@@ -1,8 +1,7 @@
 #include "converter.h"
 
 /* OPIE */
-#include <qpe/qpeapplication.h>
-
+#include <opie2/oapplicationfactory.h>
 #include <opie2/odebug.h>
 #include <opie2/opimglobal.h>
 // Include SQL related header files
@@ -17,10 +16,13 @@
 #include <qmessagebox.h>
 
 
+OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<Converter> )
+
 using namespace Opie;
 using namespace Pim;
 
-Converter::Converter():
+Converter::Converter(QWidget *p, const char* n,  WFlags fl):
+    converter_base( p, n, fl ),
     m_selectedDatabase( ADDRESSBOOK ),
     m_selectedSourceFormat( XML ),
     m_selectedDestFormat( SQL ),
@@ -56,11 +58,11 @@ void Converter::start_conversion(){
     odebug << "SourceFormat: " <<  m_selectedSourceFormat << oendl;
     odebug << "DestFormat: " << m_selectedDestFormat << oendl;
     if ( m_selectedSourceFormat == m_selectedDestFormat ){
-	    
+
 	    QMessageBox::warning( this, "PimConverter",
 				  tr( "It is not a good idea to use\n" )
 				  +tr( "the same source and destformat !" ),
-				  tr( "Ok" ) ); 
+				  tr( "Ok" ) );
 	    return;
     }
 
@@ -212,7 +214,7 @@ void Converter::start_conversion(){
 
 void Converter::closeEvent( QCloseEvent *e )
 {
-	
+
 	/* Due to the fact that we don't have multitasking here, this
 	 * critical handling don't make sense, but the future..
 	 */
@@ -221,19 +223,4 @@ void Converter::closeEvent( QCloseEvent *e )
 		return;
 	}
 	e->accept();
-}
-
-
-
-int main( int argc, char** argv ) {
-
-    QPEApplication a( argc, argv );
-
-    Converter dlg;
-
-    a.showMainWidget( &dlg );
-    // dlg. showMaximized ( );
-
-    return a.exec();
-
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE UI><UI>
 <class>converter_base</class>
 <widget>
-    <class>QDialog</class>
+    <class>QWidget</class>
     <property stdset="1">
         <name>name</name>
         <cstring>converter_base</cstring>

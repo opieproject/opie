@@ -7,7 +7,8 @@
 
 class Converter: public converter_base {
 public:
-	Converter();
+        Converter(QWidget *parent, const char* name, WFlags fl);
+	static QString appName() { return QString::fromLatin1("opimconverter");}
 
 	// Slots defined in the ui-description file
 	void start_conversion();
