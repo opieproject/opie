@@ -64,3 +64,9 @@ contains( CONFTEST, y ){
 TARGET       = opiemail
 
 include ( $(OPIEDIR)/include.pro )
+!isEmpty( LIBETPAN_INC_DIR ) {
+	INCLUDEPATH += $$LIBETPAN_INC_DIR
+}
+!isEmpty( LIBETPAN_LIB_DIR ) {
+	LIBS += -Wl,-rpath-link,$$LIBETPAN_LIB_DIR
+}
