@@ -31,6 +31,8 @@ using namespace std;
 #include <qdir.h>
 #include <qtextstream.h>
 
+#include <opie/oprocess.h>
+
 #include "utils.h"
 #include "ipkg.h"
 #include "global.h"
@@ -55,35 +57,35 @@ Ipkg :: ~Ipkg()
 bool Ipkg :: runIpkg( )
 {
     bool ret = false;
+    QStringList commands;
 
     QDir::setCurrent( "/tmp" );
-    QString cmd = "";
 
     if ( runtimeDir != "" )
     {
-        cmd += "cd ";
-        cmd += runtimeDir;
-        cmd += " ; ";
+        commands << "cd ";
+        commands << runtimeDir;
+        commands << ";";
     }
-    cmd += "ipkg -force-defaults";
+    commands << "ipkg" << "-force-defaults";
 
     // only set the destination for an install operation
     if ( option == "install" )
-        cmd += " -dest "+ destination;
+        commands << "-dest" << destination;
 
 
     if ( option != "update" && option != "download" )
     {
         if ( flags & FORCE_DEPENDS )
-            cmd += " -force-depends";
+            commands << "-force-depends";
         if ( flags & FORCE_REINSTALL  )
-            cmd += " -force-reinstall";
+            commands << "-force-reinstall";
         if ( flags & FORCE_REMOVE )
-            cmd += " -force-removal-of-essential-packages";
+            commands << "-force-removal-of-essential-packages";
         if ( flags & FORCE_OVERWRITE )
-            cmd += " -force-overwrite";
+            commands << "-force-overwrite";
         if ( flags & VERBOSE_WGET )
-            cmd += " -verbose_wget";
+            commands << "-verbose_wget";
 
         // Handle make links
         // Rules - If make links is switched on, create links to root
@@ -98,18 +100,17 @@ bool Ipkg :: runIpkg( )
     }
     
 #ifdef X86
-    cmd += " -f ";
-    cmd += IPKG_CONF;
+    commands << "-f";
+    commands << IPKG_CONF;
 #endif
 
 
     if ( option == "reinstall" )
-        cmd += " install";
+        commands << "install";
     else
-        cmd += " " + option;
+        commands << option;
     if ( package != "" )
-        cmd += " " + package;
-    cmd += " 2>&1";
+        commands << package;
 
 
     if ( package != "" )
@@ -130,13 +131,11 @@ bool Ipkg :: runIpkg( )
         }
     }
     
-    emit outputText( cmd );
-
     // Execute command
     dependantPackages = new QList<QString>;
     dependantPackages->setAutoDelete( true );
 
-    ret = executeIpkgCommand( cmd, option );
+    ret = executeIpkgCommand( commands, option );
 
     if ( option == "install" || option == "reinstall" )
     {
@@ -147,7 +146,7 @@ bool Ipkg :: runIpkg( )
         {
             emit outputText( " " );
             emit outputText( QString( "Creating symbolic links for " )+ package );
-            
+
             linkPackage( Utils::getPackageNameFromIpkFilename( package ), destination, destDir );
 
             // link dependant packages that were installed with this release
@@ -169,12 +168,12 @@ bool Ipkg :: runIpkg( )
     // to workaround an ipkg bug which stops reinstall to a different location
     if ( option == "remove" )
         removeStatusEntry();
-    
 
-//    emit outputText( QString( "Finished - status=" ) + (ret ? "success" : "failure") );
+
     emit outputText( "Finished" );
     emit outputText( "" );
     return ret;
+
 }
 
 void Ipkg :: removeStatusEntry()
@@ -255,7 +254,75 @@ void Ipkg :: removeStatusEntry()
     rename( outStatusFile, statusFile );
 }
 
+int Ipkg :: executeIpkgCommand( QStringList &cmd, const QString option )
+{
+    // OK we're gonna use OProcess to run this thing
+    proc = new OProcess();
 
+    // Connect up our slots
+    connect(proc, SIGNAL(processExited(OProcess *)),
+            this, SLOT( processFinished()));
+
+    connect(proc, SIGNAL(receivedStdout(OProcess *, char *, int)),
+            this, SLOT(commandStdout(OProcess *, char *, int)));
+
+    connect(proc, SIGNAL(receivedStderr(OProcess *, char *, int)),
+            this, SLOT(commandStderr(OProcess *, char *, int)));
+    
+    for ( QStringList::Iterator it = cmd.begin(); it != cmd.end(); ++it )
+    {
+         qDebug( "%s ", (*it).latin1() );
+         *proc << (*it).latin1();
+    }
+    cout << endl;
+
+    // Start the process going
+    finished = false;
+    if(!proc->start(OProcess::NotifyOnExit, OProcess::All))
+    {
+        emit outputText( QString( "Couldn't start ipkg process" ) );
+        qDebug( "Couldn't start ipkg process!" );
+    }
+
+    // Now wait for it to finish
+    while ( !finished )
+        qApp->processEvents();
+}
+
+void Ipkg::commandStdout(OProcess*, char *buffer, int buflen)
+{
+    qDebug("received stdout %d bytes", buflen);
+
+    QString lineStr = buffer;
+    if ( lineStr[buflen-1] == '\n' )
+        buflen --;
+    lineStr = lineStr.left( buflen );
+    emit outputText( lineStr );
+    qDebug(lineStr);
+    buffer[0] = '\0';
+}
+
+void Ipkg::commandStderr(OProcess*, char *buffer, int buflen)
+{
+    qDebug("received stderrt %d bytes", buflen);
+
+    QString lineStr = buffer;
+    if ( lineStr[buflen-1] == '\n' )
+        buflen --;
+    lineStr=lineStr.left( buflen );
+    emit outputText( lineStr );
+    buffer[0] = '\0';
+}
+
+void Ipkg::processFinished()
+{
+    delete proc;
+    finished = true;
+}
+
+
+
+/*
 int Ipkg :: executeIpkgCommand( QString &cmd, const QString option )
 {
     FILE *fp = NULL;
@@ -293,7 +360,7 @@ int Ipkg :: executeIpkgCommand( QString &cmd, const QString option )
                         dependantPackages->append( package );
                     }
                 }
-                
+
                 if ( option == "update" )
                 {
                     if (lineStr.contains("Updated list"))
@@ -320,7 +387,7 @@ int Ipkg :: executeIpkgCommand( QString &cmd, const QString option )
 
     return ret;
 }
-
+*/
 
 void Ipkg :: linkPackage( const QString &packFileName, const QString &dest, const QString &destDir )
 {
@@ -348,10 +415,10 @@ QStringList* Ipkg :: getList( const QString &packageFilename, const QString &des
         
         packageFileDir = "/usr/lib/ipkg/info/"+packageFilename+".list";
         f.setName( packageFileDir );
-//        cout << "Try to open " << packageFileDir.latin1() << endl;
+        qDebug( "Try to open %s", packageFileDir.latin1() );
         if ( ! f.open(IO_ReadOnly) )
         {
-            cout << "Could not open:" << packageFileDir << endl;
+            qDebug( "Could not open: %s", packageFileDir );
             emit outputText( QString( "Could not open :" ) + packageFileDir );
             return (QStringList*)0;
         }

@@ -25,6 +25,7 @@
 
 #include <qobject.h>
 #include <qstring.h>
+#include <qstringlist.h>
 #include <qlist.h>
 
 #define FORCE_DEPENDS                           0x0001
@@ -33,7 +34,9 @@
 #define FORCE_OVERWRITE                         0x0008
 #define MAKE_LINKS                              0x0010
 #define VERBOSE_WGET                            0x0020
-  
+
+class OProcess;
+
 class Ipkg : public QObject
 {
     Q_OBJECT
@@ -51,6 +54,12 @@ public:
 
 signals:
     void outputText( const QString &text );
+
+public slots:
+    void commandStdout(OProcess*, char *buffer, int buflen);
+    void commandStderr(OProcess*, char *buffer, int buflen);
+    void processFinished();
+
     
 private:
     bool createLinks;
@@ -58,17 +67,20 @@ private:
     QString package;
     QString destination;
     QString destDir;
-    int flags;
     QString runtimeDir;
+    OProcess *proc;
+    int flags;
+    bool finished;
 
     QList<QString> *dependantPackages;
     
-    int executeIpkgCommand( QString &cmd, const QString option );
+    int executeIpkgCommand( QStringList &cmd, const QString option );
     void removeStatusEntry();
     void linkPackage( const QString &packFileName, const QString &dest, const QString &destDir );
     QStringList* getList( const QString &packageFilename, const QString &destDir );
     void processFileList( const QStringList *fileList, const QString &destDir );
     void processLinkDir( const QString &file, const QString &baseDir, const QString &destDir );
+    
 };
 
 #endif
