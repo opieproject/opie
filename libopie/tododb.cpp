@@ -138,7 +138,7 @@ ToDoDB::ToDoDB(const QString &fileName = QString::null, ToDoResource *res ){
 }
 ToDoDB::~ToDoDB()
 {
-
+  delete m_res;
 }
 QValueList<ToDoEvent> ToDoDB::effectiveToDos(const QDate &from, const QDate &to,
 					     bool all )
@@ -199,7 +199,7 @@ QString ToDoDB::fileName()const
 }
 void ToDoDB::load()
 {
-    
+  m_todos = m_res->load( m_fileName );    
 }
 bool ToDoDB::save()
 {
