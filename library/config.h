@@ -41,6 +41,9 @@ public:
     
     bool isValid() const;
     bool hasKey( const QString &key ) const;
+
+	// inline for better SharpROM BC
+	inline bool hasGroup ( const QString &gname ) const  { return ( groups. find ( gname ) != groups. end ( )); };
     
     void setGroup( const QString &gname );
     void writeEntry( const QString &key, const char* value );
