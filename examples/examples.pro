@@ -1,4 +1,4 @@
-TEMPLATE = SUBDIRS
+TEMPLATE = subdirs
 SUBDIRS =      applet \
               inputmethod \
               main-tab \
