@@ -35,6 +35,17 @@ public:
     MemoryInfo( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
     ~MemoryInfo();
 
+    unsigned long total;
+    unsigned long used;
+    unsigned long memfree;
+    unsigned long shared;
+    unsigned long buffers;
+    unsigned long cached;
+    unsigned long realUsed;
+    unsigned long swaptotal;
+    unsigned long swapused;
+    unsigned long swapfree;
+
 private slots:
     void updateData();
 
@@ -43,6 +54,11 @@ private:
     GraphData *data;
     Graph *graph;
     GraphLegend *legend;
+
+    QLabel* swapMem;
+    GraphData *swapdata;
+    Graph *swapgraph;
+    GraphLegend *swaplegend;
 };
 
 #endif
