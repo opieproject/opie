@@ -90,9 +90,11 @@ RecBody POP3wrapper::parseMail( char *message )
     size_t curTok = 0;
     mailimf_message *result = 0;
     mailmessage * msg=0;
+    mailmime_single_fields fields;
+    
+    /* is bound to msg and will be freed there */
     struct mailmime * mime=0;
-    struct mailmime_single_fields fields;
-
+    
     RecBody body;
 
 
@@ -102,13 +104,7 @@ RecBody POP3wrapper::parseMail( char *message )
         return body;
     }
 
-#if 0
     char*body_msg = message;
-    if ( result && result->msg_body && result->msg_body->bd_text ) {
-        body_msg = (char*)result->msg_body->bd_text;
-        result->msg_body->bd_text = 0;
-    }
-
     msg = mailmessage_new();
     mailmessage_init(msg, NULL, data_message_driver, 0, strlen(body_msg));
     generic_message_t * msg_data;
@@ -116,33 +112,14 @@ RecBody POP3wrapper::parseMail( char *message )
     msg_data->msg_fetched = 1;
     msg_data->msg_message = body_msg;
     msg_data->msg_length = strlen(body_msg);
+
+
     memset(&fields, 0, sizeof(struct mailmime_single_fields));
     err = mailmessage_get_bodystructure(msg,&mime);
+    traverseBody(body,msg,mime);
 
-    if (mime->mm_mime_fields != NULL) {
-        mailmime_single_fields_init(&fields, mime->mm_mime_fields,
-            mime->mm_content_type);
-    }
-#endif
+    mailmessage_free(msg);
 
-#if 1
-    if ( result && result->msg_body && result->msg_body->bd_text ) {
-        qDebug( "POP3: bodytext found" );
-        // when curTok isn't set to 0 this line will fault! 'cause upper line faults!
-        body.setBodytext( QString( result->msg_body->bd_text ) );
-#if 0
-        curTok = 0;
-        mailmime_content*mresult = 0;
-        size_t index = 0;
-        mailmime_content_parse(result->msg_body->bd_text,
-            strlen(result->msg_body->bd_text),&index,&mresult);
-        if (mresult) {
-            mailmime_content_free(mresult);
-        }
-#endif
-        mailimf_message_free(result);
-    }
-#endif
     return body;
 }
 
@@ -455,4 +432,146 @@ encodedString* POP3wrapper::fetchDecodedPart(const RecMail&,const RecPart&)
 encodedString* POP3wrapper::fetchRawPart(const RecMail&,const RecPart&)
 {
     return new encodedString();
+}
+
+void POP3wrapper::traverseBody(RecBody&target,mailmessage*message,mailmime*mime,unsigned int current_rec)
+{
+    if (current_rec >= 10) {
+        qDebug("too deep recursion!");
+    }
+    if (!message || !mime) {
+        return;
+    }
+    int r;
+    char*data = 0;
+    size_t len;
+    clistiter * cur = 0;
+    mailmime_single_fields fields;
+    int res;
+    QString b;
+    memset(&fields, 0, sizeof(struct mailmime_single_fields));
+    RecPart part;
+    
+    if (mime->mm_mime_fields != NULL) {
+        mailmime_single_fields_init(&fields, mime->mm_mime_fields,
+            mime->mm_content_type);
+    }
+    switch (mime->mm_type) {
+    case MAILMIME_SINGLE:
+        r = mailmessage_fetch_section(message,mime,&data,&len);
+        fillSingleBody(part,message,mime);
+        if (part.Type()=="text" && target.Bodytext().isNull()) {
+            encodedString*r = new encodedString();
+            r->setContent(data,len);
+            encodedString*res = decode_String(r,part.Encoding());
+            b = QString(res->Content());
+            delete r;
+            delete res;
+            target.setBodytext(b);
+            target.setDescription(part);
+        } else {
+            /* TODO: Add the content to a list and store it for later use */
+            if (data) free(data);
+            target.addPart(part);
+        }
+        break;
+    case MAILMIME_MULTIPLE:
+        for (cur = clist_begin(mime->mm_data.mm_multipart.mm_mp_list) ; cur != NULL ; cur = clist_next(cur)) {
+            traverseBody(target,message, (mailmime*)clist_content(cur),current_rec+1);
+        }
+        break;
+    case MAILMIME_MESSAGE:
+        if (mime->mm_data.mm_message.mm_msg_mime != NULL) {
+            traverseBody(target,message,mime->mm_data.mm_message.mm_msg_mime,current_rec+1);
+        }
+        break;
+    }
+}
+
+QString POP3wrapper::getencoding(mailmime_mechanism*aEnc)
+{
+    QString enc="7bit";
+    if (!aEnc) return enc;
+    switch(aEnc->enc_type) {
+    case MAILMIME_MECHANISM_7BIT:
+        enc = "7bit";
+        break;
+    case MAILMIME_MECHANISM_8BIT:
+        enc = "8bit";
+        break;
+    case MAILMIME_MECHANISM_BINARY:
+        enc = "binary";
+        break;
+    case MAILMIME_MECHANISM_QUOTED_PRINTABLE:
+        enc = "quoted-printable";
+        break;
+    case MAILMIME_MECHANISM_BASE64:
+        enc = "base64";
+        break;
+    case MAILMIME_MECHANISM_TOKEN:
+    default:
+        if (aEnc->enc_token) {
+            enc = QString(aEnc->enc_token);
+        }
+        break;
+    }
+    return enc;
+}
+
+void POP3wrapper::fillSingleBody(RecPart&target,mailmessage*,mailmime*mime)
+{
+    if (!mime) {
+        return;
+    }
+    mailmime_content*type = mime->mm_content_type;
+    mailmime_field*field = 0;
+    clistcell*current;
+    if (!type) {
+        target.setType("text");
+        target.setSubtype("plain");
+    } else {
+        target.setSubtype(type->ct_subtype);
+        switch(type->ct_type->tp_data.tp_discrete_type->dt_type) {
+        case MAILMIME_DISCRETE_TYPE_TEXT:
+            target.setType("text");
+            break;
+        case MAILMIME_DISCRETE_TYPE_IMAGE:
+            target.setType("image");
+            break;
+        case MAILMIME_DISCRETE_TYPE_AUDIO:
+            target.setType("audio");
+            break;
+        case MAILMIME_DISCRETE_TYPE_VIDEO:
+            target.setType("video");
+            break;
+        case MAILMIME_DISCRETE_TYPE_APPLICATION:
+            target.setType("application");
+            break;
+        case MAILMIME_DISCRETE_TYPE_EXTENSION:
+        default:
+            if (type->ct_type->tp_data.tp_discrete_type->dt_extension) {
+                target.setType(type->ct_type->tp_data.tp_discrete_type->dt_extension);
+            }
+            break;
+        }
+    }
+    if (mime->mm_mime_fields && mime->mm_mime_fields->fld_list) {
+        for (current=clist_begin(mime->mm_mime_fields->fld_list);current!=0;current=clist_next(current)) {
+            field = (mailmime_field*)current->data;
+            switch(field->fld_type) {
+            case MAILMIME_FIELD_TRANSFER_ENCODING:
+                target.setEncoding(getencoding(field->fld_data.fld_encoding));
+                break;
+            case MAILMIME_FIELD_ID:
+                target.setIdentifier(field->fld_data.fld_id);
+                break;
+            case MAILMIME_FIELD_DESCRIPTION:
+                target.setDescription(field->fld_data.fld_description);
+                break;
+            default:
+                break;
+            }
+        }
+    }
+    // TODO search the parameter list for unique id and so on
 }

@@ -8,6 +8,9 @@ class RecMail;
 class RecBody;
 class encodedString;
 struct mailpop3;
+struct mailmessage;
+struct mailmime;
+struct mailmime_mechanism;
 
 class POP3wrapper : public AbstractMail
 {
@@ -40,6 +43,11 @@ protected:
     QString parseGroup( mailimf_group *group );
     QString parseAddressList( mailimf_address_list *list );
     QString parseDateTime( mailimf_date_time *date );
+    
+    static void traverseBody(RecBody&target,mailmessage*message,mailmime*mime,unsigned int current_rek=0);
+    static void fillSingleBody(RecPart&target,mailmessage*message,mailmime*mime);
+    static QString POP3wrapper::getencoding(mailmime_mechanism*aEnc);
+
     POP3account *account;
     mailpop3 *m_pop3;
     QString msgTempName;
