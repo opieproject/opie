@@ -149,6 +149,12 @@ menu "Development"
   source development/keyview/config.in
 endmenu
 
+menu "Examples"
+    config EXAMPLES
+	boolean "Compile Example Application"
+    source examples/config.in
+endmenu
+
 comment ""
   depends on EXPERIMENTAL
 menu "Experimental"

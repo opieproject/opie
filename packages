@@ -173,3 +173,7 @@ CONFIG_WLAN	noncore/settings/networksettings/wlan	wlan.pro
 CONFIG_PPP	noncore/settings/networksettings/ppp	ppp.pro
 CONFIG_WORDGAME	noncore/games/wordgame	wordgame.pro
 CONFIG_ZSAFE	noncore/apps/zsafe zsafe.pro
+CONFIG_MAIN_TAB_EXAMPLE	examples/main-tab	example.pro
+CONFIG_SIMPLE_EXAMPLE	examples/simple	example.pro
+CONFIG_SIMPLE_ICON	examples/simple-icon	example.pro
+CONFIG_SIMPLE_MAIN	examples/simple-main	example.pro
