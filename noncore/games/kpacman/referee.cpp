@@ -730,7 +730,11 @@ void Referee::keyPressEvent( QKeyEvent *k )
     // "OK" => new game
     if ( key == Key_F33 || key == Key_F2 || key == Key_Enter )
         play();
-    else if ( !gameState.testBit(Playing) && key == Key_Space )
+    else if ( !gameState.testBit(Playing) &&
+						key == Key_Up ||
+            			key == Key_Down ||
+            			key == Key_Right ||
+            			key == Key_Left ) 
         play();
     // "Space" => pause
     //else if ( key == Key_Space || key == Key_F3 )
@@ -946,7 +950,8 @@ void Referee::introPaint(int t)
                   repaint(pix->draw(30, 58, RoomPix, "© 1998-2002 J.THÖNNISSEN", PINK), FALSE);
 #elif defined( QPE_PORT )
                   repaint(pix->draw(30, 55, RoomPix, "© 1998-2002 J.THÖNNISSEN", PINK), FALSE);
-                  repaint(pix->draw(29, 60, RoomPix, "Qtopia port: Catalin CLIMOV", GREEN), FALSE);
+                  repaint(pix->draw(29, 58, RoomPix, tr("QTOPIA PORT: CATALIN CLIMOV"), GREEN), FALSE);
+                  repaint(pix->draw(29, 61, RoomPix, tr("PRESS CURSOR TO START"), GREEN), FALSE);
 #endif
                   break;
     }
