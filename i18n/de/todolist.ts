@@ -38,14 +38,6 @@
         <translation>Suchen</translation>
     </message>
     <message>
-        <source>Completed tasks</source>
-        <translation>Erledigte Aufgaben</translation>
-    </message>
-    <message>
-        <source>Show Deadline</source>
-        <translation>&quot;fällig bis&quot; anzeigen</translation>
-    </message>
-    <message>
         <source>Data</source>
         <translation>Datei</translation>
     </message>
@@ -56,10 +48,6 @@
     <message>
         <source>Options</source>
         <translation>Optionen</translation>
-    </message>
-    <message>
-        <source>Show only over due</source>
-        <translation>Nur überfälliges anzeigen</translation>
     </message>
     <message>
         <source>New from template</source>
@@ -113,6 +101,26 @@ Trozdem beenden?</translation>
     <message>
         <source>New Tasks</source>
         <translation>Neue Aufgaben</translation>
+    </message>
+    <message>
+        <source>Show completed tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show only over-due tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show task deadlines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show quick task bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QuickEdit</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -442,6 +450,21 @@ Trozdem beenden?</translation>
     <message>
         <source>Configure Templates</source>
         <translation>Vorlagen konfigurieren</translation>
+    </message>
+</context>
+<context>
+    <name>Todo</name>
+    <message>
+        <source>More</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

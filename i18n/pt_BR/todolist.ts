@@ -39,14 +39,6 @@
         <translation type="unfinished">Localizar</translation>
     </message>
     <message>
-        <source>Completed tasks</source>
-        <translation type="unfinished">Tarefas completadas</translation>
-    </message>
-    <message>
-        <source>Show Deadline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -56,10 +48,6 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show only over due</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -114,6 +102,26 @@ Sair assim mesmo ?</translation>
     </message>
     <message>
         <source>New Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show completed tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show only over-due tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show task deadlines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show quick task bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QuickEdit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -443,6 +451,21 @@ Sair assim mesmo ?</translation>
     <name>TemplateEditor</name>
     <message>
         <source>Configure Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Todo</name>
+    <message>
+        <source>More</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

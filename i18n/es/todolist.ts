@@ -38,14 +38,6 @@
         <translation>Buscar</translation>
     </message>
     <message>
-        <source>Completed tasks</source>
-        <translation>Tareas completadas</translation>
-    </message>
-    <message>
-        <source>Show Deadline</source>
-        <translation>Mostrar fecha lí­mite</translation>
-    </message>
-    <message>
         <source>Data</source>
         <translation>Datos</translation>
     </message>
@@ -112,8 +104,24 @@ e inténtelo de nuevo.
         <translation>Nuevas tareas</translation>
     </message>
     <message>
-        <source>Show only over due</source>
-        <translation>Mostrar sólo fuera de plazo</translation>
+        <source>Show completed tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show only over-due tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show task deadlines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show quick task bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QuickEdit</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -443,6 +451,21 @@ e inténtelo de nuevo.
     <message>
         <source>Configure Templates</source>
         <translation>Configurar Platillas</translation>
+    </message>
+</context>
+<context>
+    <name>Todo</name>
+    <message>
+        <source>More</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

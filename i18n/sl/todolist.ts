@@ -38,14 +38,6 @@
         <translation type="unfinished">Najdi</translation>
     </message>
     <message>
-        <source>Completed tasks</source>
-        <translation type="unfinished">Končana opravila</translation>
-    </message>
-    <message>
-        <source>Show Deadline</source>
-        <translation type="unfinished">Prikaži rok</translation>
-    </message>
-    <message>
         <source>Data</source>
         <translation type="unfinished">Podatki</translation>
     </message>
@@ -56,10 +48,6 @@
     <message>
         <source>Options</source>
         <translation type="unfinished">Izbire</translation>
-    </message>
-    <message>
-        <source>Show only over due</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>New from template</source>
@@ -113,6 +101,26 @@ Izhod?</translation>
     </message>
     <message>
         <source>New Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show completed tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show only over-due tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show task deadlines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show quick task bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QuickEdit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -442,6 +450,21 @@ Izhod?</translation>
     <name>TemplateEditor</name>
     <message>
         <source>Configure Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Todo</name>
+    <message>
+        <source>More</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
