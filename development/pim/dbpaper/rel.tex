@@ -1,0 +1,81 @@
+
+\pagebreak
+
+\subsection{Database Relations}
+TODOLIST \{ UID, DueDate, StartDate, EndDate, Completed, Description, Summary, Priority, Progress, Parent, Status \}\\
+DueDate can be null \\
+StartDate and EndDate are for timetracking reasons.
+\\
+\\
+\noindent
+DATEBOOK \{ UID, ID, Item, Value \}\\
+ID autoincrement\\
+Type element \{ Description, Location, Type, start, end, note, created \}\\
+\\
+\noindent
+RECURRANCE \{ UID, TID, RType, RWeekDays, RPosition, RFreq, RHasEndDate, REndDate \} \\
+The TID (TableID) is needed here, since both, TODOLIST and DATEBOOK use it, and in future maybe more.\\
+\\
+\noindent
+ADDRESSBOOK \{UID, ID, Item, Value \}\\
+ID autoincrement\\
+For contact to a person:\\
+Type element \{Title, FirstName, MiddleName, LastName, Suffix, Note \}\\  
+For contact to a company:\\
+Type element \{ CompanyName, Department, Note \}\\
+\\
+\noindent
+POSTAL \{ UID, TID, Type, Street, City, State, Zip, Country \} \\
+where Type can be Home, Business as predefined or any other as custom fields (not syncable) \\
+\\
+\noindent
+PERSONAL\_DATA \{ UID, ID, Item, Value \}\\
+ID autoincrement \\
+Item element \{ Company, JobTitle, Department, Office, Profession, Assistant
+ \footnote{What is Assistent and Manager ??  (se), and what about multiple assistents? Maybe by same UID but different ID and same Item - ugly(max)}, Manager, Spouse, Children, Gender, Birthday, Aniversary, Nickname, Note, \\
+ DefaultEmail, Email, HomeWebpage, Homephone, HomeFax, HomeMobil \}\\  
+\\ 
+\noindent
+TABLEID \{ TID, Name, DefaultRep, Version \}  \\
+TID Autoincrement \\
+The first 3 TIDs are set: 0 == datebook, 1 == addressbook, 2 == todolist.\\
+The rest can are assigned in order of registration of the service/app.
+DefaultRep is the default representation. That are fields from the table of the app itself which should be shown when crosslinked. \\
+\\
+\noindent
+CROSSREF \{ TID1, UID1, Item1, TID2, UID2, Item2 \}\\
+Item \emph{x} defines the field-type in the table which should be addressed. It may be empty if no special field should be addressed. \\
+Maybe add a field ``discription'' like ``verwaltet'', ``schaut an''
+
+\noindent
+Thus, it is possible to crossreference i.e. a Child (Item1 = ``Child'') in the Table PERSONAL\_DATA (TID1 = 0) with an entry in the Table ADDRESSBOOK (TID= 1, Item2 = ````) which stores the data of that child.\\
+
+\noindent
+Using ``Item'' to select which element should be referenced (instead using the ID which may only exist in our table) should guarantee that this reference may survive conversions between different formats. I.e.: For converting our Database into a XML-File, the Item should be converted directly into a attribute-name which is placed into a tag. Therefore the cross reference will stay correct!
+
+\noindent
+Still unclear is, how to synchronize our database (as XML-File, directly or via C++ Interface access) with outlook or other systems, without loosing this cross reference. We could not expect that this fine granularity or referencing may be supported by other systems...\\
+\\
+\noindent
+ALARM \{ TID, UID, Sound, Day, Month, Year, Time \}\\
+TID is needed since more then one app can have alarms and UID is not necessarly unique over different apps. \\
+A exclusive table for all alarms\\
+\\
+\noindent
+CATEGORY \{ UID, Parent, Name, ApplicationName, ForeGroundColor, BackGroundColor \}\\
+UID due to making syncing sane\\
+Parent is used for subcategories \\
+\\
+\noindent
+RECORD\_CATEGORIES \{ TID, UID, CategoryUID \}\\
+\\
+\noindent
+FILES \{ UID, Type, Url \}\\ 
+\\
+\noindent
+APPLICATION \{ UID, TYPE, URL \}\\ 
+\\
+\noindent
+LOCATION \{ UID, Name\}\\
+
+
