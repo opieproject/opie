@@ -10,22 +10,28 @@ New Launcher TODO:
 	[x] actual qws server (qpeapplication as GuiServer)
 	[x] qcop bridge
 	[x] transfer server (sync compatibility)
-	[ ] calibration QCop calls (to split calibration into a seperate app)
-	[ ] window list / management QCop calls (matchbox style task switching)
+	[ ] QPE/QWS QCop channel
+		[ ] calibration QCop calls (to split calibration into a seperate app)
+		[ ] window list / management QCop calls (matchbox style task switching)
 	[ ] qws event filter hooks
 		[ ] Touch and Key clicks
 		[ ] xstroke style input
+	[ ] slave handling (making use of bridged qcop messages)
 
-[ ] Launcher/Taskbar
+[ ] Launcher
+	[ ] Revamp to be, essentially, a tab bar with plugins.
+	[ ] AppLnk / categorytabs plugin
+	[ ] Documents scanning / documentstab plugin
+
+[ ] Taskbar
+	[ ] Generic pluginable bar, seperate app
+	[ ] Runningappsbar applet
+	[ ] Start menu applet
+
+[ ] Other
 	[ ] Proper VT handling, and VT switching - qt/e + qpeapplication.. every app needs to handle this properly
 	[ ] Proper timezone handling (create localtime link) - belongs in that which handles the time. clock applet, systemtime.
-	[ ] LauncherView as plugins, possibly allow the plugin to add any
-	    arbitary number of tabs, in which case the launcher is simply
-	    a tab bar with plugins, the default being the AppLnk and Docs
-	    scanning plugins, to give us the current functionality.
-
-[ ] Uncertain
 	[ ] Alerts - mem and battery
 	[ ] OpieScreenSaver
-	[.] package slave - essentially take bridged qcop message, pass it
+	[ ] package slave - essentially take bridged qcop message, pass it
 	    along to the app which is associated with the .ipk mime type.
