@@ -1,5 +1,5 @@
 Package: opie-osearch
-Files: bin/osearch apps/1Pim/osearch.desktop pics/osearch/*.png
+Files: plugins/application/libosearch.so.* bin/osearch apps/1Pim/osearch.desktop pics/osearch/*.png
 Priority: optional
 Section: opie/
 Maintainer: Patrick S. Vogt <tille@handhelds.org>

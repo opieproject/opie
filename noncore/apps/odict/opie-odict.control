@@ -1,5 +1,5 @@
 Package: opie-odict
-Files: bin/odict apps/Applications/odict.desktop pics/odict/odict.png
+Files: plugins/application/libodict.so.* bin/odict apps/Applications/odict.desktop pics/odict/odict.png
 Priority: optional
 Section: applications
 Maintainer: Carsten Niehaus <cniehaus@handhelds.org>

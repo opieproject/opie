@@ -1,4 +1,4 @@
-Files: bin/quicklauncher
+Files: plugins/application/libquicklauncher.so.* bin/quicklauncher
 Priority: required
 Section: qpe/system
 Maintainer: Trolltech (www.trolltech.com)

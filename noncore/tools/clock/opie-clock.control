@@ -1,5 +1,5 @@
 Package: opie-clock
-Files: bin/clock apps/Applications/clock.desktop
+Files: plugins/application/libclock.so.* bin/clock apps/Applications/clock.desktop
 Priority: optional
 Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>

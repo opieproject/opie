@@ -1,5 +1,5 @@
 Package: opie-calculator
-Files: bin/calculator apps/Applications/calculator.desktop etc/unit_conversion.dat pics/calc
+Files: plugins/application/libcalculator.so.* bin/calculator apps/Applications/calculator.desktop etc/unit_conversion.dat pics/calc
 Priority: optional
 Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>

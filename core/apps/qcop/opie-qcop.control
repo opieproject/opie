@@ -1,5 +1,5 @@
 Package: opie-qcop
-Files: bin/qcop
+Files: plugins/application/libqcop.so.* bin/qcop
 Priority: required
 Section: opie/system
 Maintainer: Martin Jones <mjones@trolltech.com>

@@ -1,5 +1,5 @@
 Package: opie-sh
-Files: bin/opie-sh bin/opie-sh-howto.sh apps/Opie-SH/opie-sh.desktop pics/opie-sh/*.png help/opie-sh/*.html
+Files: plugins/application/libopie-sh.so.* bin/opie-sh bin/opie-sh-howto.sh apps/Opie-SH/opie-sh.desktop pics/opie-sh/*.png help/opie-sh/*.html
 Priority: optional
 Section: opie/applications
 Maintainer: Thomas Stephens <spiralman@softhome.net>

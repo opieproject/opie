@@ -1,5 +1,5 @@
 Package: opie-login
-Files: bin/opie-login share/opie-login/opie-session share/opie-login/pre-session share/opie-login/post-session root/opt/QtPalmtop/etc/opie-login.conf
+Files: plugins/application/libopie-login.so.* bin/opie-login share/opie-login/opie-session share/opie-login/pre-session share/opie-login/post-session root/opt/QtPalmtop/etc/opie-login.conf
 Priority: optional
 Section: opie/system
 Maintainer: Project Opie <opie@handhelds.org>

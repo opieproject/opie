@@ -1,5 +1,5 @@
 Package: opie-kbill
-Files: bin/kbill apps/Games/kbill.desktop pics/kbill/*
+Files: plugins/application/libkbill.so.* bin/kbill apps/Games/kbill.desktop pics/kbill/*
 Priority: optional
 Section: opie/games
 Maintainer: Mark Westcott <mark@houseoffish.org>

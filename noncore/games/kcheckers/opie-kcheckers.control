@@ -1,5 +1,5 @@
 Package: opie-kcheckers
-Files: bin/kcheckers apps/Games/kcheckers.desktop pics/kcheckers
+Files: plugins/application/libkcheckers.so.* bin/kcheckers apps/Games/kcheckers.desktop pics/kcheckers
 Priority: optional
 Section: opie/games
 Maintainer: leseb <prudhomme@laposte.net>

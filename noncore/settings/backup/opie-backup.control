@@ -1,5 +1,5 @@
 Package: opie-backup
-Files: bin/backup pics/backup apps/Settings/backup.desktop
+Files: plugins/application/libbackup.so.* bin/backup pics/backup apps/Settings/backup.desktop
 Priority: optional
 Depends: task-opie-minimal
 Architecture: arm

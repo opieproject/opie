@@ -1,5 +1,5 @@
 Package: opie-textedit
-Files: bin/textedit apps/1Pim/textedit.desktop pics/textedit
+Files: plugins/application/libtextedit.so.* bin/textedit apps/1Pim/textedit.desktop pics/textedit
 Priority: optional
 Section: opie/applications
 Maintainer: L. J. Potter <llornkcor@handhelds.org>

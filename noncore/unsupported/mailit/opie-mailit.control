@@ -1,5 +1,5 @@
 Package: opie-mailit
-Files: bin/mailit apps/1Pim/mailit.desktop pics/mailit
+Files: plugins/application/libmailit.so.* bin/mailit apps/1Pim/mailit.desktop pics/mailit
 Priority: optional
 Section: opie
 Maintainer: L.J. Potter <llornkcor@handhelds.org>

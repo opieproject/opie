@@ -1,5 +1,5 @@
 Package: opie-sysinfo
-Files: bin/sysinfo apps/Settings/sysinfo.desktop pics/sysinfo
+Files: plugins/application/libsysinfo.so.* bin/sysinfo apps/Settings/sysinfo.desktop pics/sysinfo
 Priority: optional
 Section: opie/applications
 Maintainer: Dan Williams <williamsdr@acm.org>

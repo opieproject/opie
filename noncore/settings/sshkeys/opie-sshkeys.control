@@ -1,5 +1,5 @@
 Package: opie-sshkeys
-Files: bin/sshkeys apps/Settings/sshkeys.desktop pics/sshkeys/sshkeys.png
+Files: plugins/application/libsshkeys.so.* bin/sshkeys apps/Settings/sshkeys.desktop pics/sshkeys/sshkeys.png
 Priority: optional
 Section: opie/settings
 Maintainer: David Woodhouse <dwmw2@infradead.org>

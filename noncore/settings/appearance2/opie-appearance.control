@@ -1,5 +1,5 @@
 Package: opie-appearance
-Files: bin/appearance apps/Settings/Appearance.desktop pics/appearance
+Files: plugins/application/libappearance.so.* bin/appearance apps/Settings/Appearance.desktop pics/appearance
 Priority: optional
 Section: opie/settings
 Maintainer: Dan Williams <wiliamsdr@acm.org>

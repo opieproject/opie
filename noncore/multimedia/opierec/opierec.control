@@ -1,5 +1,5 @@
 Package: opierec
-Files: bin/opierec pics/opierec apps/Applications/opierec.desktop 
+Files: plugins/application/libopierec.so.* bin/opierec pics/opierec apps/Applications/opierec.desktop 
 Priority: optional
 Section: multimedia/applications
 Maintainer: L.J. Potter <ljp@llornkcor.com>

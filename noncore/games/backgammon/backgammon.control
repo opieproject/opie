@@ -1,5 +1,5 @@
 Package: backgammon
-Files: bin/backgammon apps/Games/backgammon.desktop pics/backgammon help/en/html/backgammon.html
+Files: plugins/application/libbackgammon.so.* bin/backgammon apps/Games/backgammon.desktop pics/backgammon help/en/html/backgammon.html
 Priority: optional
 Section: opie/games
 Maintainer: Ralf Waspe <rwaspe@web.de>

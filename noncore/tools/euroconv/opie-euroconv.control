@@ -1,5 +1,5 @@
 Package: opie-euroconv
-Files: bin/euroconv pics/euroconv/* apps/Applications/euroconv.desktop
+Files: plugins/application/libeuroconv.so.* bin/euroconv pics/euroconv/* apps/Applications/euroconv.desktop
 Priority: optional
 Section: opie/applications
 Maintainer: Eric Santonacci <Eric.Santonacci@talc.fr>
