@@ -1284,12 +1284,16 @@ void QPEApplication::setDefaultRotation( int r )
 #include <qgfx_qws.h>
 #include <qwindowsystem_qws.h>
 
+#if QT_VERSION > 236
 extern void qws_clearLoadedFonts();
+#endif
 
 void QPEApplication::setCurrentMode( int x, int y, int depth )
 {
     // Reset the caches
+#if QT_VERSION > 236
     qws_clearLoadedFonts();
+#endif
     QPixmapCache::clear();
 
     // Change the screen mode
