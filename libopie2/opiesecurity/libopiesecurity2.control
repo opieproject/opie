@@ -1,0 +1,10 @@
+Package: libopiesecurity2
+Files: lib/libopiesecurity2.so.*
+Priority: optional
+Section: opie/system
+Maintainer: Opie Team <opie@handhelds.org>
+Architecture: arm
+Version: 1.8.5-$SUB_VERSION
+Depends: libqpe1, libopiecore2, libopieui2
+Provides: libopiesecurity2
+Description: Opie library 2.0 security
