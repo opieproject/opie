@@ -142,7 +142,9 @@ mkdir -p include/opie
 
 echo Creating makefiles...
 
-sed -e 's/^\(VERSION.*= \).*/\1'$VERSION_MAJ.$VERSION_MIN.$VERSION_PAT/ <library/library.pro >library/library.pro-v
+# Set version for library directly
+# Version 1.5.0 right now for compat.
+sed -e 's/^\(VERSION.*= \).*/\1'1.5.0.$VERSION_PAT/ <library/library.pro >library/library.pro-v
 mv library/library.pro-v library/library.pro
 
 if [ "$QT3" = yes ]
