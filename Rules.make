@@ -169,7 +169,6 @@ ifeq ($(CONFIG_LIBOPIE),y)
 	# libopie1
 	( cd include/opie &&  rm -f *.h; ln -sf ../../libopie/*.h .; rm -f *_p.h; )
 	( cd include/opie &&  ln -sf ../../libopie/pim/*.h .; )
-	( cd include/opie &&  ln -sf ../../libopie/big-screen/*.h .; )
 endif
 	# libopie2
 	( cd include/opie2 && ln -sf ../../libopie2/opiecore/*.h .; )
