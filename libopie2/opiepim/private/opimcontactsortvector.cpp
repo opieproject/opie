@@ -41,9 +41,9 @@ int OPimContactSortVector::compareItems( const OPimContact& left,
         return 0;
 
     bool soTitle, soSummary, soFirstName, soMiddleName, soSuffix, soEmail,
-        soNick, soAnni, soBirth, soGender;
+        soNick, soFileAs, soAnni, soBirth, soGender;
     soTitle = soSummary = soFirstName = soMiddleName = soSuffix = soEmail =
-     soNick = soAnni = soBirth = soGender = false;
+     soNick = soFileAs = soAnni = soBirth = soGender = false;
     int ret = 0;
     bool asc = sortAscending();
 
@@ -75,6 +75,10 @@ int OPimContactSortVector::compareItems( const OPimContact& left,
     case OPimContactAccess::SortNickname:
         ret = testString( left.nickname(), right.nickname() );
         soNick = true;
+        break;
+    case OPimContactAccess::SortFileAsName:
+        ret = testString( left.fileAs(), right.fileAs() );
+        soFileAs = true;
         break;
     case OPimContactAccess::SortAnniversary:
         ret = testDate( left.anniversary(), right.anniversary() );
