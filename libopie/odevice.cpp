@@ -304,38 +304,32 @@ QString ODevice::systemVersionString ( ) const
 
 void ODevice::alarmSound ( )
 {
-#ifndef QT_QWS_EBX
 #ifndef QT_NO_SOUND
 	static Sound snd ( "alarm" );
 
 	if ( snd. isFinished ( ))
 		snd. play ( );
 #endif
-#endif
 }
 
 void ODevice::keySound ( )
 {
-#ifndef QT_QWS_EBX
 #ifndef QT_NO_SOUND
 	static Sound snd ( "keysound" );
 
 	if ( snd. isFinished ( ))
 		snd. play ( );
 #endif
-#endif
 }
 
 void ODevice::touchSound ( )
 {
 
-#ifndef QT_QWS_EBX
 #ifndef QT_NO_SOUND
 	static Sound snd ( "touchsound" );
 
 	if ( snd. isFinished ( ))
 		snd. play ( );
-#endif
 #endif
 }
 
@@ -592,7 +586,6 @@ void iPAQ::timerEvent ( QTimerEvent * )
 
 void iPAQ::alarmSound ( )
 {
-#if defined( QT_QWS_IPAQ ) // IPAQ
 #ifndef QT_NO_SOUND
 	static Sound snd ( "alarm" );
 	int fd;
@@ -627,7 +620,6 @@ void iPAQ::alarmSound ( )
 			::ioctl ( fd, MIXER_WRITE( 0 ), &vol );
 		::close ( fd );
 	}
-#endif
 #endif
 }
 
