@@ -46,6 +46,9 @@ class WellenreiterMainWindow: public QMainWindow
   protected:
     virtual void closeEvent( QCloseEvent* );
 
+  private:
+    QString getFileName( bool save );
+
   public slots:
     void showConfigure();
     void demoAddStations();

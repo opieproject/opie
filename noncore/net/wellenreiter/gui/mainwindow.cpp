@@ -23,6 +23,7 @@
 #include <qcombobox.h>
 #include <qdatastream.h>
 #include <qfile.h>
+#include <qfileinfo.h>
 #include <qiconset.h>
 #include <qmenubar.h>
 #include <qmessagebox.h>
@@ -33,8 +34,10 @@
 
 #ifdef QWS
 #include <qpe/resource.h>
+#include <opie/ofiledialog.h>
 #else
 #include "resource.h"
+#include <qfiledialog.h>
 #endif
 
 WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * name, WFlags f )
@@ -102,11 +105,11 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     QMenuBar* mb = menuBar();
 
     QPopupMenu* fileSave = new QPopupMenu( mb );
-    fileSave->insertItem( "&Session", this, SLOT( fileSaveSession() ) );
-    fileSave->insertItem( "&Log", this, SLOT( fileSaveLog() ) );
+    fileSave->insertItem( "&Session...", this, SLOT( fileSaveSession() ) );
+    fileSave->insertItem( "&Log...", this, SLOT( fileSaveLog() ) );
 
     QPopupMenu* fileLoad = new QPopupMenu( mb );
-    fileLoad->insertItem( "&Session", this, SLOT( fileLoadSession() ) );
+    fileLoad->insertItem( "&Session...", this, SLOT( fileLoadSession() ) );
     //fileLoad->insertItem( "&Log", this, SLOT( fileLoadLog() ) );
 
     QPopupMenu* file = new QPopupMenu( mb );
@@ -198,58 +201,99 @@ void WellenreiterMainWindow::demoAddStations()
     mw->netView()->addNewItem( "adhoc", "ELAN", "00:B0:8E:E7:56:E2", false, 3, 20 );
 }
 
-void WellenreiterMainWindow::fileSaveLog()
+QString WellenreiterMainWindow::getFileName( bool save )
 {
-    const QString fname( "/tmp/log.txt" );
-    QFile f( fname );
-    if ( f.open(IO_WriteOnly) )
+    QMap<QString, QStringList> map;
+    map.insert( tr("All"), QStringList() );
+    QStringList text;
+    text << "text/*";
+    map.insert(tr("Text"), text );
+    text << "*";
+    map.insert(tr("All"), text );
+
+    QString str;
+    if ( save )
     {
-        QTextStream t( &f );
-        t << mw->logWindow()->getLog();
-        f.close();
-        qDebug( "Saved log to file '%s'", (const char*) fname );
+        #ifdef QWS
+        str = OFileDialog::getSaveFileName( 2, "/", QString::null, map );
+        #else
+        str = QFileDialog::getSaveFileName();
+        #endif
+        if ( str.isEmpty() || QFileInfo(str).isDir() )
+            return "";
     }
     else
     {
-        qDebug( "Problem saving log to file '%s'", (const char*) fname );
+        #ifdef QWS
+        str = OFileDialog::getOpenFileName( 2, "/", QString::null, map );
+        #else
+        str = QFileDialog::getOpenFileName();
+        #endif
+        if ( str.isEmpty() || !QFile(str).exists() || QFileInfo(str).isDir() )
+            return "";
     }
+    return str;
+}
 
+void WellenreiterMainWindow::fileSaveLog()
+{
+    QString fname = getFileName( true );
+    if ( !fname.isEmpty() )
+    {
+        QFile f( fname );
+        if ( f.open(IO_WriteOnly) )
+        {
+            QTextStream t( &f );
+            t << mw->logWindow()->getLog();
+            f.close();
+            qDebug( "Saved log to file '%s'", (const char*) fname );
+        }
+        else
+        {
+            qDebug( "Problem saving log to file '%s'", (const char*) fname );
+        }
+    }
 }
 
 void WellenreiterMainWindow::fileSaveSession()
 {
-    const QString fname( "/tmp/session.xml" );
-    QFile f( fname );
-    if ( f.open(IO_WriteOnly) )
+    QString fname = getFileName( true );
+    if ( !fname.isEmpty() )
     {
-        QDataStream t( &f );
-        t << *mw->netView();
-        f.close();
-        qDebug( "Saved session to file '%s'", (const char*) fname );
-    }
-    else
-    {
-        qDebug( "Problem saving session to file '%s'", (const char*) fname );
+
+        QFile f( fname );
+        if ( f.open(IO_WriteOnly) )
+        {
+            QDataStream t( &f );
+            t << *mw->netView();
+            f.close();
+            qDebug( "Saved session to file '%s'", (const char*) fname );
+        }
+        else
+        {
+            qDebug( "Problem saving session to file '%s'", (const char*) fname );
+        }
     }
 }
 
 void WellenreiterMainWindow::fileLoadSession()
 {
-    const QString fname( "/tmp/session.xml" );
-    QFile f( fname );
-
-    if ( f.open(IO_ReadOnly) )
+    QString fname = getFileName( false );
+    if ( !fname.isEmpty() )
     {
-        QDataStream t( &f );
-        t >> *mw->netView();
-        f.close();
-        qDebug( "Loaded session from file '%s'", (const char*) fname );
+        QFile f( fname );
+        if ( f.open(IO_ReadOnly) )
+        {
+            QDataStream t( &f );
+            t >> *mw->netView();
+            f.close();
+            qDebug( "Loaded session from file '%s'", (const char*) fname );
+        }
+        else
+        {
+            qDebug( "Problem loading session from file '%s'", (const char*) fname );
+        }
     }
-    else
-    {
-        qDebug( "Problem loading session from file '%s'", (const char*) fname );
-    }
-
 }
 
 void WellenreiterMainWindow::closeEvent( QCloseEvent* e )
