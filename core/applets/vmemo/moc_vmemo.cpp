@@ -1,8 +1,8 @@
 /****************************************************************************
 ** VMemo meta object code from reading C++ file 'vmemo.h'
 **
-** Created: Wed Feb 13 17:52:12 2002
-**      by: The Qt MOC ($Id: moc_vmemo.cpp,v 1.1 2002-02-14 01:39:21 llornkcor Exp $)
+** Created: Wed Feb 13 21:49:42 2002
+**      by: The Qt MOC ($Id: moc_vmemo.cpp,v 1.2 2002-02-14 04:01:40 jeremy Exp $)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
