@@ -71,7 +71,7 @@ private:
 class TodoTextItem : public QTableItem
 {
 public:
-    TodoTextItem( QTable *t, const QString & str ) 
+    TodoTextItem( QTable *t, const QString & str )
 	:QTableItem( t, QTableItem::Never, str ) {}
 
     QString key () const { return Qtopia::buildSortKey( text() ); }
@@ -192,8 +192,11 @@ private:
 
 inline void TodoTable::insertIntoTable( ToDoEvent *todo, int row )
 {
-    QString sortKey = (char) ((todo->isCompleted() ? 'a' : 'A') 
-			      + todo->priority() ) 
+    int rows = numRows();
+    ++rows;
+    setNumRows( rows );
+    QString sortKey = (char) ((todo->isCompleted() ? 'a' : 'A')
+			      + todo->priority() )
 		      + Qtopia::buildSortKey( todo->description() );
     CheckItem *chk = new CheckItem( this, sortKey );
     chk->setChecked( todo->isCompleted() );
@@ -205,7 +208,7 @@ inline void TodoTable::insertIntoTable( ToDoEvent *todo, int row )
 
     DueTextItem *due = new DueTextItem(this, todo );
     setItem( row, 3, due);
-    
+
     setItem( row, 0, chk );
     setItem( row, 1, cmb );
     setItem( row, 2, ti );

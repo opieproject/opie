@@ -111,7 +111,7 @@ void ContactEditor::init() {
 				//slDynamicEntries->remove( it );
 				continue;
 			}
-			
+
 			if ( (*it) == tr( "Home Fax" ) ) {
 				slChooserNames.append( *it );
 				slChooserValues.append("" );
@@ -191,7 +191,7 @@ void ContactEditor::init() {
 				//slDynamicEntries->remove( it );
 				continue;
 			}
-			
+
 			if ( *it == "Name Title" || *it == "First Name" || *it == "Middle Name" || *it == "Last Name" || *it == "File As" || *it == "Default Email" || *it == "Emails" || *it == "Groups" )
 				continue;
 
@@ -270,7 +270,7 @@ void ContactEditor::init() {
 				hasStreet2 = TRUE;
 			//	slDynamicEntries->remove( it );
 				continue;
-			} 
+			}
 
 			if ( (*it).right( 8 ) == tr( "P.O. Box" ) ) {
 				hasPOBox = TRUE;
@@ -1034,7 +1034,7 @@ void ContactEditor::slotName() {
 	}
 	dlgName->showMaximized();
 	if ( dlgName->exec() ) {
-		
+
 		tmpName = txtFirstName->text() + " " + txtMiddleName->text() + " " + txtLastName->text() + " " + txtSuffix->text();
 		txtFullName->setText( tmpName.simplifyWhiteSpace() );
 		slotFullNameChange( txtFullName->text() );
@@ -1417,7 +1417,7 @@ void ContactEditor::setEntry( const Contact &entry ) {
 			*itV = ent.defaultEmail();
 
 		if ( *it == tr("Emails" ))
-			*itV = ent.emails();
+			*itV = ent.emailList().join(";");
 
 		if ( *it == tr("Home Phone" ))
 			*itV = ent.homePhone();
@@ -1618,7 +1618,7 @@ void ContactEditor::saveEntry() {
 			QString defaultmail;
 			parseEmailFrom( *itV, defaultmail, allemail );
 			ent.setDefaultEmail(  defaultmail );
-			ent.setEmails( *itV );
+			ent.insertEmails( *itV );
 		}
 
 		if ( *it == tr("Home Phone" ))

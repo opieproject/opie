@@ -529,7 +529,7 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
   cnt.setFirstName( fn );
   cnt.setMiddleName( mn );
   cnt.setLastName( ln );
-  cnt.setEmails( email );
+  cnt.insertEmails( email );
   cnt.setDefaultEmail( email );
   cnt.setFileAs();
 
