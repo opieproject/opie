@@ -88,7 +88,6 @@ void Today::channelReceived( const QCString &msg, const QByteArray & data ) {
 
 void Today::setRefreshTimer( int interval ) {
 
-
     disconnect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
 
     // 0 is "never" case

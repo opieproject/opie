@@ -58,9 +58,9 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
   Frame->setMaximumHeight( 50 );
   Frame->setMinimumHeight( 50 );
 
-    // Today text
+  // Today text
   QLabel* TodayLabel = new QLabel( Frame, "TodayText" );
-  TodayLabel->setGeometry( QRect( 10, 0, 168, 40 ) );
+  TodayLabel->setGeometry( QRect( 10, 1, 168, 40 ) );
   QFont TodayLabel_font(  TodayLabel->font() );
   TodayLabel_font.setBold( TRUE );
   TodayLabel_font.setPointSize( 40 );
@@ -92,7 +92,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
 
   // config
   ConfigButton = new OClickableLabel ( Frame, "PushButton1" );
-  ConfigButton->setGeometry( QRect( QApplication::desktop()->width()-80, 30, 25, 21 ) );
+  ConfigButton->setGeometry( QRect( QApplication::desktop()->width()-80, 29, 25, 20 ) );
   ConfigButton->setPixmap( config );
   QWhatsThis::add( ConfigButton, tr( "Click here to get to the config dialog" ) );
   ConfigButton->setBackgroundOrigin( QLabel::ParentOrigin );
