@@ -9,6 +9,7 @@
 #include "filesystem.h"
 #include "imageinfoui.h"
 #include "viewmodebutton.h"
+#include "basesetup.h"
 
 #include <iface/ifaceinfo.h>
 #include <iface/dirview.h>
@@ -69,6 +70,7 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     setupActions();
     setupToolbar();
     setupMenu();
+    m_aHideToolbar->setOn(m_cfg->readBoolEntry("base_showtoolbar",true));
 }
 
 PMainWindow::~PMainWindow() {
@@ -140,6 +142,10 @@ void PMainWindow::slotConfig() {
     QHBoxLayout *lay = new QHBoxLayout(&dlg);
     Opie::Ui::OTabWidget *wid = new Opie::Ui::OTabWidget(&dlg );
     lay->addWidget( wid );
+
+    BaseSetup*bSetup = new BaseSetup(m_cfg,wid);
+    wid->addTab(bSetup,"SettingsIcon","Basics setup");
+
     ViewMap *vM = viewMap();
     ViewMap::Iterator _it = vM->begin();
     QMap<PDirView*, QWidget*> lst;
@@ -196,6 +202,7 @@ void PMainWindow::slotConfig() {
         m_disp->manager()->save();
         m_info->manager()->save();
         m_view->manager()->save();
+        bSetup->save_values();
     }
     delete keyWid;
 }
@@ -268,8 +275,16 @@ void PMainWindow::slotFullScreenToggled(bool current)
     } else {
         setUpdatesEnabled(false);
         odebug << "window" << oendl;
-        m_disp->setMinimumSize(10,10);
-        m_disp->reparent(0,QPoint(0,0));
+        if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
+            m_disp->setMinimumSize(QApplication::desktop()->size()/2);
+        } else {
+            m_disp->setMinimumSize(10,10);
+        }
+        if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
+            m_disp->reparent(0,QPoint(50,50));
+        } else {
+            m_disp->reparent(0,QPoint(0,0));
+        }
         m_disp->setBackgroundColor(white);
         m_stack->addWidget(m_disp,ImageDisplay);
         m_disp->setVScrollBarMode(QScrollView::Auto);

@@ -685,7 +685,8 @@ void PIconView::slotStartSlide() {
     } else {
         slotShowImage( name );
     }
-    emit sig_startslide(2);
+    int t = m_cfg->readNumEntry("base_slideshowtimeout", 2);
+    emit sig_startslide(t);
 }
 
 void PIconView::slotImageInfo() {
