@@ -149,7 +149,7 @@ void Object::print(FILE *f) {
     fprintf(f, "%d", intg);
     break;
   case objReal:
-    fprintf(f, "%g", real);
+    fprintf(f, "%g", static_cast<double>(real));
     break;
   case objString:
     fprintf(f, "(");

@@ -230,10 +230,10 @@ void Page::display(OutputDev *out, fouble dpi, int rotate,
 
   if (printCommands) {
     printf("***** MediaBox = ll:%g,%g ur:%g,%g\n",
-	   box->x1, box->y1, box->x2, box->y2);
+	   static_cast<double>(box->x1), static_cast<double>(box->y1), static_cast<double>(box->x2), static_cast<double>(box->y2));
     if (isCropped()) {
       printf("***** CropBox = ll:%g,%g ur:%g,%g\n",
-	     cropBox->x1, cropBox->y1, cropBox->x2, cropBox->y2);
+	     static_cast<double>(cropBox->x1), static_cast<double>(cropBox->y1), static_cast<double>(cropBox->x2), static_cast<double>(cropBox->y2));
     }
     printf("***** Rotate = %d\n", attrs->getRotate());
   }

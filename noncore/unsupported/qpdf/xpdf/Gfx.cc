@@ -1864,7 +1864,7 @@ void Gfx::opSetFont(Object args[], int numArgs) {
     printf("  font: tag=%s name='%s' %g\n",
 	   font->getTag()->getCString(),
 	   font->getName() ? font->getName()->getCString() : "???",
-	   args[1].getNum());
+	   static_cast<double>(args[1].getNum()));
     fflush(stdout);
   }
   state->setFont(font, args[1].getNum());
