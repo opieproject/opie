@@ -9,7 +9,7 @@
 
 #include "mainwindow.h"
 
-#define FSCKED_DISTRIBUTION 1
+// #define FSCKED_DISTRIBUTION 1
 #ifdef FSCKED_DISTRIBUTION
 /*
  * The Zaurus rom
