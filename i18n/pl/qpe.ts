@@ -75,7 +75,7 @@ aby skalibrować ekran.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Witaj w Opie</translation>
+        <translation type="obsolete">Witaj w Opie</translation>
     </message>
 </context>
 <context>
@@ -117,7 +117,7 @@ aby skalibrować ekran.</translation>
     </message>
     <message>
         <source>FirstUseBackground</source>
-        <translation>PierwszeTło</translation>
+        <translation type="obsolete">PierwszeTło</translation>
     </message>
 </context>
 <context>

@@ -109,18 +109,18 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
+    <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation>Bestandsdialoog</translation>
+        <translation type="unfinished">Bestandsdialoog</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Open</translation>
+        <translation type="unfinished">Open</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Sla op</translation>
+        <translation type="unfinished">Sla op</translation>
     </message>
     <message>
         <source>Select Directory</source>
@@ -169,18 +169,18 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFontSelector</name>
+    <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation>Stijl</translation>
+        <translation type="unfinished">Stijl</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Grootte</translation>
+        <translation type="unfinished">Grootte</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation>The Quick Brown Fox Jumps Over The Lazy Dog</translation>
+        <translation type="unfinished">The Quick Brown Fox Jumps Over The Lazy Dog</translation>
     </message>
 </context>
 <context>
@@ -505,10 +505,40 @@ and </source>
     </message>
 </context>
 <context>
+    <name>Opie::Ui::OFileDialog</name>
+    <message>
+        <source>FileDialog</source>
+        <translation type="obsolete">Bestandsdialoog</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="obsolete">Open</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Sla op</translation>
+    </message>
+</context>
+<context>
     <name>Opie::Ui::OFileSelector</name>
     <message>
         <source>Name:</source>
         <translation>Naam:</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="obsolete">Stijl</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Grootte</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="obsolete">The Quick Brown Fox Jumps Over The Lazy Dog</translation>
     </message>
 </context>
 <context>

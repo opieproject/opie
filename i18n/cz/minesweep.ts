@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Mine Hunt</source>
-        <translation>Hledání min</translation>
+        <translation type="obsolete">Hledání min</translation>
     </message>
     <message>
         <source>Beginner</source>
@@ -28,6 +28,10 @@
     <message>
         <source>Game</source>
         <translation>Hra</translation>
+    </message>
+    <message>
+        <source>Mine Sweep</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -109,21 +109,6 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
-    <message>
-        <source>FileDialog</source>
-        <translation type="obsolete">DiálogoFicheiro</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation type="obsolete">Abrir</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Gravar</translation>
-    </message>
-</context>
-<context>
     <name>OFileSelector</name>
     <message>
         <source>Name:</source>
@@ -162,21 +147,6 @@
     <message>
         <source>Small</source>
         <translation type="obsolete">Pequeno</translation>
-    </message>
-</context>
-<context>
-    <name>Opie::Ui::OFontSelector</name>
-    <message>
-        <source>Style</source>
-        <translation type="obsolete">Estilo</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Tamanho</translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">A Rápida Raposa Castanha Salta Sobre O Cão Molenga</translation>
     </message>
 </context>
 <context>
@@ -624,6 +594,36 @@ e</translation>
     <message>
         <source>Pick Time:</source>
         <translation type="obsolete">Escolha Hora:</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFileDialog</name>
+    <message>
+        <source>FileDialog</source>
+        <translation type="obsolete">DiálogoFicheiro</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="obsolete">Abrir</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Gravar</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="obsolete">Estilo</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Tamanho</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="obsolete">A Rápida Raposa Castanha Salta Sobre O Cão Molenga</translation>
     </message>
 </context>
 <context>

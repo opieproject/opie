@@ -77,18 +77,18 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
+    <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation>Диалог на датотеки</translation>
+        <translation type="unfinished">Диалог на датотеки</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Отвори</translation>
+        <translation type="unfinished">Отвори</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Сними</translation>
+        <translation type="unfinished">Сними</translation>
     </message>
     <message>
         <source>Select Directory</source>
@@ -137,18 +137,18 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFontSelector</name>
+    <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation>Стил</translation>
+        <translation type="unfinished">Стил</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Големина</translation>
+        <translation type="unfinished">Големина</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation>Кафеавата лисица рипа преку мрзливото куче</translation>
+        <translation type="unfinished">Кафеавата лисица рипа преку мрзливото куче</translation>
     </message>
 </context>
 <context>
@@ -410,10 +410,40 @@ and </source>
     </message>
 </context>
 <context>
+    <name>Opie::Ui::OFileDialog</name>
+    <message>
+        <source>FileDialog</source>
+        <translation type="obsolete">Диалог на датотеки</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="obsolete">Отвори</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Сними</translation>
+    </message>
+</context>
+<context>
     <name>Opie::Ui::OFileSelector</name>
     <message>
         <source>Name:</source>
         <translation type="unfinished">Име:</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="obsolete">Стил</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Големина</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="obsolete">Кафеавата лисица рипа преку мрзливото куче</translation>
     </message>
 </context>
 <context>

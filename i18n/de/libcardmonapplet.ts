@@ -32,11 +32,11 @@
     </message>
     <message>
         <source>New card: SD/MMC</source>
-        <translation>Neue Karte: SD / MMC</translation>
+        <translation type="obsolete">Neue Karte: SD / MMC</translation>
     </message>
     <message>
         <source>Ejected: SD/MMC</source>
-        <translation>Ausgeworfen: SD / MMC</translation>
+        <translation type="obsolete">Ausgeworfen: SD / MMC</translation>
     </message>
 </context>
 </TS>

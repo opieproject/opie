@@ -59,11 +59,15 @@
     </message>
     <message>
         <source>Compare To:</source>
-        <translation>Vergelijk met:</translation>
+        <translation type="obsolete">Vergelijk met:</translation>
     </message>
     <message>
         <source>error</source>
         <translation>fout</translation>
+    </message>
+    <message>
+        <source>Compare:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

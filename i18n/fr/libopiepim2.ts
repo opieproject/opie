@@ -122,21 +122,6 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
-    <message>
-        <source>FileDialog</source>
-        <translation type="obsolete">Sélection fichier</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation type="obsolete">Ouvrir</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Enregistrer</translation>
-    </message>
-</context>
-<context>
     <name>OFileSelector</name>
     <message>
         <source>Name:</source>
@@ -175,21 +160,6 @@
     <message>
         <source>Small</source>
         <translation type="obsolete">Petite</translation>
-    </message>
-</context>
-<context>
-    <name>Opie::Ui::OFontSelector</name>
-    <message>
-        <source>Style</source>
-        <translation type="obsolete">Style</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Taille</translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">Le renard brun saute au dessus du chien paresseux</translation>
     </message>
 </context>
 <context>
@@ -641,6 +611,36 @@ et </translation>
     <message>
         <source>OTimePickerDialogBase</source>
         <translation type="obsolete">OTimePickerDialogBase</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFileDialog</name>
+    <message>
+        <source>FileDialog</source>
+        <translation type="obsolete">Sélection fichier</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="obsolete">Ouvrir</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Enregistrer</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="obsolete">Style</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Taille</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="obsolete">Le renard brun saute au dessus du chien paresseux</translation>
     </message>
 </context>
 <context>

@@ -89,6 +89,34 @@
         <source>&lt;p&gt;Please select a File.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Sending mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No Receiver spezified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Store message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Store message into drafts?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;center&gt;Attachments will not be stored in &quot;Draft&quot; folder&lt;/center&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ComposeMailUI</name>
@@ -273,10 +301,6 @@
         <translation type="unfinished">使用者</translation>
     </message>
     <message>
-        <source>Use SSL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Password</source>
         <translation type="unfinished">密碼</translation>
     </message>
@@ -298,6 +322,14 @@
     </message>
     <message>
         <source>Prefix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ssh $SERVER exec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use secure sockets:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -384,6 +416,46 @@
     </message>
 </context>
 <context>
+    <name>NNTPGroupsDlg</name>
+    <message>
+        <source>Subscribed newsgroups</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NNTPGroupsUI</name>
+    <message>
+        <source>newsgroupslist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Newsgroups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List of groups from the server. On start, only subscribed groups are listed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Groupfilter:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter a filter string here.
+Then hit &quot;get newsgroup list&quot; again and only groups starting 
+with that filter will be listet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Get newsgroup list from server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Retrieve the list of groups from server</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>NNTPconfigUI</name>
     <message>
         <source>Configure NNTP</source>
@@ -419,6 +491,18 @@
     </message>
     <message>
         <source>Use Login</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Newsgroup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Get newsgroup list from server</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -473,6 +557,18 @@
     </message>
     <message>
         <source>&lt;center&gt;Error while creating&lt;br&gt;new folder - breaking.&lt;/center&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Define a smtp account first</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read this posting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit this mail</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -781,10 +877,6 @@ All mails will be deleted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Use SSL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Use Login</source>
         <translation type="unfinished"></translation>
     </message>
@@ -815,6 +907,14 @@ All mails will be deleted.</source>
     <message>
         <source>User</source>
         <translation type="unfinished">使用者</translation>
+    </message>
+    <message>
+        <source>Use secure sockets:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ssh $SERVER exec</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -955,6 +1055,10 @@ All mails will be deleted.</source>
         <source>&lt;p&gt;Do you really want to delete this mail? &lt;br&gt;&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Display image preview</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ViewMailBase</name>
@@ -996,6 +1100,13 @@ All mails will be deleted.</source>
     </message>
     <message>
         <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>selectsmtp</name>
+    <message>
+        <source>Select SMTP Account</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

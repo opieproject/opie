@@ -91,7 +91,7 @@ con decisione per tarare il tuo schermo.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished">Benvenuto in Opie</translation>
+        <translation type="obsolete">Benvenuto in Opie</translation>
     </message>
 </context>
 <context>
@@ -173,10 +173,6 @@ Cambiarla subito.</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>FirstUseBackground</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

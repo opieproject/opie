@@ -90,7 +90,7 @@ precisión para calibrar la pantalla.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished">Bienvenido a Opie</translation>
+        <translation type="obsolete">Bienvenido a Opie</translation>
     </message>
 </context>
 <context>
@@ -172,10 +172,6 @@ Por favor cárguela.</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>FirstUseBackground</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -9,7 +9,7 @@ precies aan om uw scherm te calibreren.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Welkom bij Opie</translation>
+        <translation type="obsolete">Welkom bij Opie</translation>
     </message>
 </context>
 </TS>

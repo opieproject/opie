@@ -75,7 +75,7 @@ accurately to calibrate your screen.</source>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Добро пожаловать в Opie</translation>
+        <translation type="obsolete">Добро пожаловать в Opie</translation>
     </message>
 </context>
 <context>
@@ -113,7 +113,7 @@ accurately to calibrate your screen.</source>
     </message>
     <message>
         <source>FirstUseBackground</source>
-        <translation>ФонПервогоИспользования</translation>
+        <translation type="obsolete">ФонПервогоИспользования</translation>
     </message>
     <message>
         <source>Finish</source>

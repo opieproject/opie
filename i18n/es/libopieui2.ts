@@ -109,18 +109,18 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
+    <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation>Diálogo Fichero</translation>
+        <translation type="unfinished">Diálogo Fichero</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Abrir</translation>
+        <translation type="unfinished">Abrir</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Guardar</translation>
+        <translation type="unfinished">Guardar</translation>
     </message>
     <message>
         <source>Select Directory</source>
@@ -169,18 +169,18 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFontSelector</name>
+    <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation>Estilo</translation>
+        <translation type="unfinished">Estilo</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Tamaño</translation>
+        <translation type="unfinished">Tamaño</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation>El Zorro Marrón Saltó Sobre El Perro Perezoso</translation>
+        <translation type="unfinished">El Zorro Marrón Saltó Sobre El Perro Perezoso</translation>
     </message>
 </context>
 <context>
@@ -446,10 +446,40 @@ y </translation>
     </message>
 </context>
 <context>
+    <name>Opie::Ui::OFileDialog</name>
+    <message>
+        <source>FileDialog</source>
+        <translation type="obsolete">Diálogo Fichero</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="obsolete">Abrir</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Guardar</translation>
+    </message>
+</context>
+<context>
     <name>Opie::Ui::OFileSelector</name>
     <message>
         <source>Name:</source>
         <translation type="unfinished">Nombre:</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="obsolete">Estilo</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Tamaño</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="obsolete">El Zorro Marrón Saltó Sobre El Perro Perezoso</translation>
     </message>
 </context>
 <context>

@@ -110,21 +110,6 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
-    <message>
-        <source>FileDialog</source>
-        <translation type="obsolete">Dateidialog</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation type="obsolete">Öffnen</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Speichern</translation>
-    </message>
-</context>
-<context>
     <name>OFileSelector</name>
     <message>
         <source>Name:</source>
@@ -163,21 +148,6 @@
     <message>
         <source>Small</source>
         <translation type="obsolete">Klein</translation>
-    </message>
-</context>
-<context>
-    <name>Opie::Ui::OFontSelector</name>
-    <message>
-        <source>Style</source>
-        <translation type="obsolete">Stil</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Größe</translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">Falsches Üben von Xylophonmusik quält jeden größeren Zwerg</translation>
     </message>
 </context>
 <context>
@@ -625,6 +595,36 @@ und</translation>
     <message>
         <source>Pick Time:</source>
         <translation type="obsolete">Zeit auswählen:</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFileDialog</name>
+    <message>
+        <source>FileDialog</source>
+        <translation type="obsolete">Dateidialog</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="obsolete">Öffnen</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Speichern</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="obsolete">Stil</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Größe</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="obsolete">Falsches Üben von Xylophonmusik quält jeden größeren Zwerg</translation>
     </message>
 </context>
 <context>

@@ -90,7 +90,7 @@ a kereszteket a képernyő kalibrálásához.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished">Üdvözli önt az Opie</translation>
+        <translation type="obsolete">Üdvözli önt az Opie</translation>
     </message>
 </context>
 <context>
@@ -172,10 +172,6 @@ Kérem töltse fel a biztonsági-elemt.</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>FirstUseBackground</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

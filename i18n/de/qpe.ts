@@ -76,7 +76,7 @@ mittig um das Display zu kalibrieren.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Willkommen zu Opie</translation>
+        <translation type="obsolete">Willkommen zu Opie</translation>
     </message>
 </context>
 <context>
@@ -114,7 +114,7 @@ mittig um das Display zu kalibrieren.</translation>
     </message>
     <message>
         <source>FirstUseBackground</source>
-        <translation>ErstBenutzungsHintergrund</translation>
+        <translation type="obsolete">ErstBenutzungsHintergrund</translation>
     </message>
     <message>
         <source>Finish</source>

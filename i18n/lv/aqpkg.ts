@@ -206,35 +206,49 @@
     </message>
     <message>
         <source>Could not open :</source>
-        <translation>Nevaru atvērt :</translation>
+        <translation type="obsolete">Nevaru atvērt :</translation>
     </message>
     <message>
         <source>Creating directory </source>
-        <translation>Veidoju direktoriju</translation>
+        <translation type="obsolete">Veidoju direktoriju</translation>
     </message>
     <message>
         <source>Linked %1 to %2</source>
-        <translation>Saistīts %1 ar %2</translation>
+        <translation type="obsolete">Saistīts %1 ar %2</translation>
     </message>
     <message>
         <source>Failed to link %1 to %2</source>
-        <translation>Neizdevās saite %1 uz %2</translation>
+        <translation type="obsolete">Neizdevās saite %1 uz %2</translation>
     </message>
     <message>
         <source>Removed %1</source>
-        <translation>Izņemts %1</translation>
+        <translation type="obsolete">Izņemts %1</translation>
     </message>
     <message>
         <source>Failed to remove %1</source>
-        <translation>Neizdevās izņemt %1</translation>
+        <translation type="obsolete">Neizdevās izņemt %1</translation>
     </message>
     <message>
         <source>Removed </source>
-        <translation>Izņemts</translation>
+        <translation type="obsolete">Izņemts</translation>
     </message>
     <message>
         <source>Failed to remove </source>
-        <translation>Neizdevās izņemt</translation>
+        <translation type="obsolete">Neizdevās izņemt</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t start ipkg-link process</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking failed!
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking succeeded.
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

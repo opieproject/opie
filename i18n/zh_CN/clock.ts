@@ -203,7 +203,4 @@ one day to be selected.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
-<context>
-    <name>Set_Alarm</name>
-</context>
 </TS>

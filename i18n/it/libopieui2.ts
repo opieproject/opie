@@ -110,18 +110,18 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
+    <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation>FileDialog</translation>
+        <translation type="unfinished">FileDialog</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Apri</translation>
+        <translation type="unfinished">Apri</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Salva</translation>
+        <translation type="unfinished">Salva</translation>
     </message>
     <message>
         <source>Select Directory</source>
@@ -170,18 +170,18 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFontSelector</name>
+    <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation>Stile</translation>
+        <translation type="unfinished">Stile</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Dimensione</translation>
+        <translation type="unfinished">Dimensione</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation>Cantami o Diva del pelide Achille l&apos;ira funesta</translation>
+        <translation type="unfinished">Cantami o Diva del pelide Achille l&apos;ira funesta</translation>
     </message>
 </context>
 <context>
@@ -447,10 +447,40 @@ e </translation>
     </message>
 </context>
 <context>
+    <name>Opie::Ui::OFileDialog</name>
+    <message>
+        <source>FileDialog</source>
+        <translation type="obsolete">FileDialog</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="obsolete">Apri</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Salva</translation>
+    </message>
+</context>
+<context>
     <name>Opie::Ui::OFileSelector</name>
     <message>
         <source>Name:</source>
         <translation type="unfinished">Nome:</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="obsolete">Stile</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Dimensione</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="obsolete">Cantami o Diva del pelide Achille l&apos;ira funesta</translation>
     </message>
 </context>
 <context>

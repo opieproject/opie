@@ -61,17 +61,6 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
-    <message>
-        <source>Open</source>
-        <translation type="obsolete">Åbn</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Gem</translation>
-    </message>
-</context>
-<context>
     <name>OFileSelector</name>
     <message>
         <source>Name:</source>
@@ -106,21 +95,6 @@
     <message>
         <source>Small</source>
         <translation type="obsolete">Lille</translation>
-    </message>
-</context>
-<context>
-    <name>Opie::Ui::OFontSelector</name>
-    <message>
-        <source>Style</source>
-        <translation type="obsolete">Stil</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Størrelse</translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">The Quick Brown Fox Jumps Over Lazy Dog</translation>
     </message>
 </context>
 <context>
@@ -556,6 +530,32 @@ og</translation>
     <message>
         <source>Pick Time:</source>
         <translation type="obsolete">Vælg tid:</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFileDialog</name>
+    <message>
+        <source>Open</source>
+        <translation type="obsolete">Åbn</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Gem</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="obsolete">Stil</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Størrelse</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="obsolete">The Quick Brown Fox Jumps Over Lazy Dog</translation>
     </message>
 </context>
 <context>

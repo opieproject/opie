@@ -208,35 +208,49 @@
     </message>
     <message>
         <source>Could not open :</source>
-        <translation>Não foi possível abrir: </translation>
+        <translation type="obsolete">Não foi possível abrir: </translation>
     </message>
     <message>
         <source>Creating directory </source>
-        <translation>A criar a directoria</translation>
+        <translation type="obsolete">A criar a directoria</translation>
     </message>
     <message>
         <source>Linked %1 to %2</source>
-        <translation>Ligado %1 a %2</translation>
+        <translation type="obsolete">Ligado %1 a %2</translation>
     </message>
     <message>
         <source>Failed to link %1 to %2</source>
-        <translation>Falhou a ligação de %1 a %2</translation>
+        <translation type="obsolete">Falhou a ligação de %1 a %2</translation>
     </message>
     <message>
         <source>Removed %1</source>
-        <translation>%1 apagado</translation>
+        <translation type="obsolete">%1 apagado</translation>
     </message>
     <message>
         <source>Failed to remove %1</source>
-        <translation>Falhou a remoção de %1</translation>
+        <translation type="obsolete">Falhou a remoção de %1</translation>
     </message>
     <message>
         <source>Removed </source>
-        <translation>Apagado</translation>
+        <translation type="obsolete">Apagado</translation>
     </message>
     <message>
         <source>Failed to remove </source>
-        <translation>Falhou a remoção</translation>
+        <translation type="obsolete">Falhou a remoção</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t start ipkg-link process</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking failed!
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking succeeded.
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

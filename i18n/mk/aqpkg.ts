@@ -203,35 +203,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Could not open :</source>
+        <source>Couldn&apos;t start ipkg-link process</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Creating directory </source>
+        <source>Symbolic linking failed!
+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Linked %1 to %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to link %1 to %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Removed %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to remove %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Removed </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to remove </source>
+        <source>Symbolic linking succeeded.
+</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

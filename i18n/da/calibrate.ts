@@ -9,7 +9,7 @@ for at kalibrere skærmen.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Velkommen til Opie</translation>
+        <translation type="obsolete">Velkommen til Opie</translation>
     </message>
 </context>
 </TS>

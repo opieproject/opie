@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Mine Hunt</source>
-        <translation>Démineur</translation>
+        <translation type="obsolete">Démineur</translation>
     </message>
     <message>
         <source>Beginner</source>
@@ -29,6 +29,10 @@
     <message>
         <source>Game</source>
         <translation>Jeu</translation>
+    </message>
+    <message>
+        <source>Mine Sweep</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -59,11 +59,15 @@
     </message>
     <message>
         <source>Compare To:</source>
-        <translation>Сравнить с:</translation>
+        <translation type="obsolete">Сравнить с:</translation>
     </message>
     <message>
         <source>error</source>
         <translation>ошибка</translation>
+    </message>
+    <message>
+        <source>Compare:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

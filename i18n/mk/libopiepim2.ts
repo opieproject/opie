@@ -77,21 +77,6 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
-    <message>
-        <source>FileDialog</source>
-        <translation type="obsolete">Диалог на датотеки</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation type="obsolete">Отвори</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Сними</translation>
-    </message>
-</context>
-<context>
     <name>OFileSelector</name>
     <message>
         <source>Name:</source>
@@ -130,21 +115,6 @@
     <message>
         <source>Small</source>
         <translation type="obsolete">Мал</translation>
-    </message>
-</context>
-<context>
-    <name>Opie::Ui::OFontSelector</name>
-    <message>
-        <source>Style</source>
-        <translation type="obsolete">Стил</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Големина</translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">Кафеавата лисица рипа преку мрзливото куче</translation>
     </message>
 </context>
 <context>
@@ -588,6 +558,36 @@ and </source>
     <message>
         <source>Pick Time:</source>
         <translation type="obsolete">Одбери Време:</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFileDialog</name>
+    <message>
+        <source>FileDialog</source>
+        <translation type="obsolete">Диалог на датотеки</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="obsolete">Отвори</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Сними</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="obsolete">Стил</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Големина</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="obsolete">Кафеавата лисица рипа преку мрзливото куче</translation>
     </message>
 </context>
 <context>

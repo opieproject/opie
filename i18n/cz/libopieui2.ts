@@ -117,18 +117,18 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
+    <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation>FileDialog</translation>
+        <translation type="unfinished">FileDialog</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Otevřít</translation>
+        <translation type="unfinished">Otevřít</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Uložit</translation>
+        <translation type="unfinished">Uložit</translation>
     </message>
     <message>
         <source>Select Directory</source>
@@ -177,18 +177,18 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFontSelector</name>
+    <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation>Styl</translation>
+        <translation type="unfinished">Styl</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Velikost</translation>
+        <translation type="unfinished">Velikost</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation>Příliš žluťoučký kůň úpěl ďábelské ódy</translation>
+        <translation type="unfinished">Příliš žluťoučký kůň úpěl ďábelské ódy</translation>
     </message>
 </context>
 <context>
@@ -453,10 +453,40 @@ and </source>
     </message>
 </context>
 <context>
+    <name>Opie::Ui::OFileDialog</name>
+    <message>
+        <source>FileDialog</source>
+        <translation type="obsolete">FileDialog</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="obsolete">Otevřít</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Uložit</translation>
+    </message>
+</context>
+<context>
     <name>Opie::Ui::OFileSelector</name>
     <message>
         <source>Name:</source>
         <translation type="unfinished">Jméno:</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="obsolete">Styl</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Velikost</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="obsolete">Příliš žluťoučký kůň úpěl ďábelské ódy</translation>
     </message>
 </context>
 <context>

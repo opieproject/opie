@@ -209,35 +209,49 @@
     </message>
     <message>
         <source>Could not open :</source>
-        <translation>Impossibile aprire :</translation>
+        <translation type="obsolete">Impossibile aprire :</translation>
     </message>
     <message>
         <source>Creating directory </source>
-        <translation>Creazione directory </translation>
+        <translation type="obsolete">Creazione directory </translation>
     </message>
     <message>
         <source>Linked %1 to %2</source>
-        <translation>Creato link da %1 a %2</translation>
+        <translation type="obsolete">Creato link da %1 a %2</translation>
     </message>
     <message>
         <source>Failed to link %1 to %2</source>
-        <translation>Creazione link da %1 a %2 fallita</translation>
+        <translation type="obsolete">Creazione link da %1 a %2 fallita</translation>
     </message>
     <message>
         <source>Removed %1</source>
-        <translation>Eliminato %1</translation>
+        <translation type="obsolete">Eliminato %1</translation>
     </message>
     <message>
         <source>Failed to remove %1</source>
-        <translation>Impossibile eliminare %1</translation>
+        <translation type="obsolete">Impossibile eliminare %1</translation>
     </message>
     <message>
         <source>Removed </source>
-        <translation>Eliminato </translation>
+        <translation type="obsolete">Eliminato </translation>
     </message>
     <message>
         <source>Failed to remove </source>
-        <translation>Impossibile eliminare </translation>
+        <translation type="obsolete">Impossibile eliminare </translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t start ipkg-link process</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking failed!
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking succeeded.
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

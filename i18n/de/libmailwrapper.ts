@@ -45,6 +45,10 @@
         <source>error copy mail: %1</source>
         <translation>Fehler beim Kopieren einer Nachricht: %1</translation>
     </message>
+    <message>
+        <source>Server has no TLS support!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LoginDialogUI</name>
@@ -117,6 +121,14 @@
     <message>
         <source>Error retrieving status</source>
         <translation>Fehler bei der Statusermittlung</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -219,6 +231,34 @@
     <message>
         <source>Error sending queued mail - breaking</source>
         <translation>Fehler beim Versenden der Warteschlange</translation>
+    </message>
+    <message>
+        <source>Starttls not supported</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;center&gt;%1&lt;/center&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error init SMTP connection: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error init SMTP tls: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Login aborted - storing mail to localfolder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Authentification failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error sending mail: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

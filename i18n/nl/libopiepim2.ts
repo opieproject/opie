@@ -109,21 +109,6 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
-    <message>
-        <source>FileDialog</source>
-        <translation type="obsolete">Bestandsdialoog</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation type="obsolete">Open</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Sla op</translation>
-    </message>
-</context>
-<context>
     <name>OFileSelector</name>
     <message>
         <source>Name:</source>
@@ -162,21 +147,6 @@
     <message>
         <source>Small</source>
         <translation type="obsolete">Klein</translation>
-    </message>
-</context>
-<context>
-    <name>Opie::Ui::OFontSelector</name>
-    <message>
-        <source>Style</source>
-        <translation type="obsolete">Stijl</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Grootte</translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">The Quick Brown Fox Jumps Over The Lazy Dog</translation>
     </message>
 </context>
 <context>
@@ -624,6 +594,36 @@ and </source>
     <message>
         <source>Pick Time:</source>
         <translation type="obsolete">Kies tijd:</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFileDialog</name>
+    <message>
+        <source>FileDialog</source>
+        <translation type="obsolete">Bestandsdialoog</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="obsolete">Open</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Sla op</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="obsolete">Stijl</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Grootte</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="obsolete">The Quick Brown Fox Jumps Over The Lazy Dog</translation>
     </message>
 </context>
 <context>

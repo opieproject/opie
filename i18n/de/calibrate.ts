@@ -9,7 +9,7 @@ möglich zum Kalibrieren des Bildschirms.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Willkommen in Opie</translation>
+        <translation type="obsolete">Willkommen in Opie</translation>
     </message>
 </context>
 </TS>

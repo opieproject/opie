@@ -109,18 +109,18 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
+    <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation>Plik</translation>
+        <translation type="unfinished">Plik</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Otwórz</translation>
+        <translation type="unfinished">Otwórz</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Zapisz</translation>
+        <translation type="unfinished">Zapisz</translation>
     </message>
     <message>
         <source>Select Directory</source>
@@ -169,14 +169,14 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFontSelector</name>
+    <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation>Styl</translation>
+        <translation type="unfinished">Styl</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Rozmiar</translation>
+        <translation type="unfinished">Rozmiar</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
@@ -434,10 +434,36 @@ i</translation>
     </message>
 </context>
 <context>
+    <name>Opie::Ui::OFileDialog</name>
+    <message>
+        <source>FileDialog</source>
+        <translation type="obsolete">Plik</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="obsolete">Otwórz</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Zapisz</translation>
+    </message>
+</context>
+<context>
     <name>Opie::Ui::OFileSelector</name>
     <message>
         <source>Name:</source>
         <translation type="unfinished">Nazwa:</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="obsolete">Styl</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Rozmiar</translation>
     </message>
 </context>
 <context>

@@ -90,7 +90,7 @@ precies aan om het scherm in te stellen.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Welkom bij Opie</translation>
+        <translation type="obsolete">Welkom bij Opie</translation>
     </message>
 </context>
 <context>
@@ -176,7 +176,7 @@ Reservebatterij opladen aub.</translation>
     </message>
     <message>
         <source>FirstUseBackground</source>
-        <translation>FirstUseBackground</translation>
+        <translation type="obsolete">FirstUseBackground</translation>
     </message>
     <message>
         <source>Finish</source>

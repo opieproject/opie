@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Mine Hunt</source>
-        <translation>Busca Minas</translation>
+        <translation type="obsolete">Busca Minas</translation>
     </message>
     <message>
         <source>Beginner</source>
@@ -28,6 +28,10 @@
     <message>
         <source>Game</source>
         <translation>Nivel</translation>
+    </message>
+    <message>
+        <source>Mine Sweep</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

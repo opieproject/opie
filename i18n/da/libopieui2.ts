@@ -61,18 +61,18 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
+    <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Åbn</translation>
+        <translation type="unfinished">Åbn</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Gem</translation>
+        <translation type="unfinished">Gem</translation>
     </message>
     <message>
         <source>Select Directory</source>
@@ -117,18 +117,18 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFontSelector</name>
+    <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation>Stil</translation>
+        <translation type="unfinished">Stil</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Størrelse</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation>The Quick Brown Fox Jumps Over Lazy Dog</translation>
+        <translation type="unfinished">The Quick Brown Fox Jumps Over Lazy Dog</translation>
     </message>
 </context>
 <context>
@@ -382,10 +382,36 @@ og</translation>
     </message>
 </context>
 <context>
+    <name>Opie::Ui::OFileDialog</name>
+    <message>
+        <source>Open</source>
+        <translation type="obsolete">Åbn</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Gem</translation>
+    </message>
+</context>
+<context>
     <name>Opie::Ui::OFileSelector</name>
     <message>
         <source>Name:</source>
         <translation type="unfinished">Navn:</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="obsolete">Stil</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Størrelse</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="obsolete">The Quick Brown Fox Jumps Over Lazy Dog</translation>
     </message>
 </context>
 <context>

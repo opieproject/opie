@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Mine Hunt</source>
-        <translation>Лов на мини</translation>
+        <translation type="obsolete">Лов на мини</translation>
     </message>
     <message>
         <source>Beginner</source>
@@ -28,6 +28,10 @@
     <message>
         <source>Game</source>
         <translation>Игра</translation>
+    </message>
+    <message>
+        <source>Mine Sweep</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

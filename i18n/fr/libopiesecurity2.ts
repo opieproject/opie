@@ -1,6 +1,6 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>MultiauthMainWindow</name>
+    <name>Opie::Security::MultiauthMainWindow</name>
     <message>
         <source>Welcome to Opie Multi-authentication Framework</source>
         <translation type="unfinished"></translation>
@@ -31,7 +31,7 @@
     </message>
 </context>
 <context>
-    <name>SecOwnerDlg</name>
+    <name>Opie::Security::SecOwnerDlg</name>
     <message>
         <source>Please contact the owner (directions follow), or try again clicking of this screen (and waiting for the penalty time) if you are the legitimate owner</source>
         <translation type="unfinished"></translation>

@@ -9,7 +9,7 @@ accurately to calibrate your screen.</source>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Добро пожаловать в Opie</translation>
+        <translation type="obsolete">Добро пожаловать в Opie</translation>
     </message>
 </context>
 </TS>

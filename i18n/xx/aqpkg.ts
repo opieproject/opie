@@ -203,35 +203,49 @@
     </message>
     <message>
         <source>Could not open :</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Creating directory </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Linked %1 to %2</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Failed to link %1 to %2</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Removed %1</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Failed to remove %1</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Removed </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Failed to remove </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t start ipkg-link process</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking failed!
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking succeeded.
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -110,18 +110,18 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
+    <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation>Dateidialog</translation>
+        <translation type="unfinished">Dateidialog</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Öffnen</translation>
+        <translation type="unfinished">Öffnen</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Speichern</translation>
+        <translation type="unfinished">Speichern</translation>
     </message>
     <message>
         <source>Select Directory</source>
@@ -170,18 +170,18 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFontSelector</name>
+    <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation>Stil</translation>
+        <translation type="unfinished">Stil</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Größe</translation>
+        <translation type="unfinished">Größe</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation>Falsches Üben von Xylophonmusik quält jeden größeren Zwerg</translation>
+        <translation type="unfinished">Falsches Üben von Xylophonmusik quält jeden größeren Zwerg</translation>
     </message>
 </context>
 <context>
@@ -447,10 +447,40 @@ und</translation>
     </message>
 </context>
 <context>
+    <name>Opie::Ui::OFileDialog</name>
+    <message>
+        <source>FileDialog</source>
+        <translation type="obsolete">Dateidialog</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="obsolete">Öffnen</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Speichern</translation>
+    </message>
+</context>
+<context>
     <name>Opie::Ui::OFileSelector</name>
     <message>
         <source>Name:</source>
         <translation type="unfinished">Name:</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="obsolete">Stil</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Größe</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="obsolete">Falsches Üben von Xylophonmusik quält jeden größeren Zwerg</translation>
     </message>
 </context>
 <context>

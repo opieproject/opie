@@ -10,10 +10,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Mine Hunt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Beginner</source>
         <translation type="unfinished"></translation>
     </message>
@@ -27,6 +23,10 @@
     </message>
     <message>
         <source>Game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mine Sweep</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

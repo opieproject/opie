@@ -9,7 +9,7 @@ pecisión para calibrar la pantalla.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Bienvenido a Opie</translation>
+        <translation type="obsolete">Bienvenido a Opie</translation>
     </message>
 </context>
 </TS>

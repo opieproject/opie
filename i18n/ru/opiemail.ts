@@ -74,6 +74,34 @@
         <source>&lt;p&gt;Please select a File.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Пожалуйста выберите файл.&lt;/p&gt;</translation>
     </message>
+    <message>
+        <source>Sending mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No Receiver spezified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Store message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Store message into drafts?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Да</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">Нет</translation>
+    </message>
+    <message>
+        <source>&lt;center&gt;Attachments will not be stored in &quot;Draft&quot; folder&lt;/center&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ComposeMailUI</name>
@@ -220,7 +248,7 @@
     </message>
     <message>
         <source>Use SSL</source>
-        <translation>Исп. SSL</translation>
+        <translation type="obsolete">Исп. SSL</translation>
     </message>
     <message>
         <source>Password</source>
@@ -245,6 +273,14 @@
     <message>
         <source>Prefix</source>
         <translation>Префикс</translation>
+    </message>
+    <message>
+        <source>ssh $SERVER exec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use secure sockets:</source>
+        <translation type="unfinished">Использовать защищенные сокеты:</translation>
     </message>
 </context>
 <context>
@@ -303,6 +339,46 @@
     </message>
 </context>
 <context>
+    <name>NNTPGroupsDlg</name>
+    <message>
+        <source>Subscribed newsgroups</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NNTPGroupsUI</name>
+    <message>
+        <source>newsgroupslist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Newsgroups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List of groups from the server. On start, only subscribed groups are listed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Groupfilter:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter a filter string here.
+Then hit &quot;get newsgroup list&quot; again and only groups starting 
+with that filter will be listet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Get newsgroup list from server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Retrieve the list of groups from server</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>NNTPconfigUI</name>
     <message>
         <source>Configure NNTP</source>
@@ -339,6 +415,18 @@
     <message>
         <source>Use Login</source>
         <translation>Исп. регистрацию</translation>
+    </message>
+    <message>
+        <source>Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Newsgroup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Get newsgroup list from server</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -394,6 +482,18 @@
         <source>&lt;center&gt;Error while creating&lt;br&gt;new folder - breaking.&lt;/center&gt;</source>
         <translation>&lt;center&gt;Ошибка во время создания&lt;br&gt;новой папки - останавливаю.&lt;/center&gt;</translation>
     </message>
+    <message>
+        <source>Define a smtp account first</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read this posting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit this mail</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>POP3configUI</name>
@@ -446,7 +546,7 @@
     </message>
     <message>
         <source>Use SSL</source>
-        <translation>Исп. SSL</translation>
+        <translation type="obsolete">Исп. SSL</translation>
     </message>
     <message>
         <source>Use Login</source>
@@ -479,6 +579,14 @@
     <message>
         <source>User</source>
         <translation>Пользователь</translation>
+    </message>
+    <message>
+        <source>Use secure sockets:</source>
+        <translation type="unfinished">Использовать защищенные сокеты:</translation>
+    </message>
+    <message>
+        <source>ssh $SERVER exec</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -612,6 +720,10 @@
         <source>&lt;p&gt;Do you really want to delete this mail? &lt;br&gt;&lt;br&gt;</source>
         <translation>&lt;p&gt;Вы действительно хотите удалить это сообщение? &lt;br&gt;&lt;br&gt;</translation>
     </message>
+    <message>
+        <source>Display image preview</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ViewMailBase</name>
@@ -654,6 +766,13 @@
     <message>
         <source>Size</source>
         <translation>Размер</translation>
+    </message>
+</context>
+<context>
+    <name>selectsmtp</name>
+    <message>
+        <source>Select SMTP Account</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

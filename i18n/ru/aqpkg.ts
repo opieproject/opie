@@ -208,35 +208,49 @@
     </message>
     <message>
         <source>Could not open :</source>
-        <translation>Не могу открыть :</translation>
+        <translation type="obsolete">Не могу открыть :</translation>
     </message>
     <message>
         <source>Creating directory </source>
-        <translation>Создаю каталог</translation>
+        <translation type="obsolete">Создаю каталог</translation>
     </message>
     <message>
         <source>Linked %1 to %2</source>
-        <translation>Привязал %1 к %2</translation>
+        <translation type="obsolete">Привязал %1 к %2</translation>
     </message>
     <message>
         <source>Failed to link %1 to %2</source>
-        <translation>Не смог привязать %1 к %2</translation>
+        <translation type="obsolete">Не смог привязать %1 к %2</translation>
     </message>
     <message>
         <source>Removed %1</source>
-        <translation>Убрал %1</translation>
+        <translation type="obsolete">Убрал %1</translation>
     </message>
     <message>
         <source>Failed to remove %1</source>
-        <translation>Не смог убрать %1</translation>
+        <translation type="obsolete">Не смог убрать %1</translation>
     </message>
     <message>
         <source>Removed </source>
-        <translation>Убран</translation>
+        <translation type="obsolete">Убран</translation>
     </message>
     <message>
         <source>Failed to remove </source>
-        <translation>Не смог убрать</translation>
+        <translation type="obsolete">Не смог убрать</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t start ipkg-link process</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking failed!
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking succeeded.
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

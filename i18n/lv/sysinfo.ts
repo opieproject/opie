@@ -59,11 +59,15 @@
     </message>
     <message>
         <source>Compare To:</source>
-        <translation>Salīdzināt Ar:</translation>
+        <translation type="obsolete">Salīdzināt Ar:</translation>
     </message>
     <message>
         <source>error</source>
         <translation>kļūda</translation>
+    </message>
+    <message>
+        <source>Compare:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

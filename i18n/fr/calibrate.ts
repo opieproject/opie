@@ -10,7 +10,7 @@ avec précision pour calibrer l&apos;écran.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Bienvenue sur Opie</translation>
+        <translation type="obsolete">Bienvenue sur Opie</translation>
     </message>
 </context>
 </TS>

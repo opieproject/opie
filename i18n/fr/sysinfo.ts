@@ -60,11 +60,15 @@
     </message>
     <message>
         <source>Compare To:</source>
-        <translation>Comparer avec : </translation>
+        <translation type="obsolete">Comparer avec : </translation>
     </message>
     <message>
         <source>error</source>
         <translation>Erreur</translation>
+    </message>
+    <message>
+        <source>Compare:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -158,12 +158,6 @@ You can only select an actually configured user.</source>
     </message>
 </context>
 <context>
-    <name>Security</name>
-</context>
-<context>
-    <name>SecurityBase</name>
-</context>
-<context>
     <name>SyncBase</name>
     <message>
         <source>SyncBase</source>

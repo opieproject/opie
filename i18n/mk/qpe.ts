@@ -90,7 +90,7 @@ accurately to calibrate your screen.</source>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished">Добредојде во Opie</translation>
+        <translation type="obsolete">Добредојде во Opie</translation>
     </message>
 </context>
 <context>
@@ -171,10 +171,6 @@ Please charge the back-up battery.</source>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>FirstUseBackground</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -9,7 +9,7 @@ přesně na kříže.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Opie vás vítá</translation>
+        <translation type="obsolete">Opie vás vítá</translation>
     </message>
 </context>
 </TS>

@@ -1,6 +1,6 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
+    <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
         <translation type="unfinished"></translation>
@@ -19,7 +19,7 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFontSelector</name>
+    <name>OFontSelector</name>
     <message>
         <source>Style</source>
         <translation type="unfinished"></translation>

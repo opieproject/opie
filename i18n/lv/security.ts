@@ -251,12 +251,8 @@ Uzmanību! Visi ar roku ievadītie diapazoni tiks dzēsti!</translation>
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></source>
-        <translation>Norādiet Sync Protokolu lai apmierinātu atšķirīgas iekārtas
-                      IntelliSync izslēgs paroles pārbaudi bet jums būs jāakceptē pieslēgums.
-                     Opie1.0 ir savietojams ar QtopiaDesktop, MultiSync un KitchenSync
-                     Qtopia1.7 mainīs kā dati tiek sūtīti klientam un tas nestrādās vecākiem klientiem.
-</translation>
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

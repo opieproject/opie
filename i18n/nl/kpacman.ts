@@ -231,7 +231,7 @@ of is in een onbekend formaat.</translation>
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>                          </source>

@@ -75,7 +75,7 @@ akurāti kalibrējiet ekrānu.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Laipni lūgti Opie</translation>
+        <translation type="obsolete">Laipni lūgti Opie</translation>
     </message>
 </context>
 <context>
@@ -110,10 +110,6 @@ akurāti kalibrējiet ekrānu.</translation>
     <message>
         <source>Please wait...</source>
         <translation>Lūdzu uzgaidiet...</translation>
-    </message>
-    <message>
-        <source>FirstUseBackground</source>
-        <translation></translation>
     </message>
     <message>
         <source>Finish</source>
@@ -315,11 +311,11 @@ akurāti kalibrējiet ekrānu.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Labi</translation>
     </message>
     <message>
         <source>Plugin Manager...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Spraudņu Menedžeris...</translation>
     </message>
     <message>
         <source>Memory Status</source>

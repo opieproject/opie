@@ -55,7 +55,7 @@ Visit &lt;a href=&quot;http://opie.handhelds.org/&quot;&gt;http://opie.handhelds
 &lt;b&gt;Andreas &apos;ar&apos; Richter&lt;/b&gt; (ar@handhelds.org)&lt;br/&gt;
 &lt;b&gt;Dan &apos;drw&apos; Williams&lt;/b&gt; (drw@handhelds.org)&lt;/tt&gt;&lt;br/&gt;
 &lt;/p&gt;</source>
-        <translation>&lt;p&gt;
+        <translation type="obsolete">&lt;p&gt;
 &lt;b&gt;Rajko &apos;alwin&apos; Albrecht&lt;/b&gt; (alwin@handhelds.org)&lt;br/&gt;
 &lt;b&gt;Holger &apos;Zecke&apos; Freyther&lt;/b&gt; (zecke@handhelds.org)&lt;br/&gt;
 &lt;b&gt;Chris &apos;Kergoth&apos; Larson&lt;/b&gt; (kergoth@handhelds.org)&lt;br/&gt;
@@ -93,7 +93,7 @@ Visit &lt;a href=&quot;http://opie.handhelds.org/&quot;&gt;http://opie.handhelds
     </message>
     <message>
         <source>&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.3&lt;/b&gt;&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.3&lt;/b&gt;&lt;/center&gt;</translation>
+        <translation type="obsolete">&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.3&lt;/b&gt;&lt;/center&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;
@@ -130,6 +130,24 @@ Visit &lt;i&gt;http://opie.handhelds.org&lt;/i&gt; for more information on the O
         <translation>&lt;p&gt;Вам не нужно быть разработчиком программного обеспечения чтобы стать членом команды Opie. Вы можете присоединиться к интернациональным командам которые переводят интерфейс программ. Вы можете предоставлять графику, темы, звуки, или улучшенную документацию. Выбирайте сами!&lt;/p&gt;
 &lt;p&gt;Зайдите на &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt; чтобы узнать про проекты в которых вы можете участвовать.&lt;/p&gt;
 &lt;p&gt;Если вам нужно больше информации или документации, &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt; даст вам все, что необходимо.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.6&lt;/b&gt;&lt;/center&gt;</source>
+        <translation type="unfinished">&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.6&lt;/b&gt;&lt;/center&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;
+&lt;b&gt;Rajko &apos;alwin&apos; Albrecht&lt;/b&gt; (alwin@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Stefan &apos;eilers&apos; Eilers&lt;/b&gt; (eilers@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Holger &apos;Zecke&apos; Freyther&lt;/b&gt; (zecke@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Chris &apos;Kergoth&apos; Larson&lt;/b&gt; (kergoth@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Michael &apos;Mickey&apos; Lauer&lt;/b&gt; (mickeyl@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Lorn &apos;ljp&apos; Potter&lt;/b&gt; (ljp@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Max &apos;Harlekin&apos; Reiss&lt;/b&gt; (harlekin@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Andreas &apos;ar&apos; Richter&lt;/b&gt; (ar@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Dan &apos;drw&apos; Williams&lt;/b&gt; (drw@handhelds.org)&lt;/tt&gt;&lt;br/&gt;
+&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>Mine Hunt</source>
-        <translation>Caça Minas</translation>
+        <translation type="obsolete">Caça Minas</translation>
     </message>
     <message>
         <source>Expert</source>
@@ -29,6 +29,10 @@
     <message>
         <source>Beginner</source>
         <translation>Iniciante</translation>
+    </message>
+    <message>
+        <source>Mine Sweep</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

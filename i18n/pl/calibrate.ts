@@ -9,7 +9,7 @@ zeby skalibrowac ekran.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Witamy w Opie</translation>
+        <translation type="obsolete">Witamy w Opie</translation>
     </message>
 </context>
 </TS>

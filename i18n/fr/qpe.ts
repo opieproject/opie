@@ -91,7 +91,7 @@ avec précision pour calibrer l&apos;écran.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Bienvenue sur Opie</translation>
+        <translation type="obsolete">Bienvenue sur Opie</translation>
     </message>
 </context>
 <context>
@@ -177,7 +177,7 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     </message>
     <message>
         <source>FirstUseBackground</source>
-        <translation>Premier arriere plan</translation>
+        <translation type="obsolete">Premier arriere plan</translation>
     </message>
     <message>
         <source>Finish</source>

@@ -29,13 +29,5 @@
         <source>Ejected: </source>
         <translation>Eject:</translation>
     </message>
-    <message>
-        <source>New card: SD/MMC</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ejected: SD/MMC</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 </TS>

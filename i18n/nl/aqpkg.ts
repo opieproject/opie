@@ -207,35 +207,49 @@
     </message>
     <message>
         <source>Could not open :</source>
-        <translation>Kan niet openen:</translation>
+        <translation type="obsolete">Kan niet openen:</translation>
     </message>
     <message>
         <source>Creating directory </source>
-        <translation>Maak map aan</translation>
+        <translation type="obsolete">Maak map aan</translation>
     </message>
     <message>
         <source>Linked %1 to %2</source>
-        <translation>Link gemaakt van %1 naar %2</translation>
+        <translation type="obsolete">Link gemaakt van %1 naar %2</translation>
     </message>
     <message>
         <source>Failed to link %1 to %2</source>
-        <translation>Link van %1 naar %2 mislukt</translation>
+        <translation type="obsolete">Link van %1 naar %2 mislukt</translation>
     </message>
     <message>
         <source>Removed %1</source>
-        <translation>Verwijderd %1</translation>
+        <translation type="obsolete">Verwijderd %1</translation>
     </message>
     <message>
         <source>Failed to remove %1</source>
-        <translation>%1 verwijderen mislukt</translation>
+        <translation type="obsolete">%1 verwijderen mislukt</translation>
     </message>
     <message>
         <source>Removed </source>
-        <translation>Verwijderd</translation>
+        <translation type="obsolete">Verwijderd</translation>
     </message>
     <message>
         <source>Failed to remove </source>
-        <translation>Verwijderen mislukt</translation>
+        <translation type="obsolete">Verwijderen mislukt</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t start ipkg-link process</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking failed!
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking succeeded.
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

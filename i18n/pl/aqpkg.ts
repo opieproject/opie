@@ -207,35 +207,49 @@
     </message>
     <message>
         <source>Could not open :</source>
-        <translation>Nie mozna otworzyc: </translation>
+        <translation type="obsolete">Nie mozna otworzyc: </translation>
     </message>
     <message>
         <source>Creating directory </source>
-        <translation>Tworzenie katalogu</translation>
+        <translation type="obsolete">Tworzenie katalogu</translation>
     </message>
     <message>
         <source>Linked %1 to %2</source>
-        <translation>%1 zlinkowany do %2</translation>
+        <translation type="obsolete">%1 zlinkowany do %2</translation>
     </message>
     <message>
         <source>Failed to link %1 to %2</source>
-        <translation>Nie udalo sie zlinkowanie %1 do %2</translation>
+        <translation type="obsolete">Nie udalo sie zlinkowanie %1 do %2</translation>
     </message>
     <message>
         <source>Removed %1</source>
-        <translation>Usuniete %1</translation>
+        <translation type="obsolete">Usuniete %1</translation>
     </message>
     <message>
         <source>Failed to remove %1</source>
-        <translation>Nie udalo sie usuniecie %1</translation>
+        <translation type="obsolete">Nie udalo sie usuniecie %1</translation>
     </message>
     <message>
         <source>Removed </source>
-        <translation>Usuniete</translation>
+        <translation type="obsolete">Usuniete</translation>
     </message>
     <message>
         <source>Failed to remove </source>
-        <translation>Nie udalo sie usunac</translation>
+        <translation type="obsolete">Nie udalo sie usunac</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t start ipkg-link process</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking failed!
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking succeeded.
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

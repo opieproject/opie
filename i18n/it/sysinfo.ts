@@ -59,11 +59,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Compare To:</source>
+        <source>error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>error</source>
+        <source>Compare:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

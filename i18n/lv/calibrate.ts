@@ -9,7 +9,7 @@ akurāti kalibrējiet ekrānu.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Laipni lūgti Opie</translation>
+        <translation type="obsolete">Laipni lūgti Opie</translation>
     </message>
 </context>
 </TS>

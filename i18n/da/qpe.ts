@@ -90,7 +90,7 @@ for at kalibrere din skærm.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished">Velkommen til Opie</translation>
+        <translation type="obsolete">Velkommen til Opie</translation>
     </message>
 </context>
 <context>
@@ -172,10 +172,6 @@ Genoplad venligst back-up batteriet.</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>FirstUseBackground</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

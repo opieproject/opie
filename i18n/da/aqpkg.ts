@@ -204,35 +204,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Could not open :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Creating directory </source>
-        <translation>Opretter mappe</translation>
+        <translation type="obsolete">Opretter mappe</translation>
     </message>
     <message>
         <source>Linked %1 to %2</source>
-        <translation>Link fra %1 til %1 oprettet</translation>
-    </message>
-    <message>
-        <source>Failed to link %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Link fra %1 til %1 oprettet</translation>
     </message>
     <message>
         <source>Removed %1</source>
-        <translation>%1 fjernet</translation>
+        <translation type="obsolete">%1 fjernet</translation>
     </message>
     <message>
         <source>Failed to remove %1</source>
-        <translation>Kunne ikke fjerne %1</translation>
+        <translation type="obsolete">Kunne ikke fjerne %1</translation>
     </message>
     <message>
         <source>Removed </source>
-        <translation>Fjernet</translation>
+        <translation type="obsolete">Fjernet</translation>
     </message>
     <message>
-        <source>Failed to remove </source>
+        <source>Couldn&apos;t start ipkg-link process</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking failed!
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking succeeded.
+</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

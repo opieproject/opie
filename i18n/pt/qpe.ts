@@ -72,10 +72,6 @@
 accurately to calibrate your screen.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Welcome to Opie</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DesktopPowerAlerter</name>
@@ -112,7 +108,7 @@ accurately to calibrate your screen.</source>
     </message>
     <message>
         <source>FirstUseBackground</source>
-        <translation>Ecrâ de Fundo no Primeiro Uso</translation>
+        <translation type="obsolete">Ecrâ de Fundo no Primeiro Uso</translation>
     </message>
     <message>
         <source>Finish</source>

@@ -9,7 +9,7 @@ para calibrar sua tela.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Bemvindo ao Opie</translation>
+        <translation type="obsolete">Bemvindo ao Opie</translation>
     </message>
 </context>
 </TS>

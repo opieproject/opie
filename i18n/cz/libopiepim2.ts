@@ -117,21 +117,6 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
-    <message>
-        <source>FileDialog</source>
-        <translation type="obsolete">FileDialog</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation type="obsolete">Otevřít</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Uložit</translation>
-    </message>
-</context>
-<context>
     <name>OFileSelector</name>
     <message>
         <source>Name:</source>
@@ -170,21 +155,6 @@
     <message>
         <source>Small</source>
         <translation type="obsolete">Malý</translation>
-    </message>
-</context>
-<context>
-    <name>Opie::Ui::OFontSelector</name>
-    <message>
-        <source>Style</source>
-        <translation type="obsolete">Styl</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Velikost</translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">Příliš žluťoučký kůň úpěl ďábelské ódy</translation>
     </message>
 </context>
 <context>
@@ -634,6 +604,36 @@ and </source>
     <message>
         <source>Pick Time:</source>
         <translation type="obsolete">Čas podání:</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFileDialog</name>
+    <message>
+        <source>FileDialog</source>
+        <translation type="obsolete">FileDialog</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="obsolete">Otevřít</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Uložit</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="obsolete">Styl</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Velikost</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="obsolete">Příliš žluťoučký kůň úpěl ďábelské ódy</translation>
     </message>
 </context>
 <context>

@@ -109,21 +109,6 @@
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
-    <message>
-        <source>FileDialog</source>
-        <translation type="obsolete">Plik</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation type="obsolete">Otwórz</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Zapisz</translation>
-    </message>
-</context>
-<context>
     <name>OFileSelector</name>
     <message>
         <source>Name:</source>
@@ -162,17 +147,6 @@
     <message>
         <source>Small</source>
         <translation type="obsolete">Małe</translation>
-    </message>
-</context>
-<context>
-    <name>Opie::Ui::OFontSelector</name>
-    <message>
-        <source>Style</source>
-        <translation type="obsolete">Styl</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Rozmiar</translation>
     </message>
 </context>
 <context>
@@ -608,6 +582,32 @@ i</translation>
     <message>
         <source>Pick Time:</source>
         <translation type="obsolete">Wybierz czas:</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFileDialog</name>
+    <message>
+        <source>FileDialog</source>
+        <translation type="obsolete">Plik</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="obsolete">Otwórz</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Zapisz</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="obsolete">Styl</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Rozmiar</translation>
     </message>
 </context>
 <context>
