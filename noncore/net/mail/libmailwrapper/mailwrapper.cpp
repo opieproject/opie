@@ -32,6 +32,7 @@ Folder::Folder(const QString&tmp_name, const QString&sep  )
     name = tmp_name;
     nameDisplay = name;
     separator = sep;
+    prefix = "";
 }
 
 const QString& Folder::Separator()const
@@ -39,12 +40,13 @@ const QString& Folder::Separator()const
     return separator;
 }
 
-IMAPFolder::IMAPFolder(const QString&name,const QString&sep, bool select,bool no_inf, const QString&prefix )
+IMAPFolder::IMAPFolder(const QString&name,const QString&sep, bool select,bool no_inf, const QString&aprefix )
     : Folder( name,sep ),m_MaySelect(select),m_NoInferior(no_inf)
 {
   // Decode IMAP foldername
   nameDisplay = IMAPFolder::decodeFolderName( name );
   qDebug( "folder " + name + " - displayed as " + nameDisplay );
+    prefix = aprefix;
 
     if (prefix.length()>0) {
         if (nameDisplay.startsWith(prefix) && nameDisplay.length()>prefix.length()) {
@@ -145,4 +147,18 @@ QString IMAPFolder::decodeFolderName( const QString &name )
 Mail::Mail()
     :name(""), mail(""), to(""), cc(""), bcc(""), reply(""), subject(""), message("")
 {
+}
+
+MHFolder::MHFolder(const QString&disp_name,const QString&mbox)
+    : Folder( disp_name,"/" )
+{
+    separator = "/";
+    name = mbox;
+    if (!disp_name.startsWith("/") && disp_name.length()>0)
+        name+="/";
+    name+=disp_name;
+    if (disp_name.length()==0) {
+        nameDisplay = separator;
+    }
+    prefix = mbox;
 }

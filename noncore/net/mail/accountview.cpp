@@ -577,7 +577,7 @@ AccountView::AccountView( QWidget *parent, const char *name, WFlags flags )
 AccountView::~AccountView()
 {
     imapAccounts.clear();
-    mboxAccounts.clear();
+    mhAccounts.clear();
 }
 
 void AccountView::slotContextMenu(int id)
@@ -605,9 +605,9 @@ void AccountView::populate( QList<Account> list )
     clear();
 
     imapAccounts.clear();
-    mboxAccounts.clear();
+    mhAccounts.clear();
 
-    mboxAccounts.append(new MBOXviewItem(AbstractMail::defaultLocalfolder(),this));
+    mhAccounts.append(new MHviewItem(AbstractMail::defaultLocalfolder(),this));
 
     Account *it;
     for ( it = list.first(); it; it = list.next() ) {
@@ -666,10 +666,10 @@ void AccountView::setupFolderselect(Selectstore*sels)
     sels->showMaximized();
     QStringList sFolders;
     unsigned int i = 0;
-    for (i=0; i < mboxAccounts.count();++i) {
-        mboxAccounts[i]->refresh(false);
-        sFolders = mboxAccounts[i]->subFolders();
-        sels->addAccounts(mboxAccounts[i]->getWrapper(),sFolders);
+    for (i=0; i < mhAccounts.count();++i) {
+        mhAccounts[i]->refresh(false);
+        sFolders = mhAccounts[i]->subFolders();
+        sels->addAccounts(mhAccounts[i]->getWrapper(),sFolders);
     }
     for (i=0; i < imapAccounts.count();++i) {
         if (imapAccounts[i]->offline())
@@ -704,10 +704,10 @@ void AccountView::downloadMails(Folder*fromFolder,AbstractMail*fromWrapper)
 }
 
 /**
- * MBOX Account stuff
+ * MH Account stuff
  */
 
-MBOXviewItem::MBOXviewItem( const QString&aPath, AccountView *parent )
+MHviewItem::MHviewItem( const QString&aPath, AccountView *parent )
     : AccountViewItem( parent )
 {
     m_Path = aPath;
@@ -718,22 +718,22 @@ MBOXviewItem::MBOXviewItem( const QString&aPath, AccountView *parent )
     setOpen( true );
 }
 
-MBOXviewItem::~MBOXviewItem()
+MHviewItem::~MHviewItem()
 {
     delete wrapper;
 }
 
-AbstractMail *MBOXviewItem::getWrapper()
+AbstractMail *MHviewItem::getWrapper()
 {
     return wrapper;
 }
 
-void MBOXviewItem::refresh( QList<RecMail> & )
+void MHviewItem::refresh( QList<RecMail> & )
 {
     refresh(false);
 }
 
-void MBOXviewItem::refresh(bool force)
+void MHviewItem::refresh(bool force)
 {
     if (childCount()>0 && force==false) return;
     QList<Folder> *folders = wrapper->listFolders();
@@ -746,7 +746,7 @@ void MBOXviewItem::refresh(bool force)
     Folder *it;
     QListViewItem*item = 0;
     for ( it = folders->first(); it; it = folders->next() ) {
-        item = new MBOXfolderItem( it, this , item );
+        item = new MHfolderItem( it, this , item );
         item->setSelectable(it->may_select());
     }
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -754,13 +754,13 @@ void MBOXviewItem::refresh(bool force)
     delete folders;
 }
 
-RecBody MBOXviewItem::fetchBody( const RecMail &mail )
+RecBody MHviewItem::fetchBody( const RecMail &mail )
 {
-    qDebug( "MBOX fetchBody" );
+    qDebug( "MH fetchBody" );
     return wrapper->fetchBody( mail );
 }
 
-QPopupMenu * MBOXviewItem::getContextMenu()
+QPopupMenu * MHviewItem::getContextMenu()
 {
     QPopupMenu *m = new QPopupMenu(0);
     if (m) {
@@ -770,7 +770,7 @@ QPopupMenu * MBOXviewItem::getContextMenu()
     return m;
 }
 
-void MBOXviewItem::createFolder()
+void MHviewItem::createFolder()
 {
     Newmdirdlg ndirdlg(0,0,true);
     ndirdlg.showMaximized();
@@ -782,20 +782,20 @@ void MBOXviewItem::createFolder()
     }
 }
 
-QStringList MBOXviewItem::subFolders()
+QStringList MHviewItem::subFolders()
 {
     QStringList result;
     QListViewItem *child = firstChild();
     while ( child ) {
-        MBOXfolderItem *tmp = (MBOXfolderItem*)child;
+        MHfolderItem *tmp = (MHfolderItem*)child;
         child = child->nextSibling();
-        result.append(tmp->getFolder()->getName());
+        result.append(tmp->getFolder()->getDisplayName());
     }
     qDebug("Size of result: %i",result.count());
     return result;
 }
 
-void MBOXviewItem::contextMenuSelected(int which)
+void MHviewItem::contextMenuSelected(int which)
 {
     switch (which) {
     case 0:
@@ -809,12 +809,12 @@ void MBOXviewItem::contextMenuSelected(int which)
     }
 }
 
-MBOXfolderItem::~MBOXfolderItem()
+MHfolderItem::~MHfolderItem()
 {
     delete folder;
 }
 
-MBOXfolderItem::MBOXfolderItem( Folder *folderInit, MBOXviewItem *parent , QListViewItem*after  )
+MHfolderItem::MHfolderItem( Folder *folderInit, MHviewItem *parent , QListViewItem*after  )
     : AccountViewItem( parent,after )
 {
     folder = folderInit;
@@ -829,23 +829,23 @@ MBOXfolderItem::MBOXfolderItem( Folder *folderInit, MBOXviewItem *parent , QList
     setText( 0, folder->getDisplayName() );
 }
 
-Folder*MBOXfolderItem::getFolder()
+Folder*MHfolderItem::getFolder()
 {
     return folder;
 }
 
-void MBOXfolderItem::refresh(QList<RecMail>&target)
+void MHfolderItem::refresh(QList<RecMail>&target)
 {
     if (folder->may_select())
         mbox->getWrapper()->listMessages( folder->getName(),target );
 }
 
-RecBody MBOXfolderItem::fetchBody(const RecMail&aMail)
+RecBody MHfolderItem::fetchBody(const RecMail&aMail)
 {
     return mbox->getWrapper()->fetchBody(aMail);
 }
 
-void MBOXfolderItem::deleteFolder()
+void MHfolderItem::deleteFolder()
 {
     int yesno = QMessageBox::warning(0,QObject::tr("Delete folder",contextName),
         QObject::tr("<center>Realy delete folder <br><b>%1</b><br>and all if it content?</center>",contextName).arg(folder->getDisplayName()),
@@ -855,7 +855,7 @@ void MBOXfolderItem::deleteFolder()
     if (yesno == 0) {
         if (mbox->getWrapper()->deleteMbox(folder)) {
             QListView*v=listView();
-            MBOXviewItem * box = mbox;
+            MHviewItem * box = mbox;
             /* be carefull - after that this object is destroyd so don't use
              * any member of it after that call!!*/
             mbox->refresh(true);
@@ -866,7 +866,7 @@ void MBOXfolderItem::deleteFolder()
     }
 }
 
-QPopupMenu * MBOXfolderItem::getContextMenu()
+QPopupMenu * MHfolderItem::getContextMenu()
 {
     QPopupMenu *m = new QPopupMenu(0);
     if (m) {
@@ -877,14 +877,14 @@ QPopupMenu * MBOXfolderItem::getContextMenu()
     return m;
 }
 
-void MBOXfolderItem::downloadMails()
+void MHfolderItem::downloadMails()
 {
     AccountView*bl = mbox->accountView();
     if (!bl) return;
     bl->downloadMails(folder,mbox->getWrapper());
 }
 
-void MBOXfolderItem::contextMenuSelected(int which)
+void MHfolderItem::contextMenuSelected(int which)
 {
     switch(which) {
     case 0:

@@ -14,7 +14,7 @@
 
 #include "smtpwrapper.h"
 #include "mailwrapper.h"
-#include "mboxwrapper.h"
+#include "abstractmail.h"
 #include "logindialog.h"
 #include "mailtypes.h"
 //#include "defines.h"
@@ -490,6 +490,7 @@ void SMTPwrapper::storeMail(const char*mail, size_t length, const QString&box)
     if (!mail) return;
     QString localfolders = AbstractMail::defaultLocalfolder();
     AbstractMail*wrap = AbstractMail::getWrapper(localfolders);
+    wrap->createMbox(box);
     wrap->storeMessage(mail,length,box);
     delete wrap;
 }

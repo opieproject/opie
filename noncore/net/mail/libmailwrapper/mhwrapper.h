@@ -1,5 +1,5 @@
-#ifndef __MBOX_WRAPPER_H
-#define __MBOX_WRAPPER_H
+#ifndef __MH_WRAPPER_H
+#define __MH_WRAPPER_H
 
 #include "genericwrapper.h"
 #include <qstring.h>
@@ -9,13 +9,12 @@ class RecBody;
 class encodedString;
 struct mailmbox_folder;
 
-class MBOXwrapper : public Genericwrapper
+class MHwrapper : public Genericwrapper
 {
     Q_OBJECT
-
 public:
-    MBOXwrapper(const QString & dir,const QString&name);
-    virtual ~MBOXwrapper();
+    MHwrapper(const QString & dir,const QString&name);
+    virtual ~MHwrapper();
     
     virtual void listMessages(const QString & mailbox, QList<RecMail> &target );
     virtual QList<Folder>* listFolders();
@@ -39,10 +38,13 @@ public:
     virtual const QString&getName()const;
 
 protected:
-    static void deleteMails(mailmbox_folder*f,QList<RecMail> &target);
-    QString MBOXPath;
-    QString MBOXName;
+    QString buildPath(const QString&p);
+    QString MHPath;
+    QString MHName;
     static const QString wrapperType;
+    
+    void init_storage();
+    void clean_storage();
 };
 
 #endif

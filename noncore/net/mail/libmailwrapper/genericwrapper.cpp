@@ -6,10 +6,18 @@ Genericwrapper::Genericwrapper()
     : AbstractMail()
 {
     bodyCache.clear();
+    m_storage = 0;
+    m_folder = 0;
 }
 
 Genericwrapper::~Genericwrapper()
 {
+    if (m_folder) {
+        mailfolder_free(m_folder);
+    }
+    if (m_storage) {
+        mailstorage_free(m_storage);
+    }
     cleanMimeCache();
 }
 

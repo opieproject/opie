@@ -19,6 +19,8 @@ struct mailimf_date_time;
 struct mailimf_group;
 struct mailimf_address_list;
 struct mailsession;
+struct mailstorage;
+struct mailfolder;
 
 /* this class hold just the funs shared between
  * mbox and pop3 (later mh, too) mail access.
@@ -57,6 +59,8 @@ protected:
     QString msgTempName;
     unsigned int last_msg_id;
     QMap<QString,encodedString*> bodyCache;
+    mailstorage * m_storage;
+    mailfolder*m_folder;
 };
 
 #endif

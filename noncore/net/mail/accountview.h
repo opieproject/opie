@@ -118,13 +118,13 @@ protected:
     IMAPviewItem *imap;
 };
 
-class MBOXviewItem : public AccountViewItem
+class MHviewItem : public AccountViewItem
 {
-    friend class MBOXfolderItem;
+    friend class MHfolderItem;
 
 public:
-    MBOXviewItem( const QString&aMboxPath, AccountView *parent );
-    virtual ~MBOXviewItem();
+    MHviewItem( const QString&aMboxPath, AccountView *parent );
+    virtual ~MHviewItem();
     virtual void refresh( QList<RecMail> &target );
     virtual RecBody fetchBody( const RecMail &mail );
     AbstractMail *getWrapper();
@@ -140,12 +140,12 @@ protected:
 
 };
 
-class MBOXfolderItem : public AccountViewItem
+class MHfolderItem : public AccountViewItem
 {
 
 public:
-    MBOXfolderItem( Folder *folder, MBOXviewItem *parent , QListViewItem*after  );
-    virtual ~MBOXfolderItem();
+    MHfolderItem( Folder *folder, MHviewItem *parent , QListViewItem*after  );
+    virtual ~MHfolderItem();
     virtual void refresh(QList<RecMail>&);
     virtual RecBody fetchBody(const RecMail&);
     virtual QPopupMenu * getContextMenu();
@@ -156,7 +156,7 @@ protected:
     void downloadMails();
     virtual void deleteFolder();
     Folder *folder;
-    MBOXviewItem *mbox;
+    MHviewItem *mbox;
 };
 
 class AccountView : public QListView
@@ -184,7 +184,7 @@ signals:
 protected: 
     QListViewItem* m_currentItem;
     QValueList<IMAPviewItem*> imapAccounts;
-    QValueList<MBOXviewItem*> mboxAccounts;
+    QValueList<MHviewItem*> mhAccounts;
 };
 
 #endif

@@ -1,6 +1,7 @@
 #include "abstractmail.h"
 #include "imapwrapper.h"
 #include "pop3wrapper.h"
+#include "mhwrapper.h"
 #include "mboxwrapper.h"
 #include "mailtypes.h"
 
@@ -23,7 +24,7 @@ AbstractMail* AbstractMail::getWrapper(POP3account *a)
 
 AbstractMail* AbstractMail::getWrapper(const QString&a,const QString&name)
 {
-    return new MBOXwrapper(a,name);
+    return new MHwrapper(a,name);
 }
 
 encodedString* AbstractMail::decode_String(const encodedString*text,const QString&enc)

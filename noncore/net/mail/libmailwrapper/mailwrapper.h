@@ -69,13 +69,20 @@ public:
     Folder( const QString&init_name,const QString&sep );
     const QString&getDisplayName()const { return nameDisplay; }
     const QString&getName()const { return name; }
+    const QString&getPrefix()const{return prefix; }
     virtual bool may_select()const{return true;}
     virtual bool no_inferior()const{return true;}
     const QString&Separator()const;
 
 protected:
-    QString nameDisplay, name, separator;
-    
+    QString nameDisplay, name, separator,prefix;
+};
+
+class MHFolder : public Folder
+{
+    Q_OBJECT
+public:
+    MHFolder(const QString&disp_name,const QString&mbox);
 };
 
 class IMAPFolder : public Folder
