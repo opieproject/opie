@@ -89,7 +89,7 @@ protected:
     void drawAttrString( QString& string, QPainter& painter, QRect rect, Character attr, bool pm, bool clear );
 
 protected:
-	
+
     enum ScrollLocation
       {
 	SCRNONE,
@@ -103,14 +103,14 @@ protected:
 	int m_blX;
 	int m_blY;
 	int m_brX;
-	
+
 	int m_bY;
 	int m_bX;
 	QScrollBar* m_scrollbar;
 
 	ScrollLocation scrollLoc;
 
-	ColorEntry* color_table;
+//	ColorEntry* color_table;
 
 	bool blinking;
 };

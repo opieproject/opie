@@ -107,8 +107,8 @@ struct ColorEntry
        bold = rhs.bold; 
   }
   QColor color;
-  bool   transparent; // if used on bg
-  bool   bold;        // if used on fg
+  bool   transparent : 1; // if used on bg
+  bool   bold        : 1; // if used on fg
 };
 
 #endif // COMMON_H

@@ -17,10 +17,26 @@
 
 #define SCRWIDTH 16 // width of scrollbar
 
+
+static const ColorEntry color_table[TABLE_COLORS] =
+{
+    ColorEntry(QColor(0x00,0x00,0x00), 0, 0 ), ColorEntry( QColor(0xB2,0xB2,0xB2), 1, 0 ), // Dfore, Dback
+  ColorEntry(QColor(0x00,0x00,0x00), 0, 0 ), ColorEntry( QColor(0xB2,0x18,0x18), 0, 0 ), // Black, Red
+  ColorEntry(QColor(0x18,0xB2,0x18), 0, 0 ), ColorEntry( QColor(0xB2,0x68,0x18), 0, 0 ), // Green, Yellow
+  ColorEntry(QColor(0x18,0x18,0xB2), 0, 0 ), ColorEntry( QColor(0xB2,0x18,0xB2), 0, 0 ), // Blue,  Magenta
+  ColorEntry(QColor(0x18,0xB2,0xB2), 0, 0 ), ColorEntry( QColor(0xB2,0xB2,0xB2), 0, 0 ), // Cyan,  White
+  // intensiv
+  ColorEntry(QColor(0x00,0x00,0x00), 0, 1 ), ColorEntry( QColor(0xFF,0xFF,0xFF), 1, 0 ),
+  ColorEntry(QColor(0x68,0x68,0x68), 0, 0 ), ColorEntry( QColor(0xFF,0x54,0x54), 0, 0 ),
+  ColorEntry(QColor(0x54,0xFF,0x54), 0, 0 ), ColorEntry( QColor(0xFF,0xFF,0x54), 0, 0 ),
+  ColorEntry(QColor(0x54,0x54,0xFF), 0, 0 ), ColorEntry( QColor(0xB2,0x18,0xB2), 0, 0 ),
+  ColorEntry(QColor(0x54,0xFF,0xFF), 0, 0 ), ColorEntry( QColor(0xFF,0xFF,0xFF), 0, 0 )
+};
+
 EmulationWidget::EmulationWidget( const Profile& config, QWidget *parent, const char* name ) : WidgetLayer( config, parent, name )
 {
 
-	// initialize font attributes 
+	// initialize font attributes
 	QFontMetrics fm( font() );
 	f_height = fm.height();
 	f_width = fm.maxWidth();
@@ -32,16 +48,16 @@ EmulationWidget::EmulationWidget( const Profile& config, QWidget *parent, const 
 
 	// give reasonable defaults to m_columns, m_lines
 	calcGeometry();
-	
+
 	// load config
 	reloadConfig( config );
-	
+
 	m_resizing = false;
 }
 
 void EmulationWidget::reloadConfig( const Profile& config )
 {
-  
+
   // nothing yet
 }
 
@@ -107,7 +123,7 @@ void EmulationWidget::setImage( QArray<Character> const newimg, int lines, int c
 	setUpdatesEnabled( false );
 
 	paint.begin( this );
-	
+
 	QPoint tL = contentsRect().topLeft();
 	int tLx = tL.x();
 	int tLy = tL.y();
@@ -119,7 +135,7 @@ void EmulationWidget::setImage( QArray<Character> const newimg, int lines, int c
 
 	int lins = QMIN( m_lines, QMAX( 0, lines ) );
 	int cols = QMIN( m_columns, QMAX( 0, columns ) );
-	QArray<QChar> disstrU = QArray<QChar>( cols );	
+	QArray<QChar> disstrU = QArray<QChar>( cols );
 
 	for ( int y = 0; y < lins; ++y )
 	{	int len;
@@ -130,7 +146,7 @@ void EmulationWidget::setImage( QArray<Character> const newimg, int lines, int c
 		{
 			// disable, till widget works, WITHOUT blinking
 			//hasBlinker |= ( ext[x].r & RE_BLINK );
-			
+
 			if ( ext[x] != lcl[x] )
 			{
 				cr = ext[x].r;
@@ -172,7 +188,7 @@ void EmulationWidget::paintEvent( QPaintEvent* pe )
 {
     QPainter painter;
     const QPixmap* pm = backgroundPixmap();
-    
+
     painter.begin( this );
     painter.setBackgroundMode( TransparentMode );
 
@@ -180,12 +196,12 @@ void EmulationWidget::paintEvent( QPaintEvent* pe )
     QPoint tL = contentsRect().topLeft();
     int tLx = tL.x();
     int tLy = tL.y();
-    
+
     int lux = QMIN(m_columns-1, QMAX(0,(rect.left()   - tLx - m_blX ) / f_width));
     int luy = QMIN(m_lines-1,   QMAX(0,(rect.top()    - tLy - m_bY  ) / f_height));
     int rlx = QMIN(m_columns-1, QMAX(0,(rect.right()  - tLx - m_blX ) / f_width));
     int rly = QMIN(m_lines-1,   QMAX(0,(rect.bottom() - tLy - m_bY  ) / f_height));
-    
+
     QChar *disstrU = new QChar[m_columns];
     for (int y = luy; y <= rly; y++)
     for (int x = lux; x <= rlx; x++)
@@ -205,7 +221,7 @@ void EmulationWidget::paintEvent( QPaintEvent* pe )
 	}
 	QString unistr(disstrU,len);
 
-	drawAttrString( unistr, painter, QRect( m_blX+tLx+f_width*x,m_bY+tLy+f_height*y,f_width*len,f_height ), m_image[loc(x ,y )], pm != NULL, false );
+	drawAttrString( unistr, painter, QRect( m_blX+tLx+f_width*x,m_bY+tLy+f_height*y,f_width*len,f_height ), m_image[loc(x ,y )], pm != 0l, false );
 	x +=len -1;
     }
     delete [] disstrU;
@@ -240,13 +256,14 @@ void EmulationWidget::calcGeometry()
 		m_scrollbar->show();
 		break;
 	}
-	
+
 	m_lines = ( contentsRect().height() - 2 * rimY ) / f_height;
 	m_bY = ( contentsRect().height() - (m_lines * f_height ) ) / 2;
 }
 
-void EmulationWidget::drawAttrString( QString& string, QPainter &painter, QRect rect, Character attr, bool usePixmap, bool clear )    
+void EmulationWidget::drawAttrString( QString& string, QPainter &painter, QRect rect, Character attr, bool usePixmap, bool clear )
 {
+    qWarning("Color1 %s", color_table[attr.b].color.name().latin1() );
     if ( usePixmap && color_table[attr.b].transparent )
     {
 	painter.setBackgroundMode( TransparentMode );
@@ -260,6 +277,7 @@ void EmulationWidget::drawAttrString( QString& string, QPainter &painter, QRect 
 	else
 	{
 	    painter.setBackgroundMode( OpaqueMode );
+            qWarning("Color %s", color_table[attr.b].color.name().latin1() );
 	    painter.setBackgroundColor( color_table[attr.b].color );
 	}
     }
@@ -285,17 +303,4 @@ void EmulationWidget::setScroll( int cursor, int slines )
 }
 
 
-static const ColorEntry color_table[TABLE_COLORS] =
-{
-    ColorEntry(QColor(0x00,0x00,0x00), 0, 0 ), ColorEntry( QColor(0xB2,0xB2,0xB2), 1, 0 ), // Dfore, Dback
-  ColorEntry(QColor(0x00,0x00,0x00), 0, 0 ), ColorEntry( QColor(0xB2,0x18,0x18), 0, 0 ), // Black, Red
-  ColorEntry(QColor(0x18,0xB2,0x18), 0, 0 ), ColorEntry( QColor(0xB2,0x68,0x18), 0, 0 ), // Green, Yellow
-  ColorEntry(QColor(0x18,0x18,0xB2), 0, 0 ), ColorEntry( QColor(0xB2,0x18,0xB2), 0, 0 ), // Blue,  Magenta
-  ColorEntry(QColor(0x18,0xB2,0xB2), 0, 0 ), ColorEntry( QColor(0xB2,0xB2,0xB2), 0, 0 ), // Cyan,  White
-  // intensiv
-  ColorEntry(QColor(0x00,0x00,0x00), 0, 1 ), ColorEntry( QColor(0xFF,0xFF,0xFF), 1, 0 ),
-  ColorEntry(QColor(0x68,0x68,0x68), 0, 0 ), ColorEntry( QColor(0xFF,0x54,0x54), 0, 0 ),
-  ColorEntry(QColor(0x54,0xFF,0x54), 0, 0 ), ColorEntry( QColor(0xFF,0xFF,0x54), 0, 0 ),
-  ColorEntry(QColor(0x54,0x54,0xFF), 0, 0 ), ColorEntry( QColor(0xB2,0x18,0xB2), 0, 0 ),
-  ColorEntry(QColor(0x54,0xFF,0xFF), 0, 0 ), ColorEntry( QColor(0xFF,0xFF,0xFF), 0, 0 )
-};
+
