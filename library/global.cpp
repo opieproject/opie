@@ -571,7 +571,7 @@ void Global::invoke(const QString &c)
     for ( j = 0; j < list.count(); j++ )
     slist.append( list[j].utf8() );
 
-    const char **args = new (const char *)[slist.count() + 1];
+    const char **args = new const char *[slist.count() + 1];
     for ( j = 0; j < slist.count(); j++ )
     args[j] = slist.at(j);
     args[j] = NULL;
