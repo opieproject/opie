@@ -44,18 +44,9 @@ AdvancedFm::AdvancedFm(QWidget *,const char*, WFlags )
    unknownXpm = Resource::loadImage("UnknownDocument").smoothScale(AppLnk::smallIconSize(),AppLnk::smallIconSize() );
 
 	 initConnections();
-
-	 whichTab = 1;
-		 populateView();
-//	 rePopulate();
-//	 currentPathCombo->setFocus();
+	 populateView();
 	 channel = new QCopChannel( "QPE/Application/advancedfm", this );
 	 connect(channel,SIGNAL(received(const QCString&,const QByteArray&)),this,SLOT(qcopReceive(const QCString&,const QByteArray&)));
-
-// 	 if( CurrentView() == Local_View)
-// 			 qDebug("LOCAL VIEW");
-// 					 else
-// 							 qDebug("REMOTE VIEW");
 	 switchToLocalTab();	 
 }
 
@@ -290,26 +281,15 @@ void AdvancedFm::refreshCurrentTab() {
 }
 
 void AdvancedFm::switchToLocalTab() {
-		qDebug("switchToLocal ");
-   TabWidget->setCurrentWidget(0);
-   Local_View->setFocus();
-	 whichTab = 1;
-	 
+		TabWidget->setCurrentWidget(0);
+		Local_View->setFocus();
+		whichTab = 1;
 }
 
 void AdvancedFm::switchToRemoteTab() {
-		qDebug("switchToRemoteTab() ");
-   TabWidget->setCurrentWidget(1);
-   Remote_View->setFocus();
-	 whichTab = 2;
-}
-
-void AdvancedFm::readConfig() {
-   Config cfg("AdvancedFm");
-}
-
-void AdvancedFm::writeConfig() {
-   Config cfg("AdvancedFm");
+		TabWidget->setCurrentWidget(1);
+		Remote_View->setFocus();
+		whichTab = 2;
 }
 
 void  AdvancedFm::currentPathComboChanged() {
@@ -362,40 +342,30 @@ QStringList AdvancedFm::getPath() {
    return strList;
 }
 
-void AdvancedFm::homeButtonPushed() {
-   QString current = QDir::homeDirPath();
-   chdir( current.latin1() );
-   CurrentDir()->cd(  current, TRUE);
+void AdvancedFm::changeTo(QString dir) {
+   chdir( dir.latin1());
+   CurrentDir()->cd(dir, TRUE);
    populateView();
    update();
+}
+
+void AdvancedFm::homeButtonPushed() {
+ changeTo(QDir::homeDirPath());
 }
 
 void AdvancedFm::docButtonPushed() {
-   QString current = QPEApplication::documentDir();
-   chdir( current.latin1() );
-   CurrentDir()->cd( current, TRUE);
-   populateView();
-   update();
+   changeTo(QPEApplication::documentDir());
 }
 
 void AdvancedFm::SDButtonPushed() {
-   QString current = "/mnt/card";// this can change so fix
-   chdir( current.latin1() );
-   CurrentDir()->cd( current, TRUE);
-   populateView();
-   update();
+   changeTo("/mnt/card");// this can change so fix
 }
 
 void AdvancedFm::CFButtonPushed() {
-   QString current;
    if(zaurusDevice)
-      current= "/mnt/cf"; //zaurus
+			 changeTo("/mnt/cf"); //zaurus
    else
-      current = "/mnt/hda"; //ipaq
-   chdir( current.latin1() );
-   CurrentDir()->cd( current, TRUE);
-   populateView();
-   update();
+			 changeTo("/mnt/hda"); //ipaq
 }
 
 

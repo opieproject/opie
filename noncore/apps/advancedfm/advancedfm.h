@@ -97,6 +97,7 @@ protected:
    QListView *CurrentView();
    QListView *OtherView();
    void setOtherTabCurrent();
+	 void changeTo(QString & dir);
 
 //protected signals:
 //		void newPath(QString);
@@ -113,8 +114,6 @@ protected slots:
    void rePopulate();
    void showHidden();
    void showMenuHidden();
-   void writeConfig();
-   void readConfig();
    void ListClicked(QListViewItem *);
    void ListPressed( int, QListViewItem *, const QPoint&, int);
    void makeDir();
