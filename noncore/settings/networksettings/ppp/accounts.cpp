@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.cpp,v 1.10 2003-08-09 17:14:55 kergoth Exp $
+ * $Id: accounts.cpp,v 1.11 2004-02-21 18:32:38 ar Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -24,147 +24,164 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <qdir.h>
-#include <stdlib.h>
-#include <qlayout.h>
-#include <qtabwidget.h>
-#include <qtabdialog.h>
-#include <qwhatsthis.h>
-#include <qmessagebox.h>
-
-#include <qapplication.h>
-#include <qbuttongroup.h>
-#include <qmessagebox.h>
-#include <qvgroupbox.h>
-
 #include "accounts.h"
 #include "authwidget.h"
 #include "pppdata.h"
 #include "edit.h"
 
+/* OPIE */
+#include <qpe/qpeapplication.h>
+
+/* QT */
+#include <qdir.h>
+#include <qlayout.h>
+#include <qtabwidget.h>
+#include <qtabdialog.h>
+#include <qwhatsthis.h>
+#include <qmessagebox.h>
+#include <qapplication.h>
+#include <qbuttongroup.h>
+#include <qmessagebox.h>
+#include <qvgroupbox.h>
+
+/* STD */
+#include <stdlib.h>
+
 void parseargs(char* buf, char** args);
 
 
 AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name, WFlags f )
-    : ChooserWidget( pd, parent, name, f )
+        : ChooserWidget( pd, parent, name, f )
 {
 
-  QWhatsThis::add(edit_b, tr("Allows you to modify the selected account"));
-  QWhatsThis::add(new_b, tr("Create a new dialup connection\n"
-  			      "to the Internet"));
-  QWhatsThis::add(copy_b,
-		  tr("Makes a copy of the selected account. All\n"
-		       "settings of the selected account are copied\n"
-		       "to a new account, that you can modify to fit your\n"
-		       "needs"));
-  QWhatsThis::add(delete_b,
-		  tr("<p>Deletes the selected account\n\n"
-		       "<font color=\"red\"><b>Use with care!</b></font>"));
+    QWhatsThis::add(edit_b, tr("Allows you to modify the selected account"));
+    QWhatsThis::add(new_b, tr("Create a new dialup connection\n"
+                                  "to the Internet"));
+    QWhatsThis::add(copy_b,
+                        tr("Makes a copy of the selected account. All\n"
+                           "settings of the selected account are copied\n"
+                           "to a new account, that you can modify to fit your\n"
+                           "needs"));
+    QWhatsThis::add(delete_b,
+                        tr("<p>Deletes the selected account\n\n"
+                           "<font color=\"red\"><b>Use with care!</b></font>"));
 
 
 
-   copy_b->setEnabled( false ); //FIXME
- //  delete_b->setEnabled( false ); //FIXME
+    copy_b->setEnabled( false ); //FIXME
+    //  delete_b->setEnabled( false ); //FIXME
 
-   listListbox->insertStringList(_pppdata->getAccountList());
+    listListbox->insertStringList(_pppdata->getAccountList());
 
-   for (uint i = 0; i < listListbox->count(); i++){
-       if ( listListbox->text(i) == _pppdata->accname() )
-           listListbox->setCurrentItem( i );
-  }
+    for (uint i = 0; i < listListbox->count(); i++)
+    {
+        if ( listListbox->text(i) == _pppdata->accname() )
+            listListbox->setCurrentItem( i );
+    }
 }
 
 
 
-void AccountWidget::slotListBoxSelect(int idx) {
+void AccountWidget::slotListBoxSelect(int idx)
+{
     bool ok = _pppdata->setAccount( listListbox->text(idx) );
     ok = (bool)(idx != -1);
     delete_b->setEnabled(ok);
     edit_b->setEnabled(ok);
-//FIXME  copy_b->setEnabled(ok);
+    //FIXME  copy_b->setEnabled(ok);
 }
 
-void AccountWidget::edit() {
-  _pppdata->setAccount(listListbox->text(listListbox->currentItem()));
+void AccountWidget::edit()
+{
+    _pppdata->setAccount(listListbox->text(listListbox->currentItem()));
 
-  int result = doTab();
+    int result = doTab();
 
-  if(result == QDialog::Accepted) {
-    listListbox->changeItem(_pppdata->accname(),listListbox->currentItem());
-//    emit resetaccounts();
-    _pppdata->save();
-  }
+    if(result == QDialog::Accepted)
+    {
+        listListbox->changeItem(_pppdata->accname(),listListbox->currentItem());
+        //    emit resetaccounts();
+        _pppdata->save();
+    }
 }
 
 
-void AccountWidget::create() {
+void AccountWidget::create()
+{
 
-//     if(listListbox->count() == MAX_ACCOUNTS) {
-//         QMessageBox::information(this, "sorry",
-//                                  tr("Maximum number of accounts reached."));
-//         return;
-//     }
+    //     if(listListbox->count() == MAX_ACCOUNTS) {
+    //         QMessageBox::information(this, "sorry",
+    //                                  tr("Maximum number of accounts reached."));
+    //         return;
+    //     }
 
     int result;
-    if (_pppdata->newaccount() == -1){
+    if (_pppdata->newaccount() == -1)
+    {
         qDebug("_pppdata->newaccount() == -1");
         return;
     }
     result = doTab();
 
-    if(result == QDialog::Accepted) {
+    if(result == QDialog::Accepted)
+    {
         listListbox->insertItem(_pppdata->accname());
         listListbox->setSelected(listListbox->findItem(_pppdata->accname()),true);
 
         _pppdata->save();
-    } else
+    }
+    else
         _pppdata->deleteAccount();
 }
 
 
-void AccountWidget::copy() {
-//   if(listListbox->count() == MAX_ACCOUNTS) {
-//     QMessageBox::information(this, "sorry", tr("Maximum number of accounts reached."));
-//     return;
-//   }
+void AccountWidget::copy()
+{
+    //   if(listListbox->count() == MAX_ACCOUNTS) {
+    //     QMessageBox::information(this, "sorry", tr("Maximum number of accounts reached."));
+    //     return;
+    //   }
 
-  if(listListbox->currentItem()<0) {
-    QMessageBox::information(this, "sorry", tr("No account selected."));
-    return;
-  }
+    if(listListbox->currentItem()<0)
+    {
+        QMessageBox::information(this, "sorry", tr("No account selected."));
+        return;
+    }
 
-  _pppdata->copyaccount(listListbox->currentText());
+    _pppdata->copyaccount(listListbox->currentText());
 
-  listListbox->insertItem(_pppdata->accname());
-//  emit resetaccounts();
-  _pppdata->save();
+    listListbox->insertItem(_pppdata->accname());
+    //  emit resetaccounts();
+    _pppdata->save();
 }
 
 
-void AccountWidget::remove() {
+void AccountWidget::remove()
+{
 
-  QString s = tr("Are you sure you want to delete\nthe account \"%1\"?")
-    .arg(listListbox->text(listListbox->currentItem()));
+    QString s = tr("Are you sure you want to delete\nthe account \"%1\"?")
+                .arg(listListbox->text(listListbox->currentItem()));
 
-  if(QMessageBox::warning(this,tr("Confirm"),s,
-                          QMessageBox::Yes,QMessageBox::No
-                          ) != QMessageBox::Yes)
-    return;
+    if(QMessageBox::warning(this,tr("Confirm"),s,
+                            QMessageBox::Yes,QMessageBox::No
+                           ) != QMessageBox::Yes)
+        return;
 
-  if(_pppdata->deleteAccount(listListbox->text(listListbox->currentItem())))
-    listListbox->removeItem(listListbox->currentItem());
-
-
-//  emit resetaccounts();
-//  _pppdata->save();
+    if(_pppdata->deleteAccount(listListbox->text(listListbox->currentItem())))
+        listListbox->removeItem(listListbox->currentItem());
 
 
-  slotListBoxSelect(listListbox->currentItem());
+    //  emit resetaccounts();
+    //  _pppdata->save();
+
+
+    slotListBoxSelect(listListbox->currentItem());
 
 }
 
 
-int AccountWidget::doTab(){
+int AccountWidget::doTab()
+{
     QDialog *dlg = new QDialog( 0, "newAccount", true, Qt::WStyle_ContextHelp );
     QVBoxLayout *layout = new QVBoxLayout( dlg );
     layout->setSpacing( 0 );
@@ -175,55 +192,64 @@ int AccountWidget::doTab(){
 
     bool isnewaccount;
 
-    if(_pppdata->accname().isEmpty()) {
+    if(_pppdata->accname().isEmpty())
+    {
         dlg->setCaption(tr("New Account"));
         isnewaccount = true;
-    } else {
+    }
+    else
+    {
         QString tit = tr("Edit Account: ");
         tit += _pppdata->accname();
         dlg->setCaption(tit);
         isnewaccount = false;
     }
 
-//   // DIAL WIDGET
+    //   // DIAL WIDGET
     dial_w = new DialWidget( _pppdata, tabWindow, isnewaccount, "Dial Setup");
     tabWindow->addTab( dial_w, tr("Dial") );
 
-//   // AUTH WIDGET
-   auth_w = new AuthWidget( _pppdata, tabWindow, isnewaccount, tr("Edit Login Script"));
-   tabWindow->addTab( auth_w, tr("Authentication") );
+    //   // AUTH WIDGET
+    auth_w = new AuthWidget( _pppdata, tabWindow, isnewaccount, tr("Edit Login Script"));
+    tabWindow->addTab( auth_w, tr("Authentication") );
 
-//   // IP WIDGET
+    //   // IP WIDGET
     ip_w = new IPWidget( _pppdata, tabWindow, isnewaccount, tr("IP Setup"));
     tabWindow->addTab( ip_w, tr("IP") );
 
-//   // GATEWAY WIDGET
+    //   // GATEWAY WIDGET
     gateway_w = new GatewayWidget( _pppdata, tabWindow, isnewaccount, tr("Gateway Setup"));
     tabWindow->addTab( gateway_w, tr("Gateway") );
 
-//   // DNS WIDGET
+    //   // DNS WIDGET
     dns_w = new DNSWidget( _pppdata, tabWindow, isnewaccount, tr("DNS Servers") );
     tabWindow->addTab( dns_w, tr("DNS") );
 
-//   // EXECUTE WIDGET
-   ExecWidget *exec_w = new ExecWidget( _pppdata, tabWindow, isnewaccount, tr("Execute Programs"));
-   tabWindow->addTab( exec_w, tr("Execute") );
+    //   // EXECUTE WIDGET
+    ExecWidget *exec_w = new ExecWidget( _pppdata, tabWindow, isnewaccount, tr("Execute Programs"));
+    tabWindow->addTab( exec_w, tr("Execute") );
 
     int result = 0;
     bool ok = false;
 
-    while (!ok){
-        dlg->showMaximized();
-        result = dlg->exec();
+    while (!ok)
+    {
+        result = QPEApplication::execDialog( dlg );
         ok = true;
 
-        if(result == QDialog::Accepted) {
-            if (!auth_w->check()){
+        if(result == QDialog::Accepted)
+        {
+            if (!auth_w->check())
+            {
                 ok = false;
-            } else if(!dial_w->save()) {
+            }
+            else if(!dial_w->save())
+            {
                 QMessageBox::critical(this, "error", tr( "You must enter a unique account name"));
                 ok = false;
-            }else{
+            }
+            else
+            {
                 ip_w->save();
                 dns_w->save();
                 gateway_w->save();

@@ -1,9 +1,14 @@
+
 #include "wlanmodule.h"
 #include "wlanimp2.h"
 #include "infoimp.h"
 #include "wextensions.h"
 #include "interfaceinformationimp.h"
 
+/* OPIE */
+#include <qpe/qpeapplication.h>
+
+/* QT */
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qlabel.h>
@@ -11,8 +16,6 @@
 #include <qprogressbar.h>
 #include <qspinbox.h>
 #include <qtabwidget.h>
-
-
 
 
 /**
@@ -172,7 +175,7 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
         if (count == 2){
             // those should call the interface directly
             QWidget *info = getInfo( ifa );
-            info->showMaximized();
+            QPEApplication::showWidget( info );
 
             if ( action.contains("start" ) ){
                 ifa->start();
@@ -190,7 +193,7 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
                 wlanconfigWiget = (WLANImp*) configure(ifa);
                 toShow = (QDialog*) wlanconfigWiget;
             }
-            wlanconfigWiget->showMaximized();
+            QPEApplication::showWidget( wlanconfigWiget );
             stream >> value;
             qDebug("WLANModule (build 4) is setting %s of %s to %s", action.latin1(), interface.latin1(), value.latin1() );
             if (value.isEmpty()){

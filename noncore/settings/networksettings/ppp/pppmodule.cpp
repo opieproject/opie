@@ -1,8 +1,3 @@
-#include <errno.h>
-#include <signal.h>
-
-
-#include <qpe/config.h>
 
 #include "modem.h"
 #include "pppconfig.h"
@@ -11,19 +6,32 @@
 #include "interfaceinformationppp.h"
 #include "interfaceppp.h"
 
+/* OPIE */
+#include <qpe/config.h>
+#include <qpe/qpeapplication.h>
+
+/* QT */
+
+/* STD */
+#include <errno.h>
+#include <signal.h>
+
 // don't polute global namespace
-namespace {
+namespace
+{
     /*
      * If network settings is qutting and we've ppp
      * devices open we need to save the pid_t the PPData
      * and the interface number
      */
-    struct Connection {
+    struct Connection
+    {
         pid_t pid;
         QString device;
         QString name;
     };
-    class InterfaceKeeper {
+    class InterfaceKeeper
+    {
     public:
         InterfaceKeeper();
         ~InterfaceKeeper();
@@ -53,14 +61,16 @@ PPPModule::PPPModule() : Module()
     QMap<QString,QString>::Iterator it;
     InterfacePPP *iface;
     qDebug("getting interfaces");
-    for( it = ifaces.begin(); it != ifaces.end(); ++it ){
+    for( it = ifaces.begin(); it != ifaces.end(); ++it )
+    {
         qDebug("ifaces %s %s", it.key().latin1(), it.data().latin1() );
         iface = new InterfacePPP( 0, it.key() );
         iface->setHardwareName( it.data() );
         list.append( (Interface*)iface );
 
         // check if (*it) is one of the running ifaces
-        if ( running.contains( it.data() ) ) {
+        if ( running.contains( it.data() ) )
+        {
             qDebug("iface is running %s", it.key().latin1() );
             handledInterfaceNames << running[it.data()].device;
             iface->setStatus( true );
@@ -76,14 +86,17 @@ PPPModule::PPPModule() : Module()
 /**
  * Delete any interfaces that we own.
  */
-PPPModule::~PPPModule(){
+PPPModule::~PPPModule()
+{
     qDebug("PPPModule::~PPPModule() " );
     QMap<QString,QString> ifaces;
     InterfaceKeeper keeper;
     Interface *i;
-    for ( i=list.first(); i != 0; i=list.next() ){
+    for ( i=list.first(); i != 0; i=list.next() )
+    {
         /* if online save the state */
-        if ( i->getStatus() ) {
+        if ( i->getStatus() )
+        {
             qDebug("Iface %s is still up", i->getHardwareName().latin1() );
             InterfacePPP* ppp = static_cast<InterfacePPP*>(i);
             keeper.addInterface( ppp->pppPID(), ppp->pppDev(), ppp->getHardwareName() );
@@ -97,8 +110,9 @@ PPPModule::~PPPModule(){
 /**
  * Change the current profile
  */
-void PPPModule::setProfile(const QString &newProfile){
-  profile = newProfile;
+void PPPModule::setProfile(const QString &newProfile)
+{
+    profile = newProfile;
 }
 
 /**
@@ -106,8 +120,9 @@ void PPPModule::setProfile(const QString &newProfile){
  * @param Interface* can be used in determining the icon.
  * @return QString the icon name (minus .png, .gif etc)
  */
-QString PPPModule::getPixmapName(Interface* ){
-  return "ppp";
+QString PPPModule::getPixmapName(Interface* )
+{
+    return "ppp";
 }
 
 /**
@@ -115,7 +130,8 @@ QString PPPModule::getPixmapName(Interface* ){
  * @param Interface* interface to check against
  * @return bool true if i is owned by this module, false otherwise.
  */
-bool PPPModule::isOwner(Interface *i){
+bool PPPModule::isOwner(Interface *i)
+{
     return list.find( i ) != -1;
 }
 
@@ -123,11 +139,12 @@ bool PPPModule::isOwner(Interface *i){
  * Create, and return the WLANConfigure Module
  * @return QWidget* pointer to this modules configure.
  */
-QWidget *PPPModule::configure(Interface *i){
+QWidget *PPPModule::configure(Interface *i)
+{
     qDebug("return ModemWidget");
     PPPConfigWidget *pppconfig = new PPPConfigWidget( (InterfacePPP*)i,
-                                                      0, "PPPConfig", false,
-                                                      (Qt::WDestructiveClose | Qt::WStyle_ContextHelp));
+                                 0, "PPPConfig", false,
+                                 (Qt::WDestructiveClose | Qt::WStyle_ContextHelp));
     return pppconfig;
 }
 
@@ -135,11 +152,12 @@ QWidget *PPPModule::configure(Interface *i){
  * Create, and return the Information Module
  * @return QWidget* pointer to this modules info.
  */
-QWidget *PPPModule::information(Interface *i){
-  // We don't have any advanced pppd information widget yet :-D
-  // TODO ^
+QWidget *PPPModule::information(Interface *i)
+{
+    // We don't have any advanced pppd information widget yet :-D
+    // TODO ^
 
-   return new InterfaceInformationPPP( 0, "InterfaceInformationPPP", i );
+    return new InterfaceInformationPPP( 0, "InterfaceInformationPPP", i );
 }
 
 /**
@@ -147,10 +165,11 @@ QWidget *PPPModule::information(Interface *i){
  * @return QList<Interface> A list of interfaces that exsist that havn't
  * been called by isOwner()
  */
-QList<Interface> PPPModule::getInterfaces(){
-  // List all of the files in the peer directory
+QList<Interface> PPPModule::getInterfaces()
+{
+    // List all of the files in the peer directory
     qDebug("PPPModule::getInterfaces");
-  return list;
+    return list;
 }
 
 /**
@@ -159,30 +178,35 @@ QList<Interface> PPPModule::getInterfaces(){
  *  by possibleNewInterfaces();
  * @return Interface* NULL if it was unable to be created.
  */
-Interface *PPPModule::addNewInterface(const QString &newInterface){
+Interface *PPPModule::addNewInterface(const QString &newInterface)
+{
 
-  InterfacePPP *ifaceppp;
-  Interface *iface;
-  ifaceppp = new InterfacePPP();
-  PPPConfigWidget imp(ifaceppp, 0, "PPPConfigImp", true);
-  imp.showMaximized();
-  if(imp.exec() == QDialog::Accepted ){
-      iface = (InterfacePPP*) ifaceppp;
-      iface->setModuleOwner( this );
-      list.append( iface );
-      return iface;
-  }else {
-      delete ifaceppp;
-      iface = NULL;
-  }
-  return iface;
+    InterfacePPP *ifaceppp;
+    Interface *iface;
+    ifaceppp = new InterfacePPP();
+    PPPConfigWidget imp(ifaceppp, 0, "PPPConfigImp", true);
+
+    if( QPEApplication::execDialog( &imp ) == QDialog::Accepted )
+    {
+        iface = (InterfacePPP*) ifaceppp;
+        iface->setModuleOwner( this );
+        list.append( iface );
+        return iface;
+    }
+    else
+    {
+        delete ifaceppp;
+        iface = NULL;
+    }
+    return iface;
 }
 
 /**
  * Attempts to remove the interface, doesn't delete i
  * @return bool true if successful, false otherwise.
  */
-bool PPPModule::remove(Interface *i){
+bool PPPModule::remove(Interface *i)
+{
     return list.remove(i);
 }
 
@@ -194,37 +218,44 @@ void PPPModule::possibleNewInterfaces(QMap<QString, QString> &newIfaces)
 
 
 
-namespace {
-    InterfaceKeeper::InterfaceKeeper( ) {
-    }
-    InterfaceKeeper::~InterfaceKeeper() {
+namespace
+{
+    InterfaceKeeper::InterfaceKeeper( )
+    {}
+    InterfaceKeeper::~InterfaceKeeper()
+    {
         Config cfg("ppp_plugin_keeper");
         QStringList lst = cfg.groupList();
-        for (QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) {
+        for (QStringList::Iterator it = lst.begin(); it != lst.end(); ++it )
+        {
             Connection con;
             cfg.setGroup( (*it) );
             cfg.clearGroup();
         }
 
-        for (QMap<QString, Connection>::Iterator it = m_interfaces.begin(); it != m_interfaces.end(); ++it ) {
+        for (QMap<QString, Connection>::Iterator it = m_interfaces.begin(); it != m_interfaces.end(); ++it )
+        {
             Connection con = it.data();
             cfg.setGroup( con.name );
             cfg.writeEntry( "pid", con.pid );
             cfg.writeEntry( "device", con.device );
         }
     }
-    void InterfaceKeeper::addInterface(pid_t pid, const QString& dev, const QString& name ) {
+    void InterfaceKeeper::addInterface(pid_t pid, const QString& dev, const QString& name )
+    {
         Connection con;
         con.pid = pid;
         con.device = dev;
         con.name = name;
         m_interfaces.insert( name, con );
     }
-    QMap<QString, Connection> InterfaceKeeper::interfaces()const {
+    QMap<QString, Connection> InterfaceKeeper::interfaces()const
+    {
         Config cfg("ppp_plugin_keeper");
         QMap<QString, Connection> ifaces;
         QStringList lst = cfg.groupList();
-        for (QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) {
+        for (QStringList::Iterator it = lst.begin(); it != lst.end(); ++it )
+        {
             Connection con;
             cfg.setGroup( (*it) );
             con.name = (*it);
@@ -237,8 +268,10 @@ namespace {
         }
         return ifaces;
     }
-    bool InterfaceKeeper::isAvailable( pid_t p)const {
-        if (::kill(p, 0 ) == 0 || errno != ESRCH ) {
+    bool InterfaceKeeper::isAvailable( pid_t p)const
+    {
+        if (::kill(p, 0 ) == 0 || errno != ESRCH )
+        {
             qDebug("isAvailable %d",  p);
             return true;
         }
