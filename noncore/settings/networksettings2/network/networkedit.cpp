@@ -52,13 +52,13 @@ QString NetworkEdit::acceptable( void ) {
       return tr("Subnet mask not valid");
     if( ! validIP( Broadcast_LE->text() ) )
       return tr("Broadcast address not valid");
-    if( Gateway_LE->text().isEmpty() &&
+    if( Gateway_LE->text().isEmpty() ||
         ! validIP( Gateway_LE->text() ) )
       return tr("Gateway address not valid");
-    if( DNS1_LE->text().isEmpty() &&
+    if( ! DNS1_LE->text().isEmpty() &&
         ! validIP( DNS1_LE->text() ) )
       return tr("DNS1 address not valid");
-    if( DNS2_LE->text().isEmpty() &&
+    if( ! DNS2_LE->text().isEmpty() &&
         ! validIP( DNS2_LE->text() ) )
       return tr("DNS2 address not valid");
     return QString();

@@ -43,4 +43,15 @@ bool AUSB::generateDataForCommonFile( SystemFile & S, long DevNr ) {
     return 0;
 }
 
+bool AUSB::generateDeviceDataForCommonFile( SystemFile & S, long DevNr ) {
+    AsDevice * Dev = runtime()->device();
+    QString NIC = Dev->genNic( DevNr );
 
+    if( S.name() == "interfaces" ) {
+      // generate mapping stanza for this interface
+      S << "# check if " << NIC << " can be brought UP" << endl;
+      S << "mapping " << NIC << endl;
+      S << "  script networksettings2-request" << endl << endl;
+    }
+    return 0;
+}

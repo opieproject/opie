@@ -26,17 +26,19 @@ bool NetworkRun::setState( NodeCollection * NC, Action_t A ) {
       // we can bring UP if lower level is available
       if( NC->currentState() == Available ) {
         QString S;
-        S.sprintf( "ifup %s", II->Name.latin1() );
+        S.sprintf( "ifup %s=%s-c%d-allowed", 
+            II->Name.latin1(), II->Name.latin1(),
+            connection()->number() );
         NSResources->system().execute( S );
-        NC->setCurrentState( IsUp );
       }
       return 1;
     } else if( A == Down ) {
       if( NC->currentState() == IsUp ) {
         QString S;
-        S.sprintf( "ifdown %s", II->Name.latin1() );
+        S.sprintf( "ifdown %s=%s-c%d-allowed", 
+            II->Name.latin1(), II->Name.latin1(),
+            connection()->number() );
         NSResources->system().execute( S );
-        NC->setCurrentState( Available );
       }
       return 1;
     } 

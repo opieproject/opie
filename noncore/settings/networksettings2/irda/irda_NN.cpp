@@ -41,11 +41,18 @@ bool IRDANetNode::generateProperFilesFor(
       return 1;
 }
 
-bool IRDANetNode::hasDataFor( const QString & ) {
+bool IRDANetNode::hasDataFor( const QString &, bool  ) {
       return 0;
 }
 
 bool IRDANetNode::generateDataForCommonFile( 
+                                SystemFile & , 
+                                long ,
+                                ANetNodeInstance * ) {
+      return 1;
+}
+
+bool IRDANetNode::generateDeviceDataForCommonFile( 
                                 SystemFile & , 
                                 long ,
                                 ANetNodeInstance * ) {

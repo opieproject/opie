@@ -43,13 +43,20 @@ bool ProfileNetNode::generateProperFilesFor(
       return 1;
 }
 
-bool ProfileNetNode::hasDataFor( const QString & ) {
+bool ProfileNetNode::hasDataFor( const QString &, bool  ) {
       return 0;
 }
 
 bool ProfileNetNode::generateDataForCommonFile( 
                                 SystemFile & , 
                                 long,
+                                ANetNodeInstance * ) {
+      return 1;
+}
+
+bool ProfileNetNode::generateDeviceDataForCommonFile( 
+                                SystemFile & , 
+                                long ,
                                 ANetNodeInstance * ) {
       return 1;
 }

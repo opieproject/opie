@@ -42,8 +42,8 @@ bool LanCardNetNode::generateProperFilesFor(
       return 1;
 }
 
-bool LanCardNetNode::hasDataFor( const QString & ) {
-      return 0;
+bool LanCardNetNode::hasDataFor( const QString & S, bool DS ) {
+      return DS && S == "interfaces";
 }
 
 bool LanCardNetNode::generateDataForCommonFile( 
@@ -51,6 +51,13 @@ bool LanCardNetNode::generateDataForCommonFile(
                                 long ,
                                 ANetNodeInstance * ) {
       return 1;
+}
+
+bool LanCardNetNode::generateDeviceDataForCommonFile( 
+                                SystemFile & S , 
+                                long DevNr ,
+                                ANetNodeInstance * NNI ) {
+      return ((ALanCard *)NNI)->generateDeviceDataForCommonFile(S, DevNr);
 }
 
 extern "C" {

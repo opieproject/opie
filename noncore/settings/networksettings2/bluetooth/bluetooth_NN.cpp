@@ -49,11 +49,18 @@ bool BluetoothBNEPNetNode::generateProperFilesFor(
       return 1;
 }
 
-bool BluetoothBNEPNetNode::hasDataFor( const QString & ) {
-      return 0;
+bool BluetoothBNEPNetNode::hasDataFor( const QString & S, bool DS ) {
+      return DS && S == "interfaces";
 }
 
 bool BluetoothBNEPNetNode::generateDataForCommonFile( 
+                                SystemFile & , 
+                                long ,
+                                ANetNodeInstance * ) {
+      return 1;
+}
+
+bool BluetoothBNEPNetNode::generateDeviceDataForCommonFile( 
                                 SystemFile & , 
                                 long ,
                                 ANetNodeInstance * ) {
@@ -101,7 +108,7 @@ bool BluetoothRFCOMMNetNode::generateProperFilesFor(
       return 0;
 }
 
-bool BluetoothRFCOMMNetNode::hasDataFor( const QString & ) {
+bool BluetoothRFCOMMNetNode::hasDataFor( const QString &, bool  ) {
       return 0;
 }
 

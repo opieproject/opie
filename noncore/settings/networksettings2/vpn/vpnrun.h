@@ -12,6 +12,8 @@ public :
               AsConnection( NNI )
         { }
 
+      virtual AsConnection * asConnection( void ) 
+        { return (AsConnection *)this; }
 protected :
 
       void detectState( NodeCollection * )

@@ -34,8 +34,17 @@ void USBRun::detectState( NodeCollection * NC ) {
       }
     } 
 
-    fprintf( stderr, "NUP\n" );
-    // definitively not up
+    fprintf( stderr, "Assigned %p\n", assignedInterface() );
+    if( ( Run = assignedInterface() ) ) {
+      // we already have an interface assigned -> still present ?
+      if( ! Run->IsUp ) {
+        // usb is still free -> keep assignment
+        NC->setCurrentState( Available );
+        return;
+      } // else interface is up but NOT us -> some other profile
+    }
+
+    // nothing (valid) assigned to us
     assignInterface( 0 );
 
     // find possible interface
@@ -43,16 +52,18 @@ void USBRun::detectState( NodeCollection * NC ) {
          It.current();
          ++It ) {
       Run = It.current();
+
       fprintf( stderr, "%s %d %d=%d %d\n",
-      Run->Name.latin1(),
-      handlesInterface( Run->Name ),
-          Run->CardType, ARPHRD_ETHER,
-          ! Run->IsUp );
+          Run->Name.latin1(),
+          handlesInterface( Run->Name ),
+              Run->CardType, ARPHRD_ETHER,
+              ! Run->IsUp );
+
       if( handlesInterface( Run->Name ) &&
           Run->CardType == ARPHRD_ETHER &&
           ! Run->IsUp
         ) {
-        fprintf( stderr, "OFF\n" );
+        fprintf( stderr, "Released(OFF)\n" );
         // proper type, and Not UP -> free
         NC->setCurrentState( Off );
         return;
@@ -83,6 +94,7 @@ bool USBRun::setState( NodeCollection * NC, Action_t A ) {
           // we get back is NOT assigned
           N->assignNode( netNode() );
           assignInterface( N );
+          fprintf( stderr, "Assing %p\n", N );
           NC->setCurrentState( Available );
           return 1;
         }
@@ -92,8 +104,7 @@ bool USBRun::setState( NodeCollection * NC, Action_t A ) {
           if( ! connection()->setState( Down ) )
             // could not ...
             return 0;
-        }
-        if( NC->currentState() != Available ) {
+        } else if( NC->currentState() != Available ) {
           return 1;
         }
         assignedInterface()->assignNode( 0 ); // release

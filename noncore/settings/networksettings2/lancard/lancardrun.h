@@ -18,8 +18,12 @@ public :
         { return 2; }
       virtual QString genNic( long nr )
         { QString S; return S.sprintf( "eth%ld", nr ); }
+
       virtual AsDevice * device( void ) 
-        { return asDevice(); }
+        { return (AsDevice *)this; }
+
+      virtual AsDevice * asDevice( void ) 
+        { return (AsDevice *)this; }
 
 protected :
 

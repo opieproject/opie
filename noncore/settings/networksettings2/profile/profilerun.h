@@ -20,6 +20,9 @@ public :
 
       virtual const QString & description( void )
         { return Data->Description; }
+
+      virtual AsFullSetup * asFullSetup( void ) 
+        { return (AsFullSetup *)this; }
 private :
 
       ProfileData * Data;

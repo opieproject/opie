@@ -42,15 +42,22 @@ bool WLanNetNode::generateProperFilesFor(
       return 1;
 }
 
-bool WLanNetNode::hasDataFor( const QString & ) {
-      return 0;
+bool WLanNetNode::hasDataFor( const QString & S, bool DS ) {
+      return DS && S == "interfaces";
 }
 
 bool WLanNetNode::generateDataForCommonFile( 
-                                SystemFile & , 
-                                long,
+                                SystemFile &, 
+                                long ,
                                 ANetNodeInstance * ) {
       return 1;
+}
+
+bool WLanNetNode::generateDeviceDataForCommonFile( 
+                                SystemFile & S, 
+                                long DevNr,
+                                ANetNodeInstance * NNI ) {
+      return ((AWLan *)NNI)->generateDeviceDataForCommonFile(S, DevNr);
 }
 
 extern "C" {

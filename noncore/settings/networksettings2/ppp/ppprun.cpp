@@ -16,15 +16,7 @@ void PPPRun::detectState( NodeCollection * NC ) {
     } else {
       NC->setCurrentState( Off ); // at least this
       // but could also be unavailable
-      ANetNodeInstance * NNI;
-      RuntimeInfo * RI;
-      NNI = AsDevice::netNode();
-      printf( "%p\n", NNI );
-      NNI = NNI->nextNode();
-      printf( "%p\n", NNI );
-      RI = NNI->runtime();
-      printf( "%p\n", RI );
-      RI->detectState( NC ); 
+      AsDevice::netNode()->nextNode()->runtime()->detectState( NC ); 
     }
 }
 

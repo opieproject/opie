@@ -9,6 +9,9 @@ public :
                IRDAData & Data ) : AsLine( NNI )
         { }
 
+      virtual AsLine * asLine( void ) 
+        { return (AsLine *)this; }
+
 protected :
 
       void detectState( NodeCollection * )

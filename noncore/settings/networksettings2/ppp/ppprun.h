@@ -15,8 +15,14 @@ public :
       virtual QString genNic( long NicNr )
         { QString S; return S.sprintf( "ppp%ld", NicNr ); }
 
+      virtual AsDevice * asDevice( void ) 
+        { return (AsDevice *)this; }
+      virtual AsConnection * asConnection( void ) 
+        { return (AsConnection *)this; }
+
       virtual AsDevice * device( void ) 
-        { return AsDevice::asDevice(); }
+        { return (AsDevice *)this; }
+
       virtual RuntimeInfo * runtimeInfo( void ) 
         { return ( AsConnection *)this; }
 

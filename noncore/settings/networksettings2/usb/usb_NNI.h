@@ -28,6 +28,7 @@ public :
         { return (void *)&Data; }
 
       bool generateDataForCommonFile( SystemFile & S, long DevNr );
+      bool generateDeviceDataForCommonFile( SystemFile & S, long DevNr );
 
 protected :
 

@@ -9,6 +9,9 @@ public :
                 CableData & Data ) : AsLine( NNI )
         { D = &Data; }
 
+      virtual AsLine * asLine( void ) 
+        { return (AsLine *)this; }
+
 protected :
 
       void detectState( NodeCollection * NC );

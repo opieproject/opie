@@ -95,10 +95,14 @@ public:
   virtual bool generateProperFilesFor( ANetNodeInstance * NNI ) = 0;
   // return TRUE if this node has data to be inserted in systemfile
   // with name S
-  virtual bool hasDataFor( const QString & S ) = 0;
-  // generate data specific for the system file S
+  virtual bool hasDataFor( const QString & S, bool DeviceSpecific ) = 0;
+  // generate data specific for a profile and for the system file S
   // called only IF data was needed
   virtual bool generateDataForCommonFile( 
+      SystemFile & SF, long DevNr, ANetNodeInstance * NNI ) = 0;
+  // generate data specific for the device for the system file S
+  // called only IF data was needed
+  virtual bool generateDeviceDataForCommonFile( 
       SystemFile & SF, long DevNr, ANetNodeInstance * NNI ) = 0;
 
   // does this Node provide a Connection
@@ -215,15 +219,15 @@ public :
       RuntimeInfo( ANetNodeInstance * TheNNI )
         { NNI = TheNNI; }
 
-      // downcast
+      // downcast implemented by specify runtime classes
       AsDevice * asDevice( void )
-        { return (AsDevice *)this; }
+        { return 0; }
       AsConnection * asConnection( void )
-        { return (AsConnection *)this; }
+        { return 0; }
       AsLine * asLine( void )
-        { return (AsLine *)this; }
+        { return 0; }
       AsFullSetup * asFullSetup( void )
-        { return (AsFullSetup *)this; }
+        { return 0; }
 
       // does this node handles this interface e.g.eth0
       // recurse deeper if this node cannot answer that question
@@ -384,9 +388,12 @@ public:
     { return 0; }
   virtual bool generateProperFilesFor( ANetNodeInstance * )
     { return 0; }
-  virtual bool hasDataFor( const QString & )
+  virtual bool hasDataFor( const QString &, bool DS )
     { return 0; }
   virtual bool generateDataForCommonFile( 
+      SystemFile & , long , ANetNodeInstance * )
+    {return 1; }
+  virtual bool generateDeviceDataForCommonFile( 
       SystemFile & , long , ANetNodeInstance * )
     {return 1; }
 

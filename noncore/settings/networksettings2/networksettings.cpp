@@ -168,36 +168,54 @@ void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
     EC.showMaximized();
     // disable refresh timer 
     UpdateTimer->stop();
-    if( EC.exec() == QDialog::Accepted ) {
-      // toplevel item -> store
-      NodeCollection * NC = EC.connection();
-      if( NC->isModified() ) {
-        setModified( 1 );
-        if( LBI ) {
-          // new name -> remove item
-          NSResources->removeConnection( OldName );
-          // must add it here since change will trigger event
-          NSResources->addConnection( NC );
-          Profiles_LB->changeItem( NC->devicePixmap(),
-                                   NC->name(),
-                                   Profiles_LB->index( LBI )
-                                 );
-        } else {
-          // new item
-          int ci = Profiles_LB->count();
-          NSResources->addConnection( NC );
-          NC->setNumber( NC->maxConnectionNumber()+1 );
-          Profiles_LB->insertItem( NC->devicePixmap(), NC->name() );
-          Profiles_LB->setSelected( ci, TRUE );
+    // we need to retry
+    while( 1 ) {
+      if( EC.exec() == QDialog::Accepted ) {
+        // toplevel item -> store
+        NodeCollection * NC = EC.connection();
+        if( NC->isModified() ) {
+          setModified( 1 );
+          if( LBI ) {
+            if( NC->name() != OldName ) {
+              // find if new name is free
+              NodeCollection * LCN = NSResources->findConnection(
+                    NC->name() );
+              if( LCN ) {
+                QMessageBox::warning(
+                  0, 
+                  tr( "Generating system configuration" ),
+                  tr( "Name %1 already exists" ).arg(NC->name())
+                );
+                continue; // restart exec
+              } // else new name
+              // new name -> remove item
+              NSResources->removeConnection( OldName );
+              NSResources->addConnection( NC );
+            } // else not changed
+
+            // must add it here since change will trigger event
+            Profiles_LB->changeItem( NC->devicePixmap(),
+                                     NC->name(),
+                                     Profiles_LB->index( LBI )
+                                   );
+          } else {
+            // new item
+            int ci = Profiles_LB->count();
+            NSResources->addConnection( NC );
+            NC->setNumber( NC->maxConnectionNumber()+1 );
+            Profiles_LB->insertItem( NC->devicePixmap(), NC->name() );
+            Profiles_LB->setSelected( ci, TRUE );
+          }
+          updateProfileState( LBI );
         }
-        updateProfileState( LBI );
+      } else {
+        // cancelled : reset connection 
+        if( LBI ) {
+          NodeCollection * NC = NSResources->findConnection( LBI->text() );
+          NC->reassign();
+        }
       }
-    } else {
-      // cancelled : reset connection 
-      if( LBI ) {
-        NodeCollection * NC = NSResources->findConnection( LBI->text() );
-        NC->reassign();
-      }
+      break;
     }
     // reenable 
     UpdateTimer->start( 5000 );
@@ -333,14 +351,9 @@ void NetworkSettings::SLOT_On( void ) {
         // activate interface
         rv = NC->setState( Activate );
         break;
-      case Available :
-        // deactivate
+      case Available : // deactivate
+      case IsUp : // deactivate (will also bring down if needed)
         rv = NC->setState( Deactivate );
-        break;
-      case IsUp :
-        // bring down and deactivate
-        rv = ( NC->setState( Down ) &&
-               NC->setState( Deactivate ) );
         break;
       default :
         // others no change
@@ -366,7 +379,7 @@ void NetworkSettings::SLOT_Connect( void ) {
     NodeCollection * NC = 
         NSResources->findConnection( LBI->text() );
 
-    bool rv;
+    bool rv = 1 ;
     switch( NC->state() ) {
       case IsUp :
         // down interface
@@ -383,7 +396,7 @@ void NetworkSettings::SLOT_Connect( void ) {
         break;
       default :
         // others no change
-        return;
+        break;
     } 
 
     if( ! rv ) {
@@ -391,7 +404,6 @@ void NetworkSettings::SLOT_Connect( void ) {
           0, 
           tr( "Activating profile" ),
           tr( "Cannot enable profile" ) );
-      return;
     }
 
     // we do not update the GUI but wait for the REAL upping of the device

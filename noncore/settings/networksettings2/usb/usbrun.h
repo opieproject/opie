@@ -18,9 +18,12 @@ public :
       virtual long count( void )
         { return 1; }
       virtual QString genNic( long nr );
-      virtual AsDevice * device( void ) 
-        { return asDevice(); }
 
+      virtual AsDevice * device( void ) 
+        { return (AsDevice *)this; }
+
+      virtual AsDevice * asDevice( void ) 
+        { return (AsDevice *)this; }
 protected :
 
       void detectState( NodeCollection * );

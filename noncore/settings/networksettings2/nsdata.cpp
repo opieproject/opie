@@ -188,6 +188,7 @@ QString NetworkSettingsData::generateSettings( bool ForceReq ) {
       NodeCollection * NC;
       ANetNodeInstance * NNI;
       SystemFile * SF;
+      AsDevice * CurDev;
       bool needToRegenerate = ForceIt;
 
       //
@@ -214,7 +215,9 @@ QString NetworkSettingsData::generateSettings( bool ForceReq ) {
                    cncit.current();
                    ++cncit ) {
                 NNI = cncit.current();
-                if( NNI->netNode()->hasDataFor( SF->name() ) &&
+                if( ( NNI->netNode()->hasDataFor( SF->name(), 1 ) ||
+                      NNI->netNode()->hasDataFor( SF->name(), 0 ) 
+                    ) &&
                     NNI->isModified() ) {
                   needToRegenerate = 1;
                   break;
@@ -241,7 +244,6 @@ QString NetworkSettingsData::generateSettings( bool ForceReq ) {
       // generate files proper to each netnodeinstance
       //
       { Name2Instance_t & NNIs = NSResources->netNodeInstances();
-        ANetNodeInstance * NNI;
 
         for( QDictIterator<ANetNodeInstance> NNIIt(NNIs);
              NNIIt.current();
@@ -263,21 +265,19 @@ QString NetworkSettingsData::generateSettings( bool ForceReq ) {
       }
 
       //
-      // generate system files
+      // generate all system files
       //
       for( QDictIterator<SystemFile> sfit(SFM);
            sfit.current();
            ++sfit ) {
         SF = sfit.current();
 
-        // 
-        // regenerate current file
-        // 
         printf( "Generating %s\n", SF->name().latin1() );
         SF->open();
 
         do { // so we can break;
 
+          // global presection for this system file
           if( SF->preSection() ) {
             S = qApp->translate( "NetworkSettings", 
                                  "<p>Error in preSection for file %1</p>" ).
@@ -285,23 +285,102 @@ QString NetworkSettingsData::generateSettings( bool ForceReq ) {
             return S;
           }
 
-          for( QDictIterator<NodeCollection> ncit(M);
-               ncit.current();
-               ++ncit ) {
-            NC = ncit.current();
+          // find all netnodes and figure out if
+          // for that node there are instances 
+          for( QDictIterator<NetNode_t> nnit(
+                      NSResources->netNodes() );
+               nnit.current();
+               ++nnit ) {
+            ANetNode * NN;
 
-            // get the netnode that serves as the device for this
-            // connection
-            AsDevice * Dev = NC->device();
+            NN = nnit.current()->NetNode;
 
-            // generate 'entry' for every possible device this profile handles
+              // are there instances ? 
+              NNI = 0;
+              for( QDictIterator<ANetNodeInstance> nniit(
+                          NSResources->netNodeInstances() );
+                   nniit.current();
+                   ++nniit ) {
+                if( nniit.current()->netNode() == NN ) { 
+                  NNI = nniit.current();
+                  break;
+                }
+              }
 
-            for( QListIterator<ANetNodeInstance> cncit(*NC); 
-                 cncit.current();
-                 ++cncit ) {
-              NNI = cncit.current();
-              for( int i = 0; i < Dev->count(); i ++ ) {
-                if( NNI->netNode()->hasDataFor( SF->name() ) ) {
+              if( ! NNI )
+                // no instances
+                continue;
+
+            // has this node data for this system file ?
+            if( (CurDev = NNI->runtime()->asDevice() ) ) {
+              // generate start for this nodetype for all possible devices of this type
+              for( int i = 0; i < CurDev->count(); i ++ ) {
+                if( SF->preDeviceSection( NNI, i ) ) {
+                  S = qApp->translate( "NetworkSettings", 
+                      "<p>Error in preDeviceSection for file %1 and node %2</p>" ).
+                      arg( SF->name() ).
+                      arg( NN->nodeName() );
+                  return S;
+                }
+
+                if( ! NN->hasDataFor( SF->name(), 1 ) ) {
+                  if( NN->generateDeviceDataForCommonFile( *SF, i, NNI ) ) {
+                    S = qApp->translate( "NetworkSettings", 
+                      "<p>Error in node part for file %1 and node %2</p>" ).
+                        arg( SF->name() ).
+                        arg( NN->nodeName() );
+                    return S;
+                  }
+                }
+              }
+            } else {
+              // just request this once
+              if( SF->preDeviceSection( NNI, -1 ) ) {
+                S = qApp->translate( "NetworkSettings", 
+                    "<p>Error in preDeviceSection for file %1 and node %2</p>" ).
+                    arg( SF->name() ).
+                    arg( NN->nodeName() );
+                return S;
+              }
+
+              if( ! NN->hasDataFor( SF->name(), 1 ) ) {
+                if( NN->generateDeviceDataForCommonFile( *SF, -1, NNI ) ) {
+                  S = qApp->translate( "NetworkSettings", 
+                    "<p>Error in node part for file %1 and node %2</p>" ).
+                      arg( SF->name() ).
+                      arg( NN->nodeName() );
+                  return S;
+                }
+              }
+            }
+
+            // now generate profile specific data for all 
+            // connections working on a device of the current
+            // netnode type
+            for( QDictIterator<NodeCollection> ncit(M);
+                 ncit.current();
+                 ++ncit ) {
+              NC = ncit.current();
+
+              NNI = NC->getToplevel();
+
+              // no output needed
+              if( ! NNI->netNode()->hasDataFor( SF->name(), 0 ) )
+                continue;
+
+              // get the netnode that serves as the device for this
+              // connection
+              AsDevice * Dev = NC->device();
+
+              if( CurDev ) {
+                if( CurDev != Dev ) {
+                  // other device -> later
+                  continue;
+                }
+
+                // generate 'entry' for every combination of device and profile
+                // each node delegates to deeper level
+                for( int i = 0; i < CurDev->count(); i ++ ) {
                   if( SF->preNodeSection( NNI, i ) ) {
                     S = qApp->translate( "NetworkSettings", 
                         "<p>Error in preNodeSection for file %1 and node %2</p>" ).
@@ -310,12 +389,22 @@ QString NetworkSettingsData::generateSettings( bool ForceReq ) {
                     return S;
                   }
 
-                  if( NNI->netNode()->generateDataForCommonFile(*SF,i,NNI) ) {
-                    S = qApp->translate( "NetworkSettings", 
-                      "<p>Error in node part for file %1 and node %2</p>" ).
-                        arg( SF->name() ).
-                        arg( NNI->netNode()->nodeName() );
-                    return S;
+                  // ask all nodes in connection 
+
+                  for( QListIterator<ANetNodeInstance> cncit(*NC); 
+                       cncit.current();
+                       ++cncit ) {
+                    NNI = cncit.current();
+
+                    if( NNI->netNode()->hasDataFor( SF->name(), 0 ) ) {
+                      if( NNI->netNode()->generateDataForCommonFile(*SF,i,NNI) ) {
+                        S = qApp->translate( "NetworkSettings", 
+                          "<p>Error in node part for file %1 and node %2</p>" ).
+                            arg( SF->name() ).
+                            arg( NNI->netNode()->nodeName() );
+                        return S;
+                      }
+                    }
                   }
 
                   if( SF->postNodeSection( NNI, i ) ) {
@@ -326,9 +415,71 @@ QString NetworkSettingsData::generateSettings( bool ForceReq ) {
                     return S;
                   }
                 }
+
+              } else {
+                if( Dev ) {
+                  // other 
+                  continue;
+                }
+
+                // one entry to generate
+                if( SF->preNodeSection( NNI, -1 ) ) {
+                  S = qApp->translate( "NetworkSettings", 
+                      "<p>Error in preNodeSection for file %1 and node %2</p>" ).
+                      arg( SF->name() ).
+                      arg( NNI->netNode()->nodeName() );
+                  return S;
+                }
+
+                if( NNI->netNode()->generateDataForCommonFile(*SF,-1,NNI) ) {
+                  S = qApp->translate( "NetworkSettings", 
+                    "<p>Error in node part for file %1 and node %2</p>" ).
+                      arg( SF->name() ).
+                      arg( NNI->netNode()->nodeName() );
+                  return S;
+                }
+
+                if( SF->postNodeSection( NNI, -1 ) ) {
+                  S = qApp->translate( "NetworkSettings", 
+                      "<p>Error in postNodeSection for file %1 and node %2</p>" ).
+                          arg( SF->name() ).
+                          arg( NNI->netNode()->nodeName() );
+                  return S;
+                }
+              }
+
+              // generated some data
+              if( SF->postNodeSection( NNI, -1 ) ) {
+                S = qApp->translate( "NetworkSettings", 
+                    "<p>Error in postNodeSection for file %1 and node %2</p>" ).
+                        arg( SF->name() ).
+                        arg( NNI->netNode()->nodeName() );
+                return S;
+              }
+              *SF << endl;
+            }
+
+            if( CurDev ) {
+              // generate 'entry' for every combination of device and profile
+              // each node delegates to deeper level
+              for( int i = 0; i < CurDev->count(); i ++ ) {
+                if( SF->postDeviceSection( NNI, i ) ) {
+                  S = qApp->translate( "NetworkSettings", 
+                      "<p>Error in postDeviceSection for file %1 and node %2</p>" ).
+                          arg( SF->name() ).
+                          arg( NNI->netNode()->nodeName() );
+                  return S;
+                }
+              }
+            } else {
+              if( SF->postDeviceSection( NNI, -1 ) ) {
+                S = qApp->translate( "NetworkSettings", 
+                    "<p>Error in postDeviceSection for file %1 and node %2</p>" ).
+                        arg( SF->name() ).
+                        arg( NNI->netNode()->nodeName() );
+                return S;
               }
             }
-            *SF << endl;
           }
 
           if( SF->postSection() ) {
@@ -337,6 +488,7 @@ QString NetworkSettingsData::generateSettings( bool ForceReq ) {
                       arg( SF->name() );
             return S;
           }
+
         } while( 0 );
         SF->close();
       }

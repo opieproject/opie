@@ -42,7 +42,7 @@ bool USBNetNode::generateProperFilesFor(
       return 1;
 }
 
-bool USBNetNode::hasDataFor( const QString & S ) {
+bool USBNetNode::hasDataFor( const QString & S, bool ) {
       return (S== "interfaces");
 }
 
@@ -51,6 +51,13 @@ bool USBNetNode::generateDataForCommonFile(
                                 long DevNr,
                                 ANetNodeInstance * NNI) {
       return ((AUSB *)NNI)->generateDataForCommonFile(S, DevNr);
+}
+
+bool USBNetNode::generateDeviceDataForCommonFile( 
+                                SystemFile & S , 
+                                long DevNr,
+                                ANetNodeInstance * NNI) {
+      return ((AUSB *)NNI)->generateDeviceDataForCommonFile(S, DevNr);
 }
 
 extern "C" {

@@ -38,14 +38,15 @@ System::~System( void ) {
 
 int System::execute( const QString & S ) {
     QString MyS = S;
+    char * usr = getenv("USER");
     int rv;
 
     if( S.isEmpty() ) {
       // loophole to start shell
       return 8888;
     }
-    if( getenv("USER") != "root" ) {
-      // use SUDO
+    if( usr == 0 || strcmp( usr, "root" ) ) {
+      // unknown or non-root user -> use SUDO
       MyS.prepend( "sudo " );
     }
 

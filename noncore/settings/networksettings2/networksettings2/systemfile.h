@@ -24,6 +24,8 @@ public :
     bool postSection( void );
     bool preNodeSection( ANetNodeInstance * NNI, long DevNr );
     bool postNodeSection( ANetNodeInstance * NNI, long DevNr );
+    bool preDeviceSection( ANetNodeInstance * NNI, long DevNr );
+    bool postDeviceSection( ANetNodeInstance * NNI, long DevNr );
 
 private :
 
@@ -31,9 +33,11 @@ private :
     QString Path;
     QFile * F;
     bool hasPreSection;
-    bool hasPreNodeSection;
     bool hasPostSection;
+    bool hasPreNodeSection;
     bool hasPostNodeSection;
+    bool hasPreDeviceSection;
+    bool hasPostDeviceSection;
 
 };
 #endif

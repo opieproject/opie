@@ -28,8 +28,10 @@ public:
     virtual const char * provides( void );
 
     virtual bool generateProperFilesFor( ANetNodeInstance * NNI );
-    virtual bool hasDataFor( const QString & S );
+    virtual bool hasDataFor( const QString & S, bool DS );
     virtual bool generateDataForCommonFile( 
+        SystemFile & SF, long DevNr, ANetNodeInstance * NNI );
+    virtual bool generateDeviceDataForCommonFile( 
         SystemFile & SF, long DevNr, ANetNodeInstance * NNI );
 
 private:
@@ -59,8 +61,10 @@ public:
     virtual const char * provides( void );
 
     virtual bool generateProperFilesFor( ANetNodeInstance * NNI );
-    virtual bool hasDataFor( const QString & S );
+    virtual bool hasDataFor( const QString & S, bool  );
     virtual bool generateDataForCommonFile( 
+        SystemFile & SF, long, ANetNodeInstance * NNI );
+    virtual bool generateDeviceDataForCommonFile( 
         SystemFile & SF, long, ANetNodeInstance * NNI );
 
 private:

@@ -43,8 +43,8 @@ bool NetworkNetNode::generateProperFilesFor(
       return 1;
 }
 
-bool NetworkNetNode::hasDataFor( const QString & S ) {
-      if( S == "interfaces" ) {
+bool NetworkNetNode::hasDataFor( const QString & S, bool DS ) {
+      if( ! DS && S == "interfaces" ) {
         return 1;
       }
       return 0;
@@ -55,6 +55,13 @@ bool NetworkNetNode::generateDataForCommonFile(
                                 long DevNr,
                                 ANetNodeInstance * NNI ) {
       return ((ANetwork *)NNI)->generateDataForCommonFile(S, DevNr);
+}
+
+bool NetworkNetNode::generateDeviceDataForCommonFile( 
+                                SystemFile & , 
+                                long ,
+                                ANetNodeInstance * ) {
+      return 1;
 }
 
 extern "C" {

@@ -19,7 +19,9 @@ public :
       virtual QString genNic( long nr )
         { QString S; return S.sprintf( "wlan%ld", nr ); }
       virtual AsDevice * device( void ) 
-        { return asDevice(); }
+        { return (AsDevice *)this; }
+      virtual AsDevice * asDevice( void ) 
+        { return (AsDevice *)this; }
 
 protected :
 

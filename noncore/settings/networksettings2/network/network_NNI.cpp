@@ -104,11 +104,6 @@ bool ANetwork::generateDataForCommonFile( SystemFile & S, long DevNr ) {
     QString NIC = Dev->genNic( DevNr );
 
     if( S.name() == "interfaces" ) {
-      // generate mapping stanza for this interface
-      S << "# check if " << NIC << " can be brought UP" << endl;
-      S << "mapping " << NIC << endl;
-      S << "  script networksettings2-request" << endl << endl;
-
       // we can safely call from here since device item is deeper
       if( Data.UseDHCP ) {
         S << "iface " << NIC << "-c" << connection()->number() << 

@@ -36,7 +36,16 @@ void LanCardRun::detectState( NodeCollection * NC ) {
       }
     } 
 
-    // we are certainly not UP
+    if( ( Run = assignedInterface() ) ) {
+      // we already have an interface assigned -> still present ?
+      if( ! Run->IsUp ) {
+        // usb is still free -> keep assignment
+        NC->setCurrentState( Available );
+        return;
+      } // else interface is up but NOT us -> some other profile
+    }
+
+    // nothing (valid) assigned to us
     assignInterface( 0 );
 
     // find possible interface
@@ -87,8 +96,7 @@ bool LanCardRun::setState( NodeCollection * NC, Action_t A ) {
           if( ! connection()->setState( Down ) )
             // could not ...
             return 0;
-        }
-        if( NC->currentState() != Available ) {
+        } else if( NC->currentState() != Available ) {
           return 1;
         }
         assignedInterface()->assignNode( 0 ); // release

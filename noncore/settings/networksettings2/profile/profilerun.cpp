@@ -19,25 +19,23 @@ bool ProfileRun::setState( NodeCollection * NC, Action_t A ) {
     switch ( A ) {
       case Enable :
         if( NC->currentState() == Disabled ) {
+          Data->Disabled = 0;
           NC->setCurrentState( Off ); // at least
           // ... but request deeper 
           NNNI->runtime()->detectState(NC);
-          return 1;
         }
         return 1;
       case Disable :
-        if( NC->currentState() == IsUp ) {
-          // bring down -> make available
-          NNNI->runtime()->setState(NC, Down);
+        switch( NC->currentState() ) {
+          case IsUp :
+          case Available :
+            // bring Deactivate (will bring down) 
+            if( ! NNNI->runtime()->setState(NC, Deactivate) )
+              return 0;
+          default :
+            break;
         }
-        if( NC->currentState() == Available ) {
-          // make unavailable
-          NNNI->runtime()->setState(NC, Deactivate);
-        }
-        if( NC->currentState() > Available ) {
-          // could not disable 
-          return 0;
-        }
+        Data->Disabled = 1;
         NC->setCurrentState( Disabled );
         return 1;
       default :
