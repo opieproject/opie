@@ -27,6 +27,7 @@
 */
 #include <stdlib.h>
 
+#include <qlineedit.h>
 #include <qtimer.h>
 #include <qpoint.h>
 #include <qpopupmenu.h>
@@ -53,9 +54,11 @@ TableView::TableView( MainWindow* window, QWidget* wid )
 
     setSorting( TRUE );
     setSelectionMode( NoSelection );
-    setColumnStretchable( 2, TRUE );
+//    setColumnStretchable( 2, TRUE );
+    setColumnStretchable( 3, FALSE );
     setColumnWidth(0, 20 );
     setColumnWidth(1, 35 );
+    setColumnWidth(3, 18 );
 
     setLeftMargin( 0 );
     verticalHeader()->hide();
@@ -64,8 +67,8 @@ TableView::TableView( MainWindow* window, QWidget* wid )
     horizontalHeader()->setLabel(1, tr("Prior.") );
     horizontalHeader()->setLabel(2, tr("Description" ) );
 
-    setColumnStretchable(3, FALSE );
-    setColumnWidth(3, 20 );
+//    setColumnStretchable(3, FALSE );
+
     horizontalHeader()->setLabel(3, tr("Deadline") );
 
     if ( todoWindow()->showDeadline() )
@@ -311,78 +314,78 @@ void TableView::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool 
 
     switch(col) {
 	case 0:
-	    {
-		// completed field
-		int marg = ( cr.width() - BoxSize ) / 2;
-		int x = 0;
-		int y = ( cr.height() - BoxSize ) / 2;
-		p->setPen( QPen( cg.text() ) );
-		p->drawRect( x + marg, y, BoxSize, BoxSize );
-		p->drawRect( x + marg+1, y+1, BoxSize-2, BoxSize-2 );
-		p->setPen( darkGreen );
-		x += 1;
-		y += 1;
-		if ( task.isCompleted() ) {
-		    QPointArray a( 9*2 );
-		    int i, xx, yy;
-		    xx = x+2+marg;
-		    yy = y+4;
-		    for ( i=0; i<4; i++ ) {
-			a.setPoint( 2*i,   xx, yy );
-			a.setPoint( 2*i+1, xx, yy+2 );
-			xx++; yy++;
-		    }
-		    yy -= 2;
-		    for ( i=4; i<9; i++ ) {
-			a.setPoint( 2*i,   xx, yy );
-			a.setPoint( 2*i+1, xx, yy+2 );
-			xx++; yy--;
-		    }
-		    p->drawLineSegments( a );
-		}
-	    }
-	    break;
-	case 1:
-	    // priority field
-	    {
-		QString text = QString::number(task.priority());
-		p->drawText(2,2 + fm.ascent(), text);
-	    }
-	    break;
-	case 2:
-	    // description field
-	    {
-		QString text = task.summary().isEmpty() ?
-                               task.description() :
-                               task.summary();
-		p->drawText(2,2 + fm.ascent(), text);
-	    }
-	    break;
-	case 3:
-	    {
-		QString text;
-		if (task.hasDueDate()) {
-		    int off = QDate::currentDate().daysTo( task.dueDate() );
-                    text = QString::number(off) + tr(" day(s)");
-                    /*
-                     * set color if not completed
-                     */
-                    if (!task.isCompleted() ) {
-                        QColor color = Qt::black;
-                        if ( off < 0 )
-                            color = Qt::red;
-                        else if ( off == 0 )
-                            color = Qt::yellow;
-                        else if ( off > 0 )
-                            color = Qt::green;
-                        p->setPen(color  );
-                    }
-		} else {
-		    text = tr("None");
-		}
-		p->drawText(2,2 + fm.ascent(), text);
-	    }
-	    break;
+        {
+            // completed field
+            int marg = ( cr.width() - BoxSize ) / 2;
+            int x = 0;
+            int y = ( cr.height() - BoxSize ) / 2;
+            p->setPen( QPen( cg.text() ) );
+            p->drawRect( x + marg, y, BoxSize, BoxSize );
+            p->drawRect( x + marg+1, y+1, BoxSize-2, BoxSize-2 );
+            p->setPen( darkGreen );
+            x += 1;
+            y += 1;
+            if ( task.isCompleted() ) {
+                QPointArray a( 9*2 );
+                int i, xx, yy;
+                xx = x+2+marg;
+                yy = y+4;
+                for ( i=0; i<4; i++ ) {
+                    a.setPoint( 2*i,   xx, yy );
+                    a.setPoint( 2*i+1, xx, yy+2 );
+                    xx++; yy++;
+                }
+                yy -= 2;
+                for ( i=4; i<9; i++ ) {
+                    a.setPoint( 2*i,   xx, yy );
+                    a.setPoint( 2*i+1, xx, yy+2 );
+                    xx++; yy--;
+                }
+                p->drawLineSegments( a );
+            }
+        }
+        break;
+    case 1:
+        // priority field
+    {
+        QString text = QString::number(task.priority());
+        p->drawText(2,2 + fm.ascent(), text);
+    }
+    break;
+    case 2:
+        // description field
+    {
+        QString text = task.summary().isEmpty() ?
+                       task.description() :
+                       task.summary();
+        p->drawText(2,2 + fm.ascent(), text);
+    }
+    break;
+    case 3:
+    {
+        QString text;
+        if (task.hasDueDate()) {
+            int off = QDate::currentDate().daysTo( task.dueDate() );
+            text = QString::number(off) + tr(" day(s)");
+            /*
+             * set color if not completed
+             */
+            if (!task.isCompleted() ) {
+                QColor color = Qt::black;
+                if ( off < 0 )
+                    color = Qt::red;
+                else if ( off == 0 )
+                    color = Qt::yellow;
+                else if ( off > 0 )
+                    color = Qt::green;
+                p->setPen(color  );
+            }
+        } else {
+            text = tr("None");
+        }
+        p->drawText(2,2 + fm.ascent(), text);
+    }
+    break;
     }
     p->restore();
 }
@@ -398,6 +401,12 @@ QWidget* TableView::createEditor(int row, int col, bool )const {
         combo->insertItem( "5" );
         combo->setCurrentItem( sorted()[row].priority()-1 );
         return combo;
+    }
+        /* summary */
+    case 2:{
+        QLineEdit* edit = new QLineEdit( viewport() );
+        edit->setText( sorted()[row].summary() );
+        return edit;
     }
     case 0:
     default:
@@ -416,6 +425,17 @@ void TableView::setCellContentFromEditor(int row, int col ) {
                 updateView();
             }
         }
+    }else if ( col == 2) {
+        QWidget* wid = cellWidget(row, 2);
+        if ( wid->inherits("QLineEdit") ) {
+            QString text = ((QLineEdit*)wid)->text();
+            OTodo todo = sorted()[row];
+            if ( todo.summary() != text ) {
+                todo.setSummary( text );
+                TodoView::update( todo.uid(), todo );
+                updateView();
+            }
+        }
     }
 }
 void TableView::slotPriority() {
@@ -429,6 +449,7 @@ void TableView::slotPriority() {
  *
  */
 void TableView::timerEvent( QTimerEvent* ev ) {
+    qWarning("sorted %d", sorted().count() );
     if (sorted().count() == 0 )
         return;
 
@@ -466,8 +487,9 @@ void TableView::timerEvent( QTimerEvent* ev ) {
  */
 void TableView::contentsMouseReleaseEvent( QMouseEvent* e) {
     int row = rowAt(m_prevP.y());
-    if ( row == rowAt( e->y() ) ) {
+    if ( row == rowAt( e->y() ) && row != -1 ) {
         if ( abs( m_prevP.x() - e->x() ) >= 8 ) {
+            qWarning("current row %d", row );
             OTodo todo = sorted()[row];
             todo.setCompleted( !todo.isCompleted() );
             TodoView::update( todo.uid(), todo );
