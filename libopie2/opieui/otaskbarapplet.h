@@ -41,7 +41,7 @@
 template<class T> class OTaskbarAppletWrapper : public TaskbarAppletInterface
 {
   public:
-    OTaskbarAppletWrapper():_applet( 0 ), ref( 0 )
+    OTaskbarAppletWrapper():_applet( 0 )
     {
     }
 
@@ -80,7 +80,6 @@ template<class T> class OTaskbarAppletWrapper : public TaskbarAppletInterface
 
   private:
     T* _applet;
-    ulong ref;
 };
 
 #include <qframe.h>
