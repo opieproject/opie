@@ -46,12 +46,14 @@ protected:
     void drawContents( QPainter *p );
 
 private:
-    QPoint rotate( QPoint center, QPoint p, int angle );
-    void drawPointers ( QPainter *, const QRect &r, const QColor &c, const QTime &t, const QTime *t2 = 0 );
 
     QTime currTime;
     QTime prevTime;
     bool clear;
+
+	QPoint rotate( QPoint center, QPoint p, int angle );
+	void drawPointers ( QPainter *, const QRect &r, const QColor &c, const QTime &t, const QTime *t2 = 0 );
+
 };
 
 class Clock : public QVBox
@@ -78,9 +80,12 @@ private slots:
     void appMessage(const QCString& msg, const QByteArray& data);
     void timerEvent( QTimerEvent *e );
     void slotAdjustTime();
+
+	void slotStartTimer();
+	void slotStopTimer();
+	void slotResetTimer();
+	void setSwatchMode( int );
 private:
-    void clearClock();
-    void clearTimer();
     bool alarmBool;
     QTimer *t;
     QLCDNumber *lcd;
@@ -93,6 +98,8 @@ private:
     int swatch_totalms;
     bool swatch_running;
     bool ampm;
+    void clearClock();
+    void clearTimer();
 };
 
 #endif
