@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Press to delete the highlighted category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Presser pour effacer la catégorie surlignée.</translation>
     </message>
     <message>
         <source>Check to make this property available to all applications.</source>

@@ -68,7 +68,7 @@
     </message>
     <message>
         <source>Held</source>
-        <translation type="unfinished"></translation>
+        <translation>Held</translation>
     </message>
     <message>
         <source>Pressed</source>

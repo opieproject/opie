@@ -1,52 +1,53 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>BackupAndRestore</name>
     <message>
         <source>Backup and Restore... working...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarde et restauration... Travail en cours...</translation>
     </message>
     <message>
         <source>Backup and Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarde et restauration</translation>
     </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
     <message>
         <source>Backup And Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarde et restauration</translation>
     </message>
     <message>
         <source>Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarde</translation>
     </message>
     <message>
         <source>Applications</source>
-        <translation type="unfinished"></translation>
+        <translation>Applications</translation>
     </message>
     <message>
         <source>Save To</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer sous</translation>
     </message>
     <message>
         <source>&amp;Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sauvegarde</translation>
     </message>
     <message>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Restauration</translation>
     </message>
     <message>
         <source>Select Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Selectionner une source</translation>
     </message>
     <message>
         <source>Column 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Colonne 1</translation>
     </message>
     <message>
         <source>&amp;Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Restauration</translation>
     </message>
 </context>
 </TS>

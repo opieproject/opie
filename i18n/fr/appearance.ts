@@ -4,35 +4,35 @@
     <name>Appearance</name>
     <message>
         <source>Settings...</source>
-        <translation type="unfinished">Préférences...</translation>
+        <translation>Préférences...</translation>
     </message>
     <message>
         <source>Current scheme</source>
-        <translation type="unfinished">Thème actuel</translation>
+        <translation>Thème actuel</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Effacer</translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Sauver</translation>
+        <translation>Sauver</translation>
     </message>
     <message>
         <source>Force styling for all applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer le style pour toutes les appilcations.</translation>
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactiver le style pour ces appilcations (&lt;b&gt;*&lt;/b&gt; peut être utilisé comme joker):</translation>
     </message>
     <message>
         <source>Binary file(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier(s) binaire</translation>
     </message>
     <message>
         <source>Tab style:</source>
@@ -56,137 +56,147 @@
     </message>
     <message>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Haut</translation>
     </message>
     <message>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Bas</translation>
     </message>
     <message>
         <source>Style</source>
-        <translation type="unfinished">Style</translation>
+        <translation>Style</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished">Police</translation>
+        <translation>Police</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished">Couleurs</translation>
+        <translation>Couleurs</translation>
     </message>
     <message>
         <source>Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Fenêtres</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Avancé</translation>
     </message>
     <message>
         <source>Restart</source>
-        <translation type="unfinished">Redémarer</translation>
+        <translation>Redémarrer</translation>
     </message>
     <message>
         <source>Do you want to restart %1 now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous redémarrer %1 maintenant?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Oui</translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Non</translation>
+        <translation>Non</translation>
     </message>
     <message>
         <source>Save Scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauver le thème</translation>
     </message>
     <message>
         <source>Save scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauver lthème</translation>
     </message>
     <message>
         <source>Scheme does already exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le thème existe déjà.</translation>
     </message>
     <message>
         <source>Delete scheme</source>
-        <translation type="unfinished">Effacer le thème</translation>
+        <translation>Effacer le thème</translation>
     </message>
     <message>
         <source>Unable to delete current scheme.</source>
-        <translation type="unfinished">Impossible d&apos;effacer le thème actuel.</translation>
+        <translation>Impossible d&apos;effacer le thème courant.</translation>
     </message>
     <message>
         <source>&lt;new&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;nouveau&gt;</translation>
     </message>
     <message>
         <source>Styles control the way items such as buttons and scroll bars appear in all applications.
 
 Click here to select an available style.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les styles contrôles la manière dont les controls comme les boutons ou les barres d&apos;ascenceurs sont représentés dans toutes les applications.
+
+Cliquer ici pour sélectionner un style. disponible.</translation>
     </message>
     <message>
         <source>Click here to configure the currently selected style.
 
 Note:  This option is not available for all styles.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour configurer le style actuellement sélectionné.
+
+Note: Cette option n&apos;est pas disponible pour tous les styles.</translation>
     </message>
     <message>
         <source>Window decorations control the way the application title bar and its buttons appear.
 
 Click here to select an available decoration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les décorations de fenêtres control la manière dont les barres de titres et les bouttons des appilcations apparaissent.
+
+Cliquer ici pour sélectionner une décoration disponible.</translation>
     </message>
     <message>
         <source>Select the desired name, style and size of the default font applications will use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner le nom, le style et la taille désirés pour la police par défaut que les applications utiliseront:.</translation>
     </message>
     <message>
         <source>Color schemes are a collection of colors which are used for various parts of the display.
 
 Click here to select an available scheme.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les thèmes de couleurs sont une collection de couleurs qui sont utilisés à différents endroit de la fenêtre de l&apos;application.
+
+Cliquer ici pour sélectionner un type disponible.</translation>
     </message>
     <message>
         <source>Click here to change the colors in the current color scheme.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour changer les couleurs dans le thème de couleur actuel.</translation>
     </message>
     <message>
         <source>Click here to delete the color scheme selected in the list to the left.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour effacer le thème de couleur de la liste.</translation>
     </message>
     <message>
         <source>Click here to name and save the current color scheme.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour définir un nom et sauvegarder le thème de couleu rcourant.</translation>
     </message>
     <message>
         <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour permettre à toutes les applications d&apos;utiliser les préférences globales d&apos;apparence.</translation>
     </message>
     <message>
         <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
 
 This area allows you to select an application and which settings you wish to disable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si quelques applications ne peuvent afficher correctement les préférence globales d&apos;apparence, certaines fonctionnalité peuvent-être désactivées.
+
+Cette partie vous permet de selectionner une application et quelle préférence vous souhaitez désactiver.</translation>
     </message>
     <message>
         <source>Click here to add an application to the list above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour ajouter une application à la liste ci-dessous.</translation>
     </message>
     <message>
         <source>Click here to delete the currently selected application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour effacer l&apos;application sélectionnée.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application up in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour remonter l&apos;application sélectionnée dans la liste.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application down in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour descendre l&apos;application sélectionnée dans la liste.</translation>
     </message>
     <message>
         <source>Click here to select a desired style for tabbed dialogs (such as this application). The styles available are:
@@ -207,11 +217,11 @@ This area allows you to select an application and which settings you wish to dis
     </message>
     <message>
         <source>This is a preview window.  Look here to see your new appearance as options are changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>ceci est un aperçu de la fenêtre. Regarder ici pour voir les changement apporté.</translation>
     </message>
     <message>
         <source>Appearance Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Préference d&apos;Apparence</translation>
     </message>
 </context>
 <context>
@@ -222,46 +232,46 @@ This area allows you to select an application and which settings you wish to dis
     </message>
     <message>
         <source>Click here to select a color for: </source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour sélectionner un couleur pour:</translation>
     </message>
 </context>
 <context>
     <name>SampleWindow</name>
     <message>
         <source>Sample</source>
-        <translation type="unfinished"></translation>
+        <translation>Exemple</translation>
     </message>
     <message>
         <source>Normal Item</source>
-        <translation type="unfinished"></translation>
+        <translation>control normal</translation>
     </message>
     <message>
         <source>Disabled Item</source>
-        <translation type="unfinished"></translation>
+        <translation>control désactivé</translation>
     </message>
     <message>
         <source>Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu</translation>
     </message>
     <message>
         <source>Normal Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte normal</translation>
     </message>
     <message>
         <source>Highlighted Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte surligné</translation>
     </message>
     <message>
         <source>Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Boutton</translation>
     </message>
     <message>
         <source>Check Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Case à cocher</translation>
     </message>
     <message>
         <source>Sample window using the selected settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Example de fenêtre utilisant les préférences sélectionnées.</translation>
     </message>
 </context>
 </TS>
