@@ -840,12 +840,11 @@ void PlayListWidget::listDelete() {
           break;
       case 1:
       {
-          file = audioView->selectedItem()->text(0);
-          QListIterator<DocLnk> dit( files.children() );
-          for ( ; dit.current(); ++dit ) {
-              if( dit.current()->name() == file) {
-                  // qDebug(file);
-                  LnkProperties prop( dit.current() );
+          file = audioView->currentItem()->text(0);
+          QListIterator<DocLnk> Pdit( files.children() );
+          for ( ; Pdit.current(); ++Pdit ) {
+              if( Pdit.current()->name() == file) {
+                  LnkProperties prop( Pdit.current() );
                   prop.showMaximized();
                   prop.exec();
               }
