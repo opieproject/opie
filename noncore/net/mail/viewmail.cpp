@@ -10,6 +10,7 @@
 #include "settings.h"
 #include "composemail.h"
 #include "viewmail.h"
+#include "abstractmail.h"
 
 AttachItem::AttachItem(QListView * parent,QListViewItem *after, const QString&mime,const QString&file,const QString&desc,int num)
 	: QListViewItem(parent,after),_partNum(num)
@@ -130,12 +131,11 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
         break ;
 
         case 1:
-
              qDebug(  QString( "Test selected" ).arg(  ( ( AttachItem* )item )->Partnumber() )  );
              if (  ( ( AttachItem* )item )->Partnumber() == -1 ) {
-             setText();
-             } else  {
-             browser->setText( ( m_body.Parts()[( ( AttachItem* )item )->Partnumber() ] ).Identifier() );
+                setText();
+             } else {
+                browser->setText( m_recMail.Wrapper()->fetchPart( m_recMail, m_body.Parts()[ ( ( AttachItem* )item )->Partnumber() ] ) );
              }
         break;
  }
@@ -144,6 +144,8 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
 
 
 void ViewMail::setMail( RecMail mail ) {
+
+m_recMail = mail;
 
 m_mail[0] = mail.getFrom();
 m_mail[1] = mail.getSubject();

@@ -45,6 +45,7 @@ private:
 	QString m_mailHtml;
 	bool m_gotBody;
         RecBody m_body;
+        RecMail m_recMail;
 
         // 0 from  1 subject  2 bodytext 3 date
         QMap <int,QString>  m_mail;
