@@ -142,14 +142,8 @@ void MyPty::error()
 }
 
 void MyPty::start() {
-    char* cmd = "/bin/sh";
-
-    if ( QFile::exists( "/bin/bash" ) ) {
-        cmd = "/bin/bash";
-    }
-
     QStrList lis;
-    int r =run(cmd, lis, 0, 0);
+    int r =run(m_cmd.latin1(), lis, 0, 0);
     r = r;
 }
 /*!
@@ -182,7 +176,10 @@ int MyPty::run(const char* cmd, QStrList &, const char*, int)
 	tcsetattr( STDIN_FILENO, TCSANOW, &ttmode );
 	setenv("TERM",m_term,1);
 	setenv("COLORTERM","0",1);
-
+    EnvironmentMap::Iterator it;
+    for (it = m_env.begin(); it != m_env.end(); it++) {
+        setenv(it.key().latin1(), it.data().latin1(), 1);
+    }
 	if (getuid() == 0) {
 	    char msg[] = "WARNING: You are running this shell as root!\n";
 	    write(ttyfd, msg, sizeof(msg));
@@ -263,6 +260,7 @@ MyPty::MyPty(const Profile& prof) : m_cpid(0)
   m_fd = openPty();
   ProcCtl* ctl = ProcCtl::self();
   Q_UNUSED(ctl);
+  reload(prof);
 }
 
 /*!
@@ -291,8 +289,17 @@ void MyPty::close() {
     donePty();
     m_fd = openPty();
 }
-void MyPty::reload( const Profile& ) {
-
+void MyPty::reload( const Profile& prof) {
+    m_env.clear();
+    m_cmd = prof.readEntry("Command", "/bin/bash");
+    int envcount = prof.readNumEntry("EnvVars", 0);
+    for (int i=0; i<envcount; i++) {
+        QString name = prof.readEntry("Env_Name_" + QString::number(i), "");
+        QString value = prof.readEntry("Env_Value_" + QString::number(i), "");
+        if (!(name.isEmpty() || value.isEmpty())) {
+            m_env.insert(name, value);
+        }
+    }
 }
 /*! sends len bytes through the line */
 void MyPty::send(const QByteArray& ar)

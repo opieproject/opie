@@ -10,6 +10,7 @@
 #include "modemconfigwidget.h"
 #include "terminalwidget.h"
 #include "function_keyboard.h"
+#include "consoleconfigwidget.h"
 #include "MyPty.h"
 
 #include "default.h"
@@ -67,8 +68,8 @@ extern "C" {
     ProfileDialogWidget* newBTWidget( const QString& str, QWidget* wid ) {
         return new BTConfigWidget(str, wid );
     }
-    ProfileDialogWidget* newConsoleWid( const QString& , QWidget*  ) {
-        return 0l;
+    ProfileDialogWidget* newConsoleWid( const QString& str, QWidget* wid ) {
+        return new ConsoleConfigWidget(str, wid );
     }
 
 
@@ -102,13 +103,13 @@ Default::Default( MetaFactory* fact ) {
 //    fact->addIOLayerFactory( "irda", QObject::tr("Infrared"), newIrDaLayer   );
 //    fact->addIOLayerFactory( "bt", QObject::tr("Bluetooth"),  newBTLayer     );
     fact->addIOLayerFactory( "modem", QObject::tr("Modem"),   newModemLayer  );
-    fact->addIOLayerFactory( "console", QObject::tr("local Console"), newConsole   );
+    fact->addIOLayerFactory( "console", QObject::tr("Local Console"), newConsole   );
 
     fact->addConnectionWidgetFactory( "serial", QObject::tr("Serial"), newSerialWidget );
 //    fact->addConnectionWidgetFactory( "irda", QObject::tr("Infrared"), newIrDaWidget );
     fact->addConnectionWidgetFactory( "modem", QObject::tr("Modem"), newModemWidget );
 //    fact->addConnectionWidgetFactory( "bt", QObject::tr("Bluetooth"), newBTWidget );
-    fact->addConnectionWidgetFactory( "console", QObject::tr("local Console"), newConsoleWid );
+    fact->addConnectionWidgetFactory( "console", QObject::tr("Local Console"), newConsoleWid );
 
     fact->addTerminalWidgetFactory( "default", QObject::tr("Default Terminal"),  newTerminalWidget );
     fact->addKeyboardWidgetFactory( "defaultKeys", QObject::tr("Default Keyboard"),

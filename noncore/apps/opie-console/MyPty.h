@@ -23,9 +23,12 @@
 #define MY_PTY_H
 
 #include <qobject.h>
+#include <qlist.h>
 #include <qstrlist.h>
 
 #include "io_layer.h"
+
+typedef QMap<QString, QString> EnvironmentMap;
 
 class Profile;
 class QSocketNotifier;
@@ -95,6 +98,9 @@ private:
     QSocketNotifier* m_sn_e;
     QSocketNotifier* m_sn_r;
     char* m_term;
+
+    QString m_cmd;
+    EnvironmentMap m_env;
 };
 
 #endif

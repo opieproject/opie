@@ -27,10 +27,10 @@ keyboard?
   Fullscreen
   Modem - Josef
   Keys - hash 
+  Scripting - wazlaf 
 
 TASKS in progress:
   Keys - hash
-  Scripting - wazlaf 
    
   Session->Profile - hash => why is this needed? you can not change any settings
                              after you start the session, so all you would do is

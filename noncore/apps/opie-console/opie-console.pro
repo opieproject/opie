@@ -30,7 +30,8 @@ HEADERS      = io_layer.h io_serial.h io_irda.h io_bt.h io_modem.h \
 	       terminalwidget.h \
 	       emulation_handler.h TECommon.h \
 	       TEHistroy.h TEScreen.h TEWidget.h \
-	       TEmuVt102.h TEmulation.h MyPty.h
+	       TEmuVt102.h TEmulation.h MyPty.h \
+           consoleconfigwidget.h
 
 SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp io_bt.cpp io_modem.cpp \
 	       file_layer.cpp filetransfer.cpp \
@@ -59,7 +60,8 @@ SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp io_bt.cpp io_modem.cpp \
 	       terminalwidget.cpp \
 		emulation_handler.cpp TEHistory.cpp \
 		TEScreen.cpp TEWidget.cpp \
-		TEmuVt102.cpp TEmulation.cpp MyPty.cpp
+		TEmuVt102.cpp TEmulation.cpp MyPty.cpp \
+        consoleconfigwidget.cpp
 		
 
 INTERFACES   = configurebase.ui editbase.ui
