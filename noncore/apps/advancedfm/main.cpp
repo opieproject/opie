@@ -10,13 +10,13 @@
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
  ***************************************************************************/
-#include <qpe/qpeapplication.h>
-
-
 
 #include "advancedfm.h"
 
 #ifdef NOQUICKLAUNCH
+
+#include <qpe/qpeapplication.h>
+
 int main(int argc, char *argv[])
 {
     QPEApplication a(argc, argv);
@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     return a.exec();
 }
 #else
-#include <opie/oapplicationfactory.h>
+#include <opie2/oapplicationfactory.h>
 
 OPIE_EXPORT_APP( OApplicationFactory<AdvancedFm> )
 

@@ -16,15 +16,15 @@
 #include <qlineedit.h>
 #include <qwhatsthis.h>
 
-#include <opie/oprocess.h>
+#include <opie2/oprocess.h>
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QMultiLineEdit;
 
 class Output : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:
@@ -44,11 +44,11 @@ protected slots:
     void processFinished();
   private:
     QString cmmd;
-    
+
 };
 
 class InputDialog : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:
@@ -56,10 +56,10 @@ public:
     ~InputDialog();
     QString inputText;
     QLineEdit* LineEdit1;
-  void setInputText(const QString &); 
+  void setInputText(const QString &);
 private slots:
     void returned();
-    
+
 };
 
 #endif // OUTPUT_H

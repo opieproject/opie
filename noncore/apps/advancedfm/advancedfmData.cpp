@@ -11,9 +11,7 @@
  ***************************************************************************/
 #include "advancedfm.h"
 
-#include <opie/osplitter.h>
 #include <qpe/storage.h>
-
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/menubutton.h>
@@ -129,7 +127,7 @@ void AdvancedFm::init() {
   currentPathCombo = new QComboBox( FALSE, lineBox, "currentPathCombo" );
   currentPathCombo->setEditable(TRUE);
   currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
-  currentPathCombo->setFocusPolicy(NoFocus);  
+  currentPathCombo->setFocusPolicy(NoFocus);
   layout->addWidget( lineBox );
 
 
@@ -153,7 +151,7 @@ void AdvancedFm::init() {
   Local_View->setSelectionMode(QListView::Extended);
   Local_View->setFocusPolicy(StrongFocus);
   Local_View->installEventFilter( this );
- 
+
   QPEApplication::setStylusOperation( Local_View->viewport(),QPEApplication::RightOnHold);
 
   tabLayout->addWidget( Local_View, 0, 0 );
@@ -177,7 +175,7 @@ void AdvancedFm::init() {
   Remote_View->setSelectionMode(QListView::Extended);
   Remote_View->setFocusPolicy(StrongFocus);
   Remote_View->installEventFilter( this );
- 
+
   QPEApplication::setStylusOperation( Remote_View->viewport(),QPEApplication::RightOnHold);
 
   tabLayout_2->addWidget( Remote_View, 0, 0 );
@@ -211,7 +209,7 @@ void AdvancedFm::init() {
 
     if ( QFile::exists ( "/dev/sharp_buz" ) || QFile::exists ( "/dev/sharp_led" ))
           zaurusDevice=TRUE;
-    else 
+    else
           zaurusDevice=FALSE;
 
 

@@ -5,8 +5,6 @@
 ****************************************************************************/
 #include "output.h"
 
-#include <opie/oprocess.h>
-
 #include <qpe/qpeapplication.h>
 #include <qpe/applnk.h>
 

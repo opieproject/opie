@@ -6,12 +6,12 @@ SOURCES   = advancedfm.cpp advancedfmData.cpp advancedfmMenu.cpp filePermissions
 TARGET    = advancedfm
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe -lopie
+LIBS            += -lqpe -lopiecore2 -lopieui2
 
 TRANSLATIONS = ../../../i18n/de/advancedfm.ts \
-	 ../../../i18n/nl/advancedfm.ts \
-	 ../../../i18n/da/advancedfm.ts \
-	 ../../../i18n/xx/advancedfm.ts \
+     ../../../i18n/nl/advancedfm.ts \
+     ../../../i18n/da/advancedfm.ts \
+     ../../../i18n/xx/advancedfm.ts \
    ../../../i18n/en/advancedfm.ts \
    ../../../i18n/es/advancedfm.ts \
    ../../../i18n/fr/advancedfm.ts \
@@ -27,7 +27,7 @@ TRANSLATIONS = ../../../i18n/de/advancedfm.ts \
    ../../../i18n/zh_TW/advancedfm.ts
 
 
-!contains(CONFIG,quick-app) {	
+!contains(CONFIG,quick-app) {
  DESTDIR = $(OPIEDIR)/bin
  DEFINES += NOQUICKLAUNCH
 }

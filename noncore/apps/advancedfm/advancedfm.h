@@ -14,8 +14,8 @@
 #define QTOPIA_INTERNAL_FSLP // to get access to fileproperties
 #define QT_QWS_OPIE
 
-//#include <opie/otabwidget.h>
-#include <opie/oprocess.h>
+#include <opie2/oprocess.h>
+#include <opie2/osplitter.h>
 
 #include <qpe/ir.h>
 #include <qpe/qcopenvelope_qws.h>
@@ -30,7 +30,8 @@
 #include <qtimer.h>
 #include <qpixmap.h>
 
-class OSplitter;
+using Opie::OSplitter;
+
 class QVBoxLayout;
 class QHBoxLayout;
 class QGridLayout;
@@ -40,7 +41,6 @@ class QListviewItem;
 class QLabel;
 class QProgressBar;
 class QSpinBox;
-class QTabWidget;
 class QWidget;
 class QPopupMenu;
 class QFile;
@@ -161,7 +161,7 @@ protected slots:
    void fileBeamFinished( Ir *);
    bool copyDirectory( const QString & , const QString & );
 //   void navigateToSelected();
-   bool moveDirectory( const QString & , const QString & );	 
+   bool moveDirectory( const QString & , const QString & );
 //   void slotSwitchtoLocal(int);
 
 private:
@@ -186,7 +186,7 @@ private slots:
    void gotoCustomDir(const QString &);
    void qcopReceive(const QCString&, const QByteArray&);
    void setDocument(const QString &);
-   
+
 };
 
 #endif // ADVANCEDFM_H
