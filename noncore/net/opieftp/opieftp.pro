@@ -1,6 +1,6 @@
 TEMPLATE  = app
 CONFIG    += qt warn_on release
-HEADERS   = opieftp.h inputDialog.h ftplib.h
+HEADERS   = opieftp.h inputDialog.h 
 SOURCES   = opieftp.cpp inputDialog.cpp main.cpp
 TARGET    = opieftp
 DESTDIR   = $(OPIEDIR)/bin
