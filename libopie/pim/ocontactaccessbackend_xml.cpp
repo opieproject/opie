@@ -13,11 +13,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.3 2003-03-21 12:26:28 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.4 2003-03-21 14:32:54 mickeyl Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.cpp,v $
- * Revision 1.3  2003-03-21 12:26:28  eilers
+ * Revision 1.4  2003-03-21 14:32:54  mickeyl
+ * g++ compliance fix: default arguments belong into the declaration, but not the definition
+ *
+ * Revision 1.3  2003/03/21 12:26:28  eilers
  * Fixing small bug: If we search a birthday from today to today, it returned
  * every contact ..
  *
@@ -104,7 +107,7 @@
 using namespace Opie;
 
 
-OContactAccessBackend_XML::OContactAccessBackend_XML ( QString appname, QString filename = 0l ):
+OContactAccessBackend_XML::OContactAccessBackend_XML ( QString appname, QString filename ):
 	m_changed( false )
 {
 	// Just m_contactlist should call delete if an entry
