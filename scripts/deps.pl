@@ -18,7 +18,7 @@ sub getdepends ($$)
 	while( <FILE> ) {
 		if( $intoken == 1 ) {
 			/depends\S*(.*)/ && return $1;
-			if( /\S*(config|menu)/ ) {
+			if( /^\s*(config|menu)/ ) {
 				$intoken = 0;
 				return;
 			}
