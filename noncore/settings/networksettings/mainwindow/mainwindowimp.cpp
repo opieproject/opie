@@ -8,6 +8,7 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <qpe/applnk.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
@@ -520,7 +521,9 @@ void MainWindowImp::updateInterface(Interface *i)
 
     // Update the icons and information
 #ifdef QWS
-    item->setPixmap(0, (Resource::loadPixmap(i->getStatus() ? "up": "down")));
+    QPixmap pic;
+    pic.convertFromImage( Resource::loadImage( i->getStatus() ? "up": "down" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    item->setPixmap(0, ( pic ));
 #else
     item->setPixmap(0, (SmallIcon(i->getStatus() ? "up": "down")));
 #endif
