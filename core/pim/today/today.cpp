@@ -71,8 +71,8 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
   QCopChannel *todayChannel = new QCopChannel("QPE/Today" , this );
   connect (todayChannel, SIGNAL( received(const QCString &, const QByteArray &)),
 	   this, SLOT ( channelReceived(const QCString &, const QByteArray &)) );
-#endif  
-#endif 
+#endif
+#endif
   
   setOwnerField();
   todo = new ToDoDB;
@@ -146,24 +146,25 @@ void Today::draw() {
  
   // if the todolist.xml file was not modified in between, do not parse it.
   if (checkIfModified()) {
+    if (todo) delete todo;
     todo = new ToDoDB;
     getTodo();
   }
-  
+
   // how often refresh
   QTimer::singleShot( 20*1000, this, SLOT(draw() ) );
 }
 
-/* 
+/*
  * Check if the todolist.xml was modified (if there are new entries.
  * Returns true if it was modified.
  */
 bool Today::checkIfModified() {
-  
+
   QDir dir;
-  QString homedir = dir.homeDirPath (); 
+  QString homedir = dir.homeDirPath ();
   QString time;
-    
+
   Config cfg("today");
   cfg.setGroup("Files");
   time = cfg.readEntry("todolisttimestamp", "");
@@ -174,7 +175,7 @@ bool Today::checkIfModified() {
     return false;
   } else {
     cfg.writeEntry("todolisttimestamp", fileTime.toString() );
-    cfg.write(); 
+    cfg.write();
     return true;
   }
 }
@@ -186,13 +187,13 @@ bool Today::checkIfModified() {
 void Today::init() {
   QDate date = QDate::currentDate();
   QString time = (tr( date.toString()) );
-  
+
   TextLabel1->setText(QString("<font color=#FFFFFF>" + time + "</font>"));
-   
+
   // read config
   Config cfg("today");
-  cfg.setGroup("BaseConfig"); 
-  
+  cfg.setGroup("BaseConfig");
+
   // -- config file section --
   // how many lines should be showed in the task section
   MAX_LINES_TASK = cfg.readNumEntry("maxlinestask",5);
@@ -202,7 +203,7 @@ void Today::init() {
   MAX_LINES_MEET = cfg.readNumEntry("maxlinesmeet",5);
   // If location is to be showed too, 1 to activate it.
   SHOW_LOCATION = cfg.readNumEntry("showlocation",1);
-  // if notes should be shown 
+  // if notes should be shown
   SHOW_NOTES = cfg.readNumEntry("shownotes",0);
   // should only later appointments be shown or all for the current day.
   ONLY_LATER = cfg.readNumEntry("onlylater",1);
@@ -268,7 +269,7 @@ void Today::startConfig() {
  */
 void Today::getDates() {
   QDate date = QDate::currentDate();
-  
+
   if (AllDateBookEvents) delete AllDateBookEvents;
   AllDateBookEvents = new QWidget( );
   QVBoxLayout* layoutDates = new QVBoxLayout(AllDateBookEvents);
