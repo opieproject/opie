@@ -110,7 +110,7 @@ static Global::Command builtins[] = {
 #if defined(QPE_NEED_CALIBRATION)
         { "calibrate",          calibrate,	        1, 0 }, // No tr
 #endif
-#if !defined(QT_QWS_CASSIOPEIA)
+#if !defined(OPIE_NO_BUILTIN_SHUTDOWN)
 	{ "shutdown",           Global::shutdown,      	1, 0 }, // No tr
 //	{ "run",                run,			1, 0 }, // No tr
 #endif

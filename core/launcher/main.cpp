@@ -160,7 +160,7 @@ void initEnvironment()
     config.writeEntry("Language", lang);
     config.write();
 
-#if !defined(QT_QWS_CASSIOPEIA) && !defined(QT_QWS_IPAQ) && !defined(QT_QWS_SL5XXX)
+#if 0
      setenv( "QWS_SIZE", "240x320", 0 );
 #endif
 
