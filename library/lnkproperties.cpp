@@ -116,7 +116,7 @@ LnkProperties::LnkProperties( AppLnk* l, QWidget* parent )
 	    d->preload->hide();
 	if ( !l->property("Rotation"). isEmpty ()) {
 	    d->rotate->setChecked ( true );
-	    d->rotateButtons->setButton(((QPEApplication::defaultRotation()+l->rotation().toInt())%360)/90);
+	    d->rotateButtons->setButton((l->rotation().toInt()%360)/90);
 	}
 	else {
 	    d->rotateButtons->setEnabled(false);
@@ -289,16 +289,16 @@ void LnkProperties::done(int ok)
 	if ( !d->rotate->isHidden()) {
 	    QString newrot;
 	
-	    if (d->rotate->isChecked()) {
+	    if ( d->rotate->isChecked() ) {
 		int rot=0;
 		for(; rot<4; rot++) {
 		    if (d->rotateButtons->find(rot)->isOn())
 		        break;
 		}
-		newrot = QString::number((QPEApplication::defaultRotation()+rot*90)%360);
+		newrot = QString::number((rot*90)%360);
 	    }
-	    if (newrot !=lnk->rotation()) {
-		lnk->setRotation(newrot);
+	    if ( newrot != lnk->rotation() ) {
+		lnk-> setRotation(newrot);
 		changed = TRUE;
 	    }
 	}
