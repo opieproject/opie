@@ -1,4 +1,0 @@
-  config WEBSTYLE
-    boolean "WEB Style from KDE2"
-    default "n"
-    depends ( LIBQPE || LIBQPE-X11 ) 
