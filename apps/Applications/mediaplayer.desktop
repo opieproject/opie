@@ -4,6 +4,6 @@ Exec=opieplayer2
 Icon=opieplayer2/MPEGPlayer
 Type=Application
 MimeType=audio/mpeg;audio/x-wav;audio/x-mpegurl;audio/x-ogg;video/x-ms-asf;video/quicktime;video/mpeg;video/x-msvideo;playlist/plain;
-MimeTypeIcons=SoundPlayer;MPEGPlayer;Sound;Sound;mpegplayer/playlist2
+MimeTypeIcons=SoundPlayer;Sound;SoundPlayer;SoundPlayer;MPEGPlayer;MPEGPlayer;MPEGPlayer;MPEGPlayer;opieplayer2/playlist2
 Name=Opie Media Player
 Name[ko]=오삐 미디어 플레이어
