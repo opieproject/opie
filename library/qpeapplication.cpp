@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.55 2003-08-25 14:46:43 zecke Exp $
+** $Id: qpeapplication.cpp,v 1.56 2003-08-26 14:14:34 mickeyl Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -713,7 +713,9 @@ void QPEApplication::initApp( int argc, char **argv )
     channel.replace(QRegExp(".*/"),"");
     d->appName = channel;
 
+    #if QT_VERSION > 235
     qt_fbdpy->setIdentity( channel ); // In Qt/E 2.3.6
+    #endif
 
     channel = "QPE/Application/" + channel;
     pidChannel = new QCopChannel( channel, this);
