@@ -36,7 +36,7 @@
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Automatically bring up</string>
+                <string>Bring up on bootup</string>
             </property>
         </widget>
         <widget>
