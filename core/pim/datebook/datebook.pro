@@ -10,7 +10,8 @@ HEADERS	= datebookday.h \
 	  repeatentry.h \
 	  noteentryimpl.h \
 	  onoteedit.h \
-	  datebookdayallday.h 
+	  datebookdayallday.h  \
+	  namespace_hack.h 
 SOURCES	= main.cpp \
 	  datebookday.cpp \
 	  datebook.cpp \
