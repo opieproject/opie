@@ -163,7 +163,7 @@ void MediaPlayer::next() {
     } else { //if playing from file list, let's just stop
         qDebug("<<<<<<<<<<<<<<<<<stop for filelists");
         mediaPlayerState->setPlaying(false);
-        mediaPlayerState->setView('l');
+        mediaPlayerState->setDisplayType( MediaPlayerState::MediaSelection );
         if(l) mediaPlayerState->setLooping(l);
         if(r) mediaPlayerState->setShuffled(r);
     }

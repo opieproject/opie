@@ -221,8 +221,8 @@ void PlayListWidgetGui::setView( char view )  {
 void PlayListWidgetGui::setActiveWindow()  {
     //  qDebug("SETTING active window");
     // When we get raised we need to ensure that it switches views
-    char origView = mediaPlayerState->view();
-    mediaPlayerState->setView( 'l' ); // invalidate
-    mediaPlayerState->setView( origView ); // now switch back
+    MediaPlayerState::DisplayType origDisplayType = mediaPlayerState->displayType();
+    mediaPlayerState->setDisplayType( MediaPlayerState::MediaSelection ); // invalidate
+    mediaPlayerState->setDisplayType( origDisplayType ); // now switch back
 }
 

@@ -85,18 +85,6 @@ void MediaPlayerState::writeConfig( Config& cfg ) const {
     cfg.writeEntry( "VideoGamma",  videoGamma );
 }
 
-char MediaPlayerState::view() const
-{
-    switch ( m_displayType ) {
-        case Audio: return 'a';
-        case Video: return 'v';
-        case MediaSelection: return 'l';
-        default: assert( false );
-    }
-    // never reached
-    return 42;
-}
-
 MediaPlayerState::DisplayType MediaPlayerState::displayType() const
 {
     return m_displayType;
@@ -214,15 +202,6 @@ void MediaPlayerState::setLength( long l ) {
     emit lengthChanged(l);
 }
 
-void MediaPlayerState::setView( char v ) {
-    switch ( v ) {
-        case 'a': setDisplayType( Audio ); return;
-        case 'v': setDisplayType( Video ); return;
-        case 'l': setDisplayType( MediaSelection ); return;
-        default: assert( false );
-    }
-}
-
 void MediaPlayerState::setDisplayType( DisplayType displayType )
 {
     if ( m_displayType == displayType )
@@ -242,15 +221,15 @@ void MediaPlayerState::setNext() {
 
 void MediaPlayerState::setList() {
     setPlaying( FALSE );
-    setView('l');
+    setDisplayType( MediaSelection );
 }
 
 void MediaPlayerState::setVideo() {
-    setView('v');
+    setDisplayType( Video );
 }
 
 void MediaPlayerState::setAudio() {
-    setView('a');
+    setDisplayType( Audio );
 }
 
 void MediaPlayerState::toggleFullscreen() {

@@ -63,7 +63,6 @@ public:
     bool isStopped() const { return stopped; }
     long position() const { return curPosition; }
     long length() const { return curLength; }
-    char view() const;
     DisplayType displayType() const;
 
 public slots:
@@ -79,7 +78,6 @@ public slots:
     void setPosition( long p );
     void updatePosition( long p );
     void setLength( long l );
-    void setView( char v );
     void setDisplayType( MediaPlayerState::DisplayType displayType );
     void setBlanked( bool b );
     void setVideoGamma( int v );

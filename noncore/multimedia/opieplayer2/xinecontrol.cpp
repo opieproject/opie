@@ -85,15 +85,15 @@ void XineControl::play( const QString& fileName ) {
     }
     mediaPlayerState->setPlaying( true );
 
-    char whichGui;
+    MediaPlayerState::DisplayType displayType;
     // qDebug( QString( "libXine->hasVideo() return : %1 ").arg( libXine->hasVideo() ) );
     if ( !libXine->hasVideo() ) {
-        whichGui = 'a';
+        displayType = MediaPlayerState::Audio;
         qDebug("HAS AUDIO");
         libXine->setShowVideo( false );
         hasAudioChannel = TRUE;
     } else {
-        whichGui = 'v';
+        displayType = MediaPlayerState::Video;
         qDebug("HAS VIDEO");
         libXine->setShowVideo( true );
         hasVideoChannel = TRUE;
@@ -102,14 +102,14 @@ void XineControl::play( const QString& fileName ) {
     mediaPlayerState->setIsSeekable( libXine->isSeekable() );
 
     // which gui (video / audio)
-    mediaPlayerState->setView( whichGui );
+    mediaPlayerState->setDisplayType( displayType );
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
     if ( !disabledSuspendScreenSaver ) {
         disabledSuspendScreenSaver = TRUE;
         // Stop the screen from blanking and power saving state
         QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" )
-            << ( whichGui == 'v' ? QPEApplication::Disable : QPEApplication::DisableSuspend );
+            << ( displayType == MediaPlayerState::Video ? QPEApplication::Disable : QPEApplication::DisableSuspend );
     }
 #endif
 
