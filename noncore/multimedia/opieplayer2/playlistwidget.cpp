@@ -741,7 +741,7 @@ void PlayListWidget::writem3u() {
             filename += ".m3u";
         
         if( d->selectedFiles->first()) { //ramble through playlist view
-            m3uList = new Om3u( filename, IO_ReadWrite);
+            m3uList = new Om3u( filename, IO_ReadWrite | IO_Truncate);
 
             do {
             m3uList->add( d->selectedFiles->current()->file());
