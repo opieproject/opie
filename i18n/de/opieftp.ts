@@ -242,7 +242,7 @@ It must be empty</source>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinzu</translation>
     </message>
 </context>
 </TS>
