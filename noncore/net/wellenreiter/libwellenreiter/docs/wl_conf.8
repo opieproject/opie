@@ -1,0 +1,17 @@
+wl_conf
+
+#include <wellenreiter/wl_conf.hh>
+
+int wl_checkcfg(void);
+int wl_cfgvalue(const char *token, char *out, int maxlen);
+
+wl_checkcfg checks whether the wellenreiter configfile exists.
+wl_cfgvalue searches for the given token and copies maxlen 
+characters of its value to out.
+
+wl_ckeckcfg returns 1 if the file exists and is readable and
+0 on error.
+
+wl_cfgvalue returns -1 on error, 0 if nothing was found and
+1 on success.
+
