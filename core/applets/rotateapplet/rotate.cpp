@@ -41,11 +41,32 @@
 RotateApplet::RotateApplet ( )
 	: QObject ( 0, "RotateApplet" ), ref ( 0 ), m_flipped( false )
 {
+
+#if defined(Q_WS_QWS)
+#if !defined(QT_NO_COP)
+    QCopChannel *rotateChannel = new QCopChannel( "QPE/Rotation" , this );
+    connect ( rotateChannel, SIGNAL( received( const QCString &, const QByteArray &) ),
+              this, SLOT ( channelReceived( const QCString &, const QByteArray &) ) );
+#endif
+#endif
+
 }
 
 RotateApplet::~RotateApplet ( )
 {
 }
+
+
+/**
+ * Qcop receive method.
+ */
+void RotateApplet::channelReceived( const QCString &msg, const QByteArray & data ) {
+    QDataStream stream( data, IO_ReadOnly );
+    if ( msg == "flip()" ) {
+        activated ( );
+    }
+}
+
 
 int RotateApplet::position ( ) const
 {
@@ -62,7 +83,7 @@ QString RotateApplet::text ( ) const
 	return tr( "Rotate" );
 }
 
-QString RotateApplet::tr( const char* s ) const
+/*QString RotateApplet::tr( const char* s ) const
 {
     return qApp->translate( "RotateApplet", s, 0 );
 }
@@ -71,6 +92,7 @@ QString RotateApplet::tr( const char* s, const char* p ) const
 {
     return qApp->translate( "RotateApplet", s, p );
 }
+*/
 
 QIconSet RotateApplet::icon ( ) const
 {
@@ -89,6 +111,7 @@ QPopupMenu *RotateApplet::popup ( QWidget * ) const
 
 void RotateApplet::activated ( )
 {
+
     int defaultRotation = QPEApplication::defaultRotation();
 
     int newRotation;

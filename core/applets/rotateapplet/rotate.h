@@ -32,9 +32,13 @@
 #define __OPIE_ROTATE_APPLET_H__
 
 #include <qpe/menuappletinterface.h>
+#include <qobject.h>
 
 class RotateApplet : public QObject, public MenuAppletInterface
 {
+
+    Q_OBJECT
+
 public:
     RotateApplet ( );
     virtual ~RotateApplet ( );
@@ -47,15 +51,19 @@ public:
     virtual QString name ( ) const;
     virtual QIconSet icon ( ) const;
     virtual QString text ( ) const;
-    virtual QString tr( const char* ) const;
+    /* virtual QString tr( const char* ) const;
     virtual QString tr( const char*, const char* ) const;
+    */
     virtual QPopupMenu *popup ( QWidget *parent ) const;
-    
-    virtual void activated ( );
+     virtual void activated ( );
+
+private slots:
+    void channelReceived( const QCString &msg, const QByteArray & data );
 
 private:
-    bool m_flipped;
     ulong ref;
+    bool m_flipped;
+
 };
 
 #endif
