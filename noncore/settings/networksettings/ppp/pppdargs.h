@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdargs.h,v 1.2 2003-05-30 15:06:17 tille Exp $
+ * $Id: pppdargs.h,v 1.3 2003-06-02 14:25:18 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -45,7 +45,7 @@ private slots:
   void addbutton();
   void removebutton();
   void defaultsbutton();
-  void closebutton();
+  virtual void accept();
   void textChanged(const QString &);
   void itemSelected(int);
 

@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdargs.cpp,v 1.4 2003-05-30 15:06:17 tille Exp $
+ * $Id: pppdargs.cpp,v 1.5 2003-06-02 14:25:18 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -27,17 +27,15 @@
 
 #include <qlayout.h>
 #include <qbuttongroup.h>
-//#include <kwin.h>
 #include <qapplication.h>
 #include "pppdargs.h"
 #include "pppdata.h"
-//#include <klocale.h>
-#define i18n QObject::tr
+
 
 PPPdArguments::PPPdArguments( PPPData *pd, QWidget *parent, const char *name)
     : QDialog(parent, name, TRUE), _pppdata(pd)
 {
-  setCaption(i18n("Customize pppd Arguments"));
+  setCaption(tr("Customize pppd Arguments"));
 //  KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());
   QVBoxLayout *l = new QVBoxLayout(this, 10, 10);
   QHBoxLayout *tl = new QHBoxLayout(10);
@@ -50,7 +48,7 @@ PPPdArguments::PPPdArguments( PPPData *pd, QWidget *parent, const char *name)
   QHBoxLayout *l11 = new QHBoxLayout(10);
   l1->addLayout(l11);
 
-  argument_label = new QLabel(i18n("Argument:"), this);
+  argument_label = new QLabel(tr("Argument:"), this);
   l11->addWidget(argument_label);
 
   argument = new QLineEdit(this);
@@ -66,34 +64,21 @@ PPPdArguments::PPPdArguments( PPPData *pd, QWidget *parent, const char *name)
 	  this, SLOT(itemSelected(int)));
   l1->addWidget(arguments, 1);
 
-  add = new QPushButton(i18n("Add"), this);
+  add = new QPushButton(tr("Add"), this);
   connect(add, SIGNAL(clicked()), SLOT(addbutton()));
   l2->addWidget(add);
   l2->addStretch(1);
 
-  remove = new QPushButton(i18n("Remove"), this);
+  remove = new QPushButton(tr("Remove"), this);
   connect(remove, SIGNAL(clicked()), SLOT(removebutton()));
   l2->addWidget(remove);
 
-  defaults = new QPushButton(i18n("Defaults"), this);
+  defaults = new QPushButton(tr("Defaults"), this);
   connect(defaults, SIGNAL(clicked()), SLOT(defaultsbutton()));
   l2->addWidget(defaults);
 
   l->addSpacing(5);
 
-//   QButtonGroup *bbox = new QButtonGroup(this);
-// //  bbox->addStretch(1);
-//   closebtn = new QPushButton( bbox, i18n("OK"));
-//   bbox->insert(closebtn);
-//   connect(closebtn, SIGNAL(clicked()), SLOT(closebutton()));
-//   QPushButton *cancel = new QPushButton( bbox, i18n("Cancel"));
-//   bbox->insert(cancel);
-//   connect(cancel, SIGNAL(clicked()),
-// 	  this, SLOT(reject()));
-//   bbox->layout();
-//   l->addWidget(bbox);
-
-//   setFixedSize(sizeHint());
 
   //load info from gpppdata
   init();
@@ -132,13 +117,13 @@ void PPPdArguments::defaultsbutton() {
 }
 
 
-void PPPdArguments::closebutton() {
+void PPPdArguments::accept() {
   QStringList arglist;
   for(uint i=0; i < arguments->count(); i++)
     arglist.append(arguments->text(i));
   _pppdata->setpppdArgument(arglist);
 
-  done(0);
+  QDialog::accept();
 }
 
 

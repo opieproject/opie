@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: edit.cpp,v 1.5 2003-06-02 14:10:31 tille Exp $
+ * $Id: edit.cpp,v 1.6 2003-06-02 14:25:18 tille Exp $
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
  *
@@ -179,7 +179,6 @@ DialWidget::DialWidget( PPPData *pd, QWidget *parent, bool isnewaccount
   tl->activate();
 }
 
-
 bool DialWidget::save() {
   //first check to make sure that the account name is unique!
   if(connectname_l->text().isEmpty() ||
@@ -260,7 +259,7 @@ void DialWidget::downNumber() {
 
 void DialWidget::pppdargsbutton() {
     PPPdArguments pa(_pppdata, this);
-  pa.exec();
+    pa.exec();
 }
 
 
