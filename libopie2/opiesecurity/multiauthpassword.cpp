@@ -85,7 +85,7 @@ bool MultiauthPassword::needToAuthenticate(bool at_poweron)
  */
 void MultiauthPassword::authenticate(int lockMode)
 {
-    /** 
+    /**
      * \par Conditions
      *
      * If lockMode is an If, it's conditional:
@@ -99,9 +99,9 @@ void MultiauthPassword::authenticate(int lockMode)
         Config cfg("Security");
         cfg.setGroup("Misc");
         if ( (
-              (lockMode == IfPowerOn) && cfg.readBoolEntry("onStart", false)
+              (lockMode == IfPowerOn) && !cfg.readBoolEntry("onStart", false)
             ) || (
-              (lockMode == IfResume) && cfg.readBoolEntry("onResume", false)
+              (lockMode == IfResume) && !cfg.readBoolEntry("onResume", false)
             ) )
             return;
     }
@@ -114,7 +114,7 @@ void MultiauthPassword::authenticate(int lockMode)
      * people escape.
      */
     bool allowByPass = false;
-    
+
     if (lockMode == TestNow)
         allowByPass = true;
 
