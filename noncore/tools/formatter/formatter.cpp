@@ -77,22 +77,22 @@ FormatterApp::FormatterApp( QWidget* parent,  const char* name, bool modal, WFla
     storageComboBox = new QComboBox( FALSE, tab, "storageComboBox" );
     storageComboBox->setMaximumWidth(220);
 
-    tabLayout->addMultiCellWidget( storageComboBox, 0, 0, 0, 0 );
+    tabLayout->addMultiCellWidget( storageComboBox, 0, 0, 0, 1);
 
     TextLabel4 = new QLabel( tab, "TextLabel4" );
     TextLabel4->setText( tr( "Storage Type" ) );
 
-    tabLayout->addMultiCellWidget( TextLabel4, 1, 1, 0, 0 );
+    tabLayout->addMultiCellWidget( TextLabel4, 1, 1, 0, 1);
 
     TextLabel2 = new QLabel( tab, "TextLabel2" );
     TextLabel2->setText( tr( "File Systems" ) );
 
-    tabLayout->addMultiCellWidget( TextLabel2, 4, 4, 0, 0 );
+    tabLayout->addMultiCellWidget( TextLabel2, 4, 4, 0, 1);
 
     fileSystemsCombo = new QComboBox( FALSE, tab, "fileSystemsCombo" );
     fileSystemsCombo->setMaximumWidth(220);
 
-    tabLayout->addMultiCellWidget( fileSystemsCombo, 3, 3, 0, 0 );
+    tabLayout->addMultiCellWidget( fileSystemsCombo, 3, 3, 0, 1);
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Minimum );
     tabLayout->addItem( spacer, 2, 0 );
 
@@ -100,9 +100,10 @@ FormatterApp::FormatterApp( QWidget* parent,  const char* name, bool modal, WFla
     formatPushButton->setText( tr( "Format" ) );
     formatPushButton->setMaximumWidth(170);
     
-    tabLayout->addMultiCellWidget( formatPushButton, 6, 6, 0, 0 );
+    tabLayout->addMultiCellWidget( formatPushButton, 6, 6, 0, 1);
     QSpacerItem* spacer_2 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Minimum );
     tabLayout->addItem( spacer_2, 5, 0 );
+    
     TabWidget->insertTab( tab, tr( "Main" ) );
 
     tab_2 = new QWidget( TabWidget, "tab_2" );
@@ -112,11 +113,11 @@ FormatterApp::FormatterApp( QWidget* parent,  const char* name, bool modal, WFla
 
     mountPointLineEdit = new QLineEdit( tab_2, "mountPointLineEdit" );
 
-    tabLayout_2->addMultiCellWidget( mountPointLineEdit, 0, 0, 0, 0 );
+    tabLayout_2->addMultiCellWidget( mountPointLineEdit, 0, 0, 0, 1);
 
     deviceComboBox = new QComboBox( FALSE, tab_2, "deviceComboBox" );
 
-    tabLayout_2->addMultiCellWidget( deviceComboBox, 3, 3, 0, 0 );
+    tabLayout_2->addMultiCellWidget( deviceComboBox, 3, 3, 0, 1);
 
     TextLabel5 = new QLabel( tab_2, "TextLabel5" );
     TextLabel5->setText( tr( "CAUTION:\n"
@@ -124,34 +125,36 @@ FormatterApp::FormatterApp( QWidget* parent,  const char* name, bool modal, WFla
                              "page may cause your system \n"
                              "to stop functioning properly!!" ) );//idiot message
 
-    tabLayout_2->addMultiCellWidget( TextLabel5, 6, 6, 0, 0 );
+    tabLayout_2->addMultiCellWidget( TextLabel5, 6, 6, 0, 1);
 
     editPushButton = new QPushButton( tab_2, "editPushButton" );
     editPushButton->setText( tr( "Edit fstab" ) );
-
+    editPushButton->setMaximumWidth(100);
+    
     tabLayout_2->addMultiCellWidget( editPushButton, 7, 7, 0, 0 );
 
     fsckButton = new QPushButton( tab_2, "fsckPushButton" );
     fsckButton->setText( tr( "Check Disk" ) );
+    fsckButton->setMaximumWidth(100);
 
-    tabLayout_2->addMultiCellWidget( fsckButton, 7, 7, 1, 0 );
+    tabLayout_2->addMultiCellWidget( fsckButton, 7, 7, 1, 1);
 
     TextLabel3 = new QLabel( tab_2, "TextLabel3" );
     TextLabel3->setText( tr( "Device" ) );
 
-    tabLayout_2->addMultiCellWidget( TextLabel3, 4, 4, 0, 0 );
+    tabLayout_2->addMultiCellWidget( TextLabel3, 4, 4, 0, 1 );
     QSpacerItem* spacer_3 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     tabLayout_2->addItem( spacer_3, 5, 0 );
 
     TextLabel1 = new QLabel( tab_2, "TextLabel1" );
     TextLabel1->setText( tr( "Mount Point" ) );
 
-    tabLayout_2->addMultiCellWidget( TextLabel1, 1, 1, 0, 0 );
+    tabLayout_2->addMultiCellWidget( TextLabel1, 1, 1, 0, 1 );
     QSpacerItem* spacer_4 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     tabLayout_2->addItem( spacer_4, 2, 1 );
     TabWidget->insertTab( tab_2, tr( "Advanced" ) );
 
-    FormatterAppLayout->addWidget( TabWidget, 0, 0 );
+    FormatterAppLayout->addWidget( TabWidget, 0, 1 );
 
     connect( formatPushButton ,SIGNAL(released()),this,SLOT( doFormat()) );
     connect( editPushButton ,SIGNAL(released()),this,SLOT( editFstab()) );
