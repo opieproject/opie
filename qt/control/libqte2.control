@@ -5,7 +5,7 @@ Section: opie/system
 Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
 Version: 1:$QTE_VERSION-$QTE_REVISION
-Depends: libjpeg62, libpng12, zlib1g
+Depends: libjpeg62, libpng12-0, zlib1g
 Provides: qt-embedded, libqt2-emb
 Replaces: qt-embedded, libqt2-emb
 Description: Qt/Embedded environment
