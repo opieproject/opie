@@ -1,6 +1,7 @@
 This requires gsmlib, and hence isn't enabled by default.
 
 In order to compile this, first get gsmlib from http://www.pxh.de/fs/gsmlib/
+(There are ipkgs at ftp.uk.linux.org:/pub/people/dwmw2/gsmtool/)
 
 Compile it, then add 'gsmtool' to the Opie top-level Makefile, set
 GSMLIBDIR to point at the directory where you built gsmlib, reconfigure
