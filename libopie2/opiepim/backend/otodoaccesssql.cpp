@@ -277,7 +277,7 @@ QArray<int> OTodoAccessBackendSQL::allRecords()const {
 
     return m_uids;
 }
-QArray<int> OTodoAccessBackendSQL::queryByExample( const OTodo& , int  ){
+QArray<int> OTodoAccessBackendSQL::queryByExample( const OTodo& , int, const QDateTime& ){
     QArray<int> ints(0);
     return ints;
 }

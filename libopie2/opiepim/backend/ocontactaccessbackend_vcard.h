@@ -13,11 +13,19 @@
  * ToDo:
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.h,v 1.4 2002-12-07 13:26:22 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_vcard.h,v 1.5 2003-03-21 10:33:09 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_vcard.h,v $
- * Revision 1.4  2002-12-07 13:26:22  eilers
+ * Revision 1.5  2003-03-21 10:33:09  eilers
+ * Merged speed optimized xml backend for contacts to main.
+ * Added QDateTime to querybyexample. For instance, it is now possible to get
+ * all Birthdays/Anniversaries between two dates. This should be used
+ * to show all birthdays in the datebook..
+ * This change is sourcecode backward compatible but you have to upgrade
+ * the binaries for today-addressbook.
+ *
+ * Revision 1.4  2002/12/07 13:26:22  eilers
  * Fixing bug in storing anniversary..
  *
  * Revision 1.3  2002/11/13 14:14:51  eilers
@@ -54,7 +62,7 @@ class OContactAccessBackend_VCard : public OContactAccessBackend {
 	
 	OContact find ( int uid ) const;
 	QArray<int> allRecords() const;
-	QArray<int> queryByExample ( const OContact &query, int settings );
+	QArray<int> queryByExample ( const OContact &query, int settings, const QDateTime& d = QDateTime() );
 	QArray<int> matchRegexp(  const QRegExp &r ) const;
 
 	const uint querySettings();

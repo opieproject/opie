@@ -13,7 +13,7 @@ public:
     bool save();
 
     QArray<int> allRecords()const;
-    QArray<int> queryByExample( const OTodo& t, int sort );
+    QArray<int> queryByExample( const OTodo& t, int sort, const QDateTime& d = QDateTime() );
     QArray<int> effectiveToDos( const QDate& start,
                                 const QDate& end,
                                 bool includeNoDates );

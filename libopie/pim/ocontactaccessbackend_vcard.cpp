@@ -13,11 +13,19 @@
  * ToDo:
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.8 2003-02-21 16:52:49 zecke Exp $
+ * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.9 2003-03-21 10:33:09 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_vcard.cpp,v $
- * Revision 1.8  2003-02-21 16:52:49  zecke
+ * Revision 1.9  2003-03-21 10:33:09  eilers
+ * Merged speed optimized xml backend for contacts to main.
+ * Added QDateTime to querybyexample. For instance, it is now possible to get
+ * all Birthdays/Anniversaries between two dates. This should be used
+ * to show all birthdays in the datebook..
+ * This change is sourcecode backward compatible but you have to upgrade
+ * the binaries for today-addressbook.
+ *
+ * Revision 1.8  2003/02/21 16:52:49  zecke
  * -Remove old Todo classes they're deprecated and today I already using the
  * new API
  * -Guard against self assignment in OTodo
@@ -189,7 +197,7 @@ QArray<int> OContactAccessBackend_VCard::allRecords() const
 }
 
 // Not implemented
-QArray<int> OContactAccessBackend_VCard::queryByExample ( const OContact&, int )
+QArray<int> OContactAccessBackend_VCard::queryByExample ( const OContact&, int, const QDateTime& )
 {
 	QArray<int> ar(0);
 	return ar;

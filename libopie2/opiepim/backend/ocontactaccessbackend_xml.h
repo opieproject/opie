@@ -13,11 +13,25 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.12 2003-01-03 16:58:03 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.h,v 1.13 2003-03-21 10:33:09 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.12  2003-01-03 16:58:03  eilers
+ * Revision 1.13  2003-03-21 10:33:09  eilers
+ * Merged speed optimized xml backend for contacts to main.
+ * Added QDateTime to querybyexample. For instance, it is now possible to get
+ * all Birthdays/Anniversaries between two dates. This should be used
+ * to show all birthdays in the datebook..
+ * This change is sourcecode backward compatible but you have to upgrade
+ * the binaries for today-addressbook.
+ *
+ * Revision 1.12.2.2  2003/02/11 12:17:28  eilers
+ * Speed optimization. Removed the sequential search loops.
+ *
+ * Revision 1.12.2.1  2003/02/09 15:05:01  eilers
+ * Nothing happened.. Just some cleanup before I will start..
+ *
+ * Revision 1.12  2003/01/03 16:58:03  eilers
  * Reenable debug output
  *
  * Revision 1.11  2003/01/03 12:31:28  eilers
@@ -63,681 +77,68 @@
 #ifndef _OContactAccessBackend_XML_
 #define _OContactAccessBackend_XML_
 
-#include <qasciidict.h>
-#include <qdatetime.h>
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qregexp.h>
-#include <qarray.h>
-#include <qmap.h>
-#include <qdatetime.h> 
-
-#include <qpe/global.h>
-
-#include <opie/xmltree.h>
 #include "ocontactaccessbackend.h"
 #include "ocontactaccess.h"
 
-#include <stdlib.h>
-#include <errno.h>
-
-using namespace Opie;
+#include <qlist.h>
+#include <qdict.h>
 
 /* the default xml implementation */
 class OContactAccessBackend_XML : public OContactAccessBackend {
  public:
-	OContactAccessBackend_XML ( QString appname, QString filename = 0l ):
-		m_changed( false )
-		{
-			m_appName = appname;
-			
-			/* Set journalfile name ... */
-			m_journalName = getenv("HOME");
-			m_journalName +="/.abjournal" + appname;
-			
-			/* Expecting to access the default filename if nothing else is set */
-			if ( filename.isEmpty() ){
-				m_fileName = Global::applicationFileName( "addressbook","addressbook.xml" );
-			} else
-				m_fileName = filename;
-			
-			/* Load Database now */
-			load ();
-		}
+	OContactAccessBackend_XML ( QString appname, QString filename = 0l );
 	
-	bool save() {
-
-		if ( !m_changed )
-			return true;
-
-		QString strNewFile = m_fileName + ".new";
-		QFile f( strNewFile );
-		if ( !f.open( IO_WriteOnly|IO_Raw ) )
-			return false;
-		
-		int total_written;
-		QString out;
-		out = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE Addressbook ><AddressBook>\n"
-			" <Groups>\n"
-			" </Groups>\n"
-			" <Contacts>\n";
-		//QValueList<Contact>::iterator it;
-		QValueListConstIterator<OContact> it;
-		for ( it = m_contactList.begin(); it != m_contactList.end(); ++it ) {
-			out += "<Contact ";
-			(*it).save( out );
-			out += "/>\n";
-			QCString cstr = out.utf8();
-			total_written = f.writeBlock( cstr.data(), cstr.length() );
-			if ( total_written != int(cstr.length()) ) {
-				f.close();
-				QFile::remove( strNewFile );
-				return false;
-			}
-			out = "";
-		}
-		out += " </Contacts>\n</AddressBook>\n";
-		
-		QCString cstr = out.utf8();
-		total_written = f.writeBlock( cstr.data(), cstr.length() );
-		if ( total_written != int( cstr.length() ) ) {
-			f.close();
-			QFile::remove( strNewFile );
-			return false;
-		}
-		f.close();
-		
-		// move the file over, I'm just going to use the system call
-		// because, I don't feel like using QDir.
-		if ( ::rename( strNewFile.latin1(), m_fileName.latin1() ) < 0 ) {
-			qWarning( "problem renaming file %s to %s, errno: %d",
-				  strNewFile.latin1(), m_journalName.latin1(), errno );
-			// remove the tmp file...
-			QFile::remove( strNewFile );
-		}
-		
-		/* The journalfile should be removed now... */
-		removeJournal();
-
-		m_changed = false;
-		return true;
-	}
+	bool save();
 	
-	bool load () {
-		m_contactList.clear();
-		
-		/* Load XML-File and journal if it exists */
-		if ( !load ( m_fileName, false ) )
-			return false;
-		/* The returncode of the journalfile is ignored due to the
-		 * fact that it does not exist when this class is instantiated !
-		 * But there may such a file exist, if the application crashed.
-		 * Therefore we try to load it to get the changes before the #
-		 * crash happened...
-		 */
-		load (m_journalName, true);
-		
-		return true;
-	}
+	bool load ();
 
-	void clear () {
-		m_contactList.clear();
-		m_changed = false;
-
-	}
+	void clear ();
 	
-	bool wasChangedExternally()
-		{
-			QFileInfo fi( m_fileName );
-			
-			QDateTime lastmod = fi.lastModified ();
-			
-			return (lastmod != m_readtime);
-		}
+	bool wasChangedExternally();
 	
-	QArray<int> allRecords() const {
-		QArray<int> uid_list( m_contactList.count() );
-		
-		uint counter = 0; 
-		QValueListConstIterator<OContact> it;
-		for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-			uid_list[counter++] = (*it).uid();
-		}
-		
-		return ( uid_list );
-	}
+	QArray<int> allRecords() const;
 	
-	OContact find ( int uid ) const
-		{
-			bool found = false;
-			OContact foundContact; //Create empty contact
-
-			QValueListConstIterator<OContact> it;
-			for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-				if ((*it).uid() == uid){
-					found = true;
-					break;
-				}
-			}
-			if ( found ){
-				foundContact = *it;
-			}
-			
-			return ( foundContact );
-		}
+	OContact find ( int uid ) const;
 	
-	QArray<int> queryByExample ( const OContact &query, int settings ){
-		
-		QArray<int> m_currentQuery( m_contactList.count() );
-		QValueListConstIterator<OContact> it;
-		uint arraycounter = 0;
-		
-		for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-			/* Search all fields and compare them with query object. Store them into list
-			 * if all fields matches.
-			 */
-			QDate* queryDate = 0l;
-			QDate* checkDate = 0l;
-			bool allcorrect = true;
-			for ( int i = 0; i < Qtopia::Groups; i++ ) {
-				// Birthday and anniversary are special nonstring fields and should
-				// be handled specially
-				switch ( i ){
-				case Qtopia::Birthday:
-					queryDate = new QDate( query.birthday() );
-					checkDate = new QDate( (*it).birthday() );
-				case Qtopia::Anniversary:
-					if ( queryDate == 0l ){
-						queryDate = new QDate( query.anniversary() );
-						checkDate = new QDate( (*it).anniversary() );
-					}
-					
-					if ( queryDate->isValid() ){
-						if(  checkDate->isValid() ){
-							if ( settings & OContactAccess::DateYear ){
-								if ( queryDate->year() != checkDate->year() )
-									allcorrect = false;
-							} 
-							if ( settings & OContactAccess::DateMonth ){
-								if ( queryDate->month() != checkDate->month() )
-									allcorrect = false;
-							} 
-							if ( settings & OContactAccess::DateDay ){
-								if ( queryDate->day() != checkDate->day() )
-									allcorrect = false;
-							} 
-							if ( settings & OContactAccess::DateDiff ) {
-								QDate current = QDate::currentDate();
-								// We have to equalize the year, otherwise
-								// the search will fail..
-								checkDate->setYMD( current.year(), 
-										   checkDate->month(), 
-										   checkDate->day() );
-								if ( *checkDate < current )
-									checkDate->setYMD( current.year()+1, 
-											   checkDate->month(), 
-											   checkDate->day() );
-								qWarning("Checking if %s is between %s and %s ! ", 
-									 checkDate->toString().latin1(),
-									 current.toString().latin1(), 
-									 queryDate->toString().latin1() );
-								if ( current.daysTo( *queryDate ) > 0 ){
-									if ( !( ( *checkDate >= current ) && 
-										( *checkDate <= *queryDate ) ) ){
-										allcorrect = false;
-										qWarning (" Nope!..");
-									}
-								}
-							}
-						} else{
-							// checkDate is invalid. Therfore this entry is always rejected
-							allcorrect = false;
-						}
-					}
+	QArray<int> queryByExample ( const OContact &query, int settings, const QDateTime& d = QDateTime() );
 
-					delete queryDate;
-					queryDate = 0l;
-					delete checkDate;
-					checkDate = 0l;
-					break;
-				default:
-					/* Just compare fields which are not empty in the query object */
-					if ( !query.field(i).isEmpty() ){
-						switch ( settings & ~( OContactAccess::IgnoreCase
-								       | OContactAccess::DateDiff
-								       | OContactAccess::DateYear
-								       | OContactAccess::DateMonth
-								       | OContactAccess::DateDay
-								       | OContactAccess::MatchOne 
-								      ) ){
-
-						case OContactAccess::RegExp:{
-							QRegExp expr ( query.field(i),
-								       !(settings & OContactAccess::IgnoreCase),
-								       false );
-							if ( expr.find ( (*it).field(i), 0 ) == -1 )
-								allcorrect = false;
-						}
-							break;
-						case OContactAccess::WildCards:{
-							QRegExp expr ( query.field(i),
-								       !(settings & OContactAccess::IgnoreCase),
-								       true );
-							if ( expr.find ( (*it).field(i), 0 ) == -1 )
-								allcorrect = false;
-						}
-							break;
-						case OContactAccess::ExactMatch:{
-							if (settings & OContactAccess::IgnoreCase){
-								if ( query.field(i).upper() !=
-								     (*it).field(i).upper() )
-									allcorrect = false;
-							}else{
-								if ( query.field(i) != (*it).field(i) )
-									allcorrect = false;
-							}
-						}
-							break;
-						}
-					}
-				}
-			}
-			if ( allcorrect ){
-				m_currentQuery[arraycounter++] = (*it).uid();
-			}
-		}
-			
-		// Shrink to fit..
-		m_currentQuery.resize(arraycounter);
+	QArray<int> matchRegexp(  const QRegExp &r ) const;
 	
-		return m_currentQuery;
-	}
-
-	QArray<int> matchRegexp(  const QRegExp &r ) const{
-		QArray<int> m_currentQuery( m_contactList.count() );
-		QValueListConstIterator<OContact> it;
-		uint arraycounter = 0;
-		
-		for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-			if ( (*it).match( r ) ){
-				m_currentQuery[arraycounter++] = (*it).uid();
-			}
-			
-		}
-		// Shrink to fit..
-		m_currentQuery.resize(arraycounter);
-
-		return m_currentQuery;
-	}
+	const uint querySettings();
 	
-	const uint querySettings()
-		{
-			return ( OContactAccess::WildCards
-				 | OContactAccess::IgnoreCase
-				 | OContactAccess::RegExp
-				 | OContactAccess::ExactMatch 
-				 | OContactAccess::DateDiff
-				 | OContactAccess::DateYear
-				 | OContactAccess::DateMonth
-				 | OContactAccess::DateDay
-				);
-		}
-	
-	bool hasQuerySettings (uint querySettings) const
-		{
-			/* OContactAccess::IgnoreCase, DateDiff, DateYear, DateMonth, DateDay 
-			 * may be added with any of the other settings. IgnoreCase should never used alone.
-			 * Wildcards, RegExp, ExactMatch should never used at the same time...
-			 */
-
-			if ( querySettings == OContactAccess::IgnoreCase ) 
-				return false;
-
-			switch ( querySettings & ~( OContactAccess::IgnoreCase
-						    | OContactAccess::DateDiff
-						    | OContactAccess::DateYear
-						    | OContactAccess::DateMonth
-						    | OContactAccess::DateDay
-						  ) 
-			       ){
-			case OContactAccess::RegExp:
-				return ( true );
-			case OContactAccess::WildCards:
-				return ( true );
-			case OContactAccess::ExactMatch:
-				return ( true );
-			default:
-				return ( false );
-			}
-		}
+	bool hasQuerySettings (uint querySettings) const;
 	
 	// Currently only asc implemented.. 
-	QArray<int> sorted( bool asc,  int , int ,  int ) 
-		{
-			QMap<QString, int> nameToUid;
-			QStringList names;
-			QArray<int> m_currentQuery( m_contactList.count() );
-
-			// First fill map and StringList with all Names 
-			// Afterwards sort namelist and use map to fill array to return..
-			QValueListConstIterator<OContact> it;
-			for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-				names.append( (*it).fileAs() + QString::number( (*it).uid() ) );
-				nameToUid.insert( (*it).fileAs() + QString::number( (*it).uid() ), (*it).uid() );
-			}
-			names.sort();
-
-			int i = 0;
-			if ( asc ){
-				for ( QStringList::Iterator it = names.begin(); it != names.end(); ++it )
-					m_currentQuery[i++] = nameToUid[ (*it) ];
-			}else{
-				for ( QStringList::Iterator it = names.end(); it != names.begin(); --it )
-					m_currentQuery[i++] = nameToUid[ (*it) ];
-			}
-			
-			return m_currentQuery;
-			
-		}
-	bool add ( const OContact &newcontact )
-		{
-			//qWarning("odefaultbackend: ACTION::ADD");
-			updateJournal (newcontact, ACTION_ADD);
-			addContact_p( newcontact );
-			
-			m_changed = true;
-
-			return true;
-		}
+	QArray<int> sorted( bool asc,  int , int ,  int );
+	bool add ( const OContact &newcontact );
 	
-	bool replace ( const OContact &contact )
-		{
-			m_changed = true;
-
-			bool found = false;
-			
-			QValueListIterator<OContact> it;
-			for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-				if ( (*it).uid() == contact.uid() ){
-					found = true;
-					break;
-				}
-			}
-			if (found) {
-				updateJournal (contact, ACTION_REPLACE);
-				m_contactList.remove (it);
-				m_contactList.append (contact);
-				return true;
-			} else
-				return false;
-		}
+	bool replace ( const OContact &contact );
 	
-	bool remove ( int uid )
-		{
-			m_changed = true;
-
-			bool found = false;
-			QValueListIterator<OContact> it;
-			for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-				if ((*it).uid() == uid){
-					found = true;
-					break;
-				}
-			}
-			if (found) {
-				updateJournal ( *it, ACTION_REMOVE);
-				m_contactList.remove (it);
-				return true;
-			} else
-				return false;
-		}
-	
-	bool reload(){
-		/* Reload is the same as load in this implementation */
-		return ( load() );
-	}
+	bool remove ( int uid );
+	bool reload();
 	
  private:
 
 	enum journal_action { ACTION_ADD, ACTION_REMOVE, ACTION_REPLACE };
 
-	void addContact_p( const OContact &newcontact ){
-		m_contactList.append (newcontact);
-	}
+	void addContact_p( const OContact &newcontact );
 	
 	/* This function loads the xml-database and the journalfile */
-	bool load( const QString filename, bool isJournal ) {
-		
-		/* We use the time of the last read to check if the file was
-		 * changed externally.
-		 */
-		if ( !isJournal ){
-			QFileInfo fi( filename );
-			m_readtime = fi.lastModified ();
-		}
-		
-		const int JOURNALACTION = Qtopia::Notes + 1;
-		const int JOURNALROW = JOURNALACTION + 1;
-		
-		bool foundAction = false;
-		journal_action action = ACTION_ADD;
-		int journalKey = 0;
-		QMap<int, QString> contactMap;
-		QMap<QString, QString> customMap;
-		QMap<QString, QString>::Iterator customIt;
-		QAsciiDict<int> dict( 47 );
-		
-		dict.setAutoDelete( TRUE );
-		dict.insert( "Uid", new int(Qtopia::AddressUid) );
-		dict.insert( "Title", new int(Qtopia::Title) );
-		dict.insert( "FirstName", new int(Qtopia::FirstName) );
-		dict.insert( "MiddleName", new int(Qtopia::MiddleName) );
-		dict.insert( "LastName", new int(Qtopia::LastName) );
-		dict.insert( "Suffix", new int(Qtopia::Suffix) );
-		dict.insert( "FileAs", new int(Qtopia::FileAs) );
-		dict.insert( "Categories", new int(Qtopia::AddressCategory) );
-		dict.insert( "DefaultEmail", new int(Qtopia::DefaultEmail) );
-		dict.insert( "Emails", new int(Qtopia::Emails) );
-		dict.insert( "HomeStreet", new int(Qtopia::HomeStreet) );
-		dict.insert( "HomeCity", new int(Qtopia::HomeCity) );
-		dict.insert( "HomeState", new int(Qtopia::HomeState) );
-		dict.insert( "HomeZip", new int(Qtopia::HomeZip) );
-		dict.insert( "HomeCountry", new int(Qtopia::HomeCountry) );
-		dict.insert( "HomePhone", new int(Qtopia::HomePhone) );
-		dict.insert( "HomeFax", new int(Qtopia::HomeFax) );
-		dict.insert( "HomeMobile", new int(Qtopia::HomeMobile) );
-		dict.insert( "HomeWebPage", new int(Qtopia::HomeWebPage) );
-		dict.insert( "Company", new int(Qtopia::Company) );
-		dict.insert( "BusinessStreet", new int(Qtopia::BusinessStreet) );
-		dict.insert( "BusinessCity", new int(Qtopia::BusinessCity) );
-		dict.insert( "BusinessState", new int(Qtopia::BusinessState) );
-		dict.insert( "BusinessZip", new int(Qtopia::BusinessZip) );
-		dict.insert( "BusinessCountry", new int(Qtopia::BusinessCountry) );
-		dict.insert( "BusinessWebPage", new int(Qtopia::BusinessWebPage) );
-		dict.insert( "JobTitle", new int(Qtopia::JobTitle) );
-		dict.insert( "Department", new int(Qtopia::Department) );
-		dict.insert( "Office", new int(Qtopia::Office) );
-		dict.insert( "BusinessPhone", new int(Qtopia::BusinessPhone) );
-		dict.insert( "BusinessFax", new int(Qtopia::BusinessFax) );
-		dict.insert( "BusinessMobile", new int(Qtopia::BusinessMobile) );
-		dict.insert( "BusinessPager", new int(Qtopia::BusinessPager) );
-		dict.insert( "Profession", new int(Qtopia::Profession) );
-		dict.insert( "Assistant", new int(Qtopia::Assistant) );
-		dict.insert( "Manager", new int(Qtopia::Manager) );
-		dict.insert( "Spouse", new int(Qtopia::Spouse) );
-		dict.insert( "Children", new int(Qtopia::Children) );
-		dict.insert( "Gender", new int(Qtopia::Gender) );
-		dict.insert( "Birthday", new int(Qtopia::Birthday) );
-		dict.insert( "Anniversary", new int(Qtopia::Anniversary) );
-		dict.insert( "Nickname", new int(Qtopia::Nickname) );
-		dict.insert( "Notes", new int(Qtopia::Notes) );
-		dict.insert( "action", new int(JOURNALACTION) );
-		dict.insert( "actionrow", new int(JOURNALROW) );
-		
-		//qWarning( "OContactDefaultBackEnd::loading %s", filename.latin1() );
-		
-		XMLElement *root = XMLElement::load( filename );
-		if(root != 0l ){ // start parsing
-			/* Parse all XML-Elements and put the data into the
-			 * Contact-Class
-			 */
-			XMLElement *element = root->firstChild();
-			//qWarning("OContactAccess::load tagName(): %s", root->tagName().latin1() );
-			element = element->firstChild();
-			
-			/* Search Tag "Contacts" which is the parent of all Contacts */
-			while( element && !isJournal ){
-				if( element->tagName() != QString::fromLatin1("Contacts") ){
-					//qWarning ("OContactDefBack::Searching for Tag \"Contacts\"! Found: %s",
-					//	  element->tagName().latin1());
-					element = element->nextChild();
-				} else {
-					element = element->firstChild();
-					break;
-				}
-			}
-			/* Parse all Contacts and ignore unknown tags */
-			while( element ){
-				if( element->tagName() != QString::fromLatin1("Contact") ){
-					//qWarning ("OContactDefBack::Searching for Tag \"Contact\"! Found: %s",
-					//	  element->tagName().latin1());
-					element = element->nextChild();
-					continue;
-				}
-				/* Found alement with tagname "contact", now parse and store all
-				 * attributes contained
-				 */
-				//qWarning("OContactDefBack::load element tagName() : %s",
-				//	 element->tagName().latin1() );
-				QString dummy;
-				foundAction = false;
-				
-				XMLElement::AttributeMap aMap = element->attributes();
-				XMLElement::AttributeMap::Iterator it;
-				contactMap.clear();
-				customMap.clear();
-				for( it = aMap.begin(); it != aMap.end(); ++it ){
-					// qWarning ("Read Attribute: %s=%s", it.key().latin1(),it.data().latin1());
-					
-					int *find = dict[ it.key() ];
-					/* Unknown attributes will be stored as "Custom" elements */
-					if ( !find ) {
-						qWarning("Attribute %s not known.", it.key().latin1());
-						//contact.setCustomField(it.key(), it.data());
-						customMap.insert( it.key(),  it.data() );
-						continue;
-					}
-					
-					/* Check if special conversion is needed and add attribute
-					 * into Contact class
-					 */
-					switch( *find ) {
-						/*
-						  case Qtopia::AddressUid:
-						  contact.setUid( it.data().toInt() );
-						  break;
-						  case Qtopia::AddressCategory:
-						  contact.setCategories( Qtopia::Record::idsFromString( it.data( )));
-						  break;
-						*/
-					case JOURNALACTION:
-						action = journal_action(it.data().toInt());
-						foundAction = true;
-						qWarning ("ODefBack(journal)::ACTION found: %d", action);
-						break;
-					case JOURNALROW:
-						journalKey = it.data().toInt();
-						break;
-					default: // no conversion needed add them to the map
-						contactMap.insert( *find, it.data() );
-						break;
-					}
-				}
-				/* now generate the Contact contact */
-				OContact contact( contactMap );
-				
-				for (customIt = customMap.begin(); customIt != customMap.end(); ++customIt ) {
-					contact.setCustomField( customIt.key(),  customIt.data() );
-				}
-				
-				if (foundAction){
-					foundAction = false;
-					switch ( action ) {
-					case ACTION_ADD:
-						addContact_p (contact);
-						break;
-					case ACTION_REMOVE:
-						if ( !remove (contact.uid()) )
-							qWarning ("ODefBack(journal)::Unable to remove uid: %d",
-								  contact.uid() );
-						break;
-					case ACTION_REPLACE:
-						if ( !replace ( contact ) )
-							qWarning ("ODefBack(journal)::Unable to replace uid: %d",
-								  contact.uid() );
-						break;
-					default:
-						qWarning ("Unknown action: ignored !");
-						break;
-					}
-				}else{
-					/* Add contact to list */
-					addContact_p (contact);
-				}
-				
-				/* Move to next element */
-				element = element->nextChild();
-			}
-		}else {
-			qWarning("ODefBack::could not load");
-		}
-		delete root;
-		qWarning("returning from loading" );
-		return true;
-	}
+	bool load( const QString filename, bool isJournal );
 	
 	
-	void updateJournal( const OContact& cnt,
-			    journal_action action ) {
-		QFile f( m_journalName );
-		bool created = !f.exists();
-		if ( !f.open(IO_WriteOnly|IO_Append) )
-			return;
-		
-		QString buf;
-		QCString str;
-		
-		// if the file was created, we have to set the Tag "<CONTACTS>" to
-		// get a XML-File which is readable by our parser.
-		// This is just a cheat, but better than rewrite the parser.
-		if ( created ){
-			buf = "<Contacts>";
-			QCString cstr = buf.utf8();
-			f.writeBlock( cstr.data(), cstr.length() );
-		}
-		
-		buf = "<Contact ";
-		cnt.save( buf );
-		buf += " action=\"" + QString::number( (int)action ) + "\" ";
-		buf += "/>\n";
-		QCString cstr = buf.utf8();
-		f.writeBlock( cstr.data(), cstr.length() );
-	}
-	
-	void removeJournal()
-		{
-			QFile f ( m_journalName );
-			if ( f.exists() )
-				f.remove();
-		}
+	void updateJournal( const OContact& cnt, journal_action action );
+	void removeJournal();
 	
  protected:
 	bool m_changed;
 	QString m_journalName;
 	QString m_fileName;
 	QString m_appName;
-	QValueList<OContact> m_contactList;
+	QList<OContact> m_contactList;
 	QDateTime m_readtime;
+
+	QDict<OContact> m_uidToContact;
 };
 
 #endif

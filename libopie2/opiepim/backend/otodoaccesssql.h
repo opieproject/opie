@@ -18,7 +18,7 @@ public:
     bool save();
     QArray<int> allRecords()const;
 
-    QArray<int> queryByExample( const OTodo& t, int sort );
+    QArray<int> queryByExample( const OTodo& t, int settings, const QDateTime& d = QDateTime() );
     OTodo find(int uid)const;
     OTodo find(int uid, const QArray<int>&, uint cur, Frontend::CacheDirection )const;
     void clear();

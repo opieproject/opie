@@ -24,7 +24,7 @@ public:
     bool save();
 
     QArray<int> allRecords()const;
-    QArray<int> queryByExample( const OTodo&, int querysettings );
+    QArray<int> queryByExample( const OTodo&, int querysettings, const QDateTime& d = QDateTime() );
     OTodo find( int uid )const;
     void clear();
     bool add( const OTodo& );

@@ -255,7 +255,7 @@ QArray<int> OTodoAccessXML::allRecords()const {
     }
     return ids;
 }
-QArray<int> OTodoAccessXML::queryByExample( const OTodo&, int ) {
+QArray<int> OTodoAccessXML::queryByExample( const OTodo&, int, const QDateTime& ) {
     QArray<int> ids(0);
     return ids;
 }

@@ -13,11 +13,25 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.1 2003-02-09 15:05:01 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.2 2003-03-21 10:33:09 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.cpp,v $
- * Revision 1.1  2003-02-09 15:05:01  eilers
+ * Revision 1.2  2003-03-21 10:33:09  eilers
+ * Merged speed optimized xml backend for contacts to main.
+ * Added QDateTime to querybyexample. For instance, it is now possible to get
+ * all Birthdays/Anniversaries between two dates. This should be used
+ * to show all birthdays in the datebook..
+ * This change is sourcecode backward compatible but you have to upgrade
+ * the binaries for today-addressbook.
+ *
+ * Revision 1.1.2.2  2003/02/11 12:17:28  eilers
+ * Speed optimization. Removed the sequential search loops.
+ *
+ * Revision 1.1.2.1  2003/02/10 15:31:38  eilers
+ * Writing offsets to debug output..
+ *
+ * Revision 1.1  2003/02/09 15:05:01  eilers
  * Nothing happened.. Just some cleanup before I will start..
  *
  * Revision 1.12  2003/01/03 16:58:03  eilers
@@ -89,6 +103,11 @@ using namespace Opie;
 OContactAccessBackend_XML::OContactAccessBackend_XML ( QString appname, QString filename = 0l ):
 	m_changed( false )
 {
+	// Just m_contactlist should call delete if an entry
+	// is removed.
+	m_contactList.setAutoDelete( true );
+	m_uidToContact.setAutoDelete( false );
+
 	m_appName = appname;
 	
 	/* Set journalfile name ... */
@@ -117,19 +136,29 @@ bool OContactAccessBackend_XML::save()
 		return false;
 	
 	int total_written;
+	int idx_offset = 0;
 	QString out;
+
+	// Write Header
 	out = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE Addressbook ><AddressBook>\n"
 		" <Groups>\n"
 		" </Groups>\n"
 		" <Contacts>\n";
-	//QValueList<Contact>::iterator it;
-	QValueListConstIterator<OContact> it;
-	for ( it = m_contactList.begin(); it != m_contactList.end(); ++it ) {
+	QCString cstr = out.utf8();
+	f.writeBlock( cstr.data(), cstr.length() );
+	idx_offset += cstr.length();
+	out = "";
+
+	// Write all contacts
+	QListIterator<OContact> it( m_contactList );
+	for ( ; it.current(); ++it ) {
+		qWarning(" Uid %d at Offset: %x", (*it)->uid(), idx_offset );
 		out += "<Contact ";
-		(*it).save( out );
+		(*it)->save( out );
 		out += "/>\n";
-		QCString cstr = out.utf8();
+		cstr = out.utf8();
 		total_written = f.writeBlock( cstr.data(), cstr.length() );
+		idx_offset += cstr.length();
 		if ( total_written != int(cstr.length()) ) {
 			f.close();
 			QFile::remove( strNewFile );
@@ -139,7 +168,8 @@ bool OContactAccessBackend_XML::save()
 	}
 	out += " </Contacts>\n</AddressBook>\n";
 	
-	QCString cstr = out.utf8();
+	// Write Footer
+	cstr = out.utf8();
 	total_written = f.writeBlock( cstr.data(), cstr.length() );
 	if ( total_written != int( cstr.length() ) ) {
 		f.close();
@@ -167,6 +197,7 @@ bool OContactAccessBackend_XML::save()
 bool OContactAccessBackend_XML::load () 
 {
 	m_contactList.clear();
+	m_uidToContact.clear();
 	
 	/* Load XML-File and journal if it exists */
 	if ( !load ( m_fileName, false ) )
@@ -185,8 +216,9 @@ bool OContactAccessBackend_XML::load ()
 void OContactAccessBackend_XML::clear () 
 {
 	m_contactList.clear();
+	m_uidToContact.clear();
+
 	m_changed = false;
-	
 }
 
 bool OContactAccessBackend_XML::wasChangedExternally()
@@ -203,9 +235,9 @@ QArray<int> OContactAccessBackend_XML::allRecords() const
 	QArray<int> uid_list( m_contactList.count() );
 	
 	uint counter = 0; 
-	QValueListConstIterator<OContact> it;
-	for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-		uid_list[counter++] = (*it).uid();
+	QListIterator<OContact> it( m_contactList );
+	for( ; it.current(); ++it ){
+		uid_list[counter++] = (*it)->uid();
 	}
 	
 	return ( uid_list );
@@ -213,31 +245,26 @@ QArray<int> OContactAccessBackend_XML::allRecords() const
 
 OContact OContactAccessBackend_XML::find ( int uid ) const
 {
-	bool found = false;
 	OContact foundContact; //Create empty contact
 	
-	QValueListConstIterator<OContact> it;
-	for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-		if ((*it).uid() == uid){
-			found = true;
-			break;
-		}
-	}
+	OContact* found = m_uidToContact.find( QString().setNum( uid ) );
+
 	if ( found ){
-		foundContact = *it;
+		foundContact = *found;
 	}
 	
 	return ( foundContact );
 }
 
-QArray<int> OContactAccessBackend_XML::queryByExample ( const OContact &query, int settings )
+QArray<int> OContactAccessBackend_XML::queryByExample ( const OContact &query, int settings, 
+							const QDateTime& d )
 {
 	
 	QArray<int> m_currentQuery( m_contactList.count() );
-	QValueListConstIterator<OContact> it;
+	QListIterator<OContact> it( m_contactList );
 	uint arraycounter = 0;
 	
-	for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
+	for( ; it.current(); ++it ){
 		/* Search all fields and compare them with query object. Store them into list
 		 * if all fields matches.
 		 */
@@ -250,11 +277,11 @@ QArray<int> OContactAccessBackend_XML::queryByExample ( const OContact &query, i
 			switch ( i ){
 			case Qtopia::Birthday:
 				queryDate = new QDate( query.birthday() );
-				checkDate = new QDate( (*it).birthday() );
+				checkDate = new QDate( (*it)->birthday() );
 			case Qtopia::Anniversary:
 				if ( queryDate == 0l ){
 					queryDate = new QDate( query.anniversary() );
-					checkDate = new QDate( (*it).anniversary() );
+					checkDate = new QDate( (*it)->anniversary() );
 				}
 				
 				if ( queryDate->isValid() ){
@@ -272,7 +299,15 @@ QArray<int> OContactAccessBackend_XML::queryByExample ( const OContact &query, i
 								allcorrect = false;
 						} 
 						if ( settings & OContactAccess::DateDiff ) {
-							QDate current = QDate::currentDate();
+							QDate current;
+							// If we get an additional date, we
+							// will take this date instead of
+							// the current one.. 
+							if ( !d.date().isValid() )
+								current = QDate::currentDate();
+							else
+								current = d.date();
+
 							// We have to equalize the year, otherwise
 							// the search will fail..
 							checkDate->setYMD( current.year(), 
@@ -282,6 +317,10 @@ QArray<int> OContactAccessBackend_XML::queryByExample ( const OContact &query, i
 								checkDate->setYMD( current.year()+1, 
 										   checkDate->month(), 
 										   checkDate->day() );
+
+							// Check whether the birthday/anniversary date is between
+							// the current/given date and the maximum date
+							// ( maximum time range ) !
 							qWarning("Checking if %s is between %s and %s ! ", 
 								 checkDate->toString().latin1(),
 								 current.toString().latin1(), 
@@ -295,7 +334,7 @@ QArray<int> OContactAccessBackend_XML::queryByExample ( const OContact &query, i
 							}
 						}
 					} else{
-						// checkDate is invalid. Therfore this entry is always rejected
+						// checkDate is invalid. Therefore this entry is always rejected
 						allcorrect = false;
 					}
 				}
@@ -320,7 +359,7 @@ QArray<int> OContactAccessBackend_XML::queryByExample ( const OContact &query, i
 						QRegExp expr ( query.field(i),
 							       !(settings & OContactAccess::IgnoreCase),
 							       false );
-						if ( expr.find ( (*it).field(i), 0 ) == -1 )
+						if ( expr.find ( (*it)->field(i), 0 ) == -1 )
 							allcorrect = false;
 					}
 						break;
@@ -328,17 +367,17 @@ QArray<int> OContactAccessBackend_XML::queryByExample ( const OContact &query, i
 						QRegExp expr ( query.field(i),
 							       !(settings & OContactAccess::IgnoreCase),
 							       true );
-						if ( expr.find ( (*it).field(i), 0 ) == -1 )
+						if ( expr.find ( (*it)->field(i), 0 ) == -1 )
 							allcorrect = false;
 					}
 						break;
 					case OContactAccess::ExactMatch:{
 						if (settings & OContactAccess::IgnoreCase){
 							if ( query.field(i).upper() !=
-							     (*it).field(i).upper() )
+							     (*it)->field(i).upper() )
 								allcorrect = false;
 						}else{
-							if ( query.field(i) != (*it).field(i) )
+							if ( query.field(i) != (*it)->field(i) )
 								allcorrect = false;
 						}
 					}
@@ -348,7 +387,7 @@ QArray<int> OContactAccessBackend_XML::queryByExample ( const OContact &query, i
 			}
 		}
 		if ( allcorrect ){
-			m_currentQuery[arraycounter++] = (*it).uid();
+			m_currentQuery[arraycounter++] = (*it)->uid();
 		}
 	}
 	
@@ -361,12 +400,12 @@ QArray<int> OContactAccessBackend_XML::queryByExample ( const OContact &query, i
 QArray<int> OContactAccessBackend_XML::matchRegexp(  const QRegExp &r ) const
 {
 	QArray<int> m_currentQuery( m_contactList.count() );
-	QValueListConstIterator<OContact> it;
+	QListIterator<OContact> it( m_contactList );
 	uint arraycounter = 0;
 	
-	for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-		if ( (*it).match( r ) ){
-			m_currentQuery[arraycounter++] = (*it).uid();
+	for( ; it.current(); ++it ){
+		if ( (*it)->match( r ) ){
+			m_currentQuery[arraycounter++] = (*it)->uid();
 		}
 		
 	}
@@ -426,10 +465,10 @@ QArray<int> OContactAccessBackend_XML::sorted( bool asc,  int , int ,  int )
 	
 	// First fill map and StringList with all Names 
 	// Afterwards sort namelist and use map to fill array to return..
-	QValueListConstIterator<OContact> it;
-	for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-		names.append( (*it).fileAs() + QString::number( (*it).uid() ) );
-		nameToUid.insert( (*it).fileAs() + QString::number( (*it).uid() ), (*it).uid() );
+	QListIterator<OContact> it( m_contactList );
+	for( ; it.current(); ++it ){
+		names.append( (*it)->fileAs() + QString::number( (*it)->uid() ) );
+		nameToUid.insert( (*it)->fileAs() + QString::number( (*it)->uid() ), (*it)->uid() );
 	}
 	names.sort();
 	
@@ -461,19 +500,19 @@ bool OContactAccessBackend_XML::replace ( const OContact &contact )
 {
 	m_changed = true;
 	
-	bool found = false;
-	
-	QValueListIterator<OContact> it;
-	for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-		if ( (*it).uid() == contact.uid() ){
-			found = true;
-			break;
-		}
-	}
-	if (found) {
-		updateJournal (contact, ACTION_REPLACE);
-		m_contactList.remove (it);
-		m_contactList.append (contact);
+	OContact* found = m_uidToContact.find ( QString().setNum( contact.uid() ) );
+
+	if ( found ) {
+		OContact* newCont = new OContact( contact );
+
+		updateJournal ( *newCont, ACTION_REPLACE);
+		m_contactList.removeRef ( found );
+		m_contactList.append ( newCont );
+		m_uidToContact.remove( QString().setNum( contact.uid() ) );
+		m_uidToContact.insert( QString().setNum( newCont->uid() ), newCont );
+
+		qWarning("Nur zur Sicherheit: %d == %d ?",contact.uid(), newCont->uid());
+
 		return true;
 	} else
 		return false;
@@ -483,17 +522,13 @@ bool OContactAccessBackend_XML::remove ( int uid )
 {
 	m_changed = true;
 	
-	bool found = false;
-	QValueListIterator<OContact> it;
-	for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-		if ((*it).uid() == uid){
-			found = true;
-			break;
-		}
-	}
-	if (found) {
-		updateJournal ( *it, ACTION_REMOVE);
-		m_contactList.remove (it);
+	OContact* found = m_uidToContact.find ( QString().setNum( uid ) );
+
+	if ( found ) {
+		updateJournal ( *found, ACTION_REMOVE);
+		m_contactList.removeRef ( found );
+		m_uidToContact.remove( QString().setNum( uid ) );
+
 		return true;
 	} else
 		return false;
@@ -506,7 +541,10 @@ bool OContactAccessBackend_XML::reload(){
 
 void OContactAccessBackend_XML::addContact_p( const OContact &newcontact )
 {
-	m_contactList.append (newcontact);
+	OContact* contRef = new OContact( newcontact );
+
+	m_contactList.append ( contRef );
+	m_uidToContact.insert( QString().setNum( newcontact.uid() ), contRef );
 }
 
 /* This function loads the xml-database and the journalfile */

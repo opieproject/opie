@@ -47,10 +47,10 @@ public:
     virtual QArray<int> allRecords()const = 0;
 
     /**
-     * queryByExample for T with the SortOrder
-     * sort
+     * queryByExample for T with the given Settings
+     * 
      */
-    virtual QArray<int> queryByExample( const T& t, int sort ) = 0;
+    virtual QArray<int> queryByExample( const T& t, int settings, const QDateTime& d = QDateTime() ) = 0;
 
     /**
      * find the OPimRecord with uid @param uid

@@ -185,7 +185,7 @@ QArray<int> OTodoAccessVCal::allRecords()const {
     }
     return ar;
 }
-QArray<int> OTodoAccessVCal::queryByExample( const OTodo&, int ) {
+QArray<int> OTodoAccessVCal::queryByExample( const OTodo&, int, const QDateTime& ) {
     QArray<int> ar(0);
     return ar;
 }

@@ -16,7 +16,7 @@ public:
     bool save();
 
     QArray<int> allRecords()const;
-    QArray<int> queryByExample( const OEvent&, int  );
+    QArray<int> queryByExample( const OEvent&, int, const QDateTime& d = QDateTime() );
     OEvent find( int uid )const;
     void clear();
     bool add( const OEvent& ev );

@@ -74,7 +74,7 @@ public:
      * queryByExample.
      * @see otodoaccess, ocontactaccess
      */
-    virtual List queryByExample( const T& t, int querySettings );
+    virtual List queryByExample( const T& t, int querySettings, const QDateTime& d = QDateTime() );
 
     /**
      * find the OPimRecord uid
@@ -186,8 +186,8 @@ QArray<int> OPimAccessTemplate<T>::records()const {
 }
 template <class T>
 typename OPimAccessTemplate<T>::List
-OPimAccessTemplate<T>::queryByExample( const T& t, int sortOrder ) {
-    QArray<int> ints = m_backEnd->queryByExample( t, sortOrder );
+OPimAccessTemplate<T>::queryByExample( const T& t, int settings, const QDateTime& d ) {
+    QArray<int> ints = m_backEnd->queryByExample( t, settings, d );
 
     List lis(ints, this );
     return lis;
