@@ -990,7 +990,7 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
 #ifdef FAKE_CTRL_AND_ALT
     static bool control = FALSE;
     static bool alt = FALSE;
-    // Has a keyboard with no CTRL and ALT keys, but we fake it:
+    qDebug(" Has a keyboard with no CTRL and ALT keys, but we fake it:");
     bool dele=FALSE;
     if ( e->type() == QEvent::KeyPress || e->type() == QEvent::KeyRelease ) {
   QKeyEvent* ke = (QKeyEvent*)e;
@@ -1027,10 +1027,14 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
   if ( e->type() == QEvent::KeyPress )
   {
     QKeyEvent* ke = (QKeyEvent*)e;
-
     actSel=0; // Key stroke implies a screen update, so TEWidget won't
               // know where the current selection is.
 
+//     qDebug("key pressed is 0x%x",ke->key());
+    if( ke->state() == ShiftButton && ke->key() == Key_Tab) { //lets hardcode this sucker
+//     qDebug("key pressed 2 is 0x%x",ke->key());
+    emitText("\\"); // expose
+    } else
     emit keyPressedSignal(ke); // expose
     ke->accept();
 #ifdef FAKE_CTRL_AND_ALT
