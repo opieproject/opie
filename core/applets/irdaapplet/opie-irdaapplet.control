@@ -1,9 +1,0 @@
-Files: plugins/applets/libirdaapplet.so* pics/irdaapplet/* sounds/irdaapplet/*.wav
-Priority: optional
-Section: opie/system
-Maintainer: David Woodhouse <dwmw2@infradead.org>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION.1
-Depends: opie-base ($QPE_VERSION), libopieobex
-Description: Irda Applet
- An IrDA taskbar applet for the Opie environment

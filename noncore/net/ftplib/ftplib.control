@@ -1,9 +1,0 @@
-Files: $QTDIR/lib/libftplib.*
-Priority: optional
-Section: Communications
-Maintainer: L.J. Potter <ljp@llornkcor.com> 
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: Libftp
- The ftp library for the Opie environment.

@@ -1,4 +1,0 @@
-  config CARDMON
-    boolean "cardmon"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

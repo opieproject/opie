@@ -1,4 +1,0 @@
-  config SUSPENDAPPLET
-    boolean "suspendapplet"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,9 +1,0 @@
-Files: bin/reader apps/Applications/opie-reader.desktop pics/opie-reader/*
-Priority: optional
-Section: applications
-Maintainer: Tim Wentford <timwentford@hotmail.com>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-License: GPL
-Description: E-Book reader

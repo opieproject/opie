@@ -1,4 +1,0 @@
-  config KJUMPX
-    boolean "kjumpx"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

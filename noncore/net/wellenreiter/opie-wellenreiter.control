@@ -1,9 +1,0 @@
-Files: bin/wellenreiter bin/wellenreiterd bin/orinoco_hopper pics/wellenreiter apps/Applications/wellenreiter.desktop $QTDIR/lib/libwellenreiter.*
-Priority: optional
-Section: opie/applications
-Maintainer: Michael Lauer <mickeyl@handhelds.org> 
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION), libpcap
-Description: A WaveLAN Network Monitor
- A WaveLAN Network Monitor/Sniffer for the Opie Environment.

@@ -1,5 +1,0 @@
-*.moc
-Makefile*
-moc_*
-soundsettingsbase.cpp
-soundsettingsbase.h

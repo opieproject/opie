@@ -1,9 +1,0 @@
-[Desktop Entry]
-Comment = A WaveLAN Sniffer
-Comment[de]= Ein krasser WaveLAN Sniffer
-Exec = wellenreiter
-File = wellenreiter
-Icon = wellenreiter/appicon-trans
-Name = Wellenreiter
-Type = Application
-Name[de]=Wellenreiter

@@ -1,9 +1,0 @@
-Files: bin/mail $QTDIR/lib/libmail.so* apps/1Pim/mail.desktop pics/mail/*.png sounds/mail/*.wav
-Priority: optional
-Section: opie/applications
-Maintainer: Constantin Bergemann <cbergemann@lisa.de>
-Architecture: arm
-Version: 0.0.9-$SUB_VERSION
-Depends: opie-base, libopie
-Description: An IMAP mail client
-License: LGPL
