@@ -336,7 +336,7 @@ editando las categorías.</translation>
     </message>
     <message>
         <source>Use custom rotation</source>
-        <translation>Usar rotación personal</translation>
+        <translation>Usar rotación personalizada</translation>
     </message>
 </context>
 <context>
@@ -747,31 +747,31 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished">Lun</translation>
+        <translation>Lun</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished">Mar</translation>
+        <translation>Mar</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished">Mie</translation>
+        <translation>Mie</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished">Jue</translation>
+        <translation>Jue</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished">Vie</translation>
+        <translation>Vie</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished">Sáb</translation>
+        <translation>Sáb</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished">Dom</translation>
+        <translation>Dom</translation>
     </message>
 </context>
 <context>

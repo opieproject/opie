@@ -439,7 +439,7 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>All day</source>
-        <translation>Todo el día</translation>
+        <translation>Todo</translation>
     </message>
     <message>
         <source>Time zone</source>

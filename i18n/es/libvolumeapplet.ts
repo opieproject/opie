@@ -3,7 +3,7 @@
     <name>VolumeControl</name>
     <message>
         <source>Enable Sounds for:</source>
-        <translation>Habilitar:</translation>
+        <translation>Sonido en:</translation>
     </message>
     <message>
         <source>Alarm Sound</source>
@@ -11,11 +11,11 @@
     </message>
     <message>
         <source>Key Clicks</source>
-        <translation>Teclas sonoras</translation>
+        <translation>Teclas</translation>
     </message>
     <message>
         <source>Screen Taps</source>
-        <translation>Pantalla sonora</translation>
+        <translation>Pantalla</translation>
     </message>
 </context>
 </TS>

@@ -759,7 +759,17 @@ Release Date: October 08, 2002
 This product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.
 
 http://qtopia.sitebest.com</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Sheet
+Software de hoja de cálculo para Opie
+QWDC Beta Winner (as Sheet/Qt)
+
+Desarrolado por: Serdar Ozler
+Versión 1.0.2
+Fecha de publicación: 8 de octubre de 2002
+
+Este producto está bajo licencia GPL. Es distribuible libremente. Si quiere la última versión y el código fuente, por favor visite el sitio web.
+
+http://qtopia.sitebest.com</translation>
     </message>
 </context>
 <context>

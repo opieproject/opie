@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>could not open file</source>
-        <translation>no puedo abrir fichero</translation>
+        <translation>No pude abrir fichero</translation>
     </message>
     <message>
         <source>Charging both devices</source>

@@ -22,7 +22,7 @@
     <name>AccountEditorBase</name>
     <message>
         <source>Account Editor</source>
-        <translation>Editar cuenta</translation>
+        <translation>Editar Cuenta</translation>
     </message>
     <message>
         <source>Server</source>
@@ -66,7 +66,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Org:</source>
-        <translation>&lt;b&gt;Org:</translation>
+        <translation>&lt;b&gt;Empresa:</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -132,7 +132,7 @@
     <name>AddressPickerBase</name>
     <message>
         <source>Address Picker</source>
-        <translation>Recoge direcciones</translation>
+        <translation>Listado Direcciones</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -210,7 +210,7 @@
     <name>ComposerBase</name>
     <message>
         <source>Compose Message</source>
-        <translation>Componer mensaje</translation>
+        <translation>Componer Mensaje</translation>
     </message>
     <message>
         <source>Mail</source>
@@ -226,7 +226,7 @@
     </message>
     <message>
         <source>Attach a file</source>
-        <translation>Adjuntar un fichero</translation>
+        <translation>Adjuntar fichero</translation>
     </message>
     <message>
         <source>Addressbook</source>
@@ -356,7 +356,7 @@
     </message>
     <message>
         <source>New</source>
-        <translation>Nuevo</translation>
+        <translation>Nueva</translation>
     </message>
     <message>
         <source>General</source>
@@ -372,7 +372,7 @@
     </message>
     <message>
         <source>Play sound</source>
-        <translation>Tocar sonido</translation>
+        <translation>Emitir sonido</translation>
     </message>
     <message>
         <source>&lt;b&gt;Check&amp;nbsp;every</source>
@@ -810,7 +810,7 @@ Visite http://www.lisa.de/ para informarse.
     <name>SearchDiagBase</name>
     <message>
         <source>Mail Search</source>
-        <translation>Búsqueda correo</translation>
+        <translation>Búscar Correo</translation>
     </message>
     <message>
         <source>&lt;b&gt;Search&amp;nbsp;in:</source>

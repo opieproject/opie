@@ -81,7 +81,7 @@ servidor</translation>
     </message>
     <message>
         <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup. &lt;br&gt; Rerun NTP?</source>
-        <translation type="unfinished"></translation>
+        <translation>Pidió un retardo de %1 minutos, pero sólo %2 han pasado desde la última revisión. &lt;br&gt;¿Reejecuto NTP?</translation>
     </message>
 </context>
 <context>

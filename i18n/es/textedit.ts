@@ -3,7 +3,7 @@
     <name>@default</name>
     <message>
         <source>Text Edit</source>
-        <translation>Editar Textos</translation>
+        <translation>Editor de Textos</translation>
     </message>
     <message>
         <source>Write Failed</source>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Text Editor</source>
-        <translation>Editor Textos</translation>
+        <translation>Editor de Textos</translation>
     </message>
     <message>
         <source>All</source>
@@ -31,13 +31,13 @@
     </message>
     <message>
         <source>Choose font</source>
-        <translation>Elegir letra</translation>
+        <translation>Elegir Letra</translation>
     </message>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
-        <translation>¿Realmente quiere&lt;BR&gt;&lt;B&gt;borrar&lt;/B&gt; el fichero actual
-del dico?&lt;BR&gt;¡Es &lt;B&gt;irreversible!&lt;/B&gt;</translation>
+        <translation>¿Seguro que quiere&lt;BR&gt;&lt;B&gt;borrar&lt;/B&gt; el fichero actual
+del disco?&lt;BR&gt;¡¡Es &lt;B&gt;irreversible&lt;/B&gt;!!</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -136,7 +136,7 @@ del dico?&lt;BR&gt;¡Es &lt;B&gt;irreversible!&lt;/B&gt;</translation>
     </message>
     <message>
         <source>Text Editor</source>
-        <translation>Editor Textos</translation>
+        <translation>Editor de Textos</translation>
     </message>
     <message>
         <source>.desktop File</source>

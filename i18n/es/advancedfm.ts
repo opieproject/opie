@@ -242,11 +242,11 @@ Do you really want to delete it?</source>
     </message>
     <message>
         <source>%1 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 existe. ¿Lo sobreescribo?</translation>
     </message>
     <message>
         <source>Could not copy %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>No pude copiar %1 a %2</translation>
     </message>
 </context>
 <context>

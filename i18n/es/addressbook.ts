@@ -3,7 +3,7 @@
     <name>AbTable</name>
     <message>
         <source>Full Name</source>
-        <translation>Nombre completo</translation>
+        <translation>Nombre Completo</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Mis detalles personales</translation>
+        <translation>Mis datos personales</translation>
     </message>
     <message>
         <source>View</source>
@@ -62,7 +62,7 @@
     </message>
     <message>
         <source>Edit My Personal Details</source>
-        <translation>Editar mis detalles personales</translation>
+        <translation>Editar mis datos personales</translation>
     </message>
     <message>
         <source>Edit Address</source>
@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
-        <translation>Contactos - Mis detalles personales</translation>
+        <translation>Contactos - Mis Datos Personales</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -122,7 +122,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Not Found</source>
-        <translation>No encontrado</translation>
+        <translation>No Encontrado</translation>
     </message>
     <message>
         <source>Card</source>
@@ -148,7 +148,7 @@ inténtelo de nuevo.
         <source>Unable to find a contact for this 
  search pattern!</source>
         <translation>¡Incapaz de encontrar un contacto
-para este patrón de búsqueda!</translation>
+con ese patrón de búsqueda!</translation>
     </message>
     <message>
         <source>The selected file 
@@ -310,7 +310,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Full Name...</source>
-        <translation>Nombre completo...</translation>
+        <translation>Nombre...</translation>
     </message>
     <message>
         <source>Organization</source>
@@ -342,7 +342,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Zip Code</source>
-        <translation>Cód. postal</translation>
+        <translation>Código postal</translation>
     </message>
     <message>
         <source>United States</source>
@@ -390,7 +390,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Edit Name</source>
-        <translation>Editar nombre</translation>
+        <translation>Editar Nombre</translation>
     </message>
     <message>
         <source>Contacts</source>
@@ -1170,59 +1170,59 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Afghanistan</source>
-        <translation type="unfinished"></translation>
+        <translation>Afganistán</translation>
     </message>
     <message>
         <source>Antarctica</source>
-        <translation type="unfinished"></translation>
+        <translation>Antártida</translation>
     </message>
     <message>
         <source>Armenia</source>
-        <translation type="unfinished"></translation>
+        <translation>Armenia</translation>
     </message>
     <message>
         <source>Bolivia</source>
-        <translation type="unfinished"></translation>
+        <translation>Bolivia</translation>
     </message>
     <message>
         <source>Cameroon</source>
-        <translation type="unfinished"></translation>
+        <translation>Camerún</translation>
     </message>
     <message>
         <source>Ghana</source>
-        <translation type="unfinished"></translation>
+        <translation>Ghana</translation>
     </message>
     <message>
         <source>Guadeloupe</source>
-        <translation type="unfinished"></translation>
+        <translation>Guadalupe</translation>
     </message>
     <message>
         <source>Guinea-Bissau</source>
-        <translation type="unfinished"></translation>
+        <translation>Ginea-Bisau</translation>
     </message>
     <message>
         <source>Jamaica</source>
-        <translation type="unfinished"></translation>
+        <translation>Jamaica</translation>
     </message>
     <message>
         <source>Kiribati</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiribati</translation>
     </message>
     <message>
         <source>Kyrgyzstan</source>
-        <translation type="unfinished"></translation>
+        <translation>Kyrgyzstan</translation>
     </message>
     <message>
         <source>Palestinian Sovereign Areas</source>
-        <translation type="unfinished"></translation>
+        <translation>Palestina</translation>
     </message>
     <message>
         <source>Pitcairn Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Islas Pitcairn</translation>
     </message>
     <message>
         <source>Vietnam</source>
-        <translation type="unfinished"></translation>
+        <translation>Vietnam</translation>
     </message>
 </context>
 <context>
@@ -1241,7 +1241,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Correo-e por omisión</translation>
+        <translation>Correo-e</translation>
     </message>
     <message>
         <source>Emails</source>

@@ -225,7 +225,7 @@ Esta área le permite seleccionar un aplicación y qué funciones desea deshabil
     </message>
     <message>
         <source>Appearance Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración de Apariencia</translation>
     </message>
 </context>
 <context>

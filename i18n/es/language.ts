@@ -18,7 +18,7 @@
     </message>
     <message>
         <source>Language Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración del Idioma</translation>
     </message>
 </context>
 </TS>
