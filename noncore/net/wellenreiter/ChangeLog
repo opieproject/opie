@@ -1,5 +1,6 @@
-2003-??-??	Michael Lauer		<mickey@Vanille.de>
+2003-12-18	Michael Lauer		<mickey@Vanille.de>
 
+	* Released as Version 1.0.2 (Development Snapshot)
 	* Add automatic uploading of capture files to "The Capture Dump" site at
 	  http://www.Vanille.de/projects/capturedump.spy
 	* Initial reading of the manufacturer database happens now in background
@@ -9,7 +10,7 @@
 
 2003-11-30	Michael Lauer		<mickey@Vanille.de>
 
-	* Released as Version 1.0.1
+	* Released as Version 1.0.1 (Development Snapshot)
 	* Fixed ARP decoding for wired networks.
           Interestingly, 802.11 encapsulates these in IP packets, while wired ethernet just tags the type_of_protocol.
 	* Added reading GPS data from a gps daemon.
@@ -23,7 +24,7 @@
 
 2003-05-10	Michael Lauer		<mickey@Vanille.de>
 
-	* Released as Version 1.0
+	* Released as Version 1.0 (Stable)
 	* Added restarting the dhcp client if having killed it before.
 	* Decouple dump files from live capture to shift control over 'what' is dumped to applications.
 
