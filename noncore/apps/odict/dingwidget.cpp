@@ -39,14 +39,12 @@ DingWidget::DingWidget( )
 
 void DingWidget::loadDict( QString name )
 {
-	qDebug( "MUSS ich wirklich aufgerufen werder? schreit loadDict" );
-	qDebug( "Starte mit dem loadedDict(...)" );
 	dictName = name;
-	qDebug( "bin in loadedDict() und lade das Dict:" );
-	qDebug( dictName );
   	QString opie_dir = getenv("OPIEDIR");
-	QFile file( opie_dir+"/noncore/apps/odict/eng_ita.dic" );
-	//FIXME:this should of course be not hardcoded ;)
+	
+	Config cfg(  "odict" );
+	cfg.setGroup( "Method_" + methodname );
+	QFile file( cfg.readEntry( "file" )  );
 	
 	if(  file.open(  IO_ReadOnly ) )
 	{
@@ -57,14 +55,11 @@ void DingWidget::loadDict( QString name )
 		}
 		file.close();
 	}
-	qDebug( "loadedDict(...) ist beended" );
 	loadValues();
 }
 
 QString DingWidget::loadedDict()
 { 
-	qDebug( dictName );
-	qDebug( "^ ^ ^ ^ ^ ^ ^ war der dictName" );
 	return dictName;
 }
 
@@ -99,8 +94,6 @@ void DingWidget::loadValues()
 BroswerContent DingWidget::setText( QString word )
 {
 	queryword = word;
-	qDebug( queryword );
-	qDebug( "^ ^ ^ ^ ^ ^ ^ war das gesuchte Word");
 	return parseInfo();
 }
 
