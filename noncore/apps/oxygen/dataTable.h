@@ -17,6 +17,15 @@
 class QLabel;
 class OxydataTable;
 
+/*
+ * A OxydataWidget shows all known data of an element. It can 
+ * be used for both the PSE and the pure Data-Dialog. It is 
+ * a simple QHBox with 2 QStrings in it plus a OxydataTable
+ * which contains the rest of the data.
+ *
+ * Author: Carsten Niehaus <cniehaus@handhelds.org>
+ */
+
 class OxydataWidget : public QWidget
 {
     Q_OBJECT
