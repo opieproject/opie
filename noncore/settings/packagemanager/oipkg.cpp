@@ -46,10 +46,12 @@ OIpkg *oipkg;
 
 // Ipkg callback functions
 
-int fsignalIpkgMessage( ipkg_conf_t */*conf*/, message_level_t /*level*/, char *msg )
+int fsignalIpkgMessage( ipkg_conf_t *conf, message_level_t level, char *msg )
 {
-    oipkg->ipkgMessage( msg );
-    return 0;
+    if ( conf && ( conf->verbosity < level ) )
+        return 0;
+    else
+        oipkg->ipkgMessage( msg );
 }
 
 char *fIpkgResponse( char */*question*/ )
