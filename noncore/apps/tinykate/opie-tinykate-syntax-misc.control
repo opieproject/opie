@@ -4,5 +4,5 @@ Section: opie/applications
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION), opie-tinykate
+Depends: opie-base, opie-tinykate
 Description: Syntax Highlighting Patterns for  misc languages for TinyKate

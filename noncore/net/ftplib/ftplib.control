@@ -4,6 +4,6 @@ Section: Communications
 Maintainer: L.J. Potter <ljp@llornkcor.com> 
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base
 Description: Libftp
  The ftp library for the Opie environment.

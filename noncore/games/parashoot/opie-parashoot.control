@@ -4,6 +4,6 @@ Section: opie/games
 Maintainer: Martin Imobersteg <imm@gmx.ch>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base
 Description: Game: shoot the parachutists
  A game for the Opie environment.

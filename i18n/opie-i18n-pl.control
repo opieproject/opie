@@ -4,6 +4,6 @@ Section: opie/i18n
 Maintainer: Rozanski Sergiusz <rozanski@sergiusz.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base
 Description: i18n: Polish
  Polish UI texts and dictionary for OPIE environment.

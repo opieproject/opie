@@ -4,5 +4,5 @@ Section: opie/applications
 Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION), gzip
+Depends: opie-base, gzip
 Description: A PDF viewer for OPIE.

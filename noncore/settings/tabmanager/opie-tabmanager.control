@@ -2,7 +2,7 @@ Files: bin/tabmanager apps/Settings/tabmanager.desktop pics/tabmanager/tabmanage
 Priority: optional
 Section: opie/settings
 Version: $QPE_VERSION-$SUB_VERSION-1.2
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base
 Architecture: arm
 Maintainer: Benjamin Meyer <meyerb@sharpsec.com>
 Description: Tab Manager

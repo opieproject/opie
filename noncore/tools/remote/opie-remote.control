@@ -4,7 +4,7 @@ Section: opie/applications
 Maintainer: Thomas Stephens <spiralman@softhome.net>
 Architecture: arm
 Version: 0.3-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION), lirc
+Depends: opie-base, lirc
 License: GPL
 Description: a remote control
  A remote control using irda. A frontend to lirc.

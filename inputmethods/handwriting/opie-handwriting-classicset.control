@@ -4,6 +4,6 @@ Section: opie/inputmethods
 Maintainer: Jake Richardson <jake@asdfnews.org>
 Architecture: none
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base
 Description: Classic character set for the Handwriting inputmethod.
  Classic character set for the Handwriting inputmethod.

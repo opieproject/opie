@@ -4,6 +4,6 @@ Section: opie/inputmethods
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base
 Description: Pickboard input method
  Pickboard dictionary-based input method for the Opie environment.

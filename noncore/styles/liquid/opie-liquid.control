@@ -4,7 +4,7 @@ Section: opie/system
 Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION.1
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base
 Description: Liquid style by Mosfet.
  Mosfet's well known Liquid GUI style from KDE,
  ported to OPIE.

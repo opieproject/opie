@@ -4,6 +4,6 @@ Section: opie/applications
 Maintainer: L.J. Potter <ljp@llornkcor.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION), libopie1 ($QPE_VERSION)
+Depends: opie-base, libopie1
 Description: KDE's konsole (shell terminal)
  Ported to the Opie environment.

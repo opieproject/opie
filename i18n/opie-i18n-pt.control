@@ -4,6 +4,6 @@ Section: opie/i18n
 Maintainer: Carsten Niehaus <cniehaus@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base
 Description: i18n: Portuguese
  Portuguese UI texts and dictionary for OPIE environment.

@@ -4,6 +4,6 @@ Section: opie/settings
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base
 Description: Security settings dialog
  For the Opie environment.

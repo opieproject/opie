@@ -4,7 +4,7 @@ Section: opie/games
 Maintainer: Mark Westcott <mark@houseoffish.org>
 Architecture: arm
 Version: 0.8-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base
 License: GPL
 Description: the famous hit Bill game
  Hit Bill as hard as you can before he

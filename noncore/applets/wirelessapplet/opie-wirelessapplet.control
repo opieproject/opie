@@ -4,6 +4,6 @@ Section: opie/system
 Maintainer: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION.1
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base
 Description: Wireless Applet
  A wireless network card status taskbar applet for the Opie environment

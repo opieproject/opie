@@ -4,7 +4,7 @@ Section: opie/taskbar
 Maintainer: Opie team <opie@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base
 Conflicts: opie-batteryapplet-ipaq
 Description: Battery Monitor applet
  Battery Monitor applet for the Opie environment taskbar.

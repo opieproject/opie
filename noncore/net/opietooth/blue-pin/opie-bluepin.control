@@ -4,7 +4,7 @@ Section: opie/applications
 Maintainer: Holger Freyther <zecke@handhelds.org>
 Architecture: arm
 Version: 0.3.4-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base
 License: GPL
 Description: Bluetooth pin application
 

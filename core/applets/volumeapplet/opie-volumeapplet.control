@@ -4,6 +4,6 @@ Section: opie/taskbar
 Maintainer: L.J. Potter <ljp@llornkcor.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION.1
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base
 Description: Volume applet
  Volume applet for the Opie environment taskbar.

@@ -5,6 +5,6 @@ Maintainer: Martin Imobersteg <imm@gmx.ch>
 Architecture: arm
 Arch: iPAQ
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base
 Description: Game: control falling blocks
  A game for the Opie environment.

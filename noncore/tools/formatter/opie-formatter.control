@@ -4,7 +4,7 @@ Section: opie/applications
 Maintainer: L.J. Potter <ljp@llornkcor.com> 
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base
 Description: Formatter
  The filesystem formatting and mountpoint app for the Opie environment.
 ronment.
