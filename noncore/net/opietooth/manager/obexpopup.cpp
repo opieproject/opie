@@ -1,8 +1,12 @@
 
-#include <qtimer.h>
-
 #include "obexdialog.h"
 #include "obexpopup.h"
+
+/* OPIE */
+#include <qpe/qpeapplication.h>
+
+/* QT */
+#include <qtimer.h>
 
 using namespace OpieTooth;
 
@@ -10,7 +14,8 @@ using namespace OpieTooth;
  * c'tor init the QAction
  */
 ObexPopup::ObexPopup()
-    : QPopupMenu()  {
+        : QPopupMenu()
+{
     qWarning("RfcCommPopup c'tor");
 
     QAction* a;
@@ -24,18 +29,17 @@ ObexPopup::ObexPopup()
 };
 
 
-ObexPopup::~ObexPopup() {
-}
+ObexPopup::~ObexPopup()
+{}
 
 
-void ObexPopup::slotPush() {
+void ObexPopup::slotPush()
+{
 
     qWarning("push something");
 
-
     ObexDialog obexDialog;
-    obexDialog.showMaximized();
-    obexDialog.exec();
+    QPEApplication::execDialog( &obexDialog );
 }
 
 

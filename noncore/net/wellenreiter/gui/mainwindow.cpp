@@ -177,10 +177,7 @@ void WellenreiterMainWindow::showConfigure()
 {
     qDebug( "show configure..." );
     cw->setCaption( tr( "Configure" ) );
-    #ifdef QWS
-    cw->showMaximized();
-    #endif
-    int result = cw->exec();
+    int result = QPEApplication::execDialog( cw );
 
     if ( result ) updateToolButtonState();
 }

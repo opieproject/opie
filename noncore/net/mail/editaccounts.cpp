@@ -1,10 +1,15 @@
-#include <qt.h>
 
 #include "defines.h"
 #include "editaccounts.h"
 
+/* OPIE */
+#include <qpe/qpeapplication.h>
+
+/* QT */
+#include <qt.h>
+
 AccountListItem::AccountListItem( QListView *parent, Account *a)
-    : QListViewItem( parent )
+        : QListViewItem( parent )
 {
     account = a;
     setText( 0, account->getAccountName() );
@@ -12,7 +17,7 @@ AccountListItem::AccountListItem( QListView *parent, Account *a)
 }
 
 EditAccounts::EditAccounts( Settings *s, QWidget *parent, const char *name, bool modal, WFlags flags )
-    : EditAccountsUI( parent, name, modal, flags )
+        : EditAccountsUI( parent, name, modal, flags )
 {
     qDebug( "New Account Configuration Widget" );
     settings = s;
@@ -39,10 +44,14 @@ void EditAccounts::slotFillLists()
 
     QList<Account> accounts = settings->getAccounts();
     Account *it;
-    for ( it = accounts.first(); it; it = accounts.next() ) {
-        if ( it->getType().compare( "NNTP" ) == 0 ) {
+    for ( it = accounts.first(); it; it = accounts.next() )
+    {
+        if ( it->getType().compare( "NNTP" ) == 0 )
+        {
             (void) new AccountListItem( newsList, it );
-        } else {
+        }
+        else
+        {
             (void) new AccountListItem( mailList, it );
         }
     }
@@ -54,60 +63,76 @@ void EditAccounts::slotNewMail()
     QString *selection = new QString();
     SelectMailType selType( selection, this, 0, true );
     selType.show();
-    if ( QDialog::Accepted == selType.exec() ) {
+    if ( QDialog::Accepted == selType.exec() )
+    {
         slotNewAccount( *selection );
     }
 }
 
 void EditAccounts::slotNewAccount( const QString &type )
 {
-    if ( type.compare( "IMAP" ) == 0 ) {
+    if ( type.compare( "IMAP" ) == 0 )
+    {
         qDebug( "-> config IMAP" );
         IMAPaccount *account = new IMAPaccount();
         IMAPconfig imap( account, this, 0, true );
-        imap.showMaximized();
-        if ( QDialog::Accepted == imap.exec() ) {
+        if ( QDialog::Accepted == QPEApplication::execDialog( &imap ) )
+        {
             settings->addAccount( account );
             account->save();
             slotFillLists();
-          } else {
+        }
+        else
+        {
             account->remove();
         }
-    } else if ( type.compare( "POP3" ) == 0 ) {
+    }
+    else if ( type.compare( "POP3" ) == 0 )
+    {
         qDebug( "-> config POP3" );
         POP3account *account = new POP3account();
         POP3config pop3( account, this, 0, true, WStyle_ContextHelp );
-        pop3.showMaximized();
-        if ( QDialog::Accepted == pop3.exec() ) {
+        if ( QDialog::Accepted == QPEApplication::execDialog( &pop3 ) )
+        {
             settings->addAccount( account );
             account->save();
             slotFillLists();
-        } else {
+        }
+        else
+        {
             account->remove();
         }
-    } else if ( type.compare( "SMTP" ) == 0 ) {
+    }
+    else if ( type.compare( "SMTP" ) == 0 )
+    {
         qDebug( "-> config SMTP" );
         SMTPaccount *account = new SMTPaccount();
         SMTPconfig smtp( account, this, 0, true, WStyle_ContextHelp );
-        smtp.showMaximized();
-        if ( QDialog::Accepted == smtp.exec() ) {
+        if ( QDialog::Accepted == QPEApplication::execDialog( &smtp ) )
+        {
             settings->addAccount( account );
             account->save();
             slotFillLists();
 
-        } else {
+        }
+        else
+        {
             account->remove();
         }
-    } else if ( type.compare( "NNTP" ) == 0 ) {
+    }
+    else if ( type.compare( "NNTP" ) == 0 )
+    {
         qDebug( "-> config NNTP" );
         NNTPaccount *account = new NNTPaccount();
         NNTPconfig nntp( account, this, 0, true, WStyle_ContextHelp );
-        nntp.showMaximized();
-        if ( QDialog::Accepted == nntp.exec() ) {
+        if ( QDialog::Accepted == QPEApplication::execDialog( &nntp ) )
+        {
             settings->addAccount( account );
             account->save();
             slotFillLists();
-        } else {
+        }
+        else
+        {
             account->remove();
         }
     }
@@ -115,33 +140,40 @@ void EditAccounts::slotNewAccount( const QString &type )
 
 void EditAccounts::slotEditAccount( Account *account )
 {
-    if ( account->getType().compare( "IMAP" ) == 0 ) {
+    if ( account->getType().compare( "IMAP" ) == 0 )
+    {
         IMAPaccount *imapAcc = static_cast<IMAPaccount *>(account);
         IMAPconfig imap( imapAcc, this, 0, true, WStyle_ContextHelp );
-        imap.showMaximized();
-        if ( QDialog::Accepted == imap.exec() ) {
-           slotFillLists();
+        if ( QDialog::Accepted == QPEApplication::execDialog( &imap ) )
+        {
+            slotFillLists();
         }
-    } else if ( account->getType().compare( "POP3" ) == 0 ) {
+    }
+    else if ( account->getType().compare( "POP3" ) == 0 )
+    {
         POP3account *pop3Acc = static_cast<POP3account *>(account);
         POP3config pop3( pop3Acc, this, 0, true, WStyle_ContextHelp );
-        pop3.showMaximized();
-        if ( QDialog::Accepted == pop3.exec() ) {
-           slotFillLists();
+        if ( QDialog::Accepted == QPEApplication::execDialog( &pop3 ) )
+        {
+            slotFillLists();
         }
-    } else if ( account->getType().compare( "SMTP" ) == 0 ) {
+    }
+    else if ( account->getType().compare( "SMTP" ) == 0 )
+    {
         SMTPaccount *smtpAcc = static_cast<SMTPaccount *>(account);
         SMTPconfig smtp( smtpAcc, this, 0, true, WStyle_ContextHelp );
-        smtp.showMaximized();
-        if ( QDialog::Accepted == smtp.exec() ) {
-           slotFillLists();
+        if ( QDialog::Accepted == QPEApplication::execDialog( &smtp ) )
+        {
+            slotFillLists();
         }
-    } else if ( account->getType().compare( "NNTP" ) == 0 ) {
+    }
+    else if ( account->getType().compare( "NNTP" ) == 0 )
+    {
         NNTPaccount *nntpAcc = static_cast<NNTPaccount *>(account);
         NNTPconfig nntp( nntpAcc, this, 0, true, WStyle_ContextHelp );
-        nntp.showMaximized();
-        if ( QDialog::Accepted == nntp.exec() ) {
-           slotFillLists();
+        if ( QDialog::Accepted == QPEApplication::execDialog( &nntp ) )
+        {
+            slotFillLists();
         }
     }
 }
@@ -149,8 +181,9 @@ void EditAccounts::slotEditAccount( Account *account )
 void EditAccounts::slotDeleteAccount( Account *account )
 {
     if ( QMessageBox::information( this, tr( "Question" ),
-         tr( "<p>Do you really want to delete the selected Account?</p>" ),
-         tr( "Yes" ), tr( "No" ) ) == 0 ) {
+                                   tr( "<p>Do you really want to delete the selected Account?</p>" ),
+                                   tr( "Yes" ), tr( "No" ) ) == 0 )
+    {
         settings->delAccount( account );
         slotFillLists();
     }
@@ -159,7 +192,8 @@ void EditAccounts::slotDeleteAccount( Account *account )
 void EditAccounts::slotEditMail()
 {
     qDebug( "Edit Mail Account" );
-    if ( !mailList->currentItem() ) {
+    if ( !mailList->currentItem() )
+    {
         QMessageBox::information( this, tr( "Error" ),
                                   tr( "<p>Please select an account.</p>" ),
                                   tr( "Ok" ) );
@@ -172,7 +206,8 @@ void EditAccounts::slotEditMail()
 
 void EditAccounts::slotDeleteMail()
 {
-    if ( !mailList->currentItem() ) {
+    if ( !mailList->currentItem() )
+    {
         QMessageBox::information( this, tr( "Error" ),
                                   tr( "<p>Please select an account.</p>" ),
                                   tr( "Ok" ) );
@@ -192,7 +227,8 @@ void EditAccounts::slotNewNews()
 void EditAccounts::slotEditNews()
 {
     qDebug( "Edit News Account" );
-    if ( !newsList->currentItem() ) {
+    if ( !newsList->currentItem() )
+    {
         QMessageBox::information( this, tr( "Error" ),
                                   tr( "<p>Please select an account.</p>" ),
                                   tr( "Ok" ) );
@@ -206,7 +242,8 @@ void EditAccounts::slotEditNews()
 void EditAccounts::slotDeleteNews()
 {
     qDebug( "Delete News Account" );
-    if ( !newsList->currentItem() ) {
+    if ( !newsList->currentItem() )
+    {
         QMessageBox::information( this, tr( "Error" ),
                                   tr( "<p>Please select an account.</p>" ),
                                   tr( "Ok" ) );
@@ -243,7 +280,7 @@ void EditAccounts::accept()
  */
 
 SelectMailType::SelectMailType( QString *selection, QWidget *parent, const char *name, bool modal, WFlags flags )
-    : SelectMailTypeUI( parent, name, modal, flags )
+        : SelectMailTypeUI( parent, name, modal, flags )
 {
     selected = selection;
     selected->replace( 0, selected->length(), typeBox->currentText() );
@@ -260,7 +297,7 @@ void SelectMailType::slotSelection( const QString &sel )
  */
 
 IMAPconfig::IMAPconfig( IMAPaccount *account, QWidget *parent, const char *name, bool modal, WFlags flags )
-    : IMAPconfigUI( parent, name, modal, flags )
+        : IMAPconfigUI( parent, name, modal, flags )
 {
     data = account;
 
@@ -277,12 +314,17 @@ IMAPconfig::IMAPconfig( IMAPaccount *account, QWidget *parent, const char *name,
 
 void IMAPconfig::slotConnectionToggle( int index )
 {
-    if ( index == 2 ) {
-       portLine->setText( IMAP_SSL_PORT );
-    } else if (  index == 3 ) {
+    if ( index == 2 )
+    {
+        portLine->setText( IMAP_SSL_PORT );
+    }
+    else if (  index == 3 )
+    {
         portLine->setText( IMAP_PORT );
         CommandEdit->show();
-    } else {
+    }
+    else
+    {
         portLine->setText( IMAP_PORT );
     }
 }
@@ -316,7 +358,7 @@ void IMAPconfig::accept()
  */
 
 POP3config::POP3config( POP3account *account, QWidget *parent, const char *name, bool modal, WFlags flags )
-    : POP3configUI( parent, name, modal, flags )
+        : POP3configUI( parent, name, modal, flags )
 {
     data = account;
     fillValues();
@@ -333,12 +375,17 @@ POP3config::POP3config( POP3account *account, QWidget *parent, const char *name,
 void POP3config::slotConnectionToggle( int index )
 {
     // 2 is ssl connection
-    if ( index == 2 ) {
-       portLine->setText( POP3_SSL_PORT );
-    } else if (  index == 3 ) {
+    if ( index == 2 )
+    {
+        portLine->setText( POP3_SSL_PORT );
+    }
+    else if (  index == 3 )
+    {
         portLine->setText( POP3_PORT );
         CommandEdit->show();
-    } else {
+    }
+    else
+    {
         portLine->setText( POP3_PORT );
     }
 }
@@ -370,7 +417,7 @@ void POP3config::accept()
  */
 
 SMTPconfig::SMTPconfig( SMTPaccount *account, QWidget *parent, const char *name, bool modal, WFlags flags )
-    : SMTPconfigUI( parent, name, modal, flags )
+        : SMTPconfigUI( parent, name, modal, flags )
 {
     data = account;
 
@@ -391,12 +438,17 @@ SMTPconfig::SMTPconfig( SMTPaccount *account, QWidget *parent, const char *name,
 void SMTPconfig::slotConnectionToggle( int index )
 {
     // 2 is ssl connection
-    if ( index == 2 ) {
-       portLine->setText( SMTP_SSL_PORT );
-    } else if (  index == 3 ) {
+    if ( index == 2 )
+    {
+        portLine->setText( SMTP_SSL_PORT );
+    }
+    else if (  index == 3 )
+    {
         portLine->setText( SMTP_PORT );
         CommandEdit->show();
-    } else {
+    }
+    else
+    {
         portLine->setText( SMTP_PORT );
     }
 }
@@ -430,7 +482,7 @@ void SMTPconfig::accept()
  */
 
 NNTPconfig::NNTPconfig( NNTPaccount *account, QWidget *parent, const char *name, bool modal, WFlags flags )
-    : NNTPconfigUI( parent, name, modal, flags )
+        : NNTPconfigUI( parent, name, modal, flags )
 {
     data = account;
 
@@ -444,9 +496,12 @@ NNTPconfig::NNTPconfig( NNTPaccount *account, QWidget *parent, const char *name,
 
 void NNTPconfig::slotSSL( bool enabled )
 {
-    if ( enabled ) {
+    if ( enabled )
+    {
         portLine->setText( NNTP_SSL_PORT );
-    } else {
+    }
+    else
+    {
         portLine->setText( NNTP_PORT );
     }
 }

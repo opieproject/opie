@@ -3,8 +3,11 @@
 #include "rfcommassigndialogitem.h"
 #include "rfcommconfhandler.h"
 
+/* OPIE */
 #include <qpe/config.h>
+#include <qpe/qpeapplication.h>
 
+/* QT */
 #include <qlayout.h>
 
 using namespace OpieTooth;
@@ -15,7 +18,8 @@ using namespace OpieTooth;
 
 
 RfcommAssignDialog::RfcommAssignDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
-    : RfcommAssignDialogBase( parent, name, modal, fl ) {
+        : RfcommAssignDialogBase( parent, name, modal, fl )
+{
 
     m_range = 5;
 
@@ -33,28 +37,34 @@ RfcommAssignDialog::RfcommAssignDialog( QWidget* parent,  const char* name, bool
     loadConfig();
 }
 
-RfcommAssignDialog::~RfcommAssignDialog()  {
-    if ( confHandler )  {
+RfcommAssignDialog::~RfcommAssignDialog()
+{
+    if ( confHandler )
+    {
         delete confHandler;
     }
 }
 
 
-void RfcommAssignDialog::newDevice( const QString & mac )  {
+void RfcommAssignDialog::newDevice( const QString & mac )
+{
 
-    for ( int i = 0 ; i < m_range; i++ )  {
+    for ( int i = 0 ; i < m_range; i++ )
+    {
 
         QMap<QString, RfCommConfObject*>::Iterator it;
         it = confHandler->foundEntries().find( QString("%1").arg( i ) );
         // make sure that rfcommX is not assigned yet
-        if (  it == confHandler->foundEntries().end() )  {
+        if (  it == confHandler->foundEntries().end() )
+        {
             QDialog dialog( this,  "newdevice", true, WStyle_ContextHelp );
-            dialog.showMaximized();
+
             RfcommDialogItem *newDev = new RfcommDialogItem( &dialog );
             newDev->setIdent( i );
             newDev->setMac( mac );
 
-            if ( dialog.exec() == QDialog::Accepted )  {
+            if ( QPEApplication::execDialog( &dialog ) == QDialog::Accepted )
+            {
                 RfcommDialogItem *rfcomm = new RfcommDialogItem( m_box );
                 m_itemList.insert( i , rfcomm );
                 rfcomm->setIdent( i );
@@ -67,33 +77,37 @@ void RfcommAssignDialog::newDevice( const QString & mac )  {
     }
 }
 
-void RfcommAssignDialog::loadConfig()  {
+void RfcommAssignDialog::loadConfig()
+{
 
     //Config cfg( "bluetoothmanager-rfcommbind" );
 
-    for ( int i = 0 ; i < m_range; i++ )  {
+    for ( int i = 0 ; i < m_range; i++ )
+    {
         // cfg.setGroup( QString("%1").arg( i ) );
         RfcommDialogItem *rfcomm = new RfcommDialogItem( m_box );
         m_itemList.insert( i , rfcomm );
         rfcomm->setIdent( i );
         QMap<QString, RfCommConfObject*>::Iterator it;
         it = confHandler->foundEntries().find( QString("%1").arg( i ) );
-        if ( it != confHandler->foundEntries().end() )  {
+        if ( it != confHandler->foundEntries().end() )
+        {
             qDebug( "Found key in foundEntries() " );
             rfcomm->setMac( it.data()->mac() );
             rfcomm->setChannel( it.data()->channel() );
             rfcomm->setComment( it.data()->comment() );
         }
-          /* Use rfcomm.conf directly for now
-           * rfcomm->setMac( cfg.readEntry( "mac",  "" ) );
-           * rfcomm->setChannel( cfg.readNumEntry( "channel", 1 ) );
-           * rfcomm->setComment( cfg.readEntry( "comment", "" ) );
-           */
+        /* Use rfcomm.conf directly for now
+         * rfcomm->setMac( cfg.readEntry( "mac",  "" ) );
+         * rfcomm->setChannel( cfg.readNumEntry( "channel", 1 ) );
+         * rfcomm->setComment( cfg.readEntry( "comment", "" ) );
+         */
     }
 }
 
 
-void RfcommAssignDialog::saveConfig()  {
+void RfcommAssignDialog::saveConfig()
+{
 
     //Config cfg( "bluetoothmanager-rfcommbind" );
 
@@ -101,7 +115,8 @@ void RfcommAssignDialog::saveConfig()  {
 
     QMap< QString, RfCommConfObject*> outMap;
 
-    for( it = m_itemList.begin(); it != m_itemList.end(); ++it )  {
+    for( it = m_itemList.begin(); it != m_itemList.end(); ++it )
+    {
 
         //cfg.setGroup( QString("%1").arg( it.key() ) );
         RfcommDialogItem *rfcomm = it.data();

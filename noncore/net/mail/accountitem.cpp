@@ -1,28 +1,37 @@
+
 #include "accountitem.h"
 #include "accountview.h"
-#include <qpopupmenu.h>
-#include <qmessagebox.h>
 #include "selectstore.h"
 #include "newmaildir.h"
+#include "defines.h"
+
+/* OPIE */
 #include <libmailwrapper/mailtypes.h>
 #include <libmailwrapper/abstractmail.h>
 #include <libmailwrapper/mailwrapper.h>
-#include "defines.h"
+#include <qpe/qpeapplication.h>
+
+/* QT */
+#include <qpopupmenu.h>
+#include <qmessagebox.h>
 
 #define SETPIX(x) if (!account->getOffline()) {setPixmap( 0,x);} else {setPixmap( 0, PIXMAP_OFFLINE );}
 /**
  * POP3 Account stuff
  */
 POP3viewItem::POP3viewItem( POP3account *a, AccountView *parent )
-    : AccountViewItem( parent )
+        : AccountViewItem( parent )
 {
     account = a;
     wrapper = AbstractMail::getWrapper( account );
     SETPIX(PIXMAP_POP3FOLDER);
 #if 0
-    if (!account->getOffline()) {
+    if (!account->getOffline())
+    {
         setPixmap( 0,  );
-    } else {
+    }
+    else
+    {
         setPixmap( 0, PIXMAP_OFFLINE );
     }
 #endif
@@ -50,14 +59,16 @@ void POP3viewItem::refresh()
     if (account->getOffline()) return;
     QList<Folder> *folders = wrapper->listFolders();
     QListViewItem *child = firstChild();
-    while ( child ) {
+    while ( child )
+    {
         QListViewItem *tmp = child;
         child = child->nextSibling();
         delete tmp;
     }
     Folder *it;
     QListViewItem*item = 0;
-    for ( it = folders->first(); it; it = folders->next() ) {
+    for ( it = folders->first(); it; it = folders->next() )
+    {
         item = new POP3folderItem( it, this , item );
         item->setSelectable(it->may_select());
     }
@@ -75,11 +86,15 @@ RecBody POP3viewItem::fetchBody( const RecMail &mail )
 QPopupMenu * POP3viewItem::getContextMenu()
 {
     QPopupMenu *m = new QPopupMenu(0);
-    if (m) {
-        if (!account->getOffline()) {
+    if (m)
+    {
+        if (!account->getOffline())
+        {
             m->insertItem(QObject::tr("Disconnect",contextName),0);
             m->insertItem(QObject::tr("Set offline",contextName),1);
-        } else {
+        }
+        else
+        {
             m->insertItem(QObject::tr("Set online",contextName),1);
         }
     }
@@ -89,7 +104,8 @@ QPopupMenu * POP3viewItem::getContextMenu()
 void POP3viewItem::disconnect()
 {
     QListViewItem *child = firstChild();
-    while ( child ) {
+    while ( child )
+    {
         QListViewItem *tmp = child;
         child = child->nextSibling();
         delete tmp;
@@ -99,7 +115,8 @@ void POP3viewItem::disconnect()
 
 void POP3viewItem::setOnOffline()
 {
-    if (!account->getOffline()) {
+    if (!account->getOffline())
+    {
         disconnect();
     }
     account->setOffline(!account->getOffline());
@@ -110,7 +127,8 @@ void POP3viewItem::setOnOffline()
 
 void POP3viewItem::contextMenuSelected(int which)
 {
-    switch (which) {
+    switch (which)
+    {
     case 0:
         disconnect();
         break;
@@ -121,17 +139,19 @@ void POP3viewItem::contextMenuSelected(int which)
 }
 
 POP3folderItem::~POP3folderItem()
-{
-}
+{}
 
 POP3folderItem::POP3folderItem( Folder *folderInit, POP3viewItem *parent , QListViewItem*after  )
-    : AccountViewItem( parent,after )
+        : AccountViewItem( parent,after )
 {
     folder = folderInit;
     pop3 = parent;
-    if (folder->getDisplayName().lower()!="inbox") {
+    if (folder->getDisplayName().lower()!="inbox")
+    {
         setPixmap( 0, PIXMAP_POP3FOLDER );
-    } else {
+    }
+    else
+    {
         setPixmap( 0, PIXMAP_INBOXFOLDER);
     }
     setText( 0, folder->getDisplayName() );
@@ -151,7 +171,8 @@ RecBody POP3folderItem::fetchBody(const RecMail&aMail)
 QPopupMenu * POP3folderItem::getContextMenu()
 {
     QPopupMenu *m = new QPopupMenu(0);
-    if (m) {
+    if (m)
+    {
         m->insertItem(QObject::tr("Refresh header list",contextName),0);
         m->insertItem(QObject::tr("Delete all mails",contextName),1);
         m->insertItem(QObject::tr("Move/Copie all mails",contextName),2);
@@ -169,7 +190,8 @@ void POP3folderItem::downloadMails()
 void POP3folderItem::contextMenuSelected(int which)
 {
     AccountView * view = (AccountView*)listView();
-    switch (which) {
+    switch (which)
+    {
     case 0:
         /* must be 'cause pop3 lists are cached */
         pop3->getWrapper()->logout();
@@ -190,7 +212,7 @@ void POP3folderItem::contextMenuSelected(int which)
  * IMAP Account stuff
  */
 IMAPviewItem::IMAPviewItem( IMAPaccount *a, AccountView *parent )
-    : AccountViewItem( parent )
+        : AccountViewItem( parent )
 {
     account = a;
     wrapper = AbstractMail::getWrapper( account );
@@ -222,7 +244,7 @@ const QStringList&IMAPviewItem::subFolders()
 void IMAPviewItem::refreshFolders(bool force)
 {
     if (childCount()>0 && force==false) return;
-    if (account->getOffline()) return;   
+    if (account->getOffline()) return;
 
     removeChilds();
     currentFolders.clear();
@@ -236,29 +258,36 @@ void IMAPviewItem::refreshFolders(bool force)
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     folders->setAutoDelete(false);
 
-    for ( it = folders->first(); it; it = folders->next() ) {
-        if (it->getDisplayName().lower()=="inbox") {
+    for ( it = folders->first(); it; it = folders->next() )
+    {
+        if (it->getDisplayName().lower()=="inbox")
+        {
             item = new IMAPfolderItem( it, this , item );
             folders->remove(it);
             qDebug("inbox found");
             break;
         }
     }
-    for ( it = folders->first(); it; it = folders->next() ) {
+    for ( it = folders->first(); it; it = folders->next() )
+    {
         fname = it->getDisplayName();
         currentFolders.append(it->getName());
         pos = fname.findRev(it->Separator());
-        if (pos != -1) {
+        if (pos != -1)
+        {
             fname = fname.left(pos);
         }
         IMAPfolderItem*pitem = (IMAPfolderItem*)findSubItem(fname);
-        if (pitem) {
+        if (pitem)
+        {
             titem = item;
             item = new IMAPfolderItem(it,pitem,pitem->firstChild(),this);
             /* setup the short name */
             item->setText(0,it->getDisplayName().right(it->getDisplayName().length()-pos-1));
             item = titem;
-        } else {
+        }
+        else
+        {
             item = new IMAPfolderItem( it, this , item );
         }
     }
@@ -268,14 +297,18 @@ void IMAPviewItem::refreshFolders(bool force)
 QPopupMenu * IMAPviewItem::getContextMenu()
 {
     QPopupMenu *m = new QPopupMenu(0);
-    if (m) {
-        if (!account->getOffline()) {
+    if (m)
+    {
+        if (!account->getOffline())
+        {
             m->insertItem(QObject::tr("Refresh folder list",contextName),0);
             m->insertItem(QObject::tr("Create new folder",contextName),1);
             m->insertSeparator();
             m->insertItem(QObject::tr("Disconnect",contextName),2);
             m->insertItem(QObject::tr("Set offline",contextName),3);
-        } else {
+        }
+        else
+        {
             m->insertItem(QObject::tr("Set online",contextName),3);
         }
     }
@@ -285,16 +318,18 @@ QPopupMenu * IMAPviewItem::getContextMenu()
 void IMAPviewItem::createNewFolder()
 {
     Newmdirdlg ndirdlg;
-    ndirdlg.showMaximized();
-    if (ndirdlg.exec()) {
+    if ( QPEApplication::execDialog( &ndirdlg ))
+    {
         QString ndir = ndirdlg.Newdir();
         bool makesubs = ndirdlg.subpossible();
         QString delemiter = "/";
         IMAPfolderItem*item = (IMAPfolderItem*)firstChild();
-        if (item) {
+        if (item)
+        {
             delemiter = item->Delemiter();
         }
-        if (wrapper->createMbox(ndir,0,delemiter,makesubs)) {
+        if (wrapper->createMbox(ndir,0,delemiter,makesubs))
+        {
             refreshFolders(true);
         }
     }
@@ -303,7 +338,8 @@ void IMAPviewItem::createNewFolder()
 void IMAPviewItem::contextMenuSelected(int id)
 {
     qDebug("Id selected: %i",id);
-    switch (id) {
+    switch (id)
+    {
     case 0:
         refreshFolders(true);
         break;
@@ -315,7 +351,8 @@ void IMAPviewItem::contextMenuSelected(int id)
         wrapper->logout();
         break;
     case 3:
-        if (account->getOffline()==false) {
+        if (account->getOffline()==false)
+        {
             removeChilds();
             wrapper->logout();
         }
@@ -323,7 +360,7 @@ void IMAPviewItem::contextMenuSelected(int id)
         account->save();
         SETPIX(PIXMAP_IMAPFOLDER);
         refreshFolders(false);
-    break;
+        break;
     default:
         break;
     }
@@ -340,34 +377,39 @@ bool IMAPviewItem::offline()
 }
 
 IMAPfolderItem::IMAPfolderItem( Folder *folderInit, IMAPviewItem *parent , QListViewItem*after )
-    : AccountViewItem( parent , after )
+        : AccountViewItem( parent , after )
 {
     folder = folderInit;
     imap = parent;
-    if (folder->getDisplayName().lower()!="inbox") {
+    if (folder->getDisplayName().lower()!="inbox")
+    {
         setPixmap( 0, PIXMAP_IMAPFOLDER );
-    } else {
+    }
+    else
+    {
         setPixmap( 0, PIXMAP_INBOXFOLDER);
     }
     setText( 0, folder->getDisplayName() );
 }
 
 IMAPfolderItem::IMAPfolderItem( Folder *folderInit, IMAPfolderItem *parent , QListViewItem*after, IMAPviewItem *master  )
-    : AccountViewItem( parent,after )
+        : AccountViewItem( parent,after )
 {
     folder = folderInit;
     imap = master;
-    if (folder->getDisplayName().lower()!="inbox") {
+    if (folder->getDisplayName().lower()!="inbox")
+    {
         setPixmap( 0, PIXMAP_IMAPFOLDER );
-    } else {
+    }
+    else
+    {
         setPixmap( 0, PIXMAP_INBOXFOLDER);
     }
     setText( 0, folder->getDisplayName() );
 }
 
 IMAPfolderItem::~IMAPfolderItem()
-{
-}
+{}
 
 const QString& IMAPfolderItem::Delemiter()const
 {
@@ -376,9 +418,12 @@ const QString& IMAPfolderItem::Delemiter()const
 
 void IMAPfolderItem::refresh(QList<RecMail>&target)
 {
-    if (folder->may_select()) {
+    if (folder->may_select())
+    {
         imap->getWrapper()->listMessages( folder->getName(),target );
-    } else {
+    }
+    else
+    {
         target.clear();
     }
 }
@@ -391,16 +436,20 @@ RecBody IMAPfolderItem::fetchBody(const RecMail&aMail)
 QPopupMenu * IMAPfolderItem::getContextMenu()
 {
     QPopupMenu *m = new QPopupMenu(0);
-    if (m) {
-        if (folder->may_select()) {
+    if (m)
+    {
+        if (folder->may_select())
+        {
             m->insertItem(QObject::tr("Refresh header list",contextName),0);
             m->insertItem(QObject::tr("Move/Copie all mails",contextName),4);
             m->insertItem(QObject::tr("Delete all mails",contextName),1);
         }
-        if (folder->no_inferior()==false) {
+        if (folder->no_inferior()==false)
+        {
             m->insertItem(QObject::tr("Create new subfolder",contextName),2);
         }
-        if (folder->getDisplayName().lower()!="inbox") {
+        if (folder->getDisplayName().lower()!="inbox")
+        {
             m->insertItem(QObject::tr("Delete folder",contextName),3);
         }
     }
@@ -410,12 +459,13 @@ QPopupMenu * IMAPfolderItem::getContextMenu()
 void IMAPfolderItem::createNewFolder()
 {
     Newmdirdlg ndirdlg;
-    ndirdlg.showMaximized();
-    if (ndirdlg.exec()) {
+    if ( QPEApplication::execDialog( &ndirdlg ) )
+    {
         QString ndir = ndirdlg.Newdir();
         bool makesubs = ndirdlg.subpossible();
         QString delemiter = Delemiter();
-        if (imap->wrapper->createMbox(ndir,folder,delemiter,makesubs)) {
+        if (imap->wrapper->createMbox(ndir,folder,delemiter,makesubs))
+        {
             imap->refreshFolders(true);
         }
     }
@@ -424,18 +474,21 @@ void IMAPfolderItem::createNewFolder()
 void IMAPfolderItem::deleteFolder()
 {
     int yesno = QMessageBox::warning(0,QObject::tr("Delete folder",contextName),
-        QObject::tr("<center>Realy delete folder <br><b>%1</b><br>and all if it content?</center>",contextName).arg(folder->getDisplayName()),
-        QObject::tr("Yes",contextName),
-        QObject::tr("No",contextName),QString::null,1,1);
+                                     QObject::tr("<center>Realy delete folder <br><b>%1</b><br>and all if it content?</center>",contextName).arg(folder->getDisplayName()),
+                                     QObject::tr("Yes",contextName),
+                                     QObject::tr("No",contextName),QString::null,1,1);
     qDebug("Auswahl: %i",yesno);
-    if (yesno == 0) {
-        if (imap->getWrapper()->deleteMbox(folder)) {
+    if (yesno == 0)
+    {
+        if (imap->getWrapper()->deleteMbox(folder))
+        {
             QListView*v=listView();
             IMAPviewItem * box = imap;
             /* be carefull - after that this object is destroyd so don't use
              * any member of it after that call!!*/
             imap->refreshFolders(true);
-            if (v) {
+            if (v)
+            {
                 v->setSelected(box,true);
             }
         }
@@ -453,7 +506,8 @@ void IMAPfolderItem::contextMenuSelected(int id)
 {
     qDebug("Selected id: %i",id);
     AccountView * view = (AccountView*)listView();
-    switch(id) {
+    switch(id)
+    {
     case 0:
         view->refreshCurrent();
         break;
@@ -480,7 +534,7 @@ void IMAPfolderItem::contextMenuSelected(int id)
 /* MH is a little bit different - the top folder can contains messages other than in IMAP and
    POP3 and MBOX */
 MHviewItem::MHviewItem( const QString&aPath, AccountView *parent )
-    : AccountViewItem( parent )
+        : AccountViewItem( parent )
 {
     m_Path = aPath;
     /* be carefull - the space within settext is wanted - thats why the string twice */
@@ -518,25 +572,33 @@ void MHviewItem::refresh(bool force)
     MHfolderItem*pmaster = 0;
     QString fname = "";
     int pos;
-    for ( it = folders->first(); it; it = folders->next() ) {
+    for ( it = folders->first(); it; it = folders->next() )
+    {
         fname = it->getDisplayName();
         /* this folder itself */
-        if (fname=="/") {
+        if (fname=="/")
+        {
             currentFolders.append(fname);
             folder = it;
             continue;
         }
         currentFolders.append(fname);
         pos = fname.findRev("/");
-        if (pos > 0) {
+        if (pos > 0)
+        {
             fname = fname.left(pos);
             pmaster = (MHfolderItem*)findSubItem(fname);
-        } else {
+        }
+        else
+        {
             pmaster = 0;
         }
-        if (pmaster) {
+        if (pmaster)
+        {
             item = new MHfolderItem( it, pmaster, item, this );
-        } else {
+        }
+        else
+        {
             item = new MHfolderItem( it, this , item );
         }
         item->setSelectable(it->may_select());
@@ -555,7 +617,8 @@ RecBody MHviewItem::fetchBody( const RecMail &mail )
 QPopupMenu * MHviewItem::getContextMenu()
 {
     QPopupMenu *m = new QPopupMenu(0);
-    if (m) {
+    if (m)
+    {
         m->insertItem(QObject::tr("Refresh folder list",contextName),0);
         m->insertItem(QObject::tr("Create new folder",contextName),1);
         m->insertItem(QObject::tr("Delete all mails",contextName),2);
@@ -567,10 +630,11 @@ QPopupMenu * MHviewItem::getContextMenu()
 void MHviewItem::createFolder()
 {
     Newmdirdlg ndirdlg(0,0,true);
-    ndirdlg.showMaximized();
-    if (ndirdlg.exec()) {
+    if ( QPEApplication::execDialog( &ndirdlg ) )
+    {
         QString ndir = ndirdlg.Newdir();
-        if (wrapper->createMbox(ndir)) {
+        if (wrapper->createMbox(ndir))
+        {
             refresh(true);
         }
     }
@@ -590,7 +654,8 @@ QStringList MHviewItem::subFolders()
 
 void MHviewItem::contextMenuSelected(int which)
 {
-    switch (which) {
+    switch (which)
+    {
     case 0:
         refresh(true);
         break;
@@ -609,11 +674,10 @@ void MHviewItem::contextMenuSelected(int which)
 }
 
 MHfolderItem::~MHfolderItem()
-{
-}
+{}
 
 MHfolderItem::MHfolderItem( Folder *folderInit, MHviewItem *parent , QListViewItem*after  )
-    : AccountViewItem( parent,after )
+        : AccountViewItem( parent,after )
 {
     folder = folderInit;
     mbox = parent;
@@ -621,7 +685,7 @@ MHfolderItem::MHfolderItem( Folder *folderInit, MHviewItem *parent , QListViewIt
 }
 
 MHfolderItem::MHfolderItem( Folder *folderInit, MHfolderItem *parent, QListViewItem*after, MHviewItem*master)
-    : AccountViewItem( parent,after )
+        : AccountViewItem( parent,after )
 {
     folder = folderInit;
     mbox = master;
@@ -631,20 +695,27 @@ MHfolderItem::MHfolderItem( Folder *folderInit, MHfolderItem *parent, QListViewI
 void MHfolderItem::initName()
 {
     QString bName = folder->getDisplayName();
-    if (bName.startsWith("/")&&bName.length()>1) {
+    if (bName.startsWith("/")&&bName.length()>1)
+    {
         bName.replace(0,1,"");
     }
     int pos = bName.findRev("/");
-    if (pos > 0) {
+    if (pos > 0)
+    {
         bName.replace(0,pos+1,"");
     }
-    if (bName.lower() == "outgoing") {
+    if (bName.lower() == "outgoing")
+    {
         setPixmap( 0, PIXMAP_OUTBOXFOLDER );
-    } else if (bName.lower() == "inbox") {
+    }
+    else if (bName.lower() == "inbox")
+    {
         setPixmap( 0, PIXMAP_INBOXFOLDER);
-    } else {
+    }
+    else
+    {
         setPixmap( 0, PIXMAP_MBOXFOLDER );
-	}
+    }
     setText( 0, bName );
 }
 
@@ -667,18 +738,21 @@ RecBody MHfolderItem::fetchBody(const RecMail&aMail)
 void MHfolderItem::deleteFolder()
 {
     int yesno = QMessageBox::warning(0,QObject::tr("Delete folder",contextName),
-        QObject::tr("<center>Realy delete folder <br><b>%1</b><br>and all if it content?</center>",contextName).arg(folder->getDisplayName()),
-        QObject::tr("Yes",contextName),
-        QObject::tr("No",contextName),QString::null,1,1);
+                                     QObject::tr("<center>Realy delete folder <br><b>%1</b><br>and all if it content?</center>",contextName).arg(folder->getDisplayName()),
+                                     QObject::tr("Yes",contextName),
+                                     QObject::tr("No",contextName),QString::null,1,1);
     qDebug("Auswahl: %i",yesno);
-    if (yesno == 0) {
-        if (mbox->getWrapper()->deleteMbox(folder)) {
+    if (yesno == 0)
+    {
+        if (mbox->getWrapper()->deleteMbox(folder))
+        {
             QListView*v=listView();
             MHviewItem * box = mbox;
             /* be carefull - after that this object is destroyd so don't use
              * any member of it after that call!!*/
             mbox->refresh(true);
-            if (v) {
+            if (v)
+            {
                 v->setSelected(box,true);
             }
         }
@@ -688,7 +762,8 @@ void MHfolderItem::deleteFolder()
 QPopupMenu * MHfolderItem::getContextMenu()
 {
     QPopupMenu *m = new QPopupMenu(0);
-    if (m) {
+    if (m)
+    {
         m->insertItem(QObject::tr("Move/Copie all mails",contextName),2);
         m->insertItem(QObject::tr("Delete all mails",contextName),0);
         m->insertItem(QObject::tr("Create new subfolder",contextName),3);
@@ -707,16 +782,18 @@ void MHfolderItem::downloadMails()
 void MHfolderItem::createFolder()
 {
     Newmdirdlg ndirdlg(0,0,true);
-    ndirdlg.showMaximized();
-    if (ndirdlg.exec()) {
+    if ( QPEApplication::execDialog( &ndirdlg ) )
+    {
         QString ndir = ndirdlg.Newdir();
-        if (mbox->getWrapper()->createMbox(ndir,folder)) {
+        if (mbox->getWrapper()->createMbox(ndir,folder))
+        {
             QListView*v=listView();
             MHviewItem * box = mbox;
             /* be carefull - after that this object is destroyd so don't use
              * any member of it after that call!!*/
             mbox->refresh(true);
-            if (v) {
+            if (v)
+            {
                 v->setSelected(box,true);
             }
         }
@@ -725,7 +802,8 @@ void MHfolderItem::createFolder()
 
 void MHfolderItem::contextMenuSelected(int which)
 {
-    switch(which) {
+    switch(which)
+    {
     case 0:
         deleteAllMail(mbox->getWrapper(),folder);
         break;
@@ -749,21 +827,21 @@ void MHfolderItem::contextMenuSelected(int which)
 
 const QString AccountViewItem::contextName="AccountViewItem";
 
-AccountViewItem::AccountViewItem( AccountView *parent ) 
-    : QListViewItem( parent )
+AccountViewItem::AccountViewItem( AccountView *parent )
+        : QListViewItem( parent )
 {
     init();
     m_Backlink = parent;
 }
 
 AccountViewItem::AccountViewItem( QListViewItem *parent)
-    : QListViewItem( parent) 
+        : QListViewItem( parent)
 {
     init();
 }
 
 AccountViewItem::AccountViewItem( QListViewItem *parent , QListViewItem*after  )
-    :QListViewItem( parent,after )
+        :QListViewItem( parent,after )
 {
     init();
 }
@@ -790,13 +868,15 @@ void AccountViewItem::deleteAllMail(AbstractMail*wrapper,Folder*folder)
     QString fname="";
     if (folder) fname = folder->getDisplayName();
     int yesno = QMessageBox::warning(0,QObject::tr("Delete all mails",contextName),
-        QObject::tr("<center>Realy delete all mails in box <br>%1</center>",contextName).
-            arg(fname),
-        QObject::tr("Yes",contextName),
-        QObject::tr("No",contextName),QString::null,1,1);
+                                     QObject::tr("<center>Realy delete all mails in box <br>%1</center>",contextName).
+                                     arg(fname),
+                                     QObject::tr("Yes",contextName),
+                                     QObject::tr("No",contextName),QString::null,1,1);
     qDebug("Auswahl: %i",yesno);
-    if (yesno == 0) {
-        if (wrapper->deleteAllMail(folder)) {
+    if (yesno == 0)
+    {
+        if (wrapper->deleteAllMail(folder))
+        {
             AccountView * view = (AccountView*)listView();
             if (view) view->refreshCurrent();
         }
@@ -806,7 +886,8 @@ void AccountViewItem::deleteAllMail(AbstractMail*wrapper,Folder*folder)
 void AccountViewItem::removeChilds()
 {
     QListViewItem *child = firstChild();
-    while ( child ) {
+    while ( child )
+    {
         QListViewItem *tmp = child;
         child = child->nextSibling();
         delete tmp;
@@ -825,13 +906,17 @@ AccountViewItem*AccountViewItem::findSubItem(const QString&path,AccountViewItem*
     AccountViewItem*pitem,*sitem;
     if (!start) pitem = (AccountViewItem*)firstChild();
     else pitem = (AccountViewItem*)start->firstChild();
-    while (pitem) {
-        if (pitem->matchName(path)) {
+    while (pitem)
+    {
+        if (pitem->matchName(path))
+        {
             break;
         }
-        if (pitem->childCount()>0) {
+        if (pitem->childCount()>0)
+        {
             sitem = findSubItem(path,pitem);
-            if (sitem) {
+            if (sitem)
+            {
                 pitem = sitem;
                 break;
             }

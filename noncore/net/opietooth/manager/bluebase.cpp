@@ -22,11 +22,12 @@
 #include "btconnectionitem.h"
 #include "rfcommassigndialogimpl.h"
 
-#include <remotedevice.h>
-#include <services.h>
+/* OPIE */
+#include <qpe/qpeapplication.h>
+#include <qpe/resource.h>
+#include <qpe/config.h>
 
-#include <stdlib.h>
-
+/* QT */
 #include <qframe.h>
 #include <qlabel.h>
 #include <qpushbutton.h>
@@ -46,15 +47,16 @@
 #include <qtimer.h>
 #include <qlist.h>
 
-#include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
-#include <qpe/config.h>
-
+/* STD */
+#include <remotedevice.h>
+#include <services.h>
+#include <stdlib.h>
 
 using namespace OpieTooth;
 
 BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
-    : BluetoothBase( parent, name, fl ) {
+        : BluetoothBase( parent, name, fl )
+{
 
     m_localDevice = new Manager( "hci0" );
 
@@ -62,7 +64,7 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     connect( configApplyButton, SIGNAL(clicked() ), this, SLOT(applyConfigChanges() ) );
 
     connect( rfcommBindButton,  SIGNAL( clicked() ),  this,  SLOT( rfcommDialog() ) );
-// not good since lib is async
+    // not good since lib is async
     //       connect( ListView2, SIGNAL( expanded ( QListViewItem* ) ),
     //                  this, SLOT( addServicesToDevice( QListViewItem * ) ) );
     connect( ListView2, SIGNAL( clicked( QListViewItem* )),
@@ -76,7 +78,7 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     connect( m_localDevice, SIGNAL( connections( ConnectionState::ValueList ) ),
              this, SLOT( addConnectedDevices( ConnectionState::ValueList ) ) );
     connect( m_localDevice, SIGNAL( signalStrength( const QString&, const QString& ) ),
-    	     this, SLOT( addSignalStrength( const QString&, const QString& ) ) );
+             this, SLOT( addSignalStrength( const QString&, const QString& ) ) );
 
 
     // let hold be rightButtonClicked()
@@ -115,7 +117,8 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
 /**
  * Reads all options from the config file
  */
-void BlueBase::readConfig() {
+void BlueBase::readConfig()
+{
 
     Config cfg( "bluetoothmanager" );
     cfg.setGroup( "bluezsettings" );
@@ -131,7 +134,8 @@ void BlueBase::readConfig() {
 /**
  * Writes all options to the config file
  */
-void BlueBase::writeConfig() {
+void BlueBase::writeConfig()
+{
 
     Config cfg( "bluetoothmanager" );
     cfg.setGroup( "bluezsettings" );
@@ -149,7 +153,8 @@ void BlueBase::writeConfig() {
 /**
  * Modify the hcid.conf file to our needs
  */
-void BlueBase::writeToHciConfig() {
+void BlueBase::writeToHciConfig()
+{
     qWarning("writeToHciConfig");
     HciConfWrapper hciconf ( "/etc/bluetooth/hcid.conf" );
     hciconf.load();
@@ -166,7 +171,8 @@ void BlueBase::writeToHciConfig() {
 /**
  * Read the list of allready known devices
  */
-void BlueBase::readSavedDevices() {
+void BlueBase::readSavedDevices()
+{
 
     QValueList<RemoteDevice> loadedDevices;
     DeviceHandler handler;
@@ -179,12 +185,14 @@ void BlueBase::readSavedDevices() {
 /**
  * Write the list of allready known devices
  */
-void BlueBase::writeSavedDevices() {
+void BlueBase::writeSavedDevices()
+{
     QListViewItemIterator it( ListView2 );
     BTListItem* item;
     BTDeviceItem* device;
     RemoteDevice::ValueList list;
-    for ( ; it.current(); ++it ) {
+    for ( ; it.current(); ++it )
+    {
         item = (BTListItem*)it.current();
         if(item->typeId() != BTListItem::Device )
             continue;
@@ -205,7 +213,8 @@ void BlueBase::writeSavedDevices() {
 /**
  * Set up the gui
  */
-void BlueBase::initGui() {
+void BlueBase::initGui()
+{
     StatusLabel->setText( status() ); // maybe move it to getStatus()
     cryptCheckBox->setChecked( m_useEncryption );
     authCheckBox->setChecked( m_enableAuthentification );
@@ -222,7 +231,8 @@ void BlueBase::initGui() {
  * Get the status informations and returns it
  * @return QString the status informations gathered
  */
-QString BlueBase::status()const{
+QString BlueBase::status()const
+{
     QString infoString = tr( "<b>Device name : </b> Ipaq" );
     infoString += QString( "<br><b>" + tr( "MAC adress: " ) +"</b> No idea" );
     infoString += QString(  "<br><b>" + tr( "Class" ) + "</b> PDA" );
@@ -234,7 +244,8 @@ QString BlueBase::status()const{
 /**
  * Read the current values from the gui and invoke writeConfig()
  */
-void BlueBase::applyConfigChanges() {
+void BlueBase::applyConfigChanges()
+{
     m_deviceName =  deviceNameLine->text();
     m_defaultPasskey = passkeyLine->text();
     m_useEncryption = cryptCheckBox->isChecked();
@@ -251,12 +262,12 @@ void BlueBase::applyConfigChanges() {
  * Launch Rfcomm Bind dialog
  *
  */
-void BlueBase::rfcommDialog() {
+void BlueBase::rfcommDialog()
+{
     RfcommAssignDialog rfcommAssign ( this, "RfcommAssignDialog", true, WStyle_ContextHelp  );
 
-    rfcommAssign.showMaximized();
-
-    if ( rfcommAssign.exec() == QDialog::Accepted )  {
+    if ( QPEApplication::execDialog( &rfcommAssign ) == QDialog::Accepted )
+    {
         rfcommAssign.saveConfig();
     }
 }
@@ -265,11 +276,13 @@ void BlueBase::rfcommDialog() {
  * Add fresh found devices from scan dialog to the listing
  *
  */
-void BlueBase::addSearchedDevices( const QValueList<RemoteDevice> &newDevices ) {
+void BlueBase::addSearchedDevices( const QValueList<RemoteDevice> &newDevices )
+{
     BTDeviceItem * deviceItem;
     QValueList<RemoteDevice>::ConstIterator it;
 
-    for( it = newDevices.begin(); it != newDevices.end() ; ++it ) {
+    for( it = newDevices.begin(); it != newDevices.end() ; ++it )
+    {
 
         if (find( (*it)  )) // is already inserted
             continue;
@@ -290,21 +303,23 @@ void BlueBase::addSearchedDevices( const QValueList<RemoteDevice> &newDevices ) 
 /**
  * Action that is toggled on entrys on click
  */
-void BlueBase::startServiceActionClicked( QListViewItem */*item*/ ) {
-}
+void BlueBase::startServiceActionClicked( QListViewItem */*item*/ )
+{}
 
 
 /**
  * Action that are toggled on hold (mostly QPopups i guess)
  */
-void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & point, int /*column*/ ) {
+void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & point, int /*column*/ )
+{
     if (!item )
         return;
 
     QPopupMenu *menu = new QPopupMenu();
     int ret=0;
 
-    if ( ((BTListItem*)item)->type() == "device") {
+    if ( ((BTListItem*)item)->type() == "device")
+    {
 
         QPopupMenu *groups = new QPopupMenu();
 
@@ -316,7 +331,8 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
 
         ret = menu->exec( point  , 0);
 
-        switch(ret) {
+        switch(ret)
+        {
         case -1:
             break;
         case 2:
@@ -343,21 +359,26 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
      * the PopupMenu to delete itself
      *
      */
-    else if ( ((BTListItem*)item)->type() == "service") {
+    else if ( ((BTListItem*)item)->type() == "service")
+    {
         BTServiceItem* service = (BTServiceItem*)item;
         QMap<int, QString> list = service->services().classIdList();
         QMap<int, QString>::Iterator it = list.begin();
         QPopupMenu *popup =0l;
-        if ( it != list.end() ) {
-	    qWarning("Searching id %d %s", it.key(), it.data().latin1() );
+        if ( it != list.end() )
+        {
+            qWarning("Searching id %d %s", it.key(), it.data().latin1() );
             popup = m_popHelper.find( it.key(),
                                       service->services(),
                                       (BTDeviceItem*)service->parent() );
-	}else {
-	    qWarning("Empty");
-	}
+        }
+        else
+        {
+            qWarning("Empty");
+        }
 
-        if ( popup == 0l ) {
+        if ( popup == 0l )
+        {
             qWarning("factory returned 0l");
             popup = new QPopupMenu();
         }
@@ -365,9 +386,12 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
 
         ret = popup->exec( point );
         qWarning("returned from exec() ");
-        if ( ret == -1 ) {
+        if ( ret == -1 )
+        {
             ;
-        } else if ( ret == test1 ) {
+        }
+        else if ( ret == test1 )
+        {
             ;
         }
         delete popup;
@@ -380,7 +404,8 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
  * Search and display avail. services for a device (on expand from device listing)
  * @param item the service item returned
  */
-void BlueBase::addServicesToDevice( BTDeviceItem * item ) {
+void BlueBase::addServicesToDevice( BTDeviceItem * item )
+{
     qDebug("addServicesToDevice");
     // row of mac adress text(3)
     RemoteDevice device = item->remoteDevice();
@@ -396,7 +421,8 @@ void BlueBase::addServicesToDevice( BTDeviceItem * item ) {
  * @param device the mac address of the remote device
  * @param servicesList the list with the service the device has.
  */
-void BlueBase::addServicesToDevice( const QString& device, Services::ValueList servicesList ) {
+void BlueBase::addServicesToDevice( const QString& device, Services::ValueList servicesList )
+{
     qDebug("fill services list");
 
     QMap<QString,BTDeviceItem*>::Iterator it;
@@ -412,9 +438,10 @@ void BlueBase::addServicesToDevice( const QString& device, Services::ValueList s
     QList<QListViewItem> tempList;
     tempList.setAutoDelete( true );
     QListViewItem * child = deviceItem->firstChild();
-    while( child ) {
-	tempList.append( child );
-	child = child->nextSibling();
+    while( child )
+    {
+        tempList.append( child );
+        child = child->nextSibling();
     }
     tempList.clear();
 
@@ -422,22 +449,27 @@ void BlueBase::addServicesToDevice( const QString& device, Services::ValueList s
     BTServiceItem* serviceItem;
 
 
-    if (!servicesList.isEmpty() ) {
+    if (!servicesList.isEmpty() )
+    {
         // add services
         QMap<int, QString> list;
         QMap<int, QString>::Iterator classIt;
-        for( it2 = servicesList.begin(); it2 != servicesList.end(); ++it2 ) {
+        for( it2 = servicesList.begin(); it2 != servicesList.end(); ++it2 )
+        {
             serviceItem = new BTServiceItem( deviceItem, (*it2)  );
             list = (*it2).classIdList();
             classIt = list.begin();
             int classId=0;
-            if ( classIt != list.end() ) {
+            if ( classIt != list.end() )
+            {
                 classId = classIt.key();
             }
 
             serviceItem->setPixmap( 0, m_iconLoader->serviceIcon( classId ) );
         }
-    } else {
+    }
+    else
+    {
         Services s1;
         s1.setServiceName( tr("no services found") );
         serviceItem = new BTServiceItem( deviceItem, s1 );
@@ -450,82 +482,101 @@ void BlueBase::addServicesToDevice( const QString& device, Services::ValueList s
 
 
 
-void BlueBase::addSignalStrength() {
+void BlueBase::addSignalStrength()
+{
 
-	QListViewItemIterator it( ListView4 );
-	for ( ; it.current(); ++it ) {
-	     m_localDevice->signalStrength( ((BTConnectionItem*)it.current() )->connection().mac() );
-	}
+    QListViewItemIterator it( ListView4 );
+    for ( ; it.current(); ++it )
+    {
+        m_localDevice->signalStrength( ((BTConnectionItem*)it.current() )->connection().mac() );
+    }
 
-	QTimer::singleShot( 5000, this, SLOT( addSignalStrength() ) );
+    QTimer::singleShot( 5000, this, SLOT( addSignalStrength() ) );
 }
 
-void BlueBase::addSignalStrength( const QString& mac, const QString& strength ) {
+void BlueBase::addSignalStrength( const QString& mac, const QString& strength )
+{
 
-	QListViewItemIterator it( ListView4 );
-	for ( ; it.current(); ++it ) {
-		if( ((BTConnectionItem*)it.current())->connection().mac() == mac ) {
-			((BTConnectionItem*)it.current() )->setSignalStrength( strength );
-		}
-	}
+    QListViewItemIterator it( ListView4 );
+    for ( ; it.current(); ++it )
+    {
+        if( ((BTConnectionItem*)it.current())->connection().mac() == mac )
+        {
+            ((BTConnectionItem*)it.current() )->setSignalStrength( strength );
+        }
+    }
 }
 
 /**
  * Add the existing connections (pairs) to the connections tab.
  * This one triggers the search
  */
-void BlueBase::addConnectedDevices() {
-        m_localDevice->searchConnections();
+void BlueBase::addConnectedDevices()
+{
+    m_localDevice->searchConnections();
 }
 
 /**
  * This adds the found connections to the connection tab.
  * @param connectionList the ValueList with all current connections
  */
-void BlueBase::addConnectedDevices( ConnectionState::ValueList connectionList ) {
+void BlueBase::addConnectedDevices( ConnectionState::ValueList connectionList )
+{
 
     QValueList<OpieTooth::ConnectionState>::Iterator it;
     BTConnectionItem * connectionItem;
 
-    if ( !connectionList.isEmpty() ) {
+    if ( !connectionList.isEmpty() )
+    {
 
-        for (it = connectionList.begin(); it != connectionList.end(); ++it) {
+        for (it = connectionList.begin(); it != connectionList.end(); ++it)
+        {
 
             QListViewItemIterator it2( ListView4 );
-	    bool found = false;
-            for ( ; it2.current(); ++it2 ) {
-	        if( ( (BTConnectionItem*)it2.current())->connection().mac() == (*it).mac() ) {
-		    found = true;
-	        }
-	    }
-
-	    if ( found == false ) {
-                 connectionItem = new BTConnectionItem( ListView4, (*it) );
-
- 	         if( m_deviceList.find((*it).mac()).data() ) {
-	               connectionItem->setName( m_deviceList.find( (*it).mac()).data()->name() );
-                 }
-	    }
-
-	}
-
-        QListViewItemIterator it2( ListView4 );
-        for ( ; it2.current(); ++it2 ) {
-	    bool found = false;
-    	    for (it = connectionList.begin(); it != connectionList.end(); ++it) {
-                if( ( ((BTConnectionItem*)it2.current())->connection().mac() ) == (*it).mac() )  {
-			found = true;
-	        }
+            bool found = false;
+            for ( ; it2.current(); ++it2 )
+            {
+                if( ( (BTConnectionItem*)it2.current())->connection().mac() == (*it).mac() )
+                {
+                    found = true;
+                }
             }
 
-	    if ( !found ) {
-		delete it2.current();
-	    }
+            if ( found == false )
+            {
+                connectionItem = new BTConnectionItem( ListView4, (*it) );
+
+                if( m_deviceList.find((*it).mac()).data() )
+                {
+                    connectionItem->setName( m_deviceList.find( (*it).mac()).data()->name() );
+                }
+            }
+
+        }
+
+        QListViewItemIterator it2( ListView4 );
+        for ( ; it2.current(); ++it2 )
+        {
+            bool found = false;
+            for (it = connectionList.begin(); it != connectionList.end(); ++it)
+            {
+                if( ( ((BTConnectionItem*)it2.current())->connection().mac() ) == (*it).mac() )
+                {
+                    found = true;
+                }
+            }
+
+            if ( !found )
+            {
+                delete it2.current();
+            }
 
         }
 
 
-    } else {
+    }
+    else
+    {
         ListView4->clear();
         ConnectionState con;
         con.setMac( tr("No connections found") );
@@ -541,7 +592,8 @@ void BlueBase::addConnectedDevices( ConnectionState::ValueList connectionList ) 
  * Find out if a device can  currently be reached
  * @param device
  */
-void BlueBase::deviceActive( const RemoteDevice &device ) {
+void BlueBase::deviceActive( const RemoteDevice &device )
+{
     // search by mac, async, gets a signal back
     // We should have a BTDeviceItem there or where does it get added to the map -zecke
     m_localDevice->isAvailable( device.mac() );
@@ -553,7 +605,8 @@ void BlueBase::deviceActive( const RemoteDevice &device ) {
  * @param device - the mac address
  * @param connected - if it is avail. or not
  */
-void BlueBase::deviceActive( const QString& device, bool connected  ) {
+void BlueBase::deviceActive( const QString& device, bool connected  )
+{
     qDebug("deviceActive slot");
 
     QMap<QString,BTDeviceItem*>::Iterator it;
@@ -565,9 +618,12 @@ void BlueBase::deviceActive( const QString& device, bool connected  ) {
     BTDeviceItem* deviceItem = it.data();
 
 
-    if ( connected ) {
+    if ( connected )
+    {
         deviceItem->setPixmap( 1, m_onPix );
-    } else {
+    }
+    else
+    {
         deviceItem->setPixmap( 1, m_offPix );
     }
     m_deviceList.remove( it );
@@ -577,20 +633,22 @@ void BlueBase::deviceActive( const QString& device, bool connected  ) {
 /**
  * Open the "scan for devices"  dialog
  */
-void BlueBase::startScan() {
+void BlueBase::startScan()
+{
     ScanDialog *scan = new ScanDialog( this, "ScanDialog",
                                        true, WDestructiveClose );
     QObject::connect( scan, SIGNAL( selectedDevices( const QValueList<RemoteDevice>& ) ),
                       this, SLOT( addSearchedDevices( const QValueList<RemoteDevice>& ) ) );
 
-    scan->showMaximized();
+    QPEApplication::showDialog( scan );
 }
 
 
 /**
  * Set the informations about the local device in information Tab
  */
-void BlueBase::setInfo() {
+void BlueBase::setInfo()
+{
     StatusLabel->setText( status() );
 }
 
@@ -598,7 +656,8 @@ void BlueBase::setInfo() {
 /**
  * Decontructor
  */
-BlueBase::~BlueBase() {
+BlueBase::~BlueBase()
+{
     writeSavedDevices();
     delete m_iconLoader;
 }
@@ -610,11 +669,13 @@ BlueBase::~BlueBase() {
  * @param dev RemoteDevice to find
  * @return returns true if found
  */
-bool BlueBase::find( const RemoteDevice& rem ) {
+bool BlueBase::find( const RemoteDevice& rem )
+{
     QListViewItemIterator it( ListView2 );
     BTListItem* item;
     BTDeviceItem* device;
-    for (; it.current(); ++it ) {
+    for (; it.current(); ++it )
+    {
         item = (BTListItem*) it.current();
         if ( item->typeId() != BTListItem::Device )
             continue;

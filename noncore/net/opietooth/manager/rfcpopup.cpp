@@ -1,9 +1,13 @@
 
-#include <qtimer.h>
-
 #include "pppdialog.h"
 #include "rfcpopup.h"
 #include "rfcommassigndialogimpl.h"
+
+/* OPIE */
+#include <qpe/qpeapplication.h>
+
+/* QT */
+#include <qtimer.h>
 
 using namespace OpieTooth;
 
@@ -11,7 +15,8 @@ using namespace OpieTooth;
  * c'tor init the QAction
  */
 RfcCommPopup::RfcCommPopup( OpieTooth::BTDeviceItem* item  )
-    : QPopupMenu()  {
+        : QPopupMenu()
+{
     qWarning("RfcCommPopup c'tor");
 
     QAction* a;
@@ -32,7 +37,7 @@ RfcCommPopup::RfcCommPopup( OpieTooth::BTDeviceItem* item  )
     a->setText("Disconnect");
     a->addTo( this );
     connect( a, SIGNAL( activated() ) ,
-            this, SLOT( slotDisconnect() ) );
+             this, SLOT( slotDisconnect() ) );
 
 
     /* foo action */
@@ -40,7 +45,7 @@ RfcCommPopup::RfcCommPopup( OpieTooth::BTDeviceItem* item  )
     a->setText("Bind table");
     a->addTo( this );
     connect( a, SIGNAL( activated() ),
-            this, SLOT( slotBind() ) );
+             this, SLOT( slotBind() ) );
 
 
     /* bar action */
@@ -48,49 +53,51 @@ RfcCommPopup::RfcCommPopup( OpieTooth::BTDeviceItem* item  )
     a->setText( "Bar" );
     a->addTo( this );
     connect( a, SIGNAL( activated() ),
-            this, SLOT( slotBar() ) );
+             this, SLOT( slotBar() ) );
 
 };
 
 
-RfcCommPopup::~RfcCommPopup() {
-/*  delete m_con;
-    delete m_dis;
-    delete m_foo;
-    delete m_bar; */
+RfcCommPopup::~RfcCommPopup()
+{
+    /*  delete m_con;
+        delete m_dis;
+        delete m_foo;
+        delete m_bar; */
 }
 
 
-void RfcCommPopup::slotConnect() {
+void RfcCommPopup::slotConnect()
+{
 
     qWarning("connect");
 
-
-
     PPPDialog pppDialog;
-    pppDialog.showMaximized();
-    pppDialog.exec();
+    QPEApplication::execDialog( &pppDialog );
 }
 
 
-void RfcCommPopup::slotDisconnect() {
+void RfcCommPopup::slotDisconnect()
+{
     qWarning("slot disconnected");
 }
 
 
-void RfcCommPopup::slotBind() {
+void RfcCommPopup::slotBind()
+{
     RfcommAssignDialog rfcommAssign ( this, "RfcommAssignDialog", true, WStyle_ContextHelp  );
 
-    rfcommAssign.showMaximized();
     rfcommAssign.newDevice( m_item->mac() );
 
-    if ( rfcommAssign.exec() == QDialog::Accepted )  {
+    if ( QPEApplication::execDialog( &rfcommAssign ) == QDialog::Accepted )
+    {
         rfcommAssign.saveConfig();
     }
 }
 
 
-void RfcCommPopup::slotBar() {
+void RfcCommPopup::slotBar()
+{
     qWarning("slotBar");
 };
 

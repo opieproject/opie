@@ -1,8 +1,13 @@
+#include "ircservereditor.h"
+
+/* OPIE */
+#include <qpe/qpeapplication.h>
+
+/* QT */
 #include <qmessagebox.h>
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qwhatsthis.h>
-#include "ircservereditor.h"
 
 IRCServerEditor::IRCServerEditor(IRCServer server, QWidget* parent, const char* name, bool modal, WFlags) : QDialog(parent, name, modal, WStyle_ContextHelp) {
     QGridLayout *layout = new QGridLayout(this, 7, 2, 5, 5);
@@ -43,7 +48,8 @@ IRCServerEditor::IRCServerEditor(IRCServer server, QWidget* parent, const char* 
     layout->addWidget(label, 6, 0);
     layout->addWidget(m_channels, 6, 1);
     setCaption(tr("Edit server information"));
-    showMaximized();
+
+    QPEApplication::showDialog( this );
 }
 
 

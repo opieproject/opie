@@ -1,22 +1,28 @@
-#include <qmessagebox.h>
+
 #include "settingsdialog.h"
 #include "opiemail.h"
 #include "editaccounts.h"
 #include "composemail.h"
-#include <libmailwrapper/smtpwrapper.h>
-#include <qpe/qcopenvelope_qws.h>
-#include <qpe/resource.h>
-#include <qaction.h>
-#include <qapplication.h>
-#include <libmailwrapper/mailtypes.h>
-#include <libmailwrapper/abstractmail.h>
 #include "mailistviewitem.h"
 #include "viewmail.h"
 #include "selectstore.h"
 #include "selectsmtp.h"
 
+/* OPIE */
+#include <libmailwrapper/smtpwrapper.h>
+#include <libmailwrapper/mailtypes.h>
+#include <libmailwrapper/abstractmail.h>
+#include <qpe/qcopenvelope_qws.h>
+#include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
+
+/* QT */
+#include <qmessagebox.h>
+#include <qaction.h>
+#include <qapplication.h>
+
 OpieMail::OpieMail( QWidget *parent, const char *name, WFlags flags )
-    : MainWindow( parent, name, WStyle_ContextHelp )
+        : MainWindow( parent, name, WStyle_ContextHelp )
 {
     settings = new Settings();
 
@@ -31,13 +37,16 @@ OpieMail::~OpieMail()
 void OpieMail::appMessage(const QCString &msg, const QByteArray &data)
 {
     // copied from old mail2
-    if (msg == "writeMail(QString,QString)") {
+    if (msg == "writeMail(QString,QString)")
+    {
         QDataStream stream(data,IO_ReadOnly);
         QString name, email;
         stream >> name >> email;
         // removing the whitespaces at beginning and end is needed!
         slotwriteMail(name.stripWhiteSpace(),email.stripWhiteSpace());
-    } else if (msg == "newMail()") {
+    }
+    else if (msg == "newMail()")
+    {
         slotComposeMail();
     }
 }
@@ -45,16 +54,19 @@ void OpieMail::appMessage(const QCString &msg, const QByteArray &data)
 void OpieMail::slotwriteMail(const QString&name,const QString&email)
 {
     ComposeMail compose( settings, this, 0, true , WStyle_ContextHelp );
-    if (!email.isEmpty()) {
-        if (!name.isEmpty()) {
+    if (!email.isEmpty())
+    {
+        if (!name.isEmpty())
+        {
             compose.setTo("\"" + name + "\"" + " " + "<"+ email + ">");
-        } else {
+        }
+        else
+        {
             compose.setTo(email);
         }
     }
-    compose.showMaximized();
     compose.slotAdjustColumns();
-    compose.exec();
+    QPEApplication::execDialog( &compose );
 }
 
 void OpieMail::slotComposeMail()
@@ -72,30 +84,38 @@ void OpieMail::slotSendQueued()
     QList<SMTPaccount> smtpList;
     smtpList.setAutoDelete(false);
     Account *it;
-    for ( it = list.first(); it; it = list.next() ) {
-        if ( it->getType().compare( "SMTP" ) == 0 ) {
+    for ( it = list.first(); it; it = list.next() )
+    {
+        if ( it->getType().compare( "SMTP" ) == 0 )
+        {
             smtp = static_cast<SMTPaccount *>(it);
             smtpList.append(smtp);
         }
     }
-    if (smtpList.count()==0) {
+    if (smtpList.count()==0)
+    {
         QMessageBox::information(0,tr("Info"),tr("Define a smtp account first"));
         return;
     }
-    if (smtpList.count()==1) {
+    if (smtpList.count()==1)
+    {
         smtp = smtpList.at(0);
-    } else {
+    }
+    else
+    {
         smtp = 0;
         selectsmtp selsmtp;
         selsmtp.setSelectionlist(&smtpList);
-        selsmtp.showMaximized();
-        if (selsmtp.exec()==QDialog::Accepted) {
+        if ( QPEApplication::execDialog( &selsmtp ) == QDialog::Accepted )
+        {
             smtp = selsmtp.selected_smtp();
         }
     }
-    if (smtp) {
+    if (smtp)
+    {
         SMTPwrapper * wrap = new SMTPwrapper(smtp);
-        if ( wrap->flushOutbox() ) {
+        if ( wrap->flushOutbox() )
+        {
             QMessageBox::information(0,tr("Info"),tr("Mail queue flushed"));
         }
         delete wrap;
@@ -110,17 +130,15 @@ void OpieMail::slotSearchMails()
 void OpieMail::slotEditSettings()
 {
     SettingsDialog settingsDialog( this,  0, true,  WStyle_ContextHelp );
-    settingsDialog.showMaximized();
-    settingsDialog.exec();
+    QPEApplication::execDialog( &settingsDialog );
 }
 
 void OpieMail::slotEditAccounts()
 {
     qDebug( "Edit Accounts" );
     EditAccounts eaDialog( settings, this, 0, true,  WStyle_ContextHelp );
-    eaDialog.showMaximized();
     eaDialog.slotAdjustColumns();
-    eaDialog.exec();
+    QPEApplication::execDialog( &eaDialog );
     if ( settings ) delete settings;
     settings = new Settings();
 
@@ -139,9 +157,12 @@ void OpieMail::displayMail()
     readMail.showMaximized();
     readMail.exec();
 
-    if (  readMail.deleted ) {
-         folderView->refreshCurrent();
-    } else {
+    if (  readMail.deleted )
+    {
+        folderView->refreshCurrent();
+    }
+    else
+    {
         ( (MailListViewItem*)item )->setPixmap( 0, Resource::loadPixmap( "" ) );
     }
 }
@@ -150,9 +171,10 @@ void OpieMail::slotDeleteMail()
 {
     if (!mailView->currentItem()) return;
     RecMail mail = ((MailListViewItem*)mailView->currentItem() )->data();
-    if ( QMessageBox::warning(this, tr("Delete Mail"), QString( tr("<p>Do you really want to delete this mail? <br><br>" ) + mail.getFrom() + " - " + mail.getSubject() ) , QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes ) {
-       mail.Wrapper()->deleteMail( mail );
-       folderView->refreshCurrent();
+    if ( QMessageBox::warning(this, tr("Delete Mail"), QString( tr("<p>Do you really want to delete this mail? <br><br>" ) + mail.getFrom() + " - " + mail.getSubject() ) , QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes )
+    {
+        mail.Wrapper()->deleteMail( mail );
+        folderView->refreshCurrent();
     }
 }
 
@@ -163,7 +185,8 @@ void OpieMail::mailHold(int button, QListViewItem *item,const QPoint&,int  )
     qDebug("Event right/hold");
     if (!item) return;
     QPopupMenu *m = new QPopupMenu(0);
-    if (m) {
+    if (m)
+    {
         m->insertItem(tr("Read this mail"),this,SLOT(displayMail()));
         m->insertItem(tr("Delete this mail"),this,SLOT(slotDeleteMail()));
         m->insertItem(tr("Copy/Move this mail"),this,SLOT(slotMoveCopyMail()));
@@ -175,11 +198,14 @@ void OpieMail::mailHold(int button, QListViewItem *item,const QPoint&,int  )
 
 void OpieMail::slotShowFolders( bool show )
 {
-   qDebug( "Show Folders" );
-    if ( show && folderView->isHidden() ) {
+    qDebug( "Show Folders" );
+    if ( show && folderView->isHidden() )
+    {
         qDebug( "-> showing" );
         folderView->show();
-    } else if ( !show && !folderView->isHidden() ) {
+    }
+    else if ( !show && !folderView->isHidden() )
+    {
         qDebug( "-> hiding" );
         folderView->hide();
     }
@@ -189,7 +215,8 @@ void OpieMail::refreshMailView(QList<RecMail>*list)
 {
     MailListViewItem*item = 0;
     mailView->clear();
-    for (unsigned int i = 0; i < list->count();++i) {
+    for (unsigned int i = 0; i < list->count();++i)
+    {
         item = new MailListViewItem(mailView,item);
         item->storeData(*(list->at(i)));
         item->showEntry();
@@ -216,12 +243,14 @@ void OpieMail::slotMoveCopyMail()
     targetMail = sels.currentMail();
     targetFolder = sels.currentFolder();
     if ( (mail.Wrapper()==targetMail && mail.getMbox()==targetFolder) ||
-        targetFolder.isEmpty()) {
+            targetFolder.isEmpty())
+    {
         return;
     }
-    if (sels.newFolder() && !targetMail->createMbox(targetFolder)) {
+    if (sels.newFolder() && !targetMail->createMbox(targetFolder))
+    {
         QMessageBox::critical(0,tr("Error creating new Folder"),
-            tr("<center>Error while creating<br>new folder - breaking.</center>"));
+                              tr("<center>Error while creating<br>new folder - breaking.</center>"));
         return;
     }
     mail.Wrapper()->mvcpMail(mail,targetFolder,targetMail,sels.moveMails());

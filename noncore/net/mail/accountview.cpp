@@ -1,21 +1,26 @@
+
 #include "accountview.h"
 #include "accountitem.h"
 #include "selectstore.h"
-#include <qmessagebox.h>
-#include <qpopupmenu.h>
+
+/* OPIE */
 #include <libmailwrapper/settings.h>
 #include <libmailwrapper/mailwrapper.h>
 #include <libmailwrapper/mailtypes.h>
 #include <libmailwrapper/abstractmail.h>
+#include <qpe/qpeapplication.h>
 
+/* QT */
+#include <qmessagebox.h>
+#include <qpopupmenu.h>
 
 AccountView::AccountView( QWidget *parent, const char *name, WFlags flags )
-    : QListView( parent, name, flags )
+        : QListView( parent, name, flags )
 {
     connect( this, SIGNAL( selectionChanged( QListViewItem * ) ),
-            SLOT( refresh( QListViewItem * ) ) );
+             SLOT( refresh( QListViewItem * ) ) );
     connect( this, SIGNAL( mouseButtonPressed(int, QListViewItem *,const QPoint&,int  ) ),this,
-            SLOT( slotHold( int, QListViewItem *,const QPoint&,int  ) ) );
+             SLOT( slotHold( int, QListViewItem *,const QPoint&,int  ) ) );
     setSorting(0);
 }
 
@@ -55,12 +60,16 @@ void AccountView::populate( QList<Account> list )
     mhAccounts.append(new MHviewItem(AbstractMail::defaultLocalfolder(),this));
 
     Account *it;
-    for ( it = list.first(); it; it = list.next() ) {
-        if ( it->getType().compare( "IMAP" ) == 0 ) {
+    for ( it = list.first(); it; it = list.next() )
+    {
+        if ( it->getType().compare( "IMAP" ) == 0 )
+        {
             IMAPaccount *imap = static_cast<IMAPaccount *>(it);
             qDebug( "added IMAP " + imap->getAccountName() );
             imapAccounts.append(new IMAPviewItem( imap, this ));
-        } else if ( it->getType().compare( "POP3" ) == 0 ) {
+        }
+        else if ( it->getType().compare( "POP3" ) == 0 )
+        {
             POP3account *pop3 = static_cast<POP3account *>(it);
             qDebug( "added POP3 " + pop3->getAccountName() );
             /* must not be hold 'cause it isn't required */
@@ -69,10 +78,12 @@ void AccountView::populate( QList<Account> list )
     }
 }
 
-void AccountView::refresh(QListViewItem *item) {
+void AccountView::refresh(QListViewItem *item)
+{
 
     qDebug("AccountView refresh...");
-    if ( item ) {
+    if ( item )
+    {
         m_currentItem = item;
         QList<RecMail> headerlist;
         headerlist.setAutoDelete(true);
@@ -95,7 +106,6 @@ void AccountView::refreshCurrent()
 
 void AccountView::refreshAll()
 {
-
 }
 
 RecBody AccountView::fetchBody(const RecMail&aMail)
@@ -108,15 +118,17 @@ RecBody AccountView::fetchBody(const RecMail&aMail)
 
 void AccountView::setupFolderselect(Selectstore*sels)
 {
-    sels->showMaximized();
+    QPEApplication::showDialog( sels );
     QStringList sFolders;
     unsigned int i = 0;
-    for (i=0; i < mhAccounts.count();++i) {
+    for (i=0; i < mhAccounts.count();++i)
+    {
         mhAccounts[i]->refresh(false);
         sFolders = mhAccounts[i]->subFolders();
         sels->addAccounts(mhAccounts[i]->getWrapper(),sFolders);
     }
-    for (i=0; i < imapAccounts.count();++i) {
+    for (i=0; i < imapAccounts.count();++i)
+    {
         if (imapAccounts[i]->offline())
             continue;
         imapAccounts[i]->refreshFolders(false);
@@ -134,12 +146,14 @@ void AccountView::downloadMails(Folder*fromFolder,AbstractMail*fromWrapper)
     targetMail = sels.currentMail();
     targetFolder = sels.currentFolder();
     if ( (fromWrapper==targetMail && fromFolder->getName()==targetFolder) ||
-        targetFolder.isEmpty()) {
+            targetFolder.isEmpty())
+    {
         return;
     }
-    if (sels.newFolder() && !targetMail->createMbox(targetFolder)) {
+    if (sels.newFolder() && !targetMail->createMbox(targetFolder))
+    {
         QMessageBox::critical(0,tr("Error creating new Folder"),
-            tr("<center>Error while creating<br>new folder - breaking.</center>"));
+                              tr("<center>Error while creating<br>new folder - breaking.</center>"));
         return;
     }
     qDebug("Targetfolder: %s",targetFolder.latin1());

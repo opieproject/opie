@@ -1,11 +1,18 @@
-#include <opie/ocolorbutton.h>
-#include <opie/otabwidget.h>
-#include <qvalidator.h>
-#include <qwhatsthis.h>
+
 #include "ircsettings.h"
 #include "irctab.h"
 
-IRCSettings::IRCSettings(QWidget* parent, const char* name, bool modal, WFlags) : QDialog(parent, name, modal, WStyle_ContextHelp) {
+/* OPIE */
+#include <opie/ocolorbutton.h>
+#include <opie/otabwidget.h>
+#include <qpe/qpeapplication.h>
+
+/* QT */
+#include <qvalidator.h>
+#include <qwhatsthis.h>
+
+IRCSettings::IRCSettings(QWidget* parent, const char* name, bool modal, WFlags) : QDialog(parent, name, modal, WStyle_ContextHelp)
+{
     setCaption(tr("Settings") );
     m_config = new Config("OpieIRC");
     m_config->setGroup("OpieIRC");
@@ -70,10 +77,12 @@ IRCSettings::IRCSettings(QWidget* parent, const char* name, bool modal, WFlags) 
     layout->addWidget(m_notification, 6, 1);
     tw->addTab(view, "opieirc/colors", tr("Colors"));
     tw->setCurrentTab( genwidget );
-    showMaximized();
+
+    QPEApplication::showDialog( this );
 }
 
-void IRCSettings::accept() {
+void IRCSettings::accept()
+{
     IRCTab::m_backgroundColor = m_background->color().name();
     IRCTab::m_textColor = m_text->color().name();
     IRCTab::m_errorColor = m_error->color().name();
@@ -93,6 +102,7 @@ void IRCSettings::accept() {
     QDialog::accept();
 }
 
-IRCSettings::~IRCSettings() {
+IRCSettings::~IRCSettings()
+{
     delete m_config;
 }
