@@ -27,52 +27,14 @@
 
 */
 
-#ifdef QWS
-#include <qpe/qpeapplication.h>
-#include <qpe/qcopenvelope_qws.h>
-#else
-#include <qapplication.h>
-#endif
-
-#include <qobjectdefs.h>
-
 #include "mainwin.h"
-#include "server.h"
 
-#include "global.h"
+#include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
 
 /* be less intrusive for translation -zecke */
 extern QString LOCAL_SERVER;
 extern QString LOCAL_IPKGS;
 
-int main(int argc, char *argv[])
-{
-#ifdef QWS
-  QPEApplication a( argc, argv );
-#else
-  QApplication a( argc, argv );
-#endif
-
-#ifdef QWS
-  // Disable suspend mode
-  QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::DisableSuspend;
-#endif
-
-  LOCAL_SERVER = QObject::tr( "Installed packages" );
-  LOCAL_IPKGS = QObject::tr( "Local packages" );
-
-  MainWindow *win = new MainWindow();
-  a.setMainWidget(win);
-  win->showMaximized();
-
-  a.exec();
-
-#ifdef QWS
-  // Reenable suspend mode
-  QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
-#endif
- #ifdef _DEBUG
-  DumpUnfreed();
- #endif
-}
+OPIE_EXPORT_APP( OApplicationFactory<MainWindow> )

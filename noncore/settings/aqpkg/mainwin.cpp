@@ -66,9 +66,15 @@
 
 extern int compareVersions( const char *v1, const char *v2 );
 
-MainWindow :: MainWindow()
-	:	QMainWindow( 0x0, 0x0, WStyle_ContextHelp )
+MainWindow :: MainWindow( QWidget* parent, const char* name, WFlags fl )
+	:	QMainWindow( parent, name, fl || WStyle_ContextHelp )
 {
+    // Disable suspend mode
+    QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::DisableSuspend;
+
+    LOCAL_SERVER = QObject::tr( "Installed packages" );
+    LOCAL_IPKGS = QObject::tr( "Local packages" );
+
     setCaption( tr( "AQPkg - Package Manager" ) );
 
     // Create UI widgets
@@ -234,6 +240,9 @@ MainWindow :: MainWindow()
 MainWindow :: ~MainWindow()
 {
 	delete mgr;
+
+    // Reenable suspend mode
+    QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
 }
 
 void MainWindow :: initMainWidget()
