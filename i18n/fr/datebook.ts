@@ -572,7 +572,7 @@ Horaire
     </message>
     <message>
         <source>Start Time</source>
-        <translation type="unfinished">Heure de
+        <translation>Heure de
 début</translation>
     </message>
 </context>

@@ -4,62 +4,62 @@
     <name>@default</name>
     <message>
         <source>Language</source>
-        <translation type="unfinished">Langue</translation>
+        <translation>Langue</translation>
     </message>
     <message>
         <source>Time and Date</source>
-        <translation type="unfinished">Heure et Date</translation>
+        <translation>Heure et Date</translation>
     </message>
     <message>
         <source>Personal Information</source>
-        <translation type="unfinished">Information Personnelle</translation>
+        <translation>Information Personnelle</translation>
     </message>
 </context>
 <context>
     <name>AppLauncher</name>
     <message>
         <source>Application Problem</source>
-        <translation type="unfinished">Problème Application</translation>
+        <translation>Problème Application</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 is not responding.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;%1 ne répond pas.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;%1 ne répond pas.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Would you like to force the application to exit?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Voulez-vous forcer l&apos;application à quitter ?&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Voulez-vous forcer l&apos;application à quitter ?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;&lt;p&gt;Fast loading has been disabled for this application.  Tap and hold the application icon to reenable it.&lt;/qt&gt;</source>
-        <translation type="unfinished">&lt;qt&gt;&lt;p&gt;Le chargement rapide a été désactivé pour cette application. Cliquez et maintenez la pression sur l&apos;icône pour la réactiver.&lt;/qt&gt;</translation>
+        <translation>&lt;qt&gt;&lt;p&gt;Le chargement rapide a été désactivé pour cette application. Cliquez et maintenez la pression sur l&apos;icône pour la réactiver.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;&lt;b&gt;%1&lt;/b&gt; was terminated due to signal code %2&lt;/qt&gt;</source>
-        <translation type="unfinished">&lt;qt&gt;&lt;b&gt;%1&lt;/b&gt; a été terminée par le signal %2&lt;/qt&gt;</translation>
+        <translation>&lt;qt&gt;&lt;b&gt;%1&lt;/b&gt; a été terminée par le signal %2&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Application terminated</source>
-        <translation type="unfinished">Application terminée</translation>
+        <translation>Application terminée</translation>
     </message>
     <message>
         <source>Application not found</source>
-        <translation type="unfinished">Application non trouvée</translation>
+        <translation>Application non trouvée</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Could not locate application &lt;b&gt;%1&lt;/b&gt;&lt;/qt&gt;</source>
-        <translation type="unfinished">&lt;qt&gt;Impossible de trouver l&apos;application &lt;b&gt;%1&lt;/b&gt;&lt;/qt&gt;</translation>
+        <translation>&lt;qt&gt;Impossible de trouver l&apos;application &lt;b&gt;%1&lt;/b&gt;&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Erreur</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Could not find the application %1&lt;/qt&gt;</source>
-        <translation type="unfinished">&lt;qt&gt;Impossible de trouver l&apos;application %1&lt;/qt&gt;</translation>
+        <translation>&lt;qt&gt;Impossible de trouver l&apos;application %1&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -142,68 +142,68 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     <name>DesktopPowerAlerter</name>
     <message>
         <source>Battery Status</source>
-        <translation type="unfinished">Status Batterie</translation>
+        <translation>Status Batterie</translation>
     </message>
     <message>
         <source>Low Battery</source>
-        <translation type="unfinished">Batterie Faible</translation>
+        <translation>Batterie Faible</translation>
     </message>
 </context>
 <context>
     <name>FirstUse</name>
     <message>
         <source>&lt;&lt; Back</source>
-        <translation type="unfinished">&lt;&lt; Précédent</translation>
+        <translation>&lt;&lt; Précédent</translation>
     </message>
     <message>
         <source>Next &gt;&gt;</source>
-        <translation type="unfinished">Suivant &gt;&gt;</translation>
+        <translation>Suivant &gt;&gt;</translation>
     </message>
     <message>
         <source>Tap anywhere on the screen to continue.</source>
-        <translation type="unfinished">Cliquez sur l&apos;écran pour continuer.</translation>
+        <translation>Cliquez sur l&apos;écran pour continuer.</translation>
     </message>
     <message>
         <source>Please wait, loading %1 settings.</source>
-        <translation type="unfinished">Chargement de la configuration de %1.</translation>
+        <translation>Chargement de la configuration de %1.</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished">Veuillez patienter...</translation>
+        <translation>Veuillez patienter...</translation>
     </message>
     <message>
         <source>FirstUseBackground</source>
-        <translation type="unfinished">PremierArrierePlan</translation>
+        <translation>Premier Arriere Plan</translation>
     </message>
     <message>
         <source>Finish</source>
-        <translation type="unfinished">Terminer</translation>
+        <translation>Terminer</translation>
     </message>
 </context>
 <context>
     <name>InputMethods</name>
     <message>
         <source>Unicode</source>
-        <translation type="unfinished">Unicode</translation>
+        <translation>Unicode</translation>
     </message>
 </context>
 <context>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
-        <translation type="unfinished">Lanceur</translation>
+        <translation>Lanceur</translation>
     </message>
     <message>
         <source> - Launcher</source>
-        <translation type="unfinished">- Lanceur</translation>
+        <translation>- Lanceur</translation>
     </message>
     <message>
         <source>No application</source>
-        <translation type="unfinished">Pas d&apos;application</translation>
+        <translation>Pas d&apos;application</translation>
     </message>
     <message>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
-        <translation type="unfinished">&lt;p&gt;Aucune application définie pour ce document.&lt;p&gt;Type %1.</translation>
+        <translation>&lt;p&gt;Aucune application définie pour ce document.&lt;p&gt;Type %1.</translation>
     </message>
     <message>
         <source>Finding documents</source>
@@ -215,30 +215,30 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation type="unfinished">Documents</translation>
+        <translation>Documents</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>View as text</source>
-        <translation type="unfinished">Aperçu en texte</translation>
+        <translation>Aperçu en texte</translation>
     </message>
 </context>
 <context>
     <name>LauncherTabWidget</name>
     <message>
         <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Recherche Documents...&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Recherche Documents...&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Icon View</source>
-        <translation type="unfinished">Vue Icône</translation>
+        <translation>Vue Icône</translation>
     </message>
     <message>
         <source>List View</source>
-        <translation type="unfinished">Vue Liste</translation>
+        <translation>Vue Liste</translation>
     </message>
 </context>
 <context>
@@ -253,11 +253,11 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     </message>
     <message>
         <source>Document View</source>
-        <translation type="unfinished">Vue Document</translation>
+        <translation>Vue Document</translation>
     </message>
     <message>
         <source>All types</source>
-        <translation type="unfinished">Tous types</translation>
+        <translation>Tous types</translation>
     </message>
 </context>
 <context>
@@ -326,84 +326,84 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     <name>SafeMode</name>
     <message>
         <source>Safe Mode</source>
-        <translation type="unfinished">Mode Sans Echec</translation>
+        <translation>Mode Sans Echec</translation>
     </message>
     <message>
         <source>Plugin Manager...</source>
-        <translation type="unfinished">Gestionnaire Plugin...</translation>
+        <translation>Gestionnaire Plugin...</translation>
     </message>
     <message>
         <source>Restart Qtopia</source>
-        <translation type="unfinished">Redémarrer Qtopia</translation>
+        <translation>Redémarrer Qtopia</translation>
     </message>
     <message>
         <source>Help...</source>
-        <translation type="unfinished">Aide...</translation>
+        <translation>Aide...</translation>
     </message>
 </context>
 <context>
     <name>ServerApplication</name>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Information</translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;La date système ne semble pas être valide.
+        <translation>&lt;p&gt;La date système ne semble pas être valide.
 (%1)&lt;/p&gt;&lt;p&gt; Voulez-vous la corriger ?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Battery level is critical!
 Keep power off until power restored!</source>
-        <translation type="unfinished">Le niveau de batterie est critique !
+        <translation>Le niveau de batterie est critique !
 Eteigner la machine jusqu&apos;à ça recharge !</translation>
     </message>
     <message>
         <source>Battery is running very low. </source>
-        <translation type="unfinished">Battery très faible.</translation>
+        <translation>Battery très faible.</translation>
     </message>
     <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
-        <translation type="unfinished">La niveau de la batterie de sauvegarde est très bas.
+        <translation>La niveau de la batterie de sauvegarde est très bas.
 Veuillez rechargez la batterie de sauvegarde.</translation>
     </message>
     <message>
         <source>business card</source>
-        <translation type="unfinished">carte de visite</translation>
+        <translation>carte de visite</translation>
     </message>
     <message>
         <source>Safe Mode</source>
-        <translation type="unfinished">Mode Sans Echec</translation>
+        <translation>Mode Sans Echec</translation>
     </message>
     <message>
         <source>&lt;P&gt;A system startup error occurred, and the system is now in Safe Mode. Plugins are not loaded in Safe Mode. You can use the Plugin Manager to disable plugins that cause system error.</source>
-        <translation type="unfinished">&lt;P&gt;Une erreur s&apos;est produite lors du démarrage et le système est maintenant en mode sans échec. Les plugins ne sont pas démarrés en mode sans échec. Vous pouvez utiliser le Gestionnaire de Plugin pour désactiver le ou les plugins causant l&apos;erreur.</translation>
+        <translation>&lt;P&gt;Une erreur s&apos;est produite lors du démarrage et le système est maintenant en mode sans échec. Les plugins ne sont pas démarrés en mode sans échec. Vous pouvez utiliser le Gestionnaire de Plugin pour désactiver le ou les plugins causant l&apos;erreur.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Plugin Manager...</source>
-        <translation type="unfinished">Gestionnaire Plugin...</translation>
+        <translation>Gestionnaire Plugin...</translation>
     </message>
     <message>
         <source>Memory Status</source>
-        <translation type="unfinished">Status Mémoire</translation>
+        <translation>Status Mémoire</translation>
     </message>
     <message>
         <source>Memory Low
 Please save data.</source>
-        <translation type="unfinished">Ressource Mémoire faible
+        <translation>Ressource Mémoire faible
 Sauvegardez vos données.</translation>
     </message>
     <message>
         <source>Critical Memory Shortage
 Please end this application
 immediately.</source>
-        <translation type="unfinished">Ressource Mémoire Critique
+        <translation>Ressource Mémoire Critique
 Vous devriez fermer cette
 application immédiatement.</translation>
     </message>
@@ -412,60 +412,60 @@ application immédiatement.</translation>
     <name>ShutdownImpl</name>
     <message>
         <source>Terminate</source>
-        <translation type="unfinished">Terminer</translation>
+        <translation>Terminer</translation>
     </message>
     <message>
         <source>Terminate Opie</source>
-        <translation type="unfinished">Terminer Opie</translation>
+        <translation>Terminer Opie</translation>
     </message>
     <message>
         <source>Reboot</source>
-        <translation type="unfinished">Redémarrer</translation>
+        <translation>Redémarrer</translation>
     </message>
     <message>
         <source>Restart Opie</source>
-        <translation type="unfinished">Redémarrer Opie</translation>
+        <translation>Redémarrer Opie</translation>
     </message>
     <message>
         <source>Shutdown</source>
-        <translation type="unfinished">Arrêter</translation>
+        <translation>Arrêter</translation>
     </message>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation type="unfinished">&lt;p&gt;
+        <translation>&lt;p&gt;
 Ces options sont fournies pour être utilisées durant le développement et les tests du système Opie. Dans les conditions normales d&apos;utilisation, ces concepts ne sont pas nécessaires.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>Shutdown...</source>
-        <translation type="unfinished">Arrêt...</translation>
+        <translation>Arrêt...</translation>
     </message>
 </context>
 <context>
     <name>SyncAuthentication</name>
     <message>
         <source>Sync Connection</source>
-        <translation type="unfinished">Sync Connexion</translation>
+        <translation>Sync Connexion</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation type="unfinished">&lt;p&gt;Un systeme non authorisé demande l&apos;accès à ce périphérique.&lt;p&gt; Si vous utiliser une version de &quot;Qtopia Desktop&quot; plus vieille que 1.5.1, vous devriez la mettre à jour.</translation>
+        <translation>&lt;p&gt;Un systeme non authorisé demande l&apos;accès à ce périphérique.&lt;p&gt; Si vous utiliser une version de &quot;Qtopia Desktop&quot; plus vieille que 1.5.1, vous devriez la mettre à jour.</translation>
     </message>
     <message>
         <source>Deny</source>
-        <translation type="unfinished">Non authorisé</translation>
+        <translation>Non authorisé</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</source>
-        <translation type="unfinished">&lt;p&gt;Un systeme non authorisé demande l&apos;accès à ce périphérique.&lt;p&gt; Si vous venez juste de démarrer une Synchronisation pour la 1ere fois, c&apos;est normal.</translation>
+        <translation>&lt;p&gt;Un systeme non authorisé demande l&apos;accès à ce périphérique.&lt;p&gt; Si vous venez juste de démarrer une Synchronisation pour la 1ere fois, c&apos;est normal.</translation>
     </message>
     <message>
         <source>Allow</source>
-        <translation type="unfinished">Authorisé</translation>
+        <translation>Authorisé</translation>
     </message>
 </context>
 <context>
@@ -484,11 +484,11 @@ Ces options sont fournies pour être utilisées durant le développement et les 
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished">Abandonner</translation>
+        <translation>Abandonner</translation>
     </message>
     <message>
         <source>Syncing:</source>
-        <translation type="unfinished">Synchronisé : </translation>
+        <translation>Synchronisé : </translation>
     </message>
 </context>
 </TS>
