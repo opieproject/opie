@@ -28,6 +28,7 @@ private slots:
  
   void addProfile();
   void removeProfile();
+  void changeProfile(const QString&);
   
   void updateInterface(Interface *i);
 

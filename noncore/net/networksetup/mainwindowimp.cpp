@@ -7,20 +7,24 @@
 #include "module.h"
 
 #include <qpushbutton.h>
-#include <qdir.h>
 #include <qtabwidget.h>
+#include <qlistbox.h>
+#include <qlistview.h>
+#include <qheader.h>
+#include <qlabel.h>
+
 #include <qmainwindow.h>
 #include <qmessagebox.h>
-#include <qlistbox.h>
+
 #include <qpe/config.h>
 #include <qpe/qlibrary.h>
 #include <qpe/resource.h>
-#include <qlist.h>
 
+#include <qlist.h>
+#include <qdir.h>
 #include <qfile.h>
 #include <qtextstream.h>
-#include <qlistview.h>
-#include <qheader.h>
+
 // For library loading.
 #include <dlfcn.h>
 
@@ -37,6 +41,11 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
   connect(removeServiceButton, SIGNAL(clicked()), this, SLOT(removeClicked()));
   connect(informationServiceButton, SIGNAL(clicked()), this, SLOT(informationClicked()));
   connect(configureServiceButton, SIGNAL(clicked()), this, SLOT(configureClicked())); 
+  
+  connect(newProfileButton, SIGNAL(clicked()), this, SLOT(addProfile()));
+  connect(removeProfileButton, SIGNAL(clicked()), this, SLOT(removeProfile()));
+  connect(profilesList, SIGNAL(highlighted(const QString&)), this, SLOT(changeProfile(const QString&)));
+		  
   // Make sure we have a plugin directory to scan.
   QString DirStr = QDir::homeDirPath() + "/.networksetup/" ;
   QDir pluginDir( DirStr );
@@ -57,6 +66,8 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
 
   Config cfg("NetworkSetup");
   profiles = QStringList::split(" ", cfg.readEntry("Profiles", "All"));
+  for ( QStringList::Iterator it = profiles.begin(); it != profiles.end(); ++it)
+    profilesList->insertItem((*it));  
 }
 
 /**
@@ -307,12 +318,47 @@ void MainWindowImp::updateInterface(Interface *i){
   
 }
 
+/**
+ * Adds a new profile to the list of profiles.
+ * Don't add profiles that already exists.
+ * Appends to the combo and QStringList
+ */ 
 void MainWindowImp::addProfile(){
+  QString newProfileName = "New";
+  if(profiles.grep(newProfileName).count() > 0){
+    QMessageBox::information(this, "Can't Add.","Profile already exists.", "Ok");
+    return;
+  }
+  profiles.append(newProfileName);
+  profilesList->insertItem(newProfileName);
 
 }
 
+/**
+ * Removes the currently selected profile in the combo.
+ * Doesn't delete if there are less then 2 profiles.
+ */
 void MainWindowImp::removeProfile(){
+  if(profilesList->count() <= 1){
+    QMessageBox::information(this, "Can't remove anything.","Need One Profile.", "Ok");
+    return;
+  }
+  QString profileToRemove = profilesList->currentText();
+  if(QMessageBox::information(this, "Question",QString("Remove profile: %1").arg(profileToRemove), QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok){
+    profiles = QStringList::split(" ", profiles.join(" ").replace(QRegExp(profileToRemove), ""));
+    profilesList->clear();
+    for ( QStringList::Iterator it = profiles.begin(); it != profiles.end(); ++it)
+      profilesList->insertItem((*it));
+  }
 
+}
+
+/**
+ * A new profile has been selected, change.
+ * @param newProfile the new profile.
+ */ 
+void MainWindowImp::changeProfile(const QString& newProfile){
+  currentProfileLabel->setText(newProfile);
 }
 
 // mainwindowimp.cpp

@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>222</width>
+            <width>218</width>
             <height>289</height>
         </rect>
     </property>
@@ -194,17 +194,6 @@
                         <name>spacing</name>
                         <number>6</number>
                     </property>
-                    <widget row="1"  column="0"  rowspan="1"  colspan="2" >
-                        <class>QLabel</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>TextLabel3</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>Change Profile To</string>
-                        </property>
-                    </widget>
                     <widget row="0"  column="0"  rowspan="1"  colspan="2" >
                         <class>QLabel</class>
                         <property stdset="1">
@@ -220,7 +209,7 @@
                         <class>QLabel</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>TextLabel2</cstring>
+                            <cstring>currentProfileLabel</cstring>
                         </property>
                         <property stdset="1">
                             <name>frameShape</name>
@@ -235,42 +224,18 @@
                             <string>All</string>
                         </property>
                     </widget>
-                    <widget row="1"  column="2" >
-                        <class>QComboBox</class>
-                        <item>
-                            <property>
-                                <name>text</name>
-                                <string>All</string>
-                            </property>
-                        </item>
+                    <widget row="1"  column="0" >
+                        <class>QLabel</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>ComboBox10</cstring>
-                        </property>
-                    </widget>
-                    <widget row="2"  column="1"  rowspan="1"  colspan="2" >
-                        <class>QPushButton</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>removeProfileButton</cstring>
+                            <cstring>TextLabel1_2</cstring>
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>&amp;Remove</string>
+                            <string>Profiles</string>
                         </property>
                     </widget>
-                    <widget row="2"  column="0" >
-                        <class>QPushButton</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>newProfileButton</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>&amp;New</string>
-                        </property>
-                    </widget>
-                    <spacer row="3"  column="2" >
+                    <spacer row="5"  column="2" >
                         <property>
                             <name>name</name>
                             <cstring>Spacer16</cstring>
@@ -291,6 +256,46 @@
                             </size>
                         </property>
                     </spacer>
+                    <widget row="2"  column="0"  rowspan="3"  colspan="1" >
+                        <class>QListBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>profilesList</cstring>
+                        </property>
+                    </widget>
+                    <widget row="4"  column="1"  rowspan="1"  colspan="2" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>PushButton7</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Set Current</string>
+                        </property>
+                    </widget>
+                    <widget row="3"  column="1"  rowspan="1"  colspan="2" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>removeProfileButton</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>&amp;Remove</string>
+                        </property>
+                    </widget>
+                    <widget row="2"  column="1"  rowspan="1"  colspan="2" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>newProfileButton</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>&amp;New</string>
+                        </property>
+                    </widget>
                 </grid>
             </widget>
         </widget>
