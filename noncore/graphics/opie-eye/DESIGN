@@ -1,0 +1,22 @@
+The Design of the Eye Caramba Opie Image Viewer.
+
+It consists out of several Parts:
+
+1.) A interface for Getting Information, Files and Requesting Pixmap and the Full Image
+2.) A ImageCache which uses the current Interface to request the Pixmap in the given side
+    (the gui will listen to the slot and insert the image )
+3.) A small library which gives the Image Info and Pixmap. Internally it'll have a forked slave
+    to do the actual work. It'll also write thumbnails.
+4.) The Interface parts are designed for stuff like FileSystem View or Digi Cam support which would
+    read thumbnail from different locations
+
+
+
+TODO:
+  - Special QIconListViewItem painting routines to include BEAM,Rename,Delete,Rotate buttons
+  - Create SlideShows
+        -Add from View. Will ask to add to a slide show
+        -And special slideshow widget for the order
+	-Save in Config within AppDir of eyecaramba
+
+
