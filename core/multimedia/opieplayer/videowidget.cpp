@@ -1,26 +1,28 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
-**
-** This file is part of Qtopia Environment.
-**
-** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free Software
-** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.
-**
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-**
-** See http://www.trolltech.com/gpl/ for GPL licensing information.
-**
-** Contact info@trolltech.com if any conditions of this licensing are
-** not clear to you.
-**
-**********************************************************************/
+ ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+ **
+ ** This file is part of Qtopia Environment.
+ **
+ ** This file may be distributed and/or modified under the terms of the
+ ** GNU General Public License version 2 as published by the Free Software
+ ** Foundation and appearing in the file LICENSE.GPL included in the
+ ** packaging of this file.
+ **
+ ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+ ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+ **
+ ** See http://www.trolltech.com/gpl/ for GPL licensing information.
+ **
+ ** Contact info@trolltech.com if any conditions of this licensing are
+ ** not clear to you.
+ **
+ **********************************************************************/
 #include <qpe/resource.h>
 #include <qpe/mediaplayerplugininterface.h>
 #include <qpe/config.h>
+#include <qpe/qpeapplication.h>
 
+#include <qdir.h>
 #include <qwidget.h>
 #include <qpainter.h>
 #include <qpixmap.h>
@@ -45,440 +47,685 @@ static const int yo = 0; // movable y offset
 
 
 struct MediaButton {
-    int  xPos, yPos;
-    bool isToggle, isHeld, isDown;
-    int  controlType;
+//     int  xPos, yPos;
+   bool isToggle, isHeld, isDown;
+//     int  controlType;
 };
 
 
 // Layout information for the videoButtons (and if it is a toggle button or not)
 MediaButton videoButtons[] = {
-    { 5+0*32+xo, 200+yo, FALSE, FALSE, FALSE, 4 }, // previous
-    { 5+1*32+xo, 200+yo, FALSE, FALSE, FALSE, 1 }, // stop
-    { 5+2*32+xo, 200+yo,  TRUE, FALSE, FALSE, 0 }, // play
-    { 5+3*32+xo, 200+yo,  TRUE, FALSE, FALSE, 2 }, // pause
-    { 5+4*32+xo, 200+yo, FALSE, FALSE, FALSE, 3 }, // next
-    { 5+5*32+xo, 200+yo, FALSE, FALSE, FALSE, 8 }, // playlist
-    { 5+6*32+xo, 200+yo,  TRUE, FALSE, FALSE, 9 }  // fullscreen
+   { FALSE, FALSE, FALSE }, // stop
+   { TRUE, FALSE, FALSE }, // play
+   { FALSE, FALSE, FALSE }, // previous
+   { FALSE, FALSE, FALSE }, // next
+   { FALSE, FALSE, FALSE }, // volUp
+   { FALSE, FALSE, FALSE }, // volDown
+   { TRUE, FALSE, FALSE }  // fullscreen
 };
 
+//static const int numButtons = (sizeof(videoButtons)/sizeof(MediaButton));
 
-static const int numButtons = (sizeof(videoButtons)/sizeof(MediaButton));
+const char *skinV_mask_file_names[7] = {
+   "stop","play","back","fwd","up","down","full"
+};
 
+static const int numVButtons = (sizeof(videoButtons)/sizeof(MediaButton));
 
 VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
-    QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
-    setCaption( tr("OpiePlayer") );
-    Config cfg("OpiePlayer");
-    cfg.setGroup("VideoWidget");
+   QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 )
+{
+   setCaption( tr("OpiePlayer") );
+   Config cfg("OpiePlayer");
 
-    QString backgroundPix, Button0aPix, Button0bPix, controlsPix;
-    backgroundPix=cfg.readEntry( "backgroundPix", "opieplayer/metalFinish");
-    Button0aPix=cfg.readEntry( "Button0aPix", "opieplayer/mediaButton0a");
-    Button0bPix=cfg.readEntry( "Button0bPix","opieplayer/mediaButton0b");
-    controlsPix=cfg.readEntry( "controlsPix","opieplayer/mediaControls0" );
-    
-    setBackgroundPixmap( Resource::loadPixmap( backgroundPix) );
-    pixmaps[0] = new QPixmap( Resource::loadPixmap( Button0aPix ) );
-    pixmaps[1] = new QPixmap( Resource::loadPixmap( Button0bPix ) );
-    pixmaps[2] = new QPixmap( Resource::loadPixmap( controlsPix) );
-    currentFrame = new QImage( 220 + 2, 160, (QPixmap::defaultDepth() == 16) ? 16 : 32 );
+   cfg.setGroup("Options");
+   skin = cfg.readEntry("Skin","default");
 
-    slider = new QSlider( Qt::Horizontal, this );
-    slider->setMinValue( 0 );
-    slider->setMaxValue( 1 );
-    slider->setBackgroundPixmap( Resource::loadPixmap( backgroundPix ) );
-    slider->setFocusPolicy( QWidget::NoFocus );
-    slider->setGeometry( QRect( 7, 250, 220, 20 ) );
+   QString skinPath;
+   skinPath = "opieplayer2/skins/" + skin;
+    if(!QDir(QString(getenv("OPIEDIR")) +"/pics/"+skinPath).exists())
+      skinPath = "opieplayer2/skins/default";
 
-    connect( slider,         SIGNAL( sliderPressed() ),      this, SLOT( sliderPressed() ) );
-    connect( slider,         SIGNAL( sliderReleased() ),     this, SLOT( sliderReleased() ) );
+   qDebug("skin path " + skinPath);
 
-    connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
-    connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
-    connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
-    connect( mediaPlayerState, SIGNAL( viewChanged(char) ),    this, SLOT( setView(char) ) );
-    connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( setPaused(bool) ) );
-    connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
+//     QString skinPath = "opieplayer2/skins/" + skin;
 
-    // Intialise state
-    setLength( mediaPlayerState->length() );
-    setPosition( mediaPlayerState->position() );
-    setFullscreen( mediaPlayerState->fullscreen() );
-    setPaused( mediaPlayerState->paused() );
-    setPlaying( mediaPlayerState->playing() );
+   pixBg = new QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
+   imgUp = new QImage( Resource::loadImage( QString("%1/skinV_up").arg(skinPath) ) );
+   imgDn = new QImage( Resource::loadImage( QString("%1/skinV_down").arg(skinPath) ) );
+
+   imgButtonMask = new QImage( imgUp->width(), imgUp->height(), 8, 255 );
+   imgButtonMask->fill( 0 );
+
+   for ( int i = 0; i < 7; i++ )
+   {
+      QString filename = QString( QPEApplication::qpeDir() + "/pics/" + skinPath +
+                                  "/skinV_mask_" + skinV_mask_file_names[i] + ".png" );
+      qDebug("loading "+filename);
+      masks[i] = new QBitmap( filename );
+
+      if ( !masks[i]->isNull() )
+      {
+         QImage imgMask = masks[i]->convertToImage();
+         uchar **dest = imgButtonMask->jumpTable();
+         for ( int y = 0; y < imgUp->height(); y++ )
+         {
+            uchar *line = dest[y];
+            for ( int x = 0; x < imgUp->width(); x++ )
+            {
+               if ( !qRed( imgMask.pixel( x, y ) ) )
+                  line[x] = i + 1;
+            }
+         }
+      }
+   }
+   qDebug("finished loading first pics");
+   for ( int i = 0; i < 7; i++ )
+   {
+      buttonPixUp[i] = NULL;
+      buttonPixDown[i] = NULL;
+   }
+
+   setBackgroundPixmap( *pixBg );
+
+   currentFrame = new QImage( 220 + 2, 160, (QPixmap::defaultDepth() == 16) ? 16 : 32 );
+
+   slider = new QSlider( Qt::Horizontal, this );
+   slider->setMinValue( 0 );
+   slider->setMaxValue( 1 );
+   slider->setBackgroundPixmap( Resource::loadPixmap( backgroundPix ) );
+   slider->setFocusPolicy( QWidget::NoFocus );
+//    slider->setGeometry( QRect( 7, 250, 220, 20 ) );
+
+   connect( slider,         SIGNAL( sliderPressed() ),      this, SLOT( sliderPressed() ) );
+   connect( slider,         SIGNAL( sliderReleased() ),     this, SLOT( sliderReleased() ) );
+
+   connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
+   connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+   connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+   connect( mediaPlayerState, SIGNAL( viewChanged(char) ),    this, SLOT( setView(char) ) );
+   connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( setPaused(bool) ) );
+   connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
+
+   // Intialise state
+   setLength( mediaPlayerState->length() );
+   setPosition( mediaPlayerState->position() );
+   setFullscreen( mediaPlayerState->fullscreen() );
+   setPaused( mediaPlayerState->paused() );
+   setPlaying( mediaPlayerState->playing() );
 }
 
 
 VideoWidget::~VideoWidget() {
-    for ( int i = 0; i < 3; i++ )
-  delete pixmaps[i];
-    delete currentFrame;
+
+   for ( int i = 0; i < 7; i++ )
+   {
+      delete buttonPixUp[i];
+      delete buttonPixDown[i];
+   }
+
+   delete pixBg;
+   delete imgUp;
+   delete imgDn;
+   delete imgButtonMask;
+   for ( int i = 0; i < 7; i++ )
+   {
+      delete masks[i];
+   }
+
+//     for ( int i = 0; i < 3; i++ )
+//   delete pixmaps[i];
+//     delete currentFrame;
 }
 
 
 static bool videoSliderBeingMoved = FALSE;
 
+QPixmap *combineVImageWithBackground( QImage img, QPixmap bg, QPoint offset ) {
+   QPixmap pix( img.width(), img.height() );
+   QPainter p( &pix );
+   p.drawTiledPixmap( pix.rect(), bg, offset );
+   p.drawImage( 0, 0, img );
+   return new QPixmap( pix );
+}
+
+QPixmap *maskVPixToMask( QPixmap pix, QBitmap mask ) {
+   QPixmap *pixmap = new QPixmap( pix );
+   pixmap->setMask( mask );
+   return pixmap;
+}
+
+void VideoWidget::resizeEvent( QResizeEvent * ) {
+   int h = height();
+   int w = width();
+   //int Vh = 160;
+   //int Vw = 220;
+
+   slider->setFixedWidth( w - 20 );
+   slider->setGeometry( QRect( 15, h - 22, w - 90, 20 ) );
+   slider->setBackgroundOrigin( QWidget::ParentOrigin );
+   slider->setFocusPolicy( QWidget::NoFocus );
+   slider->setBackgroundPixmap( *pixBg );
+
+   xoff = 0;// ( imgUp->width() ) / 2;
+   if(w>h)
+      yoff = 0;
+   else
+      yoff = 185;//(( Vh  - imgUp->height() ) / 2) - 10;
+   QPoint p( xoff, yoff );
+
+   QPixmap *pixUp = combineVImageWithBackground( *imgUp, *pixBg, p );
+   QPixmap *pixDn = combineVImageWithBackground( *imgDn, *pixBg, p );
+
+   for ( int i = 0; i < 7; i++ )
+   {
+      if ( !masks[i]->isNull() )
+      {
+         delete buttonPixUp[i];
+         delete buttonPixDown[i];
+         buttonPixUp[i] = maskVPixToMask( *pixUp, *masks[i] );
+         buttonPixDown[i] = maskVPixToMask( *pixDn, *masks[i] );
+      }
+   }
+
+   delete pixUp;
+   delete pixDn;
+}
+
 
 void VideoWidget::sliderPressed() {
-    videoSliderBeingMoved = TRUE;
+   videoSliderBeingMoved = TRUE;
 }
 
 
 void VideoWidget::sliderReleased() {
-    videoSliderBeingMoved = FALSE;
-    if ( slider->width() == 0 )
-  return;
-    long val = long((double)slider->value() * mediaPlayerState->length() / slider->width());
-    mediaPlayerState->setPosition( val );
+   videoSliderBeingMoved = FALSE;
+   if ( slider->width() == 0 )
+      return;
+   long val = long((double)slider->value() * mediaPlayerState->length() / slider->width());
+   mediaPlayerState->setPosition( val );
 }
 
 
 void VideoWidget::setPosition( long i ) {
-    updateSlider( i, mediaPlayerState->length() );
+   updateSlider( i, mediaPlayerState->length() );
 }
 
 
 void VideoWidget::setLength( long max ) {
-    updateSlider( mediaPlayerState->position(), max );
+   updateSlider( mediaPlayerState->position(), max );
 }
 
 
 void VideoWidget::setView( char view ) {
-    if ( view == 'v' ) {
-  makeVisible();
-    } else {
-  // Effectively blank the view next time we show it so it looks nicer
-  scaledWidth = 0;
-  scaledHeight = 0;
-  hide();
-    }
+   if ( view == 'v' )
+   {
+      makeVisible();
+   }
+   else
+   {
+      // Effectively blank the view next time we show it so it looks nicer
+      scaledWidth = 0;
+      scaledHeight = 0;
+      hide();
+   }
 }
 
 
 void VideoWidget::updateSlider( long i, long max ) {
-    // Will flicker too much if we don't do this
-    if ( max == 0 )
-  return;
-    int width = slider->width();
-    int val = int((double)i * width / max);
-    if ( !mediaPlayerState->fullscreen() && !videoSliderBeingMoved ) {
-  if ( slider->value() != val )
-      slider->setValue( val );
-  if ( slider->maxValue() != width )
-      slider->setMaxValue( width );
-    }
+   // Will flicker too much if we don't do this
+   if ( max == 0 )
+      return;
+   int width = slider->width();
+   int val = int((double)i * width / max);
+   if ( !mediaPlayerState->fullscreen() && !videoSliderBeingMoved )
+   {
+      if ( slider->value() != val )
+         slider->setValue( val );
+      if ( slider->maxValue() != width )
+         slider->setMaxValue( width );
+   }
 }
 
 
 void VideoWidget::setToggleButton( int i, bool down ) {
-    if ( down != videoButtons[i].isDown )
-  toggleButton( i );
+   if ( down != videoButtons[i].isDown )
+      toggleButton( i );
 }
 
 
 void VideoWidget::toggleButton( int i ) {
-    videoButtons[i].isDown = !videoButtons[i].isDown;
-    QPainter p(this);
-    paintButton ( &p, i );
+   videoButtons[i].isDown = !videoButtons[i].isDown;
+   QPainter p(this);
+   paintButton ( &p, i );
 }
 
 
 void VideoWidget::paintButton( QPainter *p, int i ) {
-    int x = videoButtons[i].xPos;
-    int y = videoButtons[i].yPos;
-    int offset = 10 + videoButtons[i].isDown;
-    p->drawPixmap( x, y, *pixmaps[videoButtons[i].isDown] );
-    p->drawPixmap( x + 1 + offset, y + offset, *pixmaps[2], 9 * videoButtons[i].controlType, 0, 9, 9 );
+   if ( videoButtons[i].isDown )
+   {
+      p->drawPixmap( xoff, yoff, *buttonPixDown[i] );
+   }
+   else
+   {
+      p->drawPixmap( xoff, yoff, *buttonPixUp[i] );
+   }
+//     int x = videoButtons[i].xPos;
+//     int y = videoButtons[i].yPos;
+//     int offset = 10 + videoButtons[i].isDown;
+//     p->drawPixmap( x, y, *pixmaps[videoButtons[i].isDown] );
+//     p->drawPixmap( x + 1 + offset, y + offset, *pixmaps[2], 9 * videoButtons[i].controlType, 0, 9, 9 );
 }
 
 
 void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
-    for ( int i = 0; i < numButtons; i++ ) {
-        int x = videoButtons[i].xPos;
-        int y = videoButtons[i].yPos;
-        if ( event->state() == QMouseEvent::LeftButton ) {
-              // The test to see if the mouse click is inside the circular button or not
-              // (compared with the radius squared to avoid a square-root of our distance)
-            int radius = 16;
-            QPoint center = QPoint( x + radius, y + radius );
-            QPoint dXY = center - event->pos();
-            int dist = dXY.x() * dXY.x() + dXY.y() * dXY.y();
-            bool isOnButton = dist <= (radius * radius);
-            if ( isOnButton != videoButtons[i].isHeld ) {
-                videoButtons[i].isHeld = isOnButton;
-                toggleButton(i);
-            }
-        } else {
-            if ( videoButtons[i].isHeld ) {
-                videoButtons[i].isHeld = FALSE;
-                if ( !videoButtons[i].isToggle )
-                    setToggleButton( i, FALSE );
-            }
-        }
-        switch (i) {
-          case VideoPlay:       mediaPlayerState->setPlaying(videoButtons[i].isDown); return;
-          case VideoStop:       mediaPlayerState->setPlaying(FALSE); return;
-          case VideoPause:      mediaPlayerState->setPaused(videoButtons[i].isDown); return;
-          case VideoNext:       mediaPlayerState->setNext(); return;
-          case VideoPrevious:   mediaPlayerState->setPrev(); return;
-          case VideoPlayList:   mediaPlayerState->setList(); return;
-          case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
-        }
 
-    }
+   for ( int i = 0; i < numVButtons; i++ )
+   {
+      if ( event->state() == QMouseEvent::LeftButton )
+      {
+         // The test to see if the mouse click is inside the button or not
+         int x = event->pos().x() - xoff;
+         int y = event->pos().y() - yoff;
+
+         bool isOnButton = ( x > 0 && y > 0 && x < imgButtonMask->width()
+                             && y < imgButtonMask->height()
+                             && imgButtonMask->pixelIndex( x, y ) == i + 1 );
+
+         if ( isOnButton && !videoButtons[i].isHeld )
+         {
+            videoButtons[i].isHeld = TRUE;
+            toggleButton(i);
+
+//                 switch (i) {
+//                 case VideoVolUp:
+//                     emit moreClicked();
+//                     return;
+//                 case VideoVolDown:
+//                     emit lessClicked();
+//                     return;
+//                 }
+         }
+         else if ( !isOnButton && videoButtons[i].isHeld )
+         {
+            videoButtons[i].isHeld = FALSE;
+            toggleButton(i);
+         }
+      }
+      else
+      {
+
+         if ( videoButtons[i].isHeld )
+         {
+            videoButtons[i].isHeld = FALSE;
+            if ( !videoButtons[i].isToggle )
+            {
+               setToggleButton( i, FALSE );
+            }
+            qDebug("key %d", i);
+            switch(i)
+            {
+//                 case VideoPlay:
+//                 {
+//                     if( mediaPlayerState->isPaused )
+//                     {
+//                         setToggleButton( i, FALSE );
+//                         mediaPlayerState->setPaused( FALSE );
+//                         return;
+//                     }
+//                     else if( !mediaPlayerState->isPaused )
+//                     {
+//                         setToggleButton( i, TRUE );
+//                         mediaPlayerState->setPaused( TRUE );
+//                         return;
+//                     }
+//                     else
+//                     {
+//                         return;
+//                     }
+//                 }
+
+            case VideoPlay:       mediaPlayerState->setPlaying(videoButtons[i].isDown); return;
+            case VideoStop:       mediaPlayerState->setPlaying(FALSE); return;
+//           case VideoPause:      mediaPlayerState->setPaused(videoButtons[i].isDown); return;
+            case VideoNext:       mediaPlayerState->setNext(); return;
+            case VideoPrevious:   mediaPlayerState->setPrev(); return;
+//           case VideoPlayList:   mediaPlayerState->setList(); return;
+            case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
+
+//                 case VideoStop:       mediaPlayerState->setPlaying( FALSE ); return;
+//                 case VideoNext:       if(playList->whichList() ==0) mediaPlayerState->setNext(); return;
+//                 case VideoPrevious:   if(playList->whichList() ==0) mediaPlayerState->setPrev(); return;
+//                  case VideoVolUp:      emit moreReleased(); return;
+//                  case VideoVolDown:    emit lessReleased(); return;
+//                 case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
+            }
+         }
+      }
+   }
+
+
+
+
+
+
+//     for ( int i = 0; i < numButtons; i++ ) {
+//         int x = videoButtons[i].xPos;
+//         int y = videoButtons[i].yPos;
+//         if ( event->state() == QMouseEvent::LeftButton ) {
+//               // The test to see if the mouse click is inside the circular button or not
+//               // (compared with the radius squared to avoid a square-root of our distance)
+//             int radius = 16;
+//             QPoint center = QPoint( x + radius, y + radius );
+//             QPoint dXY = center - event->pos();
+//             int dist = dXY.x() * dXY.x() + dXY.y() * dXY.y();
+//             bool isOnButton = dist <= (radius * radius);
+//             if ( isOnButton != videoButtons[i].isHeld ) {
+//                 videoButtons[i].isHeld = isOnButton;
+//                 toggleButton(i);
+//             }
+//         } else {
+//             if ( videoButtons[i].isHeld ) {
+//                 videoButtons[i].isHeld = FALSE;
+//                 if ( !videoButtons[i].isToggle )
+//                     setToggleButton( i, FALSE );
+//             }
+//         }
+
+//         switch (i) {
+//           case VideoPlay:       mediaPlayerState->setPlaying(videoButtons[i].isDown); return;
+//           case VideoStop:       mediaPlayerState->setPlaying(FALSE); return;
+//           case VideoPause:      mediaPlayerState->setPaused(videoButtons[i].isDown); return;
+//           case VideoNext:       mediaPlayerState->setNext(); return;
+//           case VideoPrevious:   mediaPlayerState->setPrev(); return;
+//           case VideoPlayList:   mediaPlayerState->setList(); return;
+//           case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
+//         }
+
+//     }
 }
 
 
 void VideoWidget::mousePressEvent( QMouseEvent *event ) {
-    mouseMoveEvent( event );
+   mouseMoveEvent( event );
 }
 
 
 void VideoWidget::mouseReleaseEvent( QMouseEvent *event ) {
-    if ( mediaPlayerState->fullscreen() ) {
-  mediaPlayerState->setFullscreen( FALSE );
-  makeVisible();
+   if ( mediaPlayerState->fullscreen() )
+   {
+      mediaPlayerState->setFullscreen( FALSE );
+      makeVisible();
 
-  mouseMoveEvent( event );
-    }
+      mouseMoveEvent( event );
+   }
 }
 
 
 void VideoWidget::makeVisible() {
-    if ( mediaPlayerState->fullscreen() ) {
-  setBackgroundMode( QWidget::NoBackground );
-  showFullScreen();
-  resize( qApp->desktop()->size() );
-  slider->hide();
-    } else {
-  setBackgroundPixmap( Resource::loadPixmap( "opieplayer/metalFinish" ) );
-  showNormal();
-  showMaximized();
-  slider->show();
-    }
+   if ( mediaPlayerState->fullscreen() )
+   {
+      setBackgroundMode( QWidget::NoBackground );
+      showFullScreen();
+      resize( qApp->desktop()->size() );
+      slider->hide();
+   }
+   else
+   {
+      setBackgroundPixmap( *pixBg );
+      showNormal();
+      showMaximized();
+      slider->show();
+   }
 }
 
 
-void VideoWidget::paintEvent( QPaintEvent * ) {
-    QPainter p( this );
+void VideoWidget::paintEvent( QPaintEvent * pe) {
+   QPainter p( this );
 
-    if ( mediaPlayerState->fullscreen() ) {
-  // Clear the background
-  p.setBrush( QBrush( Qt::black ) );
-  p.drawRect( rect() );
-
-  // Draw the current frame
-  //p.drawImage( ); // If using directpainter we won't have a copy except whats on the screen
-    } else {
-  // draw border
-  qDrawShadePanel( &p, 4, 15, 230, 170, colorGroup(), TRUE, 5, NULL );
-
-  // Clear the movie screen first
-  p.setBrush( QBrush( Qt::black ) );
-  p.drawRect( 9, 20, 220, 160 );
-
-  // draw current frame (centrally positioned from scaling to maintain aspect ratio)
-  p.drawImage( 9 + (220 - scaledWidth) / 2, 20 + (160 - scaledHeight) / 2, *currentFrame, 0, 0, scaledWidth, scaledHeight );
-
-  // draw the buttons
-  for ( int i = 0; i < numButtons; i++ )
-      paintButton( &p, i );
-
-  // draw the slider
-  slider->repaint( TRUE );
-    }
+   if ( mediaPlayerState->fullscreen() ) {
+      // Clear the background
+      p.setBrush( QBrush( Qt::black ) );
+      p.drawRect( rect() );
+   } else {
+      if ( !pe->erased() ) {
+         // Combine with background and double buffer
+         QPixmap pix( pe->rect().size() );
+         QPainter p( &pix );
+         p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
+         p.drawTiledPixmap( pe->rect(), *pixBg, pe->rect().topLeft() );
+         for ( int i = 0; i < numVButtons; i++ ) {
+            paintButton( &p, i );
+         }
+         QPainter p2( this );
+         p2.drawPixmap( pe->rect().topLeft(), pix );
+      } else {
+         QPainter p( this );
+         for ( int i = 0; i < numVButtons; i++ )
+            paintButton( &p, i );
+      }
+      slider->repaint( TRUE );
+   }
 }
 
 
 void VideoWidget::closeEvent( QCloseEvent* ) {
-    mediaPlayerState->setList();
+   mediaPlayerState->setList();
 }
 
 
 bool VideoWidget::playVideo() {
-    bool result = FALSE;
+   bool result = FALSE;
+//   qDebug("<<<<<<<<<<<<<<<< play video");
+   int stream = 0;
 
-    int stream = 0;
+   int sw = mediaPlayerState->curDecoder()->videoWidth( stream );
+   int sh = mediaPlayerState->curDecoder()->videoHeight( stream );
+   int dd = QPixmap::defaultDepth();
+   int w = height();
+   int h = width();
 
-    int sw = mediaPlayerState->curDecoder()->videoWidth( stream );
-    int sh = mediaPlayerState->curDecoder()->videoHeight( stream );
-    int dd = QPixmap::defaultDepth();
-    int w = height();
-    int h = width();
+   ColorFormat format = (dd == 16) ? RGB565 : BGRA8888;
 
-    ColorFormat format = (dd == 16) ? RGB565 : BGRA8888;
-
-    if ( mediaPlayerState->fullscreen() ) {
+   if ( mediaPlayerState->fullscreen() )
+   {
 #ifdef USE_DIRECT_PAINTER
-  QDirectPainter p(this);
+      QDirectPainter p(this);
 
-  if ( ( qt_screen->transformOrientation() == 3 ) &&
-       ( ( dd == 16 ) || ( dd == 32 ) ) && ( p.numRects() == 1 ) ) {
+      if ( ( qt_screen->transformOrientation() == 3 ) &&
+           ( ( dd == 16 ) || ( dd == 32 ) ) && ( p.numRects() == 1 ) )
+      {
 
-      w = 320;
-      h = 240;
+         w = 320;
+         h = 240;
 
-      if ( mediaPlayerState->scaled() ) {
-    // maintain aspect ratio
-    if ( w * sh > sw * h )
-        w = sw * h / sh;
-    else
-        h = sh * w / sw;
-      } else  {
-    w = sw;
-    h = sh;
+         if ( mediaPlayerState->scaled() )
+         {
+            // maintain aspect ratio
+            if ( w * sh > sw * h )
+               w = sw * h / sh;
+            else
+               h = sh * w / sw;
+         }
+         else
+         {
+            w = sw;
+            h = sh;
+         }
+
+         w--; // we can't allow libmpeg to overwrite.
+         QPoint roff = qt_screen->mapToDevice( p.offset(), QSize( qt_screen->width(), qt_screen->height() ) );
+
+         int ox = roff.x() - height() + 2 + (height() - w) / 2;
+         int oy = roff.y() + (width() - h) / 2;
+         int sx = 0, sy = 0;
+
+         uchar* fp = p.frameBuffer() + p.lineStep() * oy;
+         fp += dd * ox / 8;
+         uchar **jt = new uchar*[h];
+
+         for ( int i = h; i; i-- )
+         {
+            jt[h - i] = fp;
+            fp += p.lineStep();
+         }
+
+         result = mediaPlayerState->curDecoder()->videoReadScaledFrame( jt, sx, sy, sw, sh, w, h, format, 0) == 0;
+
+         delete [] jt;
       }
-
-      w--; // we can't allow libmpeg to overwrite.
-      QPoint roff = qt_screen->mapToDevice( p.offset(), QSize( qt_screen->width(), qt_screen->height() ) );
-
-      int ox = roff.x() - height() + 2 + (height() - w) / 2;
-      int oy = roff.y() + (width() - h) / 2;
-      int sx = 0, sy = 0;
-
-      uchar* fp = p.frameBuffer() + p.lineStep() * oy;
-      fp += dd * ox / 8;
-      uchar **jt = new uchar*[h];
-      for ( int i = h; i; i-- ) {
-    jt[h - i] = fp;
-    fp += p.lineStep();
-      }
-
-      result = mediaPlayerState->curDecoder()->videoReadScaledFrame( jt, sx, sy, sw, sh, w, h, format, 0) == 0;
-
-      delete [] jt;
-  } else {
+      else
+      {
 #endif
-      QPainter p(this);
+         QPainter p(this);
 
-      w = 320;
-      h = 240;
+         w = 320;
+         h = 240;
 
-      if ( mediaPlayerState->scaled() ) {
-    // maintain aspect ratio
-    if ( w * sh > sw * h )
-        w = sw * h / sh;
-    else
-        h = sh * w / sw;
-      } else  {
-    w = sw;
-    h = sh;
-      }
+         if ( mediaPlayerState->scaled() )
+         {
+            // maintain aspect ratio
+            if ( w * sh > sw * h )
+               w = sw * h / sh;
+            else
+               h = sh * w / sw;
+         }
+         else
+         {
+            w = sw;
+            h = sh;
+         }
 
-      int bytes = ( dd == 16 ) ? 2 : 4;
-      QImage tempFrame( w, h, bytes << 3 );
-      result = mediaPlayerState->curDecoder()->videoReadScaledFrame( tempFrame.jumpTable(),
-              0, 0, sw, sh, w, h, format, 0) == 0;
-      if ( result && mediaPlayerState->fullscreen() ) {
+         int bytes = ( dd == 16 ) ? 2 : 4;
+         QImage tempFrame( w, h, bytes << 3 );
+         result = mediaPlayerState->curDecoder()->videoReadScaledFrame( tempFrame.jumpTable(),
+                                                                        0, 0, sw, sh, w, h, format, 0) == 0;
 
-    int rw = h, rh = w;
-    QImage rotatedFrame( rw, rh, bytes << 3 );
+         if ( result && mediaPlayerState->fullscreen() )
+         {
 
-    ushort* in  = (ushort*)tempFrame.bits();
-    ushort* out = (ushort*)rotatedFrame.bits();
-    int spl = rotatedFrame.bytesPerLine() / bytes;
-    for (int x=0; x<h; x++) {
-        if ( bytes == 2 ) {
-      ushort* lout = out++ + (w - 1)*spl;
-      for (int y=0; y<w; y++) {
-          *lout=*in++;
-          lout-=spl;
-      }
-        } else {
-      ulong* lout = ((ulong *)out)++ + (w - 1)*spl;
-      for (int y=0; y<w; y++) {
-          *lout=*((ulong*)in)++;
-          lout-=spl;
-      }
-        }
-    }
+            int rw = h, rh = w;
+            QImage rotatedFrame( rw, rh, bytes << 3 );
 
-    p.drawImage( (240 - rw) / 2, (320 - rh) / 2, rotatedFrame, 0, 0, rw, rh );
-      }
+            ushort* in  = (ushort*)tempFrame.bits();
+            ushort* out = (ushort*)rotatedFrame.bits();
+            int spl = rotatedFrame.bytesPerLine() / bytes;
+
+            for (int x=0; x<h; x++)
+            {
+               if ( bytes == 2 )
+               {
+                  ushort* lout = out++ + (w - 1)*spl;
+                  for (int y=0; y<w; y++) {
+                     *lout=*in++;
+                     lout-=spl;
+                  }
+               }
+               else
+               {
+                  ulong* lout = ((ulong *)out)++ + (w - 1)*spl;
+                  for (int y=0; y<w; y++)
+                  {
+                     *lout=*((ulong*)in)++;
+                     lout-=spl;
+                  }
+               }
+            }
+
+            p.drawImage( (240 - rw) / 2, (320 - rh) / 2, rotatedFrame, 0, 0, rw, rh );
+         }
 #ifdef USE_DIRECT_PAINTER
-  }
+      }
 #endif
-    } else {
+   }
+   else
+   {
 
-  w = 220;
-  h = 160;
+      w = 220;
+      h = 160;
 
-  // maintain aspect ratio
-  if ( w * sh > sw * h )
-      w = sw * h / sh;
-  else
-      h = sh * w / sw;
+      // maintain aspect ratio
+      if ( w * sh > sw * h )
+         w = sw * h / sh;
+      else
+         h = sh * w / sw;
 
-  result = mediaPlayerState->curDecoder()->videoReadScaledFrame( currentFrame->jumpTable(), 0, 0, sw, sh, w, h, format, 0) == 0;
+      result = mediaPlayerState->curDecoder()->videoReadScaledFrame( currentFrame->jumpTable(), 0, 0, sw, sh, w, h, format, 0) == 0;
 
-  QPainter p( this );
+      QPainter p( this );
+      int deskW = qApp->desktop()->width();
+      // Image changed size, therefore need to blank the possibly unpainted regions first
+      if ( scaledWidth != w || scaledHeight != h )
+      {
+         p.setBrush( QBrush( Qt::black ) );
+         p.drawRect( ( deskW -scaledWidth)/2, 20, scaledWidth, 160 );
+      }
 
-  // Image changed size, therefore need to blank the possibly unpainted regions first
-  if ( scaledWidth != w || scaledHeight != h ) {
-      p.setBrush( QBrush( Qt::black ) );
-      p.drawRect( 9, 20, 220, 160 );
-  }
+      scaledWidth = w;
+      scaledHeight = h;
 
-  scaledWidth = w;
-  scaledHeight = h;
+      if ( result )
+      {
+         p.drawImage(  (deskW  - scaledWidth) / 2, 20 + (160 - scaledHeight) / 2, *currentFrame, 0, 0, scaledWidth, scaledHeight );
+      }
 
-  if ( result ) {
-      p.drawImage( 9 + (220 - scaledWidth) / 2, 20 + (160 - scaledHeight) / 2, *currentFrame, 0, 0, scaledWidth, scaledHeight );
-  }
+   }
 
-    }
-
-    return result;
+   return result;
 }
 
 
 
 void VideoWidget::keyReleaseEvent( QKeyEvent *e)
 {
-    switch ( e->key() ) {
+   switch ( e->key() )
+   {
 ////////////////////////////// Zaurus keys
-      case Key_Home:
-          break;
-      case Key_F9: //activity
-          break;
-      case Key_F10: //contacts
+   case Key_Home:
+      break;
+   case Key_F9: //activity
+      break;
+   case Key_F10: //contacts
 //           hide();
-          break;
-      case Key_F11: //menu
-          break;
-      case Key_F12: //home
-          break;
-      case Key_F13: //mail
-          break;
-      case Key_Space: {
-          if(mediaPlayerState->playing()) {
-              mediaPlayerState->setPlaying(FALSE);
-          } else {
-              mediaPlayerState->setPlaying(TRUE);
-          }
+      break;
+   case Key_F11: //menu
+      break;
+   case Key_F12: //home
+      break;
+   case Key_F13: //mail
+      break;
+   case Key_Space:
+   {
+      if(mediaPlayerState->playing())
+      {
+         mediaPlayerState->setPlaying(FALSE);
       }
-          break;
-      case Key_Down:
+      else
+      {
+         mediaPlayerState->setPlaying(TRUE);
+      }
+   }
+   break;
+   case Key_Down:
 //            toggleButton(6);
 //            emit lessClicked();
 //            emit lessReleased();
 //            toggleButton(6);
-          break;
-      case Key_Up:
+      break;
+   case Key_Up:
 //             toggleButton(5);
 //             emit moreClicked();
 //             emit moreReleased();
 //             toggleButton(5);
-           break;
-      case Key_Right:
-          mediaPlayerState->setNext();
-          break;
-      case Key_Left:
-          mediaPlayerState->setPrev();
-          break;
-      case Key_Escape:
-          break;
+      break;
+   case Key_Right:
+      mediaPlayerState->setNext();
+      break;
+   case Key_Left:
+      mediaPlayerState->setPrev();
+      break;
+   case Key_Escape:
+      break;
 
-    };
+   };
 }

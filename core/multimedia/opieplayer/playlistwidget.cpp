@@ -167,6 +167,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 //                                        this , SLOT( addSelected()) );
     tbDeletePlaylist = new QPushButton( Resource::loadIconSet("trash"),"",bar,"close");
     tbDeletePlaylist->setFlat(TRUE);
+
     tbDeletePlaylist->setFixedSize(20,20);
     
     d->tbAddToList =  new ToolButton( bar, tr( "Add to Playlist" ), "opieplayer/add_to_playlist",
@@ -227,10 +228,15 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
 
       // Add the playlist area
-
+  
     QVBox *vbox3 = new QVBox( pTab ); vbox3->setBackgroundMode( PaletteButton );
     d->playListFrame = vbox3;
-    d->playListFrame ->setMinimumSize(235,260);
+
+    QGridLayout *layoutF = new QGridLayout( pTab );
+  layoutF->setSpacing( 2);
+  layoutF->setMargin( 2);
+  layoutF->addMultiCellWidget( d->playListFrame , 0, 0, 0, 1 );
+//    d->playListFrame ->setMinimumSize(235,260);
 
     QHBox *hbox2 = new QHBox( vbox3 ); hbox2->setBackgroundMode( PaletteButton );
 
@@ -250,7 +256,12 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     QWidget *aTab;
     aTab = new QWidget( tabWidget, "aTab" );
     audioView = new QListView( aTab, "Audioview" );
-    audioView->setMinimumSize(233,260);
+
+    QGridLayout *layoutA = new QGridLayout( aTab );
+  layoutA->setSpacing( 2);
+  layoutA->setMargin( 2);
+  layoutA->addMultiCellWidget( audioView, 0, 0, 0, 1 );
+
     audioView->addColumn( tr("Title"),140);
     audioView->addColumn(tr("Size"), -1);
     audioView->addColumn(tr("Media"),-1);
@@ -275,7 +286,11 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     QWidget *vTab;
     vTab = new QWidget( tabWidget, "vTab" );
     videoView = new QListView( vTab, "Videoview" );
-    videoView->setMinimumSize(233,260);
+
+    QGridLayout *layoutV = new QGridLayout( vTab );
+  layoutV->setSpacing( 2);
+  layoutV->setMargin( 2);
+  layoutV->addMultiCellWidget( videoView, 0, 0, 0, 1 );
     
     videoView->addColumn(tr("Title"),140);
     videoView->addColumn(tr("Size"),-1);
@@ -294,7 +309,13 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     QWidget *LTab;
     LTab = new QWidget( tabWidget, "LTab" );
     playLists = new FileSelector( "playlist/plain", LTab, "fileselector" , FALSE, FALSE); //buggy
-    playLists->setMinimumSize(233,260);
+
+    QGridLayout *layoutL = new QGridLayout( LTab );
+  layoutL->setSpacing( 2);
+  layoutL->setMargin( 2);
+  layoutL->addMultiCellWidget( playLists, 0, 0, 0, 1 );
+//    playLists->setMinimumSize(233,260);
+
     tabWidget->insertTab(LTab,tr("Lists"));
 
     connect(tbDeletePlaylist,(SIGNAL(released())),SLOT( deletePlaylist()));
@@ -321,16 +342,12 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
              this,SLOT( playIt( QListViewItem *)) );
     connect( videoView, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( addToSelection( QListViewItem *) ) );
 
-
 //playlists
     connect( playLists, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( loadList( const DocLnk & ) ) );
-
 
     connect( tabWidget, SIGNAL (currentChanged(QWidget*)),this,SLOT(tabChanged(QWidget*)));
 
     connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ),    d->tbPlay,    SLOT( setOn( bool ) ) );
-
-
 
     connect( mediaPlayerState, SIGNAL( loopingToggled( bool ) ),    d->tbLoop,    SLOT( setOn( bool ) ) );
     connect( mediaPlayerState, SIGNAL( shuffledToggled( bool ) ),   d->tbShuffle, SLOT( setOn( bool ) ) );

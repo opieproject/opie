@@ -37,7 +37,6 @@ enum VideoButtons {
     VideoFullscreen
 };
 
-
 class VideoWidget : public QWidget {
     Q_OBJECT
 public:
@@ -62,6 +61,7 @@ signals:
     void sliderMoved( long );
 
 protected:
+    void resizeEvent( QResizeEvent * );
     void paintEvent( QPaintEvent *pe );
     void mouseMoveEvent( QMouseEvent *event );
     void mousePressEvent( QMouseEvent *event );
@@ -70,15 +70,26 @@ protected:
     void keyReleaseEvent( QKeyEvent *e);
 
 private:
-    void paintButton( QPainter *p, int i );
-    void toggleButton( int );
-    void setToggleButton( int, bool );
-
+    QPixmap *pixBg;
+    QImage  *imgUp;
+    QImage  *imgDn;
+    QImage  *imgButtonMask;
+    QBitmap *masks[7];
+    QString backgroundPix;
+    QPixmap *buttonPixUp[7];
+    QPixmap *buttonPixDown[7];
+    QString skin;
     QSlider *slider;
     QPixmap *pixmaps[3];
     QImage *currentFrame;
+    int xoff, yoff;
     int scaledWidth;
     int scaledHeight;
+
+  void paintButton( QPainter *p, int i );
+    void toggleButton( int );
+    void setToggleButton( int, bool );
+
 };
 
 
