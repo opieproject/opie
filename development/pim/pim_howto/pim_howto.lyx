@@ -52,8 +52,8 @@
                 \let\item\@idxitem}
                {\if@restonecol\onecolumn\else\clearpage\fi}
 \end_preamble
-\language german
-\inputencoding auto
+\language american
+\inputencoding default
 \fontscheme ae
 \graphics default
 \float_placement htbp
@@ -70,7 +70,7 @@
 \tocdepth 3
 \paragraph_separation skip
 \defskip medskip
-\quotes_language german
+\quotes_language english
 \quotes_times 2
 \papercolumns 1
 \papersides 2
@@ -97,7 +97,7 @@ Abstract
 
 The Opie-Pim API provides a powerfull access interface to the PIM (Personal
  Information Management) data which contains your contact information, the
- dates in your calender tool (in this paper called datebook events) and
+ dates in your calendar tool (in this paper called datebook events) and
  your todo events.
  Beside providing full featured access to this information, it covers the
  real management of this informantion - the access of the databases - from
@@ -106,7 +106,7 @@ The Opie-Pim API provides a powerfull access interface to the PIM (Personal
 \layout Standard
 
 While starting to read the automatically generated API-documentation, the
- user may be confused by a lot of unneccessary classes and details which
+ user may be confused by a lot of unnecessary classes and details which
  makes the quick start not as easy as possible.
  Due to the fact that a user will not need most of the details, this paper
  should help to start to become confortable with those details he need to
@@ -124,7 +124,7 @@ While starting to read the automatically generated API-documentation, the
 Introduction
 \layout Standard
 
-Before starting to jump into the work, we should introduce some specialities
+Before starting to jump into the work, we should introduce some specialties
  of the PIM API, first.
  To know these facts should help to avoid possible irritations and misunderstand
 ings:
@@ -133,11 +133,11 @@ ings:
 The PIM-API heavily uses C++ templates (as known as generic classes), but
  you don't have to understand very deeple what templates are doing and how
  they work! Most of the API works without even seeing the templates.
- In some cases whe have to use them (for instance to use the factory classes),
+ In some cases we have to use them (for instance to use the factory classes),
  but this guide will provide examples which should help to find the path
  through.
  But it is a good idea to read some short introduction of templates to avoid
- unneccessary mistakes.
+ unnecessary mistakes.
 \layout Enumerate
 
 The PIM-API is split into two parts: The 
@@ -151,7 +151,7 @@ backend.
 \emph default 
  While the frontend provides the API for the user, the backend implements
  how to access the databases and what to do with the data.
- As we just want to access data, this paper just focusses the frontend.
+ As we just want to access data, this paper just focuses the frontend.
  Thus, you should ignore all classes which contains something like 
 \begin_inset Quotes gld
 \end_inset 
@@ -160,8 +160,8 @@ backend
 \begin_inset Quotes grd
 \end_inset 
 
- in its name! Backends are just interessting for people who want to extend
- or implement new possiblities about how to access databases, which will
+ in its name! Backends are just interesting for people who want to extend
+ or implement new possibilities about how to access databases, which will
  be discussed at the end of this paper.
  Currently, you just have to understand that there do exist several backends
  for every type of PIM data (Contact, Todo, Datebook) which controls whether
@@ -217,7 +217,7 @@ OPimAccessFactory
  This operation is defined like this:
 \layout LyX-Code
 
-T* defaultAccess (typename OPimGlobal::PimType type, const QString &appName)
+T* defaultAccess (typename OPimGlobal::PimType type, const QString &appName)
 \layout Standard
 
 You just have to add the following lines to your source code to use it (this
@@ -241,7 +241,7 @@ If everything works as expected, you will receive a pointer to the contact
  access-class which has to be used for accessing the database.
  Accessing the datebook database works equally
 \begin_inset Foot
-collapsed true
+collapsed false
 
 \layout Standard
 
@@ -275,9 +275,9 @@ defaultAccess()
 
 
 \emph default 
-, the default dabase is accessed automatically
+, the default database is accessed automatically
 \begin_inset Foot
-collapsed true
+collapsed false
 
 \layout Standard
 
@@ -360,7 +360,7 @@ data-class
 \emph default 
  for the selected access-class: OPimContact
 \begin_inset Foot
-collapsed true
+collapsed false
 
 \layout Standard
 
@@ -374,7 +374,7 @@ see
 
  for OPimContactAccess, OPimEvent
 \begin_inset Foot
-collapsed true
+collapsed false
 
 \layout Standard
 
@@ -388,7 +388,7 @@ see
 
  for ODateBookAccess and OPimTodo
 \begin_inset Foot
-collapsed true
+collapsed false
 
 \layout Standard
 
@@ -406,7 +406,7 @@ see
 bool load ();
 \layout LyX-Code
 
-bool reload ();
+bool reload ();
 \layout LyX-Code
 
 bool save ();
@@ -414,13 +414,13 @@ bool save ();
 
 \layout LyX-Code
 
-bool add (const T& t);
+bool add (const T& t);
 \layout LyX-Code
 
-bool remove (const T& t);
+bool remove (const T& t);
 \layout LyX-Code
 
-bool replace (const T& t);
+bool replace (const T& t);
 \layout Standard
 
 After receiving an access-object, we have to load the existing dataset into
@@ -460,11 +460,11 @@ without
 \series default 
  removing any local changes
 \begin_inset Foot
-collapsed true
+collapsed false
 
 \layout Standard
 
-We should check whether all dabases behave like this! (se)
+We should check whether all databases behave like this! (se)
 \end_inset 
 
 .
@@ -496,7 +496,7 @@ OPimRecordList
  
 \layout LyX-Code
 
-List allRecords ();
+List allRecords();
 \layout Standard
 
 In fact, this 
@@ -504,10 +504,10 @@ In fact, this
 List
 \emph default 
  just contains a list of uid's to take care of memory space.
- As every record is identified by an unique identifaction number which is
- called UID (Unique IDentification), these numbers just exists once in the
- database which is currently on access! To receive the real record, you
- have to use the operation 
+ As every record is identified by an unique identification number which
+ is called UID (Unique Identification), these numbers just exists once in
+ the database which is currently on access! To receive the real record,
+ you have to use the operation 
 \begin_inset Quotes gld
 \end_inset 
 
@@ -515,10 +515,10 @@ find()
 \begin_inset Quotes grd
 \end_inset 
 
- with a valid UID as paramter:
+ with a valid UID as parameter:
 \layout LyX-Code
 
-T find (UID uid);
+T find (UID uid);
 \layout Standard
 
 This is all you need to realize a basic access to the PIM-Databases! The
@@ -558,7 +558,7 @@ As shown in the previous chapter, all we need to access the PIM-Database
 .
 \layout Standard
 
-But first we will start with intoducing some features of the 
+But first we will start with introducing some features of the 
 \series bold 
 OPimAccessFactory
 \series default 
@@ -581,7 +581,7 @@ defaultAccess()
 \begin_inset Quotes grd
 \end_inset 
 
- to request an access-object to the dafault backend.
+ to request an access-object to the default backend.
  Whether this default backend will access the XML, VCard or SQLite database
  type, is defined by the configuration file 
 \begin_inset Quotes gld
@@ -616,18 +616,18 @@ defaultAccess()
 \layout Standard
 
 If the developer wants to select a special database type for sure without
- unnecessary side effects, he has to use the oparation 
+ unnecessary side effects, he has to use the operation 
 \emph on 
 create()
 \emph default 
  which has the following parameters:
 \layout LyX-Code
 
-T * create (OPimGlobal::PimType type, OPimGlobal::DatabaseStyle dbStyle,
+T* create (OPimGlobal::PimType type, OPimGlobal::DatabaseStyle dbStyle,
  const QString &appName, const QString &fileName=QString::null)
 \layout Standard
 
-Some paramters are already known, like type and appName (see section 
+Some parameters are already known, like type and appName (see section 
 \begin_inset LatexCommand \ref{sec:Instantiate-the-Access}
 
 \end_inset 
@@ -746,10 +746,10 @@ In most cases it is not sufficient to receive just a list of all information
  in a database.
  It is essential to get a subset of the information available and to be
  able to sort it.
- For this kind of excercise we provide some special operations which provide
+ For this kind of exercise we provide some special operations which provide
  searching and sorting in an incremental manner
 \begin_inset Foot
-collapsed true
+collapsed false
 
 \layout Standard
 
@@ -840,7 +840,7 @@ matchRegexp()
 The function is defined like this:
 \layout LyX-Code
 
-List matchRegexp (const QRegExp &r);
+List matchRegexp (const QRegExp& r);
 \layout Standard
 
 The 
@@ -897,22 +897,22 @@ OPimContact searchQuery;
 \layout LyX-Code
 
 searchQuery.setLastName( 
-\begin_inset Quotes gld
+\begin_inset Quotes eld
 \end_inset 
 
 Eilers
-\begin_inset Quotes grd
+\begin_inset Quotes erd
 \end_inset 
 
  );
 \layout LyX-Code
 
 searchQuery.setHomeZip( 
-\begin_inset Quotes gld
+\begin_inset Quotes eld
 \end_inset 
 
 3*
-\begin_inset Quotes grd
+\begin_inset Quotes srd
 \end_inset 
 
  );
@@ -959,8 +959,8 @@ The next step is to put this query into the operation which is defined like
  this:
 \layout LyX-Code
 
-List queryByExample (const T& query, int querySettings, const QDateTime
- &startperiod=QDateTime())
+List queryByExample (const T& query, int querySettings, const QDateTime&
+ startperiod=QDateTime())
 \layout Standard
 
 The first parameter 
@@ -980,7 +980,15 @@ querySettings
 \end_inset 
 
  to configure the search properly.
- This settings are defined by the enum QuerySettings in the class 
+ This settings are defined by the enumeration 
+\begin_inset Quotes gld
+\end_inset 
+
+QuerySettings
+\begin_inset Quotes grd
+\end_inset 
+
+ in the class 
 \series bold 
 OPimBase
 \series default 
@@ -1082,7 +1090,7 @@ It should be clear at this stage, that this query is very powerful and -
  depending to the querySettings - could be very complicated to implement.
  Thus, not all backends do support all features defined by querySettings
 \begin_inset Foot
-collapsed true
+collapsed false
 
 \layout Standard
 
@@ -1097,10 +1105,10 @@ At this time, just the contact database for XML and VCard is supporting
  application) we provide the following operations:
 \layout LyX-Code
 
-bool hasQuerySettings( uint querySettings );
+bool hasQuerySettings( uint querySettings );
 \layout LyX-Code
 
-uint querySettings();
+uint querySettings();
 \layout Standard
 
 The first operation 
@@ -1202,7 +1210,7 @@ List
 \end_inset 
 
  as the first parameter.
- The search operation will just occure on this set of uid's!
+ The search operation will just occur on this set of uid's!
 \layout Subsection
 
 Sorting
@@ -1212,7 +1220,7 @@ To sort a given dataset, you should use the following operation (or one
  of the others which behave slightly differently):
 \layout LyX-Code
 
-List sorted (const List& list, bool ascending, int sortOrder, int sortFilter,
+List sorted (const List& list, bool ascending, int sortOrder, int sortFilter,
  const QArray< UID >& cats);
 \layout Standard
 
@@ -1401,7 +1409,7 @@ Internal Signal Handling: Automatic Propagation of Changes
 
 \layout Standard
 
-Need to be written and is not implemented completly!
+Need to be written and is not implemented completely!
 \layout Chapter
 
 Howto Extend and Write New Backends
