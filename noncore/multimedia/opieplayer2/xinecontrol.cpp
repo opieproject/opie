@@ -2,6 +2,7 @@
 #include "xinecontrol.h"
 #include "mediaplayerstate.h"
 
+
 extern MediaPlayerState *mediaPlayerState;
 
 XineControl::XineControl( QObject *parent, const char *name )
@@ -22,16 +23,24 @@ void XineControl::play( const QString& fileName ) {
     libXine->play( fileName );
     mediaPlayerState->setPlaying( true );
     // default to audio view until we know how to handle video
-    mediaPlayerState->setView('a');
-    // determines of slider is shown
-    // mediaPlayerState->setIsStreaming( false );
-    // hier dann schaun welcher view
+    //   MediaDetect mdetect;
+    char whichGui = mdetect.videoOrAudio( fileName );
+    if (whichGui == 'f') {
+        qDebug("Nicht erkannter Dateityp");
+        return;
+    }
+
+    // which gui (video / audio)
+    mediaPlayerState->setView(  whichGui  );
+
+    // determine if slider is shown
+    mediaPlayerState->setIsStreaming( mdetect.isStreaming( fileName ) );
 }
 
 void XineControl::stop( bool isSet ) {
     if ( !isSet) {
         libXine->stop();
-        mediaPlayerState->setNext();
+        mediaPlayerState->setList();
         //mediaPlayerState->setPlaying( false );
     } else {
         // play again
@@ -39,7 +48,6 @@ void XineControl::stop( bool isSet ) {
 }
 
 void XineControl::pause( bool isSet) {
-
     libXine->pause();
 }
 

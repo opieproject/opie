@@ -3,6 +3,7 @@
 #define XINECONTROL_H
 
 #include "lib.h"
+#include "mediadetect.h"
 #include <qobject.h>
 
 class XineControl : public QObject  {
@@ -25,6 +26,7 @@ public slots:
 
 private:
     XINE::Lib *libXine;
+    MediaDetect mdetect;
     int m_length;
     int m_currentTime;
     int m_position;
