@@ -28,34 +28,18 @@
 
 #include "settings.h"
 
-#include <qpe/global.h>
-#include <qpe/fontmanager.h>
 #include <qpe/config.h>
-#include <qpe/applnk.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/power.h>
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
 #include <qpe/qcopenvelope_qws.h>
 #endif
 
-#include <qlabel.h>
 #include <qcheckbox.h>
-#include <qradiobutton.h>
 #include <qtabwidget.h>
 #include <qslider.h>
-#include <qfile.h>
-#include <qtextstream.h>
-#include <qdatastream.h>
-#include <qmessagebox.h>
-#include <qcombobox.h>
-#include <qgroupbox.h>
 #include <qspinbox.h>
 #include <qpushbutton.h>
-#include <qlistbox.h>
-#include <qdir.h>
-#if QT_VERSION >= 300
-#include <qstylefactory.h>
-#endif
 
 #include <opie/odevice.h>
 
@@ -124,10 +108,14 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 	lowSpinBox->      setValue ( config. readNumEntry ( "powerverylow", 10 ) );
 	criticalSpinBox-> setValue ( config. readNumEntry ( "powercritical", 5 ) );
 
-	if ( PowerStatusManager::readStatus ( ). acStatus ( ) != PowerStatus::Online ) 
+	if ( PowerStatusManager::readStatus ( ). acStatus ( ) != PowerStatus::Online ) {
 		connect ( brightness, SIGNAL( valueChanged ( int )), this, SLOT( setBacklight ( int )));
-	else
+		tabs-> setCurrentPage ( 0 );		
+	}
+	else {
 		connect ( brightness_ac_3, SIGNAL( valueChanged ( int )), this, SLOT( setBacklight ( int )));
+		tabs-> setCurrentPage ( 1 );
+	}
 }
 
 LightSettings::~LightSettings ( ) 

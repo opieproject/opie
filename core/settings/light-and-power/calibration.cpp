@@ -94,26 +94,26 @@ int Calibration::interval ( ) const
 
 void Calibration::setStartPoint ( const QPoint &p )
 {
-	m_p [0] = p;
+	m_p [0] = QPoint ( p. x ( ), m_scale. height ( ) - p. y ( ) - 1 );
 	checkPoints ( );	
 	update ( );
 }
 
 QPoint Calibration::startPoint ( ) const
 {
-	return m_p [0];
+	return QPoint ( m_p [0]. x ( ), m_scale. height ( ) - m_p [0]. y ( ) - 1 );
 }
 
 void Calibration::setEndPoint ( const QPoint &p )
 {
-	m_p [1] = p;
+	m_p [1] = QPoint ( p. x ( ), m_scale. height ( ) - p. y ( ) - 1 );
 	checkPoints ( );
 	update ( );
 }
 
 QPoint Calibration::endPoint ( ) const
 {
-	return m_p [1];
+	return QPoint ( m_p [1]. x ( ), m_scale. height ( ) - m_p [1]. y ( ) - 1 );
 }
 
 void Calibration::checkPoints ( )
@@ -204,12 +204,12 @@ void Calibration::mouseMoveEvent ( QMouseEvent *e )
 			m_p [i] = n [i];
 			
 			if ( i == 0 ) {
-				r |= QRect ( 0, 0, nx [0] - 0 + 1, ny [0] - 0 + 1 );
-				r |= QRect ( 0, 0, ox [0] - 0 + 1, oy [0] - 0 + 1 );
+				r |= QRect ( 0, ny [0], nx [0] - 0 + 1, 1 );
+				r |= QRect ( 0, oy [0], ox [0] - 0 + 1, 1 );
 			}
 			else if ( i == 1 ) {
-				r |= QRect ( nx [1], ny [1], width ( ) - nx [1], height ( ) - ny [1] ); 
-				r |= QRect ( ox [1], oy [1], width ( ) - ox [1], height ( ) - oy [1] ); 
+				r |= QRect ( nx [1], ny [1], width ( ) - nx [1], 1 ); 
+				r |= QRect ( ox [1], oy [1], width ( ) - ox [1], 1 ); 
 			}
 		}
 	}
@@ -253,8 +253,7 @@ void Calibration::paintEvent ( QPaintEvent * )
 	
 	p. setPen ( g. highlight ( ));
 	
-	p. drawLine ( BRD, BRD, ex, BRD );
-	p. drawLine ( ex, BRD, ex, ey );
+	p. drawLine ( BRD, ey, ex, ey );
 	
 	for ( int i = 1; i < m_steps; i++ ) {
 		int fx = x0 + dx * i / m_steps;

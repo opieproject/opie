@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>293</width>
+            <width>289</width>
             <height>443</height>
         </rect>
     </property>
@@ -780,11 +780,15 @@
                     </property>
                     <property stdset="1">
                         <name>maxValue</name>
-                        <number>127</number>
+                        <number>63</number>
                     </property>
                     <property stdset="1">
                         <name>lineStep</name>
-                        <number>10</number>
+                        <number>5</number>
+                    </property>
+                    <property stdset="1">
+                        <name>pageStep</name>
+                        <number>5</number>
                     </property>
                     <property stdset="1">
                         <name>orientation</name>

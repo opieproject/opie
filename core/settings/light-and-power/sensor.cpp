@@ -36,12 +36,12 @@
 Sensor::Sensor ( QStringList &params, QWidget *parent, const char *name )
 	: SensorBase ( parent, name, true, WStyle_ContextHelp ), m_params ( params )
 {
-	int steps = 5; 
-	int inter = 5;
+	int steps = 12; 
+	int inter = 2;
 	
-	int smin = 0;
-	int smax = 255;
-	int lmin = 0;
+	int smin = 40;
+	int smax = 215;
+	int lmin = 1;
 	int lmax = 255;
 	
 	switch ( params. count ( )) {
@@ -50,7 +50,7 @@ Sensor::Sensor ( QStringList &params, QWidget *parent, const char *name )
 		case 4: smax = params [3]. toInt ( );
 		case 3: smin = params [2]. toInt ( );
 		case 2: steps = params [1]. toInt ( );
-		case 1: inter = params [0]. toInt ( );
+		case 1: inter = params [0]. toInt ( ) / 1000;
 	}
 	
 	QVBoxLayout *lay = new QVBoxLayout ( frame );
@@ -61,8 +61,8 @@ Sensor::Sensor ( QStringList &params, QWidget *parent, const char *name )
 	m_calib-> setScale ( QSize ( 256, 256 ));
 	m_calib-> setLineSteps ( steps );
 	m_calib-> setInterval ( inter );
-	m_calib-> setStartPoint ( QPoint ( smin, lmin ));
-	m_calib-> setEndPoint ( QPoint ( smax, lmax ));
+	m_calib-> setStartPoint ( QPoint ( smin, lmax ));
+	m_calib-> setEndPoint ( QPoint ( smax, lmin ));
 	
 	interval-> setValue ( inter );
 	linesteps-> setValue ( steps );
@@ -74,12 +74,12 @@ Sensor::Sensor ( QStringList &params, QWidget *parent, const char *name )
 void Sensor::accept ( )
 {
 	m_params. clear ( );
-	m_params << QString::number ( m_calib-> interval ( ))
+	m_params << QString::number ( m_calib-> interval ( ) * 1000 )
 	         << QString::number ( m_calib-> lineSteps ( ))
 	         << QString::number ( m_calib-> startPoint ( ). x ( ))
 	         << QString::number ( m_calib-> endPoint ( ). x ( ))
-	         << QString::number ( m_calib-> startPoint ( ). y ( ))
-	         << QString::number ( m_calib-> endPoint ( ). y ( ));
+	         << QString::number ( m_calib-> endPoint ( ). y ( ))
+	         << QString::number ( m_calib-> startPoint ( ). y ( ));
 
 	QDialog::accept ( );
 }
