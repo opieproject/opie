@@ -824,7 +824,7 @@ frei und versuchen Sie es noch einmal
     <message>
         <source>&lt;qt&gt;Are you sure you want to delete
  %1?&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;Sind Sie sicher, dass die %1 löschen wollen?&lt;/qt&gt;</translation>
+        <translation>&lt;qt&gt;Sind Sie sicher, dass sie %1 löschen wollen?&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Jan</source>
