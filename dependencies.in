@@ -1,0 +1,59 @@
+  config LIBETPAN_DEP
+    boolean "Have Libetpan >= 0.33pre"
+    default "n"
+
+  config LIBETPAN_LIB_DIR
+    string "LIBETPAN library dir"
+    depends LIBETPAN_DEP
+
+  config LIBETPAN_INC_DIR
+    string "LIBETPAN include dir"
+    depends LIBETPAN_DEP
+
+  config LIBPCAP_DEP
+    boolean "Have libpcap >= 0.7.2"
+    default "n"
+
+  config LIBPCAP_LIB_DIR
+    string "LIBPCAP library dir"
+    depends LIBPCAP_DEP
+
+  config LIBPCAP_INC_DIR
+    string "LIBPCAP include dir"
+    depends LIBPCAP_DEP
+
+  config LIBSQLITE_DEP
+    boolean "Have sqlite >= 2.8.6"
+    default n
+
+  config LIBSQLITE_LIB_DIR
+    string "LIBSQLITE library dir"
+    depends  LIBSQLITE_DEP
+
+  config LIBSQLITE_INC_DIR
+    string "LIBSQLITE include dir"
+    depends LIBSQLITE_DEP
+
+  config LIBXINE_DEP
+    boolean "have libxine 1.0 beta11"
+    default "n"
+
+  config LIBXINE_LIB_DIR
+    string "LIBXINE library dir"
+    depends "LIBXINE_DEP
+
+  config LIBXINE_INC_DIR
+    string "LIBXINE include dir"
+    depends LIBXINE_DEP
+
+  config LIBIPK_DEP
+    boolean "have libipkg v109 or greater"
+    default "n"
+
+  config LIBIPK_LIB_DIR
+    string "libipkg library dir"
+    depends LIBIPK_DEP
+
+  config LIBIPK_INC_DIR
+    string "libipkg include dir"
+    depends LIBIPK_DEP

@@ -152,6 +152,10 @@ config OPIE_WE_VERSION
 
 endmenu
 
+menu "Dependencies"
+    source dependencies.in
+endmenu
+
 menu "Base"
   choice
     prompt "Qpe Library Selection"
