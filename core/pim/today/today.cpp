@@ -108,16 +108,12 @@ void Today::setOwnerField( QString &message ) {
  * Init stuff needed for today. Reads the config file.
  */
 void Today::init() {
-
-    QDate date = QDate::currentDate();
-    QString time = ( tr( date.toString() ) );
-
-    DateLabel->setText( QString( "<font color=#FFFFFF>" + time + "</font>" ) );
-
     // read config
     Config cfg( "today" );
-    cfg.setGroup( "Applets" );
+    cfg.setGroup( "Plugins" );
+
     m_excludeApplets = cfg.readListEntry( "ExcludeApplets", ',' );
+    m_allApplets = cfg.readListEntry( "AllApplets", ',' );
 }
 
 
@@ -133,12 +129,14 @@ void Today::loadPlugins() {
     }
     pluginList.clear();
 
-
     QString path = QPEApplication::qpeDir() + "/plugins/today";
     QDir dir( path, "lib*.so" );
 
     QStringList list = dir.entryList();
     QStringList::Iterator it;
+
+
+    QMap<QString, TodayPlugin> tempList;
 
     for ( it = list.begin(); it != list.end(); ++it ) {
 	TodayPluginInterface *iface = 0;
@@ -164,12 +162,10 @@ void Today::loadPlugins() {
             // package the whole thing into a qwidget so it can be shown and hidden
             plugin.guiBox = new QWidget( this );
             QHBoxLayout *boxLayout = new QHBoxLayout( plugin.guiBox );
-
             QPixmap plugPix;
             plugPix.convertFromImage( Resource::loadImage( plugin.guiPart->pixmapNameWidget() ).smoothScale( 18, 18 ), 0 );
-            OClickableLabel* plugIcon = new OClickableLabel( plugin.guiBox  );
+            OClickableLabel* plugIcon = new OClickableLabel( plugin.guiBox );
             plugIcon->setPixmap( plugPix );
-
             // a scrollview for each plugin
             QScrollView* sv = new QScrollView( plugin.guiBox );
             QWidget *plugWidget = plugin.guiPart->widget( sv->viewport() );
@@ -178,18 +174,34 @@ void Today::loadPlugins() {
             sv->setHScrollBarMode( QScrollView::AlwaysOff );
             sv->setFrameShape( QFrame::NoFrame );
             sv->addChild( plugWidget );
-
             // make sure the icon is on the top alligned
             boxLayout->addWidget( plugIcon, 0, AlignTop );
             boxLayout->addWidget( sv, 0, AlignTop );
             boxLayout->setStretchFactor( plugIcon, 1 );
             boxLayout->setStretchFactor( sv, 9 );
-            layout->addWidget( plugin.guiBox );
+            // "prebuffer" it in one more list, to get the sorting done
+            tempList.insert( plugin.name, plugin );
 
-            pluginList.append( plugin );
+            // on first start the list is off course empty
+            if ( m_allApplets.isEmpty() ) {
+                layout->addWidget( plugin.guiBox );
+                pluginList.append( plugin );
+            }
         } else {
             qDebug( "could not recognize %s", QString( path + "/" + *it ).latin1() );
             delete lib;
+        }
+    }
+
+    if (  !m_allApplets.isEmpty() ) {
+        TodayPlugin tempPlugin;
+        QStringList::Iterator stringit;
+        for( stringit = m_allApplets.begin(); stringit !=  m_allApplets.end(); ++stringit ) {
+            tempPlugin = ( tempList.find( *stringit ) ).data();
+            if ( !( (tempPlugin.name).isEmpty() ) ) {
+                layout->addWidget( tempPlugin.guiBox );
+                pluginList.append( tempPlugin );
+            }
         }
     }
 }
@@ -227,8 +239,7 @@ void Today::draw() {
         noPluginsActive->setText( tr( "No plugins activated" ) );
         layout->addWidget( noPluginsActive );
     }
-    //layout->addStretch(0);
-    //layout->addItem( new QSpacerItem( 1,1, QSizePolicy::Minimum, QSizePolicy::Expanding ) );
+    layout->addStretch(0);
 }
 
 
@@ -241,12 +252,13 @@ void Today::startConfig() {
 
     TodayPlugin plugin;
     QList<ConfigWidget> configWidgetList;
-    for ( uint i = 0; i < pluginList.count(); i++ ) {
+
+    for ( int i = pluginList.count() - 1  ; i >= 0; i-- ) {
         plugin = pluginList[i];
 
         // load the config widgets in the tabs
         if ( plugin.guiPart->configWidget( this ) != 0l ) {
-            ConfigWidget* widget = plugin.guiPart->configWidget( this );
+            ConfigWidget* widget = plugin.guiPart->configWidget( conf.TabWidget3  );
             configWidgetList.append( widget );
             conf.TabWidget3->insertTab( widget, plugin.guiPart->appName() );
         }
@@ -273,6 +285,12 @@ void Today::startConfig() {
  */
 void Today::refresh() {
     init();
+
+    // set the date in top label
+    QDate date = QDate::currentDate();
+    QString time = ( tr( date.toString() ) );
+
+    DateLabel->setText( QString( "<font color=#FFFFFF>" + time + "</font>" ) );
 
     if ( layout ) {
         delete layout;

@@ -35,7 +35,6 @@ class ToolButton : public QToolButton {
 public:
     ToolButton( QWidget *parent, const char *name, const QString& icon, QObject *handler, const QString& slot, bool t = FALSE )
         : QToolButton( parent, name ) {
-        // setTextLabel( name );
         setPixmap( Resource::loadPixmap( icon ) );
         setAutoRaise( TRUE );
         setFocusPolicy( QWidget::NoFocus );
@@ -69,29 +68,24 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal, WFlags 
     m_appletListView = new QListView( hbox1 );
     m_appletListView->addColumn( "PluginList" );
     m_appletListView->header()->hide();
+    m_appletListView->setSorting( -1 );
     QVBox *vbox1 = new QVBox( hbox1 );
     new ToolButton( vbox1, tr( "Move Up" ), "opieplayer/up",  this , SLOT( moveSelectedUp() ) );
     new ToolButton( vbox1, tr( "Move Down" ),"opieplayer/down", this , SLOT( moveSelectedDown() ) );
     tab2Layout->addWidget( hbox1 );
-
     TabWidget3->insertTab( tab_2, tr( "active/order" ) );
+
     tab_3 = new QWidget( TabWidget3, "tab_3" );
     QVBoxLayout *tab3Layout = new QVBoxLayout( tab_3 );
-    QHBox *hbox_clip = new QHBox( tab_3 );
-    TextLabel1 = new QLabel( hbox_clip, "TextLabel1" );
-    TextLabel1->setText( tr( "Clip after how\n"
-                             "many letters" ) );
-    SpinBox7 = new QSpinBox( hbox_clip, "SpinBox7" );
-    SpinBox7->setMaxValue( 80 );
+    tab3Layout->setMargin( 20 );
     QHBox *hbox_auto = new QHBox( tab_3 );
     TextLabel2 = new QLabel( hbox_auto, "AutoStart" );
-    TextLabel2->setText( tr( "autostart on \nresume? (Opie only)" ) );
+    TextLabel2->setText( tr( "autostart on \nresume?\n (Opie only)" ) );
     CheckBoxAuto = new QCheckBox( hbox_auto, "CheckBoxAuto" );
     QHBox *hbox_inactive = new QHBox( tab_3 );
     TimeLabel = new QLabel( hbox_inactive  , "TimeLabel" );
     TimeLabel->setText( tr( "minutes inactive" ) );
-    SpinBoxTime = new QSpinBox(  hbox_inactive, "TimeSpinner");
-    tab3Layout->addWidget( hbox_clip );
+    SpinBoxTime = new QSpinBox( hbox_inactive, "TimeSpinner" );
     tab3Layout->addWidget( hbox_auto );
     tab3Layout->addWidget( hbox_inactive );
     TabWidget3->insertTab( tab_3, tr( "Misc" ) );
@@ -112,7 +106,7 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal, WFlags 
 void TodayConfig::setAutoStart() {
     Config cfg( "today" );
     cfg.setGroup( "Autostart" );
-    int autostart = cfg.readNumEntry( "autostart", 1);
+    int autostart = cfg.readNumEntry( "autostart", 1 );
     if ( autostart ) {
         QCopEnvelope e( "QPE/System", "autoStart(QString,QString,QString)" );
         e << QString( "add" );
@@ -136,7 +130,7 @@ void TodayConfig::readConfig() {
     m_autoStartTimer = cfg.readEntry( "autostartdelay", "0" );
     SpinBoxTime->setValue( m_autoStartTimer.toInt() );
 
-    cfg.setGroup( "Applets" );
+    cfg.setGroup( "Plugins" );
     m_excludeApplets = cfg.readListEntry( "ExcludeApplets", ',' );
 }
 
@@ -145,25 +139,36 @@ void TodayConfig::readConfig() {
  */
 void TodayConfig::writeConfig() {
     Config cfg( "today" );
-    cfg. setGroup ( "Applets" );
+    cfg.setGroup( "Plugins" );
     if ( m_applets_changed ) {
         QStringList exclude;
         QStringList include;
-        QMap <QString, QCheckListItem *>::Iterator it;
-        for ( it = m_applets.begin(); it != m_applets. end (); ++it ) {
-            if ( !(*it)-> isOn () ) {
-                exclude << it.key();
-            } else {
-                include << it.key();
+        QStringList all_applets;
+
+        QListViewItemIterator list_it( m_appletListView );
+
+        // this makes sure the names get saved in the order selected
+        for ( ; list_it.current(); ++list_it ) {
+            QMap <QString, QCheckListItem *>::Iterator it;
+            for ( it = m_applets.begin(); it != m_applets. end (); ++it ) {
+                if ( list_it.current() == (*it) && !(*it)-> isOn () ) {
+                    exclude << it.key();
+                } else if ( list_it.current() == (*it) && (*it)-> isOn () ){
+                    include << it.key();
+                }
+                if ( list_it.current() == (*it) ) {
+                    all_applets << it.key();
+                }
             }
         }
         cfg.writeEntry( "ExcludeApplets", exclude, ',' );
         cfg.writeEntry( "IncludeApplets", include, ',' );
+        cfg.writeEntry( "AllApplets",  all_applets, ',' );
     }
 
     cfg.setGroup( "Autostart" );
     m_autoStart = CheckBoxAuto->isChecked();
-    cfg.writeEntry( "autostart",  m_autoStart  );
+    cfg.writeEntry( "autostart",  m_autoStart );
     m_autoStartTimer = SpinBoxTime->value();
     cfg.readEntry( "autostartdelay", m_autoStartTimer );
 }
@@ -171,7 +176,7 @@ void TodayConfig::writeConfig() {
 
 void TodayConfig::moveSelectedUp() {
     QListViewItem *item = m_appletListView->selectedItem();
-    if ( item && item->itemAbove() )  {
+    if ( item && item->itemAbove() ) {
         item->itemAbove()->moveItem( item );
     }
 }
@@ -197,10 +202,10 @@ void TodayConfig::pluginManagement( QString libName, QString name, QPixmap icon 
 	    item->setPixmap( 0, icon );
         }
 
-        qDebug (" SUCHNAME: " + name );
         if ( m_excludeApplets.find( libName ) == m_excludeApplets.end() ) {
 	    item->setOn( TRUE );
         }
+
 	m_applets[libName] = item;
 }
 

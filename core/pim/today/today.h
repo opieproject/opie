@@ -34,6 +34,7 @@
 class QVBoxLayout;
 
 
+
 class Today : public TodayBase {
 
     Q_OBJECT
@@ -55,13 +56,13 @@ private:
     void loadPlugins();
     void draw();
 
-
 private slots:
     void channelReceived(const QCString &msg, const QByteArray & data);
 
  private:
     TodayConfig *conf;
     QStringList m_excludeApplets;
+    QStringList m_allApplets;
 
     // QString m_autoStartTimer;
     int m_newStart;
