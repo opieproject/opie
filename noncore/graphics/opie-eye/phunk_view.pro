@@ -9,7 +9,8 @@ HEADERS = gui/iconview.h gui/filesystem.h gui/mainwindow.h \
 	  iface/dirview.h iface/dirlister.h iface/ifaceinfo.h \
 	  impl/dir/dir_lister.h impl/dir/dir_ifaceinfo.h \
 	  lib/slavemaster.h \
-	  iface/slaveiface.h
+	  iface/slaveiface.h \
+          gui/imageinfoui.h
 	
 # A list header files
 
@@ -18,10 +19,11 @@ SOURCES = gui/iconview.cpp gui/filesystem.cpp gui/mainwindow.cpp \
           lib/imagecache.cpp lib/viewmap.cpp  \
 	  impl/dir/dir_dirview.cpp iface/dirlister.cpp \
 	  iface/dirview.cpp impl/dir/dir_lister.cpp \
-	  impl/dir/dir_ifaceinfo.cpp lib/slavemaster.cpp
+	  impl/dir/dir_ifaceinfo.cpp lib/slavemaster.cpp \
+          gui/imageinfoui.cpp
 # A list of source files
 
-INTERFACES =
+INTERFACES = 
 # list of ui files
 
 INCLUDEPATH += . $(OPIEDIR)/include

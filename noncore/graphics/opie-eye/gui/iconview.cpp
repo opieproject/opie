@@ -6,6 +6,7 @@
 #include "iconview.h"
 
 #include <lib/imagecache.h>
+#include <gui/imageinfoui.h>
 
 #include <iface/dirview.h>
 #include <iface/dirlister.h>
@@ -18,7 +19,7 @@
 #include <qpe/qpemessagebox.h>
 #include <qpe/ir.h>
 #include <qpe/qcopenvelope_qws.h>
-
+#include <qpe/qpeapplication.h>
 
 #include <qiconview.h>
 #include <qlabel.h>
@@ -376,8 +377,14 @@ void PIconView::slotShowImage( const QString& ) {
 
 }
 void PIconView::slotImageInfo() {
-
+    qDebug("image info");
+    bool isDir = false;
+    QString name = currentFileName(isDir);
+    if (isDir) return;
+    infoDlg dlg(name);
+    QPEApplication::execDialog(&dlg);
 }
-void PIconView::slotImageInfo( const QString& ) {
 
+void PIconView::slotImageInfo( const QString& ) {
+    
 }
