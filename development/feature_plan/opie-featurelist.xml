@@ -49,6 +49,21 @@ and with the right size for big screens.</summary>
    <summary>Background picture displayed in different modes</summary>
    <responsible email="opie-devel@handhelds.org" name="Open" />
   </feature>
+  <feature status="todo" target="BigScreen" >
+   <summary>Implement a launcher (and/or application class) which is able to auto-position and -resize a fixed number of concurrent application windows (e.g. 4 apps per screen)</summary>
+   <responsible email="" name="" />
+  </feature>
+  <feature status="todo" target="BigScreen" >
+   <summary>Add width- and height-customizability for 
+
+ * window titlebar
+ * window borders
+ * taskbar
+
+
+</summary>
+   <responsible email="" name="" />
+  </feature>
  </category>
  <category name="Addressbook" />
  <category name="All" >
@@ -68,6 +83,10 @@ both X11 and BigScreen Qt/E to look and behave better on bigger screens</summary
 -Search for misuse and unguarded usage of system
 -Kiosk mode?</summary>
    <responsible email="opie-devel@handhelds.org" name="Open" />
+  </feature>
+  <feature status="todo" target="BigScreen" >
+   <summary>Toolbuttons are too big and have too much spacing.</summary>
+   <responsible email="" name="" />
   </feature>
  </category>
  <category name="libopie" >
@@ -215,6 +234,10 @@ should go to the settings tab and access methods for them to libopie(2)</summary
    <summary>Create a Knoppix development CD</summary>
    <responsible email="opie-devel@handhelds.org" name="Open" />
   </feature>
+  <feature status="todo" target="1.0.2" >
+   <summary>Create more example applications</summary>
+   <responsible email="" name="" />
+  </feature>
  </category>
  <category name="OpieOffice" >
   <feature status="todo" target="NewApps" >
@@ -256,6 +279,46 @@ Opie presentation maybe a svg capable viewer?</summary>
   <feature status="todo" target="1.0.2" >
    <summary>Fix problems with events prior to 1. January 1970 aka negative unix time. Don't interpret it as -1</summary>
    <responsible email="opie-devel@handhelds.org" name="Open" />
+  </feature>
+  <feature status="todo" target="BigScreen" >
+   <summary>Modify layout, i.e. text in the time row is truncated w/ Verdana-12</summary>
+   <responsible email="" name="" />
+  </feature>
+  <feature status="todo" target="BigScreen" >
+   <summary>Implement a Year view</summary>
+   <responsible email="" name="" />
+  </feature>
+ </category>
+ <category name="Applets" >
+  <feature status="todo" target="1.2" >
+   <summary>Write a decent applet container which shows only &quot;modified&quot; applets (look e.g. at Windows here :)</summary>
+   <responsible email="" name="" />
+  </feature>
+  <feature status="todo" target="BigScreen" >
+   <summary>Rework all applets to honor something like Taskbar::appletWidth and Taskbar::appletHeight</summary>
+   <responsible email="" name="" />
+  </feature>
+ </category>
+ <category name="OSearch" >
+  <feature status="todo" target="1.0.2" >
+   <summary>Scale icons</summary>
+   <responsible email="" name="" />
+  </feature>
+  <feature status="todo" target="1.0.2" >
+   <summary>Use less ui spacing in the upper half of the screen</summary>
+   <responsible email="" name="" />
+  </feature>
+ </category>
+ <category name="Opie-Console" >
+  <feature status="todo" target="BigScreen" >
+   <summary>Add customization for terminal font</summary>
+   <responsible email="" name="" />
+  </feature>
+ </category>
+ <category name="Clock" >
+  <feature status="todo" target="BigScreen" >
+   <summary>Make it less ugly</summary>
+   <responsible email="" name="" />
   </feature>
  </category>
 </features>
