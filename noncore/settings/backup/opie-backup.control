@@ -1,7 +1,7 @@
 Package: opie-backup
 Files: plugins/application/libbackup.so* bin/backup pics/backup apps/Settings/backup.desktop
 Priority: optional
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2
 Architecture: arm
 Maintainer: Stefan Eilers <Eilers.Stefan@epost.de>
 Section: opie/settings
