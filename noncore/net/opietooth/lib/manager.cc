@@ -266,7 +266,7 @@ void Manager::slotConnectionExited( OProcess* proc ) {
     emit connections(list );
     delete proc;
 }
-void Manager::slotConnectionOutput(OProcess* proc, char* cha, int len) {
+void Manager::slotConnectionOutput(OProcess* /*proc*/, char* cha, int len) {
     QCString str(cha, len );
     m_hcitoolCon.append( str );
     //delete proc;
@@ -275,7 +275,10 @@ ConnectionState::ValueList Manager::parseConnections( const QString& out ) {
     ConnectionState::ValueList list2;
     QStringList list = QStringList::split('\n',  out );
     QStringList::Iterator it;
-    for (it = list.begin(); it != list.end(); ++it ) {
+    // remove the first line ( "Connections:")
+    it = list.begin();
+    it = list.remove( it );
+    for (; it != list.end(); ++it ) {
         QString row = (*it).stripWhiteSpace();
         QStringList value = QStringList::split(' ', row );
         qWarning("0: %s", value[0].latin1() );
