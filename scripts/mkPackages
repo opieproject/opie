@@ -15,7 +15,9 @@ do
 	done
 	if [ -n "$GOOD" ]
 	then
-	    tar xfOz $i ./control.tar.gz | tar xfOz - ./control
+#	    tar xfOz $i ./control.tar.gz | tar xfOz - ./control
+	    # new version of ipkg uses ar instead of tar
+	    ar pf $i control.tar.gz | tar xfOz - ./control
 	    echo
 	else
 	    echo >&2 "Skipped old file: $i ($other is newer)"
