@@ -1,25 +1,34 @@
-/**********************************************************************
-** EditScheme
-**
-** Dialog for editing color scheme
-**
-** Copyright (C) 2002, Dan Williams
-**                    williamsdr@acm.org
-**                    http://draknor.net
-**
-** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free Software
-** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.
-**
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-**
-**********************************************************************/
+/*
+               =.            This file is part of the OPIE Project
+             .=l.            Copyright (c)  2002 Robert Griebl <sandman@handhelds.org>
+           .>+-=
+ _;:,     .>    :=|.         This library is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This library is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+
+*/
 
 #include "editScheme.h"
 
-#include "opie/colorpopupmenu.h"
+#include <opie/ocolorbutton.h>
 
 #include <qaction.h>
 #include <qlabel.h>
@@ -28,60 +37,37 @@
 #include <qscrollview.h>
 #include <qtoolbutton.h>
 
-EditScheme::EditScheme( QWidget* parent,  const char* name, bool modal, WFlags fl,
-                        int max, QString *list, QString *colors )
-    : QDialog( parent, name, modal, fl )
+EditScheme::EditScheme ( int cnt, const QString *labels, QColor *colors, QWidget* parent,  const char* name, bool modal, WFlags fl )
+	: QDialog ( parent, name, modal, fl )
 {
-    setCaption( tr( "Edit scheme" ) );
-    QGridLayout* layout = new QGridLayout( this );
-    layout->setSpacing( 4 );
-    layout->setMargin( 4 );
+	setCaption ( tr( "Edit scheme" ) );
+	QGridLayout *layout = new QGridLayout ( this, 0, 0, 4, 4 );
 
-
-    maxCount = max;
-    colorList = colors;
-    surfaceList = list;
-    colorButtons = new QToolButton * [max];
-    int i;
-    QLabel* label;
-    ColorPopupMenu* colorPopupMenu;
-    for ( i = 0; i < max; i++ )
+    m_count = cnt;
+    m_buttons = new OColorButton * [cnt];
+    m_colors = colors;
+        
+    for ( int i = 0; i < cnt; i++ )
     {
-//        colorList[i] = colors[i];
-//        surfaceList[i] = list[i];
-        label = new QLabel( tr( surfaceList[i] ), this );
-        layout->addWidget( label, i, 0 );
-        colorButtons[i] = new QToolButton( this, list[i] );
-        colorButtons[i]->setPalette( QPalette( QColor( colors[i] ) ) );
-        layout->addWidget( colorButtons[i], i, 1 );
-
-        colorPopupMenu = new ColorPopupMenu( colors[i], 0, list[i] );
-        colorButtons[i]->setPopup( colorPopupMenu );
-        colorButtons[i]->setPopupDelay( 0 );
-        connect( colorPopupMenu, SIGNAL( colorSelected( const QColor& ) ), this, SLOT( changeColor( const QColor& ) ) );
+        QLabel *l = new QLabel ( labels [i], this );
+        layout-> addWidget ( l, i, 0 );
+        
+        m_buttons [i] = new OColorButton ( this );
+        m_buttons [i]-> setColor ( colors [i] );
+        layout-> addWidget ( m_buttons [i], i, 1 );
     }
 }
 
-EditScheme::~EditScheme()
+EditScheme::~EditScheme ( )
 {
-	delete [] colorButtons;
+	delete [] m_buttons;
 }
 
-void EditScheme::changeColor( const QColor& color )
+void EditScheme::accept ( )
 {
-    QString name( sender()->name() );
-    int i;
-
-    for ( i = 0; i < maxCount; i++ )
-    {
-        if ( name == colorButtons[i]->name() )
-        {
-            break;
-        }
-    }
-    if ( i < maxCount && name == colorButtons[i]->name() )
-    {
-        colorList[i] = color.name();
-        colorButtons[i]->setPalette( QPalette( QColor( colorList[i] ) ) );
-    }
+	for ( int i = 0; i < m_count; i++ ) 
+		m_colors [i] = m_buttons [i]-> color ( );
+		
+	QDialog::accept ( );
 }
+
