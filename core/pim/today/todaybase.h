@@ -31,7 +31,8 @@ public:
     QFrame* Frame4;
     QPushButton* DatesButton;
     QLabel* DatesField;
-    QFrame* Frame;
+    QLabel* Frame;
+    //QFrame* Frame;
     QLabel* TextLabel1;
     QFrame* Frame15;
     QLabel* TodoField;

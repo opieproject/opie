@@ -27,7 +27,7 @@
 #include <qwhatsthis.h>
 #include <qimage.h>
 #include <qpixmap.h>
-#include <qscrollview.h>
+//#include <qscrollview.h>
 
 #include <qpe/resource.h>
 
@@ -51,41 +51,43 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
     setName( "TodayBase" );
   resize( 223, 307 ); 
 
+  QVBoxLayout * layout = new QVBoxLayout(this);
+  
   Frame4 = new QFrame( this, "Frame4" );
-  Frame4->setGeometry( QRect( -9, 50, 250, 150 ) ); 
   Frame4->setFrameShape( QScrollView::StyledPanel );
   Frame4->setFrameShadow( QScrollView::Sunken );
   Frame4->setBackgroundOrigin( QScrollView::ParentOrigin );
 
   // hehe, qt is ...
   getridoffuckingstrippeldlinesbutton =  new QPushButton (Frame4, "asdfsad" );
-  getridoffuckingstrippeldlinesbutton->setGeometry( QRect( 2, 10, 0, 0 ) );
+  getridoffuckingstrippeldlinesbutton->setGeometry( QRect( -5, 10, 0, 0 ) );
 
   DatesButton = new QPushButton (Frame4, "DatesButton" );
-  DatesButton->setGeometry( QRect( 10, 10, 36, 32 ) );
+  DatesButton->setGeometry( QRect( 2, 10, 36, 32 ) );
   DatesButton->setBackgroundOrigin( QPushButton::WidgetOrigin );
   DatesButton->setPixmap( datebook  );
   DatesButton->setFlat( TRUE );
 
   DatesField = new QLabel( Frame4, "DatesField" );
-  DatesField->setGeometry( QRect( 47, 10, 203, 120 ) ); 
+  DatesField->setGeometry( QRect( 40, 10, 203, 120 ) ); 
   DatesField->setText( tr( "No appointments today" ) );
   DatesField->setAlignment( int( QLabel::AlignTop | QLabel::AlignLeft ) );
 
+  // today logo
   Frame = new QLabel( this, "Frame" );
-  Frame->setGeometry( QRect( 0, 0, 240, 50 ) ); 
   QPalette pal;
   QColorGroup cg;
   cg.setColor( QColorGroup::Text, white );
   cg.setBrush( QColorGroup::Background, QBrush( QColor( 238, 238, 230), logo ) );
   pal.setActive( cg );
-
+  
   Frame->setPalette( pal );
   Frame->setFrameShape( QFrame::StyledPanel );
   Frame->setFrameShadow( QFrame::Raised );
   Frame->setLineWidth( 0 );
-
-  // datum
+  Frame->setMaximumHeight(50);
+  Frame->setMinimumHeight(50);
+  // date
   TextLabel1 = new QLabel( Frame, "TextLabel1" );
   TextLabel1->setPalette( pal );
   TextLabel1->setGeometry( QRect( 10, 35, 168, 12 ) ); 
@@ -97,28 +99,34 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
    
   // todo
   Frame15 = new QFrame( this, "Frame15" );
-  Frame15->setGeometry( QRect( -9, 200, 250, 130 ) ); 
   Frame15->setFrameShape( QFrame::StyledPanel );
   Frame15->setFrameShadow( QFrame::Sunken );
   
   TodoButton = new QPushButton (Frame15, "TodoButton" );
-  TodoButton->setGeometry( QRect( 10, 4, 36, 32 ) );
+  TodoButton->setGeometry( QRect( 2, 4, 36, 32 ) );
   TodoButton->setBackgroundOrigin( QPushButton::WidgetOrigin );
   TodoButton->setPixmap( todo  );
   TodoButton->setFlat( TRUE );
 
   TodoField = new QLabel( Frame15, "TodoField" );
-  TodoField->setGeometry( QRect( 47, 10, 196, 120 ) ); 
+  TodoField->setGeometry( QRect( 40, 10, 196, 120 ) ); 
   TodoField->setFrameShadow( QLabel::Plain );
   TodoField->setText( tr( "No current todos" ) );
   TodoField->setAlignment( int( QLabel::AlignTop | QLabel::AlignLeft ) );
 
   PushButton1 = new QPushButton (Frame15, "PushButton1" );
-  PushButton1->setGeometry( QRect( 225, 68, 25, 21 ) ); 
+  PushButton1->setGeometry( QRect( 216, 68, 25, 21 ) ); 
   PushButton1->setBackgroundOrigin( QPushButton::WidgetOrigin );
   PushButton1->setPixmap( config  );
   PushButton1->setAutoDefault( TRUE );
   PushButton1->setFlat( TRUE );
+
+  layout->addWidget(Frame);
+  layout->addWidget(Frame4);
+  layout->addWidget(Frame15);
+  
+  layout->setStretchFactor(Frame4,3);
+  layout->setStretchFactor(Frame15,2);
 }
 
 /*  
