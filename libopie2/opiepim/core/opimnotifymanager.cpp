@@ -68,5 +68,7 @@ void OPimNotifyManager::deregister( const OPimNotify& ) {
 
 }
 bool OPimNotifyManager::isEmpty()const {
-    return ( m_rem.isEmpty() && m_al.isEmpty() );
+    qWarning("is Empty called on OPimNotifyManager %d %d", m_rem.count(), m_al.count() );
+    if ( m_rem.isEmpty() && m_al.isEmpty() ) return true;
+    else return false;
 }

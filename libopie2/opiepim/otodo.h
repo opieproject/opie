@@ -175,12 +175,18 @@ public:
 
     bool hasNotifiers()const;
     /*
-     * check if the sharing is still fine!! -zecke
+     * FIXME check if the sharing is still fine!! -zecke
+     * ### CHECK If API is fine
      */
     /**
      * return a reference to our notifiers...
      */
     OPimNotifyManager &notifiers();
+
+    /**
+     *
+     */
+    const OPimNotifyManager &notifiers()const;
 
     /**
      * reimplementations

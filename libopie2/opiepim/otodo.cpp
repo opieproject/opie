@@ -298,11 +298,17 @@ QString OTodo::toRichText() const
 }
 bool OTodo::hasNotifiers()const {
     if (!data->notifiers) return false;
-    return data->notifiers->isEmpty();
+    return !data->notifiers->isEmpty();
 }
 OPimNotifyManager& OTodo::notifiers() {
     if (!data->notifiers )
         data->notifiers = new OPimNotifyManager;
+    return (*data->notifiers);
+}
+const OPimNotifyManager& OTodo::notifiers()const{
+    if (!data->notifiers )
+        data->notifiers = new OPimNotifyManager;
+
     return (*data->notifiers);
 }
 
