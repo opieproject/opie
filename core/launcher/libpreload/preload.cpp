@@ -5,12 +5,13 @@
 
 #include <qwsdecoration_qws.h>
 #include <qcommonstyle.h>
-//#include <qpe/qpeapplication.h>
+//#include <qapplication.h>
+//#include <qfont.h>
 
-class QStyle;
+//class QStyle;
 class QApplication;
 class QFont;
-class QWSDecoration;
+//class QWSDecoration;
 
 #include <dlfcn.h>
 #include <unistd.h>
@@ -20,7 +21,7 @@ class QWSDecoration;
 
 typedef void ( *qapp_setstyle_t ) ( QStyle * );
 typedef void ( *qapp_setdeco_t ) ( QApplication *, QWSDecoration * ); 
-typedef void ( *qapp_setfont_t ) ( QApplication *, const QFont &, bool, const char * ); 
+typedef void ( *qapp_setfont_t ) ( const QFont &, bool, const char * ); 
 
 
 static bool *opie_block_style_p = 0;
@@ -55,7 +56,7 @@ extern void setStyle__12QApplicationP6QStyle ( QStyle *style )
 		( *qsetstyle ) ( style );
 }
 
-extern void setFont__12QApplicationRC5QFontbPCc ( QApplication *app, const QFont &fnt, bool informWidgets, const char * className )
+extern void setFont__12QApplicationRC5QFontbPCc ( const QFont &fnt, bool informWidgets, const char * className )
 {
 	static qapp_setfont_t qsetfont = 0;
 
@@ -66,7 +67,7 @@ extern void setFont__12QApplicationRC5QFontbPCc ( QApplication *app, const QFont
 		opie_block_style_p = (bool *) resolve_symbol ( "opie_block_style" );
 	
 	if ( qsetfont && !( opie_block_style_p && *opie_block_style_p ))
-		( *qsetfont ) ( app, fnt, informWidgets, className );
+		( *qsetfont ) ( fnt, informWidgets, className );
 }
 	
 
