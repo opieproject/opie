@@ -46,6 +46,23 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
   SpinBoxNtpDelay->setValue( cfg.readNumEntry("ntpRefreshFreq",1440) );
   ComboNtpSrv->setCurrentItem( cfg.readNumEntry("ntpServer", 0) );
 
+  //make tab order
+  
+  TabWidgetMain->removePage( tabMain );
+  TabWidgetMain->removePage( tabManualSetTime );
+  TabWidgetMain->removePage( TabSettings );
+  TabWidgetMain->removePage( tabPredict );
+  TabWidgetMain->removePage( tabNtp );
+
+  TabWidgetMain->insertTab( tabMain, tr( "Main" ) );
+  TabWidgetMain->insertTab( tabManualSetTime, tr( "Manual" ) );
+  TabWidgetMain->insertTab( TabSettings, tr( "Settings" ) );
+  TabWidgetMain->insertTab( tabPredict, tr( "Predict" ) );
+  TabWidgetMain->insertTab( tabNtp, tr( "NTP" ) );
+  NtpBaseLayout->addWidget( TabWidgetMain, 0, 0 );
+
+  
+
   bool advMode = cfg.readBoolEntry("advancedFeatures", false );
   showAdvancedFeatures(advMode);
   CheckBoxAdvSettings->setChecked( advMode );
@@ -112,7 +129,7 @@ QString Ntp::getNtpServer()
 
 void Ntp::slotRunNtp()
 {
-  if ( !ntpDelayElapsed() )
+  if ( !ntpDelayElapsed() && CheckBoxAdvSettings->isChecked() )
     {
       switch (
 	      QMessageBox::warning(this, tr("Run NTP?"),
@@ -133,6 +150,8 @@ void Ntp::slotRunNtp()
   *ntpProcess << "ntpdate" << getNtpServer();
   bool ret = ntpProcess->start(OProcess::NotifyOnExit,OProcess::AllOutput);
   if ( !ret ) {
+    QMessageBox::critical(this, tr("ntp error"),
+		       tr("Error while getting time form network!"));
     qDebug("Error while executing ntpdate");
     ntpOutPut( tr("Error while executing ntpdate"));
   }
@@ -140,6 +159,7 @@ void Ntp::slotRunNtp()
 
 void  Ntp::getNtpOutput(OProcess *proc, char *buffer, int buflen)
 {
+  if (! proc ) qDebug("Ntp::getNtpOutput OProcess is null");
   QString lineStr, lineStrOld;
   lineStr = buffer;
   lineStr=lineStr.left(buflen);
@@ -153,10 +173,16 @@ void  Ntp::getNtpOutput(OProcess *proc, char *buffer, int buflen)
 
 void  Ntp::ntpFinished(OProcess *p)
 {
-  //	qDebug("p->exitStatus() %i",p->exitStatus());
+  qDebug("p->exitStatus() %i",p->exitStatus());
   if (p->exitStatus()!=0 || !p->normalExit())
-    {
-      slotProbeNtpServer();
+    {      
+      QMessageBox::critical(this, tr("ntp error"),
+			    tr("Error while getting time form\n server")+ 
+			    getNtpServer()+"\n"+
+			    _ntpOutput );
+      //      TabWidgetMain->setCurrentPage( 1 );
+      TabWidgetMain->showPage( tabManualSetTime );
+      
       return;
     }
 
@@ -307,6 +333,7 @@ void Ntp::slotNtpDelayChanged(int delay)
 
 void Ntp::ntpOutPut(QString out)
 {
+  
   MultiLineEditntpOutPut->append(out);
   MultiLineEditntpOutPut->setCursorPosition(MultiLineEditntpOutPut->numLines() + 1,0,FALSE);
 }
@@ -338,12 +365,13 @@ void Ntp::receive(const QCString &msg, const QByteArray &arg)
 
 void Ntp::setDocument(const QString &fileName)
 {
-
+  qDebug("Ntp::setDocument( %s )",fileName.latin1());
 }
 
 void Ntp::showAdvancedFeatures(bool advMode)
 {
   if  (advMode) {
+    
     TabWidgetMain->addTab( tabPredict, tr( "Predict" ) );
     TabWidgetMain->addTab( tabNtp, tr( "NTP" ) );
     TextLabel1_2_2->show();

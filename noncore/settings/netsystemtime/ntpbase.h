@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Form interface generated from reading ui file 'ntpbase.ui'
 **
-** Created: Mon Oct 21 21:32:43 2002
+** Created: Sun Nov 10 17:58:48 2002
 **      by:  The User Interface Compiler (uic)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -34,7 +34,7 @@ public:
 
     QTabWidget* TabWidgetMain;
     QWidget* tabMain;
-    QWidget* FrameSystemTime;
+    QFrame* FrameSystemTime;
     QWidget* tabNtp;
     QPushButton* runNtp;
     QWidget* FrameNtp;

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Form implementation generated from reading ui file 'ntpbase.ui'
 **
-** Created: Mon Oct 21 21:32:47 2002
+** Created: Sun Nov 10 17:59:14 2002
 **      by:  The User Interface Compiler (uic)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -31,7 +31,7 @@ NtpBase::NtpBase( QWidget* parent,  const char* name, WFlags fl )
 {
     if ( !name )
 	setName( "NtpBase" );
-    resize( 320, 411 ); 
+    resize( 317, 411 ); 
     setCaption( tr( "Network Time" ) );
     NtpBaseLayout = new QGridLayout( this ); 
     NtpBaseLayout->setSpacing( 2 );
@@ -44,11 +44,10 @@ NtpBase::NtpBase( QWidget* parent,  const char* name, WFlags fl )
     tabMainLayout->setSpacing( 2 );
     tabMainLayout->setMargin( 2 );
 
-    FrameSystemTime = new QWidget( tabMain, "FrameSystemTime" );
-    //    FrameSystemTime->setFrameShape( QFrame::StyledPanel );
-    //FrameSystemTime->setFrameShadow( QFrame::Raised );
+    FrameSystemTime = new QFrame( tabMain, "FrameSystemTime" );
 
     tabMainLayout->addWidget( FrameSystemTime, 0, 0 );
+    TabWidgetMain->insertTab( tabMain, tr( "Main" ) );
 
     tabNtp = new QWidget( TabWidgetMain, "tabNtp" );
     tabNtpLayout = new QGridLayout( tabNtp ); 
@@ -61,8 +60,6 @@ NtpBase::NtpBase( QWidget* parent,  const char* name, WFlags fl )
     tabNtpLayout->addWidget( runNtp, 1, 0 );
 
     FrameNtp = new QWidget( tabNtp, "FrameNtp" );
-    //    FrameNtp->setFrameShape( QFrame::StyledPanel );
-    //    FrameNtp->setFrameShadow( QFrame::Raised );
     FrameNtpLayout = new QGridLayout( FrameNtp ); 
     FrameNtpLayout->setSpacing( 2 );
     FrameNtpLayout->setMargin( 2 );
@@ -110,6 +107,7 @@ NtpBase::NtpBase( QWidget* parent,  const char* name, WFlags fl )
     FrameNtpLayout->addWidget( MultiLineEditntpOutPut, 1, 0 );
 
     tabNtpLayout->addWidget( FrameNtp, 0, 0 );
+    TabWidgetMain->insertTab( tabNtp, tr( "NTP" ) );
 
     tabPredict = new QWidget( TabWidgetMain, "tabPredict" );
     tabPredictLayout = new QGridLayout( tabPredict ); 
@@ -174,6 +172,7 @@ NtpBase::NtpBase( QWidget* parent,  const char* name, WFlags fl )
     Layout11->addWidget( PushButtonPredict );
 
     tabPredictLayout->addLayout( Layout11, 2, 0 );
+    TabWidgetMain->insertTab( tabPredict, tr( "Predict" ) );
 
     TabSettings = new QWidget( TabWidgetMain, "TabSettings" );
     TabSettingsLayout = new QGridLayout( TabSettings ); 
@@ -181,8 +180,6 @@ NtpBase::NtpBase( QWidget* parent,  const char* name, WFlags fl )
     TabSettingsLayout->setMargin( 2 );
 
     FrameSettings = new QWidget( TabSettings, "FrameSettings" );
-    //    FrameSettings->setFrameShape( QFrame::StyledPanel );
-    //    FrameSettings->setFrameShadow( QFrame::Raised );
     FrameSettingsLayout = new QVBoxLayout( FrameSettings ); 
     FrameSettingsLayout->setSpacing( 6 );
     FrameSettingsLayout->setMargin( 11 );
@@ -216,7 +213,7 @@ NtpBase::NtpBase( QWidget* parent,  const char* name, WFlags fl )
     FrameSettingsLayout->addItem( spacer_2 );
 
     CheckBoxAdvSettings = new QCheckBox( FrameSettings, "CheckBoxAdvSettings" );
-    CheckBoxAdvSettings->setText( tr( "Advanced features" ) );
+    CheckBoxAdvSettings->setText( tr( "Advanced settings" ) );
     FrameSettingsLayout->addWidget( CheckBoxAdvSettings );
     QSpacerItem* spacer_3 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     FrameSettingsLayout->addItem( spacer_3 );
@@ -285,27 +282,23 @@ NtpBase::NtpBase( QWidget* parent,  const char* name, WFlags fl )
     FrameSettingsLayout->addLayout( Layout7 );
 
     TabSettingsLayout->addWidget( FrameSettings, 0, 0 );
+    TabWidgetMain->insertTab( TabSettings, tr( "Settings" ) );
 
     tabManualSetTime = new QWidget( TabWidgetMain, "tabManualSetTime" );
     tabManualSetTimeLayout = new QVBoxLayout( tabManualSetTime ); 
-    tabManualSetTimeLayout->setSpacing( 2 );
-    tabManualSetTimeLayout->setMargin( 2 );
+    tabManualSetTimeLayout->setSpacing( 6 );
+    tabManualSetTimeLayout->setMargin( 11 );
 
     FrameSetTime = new QWidget( tabManualSetTime, "FrameSetTime" );
-    //    FrameSetTime->setFrameShape( QFrame::StyledPanel );
-    //    FrameSetTime->setFrameShadow( QFrame::Raised );
+    FrameSetTime->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)5, (QSizePolicy::SizeType)3, FrameSetTime->sizePolicy().hasHeightForWidth() ) );
     tabManualSetTimeLayout->addWidget( FrameSetTime );
 
     PushButtonSetManualTime = new QPushButton( tabManualSetTime, "PushButtonSetManualTime" );
     PushButtonSetManualTime->setText( tr( "Set time" ) );
     tabManualSetTimeLayout->addWidget( PushButtonSetManualTime );
-
-
-    TabWidgetMain->insertTab( tabMain, tr( "Main" ) );
+    QSpacerItem* spacer_4 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
+    tabManualSetTimeLayout->addItem( spacer_4 );
     TabWidgetMain->insertTab( tabManualSetTime, tr( "Manual" ) );
-    TabWidgetMain->insertTab( TabSettings, tr( "Settings" ) );
-    TabWidgetMain->insertTab( tabPredict, tr( "Predict" ) );
-    TabWidgetMain->insertTab( tabNtp, tr( "NTP" ) );
 
     NtpBaseLayout->addWidget( TabWidgetMain, 0, 0 );
 }

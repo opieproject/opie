@@ -15,39 +15,39 @@ class Ntp : public SetDateTime
 
 public:
   Ntp( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
-    ~Ntp();
+  ~Ntp();
 
 public slots:
-	void setDocument (const QString &);
+  void setDocument (const QString &);
 protected:
-		QDateTime predictedTime;
-    void makeChannel();
+  QDateTime predictedTime;
+  void makeChannel();
 protected slots:
-    void receive(const QCString &msg, const QByteArray &arg);
+  void receive(const QCString &msg, const QByteArray &arg);
 private:
-		QString _ntpOutput;
-   	float _shiftPerSec;
-    int _lookupDiff;
-    OProcess *ntpProcess;
-    QTimer *ntpTimer;
-    QSocket *ntpSock;
-    QCopChannel *channel;
+  QString _ntpOutput;
+  float _shiftPerSec;
+  int _lookupDiff;
+  OProcess *ntpProcess;
+  QTimer *ntpTimer;
+  QSocket *ntpSock;
+  QCopChannel *channel;
 
-   	float getTimeShift();
-	  void readLookups();
-	  void ntpOutPut(QString);
-   	bool ntpDelayElapsed();
-    QString getNtpServer();
+  float getTimeShift();
+  void readLookups();
+  void ntpOutPut(QString);
+  bool ntpDelayElapsed();
+  QString getNtpServer();
 private slots:
-    void slotRunNtp();
-    void getNtpOutput(OProcess *proc, char *buffer, int buflen);
-    void ntpFinished(OProcess*);
-	  void preditctTime();
-	  void slotCheckNtp(int);
-	  void setPredictTime();
-	  void showAdvancedFeatures(bool);
-	  void slotProbeNtpServer();
-	  void slotNtpDelayChanged(int);
+  void slotRunNtp();
+  void getNtpOutput(OProcess *proc, char *buffer, int buflen);
+  void ntpFinished(OProcess*);
+  void preditctTime();
+  void slotCheckNtp(int);
+  void setPredictTime();
+  void showAdvancedFeatures(bool);
+  void slotProbeNtpServer();
+  void slotNtpDelayChanged(int);
 };
 
 #endif

@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>320</width>
+            <width>317</width>
             <height>411</height>
         </rect>
     </property>
@@ -71,14 +71,6 @@
                             <name>name</name>
                             <cstring>FrameSystemTime</cstring>
                         </property>
-                        <property stdset="1">
-                            <name>frameShape</name>
-                            <enum>StyledPanel</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>frameShadow</name>
-                            <enum>Raised</enum>
-                        </property>
                     </widget>
                 </grid>
             </widget>
@@ -117,14 +109,6 @@
                         <property stdset="1">
                             <name>name</name>
                             <cstring>FrameNtp</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>frameShape</name>
-                            <enum>StyledPanel</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>frameShadow</name>
-                            <enum>Raised</enum>
                         </property>
                         <property>
                             <name>layoutMargin</name>
@@ -463,14 +447,6 @@
                             <name>name</name>
                             <cstring>FrameSettings</cstring>
                         </property>
-                        <property stdset="1">
-                            <name>frameShape</name>
-                            <enum>StyledPanel</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>frameShadow</name>
-                            <enum>Raised</enum>
-                        </property>
                         <property>
                             <name>layoutMargin</name>
                         </property>
@@ -802,11 +778,11 @@
                 <vbox>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>2</number>
+                        <number>11</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>2</number>
+                        <number>6</number>
                     </property>
                     <widget>
                         <class>QWidget</class>
@@ -815,12 +791,11 @@
                             <cstring>FrameSetTime</cstring>
                         </property>
                         <property stdset="1">
-                            <name>frameShape</name>
-                            <enum>StyledPanel</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>frameShadow</name>
-                            <enum>Raised</enum>
+                            <name>sizePolicy</name>
+                            <sizepolicy>
+                                <hsizetype>5</hsizetype>
+                                <vsizetype>3</vsizetype>
+                            </sizepolicy>
                         </property>
                     </widget>
                     <widget>
@@ -834,6 +809,27 @@
                             <string>Set time</string>
                         </property>
                     </widget>
+                    <spacer>
+                        <property>
+                            <name>name</name>
+                            <cstring>Spacer4_2</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>orientation</name>
+                            <enum>Vertical</enum>
+                        </property>
+                        <property stdset="1">
+                            <name>sizeType</name>
+                            <enum>Expanding</enum>
+                        </property>
+                        <property>
+                            <name>sizeHint</name>
+                            <size>
+                                <width>20</width>
+                                <height>20</height>
+                            </size>
+                        </property>
+                    </spacer>
                 </vbox>
             </widget>
         </widget>

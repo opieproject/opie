@@ -1,12 +1,12 @@
 TEMPLATE	= app
 CONFIG		= qt warn_on debug
 #CONFIG		= qt warn_on release
-HEADERS		= ntp.h settime.h ntpbase.h
-SOURCES		= main.cpp ntp.cpp settime.cpp ntpbase.cpp
+HEADERS		= ntp.h settime.h 
+SOURCES		= main.cpp ntp.cpp settime.cpp 
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
-INTERFACES	= 
+INTERFACES	= ntpbase.ui
 DESTDIR         = $(OPIEDIR)/bin
 TARGET		= systemtime
 
