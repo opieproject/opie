@@ -47,8 +47,10 @@
 
 #include "audiowidget.h"
 #include "mediaplayerstate.h"
+#include "playlistwidget.h"
 
 extern MediaPlayerState *mediaPlayerState;
+extern PlayListWidget *playList;
 
 static const int xo = -2; // movable x offset
 static const int yo = 22; // movable y offset
@@ -225,6 +227,7 @@ AudioWidget::~AudioWidget() {
     for ( int i = 0; i < 10; i++ ) {
         delete masks[i];
     }
+//    mediaPlayerState->setPlaying(false);
 }
 
 namespace {
@@ -469,8 +472,8 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                         // mediaPlayerState->setPlaying( videoButtons[i].isDown );
                     }
                 case AudioStop:       mediaPlayerState->setPlaying(FALSE); return;
-                case AudioNext:       mediaPlayerState->setNext(); return;
-                case AudioPrevious:   mediaPlayerState->setPrev(); return;
+                  case AudioNext:  if(playList->whichList() ==0) mediaPlayerState->setNext(); return;
+                case AudioPrevious:  if(playList->whichList() ==0) mediaPlayerState->setPrev(); return;
                 case AudioLoop:       mediaPlayerState->setLooping(audioButtons[i].isDown); return;
                 case AudioVolumeUp:   emit moreReleased(); return;
                 case AudioVolumeDown: emit lessReleased(); return;

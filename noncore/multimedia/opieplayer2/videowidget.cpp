@@ -44,6 +44,7 @@
 #include <qdrawutil.h>
 #include "videowidget.h"
 #include "mediaplayerstate.h"
+#include "playlistwidget.h"
 
 
 #ifdef Q_WS_QWS
@@ -54,6 +55,7 @@
 
 
 extern MediaPlayerState *mediaPlayerState;
+extern PlayListWidget *playList;
 
 
 static const int xo = 2; // movable x offset
@@ -338,8 +340,8 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                 }
 
                 case VideoStop:       mediaPlayerState->setPlaying( FALSE ); return;
-                case VideoNext:       mediaPlayerState->setNext(); return;
-                case VideoPrevious:   mediaPlayerState->setPrev(); return;
+                case VideoNext:       if(playList->whichList() ==0) mediaPlayerState->setNext(); return;
+                case VideoPrevious:   if(playList->whichList() ==0) mediaPlayerState->setPrev(); return;
                 case VideoVolUp:      emit moreReleased(); return;
                 case VideoVolDown:    emit lessReleased(); return;
                 case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
