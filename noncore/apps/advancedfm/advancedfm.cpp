@@ -84,35 +84,41 @@ AdvancedFm::AdvancedFm( )
     menuBar->insertItem( tr( "File" ), fileMenu);
     menuBar->insertItem( tr( "View" ), viewMenu);
 
+    qpeDirButton= new QPushButton(Resource::loadIconSet("go"),"",this,"QPEButton");
+    qpeDirButton ->setFixedSize( QSize( 20, 20 ) );
+    connect( qpeDirButton ,SIGNAL(released()),this,SLOT( QPEButtonPushed()) );
+    qpeDirButton->setFlat(TRUE);
+    layout->addMultiCellWidget( qpeDirButton , 0, 0, 2, 2);
+ 
     cfButton = new QPushButton(Resource::loadIconSet("cardmon/pcmcia"),"",this,"CFButton");
     cfButton ->setFixedSize( QSize( 20, 20 ) );
     connect( cfButton ,SIGNAL(released()),this,SLOT( CFButtonPushed()) );
     cfButton->setFlat(TRUE);
-    layout->addMultiCellWidget( cfButton , 0, 0, 2, 2);
+    layout->addMultiCellWidget( cfButton , 0, 0, 3, 3);
 
     sdButton = new QPushButton(Resource::loadIconSet("sdmon/sdcard"),"",this,"SDButton");
     sdButton->setFixedSize( QSize( 20, 20 ) );
     connect( sdButton ,SIGNAL(released()),this,SLOT( SDButtonPushed()) );
     sdButton->setFlat(TRUE);
-    layout->addMultiCellWidget( sdButton , 0, 0, 3, 3);
+    layout->addMultiCellWidget( sdButton , 0, 0, 4, 4);
 
     cdUpButton = new QPushButton(Resource::loadIconSet("up"),"",this,"cdUpButton");
     cdUpButton ->setFixedSize( QSize( 20, 20 ) );
     connect( cdUpButton ,SIGNAL(released()),this,SLOT( upDir()) );
     cdUpButton ->setFlat(TRUE);
-    layout->addMultiCellWidget( cdUpButton , 0, 0, 4, 4);
+    layout->addMultiCellWidget( cdUpButton , 0, 0, 5, 5);
 
     docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",this,"docsButton");
     docButton->setFixedSize( QSize( 20, 20 ) );
     connect( docButton,SIGNAL(released()),this,SLOT( docButtonPushed()) );
     docButton->setFlat(TRUE);
-    layout->addMultiCellWidget( docButton, 0, 0, 5, 5);
+    layout->addMultiCellWidget( docButton, 0, 0, 6, 6);
 
     homeButton = new QPushButton( Resource::loadIconSet("home"),"",this,"homeButton");
     homeButton->setFixedSize( QSize( 20, 20 ) );
     connect(homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
     homeButton->setFlat(TRUE);
-    layout->addMultiCellWidget( homeButton, 0, 0, 6, 6);
+    layout->addMultiCellWidget( homeButton, 0, 0, 7, 7);
 //     fileMenu->insertItem( tr( "New" ), this,  SLOT( newConnection() ));
 //     fileMenu->insertItem( tr( "Connect" ), this,  SLOT( connector() ));
 //     fileMenu->insertItem( tr( "Disconnect" ), this,  SLOT( disConnector() ));
@@ -135,7 +141,7 @@ AdvancedFm::AdvancedFm( )
     viewMenu->setCheckable(TRUE);
 
     TabWidget = new QTabWidget( this, "TabWidget" );
-    layout->addMultiCellWidget( TabWidget, 1, 1, 0, 6);
+    layout->addMultiCellWidget( TabWidget, 1, 1, 0, 7);
 
     tab = new QWidget( TabWidget, "tab" );
     tabLayout = new QGridLayout( tab );
@@ -213,7 +219,7 @@ AdvancedFm::AdvancedFm( )
     b = TRUE;
     currentPathCombo = new QComboBox( FALSE, this, "currentPathCombo" );
     currentPathCombo->setEditable(TRUE);
-    layout->addMultiCellWidget( currentPathCombo, 3, 3, 0, 6);
+    layout->addMultiCellWidget( currentPathCombo, 3, 3, 0, 7);
     currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
 
     connect( currentPathCombo, SIGNAL( activated( const QString & ) ),
@@ -224,7 +230,7 @@ AdvancedFm::AdvancedFm( )
 
     currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
 
-    layout->addMultiCellWidget( currentPathCombo, 3, 3, 0, 6);
+    layout->addMultiCellWidget( currentPathCombo, 3, 3, 0, 7);
 
     filterStr="*";
     b=FALSE;
@@ -306,7 +312,6 @@ void AdvancedFm::populateLocalView()
         }
         if(fileL !="./" && fi->exists()) {
             item= new QListViewItem( Local_View, fileL, fileS , fileDate);
-
             if(isDir || fileL.find("/",0,TRUE) != -1) {
                 if( !QDir( fi->filePath() ).isReadable())
                     pm = Resource::loadPixmap( "lockedfolder" );
@@ -314,8 +319,15 @@ void AdvancedFm::populateLocalView()
                     pm= Resource::loadPixmap( "folder" );
                 item->setPixmap( 0,pm );
             } else {
-                if( !fi->isReadable() )
+                if(fi->isExecutable()) {
+                    pm = Resource::loadPixmap( "exec");
+                    item->setPixmap( 0,pm);
+                }
+                else if( !fi->isReadable() ) {
                     pm = Resource::loadPixmap( "locked" );
+                    item->setPixmap( 0,pm);
+
+                }
                 else {
                     MimeType mt(fi->filePath());
                     pm=mt.pixmap(); //sets the correct pixmap for mimetype
@@ -423,9 +435,14 @@ void AdvancedFm::populateRemoteView()
                     pm= Resource::loadPixmap( "folder" );
                 item->setPixmap( 0,pm );
             } else {
-                if( !fi->isReadable() )
+                if(fi->isExecutable()) {
+                    pm = Resource::loadPixmap( "exec");
+                    item->setPixmap( 0,pm);
+                }
+                else if( !fi->isReadable() ) {
                     pm = Resource::loadPixmap( "locked" );
-                else {
+                    item->setPixmap( 0,pm);
+                } else {
                     MimeType mt(fi->filePath());
                     pm=mt.pixmap(); //sets the correct pixmap for mimetype
                     if(pm.isNull())
@@ -698,24 +715,36 @@ void AdvancedFm::runThis() {
 //    QFileInfo *fi;
     if (TabWidget->currentPageIndex() == 0) {
         QString curFile = Local_View->currentItem()->text(0);
-        curFile =  currentDir.canonicalPath()+"/"+curFile;
-        DocLnk nf(curFile);
-        QString execStr = nf.exec();
-        qDebug( execStr);
-        if( execStr.isEmpty() ) {
+        QFileInfo fileInfo( currentDir.canonicalPath()+"/"+curFile);
+        if(fileInfo.isExecutable()) {
+            QCopEnvelope e("QPE/System", "execute(QString)" );
+            e << curFile;
         } else {
-        nf.execute();
+        curFile =  currentDir.canonicalPath()+"/"+curFile;
+            DocLnk nf(curFile);
+            QString execStr = nf.exec();
+            qDebug( execStr);
+            if( execStr.isEmpty() ) {
+            } else {
+                nf.execute();
+            }
         }
 //         MimeType mt( curFile);
     } else {
         QString curFile = Remote_View->currentItem()->text(0);
-        curFile =  currentRemoteDir.canonicalPath()+"/"+curFile;
-        DocLnk nf(curFile);
-        QString execStr = nf.exec();
-        qDebug(execStr);
-        if( execStr.isEmpty() ) {
+        QFileInfo fileInfo( currentRemoteDir.canonicalPath()+"/"+curFile);
+        if(fileInfo.isExecutable()) {
+                QCopEnvelope e("QPE/System", "execute(QString)" );
+                e << curFile;
         } else {
-        nf.execute();
+        curFile =  currentRemoteDir.canonicalPath()+"/"+curFile;
+            DocLnk nf(curFile);
+            QString execStr = nf.exec();
+            qDebug(execStr);
+            if( execStr.isEmpty() ) {
+            } else {
+                nf.execute();
+            }
         }
 //         MimeType mt( curFile);
     }
@@ -1477,4 +1506,18 @@ void AdvancedFm::mkSym() {
         system(cmd.latin1() );
         populateLocalView();
     }
+}
+
+void AdvancedFm::QPEButtonPushed() {
+    QString current = QPEApplication::qpeDir();
+    chdir( current.latin1() );
+    if (TabWidget->currentPageIndex() == 0) {
+        currentDir.cd( current, TRUE);
+        populateLocalView();
+    } else {
+        currentRemoteDir.cd( current, TRUE);
+        populateRemoteView();
+    }
+    update();
+
 }

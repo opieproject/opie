@@ -52,7 +52,7 @@ public:
 
     QLineEdit *currentPathEdit;
     QPopupMenu *fileMenu, *localMenu, *remoteMenu, *viewMenu;
-    QPushButton  *homeButton, *docButton, *cdUpButton, *sdButton, *cfButton;
+    QPushButton  *homeButton, *docButton, *cdUpButton, *sdButton, *cfButton, *qpeDirButton;
     QDir currentDir, currentRemoteDir;
     QComboBox *currentPathCombo;
     QString filterStr;
@@ -108,6 +108,7 @@ protected slots:
   void docButtonPushed();
   void SDButtonPushed();
   void CFButtonPushed();
+  void QPEButtonPushed();
   void upDir();
   void currentPathComboChanged();
   void copy();
