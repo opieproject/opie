@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: L.J.Potter <ljp@llornkcor.com>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, libopie1, opie-mediaplayer2-skin-default | opie-mediaplayer2-skin-default-landscape
 Description: The Opie media player
  The mediaplayer for Opie. It plays mp3, mpeg, and wav.
+Version: $QPE_VERSION$EXTRAVERSION

@@ -3,7 +3,7 @@ Files: help/en/html/calibrate.html help/en/html/calibrate
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-calibrate
 License: GPL
 Description: calibrate help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/taskbar
 Maintainer: Maximilian Reiﬂ <max.reiss@gmx.de>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, libopie1
 Description: CF/PCMCIA Card Monitor applet
  SD/MMC/CF/PCMCIA Card Monitor applet for the Opie environment taskbar.
+Version: $QPE_VERSION$EXTRAVERSION

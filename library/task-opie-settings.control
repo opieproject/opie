@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: Maximilian Reiss <max.reiss@gmx.de>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, opie-appearance, opie-security, opie-systemtime, opie-light-and-power
 Description: Opie settings app
  All settings apps
+Version: $QPE_VERSION$EXTRAVERSION

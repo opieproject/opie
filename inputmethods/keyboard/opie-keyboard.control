@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/inputmethods
 Maintainer: Martin Jones <mjones@trolltech.com>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, opie-pickboard
 Description: Keyboard input method
  Keyboard input method for the Opie environment.
+Version: $QPE_VERSION$EXTRAVERSION

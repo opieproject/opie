@@ -3,7 +3,7 @@ Files: help/en/html/calculator.html help/en/html/calculator
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-calculator
 License: GPL
 Description: calculator help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

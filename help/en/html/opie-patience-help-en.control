@@ -3,7 +3,7 @@ Files: help/en/html/patience.html help/en/html/patience
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-patience
 License: GPL
 Description: patience help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

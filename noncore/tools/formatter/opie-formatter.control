@@ -4,8 +4,8 @@ Priority: optional
 Section: opie/applications
 Maintainer: L.J. Potter <ljp@llornkcor.com> 
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 Description: Formatter
  The filesystem formatting and mountpoint app for the Opie environment.
 ronment.
+Version: $QPE_VERSION$EXTRAVERSION

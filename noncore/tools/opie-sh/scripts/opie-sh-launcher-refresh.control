@@ -1,7 +1,6 @@
 Package: opie-sh-launcher-refresh
 Files: bin/launcher_refresh.sh pics/opie-sh-scripts/launcher_refresh.png apps/Opie-SH/launcher_refresh.desktop
 Installed-Size:  0
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, opie-sh
 Priority: optional
 Section: opie/settings
@@ -9,3 +8,4 @@ Maintainer: gonz <gonz@directbox.com>
 Architecture: arm
 License: GPL
 Description: refresh the launcher so that new installed applications appear
+Version: $QPE_VERSION$EXTRAVERSION

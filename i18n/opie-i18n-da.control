@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/i18n
 Maintainer: Niels Andersen <animal@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, opie-language
 Description: i18n: Danish
  Danish UI texts for OPIE environment.
+Version: $QPE_VERSION$EXTRAVERSION

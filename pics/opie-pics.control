@@ -4,6 +4,6 @@ Priority: required
 Section: opie/system
 Maintainer: Project Opie <opie@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION.2
 Description: Including unassigned and pim pics (TodoList, Addressbook, Datebook).
  These icons are available to all Opie applications.
+Version: $QPE_VERSION$EXTRAVERSION

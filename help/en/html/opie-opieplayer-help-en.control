@@ -3,7 +3,7 @@ Files: help/en/html/opieplayer.html help/en/html/opieplayer
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-opieplayer
 License: GPL
 Description: opieplayer help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

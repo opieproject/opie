@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/onlinedoc
 Maintainer: Team Opie <opie@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-backgammon
 License: GPL
 Description: backgammon help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

@@ -3,7 +3,7 @@ Files: help/en/html/tetrix.html help/en/html/tetrix
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-tetrix
 License: GPL
 Description: tetrix help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

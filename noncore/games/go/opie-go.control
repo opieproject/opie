@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/games
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 Description: The game of Go
  A game for the Opie environment.
+Version: $QPE_VERSION$EXTRAVERSION

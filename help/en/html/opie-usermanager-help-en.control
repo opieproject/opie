@@ -3,7 +3,7 @@ Files: help/en/html/usermanager.html help/en/html/usermanager
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-usermanager
 License: GPL
 Description: usermanager help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

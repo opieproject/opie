@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/plugins
 Maintainer: Lorn Potter <llornkcor@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 Description: vorbis (tremor) library
  Library needed for playing OGG files with the mediaplayer in the Opie environment.
+Version: $QPE_VERSION$EXTRAVERSION

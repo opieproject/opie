@@ -1,7 +1,6 @@
 Package: opie-sh-killproc
 Files: bin/killproc.sh apps/Opie-SH/killproc.desktop pics/opie-sh-scripts/killproc.png
 Installed-Size:  0 
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, opie-sh
 Priority: optional
 Section: opie/settings
@@ -9,3 +8,4 @@ Maintainer: gonz <gonz@directbox.com>
 Architecture: arm
 License: GPL
 Description: frontend to kill process
+Version: $QPE_VERSION$EXTRAVERSION

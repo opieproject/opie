@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/taskbar
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 Description: Clock applet
  Clock applet for the Opie environment taskbar.
+Version: $QPE_VERSION$EXTRAVERSION

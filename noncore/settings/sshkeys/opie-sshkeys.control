@@ -4,6 +4,6 @@ Priority: optional
 Section: opie/settings
 Maintainer: David Woodhouse <dwmw2@infradead.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, ssh, opie-sh-ssh-askpass
 Description: Utility for managing ssh-agent keys.
+Version: $QPE_VERSION$EXTRAVERSION

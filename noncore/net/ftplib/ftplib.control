@@ -4,7 +4,7 @@ Priority: optional
 Section: Communications
 Maintainer: L.J. Potter <ljp@llornkcor.com> 
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 Description: Libftp
  The ftp library for the Opie environment.
+Version: $QPE_VERSION$EXTRAVERSION

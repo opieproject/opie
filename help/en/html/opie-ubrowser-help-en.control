@@ -3,7 +3,7 @@ Files: help/en/html/ubrowser.html help/en/html/ubrowser
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-ubrowser
 License: GPL
 Description: ubrowser help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

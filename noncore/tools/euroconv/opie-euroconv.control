@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: Eric Santonacci <Eric.Santonacci@talc.fr>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 Description: Euroconv
  Converts currencies between different european formats
+Version: $QPE_VERSION$EXTRAVERSION

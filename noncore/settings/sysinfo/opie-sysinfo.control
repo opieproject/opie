@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: Dan Williams <williamsdr@acm.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, libopie1
 Description: System Information dialog
  For the Opie environment.
+Version: $QPE_VERSION$EXTRAVERSION

@@ -4,8 +4,8 @@ Priority: optional
 Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 Description: Calculator
  A multi-function calculator for the Opie environment.
  Includes units conversion.
+Version: $QPE_VERSION$EXTRAVERSION

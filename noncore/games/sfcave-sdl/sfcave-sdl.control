@@ -2,9 +2,9 @@ Files: bin/sfcave-sdl apps/Games/sfcave-sdl.desktop pics/sfcave-sdl sounds/sfcav
 Package: sfcave-sdl
 Priority: optional
 Section: Games
-Version: $QPE_VERSION-$SUB_VERSION
 Architecture: arm
 Maintainer: Andy Qua (andy.qua@blueyonder.co.uk)
 Depends:  libSDL,libSDL_-mixer,libSDL-image,libSDL-gfx
 Description: SFCave SDL for the Zaurus. Fly though the cave avoiding the walls.
 
+Version: $QPE_VERSION$EXTRAVERSION

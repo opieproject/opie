@@ -5,7 +5,7 @@ Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Arch: iPAQ
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 Description: XML database browsers
  A table/database viewer for the Opie environment.
+Version: $QPE_VERSION$EXTRAVERSION

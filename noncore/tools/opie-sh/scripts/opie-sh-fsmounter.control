@@ -1,7 +1,6 @@
 Package: opie-sh-fsmounter
 Files: bin/filesystem_mounter.sh pics/opie-sh-scripts/fsmounter.png apps/Opie-SH/filesystem_mounter.desktop
 Installed-Size:  0 
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, opie-sh
 Priority: optional
 Section: opie/settings
@@ -9,3 +8,4 @@ Maintainer: gonz <gonz@directbox.com>
 Architecture: arm
 License: GPL
 Description: frontend to mount/unmount filesystems
+Version: $QPE_VERSION$EXTRAVERSION

@@ -3,7 +3,7 @@ Files: help/en/html/sysinfo.html help/en/html/sysinfo
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-sysinfo
 License: GPL
 Description: sysinfo help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

@@ -3,7 +3,7 @@ Files: help/en/html/buttonsettings.html help/en/html/buttonsettings
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-buttonsettings
 License: GPL
 Description: buttonsettings help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/system
 Maintainer: L. J. Potter <ljp@llornkcor.com>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 Description: Screenshot Applet
  A screenshot taskbar applet for the Opie environment
+Version: $QPE_VERSION$EXTRAVERSION

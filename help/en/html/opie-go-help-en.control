@@ -3,7 +3,7 @@ Files: help/en/html/go.html help/en/html/go
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-go
 License: GPL
 Description: go help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

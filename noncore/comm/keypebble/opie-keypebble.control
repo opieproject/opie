@@ -5,7 +5,7 @@ Section: opie/applications
 Maintainer: Martin Imobersteg <imm@gmx.ch>
 Architecture: arm
 Arch: iPAQ
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 Description: VNC Viewer
  Virtual Network Computing (VNC) viewer
+Version: $QPE_VERSION$EXTRAVERSION

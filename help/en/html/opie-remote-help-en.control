@@ -3,7 +3,7 @@ Files: help/en/html/remote.html help/en/html/remote
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-remote
 License: GPL
 Description: remote help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

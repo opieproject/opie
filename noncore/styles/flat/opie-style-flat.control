@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/styles
 Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 Description: OPIE widget style
  Simple, flat widget style for OPIE.
+Version: $QPE_VERSION$EXTRAVERSION
