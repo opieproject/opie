@@ -17,7 +17,7 @@ public:
 signals:
     void pickboardToggled(bool on_off);
     void setMapToDefault();
-    void setMapToFile(QString file);
+    void setMapToFile(int index);
 
 private slots:
     void pickTog();

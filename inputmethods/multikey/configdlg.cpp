@@ -20,12 +20,14 @@
 #include <qsizepolicy.h>
 #include <qpushbutton.h>
 #include <qlistbox.h>
+#include <qstringlist.h>
 #include "configdlg.h"
 #include "keyboard.h"
 
 ConfigDlg::ConfigDlg () : QTabWidget ()
 {
     setCaption( tr("Multikey Configuration") );
+    Config config ("multikey");
 
     /*
      * 'general config' tab
@@ -39,12 +41,24 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
 
     keymaps = new QListBox (map_group);
     keymaps->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
-    //keymaps->setMaximumHeight(150);
 
     QString cur(tr("Current Language"));
     keymaps->insertItem(cur);
+
+    config.setGroup ("keymaps");
+    QStringList maps = config.readListEntry("maps", QChar('|'));
+
+    for (unsigned int i = 0; i < maps.count(); i++) {
+
+        keymaps->insertItem(maps[i]);
+    }
+
+    // have to "+1" because the "current language" listItem... remember?
+    keymaps->setSelected(config.readNumEntry("current", 0) + 1, true);
+
     connect(keymaps, SIGNAL(highlighted(int)), SLOT(setMap(int)));
 
+    /*
     QString ko(QPEApplication::qpeDir() + "/share/multikey/ko.keymap");
     keymaps->insertItem(ko);
 
@@ -53,6 +67,7 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
 
     QString de(QPEApplication::qpeDir() + "/share/multikey/de.keymap");
     keymaps->insertItem(de);
+    */
 
     QGrid *add_remove_grid = new QGrid(2, map_group);
     add_remove_grid->setMargin(3);
@@ -66,7 +81,6 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
 
     pick_button = new QCheckBox(tr("Pickboard"), gen_box);
 
-    Config config ("multikey");
     config.setGroup ("pickboard");
     bool pick_open = config.readBoolEntry ("open", "0"); // default closed
     if (pick_open) {
@@ -116,6 +130,15 @@ void ConfigDlg::pickTog() {
     emit pickboardToggled(pick_button->isChecked());
 }
 
+/* 
+ * the index is kinda screwy, because in the config file, index 0 is just the
+ * first element in the QStringList, but here it's the "Current Language"
+ * listItem. therefor you have to minus one to the index before you access
+ * it from the config file. 
+ *
+ * and later on, the "current language" setting should be -1 in the config file
+ */
+
 void ConfigDlg::setMap(int index) {
 
     if (index == 0) {
@@ -130,7 +153,7 @@ void ConfigDlg::setMap(int index) {
         if (!remove_button->isEnabled()) 
             remove_button->setEnabled(true);
 
-        emit setMapToFile(keymaps->text(index));
+        emit setMapToFile(index - 1);
     }
 }
 

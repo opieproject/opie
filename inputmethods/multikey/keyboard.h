@@ -113,7 +113,7 @@ private slots:
     void repeat();
     void togglePickboard(bool on_off);
     void setMapToDefault();
-    void setMapToFile(QString file);
+    void setMapToFile(int index);
     
 private:
     int getKey( int &w, int j = -1 );
