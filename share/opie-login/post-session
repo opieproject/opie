@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ -e /proc/hal/model ]; then
+  [ -e /dev/sound/dsp ]     && chown root /dev/sound/dsp
+  [ -e /dev/sound/mixer ]   && chown root /dev/sound/mixer
+  [ -e /dev/touchscreen/0 ] && chown root /dev/touchscreen/0
+  [ -e /dev/fb/0 ]          && chown root /dev/fb/0
+  [ -e /dev/vc/0 ]          && chown root /dev/vc/0
+fi
+            
+
