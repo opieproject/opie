@@ -172,7 +172,7 @@ config LIBQPE_WITHROHFEEDBACK
 
 config LIBQPE_NO_INLINE_IMAGES
   boolean "Build libqpe without inline images"
-  default y
+  default n
 
 config OPIE_NO_SOUND_PCM_READ_BITS
   boolean "There is not a pcm_read_bits io control"
