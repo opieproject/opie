@@ -14,6 +14,8 @@
 
 using namespace Opie;
 
+Qtopia::UidGen ToDoEvent::m_gen;
+
 ToDoEvent::ToDoEvent(const ToDoEvent &event )
 {
   *this = event;
@@ -35,10 +37,11 @@ ToDoEvent::ToDoEvent(bool completed, int priority,
     m_prog = progress;
     m_desc = Qtopia::simplifyMultiLineSpace(description );
     if (uid == -1 ) {
-	Qtopia::UidGen *uidgen = new Qtopia::UidGen();
-	uid = uidgen->generate();
-	delete uidgen;
-    }// generate the ids
+	uid = m_gen.generate();
+
+    }// generated the ids
+    m_gen.store( uid );
+
     m_uid = uid;
     m_hasAlarmDateTime = false;
 

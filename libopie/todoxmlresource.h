@@ -13,6 +13,7 @@ namespace Opie {
     /**
      * Is the standard XML resource for the todoapplication
      */
+    class XMLElement;
     class ToDoXMLResource : public ToDoResource {
     public:
         ToDoXMLResource(const QString& appName,

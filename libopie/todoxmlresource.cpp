@@ -66,7 +66,7 @@ bool ToDoXMLResource::load() {
 
         element = element->firstChild();
         while ( element ) {
-            if ( element->tagName() != QString::fromLatin1("Tasks") ) {
+            if ( element->tagName() != QString::fromLatin1("Task") ) {
                 element = element->nextChild();
                 continue;
             }
@@ -206,6 +206,7 @@ QArray<int> ToDoXMLResource::queryByExample( const ToDoEvent&,
 
 }
 bool ToDoXMLResource::addEvent( const ToDoEvent& ev ){
+    qWarning( QString::number( ev.uid() ) + " " + ev.summary() );
     m_events.insert( ev.uid(), ev );
 
     return true;
@@ -221,6 +222,7 @@ bool ToDoXMLResource::removeEvent( const ToDoEvent& ev) {
     return true;
 }
 ToDoEvent ToDoXMLResource::todo( QAsciiDict<int>* dict, XMLElement* element )const {
+    qWarning("parse to do from XMLElement" );
     ToDoEvent ev;
     QMap<QString, QString> attributes = element->attributes();
     QMap<QString, QString>::Iterator it;
@@ -248,6 +250,12 @@ ToDoEvent ToDoXMLResource::todo( QAsciiDict<int>* dict, XMLElement* element )con
             break;
         case ToDoEvent::Completed:
             ev.setCompleted( it.data().toInt() );
+            break;
+        case ToDoEvent::Description:
+            ev.setDescription( it.data() );
+            break;
+        case ToDoEvent::Summary:
+            ev.setSummary( it.data() );
             break;
         case ToDoEvent::Priority:
             ev.setPriority( it.data().toInt() );
@@ -304,9 +312,10 @@ QString ToDoXMLResource::toString( const QArray<int>& ints ) const{
     QString str;
 
     for (uint i = 0; i < ints.size(); i++ ) {
-        str += QString::number( i ) + ",";
+        str += QString::number( i ) + ";";
     }
     str.remove( str.length() -1, 1 );
+//    qWarning("Categories: " + str);
     return str;
 }
 QString ToDoXMLResource::toString( const ToDoEvent& ev )const {
@@ -315,10 +324,11 @@ QString ToDoXMLResource::toString( const ToDoEvent& ev )const {
     str += "Completed=\"" + QString::number( ev.isCompleted() ) + "\" ";
     str += "HasDate=\"" + QString::number( ev.hasDueDate() ) + "\" ";
     str += "Priority=\"" + QString::number( ev.priority() ) + "\" ";
-    str += "Progress=\"" + Qtopia::escapeString( ev.summary() ) + "\" ";
+    str += "Progress=\"" + QString::number(ev.progress() ) + "\" ";
 
     str += "Categories=\"" + toString( ev.categories() ) + "\" ";
     str += "Description=\"" + Qtopia::escapeString( ev.description() ) + "\" ";
+    str += "Summary=\"" + Qtopia::escapeString( ev.summary() ) + "\" ";
 
     if ( ev.hasDueDate() ) {
         str += "DateYear=\"" + QString::number( ev.dueDate().year() ) + "\" ";
@@ -338,13 +348,17 @@ QString ToDoXMLResource::toString( const ToDoEvent& ev )const {
     QStringList::Iterator listIt;
     QString refs;
     str += "CrossReference=\"";
+    bool added = false;
     for ( listIt = list.begin(); listIt != list.end(); ++listIt ) {
+        added = true;
         QArray<int> ints = ev.relations( (*listIt) );
         for ( uint i = 0; i< ints.count(); i++ ) {
             str += (*listIt) + "," + QString::number( i ) + ";";
         }
     }
-    str = str.remove( str.length()-1, 1 );
+    if ( added )
+        str = str.remove( str.length()-1, 1 );
+
     str += "\" ";
 
     str += "AlarmDateTime=\"" + TimeConversion::toISO8601( ev.alarmDateTime() ) + "\" ";

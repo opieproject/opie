@@ -26,7 +26,7 @@ namespace Opie {
                                    bool *ok ) = 0;
         virtual QArray<int> rawToDos() = 0;
         virtual QArray<int> queryByExample( const ToDoEvent&,
-                                            uint querysettings );
+                                            uint querysettings ) = 0;
         virtual QArray<int> effectiveToDos( const QDate& start,
                                          const QDate& end,
                                          bool includeNoDates ) = 0;

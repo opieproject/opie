@@ -11,6 +11,7 @@
 #include <qvaluelist.h>
 
 #include <qpe/recordfields.h>
+#include <qpe/palmtopuidgen.h>
 
 namespace Opie {
 
@@ -244,6 +245,7 @@ public:
     /** Alarm Time stuff */
     bool m_hasAlarmDateTime : 1;
     QDateTime m_alarmDateTime;
+    static Qtopia::UidGen m_gen;
 };
 };
 

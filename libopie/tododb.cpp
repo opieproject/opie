@@ -67,17 +67,18 @@ ToDoEvent &ToDoDB::Iterator::operator*() {
     int uid = d->m_uids[d->m_current];
 
     bool found = false;
-    while (!found ) {
-        found = false;
+/*    while (!found ) {
+      found = false; */
         d->m_ev = d->m_db->findEvent(uid, &found );
-    }
+/*    } */
 
     return d->m_ev;
 }
 ToDoDB::Iterator &ToDoDB::Iterator::operator++() {
+    //qWarning("operator++ %d %d",  d->m_current, d->m_uids.size() );
     /* at the end */
     if ( d->m_end ||
-         (d->m_current + 1) > d->m_uids.size() ) {
+         (d->m_current + 1) >= d->m_uids.size() ) {
         d->m_end = true;
         d->m_current = 0;
         return *this;
@@ -130,6 +131,13 @@ void ToDoDB::setResource( ToDoResource *res )
 ToDoDB::~ToDoDB()
 {
   delete m_res;
+}
+ToDoDB::Iterator ToDoDB::end() {
+    Iterator it;
+    it.d->m_end = true;
+    it.d->m_db = this;
+
+    return it;
 }
 ToDoDB::Iterator ToDoDB::effectiveToDos(const QDate &from, const QDate &to,
                                 bool all )
@@ -270,7 +278,9 @@ void ToDoDB::delEventAlarm( const ToDoEvent& event )
                               "QPE/Application/todolist",
                               "alarm(QDateTime,int)", event.uid() );
 }
+void ToDoDB::copMessage( const QCString&, const QByteArray& ) {
 
+}
 
 
 
