@@ -3,265 +3,265 @@
     <name>CategoryFilterDlg</name>
     <message>
         <source>Category Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategori filter</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Afbryd</translation>
     </message>
     <message>
         <source>Select groups to show</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg hvilke grupper der skal vises</translation>
     </message>
 </context>
 <context>
     <name>DataManager</name>
     <message>
         <source>Reading configuration...</source>
-        <translation type="unfinished"></translation>
+        <translation>Læser konfiguration...</translation>
     </message>
 </context>
 <context>
     <name>InputDialog</name>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Afbryd</translation>
     </message>
 </context>
 <context>
     <name>InstallDlg</name>
     <message>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Installér</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Start</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Indstillinger</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Output</translation>
     </message>
     <message>
         <source>Destination</source>
-        <translation type="unfinished"></translation>
+        <translation>Destination</translation>
     </message>
     <message>
         <source>Space Avail</source>
-        <translation type="unfinished"></translation>
+        <translation>Ledig plads</translation>
     </message>
 </context>
 <context>
     <name>InstallDlgImpl</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Luk</translation>
     </message>
 </context>
 <context>
     <name>InstallOptionsDlg</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Valgmuligheder</translation>
     </message>
     <message>
         <source>Force Depends</source>
-        <translation type="unfinished"></translation>
+        <translation>--force-depends</translation>
     </message>
     <message>
         <source>Force Reinstall</source>
-        <translation type="unfinished"></translation>
+        <translation>--force-reinstall</translation>
     </message>
     <message>
         <source>Force Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>--force-removal</translation>
     </message>
     <message>
         <source>Force Overwrite</source>
-        <translation type="unfinished"></translation>
+        <translation>--force-overwrite</translation>
     </message>
     <message>
         <source>Verbose WGet</source>
-        <translation type="unfinished"></translation>
+        <translation>--verbose-wget</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>AQPkg - Package Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>AQPkg - Pakkestyring</translation>
     </message>
     <message>
         <source>Type the text to search for here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Indtast teksten du vil søge efter her.</translation>
     </message>
     <message>
         <source>Click here to hide the Quick Jump toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at gemme Quick Jump værktøjslinien.</translation>
     </message>
     <message>
         <source>Update lists</source>
-        <translation type="unfinished"></translation>
+        <translation>Opdatér lister</translation>
     </message>
     <message>
         <source>Click here to update package lists from servers.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at opdatere pakke lister fra serverne.</translation>
     </message>
     <message>
         <source>Upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>Opgradér</translation>
     </message>
     <message>
         <source>Click here to upgrade all installed packages if a newer version is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at opgradere alle installerede pakker, hvis en nyere version er tilgængelig.</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Hent</translation>
     </message>
     <message>
         <source>Click here to download the currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at hente den/de valgte pakke(r).</translation>
     </message>
     <message>
         <source>Apply changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Anvend ændringer</translation>
     </message>
     <message>
         <source>Click here to install, remove or upgrade currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at installere, fjerne eller opgradere den/de valgte pakke(r).</translation>
     </message>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Handlinger</translation>
     </message>
     <message>
         <source>Show packages not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis pakker der ikke er installeret</translation>
     </message>
     <message>
         <source>Click here to show packages available which have not been installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at vise de tilgængelige pakker der ikke er installeret.</translation>
     </message>
     <message>
         <source>Show installed packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis installerede pakker</translation>
     </message>
     <message>
         <source>Click here to show packages currently installed on this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at vise de pakker der er installeret på denne enhed.</translation>
     </message>
     <message>
         <source>Show updated packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis opdaterede pakker</translation>
     </message>
     <message>
         <source>Click here to show packages currently installed on this device which have a newer version available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at vise de pakker der er installeret på denne enhed, hvor en nyere version er tilgængelig.</translation>
     </message>
     <message>
         <source>Filter by category</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtrér efter kategori</translation>
     </message>
     <message>
         <source>Click here to list packages belonging to one category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at vise pakker tilhørende en bestemt kategori.</translation>
     </message>
     <message>
         <source>Set filter category</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg filter kategori</translation>
     </message>
     <message>
         <source>Click here to change package category to used filter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at ændre den kategori der skal bruges til filteret.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Find</translation>
     </message>
     <message>
         <source>Click here to search for text in package names.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at søge efter tekst i pakke navnene.</translation>
     </message>
     <message>
         <source>Find next</source>
-        <translation type="unfinished"></translation>
+        <translation>Find næste</translation>
     </message>
     <message>
         <source>Click here to find the next package name containing the text you are searching for.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at finde det næste pakke navn indeholdende den tekst du søger efter.</translation>
     </message>
     <message>
         <source>Quick Jump keypad</source>
-        <translation type="unfinished"></translation>
+        <translation>Quick Jump tastplade</translation>
     </message>
     <message>
         <source>Click here to display/hide keypad to allow quick movement through the package list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at vise/skjule tastpladen for hurtig søgning i pakke listen.</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurér</translation>
     </message>
     <message>
         <source>Click here to configure this application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at konfigurere dette program.</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Hjælp</translation>
     </message>
     <message>
         <source>Click here for help.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for hjælp.</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Om</translation>
     </message>
     <message>
         <source>Click here for software version information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for information omkring softwaren.</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Valgmuligheder</translation>
     </message>
     <message>
         <source>Click here to hide the find toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at skjule søge værktøjslinien.</translation>
     </message>
     <message>
         <source>Servers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Servere:</translation>
     </message>
     <message>
         <source>Click here to select a package feed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at vælge et pakke feed.</translation>
     </message>
     <message>
         <source>Packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakker</translation>
     </message>
     <message>
         <source>This is a listing of all packages for the server feed selected above.
@@ -271,61 +271,69 @@ A blue dot next to the package name indicates that the package is currently inst
 A blue dot with a star indicates that a newer version of the package is available from the server feed.
 
 Click inside the box at the left to select a package.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dette er en liste over alle pakker fra det server feed der er valgt foroven.
+
+En blå prik ved siden af pakke navnet indikerer at pakken allerede er installeret.
+
+En blå prik med en stjerne indikerer at en nyere version af pakken er tilgængelig fra det valgte server feed.
+
+Klik inde i boksen til venstre for at vælge en pakke.</translation>
     </message>
     <message>
         <source>About AQPkg</source>
-        <translation type="unfinished"></translation>
+        <translation>Om AQPkg</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern</translation>
     </message>
     <message>
         <source>Click here to uninstall the currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at afinstallere den/de valgte pakke(r).</translation>
     </message>
     <message>
         <source>Building server list:
 <byte value="x9"/>%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bygger server liste:
+<byte value="x9"/>%1</translation>
     </message>
     <message>
         <source>Building package list for:
 <byte value="x9"/>%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bygger pakke liste for:
+<byte value="x9"/>%1</translation>
     </message>
     <message>
         <source>Installed To - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeret på - %1</translation>
     </message>
     <message>
         <source>Description - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Beskrivelse - %1</translation>
     </message>
     <message>
         <source>Size - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Størrelse - %1</translation>
     </message>
     <message>
         <source>Section - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sektion - %1</translation>
     </message>
     <message>
         <source>Filename - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Filnavn - %1</translation>
     </message>
     <message>
         <source>V. Installed - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>V. installeret - %1</translation>
     </message>
     <message>
         <source>V. Available - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>V. tilgængelig - %1</translation>
     </message>
     <message>
         <source>Refreshing server package lists</source>
-        <translation type="unfinished"></translation>
+        <translation>Genopfrisker server pakke lister</translation>
     </message>
     <message>
         <source>WARNING: Upgrading while
@@ -334,173 +342,181 @@ is NOT recommended!
 
 Are you sure?
 </source>
-        <translation type="unfinished"></translation>
+        <translation>ADVARSEL: Opgradering mens
+Opie/Qtopia kører
+er IKKE anbefalet!
+
+Er du sikker?
+</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Advarsel</translation>
     </message>
     <message>
         <source>Upgrading installed packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Opgraderer installerede pakker</translation>
     </message>
     <message>
         <source>Are you sure you wish to delete
 %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Er du sikker på du vil slette
+%1?</translation>
     </message>
     <message>
         <source>Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation>Er du sikker?</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nej</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>Download to where</source>
-        <translation type="unfinished"></translation>
+        <translation>Hent hvortil</translation>
     </message>
     <message>
         <source>Enter path to download to</source>
-        <translation type="unfinished"></translation>
+        <translation>Indtast stien der skal hentes til</translation>
     </message>
     <message>
         <source>Install Remote Package</source>
-        <translation type="unfinished"></translation>
+        <translation>Installér fjernpakke</translation>
     </message>
     <message>
         <source>Enter package location</source>
-        <translation type="unfinished"></translation>
+        <translation>Indtast pakkens lokation</translation>
     </message>
     <message>
         <source>Nothing to do</source>
-        <translation type="unfinished"></translation>
+        <translation>Intet at lave</translation>
     </message>
     <message>
         <source>No packages selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen pakker er valgt</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Do you wish to remove or reinstall
 %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du fjerne eller geninstallere
+%1?</translation>
     </message>
     <message>
         <source>Remove or ReInstall</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern eller geninstallér</translation>
     </message>
     <message>
         <source>ReInstall</source>
-        <translation type="unfinished"></translation>
+        <translation>Geninstallér</translation>
     </message>
     <message>
         <source>R</source>
-        <translation type="unfinished"></translation>
+        <translation>R</translation>
     </message>
     <message>
         <source>Do you wish to remove or upgrade
 %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du fjerne eller opgradere
+%1?</translation>
     </message>
     <message>
         <source>Remove or Upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern eller opgradér</translation>
     </message>
     <message>
         <source>U</source>
-        <translation type="unfinished"></translation>
+        <translation>U</translation>
     </message>
 </context>
 <context>
     <name>SettingsBase</name>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Servere</translation>
     </message>
     <message>
         <source>Active Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktive servere</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Navn:</translation>
     </message>
     <message>
         <source>URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>URL:</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Ændre</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Ny</translation>
     </message>
     <message>
         <source>Destinations</source>
-        <translation type="unfinished"></translation>
+        <translation>Destinationer</translation>
     </message>
     <message>
         <source>Link To Root</source>
-        <translation type="unfinished"></translation>
+        <translation>Link til rod</translation>
     </message>
     <message>
         <source>Proxies</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxyer</translation>
     </message>
     <message>
         <source>HTTP Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>HTTP Proxy</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodeord</translation>
     </message>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiveret</translation>
     </message>
     <message>
         <source>FTP Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>FTP Proxy</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation>Brugernavn</translation>
     </message>
     <message>
         <source>&amp;Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Anvend</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Generelt</translation>
     </message>
     <message>
         <source>(Will take effect on restart)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Aktiveres ved genstart)</translation>
     </message>
     <message>
         <source>Show Jump To Letters</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis hop-til-bogstaver</translation>
     </message>
 </context>
 </TS>

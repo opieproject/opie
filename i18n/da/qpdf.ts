@@ -3,99 +3,99 @@
     <name>QPdfDlg</name>
     <message>
         <source>QPdf</source>
-        <translation type="unfinished"></translation>
+        <translation>QPdf</translation>
     </message>
     <message>
         <source>Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom</translation>
     </message>
     <message>
         <source>Fit to width</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilpas til bredde</translation>
     </message>
     <message>
         <source>Fit to page</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilpas til side</translation>
     </message>
     <message>
         <source>50%</source>
-        <translation type="unfinished"></translation>
+        <translation>50%</translation>
     </message>
     <message>
         <source>75%</source>
-        <translation type="unfinished"></translation>
+        <translation>75%</translation>
     </message>
     <message>
         <source>100%</source>
-        <translation type="unfinished"></translation>
+        <translation>100%</translation>
     </message>
     <message>
         <source>125%</source>
-        <translation type="unfinished"></translation>
+        <translation>125%</translation>
     </message>
     <message>
         <source>150%</source>
-        <translation type="unfinished"></translation>
+        <translation>150%</translation>
     </message>
     <message>
         <source>200%</source>
-        <translation type="unfinished"></translation>
+        <translation>200%</translation>
     </message>
     <message>
         <source>Open...</source>
-        <translation type="unfinished"></translation>
+        <translation>Åben...</translation>
     </message>
     <message>
         <source>Find...</source>
-        <translation type="unfinished"></translation>
+        <translation>Find...</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuld skærm</translation>
     </message>
     <message>
         <source>First page</source>
-        <translation type="unfinished"></translation>
+        <translation>Første side</translation>
     </message>
     <message>
         <source>Previous page</source>
-        <translation type="unfinished"></translation>
+        <translation>Forrige side</translation>
     </message>
     <message>
         <source>Goto page...</source>
-        <translation type="unfinished"></translation>
+        <translation>Gå til side...</translation>
     </message>
     <message>
         <source>Next page</source>
-        <translation type="unfinished"></translation>
+        <translation>Næste side</translation>
     </message>
     <message>
         <source>Last page</source>
-        <translation type="unfinished"></translation>
+        <translation>Sidste side</translation>
     </message>
     <message>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Næste</translation>
     </message>
     <message>
         <source>Goto page</source>
-        <translation type="unfinished"></translation>
+        <translation>Gå til side</translation>
     </message>
     <message>
         <source>Select from 1 .. %1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg fra 1 .. %1:</translation>
     </message>
     <message>
         <source>&apos;%1&apos; could not be found.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; kunne ikke findes.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fejl</translation>
     </message>
     <message>
         <source>File does not exist !</source>
-        <translation type="unfinished"></translation>
+        <translation>Filen eksisterer ikke!</translation>
     </message>
 </context>
 </TS>

@@ -3,71 +3,71 @@
     <name>CanvasCardWindow</name>
     <message>
         <source>Patience</source>
-        <translation type="unfinished"></translation>
+        <translation>Kabale</translation>
     </message>
     <message>
         <source>Freecell</source>
-        <translation type="unfinished"></translation>
+        <translation>Freecell</translation>
     </message>
     <message>
         <source>Chicane</source>
-        <translation type="unfinished"></translation>
+        <translation>Chicane</translation>
     </message>
     <message>
         <source>Harp</source>
-        <translation type="unfinished"></translation>
+        <translation>Harp</translation>
     </message>
     <message>
         <source>Teeclub</source>
-        <translation type="unfinished"></translation>
+        <translation>Teeclub</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Spil</translation>
     </message>
     <message>
         <source>&amp;Change Card Backs</source>
-        <translation type="unfinished"></translation>
+        <translation>S&amp;kifte kort-bagside</translation>
     </message>
     <message>
         <source>&amp;Snap To Position</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Grib kort</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Indstillinger</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Om</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hjælp</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Spil</translation>
     </message>
     <message>
         <source>Change Card Backs</source>
-        <translation type="unfinished"></translation>
+        <translation>Skift kort-bagside</translation>
     </message>
     <message>
         <source>Snap To Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Grib kort</translation>
     </message>
     <message>
         <source>Turn One Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Vend ét kort</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Indstillinger</translation>
     </message>
     <message>
         <source>Turn Three Cards</source>
-        <translation type="unfinished"></translation>
+        <translation>Vend tre kort</translation>
     </message>
 </context>
 </TS>

@@ -3,237 +3,251 @@
     <name>OpieFtp</name>
     <message>
         <source>OpieFtp</source>
-        <translation type="unfinished"></translation>
+        <translation>OpieFtp</translation>
     </message>
     <message>
         <source>Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Forbindelse</translation>
     </message>
     <message>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokal</translation>
     </message>
     <message>
         <source>Remote</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Ny</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilslut</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbryd</translation>
     </message>
     <message>
         <source>Show Hidden Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis skjulte filer</translation>
     </message>
     <message>
         <source>Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Send</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Opret mappe</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Omdøb</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Slet</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Hent</translation>
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Skift til lokal</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation type="unfinished"></translation>
+        <translation>Skift til fjern</translation>
     </message>
     <message>
         <source>Switch to Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Skift til indstillinger</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Om</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fil</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Dato</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Størrelse</translation>
     </message>
     <message>
         <source>Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Mappe</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation>Brugernavn</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodeord</translation>
     </message>
     <message>
         <source>Remote server</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern server</translation>
     </message>
     <message>
         <source>Remote path</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern sti</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Port</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfig</translation>
     </message>
     <message>
         <source>Ftp</source>
-        <translation type="unfinished"></translation>
+        <translation>Ftp</translation>
     </message>
     <message>
         <source>Please set the server info</source>
-        <translation type="unfinished"></translation>
+        <translation>Indstil venligst server info</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Note</translation>
     </message>
     <message>
         <source>Unable to connect to
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke tilslutte til
+</translation>
     </message>
     <message>
         <source>Unable to log in
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke logge ind
+</translation>
     </message>
     <message>
         <source>Unable to upload
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke sende
+</translation>
     </message>
     <message>
         <source>Cannot upload directories</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke sende mapper</translation>
     </message>
     <message>
         <source>Unable to download 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke hente 
+</translation>
     </message>
     <message>
         <source>Unable to list the directory
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke vise mappen
+</translation>
     </message>
     <message>
         <source>Unable to change directories
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke skifte mappe
+</translation>
     </message>
     <message>
         <source>Unable to cd up
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke &apos;cd up&apos;
+</translation>
     </message>
     <message>
         <source>Unable to get working dir
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke hente arbejds mappen
+</translation>
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Skift mappe</translation>
     </message>
     <message>
         <source>Rescan</source>
-        <translation type="unfinished"></translation>
+        <translation>Genindlæs</translation>
     </message>
     <message>
         <source>Do you really want to delete
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Er du sikker på du vil slette
+</translation>
     </message>
     <message>
         <source> ?
 It must be empty</source>
-        <translation type="unfinished"></translation>
+        <translation> ?
+Den skal være tom</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nej</translation>
     </message>
     <message>
         <source>Unable to make directory
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke oprette mappe
+</translation>
     </message>
     <message>
         <source>Unable to remove directory
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke slette mappe
+</translation>
     </message>
     <message>
         <source>Unable to delete file
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke slette filen
+</translation>
     </message>
     <message>
         <source>Unable to rename file
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke omdøbe filen
+</translation>
     </message>
     <message>
         <source>Could not rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke omdøbe</translation>
     </message>
     <message>
         <source>That directory does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Den mappe eksisterer ikke</translation>
     </message>
     <message>
         <source>New Server name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nyt server navn</translation>
     </message>
     <message>
         <source>Sorry name already taken</source>
-        <translation type="unfinished"></translation>
+        <translation>Desværre, navnet er allerede brugt</translation>
     </message>
 </context>
 </TS>
