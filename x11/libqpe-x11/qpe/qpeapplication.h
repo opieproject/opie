@@ -54,6 +54,14 @@ public:
     bool keyboardGrabbed()const;
     int exec();
 
+// QWS bits
+    enum screenSaverHint {
+	Disable = 0,
+	DisableLightOff = 1,
+	DisableSuspend = 2,
+	Enable = 100
+    };
+
 signals:
     void clientMoused();
     void timeChanged();
@@ -78,6 +86,7 @@ private slots:
 protected:
     virtual void restart();
     virtual void shutdown();
+    void prepareForTermination(bool willrestart);
     bool eventFilter( QObject*, QEvent* );
     void timerEvent( QTimerEvent* );
     void raiseAppropriateWindow();

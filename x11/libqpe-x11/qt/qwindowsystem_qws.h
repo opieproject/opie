@@ -1,6 +1,7 @@
 #ifndef OPIE_QWINDOWSYSTEM_H
 #define OPIE_QWINDOWSYSTEM_H
 
+class QWSScreenSaver;
 class QWSServer {
 public:
 QWSServer(){}
@@ -11,8 +12,24 @@ QWSServer(){}
     static void setKeyboardFilter( KeyboardFilter* ) {
 
     }
+    static void setScreenSaver( QWSScreenSaver* ) {
+
+    }
+    static void setScreenSaverInterval( int ) {
+
+    }
+    static void setScreenSaverIntervals( int[] ) {
+
+    }
+    static void screenSaverActivate( bool ) {
+
+    }
+    static void setDesktopBackground( const QImage& ) {
+
+    }
 
 };
-
+struct QWSScreenSaver {
+};
 
 #endif
