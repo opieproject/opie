@@ -55,6 +55,8 @@ void Session::connect() {
             m_emu, SLOT(recv(const QByteArray&) ) );
     QObject::connect(m_emu, SIGNAL(send(const QByteArray&) ),
             m_layer, SLOT(send(const QByteArray&) ) );
+    QObject::connect(m_emu, SIGNAL(changeSize(int, int) ),
+                     m_layer, SLOT(setSize(int, int) ) );
 }
 
 void Session::disconnect() {

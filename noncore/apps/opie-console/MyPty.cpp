@@ -98,6 +98,7 @@
 
 void MyPty::setSize(int lines, int columns)
 {
+    qWarning("setting size");
   struct winsize wsize;
   wsize.ws_row = (unsigned short)lines;
   wsize.ws_col = (unsigned short)columns;

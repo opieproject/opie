@@ -77,7 +77,7 @@ void MainWindow::initUI() {
     connect( m_setProfiles, SIGNAL(activated() ),
              this, SLOT(slotConfigure() ) );
 
-
+    m_console->insertSeparator();
     /*
      * new Action for new sessions
      */
@@ -107,6 +107,8 @@ void MainWindow::initUI() {
     connect(m_disconnect, SIGNAL(activated() ),
             this, SLOT(slotDisconnect() ) );
 
+    m_console->insertSeparator();
+
     m_transfer = new QAction();
     m_transfer->setText( tr("Transfer file...") );
     m_transfer->addTo( m_console );
@@ -126,6 +128,7 @@ void MainWindow::initUI() {
     connect( m_fullscreen, SIGNAL( activated() ),
              this,  SLOT( slotFullscreen() ) );
 
+    m_console->insertSeparator();
     /*
      * terminate action
      */

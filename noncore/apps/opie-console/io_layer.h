@@ -120,7 +120,7 @@ public slots:
      * set the size
      * needed for pty
      */
-    virtual void setSize(int rows, int cols );
+    virtual void setSize(int lines, int cols );
 };
 
 #endif

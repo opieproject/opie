@@ -207,6 +207,7 @@ void TEmulation::onRcvChar(int c)
 
 void TEmulation::onKeyPress( QKeyEvent* ev )
 {
+    qWarning("onKeyPress,....");
   if (!connected) return; // someone else gets the keys
   if (scr->getHistCursor() != scr->getHistLines());
     scr->setHistCursor(scr->getHistLines());
