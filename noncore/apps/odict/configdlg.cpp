@@ -42,6 +42,7 @@ ConfigDlg::ConfigDlg(QWidget *parent, const char *name, bool modal) : QDialog(pa
 
 	/*searchmethods*/
 	search_tab = new QWidget( tab , "search_tab" );
+	loadSearchMethodNames();
 	QVBoxLayout *vbox_layout_searchtab = new QVBoxLayout( search_tab, 4 , 4 ,"blah" );
 	
 	QHBox *hbox = new QHBox( search_tab );
@@ -102,4 +103,12 @@ void ConfigDlg::slotDeleteMethod()
 	if ( list->selectedItem() )
 		list->takeItem( list->selectedItem() );
 	else qDebug("no item selected"); 
+}
+
+void ConfigDlg::loadSearchMethodNames()
+{
+	QListViewItem *item = new QListViewItem( list);
+	Config cfg(  "odict" );
+//X 	cfg.setGroup( itemName );
+//X 	QString temp = cfg.readEntry( "Seperator" );
 }

@@ -80,7 +80,7 @@ SearchMethodDlg::SearchMethodDlg(QWidget *parent, const char *name, bool modal, 
 void SearchMethodDlg::setupEntries( QString item )
 {
 	Config cfg(  "odict" );
-	cfg.setGroup( itemName );
+	cfg.setGroup( "Method_"+itemName );
 	trenner->setText( cfg.readEntry( "Seperator" ) );
 	lang1->setText( cfg.readEntry( "Lang1" ) );
 	lang2->setText( cfg.readEntry( "Lang2" ) );
@@ -98,7 +98,7 @@ void SearchMethodDlg::saveItem()
 {
 	QString name = nameLE->text();
 	Config cfg(  "odict" );
-	cfg.setGroup( name );
+	cfg.setGroup( "Method_"+name );
 	cfg.writeEntry( "Name", name );
 	cfg.writeEntry( "Seperator", trenner->text() );
 	cfg.writeEntry( "Lang1", lang1->text() );

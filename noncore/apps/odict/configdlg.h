@@ -30,6 +30,8 @@ class ConfigDlg : public QDialog
 		QListView *list;
 		QPushButton *new_button, *change_button, *delete_button;
 
+		void loadSearchMethodNames();
+
 	private slots:
 		void slotNewMethod();
 		void slotChangeMethod();
