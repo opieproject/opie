@@ -176,6 +176,8 @@ void OpieMail::slotDeleteMail()
 
 void OpieMail::mailHold(int button, QListViewItem *item,const QPoint&,int  )
 {
+    if (!mailView->currentItem()) return;
+    RecMail mail = ((MailListViewItem*)mailView->currentItem() )->data();
     /* just the RIGHT button - or hold on pda */
     if (button!=2) {return;}
     qDebug("Event right/hold");
@@ -183,9 +185,14 @@ void OpieMail::mailHold(int button, QListViewItem *item,const QPoint&,int  )
     QPopupMenu *m = new QPopupMenu(0);
     if (m)
     {
-        m->insertItem(tr("Read this mail"),this,SLOT(displayMail()));
-        m->insertItem(tr("Delete this mail"),this,SLOT(slotDeleteMail()));
-        m->insertItem(tr("Copy/Move this mail"),this,SLOT(slotMoveCopyMail()));
+        if (mail.Wrapper()->getType()==MAILLIB::A_NNTP) {
+            m->insertItem(tr("Read this posting"),this,SLOT(displayMail()));
+//            m->insertItem(tr("Copy this posting"),this,SLOT(slotMoveCopyMail()));
+        } else {
+            m->insertItem(tr("Read this mail"),this,SLOT(displayMail()));
+            m->insertItem(tr("Delete this mail"),this,SLOT(slotDeleteMail()));
+            m->insertItem(tr("Copy/Move this mail"),this,SLOT(slotMoveCopyMail()));
+        }
         m->setFocus();
         m->exec( QPoint( QCursor::pos().x(), QCursor::pos().y()) );
         delete m;
