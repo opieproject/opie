@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.20 2002-09-25 16:26:19 llornkcor Exp $
+** $Id: qpeapplication.cpp,v 1.21 2002-09-25 18:15:58 zecke Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -808,7 +808,11 @@ QString QPEApplication::qpeDir()
 */
 QString QPEApplication::documentDir()
 {
-    return QString( QDir::homeDirPath() + "/Documents");
+    const char* base = getenv( "HOME");
+    if( base )
+      return QString( base ) + "/Documents";
+      
+    return QString( "../Documents" );
 }
 
 static int deforient = -1;
