@@ -1520,7 +1520,7 @@ void LiquidStyle::drawScrollBarControls(QPainter *p, const QScrollBar *sb,
         if(sbBuffer.size() != sb->size())
             sbBuffer.resize(sb->size());
     }
-    subB.setRect( subX,subY,buttonDim,buttonDim );
+    subB.setRect( subX,subY,0,0); // buttonDim,buttonDim );
     addB.setRect( addX,addY,buttonDim,buttonDim );
     if(horiz)
         subHC.setRect(addX-buttonDim,addY,buttonDim,buttonDim );
@@ -1548,7 +1548,7 @@ void LiquidStyle::drawScrollBarControls(QPainter *p, const QScrollBar *sb,
     QPainter painter;
     if(!horiz){
         painter.begin(&sbBuffer);
-        QRect bgR(0, subB.bottom()+1, sb->width(), (len-(buttonDim*3))+1);
+        QRect bgR(0, subB.bottom()+1, sb->width(), (len-(buttonDim*2))+1);
         if(sliderR.height() >= 8){
             painter.drawPixmap(bgR.x()+1, bgR.y(), *vsbSliderFillPix, 0, 0,
                           13, 8);
@@ -1614,7 +1614,7 @@ void LiquidStyle::drawScrollBarControls(QPainter *p, const QScrollBar *sb,
     }
     else{
         painter.begin(&sbBuffer);
-        QRect bgR(subB.right()+1, 0, (len-(buttonDim*3))+1, sb->height());
+        QRect bgR(subB.right()+1, 0, (len-(buttonDim*2))+1, sb->height());
         if(sliderR.width() >= 8){
             painter.drawPixmap(bgR.x(), bgR.y()+1, *vsbSliderFillPix, 0, 0,
                                8, 13);
@@ -1685,10 +1685,10 @@ void LiquidStyle::drawScrollBarControls(QPainter *p, const QScrollBar *sb,
                    addB.width()-8, addB.height()-8, g, !maxed);
     }
     if ( controls & SubLine ) {
-        drawSBButton(p, subB, g, activeControl == SubLine);
-        drawArrow( p, horiz ? LeftArrow : UpArrow,
-                   false, subB.x()+4, subB.y()+4,
-                   subB.width()-8, subB.height()-8, g, !maxed);
+     //   drawSBButton(p, subB, g, activeControl == SubLine);
+     //   drawArrow( p, horiz ? LeftArrow : UpArrow,
+     //              false, subB.x()+4, subB.y()+4,
+     //              subB.width()-8, subB.height()-8, g, !maxed);
         drawSBButton(p, subHC, g, activeControl == SubLine);
         drawArrow( p, horiz ? LeftArrow : UpArrow,
                    false, subHC.x()+4, subHC.y()+4,
@@ -1789,8 +1789,8 @@ void LiquidStyle::scrollBarMetrics(const QScrollBar *sb, int &sliderMin,
     else
 	buttonDim = ( length - b*2 )/2 - 1;
 
-    sliderMin = b + buttonDim;
-    maxLength  = length - b*2 - buttonDim*3;
+    sliderMin = b + 0; // buttonDim;
+    maxLength  = length - b*2 - buttonDim*2; // 3;
 
     if ( sb->maxValue() == sb->minValue() ) {
 	sliderLength = maxLength;
