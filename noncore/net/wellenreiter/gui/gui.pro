@@ -29,7 +29,7 @@ SOURCES         = main.cpp \
 
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
-INTERFACES      = configbase.ui
+INTERFACES      = configbase.ui #configbasenew.ui
 TARGET          = wellenreiter
 
 !contains( platform, x11 ) {

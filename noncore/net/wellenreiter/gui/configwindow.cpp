@@ -138,3 +138,9 @@ void WellenreiterConfigWindow::getCaptureFileNameClicked()
     }
 }
 
+
+bool WellenreiterConfigWindow::usePrismHeader()
+{
+    return true;
+    //return interface->usePrismHeader();
+}

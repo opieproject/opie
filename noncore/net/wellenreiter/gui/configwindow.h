@@ -43,6 +43,8 @@ class WellenreiterConfigWindow : public WellenreiterConfigBase
     const QString soundOnBeacon() const { return beaconSound->currentText(); };
     static WellenreiterConfigWindow* instance() { return _instance; };
 
+    bool usePrismHeader();
+
   public slots:
     void changedDeviceType(int);
     void getCaptureFileNameClicked();

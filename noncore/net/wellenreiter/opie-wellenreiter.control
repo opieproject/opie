@@ -5,6 +5,6 @@ Section: opie/applications
 Maintainer: Michael 'Mickey' Lauer <mickeyl@handhelds.org> 
 Architecture: arm
 Version: 0.9.9-$SUB_VERSION
-Depends: task-opie-minimal, libpcap0, libopie2 (1.8.1)
+Depends: task-opie-minimal, libpcap0 (0.7.2), libopie2 (1.8.1)
 Description: A WaveLAN Network Monitor
  A WaveLAN Network Monitor/Sniffer for the Opie Environment.

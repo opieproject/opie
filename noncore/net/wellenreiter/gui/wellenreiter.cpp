@@ -331,12 +331,14 @@ void Wellenreiter::startClicked()
 
     // set monitor mode
 
+    bool usePrism = configwindow->usePrismHeader();
+
     switch ( cardtype )
     {
-        case DEVTYPE_CISCO: iface->setMonitoring( new OCiscoMonitoringInterface( iface ) ); break;
-        case DEVTYPE_WLAN_NG: iface->setMonitoring( new OWlanNGMonitoringInterface( iface ) ); break;
-        case DEVTYPE_HOSTAP: iface->setMonitoring( new OHostAPMonitoringInterface( iface ) ); break;
-        case DEVTYPE_ORINOCO: iface->setMonitoring( new OOrinocoMonitoringInterface( iface ) ); break;
+        case DEVTYPE_CISCO: iface->setMonitoring( new OCiscoMonitoringInterface( iface, usePrism ) ); break;
+        case DEVTYPE_WLAN_NG: iface->setMonitoring( new OWlanNGMonitoringInterface( iface, usePrism ) ); break;
+        case DEVTYPE_HOSTAP: iface->setMonitoring( new OHostAPMonitoringInterface( iface, usePrism ) ); break;
+        case DEVTYPE_ORINOCO: iface->setMonitoring( new OOrinocoMonitoringInterface( iface, usePrism ) ); break;
         case DEVTYPE_MANUAL: QMessageBox::information( this, "Wellenreiter II", tr( "Bring your device into\nmonitor mode now." ) ); break;
         case DEVTYPE_FILE: qDebug( "Wellenreiter: Capturing from file '%s'", (const char*) interface ); break;
         default: assert( 0 ); // shouldn't reach this
