@@ -1,6 +1,7 @@
 #ifndef __POP3WRAPPER
 #define __POP3WRAPPER
 
+#include <libetpan/clist.h>
 #include "mailwrapper.h"
 #include "abstractmail.h"
 #include <qmap.h>
@@ -13,6 +14,11 @@ struct mailpop3;
 struct mailmessage;
 struct mailmime;
 struct mailmime_mechanism;
+struct mailimf_mailbox_list;
+struct mailimf_mailbox;
+struct mailimf_date_time;
+struct mailimf_group;
+struct mailimf_address_list;
 
 class POP3wrapper : public AbstractMail
 {

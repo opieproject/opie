@@ -17,7 +17,8 @@ HEADERS	     = defines.h \
                pop3wrapper.h \
 	       abstractmail.h  \
 		settingsdialog.h \
-		statuswidget.h 
+		statuswidget.h \
+        smtpwrapper.h
                
 SOURCES	     = main.cpp \
 	           opiemail.cpp \
@@ -36,7 +37,8 @@ SOURCES	     = main.cpp \
                pop3wrapper.cpp \
 	       abstractmail.cpp \
 		settingsdialog.cpp \
- 		statuswidget.cpp
+ 		statuswidget.cpp \
+        smtpwrapper.cpp
                
 INTERFACES	 = editaccountsui.ui \
                selectmailtypeui.ui \

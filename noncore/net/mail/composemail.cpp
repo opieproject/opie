@@ -4,6 +4,7 @@
 #include <qpe/resource.h>
 
 #include "composemail.h"
+#include "smtpwrapper.h"
 
 ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool modal, WFlags flags )
     : ComposeMailUI( parent, name, modal, flags )
@@ -182,7 +183,7 @@ void ComposeMail::accept()
         it = (AttachViewItem *) it->itemBelow();
     }
 
-    MailWrapper wrapper( settings );
+    SMTPwrapper wrapper( settings );
     wrapper.sendMail( *mail );
 
     QDialog::accept();

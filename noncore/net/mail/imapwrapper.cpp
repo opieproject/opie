@@ -1,10 +1,11 @@
 
 #include <stdlib.h>
 
+#include <libetpan/mailimap.h>
+
 #include "imapwrapper.h"
 #include "mailtypes.h"
 #include "logindialog.h"
-#include <libetpan/mailimap.h>
 
 IMAPwrapper::IMAPwrapper( IMAPaccount *a )
     : AbstractMail()

@@ -3,11 +3,6 @@
 
 #include <qpe/applnk.h>
 
-#include <libetpan/mailmime.h>
-#include <libetpan/mailimf.h>
-#include <libetpan/mailsmtp.h>
-#include <libetpan/mailstorage.h>
-#include <libetpan/maildriver.h>
 #include <qbitarray.h>
 #include <qdatetime.h>
 
@@ -91,36 +86,6 @@ class IMAPFolder : public Folder
 		static QString decodeFolderName( const QString &name );
         bool m_MaySelect;
 
-};
-
-class MailWrapper : public QObject
-{
-    Q_OBJECT
-
-public:
-    MailWrapper( Settings *s ); 
-    void sendMail( Mail mail );
-
-private:
-    mailimf_mailbox *newMailbox(const QString&name,const QString&mail );
-    mailimf_address_list *parseAddresses(const QString&addr );
-    mailimf_fields *createImfFields( Mail *mail );
-    mailmime *buildTxtPart( QString str );
-    mailmime *buildFilePart( QString filename, QString mimetype );
-    void addFileParts( mailmime *message, QList<Attachment> files );
-    mailmime *createMimeMail( Mail *mail );
-    void smtpSend( mailmime *mail );
-    mailimf_field *getField( mailimf_fields *fields, int type );
-    clist *createRcptList( mailimf_fields *fields );
-    char *getFrom( mailmime *mail );
-    SMTPaccount *getAccount( QString from );
-    void writeToFile( QString file, mailmime *mail );
-    void readFromFile( QString file, char **data, size_t *size );
-    static QString mailsmtpError( int err );
-    static QString getTmpFile();
-
-    Settings *settings;
-        
 };
 
 #endif

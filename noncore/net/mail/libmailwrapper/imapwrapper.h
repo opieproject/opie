@@ -4,6 +4,7 @@
 #include <qlist.h>
 #include "mailwrapper.h"
 #include "abstractmail.h"
+#include <libetpan/clist.h>
 
 struct mailimap;
 struct mailimap_body_type_1part;

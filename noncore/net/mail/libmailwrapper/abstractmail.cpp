@@ -8,6 +8,7 @@
 #include <qtextstream.h>
 #include <stdlib.h>
 #include <libetpan/mailmime_content.h>
+#include <libetpan/mailmime.h>
 
 AbstractMail* AbstractMail::getWrapper(IMAPaccount *a)
 {
