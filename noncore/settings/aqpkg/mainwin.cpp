@@ -198,7 +198,7 @@ MainWindow :: MainWindow()
     // Options menu
     popup = new QPopupMenu( this );
 
-    a = new QAction( tr( "Configure" ), Resource::loadPixmap( "aqpkg/config" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Configure" ), Resource::loadPixmap( "SettingsIcon" ), QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Click here to configure this application." ) );
     connect( a, SIGNAL( activated() ), this, SLOT( displaySettings() ) );
     a->addTo( popup );
@@ -238,7 +238,7 @@ void MainWindow :: initMainWidget()
     connect( serversList, SIGNAL( activated( int ) ), this, SLOT( serverSelected( int ) ) );
     QWhatsThis::add( serversList, tr( "Click here to select a package feed." ) );
     
-    installedIcon = Resource::loadPixmap( "aqpkg/installed" );
+    installedIcon = Resource::loadPixmap( "installed" );
     updatedIcon = Resource::loadPixmap( "aqpkg/updated" );
     
     packagesList = new QListView( networkPkgWindow );
