@@ -33,7 +33,7 @@
 #include <qpushbutton.h>
 #include <qtextstream.h>
 #include <qtimer.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qtoolbutton.h>
 #include <qvbox.h>
 #include <qwidgetstack.h>

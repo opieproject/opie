@@ -40,6 +40,7 @@ static int default_colors=3;
 #define i18n tr
 
 
+using namespace Opie::Core;
 OPIE_EXPORT_APP( OApplicationFactory<ZSameWidget> )
 
 

@@ -22,7 +22,7 @@
 
 #include <qpe/resource.h>
 
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qtoolbutton.h>
 
 SnakeGame::SnakeGame(QWidget* parent, const char* name, WFlags f) :

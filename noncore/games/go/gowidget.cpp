@@ -24,7 +24,7 @@
 #include <qpe/resource.h>
 
 #include <qpainter.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qmenubar.h>
 #include <qaction.h>
 #include <qapplication.h> //processEvents()
