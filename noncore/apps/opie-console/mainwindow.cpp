@@ -54,6 +54,7 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(
 }
 
 void MainWindow::initUI() {
+
     setToolBarsMovable( FALSE  );
 
     /* tool bar for the menu */
@@ -120,10 +121,13 @@ void MainWindow::initUI() {
 
     m_console->insertSeparator();
 
+
     m_quickLaunch = new QAction( tr("QuickLaunch"),  Resource::loadPixmap("console/konsole_mini"),  QString::null,  0,  this, 0 );
     m_quickLaunch->addTo( m_icons );
     connect( m_quickLaunch,  SIGNAL( activated() ),
              this,  SLOT( slotQuickLaunch() ) );
+
+    QWhatsThis::add( m_icons, tr( "The shell button launches the \"default\" profile. If there is none default values are taken" ) );
 
     m_transfer = new QAction( tr("Transfer file..."), Resource::loadPixmap("pass") , QString::null,
                     0, this, 0  );
@@ -235,7 +239,7 @@ void MainWindow::initUI() {
 
 
     newCon->addTo( m_icons );
-    m_setProfiles->addTo( m_icons );
+    //m_setProfiles->addTo( m_icons );
     paste->addTo( m_icons );
     m_openKeys->addTo(m_icons);
     m_fullscreen->addTo( m_icons );
@@ -262,6 +266,7 @@ void MainWindow::initUI() {
             this, SLOT(slotSessionChanged(Session*) ) );
     setCentralWidget( m_consoleWindow );
 
+    slotQuickLaunch();
 }
 
 ProfileManager* MainWindow::manager() {

@@ -101,7 +101,7 @@ int main(int argc, char **argv) {
 #endif
 
     MainWindow mw;
-    mw.setCaption(QObject::tr("Opie console") );
+    mw.setCaption(QObject::tr("Opie Console") );
     app.showMainWidget( &mw );
 
     int ap = app.exec();
