@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>231</width>
+            <width>219</width>
             <height>121</height>
         </rect>
     </property>
@@ -40,6 +40,9 @@
                 <name>name</name>
                 <cstring>Layout2</cstring>
             </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
             <hbox>
                 <property stdset="1">
                     <name>margin</name>
@@ -47,13 +50,20 @@
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
-                    <number>6</number>
+                    <number>0</number>
                 </property>
                 <widget>
                     <class>QLabel</class>
                     <property stdset="1">
                         <name>name</name>
                         <cstring>TextLabel1</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>1</vsizetype>
+                        </sizepolicy>
                     </property>
                     <property stdset="1">
                         <name>text</name>
@@ -65,6 +75,13 @@
                     <property stdset="1">
                         <name>name</name>
                         <cstring>DeviceName_LBL</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>1</vsizetype>
+                        </sizepolicy>
                     </property>
                     <property stdset="1">
                         <name>text</name>
@@ -82,4 +99,12 @@
         </widget>
     </vbox>
 </widget>
+<connections>
+    <connection>
+        <sender>Profiles_LB</sender>
+        <signal>doubleClicked(QListBoxItem*)</signal>
+        <receiver>ActivateProfileGUI</receiver>
+        <slot>accept()</slot>
+    </connection>
+</connections>
 </UI>

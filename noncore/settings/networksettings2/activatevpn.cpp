@@ -18,17 +18,18 @@ MyCheckListItem::MyCheckListItem( NodeCollection * N, QListView * V ):
       NC = N;
 }
 
-ActivateVPN::ActivateVPN( void ) :
+ActivateVPN::ActivateVPN( const QString & I ) :
                   ActivateVPNGUI( 0, 0, TRUE ), NSD() {
 
     QCheckListItem * CI;
     VPN_LV->clear();
     VPN_LV->header()->hide();
 
+    // find all connections that want to be triggered by this interface
     for( QDictIterator<NodeCollection> it(NSResources->connections());
          it.current();
          ++it ) {
-      if( it.current()->triggeredBy( "vpn" ) ) {
+      if( it.current()->triggeredBy( I ) ) {
         CI = new MyCheckListItem( it.current(), VPN_LV );
       }
     }

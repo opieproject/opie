@@ -61,6 +61,8 @@ NetworkSettingsData::NetworkSettingsData( void ) {
           if( NC ) {
             NC->assignInterface( 
                 NSResources->system().findInterface( interfacename ) );
+            Log(( "Assign interface %p\n", 
+                  NC->assignedInterface() ));
           } else {
             Log(( "Profile nr %d no longer defined\n", 
                 profilenr ));
@@ -643,7 +645,8 @@ QString NetworkSettingsData::generateSettings( void ) {
     return S;
 }
 
-QList<NodeCollection> NetworkSettingsData::collectPossible( const char * Interface ) {
+QList<NodeCollection> NetworkSettingsData::collectPossible( 
+                    const QString & Interface ) {
     // collect connections that can work on top of this interface
     NodeCollection * NC;
     QList<NodeCollection> PossibleConnections;
@@ -656,10 +659,11 @@ QList<NodeCollection> NetworkSettingsData::collectPossible( const char * Interfa
       NC = it.current();
       // check if this profile handles the requested interface
       if( NC->handlesInterface( Interface ) && // if different Intf.
-          NC->state() != Disabled && // if not enabled
+          NC->state() != Disabled && // if enabled
           NC->state() != IsUp  // if already used
         ) {
-        Log( ( "Append %s for %s\n", NC->name().latin1(), Interface));
+        Log( ( "Append %s for %s\n", 
+              NC->name().latin1(), Interface.latin1() ));
         PossibleConnections.append( NC );
       }
     }
@@ -673,7 +677,7 @@ QList<NodeCollection> NetworkSettingsData::collectPossible( const char * Interfa
     if allowed, echo Interface-allowed else Interface-disallowed
 */
 
-bool NetworkSettingsData::canStart( const char * Interface ) {
+bool NetworkSettingsData::canStart( const QString & Interface ) {
     // load situation
     NodeCollection * NC = 0;
     QList<NodeCollection> PossibleConnections;
@@ -681,7 +685,7 @@ bool NetworkSettingsData::canStart( const char * Interface ) {
     PossibleConnections = collectPossible( Interface );
 
     Log( ( "for %s : Possiblilies %d\n", 
-        Interface, PossibleConnections.count() ));
+        Interface.latin1(), PossibleConnections.count() ));
     switch( PossibleConnections.count() ) {
       case 0 : // no connections
         break;
@@ -706,8 +710,8 @@ bool NetworkSettingsData::canStart( const char * Interface ) {
           { QString S= NC->setState( Activate );
             if( ! S.isEmpty() ) {
               // could not bring device Online -> try other alters
-              Log(( "%s-c%d-disallowed : %s\n", 
-                  Interface, NC->number(), S.latin1() ));
+              Log(( "disallow %ld for %s : %s\n", 
+                  NC->number(), Interface.latin1(), S.latin1() ));
               break;
             }
             // interface assigned 
@@ -716,15 +720,15 @@ bool NetworkSettingsData::canStart( const char * Interface ) {
         case Available :
         case IsUp : // also called for 'ifdown'
           // device is ready -> done
-          Log(( "%s-c%d-allowed\n", Interface, NC->number() ));
-          printf( "%s-c%d-allowed\n", Interface, NC->number() );
+          Log(( "allow %ld for %s\n", NC->number(), Interface.latin1()));
+          printf( "A%ld%s\n", NC->number(), Interface.latin1() );
           return 0;
       }
     } 
 
     // if we come here no alternatives are possible
-    Log(( "%s-cnn-disallowed\n", Interface ));
-    printf( "%s-cnn-disallowed\n", Interface );
+    Log(( "disallow %s\n", Interface.latin1()));
+    printf( "D-%s\n", Interface.latin1() );
     return 0;
 }
 
@@ -741,3 +745,43 @@ bool NetworkSettingsData::isModified( void ) {
     }
     return 0;
 }
+
+bool NetworkSettingsData::couldBeTriggered( const QString & Interface ) {
+    // load situation
+    QList<NodeCollection> PossibleTriggered;
+
+    PossibleTriggered = collectTriggered( Interface );
+
+    Log( ( "for %s : Possiblilies %d\n", 
+        Interface.latin1(), PossibleTriggered.count() ));
+
+    return ( PossibleTriggered.count() ) ? 1 : 0;
+}
+
+QList<NodeCollection> NetworkSettingsData::collectTriggered( 
+                      const QString & Interface ) {
+
+    // collect connections that could be triggered by this interface
+    NodeCollection * NC;
+    QList<NodeCollection> PossibleTriggered;
+
+    // for all connections
+    Name2Connection_t & M = NSResources->connections();
+
+    for( QDictIterator<NodeCollection> it(M);
+         it.current();
+         ++it ) {
+      NC = it.current();
+      // check if this profile handles the requested interface
+      if( NC->triggeredBy( Interface ) && // if different Intf.
+          NC->state() != Disabled && // if enabled
+          NC->state() != IsUp  // if already used
+        ) {
+        Log( ( "Append %s for %s\n", 
+            NC->name().latin1(), Interface.latin1() ));
+        PossibleTriggered.append( NC );
+      }
+    }
+    return PossibleTriggered;
+}
+

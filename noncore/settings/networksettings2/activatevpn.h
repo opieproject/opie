@@ -7,7 +7,7 @@ class ActivateVPN : public ActivateVPNGUI {
 
 public :
 
-      ActivateVPN( void );
+      ActivateVPN( const QString & Interface );
       ~ActivateVPN( void );
 
 public slots :

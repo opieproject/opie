@@ -63,7 +63,7 @@ int System::runAsRoot( QStringList & S, MyProcess * Prc ) {
     char * usr = getenv("USER");
 
     if( S.count() == 0 ) {
-      // loophole to start shell
+      // close loophole to start shell
       return 8888;
     }
     if( usr == 0 || strcmp( usr, "root" ) ) {
@@ -119,12 +119,13 @@ int System::runAsRoot( QStringList & S, MyProcess * Prc ) {
     return 1;
 }
 
-int System::execAsUser( QStringList & SL ) {
+int System::execAsUser( QStringList & SL, bool Synchronous ) {
       MyProcess * P = new MyProcess();
       CurrentQPEUser CU = NSResources->currentUser();
       char * usr = getenv("USER");
 
-      if( strcmp( usr, "root" ) == 0 ) {
+      if( usr == 0 ||
+          strcmp( usr, "root" ) == 0 ) {
         // find user running qpe
         if( CU.UserName.isEmpty() ) {
           // if we come here, the exec was not successfull
@@ -153,16 +154,21 @@ int System::execAsUser( QStringList & SL ) {
             CU.UserName.latin1(),
             SL.join( " " ).latin1() ));
 
-      int rv = ( P->process().start( OProcess::DontCare, 
-                      OProcess::NoCommunication ) );
+      P->setEchoMode( Synchronous );
+
+      bool rv = P->process().start( 
+            (Synchronous) ? OProcess::Block : 
+                            OProcess::DontCare,  
+            (Synchronous) ? OProcess::AllOutput : 
+                            OProcess::NoCommunication );
       delete P;
 
-      if( rv ) {
+      if( ! rv ) {
         // if we come here, the exec was not successfull
         Log(("Could not exec : %d\n", errno ));
       }
 
-      return ! rv;
+      return rv;
 }
 
 void System::SLOT_ProcessExited( MyProcess * P ) {
@@ -541,6 +547,11 @@ MyProcess::~MyProcess() {
 }
 
 void MyProcess::SLOT_Stdout( Opie::Core::OProcess * , char * Buf, int len ) {
+      if( EchoMode ) {
+        write( 1, Buf, len );
+        return;
+      }
+
       char * LB = (char *)alloca( len + 1 );
       memcpy( LB, Buf, len );
       LB[len] = '\0';
@@ -562,6 +573,11 @@ void MyProcess::SLOT_Stdout( Opie::Core::OProcess * , char * Buf, int len ) {
 }
 
 void MyProcess::SLOT_Stderr( Opie::Core::OProcess * , char * Buf, int len ) {
+      if( EchoMode ) {
+        write( 2, Buf, len );
+        return;
+      }
+
       char * LB = (char *)alloca( len + 1 );
       memcpy( LB, Buf, len );
       LB[len] = '\0';

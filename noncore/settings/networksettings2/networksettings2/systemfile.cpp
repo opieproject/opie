@@ -136,7 +136,6 @@ bool SystemFile::close( void ) {
       F = 0;
 
       if( ! InAppend ) {
-        odebug << "Rename " << OldP << " to " << Path << oendl;
         return ( rename( OldP.latin1(), Path.latin1() ) >= 0 );
       } 
       return 1;

@@ -23,10 +23,12 @@ OPIE_EXPORT_APP( OApplicationFactory<NetworkSettings> )
 #define ACT_REGEN       2
 // used by interfaces to request user prompt 
 #define ACT_PROMPT      3
-// used by interfaces to trigger VPN
-#define ACT_VPN         4
+// used by interfaces to trigger VPN prompting
+#define ACT_TRIGGERVPN  4
 // activate opietooth
 #define ACT_OT          5
+// prompt for VPN networks
+#define ACT_PROMPTVPN   6
 
 // include Opietooth GUI
 #include <opietooth2/Opietooth.h>
@@ -56,7 +58,11 @@ int main( int argc, char * argv[] ) {
             Action = ACT_PROMPT;
             rmv = 1;
           } else if( strcmp( argv[i], "--triggervpn" ) == 0 ) {
-            Action = ACT_VPN;
+            GuiType = QApplication::Tty;
+            Action = ACT_TRIGGERVPN;
+            rmv = 1;
+          } else if( strcmp( argv[i], "--promptvpn" ) == 0 ) {
+            Action = ACT_PROMPTVPN;
             rmv = 1;
           } else if( strcmp( argv[i], "--opietooth" ) == 0 ) {
             Action = ACT_OT;
@@ -95,15 +101,24 @@ int main( int argc, char * argv[] ) {
           case ACT_REQUEST :
             { NetworkSettingsData NS;
               if( NS.canStart( argv[1] ) ) {
+                QStringList SL;
+                SL << QPEApplication::qpeDir() + "bin/networksettings2"
+                   << "--prompt"
+                   << argv[1];
+                // exec synchronous -> blocks 
+                NSResources->system().execAsUser( SL, 1 );
+              }
+            }
+            break;
+          case ACT_TRIGGERVPN :
+            { NetworkSettingsData NS;
+              if( NS.couldBeTriggered( argv[1] ) ) {
+                // there are VPNS that can be triggered
                 QStringList S;
-                S << QPEApplication::qpeDir() + "/bin/networksettings2";
-                S << "networksettings2";
-                S << "--prompt";
+                S << QPEApplication::qpeDir() + "bin/networksettings2";
+                S << "--promptvpn";
                 S << argv[1];
                 NSResources->system().execAsUser( S );
-                Log(("FAILED %s-cNN-allowed\n", argv[1] ));
-                // if we come here , failed
-                printf( "%s-cNN-disallowed", argv[1] );
               }
             }
             break;
@@ -117,17 +132,18 @@ int main( int argc, char * argv[] ) {
           case ACT_PROMPT :
             { ActivateProfile AP(argv[1]);
               if( AP.exec() == QDialog::Accepted ) {
-                Log(("%s-c%ld-allowed\n", 
-                    argv[1], AP.selectedProfile() ));
-                printf( "%s-c%ld-allowed", argv[1], AP.selectedProfile() );
+                Log(("allow profile %ld for %s\n", 
+                    AP.selectedProfile(), argv[1] ));
+                printf( "A%ld%s\n", AP.selectedProfile(), argv[1] );
               } else {
-                Log(("%s-c%NN-disallowed\n", argv[1] ));
-                printf( "%s-cNN-disallowed", argv[1] );
+                Log(("disallow %s\n", argv[1] ));
+                printf( "D-%s\n", argv[1] );
               }
             }
             break;
-          case ACT_VPN :
-            { ActivateVPN AVPN;
+          case ACT_PROMPTVPN :
+            { ActivateVPN AVPN( argv[1] );
+              Log(("Trigger vpns on interface %s\n", argv[1] ));
               AVPN.exec();
             }
             break;

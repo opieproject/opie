@@ -247,6 +247,8 @@ const QString & TheNSResources::netNode2Description( const char * s ) {
 
 void TheNSResources::addConnection( NodeCollection * NC, bool Dangling ) {
       ANetNodeInstance * NNI;
+      Log(( "Add Connection %s, Dangling %d\n",
+          NC->name().latin1(), Dangling ));
       if( Dangling ) {
         DanglingConnectionsMap.insert( NC->name(), NC );
       } else {

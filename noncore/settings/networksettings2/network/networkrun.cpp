@@ -6,7 +6,7 @@
 State_t NetworkRun::detectState( void ) { 
     InterfaceInfo * II = nodeCollection()->assignedInterface();
 
-    Log(( "Interface %p : %d\n", II, (II) ? II->IsUp : 0 ));
+    Log(( "Interface %p %p : %d\n", II, nodeCollection(), (II) ? II->IsUp : 0 ));
     if( II && II->IsUp ) {
       // device has assigned interface
       return IsUp;
@@ -38,9 +38,10 @@ QString NetworkRun::setMyState( NodeCollection * NC, Action_t A, bool ) {
       return QString();
     }
 
-    SL << QString().sprintf( "%s=%s-c%d-allowed",
-                        II->Name.latin1(), II->Name.latin1(),
-                        nodeCollection()->number() );
+    SL << QString().sprintf( "%s=A%ld%s",
+                        II->Name.latin1(), 
+                        nodeCollection()->number(),
+                        II->Name.latin1() );
 
     if( ! NSResources->system().runAsRoot( SL ) ) {
       return QString("Cannot call %1").arg(SL.join(" "));

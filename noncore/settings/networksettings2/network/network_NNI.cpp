@@ -116,10 +116,10 @@ short ANetwork::generateFile( SystemFile &SF,
       // we can safely call from here since device item is deeper
       if( Data.UseDHCP ) {
         SF << "iface " 
-           << NIC 
-           << "-c" 
+           << "A" 
            << connection()->number() 
-           << "-allowed inet dhcp" 
+           << NIC 
+           << " inet dhcp" 
            << endl;
         SF << "  up echo \"" 
            << NIC 
@@ -139,9 +139,10 @@ short ANetwork::generateFile( SystemFile &SF,
            << endl;
       } else {
         SF << "iface " 
-           << NIC << "-c" 
+           << "A" 
            << connection()->number() 
-           << "-allowed inet static" 
+           << NIC 
+           << " inet static" 
            << endl;
         SF << "  up echo \"" 
            << NIC 

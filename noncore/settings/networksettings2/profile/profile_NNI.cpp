@@ -1,3 +1,4 @@
+#include <qpe/qpeapplication.h>
 #include <opie2/odebug.h>
 #include "profileedit.h"
 #include "profile_NNI.h"
@@ -62,7 +63,11 @@ short AProfile::generateFileEmbedded( SystemFile & SF,
         Log(("Generate Profile for %s\n", SF.name().latin1() ));
         if( Data.TriggerVPN ) {
           // this profile triggers VPN -> insert trigger
-          SF << "  up        networksettings2 --triggervpn" 
+          SF << "  up "
+             << QPEApplication::qpeDir() 
+             << "bin/networksettings2 --triggervpn " 
+             << runtime()->device()->netNode()->nodeClass()->genNic( DevNr )
+             << " || true" 
              << endl;
           rvl = 0;
         }

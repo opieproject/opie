@@ -29,6 +29,10 @@ public :
       inline OProcess & process()
         { return *P; }
 
+      inline void setEchoMode( bool M ) {
+        EchoMode = M;
+      }
+
 public slots :
 
       void SLOT_Stdout( Opie::Core::OProcess * P, char *, int );
@@ -46,6 +50,8 @@ private :
       QString StdoutBuffer;
       QString StderrBuffer;
       OProcess * P;
+      // output all output to my output
+      bool EchoMode;
 };
 
 class InterfaceInfo {
@@ -104,7 +110,7 @@ public :
       int runAsRoot( QStringList & S, MyProcess * Prc = 0 );
 
       // exec command as user
-      int execAsUser( QStringList & Cmd );
+      int execAsUser( QStringList & Cmd, bool Synchronous = 0 );
 
       // refresh stats for this interface
       void refreshStatistics( InterfaceInfo & );

@@ -110,7 +110,7 @@ public :
     Name2Connection_t & connections( void )
       { return ConnectionsMap; }
     Name2Connection_t & danglingConnections( void )
-      { return ConnectionsMap; }
+      { return DanglingConnectionsMap; }
 
     inline bool userKnown( void )
       { return CurrentUser.known(); }
