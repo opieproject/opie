@@ -169,9 +169,6 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
 
 PlayListWidget::~PlayListWidget() {
-    if ( d->current ) {
-        delete d->current;
-    }
     delete d;
 }
 
@@ -428,10 +425,8 @@ const DocLnk *PlayListWidget::current() const { // this is fugly
     assert( currentTab() == CurrentPlayList );
 
 //      qDebug("playlist");
-    if ( mediaPlayerState->isUsingPlaylist() ) {
+    if ( mediaPlayerState->isUsingPlaylist() )
         return d->selectedFiles->current();
-    } else if ( d->setDocumentUsed && d->current )
-        return d->current;
 
     assert( false );
 }

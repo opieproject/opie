@@ -66,7 +66,6 @@ PlayListWidgetGui::PlayListWidgetGui( QWidget* parent, const char* name, WFlags 
 
     d = new PlayListWidgetPrivate;
     d->setDocumentUsed = FALSE;
-    d->current = NULL;
 
     setBackgroundMode( PaletteButton );
     setToolBarsMovable( FALSE );

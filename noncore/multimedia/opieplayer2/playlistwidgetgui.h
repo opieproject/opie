@@ -64,7 +64,6 @@ public:
     QFrame *playListFrame;
     PlayListSelection *selectedFiles;
     bool setDocumentUsed;
-    DocLnk *current;
 };
 
 
