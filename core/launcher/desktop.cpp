@@ -57,7 +57,7 @@ class QCopKeyRegister
 public:
   QCopKeyRegister() : keyCode(0) { }
   QCopKeyRegister(int k, const QString &c, const QString &m) 
-	: keyCode(k), channel(c), message(m) { }
+  : keyCode(k), channel(c), message(m) { }
 
   int getKeyCode() const { return keyCode; }
   QString getChannel() const { return channel; }
@@ -76,10 +76,10 @@ static int loggedin=0;
 static void login(bool at_poweron)
 {
     if ( !loggedin ) {
-	Global::terminateBuiltin("calibrate");
-	Password::authenticate(at_poweron);
-	loggedin=1;
-	QCopEnvelope e( "QPE/Desktop", "unlocked()" );
+  Global::terminateBuiltin("calibrate");
+  Password::authenticate(at_poweron);
+  loggedin=1;
+  QCopEnvelope e( "QPE/Desktop", "unlocked()" );
     }
 }
 
@@ -96,14 +96,14 @@ class DesktopPowerAlerter : public QMessageBox
 {
 public:
     DesktopPowerAlerter( QWidget *parent, const char *name = 0 )
-	: QMessageBox( tr("Battery Status"), "Low Battery",
-		       QMessageBox::Critical,
-		       QMessageBox::Ok | QMessageBox::Default,
-		       QMessageBox::NoButton, QMessageBox::NoButton,
-		       parent, name, FALSE )
+  : QMessageBox( tr("Battery Status"), "Low Battery",
+           QMessageBox::Critical,
+           QMessageBox::Ok | QMessageBox::Default,
+           QMessageBox::NoButton, QMessageBox::NoButton,
+           parent, name, FALSE )
     {
-	currentPriority = INT_MAX;
-	alertCount = 0;
+  currentPriority = INT_MAX;
+  alertCount = 0;
     }
 
     void alert( const QString &text, int priority );
@@ -117,9 +117,9 @@ void DesktopPowerAlerter::alert( const QString &text, int priority )
 {
     alertCount++;
     if ( alertCount < priority )
-	return;
+  return;
     if ( priority > currentPriority )
-	return;
+  return;
     currentPriority = priority;
     setText( text );
     show();
@@ -147,7 +147,7 @@ DesktopApplication::DesktopApplication( int& argc, char **argv, Type t )
 
   channel = new QCopChannel( "QPE/Desktop", this );
   connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-		   this, SLOT(receive(const QCString&, const QByteArray&)) );
+       this, SLOT(receive(const QCString&, const QByteArray&)) );
 }
 
 
@@ -161,17 +161,17 @@ void DesktopApplication::receive( const QCString &msg, const QByteArray &data )
 {
   QDataStream stream( data, IO_ReadOnly );
   if (msg == "keyRegister(int key, QString channel, QString message)")
-	{
-	  int k;
-	  QString c, m;
+  {
+    int k;
+    QString c, m;
 
-	  stream >> k;
-	  stream >> c;
-	  stream >> m;
-	  
-	  qWarning("KeyRegisterRecieved: %i, %s, %s", k, (const char*)c, (const char *)m);
-	  keyRegisterList.append(QCopKeyRegister(k,c,m));
-	} 
+    stream >> k;
+    stream >> c;
+    stream >> m;
+    
+    qWarning("KeyRegisterRecieved: %i, %s, %s", k, (const char*)c, (const char *)m);
+    keyRegisterList.append(QCopKeyRegister(k,c,m));
+  } 
   else if (msg == "suspend()"){
     emit power();
   }
@@ -186,98 +186,98 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
     qpedesktop->checkMemory();
 
     if ( e->type == QWSEvent::Key ) {
-	  QWSKeyEvent *ke = (QWSKeyEvent *)e;
-	  if ( !loggedin && ke->simpleData.keycode != Key_F34 )
-	    return TRUE;
-	  bool press = ke->simpleData.is_press;
+    QWSKeyEvent *ke = (QWSKeyEvent *)e;
+    if ( !loggedin && ke->simpleData.keycode != Key_F34 )
+      return TRUE;
+    bool press = ke->simpleData.is_press;
 
-	  if (!keyRegisterList.isEmpty())
-		{
-		  KeyRegisterList::Iterator it;
-		  for( it = keyRegisterList.begin(); it != keyRegisterList.end(); ++it )
-			{
-			  if ((*it).getKeyCode() == ke->simpleData.keycode)
-				QCopEnvelope((*it).getChannel().utf8(), (*it).getMessage().utf8());
-			}
-		}
-
-	  if ( !keyboardGrabbed() ) {
-	    if ( ke->simpleData.keycode == Key_F9 ) {
-		  if ( press ) emit datebook();
-		  return TRUE;
-	    }
-	    if ( ke->simpleData.keycode == Key_F10 ) {
-	      if ( !press && cardSendTimer ) {
-		    emit contacts();
-		    delete cardSendTimer;
-		  } else if ( press ) {
-		    cardSendTimer = new QTimer();
-		    cardSendTimer->start( 2000, TRUE );
-		    connect( cardSendTimer, SIGNAL( timeout() ), this, SLOT( sendCard() ) );
-		  }
-		  return TRUE;
-	    }
-	    /* menu key now opens application menu/toolbar
-		   if ( ke->simpleData.keycode == Key_F11 ) {
-		   if ( press ) emit menu();
-		   return TRUE;
-		   }
-	    */
-	    if ( ke->simpleData.keycode == Key_F12 ) {
-		  while( activePopupWidget() )
-		    activePopupWidget()->close();
-		  if ( press ) emit launch();
-		  return TRUE;
-	    }
-	    if ( ke->simpleData.keycode == Key_F13 ) {
-		  if ( press ) emit email();
-		  return TRUE;
-	    }
-	  }
-
-	  if ( ke->simpleData.keycode == Key_F34 ) {
-	    if ( press ) emit power();
-	    return TRUE;
-	  }
-	  if ( ke->simpleData.keycode == Key_SysReq ) {
-	    if ( press ) emit power();
-	    return TRUE;
-	  }
-	  if ( ke->simpleData.keycode == Key_F35 ) {
-	    if ( press ) emit backlight();
-	    return TRUE;
-	  }
-	  if ( ke->simpleData.keycode == Key_F32 ) {
-	    if ( press ) QCopEnvelope e( "QPE/Desktop", "startSync()" );
-	    return TRUE;
-	  }
-	  if ( ke->simpleData.keycode == Key_F31 && !ke->simpleData.modifiers ) {
-	    if ( press ) emit symbol();
-	    return TRUE;
-	  }
-	  if ( ke->simpleData.keycode == Key_NumLock ) {
-	    if ( press ) emit numLockStateToggle();
-	  }
-	  if ( ke->simpleData.keycode == Key_CapsLock ) {
-	    if ( press ) emit capsLockStateToggle();
-	  }
-	  if ( press )
-	    qpedesktop->keyClick();
-    } else {
-	  if ( e->type == QWSEvent::Mouse ) {
-	    QWSMouseEvent *me = (QWSMouseEvent *)e;
-	    static bool up = TRUE;
-	    if ( me->simpleData.state&LeftButton ) {
-		  if ( up ) {
-		    up = FALSE;
-		    qpedesktop->screenClick();
-		  }
-	    } else {
-		  up = TRUE;
-	    }
-	  }
+    if (!keyRegisterList.isEmpty())
+    {
+      KeyRegisterList::Iterator it;
+      for( it = keyRegisterList.begin(); it != keyRegisterList.end(); ++it )
+      {
+        if ((*it).getKeyCode() == ke->simpleData.keycode)
+        QCopEnvelope((*it).getChannel().utf8(), (*it).getMessage().utf8());
+      }
     }
-	
+
+    if ( !keyboardGrabbed() ) {
+      if ( ke->simpleData.keycode == Key_F9 ) {
+      if ( press ) emit datebook();
+      return TRUE;
+      }
+      if ( ke->simpleData.keycode == Key_F10 ) {
+        if ( !press && cardSendTimer ) {
+        emit contacts();
+        delete cardSendTimer;
+      } else if ( press ) {
+        cardSendTimer = new QTimer();
+        cardSendTimer->start( 2000, TRUE );
+        connect( cardSendTimer, SIGNAL( timeout() ), this, SLOT( sendCard() ) );
+      }
+      return TRUE;
+      }
+      /* menu key now opens application menu/toolbar
+       if ( ke->simpleData.keycode == Key_F11 ) {
+       if ( press ) emit menu();
+       return TRUE;
+       }
+      */
+      if ( ke->simpleData.keycode == Key_F12 ) {
+      while( activePopupWidget() )
+        activePopupWidget()->close();
+      if ( press ) emit launch();
+      return TRUE;
+      }
+      if ( ke->simpleData.keycode == Key_F13 ) {
+      if ( press ) emit email();
+      return TRUE;
+      }
+    }
+
+    if ( ke->simpleData.keycode == Key_F34 ) {
+      if ( press ) emit power();
+      return TRUE;
+    }
+    if ( ke->simpleData.keycode == Key_SysReq ) {
+      if ( press ) emit power();
+      return TRUE;
+    }
+    if ( ke->simpleData.keycode == Key_F35 ) {
+      if ( press ) emit backlight();
+      return TRUE;
+    }
+    if ( ke->simpleData.keycode == Key_F32 ) {
+      if ( press ) QCopEnvelope e( "QPE/Desktop", "startSync()" );
+      return TRUE;
+    }
+    if ( ke->simpleData.keycode == Key_F31 && !ke->simpleData.modifiers ) {
+      if ( press ) emit symbol();
+      return TRUE;
+    }
+    if ( ke->simpleData.keycode == Key_NumLock ) {
+      if ( press ) emit numLockStateToggle();
+    }
+    if ( ke->simpleData.keycode == Key_CapsLock ) {
+      if ( press ) emit capsLockStateToggle();
+    }
+    if ( press )
+      qpedesktop->keyClick();
+    } else {
+    if ( e->type == QWSEvent::Mouse ) {
+      QWSMouseEvent *me = (QWSMouseEvent *)e;
+      static bool up = TRUE;
+      if ( me->simpleData.state&LeftButton ) {
+      if ( up ) {
+        up = FALSE;
+        qpedesktop->screenClick();
+      }
+      } else {
+      up = TRUE;
+      }
+    }
+    }
+  
     return QPEApplication::qwsEventFilter( e );
 }
 #endif
@@ -289,16 +289,16 @@ void DesktopApplication::psTimeout()
     *ps = PowerStatusManager::readStatus();
 
     if ( (ps->batteryStatus() == PowerStatus::VeryLow ) ) {
-	pa->alert( tr( "Battery is running very low." ), 6 );
+  pa->alert( tr( "Battery is running very low." ), 6 );
     }
 
     if (  ps->batteryStatus() == PowerStatus::Critical ) {
-	pa->alert(  tr( "Battery level is critical!\n"
-			"Keep power off until power restored!" ), 1 );
+  pa->alert(  tr( "Battery level is critical!\n"
+      "Keep power off until power restored!" ), 1 );
     }
 
     if (  ps->backupBatteryStatus() == PowerStatus::VeryLow ) {
-	pa->alert( tr( "The Back-up battery is very low.\nPlease charge the back-up battery." ), 3 );
+  pa->alert( tr( "The Back-up battery is very low.\nPlease charge the back-up battery." ), 3 );
     }
 }
 
@@ -311,9 +311,9 @@ void DesktopApplication::sendCard()
     card += "/Applications/addressbook/businesscard.vcf";
 
     if ( QFile::exists( card ) ) {
-	QCopEnvelope e("QPE/Obex", "send(QString,QString,QString)");
-	QString mimetype = "text/x-vCard";
-	e << tr("business card") << card << mimetype;
+  QCopEnvelope e("QPE/Obex", "send(QString,QString,QString)");
+  QString mimetype = "text/x-vCard";
+  e << tr("business card") << card << mimetype;
     }
 }
 
@@ -400,36 +400,36 @@ void Desktop::checkMemory()
     static bool existingMessage=FALSE;
 
     if(existingMessage)
-	return; // don't show a second message while still on first
+  return; // don't show a second message while still on first
 
     existingMessage = TRUE;
     switch ( memstate ) {
-	case Unknown:
-	    break;
-	case Low:
-	    memstate = Unknown;
-	    if ( recoverMemory() )
-		ignoreNormal = TRUE;
-	    else
-		QMessageBox::warning( 0 , "Memory Status",
-		    "The memory smacks of shortage. \n"
-		    "Please save data. " );
-	    break;
-	case Normal:
-	    memstate = Unknown;
-	    if ( ignoreNormal )
-		ignoreNormal = FALSE;
-	    else
-		QMessageBox::information ( 0 , "Memory Status",
-		    "There is enough memory again." );
-	    break;
-	case VeryLow:
-	    memstate = Unknown;
-	    QMessageBox::critical( 0 , "Memory Status",
-		"The memory is very low. \n"
-		"Please end this application \n"
-		"immediately." );
-	    recoverMemory();
+  case Unknown:
+      break;
+  case Low:
+      memstate = Unknown;
+      if ( recoverMemory() )
+    ignoreNormal = TRUE;
+      else
+    QMessageBox::warning( 0 , "Memory Status",
+        "The memory smacks of shortage. \n"
+        "Please save data. " );
+      break;
+  case Normal:
+      memstate = Unknown;
+      if ( ignoreNormal )
+    ignoreNormal = FALSE;
+      else
+    QMessageBox::information ( 0 , "Memory Status",
+        "There is enough memory again." );
+      break;
+  case VeryLow:
+      memstate = Unknown;
+      QMessageBox::critical( 0 , "Memory Status",
+    "The memory is very low. \n"
+    "Please end this application \n"
+    "immediately." );
+      recoverMemory();
     }
     existingMessage = FALSE;
 #endif
@@ -440,8 +440,8 @@ static bool isVisibleWindow(int wid)
     const QList<QWSWindow> &list = qwsServer->clientWindows();
     QWSWindow* w;
     for (QListIterator<QWSWindow> it(list); (w=it.current()); ++it) {
-	if ( w->winId() == wid )
-	    return !w->isFullyObscured();
+  if ( w->winId() == wid )
+      return !w->isFullyObscured();
     }
     return FALSE;
 }
@@ -451,57 +451,99 @@ static bool hasVisibleWindow(const QString& clientname)
     const QList<QWSWindow> &list = qwsServer->clientWindows();
     QWSWindow* w;
     for (QListIterator<QWSWindow> it(list); (w=it.current()); ++it) {
-	if ( w->client()->identity() == clientname && !w->isFullyObscured() )
-	    return TRUE;
+  if ( w->client()->identity() == clientname && !w->isFullyObscured() )
+      return TRUE;
     }
     return FALSE;
 }
 
 void Desktop::raiseLauncher()
 {
-    if ( isVisibleWindow(launcher->winId()) )
-	launcher->nextView();
-    else
-	launcher->raise();
+    Config cfg("qpe"); //F12 'Home'
+    cfg.setGroup("AppsKey");
+    QString tempItem;
+    tempItem = cfg.readEntry("Middle","Home");
+    if(tempItem == "Home" || tempItem.isEmpty()) {
+        if ( isVisibleWindow(launcher->winId()) )
+            launcher->nextView();
+        else
+            launcher->raise();
+    } else {
+        QCopEnvelope e("QPE/System","execute(QString)");
+        e << tempItem;
+    }
 }
 
 void Desktop::executeOrModify(const QString& appLnkFile)
 {
     AppLnk lnk(MimeType::appsFolderName() + "/" + appLnkFile);
     if ( lnk.isValid() ) {
-	QCString app = lnk.exec().utf8();
-	Global::terminateBuiltin("calibrate");
-	if ( QCopChannel::isRegistered("QPE/Application/" + app) ) {
-	    MRUList::addTask(&lnk);
-	    if ( hasVisibleWindow(app) )
-		QCopChannel::send("QPE/Application/" + app, "nextView()");
-	    else
-		QCopChannel::send("QPE/Application/" + app, "raise()");
-	} else {
-	    lnk.execute();
-	}
+  QCString app = lnk.exec().utf8();
+  Global::terminateBuiltin("calibrate");
+  if ( QCopChannel::isRegistered("QPE/Application/" + app) ) {
+      MRUList::addTask(&lnk);
+      if ( hasVisibleWindow(app) )
+    QCopChannel::send("QPE/Application/" + app, "nextView()");
+      else
+    QCopChannel::send("QPE/Application/" + app, "raise()");
+  } else {
+      lnk.execute();
+  }
     }
 }
 
 void Desktop::raiseDatebook()
 {
-    executeOrModify("Applications/datebook.desktop");
+    Config cfg("qpe"); //F9 'Activity'
+    cfg.setGroup("AppsKey");
+    QString tempItem;
+    tempItem = cfg.readEntry("LeftEnd","Calender");
+    if(tempItem == "Calender" || tempItem.isEmpty())  executeOrModify("Applications/datebook.desktop");
+    else {
+        QCopEnvelope e("QPE/System","execute(QString)");
+        e << tempItem;
+    }
 }
 
 void Desktop::raiseContacts()
 {
-    executeOrModify("Applications/addressbook.desktop");
+    Config cfg("qpe"); //F10, 'Contacts'
+    cfg.setGroup("AppsKey");
+    QString tempItem;
+    tempItem = cfg.readEntry("Left2nd","Address Book");
+    if(tempItem == "Address Book" || tempItem.isEmpty())  executeOrModify("Applications/addressbook.desktop");
+    else {
+        QCopEnvelope e("QPE/System","execute(QString)");
+        e << tempItem;
+    }
 }
 
 void Desktop::raiseMenu()
 {
+    Config cfg("qpe"); //F11, 'Menu'
+    cfg.setGroup("AppsKey");
+    QString tempItem;
+    tempItem = cfg.readEntry("Right2nd","Popup Menu");
+    if(tempItem == "Popup Menu" || tempItem.isEmpty()) {
     Global::terminateBuiltin("calibrate");
     tb->startMenu()->launch();
+    } else {
+        QCopEnvelope e("QPE/System","execute(QString)");
+        e << tempItem;
+    }
 }
 
 void Desktop::raiseEmail()
 {
-    executeOrModify("Applications/qtmail.desktop");
+    Config cfg("qpe"); //F13, 'Mail'
+    cfg.setGroup("AppsKey");
+    QString tempItem;
+    tempItem = cfg.readEntry("RightEnd","Mail");
+    if(tempItem == "Mail" || tempItem == "qtmail" || tempItem.isEmpty())  executeOrModify("Applications/qtmail.desktop");
+    else {
+        QCopEnvelope e("QPE/System","execute(QString)");
+        e << tempItem;
+    }
 }
 
 // autoStarts apps on resume and start
@@ -609,29 +651,29 @@ void Desktop::styleChange( QStyle &s )
 void DesktopApplication::shutdown()
 {
     if ( type() != GuiServer )
-	return;
+  return;
     ShutdownImpl *sd = new ShutdownImpl( 0, 0, WDestructiveClose );
     connect( sd, SIGNAL(shutdown(ShutdownImpl::Type)),
-	     this, SLOT(shutdown(ShutdownImpl::Type)) );
+       this, SLOT(shutdown(ShutdownImpl::Type)) );
     sd->showMaximized();
 }
 
 void DesktopApplication::shutdown( ShutdownImpl::Type t )
 {
     switch ( t ) {
-	case ShutdownImpl::ShutdownSystem:
-	    execlp("shutdown", "shutdown", "-h", "now", (void*)0);
-	    break;
-	case ShutdownImpl::RebootSystem:
-	    execlp("shutdown", "shutdown", "-r", "now", (void*)0);
-	    break;
-	case ShutdownImpl::RestartDesktop:
-	    restart();
-	    break;
-	case ShutdownImpl::TerminateDesktop:
-	    prepareForTermination(FALSE);
-	    quit();
-	    break;
+  case ShutdownImpl::ShutdownSystem:
+      execlp("shutdown", "shutdown", "-h", "now", (void*)0);
+      break;
+  case ShutdownImpl::RebootSystem:
+      execlp("shutdown", "shutdown", "-r", "now", (void*)0);
+      break;
+  case ShutdownImpl::RestartDesktop:
+      restart();
+      break;
+  case ShutdownImpl::TerminateDesktop:
+      prepareForTermination(FALSE);
+      quit();
+      break;
     }
 }
 
@@ -641,7 +683,7 @@ void DesktopApplication::restart()
 
 #ifdef Q_WS_QWS
     for ( int fd = 3; fd < 100; fd++ )
-	close( fd );
+  close( fd );
 #if defined(QT_DEMO_SINGLE_FLOPPY)
     execl( "/sbin/init", "qpe", 0 );
 #elif defined(QT_QWS_CASSIOPEIA)
@@ -658,17 +700,17 @@ void Desktop::startTransferServer()
     // start qcop bridge server
     qcopBridge = new QCopBridge( 4243 );
     if ( !qcopBridge->ok() ) {
-	delete qcopBridge;
-	qcopBridge = 0;
+  delete qcopBridge;
+  qcopBridge = 0;
     }
     // start transfer server
     transferServer = new TransferServer( 4242 );
     if ( !transferServer->ok() ) {
-	delete transferServer;
-	transferServer = 0;
+  delete transferServer;
+  transferServer = 0;
     }
     if ( !transferServer || !qcopBridge )
-	startTimer( 2000 );
+  startTimer( 2000 );
 }
 
 void Desktop::timerEvent( QTimerEvent *e )
@@ -697,7 +739,7 @@ void Desktop::keyClick()
 {
 #ifdef CUSTOM_SOUND_KEYCLICK
     if ( keyclick )
-	CUSTOM_SOUND_KEYCLICK;
+  CUSTOM_SOUND_KEYCLICK;
 #endif
 }
 
@@ -705,7 +747,7 @@ void Desktop::screenClick()
 {
 #ifdef CUSTOM_SOUND_TOUCH
     if ( touchclick )
-	CUSTOM_SOUND_TOUCH;
+  CUSTOM_SOUND_TOUCH;
 #endif
 }
 
@@ -719,15 +761,15 @@ void Desktop::soundAlarm()
 bool Desktop::eventFilter( QObject *w, QEvent *ev )
 {
     if ( ev->type() == QEvent::KeyPress ) {
-	QKeyEvent *ke = (QKeyEvent *)ev;
-	if ( ke->key() == Qt::Key_F11 ) { // menu key
-	    QWidget *active = qApp->activeWindow();
-	    if ( active && active->isPopup() ) {
-		active->close();
-	    }
-	    raiseMenu();
-	    return TRUE;
-	}
+  QKeyEvent *ke = (QKeyEvent *)ev;
+  if ( ke->key() == Qt::Key_F11 ) { // menu key
+      QWidget *active = qApp->activeWindow();
+      if ( active && active->isPopup() ) {
+    active->close();
+      }
+      raiseMenu();
+      return TRUE;
+  }
     }
     return FALSE;
 }
