@@ -1,7 +1,5 @@
 <chapter>
 <title>Translations</title>
-<section>
-
 	<para>
 		The &opie;-Project tries to offer the support for as many languages
 		as possible.  In this chapter the process of translating &opie; and its
@@ -17,7 +15,6 @@
 		possible and see how easy it is to give something very much respected to
 		the open-source community.
 	</para>
-</section> 
 
 <section>
 	<title>Preferences</title> 
@@ -150,6 +147,7 @@
 
 <section>
 	<title>Do's and don'ts</title> 
+	<para>
 	There are certain things that should only be done be the
 	translationcoordinator or one of the core developers.
 	<itemizedlist mark='opencircle'>
@@ -186,6 +184,7 @@
 		</para>
 		</listitem>
 	</itemizedlist>
+	</para>
 </section> 
 
 </chapter>
