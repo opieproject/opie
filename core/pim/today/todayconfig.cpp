@@ -30,6 +30,7 @@
 #include <qvbox.h>
 #include <qtoolbutton.h>
 #include <qtooltip.h>
+#include <qwhatsthis.h>
 
 class ToolButton : public QToolButton {
 
@@ -50,8 +51,8 @@ public:
  * By that way it would be real easy to have it as seperate app in settings tab
  *
  */
-TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal, WFlags fl )
-    : QDialog( parent, name, modal, fl ) {
+TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal )
+    : QDialog( parent, name, modal, WStyle_ContextHelp ) {
 
     setCaption( tr( "Today config" ) );
 
@@ -80,17 +81,22 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal, WFlags 
     QHBox *hbox_auto = new QHBox( tab_3 );
     TextLabel2 = new QLabel( hbox_auto, "AutoStart" );
     TextLabel2->setText( tr( "autostart on \nresume?\n (Opie only)" ) );
+    QWhatsThis::add( TextLabel2 , tr( "Check this if today should be autostarted on resume." ) );
     CheckBoxAuto = new QCheckBox( hbox_auto, "CheckBoxAuto" );
+    QWhatsThis::add( CheckBoxAuto, tr( "Check this if today should be autostarted on resume." ) );
     QHBox *hbox_inactive = new QHBox( tab_3 );
     TimeLabel = new QLabel( hbox_inactive, "TimeLabel" );
     TimeLabel->setText( tr( "minutes inactive" ) );
+    QWhatsThis::add( TimeLabel , tr( "How many minutes has the PDA been suspended before the autostart feature kicks in on resume" ) );
     SpinBoxTime = new QSpinBox( hbox_inactive, "TimeSpinner" );
+    QWhatsThis::add( SpinBoxTime , tr( "How many minutes has the PDA been suspended before the autostart feature kicks in on resume" ) );
     QHBox *hbox_iconSize = new QHBox( tab_3 );
     QLabel *iconSizeLabel = new QLabel( hbox_iconSize, "iconSizeLabel" );
     iconSizeLabel->setText( tr( "Icon size" ) );
-    //  iconSizeLabel->setToolTip( tr( "Set the icon size in pixel" ) );
+    QWhatsThis::add( iconSizeLabel, tr( "Set the icon size in pixel" ) );
     SpinBoxIconSize = new QSpinBox( hbox_iconSize, "TimeSpinner" );
     SpinBoxIconSize->setMaxValue( 32 );
+    QWhatsThis::add( SpinBoxIconSize, tr( "Set the icon size in pixel" ) );
 
     tab3Layout->addWidget( hbox_auto );
     tab3Layout->addWidget( hbox_inactive );

@@ -65,7 +65,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   TodayLabel_font.setPointSize( 40 );
   TodayLabel->setFont( TodayLabel_font );
   TodayLabel->setBackgroundOrigin( QLabel::ParentOrigin );
-  TodayLabel->setText( "<font color=#FFFFFF>" + tr("Today²") +"</font>" );
+  TodayLabel->setText( "<font color=#FFFFFF>" + tr("Today") +"</font>" );
 
   // date
   DateLabel = new QLabel( Frame, "TextLabel1" );

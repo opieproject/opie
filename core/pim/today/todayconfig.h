@@ -32,7 +32,7 @@ class TodayConfig : public QDialog {
     Q_OBJECT
 
 public:
-    TodayConfig( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    TodayConfig( QWidget* parent = 0, const char* name = 0, bool modal = FALSE );
     ~TodayConfig();
 
     OTabWidget* TabWidget3;
