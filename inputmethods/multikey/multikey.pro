@@ -14,17 +14,17 @@ LIBS            += -lqpe -L$(OPIEDIR)/plugins/inputmethods -lqpickboard
 QMAKE_LFLAGS	+= -Wl,-rpath,/opt/QtPalmtop/plugins/inputmethods
 VERSION		= 1.0.0
 
-TRANSLATIONS    = ../../i18n/pt_BR/libqmultikey.ts
-   += ../../i18n/de/libqmultikey.ts
-   += ../../i18n/xx/libqmultikey.ts
-   += ../../i18n/en/libqmultikey.ts
-   += ../../i18n/hu/libqmultikey.ts
-   += ../../i18n/sl/libqmultikey.ts
-   += ../../i18n/ja/libqmultikey.ts
-   += ../../i18n/ko/libqmultikey.ts
-   += ../../i18n/pl/libqmultikey.ts
-   += ../../i18n/no/libqmultikey.ts
-   += ../../i18n/zh_CN/libqmultikey.ts
-   += ../../i18n/zh_TW/libqmultikey.ts
-   += ../../i18n/fr/libqmultikey.ts
-   += ../../i18n/da/libqmultikey.ts
+TRANSLATIONS    = ../../i18n/pt_BR/libqmultikey.ts \
+ ../../i18n/de/libqmultikey.ts \
+ ../../i18n/xx/libqmultikey.ts \
+ ../../i18n/en/libqmultikey.ts \
+ ../../i18n/hu/libqmultikey.ts \
+ ../../i18n/sl/libqmultikey.ts \
+ ../../i18n/ja/libqmultikey.ts \
+ ../../i18n/ko/libqmultikey.ts \
+ ../../i18n/pl/libqmultikey.ts \
+ ../../i18n/no/libqmultikey.ts \
+ ../../i18n/zh_CN/libqmultikey.ts \
+ ../../i18n/zh_TW/libqmultikey.ts \
+ ../../i18n/fr/libqmultikey.ts \
+ ../../i18n/da/libqmultikey.ts
