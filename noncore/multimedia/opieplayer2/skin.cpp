@@ -27,6 +27,17 @@
 
 #include <assert.h>
 
+struct SkinData
+{
+    typedef QMap<QString, QImage> ButtonMaskImageMap;
+
+    QImage backgroundImage;
+    QImage buttonUpImage;
+    QImage buttonDownImage;
+    QImage buttonMask;
+    ButtonMaskImageMap buttonMasks;
+};
+
 Skin::Skin( const QString &name, const QString &fileNameInfix )
     : m_fileNameInfix( fileNameInfix )
 {
@@ -39,9 +50,15 @@ Skin::Skin( const QString &fileNameInfix )
     init( defaultSkinName() );
 }
 
+Skin::~Skin()
+{
+    delete d;
+}
+
 void Skin::init( const QString &name )
 {
     m_skinPath = "opieplayer2/skins/" + name;
+    d = new SkinData;
 }
 
 void Skin::preload( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount )
@@ -54,39 +71,39 @@ void Skin::preload( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint butt
 
 QImage Skin::backgroundImage() const
 {
-    if ( m_backgroundImage.isNull() )
-        m_backgroundImage = SkinCache::self().loadImage( QString( "%1/background" ).arg( m_skinPath ) );
-    return m_backgroundImage;
+    if ( d->backgroundImage.isNull() )
+        d->backgroundImage = SkinCache::self().loadImage( QString( "%1/background" ).arg( m_skinPath ) );
+    return d->backgroundImage;
 }
 
 QImage Skin::buttonUpImage() const
 {
-    if ( m_buttonUpImage.isNull() )
-        m_buttonUpImage = SkinCache::self().loadImage( QString( "%1/skin%2_up" ).arg( m_skinPath ).arg( m_fileNameInfix ) );
-    return m_buttonUpImage;
+    if ( d->buttonUpImage.isNull() )
+        d->buttonUpImage = SkinCache::self().loadImage( QString( "%1/skin%2_up" ).arg( m_skinPath ).arg( m_fileNameInfix ) );
+    return d->buttonUpImage;
 }
 
 QImage Skin::buttonDownImage() const
 {
-    if ( m_buttonDownImage.isNull() )
-        m_buttonDownImage = SkinCache::self().loadImage( QString( "%1/skin%2_down" ).arg( m_skinPath ).arg( m_fileNameInfix ) );
-    return m_buttonDownImage;
+    if ( d->buttonDownImage.isNull() )
+        d->buttonDownImage = SkinCache::self().loadImage( QString( "%1/skin%2_down" ).arg( m_skinPath ).arg( m_fileNameInfix ) );
+    return d->buttonDownImage;
 }
 
 QImage Skin::buttonMask( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount ) const
 {
-    if ( !m_buttonMask.isNull() )
-        return m_buttonMask;
+    if ( !d->buttonMask.isNull() )
+        return d->buttonMask;
 
     QSize buttonAreaSize = buttonUpImage().size();
 
-    m_buttonMask = QImage( buttonAreaSize, 8, 255 );
-    m_buttonMask.fill( 0 );
+    d->buttonMask = QImage( buttonAreaSize, 8, 255 );
+    d->buttonMask.fill( 0 );
 
     for ( uint i = 0; i < buttonCount; ++i )
         addButtonToMask( skinButtonInfo[ i ].command + 1, buttonMaskImage( skinButtonInfo[ i ].fileName ) );
 
-    return m_buttonMask;
+    return d->buttonMask;
 }
 
 void Skin::addButtonToMask( int tag, const QImage &maskImage ) const
@@ -94,10 +111,10 @@ void Skin::addButtonToMask( int tag, const QImage &maskImage ) const
     if ( maskImage.isNull() )
         return;
 
-    uchar **dest = m_buttonMask.jumpTable();
-    for ( int y = 0; y < m_buttonMask.height(); y++ ) {
+    uchar **dest = d->buttonMask.jumpTable();
+    for ( int y = 0; y < d->buttonMask.height(); y++ ) {
         uchar *line = dest[y];
-        for ( int x = 0; x < m_buttonMask.width(); x++ )
+        for ( int x = 0; x < d->buttonMask.width(); x++ )
             if ( !qRed( maskImage.pixel( x, y ) ) )
                 line[x] = tag;
     }
@@ -105,11 +122,11 @@ void Skin::addButtonToMask( int tag, const QImage &maskImage ) const
 
 QImage Skin::buttonMaskImage( const QString &fileName ) const
 {
-    ButtonMaskImageMap::Iterator it = m_buttonMasks.find( fileName );
-    if ( it == m_buttonMasks.end() ) {
+    SkinData::ButtonMaskImageMap::Iterator it = d->buttonMasks.find( fileName );
+    if ( it == d->buttonMasks.end() ) {
         QString prefix = m_skinPath + QString::fromLatin1( "/skin%1_mask_" ).arg( m_fileNameInfix );
         QString path = prefix + fileName + ".png";
-        it = m_buttonMasks.insert( fileName, SkinCache::self().loadImage( path ) );
+        it = d->buttonMasks.insert( fileName, SkinCache::self().loadImage( path ) );
     }
     return *it;
 }

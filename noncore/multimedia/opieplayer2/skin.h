@@ -32,11 +32,14 @@
 #include "threadutil.h"
 #include "singleton.h"
 
+struct SkinData;
+
 class Skin
 {
 public:
     Skin( const QString &name, const QString &fileNameInfix );
     Skin( const QString &fileNameInfix );
+    ~Skin();
 
     void preload( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount );
 
@@ -58,13 +61,7 @@ private:
     QString m_fileNameInfix;
     QString m_skinPath;
 
-    typedef QMap<QString, QImage> ButtonMaskImageMap;
-
-    mutable QImage m_backgroundImage;
-    mutable QImage m_buttonUpImage;
-    mutable QImage m_buttonDownImage;
-    mutable QImage m_buttonMask;
-    mutable ButtonMaskImageMap m_buttonMasks;
+    SkinData *d;
 
     Skin( const Skin & );
     Skin &operator=( const Skin & );
