@@ -97,7 +97,7 @@ void Keyboard::resizeEvent(QResizeEvent*)
 {
     int ph = picks->sizeHint().height();
     picks->setGeometry( 0, 0, width(), ph );
-    keyHeight = (height()-(usePicks ? ph : 0))/keys->rows();
+    keyHeight = (height()-(usePicks ? ph : 0))/(keys->rows()?keys->rows():1);
 
     int nk; // number of keys?
     if ( useLargeKeys ) {
@@ -1321,7 +1321,10 @@ Keys::Keys() {
                 + l + ".keymap";
 
     } 
-
+    if (map.isNull() || !(QFile(map).exists())) {
+        map = QPEApplication::qpeDir() + "/share/multikey/en.keymap";
+    }
+    
     setKeysFromFile(map);
 }
 

@@ -78,7 +78,6 @@ QPixmap *KeyboardImpl::icon()
 QString KeyboardImpl::name()
 {
     return qApp->translate( "InputMethods", "Multikey" );
-//    return qApp->translate( "InputMethods", "Opti" );
 }
 
 void KeyboardImpl::onKeyPress( QObject *receiver, const char *slot )
