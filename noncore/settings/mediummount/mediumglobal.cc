@@ -7,6 +7,7 @@
 #include <qlayout.h>
 #include <qframe.h>
 #include <qgroupbox.h>
+#include <qwhatsthis.h>
 
 #include <qpe/config.h>
 
@@ -31,18 +32,20 @@ void MediumGlobalWidget::initGUI()
 
   m_label = new QLabel( this );
   m_label->setTextFormat( Qt::RichText );
-  m_label->setText( tr("If a medium gets inserted into this device Opie "
-		       "tries to search the medium for Dcouments. On "
-		       "large mediums this can take some time. You can choose "
-		       "if Opie should scan for Documents globally or on a "
-		       "per medium level. You're also able to reconfigure "
-		       "each medium."
-		       ) );
+  m_label->setText( tr("") );
+  QWhatsThis::add( this, ("If a medium gets inserted into this device Opie "
+           "tries to search the medium for Dcouments. On "
+           "large mediums this can take some time. You can choose "
+           "if Opie should scan for Documents globally or on a "
+           "per medium level. You're also able to reconfigure "
+           "each medium."
+           ) );
+  
   m_layout->addWidget( m_label );
 
   m_check = new QCheckBox( tr("Enable medium checking" ), this );
   connect( m_check, SIGNAL(stateChanged(int) ),
-	   this, SLOT(slotEnableChecking() ) );
+     this, SLOT(slotEnableChecking() ) );
   m_layout->addWidget(m_check );
 
   m_frame = new QFrame(this, "Frame" );
@@ -53,7 +56,7 @@ void MediumGlobalWidget::initGUI()
   m_box->setMargin( 5 );
   m_useglobal = new QCheckBox( tr("Use global settings"), m_frame );
   connect( m_useglobal, SIGNAL( stateChanged(int) ),
-	   this, SLOT( slotGlobalChanged() ) );
+     this, SLOT( slotGlobalChanged() ) );
 
   m_box->addWidget( m_useglobal );
 
@@ -62,8 +65,8 @@ void MediumGlobalWidget::initGUI()
   m_frameLay->setMargin( 12 );
 
   QSpacerItem *item2 = new QSpacerItem( 5, 8,
-					QSizePolicy::Fixed,
-					QSizePolicy::Fixed );					
+          QSizePolicy::Fixed,
+          QSizePolicy::Fixed );         
   m_audio = new QCheckBox( tr("Audio"), m_global );
   m_all   = new QCheckBox( tr("All")  , m_global );
   m_image = new QCheckBox( tr("Image"), m_global );
@@ -71,7 +74,7 @@ void MediumGlobalWidget::initGUI()
   m_video = new QCheckBox( tr("Video"), m_global );
 
   connect(m_all, SIGNAL(stateChanged(int) ),
-	  this, SLOT(slotAllChanged()  ) );
+    this, SLOT(slotAllChanged()  ) );
 
   m_frameLay->addItem( item2, 0, 0 );
 
@@ -91,8 +94,8 @@ void MediumGlobalWidget::initGUI()
   m_layout->addWidget( m_frame );
 
   QSpacerItem *item1 = new QSpacerItem( 1, 24,
-					QSizePolicy::Fixed,
-					QSizePolicy::Expanding );
+          QSizePolicy::Fixed,
+          QSizePolicy::Expanding );
   m_layout->addItem( item1 );
 }
 void MediumGlobalWidget::readConfig()

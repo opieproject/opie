@@ -13,8 +13,8 @@
 using namespace MediumMountSetting;
 
 
-MainWindow::MainWindow( QWidget *parent, const char *name )
-  : QMainWindow( parent, name )
+MainWindow::MainWindow( QWidget *parent, const char *name, WFlags )
+  : QMainWindow( parent, name, WStyle_ContextHelp  )
 
 {
   //  m_lay = new QVBoxLayout( this );
