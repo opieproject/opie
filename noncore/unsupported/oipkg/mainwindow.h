@@ -52,7 +52,8 @@ protected slots:
   void displayList();
   void subSectionChanged();
   void sectionChanged();
-  void showSettings();
+  void showSettings(int);
+  void showSettingsSetup();
   void showSettingsSrv();
   void showSettingsDst();
 

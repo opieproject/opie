@@ -125,7 +125,7 @@ void MainWindow::makeMenu()
   cfgact = new QAction( tr( "Setups" ),
 			QString::null, 0, this, 0 );
   connect( cfgact, SIGNAL( activated() ),
-	   SLOT( showSettings() ) );
+	   SLOT( showSettingsSetup() ) );
   cfgact->addTo( cfgMenu );
 		
   cfgact = new QAction( tr( "Servers" ),
@@ -224,7 +224,7 @@ void MainWindow::makeMenu()
   setComboName(destination,settings->getDestinationName());
   connect( destination, SIGNAL(activated(int)),
   			 settings, SLOT(activeDestinationChange(int)) );
-  spacer = new QLabel( " ", destBar );
+//  spacer = new QLabel( " ", destBar );
 //  spacer->setBackgroundMode( PaletteForeground );
   CheckBoxLink = new QCheckBox( tr("Link"), destBar);
 //  CheckBoxLink->setBackgroundMode( PaletteForeground );
@@ -238,7 +238,7 @@ void MainWindow::makeMenu()
   a->addTo( destBar );
   destBar->setStretchableWidget( CheckBoxLink );
   destAction->setToggleAction( true );
- // destAction->addTo( viewMenu );
+  destAction->addTo( viewMenu );
 
 //   helpMenu
   helpMenu->insertSeparator();
@@ -385,20 +385,26 @@ void MainWindow::setSubSections()
 }
 
 
-void MainWindow::showSettings()
+void MainWindow::showSettings(int i)
 {
-  if ( settings->showDialog( 0 ) )
+  if ( settings->showDialog( i ) )
+  {
     updateList();
+  }
+ 	setComboName(destination,settings->getDestinationName());
+  CheckBoxLink->setChecked( settings->createLinks() );
+}
+void MainWindow::showSettingsSetup()
+{
+	showSettings(0);
 }
 void MainWindow::showSettingsSrv()
 {
-  if ( settings->showDialog( 1 ) )
-    updateList();
+	showSettings(1);
 }
 void MainWindow::showSettingsDst()
 {
-  if ( settings->showDialog( 2 ) )
-    updateList();
+	showSettings(2);
 }
 
 void MainWindow::sectionShow(bool b)

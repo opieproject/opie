@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>337</width>
+            <width>333</width>
             <height>454</height>
         </rect>
     </property>
@@ -215,7 +215,7 @@
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>Used servers:</string>
+                                    <string>Used servers: (Highlighted feeds are active)</string>
                                 </property>
                             </widget>
                             <spacer>

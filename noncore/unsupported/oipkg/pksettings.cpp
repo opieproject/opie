@@ -59,6 +59,13 @@ PackageManagerSettings::PackageManagerSettings( QWidget* parent,  const char* na
   readSettings();
 	activeLinkDestination->hide();
   serverChanged = false;
+
+  // get rid of setups
+//  Settings->hide();
+  settingName->hide();
+  newsetting->hide();
+  renamesetting->hide();
+  removesetting->hide();
 }
 
 PackageManagerSettings::~PackageManagerSettings()
@@ -532,22 +539,18 @@ QStringList PackageManagerSettings::getDestinationNames()
     }
   return sl;
 }
-
+                               
 
 void PackageManagerSettings::linkEnabled( bool b )
 {
 	pvDebug(2,"PackageManagerSettings::linkEnabled "+QString(b?"yes":"no"));
   activeLinkDestination->setEnabled( b );
+  CheckBoxLink->setChecked( b );
 }
 
 void PackageManagerSettings::activeServerChanged()
 {
 	changed = true;
-}
-
-QComboBox* PackageManagerSettings::getDestCombo()
-{
-	return new QComboBox(activeDestination);
 }
 
 void PackageManagerSettings::createLinksToDest()
@@ -564,7 +567,10 @@ void PackageManagerSettings::removeLinksToDest()
 //	ipkg->removeLinks( destinationurl );
 }
 
-//void PackageManagerSettings::setIpkg( PmIpkg* i )
-//{
-//	ipkg = i;
-//}
+void PackageManagerSettings::activeDestinationChange(int i)
+{
+	pvDebug(5,"activeDestinationChange "+QString::number(i));
+	if (i > activeDestination->count()) return;
+	activeDestination->setCurrentItem(i);
+	pvDebug(5,"dest name "+ activeDestination->currentText());
+}

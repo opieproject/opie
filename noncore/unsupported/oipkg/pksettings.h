@@ -24,8 +24,6 @@ public:
   QStringList getDestinationUrls();
   QStringList getDestinationNames();
   QString getDestinationUrlByName(QString);
-  QComboBox* getDestCombo();
-//  void setIpkg( PmIpkg* );
 
 public slots:
   void writeInstallationSettings();
@@ -51,6 +49,7 @@ public slots:
   void removeInstallationSetting();
   void renameInstallationSetting();
   void activeServerChanged();
+  void activeDestinationChange(int);
 signals:
 //  void doCreateLinks( QString dest );
 //  void doRemoveLinks( QString dest );
