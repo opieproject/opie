@@ -79,12 +79,15 @@ public:
     enum Size {Normal = 0, Big };
     AppLnkPrivate() {
         /* we want one normal and one big item */
-        mPixmaps = QArray<QPixmap>(2);
+
+        QPixmap pix;
+        mPixmaps.insert(0, pix );
+        mPixmaps.insert(1,  pix);
     }
 
     QStringList mCatList; // always correct
     QArray<int> mCat; // cached value; correct if not empty
-    QArray<QPixmap> mPixmaps;
+    QMap<int,  QPixmap> mPixmaps;
 
     void updateCatListFromArray()
     {
