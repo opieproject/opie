@@ -2,7 +2,19 @@ TEMPLATE        = lib
 CONFIG          += qte warn_on release
 HEADERS   = ofontmenu.h \
     ocolorbutton.h \
-    ofiledialog.h ofileselector.h tododb.h \
+    ofileselector/odefaultfactories.h \
+    ofileselector/ofiledialog.h \
+    ofileselector/ofilelistview.h \
+    ofileselector/ofileiconview.h \
+    ofileselector/ofileselector.h \
+    ofileselector/ofileselectoritem.h \
+    ofileselector/ofileselectoriconitem.h \
+    ofileselector/ofileselectormain.h \
+    ofileselector/ofileview.h \
+    ofileselector/olister.h \
+    ofileselector/olocallister.h \
+    ofileselector/opixmapprovider.h \
+    tododb.h \
     ocheckitem.h todoevent.h todoresource.h \
     todovcalresource.h xmltree.h \
     colordialog.h colorpopupmenu.h \
@@ -31,8 +43,20 @@ HEADERS   = ofontmenu.h \
 
 SOURCES   = ofontmenu.cc  \
         ocolorbutton.cpp \
+	ofileselector/odefaultfactories.cpp \
+	ofileselector/ofiledialog.cpp \
+	ofileselector/ofilefactory.cpp \
+	ofileselector/ofilelistview.cpp \
+	ofileselector/ofileiconview.cpp \
+	ofileselector/ofileselector.cpp \
+	ofileselector/ofileselectoritem.cpp \
+        ofileselector/ofileselectoriconitem.cpp \
+	ofileselector/ofileselectormain.cpp \
+	ofileselector/ofileview.cpp \
+	ofileselector/olister.cpp \
+	ofileselector/olocallister.cpp \
+	ofileselector/opixmapprovider.cpp \
 	    xmltree.cc \
-	    ofiledialog.cc ofileselector.cc \
             ocheckitem.cpp tododb.cpp todoevent.cpp \
 	    todovcalresource.cpp  colordialog.cpp \
 	    colorpopupmenu.cpp oclickablelabel.cpp \

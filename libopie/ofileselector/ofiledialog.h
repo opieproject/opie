@@ -32,7 +32,8 @@
 
 #include <qdialog.h>
 
-#include <opie/ofileselector.h>
+//#include <opie/ofileselector.h>
+#include "ofileselector.h"
 
 class OFileDialog : public QDialog {
   Q_OBJECT

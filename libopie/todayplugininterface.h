@@ -59,6 +59,12 @@ public:
      */
     virtual QString appName() const = 0;
 
+
+    /**
+     * If the plugin should take part in the periodic refresh
+     */
+    virtual bool excludeFromRefresh() const = 0;
+
     /**
      * minimum height the plugin at least should have
      */

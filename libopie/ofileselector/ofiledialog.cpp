@@ -84,7 +84,7 @@ QString OFileDialog::getOpenFileName(int selector,
 		   wid, OFileSelector::Open, selector, startDir, file, mimes);
   dlg.showMaximized();
   if( dlg.exec() )
-    ret = dlg.fileName();
+      ret = dlg.fileName();
 
   return ret;
 }

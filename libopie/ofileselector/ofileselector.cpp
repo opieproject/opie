@@ -485,6 +485,8 @@ void OFileSelector::init()
 
   if (m_selector != Normal )
       reparse();
+
+  showMaximized();
 }
 void OFileSelector::updateMimes()
 {
@@ -651,7 +653,7 @@ void OFileSelector::initToolbar() {
     m_boxToolbar->setSpacing( 0 );
 
     // tool bar members now
-    m_location = new QComboBox( m_boxToolbar );
+    m_location = new QComboBox( m_boxToolbar  );
     m_location->setEditable( TRUE );
     m_location->setDuplicatesEnabled( FALSE );
     connect( m_location,  SIGNAL(activated(const QString& ) ),
@@ -974,9 +976,9 @@ void OFileSelector::initFactory() {
     m_fileFactory = new OFileFactory();
     m_fileFactory->addLister(tr("Files"), newLocalLister );
     m_fileFactory->addView(tr("List View"), newFileListView );
-    /* the factory is just a dummy */
-    m_fileFactory->addView(tr("Documents"), newFileListView );
+    m_fileFactory->addView(tr("Documents"), newFileIconView );
 }
+
 void OFileSelector::fillList() {
     qWarning("fill list");
     if (!m_viewCheck )
