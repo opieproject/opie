@@ -41,18 +41,18 @@
     <name>ModulesDetail</name>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Senden</translation>
+        <translation>Senden</translation>
     </message>
 </context>
 <context>
     <name>ModulesInfo</name>
     <message>
         <source>Module</source>
-        <translation type="unfinished"></translation>
+        <translation>Modul</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <source>Use#</source>
@@ -79,7 +79,7 @@
     </message>
     <message>
         <source> : %1 kB</source>
-        <translation></translation>
+        <translation type="unfinished">: %1 kB</translation>
     </message>
 </context>
 <context>
@@ -163,14 +163,14 @@
     </message>
     <message>
         <source>Modules</source>
-        <translation type="unfinished"></translation>
+        <translation>Module</translation>
     </message>
 </context>
 <context>
     <name>VersionInfo</name>
     <message>
         <source>&lt;b&gt;Linux Kernel&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Linux Kernel&lt;/b&gt;&lt;p&gt;Version: </translation>
     </message>
     <message>
         <source>Compiled by: </source>
@@ -178,7 +178,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version: </translation>
     </message>
     <message>
         <source>Built on: </source>

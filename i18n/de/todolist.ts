@@ -54,35 +54,35 @@
     </message>
     <message>
         <source>Summary:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zusammenfassung:</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fortschritt:</translation>
     </message>
     <message>
         <source>0%</source>
-        <translation type="unfinished"></translation>
+        <translation>0%</translation>
     </message>
     <message>
         <source>20%</source>
-        <translation type="unfinished"></translation>
+        <translation>20%</translation>
     </message>
     <message>
         <source>40%</source>
-        <translation type="unfinished"></translation>
+        <translation>40%</translation>
     </message>
     <message>
         <source>60%</source>
-        <translation type="unfinished"></translation>
+        <translation>60%</translation>
     </message>
     <message>
         <source>80%</source>
-        <translation type="unfinished"></translation>
+        <translation>80%</translation>
     </message>
     <message>
         <source>100%</source>
-        <translation type="unfinished"></translation>
+        <translation>100%</translation>
     </message>
 </context>
 <context>
@@ -101,7 +101,7 @@
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>nicht eingeteilt</translation>
     </message>
     <message>
         <source>All</source>
@@ -176,7 +176,7 @@ bevor Sie Daten eingeben.</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>nicht eingeteilt</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -237,7 +237,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>all tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>alle Aufgaben</translation>
     </message>
 </context>
 </TS>

@@ -52,7 +52,8 @@
     <message>
         <source>Event duration is potentially longer
 than interval between repeats.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Termin dauert unter Umständen
+länger als die Wiederholungsinterval.</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -68,7 +69,7 @@ than interval between repeats.</source>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -88,7 +89,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>(Unknown)</source>
-        <translation></translation>
+        <translation>(Unbekannt)</translation>
     </message>
     <message>
         <source>Error!</source>
@@ -96,11 +97,11 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Fix it</source>
-        <translation type="unfinished"></translation>
+        <translation>Beheben</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Weiter</translation>
     </message>
 </context>
 <context>
@@ -162,34 +163,34 @@ Trozdem beenden?</translation>
     <name>DateBookDayView</name>
     <message>
         <source>:00p</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Jahre</translation>
     </message>
 </context>
 <context>
     <name>DateBookDayWidget</name>
     <message>
         <source>Start</source>
-        <translation type="unfinished">Beginn</translation>
+        <translation>Beginn</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished">Ende</translation>
+        <translation>Ende</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editieren</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Senden</translation>
     </message>
     <message>
         <source>This is an all day event.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Eintrag ist ganztägig.</translation>
     </message>
 </context>
 <context>
@@ -219,15 +220,15 @@ Trozdem beenden?</translation>
     <name>DateBookSettingsBase</name>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Voreinstellungen</translation>
     </message>
     <message>
         <source>Start viewing events</source>
-        <translation type="unfinished"></translation>
+        <translation>Erster anzuzeigender Termin</translation>
     </message>
     <message>
         <source>Start Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Startzeit:</translation>
     </message>
     <message>
         <source>:00</source>
@@ -235,46 +236,46 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Alarm Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarmeinstellungen</translation>
     </message>
     <message>
         <source>Alarm Preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarmvorwarnzeit</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation type="unfinished">Minuten</translation>
+        <translation>Minuten</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterschiedliches</translation>
     </message>
     <message>
         <source>Row style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Spaltenstil:</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Standart</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Medium</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Groß</translation>
     </message>
     <message>
         <source>Jump to current time (dayview)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zur aktuellen Zeit springen (Tagesansicht)</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeek</name>
     <message>
         <source>This is an all day event.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Termin ist ganztägig.</translation>
     </message>
 </context>
 <context>
@@ -506,7 +507,7 @@ Trozdem beenden?</translation>
     <name>NoteEntryBase</name>
     <message>
         <source>Edit Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Notiz bearbeiten</translation>
     </message>
     <message>
         <source>&lt;b&gt;1/10&lt;/b&gt; Lunch</source>
@@ -525,7 +526,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished">Jeden</translation>
+        <translation>Jeden</translation>
     </message>
     <message>
         <source>%1 %2 every </source>
@@ -595,11 +596,11 @@ Trozdem beenden?</translation>
     <name>RepeatEntry</name>
     <message>
         <source>No Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Wiederholung</translation>
     </message>
     <message>
         <source>day(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tag(e)</translation>
     </message>
     <message>
         <source>week(s)</source>
@@ -607,7 +608,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Repeat By</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederholung</translation>
     </message>
     <message>
         <source>Day</source>
@@ -757,11 +758,11 @@ und</translation>
     </message>
     <message>
         <source>months</source>
-        <translation type="unfinished"></translation>
+        <translation>Monate</translation>
     </message>
     <message>
         <source>years</source>
-        <translation type="unfinished"></translation>
+        <translation>Jahre</translation>
     </message>
 </context>
 </TS>

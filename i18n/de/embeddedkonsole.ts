@@ -184,7 +184,7 @@
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzerdefiniert</translation>
     </message>
 </context>
 <context>

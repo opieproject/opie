@@ -98,31 +98,31 @@
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Schrift</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Größe</translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="unfinished"></translation>
+        <translation>Falsches Üben von Xylophonmusik quält jeden größeren Zwerg</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Anwenden</translation>
     </message>
     <message>
         <source>Restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Neustart</translation>
     </message>
     <message>
         <source>Do you want to restart Opie now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wollen Sie Opie nun neu starten?</translation>
     </message>
     <message>
         <source>Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen...</translation>
     </message>
 </context>
 <context>
