@@ -21,6 +21,7 @@
 #include <qpe/qpemenubar.h>
 #include <qpe/resource.h>
 #include <qpe/global.h>
+#include <qpe/qpeapplication.h>
 
 #include <opie/ofiledialog.h>
 
@@ -36,8 +37,10 @@
 
 TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
     QMainWindow( parent, name, f )
-{
+{	
+	nextUnnamed=0;
 	currentView=0;
+	viewCount=0;
 	setCaption(tr("TinyKATE"));
 
 	setToolBarsMovable(FALSE);
@@ -137,6 +140,9 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
         utilSettings = new QAction( tr( "Settings" ), QString::null, 0, this, 0 );
         utilSettings->addTo( popup);
 
+  if( qApp->argc() > 1) open(qApp->argv()[1]);
+  else slotNew();
+
 }
 
 
@@ -144,12 +150,18 @@ void TinyKate::slotOpen( )
 {
 	QString filename=OFileDialog::getOpenFileName(OFileSelector::EXTENDED_ALL);
 	if (!filename.isEmpty()) {	
+		open(filename);
+	}
+}
+
+void TinyKate::open(const QString & filename)
+{
 		KateDocument *kd= new KateDocument(false, false, this,0,this);
 		KTextEditor::View *kv;
-			tabwidget->addTab(kv=kd->createView(tabwidget,"bLAH"),"BLAH","BLAH");
+			tabwidget->addTab(kv=kd->createView(tabwidget,"bLAH"),"tinykate/tinykate","BLAH");
 		qDebug(filename);
 		kd->open(filename);
-	}
+		viewCount++;
 }
 
 void TinyKate::slotCurrentChanged( QWidget * view)
@@ -184,8 +196,8 @@ void TinyKate::slotNew( )
 {
 	KateDocument *kd= new KateDocument(false, false, this,0,this);
 	KTextEditor::View *kv;
-	tabwidget->addTab(kv=kd->createView(tabwidget,"BLAH"),"BLAH",tr("Unnamed %1").arg(0));
-
+	tabwidget->addTab(kv=kd->createView(tabwidget,"BLAH"),"tinykate/tinykate",tr("Unnamed %1").arg(nextUnnamed++));
+	viewCount++;
 }
 
 void TinyKate::slotClose( )
@@ -195,5 +207,7 @@ void TinyKate::slotClose( )
 	currentView=0;
 	tabwidget->removePage(dv);
 	delete dv->document();
+	viewCount--;
+	if (!viewCount) slotNew();
 }
 

@@ -33,13 +33,15 @@ public:
     TinyKate( QWidget *parent=0, const char *name=0, WFlags f = 0);
 
 public slots:
-    void slotOpen();
+    void slotNew();
 
 protected slots:
-    void slotNew();
+    void slotOpen();
     void slotClose();
     void slotCurrentChanged(QWidget *);
 
+protected:
+    void open(const QString&);
 private:
     OTabWidget *tabwidget;
     KTextEditor::View *currentView;
@@ -55,7 +57,8 @@ private:
     QAction *utilSettings;
 
     QPopupMenu *hlmenu;
-
+    uint nextUnnamed;
+    uint viewCount;
 };
 
 
