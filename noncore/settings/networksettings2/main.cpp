@@ -63,6 +63,7 @@ int main( int argc, char * argv[] ) {
           // called from system to request something
           GuiType = QApplication::Tty;
           Action = ACT_REQUEST;
+          Log(("Request : %s\n", argv[1] ));
         }
 
         // Start Qt
