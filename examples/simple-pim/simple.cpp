@@ -90,10 +90,10 @@ MainWindow::MainWindow(QWidget *parent,  const char* name, WFlags fl )
      * connect the show signal of the PIMListView
      * to a slot to show a dialog
      */
-    connect(m_todoView, SIGNAL(showRecord(const OPimRecord&) ),
-            this, SLOT(slotShowRecord(const OPimRecord&) ) );
-    connect(m_dateView, SIGNAL(showRecord(const OPimRecord&) ),
-            this, SLOT(slotShowRecord(const OPimRecord&) ) );
+    connect(m_todoView, SIGNAL(showRecord(const Opie::OPimRecord&) ),
+            this, SLOT(slotShowRecord(const Opie::OPimRecord&) ) );
+    connect(m_dateView, SIGNAL(showRecord(const Opie::OPimRecord&) ),
+            this, SLOT(slotShowRecord(const Opie::OPimRecord&) ) );
 
     /*
      * Now comes the important lines of code for this example
