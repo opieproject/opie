@@ -68,6 +68,7 @@ MediaWidget::Button MediaWidget::setupButton( const SkinButtonInfo &buttonInfo, 
 void MediaWidget::loadDefaultSkin( const GUIInfo &guiInfo )
 {
     Skin skin( guiInfo.fileNameInfix );
+    skin.setCachable( false );
     loadSkin( guiInfo.buttonInfo, guiInfo.buttonCount, skin );
 }
 

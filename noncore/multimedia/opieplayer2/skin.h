@@ -38,6 +38,9 @@ public:
     Skin( const QString &fileNameInfix );
     ~Skin();
 
+    bool isCachable() const { return m_isCachable; }
+    void setCachable( bool cachable ) { m_isCachable = cachable; }
+
     QPixmap backgroundPixmap() const;
     QImage buttonUpImage() const;
     QImage buttonDownImage() const;
@@ -57,6 +60,7 @@ private:
 
     QString m_fileNameInfix;
     QString m_skinPath;
+    bool m_isCachable : 1;
 
     SkinData *d;
 

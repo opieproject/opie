@@ -77,11 +77,15 @@ Skin::Skin( const QString &fileNameInfix )
 
 Skin::~Skin()
 {
-    SkinCache::self().store( m_skinPath, m_fileNameInfix, d );
+    if ( m_isCachable )
+        SkinCache::self().store( m_skinPath, m_fileNameInfix, d );
+    else
+        delete d;
 }
 
 void Skin::init( const QString &name )
 {
+    m_isCachable = true;
     m_skinPath = "opieplayer2/skins/" + name;
     d = SkinCache::self().lookupAndTake( m_skinPath, m_fileNameInfix );
 }
