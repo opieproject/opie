@@ -38,6 +38,7 @@ Modem* InterfacePPP::modem()
 bool InterfacePPP::refresh()
 {
     qDebug("InterfacePPP::refresh()");
+    updateInterface(this);
     QMessageBox::information(0,"Not Implemented","This feature is not yet implemneted... ;-(");
     return false;
 }
