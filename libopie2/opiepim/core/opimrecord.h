@@ -101,6 +101,7 @@ public:
      *
      */
     void setRelations( const QString&, QArray<int> ids );
+    virtual void setUid( int uid );
 
 protected:
     QString crossToString()const;

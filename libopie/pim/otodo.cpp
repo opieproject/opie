@@ -24,7 +24,6 @@ struct OTodo::OTodoData : public QShared {
     bool isCompleted:1;
     bool hasDate:1;
     int priority;
-    QStringList category;
     QString desc;
     QString sum;
     QMap<QString, QString> extra;
@@ -46,7 +45,27 @@ OTodo::~OTodo() {
         data = 0l;
     }
 }
+OTodo::OTodo(bool completed, int priority,
+                     const QArray<int> &category,
+                     const QString& summary,
+                     const QString &description,
+                     ushort progress,
+                     bool hasDate, QDate date, int uid )
+    : OPimRecord(  uid )
+{
+    //qWarning("OTodoData");
+    setCategories( category );
+    data = new OTodoData;
+    data->date = date;
+    data->isCompleted = completed;
+    data->hasDate = hasDate;
+    data->priority = priority;
+    data->sum = summary;
+    data->prog = progress;
+    data->desc = Qtopia::simplifyMultiLineSpace(description );
+    data->hasAlarmDateTime = false;
 
+}
 OTodo::OTodo(bool completed, int priority,
                      const QStringList &category,
                      const QString& summary,
@@ -267,19 +286,19 @@ bool OTodo::operator>=(const OTodo &toDoEvent )const
 }
 bool OTodo::operator==(const OTodo &toDoEvent )const
 {
-    if( data->priority == toDoEvent.data->priority &&
-        data->priority == toDoEvent.data->prog &&
-        data->isCompleted == toDoEvent.data->isCompleted &&
-        data->hasDate == toDoEvent.data->hasDate &&
-        data->date == toDoEvent.data->date &&
-        data->category == toDoEvent.data->category &&
-        data->sum == toDoEvent.data->sum &&
-        data->desc == toDoEvent.data->desc &&
-	data->hasAlarmDateTime == toDoEvent.data->hasAlarmDateTime &&
-	data->alarmDateTime == toDoEvent.data->alarmDateTime )
-	return true;
+    if ( data->priority != toDoEvent.data->priority ) return false;
+    if ( data->priority != toDoEvent.data->prog ) return false;
+    if ( data->isCompleted != toDoEvent.data->isCompleted ) return false;
+    if ( data->hasDate != toDoEvent.data->hasDate ) return false;
+    if ( data->date != toDoEvent.data->date ) return false;
+    if ( data->sum != toDoEvent.data->sum ) return false;
+    if ( data->desc != toDoEvent.data->desc ) return false;
+    if ( data->hasAlarmDateTime != toDoEvent.data->hasAlarmDateTime )
+        return false;
+    if ( data->alarmDateTime != toDoEvent.data->alarmDateTime )
+	return false;
 
-    return false;
+    return OPimRecord::operator==( toDoEvent );
 }
 void OTodo::deref() {
 
@@ -350,5 +369,10 @@ void OTodo::copy( OTodoData* src, OTodoData* dest ) {
     dest->hasAlarmDateTime = src->hasAlarmDateTime;
     dest->alarmDateTime = src->alarmDateTime;
 }
-
+QString OTodo::type() const {
+    return QString::fromLatin1("OTodo");
+}
+QString OTodo::recordField(int id )const {
+    return QString::null;
+}
 

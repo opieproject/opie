@@ -4,9 +4,6 @@ OPimRecord::OPimRecord( int uid )
     : Qtopia::Record() {
 
     setUid( uid );
-    /* assign a new UID */
-    if ( uid == 1 )
-        assignUid();
 }
 OPimRecord::~OPimRecord() {
 }
@@ -104,3 +101,11 @@ QString OPimRecord::crossToString()const {
 
     return str;
 }
+/* if uid = 1 assign a new one */
+void OPimRecord::setUid( int uid ) {
+
+    if ( uid == 1)
+        uid = uidGen().generate();
+
+    Qtopia::Record::setUid( uid );
+};

@@ -55,7 +55,15 @@ public:
            const QString &description = QString::null,
            ushort progress = 0,
            bool hasDate = false, QDate date = QDate::currentDate(),
-           int uid = -1 );
+           int uid = 0 /*empty*/ );
+
+    OTodo( bool completed, int priority,
+           const QArray<int>& category,
+           const QString& summary = QString::null,
+           const QString& description = QString::null,
+           ushort progress = 0,
+           bool hasDate = false,  QDate date = QDate::currentDate(),
+           int uid = 0 /* empty */ );
 
     /* Copy c'tor
 
