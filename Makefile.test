@@ -94,6 +94,12 @@ endif
 
 export QMAKESPEC=$(QMAKESPECSDIR)/$(patsubst "%",%,$(CONFIG_SPECFILE))
 
+ifdef CONFIG_OPTIMIZATIONS
+export CFLAGS_RELEASE=$(patsubst "%,%,$(CONFIG_OPTIMIZATIONS))
+export CFLAGS_RELEASE:=$(patsubst %",%,$(CFLAGS_RELEASE))
+$(warning CFLAGS_RELEASE is $(CFLAGS_RELEASE))
+endif
+
 all clean: $(subdir-y)
 
 $(subdir-y) : $(if $(CONFIG_LIBQPE),$(TOPDIR)/stamp-headers) \

@@ -34,6 +34,10 @@ choice
 
 endchoice
 
+config OPTIMIZE
+  boolean "Use optimizations"
+  default "y" if ! TARGET_X86
+
 config SPECFILE
   string
   default "qws/linux-generic-g++" if TARGET_X86 && (! X11)
@@ -49,6 +53,13 @@ config CUSTOMFILE
   default "custom-ipaq.h" if TARGET_IPAQ
   default "custom-sharp.h" if TARGET_SHARP
   
+
+config OPTIMIZATIONS
+  string "Optimization flags"
+  depends OPTIMIZE
+  default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_IPAQ
+  default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_SHARP
+
 #config CROSS
 #  string "Crosscompilation prefix"
 #  default "arm-linux-"
