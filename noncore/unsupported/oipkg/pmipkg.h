@@ -48,7 +48,7 @@ private:
   QCheckBox *_force_reinstall;
   QCheckBox *_force_remove;
   QCheckBox *_force_depends;
-  void startDialog();
+//  void startDialog();
   void makeLinks(Package*);
   void linkPackage( QString, QString );
   void processLinkDir( QString , QString );

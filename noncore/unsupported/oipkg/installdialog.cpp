@@ -71,6 +71,9 @@ InstallDialog::InstallDialog( PackageManagerSettings* s, QWidget* parent,  const
     GroupBoxOptionsLayout->addWidget( _force_remove, 2, 0 );
 
     InstallDialogLayout->addWidget( GroupBoxOptions, 1, 0 );
+		toRemoveItem = new QCheckListItem( ListViewPackages, QObject::tr("To remove") );
+		toInstallItem = new QCheckListItem( ListViewPackages, QObject::tr("To install") );
+
 }
 
 /*  
