@@ -1,0 +1,4 @@
+Makefile
+moc*
+lib*.so*
+
