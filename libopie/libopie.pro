@@ -2,9 +2,9 @@ TEMPLATE        = lib
 CONFIG          += qte warn_on release
 HEADERS   = ofontmenu.h \
     ocolorbutton.h \
-    ofiledialog.h ofileselector.h tododb.h \
-    ocheckitem.h todoevent.h todoresource.h \
-    todovcalresource.h xmltree.h \
+    ofiledialog.h ofileselector.h \
+    ocheckitem.h  \
+    xmltree.h \
     colordialog.h colorpopupmenu.h \
     oclickablelabel.h oprocctrl.h \
     oprocess.h odevice.h odevicebutton.h \
@@ -36,6 +36,8 @@ HEADERS   = ofontmenu.h \
     pim/opimnotifymanager.h \
     pim/opimmainwindow.h \
     pim/opimresolver.h \
+    pim/oevent.h \
+    pim/otimezone.h \
     orecurrancewidget.h \
     oticker.h 
 #    pim/otodoaccesssql.h \
@@ -45,8 +47,8 @@ SOURCES   = ofontmenu.cc  \
         sharp_compat.cpp \
       xmltree.cc \
       ofiledialog.cc ofileselector.cc \
-            ocheckitem.cpp tododb.cpp todoevent.cpp \
-      todovcalresource.cpp  colordialog.cpp \
+            ocheckitem.cpp  \
+      colordialog.cpp \
       colorpopupmenu.cpp oclickablelabel.cpp \
       oprocctrl.cpp oprocess.cpp \
       odevice.cpp odevicebutton.cpp otimepicker.cpp \
@@ -71,6 +73,8 @@ SOURCES   = ofontmenu.cc  \
        pim/opimnotifymanager.cpp \
        pim/opimmainwindow.cpp \
        pim/opimresolver.cpp \
+       pim/oevent.cpp \
+       pim/otimezone.cpp \
        orecurrancewidget.cpp \
        oticker.cpp
 #             pim/otodoaccesssql.cpp \

@@ -13,11 +13,20 @@
  * ToDo:
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.7 2003-02-16 22:25:46 zecke Exp $
+ * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.8 2003-02-21 16:52:49 zecke Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_vcard.cpp,v $
- * Revision 1.7  2003-02-16 22:25:46  zecke
+ * Revision 1.8  2003-02-21 16:52:49  zecke
+ * -Remove old Todo classes they're deprecated and today I already using the
+ * new API
+ * -Guard against self assignment in OTodo
+ * -Add test apps for OPIM
+ * -Opiefied Event classes
+ * -Added TimeZone handling and pinning of TimeZones to OEvent
+ * -Adjust ORecur and the widget to better timezone behaviour
+ *
+ * Revision 1.7  2003/02/16 22:25:46  zecke
  * 0000276 Fix for that bug.. or better temp workaround
  * A Preferred Number is HOME|VOICE
  * A CellPhone is HOME|VOICE|CELL the type & HOME|VOICE test
@@ -74,7 +83,7 @@ bool OContactAccessBackend_VCard::load ()
 
 	VObject* obj = 0l;
 
-	if ( QFile( m_file ).exists() ){
+	if ( QFile::exists(m_file) ){
 		obj = Parse_MIME_FromFileName( QFile::encodeName(m_file).data() );
 		if ( !obj )
 			return false;

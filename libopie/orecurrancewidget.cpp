@@ -177,7 +177,7 @@ ORecur ORecurranceWidget::recurrence()const {
 	rpTmp.setEndDate( end );
     }
     // timestamp it...
-    rpTmp.setCreateTime( time( NULL ) );
+//    rpTmp.setCreateTime(  ); current DateTime is already set -zecke
     return rpTmp;
 }
 QDate ORecurranceWidget::endDate()const {

@@ -35,13 +35,18 @@ public:
     bool hasEndDate()const;
     QDate start()const;
     QDate endDate()const;
-    time_t endDateUTC()const;
-    time_t createTime()const;
+    QDateTime createdDateTime()const;
+    /**
+     * starting on monday=0, sunday=6
+     * for convience
+     */
+    bool repeatOnWeekDay( int day )const;
 
     /**
      * FromWhereToStart is not included!!!
      */
     bool nextOcurrence( const QDate& FromWhereToStart, QDate &recurDate );
+
     /**
      * The module this ORecur belongs to
      */
@@ -63,8 +68,7 @@ public:
     void setDays( char c);
     void setEndDate( const QDate& dt );
     void setStart( const QDate& dt );
-    void setEndDateUTC( time_t );
-    void setCreateTime( time_t );
+    void setCreatedDateTime( const QDateTime& );
     void setHasEndDate( bool b );
     void setRepitition(int );
 

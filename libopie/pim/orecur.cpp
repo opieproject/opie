@@ -10,17 +10,17 @@ struct ORecur::Data : public QShared {
         freq = -1;
         days = 0;
         pos = 0;
-        create = -1;
+        create = QDateTime::currentDateTime();
         hasEnd = FALSE;
-        end = 0;
+        end = QDate::currentDate();
     }
     char days; // Q_UINT8 for 8 seven days;)
     ORecur::RepeatType type;
     int freq;
     int pos;
     bool hasEnd : 1;
-    time_t end;
-    time_t create;
+    QDate end;
+    QDateTime create;
     int rep;
     QString app;
     ExceptionList list;
@@ -52,6 +52,8 @@ bool ORecur::operator==( const ORecur& )const {
     return false;
 }
 ORecur &ORecur::operator=( const ORecur& re) {
+    if ( *this == re ) return *this;
+
     re.data->ref();
     deref();
     data = re.data;
@@ -366,15 +368,12 @@ bool ORecur::hasEndDate()const {
     return data->hasEnd;
 }
 QDate ORecur::endDate()const {
-    return TimeConversion::fromUTC( data->end ).date();
+    return data->end;
 }
 QDate ORecur::start()const{
     return data->start;
 }
-time_t ORecur::endDateUTC()const {
-    return data->end;
-}
-time_t ORecur::createTime()const {
+QDateTime ORecur::createdDateTime()const {
     return data->create;
 }
 int ORecur::repetition()const {
@@ -404,13 +403,9 @@ void ORecur::setDays( char c ) {
 }
 void ORecur::setEndDate( const QDate& dt) {
     checkOrModify();
-    data->end = TimeConversion::toUTC( dt );
+    data->end = dt;
 }
-void ORecur::setEndDateUTC( time_t t) {
-    checkOrModify();
-    data->end = t;
-}
-void ORecur::setCreateTime( time_t t) {
+void ORecur::setCreatedDateTime( const QDateTime& t) {
     checkOrModify();
     data->create = t;
 }
