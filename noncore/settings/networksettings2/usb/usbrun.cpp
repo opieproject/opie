@@ -71,7 +71,19 @@ State_t USBRun::detectState( void ) {
     return Unavailable;
 }
 
-QString USBRun::setMyState( NodeCollection *, Action_t , bool ) {
+QString USBRun::setMyState( NodeCollection * NC, Action_t A, bool ) {
+
+    // nothing needs to be done to 'activate' or 'deactivate' 
+    // a cable
+
+    // perhaps (later) we can figure out if the device is IN the
+    // cradle 
+    if( A == Activate ) {
+      NC->setCurrentState( Available );
+    } else if ( A == Deactivate ) {
+      NC->setCurrentState( Unavailable );
+    }
+
     return QString();
 }
 

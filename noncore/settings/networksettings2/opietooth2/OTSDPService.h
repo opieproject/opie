@@ -70,6 +70,6 @@ private:
     QArray<AttributeEntry> attributeList;
 };
 
-}
+};
 
 #endif

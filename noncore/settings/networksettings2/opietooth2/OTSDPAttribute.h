@@ -135,6 +135,6 @@ private:
 
 };
 
-}
+};
 
 #endif

@@ -49,6 +49,6 @@ private:
     UUIDVector Networks;
 
 };
-}
+};
 
 #endif

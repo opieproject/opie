@@ -1,5 +1,5 @@
 Package: opie-networksettings2
-Files: bin/networksettings2 apps/Settings/networksettings2.desktop pics/networksettings2/*.png lib/libnetworksettings2.so* pics/networksettings2/Devices/*.png  etc/NS2templates/* etc/NS2templates/*/*
+Files: bin/networksettings2 apps/Settings/networksettings2.desktop pics/networksettings2/*.png lib/libnetworksettings2.so* pics/networksettings2/Devices/*.png etc/NS2templates/* etc/NS2templates/*/* bin/NS2SetMac.sh
 Priority: optional
 Section: opie/settings
 Maintainer: wim delvaux <wimpie@handhelds.org>

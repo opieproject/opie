@@ -16,8 +16,8 @@ class QTimerEvent;
 namespace Opie {
     namespace Core {
        class OProcess;
-    }
-}
+    };
+};
 
 namespace Opietooth2 {
 

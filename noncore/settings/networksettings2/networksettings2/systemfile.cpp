@@ -8,7 +8,7 @@
 #include "resources.h"
 #include "systemfile.h"
 
-#define TEMPLATEDIR "networktemplates/"
+#define TEMPLATEDIR "NS2templates/"
 QString TemplDir;
 
 SystemFile::SystemFile( const QString & N, 

@@ -43,11 +43,7 @@ int main( int argc, char * argv[] ) {
         // could be overruled by -qws
         QApplication::Type GuiType = QApplication::GuiClient; 
 
-#ifdef _WS_QWS_
         QPEApplication * TheApp;
-#else
-        QApplication * TheApp;
-#endif
 
         for ( int i = 1; i < argc; i ++ ) {
           int rmv;
@@ -84,7 +80,6 @@ int main( int argc, char * argv[] ) {
         }
 
         // Start Qt
-#ifdef _WS_QWS_
         // because QPEApplication does not handle GuiType well
         if( GuiType == QApplication::Tty ) {
           // this cast is NOT correct but we do not use
@@ -93,9 +88,6 @@ int main( int argc, char * argv[] ) {
         } else {
           TheApp = new QPEApplication( argc, argv, GuiType );
         }
-#else
-        TheApp = new QApplication( argc, argv, GuiType );
-#endif
 
         // init qt with app widget
 
@@ -151,11 +143,7 @@ int main( int argc, char * argv[] ) {
               TheApp->setMainWidget( W ); 
 
               W->show();
-#ifdef _WS_QWS_
               W->showMaximized();
-#else
-              W->resize( W->sizeHint() );
-#endif
               rv = TheApp->exec();
 
               delete W;
