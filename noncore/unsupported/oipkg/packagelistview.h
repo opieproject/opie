@@ -18,12 +18,14 @@
 #include <qtimer.h>
 #include <qwidget.h>
 #include <qpopupmenu.h>
+#include "listviewitemoipkg.h"
 #include "packagelist.h"
 #include "debug.h"
 
 class PackageListItem;
-class Package;
+class OipkgPackage;
 class PackageManagerSettings;
+//class ListViewItemOipkg;
 
 class PackageListView : public QListView
 {
@@ -35,11 +37,12 @@ public:
 //	~PackageListView();
   QTimer *popupTimer;
 private:
-	QDict<PackageList> PackageLists;
- 	QDict<QCheckListItem> rootItems;
-	PackageManagerSettings *settings;
-  Package *activePackage;
-  PackageListItem *activePackageListItem;
+  QDict<PackageList> PackageLists;
+  QDict<ListViewItemOipkg> rootItems;
+  PackageManagerSettings *settings;
+//  OipkgPackage *activePackage;
+//  PackageListItem *activePackageListItem;
+  ListViewItemOipkg *activeItem;
   QPopupMenu *popupMenu;
   QPopupMenu *destsMenu;
 public slots:

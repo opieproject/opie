@@ -69,7 +69,7 @@ void PackageListLocal::update()
 {
   pvDebug( 2, "parseStatus");
   parseStatus();
-  pvDebug( 2, "parseList");
+  pvDebug( 2, "parseList "+listsDir);
   parseList();
   pvDebug( 2, "finished parsing");
 }

@@ -23,7 +23,7 @@
 #define createLink 0
 #define removeLink 1
 
-class Package;
+class OipkgPackage;
 class PmIpkg : public QObject
 {
   Q_OBJECT
@@ -53,9 +53,9 @@ private:
   PackageManagerSettings* settings;
   RunWindow *runwindow;
   InstallDialog *installDialog;
-  QList<Package> to_remove;
-  QList<Package> to_install;
-  void makeLinks(Package*);
+  QList<OipkgPackage> to_remove;
+  QList<OipkgPackage> to_install;
+  void makeLinks(OipkgPackage*);
   void linkPackage( QString, QString );
   void processLinkDir( QString , QString );
   bool runIpkg(const QString& args, const QString& dest="" );

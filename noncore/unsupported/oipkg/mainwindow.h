@@ -18,6 +18,7 @@
 #include <qtimer.h>
 #include <qpopupmenu.h>
 
+#include "package.h"
 #include "packagelist.h"
 #include "packagelistremote.h"
 #include "packagelistlocal.h"

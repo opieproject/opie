@@ -24,20 +24,20 @@ public:
   PackageList (QObject *parent=0, const char *name=0);
   PackageList( PackageManagerSettings *s, QObject *parent=0, const char *name=0);
  	virtual ~PackageList();
-  void insertPackage( Package* );
-  Package* find( QString );
-  Package* next();
-  Package* first();
+  void insertPackage( OipkgPackage* );
+  OipkgPackage* find( QString );
+  OipkgPackage* next();
+  OipkgPackage* first();
 
   QStringList getSections();
   QStringList getSubSections();
   void setSettings( PackageManagerSettings* );
   void filterPackages( QString );
-  Package* getByName( QString );
+  OipkgPackage* getByName( QString );
   void clear();
   void allPackages();
 
-  QDict<Package> *versions;
+  QDict<OipkgPackage> *versions;
 
 public slots:
   void setSection(QString);
@@ -49,9 +49,9 @@ protected:
   int packageCount;
 
   PackageManagerSettings     *settings;
-  QDict<Package>         packageList;
-  QDict<Package>         origPackageList;
-  QDictIterator<Package> packageIter;
+  QDict<OipkgPackage>         packageList;
+  QDict<OipkgPackage>         origPackageList;
+  QDictIterator<OipkgPackage> packageIter;
 
   bool empty;
   QString            aktSection;
@@ -61,7 +61,7 @@ protected:
   QDict<bool> sectionsDict;
 
 
-  void updateSections( Package* );
+  void updateSections( OipkgPackage* );
   void readFileEntries( QString file, QString dest="" );
 };
 
