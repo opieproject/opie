@@ -321,10 +321,10 @@ void AddressbookWindow::setDocument( const QString &filename )
 	if ( filename.find(".vcf") != int(filename.length()) - 4 ) 
 		return;
 	
-	QValueList<OContact> cl = OContact::readVCard( filename );
-	for( QValueList<OContact>::Iterator it = cl.begin(); it != cl.end(); ++it ) {
-		m_abView->addEntry( *it );
-	}
+// 	QValueList<OContact> cl = OContact::readVCard( filename );
+// 	for( QValueList<OContact>::Iterator it = cl.begin(); it != cl.end(); ++it ) {
+// 		m_abView->addEntry( *it );
+// 	}
 	
 }
 
@@ -479,12 +479,12 @@ void AddressbookWindow::slotBeam()
 		filename = addressbookPersonalVCardName();
 		if (!QFile::exists(filename))
 			return; // can't beam a non-existent file
-		c = OContact::readVCard( filename )[0];
+// 		c = OContact::readVCard( filename )[0];
 	} else {
 		unlink( beamfile ); // delete if exists
 		c = m_abView -> currentEntry();
 		mkdir("/tmp/obex/", 0755);
-		OContact::writeVCard( beamfile, c );
+// 		OContact::writeVCard( beamfile, c );
 		filename = beamfile;
 	}
 	Ir *ir = new Ir( this );
@@ -633,7 +633,7 @@ void AddressbookWindow::editPersonal()
 	QString filename = addressbookPersonalVCardName();
 	OContact me;
 	if (QFile::exists(filename))
-		me = OContact::readVCard( filename )[0];
+// 		me = OContact::readVCard( filename )[0];
 	if ( !abEditor ) {
 		qWarning("Editing personal data");
 		abEditor = new ContactEditor( me, this, "editor" );
@@ -652,7 +652,7 @@ void AddressbookWindow::editPersonal()
 		setFocus();
 		OContact new_personal = abEditor->entry();
 		QString fname = addressbookPersonalVCardName();
-		OContact::writeVCard( fname, new_personal );
+// 		OContact::writeVCard( fname, new_personal );
 		// Hier die persönliche Card zeigen..
 // 		m_abView  -> init(new_personal);
 // 		m_abView -> sync();
