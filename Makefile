@@ -22,7 +22,8 @@ MAIL= noncore/mail/libmail noncore/mail/bend
 
 PLAYER = core/multimedia/opieplayer/libmpeg3 \
 	core/multimedia/opieplayer/libmad \
-	core/multimedia/opieplayer/wavplugin 
+	core/multimedia/opieplayer/wavplugin \
+	core/multimedia/opieplayer/modplug
 
 COMPONENTS=$(LOCALCOMPONENTS) $(INPUTCOMPONENTS) $(APPLETS) $(MAIL) $(PLAYER)	
 
