@@ -1,0 +1,7 @@
+Package: qashmoney
+Priority: optional
+Version: 0.74
+Architecture: arm
+Maintainer: Allen Forsythe qashmoneyman@attbi.com
+Section: Applications
+Description: QashMoney provides an intuitive and fast way to keep track of your accounts and budgets.
