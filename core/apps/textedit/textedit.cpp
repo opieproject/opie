@@ -787,7 +787,12 @@ void TextEdit::showEditTools() {
 /*!
   unprompted save */
 bool TextEdit::save() {
-    QString file = doc->file();
+    qDebug("saveAsFile " + currentFileName);
+    if(currentFileName.isEmpty()) {
+        saveAs();
+        return;
+    }
+  QString file = doc->file();
     qDebug("saver file "+file);
     QString name= doc->name();
     qDebug("File named "+name);
