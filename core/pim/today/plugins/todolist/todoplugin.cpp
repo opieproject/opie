@@ -36,7 +36,7 @@ double TodolistPlugin::versionNumber() const {
 }
 
 QString TodolistPlugin::pixmapNameWidget() const {
-    return "TodoList";
+    return "todo/TodoList";
 }
 
 QWidget* TodolistPlugin::widget( QWidget *wid ) {
@@ -47,7 +47,7 @@ QWidget* TodolistPlugin::widget( QWidget *wid ) {
 }
 
 QString TodolistPlugin::pixmapNameConfig() const {
-    return "TodoList";
+    return "todo/TodoList";
 }
 
 TodayConfigWidget* TodolistPlugin::configWidget( QWidget* wid ) {

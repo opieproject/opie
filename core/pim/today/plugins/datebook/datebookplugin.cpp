@@ -38,7 +38,7 @@ double DatebookPlugin::versionNumber() const {
 }
 
 QString DatebookPlugin::pixmapNameWidget() const {
-    return "DateBook";
+    return "datebook/DateBook";
 }
 
 QWidget* DatebookPlugin::widget( QWidget* wid ) {
@@ -49,7 +49,7 @@ QWidget* DatebookPlugin::widget( QWidget* wid ) {
 }
 
 QString DatebookPlugin::pixmapNameConfig() const {
-    return "DateBook";
+    return "datebook/DateBook";
 }
 
 TodayConfigWidget* DatebookPlugin::configWidget( QWidget* wid ) {
