@@ -21,4 +21,4 @@
 #include "citytime.h"
 #include <opie2/oapplicationfactory.h>
 
-OPIE_EXPORT_APP( OApplicationFactory<CityTime> )
+OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<CityTime> )
