@@ -667,7 +667,7 @@ AppLnk::~AppLnk()
 */
 void AppLnk::execute() const
 {
-    execute(QStringList());
+    execute( QStringList::split( ' ', property( "Arguments" ) ) );
 }
 
 /*!
@@ -701,7 +701,10 @@ void AppLnk::execute(const QStringList& args) const
 */
 void AppLnk::invoke(const QStringList& args) const
 {
-    Global::execute( exec(), args[0] );
+    if ( property( "Arguments" ).isEmpty() )
+        Global::execute( exec(), args[0] );
+    else
+        Global::execute( exec(), args.join( " " ) );
 }
 
 /*!
