@@ -94,7 +94,7 @@ void ODict::saveConfig()
 
 void ODict::slotDisplayAbout()
 {
-	QMessageBox::about(  this, tr( "About ODict" ), tr( "OPIE-Dictionary ODict \n (c) 2002, 2003 Carsten  Niehaus \n cniehaus@handhelds.org \n Version 20030108" ) );
+	QMessageBox::about(  this, tr( "About ODict" ), tr( "OPIE-Dictionary ODict \n (c) 2002, 2003 Carsten  Niehaus \n cniehaus@handhelds.org \n Version 20030111" ) );
 }
 
 void ODict::slotStartQuery()
@@ -109,16 +109,14 @@ void ODict::slotStartQuery()
 //X 		QMessageBox::warning(this,tr("No Dictionary"),tr("Please choose a dictonary") );
 //X 	else
 //X 	{
+
+		if ( casesens ) qDebug( "casesens = TRUE" );
+		else qDebug( "casesens = FALSE" );
 		
 		ding->setCaseSensitive( casesens ); 
 		ding->setCompleteWord( completewords ); 
 		ding->setDict( activated_name );
 		
-		qDebug( "            activated_name ist :" );
-		qDebug( activated_name );
-		
-		qDebug( "            loadedDict() ist :" );
-		qDebug( ding->loadedDict() );
 		if ( activated_name != ding->loadedDict() )
 		{
 			qDebug( "ComboBox geändert" );
@@ -132,9 +130,7 @@ void ODict::slotStartQuery()
 		browser_bottom->setText( test.bottom );
 		
 		qDebug( "Text sollte gesetzt sein..." );
-
 //X 	}
-
 }
 
 

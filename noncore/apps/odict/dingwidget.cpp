@@ -114,7 +114,7 @@ void DingWidget::loadValues()
 
 BroswerContent DingWidget::parseInfo()
 {
-	QStringList search = lines.grep( queryword );
+	QStringList search = lines.grep( queryword , isCaseSensitive );
 
  	QString current;
  	QString left;
@@ -126,6 +126,7 @@ BroswerContent DingWidget::parseInfo()
 	QString html_table_right = "</td></tr>";
 	QRegExp reg_div( trenner );
 	QRegExp reg_word( queryword );
+	reg_word.setCaseSensitive( isCaseSensitive );
 	QStringList toplist, bottomlist;
 	QString substitute = "<strong>"+queryword+"</strong>";
 
@@ -163,7 +164,7 @@ BroswerContent DingWidget::parseInfo()
  		
 		right = current.right( current.length() - current.find(trenner) -2 );
 
- 		if ( left.contains( queryword ) )
+ 		if ( left.contains( queryword , isCaseSensitive ) )
 		{
 			left.replace( queryword, substitute );
 			left = left + "-->" + right;
