@@ -179,6 +179,6 @@ void AbConfig::operator= ( const AbConfig& cnf )
 	m_beCaseSensitive = cnf.m_beCaseSensitive;
 	m_fontSize = cnf.m_fontSize;
 	m_ordered = cnf.m_ordered;
-
+	m_barPos = cnf.m_barPos;
 }
 
