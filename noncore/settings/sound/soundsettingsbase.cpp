@@ -10,18 +10,9 @@
 
 #include <qcheckbox.h>
 #include <qcombobox.h>
-#include <qgroupbox.h>
-#include <qmainwindow.h>
 
-#include <qpe/qpeapplication.h>
 #include <qlabel.h>
-#include <qpushbutton.h>
-#include <qslider.h>
 #include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qimage.h>
 #include <qpixmap.h>
 
 static const char* const image0_data[] = { 
