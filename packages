@@ -177,3 +177,4 @@ CONFIG_MAIN_TAB_EXAMPLE	examples/main-tab	example.pro
 CONFIG_SIMPLE_EXAMPLE	examples/simple	example.pro
 CONFIG_SIMPLE_ICON	examples/simple-icon	example.pro
 CONFIG_SIMPLE_MAIN	examples/simple-main	example.pro
+CONFIG_SIMPLE_PIM	examples/simple-pim	example.pro
