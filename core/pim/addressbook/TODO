@@ -4,9 +4,12 @@ Pending bugfixes from previous work:
 
 Urgent:
 
-- Font menu is invisible using german translation
 
 Important:
+
+- Personal contact editor: Disable categories
+- Name order selected in "contacteditor" not used in list view.
+- contacteditor: Birthday, annyversary, ... : Use Dateselector
 
 - Overview window cleanup needed..
 - Cursor keys should work in detail-view (ablabel)
@@ -37,3 +40,4 @@ Fixed:
 - Advanced handling of cursor keys (search..)
 - Mail-Icon is missing
 - Use opie-mail insted of qt-mail if possible.
+- Font menu is invisible using german translation
