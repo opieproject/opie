@@ -34,6 +34,7 @@ public:
     QFrame* Frame8;
     QLabel* TextLabel4;
     QLabel* TextLabel5;
+    QCheckBox* CheckBox3;
     QCheckBox* CheckBox2;
     QCheckBox* CheckBox1;
     QSpinBox* SpinBox1;

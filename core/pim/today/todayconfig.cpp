@@ -48,7 +48,7 @@ todayconfig::todayconfig( QWidget* parent,  const char* name, bool modal, WFlags
   Frame8->setFrameShadow( QFrame::Raised );
   
   TextLabel4 = new QLabel( Frame8, "TextLabel4" );
-  TextLabel4->setGeometry( QRect( 20, 89, 100, 60 ) ); 
+  TextLabel4->setGeometry( QRect( 20, 65, 100, 60 ) ); 
   TextLabel4->setText( tr( "Should the \n"
 			   "location \n"
 			   "be shown?" ) );
@@ -60,11 +60,19 @@ todayconfig::todayconfig( QWidget* parent,  const char* name, bool modal, WFlags
   
   CheckBox2 = new QCheckBox( Frame8, "CheckBox2" );
   CheckBox2->setGeometry( QRect( 158, 170, 27, 21 ) ); 
-  CheckBox2->setText( tr( "" ) );
+  //CheckBox2->setText( tr( "" ) );
   
   CheckBox1 = new QCheckBox( Frame8, "CheckBox1" );
-  CheckBox1->setGeometry( QRect( 158, 90, 27, 50 ) ); 
-  CheckBox1->setText( tr( "" ) );
+  CheckBox1->setGeometry( QRect( 158, 65, 27, 50 ) ); 
+  //CheckBox1->setText( tr( "" ) );
+  
+  CheckBox3 = new QCheckBox (Frame8, "CheckBox3" );
+  CheckBox3->setGeometry( QRect( 158, 125, 27, 21 ) );
+  
+  TextLabel6 = new QLabel( Frame8, "All Day");
+  TextLabel6->setGeometry( QRect( 20, 120, 100, 30 ) ); 
+  TextLabel6->setText( tr( "Show only later\n"
+			   "appointments") );
   
   SpinBox1 = new QSpinBox( Frame8, "SpinBox1" );
   SpinBox1->setGeometry( QRect( 115, 20, 58, 25 ) ); 
@@ -72,7 +80,7 @@ todayconfig::todayconfig( QWidget* parent,  const char* name, bool modal, WFlags
   SpinBox1->setValue( 5 );
   
   TextLabel3 = new QLabel( Frame8, "TextLabel3" );
-  TextLabel3->setGeometry( QRect( 20, 10, 90, 70 ) ); 
+  TextLabel3->setGeometry( QRect( 20, 10, 90, 60 ) ); 
   TextLabel3->setText( tr( "How many \n"
 			   "appointment\n"
 			   "should should \n"

@@ -47,7 +47,7 @@ int MAX_LINES_MEET;
 int SHOW_LOCATION;
 int SHOW_NOTES;
 // show only later dates
-int ONLY_LATER = 1;
+int ONLY_LATER;
 /* 
  *  Constructs a Example which is a child of 'parent', with the 
  *  name 'name' and widget flags set to 'f' 
@@ -75,7 +75,8 @@ void Today::draw()
   getDates();
   getMail();
   getTodo(); 
-  QTimer::singleShot( 60*1000, this, SLOT(draw()) );
+  // how often refresh
+  QTimer::singleShot( 30*1000, this, SLOT(draw()) );
 
 }
 
@@ -95,6 +96,8 @@ void Today::init()
   SHOW_LOCATION = cfg.readNumEntry("showlocation",1);
   // if notes should be shown 
   SHOW_NOTES = cfg.readNumEntry("shownotes",0);
+  ONLY_LATER = cfg.readNumEntry("onlylater",1);
+
 }
 
 void Today::startConfig() 
@@ -119,7 +122,9 @@ void Today::startConfig()
   conf->SpinBox2->setValue(MAX_LINES_TASK);
   // clip when?
   conf->SpinBox7->setValue(MAX_CHAR_CLIP);
-   
+  // only later
+  conf->CheckBox3->setChecked(ONLY_LATER);
+  
   conf->exec();
   
   int maxlinestask = conf->SpinBox2->value();
@@ -127,12 +132,14 @@ void Today::startConfig()
   int location = conf->CheckBox1->isChecked();
   int notes = conf->CheckBox2->isChecked();
   int maxcharclip = conf->SpinBox7->value();
-  
+  int onlylater = conf->CheckBox3->isChecked();
+
   cfg.writeEntry("maxlinestask",maxlinestask);
   cfg.writeEntry("maxcharclip", maxcharclip); 
   cfg.writeEntry("maxlinesmeet",maxmeet);
   cfg.writeEntry("showlocation",location);
   cfg.writeEntry("shownotes", notes);
+  cfg.writeEntry("onlylater", onlylater);
   // sync it to "disk"
   cfg.write(); 
   
@@ -169,7 +176,29 @@ void Today::getDates()
 	  //cout << time.toString() << endl;
 	  //cout << TimeString::dateString((*it).event().end()) << endl;
 	  // still some bug in here, 1 h off 
-	  if ((time.toString()  <= TimeString::dateString((*it).event().end())) && ONLY_LATER )
+
+	  // decide if to get all day or only later appointments
+	  if (!ONLY_LATER)
+	    {
+	       msg += "<B>" + (*it).description() + "</B>";
+	       // include location or not
+	       if (SHOW_LOCATION == 1) 
+		 {
+		  msg+= "<BR>" + (*it).location();
+		 }
+	       msg += "<BR>"
+		 // start time of event
+		 + TimeString::timeString(QTime((*it).event().start().time()) )
+		 // end time of event
+		 + "<b> - </b>" + TimeString::timeString(QTime((*it).event().end().time()) )
+		 + "<BR>";
+	       // include possible note or not
+	       if (SHOW_NOTES == 1)
+		{
+		  msg += " <i>note</i>:" +((*it).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
+		}
+	    }
+	  else if ((time.toString() <= TimeString::dateString((*it).event().end())) && ONLY_LATER )
 	    {
 	      msg += "<B>" + (*it).description() + "</B>";
 	      // include location or not
@@ -189,6 +218,11 @@ void Today::getDates()
 		  msg += " <i>note</i>:" +((*it).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
 		}
 	    }
+	}
+      
+      if (msg.isEmpty())
+	{
+	  msg = "No more appointments today";
 	}
     }
     DatesField->setText(msg);
