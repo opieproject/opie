@@ -150,9 +150,9 @@ void Server :: readPackageFile( Server *local, bool clearAll, bool installingToR
 	if ( !in.is_open() )
         return;
 
-    char line[1001];
+    char line[5001];
     char k[21];
-    char v[1001];
+    char v[5001];
     QString key;
     QString value;
 
@@ -163,7 +163,7 @@ void Server :: readPackageFile( Server *local, bool clearAll, bool installingToR
     bool newPackage = true;
     do
     {
-        in.getline( line, 1000 );
+        in.getline( line, 5000 );
         if ( in.eof() )
             continue;
 
