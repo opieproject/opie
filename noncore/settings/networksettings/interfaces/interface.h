@@ -17,6 +17,7 @@ public:
   Interface(QObject * parent=0, const char * name= "unknown", bool status = false);
   
   QString getInterfaceName() const { QString n(this->name()); return n; };
+  void setInterfaceName( const QString &n ) { this->setName(n); };
   
   bool getStatus() const { return status; };
   void setStatus(bool newStatus);
