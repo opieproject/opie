@@ -1,0 +1,9 @@
+*.moc
+Makefile*
+lnkpropertiesbase.cpp
+lnkpropertiesbase.h
+moc_*
+shutdown.cpp
+shutdown.h
+syncdialog.cpp
+syncdialog.h
