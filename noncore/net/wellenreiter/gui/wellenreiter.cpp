@@ -164,7 +164,11 @@ void Wellenreiter::addNewItem( QString type, QString essid, QString macaddr, boo
     if ( item )
     {
         qDebug( "found!" );
-        new MScanListItem( item, type, essid, macaddr, wep, channel, signal );
+        
+        if ( macaddr != item->text( 2 ) )
+            new MScanListItem( item, type, essid, macaddr, wep, channel, signal );
+        else
+            qDebug( "already there. ignoring..." );
     }
     else
     {
