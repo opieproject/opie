@@ -143,6 +143,8 @@ private slots:
     void slotFileBridge( const QString& );
     void slotViewChange( const QString& );
 
+    bool eventFilter (QObject *o, QEvent *e);
+
 };
 
 #endif

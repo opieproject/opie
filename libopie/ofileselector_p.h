@@ -113,7 +113,8 @@ public:
     void reread( bool all = false );
     int fileCount()const;
     QString currentDir()const;
-
+protected:
+    bool eventFilter (QObject *o, QEvent *e);
 private slots:
     void slotNew(); // will emit newSelected
     void cdUP();

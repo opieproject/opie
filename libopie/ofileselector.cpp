@@ -9,6 +9,7 @@
 #include <qpopupmenu.h>
 #include <qwidgetstack.h>
 #include <qregexp.h>
+#include <qobjectlist.h>
 
 /* hacky but we need to get FileSelector::filter */
 #define private public
@@ -260,6 +261,9 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
     lay->addWidget( box );
 
     m_view = new QListView( this );
+
+    m_view->installEventFilter(this);
+
     QPEApplication::setStylusOperation( m_view->viewport(),
                                         QPEApplication::RightOnHold);
     m_view->addColumn(" " );
@@ -373,6 +377,19 @@ QString OFileViewFileListView::currentDir()const{
 OFileSelector* OFileViewFileListView::selector() {
     return m_sel;
 }
+
+bool OFileViewFileListView::eventFilter (QObject *o, QEvent *e) {
+    if ( e->type() == QEvent::KeyPress ) {
+        QKeyEvent *k = (QKeyEvent *)e;
+        if ( (k->key()==Key_Enter) || (k->key()==Key_Return)) {
+            slotClicked( Qt::LeftButton,m_view->currentItem(),QPoint(0,0),0);
+            return true;
+        }
+    }
+    return false;
+}
+
+
 void OFileViewFileListView::connectSlots() {
     connect(m_view, SIGNAL(clicked(QListViewItem*) ),
             this, SLOT(slotCurrentChanged(QListViewItem*) ) );
@@ -570,7 +587,9 @@ QString OFileViewFileSystem::selectedName()const{
     if (!m_view )
         return QString::null;
 
-    return m_view->currentDir() + "/" + currentFileName();
+    QString cFN=currentFileName();
+    if (cFN.startsWith("/")) return cFN;
+    return m_view->currentDir() + "/" + cFN;
 }
 QString OFileViewFileSystem::selectedPath()const{
     return QString::null;
@@ -688,6 +707,7 @@ void OFileSelector::initUI() {
     m_nameBox = new QHBox( this );
     (void)new QLabel( tr("Name:"), m_nameBox );
     m_lneEdit = new QLineEdit( m_nameBox );
+    m_lneEdit ->installEventFilter(this);
     lay->addWidget( m_nameBox );
 
     m_cmbBox = new QHBox( this );
@@ -695,6 +715,22 @@ void OFileSelector::initUI() {
     m_cmbMime = new QComboBox( m_cmbBox );
     lay->addWidget( m_cmbBox );
 }
+
+/*
+ * This will make sure that the return key in the name edit causes dialogs to close
+ */
+
+bool OFileSelector::eventFilter (QObject *o, QEvent *e) {
+    if ( e->type() == QEvent::KeyPress ) {
+        QKeyEvent *k = (QKeyEvent *)e;
+        if ( (k->key()==Key_Enter) || (k->key()==Key_Return)) {
+            emit ok();
+            return true;
+        }
+    }
+    return false;
+}
+
 /*
  * This will insert the MimeTypes into the Combo Box
  * And also connect the changed signal
@@ -735,7 +771,7 @@ const DocLnk* OFileSelector::selected() {
     return lnk;
 }
 QString OFileSelector::selectedName()const{
-    return currentView()->selectedName();
+       return currentView()->selectedName();
 }
 QString OFileSelector::selectedPath()const {
     return currentView()->selectedPath();

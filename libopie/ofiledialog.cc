@@ -100,6 +100,8 @@ OFileDialog::OFileDialog(const QString &caption,
   setCaption( caption.isEmpty() ? tr("FileDialog") : caption );
   connect(file, SIGNAL(fileSelected(const QString&) ),
 	  this, SLOT(slotFileSelected(const QString&) ) );
+  connect(file, SIGNAL(ok() ),
+	  this, SLOT(slotSelectorOk()) ) ;
 
   connect(file, SIGNAL(dirSelected(const QString&) ), this, SLOT(slotDirSelected(const QString&) ) );
 
@@ -199,6 +201,12 @@ void OFileDialog::slotFileSelected(const QString & )
 {
   accept();
 }
+
+void OFileDialog::slotSelectorOk( )
+{
+  accept();
+}
+
 void OFileDialog::slotDirSelected(const QString &dir )
 {
   setCaption( dir );

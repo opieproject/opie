@@ -96,5 +96,6 @@ class OFileDialog : public QDialog {
  private slots:
   void slotFileSelected( const QString & );
   void slotDirSelected(const QString & );
+  void slotSelectorOk();
 };
 #endif
