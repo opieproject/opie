@@ -3,115 +3,126 @@
     <name>Today</name>
     <message>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoy</translation>
     </message>
     <message>
         <source>Owned by </source>
-        <translation type="unfinished"></translation>
+        <translation>Perteneciente a</translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor, rellene su información personal</translation>
     </message>
     <message>
         <source>No more appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay más citas para hoy</translation>
     </message>
     <message>
         <source>No appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay citas para hoy</translation>
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; new mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt; nuevo(s) correo(s), &lt;b&gt;%2&lt;/b&gt; correo(s) para enviar</translation>
     </message>
     <message>
         <source>There is &lt;b&gt; 1&lt;/b&gt; active task:  &lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Hay &lt;b&gt; 1&lt;/b&gt; tarea pendiente: &lt;br&gt;</translation>
     </message>
     <message>
         <source>There are &lt;b&gt; %1&lt;/b&gt; active tasks: &lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Hay &lt;b&gt; %1 &lt;/b&gt; tareas pendientes: &lt;br&gt;</translation>
     </message>
     <message>
         <source>No active tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay tareas pendientes</translation>
     </message>
 </context>
 <context>
     <name>TodayBase</name>
     <message>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoy</translation>
     </message>
     <message>
         <source>Opiemail not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Opiemail no está instalado</translation>
     </message>
 </context>
 <context>
     <name>todayconfig</name>
     <message>
         <source>Today config</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración de Hoy</translation>
     </message>
     <message>
         <source>Should the 
 location 
 be shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Mostrar 
+el lugar 
+de las citas?</translation>
     </message>
     <message>
         <source>Should the notes 
 be shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Mostrar las notas 
+de las citas?</translation>
     </message>
     <message>
         <source>Show only later
 appointments</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar únicamente
+las citas futuras</translation>
     </message>
     <message>
         <source>How many 
 appointment
 should
 be shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Cuantas citas 
+debo mostrar?</translation>
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Calendario</translation>
     </message>
     <message>
         <source>How many
 tasks should 
 be shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Cuantas tareas
+debo mostrar?</translation>
     </message>
     <message>
         <source>Tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Tareas </translation>
     </message>
     <message>
         <source>Clip after how
 many letters</source>
-        <translation type="unfinished"></translation>
+        <translation>Saltar de línea tras
+cuántas letras</translation>
     </message>
     <message>
         <source>Should today be
 autostarted on
 resume? (Opie only)</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Arrancar Hoy
+automáticamente
+al encender? (sólo Opie)</translation>
     </message>
     <message>
         <source>Activate the  
 autostart after how
 many minutes?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Activar Hoy tras
+cuántos minutos
+apagado?</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Varios</translation>
     </message>
 </context>
 </TS>
