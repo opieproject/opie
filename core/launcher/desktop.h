@@ -75,7 +75,7 @@ private:
     DesktopPowerAlerter *pa;
     PowerStatus *ps;
     QTimer *cardSendTimer;
-	QCopChannel *channel;
+  QCopChannel *channel;
 };
 
 
@@ -128,7 +128,7 @@ private:
     PackageSlave *packageSlave;
 
     QDateTime suspendTime;
-    bool keyclick,touchclick;
+    bool keyclick,touchclick,alarmsound;
 };
 
 
