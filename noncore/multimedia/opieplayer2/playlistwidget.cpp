@@ -425,21 +425,16 @@ void PlayListWidget::useSelectedDocument() {
 
 
 const DocLnk *PlayListWidget::current() { // this is fugly
-    switch ( whichList() ) {
-      case 0: //playlist
-      {
+    assert( currentTab() == CurrentPlayList );
+
 //      qDebug("playlist");
-          if ( mediaPlayerState->isUsingPlaylist() ) {
-              return d->selectedFiles->current();
-          } else if ( d->setDocumentUsed && d->current ) {
-              return d->current;
-          } else {
-              return &(d->files->selectedDocument());
-          }
-      }
-      break;
-    };
-    return 0;
+    if ( mediaPlayerState->isUsingPlaylist() ) {
+        return d->selectedFiles->current();
+    } else if ( d->setDocumentUsed && d->current ) {
+        return d->current;
+    } else {
+          return &(d->files->selectedDocument());
+    }
 }
 
 
@@ -1158,13 +1153,12 @@ PlayListWidget::TabType PlayListWidget::currentTab() const
 }
 
 QString PlayListWidget::currentFileListPathName() const {
-    switch (whichList()) {
-      case 1:
+    switch (currentTab()) {
+      case AudioFiles:
           return audioView->currentItem()->text(3);
-          break;
-      case 2:
+      case VideoFiles:
           return videoView->currentItem()->text(3);
-          break;
+      default: assert( false );
     };
-    return "";
+    return QString::null;
 }
