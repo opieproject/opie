@@ -1,8 +1,0 @@
-Files: bin/netsystemtime apps/Settings/ntpdatetime.desktop
-Priority: optional
-Section: opie/settings
-Maintainer: Patrick S. Vogt <tille@handhelds.org>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: ntp ( Network  Time  Protocol) gui
