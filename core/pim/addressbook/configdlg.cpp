@@ -21,6 +21,9 @@ ConfigDlg::ConfigDlg( QWidget *parent, const char *name):
 		allFieldListBox->insertItem( contFields[i] );
 	}
 
+	// Reset Widget Flags: This was not changeable by designer :(
+	setWFlags ( WStyle_ContextHelp );	
+
 	// Set Pics to Buttons and Tabs
 	m_upButton->setIconSet( QIconSet( Resource::loadPixmap( "addressbook/up" ) ) );
 	m_downButton->setIconSet( QIconSet( Resource::loadPixmap( "addressbook/down" ) ) );

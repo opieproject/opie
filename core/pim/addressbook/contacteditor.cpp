@@ -47,6 +47,7 @@
 #include <qaction.h>
 #include <qiconset.h> 
 #include <qmessagebox.h> 
+#include <qwhatsthis.h>
 
 #include <assert.h>
 
@@ -65,8 +66,8 @@ void parseEmailTo( const QString &strDefaultEmail,
 ContactEditor::ContactEditor(	const OContact &entry,
 				QWidget *parent,
 				const char *name,
-				WFlags fl )
-	: QDialog( parent, name, TRUE, fl ),
+				WFlags )
+	: QDialog( parent, name, TRUE, WStyle_ContextHelp ),
 	  defaultEmailChooserPosition( -1 ),
 	  m_personalView ( false ),
 	  cmbDefaultEmail( 0 ),
@@ -148,27 +149,36 @@ void ContactEditor::init() {
 	gl->setResizeMode( QLayout::FreeResize );
 
 	btnFullName = new QPushButton( tr( "Full Name..." ), container );
+	QWhatsThis::add( btnFullName, tr( "Press to enter last- middle and firstname" ) );
 	gl->addWidget( btnFullName, 0, 0 );
 	txtFullName = new QLineEdit( container );
+	QWhatsThis::add( txtFullName, tr( "Enter fullname directly ! If you have a lastname with multiple words ( for instance \"de la Guerra\"), please write <lastname>,<firstnames> like this: \"de la Guerra, Carlos Pedro\"" ) );
 	gl->addWidget( txtFullName, 0, 1 );
 
 	QLabel *l = new QLabel( tr( "Job Title" ), container );
+	QWhatsThis::add( l, tr( "The jobtitle.." ) );
 	gl->addWidget( l, 1, 0 );
 	txtJobTitle = new QLineEdit( container );
+	QWhatsThis::add( txtJobTitle, tr( "The jobtitle.." ) );
 	gl->addWidget( txtJobTitle, 1, 1 );
 
 	l = new QLabel( tr("Suffix"), container );
+	QWhatsThis::add( l, tr( "Something like \"jr.\".." ) );
 	gl->addWidget( l, 2, 0 );
 	txtSuffix = new QLineEdit( container );
+	QWhatsThis::add( txtSuffix, tr( "Something like \"jr.\".." ) );
 	gl->addWidget( txtSuffix, 2, 1 );
 
 	l = new QLabel( tr( "Organization" ), container );
+	QWhatsThis::add( l, tr( "The working place of the contact" ) );
 	gl->addWidget( l, 3, 0 );
 	txtOrganization = new QLineEdit( container );
+	QWhatsThis::add( txtOrganization, tr( "The working place of the contact" ) );
 	gl->addWidget( txtOrganization, 3, 1 );
 
 	// Chooser 1 
 	cmbChooserField1 = new QComboBox( FALSE, container );
+	QWhatsThis::add( cmbChooserField1, tr( "Press to select attribute to change" ) );
 	cmbChooserField1->setMaximumWidth( 90 );
 	gl->addWidget( cmbChooserField1, 4, 0 );
 	// Textfield for chooser 1.
@@ -181,6 +191,7 @@ void ContactEditor::init() {
 
 	// Chooser 2
 	cmbChooserField2 = new QComboBox( FALSE, container );
+	QWhatsThis::add( cmbChooserField2, tr( "Press to select attribute to change" ) );
 	cmbChooserField2->setMaximumWidth( 90 );
 	gl->addWidget( cmbChooserField2, 5, 0 );
 	// Textfield for chooser 2
@@ -193,6 +204,7 @@ void ContactEditor::init() {
 
 	// Chooser 3
 	cmbChooserField3 = new QComboBox( FALSE, container );
+	QWhatsThis::add( cmbChooserField3, tr( "Press to select attribute to change" ) );
 	cmbChooserField3->setMaximumWidth( 90 );
 	gl->addWidget( cmbChooserField3, 6, 0 );
 	// Textfield for chooser 2
@@ -204,6 +216,7 @@ void ContactEditor::init() {
 	m_widgetStack3 -> raiseWidget( TextField );
 
 	l = new QLabel( tr( "File As" ), container );
+	QWhatsThis::add( l, tr( "Press to select how to store the name (and howto show it in the listview)" ) );
 	gl->addWidget( l, 7, 0 );
 	cmbFileAs = new QComboBox( TRUE, container );
 	gl->addWidget( cmbFileAs, 7, 1 );

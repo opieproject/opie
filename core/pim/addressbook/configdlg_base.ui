@@ -1,6 +1,7 @@
 <!DOCTYPE UI><UI>
 <class>ConfigDlg_Base</class>
 <author>Stefan Eilers</author>
+<include location="global">qwhatsthis.h</include>
 <widget>
     <class>QDialog</class>
     <property stdset="1">
@@ -12,7 +13,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>282</width>
+            <width>284</width>
             <height>327</height>
         </rect>
     </property>
@@ -62,6 +63,10 @@
             <property>
                 <name>layoutSpacing</name>
             </property>
+            <property>
+                <name>whatsThis</name>
+                <string>Click on tab to select one</string>
+            </property>
             <widget>
                 <class>QWidget</class>
                 <property stdset="1">
@@ -110,6 +115,10 @@
                                     <name>title</name>
                                     <string>Query Style</string>
                                 </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Settings for the search query style</string>
+                                </property>
                                 <vbox>
                                     <property stdset="1">
                                         <name>margin</name>
@@ -129,6 +138,10 @@
                                             <name>text</name>
                                             <string>Use Regular Expressions</string>
                                         </property>
+                                        <property>
+                                            <name>whatsThis</name>
+                                            <string>Search widget expects regular expressions if selected</string>
+                                        </property>
                                     </widget>
                                     <widget>
                                         <class>QRadioButton</class>
@@ -144,6 +157,10 @@
                                             <name>checked</name>
                                             <bool>true</bool>
                                         </property>
+                                        <property>
+                                            <name>whatsThis</name>
+                                            <string>Search widget just expects simple wildcards</string>
+                                        </property>
                                     </widget>
                                 </vbox>
                             </widget>
@@ -157,6 +174,10 @@
                                     <name>text</name>
                                     <string>Case Sensitive</string>
                                 </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>If selected, search differs between upper and lower chars</string>
+                                </property>
                             </widget>
                         </vbox>
                     </widget>
@@ -169,6 +190,10 @@
                         <property stdset="1">
                             <name>title</name>
                             <string>Font</string>
+                        </property>
+                        <property>
+                            <name>whatsThis</name>
+                            <string></string>
                         </property>
                         <hbox>
                             <property stdset="1">
@@ -189,6 +214,10 @@
                                     <name>text</name>
                                     <string>Small</string>
                                 </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Font size for list- and card view</string>
+                                </property>
                             </widget>
                             <widget>
                                 <class>QRadioButton</class>
@@ -204,6 +233,10 @@
                                     <name>checked</name>
                                     <bool>true</bool>
                                 </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Font size for list- and card view</string>
+                                </property>
                             </widget>
                             <widget>
                                 <class>QRadioButton</class>
@@ -214,6 +247,10 @@
                                 <property stdset="1">
                                     <name>text</name>
                                     <string>Large</string>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Font size for list- and card view</string>
                                 </property>
                             </widget>
                         </hbox>
@@ -270,6 +307,10 @@
                             <name>title</name>
                             <string>Mail</string>
                         </property>
+                        <property>
+                            <name>whatsThis</name>
+                            <string>Fontsettings for list and card view</string>
+                        </property>
                         <vbox>
                             <property stdset="1">
                                 <name>margin</name>
@@ -293,6 +334,10 @@
                                     <name>checked</name>
                                     <bool>true</bool>
                                 </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Use Sharp's mail application if available</string>
+                                </property>
                             </widget>
                             <widget>
                                 <class>QRadioButton</class>
@@ -303,6 +348,10 @@
                                 <property stdset="1">
                                     <name>text</name>
                                     <string>Prefer Opie-Mail</string>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Use OPIE mail if installed</string>
                                 </property>
                             </widget>
                             <widget>
@@ -403,6 +452,10 @@ is provided free !</string>
                                     <name>autoRepeat</name>
                                     <bool>true</bool>
                                 </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Move selected attribute one line up</string>
+                                </property>
                             </widget>
                             <widget row="1"  column="2" >
                                 <class>QPushButton</class>
@@ -425,6 +478,10 @@ is provided free !</string>
                                     <name>autoRepeat</name>
                                     <bool>true</bool>
                                 </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Move selected attribute one line down</string>
+                                </property>
                             </widget>
                             <widget row="4"  column="0"  rowspan="1"  colspan="2" >
                                 <class>QListBox</class>
@@ -438,6 +495,10 @@ is provided free !</string>
                                         <hsizetype>7</hsizetype>
                                         <vsizetype>7</vsizetype>
                                     </sizepolicy>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>List of all available attributes</string>
                                 </property>
                             </widget>
                             <widget row="3"  column="0" >
@@ -457,6 +518,10 @@ is provided free !</string>
                                     <name>text</name>
                                     <string>Add</string>
                                 </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Add selected attribute from list below to the upper list</string>
+                                </property>
                             </widget>
                             <widget row="3"  column="1" >
                                 <class>QPushButton</class>
@@ -474,6 +539,10 @@ is provided free !</string>
                                 <property stdset="1">
                                     <name>text</name>
                                     <string>Remove</string>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Remove the selected attribute from the upper list</string>
                                 </property>
                             </widget>
                             <spacer row="2"  column="2" >
@@ -530,6 +599,10 @@ is provided free !</string>
                                         <hsizetype>7</hsizetype>
                                         <vsizetype>7</vsizetype>
                                     </sizepolicy>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Order (up -&gt; down) defines the primary contact shown in the second column of the list view</string>
                                 </property>
                             </widget>
                         </grid>
