@@ -363,7 +363,7 @@ void CategoryTabWidget::updateLink(const QString& linkfile)
 {
     int i=0;
     LauncherView* view;
-    qApp->processEvents();
+    //qApp->processEvents();
     while ((view = (LauncherView*)stack->widget(i++))) {
 	if ( view->removeLink(linkfile) )
 	    break;
