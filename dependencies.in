@@ -40,7 +40,7 @@
 
   config LIBXINE_LIB_DIR
     string "LIBXINE library dir"
-    depends "LIBXINE_DEP
+    depends LIBXINE_DEP
 
   config LIBXINE_INC_DIR
     string "LIBXINE include dir"

@@ -73,6 +73,31 @@ endif
 ifeq ($(CONFIG_OPIE_WE_VERSION_OVERRIDE),y)
 	echo DEFINES += OPIE_WE_VERSION=$(CONFIG_OPIE_WE_VERSION) >> $@
 endif
+# Write LIB dirs and INC dirs...
+ifeq ($(CONFIG_LIBETPAN_DEP),y)
+	echo LIBETPAN_LIB_DIR = $(CONFIG_LIBETPAN_LIB_DIR) >> $@
+	echo LIBETPAN_INC_DIR = $(CONFIG_LIBETPAN_INC_DIR) >> $@
+endif
+ifeq ($(CONFIG_LIBPCAP_DEP),y)
+	echo LIBPCAP_LIB_DIR = $(CONFIG_LIBPCAP_LIB_DIR) >> $@
+	echo LIBPCAP_INC_DIR = $(CONFIG_LIBPCAP_INC_DIR) >> $@
+endif
+ifeq ($(CONFIG_LIBSQLITE_DEP),y)
+	echo LIBSQLITE_LIB_DIR = $(CONFIG_LIBSQLITE_LIB_DIR) >> $@
+	echo LIBSQLITE_INC_DIR = $(CONFIG_LIBSQLITE_INC_DIR) >> $@
+endif
+ifeq ($(CONFIG_LIBXINE_DEP),y)
+	echo LIBXINE_LIB_DIR = $(CONFIG_LIBXINE_LIB_DIR) >> $@
+	echo LIBXINE_INC_DIR = $(CONFIG_LIBXINE_INC_DIR) >> $@
+endif
+ifeq ($(CONFIG_LIBIPK_DEP),y)
+	echo LIBIPK_LIB_DIR = $(CONFIG_LIBIPK_LIB_DIR) >> $@
+	echo LIBIPK_INC_DIR = $(CONFIG_LIBIPK_INC_DIR) >> $@
+endif
+ifeq ($(CONFIG_LIBSDK_DEP),y)
+	echo LIBSDL_LIB_DIR = $(CONFIG_LIBSDL_LIB_DIR) >> $@
+	echo LIBSDL_INC_DIR = $(CONFIG_LIBSDL_INC_DIR) >> $@
+endif
 $(TOPDIR)/.depends : $(shell if [ -e $(TOPDIR)/config.in ]\; then echo $(TOPDIR)/config.in\; fi\;) $(TOPDIR)/.config $(TOPDIR)/packages
 	@echo Generating dependency information...
 # add to subdir-y, and add descend rules
