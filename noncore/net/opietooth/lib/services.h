@@ -5,26 +5,81 @@
 #include <qvaluelist.h>
 
 namespace OpieTooth {
+  /**
+   * Services lets shows you all available services
+   * on a remote device
+   */
   class Services {
+
+    /** The profile descriptor
+     *
+     */
     class ProfileDesriptor{
     public:
+      /** typedef */
       typedef QValueList<ProfileDescriptor> ValueList;
+      /** c'tor for QValueList */
       ProfileDescriptor();
-      ProfileDescriptor(const QString &id, uint, uint version );
+      /**
+       *  c'tor
+       *  @param id The id or name ("Lan Access Using PPP")
+       *  @param idInt The id as uint ( 0x1102 )
+       *  @param version Version of the Profile ( 1 )
+       */
+      ProfileDescriptor(const QString &id, uint idInt, uint version );
+      /**
+       * copy c'tor
+       */
       ProfileDescriptor(const ProfileDescriptor& );
+      /**
+       * returns the id
+       */
       QString id()const;
+      /**
+       * sets the id
+       */
       void setId(const QString& id);
+
+      /**
+       * sets the uint id
+       */
       void setId(uint );
+      /**
+       * reutns the id as int
+       */
       uint idInt()const;
+      /**
+       * returns the version
+       */
       uint version()const;
+      /**
+       * sets the Version
+       */
       void setVersion(uint version );
+      /**
+       * copy operator
+       */
       ProfileDescriptor &operator=( const ProfileDescriptor );
+      /**
+       * operator==
+       */
       friend bool operator==(const ProfileDescriptor&, const ProfileDescriptor& );
     };
+    /**
+     * Protocol Descriptor
+     */
     class ProtocolDescriptor {
     public:
       typedef QValueList<ProtocolDescriptor> ValueList;
+      /**
+       * c'tor
+       */
       ProtocolDescriptor();
+      /**
+       * name
+       * number
+       * channel/port
+       */
       ProtocolDescriptor(const QString&, uint, uint channel ); // Q_UINT8 ?
       ProtocolDescriptot(const ProtocolDescriptor& );
       ~ProtocolDescriptor();
@@ -38,6 +93,7 @@ namespace OpieTooth {
       friend bool operator==( const ProtocolDescription&,
 			      const ProtocolDescription& );
     };
+
   public:
     typedef QValueList<Services> ValueList;
     Services();
