@@ -1023,10 +1023,10 @@ i=-28;
     TEWidget* te = getTe();
     if( !cfg.readBoolEntry("HorzScroll",0)) {
         te->setWrapAt(0);
-        configMenu->setItemChecked( i,FALSE);
+        configMenu->setItemChecked( i,TRUE);
     } else {
         te->setWrapAt(90);
 //        te->setWrapAt(120);
-        configMenu->setItemChecked( i,TRUE);
+        configMenu->setItemChecked( i,FALSE);
     }       
 }
