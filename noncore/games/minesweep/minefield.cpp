@@ -286,7 +286,7 @@ MineField::MineField( QWidget* parent, const char* name )
     setState( GameOver );
 
     setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Maximum ) );
-    
+
     setFocusPolicy( QWidget::NoFocus );
 
     holdTimer = new QTimer( this );
@@ -299,13 +299,20 @@ MineField::MineField( QWidget* parent, const char* name )
     mineguess=0;
     nonminecount=0;
     cellSize = -1;
+    mines = 0;
 }
 
 MineField::~MineField()
 {
-    for ( int i = 0; i < numCols*numRows; i++ )
-	delete mines[i];
-    delete[] mines;
+    int i;
+    if ( mines )
+    {
+        for ( i = 0; i < numCols*numRows; i++ )
+        {
+            delete mines[i];
+        }
+        delete[] mines;
+    }
 }
 
 void MineField::setState( State st )
@@ -320,9 +327,14 @@ void MineField::setup( int level )
     //viewport()->setUpdatesEnabled( FALSE );
 
     int i;
-    for ( i = 0; i < numCols*numRows; i++ )
-	delete mines[i];
-    delete[] mines;
+    if ( mines )
+    {
+        for ( i = 0; i < numCols*numRows; i++ )
+        {
+            delete mines[i];
+        }
+        delete[] mines;
+    }
 
     switch( lev ) {
     case 1:
@@ -345,7 +357,7 @@ void MineField::setup( int level )
     for ( i = 0; i < numCols*numRows; i++ )
 	mines[i] = new Mine( this );
 
-    
+
     nonminecount = numRows*numCols - minecount;
     mineguess = minecount;
     emit mineCount( mineguess );
@@ -359,13 +371,13 @@ void MineField::setup( int level )
     updateGeometry();
 }
 
-void MineField::drawContents( QPainter * p, int clipx, int clipy, int clipw, int cliph ) 
+void MineField::drawContents( QPainter * p, int clipx, int clipy, int clipw, int cliph )
 {
     int c1 = clipx / cellSize;
     int c2 = ( clipx + clipw - 1 ) / cellSize;
     int r1 = clipy / cellSize;
     int r2 = ( clipy + cliph - 1 ) / cellSize;
-    
+
     for ( int c = c1; c <= c2 ; c++ ) {
 	for ( int r = r1; r <= r2 ; r++ ) {
 	    int x = c * cellSize;
@@ -398,7 +410,7 @@ int MineField::findCellSize()
     int w = availableRect.width() - 1;
     int h = availableRect.height() - 1;
     int cellsize;
-    
+
     cellsize = QMIN( w/numCols, h/numRows );
     cellsize = QMIN( QMAX( cellsize, minGrid ), maxGrid );
     return cellsize;
@@ -408,19 +420,20 @@ int MineField::findCellSize()
 void MineField::setCellSize( int cellsize )
 {
     cellSize = cellsize;
-    
+
     int w = availableRect.width();
     int h = availableRect.height();
-    
+
     int w2 = cellsize*numCols;
     int h2 = cellsize*numRows;
-    
+
     resizeContents( w2, h2 );
-    
-    int b = 2;
-    
+
+    int b = 5;
+
     setGeometry( availableRect.x() + (w-w2)/2, availableRect.y() + (h-h2)/2,
-		 QMIN(w,w2+b), QMIN(h,h2+b) );
+		 w2+b, h2+b );
+//		 QMIN(w,w2+b), QMIN(h,h2+b) );
 }
 
 
