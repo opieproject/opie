@@ -490,11 +490,11 @@ QString OContact::toRichText() const
 		    text += "<br>" + Qtopia::escapeString(value) + " ";
 		    marker = true;
 		    
-	    } else
-		    text += "<br>";
-
+	    }
 	    if ( !(value = businessCity()).isEmpty() ) {
 		    marker = true;
+		    if ( !businessZip() )
+			    text += "<br> ";  
 		    text += Qtopia::escapeString(value);
 		    if ( state )
 			    text += ", " + Qtopia::escapeString(state);
@@ -584,11 +584,12 @@ QString OContact::toRichText() const
 	    if ( !(value = homeZip()).isEmpty() ){
 		    text += "<br>" + Qtopia::escapeString(value) + " ";
 		    marker = true;
-	    } else
-		    text += "<br>";
+	    }
 
 	    if ( !(value = homeCity()).isEmpty() ) {
 		    marker = true;
+		    if ( !homeZip() )
+			    text += "<br> ";  
 		    text += Qtopia::escapeString(value);
 		    if ( !state.isEmpty() )
 			    text += ", " + Qtopia::escapeString(state);
