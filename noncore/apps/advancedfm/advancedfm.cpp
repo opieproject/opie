@@ -215,6 +215,7 @@ AdvancedFm::AdvancedFm( )
      Remote_View->setMultiSelection( TRUE );
      Remote_View->setSelectionMode(QListView::Extended);
 
+
      QPEApplication::setStylusOperation( Remote_View->viewport(),QPEApplication::RightOnHold);
 
     connect( Remote_View, SIGNAL( clicked( QListViewItem*)),
@@ -225,12 +226,13 @@ AdvancedFm::AdvancedFm( )
 
     tabLayout_2->addWidget( Remote_View, 0, 0 );
 
+
     TabWidget->insertTab( tab_2, tr( "2"));
 
      connect(TabWidget,SIGNAL(currentChanged(QWidget *)),
             this,SLOT(tabChanged(QWidget*)));
 
-     tab_3 = new QWidget( TabWidget, "tab_3" );
+     /*     tab_3 = new QWidget( TabWidget, "tab_3" );
       tabLayout_3 = new QGridLayout( tab_3 );
       tabLayout_3->setSpacing( 2);
       tabLayout_3->setMargin( 2);
@@ -248,7 +250,9 @@ QListView *fileTree;
       
      tabLayout_3->addMultiCellWidget( fileTree, 0, 0, 0, 3 );
 
-     TabWidget->insertTab( tab_3, tr( "Remote" ) );
+       TabWidget->insertTab( tab_3, tr( "Remote" ) );
+       */
+         
 ///////////////
 
 ////////////////////     
@@ -1769,6 +1773,7 @@ void AdvancedFm::showFileMenu() {
       m->insertItem( tr( "Beam File" ), this, SLOT( doBeam() ));
     m->setFocus();
     m->exec( QCursor::pos() );
+    sleep(1);
     if(m) delete m;
 }
 
