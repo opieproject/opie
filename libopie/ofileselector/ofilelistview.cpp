@@ -43,17 +43,13 @@ OFileListView::~OFileListView() {
 void OFileListView::clear() {
     QListView::clear();
 }
-void OFileListView::addFile( const QString&,
+void OFileListView::addFile( const QPixmap& pix,
+                             const QString&,
                              QFileInfo* info,
                              bool isSymlink ) {
-    MimeType type( info->absFilePath() );
-    QPixmap pix = type.pixmap();
     QString dir;
     QString name;
     bool locked = false;
-
-    if( pix.isNull() )
-        pix = Resource::loadPixmap( "UnknownDocument-14");
 
     dir = info->dirPath( true );
 
@@ -64,7 +60,7 @@ void OFileListView::addFile( const QString&,
         if( ( selector()->mode() == OFileSelector::Open && !info->isReadable() ) ||
             ( selector()->mode() == OFileSelector::Save && !info->isWritable() ) ){
 
-            locked = true; pix = Resource::loadPixmap("locked");
+            locked = true;
         }
     }
     new OFileSelectorItem( this, pix, name,
@@ -72,30 +68,16 @@ void OFileListView::addFile( const QString&,
                            QString::number( info->size() ),
                            dir, locked );
 }
-void OFileListView::addFile( const QString& /*mime*/, const QString& /*dir*/,
+void OFileListView::addFile( const QPixmap&,
+                             const QString& /*mime*/, const QString& /*dir*/,
                              const QString& /*file*/,  bool /*isSyml*/ ) {
 
 }
-void OFileListView::addDir( const QString&,
+void OFileListView::addDir( const QPixmap& pix, const QString&,
                             QFileInfo* info,  bool symlink ) {
 
     bool locked = false;
     QString name;
-    QPixmap pix;
-
-    if( ( selector()->mode() == OFileSelector::Open && !info->isReadable() ) ||
-        ( selector()->mode() == OFileSelector::Save && !info->isWritable() ) ){
-
-      locked = true;
-
-      if( symlink )
-	pix = selector()->pixmap("symlinkedlocked");
-      else
-	pix = Resource::loadPixmap("lockedfolder");
-
-    }else { // readable
-      pix = symlink ?  selector()->pixmap("dirsymlink") : Resource::loadPixmap("folder") ;
-    }
 
     name = symlink ? info->fileName() + "->" + info->dirPath(true) + "/" +info->readLink() : info->fileName() ;
 
@@ -106,17 +88,20 @@ void OFileListView::addDir( const QString&,
 			   true );
 
 }
-void OFileListView::addDir( const QString& /*mime*/,  const QString& /*dir*/,
+void OFileListView::addDir( const QPixmap&,
+                            const QString& /*mime*/,  const QString& /*dir*/,
                             const QString& /*file*/, bool ) {
 
 }
-void OFileListView::addSymlink( const QString& /*mime*/,
+void OFileListView::addSymlink( const QPixmap&,
+                                const QString& /*mime*/,
                                 QFileInfo* /*info*/,
                                 bool /*isSym*/ ) {
 
 }
-void OFileListView::addSymlink( const QString& /*mime*/,  const QString& /*path*/,
-                                const QString& /*file*/,  bool /*isSym*/ ) {
+void OFileListView::addSymlink(const QPixmap&,
+                               const QString& /*m*/,  const QString& /*path*/,
+                               const QString& /*file*/,  bool /*isSym*/ ) {
 
 }
 void OFileListView::cd( const QString& ) {

@@ -6,6 +6,7 @@
 #include <qstring.h>
 #include <qstringlist.h>
 
+class OPixmapProvider;
 class OFileSelector;
 /**
  * lister is something like KIO but very
@@ -24,6 +25,7 @@ public:
      * return a list of available mimetypes
      */
     virtual QMap<QString, QStringList> mimeTypes( const QString& dir ) = 0;
+    void setPixmapProvider( OPixmapProvider* );
 
 protected:
     bool showFiles()const;
@@ -51,8 +53,10 @@ protected:
                      const QString& name,
                      bool isSymlink = FALSE );
     OFileSelector* view();
+    OPixmapProvider* provider();
 private:
     OFileSelector* m_view;
+    OPixmapProvider* m_prov;
 
 
 };

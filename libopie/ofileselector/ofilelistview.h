@@ -2,6 +2,7 @@
 #define OPIE_FILE_LIST_VIEW_H
 
 #include <qlistview.h>
+#include <qpixmap.h>
 
 #include "ofileview.h"
 
@@ -12,23 +13,30 @@ public:
     ~OFileListView();
 
     void clear();
-    void addFile( const QString& mine,
+    void addFile( const QPixmap&,
+                  const QString& mine,
                   QFileInfo* info,
                   bool isSymlink = FALSE );
 
-    void addFile( const QString& mime,
+    void addFile( const QPixmap&,
+                  const QString& mime,
                   const QString& dir,
                   const QString& file,
                   bool = false );
 
-    void addDir( const QString& mime,
+    void addDir( const QPixmap&,
+                 const QString& mime,
                  QFileInfo* info, bool = FALSE );
-    void addDir( const QString& mime, const QString& dir,
+
+    void addDir( const QPixmap&,
+                 const QString& mime, const QString& dir,
                  const QString& file,  bool = FALSE );
 
-    void addSymlink( const QString& mime,
+    void addSymlink( const QPixmap&,
+                     const QString& mime,
                      QFileInfo* info,  bool = FALSE );
-    void addSymlink( const QString& mine, const QString& path,
+    void addSymlink( const QPixmap&,
+                     const QString& mine, const QString& path,
                      const QString& file, bool isSymlink = FALSE );
     void cd( const QString& path );
     QWidget* widget();

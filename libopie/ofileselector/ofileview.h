@@ -53,22 +53,30 @@ public:
     virtual ~OFileView();
 
     virtual void clear() = 0;
-    virtual void addFile(const QString &mine,
+    virtual void addFile(const QPixmap&,
+                         const QString &mine,
                          QFileInfo *info,
                          bool isSymlink = FALSE ) = 0;
-    virtual void addFile(const QString& mine, const QString& dir,
+
+    virtual void addFile(const QPixmap&,
+                         const QString& mine, const QString& dir,
                          const QString& file, bool = FALSE ) = 0;
 
-    virtual void addDir (const QString &mine,
+    virtual void addDir (const QPixmap&,
+                         const QString &mine,
                          QFileInfo *info,
                          bool isSymlink = FALSE ) = 0;
-    virtual void addDir (const QString& mine, const QString& dir,
+    virtual void addDir (const QPixmap&,
+                         const QString& mine, const QString& dir,
                          const QString& file, bool = FALSE) = 0;
 
-    virtual void addSymlink(const QString &mime,
+    virtual void addSymlink(const QPixmap&,
+                            const QString &mime,
                             QFileInfo *info,
                             bool isSymlink = FALSE ) = 0;
-    virtual void addSymlink(const QString& mine,
+
+    virtual void addSymlink(const QPixmap&,
+                            const QString& mine,
                             const QString& path,
                             const QString& file,
                             bool isSymlink = FALSE ) = 0;
@@ -91,6 +99,8 @@ protected:
   void contextMenu();
   void changedDir(const QString &);
   void changedDir(const QDir & );
+
+    /* updates the file name line of the FileSelector */
   void updateLine( const QString& );
   OFileSelector* selector()const;
 
