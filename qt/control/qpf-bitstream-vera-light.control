@@ -5,6 +5,7 @@ Priority: optional
 Section: base
 Depends: qte-fonts-common
 Provides: qpf-bitstream-vera
+Replaces: qpf-bitstream-vera-light
 Maintainer: Chris Larson <kergoth@handhelds.org>
 Architecture: all
 Description: Bitstream Vera Fonts - small sizes - QPF format
