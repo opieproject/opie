@@ -569,7 +569,6 @@ void TextEdit::fileNew() {
 void TextEdit::fileOpen() {
     Config cfg("TextEdit");
     cfg. setGroup ( "View" );
-    QString dir = cfg.readEntry("LastOpenDirectory", QPEApplication::documentDir());
     QMap<QString, QStringList> map;
     map.insert(tr("All"), QStringList() );
     QStringList text;
@@ -578,11 +577,10 @@ void TextEdit::fileOpen() {
     text << "*";
     map.insert(tr("All"), text );
     QString str = OFileDialog::getOpenFileName( 2,
-                                                dir ,
+                                                QString::null ,
                                                 QString::null, map);
     if( !str.isEmpty() && QFile(str).exists() && !QFileInfo(str).isDir() )
     {
-       cfg.writeEntry("LastOpenDirectory",  QFileInfo(str).dirPath(false));
        openFile( str );
     }
     else
