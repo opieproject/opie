@@ -1,4 +1,4 @@
-  config WORDGAME
-    boolean "wordgame"
-    default "y"
+  config YATZEE
+    boolean "opie-yatzee (yatzee game)"
+    default "n"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
