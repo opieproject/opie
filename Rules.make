@@ -26,6 +26,19 @@ $(TOPDIR)/.depends.cfgs:
 
 $(QTDIR)/stamp-headers :
 	@-rm -f $@*
+	( cd $(QTDIR)/include; \
+		$(patsubst %,ln -sf ../src/kernel/%;,qgfx_qws.h qwsmouse_qws.h \
+		qcopchannel_qws.h qwindowsystem_qws.h \
+		qfontmanager_qws.h qwsdefaultdecoration_qws.h))
+	touch $@
+
+$(QTDIR)/stamp-headers-x11 :
+	@-rm -f $@*
+	cd $(QTDIR)/include; $(patsubst %,ln -sf $(OPIEDIR)/x11/libqpe-x11/qt/%;,qgfx_qws.h qwsmouse_qws.h qcopchannel_qws.h qwindowsystem_qws.h qfontmanager_qws.h qwsdefaultdecoration_qws.h)
+	touch $@
+
+$(OPIEDIR)/stamp-headers :
+	@-rm -f $@*
 	mkdir -p $(TOPDIR)/include/qpe $(TOPDIR)/include/qtopia \
 		$(TOPDIR)/include/opie $(TOPDIR)/include/qtopia/private
 	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
@@ -37,13 +50,9 @@ $(QTDIR)/stamp-headers :
 	( cd include/opie; for generatedHeader in `cd ../../libopie; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
 	ln -sf ../../libopie/$$generatedHeader $$generatedHeader; done )
 	ln -sf ../../library/custom.h $(TOPDIR)/include/qpe/custom.h
-	( cd $(QTDIR)/include; \
-		$(patsubst %,ln -sf ../src/kernel/%;,qgfx_qws.h qwsmouse_qws.h \
-		qcopchannel_qws.h qwindowsystem_qws.h \
-		qfontmanager_qws.h qwsdefaultdecoration_qws.h))
 	touch $@
 	
-$(QTDIR)/stamp-headers-x11 :
+$(OPIEDIR)/stamp-headers-x11 :
 	@-rm -f $@*
 	mkdir -p $(TOPDIR)/include/qpe $(TOPDIR)/include/qtopia \
 		$(TOPDIR)/include/opie $(TOPDIR)/include/qtopia/private
@@ -57,7 +66,6 @@ $(QTDIR)/stamp-headers-x11 :
 	ln -sf ../../libopie/$$generatedHeader $$generatedHeader; done )
 	ln -sf ../../library/custom.h $(TOPDIR)/include/qpe/custom.h
 	( cd include/qpe; ln -sf ../../x11/libqpe-x11/qpe/*.h .; )
-	cd $(QTDIR)/include; $(patsubst %,ln -sf $(OPIEDIR)/x11/libqpe-x11/qt/%;,qgfx_qws.h qwsmouse_qws.h qcopchannel_qws.h qwindowsystem_qws.h qfontmanager_qws.h qwsdefaultdecoration_qws.h)
 	touch $@
 	
 $(TOPDIR)/library/custom.h : $(TOPDIR)/.config

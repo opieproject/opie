@@ -104,8 +104,8 @@ endif
 
 all clean lupdate lrelease install ipk: $(SUBDIRS) 
 
-$(subdir-y) : $(if $(CONFIG_LIBQPE),$(QTDIR)/stamp-headers) \
-	$(if $(CONFIG_LIBQPE-X11),$(QTDIR)/stamp-headers-x11) \
+$(subdir-y) : $(if $(CONFIG_LIBQPE),$(QTDIR)/stamp-headers $(OPIEDIR)/stamp-headers) \
+	$(if $(CONFIG_LIBQPE-X11),$(QTDIR)/stamp-headers-x11 $(OPIEDIR)/stamp-headers-x11 ) \
 	$(TOPDIR)/library/custom.h
 
 clean : $(TOPDIR)/.config
