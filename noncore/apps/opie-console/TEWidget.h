@@ -69,6 +69,8 @@ public:
 
     void emitSelection();
 
+	void setWrapAt(int columns);
+
 public:
 
     void setImage(const ca* const newimg, int lines, int columns);
@@ -154,6 +156,7 @@ public slots:
 protected slots:
 
     void scrollChanged(int value);
+    void hscrollChanged(int value);
     void blinkEvent();
 
 private:
@@ -188,8 +191,9 @@ private:
 
     QPushButton *m_cornerButton;
     QClipboard*    cb;
-    QScrollBar* scrollbar;
+    QScrollBar* scrollbar, *hscrollbar;
     int         scrollLoc;
+	int hposition, vcolumns;
 
 //#define SCRNONE  0
 //#define SCRLEFT  1

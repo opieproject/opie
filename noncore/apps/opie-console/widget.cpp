@@ -102,8 +102,6 @@ alter Widget to use only QByteArray, where applicable.
 #define rimX 0      // left/right rim width
 #define rimY 0      // top/bottom rim high
 
-#define SCRWIDTH 16 // width of the scrollbar
-
 #define yMouseScroll 1
 // scroll increment used when dragging selection at top/bottom of window.
 

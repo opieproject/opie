@@ -15,9 +15,6 @@
 #define rimX 0 // left/right rim width
 #define rimY 0 // top/bottom rim high
 
-#define SCRWIDTH 16 // width of scrollbar
-
-
 static const ColorEntry color_table[TABLE_COLORS] =
 {
     ColorEntry(QColor(0x00,0x00,0x00), 0, 0 ), ColorEntry( QColor(0xB2,0xB2,0xB2), 1, 0 ), // Dfore, Dback

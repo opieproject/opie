@@ -90,8 +90,6 @@
 #define rimX 0      // left/right rim width
 #define rimY 0      // top/bottom rim high
 
-#define SCRWIDTH 16 // width of the scrollbar
-
 #define yMouseScroll 1
 // scroll increment used when dragging selection at top/bottom of window.
 
@@ -319,6 +317,10 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   scrollbar->setCursor( arrowCursor );
   connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
 
+  hscrollbar = new QScrollBar( Qt::Horizontal, this );
+  hscrollbar->setCursor( arrowCursor );
+  connect(hscrollbar, SIGNAL(valueChanged(int)), this, SLOT(hscrollChanged(int)));
+
   m_cornerButton = new QPushButton( this );
   m_cornerButton->setPixmap( QPixmap( (const char**)menu_xpm ) );
   m_cornerButton->setMaximumSize( 14, 14 );
@@ -352,6 +354,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   font_h   = 1;
   font_a   = 1;
   word_selection_mode = FALSE;
+  vcolumns = 0;
 
   setMouseMarks(TRUE);
   setVTFont( QFont("fixed") );
@@ -628,6 +631,13 @@ void TEWidget::propagateSize()
 void TEWidget::scrollChanged(int)
 {
   emit changedHistoryCursor(scrollbar->value()); //expose
+}
+
+void TEWidget::hscrollChanged(int loc)
+{
+  hposition = loc;
+  propagateSize();
+  update();
 }
 
 void TEWidget::setScroll(int cursor, int slines)
@@ -1139,18 +1149,38 @@ void TEWidget::calcGeometry()
 {
   //FIXME: set rimX == rimY == 0 when running in full screen mode.
 
+  int showhscrollbar = 1;
+  int hwidth = 0;
+
+  if(vcolumns == 0) showhscrollbar = 0;
+  if(showhscrollbar == 1) hwidth = QApplication::style().scrollBarExtent().width();
+
   scrollbar->resize(QApplication::style().scrollBarExtent().width(),
-                    contentsRect().height());
+                    contentsRect().height() - hwidth);
+
+  if(showhscrollbar == 1)
+  {
+    hscrollbar->resize(contentsRect().width() - hwidth, hwidth);
+    hscrollbar->setRange(0, 40);
+
+    QPoint p = contentsRect().bottomLeft();
+    hscrollbar->move(QPoint(p.x(), p.y() - hwidth));
+    hscrollbar->show();
+  }
+  else hscrollbar->hide();
+
   switch(scrollLoc)
   {
     case SCRNONE :
      columns = ( contentsRect().width() - 2 * rimX ) / font_w;
+	 if(vcolumns) columns = vcolumns;
      blX = (contentsRect().width() - (columns*font_w) ) / 2;
      brX = blX;
      scrollbar->hide();
      break;
     case SCRLEFT :
      columns = ( contentsRect().width() - 2 * rimX - scrollbar->width()) / font_w;
+	 if(vcolumns) columns = vcolumns;
      brX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
      blX = brX + scrollbar->width();
      scrollbar->move(contentsRect().topLeft());
@@ -1158,7 +1188,10 @@ void TEWidget::calcGeometry()
      break;
     case SCRRIGHT:
      columns = ( contentsRect().width()  - 2 * rimX - scrollbar->width()) / font_w;
+	 if(vcolumns) columns = vcolumns;
      blX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
+     if(showhscrollbar)
+       blX = -hposition * font_w;
      brX = blX;
      scrollbar->move(contentsRect().topRight() - QPoint(scrollbar->width()-1,0));
      scrollbar->show();
@@ -1167,6 +1200,12 @@ void TEWidget::calcGeometry()
   //FIXME: support 'rounding' styles
   lines   = ( contentsRect().height() - 2 * rimY  ) / font_h;
   bY = (contentsRect().height() - (lines  *font_h)) / 2;
+
+  if(showhscrollbar == 1)
+  {
+    //bY = bY - 10;
+    lines = lines - 1;
+  }
 }
 
 void TEWidget::makeImage()
@@ -1301,3 +1340,10 @@ void TEWidget::drop_menu_activated(int)
 QPushButton* TEWidget::cornerButton() {
     return m_cornerButton;
 }
+
+void TEWidget::setWrapAt(int columns)
+{
+	vcolumns = columns;
+}
+
+
