@@ -1,4 +1,4 @@
-Files: bin/light-and-power apps/Settings/Light.desktop
+Files: bin/light-and-power apps/Settings/Light.desktop pics/lightandpower
 Priority: optional
 Section: opie/settings
 Maintainer: Warwick Allison <warwick@trolltech.com>
