@@ -132,17 +132,17 @@ DFARS 252.227-7013 or 48 CFR 52.227-19, as applicable.
 #include <stdlib.h>
 #include <ctype.h>
 
-/*#ifdef PALMTOPCENTER*/
-/*#include <qpe/vobject_p.h>*/
-/*#else*/
+/*#ifdef PALMTOPCENTER*/
+/*#include <qpe/vobject_p.h>*/
+/*#else*/
 #include "vobject_p.h"
-/*#endif*/
+/*#endif*/
 
 /****  Types, Constants  ****/
 
 #define YYDEBUG		0	/* 1 to compile in some debugging code */
 #define MAXTOKEN	256	/* maximum token (line) length */
-#define YYSTACKSIZE 	100	/* ~unref ?*/
+#define YYSTACKSIZE 	100	/* ~unref ?*/
 #define MAXLEVEL	10	/* max # of nested objects parseable */
 				/* (includes outermost) */
 
