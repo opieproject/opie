@@ -3,11 +3,11 @@
     <name>LockMenuApplet</name>
     <message>
         <source>Lock shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Zkratka zámku</translation>
     </message>
     <message>
         <source>Lock</source>
-        <translation type="unfinished"></translation>
+        <translation>Zámek</translation>
     </message>
 </context>
 </TS>

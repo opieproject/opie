@@ -4,152 +4,160 @@
     <message>
         <source>Colormode: Color
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Režim barev: Barevný
+</translation>
     </message>
     <message>
         <source>Colormode: Black and white
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Režim barev: Černobílý
+</translation>
     </message>
     <message>
         <source>Basic</source>
-        <translation type="unfinished"></translation>
+        <translation>Základní</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normální</translation>
     </message>
     <message>
         <source>Fine</source>
-        <translation type="unfinished"></translation>
+        <translation>Jemná</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznámá</translation>
     </message>
     <message>
         <source>Quality: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kvalita: %1
+</translation>
     </message>
     <message>
         <source>Daylight</source>
-        <translation type="unfinished"></translation>
+        <translation>Denní světlo</translation>
     </message>
     <message>
         <source>Fluorescent</source>
-        <translation type="unfinished"></translation>
+        <translation>Zářivka</translation>
     </message>
     <message>
         <source>Tungsten</source>
-        <translation type="unfinished"></translation>
+        <translation>Žárovka</translation>
     </message>
     <message>
         <source>Standard light A</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardní světlo A</translation>
     </message>
     <message>
         <source>Standard light B</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardní světlo B</translation>
     </message>
     <message>
         <source>Standard light C</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardní světlo C</translation>
     </message>
     <message>
         <source>D55</source>
-        <translation type="unfinished"></translation>
+        <translation>D55</translation>
     </message>
     <message>
         <source>D65</source>
-        <translation type="unfinished"></translation>
+        <translation>D65</translation>
     </message>
     <message>
         <source>D75</source>
-        <translation type="unfinished"></translation>
+        <translation>D75</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Jiná</translation>
     </message>
     <message>
         <source>White Balance: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Balance bílé: %1</translation>
     </message>
     <message>
         <source>Average</source>
-        <translation type="unfinished"></translation>
+        <translation>Průměr</translation>
     </message>
     <message>
         <source>Center weighted average</source>
-        <translation type="unfinished"></translation>
+        <translation>Průměr s váženým středem</translation>
     </message>
     <message>
         <source>Spot</source>
-        <translation type="unfinished"></translation>
+        <translation>Bodové</translation>
     </message>
     <message>
         <source>MultiSpot</source>
-        <translation type="unfinished"></translation>
+        <translation>Vícebodové</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzorek</translation>
     </message>
     <message>
         <source>Partial</source>
-        <translation type="unfinished"></translation>
+        <translation>Částečné</translation>
     </message>
     <message>
         <source>Metering Mode: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Režim měření: %1</translation>
     </message>
     <message>
         <source>Not defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Není definován</translation>
     </message>
     <message>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuální</translation>
     </message>
     <message>
         <source>Normal progam</source>
-        <translation type="unfinished"></translation>
+        <translation>Normální program</translation>
     </message>
     <message>
         <source>Aperture priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Priorita clony</translation>
     </message>
     <message>
         <source>Shutter priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Priorita času</translation>
     </message>
     <message>
         <source>Creative progam
 (biased toward fast shutter speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Kreativní program
+(velká rychlost závěrky</translation>
     </message>
     <message>
         <source>Action progam
 (biased toward fast shutter speed)</source>
-        <translation type="unfinished"></translation>
+        <translation>Akční program
+(velká rychlost závěrky)</translation>
     </message>
     <message>
         <source>Portrait mode
 (for closeup photos with the background out of focus)</source>
-        <translation type="unfinished"></translation>
+        <translation>Režim portrét
+(pro blízké záběry s rozmazaným pozadím)</translation>
     </message>
     <message>
         <source>Landscape mode
 (for landscape photos with the background in focus)</source>
-        <translation type="unfinished"></translation>
+        <translation>Režim krajina
+(pro fotky krajiny se zaostřeným pozadím)</translation>
     </message>
     <message>
         <source>Exposure Program: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Expoziční program: %1
+</translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>Interface</name>
     <message>
         <source>Restarting interface</source>
-        <translation type="unfinished">Restartuji rozhraní</translation>
+        <translation>Restartuji rozhraní</translation>
     </message>
 </context>
 <context>

@@ -156,19 +156,20 @@
     <message>
         <source>Download mail?
 It is %1 kByte but your limit is %2 kByte</source>
-        <translation type="unfinished"></translation>
+        <translation>Stáhnout zprávu?
+Je to %1 kilobajtů, ale váš limit je %2 kB</translation>
     </message>
     <message>
         <source>Download message</source>
-        <translation type="unfinished"></translation>
+        <translation>Stáhnout zprávu</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ano</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne</translation>
     </message>
 </context>
 <context>

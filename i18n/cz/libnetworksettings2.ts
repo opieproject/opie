@@ -7,11 +7,11 @@
     </message>
     <message>
         <source>State should be off</source>
-        <translation type="unfinished"></translation>
+        <translation>Stav by měl být schozený</translation>
     </message>
     <message>
         <source>State should at least be off</source>
-        <translation type="unfinished"></translation>
+        <translation>Stav by měl být přinejmenším schozený</translation>
     </message>
 </context>
 <context>
@@ -50,27 +50,27 @@
     </message>
     <message>
         <source>&lt;p&gt;Nodes that provide working IP connection&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Uzly, které poskytují funkční IP připojení&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Fully configured network profile&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Plně nakonfigurován síťový profil&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Connection to GPRS device</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojení k GPRS zařízení</translation>
     </message>
     <message>
         <source>&lt;p&gt;Connection to a GPRS capable device&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Připojení k zařízení s možností GPRS&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Today Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba Today</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The plugin &apos;%1&apos; caused Today to crash. It could be that the plugin is not properly installed.&lt;br&gt;Today tries to continue loading plugins.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Plugin &apos;%1&apos; způsobil zhroucení Today. Je možné, že plugin nebyl řádně instalován.&lt;br&gt; Today zkusí pokračovat v nahrávání pluginů.&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>
@@ -101,11 +101,11 @@
     </message>
     <message>
         <source>Inactive</source>
-        <translation type="unfinished"></translation>
+        <translation>Neaktivní</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivní</translation>
     </message>
 </context>
 </TS>
