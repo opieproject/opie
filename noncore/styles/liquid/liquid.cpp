@@ -30,7 +30,7 @@
 #include <qheader.h>
 #include <unistd.h>
 #include <qmenubar.h>
-
+#include <qprogressbar.h>
 
 #include <stdio.h>
 
@@ -853,10 +853,7 @@ void LiquidStyle::polish(QWidget *w)
         return;
     }
    
-    
-		
-
-    if(w->inherits("QComboBox") ||
+    if(w->inherits("QComboBox") || w->inherits("QProgressBar") ||
        w->inherits("QLineEdit") || w->inherits("QRadioButton") ||
        w->inherits("QCheckBox") || w->inherits("QScrollBar")) {
         w->installEventFilter(this);
@@ -1034,6 +1031,68 @@ void LiquidStyle::unPolish(QApplication *app)
     
 //    QApplication::qwsSetDecoration ( new QPEDecoration ( ));
 }
+
+
+/* !! HACK !! Beware
+ * 
+ * TT forgot to make the QProgressBar widget styleable in Qt 2.x
+ * So the only way to customize the drawing, is to intercept the 
+ * paint event - since we have to use protected functions, we need
+ * to derive a "hack" class from QProgressBar and do the painting
+ * in there.
+ * 
+ * - sandman
+ */
+
+class HackProgressBar : public QProgressBar {
+public:
+	HackProgressBar ( );
+	
+	void paint ( QPaintEvent *event, const QColorGroup &g, QPixmap *pix )
+	{
+		QPainter p( this );
+
+		if ( !contentsRect().contains( event->rect() ) ) {
+			p.save();
+			p.setClipRegion( event->region().intersect(frameRect()) );
+			drawFrame( &p);
+			p.restore();
+		}
+		if ( event->rect().intersects( contentsRect() ))  {
+			p.setClipRegion( event->region().intersect( contentsRect() ) );
+
+			int x, y, w, h;
+			contentsRect ( ). rect ( &x, &y, &w, &h );
+
+			int prog = progress ( );
+			int total = totalSteps ( );
+			if ( prog < 0 )
+				prog = 0;
+			if ( total <= 0 )
+				total = 1;
+			int bw = w * prog / total;
+			if ( bw > w )
+				bw = w;
+
+			p.setPen(g.button().dark(130));
+			p.drawRect(x, y, bw, h);
+			p.setPen(g.button().light(120));
+			p.drawRect(x+1, y+1, bw-2, h-2);
+
+			if(bw >= 4 && h >= 4 && pix)
+				p.drawTiledPixmap(x+2, y+2, bw-4, h-4, *pix);
+			
+			if ( progress ( )>= 0 && totalSteps ( ) > 0 ) {			
+				QString pstr;
+				pstr. sprintf ( "%d%%", 100 * progress()/totalSteps ());
+				p. setPen ( g.text());//g.highlightedText ( ));
+				p. drawText (x,y,w-1,h-1,AlignCenter,pstr);
+			}
+		}
+	}
+};
+
+
 
 /*
  * This is a fun method ;-) Here's an overview. KToolBar grabs resize to
@@ -1240,7 +1299,24 @@ bool LiquidStyle::eventFilter(QObject *obj, QEvent *ev)
             }
         }
     }
-    return(false);
+    else if (obj-> inherits( "QProgressBar" )) {
+    	if ( ev->type() == QEvent::Paint ) {
+    		HackProgressBar *p = (HackProgressBar *) obj;
+    		const QColorGroup &g = p-> colorGroup ( );
+    		
+			QPixmap *pix = bevelFillDict.find(g.button().dark(120).rgb());
+			if(!pix){
+				int h, s, v;
+				g.button().dark(120).hsv(&h, &s, &v);
+				pix = new QPixmap(*bevelFillPix);
+				adjustHSV(*pix, h, s, v);
+				bevelFillDict.insert(g.button().dark(120).rgb(), pix);
+			}
+    		p-> paint ((QPaintEvent *) ev, g, pix );
+    		return true;    		
+    	}
+	}    		
+	return false ;
 }
 
 void LiquidStyle::drawButton(QPainter *p, int x, int y, int w, int h,
