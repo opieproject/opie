@@ -1,4 +1,4 @@
-#include <qradiobutton.h>
+#include <qcheckbox.h>
 
 #include <qpe/config.h>
 
@@ -19,12 +19,16 @@ void SettingsDialog::readConfig() {
     Config cfg("mail");
     cfg.setGroup( "Settings" );
     showHtmlButton->setChecked( cfg.readBoolEntry( "showHtml", false ) );
+    cfg.setGroup( "Compose" );
+    checkBoxLater->setChecked( cfg.readBoolEntry( "sendLater", false ) );
 }
 
 void SettingsDialog::writeConfig() {
     Config cfg( "mail" );
     cfg.setGroup( "Settings" );
     cfg.writeEntry( "showHtml", showHtmlButton->isChecked() );
+    cfg.setGroup( "Compose" );
+    cfg.writeEntry( "sendLater", checkBoxLater->isChecked() );;
 
 }
 

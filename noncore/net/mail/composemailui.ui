@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>264</width>
+            <width>260</width>
             <height>360</height>
         </rect>
     </property>
@@ -28,12 +28,23 @@
     <vbox>
         <property stdset="1">
             <name>margin</name>
-            <number>0</number>
+            <number>3</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>0</number>
+            <number>3</number>
         </property>
+        <widget>
+            <class>QCheckBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>checkBoxLater</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>send later</string>
+            </property>
+        </widget>
         <widget>
             <class>QTabWidget</class>
             <property stdset="1">
@@ -59,11 +70,11 @@
                 <grid>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>4</number>
+                        <number>-1</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>3</number>
+                        <number>-1</number>
                     </property>
                     <widget row="2"  column="1" >
                         <class>QLineEdit</class>

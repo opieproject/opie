@@ -2,6 +2,7 @@
 
 #include <opie/ofiledialog.h>
 #include <qpe/resource.h>
+#include <qpe/config.h>
 
 #include "composemail.h"
 #include "smtpwrapper.h"
@@ -10,6 +11,10 @@ ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool m
     : ComposeMailUI( parent, name, modal, flags )
 {
     settings = s;
+
+    Config cfg( "mail" );
+    cfg.setGroup( "Compose" );
+    checkBoxLater->setChecked( cfg.readBoolEntry( "sendLater", false ) );
 
     attList->addColumn( tr( "Name" ) );
     attList->addColumn( tr( "Size" ) );
@@ -30,6 +35,7 @@ ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool m
         QMessageBox::information( this, tr( "Problem" ),
                                   tr( "<p>Please create an SMTP account first.</p>" ),
                                   tr( "Ok" ) );
+        return;
     }
 
     connect( fromBox, SIGNAL( activated( int ) ), SLOT( fillValues( int ) ) );
@@ -153,6 +159,11 @@ void ComposeMail::removeAttachment()
 
 void ComposeMail::accept()
 {
+    if ( checkBoxLater->isChecked() ) {
+        qDebug(  "Send later" );
+    }
+
+
     qDebug( "Sending Mail with " +
             smtpAccounts.at( fromBox->currentItem() )->getAccountName() );
     Mail *mail = new Mail();
