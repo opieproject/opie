@@ -426,8 +426,9 @@ void MainWindow::slotNew() {
 
     if ( currentEditor()->accepted() ) {
 	//todo.assignUid();
-        currentView()->addEvent( todo );
         m_todoMgr.add( todo );
+        currentView()->addEvent( todo );
+
 
         // I'm afraid we must call this every time now, otherwise
         // spend expensive time comparing all these strings...
