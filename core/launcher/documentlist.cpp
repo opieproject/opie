@@ -546,9 +546,11 @@ DocumentListPrivate::DocumentListPrivate( ServerInterface *gui )
 
 void DocumentListPrivate::appendDocpath(FileSystem*fs)
 {
+    Config c( "qpe" );
+    c.setGroup( "Startup" );
     QDir defPath(fs->path()+"/Documents");
     QFileInfo f(fs->path()+"/.opiestorage.cf");
-    if (!f.exists()) {
+    if ( c.readNumEntry( "FirstUse", 42 ) == 0 && !f.exists()) {
         Mediadlg dlg(fs);
         if (QDialog::Accepted != QPEApplication::execDialog( &dlg )) {
             return;
