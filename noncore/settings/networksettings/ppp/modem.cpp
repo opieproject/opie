@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.cpp,v 1.6 2003-06-06 13:24:19 tille Exp $
+ * $Id: modem.cpp,v 1.7 2003-06-07 16:05:15 dwmw2 Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -988,7 +988,7 @@ void Modem::parseargs(char* buf, char** args) {
 
 bool Modem::execPPPDaemon(const QString & arguments)
 {
-  if(execpppd(arguments)==0) {
+  if(execpppd(arguments)) {
     _pppdata->setpppdRunning(true);
     return true;
   } else
