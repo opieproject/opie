@@ -129,10 +129,8 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
 
     }
 
-    for ( int i = 0; i < 10; i++ ) {
-        buttonPixUp[i] = 0l;
-        buttonPixDown[i] = 0l;
-    }
+    buttonPixUp.resize( masks.size(), QPixmap() );
+    buttonPixDown.resize( masks.size(), QPixmap() );
 
     setBackgroundPixmap( pixBg );
 
@@ -180,10 +178,6 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
 
 AudioWidget::~AudioWidget() {
 
-    for ( int i = 0; i < 10; i++ ) {
-        delete buttonPixUp[i];
-        delete buttonPixDown[i];
-    }
 //    mediaPlayerState->setPlaying(false);
 }
 
@@ -198,9 +192,9 @@ QPixmap combineImageWithBackground( QImage img, QPixmap bg, QPoint offset ) {
 }
 
 
-QPixmap *maskPixToMask( QPixmap pix, QBitmap mask ) {
-    QPixmap *pixmap = new QPixmap( pix );
-    pixmap->setMask( mask );
+QPixmap maskPixToMask( QPixmap pix, QBitmap mask ) {
+    QPixmap pixmap( pix );
+    pixmap.setMask( mask );
     return pixmap;
 }
 
@@ -225,8 +219,6 @@ void AudioWidget::resizeEvent( QResizeEvent * ) {
 
     for ( int i = 0; i < 10; i++ ) {
         if ( !masks[i].isNull() ) {
-            delete buttonPixUp[i];
-            delete buttonPixDown[i];
             buttonPixUp[i] = maskPixToMask( pixUp, masks[i] );
             buttonPixDown[i] = maskPixToMask( pixDn, masks[i] );
         }
@@ -332,9 +324,9 @@ void AudioWidget::setToggleButton( int i, bool down ) {
 
 void AudioWidget::paintButton( QPainter &p, int i ) {
     if ( buttons[i].isDown ) {
-        p.drawPixmap( upperLeftOfButtonMask, *buttonPixDown[i] );
+        p.drawPixmap( upperLeftOfButtonMask, buttonPixDown[i] );
     } else {
-        p.drawPixmap( upperLeftOfButtonMask, *buttonPixUp[i] );
+        p.drawPixmap( upperLeftOfButtonMask, buttonPixUp[i] );
     }
 }
 

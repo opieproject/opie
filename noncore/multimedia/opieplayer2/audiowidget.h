@@ -92,6 +92,7 @@ private slots:
     void stopSkip();
 private:
     typedef std::vector<QBitmap> MaskVector;
+    typedef std::vector<QPixmap> PixmapVector;
 
     void setToggleButton( int, bool );
     virtual void paintButton( QPainter &p, int i );
@@ -101,10 +102,9 @@ private:
     QImage  imgUp;
     QImage  imgDn;
     MaskVector masks;
-    QPixmap *buttonPixUp[10];
-    QPixmap *buttonPixDown[10];
+    PixmapVector buttonPixUp;
+    PixmapVector buttonPixDown;
 
-    QPixmap *pixmaps[4];
     OTicker  songInfo;
     QSlider slider;
     QLineEdit time;
