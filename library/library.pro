@@ -114,8 +114,8 @@ SOURCES	=   calendar.cpp \
 	finddialog.cpp \
 	lnkproperties.cpp
 # Qt 3 compatibility
-qt2:HEADERS += quuid.h qcom.h qlibrary.h qlibrary_p.h
-qt2:SOURCES += quuid.cpp qlibrary.cpp qlibrary_unix.cpp
+HEADERS += quuid.h qcom.h qlibrary.h qlibrary_p.h
+SOURCES += quuid.cpp qlibrary.cpp qlibrary_unix.cpp
 INCLUDEPATH += $(OPIEDIR)/include backend
 LIBS		+= -ldl -lcrypt -lm
 INTERFACES = passwordbase_p.ui categoryeditbase_p.ui findwidgetbase_p.ui lnkpropertiesbase_p.ui
