@@ -83,6 +83,13 @@ extern AudioWidget *audioUI;
 extern VideoWidget *videoUI;
 extern MediaPlayerState *mediaPlayerState;
 
+static inline QString fullBaseName ( const QFileInfo &fi )
+{
+	QString str = fi. fileName ( );
+	return str. left ( str. findRev ( '.' ));
+}
+
+
 QString audioMimes ="audio/mpeg;audio/x-wav;audio/x-ogg";
 // class myFileSelector {
 
@@ -324,7 +331,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     readConfig( cfg );
     QString currentPlaylist = cfg.readEntry("CurrentPlaylist","default");
     loadList(DocLnk( currentPlaylist));
-    setCaption(tr("OpiePlayer: ")+ QFileInfo(currentPlaylist).baseName());
+    setCaption(tr("OpiePlayer: ")+ fullBaseName ( QFileInfo(currentPlaylist)));
     
     initializeStates();
 }
@@ -681,7 +688,7 @@ void PlayListWidget::addSelected() {
   }
     break;
   };
-  lnk.setName( QFileInfo(filename).baseName() ); //sets name
+  lnk.setName( fullBaseName ( QFileInfo(filename))); //sets name
   lnk.setFile( filename ); //sets file name
   d->selectedFiles->addToSelection(  lnk);
   tabWidget->setCurrentPage(0);
@@ -716,7 +723,7 @@ void PlayListWidget::addToSelection( QListViewItem *it) {
     QString filename;
 
     filename=it->text(3);
-    lnk.setName( QFileInfo(filename).baseName() ); //sets name
+    lnk.setName( fullBaseName ( QFileInfo(filename)) ); //sets name
     lnk.setFile( filename ); //sets file name
     d->selectedFiles->addToSelection(  lnk);
  
@@ -1038,7 +1045,7 @@ void PlayListWidget::openFile() {
         } else if( filename.right(3) == "pls" ) {
             readPls( filename );
         } else {
-            lnk.setName( QFileInfo(filename).baseName() ); //sets name
+            lnk.setName( fullBaseName ( QFileInfo(filename)) ); //sets name
             lnk.setFile( filename ); //sets file name
             d->selectedFiles->addToSelection(  lnk);
             writeCurrentM3u();
@@ -1074,7 +1081,7 @@ void PlayListWidget::readm3u( const QString &filename ) {
             
         }  else {
           //               if( QFileInfo( s ).exists() ) {
-          lnk.setName( QFileInfo(s).baseName());
+          lnk.setName( fullBaseName ( QFileInfo(s)));
           //                 if(s.right(4) == '.')   {//if regular file
           if(s.left(1) != "/")  { 
             //            qDebug("set link "+QFileInfo(filename).dirPath()+"/"+s);
@@ -1100,7 +1107,7 @@ void PlayListWidget::readm3u( const QString &filename ) {
     if(m3uList) delete m3uList;
 
     d->selectedFiles->setSelectedItem( s);
-    setCaption(tr("OpiePlayer: ")+ QFileInfo(filename).baseName());
+    setCaption(tr("OpiePlayer: ")+ fullBaseName ( QFileInfo(filename)));
     
 }
 
@@ -1119,7 +1126,7 @@ void PlayListWidget::readPls( const QString &filename ) {
         //        s.replace( QRegExp( "%20" )," " );
         DocLnk lnk( s );
         QFileInfo f( s );
-        QString name = f.baseName();
+        QString name = fullBaseName ( f);
 
         if( name.left( 4 ) == "http" ) {
             name = s.right( s.length() - 7);

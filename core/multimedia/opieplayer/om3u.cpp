@@ -46,6 +46,13 @@
 #include <qstringlist.h>
 #include <qcstring.h>
 
+static inline QString fullBaseName ( const QFileInfo &fi )
+{
+	QString str = fi. fileName ( );
+	return str. left ( str. findRev ( '.' ));
+}
+
+
 //extern PlayListWidget *playList;
 
 Om3u::Om3u( const QString &filePath, int mode)
@@ -68,7 +75,7 @@ void Om3u::readM3u() {
                 if( s.left(2) == "E:" || s.left(2) == "P:" ) {
                     s = s.right( s.length() -2 );
                     QFileInfo f( s );
-                    QString name = f.baseName();
+                    QString name = fullBaseName ( f );
                     name = name.right( name.length() - name.findRev( "\\", -1, TRUE )  -1 );
                     s=s.replace( QRegExp( "\\" ), "/" );
                     append(s);
@@ -105,7 +112,7 @@ void Om3u::readPls() { //it's a pls file
                 // File2=http
                 s = s.replace( QRegExp( "\\" ), "/" );
                 QFileInfo f( s );
-                QString name = f.baseName();
+                QString name = fullBaseName ( f );
                 if( name.left( 4 ) == "http" ) {
                     name = s.right( s.length() - 7);
                 }  else {
