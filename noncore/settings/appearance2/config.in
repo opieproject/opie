@@ -1,4 +1,4 @@
   config APPEARANCE2
     boolean "opie-appearance (control color, widget view etc)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI && LIBQTAUX
