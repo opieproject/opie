@@ -35,9 +35,12 @@
 
 using Opie::Ui::OKeyConfigItem;
 
+/*
+ * The Icons, Request Cache and IconViewItem for the IconView
+ */
 namespace {
-    QPixmap* _dirPix = 0;
-    QPixmap* _unkPix = 0;
+    static QPixmap* _dirPix = 0;
+    static QPixmap* _unkPix = 0;
     class IconViewItem : public QIconViewItem {
     public:
         IconViewItem( QIconView*, const QString& path, const QString& name, bool isDir = false);
@@ -59,8 +62,8 @@ namespace {
  * If we request an Image or String
  * we add it to the map
  */
-    QMap<QString, IconViewItem*> g_stringInf;
-    QMap<QString, IconViewItem*> g_stringPix;
+    static QMap<QString, IconViewItem*> g_stringInf;
+    static QMap<QString, IconViewItem*> g_stringPix;
 
     IconViewItem::IconViewItem( QIconView* view,const QString& path,
                                 const QString& name, bool isDir )
@@ -101,6 +104,10 @@ namespace {
 }
 
 
+/*
+ * Set up the GUI.. initialize the slave set up gui
+ * and also load a dir
+ */
 PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
     : QVBox( wid ), m_cfg( cfg ), m_updatet( false )
 {
@@ -136,6 +143,9 @@ PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
     slotViewChanged(  m_views->currentItem() );
 }
 
+/*
+ * Unref the slave and save the keyboard manager
+ */
 PIconView::~PIconView() {
     {
         QCopEnvelope( "QPE/Application/opie-eye_slave", "refDown()" );
@@ -148,6 +158,11 @@ Opie::Ui::OKeyConfigManager* PIconView::manager() {
     return m_viewManager;
 }
 
+
+/*
+ * init the KeyBoard Shortcuts
+ * called from the c'tor
+ */
 void PIconView::initKeys() {
     Opie::Ui::OKeyPair::List lst;
     lst.append( Opie::Ui::OKeyPair::upArrowKey() );
@@ -178,6 +193,10 @@ void PIconView::initKeys() {
     m_viewManager->handleWidget( m_view );
 }
 
+
+/*
+ * change one dir up
+ */
 void PIconView::slotDirUp() {
     QDir dir( m_path );
     dir.cdUp();
@@ -185,6 +204,9 @@ void PIconView::slotDirUp() {
 
 }
 
+/*
+ * change the dir
+ */
 void PIconView::slotChangeDir(const QString& path) {
     if ( !currentView() )
         return;
@@ -284,9 +306,9 @@ void PIconView::slotReloadDir() {
 void PIconView::addFolders(  const QStringList& lst) {
     QStringList::ConstIterator it;
 
-    for(it=lst.begin(); it != lst.end(); ++it ) {
+    for(it=lst.begin(); it != lst.end(); ++it )
         (void)new IconViewItem( m_view, m_path+"/"+(*it), (*it), true );
-    }
+
 
 }
 
@@ -305,7 +327,7 @@ void PIconView::slotClicked(QIconViewItem* _it) {
     if( it->isDir() )
         slotChangeDir( it->path() );
     else // view image
-        ;
+        slotShowImage();
 }
 
 void PIconView::slotThumbInfo( const QString& _path, const QString& str ) {
@@ -360,37 +382,36 @@ void PIconView::slotBeamDone( Ir* ir) {
 
 void PIconView::slotStart() {
     m_view->viewport()->setUpdatesEnabled( false );
-    qWarning( "Sig Start" );
 }
 
 void PIconView::slotEnd() {
-    qWarning( "SLot End" );
     if ( m_updatet )
         m_view->arrangeItemsInGrid( );
     m_view->viewport()->setUpdatesEnabled( true );
     m_updatet = false;
 }
 
-void PIconView::slotShowImage() {
-    qDebug("image show");
+void PIconView::slotShowImage()
+{
+    qWarning( "SLotShowImage" );
     bool isDir = false;
     QString name = currentFileName(isDir);
     if (isDir) return;
-    ImageDlg dlg(name);
-    QPEApplication::execDialog(&dlg);    
-}
-void PIconView::slotShowImage( const QString& ) {
 
+    slotShowImage( name );
+}
+void PIconView::slotShowImage( const QString& name) {
+    emit sig_display( name );
 }
 void PIconView::slotImageInfo() {
-    qDebug("image info");
+    qWarning( "SlotImageInfo" );
     bool isDir = false;
     QString name = currentFileName(isDir);
     if (isDir) return;
-    infoDlg dlg(name);
-    QPEApplication::execDialog(&dlg);
+
+    slotImageInfo( name );
 }
 
-void PIconView::slotImageInfo( const QString& ) {
-    
+void PIconView::slotImageInfo( const QString& name) {
+     emit sig_showInfo( name );
 }

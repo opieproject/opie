@@ -7,6 +7,13 @@ using namespace Opie::Core;
 #include <qimage.h>
 #include <qlayout.h>
 
+ImageScrollView::ImageScrollView( QWidget* parent, const char* name,  WFlags f )
+    :QScrollView(parent,name,f|Qt::WRepaintNoErase ),_image_data(),_original_data(),scale_to_fit(true),
+     rotate_to_fit(true),first_resize_done(false)
+{
+    init();
+}
+
 ImageScrollView::ImageScrollView (const QImage&img, QWidget * parent, const char * name, WFlags f,bool always_scale,bool rfit)
     :QScrollView(parent,name,f|Qt::WRepaintNoErase),_image_data(),_original_data(img),scale_to_fit(always_scale),
     rotate_to_fit(rfit),first_resize_done(false)
@@ -27,6 +34,10 @@ void ImageScrollView::setImage(const QImage&img)
     _original_data=img;
     first_resize_done = false;
     init();
+}
+
+void ImageScrollView::setImage( const QString& path ) {
+
 }
 
 /* should be called every time the QImage changed it content */
@@ -258,6 +269,15 @@ void ImageScrollView::contentsMousePressEvent ( QMouseEvent * e)
     _mouseStartPosX = e->x();
     _mouseStartPosY = e->y();
 }
+
+void ImageScrollView::setDestructiveClose() {
+    WFlags fl = getWFlags();
+    /* clear it just in case */
+    fl &= ~WDestructiveClose;
+    fl |= WDestructiveClose;
+    setWFlags( fl );
+}
+
 
 /* for testing */
 ImageDlg::ImageDlg(const QString&fname,QWidget * parent, const char * name)

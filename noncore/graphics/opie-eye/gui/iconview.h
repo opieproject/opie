@@ -37,6 +37,10 @@ public:
     void resetView();
     Opie::Ui::OKeyConfigManager* manager();
 
+signals:
+    void sig_showInfo( const QString& );
+    void sig_display( const QString& );
+
 private:
     void initKeys();
     QString currentFileName(bool &isDir)const;

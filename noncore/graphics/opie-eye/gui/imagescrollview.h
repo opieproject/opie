@@ -12,11 +12,14 @@ class ImageScrollView:public QScrollView
 {
     Q_OBJECT
 public:
+    ImageScrollView( QWidget* parent, const char* name = 0, WFlags fl = 0 );
     ImageScrollView (const QImage&, QWidget * parent=0, const char * name=0, WFlags f=0,bool always_scale=false,bool rfit=false );
     ImageScrollView (const QString&, QWidget * parent=0, const char * name=0, WFlags f=0,bool always_scale=false,bool rfit=false );
     virtual ~ImageScrollView();
 
     void setImage(const QImage&);
+    void setImage( const QString& path );
+    void setDestructiveClose();
 
     enum  Rotation {
         Rotate0,
@@ -24,6 +27,9 @@ public:
         Rotate180,
         Rotate270
     };
+
+signals:
+    void sig_return();
 
 protected:
     virtual void drawContents ( QPainter * p, int clipx, int clipy, int clipw, int cliph );

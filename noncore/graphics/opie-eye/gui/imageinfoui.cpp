@@ -19,11 +19,22 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/resource.h>
 
-#define THUMBSIZE 128
+static const int THUMBSIZE = 128;
+
+
+imageinfo::imageinfo(QWidget* parent, const char* name, WFlags fl )
+    : QWidget( parent, name, fl )
+{
+    init(name);
+}
 
 imageinfo::imageinfo(const QString&_path, QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl ),currentFile(_path)
 {
+    init(name);
+    slotChangeName(_path);
+}
+void imageinfo::init(const char* name) {
     {
         QCopEnvelope( "QPE/Application/opie-eye_slave", "refUp()" );
     }
@@ -62,7 +73,6 @@ imageinfo::imageinfo(const QString&_path, QWidget* parent,  const char* name, WF
              this, SLOT(slot_fullInfo(const QString&, const QString&)) );
     connect(master, SIGNAL( sig_thumbNail(const QString&, const QPixmap&)),
             this, SLOT(slotThumbNail(const QString&, const QPixmap&)));
-    slotChangeName(_path);
 }
 
 void imageinfo::slotChangeName(const QString&_path)
@@ -111,6 +121,19 @@ void imageinfo::slotThumbNail(const QString&_path, const QPixmap&_pix)
     }
 }
 
+void imageinfo::setPath( const QString& str ) {
+    slotChangeName( str );
+}
+
+void imageinfo::setDestructiveClose() {
+    WFlags fl = getWFlags();
+    /* clear it just in case */
+    fl &= ~WDestructiveClose;
+    fl |= WDestructiveClose;
+    setWFlags( fl );
+}
+
+
 /* for testing */
 infoDlg::infoDlg(const QString&fname,QWidget * parent, const char * name)
     :QDialog(parent,name,true,WStyle_ContextHelp)
@@ -125,3 +148,5 @@ infoDlg::infoDlg(const QString&fname,QWidget * parent, const char * name)
 infoDlg::~infoDlg()
 {
 }
+
+
