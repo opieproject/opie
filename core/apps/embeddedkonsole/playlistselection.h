@@ -28,7 +28,7 @@
 class PlayListSelectionItem : public QListViewItem {
 public:
     PlayListSelectionItem( QListView *parent, QString *f ) : QListViewItem( parent ), fl( f ) {
-	setText(0, *f );
+  setText(0, *f );
     }
 
     ~PlayListSelectionItem() {
