@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.h,v 1.9 2003-08-09 17:14:55 kergoth Exp $
+ * $Id: pppdata.h,v 1.10 2004-10-14 01:44:27 zecke Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -165,6 +165,17 @@ public:
     ~PPPData() {};
 
     enum { NumInitStrings = 2 };
+    enum LineTermination {
+        EndCR,
+        EndLF,
+        EndCRLF
+    };
+
+    enum FlowControl {
+        FlowHardware,
+        FlowSoftware,
+        FlowNone
+    };
 
     // general functions
     void save();
@@ -222,8 +233,8 @@ public:
 //   void set_dock_into_panel(bool set);
 //   bool get_dock_into_panel();
 
-  const QString enter();
-  void setEnter(const QString &);
+  enum LineTermination enter();
+  void setEnter(enum LineTermination);
 
   QString pppdVersion();
   bool pppdVersionMin(int ver, int mod, int patch);
@@ -253,8 +264,8 @@ public:
    const QString modemDevice();
    bool setModemDevice(const QString &);
 
-  const QString flowcontrol();
-  void setFlowcontrol(const QString &);
+  enum FlowControl flowcontrol();
+  void setFlowcontrol(enum FlowControl);
 
   int modemTimeout();
   void setModemTimeout(int);

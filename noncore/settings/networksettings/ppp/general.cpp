@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.cpp,v 1.10 2004-10-14 00:39:47 zecke Exp $
+ * $Id: general.cpp,v 1.11 2004-10-14 01:44:27 zecke Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -192,17 +192,10 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
     QWhatsThis::add(baud_label,tmp);
     QWhatsThis::add(baud_c,tmp);
 
-    for(int i=0; i <= enter->count()-1; i++)
-    {
-        if(_pppdata->enter() == enter->text(i))
-            enter->setCurrentItem(i);
-    }
-
     tl->addRowSpacing(5, 10);
 
     //Modem Lock File
     modemlockfile = new QCheckBox(tr("&Use lock file"), this);
-
     modemlockfile->setChecked(_pppdata->modemLockFile());
     //   connect(modemlockfile, SIGNAL(toggled(bool)),
     //           SLOT(modemlockfilechanged(bool)));
@@ -240,22 +233,13 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
                            "recommended value is 30 seconds."));
 
     //set stuff from gpppdata
-    for(int i=0; i <= enter->count()-1; i++)
-    {
-        if(_pppdata->enter() == enter->text(i))
-            enter->setCurrentItem(i);
-    }
+    enter->setCurrentItem( static_cast<int>(_pppdata->enter()) );
+    flowcontrol->setCurrentItem( static_cast<int>( _pppdata->flowcontrol() ) );
 
     for(int i=0; i <= modemdevice->count()-1; i++)
     {
         if(_pppdata->modemDevice() == modemdevice->text(i))
             modemdevice->setCurrentItem(i);
-    }
-
-    for(int i=0; i <= flowcontrol->count()-1; i++)
-    {
-        if(_pppdata->flowcontrol() == flowcontrol->text(i))
-            flowcontrol->setCurrentItem(i);
     }
 
     //set the modem speed
@@ -338,8 +322,8 @@ bool ModemWidget::save()
 
     _pppdata->setDevname( modemname->text() );
     _pppdata->setModemDevice( modemdevice->currentText() );
-    _pppdata->setFlowcontrol(flowcontrol->currentText());
-    _pppdata->setFlowcontrol(flowcontrol->currentText());
+    _pppdata->setFlowcontrol(static_cast<PPPData::FlowControl>(flowcontrol->currentItem()));
+    _pppdata->setEnter( static_cast<PPPData::LineTermination>(enter->currentItem()));
     _pppdata->setSpeed(baud_c->currentText());
     _pppdata->setModemLockFile( modemlockfile->isChecked());
     _pppdata->setModemTimeout( modemtimeout->value() );
@@ -350,15 +334,16 @@ bool ModemWidget::save()
 void ModemWidget::slotBeforeModemQuery()
 {
     m_oldModemDev     = _pppdata->modemDevice();
-    m_oldFlowControl  = _pppdata->flowcontrol();
+    m_oldFlowControl  = static_cast<int>( _pppdata->flowcontrol() );
     m_oldSpeed        = _pppdata->speed();
     m_oldModemLock    = _pppdata->modemLockFile();
     m_oldModemTimeout = _pppdata->modemTimeout();
+    m_oldLineEnd      = static_cast<int>( _pppdata->enter() );
 
 
     _pppdata->setModemDevice( modemdevice->currentText() );
-    _pppdata->setFlowcontrol(flowcontrol->currentText());
-    _pppdata->setFlowcontrol(flowcontrol->currentText());
+    _pppdata->setFlowcontrol(static_cast<PPPData::FlowControl>(flowcontrol->currentItem()));
+    _pppdata->setEnter(static_cast<PPPData::LineTermination>(enter->currentItem()));
     _pppdata->setSpeed(baud_c->currentText());
     _pppdata->setModemLockFile( modemlockfile->isChecked());
     _pppdata->setModemTimeout( modemtimeout->value() );
@@ -368,7 +353,8 @@ void ModemWidget::slotBeforeModemQuery()
 void ModemWidget::slotAfterModemQuery()
 {
     _pppdata->setModemDevice( m_oldModemDev );
-    _pppdata->setFlowcontrol( m_oldFlowControl );
+    _pppdata->setFlowcontrol( static_cast<PPPData::FlowControl>(m_oldFlowControl) );
+    _pppdata->setEnter( static_cast<PPPData::LineTermination>(m_oldLineEnd) );
     _pppdata->setSpeed( m_oldSpeed );
     _pppdata->setModemLockFile( m_oldModemLock );
     _pppdata->setModemTimeout( m_oldModemTimeout );

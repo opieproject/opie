@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.h,v 1.5 2004-10-14 00:39:47 zecke Exp $
+ * $Id: general.h,v 1.6 2004-10-14 01:44:27 zecke Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -81,9 +81,9 @@ private:
   PPPData *_pppdata;
 
 private:
-    QString m_oldModemDev, m_oldFlowControl, m_oldSpeed;
+    QString m_oldModemDev, m_oldSpeed;
     bool m_oldModemLock;
-    int m_oldModemTimeout;
+    int m_oldModemTimeout, m_oldFlowControl, m_oldLineEnd;
 };
 
 

@@ -1215,8 +1215,8 @@ bool ConnectWidget::execppp() {
   if(_ifaceppp->data()->subnetmask() != "0.0.0.0")
     command += " netmask " + _ifaceppp->data()->subnetmask();
 
-  if(_ifaceppp->data()->flowcontrol() != "None") {
-    if(_ifaceppp->data()->flowcontrol() == "CRTSCTS")
+  if(_ifaceppp->data()->flowcontrol() != PPPData::FlowNone) {
+      if(_ifaceppp->data()->flowcontrol() == PPPData::FlowHardware)
       command += " crtscts";
     else
       command += " xonxoff";

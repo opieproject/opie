@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.cpp,v 1.12 2004-05-31 13:04:55 ar Exp $
+ * $Id: modem.cpp,v 1.13 2004-10-14 01:44:27 zecke Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -225,8 +225,8 @@ bool Modem::opentty() {
   tty.c_lflag &= ~(ECHO|ECHOE|ECHOK|ECHOKE);
 
 
-  if(_pppdata->flowcontrol() != "None") {
-      if(_pppdata->flowcontrol() == "CRTSCTS") {
+  if(_pppdata->flowcontrol() != PPPData::FlowNone) {
+      if(_pppdata->flowcontrol() == PPPData::FlowHardware) {
       tty.c_cflag |= CRTSCTS;
     }
     else {
@@ -355,15 +355,19 @@ bool Modem::writeLine(const char *buf) {
   char *b = new char[len+2];
   memcpy(b, buf, len);
   // different modems seem to need different line terminations
-  QString term = _pppdata->enter();
-  if(term == "LF")
+  switch( _pppdata->enter() ) {
+  case PPPData::EndLF:
     b[len++]='\n';
-  else if(term == "CR")
+    break;
+  case PPPData::EndCR:
     b[len++]='\r';
-  else if(term == "CR/LF") {
+    break;
+  case PPPData::EndCRLF:
     b[len++]='\r';
     b[len++]='\n';
+    break;
   }
+
   int l = len;
   while(l) {
     int wr = write(modemfd, &b[len-l], l);

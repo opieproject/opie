@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.14 2004-04-09 15:00:07 mickeyl Exp $
+ * $Id: pppdata.cpp,v 1.15 2004-10-14 01:44:27 zecke Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -387,12 +387,12 @@ bool PPPData::setModemDevice(const QString &n) {
 }
 
 
-const QString PPPData::flowcontrol() {
-  return readConfig(modemGroup(), FLOWCONTROL_KEY, "CRTSCTS");
+enum PPPData::FlowControl PPPData::flowcontrol() {
+  return static_cast<FlowControl>(readNumConfig(modemGroup(), FLOWCONTROL_KEY, FlowHardware));
 }
 
 
-void PPPData::setFlowcontrol(const QString &n) {
+void PPPData::setFlowcontrol(enum FlowControl n) {
   writeConfig(modemGroup(), FLOWCONTROL_KEY, n);
 }
 
@@ -720,12 +720,12 @@ void PPPData::setModemAnswerResp(const QString &n) {
 }
 
 
-const QString PPPData::enter() {
-  return readConfig(modemGroup(), ENTER_KEY, "CR");
+enum PPPData::LineTermination PPPData::enter(){
+    return static_cast<PPPData::LineTermination>(readNumConfig(modemGroup(), ENTER_KEY, EndCR));
 }
 
 
-void PPPData::setEnter(const QString &n) {
+void PPPData::setEnter(enum PPPData::LineTermination n) {
   writeConfig(modemGroup(), ENTER_KEY, n);
 }
 
