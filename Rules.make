@@ -58,6 +58,7 @@ $(OPIEDIR)/stamp-headers :
 	mkdir -p $(TOPDIR)/include/qpe \
                  $(TOPDIR)/include/qtopia \
 		 $(TOPDIR)/include/opie \
+		 $(TOPDIR)/include/opie2 \
                  $(TOPDIR)/include/qtopia/private 
 	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
 	( cd include/qtopia && rm -f *.h; ln -sf ../../library/*.h .; )

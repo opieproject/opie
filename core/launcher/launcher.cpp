@@ -381,14 +381,15 @@ LauncherView* CategoryTabWidget::newView( const QString& id, const QPixmap& pm, 
 
 void CategoryTabWidget::updateLink(const QString& linkfile)
 {
-   //       LauncherView* view;
-   qApp->processEvents();
-//          while ((view = (LauncherView*)stack->widget(i++))) {
-//        if ( view->removeLink(linkfile) )
-//            break;
-//          }
-   //   addItem(linkfile);
-   fileSel->reparse();
+    int i=0;
+    LauncherView* view;
+    //qApp->processEvents();
+    while ((view = (LauncherView*)stack->widget(i++))) {
+	if ( view->removeLink(linkfile) )
+	    break;
+    }
+    addItem(linkfile);
+    docview->updateTools();
 }
 
 void CategoryTabWidget::paletteChange( const QPalette &p )
@@ -1341,11 +1342,11 @@ void Launcher::preloadApps()
 DocumentTab::DocumentTab( QWidget *parent, int mode, int selector, const QString &dirName, const QString &fileName)
    : OFileSelector(parent,mode,selector,dirName,fileName)
 {
-   setYesCancelVisible(false);
-   setToolbarVisible(false);
-   setPermissionBarVisible(false);
-   setLineEditVisible(false) ;
-  //setChooserVisible( bool chooser );
+   //setYesCancelVisible(false);
+   //setToolbarVisible(false);
+   //setPermissionBarVisible(false);
+   //setLineEditVisible(false) ;
+   //setChooserVisible( bool chooser );
   
 }
 
