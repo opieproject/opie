@@ -180,6 +180,8 @@ public:
     void handleWidget( QWidget* );
 
     bool eventFilter( QObject*, QEvent* );
+
+    OKeyConfigItem::List keyConfigList()const;
 signals:
     /**
      * The Signals are triggered on KeyPress and KeyRelease!

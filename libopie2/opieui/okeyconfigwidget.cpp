@@ -538,7 +538,6 @@ OKeyConfigItem OKeyConfigManager::handleKeyEvent( QKeyEvent* e ) {
  * virtual keyboard
  * else change the button mod only
  */
-    qWarning( "handleKeyEvent...." );
     if ( key == 0 ) {
         key = e->ascii();
         if (  key > 96 && key < 123)
@@ -607,6 +606,12 @@ void OKeyConfigManager::clearKeyConfig() {
     delete m_map; m_map = 0;
 }
 
+/**
+ *
+ */
+Opie::Ui::OKeyConfigItem::List OKeyConfigManager::keyConfigList()const{
+    return m_keys;
+}
 
 /**
  * Add this OKeyPair to the blackList.
@@ -753,11 +758,11 @@ namespace Private {
         return m_manager;
     }
     void OKeyListViewItem::setItem( const OKeyConfigItem& item ) {
+        m_item = item;
         setPixmap( 0, m_item.pixmap() );
         setText  ( 1, m_item.text() );
         setText  ( 2, keyToString( m_item.keyPair() ) );
         setText  ( 3, keyToString( m_item.defaultKeyPair() ) );
-        m_item  = item;
     }
 
     QString keyToString( const OKeyPair& pair ) {
@@ -853,7 +858,6 @@ void OKeyConfigWidget::initUi() {
  */
 
     QGroupBox *box = new QGroupBox( this );
-    box ->setEnabled( false );
     box ->setTitle(  tr("Shortcut for Selected Action") );
     box ->setFrameStyle( QFrame::Box | QFrame::Sunken );
     layout->addWidget( box, 1 );
@@ -929,7 +933,14 @@ void OKeyConfigWidget::insert( const QString& str, OKeyConfigManager* man ) {
  * loads the items and allows editing them
  */
 void OKeyConfigWidget::load() {
+    Opie::Ui::Private::OKeyConfigWidgetPrivateList::Iterator it;
+    for ( it = m_list.begin(); it != m_list.end(); ++it ) {
+        OListViewItem *item = new OListViewItem( m_view, (*it).name );
+        OKeyConfigItem::List list = (*it).manager->keyConfigList();
+        for (OKeyConfigItem::List::Iterator keyIt = list.begin(); keyIt != list.end();++keyIt )
+            (void )new  Opie::Ui::Private::OKeyListViewItem(*keyIt, (*it).manager, item );
 
+    }
 }
 
 /**
@@ -971,6 +982,7 @@ void OKeyConfigWidget::slotListViewItem( QListViewItem* _item) {
 }
 
 void OKeyConfigWidget::slotNoKey() {
+    qWarning( "No Key" );
     m_none->setChecked( true );
     m_cus ->setChecked( false );
     m_btn ->setEnabled( false );
@@ -995,6 +1007,7 @@ void OKeyConfigWidget::slotNoKey() {
 }
 
 void OKeyConfigWidget::slotDefaultKey() {
+    qWarning( "Slot Default Key" );
     m_none->setChecked( true );
     m_cus ->setChecked( false );
     m_btn ->setEnabled( false );
@@ -1018,6 +1031,7 @@ void OKeyConfigWidget::slotDefaultKey() {
 }
 
 void OKeyConfigWidget::slotCustomKey() {
+    qWarning( "SlotCustom Key" );
     m_cus ->setChecked( true );
     m_btn ->setEnabled( true );
     m_def ->setChecked( false );
