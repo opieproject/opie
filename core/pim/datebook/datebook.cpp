@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.25.4.1 2003-05-17 10:47:02 zecke Exp $
+** $Id: datebook.cpp,v 1.25.4.2 2003-05-17 11:06:35 zecke Exp $
 **
 **********************************************************************/
 
@@ -228,7 +228,11 @@ void DateBook::receive( const QCString &msg, const QByteArray &data )
 	stream >> uid;
 	Event e=db->eventByUID(uid);
 	editEvent(e);
-    }
+    }else if (msg == "viewDefault(QDate)"){
+         QDate day;
+         stream >> day;
+         viewDefault(day);
+     }
 }
 
 DateBook::~DateBook()
@@ -720,7 +724,15 @@ void DateBook::appMessage(const QCString& msg, const QByteArray& data)
 	stream >> uid;
 	Event e=db->eventByUID(uid);
 	editEvent(e);
-    }
+    } else if (msg == "viewDefault(QDate)"){
+        /* simple copy from receive */
+        QDataStream stream(data,IO_ReadOnly);
+        QDate day;
+        stream >> day;
+        viewDefault(day);
+        needShow = true;
+     }
+
     if ( needShow ) {
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
 		showMaximized();
