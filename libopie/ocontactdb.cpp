@@ -14,11 +14,16 @@
  *       with our version of libqpe
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.10 2002-07-18 13:37:53 eilers Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.11 2002-07-21 15:21:26 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.10  2002-07-18 13:37:53  eilers
+ * Revision 1.1.2.11  2002-07-21 15:21:26  eilers
+ * Some interface changes and minor bugfixes...
+ * The search interface is able to use wildcards, regular expressions and
+ * ignore cases... I love the Trolltech cClasslibrary ! :)
+ *
+ * Revision 1.1.2.10  2002/07/18 13:37:53  eilers
  * Uniinitialized variable: fixed..
  *
  * Revision 1.1.2.9  2002/07/14 13:50:08  eilers
@@ -102,10 +107,6 @@ namespace {
 
 			/* Load Database now */
 			load ();
-		}
-
-		void setParent ( OContactDB * parent ){
-			m_parent = parent;
 		}
 
 		bool save() {
@@ -209,25 +210,45 @@ namespace {
 			return ( false );
 		}
 		
-		const Contact *queryByExample ( const Contact &query ){
+		const Contact *queryByExample ( const Contact &query, const uint settings ){
 			m_currentQuery.setAutoDelete( false );
 			m_currentQuery.clear();
 
 			QValueListConstIterator<Contact> it;
 			for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-				/* Search all fields for same data. Store pointer to contact
-				 * if all matches 
+				/* Search all fields and compare them with query object. Store pointer into list
+				 * if all fields matches. 
 				 */
 				bool allcorrect = true;
 				for ( int i = 0; i < Qtopia::rid; i++ ) {
 					/* Achtung abchecken:
-					 * Möglicherweise werden einige Felder im Contructor
+					 * Möglicherweise werden einige Felder im Constructor
 					 * von Contact nicht leer vorbelegt ! Das würde hier
 					 * zu falsche Suchanfragen führen !
 					 */
+					/* Just compare fields which are not empty in the query object */
 					if ( !query.field(i).isEmpty() ){
-						if ( query.field(i) != (*it).field(i) )
-							allcorrect = false;
+						switch (settings){
+						case query_RegExp:{
+							QRegExp expr ( query.field(i), 
+								       !(settings & query_IgnoreCase), false );
+							if ( expr.find ( (*it).field(i), 0 ) == -1 )
+								allcorrect = false;
+						}
+							break;
+						case query_WildCards:{
+							QRegExp expr ( query.field(i), 
+								       !(settings & query_IgnoreCase), true );
+							if ( expr.find ( (*it).field(i), 0 ) == -1 )
+								allcorrect = false;
+						}
+							break;
+						case query_ExactMatch:{
+							if ( query.field(i) != (*it).field(i) )
+								allcorrect = false;
+						}
+							break;
+						}
 					}
 				}
 				if ( allcorrect )
@@ -457,13 +478,13 @@ namespace {
 						foundAction = false;
 						switch ( action ) {
 						case Contact::ACTION_ADD:
-							parent()->addContact (contact);
+							addContact (contact);
 							break;
 						case Contact::ACTION_REMOVE:
-							parent()->removeContact (contact.uid(), contact);
+							removeContact (contact.uid(), contact);
 							break;
 						case Contact::ACTION_REPLACE:
-							parent()->replaceContact (contact.uid(), contact);
+							replaceContact (contact.uid(), contact);
 							break;
 						default:
 							qWarning ("Unknown action: ignored !");
@@ -529,7 +550,6 @@ OContactDB::OContactDB ( const QString appname, const QString filename,
 		end = new DefaultBackend( appname, filename );
         }
         m_backEnd = end;
-        m_backEnd->setParent ( this );
 
 	/* Connect signal of external db change to function */
 	QCopChannel *dbchannel = new QCopChannel( "QPE/PIM", this );
@@ -546,8 +566,7 @@ OContactDB::OContactDB ( const QString appname, const QString filename,
 OContactDB::~OContactDB ()
 {
 	/* The user may forget to save the changed database, therefore try to
-	 * do it for him.. But this may fail if it was changed externally and
-	 * autoreload is false...
+	 * do it for him..	 
 	 */
 	save();
 	delete m_backEnd;
@@ -559,7 +578,7 @@ bool OContactDB::save ()
 	 * Data. This will remove added items which is unacceptable !
 	 * Therefore: Reload database and merge the data...
 	 */
-	if ( isChangedExternally() )
+	if ( m_backEnd->isChangedExternally() )
 		reload();
 	
 	/* We just want to store data if we have something to store */
@@ -582,20 +601,14 @@ bool OContactDB::findContact(Contact &foundContact, int uid )
 	return ( m_backEnd->findContact(foundContact, uid) );
 }
 	
-
-bool OContactDB::isChangedExternally()
-{	
-	return ( m_backEnd->isChangedExternally() );
-}
-
 QValueList<Contact> OContactDB::allContacts() const
 {
 	return ( m_backEnd->allContacts() );
 }
 
-const Contact *OContactDB::queryByExample ( const Contact &query )
+const Contact *OContactDB::queryByExample ( const Contact &query, const uint setting )
 {
-	return ( m_backEnd->queryByExample ( query ) );
+	return ( m_backEnd->queryByExample ( query, setting ) );
 }
 
 const Contact *OContactDB::nextFound ()

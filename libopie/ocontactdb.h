@@ -13,11 +13,16 @@
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactdb.h,v 1.1.2.10 2002-07-14 13:50:08 eilers Exp $
+ * Version: $Id: ocontactdb.h,v 1.1.2.11 2002-07-21 15:21:26 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.h,v $
- * Revision 1.1.2.10  2002-07-14 13:50:08  eilers
+ * Revision 1.1.2.11  2002-07-21 15:21:26  eilers
+ * Some interface changes and minor bugfixes...
+ * The search interface is able to use wildcards, regular expressions and
+ * ignore cases... I love the Trolltech cClasslibrary ! :)
+ *
+ * Revision 1.1.2.10  2002/07/14 13:50:08  eilers
  * Interface change... REMEMBER: The search function is currently totally
  * untested !!
  *
@@ -86,20 +91,13 @@ class OContactDB;
  */
 class OContactBackend {
  public:
-	OContactBackend() : m_parent(0 ) {}
+	OContactBackend() {}
 	virtual ~OContactBackend() {}
-
-	/** Get the parent of this backend.
-	 * @return Pointer to the parent OContactDB class
-	 */
-	OContactDB* parent() { return m_parent; }
-	
-	/** Set the parent of this backend.
-	 * @param Pointer to the parent OContactDB class
-	 */
-	virtual void setParent ( OContactDB * parent ) = 0;
 	
 	/** Save the list of Contacts into database.
+	 * This function will store the local changes into the database.
+	 * Therefore they will be available to the public.
+	 * (thus, this is a database commit !)
 	 * @return either success or failure
 	 */
 	virtual bool save() = 0;
@@ -118,6 +116,16 @@ class OContactBackend {
 	virtual void reload() = 0;
 
 	/** Return if database was changed externally.
+	 * This may just make sense on file based databases like a XML-File.
+	 * It is used to prevent to overwrite the current database content 
+	 * if the file was already changed by something else !
+	 * If this happens, we have to reload before save our data. 
+	 * If we use real databases, this should be handled by the database
+	 * management system themselve, therefore this function should always return false in 
+	 * this case. It is not our problem to handle this conflict ... 
+	 * @return <i>true</i> if the database was changed and if save without reload will 
+	 * be dangerous. <i>false</i> if the database was not changed or it is save to write
+	 * in this situation. 
 	 */
 	virtual bool isChangedExternally() = 0;
 	
@@ -138,10 +146,11 @@ class OContactBackend {
 	 * a new contact-object and start query with this function.
 	 * All information will be connected by an "AND".
 	 * @param query The query form.
+	 * @param settings The parameters how to perform the query.
 	 * @return <i>NULL</i> if nothing was found or the first contact.
-	 * @see nextFound()
+	 * @see nextFound(), query_RegExp, query_WildCards, query_ExactMatch, query_IgnoreCase
 	 */
-	virtual const Contact *queryByExample ( const Contact &query ) = 0;
+	virtual const Contact *queryByExample ( const Contact &query, const uint settings ) = 0;
 
 	/** Requests a contact which was selected by queryByExample().
 	 * Use this function to move through the list of selected contacts.
@@ -171,14 +180,19 @@ class OContactBackend {
 	 * @return <i>true</i> if successful.
 	 */
 	virtual bool removeContact (int uid, const Contact &contact) = 0;
-
-	protected:
-		OContactDB *m_parent;
 	
+	/** Constants for query.
+	 * Use this constants to set the query parameters.
+	 * @see queryByExample()
+	 */
+	static const uint query_WildCards  = 0x0001;
+	static const uint query_IgnoreCase = 0x0002;
+	static const uint query_RegExp     = 0x0004;
+	static const uint query_ExactMatch = 0x0008;
 };
 
 /** Class to access the contacts database.
- * This is just a frontend for the real database handling which ich
+ * This is just a frontend for the real database handling which is
  * done by the backend.
  */
 class OContactDB: public QObject 
@@ -220,10 +234,12 @@ class OContactDB: public QObject
 	 * a new contact-object and start query with this function.
 	 * All information will be connected by an "AND".
 	 * @param query The query form.
+	 * @param settings The parameters how to perform the query (OContactBackend::query_*).
 	 * @return <i>NULL</i> if nothing was found or the first contact.
-	 * @see nextFound()
+	 * @see nextFound(), OContactBackend::query_RegExp, OContactBackend::query_WildCards, 
+	 * OContactBackend::query_ExactMatch, OContactBackend::query_IgnoreCase
 	 */
-	const Contact *queryByExample ( const Contact &query ); 
+	const Contact *queryByExample ( const Contact &query, const uint settings ); 
 
 	/** Requests a contact which was selected by queryByExample().
 	 * Use this function to move through the list of selected contacts.
@@ -253,14 +269,7 @@ class OContactDB: public QObject
 	 * @return <i>true</i> if successful.
 	 */
 	bool removeContact (int uid, const Contact &contact);
-	
-      	/** Check if the database was modified since last (re)load.
-	 * If this function returns true, we have to reload the database to
-	 * stay consistent.
-	 * @return <b>true</b> if the xml-file was changed
-	 */
-	bool isChangedExternally();
-	
+		
 	/** Reload database.
 	 * You should execute this function if the external database
 	 * was changed.
@@ -275,11 +284,13 @@ class OContactDB: public QObject
 	 */
 	bool save();
 
+
  signals:
 	/* Signal is emitted if the database was changed. Therefore
 	 * we may need to reload to stay consistent.
 	 * @param which Pointer to the database who created this event. This pointer
 	 * is useful if an application has to handle multiple databases at the same time.
+	 * @see reload()
 	 */ 
 	void signalChanged ( const OContactDB *which );
 
