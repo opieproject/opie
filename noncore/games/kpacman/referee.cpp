@@ -726,23 +726,9 @@ void Referee::setScheme(int Scheme, int Mode, Bitfont *font)
 void Referee::keyPressEvent( QKeyEvent *k )
 {
     uint key = k->key();
-#ifdef QWS
-    // "OK" => new game
-    if ( key == Key_F33 || key == Key_F2 || key == Key_Enter )
+
+    if ( !gameState.testBit(Playing) && ( key == Key_Up || key == Key_Down || key == Key_Left || key == Key_Right ) )
         play();
-    else if ( !gameState.testBit(Playing) &&
-						( key == Key_Up ||
-            			key == Key_Down ||
-            			key == Key_Right ||
-            			key == Key_Left )) 
-        play();
-    // "Space" => pause
-    //else if ( key == Key_Space || key == Key_F3 )
-    //    pause();
-    // "Menu" => hall of fame
-    //else if ( key == Key_F11 || key == Key_F4 )
-    //    toggleHallOfFame();
-#endif
 
     if (gameState.testBit(Paused) || gameState.testBit(HallOfFame) ||
         gameState.testBit(Demonstration) || gameState.testBit(Dying) ||
