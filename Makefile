@@ -32,6 +32,11 @@ COMPONENTS=$(LOCALCOMPONENTS) $(INPUTCOMPONENTS) $(APPLETS) $(MAIL) $(PLAYER)
 PIMAPPS = core/pim/addressbook core/pim/datebook \
 	 core/pim/today core/pim/todo 
 
+TODAYPLUGINS = core/pim/today/plugins/datebook \
+		core/pim/today/plugins/todolist \
+		core/pim/today/plugins/mail \
+
+
 COREAPPS = core/apps/filebrowser core/apps/helpbrowser \
 	core/apps/textedit core/apps/embeddedkonsole \
 	core/launcher  \
@@ -82,7 +87,7 @@ APPS=$(LOCALAPPS) $(PIMAPPS)  $(COREAPPS)     \
 	$(COREMULTIMEDIA) $(CORESETTINGS) \
 	$(NONCORESETTINGS) $(NONCORETOOLS) $(NONCORESTYLES) \
 	$(NONAPPS) $(NONNET) $(NONMULT) \
-	$(NONCOMM) $(GAMES)
+	$(NONCOMM) $(GAMES) $(TODAYPLUGINS)
     
     
 
