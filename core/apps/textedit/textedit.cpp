@@ -268,7 +268,6 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     a->addTo( bar );
     a->addTo( file );
 
-//
     a = new QAction( tr( "Save" ), QPixmap(( const char** ) filesave_xpm  ) , QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( save() ) );
 //      a->addTo( bar );
@@ -404,16 +403,8 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
     wa->setOn(wrap);
     updateCaption();
-    if( qApp->argc() > 1 ) {        
-        for (int i=1;i< qApp->argc();i++) {
-            QString tmp;
-            currentFileName =  tmp.sprintf("%s",qApp->argv()[i]);
-            qDebug(currentFileName);
-            setDocument( currentFileName );
-        }
-    }
-    else
-        fileNew();    
+
+    fileNew();    
 }
 
 TextEdit::~TextEdit()
@@ -626,7 +617,7 @@ void TextEdit::newFile( const DocLnk &f )
     setWState (WState_Reserved1 );
     editor->setFocus();
     doc = new DocLnk(nf);
-//    updateCaption();
+    updateCaption(currentFileName);
 }
 
 void TextEdit::openFile( const QString &f )
@@ -768,10 +759,11 @@ void TextEdit::updateCaption( const QString &name )
   QString s = name;
   if ( s.isNull() )
       s = doc->name();
-  if ( s.isEmpty() ) {
+  if ( s.isEmpty()  ) {
       s = tr( "Unnamed" );
        currentFileName=s;
   }
+
   setCaption( s + " - " + tr("Text Editor") );
     }
 }
@@ -779,7 +771,7 @@ void TextEdit::updateCaption( const QString &name )
 void TextEdit::setDocument(const QString& fileref)
 {
     bFromDocView = TRUE;
-    openFile(DocLnk(fileref));
+        openFile(DocLnk(fileref));
 //    showEditTools();
 }
 
