@@ -31,7 +31,7 @@ State_t USBRun::detectState( void ) {
           Run = It.current();
           if( X == Run->Name ) {
             NC->assignInterface( Run );
-            return IsUp;
+            return (Run->IsUp) ? IsUp : Available;
           }
         }
       }
