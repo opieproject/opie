@@ -62,19 +62,18 @@ namespace {
 
     IconViewItem::IconViewItem( QIconView* view,const QString& path,
                                 const QString& name, bool isDir )
-        : QIconViewItem( view ), m_path( path ), m_isDir( isDir ),
+        : QIconViewItem( view, name ), m_path( path ), m_isDir( isDir ),
           m_noInfo( false )
     {
-        QIconViewItem::setText( name );
         if ( isDir && !_dirPix )
             _dirPix = new QPixmap( Resource::loadPixmap("advancedfm/FileBrowser"));
         else if ( !isDir && !_unkPix )
             _unkPix = new QPixmap( Resource::loadPixmap( "UnknownDocument" ) );
     }
     inline QPixmap* IconViewItem::pixmap()const {
-        qWarning(  "Name is " + m_path.right( 15 ) + " rect is %d %d %d %d | %d %d",
-                   rect().x(),rect().y(),rect().width(),rect().height(),
-                   iconView()->contentsX(), iconView()->contentsY());
+      qWarning(  "Name is " + m_path.right( 15 ) + " rect is %d %d %d %d | %d %d",
+                 rect().x(),rect().y(),rect().width(),rect().height(),
+                 iconView()->contentsX(), iconView()->contentsY());
 
         if ( m_isDir )
             return _dirPix;
@@ -101,7 +100,7 @@ namespace {
 
 
 PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
-    : QVBox( wid ), m_cfg( cfg )
+    : QVBox( wid ), m_cfg( cfg ), m_updatet( false )
 {
     {
         QCopEnvelope( "QPE/Application/opie-eye_slave", "refUp()" );
@@ -308,26 +307,31 @@ void PIconView::slotClicked(QIconViewItem* _it) {
 }
 
 void PIconView::slotThumbInfo( const QString& _path, const QString& str ) {
-    if ( g_stringInf.contains( _path ) ) {
-        IconViewItem* item = g_stringInf[_path];
-        /* if set the view shows nonsens!
-           I dont know how to fix the format of displayed text :(*/
-        item->setText( str );
-        g_stringInf.remove( _path );
-    }
+    IconViewItem* item = g_stringInf[_path];
+    if (!item )
+        return;
+
+    if ( item->intersects(QRect( m_view->contentsX(),m_view->contentsY(),
+                                 m_view->contentsWidth(), m_view->contentsHeight() ) ) )
+        m_updatet = true;
+
+    item->setText( str );
+    g_stringInf.remove( _path );
 }
 void PIconView::slotThumbNail(const QString& _path, const QPixmap &pix) {
-    if ( g_stringPix.contains( _path ) ) {
-        IconViewItem* item = g_stringPix[_path];
+    IconViewItem* item = g_stringPix[_path];
+    if (!item )
+        return;
 
-        if (pix.width()>0) {
-            PPixmapCache::self()->insertImage( _path, pix, 64, 64 );
-            /* required for a recalculated rectangle. otherwise the view show nonsense! */
-        } else {
-            PPixmapCache::self()->insertImage(_path,Resource::loadPixmap( "UnknownDocument" ),64,64 );
-        }
-        g_stringPix.remove( _path );
-    }
+    if ( item->intersects(QRect( m_view->contentsX(),m_view->contentsY(),
+                                 m_view->contentsWidth(), m_view->contentsHeight() ) ) )
+        m_updatet = true;
+
+    if (pix.width()>0)
+        PPixmapCache::self()->insertImage( _path, pix, 64, 64 );
+
+
+    g_stringPix.remove( _path );
 }
 
 
@@ -354,11 +358,15 @@ void PIconView::slotBeamDone( Ir* ir) {
 
 void PIconView::slotStart() {
     m_view->viewport()->setUpdatesEnabled( false );
+    qWarning( "Sig Start" );
 }
 
 void PIconView::slotEnd() {
-    m_view->arrangeItemsInGrid( );
+    qWarning( "SLot End" );
+    if ( m_updatet )
+        m_view->arrangeItemsInGrid( );
     m_view->viewport()->setUpdatesEnabled( true );
+    m_updatet = false;
 }
 
 void PIconView::slotShowImage() {

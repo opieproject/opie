@@ -74,6 +74,7 @@ private:
     QComboBox* m_views;
     QIconView* m_view;
     QString m_path;
+    bool m_updatet : 1;
 };
 
 #endif
