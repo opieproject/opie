@@ -15,8 +15,12 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <iostream>
+using namespace std;
+
 #ifdef QWS
 #include <qpe/qpeapplication.h>
+#include <qpe/qcopenvelope_qws.h>
 #else
 #include <qapplication.h>
 #endif
@@ -29,24 +33,19 @@
 #include "global.h"
 
 
-/*
-int main2(int argc, char *argv[])
-{
-    Server local( "local", "", "status" );
-    local.readPackageFile();
-
-    Server s( "opiecvs", "aaa" );
-    s.readPackageFile( &local );
-
-}
-*/
-
 int main(int argc, char *argv[])
 {
+  cout << "Root dir = " << ROOT << endl;
 #ifdef QWS
   QPEApplication a( argc, argv );
 #else
   QApplication a( argc, argv );
+#endif
+
+#ifdef QWS
+  // Disable suspend mode
+  cout << "Disabling suspend mode" << endl;
+  QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::DisableSuspend;
 #endif
 
   MainWindow *win = new MainWindow();
@@ -55,6 +54,11 @@ int main(int argc, char *argv[])
 
   a.exec();
 
+#ifdef QWS
+  // Reenable suspend mode
+  cout << "Enabling suspend mode" << endl;
+  QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
+#endif
  #ifdef _DEBUG
   DumpUnfreed();
  #endif
