@@ -377,19 +377,19 @@ Trozdem beenden?</translation>
     <name>DateBookWeekLstEvent</name>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Editieren</translation>
+        <translation>Editieren</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished">Duplizieren</translation>
+        <translation>Duplizieren</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Löschen</translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished">Senden</translation>
+        <translation>Senden</translation>
     </message>
 </context>
 <context>

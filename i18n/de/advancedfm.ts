@@ -290,19 +290,19 @@ kopiert werden</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 does not exist&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 existiert nicht&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;Advanced FileManager is copyright 2002-2003 by L.J.Potter&lt;llornkcor@handhelds.org&gt; and is licensed by the GPL&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Advanced FileManager ist Copyright 2002-2003 L.J.Potter&lt;llornkcor@handhelds.org&gt; und ist lizensiert unter der GPL.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Cannot remove current directory from bookmarks. It is not bookmarked!&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Kann das aktuelle Verzeichnis nicht aus den Lesezeichen löschen. Es ist nicht als Lesezeichen abgelegt&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisieren</translation>
     </message>
     <message>
         <source>&lt;p&gt;Really delete %1 files?&lt;/p&gt;</source>

@@ -183,11 +183,11 @@
     </message>
     <message>
         <source>Columns:</source>
-        <translation type="unfinished"></translation>
+        <translation>Spalten:</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch</translation>
     </message>
 </context>
 <context>
@@ -270,11 +270,11 @@
     </message>
     <message>
         <source>Enable static background pixmap</source>
-        <translation type="unfinished"></translation>
+        <translation>Statisches Hintergrundbild aktivieren</translation>
     </message>
     <message>
         <source>Activate this, if you want the background pixmap not to scroll with the icons.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivieren Sie diese Einstellung, wenn das Hintergrundbild nicht mitscrollen soll.</translation>
     </message>
 </context>
 <context>

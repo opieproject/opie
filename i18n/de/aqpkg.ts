@@ -205,7 +205,7 @@
     </message>
     <message>
         <source>Couldn&apos;t start ipkg process</source>
-        <translation>ipkg konnte nicoht gestartet werden</translation>
+        <translation>ipkg konnte nicht gestartet werden</translation>
     </message>
     <message>
         <source>Could not open :</source>
@@ -241,17 +241,17 @@
     </message>
     <message>
         <source>Couldn&apos;t start ipkg-link process</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte ipkg-link nicht starten</translation>
     </message>
     <message>
         <source>Symbolic linking failed!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Erstellen symolischer Links fehlgeschlagen!</translation>
     </message>
     <message>
         <source>Symbolic linking succeeded.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Symbolischer Link erfolgreich erstellt.</translation>
     </message>
 </context>
 <context>

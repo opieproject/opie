@@ -228,11 +228,11 @@ Dieser Bereich erlaubt anwendungsspezifische Eigenschaften auszuschalten.</trans
     </message>
     <message>
         <source>Show Scrollbars on the left</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Bildlaufleisten auf der rechten Seite</translation>
     </message>
     <message>
         <source>Click here to display scrollbars on the left side instead of the right.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicke hier, um Bildlaufleisten auf der rechten Seite anzuzeigen.</translation>
     </message>
 </context>
 <context>

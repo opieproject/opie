@@ -18,14 +18,14 @@
     <name>AbView</name>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished">nicht zugewiesen</translation>
+        <translation>nicht zugewiesen</translation>
     </message>
 </context>
 <context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
-        <translation>Adressen</translation>
+        <translation>Kontakte</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -192,7 +192,7 @@ hinzufügen?</translation>
     </message>
     <message>
         <source>Edit Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontakt bearbeiten</translation>
     </message>
 </context>
 <context>
@@ -1364,35 +1364,35 @@ wird nach dem Neustart der Anwendung aktiv!</translation>
     <name>Opie</name>
     <message>
         <source>Contact</source>
-        <translation type="unfinished">Kontakt</translation>
+        <translation>Kontakt</translation>
     </message>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontakte</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation type="unfinished">Suche starten</translation>
+        <translation>Suche starten</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation type="unfinished">E-Mail schreiben an</translation>
+        <translation>E-Mail schreiben an</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation type="unfinished">vCard importieren</translation>
+        <translation>vCard importieren</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation type="unfinished">vCard exportieren</translation>
+        <translation>vCard exportieren</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation type="unfinished">Persönliche Daten</translation>
+        <translation>Persönliche Daten</translation>
     </message>
     <message>
         <source>Show quick search bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Schnellsuche</translation>
     </message>
 </context>
 <context>
