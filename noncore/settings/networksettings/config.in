@@ -1,10 +1,12 @@
-menu "networksetup"
+config NETWORKSETUP
+  boolean "Networksetup"
+  default "y"
+  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
 
-  config INTERFACES
-    boolean "networksetup"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && WLAN && INTERFACES
+config NETWORKSETUP-CORE
+  boolean
+  default "y" if NETWORKSETUP
+  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && NETWORKSETUP && INTERFACES
 
   source noncore/net/networksetup/wlan/config.in
   source noncore/net/networksetup/interfaces/config.in
-endmenu
