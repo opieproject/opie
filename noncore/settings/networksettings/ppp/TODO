@@ -1,0 +1,9 @@
+- ask for password is non is set
+
+- stop pppd, i.e. fix interfaceinformationppp
+
+- update modem attribute inputs when modem has changed
+- impl. PPPData::copyaccount & PPPData::deleteAccount
+
+- check if the same interface device combination allready exists
+- fix layout of edit account, i.e. get it shown maximised
