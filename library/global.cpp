@@ -680,10 +680,6 @@ void Global::execute( const QString &c, const QString& document )
     QString ap=list[0];
 
     qDebug("executing %s", ap.latin1() );
-    if ( ap == "suspend" ) {
-	QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );
-	return;
-    }
 
     /* if need be, sending a qcop message will result in an invoke, see
        preceeding function */
