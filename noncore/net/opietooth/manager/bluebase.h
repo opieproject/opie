@@ -11,6 +11,7 @@
 
 #include "bluetoothbase.h"
 #include "btlistitem.h"
+#include "bticonloader.h"
 
 #include <remotedevice.h>
 #include <manager.h>
@@ -63,6 +64,8 @@ namespace OpieTooth {
 
         QPixmap offPix;
         QPixmap onPix;
+
+        BTIconLoader *iconLoader;
 
 	private slots:
         void addSearchedDevices( QList<RemoteDevice> &newDevices );

@@ -1,4 +1,4 @@
- #include "hciconfwrapper.h"
+#include "hciconfwrapper.h"
 
 #include <qfile.h>
 #include <qtextstream.h>
