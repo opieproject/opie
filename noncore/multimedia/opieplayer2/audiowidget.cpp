@@ -72,7 +72,9 @@ void changeTextColor( QWidget * w) {
 
 AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name) :
 
-    MediaWidget( playList, mediaPlayerState, parent, name ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this ) {
+    MediaWidget( playList, mediaPlayerState, parent, name ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this ),
+    audioSliderBeingMoved( false )
+{
 
     Button defaultButton; 
     defaultButton.isToggle = defaultButton.isHeld = defaultButton.isDown = false;
@@ -231,9 +233,6 @@ void AudioWidget::resizeEvent( QResizeEvent * ) {
         }
     }
 }
-
-static bool audioSliderBeingMoved = FALSE;
-
 
 void AudioWidget::sliderPressed() {
     audioSliderBeingMoved = TRUE;

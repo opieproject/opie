@@ -107,6 +107,7 @@ private:
     QSlider slider;
     QLineEdit time;
     bool isStreaming : 1;
+    bool audioSliderBeingMoved : 1;
 };
 
 
