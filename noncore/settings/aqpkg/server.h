@@ -43,9 +43,11 @@ public:
     Package *getPackage( QString &name );
     QString toString();
     vector<Package> &getPackageList();
-
+    bool isServerActive() { return active; }
+    
     void setServerName( const QString &name ) { serverName = name; }
     void setServerUrl( const QString &url )   { serverUrl = url; }
+    void setActive( bool val )             { active = val; }
     QString &getServerName() { return serverName; }
     QString &getServerUrl()  { return serverUrl; }
 
@@ -55,6 +57,7 @@ private:
   QString serverName;
   QString serverUrl;
   QString packageFile;
+  bool active;
 
 
   vector<Package> packageList;
