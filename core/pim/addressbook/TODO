@@ -5,22 +5,22 @@ Feature requests:
 - Dial by mobile phone by tapping the number.. 
   (Maybe using gsmtool. And we may
 	add a library class for this)
-- Select of primary contact (see #274 on mantis)
 - 3rd column for 2. Contact
+
+Known Bugs:
+- "Unfiled" is always in listview ..
+- Personal Details not working
+- Contact-Editor is dropped. Wait for replacement.
 
 Urgent:
 
 Important:
 
-- "Unfiled" is always in listview ..
 - Redesign of Contacteditor
 - Store last settings of combo-boxes
 
-- Abtable: Configure Contact column (internally already available, 
-	need configuration)
 - Name order selected in "contacteditor" not used in list view.
 - Overview window cleanup needed..
-- Finishing of new View functions (List, Phonebook...)
 - Reload if contacts were changed externally
 - "What's this" should be added (Deleyed after Feature Freeze)
 
@@ -28,6 +28,7 @@ Less important:
 
 -  The picker (alphabetical sort widget) should be
    placed verticaly or horizontally (configurable)
+- Finishing of new View functions (List, Phonebook...)
 
 Should be Fixed (not absolute sure, need further validation):
 
@@ -53,3 +54,6 @@ Fixed:
 - Use advanced database functions in abtable to decrease
   memory footprint and to make everything more easy !
 	(abtable should store Iterator for selected Category)
+- Abtable: Configure Contact column (internally already available, 
+	need configuration)
+- Select of primary contact (see #274 on mantis)
