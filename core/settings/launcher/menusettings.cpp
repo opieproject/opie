@@ -64,7 +64,7 @@ MenuSettings::MenuSettings ( QWidget *parent, const char *name )
 	m_menutabs = new QCheckBox ( tr( "Show Launcher tabs in O-Menu" ), this );
 	lay-> addWidget ( m_menutabs );
 
-	m_menusubpopup = new QCheckBox ( tr( "Show Applications in subpopups" ), this );
+	m_menusubpopup = new QCheckBox ( tr( "Show Applications in Subpopups" ), this );
 	lay-> addWidget ( m_menusubpopup );
 
 	QWhatsThis::add ( m_list, tr( "Check the applets that you want to have included in the O-Menu." ));
@@ -121,8 +121,11 @@ void MenuSettings::init ( )
 	}
 
 	cfg. setGroup ( "Menu" );
-	m_menutabs-> setChecked ( cfg. readBoolEntry ( "LauncherTabs", true ));
-                m_menusubpopup-> setChecked ( cfg. readBoolEntry ( "LauncherSubPopup", true ));
+        m_menutabs->setChecked( cfg.readBoolEntry( "LauncherTabs", true ) );
+        m_menusubpopup->setChecked( cfg.readBoolEntry( "LauncherSubPopup", true ) );
+        m_menusubpopup->setEnabled( m_menutabs->isChecked() );
+        connect( m_menutabs, SIGNAL( stateChanged( int ) ), m_menusubpopup, SLOT( setEnabled( bool ) ) );
+
 }
 
 void MenuSettings::appletChanged()
