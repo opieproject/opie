@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <sys/file.h>
 
+
 #include <qdir.h>
 #include <qdialog.h>
 #include <qdragobject.h>
@@ -16,6 +17,7 @@
 #include <qpalette.h>
 #include <qptrdict.h>
 #include <qregexp.h>
+#include <qtimer.h>
 
 #include <qpe/alarmserver.h>
 #include <qpe/applnk.h>
@@ -33,6 +35,15 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/timestring.h>
 #include <qpe/qcopenvelope_qws.h>
+
+
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+
+const int XKeyPress = KeyPress;
+const int XKeyRelease = KeyRelease;
+#undef KeyPress
+#undef KeyRelease
 
 namespace {
     struct QCopRec{
@@ -76,6 +87,11 @@ public:
     QString appName;
     QString styleName;
     QString decorationName;
+    Atom wm_delete_window;
+    Atom wm_take_focus;
+    Atom wm_context_help;
+    Atom wm_context_accept;
+    Atom wm_protocols;
 
 private:
     QList<QCopRec> qcopq;
@@ -218,6 +234,32 @@ QPEApplication::QPEApplication(int &arg, char** argv, Type t)
     d = new Private;
     d->loadTextCodecs();
     d->loadImageCodecs();
+
+    // Init X-Atom
+    Atom *atoms[5];
+    Atom atoms_re[5];
+    char* names[5];
+    int n = 0;
+    atoms[n]   = &d->wm_delete_window;
+    names[n++] = "WM_DELETE_WINDOW";
+
+    atoms[n]   = &d->wm_take_focus;
+    names[n++] = "WM_TAKE_FOCUS";
+
+    atoms[n]   = &d->wm_context_help;
+    names[n++] = "_NET_WM_CONTEXT_HELP";
+
+    atoms[n]   = &d->wm_context_accept;
+    names[n++] = "_NET_WM_CONTEXT_ACCEPT";
+
+    atoms[n]   = &d->wm_protocols;
+    names[n++] = "WM_PROTOCOLS";
+
+    XInternAtoms( qt_xdisplay(), names, n, FALSE, atoms_re);
+    // now copy the values over to the properties
+    for (int i = 0; i < n; i++ )
+        *atoms[i] = atoms_re[i];
+    // done with X11 Stuff
 
     int dw = desktop()->width();
     if ( dw < 200 ) {
@@ -530,6 +572,26 @@ QPEApplication::StylusMode QPEApplication::stylusOperation( QWidget* w) {
 
 // eventFilter......
 bool QPEApplication::eventFilter( QObject* o, QEvent* e ) {
+    /*
+     * We want our WM to show Ok and a X button
+     * on dialogs
+     * our part is to set the _NET_WM_CONTEXT_ACCEPT
+     * propery
+     * and then wait for a client message -zecke
+     * on show we will add the prop
+     */
+    if (o->inherits("QDialog") && e->type() == QEvent::Show ) {
+        QDialog* dialog = (QDialog*)o;
+        Atom wm_prot[45];
+        int n = 0;
+        wm_prot[n++] = d->wm_delete_window;
+        wm_prot[n++] = d->wm_take_focus;
+        wm_prot[n++] = d->wm_context_accept;
+        if ( dialog->testWFlags( WStyle_ContextHelp ) )
+            wm_prot[n++] = d->wm_context_help;
+        XSetWMProtocols( qt_xdisplay(), dialog->winId(), wm_prot, n );
+        return TRUE; // should be save
+    }
     if ( stylusDict && e->type() >= QEvent::MouseButtonPress && e->type() <= QEvent::MouseMove ) {
         QMouseEvent * me = ( QMouseEvent* ) e;
         StylusMode mode = (StylusMode)(int)stylusDict->find(o);
@@ -657,6 +719,34 @@ void QPEApplication::prepareForTermination( bool willrestart )
 	sleep( 1 ); // You have 1 second to comply.
 #endif
 }
+int QPEApplication::x11ClientMessage(QWidget* w, XEvent* event, bool b ) {
+    qWarning("X11 ClientMessage %d %d", event->type,  ClientMessage);
+    if ( event->type == ClientMessage ) {
+        if ( (event->xclient.message_type == d->wm_protocols) &&
+             (event->xclient.data.l[0] == d->wm_context_accept ) ) {
+            qWarning("accepted!!!");
+            /*
+             * I'm not sure if we should use activeWidget
+             * or activeModalWidget
+             * a QDialog could be not modal too
+             */
+            if ( w->inherits("QDialog" ) ) {
+                qWarning("inherits QDialog!!!");
+                QDialog* dia = (QDialog*)w;
+                /*
+                 * call it directly or via QTimer::singleShot?
+                 */
+                QTimer::singleShot(0, dia, SLOT(reject() ) );
+                 return 0;
+            }
+
+        }
+    }
+    return QApplication::x11ClientMessage(w, event, b );
+}
+
+#define KeyPress XKeyPress
+#define KeyRelease XKeyRelease
 
 #if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
 

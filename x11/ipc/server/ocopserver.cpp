@@ -164,7 +164,7 @@ void OCopServer::newOnClient( int fd ) {
      *
      */
     if (head.magic == 47 ) {
-        qWarning("magic match");
+//        qWarning("magic match");
         QCString channel( head.chlen+1 );
         QCString func( head.funclen+1 );
         QByteArray data ( head.datalen );
@@ -172,15 +172,15 @@ void OCopServer::newOnClient( int fd ) {
         /*
          * we do not check for errors
          */
-        qWarning("read ");
+//        qWarning("read ");
         int s = read(fd, channel.data(), head.chlen );
         s = read(fd, func.data(), head.funclen );
         s = read(fd, data.data(), head.datalen );
-        qWarning("read");
+//        qWarning("read");
 
         /* debug output */
-        qWarning("channel %s %d", channel.data(), head.chlen );
-        qWarning("func %s %d", func.data(), head.funclen );
+//        qWarning("channel %s %d", channel.data(), head.chlen );
+//        qWarning("func %s %d", func.data(), head.funclen );
         /* debug end */
 
         /*
@@ -214,10 +214,6 @@ void OCopServer::registerClient( int fd ) {
 void OCopServer::deregisterClient(int fd ) {
     QMap<int, OCOPClient>::Iterator it = m_clients.find( fd );
     if (it != m_clients.end() ) {
-        OCOPClient client = it.data();
-        delete client.notify;
-        m_clients.remove(fd );
-        close(fd );
         /*
          * TIME_ME
          *
@@ -233,7 +229,7 @@ void OCopServer::deregisterClient(int fd ) {
             /*
              * The channel contains this fd
              */
-            qWarning("Channel %s", it2.key().data() );
+            qWarning("Channel %s %d", it2.key().data(), it2.data().count() );
             if ( it2.data().contains( fd ) ) {
                 qWarning("contains");
                 QValueList<int> array = it2.data();
@@ -241,7 +237,7 @@ void OCopServer::deregisterClient(int fd ) {
                 /*
                  * remove channel or just replace
                  */
-                if ( array.count() == 1 ) {
+                if ( array.count() == 1 || array.count() == 0) {
                     qWarning("Invalidate!");
                     /* is the list now invalidatet? */
                     m_channels.remove( it2 );
@@ -254,12 +250,18 @@ void OCopServer::deregisterClient(int fd ) {
                      */
                     goto repeatIt;
                 }else{
-                    qWarning("removing");
-                    array.remove( fd );
-                    it2 = m_channels.replace( it2.key(), array );
+                    qWarning("removing count %d %d",fd, array.count() );
+                    QValueList<int>::Iterator it3 = array.find( fd );
+                    it3 = array.remove( it3 );
+                    QCString key = it2.key().copy();
+                    it2 = m_channels.replace( key, array );
                 }
             }
         } // off all channels
+        OCOPClient client = it.data();
+        delete client.notify;
+        m_clients.remove(fd );
+        close(fd );
     }
     qWarning("clients are now at %d", m_clients.count() );
 };
@@ -327,14 +329,21 @@ void OCopServer::addChannel( const QCString& channel,
                              int fd ) {
     QMap<QCString, QValueList<int> >::Iterator it;
     it = m_channels.find( channel );
-
-    /* could be empty */
-    QValueList<int> list = it.data();
-    list.append( fd );
-    it = m_channels.replace( channel, list );
+    if ( it != m_channels.end() ) {
+        /* could be empty */
+        QValueList<int> list = it.data();
+        list.append( fd );
+        qWarning("count is now in addChannel %d %s", list.count(), channel.data() );
+        it = m_channels.replace( channel, list );
+    }else {
+        QValueList<int> ints;
+        ints.append( fd );
+        m_channels.insert( channel, ints );
+    }
 };
 void OCopServer::delChannel( const QCString& channel,
                              int fd ) {
+    qWarning("remove %s, %d", channel.data(), fd );
     if (!m_channels.contains( channel ) )
         return;
 
@@ -342,19 +351,21 @@ void OCopServer::delChannel( const QCString& channel,
     it = m_channels.find( channel );
 
     if ( it.data().contains(fd) ) {
-
         QValueList<int> ints = it.data();
         if ( ints.count() == 1  )
-            m_channels.remove( it );
+            m_channels.remove( channel );
         else{
             QValueList<int> ints = it.data();
-            ints.remove( fd );
-            m_channels.replace( it.key(), ints );
+            QValueList<int>::Iterator rem = ints.find( fd );
+            rem = ints.remove( rem );
+            QCString str = it.key().copy();
+            m_channels.replace( str, ints );
         }
+        qWarning(" channel count is now %d", ints.count() );
     }
 }
 void OCopServer::isRegistered( const QCString& channel, int fd) {
-    qWarning("isRegistered");
+//    qWarning("isRegistered");
     OCOPHead head;
     QCString func(2);
 

@@ -61,6 +61,8 @@ public:
 	DisableSuspend = 2,
 	Enable = 100
     };
+    /* reimplemented for internal purposes */
+    int x11ClientMessage( QWidget*, XEvent*, bool );
 
 signals:
     void clientMoused();
