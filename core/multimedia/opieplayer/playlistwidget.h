@@ -71,6 +71,7 @@ protected:
 void keyReleaseEvent( QKeyEvent *e);
 void keyPressEvent( QKeyEvent *e);
 private:
+    bool audioScan, videoScan; 
     void doBlank();
     void doUnblank();
     void readm3u(const QString &);
@@ -85,6 +86,8 @@ private:
     void populateAudioView();
     void populateVideoView();
 private slots:
+    void scanForAudio();
+    void scanForVideo(); 
     void openFile();
     void setDocument( const QString& fileref );
     void addToSelection( const DocLnk& ); // Add a media file to the playlist

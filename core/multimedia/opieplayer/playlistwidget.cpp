@@ -32,7 +32,6 @@
 #include <qpe/config.h>
 #include <qpe/global.h>
 #include <qpe/resource.h>
-
 #include <qaction.h>
 #include <qcursor.h>
 #include <qimage.h>
@@ -131,6 +130,8 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     d->current = NULL;
     fromSetDocument = FALSE;
     insanityBool=FALSE;
+    audioScan = FALSE;
+    videoScan = FALSE;
 //    menuTimer = new QTimer( this ,"menu timer"),
 //     connect( menuTimer, SIGNAL( timeout() ), SLOT( addSelected() ) );
 
@@ -181,6 +182,9 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     new MenuItem( pmPlayList, tr( "Save PlayList" ), this, SLOT( saveList() ) );
     pmPlayList->insertSeparator(-1);
     new MenuItem( pmPlayList, tr( "Open File or URL" ), this,SLOT( openFile() ) );
+    pmPlayList->insertSeparator(-1);
+    new MenuItem( pmPlayList, tr( "Rescan for Audio Files" ), this,SLOT( scanForAudio() ) );
+    new MenuItem( pmPlayList, tr( "Rescan for Video Files" ), this,SLOT( scanForVideo() ) );
 
     QPopupMenu *pmView = new QPopupMenu( this );
     menu->insertItem( tr( "View" ), pmView );
@@ -254,7 +258,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
              this,SLOT( playIt( QListViewItem *)) );
 
 //    audioView
-     populateAudioView();
+//     populateAudioView();
 // videowidget
      
     QWidget *vTab;
@@ -279,18 +283,17 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
              this,SLOT( playIt( QListViewItem *)) );
 
     tabWidget->insertTab( vTab,tr("Video"));
-populateVideoView();
+//  populateVideoView();
 
 //playlists list
     QWidget *LTab;
     LTab = new QWidget( tabWidget, "LTab" );
     playLists = new FileSelector( "playlist/plain", LTab, "fileselector" , FALSE, FALSE); //buggy
-    playLists->setMinimumSize(233,260);;
+    playLists->setMinimumSize(233,260);
     tabWidget->insertTab(LTab,tr("Lists"));
 
     connect( playLists, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( loadList( const DocLnk & ) ) );
 //      connect( playLists, SIGNAL( newSelected( const DocLnk &) ), this, SLOT( newFile( const DocLnk & ) ) );
-
 
 // add the library area
 
@@ -433,8 +436,6 @@ void PlayListWidget::addAllToList() {
 
 
 void PlayListWidget::addAllMusicToList() {
-//    DocLnkSet files;
-//    Global::findDocuments(&files, "audio/*");
     QListIterator<DocLnk> dit( files.children() );
     for ( ; dit.current(); ++dit )
         d->selectedFiles->addToSelection( **dit );
@@ -527,7 +528,6 @@ const DocLnk *PlayListWidget::current() { // this is fugly
       case 1://audio
       {
           qDebug("audioView");
-//             Global::findDocuments(&files, "audio/*");
           QListIterator<DocLnk> dit( files.children() );
           for ( ; dit.current(); ++dit ) {
               if( dit.current()->name() == audioView->currentItem()->text(0) && !insanityBool) {
@@ -541,7 +541,6 @@ const DocLnk *PlayListWidget::current() { // this is fugly
       case 2: // video
       {
           qDebug("videoView");
-//             Global::findDocuments(&vFiles, "video/*");
           QListIterator<DocLnk> Vdit( vFiles.children() );
           for ( ; Vdit.current(); ++Vdit ) {
               if( Vdit.current()->name() == videoView->currentItem()->text(0) && !insanityBool) {
@@ -803,6 +802,9 @@ void PlayListWidget::tabChanged(QWidget *widg) {
       break;
       case 1:
       {
+          audioView->clear();
+          populateAudioView();
+
           if( !tbDeletePlaylist->isHidden())
               tbDeletePlaylist->hide();
           d->tbRemoveFromList->setEnabled(FALSE);
@@ -811,6 +813,8 @@ void PlayListWidget::tabChanged(QWidget *widg) {
       break;
       case 2:
       {
+          videoView->clear();
+          populateVideoView();
           if( !tbDeletePlaylist->isHidden())
               tbDeletePlaylist->hide();
           d->tbRemoveFromList->setEnabled(FALSE);
@@ -826,8 +830,6 @@ void PlayListWidget::tabChanged(QWidget *widg) {
       break;
     };
 }
-
-
 
 void PlayListWidget::btnPlay(bool b) {
 
@@ -880,7 +882,6 @@ void PlayListWidget::deletePlaylist() {
         case 1: // Cancel
             break;
     };
-
 }
 
 void PlayListWidget::viewPressed( int mouse, QListViewItem *item, const QPoint& point, int i)
@@ -974,16 +975,37 @@ void PlayListWidget::listDelete() {
     };
 }
 
+void PlayListWidget::scanForAudio() {
+    qDebug("scan for audio");
+    files.detachChildren();
+    QListIterator<DocLnk> sdit( files.children() );
+    for ( ; sdit.current(); ++sdit ) {
+        delete sdit.current();
+    }
+    Global::findDocuments(&files, "audio/*");
+    audioScan = TRUE;
+}
+void PlayListWidget::scanForVideo() {
+    qDebug("scan for video");
+    vFiles.detachChildren();
+    QListIterator<DocLnk> sdit( vFiles.children() );
+    for ( ; sdit.current(); ++sdit ) {
+        delete sdit.current();
+    }
+    Global::findDocuments(&vFiles, "video/*");
+    videoScan = TRUE;
+}
+
 void PlayListWidget::populateAudioView() {
-//     if(files)
-//         files.~DocLnkSet();
+
+    audioView->clear();
     StorageInfo storageInfo;
     const QList<FileSystem> &fs = storageInfo.fileSystems();
+    if(!audioScan) scanForAudio();
 
-    Global::findDocuments(&files, "audio/*");
     QListIterator<DocLnk> dit( files.children() );
     QListIterator<FileSystem> it ( fs );
-    audioView->clear();
+
     QString storage;
     for ( ; dit.current(); ++dit ) {
         for( ; it.current(); ++it ){
@@ -993,8 +1015,10 @@ void PlayListWidget::populateAudioView() {
         }
 
         QListViewItem * newItem;
-        if ( QFile( dit.current()->file()).exists() ) {
-            newItem= /*(void)*/ new QListViewItem( audioView, dit.current()->name(), QString::number( QFile( dit.current()->file()).size() ), storage);
+        if ( QFile( dit.current()->file()).exists()  ) {
+//              qDebug(dit.current()->name());
+            newItem= /*(void)*/ new QListViewItem( audioView, dit.current()->name(),
+                                                   QString::number( QFile( dit.current()->file()).size() ), storage);
             newItem->setPixmap(0, Resource::loadPixmap( "opieplayer/musicfile" ));
         }
     }
@@ -1002,10 +1026,12 @@ void PlayListWidget::populateAudioView() {
 }
 
 void PlayListWidget::populateVideoView() {
+    videoView->clear();
     StorageInfo storageInfo;
     const QList<FileSystem> &fs = storageInfo.fileSystems();
 
-    Global::findDocuments(&vFiles, "video/*");
+    if(!videoScan ) scanForVideo();
+
     QListIterator<DocLnk> Vdit( vFiles.children() );
     QListIterator<FileSystem> it ( fs );
     videoView->clear();
@@ -1019,7 +1045,8 @@ void PlayListWidget::populateVideoView() {
 
         QListViewItem * newItem;
         if ( QFile( Vdit.current()->file()).exists() ) {
-            newItem= /*(void)*/ new QListViewItem( videoView, Vdit.current()->name(), QString::number( QFile( Vdit.current()->file()).size() ), storage);
+            newItem= /*(void)*/ new QListViewItem( videoView, Vdit.current()->name(),
+                                                   QString::number( QFile( Vdit.current()->file()).size() ), storage);
             newItem->setPixmap(0, Resource::loadPixmap( "opieplayer/videofile" ));
         }
     }
@@ -1095,7 +1122,7 @@ void PlayListWidget::keyReleaseEvent( QKeyEvent *e)
 //           break;
       case Key_Space:
           qDebug("Play");
-          playSelected();
+//          playSelected(); puh
           break;
       case Key_1:
           tabWidget->setCurrentPage(0);
@@ -1233,3 +1260,4 @@ void PlayListWidget::readPls(const QString &filename) {
         i++;
     }
 }
+
