@@ -93,6 +93,7 @@ private slots:
     void skinsMenuActivated(int);
     void pmViewActivated(int);
     void writem3u();
+    void writeCurrentM3u();
     void scanForAudio();
     void scanForVideo();
     void openFile();

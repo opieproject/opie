@@ -53,7 +53,7 @@
 class Om3u : public QStringList {
 //    Q_OBJECT
 public:
-    Om3u( const QString &filePath);
+    Om3u( const QString &filePath, int mode);
     ~Om3u();
     void readM3u();
     void readPls();

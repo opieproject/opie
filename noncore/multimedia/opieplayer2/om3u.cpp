@@ -48,15 +48,17 @@
 
 //extern PlayListWidget *playList;
 
-Om3u::Om3u( const QString &filePath)
+Om3u::Om3u( const QString &filePath, int mode)
       : QStringList (){
 //filePath is path name to m3u
 //qDebug("<<<<<<<new m3u "+filePath);
  f.setName(filePath);
-        if(f.exists())
-            f.open( IO_ReadWrite );
-        else
-            f.open( IO_ReadWrite | IO_Truncate);
+//         if(f.exists())
+//             f.open( IO_ReadWrite);
+//         else
+//             f.open( IO_ReadWrite | IO_Truncate);
+       f.open(mode);
+        
 }
 
 Om3u::~Om3u(){}
@@ -67,9 +69,8 @@ void Om3u::readM3u() { //it's m3u
     QString s;
     while ( !t.atEnd() ) {
         s=t.readLine();
-
+        //        qDebug(s);
         if( s.find( "#", 0, TRUE) == -1 ) {
-            if( s.find( " ",  0, TRUE) == -1 )  {
                 if( s.left(2) == "E:" || s.left(2) == "P:" ) {
                     s = s.right( s.length() -2 );
                     QFileInfo f( s );
@@ -89,7 +90,6 @@ void Om3u::readM3u() { //it's m3u
                     append(name);
 //                    qDebug(name);
                 }
-            }
         }
     }
 }
