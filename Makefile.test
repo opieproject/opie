@@ -1,9 +1,14 @@
 #!/usr/bin/make -f
 
+# The following are config.in's which are generated, to avoid numerous manual edits when
+# adding packages to the build.
+
+configs += config.in core/applets/config.in core/applets/restartapplet2/config.in core/apps/config.in core/config.in core/multimedia/config.in core/pim/config.in core/pim/today/plugins/config.in core/settings/config.in development/config.in inputmethods/config.in libopie/ofileselector/config.in libopie/pim/config.in libsql/config.in noncore/applets/config.in noncore/apps/config.in noncore/apps/opie-console/test/config.in noncore/comm/config.in noncore/config.in noncore/decorations/config.in noncore/games/config.in noncore/graphics/config.in noncore/multimedia/config.in noncore/net/config.in noncore/net/opietooth/config.in noncore/settings/config.in noncore/styles/config.in noncore/todayplugins/config.in noncore/tools/calc2/config.in noncore/tools/config.in noncore/unsupported/config.in noncore/unsupported/opiemail/ifaces/config.in x11/config.in x11/ipc/config.in x11/ipc/server/config.in
+
 OPIEDIR:=$(shell pwd)
 TOPDIR:=$(OPIEDIR)
 
-all :
+all : $(configs)
 
 -include $(TOPDIR)/.config
 -include $(TOPDIR)/.depends
@@ -11,3 +16,4 @@ all :
 all : $(TOPDIR)/.depends $(subdir-y)
 
 include $(TOPDIR)/Rules.make
+

@@ -1,6 +1,7 @@
 ## targets ##
 
-$(TOPDIR)/config.in :
+$(configs) :
+	$(call makecfg,$@)
 
 $(TOPDIR)/.depends : $(TOPDIR)/config.in
 	@cat $(TOPDIR)/packages | \
@@ -37,4 +38,8 @@ endef
 
 define makefilegen
 	cd $(shell dirname $(1)); $(TOPDIR)/qmake/qmake $(3) -o $(shell basename $(1)) `echo $(1)|sed -e 's,/Makefile$$,,g' -e 's,.*/,,g'`.pro
+endef
+
+define makecfg
+	$(TOPDIR)/scripts/makecfg.pl $1
 endef
