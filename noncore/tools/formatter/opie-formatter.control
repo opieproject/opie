@@ -1,4 +1,4 @@
-Files: $PKG_DIR/bin/formatter $PKG_DIR/pics/formatter/devices.png $PKG_DIR/apps/Settings/formatter.desktop
+Files: bin/formatter pics/formatter/devices.png apps/Settings/formatter.desktop
 Priority: optional
 Package: formatter
 Section: opie/applications
