@@ -11,7 +11,7 @@
 ************************************************************************************/
 
 /*
- * $Id: vmemo.cpp,v 1.15 2002-03-25 19:33:54 simon Exp $
+ * $Id: vmemo.cpp,v 1.16 2002-03-26 02:10:09 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -340,95 +340,95 @@ int VMemo::openWAV(const char *filename)
 
 void VMemo::record(void)
 {
-  int length=0, result, value;
-  qDebug("Recording");
+    int length=0, result, value;
+    qDebug("Recording");
 
-  if(systemZaurus) {
+    if(systemZaurus) {
     signed short sound[512], monoBuffer[512];
 
-  if(format==AFMT_S16_LE)  {
+    if(format==AFMT_S16_LE)  {
     while(recording)   {
-      result = read(dsp, sound, 512); // 8192
-      qApp->processEvents();
-      int j=0;
-       if(systemZaurus) {
-             for (int i = 0; i < result; i++) { //since Z is mono do normally
-               monoBuffer[i] = sound[i];
-             }
-             qApp->processEvents();
-             length+=write(wav, monoBuffer, result);
-         } else { //ipaq /stereo inputs
-            for (int i = 0; i < result; i+=2) {
-                monoBuffer[j] = (sound[i]+sound[i+1])/2;
-                j++;
-            }
-            qApp->processEvents();
-            length+=write(wav, monoBuffer, result/2);
-        }
-     printf("%d\r",length);
-     fflush(stdout);
-   }
-  }
- else { //AFMT_S8 // don't try this yet.. as player doesn't understand 8bit unsigned
-     while(recording)
- {
-   result = read(dsp, sound, 512); // 8192
-   qApp->processEvents();
-   int j=0;
-     if(systemZaurus) 
-       {
-           for (int i = 0; i < result; i++) { //since Z is mono do normally
-             monoBuffer[i] = sound[i];
-         }
-           qApp->processEvents();
-           length+=write(wav, monoBuffer, result);
-       } else { //ipaq /stereo inputs
-           for (int i = 0; i < result; i+=2) {
-               monoBuffer[j] = (sound[i]+sound[i+1])/2;
-               j++;
-           }
-           qApp->processEvents();
-           length+=write(wav, monoBuffer, result/2);
-       }
-  length += result;
-   printf("%d\r",length);
-   fflush(stdout);
+    result = read(dsp, sound, 512); // 8192
+    qApp->processEvents();
+    int j=0;
+    if(systemZaurus) {
+    for (int i = 0; i < result; i++) { //since Z is mono do normally
+    monoBuffer[i] = sound[i];
+    }
+    qApp->processEvents();
+    length+=write(wav, monoBuffer, result);
+    } else { //ipaq /stereo inputs
+    for (int i = 0; i < result; i+=2) {
+    monoBuffer[j] = (sound[i]+sound[i+1])/2;
+    j++;
+    }
+    qApp->processEvents();
+    length+=write(wav, monoBuffer, result/2);
+    }
+    printf("%d\r",length);
+    fflush(stdout);
+    }
+    }
+    else { //AFMT_S8 // don't try this yet.. as player doesn't understand 8bit unsigned
+    while(recording)
+    {
+    result = read(dsp, sound, 512); // 8192
+    qApp->processEvents();
+    int j=0;
+    if(systemZaurus) 
+    {
+    for (int i = 0; i < result; i++) { //since Z is mono do normally
+    monoBuffer[i] = sound[i];
+    }
+    qApp->processEvents();
+    length+=write(wav, monoBuffer, result);
+    } else { //ipaq /stereo inputs
+    for (int i = 0; i < result; i+=2) {
+    monoBuffer[j] = (sound[i]+sound[i+1])/2;
+    j++;
+    }
+    qApp->processEvents();
+    length+=write(wav, monoBuffer, result/2);
+    }
+    length += result;
+    printf("%d\r",length);
+    fflush(stdout);
 
     qApp->processEvents();
-  }
-}
+    }
+    }
 
-} else {
+    } else {
 
- char sound[512]; //char is 8 bit
+    char sound[512]; //char is 8 bit
 
- while(recording)
-{
-  result = read(dsp, sound, 512); // 8192
-  qApp->processEvents();
+    while(recording)
+    {
+    result = read(dsp, sound, 512); // 8192
+    qApp->processEvents();
 
-  write(wav, sound, result);
-  length += result;
+    write(wav, sound, result);
+    length += result;
 
-  qApp->processEvents();
-}
-//  qDebug("file has length of %d lasting %d seconds",
-//         length, (( length / speed) / channels) / 2 );
-// medialplayer states wrong length in secs
-}
+    qApp->processEvents();
+    }
+    //  qDebug("file has length of %d lasting %d seconds",
+    //         length, (( length / speed) / channels) / 2 );
+    // medialplayer states wrong length in secs
+    }
 
-  value = length+36;
-  lseek(wav, 4, SEEK_SET);
-  write(wav, &value, 4);
-  lseek(wav, 40, SEEK_SET);
-  write(wav, &length, 4);
-  track.close();
+    value = length+36;
+    lseek(wav, 4, SEEK_SET);
+    write(wav, &value, 4);
+    lseek(wav, 40, SEEK_SET);
+    write(wav, &length, 4);
+    track.close();
   
-  if( ioctl( dsp, SNDCTL_DSP_RESET,0) == -1)
-  perror("ioctl(\"SNDCTL_DSP_RESET\")");
-  ::close(dsp);
-  if(systemZaurus)
-        QMessageBox::message("Vmemo"," Done recording");
+    if( ioctl( dsp, SNDCTL_DSP_RESET,0) == -1)
+    perror("ioctl(\"SNDCTL_DSP_RESET\")");
+    ::close(dsp);
+    if(systemZaurus)
+    QMessageBox::message("Vmemo"," Done recording");
   
-  QSound::play(Resource::findSound("vmemoe"));
+    QSound::play(Resource::findSound("vmemoe"));
 }
