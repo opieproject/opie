@@ -20,6 +20,8 @@ void SettingsDialog::readConfig() {
     Config cfg("mail");
     cfg.setGroup( "Settings" );
     showHtmlButton->setChecked( cfg.readBoolEntry( "showHtml", false ) );
+    clickOpenMailButton->setChecked(cfg.readBoolEntry("clickOpensMail",true));
+    clickOpenFolderButton->setChecked(cfg.readBoolEntry("clickOpensFolder",true));
     cfg.setGroup( "Compose" );
     checkBoxLater->setChecked( cfg.readBoolEntry( "sendLater", false ) );
     cfg.setGroup( "Applet" );
@@ -33,6 +35,8 @@ void SettingsDialog::readConfig() {
 void SettingsDialog::writeConfig() {
     Config cfg( "mail" );
     cfg.setGroup( "Settings" );
+    cfg.writeEntry("clickOpensMail",clickOpenMailButton->isChecked());
+    cfg.writeEntry("clickOpensFolder",clickOpenFolderButton->isChecked());
     cfg.writeEntry( "showHtml", showHtmlButton->isChecked() );
     cfg.setGroup( "Compose" );
     cfg.writeEntry( "sendLater", checkBoxLater->isChecked() );

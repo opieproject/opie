@@ -49,13 +49,15 @@ protected:
     QPopupMenu *mailMenu, *settingsMenu,*serverMenu,*folderMenu;
 
     QAction *composeMail, *sendQueued, *showFolders, *searchMails, *deleteMails,
-            *editSettings, *editAccounts, *syncFolders;
+            *editSettings, *editAccounts, *syncFolders,*readMail;
     AccountView *folderView;
     QListView *mailView;
     QBoxLayout *layout;
     int m_Rotate;
     QCopChannel* m_sysChannel;
     int m_ServerMenuId,m_FolderMenuId;
+signals:
+    void settingsChanged();
 };
 
 #endif

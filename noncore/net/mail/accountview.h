@@ -33,6 +33,7 @@ public slots:
     virtual void refresh(QListViewItem *item);
     virtual void refreshCurrent();
     virtual void slotContextMenu(int id);
+    virtual void readSettings();
 
     void setupFolderselect(Selectstore*sels);
 
@@ -46,6 +47,7 @@ protected:
     QValueList<IMAPviewItem*> imapAccounts;
     QValueList<MHviewItem*> mhAccounts;
     bool m_rightPressed:1;
+    bool m_clickopens:1;
 
 protected slots:
     virtual void slotRightButton(int, QListViewItem *,const QPoint&,int);

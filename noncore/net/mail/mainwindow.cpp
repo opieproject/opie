@@ -63,10 +63,16 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     spacer->setBackgroundMode( QWidget::PaletteButton );
     toolBar->setStretchableWidget( spacer );
 
+    readMail = new QAction(tr("Read current mail"),ICON_READMAIL,0,0,this);
+    readMail->addTo(toolBar);
+    readMail->addTo(mailMenu);
+    connect(readMail,SIGNAL(activated()),this,SLOT(displayMail()));
+
     composeMail = new QAction( tr( "Compose new mail" ), ICON_COMPOSEMAIL,
                                0, 0, this );
     composeMail->addTo( toolBar );
     composeMail->addTo( mailMenu );
+
 
     sendQueued = new QAction( tr( "Send queued mails" ), ICON_SENDQUEUED,
                               0, 0, this );
@@ -122,6 +128,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     connect(folderView,SIGNAL(serverSelected(int)),this,SLOT(serverSelected(int)));
     connect(serverMenu,SIGNAL(activated(int)),folderView,SLOT(slotContextMenu(int)));
     connect(folderMenu,SIGNAL(activated(int)),folderView,SLOT(slotContextMenu(int)));
+    connect(this,SIGNAL(settingsChanged()),folderView,SLOT(readSettings()));
 
 
     layout->addWidget( folderView );

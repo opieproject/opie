@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>312</width>
-            <height>379</height>
+            <width>304</width>
+            <height>378</height>
         </rect>
     </property>
     <property stdset="1">
@@ -59,11 +59,11 @@
                 <vbox>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>3</number>
+                        <number>11</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>3</number>
+                        <number>6</number>
                     </property>
                     <widget>
                         <class>QCheckBox</class>
@@ -74,6 +74,28 @@
                         <property stdset="1">
                             <name>text</name>
                             <string>View mail as Html</string>
+                        </property>
+                    </widget>
+                    <widget>
+                        <class>QCheckBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>clickOpenMailButton</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Click opens mail</string>
+                        </property>
+                    </widget>
+                    <widget>
+                        <class>QCheckBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>clickOpenFolderButton</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Click activate server/folder</string>
                         </property>
                     </widget>
                     <spacer>

@@ -43,8 +43,11 @@ protected slots:
 protected:
     void setup_signalblocking();
 
+    bool m_clickopens:1;
+
 private:
     Settings *settings;
+signals:
 
 };
 

@@ -15,6 +15,7 @@
 #include <opie2/odebug.h>
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/config.h>
 
 /* QT */
 #include <qmap.h>
@@ -106,6 +107,10 @@ OpieMail::OpieMail( QWidget *parent, const char *name, WFlags  )
         : MainWindow( parent, name, WStyle_ContextHelp )
 {
     setup_signalblocking();
+    Config cfg("mail");
+    cfg.setGroup( "Settings" );
+    m_clickopens = cfg.readBoolEntry("clickOpensMail",true);
+
     settings = new Settings();
     folderView->populate( settings->getAccounts() );
     connect(folderView,SIGNAL(refreshMenues(int)),this,SLOT(refreshMenu(int)));
@@ -234,7 +239,12 @@ void OpieMail::slotSearchMails()
 void OpieMail::slotEditSettings()
 {
     SettingsDialog settingsDialog( this,  0, true,  WStyle_ContextHelp );
-    QPEApplication::execDialog( &settingsDialog );
+    if (QPEApplication::execDialog( &settingsDialog )) {
+        Config cfg("mail");
+        cfg.setGroup( "Settings" );
+        m_clickopens = cfg.readBoolEntry("clickOpensMail",true);
+        emit settingsChanged();
+    }
 }
 
 void OpieMail::slotEditAccounts()
@@ -342,6 +352,7 @@ void OpieMail::refreshMailView(const QValueList<RecMailP>&list)
 
 void OpieMail::mailLeftClicked(int button, QListViewItem *item,const QPoint&,int )
 {
+    if (!m_clickopens) return;
     /* just LEFT button - or tap with stylus on pda */
     if (button!=1) return;
     if (!item) return;

@@ -17,6 +17,7 @@
 #define PIC_LOCALFOLDER     "mail/localfolder"
 
 #define PIC_OFFLINE         "mail/notconnected"
+#define PIC_DOCUMENT        "DocsIcon"
 
 #define ICON_COMPOSEMAIL    QIconSet( Resource::loadPixmap( PIC_COMPOSEMAIL ) )
 #define ICON_SENDQUEUED     QIconSet( Resource::loadPixmap( PIC_SENDQUEUED ) )
@@ -25,6 +26,7 @@
 #define ICON_EDITSETTINGS   QIconSet( Resource::loadPixmap( PIC_EDITSETTINGS ) )
 #define ICON_EDITACCOUNTS   QIconSet( Resource::loadPixmap( PIC_EDITACCOUNTS ) )
 #define ICON_SYNC           QIconSet( Resource::loadPixmap( PIC_SYNC ) )
+#define ICON_READMAIL       QIconSet( Resource::loadPixmap( PIC_DOCUMENT))
 
 #define PIXMAP_IMAPFOLDER   QPixmap( Resource::loadPixmap( PIC_IMAPFOLDER ) )
 #define PIXMAP_POP3FOLDER   QPixmap( Resource::loadPixmap( PIC_POP3FOLDER ) )

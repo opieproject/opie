@@ -11,6 +11,7 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/config.h>
 
 /* QT */
 #include <qmessagebox.h>
@@ -31,12 +32,20 @@ AccountView::AccountView( QWidget *parent, const char *name, WFlags flags )
     connect( this, SIGNAL(clicked(QListViewItem*) ),this,
              SLOT( slotMouseClicked(QListViewItem*) ) );
     m_currentItem = 0;
+    readSettings();
 }
 
 AccountView::~AccountView()
 {
     imapAccounts.clear();
     mhAccounts.clear();
+}
+
+void AccountView::readSettings()
+{
+    Config cfg("mail");
+    cfg.setGroup( "Settings" );
+    m_clickopens = cfg.readBoolEntry("clickOpensFolder",true);
 }
 
 void AccountView::slotSelectionChanged(QListViewItem*item)
@@ -98,7 +107,7 @@ void AccountView::slotLeftButton(int, QListViewItem *,const QPoint&,int)
 void AccountView::slotMouseClicked(QListViewItem*item)
 {
     if (m_rightPressed) return;
-    if (!item || m_currentItem == item) return;
+    if (!item || m_currentItem == item||!m_clickopens) return;
     /* ### ToDo check settings if on single tab it should open */
     m_currentItem = item;
     refresh(m_currentItem);
