@@ -9,7 +9,7 @@
  *
  * Requirements:    Qt
  *
- * $Id: calckeypad.h,v 1.1 2003-02-15 11:45:26 groucho Exp $
+ * $Id: calckeypad.h,v 1.2 2003-02-21 10:39:30 eric Exp $
  *
  *
  ***************************************************************************/
@@ -71,7 +71,7 @@ private:
  
     QButtonGroup *grpbtnOperators;
 
- 
+    void setAppearance(void);
 
 };
 

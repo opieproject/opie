@@ -9,7 +9,7 @@
  *
  * Requirements:    Qt
  *
- * $Id: calckeypad.cpp,v 1.1 2003-02-15 11:45:26 groucho Exp $
+ * $Id: calckeypad.cpp,v 1.2 2003-02-21 10:39:29 eric Exp $
  *
  ***************************************************************************/
 
@@ -21,6 +21,8 @@
 KeyPad::KeyPad(LCDDisplay *lcd, QWidget *parent, const char *name )
     : QGrid(5, parent, name){
 
+int         i;
+QButton *btnButton;
 
 // save lcd at init
 display     = lcd;
@@ -70,6 +72,12 @@ grpbtnDigits->insert(btn7, 7);
 grpbtnDigits->insert(btn8, 8);
 grpbtnDigits->insert(btn9, 9);
 
+// set appearance of buttons
+for(i=0; i<10; i++){
+    btnButton = grpbtnDigits->find(i);
+    btnButton->setFixedSize(30,30);
+}
+
 // Operator key
 grpbtnOperators = new QButtonGroup(0, "operator");
 grpbtnOperators->insert(btnPlus, 1);
@@ -77,6 +85,17 @@ grpbtnOperators->insert(btnMinus,2);
 grpbtnOperators->insert(btnMultiply,3);
 grpbtnOperators->insert(btnDivide,4);
 grpbtnOperators->insert(btnEqual,5);
+// set appearance of buttons
+for(i=1; i<6; i++){
+    btnButton = grpbtnOperators->find(i);
+    btnButton->setFixedSize(30,30);
+}
+btnClear->setFixedSize(30,30);
+btnClear->setPalette(QPalette( QColor(255, 99, 71) ) );
+btnDot->setFixedSize(30,30);
+btnPercent->setFixedSize(30,30);
+btnF1->setFixedSize(30,30);
+btnAbout->setFixedSize(30,30);
 
 
 // SIGNALS AND SLOTS
@@ -135,22 +154,15 @@ if(iPreviousOperator){
     }
     display->setValue(dCurrent);
 }
-if(i == 5){
-    // key '=' pressed
-    dPreviousValue      = 0;
-    iPreviousOperator   = 0;
-    // We don't want to add digits
-    iLenCurrent         = 100;
-}else{
-    dPreviousValue      = dCurrent;
-    iPreviousOperator   = i;
-    // reset LCD for next digit
-    dCurrent            = 0;
-    iLenCurrent         = 1;
-    bIsDec              = false;
-    dDecCurrent         = 0;
-}
 
+dPreviousValue      = dCurrent;
+iPreviousOperator   = i;
+
+// reset LCD for next digit
+dCurrent            = 0;
+iLenCurrent         = 1;
+bIsDec              = false;
+dDecCurrent         = 0;
 }
 /***********************************************************************
  * SLOT: clearLCD  CE/C has been pressed
@@ -187,5 +199,9 @@ QMessageBox::about( this, "About Euroconv",
                          "Copyright 2003 TALC Informatique.\n"
                          "Under GPL license\n\n"
                          "Written by Eric Santonacci for Opie\n"
-                         "http://opie.handhelds.org\n" );
+                         "http://opie.handhelds.org\n\n"
+                         "Version 0.2\n\n"
+                         "Any comment or feedback to:\n"
+                         "Eric.Santonacci@talc.fr\n");
+
 }

@@ -9,7 +9,7 @@
  *
  * Requirements:    Qt
  *
- * $Id: calcdisplay.h,v 1.1 2003-02-15 11:45:26 groucho Exp $
+ * $Id: calcdisplay.h,v 1.2 2003-02-21 10:39:29 eric Exp $
  *
  *
  ***************************************************************************/
@@ -18,9 +18,39 @@
 
 #include <qhbox.h>
 #include <qlcdnumber.h>
-#include <qvgroupbox.h>
+#include <qhgroupbox.h>
 #include <qpushbutton.h>
 #include <qcombobox.h>
+
+
+/* XPM */
+static char *swap_xpm[] = {
+/* width height num_colors chars_per_pixel */
+"    13    18        2            1",
+/* colors */
+". c None",
+"# c #000000",
+/* pixels */
+"..#######....",
+"..#####......",
+"..######.....",
+"..#...###....",
+"........##...",
+".........##..",
+"..........##.",
+"...........##",
+"...........##",
+"...........##",
+"...........##",
+"..........##.",
+".........##..",
+"........##...",
+"..#...###....",
+"..######.....",
+"..#####......",
+"..#######....",
+};
+
 
 class LCDDisplay : public QHBox{
 
@@ -36,11 +66,13 @@ public slots:
 //signals:
 //    void valueChanged( int );
 private:
-    QVGroupBox  *grpbxTop;
+    int         grpbxStyle;
+
+    QHGroupBox  *grpbxTop;
     QComboBox   *cbbxTop;
     QLCDNumber  *lcdTop;
     
-    QVGroupBox  *grpbxBottom;
+    QHGroupBox  *grpbxBottom;
     QComboBox   *cbbxBottom;
     QLCDNumber  *lcdBottom;
     

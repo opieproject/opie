@@ -9,12 +9,13 @@
  *
  * Requirements:    Qt
  *
- * $Id: calcdisplay.cpp,v 1.1 2003-02-15 11:45:26 groucho Exp $
+ * $Id: calcdisplay.cpp,v 1.2 2003-02-21 10:39:29 eric Exp $
  *
  ***************************************************************************/
 
 #include <stdio.h>
 #include <qvbox.h>
+#include <qpixmap.h>
 
 #include "currency.h"
 #include "calcdisplay.h"
@@ -24,39 +25,55 @@ LCDDisplay::LCDDisplay( QWidget *parent, const char *name )
         : QHBox( parent, name ){
 
 
+
+this->setMargin(5);
+this->setSpacing(5);
+
 // Create display
 QVBox *vbxlayout    = new QVBox (this);
 
-grpbxTop    = new QVGroupBox(vbxlayout, "grpbxTop");
+/***************    Top LCD   ***********************/
+grpbxTop    = new QHGroupBox(vbxlayout, "grpbxTop");
+grpbxStyle  = grpbxTop->frameStyle();
+grpbxTop->setMaximumHeight(48);
+
 cbbxTop     = new QComboBox(grpbxTop, "cbbxTop");
+cbbxTop->setMaximumWidth(50);
+cbbxTop->insertStrList(aCurrency);
+
 lcdTop      = new QLCDNumber(10, grpbxTop, "lcdTop");
 lcdTop->setMode( QLCDNumber::DEC );
 lcdTop->setSmallDecimalPoint(true);
 lcdTop->setSegmentStyle(QLCDNumber::Flat);
-cbbxTop->insertStrList(aCurrency);
 
-grpbxBottom = new QVGroupBox(vbxlayout, "grpbxBottom");
+/**************   Bottom LCD  ************************/
+grpbxBottom = new QHGroupBox(vbxlayout, "grpbxBottom");
+grpbxBottom->setMaximumHeight(46);
+grpbxBottom->setFrameStyle(0);
+grpbxBottom->setFrameShadow(QFrame::MShadow);
+
 cbbxBottom  = new QComboBox(grpbxBottom, "cbbxBottom");
+cbbxBottom->setMaximumWidth(50);
+cbbxBottom->insertStrList(aCurrency);
+
 lcdBottom   = new QLCDNumber(10, grpbxBottom, "lcdBottom");
 lcdBottom->setMode( QLCDNumber::DEC );
 lcdBottom->setSmallDecimalPoint(true);
 lcdBottom->setSegmentStyle(QLCDNumber::Flat);
-cbbxBottom->insertStrList(aCurrency);
 
 // set combo box signals
 connect(cbbxTop, SIGNAL(activated(int)), this, SLOT(cbbxChange()));
 connect(cbbxBottom, SIGNAL(activated(int)), this, SLOT(cbbxChange()));
 
-btnSwap     = new QPushButton("S",this, "swap");
-btnSwap->setMaximumSize(20,50);
-btnSwap->setMinimumSize(20,50);
+btnSwap     = new QPushButton(this, "swap");
+QPixmap imgSwap((const char**) swap_xpm);
+btnSwap->setPixmap(imgSwap);
+btnSwap->setFixedSize(20,40);
 // set signal
 connect(btnSwap, SIGNAL(clicked()), this, SLOT(swapLCD()));
 
 // set default LCD to top
 iCurrentLCD = 0;
-
-//setValue(123.456);
 
 }
 
@@ -113,11 +130,17 @@ double dCurrentValue;
 
 // get current value
 if(!iCurrentLCD){
+    // iCurrentLCD = 0, lcdTop has current focus and is going to loose
+    // it
     dCurrentValue = lcdTop->value();
     iCurrentLCD = 1;
+    grpbxTop->setFrameStyle(0);
+    grpbxBottom->setFrameStyle(grpbxStyle);
 }else{
     dCurrentValue = lcdBottom->value();
     iCurrentLCD = 0;
+    grpbxTop->setFrameStyle(grpbxStyle);
+    grpbxBottom->setFrameStyle(0);
 }
 
 setValue(dCurrentValue);
@@ -129,8 +152,6 @@ setValue(dCurrentValue);
 void LCDDisplay::cbbxChange(void){
 
 double dCurrentValue;
-
-printf("combo changes...\n");
 
 // get current value
 if(!iCurrentLCD){
@@ -161,6 +182,9 @@ switch (iIndex){
     case 2: // DM: Deutch Mark
         return(dValue*DM);
         break;
+
+    default:
+        return 0;
 }//switch (iIndex)
 }// fct Eur2x
 
@@ -185,4 +209,8 @@ switch (iIndex){
         return(dValue/DM);
         break;
 }//switch (iIndex)
+
+// we shouldn't come here
+return 0;
+
 }// fct x2Euro
