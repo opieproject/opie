@@ -3,662 +3,669 @@
     <name>CBarPrefs</name>
     <message>
         <source>Toolbar Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Подесувања на палети</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Датотека</translation>
     </message>
     <message>
         <source>Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>Навигација</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Преглед</translation>
     </message>
     <message>
         <source>Marks</source>
-        <translation type="unfinished"></translation>
+        <translation>Означувања</translation>
     </message>
     <message>
         <source>Indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>Индикатори</translation>
     </message>
     <message>
         <source>Policy</source>
-        <translation type="unfinished"></translation>
+        <translation>Политики</translation>
     </message>
 </context>
 <context>
     <name>CButtonPrefs</name>
     <message>
         <source>Scroll Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Брзина на лизгање</translation>
     </message>
 </context>
 <context>
     <name>CCloseDialog</name>
     <message>
         <source>Tidy-up</source>
-        <translation type="unfinished"></translation>
+        <translation>Среди</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши</translation>
     </message>
     <message>
         <source>Delete Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Избричи врски</translation>
     </message>
     <message>
         <source>Delete Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши конфигурација</translation>
     </message>
 </context>
 <context>
     <name>CFileBarPrefs</name>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Отвори</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Затвои</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Информации</translation>
     </message>
     <message>
         <source>Two/One
 Touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Две/Едно 
+кликање</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Најди</translation>
     </message>
 </context>
 <context>
     <name>CIndBarPrefs</name>
     <message>
         <source>Annotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Нагласување</translation>
     </message>
 </context>
 <context>
     <name>CInterPrefs</name>
     <message>
         <source>International</source>
-        <translation type="unfinished"></translation>
+        <translation>Интернационални</translation>
     </message>
     <message>
         <source>Ideograms</source>
-        <translation type="unfinished"></translation>
+        <translation>идеограми</translation>
     </message>
     <message>
         <source>Ideogram Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина на идеограм</translation>
     </message>
     <message>
         <source>Apply font
 to dialogs</source>
-        <translation type="unfinished"></translation>
+        <translation>Користи фонт
+на дијалози</translation>
     </message>
     <message>
         <source>Encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Кодна табела</translation>
     </message>
     <message>
         <source>Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Апликација</translation>
     </message>
     <message>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Порака</translation>
     </message>
     <message>
         <source>Two/One
 Touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Две/Едно 
+кликање</translation>
     </message>
 </context>
 <context>
     <name>CLayoutPrefs</name>
     <message>
         <source>Strip CR</source>
-        <translation type="unfinished"></translation>
+        <translation>Тргни cr</translation>
     </message>
     <message>
         <source>Dehyphen</source>
-        <translation type="unfinished"></translation>
+        <translation>тргни хифенација</translation>
     </message>
     <message>
         <source>Single Space</source>
-        <translation type="unfinished"></translation>
+        <translation>единечен</translation>
     </message>
     <message>
         <source>Unindent</source>
-        <translation type="unfinished"></translation>
+        <translation>Итно</translation>
     </message>
     <message>
         <source>Reparagraph</source>
-        <translation type="unfinished"></translation>
+        <translation>Параграф</translation>
     </message>
     <message>
         <source>Double Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Двоен</translation>
     </message>
     <message>
         <source>Remap</source>
-        <translation type="unfinished"></translation>
+        <translation>Ремапирај</translation>
     </message>
     <message>
         <source>Embolden</source>
-        <translation type="unfinished"></translation>
+        <translation>Појачај</translation>
     </message>
     <message>
         <source>Full Justify</source>
-        <translation type="unfinished"></translation>
+        <translation>Целосно порамни</translation>
     </message>
 </context>
 <context>
     <name>CLayoutPrefs2</name>
     <message>
         <source>Indent</source>
-        <translation type="unfinished"></translation>
+        <translation>Идентификатор</translation>
     </message>
     <message>
         <source>Page
 Overlap</source>
-        <translation type="unfinished"></translation>
+        <translation>Страна
+префрлување</translation>
     </message>
     <message>
         <source>Graphics
 Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Графика
+Зум</translation>
     </message>
     <message>
         <source>Margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Маргини</translation>
     </message>
     <message>
         <source>Paragraph
 Leading</source>
-        <translation type="unfinished"></translation>
+        <translation>Параграф
+Водечки</translation>
     </message>
     <message>
         <source>Line
 Leading</source>
-        <translation type="unfinished"></translation>
+        <translation>Линија
+ВОвлекување</translation>
     </message>
     <message>
         <source>Markup</source>
-        <translation type="unfinished"></translation>
+        <translation>Маркирај</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Фонт</translation>
     </message>
 </context>
 <context>
     <name>CMarkBarPrefs</name>
     <message>
         <source>Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Сними линк</translation>
     </message>
     <message>
         <source>Annotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Нотација</translation>
     </message>
     <message>
         <source>Goto</source>
-        <translation type="unfinished"></translation>
+        <translation>Оди на</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Избришу</translation>
     </message>
     <message>
         <source>Autogen</source>
-        <translation type="unfinished"></translation>
+        <translation>Генерирај Автоматски</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Исчисти</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Сними</translation>
     </message>
     <message>
         <source>Tidy</source>
-        <translation type="unfinished"></translation>
+        <translation>Исчисти</translation>
     </message>
     <message>
         <source>Mark Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Маркирај Блок</translation>
     </message>
     <message>
         <source>Copy Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирај Блок</translation>
     </message>
 </context>
 <context>
     <name>CMiscBarPrefs</name>
     <message>
         <source>Floating</source>
-        <translation type="unfinished"></translation>
+        <translation>Лебдечко</translation>
     </message>
     <message>
         <source>Single bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Една палета</translation>
     </message>
     <message>
         <source>Menu/tool bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Мени/Палета</translation>
     </message>
     <message>
         <source>Multiple bars</source>
-        <translation type="unfinished"></translation>
+        <translation>Повеќе палети</translation>
     </message>
     <message>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Врв</translation>
     </message>
     <message>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Дно</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Десно</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Лево</translation>
     </message>
     <message>
         <source>Minimised</source>
-        <translation type="unfinished"></translation>
+        <translation>Минимизирано</translation>
     </message>
     <message>
         <source>Movable</source>
-        <translation type="unfinished"></translation>
+        <translation>Пренослива</translation>
     </message>
 </context>
 <context>
     <name>CMiscPrefs</name>
     <message>
         <source>Annotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Нагласување</translation>
     </message>
     <message>
         <source>Dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Речник</translation>
     </message>
     <message>
         <source>Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Клипборд</translation>
     </message>
     <message>
         <source>Depluck</source>
-        <translation type="unfinished"></translation>
+        <translation>Деплак</translation>
     </message>
     <message>
         <source>Dejpluck</source>
-        <translation type="unfinished"></translation>
+        <translation>ДејПлак</translation>
     </message>
     <message>
         <source>Continuous</source>
-        <translation type="unfinished"></translation>
+        <translation>Постојано</translation>
     </message>
 </context>
 <context>
     <name>CNavBarPrefs</name>
     <message>
         <source>Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Лигај</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Дома</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Напред</translation>
     </message>
     <message>
         <source>Page Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Страна Нагоре</translation>
     </message>
     <message>
         <source>Page Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Страна Надоле</translation>
     </message>
     <message>
         <source>Goto Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Оди на почеток</translation>
     </message>
     <message>
         <source>Goto End</source>
-        <translation type="unfinished"></translation>
+        <translation>Оди на крај</translation>
     </message>
     <message>
         <source>Jump</source>
-        <translation type="unfinished"></translation>
+        <translation>Скокни</translation>
     </message>
     <message>
         <source>Page/Line Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Лизгање на страна/линија</translation>
     </message>
 </context>
 <context>
     <name>CPrefs</name>
     <message>
         <source>OpieReader Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Подесување на Читачот</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Поставување</translation>
     </message>
     <message>
         <source>Layout(2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Поставување(2)</translation>
     </message>
     <message>
         <source>Locale</source>
-        <translation type="unfinished"></translation>
+        <translation>Јазик</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Општо</translation>
     </message>
     <message>
         <source>Buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>копчиња</translation>
     </message>
 </context>
 <context>
     <name>CURLDialog</name>
     <message>
         <source>Save URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Сними Линк</translation>
     </message>
     <message>
         <source>Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Клипборд</translation>
     </message>
     <message>
         <source>Local file</source>
-        <translation type="unfinished"></translation>
+        <translation>Локална датотека</translation>
     </message>
     <message>
         <source>Global file</source>
-        <translation type="unfinished"></translation>
+        <translation>Глобална датотека</translation>
     </message>
 </context>
 <context>
     <name>CViewBarPrefs</name>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Цел екран</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>Зголеми</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Намали</translation>
     </message>
     <message>
         <source>Set Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Намести фонт</translation>
     </message>
     <message>
         <source>Encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Кодна табела</translation>
     </message>
     <message>
         <source>Ideogram</source>
-        <translation type="unfinished"></translation>
+        <translation>идеограм</translation>
     </message>
 </context>
 <context>
     <name>QTReaderApp</name>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Датотека</translation>
     </message>
     <message>
         <source>Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>Навигација</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Преглед</translation>
     </message>
     <message>
         <source>Marks</source>
-        <translation type="unfinished"></translation>
+        <translation>Означувања</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Подесувања</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфигурација</translation>
     </message>
     <message>
         <source>Save Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Сними Конфигурација</translation>
     </message>
     <message>
         <source>Load Config</source>
-        <translation type="unfinished"></translation>
+        <translation>вчитај конфигурација</translation>
     </message>
     <message>
         <source>Delete Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши конфигурација</translation>
     </message>
     <message>
         <source>Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>палети</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Отвори</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Затвори</translation>
     </message>
     <message>
         <source>Run Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Стартувај скрипта</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Информации</translation>
     </message>
     <message>
         <source>Two/One Touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Две/Едно кликање</translation>
     </message>
     <message>
         <source>Find...</source>
-        <translation type="unfinished"></translation>
+        <translation>Најди...</translation>
     </message>
     <message>
         <source>Export Links</source>
-        <translation type="unfinished"></translation>
+        <translation>Експорирај врски</translation>
     </message>
     <message>
         <source>Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Поместувај</translation>
     </message>
     <message>
         <source>Goto Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Оди на почеток</translation>
     </message>
     <message>
         <source>Goto End</source>
-        <translation type="unfinished"></translation>
+        <translation>Оди на крај</translation>
     </message>
     <message>
         <source>Jump</source>
-        <translation type="unfinished"></translation>
+        <translation>Скокни</translation>
     </message>
     <message>
         <source>Page/Line Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Лизгање на страна/линија</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Нагоре</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Надоле</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Дома</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Напред</translation>
     </message>
     <message>
         <source>Scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Поместување</translation>
     </message>
     <message>
         <source>Set Target</source>
-        <translation type="unfinished"></translation>
+        <translation>Постави цел</translation>
     </message>
     <message>
         <source>Pause Paras</source>
-        <translation type="unfinished"></translation>
+        <translation>Паузирај</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Цел екран</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>Зголеми</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Намали</translation>
     </message>
     <message>
         <source>Set Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Намести фонт</translation>
     </message>
     <message>
         <source>Set Encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Постави кодна табела</translation>
     </message>
     <message>
         <source>Ideogram</source>
-        <translation type="unfinished"></translation>
+        <translation>идеограм</translation>
     </message>
     <message>
         <source>Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Сними линк</translation>
     </message>
     <message>
         <source>Annotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Нотација</translation>
     </message>
     <message>
         <source>Goto</source>
-        <translation type="unfinished"></translation>
+        <translation>Оди на</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>избриши</translation>
     </message>
     <message>
         <source>Autogen</source>
-        <translation type="unfinished"></translation>
+        <translation>Генерирај Автоматски</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Исчисти</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Сними</translation>
     </message>
     <message>
         <source>Tidy</source>
-        <translation type="unfinished"></translation>
+        <translation>Исчисти</translation>
     </message>
     <message>
         <source>Start Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Почетен блок</translation>
     </message>
     <message>
         <source>Copy Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирај Блок</translation>
     </message>
     <message>
         <source>Find Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Најди следно</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Затвори пребарување</translation>
     </message>
     <message>
         <source>Do Reg</source>
-        <translation type="unfinished"></translation>
+        <translation>Регисрирај</translation>
     </message>
     <message>
         <source>Close Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Затвори уредување</translation>
     </message>
     <message>
         <source>Annotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Нагласување</translation>
     </message>
 </context>
 <context>
     <name>fileBrowser</name>
     <message>
         <source>Browse for file</source>
-        <translation type="unfinished"></translation>
+        <translation>Покажи Датотека</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Скриено</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Име</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Големина</translation>
     </message>
 </context>
 </TS>

@@ -3,156 +3,156 @@
     <name>ControlsDialog</name>
     <message>
         <source>Brightness</source>
-        <translation type="unfinished"></translation>
+        <translation>Светлина</translation>
     </message>
 </context>
 <context>
     <name>ImageFileSelector</name>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Наслов</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип</translation>
     </message>
 </context>
 <context>
     <name>ImageViewer</name>
     <message>
         <source>Image Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Прегледувач на слики</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Отвори</translation>
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>Мал преглед</translation>
     </message>
     <message>
         <source>Slide show</source>
-        <translation type="unfinished"></translation>
+        <translation>Слајд-приказ</translation>
     </message>
     <message>
         <source>Preferences..</source>
-        <translation type="unfinished"></translation>
+        <translation>Својства..</translation>
     </message>
     <message>
         <source>Image Info ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Информации за слика...</translation>
     </message>
     <message>
         <source>Horizontal flip</source>
-        <translation type="unfinished"></translation>
+        <translation>Префрли Хоринзотално</translation>
     </message>
     <message>
         <source>Vertical flip</source>
-        <translation type="unfinished"></translation>
+        <translation>Префрли Вертикално</translation>
     </message>
     <message>
         <source>Open ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Отвори...</translation>
     </message>
     <message>
         <source>Rotate 90</source>
-        <translation type="unfinished"></translation>
+        <translation>Ротирај 90</translation>
     </message>
     <message>
         <source>Rotate 180</source>
-        <translation type="unfinished"></translation>
+        <translation>Ротирај 180</translation>
     </message>
     <message>
         <source>Rotate 270</source>
-        <translation type="unfinished"></translation>
+        <translation>Ротирај 270</translation>
     </message>
     <message>
         <source>Brightness ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Светлина...</translation>
     </message>
     <message>
         <source>Black And White</source>
-        <translation type="unfinished"></translation>
+        <translation>ЦрноБела</translation>
     </message>
     <message>
         <source>Scale to Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Зголеми/Намали на екран</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Цел екран</translation>
     </message>
     <message>
         <source>Stop Slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Сопри Слајд-приказ</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Датотека</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Преглед</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Опции</translation>
     </message>
     <message>
         <source> - Image Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation> - Прегледувач на слики</translation>
     </message>
     <message>
         <source>%1 colors</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 бои</translation>
     </message>
     <message>
         <source> True color</source>
-        <translation type="unfinished"></translation>
+        <translation>Вистински бои</translation>
     </message>
     <message>
         <source>%1 alpha levels</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 алфа нивоа</translation>
     </message>
     <message>
         <source>8-bit alpha channel</source>
-        <translation type="unfinished"></translation>
+        <translation>8-битен алфа канал</translation>
     </message>
 </context>
 <context>
     <name>SettingsDialogBase</name>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Својства</translation>
     </message>
     <message>
         <source>Slide Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Слајд-приказ</translation>
     </message>
     <message>
         <source>Delay between pictures</source>
-        <translation type="unfinished"></translation>
+        <translation>Каснење помеѓу слики</translation>
     </message>
     <message>
         <source>s</source>
-        <translation type="unfinished"></translation>
+        <translation>с</translation>
     </message>
     <message>
         <source>Repeat slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Повтори Слајд-приказ</translation>
     </message>
     <message>
         <source>Show pictures in reverse</source>
-        <translation type="unfinished"></translation>
+        <translation>Прикажи ги сликите обратно</translation>
     </message>
     <message>
         <source>Load pictures rotated 90 degrees</source>
-        <translation type="unfinished"></translation>
+        <translation>Вчитај ги сликите ротирани за 90 степени</translation>
     </message>
     <message>
         <source>Fast load pictures</source>
-        <translation type="unfinished"></translation>
+        <translation>Брзо вчитување на слики</translation>
     </message>
 </context>
 </TS>

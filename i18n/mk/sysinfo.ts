@@ -3,66 +3,66 @@
     <name>FileSysInfo</name>
     <message>
         <source>CF</source>
-        <translation type="unfinished"></translation>
+        <translation>CF</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
-        <translation type="unfinished"></translation>
+        <translation>Овој граф прикажува колку меморија се користи на оваа Flash картичка.</translation>
     </message>
     <message>
         <source>Ha</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha</translation>
     </message>
     <message>
         <source>This graph represents how much storage is currently used on this hard drive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Овој граф прикажува колку простор има на дискот.</translation>
     </message>
     <message>
         <source>SD</source>
-        <translation type="unfinished"></translation>
+        <translation>SD</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
-        <translation type="unfinished"></translation>
+        <translation>Овој граф покажува колку меморија се користи на оваа SD картичка.</translation>
     </message>
     <message>
         <source>SC</source>
-        <translation type="unfinished"></translation>
+        <translation>SC</translation>
     </message>
     <message>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation>ln</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Овој граф прикажува колку се користи од вградената меморија на овој уред.</translation>
     </message>
     <message>
         <source>RA</source>
-        <translation type="unfinished"></translation>
+        <translation>RA</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
-        <translation type="unfinished"></translation>
+        <translation>Овој граф прикажува колку меморија се користи во привремениот RAM диск.</translation>
     </message>
 </context>
 <context>
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Апликации на процесорот (%)</translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Користење на системскиот процесор (%)</translation>
     </message>
     <message>
         <source>This page shows how much this device&apos;s processor is being used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Оваа страна поклажува колку од процесорот се користи.</translation>
     </message>
     <message>
         <source>Type: </source>
-        <translation type="unfinished"></translation>
+        <translation>Тип:</translation>
     </message>
 </context>
 <context>
@@ -75,200 +75,210 @@ Memory is categorized as follows:
 2. Buffers - temporary storage used to improve performance
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Оваа страна покажува како меморијата се алоцира на овој уред,
+Меморијата се каратеризира според:
+
+1. Искористена - меморија која ја искоритуваат апликациите
+2. Бафери - привремени локации кои се користат за подобрување на перформансите
+3. Кеширани - информации кои биле скоро користени
+4. Слободна - меморија која не се користи.</translation>
     </message>
     <message>
         <source>Used (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Искористени (%1) кВ</translation>
     </message>
     <message>
         <source>Buffers (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Бафери ( %1 кВ)</translation>
     </message>
     <message>
         <source>Cached (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Кеширана (%1) кВ</translation>
     </message>
     <message>
         <source>Free (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Слободна (%1 кВ)</translation>
     </message>
     <message>
         <source>Total Memory: %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>Вкупно меморија: %1 кВ</translation>
     </message>
 </context>
 <context>
     <name>ModulesInfo</name>
     <message>
         <source>Module</source>
-        <translation type="unfinished"></translation>
+        <translation>Модул</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Големина</translation>
     </message>
     <message>
         <source>Use#</source>
-        <translation type="unfinished"></translation>
+        <translation>Искоритено#</translation>
     </message>
     <message>
         <source>Used By</source>
-        <translation type="unfinished"></translation>
+        <translation>Искористено од</translation>
     </message>
     <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
 
 Click and hold on a module to see additional information about the module, or to unload it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ова е листа на сите вчитани модули на кернелот.
+
+Кликни и задржи на некој од модулите за да видиш додатни информации, или да го тргнеш.</translation>
     </message>
     <message>
         <source>Select a command here and then click the Send button to the right to send the command to module selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери команда и кликни на копчето Прати за да се испрати до избраниот модул.</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Прати</translation>
     </message>
     <message>
         <source>Click here to send the selected command to the module selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кликни овде за зибранта команда да се испрати наиззбраниот модул.</translation>
     </message>
     <message>
         <source>This area shows detailed information about this module.</source>
-        <translation type="unfinished"></translation>
+        <translation>Овој дел прикажува детални информации за модулот.</translation>
     </message>
     <message>
         <source>You really want to execute
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Да се изврши</translation>
     </message>
 </context>
 <context>
     <name>MountInfo</name>
     <message>
         <source> : %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>: %1 кВ</translation>
     </message>
     <message>
         <source>Used (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Искористени (%1) кВ</translation>
     </message>
     <message>
         <source>Available (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Словофни (%1 кВ)</translation>
     </message>
 </context>
 <context>
     <name>ProcessInfo</name>
     <message>
         <source>PID</source>
-        <translation type="unfinished"></translation>
+        <translation>PID</translation>
     </message>
     <message>
         <source>Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Команда</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Статус</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Време</translation>
     </message>
     <message>
         <source>This is a list of all the processes on this handheld device.
 
 Click and hold on a process to see additional information about the process, or to send a signal to it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ова е листа на сите провеси.
+
+Килкни и задржи на процес за додатни информации, или да испратиш сигнал.</translation>
     </message>
     <message>
         <source>Select a signal here and then click the Send button to the right to send to this process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери сигнал и кликни на копчето Прати за да се испрати до процесот.</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Прати</translation>
     </message>
     <message>
         <source>Click here to send the selected signal to this process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кликни овде за зибраниот сигнал да се испрати до процесот.</translation>
     </message>
     <message>
         <source>This area shows detailed information about this process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Овде се прикажани деталн информации за процесот.</translation>
     </message>
     <message>
         <source>You really want to send
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Да испрати</translation>
     </message>
 </context>
 <context>
     <name>SystemInfo</name>
     <message>
         <source>System Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Информации за ситемот</translation>
     </message>
     <message>
         <source>Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Меморија</translation>
     </message>
     <message>
         <source>Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Медиум</translation>
     </message>
     <message>
         <source>CPU</source>
-        <translation type="unfinished"></translation>
+        <translation>Процесор</translation>
     </message>
     <message>
         <source>Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Процесс</translation>
     </message>
     <message>
         <source>Modules</source>
-        <translation type="unfinished"></translation>
+        <translation>Модули</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Верзија</translation>
     </message>
 </context>
 <context>
     <name>VersionInfo</name>
     <message>
         <source>&lt;b&gt;Linux Kernel&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Кернел&lt;/b&gt;&lt;p&gt;Верзија:</translation>
     </message>
     <message>
         <source>Compiled by: </source>
-        <translation type="unfinished"></translation>
+        <translation>Компајлирано од:</translation>
     </message>
     <message>
         <source>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Оpie&lt;/b&gt;&lt;p&gt;Верзија:</translation>
     </message>
     <message>
         <source>Built on: </source>
-        <translation type="unfinished"></translation>
+        <translation>Изградено на:</translation>
     </message>
     <message>
         <source>&lt;p&gt;Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt; Верзија:</translation>
     </message>
     <message>
         <source>&lt;p&gt;Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Модел:</translation>
     </message>
     <message>
         <source>&lt;p&gt;Vendor: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt; Производител:</translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Оваа страна ја прикажува верзијата на Opie, кернелот и дистрибудиајта.</translation>
     </message>
 </context>
 </TS>

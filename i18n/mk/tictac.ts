@@ -3,39 +3,39 @@
     <name>TicTacToe</name>
     <message>
         <source>Computer starts</source>
-        <translation type="unfinished"></translation>
+        <translation>Компјутерот стартува</translation>
     </message>
     <message>
         <source>Human starts</source>
-        <translation type="unfinished"></translation>
+        <translation>Човекот почнува</translation>
     </message>
     <message>
         <source>Play!</source>
-        <translation type="unfinished"></translation>
+        <translation>Играј!</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Исклучи</translation>
     </message>
     <message>
         <source>Click Play to start</source>
-        <translation type="unfinished"></translation>
+        <translation>Кликни Играј за старт</translation>
     </message>
     <message>
         <source>Make your move</source>
-        <translation type="unfinished"></translation>
+        <translation>Направи потег</translation>
     </message>
     <message>
         <source>You won!</source>
-        <translation type="unfinished"></translation>
+        <translation>Победа!</translation>
     </message>
     <message>
         <source>Computer won!</source>
-        <translation type="unfinished"></translation>
+        <translation>КОмпјутерот победи!</translation>
     </message>
     <message>
         <source>It&apos;s a draw</source>
-        <translation type="unfinished"></translation>
+        <translation>Нерешено</translation>
     </message>
 </context>
 </TS>

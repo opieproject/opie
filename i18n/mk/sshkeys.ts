@@ -3,38 +3,38 @@
     <name>SSHKeysApp</name>
     <message>
         <source>Error running ssh-add</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка при вчитување на ssh-add</translation>
     </message>
 </context>
 <context>
     <name>SSHKeysBase</name>
     <message>
         <source>SSH Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>SSH клучеви</translation>
     </message>
     <message>
         <source>Add Keys:</source>
-        <translation type="unfinished"></translation>
+        <translation>Додај Клучеви:</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Освежи</translation>
     </message>
     <message>
         <source>Clear Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши клучеви</translation>
     </message>
     <message>
         <source>Key Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Име</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Големина</translation>
     </message>
     <message>
         <source>Fingerprint</source>
-        <translation type="unfinished"></translation>
+        <translation>Отпечаток</translation>
     </message>
 </context>
 </TS>
