@@ -28,8 +28,8 @@ public:
     };
     enum Feature {
         AutoConnect = 0,
-        TransferFile =1,
-        Close =2
+        TransferFile = 1,
+        Close = 2
     };
     /**
      * a small c'tor

@@ -197,6 +197,16 @@ void ProfileEditorDialog::slotConActivated( const QString& str ) {
     if ( !m_con ) {
         m_con = new NoOptions( str, m_svCon->viewport(), "name");
     }
+
+    // FIXME ugly hack right. Right solution would be to look into the layer and see if it
+    // supports auto connect and then set it as prefered
+    //if (  (  )->layer()->supports()[0] == 1 ) {
+    if ( m_conCmb ->currentText() == "local Console" ) {
+        m_autoConnect->setChecked( true );
+    } else {
+        m_autoConnect->setChecked( false );
+    }
+
     m_con->load( m_prof );
     m_svCon->addChild( m_con );
 }

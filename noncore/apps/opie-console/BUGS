@@ -6,8 +6,6 @@ and we need to work around some compiler bugs!! -zecke
 Send/receive: lrzsz behaves strange when trying to use
 --overwrite or --rename.
 
-- console should autoconnect by default
-
 - keys and buttonbar merge
 
 - keys really working
@@ -20,18 +18,6 @@ Send/receive: lrzsz behaves strange when trying to use
   also:
   - an indication that it is currently recording, also change menu entry to
   "cancel recording" then   
-
-- kill more compiler warnings.
-
-- more colorshemes ( "orange is ugly" )
-
-- irda and bluetooth out ( can be done with normal serial as long as the
-connection is allready up, and extended stuff is a lot of work; maybe later
-in again ).
-
-- new conntection -> configure -> use . does not end up in profile dialog,
-
-- disable tranfer file for console mode
 
 - scripts need an extension and also an icon
 
