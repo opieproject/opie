@@ -6,6 +6,7 @@ UI.h  objects.h inputbox.h
 SOURCES		= field.cpp Bucket.cc Cable.cc Computer.cc Game.cc Horde.cc \
 Library.cc MCursor.cc Monster.cc  Network.cc Picture.cc \ 
 Spark.cc UI.cpp inputbox.cpp kbill.cpp
+INTERFACES = helpdialog.ui
 TARGET 		= kbill
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
