@@ -53,7 +53,7 @@ void InterfaceInformationImp::updateInterface(Interface *){
  * Display it.
  */ 
 void InterfaceInformationImp::advanced(){
-  InterfaceAdvanced *a = new InterfaceAdvanced(this, "InterfaceAdvanced", Qt::WShowModal | Qt::WDestructiveClose | Qt::WType_Dialog);
+  InterfaceAdvanced *a = new InterfaceAdvanced(this, "InterfaceAdvanced", Qt::WType_Modal | Qt::WDestructiveClose | Qt::WStyle_Dialog);
   a->interfaceName->setText(interface->getInterfaceName());
   a->macAddressLabel->setText(interface->getMacAddress());
   a->ipAddressLabel->setText(interface->getIp());
