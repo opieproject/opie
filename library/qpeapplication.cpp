@@ -22,6 +22,7 @@
 #include <unistd.h>
 #include <linux/limits.h> // needed for some toolchains (PATH_MAX)
 #include <qfile.h>
+#include <qqueue.h>
 #ifdef Q_WS_QWS
 #ifndef QT_NO_COP
 #if QT_VERSION <= 231
@@ -100,9 +101,7 @@ public:
 		  notbusysent( false ), preloaded( false ), forceshow( false ), nomaximize( false ),
 		  keep_running( true ), qpe_main_widget( 0 ), qcopQok( false )
 
-	{
-		qcopq.setAutoDelete( TRUE );
-	}
+	{}
 
 	int presstimer;
 	QWidget* presswidget;
@@ -133,14 +132,14 @@ public:
 	};
 	QWidget* qpe_main_widget;
         QGuardedPtr<QWidget> lastraised;
-	QList<QCopRec> qcopq;
+	QQueue<QCopRec> qcopq;
         QString styleName;
 	QString decorationName;
 
 	void enqueueQCop( const QCString &ch, const QCString &msg,
 	                  const QByteArray &data )
 	{
-		qcopq.append( new QCopRec( ch, msg, data ) );
+		qcopq.enqueue( new QCopRec( ch, msg, data ) );
 	}
 	void sendQCopQ()
 	{
@@ -149,12 +148,15 @@ public:
 
 		QCopRec * r;
 #ifndef QT_NO_COP
-
-		for ( QListIterator<QCopRec> it( qcopq ); ( r = it.current() ); ++it )
-			QCopChannel::sendLocally( r->channel, r->message, r->data );
+           while((r=qcopq.dequeue())) {
+               // remove from queue before sending...
+               // event loop can come around again before getting
+               // back from sendLocally
+               QCopChannel::sendLocally( r->channel, r->message, r->data );
 #endif
 
-		qcopq.clear();
+	       delete r;
+           }
 	}
 	static void show_mx(QWidget* mw, bool nomaximize,  const QString & = QString::null )
 	{
