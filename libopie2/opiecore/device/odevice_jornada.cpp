@@ -173,10 +173,14 @@ bool Jornada::setDisplayBrightness( int bright )
 
     QString cmdline;
 
-    if ( !bright )
-    	cmdline = QString::fromLatin1( "echo 4 > /sys/class/backlight/*/power");
-    else
-    	cmdline = QString::fromLatin1( "echo 0 > /sys/class/backlight/*/power; echo %1 > /sys/class/backlight/*/brightness" ).arg( bright );
+    if ( d->m_model == Model_Jornada_56x ) {
+        if ( !bright )
+    	    cmdline = QString::fromLatin1( "echo 4 > /sys/class/backlight/sa1100fb/power");
+        else
+    	    cmdline = QString::fromLatin1( "echo 0 > /sys/class/backlight/sa1100/power; echo %1 > /sys/class/backlight/sa1100/brightness" ).arg( bright );
+    } else if ( d->m_model == Model_Jornada_720 ) {
+        cmdline = QString::fromLatin1( "echo %1 > /sys/class/backlight/e1356fb/brightness" ).arg( bright );
+    }
 
     // No Global::shellQuote as we gurantee it to be sane
     res = ( ::system( QFile::encodeName(cmdline) ) == 0 );
@@ -188,8 +192,14 @@ bool Jornada::setDisplayBrightness( int bright )
 bool Jornada::setDisplayStatus ( bool on )
 {
     bool res = false;
-
-    QString cmdline = QString::fromLatin1( "echo %1 > /sys/class/lcd/*/power; echo %2 > /sys/class/backlight/*/power").arg( on ? "0" : "4" ).arg( on ? "0" : "4" );
+    
+    QString cmdline;
+    
+    if ( d->m_model == Model_Jornada_56x ) {
+        QString cmdline = QString::fromLatin1( "echo %1 > /sys/class/lcd/*/power; echo %2 > /sys/class/backlight/*/power").arg( on ? "0" : "4" ).arg( on ? "0" : "4" );
+    } else if ( d->m_model == Model_Jornada_720 ) {
+        QString cmdline = QString::fromLatin1( "echo %1 > /sys/class/lcd/e1356fb/power").arg( on ? "0" : "4" );
+    }
 
     res = ( ::system( QFile::encodeName(cmdline) ) == 0 );
 
