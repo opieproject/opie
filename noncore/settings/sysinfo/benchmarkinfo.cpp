@@ -114,24 +114,28 @@ BenchmarkInfo::BenchmarkInfo( QWidget *parent, const char *name, int wFlags )
     test_txt = new OCheckListItem( tests, tr( "3. Text Rendering  " ), OCheckListItem::CheckBox );
     test_gfx = new OCheckListItem( tests, tr( "4. Gfx Rendering  " ), OCheckListItem::CheckBox );
     test_ram = new OCheckListItem( tests, tr( "5. RAM Performance  " ), OCheckListItem::CheckBox );
+#ifndef QT_QWS_RAMSES
     test_sd = new OCheckListItem( tests, tr( "6. SD Card Performance  " ), OCheckListItem::CheckBox );
     test_cf = new OCheckListItem( tests, tr( "7. CF Card Performance  " ), OCheckListItem::CheckBox );
-
+#endif
     test_alu->setText( 1, "n/a" );
     test_fpu->setText( 1, "n/a" );
     test_txt->setText( 1, "n/a" );
     test_gfx->setText( 1, "n/a" );
     test_ram->setText( 1, "n/a" );
+#ifndef QT_QWS_RAMSES
     test_sd->setText( 1, "n/a" );
     test_cf->setText( 1, "n/a" );
-
+#endif
     test_alu->setText( 2, "n/a" );
     test_fpu->setText( 2, "n/a" );
     test_txt->setText( 2, "n/a" );
     test_gfx->setText( 2, "n/a" );
     test_ram->setText( 2, "n/a" );
+#ifndef QT_QWS_RAMSES
     test_sd->setText( 2, "n/a" );
     test_cf->setText( 2, "n/a" );
+#endif
 
     startButton = new QPushButton( tr( "&Start Tests!" ), this );
     QWhatsThis::add( startButton, tr( "Click here to perform the selected tests." ) );
@@ -182,8 +186,10 @@ void BenchmarkInfo::machineActivated( int index )
     test_txt->setText( 2, *(it++) );
     test_gfx->setText( 2, *(it++) );
     test_ram->setText( 2, *(it++) );
+#ifndef QT_QWS_RAMSES
     test_sd->setText( 2, *(it++) );
     test_cf->setText( 2, *(it++) );
+#endif
 }
 
 
@@ -218,7 +224,7 @@ void BenchmarkInfo::run()
     if ( test_gfx->isOn() )
     {
         int value = gfxRendering( TEST_DURATION );
-        test_gfx->setText( 1, QString().sprintf( "%.2f gops/sec", value / 4 / TEST_DURATION ) ); // 4 tests
+        test_gfx->setText( 1, QString().sprintf( "%.2f gops/sec", value / 4.0 / TEST_DURATION ) ); // 4 tests
         test_gfx->setOn( false );
     }
 
@@ -227,6 +233,7 @@ void BenchmarkInfo::run()
         performFileTest( "/tmp/benchmarkFile.dat", test_ram );
     }
 
+#ifndef QT_QWS_RAMSES
     if ( test_cf->isOn() )
     {
         OStorageInfo storage;
@@ -238,6 +245,7 @@ void BenchmarkInfo::run()
         OStorageInfo storage;
         performFileTest( storage.sdPath() + "/benchmarkFile.dat", test_sd );
     }
+#endif
 
     startButton->setText( tr( "&Start Tests!" ) );
 }
@@ -385,18 +393,18 @@ void BenchmarkInfo::performFileTest( const QString& fname, OCheckListItem* item 
 
     QFile::remove( filename );
     double readSpeed = FILE_TEST_COUNT / ( read / 1000.0 );
-    QString readUnit = "kb/s";
+    QString readUnit = "kB/s";
     if ( readSpeed > 1024 )
     {
         readSpeed = readSpeed / 1024.0;
-        readUnit = "mb/s";
+        readUnit = "MB/s";
     }
     double writeSpeed = FILE_TEST_COUNT / ( write / 1000.0 );
     QString writeUnit = "kb/s";
     if ( writeSpeed > 1024 )
     {
         writeSpeed = writeSpeed / 1024.0;
-        writeUnit = "mb/s";
+        writeUnit = "MBb/s";
     }
     item->setText( 1, QString().sprintf( "%.2f %s, %.2f %s", readSpeed, readUnit.latin1(), writeSpeed, writeUnit.latin1() ) );
     item->setOn( false );

@@ -40,15 +40,19 @@ public:
     Opie::Ui::OCheckListItem* test_txt;
     Opie::Ui::OCheckListItem* test_gfx;
     Opie::Ui::OCheckListItem* test_ram;
+#ifndef QT_QWS_RAMSES
     Opie::Ui::OCheckListItem* test_sd;
     Opie::Ui::OCheckListItem* test_cf;
+#endif
 
     bool main_rd;
     bool main_wt;
+#ifndef QT_QWS_RAMSES
     bool sd_rd;
     bool sd_wt;
     bool cf_rd;
     bool cf_wt;
+#endif
 
     QClipboard* clb;
     QComboBox* machineCombo;
