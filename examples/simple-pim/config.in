@@ -1,4 +1,4 @@
   config SIMPLE_PIM_EXAMPLE
     boolean "Mainwindow with PIM and QCOP usage"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && EXAMPLES && LIBOPIEPIM2
+    depends ( LIBQPE || LIBQPE-X11 ) && EXAMPLES && LIBOPIE2CORE && LIBOPIE2PIM

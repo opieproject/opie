@@ -1,3 +1,24 @@
+/* We use a sane order of include files, from the most special to the least special
+   That helps to reduce the number of implicit includes hence increases the reuse */
+
+/* First the local include files */
+#include "simple.h"
+
+/* Then the Ope include files.
+This includes qpe stuff which will eventually be merged with libopie2 */
+#include <opie2/odebug.h> // for odebug streams
+#include <opie2/oapplicationfactory.h> // a template + macro to save the main method and allow quick launching
+#include <opie2/otabwidget.h>
+#include <opie2/owait.h>
+#include <qpe/qpeapplication.h> // the QPEApplication
+#include <qpe/resource.h>
+#include <qpe/sound.h>
+#include <qpe/qcopenvelope_qws.h>
+#include <qpe/datebookmonth.h>
+#include <qpe/timestring.h>
+using namespace Opie::Core;
+
+/* Now the Qt includes */
 #include <qaction.h> // action
 #include <qmenubar.h> // menubar
 #include <qtoolbar.h> // toolbar
@@ -10,18 +31,8 @@
 #include <qdialog.h>
 #include <qwhatsthis.h> // for whats this
 
-#include <qpe/qpeapplication.h> // the QPEApplication
-#include <qpe/resource.h>
-#include <qpe/sound.h>
-#include <qpe/qcopenvelope_qws.h>
-#include <qpe/datebookmonth.h>
-#include <qpe/timestring.h>
-
-#include <opie2/oapplicationfactory.h> // a template + macro to save the main method and allow quick launching
-#include <opie2/otabwidget.h>
-#include <opie2/owait.h>
-
-#include "simple.h"
+/* Add standard includes here if you need some
+   Examples are: stdlib.h, socket.h, etc. */
 
 /*
  * implementation of simple
@@ -35,7 +46,6 @@
  * either a main method or one for our component plugin system
  */
 
-using namespace Opie::Core;
 OPIE_EXPORT_APP( OApplicationFactory<MainWindow> )
 
 MainWindow::MainWindow(QWidget *parent,  const char* name, WFlags fl )
@@ -304,7 +314,7 @@ void MainWindow::slotDate() {
      * at the current mouse position with a DateChooser
      * to select the day
      */
-    qWarning("slot Date");
+    odebug << "slot Date" << oendl;
     QPopupMenu *menu = new QPopupMenu();
     /* A Month to select a date from TRUE for auto close */
     DateBookMonth *month = new DateBookMonth(menu, 0, true );

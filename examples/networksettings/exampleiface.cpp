@@ -1,5 +1,8 @@
 #include "exampleiface.h"
 
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
 VirtualInterface::VirtualInterface( QObject* parent,
                                     const char* name,
                                     bool status )
@@ -17,7 +20,7 @@ bool VirtualInterface::refresh() {
  * I take wlan0 in my case
  */
     QString old = getInterfaceName();
-    qWarning("Interface name was " + old );
+    odebug << "Interface name was " << old << oendl;
     setInterfaceName( "wlan0" );
 
     bool b =Interface::refresh();

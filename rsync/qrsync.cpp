@@ -5,6 +5,11 @@ extern "C" {
 }
 #include <stdlib.h>
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qfile.h>
 
 static const char *rdiffNewFile = "/tmp/rdiff/result";
@@ -45,15 +50,15 @@ void QRsync::generateDiff( QString baseFile, QString sigFile, QString deltaFile 
 
 	result = rs_loadsig_file(sig_file, &sumset, 0);
 	if (result != RS_DONE) {
-	    qDebug( "rdiffGenDiff: loading of sig file failed, error=%d", result );
+	    odebug << "rdiffGenDiff: loading of sig file failed, error=" << result << "" << oendl; 
 	} else {
 	    result = rs_build_hash_table(sumset);
 	    if ( result != RS_DONE) {
-		qDebug( "rdiffGenDiff: building of hash table failed, error=%d", result );
+		odebug << "rdiffGenDiff: building of hash table failed, error=" << result << "" << oendl; 
 	    } else {
 		result = rs_delta_file(sumset, new_file, delta_file, 0);
 		if ( result != RS_DONE) {
-		    qDebug( "rdiffGenDiff: writing of diff file failed, error=%d", result );
+		    odebug << "rdiffGenDiff: writing of diff file failed, error=" << result << "" << oendl; 
 		}
 	    }
 	}
@@ -88,7 +93,7 @@ void QRsync::applyDiff( QString baseFile, QString deltaFile )
 	fclose( new_file );
 
 	if (result != RS_DONE) {
-	    qDebug( "rdiffApplyDiff failed with result %d", result );
+	    odebug << "rdiffApplyDiff failed with result " << result << "" << oendl; 
 	    return;
 	}
 

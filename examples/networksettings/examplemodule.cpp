@@ -1,9 +1,13 @@
-#include <qwidget.h>
+#include "exampleiface.h"
+#include "examplemodule.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
 #include <interfaces/interfaceinformationimp.h>
 
-#include "exampleiface.h"
-#include "examplemodule.h"
+#include <qwidget.h>
 
 VirtualModule::VirtualModule() {
     Interface* iface = new VirtualInterface( 0 );
