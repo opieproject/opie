@@ -3,60 +3,61 @@
     <name>DateBook</name>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Calendário</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoje</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Dia</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Semana</translation>
     </message>
     <message>
         <source>WeekLst</source>
-        <translation type="unfinished"></translation>
+        <translation>Semanas</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Mês</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar</translation>
     </message>
     <message>
         <source>Event duration is potentially longer
 than interval between repeats.</source>
-        <translation type="unfinished"></translation>
+        <translation>A duração do evento é maior que o 
+intervalo entre as repetições.</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Não pode editar os dados enquanto está a sincronizar</translation>
     </message>
     <message>
         <source>Edit Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar Evento</translation>
     </message>
     <message>
         <source> minutes)</source>
-        <translation type="unfinished"></translation>
+        <translation>minutos)</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem espaço</translation>
     </message>
     <message>
         <source>Calendar was unable to save
@@ -64,309 +65,313 @@ your changes.
 Free up some space and try again.
 
 Quit anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>O calendário não conseguiu
+gravar as alterações.
+Liberte algum espaço e tente de novo.
+
+Sair na mesma?</translation>
     </message>
     <message>
         <source>(Unknown)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Desconhecido)</translation>
     </message>
     <message>
         <source>Error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro!</translation>
     </message>
     <message>
         <source>Fix it</source>
-        <translation type="unfinished"></translation>
+        <translation>Corrija-o</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuar</translation>
     </message>
     <message>
         <source>Duplicate Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Evento Duplicado</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar...</translation>
     </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
     <message>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>Se</translation>
     </message>
     <message>
         <source>T</source>
-        <translation type="unfinished"></translation>
+        <translation>Te</translation>
     </message>
     <message>
         <source>W</source>
-        <translation type="unfinished"></translation>
+        <translation>Qu</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation>Se</translation>
     </message>
     <message>
         <source>S</source>
-        <translation type="unfinished"></translation>
+        <translation>Sá</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>Segunda</translation>
     </message>
     <message>
         <source>Tuesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Terça</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Quarta</translation>
     </message>
     <message>
         <source>Thursday</source>
-        <translation type="unfinished"></translation>
+        <translation>Quinta</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation type="unfinished"></translation>
+        <translation>Sexta</translation>
     </message>
     <message>
         <source>Saturday</source>
-        <translation type="unfinished"></translation>
+        <translation>Sábado</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
+        <translation>Domingo</translation>
     </message>
 </context>
 <context>
     <name>DateBookDayView</name>
     <message>
         <source>:00p</source>
-        <translation type="unfinished"></translation>
+        <translation>:00p</translation>
     </message>
 </context>
 <context>
     <name>DateBookDayWidget</name>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Início</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Fim</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Irradiar</translation>
     </message>
     <message>
         <source>This is an all day event.</source>
-        <translation type="unfinished"></translation>
+        <translation>O evento dura o dia todo.</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora</translation>
     </message>
     <message>
         <source> - </source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplicado</translation>
     </message>
 </context>
 <context>
     <name>DateBookSettings</name>
     <message>
         <source>:00 PM</source>
-        <translation type="unfinished"></translation>
+        <translation>:00 PM</translation>
     </message>
     <message>
         <source>:00 AM</source>
-        <translation type="unfinished"></translation>
+        <translation>:00 AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>:00</source>
-        <translation type="unfinished"></translation>
+        <translation>:00</translation>
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Calendário</translation>
     </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Preferências</translation>
     </message>
     <message>
         <source>Start viewing events</source>
-        <translation type="unfinished"></translation>
+        <translation>Início da vista de eventos</translation>
     </message>
     <message>
         <source>Start Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora de Início:</translation>
     </message>
     <message>
         <source>:00</source>
-        <translation type="unfinished"></translation>
+        <translation>:00</translation>
     </message>
     <message>
         <source>Alarm Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuração do Alarme</translation>
     </message>
     <message>
         <source>Alarm Preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarme Pré-definido</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>minutos</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Vários</translation>
     </message>
     <message>
         <source>Row style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilo da Linha:</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Omissão</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Médio</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Largo</translation>
     </message>
     <message>
         <source>Views</source>
-        <translation type="unfinished"></translation>
+        <translation>Vistas</translation>
     </message>
     <message>
         <source>Default view:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vista por omissão:</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Dia</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Semana</translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation type="unfinished"></translation>
+        <translation>Semanas</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Mês</translation>
     </message>
     <message>
         <source>Jump to current time</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir para o dia actual</translation>
     </message>
     <message>
         <source>Time display</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar o dia</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Nenhum</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Início</translation>
     </message>
     <message>
         <source>Start-End</source>
-        <translation type="unfinished"></translation>
+        <translation>Início-Fim</translation>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Omissão</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Morada:</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished"></translation>
+        <translation>Escritório</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Casa</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Categoria:</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeek</name>
     <message>
         <source>This is an all day event.</source>
-        <translation type="unfinished"></translation>
+        <translation>O evento dura o dia todo.</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>w</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekHeaderBase</name>
     <message>
         <source>00. Jan-00. Jan</source>
-        <translation type="unfinished"></translation>
+        <translation>00. Jan-00. Jan</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>w</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekLstHeaderBase</name>
     <message>
         <source>W: 00,00</source>
-        <translation type="unfinished"></translation>
+        <translation>W: 00,00</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
 </context>
 <context>
@@ -374,431 +379,432 @@ Quit anyway?</source>
     <message>
         <source>M</source>
         <comment>Monday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Se</translation>
     </message>
     <message>
         <source>T</source>
         <comment>Tuesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Te</translation>
     </message>
     <message>
         <source>W</source>
         <comment>Wednesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Qu</translation>
     </message>
     <message>
         <source>T</source>
         <comment>Thursday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Qu</translation>
     </message>
     <message>
         <source>F</source>
         <comment>Friday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Se</translation>
     </message>
     <message>
         <source>S</source>
         <comment>Saturday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sá</translation>
     </message>
     <message>
         <source>S</source>
         <comment>Sunday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Do</translation>
     </message>
     <message>
         <source>p</source>
-        <translation type="unfinished"></translation>
+        <translation>p</translation>
     </message>
 </context>
 <context>
     <name>DateEntry</name>
     <message>
         <source>Start Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora Início</translation>
     </message>
     <message>
         <source>End Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora Fim</translation>
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Calendário</translation>
     </message>
     <message>
         <source>Repeat...</source>
-        <translation type="unfinished"></translation>
+        <translation>Repetir...</translation>
     </message>
     <message>
         <source>Daily...</source>
-        <translation type="unfinished"></translation>
+        <translation>Diariamente...</translation>
     </message>
     <message>
         <source>Weekly...</source>
-        <translation type="unfinished"></translation>
+        <translation>Semanalmente...</translation>
     </message>
     <message>
         <source>Monthly...</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensalmente...</translation>
     </message>
     <message>
         <source>Yearly...</source>
-        <translation type="unfinished"></translation>
+        <translation>Anualmente...</translation>
     </message>
     <message>
         <source>No Repeat...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem repetição...</translation>
     </message>
 </context>
 <context>
     <name>DateEntryBase</name>
     <message>
         <source>New Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo Evento</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Morada</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Categoria</translation>
     </message>
     <message>
         <source>Meeting</source>
-        <translation type="unfinished"></translation>
+        <translation>Reunião</translation>
     </message>
     <message>
         <source>Lunch</source>
-        <translation type="unfinished"></translation>
+        <translation>Almoço</translation>
     </message>
     <message>
         <source>Dinner</source>
-        <translation type="unfinished"></translation>
+        <translation>Jantar</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished"></translation>
+        <translation>Viagem</translation>
     </message>
     <message>
         <source>Description </source>
-        <translation type="unfinished"></translation>
+        <translation>Descrição</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished"></translation>
+        <translation>Escritório</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Casa</translation>
     </message>
     <message>
         <source>Start - End </source>
-        <translation type="unfinished"></translation>
+        <translation>Início - Fim</translation>
     </message>
     <message>
         <source>Jan 02 00</source>
-        <translation type="unfinished"></translation>
+        <translation>Jan 02 00</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora Início</translation>
     </message>
     <message>
         <source>All day</source>
-        <translation type="unfinished"></translation>
+        <translation>Todo o dia</translation>
     </message>
     <message>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuso horário</translation>
     </message>
     <message>
         <source>&amp;Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Alarme</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>minutos</translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation type="unfinished"></translation>
+        <translation>Silencioso</translation>
     </message>
     <message>
         <source>Loud</source>
-        <translation type="unfinished"></translation>
+        <translation>Alto</translation>
     </message>
     <message>
         <source>Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Repetir</translation>
     </message>
     <message>
         <source>No Repeat...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem repetição...</translation>
     </message>
     <message>
         <source>Note...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota...</translation>
     </message>
 </context>
 <context>
     <name>NoteEntryBase</name>
     <message>
         <source>Edit Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar Nota</translation>
     </message>
     <message>
         <source>&lt;b&gt;1/10&lt;/b&gt; Lunch</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;1/10&lt;/b&gt; Almoço</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Início</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Fim</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos</translation>
     </message>
     <message>
         <source>%1 %2 every </source>
-        <translation type="unfinished"></translation>
+        <translation>todos os %1 %2</translation>
     </message>
     <message>
         <source>The %1 every </source>
-        <translation type="unfinished"></translation>
+        <translation>Todos os %1</translation>
     </message>
     <message>
         <source>The %1 %1 of every</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos os %1 %1</translation>
     </message>
     <message>
         <source>Every </source>
-        <translation type="unfinished"></translation>
+        <translation>Todos</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>Segunda</translation>
     </message>
     <message>
         <source>Tuesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Terça</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Quarta</translation>
     </message>
     <message>
         <source>Thursday</source>
-        <translation type="unfinished"></translation>
+        <translation>Quinta</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation type="unfinished"></translation>
+        <translation>Sexta</translation>
     </message>
     <message>
         <source>Saturday</source>
-        <translation type="unfinished"></translation>
+        <translation>Sábado</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
+        <translation>Domingo</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>st</source>
-        <translation type="unfinished"></translation>
+        <translation> </translation>
     </message>
     <message>
         <source>nd</source>
-        <translation type="unfinished"></translation>
+        <translation> </translation>
     </message>
     <message>
         <source>rd</source>
-        <translation type="unfinished"></translation>
+        <translation> </translation>
     </message>
     <message>
         <source>th</source>
-        <translation type="unfinished"></translation>
+        <translation> </translation>
     </message>
 </context>
 <context>
     <name>RepeatEntry</name>
     <message>
         <source>No Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem Repetição</translation>
     </message>
     <message>
         <source>day(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>dia(s)</translation>
     </message>
     <message>
         <source>week(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>semana(s)</translation>
     </message>
     <message>
         <source>Repeat By</source>
-        <translation type="unfinished"></translation>
+        <translation>Repetir Em</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Dia</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Dia</translation>
     </message>
     <message>
         <source>month(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>mês(es)</translation>
     </message>
     <message>
         <source>year(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>ano(s)</translation>
     </message>
     <message>
         <source>days</source>
-        <translation type="unfinished"></translation>
+        <translation>dias</translation>
     </message>
     <message>
         <source>day</source>
-        <translation type="unfinished"></translation>
+        <translation>dia</translation>
     </message>
     <message>
         <source>weeks</source>
-        <translation type="unfinished"></translation>
+        <translation>semanas</translation>
     </message>
     <message>
         <source>week</source>
-        <translation type="unfinished"></translation>
+        <translation>semana</translation>
     </message>
     <message>
         <source>month</source>
-        <translation type="unfinished"></translation>
+        <translation>mês</translation>
     </message>
     <message>
         <source>year</source>
-        <translation type="unfinished"></translation>
+        <translation>ano</translation>
     </message>
     <message>
         <source> and </source>
-        <translation type="unfinished"></translation>
+        <translation>e</translation>
     </message>
     <message>
         <source>,
 and </source>
-        <translation type="unfinished"></translation>
+        <translation>,
+e</translation>
     </message>
     <message>
         <source>, and </source>
-        <translation type="unfinished"></translation>
+        <translation>, e</translation>
     </message>
 </context>
 <context>
     <name>RepeatEntryBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation type="unfinished"></translation>
+        <translation>Evento Repetitivo</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Nenhum</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Dia</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Semana</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Mês</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Ano</translation>
     </message>
     <message>
         <source>Every:</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos:</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Frequência</translation>
     </message>
     <message>
         <source>End On:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fim Em:</translation>
     </message>
     <message>
         <source>No End Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem Data de Fim</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished"></translation>
+        <translation>Repetir Em</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation>Seg</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation>Ter</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation>Qua</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation>Qui</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation>Sex</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation>Sáb</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation>Dom</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos</translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation type="unfinished"></translation>
+        <translation>Var1</translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Var 2</translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="unfinished"></translation>
+        <translation>SemanaVar</translation>
     </message>
     <message>
         <source>months</source>
-        <translation type="unfinished"></translation>
+        <translation>meses</translation>
     </message>
     <message>
         <source>years</source>
-        <translation type="unfinished"></translation>
+        <translation>anos</translation>
     </message>
 </context>
 </TS>

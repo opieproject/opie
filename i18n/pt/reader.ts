@@ -1,165 +1,154 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>QTReaderApp</name>
+    <name>CBarPrefs</name>
     <message>
-        <source>Open</source>
+        <source>Toolbar Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>On Action...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Autoscroll</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <source>File</source>
+        <translation>Ficheiro</translation>
     </message>
     <message>
         <source>Navigation</source>
+        <translation>Navegação</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation>Vista</translation>
+    </message>
+    <message>
+        <source>Marks</source>
+        <translation>Marcas</translation>
+    </message>
+    <message>
+        <source>Indicators</source>
+        <translation>Indicadores</translation>
+    </message>
+    <message>
+        <source>Policy</source>
+        <translation>Política</translation>
+    </message>
+</context>
+<context>
+    <name>CButtonPrefs</name>
+    <message>
+        <source>Scroll Speed</source>
+        <translation>Velocidade de Deslizamento</translation>
+    </message>
+</context>
+<context>
+    <name>CCloseDialog</name>
+    <message>
+        <source>Tidy-up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Scroll</source>
+        <source>Delete</source>
+        <translation>Apagar</translation>
+    </message>
+    <message>
+        <source>Delete Bookmarks</source>
+        <translation type="unfinished">Apagar</translation>
+    </message>
+    <message>
+        <source>Delete Configuration</source>
+        <translation>Apagar Configuração</translation>
+    </message>
+</context>
+<context>
+    <name>CFileBarPrefs</name>
+    <message>
+        <source>Open</source>
+        <translation>Abrir</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Fechar</translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation>Informação</translation>
+    </message>
+    <message>
+        <source>Two/One
+Touch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Jump</source>
-        <translation type="unfinished"></translation>
+        <source>Find</source>
+        <translation>Procurar</translation>
     </message>
-    <message>
-        <source>Page/Line Scroll</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set Overlap</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use Cursor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set Dictionary</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Two/One Touch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Target</source>
-        <translation type="unfinished"></translation>
-    </message>
+</context>
+<context>
+    <name>CIndBarPrefs</name>
     <message>
         <source>Annotation</source>
+        <translation>Anotação</translation>
+    </message>
+</context>
+<context>
+    <name>CInterPrefs</name>
+    <message>
+        <source>International</source>
+        <translation>Internacional</translation>
+    </message>
+    <message>
+        <source>Ideograms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Dictionary</source>
+        <source>Ideogram Width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Clipboard</source>
+        <source>Apply font
+to dialogs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Up</source>
-        <translation type="unfinished"></translation>
+        <source>Encoding</source>
+        <translation>Codificação</translation>
     </message>
     <message>
-        <source>Down</source>
-        <translation type="unfinished"></translation>
+        <source>Application</source>
+        <translation>Aplicação</translation>
     </message>
     <message>
-        <source>Find...</source>
-        <translation type="unfinished"></translation>
+        <source>Message</source>
+        <translation>Mensagem</translation>
     </message>
     <message>
-        <source>Continuous</source>
+        <source>Two/One
+Touch</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Markup</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>HTML</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Peanut/PML</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Layout</source>
-        <translation type="unfinished"></translation>
-    </message>
+</context>
+<context>
+    <name>CLayoutPrefs</name>
     <message>
         <source>Strip CR</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover CR</translation>
     </message>
     <message>
         <source>Dehyphen</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover Hífens</translation>
     </message>
     <message>
         <source>Single Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Espaço Simples</translation>
     </message>
     <message>
         <source>Unindent</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover Identação</translation>
     </message>
     <message>
-        <source>Re-paragraph</source>
+        <source>Reparagraph</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Double Space</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Indent+</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Indent-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Repalm</source>
-        <translation type="unfinished"></translation>
+        <translation>Espaço Duplo</translation>
     </message>
     <message>
         <source>Remap</source>
@@ -170,64 +159,66 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Zoom In</source>
+        <source>Full Justify</source>
+        <translation>Justificação Completa</translation>
+    </message>
+</context>
+<context>
+    <name>CLayoutPrefs2</name>
+    <message>
+        <source>Indent</source>
+        <translation>Identar</translation>
+    </message>
+    <message>
+        <source>Page
+Overlap</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Zoom Out</source>
+        <source>Graphics
+Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ideogram/Word</source>
+        <source>Margin</source>
+        <translation>Margem</translation>
+    </message>
+    <message>
+        <source>Paragraph
+Leading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Set width</source>
+        <source>Line
+Leading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Encoding</source>
+        <source>Markup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ascii</source>
-        <translation type="unfinished"></translation>
+        <source>Font</source>
+        <translation>Fonte</translation>
     </message>
+</context>
+<context>
+    <name>CMarkBarPrefs</name>
     <message>
-        <source>UTF-8</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>UCS-2(BE)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>USC-2(LE)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Palm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Windows(1252)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set Font</source>
+        <source>Bookmark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Annotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotar</translation>
     </message>
     <message>
         <source>Goto</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ir Para</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar</translation>
     </message>
     <message>
         <source>Autogen</source>
@@ -235,11 +226,300 @@
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpar</translation>
     </message>
     <message>
         <source>Save</source>
+        <translation>Gravar</translation>
+    </message>
+    <message>
+        <source>Tidy</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mark Block</source>
+        <translation>Marcar Bloco</translation>
+    </message>
+    <message>
+        <source>Copy Block</source>
+        <translation>Copiar Bloco</translation>
+    </message>
+</context>
+<context>
+    <name>CMiscBarPrefs</name>
+    <message>
+        <source>Floating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Single bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Menu/tool bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multiple bars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation>Topo</translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation>Final</translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation>Direita</translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation>Esquerda</translation>
+    </message>
+    <message>
+        <source>Minimised</source>
+        <translation>Minimizar</translation>
+    </message>
+    <message>
+        <source>Movable</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CMiscPrefs</name>
+    <message>
+        <source>Annotation</source>
+        <translation>Anotação</translation>
+    </message>
+    <message>
+        <source>Dictionary</source>
+        <translation>Dicionário</translation>
+    </message>
+    <message>
+        <source>Clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Depluck</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dejpluck</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continuous</source>
+        <translation>Contínuo</translation>
+    </message>
+</context>
+<context>
+    <name>CNavBarPrefs</name>
+    <message>
+        <source>Scroll</source>
+        <translation>Deslizar</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation>Voltar</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>Início</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page Up</source>
+        <translation>Página Anterior</translation>
+    </message>
+    <message>
+        <source>Page Down</source>
+        <translation>Página Seguinte</translation>
+    </message>
+    <message>
+        <source>Goto Start</source>
+        <translation>Ir Para Início</translation>
+    </message>
+    <message>
+        <source>Goto End</source>
+        <translation>Ir Para Fim</translation>
+    </message>
+    <message>
+        <source>Jump</source>
+        <translation>Ir Para</translation>
+    </message>
+    <message>
+        <source>Page/Line Scroll</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CPrefs</name>
+    <message>
+        <source>OpieReader Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout(2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Locale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc</source>
+        <translation>Vários</translation>
+    </message>
+    <message>
+        <source>Buttons</source>
+        <translation>Botões</translation>
+    </message>
+</context>
+<context>
+    <name>CURLDialog</name>
+    <message>
+        <source>Save URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Local file</source>
+        <translation>Ficheiro local</translation>
+    </message>
+    <message>
+        <source>Global file</source>
+        <translation>Ficheiro global</translation>
+    </message>
+</context>
+<context>
+    <name>CViewBarPrefs</name>
+    <message>
+        <source>Fullscreen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom In</source>
+        <translation>Aproximar</translation>
+    </message>
+    <message>
+        <source>Zoom Out</source>
+        <translation>Afastar</translation>
+    </message>
+    <message>
+        <source>Set Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encoding</source>
+        <translation>Codificação</translation>
+    </message>
+    <message>
+        <source>Ideogram</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QTReaderApp</name>
+    <message>
+        <source>Open</source>
+        <translation>Abrir</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Fechar</translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation>Informação</translation>
+    </message>
+    <message>
+        <source>Fullscreen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Navigation</source>
+        <translation>Navegação</translation>
+    </message>
+    <message>
+        <source>Scroll</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jump</source>
+        <translation>Ir Para</translation>
+    </message>
+    <message>
+        <source>Page/Line Scroll</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Two/One Touch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Annotation</source>
+        <translation>Anotação</translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation>Cima</translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation>Baixo</translation>
+    </message>
+    <message>
+        <source>Find...</source>
+        <translation>Procurar...</translation>
+    </message>
+    <message>
+        <source>Zoom In</source>
+        <translation>Aproximar</translation>
+    </message>
+    <message>
+        <source>Zoom Out</source>
+        <translation>Afastar</translation>
+    </message>
+    <message>
+        <source>Set Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Annotate</source>
+        <translation>Anotar</translation>
+    </message>
+    <message>
+        <source>Goto</source>
+        <translation>Ir Para</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Apagar</translation>
+    </message>
+    <message>
+        <source>Autogen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation>Limpar</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Gravar</translation>
     </message>
     <message>
         <source>Tidy</source>
@@ -247,31 +527,27 @@
     </message>
     <message>
         <source>Start Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Início do Bloco</translation>
     </message>
     <message>
         <source>Copy Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar Bloco</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheiro</translation>
     </message>
     <message>
         <source>Marks</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcas</translation>
     </message>
     <message>
         <source>Find Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar Próximo</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechar Procura</translation>
     </message>
     <message>
         <source>Do Reg</source>
@@ -279,6 +555,86 @@
     </message>
     <message>
         <source>Close Edit</source>
+        <translation>Fechar Edição</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation>Ver</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Configurações</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation>Configuração</translation>
+    </message>
+    <message>
+        <source>Save Config</source>
+        <translation>Gravar Configuração</translation>
+    </message>
+    <message>
+        <source>Load Config</source>
+        <translation>Ler Configuração</translation>
+    </message>
+    <message>
+        <source>Delete Config</source>
+        <translation>Apagar Configuração</translation>
+    </message>
+    <message>
+        <source>Toolbars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run Script</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Links</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Goto Start</source>
+        <translation>Ir Para o Início</translation>
+    </message>
+    <message>
+        <source>Goto End</source>
+        <translation>Ir Para o Fim</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation>Voltar</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>Início</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scrolling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set Target</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pause Paras</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set Encoding</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ideogram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bookmark</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -290,19 +646,19 @@
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Escondidos</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamanho</translation>
     </message>
 </context>
 </TS>
