@@ -18,12 +18,10 @@ class MediumMountGui : public QDialog {
     Q_OBJECT
 
 public:
-    MediumMountGui( Config *cfg, const QString &path = "tmp/", QWidget* parent = 0, const char* name = 0, bool modal = FALSE    ,WFlags fl = 0 );
+    MediumMountGui( Config *cfg, const QString &path = "tmp/", QWidget* parent = 0, const char* name = 0, bool modal = FALSE  ,WFlags fl = 0 );
     ~MediumMountGui();
 
 protected:
-    QPushButton* quit;
-    QPushButton* quit_2;
     QLabel* DirSelectText_2;
     QLineEdit* LineEdit1;
     QPushButton* PushButton3;
@@ -39,7 +37,6 @@ protected:
     QCheckBox* CheckBoxLink;
     QCheckBox* AskBox;
 
-
 public:
     bool check();
     QStringList mimeTypes();
@@ -50,12 +47,11 @@ private:
     void writeConfig( bool checkagain );
 
 private slots:
-    void yesPressed();
-    void noPressed();
+    void accept();
+    void reject();
     void deactivateOthers();
  private:
     QString mediumPath;
-
     bool checkagain:1;
     bool checkmimeaudio:1;
     bool checkmimeimage:1;

@@ -144,7 +144,7 @@ void MediumMountGui::startGui() {
     connect( CheckBoxAll, SIGNAL( clicked() ), this, SLOT( deactivateOthers() ) );
 
     QVBox* dirBox = new QVBox( this );
-    dirBox->setMargin( 4 );
+    dirBox->setMargin( 5 );
 
     // select dirs
     DirSelectText = new QLabel( dirBox, "DirSelectText" );
@@ -154,6 +154,7 @@ void MediumMountGui::startGui() {
     LineEdit1 = new QLineEdit( dirLineBox );
     PushButton3 = new QPushButton( dirLineBox );
     PushButton3->setText( tr( "Add" ) );
+    PushButton3->setFocus();
 
     // decision
     DirSelectText_2 = new QLabel( dirBox );
@@ -171,20 +172,9 @@ void MediumMountGui::startGui() {
     CheckBoxAll->setChecked( checkmimeall );
     deactivateOthers();
 
-    QHBox* buttonBox = new QHBox( this );
-    // buttons
-    quit = new QPushButton( buttonBox );
-    quit->setFocus();
-    quit->setText( tr( "Yes" ) );
-    quit_2 = new QPushButton( buttonBox );
-    quit_2->setText( tr( "No" ) );
-
     mainLayout->addWidget( GroupBox1 );
     mainLayout->addWidget( dirBox );
-    mainLayout->addWidget( buttonBox );
-
-    connect( quit, SIGNAL( clicked() ), this, SLOT( yesPressed() ) );
-    connect( quit_2, SIGNAL( clicked() ), this, SLOT( noPressed() ) );
+    mainLayout->addStretch( 0 );
 }
 
 
@@ -196,10 +186,10 @@ void MediumMountGui::deactivateOthers() {
     CheckBoxImage->setEnabled( mod );
 }
 
-void MediumMountGui::yesPressed() {
+void MediumMountGui::accept() {
     writeConfig( true );
     // and do something
-    accept();
+    QDialog::accept();
 }
 
 
@@ -207,9 +197,9 @@ QStringList MediumMountGui::mimeTypes() {
     return mimeTypeList;
 }
 
-void MediumMountGui::noPressed() {
+void MediumMountGui::reject() {
     writeConfig( false );
-    reject();
+    QDialog::reject();
 }
 
 MediumMountGui::~MediumMountGui() {
