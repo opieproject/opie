@@ -20,7 +20,6 @@
 #ifndef ROHFEEDBACK_H
 #define ROHFEEDBACK_H
 
-#ifdef OPIE_WITHROHFEEDBACK
 
 /*
 
@@ -80,5 +79,4 @@ protected :
 }
 }
 
-#endif
 #endif

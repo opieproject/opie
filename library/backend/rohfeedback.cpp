@@ -17,7 +17,6 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifdef OPIE_WITHROHFEEDBACK
 
 #include <rohfeedback.h>
 #include <stdio.h>
@@ -141,4 +140,3 @@ void RoHFeedback::iconShow( void ) {
 }
 }
 
-#endif
