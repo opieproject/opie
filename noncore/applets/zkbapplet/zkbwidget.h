@@ -15,6 +15,7 @@ Q_OBJECT
 public:
 	ZkbWidget(QWidget* parent);
 	~ZkbWidget();
+	static int position();
 
 	QSize sizeHint() const;
 

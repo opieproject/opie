@@ -22,8 +22,7 @@ class AutoRotate : public QWidget {
 public:
     AutoRotate( QWidget *parent = 0 );
     ~AutoRotate();
-
-private slots:
+    static int position();
 
 protected:
     void paintEvent( QPaintEvent* );

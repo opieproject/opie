@@ -20,12 +20,10 @@
 #include "memorymeter.h"
 #include "memorystatus.h"
 
+#include <opie2/otaskbarapplet.h>
 #include <qtopia/power.h>
 #include <qtopia/config.h>
-
-#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
 #include <qtopia/qcopenvelope_qws.h>
-#endif
 
 #include <qpainter.h>
 #include <qtimer.h>
@@ -64,6 +62,11 @@ MemoryMeter::MemoryMeter( QWidget *parent )
 MemoryMeter::~MemoryMeter()
 {
     delete (QWidget *) memoryView;
+}
+
+int MemoryMeter::position()
+{
+    return 7;
 }
 
 QSize MemoryMeter::sizeHint() const
@@ -235,5 +238,10 @@ void MemoryMeter::paintEvent( QPaintEvent* )
 		p.setBrush(darkc);
 		p.drawRect(batt_xoffset + 3 * band_width, unused_offset, band_width, unused_height);
     }
+}
+
+Q_EXPORT_INTERFACE()
+{
+    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<MemoryMeter> );
 }
 

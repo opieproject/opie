@@ -1,13 +1,11 @@
 TEMPLATE    = lib
 CONFIG      += qt plugin warn_on release
-HEADERS     = zkbapplet.h\
-            zkbwidget.h \
+HEADERS     = zkbwidget.h \
             ../../apps/keyz-cfg/zkbcfg.h  \
             ../../apps/keyz-cfg/zkbnames.h  \
             ../../apps/keyz-cfg/zkbxml.h  \
             ../../apps/keyz-cfg/zkb.h  
-SOURCES     = zkbapplet.cpp \
-	    zkbwidget.cpp \
+SOURCES     = zkbwidget.cpp \
             ../../apps/keyz-cfg/zkbcfg.cpp  \
             ../../apps/keyz-cfg/zkbnames.cpp  \
             ../../apps/keyz-cfg/zkbxml.cpp  \

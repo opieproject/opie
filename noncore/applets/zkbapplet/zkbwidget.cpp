@@ -1,3 +1,4 @@
+#include <opie2/otaskbarapplet.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/applnk.h>
 #include <qpe/qpeapplication.h>
@@ -24,6 +25,11 @@ ZkbWidget::ZkbWidget(QWidget* parent):QLabel(parent),keymap(0),
 }
 
 ZkbWidget::~ZkbWidget() {
+}
+
+int ZkbWidget::position()
+{
+	return 8;
 }
 
 bool ZkbWidget::loadKeymap() {
@@ -148,3 +154,9 @@ void ZkbWidget::reload() {
 	loadKeymap();
 	QCopEnvelope("QPE/System", "notBusy()");
 }
+
+Q_EXPORT_INTERFACE()
+{
+    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<ZkbWidget> );
+}
+

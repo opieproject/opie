@@ -76,6 +76,7 @@ class NotesApplet : public QWidget {
 public:
     NotesApplet( QWidget *parent = 0, const char *name=0 );
     ~NotesApplet();
+    static int position();
     NotesControl *vc;
 public slots:
 private:

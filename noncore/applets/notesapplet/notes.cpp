@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <qstringlist.h>
 
+#include <opie2/otaskbarapplet.h>
 #include <qpe/filemanager.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/timestring.h>
@@ -466,6 +467,11 @@ NotesApplet::~NotesApplet() {
     delete vc;
 }
 
+int NotesApplet::position()
+{
+    return 6;
+}
+
 void NotesApplet::mousePressEvent( QMouseEvent *) {
     if( !vc->isHidden()) {
         vc->doPopulate=false;
@@ -502,3 +508,7 @@ void NotesApplet::paintEvent( QPaintEvent* ) {
     p.drawPixmap( 0, 1,  ( const char** ) notes_xpm );
 }
 
+Q_EXPORT_INTERFACE()
+{
+    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<NotesApplet> );
+}

@@ -14,6 +14,7 @@
 
 /* OPIE */
 #include <opie2/odevice.h>
+#include <opie2/otaskbarapplet.h>
 #include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/resource.h>
@@ -41,6 +42,11 @@ AutoRotate::~AutoRotate()
     if (popupMenu) {
         delete popupMenu;
     }
+}
+
+int AutoRotate::position()
+{
+    return 7;
 }
 
 void AutoRotate::mousePressEvent(QMouseEvent *)
@@ -86,5 +92,10 @@ bool AutoRotate::isRotateEnabled()
     else
         qDebug("Disabled");
     return res;
+}
+
+Q_EXPORT_INTERFACE()
+{
+    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<AutoRotate> );
 }
 

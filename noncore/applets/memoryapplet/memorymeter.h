@@ -31,6 +31,7 @@ class MemoryMeter : public QWidget
 public:
     MemoryMeter( QWidget *parent = 0 );
     ~MemoryMeter();
+    static int position();
 
     QSize sizeHint() const;
     MemoryStatus* memoryView;
