@@ -36,30 +36,30 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags fl)
 
 void MainWindow::slotCompose()
 {
-	Composer *composer = new Composer();
-	composer->showMaximized();
-	composer->show();
+	Composer composer(this, 0, true);
+	composer.showMaximized();
+	composer.exec();
 }
 
 void MainWindow::slotSearch()
 {
-	SearchDiag *searchDiag = new SearchDiag(this, 0, true);
-	searchDiag->showMaximized();
-	searchDiag->show();
+	SearchDiag searchDiag(this, 0, true);
+	searchDiag.showMaximized();
+	searchDiag.exec();
 }
 
 void MainWindow::slotConfigure()
 {
-	ConfigDiag *configDiag = new ConfigDiag(this, 0, true);
-	configDiag->showMaximized();
-	configDiag->show();
+	ConfigDiag configDiag(this, 0, true);
+	configDiag.showMaximized();
+	configDiag.exec();
 
-	connect(configDiag, SIGNAL(changed()), folderView, SLOT(update()));
+	connect(&configDiag, SIGNAL(changed()), folderView, SLOT(update()));
 }
 
 void MainWindow::mailClicked(IMAPResponseFETCH mail, IMAPHandler *handler)
 {
-	ViewMail *viewMail = new ViewMail(mail, handler);
-	viewMail->showMaximized();
-	viewMail->show();
+	ViewMail viewMail(mail, handler, this, 0, true);
+	viewMail.showMaximized();
+	viewMail.exec();
 }

@@ -26,6 +26,10 @@ class Composer : public ComposerBase
 
 public:
 	Composer(QWidget *parent = 0, const char *name = 0, WFlags fl = Qt::WType_Modal);
+	~Composer();
+
+	void hide();
+	void exec();
 
 	void setSendMail(SendMail &sendMail);
 
@@ -45,6 +49,7 @@ protected:
 	QValueList<Account> accountsLoaded;
 
 private:
+	bool _inLoop;
 	QString _inReplyTo;
 
 };

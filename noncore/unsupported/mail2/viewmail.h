@@ -43,6 +43,10 @@ class ViewMail : public ViewMailBase
 
 public:
 	ViewMail(IMAPResponseFETCH &mail, IMAPHandler *handler, QWidget *parent = 0, const char *name = 0, WFlags fl = Qt::WType_Modal);
+	~ViewMail();
+
+	void hide();
+	void exec();
 
 protected:
 //	void fillList(IMAPResponseBODYSTRUCTURE &structure);
@@ -55,6 +59,7 @@ protected slots:
 	void slotIMAPUid(IMAPResponse &response);
 
 private:
+	bool _inLoop;
 	IMAPResponseFETCH _mail;
 	IMAPHandler *_handler;
 	QString _mailHtml;

@@ -1,6 +1,7 @@
 #include <qtextbrowser.h>
 #include <qmessagebox.h>
 #include <qaction.h>
+#include <qapplication.h>
 
 #include "mailfactory.h"
 #include "composer.h"
@@ -23,7 +24,7 @@ AttachItem::AttachItem(QListViewItem *parent, AttachItemStore &attachItemStore)
 }
 
 ViewMail::ViewMail(IMAPResponseFETCH &mail, IMAPHandler *handler, QWidget *parent, const char *name, WFlags fl)
-	: ViewMailBase(parent, name, fl), _mail(mail), _handler(handler)
+	: ViewMailBase(parent, name, fl), _inLoop(false), _mail(mail), _handler(handler)
 {
 	setCaption(caption().arg(mail.envelope().from()[0].name()));
 
@@ -59,6 +60,31 @@ ViewMail::ViewMail(IMAPResponseFETCH &mail, IMAPHandler *handler, QWidget *paren
 
 	_handler->iUid("FETCH", QString("%1 (BODY[1])").arg(mail.uid()));
 	connect(_handler, SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPUid(IMAPResponse &)));
+}
+
+ViewMail::~ViewMail()
+{
+	hide();
+}
+
+void ViewMail::hide()
+{
+	QWidget::hide();
+
+	if (_inLoop) {
+		_inLoop = false;
+		qApp->exit_loop();
+	}
+}
+
+void ViewMail::exec()
+{
+	show();
+
+	if (!_inLoop) {
+		_inLoop = true;
+		qApp->enter_loop();
+	}
 }
 
 QString ViewMail::deHtml(const QString &string)
@@ -101,10 +127,10 @@ void ViewMail::slotReply()
 	sendMail.setInReplyTo(_mail.envelope().messageId());
 	sendMail.setMessage(rtext);
 
-	Composer *composer = new Composer(0, 0, Qt::WType_Modal);
-	composer->setSendMail(sendMail);
-	composer->showMaximized();
-	composer->show();
+	Composer composer(this, 0, true);
+	composer.setSendMail(sendMail);
+	composer.showMaximized();
+	composer.exec();
 }
 
 void ViewMail::slotForward()
@@ -145,10 +171,10 @@ void ViewMail::slotForward()
 	sendMail.setSubject("Fwd: " + _mail.envelope().subject());
 	sendMail.setMessage(ftext);
 
-	Composer *composer = new Composer(0, 0, Qt::WType_Modal);
-	composer->setSendMail(sendMail);
-	composer->showMaximized();
-	composer->show();
+	Composer composer(this, 0, true);
+	composer.setSendMail(sendMail);
+	composer.showMaximized();
+	composer.exec();
 }
 
 void ViewMail::slotIMAPUid(IMAPResponse &response)

@@ -6,6 +6,7 @@
 #include <qaction.h>
 #include <qtimer.h>
 #include <qlabel.h>
+#include <qapplication.h>
 
 #include <qpe/resource.h>
 
@@ -25,7 +26,7 @@ AttachViewItem::AttachViewItem(QListView *parent, Attachment &attachment)
 }
 
 Composer::Composer(QWidget *parent, const char *name, WFlags fl)
-	: ComposerBase(parent, name, fl)
+	: ComposerBase(parent, name, fl), _inLoop(false)
 {
 	abort->setEnabled(false);
 	to->setFocus();
@@ -41,6 +42,31 @@ Composer::Composer(QWidget *parent, const char *name, WFlags fl)
 
 	QTimer::singleShot(0, this, SLOT(slotFillStuff()));
 	QTimer::singleShot(0, this, SLOT(slotResizing()));
+}
+
+Composer::~Composer()
+{
+	hide();
+}
+
+void Composer::hide()
+{
+	QWidget::hide();
+
+	if (_inLoop) {
+		_inLoop = false;
+		qApp->exit_loop();
+	}
+}
+
+void Composer::exec()
+{
+	show();
+
+	if (!_inLoop) {
+		_inLoop = true;
+		qApp->enter_loop();
+	}
 }
 
 void Composer::setSendMail(SendMail &sendMail)

@@ -112,9 +112,9 @@ void SearchDiag::slotIMAPFetch(IMAPResponse &response)
 
 void SearchDiag::slotMailClicked(IMAPResponseFETCH fetch, IMAPHandler *)
 {
-	ViewMail *viewMail = new ViewMail(fetch, _folder.topFolder().handler());
-	viewMail->showMaximized();
-	viewMail->show();
+	ViewMail viewMail(fetch, _folder.topFolder().handler(), this, 0, true);
+	viewMail.showMaximized();
+	viewMail.exec();
 }
 
 void SearchDiag::slotInItemActivated(int index)
