@@ -630,6 +630,7 @@ void MainWindow::slotShow( int uid ) {
     m_stack->raiseWidget( currentShow()->widget() );
 }
 void MainWindow::slotEdit( int uid ) {
+    if (uid == 1 ) return;
     if(m_syncing) {
 	QMessageBox::warning(this, QWidget::tr("Todo"),
 			     QWidget::tr("Can not edit data, currently syncing"));
@@ -791,7 +792,7 @@ void MainWindow::beam( int uid) {
     Ir* ir = new Ir(this );
     connect(ir, SIGNAL(done(Ir*) ),
             this, SLOT(beamDone(Ir*) ) );
-    ir->send( beamfile, todo.summary(), "text/x-vCalendar" );
+    ir->send(beamfile, todo.summary(), "text/x-vCalendar" );
 }
 void MainWindow::show( int uid ) {
     slotShow( uid );

@@ -143,6 +143,7 @@ QString TableView::type() const {
     return QString::fromLatin1( tr("Table View") );
 }
 int TableView::current() {
+    if (numRows() == 0 ) return 1;
     int uid = sorted().uidAt(currentRow() );
 
     return uid;
