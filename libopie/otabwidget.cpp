@@ -294,8 +294,15 @@ void OTabWidget::setUpLayout()
 {
     tabBar->layoutTabs();
     QSize t( tabBarStack->sizeHint() );
-    if ( t.width() > width() )
+    if ( tabBarStyle == IconTab )
+    {
+        if ( t.width() > width() )
+            t.setWidth( width() );
+    }
+    else
+    {
         t.setWidth( width() );
+    }
     int lw = widgetStack->lineWidth();
     if ( tabBarPosition == Bottom )
     {
@@ -305,7 +312,7 @@ void OTabWidget::setUpLayout()
     else
     {
         tabBarStack->setGeometry( QMAX(0, lw-2), 0, t.width(), t.height() );
-        widgetStack->setGeometry( 0, t.height()-lw, width(), height()-t.height()+QMAX(0, lw-2));
+        widgetStack->setGeometry( 0, t.height()-lw, width(), height()-t.height()+QMAX( 0, lw-2 ) );
     }
 
     if ( autoMask() )
@@ -316,7 +323,7 @@ QSize OTabWidget::sizeHint() const
 {
     QSize s( widgetStack->sizeHint() );
     QSize t( tabBarStack->sizeHint() );
-    return QSize( QMAX( s.width(), t.width()), s.height() + t.height() );
+    return QSize( QMAX( s.width(), t.width() ), s.height() + t.height() );
 }
 
 void OTabWidget::resizeEvent( QResizeEvent * )
