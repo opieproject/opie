@@ -118,7 +118,7 @@ void WriteMail::init()
 	addressButton->setToggleButton(TRUE);
 	grid->addWidget( addressButton, 0, 2 );
 	connect(addressButton, SIGNAL(clicked()), this, SLOT(getAddress()) );
-	QWhatsThis::add(addressButton,QWidget::tr("This button opens the address selector with all mail adresses from your OPIE addressbook"));
+	QWhatsThis::add(addressButton,QWidget::tr("This button opens the address selector with all mail adresses from your Opie addressbook"));
 
 	emailInput = new QMultiLineEdit( widget, "emailInput" );
 	grid->addMultiCellWidget( emailInput, 2, 2, 0, 2);
