@@ -585,9 +585,11 @@ Event::Type Event::type() const
 {
     return typ;
 }
+/*
 QDateTime Event::start() const {
     return start( TRUE );
 }
+*/
 /*!
   \internal
 */
@@ -602,10 +604,11 @@ QDateTime Event::start( bool actual ) const
     }
     return dt;
 }
-
+/*
 QDateTime Event::end() const {
     return end( TRUE );
 }
+*/
 /*!
   \internal
 */
