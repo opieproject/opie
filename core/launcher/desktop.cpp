@@ -205,7 +205,7 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
     if (!keyRegisterList.isEmpty())  { 
       KeyRegisterList::Iterator it;
       for( it = keyRegisterList.begin(); it != keyRegisterList.end(); ++it ) {
-          if ((*it).getKeyCode() == ke->simpleData.keycode &&  !autoRepeat && !keyboardGrabbed()) {
+          if ((*it).getKeyCode() == ke->simpleData.keycode &&  !autoRepeat && !keyboardGrabbed() && press) {
               if(press) qDebug("press"); else qDebug("release");
               QCopEnvelope((*it).getChannel().utf8(), (*it).getMessage().utf8());
           }
