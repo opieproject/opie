@@ -101,6 +101,10 @@ ifeq ($(CONFIG_LIBSDK_DEP),y)
 	echo LIBSDL_LIB_DIR = $(CONFIG_LIBSDL_LIB_DIR) >> $@
 	echo LIBSDL_INC_DIR = $(CONFIG_LIBSDL_INC_DIR) >> $@
 endif
+ifeq ($(CONFIG_LIBSWORD_DEP),y)
+	echo LIBSWORD_LIB_DIR = $(CONFIG_LIBSWORD_LIB_DIR) >> $@
+	echo LIBSWORD_INC_DIR = $(CONFIG_LIBSWORD_INC_DIR) >> $@
+endif
 $(TOPDIR)/.depends : $(shell if [ -e $(TOPDIR)/config.in ]\; then echo $(TOPDIR)/config.in\; fi\;) $(TOPDIR)/.config $(TOPDIR)/packages
 	@echo Generating dependency information...
 # add to subdir-y, and add descend rules
@@ -220,23 +224,23 @@ gconfig: $(TOPDIR)/scripts/kconfig/gconf $(TOPDIR)/scripts/kconfig/libkconfig.so
 config: $(TOPDIR)/scripts/kconfig/conf ./config.in
 	$(TOPDIR)/scripts/kconfig/conf ./config.in
 	@touch .config.stamp
- 
+
 oldconfig: $(TOPDIR)/scripts/kconfig/conf ./config.in
 	$(TOPDIR)/scripts/kconfig/conf -o ./config.in
 	@touch .config.stamp
- 
+
 randconfig: $(TOPDIR)/scripts/kconfig/conf ./config.in
 	$(TOPDIR)/scripts/kconfig/conf -r ./config.in
 	@touch .config.stamp
- 
+
 allyesconfig: $(TOPDIR)/scripts/kconfig/conf ./config.in
 	$(TOPDIR)/scripts/kconfig/conf -y ./config.in
 	@touch .config.stamp
- 
+
 allnoconfig: $(TOPDIR)/scripts/kconfig/conf ./config.in
 	$(TOPDIR)/scripts/kconfig/conf -n ./config.in
 	@touch .config.stamp
- 
+
 defconfig: $(TOPDIR)/scripts/kconfig/conf ./config.in
 	$(TOPDIR)/scripts/kconfig/conf -d ./config.in
 	@touch .config.stamp

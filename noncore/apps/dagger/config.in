@@ -1,4 +1,4 @@
   config DAGGER
     boolean "opie-dagger (Bible study/reader application - requires libsword)"
     default "n"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBSWORD_DEP
