@@ -2,13 +2,13 @@ TEMPLATE	= app
 CONFIG		= qt warn_on release
 DESTDIR		= $(OPIEDIR)/bin
 HEADERS	= addressbook.h \
-                  abeditor.h \
+                  contacteditor.h \
 		  ablabel.h \
 		  abtable.h \
 		  addresssettings.h
 SOURCES	= main.cpp \
 		  addressbook.cpp \
-		  abeditor.cpp \
+		  contacteditor.cpp \
 		  ablabel.cpp \
 		  abtable.cpp \
 		  addresssettings.cpp

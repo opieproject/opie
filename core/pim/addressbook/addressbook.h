@@ -22,7 +22,7 @@
 
 #include <qmainwindow.h>
 
-class AbEditor;
+class ContactEditor;
 class AbLabel;
 class AbTable;
 class QPEToolBar;
@@ -83,7 +83,7 @@ private:
 	            orderedFields;
     QStringList slOrderedFields;
     enum Panes { paneList=0, paneView, paneEdit };
-    AbEditor *abEditor;
+    ContactEditor *abEditor;
     AbLabel *mView;
     AbTable *abList;
 

@@ -20,7 +20,7 @@
 
 #define QTOPIA_INTERNAL_FD
 
-#include "abeditor.h"
+#include "contacteditor.h"
 #include "ablabel.h"
 #include "abtable.h"
 #include "addresssettings.h"
@@ -429,7 +429,7 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 	cnt.setFileAs();
 
 	if ( bAbEditFirstTime ) {
-	    abEditor = new AbEditor( cnt, &orderedFields, &slOrderedFields,
+	    abEditor = new ContactEditor( cnt, &orderedFields, &slOrderedFields,
 				     this, "editor" );
 	    bAbEditFirstTime = FALSE;
 	} else {
@@ -480,7 +480,7 @@ void AddressbookWindow::editPersonal()
     if (QFile::exists(filename))
 	me = Contact::readVCard( filename )[0];
     if (bAbEditFirstTime) {
-	abEditor = new AbEditor( me, &orderedFields, &slOrderedFields,
+	abEditor = new ContactEditor( me, &orderedFields, &slOrderedFields,
 		this, "editor" );
 	// don't create a new editor every time
 	bAbEditFirstTime = FALSE;
@@ -540,7 +540,7 @@ void AddressbookWindow::editEntry( EntryMode entryMode )
 {
     Contact entry;
     if ( bAbEditFirstTime ) {
-	abEditor = new AbEditor( entry, &orderedFields, &slOrderedFields,
+	abEditor = new ContactEditor( entry, &orderedFields, &slOrderedFields,
 				 this, "editor" );
 	bAbEditFirstTime = FALSE;
 	if ( entryMode == EditEntry )
