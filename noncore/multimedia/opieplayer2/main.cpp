@@ -1,7 +1,4 @@
 
-#include <qpe/qpeapplication.h>
-#include "mediaplayerstate.h"
-#include "playlistwidget.h"
 #include "mediaplayer.h"
 
 

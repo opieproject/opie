@@ -1,6 +1,5 @@
 #include "editstringwidget.h"
 
-#include <qlabel.h>
 #include <qlayout.h>
 
 using namespace Data;

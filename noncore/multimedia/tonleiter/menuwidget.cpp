@@ -1,7 +1,5 @@
 #include "menuwidget.h"
 
-#include <qlabel.h>
-#include <qlayout.h>
 
 #include "editinst.h"
 #include "editscale.h"

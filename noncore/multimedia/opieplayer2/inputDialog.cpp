@@ -33,15 +33,8 @@
 
 #include "inputDialog.h"
 
-#include <qpe/resource.h>
-#include <qpe/qpeapplication.h>
 
-#include <qfileinfo.h>
 #include <qlineedit.h>
-#include <qlayout.h>
-#include <qvariant.h>
-#include <qpushbutton.h>
-#include <qwhatsthis.h>
 
 InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl ) {

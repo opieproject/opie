@@ -10,21 +10,14 @@
 
 #include "fretboard.h"
 #include "vumeter.h"
-#include "gs.h"
 #include <qcombobox.h>
-#include <qframe.h>
 #include <qlabel.h>
 #include <qlistbox.h>
 #include <qpushbutton.h>
 #include <qspinbox.h>
 #include <qtabwidget.h>
 #include <qlayout.h>
-#include <qvariant.h>
 #include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qimage.h>
-#include <qpixmap.h>
-#include <qbitmap.h>
 #include <qpe/resource.h>
 
 

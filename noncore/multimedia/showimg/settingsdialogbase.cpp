@@ -11,12 +11,8 @@
 #include <qcheckbox.h>
 #include <qgroupbox.h>
 #include <qlabel.h>
-#include <qpushbutton.h>
 #include <qslider.h>
 #include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
 
 /* 
  *  Constructs a SettingsDialogBase which is a child of 'parent', with the 

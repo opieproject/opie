@@ -33,8 +33,6 @@
 
 
 #include "audiowidget.h"
-#include "mediaplayerstate.h"
-#include "playlistwidget.h"
 
 #include <qpe/qpeapplication.h>
 

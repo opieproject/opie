@@ -1,5 +1,4 @@
 #include "powerchord.h"
-#include <qpushbutton.h>
 
 /* 
  *  Constructs a Example which is a child of 'parent', with the 

@@ -33,12 +33,7 @@
 
 // this file is based on work by trolltech
 
-#include <qpe/qpeapplication.h>
-#include <qpe/qlibrary.h>
 #include <qpe/config.h>
-#include <qvaluelist.h>
-#include <qobject.h>
-#include <qdir.h>
 #include "mediaplayerstate.h"
 
 #include <assert.h>

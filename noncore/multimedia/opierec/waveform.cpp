@@ -19,7 +19,6 @@
  **********************************************************************/
 #include "waveform.h"
 
-#include <qlabel.h>
 #include <qpainter.h>
 
 

@@ -1,8 +1,6 @@
 
-#include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include "qpe/qcopenvelope_qws.h"
-#include <qmessagebox.h>
 
 #include "volumecontrol.h"
 

@@ -1,22 +1,11 @@
 
 
-#include "qpe/global.h"
-#include "qpe/applnk.h"
-#include "qpe/lnkproperties.h"
-#include "qpe/applnk.h"
 #include "qpe/qpeapplication.h"
 
 #include <stdlib.h>
 
-#include <qdir.h>
-#include <qwidget.h>
-#include <qheader.h>
-#include <qimage.h>
-#include <qpixmap.h>
 #include <qlabel.h>
 #include <qfileinfo.h>
-#include <qpainter.h>
-#include <qscrollview.h>
 
 #include "ImageFileSelector.h"
 

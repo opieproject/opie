@@ -37,7 +37,6 @@
 #include <qdir.h>
 
 #include <qgfx_qws.h>
-#include <qdirectpainter_qws.h>
 
 #include <assert.h>
 

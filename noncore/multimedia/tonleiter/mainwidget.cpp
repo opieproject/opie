@@ -1,6 +1,5 @@
 #include "mainwidget.h"
 
-#include <qwidget.h>
 #include <qlayout.h>
 
 MainWidget::MainWidget(QWidget* parent,const char* name,WFlags f)

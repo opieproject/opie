@@ -23,7 +23,6 @@
 //#include <FL/Fl_Widget.H>
 //#include <FL/fl_draw.H>
 #include <stdio.h>
-#include <qpixmap.h>
 #include <qpe/resource.h>
 #include "fretboard.h"
 #include <qpainter.h>

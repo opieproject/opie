@@ -23,7 +23,6 @@
 #include <assert.h>
 
 #include "mediawidget.h"
-#include "playlistwidget.h"
 #include "skin.h"
 
 MediaWidget::MediaWidget( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QWidget *parent, const char *name )

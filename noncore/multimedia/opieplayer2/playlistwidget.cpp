@@ -40,7 +40,6 @@
 #include "playlistselection.h"
 #include "playlistwidget.h"
 #include "mediaplayer.h"
-#include "mediaplayerstate.h"
 #include "inputDialog.h"
 #include "om3u.h"
 #include "playlistfileview.h"

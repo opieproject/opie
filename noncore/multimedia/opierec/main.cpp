@@ -10,7 +10,6 @@
  *   (at your option) any later version.                                   *
  ***************************************************************************/
 #include "qtrec.h"
-#include <qpe/qpeapplication.h>
 
 #ifdef PDAUDIO
 int main(int argc, char* argv[]) {

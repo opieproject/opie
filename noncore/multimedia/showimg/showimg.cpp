@@ -32,24 +32,11 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/resource.h>
-#include <qpe/fileselector.h>
-#include <qpe/applnk.h>
-#include <qfileinfo.h>
 #include <math.h>
 #include <qmenubar.h>
-#include <qwidgetstack.h>
 #include <qpe/qpetoolbar.h>
 #include <qaction.h>
 #include <qfiledialog.h>
-#include <qmessagebox.h>
-#include <qpopupmenu.h>
-#include <qscrollview.h>
-#include <qlabel.h>
-#include <qpainter.h>
-#include <qkeycode.h>
-#include <qapplication.h>
-#include <qclipboard.h>
-#include <qtimer.h>
 #include <qspinbox.h>
 
 

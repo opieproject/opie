@@ -8,7 +8,6 @@
 #include "pixmaps.h"
 #include "qtrec.h"
 #include "waveform.h"
-#include "device.h"
 
 #include <pthread.h>
 

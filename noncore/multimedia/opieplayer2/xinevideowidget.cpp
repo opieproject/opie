@@ -32,13 +32,10 @@
 */
 
 #include <qimage.h>
-#include <qpainter.h>
-#include <qgfx_qws.h>
 #include <qdirectpainter_qws.h>
 #include <qgfx_qws.h>
 #include <qsize.h>
 #include <qapplication.h>
-#include <qpainter.h>
 
 #include <qpe/resource.h>
 

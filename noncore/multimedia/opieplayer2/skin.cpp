@@ -24,10 +24,8 @@
 #include "singleton.h"
 
 #include <qcache.h>
-#include <qmap.h>
 #include <qtimer.h>
 
-#include <qpe/resource.h>
 #include <qpe/config.h>
 
 #include <assert.h>

@@ -17,10 +17,8 @@
 #define MAINWINDOW_H
 
 #include <qmainwindow.h>
-#include <qdatetime.h>
 #include <qimage.h>
 #include <qpixmap.h>
-#include <qdatetime.h>
 
 class QAction;
 class QActionGroup;

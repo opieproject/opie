@@ -1,16 +1,12 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
-#include <qpe/qcopenvelope_qws.h>
 #include <qfileinfo.h>
 
 #include "mediaplayer.h"
-#include "playlistwidget.h"
 #include "audiowidget.h"
 #include "videowidget.h"
 #include "volumecontrol.h"
-#include "lib.h"
 
-#include "mediaplayerstate.h"
 
  // for setBacklight()
 #include <linux/fb.h>

@@ -29,22 +29,9 @@
 
 */
 
-#include "playlistwidget.h"
 #include "om3u.h"
 
-#include <qpe/applnk.h>
-#include <qpe/qpeapplication.h>
-#include <qpe/storage.h>
-#include <qpe/mimetype.h>
-#include <qpe/global.h>
-#include <qpe/resource.h>
 
-#include <qdir.h>
-#include <qregexp.h>
-#include <qstring.h>
-#include <qtextstream.h>
-#include <qstringlist.h>
-#include <qcstring.h>
 
 //extern PlayListWidget *playList;
 

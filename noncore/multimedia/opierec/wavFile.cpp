@@ -5,7 +5,6 @@
 #include <qmessagebox.h>
 #include <qdir.h>
 
-#include <qpe/timestring.h>
 #include <qpe/config.h>
 
 #include <errno.h>

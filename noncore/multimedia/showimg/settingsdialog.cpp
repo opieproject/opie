@@ -22,8 +22,6 @@
 #include <qslider.h>
 #include <qlabel.h>
 #include <qcheckbox.h>
-#include <qradiobutton.h>
-#include <qbuttongroup.h>
 
 SettingsDialog::SettingsDialog( QWidget *parent, const char *name, bool modal, WFlags f )
     : SettingsDialogBase( parent, name, modal, f )

@@ -44,7 +44,6 @@
 #include "inputDialog.h"
 #include "playlistfileview.h"
 
-#include "mediaplayerstate.h"
 
 PlayListWidgetGui::PlayListWidgetGui(QWidget* parent, const char* name )
     : QMainWindow( parent, name )  {

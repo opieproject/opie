@@ -1,6 +1,5 @@
 #include "editinst.h"
 
-#include <qlabel.h>
 #include <qpushbutton.h>
 
 #include <qpe/qpeapplication.h>

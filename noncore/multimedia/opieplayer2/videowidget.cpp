@@ -32,8 +32,6 @@
 */
 
 #include "videowidget.h"
-#include "mediaplayerstate.h"
-#include "playlistwidget.h"
 
 
 #ifdef Q_WS_QWS

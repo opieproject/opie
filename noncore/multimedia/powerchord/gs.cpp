@@ -17,8 +17,6 @@
 #include <stdlib.h>
 
 //#include <qpainter.h>
-#include <qmessagebox.h>
-#include <qstring.h>
 
 
 gs::gs()

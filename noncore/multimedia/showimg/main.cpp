@@ -20,7 +20,6 @@
 
 #include "showimg.h"
 
-#include <qpe/qpeapplication.h>
 
 #include <opie/oapplicationfactory.h>
 
