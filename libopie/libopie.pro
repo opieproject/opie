@@ -60,6 +60,7 @@ SOURCES   = ofontmenu.cc  \
              pim/ocontact.cpp \
              pim/ocontactaccess.cpp \
              pim/ocontactaccessbackend_vcard.cpp \
+             pim/ocontactaccessbackend_xml.cpp \
        pim/otodoaccessvcal.cpp \
        pim/orecur.cpp \
        pim/opimstate.cpp \
