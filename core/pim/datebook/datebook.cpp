@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.1.1.2 2002-01-31 17:03:39 kergoth Exp $
+** $Id: datebook.cpp,v 1.1.1.2.2.1 2002-02-13 19:07:13 mark Exp $
 **
 **********************************************************************/
 
@@ -86,7 +86,7 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
     qDebug("loading db t=%d", t.elapsed() );
     loadSettings();
     setCaption( tr("Calendar") );
-    setIcon( Resource::loadPixmap( "datebook_icon" ) );
+    setIcon( Resource::loadPixmap( "datebook/datebook_icon" ) );
 
     setToolBarsMovable( FALSE );
 
