@@ -196,9 +196,9 @@ bool Jornada::setDisplayStatus ( bool on )
     QString cmdline;
     
     if ( d->m_model == Model_Jornada_56x ) {
-        QString cmdline = QString::fromLatin1( "echo %1 > /sys/class/lcd/*/power; echo %2 > /sys/class/backlight/*/power").arg( on ? "0" : "4" ).arg( on ? "0" : "4" );
+        cmdline = QString::fromLatin1( "echo %1 > /sys/class/lcd/sa1100fb/power; echo %2 > /sys/class/backlight/sa1100fb/power").arg( on ? "0" : "4" ).arg( on ? "0" : "4" );
     } else if ( d->m_model == Model_Jornada_720 ) {
-        QString cmdline = QString::fromLatin1( "echo %1 > /sys/class/lcd/e1356fb/power").arg( on ? "0" : "4" );
+        cmdline = QString::fromLatin1( "echo %1 > /sys/class/lcd/e1356fb/power").arg( on ? "0" : "4" );
     }
 
     res = ( ::system( QFile::encodeName(cmdline) ) == 0 );
