@@ -14,11 +14,14 @@
 
 #include "multikey.h"
 
+/* OPIE */
+#include <opie2/otaskbarapplet.h>
 #include <qpe/global.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
 
+/* QT */
 #include <qlabel.h>
 #include <qdir.h>
 #include <qfileinfo.h>
@@ -112,7 +115,7 @@ void Multikey::message(const QCString &message, const QByteArray &data)
 		while (!map.atEnd()) {
 
 		    if (line.find(QRegExp("^sw\\s*=\\s*")) != -1) {
-                
+
 			if (i != sw.count()-1) {
 			    if (keymap_map == current_map) {
 				lang = i;
@@ -133,4 +136,14 @@ void Multikey::message(const QCString &message, const QByteArray &data)
 
 	setText(current);
     }
+}
+
+int Multikey::position()
+{
+    return 10;
+}
+
+Q_EXPORT_INTERFACE()
+{
+    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<Multikey> );
 }

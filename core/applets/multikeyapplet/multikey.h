@@ -24,6 +24,7 @@ class Multikey: public QLabel
     Q_OBJECT
 public:
     Multikey(QWidget *parent);
+    static int position();
 
 protected:
     void mousePressEvent(QMouseEvent *ev);
