@@ -11,7 +11,7 @@
 ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.26 2002-05-19 17:13:43 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.27 2002-05-23 02:03:12 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -269,7 +269,7 @@ bool VMemo::startRecording() {
 
     if ( recording)
         return FALSE;;    
-     Config config( "Sound" );
+     Config config( "Vmemo" );
      config.setGroup( "System" );
      useAlerts = config.readBoolEntry("Alert");
 
@@ -288,16 +288,14 @@ bool VMemo::startRecording() {
         return FALSE;
     }
   
-  Config vmCfg("VMemo");
-  vmCfg.setGroup("Defaults");
+  config.setGroup("Defaults");
   
   QDateTime dt = QDateTime::currentDateTime();
 
   QString fName;
-   Config cfg( "Sound" );
-   cfg.setGroup( "System" );
+   config.setGroup( "System" );
    fName = QPEApplication::documentDir() ;
-  fileName = cfg.readEntry("RecLocation", fName);
+  fileName = config.readEntry("RecLocation", fName);
 
   int s;
   s=fileName.find(':');
@@ -325,7 +323,7 @@ bool VMemo::startRecording() {
   }
   
   QArray<int> cats(1);
-  cats[0] = vmCfg.readNumEntry("Category", 0);
+  cats[0] = config.readNumEntry("Category", 0);
   
   QString dlName("vm_");
   dlName += dt.toString();
@@ -346,7 +344,7 @@ void VMemo::stopRecording() {
 
 int VMemo::openDSP()
 {
-    Config cfg("Sound");
+    Config cfg("Vmemo");
     cfg.setGroup("Record");
   
     speed = cfg.readNumEntry("SampleRate", 22050);
