@@ -187,7 +187,7 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Send</translation>
     </message>
 </context>
 <context>
@@ -678,7 +678,7 @@ og </translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Hyppighed</translation>
     </message>
     <message>
         <source>End On:</source>
@@ -726,15 +726,15 @@ og </translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation type="unfinished"></translation>
+        <translation>Var1</translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Var 2</translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="unfinished"></translation>
+        <translation>WeekVar</translation>
     </message>
     <message>
         <source>months</source>
