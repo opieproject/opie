@@ -48,6 +48,10 @@ config DEBUG
     bool
     default y
     depends ! DEBUG
+    
+config QUICK_LAUNCH
+    boolean "Enable building of quick launchable applications"
+    default n
 
 config SPECFILE
   string
