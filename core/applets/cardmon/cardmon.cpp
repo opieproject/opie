@@ -272,7 +272,9 @@ bool CardMonitor::getStatusPcmcia(int showPopUp)
 		text += cardInPcmcia1Name;
 		popUp(text, "cardmon/" + cardInPcmcia1Type);
 	    }
+#ifndef QT_NO_SOUND
 	    QSound::play(Resource::findSound("cardmon/card" + what));
+#endif
 	}
     } else {
 	// no file found
@@ -324,7 +326,9 @@ bool CardMonitor::getStatusSd(int showPopUp)
 	    what = "off";
 	}
 	//qDebug("TEXT: " + text );
+#ifndef QT_NO_SOUND
 	QSound::play(Resource::findSound("cardmon/card" + what));
+#endif
 	popUp(text, "cardmon/ide");	// XX add SD pic
     }
 #else
