@@ -20,9 +20,10 @@
 #define _REENTRANT
 
 #include <qpe/qpeapplication.h>
+#include <qpe/custom.h>
 #include <qimage.h>
 #include <qpainter.h>
-#ifdef Q_WS_QWS
+#if !defined(QT_NO_COP)
 #include <qpe/qcopenvelope_qws.h>
 #endif
 #include "mediaplayerplugininterface.h"
@@ -39,9 +40,7 @@
 #include "mediaplayerstate.h"
 
 
-#if defined(QT_QWS_SL5XXX) || defined(QT_QWS_IPAQ) || defined(QT_QWS_RAMSES)
-#define USE_REALTIME_AUDIO_THREAD
-#endif
+
 
 
 extern VideoWidget *videoUI; // now only needed to tell it to play a frame
@@ -256,7 +255,7 @@ void LoopControl::startVideo() {
         videoMutex->lock();
         current_frame = int( (double)playtime.elapsed() * (double)framerate / 1000.0 );
         //current_frame = ( clock() - begin ) * (double)framerate / CLOCKS_PER_SEC;
-  
+
         // Sync to Audio
 //        current_frame = (long)((double)(audioSampleCounter - 1000) * framerate / (double)freq);
 
@@ -312,17 +311,17 @@ void LoopControl::startVideo() {
         mediaPlayerState->curDecoder()->videoSetFrame( current_frame, stream );
     }
     prev_frame = current_frame;
-    if ( moreVideo = videoUI->playVideo() ) 
+    if ( moreVideo = videoUI->playVideo() )
         emitChangePos = TRUE;
     videoMutex->unlock();
       }
 
-  } else 
+  } else
       moreVideo = FALSE;
 
     }
 
-    if ( !moreVideo && !moreAudio ) 
+    if ( !moreVideo && !moreAudio )
   emitPlayFinished = TRUE;
 
     pthread_exit(NULL);
@@ -330,7 +329,7 @@ void LoopControl::startVideo() {
 
 void LoopControl::startAudio() {
     moreAudio = TRUE;
-    
+
     while ( moreAudio ) {
 
   if ( !isMuted && mediaPlayerState->curDecoder() && hasAudioChannel ) {
@@ -404,7 +403,7 @@ void LoopControl::startAudio() {
 
     //    qDebug( "End of file" );
 
-    if ( !moreVideo && !moreAudio ) 
+    if ( !moreVideo && !moreAudio )
   emitPlayFinished = TRUE;
 
     pthread_exit(NULL);
@@ -484,7 +483,7 @@ void LoopControl::stop( bool willPlayAgainShortly ) {
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
     if ( !willPlayAgainShortly && disabledSuspendScreenSaver ) {
-  disabledSuspendScreenSaver = FALSE; 
+  disabledSuspendScreenSaver = FALSE;
   // Re-enable the suspend mode
   QCopEnvelope("QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
     }
@@ -512,9 +511,9 @@ bool LoopControl::init( const QString& filename ) {
     fileName = filename;
     stream = 0; // only play stream 0 for now
     current_frame = total_video_frames = total_audio_samples = 0;
-    
+
     //    qDebug( "Using the %s decoder", mediaPlayerState->curDecoder()->pluginName() );
-   
+
     // ### Hack to use libmpeg3plugin to get the number of audio samples if we are using the libmad plugin
     if ( mediaPlayerState->curDecoder()->pluginName() == QString("LibMadPlugin") ) {
   if ( mediaPlayerState->libMpeg3Decoder() && mediaPlayerState->libMpeg3Decoder()->open( filename ) ) {
@@ -534,12 +533,12 @@ bool LoopControl::init( const QString& filename ) {
 
   channels = mediaPlayerState->curDecoder()->audioChannels( astream );
   DecodeLoopDebug(( "channels = %d\n", channels ));
-  
+
   if ( !total_audio_samples )
       total_audio_samples = mediaPlayerState->curDecoder()->audioSamples( astream );
 
   mediaPlayerState->setLength( total_audio_samples );
-  
+
   freq = mediaPlayerState->curDecoder()->audioFrequency( astream );
   DecodeLoopDebug(( "frequency = %d\n", freq ));
 
@@ -594,9 +593,9 @@ void LoopControl::play() {
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
     if ( !disabledSuspendScreenSaver ) {
-  disabledSuspendScreenSaver = TRUE; 
+  disabledSuspendScreenSaver = TRUE;
         // Stop the screen from blanking and power saving state
-  QCopEnvelope("QPE/System", "setScreenSaverMode(int)" ) 
+  QCopEnvelope("QPE/System", "setScreenSaverMode(int)" )
       << ( hasVideoChannel ? QPEApplication::Disable : QPEApplication::DisableSuspend );
     }
 #endif

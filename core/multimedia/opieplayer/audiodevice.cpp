@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
+#include <qpe/custom.h>
 #include <qmessagebox.h>
 
 #include "audiodevice.h"
@@ -31,8 +32,8 @@
 
 #include <errno.h>
 
-#if ( defined Q_WS_QWS || defined(_WS_QWS_) ) && !defined(QT_NO_COP)
-#include "qpe/qcopenvelope_qws.h"
+#if !defined(QT_NO_COP)
+#include <qpe/qcopenvelope_qws.h>
 #endif
 
 #if defined(Q_WS_X11) || defined(Q_WS_QWS)
@@ -45,11 +46,11 @@
 #include <unistd.h>
 #endif
 
-# if defined(QT_QWS_IPAQ)
-static const int sound_fragment_shift = 14;
-# else
+#ifdef OPIE_SOUND_FRAGMENT_SHIFT
+static const int sound_fragment_shift = OPIE_SOUND_FRAGMENT_SHIFT;
+#else
 static const int sound_fragment_shift = 16;
-# endif
+#endif
 static const int sound_fragment_bytes = (1<<sound_fragment_shift);
 //#endif
 
@@ -145,10 +146,10 @@ void AudioDevice::setVolume( unsigned int leftVolume, unsigned int rightVolume, 
 # endif
 
 //#endif
-//    qDebug( "setting volume to: 0x%x", volume ); 
+//    qDebug( "setting volume to: 0x%x", volume );
 #if ( defined Q_WS_QWS || defined(_WS_QWS_) ) && !defined(QT_NO_COP)
       // Send notification that the volume has changed
-    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << muted; 
+    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << muted;
 #endif
 }
 
@@ -156,7 +157,7 @@ void AudioDevice::setVolume( unsigned int leftVolume, unsigned int rightVolume, 
 
 AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
    //    qDebug("creating new audio device");
-//     QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE; 
+//     QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE;
     d = new AudioDevicePrivate;
     d->frequency = f;
     d->channels = chs;
@@ -172,7 +173,7 @@ AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
     int fragments = 0x10000 * 8 + sound_fragment_shift;
     int capabilities = 0;
 
-    
+
 #ifdef KEEP_DEVICE_OPEN
     if ( AudioDevicePrivate::dspFd == 0 ) {
 #endif
@@ -187,7 +188,7 @@ AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
         QMessageBox::critical(0, "Vmemo", errorMsg, tr("Abort"));
         exit(-1); //harsh?
         }
-#ifdef KEEP_DEVICE_OPEN 
+#ifdef KEEP_DEVICE_OPEN
         AudioDevicePrivate::dspFd = d->handle;
     } else {
         d->handle = AudioDevicePrivate::dspFd;
@@ -209,34 +210,34 @@ AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
         if(ioctl( d->handle, SNDCTL_DSP_CHANNELS, &d->channels )==-1)
             perror("ioctl(\"SNDCTL_DSP_CHANNELS\")");
     }
-//   QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << FALSE; 
+//   QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << FALSE;
 
     d->bufferSize = sound_fragment_bytes;
     d->unwrittenBuffer = new char[d->bufferSize];
     d->unwritten = 0;
     d->can_GETOSPACE = TRUE; // until we find otherwise
- 
+
       //if ( chs != d->channels )       qDebug( "Wanted %d, got %d channels", chs, d->channels );
       //if ( f != d->frequency )        qDebug( "wanted %dHz, got %dHz", f, d->frequency );
       //if ( capabilities & DSP_CAP_BATCH )   qDebug( "Sound card has local buffer" );
       //if ( capabilities & DSP_CAP_REALTIME )qDebug( "Sound card has realtime sync" );
       //if ( capabilities & DSP_CAP_TRIGGER ) qDebug( "Sound card has precise trigger" );
       //if ( capabilities & DSP_CAP_MMAP )    qDebug( "Sound card can mmap" );
-    
+
 }
-    
+
 
 AudioDevice::~AudioDevice() {
    //    qDebug("destryo audiodevice");
 //    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE;
-    
-# ifndef KEEP_DEVICE_OPEN 
+
+# ifndef KEEP_DEVICE_OPEN
     close( d->handle );     // Now it should be safe to shut the handle
 # endif
     delete d->unwrittenBuffer;
     delete d;
 //   QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << FALSE;
-    
+
 }
 
 
