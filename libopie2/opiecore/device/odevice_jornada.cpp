@@ -177,7 +177,7 @@ bool Jornada::setDisplayBrightness( int bright )
         if ( !bright )
     	    cmdline = QString::fromLatin1( "echo 4 > /sys/class/backlight/sa1100fb/power");
         else
-    	    cmdline = QString::fromLatin1( "echo 0 > /sys/class/backlight/sa1100/power; echo %1 > /sys/class/backlight/sa1100/brightness" ).arg( bright );
+    	    cmdline = QString::fromLatin1( "echo 0 > /sys/class/backlight/sa1100fb/power; echo %1 > /sys/class/backlight/sa1100fb/brightness" ).arg( bright );
     } else if ( d->m_model == Model_Jornada_720 ) {
         cmdline = QString::fromLatin1( "echo %1 > /sys/class/backlight/e1356fb/brightness" ).arg( bright );
     }
