@@ -16,10 +16,12 @@
 #define PYQUICKLAUNCHAPPLET_H
 
 #include <qwidget.h>
+#include <qfile.h>
 #include <qframe.h>
 #include <qpixmap.h>
 
 class PyQuicklaunchApplet;
+class QCopChannel;
 
 class PyQuicklaunchControl : public QFrame
 {
@@ -30,8 +32,6 @@ class PyQuicklaunchControl : public QFrame
 
     void readConfig();
     void writeConfigEntry( const char* entry, int val );
-
-  public slots:
 
   private:
     PyQuicklaunchApplet* applet;
@@ -47,10 +47,21 @@ class PyQuicklaunchApplet : public QWidget
     PyQuicklaunchControl* status;
 
     virtual void timerEvent( QTimerEvent* );
+    bool online;
+
+  public slots:
+    void receivedMessage( const QCString & msg, const QByteArray & data );
 
   protected:
     virtual void mousePressEvent( QMouseEvent * );
     virtual void paintEvent( QPaintEvent* );
+
+  private:
+    QCopChannel* _control;
+    QFile _fifo;
+    QString _fifoName;
+    QPixmap _online;
+    QPixmap _offline;
 };
 
 #endif // PYQUICKLAUNCHAPPLET_H

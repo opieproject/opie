@@ -17,13 +17,22 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/otaskbarapplet.h>
-#include <qpe/qpeapplication.h>
 #include <qpe/config.h>
+#include <qpe/qpeapplication.h>
+#include <qpe/resource.h>
 using namespace Opie::Core;
 
 /* QT */
+#include <qcopchannel_qws.h>
 #include <qpainter.h>
 #include <qframe.h>
+#include <qfile.h>
+#include <qtimer.h>
+
+/* STD */
+#include <pwd.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 PyQuicklaunchControl::PyQuicklaunchControl( PyQuicklaunchApplet *applet, QWidget *parent, const char *name )
         : QFrame( parent, name, WStyle_StaysOnTop | WType_Popup ), applet( applet )
@@ -67,36 +76,73 @@ void PyQuicklaunchControl::writeConfigEntry( const char *entry, int val )
 //===========================================================================
 
 PyQuicklaunchApplet::PyQuicklaunchApplet( QWidget *parent, const char *name )
-        : QWidget( parent, name )
+        : QWidget( parent, name ), online( false )
 {
     setFixedHeight( 18 );
     setFixedWidth( 14 );
     status = new PyQuicklaunchControl( this, this, "Python Quicklaunch Status" );
+
+    _online = Resource::loadPixmap( "pyquicklaunch/online" );
+    _offline = Resource::loadPixmap( "pyquicklaunch/offline" );
+
+    _fifoName = QString().sprintf( "/tmp/mickeys-quicklauncher-%s", ::getpwuid( ::getuid() )->pw_name );
+    odebug << "PyQuicklaunchApplet fifo name = '" << _fifoName << "'" << oendl;
+    _fifo.setName( _fifoName );
+
+    _control = new QCopChannel( "QPE/PyLauncher", parent, "PyLauncher QCop Control Channel" );
+    connect( _control, SIGNAL(received(const QCString&,const QByteArray&)),
+             this, SLOT(receivedMessage(const QCString&,const QByteArray&) ) );
+
 }
 
 
 PyQuicklaunchApplet::~PyQuicklaunchApplet()
-{}
+{
+}
+
+
+void PyQuicklaunchApplet::receivedMessage( const QCString& msg, const QByteArray& data )
+{
+    odebug << "receivedMessage = '" << msg << "' " << oendl;
+
+    if ( msg == "setOnline()" )
+    {
+        online = true;
+        repaint( true );
+    }
+    else if ( msg == "setOffline()" )
+    {
+        online = false;
+        repaint( true );
+    }
+    else
+    {
+        odebug << "unknown command." << oendl;
+    }
+}
 
 
 void PyQuicklaunchApplet::timerEvent( QTimerEvent* )
 {
-    // FIXME
+    bool nowOnline = _fifo.exists();
+    if ( nowOnline != online )
+    {
+        online = nowOnline;
+        repaint( true );
+    }
 }
+
 
 void PyQuicklaunchApplet::mousePressEvent( QMouseEvent * )
 {
      status->isVisible() ? status->hide() : status->show( true );
 }
 
+
 void PyQuicklaunchApplet::paintEvent( QPaintEvent* )
 {
     QPainter p( this );
-    int h = height();
-    int w = width();
-
-    // FIXME
-
+    p.drawPixmap( 0, 2, online ? _online : _offline );
 }
 
 
