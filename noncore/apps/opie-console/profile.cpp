@@ -33,6 +33,9 @@ Profile &Profile::operator=( const Profile& prof ) {
 }
 Profile::~Profile() {
 }
+QMap<QString, QString> Profile::conf()const {
+    return m_conf;
+}
 QString Profile::name()const {
     return m_name;
 }
@@ -104,3 +107,6 @@ int Profile::readNumEntry( const QString& key, int def )const {
 bool Profile::readBoolEntry( const QString& key,  bool def )const {
     return readNumEntry( key, def );
 }
+void Profile::setConf( const QMap<QString, QString>& conf ) {
+    m_conf = conf;
+};

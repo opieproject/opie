@@ -40,7 +40,7 @@ public:
     /*
      * config stuff
      */
-    QMap<QString, QString> conf();
+    QMap<QString, QString> conf()const;
     void clearConf();
     void writeEntry( const QString& key,  const QString& value );
     void writeEntry( const QString& key,  int num );
@@ -55,6 +55,7 @@ public:
     void setBackground( int back );
     void setForeground( int fore );
     void setTerminal( int term );
+    void setConf( const QMap<QString, QString>& );
 private:
     QMap<QString, QString> m_conf;
     QString m_name;

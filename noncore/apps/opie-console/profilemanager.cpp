@@ -22,9 +22,6 @@ void ProfileManager::load() {
     /*
      * for each profile
      */
-    /*
-     * QAsciiDict Parsing FIXME
-     */
     for ( it = groups.begin(); it != groups.end(); ++it ) {
         conf.setGroup( (*it) );
         Profile prof;
@@ -33,7 +30,9 @@ void ProfileManager::load() {
         prof.setBackground( conf.readNumEntry("back") );
         prof.setForeground( conf.readNumEntry("fore") );
         prof.setTerminal( conf.readNumEntry("terminal") );
+        prof.setConf( conf.items( (*it) ) );
 
+        /* now add it */
         m_list.append( prof );
     }
 
@@ -52,7 +51,7 @@ Session* ProfileManager::fromProfile( const Profile& prof) {
     /*
      * FIXME
      * load emulation
-     * load widget
+     * load widget?
      * set colors + fonts
      */
     return session;
@@ -60,6 +59,20 @@ Session* ProfileManager::fromProfile( const Profile& prof) {
 void ProfileManager::save(  ) {
     ProfileConfig conf("opie-console-profiles");
     conf.clearAll();
-    Session* se= 0l;
+    Profile::ValueList::Iterator it;
+    for (it = m_list.begin(); it != m_list.end(); ++it ) {
+        conf.setGroup( (*it).name() );
+        conf.writeEntry( "name", (*it).name() );
+        conf.writeEntry( "ioplayer", (*it).ioLayerName() );
+        conf.writeEntry( "back", (*it).background() );
+        conf.writeEntry( "fore", (*it).foreground() );
+        conf.writeEntry( "terminal", (*it).terminal() );
+        /* now the config stuff */
+        QMap<QString, QString> map =  (*it).conf();
+        QMap<QString, QString>::Iterator it;
+        for ( it = map.begin(); it != map.end(); ++it ) {
+            conf.writeEntry( it.key(), it.data() );
+        }
+    }
     // FIXME save
 }
