@@ -3,86 +3,86 @@
     <name>Button</name>
     <message>
         <source>Calendar Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalendāra Poga</translation>
     </message>
     <message>
         <source>Contacts Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontakti Poga</translation>
     </message>
     <message>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlnes Poga</translation>
     </message>
     <message>
         <source>Mail Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasta Poga</translation>
     </message>
     <message>
         <source>Home Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Mājas Poga</translation>
     </message>
     <message>
         <source>Record Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Ieraksta Poga</translation>
     </message>
     <message>
         <source>Lower+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Zemākā+Augšā</translation>
     </message>
     <message>
         <source>Lower+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Zemāk-Lejā</translation>
     </message>
     <message>
         <source>Lower+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Zemāk+Pa labi</translation>
     </message>
     <message>
         <source>Lower+Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Zemāk+Pa kreisi</translation>
     </message>
     <message>
         <source>Upper+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Augstāk+Augšā</translation>
     </message>
     <message>
         <source>Upper+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Augstāk+Lejā</translation>
     </message>
     <message>
         <source>Upper+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Augstāk+Pa labi</translation>
     </message>
     <message>
         <source>Upper+Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Augstāk+Pa kreisi</translation>
     </message>
     <message>
         <source>Display Rotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotēt Displeju</translation>
     </message>
     <message>
         <source>Action Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Darbības Poga</translation>
     </message>
     <message>
         <source>OK Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Labi Poga</translation>
     </message>
     <message>
         <source>End Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Beigu Poga</translation>
     </message>
     <message>
         <source>Todo Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Darbi Poga</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Trash</source>
-        <translation type="unfinished"></translation>
+        <translation>Atkritumi</translation>
     </message>
 </context>
 </TS>
