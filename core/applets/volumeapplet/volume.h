@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -25,25 +25,33 @@
 #include <qframe.h>
 #include <qpixmap.h>
 #include <qguardedptr.h>
-#include <qtimer.h>
 
 class QSlider;
 class QCheckBox;
+class QPushButton;
+class QTimer;
 
 class VolumeControl : public QFrame
 {
     Q_OBJECT
 public:
-    VolumeControl( bool showMic=FALSE, QWidget *parent=0, const char *name=0 );
+    VolumeControl( QWidget *parent=0, const char *name=0 );
 
 public:
     QSlider *slider;
-	QSlider *mic;
     QCheckBox *muteBox;
 
 private:
     void keyPressEvent( QKeyEvent * );
-	void createView(bool showMic = FALSE);
+
+private slots:
+    void ButtonChanged();
+    void rateTimerDone();
+
+private:
+    QPushButton *upButton;
+    QPushButton *downButton;
+    QTimer *rateTimer;
 };
 
 class VolumeApplet : public QWidget
@@ -57,37 +65,21 @@ public:
 
 public slots:
     void volumeChanged( bool muted );
-    void micChanged( bool muted );
-
     void setVolume( int percent );
-    void setMic( int percent );
-
     void sliderMoved( int percent );
-    void micMoved( int percent );
     void mute( bool );
-
-	void showVolControl(bool showMic = FALSE);
-	void advVolControl();
 
 private:
     void readSystemVolume();
-	void readSystemMic();
-
     void writeSystemVolume();
-    void writeSystemMic();
-
-	void keyPressEvent ( QKeyEvent * e );
     void mousePressEvent( QMouseEvent * );
-	void mouseReleaseEvent( QMouseEvent *);
     void paintEvent( QPaintEvent* );
 
 private:
-    int volumePercent, micPercent;
-    bool muted, micMuted;
+    int volumePercent;
+    bool muted;
     QPixmap volumePixmap;
-    QTimer *advancedTimer;
 };
 
 
 #endif // __VOLUME_APPLET_H__
-
