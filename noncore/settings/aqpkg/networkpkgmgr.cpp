@@ -94,9 +94,10 @@ void NetworkPackageManager :: updateData()
     int i;
     for ( i = 0, it = dataMgr->getServerList().begin() ; it != dataMgr->getServerList().end() ; ++it, ++i )
     {
-        cout << "Adding " << it->getServerName() << " to combobox" << endl;
+//        cout << "Adding " << it->getServerName() << " to combobox" << endl;
         if ( !it->isServerActive() )
         {
+            cout << it->getServerName() << " is not active" << endl;
             i--;
             continue;
         }
