@@ -194,8 +194,8 @@ public:
 
 	QString systemVersionString ( ) const;
 
-	virtual Transformation rotation ( ) const;
-	virtual ODirection direction ( ) const;
+    /*virtual*/ Transformation rotation ( ) const;
+    /*virtual*/ ODirection direction ( ) const;
 
 // system
 
@@ -229,8 +229,8 @@ public:
 	virtual int readLightSensor ( );
 	virtual int lightSensorResolution ( ) const;
 
-	virtual bool hasHingeSensor ( ) const;
-	virtual OHingeStatus readHingeSensor ( );
+    /*virtual*/ bool hasHingeSensor ( ) const;
+    /*virtual*/ OHingeStatus readHingeSensor ( );
 
 	const QStrList &allowedCpuFrequencies() const;
 	bool setCurrentCpuFrequency(uint index);
@@ -278,6 +278,22 @@ protected:
 	void reloadButtonMapping ( );
         /*  ugly virtual hook */
         virtual void virtual_hook( int id, void* data );
+
+protected:
+    enum { VIRTUAL_ROTATION = 0x200, VIRTUAL_DIRECTION,
+           VIRTUAL_HAS_HINGE, VIRTUAL_HINGE };
+    struct VirtRotation {
+        Transformation trans;
+    };
+    struct VirtDirection {
+        ODirection direct;
+    };
+    struct VirtHasHinge {
+        bool hasHinge;
+    };
+    struct VirtHingeStatus {
+        OHingeStatus hingeStat;
+    };
 };
 
 }

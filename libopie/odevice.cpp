@@ -75,6 +75,7 @@ public:
 	QValueList <ODeviceButton> *m_buttons;
 	uint                        m_holdtime;
 	QStrList                   *m_cpu_frequencies;
+
 };
 
 class iPAQ : public ODevice, public QWSServer::KeyboardFilter {
@@ -140,21 +141,22 @@ public:
 	virtual OLedState ledState ( OLed led ) const;
 	virtual bool setLedState ( OLed led, OLedState st );
 
-	virtual bool hasHingeSensor() const;
-	virtual OHingeStatus readHingeSensor();
+	bool hasHingeSensor() const;
+	OHingeStatus readHingeSensor();
 
 	static bool isZaurus();
 
 	// Does this break BC?
 	virtual bool suspend ( );
-	virtual Transformation rotation ( ) const;
-	virtual ODirection direction ( ) const;
+	Transformation rotation ( ) const;
+	ODirection direction ( ) const;
 
 protected:
 	virtual void buzzer ( int snd );
 
 	OLedState m_leds [1];
 	bool m_embedix;
+        void virtual_hook( int id, void *data );
 };
 
 class SIMpad : public ODevice, public QWSServer::KeyboardFilter {
@@ -444,7 +446,7 @@ ODevice *ODevice::inst ( )
 {
 	static ODevice *dev = 0;
 
-	if ( !dev ) {		
+	if ( !dev ) {
 		if ( QFile::exists ( "/proc/hal/model" ))
 			dev = new iPAQ ( );
 		else if ( Zaurus::isZaurus() )
@@ -728,7 +730,10 @@ QString ODevice::systemVersionString ( ) const
  */
 Transformation ODevice::rotation ( ) const
 {
-	return d-> m_rotation;
+    VirtRotation rot;
+    ODevice* that =(ODevice* )this;
+    that->virtual_hook( VIRTUAL_ROTATION, &rot );
+    return rot.trans;
 }
 
 /**
@@ -736,7 +741,10 @@ Transformation ODevice::rotation ( ) const
  */
 ODirection ODevice::direction ( ) const
 {
-	return d-> m_direction;
+    VirtDirection dir;
+    ODevice* that =(ODevice* )this;
+    that->virtual_hook( VIRTUAL_DIRECTION, &dir );
+    return dir.direct;
 }
 
 /**
@@ -846,7 +854,10 @@ int ODevice::lightSensorResolution ( ) const
  */
 bool ODevice::hasHingeSensor ( ) const
 {
-	return false;
+    VirtHasHinge hing;
+    ODevice* that =(ODevice* )this;
+    that->virtual_hook( VIRTUAL_HAS_HINGE, &hing );
+    return hing.hasHinge;
 }
 
 /**
@@ -854,7 +865,9 @@ bool ODevice::hasHingeSensor ( ) const
  */
 OHingeStatus ODevice::readHingeSensor ( )
 {
-	return CASE_UNKNOWN;
+    VirtHingeStatus hing;
+    virtual_hook( VIRTUAL_HINGE, &hing );
+    return hing.hingeStat;
 }
 
 /**
@@ -1003,8 +1016,29 @@ void ODevice::remapHeldAction ( int button, const OQCopMessage &action )
 
 	QCopEnvelope ( "QPE/System", "deviceButtonMappingChanged()" );
 }
-void ODevice::virtual_hook(int, void* ){
-
+void ODevice::virtual_hook(int id, void* data){
+    switch( id ) {
+    case VIRTUAL_ROTATION:{
+        VirtRotation* rot = reinterpret_cast<VirtRotation*>( data );
+        rot->trans = d->m_rotation;
+        break;
+    }
+    case VIRTUAL_DIRECTION:{
+        VirtDirection *dir = reinterpret_cast<VirtDirection*>( data );
+        dir->direct = d->m_direction;
+        break;
+    }
+    case VIRTUAL_HAS_HINGE:{
+        VirtHasHinge *hin = reinterpret_cast<VirtHasHinge*>( data );
+        hin->hasHinge = false;
+        break;
+    }
+    case VIRTUAL_HINGE:{
+        VirtHingeStatus *hin = reinterpret_cast<VirtHingeStatus*>( data );
+        hin->hingeStat = CASE_UNKNOWN;
+        break;
+    }
+    }
 }
 
 /**************************************************
@@ -1040,10 +1074,10 @@ void Yopy::init ( )
   d-> m_modelstr = "Yopy3700";
   d-> m_model = Model_Yopy_3700;
   d-> m_rotation = Rot0;
-  
+
   d-> m_systemstr = "Linupy";
   d-> m_system = System_Linupy;
-  
+
   QFile f ( "/etc/issue" );
   if ( f. open ( IO_ReadOnly )) {
     QTextStream ts ( &f );
@@ -1063,7 +1097,7 @@ void Yopy::initButtons ( )
   for (uint i = 0; i < ( sizeof( yopy_buttons ) / sizeof(yopy_button)); i++) {
 
     yopy_button *ib = yopy_buttons + i;
-    
+
     ODeviceButton b;
 
     b. setKeycode ( ib-> code );
@@ -1077,16 +1111,16 @@ void Yopy::initButtons ( )
     d-> m_buttons-> append ( b );
   }
   reloadButtonMapping ( );
-  
+
   QCopChannel *sysch = new QCopChannel("QPE/System", this);
-  connect(sysch, SIGNAL(received(const QCString &, const QByteArray & )), 
+  connect(sysch, SIGNAL(received(const QCString &, const QByteArray & )),
 	  this, SLOT(systemMessage(const QCString &, const QByteArray & )));
 }
 
 bool Yopy::suspend()
 {
-  /* Opie for Yopy does not implement its own power management at the 
-     moment.  The public version runs parallel to X, and relies on the 
+  /* Opie for Yopy does not implement its own power management at the
+     moment.  The public version runs parallel to X, and relies on the
      existing power management features. */
   return false;
 }
@@ -1543,7 +1577,7 @@ bool Zaurus::isZaurus()
 	// If the special devices by embedix exist, it is quite simple: it is a Zaurus !
 	if ( QFile::exists ( "/dev/sharp_buz" ) || QFile::exists ( "/dev/sharp_led" ) ){
 		return true;
-	}	
+	}
 
 	// On non-embedix kernels, we have to look closer.
 	bool is_zaurus = false;
@@ -1821,7 +1855,7 @@ void Zaurus::buzzer ( int sound )
 		bool vol_reset = false;
 
 		Sound snd ( soundname );
-		
+
 		if (( fd = ::open ( "/dev/sound/mixer", O_RDWR )) >= 0 ) {
 			if ( ::ioctl ( fd, MIXER_READ( 0 ), &vol ) >= 0 ) {
 				Config cfg ( "qpe" );
@@ -1848,15 +1882,15 @@ void Zaurus::buzzer ( int sound )
 				::ioctl ( fd, MIXER_WRITE( 0 ), &vol );
 			::close ( fd );
 		}
-	} else {		
+	} else {
 		int fd = ::open ( "/dev/sharp_buz", O_WRONLY|O_NONBLOCK );
-		
+
 		if ( fd >= 0 ) {
 			::ioctl ( fd, SHARP_BUZZER_MAKESOUND, sound );
 			::close ( fd );
 		}
 
-	} 
+	}
 #endif
 }
 
@@ -2066,9 +2100,9 @@ Transformation Zaurus::rotation ( ) const
 				retval = ::ioctl(handle, SHARP_IOCTL_GET_ROTATION);
 				::close (handle);
 
-				if (retval == 2 ) 
+				if (retval == 2 )
 					rot = Rot0;
-				else 
+				else
 					rot = Rot270;
 			}
 			break;
@@ -2152,6 +2186,34 @@ OHingeStatus Zaurus::readHingeSensor()
     }
 }
 
+
+void Zaurus::virtual_hook( int id, void *data ) {
+    switch( id ) {
+    case VIRTUAL_ROTATION:{
+        VirtRotation* rot = reinterpret_cast<VirtRotation*>( data );
+        rot->trans = rotation();
+        break;
+    }
+    case VIRTUAL_DIRECTION:{
+        VirtDirection *dir = reinterpret_cast<VirtDirection*>( data );
+        dir->direct = direction();
+        break;
+    }
+    case VIRTUAL_HAS_HINGE:{
+        VirtHasHinge *hin = reinterpret_cast<VirtHasHinge*>( data );
+        hin->hasHinge = hasHingeSensor();
+        break;
+    }
+    case VIRTUAL_HINGE:{
+        VirtHingeStatus *hin = reinterpret_cast<VirtHingeStatus*>( data );
+        hin->hingeStat = readHingeSensor();
+        break;
+    }
+    default:
+        ODevice::virtual_hook( id, data );
+        break;
+    }
+}
 
 /**************************************************
  *
