@@ -205,9 +205,13 @@ void AdvancedFm::doDelete()
       f += myFile;
       if(QDir(f).exists() && !QFileInfo(f).isSymLink() ) //if file is a directory
         {
-        switch ( QMessageBox::warning( this, tr("Delete Directory?"), tr("Really delete\n") + f +
-                                      "\nand all it's contents ?"
-                                      ,tr("Yes"),tr("No"),0,0,1) )
+        switch ( QMessageBox::warning( this, tr("Delete Directory?"), 
+					tr("Really delete %1\nand all it's contents ?" ).arg( f ) ,
+					tr("Yes"),
+					tr("No"),
+					0,
+					0,
+					1) )
           {
         case 0:
         {
@@ -224,8 +228,13 @@ void AdvancedFm::doDelete()
 
       } else {
           if(doMsg) {
-        switch ( QMessageBox::warning(this,tr("Delete"),tr("Really delete\n")+f
-                 +" ?",tr("Yes"),tr("No"),0,0,1) ) {
+        switch ( QMessageBox::warning(this,tr("Delete"),
+					tr("Really delete\n%1?").arg( f ),
+				 tr("Yes"),
+				 tr("No"),
+				 0,
+				 0,
+				 1) ) {
           case 1:
               return;
               break;
