@@ -57,7 +57,7 @@ void NoticeConfigWidget::writeConfig()
 /// reset the notice text to the hard-coded example defaultNoticeText
 void NoticeConfigWidget::resetNotice()
 {
-    noticeMLE->setText(defaultNoticeText);
+    noticeMLE->setText(QObject::tr(defaultNoticeText));
 }
 
 /// get the notice text from the config file (with true new lines)
@@ -68,7 +68,7 @@ QString NoticeConfigWidget::getNoticeText() {
     m_config = new Config("Security");
     m_config->setGroup("NoticePlugin");
     // Note: C++ processes '\' character, so we have to type \\\\ to mean \\ to QRegExp
-    QString noticeText = m_config->readEntry("noticeText", defaultNoticeText).replace( QRegExp("\\\\n"), "\n" );
+    QString noticeText = m_config->readEntry("noticeText", QObject::tr(defaultNoticeText) ).replace( QRegExp("\\\\n"), "\n" );
     delete m_config;
     return noticeText;
 }

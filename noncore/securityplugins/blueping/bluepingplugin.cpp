@@ -26,8 +26,7 @@ BluepingPlugin::BluepingPlugin() : MultiauthPluginObject(), m_ping(0) {
 /// deletes the m_config Config object and noticeW if necessary
 BluepingPlugin::~BluepingPlugin() {
     delete m_config;
-    if (m_ping != 0)
-        delete m_ping;
+    delete m_ping;
 }
 
 /// Simply return its name (Blueping plugin)

@@ -81,6 +81,6 @@ int NoticePlugin::authenticate() {
  */
 QString NoticePlugin::getNoticeText() {
       // Note: C++ processes '\' character, so we have to type \\\\ to mean \\ to QRegExp
-      return m_config->readEntry("noticeText", defaultNoticeText).replace( QRegExp("\\\\n"), "\n" );
+    return m_config->readEntry("noticeText", QObject::tr(defaultNoticeText)).replace( QRegExp("\\\\n"), "\n" );
 }
 

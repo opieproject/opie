@@ -20,9 +20,7 @@ int main(int argc, char **argv) {
             show = false;
         }
     }
-    if ( show == true )
-    {
-    printf("building dialog\n");
+    if ( show == true ){
         MultiauthConfig dialog;
         app.setMainWidget(&dialog);
 

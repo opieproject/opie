@@ -40,14 +40,14 @@
 
 #include <opie2/multiauthconfigwidget.h>
 
-static char defaultNoticeText [] = "<h2>NOTICE TO USERS</h2>\n"
+static char defaultNoticeText [] = QT_TRANSLATE_NOOP( "QObject", "<h2>NOTICE TO USERS</h2>\n"
         "<p>This is a private computer system and is the property of "
         "the company XXX / Mr or Ms X. It is for authorized "
         "use only. Users have no expectation of privacy.</p>\n"
         "<p><strong>Unauthorized or improper use of this system may result in "
         "disciplinary action and civil and criminal penalties. <em>By continuing to use "
         "this system you indicate your awareness of and consent to these "
-        "terms. LOG OFF IMMEDIATELY if you do not agree to them.</em></strong></p>";
+        "terms. LOG OFF IMMEDIATELY if you do not agree to them.</em></strong></p>");
 
 class NoticeConfigWidget : public Opie::Security::MultiauthConfigWidget {
 

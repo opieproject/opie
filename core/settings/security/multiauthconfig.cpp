@@ -412,7 +412,6 @@ void MultiauthConfig::pluginsChanged() {
 /// loads each multiauth plugin
 void MultiauthConfig::loadPlugins() {
 
-    odebug << "loading plugins..." << oendl;
     QString path = QPEApplication::qpeDir() + "/plugins/security";
     QDir dir( path, "lib*.so" );
 
@@ -426,12 +425,8 @@ void MultiauthConfig::loadPlugins() {
         QInterfacePtr<MultiauthPluginInterface> iface;
         QLibrary *lib = new QLibrary( path + "/" + *it );
         QString libPath(path + "/" + *it);
-        odebug << "library path: " << libPath << oendl;
 
-        odebug <<  "querying: " << QString( path + "/" + *it ) << oendl;
         if ( lib->queryInterface( IID_MultiauthPluginInterface, (QUnknownInterface**)&iface ) == QS_OK ) {
-            odebug <<  "accepted: " << QString( path + "/" + *it ) << oendl;
-
             MultiauthPlugin plugin;
             plugin.library = lib;
             plugin.iface = iface;
@@ -459,7 +454,6 @@ void MultiauthConfig::loadPlugins() {
             }
 
         } else {
-            odebug <<  "could not recognize " << QString( path + "/" + *it ) << oendl;
             delete lib;
         }
 
