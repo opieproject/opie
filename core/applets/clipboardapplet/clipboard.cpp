@@ -122,12 +122,13 @@ ClipboardApplet::ClipboardApplet( QWidget *parent, const char *name ) : QWidget(
 	setFixedHeight ( 18 );
 	m_clipboardPixmap = QPixmap ( paste_xpm );
 
-	QTimer *timer = new QTimer ( this );
+	m_timer = new QTimer ( this );
 	
 	connect ( QApplication::clipboard ( ), SIGNAL( dataChanged ( )), this, SLOT( newData ( )));
-	connect ( timer, SIGNAL( timeout ( )), this, SLOT( newData ( )));
+	connect ( m_timer, SIGNAL( timeout ( )), this, SLOT( newData ( )));
+	connect ( qApp, SIGNAL( aboutToQuit ( )), this, SLOT( shutdown ( )));
 
-	timer-> start ( 1000 );
+	m_timer-> start ( 1500 );
 	
 	m_menu = 0;
 	m_dirty = true;
@@ -136,6 +137,14 @@ ClipboardApplet::ClipboardApplet( QWidget *parent, const char *name ) : QWidget(
 
 ClipboardApplet::~ClipboardApplet ( )
 {
+}
+
+void ClipboardApplet::shutdown ( )
+{
+	// the timer has to be stopped, or Qt/E will hang on quit()
+	// see launcher/desktop.cpp
+
+	m_timer-> stop ( );
 }
 
 void ClipboardApplet::mousePressEvent ( QMouseEvent *)

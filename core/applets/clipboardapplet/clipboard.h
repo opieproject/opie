@@ -24,6 +24,8 @@
 #include <qpixmap.h>
 #include <qstringlist.h>
 
+class QTimer;
+
 class ClipboardApplet : public QWidget
 {
     Q_OBJECT
@@ -38,12 +40,14 @@ protected:
 private slots:
     void action ( int );
 	void newData ( );
+	void shutdown ( );
 
 private:
     QPopupMenu * m_menu;
     QStringList  m_history;
     bool         m_dirty;
     QString      m_lasttext;
+    QTimer *     m_timer;
     
     QPixmap      m_clipboardPixmap;
 };

@@ -686,6 +686,12 @@ void DesktopApplication::shutdown( ShutdownImpl::Type t )
       break;
   case ShutdownImpl::TerminateDesktop:
       prepareForTermination(FALSE);
+      
+      // This is a workaround for a Qt bug
+      // clipboard applet has to stop its poll timer, or Qt/E
+      // will hang on quit() right before it emits aboutToQuit()      
+      emit aboutToQuit ( );
+      
       quit();
       break;
     }
