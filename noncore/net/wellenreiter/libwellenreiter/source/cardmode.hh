@@ -1,4 +1,4 @@
-/* $Id: cardmode.hh,v 1.3 2002-12-11 13:10:26 mickeyl Exp $ */
+/* $Id: cardmode.hh,v 1.4 2002-12-11 14:57:54 mickeyl Exp $ */
 
 #ifndef CARDMODE_HH
 #define CARDMODE_HH
@@ -26,7 +26,7 @@ extern "C"
 
 /* only for now, until we have the daemon running */
 /*the config file should provide these information */
-#define   CARD_TYPE              CARD_TYPE_CISCO
+#define   CARD_TYPE              CARD_TYPE_HOSTAP
 #define   SBIN_PATH	         "/sbin/ifconfig %s promisc up"
 #define   WLANCTL_PATH           "/sbin/wlanctl-ng"
 

@@ -1,7 +1,7 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.9 2002-12-04 19:51:46 mjm Exp $
+ * $Id: daemon.cc,v 1.10 2002-12-11 14:57:54 mickeyl Exp $
  */
 
 #include "config.hh"
@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 
   fprintf(stderr, "wellenreiterd %s\n\n", VERSION);
 
-  if(!card_into_monitormode(&handletopcap, SNIFFER_DEVICE, CARD_TYPE_NG))
+  if(!card_into_monitormode(&handletopcap, SNIFFER_DEVICE, CARD_TYPE))
   {
     wl_logerr("Cannot set card into mon mode, aborting");
     exit(-1);
