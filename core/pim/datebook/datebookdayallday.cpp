@@ -40,7 +40,8 @@ DatebookdayAllday::DatebookdayAllday(DateBookDB* db, QWidget* parent,  const cha
     m_MainFrame = new QFrame(viewport());
     m_MainFrame->setFrameStyle(QFrame::NoFrame|QFrame::Plain);
     setFrameStyle(QFrame::NoFrame|QFrame::Plain);
-    setResizePolicy( QScrollView::AutoOneFit );
+    setResizePolicy( QScrollView::Default );
+    setHScrollBarMode( AlwaysOff );
     addChild(m_MainFrame);
 
     datebookdayalldayLayout = new QVBoxLayout( m_MainFrame );
@@ -65,9 +66,10 @@ DatebookAlldayDisp* DatebookdayAllday::addEvent(const EffectiveEvent&ev)
 {
     DatebookAlldayDisp * lb;
     lb = new DatebookAlldayDisp(dateBook,ev,m_MainFrame,NULL);
+    lb->show();
     datebookdayalldayLayout->addWidget(lb);
     subWidgets.append(lb);
-    
+
     connect(lb,SIGNAL(displayMe(const Event &)),lblDesc,SLOT(disp_event(const Event&)));
     ++item_count;
 
@@ -89,7 +91,7 @@ DatebookAlldayDisp::DatebookAlldayDisp(DateBookDB *db,const EffectiveEvent& ev,
     setBackgroundColor(yellow);
     setText(strDesc);
     setFrameStyle(QFrame::Raised|QFrame::Panel);
-    
+
     int s = QFontMetrics(font()).height()+4;
     setMaximumHeight( s );
     setMinimumSize( QSize( 0, s ) );
