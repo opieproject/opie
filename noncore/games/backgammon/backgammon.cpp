@@ -25,7 +25,7 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
         : QMainWindow(parent, name, fl)
 {
     if (!name) setName("BackGammon");
-    setCaption("Backgammon");
+    setCaption(tr( "Backgammon") );
     setIcon( Resource::loadPixmap( "backgammon" ) );
     //general counter varaible
     int a=0;
@@ -105,30 +105,30 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
     QPEMenuBar* menuBar = new QPEMenuBar(this);
 
     QPopupMenu* gamemenu= new QPopupMenu(this);
-    gamemenu->insertItem("New",this,SLOT(newgame()));
+    gamemenu->insertItem(tr( "New" ),this,SLOT(newgame()));
     gamemenu->insertSeparator();
-    gamemenu->insertItem("Load",this,SLOT(loadgame()));
-    gamemenu->insertItem("Save",this,SLOT(savegame()));
+    gamemenu->insertItem(tr( "Load" ),this,SLOT(loadgame()));
+    gamemenu->insertItem(tr( "Save" ),this,SLOT(savegame()));
     gamemenu->insertSeparator();
-    gamemenu->insertItem("Delete",this,SLOT(deletegame()));
-    menuBar->insertItem("Game",gamemenu);
+    gamemenu->insertItem(tr( "Delete" ),this,SLOT(deletegame()));
+    menuBar->insertItem(tr( "Game" ),gamemenu);
 
     QPopupMenu* thememenu= new QPopupMenu(this);
-    thememenu->insertItem("New",this,SLOT(newtheme()));
+    thememenu->insertItem(tr( "New" ),this,SLOT(newtheme()));
     thememenu->insertSeparator();
-    thememenu->insertItem("Load",this,SLOT(loadtheme()));
-    thememenu->insertItem("Save",this,SLOT(savetheme()));
+    thememenu->insertItem(tr( "Load"),this,SLOT(loadtheme()));
+    thememenu->insertItem(tr( "Save" ),this,SLOT(savetheme()));
     thememenu->insertSeparator();
-    thememenu->insertItem("Default",this,SLOT(themedefault()));
-    thememenu->insertItem("Delete",this,SLOT(deletetheme()));
-    menuBar->insertItem("Theme",thememenu);
+    thememenu->insertItem(tr( "Default"),this,SLOT(themedefault()));
+    thememenu->insertItem(tr( "Delete" ),this,SLOT(deletetheme()));
+    menuBar->insertItem(tr( "Theme" ),thememenu);
 
     QPopupMenu* optionmenu=new QPopupMenu(this);
-    optionmenu->insertItem("Player",this,SLOT(playerselect()));
+    optionmenu->insertItem(tr( "Player" ),this,SLOT(playerselect()));
     optionmenu->insertSeparator();
-    optionmenu->insertItem("AI",this,SLOT(modify_AI()));
-    optionmenu->insertItem("Rules",this,SLOT(setrules()));
-    menuBar->insertItem("Options",optionmenu);
+    optionmenu->insertItem(tr( "AI" ),this,SLOT(modify_AI()));
+    optionmenu->insertItem(tr( "Rules" ),this,SLOT(setrules()));
+    menuBar->insertItem(tr( "Options"),optionmenu);
 
 	QWidget* mainarea=new QWidget(this);
 	setCentralWidget(mainarea);
@@ -510,7 +510,7 @@ void BackGammon::deletetheme()
     theme_name=file->filename();
     QString theme_file=QPEApplication::qpeDir()+"/backgammon/"+theme_name+".theme";
 
-    if(!QMessageBox::warning(this,"Backgammon","deleted theme "+theme_name+" ?","OK","Cancel"))
+    if(!QMessageBox::warning(this,tr( "Backgammon" ),tr( "deleted theme %1?").arg(theme_name),tr( "OK" ),tr( "Cancel" )))
     {
       QFile(theme_file).remove();
     }
@@ -518,7 +518,7 @@ void BackGammon::deletetheme()
 
 void BackGammon::modify_AI()
 {
-    AI_Dialog* ai_mod=new AI_Dialog(this,"Load Theme",".theme");
+    AI_Dialog* ai_mod=new AI_Dialog(this,tr( "Load Theme" ),".theme");
     ai_mod->setAISettings(move->getAISettings());
     if(!ai_mod->exec())
         return;
@@ -539,7 +539,7 @@ void BackGammon::modify_AI()
 
 void BackGammon::setrules()
 {
-    RulesDialog* rulesdialog=new RulesDialog(this,"Load Theme",".theme");
+    RulesDialog* rulesdialog=new RulesDialog(this,tr( "Load Theme" ),".theme");
     rulesdialog->setRules(rules);
     if(!rulesdialog->exec())
         return;
@@ -799,7 +799,7 @@ void BackGammon::nomove()
     else
         nomove_marker->setX(170);
     nomove_marker->show();
-    message->setText("<b>no move</b>");
+    message->setText(tr( "<b>no move</b>" ));
     dice1_played=true;
     dice2_played=true;
     dice3_played=true;
@@ -835,9 +835,9 @@ void BackGammon::finished(int theplayer)
 {
     nomove_marker->hide();
     if(theplayer==1)
-        message->setText("<b>Player 1 wins. Click on board for new game.</b>");
+        message->setText(tr( "<b>Player 1 wins. Click on board for new game.</b>" ));
     else
-        message->setText("<b>Player 2 wins. Click on board for new game.</b>");
+        message->setText(tr( "<b>Player 2 wins. Click on board for new game.</b>" ));
     diceA1_value=7;
     diceA2_value=7;
     diceB1_value=7;
@@ -895,7 +895,7 @@ void BackGammon::setplayer()
 {
     if(dice1_played && dice2_played && dice3_played && dice4_played && player==1)
     {
-        message->setText("<b>P2 turn</b>");
+        message->setText(tr( "<b>P2 turn</b>", "P means player" ));
         dice_rolled=false;
         player=2;
         if(player2_auto)
@@ -903,7 +903,7 @@ void BackGammon::setplayer()
     }
     else if(dice1_played && dice2_played && dice3_played && dice4_played && player==2)
     {
-        message->setText("<b>P1 turn</b>");
+        message->setText(tr( "<b>P1 turn</b>", "P means player" ));
         dice_rolled=false;
         player=1;
         if(player1_auto)
