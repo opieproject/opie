@@ -1,5 +1,5 @@
-File: bin/tabmanager apps/Settings/tabmanager.desktop pics/tabmanager/tabmanager.png
 Package: tabmanager
+Files: bin/tabmanager apps/Settings/tabmanager.desktop pics/tabmanager/tabmanager.png
 Priority: optional
 Version: 1.0
 Architecture: arm
