@@ -3,206 +3,206 @@
     <name>LauncherSettings</name>
     <message>
         <source>Launcher Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Launcher instellingen</translation>
     </message>
     <message>
         <source>Taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Taakbalk</translation>
     </message>
     <message>
         <source>O-Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>O-Menu</translation>
     </message>
     <message>
         <source>Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabbladen</translation>
     </message>
 </context>
 <context>
     <name>MenuSettings</name>
     <message>
         <source>Load applets in O-Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Laad applets in O-Menu:</translation>
     </message>
     <message>
         <source>Show Launcher tabs in O-Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat Launcher tabbladen zien in O_Menu</translation>
     </message>
     <message>
         <source>Check the applets that you want to have included in the O-Menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vink de applets aan die je wilt gebruiken in het O-menu.</translation>
     </message>
     <message>
         <source>Adds the contents of the Launcher Tabs as menus in the O-Menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voegt de inhoud van de Launcher tabbladen toe aan het O-Menu.</translation>
     </message>
 </context>
 <context>
     <name>SampleView</name>
     <message>
         <source>Sample 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorbeeld 1</translation>
     </message>
     <message>
         <source>Sample 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorbeeld 2</translation>
     </message>
     <message>
         <source>Sample 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorbeeld 3</translation>
     </message>
 </context>
 <context>
     <name>TabDialog</name>
     <message>
         <source>Edit Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig Tabblad</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtergrond</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettertype</translation>
     </message>
     <message>
         <source>Icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Iconen</translation>
     </message>
     <message>
         <source>Previewing %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorbeeld %1</translation>
     </message>
     <message>
         <source>This is a rough preview of what the currently selected Tab will look like.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit is een ruw voorbeeld van hoe het geselecteerde tabblad eruit zal zien.</translation>
     </message>
     <message>
         <source>Use a custom font</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik een eigen lettertype</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Type:</translation>
     </message>
     <message>
         <source>Ruled</source>
-        <translation type="unfinished"></translation>
+        <translation>Geregeld</translation>
     </message>
     <message>
         <source>Solid color</source>
-        <translation type="unfinished"></translation>
+        <translation>Vulkleur</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Plaatje</translation>
     </message>
     <message>
         <source>Select...</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer...</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Satandaard</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Grootte:</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation type="unfinished"></translation>
+        <translation>Klein</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Groot</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleur:</translation>
     </message>
 </context>
 <context>
     <name>TabsSettings</name>
     <message>
         <source>Launcher Tabs:</source>
-        <translation type="unfinished"></translation>
+        <translation>Launcher tabbladen:</translation>
     </message>
     <message>
         <source>foobar</source>
-        <translation type="unfinished"></translation>
+        <translation>foo-balk</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Enable big busy indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik groot &apos;bezig&apos; icoon</translation>
     </message>
     <message>
         <source>Enable blinking busy indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik knipperend &apos;bezig&apos; icoon</translation>
     </message>
     <message>
         <source>Select the Launcher Tab you want to edit or delete.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer het Launcher tabblad dat je wilt wijzigen of verwijderen.</translation>
     </message>
     <message>
         <source>Adds a new Tab to the Launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voegt een nieuwe tab toe aan de Launcher.</translation>
     </message>
     <message>
         <source>Opens a new dialog to customize the select Tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Opent een nieuwe dialoog om de geselecteerde tab te veranderen.</translation>
     </message>
     <message>
         <source>Deletes a Tab from the Launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijdert een tab van de Launcher.</translation>
     </message>
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activeer dit als je een groot &apos;bezig&apos; icoon in het midden van het scherm wilt ipv een in de taakbalk.</translation>
     </message>
     <message>
         <source>Activate this, if you want a blinking busy indicator for starting applications in the Launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activeer dit als je een knipperend &apos;bezig&apos; icoon wilt bij het starten van programma&apos;s in de Launcher.</translation>
     </message>
     <message>
         <source>All Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle tabbladen</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Documenten</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <source>Not implemented yet</source>
-        <translation type="unfinished"></translation>
+        <translation>Nog niet geimplementeerd</translation>
     </message>
 </context>
 <context>
     <name>TaskbarSettings</name>
     <message>
         <source>Load applets in Taskbar:</source>
-        <translation type="unfinished"></translation>
+        <translation>Laad applets in de Taakbalk:</translation>
     </message>
     <message>
         <source>Check the applets that you want displayed in the Taskbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vink de applets aan die je in de taakbalk wilt hebben.</translation>
     </message>
 </context>
 </TS>

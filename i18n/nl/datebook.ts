@@ -217,7 +217,7 @@ Toch afsluiten?</translation>
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished">Kalender</translation>
+        <translation>Kalender</translation>
     </message>
 </context>
 <context>
@@ -316,23 +316,23 @@ Toch afsluiten?</translation>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaardinst.</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Locatie:</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished">Kantoor</translation>
+        <translation>Kantoor</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished">Thuis</translation>
+        <translation>Thuis</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie:</translation>
     </message>
 </context>
 <context>
@@ -346,7 +346,7 @@ Toch afsluiten?</translation>
     <name>DateBookWeekHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>w</translation>
     </message>
 </context>
 <context>
@@ -360,7 +360,7 @@ Toch afsluiten?</translation>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>w</translation>
     </message>
 </context>
 <context>
