@@ -1,0 +1,76 @@
+#!/bin/sh
+# This script creates a full destination copy of Opie ready to be rsynced
+# across to your handheld. It creates $TARGET/list which is a list of control
+# files it sees as valid packages from your compiled tree and by commenting
+# out a package from this file it will not be copied to your dest dir.
+# As new packages are compiled and seen as valid and complete it will append
+# these to the end of the existing list file. You can comment out as required.
+# I generally do a make && ./scripts/cptarget && /opt/target/load to do
+# crash and burn testing on my iPAQ.
+# /opt/target/load is a script that uses ssh to stop Opie, rsync to update it
+# it then re-generates the font-config files and restarts Opie.
+# Hope this is of some use to other people. Probably not though.
+# Most of it was ripped out of the mkipks script
+
+TARGET=/opt/target
+QTE_BASEVERSION=2.3.7
+rm -rf $TARGET/etc $TARGET/usr $TARGET/opt
+cd $OPIEDIR
+for i in `find . -name "*.control"` ; do
+	FILES=$(eval echo $(sed -n -e "s/^Files://p" $i))
+	RES=0
+	echo $i
+	for x in $FILES ; do
+		test -e $x || RES=1
+	echo $x $RES
+	done;
+if [ "$RES" -eq "0" ] ; then
+	control=`basename $i`
+	if [ -z "`sed -n /^$control/p $TARGET/list`" ] && [ -z "`sed -n /^#$control/p $TARGET/list`" ] ; then
+		echo $control >> $TARGET/list
+	fi;
+	if [ ! -z "`sed -n /^#$control/p $TARGET/list`" ] ; then
+		echo Aborting on comment $control
+		continue
+	fi;
+	for x in $FILES ; do
+	case $x in
+		*/CVS/*)
+		continue
+	;;      *~)
+		continue
+	;;      *.control)
+		continue
+	;; $QTDIR/*)
+		BASE=$(dirname /opt/QtPalmtop/${x#$QTDIR/})
+	;; etc/*.d/*)
+		BASE=$(dirname /$x)
+	;; root/*)
+		BASE=$(dirname ${x#root})
+	;; lib/*)
+		BASE=$(dirname /opt/QtPalmtop/$x)
+	;; $OPIEDIR/lib/*)
+		BASE=$(dirname /opt/QtPalmtop/${x#$OPIEDIR/})
+	;; $OPIEDIR/root/*)
+		BASE=$(dirname /${x#$OPIEDIR/root/})
+	;; *)
+		# For SHARP ROM compatibility. Should change to Qtopia.
+		BASE=/opt/QtPalmtop/$(dirname $x)
+	esac
+	t=`basename $x`
+	if [ "$t" = "CVS" ] ; then
+		continue
+	fi;
+	y=$BASE
+	echo $x $t $TARGET/$y
+	test -d $TARGET/$y || mkdir -p $TARGET/$y
+	touch -d "1/2/2004 12:00pm" $TARGET/$y
+	if [ -d $x ] ; then
+		cp -a $x $TARGET/$y/$t
+	else
+		cp -p --no-dereference $x $TARGET/$y/$t
+	fi;
+	done;
+fi;
+done;
+rm `find $TARGET -name CVS -type d` -rf
