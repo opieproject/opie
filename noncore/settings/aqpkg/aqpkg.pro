@@ -5,6 +5,7 @@ HEADERS		= global.h \
 		  datamgr.h \
 		  settingsimpl.h \
 		  ipkg.h \
+		  packagewin.h \
 		  package.h \
 		  installdlgimpl.h \
 		  instoptionsimpl.h \
@@ -20,6 +21,7 @@ SOURCES		= mainwin.cpp \
 		  settingsimpl.cpp \
 		  ipkg.cpp \
 		  main.cpp \
+		  packagewin.cpp \
 		  package.cpp \
 		  installdlgimpl.cpp \
 		  instoptionsimpl.cpp \

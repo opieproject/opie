@@ -48,6 +48,7 @@
 #include "installdlgimpl.h"
 #include "letterpushbutton.h"
 #include "mainwin.h"
+#include "packagewin.h"
 #include "settingsimpl.h"
 #include "utils.h"
 
@@ -230,7 +231,7 @@ void MainWindow :: initMainWidget()
     QLabel *l = new QLabel( tr( "Servers:" ), networkPkgWindow );
 
     serversList = new QComboBox( networkPkgWindow );
-    connect( serversList, SIGNAL( activated( int ) ), this, SLOT( serverSelected( int ) ) );
+    connect( serversList, SIGNAL(activated(int)), this, SLOT(serverSelected(int)) );
     QWhatsThis::add( serversList, tr( "Click here to select a package feed." ) );
 
     installedIcon = Resource::loadPixmap( "installed" );
@@ -239,6 +240,9 @@ void MainWindow :: initMainWidget()
     packagesList = new QListView( networkPkgWindow );
     packagesList->addColumn( tr( "Packages" ), 225 );
     QWhatsThis::add( packagesList, tr( "This is a listing of all packages for the server feed selected above.\n\nA blue dot next to the package name indicates that the package is currently installed.\n\nA blue dot with a star indicates that a newer version of the package is available from the server feed.\n\nClick inside the box at the left to select a package." ) );
+    QPEApplication::setStylusOperation( packagesList->viewport(), QPEApplication::RightOnHold );
+    connect( packagesList, SIGNAL(rightButtonPressed(QListViewItem *,const QPoint &,int)),
+             this, SLOT(slotDisplayPackage(QListViewItem *)) );
 
     QVBoxLayout *vbox = new QVBoxLayout( networkPkgWindow, 0, -1 );
     QHBoxLayout *hbox1 = new QHBoxLayout( vbox, -1 );
@@ -671,48 +675,11 @@ void MainWindow :: serverSelected( int, bool raiseProgress )
             {
                 item->setPixmap( 0, installedIcon );
             }
-
-            QString destName = "";
-            if ( package->getLocalPackage() )
-            {
-                if ( package->getLocalPackage()->getInstalledTo() )
-                    destName = package->getLocalPackage()->getInstalledTo()->getDestinationName();
-            }
-            else
-            {
-                if ( package->getInstalledTo() )
-                    destName = package->getInstalledTo()->getDestinationName();
-            }
-            if ( destName != "" )
-                new QCheckListItem( item, QString( tr( "Installed To - %1" ).arg( destName ) ) );
         }
         else
         {
             item->setPixmap( 0, nullIcon );
         }
-
-        if ( !package->isPackageStoredLocally() )
-        {
-            new QCheckListItem( item, QString( tr( "Description - %1" ).arg( package->getDescription() ) ) );
-            new QCheckListItem( item, QString( tr( "Size - %1" ).arg( package->getPackageSize() ) ) );
-            new QCheckListItem( item, QString( tr( "Section - %1" ).arg( package->getSection() ) ) );
-                    }
-        else
-            new QCheckListItem( item, QString( tr( "Filename - %1" ).arg( package->getFilename() ) ) );
-
-		if ( serverName == LOCAL_SERVER )
-		{
-        	new QCheckListItem( item, QString( tr( "V. Installed - %1" ).arg( package->getVersion() ) ) );
-		}
-		else
-		{
-        	new QCheckListItem( item, QString( tr( "V. Available - %1" ).arg( package->getVersion() ) ) );
-        	if ( package->getLocalPackage() )
-        	{
-				if ( package->isInstalled() )
-	            	new QCheckListItem( item, QString( tr( "V. Installed - %1" ).arg( package->getInstalledVersion() ) ) );
-			}
-		}
 
         packagesList->insertItem( item );
     }
@@ -1181,4 +1148,11 @@ void MainWindow :: letterPushed( QString t )
         if ( !item )
             item = (QCheckListItem *)packagesList->firstChild();
     } while ( item != start);
+}
+
+void MainWindow :: slotDisplayPackage( QListViewItem *item )
+{
+    QString itemstr( ((QCheckListItem*)item)->text() );
+    PackageWindow *p = new PackageWindow( mgr->getServer( serversList->currentText() )->getPackage( itemstr ) );
+    p->showMaximized();
 }

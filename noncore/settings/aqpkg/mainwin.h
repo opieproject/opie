@@ -31,6 +31,7 @@ class QComboBox;
 class QLabel;
 class QLineEdit;
 class QListView;
+class QListViewItem;
 class QToolBar;
 class QProgressBar;
 class QWidgetStack;
@@ -135,5 +136,6 @@ private slots:
     void downloadPackage();
     void applyChanges();
     void letterPushed( QString t );
+    void slotDisplayPackage( QListViewItem * );
 };
 #endif
