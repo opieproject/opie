@@ -237,7 +237,7 @@ void WellenreiterConfigWindow::changedStationAction(int t)
 void WellenreiterConfigWindow::getCaptureFileNameClicked()
 {
     QString name = ( (WellenreiterMainWindow*) qApp->mainWidget() )->getFileName(true);
-    odebug << "name = " << (const char*) name << "" << oendl; 
+    odebug << "name = " << name << "" << oendl; 
     if ( !name.isEmpty() )
     {
         captureFileName->setText( name );
@@ -312,11 +312,11 @@ void WellenreiterConfigWindow::performAction( const QString& type,
     }
     else
     {
-        owarn << "WellenreiterConfigWindow::performAction(): unknown type '" << (const char*) type << "'" << oendl; 
+        owarn << "WellenreiterConfigWindow::performAction(): unknown type '" << type << "'" << oendl; 
         return;
     }
 
-    odebug << "for event '" << (const char*) type << "' I'm going to perform action " << action << " (script='" << (const char*) script << "')" << oendl; 
+    odebug << "for event '" << (const char*) type << "' I'm going to perform action " << action << " (script='" << script << "')" << oendl; 
 
     switch( action )
     {
@@ -341,7 +341,7 @@ void WellenreiterConfigWindow::performAction( const QString& type,
             script = script.replace( QRegExp( "$WEP" ), wep ? QString( "true" ) : QString( "false" ) );
             script = script.replace( QRegExp( "$CHAN" ), QString::number( channel ) );
 
-            odebug << "going to call script '" << (const char*) script << "'" << oendl; 
+            odebug << "going to call script '" << script << "'" << oendl; 
             ::system( script );
             odebug << "script returned." << oendl; 
             return;

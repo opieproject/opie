@@ -19,7 +19,7 @@ bool ZkbConfig::load(const QString& file, Keymap& keymap, const QString& prefix)
 	QFile f(path+"/"+file);
 	QFileInfo fi(f);
 
-	odebug << "start loading file=" << (const char*) file.utf8() << "\n" << oendl; 
+	odebug << "start loading file=" << file.utf8() << "\n" << oendl; 
 	if (includedFiles.find(fi.absFilePath()) != includedFiles.end()) {
 		return false;
 	}
@@ -125,7 +125,7 @@ bool ZkbHandler::startStateElement(const QString& name,
 	currentStateName = prefix + name;
 	currentState = keymap.getStateByName(currentStateName);
 
-//	odebug << "state name=" << (const char*) currentStateName.utf8() << "\n" << oendl; 
+//	odebug << "state name=" << currentStateName.utf8() << "\n" << oendl; 
 
 	State* parent = 0;
 	if (!parentName.isEmpty()) {

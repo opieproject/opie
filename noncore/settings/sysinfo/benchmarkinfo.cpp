@@ -148,7 +148,7 @@ BenchmarkInfo::BenchmarkInfo( QWidget *parent, const char *name, int wFlags )
         while( !ts.eof() )
         {
             QString machline = ts.readLine();
-            odebug << "sysinfo: parsing benchmark results for '" << (const char*) machline << "'" << oendl; 
+            odebug << "sysinfo: parsing benchmark results for '" << machline << "'" << oendl; 
             QString resline = ts.readLine();
             machines.insert( machline, new QStringList( QStringList::split( ",", resline ) ) );
             machineCombo->insertItem( machline );

@@ -252,7 +252,7 @@ void WellenreiterMainWindow::demoReadFromGps()
 {
     WellenreiterConfigWindow* configwindow = WellenreiterConfigWindow::instance();
     GPS* gps = new GPS( this );
-    odebug << "Wellenreiter::demoReadFromGps(): url=gps://" << (const char*) configwindow->gpsdHost->currentText() << ":" << configwindow->gpsdPort->value() << "/" << oendl; 
+    odebug << "Wellenreiter::demoReadFromGps(): url=gps://" << configwindow->gpsdHost->currentText() << ":" << configwindow->gpsdPort->value() << "/" << oendl; 
     gps->open( configwindow->gpsdHost->currentText(), configwindow->gpsdPort->value() );
     GpsLocation loc = gps->position();
     QMessageBox::information( this, "Wellenreiter/Opie", tr( "GPS said:\n%1" ).arg( loc.dmsPosition() ) );
@@ -306,11 +306,11 @@ void WellenreiterMainWindow::fileSaveLog()
             QTextStream t( &f );
             t << mw->logWindow()->getLog();
             f.close();
-            odebug << "Saved log to file '" << (const char*) fname << "'" << oendl; 
+            odebug << "Saved log to file '" << fname << "'" << oendl; 
         }
         else
         {
-            odebug << "Problem saving log to file '" << (const char*) fname << "'" << oendl; 
+            odebug << "Problem saving log to file '" << fname << "'" << oendl; 
         }
     }
 }
@@ -327,11 +327,11 @@ void WellenreiterMainWindow::fileSaveSession()
             QDataStream t( &f );
             t << *mw->netView();
             f.close();
-            odebug << "Saved session to file '" << (const char*) fname << "'" << oendl; 
+            odebug << "Saved session to file '" << fname << "'" << oendl; 
         }
         else
         {
-            odebug << "Problem saving session to file '" << (const char*) fname << "'" << oendl; 
+            odebug << "Problem saving session to file '" << fname << "'" << oendl; 
         }
     }
 }
@@ -349,11 +349,11 @@ void WellenreiterMainWindow::fileSaveHex()
             QTextStream t( &f );
             t << mw->hexWindow()->getLog();
             f.close();
-            odebug << "Saved hex log to file '" << (const char*) fname << "'" << oendl; 
+            odebug << "Saved hex log to file '" << fname << "'" << oendl; 
         }
         else
         {
-            odebug << "Problem saving hex log to file '" << (const char*) fname << "'" << oendl; 
+            odebug << "Problem saving hex log to file '" << fname << "'" << oendl; 
         }
     }
     */
@@ -370,11 +370,11 @@ void WellenreiterMainWindow::fileLoadSession()
             QDataStream t( &f );
             t >> *mw->netView();
             f.close();
-            odebug << "Loaded session from file '" << (const char*) fname << "'" << oendl; 
+            odebug << "Loaded session from file '" << fname << "'" << oendl; 
         }
         else
         {
-            odebug << "Problem loading session from file '" << (const char*) fname << "'" << oendl; 
+            odebug << "Problem loading session from file '" << fname << "'" << oendl; 
         }
     }
 }

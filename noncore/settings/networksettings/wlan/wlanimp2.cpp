@@ -307,7 +307,7 @@ void WLANImp::writeOpts() {
 void WLANImp::rescanNeighbourhood()
 {
     QString name = interface->getInterfaceName();
-    odebug << "rescanNeighbourhood via '" << (const char*) name << "'" << oendl; 
+    odebug << "rescanNeighbourhood via '" << name << "'" << oendl; 
 
     OWirelessNetworkInterface* wiface = static_cast<OWirelessNetworkInterface*>( ONetwork::instance()->interface( name ) );
     assert( wiface );
@@ -335,7 +335,7 @@ void WLANImp::rescanNeighbourhood()
     }
     else
     {
-        odebug << "rescanNeighbourhood(): device type seems to be '" << (const char*) devicetype << "'" << oendl; 
+        odebug << "rescanNeighbourhood(): device type seems to be '" << devicetype << "'" << oendl; 
     }
 
     // configure interface to receive 802.11 management frames
