@@ -1,7 +1,7 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.1 2002-11-12 22:12:33 mjm Exp $
+ * $Id: daemon.cc,v 1.2 2002-11-13 21:57:18 mjm Exp $
  */
 
 #include "config.hh"
@@ -69,6 +69,7 @@ int main(int argc, char **argv)
 	 log_err("Cannot read from stdin: %s", strerror(errno));
 	 break;
       }
+      log_info("Sending command to '%s': %s", GUIADDR, buffer);
 
       /* Send string to GUI */
       sendgui("%d: %s", 1234, buffer);

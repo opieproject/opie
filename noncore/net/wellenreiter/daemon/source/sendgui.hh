@@ -1,4 +1,4 @@
-/* $Id: sendgui.hh,v 1.1 2002-11-12 22:12:33 mjm Exp $ */
+/* $Id: sendgui.hh,v 1.2 2002-11-13 21:57:19 mjm Exp $ */
 
 #ifndef SENDGUI_HH
 #define SENDGUI_HH
@@ -14,7 +14,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-int connect_server(int *, unsigned int, int);
 int sendgui(const char *string, ...);
 
 #endif /* SENDGUI_HH */
