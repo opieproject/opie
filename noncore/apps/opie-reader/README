@@ -1,0 +1,162 @@
+What is QT Reader?
+==================
+
+QT Reader is an e-text reading program which understands several
+varieties of PalmDoc format (types 1,2 and 4), zTxt, plain text and
+gzipped text.
+
+In addition it supports its own very highly compressed format which is
+based on ppm (regarded by many as the best available compression
+technique) with modifications by Fabrice Bellard for speed and memory
+efficiency and by myself to support random access on smaller
+devices. I call this modified format ppms (for ppm, segmented).
+
+The ppms program which is used to produce ppms files from plain text
+is available from http://www.timwentford.uklinux.net where there is
+also a comparison of file sizes produced by several compression
+methods. This is summarised below:
+
+Compression method        Size in bytes   Memory required to decompress
+Plain text                573714          N/A
+Makedoc (PalmDoc format)  329543          2k
+ppms (default)            184187          350k
+ppms (best)               151733          800k
+bzip2 -1                  180175          340k
+bzip2 -9                  154280          2.2M
+
+The default settings used here were chosen to suit the Agenda VR3. I
+would expect the Zaurus to be able to use settings which give 170kb
+file size and 500k memory without any problem. The format encodes the
+settings used so the user may choose whatever suits them. I choose
+based on the amount of memory required and on whether or not pageup
+performance is acceptable.
+
+General Use
+===========
+
+Start it up and then choose "File/Open" from the menu. Select a
+palmdoc, plain text, gzipped text or ppms file from the file selector
+and use the cursor keys to page up/down (up/down keys) and to make the
+text size comfortable (left/right keys) and thats it for most
+uses. See below for more advanced use.
+
+What the Menu Options Do
+========================
+
+File
+====
+
+File operations live in this menu.
+
+Open         Brings up the file selector to allow you to choose a
+             new file to read.
+Info         Displays info about the currently open file. Needs
+             reformatting.
+Start Block  Marks the text at the top of the currently displayed
+             page ready for copying.
+Copy Block   Copies all text from the mark to the bottom of the
+             currently displayed page to the clipboard.
+Scroll       Starts/stops autoscroll. The speed can be adjusted
+             using the up/down keys while autoscroll is on (page
+             up and down are still functional and can be activated
+             by using the up and down arrows on the task bar).
+Jump         Jumps to a specific offset in the file. If you note
+             down the current location from the File/Info display
+	     you can then jump to the same position again using
+             this function (or you could bokmark it 8^)).
+Page/Line scroll When this is On pressing the arrows (keys or
+             icons on the task bar) moves you a page at a time.
+	     When this is off, pressing the arrows moves you a
+             line at a time.
+Set Overlap  Sets the number of lines of overlap between pages
+             when scrolling by page.
+Set Dictionary When you tap on the screen the word under the
+             pointer is copied to the clipboard ready for pasting
+             into (e.g.) a dictionary program. Using this function
+             allows the word to be sent to compatible dictionary
+             programs direct. The format is exename/messagename
+             where exename is the name of the executable for the
+             dictionary program and messagename is the name of the
+             message it is expecting. You can get some idea of how
+             it works by using some debug functionality which I
+             deliberately left in QTReader. Set this to
+             uqtreader/info.
+             To deactivate it again, set it to /.
+Find         Brings up the search requester where you can enter a
+             regular expression to search (again) for.
+
+Format
+======
+
+Used to alter the way the text is reformatted before display.
+
+Strip CR     Removes those pesky DOS crs from the file.
+Strip HTML   Uses a very simple minded filter to remove html mark-up.
+Dehyphen     Removes hyphens from e-texts which have been formatted to
+             fit on different sized displays by hyphenating words
+	     which no longer appear at the end of the line.
+Unindent     Removes leading spaces from the beginning of paragraphs.
+Re-paragraph Removes/adds line breaks as necessary to make the text
+             look nice on the display.
+Double Space Adds an extra space between paragraphs.
+Indent+      Increases the number of extra leading spaces inserted
+             before paragraphs.
+Indent-      Decreases the number of extra leading spaces inserted
+             before paragraphs.
+Bold	     Sets the font to bold (if its supported by the currently
+             selected font).
+
+For e-texts from fictionwise I don't need any of these enabled. For
+Project Gutenberg e-texts I enable Strip CR, Re-paragraph and either 3 lots
+of indent+ and/or double space.
+
+Zoom         Menu option not implemented but pops up an info box
+             telling you that left/right cursor keys will zoom
+             out/in.
+Ideogram/Char grouping When selected, treats each character as a word
+             and enforces uniform character spacing - suitable for
+             many eastern character sets. When not selected, looks for
+             spaces in the text to identify words - suitable for most
+             western texts. (I'm not a language expert so forgive my,
+             probably inaccurate, generalisations).
+Set Width    Sets the character spacing as a percentage of the text
+             height to be used when in ideogram mode. Start at 100 and
+             experiment to find what you like best.
+Encoding     Allows you to choose from a variety of codings. Ascii is
+             actually unprocessed text so its precise behaviour may
+             depend on the machines locale setting. Palm and code page
+             1252 are very similar and are useful if you have an etext
+             aimed at Palms or Windows machines which use an extended
+             character set - though you will need to use a unicode
+             enabled font to show all the characters. The U... fonts
+             are different varieties of unicode encodings. If you
+             don't know what that means you probably don't need them
+             (they allow texts to access the full range of characters
+             required for non US English languages).
+Set Font     Allows you to choose which font the text is displayed
+             in. Helvetica or smoothtimes are probably best for ascii type
+             texts, unifont or cyberbit (if you have installed them)
+             are best for extended character sets (other unicode fonts
+             may also be available but these are all I've found, so far).
+Marks
+=====
+
+Mark	     Saves the current position as a bookmark
+Goto         Allows selection of a bookmark to jump to.
+Delete       Deletes an unwanted bookmark from the current text.
+Autogen      Displays a box for entering a regular
+             expression which will be used to determine which
+             paragraphs (not lines) will be marked to allow jumping to
+             directly using the Goto option. The format options
+             described above are applied before the regular expression
+             matching is done.
+             This operation is performed in the background allowing
+             you to continue paging up/down the e-text.
+Clear        Deletes all in-memory bookmarks from the current document.
+Save         Saves the "in-memory" bookmarks to disk.
+Tidy         Deletes bookmark file for a document. The operations
+             above work on an in-memory copy of the bookmarks. This
+	     option makes that copy more permanent (you will also be
+	     prompted to save the bookmarks when closing a text if the
+	     in-memory copy is different to the saved copy).
+

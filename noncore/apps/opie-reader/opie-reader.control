@@ -1,0 +1,9 @@
+Files: bin/uqtreader apps/Applications/uqtreader.desktop pics/uqtreader.png pics/panel-arrow-down.png
+Priority: optional
+Section: applications
+Maintainer: Tim Wentford <timwentford@hotmail.com>
+Architecture: arm
+Version: 0_3r_beta_UTF8
+Depends:
+License: GPL
+Description: E-Book reader
