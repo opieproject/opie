@@ -105,7 +105,7 @@ TableView::TableView( MainWindow* window, QWidget* wid )
 
     horizontalHeader()->setLabel( 0, QWidget::tr("C.") );
     horizontalHeader()->setLabel( 1, QWidget::tr("Priority") );
-    horizontalHeader()->setLabel( 2, QWidget::tr("Description" ) );
+    horizontalHeader()->setLabel( 2, QWidget::tr("Summary" ) );
     horizontalHeader()->setLabel( 3, QWidget::tr("Deadline") );
 
     setShowDeadline( todoWindow()->showDeadline() );
