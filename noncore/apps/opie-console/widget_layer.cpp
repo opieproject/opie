@@ -21,7 +21,7 @@
 
 
 
-WidgetLayer::WidgetLayer( QWidget *parent, const char *name  ) : QFrame( parent, name )
+WidgetLayer::WidgetLayer( const Profile &config, QWidget *parent, const char *name  ) : QFrame( parent, name )
 {
 	// get the clipboard
 	m_clipboard = QApplication::clipboard();

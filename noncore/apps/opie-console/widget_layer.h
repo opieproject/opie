@@ -25,7 +25,7 @@
 // opie-console includes
 #include "session.h"
 #include "common.h"
-
+#include "profile.h"
 /*
  * given a pseudo location ( column, line ),
  * returns the actual index, in the QArray<Character>
@@ -46,7 +46,7 @@ public:
 	 * @param QWidget *parent, the parent widget
 	 * @param const char *name, the name of the widget, defaults to ""
 	 */
-	WidgetLayer( const Profile &config, QWidget *parent=0, const char *name=0 );
+	WidgetLayer( const Profile& config, QWidget *parent=0, const char *name=0 );
 
 	/**
 	 * destructor
