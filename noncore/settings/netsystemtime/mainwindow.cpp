@@ -80,10 +80,9 @@ MainWindow::MainWindow( QWidget *parent , const char *name,  bool modal, WFlags 
 	mainWidget->setCurrentTab( tr( "Time" ) );
 	layout->addWidget( mainWidget );
 
-	// Create QCOP channel
-	QCopChannel *channel = new QCopChannel( "QPE/Application/netsystemtime", this );
-	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-			 this, SLOT(slotQCopReceive(const QCString&, const QByteArray&)) );
+	connect( qApp, SIGNAL(appMessage(const QCString&, const QByteArray&)),
+		this, SLOT(slotQCopReceive(const QCString&, const QByteArray&)) );
+
 
 	// Create NTP socket
 	ntpSock = new QSocket( this );
