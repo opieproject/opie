@@ -50,10 +50,7 @@ void LauncherClock::mouseReleaseEvent( QMouseEvent * )
 {
 	QCString setTimeApp;
 	setTimeApp="systemtime";
-	QCopEnvelope e("QPE/Application/"+setTimeApp, "setDocument(QString)");
-	QString lf = QString::null;
-
-	e << lf;
+	QCopEnvelope e("QPE/Application/"+setTimeApp, "raise()");
 }
 
 
