@@ -1,0 +1,152 @@
+Index: generic/imapdriver_tools.c
+===================================================================
+RCS file: /cvsroot/libetpan/libetpan/generic/imapdriver_tools.c,v
+retrieving revision 1.12
+diff -u -3 -p -r1.12 imapdriver_tools.c
+--- generic/imapdriver_tools.c	22 Nov 2003 15:42:52 -0000	1.12
++++ generic/imapdriver_tools.c	29 Nov 2003 23:52:46 -0000
+@@ -2704,7 +2704,7 @@ int mail_search_to_imap_search(struct ma
+ 
+   case MAIL_SEARCH_KEY_NOT:
+     type = MAILIMAP_SEARCH_KEY_NOT;
+-    r = mail_search_to_imap_search(key->not, &not);
++    r = mail_search_to_imap_search(key->_not, &not);
+     if (r != MAIL_NO_ERROR) {
+       res = r;
+       goto err;
+Index: generic/maildriver_types.c
+===================================================================
+RCS file: /cvsroot/libetpan/libetpan/generic/maildriver_types.c,v
+retrieving revision 1.20
+diff -u -3 -p -r1.20 maildriver_types.c
+--- generic/maildriver_types.c	26 Oct 2003 23:51:01 -0000	1.20
++++ generic/maildriver_types.c	29 Nov 2003 23:52:46 -0000
+@@ -146,7 +146,7 @@ mail_search_key_new(int type,
+   key->header_name = header_name;
+   key->header_value = header_value;
+   key->larger = larger;
+-  key->not = not;
++  key->_not = not;
+   key->or1 = or1;
+   key->or2 = or2;
+   key->smaller = smaller;
+@@ -182,8 +182,8 @@ void mail_search_key_free(struct mail_se
+     free(key->header_name);
+   if (key->header_value)
+     free(key->header_value);
+-  if (key->not)
+-    mail_search_key_free(key->not);
++  if (key->_not)
++    mail_search_key_free(key->_not);
+   if (key->or1)
+     mail_search_key_free(key->or1);
+   if (key->or2)
+Index: generic/maildriver_types.h
+===================================================================
+RCS file: /cvsroot/libetpan/libetpan/generic/maildriver_types.h,v
+retrieving revision 1.35
+diff -u -3 -p -r1.35 maildriver_types.h
+--- generic/maildriver_types.h	25 Nov 2003 00:04:54 -0000	1.35
++++ generic/maildriver_types.h	29 Nov 2003 23:52:46 -0000
+@@ -257,7 +257,7 @@ struct mail_search_key {
+   char * header_name;
+   char * header_value;
+   size_t larger;
+-  struct mail_search_key * not;
++  struct mail_search_key * _not;
+   struct mail_search_key * or1;
+   struct mail_search_key * or2;
+   size_t smaller;
+@@ -280,7 +280,7 @@ mail_search_key_new(int type,
+ 		    char * header_name,
+ 		    char * header_value,
+ 		    size_t larger,
+-		    struct mail_search_key * not,
++		    struct mail_search_key * _not,
+ 		    struct mail_search_key * or1,
+ 		    struct mail_search_key * or2,
+ 		    size_t smaller,
+Index: imap/mailimap_sender.c
+===================================================================
+RCS file: /cvsroot/libetpan/libetpan/imap/mailimap_sender.c,v
+retrieving revision 1.11
+diff -u -3 -p -r1.11 mailimap_sender.c
+--- imap/mailimap_sender.c	17 Nov 2003 11:38:41 -0000	1.11
++++ imap/mailimap_sender.c	29 Nov 2003 23:52:47 -0000
+@@ -2083,7 +2083,7 @@ static int mailimap_search_key_send(mail
+     r = mailimap_space_send(fd);
+ 	if (r != MAILIMAP_NO_ERROR)
+       return r;
+-    r = mailimap_search_key_send(fd, key->not);
++    r = mailimap_search_key_send(fd, key->_not);
+ 	if (r != MAILIMAP_NO_ERROR)
+       return r;
+     return MAILIMAP_NO_ERROR;
+Index: imap/mailimap_types.c
+===================================================================
+RCS file: /cvsroot/libetpan/libetpan/imap/mailimap_types.c,v
+retrieving revision 1.15
+diff -u -3 -p -r1.15 mailimap_types.c
+--- imap/mailimap_types.c	19 Nov 2003 01:42:54 -0000	1.15
++++ imap/mailimap_types.c	29 Nov 2003 23:52:48 -0000
+@@ -2396,7 +2396,7 @@ mailimap_search_key_new(int type,
+   key->header_name = header_name;
+   key->header_value = header_value;
+   key->larger = larger;
+-  key->not = not;
++  key->_not = not;
+   key->or1 = or1;
+   key->or2 = or2;
+   key->sentbefore = sentbefore;
+@@ -2441,8 +2441,8 @@ void mailimap_search_key_free(struct mai
+     mailimap_header_fld_name_free(key->header_name);
+   if (key->header_value)
+     mailimap_astring_free(key->header_value);
+-  if (key->not)
+-    mailimap_search_key_free(key->not);
++  if (key->_not)
++    mailimap_search_key_free(key->_not);
+   if (key->or1)
+     mailimap_search_key_free(key->or1);
+   if (key->or2)
+Index: imap/mailimap_types.h
+===================================================================
+RCS file: /cvsroot/libetpan/libetpan/imap/mailimap_types.h,v
+retrieving revision 1.16
+diff -u -3 -p -r1.16 mailimap_types.h
+--- imap/mailimap_types.h	25 Nov 2002 07:09:24 -0000	1.16
++++ imap/mailimap_types.h	29 Nov 2003 23:52:50 -0000
+@@ -2858,7 +2858,7 @@ struct mailimap_search_key {
+   char * header_name;
+   char * header_value;
+   uint32_t larger;
+-  struct mailimap_search_key * not;
++  struct mailimap_search_key * _not;
+   struct mailimap_search_key * or1;
+   struct mailimap_search_key * or2;
+   struct mailimap_date * sentbefore;
+@@ -2887,7 +2887,7 @@ mailimap_search_key_new(int type,
+ 			char * header_name,
+ 			char * header_value,
+ 			uint32_t larger,
+-			struct mailimap_search_key * not,
++			struct mailimap_search_key * _not,
+ 			struct mailimap_search_key * or1,
+ 			struct mailimap_search_key * or2,
+ 			struct mailimap_date * sentbefore,
+Index: imap/mailimap_types_helper.h
+===================================================================
+RCS file: /cvsroot/libetpan/libetpan/imap/mailimap_types_helper.h,v
+retrieving revision 1.8
+diff -u -3 -p -r1.8 mailimap_types_helper.h
+--- imap/mailimap_types_helper.h	26 Oct 2003 23:51:01 -0000	1.8
++++ imap/mailimap_types_helper.h	29 Nov 2003 23:52:50 -0000
+@@ -573,7 +573,7 @@ mailimap_search_key_new_larger(uint32_t 
+ */
+ 
+ struct mailimap_search_key *
+-mailimap_search_key_new_not(struct mailimap_search_key * not);
++mailimap_search_key_new_not(struct mailimap_search_key * _not);
+ 
+ /*
+   this function creates a condition structure to match messages that
