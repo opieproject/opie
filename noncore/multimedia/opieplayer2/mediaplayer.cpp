@@ -62,7 +62,10 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
 
     volControl = new VolumeControl;
     xineControl = new XineControl();
-    playList->setCaption(tr("OpiePlayer"));
+    Config cfg( "OpiePlayer" );
+    cfg.setGroup("PlayList");
+    QString currentPlaylist = cfg.readEntry( "CurrentPlaylist", "default");
+    playList->setCaption( tr( "OpiePlayer: " ) + QFileInfo(currentPlaylist).baseName() );
 }
 
 MediaPlayer::~MediaPlayer() {
