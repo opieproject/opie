@@ -177,6 +177,7 @@ protected:
     QPixmap* getPixmap(BitmapData item);
     QPixmap* processEmbedded(const char *label, int h, int s, int v, bool blend=false);
 private:
+	bool flatTBButtons;
     bool highcolor;
     QColorGroup radioOnGrp;
     QWidget *highlightWidget;

@@ -20,6 +20,7 @@ public slots:
 	void changeTextColor ( const QColor &col );
 	void changeShadow ( bool b );
 	void changeDeco ( bool b );
+	void changeFlat ( bool b );
 
 	virtual bool writeConfig ( );
 	
@@ -29,6 +30,7 @@ private:
 	int    m_type;
 	bool   m_shadow;
 	bool   m_deco;
+	bool   m_flat;
 	
 	QSlider *    m_opacsld;
 	QSlider *    m_contsld;

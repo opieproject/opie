@@ -169,6 +169,8 @@ LiquidStyle::LiquidStyle()
 {
     setName ( "LiquidStyle" );
 
+	flatTBButtons = false;
+
     btnMaskBmp = QBitmap(37, 26, buttonmask_bits, true);
     btnMaskBmp.setMask(btnMaskBmp);
     htmlBtnMaskBmp = QBitmap(37, 26, htmlbuttonmask_bits, true);
@@ -831,6 +833,13 @@ void LiquidStyle::polish(QWidget *w)
     if(w->inherits("QMenuBar")){
         //((QFrame*)w)->setLineWidth(0);
         w->setBackgroundMode(QWidget::PaletteBackground);
+        w->setBackgroundOrigin(QWidget::ParentOrigin);
+        return;
+    }
+    if(w->inherits("QToolBar")){
+        w->installEventFilter(this);
+        w->setBackgroundMode(QWidget::PaletteBackground);
+        w->setBackgroundOrigin(QWidget::WidgetOrigin);
         return;
     }
     if(w->inherits("QPopupMenu"))
@@ -893,8 +902,10 @@ void LiquidStyle::polish(QWidget *w)
         w->setMouseTracking(true);
         w->installEventFilter(this);
     }
-    if(w-> inherits("QToolButton")) {
-    	((QToolButton*)w)->setAutoRaise (false);
+    if(w-> inherits("QToolButton")&&w->parent()->inherits("QToolBar")) {
+    	((QToolButton*)w)->setAutoRaise (flatTBButtons);
+    	if ( flatTBButtons )
+    		w->setBackgroundOrigin(QWidget::ParentOrigin);
     }
     if(w->ownPalette() && !w->inherits("QButton") && !w->inherits("QComboBox")){
         return;
@@ -911,11 +922,6 @@ void LiquidStyle::polish(QWidget *w)
            w->backgroundMode() == QWidget::PaletteButton){
             w->setBackgroundMode(QWidget::X11ParentRelative);
         }
-    }
-    if(w->inherits("QToolBar")){
-        w->installEventFilter(this);
-        w->setBackgroundMode(QWidget::PaletteBackground);
-        return;
     }
 
 }
@@ -1001,6 +1007,8 @@ void LiquidStyle::polish(QApplication *app)
     
     if ( config. readBoolEntry ( "WinDecoration", true ))	
 	    QApplication::qwsSetDecoration ( new LiquidDecoration ( ));
+	    
+	flatTBButtons = config. readBoolEntry ( "FlatToolButtons", false );
 }
 
 void LiquidStyle::unPolish(QApplication *app)
@@ -1998,8 +2006,10 @@ void LiquidStyle::drawMenuBarItem(QPainter *p, int x, int y, int w, int h,
         w += 2;
         h += 2;
     }
-
-    p-> fillRect ( x, y, w, h, g.brush(QColorGroup::Background));
+    
+    QWidget *parent = (QWidget *)p->device();
+    p->setBrushOrigin(parent->pos());
+    parent->erase(x, y, w, h);
    
     if(menuHandler->useShadowText()){
         QColor shadow;

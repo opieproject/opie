@@ -3,8 +3,8 @@ Features:
  - Qt-only
  - works with Qt/E on QPE/OPIE
  
---- -	Mon Jul  1 11:38:05 2002
-+++ liquid.h	Mon Jun 24 19:07:45 2002
+--- -	Mon Jul 15 02:34:13 2002
++++ liquid.h	Mon Jul 15 01:51:12 2002
 @@ -2,7 +2,7 @@
  #define LIQUID_STYLE_H
  
@@ -102,8 +102,16 @@ Features:
      // for repainting toolbuttons when the toolbar is resized
      bool eventFilter(QObject *obj, QEvent *ev);
      void drawSliderGroove(QPainter * p, int x, int y, int w,  int h,
---- -	Mon Jul  1 11:38:05 2002
-+++ liquid.cpp	Mon Jul  1 03:45:28 2002
+@@ -204,6 +177,7 @@
+     QPixmap* getPixmap(BitmapData item);
+     QPixmap* processEmbedded(const char *label, int h, int s, int v, bool blend=false);
+ private:
++	bool flatTBButtons;
+     bool highcolor;
+     QColorGroup radioOnGrp;
+     QWidget *highlightWidget;
+--- -	Mon Jul 15 02:34:13 2002
++++ liquid.cpp	Mon Jul 15 02:31:59 2002
 @@ -10,12 +10,10 @@
  
  #include <qmenudata.h>
@@ -184,7 +192,7 @@ Features:
 -    opacity = config->readNumEntry("Opacity", 10);
 -    shadowText = config->readBoolEntry("ShadowText", true);
 +    Config config ( "qpe" );
-+    config. setGroup ( "MosfetMenus" );
++    config. setGroup ( "Liquid-Style" );
 +
 +    type = config. readNumEntry("Type", TransStippleBg);
 +    color = QColor ( config. readEntry("Color",  QApplication::palette().active().button().name()));
@@ -221,7 +229,7 @@ Features:
                                             r.width(), r.height());
              }
              else{ // tear off menu
-@@ -121,82 +122,54 @@
+@@ -121,82 +122,55 @@
                  stripePixmap(*pix, p->colorGroup().button());
              }
              else{
@@ -229,9 +237,9 @@ Features:
 +                QPixmapEffect::fade(*pix, (((float)opacity)+80)*0.01, color);
              }
 +
-+            if (p->inherits("QPopupMenu"))
              pixDict.insert(p->winId(), pix);
-+            else {
++            
++            if (!p->inherits("QPopupMenu")) {
 +            	p->setBackgroundPixmap(*pix);
 +            	
 +            	QObjectList *ol = p-> queryList("QWidget");
@@ -254,13 +262,13 @@ Features:
 -    }
 -    return(false);
 -}
-+//            qWarning("Deleting menu pixmap, width %d", pixDict.find(p->winId())->width());
- 
+-
 -void TransMenuHandler::slotKIPCMessage(int id, int)
 -{
 -    if(id == LIQUID_MENU_CHANGE){
 -        bool oldShadow = shadowText;
--
++//            qWarning("Deleting menu pixmap, width %d", pixDict.find(p->winId())->width());
+ 
 -        KConfig *config = KGlobal::config();
 -        config->reparseConfiguration(); // in case KControl changed values
 -
@@ -276,10 +284,9 @@ Features:
 -                w->close();
 -            }
 -        }
-+            if (p->inherits("QPopupMenu"))
-+                pixDict.remove(p->winId());
-+            else {
-+            	p->setBackgroundMode(QWidget::PaletteBackground);
++            pixDict.remove(p->winId());
++            if (!p->inherits("QPopupMenu")) {
++                p->setBackgroundMode(QWidget::PaletteBackground);
  
 -        reloadSettings();
 +            	QObjectList *ol = p-> queryList("QWidget");
@@ -295,7 +302,8 @@ Features:
 -                    w->repaint();
 -                }
 -            }
--        }
++					wid-> setBackgroundMode( QWidget::PaletteBackground );
+         }
 -    }
 -    else if(id == MOSFET_BUTTON_CHANGE){
 -        qWarning("In mosfet button change");
@@ -307,8 +315,7 @@ Features:
 -            ++it;
 -            if(w->inherits("QPushButton")){
 -                ((LiquidStyle*)parent())->unapplyCustomAttributes((QPushButton *)w);
-+					wid-> setBackgroundMode( QWidget::PaletteBackground );
-             }
+-            }
 -        }
 -        ((LiquidStyle*)parent())->loadCustomButtons();
 -        it.toFirst();
@@ -331,10 +338,12 @@ Features:
  {
 +    setName ( "LiquidStyle" );
 +
++	flatTBButtons = false;
++
      btnMaskBmp = QBitmap(37, 26, buttonmask_bits, true);
      btnMaskBmp.setMask(btnMaskBmp);
      htmlBtnMaskBmp = QBitmap(37, 26, htmlbuttonmask_bits, true);
-@@ -730,20 +703,19 @@
+@@ -730,20 +704,26 @@
      }
  
      loadCustomButtons();
@@ -348,6 +357,13 @@ Features:
 -    KConfig *config = KGlobal::config();
 -    QString oldGrp = config->group();
 +    Config config ( "qpe" );
++    config. setGroup ( "Liquid-Style" );
++	int contrast = config. readNumEntry ( "StippleContrast", 5 );
++	if ( contrast < 0 )
++		contrast = 0;
++	else if ( contrast > 10 )
++		contrast = 10;
++
      QPalette pal = QApplication::palette();
  
      // button color stuff
@@ -360,7 +376,7 @@ Features:
          // force button color to be different from background
          QBrush btnBrush(QColor(200, 202, 228));
          appPal.setBrush(QColorGroup::Button, btnBrush);
-@@ -794,15 +766,7 @@
+@@ -794,15 +774,7 @@
      pagerBrush.setPixmap(*pix);
  
      // background color stuff
@@ -377,7 +393,17 @@ Features:
      c.hsv(&bH, &bS, &bV);
      c.light(120).hsv(&bHoverH, &bHoverS, &bHoverV);
  
-@@ -825,13 +789,10 @@
+@@ -817,21 +789,18 @@
+     wallPaper.fill(c.rgb());
+     painter.begin(&wallPaper);
+     for(i=0; i < 32; i+=4){
+-        painter.setPen(c.dark(105));
++        painter.setPen(c.dark(100 + contrast));
+         painter.drawLine(0, i, 32, i);
+-        painter.setPen(c.dark(103));
++        painter.setPen(c.dark(100 + 3 * contrast / 5 ) );
+         painter.drawLine(0, i+1, 32, i+1);
+     };
      painter.end();
      bgBrush.setColor(c);
      bgBrush.setPixmap(wallPaper);
@@ -392,7 +418,7 @@ Features:
      QPixmap basePix;
      basePix.resize(32, 32);
      basePix.fill(c.rgb());
-@@ -857,51 +818,31 @@
+@@ -857,51 +826,39 @@
          }
      }
  
@@ -406,6 +432,13 @@ Features:
 -        w->setBackgroundMode(QWidget::NoBackground);
 +        //((QFrame*)w)->setLineWidth(0);
 +        w->setBackgroundMode(QWidget::PaletteBackground);
++        w->setBackgroundOrigin(QWidget::ParentOrigin);
++        return;
++    }
++    if(w->inherits("QToolBar")){
++        w->installEventFilter(this);
++        w->setBackgroundMode(QWidget::PaletteBackground);
++        w->setBackgroundOrigin(QWidget::WidgetOrigin);
          return;
      }
      if(w->inherits("QPopupMenu"))
@@ -442,7 +475,8 @@ Features:
 -    }
 +   
 +    
-+    w-> setBackgroundOrigin ( QWidget::ParentOrigin );
++    if ( !w-> inherits("QFrame") || (((QFrame*) w)-> frameShape () == QFrame::NoFrame ))
++	    w-> setBackgroundOrigin ( QWidget::ParentOrigin );
  
      if(w->inherits("QComboBox") ||
         w->inherits("QLineEdit") || w->inherits("QRadioButton") ||
@@ -453,7 +487,7 @@ Features:
          w->installEventFilter(this);
      }
      if(w->inherits("QLineEdit")){
-@@ -913,6 +854,9 @@
+@@ -913,6 +870,9 @@
          applyCustomAttributes((QPushButton *)w);
          w->installEventFilter(this);
      }
@@ -463,12 +497,14 @@ Features:
  
      bool isViewport = qstrcmp(w->name(), "qt_viewport") == 0 ||
          qstrcmp(w->name(), "qt_clipped_viewport") == 0;
-@@ -942,11 +886,12 @@
+@@ -942,11 +902,14 @@
          w->setMouseTracking(true);
          w->installEventFilter(this);
      }
-+    if(w-> inherits("QToolButton")) {
-+    	((QToolButton*)w)->setAutoRaise (false);
++    if(w-> inherits("QToolButton")&&w->parent()->inherits("QToolBar")) {
++    	((QToolButton*)w)->setAutoRaise (flatTBButtons);
++    	if ( flatTBButtons )
++    		w->setBackgroundOrigin(QWidget::ParentOrigin);
 +    }
      if(w->ownPalette() && !w->inherits("QButton") && !w->inherits("QComboBox")){
          return;
@@ -478,7 +514,7 @@ Features:
  
      if(w->parent() && w->parent()->isWidgetType() && !((QWidget*)w->parent())->
         palette().active().brush(QColorGroup::Background).pixmap()){
-@@ -954,17 +899,18 @@
+@@ -954,17 +917,13 @@
          return;
      }
      if(!isViewport && !isViewportChild && !w->testWFlags(WType_Popup) &&
@@ -490,17 +526,15 @@ Features:
          }
      }
 -    if(w->inherits("KToolBar")){
-+    if(w->inherits("QToolBar")){
-         w->installEventFilter(this);
+-        w->installEventFilter(this);
 -        //w->setBackgroundMode(QWidget::NoBackground);
-+        w->setBackgroundMode(QWidget::PaletteBackground);
-         return;
-     }
+-        return;
+-    }
 +
  }
  
  void LiquidStyle::unPolish(QWidget *w)
-@@ -977,6 +923,9 @@
+@@ -977,6 +936,9 @@
  
      if(w->inherits("QPopupMenu"))
          w->setBackgroundMode(QWidget::PaletteButton);
@@ -510,7 +544,7 @@ Features:
  
      if(w->isTopLevel())
          return;
-@@ -1001,12 +950,14 @@
+@@ -1001,12 +963,14 @@
          unapplyCustomAttributes((QPushButton *)w);
          w->removeEventFilter(this);
      }
@@ -529,7 +563,7 @@ Features:
          w->removeEventFilter(this);
      }
      if(w->inherits("QButton") || w->inherits("QComboBox")){
-@@ -1014,9 +965,9 @@
+@@ -1014,9 +978,9 @@
              w->setAutoMask(false);
          }
      }
@@ -541,7 +575,7 @@ Features:
          return;
      }
      if(w->inherits("QHeader")){
-@@ -1028,20 +979,28 @@
+@@ -1028,20 +992,34 @@
  void LiquidStyle::polish(QApplication *app)
  {
  
@@ -556,7 +590,13 @@ Features:
 +	
 +    qt_set_draw_menu_bar_impl((QDrawMenuBarItemImpl) &LiquidStyle::drawMenuBarItem);
 +    
-+    QApplication::qwsSetDecoration ( new LiquidDecoration ( ));
++    Config config ( "qpe" );
++    config. setGroup ( "Liquid-Style" );
++    
++    if ( config. readBoolEntry ( "WinDecoration", true ))	
++	    QApplication::qwsSetDecoration ( new LiquidDecoration ( ));
++	    
++	flatTBButtons = config. readBoolEntry ( "FlatToolButtons", false );
  }
  
  void LiquidStyle::unPolish(QApplication *app)
@@ -572,7 +612,7 @@ Features:
  }
  
  /*
-@@ -1063,7 +1022,7 @@
+@@ -1063,7 +1041,7 @@
   */
  bool LiquidStyle::eventFilter(QObject *obj, QEvent *ev)
  {
@@ -581,7 +621,7 @@ Features:
          if(ev->type() == QEvent::Resize){
              const QObjectList *tbChildList = obj->children();
              QObjectListIt it(*tbChildList);
-@@ -1076,35 +1035,7 @@
+@@ -1076,35 +1054,7 @@
  
          }
      }
@@ -618,7 +658,7 @@ Features:
          QWidget *btn = (QWidget *)obj;
          if(ev->type() == QEvent::Enter){
              if(btn->isEnabled()){
-@@ -1119,20 +1050,7 @@
+@@ -1119,20 +1069,7 @@
              }
          }
      }
@@ -640,7 +680,7 @@ Features:
          QToolButton *btn = (QToolButton *)btn;
          if(!btn->autoRaise()){
              if(btn->isEnabled()){
-@@ -1340,11 +1258,6 @@
+@@ -1340,11 +1277,6 @@
      QColorGroup g = btn->colorGroup();
  
  
@@ -652,7 +692,60 @@ Features:
      //int dw = buttonDefaultIndicatorWidth();
      if(btn->hasFocus() || btn->isDefault()){
          QColor c = btn->hasFocus() ? g.button().light(110) : g.background();
-@@ -1914,8 +1827,8 @@
+@@ -1596,7 +1528,7 @@
+         if(sbBuffer.size() != sb->size())
+             sbBuffer.resize(sb->size());
+     }
+-    subB.setRect( subX,subY,buttonDim,buttonDim );
++    subB.setRect( subX,subY,0,0); // buttonDim,buttonDim );
+     addB.setRect( addX,addY,buttonDim,buttonDim );
+     if(horiz)
+         subHC.setRect(addX-buttonDim,addY,buttonDim,buttonDim );
+@@ -1624,7 +1556,7 @@
+     QPainter painter;
+     if(!horiz){
+         painter.begin(&sbBuffer);
+-        QRect bgR(0, subB.bottom()+1, sb->width(), (len-(buttonDim*3))+1);
++        QRect bgR(0, subB.bottom()+1, sb->width(), (len-(buttonDim*2))+1);
+         if(sliderR.height() >= 8){
+             painter.drawPixmap(bgR.x()+1, bgR.y(), *vsbSliderFillPix, 0, 0,
+                           13, 8);
+@@ -1690,7 +1622,7 @@
+     }
+     else{
+         painter.begin(&sbBuffer);
+-        QRect bgR(subB.right()+1, 0, (len-(buttonDim*3))+1, sb->height());
++        QRect bgR(subB.right()+1, 0, (len-(buttonDim*2))+1, sb->height());
+         if(sliderR.width() >= 8){
+             painter.drawPixmap(bgR.x(), bgR.y()+1, *vsbSliderFillPix, 0, 0,
+                                8, 13);
+@@ -1761,10 +1693,10 @@
+                    addB.width()-8, addB.height()-8, g, !maxed);
+     }
+     if ( controls & SubLine ) {
+-        drawSBButton(p, subB, g, activeControl == SubLine);
+-        drawArrow( p, horiz ? LeftArrow : UpArrow,
+-                   false, subB.x()+4, subB.y()+4,
+-                   subB.width()-8, subB.height()-8, g, !maxed);
++     //   drawSBButton(p, subB, g, activeControl == SubLine);
++     //   drawArrow( p, horiz ? LeftArrow : UpArrow,
++     //              false, subB.x()+4, subB.y()+4,
++     //              subB.width()-8, subB.height()-8, g, !maxed);
+         drawSBButton(p, subHC, g, activeControl == SubLine);
+         drawArrow( p, horiz ? LeftArrow : UpArrow,
+                    false, subHC.x()+4, subHC.y()+4,
+@@ -1865,8 +1797,8 @@
+     else
+ 	buttonDim = ( length - b*2 )/2 - 1;
+ 
+-    sliderMin = b + buttonDim;
+-    maxLength  = length - b*2 - buttonDim*3;
++    sliderMin = b + 0; // buttonDim;
++    maxLength  = length - b*2 - buttonDim*2; // 3;
+ 
+     if ( sb->maxValue() == sb->minValue() ) {
+ 	sliderLength = maxLength;
+@@ -1914,8 +1846,8 @@
      return(QSize(16, 16));
  }
  
@@ -663,7 +756,7 @@ Features:
                                          bool down, bool)
  {
      bool isHover = highlightWidget == p->device();
-@@ -1957,8 +1870,8 @@
+@@ -1957,8 +1889,8 @@
      return(QSize(20, 22));
  }
  
@@ -674,7 +767,7 @@ Features:
  {
      bool isHover = highlightWidget == p->device();
      bool isMasked = p->device() && p->device()->devType() == QInternal::Widget
-@@ -1996,8 +1909,8 @@
+@@ -1996,8 +1928,8 @@
      }
  }
  
@@ -685,7 +778,7 @@ Features:
  {
      // needed for some reason by KHtml, even tho it's all filled ;P
      p->drawPixmap(x, y, *getPixmap(HTMLCB)->mask());
-@@ -2005,18 +1918,17 @@
+@@ -2005,18 +1937,17 @@
  }
  
  void LiquidStyle::drawSlider(QPainter *p, int x, int y, int w, int h,
@@ -707,7 +800,7 @@ Features:
                               Orientation orient, bool, bool)
  {
      p->drawPixmap(x, y, orient == Qt::Horizontal ? *getPixmap(HSlider)->mask() :
-@@ -2065,203 +1977,24 @@
+@@ -2065,203 +1996,26 @@
      p->drawLineSegments(a);
  }
  
@@ -778,11 +871,7 @@ Features:
  {
 -    //p->fillRect(x, y, w, h, g.brush(QColorGroup::Background));
 -}
-+    x -= 2; // Bug in Qt/E 
-+    y -= 2;
-+    w += 2;
-+    h += 2;
- 
+-
 -void LiquidStyle::drawKToolBarButton(QPainter *p, int x, int y, int w, int h,
 -                                    const QColorGroup &g, bool sunken,
 -                                    bool raised, bool enabled, bool popup,
@@ -898,18 +987,24 @@ Features:
 -        else
 -            qDrawArrow (p, Qt::DownArrow, Qt::WindowsStyle, false, w-5, h-5,
 -                        0, 0, g, false);
--    }
++    if(active){
++        x -= 2; // Bug in Qt/E 
++        y -= 2;
++        w += 2;
++        h += 2;
+     }
 -}
-+    p-> fillRect ( x, y, w, h, g.brush(QColorGroup::Background));
- 
 -
+ 
 -void LiquidStyle::drawKMenuItem(QPainter *p, int x, int y, int w, int h,
 -                            const QColorGroup &g, bool active, QMenuItem *mi,
 -                            QBrush *)
 -{
 -    if ( p->font() == KGlobalSettings::generalFont() )
 -        p->setFont( KGlobalSettings::menuFont() );
-+   w -= 2;
++    QWidget *parent = (QWidget *)p->device();
++    p->setBrushOrigin(parent->pos());
++    parent->erase(x, y, w, h);
  
      if(menuHandler->useShadowText()){
          QColor shadow;
@@ -921,7 +1016,7 @@ Features:
                  g.background().dark(130);
          }
          else
-@@ -2300,8 +2033,8 @@
+@@ -2300,8 +2054,8 @@
  }
  
  void LiquidStyle::drawPopupPanel(QPainter *p, int x, int y, int w, int h,
@@ -932,7 +1027,7 @@ Features:
  {
      QColor c;
      switch(menuHandler->transType()){
-@@ -2336,8 +2069,6 @@
+@@ -2336,8 +2090,6 @@
  
      maxpmw = QMAX( maxpmw, 20 );
  
@@ -941,7 +1036,7 @@ Features:
  
      bool dis = !enabled;
      QColorGroup itemg = dis ? pal.disabled() : pal.active();
-@@ -2363,7 +2094,7 @@
+@@ -2363,7 +2115,7 @@
              p->fillRect(x, y, w, h, menuBrush);
          }
          else{
@@ -950,7 +1045,7 @@ Features:
              if(pix)
                  p->drawPixmap(x, y, *pix, x, y, w, h);
          }
-@@ -2508,25 +2239,6 @@
+@@ -2508,25 +2260,6 @@
      return h;
  }
  
@@ -976,7 +1071,7 @@ Features:
  
  void LiquidStyle::drawFocusRect(QPainter *p, const QRect &r,
                              const QColorGroup &g, const QColor *c,
-@@ -2540,25 +2252,25 @@
+@@ -2540,25 +2273,25 @@
              return;
          }
          else{
@@ -1006,7 +1101,7 @@ Features:
          return;
      }
      QPixmap tilePix;
-@@ -2671,7 +2383,7 @@
+@@ -2671,7 +2404,7 @@
          vFrame = 8; // was 10
      }
      else
@@ -1015,7 +1110,7 @@ Features:
  }
  
  
-@@ -2699,7 +2411,7 @@
+@@ -2699,7 +2432,7 @@
          p->drawLine(x+1, y+1, x+1, y2-1);
      }
      else if(lineWidth != 2 || !sunken)
@@ -1024,7 +1119,7 @@ Features:
      else{
          QPen oldPen = p->pen();
          int x2 = x+w-1;
-@@ -2726,105 +2438,6 @@
+@@ -2726,105 +2459,6 @@
      }
  }
  
@@ -1130,7 +1225,7 @@ Features:
  
  void LiquidStyle::adjustHSV(QPixmap &pix, int h, int s, int v)
  {
-@@ -2998,22 +2611,22 @@
+@@ -2998,22 +2632,22 @@
      customBtnIconList.clear();
      customBtnLabelList.clear();
  
@@ -1160,7 +1255,7 @@ Features:
      while(labelStr != NULL){
          QColor *c = new QColor;
          c->setNamedColor(QString(colorStr));
-@@ -3022,7 +2635,7 @@
+@@ -3022,7 +2656,7 @@
          QString tmpStr(iconStr);
          if(!tmpStr.isEmpty()){
              QPixmap *pixmap =
@@ -1169,7 +1264,7 @@ Features:
              if(pixmap->isNull()){
                  delete pixmap;
                  customBtnIconList.append(NULL);
-@@ -3037,7 +2650,6 @@
+@@ -3037,7 +2671,6 @@
          colorStr = colorList.next();
          iconStr = iconList.next();
      }
@@ -1177,7 +1272,7 @@ Features:
  }
  
  void LiquidStyle::applyCustomAttributes(QPushButton *btn)
-@@ -3087,7 +2699,7 @@
+@@ -3087,7 +2720,7 @@
      }
  }
  
@@ -1186,48 +1281,133 @@ Features:
  
  
  
---- -	Mon Jul  1 11:38:05 2002
-+++ plugin.cpp	Fri Jun 28 13:25:25 2002
-@@ -1,29 +1,29 @@
+--- -	Mon Jul 15 02:34:13 2002
++++ plugin.cpp	Fri Jul 12 00:41:40 2002
+@@ -1,29 +1,113 @@
  #include "liquid.h"
 -#include <klocale.h>
-+
++#include "liquidset.h"
++#include "plugin.h"
  
- extern "C" {
+-extern "C" {
 -    KStyle* allocate();
 -    int minor_version();
 -    int major_version();
 -    const char *description();
-+    QStyle* allocate ( );
-+    int minor_version ( );
-+    int major_version ( );
-+    const char *description ( );
++
++
++LiquidInterface::LiquidInterface ( ) :  ref ( 0 )
++{
++}
++    
++LiquidInterface::~LiquidInterface ( )
++{
++}
++        
++QStyle *LiquidInterface::create ( )
++{
++	return new LiquidStyle ( );
++}
++
++QString LiquidInterface::name ( )
++{
++	return QObject::tr( "Liquid", "name" );
  }
  
 -KStyle* allocate()
-+QStyle* allocate ( )
++QString LiquidInterface::description ( )
  {
 -    return(new LiquidStyle);
-+    return new LiquidStyle ( );
++	return QObject::tr( "High Performance Liquid style by Mosfet", "description" );
  }
  
 -int minor_version()
-+int minor_version ( )
++QCString LiquidInterface::key ( )
  {
 -    return(0);
-+    return 0;
++	return QCString ( "liquid" );
  }
  
 -int major_version()
-+int major_version ( )
++unsigned int LiquidInterface::version ( )
  {
 -    return(1);
-+    return 1;
++	return 100; // 1.0.0 (\d+.\d.\d)
  }
  
 -const char *description()
-+const char *description ( )
++QRESULT LiquidInterface::queryInterface ( const QUuid &uuid, QUnknownInterface **iface )
++{
++	static LiquidSettingsInterface *setiface = 0;
++
++	*iface = 0;
++	
++	if ( uuid == IID_QUnknown )
++		*iface = this;
++	else if ( uuid == IID_Style )
++		*iface = this;
++	else if ( uuid == IID_StyleSettings ) {
++		if ( !setiface )
++			setiface = new LiquidSettingsInterface ( );
++		*iface = setiface;
++	}
++	
++	if ( *iface )
++		(*iface)-> addRef ( );
++		
++	return QS_OK;
++}
++
++Q_EXPORT_INTERFACE()
++{
++	Q_CREATE_INSTANCE( LiquidInterface )
++}
++
++
++LiquidSettingsInterface::LiquidSettingsInterface ( ) :  ref ( 0 )
  {
 -    return(i18n("High performance liquid plugin").utf8());
-+    return "High Performance Liquid";
++	m_widget = 0;
  }
++    
++LiquidSettingsInterface::~LiquidSettingsInterface ( )
++{
++}
++        
++QWidget *LiquidSettingsInterface::create ( QWidget *parent, const char *name )
++{
++	m_widget = new LiquidSettings ( parent, name ? name : "LIQUID-SETTINGS" );
++		
++	return m_widget;
++}
++
++bool LiquidSettingsInterface::accept ( )
++{
++	if ( !m_widget )
++		return false;
++
++	return m_widget-> writeConfig ( );
++}
++
++void LiquidSettingsInterface::reject ( )
++{
++}
++
++QRESULT LiquidSettingsInterface::queryInterface ( const QUuid &uuid, QUnknownInterface **iface )
++{
++	*iface = 0;
++	
++	
++	if ( uuid == IID_QUnknown )
++		*iface = this;
++	else if ( uuid == IID_StyleSettings )
++		*iface = this;
++	
++	if ( *iface )
++		(*iface)-> addRef ( );
++		
++	return QS_OK;
++}
++
++// Hack for Retail Z experiments
++extern "C" { QStyle *allocate ( ) { return new LiquidStyle ( ); } }

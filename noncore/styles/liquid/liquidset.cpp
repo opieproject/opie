@@ -28,7 +28,7 @@
 
 #include <qslider.h>
 #include <qtoolbutton.h>
-#include <qbuttongroup.h>
+#include <qcombobox.h>
 #include <qradiobutton.h>
 #include <qcheckbox.h>
 #include <qlabel.h>
@@ -72,42 +72,23 @@ LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
 	m_shadow     = config. readBoolEntry ( "ShadowText", true );
 	m_deco       = config. readBoolEntry ( "WinDecoration", true );
 	int contrast = config. readNumEntry ( "StippleContrast", 5 );
+	m_flat       = config. readBoolEntry ( "FlatToolButtons", false );
 
 	QVBoxLayout *vbox = new QVBoxLayout ( this );
 	vbox-> setSpacing ( 3 );
-	vbox-> setMargin ( 6 );
+	vbox-> setMargin ( 4 );
 
-	QButtonGroup *btngrp = new QButtonGroup ( this );
-	btngrp-> hide ( );
-
-	QRadioButton *rad;
+	QComboBox *cb = new QComboBox ( this );
+	cb-> insertItem ( tr( "No translucency" ), None );
+	cb-> insertItem ( tr( "Stippled, background color" ), StippledBg );
+	cb-> insertItem ( tr( "Stippled, button color" ), StippledBtn );
+	cb-> insertItem ( tr( "Translucent stippled, background color" ), TransStippleBg );
+	cb-> insertItem ( tr( "Translucent stippled, button color" ), TransStippleBtn );
+	cb-> insertItem ( tr( "Custom translucency" ), Custom );
 	
-	rad = new QRadioButton ( tr( "No translucency" ), this );
-	btngrp-> insert ( rad, None );
-	vbox-> addWidget ( rad );
+	cb-> setCurrentItem ( m_type );
+	vbox-> addWidget ( cb );
 	
-	rad = new QRadioButton ( tr( "Stippled, background color" ), this );
-	btngrp-> insert ( rad, StippledBg );
-	vbox-> addWidget ( rad );
-	
-	rad = new QRadioButton ( tr( "Stippled, button color" ), this );
-	btngrp-> insert ( rad, StippledBtn );
-	vbox-> addWidget ( rad );
-	
-	rad = new QRadioButton ( tr( "Translucent stippled, background color" ), this );
-	btngrp-> insert ( rad, TransStippleBg );
-	vbox-> addWidget ( rad );
-	
-	rad = new QRadioButton ( tr( "Translucent stippled, button color" ), this );
-	btngrp-> insert ( rad, TransStippleBtn );
-	vbox-> addWidget ( rad );
-	
-	rad = new QRadioButton ( tr( "Custom translucency" ), this );
-	btngrp-> insert ( rad, Custom );
-	vbox-> addWidget ( rad );
-	
-	btngrp-> setExclusive ( true );
-	btngrp-> setButton ( m_type );
 	
 	QGridLayout *grid = new QGridLayout ( vbox );
 	grid-> addColSpacing ( 0, 16 );
@@ -157,6 +138,12 @@ LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
 
 	vbox-> addSpacing ( 4 );
 	
+	QCheckBox *flattb = new QCheckBox ( tr( "Make toolbar buttons appear flat" ), this );
+	flattb-> setChecked ( m_flat );
+	vbox-> addWidget ( flattb );
+
+	vbox-> addSpacing ( 4 );
+	
 	QHBoxLayout *hbox = new QHBoxLayout ( vbox );
 	
 	hbox-> addWidget ( new QLabel ( tr( "Stipple contrast" ), this )); 
@@ -171,9 +158,10 @@ LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
 
 	changeType ( m_type );
 	
-	connect ( btngrp, SIGNAL( clicked ( int ) ), this, SLOT( changeType ( int ) ) );
+	connect ( cb, SIGNAL( highlighted ( int ) ), this, SLOT( changeType ( int ) ) );
 	connect ( shadow, SIGNAL( toggled ( bool ) ), this, SLOT( changeShadow ( bool ) ) );
 	connect ( windeco, SIGNAL( toggled ( bool ) ), this, SLOT( changeDeco ( bool ) ) );
+	connect ( flattb, SIGNAL( toggled ( bool ) ), this, SLOT( changeFlat ( bool ) ) );
 }
 
 void LiquidSettings::changeType ( int t )
@@ -212,6 +200,11 @@ void LiquidSettings::changeDeco ( bool b )
 	m_deco = b;
 }
 
+void LiquidSettings::changeFlat ( bool b )
+{
+	m_flat = b;
+}
+
 
 bool LiquidSettings::writeConfig ( )
 {
@@ -225,6 +218,7 @@ bool LiquidSettings::writeConfig ( )
 	config. writeEntry ( "ShadowText", m_shadow );	
 	config. writeEntry ( "WinDecoration", m_deco );
 	config. writeEntry ( "StippleContrast", m_contsld-> value ( ));
+	config. writeEntry ( "FlatToolButtons", m_flat );
 	config. write ( );
 
 	return true;
