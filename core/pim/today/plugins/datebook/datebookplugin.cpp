@@ -54,7 +54,7 @@ ConfigWidget* DatebookPlugin::configWidget( QWidget* wid ) {
 }
 
 QString DatebookPlugin::appName()  const {
-    return "datebook";
+    return QObject::tr( "Datebook" );
 }
 
 int DatebookPlugin::minHeight()  const {
@@ -65,6 +65,3 @@ int DatebookPlugin::maxHeight()  const {
     return 100;
 }
 
-
-int main() {
-}
