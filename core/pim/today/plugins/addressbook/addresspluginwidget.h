@@ -35,9 +35,11 @@ public:
     AddressBookPluginWidget( QWidget *parent,  const char *name );
     ~AddressBookPluginWidget();
 
+public slots:
+    void refresh( const OContactAccess* db ); 
+
 protected slots:
     void  startAddressBook();
-    void refresh( const OContactAccess* db ); 
 
 private:
     OClickableLabel* addressLabel;

@@ -20,10 +20,10 @@
 
 #include "addressplugin.h"
 #include "addresspluginconfig.h"
-#include "addresspluginwidget.h"
 
-
-AddressBookPlugin::AddressBookPlugin() {
+AddressBookPlugin::AddressBookPlugin():
+	m_abWidget( 0l )
+{
 }
 
 AddressBookPlugin::~AddressBookPlugin() {
@@ -34,7 +34,7 @@ QString AddressBookPlugin::pluginName() const {
 }
 
 double AddressBookPlugin::versionNumber() const {
-    return 0.1;
+    return 0.2;
 }
 
 QString AddressBookPlugin::pixmapNameWidget() const {
@@ -42,7 +42,8 @@ QString AddressBookPlugin::pixmapNameWidget() const {
 }
 
 QWidget* AddressBookPlugin::widget( QWidget *wid ) {
-    return new AddressBookPluginWidget( wid, "AddressBook" );
+    m_abWidget = new AddressBookPluginWidget( wid, "AddressBook" );
+    return m_abWidget;
 }
 
 QString AddressBookPlugin::pixmapNameConfig() const {
@@ -59,5 +60,10 @@ QString AddressBookPlugin::appName() const {
 
 
 bool AddressBookPlugin::excludeFromRefresh() const {
-    return true;
+    return false;
+}
+
+void AddressBookPlugin::refresh()
+{
+    m_abWidget->refresh( NULL );
 }

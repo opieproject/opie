@@ -25,6 +25,8 @@
 #include <opie/oclickablelabel.h>
 #include <opie/todayplugininterface.h>
 
+#include "addresspluginwidget.h"
+
 class AddressBookPlugin : public TodayPluginObject {
 
 public:
@@ -39,6 +41,10 @@ public:
     TodayConfigWidget* configWidget(QWidget *);
     QString appName() const;
     bool excludeFromRefresh() const;
+    void refresh();
+
+ private:
+    AddressBookPluginWidget* m_abWidget; 
 };
 
 #endif
