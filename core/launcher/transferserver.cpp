@@ -25,6 +25,9 @@
 #include <time.h>
 #include <shadow.h>
 
+/* we need the _OS_LINUX stuff first ! */
+#include <qglobal.h>
+
 #ifndef  _OS_LINUX_
 
 extern "C" {
