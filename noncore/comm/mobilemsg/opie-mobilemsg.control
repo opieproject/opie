@@ -1,0 +1,9 @@
+Files: bin/mobilemsg apps/Applications/mobilemsg.desktop pics/mobilemsg 
+Priority: optional
+Section: opie/comm
+Maintainer: Bruno Rodrigues <bruno.rodrigues@litux.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: Mobile Messaging
+ For the Opie environment.
