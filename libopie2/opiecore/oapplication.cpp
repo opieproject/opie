@@ -92,10 +92,12 @@ void OApplication::init()
     }
 }
 
+
 void OApplication::setMainWidget( QWidget* widget )
 {
     showMainWidget( widget );
 }
+
 
 void OApplication::showMainWidget( QWidget* widget, bool nomax )
 {
@@ -106,5 +108,17 @@ void OApplication::showMainWidget( QWidget* widget, bool nomax )
     widget->show();
     #endif
     widget->setCaption( _appname );
-
 }
+
+
+void OApplication::setTitle( QString title ) const
+{
+    if ( mainWidget() )
+    {
+        if ( !title.isNull() )
+            mainWidget()->setCaption( QString(_appname) + QString( " - " ) + title );
+        else
+            mainWidget()->setCaption( _appname );
+    }
+}
+

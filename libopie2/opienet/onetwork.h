@@ -142,6 +142,8 @@ class OChannelHopper : public QObject
   public:
     OChannelHopper( OWirelessNetworkInterface* );
     virtual ~OChannelHopper();
+    bool isActive() const;
+    int channel() const;
     virtual void timerEvent( QTimerEvent* );
     void setInterval( int );
     int interval() const;
@@ -151,6 +153,7 @@ class OChannelHopper : public QObject
     int _interval;
     int _channel;
     int _tid;
+    int _maxChannel;
 };
 
 
@@ -184,7 +187,7 @@ class OWirelessNetworkInterface : public ONetworkInterface
     virtual void setMonitorMode( bool );
     virtual bool monitorMode() const;
 
-    virtual void setChannelHopping( int interval );
+    virtual void setChannelHopping( int interval = 0 );
     virtual int channelHopping() const;
 
     virtual void setNickName( const QString& ) {};
@@ -207,7 +210,7 @@ class OWirelessNetworkInterface : public ONetworkInterface
     bool wioctl( int call, iwreqstruct& ) const;
 
   private:
-    OChannelHopper _hopper;
+    OChannelHopper* _hopper;
 };
 
 

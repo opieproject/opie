@@ -69,6 +69,7 @@ class OApplication: public OApplicationBaseClass
     * more than one cannot be created in the same application. It
     * saves you the trouble of having to pass the pointer explicitly
     * to every function that may require it.
+    *
     * @return the current application object
     */
     static const OApplication* oApplication() { return _instance; };
@@ -92,14 +93,29 @@ class OApplication: public OApplicationBaseClass
    /**
     * Sets the main widget - reimplemented to call showMainWidget()
     * on Qt/Embedded.
+    *
+    * @param mainWidget the widget to become the main widget
+    * @see QWidget object
     */
     virtual void setMainWidget( QWidget *mainWidget );
 
    /**
     * Shows the main widget - reimplemented to call setMainWidget()
     * on platforms other than Qt/Embedded.
+    *
+    * @param mainWidget the widget to become the main widget
+    * @see QWidget object
     */
     virtual void showMainWidget( QWidget* widget, bool nomax = false );
+
+   /**
+    * Set the application title. The application title will be concatenated
+    * to the application name given in the constructor.
+    *
+    * @param title the title. If not given, resets caption to appname
+    */
+    virtual void setTitle( QString title = QString::null ) const;
+    //virtual void setTitle() const;
 
   protected:
     void init();

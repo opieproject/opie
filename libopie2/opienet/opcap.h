@@ -60,6 +60,7 @@ typedef struct pcap_pkthdr packetheaderstruct;
 
 /* FORWARDS */
 class OPacketCapturer;
+class QSocketNotifier;
 
 /*======================================================================================
  * OPacket - A frame on the wire
@@ -84,6 +85,7 @@ class OPacket : public QObject
   private:
     const packetheaderstruct _hdr;  // pcap packet header
     const unsigned char* _data;     // pcap packet data
+    const unsigned char* _end;      // end of pcap packet data
 };
 
 /*======================================================================================
@@ -95,7 +97,7 @@ class OEthernetPacket : public QObject
   Q_OBJECT
 
   public:
-    OEthernetPacket( const struct ether_header*, QObject* parent = 0 );
+    OEthernetPacket( const unsigned char*, const struct ether_header*, QObject* parent = 0 );
     virtual ~OEthernetPacket();
 
     OMacAddress sourceAddress() const;
@@ -116,7 +118,7 @@ class OWaveLanPacket : public QObject
   Q_OBJECT
 
   public:
-    OWaveLanPacket( const struct ieee_802_11_header*, QObject* parent = 0 );
+    OWaveLanPacket( const unsigned char*, const struct ieee_802_11_header*, QObject* parent = 0 );
     virtual ~OWaveLanPacket();
 
     int duration() const;
@@ -146,16 +148,155 @@ class OWaveLanManagementPacket : public QObject
   Q_OBJECT
 
   public:
-    OWaveLanManagementPacket( const struct ieee_802_11_mgmt_header*, OWaveLanPacket* parent = 0 );
+    OWaveLanManagementPacket( const unsigned char*, const struct ieee_802_11_mgmt_header*, OWaveLanPacket* parent = 0 );
     virtual ~OWaveLanManagementPacket();
 
-    QString SSID() const;
+    int beaconInterval() const;
+    int capabilities() const; // generic
+
+    bool canESS() const;
+    bool canIBSS() const;
+    bool canCFP() const;
+    bool canCFP_REQ() const;
+    bool canPrivacy() const;
 
   private:
     const struct ieee_802_11_mgmt_header* _header;
     const struct ieee_802_11_mgmt_body* _body;
 };
 
+
+/*======================================================================================
+ * OWaveLanManagementSSID
+ *======================================================================================*/
+
+class OWaveLanManagementSSID : public QObject
+{
+  Q_OBJECT
+
+  public:
+    OWaveLanManagementSSID( const unsigned char*, const struct ssid_t*, QObject* parent = 0 );
+    virtual ~OWaveLanManagementSSID();
+
+    QString ID() const;
+
+  private:
+    const struct ssid_t* _data;
+};
+
+/*======================================================================================
+ * OWaveLanManagementRates
+ *======================================================================================*/
+
+class OWaveLanManagementRates : public QObject
+{
+  Q_OBJECT
+
+  public:
+    OWaveLanManagementRates( const unsigned char*, const struct rates_t*, QObject* parent = 0 );
+    virtual ~OWaveLanManagementRates();
+
+  private:
+    const struct rates_t* _data;
+};
+
+/*======================================================================================
+ * OWaveLanManagementCF
+ *======================================================================================*/
+
+class OWaveLanManagementCF : public QObject
+{
+  Q_OBJECT
+
+  public:
+    OWaveLanManagementCF( const unsigned char*, const struct cf_t*, QObject* parent = 0 );
+    virtual ~OWaveLanManagementCF();
+
+  private:
+    const struct cf_t* _data;
+};
+
+/*======================================================================================
+ * OWaveLanManagementFH
+ *======================================================================================*/
+
+class OWaveLanManagementFH : public QObject
+{
+  Q_OBJECT
+
+  public:
+    OWaveLanManagementFH( const unsigned char*, const struct fh_t*, QObject* parent = 0 );
+    virtual ~OWaveLanManagementFH();
+
+  private:
+    const struct fh_t* _data;
+};
+
+/*======================================================================================
+ * OWaveLanManagementDS
+ *======================================================================================*/
+
+class OWaveLanManagementDS : public QObject
+{
+  Q_OBJECT
+
+  public:
+    OWaveLanManagementDS( const unsigned char*, const struct ds_t*, QObject* parent = 0 );
+    virtual ~OWaveLanManagementDS();
+
+    int channel() const;
+
+  private:
+    const struct ds_t* _data;
+};
+
+/*======================================================================================
+ * OWaveLanManagementTim
+ *======================================================================================*/
+
+class OWaveLanManagementTim : public QObject
+{
+  Q_OBJECT
+
+  public:
+    OWaveLanManagementTim( const unsigned char*, const struct tim_t*, QObject* parent = 0 );
+    virtual ~OWaveLanManagementTim();
+
+  private:
+    const struct tim_t* _data;
+};
+
+/*======================================================================================
+ * OWaveLanManagementIBSS
+ *======================================================================================*/
+
+class OWaveLanManagementIBSS : public QObject
+{
+  Q_OBJECT
+
+  public:
+    OWaveLanManagementIBSS( const unsigned char*, const struct ibss_t*, QObject* parent = 0 );
+    virtual ~OWaveLanManagementIBSS();
+
+  private:
+    const struct ibss_t* _data;
+};
+
+/*======================================================================================
+ * OWaveLanManagementChallenge
+ *======================================================================================*/
+
+class OWaveLanManagementChallenge : public QObject
+{
+  Q_OBJECT
+
+  public:
+    OWaveLanManagementChallenge( const unsigned char*, const struct challenge_t*, QObject* parent = 0 );
+    virtual ~OWaveLanManagementChallenge();
+
+  private:
+    const struct challenge_t* _data;
+};
 
 /*======================================================================================
  * OWaveLanDataPacket - type: data (T_DATA)
@@ -166,7 +307,7 @@ class OWaveLanDataPacket : public QObject
   Q_OBJECT
 
   public:
-    OWaveLanDataPacket( const struct ieee_802_11_data_header*, OWaveLanPacket* parent = 0 );
+    OWaveLanDataPacket( const unsigned char*, const struct ieee_802_11_data_header*, OWaveLanPacket* parent = 0 );
     virtual ~OWaveLanDataPacket();
 
   private:
@@ -182,7 +323,7 @@ class OLLCPacket : public QObject
   Q_OBJECT
 
   public:
-    OLLCPacket( const struct ieee_802_11_802_2_header* data, QObject* parent = 0 );
+    OLLCPacket( const unsigned char*, const struct ieee_802_11_802_2_header* data, QObject* parent = 0 );
     virtual ~OLLCPacket();
 
   private:
@@ -198,7 +339,7 @@ class OIPPacket : public QObject
   Q_OBJECT
 
   public:
-    OIPPacket( const struct iphdr*, QObject* parent = 0 );
+    OIPPacket( const unsigned char*, const struct iphdr*, QObject* parent = 0 );
     virtual ~OIPPacket();
 
     QHostAddress fromIPAddress() const;
@@ -225,7 +366,7 @@ class OUDPPacket : public QObject
   Q_OBJECT
 
   public:
-    OUDPPacket( const struct udphdr*, QObject* parent = 0 );
+    OUDPPacket( const unsigned char*, const struct udphdr*, QObject* parent = 0 );
     virtual ~OUDPPacket();
 
     int fromPort() const;
@@ -244,7 +385,7 @@ class OTCPPacket : public QObject
   Q_OBJECT
 
   public:
-    OTCPPacket( const struct tcphdr*, QObject* parent = 0 );
+    OTCPPacket( const unsigned char*, const struct tcphdr*, QObject* parent = 0 );
     virtual ~OTCPPacket();
 
     int fromPort() const;
@@ -284,9 +425,10 @@ class OPacketCapturer : public QObject
     void readyToReceive();
 
   protected:
-    QString _name;  // devicename
-    bool _open;     // check this before doing pcap calls
-    pcap_t* _pch;   // pcap library handle
+    QString _name;          // devicename
+    bool _open;             // check this before doing pcap calls
+    pcap_t* _pch;           // pcap library handle
+    QSocketNotifier* _sn;   // socket notifier for main loop
     mutable char _errbuf[PCAP_ERRBUF_SIZE];
 };
 

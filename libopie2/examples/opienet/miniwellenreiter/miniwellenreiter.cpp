@@ -172,12 +172,15 @@ public slots:
 
     if ( beacon )
     {
-        if ( stations.find( beacon->SSID() ) )
-            stations[beacon->SSID()]->beacons++;
+        OWaveLanManagementSSID* ssid = static_cast<OWaveLanManagementSSID*>( p->child( "802.11 SSID" ) );
+        QString essid = ssid ? ssid->ID() : "<unknown>";
+
+        if ( stations.find( essid ) )
+            stations[essid]->beacons++;
         else
         {
-            printf( "found new network @ channel %d, SSID = '%s'\n", wiface->channel(), (const char*) beacon->SSID() );
-            stations.insert( beacon->SSID(), new Station( "unknown", wiface->channel(),
+            printf( "found new network @ channel %d, SSID = '%s'\n", wiface->channel(), (const char*) essid );
+            stations.insert( essid, new Station( "unknown", wiface->channel(),
             ((OWaveLanPacket*) beacon->parent())->usesWep() ) );
         }
     }

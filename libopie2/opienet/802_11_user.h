@@ -255,11 +255,11 @@ struct ieee_802_11_data_header {
 //	u_int8_t	gap[8];
 };
 
-#define CAPABILITY_ESS(cap)	((cap) & 0x0001)
-#define CAPABILITY_IBSS(cap)	((cap) & 0x0002)
-#define CAPABILITY_CFP(cap)	((cap) & 0x0004)
-#define CAPABILITY_CFP_REQ(cap)	((cap) & 0x0008)
-#define CAPABILITY_PRIVACY(cap)	((cap) & 0x0010)
+#define CAPABILITY_ESS(cap)     ((cap) & 0x0001)
+#define CAPABILITY_IBSS(cap)    ((cap) & 0x0002)
+#define CAPABILITY_CFP(cap)     ((cap) & 0x0004)
+#define CAPABILITY_CFP_REQ(cap) ((cap) & 0x0008)
+#define CAPABILITY_PRIVACY(cap) ((cap) & 0x0010)
 
 struct ssid_t {
   u_int8_t	element_id;
@@ -318,20 +318,28 @@ struct tim_t {
   u_int8_t	bitmap[251];
 };
 
-#define E_SSID 		0
-#define E_RATES 	1
-#define E_FH	 	2
-#define E_DS 		3
-#define E_CF	 	4
-#define E_TIM	 	5
-#define E_IBSS 		6
-#define E_CHALLENGE 	16
-#define E_CISCO		133
+
+struct ibss_t {
+  u_int8_t	element_id;
+  u_int8_t	length;
+  u_int16_t	atim_window;
+};
+
+
+#define E_SSID      0
+#define E_RATES     1
+#define E_FH        2
+#define E_DS        3
+#define E_CF        4
+#define E_TIM       5
+#define E_IBSS      6
+#define E_CHALLENGE 16
+#define E_CISCO     133
 
 
 struct ieee_802_11_mgmt_body {
-  u_int8_t   	timestamp[8];
-  u_int16_t  	beacon_interval;
+  u_int8_t  timestamp[8];
+  u_int16_t beacon_interval;
 //  u_int16_t 	listen_interval;
 //  u_int16_t 	status_code;
 //  u_int16_t 	aid;
@@ -340,13 +348,13 @@ struct ieee_802_11_mgmt_body {
 //  u_int16_t	auth_alg;
 //  u_int16_t	auth_trans_seq_num;
 //  struct challenge_t  challenge;
-  u_int16_t	capability_info;
-  struct ssid_t	ssid;
-  struct rates_t 	rates;
-  struct ds_t	ds;
-  struct cf_t	cf;
-  struct fh_t	fh;
-  struct tim_t	tim;
+  u_int16_t capability_info;
+//  struct ssid_t	ssid;
+//  struct rates_t 	rates;
+//  struct ds_t	ds;
+//  struct cf_t	cf;
+//  struct fh_t	fh;
+//  struct tim_t	tim;
 };
 
 

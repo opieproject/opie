@@ -291,7 +291,8 @@ bool ONetworkInterface::isWireless() const
 
 OChannelHopper::OChannelHopper( OWirelessNetworkInterface* iface )
                :QObject( 0, "Mickey's funky hopper" ),
-               _iface( iface ), _interval( 0 ), _channel( 0 ), _tid( 0 )
+               _iface( iface ), _interval( 0 ), _channel( 1 ), _tid( 0 ),
+               _maxChannel( iface->channels()+1 )
 {
 }
 
@@ -301,10 +302,21 @@ OChannelHopper::~OChannelHopper()
 }
 
 
+bool OChannelHopper::isActive() const
+{
+    return _tid;
+}
+
+
+int OChannelHopper::channel() const
+{
+    return _channel;
+}
+
+
 void OChannelHopper::timerEvent( QTimerEvent* )
 {
-    //FIXME: Get available channels from OWirelessNetworkInterface
-    if ( --_channel < 0 ) _channel = 13;
+    if ( !--_channel ) _channel = _maxChannel;
     _iface->setChannel( _channel );
     qDebug( "OChannelHopper::timerEvent(): set channel %d on interface '%s'",
             _channel, (const char*) _iface->name() );
@@ -319,6 +331,7 @@ void OChannelHopper::setInterval( int interval )
     if ( _interval )
         killTimer( _tid );
 
+    _tid = 0;
     _interval = interval;
 
     if ( _interval )
@@ -339,7 +352,7 @@ int OChannelHopper::interval() const
  *======================================================================================*/
 
 OWirelessNetworkInterface::OWirelessNetworkInterface( const QString& name )
-                           :ONetworkInterface( name ), _hopper( this )
+                           :ONetworkInterface( name ), _hopper( 0 )
 {
     qDebug( "OWirelessNetworkInterface::OWirelessNetworkInterface()" );
     init();
@@ -376,13 +389,10 @@ void OWirelessNetworkInterface::init()
         return;
     }
 
-    //TODO: Find out what the difference between num_channel and
-    //      num_frequency is about.
-
     for ( int i = 0; i < range.num_frequency; ++i )
     {
         int freq = (int) ( double( range.freq[i].m ) * pow( 10, range.freq[i].e ) / 1000000.0 );
-        _channels.insert( freq, i );
+        _channels.insert( freq, i+1 );
     }
 }
 
@@ -412,13 +422,18 @@ QString OWirelessNetworkInterface::associatedAP() const
 
 int OWirelessNetworkInterface::channel() const
 {
+    //FIXME: When monitoring enabled, then use it
+    //FIXME: to gather the current RF channel
+    //FIXME: Until then, get active channel from hopper.
+    if ( _hopper && _hopper->isActive() )
+        return _hopper->channel();
+
     if ( !wioctl( SIOCGIWFREQ ) )
     {
         return -1;
     }
     else
     {
-        //FIXME: This is off-by-one !? Why?
         return _channels[ static_cast<int>(double( _iwr.u.freq.m ) * pow( 10, _iwr.u.freq.e ) / 1000000) ];
     }
 }
@@ -461,13 +476,15 @@ int OWirelessNetworkInterface::channels() const
 
 void OWirelessNetworkInterface::setChannelHopping( int interval )
 {
-    _hopper.setInterval( interval );
+    if ( !_hopper ) _hopper = new OChannelHopper( this );
+    _hopper->setInterval( interval );
+    //FIXME: When and by whom will the channel hopper be deleted?
 }
 
 
 int OWirelessNetworkInterface::channelHopping() const
 {
-    return _hopper.interval();
+    return _hopper->interval();
 }
 
 
@@ -478,6 +495,7 @@ void OWirelessNetworkInterface::setMonitorMode( bool b )
     else
         qDebug( "ONetwork(): can't switch monitor mode without installed monitoring interface" );
 }
+
 
 bool OWirelessNetworkInterface::monitorMode() const
 {
