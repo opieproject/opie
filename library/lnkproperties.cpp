@@ -170,7 +170,7 @@ void LnkProperties::setupLocations()
   if ( (*it)->availBlocks() * (*it)->blockSize() > fileSize + 10000 ) {
       if ( (*it)->isRemovable() ||
      (*it)->disk() == "/dev/mtdblock1" ||
-     (*it)->disk() == "/dev/mtdblock/1" ) {
+     (*it)->disk() == "/dev/mtdblock/1" || (*it)->disk().left(13) == "/dev/mtdblock" ) {
     d->locationCombo->insertItem( (*it)->name(), index );
     locations.append( ((*it)->isRemovable() ? (*it)->path() : homeDir) );
     if ( lnk->file().contains( (*it)->path() ) ) {
