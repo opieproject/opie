@@ -1,0 +1,11 @@
+Package: opie-aboutapplet
+Files: plugins/applets/libaboutapplet.so*
+Priority: optional
+Section: opie/applets
+Maintainer: Opie Team <opie@handhelds.org>
+Architecture: arm
+Depends: task-opie-minimal
+Conflicts: opie-aboutapplet-ipaq
+Description: About Opie
+ About box for Opie
+Version: $QPE_VERSION$EXTRAVERSION
