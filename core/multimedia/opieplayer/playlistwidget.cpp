@@ -269,26 +269,12 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     QPEApplication::setStylusOperation( videoView->viewport(),QPEApplication::RightOnHold);
 
     tabWidget->insertTab( vTab,tr("Video"));
-//  populateVideoView();
 
-//playlists list
     QWidget *LTab;
     LTab = new QWidget( tabWidget, "LTab" );
     playLists = new FileSelector( "playlist/plain", LTab, "fileselector" , FALSE, FALSE); //buggy
     playLists->setMinimumSize(233,260);
     tabWidget->insertTab(LTab,tr("Lists"));
-
-//      connect( playLists, SIGNAL( newSelected( const DocLnk &) ), this, SLOT( newFile( const DocLnk & ) ) );
-
-// add the library area
-
-//     connect( audioView, SIGNAL( rightButtonClicked( QListViewItem *, const QPoint &, int)),
-//              this, SLOT( fauxPlay( QListViewItem *) ) );
-//     connect( videoView, SIGNAL( rightButtonClicked( QListViewItem *, const QPoint &, int)),
-//              this, SLOT( fauxPlay( QListViewItem *)) );
-
-//    connect( audioView, SIGNAL( clicked( QListViewItem *) ), this, SLOT( fauxPlay( QListViewItem *) ) );
-//    connect( videoView, SIGNAL( clicked( QListViewItem *) ), this, SLOT( fauxPlay( QListViewItem *) ) );
 
     connect(tbDeletePlaylist,(SIGNAL(released())),SLOT( deletePlaylist()));
     connect( fullScreenButton, SIGNAL(activated()), mediaPlayerState, SLOT(toggleFullscreen()) );
@@ -320,14 +306,12 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     connect( mediaPlayerState, SIGNAL( playlistToggled( bool ) ),   this,         SLOT( setPlaylist( bool ) ) );
 
     connect( d->selectedFiles, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( playIt( QListViewItem *) ) );
-//   connect( d->selectedFiles, SIGNAL( fileSelected( const DocLnk & ) ), this, SLOT( addToSelection( const DocLnk & ) ) );
 
     setCentralWidget( vbox5 );
 
     Config cfg( "OpiePlayer" );
     readConfig( cfg );
     QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
-//    qDebug("currentList is "+currentPlaylist);
     loadList(DocLnk( currentPlaylist));
     setCaption(tr("OpiePlayer: ")+ currentPlaylist );
     
@@ -351,13 +335,7 @@ void PlayListWidget::initializeStates() {
     d->tbPlay->setOn( mediaPlayerState->playing() );
     d->tbLoop->setOn( mediaPlayerState->looping() );
     d->tbShuffle->setOn( mediaPlayerState->shuffled() );
-//     d->tbFull->setOn( mediaPlayerState->fullscreen() );
-//     d->tbScale->setOn( mediaPlayerState->scaled() );
-//     d->tbScale->setEnabled( mediaPlayerState->fullscreen() );
-//    setPlaylist( mediaPlayerState->playlist() );
     setPlaylist( true);
-//     d->selectedFiles->first();
-
 }
 
 
@@ -375,7 +353,6 @@ void PlayListWidget::readConfig( Config& cfg ) {
         }
     }
     d->selectedFiles->setSelectedItem( currentString);
-//    d->selectedFiles->setSelectedItem( (const QString &)currentString);
 }
 
 
@@ -416,12 +393,6 @@ void PlayListWidget::writeConfig( Config& cfg ) const {
 
 
 void PlayListWidget::addToSelection( const DocLnk& lnk ) {
-//    qDebug("add");
-//     if( lnk.file().find(" ",0,TRUE) != -1 || lnk.file().find("%20",0,TRUE) != -1) {
-//         QMessageBox::message("Note","You are trying to play\na malformed url.");
-        
-//     } else { 
-
         d->setDocumentUsed = FALSE;
         if ( mediaPlayerState->playlist() ) {
             if(QFileInfo(lnk.file()).exists() || lnk.file().left(4) == "http" )
@@ -429,7 +400,6 @@ void PlayListWidget::addToSelection( const DocLnk& lnk ) {
         }
         else
             mediaPlayerState->setPlaying( TRUE );
-//    }
 }
 
 
@@ -537,7 +507,7 @@ const DocLnk *PlayListWidget::current() { // this is fugly
           else if ( d->setDocumentUsed && d->current ) {
               return d->current;
           } else {
-              return d->files->selected();
+              return &(d->files->selectedDocument());
           }
       }
       break;
@@ -893,9 +863,9 @@ void PlayListWidget::deletePlaylist() {
                                       (tr("You really want to delete\nthis playlist?")),
                                       (tr("Yes")), (tr("No")), 0 )){
       case 0: // Yes clicked,
-          QFile().remove(playLists->selected()->file());
-          QFile().remove(playLists->selected()->linkFile());
-          playLists->reread();
+//           QFile().remove(playLists->selected()->file());
+//           QFile().remove(playLists->selected()->linkFile());
+//           playLists->reread();
           break;
       case 1: // Cancel
           break;
@@ -1036,6 +1006,7 @@ void PlayListWidget::populateAudioView() {
                 size=0;
             else 
                 size = QFile( dit.current()->file() ).size();
+            qDebug(dit.current()->name());
             newItem= /*(void)*/ new QListViewItem( audioView, dit.current()->name(),
                                                    QString::number(size ), storage);
             newItem->setPixmap(0, Resource::loadPixmap( "opieplayer/musicfile" ));
