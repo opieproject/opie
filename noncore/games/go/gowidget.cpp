@@ -51,8 +51,8 @@ static QPixmap *whiteStone;
 
 static bool smallStones = FALSE;
 
-GoMainWidget::GoMainWidget( QWidget *parent, const char* name) :
-	QMainWindow( parent, name )
+GoMainWidget::GoMainWidget( QWidget *parent, const char* name, WFlags fl) :
+	QMainWindow( parent, name, fl )
 {
      setToolBarsMovable( FALSE );
     GoWidget *go = new GoWidget(this);

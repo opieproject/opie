@@ -21,15 +21,6 @@
 #include "textedit.h"
 
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-int main( int argc, char **argv )
-{
-    QPEApplication a( argc, argv );
-    
-    TextEdit e;
-    a.showMainDocumentWidget(&e);
-//     if ( argc == 3 && argv[1] == QCString("-f") )
-//   e.openFile(argv[2]);
-
-    return a.exec();
-}
+OPIE_EXPORT_APP( OApplicationFactory<TextEdit> )

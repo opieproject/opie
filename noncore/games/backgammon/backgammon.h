@@ -85,6 +85,7 @@ private:
     bool gameFinished;
 
 public:
+    static QString appName() { return QString::fromLatin1("backgammon"); }
     BackGammon( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~BackGammon();
 private slots:

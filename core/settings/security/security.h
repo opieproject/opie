@@ -29,6 +29,7 @@ class Security : public SecurityBase
     Q_OBJECT
 
 public:
+    static QString appName() { return QString::fromLatin1("security"); }
     Security( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~Security();
 

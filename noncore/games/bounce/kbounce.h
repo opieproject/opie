@@ -32,7 +32,8 @@ class KJezzball : public QMainWindow
    Q_OBJECT
 
 public:
-   KJezzball();
+   static QString appName() { return QString::fromLatin1("bounce"); }
+   KJezzball(QWidget *, const char*, WFlags );
 
 public slots:
    void newGame();

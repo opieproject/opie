@@ -1,6 +1,4 @@
-TEMPLATE	= app
-CONFIG		+= qt warn_on release
-DESTDIR		= $(OPIEDIR)/bin
+CONFIG		+= qt warn_on release quick-app
 HEADERS	= datebookday.h \
 	  datebook.h \	
 	  dateentryimpl.h \

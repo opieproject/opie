@@ -21,13 +21,6 @@
 #include "helpbrowser.h"
 
 #include <qtopia/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-int main( int argc, char ** argv )
-{
-    QPEApplication a( argc, argv );
-
-    HelpBrowser mw;
-    a.showMainWidget( &mw );
-
-    return a.exec();
-}
+OPIE_EXPORT_APP( OApplicationFactory<HelpBrowser> )

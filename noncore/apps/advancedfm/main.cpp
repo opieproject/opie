@@ -16,12 +16,8 @@
 
 #include "advancedfm.h"
 
-int main(int argc, char *argv[])
-{
-    QPEApplication a(argc, argv);
+#include <opie/oapplicationfactory.h>
 
-    AdvancedFm advencedFm;
-    a.showMainWidget( &advencedFm);
-    return a.exec();
-}
+OPIE_EXPORT_APP( OApplicationFactory<AdvancedFm> )
+
 

@@ -43,15 +43,15 @@ class EKNumTabWidget;
 
 class Konsole : public QMainWindow
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
+  static QString appName() { return QString::fromLatin1("embeddedkonsole"); }
 
   Konsole(QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
-  Konsole(const char * name, const char* pgm, QStrList & _args, int histon);
   ~Konsole();
   void setColLin(int columns, int lines);
-  QPEToolBar *secondToolBar; 
+  QPEToolBar *secondToolBar;
   void show();
   void setColor();
   int lastSelectedMenu;
@@ -94,21 +94,21 @@ private:
   QColor foreground, background;
 bool fromMenu;
 private:
-  class VTFont 
+  class VTFont
   {
   public:
-    VTFont(QString name, QFont& font) 
+    VTFont(QString name, QFont& font)
     {
       this->name = name;
       this->font = font;
     }
 
-    QFont& getFont() 
+    QFont& getFont()
     {
       return font;
     }
 
-    QString getName() 
+    QString getName()
     {
       return name;
     }

@@ -54,6 +54,8 @@
 #include <opie/opimnotifymanager.h>
 #include <opie/otodoaccessvcal.h>
 
+#include <opie/oapplicationfactory.h>
+
 #include "quickeditimpl.h"
 #include "todotemplatemanager.h"
 #include "templateeditor.h"
@@ -63,13 +65,17 @@
 #include "todoeditor.h"
 #include "mainwindow.h"
 
+OPIE_EXPORT_APP( OApplicationFactory<Todo::MainWindow> )
 
 using namespace Todo;
 
 MainWindow::MainWindow( QWidget* parent,
-                        const char* name )
+                        const char* name, WFlags )
     : OPimMainWindow( "Todolist", parent, name, WType_TopLevel | WStyle_ContextHelp )
 {
+    if (!name)
+        setName("todo window");
+
     m_syncing = false;
     m_showing = false;
     m_counter = 0;
@@ -350,6 +356,7 @@ TodoShow* MainWindow::currentShow() {
     return m_curShow;
 }
 void MainWindow::slotReload() {
+    m_syncing = FALSE;
     m_todoMgr.reload();
     currentView()->updateView( );
     raiseCurrentView();
@@ -604,14 +611,14 @@ void MainWindow::receiveFile( const QString& filename ) {
 		    OTodoAccess::List::Iterator it;
 		    for ( it = list.begin(); it != list.end(); ++it )
 			    m_todoMgr.add( (*it) );
-		    
+
 		    currentView()->updateView();
 	    }
     }
 }
 
 void MainWindow::slotFlush() {
-    m_syncing = FALSE;
+    m_syncing = TRUE;
     m_todoMgr.save();
 }
 void MainWindow::slotShowDetails() {

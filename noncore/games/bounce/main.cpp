@@ -18,12 +18,7 @@
 
 #include <qpe/qpeapplication.h>
 #include "kbounce.h"
+#include <opie/oapplicationfactory.h>
 
-int main(int argc, char **argv)
-{
-	QPEApplication a( argc, argv );
-	KJezzball *top = new KJezzball;
-	a.showMainWidget(top);
+OPIE_EXPORT_APP( OApplicationFactory<KJezzball> )
 
-	return a.exec();
-}

@@ -14,12 +14,6 @@
 
 #include "formatter.h"
 
-int main(int argc, char *argv[])
-{
-    QPEApplication a(argc, argv);
+#include <opie/oapplicationfactory.h>
 
-    FormatterApp formatterApp;
-    a.showMainWidget( &formatterApp);
-    return a.exec();
-}
-
+OPIE_EXPORT_APP( OApplicationFactory<FormatterApp> )

@@ -1,9 +1,7 @@
 QMAKE_CFLAGS = -DHAVE_OPENPTY
 TMAKE_FLAGS += -DHAVE_OPENPTY
 QMAKE_LIBS = -lutil
-TEMPLATE  = app
-CONFIG    += qt warn_on release
-DESTDIR   = $(OPIEDIR)/bin
+CONFIG    += qt warn_on release quick-app
 HEADERS   = TEWidget.h \
       TEScreen.h \
       TECommon.h \

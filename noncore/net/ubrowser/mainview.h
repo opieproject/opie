@@ -36,7 +36,8 @@ class MainView : public QMainWindow
 {
 	Q_OBJECT
 public:
-	MainView(QWidget *parent=0, const char *name=0);
+	static QString appName() { return QString::fromLatin1("ubrowser"); }
+	MainView(QWidget *parent=0, const char *name=0, WFlags fl = 0);
 public slots:
 	void goClicked();
 	void textChanged();

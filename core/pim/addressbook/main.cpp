@@ -20,22 +20,8 @@
 
 #include "addressbook.h"
 
-#include <qpe/qpeapplication.h>
-#include <qpe/qcopenvelope_qws.h>
-#include <qstring.h>
+#include <qtopia/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-int main( int argc, char ** argv )
-{
-    QPEApplication a( argc, argv );
+OPIE_EXPORT_APP( OApplicationFactory<AddressbookWindow> )
 
-    AddressbookWindow mw;
-    QObject::connect( &a, SIGNAL( flush() ), &mw, SLOT( flush() ) );
-    QObject::connect( &a, SIGNAL( reload() ), &mw, SLOT( reload() ) );
-    QObject::connect( &a, SIGNAL( appMessage(const QCString &, const QByteArray &) ), 
-	    &mw, SLOT( appMessage(const QCString &, const QByteArray &) ) );
-
-    mw.setCaption( AddressbookWindow::tr("Contacts") );
-    a.showMainDocumentWidget(&mw);
-
-    return a.exec();
-}

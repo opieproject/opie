@@ -46,6 +46,9 @@
 #include <qstringlist.h>
 #include <qpalette.h>
 
+#include <unistd.h>
+#include <pwd.h>
+#include <sys/types.h>
 #include <sys/wait.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -171,19 +174,52 @@ static const char *commonCmds[] =
     NULL
 };
 
+static void konsoleInit(const char* shell, QStrList& temp) {
+    if(setuid(getuid()) !=0) qDebug("setuid failed");
+    if(setgid(getgid()) != 0) qDebug("setgid failed"); // drop privileges
+
+
+//  QPEApplication::grabKeyboard(); // for CTRL and ALT
+
+    qDebug("keyboard grabbed");
+#ifdef FAKE_CTRL_AND_ALT
+    qDebug("Fake Ctrl and Alt defined");
+    QPEApplication::grabKeyboard(); // for CTRL and ALT
+#endif
+
+    shell = getenv("SHELL");
+
+    if (shell == NULL || *shell == '\0') {
+        struct passwd *ent = 0;
+        uid_t me = getuid();
+        shell = "/bin/sh";
+
+        while ( (ent = getpwent()) != 0 ) {
+            if (ent->pw_uid == me) {
+                if (ent->pw_shell != "")
+                    shell = ent->pw_shell;
+                break;
+            }
+        }
+        endpwent();
+    }
+
+    if( putenv((char*)"COLORTERM=") !=0)
+        qDebug("putenv failed"); // to trigger mc's color detection
+}
 
 Konsole::Konsole(QWidget* parent, const char* name, WFlags fl) :
     QMainWindow(parent, name, fl)
 {
-    QStrList args;
-    init("/bin/sh",args);
+    QStrList tmp; const char* shell;
+
+    setCaption( tr("Terminal") );
+
+    konsoleInit( shell, tmp );
+    init(shell,tmp);
 }
 
-Konsole::Konsole(const char* name, const char* _pgm, QStrList & _args, int)
- : QMainWindow(0, name)
-{
-    init(_pgm,_args);
-}
+
 
 void Konsole::initCommandList()
 {
@@ -299,7 +335,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
 #ifdef QT_QWS_OPIE
   colorMenu->insertItem(tr( "Custom"));
 #endif
-  
+
   configMenu->insertItem( tr("Font"), fontList );
   configMenu->insertItem(tr( "Colors") ,colorMenu);
 
@@ -368,7 +404,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   scrollMenu->insertItem(tr( "Right" ));
 //   scrollMenu->insertSeparator(4);
 //   scrollMenu->insertItem(tr( "Horizontal" ));
- 
+
   configMenu->insertItem(tr( "ScrollBar" ),scrollMenu);
 
   int jut = configMenu->insertItem(tr( "Wrap" ));
@@ -380,7 +416,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
 
   configMenu->setItemChecked(jut, cfg.readBoolEntry("useBeep",0));
 
-  
+
 //scrollMenuSelected(-29);
 //   cfg.setGroup("ScrollBar");
 //   if(cfg.readBoolEntry("HorzScroll",0)) {
@@ -418,7 +454,7 @@ void Konsole::show()
     newSession();
   }
   QMainWindow::show();
-  
+
 }
 
 void Konsole::initSession(const char*, QStrList &)
@@ -541,7 +577,7 @@ QSize Konsole::calcSize(int columns, int lines) {
 void Konsole::setColLin(int columns, int lines)
 {
   qDebug("konsole::setColLin:: Columns %d", columns);
-    
+
   if ((columns==0) || (lines==0))
   {
     if (defaultSize.isEmpty()) // not in config file : set default value
@@ -763,7 +799,7 @@ void Konsole::colorMenuSelected(int iD)
             cfg.writeEntry("Schema","18");
             colorMenu->setItemChecked(-18,TRUE);
         }
-#ifdef QT_QWS_OPIE        
+#ifdef QT_QWS_OPIE
         if(iD==-19) {
 // Custom
             qDebug("do custom");
@@ -890,7 +926,7 @@ i=-24;j=-25;k=-26;
      te->setScrollbarLocation(0);
      cfg.writeEntry("Position",0);
  }  else if(index == j) {
-        
+
      te->setScrollbarLocation(1);
      cfg.writeEntry("Position",1);
  }  else if(index == k) {
@@ -898,7 +934,7 @@ i=-24;j=-25;k=-26;
      te->setScrollbarLocation(2);
      cfg.writeEntry("Position",2);
  }
-    
+
 //       case -29: {
 //           bool b=cfg.readBoolEntry("HorzScroll",0);
 //           cfg.writeEntry("HorzScroll", !b );
@@ -1047,7 +1083,7 @@ i=-29;
 #else
 i=-28;
 #endif
-    
+
  Config cfg("Konsole");
     cfg.setGroup("ScrollBar");
     TEWidget* te = getTe();
@@ -1058,5 +1094,5 @@ i=-28;
 //        te->setWrapAt(90);
         te->setWrapAt(120);
         configMenu->setItemChecked( i,FALSE);
-    }       
+    }
 }

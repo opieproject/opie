@@ -1,7 +1,5 @@
-TEMPLATE  = app
 
-CONFIG    += qt warn_on release
-DESTDIR   = $(OPIEDIR)/bin
+CONFIG    += qt warn_on release quick-app
 
 HEADERS   = canvascard.h canvasshapes.h cardgame.h cardgamelayout.h cardpile.h card.h carddeck.h \
     canvascardgame.h freecellcardgame.h chicanecardgame.h harpcardgame.h teeclubcardgame.h \

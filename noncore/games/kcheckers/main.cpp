@@ -3,16 +3,8 @@
 #include <qfont.h>
 
 #include "kcheckers.h"
+#include <opie/oapplicationfactory.h>
 
+OPIE_EXPORT_APP( OApplicationFactory<KCheckers> )
 
-int main(int argc, char *argv[])
-{
-  QPEApplication app(argc,argv);
-
-  KCheckers kcheckers;
-  app.setMainWidget(&kcheckers);
-  kcheckers.showMaximized();
-
-  return app.exec();
-}
 

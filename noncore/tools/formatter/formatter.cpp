@@ -54,7 +54,7 @@
 
 /* 
    Blah blah blah blah */
-FormatterApp::FormatterApp( QWidget* parent,  const char* name, bool , WFlags fl )
+FormatterApp::FormatterApp( QWidget* parent,  const char* name, WFlags fl, bool modal )
         : QMainWindow( parent, name, fl )
 //    : QDialog( parent, name, modal, fl )
 {

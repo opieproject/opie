@@ -9,7 +9,7 @@
  *
  * Requirements:    Qt
  *
- * $Id: main.cpp,v 1.2.2.1 2003-06-01 13:45:32 zecke Exp $
+ * $Id: main.cpp,v 1.2.2.1.2.1 2003-08-28 00:00:57 zecke Exp $
  *
  ***************************************************************************/
 
@@ -20,20 +20,22 @@
 #include "calcdisplay.h"
 #include "calckeypad.h"
 
+#include <opie/oapplicationfactory.h>
 
-
-int main( int argc, char **argv ) {
-
-    QPEApplication app( argc, argv );
-
-    QVBox *layout = new QVBox(0, "fond");
+struct Layout : QVBox{
+    static QString appName() { return QString::fromLatin1("euroconv"); }
+    Layout(QWidget *p, const char* n, WFlags) 
+	:QVBox(0,"fond" )
+    {
+        LCDDisplay *lcd = new LCDDisplay(this, "lcd");
+	KeyPad *num = new KeyPad(lcd, this, "keypad");
     
-    LCDDisplay lcd (layout, "lcd");
-    KeyPad num(&lcd, layout, "keypad");
-    app.setMainWidget(layout);
-    layout->setCaption( QObject::tr("Euroconv") );
-    layout->showMaximized ();
-    layout->show();
-    return app.exec();
-}
+        setCaption( QObject::tr("Euroconv") );
+    };
+    
+};
+
+OPIE_EXPORT_APP( OApplicationFactory<Layout> )
+
+
 

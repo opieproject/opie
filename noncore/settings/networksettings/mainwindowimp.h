@@ -23,7 +23,8 @@ class MainWindowImp : public MainWindow {
   Q_OBJECT
 
 public:
-  MainWindowImp(QWidget *parent=0, const char *name=0);
+    static QString appName() { return QString::fromLatin1("networksettings"); }
+  MainWindowImp(QWidget *parent=0, const char *name=0, WFlags fl = 0);
   ~MainWindowImp();
 
   QCopChannel *channel;

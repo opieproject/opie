@@ -1,5 +1,4 @@
-TEMPLATE 	= app
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on release quick-app
 
 HEADERS   = backgammon.h \
             backgammonview.h \
@@ -28,7 +27,6 @@ TARGET 		= backgammon
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS		+= -lqpe -lstdc++
-DESTDIR 	=  $(OPIEDIR)/bin
 
 
 include ( $(OPIEDIR)/include.pro )

@@ -1,13 +1,10 @@
 #include "mainwindowimp.h"
 #include <qpe/qpeapplication.h>
 
-int main(int argc, char **argv)
-{
-  QPEApplication app(argc, argv);
-  MainWindowImp window;
-  app.showMainWidget(&window);
-  return app.exec();
-}
+#include <opie/oapplicationfactory.h>
+
+OPIE_EXPORT_APP( OApplicationFactory<MainWindowImp> )
+
 
 // main.cpp
 

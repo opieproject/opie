@@ -42,9 +42,10 @@ const int KCheckers::t[]={6,7,8,9,11,12,13,14,17,18,19,20,22,23,
           24,25,28,29,30,31,33,34,35,36,39,40,41,42,44,45,46,47};
 
 
-KCheckers::KCheckers():QMainWindow(0,0,WStyle_DialogBorder)
+KCheckers::KCheckers(QWidget *p, const char* n, WFlags )
+    :QMainWindow(p,n,WStyle_DialogBorder)
 {
-  setCaption("KCheckers");
+  setCaption(tr("KCheckers") );
   setIcon(QPixmap(biglogo_xpm));
 
   setToolBarsMovable(false);

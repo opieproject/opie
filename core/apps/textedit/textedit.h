@@ -54,6 +54,7 @@ class TextEdit : public QMainWindow
    Q_OBJECT
 
 public:
+   static QString appName() { return QString::fromLatin1("textedit"); }
    TextEdit( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
    ~TextEdit();
 
@@ -73,7 +74,7 @@ private slots:
    void editorChanged();
    void receive(const QCString&, const QByteArray&);
    void timerCrank();
-   void doTimer(bool); 
+   void doTimer(bool);
    void editPasteTimeDate();
    void doPrompt(bool);
    void doDesktop(bool);

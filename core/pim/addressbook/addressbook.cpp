@@ -269,6 +269,10 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 
 	//    qDebug("adressbook contrsuction: t=%d", t.elapsed() );
 
+        connect( qApp, SIGNAL( flush() ), this, SLOT( flush() ) );
+        connect( qApp, SIGNAL( reload() ), this, SLOT( reload() ) );
+        connect( qApp, SIGNAL( appMessage(const QCString &, const QByteArray &) ),
+                 this, SLOT( appMessage(const QCString &, const QByteArray &) ) );
 
 	isLoading = false;
 }
@@ -401,7 +405,7 @@ void AddressbookWindow::setDocument( const QString &filename )
 	for ( it = allList.begin(); it != allList.end(); ++it ){
 		qWarning("Adding Contact from: %s", (*it).fullName().latin1() );
 		if ( doAsk ){
-			switch( QMessageBox::information( this, tr ( "Add Contact?" ),
+			switch( QMessageBox::information( this, tr( "Add Contact?" ),
 							  tr( "Do you really want add contact for \n%1?" )
 							  .arg( (*it).fullName().latin1() ),
 							  tr( "&Yes" ), tr( "&No" ), tr( "&All Yes"),

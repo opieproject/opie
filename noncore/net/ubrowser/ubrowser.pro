@@ -1,6 +1,4 @@
-TEMPLATE	=app
-CONFIG		+=qt warn_on release
-DESTDIR		=../../../bin
+CONFIG		+=qt warn_on release quick-app
 HEADERS		= mainview.h httpfactory.h
 SOURCES		= main.cpp mainview.cpp httpfactory.cpp
 INCLUDEPATH	+=../../../include

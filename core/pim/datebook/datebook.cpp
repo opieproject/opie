@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.25.4.6 2003-06-09 18:39:23 zecke Exp $
+** $Id: datebook.cpp,v 1.25.4.6.2.1 2003-08-28 00:00:51 zecke Exp $
 **
 **********************************************************************/
 
@@ -192,6 +192,8 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 
 	qDebug("done t=%d", t.elapsed() );
 
+        connect( qApp, SIGNAL( flush() ), this, SLOT( flush() ) );
+        connect( qApp, SIGNAL( reload()), this, SLOT( reload() ) );
     /*
      *  Here is a problem description:
      *  When Weekview is the default view

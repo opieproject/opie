@@ -1,6 +1,6 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on release
-DESTDIR		= $(OPIEDIR)/bin
+#TEMPLATE	= app
+CONFIG		= qt warn_on release quick-app
+#DESTDIR		= $(OPIEDIR)/bin
 
 HEADERS	= smalltodo.h \
           todomanager.h \
@@ -24,7 +24,7 @@ HEADERS	= smalltodo.h \
 SOURCES	= smalltodo.cpp \
           todomanager.cpp \
 	  mainwindow.cpp \
-	  main.cpp \
+#	  main.cpp \
 	  tableview.cpp \
 	  todoview.cpp \
 	  todotemplatemanager.cpp \
@@ -45,25 +45,5 @@ TARGET		= todolist
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopie 
-
-TRANSLATIONS = ../../../i18n/de/todolist.ts \
-	 ../../../i18n/nl/todolist.ts \
-	 ../../../i18n/da/todolist.ts \
-	 ../../../i18n/xx/todolist.ts \
-	 ../../../i18n/en/todolist.ts \
-	 ../../../i18n/es/todolist.ts \
-	 ../../../i18n/fr/todolist.ts \
-	 ../../../i18n/hu/todolist.ts \
-	 ../../../i18n/ja/todolist.ts \
-	 ../../../i18n/ko/todolist.ts \
-	 ../../../i18n/no/todolist.ts \
-	 ../../../i18n/pl/todolist.ts \
-	 ../../../i18n/pt/todolist.ts \
-	 ../../../i18n/pt_BR/todolist.ts \
-	 ../../../i18n/sl/todolist.ts \
-	 ../../../i18n/zh_CN/todolist.ts \
-	 ../../../i18n/zh_TW/todolist.ts
-
-
 
 include ( $(OPIEDIR)/include.pro )

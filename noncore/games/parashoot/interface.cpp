@@ -25,7 +25,7 @@
 
 #include <qlabel.h>
 #include <qmessagebox.h>
-#include <qapplication.h>
+#include <qpe/qpeapplication.h>
 #include <qstyle.h>
 #include <qpe/qpetoolbar.h>
 #include <qtoolbutton.h>
@@ -36,6 +36,8 @@ ParaShoot::ParaShoot(QWidget* parent, const char* name, WFlags f) :
     fanfare("level_up"),
     score(0)
 {
+    QPEApplication::grabKeyboard();
+    QPEApplication::setInputMethodHint(this, QPEApplication::AlwaysOff );
     canvas.setAdvancePeriod(80);
     QPixmap bg = Resource::loadPixmap("parashoot/sky");
     canvas.setBackgroundPixmap(bg);

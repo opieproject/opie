@@ -120,7 +120,8 @@ class MainWindow: public QMainWindow
     void selectorFileOpen(const DocLnk &lnkDoc);
 
   public:
-    MainWindow();
+      static QString appName() { return QString::fromLatin1("sheetqt"); }
+    MainWindow(QWidget *p, const char*, WFlags);
     ~MainWindow();
 
     void setHelpFile(const QString &help_filename)          { helpFile=help_filename; }

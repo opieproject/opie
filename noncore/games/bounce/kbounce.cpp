@@ -27,7 +27,8 @@
 #include "game.h"
 #include <qlabel.h>
 
-KJezzball::KJezzball() : QMainWindow(0), m_gameWidget( 0 )
+KJezzball::KJezzball(QWidget *p, const char* n, WFlags f) 
+    : QMainWindow(p,n,f), m_gameWidget( 0 )
 {
 	setCaption(tr("Bounce"));
 	// setup variables

@@ -2,13 +2,8 @@
 
 #include "mainwindow.h"
 
-int main(int argc, char *argv[])
-{
-	QPEApplication app(argc, argv);
+#include <opie/oapplicationfactory.h>
 
-	MainWindow mw;
-	app.showMainWidget(&mw);
+OPIE_EXPORT_APP( OApplicationFactory<MainWindow> )
 
-	return app.exec();
-}
 

@@ -30,7 +30,8 @@ class FormatterApp : public QMainWindow
     Q_OBJECT
 
 public:
-    FormatterApp( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    static QString appName() { return QString::fromLatin1("formatter"); }
+    FormatterApp( QWidget* parent = 0, const char* name = 0, WFlags fl = 0, bool modal = FALSE );
     ~FormatterApp();
 
     QTabWidget *TabWidget;

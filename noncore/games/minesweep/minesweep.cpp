@@ -32,7 +32,7 @@
 #include <qmessagebox.h>
 #include <qtimer.h>
 #include <qpalette.h>
-#include <qapplication.h>
+#include <qpe/qpeapplication.h>
 #include <qlayout.h>
 #include <qlabel.h>
 
@@ -239,6 +239,7 @@ private:
 MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
 : QMainWindow( parent, name, f )
 {
+    QPEApplication::setInputMethodHint(this, QPEApplication::AlwaysOff );
     srand(::time(0));
     setCaption( tr("Mine Hunt") );
     setIcon( Resource::loadPixmap( "minesweep_icon" ) );

@@ -1,6 +1,4 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on release
-DESTDIR		= $(OPIEDIR)/bin
+CONFIG		= qt warn_on release quick-app
 HEADERS		= helpbrowser.h magictextbrowser.h
 SOURCES		= helpbrowser.cpp magictextbrowser.cpp \
 		  main.cpp

@@ -1,6 +1,4 @@
-TEMPLATE        = app
-CONFIG          += qt warn_on release
-DESTDIR         = $(OPIEDIR)/bin
+CONFIG          += qt warn_on release quick-app
 HEADERS   = showimg.h ImageFileSelector.h settingsdialog.h settingsdialogbase.h
 SOURCES   = main.cpp showimg.cpp ImageFileSelector.cpp settingsdialog.cpp settingsdialogbase.cpp
 TARGET          = showimg

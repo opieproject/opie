@@ -50,7 +50,7 @@
 #define DEFAULT_SCHEME "/var/lib/pcmcia/scheme"
 #define _PROCNETDEV "/proc/net/dev"
 
-MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(parent, name, Qt::WStyle_ContextHelp), advancedUserMode(true), scheme(DEFAULT_SCHEME){
+MainWindowImp::MainWindowImp(QWidget *parent, const char *name, WFlags) : MainWindow(parent, name, Qt::WStyle_ContextHelp), advancedUserMode(true), scheme(DEFAULT_SCHEME){
   connect(addConnectionButton, SIGNAL(clicked()), this, SLOT(addClicked()));
   connect(removeConnectionButton, SIGNAL(clicked()), this, SLOT(removeClicked()));
   connect(informationConnectionButton, SIGNAL(clicked()), this, SLOT(informationClicked()));

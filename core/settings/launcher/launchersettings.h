@@ -38,7 +38,8 @@ class LauncherSettings : public QDialog {
 	Q_OBJECT
 
 public:
-	LauncherSettings ( );
+	static QString appName() { return QString::fromLatin1("launchersettings"); }
+	LauncherSettings (QWidget *parent = 0, const char* name = 0, WFlags fl = 0 );
 
 	virtual void accept ( );
 	virtual void done ( int r );

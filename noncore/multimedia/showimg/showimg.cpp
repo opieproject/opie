@@ -212,7 +212,7 @@ void ImageWidget::mouseReleaseEvent(QMouseEvent *)
 //===========================================================================
 
 ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
-: QMainWindow( parent, name, wFlags ), filename( 0 ),  bFromDocView( FALSE )
+: QMainWindow( parent, name, WResizeNoErase ), filename( 0 ),  bFromDocView( FALSE )
 {
     setCaption( tr("Image Viewer") );
     setIcon( Resource::loadPixmap( "ImageViewer" ) );

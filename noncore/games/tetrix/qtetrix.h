@@ -52,6 +52,7 @@ class QTetrix : public QMainWindow
 {
     Q_OBJECT
 public:
+    static QString appName() { return QString::fromLatin1("tetrix"); }
     QTetrix( QWidget *parent=0, const char *name=0, WFlags f=0 );
     void startGame() { board->startGame(); }
 

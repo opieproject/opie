@@ -20,19 +20,6 @@
 
 #include "datebook.h"
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-
-int main( int argc, char **argv )
-{
-    QPEApplication a( argc, argv );
-
-    DateBook e;
-    QObject::connect( &a, SIGNAL( flush() ), &e, SLOT( flush() ) );
-    QObject::connect( &a, SIGNAL( reload() ), &e, SLOT( reload() ) );
-
-
-    e.setCaption( DateBook::tr("Calendar") );
-    a.showMainWidget(&e);
-
-    return a.exec();
-}
+OPIE_EXPORT_APP( OApplicationFactory<DateBook> )

@@ -21,16 +21,6 @@
 #include "canvascardwindow.h"
 
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-
-int main( int argc, char ** argv )
-{
-    QPEApplication a( argc, argv );
-
-    CanvasCardWindow m;
-    m.setCaption( CanvasCardWindow::tr("Patience") );
-    a.showMainWidget( &m );
-
-    return a.exec();
-}
-
+OPIE_EXPORT_APP( OApplicationFactory<CanvasCardWindow> )

@@ -49,7 +49,7 @@
 #include <sys/vfs.h>
 #include <mntent.h>
 
-AdvancedFm::AdvancedFm( )
+AdvancedFm::AdvancedFm(QWidget *,const char*, WFlags )
     : QMainWindow( ) {
    init();
    renameBox = 0;

@@ -55,7 +55,8 @@ class AdvancedFm : public QMainWindow
 {
     Q_OBJECT
 public:
-   AdvancedFm();
+    static QString appName() { return QString::fromLatin1("advancedfm"); }
+   AdvancedFm(QWidget *p = 0, const char* name = 0, WFlags fl = 0);
    ~AdvancedFm();
 protected slots:
    void slotSwitchMenu(int);

@@ -37,6 +37,7 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
     cardGame(NULL)
 {
     setIcon( Resource::loadPixmap( "cards" ) );
+    setCaption( tr("Patience") );
 
     // Create Playing Area for Games
     if ( QPixmap::defaultDepth() < 12 ) {

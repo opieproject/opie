@@ -21,14 +21,7 @@
 #include "minesweep.h"
 
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-int main( int argc, char** argv )
-{
-    QPEApplication a( argc, argv );
+OPIE_EXPORT_APP( OApplicationFactory<MineSweep> )
 
-    MineSweep ms;
-    QPEApplication::setInputMethodHint( &ms, QPEApplication::AlwaysOff );
-    a.showMainWidget( &ms );
-
-    return a.exec();
-}
