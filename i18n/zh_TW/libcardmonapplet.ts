@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>New card: </source>
-        <translation>新卡片:</translation>
+        <translation >新卡片:</translation>
     </message>
     <message>
         <source>Ejected: </source>
