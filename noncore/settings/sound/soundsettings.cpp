@@ -1,22 +1,23 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
-**
-** This file is part of Qtopia Environment.
-**
-** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free Software
-** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.
-**
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-**
-** See http://www.trolltech.com/gpl/ for GPL licensing information.
-**
-** Contact info@trolltech.com if any conditions of this licensing are
-** not clear to you.
-**
-**********************************************************************/
+ ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+ **
+ ** This file is part of Qtopia Environment.
+ **
+ ** This file may be distributed and/or modified under the terms of the
+ ** GNU General Public License version 2 as published by the Free Software
+ ** Foundation and appearing in the file LICENSE.GPL included in the
+ ** packaging of this file.
+ **
+ ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+ ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+ **
+ ** See http://www.trolltech.com/gpl/ for GPL licensing information.
+ **
+ ** Contact info@trolltech.com if any conditions of this licensing are
+ ** not clear to you.
+ **
+ **********************************************************************/
+// parts copyright 2002 L.J. Potter
 
 #include "soundsettings.h"
 
@@ -39,7 +40,7 @@
 #include <sys/stat.h>
 
 SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
-    : SoundSettingsBase( parent, objname, TRUE, fl )
+        : SoundSettingsBase( parent, objname, TRUE, fl )
 {
     keyReset=FALSE;
 
@@ -109,43 +110,44 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
     connect( timeLimitComboBox,SIGNAL(activated( const QString &)),this,SLOT( setSizeLimitButton(const QString &)));
 //     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 }
+
 void SoundSettings::updateStorageCombo() {
 
-   Config config( "Vmemo" );
-   config.setGroup( "System" );
-   QString loc = config.readEntry("RecLocation","/");
-int i=0;
-int set=0; 
-   StorageInfo storageInfo;
-   QString sName, sPath;
-   QStringList list;
-   list << "Documents : "+QPEApplication::documentDir();
-   list << "tmp : /tmp";
+    Config config( "Vmemo" );
+    config.setGroup( "System" );
+    QString loc = config.readEntry("RecLocation","/");
+    int i=0;
+    int set=0; 
+    StorageInfo storageInfo;
+    QString sName, sPath;
+    QStringList list;
+    list << "Documents : "+QPEApplication::documentDir();
+    list << "tmp : /tmp";
 
-   const QList<FileSystem> &fs = storageInfo.fileSystems();
+    const QList<FileSystem> &fs = storageInfo.fileSystems();
     QListIterator<FileSystem> it ( fs );
-        for( ; it.current(); ++it ){
-            const QString name = (*it)->name();
-            const QString path = (*it)->path();
-            qDebug("storage name "+name +" storage path is "+path);
-            list << name + ": " +path;
-            if( loc.find( path,0,TRUE) != -1)
-                set = i;      
+    for( ; it.current(); ++it ){
+        const QString name = (*it)->name();
+        const QString path = (*it)->path();
+        qDebug("storage name "+name +" storage path is "+path);
+        list << name + ": " +path;
+        if( loc.find( path,0,TRUE) != -1)
+            set = i;      
 //             if(dit.current()->file().find(path) != -1 ) storage=name;
-            i++;
-        }
+        i++;
+    }
 
-        LocationComboBox->insertStringList(list);
-        qDebug("set item %d", set);
-        LocationComboBox->setCurrentItem(set);
+    LocationComboBox->insertStringList(list);
+    qDebug("set item %d", set);
+    LocationComboBox->setCurrentItem(set);
 }
 
 void SoundSettings::setLocation(const QString & string) {
-   Config config( "Vmemo" );
-   config.setGroup( "System" );
-   config.writeEntry("RecLocation",string);
-   qDebug("set location "+string);
-   config.write();
+    Config config( "Vmemo" );
+    config.setGroup( "System" );
+    config.writeEntry("RecLocation",string);
+    qDebug("set location "+string);
+    config.write();
 }
 
 void SoundSettings::cleanUp() {
@@ -157,8 +159,15 @@ void SoundSettings::cleanUp() {
     cfg.writeEntry("Stereo",stereoCheckBox->isChecked());
     cfg.writeEntry("SixteenBit",sixteenBitCheckBox->isChecked());
 
-    if(keyReset) QCopEnvelope ("QPE/System", "restart()");
-        
+    if(keyReset) {
+        switch ( QMessageBox::warning(this,tr("Restart"),
+                                      tr("To implement a new key switch\nOpie will have to be restarted./n<B>Restart</B> Opie now?"),
+                                      tr("Yes"),tr("No"),0,1,1) ) {
+          case 0: 
+              QCopEnvelope ("QPE/System", "restart()");
+              break;
+        };
+    }
 }
 
 void SoundSettings::setKeyButton(const QString &name) {
@@ -184,8 +193,8 @@ void SoundSettings::setSizeLimitButton(const QString &index) {
     Config cfg("Vmemo");
     cfg.setGroup("Record");
     if(index.find("Unlimited",0,TRUE) != -1)
-      cfg.writeEntry("SizeLimit", -1);
+        cfg.writeEntry("SizeLimit", -1);
     else
-      cfg.writeEntry("SizeLimit", index);
+        cfg.writeEntry("SizeLimit", index);
     cfg.write();    
 }

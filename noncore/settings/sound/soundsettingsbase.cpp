@@ -162,9 +162,8 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
 
     SoundSettingsBaseLayout->addMultiCellWidget(timeLimitComboBox  , 8, 8, 0, 0, 1);
 
-
-      QSpacerItem* spacer4 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
-      SoundSettingsBaseLayout->addItem( spacer4, 9, 0 );
+    QSpacerItem* spacer4 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
+    SoundSettingsBaseLayout->addItem( spacer4, 9, 0 );
 }
 
 /*  
