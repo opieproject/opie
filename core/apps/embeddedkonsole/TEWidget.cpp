@@ -1201,7 +1201,11 @@ void TEWidget::calcGeometry()
         hScrollbar->setRange(0, vcolumns - dcolumns);
 
         QPoint p = contentsRect().bottomLeft();
-        hScrollbar->move(QPoint(p.x(), p.y() - hwidth));
+        if(scrollLoc == SCRLEFT)
+            hScrollbar->move(QPoint(p.x()+hwidth, p.y() - hwidth));
+        else
+            hScrollbar->move(QPoint(p.x(), p.y() - hwidth));
+     
         hScrollbar->show();
     }
     else hScrollbar->hide();
