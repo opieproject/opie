@@ -118,8 +118,7 @@ BroswerContent DingWidget::parseInfo()
 	QRegExp reg_word( queryword );
 	reg_word.setCaseSensitive( isCaseSensitive );
 	QStringList toplist, bottomlist;
-	//QString substitute = "<strong>"+queryword+"</strong>";
-	QString substitute = queryword;
+	QString substitute = "<strong>"+queryword+"</strong>";
 
 	for( QStringList::Iterator it = search.begin() ; it != search.end() ; ++it )
 	{
@@ -142,8 +141,8 @@ BroswerContent DingWidget::parseInfo()
 		}
 	}
 
-	s_strings.top = toplist.join( "\n" );
-	s_strings.bottom = bottomlist.join( "\n" );
+	s_strings.top = toplist.join( "<br>" );
+	s_strings.bottom = bottomlist.join( "<br>" );
 
 	return s_strings;
 }
