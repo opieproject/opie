@@ -149,8 +149,8 @@ bool WavFile::setWavHeader(int fd, wavhdr *hdr) {
   strncpy((*hdr).dataID, "data", 4);
 
   write( fd,hdr, sizeof(*hdr));
-//   qDebug("writing header: bitrate%d, samplerate %d,  channels %d",
-//          wavResolution, wavSampleRate, wavChannels);
+   qDebug("writing header: bitrate%d, samplerate %d,  channels %d",
+          wavResolution, wavSampleRate, wavChannels);
   return true;
 }
 
@@ -160,12 +160,12 @@ bool WavFile::adjustHeaders(int fd, int total) {
   write( fd, &i, sizeof(i));
   lseek( fd, 40, SEEK_SET);
   write( fd, &total, sizeof(total));
-//  qDebug("adjusting header %d", total);
+  qDebug("adjusting header %d", total);
   return true;
 }
 
 int WavFile::parseWavHeader(int fd) {
-//  qDebug("Parsing wav header");
+  qDebug("Parsing wav header");
   char string[4];
   int found;
   short fmt;
@@ -294,13 +294,18 @@ return wavResolution;
 }
 
 int WavFile::getSampleRate() {
-return wavSampleRate;
+ return wavSampleRate;
 }
 
 int WavFile::getNumberSamples() {
-return wavNumberSamples;
+ return wavNumberSamples;
 }
 
 bool WavFile::isTempFile() {
 return useTmpFile;
+}
+
+int WavFile::getChannels() {
+
+   return wavChannels;
 }

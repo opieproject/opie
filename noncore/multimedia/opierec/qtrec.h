@@ -4,7 +4,7 @@ copyright 2002 by L.J. Potter ljp@llornkcor.com
 ****************************************************************************/
 #ifndef QTREC_H
 #define QTREC_H
-#define VERSION 1.0
+#define VERSION 20030920
 
 #include <qpe/ir.h>
 
@@ -55,7 +55,7 @@ class QtRec : public QWidget
    Q_OBJECT
 
 public:
-	static QString appName() { return QString::fromLatin1("opierec"); }
+    static QString appName() { return QString::fromLatin1("opierec"); }
    QtRec( QWidget* parent=0, const char* name=0, WFlags fl=0 );
    ~QtRec();
    QSlider *OutputSlider,*InputSlider;
@@ -72,7 +72,7 @@ private:
    QString currentFile;
    QString date, currentFileName, tmpFileName;
    QTimer *t_timer;
-   bool needsStereoOut, paused, playing;
+   bool needsStereoOut, paused;
    bool useTmpFile, autoMute;
 
    bool eventFilter( QObject * , QEvent * );
@@ -98,13 +98,14 @@ private:
     
 private slots:
 
-
    void FastforwardPressed();
    void FastforwardReleased();
    void changeDirCombo(int);
    void changeSizeLimitCombo(int);
    void changeTimeSlider(int);
    void changebitrateCombo(int);
+   void changeStereoCheck( bool);
+
    void changedInVolume();
    void changedOutVolume();
    void changesamplerateCombo(int);
@@ -134,11 +135,9 @@ private slots:
 
 protected:
 
-   Device *soundDevice;
    WavFile *wavFile;
-    
    QButtonGroup *ButtonGroup1;
-   QCheckBox *outMuteCheckBox, *inMuteCheckBox, *compressionCheckBox, *autoMuteCheckBox;
+   QCheckBox *outMuteCheckBox, *inMuteCheckBox, *compressionCheckBox, *autoMuteCheckBox, *stereoCheckBox;
    QComboBox* sampleRateComboBox, * bitRateComboBox, *directoryComboBox, *sizeLimitCombo;
    QHBoxLayout* Layout12;
    QHBoxLayout* Layout13;
@@ -178,7 +177,7 @@ protected:
    void keyReleaseEvent( QKeyEvent *e);
    void receive( const QCString &, const QByteArray & );
    void showListMenu(QListViewItem * );
-//    void quickRec();
+//   void quickRec();
     
 };
 

@@ -4,7 +4,7 @@
 
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/custom.h>
+
 
 #include <fcntl.h>
 #include <stdio.h>
@@ -26,7 +26,7 @@ Device::Device( QObject * parent, const char * dsp, const char * mixr, bool reco
 {
     dspstr = (char *)dsp;
     mixstr = (char *)mixr;
-
+ 
     devForm=-1;
     devCh=-1;
     devRate=-1;
@@ -38,7 +38,9 @@ Device::Device( QObject * parent, const char * dsp, const char * mixr, bool reco
         qDebug("setting up DSP for recording");
         flags = O_RDWR;
 //        flags = O_RDONLY;
-        selectMicInput();
+
+//        selectMicInput();
+
     }
 }
 
@@ -94,6 +96,7 @@ void Device::changedOutVolume(int vol) {
         cfg.setGroup("Volume");
         cfg.writeEntry("VolumePercent", QString::number( vol ));
         QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << false;
+	qWarning("changing output vol %d", vol);
     }
     ::close(fd);
 }
@@ -108,12 +111,13 @@ void Device::changedInVolume(int vol ) {
         cfg.setGroup("Volume");
         cfg.writeEntry("Mic", QString::number(vol ));
         QCopEnvelope( "QPE/System", "micChange(bool)" ) << false;
+	qWarning("changing input volume %d", vol);
     }
     ::close(fd);
 }
 
 bool Device::selectMicInput() {
-/*
+
   int md=0;
   int info=MIXER_WRITE(SOUND_MIXER_MIC);
   md = ::open(  "/dev/mixer", O_RDWR );
@@ -126,7 +130,7 @@ bool Device::selectMicInput() {
   return false;
   }
   ::close(md);
-*/
+
     return true;
 }
 
@@ -145,18 +149,22 @@ exit(1);
            break;
        case 0: {
  */
-    if (( sd = ::open( dspstr, flags)) == -1) {
+qDebug("Opening %s",dspstr);
+ if (( sd = ::open( dspstr, flags)) == -1) {
               perror("open(\"/dev/dsp\")");
               QString errorMsg="Could not open audio device\n /dev/dsp\n"
                   +(QString)strerror(errno);
-              qDebug(errorMsg);
+              qDebug("XXXXXXXXXXXXXXXXXXXXXXX  "+errorMsg);
               return -1;
           }
 
+qDebug("Opening mixer");
     int mixerHandle=0;
-    /* Set the input dsp device and its input gain the weird Zaurus way */
-        if  (( mixerHandle = open("/dev/mixer1",O_RDWR))<0) {
-            perror("open(\"/dev/mixer1\")");
+        if  (( mixerHandle = open("/dev/mixer",O_RDWR))<0) {
+            perror("open(\"/dev/mixer\")");
+              QString errorMsg="Could not open audio device\n /dev/dsp\n"
+                  +(QString)strerror(errno);
+              qDebug("XXXXXXXXXXXXXXXXXXXXXX  "+errorMsg);
         }
 
         if(ioctl(sd,SNDCTL_DSP_RESET,0)<0){
@@ -199,16 +207,16 @@ exit(1);
 //     bool ok;
 //           sd = s.toInt(&ok, 10);
 //           qDebug("<<<<<<<<<<<<<>>>>>>>>>>>>"+s);
-
+                 
 //           f2.close();
 //     }
 ::close(mixerHandle );
-        qDebug("open device %s", dspstr);
-    qDebug("success! %d",sd);
+//         qDebug("open device %s", dspstr);
+//     qDebug("success! %d",sd);
     return sd;
 }
 
-bool Device::closeDevice( bool b) {
+bool Device::closeDevice( bool) {
 //      if(b) {//close now
 //          if (ioctl( sd, SNDCTL_DSP_RESET, 0) == -1) {
 //              perror("ioctl(\"SNDCTL_DSP_RESET\")");
@@ -222,7 +230,7 @@ bool Device::closeDevice( bool b) {
     ::close( sd); //close sound device
 //    sdfd=0;
  //   sd=0;
-    qDebug("closed dsp");
+//    qDebug("closed dsp");
     return true;
 }
 
@@ -290,7 +298,7 @@ int Device::getDeviceRate() {
 
 int Device::getDeviceBits() {
     int dBits=0;
-#if !defined(OPIE_NO_SOUND_PCM_READ_BITS) // zaurus doesnt have this
+#ifndef QT_QWS_EBX // zaurus doesnt have this
      if (ioctl( sd, SOUND_PCM_READ_BITS, &dBits) == -1) {
          perror("ioctl(\"SNDCTL_PCM_READ_BITS\")");
      }
@@ -308,11 +316,12 @@ int Device::getDeviceChannels() {
 
 int Device::getDeviceFragSize() {
     int frag_size;
-
+    
     if (ioctl( sd, SNDCTL_DSP_GETBLKSIZE, &frag_size) == -1) {
       qDebug("no fragsize");
-    } else
+    } else {
       qDebug("driver says frag size is %d", frag_size);
+    }
     return frag_size;
 }
 
@@ -333,3 +342,17 @@ bool Device::reset() {
          }
    return true;
 }
+
+int Device::devRead(int soundDescriptor, short *buf, int size) {
+   int number = 0;
+   number = ::read(  soundDescriptor, (char *)buf, size);
+   return number;
+}
+
+int Device::devWrite(int soundDescriptor, short * buf, int size) {
+   int bytesWritten = 0;
+   bytesWritten = ::write( soundDescriptor, buf, size);
+   return bytesWritten;
+}
+
+

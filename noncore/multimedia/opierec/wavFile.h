@@ -41,6 +41,7 @@ public:
     int getResolution();
     int getSampleRate();
     int getNumberSamples();
+   int getChannels();
     bool isTempFile();
     int openFile(const QString &);
     bool newFile();
