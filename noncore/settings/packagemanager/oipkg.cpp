@@ -36,7 +36,6 @@
 
 #include <qdir.h>
 #include <qfile.h>
-#include <qmessagebox.h>
 #include <qtextstream.h>
 
 const QString IPKG_CONF        = "/etc/ipkg.conf";      // Fully-qualified name of Ipkg primary configuration file
@@ -82,8 +81,7 @@ OIpkg::OIpkg( Config *config, QObject *parent, const char *name )
     oipkg = this;
 
     // Initialize libipkg
-    if ( ipkg_init( &fsignalIpkgMessage, &fIpkgResponse, &m_ipkgArgs ) )
-        QMessageBox::critical( 0, tr( "OIpkg" ), tr( "Error initialing libipkg" ) );
+    ipkg_init( &fsignalIpkgMessage, &fIpkgResponse, &m_ipkgArgs );
 
     // Default ipkg run-time arguments
     m_ipkgArgs.noaction = false;
@@ -97,8 +95,7 @@ OIpkg::~OIpkg()
         m_confInfo->setAutoDelete( true );
 
     // Free up libipkg resources
-    if ( ipkg_deinit( &m_ipkgArgs ) )
-        QMessageBox::critical( 0, tr( "OIpkg" ), tr( "Error freeing libipkg" ) );
+    ipkg_deinit( &m_ipkgArgs );
 }
 
 OConfItemList *OIpkg::configItems()
