@@ -13,6 +13,9 @@ include ( $(OPIEDIR)/gen.pro )
 include ( core/core.pro )
 include ( backend/backends.pro )
 include ( ui/ui.pro )
+include ( private/private.pro )
+
+PRECOMPILED_HEADER = stable_pch.h
 
 !contains( platform, x11 ) {
   include ( $(OPIEDIR)/include.pro )

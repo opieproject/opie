@@ -123,7 +123,6 @@ void OPimMainWindow::appMessage( const QCString& cmd, const QByteArray& array ) 
         QDateTime dt; int uid;
         stream >> dt;
         stream >> uid;
-        owarn << " Date: " << dt.toString() << " Uid: " << uid << "" << oendl;
         QDateTime current = QDateTime::currentDateTime();
         if ( current.time().hour() != dt.time().hour() && current.time().minute() != dt.time().minute() )
             return;
