@@ -44,12 +44,17 @@ case $1 in
         *) echo "Unknown processor type -`module_id`-!" ;;
    	 esac
 	
-	$OPIEDIR/bin/qpe 2>/dev/null >/dev/null &
+	if [ -x $OPIEDIR/bin/opie-login ]; then
+		$OPIEDIR/bin/opie-login 2>/dev/null >/dev/null &
+	else
+		$OPIEDIR/bin/qpe 2>/dev/null >/dev/null &
+	fi
 
 	;;
 'stop')
         echo "Killing Opie..."
         killproc qpe
+        killproc opie-login
         ;;
 *)
         echo "usage: $0 { start | stop }"

@@ -34,6 +34,7 @@ PIMAPPS = core/pim/addressbook core/pim/datebook \
 COREAPPS = core/apps/filebrowser core/apps/helpbrowser \
 	core/apps/textedit core/apps/embeddedkonsole \
 	core/launcher  \
+	core/opie-login \
 	core/apps/oipkg core/apps/qcop
 
 COREMULTIMEDIA = core/multimedia/opieplayer

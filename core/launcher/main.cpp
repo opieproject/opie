@@ -45,10 +45,6 @@
 #include "../calibrate/calibrate.h"
 #endif
 
-#ifdef QT_QWS_LOGIN
-#include "../login/qdmdialogimpl.h"
-#endif
-
 #ifdef QT_QWS_CASSIOPEIA
 static void ignoreMessage( QtMsgType, const char * )
 {
@@ -302,14 +298,6 @@ int initApplication( int argc, char ** argv )
     initBacklight();
 
     AlarmServer::initialize();
-
-#if defined(QT_QWS_LOGIN)
-    for( int i=0; i<a.argc(); i++ )
-      if( strcmp( a.argv()[i], "-login" ) == 0 ) {
-	QDMDialogImpl::login( );
-	return 0;
-      }
-#endif
 
     Desktop *d = new Desktop();
 
