@@ -1248,7 +1248,7 @@ void TEWidget::styleChange(QStyle &)
     propagateSize();
 }
 
-#ifndef QT_NO_DRAGANDDROP
+#ifdef QT_NO_DRAGANDDROP_FOO
 
 /* --------------------------------------------------------------------- */
 /*                                                                       */
@@ -1320,7 +1320,7 @@ void TEWidget::dropEvent(QDropEvent* event)
 
 void TEWidget::drop_menu_activated(int)
 {
-#ifndef QT_NO_DRAGANDDROP
+#ifdef QT_NO_DRAGANDDROP_FOO
   switch (item)
   {
     case 0: // paste

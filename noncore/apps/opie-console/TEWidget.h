@@ -128,7 +128,7 @@ protected:
     void focusOutEvent( QFocusEvent * );
     bool focusNextPrevChild( bool next );
 
-#ifndef QT_NO_DRAGANDDROP
+#ifdef QT_NO_DRAGANDDROP_FOO_BAR_
     // Dnd
     void dragEnterEvent(QDragEnterEvent* event);
     void dropEvent(QDropEvent* event);
