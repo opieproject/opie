@@ -16,6 +16,7 @@ namespace OpieTooth {
         QString type() const;
         int typeId() const;
         Services services() const;
+        int serviceId() const;
     private:
         Services m_service;
 

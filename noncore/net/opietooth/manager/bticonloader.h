@@ -18,19 +18,19 @@ namespace OpieTooth {
          * @param deviceClass the device class id
          * @return the pixmap
          */
-        QPixmap deviceIcon( const QString &deviceClass );
+        QPixmap deviceIcon( int );
 
         /**
          * Returns an icon depending on service id
          * @param serviceClass the service id
          * @return the pixmap
          */
-        QPixmap serviceIcon( const QString &serviceClass );
+        QPixmap serviceIcon( int );
 
     private:
         // first ist id, second is icon name
-        QMap<QString,QString> deviceIcons;
-        QMap<QString,QString> serviceIcons;
+        QMap<int,QString> deviceIcons;
+        QMap<int,QString> serviceIcons;
     };
 }
 

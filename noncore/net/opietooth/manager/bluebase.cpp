@@ -314,6 +314,7 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
         delete groups;
 
     } else if ( ((BTListItem*)item)->type() == "service") {
+
         menu->insertItem( tr("Test1:"),  0);
         menu->insertItem( tr("connect"), 1);
         menu->insertItem( tr("delete"),  2);
@@ -370,9 +371,16 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
 
         if (!servicesList.isEmpty() ) {
             // add services
+            QMap<int, QString> list;
+            QMap<int, QString>::Iterator classIt;
             for( it2 = servicesList.begin(); it2 != servicesList.end(); ++it2 ) {
                 serviceItem = new BTServiceItem( deviceItem  , (*it2)  );
-                serviceItem->setPixmap( 0, m_iconLoader->serviceIcon( (*it2).classIdList() ) );
+                list = (*it2).classIdList();
+                classIt = list.begin();
+                int classId;
+                if ( classIt != list.end() )
+                    classId = classIt.key();
+                serviceItem->setPixmap( 0, m_iconLoader->serviceIcon( classId ) );
             }
         } else {
     	    Services s1;

@@ -21,3 +21,6 @@ int BTServiceItem::typeId() const {
 Services BTServiceItem::services() const {
     return m_service;
 }
+int BTServiceItem::serviceId() const {
+    return m_service.recHandle();
+};
