@@ -97,6 +97,8 @@ void OxydataWidget::setLayout()
 OxydataTable::OxydataTable(int numRows, int numCols, QWidget *parent,
         const char *name) : QTable(numRows, numCols,parent, name)
 {
+    setColumnStretchable( 0, true );
+    setColumnStretchable( 1, true );
 
     for (int zeile = 0; zeile < numRows; zeile++)
         for ( int spalte = 0; spalte < numCols; spalte++ )
