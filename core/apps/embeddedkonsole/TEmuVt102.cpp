@@ -9,11 +9,11 @@
 /* This file is part of Konsole - an X terminal for KDE                      */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
-/*									      */
+/*                        */
 /* Ported Konsole to Qt/Embedded                                              */
-/*									      */
+/*                        */
 /* Copyright (C) 2000 by John Ryland <jryland@trolltech.com>                  */
-/*									      */
+/*                        */
 /* -------------------------------------------------------------------------- */
 
 /*! \class TEmuVt102
@@ -743,8 +743,37 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
   if (!ev->text().isEmpty())
   {
     if (ev->state() & AltButton) sendString("\033"); // ESC, this is the ALT prefix
-    QCString s = codec->fromUnicode(ev->text());     // encode for application
-    emit sndBlock(s.data(),s.length());              // we may well have s.length() > 1 
+      /// very hacky
+     if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='A')) sendString("\01");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='B')) sendString("\02");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='C')) sendString("\03");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='D')) sendString("\04");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='E')) sendString("\05");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='F')) sendString("\06");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='G')) sendString("\07");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='H')) sendString("\010");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='I')) sendString("\011");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='J')) sendString("\012");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='K')) sendString("\013");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='L')) sendString("\014");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='M')) sendString("\015");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='N')) sendString("\016");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='O')) sendString("\017");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='P')) sendString("\020");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='Q')) sendString("\021");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='R')) sendString("\022");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='S')) sendString("\023");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='T')) sendString("\024");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='U')) sendString("\025");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='V')) sendString("\026");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='W')) sendString("\027");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='X')) sendString("\030");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='Y')) sendString("\031");
+     else if ((ev->state() & ControlButton) && (ev->text().upper().ascii()[0]=='Z')) sendString("\032");
+   else {
+   QCString s = codec->fromUnicode(ev->text());     // encode for application
+    emit sndBlock(s.data(),s.length());              // we may well have s.length() > 1
+   }
     return;
   }
 }
@@ -891,7 +920,7 @@ void TEmuVt102::setMode(int m)
     case MODE_AppScreen : screen[1]->clearSelection();
                           screen[1]->clearEntireScreen();
                           setScreen(1);
-	  break;
+    break;
   }
   if (m < MODES_SCREEN || m == MODE_NewLine)
   {
