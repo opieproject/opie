@@ -78,6 +78,14 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
   QStringList list = i.getInterfaceList();
   QMap<QString, Interface*>::Iterator it;
   for ( QStringList::Iterator ni = list.begin(); ni != list.end(); ++ni ) {
+      /*
+       * we skipped it in getAllInterfaces now
+       * we need to ignore it as well
+       */
+      if (m_handledIfaces.contains( *ni) ) {
+          qDebug("Not up iface handled by module");
+          continue;
+      }
     bool found = false;
     for( it = interfaceNames.begin(); it != interfaceNames.end(); ++it ){
       if(it.key() == (*ni))
@@ -196,6 +204,10 @@ void MainWindowImp::getAllInterfaces(){
 
   for (QStringList::Iterator it = ifaces.begin(); it != ifaces.end(); ++it) {
     int flags = 0;
+    if ( m_handledIfaces.contains( (*it) ) ) {
+        qDebug(" %s is handled by a module", (*it).latin1() );
+        continue;
+    }
 //    int family;
     i = NULL;
 
@@ -307,6 +319,7 @@ Module* MainWindowImp::loadPlugin(const QString &pluginFileName, const QString &
     return NULL;
   }
 
+  m_handledIfaces += object->handledInterfaceNames();
   // Store for deletion later
   libraries.insert(object, lib);
   return object;
