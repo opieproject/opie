@@ -8,7 +8,6 @@ copyright 2002 by L.J. Potter ljp@llornkcor.com
 
 #include <qpe/ir.h>
 
-#include <iostream.h>
 #include <qfile.h>
 #include <qimage.h>
 #include <qlineedit.h>
