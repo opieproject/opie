@@ -184,8 +184,6 @@ private:
 
     bool reserved_sh;
 
-
-
 };
 
 inline void QPEApplication::showDialog( QDialog* d, bool nomax )

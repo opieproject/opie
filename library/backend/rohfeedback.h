@@ -1,6 +1,8 @@
 #ifndef ROHFEEDBACK_H
 #define ROHFEEDBACK_H
 
+#ifdef OPIE_WITHROHFEEDBACK
+
 /*
 
     RightOnHold feedback show
@@ -59,4 +61,5 @@ protected :
 }
 }
 
+#endif
 #endif

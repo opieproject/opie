@@ -1,6 +1,6 @@
+#ifdef OPIE_WITHROHFEEDBACK
+
 #include <rohfeedback.h>
-
-
 #include <stdio.h>
 #include <qpeapplication.h>
 #include <qevent.h>
@@ -35,12 +35,11 @@ RoHFeedback::RoHFeedback() :
 
 
       for( int i = 0; i < NOOFICONS ; i ++ ) {
-        Imgs[i] =  new QPixmap( Resource::loadPixmap("RoH/star/"+
-						     QString::number(i+1) +
-						     ".png" ));
+        Imgs[i] =  new QPixmap( Resource::loadPixmap(
+              "RoH/star/"+ QString::number(i+1) + ".png" ));
         Masks[i] = new QBitmap();
-        (*Masks[i]) = Resource::loadPixmap("RoH/star/"+QString::number(i+1) +
-                                        ".png" );
+        (*Masks[i]) = Resource::loadPixmap(
+              "RoH/star/"+QString::number(i+1) + "-mask.png" );
       }
     }
 
@@ -66,16 +65,14 @@ void RoHFeedback::init( const QPoint & P, QWidget* wid ) {
       return;
 
     Receiver =  wid;
-    IconNr = -1;
+    IconNr = FeedbackTimerStart;
     move( P.x()-IconWidth/2, P.y() - IconHeight/2 );
     // to initialize
-    Timer.start( DELAY - SPEED/NOOFICONS );
+    Timer.start( DELAY );
 }
 
 void RoHFeedback::stop( void ) {
-    IconNr = -2; // stop
-    hide();
-    Timer.stop();
+    IconNr = FeedbackStopped; // stop
 }
 
 bool RoHFeedback::event( QEvent * E ) {
@@ -100,13 +97,14 @@ bool RoHFeedback::event( QEvent * E ) {
 void RoHFeedback::iconShow( void ) {
     switch( IconNr ) {
       case FeedbackTimerStart:
-        IconNr = 0;
+        IconNr = FeedbackShow;
         Timer.start( SPEED/NOOFICONS );
         break;
       case FeedbackStopped:
         // stopped
         IconNr = FeedbackTimerStart;
         hide();
+        Timer.stop();
         break;
       case FeedbackShow: // first
         show();
@@ -123,3 +121,5 @@ void RoHFeedback::iconShow( void ) {
 
 }
 }
+
+#endif
