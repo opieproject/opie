@@ -9,3 +9,7 @@ DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lpcap -L$(QTDIR)/lib -lwellenreiter
 INTERFACES      = 
 TARGET          = wellenreiterd
+
+
+
+include ( ../../../../include.pro )

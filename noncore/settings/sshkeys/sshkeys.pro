@@ -27,3 +27,7 @@ TRANSLATIONS = ../../../i18n/de/sshkeys.ts \
 	../../../i18n/it/sshkeys.ts \
 	../../../i18n/da/sshkeys.ts
 
+
+
+
+include ( ../../../include.pro )

@@ -7,3 +7,7 @@ TARGET		= sfcave
 INCLUDEPATH 	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
+
+
+
+include ( ../../../include.pro )

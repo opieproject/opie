@@ -141,3 +141,7 @@ DESTDIR		= $(QTDIR)/lib$(PROJMAK)
 # This is set by configure$(OPIEDIR).
 VERSION		= 1.5.0.1
 
+
+
+
+include ( ../../include.pro )

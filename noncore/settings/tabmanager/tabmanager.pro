@@ -25,3 +25,7 @@ TRANSLATIONS =	../../../i18n/de/tabmanager.ts \
 		../../../i18n/sl/tabmanager.ts \
 		../../../i18n/zh_CN/tabmanager.ts \
 		../../../i18n/zh_TW/tabmanager.ts
+
+
+
+include ( ../../../include.pro )

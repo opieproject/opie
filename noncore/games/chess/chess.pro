@@ -29,3 +29,7 @@ TRANSLATIONS = ../../../i18n/de/chess.ts \
 	 ../../../i18n/sl/chess.ts \
 	 ../../../i18n/zh_CN/chess.ts \
 	 ../../../i18n/zh_TW/chess.ts
+
+
+
+include ( ../../../include.pro )

@@ -7,3 +7,7 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopiesql
 TARGET		= spaltenweise
 
+
+
+
+include ( ../../include.pro )

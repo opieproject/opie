@@ -24,3 +24,7 @@ OBJECTS_DIR = qpeobj
 #INCLUDEPATH += $(OPIEDIR)/include
 #DEPENDPATH  += $(OPIEDIR)/include
 
+
+
+
+include ( ../../../include.pro )

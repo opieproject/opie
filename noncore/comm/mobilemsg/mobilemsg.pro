@@ -26,3 +26,7 @@ TRANSLATIONS = ../../../i18n/de/mobilemsg.ts \
 	 ../../../i18n/sl/mobilemsg.ts \
 	 ../../../i18n/zh_CN/mobilemsg.ts \
 	 ../../../i18n/zh_TW/mobilemsg.ts
+
+
+
+include ( ../../../include.pro )

@@ -24,3 +24,7 @@ TRANSLATIONS = ../../../i18n/de/opieftp.ts \
 	 ../../../i18n/sl/opieftp.ts \
 	 ../../../i18n/zh_CN/opieftp.ts \
 	 ../../../i18n/zh_TW/opieftp.ts
+
+
+
+include ( ../../../include.pro )

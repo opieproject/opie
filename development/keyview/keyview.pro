@@ -26,3 +26,7 @@ TRANSLATIONS = ../i18n/de/keyview.ts \
 	 ../i18n/sl/keyview.ts \
 	 ../i18n/zh_CN/keyview.ts \
 	 ../i18n/zh_TW/keyview.ts
+
+
+
+include ( ../../include.pro )

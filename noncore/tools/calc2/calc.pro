@@ -23,3 +23,7 @@
 #	 ../../../i18n/sl/calc.pro \
 #	 ../../../i18n/zh_CN/calc.pro \
 #	 ../../../i18n/zh_TW/calc.pro
+
+
+
+include ( ../../../include.pro )

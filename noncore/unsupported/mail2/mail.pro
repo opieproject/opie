@@ -61,3 +61,7 @@ TRANSLATIONS = ../../i18n/de/mail.ts \
 	 ../../i18n/sl/mail.ts \
 	 ../../i18n/zh_CN/mail.ts \
 	 ../../i18n/zh_TW/mail.ts
+
+
+
+include ( ../../include.pro )

@@ -43,3 +43,7 @@ TRANSLATIONS = ../../../../i18n/de/bluetooth-manager.ts \
 	 ../../../../i18n/sl/bluetooth-manager.ts \
 	 ../../../../i18n/zh_CN/bluetooth-manager.ts \
 	 ../../../../i18n/zh_TW/bluetooth-manager.ts
+
+
+
+include ( ../../../../include.pro )

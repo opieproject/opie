@@ -45,3 +45,7 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lqpe -lopie -lstdc++
 DESTDIR = $(OPIEDIR)/bin
+
+
+
+include ( ../../../include.pro )

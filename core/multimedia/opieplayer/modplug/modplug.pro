@@ -17,3 +17,7 @@ DEPENDPATH      +=  $(OPIEDIR)/include
 LIBS            +=  -lqpe -lm 
 VERSION		=   1.0.0
 
+
+
+
+include ( ../../../../include.pro )

@@ -27,3 +27,7 @@ TRANSLATIONS = ../../../i18n/de/today.ts \
 	 ../../../i18n/zh_TW/today.ts \
    	 ../../../i18n/it/today.ts \
    	 ../../../i18n/da/today.ts
+
+
+
+include ( ../../../include.pro )

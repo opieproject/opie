@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/libbatteryapplet.ts \
 	 ../../../i18n/sl/libbatteryapplet.ts \
 	 ../../../i18n/zh_CN/libbatteryapplet.ts \
 	 ../../../i18n/zh_TW/libbatteryapplet.ts
+
+
+
+include ( ../../../include.pro )

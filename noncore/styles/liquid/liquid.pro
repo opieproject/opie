@@ -32,3 +32,7 @@ TRANSLATIONS = ../../../i18n/de/libliquid.ts \
 	 ../../../i18n/sl/libliquid.ts \
 	 ../../../i18n/zh_CN/libliquid.ts \
 	 ../../../i18n/zh_TW/libliquid.ts
+
+
+
+include ( ../../../include.pro )

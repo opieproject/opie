@@ -26,3 +26,7 @@ TRANSLATIONS = ../../../i18n/de/confedit.ts \
 	 ../../../i18n/sl/confedit.ts \
 	 ../../../i18n/zh_CN/confedit.ts \
 	 ../../../i18n/zh_TW/confedit.ts
+
+
+
+include ( ../../../include.pro )

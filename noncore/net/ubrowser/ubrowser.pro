@@ -7,3 +7,7 @@ INCLUDEPATH	+=../../../include
 DEPENDPATH	+=../../../include
 LIBS		+= -lqpe
 TARGET          = ubrowser
+
+
+
+include ( ../../../include.pro )

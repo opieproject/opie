@@ -33,3 +33,7 @@ TRANSLATIONS = ../../../../i18n/de/libmadplugin.ts \
 	 ../../../../i18n/sl/libmadplugin.ts \
 	 ../../../../i18n/zh_CN/libmadplugin.ts \
 	 ../../../../i18n/zh_TW/libmadplugin.ts
+
+
+
+include ( ../../../../include.pro )

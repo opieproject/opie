@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: unixmake2.cpp,v 1.1 2002-11-01 00:10:42 kergoth Exp $
+** $Id: unixmake2.cpp,v 1.2 2003-01-16 06:18:58 kergoth Exp $
 **
 ** Definition of ________ class.
 **
@@ -212,6 +212,7 @@ UnixMakefileGenerator::writeMakeParts(QTextStream &t)
     if(do_incremental && !moc_incremental && !src_incremental)
 	do_incremental = FALSE;
     t << "DIST	   = " << varList("DISTFILES") << endl;
+    t << "PRO      = " << fileFixify(project->projectFile()) << endl;
     t << "QMAKE_TARGET = " << var("QMAKE_ORIG_TARGET") << endl;
     t << "DESTDIR  = " << var("DESTDIR") << endl;
     t << "TARGET   = " << var("TARGET") << endl;

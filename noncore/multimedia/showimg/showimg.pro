@@ -24,3 +24,7 @@ TRANSLATIONS = ../../../i18n/de/showimg.ts \
    ../../../i18n/zh_CN/showimg.ts \
    ../../../i18n/zh_TW/showimg.ts \
    ../../../i18n/da/showimg.ts
+
+
+
+include ( ../../../include.pro )

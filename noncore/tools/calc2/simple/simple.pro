@@ -24,3 +24,7 @@
 #	 ../../../../i18n/sl/lib.ts \
 #	 ../../../../i18n/zh_CN/lib.ts \
 #	 ../../../../i18n/zh_TW/lib.ts
+
+
+
+include ( ../../../../include.pro )

@@ -24,3 +24,7 @@ TRANSLATIONS = ../../../i18n/de/remote.ts \
 	 ../../../i18n/sl/remote.ts \
 	 ../../../i18n/zh_CN/remote.ts \
 	 ../../../i18n/zh_TW/remote.ts
+
+
+
+include ( ../../../include.pro )

@@ -49,3 +49,7 @@ TRANSLATIONS = ../../../i18n/de/keypebble.ts \
 	 ../../../i18n/sl/keypebble.ts \
 	 ../../../i18n/zh_CN/keypebble.ts \
 	 ../../../i18n/zh_TW/keypebble.ts
+
+
+
+include ( ../../../include.pro )

@@ -26,3 +26,7 @@ TRANSLATIONS = ../../../i18n/de/systemtime.ts \
 	 ../../../i18n/sl/systemtime.ts \
 	 ../../../i18n/zh_CN/systemtime.ts \
 	 ../../../i18n/zh_TW/systemtime.ts
+
+
+
+include ( ../../../include.pro )

@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/libsuspendapplet.ts \
 	 ../../../i18n/sl/libsuspendapplet.ts \
 	 ../../../i18n/zh_CN/libsuspendapplet.ts \
 	 ../../../i18n/zh_TW/libsuspendapplet.ts
+
+
+
+include ( ../../../include.pro )

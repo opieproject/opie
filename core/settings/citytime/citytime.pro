@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/citytime.ts \
 	 ../../../i18n/zh_CN/citytime.ts \
 	 ../../../i18n/zh_TW/citytime.ts \
 	 ../../../i18n/da/citytime.ts
+
+
+
+include ( ../../../include.pro )

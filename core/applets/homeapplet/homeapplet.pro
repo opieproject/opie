@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/libhomeapplet.ts \
 	 ../../../i18n/sl/libhomeapplet.ts \
 	 ../../../i18n/zh_CN/libhomeapplet.ts \
 	 ../../../i18n/zh_TW/libhomeapplet.ts
+
+
+
+include ( ../../../include.pro )

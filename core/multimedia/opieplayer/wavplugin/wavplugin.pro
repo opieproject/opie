@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../../i18n/de/libwavplugin.ts \
 	 ../../../../i18n/sl/libwavplugin.ts \
 	 ../../../../i18n/zh_CN/libwavplugin.ts \
 	 ../../../../i18n/zh_TW/libwavplugin.ts
+
+
+
+include ( ../../../../include.pro )

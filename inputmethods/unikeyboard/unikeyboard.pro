@@ -25,3 +25,7 @@ TRANSLATIONS = ../../i18n/de/libqunikeyboard.ts \
 	 ../../i18n/sl/libqunikeyboard.ts \
 	 ../../i18n/zh_CN/libqunikeyboard.ts \
 	 ../../i18n/zh_TW/libqunikeyboard.ts
+
+
+
+include ( ../../include.pro )

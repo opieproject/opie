@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/libmetal.ts \
 	 ../../../i18n/sl/libmetal.ts \
 	 ../../../i18n/zh_CN/libmetal.ts \
 	 ../../../i18n/zh_TW/libmetal.ts
+
+
+
+include ( ../../../include.pro )

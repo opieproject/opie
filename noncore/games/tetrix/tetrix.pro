@@ -33,3 +33,7 @@ TRANSLATIONS = ../../../i18n/de/tetrix.ts \
 	 ../../../i18n/zh_CN/tetrix.ts \
 	 ../../../i18n/it/tetrix.ts \
 	 ../../../i18n/zh_TW/tetrix.ts
+
+
+
+include ( ../../../include.pro )

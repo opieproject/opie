@@ -43,3 +43,7 @@ TRANSLATIONS = ../../i18n/de/opie-login.ts \
 	../../i18n/it/opie-login.ts \
 	../../i18n/da/opie-login.ts
 
+
+
+
+include ( ../../include.pro )

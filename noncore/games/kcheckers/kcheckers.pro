@@ -33,3 +33,7 @@ TRANSLATIONS = ../../../i18n/de/kcheckers.ts \
 	 ../../../i18n/sl/kcheckers.ts \
 	 ../../../i18n/zh_CN/kcheckers.ts \
 	 ../../../i18n/zh_TW/kcheckers.ts
+
+
+
+include ( ../../../include.pro )

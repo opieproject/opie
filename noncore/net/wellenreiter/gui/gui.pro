@@ -9,3 +9,7 @@ DEPENDPATH      += $(OPIEDIR)/include ../
 LIBS            += -lqpe -lopie -L. -lwellenreiter
 INTERFACES      = configbase.ui
 TARGET          = wellenreiter
+
+
+
+include ( ../../../../include.pro )

@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/qcop.ts \
 	 ../../../i18n/sl/qcop.ts \
 	 ../../../i18n/zh_CN/qcop.ts \
 	 ../../../i18n/zh_TW/qcop.ts
+
+
+
+include ( ../../../include.pro )

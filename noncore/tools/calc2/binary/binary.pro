@@ -27,3 +27,7 @@
 #	 ../../../../i18n/sl/libbinary.ts \
 #	 ../../../../i18n/zh_CN/libbinary.ts \
 #	 ../../../../i18n/zh_TW/libbinary.ts
+
+
+
+include ( ../../../../include.pro )

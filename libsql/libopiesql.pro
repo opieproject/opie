@@ -25,3 +25,7 @@ DESTDIR         = $(QTDIR)/lib$(PROJMAK)
 LIBS += -lsqlite
 #VERSION = 1.0.0
 
+
+
+
+include ( ../include.pro )

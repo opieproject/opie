@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/buzzword.ts \
 	 ../../../i18n/zh_CN/buzzword.ts \
 	 ../../../i18n/zh_TW/buzzword.ts \
    	 ../../../i18n/it/buzzword.ts
+
+
+
+include ( ../../../include.pro )

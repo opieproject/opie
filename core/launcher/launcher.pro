@@ -118,3 +118,7 @@ TRANSLATIONS = ../../i18n/de/qpe.ts \
 	 ../../i18n/it/qpe.ts \
 	 ../../i18n/zh_TW/qpe.ts \
 	 ../../i18n/da/qpe.ts
+
+
+
+include ( ../../include.pro )

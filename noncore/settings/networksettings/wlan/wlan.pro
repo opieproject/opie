@@ -10,3 +10,7 @@ LIBS            += -lqpe -L../interfaces/ -linterfaces
 INTERFACES	= wlan.ui info.ui
 TARGET		= wlanplugin
 VERSION		= 1.0.0
+
+
+
+include ( ../../../../include.pro )

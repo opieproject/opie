@@ -24,3 +24,7 @@ TRANSLATIONS = ../../../i18n/de/snake.ts \
 	 ../../../i18n/sl/snake.ts \
 	 ../../../i18n/zh_CN/snake.ts \
 	 ../../../i18n/zh_TW/snake.ts
+
+
+
+include ( ../../../include.pro )

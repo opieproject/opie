@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/libvolumeapplet.ts \
 	 ../../../i18n/sl/libvolumeapplet.ts \
 	 ../../../i18n/zh_CN/libvolumeapplet.ts \
 	 ../../../i18n/zh_TW/libvolumeapplet.ts
+
+
+
+include ( ../../../include.pro )

@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/liblogoutapplet.ts \
 	 ../../../i18n/sl/liblogoutapplet.ts \
 	 ../../../i18n/zh_CN/liblogoutapplet.ts \
 	 ../../../i18n/zh_TW/liblogoutapplet.ts
+
+
+
+include ( ../../../include.pro )

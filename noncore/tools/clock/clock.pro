@@ -26,3 +26,7 @@ TRANSLATIONS = ../../../i18n/de/clock.ts \
 	 ../../../i18n/zh_CN/clock.ts \
 	 ../../../i18n/zh_TW/clock.ts \
 	 ../../../i18n/da/clock.ts
+
+
+
+include ( ../../../include.pro )

@@ -27,3 +27,7 @@ TRANSLATIONS = ../../i18n/de/libqjumpx.ts \
 	 ../../i18n/sl/libqjumpx.ts \
 	 ../../i18n/zh_CN/libqjumpx.ts \
 	 ../../i18n/zh_TW/libqjumpx.ts
+
+
+
+include ( ../../include.pro )

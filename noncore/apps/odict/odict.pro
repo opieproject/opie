@@ -36,3 +36,7 @@ TRANSLATIONS = ../../../i18n/de/odict.ts \
 	 ../../../i18n/zh_TW/odict.ts \
    	 ../../../i18n/it/odict.ts \
    	 ../../../i18n/da/odict.ts
+
+
+
+include ( ../../../include.pro )

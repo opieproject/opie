@@ -51,3 +51,7 @@ TRANSLATIONS = ../../../i18n/de/tableviewer.ts \
 	 ../../../i18n/sl/tableviewer.ts \
 	 ../../../i18n/zh_CN/tableviewer.ts \
 	 ../../../i18n/zh_TW/tableviewer.ts
+
+
+
+include ( ../../../include.pro )

@@ -25,3 +25,7 @@ TRANSLATIONS = ../../i18n/de/libqpickboard.ts \
 	 ../../i18n/sl/libqpickboard.ts \
 	 ../../i18n/zh_CN/libqpickboard.ts \
 	 ../../i18n/zh_TW/libqpickboard.ts
+
+
+
+include ( ../../include.pro )

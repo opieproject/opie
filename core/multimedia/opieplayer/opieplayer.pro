@@ -34,3 +34,7 @@ TRANSLATIONS = ../../../i18n/de/opieplayer.ts \
         ../../../i18n/sl/opieplayer.ts \
         ../../../i18n/zh_CN/opieplayer.ts \
         ../../../i18n/zh_TW/opieplayer.ts
+
+
+
+include ( ../../../include.pro )

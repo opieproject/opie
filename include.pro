@@ -36,9 +36,10 @@ INSTALLS += sounds
 # new targets
 
 lupdate.target = lupdate
-lupdate.commands = lupdate -noobselete $(DIST)
+lupdate.commands = lupdate -noobsolete $(PRO)
 
 lrelease.target = lrelease
-lrelease.commands = lrelease $(DIST)
+lrelease.commands = lrelease $(PRO)
 
 QMAKE_EXTRA_UNIX_TARGETS += lupdate lrelease
+

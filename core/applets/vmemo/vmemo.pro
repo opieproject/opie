@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/libvmemoapplet.ts \
    ../../../i18n/sl/libvmemoapplet.ts \
    ../../../i18n/zh_CN/libvmemoapplet.ts \
    ../../../i18n/zh_TW/libvmemoapplet.ts
+
+
+
+include ( ../../../include.pro )

@@ -71,3 +71,7 @@ DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lqpe -lopie 
 TARGET       = opie-console
 
+
+
+
+include ( ../../../include.pro )

@@ -32,3 +32,7 @@ TRANSLATIONS = ../../../i18n/de/go.ts \
 	 ../../../i18n/sl/go.ts \
 	 ../../../i18n/zh_CN/go.ts \
 	 ../../../i18n/zh_TW/go.ts
+
+
+
+include ( ../../../include.pro )

@@ -26,3 +26,7 @@ TRANSLATIONS = ../../../i18n/de/appearance.ts \
 	 ../../../i18n/zh_CN/appearance.ts \
 	 ../../../i18n/zh_TW/appearance.ts \
 	 ../../../i18n/da/appearance.ts
+
+
+
+include ( ../../../include.pro )

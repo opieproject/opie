@@ -26,3 +26,7 @@ TRANSLATIONS = ../../../i18n/de/wordgame.ts \
 	 ../../../i18n/sl/wordgame.ts \
 	 ../../../i18n/zh_CN/wordgame.ts \
 	 ../../../i18n/zh_TW/wordgame.ts
+
+
+
+include ( ../../../include.pro )

@@ -22,3 +22,7 @@ TRANSLATIONS = ../i18n/de/quickexec.ts \
 	 ../i18n/sl/quickexec.ts \
 	 ../i18n/zh_CN/quickexec.ts \
 	 ../i18n/zh_TW/quickexec.ts
+
+
+
+include ( ../include.pro )

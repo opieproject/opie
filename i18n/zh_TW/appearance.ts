@@ -62,10 +62,6 @@
         <translation>底部</translation>
     </message>
     <message>
-        <source>Appearance</source>
-        <translation>外觀</translation>
-    </message>
-    <message>
         <source>Style</source>
         <translation>樣式</translation>
     </message>
@@ -226,6 +222,10 @@ This area allows you to select an application and which settings you wish to dis
     <message>
         <source>This is a preview window.  Look here to see your new appearance as options are changed.</source>
         <translation>這是一個預覽視窗. 在這裡可以看到在改變選項之後的新外觀.</translation>
+    </message>
+    <message>
+        <source>Appearance Settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

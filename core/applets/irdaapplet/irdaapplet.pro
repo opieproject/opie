@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/libirdaapplet.ts \
 	 ../../../i18n/sl/libirdaapplet.ts \
 	 ../../../i18n/zh_CN/libirdaapplet.ts \
 	 ../../../i18n/zh_TW/libirdaapplet.ts
+
+
+
+include ( ../../../include.pro )

@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/filebrowser.ts \
 	 ../../../i18n/zh_CN/filebrowser.ts \
 	 ../../../i18n/it/filebrowser.ts \
 	 ../../../i18n/zh_TW/filebrowser.ts
+
+
+
+include ( ../../../include.pro )

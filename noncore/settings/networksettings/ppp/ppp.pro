@@ -10,3 +10,7 @@ LIBS            += -lqpe -L../interfaces/ -linterfaces
 INTERFACES	= ppp.ui
 TARGET		= pppplugin
 VERSION		= 1.0.0
+
+
+
+include ( ../../../../include.pro )

@@ -97,3 +97,7 @@ TRANSLATIONS = ../i18n/de/libopie.ts \
    ../i18n/zh_CN/libopie.ts \
    ../i18n/zh_TW/libopie.ts \
    ../i18n/da/libopie.ts
+
+
+
+include ( ../../include.pro )

@@ -26,3 +26,7 @@ TRANSLATIONS = ../../../i18n/de/libwirelessapplet.ts \
 	 ../../../i18n/sl/libwirelessapplet.ts \
 	 ../../../i18n/zh_CN/libwirelessapplet.ts \
 	 ../../../i18n/zh_TW/libwirelessapplet.ts
+
+
+
+include ( ../../../include.pro )

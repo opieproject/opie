@@ -25,3 +25,7 @@ TRANSLATIONS = ../i18n/de/example.ts \
 	 ../i18n/sl/example.ts \
 	 ../i18n/zh_CN/example.ts \
 	 ../i18n/zh_TW/example.ts
+
+
+
+include ( ../include.pro )

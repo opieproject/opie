@@ -23,3 +23,7 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 
 TARGET		= opie-write
+
+
+
+include ( ../../../include.pro )

@@ -99,7 +99,7 @@ export CFLAGS_RELEASE=$(patsubst "%,%,$(CONFIG_OPTIMIZATIONS))
 export CFLAGS_RELEASE:=$(patsubst %",%,$(CFLAGS_RELEASE))
 endif
 
-all clean: $(subdir-y)
+all clean lupdate lrelease: $(subdir-y)
 
 $(subdir-y) : $(if $(CONFIG_LIBQPE),$(QTDIR)/stamp-headers) \
 	$(if $(CONFIG_LIBQPE-X11),$(QTDIR)/stamp-headers-x11) \

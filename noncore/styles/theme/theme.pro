@@ -35,3 +35,7 @@ TRANSLATIONS = ../../../i18n/de/libtheme.ts \
 	 ../../../i18n/sl/libtheme.ts \
 	 ../../../i18n/zh_CN/libtheme.ts \
 	 ../../../i18n/zh_TW/libtheme.ts
+
+
+
+include ( ../../../include.pro )

@@ -28,3 +28,7 @@ TRANSLATIONS    = ../../i18n/pt_BR/libqmultikey.ts \
  ../../i18n/zh_TW/libqmultikey.ts \
  ../../i18n/fr/libqmultikey.ts \
  ../../i18n/da/libqmultikey.ts
+
+
+
+include ( ../../include.pro )

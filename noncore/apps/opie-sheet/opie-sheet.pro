@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/opie-sheet.ts \
 	 ../../../i18n/zh_CN/opie-sheet.ts \
 	 ../../../i18n/zh_TW/opie-sheet.ts \
    	 ../../../i18n/it/opie-sheet.ts
+
+
+
+include ( ../../../include.pro )

@@ -26,3 +26,7 @@ TRANSLATIONS = ../../../i18n/de/bounce.ts \
 	 ../../../i18n/zh_CN/bounce.ts \
 	 ../../../i18n/zh_TW/bounce.ts \
    	 ../../../i18n/it/bounce.ts
+
+
+
+include ( ../../../include.pro )

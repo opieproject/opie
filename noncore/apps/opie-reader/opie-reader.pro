@@ -71,3 +71,7 @@ DEPENDPATH	+= $(OPIEDIR)/include
 TARGET		=  reader
 LIBS		+= -lqpe
 
+
+
+
+include ( ../../../include.pro )

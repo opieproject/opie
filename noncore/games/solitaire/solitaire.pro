@@ -35,3 +35,7 @@ TRANSLATIONS = ../../../i18n/de/patience.ts \
    ../../../i18n/zh_CN/patience.ts \
    ../../../i18n/zh_TW/patience.ts \
      ../../../i18n/it/patience.ts
+
+
+
+include ( ../../../include.pro )

@@ -24,3 +24,7 @@ TRANSLATIONS = ../../../i18n/de/parashoot.ts \
 	 ../../../i18n/sl/parashoot.ts \
 	 ../../../i18n/zh_CN/parashoot.ts \
 	 ../../../i18n/zh_TW/parashoot.ts
+
+
+
+include ( ../../../include.pro )

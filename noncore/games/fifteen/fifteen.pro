@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/fifteen.ts \
 	 ../../../i18n/sl/fifteen.ts \
 	 ../../../i18n/zh_CN/fifteen.ts \
 	 ../../../i18n/zh_TW/fifteen.ts
+
+
+
+include ( ../../../include.pro )

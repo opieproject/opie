@@ -53,3 +53,7 @@ TRANSLATIONS = ../../../i18n/de/oipkg.ts \
 	 ../../../i18n/sl/oipkg.ts \
 	 ../../../i18n/zh_CN/oipkg.ts \
 	 ../../../i18n/zh_TW/oipkg.ts
+
+
+
+include ( ../../../include.pro )

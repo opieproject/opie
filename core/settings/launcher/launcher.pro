@@ -20,3 +20,7 @@ DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lqpe -lopie
 TARGET       = launchersettings
 
+
+
+
+include ( ../../../include.pro )

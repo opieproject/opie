@@ -56,3 +56,7 @@ TRANSLATIONS = ../../../i18n/de/datebook.ts \
 	 ../../../i18n/it/datebook.ts \
 	 ../../../i18n/zh_TW/datebook.ts \
 	 ../../../i18n/da/datebook.ts
+
+
+
+include ( ../../../include.pro )

@@ -10,3 +10,7 @@ LIBS            += -lqpe
 VERSION   = 1.0.0
 MOC_DIR=opieobj
 OBJECTS_DIR=opieobj
+
+
+
+include ( ../../../include.pro )

@@ -27,3 +27,7 @@ TRANSLATIONS = ../../../i18n/de/usermanager.ts \
 	../../../i18n/it/usermanager.ts \
 	../../../i18n/da/usermanager.ts
 
+
+
+
+include ( ../../../include.pro )

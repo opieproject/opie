@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/libclockapplet.ts \
 	 ../../../i18n/sl/libclockapplet.ts \
 	 ../../../i18n/zh_CN/libclockapplet.ts \
 	 ../../../i18n/zh_TW/libclockapplet.ts
+
+
+
+include ( ../../../include.pro )

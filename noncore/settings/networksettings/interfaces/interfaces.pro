@@ -10,3 +10,7 @@ LIBS            += -lqpe
 INTERFACES	= interfaceadvanced.ui  interfaceinformation.ui  interfacesetup.ui
 TARGET		= interfaces
 VERSION		= 1.0.0
+
+
+
+include ( ../../../../include.pro )

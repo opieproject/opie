@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/libcardmonapplet.ts \
 	 ../../../i18n/sl/libcardmonapplet.ts \
 	 ../../../i18n/zh_CN/libcardmonapplet.ts \
 	 ../../../i18n/zh_TW/libcardmonapplet.ts
+
+
+
+include ( ../../../include.pro )

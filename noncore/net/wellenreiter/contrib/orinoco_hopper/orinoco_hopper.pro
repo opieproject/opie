@@ -9,3 +9,7 @@ DEPENDPATH      +=
 LIBS            +=
 INTERFACES      = 
 TARGET          = orinoco_hopper
+
+
+
+include ( ../../../../../include.pro )

@@ -24,3 +24,7 @@ TRANSLATIONS = ../../../i18n/de/textedit.ts \
          ../../../i18n/sl/textedit.ts \
          ../../../i18n/zh_CN/textedit.ts \
          ../../../i18n/zh_TW/textedit.ts
+
+
+
+include ( ../../../include.pro )

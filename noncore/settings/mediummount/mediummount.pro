@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/mediummount.ts \
 	 ../../../i18n/sl/mediummount.ts \
 	 ../../../i18n/zh_CN/mediummount.ts \
 	 ../../../i18n/zh_TW/mediummount.ts
+
+
+
+include ( ../../../include.pro )

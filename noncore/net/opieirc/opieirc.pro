@@ -22,3 +22,7 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS        += -lqpe -lopie
 
+
+
+
+include ( ../../../include.pro )

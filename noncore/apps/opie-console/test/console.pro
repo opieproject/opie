@@ -15,3 +15,7 @@ DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lqpe -lopie
 TARGET       = test
 
+
+
+
+include ( ../../../../include.pro )

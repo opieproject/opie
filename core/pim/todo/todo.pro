@@ -62,3 +62,7 @@ TRANSLATIONS = ../../../i18n/de/todolist.ts \
 	 ../../../i18n/sl/todolist.ts \
 	 ../../../i18n/zh_CN/todolist.ts \
 	 ../../../i18n/zh_TW/todolist.ts
+
+
+
+include ( ../../../include.pro )

@@ -42,3 +42,7 @@ TRANSLATIONS = ../../../i18n/de/checkbook.ts \
    ../../../i18n/zh_CN/checkbook.ts \
    ../../../i18n/zh_TW/checkbook.ts \
    ../../../i18n/it/checkbook.ts
+
+
+
+include ( ../../../include.pro )

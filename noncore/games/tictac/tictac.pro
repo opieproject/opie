@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/tictac.ts \
 	 ../../../i18n/sl/tictac.ts \
 	 ../../../i18n/zh_CN/tictac.ts \
 	 ../../../i18n/zh_TW/tictac.ts
+
+
+
+include ( ../../../include.pro )

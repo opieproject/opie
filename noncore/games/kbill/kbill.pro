@@ -29,3 +29,7 @@ TRANSLATIONS = ../../../i18n/de/kbill.ts \
 	 ../../../i18n/sl/kbill.ts \
 	 ../../../i18n/zh_CN/kbill.ts \
 	 ../../../i18n/zh_TW/kbill.ts
+
+
+
+include ( ../../../include.pro )

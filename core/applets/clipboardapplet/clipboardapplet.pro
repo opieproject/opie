@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/libclipboardapplet.ts \
 	 ../../../i18n/sl/libclipboardapplet.ts \
 	 ../../../i18n/zh_CN/libclipboardapplet.ts \
 	 ../../../i18n/zh_TW/libclipboardapplet.ts
+
+
+
+include ( ../../../include.pro )

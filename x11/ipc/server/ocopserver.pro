@@ -8,3 +8,7 @@ INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 TARGET		= ocopserver
 
+
+
+
+include ( ../../../include.pro )

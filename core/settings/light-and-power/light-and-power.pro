@@ -26,3 +26,7 @@ TRANSLATIONS = ../../../i18n/de/light-and-power.ts \
 	 ../../../i18n/zh_TW/light-and-power.ts \
 	 ../../../i18n/it/light-and-power.ts \
 	 ../../../i18n/da/light-and-power.ts
+
+
+
+include ( ../../../include.pro )

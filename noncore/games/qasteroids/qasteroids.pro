@@ -24,3 +24,7 @@ TRANSLATIONS = ../../../i18n/de/qasteroids.ts \
 	 ../../../i18n/sl/qasteroids.ts \
 	 ../../../i18n/zh_CN/qasteroids.ts \
 	 ../../../i18n/zh_TW/qasteroids.ts
+
+
+
+include ( ../../../include.pro )

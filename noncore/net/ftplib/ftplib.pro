@@ -4,3 +4,7 @@ HEADERS   = ftplib.h
 SOURCES   = ftplib.c
 DESTDIR      = $(QTDIR)/lib$(PROJMAK)
 INTERFACES  = 
+
+
+
+include ( ../../../include.pro )

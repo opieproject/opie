@@ -56,3 +56,7 @@ TRANSLATIONS = ../../../i18n/de/kpacman.ts \
 	 ../../../i18n/sl/kpacman.ts \
 	 ../../../i18n/zh_CN/kpacman.ts \
 	 ../../../i18n/zh_TW/kpacman.ts
+
+
+
+include ( ../../../include.pro )

@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/libbend.ts \
 	 ../../../i18n/sl/libbend.ts \
 	 ../../../i18n/zh_CN/libbend.ts \
 	 ../../../i18n/zh_TW/libbend.ts
+
+
+
+include ( ../../../include.pro )

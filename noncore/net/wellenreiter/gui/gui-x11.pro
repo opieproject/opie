@@ -9,3 +9,7 @@ DEPENDPATH      += ../
 LIBS            += -L. -lwellenreiter
 INTERFACES      = configbase.ui
 TARGET          = wellenreiter
+
+
+
+include ( ../../../../include.pro )

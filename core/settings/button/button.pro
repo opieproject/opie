@@ -33,3 +33,7 @@ TRANSLATIONS = ../../../i18n/de/buttonsettings.ts \
 	 ../../../i18n/zh_CN/buttonsettings.ts \
 	 ../../../i18n/zh_TW/buttonsettings.ts \
 	 ../../../i18n/da/buttonsettings.ts
+
+
+
+include ( ../../../include.pro )

@@ -62,3 +62,7 @@ TRANSLATIONS = ../../../../i18n/de/libmpeg3plugin.ts \
 	 ../../../../i18n/sl/libmpeg3plugin.ts \
 	 ../../../../i18n/zh_CN/libmpeg3plugin.ts \
 	 ../../../../i18n/zh_TW/libmpeg3plugin.ts
+
+
+
+include ( ../../../../include.pro )

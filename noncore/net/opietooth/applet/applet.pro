@@ -26,3 +26,7 @@ TRANSLATIONS = ../../../../i18n/de/libbluetoothapplet.ts \
 	 ../../../../i18n/sl/libbluetoothapplet.ts \
 	 ../../../../i18n/zh_CN/libbluetoothapplet.ts \
 	 ../../../../i18n/zh_TW/libbluetoothapplet.ts
+
+
+
+include ( ../../../../include.pro )

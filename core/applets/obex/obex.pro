@@ -26,3 +26,7 @@ TRANSLATIONS = ../../../i18n/de/libopieobex.ts \
 	 ../../../i18n/sl/libopieobex.ts \
 	 ../../../i18n/zh_CN/libopieobex.ts \
 	 ../../../i18n/zh_TW/libopieobex.ts
+
+
+
+include ( ../../../include.pro )

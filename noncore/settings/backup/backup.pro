@@ -28,3 +28,7 @@ TRANSLATIONS = ../../../i18n/de/backup.ts \
 	../../../i18n/it/backup.ts \
 	../../../i18n/da/backup.ts
 
+
+
+
+include ( ../../../include.pro )

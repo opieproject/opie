@@ -14,3 +14,7 @@ INCLUDEPATH	+= $(OPIEDIR)/include $(OPIEDIR)/noncore/apps/tinykate/libkate/micro
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -ltinykate -lopie
 TARGET		= tinykate
+
+
+
+include ( ../../../include.pro )

@@ -28,3 +28,7 @@ TRANSLATIONS = ../../i18n/de/libqkeyboard.ts \
 	 ../../i18n/sl/libqkeyboard.ts \
 	 ../../i18n/zh_CN/libqkeyboard.ts \
 	 ../../i18n/zh_TW/libqkeyboard.ts
+
+
+
+include ( ../../include.pro )

@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/mindbreaker.ts \
 	 ../../../i18n/sl/mindbreaker.ts \
 	 ../../../i18n/zh_CN/mindbreaker.ts \
 	 ../../../i18n/zh_TW/mindbreaker.ts
+
+
+
+include ( ../../../include.pro )

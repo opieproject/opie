@@ -46,3 +46,7 @@ TRANSLATIONS = ../../i18n/de/libqhandwriting.ts \
 	 ../../i18n/sl/libqhandwriting.ts \
 	 ../../i18n/zh_CN/libqhandwriting.ts \
 	 ../../i18n/zh_TW/libqhandwriting.ts
+
+
+
+include ( ../../include.pro )

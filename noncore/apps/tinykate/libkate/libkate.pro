@@ -88,3 +88,7 @@ TARGET		= tinykate
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR      = $(QTDIR)/lib$(PROJMAK)
 
+
+
+
+include ( ../../../../include.pro )

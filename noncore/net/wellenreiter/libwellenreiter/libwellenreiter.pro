@@ -9,3 +9,7 @@ TMAKE_CFLAGS += -D__UNIX__
 
 DESTDIR = $(QTDIR)/lib
 TARGET = wellenreiter
+
+
+
+include ( ../../../../include.pro )

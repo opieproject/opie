@@ -8,3 +8,6 @@ INCLUDEPATH	+= $(OPIEDIR)/include /opt/QtPalmtop/include
 DEPENDPATH	+= $(OPIEDIR)/include /opt/QtPalmtop/include
 LIBS            += -L/opt/QtPalmtop/lib -lxine -lxineutils
 TARGET          = zeckeplayer
+
+
+include ( ../../../include.pro )

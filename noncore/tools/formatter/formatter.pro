@@ -24,3 +24,7 @@ TRANSLATIONS = ../../../i18n/de/formatter.ts \
 	 ../../../i18n/sl/formatter.ts \
 	 ../../../i18n/zh_CN/formatter.ts \
 	 ../../../i18n/zh_TW/formatter.ts
+
+
+
+include ( ../../../include.pro )

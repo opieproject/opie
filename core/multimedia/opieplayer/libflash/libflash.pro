@@ -29,3 +29,7 @@ TRANSLATIONS = ../../../../i18n/de/libflashplugin.ts \
 	 ../../../../i18n/sl/libflashplugin.ts \
 	 ../../../../i18n/zh_CN/libflashplugin.ts \
 	 ../../../../i18n/zh_TW/libflashplugin.ts
+
+
+
+include ( ../../../../include.pro )

@@ -27,3 +27,7 @@ TRANSLATIONS = ../../../../i18n/de/bluepin.ts \
 	 ../../../../i18n/sl/bluepin.ts \
 	 ../../../../i18n/zh_CN/bluepin.ts \
 	 ../../../../i18n/zh_TW/bluepin.ts
+
+
+
+include ( ../../../../include.pro )

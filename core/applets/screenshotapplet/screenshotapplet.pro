@@ -27,3 +27,7 @@ TRANSLATIONS = ../../../i18n/de/libscreenshotapplet.ts \
 	 ../../../i18n/sl/libscreenshotapplet.ts \
 	 ../../../i18n/zh_CN/libscreenshotapplet.ts \
 	 ../../../i18n/zh_TW/libscreenshotapplet.ts
+
+
+
+include ( ../../../include.pro )

@@ -17,3 +17,7 @@ LIBS+= -lqpe -lopie
 
 DESTDIR = $(OPIEDIR)/plugins/today
 TARGET = todayfortuneplugin
+
+
+
+include ( ../../../include.pro )

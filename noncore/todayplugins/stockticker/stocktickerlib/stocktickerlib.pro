@@ -25,3 +25,7 @@ TMAKE_CFLAGS += -D__UNIX__
 
 DESTDIR = $(OPIEDIR)/plugins/today
 TARGET = todaystocktickerplugin
+
+
+
+include ( ../../../../include.pro )

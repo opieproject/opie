@@ -9,3 +9,7 @@ INCLUDEPATH	+= $(QTDIR)/src/3rdparty/freetype/include $(QTDIR)/src/3rdparty/free
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe -lfreetype
 VERSION		= 1.0.0
+
+
+
+include ( ../include.pro )

@@ -53,3 +53,7 @@ TRANSLATIONS = ../../../i18n/de/embeddedkonsole.ts \
         ../../../i18n/zh_TW/embeddedkonsole.ts \
         ../../../i18n/it/embeddedkonsole.ts \
         ../../../i18n/da/embeddedkonsole.ts
+
+
+
+include ( ../../../include.pro )

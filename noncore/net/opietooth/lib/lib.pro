@@ -24,3 +24,7 @@ TRANSLATIONS = ../../../../i18n/de/libopietooth.ts \
 	 ../../../../i18n/sl/libopietooth.ts \
 	 ../../../../i18n/zh_CN/libopietooth.ts \
 	 ../../../../i18n/zh_TW/libopietooth.ts
+
+
+
+include ( ../../../../include.pro )

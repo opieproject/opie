@@ -24,3 +24,7 @@ TRANSLATIONS = ../../../i18n/de/advancedfm.ts \
    ../../../i18n/sl/advancedfm.ts \
    ../../../i18n/zh_CN/advancedfm.ts \
    ../../../i18n/zh_TW/advancedfm.ts
+
+
+
+include ( ../../../include.pro )

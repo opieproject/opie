@@ -39,3 +39,7 @@ TRANSLATIONS = ../../../i18n/de/libmail.ts \
 	 ../../../i18n/sl/libmail.ts \
 	 ../../../i18n/zh_CN/libmail.ts \
 	 ../../../i18n/zh_TW/libmail.ts
+
+
+
+include ( ../../../include.pro )

@@ -28,3 +28,7 @@ TRANSLATIONS = ../../i18n/de/libqdvorak.ts \
 	 ../../i18n/sl/libqdvorak.ts \
 	 ../../i18n/zh_CN/libqdvorak.ts \
 	 ../../i18n/zh_TW/libqdvorak.ts
+
+
+
+include ( ../../include.pro )

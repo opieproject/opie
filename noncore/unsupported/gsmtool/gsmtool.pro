@@ -29,3 +29,7 @@ TRANSLATIONS = ../../../i18n/de/gsmtool.ts \
 	 ../../../i18n/sl/gsmtool.ts \
 	 ../../../i18n/zh_CN/gsmtool.ts \
 	 ../../../i18n/zh_TW/gsmtool.ts
+
+
+
+include ( ../../../include.pro )

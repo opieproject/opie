@@ -8,3 +8,7 @@ DESTDIR      = $(OPIEDIR)/plugins/decorations
 TARGET       = liquid
 VERSION      = 1.0.0
 
+
+
+
+include ( ../../../include.pro )

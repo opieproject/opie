@@ -25,3 +25,7 @@ TRANSLATIONS = ../../../i18n/de/language.ts \
 	 ../../../i18n/zh_CN/language.ts \
 	 ../../../i18n/zh_TW/language.ts \
 	 ../../../i18n/da/language.ts
+
+
+
+include ( ../../../include.pro )

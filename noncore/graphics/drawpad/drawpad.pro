@@ -62,3 +62,7 @@ TRANSLATIONS = ../../../i18n/de/drawpad.ts \
 	 ../../../i18n/zh_CN/drawpad.ts \
 	 ../../../i18n/it/drawpad.ts \
 	 ../../../i18n/zh_TW/drawpad.ts
+
+
+
+include ( ../../../include.pro )
