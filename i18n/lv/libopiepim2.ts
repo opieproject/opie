@@ -219,71 +219,71 @@ un</translation>
     <name>Opie::OPimMainWindow</name>
     <message>
         <source>Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Elements</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Visi</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Neaizpildīts</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Skats</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns</translation>
     </message>
     <message>
         <source>Click here to create a new item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai veidotu jaunu elementu.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot</translation>
     </message>
     <message>
         <source>Click here to edit the selected item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai labotu iezīmēto elementu.</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Dubultot</translation>
     </message>
     <message>
         <source>Click here to duplicate the selected item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai dubltotu iezīmēto elementu.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst</translation>
     </message>
     <message>
         <source>Click here to delete the selected item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai dzēstu iezīmēto elementu.</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Bīmot</translation>
     </message>
     <message>
         <source>Click here to transmit the selected item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai pārsūtītu iezīmēto elementu.</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurēt</translation>
     </message>
     <message>
         <source>Click here to set your preferences for this application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai uzstādītu parametrus šai aplikācijai.</translation>
     </message>
     <message>
         <source>Click here to filter items by category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai filtrētu elementus pēc kategorijas.</translation>
     </message>
 </context>
 <context>
@@ -678,31 +678,31 @@ un</translation>
     </message>
     <message>
         <source>Has a due-date</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir līdz datums</translation>
     </message>
     <message>
         <source>No due-date</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav līdz datuma</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pabeigts</translation>
     </message>
     <message>
         <source>Not completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav pabeigts</translation>
     </message>
     <message>
         <source>No reccurrence</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav atkārtošanās</translation>
     </message>
     <message>
         <source>No start-date</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav sākuma datuma</translation>
     </message>
     <message>
         <source>No completed-date</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav beigu datuma</translation>
     </message>
 </context>
 <context>

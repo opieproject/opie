@@ -3,85 +3,85 @@
     <name>DateBookEvent</name>
     <message>
         <source>[with alarm]</source>
-        <translation type="unfinished"></translation>
+        <translation>[ar brīdinājumu]</translation>
     </message>
     <message>
         <source>All day</source>
-        <translation type="unfinished"></translation>
+        <translation>Visu dienu</translation>
     </message>
     <message>
         <source>note</source>
-        <translation type="unfinished"></translation>
+        <translation>piezīme</translation>
     </message>
 </context>
 <context>
     <name>DatebookPluginConfigBase</name>
     <message>
         <source>DatebookPluginConfigBase</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Show location</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt lokāciju</translation>
     </message>
     <message>
         <source>Check this if the location of an appointment should be shown for each one</source>
-        <translation type="unfinished"></translation>
+        <translation>Atzīmējiet šo ja lokāciju vajag rādīt katram notikumam</translation>
     </message>
     <message>
         <source>Show notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt piezīmes</translation>
     </message>
     <message>
         <source>Check this if the note attached to an appointment should be shown for each one</source>
-        <translation type="unfinished"></translation>
+        <translation>Atzīmējiet šo ja jārāda arī notikuma piezīme</translation>
     </message>
     <message>
         <source>Show only later appointments</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt tikai pēdējos notikumus</translation>
     </message>
     <message>
         <source>Check this if only appointments later then current time should be shown</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlaties šo ja vajag rādīt tikai nokavētos notikumus</translation>
     </message>
     <message>
         <source>Show time in extra line</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt laiku papildrindā</translation>
     </message>
     <message>
         <source>How many appointments should be shown maximal. In chronical order</source>
-        <translation type="unfinished"></translation>
+        <translation>Cik notikumus rādīt maksimāli.  Datumu secībā</translation>
     </message>
     <message>
         <source>How many appointment should be shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>Cik notikumus rādīt?</translation>
     </message>
     <message>
         <source>only today</source>
-        <translation type="unfinished"></translation>
+        <translation>tika šodien</translation>
     </message>
     <message>
         <source>How many more days should be in the range</source>
-        <translation type="unfinished"></translation>
+        <translation>Cik daudz dienu jābūt intervālā</translation>
     </message>
     <message>
         <source>How many more days</source>
-        <translation type="unfinished"></translation>
+        <translation>Cik daudz dienu</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Datebook plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalendāra spraudnis</translation>
     </message>
     <message>
         <source>No more appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>Šodien nav notikumu</translation>
     </message>
     <message>
         <source>No appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>Šodien nav notikumu</translation>
     </message>
 </context>
 </TS>

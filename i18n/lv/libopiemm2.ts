@@ -4,37 +4,40 @@
     <message>
         <source>Colormode: Color
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Krāsu režīµs: Krāsas
+</translation>
     </message>
     <message>
         <source>Colormode: Black and white
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Krāsu režīms: Melnbalts
+</translation>
     </message>
     <message>
         <source>Basic</source>
-        <translation type="unfinished"></translation>
+        <translation>Pamata</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normāls</translation>
     </message>
     <message>
         <source>Fine</source>
-        <translation type="unfinished"></translation>
+        <translation>Smalks</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Nezināms</translation>
     </message>
     <message>
         <source>Quality: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kvalitāte: %1
+</translation>
     </message>
     <message>
         <source>Daylight</source>
-        <translation type="unfinished"></translation>
+        <translation>Dienasgaisma</translation>
     </message>
     <message>
         <source>Fluorescent</source>

@@ -79,15 +79,15 @@
     </message>
     <message>
         <source>Hinge1</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinge1</translation>
     </message>
     <message>
         <source>Hinge2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Hinge3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

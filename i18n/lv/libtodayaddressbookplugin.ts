@@ -81,34 +81,34 @@ Krāsa ja zemāk</translation>
     </message>
     <message>
         <source>The urgent color will be used if the birthday/anniversary is closer than given days !</source>
-        <translation type="unfinished"></translation>
+        <translation>Speciāla krāsa tiks lietota ja dzimšanas diena būs tuvāka par doto dienu skaitu !</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>AddressBook plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>AdresuGrāmatas spraudnis</translation>
     </message>
     <message>
         <source>Database does not provide this search query ! Please upgrade libOpie !&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Datubāze nepiedāvā šo meklēšanas pieprasījumu ! Lūdzu atjauniniet libOpie !&lt;br&gt;</translation>
     </message>
     <message>
         <source>Next birthdays in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nākamās dzimšanas dienas pēc &lt;b&gt; %1 &lt;/b&gt; dienām:</translation>
     </message>
     <message>
         <source>No birthdays in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav dzimšanasdienu &lt;b&gt; %1 &lt;/b&gt; dienās!</translation>
     </message>
     <message>
         <source>Next anniversaries in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nākamās dzimšanas dienas &lt;b&gt; %1 &lt;/b&gt; dienās:</translation>
     </message>
     <message>
         <source>No anniversaries in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav svinamdienu &lt;b&gt; %1 &lt;/b&gt; dienās!</translation>
     </message>
 </context>
 </TS>

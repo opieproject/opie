@@ -23,15 +23,15 @@
     </message>
     <message>
         <source>Today</source>
-        <translation type="unfinished">Šodien</translation>
+        <translation>Šodien</translation>
     </message>
     <message>
         <source>Today Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Šodien Kļūda</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The plugin &apos;%1&apos; caused Today to crash. It could be that the plugin is not properly installed.&lt;br&gt;Today tries to continue loading plugins.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Spraudnis &quot;%1&quot; izsauca Šodien nojukšanu.  Varētu būt kad spraudnis nav pareizi instalēts.&lt;br&gt;Šodien turpinās ielādēt spraudņus.&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>

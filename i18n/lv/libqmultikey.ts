@@ -3,70 +3,70 @@
     <name>ConfigDlg</name>
     <message>
         <source>Multikey Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Multikey Konfigurācija</translation>
     </message>
     <message>
         <source>General Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Pamata Uzstādījumi</translation>
     </message>
     <message>
         <source>Keymap File</source>
-        <translation type="unfinished"></translation>
+        <translation>Taustiņatslēgu Faili</translation>
     </message>
     <message>
         <source>Current Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekošā Valoda</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt</translation>
     </message>
     <message>
         <source>Pickboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlesdēlis</translation>
     </message>
     <message>
         <source>Key Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Taustiņu Atkārtošana</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Krāsas</translation>
     </message>
     <message>
         <source>Key Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Taustiņu Krāsa</translation>
     </message>
     <message>
         <source>Key Pressed Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Nospiesta taustiņa krāsa</translation>
     </message>
     <message>
         <source>Line Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Rindas Krāsa</translation>
     </message>
     <message>
         <source>Text Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Teksta Krāsa</translation>
     </message>
     <message>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Augšup</translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Lejup</translation>
     </message>
 </context>
 <context>
     <name>InputMethods</name>
     <message>
         <source>Multikey</source>
-        <translation type="unfinished"></translation>
+        <translation>Multikey</translation>
     </message>
 </context>
 </TS>

@@ -324,11 +324,11 @@ ir par brīvu !</translation>
     </message>
     <message>
         <source>Select Contact Order:</source>
-        <translation>Izvēlaties Kontaktu Kārtību:</translation>
+        <translation>Attēlošanas Kārtība:</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Uz Augšu</translation>
+        <translation>Augšup</translation>
     </message>
     <message>
         <source>Move selected attribute one line up</source>
@@ -336,7 +336,7 @@ ir par brīvu !</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Uz Leju</translation>
+        <translation>Lejup</translation>
     </message>
     <message>
         <source>Move selected attribute one line down</source>
