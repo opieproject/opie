@@ -21,7 +21,7 @@ class ProfileManager;
 class Profile;
 class FunctionKeyboard;
 class FKey;
-
+class DocLnk;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -65,7 +65,7 @@ private slots:
     void slotOpenButtons(bool);
     void slotRecordScript();
     void slotSaveScript();
-    void slotRunScript();
+    void slotRunScript(int);
     void slotFullscreen();
     void slotSessionChanged( Session* );
     void slotKeyReceived(FKey, ushort, ushort, bool);
@@ -80,6 +80,7 @@ private slots:
 private:
     void initUI();
     void populateProfiles();
+    void populateScripts();
     void create( const Profile& );
     /**
      * the current session
@@ -90,6 +91,7 @@ private:
      * the session list
      */
     QList<Session> m_sessions;
+    QList<DocLnk>  m_scriptsData;
 
     /**
      * the metafactory
@@ -105,6 +107,7 @@ private:
     QMenuBar* m_bar;
     QPopupMenu* m_console;
     QPopupMenu* m_sessionsPop;
+    QPopupMenu* m_scriptsPop;
     QPopupMenu* m_scripts;
     QAction* m_connect;
     QAction* m_disconnect;
@@ -115,11 +118,11 @@ private:
     QAction* m_openButtons;
     QAction* m_recordScript;
     QAction* m_saveScript;
-    QAction* m_runScript;
     QAction* m_fullscreen;
     QAction* m_closewindow;
 
     FunctionKeyboard *m_kb;
+    int m_runScript_id;
     bool m_isFullscreen;
 
     QWidget* savedParentFullscreen;

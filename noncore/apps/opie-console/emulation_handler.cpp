@@ -63,7 +63,6 @@ void EmulationHandler::recvEmulation(const char* src, int len ) {
     QByteArray ar(len);
 
     memcpy(ar.data(), src, sizeof(char) * len );
-
     if (isRecording())
         m_script->append(ar);
     emit send(ar);

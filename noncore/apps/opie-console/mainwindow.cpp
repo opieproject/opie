@@ -10,6 +10,9 @@
 #include <qwhatsthis.h>
 
 #include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
+#include <qpe/filemanager.h>
+#include <qpe/mimetype.h>
 
 #include <opie/ofiledialog.h>
 
@@ -44,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(
 
     initUI();
     populateProfiles();
+    populateScripts();
 }
 void MainWindow::initUI() {
     setToolBarsMovable( FALSE  );
@@ -56,6 +60,7 @@ void MainWindow::initUI() {
     m_console = new QPopupMenu( this );
     m_scripts = new QPopupMenu( this );
     m_sessionsPop= new QPopupMenu( this );
+    m_scriptsPop = new QPopupMenu( this ); 
 
     /* add a toolbar for icons */
     m_icons = new QToolBar(this);
@@ -150,6 +155,9 @@ void MainWindow::initUI() {
     /*
      * script actions
      */
+    m_runScript_id = m_scripts->insertItem(tr("Run Script"), m_scriptsPop, -1, 0);
+    connect(m_scriptsPop, SIGNAL(activated(int)), this, SLOT(slotRunScript(int)));
+    
     m_recordScript = new QAction(tr("Record Script"), QString::null, 0, this, 0);
     m_recordScript->addTo(m_scripts);
     connect(m_recordScript, SIGNAL(activated()), this, SLOT(slotRecordScript()));
@@ -158,9 +166,6 @@ void MainWindow::initUI() {
     m_saveScript->addTo(m_scripts);
     connect(m_saveScript, SIGNAL(activated()), this, SLOT(slotSaveScript()));
 
-    m_runScript = new QAction(tr("Run Script"), QString::null, 0, this, 0);
-    m_runScript->addTo(m_scripts);
-    connect(m_runScript, SIGNAL(activated()), this, SLOT(slotRunScript()));
 
     /*
      * action that open/closes the keyboard
@@ -216,9 +221,9 @@ void MainWindow::initUI() {
     m_disconnect->setEnabled( false );
     m_terminate->setEnabled( false );
     m_transfer->setEnabled( false );
+    m_scripts->setItemEnabled(m_runScript_id, false);
     m_recordScript->setEnabled( false );
     m_saveScript->setEnabled( false );
-    m_runScript->setEnabled( false );
     m_fullscreen->setEnabled( false );
     m_closewindow->setEnabled( false );
 
@@ -249,6 +254,21 @@ void MainWindow::populateProfiles() {
     }
 
 }
+
+void MainWindow::populateScripts() {
+    m_scriptsPop->clear();
+    m_scriptsData.clear();
+    DocLnkSet files(QPEApplication::documentDir(), "text/plain");
+    QListIterator<DocLnk> dit(files.children());
+    for (; dit.current(); ++dit) {
+        if (*dit && (*dit)->name().length()>0) {
+            m_scriptsData.append((*dit));
+            m_scriptsPop->insertItem((*dit)->name());
+        }
+    }
+
+}
+
 MainWindow::~MainWindow() {
     delete m_factory;
     manager()->save();
@@ -279,38 +299,40 @@ void MainWindow::slotNew() {
 void MainWindow::slotRecordScript() {
     if (currentSession()) {
         currentSession()->emulationHandler()->startRecording();
+        m_saveScript->setEnabled(true);
+        m_recordScript->setEnabled(false);
     }
 }
 
 void MainWindow::slotSaveScript() {
     if (currentSession() && currentSession()->emulationHandler()->isRecording()) {
-        MimeTypes types;
-        QStringList script;
-        script << "text/plain";
-        script << "text/all";
-        script << "application/octet-stream";
-        types.insert("Script", script);
-        QString filename = OFileDialog::getSaveFileName(2, "/", QString::null, types);
+        QMap<QString, QStringList> map;
+        QStringList text;
+        text << "text/plain";
+        map.insert(tr("Script"), text );
+        QString filename = OFileDialog::getSaveFileName(2, QPEApplication::documentDir(), QString::null, map);
         if (!filename.isEmpty()) {
-            currentSession()->emulationHandler()->script()->saveTo(filename);
+            DocLnk nf;
+            nf.setType("text/plain");
+            nf.setFile(filename);
+            nf.setName(filename);
+            FileManager fm;
+            fm.saveFile(nf, currentSession()->emulationHandler()->script()->script());
             currentSession()->emulationHandler()->clearScript();
+            m_saveScript->setEnabled(false);
+            m_recordScript->setEnabled(true);
+            populateScripts();
         }
     }
 }
 
-void MainWindow::slotRunScript() {
+void MainWindow::slotRunScript(int id) {
     if (currentSession()) {
-        MimeTypes types;
-        QStringList script;
-        script << "text/plain";
-        script << "text/all";
-        script << "application/octet-stream";
-        types.insert("Script", script);
-        QString filename = OFileDialog::getOpenFileName(2, "/", QString::null, types);
-        if (!filename.isEmpty()) {
-            Script script(DocLnk(filename).file());
-            currentSession()->emulationHandler()->runScript(&script);
-        }
+        DocLnk *lnk = m_scriptsData.at(m_scriptsPop->indexOf(id));
+        QString filePath = lnk->file();
+        printf("path is : %s\n", filePath.latin1());
+        Script script(filePath);
+        currentSession()->emulationHandler()->runScript(&script);
     }
 }
 
@@ -325,8 +347,7 @@ void MainWindow::slotConnect() {
             m_disconnect->setEnabled( true );
             m_transfer->setEnabled( true );
             m_recordScript->setEnabled( true );
-            m_saveScript->setEnabled( true );
-            m_runScript->setEnabled( true );
+            m_scripts->setItemEnabled(m_runScript_id, true);
         }
     }
 }
@@ -339,7 +360,7 @@ void MainWindow::slotDisconnect() {
         m_transfer->setEnabled( false );
         m_recordScript->setEnabled( false);
         m_saveScript->setEnabled( false );
-        m_runScript->setEnabled( false );
+        m_scripts->setItemEnabled(m_runScript_id, false);
     }
 }
 
@@ -390,7 +411,7 @@ void MainWindow::slotClose() {
         m_transfer->setEnabled( false );
         m_recordScript->setEnabled( false );
         m_saveScript->setEnabled( false );
-        m_runScript->setEnabled( false );
+        m_scripts->setItemEnabled(m_runScript_id, false);
         m_fullscreen->setEnabled( false );
         m_closewindow->setEnabled( false );
     }
@@ -433,7 +454,7 @@ void MainWindow::create( const Profile& prof ) {
     m_transfer->setEnabled( false );
     m_recordScript->setEnabled( false );
     m_saveScript->setEnabled( false );
-    m_runScript->setEnabled( false );
+    m_scripts->setItemEnabled(m_runScript_id, false);
 
     // is io_layer wants direct connection, then autoconnect
     //if ( ( m_curSession->layer() )->supports()[0] == 1 ) {
@@ -487,15 +508,15 @@ void MainWindow::slotSessionChanged( Session* ses ) {
         if ( m_curSession->layer()->isConnected() ) {
             m_connect->setEnabled( false );
             m_disconnect->setEnabled( true );
-            m_recordScript->setEnabled( true );
-            m_saveScript->setEnabled( true );
-            m_runScript->setEnabled( true );
+            m_recordScript->setEnabled(!m_curSession->emulationHandler()->isRecording());
+            m_saveScript->setEnabled(m_curSession->emulationHandler()->isRecording());
+            m_scripts->setItemEnabled(m_runScript_id, true);
         } else {
             m_connect->setEnabled( true );
             m_disconnect->setEnabled( false );
             m_recordScript->setEnabled( false );
             m_saveScript->setEnabled( false );
-            m_runScript->setEnabled( false );
+            m_scripts->setItemEnabled(m_runScript_id, false);
         }
 
         if ( ( m_curSession->layer() )->supports()[1] == 0 ) {
