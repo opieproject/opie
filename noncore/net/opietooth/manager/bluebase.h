@@ -6,6 +6,7 @@
 #include <qwidget.h>
 #include <qscrollview.h>
 #include <qsplitter.h>
+#include <qlist.h>
 
 #include "bluetoothbase.h"
 
@@ -19,6 +20,8 @@ class QTabWidget;
 class QCheckBox;
 
 namespace OpieTooth {
+
+
 
     class BlueBase : public BluetoothBase {
         Q_OBJECT
@@ -48,7 +51,7 @@ namespace OpieTooth {
 	int enableInquiryscan;
 
 	private slots:
-
+        void addSearchedDevices( QList<RemoteDevices> &newDevices );
       	void applyConfigChanges();
 
     };

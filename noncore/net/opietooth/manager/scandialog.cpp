@@ -28,13 +28,16 @@
 #include <qtooltip.h>
 #include <qwhatsthis.h>
 #include <qprogressbar.h>
+#include <qlist.h>
 
 #include <manager.h>
 #include <device.h>
-#include <remotedevice.h>
+
 
 
 namespace OpieTooth {
+
+#include <remotedevice.h>
 
 /*
  */
@@ -63,19 +66,20 @@ namespace OpieTooth {
         QFrame *buttonFrame = new QFrame(Frame7, "");
 
         StartButton = new QPushButton( buttonFrame, "StartButton" );
-        StartButton->setText( tr( "Start" ) );
+        StartButton->setText( tr( "Start scan" ) );
 
         StopButton = new QPushButton( buttonFrame, "StopButton" );
-        StopButton->setText( tr( "Cancel" ) );
+        StopButton->setText( tr( "Cancel scan" ) );
 
         QHBoxLayout *buttonLayout = new QHBoxLayout(buttonFrame);
+
         buttonLayout->addWidget(StartButton);
 	buttonLayout->addWidget(StopButton);
 
         ListView1 = new QListView( privateLayoutWidget, "ListView1" );
 
-        ListView1->addColumn( tr( "Add" ) );
-        ListView1->addColumn( tr( "Device Name" ) );
+        //ListView1->addColumn( tr( "Add" ) );
+        ListView1->addColumn( tr( "Add Device" ) );
         //ListView1->addColumn( tr( "Type" ) );
 
         Layout11->addWidget( ListView1);
@@ -106,6 +110,9 @@ namespace OpieTooth {
         progress->setProgress(0);
         progressStat = 0;
 
+        QCheckListItem  *deviceItem2 = new QCheckListItem( ListView1, "Test1", QCheckListItem::CheckBox );
+        deviceItem2->setText(1, "BLAH" );
+
         progressTimer();
         // when finished, it emmite foundDevices()
         // checken ob initialisiert , qcop ans applet.
@@ -119,19 +126,44 @@ namespace OpieTooth {
 
     void ScanDialog::fillList(const QString& device, RemoteDevices::ValueList deviceList) {
 
-        QListViewItem * deviceItem;
+        QCheckListItem * deviceItem;
 
         RemoteDevices::ValueList::Iterator it;
         for( it = deviceList.begin(); it != deviceList.end(); ++it ) {
 
-            deviceItem = new QListViewItem( ListView1, (*it).name() );
+            deviceItem = new QCheckListItem( ListView1, (*it).name() );
+            deviceItem->setText(1, (*it).mac() );
         }
+
+    }
+
+/*
+ * Iterates trough the items, and collects the checked items.
+ * Then it emits it, so the manager can connect to the signal to fill the listing.
+ */
+    void ScanDialog::emitToManager() {
+
+        if (!ListView1) {
+            return;
+        }
+
+        QList<RemoteDevices> *deviceList = new QList<RemoteDevices>;
+
+        QListViewItemIterator it( ListView1 );
+        for ( ; it.current(); ++it ) {
+            if ( it.current()->isSelected() ) {
+                RemoteDevices* device = new RemoteDevices(  it.current()->text(1), it.current()->text(0));
+                   deviceList->append( device );
+            }
+        }
+        emit selectedDevices( *deviceList );
     }
 
 /*
  * Cleanup
  */
     ScanDialog::~ScanDialog() {
+        emitToManager();
         delete localDevice;
     }
 

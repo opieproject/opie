@@ -19,9 +19,8 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
+#include <qlist.h>
 
-
-#include <remotedevice.h>
 
 class QVBoxLayout;
 class QHBoxLayout;
@@ -36,7 +35,7 @@ class QProgressBar;
 
 namespace OpieTooth {
 
-
+#include <remotedevices.h>
 class Manager;
 class Device;
 
@@ -64,9 +63,14 @@ class Device;
         void fillList(const QString& device, RemoteDevices::ValueList list);
 
     private:
+        void emitToManager();
         Manager *localDevice;
         int progressStat;
+
+    signals:
+        void selectedDevices(QList<RemoteDevices>&);
     };
+
 
 }
 

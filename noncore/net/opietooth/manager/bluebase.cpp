@@ -41,6 +41,7 @@
 
 namespace OpieTooth {
 
+    class RemoteDevices;
 
     BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
         : BluetoothBase( parent, name, fl ) {
@@ -48,6 +49,9 @@ namespace OpieTooth {
 
         QObject::connect( (QObject*) PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan()));
         QObject::connect((QObject*)configApplyButton, SIGNAL(clicked() ), this, SLOT(applyConfigChanges()));
+
+
+
 
         QPalette pal = this->palette();
         QColor col = pal.color(QPalette::Active, QColorGroup::Background);
@@ -149,11 +153,21 @@ namespace OpieTooth {
 }
 
 
+    void BlueBase::addSearchedDevices( QList<RemoteDevices> &newDevices ) {
+
+
+
+    }
+
+
 /**
  * Open the "scan for devices"  dialog
  */
     void BlueBase::startScan() {
         ScanDialog *scan = new ScanDialog( this, "", true);
+        QObject::connect((QObject*)scan, SIGNAL( selectedDevices(QList<RemoteDevices>&) ),
+                         this, SLOT( addSearchedDevices(QList<RemoteDevices>& ) ));
+
         scan->showMaximized();
     }
 
