@@ -55,6 +55,7 @@ public:
 
     Keys();
     Keys(const char * filename);
+    ~Keys();
     ushort  uni(const int row, const int col);
     int     qcode(const int row, const int col);
     int     width(const int row, const int col);

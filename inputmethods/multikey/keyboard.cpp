@@ -1017,6 +1017,16 @@ void Keys::setKey(const int row, const int qcode, const ushort unicode,
 
     keys[row].append(key);
 }
+
+// Keys::~Keys {{{2
+Keys::~Keys() {
+
+    for (int i = 1; i <= 5; i++) 
+        for (unsigned int j = 0; j < keys[i].count(); j++)
+            delete keys[i].at(j);
+
+}
+
 // Keys:: other functions {{{2
 int Keys::width(const int row, const int col) {
     
