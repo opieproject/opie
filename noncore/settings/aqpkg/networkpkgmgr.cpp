@@ -215,12 +215,12 @@ void NetworkPackageManager :: serverSelected( int )
 #endif
 
     Server *s = dataMgr->getServer( serverName );
-//    dataMgr->setActiveServer( serverName );
 
     vector<Package> &list = s->getPackageList();
     vector<Package>::iterator it;
     for ( it = list.begin() ; it != list.end() ; ++it )
     {
+
         QString text = "";
 
 		// If the local server, only display installed packages
@@ -235,6 +235,7 @@ void NetworkPackageManager :: serverSelected( int )
             // If a different version of package is available, postfix it with an *
             if ( it->getVersion() != it->getInstalledVersion() )
             {
+
                 if ( compareVersions( it->getInstalledVersion(), it->getVersion() ) == 1 )
                     text += "*";
             }
@@ -264,11 +265,18 @@ void NetworkPackageManager :: serverSelected( int )
         else
             new QCheckListItem( item, QString( "Filename - " ) + it->getFilename() );
         
-        new QCheckListItem( item, QString( "V. Available - " ) + it->getVersion() );
-        if ( it->getLocalPackage() )
-        {
-			if ( it->isInstalled() )
-	            new QCheckListItem( item, QString( "V. Installed - " ) + it->getInstalledVersion() );
+		if ( serverName == LOCAL_SERVER )
+		{
+        	new QCheckListItem( item, QString( "V. Installed - " ) + it->getVersion() );
+		}
+		else
+		{
+        	new QCheckListItem( item, QString( "V. Available - " ) + it->getVersion() );
+        	if ( it->getLocalPackage() )
+        	{
+				if ( it->isInstalled() )
+	            	new QCheckListItem( item, QString( "V. Installed - " ) + it->getInstalledVersion() );
+			}
 		}
         packagesList->insertItem( item );
     }
@@ -317,7 +325,7 @@ void NetworkPackageManager :: updateServer()
     dlg.showDlg();
 
     // Reload data
-    dataMgr->reloadServerData( serversList->currentText() );
+    dataMgr->reloadServerData();
     serverSelected(-1);
 //  delete progDlg;
 }
@@ -346,9 +354,7 @@ void NetworkPackageManager :: upgradePackages()
         dlg.showDlg();
 
         // Reload data
-        dataMgr->reloadServerData( LOCAL_SERVER );
-
-        dataMgr->reloadServerData( serversList->currentText() );
+        dataMgr->reloadServerData();
         serverSelected(-1);
     }
 }
@@ -436,7 +442,7 @@ void NetworkPackageManager :: downloadPackage()
         }
     }
 
-    dataMgr->reloadServerData( LOCAL_IPKGS );
+    dataMgr->reloadServerData();
     serverSelected( -1 );
 }
 
@@ -477,9 +483,7 @@ void NetworkPackageManager :: applyChanges()
     dlg.showDlg();
 
     // Reload data
-    dataMgr->reloadServerData( LOCAL_SERVER );
-
-    dataMgr->reloadServerData( serversList->currentText() );
+    dataMgr->reloadServerData();
     serverSelected(-1);
 
 #ifdef QWS

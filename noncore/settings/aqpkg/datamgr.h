@@ -49,7 +49,7 @@ public:
     Destination *getDestination( const char *name );
 
     void loadServers();
-    void reloadServerData( const char *sn );
+    void reloadServerData( );
 
     void writeOutIpkgConf();
 

@@ -135,26 +135,26 @@ void DataManager :: loadServers()
     }
     fclose( fp );
 
-    vector<Server>::iterator it;
-    for ( it = serverList.begin() ; it != serverList.end() ; ++it )
-        reloadServerData( it->getServerName() );
+    reloadServerData( );
 }
 
-void DataManager :: reloadServerData( const char *serverName )
+void DataManager :: reloadServerData( )
 {
-    Server *s = getServer( serverName );
-    // Now we've read the config file in we need to read the servers
-    // The local server is a special case. This holds the contents of the
-    // status files the number of which depends on how many destinations
-    // we've set up
-    // The other servers files hold the contents of the server package list
-    if ( s->getServerName() == LOCAL_SERVER )
-        s->readStatusFile( destList );
-    else if ( s->getServerName() == LOCAL_IPKGS )
-    	s->readLocalIpks( getServer( LOCAL_SERVER ) );
-    else
-        s->readPackageFile( getServer( LOCAL_SERVER ) );
-
+	vector<Server>::iterator it = serverList.begin();
+    for ( it = serverList.begin() ; it != serverList.end() ; ++it )
+    {
+    	// Now we've read the config file in we need to read the servers
+    	// The local server is a special case. This holds the contents of the
+    	// status files the number of which depends on how many destinations
+    	// we've set up
+    	// The other servers files hold the contents of the server package list
+    	if ( it->getServerName() == LOCAL_SERVER )
+        	it->readStatusFile( destList );
+    	else if ( it->getServerName() == LOCAL_IPKGS )
+    		it->readLocalIpks( getServer( LOCAL_SERVER ) );
+    	else
+        	it->readPackageFile( getServer( LOCAL_SERVER ) );
+	}
 }
 
 void DataManager :: writeOutIpkgConf()
