@@ -26,16 +26,16 @@ Device::Device( QObject * parent, const char * dsp, const char * mixr, bool reco
 {
     dspstr = (char *)dsp;
     mixstr = (char *)mixr;
- 
+
     devForm=-1;
     devCh=-1;
     devRate=-1;
 
     if( !record){ //playing
-        odebug << "setting up DSP for playing" << oendl; 
+        odebug << "setting up DSP for playing" << oendl;
         flags = O_WRONLY;
     } else { //recording
-        odebug << "setting up DSP for recording" << oendl; 
+        odebug << "setting up DSP for recording" << oendl;
         flags = O_RDWR;
 //        flags = O_RDONLY;
 
@@ -96,7 +96,7 @@ void Device::changedOutVolume(int vol) {
         cfg.setGroup("Volume");
         cfg.writeEntry("VolumePercent", QString::number( vol ));
         QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << false;
-	owarn << "changing output vol " << vol << "" << oendl; 
+	owarn << "changing output vol " << vol << "" << oendl;
     }
     ::close(fd);
 }
@@ -111,7 +111,7 @@ void Device::changedInVolume(int vol ) {
         cfg.setGroup("Volume");
         cfg.writeEntry("Mic", QString::number(vol ));
         QCopEnvelope( "QPE/System", "micChange(bool)" ) << false;
-	owarn << "changing input volume " << vol << "" << oendl; 
+	owarn << "changing input volume " << vol << "" << oendl;
     }
     ::close(fd);
 }
@@ -149,22 +149,22 @@ exit(1);
            break;
        case 0: {
  */
-odebug << "Opening " << dspstr << "" << oendl; 
+odebug << "Opening " << dspstr << "" << oendl;
  if (( sd = ::open( dspstr, flags)) == -1) {
               perror("open(\"/dev/dsp\")");
               QString errorMsg="Could not open audio device\n /dev/dsp\n"
                   +(QString)strerror(errno);
-              odebug << "XXXXXXXXXXXXXXXXXXXXXXX  "+errorMsg << oendl; 
+              odebug << "XXXXXXXXXXXXXXXXXXXXXXX  "+errorMsg << oendl;
               return -1;
           }
 
-odebug << "Opening mixer" << oendl; 
+odebug << "Opening mixer" << oendl;
     int mixerHandle=0;
         if  (( mixerHandle = open("/dev/mixer",O_RDWR))<0) {
             perror("open(\"/dev/mixer\")");
               QString errorMsg="Could not open audio device\n /dev/dsp\n"
                   +(QString)strerror(errno);
-              odebug << "XXXXXXXXXXXXXXXXXXXXXX  "+errorMsg << oendl; 
+              odebug << "XXXXXXXXXXXXXXXXXXXXXX  "+errorMsg << oendl;
         }
 
         if(ioctl(sd,SNDCTL_DSP_RESET,0)<0){
@@ -180,7 +180,7 @@ odebug << "Opening mixer" << oendl;
   /*               close(pipefd[0]);
                  write(pipefd[1], message, sizeof(message));
      close(pipefd[1]);
- //              odebug << "" << soundDevice->sd << "" << oendl; 
+ //              odebug << "" << soundDevice->sd << "" << oendl;
            _exit(0);
        }
        default:
@@ -206,13 +206,13 @@ odebug << "Opening mixer" << oendl;
            */
 //     bool ok;
 //           sd = s.toInt(&ok, 10);
-//           odebug << "<<<<<<<<<<<<<>>>>>>>>>>>>"+s << oendl; 
-                 
+//           odebug << "<<<<<<<<<<<<<>>>>>>>>>>>>"+s << oendl;
+
 //           f2.close();
 //     }
 ::close(mixerHandle );
-//         odebug << "open device " << dspstr << "" << oendl; 
-//     odebug << "success! " << sd << "" << oendl; 
+//         odebug << "open device " << dspstr << "" << oendl;
+//     odebug << "success! " << sd << "" << oendl;
     return sd;
 }
 
@@ -230,12 +230,12 @@ bool Device::closeDevice( bool) {
     ::close( sd); //close sound device
 //    sdfd=0;
  //   sd=0;
-//    odebug << "closed dsp" << oendl; 
+//    odebug << "closed dsp" << oendl;
     return true;
 }
 
 bool Device::setDeviceFormat( int form) {
-    odebug << "set device res " << form << " " << sd << "" << oendl; 
+    odebug << "set device res " << form << " " << sd << "" << oendl;
     if (ioctl( sd, SNDCTL_DSP_SETFMT,  &form)==-1) { //set format
         perror("ioctl(\"SNDCTL_DSP_SETFMT\")");
         return false;
@@ -245,7 +245,7 @@ bool Device::setDeviceFormat( int form) {
 }
 
 bool Device::setDeviceChannels( int ch) {
-    odebug << "set channels " << ch << " " << sd << "" << oendl; 
+    odebug << "set channels " << ch << " " << sd << "" << oendl;
     if (ioctl( sd, SNDCTL_DSP_CHANNELS, &ch)==-1) {
         perror("ioctl(\"SNDCTL_DSP_CHANNELS\")");
         return false;
@@ -255,7 +255,7 @@ bool Device::setDeviceChannels( int ch) {
 }
 
 bool Device::setDeviceRate( int rate) {
-    odebug << "set rate " << rate << " " << sd << "" << oendl; 
+    odebug << "set rate " << rate << " " << sd << "" << oendl;
     if (ioctl( sd, SNDCTL_DSP_SPEED, &rate) == -1) {
         perror("ioctl(\"SNDCTL_DSP_SPEED\")");
         return false;
@@ -316,11 +316,11 @@ int Device::getDeviceChannels() {
 
 int Device::getDeviceFragSize() {
     int frag_size;
-    
+
     if (ioctl( sd, SNDCTL_DSP_GETBLKSIZE, &frag_size) == -1) {
-      odebug << "no fragsize" << oendl; 
+      odebug << "no fragsize" << oendl;
     } else {
-      odebug << "driver says frag size is " << frag_size << "" << oendl; 
+      odebug << "driver says frag size is " << frag_size << "" << oendl;
     }
     return frag_size;
 }
@@ -345,13 +345,13 @@ bool Device::reset() {
 
 int Device::devRead(int soundDescriptor, short *buf, int size) {
    int number = 0;
-   number = ::read(  soundDescriptor, (char *)buf, size);
+   number = ::read(  sd /*soundDescriptor*/, (char *)buf, size);
    return number;
 }
 
 int Device::devWrite(int soundDescriptor, short * buf, int size) {
    int bytesWritten = 0;
-   bytesWritten = ::write( soundDescriptor, buf, size);
+   bytesWritten = ::write( sd /*soundDescriptor*/, buf, size);
    return bytesWritten;
 }
 
