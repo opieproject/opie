@@ -280,6 +280,7 @@ void TableView::slotClicked(int row, int col, int,
     }
         break;
 
+        // Priority emit a double click...
     case 1:
         break;
 
@@ -542,11 +543,25 @@ void TableView::contentsMouseMoveEvent( QMouseEvent* e ) {
     QTable::contentsMouseMoveEvent( e );
 }
 void TableView::keyPressEvent( QKeyEvent* event) {
+    int row = currentRow();
+    int col = currentColumn();
+
+
     switch( event->key() ) {
     case Qt::Key_F33:
     case Qt::Key_Enter:
     case Qt::Key_Return:
-        showTodo( sorted().uidAt( currentRow() ) );
+    case Qt::Key_Space:
+        if ( col == 0 ) {
+            TodoView::complete(sorted()[row]);
+        }else if ( col == 1 ) {
+
+        }else if ( col == 2 ) {
+            showTodo( sorted().uidAt( currentRow() ) );
+        }else if ( col == 3 ) {
+            TodoView::edit( sorted().uidAt(row) );
+        }
+
         break;
     default:
         QTable::keyPressEvent( event );

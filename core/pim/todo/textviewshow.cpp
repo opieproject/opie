@@ -23,6 +23,7 @@ void TextViewShow::keyPressEvent( QKeyEvent* event ) {
     case Qt::Key_F33:
     case Qt::Key_Enter:
     case Qt::Key_Return:
+    case Qt::Key_Space:
         escapeView();
         break;
     default:
