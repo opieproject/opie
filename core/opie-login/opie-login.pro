@@ -1,5 +1,5 @@
 TEMPLATE    = app
-CONFIG      = qt warn_on debug
+CONFIG      = qt warn_on debug usepam
 
 HEADERS     = loginwindowimpl.h \
               loginapplication.h \
@@ -17,7 +17,7 @@ INTERFACES  = loginwindow.ui
 INCLUDEPATH += $(OPIEDIR)/include ../launcher ../apps/calibrate
 DEPENDPATH  += $(OPIEDIR)/include ../launcher ../apps/calibrate
 
-LIBS        += -lqpe -lopie
+LIBS        += -lqpe -lopiecore2
 
 usepam:LIBS += -lpam
 usepam:DEFINES += USEPAM

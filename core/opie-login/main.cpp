@@ -25,8 +25,24 @@
 
 */
 
-#define _GNU_SOURCE
+#include "loginapplication.h"
+#include "loginwindowimpl.h"
+#include "calibrate.h"
 
+/* OPIE */
+#include <opie2/odevice.h>
+#include <qpe/qpestyle.h>
+#include <qpe/power.h> 
+#include <qpe/config.h>
+
+/* QT */
+#include <qwindowsystem_qws.h>
+#include <qmessagebox.h>
+#include <qlabel.h>
+#include <qtimer.h>
+#include <qfile.h> 
+
+/* STD */
 #include <sys/types.h>
 #include <time.h>
 #include <sys/time.h>
@@ -39,22 +55,6 @@
 #include <signal.h>
 #include <getopt.h>
 #include <string.h>
-
-#include <qpe/qpestyle.h>
-#include <qpe/power.h>
-#include <qpe/config.h>
-
-#include <opie/odevice.h>
-
-#include <qwindowsystem_qws.h>
-#include <qmessagebox.h>
-#include <qlabel.h>
-#include <qtimer.h>
-#include <qfile.h>
-
-#include "loginapplication.h"
-#include "loginwindowimpl.h"
-#include "calibrate.h"
 
 using namespace Opie;
 
