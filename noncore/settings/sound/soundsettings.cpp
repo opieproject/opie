@@ -26,11 +26,7 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/storage.h>
 
-#include <qmessagebox.h>
-#include <qapplication.h>
-#include <qslider.h>
 #include <qcheckbox.h>
-#include <qlineedit.h>
 #include <qcombobox.h>
 #include <qlabel.h>
 
