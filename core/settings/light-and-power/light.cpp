@@ -200,7 +200,7 @@ void LightSettings::accept()
     config.writeEntry( "Interval_LightOff", interval_lightoff->value() );
     config.writeEntry( "Interval", interval_suspend->value() );
     config.writeEntry( "Brightness",
-    (brightness->maxValue()-brightness->value())*255/brightness->maxValue() );
+    ( brightness->value() ) * 255 / brightness->maxValue() );
 
     // ac
     config.writeEntry( "DimAC", (int)screensaver_dim_ac_3->isChecked() );
@@ -210,7 +210,7 @@ void LightSettings::accept()
     config.writeEntry( "Interval_LightOffAC", interval_lightoff_ac_3->value() );
     config.writeEntry( "IntervalAC", interval_suspend_ac_3->value() );
     config.writeEntry( "BrightnessAC",
-    (brightness_ac_3->maxValue() - brightness_ac_3->value())*255/brightness_ac_3->maxValue() );
+    ( brightness_ac_3->value()) * 255 / brightness_ac_3->maxValue() );
 
 
     // only make ipaq light sensor entries in config file if on an ipaq
