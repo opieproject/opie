@@ -1,0 +1,27 @@
+/************************************************************************
+/*
+/*                           Opie - Dagger
+/*                          ===============
+/*                           Version 0.9.0
+/*
+/*                   A Bible study/reader application
+/*
+/************************************************************************
+
+------------------------------------
+To-do for Opie-Dagger - April, 2004
+------------------------------------
+
+======================
+=  Current release   =
+======================
+
+1. Implement search function callback to animate OWait dialog
+2. Implement previous/next page scrolling
+3. Fix disablement of screen blanking
+
+======================
+=   Future releases  =
+======================
+
+1. Margin notes

@@ -1,0 +1,61 @@
+/************************************************************************
+/*
+/*                           Opie - Dagger
+/*                          ===============
+/*                           Version 0.9.0
+/*
+/*                   A Bible study/reader application
+/*
+/************************************************************************
+
+---------------------------------------------
+ Release Notes for Opie-Dagger - April, 2004
+---------------------------------------------
+
+======================
+=       To-do        =
+======================
+
+- See $OPIEDIR/noncore/apps/dagger/TODO for more info.
+
+======================
+=        Build       =
+======================
+
+In order to build opie-dagger, libsword needs to be present on
+the build system along with the appropriate headers.
+
+- libsword source (best to use version 1.5.x or greater):
+  - http://www.crosswire.org/sword/
+
+- the Sword library headers need to be located in an appropriate
+  include directory
+
+======================
+=         Run        =
+======================
+
+- In order to use opie-dagger, libsword must be installed
+  on the system.
+- One or more Sword modules need to be installed, see
+  http://www.crosswire.org/sword/ to download modules
+- When run for the first time, the path needs to be set to the
+  directory where the Sword modules are located.  Select 'Edit->Configure'
+  from the menu bar and enter the path on the 'General' tab.  Restart
+  Dagger.
+
+======================
+=       Credits      =
+======================
+
+- Opie-Dagger is (C) 2004 Dan Williams
+
+======================
+=        Links       =
+======================
+
+- Opie Project:             http://opie.handhelds.org
+- OpenZaurus Project:       http://openzaurus.org
+- Familiar Project:         http://familiar.handhelds.org
+- Crosswire Society         http://www.crosswire.org/
+- The Sword Project         http://www.crosswire.org/sword/
