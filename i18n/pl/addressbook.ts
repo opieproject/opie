@@ -3,7 +3,7 @@
     <name>AbTable</name>
     <message>
         <source>Full Name</source>
-        <translation>Pelna Nazwa</translation>
+        <translation>Pełna nazwa</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -34,15 +34,15 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>Usun</translation>
+        <translation>Usuń</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Znajdz</translation>
+        <translation>Znajdź</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Napisz e-mail</translation>
+        <translation>Napisz e-mail do</translation>
     </message>
     <message>
         <source>Beam Entry</source>
@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Nie mozna zmieniac danych podczas synchronizacji</translation>
+        <translation>Nie można zmieniać danych podczas synchronizacji</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
@@ -74,7 +74,7 @@
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Brak miejsca w pamieci</translation>
+        <translation>Brak miejsca w pamięci</translation>
     </message>
     <message>
         <source>Unable to save information.
@@ -82,11 +82,11 @@ Free up some space
 and try again.
 
 Quit anyway?</source>
-        <translation>Nie mozna zapisac informacji.
-Zwolnij miejsce w pamieci
-i sprobuj ponownie
+        <translation>Nie można zapisać informacji.
+Zwolnij miejsce w pamięci
+i spróbuj ponownie
 
-Zakonczyc?</translation>
+Zakończyć?</translation>
     </message>
     <message>
         <source>All</source>
@@ -94,15 +94,15 @@ Zakonczyc?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Nieprzydzielony</translation>
+        <translation>Nieprzydzielone</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>Importuj wizytowke (vCard)</translation>
+        <translation>Importuj wizytówkę (vCard)</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Zamknij Wyszukiwarke</translation>
+        <translation>Zamknij eyszukiwarkę</translation>
     </message>
     <message>
         <source>Save all Data</source>
@@ -122,11 +122,11 @@ Zakonczyc?</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation>Wizytowki</translation>
+        <translation>Wizytówki</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation>Wizytowka</translation>
+        <translation>Wizytówka</translation>
     </message>
     <message>
         <source>Start Search</source>
@@ -134,7 +134,7 @@ Zakonczyc?</translation>
     </message>
     <message>
         <source>Right file type ?</source>
-        <translation>Wlasciwy typ pliku?</translation>
+        <translation>Właściwy typ pliku?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
@@ -146,7 +146,7 @@ Zakonczyc?</translation>
     </message>
     <message>
         <source>Unable to find a contact for this search pattern!</source>
-        <translation>Nie znaleziono wizytowki odpowiadajacej
+        <translation>Nie znaleziono wizytówki odpowiadającej
 warunkom wyszukiwania!</translation>
     </message>
     <message>
@@ -154,34 +154,34 @@ warunkom wyszukiwania!</translation>
  does not end with &quot;.vcf&quot;.
  Do you really want to open it?</source>
         <translation>Wybrany plik
-nie konczy sie &quot;.vcf&quot;.
-Czy na pewno chcesz go otworzyc?</translation>
+nie ma rozszerzenia &quot;.vcf&quot;.
+Czy na pewno chcesz go otworzyć?</translation>
     </message>
     <message>
         <source>Add Contact?</source>
-        <translation>Dodac wizytowke?</translation>
+        <translation>Dodać wizytówkę?</translation>
     </message>
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation>Czy na pewno chcesz dodac wizytowke
+        <translation>Czy na pewno chcesz dodać wizytówkę
 %1?</translation>
     </message>
     <message>
         <source>&amp;All Yes</source>
-        <translation>Tak na &amp;Wszystkie</translation>
+        <translation>Tak na &amp;wszystkie</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>Eksportuj wizytowke (vCard)</translation>
+        <translation>Eksportuj wizytówkę (vCard)</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
-        <translation>Musisz wybrac wizytowke!</translation>
+        <translation>Musisz wybrać wizytówkę!</translation>
     </message>
     <message>
         <source>You have to set a filename !</source>
-        <translation>Musisz podac nazwe pliku!</translation>
+        <translation>Musisz podać nazwę pliku!</translation>
     </message>
 </context>
 <context>
@@ -192,15 +192,15 @@ Czy na pewno chcesz go otworzyc?</translation>
     </message>
     <message>
         <source>Use Regular Expressions</source>
-        <translation>Uzywaj wyrazen regularnych</translation>
+        <translation>Używaj wyrażeń regularnych</translation>
     </message>
     <message>
         <source>Use Wildcards (*,?)</source>
-        <translation>Uzywaj znakow specjalnych (*,?)</translation>
+        <translation>Używaj znaków specjalnych (*,?)</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation>Wrazliwe na wilkosc liter</translation>
+        <translation>Wielkość liter znacząca</translation>
     </message>
     <message>
         <source>Mail</source>
@@ -219,14 +219,14 @@ Czy na pewno chcesz go otworzyc?</translation>
 provided in the SHARP 
 default ROM. Opie-Mail 
 is provided free !</source>
-        <translation>Uwaga: QT-mail jest zalaczony
+        <translation>Uwaga: QT-mail jest załączony
 jedynie w oryginalnym ROM&apos;ie
 SHARP&apos;a. Opie-Mail jest
-dostepny za darmo!</translation>
+dostępny za darmo!</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation>Rozne</translation>
+        <translation>Różne</translation>
     </message>
     <message>
         <source>Search Settings</source>
@@ -238,7 +238,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation>Mala</translation>
+        <translation>Mała</translation>
     </message>
     <message>
         <source>Normal</source>
@@ -246,23 +246,23 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation>Duza</translation>
+        <translation>Duża</translation>
     </message>
     <message>
         <source>Order</source>
-        <translation>Kolejnosc</translation>
+        <translation>Kolejność</translation>
     </message>
     <message>
         <source>Select Contact Order:</source>
-        <translation>Wybierz kolejnosc wizytowek:</translation>
+        <translation>Wybierz kolejność wizytówek:</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Gora</translation>
+        <translation>Góra</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Dol</translation>
+        <translation>Dół</translation>
     </message>
     <message>
         <source>Add</source>
@@ -270,7 +270,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Usun</translation>
+        <translation>Usuń</translation>
     </message>
     <message>
         <source>Configuration</source>
@@ -278,7 +278,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Click on tab to select one</source>
-        <translation>Kliknij na zakladce aby ja wybrac</translation>
+        <translation>Kliknij w zakładkę aby ją wybrać</translation>
     </message>
     <message>
         <source>Settings for the search query style</source>
@@ -286,86 +286,86 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Search widget expects regular expressions if selected</source>
-        <translation>Obiekt wyszukiwarki bedzie oczekiwal wyrazen regularnych</translation>
+        <translation>Obiekt wyszukiwarki będzie oczekiwał wyrażeń regularnych</translation>
     </message>
     <message>
         <source>Search widget just expects simple wildcards</source>
-        <translation>Obiekt wyszukiwarki oczekuje tylko prostych znakow specjalnych</translation>
+        <translation>Obiekt wyszukiwarki oczekuje tylko prostych znaków specjalnych</translation>
     </message>
     <message>
         <source>If selected, search differs between upper and lower chars</source>
-        <translation>Wyszukiwarka bedzie rozrozniala wielkosc znakow</translation>
+        <translation>Wyszukiwarka będzie rozróżniała wielkość znaków</translation>
     </message>
     <message>
         <source>Font size for list- and card view</source>
-        <translation>Wielkosc czcionki dla listy i wizytowki</translation>
+        <translation>Wielkość czcionki dla listy i wizytówki</translation>
     </message>
     <message>
         <source>Fontsettings for list and card view</source>
-        <translation>Ustawienia czcionki dla listy i wizytowki</translation>
+        <translation>Ustawienia czcionki dla listy i wizytówki</translation>
     </message>
     <message>
         <source>Use Sharp&apos;s mail application if available</source>
-        <translation>Uzywaj aplikacji pocztowej Sharp&apos;a, jesli jest dostepna</translation>
+        <translation>Używaj aplikacji pocztowej Sharp&apos;a, jeśli jest dostępna</translation>
     </message>
     <message>
         <source>Use OPIE mail if installed</source>
-        <translation>Uzywaj aplikacji pocztowej OPIE, jesli jest zainstalowana</translation>
+        <translation>Używaj aplikacji pocztowej OPIE, jeśli jest zainstalowana</translation>
     </message>
     <message>
         <source>Move selected attribute one line up</source>
-        <translation>Przesun wybrany atrybut jedna o pozycje do gory</translation>
+        <translation>Przesuń wybrany atrybut o jedną pozycję do góry</translation>
     </message>
     <message>
         <source>Move selected attribute one line down</source>
-        <translation>Przesun wybrany atrybut jedna o pozycje do dolu</translation>
+        <translation>Przesuń wybrany atrybut o jedną pozycję do dołu</translation>
     </message>
     <message>
         <source>List of all available attributes</source>
-        <translation>Pokaz wszystkie dostepne atrybuty</translation>
+        <translation>Lista wszystkich dostępnych atrybutów</translation>
     </message>
     <message>
         <source>Add selected attribute from list below to the upper list</source>
-        <translation>Dodaj wybrany atrybut z dolnej listy do gornej listy</translation>
+        <translation>Dodaj wybrany atrybut z dolnej listy do górnej listy</translation>
     </message>
     <message>
         <source>Remove the selected attribute from the upper list</source>
-        <translation>Usun wybrany atrybut z gornej listy</translation>
+        <translation>Usuń wybrany atrybut z górnej listy</translation>
     </message>
     <message>
         <source>Order (up -&gt; down) defines the primary contact shown in the second column of the list view</source>
-        <translation>Kolejnosc (gora -&gt; dol) definiuje glowny kontakt wyswietlany w drugiej kolumnie na liscie wizytowek</translation>
+        <translation>Kolejność (góra -&gt; dół) definiuje główny kontakt wyświetlany w drugiej kolumnie na liście wizytówek</translation>
     </message>
     <message>
         <source>Tool-/Menubar</source>
-        <translation>Narzedzia/Menu</translation>
+        <translation>Narzędzia/Menu</translation>
     </message>
     <message>
         <source>Fixed</source>
-        <translation>Stale</translation>
+        <translation>Stałe</translation>
     </message>
     <message>
         <source>Switch to fixed menu-/toolbars after restarting application !</source>
-        <translation>Zmien Narzedzia/Menu na Stale po ponownym uruchomieniu programu!</translation>
+        <translation>Zmień Narzędzia/Menu na Stałe po ponownym uruchomieniu programu!</translation>
     </message>
     <message>
         <source>Moveable</source>
-        <translation>Przesuwane</translation>
+        <translation>Ruchome</translation>
     </message>
     <message>
         <source>Switch to moveable menu-/toolbars after restarting application !</source>
-        <translation>Zmien Narzedzia/Menu na Przesuwane po ponownym uruchomieniu programu!</translation>
+        <translation>Zmień Narzędzia/Menu na Ruchome po ponownym uruchomieniu programu!</translation>
     </message>
 </context>
 <context>
     <name>ContactEditor</name>
     <message>
         <source>First Name</source>
-        <translation>Imie</translation>
+        <translation>Imię</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>Drugie imie</translation>
+        <translation>Drugie imię</translation>
     </message>
     <message>
         <source>Last Name</source>
@@ -373,7 +373,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation>Tytul</translation>
+        <translation>Tytuł</translation>
     </message>
     <message>
         <source>File As</source>
@@ -381,7 +381,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Plec</translation>
+        <translation>Płeć</translation>
     </message>
     <message>
         <source>Job Title</source>
@@ -397,11 +397,11 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Country</source>
-        <translation>Panstwo</translation>
+        <translation>Kraj</translation>
     </message>
     <message>
         <source>Full Name...</source>
-        <translation>Pelna nazwa...</translation>
+        <translation>Pełna nazwa...</translation>
     </message>
     <message>
         <source>Organization</source>
@@ -453,7 +453,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>American Samoa</source>
-        <translation>Samoa Amerykanska</translation>
+        <translation>Samoa Amerykańska</translation>
     </message>
     <message>
         <source>Andorra</source>
@@ -505,7 +505,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Belarus</source>
-        <translation>Bialorus</translation>
+        <translation>Białoruś</translation>
     </message>
     <message>
         <source>Belgium</source>
@@ -545,7 +545,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Bulgaria</source>
-        <translation>Bulgaria</translation>
+        <translation>Bułgaria</translation>
     </message>
     <message>
         <source>Burkina Faso</source>
@@ -557,7 +557,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Cambodia</source>
-        <translation>Kambodza</translation>
+        <translation>Kambodża</translation>
     </message>
     <message>
         <source>Canada</source>
@@ -585,7 +585,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Christmas Island</source>
-        <translation>Wyspa Bozego Narodzenia</translation>
+        <translation>Wyspa Bożego Narodzenia</translation>
     </message>
     <message>
         <source>Colombia</source>
@@ -609,7 +609,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Cote d&apos;Ivoire</source>
-        <translation>Wybrzeze Kosci Sloniowej</translation>
+        <translation>Wybrzeże Kości Słoniowej</translation>
     </message>
     <message>
         <source>Croatia</source>
@@ -633,7 +633,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Djibouti</source>
-        <translation>Dzibuti</translation>
+        <translation>Dżibuti</translation>
     </message>
     <message>
         <source>Dominica</source>
@@ -661,7 +661,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Equatorial Guinea</source>
-        <translation>Gwinea Rownikowa</translation>
+        <translation>Gwinea Równikowa</translation>
     </message>
     <message>
         <source>Eritrea</source>
@@ -685,7 +685,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Fiji</source>
-        <translation>Fidzi</translation>
+        <translation>Fidżi</translation>
     </message>
     <message>
         <source>Finland</source>
@@ -769,7 +769,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Hungary</source>
-        <translation>Wegry</translation>
+        <translation>Węgry</translation>
     </message>
     <message>
         <source>Iceland</source>
@@ -793,7 +793,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Italy</source>
-        <translation>Wlochy</translation>
+        <translation>Włochy</translation>
     </message>
     <message>
         <source>Japan</source>
@@ -821,7 +821,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Latvia</source>
-        <translation>Lotwa</translation>
+        <translation>Łotwa</translation>
     </message>
     <message>
         <source>Lebanon</source>
@@ -905,7 +905,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Moldova</source>
-        <translation>Moldawia</translation>
+        <translation>Mołdawia</translation>
     </message>
     <message>
         <source>Monaco</source>
@@ -1017,7 +1017,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Puerto Rico</source>
-        <translation>Purto Rico</translation>
+        <translation>Puerto Rico</translation>
     </message>
     <message>
         <source>Qatar</source>
@@ -1073,11 +1073,11 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Slovakia</source>
-        <translation>Slowacja</translation>
+        <translation>Słowacja</translation>
     </message>
     <message>
         <source>Slovenia</source>
-        <translation>Slowenia</translation>
+        <translation>Słowenia</translation>
     </message>
     <message>
         <source>Solomon Islands</source>
@@ -1089,7 +1089,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>South Africa</source>
-        <translation>Afryka Poludniowa</translation>
+        <translation>Afryka Południowa</translation>
     </message>
     <message>
         <source>Spain</source>
@@ -1101,7 +1101,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>St. Helena</source>
-        <translation>Sw. Helena</translation>
+        <translation>Św. Helena</translation>
     </message>
     <message>
         <source>Sudan</source>
@@ -1129,7 +1129,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Tajikistan</source>
-        <translation>Tadzykistan</translation>
+        <translation>Tadżykistan</translation>
     </message>
     <message>
         <source>Tanzania</source>
@@ -1205,7 +1205,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Yugoslavia</source>
-        <translation>Jugoslawia</translation>
+        <translation>Jugosławia</translation>
     </message>
     <message>
         <source>Zambia</source>
@@ -1217,7 +1217,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation>Mezczyzna</translation>
+        <translation>Mężczyzna</translation>
     </message>
     <message>
         <source>Female</source>
@@ -1225,15 +1225,15 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation>Szczegoly</translation>
+        <translation>Szczegóły</translation>
     </message>
     <message>
         <source>Enter Note</source>
-        <translation>Wprowadz notatke</translation>
+        <translation>Wprowadź notatkę</translation>
     </message>
     <message>
         <source>Edit Name</source>
-        <translation>Edytuj notatke</translation>
+        <translation>Edytuj notatkę</translation>
     </message>
     <message>
         <source>Contacts</source>
@@ -1257,7 +1257,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Usun</translation>
+        <translation>Usuń</translation>
     </message>
     <message>
         <source>Afghanistan</source>
@@ -1305,7 +1305,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Palestinian Sovereign Areas</source>
-        <translation>Autonomia Palestynska</translation>
+        <translation>Autonomia Palestyńska</translation>
     </message>
     <message>
         <source>Pitcairn Islands</source>
@@ -1317,11 +1317,11 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation>Wcisnij by wprowadzc imiona i nazwisko</translation>
+        <translation>Wciśnij by wprowadzić imiona i nazwisko</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
-        <translation>Wpisz swoje dane dokladnie! Jesli masz wieloczlonowe nazwisko (np. &quot;Van Helsing&quot;), wprowadz &lt;nazwisko&gt;,&lt;imiona&gt; w ten sposob: &quot;Van Helsing, Abraham&quot;</translation>
+        <translation>Wpisz swoje dane dokładnie! Jeśli masz wieloczłonowe nazwisko (np. &quot;Van Helsing&quot;), wprowadź &lt;nazwisko&gt;,&lt;imiona&gt; w ten sposob: &quot;Van Helsing, Abraham&quot;</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
@@ -1329,19 +1329,19 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation>Na przyklad &quot;jr&quot;..</translation>
+        <translation>Na przykład &quot;jr&quot;..</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation>Miejsce pracy z wizytowki</translation>
+        <translation>Miejsce pracy z wizytówki</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
-        <translation>Wcisnij by wybrac atrybut do zmiany</translation>
+        <translation>Wciśnij by wybrać atrybut do zmiany</translation>
     </message>
     <message>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
-        <translation>Wcisnij by wybrac sposob zapisania nazwiska (i jego prezentacji na liscie)</translation>
+        <translation>Wciśnij by wybrać sposób zapisania nazwiska (i jego prezentacji na liście)</translation>
     </message>
 </context>
 <context>
