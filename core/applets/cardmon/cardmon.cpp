@@ -251,7 +251,7 @@ bool CardMonitor::getStatusPcmcia( int showPopUp ) {
         }
     } else {
         // no file found
-        qDebug("no file found");
+        qDebug( "no file found" );
         cardInPcmcia0 = FALSE;
         cardInPcmcia1 = FALSE;
     }
@@ -270,7 +270,7 @@ bool CardMonitor::getStatusSd( int showPopUp ) {
     if ( mntfp ) {
         while ( ( me = getmntent( mntfp ) ) != 0 ) {
             QString fs = me->mnt_fsname;
-            qDebug( fs );
+            //qDebug( fs );
             if ( fs.left( 14 ) == "/dev/mmc/part1" || fs.left( 7 ) == "/dev/sd" || fs.left( 9 ) == "/dev/mmcd" ) {
                 cardInSd = TRUE;
                 show();
@@ -291,7 +291,7 @@ bool CardMonitor::getStatusSd( int showPopUp ) {
             text += "SD Removed";
             what = "off";
         }
-        qDebug("TEXT: " + text );
+        //qDebug("TEXT: " + text );
         QSound::play( Resource::findSound( "cardmon/card" + what ) );
         popUp( text,  "cardmon/ide" ); // XX add SD pic
     }
