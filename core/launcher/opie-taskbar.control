@@ -3,7 +3,7 @@ Priority: required
 Section: opie/system
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
+Version: $QPE_VERSION-$SUB_VERSION.1
 Depends: qt-embedded (>=$QTE_VERSION)
 Description: Launcher for Opie
  The "finder" or "explorer", or whatever you want to call it.
