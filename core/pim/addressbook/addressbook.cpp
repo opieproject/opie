@@ -87,7 +87,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	setIcon( Resource::loadPixmap( "AddressBook" ) );
 
 	// Settings for Main Menu
-	setToolBarsMovable( false  );
+	setToolBarsMovable( true  );
 	setRightJustification( true );
 	
 	// Create Toolbar
