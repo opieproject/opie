@@ -41,6 +41,10 @@
 #include "utils.h"
 #include "global.h"
 
+enum {
+	MAXLINES = 100,
+};
+
 InstallDlgImpl::InstallDlgImpl( QList<InstallData> &packageList, DataManager *dataManager, const char *title )
     : QWidget( 0, 0, 0 )
 {
@@ -319,6 +323,12 @@ void InstallDlgImpl :: installSelected()
 void InstallDlgImpl :: displayText(const QString &text )
 {
     QString newtext = QString( "%1\n%2" ).arg( output->text() ).arg( text );
+
+    /* Set a max line count for the QMultiLineEdit, as users have reported
+     * performance issues when line count gets extreme.
+     */
+    if(output->numLines() >= MAXLINES)
+        output->removeLine(0);
     output->setText( newtext );
     output->setCursorPosition( output->numLines(), 0 );
 }
