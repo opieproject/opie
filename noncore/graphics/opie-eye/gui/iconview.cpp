@@ -201,7 +201,6 @@ void PIconView::slotDirUp() {
     QDir dir( m_path );
     dir.cdUp();
     slotChangeDir( dir.absPath() );
-
 }
 
 /*
@@ -215,11 +214,18 @@ void PIconView::slotChangeDir(const QString& path) {
     if (!lister )
         return;
 
+    /*
+     * Say what we want and take what we get
+     */
     lister->setStartPath(  path );
     m_path = lister->currentPath();
 
     m_view->viewport()->setUpdatesEnabled( false );
     m_view->clear();
+
+    /*
+     * add files and folders
+     */
     addFolders( lister->folders() );
     addFiles( lister->files() );
     m_view->viewport()->setUpdatesEnabled( true );
@@ -232,6 +238,10 @@ void PIconView::slotChangeDir(const QString& path) {
     static_cast<QMainWindow*>(parent())->setCaption( QObject::tr("%1 - O View", "Name of the dir").arg( m_path ) );
 }
 
+/**
+ * get the current file name
+ * @param isDir see if this is a dir or real file
+ */
 QString PIconView::currentFileName(bool &isDir)const {
     isDir = false;
     QIconViewItem* _it = m_view->currentItem();
@@ -258,6 +268,10 @@ void PIconView::slotTrash() {
     currentView()->dirLister()->deleteImage( pa );
     delete m_view->currentItem();
 }
+
+/*
+ * see what views are available
+ */
 void PIconView::loadViews() {
     ViewMap::Iterator it;
     ViewMap* map = viewMap();
@@ -269,6 +283,9 @@ void PIconView::resetView() {
     slotViewChanged(m_views->currentItem());
 }
 
+/*
+ *swicth view reloadDir and connect signals
+ */
 void PIconView::slotViewChanged( int i) {
     if (!m_views->count() ) {
         setCurrentView( 0l);
@@ -303,6 +320,9 @@ void PIconView::slotReloadDir() {
 }
 
 
+/*
+ * add files and folders
+ */
 void PIconView::addFolders(  const QStringList& lst) {
     QStringList::ConstIterator it;
 
@@ -319,6 +339,9 @@ void PIconView::addFiles(  const QStringList& lst) {
 
 }
 
+/*
+ * user clicked on the item. Change dir or view
+ */
 void PIconView::slotClicked(QIconViewItem* _it) {
     if(!_it )
         return;
@@ -330,6 +353,10 @@ void PIconView::slotClicked(QIconViewItem* _it) {
         slotShowImage();
 }
 
+/*
+ * got thumb info add to the cache if items is visible
+ * we later need update after processing of slave is done
+ */
 void PIconView::slotThumbInfo( const QString& _path, const QString& str ) {
     IconViewItem* item = g_stringInf[_path];
     if (!item )
@@ -342,6 +369,10 @@ void PIconView::slotThumbInfo( const QString& _path, const QString& str ) {
     item->setText( str );
     g_stringInf.remove( _path );
 }
+
+/*
+ * got thumbnail and see if it is visible so we need to update later
+ */
 void PIconView::slotThumbNail(const QString& _path, const QPixmap &pix) {
     IconViewItem* item = g_stringPix[_path];
     if (!item )
@@ -359,10 +390,17 @@ void PIconView::slotThumbNail(const QString& _path, const QPixmap &pix) {
 }
 
 
+/*
+ * FIXME rename
+ */
 void PIconView::slotRename() {
 
 }
 
+
+/*
+ * BEAM the current file
+ */
 void PIconView::slotBeam() {
     bool isDir;
     QString pa = currentFileName( isDir );
@@ -376,6 +414,9 @@ void PIconView::slotBeam() {
 
 }
 
+/*
+ * BEAM done clean up
+ */
 void PIconView::slotBeamDone( Ir* ir) {
     delete ir;
 }
@@ -393,7 +434,6 @@ void PIconView::slotEnd() {
 
 void PIconView::slotShowImage()
 {
-    qWarning( "SLotShowImage" );
     bool isDir = false;
     QString name = currentFileName(isDir);
     if (isDir) return;
@@ -404,7 +444,6 @@ void PIconView::slotShowImage( const QString& name) {
     emit sig_display( name );
 }
 void PIconView::slotImageInfo() {
-    qWarning( "SlotImageInfo" );
     bool isDir = false;
     QString name = currentFileName(isDir);
     if (isDir) return;
