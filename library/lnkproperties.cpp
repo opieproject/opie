@@ -175,6 +175,7 @@ void LnkProperties::setupLocations()
 		 (*it)->disk() == "/dev/mtdblock/1" ||
 		 (*it)->disk().left(13) == "/dev/mtdblock" ||
 		 (*it)->disk() == "/dev/mtdblock6" ||
+                                 (*it )->disk() == "/dev/root" ||
 		 (*it)->disk() == "tmpfs" ) {
 		d->locationCombo->insertItem( (*it)->name(), index );
 		locations.append( ( ((*it)->isRemovable() ||
