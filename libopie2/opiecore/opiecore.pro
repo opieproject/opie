@@ -2,23 +2,13 @@ TEMPLATE    = lib
 CONFIG      += qt warn_on debug
 DESTDIR     = $(OPIEDIR)/lib
 HEADERS     = oapplication.h            \
-              opieapplication.h         \
               oconfig.h                 \
-              opieconfig.h              \
-              ocompletionbase.h         \
-              ocompletion.h             \
               odebug.h                  \
               oglobal.h                 \
-              oglobalsettings.h         \
-              osortablevaluelist.h
-              
+              oglobalsettings.h                       
 
 SOURCES     = oapplication.cpp          \
-              opieapplication.cpp       \
               oconfig.cpp               \
-              opieconfig.cpp            \
-              ocompletionbase.cpp       \
-              ocompletion.cpp           \
               odebug.cpp                \
               oglobal.cpp               \
               oglobalsettings.cpp      

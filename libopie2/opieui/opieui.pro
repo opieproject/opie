@@ -1,11 +1,7 @@
 TEMPLATE    = lib
 CONFIG      += qt warn_on debug
 DESTDIR     = $(OPIEDIR)/lib
-HEADERS     = ocompletionbox.h       \
-              ocombobox.h            \
-              oeditlistbox.h         \
-              olineedit.h            \
-              olistview.h            \
+HEADERS     = olistview.h            \
               oimageeffect.h         \
               opixmapeffect.h        \
               opopupmenu.h           \
@@ -13,21 +9,15 @@ HEADERS     = ocompletionbox.h       \
               oselector.h            \
               oversatileview.h       \
               oversatileviewitem.h   \
-              #ojanuswidget.h         \
               odialog.h              \
 	      omenubar.h             \
 	      opiemenubar.h          \
 	      omessagebox.h          \
 	      oresource.h            \
-	      otoolbar.h            \
+	      otoolbar.h             \
               oseparator.h           
-#              otaskbarapplet.h
 
-SOURCES     = ocompletionbox.cpp     \
-              ocombobox.cpp          \
-              oeditlistbox.cpp       \
-              olineedit.cpp          \
-              olistview.cpp          \
+SOURCES     = olistview.cpp          \
               oimageeffect.cpp       \
               opixmapeffect.cpp      \
               opopupmenu.cpp         \
@@ -35,14 +25,12 @@ SOURCES     = ocompletionbox.cpp     \
               oselector.cpp          \
               oversatileview.cpp     \
               oversatileviewitem.cpp \
-              #ojanuswidget.cpp       \
               odialog.cpp            \
 	      omenubar.cpp           \
 	      opiemenubar.cpp        \
 	      oresource.cpp          \
 	      otoolbar.cpp           \
-              oseparator.cpp         #\
-#              otaskbarapplet.cpp
+              oseparator.cpp         
 
 INTERFACES  =
 TARGET      = opieui2
