@@ -67,7 +67,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	m_config.load();
 
 	setCaption( tr("Contacts") );
-	setIcon( Resource::loadPixmap( "AddressBook" ) );
+	setIcon( Resource::loadPixmap( "addressbook/AddressBook" ) );
 
 	// Settings for Main Menu
 	// setToolBarsMovable( false );

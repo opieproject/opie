@@ -35,10 +35,10 @@ endef
 #
 
 define DoPackage
-@echo \"Building ipk of \$(4)\"
-@( \$(ForSubst) ) > \$(TOPDIR)/scripts/subst
-@( \$(ForFileSubst) ) > \$(TOPDIR)/scripts/Filesubst
-@( cd \$(OPIEDIR); \\
+echo \"Building ipk of \$(4)\"
+( \$(ForSubst) ) > \$(TOPDIR)/scripts/subst
+( \$(ForFileSubst) ) > \$(TOPDIR)/scripts/Filesubst
+( cd \$(OPIEDIR); \\
   \$(OPIEDIR)/scripts/mkipkg \\
       --subst=\$(OPIEDIR)/scripts/subst \\
       --filesubst=\$(OPIEDIR)/scripts/filesubst \\

@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION$EXTRAVERSION
+Version: 1.8.5$EXTRAVERSION
 Depends: libqpe1, libopiecore2, libopieui2
 Provides: libopiesecurity2
 Recommends: opie-multiauth-pinplugin | opie-multiauth-noticeplugin | opie-multiauth-dummyplugin | opie-multiauth-bluepingplugin, opie-security

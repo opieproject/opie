@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION$EXTRAVERSION
+Version: 1.8.2$EXTRAVERSION
 Depends: libopiecore2 ($QPE_VERSION), libopiedb2 ($QPE_VERSION), libopiemm2 ($QPE_VERSION), libopienet2 ($QPE_VERSION), libopiepim2 ($QPE_VERSION), libopieui2 ($QPE_VERSION)
 Provides: libopie2
 Description: Opie library 2.0

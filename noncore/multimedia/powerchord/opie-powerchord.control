@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/multimedia
 Maintainer: Camilo Mesias <camilo@mesias.co.uk>, ljp <lpotter@trolltech.com>
 Architecture: arm
-Version: $QPE_VERSION$EXTRAVERSION
+Version: 0.0.8$EXTRAVERSION
 Depends: task-opie-minimal
 Description: Guitar Chord generator application
  Allows naming of chords using base note and key. Fretboard diagrams are

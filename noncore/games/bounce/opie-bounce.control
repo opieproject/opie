@@ -1,6 +1,6 @@
 Package: opie-bounce
 Files: plugins/application/libbounce.so* bin/bounce apps/Games/bounce.desktop pics/bounce/*.png
-Version: $QPE_VERSION$EXTRAVERSION
+Version: 0.6$EXTRAVERSION
 Depends: task-opie-minimal, libopiecore2
 Priority: optional
 Section: opie/games

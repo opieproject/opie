@@ -4,6 +4,6 @@ Priority: optional
 Section: opie/applications
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION$EXTRAVERSION
+Version: 0.6$EXTRAVERSION
 License: GPL
 Description: Opie keytabs for terminal applications

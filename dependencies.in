@@ -82,3 +82,15 @@
     string "libsword include dir"
     depends LIBSWORD_DEP
 
+  config LIBBLUEZ_DEP
+    boolean "Have bluez library"
+    default "n"
+
+  config LIBBLUEZ_LIB_DIR
+    string "libbluez library dir"
+    depends LIBBLUEZ_DEP
+
+  config LIBBLUEZ_INC_DIR
+    string "libbluez include dir"
+    depends LIBBLUEZ_DEP
+

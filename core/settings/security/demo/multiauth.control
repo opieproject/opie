@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/settings
 Maintainer: Clement Seveillac <clement@nist.gov>
 Architecture: arm
-Version: $QPE_VERSION$EXTRAVERSION
+Version: 0.0.2$EXTRAVERSION
 Depends: opie-security
 Description: multi-plugin authentication demonstrator for Opie.
  This demonstration application allows us to use one or several

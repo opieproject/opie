@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/settings
 Maintainer: Maximilian Reiﬂ <max.reiss@gmx.de>
 Architecture: arm
-Version: $QPE_VERSION$EXTRAVERSION
+Version: 0.5.4$EXTRAVERSION
 Depends: task-opie-minimal, libopietooth1, opie-bluepin
 License: GPL
 Description: Bluetooth Manager application

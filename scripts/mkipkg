@@ -244,8 +244,8 @@ createFileList()
 
 stripFile()
 {
-    if [ -f $1 -a -x $1 ]; then
-        $strip --strip-all $1
+    if [ ! -h $1 -a -f $1 -a -x $1 ]; then
+     $strip -p --strip-all $1
     fi
 }
 
@@ -276,7 +276,11 @@ substFile()
 stripFiles()
 {
     for f in $1; do
-        stripFile ./$f
+        # do not strip links
+        if [ ! -h ./$f ]
+        then
+          stripFile ./$f
+        fi
     done
 }
 

@@ -4,7 +4,7 @@ Priority: optional
 Section: system
 Maintainer: Rajko Albrecht <alwin@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION$EXTRAVERSION
+Version: 0.33$EXTRAVERSION
 Depends: libssl0.9.7
 Description: libetpan mail/news library - A version of libetpan patched for Opies mailing app
 License: LGPL

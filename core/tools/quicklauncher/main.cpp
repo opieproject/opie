@@ -117,8 +117,7 @@ public:
             appName = appName.mid( sep+1 );
 
         appIface = 0;
-        if ( loader->queryInterface(appName, IID_QtopiaApplication, (QUnknownInterface**)&appIface) != QS_OK ) {
-            owarn << "Plugin does not support QuickLauncher interface" << oendl;
+        if ( ! ( loader->queryInterface(appName, IID_QtopiaApplication, (QUnknownInterface**)&appIface) == QS_OK ) ) {
             exit(-1);
         }
 

@@ -1,6 +1,6 @@
 Package: opie-kpacman
 Files: plugins/applications/libkpacman.so* bin/kpacman apps/Games/kpacman.desktop pics/kpacman/kpacman.png share/kpacman
-Version: $QPE_VERSION$EXTRAVERSION
+Version: 0.3.1$EXTRAVERSION
 Depends: task-opie-minimal
 Priority: optional
 Section: opie/games

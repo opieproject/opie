@@ -4,6 +4,6 @@ Priority: optional
 Section: opie/applications
 Maintainer: Michael 'Mickey' Lauer <mickeyl@handhelds.org> 
 Architecture: arm
-Version: $QPE_VERSION$EXTRAVERSION
+Version: 1.2.0$EXTRAVERSION
 Depends: task-opie-minimal
 Description: Remote Desktop Protocol (RDP) Client

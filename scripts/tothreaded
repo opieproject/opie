@@ -28,10 +28,10 @@ findthreadedequiv() {
         if [ -z "$isin" ]
         then
           # no threaded package
-          echo -n "$i "
+          echo -n "$i"
         else
           # threaded package
-          echo -n "${isin}-mt " 
+          echo -n "${isin}-mt" 
         fi
       done
       echo 

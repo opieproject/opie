@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION$EXTRAVERSION
+Version: 1.8.2$EXTRAVERSION
 Depends: libqpe1, libopiecore2 ($QPE_VERSION), libsqlite3-0 | sqlite3-bin
 Provides: libopiedb2
 Description: Opie library 2.1 DB

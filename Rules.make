@@ -12,6 +12,10 @@ ifneq ($(CONFIG_THREADED),)
 else
 	echo CONFIG -= thread >> $@
 endif
+# added for auto stripped build
+ifneq ($(CONFIG_STRIP),)
+	echo CONFIG += strip >> $@
+endif
 ifneq ($(CONFIG_DEBUG),)
 	echo CONFIG += debug >> $@
 	echo CONFIG -= release >> $@
@@ -106,6 +110,10 @@ endif
 ifeq ($(CONFIG_LIBXINE_DEP),y)
 	echo LIBXINE_LIB_DIR = $(CONFIG_LIBXINE_LIB_DIR) >> $@
 	echo LIBXINE_INC_DIR = $(CONFIG_LIBXINE_INC_DIR) >> $@
+endif
+ifeq ($(CONFIG_LIBBLUEZ_DEP),y)
+	echo LIBBLUEZ_LIB_DIR = $(CONFIG_LIBBLUEZ_LIB_DIR) >> $@
+	echo LIBBLUEZ_INC_DIR = $(CONFIG_LIBBLUEZ_INC_DIR) >> $@
 endif
 ifeq ($(CONFIG_LIBIPK_DEP),y)
 	echo LIBIPK_LIB_DIR = $(CONFIG_LIBIPK_LIB_DIR) >> $@

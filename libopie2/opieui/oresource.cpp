@@ -42,6 +42,7 @@ QPixmap loadPixmap( const QString& pix )
 {
     QString filename;
     filename.sprintf( "%s/%s.png", (const char*) oApp->qpeDir(), (const char*) pix );
+    odebug << "Load pixmap " << filename << oendl;
     QPixmap pixmap( filename );
     if ( pixmap.isNull() )
     {

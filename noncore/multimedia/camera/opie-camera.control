@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/multimedia
 Maintainer: Michael 'Mickey' Lauer <mickeyl@Vanille.de>
 Architecture: arm
-Version: $QPE_VERSION$EXTRAVERSION
+Version: 1.0.1$EXTRAVERSION
 Depends: libqpe1, libopiecore2, libopieui2
 Description: A Camera Application
  A Camera Application to use with the Sharp CE-AG06.

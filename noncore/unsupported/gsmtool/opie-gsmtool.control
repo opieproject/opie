@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: David Woodhouse <dwmw2@infradead.org>
 Architecture: arm
-Version: $QPE_VERSION$EXTRAVERSION
+Version: 1.0.0$EXTRAVERSION
 Depends: task-opie-minimal, gsmlib
 License: Public Domain
 Description: GSMTool program
