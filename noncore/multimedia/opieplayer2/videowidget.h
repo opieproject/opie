@@ -37,6 +37,8 @@
 #include <qwidget.h>
 #include "xinevideowidget.h"
 
+#include "mediaplayerstate.h"
+
 class QPixmap;
 class QSlider;
 
@@ -69,7 +71,7 @@ public slots:
     void backToNormal();
     void setPosition( long );
     void setLength( long );
-    void setView( char );
+    void setDisplayType( MediaPlayerState::DisplayType displayType );
 
 signals:
     void moreClicked();

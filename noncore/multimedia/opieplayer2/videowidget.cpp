@@ -139,7 +139,7 @@ QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
     resizeEvent( NULL );
 
     connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
-    connect( mediaPlayerState, SIGNAL( viewChanged(char) ),    this, SLOT( setView(char) ) );
+    connect( mediaPlayerState, SIGNAL( displayTypeChanged(MediaPlayerState::DisplayType) ),    this, SLOT( setDisplayType(MediaPlayerState::DisplayType) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
 
     setLength( mediaPlayerState->length() );
@@ -239,16 +239,17 @@ void VideoWidget::setLength( long max ) {
     updateSlider( mediaPlayerState->position(), max );
 }
 
-void VideoWidget::setView( char view ) {
-
-    if ( view == 'v' ) {
+void VideoWidget::setDisplayType( MediaPlayerState::DisplayType displayType )
+{
+    if ( displayType == MediaPlayerState::Video ) {
         makeVisible();
-    } else {
-        // Effectively blank the view next time we show it so it looks nicer
-        scaledWidth = 0;
-        scaledHeight = 0;
-        hide();
+        return;
     }
+
+    // Effectively blank the view next time we show it so it looks nicer
+    scaledWidth = 0;
+    scaledHeight = 0;
+    hide();
 }
 
 void VideoWidget::updateSlider( long i, long max ) {
