@@ -67,6 +67,8 @@
 AdvancedFm::AdvancedFm( )
         : QMainWindow( ) {
     init();
+    renameBox = 0;
+
     initConnections();
     populateLocalView();
     populateRemoteView();
@@ -402,6 +404,14 @@ void AdvancedFm::localListPressed( int mouse, QListViewItem *, const QPoint& , i
 //  qDebug("list pressed");
   switch (mouse) {
   case 1:
+  {
+        if(renameBox != 0 )
+    {
+        qDebug("cancel rename");
+        cancelRename();
+    }
+
+  }
     break;
   case 2:
     menuTimer.start( 500, TRUE );
@@ -412,14 +422,21 @@ void AdvancedFm::localListPressed( int mouse, QListViewItem *, const QPoint& , i
 
 void AdvancedFm::remoteListPressed( int mouse, QListViewItem*, const QPoint&, int ) {
 
-  switch (mouse) {
-  case 1:
-    break;
-  case 2:
-    menuTimer.start( 500, TRUE );
-    qDebug("Start menu timer");
-    break;
-  };
+    switch (mouse) {
+      case 1:
+      {
+          if(renameBox != 0 )
+            {
+                qDebug("cancel rename");
+                cancelRename();
+            }
+      }
+      break;
+      case 2:
+          menuTimer.start( 500, TRUE );
+          qDebug("Start menu timer");
+          break;
+    };
 }
 
 
@@ -879,3 +896,4 @@ void AdvancedFm::addToDocs() {
         }
     }
 }
+

@@ -1027,16 +1027,25 @@ bool AdvancedFm::eventFilter( QObject * o, QEvent * e ) {
             return true;
         }
     }
+    if ( o->inherits( "QListView" ) ) {
+        if ( e->type() == QEvent::FocusOut ) {
+            printf("focusIn\n");
+            
+        }
+    }   
+
     return QWidget::eventFilter( o, e );
 }
 
 
-void AdvancedFm::cancelRename() {
+void AdvancedFm::cancelRename()
+{
     qDebug("cancel rename");
     QListView * view;
-    if (TabWidget->getCurrentTab() == 0) {
-        view = Local_View;
-    }
+    if (TabWidget->getCurrentTab() == 0)
+      {
+          view = Local_View;
+      }
     else
       {
           view = Remote_View;
@@ -1051,7 +1060,8 @@ void AdvancedFm::cancelRename() {
     }
 }
 
-void AdvancedFm::doRename(QListView * view) {
+void AdvancedFm::doRename(QListView * view)
+{
 
     QRect r = view->itemRect( view->currentItem( ));
     r = QRect( view->viewportToContents( r.topLeft() ), r.size() );
@@ -1075,7 +1085,8 @@ void AdvancedFm::doRename(QListView * view) {
 }
 
 
-void AdvancedFm::localRename() {
+void AdvancedFm::localRename()
+{
     oldName = Local_View->currentItem()->text(0);
     doRename(Local_View );
     populateLocalView();
@@ -1088,7 +1099,8 @@ void AdvancedFm::remoteRename()
     populateRemoteView();
 }
 
-void AdvancedFm::okRename() {
+void AdvancedFm::okRename()
+{
     QString newName = renameBox->text();
     cancelRename();
     int tabs=0;
