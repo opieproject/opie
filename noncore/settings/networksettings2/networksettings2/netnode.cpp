@@ -74,20 +74,20 @@ void ANetNodeInstance::initialize( void ) {
     // set name
     QString N;
     N.sprintf( "-%ld", InstanceCounter++ );
-    N.prepend( NodeType->nodeName() );
-    setNodeName( N );
+    N.prepend( NodeType->name() );
+    setName( N.latin1() );
 }
 
 void ANetNodeInstance::setAttribute( QString & Attr, QString & Value ){
     if( Attr == "name" ) {
-      NodeName = Value;
+      setName( Value.latin1() );
     } else {
       setSpecificAttribute( Attr, Value );
     }
 }
 
 void ANetNodeInstance::saveAttributes( QTextStream & TS ) {
-    TS << "name=" << quote( NodeName ) << endl;
+    TS << "name=" << name() << endl;
     saveSpecificAttribute( TS );
 }
 
@@ -180,7 +180,7 @@ void NodeCollection::save( QTextStream & TS ) {
          it.current();
          ++it ) {
       NNI = it.current();
-      TS << "node=" << quote( NNI->nodeName() ) << endl;
+      TS << "node=" << NNI->name() << endl;
     }
     TS << endl;
     IsNew = 0;
@@ -233,7 +233,7 @@ int NodeCollection::compareItems( QCollection::Item I1,
     ANetNodeInstance * NNI1, * NNI2;
     NNI1 = (ANetNodeInstance *)I1;
     NNI2 = (ANetNodeInstance *)I2;
-    return NNI1->nodeName().compare( NNI2->nodeName() );
+    return strcmp( NNI1->name(), NNI2->name() );
 }
 
 static char * State2PixmapTbl[] = {

@@ -17,9 +17,6 @@ public:
     virtual const QString pixmapName() 
       { return "Devices/bluetooth"; }
 
-    virtual const QString nodeName() 
-      { return tr("Bluetooth PAN/NAP"); }
-
     virtual const QString nodeDescription() ;
 
     virtual ANetNodeInstance * createInstance( void );
@@ -57,9 +54,6 @@ public:
 
     virtual const QString pixmapName() 
       { return "Devices/bluetooth"; }
-
-    virtual const QString nodeName() 
-      { return tr("Bluetooth serial link"); }
 
     virtual const QString nodeDescription() ;
 

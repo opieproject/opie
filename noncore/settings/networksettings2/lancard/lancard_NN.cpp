@@ -7,7 +7,7 @@ static const char * LanCardNeeds[] =
 /**
  * Constructor, find all of the possible interfaces
  */
-LanCardNetNode::LanCardNetNode() : ANetNode() {
+LanCardNetNode::LanCardNetNode() : ANetNode(tr("LAN card")), NICMACAddresses() {
     InstanceCount = 2;
 }
 
@@ -69,6 +69,8 @@ QString LanCardNetNode::genNic( long nr ) {
 void LanCardNetNode::setSpecificAttribute( QString & A, QString & V ) {
       if( A == "interfacecount" ) {
         InstanceCount = V.toLong();
+      } else if ( A == "macaddress" ) {
+        NICMACAddresses.append( V );
       }
 }
 
@@ -76,6 +78,13 @@ void LanCardNetNode::saveSpecificAttribute( QTextStream & TS) {
       TS << "interfacecount="
          << InstanceCount
          << endl;
+      for( QStringList::Iterator it = NICMACAddresses.begin();
+           it != NICMACAddresses.end(); 
+           ++it ) {
+        TS << "macaddress="
+           << (*it)
+           << endl;
+      }
 }
 
 extern "C" {

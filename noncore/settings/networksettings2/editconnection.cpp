@@ -133,7 +133,7 @@ NodeCollection * EditConnection::getTmpCollection( void ) {
               // this radio is selected -> go deeper
               if( SelectedNodes == 0 || 
                   NNI == 0 ||
-                  NNI->nodeClass()->nodeName() != it->text(0) ) {
+                  it->text(0) != NNI->nodeClass()->name() ) {
                 // new item not in previous collection
                 ANetNodeInstance * NNI = (*Mapping)[it]->createInstance();
                 NNI->initialize();
@@ -196,7 +196,7 @@ void EditConnection::setConnection( NodeCollection * NC ) {
           it = it->firstChild();
           Found = 0;
           while( it ) {
-            if( NNI && NNI->nodeClass()->nodeName() == it->text(0) ) {
+            if( NNI && it->text(0) == NNI->nodeClass()->name() ) {
               // this radio is part of the collection
               ((QCheckListItem *)it)->setOn( 1 );
               updateGUI( it, NNI->nodeClass() );
@@ -282,7 +282,7 @@ void EditConnection::buildFullTree( void ) {
       }
 
       MyQCheckListItem * it = new MyQCheckListItem( TheTop, 
-          NN->nodeName(), 
+          NN->name(), 
           QCheckListItem::RadioButton );
       it->setPixmap( 0, NSResources->getPixmap( "Devices/commprofile" ) );
       // remember that this node maps to this listitem
@@ -310,14 +310,14 @@ void EditConnection::buildSubTree( QListViewItem * it, ANetNode *NN ) {
         // generate radio buttons
         CI = new MyQCheckListItem( 
                 (QCheckListItem *)it, 
-                NNL[i]->nodeName(), QCheckListItem::RadioButton );
+                NNL[i]->name(), QCheckListItem::RadioButton );
         // remember that this node maps to this listitem
         CI->setPixmap( 0, NSResources->getPixmap( NNL[i]->pixmapName() ) );
         Mapping->insert( CI, NNL[i] );
         CI->setSelectable( FALSE );
       } else {
         // Single item
-        CI = new MyQListViewItem( it, NNL[i]->nodeName() );
+        CI = new MyQListViewItem( it, NNL[i]->name() );
         // remember that this node maps to this listitem
         Mapping->insert( CI, NNL[i] );
         CI->setSelectable( FALSE );
@@ -444,7 +444,7 @@ void EditConnection::SLOT_AlterTab( const QString & S ) {
             NNI = it.current();
             Devices_CB->insertItem(
                 NSResources->getPixmap( NNI->nodeClass()->pixmapName() ),
-                NNI->nodeClass()->nodeName()
+                NNI->nodeClass()->name()
             );
 
             // add edit widget

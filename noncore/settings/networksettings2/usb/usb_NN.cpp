@@ -8,7 +8,7 @@ static const char * USBNeeds[] =
 /**
  * Constructor, find all of the possible interfaces
  */
-USBNetNode::USBNetNode() : ANetNode() {
+USBNetNode::USBNetNode() : ANetNode(tr("USB Cable Connect")) {
 }
 
 /**

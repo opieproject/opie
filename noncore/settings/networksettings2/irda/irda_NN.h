@@ -17,9 +17,6 @@ public:
     virtual const QString pixmapName() 
       { return "Devices/irda"; }
 
-    virtual const QString nodeName() 
-      { return tr("Infrared link"); }
-
     virtual const QString nodeDescription() ;
 
     virtual ANetNodeInstance * createInstance( void );

@@ -79,7 +79,7 @@ public :
     Name2Instance_t & netNodeInstances( void ) 
       { return AllNodes; }
     void addNodeInstance( ANetNodeInstance * I )
-      { AllNodes.insert( I->nodeName(), I ); }
+      { AllNodes.insert( I->name(), I ); }
     void removeNodeInstance( const QString & N )
       { AllNodes.remove( N );}
     ANetNodeInstance * findNodeInstance( const QString & S )

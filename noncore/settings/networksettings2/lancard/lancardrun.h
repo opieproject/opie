@@ -10,9 +10,9 @@ class LanCardRun  : public AsDevice {
 public :
 
       LanCardRun( ANetNodeInstance * NNI, 
-                  LanCardData & Data ) : AsDevice( NNI ),
+                  LanCardData & D ) : AsDevice( NNI ),
                                          Pat( "eth[0-9]" )
-        { }
+        { Data = &D; }
 
       virtual AsDevice * device( void ) 
         { return (AsDevice *)this; }
@@ -27,11 +27,13 @@ protected :
       bool canSetState( State_t Curr, Action_t A );
 
       bool handlesInterface( const QString & I );
+      bool handlesInterface( const InterfaceInfo & II );
 
 private :
 
       InterfaceInfo * getInterface( void );
       QRegExp Pat;
+      LanCardData * Data;
 
 };
 #endif

@@ -30,7 +30,7 @@ void ALanCard::saveSpecificAttribute( QTextStream & TS) {
 
 QWidget * ALanCard::edit( QWidget * parent ) {
     GUI = new LanCardEdit( parent );
-    GUI->showData( Data );
+    GUI->showData( this );
     return GUI;
 }
 

@@ -1,5 +1,6 @@
 #include <qtoolbutton.h>
 #include <qcheckbox.h>
+#include <qtabwidget.h>
 #include <qlineedit.h>
 #include <qlistbox.h>
 #include <GUIUtils.h>
@@ -110,7 +111,13 @@ bool NetworkEdit::updateList( QStringList & SL, QListBox * LB ) {
       NewSL.append( LB->text(i) );
     }
 
-    // check if at least ONE item in new list is NEW
+    if( NewSL.count() != SL.count() ) {
+      // less or more items
+      SL= NewSL;
+      return 1;
+    }
+
+    // Same size -> same content ?
     Changed = 0;
     for ( QStringList::Iterator it = NewSL.begin(); 
           it != NewSL.end(); 
@@ -157,4 +164,61 @@ void NetworkEdit::SLOT_NetmaskModified( const QString & ) {
           arg( ipal[3].toShort() | ( ~ nmal[3].toShort() & 0x00ff) );
       Broadcast_LE->setText( NW );
     }
+}
+
+QListBox * NetworkEdit::getActiveLB( void ) {
+    switch( Tab_TAB->currentPageIndex() ) {
+      case 0 :
+        return PreUp_LB;
+      case 1 :
+        return PostUp_LB;
+      case 2 :
+        return PreDown_LB;
+    }
+    return PostDown_LB;
+}
+
+void NetworkEdit::SLOT_Add( void ) {
+    if( Command_LE->text().isEmpty() )
+      return;
+    QListBox * LB = getActiveLB();
+
+    LB->insertItem( Command_LE->text() );
+}
+
+void NetworkEdit::SLOT_Remove( void ) {
+    QListBox * LB = getActiveLB();
+    int i;
+
+    if( ( i = LB->currentItem() ) >= 0 ) {
+      LB->removeItem( i );
+    }
+}
+
+void NetworkEdit::SLOT_Up( void ) {
+    QListBox * LB = getActiveLB();
+    int i;
+
+    if( ( i = LB->currentItem() ) > 0 ) {
+      QListBoxItem * LBI =  LB->item(i);
+      LB->takeItem( LBI );
+      LB->insertItem( LBI, --i );
+      LB->setCurrentItem( i );
+    }
+}
+
+void NetworkEdit::SLOT_Down( void ) {
+    QListBox * LB = getActiveLB();
+    int i;
+
+    if( ( i = LB->currentItem() ) >= 0 && (unsigned)(i+1) != LB->count() ) {
+      QListBoxItem * LBI =  LB->item(i);
+      LB->takeItem( LBI );
+      LB->insertItem( LBI, ++i );
+      LB->setCurrentItem( i );
+    }
+}
+
+void NetworkEdit::SLOT_ShowCommand( QListBoxItem * It ) {
+    Command_LE->setText( It->text() );
 }

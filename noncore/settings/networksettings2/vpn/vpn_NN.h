@@ -17,9 +17,6 @@ public:
     virtual const QString pixmapName() 
       { return "Devices/vpn"; }
 
-    virtual const QString nodeName() 
-      { return tr("VPN Connection"); }
-
     virtual const QString nodeDescription() ;
 
     virtual ANetNodeInstance * createInstance( void );

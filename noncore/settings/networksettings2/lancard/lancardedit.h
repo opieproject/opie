@@ -1,6 +1,8 @@
 #include "lancarddata.h"
 #include "lancardGUI.h"
 
+class ALanCard;
+
 class LanCardEdit  : public LanCardGUI {
 
 public :
@@ -8,9 +10,15 @@ public :
     LanCardEdit( QWidget * parent );
     QString acceptable( void );
     bool commit( LanCardData & Data );
-    void showData( LanCardData & Data );
+    void showData( ALanCard * NNI );
+
+public slots :
+
+    void SLOT_ScanCards( void );
+    void SLOT_RemoveUnknown( void );
     
 private :
 
-    bool ContainedObsoleteMAC;
+    void populateList( void );
+    ALanCard * NNI;
 };

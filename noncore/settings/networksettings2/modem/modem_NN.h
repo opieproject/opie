@@ -17,9 +17,6 @@ public:
     virtual const QString pixmapName() 
       { return "Devices/modem"; }
 
-    virtual const QString nodeName() 
-      { return tr("Dialup modem"); }
-
     virtual const QString nodeDescription() ;
 
     virtual ANetNodeInstance * createInstance( void );

@@ -15,7 +15,8 @@ static const char * BluetoothBNEPNeeds[] =
 /**
  * Constructor, find all of the possible interfaces
  */
-BluetoothBNEPNetNode::BluetoothBNEPNetNode() : ANetNode() {
+BluetoothBNEPNetNode::BluetoothBNEPNetNode() : 
+      ANetNode(tr("Bluetooth PAN/NAP")) {
       InstanceCount = 7; // default
 }
 
@@ -88,7 +89,8 @@ static const char * BluetoothRFCOMMNeeds[] =
     { 0
     };
 
-BluetoothRFCOMMNetNode::BluetoothRFCOMMNetNode() : ANetNode() {
+BluetoothRFCOMMNetNode::BluetoothRFCOMMNetNode() : 
+      ANetNode( tr("Bluetooth serial link") ) {
 }
 
 BluetoothRFCOMMNetNode::~BluetoothRFCOMMNetNode(){

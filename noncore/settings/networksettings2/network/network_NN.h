@@ -17,9 +17,6 @@ public:
     virtual const QString pixmapName() 
       { return "Devices/tcpip"; }
 
-    virtual const QString nodeName() 
-      { return tr("IP Configuration"); }
-
     virtual const QString nodeDescription() ;
 
     virtual ANetNodeInstance * createInstance( void );

@@ -9,7 +9,7 @@ static const char * NetworkNeeds[] =
 /**
  * Constructor, find all of the possible interfaces
  */
-NetworkNetNode::NetworkNetNode() : ANetNode() {
+NetworkNetNode::NetworkNetNode() : ANetNode(tr("IP Configuration")) {
 }
 
 /**

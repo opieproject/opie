@@ -8,7 +8,7 @@ static const char * WLanNeeds[] =
 /**
  * Constructor, find all of the possible interfaces
  */
-WLanNetNode::WLanNetNode() : ANetNode() {
+WLanNetNode::WLanNetNode() : ANetNode(tr("WLan Device")) {
     InstanceCount = 2;
 }
 

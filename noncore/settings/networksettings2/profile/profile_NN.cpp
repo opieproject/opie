@@ -9,7 +9,7 @@ static const char * ProfileNeeds[] =
 /**
  * Constructor, find all of the possible interfaces
  */
-ProfileNetNode::ProfileNetNode() : ANetNode() {
+ProfileNetNode::ProfileNetNode() : ANetNode( tr("Regular profile")) {
 }
 
 /**

@@ -17,9 +17,6 @@ public:
     virtual const QString pixmapName() 
       { return "Devices/wlan"; }
 
-    virtual const QString nodeName() 
-      { return tr("WLan Device"); }
-
     virtual const QString nodeDescription() ;
 
     virtual ANetNodeInstance * createInstance( void );

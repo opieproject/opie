@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>293</width>
+            <width>289</width>
             <height>254</height>
         </rect>
     </property>
@@ -38,7 +38,7 @@
             <class>QTabWidget</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>TabWidget11</cstring>
+                <cstring>MainTab_TAB</cstring>
             </property>
             <property>
                 <name>layoutMargin</name>
@@ -483,7 +483,7 @@
                         <class>QTabWidget</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>Tab_TB</cstring>
+                            <cstring>Tab_TAB</cstring>
                         </property>
                         <property>
                             <name>layoutMargin</name>
@@ -1058,7 +1058,132 @@
         <receiver>Hostname_LE</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
+    <connection>
+        <sender>AddPreUp_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_Add()</slot>
+    </connection>
+    <connection>
+        <sender>DeletePreUp_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_Remove()</slot>
+    </connection>
+    <connection>
+        <sender>UpPreUp_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_Up()</slot>
+    </connection>
+    <connection>
+        <sender>DownPreUp_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_Down()</slot>
+    </connection>
+    <connection>
+        <sender>AddPostUp_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_Add()</slot>
+    </connection>
+    <connection>
+        <sender>DeletePostUp_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_Remove()</slot>
+    </connection>
+    <connection>
+        <sender>UpPostUp_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_Up()</slot>
+    </connection>
+    <connection>
+        <sender>DownPostUp_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_Down()</slot>
+    </connection>
+    <connection>
+        <sender>AddPreDown_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_Add()</slot>
+    </connection>
+    <connection>
+        <sender>DeletePreDown_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_Remove()</slot>
+    </connection>
+    <connection>
+        <sender>UpPreDown_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_Up()</slot>
+    </connection>
+    <connection>
+        <sender>DownPreDown_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_Down()</slot>
+    </connection>
+    <connection>
+        <sender>AddPostDown_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_Add()</slot>
+    </connection>
+    <connection>
+        <sender>DeletePostDown_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_Remove()</slot>
+    </connection>
+    <connection>
+        <sender>UpPostDown_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_Up()</slot>
+    </connection>
+    <connection>
+        <sender>DownPostDown_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_Down()</slot>
+    </connection>
+    <connection>
+        <sender>PreUp_LB</sender>
+        <signal>doubleClicked(QListBoxItem*)</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_ShowCommand( QListBoxItem *)</slot>
+    </connection>
+    <connection>
+        <sender>PreDown_LB</sender>
+        <signal>doubleClicked(QListBoxItem*)</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_ShowCommand( QListBoxItem *)</slot>
+    </connection>
+    <connection>
+        <sender>PostDown_LB</sender>
+        <signal>doubleClicked(QListBoxItem*)</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_ShowCommand( QListBoxItem *)</slot>
+    </connection>
+    <connection>
+        <sender>PostUp_LB</sender>
+        <signal>doubleClicked(QListBoxItem*)</signal>
+        <receiver>NetworkGUI</receiver>
+        <slot>SLOT_ShowCommand( QListBoxItem *)</slot>
+    </connection>
+    <slot access="public">SLOT_Add()</slot>
+    <slot access="public">SLOT_Down()</slot>
     <slot access="public">SLOT_NetmaskModified( const QString &amp; )</slot>
+    <slot access="public">SLOT_Remove()</slot>
+    <slot access="public">SLOT_Up()</slot>
+    <slot access="public">SLOT_ShowCommand( QListBoxItem *)</slot>
 </connections>
 <tabstops>
     <tabstop>DHCP_CB</tabstop>

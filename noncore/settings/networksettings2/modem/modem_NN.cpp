@@ -8,7 +8,7 @@ static const char * ModemNeeds[] =
 /**
  * Constructor, find all of the possible interfaces
  */
-ModemNetNode::ModemNetNode() : ANetNode() {
+ModemNetNode::ModemNetNode() : ANetNode(tr("Dialup modem")) {
 }
 
 /**

@@ -1,6 +1,7 @@
 #ifndef LANCARD_NETNODE_H
 #define LANCARD_NETNODE_H
 
+#include <qstringlist.h>
 #include "netnode.h"
 
 class ALanCard;
@@ -16,9 +17,6 @@ public:
 
     virtual const QString pixmapName() 
       { return "Devices/card"; }
-
-    virtual const QString nodeName() 
-      { return tr("LAN card"); }
 
     virtual const QString nodeDescription() ;
 
@@ -36,6 +34,8 @@ public:
       { return InstanceCount; }
 
     virtual QString genNic( long );
+    virtual QStringList & addressesOfNIC( void )
+      { return NICMACAddresses; }
 
 private:
 
@@ -44,6 +44,8 @@ private:
 
       // number of interfaces for this device
       long InstanceCount;
+
+      QStringList    NICMACAddresses;
 
 };
 

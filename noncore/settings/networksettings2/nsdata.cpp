@@ -15,7 +15,7 @@ NetworkSettingsData::NetworkSettingsData( void ) {
     // init global resources structure
     new TheNSResources();
 
-    CfgFile.sprintf( "%s/NETCONFIG", 
+    CfgFile.sprintf( "%s/Settings/NS2.conf", 
           NSResources->currentUser().HomeDir.latin1() );
     fprintf( stderr, "Cfg from %s\n", CfgFile.latin1() );
 
@@ -75,17 +75,23 @@ void NetworkSettingsData::loadSettings( void ) {
           ANetNode * NN = 0;
           ANetNodeInstance* NNI = 0;
           if( S.startsWith( "nodetype " ) ) {
-            S = S.mid( 9, S.length()-9-1 );
-            fprintf( stderr, "Node %s\n", S.latin1() );
+            S = S.mid( 9, S.length()-9 );
+            S = deQuote(S);
             // try to find netnode
             NN = NSResources->findNetNode( S );
+            fprintf( stderr, "Node %s : %p\n", S.latin1(), NN );
           } else {
             // try to find instance
             NNI = NSResources->createNodeInstance( S );
+            fprintf( stderr, "NodeInstance %s : %p\n", S.latin1(), NNI );
+          }
+
+          if( NN == 0 && NNI == 0 ) {
+            LeftOvers.append( Line );
           }
 
           do {
-            S = TS.readLine();
+            S = Line = TS.readLine();
 
             if( NN || NNI ) {
               if( S.isEmpty() ) {
@@ -109,7 +115,7 @@ void NetworkSettingsData::loadSettings( void ) {
 
               if( NN ) {
                 // set the attribute
-                NNI->setAttribute( Attr, Value );
+                NN->setAttribute( Attr, Value );
               } else {
                 // set the attribute
                 NNI->setAttribute( Attr, Value );
@@ -123,6 +129,7 @@ void NetworkSettingsData::loadSettings( void ) {
               }
             }
           } while( 1 );
+
           if( NNI ) {
             // loading from file -> exists
             NNI->setNew( FALSE );
@@ -166,11 +173,12 @@ QString NetworkSettingsData::saveSettings( void ) {
         it.current();
         ++it ) {
         TS << "[nodetype "
-           << it.current()->NetNode->name()
+           << quote( QString( it.current()->NetNode->name() ) )
            << "]" 
            << endl;
 
         it.current()->NetNode->saveAttributes( TS );
+        TS << endl;
     }
 
     { Name2Connection_t & M = NSResources->connections();
@@ -186,7 +194,10 @@ QString NetworkSettingsData::saveSettings( void ) {
              ++nit ) {
           // header
           NNI = nit.current();
-          TS << '[' <<NNI->nodeClass()->nodeName() << ']' << endl;
+          TS << '[' 
+             << QString(NNI->nodeClass()->name()) 
+             << ']' 
+             << endl;
           NNI->saveAttributes( TS );
           TS << endl;
         }
@@ -295,7 +306,7 @@ QString NetworkSettingsData::generateSettings( bool ForceReq ) {
               // problem generating
               S = qApp->translate( "NetworkSettings", 
                                    "<p>Cannot generate files proper to \"%1\"</p>" ).
-                      arg(NNI->nodeClass()->nodeName()) ;
+                      arg(NNI->nodeClass()->name()) ;
               return S;
             }
           }
@@ -390,12 +401,11 @@ QList<NodeCollection> NetworkSettingsData::collectPossible( const char * Interfa
          ++it ) {
       NC = it.current();
       // check if this profile handles the requested interface
-      fprintf( stderr, "check %s\n", NC->name().latin1() );
       if( NC->handlesInterface( Interface ) && // if different Intf.
           NC->state() != Disabled && // if not enabled
           NC->state() != IsUp  // if already used
         ) {
-        fprintf( stderr, "Append %s\n", NC->name().latin1() );
+        fprintf( stderr, "Append %s for %s\n", NC->name().latin1(), Interface);
         PossibleConnections.append( NC );
       }
     }
@@ -486,7 +496,7 @@ QString NetworkSettingsData::generateSystemFileNode(
         S = qApp->translate( "NetworkSettings", 
             "<p>Error in preDeviceSection for file \"%1\" and nodetype \"%2\"</p>" ).
             arg( SF.name() ).
-            arg( CurDevNN->nodeName() );
+            arg( CurDevNN->name() );
         return S;
       }
 
@@ -495,15 +505,10 @@ QString NetworkSettingsData::generateSystemFileNode(
           S = qApp->translate( "NetworkSettings", 
             "<p>Error in node Device part for file \"%1\" and node \"%2\"</p>" ).
               arg( SF.name() ).
-              arg( CurDevNN->nodeName() );
+              arg( CurDevNN->name() );
           return S;
         }
       }
-
-      if( CurDev ) 
-        fprintf( stderr, "Cur %s\n", CurDevNN->nodeName().latin1() );
-      else 
-        fprintf( stderr, "Cur NO\n" );
 
       // now generate profile specific data for all 
       // connections working on a device of the current
@@ -517,11 +522,9 @@ QString NetworkSettingsData::generateSystemFileNode(
         // the current device (or on no device if no current)
         AsDevice * Dev = NC->device();
 
-        fprintf( stderr, "%s\n", Dev->netNode()->nodeName().latin1() );
         if( CurDev ) {
           if( CurDevNN != Dev->netNode()->nodeClass() ) {
             // other device type -> later
-            fprintf( stderr, "Other Dev type\n" );
             continue;
           }
         } else {
@@ -536,7 +539,7 @@ QString NetworkSettingsData::generateSystemFileNode(
           S = qApp->translate( "NetworkSettings", 
               "<p>Error in preNodeSection for file \"%1\" and node \"%2\"</p>" ).
               arg( SF.name() ).
-              arg( CurDevNN->nodeName() );
+              arg( CurDevNN->name() );
           return S;
         }
 
@@ -551,7 +554,7 @@ QString NetworkSettingsData::generateSystemFileNode(
               S = qApp->translate( "NetworkSettings", 
                 "<p>Error in node part for file \"%1\" and node \"%2\"</p>" ).
                   arg( SF.name() ).
-                  arg( NNI->nodeClass()->nodeName() );
+                  arg( NNI->nodeClass()->name() );
               return S;
             }
           }
@@ -561,7 +564,7 @@ QString NetworkSettingsData::generateSystemFileNode(
           S = qApp->translate( "NetworkSettings", 
               "<p>Error in postNodeSection for file \"%1\" and node \"%2\"</p>" ).
                   arg( SF.name() ).
-                  arg( CurDevNN->nodeName() );
+                  arg( CurDevNN->name() );
           return S;
         }
         SF << endl;
@@ -571,7 +574,7 @@ QString NetworkSettingsData::generateSystemFileNode(
         S = qApp->translate( "NetworkSettings", 
             "<p>Error in postDeviceSection for file \"%1\" and node \"%2\"</p>" ).
                 arg( SF.name() ).
-                arg( CurDevNN->nodeName() );
+                arg( CurDevNN->name() );
         return S;
       }
 

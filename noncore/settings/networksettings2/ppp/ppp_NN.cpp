@@ -10,7 +10,7 @@ static const char * PPPNeeds[] =
 /**
  * Constructor, find all of the possible interfaces
  */
-PPPNetNode::PPPNetNode() : ANetNode() {
+PPPNetNode::PPPNetNode() : ANetNode(tr("PPP Connection")) {
 }
 
 /**

@@ -1,5 +1,6 @@
 #include <qfile.h>
 #include <qtextstream.h>
+#include <qstringlist.h>
 #include <resources.h>
 #include "lancardrun.h"
 
@@ -53,8 +54,12 @@ void LanCardRun::detectState( NodeCollection * NC ) {
          It.current();
          ++It ) {
       Run = It.current();
-      if( handlesInterface( Run->Name ) &&
-          Run->CardType == ARPHRD_ETHER &&
+      if( handlesInterface( *Run ) &&
+          ( Run->CardType == ARPHRD_ETHER
+#ifdef ARPHRD_IEEE1394
+            || Run->CardType == ARPHRD_IEEE1394
+#endif
+          ) &&
           ! Run->IsUp
         ) {
         // proper type, and Not UP -> free
@@ -145,8 +150,12 @@ InterfaceInfo * LanCardRun::getInterface( void ) {
          It.current();
          ++It ) {
       Run = It.current();
-      if( handlesInterface( Run->Name ) &&
-          Run->CardType == ARPHRD_ETHER
+      if( handlesInterface( *Run ) &&
+          ( Run->CardType == ARPHRD_ETHER
+#ifdef ARPHRD_IEEE1394
+            || Run->CardType == ARPHRD_IEEE1394
+#endif
+          )
         ) {
         // this is a LAN card
         if( Run->assignedNode() == netNode() ) {
@@ -162,5 +171,22 @@ InterfaceInfo * LanCardRun::getInterface( void ) {
 }
 
 bool LanCardRun::handlesInterface( const QString & S ) {
+    InterfaceInfo * II;
+    II = NSResources->system().interface( S );
+    if( ( II = NSResources->system().interface( S ) ) ) {
+      return handlesInterface( *II );
+    }
     return Pat.match( S ) >= 0;
+}
+
+bool LanCardRun::handlesInterface( const InterfaceInfo & II ) {
+    if( Pat.match( II.Name ) < 0 )
+      return 0;
+
+    if( Data->AnyLanCard ) {
+      return 1;
+    }
+
+    // must also match hardware address
+    return ( Data->HWAddresses.findIndex( II.MACAddress ) >= 0 );
 }

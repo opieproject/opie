@@ -72,14 +72,11 @@ public:
 
   typedef QArray<ANetNode *> NetNodeList;
 
-  ANetNode(){};
+  ANetNode( const char * Name ) : QObject( 0, Name ) {}
   virtual ~ANetNode(){};
 
   // pixmap needed for this NetNode
   virtual const QString pixmapName() = 0;
-
-  // name of this NetNode
-  virtual const QString nodeName() = 0;
 
   // description for  this NetNode
   virtual const QString nodeDescription() = 0;
@@ -184,11 +181,6 @@ public:
   bool isNew( void ) 
     { return IsNew; }
 
-  // return logical name of this instance
-  QString & nodeName( void ) 
-    { return NodeName; }
-  void setNodeName( const QString & S ) 
-    { NodeName = S; }
   // return description for this instance
   QString & description( void ) 
     { return Description; }
@@ -225,7 +217,6 @@ protected :
   ANetNode * NodeType;
   // connection to which this node belongs to
   NodeCollection * Connection;
-  QString   NodeName;
   QString   Description;
   bool      IsModified;
   bool      IsNew;
@@ -255,6 +246,8 @@ public :
       // does this node handles this interface e.g.eth0
       // recurse deeper if this node cannot answer that question
       virtual bool handlesInterface( const QString & )
+        { return 0; }
+      virtual bool handlesInterface( const InterfaceInfo & )
         { return 0; }
       virtual InterfaceInfo * assignedInterface( void );
       virtual AsDevice * device( void );

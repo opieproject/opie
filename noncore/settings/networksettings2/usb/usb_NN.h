@@ -17,9 +17,6 @@ public:
     virtual const QString pixmapName() 
       { return "Devices/usb"; }
 
-    virtual const QString nodeName() 
-      { return tr("USB Cable Connect"); }
-
     virtual const QString nodeDescription() ;
 
     virtual ANetNodeInstance * createInstance( void );

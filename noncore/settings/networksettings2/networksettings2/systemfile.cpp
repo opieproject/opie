@@ -124,7 +124,7 @@ bool SystemFile::preNodeSection( ANetNodeInstance * NNI, long ) {
         QString S = TX.readLine();
         while( ! TX.eof() ) {
           Out = S.
-              arg(NNI->nodeClass()->nodeName());
+              arg(NNI->nodeClass()->name());
           (*this) << Out << endl;
           S = TX.readLine();
         }
@@ -142,7 +142,7 @@ bool SystemFile::postNodeSection( ANetNodeInstance * NNI, long ) {
         QString S = TX.readLine();
         while( ! TX.eof() ) {
           Out = S.
-              arg(NNI->nodeName());
+              arg(NNI->name());
           (*this) << Out << endl;
           S = TX.readLine();
         }
@@ -159,7 +159,7 @@ bool SystemFile::preDeviceSection( ANetNode * NN ) {
         QString Out;
         QString S = TX.readLine();
         while( ! TX.eof() ) {
-          Out = S.arg(NN->nodeName());
+          Out = S.arg(NN->name());
           (*this) << Out << endl;
           S = TX.readLine();
         }
@@ -176,7 +176,7 @@ bool SystemFile::postDeviceSection( ANetNode * NN ) {
         QString Out;
         QString S = TX.readLine();
         while( ! TX.eof() ) {
-          Out = S.arg(NN->nodeName());
+          Out = S.arg(NN->name());
           (*this) << Out << endl;
           S = TX.readLine();
         }

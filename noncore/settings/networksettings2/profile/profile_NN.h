@@ -17,9 +17,6 @@ public:
     virtual const QString pixmapName() 
       { return "Devices/commprofile"; }
 
-    virtual const QString nodeName() 
-      { return tr("Regular profile"); }
-
     virtual const QString nodeDescription() ;
 
     virtual ANetNodeInstance * createInstance( void );

@@ -167,7 +167,8 @@ bool TheNSResources::loadNetNode(
       NN->NodeCountInLib = PNN.count();
 
       // store mapping
-      AllNodeTypes.insert( NN->NetNode->nodeName(), NN );
+      printf( "Store %s\n", NN->NetNode->name() );
+      AllNodeTypes.insert( NN->NetNode->name(), NN );
     }
 
     return 1;
@@ -176,7 +177,6 @@ bool TheNSResources::loadNetNode(
 QPixmap TheNSResources::getPixmap( const QString & QS ) {
     QString S("networksettings2/");
     S += QS;
-    printf( " pixmap %s\n", S.latin1() );
     return Resource::loadPixmap( QString("networksettings2/")+QS );
 }
 
@@ -200,7 +200,7 @@ void TheNSResources::addConnection( NodeCollection * NC ) {
            it.current();
            ++it ) {
         NNI = it.current();
-        if( findNodeInstance( NNI->nodeName() ) == 0 ) {
+        if( findNodeInstance( NNI->name() ) == 0 ) {
           // new item
           addNodeInstance( NNI );
         }
@@ -215,7 +215,7 @@ void TheNSResources::removeConnection( const QString & N ) {
       // delete netnodes in this connection
       ANetNodeInstance * NNI;
       for( NNI = NC->first(); NNI != 0; NNI = NC->next() ) {
-        removeNodeInstance( NNI->nodeName() );
+        removeNodeInstance( NNI->name() );
       }
       ConnectionsMap.remove( N ); 
 }

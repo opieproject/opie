@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>362</width>
+            <width>354</width>
             <height>359</height>
         </rect>
     </property>
@@ -69,7 +69,7 @@
             <vbox>
                 <property stdset="1">
                     <name>margin</name>
-                    <number>11</number>
+                    <number>5</number>
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
@@ -77,20 +77,6 @@
                 </property>
                 <widget>
                     <class>QListView</class>
-                    <column>
-                        <property>
-                            <name>text</name>
-                            <string>Name</string>
-                        </property>
-                        <property>
-                            <name>clickable</name>
-                            <bool>true</bool>
-                        </property>
-                        <property>
-                            <name>resizeable</name>
-                            <bool>true</bool>
-                        </property>
-                    </column>
                     <column>
                         <property>
                             <name>text</name>
@@ -114,6 +100,66 @@
                         <bool>true</bool>
                     </property>
                 </widget>
+                <widget>
+                    <class>QLayoutWidget</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Layout2</cstring>
+                    </property>
+                    <hbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>6</number>
+                        </property>
+                        <widget>
+                            <class>QPushButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>RemoveUnknown_BUT</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Remove Unknown</string>
+                            </property>
+                        </widget>
+                        <spacer>
+                            <property>
+                                <name>name</name>
+                                <cstring>Spacer1</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>orientation</name>
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property stdset="1">
+                                <name>sizeType</name>
+                                <enum>Expanding</enum>
+                            </property>
+                            <property>
+                                <name>sizeHint</name>
+                                <size>
+                                    <width>20</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                        <widget>
+                            <class>QPushButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>RescanCards_BUT</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Rescan</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
             </vbox>
         </widget>
     </vbox>
@@ -125,5 +171,19 @@
         <receiver>GroupBox1</receiver>
         <slot>setDisabled(bool)</slot>
     </connection>
+    <connection>
+        <sender>RescanCards_BUT</sender>
+        <signal>clicked()</signal>
+        <receiver>Lancard_FRM</receiver>
+        <slot>SLOT_ScanCards()</slot>
+    </connection>
+    <connection>
+        <sender>RemoveUnknown_BUT</sender>
+        <signal>clicked()</signal>
+        <receiver>Lancard_FRM</receiver>
+        <slot>SLOT_RemoveUnknown()</slot>
+    </connection>
+    <slot access="public">SLOT_ScanCards()</slot>
+    <slot access="public">SLOT_RemoveUnknown()</slot>
 </connections>
 </UI>

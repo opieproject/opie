@@ -8,7 +8,7 @@ static const char * IRDANeeds[] =
 /**
  * Constructor, find all of the possible interfaces
  */
-IRDANetNode::IRDANetNode() : ANetNode() {
+IRDANetNode::IRDANetNode() : ANetNode(tr("Infrared link")) {
 }
 
 /**

@@ -9,7 +9,7 @@ static const char * VPNNeeds[] =
 /**
  * Constructor, find all of the possible interfaces
  */
-VPNNetNode::VPNNetNode() : ANetNode() {
+VPNNetNode::VPNNetNode() : ANetNode(tr("VPN Connection")) {
 }
 
 /**
