@@ -150,7 +150,6 @@ void Today::startConfig()
 }
 
 
-
 /*
  *  Get all events that are in the datebook xml file for today
  */
@@ -176,11 +175,9 @@ void Today::getDates()
       
       if ( count <= MAX_LINES_MEET ) 
 	{
-	  //only get events past current time (start or end??)
 	  //cout << time.toString() << endl;
 	  //cout << TimeString::dateString((*it).event().end()) << endl;
-	  // still some bug in here, 1 h off 
-
+	  
 	  // decide if to get all day or only later appointments
 	  if (!ONLY_LATER)
 	    {
@@ -195,6 +192,7 @@ void Today::getDates()
 		  msg+= "<BR>" + (*it).location();
 		}
 	      msg += "<BR>"
+		
 		// start time of event
 		+ TimeString::timeString(QTime((*it).event().start().time()) )
 		// end time of event
