@@ -8,5 +8,5 @@ Arch: iPAQ
 Version: $QPE_VERSION-$SUB_VERSION
 Conflicts: opie-sound
 Depends: task-opie-minimal
-Description: Sound settings dialog
+Description: Settings for voice memos
  For the Opie environment.
