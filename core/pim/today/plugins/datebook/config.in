@@ -1,4 +1,4 @@
   config TODAY_DATEBOOK
-    boolean "datebook"
+    boolean "opie-today-datebookplugin (datebook plugin)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

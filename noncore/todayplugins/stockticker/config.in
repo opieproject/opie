@@ -1,5 +1,5 @@
   config TODAY_STOCKTICKER
-    boolean "stockticker"
+    boolean "opie-today-stocktickerplugin (stock ticker)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && TODAY
 

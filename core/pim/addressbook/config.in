@@ -1,4 +1,4 @@
   config ADDRESSBOOK
-    boolean "addressbook"
+    boolean "opie-addressbook (a simple addressbook)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,4 @@
   config TODAY_TODOLIST
-    boolean "todolist"
+    boolean "opie-today-todolistplugin (shows the next todo entries)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

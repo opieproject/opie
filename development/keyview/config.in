@@ -1,4 +1,4 @@
   config KEYVIEW
-    boolean "Keyview (Debugging tool for viewing keypresses)"
+    boolean "opie-keyview (Debugging tool for viewing keypresses)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
