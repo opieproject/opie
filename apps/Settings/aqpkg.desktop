@@ -2,5 +2,5 @@
 Type=Application
 Exec=aqpkg
 MimeType=application/ipkg
-Icon=aqpkg
+Icon=aqpkg/aqpkg
 Name=AQPkg

@@ -1,0 +1,10 @@
+Files: bin/aqpkg pics/aqpkg apps/Settings/aqpkg.desktop 
+Package: aqpkg
+Priority: optional
+Section: Settings
+ $QPE_VERSION-$SUB_VERSION.1
+Depends: opie-base ($QPE_VERSION)
+Architecture: arm
+Maintainer: Andy Qua (andy.qua@blueyonder.co.uk)
+Description: A Package Manager
+
