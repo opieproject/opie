@@ -248,6 +248,7 @@ QArray<int> ODateBookAccessBackend_XML::queryByExample(const OEvent&, int,  cons
     return QArray<int>();
 }
 void ODateBookAccessBackend_XML::clear() {
+    m_changed = true;
     m_raw.clear();
     m_rep.clear();
 }

@@ -82,7 +82,7 @@ OEvent::~OEvent() {
     }
 }
 OEvent& OEvent::operator=( const OEvent& ev) {
-    if ( *this == ev ) return  *this;
+    if ( this == &ev ) return  *this;
 
     OPimRecord::operator=( ev );
     ev.data->ref();

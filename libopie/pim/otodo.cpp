@@ -340,7 +340,7 @@ void OTodo::deref() {
 }
 OTodo &OTodo::operator=(const OTodo &item )
 {
-    if ( *this == item ) return *this;
+    if ( this == &item ) return *this;
 
     OPimRecord::operator=( item );
     //qWarning("operator= ref ");
