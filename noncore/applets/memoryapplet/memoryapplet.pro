@@ -15,7 +15,7 @@ SOURCES     = ../../settings/sysinfo/graph.cpp \
 TARGET      = memoryapplet
 DESTDIR     = $(OPIEDIR)/plugins/applets
 INCLUDEPATH += $(OPIEDIR)/include
-DEPENDPATH  += ../$(OPIEDIR)/include
+DEPENDPATH  += 
 VERSION     = 1.0.0
 LIBS        += -lqpe -lopiecore2 -lopieui2
 

@@ -3,7 +3,7 @@ HEADERS     = security.h
 SOURCES     = security.cpp main.cpp
 INTERFACES  = securitybase.ui
 INCLUDEPATH += $(OPIEDIR)/include
-DEPENDPATH  += ../$(OPIEDIR)/include
+DEPENDPATH  += 
 LIBS            += -lqpe -lopiecore2
 TARGET      = security
 

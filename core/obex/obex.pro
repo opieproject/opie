@@ -5,7 +5,7 @@ SOURCES	=   obex.cc obexsend.cpp obexhandler.cpp receiver.cpp obeximpl.cpp
 TARGET		= opieobex
 DESTDIR		= $(OPIEDIR)/plugins/obex
 INCLUDEPATH += $(OPIEDIR)/include $(OPIEDIR)/core/launcher
-DEPENDPATH      += ../$(OPIEDIR)/include
+DEPENDPATH      += 
 LIBS            += -lqpe -lopiecore2
 VERSION		= 0.0.2
 

@@ -5,7 +5,7 @@ SOURCES	=   exampleboardimpl.cpp
 TARGET		= example_board
 DESTDIR		= $(OPIEDIR)/plugins/inputmethods
 INCLUDEPATH += $(OPIEDIR)/include
-DEPENDPATH      += ../$(OPIEDIR)/include ../../launcher
+DEPENDPATH      +=  ../../launcher
 LIBS            += -lqpe
 VERSION		= 1.0.0
 

@@ -3,7 +3,7 @@ HEADERS		= light.h sensor.h calibration.h
 SOURCES		= light.cpp main.cpp sensor.cpp calibration.cpp
 INTERFACES	= lightsettingsbase.ui sensorbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
-DEPENDPATH	+= ../$(OPIEDIR)/include
+DEPENDPATH	+= 
 LIBS            += -lqpe -lopiecore2
 
 TARGET		= light-and-power

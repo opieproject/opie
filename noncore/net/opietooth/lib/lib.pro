@@ -4,8 +4,7 @@ HEADERS 	= connection.h parser.h device.h manager.h remotedevice.h services.h st
 SOURCES		= connection.cpp parser.cc device.cc manager.cc remotedevice.cc services.cc startpanconnection.cpp startdunconnection.cpp
 TARGET		= opietooth1
 INCLUDEPATH += $(OPIEDIR)/include .
-DESTDIR		= $(OPIEDIR)/lib$(PROJMAK)
+DESTDIR		= $(OPIEDIR)/lib
 LIBS += -lopiecore2
-#VERSION = 0.0.0
 
 include ( $(OPIEDIR)/include.pro )

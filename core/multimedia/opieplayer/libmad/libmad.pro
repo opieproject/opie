@@ -7,7 +7,7 @@ SOURCES   	= version.c fixed.c bit.c timer.c stream.c frame.c synth.c decoder.c 
 TARGET   	= madplugin
 DESTDIR   	= $(OPIEDIR)/plugins/codecs
 INCLUDEPATH += $(OPIEDIR)/include ..
-DEPENDPATH      += ../$(OPIEDIR)/include ..
+DEPENDPATH      +=  ..
 LIBS            += -lqpe -lm
 VERSION   =   1.0.0
 

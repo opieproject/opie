@@ -5,7 +5,7 @@ SOURCES	        =   wavplugin.cpp wavpluginimpl.cpp
 TARGET		=   wavplugin
 DESTDIR		=   $(OPIEDIR)/plugins/codecs
 INCLUDEPATH += $(OPIEDIR)/include ..
-DEPENDPATH      +=  ../$(OPIEDIR)/include ..
+DEPENDPATH      +=   ..
 LIBS            +=  -lqpe
 VERSION		=   1.0.0
 

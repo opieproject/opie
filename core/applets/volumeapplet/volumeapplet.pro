@@ -5,7 +5,7 @@ SOURCES		= volume.cpp oledbox.cpp
 TARGET		= volumeapplet
 DESTDIR		= $(OPIEDIR)/plugins/applets
 INCLUDEPATH += $(OPIEDIR)/include
-DEPENDPATH      += ../$(OPIEDIR)/include
+DEPENDPATH      += 
 LIBS            += -lqpe -lopiecore2
 VERSION		= 1.0.0
 

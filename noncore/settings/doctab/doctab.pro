@@ -3,7 +3,7 @@ HEADERS        = doctab.h
 SOURCES        = doctab.cpp main.cpp
 INTERFACES    = doctabsettingsbase.ui
 INCLUDEPATH     += $(OPIEDIR)/include
-DEPENDPATH    += ../$(OPIEDIR)/include
+DEPENDPATH    += 
 LIBS            += -lqpe -lopiecore2
 TARGET        = doctab
 

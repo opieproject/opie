@@ -42,7 +42,7 @@ TARGET    =   mpeg3plugin
 TMAKE_CC=$(CXX)
 DESTDIR   =   $(OPIEDIR)/plugins/codecs
 INCLUDEPATH += $(OPIEDIR)/include ..
-DEPENDPATH      +=  ../$(OPIEDIR)/include ..
+DEPENDPATH      +=   ..
 LIBS            +=  -lqpe -lpthread -lm
 VERSION   =   1.0.0
 

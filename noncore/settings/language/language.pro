@@ -3,7 +3,7 @@ HEADERS        = settings.h
 SOURCES        = language.cpp main.cpp
 INTERFACES    = languagesettingsbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
-DEPENDPATH    += ../$(OPIEDIR)/include
+DEPENDPATH    += 
 LIBS            += -lqpe -lopiecore2
 TARGET        = language
 

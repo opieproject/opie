@@ -5,7 +5,7 @@ SOURCES   = screenshot.cpp inputDialog.cpp
 TARGET    = screenshotapplet
 DESTDIR   = $(OPIEDIR)/plugins/applets
 INCLUDEPATH += $(OPIEDIR)/include
-DEPENDPATH      += ../$(OPIEDIR)/include
+DEPENDPATH      += 
 LIBS            += -lqpe
 VERSION   = 1.0.0
 

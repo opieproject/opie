@@ -13,7 +13,7 @@ SOURCES     = zkbwidget.cpp \
 TARGET      = zkbapplet
 DESTDIR     = $(OPIEDIR)/plugins/applets
 INCLUDEPATH += $(OPIEDIR)/include ../../apps/keyz-cfg
-DEPENDPATH  += ../$(OPIEDIR)/include
+DEPENDPATH  += 
 VERSION     = 0.6.0
 LIBS        += -lqpe
 
