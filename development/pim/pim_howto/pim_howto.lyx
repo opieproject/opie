@@ -107,10 +107,10 @@ The Opie-Pim API provides a powerfull access interface to the PIM (Personal
 
 While starting to read the automatically generated API-documentation, the
  user may be confused by a lot of unneccessary classes and details which
- makes the quick start not as easy as expected.
- Due to the fact that a user who just want to access data will not need
- most of the details, this paper should help to start to be confortable
- with the details he need to solve his problems.
+ makes the quick start not as easy as possible.
+ Due to the fact that a user will not need most of the details, this paper
+ should help to start to become confortable with those details he need to
+ solve his problems.
 \layout Standard
 
 
@@ -125,7 +125,7 @@ Introduction
 \layout Standard
 
 Before starting to jump into the work, we should introduce some specialities
- of the PIM API first.
+ of the PIM API, first.
  To know these facts should help to avoid possible irritations and misunderstand
 ings:
 \layout Enumerate
@@ -133,7 +133,7 @@ ings:
 The PIM-API heavily uses C++ templates (as known as generic classes), but
  you don't have to understand very deeple what templates are doing and how
  they work! Most of the API works without even seeing the templates.
- In some cases whe have to use them (for instance to use the factory classes)
+ In some cases whe have to use them (for instance to use the factory classes),
  but this guide will provide examples which should help to find the path
  through.
  But it is a good idea to read some short introduction of templates to avoid
@@ -151,7 +151,7 @@ backend.
 \emph default 
  While the frontend provides the API for the user, the backend implements
  how to access the databases and what to do with the data.
- This paper just focusses the frontend as we just want to access data.
+ As we just want to access data, this paper just focusses the frontend.
  Thus, you should ignore all classes which contains something like 
 \begin_inset Quotes gld
 \end_inset 
@@ -324,7 +324,7 @@ delete
 delete sourceDB;
 \layout Section
 
-Accessing the access-object
+Accessing the Access-Object
 \begin_inset LatexCommand \label{sec:Accessing-the-access-object}
 
 \end_inset 
@@ -423,8 +423,8 @@ bool remove (const T& t);
 bool replace (const T& t);
 \layout Standard
 
-After receiving an access-object, we have to load the existing dataset,
- which is done by the 
+After receiving an access-object, we have to load the existing dataset into
+ the backend, which is done by the 
 \begin_inset Quotes gld
 \end_inset 
 
@@ -499,7 +499,7 @@ OPimRecordList
 List allRecords ();
 \layout Standard
 
-In fact this 
+In fact, this 
 \emph on 
 List
 \emph default 
@@ -583,7 +583,7 @@ defaultAccess()
 
  to request an access-object to the dafault backend.
  Whether this default backend will access the XML, VCard or SQLite database
- type, this is defined by the configuration file 
+ type, is defined by the configuration file 
 \begin_inset Quotes gld
 \end_inset 
 
@@ -615,8 +615,8 @@ defaultAccess()
  
 \layout Standard
 
-If the developer wants to select a special database type for sure, he has
- to use the oparation 
+If the developer wants to select a special database type for sure without
+ unnecessary side effects, he has to use the oparation 
 \emph on 
 create()
 \emph default 
@@ -759,7 +759,7 @@ FIXME: matchRegexp() does take a list of uid's.
 \end_inset 
 
 .
- Therfore it is possible to research a 
+ Therefore it is possible to research a 
 \begin_inset Quotes gld
 \end_inset 
 
@@ -918,7 +918,7 @@ searchQuery.setHomeZip(
  );
 \layout Standard
 
-We use a usual 
+We use an usual 
 \begin_inset Quotes gld
 \end_inset 
 
@@ -926,7 +926,16 @@ OPimContact
 \begin_inset Quotes grd
 \end_inset 
 
- and fill into two fields the search information.
+ and fill into two fields the query information.
+ All filled fields are taken for the search operation (using an 
+\begin_inset Quotes gld
+\end_inset 
+
+AND
+\begin_inset Quotes grd
+\end_inset 
+
+ operation), the unused ones are simply ignored.
  As we just want to search for entries which zip number starts with a 
 \begin_inset Quotes gld
 \end_inset 
@@ -943,7 +952,7 @@ OPimContact
 \begin_inset Quotes grd
 \end_inset 
 
- as we would do for finding files in a filesystem.
+ as we would do to find files in a filesystem.
 \layout Standard
 
 The next step is to put this query into the operation which is defined like
@@ -1019,7 +1028,7 @@ eIlers
 \end_inset 
 
 , ...).
- Thus we have to use the 
+ Thus, we have to use the 
 \begin_inset Quotes gld
 \end_inset 
 
@@ -1057,7 +1066,7 @@ List found_items = queryByExample( searchQuery, OPimBase::WildCards | OpimBase::
 IgnoreCase );
 \layout Standard
 
-This operation may return a list of entries which can be accesses as usual,
+This operation may return a list of entries which can be accessed as above,
  using the 
 \begin_inset Quotes gld
 \end_inset 
@@ -1173,6 +1182,195 @@ end
  The start will be defined by the last parameter (if nothing is set, the
  current date will be taken!).
  Therefore, it is possible to set a time frame for all searched entries.
+\layout Standard
+
+If you want to do incremental search operations, you may use the special
+ 
+\begin_inset Quotes gld
+\end_inset 
+
+queryByExample()
+\begin_inset Quotes grd
+\end_inset 
+
+ which takes a 
+\begin_inset Quotes gld
+\end_inset 
+
+List
+\begin_inset Quotes grd
+\end_inset 
+
+ as the first parameter.
+ The search operation will just occure on this set of uid's!
+\layout Subsection
+
+Sorting
+\layout Standard
+
+To sort a given dataset, you should use the following operation (or one
+ of the others which behave slightly differently):
+\layout LyX-Code
+
+List sorted (const List& list, bool ascending, int sortOrder, int sortFilter,
+ const QArray< UID >& cats);
+\layout Standard
+
+This sort operation takes a list of uid's as returned for instance from
+ a search query.
+ The parameter 
+\begin_inset Quotes gld
+\end_inset 
+
+ascending
+\begin_inset Quotes grd
+\end_inset 
+
+ defines whether the sort should be in an ascending order or not.
+ 
+\begin_inset Quotes gld
+\end_inset 
+
+sortOrder
+\begin_inset Quotes grd
+\end_inset 
+
+ is defined by the enumerations 
+\begin_inset Quotes gld
+\end_inset 
+
+SortOrder
+\begin_inset Quotes grd
+\end_inset 
+
+ and 
+\begin_inset Quotes gld
+\end_inset 
+
+SortOrderBase
+\begin_inset Quotes grd
+\end_inset 
+
+ and defines which field should be used to sort (see for 
+\series bold 
+OPimContactAccess
+\series default 
+: 
+\begin_inset LatexCommand \url{http://www.sra.uni-hannover.de/~eilers/apidocs/pim2/html/classOpie_1_1OPimContactAccess.html}
+
+\end_inset 
+
+, for 
+\series bold 
+ODateBookAccess
+\series default 
+: 
+\begin_inset LatexCommand \url{http://www.sra.uni-hannover.de/~eilers/apidocs/pim2/html/classOpie_1_1ODateBookAccess.html}
+
+\end_inset 
+
+ and for 
+\series bold 
+OPimTodoAccess
+\series default 
+: 
+\begin_inset LatexCommand \url{http://www.sra.uni-hannover.de/~eilers/apidocs/pim2/html/classOpie_1_1OPimTodoAccess.html}
+
+\end_inset 
+
+ and for common settings 
+\begin_inset LatexCommand \url{http://www.sra.uni-hannover.de/~eilers/apidocs/pim2/html/structOpie_1_1OPimBase.html#w21}
+
+\end_inset 
+
+).
+\layout Standard
+
+The 
+\begin_inset Quotes gld
+\end_inset 
+
+sortFilter
+\begin_inset Quotes grd
+\end_inset 
+
+ parameter allows to remove some entries which are not interesting for the
+ result and is defined in the same classes as 
+\begin_inset Quotes gld
+\end_inset 
+
+sortOrder
+\begin_inset Quotes grd
+\end_inset 
+
+ by the enumeration 
+\begin_inset Quotes gld
+\end_inset 
+
+SortFilter
+\begin_inset Quotes grd
+\end_inset 
+
+ and 
+\begin_inset Quotes gld
+\end_inset 
+
+SortFilterBase
+\begin_inset Quotes grd
+\end_inset 
+
+.
+ The list of id's in 
+\begin_inset Quotes gld
+\end_inset 
+
+cats
+\begin_inset Quotes grd
+\end_inset 
+
+ allows to remain just these entries which are included in the list of categorie
+s.
+\layout Standard
+
+The returned list contains the same uid's as given via 
+\begin_inset Quotes gld
+\end_inset 
+
+list
+\begin_inset Quotes grd
+\end_inset 
+
+ (or a subset of it, as the sortFilter and category list removes some entries)
+ with a modified order as 
+\begin_inset Quotes gld
+\end_inset 
+
+sortOrder
+\begin_inset Quotes grd
+\end_inset 
+
+ and 
+\begin_inset Quotes gld
+\end_inset 
+
+ascending
+\begin_inset Quotes grd
+\end_inset 
+
+ dictates.
+\layout Standard
+
+Therefore 
+\begin_inset Quotes gld
+\end_inset 
+
+sorted()
+\begin_inset Quotes grd
+\end_inset 
+
+ is more a combination of search and sort, as just a sort command.
+ But this combination is exactly what the developer needs in most situations.
+ 
 \layout Section
 
 Generic Access: OPimBase and OPimRecord
