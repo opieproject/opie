@@ -28,6 +28,7 @@
 #include <qvaluelist.h>
 
 class DateBookDB;
+class DateBookDBHoliday;
 class DateBookWeekHeader;
 class QDate;
 class QLabel;
@@ -58,7 +59,7 @@ class DateBookWeekView : public QScrollView
     Q_OBJECT
 public:
     DateBookWeekView( bool ampm, bool weekOnMonday, QWidget *parent = 0,
-		      const char *name = 0 );
+              const char *name = 0 );
 
     bool whichClock() const;
     void showEvents( QValueList<EffectiveEvent> &ev );
@@ -100,8 +101,8 @@ class DateBookWeek : public QWidget
     Q_OBJECT
 
 public:
-    DateBookWeek( bool ampm, bool weekOnMonday, DateBookDB *newDB,
-		  QWidget *parent = 0, const char *name = 0 );
+    DateBookWeek( bool ampm, bool weekOnMonday, DateBookDBHoliday *newDB,
+          QWidget *parent = 0, const char *name = 0 );
     void setDate( int y, int m, int d );
     void setDate( QDate d );
     QDate date() const;
@@ -153,7 +154,7 @@ private:
     QDate bdate;
     DateBookWeekHeader *header;
     DateBookWeekView *view;
-    DateBookDB *db;
+    DateBookDBHoliday *db;
     QLabel *lblDesc;
     QTimer *tHide;
     int startTime;

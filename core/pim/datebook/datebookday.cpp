@@ -19,6 +19,7 @@
 **********************************************************************/
 
 #include "datebookday.h"
+#include "datebooktypes.h"
 #include "datebookdayheaderimpl.h"
 #include "datebookdayallday.h"
 
@@ -227,7 +228,7 @@ void DateBookDayViewQuickLineEdit::focusOutEvent ( QFocusEvent* /* e */)
 
 //===========================================================================
 
-DateBookDay::DateBookDay( bool ampm, bool startOnMonday, DateBookDB *newDb, DateBookHoliday*newHdb, QWidget *parent, const char *name )
+DateBookDay::DateBookDay( bool ampm, bool startOnMonday, DateBookDBHoliday *newDb, DateBookHoliday*newHdb, QWidget *parent, const char *name )
     : QVBox( parent, name ), currDate( QDate::currentDate() ), db( newDb ), startTime( 0 )
 {
     widgetList.setAutoDelete( true );
@@ -367,7 +368,7 @@ void DateBookDay::getEvents()
         if (!object) continue;
         /* not to do something with it */
     }
-    QValueList<EffectiveEvent> eventList = db->getEffectiveEvents( currDate, currDate );
+    QValueList<EffectiveEvent> eventList = db->getEffectiveEventsNoHoliday( currDate, currDate );
     QValueListIterator<EffectiveEvent> it;
 
     for ( it = eventList.begin(); it != eventList.end(); ++it ) {

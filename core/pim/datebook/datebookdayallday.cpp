@@ -30,7 +30,8 @@ DatebookdayAllday::DatebookdayAllday(DateBookDB* db, QWidget* parent,  const cha
     m_MainFrame = new QFrame(viewport());
     m_MainFrame->setFrameStyle(QFrame::NoFrame|QFrame::Plain);
     setFrameStyle(QFrame::NoFrame|QFrame::Plain);
-    setResizePolicy( QScrollView::Default );
+    //setResizePolicy( QScrollView::Default );
+    setResizePolicy(QScrollView::AutoOneFit);
     setHScrollBarMode( AlwaysOff );
     addChild(m_MainFrame);
 
@@ -111,13 +112,18 @@ DatebookAlldayDisp::DatebookAlldayDisp(const QString&aholiday,QWidget* parent,co
     ev.setDescription(strDesc);
     ev.setAllDay(true);
     m_Ev.setEvent(ev);
-    setBackgroundColor(yellow);
     setText(strDesc);
-    setFrameStyle(QFrame::Raised|QFrame::Panel);
+
+    setAlignment(AlignHCenter);
+    setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Minimum));
+
+    //setFrameStyle(QFrame::Raised|QFrame::Panel);
+    //setBackgroundColor(yellow);
 
     int s = QFontMetrics(font()).height()+4;
     setMaximumHeight( s );
     setMinimumSize( QSize( 0, s ) );
+
     m_holiday = true;
 }
 

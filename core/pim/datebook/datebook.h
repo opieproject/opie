@@ -20,6 +20,8 @@
 #ifndef DATEBOOK_H
 #define DATEBOOK_H
 
+#include "datebooktypes.h"
+
 #include <qpe/datebookdb.h>
 
 #include <qmainwindow.h>
@@ -36,39 +38,6 @@ class DateBookMonth;
 class Event;
 class QDate;
 class Ir;
-class QLibrary;
-
-namespace Opie {
-namespace Datebook {
-    class HolidayPlugin;
-    class HolidayPluginIf;
-}
-}
-
-class DateBookDBHack : public DateBookDB {
- public:
-  Event eventByUID(int id);
-};
-
-class DateBookHoliday
-{
-public:
-    DateBookHoliday();
-    virtual ~DateBookHoliday();
-
-    QStringList holidaylist(const QDate&);
-    QStringList holidaylist(unsigned year, unsigned month, unsigned day);
-protected:
-    void init();
-    void deinit();
-
-    struct HPlugin {
-        Opie::Datebook::HolidayPlugin*_plugin;
-        QLibrary*_lib;
-        Opie::Datebook::HolidayPluginIf*_if;
-    };
-    QValueList<HPlugin*>_pluginlist;
-};
 
 class DateBook : public QMainWindow
 {
@@ -137,7 +106,7 @@ private:
     void saveSettings();
 
 private:
-    DateBookDBHack *db;
+    DateBookDBHoliday *db;
     DateBookHoliday*db_holiday;
     QWidgetStack *views;
     DateBookDay *dayView;

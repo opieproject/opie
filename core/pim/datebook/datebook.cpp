@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.38 2005-03-16 13:14:26 alwin Exp $
+** $Id: datebook.cpp,v 1.39 2005-03-17 14:01:23 alwin Exp $
 **
 **********************************************************************/
 
@@ -75,9 +75,10 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
     bool needEvilHack= false; // if we need an Evil Hack
     QTime t;
     t.start();
-    db = new DateBookDBHack;
+    db = new DateBookDBHoliday;
     odebug << "loading db t=" << t.elapsed() << oendl;
     db_holiday = new DateBookHoliday();
+    db->db_holiday=db_holiday;
 
     loadSettings();
     setCaption( tr("Calendar") );
@@ -1149,3 +1150,45 @@ QStringList DateBookHoliday::holidaylist(unsigned year, unsigned month, unsigned
     return holidaylist(QDate(year,month,day));
 }
 
+QValueList<EffectiveEvent> DateBookHoliday::getEffectiveEvents(const QDate &from,const QDate &to )
+{
+    QValueList<EffectiveEvent> ret;
+    QValueList<HPlugin*>::Iterator it;
+    for (it=_pluginlist.begin();it!=_pluginlist.end();++it) {
+        HPlugin*_pl = *it;
+        ret+=_pl->_plugin->events(from,to);
+    }
+    return ret;
+}
+
+QValueList<EffectiveEvent> DateBookDBHoliday::getEffectiveEventsNoHoliday(const QDate &from,const QDate &to )
+{
+    return DateBookDBHack::getEffectiveEvents(from,to);
+}
+
+QValueList<EffectiveEvent> DateBookDBHoliday::getEffectiveEventsNoHoliday(const QDateTime &start)
+{
+    return DateBookDBHack::getEffectiveEvents(start);
+}
+
+QValueList<EffectiveEvent> DateBookHoliday::getEffectiveEvents(const QDateTime &start)
+{
+    return getEffectiveEvents(start.date(),start.date());
+}
+
+QValueList<EffectiveEvent> DateBookDBHoliday::getEffectiveEvents(const QDate &from,const QDate &to )
+{
+    QValueList<EffectiveEvent> ret;
+    odebug << "Ueberlagert 1" << oendl;
+    if (db_holiday) {
+        ret+=db_holiday->getEffectiveEvents(from,to);
+    }
+    ret+=getEffectiveEventsNoHoliday(from,to);
+    return ret;
+}
+
+QValueList<EffectiveEvent> DateBookDBHoliday::getEffectiveEvents( const QDateTime &start)
+{
+    odebug << "Ueberlagert 2" << oendl;
+    return DateBookDBHack::getEffectiveEvents(start);
+}

@@ -28,10 +28,12 @@
 #include <qlist.h>
 
 #include "datebook.h"
+#include "datebooktypes.h"
 #include <qlineedit.h>
 
 class DateBookDayHeader;
 class DateBookDB;
+class DateBookDBHoliday;
 class DatebookdayAllday;
 class QDateTime;
 class QMouseEvent;
@@ -180,7 +182,7 @@ class DateBookDay : public QVBox
 
     friend class DateBookDayWidget; // for beam this occurence and access to DateBookDB
 public:
-    DateBookDay( bool ampm, bool startOnMonday, DateBookDB *newDb,DateBookHoliday*newHdb,
+    DateBookDay( bool ampm, bool startOnMonday, DateBookDBHoliday *newDb,DateBookHoliday*newHdb,
          QWidget *parent, const char *name );
     void selectedDates( QDateTime &start, QDateTime &end );
 
@@ -225,7 +227,7 @@ private:
     DateBookDayView *view;
     DateBookDayHeader *header;
     DatebookdayAllday *m_allDays;
-    DateBookDB *db;
+    DateBookDBHoliday *db;
     WidgetListClass widgetList; //reimplemented QList for sorting widgets by height
     int startTime;
     bool jumpToCurTime; //should we jump to current time in dayview?
