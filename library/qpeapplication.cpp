@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.48.2.1 2003-05-25 12:45:40 zecke Exp $
+** $Id: qpeapplication.cpp,v 1.48.2.2 2003-06-02 16:21:55 zecke Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -270,11 +270,14 @@ public:
 class ResourceMimeFactory : public QMimeSourceFactory
 {
 public:
-	ResourceMimeFactory()
+        ResourceMimeFactory() : resImage( 0 )
 	{
 		setFilePath( Global::helpPath() );
 		setExtensionType( "html", "text/html;charset=UTF-8" );
 	}
+        ~ResourceMimeFactory() {
+            delete resImage;
+        }
 
 	const QMimeSource* data( const QString& abs_name ) const
 	{
@@ -288,13 +291,18 @@ public:
 				if ( dot >= 0 )
 					name = name.left( dot );
 				QImage img = Resource::loadImage( name );
-				if ( !img.isNull() )
-					r = new QImageDrag( img );
+				if ( !img.isNull() ) {
+                                    delete resImage;
+                                    resImage = new QImageDrag( img );
+                                    r = resImage;
+                                }
 			}
 			while ( !r && sl > 0 );
 		}
 		return r;
 	}
+private:
+    mutable QImageDrag *resImage;
 };
 
 static int muted = 0;
