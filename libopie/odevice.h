@@ -103,6 +103,7 @@ private:
 protected:
 	ODevice ( );
 	virtual void init ( );
+	virtual void initButtons ( );
 	
 	ODeviceData *d;
 
@@ -157,7 +158,7 @@ public:
 	 * by the device manufacturer and will be from most preferred button to least preffered
 	 * button.  Note that this list only contains "user mappable" buttons.
 	 */
-	const QValueList<ODeviceButton> &buttons ( ) const;
+	const QValueList<ODeviceButton> &buttons ( );
 	
 	/**
 	 * Returns the DeviceButton for the \a keyCode.  If \a keyCode is not found, it

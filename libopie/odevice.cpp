@@ -68,14 +68,15 @@ public:
 
 	Transformation m_rotation;
 	
-	QValueList <ODeviceButton> m_buttons;
-	uint                       m_holdtime;
+	QValueList <ODeviceButton> *m_buttons;
+	uint                        m_holdtime;
 };
 
 
 class iPAQ : public ODevice, public QWSServer::KeyboardFilter {
 protected: 
 	virtual void init ( );
+	virtual void initButtons ( );
 	
 public:
 	virtual bool setSoftSuspend ( bool soft );
@@ -106,6 +107,7 @@ protected:
 class Zaurus : public ODevice {
 protected:
 	virtual void init ( );
+	virtual void initButtons ( );
 
 public:	
 	virtual bool setSoftSuspend ( bool soft );
@@ -254,9 +256,7 @@ ODevice::ODevice ( )
 	d-> m_rotation = Rot0;
 	
 	d-> m_holdtime = 1000; // 1000ms
-	
-	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
-	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));	                     	
+	d-> m_buttons = 0;
 }
 
 void ODevice::systemMessage ( const QCString &msg, const QByteArray & )
@@ -268,7 +268,17 @@ void ODevice::systemMessage ( const QCString &msg, const QByteArray & )
 
 void ODevice::init ( )
 {
+}
+
+void ODevice::initButtons ( )
+{
+	if ( d-> m_buttons )
+		return;
+
 	// Simulation uses iPAQ 3660 device buttons
+
+	qDebug ( "init Buttons" );
+	d-> m_buttons = new QValueList <ODeviceButton>;
 
 	for ( uint i = 0; i < ( sizeof( ipaq_buttons ) / sizeof( i_button )); i++ ) {
 		i_button *ib = ipaq_buttons + i;	
@@ -280,10 +290,13 @@ void ODevice::init ( )
 			b. setPixmap ( Resource::loadPixmap ( ib-> pix ));
 			b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( ib-> fpressedservice ), ib-> fpressedaction ));
 			b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( ib-> fheldservice ), ib-> fheldaction ));
-			d-> m_buttons. append ( b );
+			d-> m_buttons-> append ( b );
 		}
 	}
 	reloadButtonMapping ( );
+	
+	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
+	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));	                     	
 }
 
 ODevice::~ODevice ( )
@@ -474,9 +487,11 @@ int ODevice::lightSensorResolution ( ) const
 	return 0;
 }
 
-const QValueList <ODeviceButton> &ODevice::buttons ( ) const
+const QValueList <ODeviceButton> &ODevice::buttons ( )
 {
-	return d-> m_buttons;
+	initButtons ( );
+
+	return *d-> m_buttons;
 }
 
 uint ODevice::buttonHoldTime ( ) const
@@ -486,7 +501,9 @@ uint ODevice::buttonHoldTime ( ) const
 
 const ODeviceButton *ODevice::buttonForKeycode ( ushort code )
 {
-	for ( QValueListConstIterator<ODeviceButton> it = d-> m_buttons. begin ( ); it != d-> m_buttons. end ( ); ++it ) {
+	initButtons ( );
+
+	for ( QValueListConstIterator<ODeviceButton> it = d-> m_buttons-> begin ( ); it != d-> m_buttons-> end ( ); ++it ) {
 		if ( (*it). keycode ( ) == code )
 			return &(*it);
 	}
@@ -495,10 +512,12 @@ const ODeviceButton *ODevice::buttonForKeycode ( ushort code )
 
 void ODevice::reloadButtonMapping ( )
 {
+	initButtons ( );
+
 	Config cfg ( "ButtonSettings" );
 	
-	for ( uint i = 0; i < d-> m_buttons. count ( ); i++ ) {
-		ODeviceButton &b = d-> m_buttons [i];
+	for ( uint i = 0; i < d-> m_buttons-> count ( ); i++ ) {
+		ODeviceButton &b = ( *d-> m_buttons ) [i];
 		QString group = "Button" + QString::number ( i );
 
 		QCString pch, hch;
@@ -524,13 +543,14 @@ void ODevice::reloadButtonMapping ( )
 
 void ODevice::remapPressedAction ( int button, const OQCopMessage &action )
 {
+	initButtons ( );
+
 	QString mb_chan;
 	
-	if ( button >= (int) d-> m_buttons. count ( ))
+	if ( button >= (int) d-> m_buttons-> count ( ))
 		return;
-	
 		
-	ODeviceButton &b = d-> m_buttons [button];
+	ODeviceButton &b = ( *d-> m_buttons ) [button];
         b. setPressedAction ( action );
 
 	mb_chan=b. pressedAction ( ). channel ( );
@@ -547,10 +567,12 @@ void ODevice::remapPressedAction ( int button, const OQCopMessage &action )
 
 void ODevice::remapHeldAction ( int button, const OQCopMessage &action )
 {
-	if ( button >= (int) d-> m_buttons. count ( ))
+	initButtons ( );
+
+	if ( button >= (int) d-> m_buttons-> count ( ))
 		return;
 		
-	ODeviceButton &b = d-> m_buttons [button];
+	ODeviceButton &b = ( *d-> m_buttons ) [button];
     	b. setHeldAction ( action );
 
 	Config buttonFile ( "ButtonSettings" );
@@ -628,6 +650,17 @@ void iPAQ::init ( )
 	
 	m_power_timer = 0;
 	
+	if ( d-> m_qwsserver )
+		QWSServer::setKeyboardFilter ( this );	
+}
+
+void iPAQ::initButtons ( )
+{
+	if ( d-> m_buttons )
+		return;
+
+	d-> m_buttons = new QValueList <ODeviceButton>;
+
 	for ( uint i = 0; i < ( sizeof( ipaq_buttons ) / sizeof( i_button )); i++ ) {
 		i_button *ib = ipaq_buttons + i;	
 		ODeviceButton b;
@@ -639,14 +672,15 @@ void iPAQ::init ( )
 			b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( ib-> fpressedservice ), ib-> fpressedaction ));
 			b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( ib-> fheldservice ), ib-> fheldaction ));
                                         
-			d-> m_buttons. append ( b );
+			d-> m_buttons-> append ( b );
 		}
 	}
-	reloadButtonMapping ( );
+	reloadButtonMapping ( );	
 	
-	if ( d-> m_qwsserver )
-		QWSServer::setKeyboardFilter ( this );	
+	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
+	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));
 }
+
 
 //#include <linux/h3600_ts.h>  // including kernel headers is evil ...
 
@@ -993,6 +1027,15 @@ void Zaurus::init ( )
 			d-> m_rotation = Rot270;
 			break;
 	}
+	m_leds [0] = Led_Off;
+}
+
+void Zaurus::initButtons ( )
+{
+	if ( d-> m_buttons )
+		return;
+		
+	d-> m_buttons = new QValueList <ODeviceButton>;
 
 	for ( uint i = 0; i < ( sizeof( z_buttons ) / sizeof( z_button )); i++ ) {
 		z_button *zb = z_buttons + i;	
@@ -1004,11 +1047,13 @@ void Zaurus::init ( )
 		b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( zb-> fpressedservice ), zb-> fpressedaction ));
 		b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( zb-> fheldservice ), zb-> fheldaction ));
                                         
-		d-> m_buttons. append ( b );
+		d-> m_buttons-> append ( b );
 	}
+	
 	reloadButtonMapping ( );
-
-	m_leds [0] = Led_Off;
+	
+	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
+	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));
 }
 
 #include <unistd.h>
