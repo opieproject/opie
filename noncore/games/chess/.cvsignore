@@ -1,0 +1,4 @@
+Makefile
+mainwindow.cpp
+mainwindow.h
+moc*
