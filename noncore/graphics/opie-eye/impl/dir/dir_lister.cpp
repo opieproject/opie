@@ -68,6 +68,7 @@ QStringList Dir_DirLister::files()const {
             if( ext == QString::fromLatin1("jpg") ||
                 ext == QString::fromLatin1("jpeg" ) ||
                 ext == QString::fromLatin1("png" ) ||
+                ext == QString::fromLatin1("bmp" ) ||
                 ext == QString::fromLatin1("gif" ) )
                 out.append( *it );
         }
