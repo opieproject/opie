@@ -41,7 +41,7 @@ namespace Resource
 QPixmap loadPixmap( const QString& pix )
 {
     QString filename;
-    filename.sprintf( "%s/%s.png", (const char*) oApp->opieDir(), (const char*) pix );
+    filename.sprintf( "%s/%s.png", (const char*) oApp->qpeDir(), (const char*) pix );
     QPixmap pixmap( filename );
     if ( pixmap.isNull() )
     {

@@ -34,14 +34,14 @@
 #define oApp OApplication::oApplication()
 
 
-#include "opieapplication.h"
+#include <qpe/qpeapplication.h>
 
 
 class OApplicationPrivate;
 class OConfig;
 
 
-class OApplication : public OpieApplication
+class OApplication : public QPEApplication
 {
   Q_OBJECT
 
@@ -91,11 +91,6 @@ class OApplication : public OpieApplication
      * @param title the title. If not given, resets caption to appname
      */
     virtual void setTitle( const QString& title = QString::null ) const;
-
-    /**
-     * see qpeDir()
-     */
-    static QString opieDir() {return qpeDir();};
 
   protected:
     void init();
