@@ -1,3 +1,13 @@
+2004-11-18  Holger Freyther  <freyther@handhelds.org>
+	* Every Access can give a set of Occurrences for a period or a datetime
+	* QueryByExample, Find, Sort can be generically accessed by OPimBase 
+	  pointer interface
+	* OPimBackendOccurrence gets split up to OPimOccurrences by 
+	  OPimTemplateBase
+	* Add safeCast to various OPimRecords
+	* Kill memleak in OPimTodo
+	* Add SortVector implementations for OPimTodo and OPimContact
+	
 2004-??-??	The Opie Team <opie@handhelds.org>
 	* Implemented some important modifications to allow to use OPimRecords as it is, without
 	  have to cast them. This makes it possible to write applications which handling pim
