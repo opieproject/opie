@@ -364,7 +364,8 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 
     // Back accent character support
 
-    if (unicode == 0x60) {
+    //if (unicode == 0x60) { // the keys from 2c6 ~ 2cf should be used instead of the ascii one
+    if (unicode == 0x2cb) {
 
         unicode = 0;
         if (shift || lock) {
@@ -381,7 +382,8 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 
     // Accent character support
 
-    if (unicode == 0xb4) {
+    //if (unicode == 0xb4) {
+    if (unicode == 0x2ca) {
 
         unicode = 0;
         if (shift || lock) {
@@ -766,6 +768,13 @@ void Keyboard::mouseReleaseEvent(QMouseEvent*)
         repaint(FALSE);
 
     } 
+    if (ctrl && unicode != 0) {
+
+        *ctrl = 0;
+        ctrl = 0;
+        repaint(FALSE);
+
+    }
     
     /*
      * do not make the meta key release after being pressed
@@ -1015,9 +1024,9 @@ void Keyboard::loadKeyboardColors() {
  *
  * all following chars means unicode char value and are in hex
  *
- * √ ¿Ω = schar (start char)
- * ¡ﬂ¿Ω = mchar (middle char)
- * ≥°¿Ω = echar (end char)
+ * Ï¥àÏùå = schar (start char)
+ * Ï§ëÏùå = mchar (middle char)
+ * ÎÅùÏùå = echar (end char)
  *
  * there are 19 schars. unicode position is at 1100 - 1112
  * there are 21 mchars. unicode position is at 1161 - 1175
@@ -1057,49 +1066,49 @@ ushort Keyboard::parseKoreanInput (ushort c) {
 			}
 			else { // must figure out what the echar is
 
-				if (echar == 0x11a8) { // §°
+				if (echar == 0x11a8) { // „Ñ±
 
-					if (c == 0x1100) 		echar = 0x11a9; // §° + §°
-					else if (c == 0x1109) 	echar = 0x11aa; // §° + §µ
+					if (c == 0x1100) 		echar = 0x11a9; // „Ñ± + „Ñ±
+					else if (c == 0x1109) 	echar = 0x11aa; // „Ñ± + „ÖÖ
 					else { 
 						schar = c; mchar = 0; echar = 0; 
 						return c;
 					}
 
-				} else if (echar == 0x11ab) { // §§
+				} else if (echar == 0x11ab) { // „Ñ¥
 
-					if (c == 0x110c)  		echar = 0x11ac; // §§ + §∏
-					else if (c == 0x1112)  	echar = 0x11ad; // §§ + §æ
+					if (c == 0x110c)  		echar = 0x11ac; // „Ñ¥ + „Öà
+					else if (c == 0x1112)  	echar = 0x11ad; // „Ñ¥ + „Öé
 					else {
 						schar = c; mchar = 0; echar = 0; 
 						return c;
 					}
 
-				} else if (echar == 0x11af) { // §©
+				} else if (echar == 0x11af) { // „Ñπ
 
-					if (c == 0x1100) 		echar = 0x11b0; // §© + §°
-					else if (c == 0x1106) 	echar = 0x11b1; // §© + §±
-					else if (c == 0x1107) 	echar = 0x11b2; // §© + §≤
-					else if (c == 0x1109) 	echar = 0x11b3; // §© + §µ
-					else if (c == 0x1110) 	echar = 0x11b4; // §© + §º
-					else if (c == 0x1111) 	echar = 0x11b5; // §© + §Ω
-					else if (c == 0x1112) 	echar = 0x11b6; // §© + §æ
+					if (c == 0x1100) 		echar = 0x11b0; // „Ñπ + „Ñ±
+					else if (c == 0x1106) 	echar = 0x11b1; // „Ñπ + „ÖÅ
+					else if (c == 0x1107) 	echar = 0x11b2; // „Ñπ + „ÖÇ
+					else if (c == 0x1109) 	echar = 0x11b3; // „Ñπ + „ÖÖ
+					else if (c == 0x1110) 	echar = 0x11b4; // „Ñπ + „Öå
+					else if (c == 0x1111) 	echar = 0x11b5; // „Ñπ + „Öç
+					else if (c == 0x1112) 	echar = 0x11b6; // „Ñπ + „Öé
 					else {
 						schar = c; mchar = 0; echar = 0; 
 						return c;
 					}
 
-				} else if (echar == 0x11b8) { // §≤
+				} else if (echar == 0x11b8) { // „ÖÇ
 
-					if (c == 0x1109) 		echar = 0x11b9; // §≤ + §µ
+					if (c == 0x1109) 		echar = 0x11b9; // „ÖÇ + „ÖÖ
 					else {
 						schar = c; mchar = 0; echar = 0; 
 						return c;
 					}
 
-				} else if (echar == 0x11ba) { // §µ 
+				} else if (echar == 0x11ba) { // „ÖÖ 
 
-					if (c == 0x1109) 		echar = 0x11bb; // §µ + §µ 
+					if (c == 0x1109) 		echar = 0x11bb; // „ÖÖ + „ÖÖ 
 					else {
 						schar = c; mchar = 0; echar = 0; 
 						return c;
@@ -1462,7 +1471,7 @@ void Keys::setKeysFromFile(const char * filename) {
 
                 baccentMap.insert(lower, shift);
 
-		qDebug ("Estoy aÒadiendo %i con %i", lower, shift);
+		qDebug ("Estoy aadiendo %i con %i", lower, shift);
                 buf = t.readLine();
             }
 	    // accent
