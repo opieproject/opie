@@ -12,7 +12,7 @@
 #include <kmessagebox.h>
 #elif defined( QPE_PORT )
 #include <qaccel.h>
-#include "config.h"
+#include <qpe/config.h>
 #include "score.h"
 #endif
 
