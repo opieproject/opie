@@ -34,6 +34,12 @@ class ODict : public QMainWindow
 		QAction *setting_a, *setting_b;
 		
 		void setupMenus();
+
+		int errorTol;
+		bool casesens, completewords, regexp;
+		
+		void loadConfig();
+		void saveConfig();
 	
 	private slots:
 		void slotDisplayAbout();

@@ -46,11 +46,33 @@ ODict::ODict() : QMainWindow()
 	connect( ok_button, SIGNAL( released() ), this, SLOT( slotStartQuery() ) );
 	
 	setCentralWidget( hbox );
+	loadConfig();
+}
+
+void ODict::loadConfig()
+{
+	Config cfg ( "odict" );
+	cfg.setGroup( "generalsettings" );
+	errorTol = cfg.readEntry( "errtol" ).toInt();
+	casesens = cfg.readEntry( "casesens" ).toInt();
+	regexp = cfg.readEntry( "regexp" ).toInt();
+	completewords = cfg.readEntry( "completewords" ).toInt();
+}
+
+
+void ODict::saveConfig()
+{
+	Config cfg ( "odict" );
+	cfg.setGroup( "generalsettings" );
+	cfg.writeEntry( "errtol" , errorTol );
+	cfg.writeEntry( "casesens" , casesens );
+	cfg.writeEntry( "regexp" , regexp );
+	cfg.writeEntry( "completewords" , completewords );
 }
 
 void ODict::slotDisplayAbout()
 {
-	QMessageBox::about(  this, tr( "About ODict" ), tr( "OPIE-Dictionary ODict \n (c) 2002, 2003 Carsten  Niehaus \n cniehaus@handhelds.org \n Version 0.1" ) );
+	QMessageBox::about(  this, tr( "About ODict" ), tr( "OPIE-Dictionary ODict \n (c) 2002, 2003 Carsten  Niehaus \n cniehaus@handhelds.org \n Version 20021230" ) );
 }
 
 void ODict::slotStartQuery()
@@ -61,7 +83,7 @@ void ODict::slotStartQuery()
 
 void ODict::slotSetErrorcount( int count )
 {
-	count = 1;
+	errorTol = count;
 }
 
 void ODict::slotSettings()
@@ -72,12 +94,31 @@ void ODict::slotSettings()
 	else qDebug( "abgebrochen" );
 }
 
-void ODict::slotSetParameter( int /*count*/ )
+void ODict::slotSetParameter( int count )
 {
-//X 	if ( int == 0 )
-//X 	if ( int == 1 )
-//X 	if ( int == 2 )
-//X 	else qWarning( "ERROR" );
+ 	if ( count == 0 )
+	{
+		if ( casesens )
+			casesens = false;
+		else
+			casesens = true;
+	}
+
+ 	if ( count == 1 )
+	{
+		if ( completewords )
+			completewords = false;
+		else
+			completewords = true;
+	}
+ 	if ( count == 2 )
+	{
+		if ( regexp )
+			regexp = false;
+		else
+			regexp = true;
+	}
+ 	else qWarning( "ERROR" );
 }
 
 void ODict::setupMenus()
@@ -92,8 +133,8 @@ void ODict::setupMenus()
 	
 	parameter = new QPopupMenu( menu );
 	connect(  parameter, SIGNAL( activated( int ) ), this, SLOT( slotSetParameter( int ) ) );
-	parameter->insertItem( tr( "C&ase sensitive" ), 0 );
-	parameter->insertItem( tr( "Only &complete Words" ), 1 ) ;
+	parameter->insertItem( tr( "C&ase sensitive" ), 0 ,0 );
+	parameter->insertItem( tr( "Only &complete Words" ), 1 , 1) ;
 	parameter->insertItem( tr( "Allow &reg. expressions" ), 2 );
 	parameter->insertSeparator();
 		error_tol_menu = new QPopupMenu( menu );	
