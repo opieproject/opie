@@ -77,7 +77,7 @@ APPS=$(LOCALAPPS) $(PIMAPPS)  $(COREAPPS)     \
     
     
 
-NONTMAKEAPPS := ipaq/opiealarm noncore/nethack
+NONTMAKEAPPS := ipaq/opiealarm 
 
 DOCS = docs/src/opie-policy
 single: mpegplayer/libmpeg3
