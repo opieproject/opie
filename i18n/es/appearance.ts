@@ -62,10 +62,6 @@
         <translation>Abajo</translation>
     </message>
     <message>
-        <source>Appearance</source>
-        <translation>Apariencia</translation>
-    </message>
-    <message>
         <source>Style</source>
         <translation>Estilo</translation>
     </message>
@@ -226,6 +222,10 @@ Esta área le permite seleccionar un aplicación y qué funciones desea deshabil
     <message>
         <source>This is a preview window.  Look here to see your new appearance as options are changed.</source>
         <translation>Esta en una ventana de previsualización. Vea la nueva apariencia mientras cambia las opciones.</translation>
+    </message>
+    <message>
+        <source>Appearance Settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

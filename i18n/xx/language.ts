@@ -13,11 +13,11 @@
 <context>
     <name>LanguageSettingsBase</name>
     <message>
-        <source>Language</source>
+        <source>Select language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select language</source>
+        <source>Language Settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

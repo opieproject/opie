@@ -123,6 +123,32 @@ e inténtelo de nuevo.
         <source>QuickEdit</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Click here to create a new task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to modify the current task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to remove the current task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to send the current task to another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a listing of all current tasks.
+
+The list displays the following information:
+1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.
+2. Priority - a graphical representation of task priority.  Double-click here to modify.
+3. Description - description of task.  Click here to select the task.
+4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTaskEditor</name>
@@ -169,10 +195,6 @@ e inténtelo de nuevo.
         <translation>C.</translation>
     </message>
     <message>
-        <source>Prior.</source>
-        <translation>Prior.</translation>
-    </message>
-    <message>
         <source>Description</source>
         <translation>Descripción</translation>
     </message>
@@ -191,6 +213,10 @@ e inténtelo de nuevo.
     <message>
         <source>%1 day(s)</source>
         <translation>%1 dia(s)</translation>
+    </message>
+    <message>
+        <source>Priority</source>
+        <translation type="unfinished">Prioridad</translation>
     </message>
 </context>
 <context>
@@ -256,167 +282,6 @@ e inténtelo de nuevo.
     </message>
 </context>
 <context>
-    <name>TaskEditorAlarms</name>
-    <message>
-        <source>empty</source>
-        <translation>vacío</translation>
-    </message>
-    <message>
-        <source>&amp;Add</source>
-        <translation>&amp;Añadir</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation>&amp;Editar</translation>
-    </message>
-    <message>
-        <source>&amp;Remove</source>
-        <translation>&amp;Borrar</translation>
-    </message>
-</context>
-<context>
-    <name>TaskEditorOverView</name>
-    <message>
-        <source>Form1</source>
-        <translation>Form1</translation>
-    </message>
-    <message>
-        <source>Priority</source>
-        <translation>Prioridad</translation>
-    </message>
-    <message>
-        <source>1 - Very High</source>
-        <translation>1 - Muy alta</translation>
-    </message>
-    <message>
-        <source>2 - High</source>
-        <translation>2 - Alta</translation>
-    </message>
-    <message>
-        <source>3 - Normal</source>
-        <translation>3 - Normal</translation>
-    </message>
-    <message>
-        <source>4 - Low</source>
-        <translation>4 - Baja</translation>
-    </message>
-    <message>
-        <source>5 - Very Low</source>
-        <translation>5 - Muy baja</translation>
-    </message>
-    <message>
-        <source>Progress</source>
-        <translation>Progreso</translation>
-    </message>
-    <message>
-        <source>0 %</source>
-        <translation>0 %</translation>
-    </message>
-    <message>
-        <source>20 %</source>
-        <translation>20 %</translation>
-    </message>
-    <message>
-        <source>40 %</source>
-        <translation>40 %</translation>
-    </message>
-    <message>
-        <source>60 %</source>
-        <translation>60 %</translation>
-    </message>
-    <message>
-        <source>80 %</source>
-        <translation>80 %</translation>
-    </message>
-    <message>
-        <source>100 %</source>
-        <translation>100 %</translation>
-    </message>
-    <message>
-        <source>Due Date:</source>
-        <translation>Fecha límite:</translation>
-    </message>
-    <message>
-        <source>1 Januar 2002</source>
-        <translation>1 enero 2002</translation>
-    </message>
-    <message>
-        <source>Start Date:</source>
-        <translation>Fecha inicio:</translation>
-    </message>
-    <message>
-        <source>1 Januar 2001</source>
-        <translation>1 enero 2002</translation>
-    </message>
-    <message>
-        <source>Summary</source>
-        <translation>Sumario</translation>
-    </message>
-    <message>
-        <source>Complete</source>
-        <translation>Completar</translation>
-    </message>
-    <message>
-        <source>work on</source>
-        <translation>trabajar en</translation>
-    </message>
-    <message>
-        <source>buy</source>
-        <translation>comprar</translation>
-    </message>
-    <message>
-        <source>organize</source>
-        <translation>organizar</translation>
-    </message>
-    <message>
-        <source>get</source>
-        <translation>conseguir</translation>
-    </message>
-    <message>
-        <source>Update</source>
-        <translation>Actualizar</translation>
-    </message>
-    <message>
-        <source>Create</source>
-        <translation>Crear</translation>
-    </message>
-    <message>
-        <source>Plan</source>
-        <translation>Planear</translation>
-    </message>
-    <message>
-        <source>Call</source>
-        <translation>Llamar</translation>
-    </message>
-    <message>
-        <source>Mail</source>
-        <translation>Correo a</translation>
-    </message>
-    <message>
-        <source>Completed Date</source>
-        <translation>Fecha completado</translation>
-    </message>
-    <message>
-        <source>Completed</source>
-        <translation>Completado</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation>Categoría</translation>
-    </message>
-    <message>
-        <source>Enable Recurrance</source>
-        <translation>Habilitar recurrencia</translation>
-    </message>
-</context>
-<context>
-    <name>TaskEditorOverViewImpl</name>
-    <message>
-        <source>Todo List</source>
-        <translation>Lista Tareas</translation>
-    </message>
-</context>
-<context>
     <name>TemplateDialog</name>
     <message>
         <source>Template Editor</source>
@@ -465,6 +330,46 @@ e inténtelo de nuevo.
     </message>
     <message>
         <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to set the priority of new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter description of new task here.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to enter additional information for new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to add new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to reset new task information.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -52,10 +52,6 @@
 <context>
     <name>MediumMountWidget</name>
     <message>
-        <source>Configure this medium. The changes will go into effect when the application get&apos;s closed. To update the Document Tab you need to removeand insert this medium.</source>
-        <translation type="obsolete">Opsætning af dette medie. Ændringerne træder i kræft når programmet bliver lukket. For at opdatere Dokument-fanen skal du fjerne og isætte mediet igen.</translation>
-    </message>
-    <message>
         <source>Which media files</source>
         <translation>Hvilke medie filer</translation>
     </message>

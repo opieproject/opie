@@ -123,6 +123,32 @@ Izhod?</translation>
         <source>QuickEdit</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Click here to create a new task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to modify the current task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to remove the current task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to send the current task to another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a listing of all current tasks.
+
+The list displays the following information:
+1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.
+2. Priority - a graphical representation of task priority.  Double-click here to modify.
+3. Description - description of task.  Click here to select the task.
+4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTaskEditor</name>
@@ -169,10 +195,6 @@ Izhod?</translation>
         <translation type="unfinished">K.</translation>
     </message>
     <message>
-        <source>Prior.</source>
-        <translation type="unfinished">Pred.</translation>
-    </message>
-    <message>
         <source>Description</source>
         <translation type="unfinished">Opis</translation>
     </message>
@@ -190,6 +212,10 @@ Izhod?</translation>
     </message>
     <message>
         <source>%1 day(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Priority</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -256,167 +282,6 @@ Izhod?</translation>
     </message>
 </context>
 <context>
-    <name>TaskEditorAlarms</name>
-    <message>
-        <source>empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TaskEditorOverView</name>
-    <message>
-        <source>Form1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Priority</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1 - Very High</source>
-        <translation type="unfinished">1 - Zelo visoka</translation>
-    </message>
-    <message>
-        <source>2 - High</source>
-        <translation type="unfinished">2 - Visoka</translation>
-    </message>
-    <message>
-        <source>3 - Normal</source>
-        <translation type="unfinished">3 - Normalna</translation>
-    </message>
-    <message>
-        <source>4 - Low</source>
-        <translation type="unfinished">4 - Nizka</translation>
-    </message>
-    <message>
-        <source>5 - Very Low</source>
-        <translation type="unfinished">5 - Zelo nizka</translation>
-    </message>
-    <message>
-        <source>Progress</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>0 %</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>20 %</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>40 %</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>60 %</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>80 %</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>100 %</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Due Date:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1 Januar 2002</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start Date:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1 Januar 2001</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Summary</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Complete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>work on</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>buy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>organize</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>get</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Update</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Plan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Call</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mail</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Completed Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Completed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="unfinished">Kategorija</translation>
-    </message>
-    <message>
-        <source>Enable Recurrance</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TaskEditorOverViewImpl</name>
-    <message>
-        <source>Todo List</source>
-        <translation type="unfinished">Seznam opravkov</translation>
-    </message>
-</context>
-<context>
     <name>TemplateDialog</name>
     <message>
         <source>Template Editor</source>
@@ -465,6 +330,46 @@ Izhod?</translation>
     </message>
     <message>
         <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to set the priority of new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter description of new task here.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to enter additional information for new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to add new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to reset new task information.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -5,6 +5,10 @@
         <source>Global</source>
         <translation>Globalno</translation>
     </message>
+    <message>
+        <source>Medium Mount Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MediumGlobalWidget</name>
@@ -39,6 +43,10 @@
     <message>
         <source>Video</source>
         <translation>Video</translation>
+    </message>
+    <message>
+        <source>If a medium gets inserted into this device Opie tries to search the medium for Documents. On large mediums this can take some time. You can choose if Opie should scan for Documents globally or on a per medium level. You&apos;re also able to reconfigure each medium.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -80,7 +88,7 @@
         <translation>Vedno preveri ta medij</translation>
     </message>
     <message>
-        <source>Configure this medium. The changes will go into effect when the application get&apos;s closed. To update the Document Tab you need to removeand insert this medium.</source>
+        <source>Configure this medium. The changes will go into effect when the application gets closed. To update the Document Tab you need to remove and insert this medium.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

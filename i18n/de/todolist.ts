@@ -122,6 +122,32 @@ Trozdem beenden?</translation>
         <source>QuickEdit</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Click here to create a new task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to modify the current task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to remove the current task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to send the current task to another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a listing of all current tasks.
+
+The list displays the following information:
+1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.
+2. Priority - a graphical representation of task priority.  Double-click here to modify.
+3. Description - description of task.  Click here to select the task.
+4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTaskEditor</name>
@@ -168,10 +194,6 @@ Trozdem beenden?</translation>
         <translation>C.</translation>
     </message>
     <message>
-        <source>Prior.</source>
-        <translation>Prior.</translation>
-    </message>
-    <message>
         <source>Description</source>
         <translation>Beschreibung</translation>
     </message>
@@ -190,6 +212,10 @@ Trozdem beenden?</translation>
     <message>
         <source>%1 day(s)</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Priority</source>
+        <translation type="unfinished">Priorität</translation>
     </message>
 </context>
 <context>
@@ -255,167 +281,6 @@ Trozdem beenden?</translation>
     </message>
 </context>
 <context>
-    <name>TaskEditorAlarms</name>
-    <message>
-        <source>empty</source>
-        <translation>leer</translation>
-    </message>
-    <message>
-        <source>&amp;Add</source>
-        <translation>&amp;Hinzufügen</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation>&amp;Editieren</translation>
-    </message>
-    <message>
-        <source>&amp;Remove</source>
-        <translation>&amp;Entfernen</translation>
-    </message>
-</context>
-<context>
-    <name>TaskEditorOverView</name>
-    <message>
-        <source>Form1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Priority</source>
-        <translation>Priorität</translation>
-    </message>
-    <message>
-        <source>1 - Very High</source>
-        <translation>1 - Sehr Hoch</translation>
-    </message>
-    <message>
-        <source>2 - High</source>
-        <translation>2 - Hoch</translation>
-    </message>
-    <message>
-        <source>3 - Normal</source>
-        <translation>3 - Normal</translation>
-    </message>
-    <message>
-        <source>4 - Low</source>
-        <translation>4 - Niedrig</translation>
-    </message>
-    <message>
-        <source>5 - Very Low</source>
-        <translation>5 - Sehr niedrig</translation>
-    </message>
-    <message>
-        <source>Progress</source>
-        <translation>Fortschritt</translation>
-    </message>
-    <message>
-        <source>0 %</source>
-        <translation>0 %</translation>
-    </message>
-    <message>
-        <source>20 %</source>
-        <translation>20 %</translation>
-    </message>
-    <message>
-        <source>40 %</source>
-        <translation>40 %</translation>
-    </message>
-    <message>
-        <source>60 %</source>
-        <translation>60 %</translation>
-    </message>
-    <message>
-        <source>80 %</source>
-        <translation>80 %</translation>
-    </message>
-    <message>
-        <source>100 %</source>
-        <translation>100 %</translation>
-    </message>
-    <message>
-        <source>Due Date:</source>
-        <translation>fällig am:</translation>
-    </message>
-    <message>
-        <source>1 Januar 2002</source>
-        <translation>1 Januar 2002</translation>
-    </message>
-    <message>
-        <source>Start Date:</source>
-        <translation>Startdatum:</translation>
-    </message>
-    <message>
-        <source>1 Januar 2001</source>
-        <translation>1 Januar 2001</translation>
-    </message>
-    <message>
-        <source>Summary</source>
-        <translation>Zusammenfassung</translation>
-    </message>
-    <message>
-        <source>Complete</source>
-        <translation>Komplett</translation>
-    </message>
-    <message>
-        <source>work on</source>
-        <translation>etwas bearbeiten</translation>
-    </message>
-    <message>
-        <source>buy</source>
-        <translation>kaufen</translation>
-    </message>
-    <message>
-        <source>organize</source>
-        <translation>organisieren</translation>
-    </message>
-    <message>
-        <source>get</source>
-        <translation>besorgen</translation>
-    </message>
-    <message>
-        <source>Update</source>
-        <translation>Update</translation>
-    </message>
-    <message>
-        <source>Create</source>
-        <translation>Erstellen</translation>
-    </message>
-    <message>
-        <source>Plan</source>
-        <translation>Plan</translation>
-    </message>
-    <message>
-        <source>Call</source>
-        <translation>Anruf</translation>
-    </message>
-    <message>
-        <source>Mail</source>
-        <translation>Post</translation>
-    </message>
-    <message>
-        <source>Completed Date</source>
-        <translation>Beendigungsdatum</translation>
-    </message>
-    <message>
-        <source>Completed</source>
-        <translation>Beended</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation>Kategorie</translation>
-    </message>
-    <message>
-        <source>Enable Recurrance</source>
-        <translation>Wiederholen aktivieren</translation>
-    </message>
-</context>
-<context>
-    <name>TaskEditorOverViewImpl</name>
-    <message>
-        <source>Todo List</source>
-        <translation>Aufgaben</translation>
-    </message>
-</context>
-<context>
     <name>TemplateDialog</name>
     <message>
         <source>Template Editor</source>
@@ -464,6 +329,46 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to set the priority of new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter description of new task here.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to enter additional information for new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to add new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to reset new task information.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

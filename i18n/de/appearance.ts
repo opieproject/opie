@@ -62,10 +62,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Appearance</source>
-        <translation type="unfinished">Erscheinungsbild</translation>
-    </message>
-    <message>
         <source>Style</source>
         <translation type="unfinished">Stil</translation>
     </message>
@@ -210,6 +206,10 @@ This area allows you to select an application and which settings you wish to dis
     </message>
     <message>
         <source>This is a preview window.  Look here to see your new appearance as options are changed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Appearance Settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

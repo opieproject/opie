@@ -18,8 +18,8 @@
         <translation type="unfinished">Seleção de Linguagem</translation>
     </message>
     <message>
-        <source>Language</source>
-        <translation type="unfinished">Linguagem</translation>
+        <source>Language Settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
