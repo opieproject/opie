@@ -1,9 +1,0 @@
-[Desktop Entry]
-Comment=A table/database viewer
-Exec=tableviewer
-Type=Application
-Name=Table Viewer
-Name[pt_BR]=Visualizador de Tabelas
-Name[hu]=Adatbázis nézõ
-Name[pt]=Base Dados
-Name[es]=Visor Base Datos

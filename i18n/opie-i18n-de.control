@@ -1,9 +1,0 @@
-Files: i18n/de/.directory i18n/de/*.qm etc/dict/dawg.de
-Priority: optional
-Section: opie/i18n
-Maintainer: Carsten Niehaus <cniehaus@kde.org>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: i18n: Deutsch
- German UI texts and dictionary for Qtopia environment.

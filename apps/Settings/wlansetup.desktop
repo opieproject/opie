@@ -1,8 +1,0 @@
-[Desktop Entry]
-Comment=Wireless LAN Setup
-Exec=wlansetup
-Icon=wlansetup/wlan
-Type=Settings
-Name=Wireless LAN Setup
-Name[pt]=Rede Wireless
-Name[es]=Red Inalámbrica

@@ -1,6 +1,0 @@
-Packagename: opie-update
-Maintainer: Patrick S. Vogt <tille@handhelds.org>
-Version: 0.9.1
-Description: Reinstall opie
-Dummy package that reinstalls opie, by removing 
-everything and reinstalling it.

@@ -1,9 +1,0 @@
-[Desktop Entry]
-Exec=netsetup
-Icon=PPPConnect
-Type=Application
-Name=Network
-Name[pt_BR]=Rede
-Name[de]=Netzwerk
-Name[pt]=Rede
-Name[es]=Red
