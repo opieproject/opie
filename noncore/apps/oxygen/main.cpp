@@ -17,13 +17,8 @@
 
 
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 #include "oxygen.h"
 
-int main(int argc, char **argv)
-{
-    QPEApplication app(argc, argv);
-    Oxygen *oxi = new Oxygen();
-    app.setMainWidget(oxi);
-    oxi->showMaximized();
-    return app.exec();
-}
+
+OPIE_EXPORT_APP( OApplicationFactory<Oxygen> )

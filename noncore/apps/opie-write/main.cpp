@@ -20,18 +20,9 @@
 **********************************************************************/
 
 #include <qpe/qpeapplication.h>
-#include <qpe/fileselector.h>
+#include <opie/oapplicationfactory.h>
 #include "mainwindow.h"
 
-int main( int argc, char ** argv )
-{
-    QPEApplication a( argc, argv );
+OPIE_EXPORT_APP( OApplicationFactory<MainWindow> )
 
-    MainWindow e;
-    a.showMainDocumentWidget(&e);
 
-    QObject::connect( &a, SIGNAL( lastWindowClosed() ),
-		      &a, SLOT( quit() ) );
-
-    a.exec();
-}

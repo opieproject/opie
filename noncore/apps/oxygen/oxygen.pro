@@ -1,5 +1,4 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on release quick-app
 HEADERS		= oxygen.h \
             kmolcalc.h \
             kmolelements.h \
@@ -20,30 +19,9 @@ SOURCES		= main.cpp \
           datawidgetui.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS		+= -lqpe -lstdc++
+LIBS		+= -lqpe 
 INTERFACES	= calcdlg.ui 
-TARGET 		= oxygen
-DESTDIR		= $(OPIEDIR)/bin
 
-TRANSLATIONS = ../../../i18n/de/oxygen.ts \
-	 ../../../i18n/nl/oxygen.ts \
-	 ../../../i18n/xx/oxygen.ts \
-	 ../../../i18n/en/oxygen.ts \
-	 ../../../i18n/es/oxygen.ts \
-	 ../../../i18n/fr/oxygen.ts \
-	 ../../../i18n/hu/oxygen.ts \
-	 ../../../i18n/ja/oxygen.ts \
-	 ../../../i18n/ko/oxygen.ts \
-	 ../../../i18n/no/oxygen.ts \
-	 ../../../i18n/pl/oxygen.ts \
-	 ../../../i18n/pt/oxygen.ts \
-	 ../../../i18n/pt_BR/oxygen.ts \
-	 ../../../i18n/sl/oxygen.ts \
-	 ../../../i18n/zh_CN/oxygen.ts \
-	 ../../../i18n/zh_TW/oxygen.ts \
-   	 ../../../i18n/it/oxygen.ts \
-   	 ../../../i18n/da/oxygen.ts
-
-
+TARGET	= oxygen
 
 include ( $(OPIEDIR)/include.pro )

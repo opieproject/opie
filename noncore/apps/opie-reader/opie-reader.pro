@@ -1,4 +1,3 @@
-TEMPLATE	= app
 CONFIG		= qt warn_on release
 HEADERS		= Aportis.h \
                   Bkmks.h \
@@ -81,11 +80,11 @@ SOURCES		= Aportis.cpp \
                   version.cpp \
                   ztxt.cpp
 
-INTERFACES	= 
-DESTDIR		= $(OPIEDIR)/bin
+DESTDIR = $(OPIEDIR)/bin
+TARGET = reader
+
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-TARGET		= reader
 LIBS		+= -lqpe
 
 include ( $(OPIEDIR)/include.pro )

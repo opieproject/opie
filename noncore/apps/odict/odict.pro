@@ -1,6 +1,4 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on debug
-#CONFIG		= qt warn_on release
+CONFIG		= qt warn_on release quick-app
 HEADERS		= odict.h \
 				searchmethoddlg.h \
 				configdlg.h \
@@ -15,7 +13,6 @@ INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS		+= -lqpe -lstdc++ -lopie
 TARGET 		= odict
-DESTDIR		= $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/odict.ts \
 	 ../../../i18n/nl/odict.ts \

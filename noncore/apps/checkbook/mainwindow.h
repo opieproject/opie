@@ -31,20 +31,29 @@
 
 #include <qmainwindow.h>
 #include <qpixmap.h>
+#include "cfg.h"
 
 class CBInfo;
 class CBInfoList;
 class QAction;
 class QListView;
 class QString;
+class QListViewItem;
 
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT
 
 	public:
-		MainWindow();
+		MainWindow(QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
 		~MainWindow();
+		static QString appName() { return QString::fromLatin1("checkbook"); };
+
+        // safe config
+        void writeConfig();
+
+        // open a check book
+        void openBook(QListViewItem *curr);
 
 	private:
 		QListView *cbList;
@@ -52,9 +61,7 @@ class MainWindow : public QMainWindow
 		QAction   *actionOpen;
 		QAction   *actionDelete;
 
-		QString  currencySymbol;
-		bool     showLocks;
-		bool     showBalances;
+        Cfg _cfg;
 		int      posName;
 
 		CBInfoList *checkbooks;

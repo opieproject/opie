@@ -17,13 +17,8 @@
 
 
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 #include "odict.h"
 
-int main(int argc, char **argv)
-{
-    QPEApplication app(argc, argv);
-    ODict *odict= new ODict();
-    app.setMainWidget(odict);
-    odict->showMaximized();
-    return app.exec();
-}
+
+OPIE_EXPORT_APP( OApplicationFactory<ODict> )

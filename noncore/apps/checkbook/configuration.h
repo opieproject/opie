@@ -30,22 +30,38 @@
 #define CONFIGURATION_H
 
 #include <qdialog.h>
+#include "cfg.h"
 
 class QCheckBox;
 class QLineEdit;
 class QString;
+class QTabWidget;
+class ListEdit;
 
 class Configuration : public QDialog
 {
 	Q_OBJECT
 
 	public:
-		Configuration( QWidget * = 0x0, const QString & = "$", bool = FALSE, bool = FALSE );
+        // Constructor
+		Configuration( QWidget *, Cfg &cfg);
 		~Configuration();
 
 		QLineEdit *symbolEdit;
 		QCheckBox *lockCB;
 		QCheckBox *balCB;
+        QCheckBox *openLastBookCB;
+        QCheckBox *lastTabCB;
+        QTabWidget *_mainWidget;
+        ListEdit *_listEditTypes;
+        ListEdit *_listEditCategories;
+
+        // saves settings in config struct
+        void saveConfig(Cfg &cfg);
+
+   protected:
+        // creates settings tap from configuration
+        QWidget *initSettings(Cfg &cfg);
 };
 
 #endif

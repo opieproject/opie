@@ -33,6 +33,8 @@
 #include "graph.h"
 #include "graphinfo.h"
 #include "password.h"
+#include "mainwindow.h"
+#include "cfg.h"
 
 #include <opie/otabwidget.h>
 #include <qpe/qpeapplication.h>
@@ -48,12 +50,21 @@
 #include <qpushbutton.h>
 #include <qwhatsthis.h>
 
-Checkbook::Checkbook( QWidget *parent, CBInfo *i, const QString &symbol )
+#define COL_ID      0
+#define COL_NUM     1
+#define COL_DATE    2
+#define COL_DESC    3
+#define COL_AMOUNT  4
+#define COL_BAL     5
+
+// --- Checkbook --------------------------------------------------------------
+Checkbook::Checkbook( QWidget *parent, CBInfo *i, Cfg *cfg )
 	: QDialog( parent, 0, TRUE, WStyle_ContextHelp )
 {
 	info = i;
-	currencySymbol = symbol;
+    _pCfg=cfg;
 
+    // Title bar
 	if ( info->name() != "" )
 	{
 		QString tempstr = info->name();
@@ -66,6 +77,7 @@ Checkbook::Checkbook( QWidget *parent, CBInfo *i, const QString &symbol )
 		setCaption( tr( "New checkbook" ) );
 	}
 
+
 	// Setup layout to make everything pretty
 	QVBoxLayout *layout = new QVBoxLayout( this );
 	layout->setMargin( 2 );
@@ -74,11 +86,14 @@ Checkbook::Checkbook( QWidget *parent, CBInfo *i, const QString &symbol )
 	// Setup tabs for all info
 	mainWidget = new OTabWidget( this );
 	layout->addWidget( mainWidget );
-
 	mainWidget->addTab( initInfo(), "checkbook/infotab", tr( "Info" ) );
 	mainWidget->addTab( initTransactions(), "checkbook/trantab", tr( "Transactions" ) );
 	mainWidget->addTab( initCharts(), "checkbook/charttab", tr( "Charts" ) );
-	mainWidget->setCurrentTab( tr( "Info" ) );
+    if( _pCfg->isShowLastTab() )
+        mainWidget->setCurrentTab( info->getLastTab() );
+    else
+	    mainWidget->setCurrentTab( tr( "Info" ) );
+    connect( mainWidget, SIGNAL( currentChanged(QWidget *) ), this, SLOT( slotTab(QWidget *) ) );
 
 	// Load checkbook information
 	loadCheckbook();
@@ -88,9 +103,10 @@ Checkbook::~Checkbook()
 {
 }
 
+// --- initInfo ---------------------------------------------------------------
 QWidget *Checkbook::initInfo()
 {
-	QWidget *control = new QWidget( mainWidget );
+    QWidget *control = new QWidget( mainWidget, tr("Info") );
 
 	QVBoxLayout *vb = new QVBoxLayout( control );
 
@@ -128,13 +144,8 @@ QWidget *Checkbook::initInfo()
 	layout->addWidget( label, 2, 0 );
 	typeList = new QComboBox( container );
 	QWhatsThis::add( typeList, tr( "Select type of checkbook here." ) );
-	typeList->insertItem( tr( "Savings" ) );		// 0
-	typeList->insertItem( tr( "Checking" ) );		// 1
-	typeList->insertItem( tr( "CD" ) );				// 2
-	typeList->insertItem( tr( "Money market" ) );	// 3
-	typeList->insertItem( tr( "Mutual fund" ) );	// 4
-	typeList->insertItem( tr( "Other" ) );			// 5
-	layout->addWidget( typeList, 2, 1 );
+    typeList->insertStringList( _pCfg->getAccountTypes() );
+    layout->addWidget( typeList, 2, 1 );
 
 	// Bank/institution name
 	label = new QLabel( tr( "Bank:" ), container );
@@ -183,34 +194,53 @@ QWidget *Checkbook::initInfo()
 	return control;
 }
 
+
+// --- initTransactions -------------------------------------------------------
 QWidget *Checkbook::initTransactions()
 {
-	QWidget *control = new QWidget( mainWidget );
+	QWidget *control = new QWidget( mainWidget, tr("Transactions") );
 
 	QGridLayout *layout = new QGridLayout( control );
 	layout->setSpacing( 2 );
 	layout->setMargin( 4 );
 
-	balanceLabel = new QLabel( tr( "Current balance: %10.00" ).arg( currencySymbol ),
-								control );
-	QWhatsThis::add( balanceLabel, tr( "This area shows the current balance in this checkbook." ) );
-	layout->addMultiCellWidget( balanceLabel, 0, 0, 0, 2 );
+    // Sort selector
+    QLabel *label = new QLabel( tr( "Sort by:" ), control );
+	QWhatsThis::add( label, tr( "Select checkbook sorting here." ) );
+	layout->addMultiCellWidget( label, 0, 0, 0, 1 );
+    _cbSortType=new QComboBox( control );
+    _cbSortType->insertItem( tr("Entry Order") );
+    _cbSortType->insertItem( tr("Date") );
+    _cbSortType->insertItem( tr("Number") );
+    layout->addMultiCellWidget( _cbSortType, 0, 0, 1, 2 );
+    connect( _cbSortType, SIGNAL( activated(const QString &) ), this, SLOT( slotSortChanged( const QString & ) ) );
 
-	tranTable = new QListView( control );
+    // Table
+    tranTable = new QListView( control );
+    QFont fnt(QPEApplication::font());
+    fnt.setPointSize( fnt.pointSize()-1 );
+    tranTable->setFont( fnt );
 	QWhatsThis::add( tranTable, tr( "This is a listing of all transactions entered for this checkbook.\n\nTo sort entries by a specific field, click on the column name." ) );
-	tranTable->addColumn( tr( "Num" ) );
+    tranTable->addColumn( tr( "Id" ) );
+    tranTable->setColumnWidthMode( COL_ID, QListView::Manual );
+    tranTable->setColumnWidth( COL_ID, 0);
+    tranTable->addColumn( tr( "Num" ) );
 	tranTable->addColumn( tr( "Date" ) );
 	//tranTable->addColumn( tr( "Cleared" ) );
 	tranTable->addColumn( tr( "Description" ) );
-	int colnum = tranTable->addColumn( tr( "Amount" ) );
-	tranTable->setColumnAlignment( colnum, Qt::AlignRight );
+	int column = tranTable->addColumn( tr( "Amount" ) );
+	tranTable->setColumnAlignment( column, Qt::AlignRight );
+    column=tranTable->addColumn( tr("Balance") );
+    tranTable->setColumnAlignment( column, Qt::AlignRight );
 	tranTable->setAllColumnsShowFocus( TRUE );
-	tranTable->setSorting( 1 );
+	tranTable->setSorting( -1 );
 	layout->addMultiCellWidget( tranTable, 1, 1, 0, 2 );
 	QPEApplication::setStylusOperation( tranTable->viewport(), QPEApplication::RightOnHold );
 	connect( tranTable, SIGNAL( rightButtonPressed( QListViewItem *, const QPoint &, int ) ),
 			 this, SLOT( slotEditTran() ) );
+    _sortCol=COL_ID;
 
+    // Buttons
 	QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), control );
 	QWhatsThis::add( btn, tr( "Click here to add a new transaction." ) );
 	connect( btn, SIGNAL( clicked() ), this, SLOT( slotNewTran() ) );
@@ -229,11 +259,13 @@ QWidget *Checkbook::initTransactions()
 	return( control );
 }
 
+
+// --- initCharts -------------------------------------------------------------
 QWidget *Checkbook::initCharts()
 {
 	graphInfo = 0x0;
 
-	QWidget *control = new QWidget( mainWidget );
+	QWidget *control = new QWidget( mainWidget, tr("Charts") );
 
 	QGridLayout *layout = new QGridLayout( control );
 	layout->setSpacing( 2 );
@@ -259,6 +291,7 @@ QWidget *Checkbook::initCharts()
 	return control;
 }
 
+// --- loadCheckbook ----------------------------------------------------------
 void Checkbook::loadCheckbook()
 {
 	if ( !info )
@@ -281,6 +314,10 @@ void Checkbook::loadCheckbook()
 			break;
 		}
 	}
+    if( i<=0 ) {
+        typeList->insertItem( temptext, 0 );
+        typeList->setCurrentItem(0);
+    }
 	bankEdit->setText( info->bank() );
 	acctNumEdit->setText( info->account() );
 	pinNumEdit->setText( info->pin() );
@@ -290,42 +327,61 @@ void Checkbook::loadCheckbook()
 
 	// Load transactions
 	float amount;
-	QString stramount;
-
-	for ( TranInfo *tran = tranList->first(); tran; tran = tranList->next() )
+    QString stramount;
+    for ( TranInfo *tran = tranList->first(); tran; tran = tranList->next() )
 	{
 		amount = tran->amount();
 		if ( tran->withdrawal() )
 		{
 			amount *= -1;
 		}
-		stramount.sprintf( "%s%.2f", currencySymbol.latin1(), amount );
-		( void ) new CBListItem( tranTable, tran->number(), tran->datestr(), tran->desc(), stramount );
+		stramount.sprintf( "%s%.2f", _pCfg->getCurrencySymbol().latin1(), amount );
+        ( void ) new CBListItem( tran, tranTable, tran->getIdStr(), tran->number(), tran->datestr(), tran->desc(), stramount );
 	}
 
-	balanceLabel->setText( tr( "Current balance: %1%2" ).arg( currencySymbol ).arg( info->balance(), 0, 'f', 2 ) );
+    // set sort order
+    bool bOk=false;
+    for(int i=0; i<_cbSortType->count(); i++) {
+        if( _cbSortType->text(i)==info->getSortOrder() ) {
+            _cbSortType->setCurrentItem(i);
+            slotSortChanged( info->getSortOrder() );
+            bOk=true;
+            break;
+        }
+    }
+    if( !bOk ) {
+        _cbSortType->setCurrentItem(0);
+        slotSortChanged( _cbSortType->currentText() );
+    }
 
-	highTranNum = tranList->count();
+    // calc running balance
+    adjustBalance();
 }
 
+// --- adjustBalance ----------------------------------------------------------
 void Checkbook::adjustBalance()
 {
-	balanceLabel->setText( tr( "Current balance: %1%2" ).arg( currencySymbol ).arg( info->balance(), 0, 'f', 2 ) );
+	// update running balance in register
+    QString sRunning;
+    float bal=info->startingBalance();
+    for(CBListItem *item=(CBListItem *)tranTable->firstChild(); item; item=(CBListItem *)item->nextSibling() ) {
+        TranInfo *tran=item->getTranInfo();
+        bal=bal + (tran->withdrawal() ? -1 : 1)*tran->amount() - tran->fee();
+        sRunning.sprintf( "%s%.2f", _pCfg->getCurrencySymbol().latin1(), bal );
+        item->setText( COL_BAL, sRunning);
+    }
 }
 
-TranInfo *Checkbook::findTran( const QString &checknum, const QString &date, const QString &desc )
+// --- resort -----------------------------------------------------------------
+void Checkbook::resort()
 {
-	TranInfo *traninfo = tranList->first();
-	while ( traninfo )
-	{
-		if ( traninfo->number() == checknum && traninfo->datestr() == date &&
-			 traninfo->desc() == desc )
-			break;
-		traninfo = tranList->next();
-	}
-	return( traninfo );
+    tranTable->setSorting(_sortCol);
+    tranTable->sort();
+    tranTable->setSorting(-1);
 }
 
+
+// --- accept -----------------------------------------------------------------
 void Checkbook::accept()
 {
 	info->setName( nameEdit->text() );
@@ -398,6 +454,8 @@ void Checkbook::slotNameChanged( const QString &newname )
 	setCaption( namestr );
 }
 
+
+// ---slotStartingBalanceChanged ----------------------------------------------
 void Checkbook::slotStartingBalanceChanged( const QString &newbalance )
 {
 	bool ok;
@@ -405,14 +463,16 @@ void Checkbook::slotStartingBalanceChanged( const QString &newbalance )
 	adjustBalance();
 }
 
+
 void Checkbook::slotNewTran()
 {
-	highTranNum++;
-	TranInfo *traninfo = new TranInfo( highTranNum );
+	TranInfo *traninfo = new TranInfo( info->getNextNumber() );
+    if( !_dLastNew.isNull() )
+        traninfo->setDate(_dLastNew);
 
 	Transaction *currtran = new Transaction( this, info->name(),
 											 traninfo,
-											 currencySymbol );
+											 _pCfg );
 	currtran->showMaximized();
 	if ( currtran->exec() == QDialog::Accepted )
 	{
@@ -422,22 +482,19 @@ void Checkbook::slotNewTran()
 		// Add to transaction table
 		float amount;
 		QString stramount;
-
-		amount = traninfo->amount();
-		if ( traninfo->withdrawal() )
-		{
-			amount *= -1;
-		}
-		stramount.sprintf( "%s%.2f", currencySymbol.latin1(), amount );
-
-		( void ) new CBListItem( tranTable, traninfo->number(), traninfo->datestr(), traninfo->desc(),
-								  stramount );
-
+		amount = (traninfo->withdrawal() ? -1 : 1)*traninfo->amount();
+		stramount.sprintf( "%s%.2f", _pCfg->getCurrencySymbol().latin1(), amount );
+		( void ) new CBListItem( traninfo, tranTable, traninfo->getIdStr(),
+                                 traninfo->number(), traninfo->datestr(), traninfo->desc(),
+								 stramount );
+        resort();
 		adjustBalance();
+
+        // save last date
+        _dLastNew = traninfo->date();
 	}
 	else
 	{
-		highTranNum--;
 		delete traninfo;
 	}
 }
@@ -446,22 +503,19 @@ void Checkbook::slotEditTran()
 {
 	QListViewItem *curritem = tranTable->currentItem();
 	if ( !curritem )
-	{
 		return;
-	}
-
-	TranInfo *traninfo = info->findTransaction( curritem->text( 0 ), curritem->text( 1 ),
-												   curritem->text( 2 ) );
+	
+	TranInfo *traninfo=info->findTransaction( curritem->text(COL_ID) );
 
 	Transaction *currtran = new Transaction( this, info->name(),
 											 traninfo,
-											 currencySymbol );
+											 _pCfg );
 	currtran->showMaximized();
 	if ( currtran->exec() == QDialog::Accepted )
 	{
-		curritem->setText( 0, traninfo->number() );
-		curritem->setText( 1, traninfo->datestr() );
-		curritem->setText( 2, traninfo->desc() );
+		curritem->setText( COL_NUM, traninfo->number() );
+		curritem->setText( COL_DATE, traninfo->datestr() );
+		curritem->setText( COL_DESC, traninfo->desc() );
 
 		float amount = traninfo->amount();
 		if ( traninfo->withdrawal() )
@@ -469,10 +523,10 @@ void Checkbook::slotEditTran()
 			amount *= -1;
 		}
 		QString stramount;
-		stramount.sprintf( "%s%.2f", currencySymbol.latin1(), amount );
-		curritem->setText( 3, stramount );
-
-		adjustBalance();
+		stramount.sprintf( "%s%.2f", _pCfg->getCurrencySymbol().latin1(), amount );
+		curritem->setText( COL_AMOUNT, stramount );
+        resort();
+        adjustBalance();
 	}
 
 	delete currtran;
@@ -482,17 +536,15 @@ void Checkbook::slotDeleteTran()
 {
 	QListViewItem *curritem = tranTable->currentItem();
 	if ( !curritem )
-	{
 		return;
-	}
 
-	TranInfo *traninfo = findTran( curritem->text( 0 ), curritem->text( 1 ), curritem->text( 2 ) );
+	TranInfo *traninfo = info->findTransaction( curritem->text(COL_ID) );
 
 	if ( QPEMessageBox::confirmDelete ( this, tr( "Delete transaction" ), traninfo->desc() ) )
 	{
 		info->removeTransaction( traninfo );
 		delete curritem;
-		adjustBalance();
+        adjustBalance();
 	}
 }
 
@@ -589,11 +641,12 @@ void Checkbook::drawCategoryChart( bool withdrawals )
 	graphInfo = new GraphInfo( GraphInfo::PieChart, list );
 }
 
-CBListItem::CBListItem( QListView *parent, QString label1, QString label2,
+CBListItem::CBListItem( TranInfo *pTran, QListView *parent, QString label1, QString label2,
 					 QString label3, QString label4, QString label5, QString label6, QString label7,
 					 QString label8 )
 	: QListViewItem( parent, label1, label2, label3, label4, label5, label6, label7, label8 )
 {
+    _pTran=pTran;
 	m_known = FALSE;
 	owner = parent;
 }
@@ -651,4 +704,27 @@ bool CBListItem::isAltBackground()
 		return m_odd;
 	}
 	return false;
+}
+
+
+// --- slotTab ----------------------------------------------------------------
+void Checkbook::slotTab(QWidget *tab)
+{
+    if( !tab || !info ) return;
+    info->setLastTab( tab->name() );
+}
+
+
+// --- slotSortChanged ---------------------------------------------------------
+void Checkbook::slotSortChanged( const QString &selc )
+{
+    if( selc==tr("Entry Order") ) {
+        _sortCol=COL_ID;
+    } else if( selc==tr("Number") ) {
+        _sortCol=COL_NUM;
+    } else if( selc==tr("Date") ) {
+        _sortCol=COL_DATE;
+    }
+    info->setSortOrder( selc );
+    resort();
 }

@@ -28,6 +28,7 @@
 
 #include "transaction.h"
 #include "traninfo.h"
+#include "cfg.h"
 
 #include <qpe/datebookmonth.h>
 
@@ -41,7 +42,7 @@
 #include <qwhatsthis.h>
 
 Transaction::Transaction( QWidget *parent, const QString &acctname, TranInfo *info,
-							const QString &symbol )
+							Cfg *pCfg )
 	: QDialog( parent, 0, TRUE, WStyle_ContextHelp )
 {
 	QString tempstr = tr( "Transaction for " );
@@ -49,7 +50,7 @@ Transaction::Transaction( QWidget *parent, const QString &acctname, TranInfo *in
 	setCaption( tempstr );
 
 	tran = info;
-	currencySymbol = symbol;
+	_pCfg=pCfg;
 
 	QVBoxLayout *vb = new QVBoxLayout( this );
 
@@ -223,28 +224,20 @@ void Transaction::accept()
 	tran->setFee( feeEdit->text().toFloat( &ok ) );
 	tran->setNumber( numEdit->text() );
 	tran->setNotes( noteEdit->text() );
-	
+
 	QDialog::accept();
 }
 
 void Transaction::slotWithdrawalClicked()
 {
 	catList->clear();
-	catList->insertItem( tr( "Automobile" ) );
-	catList->insertItem( tr( "Bills" ) );
-	catList->insertItem( tr( "CDs" ) );
-	catList->insertItem( tr( "Clothing" ) );
-	catList->insertItem( tr( "Computer" ) );
-	catList->insertItem( tr( "DVDs" ) );
-	catList->insertItem( tr( "Electronics" ) );
-	catList->insertItem( tr( "Entertainment" ) );
-	catList->insertItem( tr( "Food" ) );
-	catList->insertItem( tr( "Gasoline" ) );
-	catList->insertItem( tr( "Misc" ) );
-	catList->insertItem( tr( "Movies" ) );
-	catList->insertItem( tr( "Rent" ) );
-	catList->insertItem( tr( "Travel" ) );
-	catList->setCurrentItem( 0 );
+    CategoryList *pCatList=_pCfg->getCategoryList();
+    for(Category *pCat=pCatList->first(); pCat; pCat=pCatList->next()) {
+        if( !pCat->isIncome() )
+            catList->insertItem( pCat->getName() );
+    }
+    catList->setCurrentItem(0);
+
 	typeList->clear();
 	typeList->insertItem( tr( "Debit Charge" ) );
 	typeList->insertItem( tr( "Written Check" ) );
@@ -255,10 +248,13 @@ void Transaction::slotWithdrawalClicked()
 void Transaction::slotDepositClicked()
 {
 	catList->clear();
-	catList->insertItem( tr( "Work" ) );
-	catList->insertItem( tr( "Family Member" ) );
-	catList->insertItem( tr( "Misc. Credit" ) );
-	catList->setCurrentItem( 0 );
+	CategoryList *pCatList=_pCfg->getCategoryList();
+    for(Category *pCat=pCatList->first(); pCat; pCat=pCatList->next()) {
+        if( pCat->isIncome() )
+            catList->insertItem( pCat->getName() );
+    }
+    catList->setCurrentItem( 0 );
+
 	typeList->clear();
 	typeList->insertItem( tr( "Written Check" ) );
 	typeList->insertItem( tr( "Automatic Payment" ) );

@@ -50,13 +50,14 @@ FileSysInfo::FileSysInfo( QWidget *parent, const char *name )
 
     storage = new StorageInfo( this );
     connect( storage, SIGNAL( disksChanged() ), this, SLOT( disksChanged() ) );
-  
+
     lines.setAutoDelete(TRUE);
 
     rebuildDisks = TRUE;
     updateMounts();
     startTimer( 5000 );
 }
+
 
 void FileSysInfo::timerEvent(QTimerEvent*)
 {
@@ -66,31 +67,22 @@ void FileSysInfo::timerEvent(QTimerEvent*)
 void FileSysInfo::updateMounts()
 {
     storage->update();
-    
+
     if ( rebuildDisks )
     {
-        // Cannot auto delete QDict<MountInfo> disks because it seems to delete
-        // the filesystem object as well causing a segfault
-        MountInfo *mi; 
-        for ( QDictIterator<MountInfo> delit(disks); delit.current(); ++delit )
-        {
-            mi = delit.current();
-            mi->fs = 0x0;
-            delete mi;
-        }
         disks.clear();
         lines.clear();
-        
+
         delete vb;
         vb = new QVBoxLayout( container/*, n > 3 ? 1 : 5*/ );
 
         bool frst=TRUE;
-    
+
         FileSystem *fs;
         for ( QListIterator<FileSystem> it(storage->fileSystems()); it.current(); ++it )
         {
             fs = it.current();
-        
+
             if ( !frst )
             {
                 QFrame *f = new QFrame( container );
@@ -100,7 +92,7 @@ void FileSysInfo::updateMounts()
                 f->show();
             }
             frst = FALSE;
-           
+
             MountInfo *mi = new MountInfo( fs, container );
             vb->addWidget( mi );
             disks.insert( fs->path(), mi );
@@ -126,7 +118,7 @@ void FileSysInfo::updateMounts()
         for (QDictIterator<MountInfo> i(disks); i.current(); ++i)
             i.current()->updateData();
     }
-    
+
     rebuildDisks = FALSE;
 }
 
@@ -145,7 +137,7 @@ MountInfo::MountInfo( FileSystem *filesys, QWidget *parent, const char *name )
 
     fs = filesys;
     title = fs->name();
-    
+
     data = new GraphData();
     graph = new BarGraph( this );
     graph->setFrameStyle( QFrame::Panel | QFrame::Sunken );
@@ -163,7 +155,6 @@ MountInfo::MountInfo( FileSystem *filesys, QWidget *parent, const char *name )
 MountInfo::~MountInfo()
 {
     delete data;
-    delete fs;
 }
 
 void MountInfo::updateData()

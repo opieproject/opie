@@ -29,6 +29,7 @@
 #ifndef CBINFO_H
 #define CBINFO_H
 
+#include <qwidget.h>
 #include <qlist.h>
 #include <qstring.h>
 
@@ -63,12 +64,25 @@ class CBInfo
 		void setNotes( const QString &notes )			{ nt = notes; }
 		void setStartingBalance( float startbal )		{ sb = startbal; }
 
+        // write
 		void     write();
 
+        // transactions
 		TranInfoList *transactions()		const { return tl; }
-		TranInfo     *findTransaction( const QString &, const QString &, const QString & );
-		void           addTransaction( TranInfo * );
-		void           removeTransaction( TranInfo * );
+		TranInfo *findTransaction( const QString & );
+		void addTransaction( TranInfo * );
+		void removeTransaction( TranInfo * );
+
+        // lastTab
+        void setLastTab(const QString &sLastTab) { _sLastTab=sLastTab; }
+        QString &getLastTab() { return(_sLastTab); }
+
+        // getNextNumber
+        int getNextNumber() { return( ++_last ); }
+
+        // sortOrder
+        void setSortOrder(const QString &sSortOrder) { _sSortOrder=sSortOrder; }
+        QString &getSortOrder() { return(_sSortOrder); }
 
 	private:
 		QString n;
@@ -81,6 +95,10 @@ class CBInfo
 		QString nt;
 		float   sb;
 		float   b;
+        QString _sLastTab;
+        int _first;
+        int _last;
+        QString _sSortOrder;
 
 		TranInfoList *tl;
 

@@ -34,7 +34,7 @@ QString tempstr;
 
 TranInfo::TranInfo( int id, const QString &desc, const QDate &date, bool withdrawal,
 					const QString &type, const QString &category, float amount,
-					float fee, const QString &number, const QString &notes )
+					float fee, const QString &number, const QString &notes, int next )
 {
 	i = id;
 	d = desc;
@@ -46,6 +46,7 @@ TranInfo::TranInfo( int id, const QString &desc, const QDate &date, bool withdra
 	f = fee;
 	cn = number;
 	n = notes;
+    _next=next;
 }
 
 TranInfo::TranInfo( Config config, int entry )
@@ -111,32 +112,37 @@ TranInfo::TranInfo( Config config, int entry )
 		stramount = config.readEntry( "TransactionFee", "0.00" );
 		f = stramount.toFloat( &ok );
 
-		// Transaction number
+        // Transaction number
 		cn = config.readEntry( "CheckNumber", "" );
 
 		// Notes
 		n = config.readEntry( "Comments", "" );
+
+        // next
+        _next = config.readNumEntry("Next", -1);
 	}
 }
 
+// --- datestr ----------------------------------------------------------------
 const QString &TranInfo::datestr()
 {
-	tempstr = QString::number( td.year() );
-	tempstr.append( '/' );
-	int tempfield = td.month();
-	if ( tempfield < 10 ) tempstr.append( '0' );
-	tempstr.append( QString::number( tempfield ) );
-	tempstr.append( '/' );
-	tempfield = td.day();
-	if ( tempfield < 10 ) tempstr.append( '0' );
-	tempstr.append( QString::number( tempfield ) );
-
-	return( tempstr );
+    int y=td.year();
+    y= y>=2000 && y<=2099 ? y-2000 : y;
+    tempstr.sprintf( "%02d/%02d/%02d", y ,td.month(), td.day() );
+    return( tempstr );
 }
 
-void TranInfo::write( Config *config, int entry )
+// --- getIdStr ---------------------------------------------------------------
+const QString &TranInfo::getIdStr()
 {
-	config->setGroup( QString::number( entry ) );
+    tempstr.sprintf("%04d", i);
+    return( tempstr );
+}
+
+// --- write ------------------------------------------------------------------
+void TranInfo::write( Config *config )
+{
+	config->setGroup( QString::number( id() ) );
 
 	config->writeEntry( "Description", d );
 
@@ -169,10 +175,11 @@ void TranInfo::write( Config *config, int entry )
 	tempstr.setNum( f, 'f', 2 );
 	config->writeEntry( "TransactionFee", tempstr );
 
-	config->writeEntry( "CheckNumber", cn );
-
+    config->writeEntry( "CheckNumber", cn );
 	config->writeEntry( "Comments", n );
+    config->writeEntry( "Next", _next );
 }
+
 
 int TranInfoList::compareItems( QCollection::Item item1, QCollection::Item item2 )
 {
@@ -187,4 +194,19 @@ int TranInfoList::compareItems( QCollection::Item item1, QCollection::Item item2
 	else if ( d1 > d2 )
 		r = 1;
 	return( r );
+}
+
+// --- toString ---------------------------------------------------------------
+QString TranInfo::toString()
+{
+    QString ret;
+    ret.sprintf("(%4d) %10s %4s %-10s %5.2f %5.2f",
+        id(),
+        (const char *)datestr(),
+        (const char *)number(),
+        (const char *)desc(),
+        (withdrawal() ? -1 : 1) * amount(),
+        fee()
+    );
+    return(ret);
 }

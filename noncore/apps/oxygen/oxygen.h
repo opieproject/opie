@@ -13,12 +13,13 @@ class QStringList;
 
 class Oxygen : public QMainWindow
 {
-	Q_OBJECT
+    Q_OBJECT
 	
-    public:
-		Oxygen();
-
-	private:
-		void loadNames();
-		QStringList names;
+  public:
+    Oxygen(QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
+    static QString appName() { return QString::fromLatin1("oxygen"); }
+    
+ private:
+    void loadNames();
+    QStringList names;
 };

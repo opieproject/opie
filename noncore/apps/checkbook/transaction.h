@@ -40,20 +40,20 @@ class QRadioButton;
 class QString;
 class QWidget;
 class TranInfo;
+class Cfg;
 
 class Transaction : public QDialog
 {
 	Q_OBJECT
 
 	public:
-		Transaction( QWidget * = 0x0, const QString & = 0x0, TranInfo * = 0x0,
-					 const QString & = "$" );
+		Transaction( QWidget *, const QString &, TranInfo *, Cfg *);
 		~Transaction();
 
 	private:
 		TranInfo *tran;
 
-		QString currencySymbol;
+		Cfg *_pCfg;
 
 		QRadioButton   *withBtn;
 		QRadioButton   *depBtn;

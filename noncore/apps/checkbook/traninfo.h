@@ -40,10 +40,13 @@ class TranInfo
 		TranInfo( int = 0, const QString & = 0x0, const QDate & = QDate::currentDate(),
 				  bool = TRUE, const QString & = 0x0, const QString & = 0x0,
 				  float = 0.0, float = 0.0,
-				  const QString & = 0x0, const QString & = 0x0 );
+				  const QString & = 0x0, const QString & = 0x0, int =-1 );
 		TranInfo( Config, int );
 
+        // getters
 		int            id()			const { return i; }
+        const QString &getIdStr();
+
 		const QString &desc()		const { return d; }
 		const QDate   &date()		const { return td; }
 		const QString &datestr();
@@ -54,8 +57,10 @@ class TranInfo
 		float          fee()		const { return f; }
 		const QString &number()	const { return cn; }
 		const QString &notes()		const { return n; }
+        int getNext()   { return(_next); }
 
-		void setDesc( const QString &desc )		{ d = desc; }
+        // setters
+        void setDesc( const QString &desc )		{ d = desc; }
 		void setDate( const QDate &date )			{ td = date; }
 		void setWithdrawal( bool withdrawal )		{ w = withdrawal; }
 		void setType( const QString &type )		{ t = type; }
@@ -64,8 +69,13 @@ class TranInfo
 		void setFee( float fee )					{ f = fee; }
 		void setNumber( const QString &num )		{ cn = num; }
 		void setNotes( const QString &notes )		{ n = notes; }
+        void setNext(int next) { _next=next; }
 
-		void write( Config *, int );
+        // write
+        void write( Config * );
+
+        // toString
+        QString toString();
 
 	private:
 		int     i;
@@ -78,6 +88,7 @@ class TranInfo
 		float   f;
 		QString cn;
 		QString n;
+        int     _next;
 };
 
 class TranInfoList : public QList<TranInfo>

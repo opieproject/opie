@@ -19,14 +19,7 @@
 **********************************************************************/
 #include "tableviewer.h"
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-int main( int argc, char ** argv )
-{
-    QPEApplication a( argc, argv );
+OPIE_EXPORT_APP( OApplicationFactory<TableViewerWindow> )
 
-    TableViewerWindow mw;
-    mw.setCaption( TableViewerWindow::tr("Table Viewer") );
-    a.showMainWidget(&mw);
-
-    return a.exec();
-}

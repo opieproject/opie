@@ -1,8 +1,7 @@
 /*
                              This file is part of the OPIE Project
-
-               =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
-             .=l.                                Dan Williams <drw@handhelds.org>
+               =.
+             .=l.            Copyright (c)  2002 Dan Williams <drw@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This file is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or modify it under
@@ -27,12 +26,51 @@
 
 */
 
-#include "mainwin.h"
+#include "tabledef.h"
 
-#include <opie/oapplicationfactory.h>
+#include <qstring.h>
+#include <qpe/resource.h>
 
-/* be less intrusive for translation -zecke */
-extern QString LOCAL_SERVER;
-extern QString LOCAL_IPKGS;
+// --- ColumnDef --------------------------------------------------------------
+ColumnDef::ColumnDef(const char *sName, ColumnType type, const char *sNewValue)
+{
+    _sName=sName;
+    _type=type;
+    _sNewValue=sNewValue;
+}
 
-OPIE_EXPORT_APP( OApplicationFactory<MainWindow> )
+
+// --- addColumnValue ---------------------------------------------------------
+void ColumnDef::addColumnValue(const QString &sValue)
+{
+    if( (_type & 0x00ffffff) !=typeList )
+        qDebug("Column %s is not a list", (const char *)_sName);
+    else
+        _valueList.append(sValue);
+}
+void ColumnDef::addColumnValue(const char *sValue)
+{
+    if( (_type & 0x00ffffff)!=typeList )
+        qDebug("Column %s is not a list", (const char *)_sName);
+    else
+        _valueList.append(sValue);
+}
+
+// --- TableDef ---------------------------------------------------------------
+TableDef::TableDef(const char *sName)
+{
+    _sName=sName;
+    _vColumns.setAutoDelete(TRUE);
+}
+
+
+// --- ~TableDef --------------------------------------------------------------
+TableDef::~TableDef()
+{
+}
+
+// --- addColumnDef -----------------------------------------------------------
+void TableDef::addColumnDef(ColumnDef *pDef)
+{
+    _vColumns.append(pDef);
+}

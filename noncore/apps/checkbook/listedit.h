@@ -1,8 +1,7 @@
 /*
                              This file is part of the OPIE Project
-
-               =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
-             .=l.                                Dan Williams <drw@handhelds.org>
+               =.
+             .=l.            Copyright (c)  2002 Dan Williams <drw@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This file is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or modify it under
@@ -27,12 +26,53 @@
 
 */
 
-#include "mainwin.h"
+#ifndef LISTEDIT_H
+#define LISTEDIT_H
 
-#include <opie/oapplicationfactory.h>
+#include <qwidget.h>
+#include "tabledef.h"
+class QListView;
+class QLineEdit;
+class QListViewItem;
+class QPoint;
+class QWidgetStack;
+class QComboBox;
 
-/* be less intrusive for translation -zecke */
-extern QString LOCAL_SERVER;
-extern QString LOCAL_IPKGS;
+class ListEdit : public QWidget, public TableDef
+{
+	Q_OBJECT
 
-OPIE_EXPORT_APP( OApplicationFactory<MainWindow> )
+	public:
+		ListEdit( QWidget *, const char *sName);
+		virtual ~ListEdit();
+
+		QListView *_typeTable;
+        QLineEdit *_typeEdit;
+        QWidgetStack *_stack;
+        QComboBox *_box;
+        QListViewItem *_currentItem;
+        int _currentColumn;
+        
+        // resolves dups and empty entries
+        void fixTypes();
+        void fixTypes(int iColumn);
+
+        // stores content in string list
+        void storeInList(QStringList &lst);
+
+        // adds a column definition
+        virtual void addColumnDef(ColumnDef *pDef);
+
+        // adds data to table
+        void addData(QStringList &lst);
+
+
+    public slots:
+        void slotClick(QListViewItem *, const QPoint &pnt, int col);
+        void slotEditChanged(const QString &);
+        void slotAdd();
+        void slotDel();
+        void slotActivated(const QString &);
+};
+
+#endif

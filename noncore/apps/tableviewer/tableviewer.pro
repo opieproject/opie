@@ -1,6 +1,4 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on debug
-DESTDIR		= $(OPIEDIR)/bin
+CONFIG		= qt warn_on debug quick-app
 SUBDIRS		= db ui
 HEADERS		= tableviewer.h \
 		  xmlencodeattr.h \

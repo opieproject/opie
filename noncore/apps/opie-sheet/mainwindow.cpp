@@ -43,8 +43,8 @@
 #define DEFAULT_NUM_COLS (26*3)
 #define DEFAULT_NUM_SHEETS 3
 
-MainWindow::MainWindow()
-           :QMainWindow()
+MainWindow::MainWindow(QWidget *parent, const char* n, WFlags fl)
+           :QMainWindow(parent, n, fl)
 {
   // initialize variables
   documentModified=FALSE;

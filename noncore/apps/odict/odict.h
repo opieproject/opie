@@ -29,12 +29,12 @@ class ODict : public QMainWindow
 	Q_OBJECT
 	
     public:
-		ODict();
+		ODict(QWidget* parent = 0, const char* name = 0, WFlags fl = 0  );
 		QVBox *vbox;
 		QTextBrowser *browser_top,
 					 *browser_bottom;
 		DingWidget *ding;
-
+		static QString appName() { return QString::fromLatin1("odict"); }
 	private:
 		QPopupMenu *help, *settings, *parameter;
 		QMenuBar *menu;
