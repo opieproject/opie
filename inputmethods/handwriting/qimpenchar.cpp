@@ -346,7 +346,7 @@ bool QIMPenCharSet::load( const QString &fn, Domain d )
 		if ( file.status() == IO_Ok )
 			ok = TRUE;
 	}
-
+	setHidden ( false ); 
 	return ok;
 }
 
@@ -357,6 +357,9 @@ bool QIMPenCharSet::save( Domain d )
 {
 	if ( filename( d ).isEmpty() )
 		return FALSE;
+
+	if ( hidden() )
+		return TRUE;
 
 	bool ok = FALSE;
 

@@ -48,6 +48,9 @@ QIMPenProfile::QIMPenProfile( const QString &fn )
     if ( s == "ToggleCases" )
 	pstyle = ToggleCases;
 
+    QString t = config.readEntry( "Mono", "Dual" );
+    pmono = (QString::fromLatin1("Mono") == t );
+
     msTimeout = config.readNumEntry( "MultiTimeout", 500 );
 
     // Read user configuration
@@ -119,7 +122,7 @@ void QIMPenProfile::loadData()
     // uppercase latin1
     QIMPenCharSet *cs = 0;
     s = config.readEntry( "Uppercase" );
-    if ( !s.isEmpty() ) {
+    if ( !s.isEmpty() && !mono() ) {
 	cs = new QIMPenCharSet( baseDir + "qimpen/" + s );
 	cs->load( Global::applicationFileName("qimpen",s), QIMPenCharSet::User );
 	if ( !cs->isEmpty() ) {
@@ -133,6 +136,26 @@ void QIMPenProfile::loadData()
     // lowercase latin1
     s = config.readEntry( "Lowercase" );
     if ( !s.isEmpty() ) {
+	if ( mono() ) {
+		cs = new QIMPenCharSet ( baseDir + "qimpen/" + s );
+		cs->load( Global::applicationFileName("qimpen",s), QIMPenCharSet::User );
+		if ( !cs->isEmpty() ) {
+		    cs->setTitle( cs->title().upper() );
+		    cs->setType( QIMPenCharSet::Upper );
+		    cs->setHidden ( true );
+		    QIMPenCharIterator it( cs->characters() );
+		    for ( ; it.current(); ++it ) {
+			uint ch = it.current()->character();
+			if ( ch >= 'a' && ch <= 'z' )
+			    it.current()->setCharacter( QChar(ch).upper() );
+			}	
+		    if ( combining )
+			combining->addCombined( cs );
+		    sets.append( cs );
+		} else {
+		    delete cs;
+		}
+	}
 	cs = new QIMPenCharSet( baseDir + "qimpen/" + s );
 	cs->load( Global::applicationFileName("qimpen",s), QIMPenCharSet::User );
 	if ( !cs->isEmpty() ) {

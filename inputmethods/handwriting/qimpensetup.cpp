@@ -401,7 +401,8 @@ void QIMPenEdit::setProfile( QIMPenProfile *p )
     charSetCombo->clear();
     QIMPenCharSetIterator it( profile->charSets() );
     for ( ; it.current(); ++it ) {
-        charSetCombo->insertItem( it.current()->description() );
+	if ( ! it.current()->hidden() )
+	    charSetCombo->insertItem( it.current()->description() );
     }
     selectCharSet( 0 );
     charList->setFocus();

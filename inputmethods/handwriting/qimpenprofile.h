@@ -33,6 +33,7 @@ public:
 
     enum Style { ToggleCases, BothCases };
     Style style() const { return pstyle; }
+    bool mono() const { return pmono; }
     void setStyle( Style s );
 
     bool canSelectStyle() const { return tstyle; }
@@ -65,6 +66,7 @@ private:
     bool tstyle;
     int msTimeout;
     bool wordMatch;
+    bool pmono;
 };
 
 #endif
