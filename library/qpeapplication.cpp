@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.4 2002-02-10 13:22:54 jeremy Exp $
+** $Id: qpeapplication.cpp,v 1.5 2002-03-22 18:17:23 harlekin Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -1279,9 +1279,9 @@ void QPEApplication::prepareForTermination(bool willrestart)
     if ( willrestart ) {
 	// Draw a big wait icon, the image can be altered in later revisions
 //	QWidget *d = QApplication::desktop();
-	QImage img = Resource::loadImage( "wait" );
+	QImage img = Resource::loadImage( "launcher/new_wait" );
 	QPixmap pix;
-	pix.convertFromImage(img.smoothScale(3*img.width(), 3*img.height()));
+	pix.convertFromImage(img.smoothScale(1*img.width(), 1*img.height()));
 	QLabel *lblWait = new QLabel(0, "wait hack!", QWidget::WStyle_Customize |
 				  QWidget::WStyle_NoBorder | QWidget::WStyle_Tool );
 	lblWait->setPixmap( pix );
