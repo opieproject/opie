@@ -118,7 +118,7 @@ QString DateBookEvent::differDate( QDate date ) {
         //returnText += tr( "tomorrow" );
     } else {
         //returnText += tr( "in %1 days" ).arg( differDate );
-        returnText += "   [ " + date.dayName( date.dayOfWeek() ) + " ] ";
+        returnText += "   [ " + tr ( date.dayName( date.dayOfWeek() ) ) + " ] ";
     }
     returnText += "</b></font>";
     return returnText;
