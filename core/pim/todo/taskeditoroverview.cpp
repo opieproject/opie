@@ -65,7 +65,7 @@ TaskEditorOverView::TaskEditorOverView( QWidget* parent,  const char* name, WFla
     QWidget *container = new QWidget( sv->viewport() );
     sv->addChild( container );
 
-    QGridLayout *layout = new QGridLayout( container, 7, 2, 4, 4 ); 
+    QGridLayout *layout = new QGridLayout( container, 7, 2, 4, 4 );
 
     // Description
     QLabel *label = new QLabel( tr( "Description:" ), container );
@@ -119,7 +119,7 @@ TaskEditorOverView::TaskEditorOverView( QWidget* parent,  const char* name, WFla
     label = new QLabel( tr( "Notes:" ), container );
     layout->addWidget( label, 5, 0 );
     QWhatsThis::add( label, tr( "Enter any additional information about this task here." ) );
-    mleNotes = new QMultiLineEdit( this );
+    mleNotes = new QMultiLineEdit( container );
     mleNotes->setWordWrap( QMultiLineEdit::WidgetWidth );
     layout->addMultiCellWidget( mleNotes, 6, 6, 0, 1 );
     QWhatsThis::add( mleNotes, tr( "Enter any additional information about this task here." ) );
@@ -165,7 +165,7 @@ void TaskEditorOverView::save( OTodo &todo )
         todo.setCategories( arr );
     }
 
-    // Recurrence - don't need to save here...    
+    // Recurrence - don't need to save here...
 
     // Notes
     todo.setDescription( mleNotes->text() );
