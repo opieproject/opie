@@ -13,11 +13,14 @@
  * ToDo:
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.10 2003-04-13 18:07:10 zecke Exp $
+ * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.10.4.1 2003-06-02 13:37:49 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_vcard.cpp,v $
- * Revision 1.10  2003-04-13 18:07:10  zecke
+ * Revision 1.10.4.1  2003-06-02 13:37:49  eilers
+ * Fixing memory leak
+ *
+ * Revision 1.10  2003/04/13 18:07:10  zecke
  * More API doc
  * QString -> const QString&
  * QString = 0l -> QString::null
@@ -151,6 +154,7 @@ bool OContactAccessBackend_VCard::save()
 		cleanVObject( vo );
 	}
 	cleanStrTbl();
+	deleteVObject( obj );
 
 	m_dirty = false;
 	return true;
