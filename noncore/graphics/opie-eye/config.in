@@ -1,9 +1,9 @@
   config OPIE_EYE
     boolean "opie-eye The Image Viewer and Browser"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI
+    depends on ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI
     
   config OPIE_EYE_SLAVE
     boolean
     default "y" if OPIE_EYE
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI
+    depends on ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI
