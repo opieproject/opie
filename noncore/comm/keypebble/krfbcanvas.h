@@ -32,6 +32,8 @@ public slots:
   void refresh();
   void bell();
   void sendCtlAltDel(void);
+  void markRightClick(void);
+  void markDoubleClick(void);
 
 protected:
   virtual void keyPressEvent( QKeyEvent * );
@@ -48,6 +50,8 @@ protected slots:
   void clipboardChanged();
 
 private:
+  int nextRightClick;
+  int nextDoubleClick;
   KRFBConnection *connection_;
   QString password;
   bool loggedIn_;

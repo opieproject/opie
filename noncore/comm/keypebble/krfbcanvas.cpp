@@ -10,6 +10,7 @@
 #include <qclipboard.h>
 #include <qaction.h>
 #include <qpixmap.h>
+#include <qpoint.h>
 #include <qapplication.h>
 #include <qmainwindow.h>
 #include <qiconset.h>
@@ -27,6 +28,9 @@ KRFBCanvas::KRFBCanvas( QWidget *parent, const char *name )
 
     viewport()->setFocusPolicy( QWidget::StrongFocus );
     viewport()->setFocus();
+
+    nextRightClick=0;
+    nextDoubleClick=0;
 }
 
 KRFBCanvas::~KRFBCanvas()
@@ -124,14 +128,35 @@ void KRFBCanvas::viewportUpdate( int x, int y, int w, int h )
 
 void KRFBCanvas::contentsMousePressEvent( QMouseEvent *e )
 {
-  if ( loggedIn_ )
+
+  if (nextDoubleClick) {
+    connection_->buffer()->mouseEvent( &QMouseEvent(QEvent::MouseButtonPress, e->pos(),LeftButton,LeftButton));
+    connection_->buffer()->mouseEvent( &QMouseEvent(QEvent::MouseButtonRelease, e->pos(),LeftButton,0));
+    connection_->buffer()->mouseEvent( &QMouseEvent(QEvent::MouseButtonRelease, e->pos(),LeftButton,0));
+    connection_->buffer()->mouseEvent( &QMouseEvent(QEvent::MouseButtonPress, e->pos(),NoButton,NoButton));
+    connection_->buffer()->mouseEvent( &QMouseEvent(QEvent::MouseButtonRelease, e->pos(),NoButton,0));
+  } if (nextRightClick) {
+    connection_->buffer()->mouseEvent( &QMouseEvent(QEvent::MouseButtonPress, e->pos(),RightButton,RightButton));
+    connection_->buffer()->mouseEvent( &QMouseEvent(QEvent::MouseButtonRelease, e->pos(),RightButton,0));
+    connection_->buffer()->mouseEvent( &QMouseEvent(QEvent::MouseButtonPress, e->pos(),NoButton,NoButton));
+    connection_->buffer()->mouseEvent( &QMouseEvent(QEvent::MouseButtonRelease, e->pos(),NoButton,0));
+  } else if ( loggedIn_ )
     connection_->buffer()->mouseEvent( e );
+
+  qDebug("Press");
+  qDebug(QString::number(e->type()==QEvent::MouseButtonPress));
 }
 
 void KRFBCanvas::contentsMouseReleaseEvent( QMouseEvent *e )
 {
-  if ( loggedIn_ )
+  if ( loggedIn_ && !nextRightClick && !nextDoubleClick) {
     connection_->buffer()->mouseEvent( e );
+  }
+
+  nextRightClick=0;
+  nextDoubleClick=0;
+  qDebug("Release");
+  qDebug(QString::number(e->button()));
 }
 
 void KRFBCanvas::contentsMouseMoveEvent( QMouseEvent *e )
@@ -167,7 +192,6 @@ void KRFBCanvas::clipboardChanged()
 void KRFBCanvas::sendCtlAltDel( void)
 {
 
-		qDebug("Here");
   if ( loggedIn_ ) {
     connection_->buffer()->keyPressEvent( &QKeyEvent(QEvent::KeyPress,Qt::Key_Control, 0,0));
     connection_->buffer()->keyPressEvent( &QKeyEvent(QEvent::KeyPress,Qt::Key_Alt, 0,0));
@@ -176,4 +200,14 @@ void KRFBCanvas::sendCtlAltDel( void)
 		connection_->buffer()->keyPressEvent( &QKeyEvent(QEvent::KeyRelease,Qt::Key_Alt, 0,0));
     connection_->buffer()->keyPressEvent( &QKeyEvent(QEvent::KeyRelease,Qt::Key_Delete, 0,0));
 	}
+}
+
+void KRFBCanvas::markDoubleClick( void)
+{
+  nextRightClick=1;
+}
+
+void KRFBCanvas::markRightClick( void)
+{
+  nextRightClick=1;
 }

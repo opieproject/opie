@@ -183,6 +183,18 @@ void KVNC::setupActions()
 	    this, SLOT( closeConnection() ) );
     disconnectAction->addTo( cornerMenu );
     disconnectAction->setEnabled( false );
+
+    doubleClickAction = new QAction( tr("Next Click is Double Click"), QString::null, 0, 0 );
+    connect( doubleClickAction, SIGNAL(activated()),
+	    canvas, SLOT( markDoubleClick() ) );
+    doubleClickAction->addTo( cornerMenu );
+    doubleClickAction->setEnabled( false );
+
+    rightClickAction = new QAction( tr("Next Click is Right Click"), QString::null, 0, 0 );
+    connect( rightClickAction, SIGNAL(activated()),
+	    canvas, SLOT( markRightClick() ) );
+    rightClickAction->addTo( cornerMenu );
+    rightClickAction->setEnabled( false );
 }
 
 void KVNC::toggleFullScreen()
@@ -238,6 +250,8 @@ void KVNC::connected()
     ctlAltDelAction->setEnabled(true);
     disconnectAction->setEnabled( true );
     fullScreenAction->setEnabled( true );
+    doubleClickAction->setEnabled( false );
+    rightClickAction->setEnabled( true );
 		stack->raiseWidget(canvas);
 	 	bar->hide();
 }
@@ -258,6 +272,8 @@ void KVNC::disconnected()
     ctlAltDelAction->setEnabled(false);
     disconnectAction->setEnabled( false );
     fullScreenAction->setEnabled( false );
+    doubleClickAction->setEnabled( false );
+    rightClickAction->setEnabled( false );
 		stack->raiseWidget(bookmarkSelector);
 	 	bar->show();
 }
