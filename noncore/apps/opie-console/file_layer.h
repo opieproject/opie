@@ -2,7 +2,6 @@
 #define OPIE_FILE_LAYER_H
 
 #include "io_layer.h"
-#include <opie/oprocess.h>
 
 class QFile;
 /**
@@ -25,11 +24,6 @@ public slots:
      */
     virtual void sendFile( const QString& file ) = 0;
     virtual void sendFile( const QFile& ) = 0;
-
-private slots:
-    void SzRecievedStdout(OProcess *, char *, int);
-    void SzRecievedStderr(OProcess *, char *, int);
-    void recievedStdin(QByteArray &);
 
 signals:
     /**
@@ -54,7 +48,6 @@ protected:
 
 private:
     IOLayer* m_layer;
-    OProcess *proc;
 
 };
 
