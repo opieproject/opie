@@ -1,0 +1,4 @@
+  config CONFEDIT
+    boolean "oseatch"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
