@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>KJezzball</name>
     <message>
@@ -111,7 +112,15 @@ Try to reduce total space by 75%.
 
 This program is distributed under
 the terms of the GPL v2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geschrieben von: Stefan Schimanski
+Portiert von: Martin Imobersteg
+
+Klicken um Wände zu erzeugen.
+Leertaste um Wandrichtung zu wechseln.
+Versuchen sie den Platz um 75% zu verkleinern
+
+Dieses Programm wird unter den 
+Bedingungen der GPL v2 vertrieben.</translation>
     </message>
 </context>
 </TS>

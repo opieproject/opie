@@ -707,7 +707,8 @@ Don&apos;t enable this unless you really need it.</source>
     <message>
         <source>Selecting this option might cause some weird problems with the X-server and applications while kppp is connected. Don&apos;t use it until you know what you are doing!
 For more information take a look at the handbook (or help) in the section &quot;Frequently asked questions&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Option zu wählen könnte merkwürdige Probleme mit dem X-Server und Anwendungen produzieren während kppp verbunden ist. Tun Sie es nicht, wenn Sie nicht wissen, was Sie hier tun!
+Für mehr information schauen Sie in das Handbuch (oder die Hilfe) unter der Sektion &quot;Regelmässig gestellte Fragen&quot;.</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -742,11 +743,11 @@ Bitte Passwort eingeben</translation>
     <name>ModemWidget</name>
     <message>
         <source>Modem &amp;name:</source>
-        <translation>Modem &amp;name:</translation>
+        <translation>Modem &amp;Name:</translation>
     </message>
     <message>
         <source>Modem de&amp;vice:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem &amp;Gerät:</translation>
     </message>
     <message>
         <source>This specifies the serial port your modem is attached 
@@ -756,23 +757,29 @@ to. On Linux/x86, typically this is either /dev/ttyS0
 If you have an internal ISDN card with AT command
 emulation (most cards under Linux support this), you
 should select one of the /dev/ttyIx devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies gibt den seriellen Port an, an dem das Modem angeschlossen
+ist. Auf Linux/x86 ist das typischer Weise entweder /dev/ttyS0
+(COM1 unter DOS) oder /dev/ttyS1 (COM2 unter DOS).
+
+Wenn Sie eine interner ISDN Karte mit AT Kommando Emulation
+haben (die meisten Karten unter Linux unterstützen dies), sollten
+eines der /dev/ttyIx Geräte auswählen.</translation>
     </message>
     <message>
         <source>&amp;Flow control:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fluss Kontrolle:</translation>
     </message>
     <message>
         <source>Hardware [CRTSCTS]</source>
-        <translation type="unfinished"></translation>
+        <translation>Hardware [CRTSCTS]</translation>
     </message>
     <message>
         <source>Software [XON/XOFF]</source>
-        <translation type="unfinished"></translation>
+        <translation>Software [XON/XOFF]</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine</translation>
     </message>
     <message>
         <source>&lt;p&gt;Specifies how the serial port and modem
@@ -780,11 +787,15 @@ communicate. You should not change this unless
 you know what you are doing.
 
 &lt;b&gt;Default&lt;/b&gt;: CRTSCTS</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Gibt an, wie der serielle Port und das Modem
+kommunizieren. Sollte nicht geändert werden, wenn
+man nicht weiß, was man tut.
+
+&lt;b&gt;Standard&lt;/b&gt;: CRTSCTS</translation>
     </message>
     <message>
         <source>&amp;Line termination:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zeilenende:</translation>
     </message>
     <message>
         <source>&lt;p&gt;Specifies how AT commands are sent to your
@@ -794,11 +805,18 @@ to the init string, you should try different
 settings here
 
 &lt;b&gt;Default&lt;/b&gt;: CR/LF</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Gibt an, wie AT Kommandos zum Modem
+gesendet werden. Normaler Weise ist der Standard
+&lt;i&gt;CR/LF&lt;/i&gt; völlig okay. Wenn das Modem nicht auf
+die Initialisierung antwortet, sollten hier andere 
+Einstellungen probiert werden.
+
+&lt;b&gt;Standardt&lt;/b&gt;: CR/LF</translation>
     </message>
     <message>
         <source>Co&amp;nnection speed:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Verbindungs-
+geschwindigkeit:</translation>
     </message>
     <message>
         <source>Specifies the speed your modem and the serial
@@ -811,7 +829,7 @@ that your serial port supports higher speeds).</source>
     </message>
     <message>
         <source>&amp;Use lock file</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Benutze Sperrdatei</translation>
     </message>
     <message>
         <source>&lt;p&gt;To prevent other programs from accessing the
@@ -827,11 +845,11 @@ be done.
     </message>
     <message>
         <source>Modem timeout:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem Zeitüberschreitung:</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation>Sek</translation>
     </message>
     <message>
         <source>This specifies how long &lt;i&gt;kppp&lt;/i&gt; waits for a
@@ -902,16 +920,17 @@ problems with this, do not modify this setting.
     </message>
     <message>
         <source>Mod&amp;em Commands...</source>
-        <translation type="unfinished"></translation>
+        <translation>Mod&amp;em Kommandos...</translation>
     </message>
     <message>
         <source>Allows you to change the AT command for
 your modem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier kann man die AT Kommandos des
+Modems ändern.</translation>
     </message>
     <message>
         <source>&amp;Query Modem...</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem &amp;abfragen...</translation>
     </message>
     <message>
         <source>Most modems support the ATI command set to
@@ -1030,7 +1049,7 @@ you setup the modem</source>
     </message>
     <message>
         <source>Unable to create modem lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte Modem Sperrdatei nicht erzeugen.</translation>
     </message>
     <message>
         <source>Looking for modem...</source>
@@ -1102,83 +1121,86 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>Pre-init delay (sec/100):</source>
-        <translation type="unfinished"></translation>
+        <translation>Vor-Initial.-Verzögerung
+(Sek/100):</translation>
     </message>
     <message>
         <source>Initialization string %1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Initialisierung:</translation>
     </message>
     <message>
         <source>Post-init delay (sec/100):</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach-Initial. Verzögerung
+(Sek/100):</translation>
     </message>
     <message>
         <source>Dialing speed (sec/100):</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählgeschwindigkeit
+(Sek/100):</translation>
     </message>
     <message>
         <source>Init response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Init. Antwort:</translation>
     </message>
     <message>
         <source>No dial tone detection:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ohne Wählton Erkennung:</translation>
     </message>
     <message>
         <source>Dial string:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wähl-Zeichenkette:</translation>
     </message>
     <message>
         <source>Connect response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindungsantwort:</translation>
     </message>
     <message>
         <source>Busy response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Besetzt Antwort:</translation>
     </message>
     <message>
         <source>No carrier response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ohne Träger Antwort:</translation>
     </message>
     <message>
         <source>No dial tone response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ohne Wählton Antwort:</translation>
     </message>
     <message>
         <source>Hangup string:</source>
-        <translation type="unfinished"></translation>
+        <translation>Auflegezeichenkette:</translation>
     </message>
     <message>
         <source>Hangup response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Auflegeantwort:</translation>
     </message>
     <message>
         <source>Answer string:</source>
-        <translation type="unfinished"></translation>
+        <translation>Antwort Zeichenkette:</translation>
     </message>
     <message>
         <source>Ring response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Klingel Antwort:</translation>
     </message>
     <message>
         <source>Answer response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Antwort Reaktion:</translation>
     </message>
     <message>
         <source>Escape string:</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbruch Zeichenkette:</translation>
     </message>
     <message>
         <source>Escape response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbruch Antwort:</translation>
     </message>
     <message>
         <source>Guard time (sec/50):</source>
-        <translation type="unfinished"></translation>
+        <translation>Wächter Zeit (sec/50):</translation>
     </message>
     <message>
         <source>Volume off/low/high:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lautstärke aus/leise/laut:</translation>
     </message>
     <message>
         <source>Connected at:</source>
@@ -1202,23 +1224,23 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Getrennt</translation>
     </message>
     <message>
         <source>Byte</source>
-        <translation type="unfinished">Byte</translation>
+        <translation>ByteByte</translation>
     </message>
     <message>
         <source>KB</source>
-        <translation type="unfinished">KB</translation>
+        <translation>KBKB</translation>
     </message>
     <message>
         <source>MB</source>
-        <translation type="unfinished">MB</translation>
+        <translation>MBMB</translation>
     </message>
     <message>
         <source>GB</source>
-        <translation type="unfinished">GB</translation>
+        <translation>GBGB</translation>
     </message>
     <message>
         <source>Connecting to: </source>
@@ -1226,15 +1248,15 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>Online</source>
-        <translation type="unfinished"></translation>
+        <translation>Online</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Offline</translation>
     </message>
     <message>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Log</translation>
     </message>
     <message>
         <source>Connecting to: %1</source>
@@ -1242,7 +1264,7 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>Running pre-startup command...</source>
-        <translation type="unfinished"></translation>
+        <translation>Führe Vor-Startup Kommando aus...</translation>
     </message>
     <message>
         <source>Initializing modem...</source>
@@ -1250,7 +1272,7 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>Setting </source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellung</translation>
     </message>
     <message>
         <source>Setting speaker volume...</source>
@@ -1278,11 +1300,11 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>No Carrier</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Trägersignal</translation>
     </message>
     <message>
         <source>Scanning %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Untersuche %1</translation>
     </message>
     <message>
         <source>Saving %1</source>
@@ -1306,7 +1328,7 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>Hangup</source>
-        <translation type="unfinished"></translation>
+        <translation>Auflegen</translation>
     </message>
     <message>
         <source>Answer</source>
@@ -1314,7 +1336,7 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>ID %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ID %1</translation>
     </message>
     <message>
         <source>Password %1</source>
@@ -1342,7 +1364,7 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>Loop End %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Schleifen Ende %1</translation>
     </message>
     <message>
         <source>LoopEnd without matching Start! Line: %1</source>
@@ -1370,7 +1392,7 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>Scanning: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Untersuche: %1</translation>
     </message>
     <message>
         <source>Expecting: %1</source>
@@ -1382,7 +1404,7 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>Running startup command...</source>
-        <translation type="unfinished"></translation>
+        <translation>Führe Startup Kommando aus...</translation>
     </message>
     <message>
         <source>Done</source>
@@ -1390,9 +1412,8 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>pppd command + command-line arguments exceed 2024 characters in length.</source>
-        <translation type="unfinished">&lt;p&gt;Löscht das gewählte Gerät
-
-&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Vorsichtig verwenden !!!&lt;/b&gt;&lt;/font&gt;</translation>
+        <translation>pppd Kommando + Kommadozeilen Argumente 
+überschreiten 2024 Zeichen.</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Cannot find the PPP daemon!&lt;br&gt;Make sure that pppd is installed and that you have entered the correct path.&lt;/qt&gt;</source>
@@ -1412,7 +1433,7 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>&lt;qt&gt;Cannot create PAP/CHAP authentication&lt;br&gt;file &quot;%1&quot;&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Kann nicht PAP/CHAP Authentifikationsdatei&lt;br&gt;&quot;%1&quot; erzeugen&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>You must specify a telephone number!</source>

@@ -20,35 +20,35 @@
     </message>
     <message>
         <source>Reset string </source>
-        <translation type="unfinished"></translation>
+        <translation>Zurücksetzzeichenkette</translation>
     </message>
     <message>
         <source>Dialing prefix #1 </source>
-        <translation type="unfinished"></translation>
+        <translation>Wählpräfix #1</translation>
     </message>
     <message>
         <source>Dialing suffix #1 </source>
-        <translation type="unfinished"></translation>
+        <translation>Wählsuffix #1</translation>
     </message>
     <message>
         <source>Dialing prefix #2 </source>
-        <translation type="unfinished"></translation>
+        <translation>Wählpräfix #2</translation>
     </message>
     <message>
         <source>Dialing suffix #2 </source>
-        <translation type="unfinished"></translation>
+        <translation>Wählsuffix #2</translation>
     </message>
     <message>
         <source>Dialing prefix #3 </source>
-        <translation type="unfinished"></translation>
+        <translation>Wählpräfix #3</translation>
     </message>
     <message>
         <source>Dialing suffix #3 </source>
-        <translation type="unfinished"></translation>
+        <translation>Wählsuffix #3</translation>
     </message>
     <message>
         <source>Connect string </source>
-        <translation type="unfinished"></translation>
+        <translation>Zeichenkette bei Verbindung</translation>
     </message>
     <message>
         <source>Hang-up string </source>
@@ -68,11 +68,11 @@
     </message>
     <message>
         <source>DTR drop time (0=no) </source>
-        <translation type="unfinished"></translation>
+        <translation>DTR drop Zeit (0=keine)</translation>
     </message>
     <message>
         <source>Auto bps detect </source>
-        <translation type="unfinished"></translation>
+        <translation>Auto BPS Erkennung</translation>
     </message>
     <message>
         <source>No</source>
@@ -99,7 +99,7 @@
     </message>
     <message>
         <source>Or peer mac address</source>
-        <translation type="unfinished"></translation>
+        <translation>Oder mac Adresse des Partners</translation>
     </message>
 </context>
 <context>
@@ -190,11 +190,11 @@
     </message>
     <message>
         <source>Terminal Emulation:</source>
-        <translation type="unfinished">Terminal Emulation:</translation>
+        <translation>Terminal Emulation:</translation>
     </message>
     <message>
         <source>IO Layer:</source>
-        <translation type="unfinished"></translation>
+        <translation>IO Schicht:</translation>
     </message>
     <message>
         <source>Look</source>
@@ -407,7 +407,7 @@
     </message>
     <message>
         <source>The shell button launches the &quot;default&quot; profile. If there is none default values are taken</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Shell Knopf lädt das &quot;default&quot; Profil. Wenn es keines gibt, werden Standardwerte genommen</translation>
     </message>
     <message>
         <source>Transfer file...</source>
@@ -691,7 +691,7 @@
     </message>
     <message>
         <source>Special Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Spezial Tasten</translation>
     </message>
     <message>
         <source>Invalid profile</source>

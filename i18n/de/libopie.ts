@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Button</name>
     <message>
@@ -392,7 +393,7 @@ und</translation>
     </message>
     <message>
         <source>on </source>
-        <translation type="unfinished"></translation>
+        <translation>an</translation>
     </message>
 </context>
 <context>

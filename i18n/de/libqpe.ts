@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Categories</name>
     <message>
@@ -866,19 +867,19 @@ frei und versuchen Sie es noch einmal
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Could not find the application </source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte die Anwendung nicht finden</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Could not start the application </source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte die Anwendung nicht starten</translation>
     </message>
 </context>
 <context>

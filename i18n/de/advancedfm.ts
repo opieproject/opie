@@ -268,7 +268,7 @@ and all it&apos;s contents ?</source>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="unfinished">AdvancedFm :: </translation>
+        <translation>AdvancedFm :: </translation>
     </message>
     <message>
         <source> kB free</source>
