@@ -256,31 +256,30 @@ UIDArray OPimContactAccessBackend::sorted( const UIDArray& ar, bool asc, int sor
 
         contactPassed = true;
 
-	// Filter all Contacts which have any category
 	if ( (filter & OPimContactAccess::DoNotShowWithCategory) ? true : false ){
 		if ( !contact.categories().isEmpty() )
 			continue;
+	} else {
+
+		if ( (filter  & OPimContactAccess::FilterCategory) ? true : false ){
+			/* show category */
+			/* -1 == unfiled */
+			for ( uint cat_nu = 0; cat_nu < cat_count; ++cat_nu ) {
+				cat = categories[cat_nu];
+			
+				if ( cat == -1 ) { 
+					// We should search unfiled contacts. 
+					// Unfiled categories have no category set, thus continue if 
+					// this contact has no empty category.
+					if( !contact.categories().isEmpty() )
+						contactPassed = false;
+				} else if ( cat != 0 )
+					if ( !contact.categories().contains( cat ) )
+						contactPassed = false;
+			}
+			
+		}
 	}
-
-        /* show category */
-        /* -1 == unfiled */
-        for ( uint cat_nu = 0; cat_nu < cat_count; ++cat_nu ) {
-            cat = categories[cat_nu];
-
-	    if ( (filter  & OPimContactAccess::FilterCategory) ? true : false ){
-		    if ( cat == -1 ) { 
-			    // We should search unfiled contacts. 
-			    // Unfiled categories have no category set, thus continue if 
-			    // this contact has no empty category.
-			    if( !contact.categories().isEmpty() )
-				    contactPassed = false;
-		    } else if ( cat != 0 )
-			    if ( !contact.categories().contains( cat ) )
-				    contactPassed = false;
-	    }
-
-        }
-
         /*
          * If none of the Categories matched
          * continue

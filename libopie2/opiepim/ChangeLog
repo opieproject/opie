@@ -1,3 +1,5 @@
+2005-03.19 Stefan Eilers <stefan@eilers-online.net>
+	* Minor update for sorted(). Now ignoring any category search if "DoNotShowWithCategory" filter is activated.
 2005-03-18 Stefan Eilers <stefan@eilers-online.net>
 	* Rewrote generic sorted filter and added filter for "DoNotShowWithCategory", needed by addressbook (other filters need to be added!)
 2005-01-16 Stefan Eilers <stefan@eilers-online.net>
