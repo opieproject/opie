@@ -41,6 +41,8 @@
 // is replaced by fromLatin1() (eilers)
 #define __BUGGY_LOCAL8BIT_
 
+	char *regex_raw;
+	regex_t regex_c;
 
 using namespace Opie::DB;
 using namespace Opie::DB::Internal;
@@ -84,24 +86,27 @@ void OSQLiteDriver::setUrl( const QString& url ) {
 void OSQLiteDriver::setOptions( const QStringList& ) {
 }
 
-/*------------------------------------------------------------------/*
+/*
  * Functions to patch a regex search into sqlite
- * -----------------------------------------------------------------*/
+ */
 int sqliteRlikeCompare(const char *zPattern, const char *zString){
-	  regex_t regex;
 	int res;
-	if ( zPattern==NULL || zString==NULL ) {
-		printf("One of the args was null!\n");
+	if (regex_raw == NULL || (strcmp (zPattern, regex_raw) != 0)){
+		if (regex_raw != NULL) {
+		    free(regex_raw);
+		    regfree(&regex_c);
+		}
+		regex_raw = (char *)malloc(strlen(zPattern)+1);
+		strncpy(regex_raw, zPattern, strlen(zPattern)+1);
+		res = regcomp(&regex_c, zPattern, REG_EXTENDED);
+		if ( res != 0 ) {
+		    printf("Regcomp failed with code %u on string %s\n",res,zPattern);
+		    free(regex_raw);
+		    regex_raw=NULL;
 		return 0;
+		}
 	}
-	res = regcomp(&regex, zPattern, REG_EXTENDED);
-	if ( res != 0 ) {
-		printf("Regcomp failed with code %u on string %s\n",res,zPattern);
-
-		return 0;
-	}
-	res = (regexec(&regex, zString, 0, NULL, 0)==0);
-	regfree(&regex);
+	res = (regexec(&regex_c, zString, 0, NULL, 0)==0);
 	return res;
 }
 
@@ -142,7 +147,9 @@ bool OSQLiteDriver::open() {
 bool OSQLiteDriver::close() {
     if (m_sqlite )
         sqlite_close( m_sqlite ), m_sqlite=0l;
-
+	free(regex_raw);
+	regex_raw=NULL;
+	regfree(&regex_c);
     return true;
 }
 
