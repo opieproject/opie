@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=zsame
+Icon=zsame/ZSame
+Type=Application
+Name=ZSame
+Comment=Find rows of same images
