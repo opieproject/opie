@@ -65,7 +65,7 @@ bool Ipkg :: runIpkg( )
     }
     cmd += "ipkg";
 
-    if ( option != "update" && option != "download" )
+    if ( option != "update" && option != "download" && option != "upgrade" )
     {
         cmd += " -dest "+ destination;
         cmd += " -force-defaults";
@@ -97,7 +97,10 @@ bool Ipkg :: runIpkg( )
     cmd += IPKG_CONF;
 #endif
 
-    cmd += " " + option + " " + package + " 2>&1";
+    cmd += " " + option;
+    if ( option != "upgrade" )
+        cmd += " " + package;
+    cmd += " 2>&1";
 
     qApp->processEvents();
 
@@ -118,6 +121,7 @@ bool Ipkg :: runIpkg( )
     // Execute command
     dependantPackages = new QList<QString>;
     dependantPackages->setAutoDelete( true );
+
     ret = executeIpkgCommand( cmd, option );
 
     if ( option == "install" )
