@@ -306,7 +306,6 @@ static void qpe_show_dialog( QDialog* d, bool nomax )
     static bool read_widget_rect(const QString &app, bool &maximized, QPoint &p, QSize &s)
     {
 	maximized = TRUE;
-	qDebug("read_widget_rect");
 	// 350 is the trigger in qwsdefaultdecoration for providing a resize button
 	if ( qApp->desktop()->width() <= 350 )
 	    return FALSE;
@@ -378,7 +377,6 @@ static void qpe_show_dialog( QDialog* d, bool nomax )
 	// 350 is the trigger in qwsdefaultdecoration for providing a resize button
 	if ( qApp->desktop()->width() <= 350 )
 	    return;
-	qDebug("store_widget_rect");
 	// we use these to map the offset of geometry and pos.  ( we can only use normalGeometry to
 	// get the non-maximized version, so we have to do it the hard way )
 	int offsetX = w->x() - w->geometry().left();
