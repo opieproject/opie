@@ -1,133 +1,134 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Board</name>
     <message>
         <source>Blanks: </source>
-        <translation type="unfinished"></translation>
+        <translation>Vuoti: </translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancella</translation>
     </message>
     <message>
         <source>Unknown word</source>
-        <translation type="unfinished"></translation>
+        <translation>Parola sconosciuta</translation>
     </message>
     <message>
         <source>&lt;p&gt;The word &quot;%1&quot; is not in the dictionary.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;La parola &quot;%1&quot; non è presente nel dizionario.</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignora</translation>
     </message>
 </context>
 <context>
     <name>NewGameBase</name>
     <message>
         <source>Players</source>
-        <translation type="unfinished"></translation>
+        <translation>Giocatori</translation>
     </message>
     <message>
         <source>AI3: Smart AI player</source>
-        <translation type="unfinished"></translation>
+        <translation>IA3: IA Avanzata</translation>
     </message>
     <message>
         <source>Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Regole</translation>
     </message>
     <message>
         <source>&amp;Start</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Inizio</translation>
     </message>
 </context>
 <context>
     <name>RulesBase</name>
     <message>
         <source>Game Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Regole Gioco</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Board</source>
-        <translation type="unfinished"></translation>
+        <translation>Board</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensione:</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Cancella</translation>
     </message>
 </context>
 <context>
     <name>ScoreInfo</name>
     <message>
         <source>&lt;P&gt;Invalid move</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Mossa non valida</translation>
     </message>
     <message>
         <source>&lt;P&gt;Score: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Punteggio: </translation>
     </message>
 </context>
 <context>
     <name>WordGame</name>
     <message>
         <source>Word Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Word Game</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Indietro</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Fatto</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiudi</translation>
     </message>
     <message>
         <source>End game</source>
-        <translation type="unfinished"></translation>
+        <translation>Fine partita</translation>
     </message>
     <message>
         <source>Do you want to end the game early?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vuoi terminare la partita prematuramente?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sì</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
 </context>
 </TS>

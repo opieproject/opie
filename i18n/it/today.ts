@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>Click here to launch the associated app</source>
-        <translation>Clicca qui per lanciare l&apos;app. associata</translation>
+        <translation>Premi qui per lanciare l&apos;app. associata</translation>
     </message>
 </context>
 <context>
@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Click here to get to the config dialog</source>
-        <translation>Clicca qui per andare alle impostazioni</translation>
+        <translation>Premi qui per andare alle impostazioni</translation>
     </message>
 </context>
 <context>
@@ -78,7 +78,7 @@ resume?(new line)
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation>Clicca qui se l&apos;applicazione deve partire automaticamente al riavvio.</translation>
+        <translation>Premi qui se l&apos;applicazione deve partire automaticamente al riavvio.</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
@@ -110,15 +110,15 @@ resume?(new line)
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
-        <translation>Clicca per attivare/disattivare un plugin o utilizza le frecce a destra per cambiare l&apos;ordine di visualizzazione</translation>
+        <translation>Premi per attivare/disattivare un plugin o utilizza le frecce a destra per cambiare l&apos;ordine di visualizzazione</translation>
     </message>
     <message>
         <source>Today Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurazione</translation>
     </message>
     <message>
         <source>Tiny Banner</source>
-        <translation type="unfinished"></translation>
+        <translation>Banner Piccolo</translation>
     </message>
 </context>
 </TS>

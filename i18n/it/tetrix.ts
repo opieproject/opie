@@ -1,36 +1,37 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>OHighscore</name>
     <message>
         <source>empty</source>
-        <translation type="unfinished"></translation>
+        <translation>vuoto</translation>
     </message>
     <message>
         <source>Enter your name!</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci il tuo nome!</translation>
     </message>
 </context>
 <context>
     <name>OHighscoreDialog</name>
     <message>
         <source>Highscores</source>
-        <translation type="unfinished"></translation>
+        <translation>Punteggi</translation>
     </message>
     <message>
         <source>#</source>
-        <translation type="unfinished"></translation>
+        <translation>#</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Punti</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="unfinished">Livello</translation>
+        <translation>Livello</translation>
     </message>
 </context>
 <context>

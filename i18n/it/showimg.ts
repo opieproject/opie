@@ -114,46 +114,46 @@
     </message>
     <message>
         <source>Slide show</source>
-        <translation type="unfinished"></translation>
+        <translation>Slide show</translation>
     </message>
     <message>
         <source>Stop Slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Fine Slideshow</translation>
     </message>
 </context>
 <context>
     <name>SettingsDialogBase</name>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni</translation>
     </message>
     <message>
         <source>Slide Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Slide Show</translation>
     </message>
     <message>
         <source>Delay between pictures</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritardo tra le immagini</translation>
     </message>
     <message>
         <source>s</source>
-        <translation type="unfinished"></translation>
+        <translation>s</translation>
     </message>
     <message>
         <source>Repeat slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Ripeti slideshow</translation>
     </message>
     <message>
         <source>Show pictures in reverse</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra immagini in negativo</translation>
     </message>
     <message>
         <source>Load pictures rotated 90 degrees</source>
-        <translation type="unfinished"></translation>
+        <translation>Carica immagini ruotate a 90 gradi</translation>
     </message>
     <message>
         <source>Fast load pictures</source>
-        <translation type="unfinished"></translation>
+        <translation>Caricamento veloce immagini</translation>
     </message>
 </context>
 </TS>

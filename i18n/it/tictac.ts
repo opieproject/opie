@@ -1,41 +1,42 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>TicTacToe</name>
     <message>
         <source>Computer starts</source>
-        <translation type="unfinished"></translation>
+        <translation>Inizia computer</translation>
     </message>
     <message>
         <source>Human starts</source>
-        <translation type="unfinished"></translation>
+        <translation>Inizia umano</translation>
     </message>
     <message>
         <source>Play!</source>
-        <translation type="unfinished"></translation>
+        <translation>Gioca!</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Esci</translation>
     </message>
     <message>
         <source>Click Play to start</source>
-        <translation type="unfinished"></translation>
+        <translation>Premi Gioca per iniziare</translation>
     </message>
     <message>
         <source>Make your move</source>
-        <translation type="unfinished"></translation>
+        <translation>Fai la tua mossa</translation>
     </message>
     <message>
         <source>You won!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hai vinto!</translation>
     </message>
     <message>
         <source>Computer won!</source>
-        <translation type="unfinished"></translation>
+        <translation>Il Computer ha vinto!</translation>
     </message>
     <message>
         <source>It&apos;s a draw</source>
-        <translation type="unfinished"></translation>
+        <translation>Pareggio</translation>
     </message>
 </context>
 </TS>

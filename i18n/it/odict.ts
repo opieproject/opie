@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>C&amp;ase sensitive</source>
-        <translation type="unfinished">C&amp;ase sensitive</translation>
+        <translation>C&amp;ase sensitive</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -90,7 +90,7 @@
     </message>
     <message>
         <source>Decollator</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Language 2</source>

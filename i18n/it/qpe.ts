@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AppMonitor</name>
     <message>
@@ -95,11 +96,11 @@ Cambiarla subito.</translation>
     </message>
     <message>
         <source>Finding documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricerca documenti</translation>
     </message>
     <message>
         <source>Searching documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricerca documenti</translation>
     </message>
 </context>
 <context>
@@ -176,7 +177,7 @@ Cambiarla subito.</translation>
     <name>QObject</name>
     <message>
         <source>Battery Status</source>
-        <translation type="unfinished">Stato Batteria</translation>
+        <translation>Stato Batteria</translation>
     </message>
 </context>
 <context>

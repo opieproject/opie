@@ -4,47 +4,47 @@
     <name>FormatTabWidget</name>
     <message>
         <source>Time format</source>
-        <translation type="unfinished">Formato tempo</translation>
+        <translation>Formato orario</translation>
     </message>
     <message>
         <source>hh:mm</source>
-        <translation type="unfinished">hh:mm</translation>
+        <translation>hh:mm</translation>
     </message>
     <message>
         <source>D/M hh:mm</source>
-        <translation type="unfinished">D/M hh:mm</translation>
+        <translation>D/M hh:mm</translation>
     </message>
     <message>
         <source>M/D hh:mm</source>
-        <translation type="unfinished">M/D hh:mm</translation>
+        <translation>M/D hh:mm</translation>
     </message>
     <message>
         <source>12/24 hour</source>
-        <translation type="unfinished">12/24 ore</translation>
+        <translation>12/24 ore</translation>
     </message>
     <message>
         <source>24 hour</source>
-        <translation type="unfinished">24 ore</translation>
+        <translation>24 ore</translation>
     </message>
     <message>
         <source>12 hour</source>
-        <translation type="unfinished">12 ore</translation>
+        <translation>12 ore</translation>
     </message>
     <message>
         <source>Date format</source>
-        <translation type="unfinished">Formato Data</translation>
+        <translation>Formato data</translation>
     </message>
     <message>
         <source>Weeks start on</source>
-        <translation type="unfinished">Settimane iniziano il</translation>
+        <translation>Settimane iniziano il</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished">Domenica</translation>
+        <translation>Domenica</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished">Lunedì</translation>
+        <translation>Lunedì</translation>
     </message>
 </context>
 <context>
@@ -143,7 +143,7 @@ ntpdate </source>
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
+        <translation>n/d</translation>
     </message>
     <message>
         <source>Estimated shift</source>
@@ -179,7 +179,7 @@ ntpdate </source>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> secondi</translation>
     </message>
 </context>
 <context>
@@ -209,23 +209,23 @@ ntpdate </source>
     <name>TimeTabWidget</name>
     <message>
         <source>Hour</source>
-        <translation type="unfinished">Ora</translation>
+        <translation>Ora</translation>
     </message>
     <message>
         <source>Minute</source>
-        <translation type="unfinished">Minuto</translation>
+        <translation>Minuto</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished">AM</translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished">PM</translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Data</translation>
+        <translation>Data</translation>
     </message>
     <message>
         <source>Time zone</source>

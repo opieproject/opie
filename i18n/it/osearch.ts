@@ -1,123 +1,124 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>MainWindow</name>
     <message>
         <source>OSearch</source>
-        <translation type="unfinished"></translation>
+        <translation>OSearch</translation>
     </message>
     <message>
         <source>adressbook</source>
-        <translation type="unfinished"></translation>
+        <translation>rubrica</translation>
     </message>
     <message>
         <source>todo</source>
-        <translation type="unfinished"></translation>
+        <translation>attività</translation>
     </message>
     <message>
         <source>datebook</source>
-        <translation type="unfinished"></translation>
+        <translation>agenda</translation>
     </message>
     <message>
         <source>applications</source>
-        <translation type="unfinished"></translation>
+        <translation>applicazioni</translation>
     </message>
     <message>
         <source>documents</source>
-        <translation type="unfinished"></translation>
+        <translation>documenti</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerca</translation>
     </message>
     <message>
         <source>Search all</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerca tutti</translation>
     </message>
     <message>
         <source>Case sensitiv</source>
-        <translation type="unfinished"></translation>
+        <translation>Case sensitive</translation>
     </message>
     <message>
         <source>Use wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa wildcard</translation>
     </message>
     <message>
         <source>The details of the current result</source>
-        <translation type="unfinished"></translation>
+        <translation>Dettagli sulla ricerca corrente</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opzioni</translation>
     </message>
     <message>
         <source>Enter your search terms here</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci qui i termini della ricerca</translation>
     </message>
 </context>
 <context>
     <name>OListView</name>
     <message>
         <source>Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Risultati</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>show</source>
-        <translation type="unfinished"></translation>
+        <translation>mostra</translation>
     </message>
     <message>
         <source>edit</source>
-        <translation type="unfinished"></translation>
+        <translation>modifica</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>esegui</translation>
     </message>
     <message>
         <source>open in filemanager</source>
-        <translation type="unfinished"></translation>
+        <translation>apri nel filemanager</translation>
     </message>
     <message>
         <source>open with </source>
-        <translation type="unfinished"></translation>
+        <translation>apri con</translation>
     </message>
     <message>
         <source>show completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>mostra attività completate</translation>
     </message>
     <message>
         <source>show past events</source>
-        <translation type="unfinished"></translation>
+        <translation>mostra eventi passati</translation>
     </message>
     <message>
         <source>search in dates</source>
-        <translation type="unfinished"></translation>
+        <translation>cerca nelle date</translation>
     </message>
     <message>
         <source>File: </source>
-        <translation type="unfinished"></translation>
+        <translation>File: </translation>
     </message>
     <message>
         <source>Link: </source>
-        <translation type="unfinished"></translation>
+        <translation>Link: </translation>
     </message>
     <message>
         <source>Mimetype: </source>
-        <translation type="unfinished"></translation>
+        <translation>Mimetype: </translation>
     </message>
     <message>
         <source>search content</source>
-        <translation type="unfinished"></translation>
+        <translation>cerca contenuto</translation>
     </message>
     <message>
         <source>searching %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ricerca %1</translation>
     </message>
 </context>
 </TS>

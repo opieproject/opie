@@ -4,91 +4,91 @@
     <name>ATConfigDialog</name>
     <message>
         <source>Dialing parameter setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni parametri di connessione</translation>
     </message>
     <message>
         <source>Settings1</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni1</translation>
     </message>
     <message>
         <source>Settings2</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni2</translation>
     </message>
     <message>
         <source>Init string </source>
-        <translation type="unfinished"></translation>
+        <translation>Stringa di inizializzazione</translation>
     </message>
     <message>
         <source>Reset string </source>
-        <translation type="unfinished"></translation>
+        <translation>Stringa di reset</translation>
     </message>
     <message>
         <source>Dialing prefix #1 </source>
-        <translation type="unfinished"></translation>
+        <translation>Prefisso chiamata #1 </translation>
     </message>
     <message>
         <source>Dialing suffix #1 </source>
-        <translation type="unfinished"></translation>
+        <translation>Suffisso chiamata #1 </translation>
     </message>
     <message>
         <source>Dialing prefix #2 </source>
-        <translation type="unfinished"></translation>
+        <translation>Prefisso chiamata #2 </translation>
     </message>
     <message>
         <source>Dialing suffix #2 </source>
-        <translation type="unfinished"></translation>
+        <translation>Suffisso chiamata #2 </translation>
     </message>
     <message>
         <source>Dialing prefix #3 </source>
-        <translation type="unfinished"></translation>
+        <translation>Prefisso chiamata #3 </translation>
     </message>
     <message>
         <source>Dialing suffix #3 </source>
-        <translation type="unfinished"></translation>
+        <translation>Suffisso chiamata #3 </translation>
     </message>
     <message>
         <source>Connect string </source>
-        <translation type="unfinished"></translation>
+        <translation>Stringa di connessione</translation>
     </message>
     <message>
         <source>Hang-up string </source>
-        <translation type="unfinished"></translation>
+        <translation>Stringa di hang-up</translation>
     </message>
     <message>
         <source>Dial time </source>
-        <translation type="unfinished"></translation>
+        <translation>Orario composizione</translation>
     </message>
     <message>
         <source>Delay before redial </source>
-        <translation type="unfinished"></translation>
+        <translation>Ritardo prima della ricomposizione</translation>
     </message>
     <message>
         <source>Number of tries </source>
-        <translation type="unfinished"></translation>
+        <translation>Numero di tentativi</translation>
     </message>
     <message>
         <source>DTR drop time (0=no) </source>
-        <translation type="unfinished"></translation>
+        <translation>DTR drop time (0=no) </translation>
     </message>
     <message>
         <source>Auto bps detect </source>
-        <translation type="unfinished"></translation>
+        <translation>Riconoscimento bps auto</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sì</translation>
     </message>
     <message>
         <source>Modem has DCD line </source>
-        <translation type="unfinished"></translation>
+        <translation>Modem ha linea DCD</translation>
     </message>
     <message>
         <source>Multi-line untag </source>
-        <translation type="unfinished"></translation>
+        <translation>Untag multi-linea</translation>
     </message>
 </context>
 <context>
@@ -99,7 +99,7 @@
     </message>
     <message>
         <source>Or peer mac address</source>
-        <translation type="unfinished"></translation>
+        <translation>O mac address</translation>
     </message>
 </context>
 <context>
@@ -164,95 +164,95 @@
     <name>DialDialog</name>
     <message>
         <source>Enter number</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci numero</translation>
     </message>
     <message>
         <source>Enter the number you want to dial. When finished, press ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci il numero da chiamare. Quando terminato, premi ok</translation>
     </message>
 </context>
 <context>
     <name>EditBase</name>
     <message>
         <source>Editor Base</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor Base</translation>
     </message>
     <message>
         <source>Terminal Emulation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Emulazione Terminale:</translation>
     </message>
     <message>
         <source>IO Layer:</source>
-        <translation type="unfinished"></translation>
+        <translation>Layer IO:</translation>
     </message>
     <message>
         <source>Look</source>
-        <translation type="unfinished"></translation>
+        <translation>Vista</translation>
     </message>
     <message>
         <source>Foreground:</source>
-        <translation type="unfinished"></translation>
+        <translation>Primo piano:</translation>
     </message>
     <message>
         <source>Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Nero</translation>
     </message>
     <message>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>Bianco</translation>
     </message>
     <message>
         <source>Gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Grigio</translation>
     </message>
     <message>
         <source>Background:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sfondo:</translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Font:</translation>
     </message>
     <message>
         <source>Micro</source>
-        <translation type="unfinished"></translation>
+        <translation>Micro</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation type="unfinished"></translation>
+        <translation>Piccolo</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Medio</translation>
     </message>
 </context>
 <context>
     <name>FileReceive</name>
     <message>
         <source>Could not start</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile avviare</translation>
     </message>
 </context>
 <context>
     <name>FileTransfer</name>
     <message>
         <source>Was not able to fork</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile effettuare fork</translation>
     </message>
     <message>
         <source>Could not start</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile avviare</translation>
     </message>
 </context>
 <context>
     <name>FunctionKeyboardConfig</name>
     <message>
         <source>Dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensioni</translation>
     </message>
     <message>
         <source>Edit Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica Tasto</translation>
     </message>
 </context>
 <context>
@@ -291,7 +291,7 @@
     </message>
     <message>
         <source>Data Bits</source>
-        <translation type="unfinished"></translation>
+        <translation>Data Bit</translation>
     </message>
     <message>
         <source>5</source>
@@ -311,7 +311,7 @@
     </message>
     <message>
         <source>Stop Bits</source>
-        <translation type="unfinished"></translation>
+        <translation>Stop Bit</translation>
     </message>
     <message>
         <source>1</source>
@@ -354,7 +354,7 @@
     </message>
     <message>
         <source>Invalid baud rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Baud rate invalido</translation>
     </message>
     <message>
         <source>Device is already connected</source>
@@ -392,7 +392,7 @@
     </message>
     <message>
         <source>QuickLaunch</source>
-        <translation type="unfinished"></translation>
+        <translation>QuickLaunch</translation>
     </message>
     <message>
         <source>The shell button launches the &quot;default&quot; profile. If there is none default values are taken</source>
@@ -404,7 +404,7 @@
     </message>
     <message>
         <source>Line wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>A capo automatico</translation>
     </message>
     <message>
         <source>Full screen</source>
@@ -798,15 +798,15 @@
     </message>
     <message>
         <source>Line-break conversions</source>
-        <translation type="unfinished"></translation>
+        <translation>Conversioni line-break</translation>
     </message>
     <message>
         <source>Inbound</source>
-        <translation type="unfinished"></translation>
+        <translation>In arrivo</translation>
     </message>
     <message>
         <source>Outbound</source>
-        <translation type="unfinished"></translation>
+        <translation>In uscita</translation>
     </message>
     <message>
         <source>Options</source>
@@ -814,11 +814,11 @@
     </message>
     <message>
         <source>Local echo</source>
-        <translation type="unfinished"></translation>
+        <translation>Echo locale</translation>
     </message>
     <message>
         <source>Line wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>A capo automatico</translation>
     </message>
     <message>
         <source>VT 100</source>
