@@ -1,5 +1,5 @@
-Package: opie-networksettings
-Files: plugins/application/libnetworksettings.so* bin/networksettings apps/Settings/networksettings.desktop pics/networksettings/* pics/Network/PPPConnect.png $OPIEDIR/lib/libinterfaces.so* root/usr/bin/changedns bin/getprofile
+Package: opie-networksettings2
+Files: plugins/application/libnetworksettings2.so* bin/networksettings2 apps/Settings/networksettings2.desktop pics/networksettings2/* pics/Network/PPPConnect.png
 Priority: optional
 Section: opie/settings
 Maintainer: Patrick S. Vogt <tille@handhelds.org>
