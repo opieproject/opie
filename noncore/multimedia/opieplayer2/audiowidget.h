@@ -43,6 +43,7 @@
 #include <qframe.h>
 #include <qlineedit.h>
 
+#include <opie/oticker.h>
 
 class QPixmap;
 
@@ -61,23 +62,6 @@ enum AudioButtons {
     AudioBack
 };
 };
-
-class Ticker : public QFrame {
-    Q_OBJECT
-
-public:
-    Ticker( QWidget* parent=0 );
-    ~Ticker();
-    void setText( const QString& text ) ;
-
-protected:
-    void timerEvent( QTimerEvent * );
-    void drawContents( QPainter *p );
-private:
-    QString scrollText;
-    int pos, pixelLen;
-};
-
 
 class AudioWidget : public QWidget {
     Q_OBJECT
@@ -138,7 +122,7 @@ private:
     QPixmap *buttonPixDown[10];
 
     QPixmap *pixmaps[4];
-    Ticker  songInfo;
+    OTicker  songInfo;
     QSlider slider;
     QLineEdit time;
     int xoff, yoff;

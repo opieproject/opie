@@ -147,10 +147,15 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     slider.setFocusPolicy( QWidget::NoFocus );
     slider.setBackgroundPixmap( *pixBg );
 
+//     Config cofg("qpe");
+//     cofg.setGroup("Appearance");
+//     QColor backgroundcolor = QColor( cofg.readEntry( "Background", "#E5E1D5" ) );
+
     time.setFocusPolicy( QWidget::NoFocus );
     time.setAlignment( Qt::AlignCenter );
-    time.setFrame(FALSE);
-    changeTextColor( &time );
+    
+//    time.setFrame(FALSE);
+//    changeTextColor( &time );
 
     resizeEvent( NULL );
 

@@ -791,10 +791,7 @@ void PlayListWidget::readm3u( const QString &filename ) {
         if(s.left(4)=="http") {
           lnk.setName( s ); //sets file name
           lnk.setIcon("opieplayer2/musicfile");
-//           if(s.right(4) != '.' || s.right(5) != '.')
-//             lnk.setFile( s+"/"); //if url with no extension
-//           else
-            lnk.setFile( s ); //sets file name
+          lnk.setFile( s ); //sets file name
             
         }  else {
           //               if( QFileInfo( s ).exists() ) {
