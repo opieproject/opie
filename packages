@@ -88,6 +88,7 @@ CONFIG_MODPLUG	core/multimedia/opieplayer/modplug	modplug.pro
 CONFIG_MULTIKEY	inputmethods/multikey	multikey.pro
 CONFIG_NETSYSTEMTIME	noncore/settings/netsystemtime	netsystemtime.pro
 CONFIG_NETWORKSETUP	noncore/net/networksettings	networksettings.pro
+CONFIG_NETWORKAPPLET	noncore/applets/networkapplet	networkapplet.pro
 CONFIG_NOTESAPPLET	noncore/applets/notesapplet	notesapplet.pro
 CONFIG_OBEX	core/applets/obex2	obex.pro
 CONFIG_OCOPSERVER	x11/ipc/server	ocopserver.pro
