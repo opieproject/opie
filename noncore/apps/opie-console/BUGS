@@ -29,4 +29,7 @@ connection its used on
   - paste  button
   - keys button
 
+- dial dialog - ugly , better use a qlineedit there to for showing or
+  disable
+
 - exit / strg + d does not close conection / tab

@@ -337,6 +337,9 @@ void MainWindow::slotConnect() {
             m_connect->setEnabled( false );
             m_disconnect->setEnabled( true );
             m_transfer->setEnabled( true );
+            m_recordScript->setEnabled( true );
+            m_saveScript->setEnabled( true );
+            m_runScript->setEnabled( true );
         }
     }
 }
@@ -347,6 +350,9 @@ void MainWindow::slotDisconnect() {
         m_connect->setEnabled( true );
         m_disconnect->setEnabled( false );
         m_transfer->setEnabled( false );
+        m_recordScript->setEnabled( false);
+        m_saveScript->setEnabled( false );
+        m_runScript->setEnabled( false );
     }
 }
 
@@ -433,12 +439,12 @@ void MainWindow::create( const Profile& prof ) {
     m_connect->setEnabled( true );
     m_disconnect->setEnabled( false );
     m_terminate->setEnabled( true );
-    m_recordScript->setEnabled( true );
-    m_saveScript->setEnabled( true );
-    m_runScript->setEnabled( true );
     m_fullscreen->setEnabled( true );
     m_closewindow->setEnabled( true );
     m_transfer->setEnabled( false );
+    m_recordScript->setEnabled( false );
+    m_saveScript->setEnabled( false );
+    m_runScript->setEnabled( false );
 
     // is io_layer wants direct connection, then autoconnect
     //if ( ( m_curSession->layer() )->supports()[0] == 1 ) {
@@ -490,9 +496,15 @@ void MainWindow::slotSessionChanged( Session* ses ) {
         if ( m_curSession->layer()->isConnected() ) {
             m_connect->setEnabled( false );
             m_disconnect->setEnabled( true );
+            m_recordScript->setEnabled( true );
+            m_saveScript->setEnabled( true );
+            m_runScript->setEnabled( true );
         } else {
             m_connect->setEnabled( true );
             m_disconnect->setEnabled( false );
+            m_recordScript->setEnabled( false );
+            m_saveScript->setEnabled( false );
+            m_runScript->setEnabled( false );
         }
 
         if ( ( m_curSession->layer() )->supports()[1] == 0 ) {
@@ -500,6 +512,10 @@ void MainWindow::slotSessionChanged( Session* ses ) {
         } else {
             m_transfer->setEnabled( true );
         }
+
+
+
+
 
         QWidget *w = m_curSession->widget();
         if(w) w->setFocus();
