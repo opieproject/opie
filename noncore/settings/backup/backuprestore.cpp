@@ -39,114 +39,113 @@ const QString tempFileName = "/tmp/backup.err";
 
 
 BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags fl)
-        : BackupAndRestoreBase(parent, name,  fl){
-  this->showMaximized();
-  backupList->header()->hide();
-  restoreList->header()->hide();
-  connect(backupButton, SIGNAL(clicked()),
-          this, SLOT(backupPressed()));
-  connect(restoreButton, SIGNAL(clicked()),
-          this, SLOT(restore()));
-  connect(backupList, SIGNAL(clicked( QListViewItem * )),
-          this, SLOT(selectItem(QListViewItem*)));
-  connect(restoreSource, SIGNAL(activated( int  )),
-          this, SLOT(sourceDirChanged(int)));
-  connect(updateList, SIGNAL(clicked()),
-          this, SLOT( fileListUpdate()));
+        : BackupAndRestoreBase(parent, name,  fl)
+{
+    this->showMaximized();
+    backupList->header()->hide();
+    restoreList->header()->hide();
+    connect(backupButton, SIGNAL(clicked()),
+            this, SLOT(backup()));
+    connect(restoreButton, SIGNAL(clicked()),
+            this, SLOT(restore()));
+    connect(backupList, SIGNAL(clicked( QListViewItem * )),
+            this, SLOT(selectItem(QListViewItem*)));
+    connect(restoreSource, SIGNAL(activated( int  )),
+            this, SLOT(sourceDirChanged(int)));
+    connect(updateList, SIGNAL(clicked()),
+            this, SLOT( fileListUpdate()));
 
-  applicationSettings = new QListViewItem(backupList, "Application Settings", "",
-                                          QDir::homeDirPath() + "/Settings/");
-  selectItem(applicationSettings);
-  applicationSettings = new QListViewItem(backupList, "Application Data", "",
-                                          QDir::homeDirPath() + "/Applications/");
-  selectItem(applicationSettings);
-  documents= new QListViewItem(backupList, "Documents", "",
-                               QDir::homeDirPath() + "/Documents/");
-  selectItem(documents);
+    //add directorys for backing up
+    applicationSettings = new QListViewItem(backupList, "Application Settings", "", "Settings/");
+    selectItem(applicationSettings);
+    applicationSettings = new QListViewItem(backupList, "Application Data", "", "Applications/");
+    selectItem(applicationSettings);
+    documents= new QListViewItem(backupList, "Documents", "", "Documents/");
+    selectItem(documents);
 
-  scanForApplicationSettings();
+    scanForApplicationSettings();
 
-  Config config("BackupAndRestore");
-  config.setGroup("General");
-  int totalLocations = config.readNumEntry("totalLocations",0);
-
-//todo make less static here and use Storage class to get infos
-  if(totalLocations == 0){
-    QString home = QDir::homeDirPath();
-    home += "/Documents";
-    backupLocations.insert("Documents", home);
-    if (StorageInfo::hasCf()) {
-      backupLocations.insert("CF", "/mnt/cf");
+    backupLocations.insert( "Documents", QDir::homeDirPath() + "/Documents" );
+    if (StorageInfo::hasCf())
+    {
+        backupLocations.insert("CF", "/mnt/cf");
     }
-    if (StorageInfo::hasSd || StorageInfo::hasMmc) {
-      backupLocations.insert("SD", "/mnt/card");
+    if (StorageInfo::hasSd || StorageInfo::hasMmc)
+    {
+        backupLocations.insert("SD", "/mnt/card");
     }
-  }
-  else{
-    for(int i = 0; i < totalLocations; i++){
-      backupLocations.insert(config.readEntry(QString("backupLocationName_%1").arg(i)),
-                             config.readEntry(QString("backupLocation_%1").arg(i)));
+
+    QMap<QString, QString>::Iterator it;
+    for( it = backupLocations.begin(); it != backupLocations.end(); ++it )
+    {
+        storeToLocation->insertItem(it.key());
+        restoreSource->insertItem(it.key());
     }
-  }
-  QMap<QString, QString>::Iterator it;
-  for( it = backupLocations.begin(); it != backupLocations.end(); ++it ){
-    storeToLocation->insertItem(it.key());
-    restoreSource->insertItem(it.key());
-  }
 
-  // Read the list of items to ignore.
-  QList<QString> dontBackupList;
-  dontBackupList.setAutoDelete(true);
-  config.setGroup("DontBackup");
-  int total = config.readNumEntry("Total", 0);
-  for(int i = 0; i < total; i++){
-    dontBackupList.append(new QString(config.readEntry(QString("%1").arg(i), "")));
-  }
+    // Read the list of items to ignore.
+    Config config("BackupAndRestore");
 
-  QList<QListViewItem> list;
-  getAllItems(backupList->firstChild(), list);
-
-  for(uint i = 0; i < list.count(); i++){
-    QString text = list.at(i)->text(HEADER_NAME);
-    for(uint i2 = 0;  i2 < dontBackupList.count(); i2++){
-      if(*dontBackupList.at(i2) == text){
-        selectItem(list.at(i));
-        break;
-      }
+    QList<QString> dontBackupList;
+    dontBackupList.setAutoDelete(true);
+    config.setGroup("DontBackup");
+    int total = config.readNumEntry("Total", 0);
+    for(int i = 0; i < total; i++)
+    {
+        dontBackupList.append(new QString(config.readEntry(QString("%1").arg(i), "")));
     }
-  }
+
+    QList<QListViewItem> list;
+    getAllItems(backupList->firstChild(), list);
+
+    for(uint i = 0; i < list.count(); i++)
+    {
+        QString text = list.at(i)->text(HEADER_NAME);
+        for(uint i2 = 0;  i2 < dontBackupList.count(); i2++)
+        {
+            if(*dontBackupList.at(i2) == text)
+            {
+                selectItem(list.at(i));
+                break;
+            }
+        }
+    }
 }
 
-BackupAndRestore::~BackupAndRestore(){
-  QList<QListViewItem> list;
-  getAllItems(backupList->firstChild(), list);
+BackupAndRestore::~BackupAndRestore()
+{
+    QList<QListViewItem> list;
+    getAllItems(backupList->firstChild(), list);
 
-  Config config("BackupAndRestore");
-  config.setGroup("DontBackup");
-  config.clearGroup();
+    Config config("BackupAndRestore");
+    config.setGroup("DontBackup");
+    config.clearGroup();
 
-  int count = 0;
-  for(uint i = 0; i < list.count(); i++){
-    if(list.at(i)->text(HEADER_BACKUP) == ""){
-      config.writeEntry(QString("%1").arg(count), list.at(i)->text(HEADER_NAME));
-      count++;
+    int count = 0;
+    for(uint i = 0; i < list.count(); i++)
+    {
+        if(list.at(i)->text(HEADER_BACKUP) == "")
+        {
+            config.writeEntry(QString("%1").arg(count), list.at(i)->text(HEADER_NAME));
+            count++;
+        }
     }
-  }
-  config.writeEntry("Total", count);
+    config.writeEntry("Total", count);
 
-  // Remove Temp File
-  if ( QFile::exists( tempFileName ) )
-	  QFile::remove( tempFileName );
+    // Remove Temp File
+    if ( QFile::exists( tempFileName ) )
+        QFile::remove( tempFileName );
 }
 
-QList<QListViewItem> BackupAndRestore::getAllItems(QListViewItem *item, QList<QListViewItem> &list){
-  while(item){
-    if(item->childCount() > 0)
-      getAllItems(item->firstChild(), list);
-    list.append(item);
-    item = item->nextSibling();
-  }
-  return list;
+QList<QListViewItem> BackupAndRestore::getAllItems(QListViewItem *item, QList<QListViewItem> &list)
+{
+    while(item)
+    {
+        if(item->childCount() > 0)
+            getAllItems(item->firstChild(), list);
+        list.append(item);
+        item = item->nextSibling();
+    }
+    return list;
 }
 
 /**
@@ -154,34 +153,40 @@ QList<QListViewItem> BackupAndRestore::getAllItems(QListViewItem *item, QList<QL
  * and changing the icon to match
  * @param currentItem the item to swich the selection choice.
  */
-void BackupAndRestore::selectItem(QListViewItem *currentItem){
-  if(!currentItem)
-    return;
+void BackupAndRestore::selectItem(QListViewItem *currentItem)
+{
+    if(!currentItem)
+        return;
 
-  if(currentItem->text(HEADER_BACKUP) == "B"){
-    currentItem->setPixmap(HEADER_NAME, Resource::loadPixmap("backup/null"));
-    currentItem->setText(HEADER_BACKUP, "");
-  }
-  else{
-    currentItem->setPixmap(HEADER_NAME, Resource::loadPixmap("backup/check"));
-    currentItem->setText(HEADER_BACKUP, "B");
-  }
+    if(currentItem->text(HEADER_BACKUP) == "B")
+    {
+        currentItem->setPixmap(HEADER_NAME, Resource::loadPixmap("backup/null"));
+        currentItem->setText(HEADER_BACKUP, "");
+    }
+    else
+    {
+        currentItem->setPixmap(HEADER_NAME, Resource::loadPixmap("backup/check"));
+        currentItem->setText(HEADER_BACKUP, "B");
+    }
 }
 
-void BackupAndRestore::scanForApplicationSettings(){
-  QDir d(applicationSettings->text(BACKUP_LOCATION));
-  d.setFilter( QDir::Dirs | QDir::Files | QDir::NoSymLinks );
-  const QFileInfoList *list = d.entryInfoList();
-  QFileInfoListIterator it( *list );
-  QFileInfo *fi;
-  while ( (fi=it.current()) ) {
-    // qDebug((d.path()+fi->fileName()).latin1());
-	  if ( ( fi->fileName() != "." ) && ( fi->fileName() != ".." ) ) {
-	       QListViewItem *newItem = new QListViewItem(applicationSettings, fi->fileName());
-	       selectItem(newItem);
-	  }
-    ++it;
-  }
+void BackupAndRestore::scanForApplicationSettings()
+{
+    QDir d( QDir::homeDirPath() + "/" + QString( applicationSettings->text(BACKUP_LOCATION) ) );
+    d.setFilter( QDir::Dirs | QDir::Files | QDir::NoSymLinks );
+    const QFileInfoList *list = d.entryInfoList();
+    QFileInfoListIterator it( *list );
+    QFileInfo *fi;
+    while ( (fi=it.current()) )
+    {
+        //qDebug((d.path()+"/"+fi->fileName()).latin1());
+        if ( ( fi->fileName() != "." ) && ( fi->fileName() != ".." ) )
+        {
+            QListViewItem *newItem = new QListViewItem(applicationSettings, fi->fileName());
+            selectItem(newItem);
+        }
+        ++it;
+    }
 }
 
 /**
@@ -190,128 +195,143 @@ void BackupAndRestore::scanForApplicationSettings(){
  * Determine the file name to store the backup in.  Backup the file(s) using
  * tar and gzip  --best.  Report failure or success
  */
-void BackupAndRestore::backupPressed(){
-  QString backupFiles;
-  if(getBackupFiles(backupFiles, NULL) == 0){
-    QMessageBox::critical(this, "Message",
-                          "No items selected.",QString("Ok") );
-    return;
-  }
+void BackupAndRestore::backup()
+{
+    QString backupFiles;
+    if(getBackupFiles(backupFiles, NULL) == 0)
+    {
+        QMessageBox::critical(this, "Message",
+                              "No items selected.",QString("Ok") );
+        return;
+    }
 
-  setCaption(tr("Backup and Restore... working..."));
-  QString outputFile = backupLocations[storeToLocation->currentText()];
+    setCaption(tr("Backup and Restore... working..."));
+    QString outputFile = backupLocations[storeToLocation->currentText()];
 
-  QDateTime datetime = QDateTime::currentDateTime();
-  QString dateString = QString::number( datetime.date().year() ) + QString::number( datetime.date().month() ).rightJustify(2, '0') +
-	  QString::number( datetime.date().day() ).rightJustify(2, '0');
+    QDateTime datetime = QDateTime::currentDateTime();
+    QString dateString = QString::number( datetime.date().year() ) + QString::number( datetime.date().month() ).rightJustify(2, '0') +
+                         QString::number( datetime.date().day() ).rightJustify(2, '0');
 
-  outputFile += "/" + dateString;
+    outputFile += "/" + dateString;
 
-  QString t = outputFile;
-  int c = 1;
-  while(QFile::exists(outputFile + EXTENSION)){
-    outputFile = t + QString("%1").arg(c);
-    c++;
-  }
+    QString t = outputFile;
+    int c = 1;
+    while(QFile::exists(outputFile + EXTENSION))
+    {
+        outputFile = t + QString("%1").arg(c);
+        c++;
+    }
 
-  // We execute tar and compressing its output with gzip..
-  // The error output will be written into a temp-file which could be provided
-  // for debugging..
-  qDebug( "Storing file: %s", outputFile.latin1() );
-  outputFile += EXTENSION;
+    // We execute tar and compressing its output with gzip..
+    // The error output will be written into a temp-file which could be provided
+    // for debugging..
+    qDebug( "Storing file: %s", outputFile.latin1() );
+    outputFile += EXTENSION;
 
-  qWarning( QString("(tar -c %1 | gzip > %2 ) 2> %3")
-	    .arg( backupFiles )
-	    .arg( outputFile.latin1() )
-	    .arg( tempFileName.latin1() ) );
+    QString commandLine = QString( "(tar -C %1 -c %2 | gzip > %3 ) 2> %4" ).arg( QDir::homeDirPath() )
+                                                                           .arg( backupFiles )
+                                                                           .arg( outputFile.latin1() )
+                                                                           .arg( tempFileName.latin1() );
 
+    qDebug( commandLine );
 
-  int r = system( QString("(tar -c %1 | gzip > %2 ) 2> %3")
-		  .arg( backupFiles )
-		  .arg( outputFile.latin1() )
-		  .arg( tempFileName.latin1() ) );
+    int r = system( commandLine );
 
-   if(r != 0){
-    perror("Error: ");
-    QString errorMsg= tr( "Error from System:\n" ) + (QString)strerror( errno );
+    if(r != 0)
+    {
+        perror("Error: ");
+        QString errorMsg= tr( "Error from System:\n" ) + (QString)strerror( errno );
 
-     switch( QMessageBox::critical(this, tr( "Message" ), tr( "Backup Failed!" ) + "\n"
-				   + errorMsg, QString( tr( "Ok" ) ), QString( tr( "Details" ) ) ) ){
+        switch( QMessageBox::critical(this, tr( "Message" ), tr( "Backup Failed!" ) + "\n"
+                                      + errorMsg, QString( tr( "Ok" ) ), QString( tr( "Details" ) ) ) )
+        {
 
-     case 1:
-	     qWarning("Details pressed !");
-	     ErrorDialog* pErrDialog = new ErrorDialog( this, NULL, true );
-	     QFile errorFile( tempFileName );
-	     if ( errorFile.open(IO_ReadOnly) ) {
-		     QTextStream t( &errorFile );
-		     QString s;
-		     while ( !t.eof() ) {        // until end of file...
-			     s += t.readLine();       // line of text excluding '\n'
-		     }
-		     errorFile.close();
+        case 1:
+            qWarning("Details pressed !");
+            ErrorDialog* pErrDialog = new ErrorDialog( this, NULL, true );
+            QFile errorFile( tempFileName );
+            if ( errorFile.open(IO_ReadOnly) )
+            {
+                QTextStream t( &errorFile );
+                QString s;
+                while ( !t.eof() )
+                {        // until end of file...
+                    s += t.readLine();       // line of text excluding '\n'
+                }
+                errorFile.close();
 
-		     pErrDialog->m_textarea->setText( s );
-	     }else{
-		     pErrDialog->m_textarea->setText( "Unable to open File: /tmp/backup.er" );
-	     }
-	     pErrDialog->showMaximized();
-	     pErrDialog->exec();
-	     delete pErrDialog;
-	     break;
-     }
-     setCaption(tr("Backup and Restore.. Failed !!"));
-     return;
-   }
-   else{
-     QMessageBox::information(this, tr( "Message" ), tr( "Backup Successfull." ), QString(tr( "Ok" ) ) );
+                pErrDialog->m_textarea->setText( s );
+            }
+            else
+            {
+                pErrDialog->m_textarea->setText( "Unable to open File: /tmp/backup.er" );
+            }
+            pErrDialog->showMaximized();
+            pErrDialog->exec();
+            delete pErrDialog;
+            break;
+        }
+        setCaption(tr("Backup and Restore.. Failed !!"));
+        return;
+    }
+    else
+    {
+        QMessageBox::information(this, tr( "Message" ), tr( "Backup Successfull." ), QString(tr( "Ok" ) ) );
 
-   }
-   setCaption(tr("Backup and Restore"));
+    }
+    setCaption(tr("Backup and Restore"));
 }
 
 /***
  * Get a list of all of the files to backup.
  */
-int BackupAndRestore::getBackupFiles(QString &backupFiles, QListViewItem *parent){
-  QListViewItem * currentItem;
-  QString currentHome;
-  if(!parent)
-    currentItem = backupList->firstChild();
-  else{
-    currentItem = parent->firstChild();
-    currentHome = parent->text(BACKUP_LOCATION);
-  }
-
-  uint count = 0;
-  while( currentItem != 0 ){
-    if(currentItem->text(HEADER_BACKUP) == "B" ){
-      if(currentItem->childCount() == 0 ){
-        if(parent == NULL)
-    backupFiles += currentItem->text(BACKUP_LOCATION);
-  else
-          backupFiles += currentHome + currentItem->text(HEADER_NAME);
-  backupFiles += " ";
-  count++;
-      }
-      else{
-        count += getBackupFiles(backupFiles, currentItem);
-      }
+int BackupAndRestore::getBackupFiles(QString &backupFiles, QListViewItem *parent)
+{
+    QListViewItem * currentItem;
+    QString currentHome;
+    if(!parent)
+        currentItem = backupList->firstChild();
+    else
+    {
+        currentItem = parent->firstChild();
+        currentHome = parent->text(BACKUP_LOCATION);
     }
-    currentItem = currentItem->nextSibling();
-  }
-  return count;
+
+    uint count = 0;
+    while( currentItem != 0 )
+    {
+        if(currentItem->text(HEADER_BACKUP) == "B" )
+        {
+            if(currentItem->childCount() == 0 )
+            {
+                if(parent == NULL)
+                    backupFiles += currentItem->text(BACKUP_LOCATION);
+                else
+                    backupFiles += currentHome + currentItem->text(HEADER_NAME);
+                backupFiles += " ";
+                count++;
+            }
+            else
+            {
+                count += getBackupFiles(backupFiles, currentItem);
+            }
+        }
+        currentItem = currentItem->nextSibling();
+    }
+    return count;
 }
 
-void BackupAndRestore::sourceDirChanged(int selection){
-  restoreList->clear();
-  rescanFolder(backupLocations[restoreSource->text(selection)]);
+void BackupAndRestore::sourceDirChanged(int selection)
+{
+    restoreList->clear();
+    rescanFolder(backupLocations[restoreSource->text(selection)]);
 }
 
 void BackupAndRestore::fileListUpdate()
 {
-	qWarning("void BackupAndRestore::fileListUpdate()");
-	restoreList->clear();
-	rescanFolder( backupLocations[restoreSource->currentText()] );
+    qWarning("void BackupAndRestore::fileListUpdate()");
+    restoreList->clear();
+    rescanFolder( backupLocations[restoreSource->currentText()] );
 }
 
 /**
@@ -319,88 +339,109 @@ void BackupAndRestore::fileListUpdate()
  * but will not follow symlinks.
  * @param directory - the directory to look in.
  */
-void BackupAndRestore::rescanFolder(QString directory){
-  //qDebug(QString("rescanFolder: ") + directory.latin1());
-  QDir d(directory);
-  if(!d.exists())
-    return;
+void BackupAndRestore::rescanFolder(QString directory)
+{
+    //qDebug(QString("rescanFolder: ") + directory.latin1());
+    QDir d(directory);
+    if(!d.exists())
+        return;
 
-  d.setFilter( QDir::Files | QDir::Hidden | QDir::Dirs);
-  const QFileInfoList *list = d.entryInfoList();
-  QFileInfoListIterator it( *list );
-  QFileInfo *file;
-  while ( (file=it.current()) ) {  // for each file...
-    // If it is a dir and not .. or . then add it as a tab and go down.
-    if(file->isDir()){
-      if(file->fileName() != ".." && file->fileName() != ".") {
-  rescanFolder(directory + "/" + file->fileName());
-      }
+    d.setFilter( QDir::Files | QDir::Hidden | QDir::Dirs);
+    const QFileInfoList *list = d.entryInfoList();
+    QFileInfoListIterator it( *list );
+    QFileInfo *file;
+    while ( (file=it.current()) )
+    {  // for each file...
+        // If it is a dir and not .. or . then add it as a tab and go down.
+        if(file->isDir())
+        {
+            if(file->fileName() != ".." && file->fileName() != ".")
+            {
+                rescanFolder(directory + "/" + file->fileName());
+            }
+        }
+        else
+        {
+            // If it is a backup file add to list.
+            if(file->fileName().contains(EXTENSION))
+                (void)new QListViewItem(restoreList, file->fileName());
+        }
+        ++it;
     }
-    else{
-      // If it is a backup file add to list.
-      if(file->fileName().contains(EXTENSION))
-        (void)new QListViewItem(restoreList, file->fileName());
-    }
-    ++it;
-  }
 }
 
 /**
  * Restore a backup file.
  * Report errors or success
  */
-void BackupAndRestore::restore(){
-  QListViewItem *restoreItem = restoreList->currentItem();
-  if(!restoreItem){
-    QMessageBox::critical(this, tr( "Message" ),
-                          tr( "Please select something to restore." ),QString( tr( "Ok") ) );
-    return;
-  }
-  setCaption(tr("Backup and Restore... working..."));
-
-  QString restoreFile = backupLocations[restoreSource->currentText()];
-
-  restoreFile += "/" + restoreItem->text(0);
-
-  int r = system(QString("tar -C / -zxf %1 2> %3")
-		 .arg( restoreFile.latin1() )
-		 .arg( tempFileName.latin1() ) );
-  if(r != 0){
-    QString errorMsg= tr( "Error from System:\n" ) + (QString)strerror( errno );
-    switch( QMessageBox::critical(this, tr( "Message" ), tr( "Restore Failed." ) + "\n"
-				  + errorMsg, QString( tr( "Ok") ), QString( tr( "Details" ) ) ) ) {
-    case 1:
-	    qWarning("Details pressed !");
-	    ErrorDialog* pErrDialog = new ErrorDialog( this, NULL, true );
-	    QFile errorFile( tempFileName );
-	    if ( errorFile.open(IO_ReadOnly) ) {
-		    QTextStream t( &errorFile );
-		    QString s;
-		    while ( !t.eof() ) {        // until end of file...
-			    s += t.readLine();       // line of text excluding '\n'
-		    }
-		    errorFile.close();
-
-		    pErrDialog->m_textarea->setText( s );
-	    }else{
-		    pErrDialog->m_textarea->setText( tr( "Unable to open File: %1" ).arg( "/tmp/backup.er" ) );
-	    }
-	    pErrDialog->showMaximized();
-	    pErrDialog->exec();
-	    delete pErrDialog;
-
-	    setCaption(tr("Backup and Restore.. Failed !!"));
-	    return;
-
-	    break;
-
+void BackupAndRestore::restore()
+{
+    QListViewItem *restoreItem = restoreList->currentItem();
+    if(!restoreItem)
+    {
+        QMessageBox::critical(this, tr( "Message" ),
+                              tr( "Please select something to restore." ),QString( tr( "Ok") ) );
+        return;
     }
-  }
-  else{
-    QMessageBox::critical(this, tr( "Message" ),
-                          tr( "Restore Successfull." ), QString( tr( "Ok") ) );
-  }
-  setCaption(tr("Backup and Restore"));
+    setCaption(tr("Backup and Restore... working..."));
+
+    QString restoreFile = backupLocations[restoreSource->currentText()];
+
+    restoreFile += "/" + restoreItem->text(0);
+
+    qDebug( restoreFile );
+
+    QString commandLine = QString( "tar -C %1 -zxf %2 2> %3" ).arg( QDir::homeDirPath() )
+                                                              .arg( restoreFile.latin1() )
+                                                              .arg( tempFileName.latin1() );
+
+    qDebug( commandLine );
+
+    int r = system( commandLine );
+
+    if(r != 0)
+    {
+        QString errorMsg= tr( "Error from System:\n" ) + (QString)strerror( errno );
+        switch( QMessageBox::critical(this, tr( "Message" ), tr( "Restore Failed." ) + "\n"
+                                      + errorMsg, QString( tr( "Ok") ), QString( tr( "Details" ) ) ) )
+        {
+        case 1:
+            qWarning("Details pressed !");
+            ErrorDialog* pErrDialog = new ErrorDialog( this, NULL, true );
+            QFile errorFile( tempFileName );
+            if ( errorFile.open(IO_ReadOnly) )
+            {
+                QTextStream t( &errorFile );
+                QString s;
+                while ( !t.eof() )
+                {        // until end of file...
+                    s += t.readLine();       // line of text excluding '\n'
+                }
+                errorFile.close();
+
+                pErrDialog->m_textarea->setText( s );
+            }
+            else
+            {
+                pErrDialog->m_textarea->setText( tr( "Unable to open File: %1" ).arg( "/tmp/backup.er" ) );
+            }
+            pErrDialog->showMaximized();
+            pErrDialog->exec();
+            delete pErrDialog;
+
+            setCaption(tr("Backup and Restore.. Failed !!"));
+            return;
+
+            break;
+
+        }
+    }
+    else
+    {
+        QMessageBox::critical(this, tr( "Message" ),
+                              tr( "Restore Successfull." ), QString( tr( "Ok") ) );
+    }
+    setCaption(tr("Backup and Restore"));
 }
 
 // backuprestore.cpp
