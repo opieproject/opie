@@ -1,29 +1,30 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AdvancedConfigBase</name>
     <message>
         <source>Advanced Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration avancée</translation>
     </message>
     <message>
         <source>Renew DHCP on changing</source>
-        <translation type="unfinished"></translation>
+        <translation>Renouveler DHCP après le changement</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Fréquence</translation>
     </message>
     <message>
         <source>MODE</source>
-        <translation type="unfinished"></translation>
+        <translation>MODE</translation>
     </message>
     <message>
         <source>ESSID</source>
-        <translation type="unfinished"></translation>
+        <translation>ESSID</translation>
     </message>
     <message>
         <source>AccessPoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Point d&apos;accès</translation>
     </message>
 </context>
 </TS>
