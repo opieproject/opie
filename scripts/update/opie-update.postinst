@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -v
 #
 #  script to remove and reinstall opie
 #
@@ -12,26 +12,31 @@ pack=`ipkg status | grep Package | grep -i opie | sed  "s/Package://"`
 
 
 echo "Stopping Opie"
-`/etc/init.d/qpe stop`
+`/etc/init.d/opie stop`
 
+echo "start" > /tmp/update.log
 
 for p in  $pack; do
 cmd="$IPKG_REMOVE $p"
-echo "$cmd"
+echo "rem.  $p" >> /tmp/update.log
 $cmd
 done
 
-#to be sure
-pack2=`ipkg status | grep Package | grep -i opie | sed  "s/Package://"`
-while [ $pack2 != "" ]
-do
-for p in  $pack2; do
-cmd="$IPKG_REMOVE $p"
-echo "$cmd"
-$cmd
-done
-pack2=`ipkg status | grep Package | grep -i opie | sed  "s/Package://"`
-done;
+#to be sure...
+#... to have an endless loop ;-)
+# so comment it!
+#pack2=`ipkg status | grep Package | grep -i opie | sed  "s/Package://"`
+#while [ $pack2 != "" ]
+#do
+#echo "debug: while loop: $pack2"
+#for p in  $pack2; do
+#echo "debug for loop: $p"
+#cmd="$IPKG_REMOVE $p"
+#echo "$cmd"
+#$cmd
+#done
+#pack2=`ipkg status | grep Package | grep -i opie | sed  "s/Package://"`
+#done;
 
 #might help
 sync
@@ -42,6 +47,7 @@ echo "Updateing"
 
 for p in  $pack; do
 cmd="$IPKG_INSTALL $p"
+echo "inst. $p" >> /tmp/update.log
 echo "$cmd"
 $cmd
 done
@@ -49,4 +55,4 @@ done
 ipkg remove opie-update
 
 echo "Starting Opie"
-`/etc/init.d/qpe start`
+`/etc/init.d/opie start`
