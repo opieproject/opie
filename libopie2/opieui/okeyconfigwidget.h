@@ -12,15 +12,24 @@
 
 #include <qstring.h>
 #include <qpixmap.h>
-#include <qbytearray.h>
+#include <qcstring.h>
 #include <qhbox.h>
 #include <qvaluelist.h>
 
 class QKeyEvent;
+class QLabel;
+class QPushButton;
+class QListViewItem;
+class QRadioButton;
 
 namespace Opie {
 namespace Ui {
-
+namespace Private {
+    class OKeyConfigWidgetPrivate;
+    typedef QValueList<OKeyConfigWidgetPrivate> OKeyConfigWidgetPrivateList;
+}
+    class OListViewItem;
+    class OListView;
 
 /**
  * \brief small class representing a Key with possible modifiers
@@ -34,7 +43,7 @@ namespace Ui {
  */
 class OKeyPair {
 public:
-    typedef QValueList<OKeyPair> OKeyPairList;
+    typedef QValueList<OKeyPair> List;
     OKeyPair( int key = -1, int modifier = -1);
     ~OKeyPair();
 
@@ -55,11 +64,11 @@ public:
     static OKeyPair upArrowKey();
     static OKeyPair downArrowKey();
     static OKeyPair emptyKey();
-    static OKeyPairList hardwareKeys();
+    static OKeyPair::List hardwareKeys();
 
 private:
-    int m_key = -1;
-    int m_mod = -1;
+    int m_key;
+    int m_mod;
     class Private;
     Private* d;
 };
@@ -75,12 +84,12 @@ private:
 class OKeyConfigItem {
     friend class OKeyConfigManager;
 public:
-    typedef QValueList<OKeyConfigItem> OKeyConfigItemList;
+    typedef QValueList<OKeyConfigItem> List;
     OKeyConfigItem( const QString& text = QString::null , const QCString& config_key = QCString(),
                     const QPixmap& symbol  = QPixmap(),
                     int id = -1,
-                    const OKeyPair& set = OKeyPair::emptyKey(),
-                    const OKeyPair& def = OKeyPair::emptyKey() );
+                    const OKeyPair& def = OKeyPair::emptyKey(),
+                    QObject *caller = 0, const char* slot = 0);
     OKeyConfigItem( const Opie::Core::ODeviceButton& );
     ~OKeyConfigItem();
 
@@ -91,9 +100,12 @@ public:
     QPixmap pixmap()const;
     int id()const;
 
+
+
     OKeyPair keyPair()const;
     OKeyPair defaultKeyPair()const;
     QCString configKey()const;
+
 
     void setText( const QString& text );
     void setPixmap( const QPixmap& );
@@ -103,16 +115,20 @@ public:
     bool isEmpty()const;
 
 protected:
+    QObject *object()const;
+    QCString slot()const;
     void setId( int id );
     void setConfigKey( const QCString& );
 
 private:
-    int m_id;
     QString  m_text;
     QCString m_config;
     QPixmap  m_pix;
+    int m_id;
     OKeyPair m_key;
     OKeyPair m_def;
+    QObject *m_obj;
+    QCString m_str;
     class Private;
     Private *d;
 };
@@ -131,17 +147,18 @@ private:
  * You can either handle the QKeyEvent yourself and ask this class if it is
  * handled by your action and let give you the action. Or you can install
  * the event filter and get a signal.
+ * You need to load ans save yourself!
  *
  * @since 1.1.2
  */
 class OKeyConfigManager : public QObject {
     Q_OBJECT
-    typedef QMap<it, OKeyConfigItemList> OKeyMapConfigPrivate;
+    typedef QMap<int, OKeyConfigItem::List> OKeyMapConfigPrivate;
 public:
     OKeyConfigManager(Opie::Core::OConfig *conf = 0,
                       const QString& group = QString::null,
-                      OKeyPairList &block = OKeyPairList(),
-                      bool grabkeyboard = false,  QObject *= 0,
+                      const OKeyPair::List &block = OKeyPair::List(),
+                      bool grabkeyboard = false,  QObject * par = 0,
                       const char* name = 0      );
     ~OKeyConfigManager();
 
@@ -158,22 +175,35 @@ public:
     void addToBlackList( const OKeyPair& );
     void removeFromBlackList( const OKeyPair& );
     void clearBlackList();
-    OKeyPairList blackList()const;
+    OKeyPair::List blackList()const;
 
     void handleWidget( QWidget* );
 
     bool eventFilter( QObject*, QEvent* );
 signals:
-    void keyConfigChanged( Opie::Ui::OKeyConfigManager* );
+    /**
+     * The Signals are triggered on KeyPress and KeyRelease!
+     * You can check the isDown of the QKeyEvent
+     * @see QKeyEvent
+     */
     void actionActivated( QWidget*, QKeyEvent*, const Opie::Ui::OKeyConfigItem& );
 
+    /**
+     * This Signal correspondents to the OKeyConfigItem slot
+     * and object
+     *
+     * @see OKeyConfigItem::slot
+     * @see OKeyConfigItem::object
+     */
+    void actionActivated( QWidget* par, QKeyEvent* key);
+
 private:
-    OKeyConfigItemList keyList( int );
-    OKeyPairList m_blackKeys;
-    OKeyConfigItemList m_keys;
+    OKeyConfigItem::List keyList( int );
+    OKeyConfigItem::List m_keys;
     QValueList<QWidget*> m_widgets;
     Opie::Core::OConfig *m_conf;
     QString m_group;
+    OKeyPair::List m_blackKeys;
     bool m_grab : 1;
     OKeyMapConfigPrivate *m_map;
     class Private;
@@ -181,23 +211,52 @@ private:
 };
 
 
-class OKeyConfigWidget : public QHBox {
+/**
+ * With this Widget you can let the Keyboard Shortcuts
+ * be configured by the user.
+ * There are two ways you can use this widget. Either in a tab were
+ * all changes are immediately getting into effect or in a queue
+ * were you ask for saving. Save won't write the data but only set
+ * it to the OKeyConfigManager
+ *
+ * @since 1.2
+ */
+class OKeyConfigWidget : public QWidget {
     Q_OBJECT
+
 public:
-    enum ChangeMode { Imediate, Queu };
+    /**
+     * Immediate Apply the change directly to the underlying OKeyConfigManager
+     * Queue Save all items and then apply when you save()
+     */
+    enum ChangeMode { Imediate, Queue };
     OKeyConfigWidget( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
-    OKeyConfigWidget( OKeyConfigManager *, QWidget* parent = 0, const char* = 0, WFlags = 0 );
     ~OKeyConfigWidget();
 
     void setChangeMode( enum ChangeMode );
     ChangeMode changeMode()const;
 
-    void setKeyConfig( OKeyConfigManager* );
+    void insert( const QString& name, OKeyConfigManager* );
 
-    void reload();
+    void load();
     void save();
+
+private slots:
+    void slotListViewItem(  QListViewItem* );
+    void slotNoKey();
+    void slotDefaultKey();
+    void slotCustomKey();
+
+
 private:
-    OKeyConfigManager* m_manager;
+    void initUi();
+    Opie::Ui::OListView *m_view;
+    Opie::Ui::Private::OKeyConfigWidgetPrivateList m_list;
+    QLabel *m_lbl;
+    QPushButton *m_btn;
+    QRadioButton *m_def, *m_cus, *m_none;
+    QWidget* m_box;
+    ChangeMode m_mode;
     class Private;
     Private *d;
 };
