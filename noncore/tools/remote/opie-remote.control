@@ -1,0 +1,10 @@
+Files: bin/remote apps/Applications/remote.desktop pics/remote/*.png
+Priority: optional
+Section: opie/applications
+Maintainer: Thomas Stephens <spiralman@softhome.net>
+Architecture: arm
+Version: 0.3-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION), lirc
+License: GPL
+Description: a remote control
+ A remote control using irda. A frontend to lirc.
