@@ -3,111 +3,112 @@
     <name>AddressBookPluginConfig</name>
     <message>
         <source>Max Lines: </source>
-        <translation type="unfinished"></translation>
+        <translation>Макс. линий:</translation>
     </message>
     <message>
         <source>Set the maximum number of lines that should be shown for each anniversaries/birthdays</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить максимальное число линий используемых для каждого юбилея/дня рождения</translation>
     </message>
     <message>
         <source>Clip line after X chars: </source>
-        <translation type="unfinished"></translation>
+        <translation>Обрезать линию после X символов:</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="unfinished"></translation>
+        <translation>После скольки символов данные будут обрезаны</translation>
     </message>
     <message>
         <source>Days look ahead: </source>
-        <translation type="unfinished"></translation>
+        <translation>Дней смотреть вперед:</translation>
     </message>
     <message>
         <source>How many days we should search forward</source>
-        <translation type="unfinished"></translation>
+        <translation>На сколько дней вперед делать поиск</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>
-        <translation type="unfinished"></translation>
+        <translation>Уст. цвет заголовков:</translation>
     </message>
     <message>
         <source>Colors for the headlines !</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвета заголовков !</translation>
     </message>
     <message>
         <source>Set Entry Color: </source>
-        <translation type="unfinished"></translation>
+        <translation>Уст. цвет записи:</translation>
     </message>
     <message>
         <source>This color will be used for shown birthdays/anniversaries !</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот цвет будет использован для показа юбилеев/дней рождений !</translation>
     </message>
     <message>
         <source>Set Urgent
 Color if below </source>
-        <translation type="unfinished"></translation>
+        <translation>Уст. срочный
+цвет если меньше</translation>
     </message>
     <message>
         <source> days: </source>
-        <translation type="unfinished"></translation>
+        <translation>дней:</translation>
     </message>
     <message>
         <source>This urgent color will be used if we are close to the event !</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот цвет будет использован если мы приближаемся к событию !</translation>
     </message>
     <message>
         <source>The urgent color will be used if the birthday/anniversary is closer than given days !</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;Срочный&quot; цвет будет использован если дни рождения/юбилеи ближе чем заданное число дней !</translation>
     </message>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation type="unfinished"></translation>
+        <translation>Чтобы применить установки: Перезапустите приложение!</translation>
     </message>
     <message>
         <source>Enable/Disable Views</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить/Запретить виды</translation>
     </message>
     <message>
         <source>Show &amp;Birthdays</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать &amp;Дни Рождения</translation>
     </message>
     <message>
         <source>Show &amp;Anniveraries</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать &amp;Юбилеи</translation>
     </message>
     <message>
         <source>The next birthdays will just be shown, if enabled!</source>
-        <translation type="unfinished"></translation>
+        <translation>Следующие дни рождения будут показаны, если разрешены!</translation>
     </message>
     <message>
         <source>The next anniversaries will just be shown, if enabled !</source>
-        <translation type="unfinished"></translation>
+        <translation>Следующие юбилеи будут показаны, если разрешены!</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>AddressBook plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Плагин Адресной Книги</translation>
     </message>
     <message>
         <source>Next birthdays in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation type="unfinished"></translation>
+        <translation>Дни рождения в течении след. &lt;b&gt; %1 &lt;/b&gt; дней:</translation>
     </message>
     <message>
         <source>No birthdays in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет дней рождений в течении &lt;b&gt; %1 &lt;/b&gt; дней!</translation>
     </message>
     <message>
         <source>Next anniversaries in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation type="unfinished"></translation>
+        <translation>Юбилеи в течении след. &lt;b&gt; %1 &lt;/b&gt; дней:</translation>
     </message>
     <message>
         <source>No anniversaries in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет юбилеев в течении след. &lt;b&gt; %1 &lt;/b&gt; дней!</translation>
     </message>
     <message>
         <source>Database does not provide this search query ! Please upgrade libOpie !&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>База данных не предоставляет эту опцию поиска ! Пожалуйста обновите libOpie !&lt;br&gt;</translation>
     </message>
 </context>
 </TS>
