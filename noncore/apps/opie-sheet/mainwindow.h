@@ -88,7 +88,6 @@ class MainWindow: public QMainWindow
     void slotFileSave();
     void slotFileSaveAs();
     void slotHelpAbout();
-    void slotHelpGeneral();
     void slotEditAccept();
     void slotEditCancel();
     void slotEditPaste();

@@ -16,8 +16,10 @@
 
 #include <qpe/filemanager.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/resource.h>
 #include <qmessagebox.h>
 #include <qfile.h>
+#include <qtranslator.h>
 #include <qradiobutton.h>
 #include "cellformat.h"
 #include "numberdlg.h"
@@ -25,12 +27,7 @@
 #include "sortdlg.h"
 #include "finddlg.h"
 
-#include "file-new.xpm"
-#include "file-open.xpm"
-#include "file-save.xpm"
-#include "edit-cancel.xpm"
-#include "edit-accept.xpm"
-#include "help-general.xpm"
+
 #include "func-plus.xpm"
 #include "func-minus.xpm"
 #include "func-cross.xpm"
@@ -265,25 +262,25 @@ void MainWindow::setDocument(const QString &applnk_filename)
 
 void MainWindow::initActions()
 {
-  fileNew=new QAction(tr("New File"), QPixmap(file_new_xpm), tr("&New"), 0, this);
+  fileNew=new QAction(tr("New File"), Resource::loadPixmap( "new" ), tr("&New"), 0, this);
   connect(fileNew, SIGNAL(activated()), this, SLOT(slotFileNew()));
-  fileOpen=new QAction(tr("Open File"), QPixmap(file_open_xpm), tr("&Open"), 0, this);
+  fileOpen=new QAction(tr("Open File"), Resource::loadPixmap( "fileopen" ), tr("&Open"), 0, this);
   connect(fileOpen, SIGNAL(activated()), this, SLOT(slotFileOpen()));
-  fileSave=new QAction(tr("Save File"), QPixmap(file_save_xpm), tr("&Save"), 0, this);
+  fileSave=new QAction(tr("Save File"),Resource::loadPixmap( "save" ), tr("&Save"), 0, this);
   connect(fileSave, SIGNAL(activated()), this, SLOT(slotFileSave()));
-  fileSaveAs=new QAction(tr("Save File As"), QPixmap(file_save_xpm), tr("Save &As"), 0, this);
+  fileSaveAs=new QAction(tr("Save File As"), Resource::loadPixmap( "save" ), tr("Save &As"), 0, this);
   connect(fileSaveAs, SIGNAL(activated()), this, SLOT(slotFileSaveAs()));
-  fileQuit=new QAction(tr("Quit"), tr("&Quit"), 0, this);
-  connect(fileQuit, SIGNAL(activated()), this, SLOT(close()));
+  //fileQuit=new QAction(tr("Quit"), tr("&Quit"), 0, this);
+  //connect(fileQuit, SIGNAL(activated()), this, SLOT(close()));
 
-  helpGeneral=new QAction(tr("General Help"), QPixmap(help_general_xpm), tr("&General"), 0, this);
-  connect(helpGeneral, SIGNAL(activated()), this, SLOT(slotHelpGeneral()));
-  helpAbout=new QAction(tr("About Opie Sheet"), tr("&About"), 0, this);
-  connect(helpAbout, SIGNAL(activated()), this, SLOT(slotHelpAbout()));
+  // helpGeneral=new QAction(tr("General Help"), QPixmap(help_general_xpm), tr("&General"), 0, this);
+  //connect(helpGeneral, SIGNAL(activated()), this, SLOT(slotHelpGeneral()));
+  //helpAbout=new QAction(tr("About Opie Sheet"), tr("&About"), 0, this);
+  //connect(helpAbout, SIGNAL(activated()), this, SLOT(slotHelpAbout()));
 
-  editAccept=new QAction(tr("Accept"), QPixmap(edit_accept_xpm), tr("&Accept"), 0, this);
+  editAccept=new QAction(tr("Accept"),Resource::loadPixmap( "enter" ) , tr("&Accept"), 0, this);
   connect(editAccept, SIGNAL(activated()), this, SLOT(slotEditAccept()));
-  editCancel=new QAction(tr("Cancel"), QPixmap(edit_cancel_xpm), tr("&Cancel"), 0, this);
+  editCancel=new QAction(tr("Cancel"), Resource::loadPixmap( "close" ), tr("&Cancel"), 0, this);
   connect(editCancel, SIGNAL(activated()), this, SLOT(slotEditCancel()));
   editCellSelect=new QAction(tr("Cell Selector"), QPixmap(cell_select_xpm), tr("Cell &Selector"), 0, this);
   editCellSelect->setToggleAction(TRUE);
@@ -371,8 +368,8 @@ void MainWindow::initMenu()
   fileOpen->addTo(menuFile);
   fileSave->addTo(menuFile);
   fileSaveAs->addTo(menuFile);
-  menuFile->insertSeparator();
-  fileQuit->addTo(menuFile);
+//  menuFile->insertSeparator();
+//  fileQuit->addTo(menuFile);
   menu->insertItem(tr("&File"), menuFile);
 
   menuEdit=new QPopupMenu;
@@ -399,10 +396,10 @@ void MainWindow::initMenu()
   dataFindReplace->addTo(menuData);
   menu->insertItem(tr("&Data"), menuData);
 
-  menuHelp=new QPopupMenu;
-  helpGeneral->addTo(menuHelp);
-  helpAbout->addTo(menuHelp);
-  menu->insertItem(tr("&Help"), menuHelp);
+//  menuHelp=new QPopupMenu;
+// helpGeneral->addTo(menuHelp);
+//  helpAbout->addTo(menuHelp);
+//  menu->insertItem(tr("&Help"), menuHelp);
 
   submenuRow=new QPopupMenu;
   rowHeight->addTo(submenuRow);
@@ -515,17 +512,6 @@ void MainWindow::initEditToolbar()
   connect(editData, SIGNAL(returnPressed()), this, SLOT(slotEditAccept()));
 
   editCellSelect->addTo(toolbarEdit);
-}
-
-void MainWindow::slotHelpGeneral()
-{
-  if (QFile::exists(helpFile))
-  {
-    QCopEnvelope e("QPE/Application/helpbrowser", "showFile(QString)");
-    e << helpFile;
-  }
-  else
-    QMessageBox::critical(this, tr("Error"), tr("Help file not found!"));
 }
 
 void MainWindow::slotHelpAbout()
