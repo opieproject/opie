@@ -13,9 +13,12 @@
 #include <qtabwidget.h>
 #include <qcombobox.h>
 
-/* system() */
-//#include <stdlib.h>
-#include <opie/oprocess.h>
+#ifdef QTE_VERSION 
+ #include <opie/oprocess.h>
+#else
+ #define OProcess KProcess
+ #include <kprocess.h>
+#endif
 
 #define WIRELESS_OPTS "/etc/pcmcia/wireless.opts"
 
@@ -226,7 +229,8 @@ void WLANImp::accept(){
   if(!interfaceSetup->saveChanges())
     return;
 
-  OProcess insert(QString("sh"));
+  OProcess insert;
+  insert << "sh";
   insert << "-c";
   insert << "cardctl eject && cardctl insert";
 
@@ -237,6 +241,4 @@ void WLANImp::accept(){
   // Close out the dialog
   QDialog::accept();
 }
-
-// wlanimp.cpp
 
