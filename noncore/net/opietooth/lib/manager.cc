@@ -259,16 +259,17 @@ void Manager::searchConnections() {
         delete proc;
     }
 }
-void Manager::slotConnectionExited( OProcess* /*proc*/ ) {
-    qWarning("exited");
+void Manager::slotConnectionExited( OProcess* proc ) {
+    qWarning("<<<<<<<<<<<<<<<<<exited");
     ConnectionState::ValueList list;
     list = parseConnections( m_hcitoolCon );
     emit connections(list );
+    delete proc;
 }
 void Manager::slotConnectionOutput(OProcess* proc, char* cha, int len) {
     QCString str(cha, len );
     m_hcitoolCon.append( str );
-    delete proc;
+    //delete proc;
 }
 ConnectionState::ValueList Manager::parseConnections( const QString& out ) {
     ConnectionState::ValueList list2;

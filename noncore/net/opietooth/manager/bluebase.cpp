@@ -418,7 +418,7 @@ void BlueBase::addServicesToDevice( const QString& device, Services::ValueList s
  * This one triggers the search
  */
 void BlueBase::addConnectedDevices() {
-    m_localDevice->searchConnections();
+        m_localDevice->searchConnections();
 }
 
 

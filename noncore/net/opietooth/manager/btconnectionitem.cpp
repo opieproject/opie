@@ -7,6 +7,7 @@ BTConnectionItem::BTConnectionItem( QListView* parent, const ConnectionState& co
     : BTListItem( parent ){
     m_con = con;
     setText(0, m_con.mac() );
+    setText(1, m_con.connectionMode() );
 }
 BTConnectionItem::~BTConnectionItem() {
 
