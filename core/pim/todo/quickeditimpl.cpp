@@ -13,10 +13,17 @@ QuickEditImpl::QuickEditImpl( QWidget* parent, bool visible )
     : QPEToolBar( (QMainWindow *)parent ), Todo::QuickEdit( (Todo::MainWindow *)parent ) {
     setHorizontalStretchable( TRUE );
 
+    // Load priority icons
+    // TODO - probably should be done globally somewhere else
+    priority1 = Resource::loadPixmap( "todo/priority1" );
+    priority3 = Resource::loadPixmap( "todo/priority3" );
+    priority5 = Resource::loadPixmap( "todo/priority5" );
+	
+	
 	// TODO - come up with icons and replace text priority values
     m_lbl = new OClickableLabel( this );
     m_lbl->setMinimumWidth(15);
-    m_lbl->setText("3");
+    m_lbl->setPixmap( priority3 );
     connect(m_lbl, SIGNAL(clicked() ), this, SLOT(slotPrio()) );
 
     m_edit = new QLineEdit( this );
@@ -57,7 +64,7 @@ void QuickEditImpl::slotEnter() {
 
     if (!m_edit->text().isEmpty() ) {
         todo.setUid(1 ); // new uid
-        todo.setPriority( m_lbl->text().toInt() );
+        todo.setPriority( m_state );
         todo.setSummary( m_edit->text() );
         if ( ((Todo::MainWindow *)parent())->currentCatId() != 0 )
             todo.setCategories( ((Todo::MainWindow *)parent())->currentCatId() );
@@ -69,20 +76,20 @@ void QuickEditImpl::slotEnter() {
     reinit();
 }
 void QuickEditImpl::slotPrio() {
-    m_state++;
-    if (m_state > 2 )
-        m_state = 0;
+    m_state -= 2;
+    if ( m_state < 1 )
+        m_state = 5;
 
-    switch(m_state ) {
-    case 0:
-        m_lbl->setText( "1" );
-        break;
-    case 2:
-        m_lbl->setText( "5" );
-        break;
+    switch( m_state ) {
     case 1:
+        m_lbl->setPixmap( priority1 );
+        break;
+    case 5:
+        m_lbl->setPixmap( priority5 );
+        break;
+    case 3:
     default:
-        m_lbl->setText( "3");
+        m_lbl->setPixmap( priority3 );
         break;
     }
 }
@@ -93,7 +100,7 @@ void QuickEditImpl::slotCancel() {
     reinit();
 }
 void QuickEditImpl::reinit() {
-    m_state = 1;
-    m_lbl->setText("3");
+    m_state = 3;
+    m_lbl->setPixmap( priority3 );
     m_edit->clear();
 }

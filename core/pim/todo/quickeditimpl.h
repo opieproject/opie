@@ -1,6 +1,8 @@
 #ifndef OPIE_QUICK_EDIT_IMPL_H
 #define OPIE_QUICK_EDIT_IMPL_H
 
+#include <qpixmap.h>
+
 #include <qpe/qpetoolbar.h>
 
 #include "quickedit.h"
@@ -30,6 +32,10 @@ private:
     QPopupMenu* m_menu;
     OTodo m_todo;
     bool m_visible;
+
+    QPixmap priority1;
+    QPixmap priority3;
+    QPixmap priority5;
 };
 
 #endif
