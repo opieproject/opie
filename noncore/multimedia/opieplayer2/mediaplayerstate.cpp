@@ -21,8 +21,8 @@ MediaPlayerState::MediaPlayerState( QObject *parent, const char *name )
 
 
 MediaPlayerState::~MediaPlayerState() {
-    Config cfg( "OpiePlayer" );
-    writeConfig( cfg );
+//     Config cfg( "OpiePlayer" );
+//     writeConfig( cfg );
 
 }
 

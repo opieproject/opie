@@ -293,8 +293,8 @@ void MediaPlayer::keyReleaseEvent( QKeyEvent *e) {
 }
 
 void MediaPlayer::cleanUp() {// this happens on closing
-    Config cfg( "OpiePlayer" );
-    playList->writeConfig( cfg );
+     Config cfg( "OpiePlayer" );
+     playList->writeConfig( cfg );
     
 //     QPEApplication::grabKeyboard();
 //     QPEApplication::ungrabKeyboard();

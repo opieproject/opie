@@ -307,10 +307,10 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
 
 PlayListWidget::~PlayListWidget() {
-  if ( d->current ) {
-    delete d->current;
-  }
-  delete d;
+   if ( d->current ) {
+     delete d->current;
+   }
+   delete d;
 }
 
 
