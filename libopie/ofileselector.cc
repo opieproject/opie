@@ -51,6 +51,23 @@
 
 QMap<QString,QPixmap> *OFileSelector::m_pixmaps = 0;
 
+namespace {
+
+  int indexByString( const QComboBox *box, const QString &str ){
+    int index= -1;
+    for(int i= 0; i < box->count(); i++ ){
+      qWarning("str T%sT  boxT%sT", str.latin1(), box->text(i).latin1() );
+      if( str == box->text(i ) ){
+	  index= i;
+	  break;
+      }
+    }
+    return index;
+  }
+
+};
+
+
 OFileSelector::OFileSelector(QWidget *wid, int mode, int selector, const QString &dirName,
 			     const QString &fileName, const QStringList mimetypes ) : QWidget( wid )
 {
@@ -104,13 +121,20 @@ OFileSelector::OFileSelector(QWidget *wid, int mode, int selector, const QString
 }
 void OFileSelector::initPics()
 {
+  qWarning("init pics" );
   m_pixmaps = new QMap<QString,QPixmap>;
-  QPixmap pm  = Resource::loadPixmap( "folder "  );
+  QPixmap pm  = Resource::loadPixmap( "folder"  );
   QPixmap lnk = Resource::loadPixmap( "symlink"  );
   QPainter painter( &pm );
   painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
   pm.setMask( pm.createHeuristicMask( FALSE ) );
   m_pixmaps->insert("dirsymlink", pm );
+
+  QPixmap pm2 = Resource::loadPixmap( "lockedfolder" );
+  QPainter pen(&pm2 );
+  pen.drawPixmap(pm2.width()-lnk.width(), pm2.height()-lnk.height(), lnk );
+  pm2.setMask( pm2.createHeuristicMask( FALSE ) );
+  m_pixmaps->insert("symlinkedlocked", pm2 );
 
 };
 // let's initialize the gui
@@ -144,10 +168,18 @@ void OFileSelector::init()
 {
 
   m_stack = new QWidgetStack(this, "wstack" );
-  m_select = new FileSelector(m_mimetypes.join(";"), m_stack, "fileselector", FALSE, FALSE );
-  m_stack->addWidget(m_select, NORMAL );
-  m_lay->addWidget(m_stack );
-  m_stack->raiseWidget(NORMAL );
+  if( m_selector == NORMAL ){
+    QString currMime;
+    if( m_mimeCheck != 0 )
+      currMime = m_mimeCheck->currentText();
+    updateMimes();
+    m_select = new FileSelector( currMime == "All" ? QString::null : currMime , m_stack, "fileselector", FALSE, FALSE );
+    m_stack->addWidget(m_select, NORMAL );
+    m_lay->addWidget(m_stack );
+    m_stack->raiseWidget(NORMAL );
+  }else {
+    initializeListView();
+  }
 
   if(m_shLne ){ 
     initializeName();
@@ -279,7 +311,7 @@ QString OFileSelector::selectedName( )const
 QStringList OFileSelector::selectedNames()const
 {
   QStringList list;
-
+  return list;
 }
 DocLnk OFileSelector::selectedDocument( )const
 {
@@ -365,6 +397,7 @@ void OFileSelector::reparse()
     m_mimetypes.prepend("All" );
     m_mimeCheck->insertStringList(m_mimetypes );
     // set it to the current mimetype
+    m_mimeCheck->setCurrentItem( indexByString( m_mimeCheck, currMime ) ); 
   };
   QDir dir( m_currentDir );
   //dir.setFilter(-1 );
@@ -380,10 +413,10 @@ void OFileSelector::reparse()
     qWarning("Test:  %s", fi->fileName().latin1() );
     if(fi->isSymLink() ){
       qWarning("Symlink %s", fi->fileName().latin1() );
-      QString file = fi->readLink();
+      QString file = fi->dirPath(true)+"/"+ fi->readLink();
       qWarning("File ->%s", file.latin1() );
       for(int i=0; i<=4; i++ ){ // prepend from dos
-	QFileInfo info( fi->dirPath()+ "/"+file );
+	QFileInfo info( file );
 	if( !info.exists() ){
 	  qWarning("does not exist" );
 	  addSymlink(currMime,  fi, TRUE );
@@ -397,7 +430,7 @@ void OFileSelector::reparse()
 	  addFile(currMime, fi, TRUE );
 	  break;
 	}else if( info.isSymLink() ){
-	  file = info.readLink();
+	  file = info.dirPath(true)+ "/"+ info.readLink();
 	  qWarning("isSymlink again %s", file.latin1() );
 	}else if( i == 4 ){ // just insert it and have the symlink symbol
 	  addSymlink(currMime, fi );
@@ -493,8 +526,7 @@ void OFileSelector::slotMimeCheck(const QString &view ){
     m_stack->addWidget( m_select, NORMAL );
     m_stack->raiseWidget( NORMAL );
   }else{
-
-
+    reparse();
   }
 }
 
@@ -558,7 +590,7 @@ void OFileSelector::updateMimes() // lets check which mode is active
     }
   }else{
     // should be allreday updatet
-
+    ;
   }
 };
 void OFileSelector::initializeListView()
@@ -580,6 +612,13 @@ void OFileSelector::initializeListView()
   header->hide();
   m_View->setSorting(1 );
 };
+/* If a item is locked  depends on the mode
+   if we're in OPEN !isReadable is locked
+   if we're in SAVE !isWriteable is locked
+
+
+ */
+
 
 void OFileSelector::addFile(const QString &mime, QFileInfo *info, bool symlink ){
   qWarning("Add Files" );
@@ -589,6 +628,9 @@ void OFileSelector::addFile(const QString &mime, QFileInfo *info, bool symlink )
   }
 
   MimeType type( info->filePath() );
+  QString name;
+  QString dir;
+  bool locked= false;
   if(mime == "All" ){
     ;
   }else if( type.id() != mime ) {
@@ -597,16 +639,28 @@ void OFileSelector::addFile(const QString &mime, QFileInfo *info, bool symlink )
   QPixmap pix = type.pixmap(); 
   if(pix.isNull() )
     pix = Resource::loadPixmap( "UnknownDocument-14" );
-  if( symlink ) // have a blended pic sometime
-    new OFileSelectorItem( m_View, pix, info->fileName(),
-			   info->lastModified().toString(),
-			   QString::number(info->size() ),
-			   info->dirPath(true) );
-  else
-    new OFileSelectorItem( m_View, pix, info->fileName(),
-			   info->lastModified().toString(),
-			   QString::number(info->size() ),
-			   info->dirPath(true) );
+  dir = info->dirPath( true );
+  if( symlink ) { // check if the readLink is readable
+    // do it right later
+    name = info->fileName() + " -> " + info->dirPath() + "/" + info->readLink();
+  }else{ // keep track of the icons
+    name = info->fileName();
+    if( m_mode == OPEN ){
+      if( !info->isReadable() ){
+	locked = true;
+	pix = Resource::loadPixmap("locked" );
+      }
+    }else if( m_mode == SAVE ){
+      if( !info->isWritable() ){
+	locked = true;
+	pix = Resource::loadPixmap("locked" );
+      }
+    } 
+  }
+  new OFileSelectorItem( m_View, pix, name,
+			 info->lastModified().toString(),
+			 QString::number( info->size() ),
+			 dir, locked ); 
 }
 void OFileSelector::addDir(const QString &mime, QFileInfo *info, bool symlink  )
 {
@@ -614,16 +668,34 @@ void OFileSelector::addDir(const QString &mime, QFileInfo *info, bool symlink  )
     return;
   //if( showDirs )
   {
+    bool locked;
+    QString name;
+    QPixmap pix;
+    if( ( m_mode == OPEN && !info->isReadable() ) || ( m_mode == SAVE && !info->isWritable()  ) ){
+      locked = true;
+      if( symlink ){
+	pix = (*m_pixmaps)["symlinkedlocked"];
+      }else{
+	pix = Resource::loadPixmap("lockedfolder"  );
+      }
+    }else{
+      if( symlink ){
+	pix = (*m_pixmaps)["dirsymlink" ];
+      }else{
+	pix = Resource::loadPixmap("folder"  );
+      }
+    }
     if( symlink){
-      QPixmap map = (*m_pixmaps)["dirsymlink" ];
-      qWarning("Symlink" );
-      new OFileSelectorItem(m_View, map,
-			info->fileName(), info->lastModified().toString() ,
-			QString::number(info->size() ),info->dirPath(true), true );
-    }else
-      new OFileSelectorItem(m_View, Resource::loadPixmap("folder" ),
-			info->fileName(), info->lastModified().toString(),
-			QString::number(info->size() ),info->dirPath(true),  true );
+      name = info->fileName()+ "->"+ info->dirPath(true) +"/" +info->readLink();
+
+    }else{
+      //if(info->isReadable() )
+      name = info->fileName();
+    }
+
+      new OFileSelectorItem(m_View, pix,
+			    name, info->lastModified().toString(),
+			    QString::number(info->size() ),info->dirPath(true),  locked, true );
 
   }
 }

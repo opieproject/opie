@@ -68,7 +68,7 @@ class OFileSelectorItem : public QListViewItem {
  public:
   OFileSelectorItem(QListView *view, const QPixmap &pixmap, const QString &path,
 		    const QString &date, const QString &size, const QString &mDir,
-		    bool isDir=false ): QListViewItem(view) {
+		    bool isLocked=false, bool isDir=false ): QListViewItem(view) {
     setPixmap(0, pixmap );
     setText(1, path );
     setText(2, size );
@@ -76,6 +76,10 @@ class OFileSelectorItem : public QListViewItem {
     //setText(4, mDir );
     m_dir = mDir;
     dir = isDir;
+    mLocked = isLocked;
+  }
+  bool locked() const{
+    return mLocked;
   }
   QString directory()const{
     return m_dir;
@@ -104,6 +108,7 @@ class OFileSelectorItem : public QListViewItem {
     return ke;
   };
  private:
+  bool mLocked:1;
   bool dir:1;
   QString m_dir;
 };
@@ -136,7 +141,7 @@ class OFileSelector : public QWidget {
   bool showDirs()const { return m_dir; }
   void setShowDirs(bool );
 
-  const QListView* listview() { return m_View; };
+  const QListView* listView() { return m_View; };
 
   bool isCaseSensetive()const {  return m_case; }
   void setCaseSensetive(bool caSe );
@@ -169,7 +174,7 @@ class OFileSelector : public QWidget {
   /* the user needs to delete it */
   DocLnk selectedDocument()const;
   /* the user needs to delete it */
-  QValueList<DocLnk> selectedDocuments();
+  QValueList<DocLnk> selectedDocuments()const;
 
  signals:
   void fileSelected( const DocLnk & );
