@@ -474,7 +474,7 @@ QString OContact::toRichText() const
     // business address
     if ( !businessStreet().isEmpty() || !businessCity().isEmpty() ||
 	 !businessZip().isEmpty() || !businessCountry().isEmpty() ) {
-	text += QObject::tr( "<br><br><b>Work Address:</b>" );
+	text += QObject::tr( "<br><b>Work Address:</b>" );
 	marker = true;
     }
 
@@ -490,11 +490,11 @@ QString OContact::toRichText() const
 		    text += "<br>" + Qtopia::escapeString(value) + " ";
 		    marker = true;
 		    
-	    } else
-		    text += "<br>";
-
+	    }
 	    if ( !(value = businessCity()).isEmpty() ) {
 		    marker = true;
+		    if ( businessZip().isEmpty() && !businessStreet().isEmpty() )
+			    text += "<br>";
 		    text += Qtopia::escapeString(value);
 		    if ( state )
 			    text += ", " + Qtopia::escapeString(state);
@@ -566,12 +566,12 @@ QString OContact::toRichText() const
 	marker = true;
     }
 
-    text += "<br>";
+    // text += "<br>";
 
     // home address
     if ( !homeStreet().isEmpty() || !homeCity().isEmpty() ||
 	 !homeZip().isEmpty() || !homeCountry().isEmpty() ) {
-	text += QObject::tr( "<br><br><b>Home Address:</b>" );
+	text += QObject::tr( "<br><b>Home Address:</b>" );
 	marker = true;
     }
 
@@ -586,11 +586,11 @@ QString OContact::toRichText() const
 	    if ( !(value = homeZip()).isEmpty() ){
 		    text += "<br>" + Qtopia::escapeString(value) + " ";
 		    marker = true;
-	    } else
-		    text += "<br>";
-
+	    }
 	    if ( !(value = homeCity()).isEmpty() ) {
 		    marker = true;
+		    if ( homeZip().isEmpty() && !homeStreet().isEmpty() )
+			    text += "<br>";
 		    text += Qtopia::escapeString(value);
 		    if ( !state.isEmpty() )
 			    text += ", " + Qtopia::escapeString(state);
