@@ -1,4 +1,5 @@
 #CONFIG_APPLET	noncore/net/opietooth/applet	applet.pro
+#CONFIG_APPSKEY	noncore/settings/appskey	appskey.pro
 #CONFIG_BINARY	noncore/tools/calc2/binary	binary.pro
 #CONFIG_BLUE-PIN	noncore/net/opietooth/blue-pin	blue-pin.pro
 #CONFIG_CALC2	noncore/tools/calc2	calc2.pro
@@ -44,13 +45,13 @@ CONFIG_OCOPSERVER	x11/ipc/server	ocopserver.pro
 CONFIG_ADDRESSBOOK	core/pim/addressbook	addressbook.pro
 CONFIG_ADVANCEDFM	noncore/apps/advancedfm	advancedfm.pro
 CONFIG_APPEARANCE2	noncore/settings/appearance2	appearance2.pro
-CONFIG_APPSKEY	noncore/settings/appskey	appskey.pro
 CONFIG_AQPKG	noncore/apps/aqpkg	aqpkg.pro
 CONFIG_BACKUP	noncore/settings/backup	backup.pro
 CONFIG_BATTERYAPPLET	core/applets/batteryapplet	batteryapplet.pro
 CONFIG_BATTERYAPPLET-IPAQ	core/applets/batteryapplet-ipaq	batteryapplet-ipaq.pro
 CONFIG_BEND	noncore/mail/bend	bend.pro
 CONFIG_BOUNCE	noncore/games/bounce	bounce.pro
+CONFIG_BUTTON-SETTINGS	core/settings/button	button.pro
 CONFIG_BUZZWORD	noncore/games/buzzword	buzzword.pro
 CONFIG_CALCULATOR	noncore/tools/calculator	calculator.pro
 CONFIG_CARDMON	core/applets/cardmon	cardmon.pro

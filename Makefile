@@ -53,12 +53,12 @@ COREMULTIMEDIA = core/multimedia/opieplayer
 
 CORESETTINGS = core/settings/light-and-power core/settings/security \
 	noncore/settings/netsystemtime core/settings/citytime \
-	core/settings/launcher
+	core/settings/launcher core/settings/button
 
 NONCORESETTINGS  =noncore/settings/language noncore/settings/rotation \
 	noncore/settings/appearance2 noncore/settings/sound \
 	noncore/settings/mediummount \
-	noncore/settings/tabmanager noncore/settings/appskey \
+	noncore/settings/tabmanager \
 	noncore/settings/sshkeys noncore/settings/usermanager \
 	noncore/settings/backup
 
