@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Entrée</translation>
+        <translation>Transmettre Entrée</translation>
     </message>
     <message>
         <source>My Personal Details</source>
@@ -95,7 +95,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Vide</translation>
+        <translation>Non Classé</translation>
     </message>
     <message>
         <source>Import vCard</source>
@@ -103,161 +103,168 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer Rechercher</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauver Toutes les Données</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Config</translation>
     </message>
     <message>
         <source>Not Found</source>
-        <translation type="unfinished"></translation>
+        <translation>Non Trouvé</translation>
     </message>
     <message>
         <source>List</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation type="unfinished"></translation>
+        <translation>Fiches</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Fiche</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrer la Recherche</translation>
     </message>
     <message>
         <source>Right file type ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Type de Fichier Valide?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Yes</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;No</translation>
     </message>
     <message>
         <source>Unable to find a contact for this 
  search pattern!</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de trouver un contact
+pour cette expression!</translation>
     </message>
     <message>
         <source>The selected file 
  does not end with &quot;.vcf&quot;.
  Do you really want to open it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier selectionné
+ne se termine pas par &quot;.vcf&quot;.
+Voulez-vous vraimment l&apos;ouvrir?</translation>
     </message>
     <message>
         <source>Add Contact?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un Contact?</translation>
     </message>
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraimment ajouter une contact pour
+%1?</translation>
     </message>
     <message>
         <source>&amp;All Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui à &amp;Tous</translation>
     </message>
 </context>
 <context>
     <name>ConfigDlg_Base</name>
     <message>
         <source>Query Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Style de Requête</translation>
     </message>
     <message>
         <source>Use Regular Expressions</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser des Expressions Régulières</translation>
     </message>
     <message>
         <source>Use Wildcards (*,?)</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser des Jokers (*, ?)</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Sensible à la casse</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Courrier</translation>
     </message>
     <message>
         <source>Prefer QT-Mail </source>
-        <translation type="unfinished"></translation>
+        <translation>Préferer QT-Mail</translation>
     </message>
     <message>
         <source>Prefer Opie-Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Préferer Opie-Mail</translation>
     </message>
     <message>
         <source>Notice: QT-Mail is just 
 provided in the SHARP 
 default ROM. Opie-Mail 
 is provided free !</source>
-        <translation type="unfinished"></translation>
+        <translation>Note: QT-Mail est fourni
+dans la ROM par défaut du
+SHARP. Opie-Mail est founi
+gratuitement!</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Divers</translation>
     </message>
     <message>
         <source>Search Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Définition de la Recherche</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished">Police</translation>
+        <translation>Police</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation type="unfinished">Petit</translation>
+        <translation>Petit</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished">Normal</translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation type="unfinished">Grand</translation>
+        <translation>Grand</translation>
     </message>
     <message>
         <source>Order</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordre</translation>
     </message>
     <message>
         <source>Select Contact Order:</source>
-        <translation type="unfinished"></translation>
+        <translation>Selectionner l&apos;Ordre des Contacts:</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished">Monter</translation>
+        <translation>Monter</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished">Descendre</translation>
+        <translation>Descendre</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration</translation>
     </message>
 </context>
 <context>
@@ -1152,242 +1159,242 @@ is provided free !</source>
     </message>
     <message>
         <source>Kuwait</source>
-        <translation type="unfinished"></translation>
+        <translation>Koweit</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Inconnu</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Supprimer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Afghanistan</source>
-        <translation type="unfinished"></translation>
+        <translation>Afghanistan</translation>
     </message>
     <message>
         <source>Antarctica</source>
-        <translation type="unfinished"></translation>
+        <translation>Antartique</translation>
     </message>
     <message>
         <source>Armenia</source>
-        <translation type="unfinished"></translation>
+        <translation>Arménie</translation>
     </message>
     <message>
         <source>Bolivia</source>
-        <translation type="unfinished"></translation>
+        <translation>Bolivie</translation>
     </message>
     <message>
         <source>Cameroon</source>
-        <translation type="unfinished"></translation>
+        <translation>Cameroun</translation>
     </message>
     <message>
         <source>Ghana</source>
-        <translation type="unfinished"></translation>
+        <translation>Ghana</translation>
     </message>
     <message>
         <source>Guadeloupe</source>
-        <translation type="unfinished"></translation>
+        <translation>Guadeloupe</translation>
     </message>
     <message>
         <source>Guinea-Bissau</source>
-        <translation type="unfinished"></translation>
+        <translation>Guinea-Bissau</translation>
     </message>
     <message>
         <source>Jamaica</source>
-        <translation type="unfinished"></translation>
+        <translation>Jamaïque</translation>
     </message>
     <message>
         <source>Kiribati</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiribati</translation>
     </message>
     <message>
         <source>Kyrgyzstan</source>
-        <translation type="unfinished"></translation>
+        <translation>Kyrgyzstan</translation>
     </message>
     <message>
         <source>Palestinian Sovereign Areas</source>
-        <translation type="unfinished"></translation>
+        <translation>Zone de Souveraineté Palestinienne</translation>
     </message>
     <message>
         <source>Pitcairn Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Iles Pitcairn</translation>
     </message>
     <message>
         <source>Vietnam</source>
-        <translation type="unfinished"></translation>
+        <translation>Vietnam</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Business Phone</source>
-        <translation type="unfinished">Téléphone (Bureau)</translation>
+        <translation>Téléphone (Bureau)</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation type="unfinished">Fax (Bureau)</translation>
+        <translation>Fax (Bureau)</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation type="unfinished">Portable (Bureau)</translation>
+        <translation>Portable (Bureau)</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation type="unfinished">Email par défaut</translation>
+        <translation>Email par défaut</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation type="unfinished">Emails</translation>
+        <translation>Emails</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation type="unfinished">Téléphone (Domicile)</translation>
+        <translation>Téléphone (Domicile)</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation type="unfinished">Fax (Domicile)</translation>
+        <translation>Fax (Domicile)</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation type="unfinished">Portable (Domicile)</translation>
+        <translation>Portable (Domicile)</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished">Bureau</translation>
+        <translation>Bureau</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation type="unfinished">Profession</translation>
+        <translation>Profession</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation type="unfinished">Assistant</translation>
+        <translation>Assistant</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation type="unfinished">Responsable</translation>
+        <translation>Responsable</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation type="unfinished">Epouse</translation>
+        <translation>Epouse</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished">Genre</translation>
+        <translation>Genre</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished">Date de naissance</translation>
+        <translation>Date de naissance</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation type="unfinished">Anniversaire</translation>
+        <translation>Anniversaire</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation type="unfinished">Surnom</translation>
+        <translation>Surnom</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation type="unfinished">Enfants</translation>
+        <translation>Enfants</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished">Titre</translation>
+        <translation>Titre</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished">Prénom</translation>
+        <translation>Prénom</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation type="unfinished">Second prénom</translation>
+        <translation>Second prénom</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation type="unfinished">Suffixe</translation>
+        <translation>Suffixe</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation type="unfinished">Lister sous</translation>
+        <translation>Lister sous</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation type="unfinished">Fonction</translation>
+        <translation>Fonction</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation type="unfinished">Département</translation>
+        <translation>Département</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation type="unfinished">Société</translation>
+        <translation>Société</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation type="unfinished">Rue (Bureau)</translation>
+        <translation>Rue (Bureau)</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation type="unfinished">Ville (Bureau)</translation>
+        <translation>Ville (Bureau)</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation type="unfinished">Département (Bureau)</translation>
+        <translation>Département (Bureau)</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation type="unfinished">Code postal (Bureau)</translation>
+        <translation>Code postal (Bureau)</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation type="unfinished">Pays (Bureau)</translation>
+        <translation>Pays (Bureau)</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation type="unfinished">Pager (Bureau)</translation>
+        <translation>Alphapage (Bureau)</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation type="unfinished">Page web (Bureau)</translation>
+        <translation>Page web (Bureau)</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation type="unfinished">Rue (Domicile)</translation>
+        <translation>Rue (Domicile)</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation type="unfinished">Ville (Domicile)</translation>
+        <translation>Ville (Domicile)</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation type="unfinished">Département (Domicile)</translation>
+        <translation>Département (Domicile)</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation type="unfinished">Code postal (Domicile)</translation>
+        <translation>Code postal (Domicile)</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation type="unfinished">Pays (Domicile)</translation>
+        <translation>Pays (Domicile)</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation type="unfinished">Page web (Domicile)</translation>
+        <translation>Page web (Domicile)</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished">Notes</translation>
+        <translation>Notes</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation type="unfinished">Groupes</translation>
+        <translation>Groupes</translation>
     </message>
 </context>
 </TS>
