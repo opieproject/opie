@@ -562,7 +562,7 @@ ca* TEScreen::getCookedImage()
 
 void TEScreen::reset()
 {
-  Config cfg("Qkonsole");
+  Config cfg( "Konsole" );
   cfg.setGroup("ScrollBar");
   if( !cfg.readBoolEntry("HorzScroll",0) )
     setMode(MODE_Wrap  ); saveMode(MODE_Wrap  );  // wrap at end of margin

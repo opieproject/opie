@@ -306,7 +306,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
 
   connect( hScrollbar, SIGNAL(valueChanged(int)), this, SLOT( hScrollChanged(int)));
 
-  Config cfg("Qkonsole");
+  Config cfg( "Konsole" );
   cfg.setGroup("ScrollBar");
   switch( cfg.readNumEntry("Position",2)){
   case 0:
@@ -1227,7 +1227,7 @@ void TEWidget::calcGeometry()
     int showhscrollbar = 1;
     int hwidth = 0;
     int dcolumns;
-    Config cfg("Qkonsole");
+    Config cfg( "Konsole" );
     cfg.setGroup("ScrollBar");
     useHorzScroll=cfg.readBoolEntry("HorzScroll",0);
 

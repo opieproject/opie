@@ -102,7 +102,7 @@ connect(ToolButton5,SIGNAL(clicked()),m_PlayListSelection,SLOT(moveSelectedDown(
         item->moveItem( current );
     m_SuggestedCommandList->setSelected( item, TRUE );
     m_SuggestedCommandList->ensureItemVisible( m_SuggestedCommandList->selectedItem() );
-  Config cfg("Qkonsole");
+  Config cfg( "Konsole" );
   cfg.setGroup("Commands");
   if (cfg.readEntry("Commands Set","FALSE") == "TRUE") {
    for (int i = 0; i < 100; i++) {

@@ -90,7 +90,7 @@ void HistoryScroll::setSize(int lines, int cells)
   
 void HistoryScroll::setScroll(bool on)
 {
-  Config cfg("Qkonsole");
+  Config cfg( "Konsole" );
   cfg.setGroup("History");
   //  printf("setScroll(%d)\n", on);
   if (on) {

@@ -20,6 +20,7 @@
 /*                        */
 /* -------------------------------------------------------------------------- */
 // enhancements added by L.J. Potter <ljp@llornkcor.com>
+// enhancements added by Phillip Kuhn
 //#define QT_QWS_OPIE
 
 #include <stdlib.h>
@@ -261,7 +262,7 @@ class HistoryList : public QList<HistoryItem>
 void Konsole::initCommandList()
 {
     //    qDebug("Konsole::initCommandList");
-    Config cfg("Qkonsole");
+    Config cfg( "Konsole" );
     cfg.setGroup("Commands");
     //    commonCombo->setInsertionPolicy(QComboBox::AtCurrent);
     commonCombo->clear();
@@ -371,7 +372,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
     setCaption( "Qkonsole" );
     setIcon( Resource::loadPixmap( "qkonsole/qkonsole" ) );
 
-    Config cfg("Qkonsole");
+    Config cfg( "Konsole" );
     cfg.setGroup("Font");
     QString tmp;
 
@@ -784,7 +785,7 @@ Konsole::historyDialog()
     QLabel *l = new QLabel ( tr( "History Lines:" ), d );
     lay-> addWidget ( l );
 
-    Config cfg("Qkonsole");
+    Config cfg( "Konsole" );
     cfg.setGroup("History");
     int hist = cfg.readNumEntry("history_lines",300);
     int avg_line = cfg.readNumEntry("avg_line_length",60);
@@ -927,7 +928,7 @@ void Konsole::setFont(int f)
             fontList->setItemChecked(i, fonts.at(i)->getFamilyNum() == familyNum
                                      && fonts.at(i)->getSize() == size);
         }
-        Config cfg("Qkonsole");
+        Config cfg( "Konsole" );
         cfg.setGroup("Font");
         QString ss = "Session"+ QString::number(tab->currentPageIndex()+1);
         if (tab->currentPageIndex() == 0)
@@ -1172,7 +1173,7 @@ void Konsole::newSession()
     if(nsessions < 15)
     {    // seems to be something weird about 16 tabs on the Zaurus.... memory?
         TEWidget* te = new TEWidget(tab);
-        Config cfg("Qkonsole");
+        Config cfg( "Konsole" );
         cfg.setGroup("Menubar");
 
         // FIXME use more defaults from config file
@@ -1411,7 +1412,7 @@ void Konsole::colorMenuSelected(int iD)
     //      qDebug( temp.sprintf("colormenu %d", iD));
 
     TEWidget* te = getTe();
-    Config cfg("Qkonsole");
+    Config cfg( "Konsole" );
     cfg.setGroup("Colors");
 
     ColorEntry m_table[TABLE_COLORS];
@@ -1595,7 +1596,7 @@ void Konsole::setColors(QColor foreground, QColor background)
 
 void Konsole::tabMenuSelected(int id)
 {
-    Config cfg("Qkonsole");
+    Config cfg( "Konsole" );
     cfg.setGroup("Tabs");
     tabMenu->setItemChecked(tabPos, false);
     if (id == tm_bottom)
@@ -1632,7 +1633,7 @@ void Konsole::configMenuSelected(int iD)
     //      qDebug( temp.sprintf("configmenu %d",iD));
 
     TEWidget* te = getTe();
-    Config cfg("Qkonsole");
+    Config cfg( "Konsole" );
     cfg.setGroup("Menubar");
     if(iD == cm_wrap)
     {
@@ -1666,7 +1667,7 @@ void Konsole::configMenuSelected(int iD)
 
 void Konsole::changeCommand(const QString &text, int c)
 {
-    Config cfg("Qkonsole");
+    Config cfg( "Konsole" );
     cfg.setGroup("Commands");
     if(commonCmds[c] != text)
     {
@@ -1678,7 +1679,7 @@ void Konsole::changeCommand(const QString &text, int c)
 
 void Konsole::setColor(int sess)
 {
-    Config cfg("Qkonsole");
+    Config cfg( "Konsole" );
     cfg.setGroup("Colors");
     QColor foreground, background;
     QString ss = QString("Session") + QString::number(sess);
@@ -1702,7 +1703,7 @@ void Konsole::scrollMenuSelected(int index)
     //    qDebug( "scrollbar menu %d",index);
 
     TEWidget* te = getTe();
-    Config cfg("Qkonsole");
+    Config cfg( "Konsole" );
     cfg.setGroup("ScrollBar");
 
     if(index == sm_none)
@@ -1749,7 +1750,7 @@ void Konsole::editCommandListMenuSelected(int iD)
 
 
     TEWidget* te = getTe();
-    Config cfg("Qkonsole");
+    Config cfg( "Konsole" );
     cfg.setGroup("Menubar");
     if( iD  == ec_cmdlist)
     {
@@ -1865,7 +1866,7 @@ void Konsole::parseCommandLine()
 
 void Konsole::changeForegroundColor(const QColor &color)
 {
-    Config cfg("Qkonsole");
+    Config cfg( "Konsole" );
     cfg.setGroup("Colors");
     int r, g, b;
     color.rgb(&r,&g,&b);
@@ -1889,7 +1890,7 @@ void Konsole::changeBackgroundColor(const QColor &color)
 {
 
     qDebug("Change background");
-    Config cfg("Qkonsole");
+    Config cfg( "Konsole" );
     cfg.setGroup("Colors");
     int r, g, b;
     color.rgb(&r,&g,&b);
@@ -1901,7 +1902,7 @@ void Konsole::changeBackgroundColor(const QColor &color)
 
 void Konsole::doWrap()
 {
-    Config cfg("Qkonsole");
+    Config cfg( "Konsole" );
     cfg.setGroup("ScrollBar");
     TEWidget* te = getTe();
     if( !cfg.readBoolEntry("HorzScroll",0))
