@@ -1,27 +1,27 @@
 /*
-                     This file is part of the Opie Project
-                      Copyright (C) The Opie Team <opie-devel@handhelds.org>
+                             This file is part of the Opie Project
+                             Copyright (C) The Opie Team <opie-devel@handhelds.org>
               =.
             .=l.
-     .>+-=
-_;:,   .>  :=|.         This program is free software; you can
-.> <`_,  > .  <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--  :           the terms of the GNU Library General Public
-.="- .-=="i,   .._         License as published by the Free Software
-- .  .-<_>   .<>         Foundation; either version 2 of the License,
-  ._= =}    :          or (at your option) any later version.
-  .%`+i>    _;_.
-  .i_,=:_.   -<s.       This program is distributed in the hope that
-  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
-  : ..  .:,   . . .    without even the implied warranty of
-  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
- _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=    =    ;      Library General Public License for more
-++=  -.   .`   .:       details.
-:   = ...= . :.=-
--.  .:....=;==+<;          You should have received a copy of the GNU
- -_. . .  )=. =           Library General Public License along with
-  --    :-=`           this library; see the file COPYING.LIB.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -183,8 +183,6 @@ void Zaurus::init(const QString& cpu_info)
     }
 
     // set initial rotation
-
-    bool flipstate = false;
     switch ( d->m_model ) {
         case Model_Zaurus_SL6000:
         case Model_Zaurus_SLA300:
@@ -318,64 +316,35 @@ int status;  /* set new led status if you call SHARP_LED_SETSTATUS */
 void Zaurus::buzzer ( int sound )
 {
 #ifndef QT_NO_SOUND
-    QString soundname;
+    Sound *snd = 0;
 
     // Not all devices have real sound
     if ( d->m_model == Model_Zaurus_SLC7x0
         || d->m_model == Model_Zaurus_SLB600 ){
 
         switch ( sound ){
-        case SHARP_BUZ_SCHEDULE_ALARM:
-            soundname = "alarm";
-            break;
         case SHARP_BUZ_TOUCHSOUND:
-            soundname = "touchsound";
+            static Sound touch_sound("touchsound");
+            snd = &touch_sound;
             break;
         case SHARP_BUZ_KEYSOUND:
-            soundname = "keysound";
+            static Sound key_sound( "keysound" );
+            snd = &key_sound;
             break;
+        case SHARP_BUZ_SCHEDULE_ALARM:
         default:
-            soundname = "alarm";
-
+            static Sound alarm_sound("alarm");
+            snd = &alarm_sound;
+            break;
         }
     }
 
     // If a soundname is defined, we expect that this device has
     // sound capabilities.. Otherwise we expect to have the buzzer
     // device..
-    if ( !soundname.isEmpty() ){
-        int fd;
-        int vol;
-        bool vol_reset = false;
-
-        Sound snd ( soundname );
-
-        if (( fd = ::open ( "/dev/sound/mixer", O_RDWR )) >= 0 ) {
-            if ( ::ioctl ( fd, MIXER_READ( 0 ), &vol ) >= 0 ) {
-                Config cfg ( "qpe" );
-                cfg. setGroup ( "Volume" );
-
-                int volalarm = cfg. readNumEntry ( "AlarmPercent", 50 );
-                if ( volalarm < 0 )
-                    volalarm = 0;
-                else if ( volalarm > 100 )
-                    volalarm = 100;
-                volalarm |= ( volalarm << 8 );
-
-                if ( ::ioctl ( fd, MIXER_WRITE( 0 ), &volalarm ) >= 0 )
-                    vol_reset = true;
-            }
-        }
-
-        snd. play();
-        while ( !snd. isFinished())
-            qApp->processEvents();
-
-        if ( fd >= 0 ) {
-            if ( vol_reset )
-                ::ioctl ( fd, MIXER_WRITE( 0 ), &vol );
-            ::close ( fd );
-        }
+    if ( snd ){
+        changeMixerForAlarm( 0, "/dev/sound/mixer", snd );
+        snd-> play();
     } else {
         int fd = ::open ( "/dev/sharp_buz", O_WRONLY|O_NONBLOCK );
 
@@ -514,7 +483,7 @@ bool Zaurus::setDisplayBrightness ( int bright )
             // special treatment for devices with the corgi backlight interface
             if (( fd = ::open ( "/proc/driver/fl/corgi-bl", O_WRONLY )) >= 0 )
             {
-                int value = ( bright == 1 ) ? 1 : bright * ( 17.0 / 255.0 );
+                int value = ( bright == 1 ) ? 1 : static_cast<int>( bright * ( 17.0 / 255.0 ) );
                 char writeCommand[100];
                 const int count = sprintf( writeCommand, "0x%x\n", value );
                 res = ( ::write ( fd, writeCommand, count ) != -1 );

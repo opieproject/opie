@@ -238,16 +238,17 @@ bool SIMpad::setLedState ( OLed l, OLedState st )
             write to cs3 */
                 m_leds [0] = st;
                 return true;
-            }
-        }
-    }
-
+ //          }
+//        }
+#else
+    Q_UNUSED( l )
+    Q_UNUSED( st )
 #endif
     return false;
 }
 
 
-bool SIMpad::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, bool autoRepeat )
+bool SIMpad::filter ( int /*unicode*/, int /*keycode*/, int /*modifiers*/, bool /*isPress*/, bool /*autoRepeat*/ )
 {
     //TODO
     return false;
@@ -266,36 +267,10 @@ void SIMpad::playAlarmSound()
 {
 #ifndef QT_NO_SOUND
     static Sound snd ( "alarm" );
-    int fd;
-    int vol;
-    bool vol_reset = false;
 
-    if (( fd = ::open ( "/dev/sound/mixer", O_RDWR )) >= 0 ) {
-        if ( ::ioctl ( fd, MIXER_READ( 0 ), &vol ) >= 0 ) {
-            Config cfg ( "qpe" );
-            cfg. setGroup ( "Volume" );
-
-            int volalarm = cfg. readNumEntry ( "AlarmPercent", 50 );
-            if ( volalarm < 0 )
-                volalarm = 0;
-            else if ( volalarm > 100 )
-                volalarm = 100;
-            volalarm |= ( volalarm << 8 );
-
-            if ( ::ioctl ( fd, MIXER_WRITE( 0 ), &volalarm ) >= 0 )
-                vol_reset = true;
-        }
-    }
-
+    /* save as the Sound is static! */
+    changeMixerForAlarm( 0, "/dev/sound/mixer" , &snd);
     snd. play();
-    while ( !snd. isFinished())
-        qApp->processEvents();
-
-    if ( fd >= 0 ) {
-        if ( vol_reset )
-            ::ioctl ( fd, MIXER_WRITE( 0 ), &vol );
-        ::close ( fd );
-    }
 #endif
 }
 
@@ -335,14 +310,10 @@ bool SIMpad::setDisplayStatus ( bool on )
 {
     qDebug( "ODevice for SIMpad: setDisplayStatus(%s)", on? "on" : "off" );
 
-    bool res = false;
-    int fd;
 
     QString cmdline = QString().sprintf( "echo %s > /proc/cs3", on ? "0xd41a" : "0xd40a" ); //TODO make better :)
 
-    res = ( ::system( (const char*) cmdline ) == 0 );
-
-    return res;
+    return ( ::system( (const char*) cmdline ) == 0 );
 }
 
 

@@ -143,6 +143,8 @@ bool Yopy::setDisplayBrightness( int bright )
             return true;
         }
     }
+#else
+    Q_UNUSED( bright )
 #endif
     return false;
 }

@@ -1,27 +1,27 @@
 /*
-                     This file is part of the Opie Project
-                      Copyright (C) The Opie Team <opie-devel@handhelds.org>
+                             This file is part of the Opie Project
+                             Copyright (C) 2002,2003,2004 The Opie Team <opie-devel@handhelds.org>
               =.
             .=l.
-     .>+-=
-_;:,   .>  :=|.         This program is free software; you can
-.> <`_,  > .  <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--  :           the terms of the GNU Library General Public
-.="- .-=="i,   .._         License as published by the Free Software
-- .  .-<_>   .<>         Foundation; either version 2 of the License,
-  ._= =}    :          or (at your option) any later version.
-  .%`+i>    _;_.
-  .i_,=:_.   -<s.       This program is distributed in the hope that
-  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
-  : ..  .:,   . . .    without even the implied warranty of
-  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
- _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=    =    ;      Library General Public License for more
-++=  -.   .`   .:       details.
-:   = ...= . :.=-
--.  .:....=;==+<;          You should have received a copy of the GNU
- -_. . .  )=. =           Library General Public License along with
-  --    :-=`           this library; see the file COPYING.LIB.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -331,36 +331,9 @@ void iPAQ::playAlarmSound()
 {
 #ifndef QT_NO_SOUND
     static Sound snd ( "alarm" );
-    int fd;
-    int vol;
-    bool vol_reset = false;
 
-    if (( fd = ::open ( "/dev/sound/mixer", O_RDWR )) >= 0 ) {
-        if ( ::ioctl ( fd, MIXER_READ( 0 ), &vol ) >= 0 ) {
-            Config cfg ( "qpe" );
-            cfg. setGroup ( "Volume" );
-
-            int volalarm = cfg. readNumEntry ( "AlarmPercent", 50 );
-            if ( volalarm < 0 )
-                volalarm = 0;
-            else if ( volalarm > 100 )
-                volalarm = 100;
-            volalarm |= ( volalarm << 8 );
-
-            if ( ::ioctl ( fd, MIXER_WRITE( 0 ), &volalarm ) >= 0 )
-                vol_reset = true;
-        }
-    }
-
+    changeMixerForAlarm(0, "/dev/sound/mixer", &snd );
     snd. play();
-    while ( !snd. isFinished())
-        qApp->processEvents();
-
-    if ( fd >= 0 ) {
-        if ( vol_reset )
-            ::ioctl ( fd, MIXER_WRITE( 0 ), &vol );
-        ::close ( fd );
-    }
 #endif
 }
 

@@ -45,6 +45,7 @@
 #include <qpe/resource.h>
 #include <qpe/sound.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/sound.h>
 #include <opie2/okeyfilter.h>
 
 /* STD */
@@ -170,6 +171,10 @@ ODevice::ODevice()
     d->m_holdtime = 1000; // 1000ms
     d->m_buttons = 0;
     d->m_cpu_frequencies = new QStrList;
+
+
+    /* mixer */
+    d->m_sound = d->m_vol   = d->m_mixer = -1;
 
     // New distribution detection code first checks for legacy distributions,
     // identified by /etc/familiar-version or /etc/oz_version.
@@ -705,6 +710,11 @@ void ODevice::virtual_hook(int, void* ){
 
 }
 
+/**
+ * Sends a QCOP message to channel QPE/System
+ * with the message "aboutToSuspend()" if this
+ * is the windowing server
+ */
 void ODevice::sendSuspendmsg()
 {
     if ( isQWS() )
@@ -713,16 +723,63 @@ void ODevice::sendSuspendmsg()
     QCopEnvelope ( "QPE/System", "aboutToSuspend()" );
 }
 
+/**
+ * \brief Prepend the QWSServer::KeyboardFilter to the list of installed KeyFilters
+ *
+ * Prepend a QWSServer::KeyboardFilter to the List of Keyboard
+ * Filters. This function is the only way to prepend a KeyFilter.
+ *
+ * @param aFilter The KeyFilter to be prepended to the list of filters
+ *
+ * @see Opie::Core::OKeyFilter
+ * @see Opie::Core::OKeyFilter::inst()
+ */
 void ODevice::addPreHandler(QWSServer::KeyboardFilter*aFilter)
 {
     Opie::Core::OKeyFilter::inst()->addPreHandler(aFilter);
 }
 
+/**
+ * \brief Remove the QWSServer::KeyboardFilter in the param from the list
+ *
+ * Remove the QWSServer::KeyboardFilter \par aFilter from the List
+ * of Keyfilters. Call this when you delete the KeyFilter!
+ *
+ * @param aFilter The filter to be removed from the Opie::Core::OKeyFilter
+ * @see Opie::Core::ODevice::addPreHandler
+ */
 void ODevice::remPreHandler(QWSServer::KeyboardFilter*aFilter)
 {
     Opie::Core::OKeyFilter::inst()->remPreHandler(aFilter);
 }
 
+void ODevice::playingStopped() {
+    const_cast<QObject*>(sender())->disconnect( this );
+    if ( d->m_sound >= 0 ) {
+        ::ioctl ( d->m_sound, MIXER_WRITE( d->m_mixer ), &d->m_vol );
+        ::close ( d->m_sound );
+    }
+}
+
+void ODevice::changeMixerForAlarm( int mixer, const char* file, Sound *snd ) {
+    if (( d->m_sound = ::open ( file, O_RDWR )) >= 0 ) {
+        if ( ::ioctl ( d->m_sound, MIXER_READ( mixer ), &d->m_vol ) >= 0 ) {
+            Config cfg ( "qpe" );
+            cfg. setGroup ( "Volume" );
+
+            int volalarm = cfg. readNumEntry ( "AlarmPercent", 50 );
+            if ( volalarm < 0 )
+                volalarm = 0;
+            else if ( volalarm > 100 )
+                volalarm = 100;
+            volalarm |= ( volalarm << 8 );
+
+            if ( ::ioctl ( d->m_sound, MIXER_WRITE( mixer ), &volalarm ) >= 0 )
+                register_qpe_sound_finished(snd, this, SLOT(playingStopped()));
+        }
+        d->m_mixer = mixer;
+    }
+}
 
 }
 }
