@@ -7,19 +7,13 @@
 
 #include <opie/oprocess.h>
 
-#include <qpe/filemanager.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/applnk.h>
 
-#include <qmessagebox.h>
-#include <qstringlist.h>
 #include <qfile.h>
-#include <qcstring.h>
-#include <qlineedit.h>
 #include <qmultilineedit.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
-#include <qvariant.h>
 
 #include <errno.h>
 

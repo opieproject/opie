@@ -11,10 +11,6 @@
  *   (at your option) any later version.                                   *
  ***************************************************************************/
 #include <qpe/qpeapplication.h>
-#include <qpe/qcopenvelope_qws.h>
-#include <qpe/config.h>
-#include <qstring.h>
-#include <qstringlist.h>
 
 
 
