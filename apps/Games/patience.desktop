@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=A Game of Patience
 Exec=patience
-Icon=Solitaire
+Icon=cards/Solitaire
 Type=Application
 Name=Patience
 Name[pt_BR]=Paciencia

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=A HTML Help Browser Program
 Exec=helpbrowser
-Icon=HelpBrowser
+Icon=helpbrowser/HelpBrowser
 Type=Application
 Name=Help Browser
 Name[pt_BR] = Navegador de Ajuda

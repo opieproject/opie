@@ -1,4 +1,4 @@
-Files: bin/wordgame apps/Games/wordgame.desktop
+Files: bin/wordgame apps/Games/wordgame.desktop pics/wordgame
 Priority: optional
 Section: opie/games
 Maintainer: Warwick Allison <warwick@trolltech.com>

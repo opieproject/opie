@@ -1,4 +1,4 @@
-Files: bin/advancedfm apps/Applications/advancedfm.desktop
+Files: bin/advancedfm apps/Applications/advancedfm.desktop pics/advancedfm
 Priority: optional
 Section: opie/applications
 Maintainer: L.J. Potter <ljp@llornkcor.com> 

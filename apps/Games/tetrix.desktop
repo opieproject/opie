@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=A Block Stacking Game
 Exec=tetrix
-Icon=Tetrix
+Icon=tetrix/Tetrix
 Type=Application
 Name=Tetrix
 Name[ja]=テトリックス

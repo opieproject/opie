@@ -2,7 +2,7 @@
 Comment = A File Manager Program
 Exec = filebrowser
 File = ../apps/Applications/filebrowser
-Icon = FileBrowser
+Icon = filebrowser/FileBrowser
 Name = File Manager
 Name[pt_BR] = Gerenciador de Arquivos
 Name[de]=Datei Manager

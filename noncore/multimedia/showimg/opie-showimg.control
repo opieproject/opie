@@ -1,4 +1,4 @@
-Files: bin/showimg apps/Applications/showimg.desktop
+Files: bin/showimg apps/Applications/showimg.desktop pics/imageviewer
 Priority: optional
 Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>

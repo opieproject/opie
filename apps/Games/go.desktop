@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=A Board Strategy Game
 Exec=go
-Icon=Go
+Icon=go/Go
 Type=Application
 Name=Go
 Name[pt]=Go

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=A Calculator Program
 Exec=calculator
-Icon=Calculator
+Icon=calc/Calculator
 Type=Application
 Name=Calculator
 Name[pt_BR]=Calculadora

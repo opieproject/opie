@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=A Snake Game
 Exec=snake
-Icon=Snake
+Icon=snake/Snake
 Type=Application
 Name=Snake
 Name[pt_BR]=Cobra

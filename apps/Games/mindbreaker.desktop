@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=A Code Breaking Game
 Exec=mindbreaker
-Icon=Mindbreaker
+Icon=mindbreaker/Mindbreaker
 Type=Application
 Name=Mindbreaker
 Name[pt]=Mindbreaker

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Exec=light-and-power
-Icon=Light
+Icon=lightandpower/Light
 Name=Light & Power
 Name[pt_BR]=Iluminacao e Energia
 Name[no]=Lys

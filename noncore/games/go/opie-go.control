@@ -1,4 +1,4 @@
-Files: bin/go apps/Games/go.desktop
+Files: bin/go apps/Games/go.desktop pics/go
 Priority: optional
 Section: opie/games
 Maintainer: Warwick Allison <warwick@trolltech.com>

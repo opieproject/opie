@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=A word arranging game
 Exec=wordgame
-Icon=WordGame
+Icon=wordgame/WordGame
 Type=Application
 Name=Word Game
 Name[pt_BR]=Palavras Cruzadas
