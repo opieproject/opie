@@ -1,7 +1,7 @@
 /*= -*- c-basic-offset: 4; indent-tabs-mode: nil; -*-
  *
  * librsync -- the library for network deltas
- * $Id: buf.c,v 1.2 2004-09-10 11:18:45 zecke Exp $
+ * $Id: buf.c,v 1.3 2004-09-10 12:48:25 schurig Exp $
  * 
  * Copyright (C) 2000, 2001 by Martin Pool <mbp@samba.org>
  * 
@@ -96,10 +96,11 @@ void rs_filebuf_free(rs_filebuf_t *fb)
 rs_result rs_infilebuf_fill(rs_job_t *job, rs_buffers_t *buf,
                             void *opaque)
 {
-    job=job;
     int                     len;
     rs_filebuf_t            *fb = (rs_filebuf_t *) opaque;
     FILE                    *f = fb->f;
+
+    job=job; // fix unused warning
         
     /* This is only allowed if either the buf has no input buffer
      * yet, or that buffer could possibly be BUF. */
@@ -148,10 +149,11 @@ rs_result rs_infilebuf_fill(rs_job_t *job, rs_buffers_t *buf,
  */
 rs_result rs_outfilebuf_drain(rs_job_t *job, rs_buffers_t *buf, void *opaque)
 {
-    job=job;
     int present;
     rs_filebuf_t *fb = (rs_filebuf_t *) opaque;
     FILE *f = fb->f;
+
+    job=job; // fix unused warning
 
     /* This is only allowed if either the buf has no output buffer
      * yet, or that buffer could possibly be BUF. */
