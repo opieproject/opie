@@ -28,7 +28,7 @@
 #include <qspinbox.h>
 #include "commonwidgets.h"
 
-DateEdit::DateEdit( QWidget *parent = 0, const char *name = 0, WFlags f = 0 )
+DateEdit::DateEdit( QWidget *parent, const char *name, WFlags f )
     : QToolButton(parent, name)
 {
     QPopupMenu *m1 = new QPopupMenu(this);
@@ -82,7 +82,7 @@ void DateEdit::subValueChanged()
     emit valueChanged(current);
 }
 
-TimeEdit::TimeEdit( QWidget *parent = 0, const char *name = 0, WFlags f = 0 )
+TimeEdit::TimeEdit( QWidget *parent, const char *name, WFlags f )
     : QWidget(parent, name, f)
 {
     QHBoxLayout *layout = new QHBoxLayout(this, 0);
@@ -190,7 +190,7 @@ void TimeEdit::subValueChanged()
     emit valueChanged(time());
 }
 
-IntEdit::IntEdit( QWidget *parent = 0, const char *name = 0, WFlags f = 0 )
+IntEdit::IntEdit( QWidget *parent, const char *name, WFlags f )
     : QSpinBox(INT_MIN, INT_MAX, 1, parent, name)
 {
     setValue(0);

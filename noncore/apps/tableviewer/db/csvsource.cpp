@@ -98,6 +98,7 @@ QStringList readElem(QString in)
 	else 
 	    index++;
     }
+    return out;
 }
 
 bool DBCsv::openSource(QIODevice *inDev)

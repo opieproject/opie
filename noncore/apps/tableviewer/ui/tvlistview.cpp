@@ -85,8 +85,8 @@ TVListViewItem::~TVListViewItem()
     data_reference = 0;
 }
 
-TVListView::TVListView(TableState *t, QWidget* parent = 0, 
-	const char *name = 0, WFlags fl =0) : QWidget(parent, name, fl)
+TVListView::TVListView(TableState *t, QWidget* parent, 
+	const char *name, WFlags fl ) : QWidget(parent, name, fl)
 {
     if (!name) 
     	setName("TVListView");

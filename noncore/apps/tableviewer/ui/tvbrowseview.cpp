@@ -37,8 +37,8 @@
 /*!
     Constructs a new TVBrowseView widget 
 */
-TVBrowseView::TVBrowseView(TableState *t, QWidget* parent = 0, const char *name = 0, 
-  WFlags fl =0)
+TVBrowseView::TVBrowseView(TableState *t, QWidget* parent, const char *name, 
+  WFlags fl )
 {
     if (!name) 
   setName("BrowseView");

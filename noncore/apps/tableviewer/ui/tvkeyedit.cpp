@@ -92,8 +92,8 @@ private:
     int position;
 };
 
-TVKeyEdit::TVKeyEdit(TableState *t, QWidget* parent = 0, const char *name = 0, 
-	WFlags fl = 0) : TVKeyEdit_gen(parent, name, true, fl)
+TVKeyEdit::TVKeyEdit(TableState *t, QWidget* parent, const char *name, 
+	WFlags fl) : TVKeyEdit_gen(parent, name, true, fl)
 {
     int i;
     ts = t;

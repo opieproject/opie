@@ -40,8 +40,8 @@
 #include <qscrollview.h>
 #include <qsignalmapper.h>
 
-TVEditView::TVEditView(TableState *s, DataElem *d, QWidget* parent = 0, 
-        const char *name = 0, WFlags fl =0) : QDialog(parent, name, true, fl)
+TVEditView::TVEditView(TableState *s, DataElem *d, QWidget* parent, 
+        const char *name, WFlags fl ) : QDialog(parent, name, true, fl)
 {
     if (!name)
         setName("TVEditView");

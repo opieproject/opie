@@ -679,7 +679,7 @@ bool TVVariant::close(TVVariant n)
 
 Key::Key() : kname(), kexample(), kflags(0) { }
 
-Key::Key(QString name, TVVariant example, int flags = 0) :
+Key::Key(QString name, TVVariant example, int flags) :
     kname(name), kexample(example), kflags(flags) { } 
 
 Key::Key(const Key &other)

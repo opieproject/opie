@@ -26,8 +26,8 @@
 #include <qpushbutton.h>
 #include <qlabel.h>
 
-TVFilterView::TVFilterView(TableState *t, QWidget* parent = 0, 
-                           const char *name = 0, WFlags fl =0) : QDialog(parent, name, TRUE, fl)
+TVFilterView::TVFilterView(TableState *t, QWidget* parent, 
+                           const char *name, WFlags fl ) : QDialog(parent, name, TRUE, fl)
 {
     if ( !name ) 
 	setName( "Filter View" );
