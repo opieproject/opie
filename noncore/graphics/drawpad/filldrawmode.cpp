@@ -38,11 +38,7 @@ void FillDrawMode::mousePressEvent(QMouseEvent* e)
     m_oldRgb = m_image.pixel(x, y);
 
     if (m_oldRgb != m_fillRgb) {
-        m_image.setPixel(x, y, m_fillRgb);
-        fillEast(x + 1, y);
-        fillSouth(x, y + 1);
-        fillWest(x - 1, y);
-        fillNorth(x, y - 1);
+        fillLine(x, y);
 
         m_pDrawPadCanvas->currentPage()->convertFromImage(m_image);
         m_pDrawPadCanvas->viewport()->update();
@@ -59,50 +55,34 @@ void FillDrawMode::mouseMoveEvent(QMouseEvent* e)
     Q_UNUSED(e)
 }
 
-void FillDrawMode::fillEast(int x, int y)
+void FillDrawMode::fillLine(int x, int y)
 {
-    if (x < m_image.width()) {
+    if ((x >= 0) && (x < m_image.width()) && (y >= 0) && (y < m_image.height())) {
         if (m_image.pixel(x, y) == m_oldRgb) {
-            m_image.setPixel(x, y, m_fillRgb);
-            fillEast(x + 1, y);
-            fillSouth(x, y + 1);
-            fillNorth(x, y - 1);
-        }
-    }
-}
+            int x1, x2;
 
-void FillDrawMode::fillSouth(int x, int y)
-{
-    if (y < m_image.height()) {
-        if (m_image.pixel(x, y) == m_oldRgb) {
-            m_image.setPixel(x, y, m_fillRgb);
-            fillEast(x + 1, y);
-            fillSouth(x, y + 1);
-            fillWest(x - 1, y);
-        }
-    }
-}
+            x1 = x - 1;
+            x2 = x + 1;
 
-void FillDrawMode::fillWest(int x, int y)
-{
-    if (x >= 0) {
-        if (m_image.pixel(x, y) == m_oldRgb) {
-            m_image.setPixel(x, y, m_fillRgb);
-            fillSouth(x, y + 1);
-            fillWest(x - 1, y);
-            fillNorth(x, y - 1);
-        }
-    }
-}
+            while ((x1 >= 0) && (m_image.pixel(x1, y) == m_oldRgb)) {
+                x1--;
+            }
 
-void FillDrawMode::fillNorth(int x, int y)
-{
-    if (y >= 0) {
-        if (m_image.pixel(x, y) == m_oldRgb) {
-            m_image.setPixel(x, y, m_fillRgb);
-            fillEast(x + 1, y);
-            fillWest(x - 1, y);
-            fillNorth(x, y - 1);
+            while ((x2 < m_image.width()) && (m_image.pixel(x2, y) == m_oldRgb)) {
+                x2++;
+            }
+
+            for (int i = x1 + 1; i < x2; i++) {
+                m_image.setPixel(i, y, m_fillRgb);
+            }
+
+            for (int i = x1 + 1; i < x2; i++) {
+                fillLine(i, y - 1);
+            }
+
+            for (int i = x1 + 1; i < x2; i++) {
+                fillLine(i, y + 1);
+            }
         }
     }
 }

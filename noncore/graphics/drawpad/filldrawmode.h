@@ -29,10 +29,7 @@ public:
     void mouseMoveEvent(QMouseEvent* e);
 
 private:
-    void fillEast(int x, int y);
-    void fillSouth(int x, int y);
-    void fillWest(int x, int y);
-    void fillNorth(int x, int y);
+    void fillLine(int x, int y);
 
     QImage m_image;
     QRgb m_fillRgb;
