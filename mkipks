@@ -1,6 +1,6 @@
 #!/bin/sh
 
-QTE_VERSION=2.3.2
+QTE_VERSION=2.3.3
 DEB_VERSION=2.0
 
 # Have to do this here, since CVS can't store symlinks
@@ -8,8 +8,13 @@ mkdir -p etc/rc2.d
 rm -f etc/rc2.d/S98opie
 ln -s ../init.d/opie etc/rc2.d/S98opie
 
+rm -f etc/rc2.d/S01bootsplash
+ln -s ../init.d/opie etc/rc2.d/S01bootsplash
+
 rm -f ipaq/etc/rc2.d/S96opieatd
 ln -s ../init.d/opieatd ipaq/etc/rc2.d/S96opieatd
+
+
 
 VERSION_MAJ=$(sed -n -e 's/.*QPE_VERSION "\([0-9]*\)\..*\..*".*/\1/p' <$OPIEDIR/include/qpe/version.h)
 VERSION_MIN=$(sed -n -e 's/.*QPE_VERSION ".*\.\([0-9]*\)\..*".*/\1/p' <$OPIEDIR/include/qpe/version.h)

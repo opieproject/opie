@@ -1,0 +1,5 @@
+#!/bin/sh
+
+/bin/cat /opt/QtPalmtop/pics/bootsplash/bootlogo > /dev/fb0
+
+    
