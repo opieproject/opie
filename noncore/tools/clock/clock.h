@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -20,50 +20,39 @@
 #ifndef CLOCK_H
 #define CLOCK_H
 
+#include "clockbase.h"
+#include "alarmdlgbase.h"
 #include <qdatetime.h>
-#include <qvbox.h>
-#include <qpixmap.h>
 
-class QLCDNumber;
-class QLabel;
 class QTimer;
-class QRadioButton;
-class QPushButton;
-class QDateTime;
+class QLabel;
+class QDialog;
+class AnalogClock;
+class QBoxLayout;
+class QToolButton;
 
-class AnalogClock : public QFrame
+class AlarmDlg: public AlarmDlgBase
 {
     Q_OBJECT
 
 public:
-    AnalogClock( QWidget * parent = 0, const char * name = 0 );
+    AlarmDlg(QWidget *parent = 0, const char *name = 0, bool modal = TRUE,
+	const QString &txt = "Alarm");
 
-    QSizePolicy sizePolicy() const;
-
-    void display( const QTime& time );
+    void    setText(const QString &txt);
 
 
-protected:
-    void drawContents( QPainter *p );
-
-private:
-
-    QPixmap bg;
-    QTime currTime;
-    QTime prevTime;
-    bool clear;
-
-	QPoint rotate( QPoint center, QPoint p, int angle );
-	void drawPointers ( QPainter *, const QRect &r, const QColor &c, const QTime &t, const QTime *t2 = 0 );
-
+private slots:
+    void    checkSnooze(void);
+    void    changePrompt(int minutes);
 };
 
-class Clock : public QVBox
+class Clock : public ClockBase
 {
     Q_OBJECT
 
 public:
-    Clock( QWidget * parent = 0, const char * name = 0, WFlags f=0 );
+    Clock( QWidget *parent=0, const char *name=0, WFlags fl=0 );
     ~Clock();
     QDateTime when;
     bool bSound;
@@ -71,41 +60,56 @@ public:
     static QString appName() { return QString::fromLatin1("clock"); }
 
 private slots:
-    void slotSet();
-    void slotReset();
-    void modeSelect(int);
+    void stopStartStopWatch();
+    void resetStopWatch();
+    void prevLap();
+    void nextLap();
+    void lapTimeout();
+    void tabChanged(QWidget*);
     void updateClock();
     void changeClock( bool );
-    void slotSetAlarm();
-    void slotSnooze();
-    void slotToggleAlarm();
-    void alarmOn();
-    void alarmOff();
+    void setDailyAmPm( int );
+    void setDailyMinute( int );
+    void dailyEdited();
+    void enableDaily( bool );
     void appMessage(const QCString& msg, const QByteArray& data);
-    void timerEvent( QTimerEvent *e );
-    void slotAdjustTime();
+    void alarmTimeout();
+    void applyDailyAlarm();
+    void scheduleApplyDailyAlarm();
+    void slotBrowseMp3File();
 
-	void slotStartTimer();
-	void slotStopTimer();
-	void slotResetTimer();
-	void setSwatchMode( int );
+protected:
+    QDateTime nextAlarm( int h, int m );
+    int dayBtnIdx( int ) const;
+    void closeEvent( QCloseEvent *e );
+    void updateLap();
+    void setSwatchLcd( QLCDNumber *lcd, int ms, bool showMs );
+    bool eventFilter( QObject *, QEvent * );
+    bool spinBoxValid( QSpinBox *sb );
+    bool validDaysSelected(void);
+
 private:
-    bool alarmBool;
     QTimer *t;
-    QLCDNumber *lcd;
-    QLabel *date;
-    QLabel *ampmLabel;
-    QPushButton *set, *reset, *alarmBtn, *snoozeBtn, *alarmOffBtn;
-    QRadioButton *clockRB, *swatchRB;
-    AnalogClock *aclock;
+    QTimer *alarmt;
     QTime swatch_start;
     int swatch_totalms;
+    QArray<int> swatch_splitms;
     bool swatch_running;
+    int swatch_currLap;
+    int swatch_dispLap;
+    QToolButton *prevLapBtn;
+    QToolButton *nextLapBtn;
+    QTimer *lapTimer;
+    AnalogClock* analogStopwatch;
+    QLCDNumber* stopwatchLcd;
+    QBoxLayout *swLayout;
     bool ampm;
-    void clearClock();
-    void clearTimer();
-    void startSWatch();
-    void stopSWatch();
+    bool onMonday;
+    int alarmCount;
+    AlarmDlg* alarmDlg;
+    QToolButton **dayBtn;
+    bool init;
+    QTimer *applyAlarmTimer;
 };
 
 #endif

@@ -44,7 +44,7 @@ void AnalogClock::drawContents( QPainter *p )
 #if !defined(NO_DEBUG)
     static bool first = true;
     if ( first ) {
-	QTOPIA_PROFILE("first paint event");
+//	QTOPIA_PROFILE("first paint event");
 	first = false;
     }
 #endif
