@@ -13,11 +13,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.7 2003-08-01 12:30:16 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.8 2003-08-30 15:28:26 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.cpp,v $
- * Revision 1.7  2003-08-01 12:30:16  eilers
+ * Revision 1.8  2003-08-30 15:28:26  eilers
+ * Removed some unimportant debug output which causes slow down..
+ *
+ * Revision 1.7  2003/08/01 12:30:16  eilers
  * Merging changes from BRANCH_1_0 to HEAD
  *
  * Revision 1.6  2003/07/07 16:19:47  eilers
@@ -170,7 +173,7 @@ bool OContactAccessBackend_XML::save()
 	// Write all contacts
 	QListIterator<OContact> it( m_contactList );
 	for ( ; it.current(); ++it ) {
-		qWarning(" Uid %d at Offset: %x", (*it)->uid(), idx_offset );
+		// qWarning(" Uid %d at Offset: %x", (*it)->uid(), idx_offset );
 		out += "<Contact ";
 		(*it)->save( out );
 		out += "/>\n";
@@ -702,7 +705,7 @@ bool OContactAccessBackend_XML::load( const QString filename, bool isJournal )
 				int *find = dict[ it.key() ];
 				/* Unknown attributes will be stored as "Custom" elements */
 				if ( !find ) {
-					qWarning("Attribute %s not known.", it.key().latin1());
+					// qWarning("Attribute %s not known.", it.key().latin1());
 					//contact.setCustomField(it.key(), it.data());
 					customMap.insert( it.key(),  it.data() );
 					continue;

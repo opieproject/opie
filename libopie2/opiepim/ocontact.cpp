@@ -1107,7 +1107,7 @@ void OContact::setAnniversary( const QDate &v )
 QDate OContact::birthday() const
 {
 	QString str = find( Qtopia::Birthday );
-	qWarning ("Birthday %s", str.latin1() );
+	// qWarning ("Birthday %s", str.latin1() );
 	if ( !str.isEmpty() )
 		return  OConversion::dateFromString ( str );
 	else
@@ -1122,7 +1122,7 @@ QDate OContact::anniversary() const
 {
 	QDate empty;
 	QString str = find( Qtopia::Anniversary );
-	qWarning ("Anniversary %s", str.latin1() );
+	// qWarning ("Anniversary %s", str.latin1() );
 	if ( !str.isEmpty() )
 		return OConversion::dateFromString ( str );
 	else
