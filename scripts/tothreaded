@@ -1,0 +1,132 @@
+#!/bin/sh
+
+# PURPOSE :
+#
+# this script converts a non-threaded control file to a threaded one
+# by extending appropriate names with -mt as extension
+#
+# eg abc.control becoms abc-mt.control
+#
+
+#
+# make sure that the depends expression has enough spaces
+# expression can contian : , ( ) || && 
+#
+tokenize() {
+    sed "s/,/ & /g" | sed "s/)/ & /g" | sed "s/(/ & /g" |  sed "s/|/ & /g" | sed "s/&/ & /g"
+}
+
+#
+# function converts package name to threaded equivalend IF the
+# package file HAS a threaded version
+#
+findthreadedequiv() {
+      local isin i
+      for i in $*
+      do
+        isin=`grep "^$i\$" "$ALLTHREADEDPKGSFILE"`
+        if [ -z "$isin" ]
+        then
+          # no threaded package
+          echo -n "$i "
+        else
+          # threaded package
+          echo -n "${isin}-mt " 
+        fi
+      done
+      echo 
+}
+
+#
+# signature of binary files
+# currently obsolete
+#
+# ISBINARY="*ELF*LSB*"
+
+usage() {
+      echo "Usage : tothreaded <controlfile> <ALLPackages file>"
+      exit 2
+}
+
+. scripts/SpecialMTFiles
+
+#
+# get the name of the controlfile to check for threading
+#
+if [ -z "$1" ]
+then
+    usage
+fi
+controlfile=$1
+shift
+
+case $controlfile in
+  *-mt.control)
+    #already threaded
+    echo $controlfile
+    exit 0;
+    ;;
+esac
+
+#
+# file containing list of all known threaded packages
+#
+if [ -z "$1" ]
+then
+    usage
+fi
+ALLTHREADEDPKGSFILE=$1
+shift
+
+#
+# strip out the name of the package
+#
+packagename=${controlfile##*/}  # path
+packagename=${packagename%.control} # extension
+
+#
+# generate new control file
+#
+newcontrolfile=${controlfile/\.control/-mt\.control}
+
+#
+# read all lines in original control file
+#
+while read line
+do
+  case $line in
+    # convert some files to threaded equivalent
+    "Files:"*)
+       files=${line#Files:}
+       # thread-converted files
+       T_files=`ConvertSpecialFiles "$files"`
+       echo "Files: $T_files"
+       ;;
+     "Package: "*)
+       T_package=`findthreadedequiv ${line#Package: }`
+       echo "Package: ${T_package}"
+       ;;
+     "Depends: "*)
+       depends=`echo "${line#Depends: }" | tokenize`
+       T_depends=`findthreadedequiv ${depends}`
+       echo "Depends: $T_depends"
+       ;;
+     "Provides: "*)
+       T_provides=`findthreadedequiv ${line#Provides: }`
+       echo "Provides: $T_provides"
+       ;;
+     "Conflicts: "*)
+       conflicts=`echo "${line#Conflicts: }" | tokenize`
+       T_conflicts=`findthreadedequiv ${conflicts}`
+       echo "Conflicts: $T_conflicts"
+       ;;
+     *":"*) 
+       echo "$line"
+       ;;
+     *) # al other lines
+       echo " $line"
+       ;;
+  esac
+done < $controlfile > $newcontrolfile
+
+echo $newcontrolfile

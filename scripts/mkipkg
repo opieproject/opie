@@ -179,15 +179,15 @@ createFileList()
     local includemaskpresent=0
     local excludemaskpresent=0
 
-    if (cat $1|grep -q ^FileExcludeMask); then
+    if (grep -q ^FileExcludeMask $1); then
         excludemaskpresent=1
         excludeMask=$(eval echo '"'$(sed -n -e "s,^FileExcludeMask: *,,p" $1)'"')
     fi
-    if (cat $1|grep -q ^FileIncludeMask); then
+    if (grep -q ^FileIncludeMask $1); then
         includemaskpresent=1
         includeMask=$(eval echo '"'$(sed -n -e "s,^FileIncludeMask: *,,p" $1)'"')
     else
-        if (cat $1|grep -q ^Files:); then
+        if (grep -q ^Files: $1); then
             includemaskpresent=1
             includeMask=$(eval echo '"'$(sed -n -e "s,^Files: *,,p" $1)'"')
         fi
@@ -195,7 +195,9 @@ createFileList()
  
     _pushd $destdir
     
-    excludeMask="$excludeMask CONTROL/* usr/share/*"
+    declare -a excludeMaskArray
+    excludeMaskArray=( $excludeMask )
+    excludeMaskArray=( "${excludeMaskArray[@]}" "CONTROL/*" "usr/share/*" )
 
     if [ $includemaskpresent != 1 ]; then
         includeMask="."
@@ -209,21 +211,19 @@ createFileList()
 
     expandMaskToList "$includeMask" _fileList
 
-    _excludeList=
-    if [ -n "$excludeMask" ]; then
-        expandMaskToList "$excludeMask" _excludeList
-        _excludeList="$_excludeList `find -name \*CVS\* -o -name \*SCCS\*`"
-    fi
+    excludeMaskArray=( "${excludeMaskArray[@]}" "*/CVS*" "*/SCCS*" )
 
     local realFileList=
     local missing=0
     for file in $_fileList; do
         local containedInList=0
-        for i in $_excludeList; do
-            if [ $file = $i ]; then
+        for i in "${excludeMaskArray[@]}"; do
+            if [[ $file == $i ]]; then
                 containedInList=1
+                break;
             fi
         done
+
         if [ $containedInList = 0 ]; then
             if ! [ -e $file -o -L $file ]; then
                 echo "$self: $file not found"

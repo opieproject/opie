@@ -1,0 +1,14 @@
+ConvertSpecialFiles() {
+       local f
+       for f in "$*"
+       do
+         case "$f" in
+           *libqte*)
+             echo ${f//qte/qte-mt}
+             ;;
+           *)
+             echo $f
+             ;;
+         esac
+       done
+}

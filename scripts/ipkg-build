@@ -5,21 +5,56 @@
 # based on a script by Steve Redler IV, steve@sr-tech.com 5-21-2001
 set -e
 
-ipkg_extract_value() {
-	sed -e "s/^[^:]*:[[:space:]]*//"
+#declare array for values and fields found in control file
+declare -a AllValues AllFields
+
+collect_values() {
+      local i line
+
+      i=0
+      while read line
+      do
+        AllFields[$i]=${line%%:*}
+        AllValues[$i]=`echo ${line#*:}` # echo to remove spaces
+        let i=i+1
+      done < ${pkg_dir}/${CONTROL}/control
 }
 
 required_field() {
-	field=$1
+        local field i
+        field=$1
 
-	value=`grep "^$field:" < $CONTROL/control | ipkg_extract_value`
-	if [ -z "$value" ]; then
-		echo "*** Error: $CONTROL/control is missing field $field" >&2
-		return 1
-	fi
-	echo $value
-	return 0
+        i=0
+        for af in "${AllFields[@]}"
+        do
+          if [ "$field" = "$af" ]
+          then
+            # return value
+            echo "${AllValues[$i]}"
+            return 0;
+          fi
+          let i=i+1
+        done
+        # not found
+	echo "*** Error: $CONTROL/control is missing field $field" >&2
+	return 1
 }
+
+#ipkg_extract_value() {
+#	sed -e "s/^[^:]*:[[:space:]]*//"
+#}
+#
+#required_field() {
+#	field=$1
+#
+#	value=`grep "^$field:" < $CONTROL/control | ipkg_extract_value`
+#	if [ -z "$value" ]; then
+#		echo "*** Error: $CONTROL/control is missing field $field" >&2
+#		return 1
+#	fi
+#	echo $value
+#	return 0
+#}
 
 pkg_appears_sane() {
 	local pkg_dir=$1
@@ -137,6 +172,9 @@ while getopts "cg:o:" opt; do
 	esac
 done
 
+# maks sure that tar produces headers compatible with busybox format
+# debian needs this
+ogargs="$ogargs --format=oldgnu"
 
 shift $(($OPTIND - 1))
 
@@ -170,6 +208,9 @@ if [ -z "$CONTROL" ]; then
 	echo "*** Error: Directory $pkg_dir has no CONTROL subdirectory." >&2
 	exit 1
 fi
+
+# load values 
+collect_values 
 
 if ! pkg_appears_sane $pkg_dir; then
 	echo >&2
