@@ -20,7 +20,7 @@ SOURCES		=	configfile.cpp \
 			smtphandler.cpp
 INCLUDEPATH	+=	$(OPIEDIR)/include
 LIBS		+=	-L$(OPIEDIR)/lib -lqpe
-TARGET		=	mail
+TARGET		=	coremail
 DESTDIR      = $(OPIEDIR)/lib
 
 TRANSLATIONS = ../../../i18n/de/libmail.ts \
