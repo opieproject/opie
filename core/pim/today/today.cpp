@@ -26,6 +26,7 @@
 #include <qpe/global.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/contact.h>
+#include <qpe/timestring.h>
 
 #include <qdir.h>
 #include <qfile.h>
@@ -130,16 +131,33 @@ void Today::init() {
 
     cfg.setGroup( "General" );
     m_iconSize = cfg.readNumEntry( "IconSize", 18 );
+    m_hideBanner = cfg.readNumEntry( "HideBanner", 0 );
     setRefreshTimer(  cfg.readNumEntry( "checkinterval", 15000 ) );
 
     // set the date in top label
     QDate date = QDate::currentDate();
-    QString time = ( tr( date.toString() ) );
-    DateLabel->setText( QString( "<font color=#FFFFFF>" + time + "</font>" ) );
+    DateLabel->setText( QString( "<font color=#FFFFFF>" + TimeString::longDateString( date ) + "</font>" ) );
 
     if ( layout ) {
       delete layout;
     }
+
+    if ( m_hideBanner )  {
+        Opiezilla->hide();
+        TodayLabel->hide();
+        Frame->setMaximumHeight( 18 );
+        Frame->setMinimumHeight( 18 );
+        DateLabel->setGeometry( QRect( 10, 2, 168, 12 ) );
+        ConfigButton->setGeometry( QRect( QApplication::desktop()->width()-20, 0, 25, 20 ) );
+    } else {
+        Opiezilla->show();
+        TodayLabel->show();
+        Frame->setMaximumHeight( 50 );
+        Frame->setMinimumHeight( 50 );
+        DateLabel->setGeometry( QRect( 10, 35, 168, 12 ) );
+        ConfigButton->setGeometry( QRect( QApplication::desktop()->width()-80, 29, 25, 20 ) );
+    }
+
     layout = new QVBoxLayout( this );
     layout->addWidget( Frame );
     layout->addWidget( OwnerField );
@@ -319,7 +337,7 @@ void Today::startConfig() {
     TodayPlugin plugin;
     QList<TodayConfigWidget> configWidgetList;
 
-    for ( int i = pluginList.count() - 1  ; i >= 0; i-- ) {
+    for ( int i = pluginList.count() - 1; i >= 0; i-- ) {
         plugin = pluginList[i];
 
         // load the config widgets in the tabs

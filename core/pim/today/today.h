@@ -66,6 +66,7 @@ private slots:
     int m_newStart;
     int m_iconSize;
     int m_maxCharClip;
+    int m_hideBanner;
 };
 
 #endif

@@ -60,10 +60,10 @@ private:
     bool m_applets_changed;
 
     QLabel* TextLabel2;
-    QCheckBox* CheckBoxAuto;
+    QCheckBox* CheckBoxAuto, *CheckBoxHide;
     QWidget* tab_2;
     QWidget* tab_3;
-    QLabel* TextLabel1;
+    QLabel* TextLabel1, *TextLabel4;
     QSpinBox* SpinBox7;
     QLabel* TimeLabel;
     QSpinBox* SpinBoxTime;

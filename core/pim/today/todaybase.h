@@ -43,6 +43,8 @@ public:
     QLabel* Frame;
     QLabel* DateLabel;
     QFrame* Frame15;
+    QLabel* Opiezilla;
+    QLabel* TodayLabel;
     OClickableLabel* ConfigButton;
 
 protected:

@@ -58,7 +58,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
   Frame->setMinimumHeight( 50 );
 
   // Today text
-  QLabel* TodayLabel = new QLabel( Frame, "TodayText" );
+  TodayLabel = new QLabel( Frame, "TodayText" );
   TodayLabel->setGeometry( QRect( 10, 1, 168, 40 ) );
   QFont TodayLabel_font(  TodayLabel->font() );
   TodayLabel_font.setBold( TRUE );
@@ -77,7 +77,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
   DateLabel->setTextFormat( RichText );
 
   // Opiezilla
-  QLabel* Opiezilla = new QLabel( Frame, "OpieZilla" );
+  Opiezilla = new QLabel( Frame, "OpieZilla" );
   Opiezilla->setPixmap( opiezilla );
   Opiezilla->setGeometry( QApplication::desktop()->width()-50 ,1, 45, 47 );
   QWhatsThis::add( Opiezilla , tr( "Today by Maximilian Reiﬂ" ) );

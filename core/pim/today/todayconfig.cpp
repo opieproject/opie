@@ -54,7 +54,7 @@ public:
 TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal )
     : QDialog( parent, name, modal, WStyle_ContextHelp ) {
 
-    setCaption( tr( "Today config" ) );
+    setCaption( tr( "Today Config" ) );
 
     QVBoxLayout *layout = new QVBoxLayout( this );
     TabWidget3 = new OTabWidget ( this, "tabwidget", OTabWidget::Global, OTabWidget::Bottom );
@@ -85,6 +85,14 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal )
     QWhatsThis::add( TextLabel2 , tr( "Check this if today should be autostarted on resume." ) );
     CheckBoxAuto = new QCheckBox( hbox_auto, "CheckBoxAuto" );
     QWhatsThis::add( CheckBoxAuto, tr( "Check this if today should be autostarted on resume." ) );
+
+    QHBox *hbox_hide = new QHBox( tab_3 );
+    TextLabel4 = new QLabel( hbox_hide, "HideBanner" );
+    TextLabel4->setText( tr( "Tiny Banner" ) );
+    //QWhatsThis::add( TextLabel2 , tr( "Check this if today should be autostarted on resume." ) );
+    CheckBoxHide = new QCheckBox( hbox_hide, "CheckBoxHide" );
+    // QWhatsThis::add( CheckBoxAuto, tr( "Check this if today should be autostarted on resume." ) );
+
     QHBox *hbox_inactive = new QHBox( tab_3 );
     TimeLabel = new QLabel( hbox_inactive, "TimeLabel" );
     TimeLabel->setText( tr( "minutes inactive" ) );
@@ -112,6 +120,7 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal )
     QWhatsThis::add(  SpinRefresh, tr( "How often should Today refresh itself" ) );
 
     tab3Layout->addWidget( hbox_auto );
+    tab3Layout->addWidget( hbox_hide );
     tab3Layout->addWidget( hbox_inactive );
     tab3Layout->addWidget( hbox_iconSize );
     tab3Layout->addWidget( hbox_refresh );
@@ -160,6 +169,7 @@ void TodayConfig::readConfig() {
     m_iconSize = cfg.readNumEntry( "IconSize", 18 );
     SpinBoxIconSize->setValue( m_iconSize );
     SpinRefresh->setValue( cfg.readNumEntry( "checkinterval", 15000 ) / 1000 );
+    CheckBoxHide->setChecked( cfg.readNumEntry( "HideBanner", 0 ) );
 
 
     cfg.setGroup( "Plugins" );
@@ -207,6 +217,7 @@ void TodayConfig::writeConfig() {
 
     cfg.setGroup( "General" );
     cfg.writeEntry( "IconSize", m_iconSize );
+    cfg.writeEntry( "HideBanner",  CheckBoxHide->isChecked() );
     cfg.writeEntry( "checkinterval", SpinRefresh->value()*1000 );
 
     // set autostart settings
