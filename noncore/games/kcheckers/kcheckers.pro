@@ -10,9 +10,9 @@ SOURCES		= checkers.cpp \
 		  kcheckers.cpp \
 		  main.cpp \
 		  rcheckers.cpp
-INTERFACES	= 
+INTERFACES	=
 INCLUDEPATH	+= $(OPIEDIR)/include
-LIBS		+= -lqpe
+LIBS		+= -lqpe -lopiecore2
 TARGET		= kcheckers
 
 
