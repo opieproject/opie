@@ -43,15 +43,18 @@ using namespace Opie::Core;
 
 
 SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
-        : SoundSettingsBase( parent, objname, TRUE, fl )
+        : SoundSettingsBase( parent, objname, true, fl )
 {
-    keyReset=FALSE;
+    keyReset=false;
     noWarning=false;
     Config config( "qpe");
     config.setGroup( "Volume" );
     Config cfg("Vmemo");
-    connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
-    AlertCheckBox->setChecked(cfg.readBoolEntry("Alert"));
+
+ 
+//		connect(qApp,SIGNAL(aboutToQuit()),SLOT(cleanUp()));
+		
+    AlertCheckBox->setChecked( cfg.readBoolEntry("Alert", 1));
     
     cfg.setGroup("Record");
     int rate=config.readNumEntry("SampleRate", 22050);
@@ -72,28 +75,28 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
 #if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX)
 //since ipaq and zaurus have particular
 //devices
-    bool systemZaurus=FALSE;
+    bool systemZaurus=false;
     struct utsname name; /* check for embedix kernel running on the zaurus*/
     if (uname(&name) != -1) {// TODO change this here,...
         QString release=name.release;
-        if( release.find("embedix",0,TRUE) != -1) {
+        if( release.find("embedix",0,true) != -1) {
             odebug << "IS System Zaurus" << oendl; 
-            systemZaurus=TRUE;
+            systemZaurus=true;
         }
     }
     if(!systemZaurus) {
-        stereoCheckBox->setChecked(TRUE);
+        stereoCheckBox->setChecked(true);
     }
-    stereoCheckBox->setEnabled(FALSE);
-    sixteenBitCheckBox->setEnabled(FALSE);
+    stereoCheckBox->setEnabled(false);
+    sixteenBitCheckBox->setEnabled(false);
 #else
 #endif
     int sRate=cfg.readNumEntry("SizeLimit", 30);
     odebug << "" << sRate << "" << oendl; 
 
-    if(sRate ==30)
+    if(sRate == 30)
         timeLimitComboBox->setCurrentItem(0);
-    else if(sRate==20)
+    else if(sRate == 20)
         timeLimitComboBox->setCurrentItem(1);
     else if(sRate == 15)
         timeLimitComboBox->setCurrentItem(2);
@@ -107,7 +110,8 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
     sixteenBitCheckBox->setChecked(cfg.readNumEntry("SixteenBit", 1));
 
     cfg.setGroup("Defaults");
-    keyComboBox->setCurrentItem(cfg.readNumEntry("toggleKey") );
+		recordKey = cfg.readNumEntry("toggleKey");
+    keyComboBox->setCurrentItem( recordKey);
 
     updateStorageCombo();
 
@@ -115,16 +119,11 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
     vmCfg.setGroup("Defaults");
     adpcmCheckBox->setChecked( vmCfg.readBoolEntry("use_ADPCM", 0));
 
-    connect( LocationComboBox,SIGNAL(activated(const QString&)), this,
-             SLOT( setLocation(const QString&)));
-    connect( keyComboBox,SIGNAL(activated(int)), this,
-             SLOT( setKeyButton(int)));
-    connect( timeLimitComboBox,SIGNAL(activated(const QString&)), this,
-             SLOT( setSizeLimitButton(const QString&)));
-    connect( restartCheckBox,SIGNAL( toggled(bool)), this,
-             SLOT( restartOpie(bool)));
-    connect( adpcmCheckBox,SIGNAL( toggled(bool)), this,
-             SLOT( slotAdpcm(bool)));
+    connect(LocationComboBox,SIGNAL(activated(const QString&)),this,SLOT(setLocation(const QString&)));
+    connect(keyComboBox,SIGNAL(activated(int)),this,SLOT(setKeyButton(int)));
+    connect(timeLimitComboBox,SIGNAL(activated(const QString&)),this,SLOT(setSizeLimitButton(const QString&)));
+    connect(restartCheckBox,SIGNAL( toggled(bool)),this,SLOT(restartOpie(bool)));
+    connect(adpcmCheckBox,SIGNAL( toggled(bool)),this,SLOT(slotAdpcm(bool)));
 
    //     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 }
@@ -134,8 +133,8 @@ void SoundSettings::updateStorageCombo() {
     Config config( "Vmemo" );
     config.setGroup( "System" );
     QString loc = config.readEntry("RecLocation","/");
-    int i=0;
-    int set=0; 
+    int i = 0;
+    int set = 0; 
     StorageInfo storageInfo;
     QString sName, sPath;
     QStringList list;
@@ -149,7 +148,7 @@ void SoundSettings::updateStorageCombo() {
         const QString path = (*it)->path();
         odebug << "storage name "+name +" storage path is "+path << oendl; 
         list << name + ": " +path;
-        if( loc.find( path,0,TRUE) != -1)
+        if( loc.find( path,0,true) != -1)
             set = i;      
 //   if(dit.current()->file().find(path) != -1 ) storage=name;
         i++;
@@ -168,7 +167,14 @@ void SoundSettings::setLocation(const QString & string) {
     config.write();
 }
 
+ void SoundSettings::accept() {
+		 cleanUp();
+		 qApp->quit();
+}
+
+
 void SoundSettings::cleanUp() {
+
     Config cfg("Vmemo");
     cfg.writeEntry("Alert",AlertCheckBox->isChecked());
 
@@ -179,22 +185,27 @@ void SoundSettings::cleanUp() {
     if(keyReset && noWarning) {
         QCopEnvelope ("QPE/System", "restart()");
     }
-}
-
-void SoundSettings::setKeyButton( int index) {
-    Config cfg("Vmemo");
     cfg.setGroup("Defaults");
-    cfg.writeEntry( "toggleKey", index );
-    keyReset = TRUE;
-    if( index == 1) {
+    cfg.writeEntry( "toggleKey", recordKey);
+    if( recordKey == 1) {
         cfg.writeEntry( "hideIcon", 0 );
-        keyLabel->setText(tr("Shows icon"));
     }
     else {
         cfg.writeEntry( "hideIcon", 1);
-        keyLabel->setText(tr("Hides icon"));
     }
     cfg.write();
+}
+
+void SoundSettings::setKeyButton( int index) {
+		recordKey = index;
+		restartCheckBox->setChecked(true);
+    keyReset = true;
+    if( index == 1) {
+        keyLabel->setText(tr("Shows icon"));
+    }
+    else {
+        keyLabel->setText(tr("Hides icon"));
+    }
 }
 
 void SoundSettings::updateLocationCombo() {
@@ -205,7 +216,7 @@ void SoundSettings::setSizeLimitButton(const QString &index) {
 
     Config cfg("Vmemo");
     cfg.setGroup("Record");
-    if(index.find("Unlimited",0,TRUE) != -1)
+    if(index.find("Unlimited",0,true) != -1)
         cfg.writeEntry("SizeLimit", -1);
     else
         cfg.writeEntry("SizeLimit", index);

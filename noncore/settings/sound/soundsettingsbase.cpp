@@ -68,7 +68,8 @@ static const char* const image1_data[] = {
  *  TRUE to construct a modal dialog.
  */
 SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool modal, WFlags fl )
-    : QMainWindow( parent, name, fl )
+    : QDialog( parent, name, fl )
+//    : QMainWindow( parent, name, fl )
 {
     QPixmap image0( ( const char** ) image0_data );
     QPixmap image1( ( const char** ) image1_data );

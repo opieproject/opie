@@ -31,15 +31,18 @@ Q_OBJECT
 public:
  static QString appName() { return QString::fromLatin1("sound"); }
  SoundSettings( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+// ~SoundSettings();
   
 protected:
-   bool noWarning;
-/*  void accept(); */
+ int recordKey, hideIt;
+ bool noWarning;
+  void accept(); 
 /*  void reject(); */
  void updateStorageCombo();
  void updateLocationCombo();
   
 private slots:
+//void closeEvent(QCloseEvent *  ); 
  void setKeyButton( int);
  void setSizeLimitButton(const QString &);
  void setLocation(const QString &);

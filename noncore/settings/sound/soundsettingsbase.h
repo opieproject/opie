@@ -11,7 +11,7 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
-#include <qmainwindow.h>
+//#include <qmainwindow.h>
 
 class QVBoxLayout; 
 class QHBoxLayout; 
@@ -22,7 +22,8 @@ class QGroupBox;
 class QLabel;
 class QSlider;
 
-class SoundSettingsBase : public QMainWindow
+class SoundSettingsBase : public QDialog
+//class SoundSettingsBase : public QMainWindow
 { 
     Q_OBJECT
 
