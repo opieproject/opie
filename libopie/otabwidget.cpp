@@ -327,7 +327,7 @@ QPixmap OTabWidget::loadSmooth( const QString &name )
 {
     QImage image = Resource::loadImage( name );
     QPixmap pixmap;
-    pixmap.convertFromImage( image.smoothScale( 16, 16 ) );
+    pixmap.convertFromImage( image.smoothScale( 14, 14 ) );
     return pixmap;
 }
 
