@@ -18,12 +18,12 @@
 using namespace Opie::Core;
 
 MailApplet::MailApplet( QWidget *parent )
-: QWidget( parent ) {
+: QLabel( parent ) {
 
     m_config = new Config( "mail" );
     m_config->setGroup( "Applet" );
 
-    setFixedWidth( AppLnk::smallIconSize() );
+    //setFixedWidth( AppLnk::smallIconSize() );
     setFixedHeight( AppLnk::smallIconSize() );
 
     hide();
@@ -53,16 +53,19 @@ MailApplet::~MailApplet() {
         delete m_config;
 }
 
-void MailApplet::paintEvent( QPaintEvent* ) {
+void MailApplet::paintEvent( QPaintEvent*ev )
+{
     QPainter p( this );
     p.drawPixmap( 0, 0, Resource::loadPixmap( "mail/inbox" ) );
+    QLabel::paintEvent(ev);
+#if 0
     QFont f( "vera", AppLnk::smallIconSize() );
     QFontMetrics fm( f );
     p.setFont( f );
     p.setPen( Qt::blue );
     p.drawText( AppLnk::smallIconSize()/3, AppLnk::smallIconSize() - 2, QString::number( m_newMails ) );
+#endif
     return;
-
 }
 
 void MailApplet::mouseReleaseEvent( QMouseEvent* e ) {
@@ -134,12 +137,11 @@ void MailApplet::slotCheck() {
         cfg.setGroup( "Status" );
         cfg.writeEntry( "newMails", m_newMails );
         {
-            odebug << "QCop abschicken" << oendl;
             QCopEnvelope env( "QPE/Pim", "newMails(int)" );
             env <<  m_newMails;
         }
-        odebug << "QCop abschicken done" << oendl;
-        repaint( true );
+        setText(QString::number( m_newMails ));
+//        repaint( true );
     } else {
         ODevice *device = ODevice::inst();
         if ( !isHidden() )

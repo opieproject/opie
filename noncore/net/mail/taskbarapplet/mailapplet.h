@@ -2,13 +2,14 @@
 #define MAILAPPLET_H
 
 #include <qbutton.h>
+#include <qlabel.h>
 
 #include <libmailwrapper/statusmail.h>
 
 class Config;
 class QTimer;
 
-class MailApplet : public QWidget {
+class MailApplet : public QLabel {
 
     Q_OBJECT
 
