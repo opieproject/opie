@@ -585,9 +585,11 @@ QString OContact::toRichText() const
 	text += "<b>" + QObject::tr("Nickname: ") + "</b>"
 		+ Qtopia::escapeString(str) + "<br>";
 
-    text += "<b>" + QObject::tr( "Category:") + "</b> ";
-    text += categoryNames().join(", ");
-    text += "<br>";
+    if ( categoryNames().count() ){
+	    text += "<b>" + QObject::tr( "Category:") + "</b> ";
+	    text += categoryNames().join(", ");
+	    text += "<br>";
+    }
 
     // notes last
     if ( (value = notes()) ) {
@@ -961,22 +963,36 @@ class QString OContact::recordField( int pos ) const
 // QString is always too complicate to interprete (DD.MM.YY, DD/MM/YY, MM/DD/YY, etc..)(se)
 
 /*! \fn void OContact::setBirthday( const QDate& date )
-  Sets the birthday for the contact to \a date.
+  Sets the birthday for the contact to \a date. If date is null
+  the current stored date will be removed.
 */
 void OContact::setBirthday( const QDate &v )
 {
-	if ( ( !v.isNull() ) && ( v.isValid() ) )
+	if ( v.isNull() ){
+		qWarning( "Remove Birthday");
+		replace( Qtopia::Birthday, QString::null );
+		return;
+	}
+
+	if ( v.isValid() )
 		replace( Qtopia::Birthday, TimeConversion::toString( v ) );
 
 }
 
 
 /*! \fn void OContact::setAnniversary( const QDate &date )
-  Sets the anniversary of the contact to \a date.
+  Sets the anniversary of the contact to \a date. If date is
+  null, the current stored date will be removed.
 */
 void OContact::setAnniversary( const QDate &v )
 {
-	if ( ( !v.isNull() ) && ( v.isValid() ) )
+	if ( v.isNull() ){
+		qWarning( "Remove Anniversary");
+		replace( Qtopia::Anniversary, QString::null );
+		return;
+	}
+
+	if ( v.isValid() )
 		replace( Qtopia::Anniversary, TimeConversion::toString( v ) );
 }
 
