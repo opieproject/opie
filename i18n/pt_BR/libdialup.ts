@@ -142,6 +142,22 @@
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Device:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IrDA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PCMCIA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Serial</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PppMon</name>

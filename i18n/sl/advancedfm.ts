@@ -180,6 +180,28 @@ Do you really want to delete it?</source>
         <source>Copy Same Dir</source>
         <translation>Kopiraj isti imenik</translation>
     </message>
+    <message>
+        <source>Could not copy
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>to
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not move
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Advanced FileManager
+is copyright 2002 by
+L.J.Potter&lt;llornkcor@handhelds.org&gt;
+and is licensed by the GPL</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>

@@ -3,7 +3,7 @@
     <name>LightSettingsBase</name>
     <message>
         <source>Light Settings</source>
-        <translation>Ustawienia podswietlania</translation>
+        <translation type="obsolete">Ustawienia podswietlania</translation>
     </message>
     <message>
         <source>Adjust to environment</source>
@@ -47,6 +47,10 @@
     </message>
     <message>
         <source>Only deactivate LCD during Suspend</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light and Power Settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

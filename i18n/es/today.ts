@@ -35,6 +35,10 @@
     </message>
     <message>
         <source>No more  today</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>No more appointments today</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

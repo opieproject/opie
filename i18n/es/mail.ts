@@ -234,7 +234,7 @@
     </message>
     <message>
         <source>Abort sending</source>
-        <translation>Cancelar envío</translation>
+        <translation type="obsolete">Cancelar envío</translation>
     </message>
     <message>
         <source>From</source>

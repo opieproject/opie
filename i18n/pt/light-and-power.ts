@@ -3,7 +3,7 @@
     <name>LightSettingsBase</name>
     <message>
         <source>Light Settings</source>
-        <translation>Configuração da Luz</translation>
+        <translation type="obsolete">Configuração da Luz</translation>
     </message>
     <message>
         <source>Adjust to environment</source>
@@ -48,6 +48,10 @@
     <message>
         <source>Off</source>
         <translation>Desligar</translation>
+    </message>
+    <message>
+        <source>Light and Power Settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

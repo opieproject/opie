@@ -145,6 +145,25 @@
     </message>
 </context>
 <context>
+    <name>OTimePickerDialogBase</name>
+    <message>
+        <source>TimePicker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pick Time:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Summary:</source>

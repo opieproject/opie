@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Light Settings</source>
-        <translation type="unfinished">Configuração de iluminação</translation>
+        <translation type="obsolete">Configuração de iluminação</translation>
     </message>
     <message>
         <source>&lt;blockquote&gt;The brighter the screen light, the more battery power is used.&lt;/blockquote&gt;</source>
@@ -48,6 +48,10 @@
     </message>
     <message>
         <source>Only deactivate LCD during Suspend</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light and Power Settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

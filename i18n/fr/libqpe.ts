@@ -227,7 +227,7 @@ est en train d&apos;éditer les catégories.</translation>
     <name>LnkPropertiesBase</name>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Détails</translation>
     </message>
     <message>
         <source>Comment:</source>
@@ -251,7 +251,7 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Effacer</translation>
     </message>
     <message>
         <source>Del Icon</source>
@@ -421,11 +421,11 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tout</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vide</translation>
     </message>
     <message>
         <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>

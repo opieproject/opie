@@ -187,6 +187,10 @@
         <source>Custom</source>
         <translation>Personaliser</translation>
     </message>
+    <message>
+        <source>Command List</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PlayListSelection</name>

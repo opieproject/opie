@@ -173,6 +173,14 @@ el fichero actual del disco?
         <source>Text</source>
         <translation>Texto</translation>
     </message>
+    <message>
+        <source>Insert Time and Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Advanced features</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>filePermissions</name>

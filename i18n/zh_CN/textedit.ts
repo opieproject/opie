@@ -169,6 +169,14 @@ Open .desktop file or linked file?</source>
         <source>Text</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Insert Time and Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Advanced features</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>filePermissions</name>

@@ -234,7 +234,7 @@
     </message>
     <message>
         <source>Abort sending</source>
-        <translation>Prekini pošiljanje</translation>
+        <translation type="obsolete">Prekini pošiljanje</translation>
     </message>
     <message>
         <source>From</source>

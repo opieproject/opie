@@ -1,5 +1,5 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>NewTaskDialog</name>
     <message>
@@ -11,79 +11,79 @@
     <name>NewTaskDialogBase</name>
     <message>
         <source>New Task</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished">새 할일</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1 - Very High</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>2 - High</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>3 - Normal</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>4 - Low</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>5 - Very Low</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Completed</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>D&amp;ue</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>1 Jan 2001</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Summary:</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>0%</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>20%</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>40%</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>60%</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>80%</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>100%</source>
-        <translation type='obsolete'></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

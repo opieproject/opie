@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Apply</source>
-        <translation>Uveljavi</translation>
+        <translation type="obsolete">Uveljavi</translation>
     </message>
     <message>
         <source>Restart</source>
@@ -98,6 +98,42 @@
     <message>
         <source>Settings...</source>
         <translation>Nastavitve...</translation>
+    </message>
+    <message>
+        <source>Tab style:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tabs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tabs w/icons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop down list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drop down list w/icons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable advanced options in Opie apps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Advanced</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

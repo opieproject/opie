@@ -174,6 +174,14 @@ Odprem .desktop datoteko ali povezano datoteko?</translation>
         <source>Text</source>
         <translation>Besedilo</translation>
     </message>
+    <message>
+        <source>Insert Time and Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Advanced features</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>filePermissions</name>

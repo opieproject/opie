@@ -186,6 +186,10 @@
         <source>Custom</source>
         <translation>Po izbiri</translation>
     </message>
+    <message>
+        <source>Command List</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PlayListSelection</name>

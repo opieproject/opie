@@ -29,6 +29,10 @@
         <source>To install</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>-force-overwrite</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>

@@ -13,5 +13,9 @@
         <source>Config</source>
         <translation>Configurar</translation>
     </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

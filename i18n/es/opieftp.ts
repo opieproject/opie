@@ -239,5 +239,13 @@ Debaría estar vacío</translation>
         <source>That directory does not exist</source>
         <translation>Ese directorio no existe</translation>
     </message>
+    <message>
+        <source>New Server name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sorry name already taken</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
