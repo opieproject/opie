@@ -3,18 +3,18 @@
 
 #include <qpe/resource.h>
 
-#define USER_AGENT          "OpieMail v0.0.1-alpha"
+#define USER_AGENT          "OpieMail v0.1"
 
-#define PIC_COMPOSEMAIL     "opiemail/composemail"
-#define PIC_SENDQUEUED      "opiemail/sendqueued"
-#define PIC_SHOWFOLDERS     "opiemail/showfolders"
-#define PIC_SEARCHMAILS     "opiemail/searchmails"
-#define PIC_EDITSETTINGS    "opiemail/editsettings"
-#define PIC_EDITACCOUNTS    "opiemail/editaccounts"
-#define PIC_SYNC            "opiemail/sync"
-#define PIC_IMAPFOLDER      "opiemail/imapfolder"
-#define PIC_POP3FOLDER      "opiemail/pop3folder"
-#define PIC_INBOXFOLDER     "opiemail/inbox"
+#define PIC_COMPOSEMAIL     "mail/composemail"
+#define PIC_SENDQUEUED      "mail/sendqueued"
+#define PIC_SHOWFOLDERS     "mail/showfolders"
+#define PIC_SEARCHMAILS     "mail/searchmails"
+#define PIC_EDITSETTINGS    "mail/editsettings"
+#define PIC_EDITACCOUNTS    "mail/editaccounts"
+#define PIC_SYNC            "mail/sync"
+#define PIC_IMAPFOLDER      "mail/imapfolder"
+#define PIC_POP3FOLDER      "mail/pop3folder"
+#define PIC_INBOXFOLDER     "mail/inbox"
 
 #define ICON_COMPOSEMAIL    QIconSet( Resource::loadPixmap( PIC_COMPOSEMAIL ) ) 
 #define ICON_SENDQUEUED     QIconSet( Resource::loadPixmap( PIC_SENDQUEUED ) ) 

@@ -176,7 +176,7 @@ void MainWindow::displayMail(QListViewItem*item)
     if (  readMail.deleted ) {
          folderView->refreshCurrent();
     } else {
-        ( (MailListViewItem*)item )->setPixmap( 0, Resource::loadPixmap( "opiemail/kmmsgunseen") );
+        ( (MailListViewItem*)item )->setPixmap( 0, Resource::loadPixmap( "mail/kmmsgunseen") );
     }
 }
 
@@ -200,11 +200,11 @@ MailListViewItem::MailListViewItem(QListView * parent, MailListViewItem * item )
 void MailListViewItem::showEntry()
 {
     if ( mail_data.getFlags().testBit( FLAG_ANSWERED ) == true) {
-        setPixmap( 0, Resource::loadPixmap( "opiemail/kmmsgreplied") );
+        setPixmap( 0, Resource::loadPixmap( "mail/kmmsgreplied") );
     } else if ( mail_data.getFlags().testBit( FLAG_SEEN ) == true )  {
-        setPixmap( 0, Resource::loadPixmap( "opiemail/kmmsgunseen") );
+        setPixmap( 0, Resource::loadPixmap( "mail/kmmsgunseen") );
     } else  {
-        setPixmap( 0, Resource::loadPixmap( "opiemail/kmmsgnew") );
+        setPixmap( 0, Resource::loadPixmap( "mail/kmmsgnew") );
     }
     setText(1,mail_data.getSubject());
     setText(2,mail_data.getFrom());

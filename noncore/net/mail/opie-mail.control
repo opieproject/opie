@@ -1,10 +1,10 @@
 Package: opie-mail
-Files: bin/opiemail apps/1Pim/mail.desktop pics/opiemail/*.png plugins/application/libopiemail.so*
+Files: bin/opiemail apps/1Pim/mail.desktop pics/mail/*.png plugins/application/libopiemail.so*
 Priority: optional
 Section: opie/applications
-Maintainer: Juergen Graf <jgf@handhelds.org>
+Maintainer: Rajko Albrecht <alwin@handhelds.org>, Juergen Graf <jgf@handhelds.org>, Maximilian Reiﬂ <harlekin@handhelds.org>
 Architecture: arm
-Version: 0.0.1-$SUB_VERSION
+Version: 0.1-$SUB_VERSION
 Depends: task-opie-minimal, libopie1
 Description: Opie's mail and news client (POP3, IMAP and NNTP)
 License: LGPL
