@@ -1,3 +1,70 @@
+/*
+                             This file is part of the Opie Project
+              =.             (C) 2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
+
+#include <opie2/odebug.h>
+#include <opie2/oinputsystem.h>
+
+using namespace Opie::Core;
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <sys/fcntl.h>
+
+#if 1
+
+int main( int argc, char** argv )
+{
+    OInputSystem* sys = OInputSystem::instance();
+    OInputSystem::DeviceIterator it = sys->iterator();
+
+    OInputDevice* dev = 0;
+    
+    while ( it.current() )
+    {
+        odebug << "DEMO: OInputSystem contains Device '" <<  it.current()->name() << "'" << oendl;
+        
+        dev = it.current();
+        
+        odebug << "========================================"
+            << "\nDevice: " << dev->name()
+            << "\nName: " << dev->identity()
+            << "\nPath: " << dev->path()
+            << "\nUniq: " << dev->uniq()
+            << oendl;
+    
+        ++it;
+    }
+}
+
+#else
+
 #include <fcntl.h>
 #include <unistd.h>
 #include <cstdlib>
@@ -248,3 +315,4 @@ hell:
     exit( EXIT_FAILURE );
 }
 
+#endif

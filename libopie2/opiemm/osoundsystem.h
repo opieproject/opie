@@ -67,11 +67,11 @@ class OSoundSystem : public QObject
      */
     int count() const;
     /**
-     * @returns a pointer to the (one and only) @ref ONetwork instance.
+     * @returns a pointer to the (one and only) @ref OSystem instance.
      */
     static OSoundSystem* instance();
     /**
-     * @returns an iterator usable for iterating through all network interfaces.
+     * @returns an iterator usable for iterating through all sound cards.
      */
     CardIterator iterator() const;
     /**
