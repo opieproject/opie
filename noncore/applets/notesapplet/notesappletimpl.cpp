@@ -18,6 +18,7 @@ NotesAppletImpl::NotesAppletImpl()
 }
 
 NotesAppletImpl::~NotesAppletImpl() {
+    // not needed though cause we should have a valid parent
     delete notes;
 }
 

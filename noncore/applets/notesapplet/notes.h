@@ -16,7 +16,7 @@
 #define __NOTES_APPLET_H__
 
 #include <qwidget.h>
-#include <qframe.h>
+#include <qvbox.h>
 #include <qpixmap.h>
 #include <qguardedptr.h>
 #include <qtimer.h>
@@ -31,7 +31,7 @@ class QPushButton;
 class QMultiLineEdit;
 class QListBox;
 class QListBoxItem;
-class NotesControl : public QFrame {
+class NotesControl : public QVBox {
     Q_OBJECT
 public:
     NotesControl( QWidget *parent=0, const char *name=0 );
@@ -46,7 +46,7 @@ public:
     void save();
     void populateBox();
     void load();
-    
+
 private:
       QTimer menuTimer;
       DocLnk *doc;
@@ -76,7 +76,7 @@ class NotesApplet : public QWidget {
 public:
     NotesApplet( QWidget *parent = 0, const char *name=0 );
     ~NotesApplet();
-    NotesControl *vc; 
+    NotesControl *vc;
 public slots:
 private:
     void mousePressEvent( QMouseEvent * );
@@ -86,7 +86,7 @@ private:
     QPixmap notesPixmap;
 private slots:
 
-        
+
 };
 
 #endif // __NOTES_APPLET_H__
