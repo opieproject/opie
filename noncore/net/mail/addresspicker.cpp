@@ -5,8 +5,8 @@
 #include <qfile.h>
 
 #include <qpe/resource.h>
-#include <opie/ocontactaccess.h>
-#include <opie/ocontact.h>
+#include <opie2/ocontactaccess.h>
+#include <opie2/ocontact.h>
 
 
 #include <stdlib.h>
@@ -21,14 +21,15 @@ AddressPicker::AddressPicker( QWidget *parent, const char *name, bool modal, WFl
 
     connect(okButton, SIGNAL(clicked()), SLOT(accept()));
     connect(cancelButton, SIGNAL(clicked()), SLOT(close()));
-    OContactAccess::List::Iterator it;
+    Opie::OContactAccess::List::Iterator it;
 
     QString lineEmail, lineName, contactLine;
     /* what name has to set here???? */
-    OContactAccess m_contactdb("opiemail");
+    Opie::OContactAccess m_contactdb("opiemail");
+    
     QStringList mails;
     QString pre,suf;
-    OContactAccess::List m_list = m_contactdb.sorted( true, 0, 0, 0 );
+    Opie::OContactAccess::List m_list = m_contactdb.sorted( true, 0, 0, 0 );
     for ( it = m_list.begin(); it != m_list.end(); ++it ) {
         if ((*it).defaultEmail().length()!=0) {
             mails = (*it).emailList();
