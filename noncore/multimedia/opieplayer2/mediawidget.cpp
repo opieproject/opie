@@ -73,7 +73,7 @@ void MediaWidget::loadDefaultSkin( const GUIInfo &guiInfo )
 
 void MediaWidget::loadSkin( const SkinButtonInfo *skinInfo, uint buttonCount, const Skin &skin )
 {
-    backgroundPixmap = skin.backgroundImage();
+    backgroundPixmap = skin.backgroundPixmap();
     buttonUpImage = skin.buttonUpImage();
     buttonDownImage = skin.buttonDownImage();
 
