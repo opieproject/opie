@@ -1,4 +1,5 @@
 *.o
 *~
 moc_*
+tmp
 Makefile
