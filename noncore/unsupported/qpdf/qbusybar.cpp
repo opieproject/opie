@@ -53,6 +53,7 @@ void QBusyBar::setParameters ( int d, int s, int v )
 
 QBusyBar::~QBusyBar ( )
 {
+	delete [] m_fadecols;
 }
 
 bool QBusyBar::isBusy ( ) const
