@@ -63,11 +63,9 @@ protected slots:
   void mkDir();
   void del();
   void rn();
-  void populateLocalView();
-  void populateRemoteView();
+  void populateView();
   void showHidden();
   void showMenuHidden();
-//  void showRemoteHidden();
   void writeConfig();
   void readConfig();
   void ListClicked(QListViewItem *);
@@ -125,7 +123,7 @@ protected:
   QDir *OtherDir(); 
   QListView *CurrentView();
   QListView *OtherView();
-  void PopulateView();
+  void setOtherTabCurrent();
 
 protected slots:
   void dirMenuSelected(int);
