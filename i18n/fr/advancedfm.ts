@@ -1,233 +1,235 @@
 <!DOCTYPE TS><TS>
+<codec>iso8859-1</codec>
 <context>
     <name>AdvancedFm</name>
     <message>
         <source>AdvancedFm</source>
-        <translation type="unfinished"></translation>
+        <translation>AdvancedFm</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Vue</translation>
     </message>
     <message>
         <source>Show Hidden Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Montrer les fichiers cachés</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un répertoire</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Renommer</translation>
     </message>
     <message>
         <source>Run Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Exécuter une commande</translation>
     </message>
     <message>
         <source>Run Command with Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Exécuter une commande ayant une sortie</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Basculer vers "Local"</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation type="unfinished"></translation>
+        <translation>Basculer vers "Remote"</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>A propos</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Date</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>Do you really want to delete
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment effacer</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Non</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Note</translation>
     </message>
     <message>
         <source>Could not rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de renommer</translation>
     </message>
     <message>
         <source>That directory does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Répertoire inexistant</translation>
     </message>
     <message>
         <source>Copy As</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier sous</translation>
     </message>
     <message>
         <source>AdvancedFm Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortie d&apos;AdvancedFm</translation>
     </message>
     <message>
         <source>command failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>la commande n&apos;a pas fonctionnée !</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation type="unfinished"></translation>
+        <translation type='unfinished'></translation>
     </message>
     <message>
         <source>Ir sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoie Ir.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Changer de répertoire</translation>
     </message>
     <message>
         <source>Execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Exécuter</translation>
     </message>
     <message>
         <source>Open as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir comme text</translation>
     </message>
     <message>
         <source>Make Symlink</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un lien symbolique</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier</translation>
     </message>
     <message>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Déplacer</translation>
     </message>
     <message>
         <source>Rescan</source>
-        <translation type="unfinished"></translation>
+        <translation>Rafraichir</translation>
     </message>
     <message>
         <source>File Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Information sur le fichier</translation>
     </message>
     <message>
         <source>Set Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Définir les droits</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriétés</translation>
     </message>
     <message>
         <source>Beam File</source>
-        <translation type="unfinished"></translation>
+        <translation type='unfinished'></translation>
     </message>
     <message>
         <source> already exists
 Do you really want to delete it?</source>
-        <translation type="unfinished"></translation>
+        <translation>existe déjà
+Souhaitez-vous vraiment l&apos;effacer ?</translation>
     </message>
     <message>
         <source>Copy </source>
-        <translation type="unfinished"></translation>
+        <translation>Copier</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="unfinished"></translation>
+        <translation>Sous</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier le même répertoire</translation>
     </message>
 </context>
 <context>
     <name>Output</name>
     <message>
         <source>Save output to file (name only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarder la sortie dans un fichier</translation>
     </message>
 </context>
 <context>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Définir les droits</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Définir les droits pour :</translation>
     </message>
     <message>
         <source>owner</source>
-        <translation type="unfinished"></translation>
+        <translation>propriétaire</translation>
     </message>
     <message>
         <source>group</source>
-        <translation type="unfinished"></translation>
+        <translation>groupe</translation>
     </message>
     <message>
         <source>others</source>
-        <translation type="unfinished"></translation>
+        <translation>autres</translation>
     </message>
     <message>
         <source>Owner</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriétaire</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Groupe</translation>
     </message>
     <message>
         <source>read</source>
-        <translation type="unfinished"></translation>
+        <translation>lire</translation>
     </message>
     <message>
         <source>write</source>
-        <translation type="unfinished"></translation>
+        <translation>écrire</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>exécuter</translation>
     </message>
 </context>
 </TS>

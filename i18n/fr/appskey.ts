@@ -1,29 +1,30 @@
 <!DOCTYPE TS><TS>
+<codec>iso8859-1</codec>
 <context>
     <name>AppsKeyApp</name>
     <message>
         <source>Set Application Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Définir les touches du PDA</translation>
     </message>
     <message>
         <source>Calender</source>
-        <translation type="unfinished"></translation>
+        <translation>Calendrier</translation>
     </message>
     <message>
         <source>Address Book</source>
-        <translation type="unfinished"></translation>
+        <translation>Carnet d&apos;adresses</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Répertoire personnel</translation>
     </message>
     <message>
         <source>Popup Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Courrier</translation>
     </message>
 </context>
 </TS>
