@@ -4,6 +4,7 @@
 
 #include <qpe/config.h>
 
+#include "modem.h"
 #include "pppconfig.h"
 #include "pppmodule.h"
 #include "pppdata.h"
@@ -64,6 +65,8 @@ PPPModule::PPPModule() : Module()
             handledInterfaceNames << running[it.data()].device;
             iface->setStatus( true );
             iface->setPPPDpid( running[it.data()].pid );
+            iface->modem()->setPPPDevice( running[it.data()].device );
+            iface->refresh();
         }
     }
 

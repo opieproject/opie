@@ -1136,6 +1136,7 @@ void ConnectWidget::if_waiting_slot() {
   messg->setText("");
 
   _ifaceppp->setStatus( true );
+  _ifaceppp->refresh();
   //  emit _ifaceppp->updateInterface(_ifaceppp);
 
   // prepare the con_win so as to have the right size for
@@ -1241,7 +1242,7 @@ bool ConnectWidget::execppp() {
     command += " " + *it;
   }
 
-  command += " call opie-kppp";
+  command += " call opie-kppp logfd 11";
 
   if (command.length() > MAX_CMDLEN) {
       QMessageBox::critical(this, "error", i18n(

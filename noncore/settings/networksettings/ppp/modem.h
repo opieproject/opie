@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.h,v 1.4.2.2 2003-07-24 08:51:50 harlekin Exp $
+ * $Id: modem.h,v 1.4.2.3 2003-07-24 13:15:37 harlekin Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -75,6 +75,7 @@ public:
   bool setHostname(const QString & name);
 
   QString pppDevice()const;
+    void setPPPDevice( const QString& );
     pid_t pppPID()const;
     void setPPPDPid( pid_t );
 
@@ -90,6 +91,7 @@ private slots:
   void startNotifier();
   void stopNotifier();
   void readtty(int);
+  void slotModemDebug(int);
 
 private:
   enum { MaxPathLen = 30, MaxStrLen = 40, MaxArgs = 100 };
@@ -111,12 +113,15 @@ private:
   int pppdPid;
   int _pppdExitStatus;
   QSocketNotifier *sn;
+    QSocketNotifier *m_modemDebug;
   bool data_mode;
   QString errmsg;
   struct termios initial_tty;
   struct termios tty;
   bool modem_is_locked;
   PPPData *_pppdata;
+    int m_pppdLOG[2];
+    QString m_pppdDev;
 };
 
 #endif

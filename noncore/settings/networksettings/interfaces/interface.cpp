@@ -1,7 +1,7 @@
 /**
- * $Author: benmeyer $
- * $Date: 2003-04-09 00:04:29 $
- */ 
+ * $Author: harlekin $
+ * $Date: 2003-07-24 13:15:37 $
+ */
 
 #include "interface.h"
 #include <qdatetime.h>
@@ -24,7 +24,7 @@ Interface::Interface(QObject * parent, const char * name, bool newSatus): QObjec
  * Set status
  * @param newStatus - the new status
  * emit updateInterface
- */ 
+ */
 void Interface::setStatus(bool newStatus){
   if(status != newStatus){
     status = newStatus;
@@ -36,27 +36,27 @@ void Interface::setStatus(bool newStatus){
  * Set if attached or not (802.11 card pulled out for example)
  * @param isAttached - if attached
  * emit updateInterface
- */ 
+ */
 void Interface::setAttached(bool isAttached){
   attached = isAttached;
   emit(updateInterface(this));
 };
-  
+
 /**
  * Set Hardware name
  * @param name - the new name
  * emit updateInterface
- */ 
+ */
 void Interface::setHardwareName(const QString &name){
   hardwareName = name;
   emit(updateInterface(this));
 };
- 
+
 /**
  * Set Module owner
  * @param owner - the new owner
  * emit updateInterface
- */ 
+ */
 void Interface::setModuleOwner(Module *owner){
   moduleOwner = owner;
   emit(updateInterface(this));
@@ -65,14 +65,14 @@ void Interface::setModuleOwner(Module *owner){
 
 /**
  * Try to start the interface.
- */ 
+ */
 void Interface::start(){
-  // check to see if we are already running.	
+  // check to see if we are already running.
   if(true == status){
     emit (updateMessage("Unable to start interface,\n already started"));
     return;
   }
-  
+
   int ret = system(QString("%1 %2 up").arg(IFCONFIG).arg(this->name()).latin1());
   // See if it was successfull...
   if(ret != 0){
@@ -89,12 +89,12 @@ void Interface::start(){
  * Try to stop the interface.
  */
 void Interface::stop(){
-  // check to see if we are already stopped.	
+  // check to see if we are already stopped.
   if(false == status){
     emit (updateMessage("Unable to stop interface,\n already stopped"));
     return;
   }
-	  
+
   int ret = system(QString("%1 %2 down").arg(IFCONFIG).arg(this->name()).latin1());
   if(ret != 0){
     emit (updateMessage("Stopping interface failed"));
@@ -108,7 +108,7 @@ void Interface::stop(){
 
 /**
  * Try to restart the interface.
- */ 
+ */
 void Interface::restart(){
   stop();
   start();
@@ -133,14 +133,14 @@ bool Interface::refresh(){
     emit(updateInterface(this));
     return true;
   }
-	
+
   QString fileName = QString("/tmp/%1_ifconfig_info").arg(this->name());
-  int ret = system(QString("%1 %2 > %3").arg(IFCONFIG).arg(this->name()).arg(fileName).latin1());
+  int ret = system(QString("LANG=C %1 %2 > %3").arg(IFCONFIG).arg(this->name()).arg(fileName).latin1());
   if(ret != 0){
     qDebug(QString("Interface: Ifconfig return value: %1, is not 0").arg(ret).latin1());
     return false;
   }
-  
+
   QFile file(fileName);
   if (!file.open(IO_ReadOnly)){
     qDebug(QString("Interface: Can't open file: %1").arg(fileName).latin1());
@@ -152,7 +152,7 @@ bool Interface::refresh(){
   ip = "0.0.0.0";
   subnetMask = "0.0.0.0";
   broadcast = "";
-  
+
   QTextStream stream( &file );
   QString line;
   while ( !stream.eof() ) {
@@ -185,30 +185,30 @@ bool Interface::refresh(){
   leaseObtained = "";
   leaseExpires = "";
   dhcp = false;
-   
+
   QString dhcpDirectory(DHCP_INFO_DIR);
   QDir d(dhcpDirectory);
   if(!d.exists(dhcpDirectory))
     dhcpDirectory = "/var/run";
-  
-  // See if we have 
+
+  // See if we have
   QString dhcpFile(QString(dhcpDirectory+"/dhcpcd-%1.info").arg(this->name()));
   // If there is no DHCP information then exit now with no errors.
   if(!QFile::exists(dhcpFile)){
     emit(updateInterface(this));
     return true;
   }
-  
+
   file.setName(dhcpFile);
   if (!file.open(IO_ReadOnly)){
     qDebug(QString("Interface: Can't open file: %1").arg(dhcpFile).latin1());
     return false;
   }
-  
+
   // leaseTime and renewalTime and used if pid and deamon exe can be accessed.
   int leaseTime = 0;
   int renewalTime = 0;
-  
+
   stream.setDevice( &file );
   while ( !stream.eof() ) {
     line = stream.readLine();
@@ -222,7 +222,7 @@ bool Interface::refresh(){
   file.close();
   //qDebug(QString("Interface: leaseTime: %1").arg(leaseTime).latin1());
   //qDebug(QString("Interface: renewalTime: %1").arg(renewalTime).latin1());
-  
+
   // Get the pid of the deamond
   dhcpFile = (QString(dhcpDirectory+"/dhcpcd-%1.pid").arg(this->name()));
   file.setName(dhcpFile);
@@ -244,7 +244,7 @@ bool Interface::refresh(){
     return false;
   }
 
-  // Get the start running time of the deamon 
+  // Get the start running time of the deamon
   fileName = (QString("/proc/%1/stat").arg(pid));
   file.setName(fileName);
   stream.setDevice( &file );
@@ -257,7 +257,7 @@ bool Interface::refresh(){
   }
   file.close();
   long time = 0;
-  // Grab the start time  
+  // Grab the start time
   //                     pid com state ppid pgrp session tty_nr tpgid flags
   sscanf(line.latin1(), "%*d %*s %*c   %*d  %*d  %*d     %*d    %*d   %*u "
   //   minflt cminflt majflt cmajflt utime stime cutime cstime priority
@@ -265,7 +265,7 @@ bool Interface::refresh(){
   //   nice 0   itrealvalue starttime
       "%*d  %*d %*d %lu", (long*) &time);
   time = time/100;
-  
+
   QDateTime datetime(QDateTime::currentDateTime());
 
   // Get the uptime of the computer.
@@ -281,19 +281,19 @@ bool Interface::refresh(){
     qDebug("Interface: Can't open /proc/uptime to retrive uptime.");
     return false;
   }
-  
+
   datetime = datetime.addSecs(time);
   //qDebug(QString("Interface: %1 %2").arg(datetime.toString()).arg(pid).latin1());
-   
-  // Calculate the start and renew times 
+
+  // Calculate the start and renew times
   leaseObtained	= datetime.toString();
-  
-  // Calculate the start and renew times 
+
+  // Calculate the start and renew times
   datetime = datetime.addSecs(leaseTime);
   leaseExpires = datetime.toString();
-  
+
   dhcp = true;
-  
+
   emit(updateInterface(this));
   return true;
 }

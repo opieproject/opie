@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.cpp,v 1.7.2.2 2003-07-24 08:51:50 harlekin Exp $
+ * $Id: modem.cpp,v 1.7.2.3 2003-07-24 13:15:37 harlekin Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -99,7 +99,7 @@ Modem::Modem( PPPData* pd )
     modemfd = -1;
     _pppdExitStatus = -1;
     pppdPid = -1;
-    sn = 0L;
+    sn = m_modemDebug =  0L;
     data_mode = false;
     modem_is_locked = false;
     lockfile[0] = '\0';
@@ -877,10 +877,14 @@ bool Modem::execpppd(const char *arguments) {
 
   _pppdExitStatus = -1;
 
+  (void)::pipe( m_pppdLOG );
+
   switch(pppdPid = fork())
     {
     case -1:
       fprintf(stderr,"In parent: fork() failed\n");
+      ::close(  m_pppdLOG[0] );
+      ::close(  m_pppdLOG[1] );
       return false;
       break;
 
@@ -902,8 +906,12 @@ bool Modem::execpppd(const char *arguments) {
       if(tcsetpgrp(modemfd, pgrpid)<0)
         fprintf(stderr, "tcsetpgrp() failed.\n");
 
+      ::close( m_pppdLOG[0] );
+      ::setenv( "LANG", "C", 1 ); // overwrite
+      dup2(m_pppdLOG[1], 11 ); // for logfd 11
       dup2(modemfd, 0);
       dup2(modemfd, 1);
+
 
       switch (checkForInterface()) {
         case 1:
@@ -924,7 +932,24 @@ bool Modem::execpppd(const char *arguments) {
     default:
       qDebug("In parent: pppd pid %d\n",pppdPid);
       close(modemfd);
+
+      ::close( m_pppdLOG[1] );
+      // set it to nonblocking io
+      int flag = ::fcntl( m_pppdLOG[0], F_GETFL );
+
+      if ( !(flag & O_NONBLOCK) ) {
+          qDebug("Setting nonblocking io");
+          flag |= O_NONBLOCK;
+          ::fcntl(m_pppdLOG[0], F_SETFL, flag );
+      }
+
+      delete m_modemDebug;
+      m_modemDebug = new QSocketNotifier(m_pppdLOG[0], QSocketNotifier::Read, this );
+      connect(m_modemDebug, SIGNAL(activated(int) ),
+              this, SLOT(slotModemDebug(int) ) );
+
       modemfd = -1;
+      m_pppdDev = QString::fromLatin1("ppp0");
       return true;
       break;
     }
@@ -934,6 +959,8 @@ bool Modem::execpppd(const char *arguments) {
 bool Modem::killpppd() {
     qDebug("In killpppd and pid is %d", pppdPid );
   if(pppdPid > 0) {
+    delete m_modemDebug;
+    m_modemDebug = 0;
     qDebug("In killpppd(): Sending SIGTERM to %d\n", pppdPid);
     if(kill(pppdPid, SIGTERM) < 0) {
       qDebug("Error terminating %d. Sending SIGKILL\n", pppdPid);
@@ -1023,7 +1050,10 @@ bool Modem::setHostname(const QString & name)
 }
 
 QString Modem::pppDevice()const {
-    return "ppp0";
+    return m_pppdDev;
+}
+void Modem::setPPPDevice( const QString& dev ) {
+    m_pppdDev = dev;
 }
 pid_t Modem::pppPID()const {
     return pppdPid;
@@ -1033,4 +1063,21 @@ void Modem::setPPPDPid( pid_t pid ) {
     _pppdExitStatus = -1;
     pppdPid = pid;
     modemfd = -1;
+}
+void Modem::slotModemDebug(int fd) {
+    char buf[2049];
+    int len;
+
+    // read in pppd data look for Using interface
+    // then read the interface
+    // we limit to 10 device now 0-9
+    if((len = ::read(fd, buf, 2048)) > 0) {
+        buf[len+1] = '\0';
+        char *found;
+        if ( (found = ::strstr(buf, "Using interface ") ) ) {
+            found += 16;
+            m_pppdDev = QString::fromLatin1(found, 5 );
+            m_pppdDev = m_pppdDev.simplifyWhiteSpace();
+        }
+    }
 }

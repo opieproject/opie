@@ -38,7 +38,13 @@ Modem* InterfacePPP::modem()const
 bool InterfacePPP::refresh()
 {
     qDebug("InterfacePPP::refresh()");
-    updateInterface(this);
+    QString old = getInterfaceName();
+    setInterfaceName( modem()->pppDevice() );
+
+    (void)Interface::refresh();
+
+    setInterfaceName( old );
+    emit updateInterface(this);
 
     return true;
 }
