@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.10 2002-06-21 01:23:55 sandman Exp $
+** $Id: qpeapplication.cpp,v 1.11 2002-06-24 22:38:00 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -605,10 +605,10 @@ QPEApplication::QPEApplication( int& argc, char **argv, Type t )
   else {
       Config config( "qpe" );
       config.setGroup( "Appearance" );
-      QString familyStr = config.readEntry( "FontFamily", "fixed" );
+      QString familyStr = config.readEntry( "FontFamily", "helvetica" );
       QString styleStr = config.readEntry( "FontStyle", "Regular" );
       QString sizeStr = config.readEntry( "FontSize", "10" );
-      QString charSetStr = config.readEntry( "FontCharSet", "iso10646-1" );
+      QString charSetStr = config.readEntry( "FontCharSet", QString::null );
       bool ok;
       int i_size = sizeStr.toInt( &ok, 10 );
       FontDatabase fdb;
