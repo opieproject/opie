@@ -369,20 +369,38 @@ void ServerApplication::apmTimeout() {
     if ( m_ps->acStatus() != m_ps_last-> acStatus() )
         m_screensaver-> powerStatusChanged( *m_ps );
 
-    if ( m_ps->acStatus() == PowerStatus::Online )
+    if ( m_ps->acStatus() == PowerStatus::Online ) {  
         return;
-
+    }
+    
     int bat = m_ps-> batteryPercentRemaining();
 
     if ( bat < m_ps_last-> batteryPercentRemaining() ) {
-        if ( bat <= m_powerCritical )
-            pa->alert( tr( "Battery level is critical!\nKeep power off until power restored!" ), 1 );
-        else if ( bat <= m_powerVeryLow )
-            pa->alert( tr( "Battery is running very low. "), 2 );
+        if ( bat <= m_powerCritical ) {
+	    QMessageBox battlow(
+		tr("WARNING"),
+		tr("<p>The battery level is critical!"
+		    "<p>Keep power off until AC is restored"),
+		QMessageBox::Warning,
+		QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton,
+		0, QString::null, TRUE, WStyle_StaysOnTop);
+	    battlow.setButtonText(QMessageBox::Cancel, tr("Ok"));
+	    battlow.exec();     
+        } else if ( bat <= m_powerVeryLow )
+            pa->alert( tr( "The battery is running very low. "), 2 );
     }
-    if ( m_ps-> backupBatteryStatus() == PowerStatus::VeryLow )
-        pa->alert( tr("The Back-up battery is very low.\nPlease charge the back-up battery." ), 2);
-
+    
+    if ( m_ps-> backupBatteryStatus() == PowerStatus::VeryLow ) {
+	    QMessageBox battlow(
+		tr("WARNING"),
+		tr("<p>The Back-up battery is very low"
+		    "<p>Please charge the back-up battery"),
+		QMessageBox::Warning,
+		QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton,
+		0, QString::null, TRUE, WStyle_StaysOnTop);
+	    battlow.setButtonText(QMessageBox::Cancel, tr("Ok"));
+	    battlow.exec();   
+    }    
 }
 
 void ServerApplication::systemMessage( const QCString& msg,
