@@ -33,6 +33,7 @@ IRCServerEditor::IRCServerEditor(IRCServer server, QWidget* parent, const char* 
     layout->addWidget(m_realname, 4, 1);
     label = new QLabel(tr("Password :"), this);
     m_password = new QLineEdit(server.password(), this);
+    m_password->setEchoMode( QLineEdit::Password );
     QWhatsThis::add(m_password, tr("Password to connect to the server (if required)"));
     layout->addWidget(label, 5, 0);
     layout->addWidget(m_password, 5, 1);
