@@ -68,6 +68,7 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
 
     screensaver_dim->setChecked( config.readNumEntry("Dim",1) != 0 );
     screensaver_lightoff->setChecked( config.readNumEntry("LightOff",1) != 0 );
+    LcdOffOnly->setChecked( config.readNumEntry("LcdOffOnly",0) != 0 );
     int maxbright = qpe_sysBrightnessSteps();
     initbright = config.readNumEntry("Brightness",255);
     brightness->setMaxValue( maxbright );
@@ -113,6 +114,7 @@ void LightSettings::accept()
     config.setGroup( "Screensaver" );
     config.writeEntry( "Dim", (int)screensaver_dim->isChecked() );
     config.writeEntry( "LightOff", (int)screensaver_lightoff->isChecked() );
+    config.writeEntry( "LcdOffOnly", (int)LcdOffOnly->isChecked() );
     config.writeEntry( "Interval_Dim", interval_dim->value() );
     config.writeEntry( "Interval_LightOff", interval_lightoff->value() );
     config.writeEntry( "Interval", interval_suspend->value() );
