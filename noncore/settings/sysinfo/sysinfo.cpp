@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-**********************************************************************/
+**********************************************************************
 **
 **  Enhancements by: Dan Williams, <williamsdr@acm.org>
 **
