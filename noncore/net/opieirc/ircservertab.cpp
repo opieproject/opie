@@ -219,6 +219,18 @@ void IRCServerTab::display(IRCOutput output) {
                 channelTab->appendText("<font color=\"" + m_otherColor + "\">"+output.htmlMessage()+"</font><br>");
             }
             break;
+        case OUTPUT_TOPIC: {
+                IRCChannel *channel = (IRCChannel *) output.getParam(0);
+                if (channel) {
+                    IRCChannelTab *channelTab = getTabForChannel(channel);
+                    if (channelTab) {
+                        channelTab->appendText("<font color=\"" + m_notificationColor + "\">"+output.htmlMessage()+"</font><br>");
+                        return;
+                    }
+                }
+                appendText("<font color=\"" + m_notificationColor + "\">"+output.htmlMessage()+"</font><br>");
+            }
+            break;
         case OUTPUT_QUIT: {
                 QString nick = ((IRCPerson *)output.getParam(0))->nick();
                 QListIterator<IRCChannelTab> it(m_channelTabs);

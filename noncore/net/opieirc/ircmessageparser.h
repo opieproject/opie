@@ -72,6 +72,7 @@ private:
     void parseLiteralError(IRCMessage *message);
     void parseLiteralMode(IRCMessage *message);
     void parseLiteralKick(IRCMessage *message);
+    void parseLiteralTopic(IRCMessage *message);
     void parseNumerical001(IRCMessage *message);
     void parseNumerical002(IRCMessage *message);
     void parseNumerical003(IRCMessage *message);
@@ -82,6 +83,8 @@ private:
     void parseNumericalEndOfNames(IRCMessage *message);
     void parseNumericalNicknameInUse(IRCMessage *message);
     void parseNumericalNoSuchNick(IRCMessage *message);
+    void parseNumericalTopic(IRCMessage *message);
+    void parseNumericalTopicWhoTime(IRCMessage *message);
     void parseCTCPPing(IRCMessage *message);
     void parseCTCPVersion(IRCMessage *message);
     void parseCTCPAction(IRCMessage *message);

@@ -15,6 +15,7 @@ IRCLiteralMessageParserStruct IRCMessageParser::literalParserProcTable[] = {
     { "ERROR:",  FUNC(parseLiteralError) },
     { "MODE",    FUNC(parseLiteralMode) },
     { "KICK",    FUNC(parseLiteralKick) },
+    { "TOPIC",   FUNC(parseLiteralTopic) },
     { 0 , 0 }
 };
 
@@ -36,6 +37,8 @@ IRCNumericalMessageParserStruct IRCMessageParser::numericalParserProcTable[] = {
     { 251, FUNC(parseNumericalStats) },         // RPL_LUSERCLIENT
     { 254, FUNC(nullFunc)},                     // RPL_LUSERCHANNELS
     { 255, FUNC(parseNumericalStats) },         // RPL_LUSERNAME
+    { 332, FUNC(parseNumericalTopic) },         // RPL_TOPIC
+    { 333, FUNC(parseNumericalTopicWhoTime) },  // RPL_TOPICWHOTIME
     { 353, FUNC(parseNumericalNames) },         // RPL_NAMREPLY
     { 366, FUNC(parseNumericalEndOfNames) },    // RPL_ENDOFNAMES
     { 375, FUNC(parseNumericalStats) },         // RPL_MOTDSTART
@@ -191,7 +194,7 @@ void IRCMessageParser::parseLiteralPrivMsg(IRCMessage *message) {
                 emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Channel message with unknown sender")));
             }
         } else {
-            emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Channel message with unknown channel")));
+            emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Channel message with unknown channel ") + message->param(0)));
         }
     } else {
         emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Received PRIVMSG of unknown type")));
@@ -239,6 +242,18 @@ void IRCMessageParser::parseLiteralQuit(IRCMessage *message) {
         delete person;
     } else {
          emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Unknown person quit - desynchronized?")));
+    }
+}
+
+void IRCMessageParser::parseLiteralTopic(IRCMessage *message) {
+    IRCPerson mask(message->prefix());
+    IRCChannel *channel = m_session->getChannel(message->param(0));
+    if (channel) {
+        IRCOutput output(OUTPUT_TOPIC, mask.nick() + tr(" changed topic to ") + "\"" + message->param(1) + "\"");
+        output.addParam(channel);
+        emit outputReady(output);
+    } else {
+        emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Unknown channel topic - desynchronized?")));
     }
 }
 
@@ -483,4 +498,20 @@ void IRCMessageParser::parseNumericalNicknameInUse(IRCMessage *) {
 
 void IRCMessageParser::parseNumericalNoSuchNick(IRCMessage *) {
     emit outputReady(IRCOutput(OUTPUT_ERROR, tr("No such nickname")));
+}
+
+void IRCMessageParser::parseNumericalTopic(IRCMessage *message) {
+    IRCChannel *channel = m_session->getChannel(message->param(1));
+    if (channel) {
+        IRCOutput output(OUTPUT_TOPIC, tr("Topic for channel " + channel->channelname() + " is \"" + message->param(2) + "\""));
+        output.addParam(channel);
+        emit outputReady(output);
+    } else {
+        IRCOutput output(OUTPUT_TOPIC, tr("Topic for channel " + message->param(1) + " is \"" + message->param(2) + "\""));
+        output.addParam(0);
+        emit outputReady(output);
+    }
+}
+
+void IRCMessageParser::parseNumericalTopicWhoTime(IRCMessage *message) {
 }

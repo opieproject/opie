@@ -44,7 +44,8 @@ enum IRCOutputType {
     OUTPUT_OTHERKICK      = 13,  /* parameters : channel (IRCChannel) person (IRCChannelPerson) */
     OUTPUT_CHANACTION     = 14,  /* parameters : channel (IRCChannel) person (IRCChannelPerson) */
     OUTPUT_QUERYACTION    = 15,  /* parameters : person (IRCPerson) */
-    OUTPUT_CHANPERSONMODE = 16   /* parameters : channel (IRCCHannel) person (IRCChannelPerson) */
+    OUTPUT_CHANPERSONMODE = 16,  /* parameters : channel (IRCCHannel) person (IRCChannelPerson) */
+    OUTPUT_TOPIC          = 17   /* parameters : channel (IRCChannel) */
 };
 
 /* The IRCOutput class is used as a kind of message which is sent by the
