@@ -17,34 +17,13 @@
    Boston, MA 02111-1307, USA.
 */
 
-
+#include <qpe/stringutil.h>
 #include <opie/xmltree.h>
 
 #include <qxml.h>
 
 #include <assert.h>
 
-namespace
-{
-
-/**
-  Encode an attribute value upon saving.
-  replaces '"' with "&quot"
-  replaces '<' with "&lt"
-  replaces '&' with "&amp"
-  replaces '>' with "&gt"
-*/
-QString encodeAttr( const QString& str ) 
-{
-    QString encAttr( str ); // cause of the const parameter
-    encAttr = encAttr.replace( QRegExp( "[<]"  ), "&lt"   );
-    encAttr = encAttr.replace( QRegExp( "[>]"  ), "&gt"   );
-    encAttr = encAttr.replace( QRegExp( "[\"]" ), "&quot" );
-    encAttr = encAttr.replace( QRegExp( "[&]"  ), "&amp"  );   
-    return encAttr;
-}
-
-}
 
 XMLElement::XMLElement()
     : m_parent( 0 ), m_next( 0 ), m_prev( 0 ), m_first( 0 ), m_last( 0 )
@@ -110,7 +89,18 @@ void XMLElement::insertAfter( XMLElement *newChild, XMLElement *refChild )
     if ( next )
         next->m_prev = newChild;
 }
-
+QString XMLElement::attribute(const QString &attr )const
+{
+    if ( !m_attributes.contains( attr ) )
+	return QString::null;
+    AttributeMap::ConstIterator it = m_attributes.find( attr );
+    return it.data();
+}
+void XMLElement::setAttribute(const QString &attr, const QString &value )
+{
+    m_attributes.remove( attr );
+    m_attributes.insert( attr, value );
+}
 void XMLElement::insertBefore( XMLElement *newChild, XMLElement *refChild )
 {
     assert( refChild );
@@ -163,7 +153,7 @@ void XMLElement::save( QTextStream &s, uint indent )
 {
     if ( !m_value.isEmpty() )
     {
-        s << encodeAttr( m_value );
+        s << Qtopia::escapeString( m_value );
         return;
     }
 
@@ -179,7 +169,7 @@ void XMLElement::save( QTextStream &s, uint indent )
         AttributeMap::ConstIterator end = m_attributes.end();
         for (; it != end; ++it )
         {
-            s << it.key() << "=\"" << encodeAttr( it.data() ) << "\"";
+            s << it.key() << "=\"" << Qtopia::escapeString( it.data() ) << "\"";
             s << " ";
         }
     }
@@ -324,3 +314,5 @@ XMLElement *XMLElement::load( const QString &fileName )
 
     return handler.root();;
 }
+
+

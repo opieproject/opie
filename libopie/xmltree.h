@@ -84,6 +84,8 @@ public:
     AttributeMap attributes() const { return m_attributes; }
     AttributeMap &attributes() { return m_attributes; }
 
+    QString attribute(const QString &)const;
+    void setAttribute( const QString &attr, const QString &value );
     void save( QTextStream &stream, uint indent = 0 );
 
     XMLElement *namedItem( const QString &name );
