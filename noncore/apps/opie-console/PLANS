@@ -13,6 +13,7 @@ Then we would like to send keys? Do we want that?
 We want a modular architecture which might support plugins in
 the future
 
+
 (Almost) DONE:
   Framework
   Serial IOLayer
@@ -21,13 +22,14 @@ the future
   IOLayer
   Profile->Session and MainWidget
   FilesendingLayer ( Z/Y Modem tested X does not work at all )
+  Fullscreen
 
 TASKS in progress:
   Irda  ConfigWidget - Harlekin
   BT ConfigWidget - Harlekin
   IRDA-Layer - Harlekin
   Bluetooth-Layer - Harlekin
-  Modem - Harlekin
+  Modem - Josef
   Keys - hash
   TE - ibotty
   Scripting - wazlaf 
@@ -45,7 +47,5 @@ TASKS in progress:
                  hash => got it.
 
 OPEN tasks:
-  Modem
-  Fullscreen mode ( maybe spy at vnc viewer  or read NeoTrons HOWTO)
   Receiving ( copy &n paste from filetransfer.cpp )
-  
+    
