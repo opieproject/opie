@@ -6,7 +6,7 @@
 #include "pksettings.h"
 #include "debug.h"
 
-class PackageList :QObject
+class PackageList : public QObject
 {
   Q_OBJECT
 public:
