@@ -3,7 +3,7 @@
     <name>QPdfDlg</name>
     <message>
         <source>QPdf</source>
-        <translation type="unfinished"></translation>
+        <translation>QPdf</translation>
     </message>
     <message>
         <source>Zoom</source>
@@ -19,27 +19,27 @@
     </message>
     <message>
         <source>50%</source>
-        <translation type="unfinished"></translation>
+        <translation>50%</translation>
     </message>
     <message>
         <source>75%</source>
-        <translation type="unfinished"></translation>
+        <translation>75%</translation>
     </message>
     <message>
         <source>100%</source>
-        <translation type="unfinished"></translation>
+        <translation>100%</translation>
     </message>
     <message>
         <source>125%</source>
-        <translation type="unfinished"></translation>
+        <translation>125%</translation>
     </message>
     <message>
         <source>150%</source>
-        <translation type="unfinished"></translation>
+        <translation>150%</translation>
     </message>
     <message>
         <source>200%</source>
-        <translation type="unfinished"></translation>
+        <translation>200%</translation>
     </message>
     <message>
         <source>Open...</source>
@@ -87,7 +87,7 @@
     </message>
     <message>
         <source>&apos;%1&apos; could not be found.</source>
-        <translation type="unfinished">Kann &apos;%1&apos; nicht finden.</translation>
+        <translation>Kann &apos;%1&apos; nicht finden.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>File does not exist !</source>
-        <translation type="unfinished">Datei existiert nicht !</translation>
+        <translation>Datei existiert nicht !</translation>
     </message>
 </context>
 </TS>

@@ -63,11 +63,11 @@
     </message>
     <message>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiel</translation>
     </message>
     <message>
         <source>Skill</source>
-        <translation type="unfinished"></translation>
+        <translation>Schwierigkeitsgrad</translation>
     </message>
     <message>
         <source>Options</source>
@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>Incorrect course.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiger Zug.</translation>
     </message>
 </context>
 </TS>

@@ -674,7 +674,7 @@ und</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederholen am</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -706,7 +706,7 @@ und</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeden</translation>
     </message>
     <message>
         <source>Var1</source>

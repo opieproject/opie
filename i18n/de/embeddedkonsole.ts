@@ -92,7 +92,7 @@
     </message>
     <message>
         <source>Tabs on Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabs unten</translation>
     </message>
     <message>
         <source>Green on Black</source>
@@ -172,7 +172,7 @@
     </message>
     <message>
         <source>ScrollBar</source>
-        <translation type="unfinished"></translation>
+        <translation>Laufleiste</translation>
     </message>
     <message>
         <source>Show Command List</source>

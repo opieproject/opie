@@ -69,7 +69,7 @@
     </message>
     <message>
         <source>Unfiled</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>All</source>
@@ -144,7 +144,7 @@ bevor Sie Daten eingeben.</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -169,39 +169,39 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei</translation>
     </message>
     <message>
         <source>Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Schritart</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgabe sehen</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen...</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles Löschen...</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Verdoppeln</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <source>Delete all tasks?</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Aufgaben löschen?</translation>
     </message>
 </context>
 </TS>

@@ -411,15 +411,15 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Afganistan</source>
-        <translation type="unfinished"></translation>
+        <translation>Afganistan</translation>
     </message>
     <message>
         <source>Albania</source>
-        <translation type="unfinished"></translation>
+        <translation>Albanien</translation>
     </message>
     <message>
         <source>Algeria</source>
-        <translation type="unfinished"></translation>
+        <translation>Algerien</translation>
     </message>
     <message>
         <source>American Samoa</source>
@@ -427,27 +427,27 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Andorra</source>
-        <translation type="unfinished"></translation>
+        <translation>Andorra</translation>
     </message>
     <message>
         <source>Angola</source>
-        <translation type="unfinished"></translation>
+        <translation>Angola</translation>
     </message>
     <message>
         <source>Anguilla</source>
-        <translation type="unfinished"></translation>
+        <translation>Anguilla</translation>
     </message>
     <message>
         <source>Antartica</source>
-        <translation type="unfinished"></translation>
+        <translation>Antarktis</translation>
     </message>
     <message>
         <source>Argentina</source>
-        <translation type="unfinished"></translation>
+        <translation>Argentinien</translation>
     </message>
     <message>
         <source>Armania</source>
-        <translation type="unfinished"></translation>
+        <translation>Armenien</translation>
     </message>
     <message>
         <source>Aruba</source>
@@ -455,11 +455,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Australia</source>
-        <translation type="unfinished"></translation>
+        <translation>Australien</translation>
     </message>
     <message>
         <source>Austria</source>
-        <translation type="unfinished"></translation>
+        <translation>Östereich</translation>
     </message>
     <message>
         <source>Azerbaijan</source>
@@ -467,7 +467,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Bahamas</source>
-        <translation type="unfinished"></translation>
+        <translation>Bahamas</translation>
     </message>
     <message>
         <source>Bahrain</source>
@@ -475,7 +475,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Bangladesh</source>
-        <translation type="unfinished"></translation>
+        <translation>Bangladesch</translation>
     </message>
     <message>
         <source>Barbados</source>
@@ -483,11 +483,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Belarus</source>
-        <translation type="unfinished"></translation>
+        <translation>Belarus</translation>
     </message>
     <message>
         <source>Belgium</source>
-        <translation type="unfinished"></translation>
+        <translation>Belgien</translation>
     </message>
     <message>
         <source>Belize</source>
@@ -507,11 +507,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Boliva</source>
-        <translation type="unfinished"></translation>
+        <translation>Bolivien</translation>
     </message>
     <message>
         <source>Botswana</source>
-        <translation type="unfinished"></translation>
+        <translation>Botswana</translation>
     </message>
     <message>
         <source>Bouvet Island</source>
@@ -519,7 +519,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Brazil</source>
-        <translation type="unfinished"></translation>
+        <translation>Brasilien</translation>
     </message>
     <message>
         <source>Brunei Darussalam</source>
@@ -527,15 +527,15 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Bulgaria</source>
-        <translation type="unfinished"></translation>
+        <translation>Bulgarien</translation>
     </message>
     <message>
         <source>Burkina Faso</source>
-        <translation type="unfinished"></translation>
+        <translation>Burkina Faso</translation>
     </message>
     <message>
         <source>Burundi</source>
-        <translation type="unfinished"></translation>
+        <translation>Burundi</translation>
     </message>
     <message>
         <source>Cambodia</source>
@@ -551,27 +551,27 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Cayman Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Cayman Inseln</translation>
     </message>
     <message>
         <source>Chad</source>
-        <translation type="unfinished"></translation>
+        <translation>Chad</translation>
     </message>
     <message>
         <source>Chile</source>
-        <translation type="unfinished"></translation>
+        <translation>Chile</translation>
     </message>
     <message>
         <source>China</source>
-        <translation type="unfinished"></translation>
+        <translation>China</translation>
     </message>
     <message>
         <source>Christmas Island</source>
-        <translation type="unfinished"></translation>
+        <translation>Weinachtsinseln</translation>
     </message>
     <message>
         <source>Colombia</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolumbien</translation>
     </message>
     <message>
         <source>Comoros</source>
@@ -579,39 +579,39 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Congo</source>
-        <translation type="unfinished"></translation>
+        <translation>Kongo</translation>
     </message>
     <message>
         <source>Cook Island</source>
-        <translation type="unfinished"></translation>
+        <translation>Cook Inseln</translation>
     </message>
     <message>
         <source>Costa Rica</source>
-        <translation type="unfinished"></translation>
+        <translation>Costa Rica</translation>
     </message>
     <message>
         <source>Cote d&apos;Ivoire</source>
-        <translation type="unfinished"></translation>
+        <translation>Elfenbeinküste</translation>
     </message>
     <message>
         <source>Croatia</source>
-        <translation type="unfinished"></translation>
+        <translation>Kroatien</translation>
     </message>
     <message>
         <source>Cuba</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuba</translation>
     </message>
     <message>
         <source>Cyprus</source>
-        <translation type="unfinished"></translation>
+        <translation>Zypern</translation>
     </message>
     <message>
         <source>Czech Republic</source>
-        <translation type="unfinished"></translation>
+        <translation>Tschechei</translation>
     </message>
     <message>
         <source>Denmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Dänemark</translation>
     </message>
     <message>
         <source>Djibouti</source>
@@ -623,47 +623,47 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Dominican Republic</source>
-        <translation type="unfinished"></translation>
+        <translation>Dominikanische Republik</translation>
     </message>
     <message>
         <source>East Timor</source>
-        <translation type="unfinished"></translation>
+        <translation>Ost Timor</translation>
     </message>
     <message>
         <source>Ecuador</source>
-        <translation type="unfinished"></translation>
+        <translation>Equador</translation>
     </message>
     <message>
         <source>Egypt</source>
-        <translation type="unfinished"></translation>
+        <translation>Ägypten</translation>
     </message>
     <message>
         <source>El Salvador</source>
-        <translation type="unfinished"></translation>
+        <translation>El Salvador</translation>
     </message>
     <message>
         <source>Equatorial Guinea</source>
-        <translation type="unfinished"></translation>
+        <translation>Äquitorial Guinea</translation>
     </message>
     <message>
         <source>Eritrea</source>
-        <translation type="unfinished"></translation>
+        <translation>Eritrea</translation>
     </message>
     <message>
         <source>Estonia</source>
-        <translation type="unfinished"></translation>
+        <translation>Estland</translation>
     </message>
     <message>
         <source>Ethiopia</source>
-        <translation type="unfinished"></translation>
+        <translation>Äthopien</translation>
     </message>
     <message>
         <source>Falkland Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Falklandinseln</translation>
     </message>
     <message>
         <source>Faroe Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Farörinseln</translation>
     </message>
     <message>
         <source>Fiji</source>
@@ -671,11 +671,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Finland</source>
-        <translation type="unfinished"></translation>
+        <translation>Finland</translation>
     </message>
     <message>
         <source>French Guiana</source>
-        <translation type="unfinished"></translation>
+        <translation>Französisch Guiana</translation>
     </message>
     <message>
         <source>French Polynesia</source>
@@ -691,7 +691,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Georgia</source>
-        <translation type="unfinished"></translation>
+        <translation>Georgien</translation>
     </message>
     <message>
         <source>Gahna</source>
@@ -699,19 +699,19 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Gibraltar</source>
-        <translation type="unfinished"></translation>
+        <translation>Gibraltar</translation>
     </message>
     <message>
         <source>Greece</source>
-        <translation type="unfinished"></translation>
+        <translation>Griechenland</translation>
     </message>
     <message>
         <source>Greenland</source>
-        <translation type="unfinished"></translation>
+        <translation>Grönland</translation>
     </message>
     <message>
         <source>Grenada</source>
-        <translation type="unfinished"></translation>
+        <translation>Grenada</translation>
     </message>
     <message>
         <source>Guadelupe</source>
@@ -755,23 +755,23 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Hungary</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungarn</translation>
     </message>
     <message>
         <source>Iceland</source>
-        <translation type="unfinished"></translation>
+        <translation>Island</translation>
     </message>
     <message>
         <source>India</source>
-        <translation type="unfinished"></translation>
+        <translation>Indien</translation>
     </message>
     <message>
         <source>Indonesia</source>
-        <translation type="unfinished"></translation>
+        <translation>Indonesien</translation>
     </message>
     <message>
         <source>Ireland</source>
-        <translation type="unfinished"></translation>
+        <translation>Irland</translation>
     </message>
     <message>
         <source>Israel</source>
@@ -779,7 +779,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Italy</source>
-        <translation type="unfinished"></translation>
+        <translation>Italien</translation>
     </message>
     <message>
         <source>Jamacia</source>
@@ -843,7 +843,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Luxembourg</source>
-        <translation type="unfinished"></translation>
+        <translation>Luxemburg</translation>
     </message>
     <message>
         <source>Macau</source>
@@ -943,7 +943,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Netherlands</source>
-        <translation type="unfinished"></translation>
+        <translation>Niederlande</translation>
     </message>
     <message>
         <source>New Caledonia</source>
@@ -951,7 +951,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>New Zealand</source>
-        <translation type="unfinished"></translation>
+        <translation>Neuseeland</translation>
     </message>
     <message>
         <source>Nicaragua</source>
@@ -1123,7 +1123,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Switzerland</source>
-        <translation type="unfinished"></translation>
+        <translation>Schweiz</translation>
     </message>
     <message>
         <source>Taiwan</source>
@@ -1159,7 +1159,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Turkey</source>
-        <translation type="unfinished"></translation>
+        <translation>Türkei</translation>
     </message>
     <message>
         <source>Turkmenistan</source>
@@ -1195,11 +1195,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Viet Nam</source>
-        <translation type="unfinished"></translation>
+        <translation>Vietnam</translation>
     </message>
     <message>
         <source>Virgin Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Jungfraueninseln</translation>
     </message>
     <message>
         <source>Western Sahara</source>
@@ -1211,7 +1211,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Yugoslavia</source>
-        <translation type="unfinished"></translation>
+        <translation>Yogoslavien</translation>
     </message>
     <message>
         <source>Zambia</source>
