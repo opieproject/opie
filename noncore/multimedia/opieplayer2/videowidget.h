@@ -45,11 +45,11 @@ class QPixmap;
 class QSlider;
 
 enum VideoButtons {
-    VideoStop = 0,
-    VideoPlay,
+    VideoPlay = 0,
+    VideoStop,
 //    VideoPause,
-    VideoPrevious,
     VideoNext,
+    VideoPrevious,
     VideoVolUp,
     VideoVolDown,
     VideoFullscreen

@@ -60,7 +60,7 @@ const int xo = 2; // movable x offset
 const int yo = 0; // movable y offset
 
 const char * const skinV_mask_file_names[7] = {
-"stop","play","back","fwd","up","down","full"
+"play","stop","fwd","back","up","down","full"
 };
 
 }
@@ -77,10 +77,10 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     toggleButton.isHeld = toggleButton.isDown = false;
 
     buttons.reserve( 7 );
-    buttons.push_back( defaultButton ); // stop
     buttons.push_back( toggleButton ); // play
-    buttons.push_back( defaultButton ); // previous
+    buttons.push_back( defaultButton ); // stop
     buttons.push_back( defaultButton ); // next
+    buttons.push_back( defaultButton ); // previous
     buttons.push_back( defaultButton ); // volUp
     buttons.push_back( defaultButton ); // volDown
     buttons.push_back( toggleButton ); //fullscreen
