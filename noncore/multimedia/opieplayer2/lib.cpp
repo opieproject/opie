@@ -135,11 +135,11 @@ void Lib::initialize()
         setWidget( m_wid );
     }
 
-    m_queue = xine_event_new_queue (m_stream);
+    //  m_queue = xine_event_new_queue (m_stream);
 
-    xine_event_create_listener_thread (m_queue, xine_event_handler, this);
+    // xine_event_create_listener_thread (m_queue, xine_event_handler, this);
 
-    ::null_preload_decoders( m_stream );
+      ::null_preload_decoders( m_stream );
 
     m_duringInitialization = false;
 }
@@ -194,8 +194,13 @@ int Lib::play( const QString& fileName, int startPos, int start_time ) {
     // FIXME actually a hack imho. Should not be needed to dispose the whole stream
     // but without we get wrong media length reads from libxine for the second media
     xine_dispose ( m_stream );
+
     QString str = fileName.stripWhiteSpace();
+
     m_stream = xine_stream_new (m_xine,  m_audioOutput,  m_videoOutput );
+    m_queue = xine_event_new_queue (m_stream);
+    xine_event_create_listener_thread (m_queue, xine_event_handler, this);
+
     if ( !xine_open( m_stream, QFile::encodeName(str.utf8() ).data() ) ) {
         return 0;
     }

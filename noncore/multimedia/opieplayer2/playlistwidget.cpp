@@ -680,8 +680,8 @@ void PlayListWidget::openFile() {
     types.insert("Video", video );
 
     QString str = OFileDialog::getOpenFileName( 1,
-                  cfg.readEntry("LastDirectory",QPEApplication::documentDir()),"",
-                  types, 0 );
+                                                cfg.readEntry("LastDirectory",QPEApplication::documentDir()),"",
+                                                types, 0 );
     if(str.left(2) == "//") str=str.right(str.length()-1);
     cfg.writeEntry("LastDirectory" ,QFileInfo(str).dirPath());
 

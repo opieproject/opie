@@ -24,11 +24,6 @@
 #include <sys/file.h>
 #include <sys/ioctl.h>
 
-#include <unistd.h>
-
-
-
-
 
 #define FBIOBLANK             0x4611
 
@@ -159,9 +154,11 @@ void MediaPlayer::next() {
 
     if(playList.currentTab() == PlayListWidget::CurrentPlayList) { //if using the playlist
         if ( playList.next() ) {
+            qDebug( "NEXT TRIGGERED" );
             play();
         } else if ( mediaPlayerState.isLooping() ) {
             if ( playList.first() ) {
+                qDebug( "FIRST TRIGGERED" );
                 play();
             }
         } else {
