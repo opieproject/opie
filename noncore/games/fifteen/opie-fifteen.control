@@ -2,10 +2,10 @@ Package: opie-fifteen
 Files: plugins/application/libfifteen.so* bin/fifteen apps/Games/fifteen.desktop pics/fifteen
 Priority: optional
 Section: opie/games
-Maintainer: Martin Imobersteg <imm@gmx.ch> 
+Maintainer: Martin Imobersteg <imm@gmx.ch>
 Architecture: arm
 Arch: iPAQ
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2
 Description: Fifteen pieces game
  A game for the Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION
