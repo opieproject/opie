@@ -18,12 +18,16 @@ signals:
     void pickboardToggled(bool on_off);
     void setMapToDefault();
     void setMapToFile(QString map);
+    void reloadKeyboard();
 
 private slots:
     void pickTog();
     void setMap(int index);
     void addMap();
     void removeMap();
+
+    // all those required slots for the color push buttons
+    void keyColorButtonClicked();
 
 private:
     QCheckBox *pick_button;
@@ -34,6 +38,9 @@ private:
 
     QStringList default_maps; // the maps in your share/multikey/ dir
     QStringList custom_maps; // maps you added with the 'add' button
+
+    /* color buttons */
+    QPushButton *key_color_button;
 
 };
 

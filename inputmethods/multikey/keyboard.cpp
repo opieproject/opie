@@ -49,6 +49,7 @@ Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
     configdlg(0)
 
 {
+
     // get the default font
     Config *config = new Config( "qpe" );
     config->setGroup( "Appearance" );
@@ -72,12 +73,15 @@ Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
 
     } else picks->hide();
 
+    loadKeyboardColors();
+
     keys = new Keys();
 
     repeatTimer = new QTimer( this );
     connect( repeatTimer, SIGNAL(timeout()), this, SLOT(repeat()) );
 
 }
+
 Keyboard::~Keyboard() {
 
     if ( configdlg ) { 
@@ -156,11 +160,6 @@ void Keyboard::paintEvent(QPaintEvent* e)
 
 void Keyboard::drawKeyboard(QPainter &p, int row, int col)
 {
-    QColor keycolor = 
-		    	QColor(240,240,240); 
-    QColor keycolor_pressed = QColor(171,183,198);
-    QColor keycolor_lines = QColor(138,148,160);
-    QColor textcolor = QColor(43,54,68);
 
 
     if (row != -1 && col != -1) { //just redraw one key
@@ -182,12 +181,11 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
 
         ushort c = keys->uni(row, col);
 
-        if (!pix) {
-            p.setPen(textcolor);
+        p.setPen(textcolor);
+        if (!pix)
             p.drawText(x, y, 
                defaultKeyWidth * keyWidth, keyHeight,
                AlignCenter, ((shift || lock) && keys->shift(c)) ? (QChar)keys->shift(c) : (QChar)c);
-        }
         else
             // center the image in the middle of the key
             p.drawPixmap( x + (defaultKeyWidth * keyWidth - pix->width())/2, 
@@ -292,6 +290,8 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
                        this, SLOT(setMapToDefault()));
                connect(configdlg, SIGNAL(setMapToFile(QString)), 
                        this, SLOT(setMapToFile(QString)));
+               connect(configdlg, SIGNAL(reloadKeyboard()),
+                       this, SLOT(reloadKeyboard()));
                configdlg->showMaximized();
                configdlg->show();
                configdlg->raise();
@@ -545,6 +545,55 @@ void Keyboard::setMapToFile(QString map) {
         keys = new Keys();
 
     repaint(FALSE);
+
+}
+
+/* Keybaord::setColor {{{1 */
+void Keyboard::reloadKeyboard() {
+
+    // reload colors and redraw
+    loadKeyboardColors();
+    repaint();
+
+}
+
+void Keyboard::loadKeyboardColors() {
+
+    Config config ("multikey");
+    config.setGroup("colors");
+
+    QStringList color;
+    color = config.readListEntry("keycolor", QChar(','));
+    if (color.isEmpty()) {
+        color = QStringList::split(",", "240,240,240");
+        config.writeEntry("keycolor", color.join(","));
+
+    }
+    keycolor = QColor(color[0].toInt(), color[1].toInt(), color[2].toInt());
+
+    color = config.readListEntry("keycolor_pressed", QChar(','));
+    if (color.isEmpty()) {
+        color = QStringList::split(",", "171,183,198");
+        config.writeEntry("keycolor_pressed", color.join(","));
+
+    }
+    keycolor_pressed = QColor(color[0].toInt(), color[1].toInt(), color[2].toInt());
+
+    color = config.readListEntry("keycolor_lines", QChar(','));
+    if (color.isEmpty()) {
+        color = QStringList::split(",", "138,148,160");
+        config.writeEntry("keycolor_lines", color.join(","));
+
+    }
+    keycolor_lines = QColor(color[0].toInt(), color[1].toInt(), color[2].toInt());
+
+    color = config.readListEntry("textcolor", QChar(','));
+    if (color.isEmpty()) {
+        color = QStringList::split(",", "43,54,68");
+        config.writeEntry("textcolor", color.join(","));
+
+    }
+    textcolor = QColor(color[0].toInt(), color[1].toInt(), color[2].toInt());
 
 }
 

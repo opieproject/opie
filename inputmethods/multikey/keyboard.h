@@ -114,6 +114,9 @@ private slots:
     void togglePickboard(bool on_off);
     void setMapToDefault();
     void setMapToFile(QString map);
+
+    // used to redraw keyboard after edited colors
+    void reloadKeyboard();
     
 private:
     int getKey( int &w, int j = -1 );
@@ -151,6 +154,13 @@ private:
     ushort constoe(const ushort c);
 
     QTimer *repeatTimer;
+
+    /* colors */
+    void loadKeyboardColors();
+    QColor keycolor;
+    QColor keycolor_pressed;
+    QColor keycolor_lines;
+    QColor textcolor;
 
     ConfigDlg *configdlg;
 };

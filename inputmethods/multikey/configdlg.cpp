@@ -1,6 +1,7 @@
 /*
  * TODO
  * make a font selection thing (size too)
+ * make a cursor thing
  *
  *
  *
@@ -24,11 +25,13 @@
 #include <qlistbox.h>
 #include <qstringlist.h>
 #include <opie/ofiledialog.h>
+#include <opie/colordialog.h>
 #include <qdir.h>
 #include <qfileinfo.h>
 #include "configdlg.h"
 #include "keyboard.h"
 
+// ConfigDlg::ConfigDlg() {{{1
 ConfigDlg::ConfigDlg () : QTabWidget ()
 {
     setCaption( tr("Multikey Configuration") );
@@ -104,6 +107,8 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
 
     remove_button = new QPushButton(tr("Remove"), add_remove_grid);
     remove_button->setFlat((bool)1);
+    if ((int)map_dir.count() >= keymaps->currentItem()) 
+        remove_button->setDisabled(true);
     connect(remove_button, SIGNAL(clicked()), SLOT(removeMap()));
 
     pick_button = new QCheckBox(tr("Pickboard"), gen_box);
@@ -129,12 +134,25 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
     addTab(color_box, tr("Colors"));
 
     QLabel *label;
+    QStringList color;
 
     label = new QLabel(tr("Key Color"), color_box);
-    QPushButton *button = new QPushButton(color_box);
-    button->setFlat((bool)1);
+    key_color_button = new QPushButton(color_box);
+    connect(key_color_button, SIGNAL(clicked()), SLOT(keyColorButtonClicked()));
+    key_color_button->setFlat((bool)1);
+
+    config.setGroup("colors");
+    color = config.readListEntry("keycolor", QChar(','));
+    if (color.isEmpty()) {
+        color = QStringList::split(",", "240,240,240");
+        config.writeEntry("keycolor", color.join(","));
+
+    }
+    key_color_button->setBackgroundColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
+
+
     label = new QLabel(tr("Key Pressed Color"), color_box);
-    button = new QPushButton(color_box);
+    QPushButton *button = new QPushButton(color_box);
     button->setFlat((bool)1);
     label = new QLabel(tr("Line Color"), color_box);
     button = new QPushButton(color_box);
@@ -164,28 +182,27 @@ void ConfigDlg::pickTog() {
  *
  */
 
+// ConfigDlg::setMap {{{1
 void ConfigDlg::setMap(int index) {
 
     if (index == 0) {
 
         remove_button->setDisabled(true);
-
         emit setMapToDefault();
     }
     else if ((uint)index <= default_maps.count()) {
 
         remove_button->setDisabled(true);
-
         emit setMapToFile(keymaps->text(index));
 
     } else {
 
         remove_button->setEnabled(true);
-
         emit setMapToFile(keymaps->text(index));
     }
 }
 
+// ConfigDlg::addMap() {{{1
 void ConfigDlg::addMap() {
 
     QString map = OFileDialog::getOpenFileName(1, QDir::home().absPath());
@@ -197,11 +214,12 @@ void ConfigDlg::addMap() {
     keymaps->setSelected(keymaps->count() - 1, true);
 
 
-    config.writeEntry("maps", maps.join("|"));
+    config.writeEntry("maps", maps, QChar('|'));
     config.writeEntry("current", map);
 
 }
 
+// ConfigDlg::removeMap() {{{1
 void ConfigDlg::removeMap() {
 
     cout << "removing : " << custom_maps[keymaps->currentItem() - default_maps.count() - 1] << "\n";
@@ -217,5 +235,25 @@ void ConfigDlg::removeMap() {
     // write the changes
     Config config ("multikey");
     config.setGroup("keymaps");
-    config.writeEntry("maps", custom_maps.join("|"));
+    config.writeEntry("maps", custom_maps, QChar('|'));
+}
+
+// ConfigDlg::color {{{1
+void ConfigDlg::keyColorButtonClicked() {
+
+    Config config ("multikey");
+    config.setGroup ("colors");
+
+    QStringList color = config.readListEntry("keycolor", QChar(','));
+
+    QColor newcolor = OColorDialog::getColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
+
+    color[0].setNum(newcolor.red());
+    color[1].setNum(newcolor.green());
+    color[2].setNum(newcolor.blue());
+
+    config.writeEntry("keycolor", color, QChar(','));
+    
+    key_color_button->setBackgroundColor(newcolor);
+    emit reloadKeyboard();
 }
