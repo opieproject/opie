@@ -21,8 +21,6 @@
 #include "DashEdit.h"
 #include "DasherInterface.h"
 
-#include <iconv.h>
-
 using namespace Dasher;
 
 class QtDasherScreen : public QWidget, public Dasher::CDasherScreen
