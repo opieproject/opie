@@ -1,9 +1,11 @@
-CONFIG    += qt warn_on release quick-app
+#CONFIG    += qt warn_on release quick-app
+CONFIG    += qt warn_on release 
 HEADERS   = opieftp.h inputDialog.h
 SOURCES   = opieftp.cpp inputDialog.cpp main.cpp
 TARGET    = opieftp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe -lftplib -lopieui2 -lopiecore2
+LIBS            += -lqpe -lftplib 
+DESTDIR=$(QPEDIR)/bin
 
 include ( $(OPIEDIR)/include.pro )
