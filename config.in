@@ -77,6 +77,10 @@ config OPTIMIZATIONS
 #    to all compilation commands. For example, a crosscompilation prefix
 #    of arm-linux-, results in the build calling arm-linux-gcc as its CC.
 
+config EXPERIMENTAL
+  bool "Prompt for development and/or incomplete items"
+  default y
+
 endmenu
 
 menu "Base"
@@ -155,7 +159,9 @@ menu "Tools"
   source development/config.in
 endmenu
 comment ""
+  depends on EXPERIMENTAL
 menu "Experimental"
+  depends on EXPERIMENTAL
   source libopie2/config.in
 endmenu
 
