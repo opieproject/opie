@@ -1,6 +1,6 @@
 TEMPLATE    =  lib
 
-CONFIG       = release warn_on
+CONFIG       = qt release warn_on
 
 SOURCES     =  preload.cpp
                
