@@ -248,7 +248,7 @@ bool FileManager::copyFile( const QString & src, const QString & dest ) {
          int err=0;
          QString msg;
 #ifdef Q_OS_MACX
-#ifdef SENDMAIL
+#ifdef SENDFILE
 	 /* FreeBSD does support a different kind of 
 	  * sendfile. (eilers)
 	  * I took this from Very Secure FTPd
@@ -268,12 +268,12 @@ bool FileManager::copyFile( const QString & src, const QString & dest ) {
           {
             err = (int) written;
           }
-#else /* SENDMAIL */
+#else /* SENDFILE */
 	  err == -1;
 	  msg = "FAILURE: Using unsupported function \"sendfile()\" Need Workaround !!";
 	  success = false;
 #         warning "Need workaround for sendfile!!(eilers)"
-#endif  /* SENDMAIL */
+#endif  /* SENDFILE */
 
 #else
 	  err = sendfile(write_fd, read_fd, &offset, stat_buf.st_size);
