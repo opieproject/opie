@@ -194,15 +194,33 @@ bool SyncAuthentication::checkPassword( const QString& password )
     int now = time(0);
 
     Config cfg("Security");
-    cfg.setGroup("Sync");
-    QString syncapp = cfg.readEntry("syncapp","Qtopia");
+    cfg.setGroup("SyncMode");
+    int mode = cfg.readNumEntry("Mode", 0x02 );
 
-    //No password needed if the user really wants it
-    if (syncapp == "IntelliSync") {
-    	return TRUE;
+    //No pass word needed if the user really needs it
+    if (mode & 0x04) {
+        QMessageBox unauth(
+            tr("Sync Connection"),
+            tr("<qt><p>An unauthorized system is requesting access to this device."
+               "<p>You chose IntelliSync so you may I allow or deny this connection.</qt>" ),
+            QMessageBox::Warning,
+            QMessageBox::Ok, QMessageBox::Cancel|QMessageBox::Default, QMessageBox::NoButton,
+            0, QString::null, TRUE, WStyle_StaysOnTop);
+        unauth.setButtonText(QMessageBox::Ok, tr("Allow" ) );
+        unauth.setButtonText(QMessageBox::Cancel, tr("Deny"));
+        switch( unauth.exec() ) {
+        case QMessageBox::Ok:
+            return TRUE;
+            break;
+        case QMessageBox::Cancel:
+        default:
+            denials++;
+            lastdenial=now;
+            return FALSE;
+        }
     }
 
-    // Detect old Qtopia Desktop (no password)
+    // Detect old Qtopia Desktop (no password) and fail
     if ( password.isEmpty() ) {
 		if ( denials < 3 || now > lastdenial+600 ) {
 		    QMessageBox unauth(

@@ -165,7 +165,7 @@ void QCopBridge::desktopMessage( const QCString &command, const QByteArray &data
             pi->sendDesktopMessage( command, data );
         }
     }
-    if ( m_mode & Sharp )
+    if ( ( m_mode & Sharp ) || (m_mode & IntelliSync) )
         sendDesktopMessageOld( command, data );
 }
 

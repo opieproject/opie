@@ -37,7 +37,8 @@ class QCopBridge : public QServerSocket
     Q_OBJECT
 
 public:
-    enum Mode  { Qtopia1_7= 0x01, Sharp = 0x02, Both = Qtopia1_7 | Sharp };
+    /* can not or anymore :) */
+    enum Mode  { Qtopia1_7= 0x01, Sharp = 0x02, IntelliSync = 0x04 };
     QCopBridge( Q_UINT16 port, QObject *parent = 0, const char* name = 0 );
     virtual ~QCopBridge();
 
