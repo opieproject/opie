@@ -1,4 +1,0 @@
-  config QASHMONEY
-    boolean "opie-qashmoney (money manager)" 
-    default "n"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBSQLITE_DEP

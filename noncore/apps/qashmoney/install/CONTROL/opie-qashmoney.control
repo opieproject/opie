@@ -1,8 +1,0 @@
-Package: opie-qashmoney
-Files: bin/qashmoney pics/qashmoney/* pics/qashmoney/flags/* apps/Applications/qashmoney.desktop
-Priority: optional
-Version: $QPE_VERSION$EXTRAVERSION
-Architecture: arm
-Maintainer: Allen Forsythe allen@qashmoney.org
-Section: Applications
-Description: QashMoney provides an intuitive and fast way to keep track of your accounts and budgets.
