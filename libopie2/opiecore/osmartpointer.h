@@ -35,7 +35,7 @@ _;:,     .>    :=|.         This program is free software; you can
 #include <stddef.h>
 
 /*!
- * \file OSmartPointer.h
+ * \file osmartpointer.h
  * \brief smart pointer and reference counter
  * \author Rajko Albrecht
  *

@@ -1,5 +1,5 @@
 /**
- * \file multiauthpassord.h
+ * \file multiauthpassword.h
  * \brief Password Dialog dropin.
  * \author Clément Séveillac (clement . seveillac (at) via . ecp . fr)
  */
