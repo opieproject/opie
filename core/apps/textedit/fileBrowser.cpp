@@ -110,7 +110,7 @@ void fileBrowser::listClicked(QListViewItem *selectedItem)
 {
     QString strItem=selectedItem->text(0);
     QString strSize=selectedItem->text(1);
-//  qDebug("strItem is "+strItem);
+//    qDebug("strItem is "+strItem);
     strSize.stripWhiteSpace();
 //  qDebug(strSize);
 
@@ -137,10 +137,13 @@ void fileBrowser::listClicked(QListViewItem *selectedItem)
                     currentDir.cd(strItem, TRUE);
                     populateList();
                 }
-            } else
+            } else {
+                strItem=QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem);
                   if( QFile::exists(strItem ) ) {
-//                      qDebug("We found our files!!");
+//currentDir.canonicalPath()
+                      qDebug("We found our files!!"+strItem);
                     OnOK();
+                  }
                 } //end not symlink
         chdir(strItem.latin1());
       }
@@ -152,7 +155,7 @@ void fileBrowser::OnOK()
     for ( ; it1.current(); ++it1 ) {
       if ( it1.current()->isSelected() ) {
          selectedFileName=QDir::cleanDirPath(currentDir.canonicalPath()+"/"+it1.current()->text(0));
-//         qDebug("selected filename is "+selectedFileName);
+         qDebug("selected filename is "+selectedFileName);
        fileList.append( selectedFileName );
       }
     }

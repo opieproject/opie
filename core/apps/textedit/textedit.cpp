@@ -299,6 +299,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
      a->addTo( bar );
      a->addTo( edit );
 
+     
     int defsize;
     bool defb, defi, wrap;
 
@@ -368,6 +369,11 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     connect( a, SIGNAL( activated() ), this, SLOT( findClose() ) );
     a->addTo( searchBar );
 
+     edit->insertSeparator();
+     a = new QAction( tr( "Delete" ), Resource::loadPixmap( "delete" ), QString::null, 0, this, 0 );
+     connect( a, SIGNAL( activated() ), this, SLOT( editDelete() ) );
+     a->addTo( edit );
+     
     searchBar->hide();
 
     editorStack = new QWidgetStack( this );
@@ -409,7 +415,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
 TextEdit::~TextEdit()
 {
-    saveAs();
+//    saveAs();
 
     Config cfg("TextEdit");
     cfg.setGroup("View");
@@ -509,14 +515,13 @@ void TextEdit::fileOpen()
     clearWState (WState_Reserved1 );
     editorStack->raiseWidget( fileSelector );
     fileSelector->reread();
-    updateCaption(currentFileName);
+    updateCaption();
 }
 
 void TextEdit::newFileOpen()
 {
-    fileBrowser *browseForFiles;
     browseForFiles=new fileBrowser(this,"fileBrowser",TRUE,0, "*");
-    if( browseForFiles->exec()!= 0 ) {
+    if( browseForFiles->exec() != -1 ) {
         QString selFile= browseForFiles->selectedFileName;
         QStringList fileList=browseForFiles->fileList;
         qDebug(selFile);
@@ -534,7 +539,7 @@ void TextEdit::newFileOpen()
         }
     }
     delete browseForFiles;
-
+    editor->setEdited( true );
 }
 
 #if 0
@@ -617,6 +622,7 @@ void TextEdit::newFile( const DocLnk &f )
     setWState (WState_Reserved1 );
     editor->setFocus();
     doc = new DocLnk(nf);
+    qDebug("newFile "+currentFileName);
     updateCaption(currentFileName);
 }
 
@@ -626,6 +632,9 @@ void TextEdit::openFile( const QString &f )
     DocLnk nf;
     nf.setType("text/plain");
     nf.setFile(f);
+    currentFileName=f;
+    qDebug("openFile string"+currentFileName);
+
     openFile(nf);
     showEditTools();
     // Show filename in caption
@@ -642,6 +651,8 @@ void TextEdit::openFile( const DocLnk &f )
     bFromDocView = TRUE;
     FileManager fm;
     QString txt;
+    currentFileName=f.name();
+    qDebug("openFile doclnk " + currentFileName);
     if ( !fm.loadFile( f, txt ) ) {
   // ####### could be a new file
         qDebug( "Cannot open file" );
@@ -654,8 +665,10 @@ void TextEdit::openFile( const DocLnk &f )
   delete doc;
     doc = new DocLnk(f);
     editor->setText(txt);
-    editor->setEdited(FALSE);
-    updateCaption(currentFileName);
+    editor->setEdited( false);
+    qDebug("openFile doclnk "+currentFileName);
+    doc->setName(currentFileName);
+    updateCaption();
 }
 
 void TextEdit::showEditTools()
@@ -673,26 +686,37 @@ void TextEdit::showEditTools()
     setWState (WState_Reserved1 );
 }
 
+/*!
+  unprompted save */
 bool TextEdit::save()
 {
+     qDebug("saveFile "+currentFileName);
+
     QString rt = editor->text();
     doc->setName( currentFileName);
     FileManager fm;
     if ( !fm.saveFile( *doc, rt ) ) {
         return false;
     }
-    delete doc;
-    doc = 0;
+//  if(doc)
+//      delete doc;
+//      doc = 0;
     editor->setEdited( false );
     return true;
-    
 }
 
+/*!
+  prompted save */
 bool TextEdit::saveAs()
 {
-      // case of nothing to save...
-    if ( !doc || !bFromDocView)
-        return true;
+        qDebug("saveAsFile "+currentFileName);
+
+      // case of nothing to save... /// there's always something to save
+//          if ( !doc )//|| !bFromDocView)
+//            {
+//                qDebug("no doc");
+//                return true;
+//      }
     if ( !editor->edited() ) {
         delete doc;
         doc = 0;
@@ -703,7 +727,7 @@ bool TextEdit::saveAs()
     qDebug(currentFileName);
     
     if( currentFileName.isEmpty() || currentFileName == "Unnamed") {
-
+        qDebug("do silly TT filename thing");
         if ( doc->name().isEmpty() ) {
             QString pt = rt.simplifyWhiteSpace();
             int i = pt.find( ' ' );
@@ -718,29 +742,45 @@ bool TextEdit::saveAs()
             if ( docname.length() > 40 )
                 docname = docname.left(40);
             if ( docname.isEmpty() )
-                docname = "Empty Text";
+                docname = "Unnamed";
             doc->setName(docname);
             currentFileName=docname;
         }
     }
 
-    fileSaver *fileSaveDlg;
     fileSaveDlg=new fileSaver(this,"SaveFile",TRUE,0, currentFileName);
-    if( fileSaveDlg->exec() != 0 ) {
+    qDebug("wanna save filename "+currentFileName);
+    fileSaveDlg->exec();
+    if( fileSaveDlg->result() == 1 ) {
     QString fileNm=fileSaveDlg->selectedFileName;
-    qDebug("save filename "+fileNm);
-    doc->setName(fileNm);
-    updateCaption(fileNm);
+    qDebug("saving filename "+fileNm);
+    QFileInfo fi(fileNm);
+    currentFileName=fi.fileName();
+    if(doc) {
+        qDebug("doclnk exists");
+//        QString file = doc->file();
+//        doc->removeFiles();
+        delete doc;
+        DocLnk nf;
+        nf.setType("text/plain");
+        nf.setFile( fileNm);
+        doc = new DocLnk(nf);
+//        editor->setText(rt);
+        qDebug("openFile doclnk "+currentFileName);
     }
-    delete fileSaveDlg;
-
+    doc->setName( currentFileName);
+    updateCaption( currentFileName);
+    
     FileManager fm;
     if ( !fm.saveFile( *doc, rt ) ) {
         return false;
     }
-    delete doc;
-    doc = 0;
+//      delete doc;
+//      doc = 0;
     editor->setEdited( false );
+    }
+    if(fileSaveDlg)
+    delete fileSaveDlg;
     return true;
 }
 
@@ -818,3 +858,17 @@ void TextEdit::changeFont() {
 
 }
 
+void TextEdit::editDelete()
+{
+    switch ( QMessageBox::warning(this,"Text Editor","Do you really want\nto delete the current file\nfrom the disk?\nThis is irreversable!!","Yes","No",0,0,1) ) {
+      case 0:
+          if(doc) {
+              doc->removeFiles();
+              clear();
+          }
+          break;
+      case 1: 
+            // exit
+          break;
+    };
+}

@@ -57,11 +57,12 @@ public slots:
 private:
 
 private slots:
-    void accept();
+        void accept(); 
         void upDir();
         void listDoubleClicked(QListViewItem *);
         void listClicked(QListViewItem *);
-        void OnOK();
+        void closeEvent( QCloseEvent * );
+
 protected slots: 
 
 protected:

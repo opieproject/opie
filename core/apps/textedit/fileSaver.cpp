@@ -50,7 +50,7 @@ fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl 
     ListView->setGeometry( QRect( 10, 35, 220, 160 ) );
 
     fileEdit= new QLineEdit(this);
-    fileEdit->setGeometry( QRect( 10, 230, 200, 25));
+    fileEdit->setGeometry( QRect( 10, 200, 200, 22));
 
     fileEdit->setText( tmpFileName);
 
@@ -147,7 +147,7 @@ void fileSaver::listClicked(QListViewItem *selectedItem)
                     currentDir.cd(strItem, TRUE);
                     populateList();
                 }
-            } //  else
+            } // else
 //                    if( QFile::exists(strItem ) ) {
 //                        qDebug("We found our files!!");
 
@@ -159,14 +159,24 @@ void fileSaver::listClicked(QListViewItem *selectedItem)
 }
 
 
-void fileSaver::OnOK()
+void fileSaver::closeEvent( QCloseEvent *e )
 {
-//    reject();
+    if(e->isAccepted()) {
+    e->accept();        
+    } else {
+    qDebug("not accepted");
+    done(-1);
+    }
 }
 
 void fileSaver::accept() {
     selectedFileName =  fileEdit->text();
-    selectedFileName = currentDir.canonicalPath()+ selectedFileName;
-    qDebug("goint to save "+selectedFileName);
-    reject();
+    QString path =  currentDir.canonicalPath()+"/" + selectedFileName;
+    if( path.find("//",0,TRUE) ==-1 ) {
+        selectedFileName = path;
+    } else {
+        selectedFileName = currentDir.canonicalPath()+selectedFileName;
+    }
+    qDebug("going to save "+selectedFileName);
+    done(1);
 }

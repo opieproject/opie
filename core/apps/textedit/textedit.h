@@ -24,6 +24,9 @@
 
 #define QTEXTEDIT_OPEN_API
 
+#include "fileBrowser.h"
+#include "fileSaver.h"
+
 #include <qpe/filemanager.h>
 
 #include <qmainwindow.h>
@@ -68,6 +71,7 @@ private slots:
     void editCopy();
     void editPaste();
     void editFind();
+    void editDelete();
 
     void findNext();
     void findClose();
@@ -94,6 +98,9 @@ private:
 private:
     QWidgetStack *editorStack;
     FileSelector *fileSelector;
+    fileSaver *fileSaveDlg;
+    fileBrowser *browseForFiles;
+
     QpeEditor* editor;
     QToolBar *menu, *editBar, *searchBar;
     QLineEdit *searchEdit;
