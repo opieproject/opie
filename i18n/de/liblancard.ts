@@ -42,7 +42,7 @@
     <name>LanCardRun</name>
     <message>
         <source>No interface found</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Interface gefunden</translation>
     </message>
 </context>
 </TS>

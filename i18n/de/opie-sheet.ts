@@ -3,881 +3,881 @@
     <name>CellFormat</name>
     <message>
         <source>&amp;Borders</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rahmen</translation>
     </message>
     <message>
         <source>Back&amp;ground</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hintergrund</translation>
     </message>
     <message>
         <source>&amp;Font</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Schrift</translation>
     </message>
     <message>
         <source>&amp;Alignment</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ausrichtung</translation>
     </message>
     <message>
         <source>&amp;Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Breite:</translation>
     </message>
     <message>
         <source>&amp;Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Farbe:</translation>
     </message>
     <message>
         <source>&amp;Default Borders</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard &amp;Rahmen</translation>
     </message>
     <message>
         <source>&amp;Style:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Muster:</translation>
     </message>
     <message>
         <source>&amp;Default Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard &amp;Hintergrund</translation>
     </message>
     <message>
         <source>&amp;Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Schrift:</translation>
     </message>
     <message>
         <source>&amp;Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Größe:</translation>
     </message>
     <message>
         <source>&amp;Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Fe&amp;tt</translation>
     </message>
     <message>
         <source>&amp;Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kursiv</translation>
     </message>
     <message>
         <source>&amp;Default Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Standar&amp;d Schrift</translation>
     </message>
     <message>
         <source>&amp;Vertical:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vertikal:</translation>
     </message>
     <message>
         <source>&amp;Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>H&amp;orizontal:</translation>
     </message>
     <message>
         <source>&amp;Word Wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zeilenumbruch</translation>
     </message>
     <message>
         <source>&amp;Default Alignment</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard &amp;Ausrichtung</translation>
     </message>
     <message>
         <source>Format Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Zellen formatieren</translation>
     </message>
     <message>
         <source>Opie Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Sheet</translation>
     </message>
 </context>
 <context>
     <name>FindDialog</name>
     <message>
         <source>&amp;Find &amp;&amp; Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Finden &amp;&amp; Ersetzen</translation>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Optionen</translation>
     </message>
     <message>
         <source>&amp;Search for:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Suche nach:</translation>
     </message>
     <message>
         <source>&amp;Replace with:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ersetze &amp;mit:</translation>
     </message>
     <message>
         <source>&amp;Type</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Typ</translation>
     </message>
     <message>
         <source>&amp;Find</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Finde</translation>
     </message>
     <message>
         <source>&amp;Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ersetze</translation>
     </message>
     <message>
         <source>Replace &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Alles ersetzen</translation>
     </message>
     <message>
         <source>Match &amp;case</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Grossschreibung</translation>
     </message>
     <message>
         <source>Current &amp;selection only</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nur aktuelle Auswahl</translation>
     </message>
     <message>
         <source>&amp;Entire cell</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vollständige Zelle</translation>
     </message>
     <message>
         <source>Find &amp; Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>Finden &amp; Ersetzen</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Opie Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Sheet</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Inconsistency error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Inkonsistenz Fehler!</translation>
     </message>
     <message>
         <source>File cannot be saved!</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei kann nicht gespeichert werden!</translation>
     </message>
     <message>
         <source>File cannot be opened!</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei kann nicht geöffent werden!</translation>
     </message>
     <message>
         <source>Invalid file format!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiges Dateiformat!</translation>
     </message>
     <message>
         <source>Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichere Datei</translation>
     </message>
     <message>
         <source>Do you want to save the current file?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie die aktuelle Datei speichern?</translation>
     </message>
     <message>
         <source>&amp;File Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Dateiname:</translation>
     </message>
     <message>
         <source>UnnamedFile</source>
-        <translation type="unfinished"></translation>
+        <translation>UnbekannteDatei</translation>
     </message>
     <message>
         <source>New File</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Datei</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Neu</translation>
     </message>
     <message>
         <source>Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei öffnen</translation>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Öffnen</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Speichern</translation>
     </message>
     <message>
         <source>Save File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichere Datei als</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichere &amp;als</translation>
     </message>
     <message>
         <source>Import Excel file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importiere Excel Datei</translation>
     </message>
     <message>
         <source>Import E&amp;xcel file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importiere E&amp;xcel Datei</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Akzeptieren</translation>
     </message>
     <message>
         <source>&amp;Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>A&amp;kzeptieren</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbruch</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbru&amp;ch</translation>
     </message>
     <message>
         <source>Cell Selector</source>
-        <translation type="unfinished"></translation>
+        <translation>Zellen-Selektor</translation>
     </message>
     <message>
         <source>Cell &amp;Selector</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zellen-Selektor</translation>
     </message>
     <message>
         <source>Cut Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Zellen ausschneiden</translation>
     </message>
     <message>
         <source>Cu&amp;t</source>
-        <translation type="unfinished"></translation>
+        <translation>Au&amp;sscheiden</translation>
     </message>
     <message>
         <source>Copy Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Zellen kopieren</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kopieren</translation>
     </message>
     <message>
         <source>Paste Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Zellen einfügen</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Einfügen</translation>
     </message>
     <message>
         <source>Paste Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhalt einfügen</translation>
     </message>
     <message>
         <source>Paste Cont&amp;ents</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Inhalt einfügen</translation>
     </message>
     <message>
         <source>Clear Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Zelleninhalt löschen</translation>
     </message>
     <message>
         <source>C&amp;lear</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Leeren</translation>
     </message>
     <message>
         <source>Insert Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Zellen einfügen</translation>
     </message>
     <message>
         <source>C&amp;ells</source>
-        <translation type="unfinished"></translation>
+        <translation>Zelle&amp;n</translation>
     </message>
     <message>
         <source>Insert Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeilen einfügen</translation>
     </message>
     <message>
         <source>&amp;Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zeilen</translation>
     </message>
     <message>
         <source>Insert Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Spalten einfügen</translation>
     </message>
     <message>
         <source>&amp;Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>S&amp;palten</translation>
     </message>
     <message>
         <source>Add Sheets</source>
-        <translation type="unfinished"></translation>
+        <translation>Blatt hinzufügen</translation>
     </message>
     <message>
         <source>&amp;Sheets</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Blätter</translation>
     </message>
     <message>
         <source>Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Zellen</translation>
     </message>
     <message>
         <source>&amp;Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Zelle&amp;n</translation>
     </message>
     <message>
         <source>Row Height</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeilenhöhe</translation>
     </message>
     <message>
         <source>H&amp;eight</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Höhe</translation>
     </message>
     <message>
         <source>Adjust Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeile anpassen</translation>
     </message>
     <message>
         <source>&amp;Adjust</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Anpassen</translation>
     </message>
     <message>
         <source>Show Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeile zeigen</translation>
     </message>
     <message>
         <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zeigen</translation>
     </message>
     <message>
         <source>Hide Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeile verstecken</translation>
     </message>
     <message>
         <source>&amp;Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Verstecken</translation>
     </message>
     <message>
         <source>Column Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Spaltenbreite</translation>
     </message>
     <message>
         <source>&amp;Width</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Breite</translation>
     </message>
     <message>
         <source>Adjust Column</source>
-        <translation type="unfinished"></translation>
+        <translation>Spalte anpassen</translation>
     </message>
     <message>
         <source>Show Column</source>
-        <translation type="unfinished"></translation>
+        <translation>Spalte zeigen</translation>
     </message>
     <message>
         <source>Hide Column</source>
-        <translation type="unfinished"></translation>
+        <translation>Spalte verstecken</translation>
     </message>
     <message>
         <source>Rename Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Blatt umbenennen</translation>
     </message>
     <message>
         <source>&amp;Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Umbenennen</translation>
     </message>
     <message>
         <source>Remove Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Blatt löschen</translation>
     </message>
     <message>
         <source>R&amp;emove</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Löschen</translation>
     </message>
     <message>
         <source>Sort Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Daten sortieren</translation>
     </message>
     <message>
         <source>&amp;Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sortieren</translation>
     </message>
     <message>
         <source>Find &amp;&amp; Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>Finden &amp;&amp; Ersetzen</translation>
     </message>
     <message>
         <source>&amp;Find &amp;&amp; Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Finden &amp;&amp; Ersetzen</translation>
     </message>
     <message>
         <source>Equal To</source>
-        <translation type="unfinished"></translation>
+        <translation>Gleich mit</translation>
     </message>
     <message>
         <source>&amp;Equal To</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gleich mit</translation>
     </message>
     <message>
         <source>Addition</source>
-        <translation type="unfinished"></translation>
+        <translation>Addition</translation>
     </message>
     <message>
         <source>&amp;Addition</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Addition</translation>
     </message>
     <message>
         <source>Subtraction</source>
-        <translation type="unfinished"></translation>
+        <translation>Subtraktion</translation>
     </message>
     <message>
         <source>&amp;Subtraction</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Subtraktion</translation>
     </message>
     <message>
         <source>Multiplication</source>
-        <translation type="unfinished"></translation>
+        <translation>Multiplikation</translation>
     </message>
     <message>
         <source>&amp;Multiplication</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Multiplikation</translation>
     </message>
     <message>
         <source>Division</source>
-        <translation type="unfinished"></translation>
+        <translation>Division</translation>
     </message>
     <message>
         <source>&amp;Division</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Division</translation>
     </message>
     <message>
         <source>Open ParanthesistempCellData-&gt;row+row1, tempCellData-&gt;col+col1</source>
-        <translation type="unfinished"></translation>
+        <translation>Open ParanthesistempCellData-&gt;row+row1, tempCellData-&gt;col+col1</translation>
     </message>
     <message>
         <source>&amp;Open Paranthesis</source>
-        <translation type="unfinished"></translation>
+        <translation>Klammerung &amp;oeffnen</translation>
     </message>
     <message>
         <source>Close Paranthesis</source>
-        <translation type="unfinished"></translation>
+        <translation>Klammerung schließen</translation>
     </message>
     <message>
         <source>&amp;Close Paranthesis</source>
-        <translation type="unfinished"></translation>
+        <translation>Klammerung s&amp;chließen</translation>
     </message>
     <message>
         <source>Comma</source>
-        <translation type="unfinished"></translation>
+        <translation>Komma</translation>
     </message>
     <message>
         <source>&amp;Comma</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Komma</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Datei</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
         <source>&amp;Insert</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Einfügen</translation>
     </message>
     <message>
         <source>&amp;Format</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Formatierung</translation>
     </message>
     <message>
         <source>&amp;Data</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Daten</translation>
     </message>
     <message>
         <source>&amp;Row</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zeile</translation>
     </message>
     <message>
         <source>Colum&amp;n</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Spalte</translation>
     </message>
     <message>
         <source>&amp;Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>B&amp;latt</translation>
     </message>
     <message>
         <source>&amp;Function</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Funktion</translation>
     </message>
     <message>
         <source>&amp;Simple</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Einfach</translation>
     </message>
     <message>
         <source>ABS(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ABS(x)</translation>
     </message>
     <message>
         <source>CEILING(x,acc)</source>
-        <translation type="unfinished"></translation>
+        <translation>CEILING(x,acc)</translation>
     </message>
     <message>
         <source>FACT(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>FACT(x)</translation>
     </message>
     <message>
         <source>FLOOR(x,acc)</source>
-        <translation type="unfinished"></translation>
+        <translation>FLOOR(x,acc)</translation>
     </message>
     <message>
         <source>INT(x)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>MOD(x,y)</source>
-        <translation type="unfinished"></translation>
+        <translation>MOD(x,y)</translation>
     </message>
     <message>
         <source>ROUND(x,digits)</source>
-        <translation type="unfinished"></translation>
+        <translation>ROUND(x,digits)</translation>
     </message>
     <message>
         <source>SIGN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>SIGN(x)</translation>
     </message>
     <message>
         <source>EXP(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>EXP(x)</translation>
     </message>
     <message>
         <source>LN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>LN(x)</translation>
     </message>
     <message>
         <source>LOG(x,b)</source>
-        <translation type="unfinished"></translation>
+        <translation>LOG(x,b)</translation>
     </message>
     <message>
         <source>LOG10(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>LOG10(x)</translation>
     </message>
     <message>
         <source>POWER(x,y)</source>
-        <translation type="unfinished"></translation>
+        <translation>POWER(x,y)</translation>
     </message>
     <message>
         <source>SQRT(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>SQRT(x)</translation>
     </message>
     <message>
         <source>DEGREES(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>DEGREES(x)</translation>
     </message>
     <message>
         <source>RADIANS(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>RADIANS(x)</translation>
     </message>
     <message>
         <source>PI()</source>
-        <translation type="unfinished"></translation>
+        <translation>PI()</translation>
     </message>
     <message>
         <source>RAND()</source>
-        <translation type="unfinished"></translation>
+        <translation>RAND()</translation>
     </message>
     <message>
         <source>RANDBETWEEN(a,b)</source>
-        <translation type="unfinished"></translation>
+        <translation>RANDBETWEEN(a,b)</translation>
     </message>
     <message>
         <source>S&amp;tandard</source>
-        <translation type="unfinished"></translation>
+        <translation>S&amp;tandard</translation>
     </message>
     <message>
         <source>AND(x1,x2)</source>
-        <translation type="unfinished"></translation>
+        <translation>AND(x1,x2)</translation>
     </message>
     <message>
         <source>NOT(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>NOT(x)</translation>
     </message>
     <message>
         <source>OR(x1,x2)</source>
-        <translation type="unfinished"></translation>
+        <translation>OR(x1,x2)</translation>
     </message>
     <message>
         <source>IF(compare,val1,val2)</source>
-        <translation type="unfinished"></translation>
+        <translation>IF(compare,val1,val2)</translation>
     </message>
     <message>
         <source>INDEX(range,index)</source>
-        <translation type="unfinished"></translation>
+        <translation>INDEX(range,index)</translation>
     </message>
     <message>
         <source>ISBLANK(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ISBLANK(x)</translation>
     </message>
     <message>
         <source>ISNUMBER(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ISNUMBER(x)</translation>
     </message>
     <message>
         <source>EVEN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>EVEN(x)</translation>
     </message>
     <message>
         <source>ISEVEN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ISEVEN(x)</translation>
     </message>
     <message>
         <source>ODD(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ODD(x)</translation>
     </message>
     <message>
         <source>ISODD(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ISODD(x)</translation>
     </message>
     <message>
         <source>Logical-&amp;Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Logical-&amp;Information</translation>
     </message>
     <message>
         <source>SIN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>SIN(x)</translation>
     </message>
     <message>
         <source>COS(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>COS(x)</translation>
     </message>
     <message>
         <source>TAN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>TAN(x)</translation>
     </message>
     <message>
         <source>ASIN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ASIN(x)</translation>
     </message>
     <message>
         <source>ACOS(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ACOS(x)</translation>
     </message>
     <message>
         <source>ATAN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ATAN(x)</translation>
     </message>
     <message>
         <source>ATAN2(x,y)</source>
-        <translation type="unfinished"></translation>
+        <translation>ATAN2(x,y)</translation>
     </message>
     <message>
         <source>SINH(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>SINH(x)</translation>
     </message>
     <message>
         <source>COSH(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>COSH(x)</translation>
     </message>
     <message>
         <source>TANH(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>TANH(x)</translation>
     </message>
     <message>
         <source>ACOSH(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ACOSH(x)</translation>
     </message>
     <message>
         <source>ASINH(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ASINH(x)</translation>
     </message>
     <message>
         <source>ATANH(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ATANH(x)</translation>
     </message>
     <message>
         <source>&amp;Trigonometric</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Trigonometrie</translation>
     </message>
     <message>
         <source>LEN(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>LEN(s)</translation>
     </message>
     <message>
         <source>LEFT(s,num)</source>
-        <translation type="unfinished"></translation>
+        <translation>LEFT(s,num)</translation>
     </message>
     <message>
         <source>RIGHT(s,num)</source>
-        <translation type="unfinished"></translation>
+        <translation>RIGHT(s,num)</translation>
     </message>
     <message>
         <source>MID(s,pos,len)</source>
-        <translation type="unfinished"></translation>
+        <translation>MID(s,pos,len)</translation>
     </message>
     <message>
         <source>CONCATENATE(s1,s2..)</source>
-        <translation type="unfinished"></translation>
+        <translation>CONCATENATE(s1,s2..)</translation>
     </message>
     <message>
         <source>EXACT(s1,s2)</source>
-        <translation type="unfinished"></translation>
+        <translation>EXACT(s1,s2)</translation>
     </message>
     <message>
         <source>FIND(what,where,pos)</source>
-        <translation type="unfinished"></translation>
+        <translation>FIND(what,where,pos)</translation>
     </message>
     <message>
         <source>REPLACE(s,pos,len,ns)</source>
-        <translation type="unfinished"></translation>
+        <translation>REPLACE(s,pos,len,ns)</translation>
     </message>
     <message>
         <source>REPT(s,n)</source>
-        <translation type="unfinished"></translation>
+        <translation>REPT(s,n)</translation>
     </message>
     <message>
         <source>UPPER(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>UPPER(s)</translation>
     </message>
     <message>
         <source>LOWER(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>LOWER(s)</translation>
     </message>
     <message>
         <source>&amp;Strings</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Strings</translation>
     </message>
     <message>
         <source>AVERAGE(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>AVERAGE(range)</translation>
     </message>
     <message>
         <source>COUNT(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>COUNT(range)</translation>
     </message>
     <message>
         <source>COUNTIF(range,eqls)</source>
-        <translation type="unfinished"></translation>
+        <translation>COUNTIF(range,eqls)</translation>
     </message>
     <message>
         <source>MAX(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>MAX(range)</translation>
     </message>
     <message>
         <source>MIN(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>MIN(range)</translation>
     </message>
     <message>
         <source>SUM(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>SUM(range)</translation>
     </message>
     <message>
         <source>SUMSQ(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>SUMSQ(range)</translation>
     </message>
     <message>
         <source>VAR(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>VAR(range)</translation>
     </message>
     <message>
         <source>VARP(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>VARP(range)</translation>
     </message>
     <message>
         <source>STDEV(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>STDEV(range)</translation>
     </message>
     <message>
         <source>STDEVP(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>STDEVP(range)</translation>
     </message>
     <message>
         <source>SKEW(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>SKEW(range)</translation>
     </message>
     <message>
         <source>KURT(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>KURT(range)</translation>
     </message>
     <message>
         <source>Sta&amp;tistical</source>
-        <translation type="unfinished"></translation>
+        <translation>Sta&amp;tistisch</translation>
     </message>
     <message>
         <source>BESSELI(x,n)</source>
-        <translation type="unfinished"></translation>
+        <translation>BESSELI(x,n)</translation>
     </message>
     <message>
         <source>BESSELJ(x,n)</source>
-        <translation type="unfinished"></translation>
+        <translation>BESSELJ(x,n)</translation>
     </message>
     <message>
         <source>BESSELK(x,n)</source>
-        <translation type="unfinished"></translation>
+        <translation>BESSELK(x,n)</translation>
     </message>
     <message>
         <source>BESSELY(x,n)</source>
-        <translation type="unfinished"></translation>
+        <translation>BESSELY(x,n)</translation>
     </message>
     <message>
         <source>BETAI(x,a,b)</source>
-        <translation type="unfinished"></translation>
+        <translation>BETAI(x,a,b)</translation>
     </message>
     <message>
         <source>ERF(a,b)</source>
-        <translation type="unfinished"></translation>
+        <translation>ERF(a,b)</translation>
     </message>
     <message>
         <source>ERFC(a,b)</source>
-        <translation type="unfinished"></translation>
+        <translation>ERFC(a,b)</translation>
     </message>
     <message>
         <source>GAMMALN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>GAMMALN(x)</translation>
     </message>
     <message>
         <source>GAMMAP(x,a)</source>
-        <translation type="unfinished"></translation>
+        <translation>GAMMAP(x,a)</translation>
     </message>
     <message>
         <source>GAMMAQ(x,a)</source>
-        <translation type="unfinished"></translation>
+        <translation>GAMMAQ(x,a)</translation>
     </message>
     <message>
         <source>Scienti&amp;fic</source>
-        <translation type="unfinished"></translation>
+        <translation>Wissenscha&amp;ftlich</translation>
     </message>
     <message>
         <source>BETADIST(z,a,b,Q?)</source>
-        <translation type="unfinished"></translation>
+        <translation>BETADIST(z,a,b,Q?)</translation>
     </message>
     <message>
         <source>CHI2DIST(x,n,Q?)</source>
-        <translation type="unfinished"></translation>
+        <translation>CHI2DIST(x,n,Q?)</translation>
     </message>
     <message>
         <source>CHIDIST(x,n,Q?)</source>
-        <translation type="unfinished"></translation>
+        <translation>CHIDIST(x,n,Q?)</translation>
     </message>
     <message>
         <source>FDIST(z,deg1,deg2,Q?)</source>
-        <translation type="unfinished"></translation>
+        <translation>FDIST(z,deg1,deg2,Q?)</translation>
     </message>
     <message>
         <source>GAMMADIST(x,a,b,Q?)</source>
-        <translation type="unfinished"></translation>
+        <translation>GAMMADIST(x,a,b,Q?)</translation>
     </message>
     <message>
         <source>NORMALDIST(x,m,s,Q?)</source>
-        <translation type="unfinished"></translation>
+        <translation>NORMALDIST(x,m,s,Q?)</translation>
     </message>
     <message>
         <source>PHI(x,Q?)</source>
-        <translation type="unfinished"></translation>
+        <translation>PHI(x,Q?)</translation>
     </message>
     <message>
         <source>POISSON(x,n,Q?)</source>
-        <translation type="unfinished"></translation>
+        <translation>POISSON(x,n,Q?)</translation>
     </message>
     <message>
         <source>&amp;Distributions</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Verteilung</translation>
     </message>
     <message>
         <source>Functions</source>
-        <translation type="unfinished"></translation>
+        <translation>Funktionen</translation>
     </message>
     <message>
         <source>About Opie Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Über Opie Sheet</translation>
     </message>
     <message>
         <source>Opie Sheet
@@ -891,137 +891,147 @@ Release Date: October 08, 2002
 This product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.
 
 http://qtopia.sitebest.com</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Sheet
+Tabellenkalkulation für Opie
+QWDC Beta Winner (als Sheet/Qt)
+
+Entwickelt von: Serdar Ozler
+Release 1.0.2
+Release Datum: 8. Oktober 2002
+
+Dieses Produkt ist lizensiert unter GPL. Es darf frei verteilt werden. Wenn sie die neueste Version und auch den Quelltext haben möchten, besuchen Sie bitte folgende Website
+
+http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>&amp;Number of rows:</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl der &amp;Zeilen:</translation>
     </message>
     <message>
         <source>&amp;Number of columns:</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl der &amp;Spalten:</translation>
     </message>
     <message>
         <source>&amp;Number of sheets:</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl der &amp;Blätter:</translation>
     </message>
     <message>
         <source>Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Blatt</translation>
     </message>
     <message>
         <source>&amp;Height of each row:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Höhe jeder Zeile:</translation>
     </message>
     <message>
         <source>&amp;Width of each column:</source>
-        <translation type="unfinished"></translation>
+        <translation>B&amp;reite jeder Spalte:</translation>
     </message>
     <message>
         <source>&lt;td&gt;Unable to open or parse file!&lt;/td&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;td&gt;Kann die Datei nicht öffnen oder lesen!&lt;/td&gt;</translation>
     </message>
     <message>
         <source>&amp;Sheet Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Blattname:</translation>
     </message>
     <message>
         <source>There is only one sheet!</source>
-        <translation type="unfinished"></translation>
+        <translation>Es gibt nur ein Blatt!</translation>
     </message>
     <message>
         <source>Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sind Sie sicher?</translation>
     </message>
     <message>
         <source>&amp;Type</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Typ</translation>
     </message>
     <message>
         <source>Shift cells &amp;down</source>
-        <translation type="unfinished"></translation>
+        <translation>Zellen nach &amp;unten verschieben</translation>
     </message>
     <message>
         <source>Shift cells &amp;right</source>
-        <translation type="unfinished"></translation>
+        <translation>Zellen nach &amp;rechts verschieben</translation>
     </message>
     <message>
         <source>Entire ro&amp;w</source>
-        <translation type="unfinished"></translation>
+        <translation>Ganze &amp;Zeile</translation>
     </message>
     <message>
         <source>Entire &amp;column</source>
-        <translation type="unfinished"></translation>
+        <translation>Ganze &amp;Spalte</translation>
     </message>
 </context>
 <context>
     <name>Sheet</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Search key not found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchschlüssel nicht gefunden!</translation>
     </message>
 </context>
 <context>
     <name>SortDialog</name>
     <message>
         <source>&amp;Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sortieren</translation>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Optionen</translation>
     </message>
     <message>
         <source>&amp;Sort by</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sortieren nach</translation>
     </message>
     <message>
         <source>&amp;Then by</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Dann nach</translation>
     </message>
     <message>
         <source>Then &amp;by</source>
-        <translation type="unfinished"></translation>
+        <translation>Dann &amp;nach </translation>
     </message>
     <message>
         <source>&amp;Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Großschreibung beachten</translation>
     </message>
     <message>
         <source>&amp;Direction</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Richtung</translation>
     </message>
     <message>
         <source>&amp;Top to bottom (rows)</source>
-        <translation type="unfinished"></translation>
+        <translation>Von &amp;oben nach unten (Zeilen)</translation>
     </message>
     <message>
         <source>&amp;Left to right (columns)</source>
-        <translation type="unfinished"></translation>
+        <translation>Von &amp;Links nach rechts (Spalten)</translation>
     </message>
     <message>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortieren</translation>
     </message>
     <message>
         <source>&amp;Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Aufsteigend</translation>
     </message>
     <message>
         <source>&amp;Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>A&amp;bsteigend</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>One cell cannot be sorted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine einzelne Zelle kann nicht sortiert werden!</translation>
     </message>
 </context>
 </TS>

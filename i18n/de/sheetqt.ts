@@ -142,7 +142,7 @@
     </message>
     <message>
         <source>Error</source>
-        <translation></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Inconsistency error!</source>

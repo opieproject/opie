@@ -1020,19 +1020,19 @@ Klicken um ein Paket auszuwählen, Klicken und halten um Mehr Informationen anzu
     </message>
     <message>
         <source>Information level:</source>
-        <translation type="unfinished"></translation>
+        <translation>Informationslevel:</translation>
     </message>
     <message>
         <source>Package source lists directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzeichnis mit Listen der Paketquellen:</translation>
     </message>
     <message>
         <source>Enter the directory where package source feed information is stored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben sie das Verzeichnis ein, wo die Feed Informationen gespeichert sind.</translation>
     </message>
     <message>
         <source>Tap here to select the directory where package source feed information is stored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um das Verzeichnis auszuwählen, in dem Informationen zu Paketquellen Feeds gespeichert sind.</translation>
     </message>
 </context>
 <context>

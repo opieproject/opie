@@ -4,7 +4,7 @@
     <name>Interface</name>
     <message>
         <source>Restarting interface</source>
-        <translation type="unfinished"> Interface-Neustart</translation>
+        <translation> Interface-Neustart</translation>
     </message>
 </context>
 <context>
