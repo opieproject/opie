@@ -20,14 +20,14 @@
 #include <qradiobutton.h>
 #include <qspinbox.h>
 
-NewPageDialog::NewPageDialog(uint width, uint height, const QColor& foregroundColor,
-                             const QColor& backgroundColor, QWidget* parent, const char* name)
+NewPageDialog::NewPageDialog(uint width, uint height, const QColor& penColor,
+                             const QColor& brushColor, QWidget* parent, const char* name)
     : QDialog(parent, name, true)
 {
     setCaption(tr("New Page"));
 
-    m_foregroundColor = foregroundColor;
-    m_backgroundColor = backgroundColor;
+    m_penColor = penColor;
+    m_brushColor = brushColor;
 
     QGroupBox* sizeGroupBox = new QGroupBox(0, Qt::Vertical, tr("Page Size"), this);
 
@@ -40,11 +40,11 @@ NewPageDialog::NewPageDialog(uint width, uint height, const QColor& foregroundCo
     m_pWidthSpinBox->setValue(width);
     m_pHeightSpinBox->setValue(height);
 
-    m_pContentButtonGroup = new QButtonGroup(0, Qt::Vertical, tr("Contents"), this);
+    m_pContentButtonGroup = new QButtonGroup(0, Qt::Vertical, tr("Background"), this);
 
     QRadioButton* whiteColorRadioButton = new QRadioButton(tr("White"), m_pContentButtonGroup);
-    QRadioButton* foregroundColorRadioButton = new QRadioButton(tr("Foreground Color"), m_pContentButtonGroup);
-    QRadioButton* backgroundColorRadioButton = new QRadioButton(tr("Background Color"), m_pContentButtonGroup);
+    QRadioButton* penColorRadioButton = new QRadioButton(tr("Pen Color"), m_pContentButtonGroup);
+    QRadioButton* brushColorRadioButton = new QRadioButton(tr("Brush Color"), m_pContentButtonGroup);
 
     m_pContentButtonGroup->setButton(0);
 
@@ -62,8 +62,8 @@ NewPageDialog::NewPageDialog(uint width, uint height, const QColor& foregroundCo
     sizeLayout->setColStretch(1, 1);
 
     contentLayout->addWidget(whiteColorRadioButton);
-    contentLayout->addWidget(foregroundColorRadioButton);
-    contentLayout->addWidget(backgroundColorRadioButton);
+    contentLayout->addWidget(penColorRadioButton);
+    contentLayout->addWidget(brushColorRadioButton);
 
     mainLayout->addWidget(sizeGroupBox);
     mainLayout->addWidget(m_pContentButtonGroup);
@@ -90,10 +90,10 @@ const QColor& NewPageDialog::selectedColor()
             return (Qt::white);
             break;
         case 1:
-            return (m_foregroundColor);
+            return (m_penColor);
             break;
         case 2:
-            return (m_backgroundColor);
+            return (m_brushColor);
             break;
         default:
             return (Qt::white);

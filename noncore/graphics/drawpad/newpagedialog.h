@@ -36,8 +36,8 @@ private:
     QSpinBox* m_pWidthSpinBox;
     QSpinBox* m_pHeightSpinBox;
 
-    QColor m_foregroundColor;
-    QColor m_backgroundColor;
+    QColor m_penColor;
+    QColor m_brushColor;
 
     QButtonGroup* m_pContentButtonGroup;
 };

@@ -54,6 +54,7 @@ private:
 
     State m_state;
     ulong m_dataLenght;
+    QString m_dataFormat;
     QList<QPixmap> m_pixmaps;
 };
 
@@ -80,6 +81,11 @@ bool DrawPadCanvasXmlHandler::startElement(const QString& namespaceURI, const QS
     if (qName.compare("data") == 0) {
         m_state = InData;
         m_dataLenght = atts.value("length").toULong();
+        m_dataFormat = atts.value("format");
+
+        if (m_dataFormat.isEmpty()) {
+            m_dataFormat = "XPM";
+        }
     }
 
     return true;
@@ -133,7 +139,7 @@ bool DrawPadCanvasXmlHandler::characters(const QString& ch)
         ::uncompress((uchar*)byteArrayUnzipped.data(), &m_dataLenght, (uchar*)byteArray.data(), byteArray.size());
 
         QImage image;
-        image.loadFromData((const uchar*)byteArrayUnzipped.data(), m_dataLenght, "XPM");
+        image.loadFromData((const uchar*)byteArrayUnzipped.data(), m_dataLenght, m_dataFormat);
 
         QPixmap* pixmap = new QPixmap(image.width(), image.height());
         pixmap->convertFromImage(image);
@@ -215,7 +221,7 @@ void DrawPadCanvas::save(QIODevice* ioDevice)
         QImage image = bufferIterator.current()->convertToImage();
         QByteArray byteArray;
         QBuffer buffer(byteArray);
-        QImageIO imageIO(&buffer, "XPM");
+        QImageIO imageIO(&buffer, "PNG");
 
         buffer.open(IO_WriteOnly);
         imageIO.setImage(image);
@@ -226,7 +232,7 @@ void DrawPadCanvas::save(QIODevice* ioDevice)
         QByteArray byteArrayZipped(size);
         ::compress((uchar*)byteArrayZipped.data(), &size, (uchar*)byteArray.data(), byteArray.size());
 
-        textStream << "            <data length=\"" << byteArray.size() << "\">";
+        textStream << "            <data length=\"" << byteArray.size() << "\" format=\"PNG\">";
 
         static const char hexchars[] = "0123456789abcdef";
 

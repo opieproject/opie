@@ -153,6 +153,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     m_pFilledRectangleToolAction->addTo(rectanglePopupMenu);
 
     m_pRectangleToolButton->setPopup(rectanglePopupMenu);
+    m_pRectangleToolButton->setPopupDelay(0);
 
     m_pEllipseToolButton = new QToolButton(drawModeToolBar);
     m_pEllipseToolButton->setToggleButton(true);
@@ -168,6 +169,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     m_pFilledEllipseToolAction->addTo(ellipsePopupMenu);
 
     m_pEllipseToolButton->setPopup(ellipsePopupMenu);
+    m_pEllipseToolButton->setPopupDelay(0);
 
     m_pFillToolAction = new QAction(tr("Fill Region"), Resource::loadIconSet("drawpad/fill.png"), QString::null, 0, this);
     m_pFillToolAction->setToggleAction(true);
