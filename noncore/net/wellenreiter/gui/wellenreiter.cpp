@@ -474,6 +474,7 @@ void Wellenreiter::timerEvent( QTimerEvent* )
 
 void Wellenreiter::doAction( const QString& action, const QString& protocol, OPacket* p )
 {
+    #ifdef QWS
     if ( action == "TouchSound" )
         ODevice::inst()->touchSound();
     else if ( action == "AlarmSound" )
@@ -489,10 +490,14 @@ void Wellenreiter::doAction( const QString& action, const QString& protocol, OPa
     else if ( action == "MessageBox" )
         QMessageBox::information( this, "Notification!",
         QString().sprintf( "Got packet with protocol '%s'", (const char*) protocol ) );
+    #else
+    #warning Actions do not work with Qt/X11 yet
+    #endif
 }
 
 void Wellenreiter::joinNetwork(const QString& type, const QString& essid, int channel, const QString& macaddr)
 {
+    #ifdef QWS
     if ( !iface )
     {
         QMessageBox::warning( this, tr( "Can't do that!" ), tr( "No wireless\ninterface available." ) );
@@ -524,7 +529,9 @@ void Wellenreiter::joinNetwork(const QString& type, const QString& essid, int ch
     msg << QString(iface->name()) << QString("Channel") << channel;
 //    qDebug("msg >%s< mac >%s<", iface->name(),macaddr);
 //    msg << QString(iface->name()) << QString("MacAddr") << macaddr;
-
+    #else
+    QMessageBox::warning( this, tr( "Can't do that!" ), tr( "Function only available on Embedded build" ) );
+    #endif
 
 }
 

@@ -35,8 +35,10 @@
 #include <qlistview.h>
 #include <qpen.h>
 #include <qdatastream.h>
+#include <qstringlist.h>
 
 class OListViewItem;
+
 
 /*======================================================================================
  * OListView
