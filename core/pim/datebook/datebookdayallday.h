@@ -3,6 +3,7 @@
 
 #include <qvariant.h>
 #include <qframe.h>
+#include <qscrollview.h>
 #include <qlabel.h>
 #include <qlist.h>
 #include <qpe/event.h>
@@ -14,7 +15,7 @@ class DatebookAlldayDisp;
 class DatebookEventDesc;
 class DateBookDB;
 
-class DatebookdayAllday : public QWidget
+class DatebookdayAllday : public QScrollView
 {
     Q_OBJECT
 
@@ -29,6 +30,7 @@ public slots:
     void removeAllEvents();
 
 protected:
+    QFrame * m_MainFrame;
     QVBoxLayout* datebookdayalldayLayout;
     DatebookEventDesc * lblDesc;
     unsigned int item_count;

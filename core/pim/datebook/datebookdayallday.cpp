@@ -29,14 +29,21 @@
  *  Constructs a DatebookdayAllday which is a child of 'parent', with the
  *  name 'name' and widget flags set to 'f'
  */
-DatebookdayAllday::DatebookdayAllday(DateBookDB* db, QWidget* parent,  const char* name, WFlags fl )
-    : QWidget( parent, name,fl ),item_count(0),dateBook(db)
+DatebookdayAllday::DatebookdayAllday(DateBookDB* db, QWidget* parent,  const char* name, WFlags  )
+    : QScrollView( parent, name ),item_count(0),dateBook(db)
 {
     if ( !name )
         setName( "DatebookdayAllday" );
     setMinimumSize( QSize( 0, 0 ) );
+    setMaximumHeight(3* (QFontMetrics(font()).height()+4) );
 
-    datebookdayalldayLayout = new QVBoxLayout( this );
+    m_MainFrame = new QFrame(viewport());
+    m_MainFrame->setFrameStyle(QFrame::NoFrame|QFrame::Plain);
+    setFrameStyle(QFrame::NoFrame|QFrame::Plain);
+    setResizePolicy( QScrollView::AutoOneFit );
+    addChild(m_MainFrame);
+
+    datebookdayalldayLayout = new QVBoxLayout( m_MainFrame );
     datebookdayalldayLayout->setSpacing( 0 );
     datebookdayalldayLayout->setMargin( 0 );
 
@@ -57,10 +64,10 @@ DatebookdayAllday::~DatebookdayAllday()
 DatebookAlldayDisp* DatebookdayAllday::addEvent(const EffectiveEvent&ev)
 {
     DatebookAlldayDisp * lb;
-    lb = new DatebookAlldayDisp(dateBook,ev,this,NULL);
+    lb = new DatebookAlldayDisp(dateBook,ev,m_MainFrame,NULL);
     datebookdayalldayLayout->addWidget(lb);
     subWidgets.append(lb);
-
+    
     connect(lb,SIGNAL(displayMe(const Event &)),lblDesc,SLOT(disp_event(const Event&)));
     ++item_count;
 
@@ -82,9 +89,10 @@ DatebookAlldayDisp::DatebookAlldayDisp(DateBookDB *db,const EffectiveEvent& ev,
     setBackgroundColor(yellow);
     setText(strDesc);
     setFrameStyle(QFrame::Raised|QFrame::Panel);
-    QSize s = sizeHint();
-    setMaximumSize( QSize( 32767, s.height()-4 ) );
-    setMinimumSize( QSize( 0, s.height()-4 ) );
+    
+    int s = QFontMetrics(font()).height()+4;
+    setMaximumHeight( s );
+    setMinimumSize( QSize( 0, s ) );
 }
 
 DatebookAlldayDisp::~DatebookAlldayDisp()
@@ -223,4 +231,3 @@ void DatebookEventDesc::disp_event(const Event&e)
     show();
     m_Timer->start(2000,true);
 }
-
