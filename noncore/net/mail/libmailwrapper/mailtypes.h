@@ -44,6 +44,9 @@ public:
     void setMbox(const QString&box){mbox = box;}
     void setMsgid(const QString&id){msg_id=id;}
     const QString&Msgid()const{return msg_id;}
+    void setReplyto(const QString&reply){replyto=reply;}
+    const QString&Replyto()const{return replyto;}
+
 
     void setTo(const QStringList&list);
     const QStringList&To()const;
@@ -55,7 +58,7 @@ public:
     void setFlags(const QBitArray&flags){msg_flags = flags;}
 
 protected:
-    QString subject,date,from,mbox,msg_id;
+    QString subject,date,from,mbox,msg_id,replyto;
     int msg_number;
     QBitArray msg_flags;
     QStringList to,cc,bcc;

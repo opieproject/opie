@@ -28,7 +28,7 @@ protected:
     void logout();
     void searchBodyText(const RecMail&mail,mailimap_body_type_1part*mailDescription,RecBody&target_body);
     void fillPlainBody(const RecMail&mail,RecBody&target_body, mailimap_body_type_text * text_body);
-    QStringList address_list_to_stringlist(clist*list);
+    static QStringList address_list_to_stringlist(clist*list);
 
 private:
     IMAPaccount *account;

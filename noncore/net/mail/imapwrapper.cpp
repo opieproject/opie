@@ -209,11 +209,7 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
 {
     RecMail * m = 0;
     mailimap_msg_att_item *item=0;
-    bool named_from = false;
-    QString from,date,subject;
-    date = from = subject = "";
-    clistcell *current,*c,*cf, *current_from = NULL;
-    mailimap_address * current_address = NULL;
+    clistcell *current,*c,*cf;
     mailimap_msg_att_dynamic*flist;
     mailimap_flag_fetch*cflag;
     QBitArray mFlags(7);
@@ -271,13 +267,13 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
             qDebug( "header: \n%s", item->msg_att_static->rfc822_header );
         } else if (item->msg_att_static->type==MAILIMAP_MSG_ATT_ENVELOPE) {
             mailimap_envelope * head = item->msg_att_static->env;
-            date = head->date;
-            subject = head->subject;
             m = new RecMail();
+            m->setDate(head->date);
+            m->setSubject(head->subject);
             if (head->from!=NULL) {
                 addresslist = address_list_to_stringlist(head->from->list);
                 if (addresslist.count()) {
-                    from = addresslist.first();
+                    m->setFrom(addresslist.first());
                 }
             }
             if (head->to!=NULL) {
@@ -292,13 +288,16 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
                 addresslist = address_list_to_stringlist(head->bcc->list);
                 m->setBcc(addresslist);
             }
-            m->setSubject(subject);
-            m->setFrom(from);
-            m->setDate(date);
+            if (head->reply_to!=NULL) {
+                addresslist = address_list_to_stringlist(head->bcc->list);
+                if (addresslist.count()) {
+                    m->setReplyto(addresslist.first());
+                }
+            }
             m->setMsgid(QString(head->message_id));
             qDebug("header: \nFrom: %s\nSubject: %s\nDate: %s\nMsgid: %s",
-                   from.latin1(),
-                   subject.latin1(),date.latin1(),m->Msgid().latin1());
+                   m->getFrom().latin1(),
+                   m->getSubject().latin1(),m->getDate().latin1(),m->Msgid().latin1());
         } else if (item->msg_att_static->type==MAILIMAP_MSG_ATT_INTERNALDATE) {
             mailimap_date_time*d = item->msg_att_static->internal_date;
             QDateTime da(QDate(d->year,d->month,d->day),QTime(d->hour,d->min,d->sec));
@@ -439,6 +438,7 @@ QStringList IMAPwrapper::address_list_to_stringlist(clist*list)
         return l;
     }
     current = clist_begin(list);
+    unsigned int count = 0;
     while (current!= NULL) {
         from = "";
         named_from = false;
@@ -463,6 +463,9 @@ QStringList IMAPwrapper::address_list_to_stringlist(clist*list)
            from+=">";
         }
         l.append(QString(from));
+        if (++count > 99) {
+            break;
+        }
     }
     return l;
 }
