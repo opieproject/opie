@@ -55,9 +55,7 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal, WFlags 
     setCaption( tr( "Today config" ) );
 
     QVBoxLayout *layout = new QVBoxLayout( this );
-    TabWidget3 = new QTabWidget( this, "TabWidget3" );
-    TabWidget3->setAutoMask( FALSE );
-    TabWidget3->setTabShape( QTabWidget::Rounded );
+    TabWidget3 = new OTabWidget ( this, "tabwidget", OTabWidget::Global, OTabWidget::Bottom );
     layout->addWidget( TabWidget3 );
 
     tab_2 = new QWidget( TabWidget3, "tab_2" );
@@ -73,7 +71,7 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal, WFlags 
     new ToolButton( vbox1, tr( "Move Up" ), "opieplayer/up",  this , SLOT( moveSelectedUp() ) );
     new ToolButton( vbox1, tr( "Move Down" ),"opieplayer/down", this , SLOT( moveSelectedDown() ) );
     tab2Layout->addWidget( hbox1 );
-    TabWidget3->insertTab( tab_2, tr( "active/order" ) );
+    TabWidget3->addTab( tab_2, "pass", tr( "active/order" ) );
 
     tab_3 = new QWidget( TabWidget3, "tab_3" );
     QVBoxLayout *tab3Layout = new QVBoxLayout( tab_3 );
@@ -88,7 +86,7 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal, WFlags 
     SpinBoxTime = new QSpinBox( hbox_inactive, "TimeSpinner" );
     tab3Layout->addWidget( hbox_auto );
     tab3Layout->addWidget( hbox_inactive );
-    TabWidget3->insertTab( tab_3, tr( "Misc" ) );
+    TabWidget3->addTab( tab_3, "SettingsIcon", tr( "Misc" ) );
 
     m_applets_changed = false;
 

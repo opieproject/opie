@@ -33,7 +33,7 @@
 #include <qpixmap.h>
 #include <qlayout.h>
 #include <qhbox.h>
-#include <qtabwidget.h>
+#include <opie/otabwidget.h>
 #include <qdialog.h>
 
 
@@ -260,7 +260,8 @@ void Today::startConfig() {
         if ( plugin.guiPart->configWidget( this ) != 0l ) {
             ConfigWidget* widget = plugin.guiPart->configWidget( conf.TabWidget3  );
             configWidgetList.append( widget );
-            conf.TabWidget3->insertTab( widget, plugin.guiPart->appName() );
+            conf.TabWidget3->addTab( widget, plugin.guiPart->pixmapNameConfig()
+                                     , plugin.guiPart->appName() );
         }
         // set the order/activate tab
         conf.pluginManagement( plugin.name, plugin.guiPart->pluginName(),

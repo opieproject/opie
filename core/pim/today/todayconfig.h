@@ -20,6 +20,7 @@
 #include <qvariant.h>
 #include <qdialog.h>
 #include <qlistview.h>
+#include <opie/otabwidget.h>
 
 class QCheckBox;
 class QLabel;
@@ -34,7 +35,7 @@ public:
     TodayConfig( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
     ~TodayConfig();
 
-    QTabWidget* TabWidget3;
+    OTabWidget* TabWidget3;
 
     void writeConfig();
     void pluginManagement( QString libName, QString name, QPixmap icon );
