@@ -224,7 +224,7 @@ private:
 
 
 TabDialog::TabDialog ( const QPixmap *tabicon, const QString &tabname, TabConfig &tc, QWidget *parent, const char *name, bool modal, WFlags fl ) 
-	: QDialog ( parent, name, modal, fl )
+	: QDialog ( parent, name, modal, fl ), m_tc ( tc )
 {
 	setCaption ( tr( "Edit Tab" ));
 	
@@ -249,6 +249,14 @@ TabDialog::TabDialog ( const QPixmap *tabicon, const QString &tabname, TabConfig
 			
 	lay-> addWidget ( tw, 10 );
 	lay-> addWidget ( sample, 1 );
+	
+	m_iconsize-> setButton ( tc. m_view );
+	iconSizeClicked ( tc. m_view );
+	m_bgtype-> setButton ( tc. m_bg_type );
+	m_solidcolor-> setColor ( QColor ( tc. m_bg_color ));
+	bgTypeClicked ( tc. m_bg_type );
+	m_fontselect-> setSelectedFont ( tc. m_font_family, tc. m_font_style, tc. m_font_size );
+	fontClicked ( m_fontselect-> selectedFont ( ));
 }
 
 
@@ -258,15 +266,7 @@ TabDialog::~TabDialog ( )
 
 QWidget *TabDialog::createFontTab ( QWidget *parent )
 {
-	Config config ( "qpe" );
-	config. setGroup ( "Appearance" );
-
-    QString familyStr = config.readEntry( "FontFamily", "Helvetica" );
-    QString styleStr = config.readEntry( "FontStyle", "Regular" );
-    int size = config.readNumEntry( "FontSize", 10 );
-
     m_fontselect = new OFontSelector ( parent, "FontTab" );    
-    m_fontselect-> setSelectedFont ( familyStr, styleStr, size );
     
     connect( m_fontselect, SIGNAL( fontSelected ( const QFont & )),
              this, SLOT( fontClicked ( const QFont & )));
@@ -299,11 +299,11 @@ QWidget *TabDialog::createBgTab ( QWidget *parent )
     rb = new QRadioButton( tr( "Solid color" ), tab, "solid" );
     m_bgtype-> insert ( rb, TabConfig::SolidColor ); 
     hb-> addWidget ( rb );
+	hb-> addSpacing ( 10 );
     
 	m_solidcolor = new OColorButton ( tab );
 	connect ( m_solidcolor, SIGNAL( colorSelected ( const QColor & )), this, SLOT( colorClicked ( const QColor & )));
 	hb-> addWidget ( m_solidcolor );
-	hb-> addStretch ( 10 );
 
     gridLayout-> addLayout ( hb, 1, 1 );
 
@@ -311,7 +311,7 @@ QWidget *TabDialog::createBgTab ( QWidget *parent )
     m_bgtype-> insert ( rb, TabConfig::Image );
     gridLayout-> addWidget( rb, 3, 1 );
 
-	QPushButton *p;
+//	QPushButton *p;
 
 	connect ( m_bgtype, SIGNAL( clicked ( int )), this, SLOT( bgTypeClicked ( int )));
 
@@ -378,4 +378,16 @@ void TabDialog::bgTypeClicked ( int t )
 void TabDialog::colorClicked ( const QColor &col )
 {
 	m_sample-> setBackgroundType ( TabConfig::SolidColor, col. name ( ));
+}
+
+void TabDialog::accept ( )
+{
+	m_tc. m_view = (TabConfig::ViewMode) m_iconsize-> id ( m_iconsize-> selected ( ));
+	m_tc. m_bg_type = (TabConfig::BackgroundType) m_bgtype-> id ( m_bgtype-> selected ( ));
+	m_tc. m_bg_color = m_solidcolor-> color ( ). name ( );
+	m_tc. m_font_family = m_fontselect-> fontFamily ( );
+	m_tc. m_font_size = m_fontselect-> fontSize ( );
+	m_tc. m_font_style = m_fontselect-> fontStyle ( );
+	
+	QDialog::accept ( );
 }

@@ -15,6 +15,9 @@ public:
 	TabDialog ( const QPixmap *tabicon, const QString &tabname, TabConfig &cfg, QWidget *parent = 0, const char *name = 0, bool modal = false, WFlags = 0 );
 	virtual ~TabDialog ( );	
 
+public slots:
+	virtual void accept ( );
+
 protected slots:
 	void iconSizeClicked ( int );
 	void fontClicked ( const QFont & );
@@ -34,6 +37,8 @@ private:
 	OColorButton *m_solidcolor;
 	
 	QButtonGroup *m_bgtype;
+	
+	TabConfig &m_tc;
 };
 
 

@@ -120,9 +120,11 @@ void TabsSettings::readTabSettings ( )
 		if ( f. count ( ) == 4 ) {
 			tc. m_font_family = f [0];
 			tc. m_font_size = f [1]. toInt ( );
+			tc. m_font_style = f [2];
 		} else {
 			tc. m_font_family = font ( ). family ( );
 			tc. m_font_size = font ( ). pointSize ( );
+			tc. m_font_style = "Regular";
 		}
 		m_tabs [*it] = tc;
 	}
@@ -158,7 +160,7 @@ void TabsSettings::accept ( )
 		cfg. writeEntry ( "BackgroundColor", tc. m_bg_color );
 		cfg. writeEntry ( "TextColor", tc. m_text_color );
 
-		QString f = tc. m_font_family + "," + QString::number ( tc. m_font_size ) + ",50,0";
+		QString f = tc. m_font_family + "," + QString::number ( tc. m_font_size ) + "," + tc. m_font_style + ",0";
 		cfg. writeEntry ( "Font", f );
 		QCopEnvelope be ( "QPE/Launcher", "setTabBackground(QString,int,QString)" );
 
