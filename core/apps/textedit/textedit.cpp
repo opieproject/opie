@@ -832,10 +832,13 @@ void TextEdit::updateCaption( const QString &name )
 void TextEdit::setDocument(const QString& fileref)
 {
     bFromDocView = TRUE;
+    qDebug("setDocument "+fileref);
+    bFromDocView = TRUE;
+    if(fileref.find(".desktop",0,TRUE) == -1) {
     openFile(fileref);
-//  bFromDocView = TRUE;
-//         openFile(DocLnk(fileref));
-//    showEditTools();
+    } else {
+      openFile(DocLnk(fileref));
+    }
 }
 
 void TextEdit::closeEvent( QCloseEvent *e )
