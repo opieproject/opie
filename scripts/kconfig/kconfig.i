@@ -31,6 +31,11 @@ static void expr_to_s_help(void *data, const char *str)
 %}
 #endif
 
+#ifdef SWIGPYTHON
+%rename (Property) property;
+%rename (default) def;
+#endif
+
 %immutable;
 %include "expr.h"
 #define P(name,type,arg)        extern type name arg

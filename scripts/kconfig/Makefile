@@ -1,46 +1,30 @@
-VERSION=1.2
+VERSION=1.3
 CC=gcc
 CXX=g++
-CFLAGS=-O2 -Wall -g -fPIC
+CFLAGS=-O0 -Wall -g -fPIC
 CXXFLAGS=$(CFLAGS) -I$(HOSTQTDIR)/include
 LDFLAGS=
 LXXFLAGS=$(LDFLAGS) -L$(HOSTQTDIR)/lib -Wl,-rpath,$(HOSTQTDIR)/lib
 LEX=flex
+LFLAGS=-L
 YACC=bison
-YFLAGS=-d -t #-v
+YFLAGS=-l
+#YFLAGS=-d -t -v -l
 ifndef HOSTQTDIR
-ifeq ($(shell if [ -e /usr/share/qt ]; then echo foundit; fi),foundit)
 HOSTQTDIR=/usr/share/qt
-else
-ifeq ($(shell if [ -e /usr/lib/qt ]; then echo foundit; fi),foundit)
-HOSTQTDIR=/usr/lib/qt
 endif
-endif
-endif
-
-ifndef QTLIB
-ifeq ($(shell if [ -e $(HOSTQTDIR)/lib/libqt-mt.so ]; then echo foundit; fi),foundit)
-QTLIB=-lqt-mt
-else
-ifneq ($(shell if [ -e $(HOSTQTDIR)/lib/libqt.so ]; then echo foundit; fi),foundit)
-$(warning Unable to locate libqt.so!)
-endif
-QTLIB=-lqt
-endif
-endif
-
 MOC=$(wildcard $(HOSTQTDIR)/bin/moc)
 
 parse_SRC=zconf.y
 conf_SRC=conf.c $(parse_SRC)
 mconf_SRC=mconf.c $(parse_SRC)
 qconf_SRC=qconf.cc
-lkcc_SRC=cml1.y cml1.l help.l cml1.h expr1.c
 HDR=expr.h lkc.h lkc_proto.h qconf.h
-OTHER=README lkc_spec lkc_overview Makefile.kernel convert-all prepare-all.diff fixup-all.diff \
+OTHER=README lkc-language.txt Makefile.kernel \
 	kconfig.i extconf.rb example
-INST=zconf.y zconf.l confdata.c expr.c symbol.c menu.c conf.c mconf.c qconf.cc kconfig_load.c images.c $(parse_SRC) $(HDR)
-INSTGEN=lex.zconf.c zconf.tab.c zconf.tab.h
+INST=zconf.y zconf.l confdata.c expr.c symbol.c menu.c \
+	conf.c mconf.c qconf.cc kconfig_load.c images.c $(HDR)
+INSTGEN=lex.zconf.c zconf.tab.c
 
 #DEBUG=1
 ifdef DEBUG
@@ -50,7 +34,7 @@ else
 qconf_SRC+=kconfig_load.c
 endif
 
-SRC=$(conf_SRC) $(mconf_SRC) $(qconf_SRC) $(lkcc_SRC)
+SRC=$(conf_SRC) $(mconf_SRC) $(qconf_SRC)
 CSRC=$(filter %.c, $(SRC))
 YSRC=$(filter %.y, $(SRC))
 LSRC=$(filter %.l, $(SRC))
@@ -76,27 +60,13 @@ qconf_OBJ=$(filter %.o, \
 		$(patsubst %.y,%.tab.o, \
 		$(patsubst %.l,lex.%.o, \
 			$(qconf_SRC))))))
-lkcc_OBJ=$(filter %.o, \
-		$(patsubst %.c,%.o, \
-		$(patsubst %.y,%.tab.o, \
-		$(patsubst %.l,lex.%.o, \
-			$(lkcc_SRC)))))
-OBJ=$(conf_OBJ) $(mconf_OBJ) $(qconf_OBJ) $(lkcc_OBJ)
+OBJ=$(conf_OBJ) $(mconf_OBJ) $(qconf_OBJ)
 
 ifeq ($(MOC),)
-all: lkcc conf mconf
+all: conf mconf
 else
-all: lkcc conf mconf qconf libkconfig.so
+all: conf mconf qconf libkconfig.so
 endif
-
-lex.help.c: help.l
-lex.help.o: lex.help.c cml1.h expr.h
-lex.cml1.c: cml1.l
-lex.cml1.o: lex.cml1.c cml1.tab.h cml1.h expr.h
-cml1.tab.c: cml1.y
-cml1.tab.h: cml1.y
-cml1.tab.o: cml1.tab.c cml1.h expr.h
-expr1.o: expr1.c expr.h
 
 lkc_deps := lkc.h lkc_proto.h lkc_defs.h expr.h
 
@@ -128,12 +98,9 @@ qconf:
 	@echo environment variable is set to the correct location.
 	@false
 else
-qconf: $(qconf_OBJ) libkconfig.so
-	$(CXX) $(LXXFLAGS) $^ $(QTLIB) -o $@
+qconf: $(qconf_OBJ)
+	$(CXX) $(LXXFLAGS) $^ -lqt -o $@
 endif
-
-lkcc: $(lkcc_OBJ)
-	$(CC) $(LDFLAGS) $^ -o $@
 
 libkconfig.so: $(parse_OBJ)
 	$(CC) -shared $^ -o $@
@@ -142,13 +109,14 @@ lkc_defs.h: lkc_proto.h
 	sed < $< > $@ 's/P(\([^,]*\),.*/#define \1 (\*\1_p)/'
 
 clean:
-	rm -f $(OBJ) lkcc conf qconf mconf *.moc lex.* *.tab.? *.output
+	rm -f $(OBJ) conf qconf mconf *.moc lex.* *.tab.? *.output
+	rm -rf .ruby .python
 
 tgz:
 	mkdir tmp
 	mkdir tmp/lkc-$(VERSION)
 	cp -ra Makefile $(sort $(SRC) $(HDR) $(OTHER) $(INST)) tmp/lkc-$(VERSION)
-	tar -cpvz -C tmp -f lkc-$(VERSION).tar.gz lkc-$(VERSION)
+	tar -cpvz -C tmp --exclude CVS -f lkc-$(VERSION).tar.gz lkc-$(VERSION)
 	rm -rf tmp
 
 %.tab.c %.tab.h: %.y
@@ -167,24 +135,15 @@ lex.%.c: %.l
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 ifdef KERNELSRC
-install: lkcc $(INSTGEN)
-	set -x; mkdir $(KERNELSRC)/scripts/kconfig; \
-	cp $(sort $(INST)) $(KERNELSRC)/scripts/kconfig; \
+install: $(INSTGEN)
+	set -x; cp $(sort $(INST)) $(KERNELSRC)/scripts/kconfig; \
 	for f in $(INSTGEN); do cp $$f $(KERNELSRC)/scripts/kconfig/$${f}_shipped; done; \
-	cp Makefile.kernel $(KERNELSRC)/scripts/kconfig/Makefile; \
-	LKCSRC=$$PWD; export LKCSRC; \
-	cd $(KERNELSRC); \
-	patch -p0 -N < $$LKCSRC/prepare-all.diff; \
-	sh $$LKCSRC/convert-all; \
-	patch -p0 -N < $$LKCSRC/fixup-all.diff
+	cp Makefile.kernel $(KERNELSRC)/scripts/kconfig/Makefile
 
-#	cp Makefile $(KERNELSRC)/scripts/kconfig/Makefile; \
-
-uninstall:
-	patch -p0 -N -R -d $(KERNELSRC) < prepare-all.diff; \
-	cd $(KERNELSRC); \
-	find -name "Kconfig*" | xargs rm; \
-	rm -rf scripts/kconfig log.*
+diff: $(INSTGEN)
+	for f in $(sort $(INST)); do diff -u $(KERNELSRC)/scripts/kconfig/$$f $$f; done; \
+	for f in $(INSTGEN); do diff -u $(KERNELSRC)/scripts/kconfig/$${f}_shipped $$f; done; \
+	diff -u $(KERNELSRC)/scripts/kconfig/Makefile Makefile.kernel
 else
 install:
 	@echo "Please use KERNELSRC=<path/to/linux-kernel> to install"
@@ -204,4 +163,19 @@ ruby: .ruby libkconfig.so .ruby/kconfig.so
 .ruby/kconfig.so: .ruby/kconfig_wrap.c .ruby/Makefile
 	make -C .ruby
 
-.PHONY: all tgz clean ruby
+
+PYTHON_INCLUDE=$(shell python -c "import sys; print '-I'+sys.prefix+'/include/python'+sys.version[:3]")
+
+python: .python .python/kconfig.py .python/_kconfig.so
+
+.python:
+	mkdir .python
+
+.python/kconfig_wrap.c .python/kconfig.py: kconfig.i kconfig_load.c expr.h lkc_proto.h
+	swig -python -o .python/kconfig_wrap.c kconfig.i
+
+.python/_kconfig.so: .python/kconfig_wrap.c
+	cd .python; $(CC) $(CFLAGS) -shared kconfig_wrap.c -o _kconfig.so -I.. $(PYTHON_INCLUDE)
+
+
+.PHONY: all tgz clean ruby python
