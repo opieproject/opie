@@ -53,7 +53,7 @@ void DateBookWeekLstHeader::setDate(const QDate &d) {
 
     int year,week;
     calcWeek(d,week,year,onMonday);
-    labelWeek->setText("W: " + QString::number(week));
+    labelWeek->setText(tr( "W: %1" ).arg( ( QString::number(week)) ) );
 
     QDate start=date;
     QDate stop=start.addDays(6);
