@@ -1,4 +1,5 @@
-CONFIG       += qt warn_on quick-app
+TEMPLATE = app
+CONFIG       += qt warn_on 
 HEADERS      = io_layer.h io_serial.h io_irda.h io_bt.h io_modem.h \
            file_layer.h filetransfer.h \
            metafactory.h \
@@ -60,6 +61,7 @@ SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp io_bt.cpp io_modem.cpp \
         consoleconfigwidget.cpp
 
 
+DESTDIR      = $(OPIEDIR)/bin/
 INTERFACES   = configurebase.ui editbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include

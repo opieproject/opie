@@ -28,10 +28,9 @@ keyboard?
   Modem - Josef
   Keys - hash 
   Scripting - wazlaf 
+  Keys - hash
 
 TASKS in progress:
-  Keys - hash
-   
   Session->Profile - hash => why is this needed? you can not change any settings
                              after you start the session, so all you would do is
                              create a duplicate of the profile used to open the
@@ -42,7 +41,7 @@ TASKS in progress:
 			     you start to experiment and it starts to work
 			     now you want to save the session
                  
-                 hash => got it.
+                     hash => got it.
 
 OPEN tasks:
   Receiving ( copy &n paste from filetransfer.cpp )
