@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.20 2003-04-12 00:22:57 umopapisdn Exp $
+** $Id: datebook.cpp,v 1.21 2003-04-12 01:19:53 umopapisdn Exp $
 **
 **********************************************************************/
 
@@ -221,7 +221,7 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 #endif
 
     qDebug("done t=%d", t.elapsed() );
-    
+
     /*
      *  Here is a problem description:
      *  When Weekview is the default view
@@ -236,9 +236,9 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
      *  so we'll call it then via a singleShot
      *  from view()
      */
-    if( needEvilHack ){
-	QTimer::singleShot( 500, this, SLOT(viewWeek()) );
-    }
+	if( needEvilHack ){
+		QTimer::singleShot( 500, this, SLOT(viewWeek()) );
+	}
 }
 
 void DateBook::receive( const QCString &msg, const QByteArray &data )
@@ -276,28 +276,32 @@ void DateBook::slotSettings()
     frmSettings.showMaximized();
 #endif
 
-    if ( frmSettings.exec() ) {
-	aPreset = frmSettings.alarmPreset();
-	presetTime = frmSettings.presetTime();
-	startTime = frmSettings.startTime();
-	bJumpToCurTime = frmSettings.jumpToCurTime();
-	rowStyle = frmSettings.rowStyle();
-	if ( dayView )
-	    dayView->setStartViewTime( startTime );
-	    dayView->setJumpToCurTime( bJumpToCurTime );
-	    dayView->setRowStyle( rowStyle );
-	if ( weekView )
-	    weekView->setStartViewTime( startTime );
-	saveSettings();
+	if ( frmSettings.exec() ) {
 
-	// make the change obvious
-	if ( views->visibleWidget() ) {
-	    if ( views->visibleWidget() == dayView )
-		dayView->redraw();
-	    else if ( views->visibleWidget() == weekView )
-		weekView->redraw();
+		aPreset = frmSettings.alarmPreset();
+		presetTime = frmSettings.presetTime();
+		startTime = frmSettings.startTime();
+		bJumpToCurTime = frmSettings.jumpToCurTime();
+		rowStyle = frmSettings.rowStyle();
+
+		if ( dayView ) {
+			dayView->setStartViewTime( startTime );
+			dayView->setJumpToCurTime( bJumpToCurTime );
+			dayView->setRowStyle( rowStyle );
+		}
+		if ( weekView ) {
+			weekView->setStartViewTime( startTime );
+		}
+		saveSettings();
+
+		// make the change obvious
+		if ( views->visibleWidget() ) {
+			if ( views->visibleWidget() == dayView )
+				dayView->redraw();
+			else if ( views->visibleWidget() == weekView )
+				weekView->redraw();
+		}
 	}
-    }
 }
 
 void DateBook::fileNew()
@@ -351,31 +355,31 @@ QDate DateBook::currentDate()
 }
 
 void DateBook::view(int v, const QDate &d) {
-    if (v==DAY) {
-	initDay();
-	dayAction->setOn( TRUE );
-	dayView->setDate( d );
-	views->raiseWidget( dayView );
-	dayView->redraw();
-    } else if (v==WEEK) {
-	initWeek();
-	weekAction->setOn( TRUE );
-	weekView->setDate( d );
-	views->raiseWidget( weekView );
-	weekView->redraw();
-    } else if (v==WEEKLST) {
-	initWeekLst();
-	weekLstAction->setOn( TRUE );
-	weekLstView->setDate(d);
-	views->raiseWidget( weekLstView );
-	weekLstView->redraw();
-    } else if (v==MONTH) {
-	initMonth();
-	monthAction->setOn( TRUE );
-	monthView->setDate( d.year(), d.month(), d.day() );
-	views->raiseWidget( monthView );
-	monthView->redraw();
-    }
+	if (v==DAY) {
+		initDay();
+		dayAction->setOn( TRUE );
+		dayView->setDate( d );
+		views->raiseWidget( dayView );
+		dayView->redraw();
+	} else if (v==WEEK) {
+		initWeek();
+		weekAction->setOn( TRUE );
+		weekView->setDate( d );
+		views->raiseWidget( weekView );
+		weekView->redraw();
+	} else if (v==WEEKLST) {
+		initWeekLst();
+		weekLstAction->setOn( TRUE );
+		weekLstView->setDate(d);
+		views->raiseWidget( weekLstView );
+		weekLstView->redraw();
+	} else if (v==MONTH) {
+		initMonth();
+		monthAction->setOn( TRUE );
+		monthView->setDate( d.year(), d.month(), d.day() );
+		views->raiseWidget( monthView );
+		monthView->redraw();
+	}
 }
 
 void DateBook::viewDefault(const QDate &d) {
@@ -514,57 +518,58 @@ void DateBook::showDay( int year, int month, int day )
 
 void DateBook::initDay()
 {
-    if ( !dayView ) {
-	dayView = new DateBookDay( ampm, onMonday, db, views, "day view" );
-	views->addWidget( dayView, DAY );
-	dayView->setStartViewTime( startTime );
-	dayView->setJumpToCurTime( bJumpToCurTime );
-	dayView->setRowStyle( rowStyle );
-	connect( this, SIGNAL( newEvent() ),
-		 dayView, SLOT( redraw() ) );
-	connect( dayView, SIGNAL( newEvent() ),
-		 this, SLOT( fileNew() ) );
-	connect( dayView, SIGNAL( removeEvent( const Event & ) ),
-		 this, SLOT( removeEvent( const Event & ) ) );
-	connect( dayView, SIGNAL( editEvent( const Event & ) ),
-		 this, SLOT( editEvent( const Event & ) ) );
-	connect( dayView, SIGNAL( duplicateEvent( const Event & ) ),
-		 this, SLOT( duplicateEvent( const Event & ) ) );
-	connect( dayView, SIGNAL( beamEvent( const Event & ) ),
-		 this, SLOT( beamEvent( const Event & ) ) );
-	connect( dayView, SIGNAL(sigNewEvent(const QString &)),
-		 this, SLOT(slotNewEventFromKey(const QString &)) );
+	if ( !dayView ) {
+		dayView = new DateBookDay( ampm, onMonday, db, views, "day view" );
+		views->addWidget( dayView, DAY );
+		dayView->setStartViewTime( startTime );
+		dayView->setJumpToCurTime( bJumpToCurTime );
+		dayView->setRowStyle( rowStyle );
+		connect( this, SIGNAL( newEvent() ),
+			dayView, SLOT( redraw() ) );
+		connect( dayView, SIGNAL( newEvent() ),
+			this, SLOT( fileNew() ) );
+		connect( dayView, SIGNAL( removeEvent( const Event & ) ),
+			this, SLOT( removeEvent( const Event & ) ) );
+		connect( dayView, SIGNAL( editEvent( const Event & ) ),
+			this, SLOT( editEvent( const Event & ) ) );
+		connect( dayView, SIGNAL( duplicateEvent( const Event & ) ),
+			this, SLOT( duplicateEvent( const Event & ) ) );
+		connect( dayView, SIGNAL( beamEvent( const Event & ) ),
+			this, SLOT( beamEvent( const Event & ) ) );
+		connect( dayView, SIGNAL(sigNewEvent(const QString &)),
+			this, SLOT(slotNewEventFromKey(const QString &)) );
     }
 }
 
 void DateBook::initWeek()
 {
-    if ( !weekView ) {
-	weekView = new DateBookWeek( ampm, onMonday, db, views, "week view" );
-	weekView->setStartViewTime( startTime );
-	views->addWidget( weekView, WEEK );
-	connect( weekView, SIGNAL( showDate( int, int, int ) ),
-		 this, SLOT( showDay( int, int, int ) ) );
-	connect( this, SIGNAL( newEvent() ),
-		 weekView, SLOT( redraw() ) );
-    }
-    //But also get it right: the year that we display can be different
-    //from the year of the current date. So, first find the year
-    //number of the current week.
+	if ( !weekView ) {
+		weekView = new DateBookWeek( ampm, onMonday, db, views, "week view" );
+		weekView->setStartViewTime( startTime );
+		views->addWidget( weekView, WEEK );
+		connect( weekView, SIGNAL( showDate( int, int, int ) ),
+			this, SLOT( showDay( int, int, int ) ) );
+		connect( this, SIGNAL( newEvent() ),
+			weekView, SLOT( redraw() ) );
+	}
 
-    int yearNumber, totWeeks;
-    calcWeek( currentDate(), totWeeks, yearNumber, onMonday );
+	//But also get it right: the year that we display can be different
+	//from the year of the current date. So, first find the year
+	//number of the current week.
+	int yearNumber, totWeeks;
+	calcWeek( currentDate(), totWeeks, yearNumber, onMonday );
 
-    QDate d = QDate( yearNumber, 12, 31 );
-    calcWeek( d, totWeeks, yearNumber, onMonday );
-
-    while ( totWeeks == 1 ) {
-	d = d.addDays( -1 );
+	QDate d = QDate( yearNumber, 12, 31 );
 	calcWeek( d, totWeeks, yearNumber, onMonday );
-    }
-    if ( totWeeks != weekView->totalWeeks() )
-	weekView->setTotalWeeks( totWeeks );
+
+	while ( totWeeks == 1 ) {
+		d = d.addDays( -1 );
+		calcWeek( d, totWeeks, yearNumber, onMonday );
+	}
+	if ( totWeeks != weekView->totalWeeks() )
+		weekView->setTotalWeeks( totWeeks );
 }
+
 void DateBook::initWeekLst() {
   if ( !weekLstView ) {
       weekLstView = new DateBookWeekLst( ampm, onMonday, db,
