@@ -2,6 +2,9 @@
 <!ENTITY arrow "-->">
 ]>
 <book><title>Opie User Manual</title>
+<bookinfo><authorgroup><collab>
+<collabname>The Opie Team</collabname>
+</collab></authorgroup></bookinfo>
 <part><title>Getting Started</title>
 <chapter><title>What is Opie?</title>
 <para>
@@ -15,7 +18,7 @@ based upon the QT toolkit.
 </para>
 <para>
 Opie has been designed for devices with small screens, and a touchscreen input 
-device (ie, only one mouse click, and no constant mouse position), as well as 
+device (ie, only one mouse click, and no constant mouse position), as well as
 designed to fit in a relatively small amount of storage space (about 5 megabytes
 for the base libraries and the launcher).
 </para>
