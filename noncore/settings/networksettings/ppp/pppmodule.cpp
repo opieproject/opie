@@ -8,7 +8,12 @@
 /**
  * Constructor, find all of the possible interfaces
  */
-PPPModule::PPPModule() : Module() {
+PPPModule::PPPModule() : Module()
+{
+    Interface *iface;
+    iface = new Interface( 0, "device" );
+    iface->setHardwareName( "account" );
+    list.append( iface );
 }
 
 /**
@@ -42,12 +47,7 @@ QString PPPModule::getPixmapName(Interface* ){
  * @return bool true if i is owned by this module, false otherwise.
  */
 bool PPPModule::isOwner(Interface *i){
-  if(!i->getInterfaceName().upper().contains("PPP"))
-    return false;
-
-  i->setHardwareName("PPP");
-  list.append(i);
-  return true;
+    return list.find( i ) != -1;
 }
 
 /**
@@ -56,8 +56,8 @@ bool PPPModule::isOwner(Interface *i){
  */
 QWidget *PPPModule::configure(Interface *i){
     qDebug("return ModemWidget");
-    PPPConfigWidget *pppconfig = new PPPConfigWidget( 0, "PPPConfig",  false,  Qt::WDestructiveClose );
-//    pppconfig->setProfile(profile);
+    PPPConfigWidget *pppconfig = new PPPConfigWidget( 0, "PPPConfig",  false,
+                                                      Qt::WDestructiveClose );
     return pppconfig;
 }
 
@@ -97,8 +97,12 @@ Interface *PPPModule::addNewInterface(const QString &newInterface){
   imp.showMaximized();
   if(imp.exec() == QDialog::Accepted ){
               qDebug("ACCEPTED");
-              return new Interface( 0, newInterface );
               PPPData::data()->save();
+              Interface *iface;
+              iface = new Interface( 0, PPPData::data()->modemDevice() );
+              iface->setHardwareName( PPPData::data()->accname() );
+              list.append( iface );
+              return iface;
   }
   return NULL;
 }
@@ -114,8 +118,8 @@ bool PPPModule::remove(Interface*){
 
 void PPPModule::possibleNewInterfaces(QMap<QString, QString> &newIfaces)
 {
-    qDebug("here");
-        newIfaces.insert(QObject::tr("PPP") ,QObject::tr("generic ppp device"));
+    newIfaces.insert(QObject::tr("PPP") ,
+                     QObject::tr("generic ppp device"));
 }
 
 

@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.h,v 1.2 2003-05-24 16:12:04 tille Exp $
+ * $Id: pppdata.h,v 1.3 2003-05-24 23:34:09 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -159,30 +159,31 @@ class Config;
 
 class PPPData {
 public:
-  PPPData();
-  ~PPPData() {};
+    PPPData();
+    ~PPPData() {};
     static PPPData* data();
 
-  enum { NumInitStrings = 2 };
+    enum { NumInitStrings = 2 };
 
-  // general functions
-  bool open();
-  void save();
-  void cancel();
-//  int  access() const;       // read/write access
+    // general functions
+    bool open();
+    void save();
+    void cancel();
 
-  // function to read/write date to configuration file
-  QString readConfig(const QString &, const QString &, const QString &);
-  int readNumConfig(const QString &, const QString &, int);
-  bool readListConfig(const QString &, const QString &,
+
+    // function to read/write date to configuration file
+    QString readConfig(const QString &, const QString &, const QString &);
+    int readNumConfig(const QString &, const QString &, int);
+    bool readListConfig(const QString &, const QString &,
                       QStringList &, char sep = ',');
-  void writeConfig(const QString &, const QString &, const QString &);
-  void writeConfig(const QString &, const QString &, int);
-  void writeListConfig(const QString &, const QString &,
+    void writeConfig(const QString &, const QString &, const QString &);
+    void writeConfig(const QString &, const QString &, int);
+    void writeListConfig(const QString &, const QString &,
                        QStringList &, char sep = ',');
 
-  // return the current account group
-  QString currentGroup() { return cgroup; }
+    // return the current account group
+    QString currentGroup() { return cgroup; }
+    QString modemGroup();
 
   // functions to set/get general kppp info
   QString password() const;

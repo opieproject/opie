@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.2 2003-05-24 16:12:04 tille Exp $
+ * $Id: pppdata.cpp,v 1.3 2003-05-24 23:34:09 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -323,27 +323,27 @@ void PPPData::setpppdTimeout(int n) {
 
 
 const QString PPPData::modemDevice() {
-  return readConfig (MODEM_GRP, MODEMDEV_KEY, devices[DEV_DEFAULT]);
+  return readConfig (modemGroup(), MODEMDEV_KEY, devices[DEV_DEFAULT]);
 }
 
 
 void PPPData::setModemDevice(const QString &n) {
-  writeConfig(MODEM_GRP, MODEMDEV_KEY, n);
+  writeConfig(modemGroup(), MODEMDEV_KEY, n);
 }
 
 
 const QString PPPData::flowcontrol() {
-  return readConfig(MODEM_GRP, FLOWCONTROL_KEY, "CRTSCTS");
+  return readConfig(modemGroup(), FLOWCONTROL_KEY, "CRTSCTS");
 }
 
 
 void PPPData::setFlowcontrol(const QString &n) {
-  writeConfig(MODEM_GRP, FLOWCONTROL_KEY, n);
+  writeConfig(modemGroup(), FLOWCONTROL_KEY, n);
 }
 
 
 const QString PPPData::speed() {
-  QString s = readConfig(MODEM_GRP, SPEED_KEY, "57600");
+  QString s = readConfig(modemGroup(), SPEED_KEY, "57600");
   // undo the damage of a bug in former versions. It left an empty Speed=
   // entry in kppprc. kppp did set the serial port to 57600 as default but
   // pppd wouldn't receive the speed via the command line.
@@ -354,88 +354,88 @@ const QString PPPData::speed() {
 
 
 void PPPData::setSpeed(const QString &n) {
-  writeConfig(MODEM_GRP, SPEED_KEY, n);
+  writeConfig(modemGroup(), SPEED_KEY, n);
 }
 
 
 #if 0
 void PPPData::setUseCDLine(const int n) {
-  writeConfig(MODEM_GRP,USECDLINE_KEY,n);
+  writeConfig(modemGroup(),USECDLINE_KEY,n);
 }
 
 
 int PPPData::UseCDLine() {
-  return  readNumConfig(MODEM_GRP,USECDLINE_KEY,0);
+  return  readNumConfig(modemGroup(),USECDLINE_KEY,0);
 }
 #endif
 
 const QString  PPPData::modemEscapeStr() {
-  return readConfig(MODEM_GRP,ESCAPESTR_KEY,"+++");
+  return readConfig(modemGroup(),ESCAPESTR_KEY,"+++");
 }
 
 
 void PPPData::setModemEscapeStr(const QString &n) {
-  writeConfig(MODEM_GRP,ESCAPESTR_KEY,n);
+  writeConfig(modemGroup(),ESCAPESTR_KEY,n);
 }
 
 
 const QString  PPPData::modemEscapeResp() {
-  return readConfig(MODEM_GRP,ESCAPERESP_KEY,"OK");
+  return readConfig(modemGroup(),ESCAPERESP_KEY,"OK");
 }
 
 
 void PPPData::setModemEscapeResp(const QString &n) {
-  writeConfig(MODEM_GRP,ESCAPERESP_KEY,n);
+  writeConfig(modemGroup(),ESCAPERESP_KEY,n);
 }
 
 
 int  PPPData::modemEscapeGuardTime() {
-  return readNumConfig(MODEM_GRP,ESCAPEGUARDTIME_KEY,50);
+  return readNumConfig(modemGroup(),ESCAPEGUARDTIME_KEY,50);
 }
 
 
 void PPPData::setModemEscapeGuardTime(int n) {
-  writeConfig(MODEM_GRP,ESCAPEGUARDTIME_KEY,n);
+  writeConfig(modemGroup(),ESCAPEGUARDTIME_KEY,n);
 }
 
 
 bool PPPData::modemLockFile() {
-  return readNumConfig(MODEM_GRP, LOCKFILE_KEY, 1);
+  return readNumConfig(modemGroup(), LOCKFILE_KEY, 1);
 }
 
 
 void PPPData::setModemLockFile(bool set) {
-  writeConfig(MODEM_GRP, LOCKFILE_KEY, set);
+  writeConfig(modemGroup(), LOCKFILE_KEY, set);
 }
 
 
 int PPPData::modemTimeout() {
-  return readNumConfig(MODEM_GRP, TIMEOUT_KEY, MODEM_TIMEOUT);
+  return readNumConfig(modemGroup(), TIMEOUT_KEY, MODEM_TIMEOUT);
 }
 
 
 void PPPData::setModemTimeout(int n) {
-  writeConfig(MODEM_GRP, TIMEOUT_KEY, n);
+  writeConfig(modemGroup(), TIMEOUT_KEY, n);
 }
 
 
 int PPPData::modemToneDuration() {
-  return readNumConfig(MODEM_GRP, TONEDURATION_KEY,MODEM_TONEDURATION);
+  return readNumConfig(modemGroup(), TONEDURATION_KEY,MODEM_TONEDURATION);
 }
 
 
 void PPPData::setModemToneDuration(int n) {
-  writeConfig(MODEM_GRP, TONEDURATION_KEY, n);
+  writeConfig(modemGroup(), TONEDURATION_KEY, n);
 }
 
 
 int PPPData::busyWait() {
-  return readNumConfig(MODEM_GRP, BUSYWAIT_KEY, BUSY_WAIT);
+  return readNumConfig(modemGroup(), BUSYWAIT_KEY, BUSY_WAIT);
 }
 
 
 void PPPData::setbusyWait(int n) {
-  writeConfig(MODEM_GRP, BUSYWAIT_KEY, n);
+  writeConfig(modemGroup(), BUSYWAIT_KEY, n);
 }
 
 
@@ -446,151 +446,151 @@ void PPPData::setbusyWait(int n) {
 const QString PPPData::modemInitStr(int i) {
   assert(i >= 0 && i < NumInitStrings);
   if(i == 0)
-    return readConfig(MODEM_GRP, INITSTR_KEY, "ATZ");
+    return readConfig(modemGroup(), INITSTR_KEY, "ATZ");
   else
-    return readConfig(MODEM_GRP, INITSTR_KEY + QString::number(i), "");
+    return readConfig(modemGroup(), INITSTR_KEY + QString::number(i), "");
 }
 
 
 void PPPData::setModemInitStr(int i, const QString &n) {
   assert(i >= 0 && i < NumInitStrings);
   QString k = INITSTR_KEY + (i > 0 ? QString::number(i) : "");
-  writeConfig(MODEM_GRP, k, n);
+  writeConfig(modemGroup(), k, n);
 }
 
 
 const QString PPPData::modemInitResp() {
-  return readConfig(MODEM_GRP, INITRESP_KEY, "OK");
+  return readConfig(modemGroup(), INITRESP_KEY, "OK");
 }
 
 
 void PPPData::setModemInitResp(const QString &n) {
-  writeConfig(MODEM_GRP, INITRESP_KEY, n);
+  writeConfig(modemGroup(), INITRESP_KEY, n);
 }
 
 
 int PPPData::modemPreInitDelay() {
-  return readNumConfig(MODEM_GRP, PREINITDELAY_KEY, 50);
+  return readNumConfig(modemGroup(), PREINITDELAY_KEY, 50);
 }
 
 
 void PPPData::setModemPreInitDelay(int n) {
-  writeConfig(MODEM_GRP, PREINITDELAY_KEY, n);
+  writeConfig(modemGroup(), PREINITDELAY_KEY, n);
 }
 
 
 int PPPData::modemInitDelay() {
-  return readNumConfig(MODEM_GRP, INITDELAY_KEY, 50);
+  return readNumConfig(modemGroup(), INITDELAY_KEY, 50);
 }
 
 
 void PPPData::setModemInitDelay(int n) {
-  writeConfig(MODEM_GRP, INITDELAY_KEY, n);
+  writeConfig(modemGroup(), INITDELAY_KEY, n);
 }
 
 QString PPPData::modemNoDialToneDetectionStr() {
-  return readConfig(MODEM_GRP, NODTDETECT_KEY, "ATX3");
+  return readConfig(modemGroup(), NODTDETECT_KEY, "ATX3");
 }
 
 void PPPData::setModemNoDialToneDetectionStr(const QString &n) {
-  writeConfig(MODEM_GRP, NODTDETECT_KEY, n);
+  writeConfig(modemGroup(), NODTDETECT_KEY, n);
 }
 
 const QString PPPData::modemDialStr() {
-  return readConfig(MODEM_GRP, DIALSTR_KEY, "ATDT");
+  return readConfig(modemGroup(), DIALSTR_KEY, "ATDT");
 }
 
 
 void PPPData::setModemDialStr(const QString &n) {
-  writeConfig(MODEM_GRP, DIALSTR_KEY, n);
+  writeConfig(modemGroup(), DIALSTR_KEY, n);
 }
 
 
 const QString PPPData::modemConnectResp() {
-  return readConfig(MODEM_GRP, CONNECTRESP_KEY, "CONNECT");
+  return readConfig(modemGroup(), CONNECTRESP_KEY, "CONNECT");
 }
 
 
 void PPPData::setModemConnectResp(const QString &n) {
-  writeConfig(MODEM_GRP, CONNECTRESP_KEY, n);
+  writeConfig(modemGroup(), CONNECTRESP_KEY, n);
 }
 
 
 const QString PPPData::modemBusyResp() {
-  return readConfig(MODEM_GRP, BUSYRESP_KEY, "BUSY");
+  return readConfig(modemGroup(), BUSYRESP_KEY, "BUSY");
 }
 
 
 void PPPData::setModemBusyResp(const QString &n) {
-  writeConfig(MODEM_GRP, BUSYRESP_KEY, n);
+  writeConfig(modemGroup(), BUSYRESP_KEY, n);
 }
 
 
 const QString PPPData::modemNoCarrierResp() {
-  return readConfig(MODEM_GRP, NOCARRIERRESP_KEY, "NO CARRIER");
+  return readConfig(modemGroup(), NOCARRIERRESP_KEY, "NO CARRIER");
 }
 
 
 void PPPData::setModemNoCarrierResp(const QString &n) {
-  writeConfig(MODEM_GRP, NOCARRIERRESP_KEY, n);
+  writeConfig(modemGroup(), NOCARRIERRESP_KEY, n);
 }
 
 
 const QString PPPData::modemNoDialtoneResp() {
-  return readConfig(MODEM_GRP, NODIALTONERESP_KEY, "NO DIALTONE");
+  return readConfig(modemGroup(), NODIALTONERESP_KEY, "NO DIALTONE");
 }
 
 
 void PPPData::setModemNoDialtoneResp(const QString &n) {
-  writeConfig(MODEM_GRP, NODIALTONERESP_KEY, n);
+  writeConfig(modemGroup(), NODIALTONERESP_KEY, n);
 }
 
 
 const QString PPPData::modemHangupStr() {
-  return readConfig(MODEM_GRP, HANGUPSTR_KEY, "+++ATH");
+  return readConfig(modemGroup(), HANGUPSTR_KEY, "+++ATH");
 }
 
 void PPPData::setModemHangupStr(const QString &n) {
-  writeConfig(MODEM_GRP, HANGUPSTR_KEY, n);
+  writeConfig(modemGroup(), HANGUPSTR_KEY, n);
 }
 
 
 const QString PPPData::modemHangupResp() {
-  return readConfig(MODEM_GRP, HANGUPRESP_KEY, "OK");
+  return readConfig(modemGroup(), HANGUPRESP_KEY, "OK");
 }
 
 void PPPData::setModemHangupResp(const QString &n) {
-  writeConfig(MODEM_GRP, HANGUPRESP_KEY, n);
+  writeConfig(modemGroup(), HANGUPRESP_KEY, n);
 }
 
 
 const QString PPPData::modemAnswerStr() {
-  return readConfig(MODEM_GRP, ANSWERSTR_KEY, "ATA");
+  return readConfig(modemGroup(), ANSWERSTR_KEY, "ATA");
 }
 
 
 QString PPPData::volumeOff() {
-  return readConfig(MODEM_GRP, VOLUME_OFF, "M0L0");
+  return readConfig(modemGroup(), VOLUME_OFF, "M0L0");
 }
 
 
 void PPPData::setVolumeOff(const QString &s) {
-  writeConfig(MODEM_GRP, VOLUME_OFF, s);
+  writeConfig(modemGroup(), VOLUME_OFF, s);
 }
 
 
 QString PPPData::volumeMedium() {
- return readConfig(MODEM_GRP, VOLUME_MEDIUM, "M1L1");
+ return readConfig(modemGroup(), VOLUME_MEDIUM, "M1L1");
 }
 
 
 void PPPData::setVolumeMedium(const QString &s) {
-  writeConfig(MODEM_GRP, VOLUME_MEDIUM, s);
+  writeConfig(modemGroup(), VOLUME_MEDIUM, s);
 }
 
 
 QString PPPData::volumeHigh() {
-  QString tmp = readConfig(MODEM_GRP, VOLUME_HIGH, "M1L3");
+  QString tmp = readConfig(modemGroup(), VOLUME_HIGH, "M1L3");
   if(tmp == "M1L4")
     tmp = "M1L3";
   return tmp;
@@ -598,7 +598,7 @@ QString PPPData::volumeHigh() {
 
 
 void PPPData::setVolumeHigh(const QString &s) {
- writeConfig(MODEM_GRP, VOLUME_HIGH, s);
+ writeConfig(modemGroup(), VOLUME_HIGH, s);
 }
 
 
@@ -624,54 +624,54 @@ QString PPPData::volumeInitString() {
 
 
 int PPPData::volume() {
-  return readNumConfig(MODEM_GRP, VOLUME_KEY, 1);
+  return readNumConfig(modemGroup(), VOLUME_KEY, 1);
 }
 
 
 void PPPData::setVolume(int i) {
-  writeConfig(MODEM_GRP, VOLUME_KEY, i);
+  writeConfig(modemGroup(), VOLUME_KEY, i);
 }
 
 int PPPData::waitForDialTone() {
-  return readNumConfig(MODEM_GRP, DIALTONEWAIT_KEY, 1);
+  return readNumConfig(modemGroup(), DIALTONEWAIT_KEY, 1);
 }
 
 void PPPData::setWaitForDialTone(int i) {
-  writeConfig(MODEM_GRP, DIALTONEWAIT_KEY, i);
+  writeConfig(modemGroup(), DIALTONEWAIT_KEY, i);
 }
 
 void PPPData::setModemAnswerStr(const QString &n) {
-  writeConfig(MODEM_GRP, ANSWERSTR_KEY, n);
+  writeConfig(modemGroup(), ANSWERSTR_KEY, n);
 }
 
 
 const QString PPPData::modemRingResp() {
-  return readConfig(MODEM_GRP, RINGRESP_KEY, "RING");
+  return readConfig(modemGroup(), RINGRESP_KEY, "RING");
 }
 
 
 void PPPData::setModemRingResp(const QString &n) {
-  writeConfig(MODEM_GRP, RINGRESP_KEY, n);
+  writeConfig(modemGroup(), RINGRESP_KEY, n);
 }
 
 
 const QString PPPData::modemAnswerResp() {
-  return readConfig(MODEM_GRP, ANSWERRESP_KEY, "CONNECT");
+  return readConfig(modemGroup(), ANSWERRESP_KEY, "CONNECT");
 }
 
 
 void PPPData::setModemAnswerResp(const QString &n) {
-  writeConfig(MODEM_GRP, ANSWERRESP_KEY, n);
+  writeConfig(modemGroup(), ANSWERRESP_KEY, n);
 }
 
 
 const QString PPPData::enter() {
-  return readConfig(MODEM_GRP, ENTER_KEY, "CR");
+  return readConfig(modemGroup(), ENTER_KEY, "CR");
 }
 
 
 void PPPData::setEnter(const QString &n) {
-  writeConfig(MODEM_GRP, ENTER_KEY, n);
+  writeConfig(modemGroup(), ENTER_KEY, n);
 }
 
 
@@ -1209,6 +1209,10 @@ void PPPData::setpppdError(int err) {
   pppderror = err;
 }
 
+QString PPPData::modemGroup()
+{
+    return MODEM_GRP;
+}
 
 // //
 // // window position

@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.h,v 1.2 2003-05-23 19:43:46 tille Exp $
+ * $Id: modem.h,v 1.3 2003-05-24 23:34:09 tille Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -93,6 +93,10 @@ private:
 
   const char* authFile(Auth method, int version = Original );
   bool createAuthFile(Auth method,const char *username,const char *password);
+  bool removeAuthFile(Auth method);
+  bool execpppd(const char *arguments);
+  bool killpppd();
+  void parseargs(char* buf, char** args);
   void escape_to_command_mode();
   int openLockfile(QString,int);
 
@@ -100,6 +104,8 @@ private:
   QString device;
   QString lockfile;   
   int modemfd;
+  int pppdPid;
+  int _pppdExitStatus;
   QSocketNotifier *sn;
   bool data_mode;
   QString errmsg;

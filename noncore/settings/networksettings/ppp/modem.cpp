@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.cpp,v 1.3 2003-05-24 16:12:02 tille Exp $
+ * $Id: modem.cpp,v 1.4 2003-05-24 23:34:09 tille Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -26,6 +26,7 @@
 
 #include <errno.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <fcntl.h>
 #include <signal.h>
 #include <sys/ioctl.h>
@@ -33,7 +34,18 @@
 #include <regex.h>
 #include <qregexp.h>
 #include <assert.h>
+#include <string.h>
 
+#ifdef HAVE_RESOLV_H
+#  include <arpa/nameser.h>
+#  include <resolv.h>
+#endif
+
+#ifndef _PATH_RESCONF
+#define _PATH_RESCONF "/etc/resolv.conf"
+#endif
+
+#define strlcpy strcpy
 #include "auth.h"
 #include "modem.h"
 #include "pppdata.h"
@@ -83,6 +95,8 @@ Modem::Modem()
 {
     if (Modem::modem != 0) return; //CORRECT?
     modemfd = -1;
+    _pppdExitStatus = -1;
+    pppdPid = -1;
     sn = 0L;
     data_mode = false;
     modem_is_locked = false;
@@ -755,6 +769,22 @@ bool Modem::createAuthFile(Auth method, const char *username, const char *passwo
 }
 
 
+bool Modem::removeAuthFile(Auth method) {
+  const char *authfile, *oldName;
+
+  if(!(authfile = authFile(method)))
+    return false;
+  if(!(oldName = authFile(method, Old)))
+    return false;
+
+  if(access(oldName, F_OK) == 0) {
+    unlink(authfile);
+    return (rename(oldName, authfile) == 0);
+  } else
+    return false;
+}
+
+
 bool Modem::setSecret(int method, const char* name, const char* password)
 {
 
@@ -778,32 +808,215 @@ bool Modem::setSecret(int method, const char* name, const char* password)
 
 }
 
-bool Modem::removeSecret(int)
+bool Modem::removeSecret(int method)
 {
-    return true;
+   Auth auth;
+
+    switch(method) {
+    case AUTH_PAP:
+        auth = Modem::PAP;
+        break;
+    case AUTH_CHAP:
+        auth = Modem::CHAP;
+        break;
+    default:
+        return false;
+    }
+    return removeAuthFile( auth );
 }
 
-void Modem::killPPPDaemon()
+int checkForInterface()
 {
+// I don't know if Linux needs more initialization to get the ioctl to
+// work, pppd seems to hint it does.  But BSD doesn't, and the following
+// code should compile.
+#if (defined(HAVE_NET_IF_PPP_H) || defined(HAVE_LINUX_IF_PPP_H)) && !defined(__svr4__)
+    int s, ok;
+    struct ifreq ifr;
+    //    extern char *no_ppp_msg;
+
+    if ((s = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
+        return 1;               /* can't tell */
+
+    strlcpy(ifr.ifr_name, "ppp0", sizeof (ifr.ifr_name));
+    ok = ioctl(s, SIOCGIFFLAGS, (caddr_t) &ifr) >= 0;
+    close(s);
+
+    if (ok == -1) {
+// This is ifdef'd FreeBSD, because FreeBSD is the only BSD that supports
+// KLDs, the old LKM interface couldn't handle loading devices
+// dynamically, and thus can't load ppp support on the fly
+#ifdef __FreeBSD__
+        // If we failed to load ppp support and don't have it already.
+        if (kldload("if_ppp") == -1) {
+            return -1;
+        }
+        return 0;
+#else
+        return -1;
+#endif
+    }
+    return 0;
+#else
+// We attempt to use the SunOS/SysVr4 method and stat /dev/ppp
+   struct stat buf;
+
+   memset(&buf, 0, sizeof(buf));
+   return stat("/dev/ppp", &buf);
+#endif
 }
 
-int Modem::pppdExitStatus()
-{
-    return -1;
+bool Modem::execpppd(const char *arguments) {
+  char buf[MAX_CMDLEN];
+  char *args[MaxArgs];
+  pid_t pgrpid;
+
+  if(modemfd<0)
+    return false;
+
+  _pppdExitStatus = -1;
+
+  switch(pppdPid = fork())
+    {
+    case -1:
+      fprintf(stderr,"In parent: fork() failed\n");
+      return false;
+      break;
+
+    case 0:
+      // let's parse the arguments the user supplied into UNIX suitable form
+      // that is a list of pointers each pointing to exactly one word
+      strlcpy(buf, arguments);
+      parseargs(buf, args);
+      // become a session leader and let /dev/ttySx
+      // be the controlling terminal.
+      pgrpid = setsid();
+#ifdef TIOCSCTTY
+      if(ioctl(modemfd, TIOCSCTTY, 0)<0)
+        fprintf(stderr, "ioctl() failed.\n");
+#elif defined (TIOCSPGRP)
+       if(ioctl(modemfd, TIOCSPGRP, &pgrpid)<0)
+       fprintf(stderr, "ioctl() failed.\n");
+#endif
+      if(tcsetpgrp(modemfd, pgrpid)<0)
+        fprintf(stderr, "tcsetpgrp() failed.\n");
+
+      dup2(modemfd, 0);
+      dup2(modemfd, 1);
+
+      switch (checkForInterface()) {
+        case 1:
+          fprintf(stderr, "Cannot determine if kernel supports ppp.\n");
+          break;
+        case -1:
+          fprintf(stderr, "Kernel does not support ppp, oops.\n");
+          break;
+        case 0:
+          fprintf(stderr, "Kernel supports ppp alright.\n");
+          break;
+      }
+
+      execve(pppdPath(), args, 0L);
+      _exit(0);
+      break;
+
+    default:
+      qDebug("In parent: pppd pid %d\n",pppdPid);
+      close(modemfd);
+      modemfd = -1;
+      return true;
+      break;
+    }
+}
+
+
+bool Modem::killpppd() {
+  if(pppdPid > 0) {
+    qDebug("In killpppd(): Sending SIGTERM to %d\n", pppdPid);
+    if(kill(pppdPid, SIGTERM) < 0) {
+      qDebug("Error terminating %d. Sending SIGKILL\n", pppdPid);
+      if(kill(pppdPid, SIGKILL) < 0) {
+        qDebug("Error killing %d\n", pppdPid);
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+
+void Modem::parseargs(char* buf, char** args) {
+  int nargs = 0;
+  int quotes;
+
+  while(nargs < MaxArgs-1 && *buf != '\0') {
+
+    quotes = 0;
+
+    // Strip whitespace. Use nulls, so that the previous argument is
+    // terminated automatically.
+
+    while ((*buf == ' ' ) || (*buf == '\t' ) || (*buf == '\n' ) )
+      *buf++ = '\0';
+
+    // detect begin of quoted argument
+    if (*buf == '"' || *buf == '\'') {
+      quotes = *buf;
+      *buf++ = '\0';
+    }
+
+    // save the argument
+    if(*buf != '\0') {
+      *args++ = buf;
+      nargs++;
+    }
+
+    if (!quotes)
+      while ((*buf != '\0') && (*buf != '\n') &&
+	     (*buf != '\t') && (*buf != ' '))
+	buf++;
+    else {
+      while ((*buf != '\0') && (*buf != quotes))
+	buf++;
+      *buf++ = '\0';
+    }
+  }
+
+  *args = 0L;
 }
 
 bool Modem::execPPPDaemon(const QString & arguments)
 {
+  if(execpppd(arguments)==0) {
+    PPPData::data()->setpppdRunning(true);
     return true;
+  } else
+    return false;
+}
+
+void Modem::killPPPDaemon()
+{
+  PPPData::data()->setpppdRunning(false);
+  killpppd();
+}
+
+int Modem::pppdExitStatus()
+{
+    return _pppdExitStatus;
 }
 
 int Modem::openResolv(int flags)
 {
-    return -1;
+    int fd;
+    if ((fd = open(_PATH_RESCONF, flags)) == -1) {
+        qDebug("error opening resolv.conf!");
+        fd = open(DEVNULL, O_RDONLY);
+    }
+    return fd;
 }
 
 bool Modem::setHostname(const QString & name)
 {
-    return true;
+    return sethostname(name, name.length()) == 0;
 }
 
