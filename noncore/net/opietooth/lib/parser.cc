@@ -120,9 +120,8 @@ bool Parser::parseClassId( const QString& str) {
     if (str.startsWith("Service Class ID List:") ) {
         m_classOver = true;
         return true;
-    }else if ( m_classOver ) { // ok now are the informations in place
+    }else if ( m_classOver && str.startsWith("   " )  ){ // ok now are the informations in place
 
-        m_classOver = false;
 
         // "Obex Object Push" (0x1105)
         //  find backwards the " and the from 0 to pos and the mid pos+1
@@ -132,12 +131,11 @@ bool Parser::parseClassId( const QString& str) {
         int ids;
         ids = convert( str, classes );
         qWarning("ids %d", ids );
-        m_item.setClassIdList( classes );
-        m_item.setClassIdList( ids );
+        m_item.insertClassId( ids, classes );
 
         return true;
     }else
-        m_classOver = true;
+        m_classOver = false;
     return false;
 }
 bool Parser::parseProtocol( const QString& str) {

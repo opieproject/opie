@@ -113,8 +113,7 @@ Services::~Services(){
 Services &Services::operator=( const Services& ser){
     m_name =  ser.m_name;
     m_recHandle = ser.m_recHandle;
-    m_classList = ser.m_classList;
-    m_classId = ser.m_classId;
+    m_classIds = ser.m_classIds;
     m_protocols = ser.m_protocols;
     m_profiles = ser.m_profiles;
   return *this;
@@ -122,11 +121,10 @@ Services &Services::operator=( const Services& ser){
 bool operator==( const Services& one,
 		 const Services& two){
     if ( ( one.recHandle() == two.recHandle() ) &&
-         ( one.classIdListInt() == two.classIdListInt() ) &&
          ( one.serviceName() == two.serviceName() ) &&
-         ( one.classIdList() == two.classIdList() ) &&
          ( one.protocolDescriptorList() == two.protocolDescriptorList() ) &&
-         ( one.profileDescriptor() == two.profileDescriptor() ) )
+         ( one.profileDescriptor() == two.profileDescriptor() )
+         /* ( one.classIdList() == two.classIdList() ) */ )
         return true;
   return false;
 }
@@ -142,17 +140,17 @@ int Services::recHandle() const{
 void Services::setRecHandle( int handle){
     m_recHandle = handle;
 }
-QString Services::classIdList() const{
-    return m_classList;
+QMap<int, QString> Services::classIdList()const {
+    return m_classIds;
+};
+void Services::insertClassId( int id, const QString& str ) {
+    m_classIds.insert( id, str );
 }
-void Services::setClassIdList( const QString& str){
-    m_classList = str;
+void Services::removeClassId(int id) {
+    m_classIds.remove( id );
 }
-int Services::classIdListInt() const{
-    return m_classId;
-}
-void Services::setClassIdList(int id){
-    m_classId = id;
+void Services::clearClassId() {
+    m_classIds.clear();
 }
 void Services::insertProtocolDescriptor( const ProtocolDescriptor& prot){
     m_protocols.append( prot );

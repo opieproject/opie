@@ -2,6 +2,7 @@
 #ifndef OpieToothServices_H
 #define OpieToothServices_H
 
+#include <qmap.h>
 #include <qvaluelist.h>
 
 namespace OpieTooth {
@@ -116,10 +117,11 @@ namespace OpieTooth {
     int recHandle()const;
     void setRecHandle( int );
 
-    QString classIdList()const;
-    void setClassIdList( const QString& );
-    int classIdListInt()const;
-    void setClassIdList(int );
+
+    QMap<int, QString> classIdList()const;
+    void insertClassId( int id, const QString& className );
+    void removeClassId( int id );
+    void clearClassId();
 
     void insertProtocolDescriptor(const ProtocolDescriptor& );
     void clearProtocolDescriptorList();
@@ -132,10 +134,9 @@ namespace OpieTooth {
     ProfileDescriptor::ValueList profileDescriptor()const;
 
   private:
+      QMap<int, QString> m_classIds;
       QString m_name;
       int m_recHandle;
-      QString m_classList;
-      int m_classId;
       QValueList<ProfileDescriptor> m_profiles;
       QValueList<ProtocolDescriptor> m_protocols;
   };
