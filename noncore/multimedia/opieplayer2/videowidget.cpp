@@ -33,7 +33,6 @@
 
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
-#include <qpe/mediaplayerplugininterface.h>
 #include <qpe/config.h>
 
 
