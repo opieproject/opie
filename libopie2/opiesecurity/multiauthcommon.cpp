@@ -4,6 +4,8 @@
 /* Opie */
 #include <opie2/odebug.h>
 #include <opie2/oapplication.h>
+#include <opie2/ocontactaccessbackend_vcard.h>
+#include <opie2/ocontactaccess.h>
 
 /* Qt */
 #include <qpe/qpeapplication.h>
@@ -19,7 +21,7 @@
 namespace Opie {
 namespace Security {
 
-SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name, Contact c,
+SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name, const QString& c,
                           bool modal, bool fullscreen = FALSE )
 : QDialog( parent, name, modal,
            fullscreen ?
@@ -31,7 +33,7 @@ SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name, Contact c,
     }
     // set up contents.
     QString text("<H3>" + tr("Please contact the owner (directions follow), or try again clicking of this screen (and waiting for the penalty time) if you are the legitimate owner") + "</H3>");
-    text += c.toRichText();
+    text += c;
     tv = new QTextView(this);
     tv->setText(text);
 
@@ -63,11 +65,12 @@ int runPlugins() {
     // see if there is contact information.
     QString vfilename = Global::applicationFileName("addressbook",
                                                     "businesscard.vcf");
-    if (QFile::exists(vfilename)) {
-        Contact c;
-        c = Contact::readVCard( vfilename )[0];
-
-        oi = new SecOwnerDlg(0, 0, c, TRUE, TRUE);
+    Opie::OPimContactAccess acc( "multiauth", vfilename,
+                                 new Opie::OPimContactAccessBackend_VCard( "multiauth", vfilename ) );
+    if ( acc.load() ) {
+        Opie::OPimContact contact = acc.allRecords()[0];
+        if ( !contact.isEmpty() )
+            oi = new SecOwnerDlg(0, 0, contact.toRichText(), TRUE, TRUE);
     }
 
     Config config("Security");
@@ -186,7 +189,7 @@ int runPlugins() {
             delete lib;
         } // end if plugin recognized
     } //end for
-    if(oi) delete oi;
+    delete oi;
     return 1;
 }
 

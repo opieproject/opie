@@ -41,7 +41,6 @@
 #include <qtextview.h>
 #include <qdialog.h>
 
-
 namespace Opie {
 namespace Security {
 
@@ -51,7 +50,7 @@ class SecOwnerDlg : public QDialog
     Q_OBJECT
     public:
 
-        SecOwnerDlg( QWidget *parent, const char * name, Contact c,
+        SecOwnerDlg( QWidget *parent, const char * name, const QString& owner,
                      bool modal, bool fullscreen);
 
         void resizeEvent( QResizeEvent * );
