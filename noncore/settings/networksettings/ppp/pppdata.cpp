@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.11.2.2 2003-07-26 23:35:05 tille Exp $
+ * $Id: pppdata.cpp,v 1.11.2.3 2003-07-28 14:17:45 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -1170,6 +1170,7 @@ void PPPData::setpppdArgument(QStringList &args) {
 
 void PPPData::setpppdArgumentDefaults() {
   QStringList arg;
+  arg << "lcp-echo-failure 0";
   setpppdArgument(arg);
 }
 
