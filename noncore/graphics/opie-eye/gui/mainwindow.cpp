@@ -42,7 +42,6 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     setCaption( QObject::tr("Opie Eye Caramba" ) );
     m_cfg = new Opie::Core::OConfig("phunkview");
     m_cfg->setGroup("Zecke_view" );
-//    odebug << "Process-wide OApplication object @ " << oApp << oendl;
     /*
      * Initialize ToolBar and IconView
      * And Connect Them
@@ -76,7 +75,7 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     QToolButton*btn = new QToolButton( bar );
     btn->setIconSet( Resource::loadIconSet( "edit" ) );
     connect( btn, SIGNAL(clicked()),
-             m_view, SLOT(slotRename()) );
+             m_view, SLOT(slotImageInfo()) );
 
     if ( Ir::supported() ) {
         btn = new QToolButton( bar );
