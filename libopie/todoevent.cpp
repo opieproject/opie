@@ -9,7 +9,7 @@ ToDoEvent::ToDoEvent(const ToDoEvent &event )
   *this = event;
 }
 
-ToDoEvent::ToDoEvent(bool completed, int priority, const QString &category, 
+ToDoEvent::ToDoEvent(bool completed, int priority, const QStringList &category, 
 	       const QString &description, bool hasDate, QDate date, int uid )
 {
     qWarning("todoEvent c'tor" );
@@ -28,8 +28,8 @@ ToDoEvent::ToDoEvent(bool completed, int priority, const QString &category,
 }
 QArray<int> ToDoEvent::categories()const
 {
-  QArray<int> array(1); // currently the datebook can be only in one category
-  array = Qtopia::Record::idsFromString( category() );
+  QArray<int> array(m_category.count() ); // currently the datebook can be only in one category
+    array = Qtopia::Record::idsFromString( m_category.join(";") );
   return array;
 }
 bool ToDoEvent::match( const QRegExp &regExp )const
@@ -55,14 +55,28 @@ int ToDoEvent::priority()const
 {
     return m_priority;
 }
-QString ToDoEvent::category()const
+QStringList ToDoEvent::allCategories()const
 {
     return m_category;
+}
+void ToDoEvent::insertCategory(const QString &str )
+{
+  m_category.append( str );
+}
+void ToDoEvent::clearCategories()
+{
+  m_category.clear();
+}
+void ToDoEvent::setCategories(const QStringList &list )
+{
+  m_category = list;
+  qWarning("todoevent: %s", list.join(";" ).latin1() );
 }
 QDate ToDoEvent::date()const
 {
     return m_date;
 }
+
 QString ToDoEvent::description()const
 {
     return m_desc;
@@ -82,7 +96,8 @@ void ToDoEvent::setDescription(const QString &desc )
 void ToDoEvent::setCategory( const QString &cat )
 {
   qWarning("setCategory %s", cat.latin1() );
-  m_category = cat;
+  m_category.clear();
+  m_category << cat;
 }
 void ToDoEvent::setPriority(int prio )
 {
@@ -151,7 +166,7 @@ bool ToDoEvent::operator>=(const ToDoEvent &toDoEvent )const
 }
 bool ToDoEvent::operator==(const ToDoEvent &toDoEvent )const
 {
-    if( m_date == toDoEvent.m_date && m_isCompleted == toDoEvent.m_isCompleted && m_hasDate == toDoEvent.m_hasDate && m_priority == toDoEvent.m_priority && m_category == toDoEvent.m_category && m_desc == toDoEvent.m_category )
+    if( m_date == toDoEvent.m_date && m_isCompleted == toDoEvent.m_isCompleted && m_hasDate == toDoEvent.m_hasDate && m_priority == toDoEvent.m_priority && m_category == toDoEvent.m_category && m_desc == toDoEvent.m_desc )
 	return true;
     return false;
 }

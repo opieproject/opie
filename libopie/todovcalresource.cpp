@@ -48,7 +48,7 @@ static VObject *vobjByEvent( const ToDoEvent &event )
 
   QString string = QString::number(event.priority() );
   addPropValue( task, VCPriorityProp, string.local8Bit() );
-  addPropValue( task, VCCategoriesProp, event.category().local8Bit() );
+  addPropValue( task, VCCategoriesProp, event.allCategories().join(";").local8Bit() );
   addPropValue( task, VCDescriptionProp, event.description().local8Bit() );
   addPropValue( task, VCSummaryProp, event.description().left(15).local8Bit() );
   return task;

@@ -21,12 +21,16 @@ public:
 	map.insert( "Completed", QString::number((int)(*it).isCompleted() ) );
 	map.insert( "HasDate", QString::number((int)(*it).hasDate() ) );
 	map.insert( "Priority", QString::number( (*it).priority() ) );
-	if(!(*it).category().isEmpty() ){
-	  QArray<int> arrat(1);
-	  arrat = Qtopia::Record::idsFromString(  (*it).category() );
-	  map.insert( "Categories", QString::number( arrat[0] ) );
-	}else
-	  map.insert( "Categories", QString::null );
+	QArray<int> arrat = (*it).categories();
+	QString attr;
+	for(uint i=0; i < arrat.count(); i++ ){
+	  attr.append(QString::number(arrat[i])+";" );
+	}
+	if(!attr.isEmpty() ) // remove the last ;
+	  attr.remove(attr.length()-1, 1 );
+	map.insert( "Categories", attr );
+	//else
+	//map.insert( "Categories", QString::null );
 	map.insert( "Description", (*it).description() );
 	if( (*it).hasDate() ){
 	  map.insert("DateYear",  QString::number( (*it).date().year()  ) );
@@ -101,12 +105,9 @@ public:
 	event.setDescription( dummy );
 	// category
 	dummy = element->attribute("Categories" );
-	dumInt = dummy.toInt(&ok );
-	if(ok ) {
-	  QArray<int> arrat(1);
-	  arrat[0] = dumInt;
-	  event.setCategory( Qtopia::Record::idsToString( arrat ) );
-	}
+	QStringList ids = QStringList::split(";", dummy );
+	event.setCategories( ids );     
+   
 	//uid
 	dummy = element->attribute("Uid" );
 	dumInt = dummy.toInt(&ok );

@@ -2,6 +2,7 @@
 #ifndef todoevent_h
 #define todoevent_h
 
+#include <qstringlist.h>
 #include <qdatetime.h>
 
 class ToDoEvent {
@@ -9,14 +10,14 @@ class ToDoEvent {
  public:
     enum Priority { VERYHIGH=1, HIGH, NORMAL, LOW, VERYLOW };
     ToDoEvent( bool completed = false, int priority = NORMAL, 
-	       const QString &category = QString::null, 
+	       const QStringList &category = QStringList(), 
 	       const QString &description = QString::null , 
 	       bool hasDate = false, QDate date = QDate::currentDate(), int uid = -1 );
     ToDoEvent(const ToDoEvent & );
     bool isCompleted() const;
     bool hasDate() const;
     int priority()const ;
-    QString category()const;
+    QStringList allCategories()const;
     QArray<int> categories() const;
     QDate date()const;
     QString description()const;
@@ -24,8 +25,14 @@ class ToDoEvent {
     int uid()const { return m_uid;};
     void setCompleted(bool completed );
     void setHasDate( bool hasDate );
-    // if the category doesn't exist we will create it 
+    // if the category doesn't exist we will create it
+    // this sets the the Category after this call category will be the only category 
     void setCategory( const QString &category );
+    // adds a category to the Categories of this event
+    void insertCategory(const QString &category );
+    void clearCategories();
+    void setCategories(const QStringList& );
+
     void setPriority(int priority );
     void setDate( QDate date );
     void setDescription(const QString& );
@@ -48,7 +55,7 @@ class ToDoEvent {
     bool m_isCompleted:1;
     bool m_hasDate:1;
     int m_priority;
-    QString m_category;
+    QStringList m_category;
     QString m_desc;
     int m_uid;
 };
