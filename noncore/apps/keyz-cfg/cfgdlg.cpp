@@ -128,6 +128,5 @@ void CfgDlg::accept() {
 	QCopEnvelope("QPE/zkb", "reload()");
 
 	QDialog::accept();
-	parentWidget()->close(false);
 }
 
