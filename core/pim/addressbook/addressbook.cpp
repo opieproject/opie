@@ -565,10 +565,10 @@ void AddressbookWindow::writeMail()
 			m_config.setUseOpieMail( true );
 	}
 	if ( m_config.useOpieMail() ){
-		qWarning ("Accessing: %s", (basepath + "/bin/mail").latin1());
-		if ( QFile::exists( basepath + "/bin/mail" ) ){
+		qWarning ("Accessing: %s", (basepath + "/bin/opiemail").latin1());
+		if ( QFile::exists( basepath + "/bin/opiemail" ) ){
 			qWarning ("QCop");
-			QCopEnvelope e("QPE/Application/mail", "writeMail(QString,QString)");
+			QCopEnvelope e("QPE/Application/opiemail", "writeMail(QString,QString)");
 			e << name << email;
 			return;
 		} else
