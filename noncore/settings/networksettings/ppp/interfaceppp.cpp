@@ -1,5 +1,8 @@
 
 #include <qmessagebox.h>
+#include <qlayout.h>
+#include <qlineedit.h>
+#include <qlabel.h>
 #define i18n QObject::tr
 
 #include "auth.h"
@@ -52,13 +55,22 @@ bool InterfacePPP::refresh()
 void InterfacePPP::start()
 {
     qDebug("InterfacePPP::start");
-// should work...
-//     if (data()->password().isEmpty() ){
-// //FIXME: ask for password
-//         qDebug("using dummy password");
-//         QMessageBox::critical( 0, "no password", "you should be prompted for a password, but you are not! ;-)");
-//     }
 
+    if (data()->password().isEmpty() && !data()->storedUsername().isEmpty() ) {
+
+        QDialog mb( 0, "Dialog", true );
+        mb.setCaption( tr( "No password" ) );
+        QVBoxLayout layout( &mb );
+        QLabel text ( &mb  );
+        text.setText( tr("Username defined but no password\n Please enter a password") );
+        QLineEdit lineedit( &mb );
+        lineedit.setEchoMode( QLineEdit::Password );
+        layout.addWidget( &text );
+        layout.addWidget( &lineedit );
+        if ( mb.exec() == QDialog::Accepted )  {
+            data()->setPassword( lineedit.text() );
+        }
+    }
 
   QFileInfo info(pppdPath());
 
