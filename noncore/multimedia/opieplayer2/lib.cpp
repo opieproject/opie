@@ -6,7 +6,7 @@
 #include <qfile.h>
 
 #include "frame.h"
-#include "xinelib.h"
+#include "lib.h"
 
 
 

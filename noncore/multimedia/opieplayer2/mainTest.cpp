@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "xinelib.h"
+#include "lib.h"
 
 int main( int argc,  char *argv[] ) {
     printf("FixME\n");
