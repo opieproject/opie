@@ -17,6 +17,7 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	launcher/netmonapplet \
 	launcher/screenshotapplet \
 	launcher/clipboardapplet \
+	launcher/cardmon \
 	launcher/vmemo \
 	netsetup/dialup \
 	netsetup/lan \
@@ -24,8 +25,6 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	core/opieplayer/libmpeg3 \
 	core/opieplayer/libmad \
 	core/opieplayer/wavplugin \
-	cardmon \
-	sdmon 
 
 APPS=$(LOCALAPPS) core/addressbook calculator clock datebook \
     filebrowser helpbrowser minesweep core/opieplayer \
