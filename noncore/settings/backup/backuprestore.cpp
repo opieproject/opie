@@ -252,10 +252,11 @@ void BackupAndRestore::backup()
     qDebug( "Storing file: %s", outputFile.latin1() );
     outputFile += EXTENSION;
 
-    QString commandLine = QString( "(tar -C %1 -z --exclude=*.bck -c %2 > %3 ) 2> %4" ).arg( QDir::homeDirPath() )
-                                                                           .arg( backupFiles )
-                                                                           .arg( outputFile.latin1() )
-                                                                           .arg( tempFileName.latin1() );
+    QString commandLine = QString( "cd %1 && (tar -X %1 -cz %2 -f %3 ) 2> %4" ).arg( QDir::homeDirPath() )
+                          .arg( getExcludeFile() )
+                          .arg( backupFiles )
+                          .arg( outputFile.latin1() )
+                          .arg( tempFileName.latin1() );
 
     qDebug( commandLine );
 
@@ -420,9 +421,9 @@ void BackupAndRestore::restore()
 
     qDebug( restoreFile );
 
-    QString commandLine = QString( "tar -C %1 -zxf %2 2> %3" ).arg( QDir::homeDirPath() )
-                                                              .arg( restoreFile.latin1() )
-                                                              .arg( tempFileName.latin1() );
+    QString commandLine = QString( "cd %1 && tar -zxf %2 2> %3" ).arg( QDir::homeDirPath() )
+                          .arg( restoreFile.latin1() )
+                          .arg( tempFileName.latin1() );
 
     qDebug( commandLine );
 
@@ -475,6 +476,35 @@ void BackupAndRestore::restore()
     config.writeEntry( "LastRestoreLocation", restoreSource->currentText() );
 
     setCaption(tr("Backup and Restore"));
+}
+
+
+/**
+ * Check for exclude in Applications/backup
+ * If it does not exist, the function will create the file with *.bck as content
+ * The exclude_files is read by tar and will provide to exclude special files out from backup. 
+ * e.g. alle *.bck files (backup-files) will not be backed up by default
+ */
+
+QString BackupAndRestore::getExcludeFile()
+{
+    QString excludeFileName = Global::applicationFileName( "backup", "exclude" );
+    if ( !QFile::exists( excludeFileName ) )
+    {
+        QFile excludeFile( excludeFileName);
+        if ( excludeFile.open( IO_WriteOnly ) == true )
+        {
+            QTextStream writeStream( &excludeFile );
+            writeStream << "*.bck" << "\n";
+            excludeFile.close();
+        }
+        else
+        {
+            return QString::null;
+        }
+    }
+
+    return excludeFileName;
 }
 
 // backuprestore.cpp

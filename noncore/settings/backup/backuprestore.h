@@ -31,6 +31,7 @@ private slots:
 private:
     void scanForApplicationSettings();
     int getBackupFiles(QString &backupFiles, QListViewItem *parent);
+    QString getExcludeFile();
     QMap<QString, QString> backupLocations;
     QList<QListViewItem> getAllItems(QListViewItem *item, QList<QListViewItem> &list);
 
