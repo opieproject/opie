@@ -25,6 +25,13 @@
 #include <qsound.h>
 #include <qfile.h>
 
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/ioctl.h>
+#include <sys/soundcard.h>
+
+#include "config.h"
+#include <qmessagebox.h>
 #ifndef QT_NO_SOUND
 static int WAVsoundDuration(const QString& filename)
 {
@@ -99,11 +106,13 @@ public:
 	QSound(Resource::findSound(name)),
 	filename(Resource::findSound(name))
     {
+	loopsleft=0;    
     }
 
-    void playLoop()
+    void playLoop(int loopcnt = -1)
     {
 	// needs server support
+	loopsleft = loopcnt;
 
 	int ms = WAVsoundDuration(filename);
 	if ( ms )
@@ -111,13 +120,24 @@ public:
 	play();
     }
 
-    void timerEvent(QTimerEvent*)
+    void timerEvent ( QTimerEvent *e )
     {
+	if (loopsleft >= 0) {
+	    if (--loopsleft <= 0)
+		killTimer (e->timerId());
+		return;
+	}	    
 	play();
+    }
+    
+    bool isFinished ( ) const
+    {
+	return ( loopsleft == 0 );
     }
 
 private:
     QString filename;
+    int loopsleft;
 };
 #endif
 
@@ -139,7 +159,7 @@ void Sound::play()
 {
 #ifndef QT_NO_SOUND
     d->killTimers();
-    d->play();
+    d->playLoop(1);
 #endif
 }
 
@@ -158,16 +178,16 @@ void Sound::stop()
 #endif
 }
 
+bool Sound::isFinished() const
+{
+#ifndef QT_NO_SOUND
+    return d->isFinished();
+#endif
+}
 
 void Sound::soundAlarm()
 {
-#ifdef QT_QWS_CUSTOM
-# ifndef QT_NO_COP
+#ifndef QT_NO_COP
     QCopEnvelope( "QPE/TaskBar", "soundAlarm()" );
-# endif
-#else
-# ifndef QT_NO_SOUND
-    QSound::play(Resource::findSound("alarm"));
-# endif
 #endif    
 }

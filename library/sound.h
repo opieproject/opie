@@ -32,6 +32,8 @@ public:
     void playLoop();
     void stop();
 
+	bool isFinished ( ) const;
+
     static void soundAlarm();
     //static void soundClick();
     //static void soundTap();
