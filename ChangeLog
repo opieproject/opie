@@ -7,6 +7,8 @@
 	----------
 	* #1236 - VCards contained empty home and work address entries causing Palms to crash (eilers)
 	* #1536 - Autosave of custom locations in opie backup (ar)
+	* #1539 - Fixed displaying too long path in the delete dialog in opie-eye (zecke)
+	* #1540 - Implemented deletion of DocLnks in opie-eye
 
 	Internal
 	--------
