@@ -25,6 +25,7 @@
                              Boston, MA 02111-1307, USA.
 
 */
+#include <qdatetime.h>
 #include <qpe/categoryselect.h>
 
 #include "todomanager.h"
@@ -33,51 +34,60 @@ using namespace Todo;
 
 TodoManager::TodoManager( QObject *obj )
     : QObject( obj ) {
-    m_db = new Opie::ToDoDB();
+    m_db = new OTodoAccess();
+    QTime time;
+    time.start();
     m_db->load();
+    int el = time.elapsed();
+    qWarning("QTimer for loading %d", el/1000 );
 }
 TodoManager::~TodoManager() {
     delete m_db;
 }
-Opie::ToDoEvent TodoManager::event(int uid ) {
-    return m_db->findEvent( uid );
+OTodo TodoManager::event(int uid ) {
+    return m_db->find( uid );
 }
-Opie::ToDoDB::Iterator TodoManager::begin() {
-    return m_db->rawToDos();
+OTodoAccess::List::Iterator TodoManager::begin() {
+    m_list = m_db->allRecords();
+    m_it = m_list.begin();
+    return m_it;
 }
-Opie::ToDoDB::Iterator TodoManager::end() {
-    return m_db->end();
+OTodoAccess::List::Iterator TodoManager::end() {
+    return m_list.end();
 }
-Opie::ToDoDB::Iterator TodoManager::overDue() {
-    return m_db->overDue();
+OTodoAccess::List::Iterator TodoManager::overDue() {
+    m_list = m_db->overDue();
+    m_it = m_list.begin();
+    return m_it;
 }
-Opie::ToDoDB::Iterator TodoManager::fromTo( const QDate& start,
+OTodoAccess::List::Iterator TodoManager::fromTo( const QDate& start,
                                       const QDate& end ) {
-    return m_db->effectiveToDos( start, end );
+    m_list = m_db->effectiveToDos( start, end );
+    m_it = m_list.begin();
+    return m_it;
 }
-Opie::ToDoDB::Iterator TodoManager::query( const ToDoEvent& ev, int query ) {
-    return m_db->queryByExample( ev, query );
+OTodoAccess::List::Iterator TodoManager::query( const OTodo& ev, int query ) {
+    m_list = m_db->queryByExample( ev, query );
+    m_it = m_list.begin();
+    return m_it;
 }
-Opie::ToDoDB* TodoManager::todoDB() {
+OTodoAccess* TodoManager::todoDB() {
     return m_db;
 }
-void TodoManager::add( const Opie::ToDoEvent& ev ) {
-    m_db->addEvent( ev );
+void TodoManager::add( const OTodo& ev ) {
+    m_db->add( ev );
 }
 void TodoManager::update( int, const SmallTodo& ) {
 
 }
-void TodoManager::update( int, const Opie::ToDoEvent& ev) {
-    m_db->replaceEvent( ev );
+void TodoManager::update( int, const OTodo& ev) {
+    m_db->replace( ev );
 }
 void TodoManager::remove( int uid ) {
-    //Opie::ToDoEvent ev = m_db->findEvent( uid );
-    ToDoEvent ev;
-    ev.setUid( uid );
-    m_db->removeEvent( ev );
+    m_db->remove( uid );
 }
 void TodoManager::removeAll() {
-    m_db->removeAll();
+    m_db->clear();
 }
 void TodoManager::save() {
     m_db->save();

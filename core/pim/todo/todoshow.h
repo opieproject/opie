@@ -31,9 +31,8 @@
 #include <qstring.h>
 #include <qwidget.h>
 
-#include <opie/todoevent.h>
+#include <opie/otodo.h>
 
-using namespace Opie;
 namespace Todo {
     /**
      * TodoShow is the baseclass of
@@ -46,7 +45,7 @@ namespace Todo {
         TodoShow();
         virtual ~TodoShow();
         virtual QString type()const = 0;
-        virtual void slotShow( const ToDoEvent& ev ) = 0;
+        virtual void slotShow( const OTodo& ev ) = 0;
         virtual QWidget* widget() = 0;
     };
 };

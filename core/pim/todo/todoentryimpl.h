@@ -23,8 +23,8 @@
 
 #include "todoentry.h"
 
-#include <opie/todoevent.h>
-#include <opie/ocontactselector.h>
+#include <opie/otodo.h>
+//#include <opie/ocontactselector.h>
 
 #include <qdatetime.h>
 #include <qpalette.h>
@@ -33,31 +33,31 @@ class QLabel;
 class QTimer;
 class DateBookMonth;
 
-using namespace Opie;
+
 
 class NewTaskDialog : public NewTaskDialogBase
 {
     Q_OBJECT
 
 public:
-    NewTaskDialog( const ToDoEvent &task, QWidget *parent = 0, const char* name = 0,
+    NewTaskDialog( const OTodo& task, QWidget *parent = 0, const char* name = 0,
 		   bool modal = FALSE, WFlags fl = 0 );
     NewTaskDialog( int id, QWidget* parent = 0, const char* name = 0,
 		   bool modal = FALSE, WFlags fl = 0 );
     ~NewTaskDialog();
 
-    ToDoEvent todoEntry();
+    OTodo todoEntry();
 
 protected slots:
     void dateChanged( int y, int m, int d );
-    void groupButtonClicked (); 
+    void groupButtonClicked ();
     void slotCopy();
 protected:
     virtual void accept();
 
 private:
     void init();
-    ToDoEvent todo;
+    OTodo todo;
     QDate date;
     DateBookMonth *picker;
 };

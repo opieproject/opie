@@ -32,11 +32,11 @@
 #include <qtable.h>
 #include <qmap.h>
 
+#include "tableitems.h"
 #include "todoview.h"
 
-using namespace Opie;
-
 class QTimer;
+
 namespace Todo {
     class CheckItem;
     class DueTextItem;
@@ -46,19 +46,19 @@ namespace Todo {
         TableView( MainWindow*, QWidget* parent );
         ~TableView();
 
-        void updateFromTable( const ToDoEvent&, CheckItem* = 0 );
-        ToDoEvent find(int uid);
+        void updateFromTable( const OTodo&, CheckItem* = 0 );
+        OTodo find(int uid);
 
         QString type()const;
         int current();
         QString currentRepresentation();
 
         void showOverDue( bool );
-        void setTodos( ToDoDB::Iterator it,
-                       ToDoDB::Iterator end );
-        void setTodo( int uid, const ToDoEvent& );
-        void addEvent( const ToDoEvent& event );
-        void replaceEvent( const ToDoEvent& );
+        void setTodos( OTodoAccess::List::Iterator it,
+                       OTodoAccess::List::Iterator end );
+        void setTodo( int uid, const OTodo& );
+        void addEvent( const OTodo& event );
+        void replaceEvent( const OTodo& );
         void removeEvent( int uid );
         void setShowCompleted( bool );
         void setShowDeadline( bool );
@@ -70,11 +70,15 @@ namespace Todo {
         QWidget* widget();
         void sortColumn(int, bool, bool );
     private:
-        QMap<int, CheckItem*> m_cache;
-        void insertTodo( const ToDoEvent& );
+        /* reimplented for internal reasons */
+        void viewportPaintEvent( QPaintEvent* );
+        inline void insertTodo( const OTodo& );
         CheckItem* checkItem( int row );
         DueTextItem* dueItem( int row );
         QTimer *m_menuTimer;
+        QMap<int, CheckItem*> m_cache;
+        bool m_enablePaint:1;
+
 private slots:
         void slotShowMenu();
         void slotClicked(int, int, int,
@@ -84,6 +88,35 @@ private slots:
         void slotValueChanged(int, int);
         void slotCurrentChanged(int, int );
     };
+    inline void TableView::insertTodo( const OTodo& event ) {
+        int row = numRows();
+        setNumRows( row + 1 );
+
+
+        QString sortKey =  (char) ( (event.isCompleted() ? 'a' : 'A' )
+                                    + event.priority() )
+                           +  Qtopia::buildSortKey( event.description() );
+        CheckItem *chk = new CheckItem( this, sortKey, event.uid(), event.categories() );
+        chk->setChecked( event.isCompleted() );
+
+        ComboItem *cmb = new ComboItem(this,  QTableItem::WhenCurrent );
+        cmb->setText( QString::number( event.priority() ) );
+
+        QString sum = event.summary();
+        QTableItem* ti = new TodoTextItem( this, sum.isEmpty() ?
+                                           event.description().left(40).simplifyWhiteSpace() :
+                                           sum );
+        ti->setReplaceable( FALSE );
+
+        DueTextItem *due = new DueTextItem(this, event );
+
+        setItem( row, 0, chk );
+        setItem( row, 1, cmb );
+        setItem( row, 2, ti  );
+        setItem( row, 3, due );
+
+        m_cache.insert( event.uid(), chk );
+    }
 };
 
 #endif

@@ -14,28 +14,28 @@ namespace {
     public:
         TemplateListItem( QListView*,
                           const QString& name,
-                          const Opie::ToDoEvent& );
+                          const OTodo& );
         ~TemplateListItem();
 
-        Opie::ToDoEvent event()const;
+        OTodo event()const;
         QString text()const;
         void setText(const QString& str );
-        void setEvent( const Opie::ToDoEvent& );
+        void setEvent( const OTodo& );
     private:
         QString m_name;
-        Opie::ToDoEvent m_ev;
+        OTodo m_ev;
     };
 
     /* implementation */
     TemplateListItem::TemplateListItem( QListView* view,
                                         const QString& text,
-                                        const ToDoEvent& ev )
+                                        const OTodo& ev )
         : QListViewItem( view ), m_name( text ), m_ev( ev )
     {
         QListViewItem::setText(0, m_name );
     }
     TemplateListItem::~TemplateListItem() {}
-    ToDoEvent TemplateListItem::event() const {
+    OTodo TemplateListItem::event() const {
         return m_ev;
     }
     QString TemplateListItem::text()const {
@@ -45,7 +45,7 @@ namespace {
         QListViewItem::setText(0, str );
         m_name = str;
     }
-    void TemplateListItem::setEvent( const ToDoEvent& ev) {
+    void TemplateListItem::setEvent( const OTodo& ev) {
         m_ev = ev;
     }
 }
@@ -71,7 +71,7 @@ TemplateDialogImpl::~TemplateDialogImpl() {
 }
 void TemplateDialogImpl::slotAdd() {
     QString str = tr("New Template %1").arg( listView()->childCount() );
-    ToDoEvent ev;
+    OTodo ev;
     m_man->addEvent(str, ev);
     new TemplateListItem( listView(), str, ev );
 }
@@ -85,7 +85,7 @@ void TemplateDialogImpl::slotRemove() {
 }
 void TemplateDialogImpl::slotEdit() {
     TemplateListItem* item = (TemplateListItem*)listView()->currentItem();
-    ToDoEvent ev = m_win->currentEditor()->edit( m_win, item->event() );
+    OTodo ev = m_win->currentEditor()->edit( m_win, item->event() );
     if ( m_win->currentEditor()->accepted() ) {
         qWarning("accepted");
         item->setEvent( ev );

@@ -31,7 +31,7 @@
 #include <qpopupmenu.h>
 
 #include "mainwindow.h"
-#include "tableitems.h"
+//#include "tableitems.h"
 #include "tableview.h"
 
 using namespace Todo;
@@ -39,6 +39,9 @@ using namespace Todo;
 
 TableView::TableView( MainWindow* window, QWidget* wid )
     : QTable(  wid ), TodoView( window ) {
+    setUpdatesEnabled( false );
+    viewport()->setUpdatesEnabled( false );
+    m_enablePaint = false;
     setNumRows(0);
     setNumCols(4);
 
@@ -77,6 +80,10 @@ TableView::TableView( MainWindow* window, QWidget* wid )
     connect( m_menuTimer, SIGNAL(timeout()),
              this, SLOT(slotShowMenu()) );
 
+    m_enablePaint = true;
+    setUpdatesEnabled( true );
+    viewport()->setUpdatesEnabled( true );
+    viewport()->update();
 }
 /* a new day has started
  * update the day
@@ -93,11 +100,11 @@ void TableView::slotShowMenu() {
     menu->exec(QCursor::pos() );
     delete menu;
 }
-ToDoEvent TableView::find(int uid ) {
-    ToDoEvent ev = TodoView::event( uid );
+OTodo TableView::find(int uid ) {
+    OTodo ev = TodoView::event( uid );
     return ev;
 }
-void TableView::updateFromTable( const ToDoEvent& ev, CheckItem* item ) {
+void TableView::updateFromTable( const OTodo& ev, CheckItem* item ) {
     TodoView::update( ev.uid(), ev );
 
     /* update the other columns */
@@ -133,63 +140,50 @@ void TableView::showOverDue( bool ) {
     clear();
     setTodos( begin(), end() );
 }
-void TableView::insertTodo( const ToDoEvent& event ) {
-    int row = numRows();
-    setNumRows( row + 1 );
 
-
-    QString sortKey =  (char) ( (event.isCompleted() ? 'a' : 'A' )
-                                + event.priority() )
-                       +  Qtopia::buildSortKey( event.description() );
-    CheckItem *chk = new CheckItem( this, sortKey, event.uid(), event.categories() );
-    chk->setChecked( event.isCompleted() );
-
-    ComboItem *cmb = new ComboItem(this,  QTableItem::WhenCurrent );
-    cmb->setText( QString::number( event.priority() ) );
-
-    QString sum = event.summary();
-    QTableItem* ti = new TodoTextItem( this, sum.isEmpty() ?
-                                       event.description().left(40).simplifyWhiteSpace() :
-                                       sum );
-    ti->setReplaceable( FALSE );
-
-    DueTextItem *due = new DueTextItem(this, event );
-
-    setItem( row, 0, chk );
-    setItem( row, 1, cmb );
-    setItem( row, 2, ti  );
-    setItem( row, 3, due );
-
-    m_cache.insert( event.uid(), chk );
-
-};
-void TableView::setTodos( ToDoDB::Iterator it,
-                          ToDoDB::Iterator end ) {
+void TableView::setTodos( OTodoAccess::List::Iterator it,
+                          OTodoAccess::List::Iterator end ) {
+    QTime time;
+    time.start();
+    m_enablePaint = false;
+    setUpdatesEnabled( false );
+    viewport()->setUpdatesEnabled( false );
     clear();
+    QString currentCat = todoWindow()->currentCategory();
+    bool showCompleted = todoWindow()->currentCatId();
+    bool showOverDue   = todoWindow()->showOverDue();
     qWarning( "Current Category:" + todoWindow()->currentCategory() );
+    int id = todoWindow()->currentCatId();
+    QTime t;
+    t.start();
     for (; it != end; ++it ) {
         /* test if the categories match */
-        if ( !todoWindow()->currentCategory().isEmpty() &&
-             !(*it).categories().contains( todoWindow()->currentCatId() ) ) {
-            qWarning("not empty and not contains continue");
+        if ( !currentCat.isEmpty() &&
+             !(*it).categories().contains( id ) ) {
             continue;
         }
         /* the item is completed but we shouldn't show it */
-        if ( !todoWindow()->showCompleted() && (*it).isCompleted() ) {
-            qWarning("not show completed but is completed ");
+        if ( !showCompleted && (*it).isCompleted() ) {
             continue;
         }
         /* the item is not overdue but we should only show overdue */
-        if ( todoWindow()->showOverDue() && !(*it).isOverdue() ) {
-            qWarning("show over due but not over due");
+        if ( showOverDue && !(*it).isOverdue() ) {
             continue;
         }
         /* now it's fine to add it */
         insertTodo( (*it) );
 
     }
+    int elc = time.elapsed();
+    qWarning("Adding took %d", elc/1000 );
+    setUpdatesEnabled( true );
+    viewport()->setUpdatesEnabled( true );
+    viewport()->update();
+    m_enablePaint = true;
+    int el = time.elapsed();
+    qWarning("adding took %d", el/1000 );
 }
-void TableView::setTodo( int uid, const ToDoEvent& ev ) {
+void TableView::setTodo( int uid, const OTodo& ev ) {
     QMap<int, CheckItem*>::Iterator it = m_cache.find( uid );
 
     if ( it != m_cache.end() ) {
@@ -214,14 +208,14 @@ void TableView::setTodo( int uid, const ToDoEvent& ev ) {
         due->setToDoEvent( ev );
     }
 }
-void TableView::addEvent( const ToDoEvent& ev) {
+void TableView::addEvent( const OTodo& ev) {
     insertTodo( ev );
 }
 /*
  * find the event
  * and then replace the complete row
  */
-void TableView::replaceEvent( const ToDoEvent& ev) {
+void TableView::replaceEvent( const OTodo& ev) {
     setTodo( ev.uid(), ev );
 }
 /*
@@ -352,4 +346,9 @@ QWidget* TableView::widget() {
 void TableView::sortColumn( int row, bool asc, bool ) {
     QTable::sortColumn( row, asc, TRUE );
 
+}
+void TableView::viewportPaintEvent( QPaintEvent* e) {
+    qWarning("Paint event" );
+    if (m_enablePaint )
+        QTable::viewportPaintEvent( e );
 }

@@ -20,13 +20,20 @@
 
 #include "mainwindow.h"
 
+
+#include <qdatetime.h>
+
 #include <qpe/qpeapplication.h>
 
 int main( int argc, char **argv )
 {
     QPEApplication a( argc, argv );
 
+    QTime time;
+    time.start();
     Todo::MainWindow mw;
+    int t = time.elapsed();
+    qWarning("QTime %d", t/1000 );
     mw.setCaption("Opie Todolist");
     QObject::connect( &a, SIGNAL( flush() ), &mw, SLOT( slotFlush() ) );
     QObject::connect( &a, SIGNAL( reload() ), &mw, SLOT( slotReload() ) );

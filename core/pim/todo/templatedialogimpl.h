@@ -3,7 +3,7 @@
 
 #include <qlistview.h>
 
-#include <opie/todoevent.h>
+#include <opie/otodo.h>
 
 #include "templatedialog.h"
 

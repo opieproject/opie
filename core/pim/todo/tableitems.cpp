@@ -46,7 +46,7 @@ void CheckItem::setChecked( bool b ) {
 }
 void CheckItem::toggle() {
     TableView* view = static_cast<TableView*>( table() );
-    ToDoEvent ev = view->find( view->current() );
+    OTodo ev = view->find( view->current() );
     ev.setCompleted(!isChecked() );
     view->updateFromTable( ev );
 
@@ -86,7 +86,7 @@ QWidget* ComboItem::createEditor()const {
 }
 void ComboItem::setContentFromEditor( QWidget* w) {
     TableView* view = static_cast<TableView*>( table() );
-    ToDoEvent ev = view->find( view->current() );
+    OTodo ev = view->find( view->current() );
 
     if ( w->inherits( "QComboBox" ) )
         setText( ( (QComboBox*)w )->currentText() );
@@ -119,7 +119,7 @@ TodoTextItem::TodoTextItem( QTable* t,
 {}
 
 /* DueTextItem */
-DueTextItem::DueTextItem( QTable* t, const ToDoEvent& ev)
+DueTextItem::DueTextItem( QTable* t, const OTodo& ev)
     : QTableItem(t, Never, QString::null )
 {
     setToDoEvent( ev );
@@ -148,7 +148,7 @@ void DueTextItem::setCompleted( bool comp ) {
     m_completed = comp;
     table()->updateCell( row(), col() );
 }
-void DueTextItem::setToDoEvent( const ToDoEvent& ev ) {
+void DueTextItem::setToDoEvent( const OTodo& ev ) {
     m_hasDate = ev.hasDueDate();
     m_completed = ev.isCompleted();
 

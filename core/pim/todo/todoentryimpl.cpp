@@ -22,8 +22,7 @@
 #include "todoentryimpl.h"
 
 #include <opie/oclickablelabel.h>
-#include <opie/todoevent.h>
-#include <opie/tododb.h>
+#include <opie/otodo.h>
 
 #include <qpe/categoryselect.h>
 #include <qpe/datebookmonth.h>
@@ -44,14 +43,14 @@
 #include <qlabel.h>
 #include <qtimer.h>
 #include <qapplication.h>
-#include <qvaluelist.h> 
+#include <qvaluelist.h>
 
-NewTaskDialog::NewTaskDialog( const ToDoEvent& task, QWidget *parent,
+NewTaskDialog::NewTaskDialog( const OTodo& task, QWidget *parent,
 			      const char *name, bool modal, WFlags fl )
     : NewTaskDialogBase( parent, name, modal, fl ),
       todo( task )
 {
-    todo.setCategories( task.allCategories() );
+    todo.setCategories( task.categories() );
     if ( todo.hasDueDate() )
 	date = todo.dueDate();
     else
@@ -81,11 +80,8 @@ NewTaskDialog::NewTaskDialog( int id, QWidget* parent,  const char* name, bool m
     : NewTaskDialogBase( parent, name, modal, fl ),
       date( QDate::currentDate() )
 {
-    if ( id != -1 ) {
-	QArray<int> ids( 1 );
-	ids[0] = id;
-	todo.setCategory( Qtopia::Record::idsToString( ids ) );
-    }
+    if ( id != -1 ) 
+	todo.setCategories( id );
     init();
 }
 
@@ -125,10 +121,10 @@ void NewTaskDialog::dateChanged( int y, int m, int d )
 }
 void NewTaskDialog::groupButtonClicked ()
 {
-	OContactSelectorDialog cd( this );
+/*	OContactSelectorDialog cd( this );
 	QArray<int> todo_relations = todo.relations ( "addressbook" );
 	QValueList<int> selectedContacts;
-	
+
 	for ( uint i=0; i < todo_relations.size(); i++ ){
 		printf ("old: %d\n", todo_relations[i]);
 		selectedContacts.append( todo_relations[i] );
@@ -143,12 +139,12 @@ void NewTaskDialog::groupButtonClicked ()
 			printf ("Adding: %d\n", (*it));
 			todo.addRelated( "addressbook", (*it) );
 		}
-	
-	}
 
+	}
+*/
 }
 
-ToDoEvent NewTaskDialog::todoEntry()
+OTodo NewTaskDialog::todoEntry()
 {
   if( checkDate->isChecked() ){
     todo.setDueDate( date );
@@ -159,8 +155,7 @@ ToDoEvent NewTaskDialog::todoEntry()
   if ( comboCategory->currentCategory() != -1 ) {
     QArray<int> arr = comboCategory->currentCategories();
     QStringList list;
-    list = QStringList::split(";", Qtopia::Record::idsToString( arr )) ;
-    todo.setCategories( list );
+    todo.setCategories( arr );
   }
   todo.setPriority( comboPriority->currentItem() + 1 );
   todo.setCompleted( checkCompleted->isChecked() );
@@ -171,7 +166,7 @@ ToDoEvent NewTaskDialog::todoEntry()
   todo.setProgress( text.remove( text.length()-1, 1 ).toUShort() );
   return todo;
 }
-void NewTaskDialog::slotCopy() 
+void NewTaskDialog::slotCopy()
 {
     txtTodo->clear();
     txtTodo->setText( lneSum->text() );

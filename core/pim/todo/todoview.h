@@ -34,11 +34,10 @@
 #include <qvaluelist.h>
 #include <qwidget.h>
 
-#include <opie/tododb.h>
+#include <opie/otodoaccess.h>
 
 #include "smalltodo.h"
 
-using namespace Opie;
 
 namespace Todo {
 
@@ -59,7 +58,7 @@ namespace Todo {
             emit update(uid, to );
         }
         void emitUpdate( int uid,
-                         const ToDoEvent& ev ){
+                         const OTodo& ev ){
             emit update(uid, ev );
         }
         void emitRemove( int uid ) {
@@ -72,7 +71,7 @@ namespace Todo {
         void showTodo(int uid );
         void edit(int uid );
         void update( int uid, const Todo::SmallTodo& );
-        void update( int uid, const Opie::ToDoEvent& );
+        void update( int uid, const OTodo& );
         /* sorry you need to cast */;
         void update( QWidget* wid );
         void remove( int uid );
@@ -90,11 +89,11 @@ namespace Todo {
         virtual int current() = 0;
         virtual QString currentRepresentation() = 0;
         virtual void showOverDue( bool ) = 0;
-        virtual void setTodos( ToDoDB::Iterator it,
-                               ToDoDB::Iterator end ) = 0;
+        virtual void setTodos( OTodoAccess::List::Iterator it,
+                               OTodoAccess::List::Iterator end ) = 0;
 
-        virtual void addEvent( const ToDoEvent& ) = 0;
-        virtual void replaceEvent( const ToDoEvent& ) = 0;
+        virtual void addEvent( const OTodo& ) = 0;
+        virtual void replaceEvent( const OTodo& ) = 0;
         virtual void removeEvent( int uid ) = 0;
         virtual void setShowCompleted( bool ) = 0;
         virtual void setShowDeadline( bool ) = 0;
@@ -153,9 +152,9 @@ namespace Todo {
                             const char* slot );
     protected:
         MainWindow* todoWindow();
-        ToDoEvent event(int uid );
-        ToDoDB::Iterator begin();
-        ToDoDB::Iterator end();
+        OTodo event(int uid );
+        OTodoAccess::List::Iterator begin();
+        OTodoAccess::List::Iterator end();
 
         /*
           These things needs to be implemented
@@ -166,7 +165,7 @@ namespace Todo {
         void showTodo( int uid ) { hack->emitShow(uid); }
         void edit( int uid ) { hack->emitEdit(uid); }
         void update(int uid, const SmallTodo& to );
-        void update(int uid, const ToDoEvent& ev);
+        void update(int uid, const OTodo& ev);
         void remove( int uid ) {
             hack->emitRemove( uid );
         }

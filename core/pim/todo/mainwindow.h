@@ -32,8 +32,8 @@
 #include <qlist.h>
 #include <qmainwindow.h>
 
-#include <opie/tododb.h>
-#include <opie/todoevent.h>
+#include <opie/otodoaccess.h>
+#include <opie/otodo.h>
 
 #include "smalltodo.h"
 #include "todoview.h"
@@ -46,7 +46,6 @@ class QAction;
 class QWidgetStack;
 class Ir;
 
-using namespace Opie;
 
 namespace Todo {
     typedef TodoView View;
@@ -54,6 +53,7 @@ namespace Todo {
     class Editor;
     class TodoShow;
     class TemplateEditor;
+
     class MainWindow : public QMainWindow {
         Q_OBJECT
     public:
@@ -61,7 +61,7 @@ namespace Todo {
                     const char* name = 0 );
         ~MainWindow();
 
-        /** return a context menu for a ToDoEvent */
+        /** return a context menu for an OTodo */
         QPopupMenu* contextMenu(int uid );
         QPopupMenu* options();
         QPopupMenu* edit();
@@ -69,9 +69,11 @@ namespace Todo {
         QToolBar*   toolbar();
 
 
-        ToDoDB::Iterator begin();
-        ToDoDB::Iterator end();
-        ToDoEvent event(int uid );
+        OTodoAccess::List::Iterator begin();
+        OTodoAccess::List::Iterator  end();
+//        OTodoAccess::List::Iterator &iterator();
+
+        OTodo event(int uid );
 
         bool isSyncing()const;
         bool showCompleted()const;
@@ -81,7 +83,7 @@ namespace Todo {
         int currentCatId();
         TemplateManager* templateManager();
 
-        void updateTodo( const ToDoEvent& );
+        void updateTodo( const OTodo& );
         void populateTemplates();
         Editor* currentEditor();
 private slots:

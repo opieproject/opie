@@ -247,7 +247,7 @@ void MainWindow::connectBase( ViewBase* base) {
     base->connectUpdateSmall( this,
                               SLOT(slotUpate1(int, const Todo::SmallTodo&)  ));
     base->connectUpdateBig( this,
-                            SLOT(slotUpate2(int, const Opie::ToDoEvent& ) ) );
+                            SLOT(slotUpate2(int, const OTodo& ) ) );
     base->connectUpdateView( this, SLOT(slotUpdate3( QWidget* ) ) ) ;
     base->connectRemove(&m_todoMgr,
                         SLOT(remove(int)) );
@@ -275,13 +275,13 @@ QPopupMenu* MainWindow::view() {
 QToolBar* MainWindow::toolbar() {
     return m_tool;
 }
-ToDoDB::Iterator MainWindow::begin() {
+OTodoAccess::List::Iterator MainWindow::begin() {
     return m_todoMgr.begin();
 }
-ToDoDB::Iterator MainWindow::end() {
+OTodoAccess::List::Iterator MainWindow::end() {
     return m_todoMgr.end();
 }
-ToDoEvent MainWindow::event( int uid ) {
+OTodo MainWindow::event( int uid ) {
     return m_todoMgr.event( uid );
 }
 bool MainWindow::isSyncing()const {
@@ -369,7 +369,7 @@ void MainWindow::populateTemplates() {
 void MainWindow::slotNewFromTemplate( int id ) {
     QString name = m_template->text( id );
 
-    ToDoEvent event = templateManager()->templateEvent( name );
+    OTodo event = templateManager()->templateEvent( name );
     event = currentEditor()->edit(this,
                                   event );
 
@@ -390,7 +390,7 @@ void MainWindow::slotNew() {
     }
 
 
-    ToDoEvent todo = currentEditor()->newTodo( currentCatId(),
+    OTodo todo = currentEditor()->newTodo( currentCatId(),
                                              this );
 
     if ( currentEditor()->accepted() ) {
@@ -412,7 +412,7 @@ void MainWindow::slotDuplicate() {
                              tr("Can not edit data, currently syncing"));
         return;
     }
-    ToDoEvent ev = m_todoMgr.event( currentView()->current() );
+    OTodo ev = m_todoMgr.event( currentView()->current() );
     /* let's generate a new uid */
     ev.setUid(-1);
     m_todoMgr.add( ev );
@@ -485,7 +485,6 @@ void MainWindow::setCategory( int c) {
 
     if (c == 1 ) {
         m_curCat = QString::null;
-        currentView()->setShowCategory( QString::null );
         setCaption( tr("Todo") + " - " + tr("All Categories" ) );
 
     }else if ( c == (int)m_catMenu->count() - 1 ) {
@@ -586,7 +585,7 @@ void MainWindow::slotEdit( int uid ) {
 	return;
     }
 
-    ToDoEvent todo = m_todoMgr.event( uid );
+    OTodo todo = m_todoMgr.event( uid );
 
     todo = currentEditor()->edit(this, todo );
 
@@ -605,7 +604,7 @@ void MainWindow::slotUpdate1( int uid, const SmallTodo& ev) {
     m_todoMgr.update( uid, ev );
 }
 */
-void MainWindow::updateTodo(  const ToDoEvent& ev) {
+void MainWindow::updateTodo(  const OTodo& ev) {
     m_todoMgr.update( ev.uid() , ev );
 }
 /* The view changed it's configuration

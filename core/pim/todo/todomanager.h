@@ -35,12 +35,11 @@
 
 #include <qpe/categories.h>
 
-#include <opie/tododb.h>
-#include <opie/todoevent.h>
+#include <opie/otodo.h>
+#include <opie/otodoaccess.h>
 
 #include "smalltodo.h"
 
-using namespace Opie;
 
 namespace Todo {
     class TodoManager : public QObject{
@@ -51,15 +50,15 @@ namespace Todo {
 
         QStringList categories()/*const*/;
         int catId(const QString&);
-        ToDoEvent event(int uid );
-        ToDoDB::Iterator begin();
-        ToDoDB::Iterator end();
+        OTodo event(int uid );
+        OTodoAccess::List::Iterator begin();
+        OTodoAccess::List::Iterator end();
 
-        ToDoDB::Iterator overDue();
-        ToDoDB::Iterator fromTo( const QDate& start,
+        OTodoAccess::List::Iterator overDue();
+        OTodoAccess::List::Iterator fromTo( const QDate& start,
                                  const QDate& end );
-        ToDoDB::Iterator query( const ToDoEvent& ev, int query );
-        ToDoDB* todoDB();
+        OTodoAccess::List::Iterator query( const OTodo& ev, int query );
+        OTodoAccess* todoDB();
         bool saveAll();
 
 
@@ -68,9 +67,9 @@ namespace Todo {
         void updateCategories();
 
     public slots:
-        void add( const ToDoEvent& );
+        void add( const OTodo& );
         void update( int uid,  const SmallTodo& );
-        void update( int uid, const ToDoEvent& );
+        void update( int uid, const OTodo& );
         void remove( int uid );
         void remove( const QArray<int>& );
         void removeAll();
@@ -78,7 +77,9 @@ namespace Todo {
         void save();
 
     private:
-        ToDoDB* m_db;
+        OTodoAccess* m_db;
+        OTodoAccess::List m_list;
+        OTodoAccess::List::Iterator m_it;
         Categories m_cat;
 
     };

@@ -9,7 +9,7 @@ Editor::Editor() {
 }
 Editor::~Editor() {
 }
-ToDoEvent Editor::newTodo( int cur,
+OTodo Editor::newTodo( int cur,
                            QWidget* par) {
 
     NewTaskDialog e( cur, par, 0, TRUE );
@@ -25,13 +25,13 @@ ToDoEvent Editor::newTodo( int cur,
     }else
         m_accepted = false;
 
-    ToDoEvent ev = e.todoEntry();
-    ev.setUid(-1);
+    OTodo ev = e.todoEntry();
+    ev.setUid(1);
 
     return ev;
 }
-ToDoEvent Editor::edit( QWidget *wid,
-                        const ToDoEvent& todo ) {
+OTodo Editor::edit( QWidget *wid,
+                        const OTodo& todo ) {
     NewTaskDialog e( todo, wid, 0, TRUE );
     e.setCaption( QObject::tr( "Edit Task" ) );
 
@@ -40,7 +40,7 @@ ToDoEvent Editor::edit( QWidget *wid,
 #endif
     int ret = e.exec();
 
-    ToDoEvent ev = e.todoEntry();
+    OTodo ev = e.todoEntry();
     if ( ret == QDialog::Accepted )
         m_accepted = true;
     else

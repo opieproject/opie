@@ -33,13 +33,12 @@
 #include <qstring.h>
 #include <qstringlist.h>
 
-//using namespace Opie;
 
 namespace Todo {
     /**
      * SmallTodo holds everything necessary
-     * to represent a ToDoEvent without holding
-     * everything from a ToDoEvent
+     * to represent a OTodo without holding
+     * everything from a OTodo
      */
     class SmallTodo {
     public:

@@ -37,9 +37,8 @@
 #include <qpe/stringutil.h>
 
 #include <opie/ocheckitem.h>
-#include <opie/todoevent.h>
+#include <opie/otodo.h>
 
-using namespace Opie;
 
 namespace Todo {
 
@@ -105,11 +104,11 @@ namespace Todo {
 
     class DueTextItem : public QTableItem {
     public:
-        DueTextItem( QTable* t, const ToDoEvent& );
+        DueTextItem( QTable* t, const OTodo& );
         ~DueTextItem();
 
         QString key()const;
-        void setToDoEvent( const ToDoEvent& ev );
+        void setToDoEvent( const OTodo& ev );
         void setCompleted( bool comp );
         void paint( QPainter *p, const QColorGroup &cg,
                     const QRect& cr, bool selected );

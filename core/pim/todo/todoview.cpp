@@ -30,7 +30,7 @@ void TodoView::connectUpdateSmall( QObject* obj,
 }
 void TodoView::connectUpdateBig( QObject* obj,
                        const char* slot ) {
-    QObject::connect( hack, SIGNAL(update(int, const Opie::ToDoEvent& ) ),
+    QObject::connect( hack, SIGNAL(update(int, const OTodo& ) ),
                       obj, slot );
 }
 void TodoView::connectUpdateView( QObject* obj,
@@ -47,13 +47,13 @@ MainWindow* TodoView::todoWindow() {
     return m_main;
 }
 
-ToDoEvent TodoView::event(int uid ) { return m_main->event( uid ); }
-ToDoDB::Iterator TodoView::begin() { return m_main->begin(); }
-ToDoDB::Iterator TodoView::end() { return m_main->end(); }
+OTodo TodoView::event(int uid ) { return m_main->event( uid ); }
+OTodoAccess::List::Iterator TodoView::begin() { return m_main->begin(); }
+OTodoAccess::List::Iterator TodoView::end() { return m_main->end(); }
 
 void TodoView::update(int uid, const SmallTodo& to ) {
     //m_main->slotUpate1( uid, to );
 }
-void TodoView::update(int uid, const ToDoEvent& ev ) {
+void TodoView::update(int uid, const OTodo& ev ) {
     m_main->updateTodo( ev );
 }

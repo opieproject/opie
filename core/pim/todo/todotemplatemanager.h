@@ -4,9 +4,8 @@
 #include <qstring.h>
 #include <qmap.h>
 
-#include <opie/todoevent.h>
+#include <opie/otodo.h>
 
-using namespace Opie;
 
 namespace Todo {
     class TemplateManager {
@@ -16,14 +15,14 @@ namespace Todo {
         void load();
         void save();
         QStringList templates()const;
-        ToDoEvent templateEvent( const QString& templateName );
+        OTodo templateEvent( const QString& templateName );
 
         /* also replaces one */
-        void addEvent( const QString&, const ToDoEvent& );
+        void addEvent( const QString&, const OTodo& );
         void removeEvent( const QString& );
     private:
         QString m_path;
-        QMap<QString, ToDoEvent> m_templates;
+        QMap<QString, OTodo> m_templates;
 
 
 
