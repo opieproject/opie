@@ -22,7 +22,7 @@
 
 #include <qmainwindow.h>
 #include "db/common.h"
-#include "fileselector.h"
+#include <qpe/fileselector.h>
 
 /* Forward class declarations */
 class QWidgetStack;
@@ -98,7 +98,7 @@ private:
         ListState,
         FilterState,
         EditState,
-	FileState,
+  FileState,
     };
 
     UserState current_view;

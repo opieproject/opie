@@ -28,8 +28,9 @@
 #include "db/datacache.h"
 
 /* QPE includes */
-#include "fileselector.h"
-#include "resource.h"
+#include <qpe/fileselector.h>
+#include <qpe/resource.h>
+#include <qpe/qpetoolbar.h>
 
 /* QTE includes */
 #include <qpe/qpemenubar.h>
@@ -38,7 +39,6 @@
 #include <qwidgetstack.h>
 #include <qlayout.h>
 #include <qbuffer.h>
-
 /*!
     \class TableViewerWindow
     \brief The main window widget of the application
@@ -93,44 +93,44 @@ TableViewerWindow::TableViewerWindow(QWidget *parent, const char *name, WFlags f
     /* Build tool bar */
     navigation = new QPEToolBar(this, "navigation");
     QToolButton *newItemButton = new QToolButton(
-	    QIconSet(Resource::loadImage("new")), "New Item", QString::null,
-	    this, SLOT(newItemSlot()), navigation, "New Item");
+      QIconSet(Resource::loadPixmap("new")), "New Item", QString::null,
+      this, SLOT(newItemSlot()), navigation, "New Item");
     QToolButton *editItemButton = new QToolButton(
-	    QIconSet(Resource::loadImage("edit")), "Edit Item", QString::null,
-	    this, SLOT(editItemSlot()), navigation, "Edit Item");
+      QIconSet(Resource::loadPixmap("edit")), "Edit Item", QString::null,
+      this, SLOT(editItemSlot()), navigation, "Edit Item");
     QToolButton *deleteItemButton = new QToolButton(
-	    QIconSet(Resource::loadImage("trash")), "Delete Item", 
-	    QString::null, this, 
-	    SLOT(deleteItemSlot()), navigation, "Delete Item");
+      QIconSet(Resource::loadPixmap("trash")), "Delete Item", 
+      QString::null, this, 
+      SLOT(deleteItemSlot()), navigation, "Delete Item");
 
     navigation->addSeparator();
 
     QToolButton *firstItemButton = new QToolButton(
-	    QIconSet(Resource::loadImage("fastback")), "First Item", 
-	    QString::null, this, 
-	    SLOT(firstItem()), navigation, "First Item");
+      QIconSet(Resource::loadPixmap("fastback")), "First Item", 
+      QString::null, this, 
+      SLOT(firstItem()), navigation, "First Item");
     QToolButton *previousItemButton = new QToolButton(
-	    QIconSet(Resource::loadImage("back")), "Previous Item", 
-	    QString::null, this, 
-	    SLOT(previousItem()), navigation, "Previous Item");
+      QIconSet(Resource::loadPixmap("back")), "Previous Item", 
+      QString::null, this, 
+      SLOT(previousItem()), navigation, "Previous Item");
     QToolButton *nextItemButton = new QToolButton(
-	    QIconSet(Resource::loadImage("forward")), "Next Item", 
-	    QString::null, this, 
-	    SLOT(nextItem()), navigation, "Next Item");
+      QIconSet(Resource::loadPixmap("forward")), "Next Item", 
+      QString::null, this, 
+      SLOT(nextItem()), navigation, "Next Item");
     QToolButton *lastItemButton = new QToolButton(
-	    QIconSet(Resource::loadImage("fastforward")), "Last Item", 
-	    QString::null, this, 
-	    SLOT(lastItem()), navigation, "Last Item");
+      QIconSet(Resource::loadPixmap("fastforward")), "Last Item", 
+      QString::null, this, 
+      SLOT(lastItem()), navigation, "Last Item");
 
     navigation->addSeparator();
     QToolButton *browseButton = new QToolButton(
-	    QIconSet(Resource::loadImage("day")), "View Single Item", 
-	    QString::null, this, 
-	    SLOT(browseViewSlot()), navigation, "View Single Item");
+      QIconSet(Resource::loadPixmap("day")), "View Single Item", 
+      QString::null, this, 
+      SLOT(browseViewSlot()), navigation, "View Single Item");
     QToolButton *listButton = new QToolButton(
-	    QIconSet(Resource::loadImage("month")), "View Multiple Items", 
-	    QString::null, this, 
-	    SLOT(listViewSlot()), navigation, "View Multiple Items");
+      QIconSet(Resource::loadPixmap("month")), "View Multiple Items", 
+      QString::null, this, 
+      SLOT(listViewSlot()), navigation, "View Multiple Items");
 
     setToolBarsMovable(FALSE);
     setToolBarsMovable(FALSE);
@@ -141,7 +141,7 @@ TableViewerWindow::TableViewerWindow(QWidget *parent, const char *name, WFlags f
     listView = new TVListView(&ts, this, 0);
     filterView = new TVFilterView(&ts, this, 0);
     fileSelector = new FileSelector("text/csv;text/x-xml-tableviewer", 
-    				    this, "fileselector");
+                this, "fileselector");
     fileSelector->setNewVisible(FALSE);
     fileSelector->setCloseVisible(FALSE);
 
@@ -162,7 +162,7 @@ TableViewerWindow::TableViewerWindow(QWidget *parent, const char *name, WFlags f
 
     connect(fileSelector, SIGNAL(closeMe()), this, SLOT(browseViewSlot()));
     connect(fileSelector, SIGNAL(fileSelected(const DocLnk &)), 
-    				 this, SLOT(openDocument(const DocLnk &)));
+             this, SLOT(openDocument(const DocLnk &)));
 
     main_layout->addWidget(menu);
     main_layout->addWidget(cw);
@@ -177,7 +177,7 @@ TableViewerWindow::TableViewerWindow(QWidget *parent, const char *name, WFlags f
 TableViewerWindow::~TableViewerWindow()
 {
     if(dirty)
-    	saveDocument();
+      saveDocument();
 }
 
 /*!
@@ -186,7 +186,7 @@ TableViewerWindow::~TableViewerWindow()
 void TableViewerWindow::selectDocument()
 {
     if(dirty)
-	saveDocument();
+  saveDocument();
     current_view = FileState;
     cw->raiseWidget(current_view);
     fileSelector->reread();
@@ -195,14 +195,14 @@ void TableViewerWindow::selectDocument()
 void TableViewerWindow::saveDocument()
 {
     if(!dirty)
-	return;
+  return;
 
     FileManager fm;
     QIODevice *dev = fm.saveFile(doc);
 
     if(!ds->saveSource(dev, doc.type())){
-	qWarning("Save unsuccessful");
-	return;
+  qWarning("Save unsuccessful");
+  return;
     }
     dev->close();
     dirty = FALSE;
@@ -229,16 +229,16 @@ void TableViewerWindow::newDocument()
     current_view = BrowseState;
     cw->raiseWidget(current_view);
 
-	/* now set up for editing the keys */
-	ts.kRep->addKey("key", TVVariant::String);
-	editKeysSlot();
+  /* now set up for editing the keys */
+  ts.kRep->addKey("key", TVVariant::String);
+  editKeysSlot();
 }
 
 void TableViewerWindow::openDocument(const DocLnk &f)
 {
 
     if (!f.isValid()) 
-	return;
+  return;
 
     FileManager fm;
     QIODevice *dev = fm.openFile(f);
@@ -251,8 +251,8 @@ void TableViewerWindow::openDocument(const DocLnk &f)
         listView->reset();
         filterView->reset();
 
-	current_view = BrowseState;
-	cw->raiseWidget(current_view);
+  current_view = BrowseState;
+  cw->raiseWidget(current_view);
 
         /* set up new table state and ensure sub widgets have a reference */
         ts.current_column = 0;
@@ -281,7 +281,7 @@ void TableViewerWindow::openDocument(const DocLnk &f)
         scratch += ds->getName();
         setCaption(tr(scratch));
 
-	dirty = FALSE;
+  dirty = FALSE;
     } else {
         qWarning(tr("could not load Document"));
     }
@@ -329,7 +329,7 @@ void TableViewerWindow::applyFilter()
         d = ds->getCurrentData();
         if(d) 
             if(filterView->passesFilter(d))
-		listView->addItem(d);
+    listView->addItem(d);
     } while(ds->next());
     listView->first();
     listView->rebuildData();
@@ -365,9 +365,9 @@ void TableViewerWindow::filterViewSlot()
 void TableViewerWindow::editItemSlot()
 {
     if(TVEditView::openEditItemDialog(&ts, ts.current_elem, this)) {
-	listView->rebuildData();
-	browseView->rebuildData();
-	dirty = TRUE;
+  listView->rebuildData();
+  browseView->rebuildData();
+  dirty = TRUE;
     }
 }
 
@@ -376,25 +376,25 @@ void TableViewerWindow::newItemSlot()
     DataElem *d = new DataElem(ds);
     if (TVEditView::openEditItemDialog(&ts, d, this)) {
 
-	ds->addItem(d);
-	ts.current_elem = d;
-	applyFilter();
-	listView->rebuildData();
-	browseView->rebuildData();
-	dirty = TRUE;
+  ds->addItem(d);
+  ts.current_elem = d;
+  applyFilter();
+  listView->rebuildData();
+  browseView->rebuildData();
+  dirty = TRUE;
     }
 }
 
 void TableViewerWindow::deleteItemSlot()
 {
-	/* delete the actual item, then do a 'filter' */
-	DataElem *to_remove = ts.current_elem;
+  /* delete the actual item, then do a 'filter' */
+  DataElem *to_remove = ts.current_elem;
 
-	if(!to_remove) 
-		return;
+  if(!to_remove) 
+    return;
 
     listView->removeItem();
-	ds->removeItem(to_remove);
+  ds->removeItem(to_remove);
     
     applyFilter();
     listView->rebuildData();
@@ -432,7 +432,7 @@ void TableViewerWindow::editKeysSlot()
         } while(ds->next());
 
         /* Set up browse view, Will be based of structure of listView */
-	dirty = TRUE;
+  dirty = TRUE;
     }
 }
 

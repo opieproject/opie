@@ -18,7 +18,7 @@
 **
 **********************************************************************/
 #include "tableviewer.h"
-#include <qpeapplication.h>
+#include <qpe/qpeapplication.h>
 
 int main( int argc, char ** argv )
 {
