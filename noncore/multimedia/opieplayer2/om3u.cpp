@@ -154,7 +154,7 @@ void Om3u::remove(const QString &filePath) { //removes from m3u list
   }
 }
 
-void Om3u::deleteFile(const QString &filePath) {//deletes m3u file
+void Om3u::deleteFile(const QString &/*filePath*/) {//deletes m3u file
      f.close();
      f.remove();
 
