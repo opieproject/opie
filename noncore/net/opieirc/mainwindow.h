@@ -34,7 +34,7 @@ public:
     MainWindow(QWidget *parent = 0, const char *name = 0, WFlags f = 0);
 //    IRCTabWidget getTabWidget();
     void addTab(IRCTab *tab);
-    void killTab(IRCTab *tab);
+    void killTab(IRCTab *tab, bool now = false);
     static QString appName() { return QString::fromLatin1("opieirc"); }
     static QString appCaption();
 signals:
@@ -46,15 +46,16 @@ protected slots:
     void changeEvent(IRCTab *);
 
     void slotNextTab();
-    void slotPrevTab();
-    void slotCloseTab();
+    void slotPrevTab();   
     void slotPing(const QString&);    
+    void slotKillTabsLater();
 
 protected:
     void loadSettings();
 protected:
     IRCTabWidget *m_tabWidget;
     QList<IRCTab> m_tabs;
+    QList<IRCTab> m_toDelete;
 };
 
 #endif /* __MAINWINDOW_H */

@@ -36,12 +36,13 @@ public:
     bool hasServer();
     /* Return the selected server */
     IRCServer server();
-    
+
     ~IRCServerList();
 public slots:
     void addServer();
     void delServer();
     void editServer();
+    void acceptOnClick(QListBoxItem*);
 protected:
     Config    *m_config;
     QListBox  *m_list;

@@ -67,6 +67,9 @@ OKeyConfigManager* IRCHistoryLineEdit::keyConfigInstance() {
                                                  KeyNextTab, OKeyPair(Qt::Key_N, Qt::ControlButton) ));
         s_manager->addKeyConfig( OKeyConfigItem( tr("Previous Tab"), "prev_tab", QPixmap(),
                                                  KeyPrevTab, OKeyPair(Qt::Key_P, Qt::ControlButton) ));
+        s_manager->addKeyConfig( OKeyConfigItem( tr("Close Tab"), "close_tab",
+                                                 QPixmap(), KeyCloseTab,
+                                                 OKeyPair(Qt::Key_C, Qt::ControlButton) ));
         s_manager->load();
     }
 
@@ -107,6 +110,8 @@ void IRCHistoryLineEdit::keyPressEvent(QKeyEvent *event) {
     case KeyPrevTab:
         emit prevTab();
         return;
+    case KeyCloseTab:
+        emit closeTab();
     default:
         break;
     }

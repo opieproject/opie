@@ -38,6 +38,10 @@ public:
     /* The ID is required to store the position of this IRCTab inside the IRCTabWidget */
     void setID(int id);
     int id();
+
+    static void setUseTimeStamps(bool b);
+    static QString  appendTimestamp(const QString& tex);   
+
     virtual QString title() = 0;
     virtual IRCSession *session() = 0;
     virtual void appendText(QString text) = 0;

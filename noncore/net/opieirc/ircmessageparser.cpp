@@ -283,6 +283,40 @@ void IRCMessageParser::parseCTCPPing(IRCMessage *message) {
     IRCPerson mask(message->prefix());
     m_session->m_connection->sendCTCP(mask.nick(), "PING " + message->allParameters());
     emit outputReady(IRCOutput(OUTPUT_CTCP, tr("Received a CTCP PING from ")+mask.nick()));
+
+    //IRCPerson mask(message->prefix());
+    QString dest = message->ctcpDestination();
+    if (dest.startsWith("#")) {
+        IRCChannel *channel = m_session->getChannel(dest.lower());
+        if (channel) {
+            IRCChannelPerson *person = channel->getPerson(mask.nick());
+            if (person) {
+                IRCOutput output(OUTPUT_CHANACTION, tr("Received a CTCP PING from ")+ mask.nick()) ;
+                output.addParam(channel);
+                output.addParam(person);
+                emit outputReady(output);
+            } else {
+                emit outputReady(IRCOutput(OUTPUT_ERROR, tr("CTCP PING with unknown person - Desynchronized?")));
+            }
+        } else {
+            emit outputReady(IRCOutput(OUTPUT_ERROR, tr("CTCP PING with unknown channel - Desynchronized?")));
+        }
+    } else {
+        if (message->ctcpDestination() == m_session->m_server->nick()) {
+            IRCPerson *person = m_session->getPerson(mask.nick());
+            if (!person) {
+                /* Person not yet known, create and add to the current session */
+                person = new IRCPerson(message->prefix());
+                m_session->addPerson(person);
+            }
+            IRCOutput output(OUTPUT_QUERYACTION, tr("Received a CTCP PING from ")+ mask.nick() );
+            output.addParam(person);
+            emit outputReady(output);
+        } else {
+            emit outputReady(IRCOutput(OUTPUT_ERROR, tr("CTCP PING with bad recipient")));
+        }
+    }
+
 }
 
 void IRCMessageParser::parseCTCPVersion(IRCMessage *message) {

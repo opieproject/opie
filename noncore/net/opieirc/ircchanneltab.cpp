@@ -15,6 +15,7 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
     m_textview->setVScrollBarMode(QScrollView::AlwaysOn);
     m_listVisible = TRUE;
     m_listButton = new QPushButton(">", m_textview);
+    m_listButton->setFlat( true );
     m_textview->setCornerWidget(m_listButton);
     m_textview->setTextFormat(RichText);
     QWhatsThis::add(m_textview, tr("Channel discussion"));
@@ -25,7 +26,7 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
     m_field = new IRCHistoryLineEdit(this);
     connect(m_field, SIGNAL(nextTab()), this, SIGNAL(nextTab()));
     connect(m_field, SIGNAL(prevTab()), this, SIGNAL(prevTab()));
-    connect(m_field, SIGNAL(closeTab()), this, SIGNAL(closeTab()));
+    connect(m_field, SIGNAL(closeTab()), this, SLOT(remove()));
     connect(this, SIGNAL(editFocus()), m_field, SLOT(setEditFocus()));
 
     QWhatsThis::add(m_field, tr("Type your message here to participate in the channel discussion"));
@@ -36,7 +37,6 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
     connect(m_list, SIGNAL(mouseButtonPressed(int,QListBoxItem*,const QPoint&)), this, SLOT(mouseButtonPressed(int,QListBoxItem*,const QPoint&)));
     /* Construct the popup menu */
     QPopupMenu *ctcpMenu = new QPopupMenu(m_list);
-    m_popup->insertItem(Resource::loadPixmap("opieirc/ctcp"), tr("CTCP"), ctcpMenu);
     m_popup->insertItem(Resource::loadPixmap("opieirc/query"), tr("Query"), this, SLOT(popupQuery()));
     ctcpMenu->insertItem(Resource::loadPixmap("opieirc/ping"), tr("Ping"), this, SLOT(popupPing()));
     ctcpMenu->insertItem(Resource::loadPixmap("opieirc/version"), tr("Version"), this, SLOT(popupVersion()));
@@ -49,6 +49,7 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
     m_field->setActiveWindow();
 
     connect(m_field, SIGNAL(returnPressed()), this, SLOT(processCommand()));
+    connect(m_list,  SIGNAL(doubleClicked ( QListBoxItem * ) ), this, SLOT(popupQuery( QListBoxItem * ) ));
     settingsChanged();
 }
 
@@ -58,7 +59,7 @@ void IRCChannelTab::scrolling(){
 
 void IRCChannelTab::appendText(QString text) {
     /* not using append because it creates layout problems */
-    QString txt = m_textview->text() + text + "\n";
+    QString txt = m_textview->text() + IRCTab::appendTimestamp( text );
     if (m_maxLines > 0 && m_lines >= m_maxLines) {
         int firstBreak = txt.find('\n');
         if (firstBreak != -1) {
@@ -72,7 +73,9 @@ void IRCChannelTab::appendText(QString text) {
     m_textview->ensureVisible(0, m_textview->contentsHeight());
 
     int p1, p2;
-    if ( (p1 = text.find("ping", 0, false) )!= -1 && (p2 = text.find( m_parentTab->server()->nick(), 0,false )) != -1  ) {
+    if ( text.contains( IRCMessageParser::tr("Received a CTCP PING from ") ) )
+        emit ping( title() );
+    else if ( (p1 = text.find("ping", 0, false) )!= -1 && (p2 = text.find( m_parentTab->server()->nick(), 0,false )) != -1  ) {
         int col = text.findRev("color", -1, false);
         if ( col < p2 )
             emit ping( title() );
@@ -132,9 +135,9 @@ void IRCChannelTab::mouseButtonPressed(int mouse, QListBoxItem *, const QPoint &
     };
 }
 
-void IRCChannelTab::popupQuery() {
-    if (m_list->currentItem() != -1) {
-        IRCPerson *person = session()->getPerson(m_list->item(m_list->currentItem())->text());
+void IRCChannelTab::popupQuery( QListBoxItem *item) {
+    if (item) {
+        IRCPerson *person = session()->getPerson(item->text());
         if (person) {
             IRCQueryTab *tab = m_parentTab->getTabForQuery(person);
             if (!tab) {
@@ -144,6 +147,11 @@ void IRCChannelTab::popupQuery() {
             }
         }
     }
+}
+
+void IRCChannelTab::popupQuery() {
+    if ( m_list->currentItem() != -1 )
+        popupQuery( m_list->item(m_list->currentItem()));
 }
 
 void IRCChannelTab::popupPing() {

@@ -18,6 +18,22 @@ QString IRCTab::m_otherColor;
 QString IRCTab::m_notificationColor;
 int IRCTab::m_maxLines;
 
+
+static bool g_useTime =  false;
+
+void IRCTab::setUseTimeStamps( bool b ) {
+    g_useTime = b;
+}
+
+// ## FIXME use TimeString later for AM/PM Setting
+QString IRCTab::appendTimestamp( const QString& text ) {
+    return g_useTime ?
+        "[" +QTime::currentTime().toString()+"]" + text + "\n" :
+        text + "\n";
+
+}
+
+
 IRCTab::IRCTab(QWidget *parent, const char *name, WFlags f) : QWidget(parent, name, f) {
     m_layout = new QVBoxLayout(this);
     QHBoxLayout *descLayout = new QHBoxLayout(m_layout);

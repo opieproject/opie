@@ -12,6 +12,7 @@
 /* QT */
 #include <qvalidator.h>
 #include <qwhatsthis.h>
+#include <qcheckbox.h>
 
 using namespace Opie;
 using namespace Opie::Ui;
@@ -25,7 +26,7 @@ IRCSettings::IRCSettings(QWidget* parent, const char* name, bool modal, WFlags) 
     l->addWidget(tw);
     /* General Configuration */
     QWidget *genwidget = new QWidget(tw);
-    QGridLayout *layout = new QGridLayout(genwidget, 1, 2, 5, 0);
+    QGridLayout *layout = new QGridLayout(genwidget, 1, 4, 5, 0);
     QLabel *label = new QLabel(tr("Lines displayed :"), genwidget);
     layout->addWidget(label, 0, 0);
     m_lines = new QLineEdit(m_config->readEntry("Lines", "100"), genwidget);
@@ -35,6 +36,19 @@ IRCSettings::IRCSettings(QWidget* parent, const char* name, bool modal, WFlags) 
     validator->setBottom(0);
     m_lines->setValidator(validator);
     layout->addWidget(m_lines, 0, 1);
+
+    /*
+     * include timestamp
+     */
+    m_displayTime = new QCheckBox( tr("Display time in chat log"), genwidget );
+    m_displayTime->setChecked( m_config->readBoolEntry("DisplayTime", false) );
+    layout->addMultiCellWidget(m_displayTime, 1, 1, 0, 4 );
+
+    // add a spacer
+    layout->addItem( new QSpacerItem(1,1, QSizePolicy::Minimum,
+                                     QSizePolicy::MinimumExpanding),
+                     2, 0 );
+
     tw->addTab(genwidget, "opieirc/settings", tr("General"));
 
     /* Color configuration */
@@ -117,6 +131,8 @@ void IRCSettings::accept()
     m_config->writeEntry("ServerColor", IRCTab::m_serverColor);
     m_config->writeEntry("NotificationColor", IRCTab::m_notificationColor);
     m_config->writeEntry("Lines", m_lines->text());
+    m_config->writeEntry("DisplayTime", m_displayTime->isChecked() );
+    IRCTab::setUseTimeStamps(m_displayTime->isChecked());
     IRCHistoryLineEdit::keyConfigInstance()->save();
 
     QDialog::accept();

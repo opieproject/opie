@@ -48,6 +48,7 @@ void MainWindow::loadSettings() {
     IRCTab::m_serverColor = config.readEntry("ServerColor", "#0000FF");
     IRCTab::m_notificationColor = config.readEntry("NotificationColor", "#AA3300");
     IRCTab::m_maxLines = config.readNumEntry("Lines", 100);
+    IRCTab::setUseTimeStamps( config.readBoolEntry("DisplayTime", false ) );
 }
 
 void MainWindow::selected(QWidget *) {
@@ -60,7 +61,6 @@ void MainWindow::addTab(IRCTab *tab) {
     connect(tab, SIGNAL(ping (const QString&)), this, SLOT(slotPing(const QString&)));
     connect(tab, SIGNAL(nextTab()), this, SLOT(slotNextTab()));
     connect(tab, SIGNAL(prevTab()), this, SLOT(slotPrevTab()));
-    connect(tab, SIGNAL(closeTab()), this, SLOT(slotCloseTab()));
 
     m_tabWidget->addTab(tab, tab->title());
     m_tabWidget->showPage(tab);
@@ -73,12 +73,24 @@ void MainWindow::changeEvent(IRCTab *tab) {
         m_tabWidget->setTabColor(tab->id(), blue);
 }
 
-void MainWindow::killTab(IRCTab *tab) {
-    m_tabWidget->removePage(tab);
-    m_tabs.remove(tab);
+void MainWindow::killTab(IRCTab *tab, bool imediate) {
+    m_toDelete.append( tab );
 
-    /* there might be nicer ways to do this .. */
-    delete tab;
+    if ( imediate )
+        slotKillTabsLater();
+    else
+        QTimer::singleShot(0, this, SLOT(slotKillTabsLater()) );
+}
+
+void MainWindow::slotKillTabsLater() {
+    for ( QListIterator<IRCTab> it(m_toDelete); it.current(); ++it ) {
+        m_tabWidget->removePage( it.current() );
+        m_tabs.remove( it.current() );
+    }
+
+    m_toDelete.setAutoDelete( true );
+    m_toDelete.clear();
+    m_toDelete.setAutoDelete( false );
 }
 
 void MainWindow::newConnection() {
@@ -117,13 +129,7 @@ void MainWindow::slotPrevTab() {
         m_tabWidget->setCurrentPage ( i-1 );
 }
 
-void MainWindow::slotCloseTab() {
-    IRCTab *tab = (IRCTab *) m_tabWidget->currentPage ();
-    if ( tab )
-        killTab ( tab );
-}
-
-void MainWindow::slotPing( const QString& channel ) {
+void MainWindow::slotPing( const QString& /*channel*/ ) {
     raise();
 }
 

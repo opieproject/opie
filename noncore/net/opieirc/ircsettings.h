@@ -32,6 +32,7 @@ class OKeyConfigWidget;
 }
 }
 
+class QCheckBox;
 class IRCSettings : public QDialog {
     Q_OBJECT
 public:
@@ -50,6 +51,7 @@ protected:
     Opie::OColorButton *m_notification;
     Opie::Ui::OKeyConfigWidget *m_keyConf;
     QLineEdit    *m_lines;
+    QCheckBox *m_displayTime;
 };
 
 #endif /* __IRCSETTINGS_H */

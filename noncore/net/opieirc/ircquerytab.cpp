@@ -16,19 +16,22 @@ IRCQueryTab::IRCQueryTab(IRCPerson *person, IRCServerTab *parentTab, MainWindow 
     m_textview->setTextFormat(RichText);
     QWhatsThis::add(m_textview, tr("Private discussion"));
     m_field = new IRCHistoryLineEdit(this);
+
     connect(m_field, SIGNAL(nextTab()), this, SIGNAL(nextTab()));
     connect(m_field, SIGNAL(prevTab()), this, SIGNAL(prevTab()));
-    connect(m_field, SIGNAL(closeTab()),this, SIGNAL(closeTab()));
-
+    connect(m_field, SIGNAL(closeTab()),this, SLOT(remove()));
+    connect(this, SIGNAL(editFocus()), m_field, SLOT(setEditFocus()));
 
     QWhatsThis::add(m_field, tr("Type your text here in order to send a message to the other person"));
     m_layout->add(hbox);
     hbox->show();
     m_layout->add(m_field);
-    m_field->setFocus();
+
     connect(m_field, SIGNAL(returnPressed()), this, SLOT(processCommand()));
     connect(m_mainWindow, SIGNAL(updateScroll()), this, SLOT(scrolling()));
     settingsChanged();
+    m_field->setFocus();
+    m_field->setActiveWindow();
 }
 
 void IRCQueryTab::scrolling(){

@@ -4,7 +4,8 @@
 
 
 bool IRCServerTab::containsPing( const QString& text, IRCServerTab* tab ) {
-    return (text.find("ping") != -1 && text.find( tab->server()->nick() != -1));
+  return (text.contains(IRCMessageParser::tr("Received a CTCP PING from "))) ||
+         (text.find("ping") != -1 && text.find( tab->server()->nick() != -1));
 }
 
 
@@ -30,10 +31,13 @@ IRCServerTab::IRCServerTab(IRCServer server, MainWindow *mainWindow, QWidget *pa
     QWhatsThis::add(m_field, tr("Type commands here. A list of available commands can be found inside the OpieIRC help"));
     m_layout->add(m_field);
     connect(m_field, SIGNAL(returnPressed()), this, SLOT(processCommand()));
-    m_field->setFocus();
     connect(m_session, SIGNAL(outputReady(IRCOutput)), this, SLOT(display(IRCOutput)));
     connect(m_mainWindow, SIGNAL(updateScroll()), this, SLOT(scrolling()));
     settingsChanged();
+
+    m_field->setFocus();
+    m_field->setActiveWindow();
+
 }
 
 void IRCServerTab::scrolling(){
@@ -43,7 +47,10 @@ void IRCServerTab::scrolling(){
 
 void IRCServerTab::appendText(QString text) {
     /* not using append because it creates layout problems */
-    QString txt = m_textview->text() + text + "\n";
+    QString txt = m_textview->text() + IRCTab::appendTimestamp( text );
+
+
+
     if (m_maxLines > 0 && m_lines >= m_maxLines) {
         int firstBreak = txt.find('\n');
         if (firstBreak != -1) {
@@ -234,11 +241,11 @@ void IRCServerTab::remove() {
         /* Session has previously been closed */
         m_channelTabs.first();
         while (m_channelTabs.current() != 0) {
-            m_mainWindow->killTab(m_channelTabs.current());
+            m_mainWindow->killTab(m_channelTabs.current(), true);
         }
         m_queryTabs.first();
         while (m_queryTabs.current() != 0) {
-            m_mainWindow->killTab(m_queryTabs.current());
+            m_mainWindow->killTab(m_queryTabs.current(), true);
         }
         m_mainWindow->killTab(this);
     }
@@ -272,11 +279,11 @@ void IRCServerTab::display(IRCOutput output) {
             if (m_close) {
                 m_channelTabs.first();
                 while (m_channelTabs.current() != 0) {
-                    m_mainWindow->killTab(m_channelTabs.current());
+                    m_mainWindow->killTab(m_channelTabs.current(), true);
                 }
                 m_queryTabs.first();
                 while (m_queryTabs.current() != 0) {
-                    m_mainWindow->killTab(m_queryTabs.current());
+                    m_mainWindow->killTab(m_queryTabs.current(), true);
                 }
                 m_mainWindow->killTab(this);
             } else {
@@ -312,14 +319,14 @@ void IRCServerTab::display(IRCOutput output) {
         case OUTPUT_SELFPART: {
                 IRCChannelTab *channelTab = getTabForChannel((IRCChannel *)output.getParam(0));
                 if (channelTab)
-                    m_mainWindow->killTab(channelTab);
+                    m_mainWindow->killTab(channelTab, true);
             }
             break;
         case OUTPUT_SELFKICK: {
                 appendText("<font color=\"" + m_errorColor + "\">" + output.htmlMessage() + "</font><br>");
                 IRCChannelTab *channelTab = getTabForChannel((IRCChannel *)output.getParam(0));
                 if (channelTab)
-                    m_mainWindow->killTab(channelTab);
+                    m_mainWindow->killTab(channelTab, true);
             }
             break;
         case OUTPUT_CHANACTION: {

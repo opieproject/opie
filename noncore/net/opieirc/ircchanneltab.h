@@ -53,7 +53,9 @@ protected slots:
     void toggleList();
     void mouseButtonPressed(int mouse, QListBoxItem *item, const QPoint &point);
     /* Popup slots */
+    void popupQuery(QListBoxItem*);
     void popupQuery();
+
     void popupPing();
     void popupVersion();
     void popupWhois();

@@ -82,6 +82,11 @@ IRCServerList::IRCServerList(QWidget* parent, const char *name, bool modal, WFla
         }
     }
 
+    connect(m_list, SIGNAL(doubleClicked(QListBoxItem*)),
+            this, SLOT(acceptOnClick(QListBoxItem *)));
+    connect(m_list, SIGNAL(returnPressed(QListBoxItem*)),
+            this, SLOT(acceptOnClick(QListBoxItem*)));
+
     QPEApplication::showDialog( this );
 }
 
@@ -120,6 +125,10 @@ void IRCServerList::editServer()
             item->setServer(server);
         }
     }
+}
+
+void IRCServerList::acceptOnClick( QListBoxItem* ) {
+    accept();
 }
 
 int IRCServerList::exec()
