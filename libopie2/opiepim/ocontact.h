@@ -34,16 +34,8 @@ QPC_TEMPLATEEXTERN template class QPC_EXPORT QMap<int, QString>;
 // MOC_SKIP_END
 #endif
 
-class ContactPrivate;  // Wozu ist das gut und wo ist das decrariert ? (se)
-		       /* Stefan das ist eine forward declaration
-		        * dann machst du in der private section
-			* ContactPrivate *d;
-			*
-			* und wenn du bei Opie1.1 was hinzufuegen moechtest
-			* packst du es in ContactPrivate damit Opie
-			* binaer kompatibel bleibt
-			* -zecke
-			*/
+class ContactPrivate; 
+
 class QPC_EXPORT OContact : public OPimRecord
 {
     friend class DataSet;
@@ -51,11 +43,6 @@ public:
     OContact();
     OContact( const QMap<int, QString> &fromMap );
     virtual ~OContact();
-
-    /* VCARD stuff should vanish! -zecke */
-    static void writeVCard( const QString &filename, const QValueList<OContact> &contacts);
-    static void writeVCard( const QString &filename, const OContact &c );
-    static QValueList<OContact> readVCard( const QString &filename );
 
     enum journal_action { ACTION_ADD, ACTION_REMOVE, ACTION_REPLACE };
 
@@ -206,23 +193,13 @@ public:
 //     const QString &customField( const QString &key )
 //         { return find( Custom- + key ); }
 
-    static QStringList fields();
-    static QStringList trfields();
-    static QStringList untrfields();
 
     QString toRichText() const;
     QMap<int, QString> toMap() const;
     QString field( int key ) const { return find( key ); }
 
 
-    // journaling...
-    /* do we still need them? Stefan your backend takes care of these -zecke */
-    void saveJournal( journal_action action, const QString &key = QString::null );
-    void save( QString &buf ) const;
-
-    /* we shouldn't inline this one -zecke */
-    void setUid( int i )
-{ OPimRecord::setUid(i); replace( Qtopia::AddressUid , QString::number(i)); }
+    void setUid( int i );
 
     QString toShortText()const;
     QString OContact::type()const;
@@ -237,18 +214,15 @@ public:
 
 
 private:
-    /* I do not like friends ;)
-     * besides that I think we do not need them
-     * anymore -zecke
-     */
-    friend class AbEditor;
-    friend class AbTable;
-    friend class AddressBookAccessPrivate;
-    friend class XMLIO;
+    // The XML-Backend needs some access to the private functions
+    friend class OContactAccessBackend_XML;
 
     void insert( int key, const QString &value );
     void replace( int key, const QString &value );
     QString find( int key ) const;
+    static QStringList fields();
+
+    void save( QString &buf ) const;
 
     QString displayAddress( const QString &street,
 			    const QString &city,
