@@ -116,7 +116,15 @@ bool OTodoAccessXML::load() {
         /*
          * now add it
          */
+        if (m_events.contains( ev.uid() ) || ev.uid() == 0) {
+            ev.setUid( 1 );
+            m_changed = true;
+        }
+        if ( ev.hasDueDate() ) {
+            ev.setDueDate( QDate(m_year, m_month, m_day) );
+        }
         m_events.insert(ev.uid(), ev );
+        m_year = m_month = m_day = -1;
     }
 
     qWarning("counts %d records loaded!", m_events.count() );
@@ -338,11 +346,6 @@ void OTodoAccessXML::todo( QAsciiDict<int>* dict, OTodo& ev,
     }
     default:
         break;
-    }
-
-    if ( ev.hasDueDate() ) {
-        QDate date( m_year,  m_month, m_day );
-        ev.setDueDate( date );
     }
 }
 QString OTodoAccessXML::toString( const OTodo& ev )const {
