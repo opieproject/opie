@@ -107,8 +107,7 @@ public:
 
 static QImage scaleButton( const QImage &img, int height )
 {
-    qWarning("Height %d %d",  height, img.height() );
-    if ( img.height()!=0 && img.height() != height ) {
+    if ( img.height() != 0 && img.height() != height ) {
 	return img.smoothScale( img.width()*height/img.height(), height );
     } else {
 	return img;

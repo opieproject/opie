@@ -103,7 +103,7 @@ private:
 
 private:
     // RESOLVE please -zecke@handhelds.org
-    const DocLnk *selected(); // use selectedDocument()  that's no luckily no compiler is putting the access into the symbol name
+    const DocLnk *selected(); // use selectedDocument()  luckily no compiler is putting the access into the symbol name
     FileSelectorView *view;
     QString filter;
     QToolButton *buttonNew, *buttonClose;
