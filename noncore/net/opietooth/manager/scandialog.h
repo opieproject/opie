@@ -31,14 +31,14 @@ class QLabel;
 class QListView;
 class QListViewItem;
 class QPushButton;
-
-class Manager;
-class Device;
+class QProgressBar;
 
 
 namespace OpieTooth {
 
 
+class Manager;
+class Device;
 
     class ScanDialog : public QDialog {
         Q_OBJECT
@@ -48,9 +48,9 @@ namespace OpieTooth {
         ~ScanDialog();
 
         QFrame* Frame7;
-        QLabel* TextLabel10;
+        QProgressBar* progress;
         QPushButton* StartButton;
-        QPushButton* PushButton6;
+        QPushButton* StopButton;
         QListView* ListView1;
 
 
@@ -58,12 +58,14 @@ namespace OpieTooth {
         QGridLayout* Layout11;
 
     private slots:
+        void stopSearch();
         void startSearch();
         void fillList(const QString& device, RemoteDevices::ValueList list);
 
     private:
-
+        void progressTimer(int maxSeconds);
         Manager *localDevice;
+        int progressStat;
     };
 
 }
