@@ -15,6 +15,7 @@ WLANModule::WLANModule() : Module() {
 /**
  */ 
 WLANModule::~WLANModule(){
+  qDebug("Deleting module");
   Interface *i;
   for ( i=list.first(); i != 0; i=list.next() )
     delete i;
@@ -57,7 +58,7 @@ bool WLANModule::isOwner(Interface *i){
  * @return QWidget* pointer to the tab widget in this modules configure.
  */ 
 QWidget *WLANModule::configure(Interface *, QTabWidget **tabWidget){
-  WLANImp *wlanconfig = new WLANImp(0, "WlanConfig");
+  WLANImp *wlanconfig = new WLANImp(0, "WlanConfig", false,  Qt::WDestructiveClose);
   (*tabWidget) = wlanconfig->tabWidget;
   return wlanconfig;
 }
@@ -88,10 +89,6 @@ QWidget *WLANModule::information(Interface *i, QTabWidget **tabWidget){
   info->noiseProgressBar->setProgress(noise);
   info->qualityProgressBar->setProgress(quality);
   info->rateLabel->setText(QString("%1 Mb/s").arg(we.rate()));
-  //WlanInfo info (0, "wireless info", true);
-  //info.show();
-  //return NULL;
-  
   return info;
 }
 

@@ -78,7 +78,7 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
  * Deconstructor. Save profiles.  Delete loaded libraries.
  */
 MainWindowImp::~MainWindowImp(){
-  qDebug("start Saving mainwindow");
+  qDebug("Deleting main window");
   // Save profiles.
   Config cfg("NetworkSetup");
   cfg.setGroup("General");
@@ -90,14 +90,14 @@ MainWindowImp::~MainWindowImp(){
     if(iIt.key()->getModuleOwner() == NULL)
       delete iIt.key();
   }
-
+  
   // Delete Modules and Libraries
   QMap<Module*, QLibrary*>::Iterator it;
   for( it = libraries.begin(); it != libraries.end(); ++it ){
     delete it.key();
-    delete it.data();
+    //delete it.data();
   }
-  qDebug("done Saving mainwindow");
+  qDebug("Done deleting main window");
 }
 
 /**
@@ -244,10 +244,9 @@ void MainWindowImp::configureClicked(){
     QWidget *moduleConfigure = i->getModuleOwner()->configure(i, &tabWidget);
     if(moduleConfigure != NULL){
       if(tabWidget != NULL){
-	InterfaceSetupImp *configure = new InterfaceSetupImp(tabWidget, "InterfaceSetupImp", i, true);
+	InterfaceSetupImp *configure = new InterfaceSetupImp(tabWidget, "InterfaceSetupImp", i, false, Qt::WDestructiveClose);
         configure->setProfile(currentProfile);
 	tabWidget->insertTab(configure, "TCP/IP");
-      
       }
       moduleConfigure->showMaximized();
       moduleConfigure->show();
@@ -255,7 +254,7 @@ void MainWindowImp::configureClicked(){
     }
   }
   
-  InterfaceSetupImp *configure = new InterfaceSetupImp(0, "InterfaceSetupImp", i, true);
+  InterfaceSetupImp *configure = new InterfaceSetupImp(0, "InterfaceSetupImp", i, false, Qt::WDestructiveClose);
   configure->setProfile(currentProfile);
   configure->showMaximized();
   configure->show();

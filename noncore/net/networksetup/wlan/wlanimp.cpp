@@ -16,7 +16,7 @@
 #include <qcheckbox.h>
 #include <qregexp.h>
 
-WLANImp::WLANImp( QWidget* parent, const char* name):WLAN(parent, name, Qt::WDestructiveClose){
+WLANImp::WLANImp( QWidget* parent, const char* name, bool modal, WFlags fl):WLAN(parent, name, modal, fl){
   config = new Config("wireless");
   readConfig();
 }
@@ -101,6 +101,7 @@ bool WLANImp::writeConfig()
     config->writeEntry( "dot11WEPDefaultKey1", keyLineEdit1->text() );
     config->writeEntry( "dot11WEPDefaultKey2", keyLineEdit2->text() );
     config->writeEntry( "dot11WEPDefaultKey3", keyLineEdit3->text() );
+    return true;
     return writeWirelessOpts( );
 }
 
@@ -110,12 +111,6 @@ void WLANImp::accept()
 {
   if ( writeConfig() )
     QDialog::accept();
-}
-
-void WLANImp::done ( int r )
-{
-	QDialog::done ( r );
-	close ( );
 }
 
 bool WLANImp::writeWirelessOpts( QString scheme )

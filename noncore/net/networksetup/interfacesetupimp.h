@@ -11,7 +11,7 @@ class InterfaceSetupImp : public InterfaceSetup {
 	
 public:
   InterfaceSetupImp( QWidget* parent = 0, const char* name = 0, Interface *i=0, bool modal = FALSE, WFlags fl = 0);
-
+  
 protected slots:
   void accept();
 

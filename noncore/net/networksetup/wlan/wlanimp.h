@@ -9,12 +9,11 @@ class WLANImp : public WLAN {
   Q_OBJECT
 
 public:
-  WLANImp( QWidget* parent = 0, const char* name = 0);
+  WLANImp( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
   ~WLANImp( );
 
 protected:
   void accept();
-  void done ( int r );
 
 private:
   void readConfig();

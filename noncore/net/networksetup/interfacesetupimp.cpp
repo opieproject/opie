@@ -38,7 +38,7 @@ void InterfaceSetupImp::accept(){
   if(!saveSettings())
     return;
   interfaces->write();
-  close(true);
+  QDialog::accept();
 }
 
 /**
