@@ -20,6 +20,7 @@ DialDialog::DialDialog(  QWidget* parent, const char* name, bool modal, WFlags f
     QVBoxLayout *mainLayout = new QVBoxLayout( this );
 
     QLabel *textLabel = new QLabel( this );
+    textLabel->setTextFormat( QLabel::RichText );
     textLabel->setText( tr("Enter the number you want to dial. When finished, press ok") );
 
     m_dialLine = new QLineEdit( this );

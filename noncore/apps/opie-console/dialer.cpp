@@ -13,6 +13,8 @@
 #include <fcntl.h>
 #include <errno.h>
 
+#include "io_modem.h"
+
 // State machine:          | When an error occurs, we don't have to
 //                         | reset everything.
 // (init) <------+         | But if the user wants to reset,
@@ -53,14 +55,10 @@ Dialer::Dialer(const Profile& profile, int fd, QWidget *parent, const char *name
 	QVBoxLayout *vbox;
 	QLabel *desc;
 
-	//m_profile.writeEntry("InitString", "ATZ");
-	//m_profile.writeEntry("DialPrefix1", "ATDT");
-	//m_profile.writeEntry("Termination", "\n");
 
 	usercancel = 0;
 	cleanshutdown = 0;
 
-//	fcntl(m_fd, F_SETFL, O_NONBLOCK);
 
 	desc = new QLabel(QObject::tr("Dialing number: %1").arg(m_profile.readEntry("Number")), this);
 	progress = new QProgressBar(this);
@@ -89,7 +87,7 @@ void Dialer::setHangupOnly()
 {
 	state = state_cancel;
 	usercancel = 1;
-        send("+++ATH\r");
+        send( m_profile.readEntry("HangupString", MODEM_DEFAULT_HANGUP_STRING )+"\r" );
 }
 
 void Dialer::slotCancel()
@@ -142,19 +140,15 @@ void Dialer::trydial(const QString& number)
 	if(state != state_cancel) switchState(state_preinit);
 	if(cleanshutdown)
 	{
-            qWarning("HangupString " + m_profile.readEntry("HangupString"));
-            //send(m_profile.readEntry("HangupString"));
-		send("+++ATH\r");
-		//send("");
+            qWarning("HangupString " + m_profile.readEntry("HangupString",  MODEM_DEFAULT_HANGUP_STRING));
+            send(m_profile.readEntry("HangupString", MODEM_DEFAULT_HANGUP_STRING ) + "\r");
 	}
 
 	if(state != state_cancel)
 	{
 		switchState(state_init);
-		//send("ATZ");
-                qWarning("Init String " + m_profile.readEntry("InitString") );
-//		send(m_profile.readEntry("InitString", "AT"));
-                send("AT\r");
+//                qWarning("Init String " + m_profile.readEntry("InitString") );
+		send(m_profile.readEntry("InitString",MODEM_DEFAULT_INIT_STRING ) + "\r");
 		QString response2 = receive();
 		if(!response2.contains("\nOK\r"))
 			reset();
@@ -187,8 +181,10 @@ void Dialer::trydial(const QString& number)
             qWarning("progress");
 		switchState(state_dialing);
 
-		send(QString("ATDT %1\r").arg(number));
-//		send(QString("%1 %2").arg(m_profile.readEntry("DialPrefix1")).arg(number));
+//		send(QString("ATDT %1\r").arg(number));
+		send(QString("%1 %2\r").arg(m_profile.readEntry("DialPrefix1", MODEM_DEFAULT_DIAL_PREFIX1 ))
+                     .arg(number));
+
 		QString response5 = receive();
 		if(!response5.contains("CONNECT") )
 		{

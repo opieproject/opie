@@ -153,6 +153,7 @@ QWidget* ATConfigDialog::tab1( QWidget* parent ) {
 
 
 void ATConfigDialog::readConfig( const Profile& config ) {
+    qWarning("config in atconfigdialog");
 
     initStringLine->setText( config.readEntry("InitString", MODEM_DEFAULT_INIT_STRING ) );
     resetStringLine->setText( config.readEntry("ResetString", MODEM_DEFAULT_RESET_STRING ) );

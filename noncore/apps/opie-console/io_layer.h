@@ -94,7 +94,13 @@ signals:
      */
     virtual void error( int, const QString& );
 
+
     virtual void closed();
+
+    /* signal emitted for closure of the IOLayer
+     * for some reasons
+     */
+    virtual void closed(IOLayer*);
 public slots:
     /**
      * send a QCString to the device

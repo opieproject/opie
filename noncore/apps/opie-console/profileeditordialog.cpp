@@ -66,11 +66,11 @@ void ProfileEditorDialog::initUI()
 
     m_svCon = new QScrollView( m_tabCon );
     m_svCon->setResizePolicy( QScrollView::AutoOneFit );
-    m_svCon->setHScrollBarMode( QScrollView::AlwaysOff );
+    //m_svCon->setHScrollBarMode( QScrollView::AlwaysOff );
     m_svCon->setFrameShape( QFrame::NoFrame );
     m_svTerm = new QScrollView( m_tabTerm );
     m_svTerm->setResizePolicy( QScrollView::AutoOneFit );
-    m_svTerm->setHScrollBarMode( QScrollView::AlwaysOff );
+    //m_svTerm->setHScrollBarMode( QScrollView::AlwaysOff );
     m_svTerm->setFrameShape( QFrame::NoFrame );
 
     /* base layout for tabs */

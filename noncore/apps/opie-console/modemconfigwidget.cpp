@@ -132,13 +132,14 @@ void ModemConfigWidget::load( const Profile& prof ) {
     }
 
 
-
+    atConf->readConfig( prof );
     if ( prof.readEntry( "Device" ).isEmpty() ) {
+        qWarning("device empty!");
         return;
     }
     setCurrent( prof.readEntry( "Device" ), m_deviceCmb );
 
-    atConf->readConfig( prof );
+
 }
 
 /*
@@ -234,6 +235,10 @@ void ModemConfigWidget::save( Profile& prof ) {
 
 void ModemConfigWidget::slotAT() {
     //  ATConfigDialog conf( this, "ATConfig", true );
+    // josef/Max I know why don't you create the stuff on the stack
+    // but making it a TopLevel Dialog and ignoring
+    // cancel is not fun either...
+    // what to do? FIXME!!! -zecke
     atConf->showMaximized();
     if ( atConf->exec() != QDialog::Accepted ) {
         // reload old settings
