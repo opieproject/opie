@@ -401,11 +401,11 @@ die Kategorien.</translation>
     <name>QMessageBox</name>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nein</translation>
     </message>
 </context>
 <context>
@@ -814,7 +814,7 @@ frei und versuchen Sie es noch einmal
     <message>
         <source>&lt;qt&gt;Are you sure you want to delete
  %1?&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Sind Sie sicher, dass die %1 löschen wollen?&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>

@@ -98,7 +98,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>error box</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlerbox</translation>
     </message>
 </context>
 <context>
@@ -199,7 +199,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Beam this occurence</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Vorkommen Senden</translation>
     </message>
 </context>
 <context>
@@ -370,7 +370,7 @@ Trozdem beenden?</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation type="unfinished"></translation>
+        <translation>MDMDFSSM</translation>
     </message>
 </context>
 <context>
@@ -567,7 +567,7 @@ Trozdem beenden?</translation>
     <name>DatebookAlldayDisp</name>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
 </context>
 <context>
@@ -734,7 +734,7 @@ und</translation>
     </message>
     <message>
         <source>on </source>
-        <translation type="unfinished"></translation>
+        <translation>am</translation>
     </message>
 </context>
 <context>

@@ -95,7 +95,7 @@ die letzten 10 Jahre Ihrer Freundschaft.</translation>
     </message>
     <message>
         <source>KPacman</source>
-        <translation type="unfinished"></translation>
+        <translation>KPacman</translation>
     </message>
 </context>
 <context>
@@ -219,10 +219,6 @@ oder iist in einem unbekannten Format.</translation>
     <message>
         <source>@YY@/@MM@/@DD@</source>
         <translation>@DD@/@MM@/@YY@</translation>
-    </message>
-    <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

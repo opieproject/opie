@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>OPIE-Dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>OPIE-Lexikon</translation>
     </message>
 </context>
 <context>

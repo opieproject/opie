@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Adding attachments</source>
-        <translation type="unfinished"></translation>
+        <translation>Anhang anfügen</translation>
     </message>
 </context>
 <context>
@@ -196,12 +196,12 @@ Check user name and password&lt;/qt&gt;</source>
     </message>
     <message>
         <source>Receiving error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Empfang</translation>
     </message>
     <message>
         <source>OK
 </source>
-        <translation type="unfinished">OK
+        <translation>OK
 </translation>
     </message>
 </context>
@@ -296,7 +296,7 @@ Möchten Sie dies jetzt durchführen ?</translation>
     </message>
     <message>
         <source>DNS lookup</source>
-        <translation type="unfinished">DNS-Auflösung</translation>
+        <translation>DNS-Auflösung</translation>
     </message>
 </context>
 <context>
@@ -629,11 +629,11 @@ Adressen sein</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>EMail</source>
-        <translation type="unfinished"></translation>
+        <translation>EMail</translation>
     </message>
 </context>
 </TS>

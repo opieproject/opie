@@ -113,7 +113,7 @@
     </message>
     <message>
         <source>%1 Kb</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 kB</translation>
     </message>
 </context>
 <context>

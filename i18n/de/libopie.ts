@@ -618,7 +618,7 @@ und</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>Low</source>
@@ -642,15 +642,15 @@ und</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Arbeitsadresse:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Privatadresse:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>The %1 %2 of every</source>
-        <translation type="unfinished">Den %1 %2 of jeden</translation>
+        <translation>Den %1 %2 jedes</translation>
     </message>
 </context>
 <context>

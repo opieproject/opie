@@ -99,7 +99,7 @@ You get %2 lives this time!</source>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Über</translation>
     </message>
     <message>
         <source>Written by: Stefan Schimanski

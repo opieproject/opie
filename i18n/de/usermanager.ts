@@ -18,7 +18,7 @@
     </message>
     <message>
         <source>Opie User Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie-Benutzerverwaltung</translation>
     </message>
 </context>
 <context>

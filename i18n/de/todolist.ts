@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
-        <translation type="unfinished">&lt;h1&gt;Alarm um %1&gt;&lt;/h1&gt;&lt;br&gt;</translation>
+        <translation>&lt;h1&gt;Alarm um %1&gt;&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
 </context>
 <context>
@@ -482,7 +482,7 @@ Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann e
     </message>
     <message>
         <source>Summary:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zusammenfassung:</translation>
     </message>
     <message>
         <source>Notes:</source>

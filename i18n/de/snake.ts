@@ -43,11 +43,11 @@ Spiel zu beginnen.</translation>
     </message>
     <message>
         <source>Press any key to start</source>
-        <translation type="unfinished"></translation>
+        <translation>Drücken Sie zum Starten eine Taste</translation>
     </message>
     <message>
         <source>Press any key to begin a new game.</source>
-        <translation type="unfinished"></translation>
+        <translation>Für eine neues Spiel drücken Sie eine Taste.</translation>
     </message>
 </context>
 </TS>

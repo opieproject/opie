@@ -170,40 +170,46 @@ wurde erfolgreich gemountet.</translation>
 Changing parameters on this
 page may cause your system
 to stop functioning properly!</source>
-        <translation type="unfinished"></translation>
+        <translation>ACHTUNG:
+Das Ändern von Parametern auf 
+dieser Seite kann die Funktionalität
+des Systems beeinträchtigen!</translation>
     </message>
     <message>
         <source>Format?</source>
-        <translation type="unfinished"></translation>
+        <translation>Formatieren?</translation>
     </message>
     <message>
         <source>
 with %1 filesystem?
 You will loose all data!!</source>
-        <translation type="unfinished"></translation>
+        <translation>mit Dateisystem %1?
+Alle Daten gehen verloren!</translation>
     </message>
     <message>
         <source>Trying to umount %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 wird ausgebunden.</translation>
     </message>
     <message>
         <source>Trying to mount %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 wird eingebunden.</translation>
     </message>
     <message>
         <source>%1
 has been successfully mounted.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 wurde erfolgreich eingebunden.</translation>
     </message>
     <message>
         <source>Storage Type: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichertyp: %1</translation>
     </message>
     <message>
         <source>Type: %1
 Formatted with %2
 %3, %4, %5</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ: %1
+Formatiert mit %2
+%3, %4, %5</translation>
     </message>
 </context>
 </TS>
