@@ -224,7 +224,6 @@ void WLANImp::accept(){
   if(!interfaceSetup->saveChanges())
     return;
  
-  return;
   // Restart the device now that the settings have changed
   QString initpath;
   if( QDir("/etc/rc.d/init.d").exists() )

@@ -53,7 +53,7 @@
                 </property>
                 <attribute>
                     <name>title</name>
-                    <string>WLAN General</string>
+                    <string>General</string>
                 </attribute>
                 <vbox>
                     <property stdset="1">
@@ -72,7 +72,7 @@
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>Sepecify Access Point</string>
+                            <string>&amp;Specify Access Point</string>
                         </property>
                     </widget>
                     <widget>
@@ -87,7 +87,7 @@
                         </property>
                         <property stdset="1">
                             <name>title</name>
-                            <string>Settings</string>
+                            <string>Specific &amp;Access Point Settings</string>
                         </property>
                         <grid>
                             <property stdset="1">
@@ -113,7 +113,7 @@
                                 <class>QLabel</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>TextLabel2_2</cstring>
+                                    <cstring>TextLabel2</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
@@ -234,7 +234,7 @@
                 </property>
                 <attribute>
                     <name>title</name>
-                    <string>Wep</string>
+                    <string>Encryption</string>
                 </attribute>
                 <vbox>
                     <property stdset="1">
@@ -253,7 +253,7 @@
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>Enable Wep</string>
+                            <string>&amp;Enable WEP</string>
                         </property>
                     </widget>
                     <widget>
@@ -268,7 +268,7 @@
                         </property>
                         <property stdset="1">
                             <name>title</name>
-                            <string>Authentication Type</string>
+                            <string>&amp;Authentication Type</string>
                         </property>
                         <hbox>
                             <property stdset="1">
@@ -287,7 +287,7 @@
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>Open System</string>
+                                    <string>&amp;Open System</string>
                                 </property>
                                 <property stdset="1">
                                     <name>checked</name>
@@ -302,7 +302,7 @@
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>Shared Key</string>
+                                    <string>&amp;Shared Key</string>
                                 </property>
                             </widget>
                         </hbox>
@@ -319,7 +319,7 @@
                         </property>
                         <property stdset="1">
                             <name>title</name>
-                            <string>Key Setting</string>
+                            <string>&amp;Key Setting</string>
                         </property>
                         <grid>
                             <property stdset="1">
