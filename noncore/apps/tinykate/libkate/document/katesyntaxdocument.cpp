@@ -24,8 +24,8 @@
 #include <qstringlist.h>
 #include <kconfig.h>
 #include <kglobal.h>
-
-
+#include <qpe/qpeapplication.h>
+#include <qdir.h>
 
 SyntaxDocument::SyntaxDocument()
 {
@@ -54,11 +54,15 @@ void SyntaxDocument::setupModeList(bool force)
   KConfig *config=KGlobal::config();
   KStandardDirs *dirs = KGlobal::dirs();
 
-  QStringList list=dirs->findAllResources("data","kate/syntax/*.xml",false,true);
+//  QStringList list=dirs->findAllResources("data","kate/syntax/*.xml",false,true);
+  QString path=QPEApplication::qpeDir() +"share/tinykate/syntax/";
+
+  QDir dir(path);
+  QStringList list=dir.entryList("*.xml");
 
   for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
   {
-    QString Group="Highlighting_Cache"+*it;
+    QString Group="Highlighting_Cache"+path+*it;
 
     if ((config->hasGroup(Group)) && (!force))
     {
@@ -73,8 +77,8 @@ void SyntaxDocument::setupModeList(bool force)
     }
     else
     {
-	qDebug("Found a description file:"+(*it));
-        setIdentifier(*it);
+	qDebug("Found a description file:"+path+(*it));
+        setIdentifier(path+(*it));
         Opie::XMLElement *e=m_root;
         if (e)
         {
@@ -91,7 +95,7 @@ void SyntaxDocument::setupModeList(bool force)
             if (mli->section.isEmpty())
               mli->section=i18n("Other");
 
-            mli->identifier = *it;
+            mli->identifier = path+(*it);
 #warning fixme
 /*
             config->setGroup(Group);
