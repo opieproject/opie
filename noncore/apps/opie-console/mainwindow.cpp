@@ -296,6 +296,7 @@ void MainWindow::slotSaveScript() {
         MimeTypes types;
         QStringList script;
         script << "text/plain";
+        script << "text/all";
         types.insert("Script", script);
         QString filename = OFileDialog::getSaveFileName(2, "/", QString::null, types);
         if (!filename.isEmpty()) {
@@ -310,6 +311,7 @@ void MainWindow::slotRunScript() {
         MimeTypes types;
         QStringList script;
         script << "text/plain";
+        script << "text/all";
         types.insert("Script", script);
         QString filename = OFileDialog::getOpenFileName(2, "/", QString::null, types);
         if (!filename.isEmpty()) {

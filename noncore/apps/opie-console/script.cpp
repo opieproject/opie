@@ -7,6 +7,7 @@ Script::Script() {
 
 Script::Script(const QString fileName) {
     QFile file(fileName);
+    file.open(IO_ReadOnly );
     m_script = file.readAll();
 }
 
