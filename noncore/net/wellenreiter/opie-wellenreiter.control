@@ -1,0 +1,9 @@
+Files: bin/wellenreiter pics/wellenreiter
+Priority: optional
+Section: opie/applications
+Maintainer: Michael Lauer <mickeyl@handhelds.org> 
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: A wavelan network monitor
+ A wavelan network monitor/sniffer for the Opie environment.
