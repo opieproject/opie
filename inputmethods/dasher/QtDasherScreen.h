@@ -36,7 +36,7 @@ class QtDasherScreen : public QWidget, public Dasher::CDasherScreen
   void SetFont(std::string Name)
     { fontname = Name; /* set_the_font(); */ }
 
-  void SetFontSize(Dasher::Opts::FontSize fontsize)
+  void SetFontSize(Dasher::Opts::FontSize )
     {
 #warning QtDasherScreen::SetFontSize() not implemented
     }
@@ -46,7 +46,7 @@ class QtDasherScreen : public QWidget, public Dasher::CDasherScreen
       return (Dasher::Opts::Normal);
     }
   
-  void TextSize(symbol Character, int* Width, int* Height, int Size) const
+  void TextSize(symbol , int* Width, int* Height, int ) const
     { 
       // should probably use QPainter::boundingRect()
       *Width = *Height = font.pixelSize();

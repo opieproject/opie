@@ -102,34 +102,34 @@ functions are over-ridden.
 --------------------------------------------------------------------------*/
 
 
-bool CSettingsStore::LoadSetting(const string& Key, bool* Value)
+bool CSettingsStore::LoadSetting(const string& , bool* )
 {
 	return false;
 }
 
 
-bool CSettingsStore::LoadSetting(const string& Key, long* Value)
+bool CSettingsStore::LoadSetting(const string& , long* )
 {
 	return false;
 }
 
 
-bool CSettingsStore::LoadSetting(const string& Key, string* Value)
+bool CSettingsStore::LoadSetting(const string& , string* )
 {
 	return false;
 }
 
 
-void CSettingsStore::SaveSetting(const string& Key, bool Value)
+void CSettingsStore::SaveSetting(const string& , bool )
 {
 }
 
 
-void CSettingsStore::SaveSetting(const string& Key, long Value)
+void CSettingsStore::SaveSetting(const string& , long )
 {
 }
 
 
-void CSettingsStore::SaveSetting(const string& Key, const string& Value)
+void CSettingsStore::SaveSetting(const string& , const string& )
 {
 }

@@ -17,7 +17,7 @@ using namespace std;
 //////////////////////////////////////////////////////////////////////
 
 CDasherModel::CDasherModel(CDashEditbox* Editbox, CLanguageModel* LanguageModel, bool Dimensions)
-  : m_editbox(Editbox), m_languagemodel(LanguageModel), m_Root(0), m_Dimensions(Dimensions)
+  : m_Dimensions(Dimensions), m_editbox(Editbox), m_languagemodel(LanguageModel), m_Root(0)
 {
 	LearnContext = m_languagemodel->GetRootNodeContext();
 	
@@ -105,7 +105,7 @@ void CDasherModel::Get_string_under_mouse(const myint Mousex,const myint Mousey,
 /////////////////////////////////////////////////////////////////////////////
 
 
-void CDasherModel::Flush(const myint Mousex,const myint Mousey)
+void CDasherModel::Flush(const myint ,const myint )
 {
 	vector<symbol> vtUnder;
 	Get_string_under_mouse(m_DasherOX,m_DasherOY,vtUnder);
@@ -184,7 +184,7 @@ void CDasherModel::Start()
 
 void CDasherModel::Get_new_root_coords(myint Mousex,myint Mousey)
 {
-	int cappedrate=0;
+	// int cappedrate=0;
 	double dRx=1.0,dRxnew=1.0;
 	double dRxnew2;
 
@@ -243,7 +243,7 @@ void CDasherModel::Get_new_root_coords(myint Mousex,myint Mousey)
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CDasherModel::Tap_on_display(myint miMousex,myint miMousey, unsigned long Time) 
+void CDasherModel::Tap_on_display(myint miMousex,myint miMousey, unsigned long ) 
 	// work out the next viewpoint, opens some new nodes
 {
 	// works out next viewpoint

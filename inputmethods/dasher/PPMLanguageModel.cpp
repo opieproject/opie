@@ -72,7 +72,7 @@ CPPMLanguageModel::~CPPMLanguageModel()
 }
 
 
-bool CPPMLanguageModel::GetProbs(CContext *context,vector<unsigned int> &probs,double addprob)
+bool CPPMLanguageModel::GetProbs(CContext *context,vector<unsigned int> &probs,double )
 	// get the probability distribution at the context
 {
 	// seems like we have to have this hack for VC++
@@ -85,7 +85,7 @@ bool CPPMLanguageModel::GetProbs(CContext *context,vector<unsigned int> &probs,d
 	CPPMnode *temp,*s; 
 	int loop,total;
 	int sym; 
-	ulong spent=0; 
+	// ulong spent=0; 
 	ulong size_of_slice;
 	bool *exclusions=new bool [modelchars];
 	ulong uniform=modelchars;
@@ -192,7 +192,7 @@ void CPPMLanguageModel::EnterSymbol(CContext* Context, modelchar Symbol)
 	CPPMLanguageModel::CPPMContext& context = * static_cast<CPPMContext *> (Context);
 	
 	CPPMnode *find;
-	CPPMnode *temp=context.head;
+	// CPPMnode *temp=context.head;
 	
 	while (context.head) {
 		find =context.head->find_symbol(Symbol);
@@ -246,7 +246,7 @@ void CPPMLanguageModel::dumpString( char *str, int pos, int len )
 }
 
 
-void CPPMLanguageModel::dumpTrie( CPPMLanguageModel::CPPMnode *t, int d )
+void CPPMLanguageModel::dumpTrie( CPPMLanguageModel::CPPMnode *, int )
 	// diagnostic display of the PPM trie from node t and deeper
 {
 //TODO

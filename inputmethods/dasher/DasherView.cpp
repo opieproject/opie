@@ -24,14 +24,14 @@ void CDasherView::ChangeOrientation(Dasher::Opts::ScreenOrientations Orientation
 }
 
 
-void CDasherView::FlushAt(int mousex,int mousey) 
+void CDasherView::FlushAt(int ,int ) 
 {
 	m_DasherModel.Flush(0,0);
 }
 
 int CDasherView::RecursiveRender(CDasherNode* Render, myint y1,myint y2,int mostleft, bool text)
 {
-	symbol CurChar = Render->Symbol();
+	// symbol CurChar = Render->Symbol();
 	int Color;
 
 	if (ColourMode==true) {

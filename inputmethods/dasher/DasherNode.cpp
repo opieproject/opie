@@ -32,7 +32,7 @@ void CDasherNode::Dump_node () const
 	*/
 }
 
-void CDasherNode::Generic_Push_Node(CLanguageModel::CNodeContext *context) {
+void CDasherNode::Generic_Push_Node(CLanguageModel::CNodeContext *) {
 
 	m_iAge=0;
 	m_bAlive=true;

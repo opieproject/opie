@@ -14,8 +14,10 @@ using namespace Dasher;
 using namespace std;
 
 CAlphIO::CAlphIO(string SystemLocation, string UserLocation)
-	: SystemLocation(SystemLocation), UserLocation(UserLocation),
-	  BlankInfo(), CData("")
+	: BlankInfo(), 
+	  SystemLocation(SystemLocation), 
+          UserLocation(UserLocation),
+	  CData("")
 {
 	CreateDefault();
 }
@@ -38,7 +40,7 @@ const CAlphIO::AlphInfo& CAlphIO::GetInfo(const std::string& AlphID)
 	if (AlphID=="")
 		return Alphabets["Default"];
 	else {
-		AlphInfo& CurInfo = Alphabets[AlphID];
+		// AlphInfo& CurInfo = Alphabets[AlphID];
 		Alphabets[AlphID].AlphID = AlphID; // Ensure consistency
 		return Alphabets[AlphID];
 	}

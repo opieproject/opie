@@ -49,7 +49,7 @@ void QtDasherPlugin::unflush()
 {
   if (flushcount==0)
     return;
-  for (flushcount; flushcount>0; flushcount--) {
+  for (; flushcount>0; flushcount--) {
     deletetext();
   }
 }

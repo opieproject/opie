@@ -18,10 +18,13 @@
 
 QtDasherScreen::QtDasherScreen (int _width, int _height,
 				CDasherInterface *_interface,
-				QWidget * _parent, Dasher::CDashEditbox *edit):
-  QWidget(_parent), interface( _interface ),
-  fontname( "fixed" ), fontsize(12),
-  Dasher::CDasherScreen(_width, _height)
+				QWidget * _parent, 
+				Dasher::CDashEditbox *_edit):
+  QWidget(_parent), 
+  Dasher::CDasherScreen(_width, _height),
+  fontsize(12),
+  interface( _interface ),
+  fontname( "fixed" )
 {
   font = QFont (fontname.c_str(), fontsize);
   painter = new QPainter ();
@@ -32,7 +35,9 @@ QtDasherScreen::QtDasherScreen (int _width, int _height,
 
   interface->ChangeLanguageModel(0);
   interface->ChangeView(0);
-  interface->ChangeEdit(edit);
+  interface->ChangeEdit(_edit);
+  edit = _edit;
+
 
 /* interface->GetFontSizes(&FontSizes);
 
@@ -143,7 +148,7 @@ void QtDasherScreen::DrawPolygon(point* Points, int Number, int Color,
   painter->drawPolygon (qpa);
 }
 
-void QtDasherScreen::mousePressEvent (QMouseEvent *e)
+void QtDasherScreen::mousePressEvent (QMouseEvent *)
 {
     paused=false;
     interface->Unpause(get_time());

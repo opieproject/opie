@@ -21,31 +21,31 @@ public:
 	
 	// These actually affect the way Dasher works
 	//! Change the alphabet in use to NewAlphabetID
-	virtual void ChangeAlphabet(const std::string& NewAlphabetID) {};
+	virtual void ChangeAlphabet(const std::string& ) {};
 
 	//! Change the maximum bitrate (effectively the speed) of Dasher
-	virtual void ChangeMaxBitRate(double NewMaxBitRate) {};
+	virtual void ChangeMaxBitRate(double ) {};
 
 	//! Generate a new langage model. Not usually needed
-	virtual void ChangeLanguageModel(unsigned int NewLanguageModelID) {};
+	virtual void ChangeLanguageModel(unsigned int ) {};
 
 	//! Generate a new view of the model. Call it with 0 when starting up
-	virtual void ChangeView(unsigned int NewViewID) {};
+	virtual void ChangeView(unsigned int ) {};
 
 	//! Change the orientation (l->r, r->l, so on) of the model
-	virtual void ChangeOrientation(Opts::ScreenOrientations Orientation) {};
+	virtual void ChangeOrientation(Opts::ScreenOrientations ) {};
 
 	//! Set the file encoding of output files to Encoding
-	virtual void SetFileEncoding(Opts::FileEncodingFormats Encoding) {};
+	virtual void SetFileEncoding(Opts::FileEncodingFormats ) {};
 
 	//! Inform the core that the screen has this size
-	virtual void SetScreenSize(long Width, long Height) {};
+	virtual void SetScreenSize(long , long ) {};
 	
 	//! Set the size of the font used in the Dasher canvas
-	virtual void SetDasherFontSize(Dasher::Opts::FontSize fontsize) {};
+	virtual void SetDasherFontSize(Dasher::Opts::FontSize ) {};
 
 	//! Set the number of dimensions of input (either 1 or 2)
-	virtual void SetDasherDimensions(bool Value) {};
+	virtual void SetDasherDimensions(bool ) {};
 
 	// These are recommended options for the Dasher GUI. {{{ They don't actually
 	// change the way Dasher works. They are part of the Dasher interface
@@ -53,49 +53,49 @@ public:
 	// easy for the Dasher engine to control the GUI later on. }}}
 
 	//! True if toolbar should be shown, false otherwise
-	virtual void ShowToolbar(bool Value) {};
+	virtual void ShowToolbar(bool ) {};
 
 	//! True if toolbar should show text, false otherwse
-	virtual void ShowToolbarText(bool Value) {};
+	virtual void ShowToolbarText(bool ) {};
 
 	//! True if toolbar should have large icons, false otherwise
-	virtual void ShowToolbarLargeIcons(bool Value) {};
+	virtual void ShowToolbarLargeIcons(bool ) {};
 
 	//! True if the speed slider should be shown, false otherwise
-	virtual void ShowSpeedSlider(bool Value) {};
+	virtual void ShowSpeedSlider(bool ) {};
 
 	//! True if the window layout should be fixed, false otherwise
-	virtual void FixLayout(bool Value) {};
+	virtual void FixLayout(bool ) {};
 
 	//! True if new files should be timestamped, false otherwise
-	virtual void TimeStampNewFiles(bool Value) {};
+	virtual void TimeStampNewFiles(bool ) {};
 
 	//! True if all text should be copied to clipboard when Dasher is stopped, false otherwise
-	virtual void CopyAllOnStop(bool Value) {};
+	virtual void CopyAllOnStop(bool ) {};
 
 	//! True if a box should be drawn to represent the logical position of the mouse
-	virtual void DrawMouse(bool Value) {};
+	virtual void DrawMouse(bool ) {};
 
 	//! Set the editbox font 
-	virtual void SetEditFont(std::string Name, long Size) {};
+	virtual void SetEditFont(std::string , long ) {};
 
 	//! Set the canvas font
-	virtual void SetDasherFont(std::string Name) {};
+	virtual void SetDasherFont(std::string ) {};
 
 	//! Set the height of the edit box
-	virtual void SetEditHeight(long Value) {};
+	virtual void SetEditHeight(long ) {};
 	
 	//! Should Dasher start and stop on space bar?
-	virtual void StartOnSpace(bool Value) {};
+	virtual void StartOnSpace(bool ) {};
 
 	//! Should Dasher start and stop on left mouse button?
-	virtual void StartOnLeft(bool Value) {};
+	virtual void StartOnLeft(bool ) {};
 	
 	//! Should Dasher be keyboard controlled?
-	virtual void KeyControl(bool Value) {};
+	virtual void KeyControl(bool ) {};
 	
 	//! Should Dasher pause when the pointer leaves the window?
-	virtual void WindowPause(bool Value) {};
+	virtual void WindowPause(bool ) {};
 };
 
 

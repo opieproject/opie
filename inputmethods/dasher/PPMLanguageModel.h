@@ -16,7 +16,7 @@
 
 #include "LanguageModel.h"
 
-static char dumpTrieStr[40000];
+// static char dumpTrieStr[40000];
 const int MAX_ORDER = 5;
 const int maxcont =200;
 
@@ -25,7 +25,7 @@ class Dasher::CPPMLanguageModel : public Dasher::CLanguageModel, private NoClone
 {
 public:
 	CPPMLanguageModel(CAlphabet *_alphabet, int _normalization);
-	~CPPMLanguageModel();
+	virtual ~CPPMLanguageModel();
 	
 	class CPPMnode {
 	public:
@@ -41,7 +41,8 @@ public:
 	
 	class CPPMContext : public CContext {
 	public:
-		CPPMContext(CPPMContext const &input) {head = input.head;	order= input.order;}
+		CPPMContext(CPPMContext const &input) : CContext(input)
+                  { head = input.head;order= input.order;}
 		CPPMContext(CPPMnode* _head=0, int _order=0) : head(_head),order(_order) {};
 		~CPPMContext() {};
 		void dump();

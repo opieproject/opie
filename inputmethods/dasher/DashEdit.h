@@ -23,7 +23,7 @@ namespace Dasher {class CDashEditbox;}
 class Dasher::CDashEditbox
 {
 public:
-	CDashEditbox() : m_iFlushed(0), m_DasherInterface(0), m_dirty(false) {}
+	CDashEditbox() : m_dirty(false),m_iFlushed(0),  m_DasherInterface(0) {}
 
 	//! Provide the Editbox with a widget interface
 	virtual void SetInterface(CDasherWidgetInterface* DasherInterface) {m_DasherInterface = DasherInterface;}
@@ -45,7 +45,7 @@ public:
 	virtual void get_new_context(std::string& str, int max)=0;
 	
 	//! Delete flushed text from the editbox
-	virtual inline void unflush()=0;
+	virtual void unflush()=0;
 	
 	//! Enter a the character Symbol into the text box
 	virtual void output(symbol Symbol)=0;
@@ -65,7 +65,7 @@ public:
 	//
 	//! If switched on, all new files should be timestamped, either in the
 	//! filename or in file metadata
-	virtual void TimeStampNewFiles(bool Value) {}
+	virtual void TimeStampNewFiles(bool ) {}
 
 	//! Return true if any text has been modified since the last save (optional)
 	bool IsDirty() {return m_dirty;}
@@ -75,14 +75,14 @@ public:
 	//! New file - provide a file save dialogue and return the filename in
 	//! filename, or provide a blank filename and present a file 
 	//! save dialogue when Save() is called
-	virtual void New(const std::string& filename) {}; // filename can be "", but you cannot call Save() without having set a filename.
+	virtual void New(const std::string& ) {}; // filename can be "", but you cannot call Save() without having set a filename.
 	
 	//! Open a file (optional)
 	//
 	//! Provide a file open dialogue and set filename to the 
 	//! filename. Return true if a file is chosen and opened successfully,
 	//! false otherwise
-	virtual bool Open(const std::string& filename) {return false;};
+	virtual bool Open(const std::string& ) {return false;};
 
 	//! Open a file and append to it (optional)
 	// 
@@ -90,13 +90,13 @@ public:
 	//! filename. The file will then have any new text appended to it. 
 	//! Return true if a file is chosen and opened successfully, false 
 	//! otherwise
-	virtual bool OpenAppendMode(const std::string& filename) {return false;};
+	virtual bool OpenAppendMode(const std::string& ) {return false;};
 	//! Save a file as a provided filename (optional)
 	// 
 	//! Provide a file save dialogue and set filename to the 
 	//! filename. Return true if a file is chosen and saved successfully,
 	//! false otherwise
-	virtual bool SaveAs(const std::string& filename) {return false;};
+	virtual bool SaveAs(const std::string& ) {return false;};
 
 	//! Save the current file (optional)
 	//

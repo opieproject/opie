@@ -74,9 +74,23 @@ using namespace Opts;
 
 /////////////////////////////////////////////////////////////////////////////
 
-inline CDasherNode::CDasherNode(CDasherNode *parent,symbol Symbol, unsigned int igroup, int iphase, ColorSchemes ColorScheme,int ilbnd,int ihbnd,CLanguageModel *lm, int Colour=0)
-	: m_parent(parent),m_Symbol(Symbol),m_iGroup(igroup),m_iLbnd(ilbnd),m_iHbnd(ihbnd),m_languagemodel(lm),m_iPhase(iphase),
-  m_context(0), m_iAge(0), m_bAlive(1), m_Children(0), m_bForce(false), m_iChars(0), m_ColorScheme(ColorScheme), m_bControlChild(false), m_iColour(Colour)
+inline CDasherNode::CDasherNode(CDasherNode *parent,symbol Symbol, unsigned int igroup, int iphase, ColorSchemes ColorScheme,int ilbnd,int ihbnd,CLanguageModel *lm, int Colour=0) :
+ 	  m_iLbnd(ilbnd),
+	  m_iHbnd(ihbnd),
+	  m_iGroup(igroup),
+          m_iChars(0), 
+          m_iAge(0), 
+	  m_bAlive(1), 
+          m_bControlChild(false),
+	  m_ColorScheme(ColorScheme), 
+	  m_iPhase(iphase),
+          m_iColour(Colour),
+	  m_Symbol(Symbol),
+	  m_languagemodel(lm),
+          m_Children(0), 
+	  m_parent(parent),
+	  m_context(0),  
+	  m_bForce(false)
 {
 	/*
 	switch (ColorScheme) {
