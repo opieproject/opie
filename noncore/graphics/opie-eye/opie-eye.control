@@ -1,0 +1,9 @@
+Package: opie-drawpad
+Files: plugins/application/libopie-eye.so* bin/opie-eye apps/Applications/opie-eye.desktop
+Priority: optional
+Section: opie/pim
+Maintainer: Holger Freyther <zecke@handhelds.org>
+Architecture: arm
+Depends: task-opie-minimal, libopiecore2, libopieui2
+Description: A image viewer
+Version: $QPE_VERSION$EXTRAVERSION
