@@ -843,7 +843,7 @@ void DateBookDB::loadFile( const QString &strFile )
 	    case FRWeekdays:
 		    // QtopiaDesktop 1.6 sometimes creates 'rweekdays="0"'
 		    // when it goes mad. This causes datebook to crash.. (se)
-		    if ( value.toInt() != 0 ) 
+		    if ( value.toInt() != 0 )
 			    rp.days = value.toInt();
 		    else
 			    rp.days = 1;
@@ -1040,7 +1040,7 @@ bool DateBookDB::removeRepeat( const Event &ev )
     QValueListIterator<Event> it;
     for ( it = repeatEvents.begin(); it != repeatEvents.end(); ++it ) {
 	if ( removeMe == (*it).repeatPattern().createTime ) {
-	    repeatEvents.remove( *it );
+	    (void)repeatEvents.remove( it );
 	    // best break, or we are going into undefined territory!
 	    return TRUE;
 	}
