@@ -730,10 +730,12 @@ void AdvancedFm::showFileMenu() {
     QFile fi(curApp);
 
     QPopupMenu *m = new QPopupMenu(0);
+    QPopupMenu *n = new QPopupMenu(0);
+//    QPopupMenu *o = new QPopupMenu(0);
 
     m->insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
     if ( !QFileInfo(fi).isDir() ) {
-    m->insertSeparator();
+//    m->insertSeparator();
 //         m->insertItem( tr( "Change Directory" ), this, SLOT( doLocalCd() ));
 //     } else {
 
@@ -745,42 +747,40 @@ void AdvancedFm::showFileMenu() {
 
         m->insertItem( Resource::loadPixmap( "txt" ), tr( "Open as text" ),this, SLOT( runText() ) );
     }
-    m->insertSeparator();
 
+    m->insertItem(tr("Actions"),n);
+    if(isLocalView)
+        n->insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
+    else
+        n->insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
+
+    n->insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ));
+
+    n->insertSeparator();
+    
+    
+    if(isLocalView)
+        n->insertItem( tr( "Rename" ), this, SLOT( localRename() ));
+    else
+        n->insertItem( tr( "Rename" ), this, SLOT( remoteRename() ));
+
+    n->insertItem( tr( "Copy" ), this, SLOT( copy() ));
+    n->insertItem( tr( "Copy As" ), this, SLOT( copyAs() ));
+    n->insertItem( tr( "Copy Same Dir" ), this, SLOT( copySameDir() ));
+    n->insertItem( tr( "Move" ), this, SLOT( move() ));
+
+    n->insertSeparator();
 
     if(isLocalView)
-        m->insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
+        n->insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
     else
-        m->insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
+        n->insertItem( tr( "Delete" ), this, SLOT( remoteDelete() ));
 
-    m->insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ));
-    m->insertSeparator();
 
-    if(isLocalView)
-        m->insertItem( tr( "Rename" ), this, SLOT( localRename() ));
-    else
-        m->insertItem( tr( "Rename" ), this, SLOT( remoteRename() ));
-
-    m->insertItem( tr( "Copy" ), this, SLOT( copy() ));
-    m->insertItem( tr( "Copy As" ), this, SLOT( copyAs() ));
-    m->insertItem( tr( "Copy Same Dir" ), this, SLOT( copySameDir() ));
-    m->insertItem( tr( "Move" ), this, SLOT( move() ));
-    m->insertSeparator();
     m->insertItem( tr( "Add To Documents" ), this, SLOT( addToDocs() ));
-
-//   if(isLocalView)
-//     m->insertItem( tr( "Rescan" ), this, SLOT( populateLocalView() ));
-//   else
-//     m->insertItem( tr( "Rescan" ), this, SLOT( populateRemoteView() ));
 
     m->insertItem( tr( "Run Command" ), this, SLOT( runCommand() ));
     m->insertItem( tr( "File Info" ), this, SLOT( fileStatus() ));
-    m->insertSeparator();
-
-    if(isLocalView)
-        m->insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
-    else
-        m->insertItem( tr( "Delete" ), this, SLOT( remoteDelete() ));
 
     m->insertSeparator();
     m->insertItem( tr( "Set Permissions" ), this, SLOT( filePerms() ));
