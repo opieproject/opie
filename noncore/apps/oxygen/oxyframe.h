@@ -18,14 +18,14 @@
 #define _OXYFRAME_H
 
 
-#include <qframe.h>
+#include <qlabel.h>
 
-class OxyFrame : public QFrame
+class OxyFrame : public QLabel
 {
 	Q_OBJECT
 	
     public:
-        OxyFrame(  QWidget *parent=0, const char *name=0);
+        OxyFrame(  QWidget *parent=0, const char *name=0, QString symbol="" );
 
         void mousePressEvent( QMouseEvent *);
 

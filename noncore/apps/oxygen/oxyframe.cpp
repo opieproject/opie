@@ -19,13 +19,21 @@
 #include <qpe/config.h>
 #include "oxyframe.h"
 
-OxyFrame::OxyFrame(QWidget *parent, const char *name) : QFrame(parent,name)
+OxyFrame::OxyFrame(QWidget *parent, const char *name, QString symbol ) 
+  : QLabel(parent,name)
 {
     N = name;
     this->setFrameStyle( QFrame::Box );
     this->setLineWidth( 0 );
     this->setMidLineWidth( 1 );
     this->setFrameShadow( QFrame::Sunken );
+    setMinimumSize(6,6);
+    setScaledContents( true );
+    QFont font;
+    font.setWeight(QFont::Light);
+    font.setPixelSize(3);
+    setFont( font );
+    setText( symbol );
 }
 
 void OxyFrame::mousePressEvent (  QMouseEvent * e ){
