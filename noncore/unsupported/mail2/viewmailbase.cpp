@@ -1,10 +1,10 @@
 #include <qtextbrowser.h>
 #include <qlistview.h>
-#include <qtoolbar.h>
 #include <qaction.h>
 #include <qlabel.h>
 #include <qvbox.h>
 
+#include <qpe/qpetoolbar.h>
 #include <qpe/resource.h>
 
 #include "viewmailbase.h"
@@ -16,7 +16,7 @@ ViewMailBase::ViewMailBase(QWidget *parent, const char *name, WFlags fl)
 	setCaption(tr("E-Mail by %1"));
 	setToolBarsMovable(false);
 
-	toolbar = new QToolBar(this);
+	toolbar = new QPEToolBar(this);
 	toolbar->setHorizontalStretchable(true);
 	addToolBar(toolbar);
 

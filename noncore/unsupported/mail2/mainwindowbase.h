@@ -6,8 +6,8 @@
 class ServerConnection;
 class QProgressBar;
 class FolderWidget;
+class QPEToolBar;
 class MailTable;
-class QToolBar;
 class QAction;
 class QLabel;
 
@@ -25,8 +25,8 @@ protected:
 	ServerConnection *serverConnection;
 	QProgressBar *statusProgress;
 	FolderWidget *folderView;
+	QPEToolBar *toolbar;
 	MailTable *mailView;
-	QToolBar *toolbar;
 	QAction *compose, *folders, *findmails, *configure, *stop;
 	QLabel *statusLabel;
 

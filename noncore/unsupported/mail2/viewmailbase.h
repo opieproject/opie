@@ -5,8 +5,8 @@
 
 class QAction;
 class OpenDiag;
-class QToolBar;
 class QListView;
+class QPEToolBar;
 class QTextBrowser;
 
 class ViewMailBase : public QMainWindow
@@ -19,7 +19,7 @@ public:
 protected:
 	QAction *reply, *forward, *attachbutton, *deleteMail;
 	QListView *attachments;
-	QToolBar *toolbar;
+	QPEToolBar *toolbar;
 	QTextBrowser *browser;
 	OpenDiag *openDiag;
 

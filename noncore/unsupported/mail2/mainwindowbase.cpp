@@ -1,12 +1,12 @@
 #include <qprogressbar.h>
 #include <qtoolbutton.h>
 #include <qpopupmenu.h>
-#include <qtoolbar.h>
 #include <qaction.h>
 #include <qheader.h>
 #include <qlabel.h>
 #include <qvbox.h>
 
+#include <qpe/qpetoolbar.h>
 #include <qpe/resource.h>
 
 #include "mainwindowbase.h"
@@ -19,7 +19,7 @@ MainWindowBase::MainWindowBase(QWidget *parent, const char *name, WFlags fl)
 	setCaption(tr("E-Mail"));
 	setToolBarsMovable(false);
 
-	toolbar = new QToolBar(this);
+	toolbar = new QPEToolBar(this);
 	addToolBar(toolbar);
 	toolbar->setHorizontalStretchable(true);
 

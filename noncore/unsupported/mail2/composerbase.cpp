@@ -2,12 +2,12 @@
 #include <qpopupmenu.h>
 #include <qcombobox.h>
 #include <qlineedit.h>
-#include <qtoolbar.h>
 #include <qlayout.h>
 #include <qaction.h>
 #include <qlabel.h>
 #include <qvbox.h>
 
+#include <qpe/qpetoolbar.h>
 #include <qpe/resource.h>
 
 #include "listviewplus.h"
@@ -19,7 +19,7 @@ ComposerBase::ComposerBase(QWidget *parent, const char *name, WFlags fl)
 	setCaption(tr("Compose Message"));
 	setToolBarsMovable(false);
 
-	toolbar = new QToolBar(this);
+	toolbar = new QPEToolBar(this);
 	addToolBar(toolbar);
 	toolbar->setHorizontalStretchable(true);
 
@@ -116,7 +116,7 @@ ComposerBase::ComposerBase(QWidget *parent, const char *name, WFlags fl)
 	attachWindow->setToolBarsMovable(false);
 	attachWindow->hide();
 
-	attachToolbar = new QToolBar(attachWindow);
+	attachToolbar = new QPEToolBar(attachWindow);
 	attachToolbar->setVerticalStretchable(true);
 	
 	addattach = new QAction(tr("Add an Attachement"), QIconSet(Resource::loadPixmap("mail/newmail")), 0, 0, this);

@@ -6,9 +6,9 @@
 class QMultiLineEdit;
 class ListViewPlus;
 class QPopupMenu;
+class QPEToolBar;
 class QComboBox;
 class QLineEdit;
-class QToolBar;
 class QAction;
 class QLabel;
 
@@ -38,9 +38,9 @@ protected:
 	ListViewPlus *attachView;
 	QMainWindow *attachWindow;
 	QPopupMenu *attachPopup;
+	QPEToolBar *toolbar, *attachToolbar;
 	QComboBox *fromBox, *from, *receiversBox, *subjectBox, *priority;
 	QLineEdit *replyto, *to, *cc, *bcc, *subject;
-	QToolBar *toolbar, *attachToolbar;
 	QAction *sendmail, *attachfile, *addressbook, *abort, *addattach, *delattach;
 	QLabel *fromLabel, *status;
 
