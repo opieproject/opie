@@ -18,6 +18,7 @@ HEADERS   = ofontmenu.h \
     pim/opimaccessbackend.h \
     pim/otodoaccess.h \
     pim/otodoaccessbackend.h \
+    pim/oconversion.h \
     pim/ocontact.h \
     pim/ocontactaccess.h \
     pim/ocontactaccessbackend.h \
@@ -62,6 +63,7 @@ SOURCES   = ofontmenu.cc  \
        pim/otodoaccess.cpp \
        pim/otodoaccessbackend.cpp \
              pim/otodoaccessxml.cpp \
+             pim/oconversion.cpp \
              pim/ocontact.cpp \
              pim/ocontactaccess.cpp \
              pim/ocontactaccessbackend_vcard.cpp \

@@ -1,8 +1,6 @@
 /**********************************************************************
 ** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
-** Copyright (C) 2002 by Stefan Eilers (eilers.stefan@epost.de)
-**
-** This file is part of the Qtopia Environment.
+** Copyright (C) 2002-2003 by Stefan Eilers (eilers.stefan@epost.de)
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -25,7 +23,7 @@
 #include "opimresolver.h"
 
 #include <qpe/stringutil.h>
-#include <qpe/timeconversion.h>
+#include "oconversion.h"
 #include <qpe/timestring.h>
 
 #include <qobject.h>
@@ -1017,7 +1015,7 @@ void OContact::setBirthday( const QDate &v )
 	}
 
 	if ( v.isValid() )
-		replace( Qtopia::Birthday, TimeConversion::toString( v ) );
+		replace( Qtopia::Birthday, OConversion::dateToString( v ) );
 
 }
 
@@ -1035,7 +1033,7 @@ void OContact::setAnniversary( const QDate &v )
 	}
 
 	if ( v.isValid() )
-		replace( Qtopia::Anniversary, TimeConversion::toString( v ) );
+		replace( Qtopia::Anniversary, OConversion::dateToString( v ) );
 }
 
 /*! \fn QDate OContact::birthday() const
@@ -1046,7 +1044,7 @@ QDate OContact::birthday() const
 	QString str = find( Qtopia::Birthday );
 	qWarning ("Birthday %s", str.latin1() );
 	if ( !str.isEmpty() )
-		return  TimeConversion::fromString ( str );
+		return  OConversion::dateFromString ( str );
 	else
 		return QDate();
 }
@@ -1061,7 +1059,7 @@ QDate OContact::anniversary() const
 	QString str = find( Qtopia::Anniversary );
 	qWarning ("Anniversary %s", str.latin1() );
 	if ( !str.isEmpty() )
-		return TimeConversion::fromString ( str );
+		return OConversion::dateFromString ( str );
 	else
 		return empty;
 }
