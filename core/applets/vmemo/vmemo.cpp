@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.51 2002-09-20 16:15:20 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.52 2002-09-21 22:26:31 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 extern "C" {
@@ -309,9 +309,6 @@ bool VMemo::startRecording() {
 
   if (openDSP() == -1)  {
     recording = FALSE;
-    msgLabel=0;
-    delete msgLabel;
-    
     return FALSE;
   }
   
@@ -427,8 +424,12 @@ int VMemo::openDSP() {
   }
   
   if(dsp == -1)  {
-    perror("open(\"/dev/dsp\")");
-    errorMsg="open(\"/dev/dsp\")\n "+(QString)strerror(errno);
+      msgLabel->close();
+      msgLabel=0;
+      delete msgLabel;
+    
+      perror("open(\"/dev/dsp\")");
+      errorMsg="open(\"/dev/dsp\")\n "+(QString)strerror(errno);
     QMessageBox::critical(0, "vmemo", errorMsg, "Abort");
     return -1;
   }
