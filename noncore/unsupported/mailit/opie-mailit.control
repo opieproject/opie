@@ -6,4 +6,4 @@ Architecture: arm
 Version: $OPIE_VERSION-$SUB_VERSION
 Depends: opie-base
 Description: EMail
- A simple POP3 email client for the Qt Palmtop environment.
+ A simple POP3 email client for the Opie environment.
