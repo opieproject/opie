@@ -5,10 +5,12 @@
 
 */
 
-// $Id: ogfxeffect.cpp,v 1.1 2002-06-29 23:45:19 sandman Exp $
+// $Id: ogfxeffect.cpp,v 1.2 2002-07-01 23:38:26 sandman Exp $
 
 #include <qimage.h>
 #include <qpainter.h>
+
+#include <qpe/qmath.h>
 
 #include "ogfxeffect.h"
 
@@ -21,7 +23,7 @@
 
 
 QPixmap& OGfxEffect::gradient(QPixmap &pixmap, const QColor &ca,
-	const QColor &cb, GradientType eff, int ncols)
+	const QColor &cb, GradientType eff, int /*ncols*/)
 {
     if(pixmap.depth() > 8 &&
        (eff == VerticalGradient || eff == HorizontalGradient)) {
@@ -91,12 +93,10 @@ QPixmap& OGfxEffect::gradient(QPixmap &pixmap, const QColor &ca,
 
 QPixmap& OGfxEffect::blend(QPixmap &pixmap, float initial_intensity,
 			  const QColor &bgnd, GradientType eff,
-			  bool anti_dir, int ncols)
+			  bool anti_dir, int /*ncols*/)
 {
     QImage image = pixmap.convertToImage();
     OGfxEffect::blend(image, initial_intensity, bgnd, eff, anti_dir);
-
-    unsigned int tmp;
 
 	if ( pixmap. depth ( ) <= 8 )
 		image. convertDepth ( pixmap. depth ( ));
@@ -218,7 +218,7 @@ QImage& OGfxEffect::blend(QImage &image, float initial_intensity,
                 if (eff == RectangleGradient)
                     intensity = initial_intensity + QMAX(xvar, yvar);
                 else
-                    intensity = initial_intensity + sqrt(xvar * xvar + yvar * yvar);
+                    intensity = initial_intensity + qSqrt(xvar * xvar + yvar * yvar);
                 if (intensity > 1) intensity = 1;
                 if (intensity < 0) intensity = 0;
 
@@ -262,7 +262,7 @@ QImage& OGfxEffect::blend(QImage &image, float initial_intensity,
                 if (eff == RectangleGradient)
                     intensity = initial_intensity + QMAX(xvar, yvar);
                 else
-                    intensity = initial_intensity + sqrt(xvar * xvar + yvar * yvar);
+                    intensity = initial_intensity + qSqrt(xvar * xvar + yvar * yvar);
                 if (intensity > 1) intensity = 1;
                 if (intensity < 0) intensity = 0;
 
