@@ -46,14 +46,14 @@ public:
     ~OpieFtp();
 
     QTabWidget *TabWidget;
-    QWidget *tab, *tab_2, *tab_3;;
+    QWidget *tab, *tab_2, *tab_3;
     QListView *Local_View, *Remote_View;
 
     QComboBox *UsernameComboBox, *ServerComboBox;
-    QLineEdit *PasswordEdit, *remotePath, *currentPathEdit; 
+    QLineEdit *PasswordEdit, *remotePath, *currentPathEdit;
     QLabel *TextLabel2, *TextLabel1, *TextLabel3, *TextLabel4;;
     QSpinBox* PortSpinBox;
-    QPopupMenu *connectionMenu, *localMenu, *remoteMenu;
+    QPopupMenu *connectionMenu, *localMenu, *remoteMenu, *tabMenu;
     QDir currentDir;
     QString currentRemoteDir;
     QString filterStr;
@@ -61,8 +61,10 @@ public:
     bool b;
     
 protected slots:
-    void showLocalMenu( );
-    void showRemoteMenu( );
+    void showLocalMenu( QListViewItem *);
+    void showRemoteMenu( QListViewItem *);
+    void doLocalCd();
+    void doRemoteCd();
     void localUpload();
     void remoteDownload();
     void newConnection();
@@ -87,8 +89,14 @@ protected slots:
     void remoteRename();
     void localRename();
     void currentPathEditChanged();
+  void switchToLocalTab();
+  void switchToRemoteTab();
+  void switchToConfigTab();
 protected:
     void nullifyCallBack();
+    QGridLayout* tabLayout;
+    QGridLayout* tabLayout_2;
+    QGridLayout* tabLayout_3;
     
 };
 

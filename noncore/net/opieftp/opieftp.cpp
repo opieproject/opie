@@ -45,6 +45,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+
 QProgressBar *ProgressBar;
 static netbuf *conn=NULL;
 
@@ -62,48 +63,63 @@ static int log_progress(netbuf *ctl, int xfered, void *arg)
 OpieFtp::OpieFtp( )
         : QMainWindow( )
 {
-    resize( 236, 290 ); 
-    setMaximumSize( QSize( 240, 320 ) );
     setCaption( tr( "OpieFtp" ) );
+
+    QGridLayout *layout = new QGridLayout( this );
+    layout->setSpacing( 2);
+    layout->setMargin( 2);
 
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
-    QPEMenuBar *menuBar = new QPEMenuBar( this );
+    QPEMenuBar *menuBar = new QPEMenuBar(this);
     connectionMenu  = new QPopupMenu( this );
     localMenu  = new QPopupMenu( this );
     remoteMenu  = new QPopupMenu( this );
+    tabMenu = new QPopupMenu( this );
+
+    layout->addMultiCellWidget( menuBar, 0, 0, 0, 3 );
+
     menuBar->insertItem( tr( "Connection" ), connectionMenu);
     menuBar->insertItem( tr( "Local" ), localMenu);
     menuBar->insertItem( tr( "Remote" ), remoteMenu);
+    menuBar->insertItem( tr( "View" ), tabMenu);
 
     connectionMenu->insertItem( tr( "New" ), this,  SLOT( newConnection() ));
     connectionMenu->insertItem( tr( "Connect" ), this,  SLOT( connector() ));
     connectionMenu->insertItem( tr( "Disconnect" ), this,  SLOT( disConnector() ));
 
     localMenu->insertItem( tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
+    localMenu->insertSeparator();
     localMenu->insertItem( tr( "Upload" ), this, SLOT( localUpload() ));
     localMenu->insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
     localMenu->insertItem( tr( "Rename" ), this, SLOT( localRename() ));
     localMenu->insertSeparator();
     localMenu->insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
-
+    localMenu->setCheckable(TRUE);
+    
     remoteMenu->insertItem( tr( "Download" ), this, SLOT( remoteDownload() ));
     remoteMenu->insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
     remoteMenu->insertItem( tr( "Rename" ), this, SLOT( remoteRename() ));
     remoteMenu->insertSeparator();
     remoteMenu->insertItem( tr( "Delete" ), this, SLOT( remoteDelete() ));
 
-    ProgressBar = new QProgressBar( this, "ProgressBar" );
-    ProgressBar->setGeometry( QRect( 5, 268, 231, 15 ) ); 
+    tabMenu->insertItem( tr( "Switch to Local" ), this, SLOT( switchToLocalTab() ));
+    tabMenu->insertItem( tr( "Switch to Remote" ), this, SLOT( switchToRemoteTab() ));
+    tabMenu->insertItem( tr( "Switch to Config" ), this, SLOT( switchToConfigTab() ));
+    tabMenu->setCheckable(TRUE);
 
-    TabWidget = new QTabWidget( this, "TabWidget2" );
-    TabWidget->setGeometry( QRect( 3, 25, 240, 220 ) );
+    TabWidget = new QTabWidget( this, "TabWidget" );
+    layout->addMultiCellWidget( TabWidget, 1, 1, 0, 3 );
+
     TabWidget->setTabShape(QTabWidget::Triangular);
 
     tab = new QWidget( TabWidget, "tab" );
+    tabLayout = new QGridLayout( tab );
+    tabLayout->setSpacing( 2);
+    tabLayout->setMargin( 2);
 
     Local_View = new QListView( tab, "Local_View" );
-    Local_View->setGeometry( QRect( 3, 2, 225, 195 ) );
+//    Local_View->setResizePolicy( QListView::AutoOneFit );
     Local_View->addColumn( "File",120);
     Local_View->addColumn( "Size",-1);
     Local_View->setColumnAlignment(1,QListView::AlignRight);
@@ -111,6 +127,8 @@ OpieFtp::OpieFtp( )
     Local_View->setColumnAlignment(2,QListView::AlignRight);
     Local_View->setAllColumnsShowFocus(TRUE);
     QPEApplication::setStylusOperation( Local_View->viewport(),QPEApplication::RightOnHold);
+
+    tabLayout->addWidget( Local_View, 0, 0 );
 
     connect( Local_View, SIGNAL( doubleClicked( QListViewItem*)),
              this,SLOT( localListClicked(QListViewItem *)) );
@@ -120,9 +138,11 @@ OpieFtp::OpieFtp( )
     TabWidget->insertTab( tab, tr( "Local" ) );
 
     tab_2 = new QWidget( TabWidget, "tab_2" );
+    tabLayout_2 = new QGridLayout( tab_2 );
+    tabLayout_2->setSpacing( 2);
+    tabLayout_2->setMargin( 2);
 
     Remote_View = new QListView( tab_2, "Remote_View" );
-    Remote_View->setGeometry( QRect( 3, 2, 225, 195 ) ); 
     Remote_View->addColumn( "File",120);
     Remote_View->addColumn( "Size",-1);
     Remote_View->setColumnAlignment(1,QListView::AlignRight);
@@ -136,52 +156,69 @@ OpieFtp::OpieFtp( )
     connect( Remote_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
              this,SLOT( RemoteListPressed(int, QListViewItem *, const QPoint&, int)) );
 
+    tabLayout_2->addWidget( Remote_View, 0, 0 );
+
     TabWidget->insertTab( tab_2, tr( "Remote" ) );
 
     tab_3 = new QWidget( TabWidget, "tab_3" );
+    tabLayout_3 = new QGridLayout( tab_3 );
+    tabLayout_3->setSpacing( 2);
+    tabLayout_3->setMargin( 2);
 
     TextLabel1 = new QLabel( tab_3, "TextLabel1" );
-    TextLabel1->setGeometry( QRect( 10, 10, 60, 16 ) ); 
     TextLabel1->setText( tr( "Username" ) );
+    tabLayout_3->addMultiCellWidget( TextLabel1, 0, 0, 0, 1 );
+
     UsernameComboBox = new QComboBox( FALSE, tab_3, "UsernameComboBox" );
-    UsernameComboBox->setGeometry( QRect( 10, 25, 196, 21 ) );
     UsernameComboBox->setEditable(TRUE);
-    UsernameComboBox->lineEdit()->setText("anonymous");
+//    UsernameComboBox->lineEdit()->setText("anonymous");
+    UsernameComboBox->lineEdit()->setText("root");
 //    UsernameComboBox->lineEdit()->setText("llornkcor");
+    tabLayout_3->addMultiCellWidget( UsernameComboBox, 1, 1, 0, 1 );
 
     TextLabel2 = new QLabel( tab_3, "TextLabel2" );
-    TextLabel2->setGeometry( QRect( 10, 50, 65, 16 ) ); 
     TextLabel2->setText( tr( "Password" ) );
+    tabLayout_3->addMultiCellWidget( TextLabel2, 0, 0, 2, 3 );
+
     PasswordEdit = new QLineEdit( "", tab_3, "PasswordComboBox" );
-    PasswordEdit->setGeometry( QRect( 10, 65, 195, 16 ) );
     PasswordEdit->setEchoMode(QLineEdit::Password);
-    PasswordEdit->setText( tr( "me@opieftp.org" ) );
+//    PasswordEdit->setText( tr( "me@opieftp.org" ) );
+//    PasswordEdit->setText( tr( "" ) );
+    tabLayout_3->addMultiCellWidget( PasswordEdit, 1, 1, 2, 3 );
 
     TextLabel3 = new QLabel( tab_3, "TextLabel3" );
-    TextLabel3->setGeometry( QRect( 10, 90, 95, 16 ) ); 
     TextLabel3->setText( tr( "Remote server" ) );
+    tabLayout_3->addMultiCellWidget( TextLabel3, 2, 2, 0, 1 );
+
     ServerComboBox = new QComboBox( FALSE, tab_3, "ServerComboBox" );
-    ServerComboBox->setGeometry( QRect( 10, 105, 195, 21 ) );
     ServerComboBox->setEditable(TRUE);
     ServerComboBox->lineEdit()->setText( tr( "" ) );
+    tabLayout_3->addMultiCellWidget( ServerComboBox, 3, 3, 0, 1 );
 //    ServerComboBox->lineEdit()->setText( tr( "llornkcor.com" ) );
+    ServerComboBox->lineEdit()->setText( tr( "192.168.129.201" ) );
 
     QLabel *TextLabel5 = new QLabel( tab_3, "TextLabel5" );
-    TextLabel5->setGeometry( QRect( 10, 130, 95, 16 ) ); 
     TextLabel5->setText( tr( "Remote path" ) );
+    tabLayout_3->addMultiCellWidget( TextLabel5, 2, 2, 2, 3 );
+
     remotePath = new QLineEdit( "/", tab_3, "remotePath" );
-    remotePath->setGeometry( QRect( 10, 145, 195, 16 ) );
     remotePath->setText( currentRemoteDir = "/");
 //    remotePath->setText( currentRemoteDir = "/home/llornkcor/");
-    
+    tabLayout_3->addMultiCellWidget( remotePath, 3, 3, 2, 3 );
+
     TextLabel4 = new QLabel( tab_3, "TextLabel4" );
-    TextLabel4->setGeometry( QRect( 10, 170, 30, 21 ) ); 
     TextLabel4->setText( tr( "Port" ) );
+    tabLayout_3->addMultiCellWidget( TextLabel4, 4, 4, 0, 1 );
+
     PortSpinBox = new QSpinBox( tab_3, "PortSpinBox" );
-    PortSpinBox->setGeometry( QRect( 40, 175, 75, 20 ) ); 
     PortSpinBox->setButtonSymbols( QSpinBox::UpDownArrows );
     PortSpinBox->setMaxValue(32786);
-    PortSpinBox->setValue( 21);
+    PortSpinBox->setValue( 4242);
+//    PortSpinBox->setValue( 21);
+    tabLayout_3->addMultiCellWidget( PortSpinBox, 4, 4, 1, 1);
+
+    QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
+    tabLayout_3->addItem( spacer, 5, 0 );
 
     TabWidget->insertTab( tab_3, tr( "Config" ) );
 
@@ -192,11 +229,16 @@ OpieFtp::OpieFtp( )
     currentDir.setPath( QDir::currentDirPath());
 //      currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
     currentPathEdit = new QLineEdit( "/", this, "currentPathEdit" );
-    currentPathEdit->setGeometry( QRect( 5, 248, 220, 18 ) );
+    layout->addMultiCellWidget( currentPathEdit, 3, 3, 0, 3 );
+
     currentPathEdit->setText( currentDir.canonicalPath());
     connect( currentPathEdit,SIGNAL(returnPressed()),this,SLOT(currentPathEditChanged()));
-    
+
+    ProgressBar = new QProgressBar( this, "ProgressBar" );
+    layout->addMultiCellWidget( ProgressBar, 4, 4, 0, 3 );
+
     filterStr="*";
+    b=FALSE;
     populateLocalView();
 }
 
@@ -208,17 +250,34 @@ void OpieFtp::cleanUp()
 {
     if(conn)
         FtpQuit(conn);
-   QFile f("./._temp");
-   if(f.exists())
-       f. remove();
+    QString sfile=QDir::homeDirPath();
+    if(sfile.right(1) != "/")
+        sfile+="/._temp";
+    else
+        sfile+="._temp";
+    QFile file( sfile);
+    if(file.exists())
+        file.remove();
 }
 
 void OpieFtp::tabChanged(QWidget *w)
 {
     if (TabWidget->currentPageIndex() == 0) {
             currentPathEdit->setText( currentDir.canonicalPath());
-    } else if (TabWidget->currentPageIndex() == 1) {
+            tabMenu->setItemChecked(tabMenu->idAt(0),TRUE);
+            tabMenu->setItemChecked(tabMenu->idAt(1),FALSE);
+            tabMenu->setItemChecked(tabMenu->idAt(2),FALSE);
+    }
+  if (TabWidget->currentPageIndex() == 1) {
             currentPathEdit->setText( currentRemoteDir );
+            tabMenu->setItemChecked(tabMenu->idAt(1),TRUE);
+            tabMenu->setItemChecked(tabMenu->idAt(0),FALSE);
+            tabMenu->setItemChecked(tabMenu->idAt(2),FALSE);
+    }
+  if (TabWidget->currentPageIndex() == 2) {
+            tabMenu->setItemChecked(tabMenu->idAt(2),TRUE);
+            tabMenu->setItemChecked(tabMenu->idAt(0),FALSE);
+            tabMenu->setItemChecked(tabMenu->idAt(1),FALSE);
     }
 }
 
@@ -254,11 +313,12 @@ void OpieFtp::localUpload()
         QMessageBox::message("Note","Cannot upload directories");
     }
     TabWidget->setCurrentPage(1);
-    populateRemoteView();
+    remoteDirList( (const QString &)currentRemoteDir); //this also calls populate
     QCopEnvelope ( "QPE/System", "notBusy()" );
 }
 
-void OpieFtp::nullifyCallBack() {
+void OpieFtp::nullifyCallBack()
+{
         FtpOptions(FTPLIB_CALLBACK, NULL, conn);
         FtpOptions(FTPLIB_IDLETIME, NULL, conn);
         FtpOptions(FTPLIB_CALLBACKARG, NULL, conn);
@@ -272,13 +332,16 @@ void OpieFtp::remoteDownload()
     QCopEnvelope ( "QPE/System", "busy()" );
     qApp->processEvents();
     QString strItem = Remote_View->currentItem()->text(0);
-    QString localFile = currentDir.canonicalPath()+"/"+strItem;
+//      strItem=strItem.right(strItem.length()-1);
+
+    QString localFile = currentDir.canonicalPath()+strItem;
+//    QString localFile = currentDir.canonicalPath()+"/"+strItem;
     QString remoteFile= currentRemoteDir+strItem;
     if (!FtpSize( remoteFile.latin1(), &fsz, FTPLIB_ASCII, conn))
         fsz = 0;
     QString temp;
-    temp.sprintf( remoteFile+" "+" %dkb", fsz); 
-            
+    temp.sprintf( remoteFile+" "+" %dkb", fsz);
+
     ProgressBar->setTotalSteps(fsz);
     FtpOptions(FTPLIB_CALLBACK, (long) log_progress, conn);
     FtpOptions(FTPLIB_IDLETIME, (long) 1000, conn);
@@ -355,8 +418,14 @@ void OpieFtp::disConnector()
 
 bool OpieFtp::remoteDirList(const QString &dir)
 {
+    QString tmp = QDir::homeDirPath();
+    if(tmp.right(1) != "/")
+        tmp+="/._temp";
+    else
+        tmp+="._temp";
+//    qDebug("Listing remote dir "+tmp);
     QCopEnvelope ( "QPE/System", "busy()" );
-    if (!FtpDir( "./._temp", dir.latin1(), conn) ) {
+    if (!FtpDir( tmp.latin1(), dir.latin1(), conn) ) {
         QString msg;
         msg.sprintf("Unable to list the directory\n"+dir+"\n%s",FtpLastResponse(conn) );
         msg.replace(QRegExp(":"),"\n");
@@ -364,7 +433,7 @@ bool OpieFtp::remoteDirList(const QString &dir)
 //        FtpQuit(conn);
         return false;
     }
-    populateRemoteView();
+    populateRemoteView() ;
     QCopEnvelope ( "QPE/System", "notBusy()" );
     return true;
 }
@@ -393,6 +462,7 @@ void OpieFtp::populateLocalView()
     currentDir.setMatchAllDirs(TRUE);
     currentDir.setNameFilter(filterStr);
     QString fileL, fileS, fileDate;
+    bool isDir=FALSE;
     const QFileInfoList *list = currentDir.entryInfoList( /*QDir::All*/ /*, QDir::SortByMask*/);
     QFileInfoListIterator it(*list);
     QFileInfo *fi;
@@ -403,48 +473,82 @@ void OpieFtp::populateLocalView()
             QFileInfo sym( symLink);
             fileS.sprintf( "%10li", sym.size() );
             fileL.sprintf( "%s ->  %s",  sym.fileName().data(),sym.absFilePath().data() );
-            fileDate = sym.lastModified().toString(); 
+            fileDate = sym.lastModified().toString();
         } else {
 //        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
             fileS.sprintf( "%10li", fi->size() );
             fileL.sprintf( "%s",fi->fileName().data() );
-            fileDate= fi->lastModified().toString(); 
+            fileDate= fi->lastModified().toString();
             if( QDir(QDir::cleanDirPath(currentDir.canonicalPath()+"/"+fileL)).exists() ) {
                 fileL+="/";
+                isDir=TRUE;
 //     qDebug( fileL);
             }
         }
-        item= new QListViewItem( Local_View,fileL,fileS, fileDate);
+        if(fileL !="./") {
+        item = new QListViewItem( Local_View,fileL,fileS, fileDate);
+        if(isDir)
+            item->setPixmap( 0,  Resource::loadPixmap( "folder" ));
+        else
+            item->setPixmap( 0, Resource::loadPixmap( "fileopen" ));
+        }
+        isDir=FALSE;
         ++it;
      }
     Local_View->setSorting( 3,FALSE);
     currentPathEdit->setText( currentDir.canonicalPath() );
 }
 
-bool OpieFtp::populateRemoteView()
+bool OpieFtp::populateRemoteView( )
 {
- Remote_View->clear();
-    QFile tmp("./._temp");
+//    qDebug("populate remoteview");
+    QString sfile=QDir::homeDirPath();
+    if(sfile.right(1) != "/")
+        sfile+="/._temp";
+    else
+        sfile+="._temp";
+    QFile file( sfile);
+    Remote_View->clear();
     QString s, File_Name;
+    QListViewItem *itemDir=NULL, *itemFile=NULL;
     QString fileL, fileS, fileDate;
-    new QListViewItem( Remote_View, "../");
-    if (tmp.open(IO_ReadOnly)) {
-        QTextStream t( &tmp );   // use a text stream
+    if ( file.open(IO_ReadOnly)) {
+        QTextStream t( &file );   // use a text stream
         while ( !t.eof()) {
             s = t.readLine();
             fileL = s.right(s.length()-55);
             fileL = fileL.stripWhiteSpace();
-            if(s.left(1) == "d")
+            if(s.left(1) == "d") 
                 fileL = fileL+"/";
+//                  fileL = "/"+fileL+"/";
             fileS = s.mid( 30, 42-30);
             fileS = fileS.stripWhiteSpace();
             fileDate = s.mid( 42, 55-42);
             fileDate = fileDate.stripWhiteSpace();
-            if(fileL.find("total",0,TRUE) == -1)          
-             new QListViewItem( Remote_View, fileL, fileS, fileDate);
+            if(fileL.find("total",0,TRUE) == -1) {
+                QListViewItem * item = new QListViewItem( Remote_View, fileL, fileS, fileDate);
+                if(s.left(1) == "d") {
+                    item->setPixmap( 0, Resource::loadPixmap( "folder" ));
+                      if(itemDir)
+                          item->moveItem(itemDir);
+                      itemDir=item;
+                } else {
+                    item->setPixmap( 0, Resource::loadPixmap( "fileopen" ));
+                      if(itemFile)
+                          item->moveItem(itemFile);
+                      itemFile=item;
+                }
+            }
         }
-        tmp.close();
-    }
+        QListViewItem * item1 = new QListViewItem( Remote_View, "../");
+        item1->setPixmap( 0, Resource::loadPixmap( "folder" ));
+        file.close();
+        if( file.exists())
+            file. remove();
+    } else
+        qDebug("temp file not opened successfullly "+sfile);
+    Remote_View->setSorting( 4,TRUE);
+    
     return true;        
 }
 
@@ -479,7 +583,6 @@ void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
             if( !remoteChDir( (const QString &)strItem)) {
                 currentRemoteDir = oldRemoteCurrentDir;
                 strItem="";
-                populateRemoteView();
                 qDebug("RemoteCurrentDir1 "+oldRemoteCurrentDir);
             }
         } else if(strItem.find("/",0,TRUE) != -1) { // this is a directory
@@ -488,8 +591,7 @@ void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
                 currentRemoteDir = oldRemoteCurrentDir;
                 strItem="";
                 qDebug("RemoteCurrentDir1 "+oldRemoteCurrentDir);
-                
-                populateRemoteView();
+
             } else {
             currentRemoteDir = currentRemoteDir+strItem;
             }
@@ -497,14 +599,14 @@ void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
             qDebug("download "+strItem);
         }
     }
+    remoteDirList( (const QString &)currentRemoteDir); //this also calls populate
     if(currentRemoteDir.right(1) !="/")
         currentRemoteDir +="/";
     currentPathEdit->setText( currentRemoteDir );
-    remoteDirList( (const QString &)currentRemoteDir);
     QCopEnvelope ( "QPE/System", "notBusy()" );
 }
 
- void OpieFtp::localListClicked(QListViewItem *selectedItem)
+void OpieFtp::localListClicked(QListViewItem *selectedItem)
 {
     QString strItem=selectedItem->text(0);
     QString strSize=selectedItem->text(1);
@@ -540,15 +642,28 @@ void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
     }
 }
 
+void OpieFtp::doLocalCd()
+{
+    localListClicked( Local_View->currentItem());
+}
+
+void OpieFtp:: doRemoteCd()
+{
+    remoteListClicked( Remote_View->currentItem());
+
+}
+
 void OpieFtp::showHidden()
 {
     if (!b) {
     currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
+    localMenu->setItemChecked(localMenu->idAt(0),TRUE);
 //    currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
     b=TRUE;
     
     }  else {
     currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
+    localMenu->setItemChecked(localMenu->idAt(0),FALSE);
 //    currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
     b=FALSE;
     }
@@ -560,8 +675,8 @@ void OpieFtp::ListPressed( int mouse, QListViewItem *item, const QPoint &point, 
     switch (mouse) {
       case 1:
           break;
-      case 2: 
-    showLocalMenu();
+      case 2:
+          showLocalMenu(item);
     break;
     };
 }
@@ -571,15 +686,18 @@ void OpieFtp::RemoteListPressed( int mouse, QListViewItem *item, const QPoint &p
  switch (mouse) {
       case 1:
           break;
-      case 2: 
-    showRemoteMenu();
+      case 2:
+          showRemoteMenu(item);
     break;
     };
 }
 
-void OpieFtp::showRemoteMenu()
+void OpieFtp::showRemoteMenu(QListViewItem * item)
 {
     QPopupMenu  m;// = new QPopupMenu( Local_View );
+    if(item->text(0).right(1) == "/")
+    m.insertItem( tr( "Change Directory" ), this, SLOT( doRemoteCd() ));
+    else
     m.insertItem( tr( "Download" ), this, SLOT( remoteDownload() ));
     m.insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
     m.insertItem( tr( "Rename" ), this, SLOT( remoteRename() ));
@@ -588,15 +706,25 @@ void OpieFtp::showRemoteMenu()
     m.exec( QCursor::pos() );
 }
 
-void OpieFtp::showLocalMenu()
+void OpieFtp::showLocalMenu(QListViewItem * item)
 {
     QPopupMenu  m;
     m.insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
+    m.insertSeparator();
+    if(item->text(0).right(1) == "/")
+    m.insertItem( tr( "Change Directory" ), this, SLOT( doLocalCd() ));
+    else
     m.insertItem( tr( "Upload" ), this, SLOT( localUpload() ));
     m.insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
     m.insertItem( tr( "Rename" ), this, SLOT( localRename() ));
     m.insertSeparator();
     m.insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
+    m.setCheckable(TRUE);
+    if (b)
+        m.setItemChecked(m.idAt(0),TRUE);
+    else
+        m.setItemChecked(m.idAt(0),FALSE);
+
     m.exec( QCursor::pos() );
 }
 
@@ -663,8 +791,8 @@ void OpieFtp::remoteMakDir()
            QMessageBox::message("Note",msg);
        }
        QCopEnvelope ( "QPE/System", "notBusy()" );
+    remoteDirList( (const QString &)currentRemoteDir); //this also calls populate
     }
-    populateRemoteView();
 }
 
 void OpieFtp::remoteDelete()
@@ -683,6 +811,8 @@ void OpieFtp::remoteDelete()
                   msg.replace(QRegExp(":"),"\n");
                   QMessageBox::message("Note",msg);
               }
+              remoteDirList( (const QString &)currentRemoteDir); //this also calls populate
+              
           }
           break;
         };
@@ -697,6 +827,7 @@ void OpieFtp::remoteDelete()
                   msg.replace(QRegExp(":"),"\n");
                   QMessageBox::message("Note",msg);
               }
+              remoteDirList( (const QString &)currentRemoteDir); //this also calls populate
           }
           break;
         };
@@ -722,8 +853,8 @@ void OpieFtp::remoteRename()
             QMessageBox::message("Note",msg);
         }
         QCopEnvelope ( "QPE/System", "notBusy()" );
+    remoteDirList( (const QString &)currentRemoteDir); //this also calls populate
     }
-    populateRemoteView();
 }
 
 void OpieFtp::localRename()
@@ -745,7 +876,7 @@ void OpieFtp::localRename()
 void OpieFtp::currentPathEditChanged()
 {
     QString  oldRemoteCurrentDir =  currentRemoteDir;
- qDebug("oldRemoteCurrentDir "+oldRemoteCurrentDir);
+//    qDebug("oldRemoteCurrentDir "+oldRemoteCurrentDir);
     if (TabWidget->currentPageIndex() == 0) {
         if(QDir( currentPathEdit->text()).exists()) {
             currentDir.setPath( currentPathEdit->text() );
@@ -764,7 +895,22 @@ void OpieFtp::currentPathEditChanged()
                 currentRemoteDir = oldRemoteCurrentDir;
                 currentPathEdit->setText( currentRemoteDir );
             }
-        
+
         remoteDirList( (const QString &)currentRemoteDir);
     }
+}
+
+void OpieFtp::switchToLocalTab()
+{
+    TabWidget->setCurrentPage(0);
+}
+
+void OpieFtp::switchToRemoteTab()
+{
+    TabWidget->setCurrentPage(1);
+}
+
+void OpieFtp::switchToConfigTab()
+{
+    TabWidget->setCurrentPage(2);
 }
