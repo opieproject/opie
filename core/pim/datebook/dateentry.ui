@@ -18,7 +18,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: dateentry.ui,v 1.7 2003-04-13 23:14:23 umopapisdn Exp $
+** $Id: dateentry.ui,v 1.8 2003-11-30 10:08:26 waspe Exp $
 **
 *********************************************************************</comment>
 <widget>
@@ -122,7 +122,7 @@
             <property stdset="1">
                 <name>sizePolicy</name>
                 <sizepolicy>
-                    <hsizetype>7</hsizetype>
+                    <hsizetype>3</hsizetype>
                     <vsizetype>0</vsizetype>
                 </sizepolicy>
             </property>
@@ -177,7 +177,7 @@
             <property stdset="1">
                 <name>sizePolicy</name>
                 <sizepolicy>
-                    <hsizetype>7</hsizetype>
+                    <hsizetype>3</hsizetype>
                     <vsizetype>0</vsizetype>
                 </sizepolicy>
             </property>
@@ -200,8 +200,15 @@
                 <name>name</name>
                 <cstring>comboCategory</cstring>
             </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>1</vsizetype>
+                </sizepolicy>
+            </property>
         </widget>
-        <widget row="3"  column="0" rowspan="2">
+        <widget row="3"  column="0"  rowspan="2"  colspan="1" >
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
@@ -219,10 +226,6 @@
                 <cstring>buttonStart</cstring>
             </property>
             <property stdset="1">
-                <name>text</name>
-                <string>Jan 02 00</string>
-            </property>
-            <property stdset="1">
                 <name>minimumSize</name>
                 <size>
                     <width>70</width>
@@ -236,12 +239,23 @@
                     <height>32767</height>
                 </size>
             </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Jan 02 00</string>
+            </property>
         </widget>
-        <widget row="4"  column="1"  rowspan="1"  colspan="1" >
+        <widget row="4"  column="1" >
             <class>QLineEdit</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>comboStart</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>0</vsizetype>
+                </sizepolicy>
             </property>
             <property stdset="1">
                 <name>minimumSize</name>
@@ -286,23 +300,25 @@
                 </size>
             </property>
         </spacer>
-
-	<widget row="5"  column="1" colspan="3">
-	    <class>OTimePicker</class>
+        <widget row="5"  column="1"  rowspan="1"  colspan="3" >
+            <class>OTimePicker</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>timePickerStart</cstring>
             </property>
- 	</widget>
-        <widget row="3"  column="3" colspan="1">
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>1</vsizetype>
+                </sizepolicy>
+            </property>
+        </widget>
+        <widget row="3"  column="3" >
             <class>QPushButton</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>buttonEnd</cstring>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>Jan 02 00</string>
             </property>
             <property stdset="1">
                 <name>minimumSize</name>
@@ -318,12 +334,23 @@
                     <height>32767</height>
                 </size>
             </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Jan 02 00</string>
+            </property>
         </widget>
-        <widget row="4"  column="3" colspan="1">
+        <widget row="4"  column="3" >
             <class>QLineEdit</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>comboEnd</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>0</vsizetype>
+                </sizepolicy>
             </property>
             <property stdset="1">
                 <name>minimumSize</name>
@@ -385,6 +412,13 @@
             <property stdset="1">
                 <name>name</name>
                 <cstring>timezone</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>1</vsizetype>
+                </sizepolicy>
             </property>
         </widget>
         <widget row="8"  column="0" >
@@ -482,19 +516,19 @@
                 <cstring>cmdRepeat</cstring>
             </property>
             <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>0</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
                 <name>focusPolicy</name>
                 <enum>TabFocus</enum>
             </property>
             <property stdset="1">
                 <name>text</name>
                 <string>No Repeat...</string>
-            </property>
-            <property stdset="1">
-                <name>sizePolicy</name>
-                <sizepolicy>
-                    <hsizetype>7</hsizetype>
-                    <vsizetype>0</vsizetype>
-                </sizepolicy>
             </property>
         </widget>
         <widget row="10"  column="0"  rowspan="1"  colspan="4" >
