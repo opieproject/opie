@@ -130,7 +130,7 @@
     </message>
     <message>
         <source>Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Estándar</translation>
     </message>
 </context>
 </TS>

@@ -148,15 +148,15 @@
     <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilo</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Tamaño</translation>
+        <translation>Tamaño</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="unfinished"></translation>
+        <translation>El Rápido Zorro Marrón Saltó Por Encima Del Perro Perezoso</translation>
     </message>
 </context>
 <context>

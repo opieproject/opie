@@ -35,23 +35,23 @@
     </message>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Form1</translation>
     </message>
     <message>
         <source>Molecular Weight</source>
-        <translation type="unfinished"></translation>
+        <translation>Peso molecular</translation>
     </message>
     <message>
         <source>Chemical Formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Fórmula química</translation>
     </message>
     <message>
         <source>Molecular Weight (u):</source>
-        <translation type="unfinished"></translation>
+        <translation>Peso molecular (u):</translation>
     </message>
     <message>
         <source>Elemental Composition (%):</source>
-        <translation type="unfinished"></translation>
+        <translation>Composición elemental (%):</translation>
     </message>
 </context>
 <context>
@@ -94,19 +94,19 @@
     </message>
     <message>
         <source>%1 u</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 u</translation>
     </message>
     <message>
         <source>%1 J</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 J</translation>
     </message>
     <message>
         <source>%1 nm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 nm</translation>
     </message>
     <message>
         <source>%1 K</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 K</translation>
     </message>
 </context>
 <context>
@@ -117,15 +117,15 @@
     </message>
     <message>
         <source>PSE</source>
-        <translation type="unfinished"></translation>
+        <translation>PSE</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Datos</translation>
     </message>
     <message>
         <source>Calculations</source>
-        <translation type="unfinished">Cálculos</translation>
+        <translation>Cálculos</translation>
     </message>
 </context>
 <context>

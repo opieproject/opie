@@ -126,7 +126,7 @@
     </message>
     <message>
         <source>Key_Record</source>
-        <translation type="unfinished"></translation>
+        <translation>Tecla_Grabación</translation>
     </message>
 </context>
 </TS>

@@ -251,7 +251,7 @@ To use a different directory or filename for the highscores,specify them in the 
     </message>
     <message>
         <source>                          </source>
-        <translation type="unfinished"></translation>
+        <translation>                          </translation>
     </message>
 </context>
 <context>

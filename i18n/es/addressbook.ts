@@ -839,8 +839,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Malta</source>
-        <translation type="unfinished">M
-alta</translation>
+        <translation>Malta</translation>
     </message>
     <message>
         <source>Martinique</source>
@@ -852,7 +851,7 @@ alta</translation>
     </message>
     <message>
         <source>Mauritius</source>
-        <translation type="unfinished"></translation>
+        <translation>Mauricio</translation>
     </message>
     <message>
         <source>Mayotte</source>
@@ -1328,7 +1327,7 @@ alta</translation>
     </message>
     <message>
         <source>Kuwait</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuwait</translation>
     </message>
     <message>
         <source>Kyrgystan</source>

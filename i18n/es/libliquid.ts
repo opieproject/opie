@@ -75,11 +75,11 @@
     <name>Styles</name>
     <message>
         <source>Liquid</source>
-        <translation type="unfinished">Líquido</translation>
+        <translation>Líquido</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation type="unfinished">Estilo Líquido de alto rendimiento por Mosfet</translation>
+        <translation>Estilo Líquido de alto rendimiento por Mosfet</translation>
     </message>
 </context>
 </TS>

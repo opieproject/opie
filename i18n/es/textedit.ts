@@ -3,53 +3,53 @@
     <name>@default</name>
     <message>
         <source>Text Edit</source>
-        <translation type="unfinished">Editar Textos</translation>
+        <translation>Editar Textos</translation>
     </message>
     <message>
         <source>Write Failed</source>
-        <translation type="unfinished">Fallo al escribir</translation>
+        <translation>Fallo al escribir</translation>
     </message>
     <message>
         <source>Unnamed</source>
-        <translation type="unfinished">Sin nombre</translation>
+        <translation>Sin nombre</translation>
     </message>
     <message>
         <source>Text Editor</source>
-        <translation type="unfinished">Editor Textos</translation>
+        <translation>Editor Textos</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished">Todo</translation>
+        <translation>Todo</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Texto</translation>
+        <translation>Texto</translation>
     </message>
     <message>
         <source>Permissions</source>
-        <translation type="unfinished">Permisos</translation>
+        <translation>Permisos</translation>
     </message>
     <message>
         <source>Choose font</source>
-        <translation type="unfinished"></translation>
+        <translation>Elegir letra</translation>
     </message>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
-        <translation type="unfinished">¿Realmente quiere&lt;BR&gt;&lt;B&gt;borrar&lt;/B&gt; el fichero actual
+        <translation>¿Realmente quiere&lt;BR&gt;&lt;B&gt;borrar&lt;/B&gt; el fichero actual
 del dico?&lt;BR&gt;¡Es &lt;B&gt;irreversible!&lt;/B&gt;</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Sí</translation>
+        <translation>Sí</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">No</translation>
+        <translation>No</translation>
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation type="unfinished">Text Edit tiene copyright&lt;BR&gt;2000 Trolltech AS, y&lt;BR&gt;2002 &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;, y está bajo licencia GPL</translation>
+        <translation>Text Edit tiene copyright&lt;BR&gt;2000 Trolltech AS, y&lt;BR&gt;2002 &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;, y está bajo licencia GPL</translation>
     </message>
 </context>
 <context>
