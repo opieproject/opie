@@ -58,7 +58,7 @@ class OFileSelector : public QWidget {
 public:
     enum Mode { Open=1, Save=2, FileSelector=4, OPEN=1, SAVE=2, FILESELECTOR=4 };
 //    enum OldMode { OPEN=1, SAVE=2, FILESELECTOR = 4 };
-    enum Selector { Normal = 0, Extended=1,  ExtendedAll =2, NORMAL=0,EXTENDED=1, EXTENDED_ALL =2 };
+    enum Selector { Normal = 0, Extended=1,  ExtendedAll =2, Default=3,  NORMAL=0,EXTENDED=1, EXTENDED_ALL =2, DEFAULT=3 };
 //    enum OldSelector { NORMAL = 0, EXTENDED =1, EXTENDED_ALL = 2};
 
     OFileSelector(QWidget* parent, int mode, int selector,
@@ -85,9 +85,15 @@ public:
     int mode()const;
     int selector()const;
 
+
+    void setNewVisible( bool b );
+    void setCloseVisible( bool b );
+    void setNameVisible( bool b );
+
 signals:
     void fileSelected( const DocLnk& );
     void fileSelected( const QString& );
+    void newSelected( const DocLnk& );
     void closeMe();
     void ok();
     void cancel();

@@ -115,6 +115,7 @@ public:
     QString currentDir()const;
 
 private slots:
+    void slotNew(); // will emit newSelected
     void cdUP();
     void cdHome();
     void cdDoc();

@@ -131,6 +131,8 @@ QWidget* ODocumentFileView::widget( QWidget* parent ) {
                          selector(), SLOT(slotDocLnkBridge(const DocLnk&) ) );
         QObject::connect(m_selector, SIGNAL(closeMe() ),
                          selector(), SIGNAL(closeMe() ) );
+        QObject::connect(m_selector, SIGNAL(newSelected(const DocLnk& ) ),
+                         selector(), SIGNAL(newSelected(const DocLnk& ) ) );
     }
 
     return m_selector;
@@ -222,6 +224,12 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
     connect(btn, SIGNAL(clicked() ),
             this, SLOT(cdDoc() ) );
 
+    m_btnNew = new QToolButton( box );
+    m_btnNew->setIconSet( Resource::loadIconSet("new") );
+    connect(m_btnNew, SIGNAL(clicked() ),
+            this, SLOT(slotNew() ) );
+
+
     m_btnClose = new QToolButton( box );
     m_btnClose->setIconSet( Resource::loadIconSet("close") );
     connect(m_btnClose, SIGNAL(clicked() ),
@@ -269,6 +277,10 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
 }
 OFileViewFileListView::~OFileViewFileListView() {
 }
+void OFileViewFileListView::slotNew() {
+    DocLnk lnk;
+    emit selector()->newSelected( lnk );
+}
 OFileSelectorItem* OFileViewFileListView::currentItem()const{
     QListViewItem* item = m_view->currentItem();
     if (!item )
@@ -283,6 +295,11 @@ void OFileViewFileListView::reread( bool all ) {
         m_btnClose->show();
     else
         m_btnClose->hide();
+
+    if (selector()->showNew() )
+        m_btnNew->show();
+    else
+        m_btnNew->hide();
 
     m_mimes = selector()->currentMimeType();
     m_all = all;
@@ -770,4 +787,18 @@ void OFileSelector::slotViewChange( const QString& view ) {
     m_current = interface;
 
     id++;
+}
+void OFileSelector::setNewVisible( bool b ) {
+    m_shNew = b;
+    currentView()->reread();
+}
+void OFileSelector::setCloseVisible( bool b ) {
+    m_shClose = b;
+    currentView()->reread();
+}
+void OFileSelector::setNameVisible( bool b ) {
+    if ( b )
+        m_nameBox->show();
+    else
+        m_nameBox->hide();
 }
