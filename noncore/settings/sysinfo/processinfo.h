@@ -34,7 +34,7 @@ public:
 
 private slots:
     void updateData();
-    void viewProcess(QListViewItem *);
+    void viewProcess( QListViewItem * );
 
 private:
     QListView* ProcessView;

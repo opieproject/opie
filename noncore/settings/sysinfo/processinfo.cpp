@@ -17,6 +17,8 @@
 **
 **********************************************************************/
 
+#include <qpe/qpeapplication.h>
+
 #include <qheader.h>
 #include <qlistview.h>
 #include <qlayout.h>
@@ -39,7 +41,9 @@ ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
     colnum = ProcessView->addColumn( tr( "Time" ) );
     ProcessView->setColumnAlignment( colnum, Qt::AlignRight );
     ProcessView->setAllColumnsShowFocus( TRUE );
-    connect( ProcessView, SIGNAL( doubleClicked(QListViewItem *) ), this, SLOT( viewProcess(QListViewItem *) ) );
+    QPEApplication::setStylusOperation( ProcessView->viewport(), QPEApplication::RightOnHold );
+    connect( ProcessView, SIGNAL( rightButtonPressed( QListViewItem *, const QPoint &, int ) ),
+            this, SLOT( viewProcess( QListViewItem * ) ) );
 
     layout->addWidget( ProcessView );
 
@@ -107,7 +111,7 @@ void ProcessInfo::updateData()
     delete procdir;
 }
 
-void ProcessInfo::viewProcess(QListViewItem *process)
+void ProcessInfo::viewProcess( QListViewItem *process )
 {
     QString pid= process->text( 0 ).stripWhiteSpace();
     QString command = process->text( 1 );
@@ -125,6 +129,5 @@ void ProcessInfo::viewProcess(QListViewItem *process)
         }
         fclose( statfile );
     }
-
     ProcessDtl->showMaximized();
 }
