@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.7 2002-03-31 12:56:14 hakan Exp $
+** $Id: datebook.cpp,v 1.8 2002-05-09 11:58:33 dwmw2 Exp $
 **
 **********************************************************************/
 
@@ -55,6 +55,7 @@
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
 #include <qpushbutton.h>
+#include <qregexp.h>
 #include <qtextcodec.h>
 #include <qtextstream.h>
 #include <qtl.h>
