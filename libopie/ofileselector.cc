@@ -330,9 +330,13 @@ QString OFileSelector::selectedName() const
     name = lnk->file();
     delete lnk;
   }else if( m_selector == EXTENDED || m_selector == EXTENDED_ALL ){
-    QListViewItem *item  = m_View->currentItem();
-    if( item != 0 )
-      name = m_currentDir + "/" + item->text( 1 );
+      if ( m_shLne ) {
+          name = m_currentDir + "/" +m_edit->text();
+      }else{
+          QListViewItem *item  = m_View->currentItem();
+          if( item != 0 )
+              name = m_currentDir + "/" + item->text( 1 );
+      }
   }else { // installed view
     ;
   }
@@ -521,10 +525,21 @@ void OFileSelector::slotMimeCheck(const QString &mime)
   }
 
 }
+/*
+ * Ok if a non dir gets inserted into this combobox
+ * we need to change it
+ * QFileInfo and dirPath will give us the right Dir
+ */
 void OFileSelector::slotLocationActivated(const QString &file)
 {
-  cd(file.left(file.find("<-",0,TRUE)));
-  reparse();
+    qWarning("slotLocationActivated");
+    QString name = file.left( file.find("<-", 0, TRUE ) );
+    QFileInfo info( name );
+    if ( info.isFile() )
+        cd(info.dirPath( TRUE ) ); //absolute
+    else
+        cd(name );
+    reparse();
 }
 void OFileSelector::slotInsertLocationPath(const QString &currentPath, int count)
 {
@@ -544,10 +559,20 @@ void OFileSelector::slotInsertLocationPath(const QString &currentPath, int count
     m_location->insertStringList( pathList,-1);
   }
 }
+/*
+ * Do not crash anymore
+ * don't try to change dir to a file
+ */
 void OFileSelector::locationComboChanged()
 {
-  cd( m_location->lineEdit()->text());
-  reparse();
+    QFileInfo info( m_location->lineEdit()->text() );
+    qWarning("info %s %s", info.dirPath(true).latin1(), m_location->lineEdit()->text().latin1() );
+    if (info.isFile() )
+        cd(info.dirPath(TRUE) ); //absolute path
+    else
+        cd( m_location->lineEdit()->text() );
+
+    reparse();
 }
 void OFileSelector::init()
 {
