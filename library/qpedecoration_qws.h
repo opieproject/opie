@@ -63,6 +63,8 @@ protected:
 private:
     void windowData( const QWidget *w, WindowDecorationInterface::WindowData &wd ) const;
 
+	void init ( const QString & );
+
 protected:
     QImage imageOk;
     QImage imageClose;

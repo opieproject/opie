@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.27 2002-11-24 18:21:41 sandman Exp $
+** $Id: qpeapplication.cpp,v 1.28 2002-11-25 22:12:18 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -899,7 +899,7 @@ void QPEApplication::setDefaultRotation( int r )
 }
 
 // exported to libpreload.so
-bool opie_block_style = false;
+int opie_block_style = 0;
 
 /*!
   \internal
@@ -910,7 +910,7 @@ void QPEApplication::applyStyle()
 	config.setGroup( "Appearance" );
 	
 	// don't block ourselves ...
-	opie_block_style = false;
+	opie_block_style = 0;
 	
 	
 	static QString appname;
@@ -975,6 +975,8 @@ void QPEApplication::applyStyle()
 	if ( nostyle & 0x04 )
 		dec = "";
 	
+	//qDebug ( "Setting Deco: %s -- old %s (%d)", dec.latin1(), d-> decorationName.latin1(), nostyle);
+	
 	if ( dec != d->decorationName ) {
 		qwsSetDecoration( new QPEDecoration( dec ) );
 		d->decorationName = dec;
@@ -993,7 +995,8 @@ void QPEApplication::applyStyle()
 	setFont( QFont(ff, fs) );
 	
 	// revert to global blocking policy ...
-	opie_block_style = config. readBoolEntry ( "ForceStyle", false );
+	opie_block_style = config. readBoolEntry ( "ForceStyle", false ) ? 0xff : 0x00;
+	opie_block_style -= nostyle;
 }
 
 void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data )

@@ -480,40 +480,26 @@ private:
 
 static WindowDecorationInterface *wdiface = 0;
 static QLibrary *wdlib = 0;
+static QString libname;
 
 //===========================================================================
 
 QPEDecoration::QPEDecoration()
     : QWSDefaultDecoration()
 {
-    if ( wdlib ) {
-	wdiface->release();
-	wdlib->unload();
-	delete wdlib;
-	wdlib = 0;
-    } else {
-	delete wdiface;
-    }
-    wdiface = new DefaultWindowDecoration;
-
-    helpFile = QString(qApp->argv()[0]) + ".html";
-    QStringList helpPath = Global::helpPath();
-    helpExists = FALSE;
-    for (QStringList::ConstIterator it=helpPath.begin(); it!=helpPath.end() && !helpExists; ++it) {
-	helpExists = QFile::exists( *it + "/" + helpFile );
-    	qDebug ( "Checking %s/%s for help: %d", (*it).latin1(), helpFile.latin1(),helpExists);
-   }
-    qpeManager = new QPEManager( this );
-    
-    // for backward compatibility:
-    imageOk = *okImage ( 15 );
-    imageClose = *closeImage ( 15 );
-    imageHelp = *helpImage ( 15 );
+    init ( libname );
 }
 
 QPEDecoration::QPEDecoration( const QString &plugin )
     : QWSDefaultDecoration()
 {
+    init ( plugin );
+}
+
+void QPEDecoration::init ( const QString &plugin )
+{
+    libname = plugin;
+
     if ( wdlib ) {
 	wdiface->release();
 	wdlib->unload();
@@ -522,6 +508,7 @@ QPEDecoration::QPEDecoration( const QString &plugin )
     } else {
 	delete wdiface;
     }
+        
     WindowDecorationInterface *iface = 0;
     QString path = QPEApplication::qpeDir() + "/plugins/decorations";
     QLibrary *lib = new QLibrary( path + "/" + plugin );
@@ -538,8 +525,14 @@ QPEDecoration::QPEDecoration( const QString &plugin )
     helpExists = FALSE;
     for (QStringList::ConstIterator it=helpPath.begin(); it!=helpPath.end() && !helpExists; ++it) {
 	helpExists = QFile::exists( *it + "/" + helpFile );
-    	qDebug ( "Checking %s/%s for help: %d", (*it).latin1(), helpFile.latin1(),helpExists); }
+    	//qDebug ( "Checking %s/%s for help: %d", (*it).latin1(), helpFile.latin1(),helpExists); 
+    }
     qpeManager = new QPEManager( this );
+    
+    // Qtopia 1.5 compatibility
+    imageOk    = *okImage ( 15 );
+    imageClose = *closeImage ( 15 );
+    imageHelp  = *helpImage ( 15 ); 
 }
 
 QPEDecoration::~QPEDecoration()
