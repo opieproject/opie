@@ -4,6 +4,7 @@
  */
 
 #include "iconview.h"
+#include "messagebox.h"
 
 #include <lib/imagecache.h>
 #include <gui/imageinfoui.h>
@@ -377,13 +378,12 @@ QString PIconView::prevFileName(bool &isDir)const{
 void PIconView::slotTrash() {
     bool isDir;
     QString pa = currentFileName( isDir );
-    if ( isDir && pa.isEmpty() )
+    if ( isDir || pa.isEmpty() )
         return;
 
-    if (!QPEMessageBox::confirmDelete( this,
-                                      tr("Delete Image" ),
-                                      tr("the Image %1" ).arg(pa)))
-        return
+    if (!OMessageBox::confirmDelete( this, tr("the Image"),
+                                     pa, tr("Delete Image" )))
+        return;
 
 
     currentView()->dirLister()->deleteImage( pa );
@@ -430,9 +430,6 @@ void PIconView::resetView() {
 
 void PIconView::polish()
 {
-    odebug << "===\n"
-            << "PIconView::polish()\n"
-            << "====" << oendl;
     QVBox::polish();
 
     QString lastView = m_cfg->readEntry("LastView","");

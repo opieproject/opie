@@ -4,7 +4,8 @@ HEADERS +=    gui/filesystem.h       \
               gui/imageview.h        \
               gui/mainwindow.h       \
               gui/viewmodebutton.h   \
-              gui/basesetup.h
+              gui/basesetup.h        \
+	      gui/messagebox.h
 
 SOURCES +=    gui/filesystem.cpp     \
               gui/iconview.cpp       \
@@ -12,6 +13,7 @@ SOURCES +=    gui/filesystem.cpp     \
               gui/imageview.cpp      \
               gui/mainwindow.cpp     \
 	      gui/viewmodebutton.cpp \
-              gui/basesetup.cpp
+              gui/basesetup.cpp	     \
+	      gui/messagebox.cpp
 
 
