@@ -2,3 +2,5 @@ Makefile*
 moc_*
 .moc
 .obj
+fifteenconfigdialogbase.*
+fifteen
