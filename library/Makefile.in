@@ -78,7 +78,11 @@ HEADERS =	calendar.h \
 		backend/vobject_p.h \
 		findwidget_p.h \
 		finddialog.h \
-		lnkproperties.h
+		lnkproperties.h \
+		quuid.h \
+		qcom.h \
+		qlibrary.h \
+		qlibrary_p.h
 SOURCES =	calendar.cpp \
 		global.cpp \
 		xmlreader.cpp \
@@ -133,7 +137,10 @@ SOURCES =	calendar.cpp \
 		backend/vobject.cpp \
 		findwidget_p.cpp \
 		finddialog.cpp \
-		lnkproperties.cpp
+		lnkproperties.cpp \
+		quuid.cpp \
+		qlibrary.cpp \
+		qlibrary_unix.cpp
 OBJECTS =	calendar.o \
 		global.o \
 		xmlreader.o \
@@ -189,6 +196,9 @@ OBJECTS =	calendar.o \
 		findwidget_p.o \
 		finddialog.o \
 		lnkproperties.o \
+		quuid.o \
+		qlibrary.o \
+		qlibrary_unix.o \
 		passwordbase_p.o \
 		categoryeditbase_p.o \
 		findwidgetbase_p.o \
@@ -226,6 +236,7 @@ SRCMOC	=	moc_menubutton.cpp \
 		moc_findwidget_p.cpp \
 		moc_finddialog.cpp \
 		moc_lnkproperties.cpp \
+		moc_qlibrary_p.cpp \
 		global.moc \
 		network.moc \
 		password.moc \
@@ -256,6 +267,7 @@ OBJMOC	=	moc_menubutton.o \
 		moc_findwidget_p.o \
 		moc_finddialog.o \
 		moc_lnkproperties.o \
+		moc_qlibrary_p.o \
 		moc_passwordbase_p.o \
 		moc_categoryeditbase_p.o \
 		moc_findwidgetbase_p.o \
@@ -291,10 +303,8 @@ $(DESTDIR)$(SYSCONF_LINK_TARGET): $(UICDECLS) $(OBJECTS) $(OBJMOC) $(SUBLIBS)
 
 moc: $(SRCMOC)
 
-tmake: Makefile.in
-
-Makefile.in: library.pro
-	tmake library.pro -o Makefile.in
+tmake:
+	tmake library.pro
 
 clean:
 	-rm -f $(OBJECTS) $(OBJMOC) $(SRCMOC) $(UICIMPLS) $(UICDECLS)
@@ -602,6 +612,17 @@ lnkproperties.o: lnkproperties.cpp \
 		lnkpropertiesbase_p.h \
 		ir.h
 
+quuid.o: quuid.cpp \
+		quuid.h
+
+qlibrary.o: qlibrary.cpp \
+		qlibrary_p.h \
+		qlibrary.h
+
+qlibrary_unix.o: qlibrary_unix.cpp \
+		qlibrary_p.h \
+		qlibrary.h
+
 passwordbase_p.h: passwordbase_p.ui
 	$(UIC) passwordbase_p.ui -o $(INTERFACE_DECL_PATH)/passwordbase_p.h
 
@@ -707,6 +728,10 @@ moc_finddialog.o: moc_finddialog.cpp \
 moc_lnkproperties.o: moc_lnkproperties.cpp \
 		lnkproperties.h
 
+moc_qlibrary_p.o: moc_qlibrary_p.cpp \
+		qlibrary_p.h \
+		qlibrary.h
+
 moc_passwordbase_p.o: global.moc \
 		global.cpp
 
@@ -787,6 +812,9 @@ moc_finddialog.cpp: finddialog.h
 
 moc_lnkproperties.cpp: lnkproperties.h
 	$(MOC) lnkproperties.h -o moc_lnkproperties.cpp
+
+moc_qlibrary_p.cpp: qlibrary_p.h
+	$(MOC) qlibrary_p.h -o moc_qlibrary_p.cpp
 
 global.moc: global.cpp
 	$(MOC) global.cpp -o global.moc

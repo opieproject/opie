@@ -62,8 +62,10 @@ $(DESTDIR)$(TARGET): $(UICDECLS) $(OBJECTS) $(OBJMOC) $(SUBLIBS)
 
 moc: $(SRCMOC)
 
-tmake:
-	tmake quickexec.pro
+tmake: Makefile.in
+
+Makefile.in: quickexec.pro
+	tmake quickexec.pro -o Makefile.in
 
 clean:
 	-rm -f $(OBJECTS) $(OBJMOC) $(SRCMOC) $(UICIMPLS) $(UICDECLS)

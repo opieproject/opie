@@ -25,6 +25,7 @@ TARGET1 = lib$(TARGET).so.$(VER_MAJ)
 
 HEADERS =	background.h \
 		desktop.h \
+		qprocess.h \
 		info.h \
 		appicons.h \
 		taskbar.h \
@@ -63,6 +64,8 @@ HEADERS =	background.h \
 		$(OPIEDIR)/rsync/qrsync.h
 SOURCES =	background.cpp \
 		desktop.cpp \
+		qprocess.cpp \
+		qprocess_unix.cpp \
 		info.cpp \
 		appicons.cpp \
 		taskbar.cpp \
@@ -110,6 +113,8 @@ SOURCES =	background.cpp \
 		$(OPIEDIR)/rsync/qrsync.cpp
 OBJECTS =	background.o \
 		desktop.o \
+		qprocess.o \
+		qprocess_unix.o \
 		info.o \
 		appicons.o \
 		taskbar.o \
@@ -165,6 +170,7 @@ UICIMPLS =      shutdown.cpp \
 		syncdialog.cpp
 SRCMOC	=	moc_background.cpp \
 		moc_desktop.cpp \
+		moc_qprocess.cpp \
 		moc_info.cpp \
 		moc_appicons.cpp \
 		moc_taskbar.cpp \
@@ -180,11 +186,13 @@ SRCMOC	=	moc_background.cpp \
 		moc_qcopbridge.cpp \
 		moc_packageslave.cpp \
 		moc_irserver.cpp \
+		qprocess_unix.moc \
 		appicons.moc \
 		moc_shutdown.cpp \
 		moc_syncdialog.cpp
 OBJMOC	=	moc_background.o \
 		moc_desktop.o \
+		moc_qprocess.o \
 		moc_info.o \
 		moc_appicons.o \
 		moc_taskbar.o \
@@ -290,7 +298,6 @@ desktop.o: desktop.cpp \
 		qcopbridge.h \
 		startmenu.h \
 		taskbar.h \
-		$(OPIEDIR)/include/qpe/custom.h \
 		transferserver.h \
 		irserver.h \
 		packageslave.h \
@@ -300,6 +307,14 @@ desktop.o: desktop.cpp \
 		$(OPIEDIR)/include/qpe/power.h \
 		$(OPIEDIR)/include/qpe/qcopenvelope_qws.h \
 		$(OPIEDIR)/include/qpe/global.h
+
+qprocess.o: qprocess.cpp \
+		qprocess.h
+
+qprocess_unix.o: qprocess_unix.cpp \
+		qprocess_unix.moc \
+		qprocess.h \
+		qcleanuphandler_p.h
 
 info.o: info.cpp \
 		info.h \
@@ -331,7 +346,6 @@ taskbar.o: taskbar.cpp \
 		$(OPIEDIR)/include/qpe/resource.h \
 		appicons.h \
 		taskbar.h \
-		$(OPIEDIR)/include/qpe/custom.h \
 		desktop.h \
 		shutdownimpl.h \
 		shutdown.h \
@@ -365,7 +379,9 @@ taskbar.o: taskbar.cpp \
 		$(OPIEDIR)/include/qpe/sound.h \
 		../mpegplayer/mediaplayer.h \
 		$(OPIEDIR)/include/qpe/qlibrary.h \
+		$(OPIEDIR)/include/qpe/mediaplayerplugininterface.h \
 		../embeddedkonsole/konsole.h \
+		$(OPIEDIR)/include/qpe/qpetoolbar.h \
 		../wordgame/wordgame.h \
 		$(OPIEDIR)/include/qpe/qdawg.h
 
@@ -449,11 +465,11 @@ $(OPIEDIR)/calibrate/calibrate.o: $(OPIEDIR)/calibrate/calibrate.cpp \
 		$(OPIEDIR)/include/qpe/resource.h
 
 transferserver.o: transferserver.cpp \
-		$(OPIEDIR)/include/qpe/qprocess.h \
 		$(OPIEDIR)/include/qpe/process.h \
 		$(OPIEDIR)/include/qpe/config.h \
 		$(OPIEDIR)/include/qpe/qcopenvelope_qws.h \
-		transferserver.h
+		transferserver.h \
+		qprocess.h
 
 packageslave.o: packageslave.cpp \
 		packageslave.h \
@@ -492,7 +508,6 @@ main.o: main.cpp \
 		shutdown.h \
 		$(OPIEDIR)/include/qpe/qpeapplication.h \
 		taskbar.h \
-		$(OPIEDIR)/include/qpe/custom.h \
 		stabmon.h \
 		$(OPIEDIR)/include/qpe/network.h \
 		$(OPIEDIR)/include/qpe/config.h \
@@ -747,6 +762,9 @@ moc_desktop.o: moc_desktop.cpp \
 		shutdown.h \
 		$(OPIEDIR)/include/qpe/qpeapplication.h
 
+moc_qprocess.o: moc_qprocess.cpp \
+		qprocess.h
+
 moc_info.o: moc_info.cpp \
 		info.h \
 		background.h
@@ -755,8 +773,7 @@ moc_appicons.o: moc_appicons.cpp \
 		appicons.h
 
 moc_taskbar.o: moc_taskbar.cpp \
-		taskbar.h \
-		$(OPIEDIR)/include/qpe/custom.h
+		taskbar.h
 
 moc_sidething.o: moc_sidething.cpp \
 		sidething.h \
@@ -805,19 +822,24 @@ moc_packageslave.o: moc_packageslave.cpp \
 moc_irserver.o: moc_irserver.cpp \
 		irserver.h
 
-moc_shutdown.o: appicons.moc \
+moc_shutdown.o: qprocess_unix.moc \
+		qprocess_unix.cpp \
+		qprocess.h \
+		qcleanuphandler_p.h
+
+moc_syncdialog.o: appicons.moc \
 		appicons.cpp \
 		appicons.h \
 		$(OPIEDIR)/include/qpe/qcopenvelope_qws.h
-
-moc_syncdialog.o: moc_shutdown.cpp \
-		shutdown.h
 
 moc_background.cpp: background.h
 	$(MOC) background.h -o moc_background.cpp
 
 moc_desktop.cpp: desktop.h
 	$(MOC) desktop.h -o moc_desktop.cpp
+
+moc_qprocess.cpp: qprocess.h
+	$(MOC) qprocess.h -o moc_qprocess.cpp
 
 moc_info.cpp: info.h
 	$(MOC) info.h -o moc_info.cpp
@@ -863,6 +885,9 @@ moc_packageslave.cpp: packageslave.h
 
 moc_irserver.cpp: irserver.h
 	$(MOC) irserver.h -o moc_irserver.cpp
+
+qprocess_unix.moc: qprocess_unix.cpp
+	$(MOC) qprocess_unix.cpp -o qprocess_unix.moc
 
 appicons.moc: appicons.cpp
 	$(MOC) appicons.cpp -o appicons.moc

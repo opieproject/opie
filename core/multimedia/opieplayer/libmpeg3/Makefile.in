@@ -129,10 +129,8 @@ $(DESTDIR)$(SYSCONF_LINK_TARGET): $(UICDECLS) $(OBJECTS) $(OBJMOC) $(SUBLIBS)
 
 moc: $(SRCMOC)
 
-tmake: Makefile.in
-
-Makefile.in: libmpeg3.pro
-	tmake libmpeg3.pro -o Makefile.in
+tmake:
+	tmake libmpeg3.pro
 
 clean:
 	-rm -f $(OBJECTS) $(OBJMOC) $(SRCMOC) $(UICIMPLS) $(UICDECLS)

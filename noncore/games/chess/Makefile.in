@@ -104,10 +104,16 @@ REQUIRES=
 ####### Compile
 
 chess.o: chess.cpp \
-		chess.h
+		/home/kergoth/roms/openzaurus/buildroot-oz/build/opie/include/qpe/config.h \
+		/home/kergoth/roms/openzaurus/buildroot-oz/build/opie/include/qpe/resource.h \
+		chess.h \
+		/home/kergoth/roms/openzaurus/buildroot-oz/build/opie/include/qpe/process.h
 
 main.o: main.cpp \
-		chess.h
+		/home/kergoth/roms/openzaurus/buildroot-oz/build/opie/include/qpe/qpeapplication.h \
+		/home/kergoth/roms/openzaurus/buildroot-oz/build/opie/include/qpe/qpetoolbar.h \
+		chess.h \
+		/home/kergoth/roms/openzaurus/buildroot-oz/build/opie/include/qpe/process.h
 
 mainwindow.h: mainwindow.ui
 	$(UIC) mainwindow.ui -o $(INTERFACE_DECL_PATH)/mainwindow.h
@@ -120,7 +126,8 @@ mainwindow.o: mainwindow.cpp \
 		mainwindow.ui
 
 moc_chess.o: moc_chess.cpp \
-		chess.h
+		chess.h \
+		/home/kergoth/roms/openzaurus/buildroot-oz/build/opie/include/qpe/process.h
 
 moc_mainwindow.o: moc_mainwindow.cpp \
 		mainwindow.h

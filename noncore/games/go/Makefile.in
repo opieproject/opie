@@ -75,10 +75,8 @@ $(DESTDIR)$(TARGET): $(UICDECLS) $(OBJECTS) $(OBJMOC) $(SUBLIBS)
 
 moc: $(SRCMOC)
 
-tmake: Makefile.in
-
-Makefile.in: go.pro
-	tmake go.pro -o Makefile.in
+tmake:
+	tmake go.pro
 
 clean:
 	-rm -f $(OBJECTS) $(OBJMOC) $(SRCMOC) $(UICIMPLS) $(UICDECLS)
@@ -135,13 +133,18 @@ gowidget.o: gowidget.cpp \
 		gowidget.h \
 		amigo.h \
 		go.h \
-		goplayutils.h
+		goplayutils.h \
+		$(OPIEDIR)/include/qpe/config.h \
+		$(OPIEDIR)/include/qpe/resource.h \
+		$(OPIEDIR)/include/qpe/qpetoolbar.h \
+		$(OPIEDIR)/include/qpe/qpemenubar.h
 
 main.o: main.cpp \
 		gowidget.h \
 		amigo.h \
 		go.h \
-		goplayutils.h
+		goplayutils.h \
+		$(OPIEDIR)/include/qpe/qpeapplication.h
 
 moc_gowidget.o: moc_gowidget.cpp \
 		gowidget.h \
