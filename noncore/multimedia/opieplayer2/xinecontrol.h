@@ -43,6 +43,7 @@ class XineControl : public QObject  {
 public:
     XineControl( QObject *parent = 0, const char *name =0 );
     ~XineControl();
+    int m_length;
 
 public slots:
     void play( const QString& fileName );
@@ -54,17 +55,16 @@ public slots:
     // get length of media file and set it
     void length();
 
-    int position();
+    long position();
 
 private:
     XINE::Lib *libXine;
     MediaDetect mdetect;
-    int m_length;
     int m_currentTime;
-    int m_position;
+    long m_position;
 
 signals:
-    void positionChanged( long position  );
+    void positionChanged( long );
 
 };
 

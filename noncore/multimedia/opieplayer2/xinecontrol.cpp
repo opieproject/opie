@@ -108,10 +108,9 @@ void  XineControl::length() {
     mediaPlayerState->setLength( m_length );
 }
 
-int XineControl::position() {
-    length();
-    qDebug("M_LENGTH :" + m_length);
-    m_position = ( currentTime() /m_length*100);
+long XineControl::position() {
+    qDebug("<<<<<<<<<<<< xinecontrol setPostion>>>>>>>>>");
+    m_position = (m_currentTime/m_length*100);
     mediaPlayerState->setPosition( m_position  );
     long emitPos = (long)m_position;
     emit positionChanged( emitPos );
@@ -127,3 +126,4 @@ void XineControl::setFullscreen( bool isSet ) {
 void XineControl::seekTo( long second ) {
     //  libXine->
 }
+
