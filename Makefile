@@ -110,9 +110,13 @@ qtmessages:
 	done ;\
 	xgettext -C -ktr -kQT_TRANSLATE_NOOP -n `cat list` -o $(OPIEDIR)/qt-messages.pot 
 
+ifndef CONFIG_TARGET_OE
 $(subdir-y) : $(if $(CONFIG_LIBQPE),$(QTDIR)/stamp-headers $(OPIEDIR)/stamp-headers) \
 	$(if $(CONFIG_LIBQPE-X11),$(QTDIR)/stamp-headers-x11 $(OPIEDIR)/stamp-headers-x11 ) \
 	$(TOPDIR)/library/custom.h
+else
+$(subdir-y) : $(if $(CONFIG_LIBQPE),$(OPIEDIR)/stamp-headers) $(TOPDIR)/library/custom.h
+endif
 
 clean : $(TOPDIR)/.config
 	make -C bin clean

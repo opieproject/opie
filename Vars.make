@@ -1,7 +1,3 @@
-ifndef QTDIR
-$(error QTDIR not set)
-endif
-
 prefix=/opt/QtPalmtop
 
 ifeq ($(OPIEDIR),)
@@ -13,6 +9,18 @@ endif
 
 ifneq ($(wildcard $(TOPDIR)/.config),)
     include $(TOPDIR)/.config
+endif
+
+ifndef CONFIG_TARGET_OE
+    ifndef QTDIR
+    $(error QTDIR not set)
+    endif
+else
+    OEDIR:=$(CONFIG_OE_BUILD_DIR)
+    QTDIR:=$(OEDIR)/tmp/staging/arm-linux/qt2
+    $(shell mkdir -p $(QTDIR)/src/moc)
+    $(shell echo -e "all: \n\t" >>$(QTDIR)/src/moc/Makefile)
+    PLATFORM=sharp-linux
 endif
 
 ifdef CONFIG_TARGET_X86

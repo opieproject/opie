@@ -21,6 +21,9 @@ choice
   config TARGET_C700
     boolean "Sharp Zaurus w/ PXA25x (5600, C7x0, C8x0)"
 
+  config TARGET_OE
+    boolean "OpenEmbedded w/ OE build dir set below"
+
   config TARGET_IPAQ
     boolean "iPAQ"
 
@@ -32,8 +35,12 @@ choice
 
   config TARGET_YOPY
     boolean "Yopy 3500/3700"  
-
 endchoice
+
+config OE_BUILD_DIR
+  depends TARGET_OE
+  string "OE build directory"
+  default ">>>set OpenEmbedded build directory here<<<"
 
 config OPTIMIZE
   boolean "Use optimizations"
@@ -80,6 +87,7 @@ config SPECFILE
   default "linux-g++" if TARGET_SIMPAD && X11
   default "qws/linux-yopy-g++" if TARGET_YOPY && (! X11)
   default "qws/macx-generic-g++" if TARGET_MACOSX && (! X11)
+  default "qws/linux-oe-g++" if TARGET_OE && (!X11)
 
 config CUSTOMFILE
   string
