@@ -46,6 +46,7 @@ void TaskEditorOverViewImpl::load( const OTodo& todo) {
 
     ckbDue->setChecked( todo.hasDueDate() );
     btnDue->setText( TimeString::longDateString( todo.dueDate() ) );
+    btnDue->setEnabled( todo.hasDueDate() );
 
     cmbPrio->setCurrentItem( todo.priority() -1 );
     ckbCompleted->setChecked( todo.isCompleted() );
