@@ -553,8 +553,15 @@ void TextEdit::setItalic(bool y) {
 
 void TextEdit::setWordWrap(bool y) {
     bool state = editor->edited();
+    QString captionStr = caption();
+    bool b1 = edited1;
+    bool b2 = edited;
+
     editor->setWordWrap(y ? QMultiLineEdit::WidgetWidth : QMultiLineEdit::NoWrap );
     editor->setEdited( state );
+    edited1=b1;
+    edited=b2;
+    setCaption(captionStr);
 }
 
 void TextEdit::setSearchBar(bool b) {
@@ -684,7 +691,7 @@ void TextEdit::openDotFile( const QString &f ) {
     file.open(IO_ReadWrite);
     QTextStream t(&file);
     while ( !t.atEnd()) {
-        txt+=t.readLine();
+        txt+=t.readLine()+"\n";
     }
     editor->setText(txt);
     editor->setEdited( false);
