@@ -24,6 +24,7 @@
 
 class TodolistPluginConfig : public TodayConfigWidget {
 
+Q_OBJECT
 
 public:
 

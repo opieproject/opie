@@ -25,7 +25,7 @@
 
 class DatebookPluginConfig : public TodayConfigWidget {
 
-
+    Q_OBJECT
 
 public:
     DatebookPluginConfig( QWidget *parent,  const char *name );
