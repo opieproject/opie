@@ -53,7 +53,7 @@ bool WavFile::newFile() {
   date = dt.toString();//TimeString::dateString( QDateTime::currentDateTime(),false,true);
   date.replace(QRegExp("'"),"");
   date.replace(QRegExp(" "),"_");
-  date.replace(QRegExp(":"),".");
+  date.replace(QRegExp(":"),"-");
   date.replace(QRegExp(","),"");
 
   QString currentFile=date;
