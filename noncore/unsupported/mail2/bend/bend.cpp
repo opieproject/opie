@@ -9,20 +9,16 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 
-#include <stdlib.h>
+#include <opie/odevice.h>
 
-#include "configfile.h"
 #include "imapresponse.h"
 #include "imaphandler.h"
-#include "zaurusstuff.h"
+#include "configfile.h"
 #include "bend.h"
 
 BenD::BenD(QWidget *parent, const char *name, WFlags fl)
 	: QButton(parent, name, fl)
 {
-	_zaurus = false;
-	if (QFile("/dev/sharp_buz").exists()) _zaurus = true;
-
 	_config = new Config("mail");
 	_config->setGroup("Settings");
 
@@ -56,11 +52,10 @@ void BenD::slotClicked()
 {
 	QCopEnvelope e("QPE/System", "execute(QString)");
 	e << QString("mail");
-
-	if (_ledOn) {
-		ZaurusStuff::blinkLedOff();
-		_ledOn = false;
-	}
+	
+	ODevice *device = ODevice::inst();
+	if (device->led(1) == OLED_BlinkSlow)
+		device->setLed(1, OLED_Off);
 }
 
 void BenD::slotCheck()
@@ -98,30 +93,19 @@ void BenD::slotIMAPStatus(IMAPResponse &response)
 
 	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
 		if (response.STATUS()[0].recent().toInt() > 0) {
+			ODevice *device = ODevice::inst();
 			if (isHidden()) show();
-			if (_config->readBoolEntry("BlinkLed", true)) 
-				ZaurusStuff::blinkLedOn();
-			if (_config->readBoolEntry("PlaySound", false)) {
-				if (_zaurus) {
-					ZaurusStuff::buzzerOn();
-					QTimer::singleShot(3000, this, SLOT(slotSoundOff()));
-				} else {
-					QSound::play(Resource::findSound("mail/newmail"));
-				}
-			}
+			if (_config->readBoolEntry("BlinkLed", true))
+				device->setLed(1, OLED_BlinkSlow); 
+			if (_config->readBoolEntry("PlaySound", false))
+				device->alarmSound();
 		} else {
+			ODevice *device = ODevice::inst();
 			if (!isHidden()) hide();
-			if (!_ledOn) {
-				ZaurusStuff::blinkLedOff();
-				_ledOn = false;
-			}
+			if (device->led(1) == OLED_BlinkSlow) 
+				device->setLed(1, OLED_Off);
 		}
 		response.imapHandler()->iLogout();
 	} else qWarning("BenD: WARNING: Couldn't retrieve INBOX status.");
-}
-
-void BenD::slotSoundOff()
-{
-	ZaurusStuff::buzzerOff();
 }
 
