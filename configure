@@ -136,10 +136,13 @@ fi
 
 mkdir -p include/qpe
 ( cd include/qpe &&  rm -f *.h; ln -s ../../library/*.h .; ln -s ../../library/backend/*.h .; rm -f *_p.h; )
-
+mkdir -p include/qtopia
+( cd include/qtopia && rm -f *.h; ln -s ../../library/*.h .; )
+mkdir -p include/qtopia/private
+( cd include/qtopia/private && rm -f *.h; ln -s ../../../library/backend/*.h .; )
 mkdir -p include/opie
 ( cd include/opie &&  rm -f *.h; ln -s ../../libopie/*.h .; rm -f *_p.h; )
-( cd include/opie && ln -s ../../libsql/*.h . )
+( cd include/opie &&  ln -s ../../libsql/*.h .; )
 
 echo Creating makefiles...
 
