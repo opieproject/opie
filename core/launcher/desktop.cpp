@@ -323,11 +323,11 @@ void DesktopApplication::switchLCD ( bool on )
 
     if ( dapp-> m_screensaver ) {
       if ( on )
-	    dapp-> m_screensaver-> restore ( ); //setBacklight ( on ? -3 : -1 );
-	  else
-	    dapp-> m_screensaver-> save ( 1 );
-	  
-	}
+      dapp-> m_screensaver-> restore ( ); //setBacklight ( on ? -3 : -1 );
+    else
+      dapp-> m_screensaver-> save ( 1 );
+    
+  }
   }
 }
 
@@ -381,7 +381,7 @@ void DesktopApplication::desktopMessage( const QCString &msg, const QByteArray &
     emit power();
   }
   else if ( msg == "home()" ) {
-	qpedesktop-> home ( ); 
+  qpedesktop-> home ( ); 
   }
 #endif
 }
@@ -675,9 +675,9 @@ void Desktop::checkMemory()
       memstate = Unknown;
       if ( ignoreNormal )
         ignoreNormal = FALSE;
-      else
-        QMessageBox::information ( 0 , "Memory Status",
-                                   "There is enough memory again." );
+//       else
+//         QMessageBox::information ( 0 , "Memory Status",
+//                                    "There is enough memory again." );
       break;
     case VeryLow:
       memstate = Unknown;
@@ -720,7 +720,7 @@ void Desktop::raiseLauncher()
   QString tempItem;
   tempItem = cfg.readEntry( "Middle", "Home" );
   if ( tempItem == "Home" || tempItem.isEmpty() ) {
-  	home ( );
+    home ( );
   }
   else {
     QCopEnvelope e( "QPE/System", "execute(QString)" );
@@ -729,7 +729,7 @@ void Desktop::raiseLauncher()
 }
 
 void Desktop::home ( )
-{	
+{ 
     if ( isVisibleWindow( launcher->winId() ) )
       launcher->nextView();
     else
