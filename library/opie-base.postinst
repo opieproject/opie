@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 ln -sf ../init.d/opie /etc/rc0.d/K98opie
 ln -sf ../init.d/opie /etc/rc1.d/K98opie
@@ -8,4 +8,5 @@ ln -sf ../init.d/opie /etc/rc3.d/S98opie
 ln -sf ../init.d/opie /etc/rc4.d/S98opie
 ln -sf ../init.d/opie /etc/rc5.d/S98opie
 
+[ -x ldconfig ] && ldconfig
 exit 0
