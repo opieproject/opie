@@ -5,7 +5,7 @@ Section: opie/pim
 Conflicts: qpe-tkccalendar
 Maintainer: Holger 'Zecke' Freyther <zecke@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal, libopiecore2, libopieui2, libopiepim2, opie-pics
+Depends: task-opie-minimal, libopiecore2, libopieui2, libopiepim2, opie-pics, libopiedb2
 Description: A datebook/appointment manager
  A datebook/appointment manager for the Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION
