@@ -70,7 +70,7 @@ lrelease.commands = lrelease $(PRO)
 
 # new message target to get all strings from the apps with and without tr
 messages.target = messages
-messages.commands = xgettext -C -n -ktr -kQT_TRANSLATE_NOOP $$HEADERS $$SOURCES -o '$(OPIEDIR)/messages-$(PRO)-tr.po' && xgettext -C -n -a $$HEADERS $$SOURCES -o '$(OPIEDIR)/messages-$(QMAKE_TARGET)-allstrings.po'
+messages.commands = xgettext -C -n -ktr -kQT_TRANSLATE_NOOP $$HEADERS $$SOURCES -o '$(OPIEDIR)/messages-$(QMAKE_TARGET)-tr.po' && xgettext -C -n -a $$HEADERS $$SOURCES -o '$(OPIEDIR)/messages-$(QMAKE_TARGET)-allstrings.po'
 
 ipk.target = ipk
 ipk.commands = tmp=`mktemp -d /tmp/ipkg-opie.XXXXXXXXXX` && ( $(MAKE) INSTALL_ROOT="$$$$tmp" install && ipkg-build $$$$tmp; rm -rf $$$$tmp; )
