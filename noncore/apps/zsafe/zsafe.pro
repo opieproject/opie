@@ -14,7 +14,7 @@ INCLUDEPATH	+= $(OPIEDIR)/include
 INCLUDEPATH	+= .
 INCLUDEPATH	+= $(OPIEDIR)/noncore/apps/zsafe
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS        += -Wl,-rpath,$(OPIEDIR)/lib -L$(OPIEDIR)/lib -lqpe
+LIBS        += -Wl,-rpath,$(OPIEDIR)/lib -L$(OPIEDIR)/lib -lqpe -lopie
 TARGET		 = zsafe
 TRANSLATIONS = $(OPIEDIR)/noncore/apps/zsafe/i18n/de/zsafe.ts
 
