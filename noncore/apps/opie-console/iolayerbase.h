@@ -13,8 +13,8 @@ class QHBoxLayout;
 class IOLayerBase : public QWidget {
     Q_OBJECT
 public:
-    enum Flow { Software, Hardware };
-    enum Parity{ Odd, Even };
+    enum Flow { Hardware, Software };
+    enum Parity{ Odd  =2 , Even =1 };
     enum Speed{ Baud_115200,
                 Baud_57600,
                 Baud_38400,

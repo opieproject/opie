@@ -1,5 +1,6 @@
 #include "io_serial.h"
 #include "sz_transfer.h"
+#include "serialconfigwidget.h"
 #include "terminalwidget.h"
 
 #include "default.h"
@@ -28,8 +29,8 @@ extern "C" {
     }
 
     // Connection Widgets
-    ProfileDialogWidget* newSerialWidget(const QString& str, QWidget* ) {
-        return 0l;
+    ProfileDialogWidget* newSerialWidget(const QString& str, QWidget* wid) {
+        return new SerialConfigWidget(str, wid );
     }
     ProfileDialogWidget* newIrDaWidget( const QString& str, QWidget* wid) {
         return newSerialWidget(str, wid);

@@ -165,6 +165,7 @@ void MainWindow::slotConfigure() {
     int ret = conf.exec();
 
     if ( QDialog::Accepted == ret ) {
+        qWarning("conf %d", conf.list().count() );
         manager()->setProfiles( conf.list() );
         populateProfiles();
     }

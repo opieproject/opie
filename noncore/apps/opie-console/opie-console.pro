@@ -26,7 +26,8 @@ HEADERS      = io_layer.h io_serial.h \
 	       profileeditordialog.h \
 	       default.h \
 	       terminalwidget.h \
-	       iolayerbase.h
+	       iolayerbase.h \
+	       serialconfigwidget.h
 
 SOURCES      = io_layer.cpp io_serial.cpp \
 	       file_layer.cpp sz_transfer.cpp \
@@ -51,7 +52,8 @@ SOURCES      = io_layer.cpp io_serial.cpp \
 	       profileeditordialog.cpp \
 	       default.cpp \
 	       terminalwidget.cpp \
-	       iolayerbase.cpp
+	       iolayerbase.cpp \
+	       serialconfigwidget.cpp
    
 INTERFACES   = configurebase.ui editbase.ui
 INCLUDEPATH += $(OPIEDIR)/include

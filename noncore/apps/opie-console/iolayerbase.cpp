@@ -35,7 +35,7 @@ IOLayerBase::IOLayerBase( QWidget* par,  const char* name )
     m_speedLabel = new QLabel(tr("Speed"), this );
     m_speedBox = new QComboBox(this );
 
-    m_groupFlow = new QButtonGroup(tr("Flow control") );
+    m_groupFlow = new QButtonGroup(tr("Flow control"),this );
     m_flowHw = new QRadioButton(tr("Hardware"), m_groupFlow );
     m_flowSw = new QRadioButton(tr("Software"), m_groupFlow );
 
@@ -113,11 +113,37 @@ void IOLayerBase::setSpeed( Speed sp ) {
     m_speedBox->setCurrentItem(index );
 }
 IOLayerBase::Flow IOLayerBase::flow()const {
-    return Hardware;
+    if (m_flowHw->isChecked() ) {
+        qWarning("Hardware flow");
+        return Hardware;
+    }else {
+        qWarning("Software");
+        return Software;
+    }
 }
 IOLayerBase::Parity IOLayerBase::parity()const {
-    return Odd;
+    if (m_parityOdd->isChecked() )
+        return Odd;
+    else
+        return Even;
+
 }
 IOLayerBase::Speed IOLayerBase::speed()const{
-    return Baud_9600;
+    switch( m_speedBox->currentItem() ) {
+    case id_baud_115200:
+        return Baud_115200;
+        break;
+    case id_baud_57600:
+        return Baud_57600;
+        break;
+    case id_baud_38400:
+        return Baud_38400;
+        break;
+    case id_baud_19200:
+        return Baud_19200;
+        break;
+    case id_baud_9600:
+        return Baud_9600;
+        break;
+    }
 }

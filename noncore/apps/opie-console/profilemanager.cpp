@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <qfile.h>
 
 #include <qpe/config.h>
 
@@ -30,6 +34,7 @@ void ProfileManager::load() {
         prof.setName( conf.readEntry("name") );
         prof.setIOLayer( conf.readEntry("iolayer").utf8() );
         prof.setTerminalName( conf.readEntry("term").utf8() );
+        qWarning(" %s %s", conf.readEntry("iolayer").latin1(), prof.ioLayerName().data() );
         prof.setBackground( conf.readNumEntry("back") );
         prof.setForeground( conf.readNumEntry("fore") );
         prof.setTerminal( conf.readNumEntry("terminal") );
@@ -60,13 +65,13 @@ Session* ProfileManager::fromProfile( const Profile& prof) {
     return session;
 }
 void ProfileManager::save(  ) {
+    QFile::remove( (QString(getenv("HOME") )+ "/Settings/opie-console-profiles.conf" ) );
     ProfileConfig conf("opie-console-profiles");
-    conf.clearAll();
     Profile::ValueList::Iterator it;
     for (it = m_list.begin(); it != m_list.end(); ++it ) {
         conf.setGroup( (*it).name() );
         conf.writeEntry( "name", (*it).name() );
-        conf.writeEntry( "ioplayer", QString::fromUtf8( (*it).ioLayerName() ) );
+        conf.writeEntry( "iolayer", QString::fromUtf8( (*it).ioLayerName() ) );
         conf.writeEntry( "term", QString::fromUtf8( (*it).terminalName()  ) );
         conf.writeEntry( "back", (*it).background() );
         conf.writeEntry( "fore", (*it).foreground() );
