@@ -452,7 +452,7 @@ void Today::startMail() {
   QCopEnvelope e("QPE/System", "execute(QString)");
   e << QString("opiemail");
 //Right now start both, maybe decide which to rum via config file ..
-  QCopEnvelope e("QPE/System", "execute(QString)");
+  QCopEnvelope f("QPE/System", "execute(QString)");
   e << QString("qtmail");
 }
 
