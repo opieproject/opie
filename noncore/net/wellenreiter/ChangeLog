@@ -1,5 +1,8 @@
 2004-??-??	Michael Lauer		<mickey@Vanille.de>
 
+	* Registered a signal handler. We're now trying to gracefully exit and emergency close capture files.
+          This should allow reproducing failures.
+	* Added sanity check for compile time vs. run time Wireless Extension versions.
 	* Added sanity check isPresent(interface) before starting the engine.
 	* Added a View submenu. Added actions to expand and collapse all items.
 	* Switched to a (hopefully) more reliable method reading from gpsd.

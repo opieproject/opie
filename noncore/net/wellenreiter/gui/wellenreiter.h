@@ -20,6 +20,8 @@
 #include <opie2/odevice.h>
 #endif
 
+#include <signal.h>
+
 class QTimerEvent;
 class QPixmap;
 namespace Opie {namespace Net {class OPacket;}}
@@ -54,6 +56,8 @@ class Wellenreiter : public WellenreiterBase {
 
   public:
     bool sniffing;
+    static Wellenreiter* instance;
+    static void signalHandler( int sig );
 
   protected:
     virtual void timerEvent( QTimerEvent* );
@@ -86,6 +90,7 @@ class Wellenreiter : public WellenreiterBase {
     void doAction( const QString& action, const QString& protocol, Opie::Net::OPacket* p );
     QObject* childIfToParse( Opie::Net::OPacket* p, const QString& protocol );
     bool checkDumpPacket( Opie::Net::OPacket* p );
+    void registerSignalHandler();
 
   private:
     #ifdef QWS

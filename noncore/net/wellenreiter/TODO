@@ -22,7 +22,7 @@
 - enable multiple packet sources
   - infrared
   - bluetooth
-  - usb?
+  - usb
 
 - define packet structure in a metalanguage and generate
   the actual parsing code (hmmm)
@@ -36,7 +36,7 @@
 
 - enable sniffing in wired networks
 
-- fix autodetection (interface name)
+- fix autodetection (the interface name is not selected correctly)
 
 - use ethtool IOCTLs (if present)
 
@@ -72,6 +72,4 @@
 	# Latitude      Longitude       ( SSID )        Type    ( BSSID )       Time (GMT)      [ SNR Sig Noise ]
 	# $DateGMT: 2004-02-07
 	N 41.1008009    W 8.3893034     ( Porceven )    BBS     ( 00:a0:f8:41:91:63 )   22:32:39 (GMT)  [ 21 177 156 ]
-
-- add SIGSEGV handler for emergency closing the capture file etc.
 

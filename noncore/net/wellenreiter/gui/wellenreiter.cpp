@@ -58,6 +58,9 @@ using namespace Opie::Ui;
 #include <string.h>
 #include <sys/types.h>
 #include <stdlib.h>
+#include <signal.h>
+
+Wellenreiter* Wellenreiter::instance = 0;
 
 Wellenreiter::Wellenreiter( QWidget* parent )
     : WellenreiterBase( parent, 0, 0 ),
@@ -87,19 +90,50 @@ Wellenreiter::Wellenreiter( QWidget* parent )
 
     QTimer::singleShot( 1000, this, SLOT( initialTimer() ) );
 
+    registerSignalHandler();
 }
 
 
 Wellenreiter::~Wellenreiter()
 {
     delete pcap;
+    //unregisterSignalHandler();
 }
 
 
 void Wellenreiter::initialTimer()
 {
-    odebug << "Wellenreiter::preloading manufacturer database..." << oendl;
+    odebug << "preloading manufacturer database..." << oendl;
     OManufacturerDB::instance();
+}
+
+
+void Wellenreiter::signalHandler( int sig )
+{
+    oerr << "Aye! Received SIGSEGV or SIGBUS! Trying to exit gracefully..." << oendl;
+    if ( Wellenreiter::instance->sniffing )
+    {
+        Wellenreiter::instance->pcap->close();
+        Wellenreiter::instance->stopClicked();
+    }
+    oerr << "Phew. Seemed to work." << oendl;
+    ::exit( -1 );
+}
+
+
+void Wellenreiter::registerSignalHandler()
+{
+    Wellenreiter::instance = this;
+    struct sigaction action;
+
+    action.sa_handler = Wellenreiter::signalHandler;
+    if (sigemptyset(&action.sa_mask))
+        oerr << "sigemptyset() failure:" << strerror( errno ) << oendl;
+    if (sigaction(SIGSEGV, &action, NULL))
+        oerr << "can't set up a signal handler for SIGSEGV:" << strerror( errno ) << oendl;
+    if (sigaction(SIGBUS, &action, NULL))
+        oerr << "can't set up a signal handler for SIGBUS:" << strerror( errno ) << oendl;
+    odebug << "signal handlers setup." << oendl;
 }
 
 
@@ -502,7 +536,7 @@ void Wellenreiter::startClicked()
     if ( ( interface == "" ) || ( cardtype == 0 ) )
     {
         QMessageBox::information( this, "Wellenreiter II",
-                                  tr( "Your device is not\nproperly configured. Please reconfigure!" ) );
+                                  tr( "No device configured.\nPlease reconfigure!" ) );
         return;
     }
 
@@ -530,6 +564,16 @@ void Wellenreiter::startClicked()
         {
             QMessageBox::warning( this, "Wellenreiter II",
                                 tr( "Can't bring interface '%1' up:\n" ).arg( iface->name() ) + strerror( errno ) );
+            return;
+        }
+
+        // check if wireless extension version matches
+        if ( ONetwork::wirelessExtensionCompileVersion() != iface->wirelessExtensionDriverVersion() )
+        {
+            QMessageBox::critical( this, "Wellenreiter II", tr( "<p>The Wireless Extension Versions<br>are not matching!<p>"
+                                    "  Wellenreiter II : WE V%1<br>Interface driver: WE V%2" )
+                                    .arg( QString::number( ONetwork::wirelessExtensionCompileVersion() ) )
+                                    .arg( QString::number( iface->wirelessExtensionDriverVersion() ) ) );
             return;
         }
     }
