@@ -1029,6 +1029,17 @@ static const char *replaceChar(unsigned char c)
 	return 0;
     }
 
+#warning "Bug-Workaround must be fixed !"
+	// IF THIS FUNCTION RETURNES TRUE, THE DATA IS EXPORTED
+	// AS QUOTED PRINTABLE. 
+	// BUT THE PARSER IS UNABLE TO IMPORT THIS, THEREFORE 
+	// I DECIDED TO DISABLE IT UNTIL TROLLTECH FIXES THIS BUG
+        // SEE ALSO includesUnprintable(VObject *o)
+	// (se)
+
+    return 0;
+
+#if 0
     static char trans[4];
     trans[0] = '=';
     trans[3] = '\0';
@@ -1046,6 +1057,7 @@ static const char *replaceChar(unsigned char c)
 	trans[2] = 'A' + (rem - 10);
 
     return trans;
+#endif
 }
 
 static void writeQPString(OFile *fp, const char *s)
@@ -1079,6 +1091,16 @@ static void writeQPString(OFile *fp, const char *s)
 
 static bool includesUnprintable(VObject *o)
 {
+
+#if 0
+
+	// IF THIS FUNCTION RETURNES TRUE, THE DATA IS EXPORTED
+	// AS QUOTED PRINTABLE. 
+	// BUT THE PARSER IS UNABLE TO IMPORT THIS, THEREFORE 
+	// I DECIDED TO DISABLE IT UNTIL TROLLTECH FIXES THIS BUG
+	// SEE ALSO *replaceChar(unsigned char c)
+	// (se)
+
     if (o) {
 	if (VALUE_TYPE(o) == VCVT_STRINGZ) {
 	    const char *p = STRINGZ_VALUE_OF(o);
@@ -1091,6 +1113,10 @@ static bool includesUnprintable(VObject *o)
 	    }
 	}
     }
+
+#endif
+#warning "Bug-Workaround must be fixed !"
+
     return FALSE;
 }
 
