@@ -497,8 +497,8 @@ void TextEdit::fileOpen()
     browseForFiles->setFileView( viewSelection );
     browseForFiles->showMaximized();
     if( browseForFiles->exec() != -1 ) {
-        QString selFile= browseForFiles->selectedFileName;
-        QStringList fileList=browseForFiles->fileList;
+        QString selFile = browseForFiles->selectedFileName;
+        QStringList fileList = browseForFiles->fileList;
         qDebug(selFile);
         QStringList::ConstIterator f;
         QString fileTemp;

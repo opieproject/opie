@@ -22,6 +22,7 @@ copyright Sun 02-17-2002 22:28:23 L. J. Potter ljp@llornkcor.com
 #include <qstringlist.h>
 #include <qlabel.h>
 #include <qstring.h>
+#include <qdict.h>
 
 #include <qpe/filemanager.h>
 
@@ -35,6 +36,9 @@ class QComboBox;
 class QWidgetStack;
 class FileSelector;
 class QPoint;
+class MenuButton;
+class QRegExp;
+
 
 class fileBrowser : public QDialog
 {
@@ -47,20 +51,28 @@ public:
 
     void setFileView( int );
 
-    QPushButton *buttonOk, *buttonCancel, *homeButton, *docButton, *hideButton;
+    QPushButton *buttonOk, *buttonCancel, *homeButton, *docButton, *hideButton, *cdUpButton;
     QListView* ListView;
 
     QLabel *dirLabel;
     QString selectedFileName, filterStr;
     QDir currentDir;
     QFile file;
-    QStringList fileList;
+    QStringList fileList, dirPathStringList;
     QListViewItem * item;
-    QComboBox *SelectionCombo;
+    QComboBox *SelectionCombo, *dirPathCombo;
+    MenuButton *typemb;
     QWidgetStack *FileStack;
     FileSelector *fileSelector;
-
+    QString mimeType;
 public slots:
+    
+private:
+//    QDict<void> mimes;
+    QRegExp tf;
+    QStringList getMimeTypes();
+    void fillCombo( const QString&);
+private slots:
     void homeButtonPushed();
     void docButtonPushed();
     void ListPressed( int, QListViewItem *, const QPoint&, int);
@@ -69,15 +81,17 @@ public slots:
     void makDir();
     void localRename();
     void localDelete();
-private:
-
-private slots:
+    void receive( const QCString &msg, const QByteArray &data );
+    void dirPathComboActivated( const QString & );
     void upDir();
     void listClicked( QListViewItem * );
     void selectionChanged( const QString & );
     void OnOK();
     void docOpen( const DocLnk & );
-
+    void updateMimeTypeMenu();
+    void showType(const QString &);
+    void dirPathEditPressed();
+    
 protected slots:
 
 protected:

@@ -18,7 +18,9 @@
 #include <qpe/resource.h>
 #include <qpe/fileselector.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/menubutton.h>
 
+#include <qdict.h>
 #include <qwidgetstack.h>
 #include <qlistview.h>
 #include <qcombo.h>
@@ -29,6 +31,7 @@
 #include <unistd.h>
 #include <qpopupmenu.h>
 #include <qlineedit.h>
+#include <qstringlist.h>
 
 #include <unistd.h>
 #include <stdlib.h>
@@ -47,32 +50,52 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     setCaption(tr( name ) );
     filterStr=filter;
 
+//      channel = new QCopChannel( "QPE/fileDialog", this );
+//      connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
+//         this, SLOT(receive(const QCString&, const QByteArray&)) );
+
     QGridLayout *layout = new QGridLayout( this );
     layout->setSpacing( 4 );
     layout->setMargin( 4 );
 
+    dirPathCombo = new QComboBox( FALSE, this, "dorPathCombo" );
+    dirPathCombo->setEditable(TRUE);
 
-    dirLabel = new QLabel(this, "DirLabel");
-    dirLabel->setText(currentDir.canonicalPath());
-    dirLabel->setMinimumSize( QSize( 50, 15 ) );
-    dirLabel->setMaximumSize( QSize( 250, 15 ) );
-    layout->addWidget( dirLabel, 0, 0 );
+    connect( dirPathCombo, SIGNAL( activated( const QString & ) ),
+              this, SLOT( dirPathComboActivated( const QString & ) ) );
+
+    connect( dirPathCombo->lineEdit(), SIGNAL( returnPressed(  ) ),
+              this, SLOT( dirPathEditPressed( ) ) );
+
+    dirPathStringList << "/";
+// we can get the storage here
+
+    layout->addMultiCellWidget( dirPathCombo, 0, 0, 0, 4 );
+
+    cdUpButton = new QPushButton(Resource::loadIconSet("up"),"",this,"cdUpButton");
+    cdUpButton ->setMinimumSize( QSize( 20, 20 ) );
+    cdUpButton ->setMaximumSize( QSize( 20, 20 ) );
+    connect( cdUpButton ,SIGNAL(released()),this,SLOT( upDir()) );
+    cdUpButton ->setFlat(TRUE);
+    layout->addMultiCellWidget( cdUpButton, 0, 0, 5, 5 );
+
 
     docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",this,"docsButton");
-    docButton->setMinimumSize( QSize( 25, 25 ) );
-    docButton->setMaximumSize( QSize( 25, 25 ) );
+    docButton->setMinimumSize( QSize( 20, 20 ) );
+    docButton->setMaximumSize( QSize( 20, 20 ) );
     connect( docButton,SIGNAL(released()),this,SLOT( docButtonPushed()) );
     docButton->setFlat(TRUE);
-    layout->addWidget( docButton, 0, 1 );
+    layout->addMultiCellWidget( docButton, 0, 0, 6, 6 );
 
     homeButton = new QPushButton( Resource::loadIconSet("home"),"",this,"homeButton");
-    homeButton->setMinimumSize( QSize( 25, 25 ) );
-    homeButton->setMaximumSize( QSize( 25, 25 ) );
+    homeButton->setMinimumSize( QSize( 20, 20 ) );
+    homeButton->setMaximumSize( QSize( 20, 20 ) );
     connect(homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
     homeButton->setFlat(TRUE);
-    layout->addWidget( homeButton, 0, 2 );
+    layout->addMultiCellWidget( homeButton, 0, 0, 7, 7 );
 
     FileStack = new QWidgetStack( this );
+
 
     ListView = new QListView( this, "ListView" );
     ListView->setMinimumSize( QSize( 100, 25 ) );
@@ -82,7 +105,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     ListView->addColumn( tr( "Size" ) );
     ListView->setColumnWidth(1,-1);
     ListView->addColumn( "Date",-1);
-//      ListView->addColumn( tr( "" ) );
+
     ListView->setColumnWidthMode(0,QListView::Manual);
     ListView->setColumnAlignment(1,QListView::AlignRight);
     ListView->setColumnAlignment(2,QListView::AlignRight);
@@ -95,21 +118,29 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     connect( ListView, SIGNAL( clicked( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
 
     FileStack->addWidget( ListView, get_unique_id() );
-
-    fileSelector = new FileSelector( "text/*", FileStack, "fileselector" , FALSE, FALSE); //buggy
+    mimeType="text/*";
+    fileSelector = new FileSelector( mimeType, FileStack, "fileselector" , FALSE, FALSE); //buggy
 //    connect( fileSelector, SIGNAL( closeMe() ), this, SLOT( showEditTools() ) );
 //    connect( fileSelector, SIGNAL( newSelected( const DocLnk &) ), this, SLOT( newFile( const DocLnk & ) ) );
     connect( fileSelector, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( docOpen( const DocLnk & ) ) );
-    layout->addMultiCellWidget( FileStack, 1, 1, 0, 2 );
+    layout->addMultiCellWidget( FileStack, 1, 1, 0, 7 );
 
     SelectionCombo = new QComboBox( FALSE, this, "SelectionCombo" );
-    SelectionCombo->setMinimumSize( QSize( 200, 25 ) );
     SelectionCombo->insertItem( tr( "Documents" ) );
     SelectionCombo->insertItem( tr( "All files" ) );
-    SelectionCombo->insertItem( tr( "All files (incl. hidden)" ) );
-    layout->addMultiCellWidget( SelectionCombo, 2, 2, 0, 2 );
+    SelectionCombo->insertItem( tr( "Hidden files" ) );
+//      SelectionCombo->setMaximumWidth(120);
+    layout->addMultiCellWidget( SelectionCombo, 2, 2, 0, 3 );
+
     connect( SelectionCombo, SIGNAL( activated( const QString & ) ),
             this, SLOT( selectionChanged( const QString & ) ) );
+
+    typemb = new MenuButton(this);
+    typemb->setLabel(tr("Type: %1"));
+    typemb->setMinimumWidth(110);
+    typemb->setFixedHeight(22);
+    layout->addMultiCellWidget( typemb, 2, 2, 4, 7 );
+    updateMimeTypeMenu() ;
 
     currentDir.setPath(QDir::currentDirPath());
     currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden */| QDir::All);
@@ -168,18 +199,33 @@ void fileBrowser::populateList()
             item->setPixmap( 0,  Resource::loadPixmap( "folder" ));
         else
             item->setPixmap( 0, Resource::loadPixmap( "fileopen" ));
-        }        
+        }
         isDir=FALSE;
         ++it;
     }
-//    ListView->setSorting( 2, FALSE);
     ListView->setSorting( 3, FALSE);
-    dirLabel->setText(currentDir.canonicalPath());
+    QString currentPath = currentDir.canonicalPath();
+
+    fillCombo( (const QString &)currentPath);
+//   dirPathCombo->lineEdit()->setText(currentPath);
+
+//      if( dirPathStringList.grep(currentPath,TRUE).isEmpty() ) {
+//          dirPathCombo->clear();
+//          dirPathStringList.prepend(currentPath );
+//          dirPathCombo->insertStringList( dirPathStringList,-1);
+//      }
 }
 
 void fileBrowser::upDir()
 {
-//    qDebug(currentDir.canonicalPath());
+    QString current = currentDir.canonicalPath();
+    QDir dir(current);
+    dir.cdUp();
+    current = dir.canonicalPath();
+    chdir( current.latin1() );
+    currentDir.cd(  current, TRUE);
+    populateList();
+    update();
 }
 
 // you may want to switch these 2 functions. I like single clicks
@@ -240,31 +286,31 @@ void fileBrowser::OnOK()
 }
 
 void fileBrowser::homeButtonPushed() {
-        chdir( QDir::homeDirPath().latin1() );
-        currentDir.cd(  QDir::homeDirPath(), TRUE);
-        populateList();
-        update();
+    QString current = QDir::homeDirPath();
+    chdir( current.latin1() );
+    currentDir.cd(  current, TRUE);
+    populateList();
+    update();
 }
 
 void fileBrowser::docButtonPushed() {
-        chdir( QString(QPEApplication::documentDir()+"/text").latin1() );
-        currentDir.cd( QPEApplication::documentDir()+"/text", TRUE);
-        populateList();
-        update();
+    QString current = QPEApplication::documentDir();
+    chdir( current.latin1() );
+    currentDir.cd( current, TRUE);
+    populateList();
+    update();
 
 }
 
 void fileBrowser::selectionChanged( const QString &select )
 {
-    if ( select == "Documents")
-    {
+    if ( select == "Documents")  {
         FileStack->raiseWidget( fileSelector );
-        dirLabel->hide();
+        dirPathCombo->hide();
+        cdUpButton->hide();
         docButton->hide();
         homeButton->hide();
-    }
-    else
-    {
+    } else {
         if ( select == "All files" )
             currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::All);
         else
@@ -272,7 +318,8 @@ void fileBrowser::selectionChanged( const QString &select )
 
         populateList();
         update();
-        dirLabel->show();
+        dirPathCombo->show();
+        cdUpButton->show();
         docButton->show();
         homeButton->show();
         FileStack->raiseWidget( ListView );
@@ -303,11 +350,12 @@ void fileBrowser::showListMenu(QListViewItem *item) {
     m.insertItem( tr( "Change Directory" ), this, SLOT( doCd() ));
     else
     m.insertItem( tr( "Make Directory" ), this, SLOT( makDir() ));
+    m.insertItem( tr( "Rescan" ), this, SLOT( populateList()() ));
     m.insertItem( tr( "Rename" ), this, SLOT( localRename() ));
     m.insertSeparator();
     m.insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
     m.exec( QCursor::pos() );
-    
+
 }
 
 void fileBrowser::doCd() {
@@ -352,11 +400,11 @@ void fileBrowser::localDelete() {
               populateList();
           }
               break;
-          case 1: 
+          case 1:
                 // exit
               break;
         };
-        
+
     } else {
         switch ( QMessageBox::warning(this,"Delete","Do you really want to delete\n"+f
                                       +" ?","Yes","No",0,0,1) ) {
@@ -367,10 +415,117 @@ void fileBrowser::localDelete() {
               populateList();
           }
               break;
-          case 1: 
+          case 1:
                 // exit
               break;
         };
+    }
+}
+
+void fileBrowser::updateMimeTypeMenu() {
+
+    disconnect( typemb, SIGNAL(selected(const QString&)),
+          this, SLOT(showType(const QString&)) );
+
+    QString prev;
+
+    // Type filter
+    QStringList types;
+    types << tr("All");
+    types << "--";
+    types += getMimeTypes();
+    prev = typemb->currentText();
+    typemb->clear();
+    typemb->insertItems(types);
+      //  typemb->select(prev);
+
+    connect(typemb, SIGNAL(selected(const QString&)), this, SLOT(showType(const QString&)));
+}
+
+void fileBrowser::showType(const QString &t) {
+
+    qDebug(t);
+    mimeType = t+"/*";
+//      if(fileSelector) {
+//      disconnect( fileSelector, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( docOpen( const DocLnk & ) ) );
+//          delete fileSelector;
+    }
+      //   fileSelector = new FileSelector( mimeType, FileStack, "fileselector" , FALSE, FALSE); //buggy
+//    connect( fileSelector, SIGNAL( closeMe() ), this, SLOT( showEditTools() ) );
+//    connect( fileSelector, SIGNAL( newSelected( const DocLnk &) ), this, SLOT( newFile( const DocLnk & ) ) );
+      //   connect( fileSelector, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( docOpen( const DocLnk & ) ) );
+    fileSelector->reread();
+    repaint();
+//      if ( t == tr("All") ) {
+//          icons->setTypeFilter("",TRUE);
+//      } else {
+//          icons->setTypeFilter(t+"/*",TRUE);
+//      }
+
+}
+
+QStringList fileBrowser::getMimeTypes() {
+    QStringList r;
+    AppLnkSet apps( QPEApplication::qpeDir() + "apps" );
+    QFile file( QPEApplication::qpeDir()+"etc/available.mime");
+    file.open( IO_WriteOnly|IO_Truncate);//)
+    for ( QListIterator<AppLnk> it( apps.children() ); it.current(); ++it ) {
+        AppLnk* l;
+        l = it.current();
+        QStringList maj = l->mimeTypes();
+        QStringList::ConstIterator f;
+        for (  f = maj.begin(); f != maj.end(); f++ ) {
+            QString  temp = *f;
+            int sl = temp.find('/');
+            if (sl >= 0) {
+                QString k = temp.left(sl);
+                if( r.grep(k,TRUE).isEmpty() ) {
+                    r << k;
+                    k+="\n";
+                    file.writeBlock(  k.latin1(), k.length());
+                }
+            }
+        }
+    }
+    r.sort();
+    file.close();
+    return r;
+}
+
+void fileBrowser::receive( const QCString &msg, const QByteArray &data ) {
+//    QDataStream stream( data, IO_ReadOnly );
+//    if (msg == "keyRegister(int key, QString channel, QString message)")
+//    {
+//      int k;
+//      QString c, m;
+//      stream >> k;
+//      stream >> c;
+//      stream >> m;
+}
+
+void fileBrowser::dirPathComboActivated( const QString & current) {
+    chdir( current.latin1() );
+    currentDir.cd( current, TRUE);
+    populateList();
+    update();
+}
+
+void fileBrowser::dirPathEditPressed() {
+    QString current = dirPathCombo->lineEdit()->text();
+    chdir( current.latin1() );
+    currentDir.cd( current, TRUE);
+    populateList();
+    update();
+}
+
+void fileBrowser::fillCombo(const QString &currentPath) {
+
+    dirPathCombo->lineEdit()->setText(currentPath);
+
+    if( dirPathStringList.grep(currentPath,TRUE).isEmpty() ) {
+        dirPathCombo->clear();
+        dirPathStringList.prepend(currentPath );
+        dirPathCombo->insertStringList( dirPathStringList,-1);
     }
 
 }
