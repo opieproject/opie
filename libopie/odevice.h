@@ -200,7 +200,7 @@ public:
 
 	QStrList &cpuFrequencies() const;
 	bool setCpuFrequency(uint index);
-	uint cpuFrequency() const;
+	int cpuFrequency() const;
 
 	/**
 	 * Returns the available buttons on this device.  The number and location

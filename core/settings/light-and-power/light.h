@@ -30,6 +30,7 @@
 
 
 #include <qstringlist.h>
+#include <qlistbox.h>
 #include "lightsettingsbase.h"
 
 class QTimer;
@@ -51,12 +52,14 @@ protected slots:
     virtual void calibrateSensorAC ( );
     void setBacklight ( int );
     void setContrast ( int );
+    void setFrequency ( int );
     void resetBacklight ( );
 
 private:
     int m_bres;
     int m_cres;
     int m_oldcontrast;
+    int m_oldfreq;
     QTimer *m_resettimer;
     QStringList m_sensordata;
     QStringList m_sensordata_ac;

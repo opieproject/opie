@@ -42,6 +42,7 @@
 #include <qspinbox.h>
 #include <qpushbutton.h>
 #include <qgroupbox.h>
+#include <qcombobox.h>
 
 #include <opie/odevice.h>
 
@@ -62,10 +63,20 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 		CalibrateLightSensor_ac-> hide ( );
 	}
 	if (m_cres) {
-		GroupLight->setTitle(tr("Backlight & Contrast"));
+		GroupLight->setTitle(tr("Backlight && Contrast"));
+		GroupLight_ac->setTitle(GroupLight->title());
 	} else {
 		contrast->hide();
 		contrast_ac->hide();
+	}
+
+	QStrList freq = ODevice::inst()->cpuFrequencies();
+	if ( freq.count() ) {
+		frequency->insertStrList( freq );
+		frequency_ac->insertStrList( freq );
+	} else {
+		frequency->hide();
+		frequency_ac->hide();
 	}
 
 	Config config ( "apm" );
@@ -77,7 +88,10 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 	interval_suspend->  setValue ( config. readNumEntry ( "Suspend", 60 ));
 
 	// battery check and slider
-	LcdOffOnly-> setChecked ( config. readBoolEntry ( "LcdOffOnly", false ));
+	LcdOffOnly->setChecked ( config. readBoolEntry ( "LcdOffOnly", false ));
+
+	// CPU frequency
+	frequency->setCurrentItem( config.readNumEntry("Freq", 0) );
 
 	int bright = config. readNumEntry ( "Brightness", 127 );
 	int contr  = m_oldcontrast = config. readNumEntry ( "Contrast", 127 );
@@ -106,6 +120,9 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 
 	// ac check and slider
 	LcdOffOnly_ac-> setChecked ( config. readBoolEntry ( "LcdOffOnly", false ));
+
+	// CPU frequency
+	frequency_ac->setCurrentItem( config.readNumEntry("Freq", 0) );
 
 	bright = config. readNumEntry ( "Brightness", 255 );
 	brightness_ac-> setTickInterval ( QMAX( 16, 256 / m_bres ));
@@ -147,6 +164,7 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 		connect ( contrast,    SIGNAL( valueChanged ( int )), this, SLOT( setContrast ( int )));
 		connect ( contrast_ac, SIGNAL( valueChanged ( int )), this, SLOT( setContrast ( int )));
 	}
+        connect( frequency, SIGNAL( activated(int) ),          this, SLOT( setFrequency(int) ) );
 }
 
 LightSettings::~LightSettings ( ) 
@@ -189,6 +207,12 @@ void LightSettings::setContrast ( int contr )
 	ODevice::inst ( )-> setDisplayContrast(contr);
 }
 
+void LightSettings::setFrequency ( int index )
+{
+qWarning("LightSettings::setFrequency(%d)", index);
+	ODevice::inst ( )-> setCpuFrequency(index);
+}
+
 void LightSettings::resetBacklight ( )
 {
 	setBacklight ( -1 );
@@ -208,6 +232,7 @@ void LightSettings::accept ( )
 	config. writeEntry ( "Brightness", brightness-> value () );
 	if (m_cres)
 	config. writeEntry ( "Contrast",   contrast-> value () );
+	config. writeEntry ( "Freq",       frequency->currentItem() );
 
 	// ac
 	config. setGroup ( "AC" );
@@ -218,6 +243,7 @@ void LightSettings::accept ( )
 	config. writeEntry ( "Brightness", brightness_ac-> value () );
 	if (m_cres)
 	config. writeEntry ( "Contrast",   contrast_ac-> value () );
+	config. writeEntry ( "Freq",       frequency_ac->currentItem() );
 
 	// only make light sensor stuff appear if the unit has a sensor	
 	if ( ODevice::inst ( )-> hasLightSensor ( )) {

@@ -779,7 +779,6 @@ int ODevice::lightSensorResolution ( ) const
  */
 QStrList &ODevice::cpuFrequencies ( ) const
 {
-qWarning("ODevice::cpuFrequencies: m_cpu_frequencies is %d", (int) d->m_cpu_frequencies);
 	return *d->m_cpu_frequencies;
 }
 
@@ -797,21 +796,18 @@ bool ODevice::setCpuFrequency(uint index)
 	char *freq = d->m_cpu_frequencies->at(index);
 	qWarning("set freq to %s", freq);
 
-	//TODO: do the change in /proc/sys/cpu/0/speed
+	int fd;
+
+	if ((fd = ::open("/proc/sys/cpu/0/speed", O_WRONLY)) >= 0) {
+		char writeCommand[50];
+		const int count = sprintf(writeCommand, "%s\n", freq);
+		int res = (::write(fd, writeCommand, count) != -1);
+		::close(fd);
+		return res;
+	}
 
 	return false;
 }
-
-/**
- * Returns current frequency index out of d->m_cpu_frequencies
- */
-uint ODevice::cpuFrequency() const
-{
-	// TODO: get freq from /proc/sys/cpu/0/speed and return index
-
-	return 0;
-}
-
 
 
 /**
@@ -1992,11 +1988,26 @@ void Ramses::init()
 
 	m_power_timer = 0;
 
-qWarning("adding freq");
-	d->m_cpu_frequencies->append("100");
-	d->m_cpu_frequencies->append("200");
-	d->m_cpu_frequencies->append("300");
-	d->m_cpu_frequencies->append("400");
+#ifdef QT_QWS_ALLOW_OVERCLOCK
+#warning *** Overclocking enabled - this may fry your hardware - you have been warned ***
+#define OC(x...)        x
+#else
+#define OC(x...)
+#endif
+
+
+	// This table is true for a Intel XScale PXA 255
+
+	d->m_cpu_frequencies->append("99000");      // mem= 99, run= 99, turbo= 99, PXbus= 50
+OC(	d->m_cpu_frequencies->append("118000"); )   // mem=118, run=118, turbo=118, PXbus= 59 OC'd mem
+	d->m_cpu_frequencies->append("199100");     // mem= 99, run=199, turbo=199, PXbus= 99
+OC(	d->m_cpu_frequencies->append("236000"); )   // mem=118, run=236, turbo=236, PXbus=118 OC'd mem
+	d->m_cpu_frequencies->append("298600");     // mem= 99, run=199, turbo=298, PXbus= 99
+OC(	d->m_cpu_frequencies->append("354000"); )   // mem=118, run=236, turbo=354, PXbus=118 OC'd mem
+	d->m_cpu_frequencies->append("398099");     // mem= 99, run=199, turbo=398, PXbus= 99
+	d->m_cpu_frequencies->append("398100");     // mem= 99, run=398, turbo=398, PXbus=196
+OC(	d->m_cpu_frequencies->append("471000"); )   // mem=118, run=471, turbo=471, PXbus=236 OC'd mem/core/bus
+
 }
 
 bool Ramses::filter(int /*unicode*/, int keycode, int modifiers, bool isPress, bool autoRepeat)
@@ -2144,8 +2155,6 @@ bool Ramses::setDisplayContrast(int contr)
 		res = (::write(fd, writeCommand, count) != -1);
 		res = true;
 		::close(fd);
-	} else {
-		qWarning("no write");
 	}
 	return res;
 }
