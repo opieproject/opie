@@ -148,7 +148,7 @@ void Bkmk::setAnno(tchar* t)
     }
 }
 
-BkmkFile::BkmkFile(const char *fnm, bool w = false)
+BkmkFile::BkmkFile(const char *fnm, bool w)
     :
     wt(w), isUpgraded(false)
 {

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: QTReader.cpp,v 1.6 2002-12-20 01:35:01 llornkcor Exp $
+** $Id: QTReader.cpp,v 1.7 2003-01-23 13:26:21 mickeyl Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -36,7 +36,7 @@ const char *QTReader::fonts[] = { "Helvetica", "Courier", "Times", 0 };
 //const tchar *QTReader::fonts[] = { "verdana", "Courier", "Times", 0 };
 //const int   QTReader::fontsizes[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,0};
 
-QTReader::QTReader( QWidget *parent=0, const char *name=0, WFlags f = 0) :
+QTReader::QTReader( QWidget *parent, const char *name, WFlags f) :
   QWidget(parent, name, f),
   m_delay(100),
   m_scrolldy1(0),
@@ -57,7 +57,7 @@ QTReader::QTReader( QWidget *parent=0, const char *name=0, WFlags f = 0) :
 //  init();
 }
 /*
-QTReader::QTReader( const QString& filename, QWidget *parent=0, const tchar *name=0, WFlags f = 0) :
+QTReader::QTReader( const QString& filename, QWidget *parent, const tchar *name, WFlags f ) :
   QWidget(parent, name, f),
   m_textfont(0),
   m_textsize(1),

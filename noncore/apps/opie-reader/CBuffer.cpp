@@ -11,7 +11,7 @@ CBufferBase& CBufferBase::assign(const void* sztmp, size_t ms)
     return *this;
 }
 
-CBufferBase::CBufferBase(size_t ms, size_t n = 16) : len(n), membersize(ms)
+CBufferBase::CBufferBase(size_t ms, size_t n) : len(n), membersize(ms)
 {
     buffer = new unsigned char[len*membersize];
     memset(buffer, 0, len*membersize);
@@ -31,7 +31,7 @@ void* CBufferBase::operator[](int i)
     return buffer+i*membersize;
 }
 
-size_t CBufferBase::bstrlen(unsigned char* _buffer = NULL)
+size_t CBufferBase::bstrlen(unsigned char* _buffer)
 {
     if (_buffer == NULL) _buffer = buffer;
     unsigned char* zero = new unsigned char[membersize];
