@@ -111,13 +111,13 @@ public:
 	/**
 	 * sets the scrollbar (if implemented by successor of this class)
 	 */
-	virtual void setScroll( int cursor, int slines );
+	virtual void setScroll( int cursor, int slines ) = 0;
 
 	/**
 	 * scrolls (if implemented, by successor of this class)
 	 * @param int value, how much the widget should scroll up (positive value) or down (negative value)
 	 */
-	virtual void scroll( int value );
+	virtual void scroll( int value ) = 0;
 		
 signals:
 
