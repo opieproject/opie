@@ -136,8 +136,6 @@ public:
     ~OPluginLoader();
 
     template<class IFace>
-    IFace* load( const QString& name, const QUuid& );
-    template<class IFace>
     IFace* load( const OPluginItem& item, const QUuid& );
 };
 
@@ -170,10 +168,6 @@ public:
     void save();
 };
 
-template<class IFace>
-IFace* OPluginLoader::load( const QString& name, const QUuid& uid ) {
-    return static_cast<IFace*>( OGenericPluginLoader::load( item, uid ) );
-}
 
 template<class IFace>
 IFace* OPluginLoader::load( const OPluginItem& item, const QUuid& uid ) {
