@@ -140,10 +140,6 @@ Cerrando reproductor.</translation>
         <translation>Guardar lista</translation>
     </message>
     <message>
-        <source>Export playlist to m3u</source>
-        <translation type="obsolete">Exportar lista a m3u </translation>
-    </message>
-    <message>
         <source>Open File or URL</source>
         <translation>Abrir fichero o URL</translation>
     </message>
@@ -226,10 +222,6 @@ la próxima vez que la inicie.</translation>
     <message>
         <source>There was a problem in getting the file.</source>
         <translation>Hubo un problema trayendo el fichero.</translation>
-    </message>
-    <message>
-        <source>Save Playlist</source>
-        <translation type="obsolete">Guardar lista</translation>
     </message>
     <message>
         <source>Remove Playlist?</source>

@@ -167,18 +167,6 @@ Mantenga pulsado un proceso para ver información adicional, o para enviarle una
 <context>
     <name>StorageInfo</name>
     <message>
-        <source>Hard Disk</source>
-        <translation type="obsolete">Disco duro</translation>
-    </message>
-    <message>
-        <source>SCSI Hard Disk</source>
-        <translation type="obsolete">Disco duro SCSI</translation>
-    </message>
-    <message>
-        <source>Int. Storage</source>
-        <translation type="obsolete">Alm. interno</translation>
-    </message>
-    <message>
         <source>CF Card: </source>
         <translation>Tarjeta CF: </translation>
     </message>

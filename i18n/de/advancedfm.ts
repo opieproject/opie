@@ -66,11 +66,6 @@
         <translation>2</translation>
     </message>
     <message>
-        <source>Do you really want to delete
-</source>
-        <translation type="obsolete">Wirklich löschen</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
@@ -97,14 +92,6 @@
     <message>
         <source>AdvancedFm Output</source>
         <translation>Erweiterter Dateimanager Ausgabe</translation>
-    </message>
-    <message>
-        <source>command failed!</source>
-        <translation type="obsolete">Befehl fehlgeschlagen!</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>

@@ -146,16 +146,8 @@ editando as categorias.</translation>
 <context>
     <name>FileSelector</name>
     <message>
-        <source>View</source>
-        <translation type="obsolete">Ver</translation>
-    </message>
-    <message>
         <source>Close the File Selector</source>
         <translation>Fechar Seletor de Arquivo</translation>
-    </message>
-    <message>
-        <source>Create a new Document</source>
-        <translation type="obsolete">Criar novo Documento</translation>
     </message>
     <message>
         <source>Show documents of this type</source>
@@ -188,10 +180,6 @@ editando as categorias.</translation>
         <source>Name</source>
         <translation>Nome</translation>
     </message>
-    <message>
-        <source>There are no files in this directory.</source>
-        <translation type="obsolete">Não existem arquivos neste diretório.</translation>
-    </message>
 </context>
 <context>
     <name>FindDialog</name>
@@ -216,10 +204,6 @@ editando as categorias.</translation>
     <message>
         <source>Find</source>
         <translation type="unfinished">Localizar</translation>
-    </message>
-    <message>
-        <source>&amp;Find</source>
-        <translation type="obsolete">&amp;Localizar</translation>
     </message>
     <message>
         <source>Start Search at:</source>
@@ -261,10 +245,6 @@ editando as categorias.</translation>
         <translation>Cópia de </translation>
     </message>
     <message>
-        <source>Icon deletion failed.</source>
-        <translation type="obsolete">Remoção de ícone falhou.</translation>
-    </message>
-    <message>
         <source>Duplicate</source>
         <translation>Duplicata</translation>
     </message>
@@ -275,10 +255,6 @@ editando as categorias.</translation>
     <message>
         <source>Details</source>
         <translation>Detalhes</translation>
-    </message>
-    <message>
-        <source>Delete Icon and leave file</source>
-        <translation type="obsolete">Apagar ícone e deixar arquivo</translation>
     </message>
     <message>
         <source>Moving Document failed.</source>
@@ -334,10 +310,6 @@ editando as categorias.</translation>
     <message>
         <source>Details</source>
         <translation type="unfinished">Detalhes</translation>
-    </message>
-    <message>
-        <source>Del Icon</source>
-        <translation type="obsolete">Rem. Ícone</translation>
     </message>
     <message>
         <source>The media the document resides on.</source>

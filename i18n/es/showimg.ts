@@ -64,16 +64,8 @@
         <translation>Ver miniaturas</translation>
     </message>
     <message>
-        <source>Slideshow</source>
-        <translation type="obsolete">Diapositivas</translation>
-    </message>
-    <message>
         <source>Preferences..</source>
         <translation>Preferencias..</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation type="obsolete">Ayuda</translation>
     </message>
     <message>
         <source>Image Info ...</source>

@@ -53,29 +53,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     </message>
 </context>
 <context>
-    <name>FontDialog</name>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete">Fonte</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Tamanho</translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">The Quick Brown Fox Jumps Over The Lazy Dog</translation>
-    </message>
-    <message>
-        <source>Font Dialog</source>
-        <translation type="obsolete">Diálogo de Fontes</translation>
-    </message>
-    <message>
-        <source>Font Style</source>
-        <translation type="obsolete">Estilo da Fonte</translation>
-    </message>
-</context>
-<context>
     <name>TextEdit</name>
     <message>
         <source>Cut</source>
@@ -84,10 +61,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     <message>
         <source>New</source>
         <translation>Novo</translation>
-    </message>
-    <message>
-        <source>Bold</source>
-        <translation type="obsolete">Negrito</translation>
     </message>
     <message>
         <source>Copy</source>
@@ -138,10 +111,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
         <translation>Editor de Texto</translation>
     </message>
     <message>
-        <source>Italic</source>
-        <translation type="obsolete">Itálico</translation>
-    </message>
-    <message>
         <source>Zoom out</source>
         <translation>Afastar</translation>
     </message>
@@ -152,10 +121,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     <message>
         <source>Save As</source>
         <translation>Salvar Como</translation>
-    </message>
-    <message>
-        <source>Unnamed</source>
-        <translation type="obsolete">Sem Nome</translation>
     </message>
     <message>
         <source>Find...</source>

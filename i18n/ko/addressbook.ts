@@ -14,60 +14,6 @@
         <source>Pick</source>
         <translation>고르기</translation>
     </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">정리하지 않음</translation>
-    </message>
-</context>
-<context>
-    <name>AddressSettings</name>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">직위</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">이름</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">성</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">정렬할 이름</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">기본 이메일 주소</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">기타</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">성별</translation>
-    </message>
-</context>
-<context>
-    <name>AddressSettingsBase</name>
-    <message>
-        <source>Arrange Edit Fields</source>
-        <translation type="obsolete">필드의 순서 정하기</translation>
-    </message>
-    <message>
-        <source>Select the field order:</source>
-        <translation type="obsolete">필드의 순서를 고르세요</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation type="obsolete">위로</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation type="obsolete">아래로</translation>
-    </message>
 </context>
 <context>
     <name>AddressbookWindow</name>
@@ -108,26 +54,6 @@
         <translation>개인 정보</translation>
     </message>
     <message>
-        <source>Arrange Edit Fields</source>
-        <translation type="obsolete">필드의 순서 정하기</translation>
-    </message>
-    <message>
-        <source>Out of Space</source>
-        <translation type="obsolete">자리 보족</translation>
-    </message>
-    <message>
-        <source>There is not enough space to create
-neccessary startup files.
-
-Free up some space before
-entering data!</source>
-        <translation type="obsolete">필요한 시작 파일들을 만들 
-자리가 부족합니다.
-
-새 정보를 입력하기 전에 용량을 
-비우시기 바랍니다.</translation>
-    </message>
-    <message>
         <source>View</source>
         <translation>보기</translation>
     </message>
@@ -164,60 +90,12 @@ Quit anyway?</source>
 그래도 끝낼까요?</translation>
     </message>
     <message>
-        <source>Name Title</source>
-        <translation type="obsolete">직위</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">기타</translation>
-    </message>
-    <message>
-        <source>Work</source>
-        <translation type="obsolete">회사</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">이름</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">성</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">정렬할 이름</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">기본 이메일 주소</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">성</translation>
-    </message>
-    <message>
         <source>All</source>
         <translation>모두</translation>
     </message>
     <message>
         <source>Unfiled</source>
         <translation>정렬 안됨</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete">글꼴</translation>
-    </message>
-    <message>
-        <source>Small</source>
-        <translation type="obsolete">작은</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="obsolete">보통</translation>
-    </message>
-    <message>
-        <source>Large</source>
-        <translation type="obsolete">큰</translation>
     </message>
     <message>
         <source>Import vCard</source>
@@ -389,18 +267,6 @@ is provided free !</source>
 <context>
     <name>ContactEditor</name>
     <message>
-        <source>Default Email</source>
-        <translation type="obsolete">기본 이메일 주소</translation>
-    </message>
-    <message>
-        <source>Emails</source>
-        <translation type="obsolete">이메일 주소들</translation>
-    </message>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">직위</translation>
-    </message>
-    <message>
         <source>First Name</source>
         <translation>이름</translation>
     </message>
@@ -427,18 +293,6 @@ is provided free !</source>
     <message>
         <source>Job Title</source>
         <translation>직업명</translation>
-    </message>
-    <message>
-        <source>Company</source>
-        <translation type="obsolete">회사</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">기타</translation>
-    </message>
-    <message>
-        <source>Groups</source>
-        <translation type="obsolete">분류들</translation>
     </message>
     <message>
         <source>City</source>
@@ -1345,144 +1199,12 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Business Fax</source>
-        <translation type="obsolete">회사 팩스</translation>
-    </message>
-    <message>
-        <source>Home Fax</source>
-        <translation type="obsolete">집 팩스</translation>
-    </message>
-    <message>
-        <source>Business Phone</source>
-        <translation type="obsolete">회사 전화</translation>
-    </message>
-    <message>
-        <source>Home Phone</source>
-        <translation type="obsolete">집 전화</translation>
-    </message>
-    <message>
-        <source>Business Mobile</source>
-        <translation type="obsolete">회사 핸드폰</translation>
-    </message>
-    <message>
-        <source>Home Mobile</source>
-        <translation type="obsolete">집 핸드폰</translation>
-    </message>
-    <message>
-        <source>Business WebPage</source>
-        <translation type="obsolete">회사 웹사이트</translation>
-    </message>
-    <message>
-        <source>Home Web Page</source>
-        <translation type="obsolete">집 웹사이트</translation>
-    </message>
-    <message>
-        <source>Business Pager</source>
-        <translation type="obsolete">회사 삐삐</translation>
-    </message>
-    <message>
-        <source>Business Street</source>
-        <translation type="obsolete">회사 주소</translation>
-    </message>
-    <message>
-        <source>Home Street</source>
-        <translation type="obsolete">집 주소</translation>
-    </message>
-    <message>
-        <source>Business City</source>
-        <translation type="obsolete">회사 도시</translation>
-    </message>
-    <message>
-        <source>Business State</source>
-        <translation type="obsolete">회사 주</translation>
-    </message>
-    <message>
-        <source>Business Zip</source>
-        <translation type="obsolete">회사 우편번호</translation>
-    </message>
-    <message>
-        <source>Business Country</source>
-        <translation type="obsolete">회사 국가</translation>
-    </message>
-    <message>
-        <source>Home City</source>
-        <translation type="obsolete">집 도시</translation>
-    </message>
-    <message>
-        <source>Home State</source>
-        <translation type="obsolete">집 주</translation>
-    </message>
-    <message>
-        <source>Home Zip</source>
-        <translation type="obsolete">집 우편번호</translation>
-    </message>
-    <message>
-        <source>Home Country</source>
-        <translation type="obsolete">집 국가</translation>
-    </message>
-    <message>
-        <source>Department</source>
-        <translation type="obsolete">부</translation>
-    </message>
-    <message>
-        <source>Office</source>
-        <translation type="obsolete">회사</translation>
-    </message>
-    <message>
-        <source>Profession</source>
-        <translation type="obsolete">직업</translation>
-    </message>
-    <message>
-        <source>Assistant</source>
-        <translation type="obsolete">비서</translation>
-    </message>
-    <message>
-        <source>Manager</source>
-        <translation type="obsolete">매니저</translation>
-    </message>
-    <message>
-        <source>Spouse</source>
-        <translation type="obsolete">배우자</translation>
-    </message>
-    <message>
         <source>Birthday</source>
         <translation>생일</translation>
     </message>
     <message>
         <source>Anniversary</source>
         <translation>결혼 기념일</translation>
-    </message>
-    <message>
-        <source>Nickname</source>
-        <translation type="obsolete">별명</translation>
-    </message>
-    <message>
-        <source>Children</source>
-        <translation type="obsolete">자식들</translation>
-    </message>
-    <message>
-        <source>Work Phone</source>
-        <translation type="obsolete">회사 전화</translation>
-    </message>
-    <message>
-        <source>Work Fax</source>
-        <translation type="obsolete">회사 팩스</translation>
-    </message>
-    <message>
-        <source>work Mobile</source>
-        <translation type="obsolete">회사 핸드폰</translation>
-    </message>
-    <message>
-        <source>Work Pager</source>
-        <translation type="obsolete">회사 삐삐</translation>
-    </message>
-    <message>
-        <source>Work Web Page</source>
-        <translation type="obsolete">회사 웹사이트</translation>
-    </message>
-    <message>
-        <source>Work Mobile</source>
-        <translation type="obsolete">회사 핸드폰</translation>
     </message>
     <message>
         <source>Kuwait</source>
@@ -1557,7 +1279,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">성</translation>
     </message>
     <message>
         <source>Birthday</source>

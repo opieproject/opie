@@ -669,30 +669,6 @@
         <translation>File di aiuto non trovato!</translation>
     </message>
     <message>
-        <source>Opie Sheet
-Spreadsheet Software for Opie
-QWDC Beta Winner (as Sheet/Qt)
-
-Developed by: Serdar Ozler
-Release 1.0.1
-Release Date: July 04, 2002
-
-This product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.
-
-http://qtopia.sitebest.com</source>
-        <translation type="obsolete">Opie Sheet
-Foglio di Calcolo per Opie
-Vincitore QWDC Beta (come Sheet/Qt)
-
-Creato da: Serdar Ozler
-Versione 1.0.1
-Data Versione: 04 Luglio 2002
-
-Questo prodotto è sotto licenza GPL. E&apos; possibile distribuirlo gratuitamente. Per l&apos;ultima versione ed il codice sorgente, visitate il sito web:
-
-http://qtopia.sitebest.com</translation>
-    </message>
-    <message>
         <source>&amp;Number of rows:</source>
         <translation>&amp;Numero di righe:</translation>
     </message>

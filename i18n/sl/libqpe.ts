@@ -145,14 +145,6 @@ ureja kategorije.</translation>
 <context>
     <name>FileSelector</name>
     <message>
-        <source>View</source>
-        <translation type="obsolete">Pogled</translation>
-    </message>
-    <message>
-        <source>Create a new Document</source>
-        <translation type="obsolete">Ustvari nov dokument</translation>
-    </message>
-    <message>
         <source>Close the File Selector</source>
         <translation>Zapri Izbiralca datotek</translation>
     </message>
@@ -187,10 +179,6 @@ ureja kategorije.</translation>
         <source>Name</source>
         <translation>Ime</translation>
     </message>
-    <message>
-        <source>There are no files in this directory.</source>
-        <translation type="obsolete">V tem imeniku ni datotek.</translation>
-    </message>
 </context>
 <context>
     <name>FindDialog</name>
@@ -219,10 +207,6 @@ ureja kategorije.</translation>
     <message>
         <source>Find what:</source>
         <translation>Išči kaj:</translation>
-    </message>
-    <message>
-        <source>&amp;Find</source>
-        <translation type="obsolete">&amp;Najdi</translation>
     </message>
     <message>
         <source>Category:</source>
@@ -260,14 +244,6 @@ ureja kategorije.</translation>
         <translation>Izbris datoteke spodletel.</translation>
     </message>
     <message>
-        <source>Delete Icon and leave file</source>
-        <translation type="obsolete">Izbriši ikono in zapusti datoteko</translation>
-    </message>
-    <message>
-        <source>Icon deletion failed.</source>
-        <translation type="obsolete">Izbris ikone spodletel.</translation>
-    </message>
-    <message>
         <source>Copy of </source>
         <translation>Kopija</translation>
     </message>
@@ -286,10 +262,6 @@ ureja kategorije.</translation>
     <message>
         <source>Moving Document failed.</source>
         <translation>Premikanje dokumenta spodletelo.</translation>
-    </message>
-    <message>
-        <source>File does not exist.</source>
-        <translation type="obsolete">Datoteka ne obstaja.</translation>
     </message>
     <message>
         <source>Hard Disk</source>
@@ -329,10 +301,6 @@ ureja kategorije.</translation>
     <message>
         <source>Delete</source>
         <translation>Izbriši</translation>
-    </message>
-    <message>
-        <source>Del Icon</source>
-        <translation type="obsolete">Izbriši ikono</translation>
     </message>
     <message>
         <source>Copy</source>

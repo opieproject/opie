@@ -9,20 +9,8 @@
 <context>
     <name>LightSettingsBase</name>
     <message>
-        <source>Adjust to environment</source>
-        <translation type="obsolete">Wyrownaj do srodowiska</translation>
-    </message>
-    <message>
         <source>By sensing the ambient light where you are using your device, the screen light can be adjusted automatically. The brightness setting still affects the average brightness.</source>
         <translation>Sensor swiatla ustawi poziom podswietlenia automatycznie</translation>
-    </message>
-    <message>
-        <source>Power saving</source>
-        <translation type="obsolete">Oszczednosc energii</translation>
-    </message>
-    <message>
-        <source> seconds</source>
-        <translation type="obsolete"> sekund</translation>
     </message>
     <message>
         <source>Light off after</source>
@@ -35,14 +23,6 @@
     <message>
         <source>Suspend after</source>
         <translation>Zasnij po</translation>
-    </message>
-    <message>
-        <source>Bright</source>
-        <translation type="obsolete">Jasnosc</translation>
-    </message>
-    <message>
-        <source>&lt;blockquote&gt;The brighter the screen light, the more battery power is used.&lt;/blockquote&gt;</source>
-        <translation type="obsolete">&lt;blockquote&gt;Im jasniej tym wiecej potrzeba energii.&lt;/blockquote&gt;</translation>
     </message>
     <message>
         <source>Off</source>

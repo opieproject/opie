@@ -191,18 +191,6 @@
         <source>Package</source>
         <translation type="unfinished">Paket</translation>
     </message>
-    <message>
-        <source>Install to</source>
-        <translation type="obsolete">Installiere auf</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="obsolete">Entferne</translation>
-    </message>
-    <message>
-        <source>Reinstall</source>
-        <translation type="obsolete">Installiere neu</translation>
-    </message>
 </context>
 <context>
     <name>PackageManagerSettings</name>
@@ -355,7 +343,7 @@ Alles fertig.</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Entfernen</translation>
     </message>
 </context>
 <context>

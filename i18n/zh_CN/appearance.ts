@@ -132,9 +132,6 @@
     </message>
 </context>
 <context>
-    <name>AppearanceSettings</name>
-</context>
-<context>
     <name>EditScheme</name>
     <message>
         <source>Edit scheme</source>

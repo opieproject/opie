@@ -19,10 +19,6 @@
         <translation>Peso Molecolare</translation>
     </message>
     <message>
-        <source>chemical Formula</source>
-        <translation type="obsolete">Formula Chimica</translation>
-    </message>
-    <message>
         <source>Molecular Weight (u):</source>
         <translation>Peso Molecolare (u):</translation>
     </message>
@@ -80,10 +76,6 @@
     <message>
         <source>%1 J</source>
         <translation>%1 J</translation>
-    </message>
-    <message>
-        <source>%1 nm</source>
-        <translation type="obsolete">%1 nm</translation>
     </message>
     <message>
         <source>%1 K</source>

@@ -43,18 +43,7 @@ precisión para calibrar la pantalla.</translation>
     </message>
 </context>
 <context>
-    <name>Desktop</name>
-    <message>
-        <source>Battery Status</source>
-        <translation type="obsolete">Estado de la batería</translation>
-    </message>
-</context>
-<context>
     <name>DesktopApplication</name>
-    <message>
-        <source>Battery level is critical!&quot;nKeep power off until power restored!</source>
-        <translation type="obsolete">¡El nivel de la batería es crítico!&quot;n¡Apágueme o enchúfeme!</translation>
-    </message>
     <message>
         <source>Battery is running very low.</source>
         <translation>La batería está muy baja.</translation>
@@ -134,10 +123,6 @@ Por favor cárguela.</translation>
         <translation>Medio insertado</translation>
     </message>
     <message>
-        <source>A &lt;b&gt;storage medium&lt;/b&gt; was inserted. Should it be scanned for media file?</source>
-        <translation type="obsolete">Se insertó un &lt;b&gt;medio de almacenamiento&lt;/b&gt;. ¿Examino sus ficheros?</translation>
-    </message>
-    <message>
         <source>Which media files</source>
         <translation>Qué ficheros</translation>
     </message>
@@ -182,14 +167,6 @@ Por favor cárguela.</translation>
         <translation>No preguntar otra vez por este medio</translation>
     </message>
     <message>
-        <source>Yes</source>
-        <translation type="obsolete">Sí</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">No</translation>
-    </message>
-    <message>
         <source>A &lt;b&gt;storage medium&lt;/b&gt; was inserted. Should it be scanned for media files?</source>
         <translation>Se insertó un &lt;b&gt;medio de almacenamiento&lt;/b&gt;. ¿Examino sus ficheros?</translation>
     </message>
@@ -221,12 +198,6 @@ Por favor cárguela.</translation>
         <translation>Apagar</translation>
     </message>
     <message>
-        <source>&lt;p&gt;
-These termination options are provided primarily for use while developing and testing the Opie system In a normal environment, these concepts are unnecessary.</source>
-        <translation type="obsolete">&lt;p&gt;
-Estas opciones de terminación se usan principalmente en las pruebas y desarrollo del sistema Opie. En un entorno normal, estos conceptos son innecesarios.</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
@@ -244,16 +215,8 @@ Estas opciones de terminación se usan principalmente en las pruebas y desarroll
         <translation>Conexión de sincronización</translation>
     </message>
     <message>
-        <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you ae using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation type="obsolete">&lt;p&gt;Un sistema no autorizado está pidiendo acceso a este dispositivo.&lt;p&gt;Si está usando una versión de Desktop Qtopia anterior a la 1.5.1, por favor actualícese.</translation>
-    </message>
-    <message>
         <source>Deny</source>
         <translation>Denegar</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you hve just initiated a Sync for the first time, this is normal.</source>
-        <translation type="obsolete">&lt;p&gt;Un sistema no reconocido está pidiendo acceso a este dispositivo.&lt;p&gt;Si acaba de empezar su primera sincronización, esto es normal.</translation>
     </message>
     <message>
         <source>Allow</source>

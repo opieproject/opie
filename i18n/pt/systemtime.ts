@@ -205,10 +205,6 @@
 <context>
     <name>SetDateTime</name>
     <message>
-        <source>Set System Time</source>
-        <translation type="obsolete">Hora do sistema</translation>
-    </message>
-    <message>
         <source>Time Zone</source>
         <translation>Fuso Horário</translation>
     </message>

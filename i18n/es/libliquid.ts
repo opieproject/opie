@@ -46,29 +46,12 @@
         <translation>Usar texto del menú sombreado</translation>
     </message>
     <message>
-        <source>Draw liquid window title bars</source>
-        <translation type="obsolete">Barra título ventana líquida</translation>
-    </message>
-    <message>
         <source>Make toolbar buttons appear flat</source>
         <translation>Botones planos en barra herramientas</translation>
     </message>
     <message>
         <source>Stipple contrast</source>
         <translation>Puntear contraste</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Liquid</source>
-        <comment>name</comment>
-        <translation type="obsolete">Líquido</translation>
-    </message>
-    <message>
-        <source>High Performance Liquid style by Mosfet</source>
-        <comment>description</comment>
-        <translation type="obsolete">Estilo Líquido de alto rendimiento por Mosfet</translation>
     </message>
 </context>
 <context>

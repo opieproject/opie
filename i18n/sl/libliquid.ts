@@ -46,29 +46,12 @@
         <translation>Uporabi senčeno besedilo v menujih</translation>
     </message>
     <message>
-        <source>Draw liquid window title bars</source>
-        <translation type="obsolete">Riši tekoče naslovne letve</translation>
-    </message>
-    <message>
         <source>Make toolbar buttons appear flat</source>
         <translation>Naj se orodni gumb pojavi ploščat</translation>
     </message>
     <message>
         <source>Stipple contrast</source>
         <translation>Črtast kontrast</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Liquid</source>
-        <comment>name</comment>
-        <translation type="obsolete">Liquid</translation>
-    </message>
-    <message>
-        <source>High Performance Liquid style by Mosfet</source>
-        <comment>description</comment>
-        <translation type="obsolete">High Performance Liquid stil od Mosfeta</translation>
     </message>
 </context>
 <context>

@@ -26,10 +26,6 @@
         <translation>%1%</translation>
     </message>
     <message>
-        <source>Select a character from the list.  The writing area on the left shows the reference character.  Practice writing in the area on the right.</source>
-        <translation type="obsolete">Selecione um caractere da lista. A área de escrita na esquerda mostra o caractere de referência. Pratique a escrita na área da direita.</translation>
-    </message>
-    <message>
         <source>Matched: </source>
         <translation>Combinou: </translation>
     </message>

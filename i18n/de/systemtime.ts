@@ -207,10 +207,6 @@ wo kämen wir da hin...</translation>
 <context>
     <name>SetDateTime</name>
     <message>
-        <source>Set System Time</source>
-        <translation type="obsolete">Systemzeit einstellen</translation>
-    </message>
-    <message>
         <source>Time Zone</source>
         <translation>Zeitzone</translation>
     </message>

@@ -13,60 +13,6 @@
         <source>Pick</source>
         <translation>Izberi</translation>
     </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Brez</translation>
-    </message>
-</context>
-<context>
-    <name>AddressSettings</name>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Naziv</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">Ime</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">Priimek</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">Datoteka kot</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">Privzeta epošta</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Opombe</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">Spol</translation>
-    </message>
-</context>
-<context>
-    <name>AddressSettingsBase</name>
-    <message>
-        <source>Arrange Edit Fields</source>
-        <translation type="obsolete">Uredi urejevalna polja</translation>
-    </message>
-    <message>
-        <source>Select the field order:</source>
-        <translation type="obsolete">Izberi zaporedje polj:</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation type="obsolete">Gor</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation type="obsolete">Dol</translation>
-    </message>
 </context>
 <context>
     <name>AddressbookWindow</name>
@@ -107,26 +53,6 @@
         <translation>Moje osebne podrobnosti</translation>
     </message>
     <message>
-        <source>Arrange Edit Fields</source>
-        <translation type="obsolete">Uredi urejevalna polja</translation>
-    </message>
-    <message>
-        <source>Out of Space</source>
-        <translation type="obsolete">Zmanjkalo je prostora</translation>
-    </message>
-    <message>
-        <source>There is not enough space to create
-neccessary startup files.
-
-Free up some space before
-entering data!</source>
-        <translation type="obsolete">Ni dovolj prostora za potrebne
-zagonske datoteke.
-
-Sprostite nekaj prostora preden
-vnesete podatke!</translation>
-    </message>
-    <message>
         <source>View</source>
         <translation>Pogled</translation>
     </message>
@@ -163,64 +89,12 @@ in poizkusite ponovno.
 Izhod?</translation>
     </message>
     <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Naziv</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Zapiski</translation>
-    </message>
-    <message>
-        <source>Work</source>
-        <translation type="obsolete">Služba</translation>
-    </message>
-    <message>
-        <source>Mb</source>
-        <translation type="obsolete">Mobitel</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">Ime</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">Priimek</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">Datoteka kot</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">Privzeta epošta</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">Spol</translation>
-    </message>
-    <message>
         <source>All</source>
         <translation>Vse</translation>
     </message>
     <message>
         <source>Unfiled</source>
         <translation>Brez</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete">Pisava</translation>
-    </message>
-    <message>
-        <source>Small</source>
-        <translation type="obsolete">Mala</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="obsolete">Normalna</translation>
-    </message>
-    <message>
-        <source>Large</source>
-        <translation type="obsolete">Velika</translation>
     </message>
     <message>
         <source>Import vCard</source>
@@ -392,18 +266,6 @@ is provided free !</source>
 <context>
     <name>ContactEditor</name>
     <message>
-        <source>Default Email</source>
-        <translation type="obsolete">Privzeta epošta</translation>
-    </message>
-    <message>
-        <source>Emails</source>
-        <translation type="obsolete">Epošta</translation>
-    </message>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Naziv</translation>
-    </message>
-    <message>
         <source>First Name</source>
         <translation>Ime</translation>
     </message>
@@ -430,18 +292,6 @@ is provided free !</source>
     <message>
         <source>Job Title</source>
         <translation>Delovno mesto</translation>
-    </message>
-    <message>
-        <source>Company</source>
-        <translation type="obsolete">Podjetje</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Zapiski</translation>
-    </message>
-    <message>
-        <source>Groups</source>
-        <translation type="obsolete">Skupine</translation>
     </message>
     <message>
         <source>City</source>
@@ -1348,144 +1198,12 @@ is provided free !</source>
         <translation>Zimbabve</translation>
     </message>
     <message>
-        <source>Business Fax</source>
-        <translation type="obsolete">Službeni faks</translation>
-    </message>
-    <message>
-        <source>Home Fax</source>
-        <translation type="obsolete">Domači faks</translation>
-    </message>
-    <message>
-        <source>Business Phone</source>
-        <translation type="obsolete">Službeni telefon</translation>
-    </message>
-    <message>
-        <source>Home Phone</source>
-        <translation type="obsolete">Domači telefon</translation>
-    </message>
-    <message>
-        <source>Business Mobile</source>
-        <translation type="obsolete">Službeni mobitel</translation>
-    </message>
-    <message>
-        <source>Home Mobile</source>
-        <translation type="obsolete">Domači mobitel</translation>
-    </message>
-    <message>
-        <source>Business WebPage</source>
-        <translation type="obsolete">Službena spletna stran</translation>
-    </message>
-    <message>
-        <source>Home Web Page</source>
-        <translation type="obsolete">Domača spletna stran</translation>
-    </message>
-    <message>
-        <source>Business Pager</source>
-        <translation type="obsolete">Službeni pozivnik</translation>
-    </message>
-    <message>
-        <source>Business Street</source>
-        <translation type="obsolete">Ulica podjetja</translation>
-    </message>
-    <message>
-        <source>Home Street</source>
-        <translation type="obsolete">Domača ulica</translation>
-    </message>
-    <message>
-        <source>Business City</source>
-        <translation type="obsolete">Mesto podjetja</translation>
-    </message>
-    <message>
-        <source>Business State</source>
-        <translation type="obsolete">Okrožje podjetja</translation>
-    </message>
-    <message>
-        <source>Business Zip</source>
-        <translation type="obsolete">Poštna št. podjetja</translation>
-    </message>
-    <message>
-        <source>Business Country</source>
-        <translation type="obsolete">Država podjetja</translation>
-    </message>
-    <message>
-        <source>Home City</source>
-        <translation type="obsolete">Domače mesto</translation>
-    </message>
-    <message>
-        <source>Home State</source>
-        <translation type="obsolete">Domače okrožje</translation>
-    </message>
-    <message>
-        <source>Home Zip</source>
-        <translation type="obsolete">Domača poštna številka</translation>
-    </message>
-    <message>
-        <source>Home Country</source>
-        <translation type="obsolete">Domača država</translation>
-    </message>
-    <message>
-        <source>Department</source>
-        <translation type="obsolete">Oddelek</translation>
-    </message>
-    <message>
-        <source>Office</source>
-        <translation type="obsolete">Pisarna</translation>
-    </message>
-    <message>
-        <source>Profession</source>
-        <translation type="obsolete">Poklic</translation>
-    </message>
-    <message>
-        <source>Assistant</source>
-        <translation type="obsolete">Pomočnik</translation>
-    </message>
-    <message>
-        <source>Manager</source>
-        <translation type="obsolete">Upravnik</translation>
-    </message>
-    <message>
-        <source>Spouse</source>
-        <translation type="obsolete">Zakonec</translation>
-    </message>
-    <message>
         <source>Birthday</source>
         <translation>Rojstni dan</translation>
     </message>
     <message>
         <source>Anniversary</source>
         <translation>Obletnica</translation>
-    </message>
-    <message>
-        <source>Nickname</source>
-        <translation type="obsolete">Vzdevek</translation>
-    </message>
-    <message>
-        <source>Children</source>
-        <translation type="obsolete">Otroci</translation>
-    </message>
-    <message>
-        <source>Work Phone</source>
-        <translation type="obsolete">Službeni telefon</translation>
-    </message>
-    <message>
-        <source>Work Fax</source>
-        <translation type="obsolete">Službeni faks</translation>
-    </message>
-    <message>
-        <source>work Mobile</source>
-        <translation type="obsolete">službeni mobitel</translation>
-    </message>
-    <message>
-        <source>Work Pager</source>
-        <translation type="obsolete">Službeni pozivnik</translation>
-    </message>
-    <message>
-        <source>Work Web Page</source>
-        <translation type="obsolete">Službena spletna stran</translation>
-    </message>
-    <message>
-        <source>Work Mobile</source>
-        <translation type="obsolete">Službeni mobitel</translation>
     </message>
     <message>
         <source>Kuwait</source>

@@ -52,25 +52,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     </message>
 </context>
 <context>
-    <name>FontDialog</name>
-    <message>
-        <source>FontDialog</source>
-        <translation type="obsolete">WyborCzcionki</translation>
-    </message>
-    <message>
-        <source>Font Dialog</source>
-        <translation type="obsolete">Wybor czcionki</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Rozmiar</translation>
-    </message>
-    <message>
-        <source>Font Style</source>
-        <translation type="obsolete">Styl</translation>
-    </message>
-</context>
-<context>
     <name>TextEdit</name>
     <message>
         <source>New</source>
@@ -113,14 +94,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
         <translation>Pomniejsz</translation>
     </message>
     <message>
-        <source>Bold</source>
-        <translation type="obsolete">Pogrobiona</translation>
-    </message>
-    <message>
-        <source>Italic</source>
-        <translation type="obsolete">Pochyla</translation>
-    </message>
-    <message>
         <source>Wrap lines</source>
         <translation>Zawijal linie</translation>
     </message>
@@ -159,26 +132,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     <message>
         <source>Text Editor</source>
         <translation>Edytor tekstu</translation>
-    </message>
-    <message>
-        <source>Unnamed</source>
-        <translation type="obsolete">Nienazwany</translation>
-    </message>
-    <message>
-        <source>Permissions</source>
-        <translation type="obsolete">Uprawnienia</translation>
-    </message>
-    <message>
-        <source>FontDialog</source>
-        <translation type="obsolete">WyborCzcionki</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Tak</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Nie</translation>
     </message>
     <message>
         <source>About</source>

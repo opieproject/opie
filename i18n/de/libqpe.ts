@@ -208,10 +208,6 @@ editing categories.</source>
         <translation>Suchen nach:</translation>
     </message>
     <message>
-        <source>&amp;Find</source>
-        <translation type="obsolete">&amp;Suchen</translation>
-    </message>
-    <message>
         <source>Category:</source>
         <translation>Kategorie:</translation>
     </message>

@@ -53,10 +53,6 @@
         <translation>Icono Barra Tareas</translation>
     </message>
     <message>
-        <source>Key_Escape</source>
-        <translation type="obsolete">Tecla_Escape</translation>
-    </message>
-    <message>
         <source>Key_Space</source>
         <translation>Tecla_Espacio</translation>
     </message>

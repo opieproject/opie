@@ -2,36 +2,12 @@
 <context>
     <name>CalcDlg</name>
     <message>
-        <source>Calculations</source>
-        <translation type="obsolete">Cálculos</translation>
-    </message>
-    <message>
-        <source>Molweight</source>
-        <translation type="obsolete">Peso molecular</translation>
-    </message>
-    <message>
-        <source>Formula:</source>
-        <translation type="obsolete">Fórmula:</translation>
-    </message>
-    <message>
         <source>Calculate</source>
         <translation>Calcular</translation>
     </message>
     <message>
         <source>Clear</source>
         <translation>Borrar</translation>
-    </message>
-    <message>
-        <source>Result:</source>
-        <translation type="obsolete">Resultado:</translation>
-    </message>
-    <message>
-        <source>Elemental composition (%):</source>
-        <translation type="obsolete">Composición elemental (%):</translation>
-    </message>
-    <message>
-        <source>Nernst</source>
-        <translation type="obsolete">Nernst</translation>
     </message>
     <message>
         <source>Form1</source>
@@ -99,10 +75,6 @@
     <message>
         <source>%1 J</source>
         <translation>%1 J</translation>
-    </message>
-    <message>
-        <source>%1 nm</source>
-        <translation type="obsolete">%1 nm</translation>
     </message>
     <message>
         <source>%1 K</source>

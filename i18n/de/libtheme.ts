@@ -1,14 +1,6 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>QObject</name>
-    <message>
-        <source>Themed style</source>
-        <comment>name</comment>
-        <translation type="obsolete">Schema</translation>
-    </message>
-</context>
-<context>
     <name>Styles</name>
     <message>
         <source>Themed style</source>

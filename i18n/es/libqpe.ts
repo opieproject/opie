@@ -145,14 +145,6 @@ editando las categorías.</translation>
 <context>
     <name>FileSelector</name>
     <message>
-        <source>View</source>
-        <translation type="obsolete">Ver</translation>
-    </message>
-    <message>
-        <source>Create a new Document</source>
-        <translation type="obsolete">Crear nuevo documento</translation>
-    </message>
-    <message>
         <source>Close the File Selector</source>
         <translation>Cerrar selección fichero</translation>
     </message>
@@ -187,10 +179,6 @@ editando las categorías.</translation>
         <source>Name</source>
         <translation>Nombre</translation>
     </message>
-    <message>
-        <source>There are no files in this directory.</source>
-        <translation type="obsolete">No hay ficheros en este directorio.</translation>
-    </message>
 </context>
 <context>
     <name>FindDialog</name>
@@ -219,10 +207,6 @@ editando las categorías.</translation>
     <message>
         <source>Find what:</source>
         <translation>Qué buscar:</translation>
-    </message>
-    <message>
-        <source>&amp;Find</source>
-        <translation type="obsolete">&amp;Buscar</translation>
     </message>
     <message>
         <source>Category:</source>
@@ -260,14 +244,6 @@ editando las categorías.</translation>
         <translation>Falló al borrar fichero.</translation>
     </message>
     <message>
-        <source>Delete Icon and leave file</source>
-        <translation type="obsolete">Borrar icono y dejar fichero</translation>
-    </message>
-    <message>
-        <source>Icon deletion failed.</source>
-        <translation type="obsolete">Fallo al borrar icono.</translation>
-    </message>
-    <message>
         <source>Copy of </source>
         <translation>Copiar de </translation>
     </message>
@@ -286,10 +262,6 @@ editando las categorías.</translation>
     <message>
         <source>Moving Document failed.</source>
         <translation>Fallo al mover documento.</translation>
-    </message>
-    <message>
-        <source>File does not exist.</source>
-        <translation type="obsolete">El fichero no existe.</translation>
     </message>
     <message>
         <source>Hard Disk</source>
@@ -329,10 +301,6 @@ editando las categorías.</translation>
     <message>
         <source>Delete</source>
         <translation>Borrar</translation>
-    </message>
-    <message>
-        <source>Del Icon</source>
-        <translation type="obsolete">Borrar icono</translation>
     </message>
     <message>
         <source>Copy</source>

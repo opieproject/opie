@@ -14,67 +14,9 @@
         <source>Contact</source>
         <translation>Contato</translation>
     </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Não Preenchido</translation>
-    </message>
-</context>
-<context>
-    <name>AddressSettings</name>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Notas</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">Sexo</translation>
-    </message>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Título</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">Primeiro Nome</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">Sobrenome</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">E-mail Padrão</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">Arquivar Como</translation>
-    </message>
-</context>
-<context>
-    <name>AddressSettingsBase</name>
-    <message>
-        <source>Up</source>
-        <translation type="obsolete">P/ Cima</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation type="obsolete">P/ Baixo</translation>
-    </message>
-    <message>
-        <source>Arrange Edit Fields</source>
-        <translation type="obsolete">Organizar Campos de Edição</translation>
-    </message>
-    <message>
-        <source>Select the field order:</source>
-        <translation type="obsolete">Selecione a ordem dos campos:</translation>
-    </message>
 </context>
 <context>
     <name>AddressbookWindow</name>
-    <message>
-        <source>Mb</source>
-        <translation type="obsolete">Mb</translation>
-    </message>
     <message>
         <source>All</source>
         <translation>Tudo</translation>
@@ -96,31 +38,12 @@
         <translation>Ver</translation>
     </message>
     <message>
-        <source>Work</source>
-        <translation type="obsolete">Trabalho</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Notas</translation>
-    </message>
-    <message>
         <source>Edit My Personal Details</source>
         <translation>Editar Meus Detalhes Pessoais</translation>
     </message>
     <message>
         <source>Edit Address</source>
         <translation>Editar Endereço</translation>
-    </message>
-    <message>
-        <source>There is not enough space to create
-neccessary startup files.
-
-Free up some space before
-entering data!</source>
-        <translation type="obsolete">Não há espaço suficiente para criar
-os arquivos iniciais necessários.
-Libere algum espaço antes de
-inserir dados!</translation>
     </message>
     <message>
         <source>Unable to save information.
@@ -143,56 +66,24 @@ Sair assim mesmo?</translation>
         <translation>Apagar</translation>
     </message>
     <message>
-        <source>Gender</source>
-        <translation type="obsolete">Sexo</translation>
-    </message>
-    <message>
         <source>Contacts</source>
         <translation>Contatos</translation>
-    </message>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Título</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
         <translation>Impossível editar dados durante sincronização</translation>
     </message>
     <message>
-        <source>First Name</source>
-        <translation type="obsolete">Nome</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">Sobrenome</translation>
-    </message>
-    <message>
         <source>Contact</source>
         <translation>Contato</translation>
-    </message>
-    <message>
-        <source>Arrange Edit Fields</source>
-        <translation type="obsolete">Organizar Campos de Edição</translation>
     </message>
     <message>
         <source>Unfiled</source>
         <translation>Não Preenchido</translation>
     </message>
     <message>
-        <source>Default Email</source>
-        <translation type="obsolete">E-mail Padrão</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">Arquivar Como</translation>
-    </message>
-    <message>
         <source>Out of space</source>
         <translation>Out of Space</translation>
-    </message>
-    <message>
-        <source>Out of Space</source>
-        <translation type="obsolete">Sem Espaço</translation>
     </message>
     <message>
         <source>Write Mail To</source>
@@ -376,14 +267,6 @@ is provided free !</source>
 <context>
     <name>ContactEditor</name>
     <message>
-        <source>Default Email</source>
-        <translation type="obsolete">E-mail Padrão</translation>
-    </message>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Título</translation>
-    </message>
-    <message>
         <source>First Name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -410,10 +293,6 @@ is provided free !</source>
     <message>
         <source>Job Title</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Notas</translation>
     </message>
     <message>
         <source>City</source>

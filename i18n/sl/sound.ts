@@ -53,10 +53,6 @@
         <translation>Ikona opravilne vrstice</translation>
     </message>
     <message>
-        <source>Key_Escape</source>
-        <translation type="obsolete">Tipka_escape</translation>
-    </message>
-    <message>
         <source>Key_Space</source>
         <translation>Tipka_presledek</translation>
     </message>

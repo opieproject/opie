@@ -21,10 +21,6 @@
 <context>
     <name>HandwritingTrainer</name>
     <message>
-        <source>Select a character from the list.  The writing area on the left shows the reference character.  Practice writing in the area on the right.</source>
-        <translation type="obsolete">Seleccione un caracter de la lista. El área de escritura de la izquierda muestra el caracter refencia. Practique la escitura en el área de la derecha.</translation>
-    </message>
-    <message>
         <source>Matched: </source>
         <translation>Coincidencia:</translation>
     </message>

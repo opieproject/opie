@@ -52,21 +52,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     </message>
 </context>
 <context>
-    <name>FontDialog</name>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Taille</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete">Fonte</translation>
-    </message>
-    <message>
-        <source>Font Style</source>
-        <translation type="obsolete">Style Fonte</translation>
-    </message>
-</context>
-<context>
     <name>TextEdit</name>
     <message>
         <source>New</source>
@@ -107,14 +92,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     <message>
         <source>Zoom out</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bold</source>
-        <translation type="obsolete">Gras</translation>
-    </message>
-    <message>
-        <source>Italic</source>
-        <translation type="obsolete">Italique</translation>
     </message>
     <message>
         <source>Wrap lines</source>

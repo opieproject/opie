@@ -140,10 +140,6 @@ Zapiram predvajalnik.</translation>
         <translation>Shrani seznam</translation>
     </message>
     <message>
-        <source>Export playlist to m3u</source>
-        <translation type="obsolete">Izvozi seznam v m3u</translation>
-    </message>
-    <message>
         <source>Open File or URL</source>
         <translation>Odpri datoteko ali URL</translation>
     </message>
@@ -226,10 +222,6 @@ naslednjič, ko poženete program.</translation>
     <message>
         <source>There was a problem in getting the file.</source>
         <translation>Prišlo je do problema pri pobiranju datoteke.</translation>
-    </message>
-    <message>
-        <source>Save Playlist</source>
-        <translation type="obsolete">Shrani seznam</translation>
     </message>
     <message>
         <source>Remove Playlist?</source>

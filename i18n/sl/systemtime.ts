@@ -205,10 +205,6 @@
 <context>
     <name>SetDateTime</name>
     <message>
-        <source>Set System Time</source>
-        <translation type="obsolete">Nastavi sistemski čas</translation>
-    </message>
-    <message>
         <source>Time Zone</source>
         <translation>Časovni pas</translation>
     </message>

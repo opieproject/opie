@@ -206,10 +206,6 @@ servidor</translation>
 <context>
     <name>SetDateTime</name>
     <message>
-        <source>Set System Time</source>
-        <translation type="obsolete">Fijar Hora del Sistema</translation>
-    </message>
-    <message>
         <source>Time Zone</source>
         <translation>Zona horaria</translation>
     </message>

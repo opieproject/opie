@@ -14,60 +14,6 @@
         <source>Pick</source>
         <translation>Sélectionner</translation>
     </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Vide</translation>
-    </message>
-</context>
-<context>
-    <name>AddressSettings</name>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Titre</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">Prénom</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">Nom</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">Lister sous</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">Email par défaut</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Notes</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">Genre</translation>
-    </message>
-</context>
-<context>
-    <name>AddressSettingsBase</name>
-    <message>
-        <source>Arrange Edit Fields</source>
-        <translation type="obsolete">Configurer les champs</translation>
-    </message>
-    <message>
-        <source>Select the field order:</source>
-        <translation type="obsolete">Sélectionner l&apos;ordre des champs :</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation type="obsolete">Monter</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation type="obsolete">Descendre</translation>
-    </message>
 </context>
 <context>
     <name>AddressbookWindow</name>
@@ -108,26 +54,6 @@
         <translation>Mes informations personnelles</translation>
     </message>
     <message>
-        <source>Arrange Edit Fields</source>
-        <translation type="obsolete">Configurer les champs</translation>
-    </message>
-    <message>
-        <source>Out of Space</source>
-        <translation type="obsolete">Plus de mémoire disponible</translation>
-    </message>
-    <message>
-        <source>There is not enough space to create
-neccessary startup files.
-
-Free up some space before
-entering data!</source>
-        <translation type="obsolete">Pas assez d&apos;espace disponible 
-pour créer les fichiers de démarrage
-
-Libérer de la mémoire avant de pouvoir
-saisir des données !</translation>
-    </message>
-    <message>
         <source>View</source>
         <translation>Vue</translation>
     </message>
@@ -164,64 +90,12 @@ et réessayer
 Quitter ?</translation>
     </message>
     <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Titre</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Notes</translation>
-    </message>
-    <message>
-        <source>Work</source>
-        <translation type="obsolete">Bureau</translation>
-    </message>
-    <message>
-        <source>Mb</source>
-        <translation type="obsolete">Mo</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">Prénom</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">Nom</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">Lister sous</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">Email par défaut</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">Genre</translation>
-    </message>
-    <message>
         <source>All</source>
         <translation>Tout</translation>
     </message>
     <message>
         <source>Unfiled</source>
         <translation>Vide</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete">Police</translation>
-    </message>
-    <message>
-        <source>Small</source>
-        <translation type="obsolete">Petit</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="obsolete">Normal</translation>
-    </message>
-    <message>
-        <source>Large</source>
-        <translation type="obsolete">Grand</translation>
     </message>
     <message>
         <source>Import vCard</source>
@@ -393,18 +267,6 @@ is provided free !</source>
 <context>
     <name>ContactEditor</name>
     <message>
-        <source>Default Email</source>
-        <translation type="obsolete">Email par défaut</translation>
-    </message>
-    <message>
-        <source>Emails</source>
-        <translation type="obsolete">Emails</translation>
-    </message>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Titre</translation>
-    </message>
-    <message>
         <source>First Name</source>
         <translation>Prénom</translation>
     </message>
@@ -431,18 +293,6 @@ is provided free !</source>
     <message>
         <source>Job Title</source>
         <translation>Fonction</translation>
-    </message>
-    <message>
-        <source>Company</source>
-        <translation type="obsolete">Société</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Notes</translation>
-    </message>
-    <message>
-        <source>Groups</source>
-        <translation type="obsolete">Groupes</translation>
     </message>
     <message>
         <source>City</source>
@@ -1349,144 +1199,12 @@ is provided free !</source>
         <translation>Zimbabwe</translation>
     </message>
     <message>
-        <source>Business Fax</source>
-        <translation type="obsolete">Fax (Bureau)</translation>
-    </message>
-    <message>
-        <source>Home Fax</source>
-        <translation type="obsolete">Fax (Domicile)</translation>
-    </message>
-    <message>
-        <source>Business Phone</source>
-        <translation type="obsolete">Téléphone (Bureau)</translation>
-    </message>
-    <message>
-        <source>Home Phone</source>
-        <translation type="obsolete">Téléphone (Domicile)</translation>
-    </message>
-    <message>
-        <source>Business Mobile</source>
-        <translation type="obsolete">Portable (Bureau)</translation>
-    </message>
-    <message>
-        <source>Home Mobile</source>
-        <translation type="obsolete">Portable (Domicile)</translation>
-    </message>
-    <message>
-        <source>Business WebPage</source>
-        <translation type="obsolete">Page web (Bureau)</translation>
-    </message>
-    <message>
-        <source>Home Web Page</source>
-        <translation type="obsolete">Page web (Domicile)</translation>
-    </message>
-    <message>
-        <source>Business Pager</source>
-        <translation type="obsolete">Pager (Bureau)</translation>
-    </message>
-    <message>
-        <source>Business Street</source>
-        <translation type="obsolete">Rue (Bureau)</translation>
-    </message>
-    <message>
-        <source>Home Street</source>
-        <translation type="obsolete">Rue (Domicile)</translation>
-    </message>
-    <message>
-        <source>Business City</source>
-        <translation type="obsolete">Ville (Bureau)</translation>
-    </message>
-    <message>
-        <source>Business State</source>
-        <translation type="obsolete">Département (Bureau)</translation>
-    </message>
-    <message>
-        <source>Business Zip</source>
-        <translation type="obsolete">Code postal (Bureau)</translation>
-    </message>
-    <message>
-        <source>Business Country</source>
-        <translation type="obsolete">Pays (Bureau)</translation>
-    </message>
-    <message>
-        <source>Home City</source>
-        <translation type="obsolete">Ville (Domicile)</translation>
-    </message>
-    <message>
-        <source>Home State</source>
-        <translation type="obsolete">Département (Domicile)</translation>
-    </message>
-    <message>
-        <source>Home Zip</source>
-        <translation type="obsolete">Code postal (Domicile)</translation>
-    </message>
-    <message>
-        <source>Home Country</source>
-        <translation type="obsolete">Pays (Domicile)</translation>
-    </message>
-    <message>
-        <source>Department</source>
-        <translation type="obsolete">Département</translation>
-    </message>
-    <message>
-        <source>Office</source>
-        <translation type="obsolete">Bureau</translation>
-    </message>
-    <message>
-        <source>Profession</source>
-        <translation type="obsolete">Profession</translation>
-    </message>
-    <message>
-        <source>Assistant</source>
-        <translation type="obsolete">Assistant</translation>
-    </message>
-    <message>
-        <source>Manager</source>
-        <translation type="obsolete">Responsable</translation>
-    </message>
-    <message>
-        <source>Spouse</source>
-        <translation type="obsolete">Epouse</translation>
-    </message>
-    <message>
         <source>Birthday</source>
         <translation>Date de naissance</translation>
     </message>
     <message>
         <source>Anniversary</source>
         <translation>Anniversaire</translation>
-    </message>
-    <message>
-        <source>Nickname</source>
-        <translation type="obsolete">Surnom</translation>
-    </message>
-    <message>
-        <source>Children</source>
-        <translation type="obsolete">Enfants</translation>
-    </message>
-    <message>
-        <source>Work Phone</source>
-        <translation type="obsolete">Téléphone (Bureau)</translation>
-    </message>
-    <message>
-        <source>Work Fax</source>
-        <translation type="obsolete">Fax (Bureau)</translation>
-    </message>
-    <message>
-        <source>work Mobile</source>
-        <translation type="obsolete">Portable (Bureau)</translation>
-    </message>
-    <message>
-        <source>Work Pager</source>
-        <translation type="obsolete">Pager (Bureau)</translation>
-    </message>
-    <message>
-        <source>Work Web Page</source>
-        <translation type="obsolete">Page web (Bureau)</translation>
-    </message>
-    <message>
-        <source>Work Mobile</source>
-        <translation type="obsolete">Portable (Bureau)</translation>
     </message>
     <message>
         <source>Kuwait</source>

@@ -242,10 +242,6 @@
         <translation>Formato de hora</translation>
     </message>
     <message>
-        <source>Set System Time</source>
-        <translation type="obsolete">Ajustar horário do Sistema</translation>
-    </message>
-    <message>
         <source>Applet format</source>
         <translation type="unfinished"></translation>
     </message>

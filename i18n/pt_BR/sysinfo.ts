@@ -158,14 +158,6 @@ Click and hold on a process to see additional information about the process, or 
 <context>
     <name>StorageInfo</name>
     <message>
-        <source>SCSI Hard Disk</source>
-        <translation type="obsolete">Disco Rígido SCSI</translation>
-    </message>
-    <message>
-        <source>Hard Disk</source>
-        <translation type="obsolete">Disco Rígido</translation>
-    </message>
-    <message>
         <source>CF Card: </source>
         <translation type="unfinished"></translation>
     </message>

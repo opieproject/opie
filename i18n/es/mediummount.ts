@@ -9,10 +9,6 @@
 <context>
     <name>MediumGlobalWidget</name>
     <message>
-        <source>If a medium gets inserted into this device Opie tries to search the medium for Dcouments. On large mediums this can take some time. You can choose if Opie should scan for Documents globally or on a per medium level. You&apos;re also able to reconfigure each medium.</source>
-        <translation type="obsolete">Si un medio es insertado en el dispositivo Opie intenta buscar el medio para Documentos. En medios grandes esto puede llevar tiempo. Puede escoger si Opie debe examinar para Documentos globalmente, o por medio. También puede reconfigurar cada medio.</translation>
-    </message>
-    <message>
         <source>Enable medium checking</source>
         <translation>Habilitar comprobación medio</translation>
     </message>

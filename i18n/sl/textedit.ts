@@ -52,33 +52,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     </message>
 </context>
 <context>
-    <name>FontDialog</name>
-    <message>
-        <source>Font Dialog</source>
-        <translation type="obsolete">Dialog pisave</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Velikost</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete">Pisava</translation>
-    </message>
-    <message>
-        <source>Font Style</source>
-        <translation type="obsolete">Stil pisave</translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">Hitra rjava lisica skače čez počasnega psa</translation>
-    </message>
-    <message>
-        <source>FontDialog</source>
-        <translation type="obsolete">DialogPisave</translation>
-    </message>
-</context>
-<context>
     <name>TextEdit</name>
     <message>
         <source>New</source>
@@ -121,14 +94,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
         <translation>Pomanjšaj</translation>
     </message>
     <message>
-        <source>Bold</source>
-        <translation type="obsolete">Odebeljeno</translation>
-    </message>
-    <message>
-        <source>Italic</source>
-        <translation type="obsolete">Poševno</translation>
-    </message>
-    <message>
         <source>Wrap lines</source>
         <translation>Objami vrstice</translation>
     </message>
@@ -165,28 +130,8 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
         <translation>Urejevalnik besedila</translation>
     </message>
     <message>
-        <source>Unnamed</source>
-        <translation type="obsolete">Neimenovano</translation>
-    </message>
-    <message>
         <source>Font</source>
         <translation>Pisava</translation>
-    </message>
-    <message>
-        <source>Permissions</source>
-        <translation type="obsolete">Pravice</translation>
-    </message>
-    <message>
-        <source>FontDialog</source>
-        <translation type="obsolete">DialogPisave</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Da</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Ne</translation>
     </message>
     <message>
         <source>About</source>

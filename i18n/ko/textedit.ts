@@ -52,34 +52,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     </message>
 </context>
 <context>
-    <name>FontDialog</name>
-    <message>
-        <source>Font Dialog</source>
-        <translation type="obsolete">글꼴</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">크기</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete">글꼴</translation>
-    </message>
-    <message>
-        <source>Font Style</source>
-        <translation type="obsolete">글꼴</translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">The Quick Brown Fox Jumps Over The Lazy Dog
-가나다라마바사</translation>
-    </message>
-    <message>
-        <source>FontDialog</source>
-        <translation type="obsolete">글꼴</translation>
-    </message>
-</context>
-<context>
     <name>TextEdit</name>
     <message>
         <source>New</source>
@@ -122,14 +94,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
         <translation>축소</translation>
     </message>
     <message>
-        <source>Bold</source>
-        <translation type="obsolete">볼드</translation>
-    </message>
-    <message>
-        <source>Italic</source>
-        <translation type="obsolete">이탈릭</translation>
-    </message>
-    <message>
         <source>Wrap lines</source>
         <translation>줄을 감기</translation>
     </message>
@@ -166,28 +130,8 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
         <translation>텍스트 편집기</translation>
     </message>
     <message>
-        <source>Unnamed</source>
-        <translation type="obsolete">무명</translation>
-    </message>
-    <message>
         <source>Font</source>
         <translation>글꼴</translation>
-    </message>
-    <message>
-        <source>Permissions</source>
-        <translation type="obsolete">권한</translation>
-    </message>
-    <message>
-        <source>FontDialog</source>
-        <translation type="obsolete">글꼴</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">예</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">아니오</translation>
     </message>
     <message>
         <source>About</source>

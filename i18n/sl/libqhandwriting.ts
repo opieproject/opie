@@ -21,10 +21,6 @@
 <context>
     <name>HandwritingTrainer</name>
     <message>
-        <source>Select a character from the list.  The writing area on the left shows the reference character.  Practice writing in the area on the right.</source>
-        <translation type="obsolete">Izberite znak iz seznama. Na levi imate primer znaka. Na desni strani pa lahko vadite.</translation>
-    </message>
-    <message>
         <source>Matched: </source>
         <translation>Najdeno: </translation>
     </message>

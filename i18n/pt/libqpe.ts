@@ -145,10 +145,6 @@ as categorias.</translation>
 <context>
     <name>FileSelector</name>
     <message>
-        <source>View</source>
-        <translation type="obsolete">Ver</translation>
-    </message>
-    <message>
         <source>Close the File Selector</source>
         <translation type="unfinished"></translation>
     </message>
@@ -211,10 +207,6 @@ as categorias.</translation>
     <message>
         <source>Find what:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Find</source>
-        <translation type="obsolete">&amp;Procurar</translation>
     </message>
     <message>
         <source>Category:</source>

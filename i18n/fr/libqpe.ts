@@ -146,14 +146,6 @@ est en train d&apos;éditer les catégories.</translation>
 <context>
     <name>FileSelector</name>
     <message>
-        <source>View</source>
-        <translation type="obsolete">Vue</translation>
-    </message>
-    <message>
-        <source>Create a new Document</source>
-        <translation type="obsolete">Créer un nouveau document</translation>
-    </message>
-    <message>
         <source>Close the File Selector</source>
         <translation>Ferme le sélecteur de fichiers</translation>
     </message>
@@ -188,10 +180,6 @@ est en train d&apos;éditer les catégories.</translation>
         <source>Name</source>
         <translation>Nom</translation>
     </message>
-    <message>
-        <source>There are no files in this directory.</source>
-        <translation type="obsolete">Ce répertroire est vide.</translation>
-    </message>
 </context>
 <context>
     <name>FindDialog</name>
@@ -220,10 +208,6 @@ est en train d&apos;éditer les catégories.</translation>
     <message>
         <source>Find what:</source>
         <translation>Trouver : </translation>
-    </message>
-    <message>
-        <source>&amp;Find</source>
-        <translation type="obsolete">&amp;Trouver</translation>
     </message>
     <message>
         <source>Category:</source>
@@ -261,14 +245,6 @@ est en train d&apos;éditer les catégories.</translation>
         <translation>Echec de l&apos;effacement du fichier.</translation>
     </message>
     <message>
-        <source>Delete Icon and leave file</source>
-        <translation type="obsolete">Effacer l&apos;icone et conserver fichier</translation>
-    </message>
-    <message>
-        <source>Icon deletion failed.</source>
-        <translation type="obsolete">Echec de l&apos;effacement de l&apos;icone.</translation>
-    </message>
-    <message>
         <source>Copy of </source>
         <translation>Copie de</translation>
     </message>
@@ -287,10 +263,6 @@ est en train d&apos;éditer les catégories.</translation>
     <message>
         <source>Moving Document failed.</source>
         <translation>Echec du déplacement du fichier.</translation>
-    </message>
-    <message>
-        <source>File does not exist.</source>
-        <translation type="obsolete">Le fichier n&apos;existe pas.</translation>
     </message>
     <message>
         <source>Hard Disk</source>

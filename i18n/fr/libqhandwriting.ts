@@ -22,10 +22,6 @@
 <context>
     <name>HandwritingTrainer</name>
     <message>
-        <source>Select a character from the list.  The writing area on the left shows the reference character.  Practice writing in the area on the right.</source>
-        <translation type="obsolete">Sélectionner un caractère dans la liste. La one d&apos;écriture à gauche présente les caractères de référence. Entrainez-vous à écrire sur la zone à droite.</translation>
-    </message>
-    <message>
         <source>Matched: </source>
         <translation>Ressemblance :</translation>
     </message>

@@ -67,11 +67,6 @@
         <translation>2</translation>
     </message>
     <message>
-        <source>Do you really want to delete
-</source>
-        <translation type="obsolete">Voulez-vous vraiment effacer</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
@@ -98,14 +93,6 @@
     <message>
         <source>AdvancedFm Output</source>
         <translation>Sortie d&apos;AdvancedFm</translation>
-    </message>
-    <message>
-        <source>command failed!</source>
-        <translation type="obsolete">la commande n&apos;a pas fonctionnée !</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>

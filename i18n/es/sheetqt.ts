@@ -668,30 +668,6 @@
         <translation>¡No encontré la ayuda!</translation>
     </message>
     <message>
-        <source>Opie Sheet
-Spreadsheet Software for Opie
-QWDC Beta Winner (as Sheet/Qt)
-
-Developed by: Serdar Ozler
-Release 1.0.1
-Release Date: July 04, 2002
-
-This product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.
-
-http://qtopia.sitebest.com</source>
-        <translation type="obsolete">Opie Sheet
-Hoja de Cálculo de Opie
-QWDC Beta Winner (as Sheet/Qt)
-
-Desarrollado por: Serdar Ozler
-Versión 1.0.1
-Fecha: 04 julio 2002
-
-Este producto está bajo licencia GPL. Es de libre distribución. Si quiere la última versión y el código fuente, por favor visite el sitio web.
-
-http://qtopia.sitebest.com</translation>
-    </message>
-    <message>
         <source>&amp;Number of rows:</source>
         <translation>&amp;Número de filas:</translation>
     </message>

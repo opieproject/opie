@@ -66,12 +66,6 @@
         <translation>2</translation>
     </message>
     <message>
-        <source>Do you really want to delete
-</source>
-        <translation type="obsolete">Seguro que quiere borrar
-</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Sí</translation>
     </message>
@@ -98,14 +92,6 @@
     <message>
         <source>AdvancedFm Output</source>
         <translation>Salida Gestor de Ficheros Avanzado</translation>
-    </message>
-    <message>
-        <source>command failed!</source>
-        <translation type="obsolete">¡el comando falló!</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;Ok</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>

@@ -118,28 +118,10 @@ Quit Anyway?</source>
     </message>
 </context>
 <context>
-    <name>NewTaskDialog</name>
-    <message>
-        <source>Todo List</source>
-        <translation type="obsolete">할일 목록</translation>
-    </message>
-</context>
-<context>
-    <name>NewTaskDialogBase</name>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">새 할일</translation>
-    </message>
-</context>
-<context>
     <name>OTaskEditor</name>
     <message>
         <source>Overview</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="obsolete">설명</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -470,142 +452,6 @@ Quit Anyway?</source>
     <message>
         <source>Configure Templates</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TodoTable</name>
-    <message>
-        <source>C.</source>
-        <translation type="obsolete">成</translation>
-    </message>
-    <message>
-        <source>Prior.</source>
-        <translation type="obsolete">우선순위</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="obsolete">설명</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">정렬 안됨</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete">모두</translation>
-    </message>
-    <message>
-        <source>Deadline</source>
-        <translation type="obsolete">마감</translation>
-    </message>
-</context>
-<context>
-    <name>TodoWindow</name>
-    <message>
-        <source>Todo</source>
-        <translation type="obsolete">할일</translation>
-    </message>
-    <message>
-        <source>Out of Space</source>
-        <translation type="obsolete">자리 부족</translation>
-    </message>
-    <message>
-        <source>Unable to create startup files
-Free up some space
-before you enter any data</source>
-        <translation type="obsolete">시작 파일들을 만들수 없습니다.
-정보를 입력하기 전에 
-자리를 비워두시기 바랍니다.</translation>
-    </message>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">새 할일</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation type="obsolete">무선 전송</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">찾기</translation>
-    </message>
-    <message>
-        <source>Completed tasks</source>
-        <translation type="obsolete">성취한 일들을 표시</translation>
-    </message>
-    <message>
-        <source>Can not edit data, currently syncing</source>
-        <translation type="obsolete">현제 싱크 중이므로 데이타 편집 불가</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="obsolete">할일 편집</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation type="obsolete">모든 분류</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">정리 안된것들</translation>
-    </message>
-    <message>
-        <source>Out of space</source>
-        <translation type="obsolete">자리 부족</translation>
-    </message>
-    <message>
-        <source>Todo was unable
-to save your changes.
-Free up some space
-and try again.
-
-Quit Anyway?</source>
-        <translation type="obsolete">수정된 데이타를 저장할수 
-없었습니다.
-자리를 비우시고 
-다시 해보시기 바랍니다.
-
-그래도 끝낼까요?</translation>
-    </message>
-    <message>
-        <source>Show Deadline</source>
-        <translation type="obsolete">마감일을 표시</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation type="obsolete">데이타</translation>
-    </message>
-    <message>
-        <source>Fonts</source>
-        <translation type="obsolete">글꼴</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation type="obsolete">할일 보기</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="obsolete">지우기...</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation type="obsolete">모두 지우기...</translation>
-    </message>
-    <message>
-        <source>Duplicate</source>
-        <translation type="obsolete">복사 하기</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">분류</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">옵션들</translation>
-    </message>
-    <message>
-        <source>all tasks</source>
-        <translation type="obsolete">모든 할일</translation>
     </message>
 </context>
 </TS>

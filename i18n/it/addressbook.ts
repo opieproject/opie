@@ -13,60 +13,6 @@
         <source>Pick</source>
         <translation>Scelta</translation>
     </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Vuota</translation>
-    </message>
-</context>
-<context>
-    <name>AddressSettings</name>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Titolo</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">Nome</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">Cognome</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">Visualizza come</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">Email Principale</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Note</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">Sesso</translation>
-    </message>
-</context>
-<context>
-    <name>AddressSettingsBase</name>
-    <message>
-        <source>Arrange Edit Fields</source>
-        <translation type="obsolete">Ordina i Contatti</translation>
-    </message>
-    <message>
-        <source>Select the field order:</source>
-        <translation type="obsolete">Ordina i contatti per:</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation type="obsolete">Sù</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation type="obsolete">Giù</translation>
-    </message>
 </context>
 <context>
     <name>AddressbookWindow</name>
@@ -111,44 +57,8 @@
         <translation>Informazioni Personali</translation>
     </message>
     <message>
-        <source>Arrange Edit Fields</source>
-        <translation type="obsolete">Ordina Contatti</translation>
-    </message>
-    <message>
-        <source>Out of Space</source>
-        <translation type="obsolete">Spazio Esaurito</translation>
-    </message>
-    <message>
-        <source>There is not enough space to create
-neccessary startup files.
-
-Free up some space before
-entering data!</source>
-        <translation type="obsolete">Non c&apos;è abbastanza spazio per creare
-i necessari file di avvio.
-
-Liberare dello spazio prima di
-inserire i dati!</translation>
-    </message>
-    <message>
         <source>View</source>
         <translation>Vista</translation>
-    </message>
-    <message>
-        <source>Small</source>
-        <translation type="obsolete">Piccolo</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="obsolete">Normale</translation>
-    </message>
-    <message>
-        <source>Large</source>
-        <translation type="obsolete">Grande</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete">Font</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -183,42 +93,6 @@ e riprovare.
 Uscire comunque?</translation>
     </message>
     <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Titolo</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Note</translation>
-    </message>
-    <message>
-        <source>Work</source>
-        <translation type="obsolete">Lavoro</translation>
-    </message>
-    <message>
-        <source>Mb</source>
-        <translation type="obsolete">Mb</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">Nome</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">Cognome</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">Visualizza come</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">Email Principale</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">Sesso</translation>
-    </message>
-    <message>
         <source>All</source>
         <translation>Tutte</translation>
     </message>
@@ -233,18 +107,6 @@ Uscire comunque?</translation>
     <message>
         <source>List</source>
         <translation>Lista</translation>
-    </message>
-    <message>
-        <source>Phone Book</source>
-        <translation type="obsolete">Elenco Numeri Telefonici</translation>
-    </message>
-    <message>
-        <source>Company Book</source>
-        <translation type="obsolete">Elenco Compagnia</translation>
-    </message>
-    <message>
-        <source>Email Book</source>
-        <translation type="obsolete">Elenco Email</translation>
     </message>
     <message>
         <source>Cards</source>
@@ -404,54 +266,6 @@ is provided free !</source>
 <context>
     <name>ContactEditor</name>
     <message>
-        <source>Business Fax</source>
-        <translation type="obsolete">Fax Ufficio</translation>
-    </message>
-    <message>
-        <source>Home Fax</source>
-        <translation type="obsolete">Fax Abitazione</translation>
-    </message>
-    <message>
-        <source>Business Phone</source>
-        <translation type="obsolete">Telefono Ufficio</translation>
-    </message>
-    <message>
-        <source>Home Phone</source>
-        <translation type="obsolete">Tleefono Abitazione</translation>
-    </message>
-    <message>
-        <source>Business Mobile</source>
-        <translation type="obsolete">Cellulare Ufficio</translation>
-    </message>
-    <message>
-        <source>Home Mobile</source>
-        <translation type="obsolete">Cellulare Abitazione</translation>
-    </message>
-    <message>
-        <source>Business WebPage</source>
-        <translation type="obsolete">Pagina Web Ufficio</translation>
-    </message>
-    <message>
-        <source>Home Web Page</source>
-        <translation type="obsolete">Pagina Web Abitazione</translation>
-    </message>
-    <message>
-        <source>Business Pager</source>
-        <translation type="obsolete">Cercapersone Ufficio</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">Email Principale</translation>
-    </message>
-    <message>
-        <source>Emails</source>
-        <translation type="obsolete">Altre Email</translation>
-    </message>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Titolo</translation>
-    </message>
-    <message>
         <source>First Name</source>
         <translation>Nome</translation>
     </message>
@@ -480,56 +294,8 @@ is provided free !</source>
         <translation>Titolo</translation>
     </message>
     <message>
-        <source>Company</source>
-        <translation type="obsolete">Società</translation>
-    </message>
-    <message>
         <source>Organization</source>
         <translation>Organizzazione</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Note</translation>
-    </message>
-    <message>
-        <source>Groups</source>
-        <translation type="obsolete">Gruppi</translation>
-    </message>
-    <message>
-        <source>Business Street</source>
-        <translation type="obsolete">Indirizzo Lavoro</translation>
-    </message>
-    <message>
-        <source>Home Street</source>
-        <translation type="obsolete">Indirizzo Abitazione</translation>
-    </message>
-    <message>
-        <source>Business City</source>
-        <translation type="obsolete">Città Lavoro</translation>
-    </message>
-    <message>
-        <source>Business State</source>
-        <translation type="obsolete">Stato Lavoro</translation>
-    </message>
-    <message>
-        <source>Business Zip</source>
-        <translation type="obsolete">Paese Ufficio</translation>
-    </message>
-    <message>
-        <source>Home City</source>
-        <translation type="obsolete">Città Abitazione</translation>
-    </message>
-    <message>
-        <source>Home State</source>
-        <translation type="obsolete">Stato Abitazione</translation>
-    </message>
-    <message>
-        <source>Home Zip</source>
-        <translation type="obsolete">CAP Abitazione</translation>
-    </message>
-    <message>
-        <source>Home Country</source>
-        <translation type="obsolete">Paese Abitazione</translation>
     </message>
     <message>
         <source>Full Name...</source>
@@ -1428,30 +1194,6 @@ is provided free !</source>
         <translation>Modifica Nome</translation>
     </message>
     <message>
-        <source>Department</source>
-        <translation type="obsolete">Dipartimento</translation>
-    </message>
-    <message>
-        <source>Office</source>
-        <translation type="obsolete">Ufficio</translation>
-    </message>
-    <message>
-        <source>Profession</source>
-        <translation type="obsolete">Professione</translation>
-    </message>
-    <message>
-        <source>Assistant</source>
-        <translation type="obsolete">Assistente</translation>
-    </message>
-    <message>
-        <source>Manager</source>
-        <translation type="obsolete">Direttore</translation>
-    </message>
-    <message>
-        <source>Spouse</source>
-        <translation type="obsolete">Coniuge</translation>
-    </message>
-    <message>
         <source>Birthday</source>
         <translation>Compleanno</translation>
     </message>
@@ -1460,44 +1202,8 @@ is provided free !</source>
         <translation>Anniversario</translation>
     </message>
     <message>
-        <source>Nickname</source>
-        <translation type="obsolete">Alias</translation>
-    </message>
-    <message>
-        <source>Children</source>
-        <translation type="obsolete">Figli</translation>
-    </message>
-    <message>
-        <source>Work Phone</source>
-        <translation type="obsolete">Telefono Ufficio</translation>
-    </message>
-    <message>
-        <source>Work Fax</source>
-        <translation type="obsolete">Fax Ufficio</translation>
-    </message>
-    <message>
-        <source>work Mobile</source>
-        <translation type="obsolete">Cellulare Ufficio</translation>
-    </message>
-    <message>
-        <source>Work Pager</source>
-        <translation type="obsolete">Cercapersone Ufficio</translation>
-    </message>
-    <message>
-        <source>Work Web Page</source>
-        <translation type="obsolete">Pagina Web Ufficio</translation>
-    </message>
-    <message>
         <source>Contacts</source>
         <translation>Contatti</translation>
-    </message>
-    <message>
-        <source>Work Mobile</source>
-        <translation type="obsolete">Cellulare Ufficio</translation>
-    </message>
-    <message>
-        <source>Business Country</source>
-        <translation type="obsolete">Paese Lavoro</translation>
     </message>
     <message>
         <source>Kuwait</source>

@@ -66,13 +66,6 @@
         <translation>2</translation>
     </message>
     <message>
-        <source>Do you really want to delete
-</source>
-        <translation type="obsolete">Ali res želite izbrisati
-
-</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Da</translation>
     </message>
@@ -99,14 +92,6 @@
     <message>
         <source>AdvancedFm Output</source>
         <translation>Izhod iz programa</translation>
-    </message>
-    <message>
-        <source>command failed!</source>
-        <translation type="obsolete">ukaz spodletel!</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;Vredu</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>

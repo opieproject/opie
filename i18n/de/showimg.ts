@@ -64,16 +64,8 @@
         <translation>Vorschau</translation>
     </message>
     <message>
-        <source>Slideshow</source>
-        <translation type="obsolete">Diashow</translation>
-    </message>
-    <message>
         <source>Preferences..</source>
         <translation>Einstellungen..</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation type="obsolete">Hilfe</translation>
     </message>
     <message>
         <source>Image Info ...</source>

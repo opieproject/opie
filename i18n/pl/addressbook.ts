@@ -13,60 +13,6 @@
         <source>Pick</source>
         <translation>Elita</translation>
     </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Pusty</translation>
-    </message>
-</context>
-<context>
-    <name>AddressSettings</name>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Tytul</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">Imie</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">Nazwisko</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">Jako</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">Domyslny e-mail</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Notatka</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">Plec</translation>
-    </message>
-</context>
-<context>
-    <name>AddressSettingsBase</name>
-    <message>
-        <source>Arrange Edit Fields</source>
-        <translation type="obsolete">Rozmiesc pola edycji</translation>
-    </message>
-    <message>
-        <source>Select the field order:</source>
-        <translation type="obsolete">Wybierz kolejnosc pol:</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation type="obsolete">Gora</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation type="obsolete">Dol</translation>
-    </message>
 </context>
 <context>
     <name>AddressbookWindow</name>
@@ -107,31 +53,8 @@
         <translation>Moje dane</translation>
     </message>
     <message>
-        <source>Arrange Edit Fields</source>
-        <translation type="obsolete">Porzadkuj pola edycji</translation>
-    </message>
-    <message>
-        <source>Out of Space</source>
-        <translation type="obsolete">Brak miejsca</translation>
-    </message>
-    <message>
-        <source>There is not enough space to create
-neccessary startup files.
-
-Free up some space before
-entering data!</source>
-        <translation type="obsolete">Brak miejsca w pamieci
-na pliki startowe.
-
-Zwolnij miejsce w pamieci!</translation>
-    </message>
-    <message>
         <source>View</source>
         <translation>Widok</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete">Czcionka</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -166,56 +89,12 @@ i sprobuj ponownie
 Zakonczyc?</translation>
     </message>
     <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Tytul</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Notatka</translation>
-    </message>
-    <message>
-        <source>Work</source>
-        <translation type="obsolete">Praca</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">Imie</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">Nazwisko</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">Jako</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">Domyslny e-mail</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">Plec</translation>
-    </message>
-    <message>
         <source>All</source>
         <translation>Wszystkie</translation>
     </message>
     <message>
         <source>Unfiled</source>
         <translation>nieprzydzielony</translation>
-    </message>
-    <message>
-        <source>Small</source>
-        <translation type="obsolete">Maly</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="obsolete">Normalny</translation>
-    </message>
-    <message>
-        <source>Large</source>
-        <translation type="obsolete">Duzy</translation>
     </message>
     <message>
         <source>Import vCard</source>
@@ -387,18 +266,6 @@ is provided free !</source>
 <context>
     <name>ContactEditor</name>
     <message>
-        <source>Default Email</source>
-        <translation type="obsolete">Domyslny e-mail</translation>
-    </message>
-    <message>
-        <source>Emails</source>
-        <translation type="obsolete">E-maile</translation>
-    </message>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Tytul</translation>
-    </message>
-    <message>
         <source>First Name</source>
         <translation>Imie</translation>
     </message>
@@ -425,18 +292,6 @@ is provided free !</source>
     <message>
         <source>Job Title</source>
         <translation>Temat pracy</translation>
-    </message>
-    <message>
-        <source>Company</source>
-        <translation type="obsolete">Firma</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Notatka</translation>
-    </message>
-    <message>
-        <source>Groups</source>
-        <translation type="obsolete">Grupa</translation>
     </message>
     <message>
         <source>City</source>

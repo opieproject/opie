@@ -14,14 +14,6 @@
         <translation type="unfinished">Desligada</translation>
     </message>
     <message>
-        <source>Power saving</source>
-        <translation type="obsolete">Conservação de enegria</translation>
-    </message>
-    <message>
-        <source>&lt;blockquote&gt;The brighter the screen light, the more battery power is used.&lt;/blockquote&gt;</source>
-        <translation type="obsolete">&lt;blockquote&gt;Quanto mais clara a luz mais bateria será usada.&lt;/blockquote&gt;</translation>
-    </message>
-    <message>
         <source>Light off after</source>
         <translation type="unfinished">Apagar luz após</translation>
     </message>
@@ -32,14 +24,6 @@
     <message>
         <source>Dim light after</source>
         <translation type="unfinished">Diminuir a luz após</translation>
-    </message>
-    <message>
-        <source> seconds</source>
-        <translation type="obsolete"> segundos</translation>
-    </message>
-    <message>
-        <source>Adjust to environment</source>
-        <translation type="obsolete">Ajustar ao meio-ambiente</translation>
     </message>
     <message>
         <source>Suspend after</source>

@@ -191,18 +191,6 @@
         <source>Package</source>
         <translation>Paquete</translation>
     </message>
-    <message>
-        <source>Install to</source>
-        <translation type="obsolete">Instalar en</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="obsolete">Borrar</translation>
-    </message>
-    <message>
-        <source>Reinstall</source>
-        <translation type="obsolete">Reinstalar</translation>
-    </message>
 </context>
 <context>
     <name>PackageManagerSettings</name>

@@ -145,14 +145,6 @@ modificando le categorie.</translation>
 <context>
     <name>FileSelector</name>
     <message>
-        <source>View</source>
-        <translation type="obsolete">Vista</translation>
-    </message>
-    <message>
-        <source>Create a new Document</source>
-        <translation type="obsolete">Crea un nuovo documento</translation>
-    </message>
-    <message>
         <source>Close the File Selector</source>
         <translation>Chiudi Selettore File</translation>
     </message>
@@ -187,10 +179,6 @@ modificando le categorie.</translation>
         <source>Name</source>
         <translation>Nome</translation>
     </message>
-    <message>
-        <source>There are no files in this directory.</source>
-        <translation type="obsolete">Non ci sono file in questa directory.</translation>
-    </message>
 </context>
 <context>
     <name>FindDialog</name>
@@ -219,10 +207,6 @@ modificando le categorie.</translation>
     <message>
         <source>Find what:</source>
         <translation>Trova cosa:</translation>
-    </message>
-    <message>
-        <source>&amp;Find</source>
-        <translation type="obsolete">&amp;Trova</translation>
     </message>
     <message>
         <source>Category:</source>
@@ -256,20 +240,8 @@ modificando le categorie.</translation>
         <translation>Cancella</translation>
     </message>
     <message>
-        <source>File does not exist.</source>
-        <translation type="obsolete">File inesistente.</translation>
-    </message>
-    <message>
         <source>File deletion failed.</source>
         <translation>Cancellazione file fallita.</translation>
-    </message>
-    <message>
-        <source>Delete Icon and leave file</source>
-        <translation type="obsolete">Cancella Icona e non modificare il file</translation>
-    </message>
-    <message>
-        <source>Icon deletion failed.</source>
-        <translation type="obsolete">Cancellazione icona fallita.</translation>
     </message>
     <message>
         <source>Copy of </source>
@@ -329,10 +301,6 @@ modificando le categorie.</translation>
     <message>
         <source>Delete</source>
         <translation>Cancella</translation>
-    </message>
-    <message>
-        <source>Del Icon</source>
-        <translation type="obsolete">Cancella Icona</translation>
     </message>
     <message>
         <source>Copy</source>

@@ -145,14 +145,6 @@ edytuje kategorie.</translation>
 <context>
     <name>FileSelector</name>
     <message>
-        <source>View</source>
-        <translation type="obsolete">Widok</translation>
-    </message>
-    <message>
-        <source>Create a new Document</source>
-        <translation type="obsolete">Utworz nowy dokument</translation>
-    </message>
-    <message>
         <source>Close the File Selector</source>
         <translation>Zamknij wybor plikow</translation>
     </message>
@@ -187,10 +179,6 @@ edytuje kategorie.</translation>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
-    <message>
-        <source>There are no files in this directory.</source>
-        <translation type="obsolete">Nie ma plikow w tym katalogu.</translation>
-    </message>
 </context>
 <context>
     <name>FindDialog</name>
@@ -219,10 +207,6 @@ edytuje kategorie.</translation>
     <message>
         <source>Find what:</source>
         <translation>Co szukac:</translation>
-    </message>
-    <message>
-        <source>&amp;Find</source>
-        <translation type="obsolete">&amp;Znajdz</translation>
     </message>
     <message>
         <source>Category:</source>
@@ -258,14 +242,6 @@ edytuje kategorie.</translation>
     <message>
         <source>File deletion failed.</source>
         <translation>Usuwanie nie powiodlo sie.</translation>
-    </message>
-    <message>
-        <source>Delete Icon and leave file</source>
-        <translation type="obsolete">Usun ikona i zostaw plik</translation>
-    </message>
-    <message>
-        <source>Icon deletion failed.</source>
-        <translation type="obsolete">Blad usuwania ikony</translation>
     </message>
     <message>
         <source>Copy of </source>
@@ -325,10 +301,6 @@ edytuje kategorie.</translation>
     <message>
         <source>Delete</source>
         <translation>Usun</translation>
-    </message>
-    <message>
-        <source>Del Icon</source>
-        <translation type="obsolete">Usun ikone</translation>
     </message>
     <message>
         <source>Copy</source>

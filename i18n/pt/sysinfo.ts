@@ -157,18 +157,6 @@ Click and hold on a process to see additional information about the process, or 
 <context>
     <name>StorageInfo</name>
     <message>
-        <source>Hard Disk</source>
-        <translation type="obsolete">Disco</translation>
-    </message>
-    <message>
-        <source>SCSI Hard Disk</source>
-        <translation type="obsolete">Disco SCSI</translation>
-    </message>
-    <message>
-        <source>Int. Storage</source>
-        <translation type="obsolete">Armazenamento Interno</translation>
-    </message>
-    <message>
         <source>CF Card: </source>
         <translation type="unfinished"></translation>
     </message>

@@ -53,10 +53,6 @@
         <translation>Icon na Barra de Tarefas</translation>
     </message>
     <message>
-        <source>Key_Escape</source>
-        <translation type="obsolete">Key_Escape</translation>
-    </message>
-    <message>
         <source>Key_Space</source>
         <translation>Key_Space</translation>
     </message>

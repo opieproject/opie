@@ -47,29 +47,12 @@
         <translation>Utiliser des menus ombrés</translation>
     </message>
     <message>
-        <source>Draw liquid window title bars</source>
-        <translation type="obsolete">Dessiner les barres de titre des fenêtres en Liquid</translation>
-    </message>
-    <message>
         <source>Make toolbar buttons appear flat</source>
         <translation>Rendre unis les buttons de la barre des outils</translation>
     </message>
     <message>
         <source>Stipple contrast</source>
         <translation>Stipple contrast</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Liquid</source>
-        <comment>name</comment>
-        <translation type="obsolete">Liquid</translation>
-    </message>
-    <message>
-        <source>High Performance Liquid style by Mosfet</source>
-        <comment>description</comment>
-        <translation type="obsolete">Style &quot;High Performance Liquid&quot; par Mosfet</translation>
     </message>
 </context>
 <context>

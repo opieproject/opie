@@ -205,10 +205,6 @@
 <context>
     <name>SetDateTime</name>
     <message>
-        <source>Set System Time</source>
-        <translation type="obsolete">Ustaw czas systemowy</translation>
-    </message>
-    <message>
         <source>Time Zone</source>
         <translation>Strefa czasowa</translation>
     </message>

@@ -224,41 +224,6 @@ o está en un formato desconocido.</translation>
         <translation>PAUSA</translation>
     </message>
     <message>
-        <source>You&apos;re going to create the highscore-file
-&apos;%1&apos;
-for your maschine, that should be used systemwide.
-
-To grant access to the other users, set the appropriate rights (a+w)
-on that file or ask your systemadministator for that favor.
-
-To use a different directory or filename for the highscores,specify them in the configfile (kpacmanrc:highscoreFilePath).</source>
-        <translation type="obsolete">Va a generar el archivo de puntuaciones
-&apos;%1&apos;
-para su máquina, que debería usarse por todo el sistema.
-
-Para permitir el acceso a otros usuarios, ponga los permisos apropiados (a+w)
-en ese archivo o pida a su administrador que lo haga.
-
-Para usar un directorio o archivo diferente para las puntuaciones, especifíquelo en el archivo de configuración (kpacmanrc:highscoreFilePath).</translation>
-    </message>
-    <message>
-        <source>You&apos;re using a private highscore-file, that&apos;s mostly because of
-missing write-access to the systemwide file
-&apos;%1&apos; .
-
-Ask your systemadministrator for granting you access to that file,
-by setting the appropriate rights (a+w) on it.
-
-To use a different directory or filename for the highscores,specify them in the configfile (kpacmanrc:highscoreFilePath).</source>
-        <translation type="obsolete">Esta usando un archivo de puntuación privado, lo que suele ocurrir
-porque no tiene permiso de escritura en el archivo de puntuación global.
-
-Pida a su administrador de sistema que le dé acceso a ese archivo,
-fijando los permisos adecuados (a+w).
-
-Para usar un directorio o archivo diferente para las puntuaciones, especifíquelo en el archivo de configuración (kpacmanrc:highscoreFilePath).</translation>
-    </message>
-    <message>
         <source>@YY@/@MM@/@DD@</source>
         <translation>@YY@/@MM@/@DD@</translation>
     </message>

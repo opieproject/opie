@@ -133,13 +133,6 @@
     </message>
 </context>
 <context>
-    <name>AppearanceSettings</name>
-    <message>
-        <source>Appearance</source>
-        <translation type="obsolete">Aparncia</translation>
-    </message>
-</context>
-<context>
     <name>EditScheme</name>
     <message>
         <source>Edit scheme</source>

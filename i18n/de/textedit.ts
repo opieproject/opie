@@ -52,25 +52,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     </message>
 </context>
 <context>
-    <name>FontDialog</name>
-    <message>
-        <source>Font Dialog</source>
-        <translation type="obsolete">Schrift</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Größe</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete">Schrift</translation>
-    </message>
-    <message>
-        <source>Font Style</source>
-        <translation type="obsolete">Stil</translation>
-    </message>
-</context>
-<context>
     <name>TextEdit</name>
     <message>
         <source>New</source>
@@ -113,14 +94,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
         <translation>Zoom aus</translation>
     </message>
     <message>
-        <source>Bold</source>
-        <translation type="obsolete">Fett</translation>
-    </message>
-    <message>
-        <source>Italic</source>
-        <translation type="obsolete">Kursiv</translation>
-    </message>
-    <message>
         <source>Wrap lines</source>
         <translation>Zeilenumbruch</translation>
     </message>
@@ -157,24 +130,8 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
         <translation>Texteditor</translation>
     </message>
     <message>
-        <source>Unnamed</source>
-        <translation type="obsolete">Unbenannt</translation>
-    </message>
-    <message>
         <source>Font</source>
         <translation>Schrift</translation>
-    </message>
-    <message>
-        <source>Permissions</source>
-        <translation type="obsolete">Dateirechte</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Ja</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Nein</translation>
     </message>
     <message>
         <source>About</source>

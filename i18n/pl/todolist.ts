@@ -112,60 +112,10 @@ Quit Anyway?</source>
     </message>
 </context>
 <context>
-    <name>NewTaskDialog</name>
-    <message>
-        <source>Todo List</source>
-        <translation type="obsolete">Lista ZrobTo</translation>
-    </message>
-</context>
-<context>
-    <name>NewTaskDialogBase</name>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">Nowy proces</translation>
-    </message>
-    <message>
-        <source>Priority:</source>
-        <translation type="obsolete">Priorytet:</translation>
-    </message>
-    <message>
-        <source>1 - Very High</source>
-        <translation type="obsolete">1 - Bardzo wysoki</translation>
-    </message>
-    <message>
-        <source>2 - High</source>
-        <translation type="obsolete">2 - Wysoki</translation>
-    </message>
-    <message>
-        <source>3 - Normal</source>
-        <translation type="obsolete">3 - Normalny</translation>
-    </message>
-    <message>
-        <source>4 - Low</source>
-        <translation type="obsolete">4 - Niski</translation>
-    </message>
-    <message>
-        <source>5 - Very Low</source>
-        <translation type="obsolete">5 - Bardzo niski</translation>
-    </message>
-    <message>
-        <source>Category:</source>
-        <translation type="obsolete">Kategoria:</translation>
-    </message>
-    <message>
-        <source>&amp;Completed</source>
-        <translation type="obsolete">&amp;Kompletny</translation>
-    </message>
-</context>
-<context>
     <name>OTaskEditor</name>
     <message>
         <source>Overview</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="obsolete">Opis</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -496,68 +446,6 @@ Quit Anyway?</source>
     <message>
         <source>Configure Templates</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TodoTable</name>
-    <message>
-        <source>Description</source>
-        <translation type="obsolete">Opis</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Nieprzypisany</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete">Wszystkie</translation>
-    </message>
-</context>
-<context>
-    <name>TodoWindow</name>
-    <message>
-        <source>Todo</source>
-        <translation type="obsolete">ZrobTo</translation>
-    </message>
-    <message>
-        <source>Out of Space</source>
-        <translation type="obsolete">Brak pamieci</translation>
-    </message>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">Nowy proces</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Znajdz</translation>
-    </message>
-    <message>
-        <source>Completed tasks</source>
-        <translation type="obsolete">Zakonczonych procesow</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="obsolete">Edycja procesu</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation type="obsolete">Wszystkie kategorie</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Nieprzypisany</translation>
-    </message>
-    <message>
-        <source>Out of space</source>
-        <translation type="obsolete">Brak pamieci</translation>
-    </message>
-    <message>
-        <source>Show Deadline</source>
-        <translation type="obsolete">Wyswietl Deadline</translation>
-    </message>
-    <message>
-        <source>Fonts</source>
-        <translation type="obsolete">Czcionka</translation>
     </message>
 </context>
 </TS>
