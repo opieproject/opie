@@ -216,13 +216,13 @@ WellenreiterMainWindow::~WellenreiterMainWindow()
 
 void WellenreiterMainWindow::demoAddStations()
 {
-    mw = 0;
+    //mw = 0; // test SIGSGV handling
 
-    mw->netView()->addNewItem( "managed", "Vanille", "00:00:20:EF:A6:43", true, 6, 80 );
-    mw->netView()->addNewItem( "managed", "Vanille", "00:30:6D:EF:A6:23", true, 11, 10 );
-    mw->netView()->addNewItem( "adhoc", "ELAN", "00:A0:F8:E7:16:22", false, 3, 10 );
-    mw->netView()->addNewItem( "adhoc", "ELAN", "00:AA:01:E7:56:62", false, 3, 15 );
-    mw->netView()->addNewItem( "adhoc", "ELAN", "00:B0:8E:E7:56:E2", false, 3, 20 );
+    mw->netView()->addNewItem( "managed", "Vanille", OMacAddress::fromString("00:00:20:EF:A6:43"), true, 6, 80 );
+    mw->netView()->addNewItem( "managed", "Vanille", OMacAddress::fromString("00:30:6D:EF:A6:23"), true, 11, 10 );
+    mw->netView()->addNewItem( "adhoc", "ELAN", OMacAddress::fromString("00:A0:F8:E7:16:22"), false, 3, 10 );
+    mw->netView()->addNewItem( "adhoc", "ELAN", OMacAddress::fromString("00:AA:01:E7:56:62"), false, 3, 15 );
+    mw->netView()->addNewItem( "adhoc", "ELAN", OMacAddress::fromString("00:B0:8E:E7:56:E2"), false, 3, 20 );
 }
 
 

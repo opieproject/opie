@@ -22,7 +22,6 @@
 #include "configwindow.h"
 #include "statwindow.h"
 #include "graphwindow.h"
-#include "manufacturers.h"
 #include "protolistview.h"
 
 // Opie
@@ -65,20 +64,8 @@ using namespace Opie;
 
 Wellenreiter::Wellenreiter( QWidget* parent )
     : WellenreiterBase( parent, 0, 0 ),
-      sniffing( false ), iface( 0 ), manufacturerdb( 0 ), configwindow( 0 )
+      sniffing( false ), iface( 0 ), configwindow( 0 )
 {
-
-    //
-    // construct manufacturer database
-    //
-
-    QString manufile;
-    #ifdef QWS
-    manufile.sprintf( "%s/share/wellenreiter/manufacturers.dat", (const char*) QPEApplication::qpeDir() );
-    #else
-    manufile.sprintf( "/usr/local/share/wellenreiter/manufacturers.dat" );
-    #endif
-    manufacturerdb = new ManufacturerDB( manufile );
 
     logwindow->log( "(i) Wellenreiter has been started." );
 
@@ -93,22 +80,13 @@ Wellenreiter::Wellenreiter( QWidget* parent )
     logwindow->log( sys );
     #endif
 
-    // setup GUI
     netview->setColumnWidthMode( 1, QListView::Manual );
-
-    if ( manufacturerdb )
-        netview->setManufacturerDB( manufacturerdb );
-
     pcap = new OPacketCapturer();
-
 }
 
 
 Wellenreiter::~Wellenreiter()
 {
-    // no need to delete child widgets, Qt does it all for us
-
-    delete manufacturerdb;
     delete pcap;
 }
 
@@ -186,7 +164,7 @@ void Wellenreiter::handleBeacon( OPacket* p, OWaveLanManagementPacket* beacon )
     int channel = ds ? ds->channel() : -1;
 
     OWaveLanPacket* header = static_cast<OWaveLanPacket*>( p->child( "802.11" ) );
-    netView()->addNewItem( type, essid, header->macAddress2().toString(), beacon->canPrivacy(), channel, 0 );
+    netView()->addNewItem( type, essid, header->macAddress2(), beacon->canPrivacy(), channel, 0 );
 
     // update graph window
     if ( ds )
@@ -205,47 +183,19 @@ void Wellenreiter::handleData( OPacket* p, OWaveLanDataPacket* data )
     OWaveLanPacket* wlan = (OWaveLanPacket*) p->child( "802.11" );
     if ( wlan->fromDS() && !wlan->toDS() )
     {
-        qDebug( "FromDS traffic: '%s' -> '%s' via '%s'",
-            (const char*) wlan->macAddress3().toString(true),
-            (const char*) wlan->macAddress1().toString(true),
-            (const char*) wlan->macAddress2().toString(true) );
-        netView()->fromDStraffic( wlan->macAddress3().toString(),
-                                wlan->macAddress1().toString(),
-                                wlan->macAddress2().toString() );
+        netView()->fromDStraffic( wlan->macAddress3(), wlan->macAddress1(), wlan->macAddress2() );
     }
-    else
-    if ( !wlan->fromDS() && wlan->toDS() )
+    else if ( !wlan->fromDS() && wlan->toDS() )
     {
-        qDebug( "ToDS traffic: '%s' -> '%s' via '%s'",
-            (const char*) wlan->macAddress2().toString(true),
-            (const char*) wlan->macAddress3().toString(true),
-            (const char*) wlan->macAddress1().toString(true) );
-        netView()->toDStraffic( wlan->macAddress2().toString(),
-                                wlan->macAddress3().toString(),
-                                wlan->macAddress1().toString() );
+        netView()->toDStraffic( wlan->macAddress2(), wlan->macAddress3(), wlan->macAddress1() );
     }
-    else
-    if ( wlan->fromDS() && wlan->toDS() )
+    else if ( wlan->fromDS() && wlan->toDS() )
     {
-        qDebug( "WDS(bridge) traffic: '%s' -> '%s' via '%s' and '%s'",
-            (const char*) wlan->macAddress4().toString(true),
-            (const char*) wlan->macAddress3().toString(true),
-            (const char*) wlan->macAddress1().toString(true),
-            (const char*) wlan->macAddress2().toString(true) );
-        netView()->WDStraffic( wlan->macAddress4().toString(),
-                            wlan->macAddress3().toString(),
-                            wlan->macAddress1().toString(),
-                            wlan->macAddress2().toString() );
+        netView()->WDStraffic( wlan->macAddress4(), wlan->macAddress3(), wlan->macAddress1(), wlan->macAddress2() );
     }
     else
     {
-        qDebug( "IBSS(AdHoc) traffic: '%s' -> '%s' (Cell: '%s')'",
-            (const char*) wlan->macAddress2().toString(true),
-            (const char*) wlan->macAddress1().toString(true),
-            (const char*) wlan->macAddress3().toString(true) );
-        netView()->IBSStraffic( wlan->macAddress2().toString(),
-                                wlan->macAddress1().toString(),
-                                wlan->macAddress3().toString() );
+        netView()->IBSStraffic( wlan->macAddress2(), wlan->macAddress1(), wlan->macAddress3() );
     }
 
     OARPPacket* arp = (OARPPacket*) p->child( "ARP" );
@@ -254,12 +204,12 @@ void Wellenreiter::handleData( OPacket* p, OWaveLanDataPacket* data )
         qDebug( "Received ARP traffic (type '%s'): ", (const char*) arp->type() );
         if ( arp->type() == "REQUEST" )
         {
-            netView()->identify( arp->senderMacAddress().toString(), arp->senderIPV4Address().toString() );
+            netView()->identify( arp->senderMacAddress(), arp->senderIPV4Address().toString() );
         }
         else if ( arp->type() == "REPLY" )
         {
-            netView()->identify( arp->senderMacAddress().toString(), arp->senderIPV4Address().toString() );
-            netView()->identify( arp->targetMacAddress().toString(), arp->targetIPV4Address().toString() );
+            netView()->identify( arp->senderMacAddress(), arp->senderIPV4Address().toString() );
+            netView()->identify( arp->targetMacAddress(), arp->targetIPV4Address().toString() );
         }
     }
 
@@ -437,7 +387,7 @@ void Wellenreiter::startClicked()
         if ( !iface->monitorMode() )
         {
             QMessageBox::warning( this, "Wellenreiter II",
-                                  tr( "Can't set interface '%1' into monitor mode:\n" ).arg( iface->name() ) + strerror( errno ) );
+                                  tr( "Can't set interface '%1'\ninto monitor mode:\n" ).arg( iface->name() ) + strerror( errno ) );
             return;
         }
     }

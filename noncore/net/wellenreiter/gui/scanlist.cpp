@@ -18,7 +18,6 @@
 #include "logwindow.h"
 
 #include <assert.h>
-#include "manufacturers.h"
 #include <qdatetime.h>
 #include <qtextstream.h>
 
@@ -47,7 +46,7 @@ const int col_firstseen = 8;
 const int col_lastseen = 9;
 
 MScanListView::MScanListView( QWidget* parent, const char* name )
-              :OListView( parent, name ), _manufacturerdb( 0 )
+              :OListView( parent, name )
 {
 
     setFrameShape( QListView::StyledPanel );
@@ -77,14 +76,17 @@ MScanListView::MScanListView( QWidget* parent, const char* name )
     setAllColumnsShowFocus( true );
 };
 
+
 MScanListView::~MScanListView()
 {
 };
+
 
 OListViewItem* MScanListView::childFactory()
 {
     return new MScanListItem( this );
 }
+
 
 void MScanListView::serializeTo( QDataStream& s) const
 {
@@ -92,20 +94,17 @@ void MScanListView::serializeTo( QDataStream& s) const
     OListView::serializeTo( s );
 }
 
+
 void MScanListView::serializeFrom( QDataStream& s)
 {
     qDebug( "serializing MScanListView" );
     OListView::serializeFrom( s );
 }
 
-void MScanListView::setManufacturerDB( ManufacturerDB* manufacturerdb )
-{
-    _manufacturerdb = manufacturerdb;
-}
 
-void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal )
+void MScanListView::addNewItem( const QString& type, const QString& essid, const OMacAddress& mac, bool wep, int channel, int signal )
 {
-    // FIXME: scanlistitem needs a proper encapsulation and not such a damn dealing with text(...)
+    QString macaddr = mac.toString(true);
 
     #ifdef DEBUG
     qDebug( "MScanList::addNewItem( %s / %s / %s [%d]", (const char*) type,
@@ -168,8 +167,7 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
     #endif
 
     MScanListItem* station = new MScanListItem( network, type, "", macaddr, wep, channel, signal );
-    if ( _manufacturerdb )
-        station->setManufacturer( _manufacturerdb->lookup( macaddr ) );
+    station->setManufacturer( mac.manufacturer() );
 
     if ( type == "managed" )
     {
@@ -184,11 +182,11 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
 }
 
 
-void MScanListView::addIfNotExisting( MScanListItem* network, QString addr, const QString& type )
+void MScanListView::addIfNotExisting( MScanListItem* network, const OMacAddress& addr, const QString& type )
 {
     MScanListItem* subitem = static_cast<MScanListItem*>( network->firstChild() );
 
-    while ( subitem && ( subitem->text( col_ap ) != addr ) )
+    while ( subitem && ( subitem->text( col_ap ) != addr.toString(true) ) )
     {
         #ifdef DEBUG
         qDebug( "subitemtext: %s", (const char*) subitem->text( col_ap ) );
@@ -200,16 +198,15 @@ void MScanListView::addIfNotExisting( MScanListItem* network, QString addr, cons
     {
         // we have already seen this item, it's a dupe
         #ifdef DEBUG
-        qDebug( "%s is a dupe - ignoring...", (const char*) addr );
+        qDebug( "%s is a dupe - ignoring...", (const char*) addr.toString(true) );
         #endif
         subitem->receivedBeacon(); //FIXME: sent data bit
         return;
     }
 
     // Hey, it seems to be a new item :-D
-    MScanListItem* station = new MScanListItem( network, type, /* network->text( col_essid ) */ "", addr, false, -1, -1 );
-    if ( _manufacturerdb )
-    station->setManufacturer( _manufacturerdb->lookup( addr ) );
+    MScanListItem* station = new MScanListItem( network, type, /* network->text( col_essid ) */ "", addr.toString(true), false, -1, -1 );
+    station->setManufacturer( addr.manufacturer() );
 
     QString s;
     if ( type == "station" )
@@ -224,15 +221,15 @@ void MScanListView::addIfNotExisting( MScanListItem* network, QString addr, cons
 }
 
 
-void MScanListView::WDStraffic( QString from, QString to, QString viaFrom, QString viaTo )
+void MScanListView::WDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& viaFrom, const OMacAddress& viaTo )
 {
     QString s;
     MScanListItem* network;
 
     QListViewItemIterator it( this );
     while ( it.current() &&
-            it.current()->text( col_ap ) != viaFrom &&
-            it.current()->text( col_ap ) != viaTo ) ++it;
+            it.current()->text( col_ap ) != viaFrom.toString(true) &&
+            it.current()->text( col_ap ) != viaTo.toString(true) ) ++it;
 
     MScanListItem* item = static_cast<MScanListItem*>( it.current() );
 
@@ -249,13 +246,13 @@ void MScanListView::WDStraffic( QString from, QString to, QString viaFrom, QStri
 }
 
 
-void MScanListView::toDStraffic( QString from, QString to, QString via )
+void MScanListView::toDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via )
 {
     QString s;
     MScanListItem* network;
 
     QListViewItemIterator it( this );
-    while ( it.current() && it.current()->text( col_ap ) != via ) ++it;
+    while ( it.current() && it.current()->text( col_ap ) != via.toString(true) ) ++it;
 
     MScanListItem* item = static_cast<MScanListItem*>( it.current() );
 
@@ -272,13 +269,13 @@ void MScanListView::toDStraffic( QString from, QString to, QString via )
 }
 
 
-void MScanListView::fromDStraffic( QString from, QString to, QString via )
+void MScanListView::fromDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via )
 {
     QString s;
     MScanListItem* network;
 
     QListViewItemIterator it( this );
-    while ( it.current() && it.current()->text( col_ap ) != via ) ++it;
+    while ( it.current() && it.current()->text( col_ap ) != via.toString(true) ) ++it;
 
     MScanListItem* item = static_cast<MScanListItem*>( it.current() );
 
@@ -294,21 +291,21 @@ void MScanListView::fromDStraffic( QString from, QString to, QString via )
 }
 
 
-void MScanListView::IBSStraffic( QString from, QString to, QString via )
+void MScanListView::IBSStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via )
 {
     qWarning( "D'oh! Not yet implemented..." );
     MLogWindow::logwindow()->log( "WARNING: Unhandled IBSS traffic!" );
 }
 
 
-void MScanListView::identify( const QString& macaddr, const QString& ip )
+void MScanListView::identify( const OMacAddress& macaddr, const QString& ip )
 {
-    qDebug( "identify %s = %s", (const char*) macaddr, (const char*) ip );
+    qDebug( "identify %s = %s", (const char*) macaddr.toString(), (const char*) ip );
 
     QListViewItemIterator it( this );
     for ( ; it.current(); ++it )
     {
-        if ( it.current()->text( col_ap ) == macaddr )
+        if ( it.current()->text( col_ap ) == macaddr.toString(true) )
         {
             it.current()->setText( col_ip, ip );
             return;
@@ -316,7 +313,7 @@ void MScanListView::identify( const QString& macaddr, const QString& ip )
     }
     qDebug( "D'oh! Received identification, but item not yet in list... ==> Handle this!" );
     MLogWindow::logwindow()->log( QString().sprintf( "WARNING: Unhandled identification %s = %s!",
-                                                     (const char*) macaddr, (const char*) ip ) );
+                                                     (const char*) macaddr.toString(), (const char*) ip ) );
 }
 
 
@@ -450,7 +447,9 @@ void MScanListItem::receivedBeacon()
     #endif
     setText( col_sig, QString::number( _beacons ) );
     setText( col_lastseen, QTime::currentTime().toString() );
-    if ( WellenreiterConfigWindow::instance() )
-        playSound( WellenreiterConfigWindow::instance()->soundOnBeacon() );
+
+    MScanListItem* p = (MScanListItem*) parent();
+    if ( p ) p->receivedBeacon();
+
 }
 

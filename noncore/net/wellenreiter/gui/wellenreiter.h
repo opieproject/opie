@@ -30,7 +30,6 @@ class OWaveLanManagementPacket;
 class OWaveLanDataPacket;
 class OPacketCapturer;
 class OWirelessNetworkInterface;
-class ManufacturerDB;
 class WellenreiterConfigWindow;
 class MLogWindow;
 class MHexWindow;
@@ -71,7 +70,7 @@ class Wellenreiter : public WellenreiterBase {
     void doAction( const QString& action, const QString& protocol, OPacket* p );
     QObject* childIfToParse( OPacket* p, const QString& protocol );
     bool checkDumpPacket( OPacket* p );
-    
+
   private:
     #ifdef QWS
     OSystem _system;                // Opie Operating System identifier
@@ -79,7 +78,6 @@ class Wellenreiter : public WellenreiterBase {
 
     OWirelessNetworkInterface* iface;
     OPacketCapturer* pcap;
-    ManufacturerDB* manufacturerdb;
     WellenreiterConfigWindow* configwindow;
 
     //void readConfig();

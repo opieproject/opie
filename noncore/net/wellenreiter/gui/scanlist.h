@@ -16,13 +16,14 @@
 #ifndef SCANLIST_H
 #define SCANLIST_H
 
+/* OPIE */
 #include <opie2/olistview.h>
+#include <opie2/onetutils.h>
 
+/* QT */
 #include <qtextstream.h>
 
 class QString;
-class ManufacturerDB;
-
 class MScanListItem;
 
 class MScanListView: public OListView
@@ -33,26 +34,21 @@ class MScanListView: public OListView
     MScanListView( QWidget* parent = 0, const char* name = 0 );
     virtual ~MScanListView();
 
-    void setManufacturerDB( ManufacturerDB* manufacturerdb );
-
     virtual OListViewItem* childFactory();
     virtual void serializeTo( QDataStream& s ) const;
     virtual void serializeFrom( QDataStream& s );
 
   public slots:
-    void addNewItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal );
-    void fromDStraffic( QString from, QString to, QString via ); // NYI
-    void toDStraffic( QString from, QString to, QString via );
-    void WDStraffic( QString from, QString to, QString viaFrom, QString viaTo );
-    void IBSStraffic( QString from, QString to, QString via ); // NYI
+    void addNewItem( const QString& type, const QString& essid, const OMacAddress& macaddr, bool wep, int channel, int signal );
+    void fromDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via );
+    void toDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via );
+    void WDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& viaFrom, const OMacAddress& viaTo );
+    void IBSStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via );
 
-    void identify( const QString& macaddr, const QString& ipaddr );
+    void identify( const OMacAddress&, const QString& ipaddr );
 
   protected:
-    void addIfNotExisting( MScanListItem* parent, QString addr, const QString& type = "station" );
-
-  private:
-    ManufacturerDB* _manufacturerdb;
+    void addIfNotExisting( MScanListItem* parent, const OMacAddress& addr, const QString& type = "station" );
 
 };
 

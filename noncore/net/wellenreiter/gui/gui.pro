@@ -12,7 +12,6 @@ HEADERS         = wellenreiterbase.h \
                   hexwindow.h \
                   statwindow.h \
                   configwindow.h \
-                  manufacturers.h \
                   graphwindow.h \
                   protolistview.h
 
@@ -25,7 +24,6 @@ SOURCES         = main.cpp \
                   hexwindow.cpp \
                   statwindow.cpp \
                   configwindow.cpp \
-                  manufacturers.cpp \
                   graphwindow.cpp \
                   protolistview.cpp
 
