@@ -87,7 +87,6 @@ ShutdownImpl::ShutdownImpl( QWidget* parent, const char *name, WFlags fl )
 	vbox-> addWidget ( btngrp );
 
 	m_info = new QLabel ( this, "info" );
-	m_info-> setText( tr( "<p>\n" "These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary." ) );
 	vbox-> addWidget ( m_info );
 
 	m_progress = new QProgressBar ( this, "progressBar" );
