@@ -53,6 +53,7 @@ application/x-mif   mif
 application/x-msdos-program com exe bat
 application/x-netcdf    nc cdf
 application/x-ns-proxy-autoconfig pac
+application/x-ogg ogg
 application/x-perl    pl pm
 application/x-sh    sh
 application/x-shar    shar
@@ -84,7 +85,6 @@ audio/x-pn-realaudio    ra ram
 audio/x-pn-realaudio-plugin
 audio/x-realaudio   ra
 audio/x-wav     wav
-audio/x-ogg    ogg
 chemical/x-pdb      xyz
 etext/x-palm-pdb	pdb
 image/gif     gif
