@@ -45,7 +45,7 @@ QPixmap loadPixmap( const QString& pix )
     QPixmap pixmap( filename );
     if ( pixmap.isNull() )
     {
-        odebug << "libopie2 resource: can't find pixmap " << filename << oendl;;
+        odebug << "libopie2 resource: can't find pixmap " << filename << oendl;
     }
     return pixmap;
 };
