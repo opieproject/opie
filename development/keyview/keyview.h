@@ -6,7 +6,7 @@
 
 
 class Keyview : public QGrid
-{ 
+{
     Q_OBJECT
 
 public:

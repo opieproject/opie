@@ -3,6 +3,8 @@
 //#include <iostream.h>
 #include <qlineedit.h>
 #include <qlabel.h>
+#include <opie2/okeyfilter.h>
+#include <opie2/odebug.h>
 
 Keyview::Keyview( QWidget* parent,  const char* name, WFlags fl )
     : QGrid ( 2, parent, name, fl )
@@ -28,7 +30,7 @@ Keyview::Keyview( QWidget* parent,  const char* name, WFlags fl )
     l = new QLabel(QString("isPress:"), this);
     isPress = new QLineEdit(this);
     isPress->setReadOnly(1);
-    
+
     l = new QLabel(QString("autoRepeat:"), this);
     autoRepeat = new QLineEdit(this);
     autoRepeat->setReadOnly(1);
@@ -39,13 +41,16 @@ Keyview::Keyview( QWidget* parent,  const char* name, WFlags fl )
 
 
     KeyFilter *filter = new KeyFilter(this);
-    QWSServer::setKeyboardFilter(filter);
+    Opie::Core::OKeyFilter::inst()->addHandler(filter);
+    odebug << "Creating keyview filter " << oendl;
 
-    connect(filter, SIGNAL(keyPressed(int,int,int,bool,bool)), 
+    connect(filter, SIGNAL(keyPressed(int,int,int,bool,bool)),
                            this, SLOT(updateItems(int,int,int,bool,bool)));
 }
 
-Keyview::~Keyview() { }
+Keyview::~Keyview()
+{
+}
 
 void Keyview::updateItems(int u, int k, int m, bool p, bool a) {
 
@@ -56,8 +61,8 @@ void Keyview::updateItems(int u, int k, int m, bool p, bool a) {
     autoRepeat->setText("0x" + QString::number(a, 16));
 }
 
-KeyFilter::KeyFilter(QObject * parent, const char *name) : QObject( parent, name ) {
-
+KeyFilter::KeyFilter(QObject * parent, const char *name) : QObject( parent, name )
+{
 }
 
 bool KeyFilter::filter(int unicode, int keycode, int modifiers, bool isPress,
