@@ -5,12 +5,31 @@
 #include <qlabel.h>
 #include <qpushbutton.h>
 #include <qapp.h>
+#include <qtimer.h>
+
+// State machine:          | When an error occurs, we don't have to
+//                         | reset everything.
+// (init) <------+         | But if the user wants to reset,
+//   |           |         | we stop dialing immediately.
+//   v           |         |
+// (options) ----+         | Following the state machine is necessary
+//   |       \             | to get determinable results.
+//   v        ^            |
+// (dial) ----+            |
+//   |        ^            |
+//   v        |            |
+// (online) --+            |
+//   |                     |
+//   v                     |
 
 Dialer::Dialer(const QString& number, QWidget *parent, const char *name)
 : QDialog(parent, name, true)
 {
 	QVBoxLayout *vbox;
 	QLabel *desc;
+
+	usercancel = 0;
+	m_number = number;
 
 	desc = new QLabel(QObject::tr("Dialing number: %1").arg(number), this);
 	progress = new QProgressBar(this);
@@ -24,13 +43,11 @@ Dialer::Dialer(const QString& number, QWidget *parent, const char *name)
 	vbox->add(status);
 	vbox->add(cancel);
 
-	reset();
-
 	connect(cancel, SIGNAL(clicked()), SLOT(slotCancel()));
 
 	show();
 
-	dial(number);
+	QTimer::singleShot(500, this, SLOT(slotAutostart()));
 }
 
 Dialer::~Dialer()
@@ -40,30 +57,82 @@ Dialer::~Dialer()
 void Dialer::slotCancel()
 {
 	if(state != state_online) reset();
-	close();
+	else accept();
 }
 
 void Dialer::reset()
 {
-	switchState(state_init);
+	switchState(state_cancel);
+	usercancel = 1;
+}
+
+void Dialer::slotAutostart()
+{
+	state = state_preinit;
+	dial(m_number);
 }
 
 void Dialer::dial(const QString& number)
 {
-	send("ATZ");
-	QString response = receive();
+	while(state != state_online)
+	{
+		if(!usercancel)
+		{
+			trydial(number);
+		}
+		else break;
+	}
 
-	switchState(state_options);
+	if(usercancel)
+	{
+		reject();
+	}
+}
 
-	send("ATM0L0");
-	QString response2 = receive();
+void Dialer::trydial(const QString& number)
+{
+	if(state != state_cancel)
+	{
+		switchState(state_preinit);
+		// ...
+		QString response = receive();
+	}
 
-	switchState(state_dialing);
+	if(state != state_cancel)
+	{
+		switchState(state_init);
+		send("ATZ");
+		QString response2 = receive();
+	}
 
-	send(QString("ATDT %1").arg(number));
-	QString response3 = receive();
+	if(state != state_cancel)
+	{
+		switchState(state_options);
 
-	switchState(state_online);
+		send("ATM0L0");
+		QString response3 = receive();
+	}
+
+	if(state != state_cancel)
+	{
+		switchState(state_dialtone);
+
+		send("ATX1");
+		QString response4 = receive();
+	}
+
+	if(state != state_cancel)
+	{
+		switchState(state_dialing);
+
+		send(QString("ATDT %1").arg(number));
+		QString response5 = receive();
+	}
+	
+	if(state != state_cancel)
+	{
+		switchState(state_online);
+	}
 }
 
 void Dialer::send(const QString& msg)
@@ -73,28 +142,42 @@ void Dialer::send(const QString& msg)
 
 QString Dialer::receive()
 {
-	for(int i = 0; i < 200000; i++)
+	for(int i = 0; i < 200000;i++)
 		qApp->processEvents();
 	return QString::null;
 }
 
 void Dialer::switchState(int newstate)
 {
+	int oldstate = state;
 	state = newstate;
 
 	switch(state)
 	{
+		case state_cancel:
+			status->setText(QObject::tr("Cancelling..."));
+			progress->setProgress(0);
+			break;
+		case state_preinit:
+			status->setText(QObject::tr("Searching modem"));
+			progress->setProgress(10);
+			break;
 		case state_init:
 			status->setText(QObject::tr("Initializing..."));
-			progress->setProgress(10);
+			progress->setProgress(20);
 			break;
 		case state_options:
 			status->setText(QObject::tr("Reset speakers"));
-			progress->setProgress(20);
+			progress->setProgress(30);
+			break;
+		case state_dialtone:
+			status->setText(QObject::tr("Turning off dialtone"));
+			progress->setProgress(40);
 			break;
 		case state_dialing:
-			status->setText(QObject::tr("Dial number"));
-			progress->setProgress(30);
+			if(oldstate != state_dialing) status->setText(QObject::tr("Dial number"));
+			else status->setText(QObject::tr("Line busy, redialing number"));
+			progress->setProgress(50);
 			break;
 		case state_online:
 			status->setText(QObject::tr("Connection established"));

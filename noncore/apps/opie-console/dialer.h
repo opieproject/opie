@@ -15,19 +15,24 @@ class Dialer : public QDialog
 
 	public slots:
 		void slotCancel();
+		void slotAutostart();
 
 	private:
 		void switchState(int newstate);
 		void reset();
 		void dial(const QString& number);
+		void trydial(const QString& number);
 
 		void send(const QString& msg);
 		QString receive();
 
 		enum States
 		{
+			state_cancel,
+			state_preinit,
 			state_init,
 			state_options,
+			state_dialtone,
 			state_dialing,
 			state_online
 		};
@@ -36,6 +41,8 @@ class Dialer : public QDialog
 		QProgressBar *progress;
 		QPushButton *cancel;
 		int state;
+		int usercancel;
+		QString m_number;
 };
 
 #endif
