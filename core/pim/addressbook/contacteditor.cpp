@@ -1013,7 +1013,7 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
 				strMiddleName = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
 				spPos = simplifiedName.find( ' ', spPos2 + 1, TRUE );
-				strLastName = simplifiedName.mid( spPos2 + 1, (spPos - 1) - spPos );
+				strLastName = simplifiedName.mid( spPos2 + 1, (spPos - 1) - spPos2 );
 				strSuffix = simplifiedName.mid( spPos + 1 );
 				break;
 
@@ -1023,7 +1023,7 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
 				strFirstName = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
 				spPos = simplifiedName.find( ' ', spPos2 + 1, TRUE );
-				strMiddleName = simplifiedName.mid( spPos2 + 1, (spPos - 1) - spPos );
+				strMiddleName = simplifiedName.mid( spPos2 + 1, (spPos - 1) - spPos2 );
 				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
 				strLastName = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
 				strSuffix = simplifiedName.mid( spPos2 + 1 );
@@ -1035,7 +1035,7 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
 				strFirstName = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
 				spPos = simplifiedName.find( ' ', spPos2 + 1, TRUE );
-				strMiddleName = simplifiedName.mid( spPos2 + 1, (spPos - 1) - spPos );
+				strMiddleName = simplifiedName.mid( spPos2 + 1, (spPos - 1) - spPos2 );
 				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
 				strLastName = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
 				strSuffix = simplifiedName.mid( spPos2 + 1 );
@@ -1069,7 +1069,7 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
 				strFirstName = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
 				spPos = simplifiedName.find( ' ', spPos2 + 1, TRUE );
-				strMiddleName = simplifiedName.mid( spPos2 + 1, (spPos - 1) - spPos );
+				strMiddleName = simplifiedName.mid( spPos2 + 1, (spPos - 1) - spPos2 );
 				strSuffix = simplifiedName.mid( spPos + 1 );
 				break;
 
@@ -1079,7 +1079,7 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
 				strTitle = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
 				spPos = simplifiedName.find( ' ', spPos2 + 1, TRUE );
-				strFirstName = simplifiedName.mid( spPos2 + 1, (spPos - 1) - spPos );
+				strFirstName = simplifiedName.mid( spPos2 + 1, (spPos - 1) - spPos2 );
 				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
 				strMiddleName = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
 				strSuffix = simplifiedName.mid( spPos2 + 1 );
@@ -1379,6 +1379,7 @@ void ContactEditor::saveEntry() {
 		ent.setFirstName( txtFirstName->text() );
 		ent.setLastName( txtLastName->text() );
 		ent.setMiddleName( txtMiddleName->text() );
+		ent.setSuffix( txtSuffix->text() );
 
 	//}
 
