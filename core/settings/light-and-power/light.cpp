@@ -44,6 +44,7 @@
 #include <qcombobox.h>
 #include <qgroupbox.h>
 #include <qspinbox.h>
+#include <qpushbutton.h>
 #include <qlistbox.h>
 #include <qdir.h>
 #if QT_VERSION >= 300
@@ -58,19 +59,18 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
     : LightSettingsBase( parent, name, TRUE, fl )
 {
 
-    if ( ODevice::inst()->model() ==  Model_iPAQ_H31xx ||
-         ODevice::inst()->model() ==  Model_iPAQ_H36xx ||
-         ODevice::inst()->model() ==  Model_iPAQ_H37xx ||
-         ODevice::inst()->model() ==  Model_iPAQ_H38xx ) {
+    if ( ODevice::inst()->hasLightSensor() ) {
         // Not supported yet - hide until implemented
-        IpaqGroupBox->setEnabled( false );
-        IpaqGroupBoxAC->setEnabled( false );
-        LightSensorGroupBox->setEnabled( false );
+        auto_brightness->setEnabled( false );
+        CalibrateLightSensor->setEnabled( false );
+        auto_brightness_ac_3->setEnabled( false );
+        CalibrateLightSensorAC->setEnabled( false );
     } else {
         // if ipaq no need to show the sensor box
-        IpaqGroupBox->hide();
-        IpaqGroupBoxAC->hide();
-        LightSensorGroupBox->hide();
+        auto_brightness->hide();
+        CalibrateLightSensor->hide();
+        auto_brightness_ac_3->hide();
+        CalibrateLightSensorAC->hide();
     }
 
     Config config( "qpe" );
@@ -80,28 +80,54 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
 
     // battery spinboxes
     interval = config.readNumEntry( "Interval_Dim", 20 );
-    interval_dim->setValue( interval );
+    if ( config.readNumEntry("Dim",1) == 0 ) {
+        interval_dim->setSpecialValueText( tr("never") );
+    } else {
+        interval_dim->setValue( interval );
+    }
+
     interval = config.readNumEntry( "Interval_LightOff", 30 );
-    interval_lightoff->setValue( interval );
+    if ( config.readNumEntry("LightOff",1) == 0 ) {
+        interval_lightoff->setSpecialValueText( tr("never") );
+    } else {
+        interval_lightoff->setValue( interval );
+    }
+
     interval = config.readNumEntry( "Interval", 60 );
     if ( interval > 3600 ) interval /= 1000; // compatibility (was millisecs)
     interval_suspend->setValue( interval );
 
     // ac spinboxes
     interval = config.readNumEntry( "Interval_DimAC", 20 );
+    if ( config.readNumEntry("DimAC",1) == 0 ) {
+        interval_dim_ac_3->setSpecialValueText( tr("never") );
+    } else {
     interval_dim_ac_3->setValue( interval );
+    }
+
     interval = config.readNumEntry( "Interval_LightOffAC", 30 );
-    interval_lightoff_ac_3->setValue( interval );
+    if ( config.readNumEntry("LightOffAC",1) == 0 ) {
+        interval_lightoff_ac_3->setSpecialValueText( tr("never") );
+    } else {
+        interval_lightoff_ac_3->setValue( interval );
+    }
+
     interval = config.readNumEntry( "IntervalAC", 60 );
     if ( interval > 3600 ) {
         interval /= 1000; // compatibility (was millisecs)
     }
-    interval_suspend_ac_3->setValue( interval );
+    if ( config.readNumEntry("NoApmAC", 0) == 0 ) {
+        interval_suspend_ac_3->setSpecialValueText( tr("never") );
+    } else {
+        interval_suspend_ac_3->setValue( interval );
+    }
 
 
     // battery check and slider
-    screensaver_dim->setChecked( config.readNumEntry("Dim",1) != 0 );
-    screensaver_lightoff->setChecked( config.readNumEntry("LightOff",1) != 0 );
+
+
+
+
     LcdOffOnly->setChecked( config.readNumEntry("LcdOffOnly",0) != 0 );
     int maxbright = ODevice::inst ( )-> displayBrightnessResolution ( );
     initbright = config.readNumEntry("Brightness",255);
@@ -112,10 +138,7 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
     brightness->setValue( (maxbright*255 - initbright*maxbright)/255 );
 
     // ac check and slider
-    screensaver_dim_ac_3->setChecked( config.readNumEntry("DimAC",1) != 0 );
-    screensaver_lightoff_ac_3->setChecked( config.readNumEntry("LightOffAC",1) != 0 );
     LcdOffOnly_2_3->setChecked( config.readNumEntry("LcdOffOnlyAC",0) != 0 );
-    noApmAC->setChecked( config.readNumEntry("NoApmAC",0) != 0 );
     int maxbright_ac = ODevice::inst ( )-> displayBrightnessResolution ( );
     initbright_ac = config.readNumEntry("BrightnessAC",255);
     brightness_ac_3->setMaxValue( maxbright_ac );
@@ -129,10 +152,10 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
     config.setGroup( "Ipaqlightsensor" );
     auto_brightness->setChecked( config.readNumEntry("LightSensor",1) != 0 );
     auto_brightness_ac_3->setChecked( config.readNumEntry("LightSensorAC",1) != 0 );
-    LightStepSpin->setValue( config.readNumEntry("Steps", 10 ) );
-    LightMinValueSlider->setValue( config.readNumEntry("MinValue", 70 ) );
-    connect( LightStepSpin, SIGNAL( valueChanged( int ) ), this, SLOT( slotSliderTicks( int ) ) ) ;
-    LightShiftSpin->setValue( config.readNumEntry("Shift", 0 ) );
+    //LightStepSpin->setValue( config.readNumEntry("Steps", 10 ) );
+    //LightMinValueSlider->setValue( config.readNumEntry("MinValue", 70 ) );
+    //connect( LightStepSpin, SIGNAL( valueChanged( int ) ), this, SLOT( slotSliderTicks( int ) ) ) ;
+    //LightShiftSpin->setValue( config.readNumEntry("Shift", 0 ) );
 
     // advanced settings
     Config conf("apm");
@@ -140,8 +163,6 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
     warnintervalBox->setValue( conf.readNumEntry("checkinterval", 10000)/1000 );
     lowSpinBox->setValue( conf.readNumEntry("powerverylow", 10 ) );
     criticalSpinBox->setValue( conf.readNumEntry("powercritical", 5 ) );
-
-
 
     connect( brightness, SIGNAL( valueChanged(int) ), this, SLOT( applyBrightness() ) );
     connect( brightness_ac_3, SIGNAL( valueChanged(int) ), this, SLOT( applyBrightnessAC() ) );
@@ -152,7 +173,7 @@ LightSettings::~LightSettings()
 }
 
 void LightSettings::slotSliderTicks( int steps ) {
-    LightMinValueSlider->setTickInterval( steps );
+//    LightMinValueSlider->setTickInterval( steps );
 }
 
 static void set_fl(int bright)
@@ -171,21 +192,22 @@ void LightSettings::reject()
 
 void LightSettings::accept()
 {
-    if ( qApp->focusWidget() )
+    if ( qApp->focusWidget() ) {
         qApp->focusWidget()->clearFocus();
+    }
 
     applyBrightness();
 
     // bat
-    int i_dim =      (screensaver_dim->isChecked() ? interval_dim->value() : 0);
-    int i_lightoff = (screensaver_lightoff->isChecked() ? interval_lightoff->value() : 0);
+    int i_dim =      ( !( interval_dim->specialValueText() == tr("never") ) ? interval_dim->value() : 0);
+    int i_lightoff = ( !( interval_lightoff->specialValueText() == tr("never") )  ? interval_lightoff->value() : 0);
     int i_suspend =  interval_suspend->value();
     QCopEnvelope e("QPE/System", "setScreenSaverIntervals(int,int,int)" );
     e << i_dim << i_lightoff << i_suspend;
 
     // ac
-    int i_dim_ac =      (screensaver_dim_ac_3->isChecked() ? interval_dim_ac_3->value() : 0);
-    int i_lightoff_ac = (screensaver_lightoff_ac_3->isChecked() ? interval_lightoff_ac_3->value() : 0);
+    int i_dim_ac =      ( !( interval_dim_ac_3->specialValueText() == tr("never") ) ? interval_dim_ac_3->value() : 0);
+    int i_lightoff_ac = ( !( interval_lightoff_ac_3->specialValueText() == tr("never") ) ? interval_lightoff_ac_3->value() : 0);
     int i_suspend_ac =  interval_suspend_ac_3->value();
     QCopEnvelope e_ac("QPE/System", "setScreenSaverIntervalsAC(int,int,int)" );
     e << i_dim_ac << i_lightoff_ac << i_suspend_ac;
@@ -194,8 +216,8 @@ void LightSettings::accept()
     config.setGroup( "Screensaver" );
 
     // bat
-    config.writeEntry( "Dim", (int)screensaver_dim->isChecked() );
-    config.writeEntry( "LightOff", (int)screensaver_lightoff->isChecked() );
+    config.writeEntry( "Dim", interval_dim->specialValueText() == tr("never") );
+    config.writeEntry( "LightOff", interval_lightoff->specialValueText() == tr("never") );
     config.writeEntry( "LcdOffOnly", (int)LcdOffOnly->isChecked() );
     config.writeEntry( "Interval_Dim", interval_dim->value() );
     config.writeEntry( "Interval_LightOff", interval_lightoff->value() );
@@ -204,10 +226,10 @@ void LightSettings::accept()
     ( brightness->value() ) * 255 / brightness->maxValue() );
 
     // ac
-    config.writeEntry( "DimAC", (int)screensaver_dim_ac_3->isChecked() );
-    config.writeEntry( "LightOffAC", (int)screensaver_lightoff_ac_3->isChecked() );
+    config.writeEntry( "DimAC", interval_dim_ac_3->specialValueText() == tr("never") );
+    config.writeEntry( "LightOffAC", interval_lightoff_ac_3->specialValueText() == tr("never") );
     config.writeEntry( "LcdOffOnlyAC", (int)LcdOffOnly_2_3->isChecked() );
-    config.writeEntry( "NoAPmAC", (int)noApmAC->isChecked() );
+    config.writeEntry( "NoAPmAC", interval_suspend_ac_3->specialValueText() == tr("never") );
     config.writeEntry( "Interval_DimAC", interval_dim_ac_3->value() );
     config.writeEntry( "Interval_LightOffAC", interval_lightoff_ac_3->value() );
     config.writeEntry( "IntervalAC", interval_suspend_ac_3->value() );
@@ -216,19 +238,14 @@ void LightSettings::accept()
 
 
     // only make ipaq light sensor entries in config file if on an ipaq
-    if ( ODevice::inst()->model() ==  Model_iPAQ_H31xx ||
-         ODevice::inst()->model() ==  Model_iPAQ_H36xx ||
-         ODevice::inst()->model() ==  Model_iPAQ_H37xx ||
-         ODevice::inst()->model() ==  Model_iPAQ_H38xx ) {
-
+    if ( ODevice::inst()->hasLightSensor() ) {
         // ipaq sensor
         config.setGroup( "Ipaqlightsensor" );
-
         config.writeEntry( "LightSensor", (int)auto_brightness->isChecked() );
         config.writeEntry( "LightSensorAC", (int)auto_brightness_ac_3->isChecked() );
-        config.writeEntry( "Steps", LightStepSpin->value() );
-        config.writeEntry( "MinValue", LightMinValueSlider->value() );
-        config.writeEntry( "Shift", LightShiftSpin->value() );
+        //config.writeEntry( "Steps", LightStepSpin->value() );
+        //onfig.writeEntry( "MinValue", LightMinValueSlider->value() );
+        //config.writeEntry( "Shift", LightShiftSpin->value() );
     }
 
     config.write();
