@@ -16,6 +16,7 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	launcher/clockapplet \
 	launcher/netmonapplet \
 	launcher/screenshotapplet \
+	launcher/clipboardapplet \
 	launcher/vmemo \
 	netsetup/dialup \
 	netsetup/lan \
