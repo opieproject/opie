@@ -48,7 +48,9 @@ signals:
 
 private:
     QColor m_color;
-    bool m_active;
+    bool m_active : 1;
+    class ColorPanelButtonPrivate;
+    ColorPanelButtonPrivate *d;
 };
 
 class ColorPopupMenu : public QPopupMenu
@@ -60,6 +62,8 @@ public:
     ~ColorPopupMenu();
 
 private:
+    class ColorPopupMenuPrivate;
+    ColorPopupMenuPrivate *d;
     QColor       m_color;
     QWidget*     colorPanel;
     QGridLayout* colorLayout;
