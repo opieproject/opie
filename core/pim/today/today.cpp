@@ -94,7 +94,8 @@ void Today::draw() {
 
 void Today::init() {
   QDate date = QDate::currentDate();
-  QString time = (tr( date.toString() ), white);
+  QString time = (tr( date.toString()) );
+//  QString time = (tr( date.toString()) , white);
   
   TextLabel1->setText(time);
   db = new DateBookDB;
@@ -186,64 +187,64 @@ void Today::getDates() {
     QString msg;
     
     for ( QValueList<EffectiveEvent>::ConstIterator it=list.begin();
-	  it!=list.end(); ++it ) {
+    it!=list.end(); ++it ) {
       
       count++;
       
       if ( count <= MAX_LINES_MEET ) {
-	//cout << time.toString() << endl;
-	//cout << TimeString::dateString((*it).event().end()) << endl;
-	
-	// decide if to get all day or only later appointments
-	if (!ONLY_LATER) {
-	  msg += "<B>" + (*it).description() + "</B>";
-	  if ( (*it).event().hasAlarm() ) {
-	    msg += " <b>[with alarm]</b>";
-	  }
-	  // include location or not
-	  if (SHOW_LOCATION == 1) {
-	    msg += "<BR><i>" + (*it).location();
-	    msg += "</i>";
-	  }
-	  
-	  if ( (TimeString::timeString(QTime((*it).event().start().time()) ) == "00:00") &&  (TimeString::timeString(QTime((*it).event().end().time()) ) == "23:59") ) {
-	    msg += "<br>All day";
-	  }  else {
-	    // start time of event
-	    msg += "<br>" + TimeString::timeString(QTime((*it).event().start().time()) )
-	      // end time of event
-	      + "<b> - </b>" + TimeString::timeString(QTime((*it).event().end().time()) );
-	  }
-	  msg += "<BR>";
-	  // include possible note or not
-	  if (SHOW_NOTES == 1) {
-	    msg += " <i>note</i>:" +((*it).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
-	  }
-	} else if ((time.toString() <= TimeString::dateString((*it).event().end())) ) {
-	  msg += "<B>" + (*it).description() + "</B>";
-	  if ( (*it).event().hasAlarm() ) {
-	    msg += " <b>[with alarm]</b>";
-	  }
-	  // include location or not
-	  if (SHOW_LOCATION == 1) {
-	    msg+= "<BR><i>" + (*it).location();
-	    msg += "</i>";
-	  }
-	  
-	  if ( (TimeString::timeString(QTime((*it).event().start().time()) ) == "00:00") &&  (TimeString::timeString(QTime((*it).event().end().time()) ) == "23:59") ) {
-	    msg += "<br>All day";
-	  } else {
-	    // start time of event
-	    msg += "<br>" + TimeString::timeString(QTime((*it).event().start().time()) )
-	      // end time of event
-	      + "<b> - </b>" + TimeString::timeString(QTime((*it).event().end().time()) );
-	  }
-	  msg += "<BR>";
-	  // include possible note or not
-	  if (SHOW_NOTES == 1) {
-	    msg += " <i>note</i>:" +((*it).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
-	  }
-	}
+  //cout << time.toString() << endl;
+  //cout << TimeString::dateString((*it).event().end()) << endl;
+  
+  // decide if to get all day or only later appointments
+  if (!ONLY_LATER) {
+    msg += "<B>" + (*it).description() + "</B>";
+    if ( (*it).event().hasAlarm() ) {
+      msg += " <b>[with alarm]</b>";
+    }
+    // include location or not
+    if (SHOW_LOCATION == 1) {
+      msg += "<BR><i>" + (*it).location();
+      msg += "</i>";
+    }
+    
+    if ( (TimeString::timeString(QTime((*it).event().start().time()) ) == "00:00") &&  (TimeString::timeString(QTime((*it).event().end().time()) ) == "23:59") ) {
+      msg += "<br>All day";
+    }  else {
+      // start time of event
+      msg += "<br>" + TimeString::timeString(QTime((*it).event().start().time()) )
+        // end time of event
+        + "<b> - </b>" + TimeString::timeString(QTime((*it).event().end().time()) );
+    }
+    msg += "<BR>";
+    // include possible note or not
+    if (SHOW_NOTES == 1) {
+      msg += " <i>note</i>:" +((*it).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
+    }
+  } else if ((time.toString() <= TimeString::dateString((*it).event().end())) ) {
+    msg += "<B>" + (*it).description() + "</B>";
+    if ( (*it).event().hasAlarm() ) {
+      msg += " <b>[with alarm]</b>";
+    }
+    // include location or not
+    if (SHOW_LOCATION == 1) {
+      msg+= "<BR><i>" + (*it).location();
+      msg += "</i>";
+    }
+    
+    if ( (TimeString::timeString(QTime((*it).event().start().time()) ) == "00:00") &&  (TimeString::timeString(QTime((*it).event().end().time()) ) == "23:59") ) {
+      msg += "<br>All day";
+    } else {
+      // start time of event
+      msg += "<br>" + TimeString::timeString(QTime((*it).event().start().time()) )
+        // end time of event
+        + "<b> - </b>" + TimeString::timeString(QTime((*it).event().end().time()) );
+    }
+    msg += "<BR>";
+    // include possible note or not
+    if (SHOW_NOTES == 1) {
+      msg += " <i>note</i>:" +((*it).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
+    }
+  }
       }
     }
     if (msg.isEmpty()) {
@@ -282,31 +283,31 @@ QList<TodoItem> Today::loadTodo(const char *filename) {
       priority = -1;
       completed = -1;
       while((attlist) && (attlist[j])) {
-	if(!attlist[j]->name) {
-	  continue;
-	}
-	if(!strcmp(attlist[j]->name, "Description")) {
-	  description = attlist[j]->value;
-	}
-	// get Completed tag (0 or 1)
-	if(!strcmp(attlist[j]->name, "Completed")) {
-	  QString s = attlist[j]->name;
-	  if(s == "Completed") {
-	    completed = QString(attlist[j]->value).toInt();
-	  }
-	}
-	// get Priority (1 to 5)
-	if(!strcmp(attlist[j]->name, "Priority")) {
-	  QString s = attlist[j]->name;
-	  if(s == "Priority") {
-	    priority = QString(attlist[j]->value).toInt(); 
-	  }
-	}
-	j++;
+  if(!attlist[j]->name) {
+    continue;
+  }
+  if(!strcmp(attlist[j]->name, "Description")) {
+    description = attlist[j]->value;
+  }
+  // get Completed tag (0 or 1)
+  if(!strcmp(attlist[j]->name, "Completed")) {
+    QString s = attlist[j]->name;
+    if(s == "Completed") {
+      completed = QString(attlist[j]->value).toInt();
+    }
+  }
+  // get Priority (1 to 5)
+  if(!strcmp(attlist[j]->name, "Priority")) {
+    QString s = attlist[j]->name;
+    if(s == "Priority") {
+      priority = QString(attlist[j]->value).toInt(); 
+    }
+  }
+  j++;
       }
       if(description) {
-	tmp = new TodoItem(description, completed, priority);
-	loadtodolist.append(tmp);
+  tmp = new TodoItem(description, completed, priority);
+  loadtodolist.append(tmp);
       }
       i++;
     }
@@ -353,10 +354,10 @@ void Today::getTodo() {
     TodoItem *item;
     for( item = todolist.first(); item; item = todolist.next()) {
       if (!(item->getCompleted() == 1) ) {
-	count++;
-	if (count <= MAX_LINES_TASK) {
-	  tmpout += "<b>- </b>" + QString(((item)->getDescription().mid(0, MAX_CHAR_CLIP) + ("<br>")));
-	}
+  count++;
+  if (count <= MAX_LINES_TASK) {
+    tmpout += "<b>- </b>" + QString(((item)->getDescription().mid(0, MAX_CHAR_CLIP) + ("<br>")));
+  }
       }
     }
   }
