@@ -74,7 +74,7 @@ CardMonitor::~CardMonitor() {
 
 void CardMonitor::popUp( QString message, QString icon ) {
     if ( ! popupMenu ) {
-  popupMenu = new QPopupMenu(0);
+  popupMenu = new QPopupMenu();
     }
 
     popupMenu->clear();
@@ -95,8 +95,6 @@ void CardMonitor::popUp( QString message, QString icon ) {
 
 void CardMonitor::popupTimeout() {
     popupMenu->hide();
-    popupMenu=0;
-    if(popupMenu) delete popupMenu;
 }
 
 void CardMonitor::mousePressEvent( QMouseEvent * ) {
