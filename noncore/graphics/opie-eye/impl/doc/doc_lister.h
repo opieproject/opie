@@ -7,6 +7,8 @@
 
 #include <iface/dirlister.h>
 
+#include <qpe/applnk.h>
+
 #include <qstring.h>
 #include <qmap.h>
 
@@ -38,6 +40,8 @@ private:
     QMap<QString,QString> m_namemap,m_filemap;
     int m_catFilter;
     bool matchCat(const AppLnk* app);
+    bool m_docreads;
+    DocLnkSet m_ds;
 
 protected slots:
     virtual void slotFullInfo(const QString&, const QString&);

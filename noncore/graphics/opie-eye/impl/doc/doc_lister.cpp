@@ -38,6 +38,7 @@ Doc_DirLister::Doc_DirLister()
 
     m_namemap.clear();
     m_filemap.clear();
+    m_docreads = false;
 }
 
 QString Doc_DirLister::defaultPath()const {
@@ -56,11 +57,13 @@ bool Doc_DirLister::matchCat(const AppLnk* app)
 QString Doc_DirLister::setStartPath(const QString&) {
     static const QString Mtype_str("image/jpeg;image/gif;image/bmp;image/png");
     if (m_namemap.isEmpty()) {
-        DocLnkSet ds;
-        Global::findDocuments(&ds,Mtype_str);
-        QListIterator<DocLnk> dit(ds.children());
+        if (!m_docreads) {
+            Global::findDocuments(&m_ds,Mtype_str);
+            m_docreads = true;
+        }
+        QListIterator<DocLnk> dit(m_ds.children());
         for( ; dit.current(); ++dit) {
-            if (! (*dit)->isValid()) continue;
+//            if (! (*dit)->isValid()) continue;
             if (!matchCat((*dit))) continue;
             m_namemap[(*dit)->name()]=(*dit)->file();
             m_filemap[(*dit)->file()]=(*dit)->name();
