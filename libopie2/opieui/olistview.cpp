@@ -45,8 +45,8 @@ namespace Ui   {
  * OListView
  *======================================================================================*/
 
-OListView::OListView( QWidget *parent, const char *name )
-          :QListView( parent, name )
+OListView::OListView( QWidget *parent, const char *name, WFlags fl )
+          :QListView( parent, name, fl )
 {
     //FIXME: get from global settings and calculate ==> see oglobalsettings.*
 
