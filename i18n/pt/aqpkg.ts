@@ -216,11 +216,11 @@
     </message>
     <message>
         <source>Linked %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligado %1 a %2</translation>
     </message>
     <message>
         <source>Failed to link %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou a ligação de %1 a %2</translation>
     </message>
     <message>
         <source>Removed %1</source>
@@ -247,11 +247,11 @@
     </message>
     <message>
         <source>Type the text to search for here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza o texto para procurar aqui.</translation>
     </message>
     <message>
         <source>Click here to hide the Quick Jump toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para esconder a barra de ferramentas de salto rápido.</translation>
     </message>
     <message>
         <source>Update lists</source>
@@ -259,7 +259,7 @@
     </message>
     <message>
         <source>Click here to update package lists from servers.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para actualizar a lista de pacotes dos servidores.</translation>
     </message>
     <message>
         <source>Upgrade</source>
@@ -267,15 +267,15 @@
     </message>
     <message>
         <source>Click here to upgrade all installed packages if a newer version is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para actualizar todos os pacotes que tenham disponível uma versão mais recente.</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Obter</translation>
     </message>
     <message>
         <source>Click here to download the currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para obter os pacotes seleccionados.</translation>
     </message>
     <message>
         <source>Apply changes</source>
@@ -283,7 +283,7 @@
     </message>
     <message>
         <source>Click here to install, remove or upgrade currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para instalar, remover ou actualizar os pacotes seleccionados.</translation>
     </message>
     <message>
         <source>Actions</source>
@@ -295,7 +295,7 @@
     </message>
     <message>
         <source>Click here to show packages available which have not been installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para mostrar os pacotes disponíveis que não estão instalados.</translation>
     </message>
     <message>
         <source>Show installed packages</source>
@@ -303,7 +303,7 @@
     </message>
     <message>
         <source>Click here to show packages currently installed on this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para motrar os pacotes instalados neste dispositivo.</translation>
     </message>
     <message>
         <source>Show updated packages</source>
@@ -311,7 +311,7 @@
     </message>
     <message>
         <source>Click here to show packages currently installed on this device which have a newer version available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para motrar os pacotes instalados neste dispositivo e que tenham disponível uma versão mais recente.</translation>
     </message>
     <message>
         <source>Filter by category</source>
@@ -319,15 +319,15 @@
     </message>
     <message>
         <source>Click here to list packages belonging to one category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para mostrar os pacotes que pertençam a uma determinada categoria.</translation>
     </message>
     <message>
         <source>Set filter category</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtrar por categoria</translation>
     </message>
     <message>
         <source>Click here to change package category to used filter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para mudar a filtragem de pacotes por categoria.</translation>
     </message>
     <message>
         <source>Find</source>
@@ -335,23 +335,23 @@
     </message>
     <message>
         <source>Click here to search for text in package names.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para procurar pacotes por texto no nome.</translation>
     </message>
     <message>
         <source>Find next</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar Próxima</translation>
     </message>
     <message>
         <source>Click here to find the next package name containing the text you are searching for.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para procurar o próximo pacote que contenha o texto que procura no nome.</translation>
     </message>
     <message>
         <source>Quick Jump keypad</source>
-        <translation type="unfinished"></translation>
+        <translation>Teclado de Salto Rápido</translation>
     </message>
     <message>
         <source>Click here to display/hide keypad to allow quick movement through the package list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para mostrar ou esconder o teclado que permite um movimento rápido na lista de pacotes.</translation>
     </message>
     <message>
         <source>View</source>
@@ -363,11 +363,11 @@
     </message>
     <message>
         <source>Click here to configure this application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para configurar esta aplicação.</translation>
     </message>
     <message>
         <source>Click here to hide the find toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para esconder a barra de pesquisa.</translation>
     </message>
     <message>
         <source>Servers:</source>
@@ -375,7 +375,7 @@
     </message>
     <message>
         <source>Click here to select a package feed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para seleccionar uma fonte de pacotes.</translation>
     </message>
     <message>
         <source>Packages</source>
@@ -389,7 +389,13 @@ A blue dot next to the package name indicates that the package is currently inst
 A blue dot with a star indicates that a newer version of the package is available from the server feed.
 
 Click inside the box at the left to select a package.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta é a lista de todos os pacotes disponíveis no servidor seleccionado.
+
+Um ponto azul perto do nome do pacote indica que está instalado.
+
+Um ponto azul com uma estrela indica que existe uma nova versão disponível neste servidor.
+
+Clique na caixa à esquerda para seleccionar um pacote.</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -397,7 +403,7 @@ Click inside the box at the left to select a package.</source>
     </message>
     <message>
         <source>Click here to uninstall the currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para desinstalar os pacotes seleccionado.</translation>
     </message>
     <message>
         <source>Building server list:
@@ -422,7 +428,11 @@ is NOT recommended!
 
 Are you sure?
 </source>
-        <translation type="unfinished"></translation>
+        <translation>ATENÇÃO: Não é recomendada
+a actualização do Opie/Qtopia 
+enquanto o está a usar!
+
+Tem a certeza?</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -451,19 +461,19 @@ Are you sure?
     </message>
     <message>
         <source>Download to where</source>
-        <translation type="unfinished"></translation>
+        <translation>Obter para onde</translation>
     </message>
     <message>
         <source>Enter path to download to</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza a directoria para onde gravar</translation>
     </message>
     <message>
         <source>Install Remote Package</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalar Pacotes Remotos</translation>
     </message>
     <message>
         <source>Enter package location</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza a localização do pacote</translation>
     </message>
     <message>
         <source>Nothing to do</source>
@@ -501,7 +511,7 @@ Are you sure?
     </message>
     <message>
         <source>Updating Launcher...</source>
-        <translation type="unfinished"></translation>
+        <translation>A actualizar a lista de aplicações...</translation>
     </message>
 </context>
 <context>
@@ -559,7 +569,7 @@ Are you sure?
     </message>
     <message>
         <source>N/A</source>
-        <translation type="unfinished"></translation>
+        <translation>N/A</translation>
     </message>
     <message>
         <source>Package - %1
@@ -607,7 +617,7 @@ Are you sure?
     </message>
     <message>
         <source>Proxies</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxies</translation>
     </message>
     <message>
         <source>New</source>
@@ -647,11 +657,11 @@ Are you sure?
     </message>
     <message>
         <source>Link to root</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligar à raiz </translation>
     </message>
     <message>
         <source>HTTP Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy HTTP</translation>
     </message>
     <message>
         <source>Enabled</source>
@@ -659,15 +669,15 @@ Are you sure?
     </message>
     <message>
         <source>FTP Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy FTP</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>Conta:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Palavra Chave:</translation>
     </message>
 </context>
 </TS>

@@ -195,11 +195,11 @@ contacto para %1?</translation>
     </message>
     <message>
         <source>Use Wildcards (*,?)</source>
-        <translation type="unfinished">Usar</translation>
+        <translation>Usar expressões (*,?)</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorar letras grandes/pequenas</translation>
     </message>
     <message>
         <source>Mail</source>
@@ -278,31 +278,31 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Click on tab to select one</source>
-        <translation type="unfinished">C</translation>
+        <translation>Clique na pasta para seleccionar uma</translation>
     </message>
     <message>
         <source>Settings for the search query style</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações para o estilo da procura</translation>
     </message>
     <message>
         <source>Search widget expects regular expressions if selected</source>
-        <translation type="unfinished"></translation>
+        <translation>A procura usa expressões regulares se for selecionado</translation>
     </message>
     <message>
         <source>Search widget just expects simple wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>A procura usa apenas expressões simples</translation>
     </message>
     <message>
         <source>If selected, search differs between upper and lower chars</source>
-        <translation type="unfinished"></translation>
+        <translation>Se selecionado, a procura diferencia entre os caractéres grandes e pequenos</translation>
     </message>
     <message>
         <source>Font size for list- and card view</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamanho da fonte para a lista e para a vista dos cartões</translation>
     </message>
     <message>
         <source>Fontsettings for list and card view</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações da fonte para a lista e para a vista de cartões</translation>
     </message>
     <message>
         <source>Use Sharp&apos;s mail application if available</source>
@@ -326,19 +326,19 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Add selected attribute from list below to the upper list</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicione os atributos selecionados da lista abaixo para a lista acima</translation>
     </message>
     <message>
         <source>Remove the selected attribute from the upper list</source>
-        <translation type="unfinished"></translation>
+        <translation>Remove os atributos selecionados da lista acima</translation>
     </message>
     <message>
         <source>Order (up -&gt; down) defines the primary contact shown in the second column of the list view</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordena (cima -&gt; baixo) define o contacto primário a mostrar na segunda coluna da vista em lista</translation>
     </message>
     <message>
         <source>Tool-/Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>Ferramenta-/Menu</translation>
     </message>
     <message>
         <source>Fixed</source>
@@ -346,7 +346,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Switch to fixed menu-/toolbars after restarting application !</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar para menus ou barras de ferramentas fixas depois de reiniciar a aplicação!</translation>
     </message>
     <message>
         <source>Moveable</source>
@@ -354,7 +354,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Switch to moveable menu-/toolbars after restarting application !</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar para menus ou barras de ferramentas amovíveis depois de reiniciar a aplicação!</translation>
     </message>
 </context>
 <context>
@@ -1305,7 +1305,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Palestinian Sovereign Areas</source>
-        <translation type="unfinished">Palestina</translation>
+        <translation>Territórios Ocupados Palestinianos</translation>
     </message>
     <message>
         <source>Pitcairn Islands</source>
@@ -1317,15 +1317,15 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha para introduzir o ultimo, do meio e primeiro nome</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza o nome completo directamente. Se tiver um apelido com várias palavras (por exemplo, &quot;da Silva&quot;), escreva &lt;apelido&gt;,&lt;nomes&gt; tal como: &quot;da Silva, Rosa Margarida&quot;</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation type="unfinished"></translation>
+        <translation>O título (emprego)..</translation>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
@@ -1333,15 +1333,15 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation type="unfinished"></translation>
+        <translation>O local de trabalho do contacto</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
-        <translation type="unfinished"></translation>
+        <translation>Use para escolher o atributo a mudar</translation>
     </message>
     <message>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
-        <translation type="unfinished"></translation>
+        <translation>Use para escolher o formato para gravar o nome e mostrar na lista</translation>
     </message>
 </context>
 <context>

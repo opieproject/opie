@@ -3,7 +3,7 @@
     <name>ATConfigDialog</name>
     <message>
         <source>Dialing parameter setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuração de parametros de ligação</translation>
     </message>
     <message>
         <source>Settings1</source>
@@ -55,11 +55,11 @@
     </message>
     <message>
         <source>Dial time </source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo de ligação</translation>
     </message>
     <message>
         <source>Delay before redial </source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo de espera entre tentativas</translation>
     </message>
     <message>
         <source>Number of tries </source>
@@ -67,7 +67,7 @@
     </message>
     <message>
         <source>DTR drop time (0=no) </source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo para desligar DTR (0=não)</translation>
     </message>
     <message>
         <source>Auto bps detect </source>
@@ -83,11 +83,11 @@
     </message>
     <message>
         <source>Modem has DCD line </source>
-        <translation type="unfinished"></translation>
+        <translation>O Modem tem DCD</translation>
     </message>
     <message>
         <source>Multi-line untag </source>
-        <translation type="unfinished"></translation>
+        <translation>Desligar multi-ligações</translation>
     </message>
 </context>
 <context>
@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>Or peer mac address</source>
-        <translation type="unfinished"></translation>
+        <translation>Ou endereço MAC do destino</translation>
     </message>
 </context>
 <context>
@@ -185,7 +185,7 @@
     <name>EditBase</name>
     <message>
         <source>Editor Base</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor Básico</translation>
     </message>
     <message>
         <source>Terminal Emulation:</source>
@@ -193,11 +193,11 @@
     </message>
     <message>
         <source>IO Layer:</source>
-        <translation type="unfinished"></translation>
+        <translation>Camada IO:</translation>
     </message>
     <message>
         <source>Look</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver</translation>
     </message>
     <message>
         <source>Foreground:</source>
@@ -240,18 +240,18 @@
     <name>FileReceive</name>
     <message>
         <source>Could not start</source>
-        <translation type="unfinished">Nã</translation>
+        <translation>Não foi possível iniciar</translation>
     </message>
 </context>
 <context>
     <name>FileTransfer</name>
     <message>
         <source>Was not able to fork</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível duplicar processo (fork)</translation>
     </message>
     <message>
         <source>Could not start</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível iniciar</translation>
     </message>
 </context>
 <context>
@@ -273,7 +273,7 @@
     </message>
     <message>
         <source>Flow control</source>
-        <translation type="unfinished"></translation>
+        <translation>Controlo (flow)</translation>
     </message>
     <message>
         <source>Hardware</source>
@@ -301,7 +301,7 @@
     </message>
     <message>
         <source>Data Bits</source>
-        <translation type="unfinished"></translation>
+        <translation>Bits de Dados</translation>
     </message>
     <message>
         <source>5</source>
@@ -321,7 +321,7 @@
     </message>
     <message>
         <source>Stop Bits</source>
-        <translation type="unfinished"></translation>
+        <translation>Bits de Paragem</translation>
     </message>
     <message>
         <source>1</source>
@@ -360,15 +360,15 @@
     <name>IOSerial</name>
     <message>
         <source>Not connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Não está ligado</translation>
     </message>
     <message>
         <source>Invalid baud rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidade inválida</translation>
     </message>
     <message>
         <source>Device is already connected</source>
-        <translation type="unfinished"></translation>
+        <translation>O dispositivo já está em uso</translation>
     </message>
 </context>
 <context>
@@ -402,11 +402,11 @@
     </message>
     <message>
         <source>QuickLaunch</source>
-        <translation type="unfinished"></translation>
+        <translation>Execução Rápida</translation>
     </message>
     <message>
         <source>The shell button launches the &quot;default&quot; profile. If there is none default values are taken</source>
-        <translation type="unfinished"></translation>
+        <translation>O botão da concha lança o perfil por omissão. Se não existir nenhum, serão usados os valores por omissão</translation>
     </message>
     <message>
         <source>Transfer file...</source>
@@ -434,15 +434,15 @@
     </message>
     <message>
         <source>Run Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Executar Script</translation>
     </message>
     <message>
         <source>Record Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar Script</translation>
     </message>
     <message>
         <source>Save Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar Script</translation>
     </message>
     <message>
         <source>Open Keyboard...</source>
@@ -458,7 +458,7 @@
     </message>
     <message>
         <source>Scripts</source>
-        <translation type="unfinished"></translation>
+        <translation>Scripts</translation>
     </message>
     <message>
         <source>Copy</source>
@@ -470,11 +470,11 @@
     </message>
     <message>
         <source>Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Script</translation>
     </message>
     <message>
         <source>&lt;qt&gt;There is no Connection.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Não existe ligação.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>History</source>
@@ -485,11 +485,11 @@
     <name>ModemConfigWidget</name>
     <message>
         <source>Modem is attached to:</source>
-        <translation type="unfinished"></translation>
+        <translation>O modem está ligado a:</translation>
     </message>
     <message>
         <source>Enter telefon number here:</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza o número de telefone aqui:</translation>
     </message>
     <message>
         <source>AT commands</source>
@@ -504,7 +504,7 @@
     <name>NoOptions</name>
     <message>
         <source>This Plugin does not support any configurations</source>
-        <translation type="unfinished"></translation>
+        <translation>Este extra não suporta nenhuma configuração</translation>
     </message>
 </context>
 <context>
@@ -519,7 +519,7 @@
     </message>
     <message>
         <source>Auto connect after load</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligar automaticamente ao iniciar</translation>
     </message>
     <message>
         <source>Local Console</source>
@@ -542,15 +542,15 @@
     </message>
     <message>
         <source>Connecting failed for this session.</source>
-        <translation type="unfinished"></translation>
+        <translation>A ligação falhou para esta sessão.</translation>
     </message>
     <message>
         <source>Session failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou a sessão</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Cannot open session: Not all components were found.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Não foi possível abrir a sessão: faltam componentes.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Transfer mode</source>
@@ -602,7 +602,7 @@
     </message>
     <message>
         <source>No file has been specified.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi especificado nenhum ficheiro.</translation>
     </message>
     <message>
         <source>Sending...</source>
@@ -618,7 +618,7 @@
     </message>
     <message>
         <source>The file transfer has been cancelled.</source>
-        <translation type="unfinished"></translation>
+        <translation>A transferência do ficheiro foi cancelada.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -630,7 +630,7 @@
     </message>
     <message>
         <source>Transfer could not be started.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível iniciar a transferência.</translation>
     </message>
     <message>
         <source>No error.</source>
@@ -638,7 +638,7 @@
     </message>
     <message>
         <source>Undefined error occured.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocorreu um erro indefinido.</translation>
     </message>
     <message>
         <source>Incomplete transfer.</source>
@@ -690,7 +690,7 @@
     </message>
     <message>
         <source>Please enter a profile name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza um nome para o perfil.</translation>
     </message>
     <message>
         <source>Z-Modem</source>
@@ -754,7 +754,7 @@
     </message>
     <message>
         <source>Reset speakers</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar Colunas</translation>
     </message>
     <message>
         <source>Turning off dialtone</source>
@@ -774,7 +774,7 @@
     </message>
     <message>
         <source>Dismiss</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -812,15 +812,15 @@
     </message>
     <message>
         <source>Line-break conversions</source>
-        <translation type="unfinished"></translation>
+        <translation>Conversão de quebras de linhas</translation>
     </message>
     <message>
         <source>Inbound</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrada</translation>
     </message>
     <message>
         <source>Outbound</source>
-        <translation type="unfinished"></translation>
+        <translation>Saída</translation>
     </message>
     <message>
         <source>Options</source>

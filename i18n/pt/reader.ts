@@ -46,7 +46,7 @@
     </message>
     <message>
         <source>Autoscroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Deslizamento Automático</translation>
     </message>
     <message>
         <source>Bookmark</source>
@@ -192,11 +192,11 @@ Toque</translation>
     </message>
     <message>
         <source>Ideograms</source>
-        <translation type="unfinished"></translation>
+        <translation>Ideogramas</translation>
     </message>
     <message>
         <source>Ideogram Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Largura das Ideogramas</translation>
     </message>
     <message>
         <source>Apply font
@@ -229,7 +229,8 @@ Toque</translation>
     <message>
         <source>Swap Tap
 Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar Acção
+do Toque</translation>
     </message>
 </context>
 <context>
@@ -252,7 +253,7 @@ Actions</source>
     </message>
     <message>
         <source>Reparagraph</source>
-        <translation type="unfinished">Re-paragrafa</translation>
+        <translation>Re-paragrafar</translation>
     </message>
     <message>
         <source>Double Space</source>
@@ -264,7 +265,7 @@ Actions</source>
     </message>
     <message>
         <source>Embolden</source>
-        <translation type="unfinished"></translation>
+        <translation>Mais escuro</translation>
     </message>
     <message>
         <source>Full Justify</source>
@@ -290,7 +291,8 @@ Páginas</translation>
     <message>
         <source>Graphics
 Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Escalar os
+Gráficos</translation>
     </message>
     <message>
         <source>Margin</source>
@@ -310,7 +312,7 @@ da Linha</translation>
     </message>
     <message>
         <source>Markup</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcas</translation>
     </message>
     <message>
         <source>Font</source>
@@ -337,7 +339,7 @@ da Linha</translation>
     </message>
     <message>
         <source>Autogen</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerar Automaticamente</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -364,19 +366,19 @@ da Linha</translation>
     <name>CMiscBarPrefs</name>
     <message>
         <source>Floating</source>
-        <translation type="unfinished"></translation>
+        <translation>Flutuar</translation>
     </message>
     <message>
         <source>Single bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Uma barra</translation>
     </message>
     <message>
         <source>Menu/tool bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu/barra</translation>
     </message>
     <message>
         <source>Multiple bars</source>
-        <translation type="unfinished"></translation>
+        <translation>Múltiplas barras</translation>
     </message>
     <message>
         <source>Top</source>
@@ -415,15 +417,15 @@ da Linha</translation>
     </message>
     <message>
         <source>Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Clipboard</translation>
     </message>
     <message>
         <source>Depluck</source>
-        <translation type="unfinished"></translation>
+        <translation>Des-depenar</translation>
     </message>
     <message>
         <source>Dejpluck</source>
-        <translation type="unfinished"></translation>
+        <translation>Des-depenar</translation>
     </message>
     <message>
         <source>Continuous</source>
@@ -435,7 +437,7 @@ da Linha</translation>
     </message>
     <message>
         <source>Plucker</source>
-        <translation type="unfinished"></translation>
+        <translation>Depenar</translation>
     </message>
 </context>
 <context>
@@ -478,7 +480,7 @@ da Linha</translation>
     </message>
     <message>
         <source>Page/Line Scroll</source>
-        <translation type="unfinished">Página/Linha</translation>
+        <translation>Deslizar por página/linha</translation>
     </message>
 </context>
 <context>
@@ -489,11 +491,11 @@ da Linha</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilo</translation>
     </message>
     <message>
         <source>Layout(2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilo(2)</translation>
     </message>
     <message>
         <source>Locale</source>
@@ -516,7 +518,7 @@ da Linha</translation>
     </message>
     <message>
         <source>Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Clipboard</translation>
     </message>
     <message>
         <source>Local file</source>
@@ -551,7 +553,7 @@ da Linha</translation>
     </message>
     <message>
         <source>Ideogram</source>
-        <translation type="unfinished"></translation>
+        <translation>Ideograma</translation>
     </message>
 </context>
 <context>
@@ -578,7 +580,7 @@ da Linha</translation>
     </message>
     <message>
         <source>Scroll</source>
-        <translation type="unfinished">Deslizar</translation>
+        <translation>Deslizar</translation>
     </message>
     <message>
         <source>Jump</source>
@@ -586,7 +588,7 @@ da Linha</translation>
     </message>
     <message>
         <source>Page/Line Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Deslizar por página/linha</translation>
     </message>
     <message>
         <source>Two/One Touch</source>
@@ -634,7 +636,7 @@ da Linha</translation>
     </message>
     <message>
         <source>Autogen</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerar Automaticamente</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -674,7 +676,7 @@ da Linha</translation>
     </message>
     <message>
         <source>Do Reg</source>
-        <translation type="unfinished"></translation>
+        <translation>Registar</translation>
     </message>
     <message>
         <source>Close Edit</source>
@@ -706,15 +708,15 @@ da Linha</translation>
     </message>
     <message>
         <source>Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Barras de Ferramentas</translation>
     </message>
     <message>
         <source>Run Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Executar script</translation>
     </message>
     <message>
         <source>Export Links</source>
-        <translation type="unfinished">Exportar </translation>
+        <translation>Exportar Ligações</translation>
     </message>
     <message>
         <source>Goto Start</source>
@@ -738,15 +740,15 @@ da Linha</translation>
     </message>
     <message>
         <source>Scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Deslizamento</translation>
     </message>
     <message>
         <source>Set Target</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolher Destino</translation>
     </message>
     <message>
         <source>Pause Paras</source>
-        <translation type="unfinished"></translation>
+        <translation>Parar Parágrafos</translation>
     </message>
     <message>
         <source>Set Encoding</source>
@@ -754,7 +756,7 @@ da Linha</translation>
     </message>
     <message>
         <source>Ideogram</source>
-        <translation type="unfinished"></translation>
+        <translation>Ideograma</translation>
     </message>
     <message>
         <source>Bookmark</source>

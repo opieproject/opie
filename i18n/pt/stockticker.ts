@@ -11,11 +11,11 @@
     </message>
     <message>
         <source>&amp;Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>Para &amp;Trás</translation>
     </message>
     <message>
         <source>&amp;Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Para a &amp;Frente</translation>
     </message>
     <message>
         <source>&amp;Home</source>
@@ -43,11 +43,11 @@
     </message>
     <message>
         <source>Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>Para Trás</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Para a Frente</translation>
     </message>
     <message>
         <source>Home</source>
@@ -58,11 +58,11 @@
     <name>InputDialog</name>
     <message>
         <source>Symbol Lookup</source>
-        <translation type="unfinished"></translation>
+        <translation>Procura de Símbolo</translation>
     </message>
     <message>
         <source>Enter something to lookup / search.</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza algo para procurar.</translation>
     </message>
 </context>
 </TS>

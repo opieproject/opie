@@ -75,7 +75,7 @@
     </message>
     <message>
         <source>&amp;Snap to position</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ajustar à posição</translation>
     </message>
     <message>
         <source>Change card backs</source>
@@ -83,7 +83,7 @@
     </message>
     <message>
         <source>Snap to position</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustar à posição</translation>
     </message>
     <message>
         <source>Turn one card</source>

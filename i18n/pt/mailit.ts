@@ -154,7 +154,8 @@
     <message>
         <source>Click to download mail via all available accounts.
  Press and hold to select the desired account.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique para obter o correio de todas as contas disponíveis.
+Clique e espere para seleccionar uma conta.</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -168,7 +169,9 @@
         <source>There is no active account 
 associated to this mail
  it can not be downloaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Não existe nenhuma conta activa
+associada a este mail e portanto
+não poderá ser obtido</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Unknown response from server&lt;/qt&gt;</source>
@@ -208,13 +211,14 @@ Verifique conta e palavra chave&lt;/qt&gt;</translation>
     <message>
         <source>Could not locate all files in 
 mail with subject: </source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível localizar todos
+os ficheiros no correio com o assunto:</translation>
     </message>
     <message>
         <source>
 Mail has NOT been sent</source>
-        <translation type="unfinished">
-O </translation>
+        <translation>
+Falhou o envio do correio</translation>
     </message>
     <message>
         <source>Attachment error</source>
@@ -235,17 +239,19 @@ O </translation>
     </message>
     <message>
         <source>Central view area</source>
-        <translation type="unfinished"></translation>
+        <translation>Área de vista central</translation>
     </message>
     <message>
         <source>Mail not downloaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Correio ainda não obtido</translation>
     </message>
     <message>
         <source>The mail you have clicked 
 has not been downloaded yet.
  Would you like to do it now ?</source>
-        <translation type="unfinished"></translation>
+        <translation>O correio que clicou ainda
+não foi obtido. Quer obtê-lo
+agora ?</translation>
     </message>
     <message>
         <source>Mailit</source>
@@ -268,7 +274,7 @@ has not been downloaded yet.
     </message>
     <message>
         <source>Retrieving </source>
-        <translation type="unfinished"></translation>
+        <translation>A obter</translation>
     </message>
     <message>
         <source>Completing message </source>
@@ -288,7 +294,7 @@ has not been downloaded yet.
     </message>
     <message>
         <source>DNS lookup</source>
-        <translation type="unfinished"></translation>
+        <translation>Procura no DNS</translation>
     </message>
 </context>
 <context>
@@ -311,11 +317,11 @@ has not been downloaded yet.
     </message>
     <message>
         <source>Queue your mail by clicking here</source>
-        <translation type="unfinished"></translation>
+        <translation>Coloque este correio na caixa &quot;a enviar&quot; clicando aqui</translation>
     </message>
     <message>
         <source>This is an overview about all attachments in the mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Este é um resumo de todos os anexos do correio</translation>
     </message>
     <message>
         <source>This is the inbox view.
@@ -324,13 +330,20 @@ viewed by double clicking the entry.
 blue attachment icon shows whether this 
 mailhas attachments.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Esta é a vista da caixa de entrada.
+Ela mostra os mails obtidos que podem ser
+lidos se clicar duas vezes na entrada.
+A existencia de um icon azul revela a 
+existência de anexos.</translation>
     </message>
     <message>
         <source>This is the outbox view.
 It keeps the queued mails to send which can be 
 reviewed by double clicking the entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta é a vista da caixa de saída.
+Ela mostra os mails para saír que podem ser
+revistos se clicar duas vezes na entrada.
+</translation>
     </message>
     <message>
         <source>Choose the recipients from this list</source>
@@ -338,7 +351,7 @@ reviewed by double clicking the entry.</source>
     </message>
     <message>
         <source>This button opens the address selector with all mail adresses from your Opie addressbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Este botão dá acesso aos contactos disponíveis nos contactos do Opie</translation>
     </message>
 </context>
 <context>
@@ -377,7 +390,7 @@ reviewed by double clicking the entry.</source>
     </message>
     <message>
         <source>Click here to forward the selected mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para reencaminhar o correio selecionado</translation>
     </message>
     <message>
         <source>Read the previous mail in the list</source>
@@ -389,24 +402,25 @@ reviewed by double clicking the entry.</source>
     </message>
     <message>
         <source>Click here to add attachments to your mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para adicionar anexos ao correio</translation>
     </message>
     <message>
         <source>The mail view has 2 modes:
 &lt;LI&gt;&lt;B&gt;RichText&lt;/B&gt; shows the mail as HTML with reach features (no standard line breaks)&lt;/LI&gt;&lt;LI&gt;&lt;B&gt;Plain&lt;/B&gt; shows the mail as standard plain text&lt;/LI&gt;Click here to switch between those view modes</source>
-        <translation type="unfinished"></translation>
+        <translation>Existem duas vistas para o correio:
+&lt;li&gt;&lt;b&gt;HTML&lt;/b&gt; mostra o mail como HTML&lt;/li&gt;&lt;li&gt;&lt;b&gt;Texto&lt;/b&gt; mostra o mail como texto&lt;/li&gt;Clique aqui para alternar entre os dois modos</translation>
     </message>
     <message>
         <source>Click here to remove the selected mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para remover os correios selecionados</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Obter</translation>
     </message>
     <message>
         <source>Click here to download the selected mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para obter o correio selecionado</translation>
     </message>
     <message>
         <source>reply</source>
@@ -419,7 +433,8 @@ reviewed by double clicking the entry.</source>
     <message>
         <source>Click here to reply to the selected mail
 Press and hold for more options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para responder ao correio selecionado
+Clique e espera para mais opções.</translation>
     </message>
     <message>
         <source>Reply all</source>
@@ -427,7 +442,7 @@ Press and hold for more options.</source>
     </message>
     <message>
         <source>Click here to reply to the selected mail to CC: addresses also</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para responder a todos os destinatários do correio</translation>
     </message>
 </context>
 <context>
@@ -461,11 +476,11 @@ Press and hold for more options.</source>
     </message>
     <message>
         <source>Click here to install the attachment to your Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para copiar os anexos para a pasta dos documentos</translation>
     </message>
     <message>
         <source>Exploring attatchments</source>
-        <translation type="unfinished"></translation>
+        <translation>Navegar nos anexos</translation>
     </message>
     <message>
         <source>Attatchment</source>
@@ -500,7 +515,7 @@ Press and hold for more options.</source>
     </message>
     <message>
         <source>Enque mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Correio a enviar</translation>
     </message>
     <message>
         <source>New mail</source>
@@ -528,15 +543,15 @@ Press and hold for more options.</source>
     </message>
     <message>
         <source>Click here to attach files to your mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para anexar ficheiros ao seu correio</translation>
     </message>
     <message>
         <source>This button puts your mail in the send queue</source>
-        <translation type="unfinished"></translation>
+        <translation>Este botão coloca o seu correio na caixa de saída</translation>
     </message>
     <message>
         <source>Click here to create a new mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para criar um novo correio</translation>
     </message>
     <message>
         <source>No recipient</source>
@@ -544,7 +559,7 @@ Press and hold for more options.</source>
     </message>
     <message>
         <source>Send mail to whom?</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar o correio a quem?</translation>
     </message>
     <message>
         <source>OK
@@ -554,21 +569,25 @@ Press and hold for more options.</source>
     </message>
     <message>
         <source>Incorrect recipient separator</source>
-        <translation type="unfinished"></translation>
+        <translation>Separador de destinatários incorrecto</translation>
     </message>
     <message>
         <source>Recipients must be separated by ;
 and be valid emailaddresses</source>
-        <translation type="unfinished"></translation>
+        <translation>Os destinatários deverão ser separados
+pelo caractér &quot;;&quot; e deverão ser endereços
+de correio válidos</translation>
     </message>
     <message>
         <source>Incorrect carbon copy separator</source>
-        <translation type="unfinished"></translation>
+        <translation>Separador de CC incorrecto</translation>
     </message>
     <message>
         <source>CC Recipients must be separated by ;
 and be valid emailaddresses</source>
-        <translation type="unfinished"></translation>
+        <translation>Os destinatários em CC deverão ser separados
+pelo caractér &quot;;&quot; e deverão ser endereços
+de correio válidos</translation>
     </message>
     <message>
         <source>Re: </source>

@@ -23,27 +23,27 @@
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>Vista de Miniaturas</translation>
     </message>
     <message>
         <source>Thumbnail View...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vista de Miniaturas...</translation>
     </message>
     <message>
         <source>Page Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informação da Página</translation>
     </message>
     <message>
         <source>Page Information...</source>
-        <translation type="unfinished"></translation>
+        <translation>Informação da Página...</translation>
     </message>
     <message>
         <source>Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Ferramentas</translation>
     </message>
     <message>
         <source>New Page</source>
-        <translation type="unfinished">Nova Página</translation>
+        <translation>Nova Página</translation>
     </message>
     <message>
         <source>Clear Page</source>
@@ -55,11 +55,11 @@
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>Desfazer</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>Refazer</translation>
     </message>
     <message>
         <source>First Page</source>
@@ -115,11 +115,11 @@
     </message>
     <message>
         <source>Pen Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Largura da Caneta</translation>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation type="unfinished">Cor de Desenho</translation>
+        <translation>Cor da Caneta</translation>
     </message>
     <message>
         <source>Fill Color</source>
@@ -128,7 +128,8 @@
     <message>
         <source>Do you want to clear
 the current page?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tem a certeza que quer 
+limpar a página actual?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -141,103 +142,105 @@ the current page?</source>
     <message>
         <source>Do you want to delete
 the current page?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tem a certeza que quer 
+apagar a página actual?</translation>
     </message>
     <message>
         <source>Do you want to delete
 all the pages?</source>
-        <translation type="unfinished">l</translation>
+        <translation>Tem a certeza que quer 
+apagar todas as páginas?</translation>
     </message>
     <message>
         <source>Anti-Aliasing</source>
-        <translation type="unfinished"></translation>
+        <translation>Anti-Aliasing</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para adicionar uma página nova.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para limpar a página actual.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para apagar a página actual.</translation>
     </message>
     <message>
         <source>Click here to undo the last action.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para desfazer a ultima acção.</translation>
     </message>
     <message>
         <source>Click here to re-perform the last action.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para refazer a ultima acção.</translation>
     </message>
     <message>
         <source>Click here to view the first page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para ver a primeira página.</translation>
     </message>
     <message>
         <source>Click here to view the previous page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para ver a última página.</translation>
     </message>
     <message>
         <source>Click here to view the next page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para ver a próxima página.</translation>
     </message>
     <message>
         <source>Click here to view the last page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para ver a página anterior.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw lines.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para escolher uma ferramenta para desenhar linhas.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw rectangles.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para escolher uma ferramenta para desenhar rectângulos.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw ellipses.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para escolher uma ferramenta para desenhar elipses.</translation>
     </message>
     <message>
         <source>Click here to select the text drawing tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para escolher uma ferramenta para texto.</translation>
     </message>
     <message>
         <source>Click here to select the fill tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para escolher uma ferramenta para preencher.</translation>
     </message>
     <message>
         <source>Click here to select the eraser tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para escolher uma ferramenta para apagar.</translation>
     </message>
     <message>
         <source>Click here to select the width of the drawing pen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para escolher a largura da caneta.</translation>
     </message>
     <message>
         <source>Click here to select the color used when drawing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para escolher a cor da caneta.</translation>
     </message>
     <message>
         <source>Click here to select the color used when filling in areas.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para escolher a cor de preenchimento.</translation>
     </message>
     <message>
         <source>DrawPad - Page %1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>DrawPad - Página %1/%2</translation>
     </message>
 </context>
 <context>
     <name>ExportDialog</name>
     <message>
         <source>DrawPad - Export</source>
-        <translation type="unfinished"></translation>
+        <translation>DrawPad - Exportar</translation>
     </message>
     <message>
         <source>Page Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar Páginas</translation>
     </message>
     <message>
         <source>All</source>
@@ -249,7 +252,7 @@ all the pages?</source>
     </message>
     <message>
         <source>Range</source>
-        <translation type="unfinished"></translation>
+        <translation>Conjunto</translation>
     </message>
     <message>
         <source>To:</source>
@@ -269,26 +272,26 @@ all the pages?</source>
     </message>
     <message>
         <source>All Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Todas as Imagens</translation>
     </message>
 </context>
 <context>
     <name>ImportDialog</name>
     <message>
         <source>DrawPad - Import</source>
-        <translation type="unfinished"></translation>
+        <translation>DrawPad - Importar</translation>
     </message>
     <message>
         <source>Automatic preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Previsão Automática</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Previsão</translation>
     </message>
     <message>
         <source>All images</source>
-        <translation type="unfinished"></translation>
+        <translation>Todas as Imagens</translation>
     </message>
 </context>
 <context>
@@ -338,7 +341,7 @@ all the pages?</source>
     <name>PageInformationDialog</name>
     <message>
         <source>Page Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informação da Página</translation>
     </message>
     <message>
         <source>General</source>
@@ -369,29 +372,29 @@ all the pages?</source>
     <name>QObject</name>
     <message>
         <source>Title: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Título: %1</translation>
     </message>
     <message>
         <source>Dimension: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensão: %1x%2</translation>
     </message>
     <message>
         <source>Date: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Data: %1</translation>
     </message>
 </context>
 <context>
     <name>TextToolDialog</name>
     <message>
         <source>Insert Text</source>
-        <translation type="unfinished">Inserir Texto</translation>
+        <translation>Insira Texto</translation>
     </message>
 </context>
 <context>
     <name>ThumbnailView</name>
     <message>
         <source>DrawPad - Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>DrawPad - Vista de Miniaturas</translation>
     </message>
     <message>
         <source>Clear Page</source>
@@ -400,7 +403,8 @@ all the pages?</source>
     <message>
         <source>Do you want to clear
 the selected page?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tem a certeza que quer
+limpar a página actual?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -417,27 +421,28 @@ the selected page?</source>
     <message>
         <source>Do you want to delete
 the selected page?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tem a certeza que quer
+apagar a página seleccionada?</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para adicionar uma página nova.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para limpar a página actual.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para apagar a página actual.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet up one position in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para mover a página actual uma posição acima.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet down one position in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para mover a página actual uma posição abaixo.</translation>
     </message>
 </context>
 </TS>

@@ -31,27 +31,27 @@
     </message>
     <message>
         <source>Enter your search pattern here. You may use &lt;big&gt;&lt;tt&gt;?&lt;/tt&gt;&lt;/big&gt; to represent any one letter, &lt;big&gt;&lt;tt&gt;*&lt;/tt&gt;&lt;/big&gt; to represent zero or more arbitrary letters, or &lt;big&gt;&lt;tt&gt;[&lt;i&gt;abc&lt;/i&gt;]&lt;/tt&gt;&lt;/big&gt; to represent any one of the letters &lt;big&gt;&lt;tt&gt;&lt;i&gt;abc&lt;/i&gt;&lt;/tt&gt;&lt;/big&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza a procura aqui. Pode usar &quot;?&quot; para representar uma letra, &quot;*&quot; para representar zero ou mais letras ou &quot;[abc]&quot; para representar qualquer uma das letras &quot;a&quot;, &quot;b&quot; ou &quot;c&quot;.</translation>
     </message>
     <message>
         <source>Matches</source>
-        <translation type="unfinished"></translation>
+        <translation>Encontrado</translation>
     </message>
     <message>
         <source>Pickboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Quadro de Escolha</translation>
     </message>
     <message>
         <source>Letter sets</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de Letras</translation>
     </message>
     <message>
         <source>Enter sets of letters here, seperated by spaces in the same way as the sets of letters appear at the bottom of the Pickboard. The list below will show the largest sets of words that could be typed ambiguously. This information helps you tune the letter sets for your dictionary.</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza a lista de letras aqui, separadas por espaços no mesmo formato que as letras que aparecem em baixo no Quadro de Escolha. A lista abaixo irá mostrar a melhor lista de palavras que poderão ser escritas com essas letras. Esta informação ajudar-lhe-á a escolher a lista de letras a usar para o dicionário.</translation>
     </message>
     <message>
         <source>Longest ambiguities</source>
-        <translation type="unfinished"></translation>
+        <translation>Ambiguidade mais comprida</translation>
     </message>
     <message>
         <source>Edit words</source>

@@ -3,165 +3,178 @@
     <name>FormatterApp</name>
     <message>
         <source>Formatter</source>
-        <translation type="unfinished"></translation>
+        <translation>Formatar Cartão</translation>
     </message>
     <message>
         <source>Storage Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo de Armazenamento</translation>
     </message>
     <message>
         <source>File Systems</source>
-        <translation type="unfinished"></translation>
+        <translation>Sistemas de Ficheiros</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formatar</translation>
     </message>
     <message>
         <source>Main</source>
-        <translation type="unfinished"></translation>
+        <translation>Principal</translation>
     </message>
     <message>
         <source>Edit fstab</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar Lista de Sistemas de Ficheiros (fstab)</translation>
     </message>
     <message>
         <source>Check Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Verificar Cartão</translation>
     </message>
     <message>
         <source>Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Dispositivo</translation>
     </message>
     <message>
         <source>Mount Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Directoria de Acesso</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Avançado</translation>
     </message>
     <message>
         <source>Really format
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Formatar mesmo
+</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sim</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Não</translation>
     </message>
     <message>
         <source>Could not format.
 Unknown type</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível formatar.
+Tipo desconhecido</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Formatter Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Resultado da Formatação</translation>
     </message>
     <message>
         <source>Trying to umount.</source>
-        <translation type="unfinished"></translation>
+        <translation>A tentar desmontar.</translation>
     </message>
     <message>
         <source>umount failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>falhou a desmontar!</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <source>Could not umount.
 Device is busy!</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível desmontar.
+O dispositivo está a ser usado!</translation>
     </message>
     <message>
         <source>Trying to format.</source>
-        <translation type="unfinished"></translation>
+        <translation>A tentar formatar.</translation>
     </message>
     <message>
         <source>No such device!</source>
-        <translation type="unfinished"></translation>
+        <translation>Não existe o dispositivo!</translation>
     </message>
     <message>
         <source>
 has been successfully formatted.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+foi formatado com sucesso.</translation>
     </message>
     <message>
         <source>Card mount failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou ao montar o cartão!</translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pode fechar a janela de resultado.</translation>
     </message>
     <message>
         <source>Internal</source>
-        <translation type="unfinished"></translation>
+        <translation>Interno</translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Total: %1 KB (%d MB)
+</translation>
     </message>
     <message>
         <source>Used: %1 kB ( %d mB)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Usado: %1 KB (%d MB)
+</translation>
     </message>
     <message>
         <source>Available: %1 kB ( %d mB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Disponível: %1 KB (%d MB)</translation>
     </message>
     <message>
         <source>CAUTION:
 Changing parameters on this
 page may cause your system
 to stop functioning properly!</source>
-        <translation type="unfinished"></translation>
+        <translation>ATENÇÃO:
+Alterações de parametros nesta
+página poderão provar o mau
+funcionamento do sistema!</translation>
     </message>
     <message>
         <source>Format?</source>
-        <translation type="unfinished"></translation>
+        <translation>Formatar?</translation>
     </message>
     <message>
         <source>
 with %1 filesystem?
 You will loose all data!!</source>
-        <translation type="unfinished"></translation>
+        <translation>com o sistema de ficheiros %1?
+Perderá todos os dados!</translation>
     </message>
     <message>
         <source>Trying to umount %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>A tentar desmontar %1.</translation>
     </message>
     <message>
         <source>Trying to mount %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>A tentar montar %1.</translation>
     </message>
     <message>
         <source>%1
 has been successfully mounted.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1
+foi montado com sucesso.</translation>
     </message>
     <message>
         <source>Storage Type: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo de Armazenamento: %1</translation>
     </message>
     <message>
         <source>Type: %1
 Formatted with %2
 %3, %4, %5</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo: %1
+Formatado com %2
+%3, %4, %5</translation>
     </message>
 </context>
 </TS>

@@ -106,7 +106,7 @@ servidor:</translation>
     </message>
     <message>
         <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Pediu um tempo de espera de %1 minutos, mas só passaram %2 deste a última actualização.&lt;br&gt;Continuar?</translation>
     </message>
     <message>
         <source>%1 seconds</source>
@@ -117,15 +117,15 @@ servidor:</translation>
     <name>NTPTabWidget</name>
     <message>
         <source>Start time</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora de Início</translation>
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
+        <translation>n/a</translation>
     </message>
     <message>
         <source>Time shift</source>
-        <translation type="unfinished"></translation>
+        <translation>Diferença de tempo</translation>
     </message>
     <message>
         <source>New time</source>
@@ -140,7 +140,7 @@ servidor:</translation>
     <name>PredictTabWidget</name>
     <message>
         <source>Predicted time drift</source>
-        <translation type="unfinished"></translation>
+        <translation>Deslize de tempo previsto</translation>
     </message>
     <message>
         <source>n/a</source>
@@ -156,15 +156,15 @@ servidor:</translation>
     </message>
     <message>
         <source>Shift [s/h]</source>
-        <translation type="unfinished">Diferença</translation>
+        <translation>Diferença [s/h]</translation>
     </message>
     <message>
         <source>Last [h]</source>
-        <translation type="unfinished"></translation>
+        <translation>Último [h]</translation>
     </message>
     <message>
         <source>Offset [s]</source>
-        <translation type="unfinished"></translation>
+        <translation>Diferênca [s]</translation>
     </message>
     <message>
         <source>Predict time</source>
@@ -172,11 +172,11 @@ servidor:</translation>
     </message>
     <message>
         <source>Set predicted time</source>
-        <translation type="unfinished"></translation>
+        <translation>Alterar Hora Prevista</translation>
     </message>
     <message>
         <source> s/h</source>
-        <translation type="unfinished"></translation>
+        <translation>s/h</translation>
     </message>
     <message>
         <source> seconds</source>
@@ -195,7 +195,7 @@ servidor:</translation>
     </message>
     <message>
         <source>minutes between prediction updates</source>
-        <translation type="unfinished">minutos entre actualizações da </translation>
+        <translation>minutos entre actualizações da previsão</translation>
     </message>
     <message>
         <source>Display time server information</source>
@@ -203,7 +203,7 @@ servidor:</translation>
     </message>
     <message>
         <source>Display time prediction information</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar informação da previsão da hora</translation>
     </message>
 </context>
 <context>
@@ -238,7 +238,7 @@ servidor:</translation>
     </message>
     <message>
         <source>Set predicted time</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar a hora prevista</translation>
     </message>
 </context>
 </TS>

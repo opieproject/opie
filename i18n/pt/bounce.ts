@@ -3,7 +3,7 @@
     <name>KJezzball</name>
     <message>
         <source>Bounce</source>
-        <translation type="unfinished"></translation>
+        <translation>Bounce</translation>
     </message>
     <message>
         <source>&amp;New game</source>
@@ -117,7 +117,15 @@ Try to reduce total space by 75%.
 
 This program is distributed under
 the terms of the GPL v2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Escrito por: Stefan Schimanski
+Adaptado por: Martin Imobersteg
+
+Clique para formar paredes.
+Use o espaço para mudar a direção da parede.
+Tente reduzir o espaço total em 75%.
+
+Este programa é distribuido sob os termos
+da licença GPL v2.</translation>
     </message>
 </context>
 </TS>

@@ -37,7 +37,7 @@
     <name>QObject</name>
     <message>
         <source>Enter Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza Tarefa</translation>
     </message>
     <message>
         <source>Edit Task</source>
@@ -53,14 +53,14 @@
     </message>
     <message>
         <source>Opie Todolist</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de Tarefas do Opie</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation type="unfinished">Novo </translation>
+        <translation>Novo a partir de exemplo</translation>
     </message>
     <message>
         <source>New Task</source>
@@ -68,7 +68,7 @@
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para criar uma nova tarefa.</translation>
     </message>
     <message>
         <source>Edit Task</source>
@@ -76,7 +76,7 @@
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para modificar uma tarefa.</translation>
     </message>
     <message>
         <source>View Task</source>
@@ -88,7 +88,7 @@
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para remover a tarefa actual.</translation>
     </message>
     <message>
         <source>Delete all...</source>
@@ -96,7 +96,7 @@
     </message>
     <message>
         <source>Delete completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Remoção completa</translation>
     </message>
     <message>
         <source>Beam</source>
@@ -104,7 +104,7 @@
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para irradiar a tarefa actual para outro dispositivo.</translation>
     </message>
     <message>
         <source>Find</source>
@@ -112,23 +112,23 @@
     </message>
     <message>
         <source>Show completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar tarefas completas</translation>
     </message>
     <message>
         <source>Show only over-due tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar apenas tarefas atrazadas</translation>
     </message>
     <message>
         <source>Show task deadlines</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar data limite das tarefas</translation>
     </message>
     <message>
         <source>Show quick task bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar barra de tarefas rápidas</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished">Dados</translation>
+        <translation>Dados</translation>
     </message>
     <message>
         <source>Category</source>
@@ -140,7 +140,7 @@
     </message>
     <message>
         <source>QuickEdit</source>
-        <translation type="unfinished"></translation>
+        <translation>Edição Rápida</translation>
     </message>
     <message>
         <source>This is a listing of all current tasks.
@@ -150,7 +150,13 @@ The list displays the following information:
 2. Priority - a graphical representation of task priority.  Double-click here to modify.
 3. Description - description of task.  Click here to select the task.
 4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta é a lista de todas as tarefas actuais.
+
+Esta lista mostra a seguinte informação:
+1. Completadas - o visto verde indica que a tarefa está completa. Clique aqui para completar a tarefa.
+2. Prioridade - uma representação gráfica da prioridade da tarefa. Faça duplo clique para a modificar.
+3. Descrição - descrição da tarefa. Clique aqui para a seleccionar.
+4. Data Limite - mostra a data limite para a execução da tarefa. Esta coluna pode ser visível ou não a partir do menu &quot;Opções-&gt;Mostrar data limite das tarefas&quot;.</translation>
     </message>
     <message>
         <source>All Categories</source>
@@ -167,7 +173,12 @@ Free up some space
 and try again.
 
 Quit Anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível gravar 
+as alterações
+Liberte algum espaço 
+e tente novamente.
+
+Sair na mesma?</translation>
     </message>
     <message>
         <source>Todo</source>
@@ -191,7 +202,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Recebidas %1 nova(s) tarefas.&lt;p&gt;Quer adicioná-las a lista?</translation>
     </message>
     <message>
         <source>New Tasks</source>
@@ -219,7 +230,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation type="unfinished">Configurar </translation>
+        <translation>Configurar Exemplos</translation>
     </message>
     <message>
         <source>Priority:</source>
@@ -227,7 +238,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Template Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor de Exemplos</translation>
     </message>
     <message>
         <source>Add</source>
@@ -247,7 +258,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>New Template %1</source>
-        <translation type="unfinished">Novo</translation>
+        <translation>Novo Exemplo %1</translation>
     </message>
     <message>
         <source>Click here to set the priority of new task.
@@ -255,7 +266,11 @@ Quit Anyway?</source>
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para mudar a prioridade da tarefa.
+
+Esta àrea é chamada de barra de tarefas rápidas.
+
+Ela permite-lhe adicionar rápidamente uma tarefa à lista. Esta àrea pode ser visível ou não através do menu &quot;Opções -&gt; Mostrar barra de tarefas rápidas&quot;.</translation>
     </message>
     <message>
         <source>Enter description of new task here.
@@ -263,7 +278,12 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza a descrição da nova tarefa aqui.
+
+Esta àrea é chamada de barra de tarefas rápidas.
+
+Ela permite-lhe adicionar rápidamente uma tarefa à lista. Esta àrea pode ser visível ou não através do menu &quot;Opções -&gt; Mostrar barra de tarefas rápidas&quot;.
+</translation>
     </message>
     <message>
         <source>More</source>
@@ -275,11 +295,15 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para adicionar informação à tarefa.
+
+Esta àrea é chamada de barra de tarefas rápidas.
+
+Ela permite-lhe adicionar rápidamente uma tarefa à lista. Esta àrea pode ser visível ou não através do menu &quot;Opções -&gt; Mostrar barra de tarefas rápidas&quot;.</translation>
     </message>
     <message>
         <source>Enter</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza</translation>
     </message>
     <message>
         <source>Click here to add new task.
@@ -287,7 +311,11 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui adicionar uma tarefa.
+
+Esta àrea é chamada de barra de tarefas rápidas.
+
+Ela permite-lhe adicionar rápidamente uma tarefa à lista. Esta àrea pode ser visível ou não através do menu &quot;Opções -&gt; Mostrar barra de tarefas rápidas&quot;.</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -299,22 +327,26 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para limpar a informação da tarefa.
+
+Esta àrea é chamada de barra de tarefas rápidas.
+
+Ela permite-lhe adicionar rápidamente uma tarefa à lista. Esta àrea pode ser visível ou não através do menu &quot;Opções -&gt; Mostrar barra de tarefas rápidas&quot;.</translation>
     </message>
     <message>
         <source>Data can not be edited, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Não é possível editar os dados enquanto está a sincronizar</translation>
     </message>
     <message>
         <source>Data can&apos;t be edited, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Não é possível editar os dados enquanto está a sincronizar</translation>
     </message>
 </context>
 <context>
     <name>TableView</name>
     <message>
         <source>Table View</source>
-        <translation type="unfinished"></translation>
+        <translation>Vista de Tabela</translation>
     </message>
     <message>
         <source>None</source>
@@ -360,7 +392,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Enter brief description of the task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza uma descrição curta da tarefa aqui.</translation>
     </message>
     <message>
         <source>Complete </source>
@@ -368,11 +400,11 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Work on </source>
-        <translation type="unfinished"></translation>
+        <translation>Trabalhar em</translation>
     </message>
     <message>
         <source>Buy </source>
-        <translation type="unfinished"></translation>
+        <translation>Comprar</translation>
     </message>
     <message>
         <source>Organize </source>
@@ -380,7 +412,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Get </source>
-        <translation type="unfinished"></translation>
+        <translation>Obter</translation>
     </message>
     <message>
         <source>Update </source>
@@ -404,7 +436,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Select priority of task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha a prioridade da tarefa aqui.</translation>
     </message>
     <message>
         <source>Very High</source>
@@ -432,7 +464,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Select category to organize this task with.</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha a categoria da tarefa aqui.</translation>
     </message>
     <message>
         <source>Recurring task</source>
@@ -440,11 +472,11 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui se a tarefa é recursiva. A frequência pode ser configurada na opção de &quot;Recorrência&quot;.</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza informação adicional da tarefa aqui.</translation>
     </message>
     <message>
         <source>Todo List</source>
@@ -463,11 +495,11 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Click here to set the current status of this task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para mudar o estado desta tarefa.</translation>
     </message>
     <message>
         <source>Started</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciada</translation>
     </message>
     <message>
         <source>Postponed</source>
@@ -487,7 +519,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Select progress made on this task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha o progresso desta tarefa.</translation>
     </message>
     <message>
         <source>0 %</source>
@@ -519,7 +551,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Click here to set the date this task was started.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para alterar a data de início desta tarefa.</translation>
     </message>
     <message>
         <source>Due Date:</source>
@@ -527,7 +559,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Click here to set the date this task needs to be completed by.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para alterar a data limite desta tarefa.</translation>
     </message>
     <message>
         <source>Completed:</source>
@@ -535,19 +567,19 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Click here to mark this task as completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para marcar esta tarefa como completa.</translation>
     </message>
     <message>
         <source>Click here to set the date this task was completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para introduzir a data em que esta tarefa foi completa.</translation>
     </message>
     <message>
         <source>Maintainer Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo de Manutenção:</translation>
     </message>
     <message>
         <source>Click here to set the maintainer&apos;s role.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para mudar a regra de manutenção.</translation>
     </message>
     <message>
         <source>Nothing</source>
@@ -563,23 +595,23 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Coordinating</source>
-        <translation type="unfinished">Corde</translation>
+        <translation>Coordenação</translation>
     </message>
     <message>
         <source>Maintainer:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mantenedor:</translation>
     </message>
     <message>
         <source>This is the name of the current task maintainer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este é o nome do mantenedor da tarefa actual.</translation>
     </message>
     <message>
         <source>test</source>
-        <translation type="unfinished"></translation>
+        <translation>test</translation>
     </message>
     <message>
         <source>Click here to select the task maintainer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para mudar o mantenedor da tarefa.</translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>DateBookEvent</name>
     <message>
         <source>[with alarm]</source>
-        <translation type="unfinished"></translation>
+        <translation>[com alarme]</translation>
     </message>
     <message>
         <source>note</source>
@@ -14,11 +14,11 @@
     <name>DatebookPluginConfig</name>
     <message>
         <source>Show location</source>
-        <translation type="unfinished">Motrar </translation>
+        <translation>Mostrar localização</translation>
     </message>
     <message>
         <source>Check this if the location of an appointment should be shown for each one</source>
-        <translation type="unfinished"></translation>
+        <translation>Active isto se quiser ver a localização de cada marcação</translation>
     </message>
     <message>
         <source>Show notes</source>
@@ -26,58 +26,62 @@
     </message>
     <message>
         <source>Check this if the note attached to an appointment should be shown for each one</source>
-        <translation type="unfinished"></translation>
+        <translation>Active isto se quiser ver a nota associada a cada marcação</translation>
     </message>
     <message>
         <source>Show only later
  appointments</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar apenas as
+próximas marcações</translation>
     </message>
     <message>
         <source>Check this if only appointments later then current time should be shown</source>
-        <translation type="unfinished"></translation>
+        <translation>Active isto se quiser ver apenas as próximas marcações</translation>
     </message>
     <message>
         <source>How many 
 appointment
 should be 
 shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar 
+quantas
+marcações?
+</translation>
     </message>
     <message>
         <source>How many appointments should be shown maximal. In chronical order</source>
-        <translation type="unfinished"></translation>
+        <translation>Qual o máximo de marcações a mostrar em ordem temporal</translation>
     </message>
     <message>
         <source>How many more days</source>
-        <translation type="unfinished"></translation>
+        <translation>Quantos dias mais</translation>
     </message>
     <message>
         <source>How many more days should be in the range</source>
-        <translation type="unfinished"></translation>
+        <translation>Quantos dias mais deverão estar disponíveis</translation>
     </message>
     <message>
         <source> day(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>dia(s)</translation>
     </message>
     <message>
         <source>only today</source>
-        <translation type="unfinished"></translation>
+        <translation>apenas hoje</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Datebook plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Extra de Marcações</translation>
     </message>
     <message>
         <source>No more appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem mais marcações para hoje</translation>
     </message>
     <message>
         <source>No appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem marcações para hoje</translation>
     </message>
 </context>
 </TS>

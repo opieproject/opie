@@ -204,7 +204,7 @@ para esta conta, tente mais tarde.</translation>
     </message>
     <message>
         <source>Raise on bell</source>
-        <translation type="unfinished"></translation>
+        <translation>Primeiro Plano quando tocar</translation>
     </message>
     <message>
         <source>Request shared session</source>
@@ -224,7 +224,7 @@ para esta conta, tente mais tarde.</translation>
     </message>
     <message>
         <source>Scale Factor</source>
-        <translation type="unfinished"></translation>
+        <translation>Factor de Escala</translation>
     </message>
     <message>
         <source>Encodings</source>
@@ -280,11 +280,11 @@ para esta conta, tente mais tarde.</translation>
     </message>
     <message>
         <source>Scale the remote display to fit on the PDA (Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>Escalar o ecrâ remoto para caber no ecrâ do dispositivo (lento)</translation>
     </message>
     <message>
         <source>Enable transmiting identical rectangles as references to existing data</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar a transmissão de rectangulos semelhantes como referência dos dados existentes</translation>
     </message>
 </context>
 </TS>

@@ -4,7 +4,8 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toque na cruz com firmeza e 
+precisão para calibrar o ecrâ.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>

@@ -15,19 +15,19 @@
     </message>
     <message>
         <source>No plugins found</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foram encontrados extras</translation>
     </message>
     <message>
         <source>No plugins activated</source>
-        <translation type="unfinished"></translation>
+        <translation>Não existe nenhum extra activado</translation>
     </message>
     <message>
         <source>Click here to launch the associated app</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para lançar a aplicação associada</translation>
     </message>
     <message>
         <source>&lt;b&gt;Owned by %1&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Propriedade de %1&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -38,40 +38,42 @@
     </message>
     <message>
         <source>Today by Maximilian Rei&#xdf;</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoje, por Maximilian Reiß</translation>
     </message>
     <message>
         <source>Click here to get to the config dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para a janela de configuração</translation>
     </message>
 </context>
 <context>
     <name>TodayConfig</name>
     <message>
         <source>Load which plugins in what order:</source>
-        <translation type="unfinished"></translation>
+        <translation>Quais os extras a carregar e qual a ordem:</translation>
     </message>
     <message>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover para Cima</translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover para Baixo</translation>
     </message>
     <message>
         <source>active/order</source>
-        <translation type="unfinished"></translation>
+        <translation>activar/ordenar</translation>
     </message>
     <message>
         <source>autostart on 
 resume?
  (Opie only)</source>
-        <translation type="unfinished"></translation>
+        <translation>iniciar automaticamente
+quando ligar?
+(apenas Opie)</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation type="unfinished"></translation>
+        <translation>minutos inactivo</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -79,47 +81,47 @@ resume?
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation type="unfinished"></translation>
+        <translation>Active aqui se quiser que o &quot;hoje&quot; seja iniciado ao ligar o dispositivo.</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Qual o intervalo de inactividade, em minutos, para que, ao ligar, o&quot;hoje&quot; seja iniciado </translation>
     </message>
     <message>
         <source>Icon size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamanho do icone</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation type="unfinished"></translation>
+        <translation>Altere o tamanho do icone, em pixeis</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Reler</translation>
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation type="unfinished"></translation>
+        <translation>Qual o intervalo de actualização</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation>seg</translation>
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished"></translation>
+        <translation>nunca</translation>
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
-        <translation type="unfinished"></translation>
+        <translation>Active ou desactive cada extra ou use os cursores para alterar a ordem</translation>
     </message>
     <message>
         <source>Today Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuração do &quot;Hoje&quot;</translation>
     </message>
     <message>
         <source>Tiny Banner</source>
-        <translation type="unfinished"></translation>
+        <translation>Barra Pequena</translation>
     </message>
 </context>
 </TS>
