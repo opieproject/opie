@@ -4,5 +4,5 @@ Section: opie/system
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Description: Basic sounds for Qtopia environment
- These icons are available to all Opie applications.
+Description: Basic sounds for Opie environment
+ These sounds are available to all Opie applications.
