@@ -70,13 +70,13 @@ private slots:
     void slotFind();
     void slotSetCategory( int );
     void slotUpdateToolbar();
-
+    void slotSetFont(int);
 private:
     void initFields();	// inititialize our fields...
     AbLabel *abView();
     void populateCategories();
 
-    QPopupMenu *catMenu;
+    QPopupMenu *catMenu, *fontMenu;
     QPEToolBar *listTools;
     QToolButton *deleteButton;
     QValueList<int> allFields,
@@ -94,6 +94,8 @@ private:
     int viewMargin;
 
     bool syncing;
+    QFont *defaultFont;
+    int startFontSize;
 };
 
 #endif

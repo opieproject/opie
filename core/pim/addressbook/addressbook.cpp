@@ -213,8 +213,52 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
     mbList->insertItem( tr("View"), catMenu );
     setCentralWidget( abList );
 
+    fontMenu = new QPopupMenu(this);
+    fontMenu->setCheckable( true );
+    connect( fontMenu, SIGNAL(activated(int)), this, SLOT(slotSetFont(int)));
+
+    fontMenu->insertItem("Small", 0);
+    fontMenu->insertItem("Normal", 1);
+    fontMenu->insertItem("Large", 2);
+
+    defaultFont = new QFont( abList->font() );
+
+    slotSetFont(startFontSize);
+		    
+    mbList->insertItem( tr("Font"), fontMenu);
+    setCentralWidget(abList);
+
     //    qDebug("adressbook contrsuction: t=%d", t.elapsed() );
 }
+void AddressbookWindow::slotSetFont( int size ) {
+
+	if (size > 2 || size < 0)
+		size = 1;
+
+	startFontSize = size;
+
+	switch (size) {
+		case 0:
+			fontMenu->setItemChecked(0, true);
+			fontMenu->setItemChecked(1, false);
+			fontMenu->setItemChecked(2, false);
+			abList->setFont( QFont( defaultFont->family(), defaultFont->pointSize() - 2 ) );
+			break;
+		case 1:
+			fontMenu->setItemChecked(0, false);
+			fontMenu->setItemChecked(1, true);
+			fontMenu->setItemChecked(2, false);
+			abList->setFont( *defaultFont );
+			break;
+		case 2:
+			fontMenu->setItemChecked(0, false);
+			fontMenu->setItemChecked(1, false);
+			fontMenu->setItemChecked(2, true);
+			abList->setFont( QFont( defaultFont->family(), defaultFont->pointSize() + 2 ) );
+			break;
+	}
+}
+
 
 void AddressbookWindow::setDocument( const QString &filename )
 {
@@ -244,6 +288,9 @@ void AddressbookWindow::resizeEvent( QResizeEvent *e )
 
 AddressbookWindow::~AddressbookWindow()
 {
+	Config cfg("AddressBook");
+	cfg.setGroup("Font");
+	cfg.writeEntry("fontSize", startFontSize);
 }
 
 void AddressbookWindow::slotUpdateToolbar()
@@ -713,6 +760,8 @@ void AddressbookWindow::initFields()
     cfg.setGroup( "Version" );
     version = cfg.readNumEntry( "version" );
     i = 0;
+    startFontSize = 1;
+
     if ( version >= ADDRESSVERSION ) {
 
 	cfg.setGroup( "ImportantCategory" );
@@ -726,6 +775,10 @@ void AddressbookWindow::initFields()
 	    slOrderedFields.append( zn );
 	    zn = cfg.readEntry( "Category" + QString::number(++i), QString::null );
 	}
+	cfg.setGroup( "Font" );
+	startFontSize = cfg.readNumEntry( "fontSize", 1 );
+	
+
     } else {
 	QString str;
 	str = getenv("HOME");
