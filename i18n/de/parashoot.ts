@@ -3,22 +3,25 @@
     <name>ParaShoot</name>
     <message>
         <source>ParaShoot</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallschirmjäger</translation>
     </message>
     <message>
         <source>New Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Spiel</translation>
     </message>
     <message>
         <source>     Level: %1       Score: %2   </source>
-        <translation type="unfinished"></translation>
+        <translation>Level: %1 Punkte: %2</translation>
     </message>
     <message>
         <source>       GAME OVER!
        Your Score:  %1
  Parachuters Killed: %2
         Accuracy: %3% </source>
-        <translation type="unfinished"></translation>
+        <translation>Das Spiel ist aus!
+Ihre Punkte: %1
+Abgeschossene Fallschirmjäger: %2
+Genauigkeit: %3%</translation>
     </message>
 </context>
 </TS>
