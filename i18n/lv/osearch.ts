@@ -67,7 +67,7 @@
     </message>
     <message>
         <source>Case sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Reģistrjūtīgs</translation>
     </message>
 </context>
 <context>
@@ -133,19 +133,19 @@
     </message>
     <message>
         <source>Show completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt pabegitos uzdevumus</translation>
     </message>
     <message>
         <source>Show past events</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt pagājušos notikumus</translation>
     </message>
     <message>
         <source>Search in dates</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēt datumos</translation>
     </message>
     <message>
         <source>Search content</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēt saturu</translation>
     </message>
 </context>
 </TS>

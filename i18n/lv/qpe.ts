@@ -199,7 +199,7 @@ akurāti kalibrējiet ekrānu.</translation>
     <name>MediumMountSetting::MediumMountWidget</name>
     <message>
         <source>Configure this medium. The changes will go into effect when the application gets closed. To update the Document Tab you need to remove and insert this medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurēt šo mediju. Izmaiņas tiks ņemtas vērā kad aplikāciju aizvērs.  Lai atjaunotu Dokumentu Tab jums vajag izņemt un ievietot šo mediju.</translation>
     </message>
     <message>
         <source>Which media files</source>
@@ -250,7 +250,7 @@ akurāti kalibrējiet ekrānu.</translation>
     <name>QueuedRequestRunner</name>
     <message>
         <source>Processing Queued Requests</source>
-        <translation type="unfinished"></translation>
+        <translation>Apstrādājam Pieprasījumus Rindā</translation>
     </message>
 </context>
 <context>
@@ -276,7 +276,7 @@ akurāti kalibrējiet ekrānu.</translation>
     <name>Server</name>
     <message>
         <source>USB Lock</source>
-        <translation type="unfinished"></translation>
+        <translation>USB Slēdzis</translation>
     </message>
 </context>
 <context>
@@ -321,99 +321,102 @@ akurāti kalibrējiet ekrānu.</translation>
     </message>
     <message>
         <source>&lt;P&gt;A system startup error occurred, and the system is now in Safe Mode. Plugins are not loaded in Safe Mode. You can use the Plugin Manager to disable plugins that cause system error.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Sistēmas starts neizdevās, un sistēma ir Drošā Režīmā. Šajā režīmā nav ielādēti spraudņi.  Jūs variet lietot Spraudņu Menedžeri lai izslēgtu spraudņus, kas radīja problēmas.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished">Labi</translation>
+        <translation>Labi</translation>
     </message>
     <message>
         <source>Plugin Manager...</source>
-        <translation type="unfinished">Spraudņu Menedžeris...</translation>
+        <translation>Spraudņu Menedžeris...</translation>
     </message>
     <message>
         <source>Memory Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Atmiņas Statuss</translation>
     </message>
     <message>
         <source>Memory Low
 Please save data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Trūkst Atmiņas
+Lūdzu saglabājiet datus.</translation>
     </message>
     <message>
         <source>Critical Memory Shortage
 Please end this application
 immediately.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kritiski Trūkst Atmiņas
+Lūdzu tūlīt
+apstādiniet aplikāciju.</translation>
     </message>
 </context>
 <context>
     <name>ShutdownImpl</name>
     <message>
         <source>Shutdown...</source>
-        <translation type="unfinished"></translation>
+        <translation>Aizveras...</translation>
     </message>
     <message>
         <source>Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārtraukt</translation>
     </message>
     <message>
         <source>Terminate Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārtraukt Opie</translation>
     </message>
     <message>
         <source>Reboot</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārstartēt</translation>
     </message>
     <message>
         <source>Restart Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārstartēt Opie</translation>
     </message>
     <message>
         <source>Shutdown</source>
-        <translation type="unfinished"></translation>
+        <translation>Aizvērt</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Atlikt</translation>
     </message>
 </context>
 <context>
     <name>SyncAuthentication</name>
     <message>
         <source>Sync Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Sinh. Savienojumu</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade or change the security setting to use IntelliSync.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Neautorizēta sistēma pieprasa pieeju šai iekārtai.&lt;p&gt;Ja jūs lietojat Qtopia Desktop versiju vecāku par 1.5.1, lūdzu atjauniniet vai mainiet drošības uzstādījumus uz IntelliSync.</translation>
     </message>
     <message>
         <source>Deny</source>
-        <translation type="unfinished"></translation>
+        <translation>Azliegt</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Nezināma sistēma pieprasa pieeju šai iekārtai.&lt;p&gt;Ja jūs tiko sākāt sihnronizāciju, tas ir normāli.</translation>
     </message>
     <message>
         <source>Allow</source>
-        <translation type="unfinished"></translation>
+        <translation>Atļaut</translation>
     </message>
     <message>
         <source>&lt;qt&gt;&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;You chose IntelliSync so you may I allow or deny this connection.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;&lt;p&gt;Neautorizēta sistēma pieprasa pieeju šai iekārtai.&lt;p&gt;Izvēloties IntelliSync lai varētu atļaut vai aizliegt pieeju.&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>
     <name>SyncDialog</name>
     <message>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Atlikt</translation>
     </message>
     <message>
         <source>Syncing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sinhronizē:</translation>
     </message>
 </context>
 </TS>

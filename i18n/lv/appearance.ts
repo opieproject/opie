@@ -217,11 +217,11 @@ This area allows you to select an application and which settings you wish to dis
     </message>
     <message>
         <source>Show Scrollbars on the left</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt Skroljoslas pa kreisi</translation>
     </message>
     <message>
         <source>Click here to display scrollbars on the left side instead of the right.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai attēlotu srkoljoslas kresajā nevis labajā pusē.</translation>
     </message>
 </context>
 <context>

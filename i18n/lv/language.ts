@@ -11,12 +11,13 @@
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Valoda</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Attention, all windows will be closed by changing the language
 without saving the Data.&lt;br&gt;&lt;br&gt;Go on?&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Uzmanību, mainot valodu visi logi tiks aizvērti
+nesaglabājot datus.&lt;br&gt;&lt;br&gt;Turpināt?&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>

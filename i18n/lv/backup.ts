@@ -65,23 +65,23 @@
     </message>
     <message>
         <source>&lt;qt&gt;%1&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Restore</source>
-        <translation type="unfinished">Atjaunot</translation>
+        <translation>Atjaunot</translation>
     </message>
     <message>
         <source>Would you really overwrite your local data?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai tiešām pārrakstīsiet lokālos datus?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Jā</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nē</translation>
     </message>
 </context>
 <context>

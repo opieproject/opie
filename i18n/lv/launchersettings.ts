@@ -178,11 +178,11 @@
     </message>
     <message>
         <source>Columns:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolonnas:</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Automātiski</translation>
     </message>
 </context>
 <context>
@@ -257,11 +257,11 @@
     </message>
     <message>
         <source>Enable static background pixmap</source>
-        <translation type="unfinished"></translation>
+        <translation>Atļaut statisko fona bildi</translation>
     </message>
     <message>
         <source>Activate this, if you want the background pixmap not to scroll with the icons.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivējiet šo, ja vēlaties lai fona bilde nepārvietotos ar ikonām.</translation>
     </message>
 </context>
 <context>

@@ -61,43 +61,43 @@
     </message>
     <message>
         <source>Tap here to filter package list by application category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai filtrētu pēc aplikācijas kategorijas.</translation>
     </message>
     <message>
         <source>Select the application category to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlaties aplikācijas kategoriju pēc kuras filtrēt.</translation>
     </message>
     <message>
         <source>Tap here to filter package list by package name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiežat šeit lai filtrētu pakotnes pēc nosaukuma.</translation>
     </message>
     <message>
         <source>Enter the package name to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet pakotnes nosaukumu atlasei.</translation>
     </message>
     <message>
         <source>Tap here to filter package list by the package status.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiežat šeit lai atlasītu pakotnes pēc statusa.</translation>
     </message>
     <message>
         <source>Select the package status to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlaties pakotnes status filtrēšanai.</translation>
     </message>
     <message>
         <source>Tap here to filter package list by source server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiežat šeit lai atlasītu pakotnes pēc servera.</translation>
     </message>
     <message>
         <source>Select the source server to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlaties kuru serveri atlasīt.</translation>
     </message>
     <message>
         <source>Tap here to filter package list by destination where the package is installed to on this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiežat šeit lai šķirotu pakotnes pēc mērķvietas.</translation>
     </message>
     <message>
         <source>Select the destination location to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādīt mērķa vietu filtrēšanai.</translation>
     </message>
 </context>
 <context>
@@ -424,51 +424,51 @@ Klikšķiniet uz kvadrāta kreisajā pusē, lai atzīmētu pakotni.</translation
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtrs</translation>
     </message>
     <message>
         <source>Filter settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtra uzstādījumi</translation>
     </message>
     <message>
         <source>Package Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakotņu Menedžeris</translation>
     </message>
     <message>
         <source>Update package information</source>
-        <translation type="unfinished"></translation>
+        <translation>Atjaunot pakotņu informāciju</translation>
     </message>
     <message>
         <source>Upgrade installed packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Atjaunot instalētās pakotnes</translation>
     </message>
     <message>
         <source>Enter path to download package to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet ceļu pakotnes lejuplādēšanai:</translation>
     </message>
     <message>
         <source>Download packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Lejuplādēt pakotnes</translation>
     </message>
     <message>
         <source>Remove or upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt vai atjaunināt</translation>
     </message>
     <message>
         <source>Remove or reinstall</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt vai pārinstalēt</translation>
     </message>
     <message>
         <source>Reinstall</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārinstalēt</translation>
     </message>
     <message>
         <source>Config updated</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurācija atjaunota</translation>
     </message>
     <message>
         <source>The configuration has been updated.  Do you want to update server and package information now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurācija tika atjaunota.  Vai vēlaties atjaunot arī serveru un pakotņu informāciju?</translation>
     </message>
     <message>
         <source>This is a listing of all packages.
@@ -549,98 +549,98 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
     <name>OIpkg</name>
     <message>
         <source>Linking packages installed in: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sasaist  pakotnes kas instalētas: %1</translation>
     </message>
     <message>
         <source>Error linkling &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda sasaistot &quot;%1&quot; uz &quot;%2&quot;</translation>
     </message>
     <message>
         <source>Links removed for: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sasaistes izņemtas: %1</translation>
     </message>
 </context>
 <context>
     <name>OIpkgConfigDlg</name>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurācija</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Serveri</translation>
     </message>
     <message>
         <source>Destinations</source>
-        <translation type="unfinished"></translation>
+        <translation>Mērķi</translation>
     </message>
     <message>
         <source>Proxies</source>
-        <translation type="unfinished"></translation>
+        <translation>Proksi</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opcijas</translation>
+        <translation>Opcijas</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst</translation>
     </message>
     <message>
         <source>HTTP Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>HTTP Proksi</translation>
     </message>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Atļauts</translation>
     </message>
     <message>
         <source>FTP Proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>FTP Proksi</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lietotājs:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Parole:</translation>
     </message>
     <message>
         <source>Force Depends</source>
-        <translation type="unfinished"></translation>
+        <translation>Piespiedu Saistītās</translation>
     </message>
     <message>
         <source>Force Reinstall</source>
-        <translation type="unfinished"></translation>
+        <translation>Piespiedu Pārinstalācija</translation>
     </message>
     <message>
         <source>Force Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Piespiedu Izņemšana</translation>
     </message>
     <message>
         <source>Force Overwrite</source>
-        <translation type="unfinished"></translation>
+        <translation>Piespiedu Pārrakstīšana</translation>
     </message>
     <message>
         <source>Errors only</source>
-        <translation type="unfinished"></translation>
+        <translation>Tikai kļūdas</translation>
     </message>
     <message>
         <source>Normal messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Parastas ziņas</translation>
     </message>
     <message>
         <source>Informative messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Informatīvās ziņas</translation>
     </message>
     <message>
         <source>Troubleshooting output</source>
-        <translation type="unfinished"></translation>
+        <translation>Atkļūdošanas izvads</translation>
     </message>
     <message>
         <source>This is a list of all servers configured.  Select one here to edit or delete, or add a new one below.</source>
@@ -731,74 +731,74 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
     <name>OIpkgDestDlg</name>
     <message>
         <source>Edit Destination</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot Mērķi</translation>
     </message>
     <message>
         <source>Active</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktīvs</translation>
     </message>
     <message>
         <source>Tap here to indicate whether this entry is active or not.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiežat šeit lai norādītu vai ieraksts ir aktīvs vai nē.</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vārds:</translation>
     </message>
     <message>
         <source>Enter the name of this entry here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet nosaukumu.</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Atrašanās:</translation>
     </message>
     <message>
         <source>Enter the absolute directory path of this entry here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet absolūto direktorijas ceļu.</translation>
     </message>
     <message>
         <source>Tap here to select the desired location.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiežat šeit lai izvēlētos atrašanos.</translation>
     </message>
 </context>
 <context>
     <name>OIpkgServerDlg</name>
     <message>
         <source>Edit Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot Serveri</translation>
     </message>
     <message>
         <source>Active</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktīvs</translation>
     </message>
     <message>
         <source>Tap here to indicate whether this entry is active or not.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiežat šeit, lai norādītu vai ieraksts ir aktīvs.</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nosaukums:</translation>
     </message>
     <message>
         <source>Enter the name of this entry here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet ieraksta nosaukumu.</translation>
     </message>
     <message>
         <source>Address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Adrese:</translation>
     </message>
     <message>
         <source>Enter the URL address of this entry here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet ieraksta URL adresi.</translation>
     </message>
     <message>
         <source>Compressed server feed</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompresēta servera barotne</translation>
     </message>
     <message>
         <source>Tap here to indicate whether the server support compressed archives or not.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiežat šeit, lai norādītu vai serveris atbalsta saspiestos arhīvus.</translation>
     </message>
 </context>
 <context>
@@ -806,43 +806,45 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
     <message>
         <source>Reading available packages:
 <byte value="x9"/></source>
-        <translation type="unfinished"></translation>
+        <translation>Lasu pieejamās pakotnes:
+</translation>
     </message>
     <message>
         <source>Reading installed packages:
 <byte value="x9"/></source>
-        <translation type="unfinished"></translation>
+        <translation>Lasu instalētās pakotnes:
+</translation>
     </message>
 </context>
 <context>
     <name>PackageInfoDlg</name>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informācija</translation>
     </message>
     <message>
         <source>Unable to retrieve package information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru saņemt pakotnes informāciju.</translation>
     </message>
     <message>
         <source>Retrieve file list</source>
-        <translation type="unfinished"></translation>
+        <translation>Saņemt failu sarakstu</translation>
     </message>
     <message>
         <source>File list</source>
-        <translation type="unfinished"></translation>
+        <translation>Failu saraksts</translation>
     </message>
     <message>
         <source>This area contains information about the package.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šis laukums satur informāciju par pakotni.</translation>
     </message>
     <message>
         <source>This area contains a list of files contained in this package.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šis laukums satur pakotnes failu sarakstu.</translation>
     </message>
     <message>
         <source>Tap here to retrieve list of files contained in this package.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiežat šeit lai saņemtu pakotnes failu sarakstu.</translation>
     </message>
 </context>
 <context>

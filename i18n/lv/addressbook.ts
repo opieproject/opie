@@ -18,7 +18,7 @@
     <name>AbView</name>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished">Neierakstīts</translation>
+        <translation>Neierakstīts</translation>
     </message>
 </context>
 <context>
@@ -191,7 +191,7 @@ Vai pārtraukt?</translation>
     </message>
     <message>
         <source>Edit Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot Kontaktu</translation>
     </message>
 </context>
 <context>
@@ -1362,35 +1362,35 @@ ir par brīvu !</translation>
     <name>Opie</name>
     <message>
         <source>Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontakts</translation>
     </message>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished">Kontakti</translation>
+        <translation>Kontakti</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation type="unfinished">Sākt Meklēšanu</translation>
+        <translation>Sākt Meklēšanu</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation type="unfinished">Rakstīt E-pastu Uz</translation>
+        <translation>Rakstīt E-pastu Uz</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation type="unfinished">Importēt vKarti</translation>
+        <translation>Importēt vKarti</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation type="unfinished">Eksportēt vKarti</translation>
+        <translation>Eksportēt vKarti</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation type="unfinished">Informācija par Mani</translation>
+        <translation>Personālā Informācija</translation>
     </message>
     <message>
         <source>Show quick search bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt ātrās meklēšanas joslu</translation>
     </message>
 </context>
 </TS>

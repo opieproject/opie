@@ -123,7 +123,7 @@
     </message>
     <message>
         <source>Calculator</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalkulators</translation>
     </message>
 </context>
 <context>

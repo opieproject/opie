@@ -3,15 +3,15 @@
     <name>LauncherClock</name>
     <message>
         <source>Set time...</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādīt laiku...</translation>
     </message>
     <message>
         <source>Clock..</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulkstenis..</translation>
     </message>
     <message>
         <source>Alarm...</source>
-        <translation type="unfinished"></translation>
+        <translation>Modinātājs...</translation>
     </message>
 </context>
 </TS>

@@ -166,7 +166,7 @@ izvēlēto failu?</translation>
     </message>
     <message>
         <source>Please select file to play</source>
-        <translation type="unfinished"></translation>
+        <translation>Lūdzu izvēlaties failu spēlēšanai</translation>
     </message>
 </context>
 </TS>

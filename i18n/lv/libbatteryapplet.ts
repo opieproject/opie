@@ -3,84 +3,85 @@
     <name>BatteryStatus</name>
     <message>
         <source>Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Problēma</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation type="unfinished"></translation>
+        <translation>nevaru atvērt failu</translation>
     </message>
     <message>
         <source>no data</source>
-        <translation type="unfinished"></translation>
+        <translation>nav datu</translation>
     </message>
     <message>
         <source>Charging both devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzlādēju abas iekārtas</translation>
     </message>
     <message>
         <source>Charging</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzlādēju</translation>
     </message>
     <message>
         <source>Battery status: </source>
-        <translation type="unfinished"></translation>
+        <translation>Baterijas statuss:</translation>
     </message>
     <message>
         <source>Good</source>
-        <translation type="unfinished"></translation>
+        <translation>Labs</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Zems</translation>
     </message>
     <message>
         <source>Very Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Ļoti Zems</translation>
     </message>
     <message>
         <source>Critical</source>
-        <translation type="unfinished"></translation>
+        <translation>Kritisks</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Nezināms</translation>
     </message>
     <message>
         <source>On backup power</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktīva rezerves barošana</translation>
     </message>
     <message>
         <source>Power on-line</source>
-        <translation type="unfinished"></translation>
+        <translation>Strāva pieslēgta</translation>
     </message>
     <message>
         <source>External power disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Årējā barošana atslēgta</translation>
     </message>
     <message>
         <source>Jacket  </source>
-        <translation type="unfinished"></translation>
+        <translation>Paplašinājums  </translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav pieslēgts baterijas papildinājums</translation>
     </message>
     <message>
         <source>Remaining Power: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Atlikusi Strāva: %1%</translation>
     </message>
     <message>
         <source>Remaining Time: %1m %2s</source>
-        <translation type="unfinished"></translation>
+        <translation>Atlicis Laiks: %1m %2s</translation>
     </message>
     <message>
         <source>Remaing Power: %1 %2
 Remaining Time: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Atlikusi Strāva: %1 %2
+Atlicis Laiks: %3</translation>
     </message>
     <message>
         <source>Ipaq  %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ipaq  %1</translation>
     </message>
 </context>
 </TS>

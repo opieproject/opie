@@ -247,7 +247,7 @@
     <name>FileTransfer</name>
     <message>
         <source>Was not able to fork</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru atzarot</translation>
     </message>
     <message>
         <source>Could not start</source>

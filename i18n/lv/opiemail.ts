@@ -104,7 +104,7 @@
     </message>
     <message>
         <source>No Receiver specified</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav uzrādīts Saņēmējs</translation>
     </message>
 </context>
 <context>
@@ -387,7 +387,9 @@ tika kopas ar šo filtru.</translation>
         <source>Enter a filter string here.
 Then hit &quot;get newsgroup list&quot; again and only groups starting 
 with that filter will be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet šeit atlases rindu.
+Tad nospiediet &quot;saņemt grupu sarakstu&quot; atkal un tiks parādītas
+tikai grupas kas sākās ar šo rindu.</translation>
     </message>
 </context>
 <context>
@@ -547,15 +549,15 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>ask before downloading large mails</source>
-        <translation type="unfinished"></translation>
+        <translation>jautāt pirms lielu E-pastu lejuplādes</translation>
     </message>
     <message>
         <source>Large mail size (kb):</source>
-        <translation type="unfinished"></translation>
+        <translation>Liela pasta izmērs (kb):</translation>
     </message>
     <message>
         <source> kB</source>
-        <translation type="unfinished"></translation>
+        <translation>kB</translation>
     </message>
 </context>
 <context>
@@ -750,7 +752,7 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>E-Mail by %1</source>
-        <translation type="unfinished">E-Pasts no %1</translation>
+        <translation>E-Pasts no %1</translation>
     </message>
 </context>
 <context>
@@ -797,7 +799,7 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>E-Mail view</source>
-        <translation type="unfinished"></translation>
+        <translation>E-Pasta skats</translation>
     </message>
 </context>
 <context>

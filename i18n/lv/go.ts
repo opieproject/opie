@@ -3,50 +3,50 @@
     <name>GoMainWidget</name>
     <message>
         <source>New Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauna Spēle</translation>
     </message>
     <message>
         <source>Pass</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasēt</translation>
     </message>
     <message>
         <source>Resign</source>
-        <translation type="unfinished"></translation>
+        <translation>Atkāpties</translation>
     </message>
     <message>
         <source>Two player option</source>
-        <translation type="unfinished"></translation>
+        <translation>Divu spēlētāju opcija</translation>
     </message>
     <message>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Spēle</translation>
     </message>
 </context>
 <context>
     <name>GoWidget</name>
     <message>
         <source>White %1, Black %2. </source>
-        <translation type="unfinished"></translation>
+        <translation>Baltie %1, Melnie %2.</translation>
     </message>
     <message>
         <source>White wins.</source>
-        <translation type="unfinished"></translation>
+        <translation>Baltie vinē.</translation>
     </message>
     <message>
         <source>Black wins.</source>
-        <translation type="unfinished"></translation>
+        <translation>Melnie vinē.</translation>
     </message>
     <message>
         <source>A draw.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dalīt.</translation>
     </message>
     <message>
         <source>I pass</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasēt</translation>
     </message>
     <message>
         <source>Prisoners: black %1, white %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Cietumnieki: melnie %1, baltie %2</translation>
     </message>
 </context>
 </TS>

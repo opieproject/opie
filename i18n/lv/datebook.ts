@@ -377,20 +377,20 @@ Labot</translation>
     <name>DateBookWeekLstEvent</name>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">
+        <translation>
 Labot</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished">Duplicēt</translation>
+        <translation>Duplicēt</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Dzēst</translation>
+        <translation>Dzēst</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished">Bīmot</translation>
+        <translation>Bīmot</translation>
     </message>
 </context>
 <context>

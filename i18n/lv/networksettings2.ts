@@ -3,159 +3,159 @@
     <name>ActivateProfileGUI</name>
     <message>
         <source>Activate Network</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivizēt Tīklu</translation>
     </message>
     <message>
         <source>Select profile to activate for </source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādīt aktivizējamo profailu</translation>
     </message>
     <message>
         <source>TextLabel2</source>
-        <translation type="unfinished"></translation>
+        <translation>TekstaEtiķete2</translation>
     </message>
 </context>
 <context>
     <name>ActivateVPNGUI</name>
     <message>
         <source>Activate VPN</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivizēt VPN</translation>
     </message>
     <message>
         <source>Check the VPN&apos;s you want to activate</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārbaudiet aktivizējamos VPN</translation>
     </message>
     <message>
         <source>Column 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolonna 1</translation>
     </message>
 </context>
 <context>
     <name>EditNetworkSetup</name>
     <message>
         <source>Error presentig NetworkSetup</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda uzstādot TīklaUzstādījumus</translation>
     </message>
     <message>
         <source>&lt;p&gt;Old NetworkSetup or missing plugin &quot;&lt;i&gt;%1&lt;/i&gt;&quot;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Vecais TīklaUzstādījums vai trūkst spraudņa &quot;&lt;i&gt;%1&lt;/i&gt;&quot;&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Missing NetworkSetup&quot;&lt;i&gt;%1&lt;/i&gt;&quot;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Iztrūkst TīklaUzstādījumi&quot;&lt;i&gt;%1&lt;/i&gt;&quot;&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Closing NetworkSetup Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Aizveru TīklaUzstādījumu Uzstādījumus</translation>
     </message>
     <message>
         <source>Definition not complete or no name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nosaukuma definīcija ir nepabeigta</translation>
     </message>
     <message>
         <source>Cannot save</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru saglabāt</translation>
     </message>
     <message>
         <source>Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādījumi</translation>
     </message>
     <message>
         <source>No configuration required</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav nepieciešama konfigurācija</translation>
     </message>
 </context>
 <context>
     <name>EditNetworkSetupGUI</name>
     <message>
         <source>Edit profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot profailu</translation>
     </message>
     <message>
         <source>Device Tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Iekārtas Koks</translation>
     </message>
     <message>
         <source>NetworkSetup profile</source>
-        <translation type="unfinished"></translation>
+        <translation>TīklaUzstādījumu profails</translation>
     </message>
     <message>
         <source>Column 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolonna 1</translation>
     </message>
     <message>
         <source>Auto collapse</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto savērse</translation>
     </message>
     <message>
         <source>Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādījumi</translation>
     </message>
 </context>
 <context>
     <name>NetworkSettings</name>
     <message>
         <source>Saving setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt uzstādījumus</translation>
     </message>
     <message>
         <source>Removing profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt profailu</translation>
     </message>
     <message>
         <source>Remove selected profile ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt izvēlēto profailu ?</translation>
     </message>
     <message>
         <source>In System Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Sistēmas Konfigurācijā</translation>
     </message>
     <message>
         <source>Name %1 already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Vārds %1 jau eksistē</translation>
     </message>
     <message>
         <source>&lt;&lt;No description&gt;&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;&lt;Nav apraksta&gt;&gt;</translation>
     </message>
     <message>
         <source>Generate config</source>
-        <translation type="unfinished"></translation>
+        <translation>Ģenerēt konfigurāciju</translation>
     </message>
     <message>
         <source>Activating profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivizēt profailu</translation>
     </message>
     <message>
         <source>Increase availability</source>
-        <translation type="unfinished"></translation>
+        <translation>Palielināt pieejamību</translation>
     </message>
     <message>
         <source>Decrease availability</source>
-        <translation type="unfinished"></translation>
+        <translation>Palielināt pieejamību</translation>
     </message>
     <message>
         <source>&lt;p&gt;Could not save setup to &quot;%1&quot; !&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Nevaru saglabāt uzstādījumu &quot;%1&quot; !&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Cannot build proper file &quot;%1&quot; for node &quot;%2&quot;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Nevaru uzbūvēt attiecīgu failu &quot;%1&quot; nodei &quot;%2&quot;&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Cannot create path &quot;%1&quot; for proper file &quot;%2&quot; for node &quot;%3&quot;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Nevaru izveidot ceļu &quot;%1&quot; attiecīgam failam &quot;%2&quot; nodei &quot;%3&quot;&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Cannot open proper file &quot;%1&quot; for node &quot;%2&quot;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Nevaru atvērt failu &quot;%1&quot; nodei &quot;%2&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Error in section &quot;preamble&quot; for proper file &quot;%1&quot; and node &quot;%2&quot;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt; Kļūda izvēlē &quot;preambula&quot; attiecīgam failam &quot;%1&quot; un nodei &quot;%2&quot;&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Error in section for node &quot;%1&quot; for proper file &quot;%2&quot; and node class &quot;%3&quot;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Kļūda izvēloties nodi &quot;%1&quot; attiecīgam failm &quot;%2&quot; un nodes klasei &quot;%3&quot;&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Error in section &quot;postamble&quot; for proper file &quot;%1&quot; and node &quot;%2&quot;&lt;/p&gt;</source>
@@ -206,27 +206,27 @@
     <name>NetworkSettingsGUI</name>
     <message>
         <source>Network Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Tīkla Uzstādījumi</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Profails</translation>
     </message>
     <message>
         <source>Messages ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ziņas ...</translation>
     </message>
     <message>
         <source>Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Ziņas</translation>
     </message>
     <message>
         <source>Profile ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Profails ...</translation>
     </message>
 </context>
 </TS>
