@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Enable Sounds for:</source>
-        <translation>Habilitar sonidos para:</translation>
+        <translation>Habilitar:</translation>
     </message>
     <message>
         <source>Alarm Sound</source>

@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Passcode incorrect</source>
-        <translation>Código incorrecto</translation>
+        <translation>Código Incorrecto</translation>
     </message>
     <message>
         <source>The passcode entered is incorrect.
@@ -30,6 +30,14 @@ Acceso denegado</translation>
     <message>
         <source>None</source>
         <translation>Ninguna</translation>
+    </message>
+    <message>
+        <source>Enter new passcode</source>
+        <translation type="obsolete">Introduzca nuevo código</translation>
+    </message>
+    <message>
+        <source>Re-enter new passcode</source>
+        <translation type="obsolete">Re-introduzca el código</translation>
     </message>
 </context>
 <context>

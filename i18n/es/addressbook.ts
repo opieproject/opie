@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>No rellenado</translation>
+        <translation>En blanco</translation>
     </message>
 </context>
 <context>
@@ -53,19 +53,19 @@
     <name>AddressSettingsBase</name>
     <message>
         <source>Arrange Edit Fields</source>
-        <translation>Reordenar campos</translation>
+        <translation>Organizando Campos</translation>
     </message>
     <message>
         <source>Select the field order:</source>
-        <translation>Seleccione orden de los campos:</translation>
+        <translation>Seleccione el orden de los campos:</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Arriba</translation>
+        <translation>Subir</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Abajo</translation>
+        <translation>Bajar</translation>
     </message>
 </context>
 <context>
@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>Arrange Edit Fields</source>
-        <translation>Reordenar Campos</translation>
+        <translation>Organizar campos</translation>
     </message>
     <message>
         <source>Out of Space</source>
@@ -204,7 +204,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Vacío</translation>
+        <translation>En blanco</translation>
     </message>
     <message>
         <source>Font</source>
@@ -224,7 +224,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>Importar cCard</translation>
+        <translation>Importar vCard</translation>
     </message>
 </context>
 <context>
@@ -1040,7 +1040,7 @@ alta</translation>
     </message>
     <message>
         <source>Reunion</source>
-        <translation type="unfinished"></translation>
+        <translation>Reunion</translation>
     </message>
     <message>
         <source>Romania</source>
@@ -1236,143 +1236,143 @@ alta</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Fax negocio</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Fax casa</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Tfno. negocio</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Teléfono casa</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Móvil negocio</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Móvil personal</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation type="unfinished"></translation>
+        <translation>Web negocio</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Web personal</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation type="unfinished"></translation>
+        <translation>Busca negocio</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Calle negocio</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Calle casa</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciudad trabajo</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation type="unfinished"></translation>
+        <translation>Provincia trabajo</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Cód.postal trabajo</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation type="unfinished"></translation>
+        <translation>País trabajo</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciudad casa</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation type="unfinished"></translation>
+        <translation>Provincia casa</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Cód.postal casa</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation type="unfinished"></translation>
+        <translation>País casa</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation type="unfinished"></translation>
+        <translation>Departamento</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished"></translation>
+        <translation>Oficina</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation type="unfinished"></translation>
+        <translation>Profesión</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayudante</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Superior</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Cónyuge</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Cumpleaños</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation type="unfinished"></translation>
+        <translation>Aniversario</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Apodo</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Hijos</translation>
     </message>
     <message>
         <source>Work Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Tfno. trabajo</translation>
     </message>
     <message>
         <source>Work Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Fax trabajo</translation>
     </message>
     <message>
         <source>work Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Móvil trabajo</translation>
     </message>
     <message>
         <source>Work Pager</source>
-        <translation type="unfinished"></translation>
+        <translation>Busca trabajo</translation>
     </message>
     <message>
         <source>Work Web Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Web trabajo</translation>
     </message>
     <message>
         <source>Work Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Móvil trabajo</translation>
     </message>
 </context>
 </TS>

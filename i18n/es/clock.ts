@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation>Cronómetro</translation>
+        <translation>Crono</translation>
     </message>
     <message>
         <source>Start</source>

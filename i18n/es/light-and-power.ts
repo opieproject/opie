@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Only deactivate LCD during Suspend</source>
-        <translation>Desactivar pantalla sólo al suspender</translation>
+        <translation>Sólo desactivar la pantalla al suspender</translation>
     </message>
     <message>
         <source>Light off after</source>

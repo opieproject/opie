@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>No rellenado</translation>
+        <translation>En blanco</translation>
     </message>
     <message>
         <source> (multi.)</source>
@@ -79,7 +79,7 @@
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>No rellenado</translation>
+        <translation>En blanco</translation>
     </message>
 </context>
 <context>
@@ -92,7 +92,7 @@
         <source>Sorry, another application is
 editing categories.</source>
         <translation>Lo siento, otra aplicación está
-editando categorías.</translation>
+editando las categorías.</translation>
     </message>
     <message>
         <source>Edit Categories</source>
@@ -424,7 +424,7 @@ Libere memoria e intételo de nuevo.</translation>
     <message>
         <source>Are you sure you want to delete
  %1?</source>
-        <translation>¿Está seguro que quiere borrar
+        <translation>¿Seguro que quiere borrar
 %1?</translation>
     </message>
     <message>
@@ -433,7 +433,7 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>No rellenado</translation>
+        <translation>En blanco</translation>
     </message>
     <message>
         <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>
@@ -445,87 +445,87 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Email Addresses: </source>
-        <translation>Correo-e:</translation>
+        <translation>Correos-e: </translation>
     </message>
     <message>
         <source>Home Phone: </source>
-        <translation>Teléfono casa:</translation>
+        <translation>Teléfono casa: </translation>
     </message>
     <message>
         <source>Home Fax: </source>
-        <translation>Fax casa:</translation>
+        <translation>Fax casa: </translation>
     </message>
     <message>
         <source>Home Mobile: </source>
-        <translation>Móvil personal:</translation>
+        <translation>Móvil personal: </translation>
     </message>
     <message>
         <source>Home Web Page: </source>
-        <translation>Página web personal:</translation>
+        <translation>Web personal: </translation>
     </message>
     <message>
         <source>Business Web Page: </source>
-        <translation>Página web empresa:</translation>
+        <translation>Web negocio: </translation>
     </message>
     <message>
         <source>Office: </source>
-        <translation>Oficina:</translation>
+        <translation>Oficina: </translation>
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation>Teléfono empresa:</translation>
+        <translation>Teléfono negocio: </translation>
     </message>
     <message>
         <source>Business Fax: </source>
-        <translation>Fax empresa:</translation>
+        <translation>Fax negocio: </translation>
     </message>
     <message>
         <source>Business Mobile: </source>
-        <translation>Móvil empresa:</translation>
+        <translation>Móvil negocio: </translation>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation>Busca empresa:</translation>
+        <translation>Busca negocio: </translation>
     </message>
     <message>
         <source>Profession: </source>
-        <translation>Profesión:</translation>
+        <translation>Profesión: </translation>
     </message>
     <message>
         <source>Assistant: </source>
-        <translation>Ayudante:</translation>
+        <translation>Ayudante: </translation>
     </message>
     <message>
         <source>Manager: </source>
-        <translation>Gerente:</translation>
+        <translation>Superior: </translation>
     </message>
     <message>
         <source>Male</source>
-        <translation>Varón</translation>
+        <translation>Hombre</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation>Hembra</translation>
+        <translation>Mujer</translation>
     </message>
     <message>
         <source>Gender: </source>
-        <translation>Género:</translation>
+        <translation>Género: </translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation>Esposa:</translation>
+        <translation>Cónyuge: </translation>
     </message>
     <message>
         <source>Birthday: </source>
-        <translation>Cumpleaños:</translation>
+        <translation>Cumpleaños: </translation>
     </message>
     <message>
         <source>Anniversary: </source>
-        <translation>Aniversario:</translation>
+        <translation>Aniversario: </translation>
     </message>
     <message>
         <source>Nickname: </source>
-        <translation>Apodo:</translation>
+        <translation>Apodo: </translation>
     </message>
     <message>
         <source>Name Title</source>
@@ -553,7 +553,7 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation>Título profesional</translation>
+        <translation>Cargo</translation>
     </message>
     <message>
         <source>Department</source>
@@ -565,19 +565,19 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation>Teléfono empresa</translation>
+        <translation>Teléfono negocio</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>Fax empresa</translation>
+        <translation>Fax negocio</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>Móvil empresa</translation>
+        <translation>Móvil negocio</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Correo-e predefinido</translation>
+        <translation>Correo-e omisión</translation>
     </message>
     <message>
         <source>Emails</source>
@@ -597,31 +597,31 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Calle empresa</translation>
+        <translation>Calle negocio</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Ciudade empresa</translation>
+        <translation>Ciudad negocio</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Provincia empresa</translation>
+        <translation>Provincia negocio</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Zip empresa</translation>
+        <translation>CP negocio</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>País empresa</translation>
+        <translation>País negocio</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>Busca empresa</translation>
+        <translation>Busca negocio</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>Página web empresa</translation>
+        <translation>Web negocio</translation>
     </message>
     <message>
         <source>Office</source>
@@ -637,7 +637,7 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation>Gerente</translation>
+        <translation>Superior</translation>
     </message>
     <message>
         <source>Home Street</source>
@@ -653,7 +653,7 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>Zip casa</translation>
+        <translation>Cód.portal casa</translation>
     </message>
     <message>
         <source>Home Country</source>
@@ -661,11 +661,11 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>Página web personal</translation>
+        <translation>Web personal</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation>Esposa</translation>
+        <translation>Cónyuge</translation>
     </message>
     <message>
         <source>Gender</source>
@@ -685,7 +685,7 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation>Niños</translation>
+        <translation>Hijos</translation>
     </message>
     <message>
         <source>Notes</source>

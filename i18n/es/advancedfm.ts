@@ -145,7 +145,7 @@
     </message>
     <message>
         <source>Rescan</source>
-        <translation>Reexaminar</translation>
+        <translation>Actualizar</translation>
     </message>
     <message>
         <source>File Info</source>
@@ -193,11 +193,11 @@ Do you really want to delete it?</source>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation>Fijar permisos fichero</translation>
+        <translation>Fijar Permisos Fichero</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation>Fijar permisos fichero para:</translation>
+        <translation>Fijar permisos para el fichero:</translation>
     </message>
     <message>
         <source>owner</source>
@@ -221,15 +221,15 @@ Do you really want to delete it?</source>
     </message>
     <message>
         <source>read</source>
-        <translation>leer</translation>
+        <translation>lectura</translation>
     </message>
     <message>
         <source>write</source>
-        <translation>escribir</translation>
+        <translation>escritura</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation>ejecutar</translation>
+        <translation>ejecución</translation>
     </message>
 </context>
 </TS>

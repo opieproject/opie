@@ -291,7 +291,7 @@
     </message>
     <message>
         <source>Used servers: (Highlighted feeds are active)</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidores usados: (Fuentes activas resaltadas)</translation>
     </message>
 </context>
 <context>
