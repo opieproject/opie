@@ -4,5 +4,6 @@ Section: opie/settings
 Maintainer: Patrick S. Vogt <tille@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base ($QPE_VERSION), ntpdate
 Description: ntp ( Network  Time  Protocol) gui
+This utility syncs system time with a atomic timerserver via internet
