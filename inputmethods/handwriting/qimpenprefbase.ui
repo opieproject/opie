@@ -61,12 +61,12 @@
                         <cstring>multiStrokeSlider</cstring>
                     </property>
                     <property stdset="1">
-                        <name>minValue</name>
-                        <number>250</number>
-                    </property>
-                    <property stdset="1">
                         <name>maxValue</name>
                         <number>1000</number>
+                    </property>
+                    <property stdset="1">
+                        <name>minValue</name>
+                        <number>250</number>
                     </property>
                     <property stdset="1">
                         <name>lineStep</name>
