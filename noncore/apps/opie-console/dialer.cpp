@@ -224,8 +224,7 @@ QString Dialer::receive()
 	QString buf;
 	char buffer[1024];
 	int ret;
-
-	qApp->processEvents();
+	int counter;
 
 	while(1)
 	{
@@ -247,7 +246,9 @@ qWarning("Receiving: '%s'", buf.latin1());
 		else if(ret < 0)
 		{
 			if(errno != EAGAIN) reset();
+			else if(!(counter++ % 100)) qApp->processEvents();
 		}
+		else if(!(counter++ % 100)) qApp->processEvents();
 	}
 
 	return QString::null;
