@@ -2,8 +2,6 @@
 Type=Application
 Exec=kpacman
 Icon=kpacman/kpacman
-Comment=
-Comment[de]=
 Name=Kpacman
 Name[de]=Kpacman
 Name[it]=Pac Man

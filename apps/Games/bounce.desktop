@@ -4,3 +4,4 @@ Exec=bounce
 Icon=bounce/bounce
 Comment=A JezzGame 
 Name=Bounce
+Name[de]=Bounce
