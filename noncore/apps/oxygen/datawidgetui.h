@@ -8,10 +8,12 @@
  *                                                                         *
  **************************************************************************/
 #include "datawidget.h"
+#include "dataTable.h"
 
 class QTable;
+class QComboBox;
 
-class dataWidgetUI : public dataWidget
+class dataWidgetUI : public QDialog
 {
 	Q_OBJECT
 	
@@ -20,6 +22,8 @@ class dataWidgetUI : public dataWidget
 
     private:
         void createTableLayout();
+        QTable *DataTable;
+        QComboBox *dataCombo;
 
     private slots:
         void slotShowData(int);

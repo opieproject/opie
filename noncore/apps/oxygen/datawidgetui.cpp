@@ -13,9 +13,23 @@
 #include <qtable.h>
 #include <qstring.h>
 #include <qcombobox.h>
+#include <qlayout.h>
 
-dataWidgetUI::dataWidgetUI() : dataWidget()
+dataWidgetUI::dataWidgetUI() : QDialog()
 {
+    this->setCaption("foo");
+    
+    QVBoxLayout *vbox = new QVBoxLayout( this );
+    
+    dataCombo = new QComboBox( this );
+    DataTable = new QTable( 7,2, this );
+
+    vbox->addWidget( dataCombo );
+    vbox->addWidget( DataTable );
+    
+    DataTable->show();
+    dataCombo->show();
+    
     connect ( dataCombo, SIGNAL( activated(int) ), this, SLOT( slotShowData(int) ) );
     Config test( "/home/opie/Settings/oxygendata", Config::File );
     
@@ -33,19 +47,19 @@ dataWidgetUI::dataWidgetUI() : dataWidget()
 }
 
 void dataWidgetUI::createTableLayout(){
-    dataTable->horizontalHeader()->hide();
-    dataTable->verticalHeader()->hide();
-    dataTable->setTopMargin( 0 );
-    dataTable->setLeftMargin( 0 );
+    DataTable->horizontalHeader()->hide();
+    DataTable->verticalHeader()->hide();
+    DataTable->setTopMargin( 0 );
+    DataTable->setLeftMargin( 0 );
     
-    dataTable->setText( 0,0,"Weight:" );
-    dataTable->setText( 1,0,"Block" );
-    dataTable->setText( 2,0,"Group" );
-    dataTable->setText( 3,0,"Electronegativity" );
-    dataTable->setText( 4,0,"Atomic radius" );
-    dataTable->setText( 5,0,"Ionizationenergie" );
-    dataTable->setText( 6,0,"Density" );
-    dataTable->setText( 7,0,"Boilingpoint" );
+    DataTable->setText( 0,0,"Weight:" );
+    DataTable->setText( 1,0,"Block" );
+    DataTable->setText( 2,0,"Group" );
+    DataTable->setText( 3,0,"Electronegativity" );
+    DataTable->setText( 4,0,"Atomic radius" );
+    DataTable->setText( 5,0,"Ionizationenergie" );
+    DataTable->setText( 6,0,"Density" );
+    DataTable->setText( 7,0,"Boilingpoint" );
 }
 
 
@@ -53,19 +67,19 @@ void dataWidgetUI::slotShowData(int number){
     Config test( "/home/opie/Settings/oxygendata", Config::File );
     test.setGroup( QString::number( number+1 ));
     QString weight = test.readEntry( "Weight" );
-    dataTable->setText( 0,1,weight ); 
+    DataTable->setText( 0,1,weight ); 
     QString block = test.readEntry( "Block" );
-    dataTable->setText( 1,1,block ); 
+    DataTable->setText( 1,1,block ); 
     QString grp = test.readEntry( "Group" );
-    dataTable->setText( 2,1,grp ); 
+    DataTable->setText( 2,1,grp ); 
     QString en = test.readEntry( "EN" );
-    dataTable->setText( 3,1,en ); 
+    DataTable->setText( 3,1,en ); 
     QString ar = test.readEntry( "AR" );
-    dataTable->setText( 4,1,ar ) ; 
+    DataTable->setText( 4,1,ar ) ; 
     QString ion = test.readEntry( "IE" );
-    dataTable->setText( 5,1,ion ); 
+    DataTable->setText( 5,1,ion ); 
     QString dens = test.readEntry( "Density" );
-    dataTable->setText( 6,1,dens ); 
+    DataTable->setText( 6,1,dens ); 
     QString bp = test.readEntry( "BP" );
-    dataTable->setText( 7,1,bp ); 
+    DataTable->setText( 7,1,bp ); 
 }

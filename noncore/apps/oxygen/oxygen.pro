@@ -4,6 +4,7 @@ HEADERS		= oxygen.h \
             kmolcalc.h \
             kmolelements.h \
             calcdlgui.h \
+            dataTable.h \
             datawidgetui.h
 
 SOURCES		= main.cpp \
@@ -11,12 +12,12 @@ SOURCES		= main.cpp \
           kmolcalc.cpp \
           calcdlgui.cpp \
           kmolelements.cpp \
+          dataTable.cpp \
           datawidgetui.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS		+= -lqpe
-INTERFACES	= calcdlg.ui \
-              datawidget.ui
+INTERFACES	= calcdlg.ui 
 TARGET 		= oxygen
 DESTDIR		= $(OPIEDIR)/bin
 
