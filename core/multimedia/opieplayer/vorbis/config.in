@@ -2,3 +2,5 @@
     boolean "libtremorplugin"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && OPIEPLAYER
+    comment "tremor is ogg vorbis!!"
+    
