@@ -29,6 +29,7 @@ class QListView;
 //#define       DRAW_TEST_ITERATIONS     5000
 
 #define       INT_TEST_ITERATIONS      50
+#define       DHRYSTONE_RUNS           20000000
 #define       CHAR_TEST_ITERATIONS     15000
 #define       DRAW_TEST_ITERATIONS     5000
 

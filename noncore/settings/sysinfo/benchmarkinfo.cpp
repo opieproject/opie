@@ -37,15 +37,17 @@
 #include <qpushbutton.h>
 
 /* STD */
-#include <stdio.h>
 #include <time.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "benchmarkinfo.h"
 
 extern "C"
 {
     void BenchFFT( void );
+    double dhry_main( int );
 }
 
 //===========================================================================
@@ -122,9 +124,8 @@ void BenchmarkInfo::run()
 
     if ( test_alu->isOn() )
     {
-        t.start();
-        benchInteger();
-        test_alu->setText( 1, QString( "%1 secs" ).arg( QString::number( t.elapsed() / 1000.0 ) ) );
+        int d = round( dhry_main( DHRYSTONE_RUNS ) );
+        test_alu->setText( 1, QString( "%1 DHRYS" ).arg( QString::number( d ) ) );
         test_alu->setOn( false );
     }
 
