@@ -701,7 +701,6 @@ void MainWindow::slotEdit( int uid ) {
 
     /* if completed */
     if ( currentEditor()->accepted() ) {
-        qWarning("Replacing now" );
         handleAlarms( old_todo, todo );
         m_todoMgr.update( todo.uid(), todo );
 	currentView()->replaceEvent( todo );
@@ -759,6 +758,10 @@ void MainWindow::slotComplete( const OTodo& todo ) {
      * and update the items duedate to the next
      * possible recurrance of this item...
      * the spinned off one will loose the
+     * recurrence.
+     * We calculate the difference between the old due date and the
+     * new one and add this diff to start, completed and alarm dates
+     * -zecke
      */
     if ( to.hasRecurrence() && to.isCompleted() ) {
         OTodo to2( to );
@@ -775,6 +778,8 @@ void MainWindow::slotComplete( const OTodo& todo ) {
          */
         QDate date;
         if ( to2.recurrence().nextOcurrence( to2.dueDate().addDays(1), date ) ) {
+            int dayDiff = to.dueDate().daysTo( date );
+            qWarning("day diff is %d", dayDiff );
             QDate inval;
             /* generate a new uid for the old record */
             to.setUid( 1 );
@@ -788,9 +793,30 @@ void MainWindow::slotComplete( const OTodo& todo ) {
              * and complete date
              */
             to2.setDueDate( date );
-            to2.setStartDate( inval );
+            rec.setStart( date );
+            to2.setRecurrence( rec );  // could be Monday, TuesDay, Thursday every week
+
+            /* move start date */
+            if (to2.hasStartDate() )
+                to2.setStartDate( to2.startDate().addDays( dayDiff ) );
+
+            /* now the alarms */
+            if (to2.hasNotifiers() ) {
+                OPimNotifyManager::Alarms _als = to2.notifiers().alarms();
+                OPimNotifyManager::Alarms als;
+
+                /* for every alarm move the day */
+                for ( OPimNotifyManager::Alarms::Iterator it = _als.begin(); it != _als.end(); ++it ) {
+                    OPimAlarm al = (*it);
+                    al.setDateTime( al.dateTime().addDays( dayDiff ) );
+                    als.append( al );
+                }
+                to2.notifiers().setAlarms( als );
+                handleAlarms( OTodo(), todo );
+            }
             to2.setCompletedDate( inval );
             to2.setCompleted( false );
+
             updateTodo( to2 );
         }else
             updateTodo( to );
@@ -1003,3 +1029,4 @@ void MainWindow::doAlarm( const QDateTime& dt, int uid ) {
     }
 
 }
+

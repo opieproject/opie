@@ -50,7 +50,6 @@ void OTaskEditor::load(const OTodo& to) {
     m_overView->load( to );
     m_stat->load( to );
     m_rec->setRecurrence( to.recurrence(), to.hasDueDate() ? to.dueDate() : QDate::currentDate() );
-    m_alarm->setEnabled( !to.hasRecurrence() );
     m_alarm->load( to );
 }
 void OTaskEditor::init() {
