@@ -13,11 +13,26 @@
  * ToDo:
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.6 2003-01-13 15:49:31 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.7 2003-02-16 22:25:46 zecke Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_vcard.cpp,v $
- * Revision 1.6  2003-01-13 15:49:31  eilers
+ * Revision 1.7  2003-02-16 22:25:46  zecke
+ * 0000276 Fix for that bug.. or better temp workaround
+ * A Preferred Number is HOME|VOICE
+ * A CellPhone is HOME|VOICE|CELL the type & HOME|VOICE test
+ * triggers both
+ * and the cell phone number overrides the other entries..
+ *
+ * as a temp I check that it's not equal to HOME|VOICE|CELL before setting the
+ * number
+ *
+ * The right and final fix would be to reorder the if statement to make it
+ * if else based and the less common thing put to the bottom
+ *
+ * OTodoAccessVcal fix the date for beaming
+ *
+ * Revision 1.6  2003/01/13 15:49:31  eilers
  * Fixing crash when businesscard.vcf is missing..
  *
  * Revision 1.5  2002/12/07 13:26:22  eilers
@@ -53,10 +68,10 @@ OContactAccessBackend_VCard::OContactAccessBackend_VCard ( QString , QString fil
 
 
 bool OContactAccessBackend_VCard::load ()
-{   
+{
 	m_map.clear();
 	m_dirty = false;
-	
+
 	VObject* obj = 0l;
 
 	if ( QFile( m_file ).exists() ){
@@ -81,7 +96,7 @@ bool OContactAccessBackend_VCard::load ()
 		}
 
 		m_map.insert( con.uid(), con );
-		
+
 		VObject *t = obj;
 		obj = nextVObjectInList(obj);
 		cleanVObject( t );
@@ -95,7 +110,7 @@ bool OContactAccessBackend_VCard::reload()
 	return load();
 }
 bool OContactAccessBackend_VCard::save()
-{ 
+{
 	if (!m_dirty )
 		return true;
 
@@ -117,7 +132,7 @@ bool OContactAccessBackend_VCard::save()
 
 	m_dirty = false;
 	return true;
-	
+
 
 }
 void OContactAccessBackend_VCard::clear ()
@@ -137,7 +152,7 @@ bool OContactAccessBackend_VCard::remove ( int uid )
 {
 	m_map.remove( uid );
 	m_dirty = true;
-	return true;	
+	return true;
 }
 
 bool OContactAccessBackend_VCard::replace ( const OContact &contact )
@@ -146,7 +161,7 @@ bool OContactAccessBackend_VCard::replace ( const OContact &contact )
 	m_dirty = true;
 	return true;
 }
-	
+
 OContact OContactAccessBackend_VCard::find ( int uid ) const
 {
     return m_map[uid];
@@ -206,7 +221,7 @@ QArray<int> OContactAccessBackend_VCard::sorted( bool , int, int, int )
 OContact OContactAccessBackend_VCard::parseVObject( VObject *obj )
 {
 	OContact c;
-	
+
 	VObjectIterator it;
 	initPropIterator( &it, obj );
 	while( moreIteration( &it ) ) {
@@ -239,7 +254,7 @@ OContact OContactAccessBackend_VCard::parseVObject( VObject *obj )
 			QString region;
 			QString postal;
 			QString country;
-			
+
 			VObjectIterator nit;
 			initPropIterator( &nit, o );
 			while( moreIteration( &nit ) ) {
@@ -286,7 +301,7 @@ OContact OContactAccessBackend_VCard::parseVObject( VObject *obj )
 				UNKNOWN = 0x80
 			};
 			int type = 0;
-			
+
 			VObjectIterator nit;
 			initPropIterator( &nit, o );
 			while( moreIteration( &nit ) ) {
@@ -314,14 +329,15 @@ OContact OContactAccessBackend_VCard::parseVObject( VObject *obj )
 					type |= HOME;
 				if ( ( type & (VOICE|CELL|FAX|PAGER) ) == 0 ) // default
 					type |= VOICE;
-				
-				if ( (type & (VOICE|HOME) ) == (VOICE|HOME) )
+
+                                qWarning("value %s %d", value.data(), type );
+				if ( (type & (VOICE|HOME) ) == (VOICE|HOME) && (type & (CELL|HOME) ) != (CELL|HOME) )
 					c.setHomePhone( value );
 				if ( ( type & (FAX|HOME) ) == (FAX|HOME) )
 					c.setHomeFax( value );
 				if ( ( type & (CELL|HOME) ) == (CELL|HOME) )
 					c.setHomeMobile( value );
-				if ( ( type & (VOICE|WORK) ) == (VOICE|WORK) )
+				if ( ( type & (VOICE|WORK) ) == (VOICE|WORK) && (type & (CELL|WORK) ) != (CELL|WORK) )
 					c.setBusinessPhone( value );
 				if ( ( type & (FAX|WORK) ) == (FAX|WORK) )
 					c.setBusinessFax( value );
@@ -406,9 +422,9 @@ OContact OContactAccessBackend_VCard::parseVObject( VObject *obj )
 		else if ( name == VCBirthDateProp ) {
 			// Reading Birthdate regarding RFC 2425 (5.8.4)
 			c.setBirthday( convVCardDateToDate( value ) );
-			
+
 		}
-		
+
 #if 0
 		else {
 			printf("Name: %s, value=%s\n", name.data(), vObjectStringZValue( o ) );
@@ -434,10 +450,10 @@ VObject* OContactAccessBackend_VCard::createVObject( const OContact &c )
 	safeAddPropValue( vcard, VCVersionProp, "2.1" );
 	safeAddPropValue( vcard, VCLastRevisedProp, TimeConversion::toISO8601( QDateTime::currentDateTime() ) );
 	safeAddPropValue( vcard, VCUniqueStringProp, QString::number(c.uid()) );
-	
+
 	// full name
 	safeAddPropValue( vcard, VCFullNameProp, c.fullName() );
-	
+
 	// name properties
 	VObject *name = safeAddProp( vcard, VCNameProp );
 	safeAddPropValue( name, VCFamilyNameProp, c.lastName() );
@@ -445,7 +461,7 @@ VObject* OContactAccessBackend_VCard::createVObject( const OContact &c )
 	safeAddPropValue( name, VCAdditionalNamesProp, c.middleName() );
 	safeAddPropValue( name, VCNamePrefixesProp, c.title() );
 	safeAddPropValue( name, VCNameSuffixesProp, c.suffix() );
-	
+
 	// home properties
 	VObject *home_adr= safeAddProp( vcard, VCAdrProp );
 	safeAddProp( home_adr, VCHomeProp );
@@ -454,7 +470,7 @@ VObject* OContactAccessBackend_VCard::createVObject( const OContact &c )
 	safeAddPropValue( home_adr, VCRegionProp, c.homeState() );
 	safeAddPropValue( home_adr, VCPostalCodeProp, c.homeZip() );
 	safeAddPropValue( home_adr, VCCountryNameProp, c.homeCountry() );
-	
+
 	VObject *home_phone = safeAddPropValue( vcard, VCTelephoneProp, c.homePhone() );
 	safeAddProp( home_phone, VCHomeProp );
 	home_phone = safeAddPropValue( vcard, VCTelephoneProp, c.homeMobile() );
@@ -463,10 +479,10 @@ VObject* OContactAccessBackend_VCard::createVObject( const OContact &c )
 	home_phone = safeAddPropValue( vcard, VCTelephoneProp, c.homeFax() );
 	safeAddProp( home_phone, VCHomeProp );
 	safeAddProp( home_phone, VCFaxProp );
-	
+
 	VObject *url = safeAddPropValue( vcard, VCURLProp, c.homeWebpage() );
 	safeAddProp( url, VCHomeProp );
-	
+
 	// work properties
 	VObject *work_adr= safeAddProp( vcard, VCAdrProp );
 	safeAddProp( work_adr, VCWorkProp );
@@ -475,7 +491,7 @@ VObject* OContactAccessBackend_VCard::createVObject( const OContact &c )
 	safeAddPropValue( work_adr, VCRegionProp, c.businessState() );
 	safeAddPropValue( work_adr, VCPostalCodeProp, c.businessZip() );
 	safeAddPropValue( work_adr, VCCountryNameProp, c.businessCountry() );
-	
+
 	VObject *work_phone = safeAddPropValue( vcard, VCTelephoneProp, c.businessPhone() );
 	safeAddProp( work_phone, VCWorkProp );
 	work_phone = safeAddPropValue( vcard, VCTelephoneProp, c.businessMobile() );
@@ -487,41 +503,41 @@ VObject* OContactAccessBackend_VCard::createVObject( const OContact &c )
 	work_phone = safeAddPropValue( vcard, VCTelephoneProp, c.businessPager() );
 	safeAddProp( work_phone, VCWorkProp );
 	safeAddProp( work_phone, VCPagerProp );
-	
+
 	url = safeAddPropValue( vcard, VCURLProp, c.businessWebpage() );
 	safeAddProp( url, VCWorkProp );
-	
+
 	VObject *title = safeAddPropValue( vcard, VCTitleProp, c.jobTitle() );
 	safeAddProp( title, VCWorkProp );
-	
-	
+
+
 	QStringList emails = c.emailList();
 	emails.prepend( c.defaultEmail() );
 	for( QStringList::Iterator it = emails.begin(); it != emails.end(); ++it ) {
 		VObject *email = safeAddPropValue( vcard, VCEmailAddressProp, *it );
 		safeAddProp( email, VCInternetProp );
 	}
-	
+
 	safeAddPropValue( vcard, VCNoteProp, c.notes() );
-	
+
 	// Exporting Birthday regarding RFC 2425 (5.8.4)
 	if ( c.birthday().isValid() ){
 		qWarning("Exporting birthday as: %s", convDateToVCardDate( c.birthday() ).latin1() );
 		safeAddPropValue( vcard, VCBirthDateProp, convDateToVCardDate( c.birthday() ) );
 	}
-	
+
 	if ( !c.company().isEmpty() || !c.department().isEmpty() || !c.office().isEmpty() ) {
 		VObject *org = safeAddProp( vcard, VCOrgProp );
 		safeAddPropValue( org, VCOrgNameProp, c.company() );
 		safeAddPropValue( org, VCOrgUnitProp, c.department() );
 		safeAddPropValue( org, VCOrgUnit2Prop, c.office() );
 	}
-	
+
 	// some values we have to export as custom fields
 	safeAddPropValue( vcard, "X-Qtopia-Profession", c.profession() );
 	safeAddPropValue( vcard, "X-Qtopia-Manager", c.manager() );
 	safeAddPropValue( vcard, "X-Qtopia-Assistant", c.assistant() );
-	
+
 	safeAddPropValue( vcard, "X-Qtopia-Spouse", c.spouse() );
 	safeAddPropValue( vcard, "X-Qtopia-Gender", c.gender() );
 	if ( c.anniversary().isValid() ){
@@ -530,7 +546,7 @@ VObject* OContactAccessBackend_VCard::createVObject( const OContact &c )
 	}
 	safeAddPropValue( vcard, "X-Qtopia-Nickname", c.nickname() );
 	safeAddPropValue( vcard, "X-Qtopia-Children", c.children() );
-	
+
 	return vcard;
 }
 
@@ -544,7 +560,7 @@ QString OContactAccessBackend_VCard::convDateToVCardDate( const QDate& d ) const
 		int pos = 0;
 		while ( ( pos = str_rfc2425.find (' ')  ) > 0 )
 			str_rfc2425.replace( pos, 1, "0" );
-		
+
 		return str_rfc2425;
 }
 

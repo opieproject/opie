@@ -58,9 +58,12 @@ namespace {
         if( task == 0 )
             return 0l;
 
-        if( event.hasDueDate() )
+        if( event.hasDueDate() ) {
+            QTime time(0, 0, 0);
+            QDateTime date(event.dueDate(), time );
             addPropValue( task, VCDueProp,
-                          TimeConversion::toISO8601( event.dueDate() ) );
+                          TimeConversion::toISO8601( date ) );
+        }
 
         if( event.isCompleted() )
             addPropValue( task, VCStatusProp, "COMPLETED");
