@@ -93,8 +93,21 @@ LanguageSettings::~LanguageSettings()
 
 void LanguageSettings::accept()
 {
-	applyLanguage();
-	QDialog::accept();
+	switch( QMessageBox::warning( this, "Language",
+		"Attention, all windows will be closed\n"
+		"by changing the language\n"
+		"without saving the Data.\n\n"
+		"Go on?",
+		"Ok", "Cancel", 0,
+		 0, 1 ))
+	{
+	 case 0: // OK
+	 	applyLanguage();
+	        QDialog::accept();
+		break;
+	 case 1: // Abbruch
+		break;
+	}
 }
 
 void LanguageSettings::applyLanguage()
