@@ -1,6 +1,3 @@
-QMAKE_CFLAGS = -DHAVE_OPENPTY
-TMAKE_FLAGS += -DHAVE_OPENPTY
-QMAKE_LIBS = -lutil
 CONFIG    += qt warn_on release quick-app
 HEADERS   = TEWidget.h \
       TEScreen.h \
@@ -32,7 +29,7 @@ INTERFACES =  commandeditdialogbase.ui smallcommandeditdialogbase.ui
 TARGET    = embeddedkonsole
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe -lopiecore2 -lqtaux2
-TMAKE_CXXFLAGS += -DQT_QWS_OPIE -DHAVE_OPENPTY
+LIBS            += -lqpe -lopiecore2 -lqtaux2 -lutil
+DEFINES += QT_QWS_OPIE HAVE_OPENPTY
 
 include ( $(OPIEDIR)/include.pro )
