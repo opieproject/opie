@@ -52,7 +52,7 @@ void initEnvironment()
 {
     int rot;
     Config config("locale");
-    
+
     config.setGroup( "Location" );
     QString tz = config.readEntry( "Timezone", getenv("TZ") );
 
@@ -126,13 +126,6 @@ int initApplication( int argc, char ** argv )
     }
 
     d->show();
-
-	if ( QDate::currentDate ( ). year ( ) < 2000 ) {
-		if ( QMessageBox::information ( 0, DesktopApplication::tr( "Information" ), DesktopApplication::tr( "<p>The system date doesn't seem to be valid.\n(%1)</p><p>Do you want to correct the clock ?</p>" ). arg( TimeString::dateString ( QDate::currentDate ( ))), QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes ) {
-			QCopEnvelope e ( "QPE/Application/systemtime", "setDocument(QString)" );
-			e << QString ( );		                              
-		}
-	}
 
     int rv =  a.exec();
 
