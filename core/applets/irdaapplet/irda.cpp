@@ -195,8 +195,11 @@ void IrdaApplet::mousePressEvent( QMouseEvent *) {
         menu->insertItem( tr("Enable Receive"), 4 );
     }
 
-    QPoint p = mapToGlobal( QPoint(1, menu->sizeHint().height()-1) );
-    ret = menu->exec(p, 2);
+    QPoint p = mapToGlobal ( QPoint ( 0, 0 ));
+    QSize s = menu-> sizeHint ( );
+    ret = menu->exec( QPoint ( 
+	p. x ( ) + ( width ( ) / 2 ) - ( s. width ( ) / 2 ), 
+	p. y ( ) - s. height ( ) ), 0);
 
     qDebug("ret was %d\n", ret);
 
