@@ -5,3 +5,7 @@ Icon=osearch/OSearch
 Type=Application
 Name=search
 Name[de]=suchen
+Name[pt]=Procura
+Name[pt_BR]=Procura
+Comment[pt]=Procure os dados
+Comment[pt_BR]=Procure os dados

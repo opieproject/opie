@@ -1,12 +1,14 @@
 [Desktop Entry]
-Categories = 
+Categories =
 Comment = A Todo List Program
 Comment[da] = Et program til styring af opgaver
 Comment[de] = Ein Programm zur Verwaltung von Aufgaben
 Comment[es] = Un programa de lista de tareas
 Comment[fr] = Un programme de liste de tâches
+Comment[pt] = Gestor de tarefas
+Comment[pt_BR] = Gerenciador de afazeres
 Exec = todolist
-File = 
+File =
 Icon = todo/TodoList
 Name = Todo List
 Name[da] = Opgaveliste

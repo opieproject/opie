@@ -1,11 +1,14 @@
 [Desktop Entry]
 Comment=A Code Breaking Game
 Comment[es]=Juego de romper códigos
+Comment[pt]=Jogo de mastermind
+Comment[pt_BR]=Jogo de mastermind
 Exec=mindbreaker
 Icon=mindbreaker/Mindbreaker
 Type=Application
 Name=Mindbreaker
-Name[pt]=Mindbreaker
+Name[pt]=Mastermind
+Name[pt_BR]=Mastermind
 Name[es]=Rompecabezas
 Name[it]=MindBreaker (Mastermind)
 Name[de]=Mindbreaker

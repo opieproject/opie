@@ -1,6 +1,8 @@
 [Desktop Entry]
 Comment=A Snake Game
 Comment[es]=El juego de la serpiente
+Comment[pt]=O jogo da cobra
+Comment[pt_BR]=O jogo da cobra
 Exec=snake
 Icon=snake/Snake
 Type=Application

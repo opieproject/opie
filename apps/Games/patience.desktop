@@ -1,6 +1,8 @@
 [Desktop Entry]
 Comment=A Game of Patience
 Comment[es]=Juego de paciencia
+Comment[pt]=Jogo do solitário
+Comment[pt_BR]=Jogo da paciencia
 Exec=patience
 Icon=cards/Solitaire
 Type=Application

@@ -1,5 +1,9 @@
 [Desktop Entry]
+Comment[pt] = Gravador de Som
+Comment[pt_BR] = Gravador de Som
 Exec = opierec
 Icon = opierec/Opierec
 Type = Application
 Name = OpieRecord
+Name[pt] = Gravador
+Name[pt_BR] = Gravador

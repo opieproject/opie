@@ -2,6 +2,8 @@
 Comment=Set date and time from network
 Comment[es]=Fije la hora por el Network Time Protocol (NTP)
 Comment[da]=Indstil dato og tid manuelt eller via NTP
+Comment[pt]=Configura a data e hora via rede (NTP)
+Comment[pt_BR]=Configura a data e hora via rede (NTP)
 Exec=systemtime
 Icon=netsystemtime/DateTime
 Type=Application
@@ -13,3 +15,5 @@ Name[de]=Datum
 Name[es]=Hora NTP
 Name[da]=Dato/Tid
 Name[fr]=Date et heure
+Name[pt]=Data e Hora
+Name[pt_BR]=Data e Hora

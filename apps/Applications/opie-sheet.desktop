@@ -1,6 +1,8 @@
 [Desktop Entry]
 Comment=Spreadsheet Application
 Comment[es]=Aplicación de hoja de cálculo
+Comment[pt]=Folha de cálculo
+Comment[pt_BR]=Folha de cálculo
 Exec=sheetqt
 Icon=opie-sheet/sheetqt
 Type=Application
@@ -12,3 +14,5 @@ Name[it]=Foglio di Calcolo
 Name[zh_TW]=Opie Sheet
 Name[ko]=스프레드시트
 Name[fr]=Tableur
+Name[pt]=Folha de Cálculo
+Name[pt_BR]=Folha de Cálculo

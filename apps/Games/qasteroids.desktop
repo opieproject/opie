@@ -1,6 +1,8 @@
 [Desktop Entry]
 Comment=Shoot the rocks
 Comment[es]=Dispare a las rocas
+Comment[pt]=Dispare contra as rochas
+Comment[pt_BR]=Dispare contra as rochas
 Exec=qasteroids
 Icon=qasteroids/Asteroids
 Type=Application
@@ -8,6 +10,7 @@ Name=Asteroids
 Name[hu]=Asteroids
 Name[de]=Asteroiden
 Name[pt]=Asteróides
+Name[pt_BR]=Asteróides
 Name[es]=Asteroides
 Name[it]=Asteroids
 Name[zh_TW]=Asteroids

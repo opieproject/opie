@@ -5,3 +5,7 @@ Icon=qashmoney.png
 Name=QashMoney
 Terminal=false
 Type=Application
+Name[pt]=Gestor Dinheiro
+Name[pt_BR]=Gestor Dinheiro
+Comment[pt]=Gestor de Dinheiro
+Comment[pt_BR]=Gestor de Dinheiro

@@ -1,6 +1,8 @@
 [Desktop Entry]
 Comment=A word arranging game
 Comment[es]=Juego de organizar palabras
+Comment[pt]=Jogo de palavras cruzadas
+Comment[pt_BR]=Jogo de palavras cruzadas
 Exec=wordgame
 Icon=wordgame/WordGame
 Type=Application

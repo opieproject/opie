@@ -1,11 +1,14 @@
 [Desktop Entry]
 Comment=Tab Managing Tool
 Comment[es]=Herramienta para gestionar las etiquetas superiores
+Comment[pt]=Gestor de pastas
+Comment[pt_BR]=Gerenciador de pastas
 Exec=tabmanager
 Icon=tabmanager/tabmanager
 Type=Settings
 Name=Tab Manager
 Name[pt]=Pastas
+Name[pt_BR]=Pastas
 Name[es]=Gestor Etiquetas
 Name[it]=Gestione Tab
 Name[zh_TW]=Tab Manager
