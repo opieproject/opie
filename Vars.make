@@ -36,12 +36,13 @@ export QMAKESPECSDIR=$(OPIEDIR)/mkspecs
 
 ifeq ($(QPE_VERSION),)
     VERSION_MAJ:=$(shell echo $$(sed -n -e 's/.*QPE_VERSION "\([0-9]*\)\..*\..*".*/\1/p' <$(OPIEDIR)/library/version.h))
-    VERSION_MIN:=$(shell echo $$(sed -n -e 's/.*QPE_VERSION ".*\.\([0-9]*\)\..*".*/\1/p' <$(OPIEDIR)/library/version.h))
+    VERSION_MIN:=$(shell echo $$(sed -n -e 's/.*QPE_VERSION "\([0-9]*\)\.\([0-9]*\)\.\([0-9]*\).*".*/\2/p' <$(OPIEDIR)/library/version.h))
+    VERSION_DEV:=$(shell echo $$(sed -n -e 's/.*QPE_VERSION "\([0-9]*\)\.\([0-9]*\)\.\([0-9]*\).*".*/\3/p' <$(OPIEDIR)/library/version.h))
     VERSION_PAT:=$(shell echo $$(sed -n -e 's/.*QPE_VERSION ".*\..*\.\([0-9]*\).*/\1/p' <$(OPIEDIR)/library/version.h))
-    QPE_VERSION:=$(VERSION_MAJ).$(VERSION_MIN).$(VERSION_PAT)
+    QPE_VERSION:=$(VERSION_MAJ).$(VERSION_MIN).$(VERSION_DEV).$(VERSION_PAT)
 
     ifeq ($(QPE_VERSION),..)
-        QPE_VERSION=0.9.3
+        $(error Can't compute QPE_VERSION)
     endif
 endif
 export QPE_VERSION

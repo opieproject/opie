@@ -98,7 +98,8 @@ apidox : doc/generate_apidox
 version:
 	@echo "Opie-Version is computed as $(VERSION_MAJ) (version_maj), \
                                            $(VERSION_MIN) (version_min), \
+                                           $(VERSION_DEV) (version_dev), \
                                            $(VERSION_PAT) (version_pat), \
-                                           $(SUB_VERSION) (subversion)"
+                                           $(SUB_VERSION) (subversion) --> $(QPE_VERSION)$(EXTRAVERSION)"
 
 include $(TOPDIR)/Rules.make
