@@ -41,4 +41,5 @@ TRANSLATIONS = ../../../i18n/de/sysinfo.ts \
 	 ../../../i18n/pt_BR/sysinfo.ts \
 	 ../../../i18n/sl/sysinfo.ts \
 	 ../../../i18n/zh_CN/sysinfo.ts \
-	 ../../../i18n/zh_TW/sysinfo.ts
+	 ../../../i18n/zh_TW/sysinfo.ts \
+	 ../../../i18n/da/sysinfo.ts
