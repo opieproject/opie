@@ -92,12 +92,14 @@ public slots:
     g->setGroup( "General" );
     g->writeEntry( "debugMode", m );
     e->setText( OGlobalSettings::debugOutput() );
+    g->write();
   }
   void updateDebugOutput()
   {
     OConfig* g = OGlobal::config();
     g->setGroup( "General" );
     g->writeEntry( "debugOutput"+QString::number(OGlobalSettings::debugMode()), e->text() );
+    g->write();
   }
   void emitInfoOutput()
   {

@@ -6,8 +6,8 @@ INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lopiecore2 -lopienet2
 TARGET          = miniwellenreiter
-MOC_DIR     = moc
-OBJECTS_DIR = obj
+MOC_DIR         = moc
+OBJECTS_DIR     = obj
 
 include ( $(OPIEDIR)/include.pro )
 

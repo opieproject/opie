@@ -1,7 +1,6 @@
 /*
                              This file is part of the Opie Project
-
-                             (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+                             Copyright (C) 2003 by Michael 'Mickey' Lauer <mickey@Vanille.de>
               =.
             .=l.
            .>+-=

@@ -1,9 +1,6 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) 2003 by the Wellenreiter team:
-                             Martin J. Muench <mjm@remote-exploit.org>
-                             Max Moser <mmo@remote-exploit.org
-                             Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+                             Copyright (C) 2003 by Michael 'Mickey' Lauer <mickey@Vanille.de>
               =.
             .=l.
            .>+-=
@@ -950,6 +947,7 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
             offset += we->len;
             we = (struct iw_event*) &buffer[offset];
         }
+        return stations;
 
         return stations;
 

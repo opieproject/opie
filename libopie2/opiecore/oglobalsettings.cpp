@@ -38,6 +38,7 @@
 
 /* QT */
 
+#include <qobject.h>
 #include <qdir.h>
 #include <qpixmap.h>
 #include <qfontinfo.h>

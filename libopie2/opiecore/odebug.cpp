@@ -1,9 +1,8 @@
 /*
                              This file is part of the Opie Project
                              (C) 2003 Michael 'Mickey' Lauer (mickey@tm.informatik.uni-frankfurt.de)
-                             Inspired by the KDE debug classes, which are
-                             (C) 1997 Matthias Kalle Dalheimer (kalle@kde.org)
                              (C) 2002 Holger Freyther (freyther@kde.org)
+                             (C) 1997 Matthias Kalle Dalheimer (kalle@kde.org)
               =.
             .=l.
            .>+-=

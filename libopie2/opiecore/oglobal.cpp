@@ -30,7 +30,14 @@
 
 #include <opie2/oglobal.h>
 
+OConfig* OGlobal::_config = 0;
+
 OConfig* OGlobal::config()
 {
-    return globalconfig;
+    if ( !OGlobal::_config )
+    {
+        qDebug( "OGlobal::creating global configuration instance." );
+        OGlobal::_config = new OConfig( "global" );
+    }
+    return OGlobal::_config;
 }

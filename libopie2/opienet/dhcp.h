@@ -198,3 +198,4 @@ struct dhcp_packet {
 #define FQDN_SUBOPTION_COUNT		8
 
 #endif
+

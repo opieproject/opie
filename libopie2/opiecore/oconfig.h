@@ -35,7 +35,7 @@
 //FIXME: Implement for X11 or reuse libqpe/Config there also?
 //FIXME: Or rather use QSettings also for libqpe?
 
-#include "opieconfig.h"
+#include <qpe/config.h>
 
 class QColor;
 class QFont;
@@ -45,7 +45,7 @@ class QFont;
   * featuring additional handling of color and font entries
   */
 
-class OConfig : public OpieConfig
+class OConfig : public Config
 {
   public:
     /**
@@ -63,7 +63,7 @@ class OConfig : public OpieConfig
      * @returns the name of the current group.
      * The current group is used for searching keys and accessing entries.
      */
-    const QString& group() { return OpieConfig::group(); };
+    const QString& group() { return git.key(); };
     /**
      * @returns a @ref QColor entry or a @a default value if the key is not found.
      */
@@ -101,7 +101,7 @@ class OConfig : public OpieConfig
  * in one block.
  *
  * @author Matthias Kalle Dalheimer <Kalle@kde.org>
- * @version $Id: oconfig.h,v 1.4 2003-09-25 18:11:23 mickeyl Exp $
+ * @version $Id: oconfig.h,v 1.5 2003-12-01 22:44:39 mickeyl Exp $
  * @see OConfig
  */
 

@@ -1,7 +1,6 @@
 /*
                              This file is part of the Opie Project
-
-                             Copyright (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+                             Copyright (C) 2003 Michael 'Mickey' Lauer <mickey@Vanille.de>
               =.
             .=l.
            .>+-=
@@ -31,19 +30,20 @@
 #ifndef OGLOBAL_H
 #define OGLOBAL_H
 
-#include <qpe/global.h>
 #include <opie2/oconfig.h>
 
-static OConfig *globalconfig = new OConfig( "global" );
+//FIXME Is it wise or even necessary to inherit OGlobal from Global?
+//      once we totally skip libqpe it should ideally swallow Global -zecke
+//      You're right. I deleted global as the base class. -mickeyl
 
-//FIXME: Is it wise or even necessary to inherit OGlobal from Global?
-// once we totally skip libqpe it should ideally swallow Global -zecke
-
-class OGlobal : public Global
+class OGlobal
 {
   public:
-    // do we want to put that into OApplication as in KApplication -zecke
+    //FIXME Do we want to put that into OApplication as in KApplication? -zecke
+    //      We already have a per-application config in OApplication
+    //      ( accessed through oApp->config() ), but this one is the global one! -mickeyl
     static OConfig* config();
+    static OConfig* _config;
 };
 
 #endif // OGLOBAL_H

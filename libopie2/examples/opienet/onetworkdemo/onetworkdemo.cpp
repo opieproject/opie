@@ -110,15 +110,16 @@ int main( int argc, char** argv )
 
             // monitor test
 
-            /*
+            
 
             qDebug( "DEMO: current interface mode is '%s'", (const char*) iface->mode() );
             iface->setMode( "monitor" );
             qDebug( "DEMO: current interface mode is '%s'", (const char*) iface->mode() );
 
-            sleep( 1 ); */
+            sleep( 1 );
 
-            iface->setMode( "master" );
+            iface->setChannel( 1 );
+            iface->setMode( "managed" );
 
             //sleep( 1 );
             qDebug( "DEMO: current interface mode is '%s'", (const char*) iface->mode() );

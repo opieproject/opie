@@ -39,12 +39,14 @@
 #include <opie2/oconfig.h>
 
 OConfig::OConfig( const QString &name, Domain domain )
-    :OpieConfig( name, domain )
+        :Config( name, domain )
 {
+    qDebug( "OConfig::OConfig()" );
 }
 
 OConfig::~OConfig()
 {
+    qDebug( "OConfig::~OConfig()" );
 }
 
 QColor OConfig::readColorEntry( const QString& key, const QColor* pDefault ) const

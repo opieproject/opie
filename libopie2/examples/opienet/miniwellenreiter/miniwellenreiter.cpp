@@ -31,7 +31,7 @@ class Wellenreiter : public QApplication
 {
 Q_OBJECT
 public:
-  Wellenreiter( int argc, char** argv ) : QApplication( argc, argv )
+  Wellenreiter( int argc, char** argv ) : QApplication( argc, argv ), channel( 1 )
   {
 
     ONetwork* net = ONetwork::instance();
@@ -56,9 +56,9 @@ public:
     exit( -1 );
     }
 
-    printf( "****************************************************\n" );
-    printf( "* Wellenreiter mini edition 1.0 (C) 2003 M-M-M *\n" );
-    printf( "****************************************************\n" );
+    printf( "*******************************************************************\n" );
+    printf( "* Wellenreiter mini edition 1.0.0 (C) 2003 Michael 'Mickey' Lauer *\n" );
+    printf( "*******************************************************************\n" );
     printf( "\n\n" );
 
     QString interface( argv[1] );
@@ -105,6 +105,12 @@ public:
     if ( driver == "orinoco" )
         new OOrinocoMonitoringInterface( wiface, false );
     else
+    if ( driver == "hostap" )
+        new OHostAPMonitoringInterface( wiface, false );
+    else
+    if ( driver == "wlan-ng" )
+        new OWlanNGMonitoringInterface( wiface, false );
+    else
     {
         printf( "Unknown driver. Exiting\n" );
         exit( -1 );
@@ -112,7 +118,7 @@ public:
 
     // enable monitoring mode
     printf( "Enabling monitor mode...\n" );
-    //wiface->setMonitorMode( true );
+    wiface->setMode( "monitor" );
 
     // open a packet capturer
     cap = new OPacketCapturer();
@@ -131,12 +137,20 @@ public:
 
     // connect
     connect( cap, SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
+    // timer
+    startTimer( 1000 );
 
   }
 
   ~Wellenreiter() {};
 
 public slots:
+  virtual void timerEvent(QTimerEvent* e)
+  {
+    wiface->setChannel( channel++ );
+    if ( channel == 14 ) channel = 1;
+  }
+
   void receivePacket(OPacket* p)
   {
     if (!p)
@@ -203,6 +217,7 @@ public slots:
 private:
   OPacketCapturer* cap;
   OWirelessNetworkInterface* wiface;
+  int channel;
 };
 
 
