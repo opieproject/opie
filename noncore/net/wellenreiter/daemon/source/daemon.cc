@@ -1,7 +1,7 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.11 2002-12-16 17:59:21 mjm Exp $
+ * $Id: daemon.cc,v 1.12 2002-12-16 18:25:36 mickeyl Exp $
  */
 
 #include "config.hh"
@@ -11,7 +11,7 @@
 int main(int argc, char **argv)
 {
   int sock, maxfd, retval, card_type;
-  char buffer[128], sniffer_device[5];
+  char buffer[128], sniffer_device[6];
   struct pcap_pkthdr header;
   pcap_t *handletopcap;
   const unsigned char *packet;
