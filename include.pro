@@ -1,13 +1,13 @@
 # make install
 
 # base opie install path
-outdir = /opt/QtPalmtop
+prefix = /opt/QtPalmtop
 
 contains( TEMPLATE, lib ) {
-	target.path = $$outdir/lib
+	target.path = $$prefix/lib
 }
 !contains( TEMPLATE, lib ) {
-	target.path = $$outdir/bin
+	target.path = $$prefix/bin
 }
 INSTALLS += target
 
@@ -16,13 +16,13 @@ control.path = /CONTROL
 control.files = control postinst prerm postrm preinst conffiles
 INSTALLS += control
 
-# images, default is $$outdir/pics/$$TARGET
-pics.path = $$outdir/pics/$$TARGET
+# images, default is $$prefix/pics/$$TARGET
+pics.path = $$prefix/pics/$$TARGET
 pics.files = pics/*
 INSTALLS += pics
 
-# sounds, default path is $$outdir/sounds/$$TARGET
-sounds.path = $$outdir/sounds/$$TARGET
+# sounds, default path is $$prefix/sounds/$$TARGET
+sounds.path = $$prefix/sounds/$$TARGET
 sounds.files = sounds/*
 INSTALLS += sounds
 
@@ -36,16 +36,16 @@ data.path = /usr/share/$$TARGET
 data.files = share/*
 INSTALLS += data
 
-etc.path = $$outdir/etc/
+etc.path = $$prefix/etc/
 etc.files = etc/*
 INSTALLS += etc
 
-apps.path = $$outdir/apps/
+apps.path = $$prefix/apps/
 apps.files = apps/*
 INSTALLS += apps
 
-# sounds, default path is $$outdir/sounds/$$TARGET
-sounds.path = $$outdir/sounds/$$TARGET
+# sounds, default path is $$prefix/sounds/$$TARGET
+sounds.path = $$prefix/sounds/$$TARGET
 sounds.files = sounds/*
 INSTALLS += sounds
 
@@ -66,5 +66,5 @@ ipk.target = ipk
 ipk.commands = tmp=`mktemp -d /tmp/ipkg-opie.XXXXXXXXXX` && ( $(MAKE) INSTALL_ROOT="$$$$tmp" install && ipkg-build $$$$tmp; rm -rf $$$$tmp; )
 
 QMAKE_EXTRA_UNIX_TARGETS += lupdate lrelease ipk
-QMAKE_LFLAGS += -Wl,-rpath=$$outdir/lib
+QMAKE_LFLAGS += -Wl,-rpath=$$prefix/lib
 QMAKE_LIBDIR += $(OPIEDIR)/lib
