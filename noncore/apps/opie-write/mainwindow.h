@@ -45,8 +45,10 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow( QWidget *parent = 0, const char *name = 0 );
+    MainWindow( QWidget *parent = 0, const char *name = 0 , WFlags fl = 0);
     ~MainWindow();
+
+    static QString appName() { return QString::fromLatin1("opie-write"); }
 
 protected:
     void closeEvent( QCloseEvent *e );

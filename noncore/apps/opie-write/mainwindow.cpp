@@ -100,8 +100,8 @@ private:
 
 //===========================================================================
 
-MainWindow::MainWindow( QWidget *parent, const char *name )
-    : QMainWindow( parent, name ),
+MainWindow::MainWindow( QWidget *parent, const char *name, WFlags fl  )
+    : QMainWindow( parent, name, fl ),
       doc( 0 )
 {
     setRightJustification(TRUE);
