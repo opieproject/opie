@@ -2,12 +2,13 @@ CLEAN UP
 
 Fix Profiles
 
-Write dns script
-
 WLAN needs to be re-written to not use Config
 
 Write a class that parses /proc and not ifconfig
-udchcp needs to output the dhcp information
+
+udchcp needs to output the dhcp information so interfaces can read it
+
+interfacesetupimp really doesn't need a interface* pointer
 
 Possible other modules to write: ppp, ipsec, bluetooth, ipchains
 

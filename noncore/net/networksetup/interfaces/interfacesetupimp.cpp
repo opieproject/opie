@@ -60,7 +60,7 @@ bool InterfaceSetupImp::saveSettings(){
   }
   
   if(!dhcpCheckBox->isChecked() && (ipAddressEdit->text().isEmpty() || subnetMaskEdit->text().isEmpty())){
-   QMessageBox::information(this, "Not Saved.", "Please fill in the IP address and\n subnet entries.", "Ok");
+   QMessageBox::information(this, "Not Saved.", "Please fill in the IP address and\n subnet entries.", QMessageBox::Ok);
    return false;
   }	
   interfaces->removeAllInterfaceOptions();

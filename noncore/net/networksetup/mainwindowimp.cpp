@@ -169,7 +169,7 @@ void MainWindowImp::addClicked(){
   }
   // See if the list has anything that we can add.
   if(list.count() == 0){
-    QMessageBox::information(this, "Sorry", "Nothing to add.", "Ok");
+    QMessageBox::information(this, "Sorry", "Nothing to add.", QMessageBox::Ok);
     return;
   }
   AddConnectionImp addNewConnection(this, "AddConnectionImp", true);
@@ -199,19 +199,19 @@ void MainWindowImp::addClicked(){
 void MainWindowImp::removeClicked(){
   QListViewItem *item = connectionList->currentItem();
   if(!item) {
-    QMessageBox::information(this, "Sorry","Please select an interface First.", "Ok");
+    QMessageBox::information(this, "Sorry","Please select an interface First.", QMessageBox::Ok);
     return; 
   }
   
   Interface *i = interfaceItems[item];
   if(i->getModuleOwner() == NULL){
-    QMessageBox::information(this, "Can't remove interface.", "Interface is built in.", "Ok");
+    QMessageBox::information(this, "Can't remove interface.", "Interface is built in.", QMessageBox::Ok);
   }
   else{
     if(!i->getModuleOwner()->remove(i))
-      QMessageBox::information(this, "Error", "Unable to remove.", "Ok");
+      QMessageBox::information(this, "Error", "Unable to remove.", QMessageBox::Ok);
     else{
-      QMessageBox::information(this, "Success", "Interface was removed.", "Ok");
+      QMessageBox::information(this, "Success", "Interface was removed.", QMessageBox::Ok);
       // TODO memory managment....
       // who deletes the interface?
     }
@@ -444,7 +444,7 @@ void MainWindowImp::newProfileChanged(const QString& newText){
 void MainWindowImp::addProfile(){
   QString newProfileName = newProfile->text();
   if(profiles.grep(newProfileName).count() > 0){
-    QMessageBox::information(this, "Can't Add","Profile already exists.", "Ok");
+    QMessageBox::information(this, "Can't Add","Profile already exists.", QMessageBox::Ok);
     return;
   }
   profiles.append(newProfileName);
@@ -457,17 +457,17 @@ void MainWindowImp::addProfile(){
  */
 void MainWindowImp::removeProfile(){
   if(profilesList->count() <= 1){
-    QMessageBox::information(this, "Can't remove.","At least one profile\nis needed.", "Ok");
+    QMessageBox::information(this, "Can't remove.","At least one profile\nis needed.", QMessageBox::Ok);
     return;
   }
   QString profileToRemove = profilesList->currentText();
   if(profileToRemove == "All"){
-    QMessageBox::information(this, "Can't remove.","Can't remove default.", "Ok");
+    QMessageBox::information(this, "Can't remove.","Can't remove default.", QMessageBox::Ok);
     return;
   }
   // Can't remove the curent profile
   if(profileToRemove == currentProfileLabel->text()){
-    QMessageBox::information(this, "Can't remove.",QString("%1 is the current profile.").arg(profileToRemove), "Ok");
+    QMessageBox::information(this, "Can't remove.",QString("%1 is the current profile.").arg(profileToRemove), QMessageBox::Ok);
     return;
 
   }
@@ -507,7 +507,7 @@ void MainWindowImp::removeProfile(){
  */ 
 void MainWindowImp::changeProfile(){
   if(profilesList->currentItem() == -1){
-    QMessageBox::information(this, "Can't Change.","Please select a profile.", "Ok");
+    QMessageBox::information(this, "Can't Change.","Please select a profile.", QMessageBox::Ok);
     return;
   }
   QString newProfile = profilesList->text(profilesList->currentItem());
