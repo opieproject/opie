@@ -46,13 +46,12 @@ namespace Todo {
         TableView( MainWindow*, QWidget* parent );
         ~TableView();
 
-        void updateFromTable( const OTodo&, CheckItem* = 0 );
-        OTodo find(int uid);
 
         QString type()const;
         int current();
         QString currentRepresentation();
 
+        void clear();
         void showOverDue( bool );
         void updateView();
         void setTodo( int uid, const OTodo& );
@@ -63,19 +62,21 @@ namespace Todo {
         void setShowDeadline( bool );
 
         void setShowCategory(const QString& =QString::null );
-        void clear();
         void newDay();
-        QArray<int> completed();
         QWidget* widget();
         void sortColumn(int, bool, bool );
+
+        /*
+         * we do our drawing ourselves
+         * because we don't want to have
+         * 40.000 QTableItems for 10.000
+         * OTodos where we only show 10 at a time!
+         */
+        void paintCell(QPainter* p, int row, int col,  const QRect&, bool );
     private:
         /* reimplented for internal reasons */
         void viewportPaintEvent( QPaintEvent* );
-        inline void insertTodo( const OTodo&, int row );
-        CheckItem* checkItem( int row );
-        DueTextItem* dueItem( int row );
         QTimer *m_menuTimer;
-        QMap<int, CheckItem*> m_cache;
         bool m_enablePaint:1;
 
 private slots:
@@ -87,33 +88,6 @@ private slots:
         void slotValueChanged(int, int);
         void slotCurrentChanged(int, int );
     };
-    inline void TableView::insertTodo( const OTodo& event, int row ) {
-
-
-        QString sortKey =  (char) ( (event.isCompleted() ? 'a' : 'A' )
-                                    + event.priority() )
-                           +  Qtopia::buildSortKey( event.description() );
-        CheckItem *chk = new CheckItem( this, sortKey, event.uid(), event.categories() );
-        chk->setChecked( event.isCompleted() );
-
-        ComboItem *cmb = new ComboItem(this,  QTableItem::WhenCurrent );
-        cmb->setText( QString::number( event.priority() ) );
-
-        QString sum = event.summary();
-        QTableItem* ti = new TodoTextItem( this, sum.isEmpty() ?
-                                           event.description().left(40).simplifyWhiteSpace() :
-                                           sum );
-        ti->setReplaceable( FALSE );
-
-        DueTextItem *due = new DueTextItem(this, event );
-
-        setItem( row, 0, chk );
-        setItem( row, 1, cmb );
-        setItem( row, 2, ti  );
-        setItem( row, 3, due );
-
-        m_cache.insert( event.uid(), chk );
-    }
 };
 
 #endif

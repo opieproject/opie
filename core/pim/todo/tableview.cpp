@@ -36,6 +36,11 @@
 
 using namespace Todo;
 
+namespace {
+    static const int BoxSize = 14;
+    static const int RowHeight = 20;
+}
+
 
 TableView::TableView( MainWindow* window, QWidget* wid )
     : QTable(  wid ), TodoView( window ) {
@@ -100,36 +105,12 @@ void TableView::slotShowMenu() {
     menu->exec(QCursor::pos() );
     delete menu;
 }
-OTodo TableView::find(int uid ) {
-    OTodo ev = TodoView::event( uid );
-    return ev;
-}
-void TableView::updateFromTable( const OTodo& ev, CheckItem* item ) {
-    TodoView::update( ev.uid(), ev );
-
-    /* update the other columns */
-    /* if completed or not we need to update
-     * the table
-     *
-     * We've two cases
-     * either item or !item
-     * this makes cases more easy
-     */
-    if ( !item ) {
-        item = m_cache[ev.uid()];
-    }
-    DueTextItem *due = dueItem( item->row() );
-    due->setCompleted( ev.isCompleted() );
-}
 QString TableView::type() const {
     return QString::fromLatin1( tr("Table View") );
 }
 int TableView::current() {
     int cur = 0;
-    CheckItem* i = checkItem( currentRow() );
-    if (i )
-        cur = i->uid();
-
+    // FIXME
     return cur;
 }
 QString TableView::currentRepresentation() {
@@ -148,88 +129,44 @@ void TableView::updateView( ) {
     OTodoAccess::List::Iterator it, end;
     it = sorted().begin();
     end = sorted().end();
+
     qWarning("setTodos");
     QTime time;
     time.start();
     m_enablePaint = false;
     setUpdatesEnabled( false );
     viewport()->setUpdatesEnabled( false );
-    clear();
-    QString currentCat = todoWindow()->currentCategory();
-    bool showCompleted = todoWindow()->showCompleted();
-    bool showOverDue   = todoWindow()->showOverDue();
-    qWarning( "Current Category:" + todoWindow()->currentCategory() );
-    int id = todoWindow()->currentCatId();
+
     QTime t;
     t.start();
     setNumRows( it.count() );
-    uint i = 0;
-    for (; it != end; ++it ) {
-        OTodo todo = (*it);
-        /* test if the categories match */
-        if ( !currentCat.isEmpty() &&
-             !todo.categories().contains( id ) ) {
-            continue;
-        }
-        /* the item is completed but we shouldn't show it */
-        if ( !showCompleted && todo.isCompleted() ) {
-            qWarning("isCompleted ");
-            continue;
-        }
-        /* the item is not overdue but we should only show overdue */
-        if ( showOverDue && !todo.isOverdue() ) {
-            continue;
-        }
-        /* now it's fine to add it */
-        insertTodo(  todo, i );
-	i++;
-    }
-    setNumRows( i );
     int elc = time.elapsed();
     qWarning("Adding took %d", elc/1000 );
     setUpdatesEnabled( true );
     viewport()->setUpdatesEnabled( true );
     viewport()->update();
+
     m_enablePaint = true;
     int el = time.elapsed();
     qWarning("adding took %d", el/1000 );
 }
-void TableView::setTodo( int uid, const OTodo& ev ) {
-    QMap<int, CheckItem*>::Iterator it = m_cache.find( uid );
+void TableView::setTodo( int, const OTodo&) {
+    sort();
 
-    if ( it != m_cache.end() ) {
-        int row = it.data()->row();
-
-        /* update checked */
-        CheckItem* check = checkItem(row );
-        if (check)
-            check->setChecked( ev.isCompleted() );
-
-        /* update the text */
-        QString sum = ev.summary();
-        setText(row, 2, sum.isEmpty() ?
-                ev.description().left(40).simplifyWhiteSpace() :
-                sum );
-
-        /* update priority */
-        setText(row, 1, QString::number( ev.priority() ) );
-
-        /* update DueDate */
-        DueTextItem *due = dueItem( row );
-        due->setToDoEvent( ev );
-    }
+    /* repaint */
+    QTable::update();
 }
-void TableView::addEvent( const OTodo& ev) {
-    int row= numRows();
-    setNumRows( row + 1 );
-    insertTodo( ev, row );
+void TableView::addEvent( const OTodo&) {
+    sort();
+
+    QTable::update();
 }
 /*
  * find the event
  * and then replace the complete row
  */
 void TableView::replaceEvent( const OTodo& ev) {
-    setTodo( ev.uid(), ev );
+    addEvent( ev );
 }
 /*
  * re aligning table can be slow too
@@ -237,7 +174,6 @@ void TableView::replaceEvent( const OTodo& ev) {
  * either this or the old align table
  */
 void TableView::removeEvent( int ) {
-    clear();
     updateView();
 }
 void TableView::setShowCompleted( bool b) {
@@ -256,41 +192,19 @@ void TableView::setShowCategory( const QString& ) {
     updateView();
 }
 void TableView::clear() {
-    m_cache.clear();
-    int rows = numRows();
-    for (int r = 0; r < rows; r++ ) {
-        for (int c = 0; c < numCols(); c++ ) {
-            if ( cellWidget(r, c) )
-                clearCellWidget(r, c );
-            clearCell(r, c);
-        }
-    }
-    setNumRows( 0);
-}
-QArray<int> TableView::completed() {
-    int row = numRows();
-    QArray<int> ids( row );
-
-    int j=0;
-    for (int i = 0; i < row; i++ ) {
-        CheckItem* item = checkItem(i );
-        if (item->isChecked() ) {
-            ids[j] = item->uid();
-            j++;
-        }
-    }
-    ids.resize( j );
-    return ids;
+    setNumRows(0);
 }
 void TableView::slotClicked(int row, int col, int,
                             const QPoint& point) {
     if ( !cellGeometry(row, col ).contains(point ) )
         return;
+    int ui=0; // FIXME = uid(row);
 
 
     switch( col ) {
     case 0: {
-        CheckItem* item = checkItem( row );
+        // FIXME
+        CheckItem* item = 0l;
         /*
          * let's see if we centered clicked
          */
@@ -313,12 +227,12 @@ void TableView::slotClicked(int row, int col, int,
 
     case 2: {
         m_menuTimer->stop();
-        showTodo( checkItem(row)->uid() );
+        showTodo( ui );
         break;
     }
     case 3: {
         m_menuTimer->stop();
-        TodoView::edit( checkItem(row)->uid() );
+        TodoView::edit( ui );
         break;
     }
     }
@@ -338,17 +252,6 @@ void TableView::slotValueChanged( int, int ) {
 void TableView::slotCurrentChanged(int, int ) {
     m_menuTimer->stop();
 }
-/*
- * hardcode to column 0
- */
-CheckItem* TableView::checkItem( int row ) {
-    CheckItem *i = static_cast<CheckItem*>( item( row, 0 ) );
-    return i;
-}
-DueTextItem* TableView::dueItem( int row ) {
-    DueTextItem* i = static_cast<DueTextItem*> ( item(row, 3 ) );
-    return i;
-}
 QWidget* TableView::widget() {
     return this;
 }
@@ -356,6 +259,8 @@ QWidget* TableView::widget() {
  * We need to overwrite sortColumn
  * because we want to sort whole row
  * based
+ * We event want to set the setOrder
+ * to a sort() and update()
  */
 void TableView::sortColumn( int row, bool asc, bool ) {
     QTable::sortColumn( row, asc, TRUE );
@@ -365,4 +270,90 @@ void TableView::viewportPaintEvent( QPaintEvent* e) {
     qWarning("Paint event" );
     if (m_enablePaint )
         QTable::viewportPaintEvent( e );
+}
+/*
+ * This segment is copyrighted by TT
+ * it was taken from their todolist
+ * application this code is GPL
+ */
+void TableView::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool ) {
+    const QColorGroup &cg = colorGroup();
+
+    p->save();
+
+    OTodo task = sorted()[row];
+
+    p->fillRect( 0, 0, cr.width(), cr.height(), cg.brush( QColorGroup::Base ) );
+
+    QPen op = p->pen();
+    p->setPen(cg.mid());
+    p->drawLine( 0, cr.height() - 1, cr.width() - 1, cr.height() - 1 );
+    p->drawLine( cr.width() - 1, 0, cr.width() - 1, cr.height() - 1 );
+    p->setPen(op);
+
+    QFont f = p->font();
+    QFontMetrics fm(f);
+
+    switch(col) {
+	case 0:
+	    {
+		// completed field
+		int marg = ( cr.width() - BoxSize ) / 2;
+		int x = 0;
+		int y = ( cr.height() - BoxSize ) / 2;
+		p->setPen( QPen( cg.text() ) );
+		p->drawRect( x + marg, y, BoxSize, BoxSize );
+		p->drawRect( x + marg+1, y+1, BoxSize-2, BoxSize-2 );
+		p->setPen( darkGreen );
+		x += 1;
+		y += 1;
+		if ( task.isCompleted() ) {
+		    QPointArray a( 9*2 );
+		    int i, xx, yy;
+		    xx = x+2+marg;
+		    yy = y+4;
+		    for ( i=0; i<4; i++ ) {
+			a.setPoint( 2*i,   xx, yy );
+			a.setPoint( 2*i+1, xx, yy+2 );
+			xx++; yy++;
+		    }
+		    yy -= 2;
+		    for ( i=4; i<9; i++ ) {
+			a.setPoint( 2*i,   xx, yy );
+			a.setPoint( 2*i+1, xx, yy+2 );
+			xx++; yy--;
+		    }
+		    p->drawLineSegments( a );
+		}
+	    }
+	    break;
+	case 1:
+	    // priority field
+	    {
+		QString text = QString::number(task.priority());
+		p->drawText(2,2 + fm.ascent(), text);
+	    }
+	    break;
+	case 2:
+	    // description field
+	    {
+		QString text = task.summary().isEmpty() ?
+                               task.description() :
+                               task.summary();
+		p->drawText(2,2 + fm.ascent(), text);
+	    }
+	    break;
+	case 3:
+	    {
+		QString text;
+		if (task.hasDueDate()) {
+		    text = "HAS";
+		} else {
+		    text = tr("None");
+		}
+		p->drawText(2,2 + fm.ascent(), text);
+	    }
+	    break;
+    }
+    p->restore();
 }

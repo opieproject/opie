@@ -48,7 +48,7 @@ void CheckItem::toggle() {
     TableView* view = static_cast<TableView*>( table() );
     OTodo ev = view->find( view->current() );
     ev.setCompleted(!isChecked() );
-    view->updateFromTable( ev );
+    //view->updateFromTable( ev );
 
     OCheckItem::toggle();
     table()->updateCell( row(), col() );
@@ -94,7 +94,7 @@ void ComboItem::setContentFromEditor( QWidget* w) {
         QTableItem::setContentFromEditor( w );
 
     ev.setPriority( text().toInt() );
-    view->updateFromTable( ev );
+    //view->updateFromTable( ev );
 }
 void ComboItem::setText( const QString& s ) {
     if ( m_cb )

@@ -481,7 +481,8 @@ void MainWindow::slotDeleteCompleted() {
     if ( !QPEMessageBox::confirmDelete( this, tr( "Todo" ), tr("all completed tasks?") ) )
         return;
 
-    m_todoMgr.remove( currentView()->completed() );
+    // FIXME
+    //m_todoMgr.remove( currentView()->completed() );
     currentView()->updateView( );
 }
 void MainWindow::slotFind() {

@@ -102,7 +102,7 @@ namespace Todo {
         virtual void setShowDeadline( bool ) = 0;
         virtual void setShowCategory( const QString& = QString::null ) = 0;
         virtual void clear() = 0;
-        virtual QArray<int> completed() = 0;
+/*        virtual QArray<int> completed() = 0; */
         virtual void newDay() = 0;
 
         virtual void connectShow( QObject*, const char* ) = 0;
