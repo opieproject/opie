@@ -72,7 +72,7 @@ void DateBookWeekLstHeader::setDate(const QDate &d) {
 			QString::number(stop.day()) + "." +
 			start.monthName(stop.month()) +" ("+
 			tr("w")+":"+QString::number( week ) +")");
-	emit dateChanged(year,week);
+	emit dateChanged(date);
 }
 
 void DateBookWeekLstHeader::pickDate() {
@@ -109,7 +109,7 @@ void DateBookWeekLstHeader::prevMonth()
 	setDate(date.addDays(-28));
 }
 
-DateBookWeekLstDayHdr::DateBookWeekLstDayHdr(const QDate &d, bool /*onM*/,
+DateBookWeekLstDayHdr::DateBookWeekLstDayHdr(const QDate &d, bool /* onM */,
 					     QWidget* parent,
 					     const char* name,
 					     WFlags fl )
@@ -117,7 +117,7 @@ DateBookWeekLstDayHdr::DateBookWeekLstDayHdr(const QDate &d, bool /*onM*/,
 
 	date=d;
 
-	static const char *wdays={"MTWTFSS"};
+	static const char *wdays={"MTWTFSSM"};
 	char day=wdays[d.dayOfWeek()-1];
 
 	label->setText( QString(QObject::tr(QString(QChar(day)))) + " " +QString::number(d.day()) );
@@ -234,25 +234,28 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
 		dayOrder[0]=7;
 	}
 
-    for (int i=0; i<7; i++) {
+	// Calculate offset to first day of week.
+	int dayoffset=d.dayOfWeek();
+	if(bStartOnMonday) dayoffset--;
+
+	for (int i=0; i<7; i++) {
 	// Header
-	DateBookWeekLstDayHdr *hdr=new DateBookWeekLstDayHdr(d.addDays(i), bStartOnMonday,this);
-	connect(hdr, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
-	connect(hdr, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)),
-		this, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)));
-	layout->addWidget(hdr);
+		DateBookWeekLstDayHdr *hdr=new DateBookWeekLstDayHdr(d.addDays(i-dayoffset), bStartOnMonday,this);
+		connect(hdr, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
+		connect(hdr, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)),
+			this, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)));
+		layout->addWidget(hdr);
 
-	// Events
-	while ( (*it).date().dayOfWeek() == dayOrder[i] && it!=ev.end() ) {
-		if(!(((*it).end().hour()==0) && ((*it).end().minute()==0) && ((*it).startDate()!=(*it).date()))) {	// Skip events ending at 00:00 starting at another day.
-			DateBookWeekLstEvent *l=new DateBookWeekLstEvent(*it,weeklistviewconfig,this);
-			layout->addWidget(l);
-			connect (l, SIGNAL(editEvent(const Event &)), this, SIGNAL(editEvent(const Event &)));
+		// Events
+		while ( (*it).date().dayOfWeek() == dayOrder[i] && it!=ev.end() ) {
+			if(!(((*it).end().hour()==0) && ((*it).end().minute()==0) && ((*it).startDate()!=(*it).date()))) {	// Skip events ending at 00:00 starting at another day.
+				DateBookWeekLstEvent *l=new DateBookWeekLstEvent(*it,weeklistviewconfig,this);
+				layout->addWidget(l);
+				connect (l, SIGNAL(editEvent(const Event &)), this, SIGNAL(editEvent(const Event &)));
+			}
+			it++;
 		}
-		it++;
-	}
-
-	layout->addItem(new QSpacerItem(1,1, QSizePolicy::Minimum, QSizePolicy::Expanding));
+		layout->addItem(new QSpacerItem(1,1, QSizePolicy::Minimum, QSizePolicy::Expanding));
     }
 }
 DateBookWeekLstView::~DateBookWeekLstView(){}
@@ -298,7 +301,7 @@ DateBookWeekLst::DateBookWeekLst( bool ap, bool onM, DateBookDB *newDB,
 
 	header=new DateBookWeekLstHeader(onM, this);
 	layout->addWidget( header );
-	connect(header, SIGNAL(dateChanged(int,int)), this, SLOT(dateChanged(int,int)));
+	connect(header, SIGNAL(dateChanged(QDate &)), this, SLOT(dateChanged(QDate &)));
 	connect(header, SIGNAL(setDbl(bool)), this, SLOT(setDbl(bool)));
 
 	scroll=new QScrollView(this);
@@ -318,32 +321,18 @@ DateBookWeekLst::~DateBookWeekLst(){
 }
 
 void DateBookWeekLst::setDate(const QDate &d) {
-	int w,y;
-	calcWeek(d,w,y,bStartOnMonday);
-	year=y;
-	_week=w;
-	header->setDate(date());
+	bdate=d;
+	header->setDate(d);
 }
+
 void DateBookWeekLst::setDbl(bool on) {
 	dbl=on;
 	redraw();
 }
 void DateBookWeekLst::redraw() {getEvents();}
 
-QDate DateBookWeekLst::date() const {
-	QDate d;
-	d.setYMD(year,1,1);
-
-	int dow= d.dayOfWeek();
-	if (!bStartOnMonday)
-	if (dow==7) {
-		dow=1;
-	} else {
-		dow++;
-	}
-
-	d=d.addDays( (_week-1)*7 - dow + 1 );
-	return d;
+QDate DateBookWeekLst::date() {
+	return bdate;
 }
 
 void DateBookWeekLst::getEvents() {
@@ -371,9 +360,8 @@ void DateBookWeekLst::getEvents() {
 	scroll->updateScrollBars();
 }
 
-void DateBookWeekLst::dateChanged(int y, int w) {
-	year=y;
-	_week=w;
+void DateBookWeekLst::dateChanged(QDate &newdate) {
+	bdate=newdate;
 	getEvents();
 }
 

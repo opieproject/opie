@@ -32,7 +32,7 @@ public slots:
 	void pickDate();
 	void setDate(int y, int m, int d);
 signals:
-	void dateChanged(int y, int w);
+	void dateChanged(QDate &newdate);
 	void setDbl(bool on);
 private:
 	QDate date;
@@ -119,11 +119,11 @@ public:
     void setDate( int y, int w );
     void setDate(const QDate &d );
     int week() const { return _week; };
-    QDate date() const;
+    QDate date();
 
 public slots:
     void redraw();
-    void dateChanged(int y, int w);
+    void dateChanged(QDate &date);
 
 protected slots:
     void keyPressEvent(QKeyEvent *);
@@ -141,12 +141,13 @@ private:
     bool ampm;
     bool bStartOnMonday;
     bool dbl;
-    int year, _week;
+	QDate bdate;
+    int year, _week,dow;
     DateBookWeekLstHeader *header;
     QWidget *view;
     QVBoxLayout *layout;
     QScrollView *scroll;
-    
+
     void getEvents();
 };
 

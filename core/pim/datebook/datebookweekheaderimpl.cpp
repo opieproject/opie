@@ -105,7 +105,7 @@ void DateBookWeekHeader::setDate(const QDate &d) {
 			QString::number(stop.day()) + "." +
 			start.monthName(stop.month()) +" ("+
 			tr("w")+":"+QString::number( week ) +")");
-	emit dateChanged(year,week);
+	emit dateChanged(date);
 }
 
 void DateBookWeekHeader::setStartOfWeek( bool onMonday )
@@ -113,27 +113,3 @@ void DateBookWeekHeader::setStartOfWeek( bool onMonday )
 	bStartOnMonday = onMonday;
 	setDate( date );
 }
-
-// dateFromWeek
-// compute the date from the week in the year
-QDate dateFromWeek( int week, int year, bool startOnMonday )
-{
-	QDate d;
-	d.setYMD( year, 1, 1 );
-	int dayOfWeek = d.dayOfWeek();
-	if ( startOnMonday ) {
-		if ( dayOfWeek <= 4 ) {
-		d = d.addDays( ( week - 1 ) * 7 - dayOfWeek + 1 );
-		} else {
-		d = d.addDays( (week) * 7 - dayOfWeek + 1 );
-		}
-	} else {
-		if ( dayOfWeek <= 4 || dayOfWeek == 7) {
-		d = d.addDays( ( week - 1 ) * 7 - dayOfWeek % 7 );
-		} else {
-		d = d.addDays( ( week ) * 7 - dayOfWeek % 7 );
-		}
-	}
-	return d;
-}
-

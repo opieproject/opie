@@ -370,7 +370,7 @@ DateBookWeek::DateBookWeek( bool ap, bool startOnMonday, DateBookDB *newDB,
 	connect( view, SIGNAL( showDay( int ) ), this, SLOT( showDay( int ) ) );
 	connect( view, SIGNAL(signalShowEvent(const EffectiveEvent&)), this, SLOT(slotShowEvent(const EffectiveEvent&)) );
 	connect( view, SIGNAL(signalHideEvent()), this, SLOT(slotHideEvent()) );
-	connect( header, SIGNAL( dateChanged( int, int ) ), this, SLOT( dateChanged( int, int ) ) );
+	connect( header, SIGNAL( dateChanged( QDate &) ), this, SLOT( dateChanged( QDate &) ) );
 	connect( tHide, SIGNAL( timeout() ), lblDesc, SLOT( hide() ) );
 	connect( qApp, SIGNAL(weekChanged(bool)), this, SLOT(slotWeekChanged(bool)) );
 	connect( qApp, SIGNAL(clockChanged(bool)), this, SLOT(slotClockChanged(bool)));
@@ -399,10 +399,14 @@ void DateBookWeek::keyPressEvent(QKeyEvent *e)
 
 void DateBookWeek::showDay( int day )
 {
-	QDate d;
-	d = dateFromWeek( _week, year, bStartOnMonday );
+	QDate d=bdate;
+
+	// Calculate offset to first day of week.
+	int dayoffset=d.dayOfWeek();
+	if(bStartOnMonday) dayoffset--;
+
 	day--;
-	d = d.addDays( day );
+	d=d.addDays(day-dayoffset);
 	emit showDate( d.year(), d.month(), d.day() );
 }
 
@@ -411,34 +415,22 @@ void DateBookWeek::setDate( int y, int m, int d )
 	setDate(QDate(y, m, d));
 }
 
-void DateBookWeek::setDate(QDate date)
+void DateBookWeek::setDate(QDate newdate)
 {
-	dow = date.dayOfWeek();
-	int w, y;
-	calcWeek( date, w, y, bStartOnMonday );
-	header->setDate( date );
+	bdate=newdate;
+	dow = newdate.dayOfWeek();
+	header->setDate( newdate );
 }
 
-void DateBookWeek::dateChanged( int y, int w )
+void DateBookWeek::dateChanged( QDate &newdate )
 {
-	year = y;
-	_week = w;
+	bdate=newdate;
 	getEvents();
 }
 
 QDate DateBookWeek::date() const
 {
-	QDate d;
-	d = dateFromWeek( _week - 1, year, bStartOnMonday );
-	if ( bStartOnMonday )
-		d = d.addDays( 7 + dow - 1 );
-	else {
-		if ( dow == 7 )
-		d = d.addDays( dow );
-		else
-		d = d.addDays( 7 + dow );
-	}
-	return d;
+	return bdate;
 }
 
 void DateBookWeek::getEvents()
@@ -578,7 +570,13 @@ void DateBookWeek::slotClockChanged( bool ap )
 // return the date at the beginning of the week...
 QDate DateBookWeek::weekDate() const
 {
-    return dateFromWeek( _week, year, bStartOnMonday );
+	QDate d=bdate;
+
+	// Calculate offset to first day of week.
+	int dayoffset=d.dayOfWeek();
+	if(bStartOnMonday) dayoffset--;
+
+	return d.addDays(-dayoffset);
 }
 
 // this used to only be needed by datebook.cpp, but now we need it inside

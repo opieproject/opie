@@ -124,7 +124,7 @@ protected slots:
 
 private slots:
     void showDay( int day );
-    void dateChanged( int y, int w );
+    void dateChanged( QDate &newdate );
     void slotShowEvent( const EffectiveEvent & );
     void slotHideEvent();
     void slotYearChanged( int );
@@ -150,6 +150,7 @@ private:
     int year;
     int _week;
     int dow;
+    QDate bdate;
     DateBookWeekHeader *header;
     DateBookWeekView *view;
     DateBookDB *db;
@@ -161,6 +162,5 @@ private:
 };
 
 
-bool calcWeek( const QDate &d, int &week, int &year,
-	       bool startOnMonday = false );
+bool calcWeek( const QDate &d, int &week, int &year, bool startOnMonday = false );
 #endif
