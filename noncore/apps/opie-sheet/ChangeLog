@@ -1,9 +1,13 @@
+July 06, 2002
+
+	- Fixed DocLnk management to save documents correctly. (by leseb)
+
 July 04, 2002
 
-        * Release 1.0.1
-	- Sheet/Qt is now a part of Opie, so its name is changed to Opie Sheet.
-	- Fixed sorting bug.
+        * Release 1.0.1 (by thufir)
+	- Sheet/Qt is now a part of Opie, so its name is changed to Opie Sheet. (by thufir)
+	- Fixed sorting bug. (by thufir)
 
 April 14, 2002
 
-	* Release 1.0.0
+	* Release 1.0.0 (by thufir)
