@@ -307,11 +307,11 @@ protected</source>
     </message>
     <message>
         <source>Click here to select whether the last tab in a checkbook should be displayed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier, um das letzte Scheckbuch Tab anzuzeigen.</translation>
     </message>
     <message>
         <source>Save new description as payee</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichere neue Beschreibung als Empfänger</translation>
     </message>
     <message>
         <source>Click here to save new descriptions in the list of payess.</source>
