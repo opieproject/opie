@@ -20,8 +20,6 @@
 
 #include "clock.h"
 
-#include <qmessagebox.h>
-
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
@@ -38,13 +36,6 @@ LauncherClock::LauncherClock( QWidget *parent ) : QLabel( parent )
     timerId = 0;
     timerEvent( 0 );
     show();
-
-    if ( QDate::currentDate ( ). year ( ) < 2000 ) {
-        if ( QMessageBox::information ( 0, tr( "Information" ), tr( "<p>The system date doesn't seem to be valid.\n(%1)</p><p>Do you want to correct the clock ?</p>" ). arg( TimeString::dateString ( QDate::currentDate ( ))), QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes ) {
-            QCopEnvelope e ( "QPE/Application/systemtime", "setDocument(QString)" );
-            e << QString ( );
-        }
-    }
 }
 
 void LauncherClock::readConfig() {
