@@ -229,7 +229,7 @@ void PlayListWidget::viewPressed( int mouse, QListViewItem *, const QPoint& , in
     case 2:
     {
         QPopupMenu  m;
-        m.insertItem( tr( "Play" ), this, SLOT( playSelected() ));
+        m.insertItem( tr( "Play Selected" ), this, SLOT( playSelected() ));
         m.insertItem( tr( "Add to Playlist" ), this, SLOT( addSelected() ));
         m.exec( QCursor::pos() );
     }
@@ -245,7 +245,7 @@ void PlayListWidget::playlistViewPressed( int mouse, QListViewItem *, const QPoi
     case 2:
     {
         QPopupMenu  m;
-        m.insertItem( tr( "Play Selected" ), this, SLOT( playSelected() ));
+        m.insertItem( tr( "Play" ), this, SLOT( playSelected() ));
         m.insertItem( tr( "Remove" ), this, SLOT( removeSelected() ));
         m.exec( QCursor::pos() );
     }
@@ -322,42 +322,18 @@ void PlayListWidget::useSelectedDocument() {
 
 const DocLnk *PlayListWidget::current() { // this is fugly
     switch ( whichList() ) {
-    case 0: //playlist
-    {
+      case 0: //playlist
+      {
 //      qDebug("playlist");
-        if ( mediaPlayerState->playlist() ) {
-            return d->selectedFiles->current();
-        } else if ( d->setDocumentUsed && d->current ) {
-            return d->current;
-        } else {
-            return d->files->selected();
-        }
-    }
-    break;
-    case 1://audio
-    {
-//      qDebug("audioView");
-        QListIterator<DocLnk> dit( files.children() );
-        for ( ; dit.current(); ++dit ) {
-            if( dit.current()->name() == audioView->currentItem()->text( 0 ) && !insanityBool ) {
-                insanityBool = TRUE;
-                return dit;
-            }
-        }
-    }
-    break;
-    case 2: // video
-    {
-//      qDebug("videoView");
-        QListIterator<DocLnk> Vdit( vFiles.children() );
-        for ( ; Vdit.current(); ++Vdit ) {
-            if( Vdit.current()->name() == videoView->currentItem()->text( 0 ) && !insanityBool) {
-                insanityBool = TRUE;
-                return Vdit;
-            }
-        }
-    }
-    break;
+          if ( mediaPlayerState->playlist() ) {
+              return d->selectedFiles->current();
+          } else if ( d->setDocumentUsed && d->current ) {
+              return d->current;
+          } else {
+              return d->files->selected();
+          }
+      }
+      break;
     };
     return 0;
 }
@@ -496,47 +472,47 @@ void PlayListWidget::addSelected() {
     Config cfg( "OpiePlayer" );
     cfg.setGroup("PlayList");
     QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
-    //    int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
+      //    int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
 
     switch (whichList()) {
-    case 0: //playlist
-        break;
-    case 1: { //audio
-        QListViewItemIterator it(  audioView  );
-        // iterate through all items of the listview
-        for ( ; it.current(); ++it ) {
-            if ( it.current()->isSelected() ) {
-                QListIterator<DocLnk> dit( files.children() );
-                for ( ; dit.current(); ++dit ) {
-                    if( dit.current()->name() == it.current()->text(0) ) {
-                        if(QFileInfo( dit.current()->file()).exists())
-                            d->selectedFiles->addToSelection(  **dit );
-                    }
-                }
-                audioView->setSelected( it.current(),FALSE);
-            }
-        }
-        tabWidget->setCurrentPage(0);
-    }
-        break;
-    case 2: { // video
-        QListViewItemIterator it(  videoView  );
-    // iterate through all items of the listview
-        for ( ; it.current(); ++it ) {
-            if ( it.current()->isSelected() ) {
-                QListIterator<DocLnk> dit( vFiles.children() );
-                for ( ; dit.current(); ++dit ) {
-                    if( dit.current()->name() == it.current()->text(0) ) {
-                        if(QFileInfo( dit.current()->file()).exists())
-                            d->selectedFiles->addToSelection(  **dit );
-                    }
-                }
-        videoView->setSelected( it.current(),FALSE);
-            }
-        }
-        tabWidget->setCurrentPage(0);
-    }
-    break;
+      case 0: //playlist
+          break;
+      case 1: { //audio
+          QListViewItemIterator it(  audioView  );
+            // iterate through all items of the listview
+          for ( ; it.current(); ++it ) {
+              if ( it.current()->isSelected() ) {
+                  QListIterator<DocLnk> dit( files.children() );
+                  for ( ; dit.current(); ++dit ) {
+                      if( dit.current()->name() == it.current()->text(0) ) {
+                          if(QFileInfo( dit.current()->file()).exists())
+                              d->selectedFiles->addToSelection(  **dit );
+                      }
+                  }
+                  audioView->setSelected( it.current(),FALSE);
+              }
+          }
+          tabWidget->setCurrentPage(0);
+      }
+          break;
+      case 2: { // video
+          QListViewItemIterator it(  videoView  );
+            // iterate through all items of the listview
+          for ( ; it.current(); ++it ) {
+              if ( it.current()->isSelected() ) {
+                  QListIterator<DocLnk> dit( vFiles.children() );
+                  for ( ; dit.current(); ++dit ) {
+                      if( dit.current()->name() == it.current()->text(0) ) {
+                          if(QFileInfo( dit.current()->file()).exists())
+                              d->selectedFiles->addToSelection(  **dit );
+                      }
+                  }
+                  videoView->setSelected( it.current(),FALSE);
+              }
+          }
+          tabWidget->setCurrentPage(0);
+      }
+          break;
     };
 }
 
@@ -635,6 +611,7 @@ void PlayListWidget::tabChanged(QWidget *) {
 
 
 void PlayListWidget::btnPlay(bool b) {
+//    mediaPlayerState->setPlaying(false);
     mediaPlayerState->setPlaying(b);
     qApp->processEvents();
     insanityBool=FALSE;
@@ -1040,7 +1017,7 @@ void PlayListWidget::populateSkinsMenu() {
     QFileInfo *fi;
     while ( ( fi = it.current() ) ) {
         skinName =  fi->fileName();
-        qDebug(  fi->fileName() );
+//        qDebug(  fi->fileName() );
         if( skinName != "." &&  skinName != ".." && skinName !="CVS" )  {
             item = skinsMenu->insertItem( fi->fileName() ) ;
         }
@@ -1055,7 +1032,7 @@ void PlayListWidget::populateSkinsMenu() {
 }
 
 void PlayListWidget::skinsMenuActivated( int item ) {
-    for( uint i = defaultSkinIndex; i > defaultSkinIndex - skinsMenu->count(); i-- ) {
+    for( int i = defaultSkinIndex; i > defaultSkinIndex - skinsMenu->count(); i-- ) {
         skinsMenu->setItemChecked( i, FALSE );
     }
     skinsMenu->setItemChecked( item, TRUE );
