@@ -35,6 +35,7 @@ HEADERS   = ofontmenu.h \
     pim/opimnotify.h \
     pim/opimnotifymanager.h \
     pim/opimmainwindow.h \
+    pim/opimresolver.h \
     orecurrancewidget.h \
     oticker.h 
 #    pim/otodoaccesssql.h \
@@ -69,6 +70,7 @@ SOURCES   = ofontmenu.cc  \
        pim/opimnotify.cpp \
        pim/opimnotifymanager.cpp \
        pim/opimmainwindow.cpp \
+       pim/opimresolver.cpp \
        orecurrancewidget.cpp \
        oticker.cpp
 #             pim/otodoaccesssql.cpp \
