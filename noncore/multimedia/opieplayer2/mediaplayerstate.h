@@ -63,7 +63,7 @@ public:
     bool isStopped() const { return stopped; }
     long position() const { return curPosition; }
     long length() const { return curLength; }
-    char view() const { return curView; }
+    char view() const;
     DisplayType displayType() const;
 
 public slots:
@@ -80,6 +80,7 @@ public slots:
     void updatePosition( long p );
     void setLength( long l );
     void setView( char v );
+    void setDisplayType( MediaPlayerState::DisplayType displayType );
     void setBlanked( bool b );
     void setVideoGamma( int v );
 
@@ -110,7 +111,6 @@ signals:
     void positionChanged( long ); // When the slider is moved
     void positionUpdated( long ); // When the media file progresses
     void lengthChanged( long );
-    void viewChanged( char );
     void displayTypeChanged( MediaPlayerState::DisplayType type );
     void isSeekableToggled( bool );
     void blankToggled( bool );
@@ -132,7 +132,7 @@ private:
     bool stopped : 1;
     long curPosition;
     long curLength;
-    char curView;
+    DisplayType m_displayType;
     int videoGamma;
     void readConfig( Config& cfg );
 

@@ -72,7 +72,7 @@ void MediaPlayerState::readConfig( Config& cfg ) {
     paused = FALSE;
     curPosition = 0;
     curLength = 0;
-    curView = 'l';
+    m_displayType = MediaSelection;
 }
 
 
@@ -85,17 +85,21 @@ void MediaPlayerState::writeConfig( Config& cfg ) const {
     cfg.writeEntry( "VideoGamma",  videoGamma );
 }
 
-MediaPlayerState::DisplayType MediaPlayerState::displayType() const
+char MediaPlayerState::view() const
 {
-    char v = view();
-    switch ( v ) {
-        case 'a': return MediaPlayerState::Audio;
-        case 'v': return MediaPlayerState::Video;
-        case 'l': return MediaPlayerState::MediaSelection;
+    switch ( m_displayType ) {
+        case Audio: return 'a';
+        case Video: return 'v';
+        case MediaSelection: return 'l';
         default: assert( false );
     }
     // never reached
-    return MediaPlayerState::MediaSelection;
+    return 42;
+}
+
+MediaPlayerState::DisplayType MediaPlayerState::displayType() const
+{
+    return m_displayType;
 }
 
 // slots
@@ -211,12 +215,21 @@ void MediaPlayerState::setLength( long l ) {
 }
 
 void MediaPlayerState::setView( char v ) {
-    if ( curView  == v ) {
-        return;
+    switch ( v ) {
+        case 'a': setDisplayType( Audio ); return;
+        case 'v': setDisplayType( Video ); return;
+        case 'l': setDisplayType( MediaSelection ); return;
+        default: assert( false );
     }
-    curView = v;
-    emit viewChanged(v);
-    emit displayTypeChanged( displayType() );
+}
+
+void MediaPlayerState::setDisplayType( DisplayType displayType )
+{
+    if ( m_displayType == displayType )
+        return;
+
+    m_displayType = displayType;
+    emit displayTypeChanged( m_displayType );
 }
 
 void MediaPlayerState::setPrev(){
