@@ -27,6 +27,8 @@
 
 */
 
+#include <opie2/oprocess.h>
+
 #ifdef QWS
 #include <qpe/qpeapplication.h>
 #else
@@ -35,8 +37,6 @@
 #include <qdir.h>
 #include <qfile.h>
 #include <qtextstream.h>
-
-#include <opie/oprocess.h>
 
 #include "utils.h"
 #include "ipkg.h"
@@ -364,7 +364,7 @@ void Ipkg::processFinished()
     proc = 0;
     finished = true;
 
-	emit ipkgFinished();
+    emit ipkgFinished();
 }
 
 

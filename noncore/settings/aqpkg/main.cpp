@@ -29,7 +29,7 @@
 
 #include "mainwin.h"
 
-#include <opie/oapplicationfactory.h>
+#include <opie2/oapplicationfactory.h>
 
 /* be less intrusive for translation -zecke */
 extern QString LOCAL_SERVER;

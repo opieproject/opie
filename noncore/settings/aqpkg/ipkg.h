@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -55,8 +55,8 @@ class Ipkg : public QObject
 public:
     Ipkg();
     ~Ipkg();
-	void runIpkg();
-	void createSymLinks();
+    void runIpkg();
+    void createSymLinks();
 
     void setOption( const char *opt )               { option = opt; }
     void setPackage( const char *pkg )              { package = pkg; }
@@ -67,7 +67,7 @@ public:
 
 signals:
     void outputText( const QString &text );
-	void ipkgFinished();
+    void ipkgFinished();
 
 public slots:
     void commandStdout(OProcess*, char *buffer, int buflen);
@@ -75,7 +75,7 @@ public slots:
     void processFinished();
     void abort();
 
-    
+
 private:
     bool createLinks;
     bool aborted;
@@ -91,14 +91,14 @@ private:
     bool finished;
 
     QList<QString> *dependantPackages;
-    
+
     int executeIpkgCommand( QStringList &cmd, const QString option );
     void removeStatusEntry();
     void linkPackage( const QString &packFileName, const QString &dest, const QString &destDir );
     QStringList* getList( const QString &packageFilename, const QString &destDir );
     void processFileList( const QStringList *fileList, const QString &destDir );
     void processLinkDir( const QString &file, const QString &baseDir, const QString &destDir );
-    
+
 };
 
 #endif

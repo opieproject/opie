@@ -2,7 +2,7 @@ Package: opie-aqpkg
 Files: plugins/application/libaqpkg.so* bin/aqpkg pics/aqpkg apps/Settings/aqpkg.desktop
 Priority: optional
 Section: opie/settings
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2, libopieui2
 Replaces: aqpkg
 Architecture: arm
 Maintainer: Andy Qua (andy.qua@blueyonder.co.uk)

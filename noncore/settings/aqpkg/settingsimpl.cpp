@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -24,14 +24,14 @@
     --        :-=`           Free Software Foundation, Inc.,
                              59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
- 
+
 */
 
 #include "settingsimpl.h"
 #include "global.h"
 
 /* OPIE */
-#include <opie/otabwidget.h>
+#include <opie2/otabwidget.h>
 #ifdef QWS
 #include <qpe/config.h>
 #include <qpe/resource.h>
@@ -63,7 +63,7 @@ SettingsImpl :: SettingsImpl( DataManager *dataManager, QWidget * parent, const 
     layout->setSpacing( 4 );
 
     // Setup tabs for all info
-    OTabWidget *tabwidget = new OTabWidget( this );
+    Opie::OTabWidget *tabwidget = new Opie::OTabWidget( this );
     layout->addWidget( tabwidget );
 
     tabwidget->addTab( initServerTab(), "aqpkg/servertab", tr( "Servers" ) );

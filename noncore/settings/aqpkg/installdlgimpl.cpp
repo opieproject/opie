@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -29,8 +29,8 @@
 
 #include <stdio.h>
 
-#include <opie/ofiledialog.h>
- 
+#include <opie2/ofiledialog.h>
+
 #ifdef QWS
 #include <qpe/config.h>
 #include <qpe/fileselector.h>
@@ -58,7 +58,7 @@
 #include "global.h"
 
 enum {
-	MAXLINES = 100,
+    MAXLINES = 100,
 };
 
 InstallDlgImpl::InstallDlgImpl( const QList<InstallData> &packageList, DataManager *dataManager, const char *title )
@@ -66,7 +66,7 @@ InstallDlgImpl::InstallDlgImpl( const QList<InstallData> &packageList, DataManag
 {
     setCaption( title );
     init( TRUE );
-    
+
     pIpkg = 0;
     upgradePackages = false;
     dataMgr = dataManager;
@@ -81,14 +81,14 @@ InstallDlgImpl::InstallDlgImpl( const QList<InstallData> &packageList, DataManag
     flags = cfg.readNumEntry( "installFlags", 0 );
     infoLevel = cfg.readNumEntry( "infoLevel", 1 );
 #else
-	flags = 0;
+    flags = 0;
 #endif
 
     // Output text is read only
     output->setReadOnly( true );
-//	QFont f( "helvetica" );
-//	f.setPointSize( 10 );
-//	output->setFont( f );
+//    QFont f( "helvetica" );
+//    f.setPointSize( 10 );
+//    output->setFont( f );
 
 
     // setup destination data
@@ -104,44 +104,44 @@ InstallDlgImpl::InstallDlgImpl( const QList<InstallData> &packageList, DataManag
 
     destination->setCurrentItem( defIndex );
 
-	QListIterator<InstallData> it( packageList );
-	// setup package data
-	QString remove = tr( "Remove\n" );
-	QString install = tr( "Install\n" );
-	QString upgrade = tr( "Upgrade\n" );
-	for ( ; it.current(); ++it )
-	{
-		InstallData *item = it.current();
-		InstallData *newitem = new InstallData();
+    QListIterator<InstallData> it( packageList );
+    // setup package data
+    QString remove = tr( "Remove\n" );
+    QString install = tr( "Install\n" );
+    QString upgrade = tr( "Upgrade\n" );
+    for ( ; it.current(); ++it )
+    {
+        InstallData *item = it.current();
+        InstallData *newitem = new InstallData();
 
-		newitem->option = item->option;
-		newitem->packageName = item->packageName;
-		newitem->destination = item->destination;
-		newitem->recreateLinks = item->recreateLinks;
-		packages.append( newitem );
+        newitem->option = item->option;
+        newitem->packageName = item->packageName;
+        newitem->destination = item->destination;
+        newitem->recreateLinks = item->recreateLinks;
+        packages.append( newitem );
 
-		if ( item->option == "I" )
-		{
-			install.append( QString( "   %1\n" ).arg( item->packageName ) );
-		}
-		else if ( item->option == "D" )
-		{
-			remove.append( QString( "   %1\n" ).arg( item->packageName ) );
-		}
-		else if ( item->option == "U" || item->option == "R" )
-		{
-			QString type;
-			if ( item->option == "R" )
-				type = tr( "(ReInstall)" );
-			else
-				type = tr( "(Upgrade)" );
-			upgrade.append( QString( "   %1 %2\n" ).arg( item->packageName ).arg( type ) );
-		}
-	}
+        if ( item->option == "I" )
+        {
+            install.append( QString( "   %1\n" ).arg( item->packageName ) );
+        }
+        else if ( item->option == "D" )
+        {
+            remove.append( QString( "   %1\n" ).arg( item->packageName ) );
+        }
+        else if ( item->option == "U" || item->option == "R" )
+        {
+            QString type;
+            if ( item->option == "R" )
+                type = tr( "(ReInstall)" );
+            else
+                type = tr( "(Upgrade)" );
+            upgrade.append( QString( "   %1 %2\n" ).arg( item->packageName ).arg( type ) );
+        }
+    }
 
-	output->setText( QString( "%1\n%2\n%3\n" ).arg( remove ).arg( install ).arg( upgrade ) );
+    output->setText( QString( "%1\n%2\n%3\n" ).arg( remove ).arg( install ).arg( upgrade ) );
 
-	displayAvailableSpace( destination->currentText() );
+    displayAvailableSpace( destination->currentText() );
 }
 
 InstallDlgImpl::InstallDlgImpl( Ipkg *ipkg, QString initialText, const char *title )
@@ -162,7 +162,7 @@ InstallDlgImpl::~InstallDlgImpl()
 
 void InstallDlgImpl :: init( bool displayextrainfo )
 {
-    QGridLayout *layout = new QGridLayout( this ); 
+    QGridLayout *layout = new QGridLayout( this );
     layout->setSpacing( 4 );
     layout->setMargin( 4 );
 
@@ -185,7 +185,7 @@ void InstallDlgImpl :: init( bool displayextrainfo )
         destination = 0x0;
         txtAvailableSpace = 0x0;
     }
-    
+
     QGroupBox *GroupBox2 = new QGroupBox( 0, Qt::Vertical, tr( "Output" ), this );
     GroupBox2->layout()->setSpacing( 0 );
     GroupBox2->layout()->setMargin( 4 );
@@ -198,7 +198,7 @@ void InstallDlgImpl :: init( bool displayextrainfo )
     btnInstall = new QPushButton( Resource::loadPixmap( "aqpkg/apply" ), tr( "Start" ), this );
     layout->addWidget( btnInstall, 3, 0 );
     connect( btnInstall, SIGNAL( clicked() ), this, SLOT( installSelected() ) );
-    
+
     btnOptions = new QPushButton( Resource::loadPixmap( "SettingsIcon" ), tr( "Options" ), this );
     layout->addWidget( btnOptions, 3, 1 );
     connect( btnOptions, SIGNAL( clicked() ), this, SLOT( optionsSelected() ) );
@@ -232,8 +232,8 @@ void InstallDlgImpl :: optionsSelected()
         map.insert(tr( "Text" ), text );
         text << "*";
         map.insert( tr( "All" ), text );
-        
-        QString filename = OFileDialog::getSaveFileName( 2, "/", "ipkg-output", map );
+
+        QString filename = Opie::OFileDialog::getSaveFileName( 2, "/", "ipkg-output", map );
         if( !filename.isEmpty() )
         {
             QString currentFileName = QFileInfo( filename ).fileName();
@@ -257,7 +257,7 @@ void InstallDlgImpl :: installSelected()
             pIpkg->abort();
             displayText( tr( "**** Process Aborted ****" ) );
         }
-        
+
         btnInstall->setText( tr( "Close" ) );
         btnInstall->setIconSet( Resource::loadPixmap( "enter" ) );
         return;
@@ -267,7 +267,7 @@ void InstallDlgImpl :: installSelected()
         emit reloadData( this );
         return;
     }
-    
+
     // Disable buttons
     btnOptions->setEnabled( false );
 //    btnInstall->setEnabled( false );
@@ -291,7 +291,7 @@ void InstallDlgImpl :: installSelected()
         int instFlags = flags;
         if ( d->linkToRoot() )
             instFlags |= MAKE_LINKS;
-    
+
 #ifdef QWS
         // Save settings
         Config cfg( "aqpkg" );
@@ -303,12 +303,12 @@ void InstallDlgImpl :: installSelected()
         connect( pIpkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
         connect( pIpkg, SIGNAL(ipkgFinished()), this, SLOT(ipkgFinished()));
 
-		firstPackage = TRUE;
-		ipkgFinished();
+        firstPackage = TRUE;
+        ipkgFinished();
 
         // First run through the remove list, then the install list then the upgrade list
-/*        
-		pIpkg->setOption( "remove" );
+/*
+        pIpkg->setOption( "remove" );
         QListIterator<InstallData> it( removeList );
         InstallData *idata;
         for ( ; it.current(); ++it )
@@ -321,7 +321,7 @@ void InstallDlgImpl :: installSelected()
             int tmpFlags = flags;
             if ( idata->destination->linkToRoot() )
                 tmpFlags |= MAKE_LINKS;
-            
+
             pIpkg->setFlags( tmpFlags, infoLevel );
             pIpkg->runIpkg();
         }
@@ -400,77 +400,77 @@ void InstallDlgImpl :: displayAvailableSpace( const QString &text )
     }
     else
         space = tr( "Unknown" );
-        
+
     if ( txtAvailableSpace )
         txtAvailableSpace->setText( space );
 }
 
 void InstallDlgImpl :: ipkgFinished()
 {
-	InstallData *item;
-	if ( firstPackage )
-		item = packages.first();
-	else
-	{
-		// Create symlinks if necessary before moving on to next package
-		pIpkg->createSymLinks();
+    InstallData *item;
+    if ( firstPackage )
+        item = packages.first();
+    else
+    {
+        // Create symlinks if necessary before moving on to next package
+        pIpkg->createSymLinks();
 
-		item = packages.next();
-	}
+        item = packages.next();
+    }
 
-	firstPackage = FALSE;
-	if ( item )
-	{
-		pIpkg->setPackage( item->packageName );
-		int tmpFlags = flags;
+    firstPackage = FALSE;
+    if ( item )
+    {
+        pIpkg->setPackage( item->packageName );
+        int tmpFlags = flags;
 
-		if ( item->option == "I" )
-		{
-			pIpkg->setOption( "install" );
-			Destination *d = dataMgr->getDestination( destination->currentText() );
-			pIpkg->setDestination( d->getDestinationName() );
-			pIpkg->setDestinationDir( d->getDestinationPath() );
-		
-			if ( d->linkToRoot() )
-				tmpFlags |= MAKE_LINKS;
-		}
-		else if ( item->option == "D" )
-		{
-			pIpkg->setOption( "remove" );
-			pIpkg->setDestination( item->destination->getDestinationName() );
-			pIpkg->setDestinationDir( item->destination->getDestinationPath() );
+        if ( item->option == "I" )
+        {
+            pIpkg->setOption( "install" );
+            Destination *d = dataMgr->getDestination( destination->currentText() );
+            pIpkg->setDestination( d->getDestinationName() );
+            pIpkg->setDestinationDir( d->getDestinationPath() );
 
-			if ( item->destination->linkToRoot() )
-				tmpFlags |= MAKE_LINKS;
-		}
-		else
-		{
-			if ( item->option == "R" )
-				pIpkg->setOption( "reinstall" );
-			else
-				pIpkg->setOption( "upgrade" );
-			
-			pIpkg->setDestination( item->destination->getDestinationName() );
-			pIpkg->setDestinationDir( item->destination->getDestinationPath() );
-			pIpkg->setPackage( item->packageName );
+            if ( d->linkToRoot() )
+                tmpFlags |= MAKE_LINKS;
+        }
+        else if ( item->option == "D" )
+        {
+            pIpkg->setOption( "remove" );
+            pIpkg->setDestination( item->destination->getDestinationName() );
+            pIpkg->setDestinationDir( item->destination->getDestinationPath() );
 
-			tmpFlags |= FORCE_REINSTALL;
-			if ( item->destination->linkToRoot() && item->recreateLinks )
-				tmpFlags |= MAKE_LINKS;
-		}
-		pIpkg->setFlags( tmpFlags, infoLevel );
-		pIpkg->runIpkg();
-	}
-	else
-	{
-		btnOptions->setEnabled( true );
-		btnInstall->setText( tr( "Close" ) );
-		btnInstall->setIconSet( Resource::loadPixmap( "enter" ) );
+            if ( item->destination->linkToRoot() )
+                tmpFlags |= MAKE_LINKS;
+        }
+        else
+        {
+            if ( item->option == "R" )
+                pIpkg->setOption( "reinstall" );
+            else
+                pIpkg->setOption( "upgrade" );
 
-		btnOptions->setText( tr( "Save output" ) );
-		btnOptions->setIconSet( Resource::loadPixmap( "save" ) );
+            pIpkg->setDestination( item->destination->getDestinationName() );
+            pIpkg->setDestinationDir( item->destination->getDestinationPath() );
+            pIpkg->setPackage( item->packageName );
 
-		if ( destination && destination->currentText() != 0 && destination->currentText() != "" )
-			displayAvailableSpace( destination->currentText() );
-	}
+            tmpFlags |= FORCE_REINSTALL;
+            if ( item->destination->linkToRoot() && item->recreateLinks )
+                tmpFlags |= MAKE_LINKS;
+        }
+        pIpkg->setFlags( tmpFlags, infoLevel );
+        pIpkg->runIpkg();
+    }
+    else
+    {
+        btnOptions->setEnabled( true );
+        btnInstall->setText( tr( "Close" ) );
+        btnInstall->setIconSet( Resource::loadPixmap( "enter" ) );
+
+        btnOptions->setText( tr( "Save output" ) );
+        btnOptions->setIconSet( Resource::loadPixmap( "save" ) );
+
+        if ( destination && destination->currentText() != 0 && destination->currentText() != "" )
+            displayAvailableSpace( destination->currentText() );
+    }
 }
