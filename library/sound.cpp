@@ -102,43 +102,47 @@ static int WAVsoundDuration(const QString& filename)
 
 class SoundData : public QSound {
 public:
-    SoundData(const QString& name) :
-	QSound(Resource::findSound(name)),
-	filename(Resource::findSound(name))
-    {
-	loopsleft=0;    
-    }
+	SoundData ( const QString& name ) :
+		QSound ( Resource::findSound ( name )),
+		filename ( Resource::findSound ( name ))
+	{
+		loopsleft=0;    
+		ms = WAVsoundDuration(filename);
+	}
 
-    void playLoop(int loopcnt = -1)
-    {
-	// needs server support
-	loopsleft = loopcnt;
+	void playLoop ( int loopcnt = -1 )
+	{
+		// needs server support
+		loopsleft = loopcnt;
 
-	int ms = WAVsoundDuration(filename);
-	if ( ms )
-	    startTimer(ms > 50 ? ms-50 : 0); // 50 for latency
-	play();
-    }
+		if ( ms )
+			startTimer ( ms > 50 ? ms-50 : 0 ); // 50 for latency
+		play ( );
+	}
 
     void timerEvent ( QTimerEvent *e )
     {
-	if (loopsleft >= 0) {
-	    if (--loopsleft <= 0)
-		killTimer (e->timerId());
-		return;
-	}	    
-	play();
-    }
+		if ( loopsleft >= 0 ) {
+			if ( --loopsleft <= 0 ) {
+				killTimer ( e-> timerId ( ));
+				loopsleft = 0;
+				return;
+			}
+		}	    
+		play();
+	}
     
-    bool isFinished ( ) const
-    {
-	return ( loopsleft == 0 );
-    }
+	bool isFinished ( ) const
+	{
+		return ( loopsleft == 0 );
+	}
 
 private:
-    QString filename;
-    int loopsleft;
+	QString filename;
+	int loopsleft;
+	int ms;
 };
+
 #endif
 
 Sound::Sound(const QString& name)
@@ -158,7 +162,6 @@ Sound::~Sound()
 void Sound::play()
 {
 #ifndef QT_NO_SOUND
-    d->killTimers();
     d->playLoop(1);
 #endif
 }
@@ -182,6 +185,8 @@ bool Sound::isFinished() const
 {
 #ifndef QT_NO_SOUND
     return d->isFinished();
+#else
+	return true;
 #endif
 }
 
