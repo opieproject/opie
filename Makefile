@@ -54,44 +54,6 @@ $(TOPDIR)/.config: $(TOPDIR)/.depends.cfgs $(configs)
 	@$(MAKE) -C scripts/kconfig conf;
 	./scripts/kconfig/conf -s ./config.in
 
-# config rules must have the $(configs) var defined
-# at the time that they run. we must ensure that .depends.cfgs
-# is built and included by the time we reach this point.
-
-xconfig :
-	$(call descend,scripts/kconfig,qconf)
-	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(TOPDIR)/scripts/kconfig \
-		./scripts/kconfig/qconf ./config.in
-
-menuconfig : scripts/lxdialog/lxdialog
-	$(call descend,scripts/kconfig,mconf)
-	./scripts/kconfig/mconf ./config.in
-
-config :
-	$(call descend,scripts/kconfig,conf)
-	./scripts/kconfig/conf ./config.in
- 
-oldconfig :
-	$(call descend,scripts/kconfig,conf)
-	./scripts/kconfig/conf -o ./config.in
- 
-randconfig :
-	$(call descend,scripts/kconfig,conf)
-	./scripts/kconfig/conf -r ./config.in
- 
-allyesconfig :
-	$(call descend,scripts/kconfig,conf)
-	./scripts/kconfig/conf -y ./config.in
- 
-allnoconfig :
-	$(call descend,scripts/kconfig,conf)
-	./scripts/kconfig/conf -n ./config.in
- 
-defconfig :
-	$(call descend,scripts/kconfig,conf)
-	./scripts/kconfig/conf -d ./config.in
-
-
 export
 
 ifeq ($(filter $(noconfig_targets),$(MAKECMDGOALS)),)
