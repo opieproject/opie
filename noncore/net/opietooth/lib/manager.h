@@ -8,37 +8,91 @@
 
 namespace OpieTooth {
   class Device;
+  /** Manager manages a blueZ device (hci0 for example)
+   *  with Manager you can control the things you
+   *  could do from command line in a OO and asynchronus
+   *  way.   
+   */
   class Manager : public QObject {
 Q_OBJECT
   public:
-    // Manage MAC device or by name (hci0)
+    /** c'tor whichs create a new Manager
+     *  @param device is the device to use. Either a mac or blueZ device name
+     *
+     */
     Manager( const QString &device );
-    // Manage a with Device attached device
+    /** c'tor
+     * @param dev The Device to be managed
+     * We don't care of Device so you need to delete it
+     */   
     Manager( Device* dev );
-    // manage nothing ;)
+    /**
+     * c'tor
+     */
     Manager();
     ~Manager();
 
-    // setDevice either MAC or hci0
-    // ups it
+    /** Set the manager to control a new device
+     *  @param device the new device to control (hci0 )
+     */
     void setDevice( const QString& device );
+    /**
+     * Convience functions for setting a new device
+     */
     void setDevice( Device *dev );
-    // asynchron connect to signal
-    void isConnected(const QString& device );
+    /**
+     * Wether or not a device is connected. The function
+     * is asynchron
+     * If device is empty it will take the currently managed
+     * device and see if it's up
+     * for Remote devices it will ping and see
+     */
+    void isConnected(const QString& device= QString::null );
+    /**
+     * same as above
+     */
     void isConnected(Device *dev );
 
-    // if c'tor with device or setDevice everythning is ok
-    void searchDevices();
-    // use an alternate device
-    void searchDevices(const QString& device);
+    /** this search for devices reachable from the
+     *  currently managed device   
+     *  or from device if @param device is not empty
+     */
+    void searchDevices(const QString& device= QString::null );
+    /** same as above
+     *
+     */
     void searchDevices(Device *d );
 
+    /**
+     * This will add the service @param name
+     * to the sdpd daemon
+     * It will start the daemon if necessary
+     */
     void addService(const QString &name );
+    /**
+     * This will add the services @param names
+     * to the sdpd daemon
+     * It will start the daemon if necessary
+     */
     void addServices( const QStringList& names );
+    /**
+     * This removes a service from the sdps
+     */
     void removeService(const QString &name );
+    /**
+     * Removes a list from the sdpd
+     */
     void removeServices(const QStringList& );
 
+    /**
+     * search for services on a remote device
+     * 
+     */
     void searchServices( const QString& remDevice );
+    /**
+     * search for services on a remote device
+     */
+    void searchServices( const RemoteDevices& );
     /*static*/ QString toDevice( const QString& mac );
     /*static*/ QString toMac( const QString &device );
 
