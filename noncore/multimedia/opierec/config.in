@@ -1,0 +1,4 @@
+  config OPIEREC
+    boolean "opierec"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) 
