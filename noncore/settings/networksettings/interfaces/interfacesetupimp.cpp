@@ -14,22 +14,20 @@
 /**
  * Constuctor.  Set up the connection. A profile must be set.
  */ 
-InterfaceSetupImp::InterfaceSetupImp(QWidget* parent, const char* name, Interface *i, Interfaces *j, WFlags fl) : InterfaceSetup(parent, name, fl), interfaces(j), interface(i), delInterfaces(false){
-}
-
-/**
- * Constuctor.  Set up the connection. A profile must be set.
- */ 
-InterfaceSetupImp::InterfaceSetupImp(QWidget* parent, const char* name, Interface *i, WFlags fl) : InterfaceSetup(parent, name, fl), interface(i), delInterfaces(true){
-  interfaces = new Interfaces;
+InterfaceSetupImp::InterfaceSetupImp(QWidget* parent, const char* name, Interface *i, Interfaces *j, WFlags fl) : InterfaceSetup(parent, name, fl), interface(i), interfaces(j), delInterfaces(false){
+  if (j == 0) {
+    delInterfaces = true;
+    interfaces = new Interfaces;
+  }
 }
 
 /**
  * Destructor
  */ 
 InterfaceSetupImp::~InterfaceSetupImp(){
-  if(delInterfaces)
+  if(delInterfaces) {
     delete interfaces;
+  }
 }
 
 /**
@@ -62,7 +60,7 @@ bool InterfaceSetupImp::saveSettings(){
    QMessageBox::information(this, "Not Saved.", "Please fill in the IP address and\n subnet entries.", QMessageBox::Ok);
    return false;
   }	
-  interfaces->removeAllInterfaceOptions();
+  //interfaces.removeAllInterfaceOptions();
   
   // DHCP
   if(dhcpCheckBox->isChecked())

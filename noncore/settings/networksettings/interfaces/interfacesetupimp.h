@@ -11,7 +11,6 @@ class InterfaceSetupImp : public InterfaceSetup {
   Q_OBJECT
 	
 public:
-  InterfaceSetupImp( QWidget* parent = 0, const char* name = 0, Interface *i = 0, WFlags fl = 0);
   InterfaceSetupImp( QWidget* parent = 0, const char* name = 0, Interface *i = 0, Interfaces *j = 0, WFlags fl = 0);
   ~InterfaceSetupImp();
   bool saveChanges();
@@ -37,7 +36,7 @@ public:
     InterfaceSetupImpDialog(QWidget* parent = 0, const char* name = 0, Interface *i=0, bool modal = false, WFlags fl = 0) : QDialog(parent, name, modal, fl){
     QVBoxLayout *InterfaceSetupLayout = new QVBoxLayout( this );
     setCaption("Interface Setup");
-    interfaceSetup = new InterfaceSetupImp(this, "InterfaceSetup",i,fl);
+    interfaceSetup = new InterfaceSetupImp(this, "InterfaceSetup",i);
     InterfaceSetupLayout->addWidget( interfaceSetup );
   };
   void setProfile(QString &profile){ interfaceSetup->setProfile(profile);};
