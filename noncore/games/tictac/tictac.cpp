@@ -79,6 +79,7 @@ TicTacGameBoard::TicTacGameBoard( int n, QWidget *parent, const char *name )
     }
     QTime t = QTime::currentTime();   // set random seed
     srand( t.hour()*12+t.minute()*60+t.second()*60 );
+		
 }
 
 TicTacGameBoard::~TicTacGameBoard()
@@ -329,6 +330,7 @@ TicTacToe::TicTacToe( QWidget *parent, const char *name, WFlags fl )
     l->addLayout( b );
     b->addWidget( newGame );
     b->addWidget( quit );
+		move(0,0);
     QPEApplication::showWidget( this );
     newState();
 }
