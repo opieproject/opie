@@ -73,6 +73,7 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* name, WFlags fl )
 
         if( release.find("embedix",0,TRUE) !=-1)
             stereoCheckBox->hide();
+    }
 //         else
 //            stereoCheckBox->hide();
 
