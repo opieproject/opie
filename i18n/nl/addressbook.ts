@@ -350,7 +350,7 @@ geleverd!</translation>
         <translation>Schakel over naar vaste gereedschap-/menubalk na het wisselen van programma!</translation>
     </message>
     <message>
-        <source>Movable</source>
+        <source>Moveable</source>
         <translation>Verplaatsbaar</translation>
     </message>
     <message>

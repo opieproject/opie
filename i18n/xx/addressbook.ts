@@ -339,7 +339,7 @@ is provided free !</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Movable</source>
+        <source>Moveable</source>
         <translation>FOO</translation>
     </message>
     <message>

@@ -351,7 +351,7 @@ rilasciato gratuitamente!</translation>
         <translation>Cambia su menu-/toolbar fissi dopo aver riavviato l&apos;applicazione !</translation>
     </message>
     <message>
-        <source>Movable</source>
+        <source>Moveable</source>
         <translation>Mobile</translation>
     </message>
     <message>

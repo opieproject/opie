@@ -350,7 +350,7 @@ suministra gratis!</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Movable</source>
+        <source>Moveable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -350,7 +350,7 @@ ist frei erhältlich !</translation>
 wird nach dem Neustart der Anwendung aktiv!</translation>
     </message>
     <message>
-        <source>Movable</source>
+        <source>Moveable</source>
         <translation>Beweglich</translation>
     </message>
     <message>
