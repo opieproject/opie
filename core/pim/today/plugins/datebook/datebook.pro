@@ -33,6 +33,6 @@ TRANSLATIONS = ../../../../../i18n/de/todaydatebookplugin.ts \
          ../../../../../i18n/zh_CN/libtodaydatebookplugin.ts \
          ../../../../../i18n/zh_TW/todaydatebookplugin.ts \
          ../../../../../i18n/it/todaydatebookplugin.ts \
-         ../../../../../i18n/da/todaydatebookpluging.ts
+         ../../../../../i18n/da/todaydatebookplugin.ts
 
 include ( $(OPIEDIR)/include.pro )
