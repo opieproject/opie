@@ -409,7 +409,7 @@ void MainWindow::closeEvent( QCloseEvent* e ) {
         /* save templates */
         templateManager()->save();
         e->accept();
-        qApp->quit();
+        QTimer::singleShot(0, qApp, SLOT(closeAllWindows()) );
     }
 }
 void MainWindow::populateTemplates() {
