@@ -252,7 +252,7 @@ void StockTickerPluginWidget::doStocks() {
 //    getStocks( symbollist.latin1() );
 }
 
-void StockTickerPluginWidget::DefProxy(void) {
+//void StockTickerPluginWidget::DefProxy(void) {
 //     char *proxy;
 //     libstocks_return_code error;
 
@@ -271,7 +271,7 @@ void StockTickerPluginWidget::DefProxy(void) {
 // //             exit(1);
 //         }
 //     }
-}
+//}
 
 void StockTickerPluginWidget::timerEvent( QTimerEvent *e ) {
     killTimer(e->timerId());

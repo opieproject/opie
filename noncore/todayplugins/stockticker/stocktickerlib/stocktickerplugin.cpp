@@ -34,7 +34,7 @@ double StockTickerPlugin::versionNumber() const {
 }
 
 QString StockTickerPlugin::pixmapNameWidget() const {
-    return "pass";
+    return "stockticker/stockticker";
 }
 
 QWidget* StockTickerPlugin::widget( QWidget * wid ) {
@@ -42,7 +42,7 @@ QWidget* StockTickerPlugin::widget( QWidget * wid ) {
 }
 
 QString StockTickerPlugin::pixmapNameConfig() const {
-    return 0l;
+    return "stockticker/stockticker";
 }
 
 TodayConfigWidget* StockTickerPlugin::configWidget( QWidget* wid ) {

@@ -54,7 +54,7 @@ private:
     QSocket *Sock;
     void timerEvent( QTimerEvent * );
     void init();
-    void DefProxy(void);
+//    void DefProxy(void);
     int timerDelay;
 };
 

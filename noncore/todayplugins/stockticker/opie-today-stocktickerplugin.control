@@ -1,4 +1,4 @@
-Files: plugins/today/libtodaystocktickerplugin.so* bin/stockticker
+Files: plugins/today/libtodaystocktickerplugin.so* bin/stockticker pics/stockticker/stockticker.png
 Priority: optional
 Section: opie/applications
 Maintainer: ljp <llornkcor@handhelds.org>
