@@ -1,6 +1,6 @@
 #ifndef lint
 /*static char yysccsid[] = "from: @(#)yaccpar	1.9 (Berkeley) 02/21/93";*/
-static char yyrcsid[] = "$Id: vcc_yacc.cpp,v 1.6 2003-08-29 18:02:09 zecke Exp $";
+static char yyrcsid[] = "$Id: vcc_yacc.cpp,v 1.7 2003-11-04 17:19:02 waspe Exp $";
 #endif
 #define YYBYACC 1
 #define YYMAJOR 1
@@ -155,17 +155,22 @@ DFARS 252.227-7013 or 48 CFR 52.227-19, as applicable.
 #include <stdlib.h>
 #include <ctype.h>
 
-/*#ifdef PALMTOPCENTER*/
-/*#include <qpe/vobject_p.h>*/
-/*#else*/
+/*#ifdef PALMTOPCENTER
+*/
+/*#include <qpe/vobject_p.h>
+*/
+/*#else
+*/
 #include "vobject_p.h"
-/*#endif*/
+/*#endif
+*/
 
 /****  Types, Constants  ****/
 
 #define YYDEBUG		0	/* 1 to compile in some debugging code */
 #define MAXTOKEN	256	/* maximum token (line) length */
-#define YYSTACKSIZE 	100	/* ~unref ?*/
+#define YYSTACKSIZE 	100	/* ~unref ?
+*/
 #define MAXLEVEL	10	/* max # of nested objects parseable */
 				/* (includes outermost) */
 
