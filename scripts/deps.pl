@@ -46,10 +46,14 @@ sub makedepends ($$)
 			/\&\&/ && next;
 			/\|\|/ && next;
 			/^$/ && next;
+			/^\($/ && next;
+			/^\)$/ && next;
+			/^on$/ && next;
+			/^!$/ && next;
 			if(defined(${$tokenpath}{"CONFIG_" . $_})){
 				print '$(if $(CONFIG_' . $_ . '),' . ${$tokenpath}{"CONFIG_" . $_} . ') ';
 			} else {
-				print STDERR "ERROR in dependency generation, unable to locate path for token CONFIG_$_\n";
+				print STDERR "Warning: unable to locate path for token CONFIG_$_\n";
 			}
 		}
 		print "\n";
