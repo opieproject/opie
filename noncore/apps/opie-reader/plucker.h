@@ -2,7 +2,7 @@
 #define __plucker_h
 
 #include "CExpander.h"
-#include <zlib.h>
+#include "zlib/zlib.h"
 #include "ztxt.h"
 #include "pdb.h"
 #include "CBuffer.h"
@@ -58,17 +58,17 @@ class CPlucker : public CExpander, Cpdb
     int bgetch();
  public:
     virtual void sizes(unsigned long& _file, unsigned long& _text)
-	{
-	    _file = file_length;
-	    _text = textlength;
+  {
+      _file = file_length;
+      _text = textlength;
 //ntohl(hdr0.size);
-	}
+  }
     virtual bool hasrandomaccess() { return true; }
     virtual ~CPlucker()
-	{
-	    if (expandedtextbuffer != NULL) delete [] expandedtextbuffer;
-	    if (compressedtextbuffer != NULL) delete [] compressedtextbuffer;
-	}
+  {
+      if (expandedtextbuffer != NULL) delete [] expandedtextbuffer;
+      if (compressedtextbuffer != NULL) delete [] compressedtextbuffer;
+  }
     CPlucker();
     virtual int openfile(const char *src);
     virtual int getch();
@@ -78,9 +78,9 @@ class CPlucker : public CExpander, Cpdb
     virtual CList<Bkmk>* getbkmklist();
     virtual bool hyperlink(unsigned int n);
     virtual MarkupType PreferredMarkup()
-	{
-	    return cNONE;
-	}
+  {
+      return cNONE;
+  }
 };
 
 #endif

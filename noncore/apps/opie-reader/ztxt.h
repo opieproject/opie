@@ -2,12 +2,12 @@
 #define __ztxt_h
 
 #include "CExpander.h"
-#include <zlib.h>
+#include "zlib/zlib.h"
 #include "pdb.h"
 /*
  * Stuff common to both Weasel Reader and makeztxt
  *
- * $Id: ztxt.h,v 1.2 2002/09/08 11:45:55 tim Exp $
+ * $Id: ztxt.h,v 1.3 2002/09/14 02:19:09 llornkcor Exp $
  *
  */
 
@@ -76,20 +76,20 @@ class ztxt : public CExpander, Cpdb
     void home();
  public:
     virtual void sizes(unsigned long& _file, unsigned long& _text)
-	{
-	    _file = file_length;
-	    _text = ntohl(hdr0.size);
-	}
+  {
+      _file = file_length;
+      _text = ntohl(hdr0.size);
+  }
     virtual bool hasrandomaccess() { return (hdr0.randomAccess != 0); }
     virtual ~ztxt()
-	{
-	    if (expandedtextbuffer != NULL) delete [] expandedtextbuffer;
-	    if (compressedtextbuffer != NULL) delete [] compressedtextbuffer;
-	    if (bInit)
-	    {
-		inflateEnd(&zstream);
-	    }
-	}
+  {
+      if (expandedtextbuffer != NULL) delete [] expandedtextbuffer;
+      if (compressedtextbuffer != NULL) delete [] compressedtextbuffer;
+      if (bInit)
+      {
+    inflateEnd(&zstream);
+      }
+  }
     ztxt();
     virtual int openfile(const char *src);
     virtual int getch();
@@ -97,9 +97,9 @@ class ztxt : public CExpander, Cpdb
     virtual void locate(unsigned int n);
     virtual CList<Bkmk>* getbkmklist();
     virtual MarkupType PreferredMarkup()
-	{
-	    return cTEXT;
-	}
+  {
+      return cTEXT;
+  }
 };
 
 #endif
