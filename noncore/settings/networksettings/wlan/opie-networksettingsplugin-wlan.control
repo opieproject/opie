@@ -1,5 +1,5 @@
 Package: opie-networksettingsplugin-wlan
-Files: $OPIEDIR/plugins/networksettings/libwlan.so* 
+Files: plugins/networksettings/libwlan.so* 
 Priority: optional
 Section: opie/settings
 Maintainer: Patrick S. Vogt <tille@handhelds.org>
