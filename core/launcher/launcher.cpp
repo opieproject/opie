@@ -76,6 +76,37 @@
 // uidGen
 
 // uidGen
+namespace {
+  QStringList configToMime( Config *cfg ){
+    QStringList mimes;
+    bool tmpMime;
+    cfg->setGroup("mimetypes" );
+    tmpMime = cfg->readBoolEntry("all" ,false);
+    if( tmpMime ){
+      mimes << QString::null;
+      return mimes;
+    }else{
+      tmpMime = cfg->readBoolEntry("audio", true );
+      if(tmpMime )
+	mimes.append("audio//*" );
+
+      tmpMime = cfg->readBoolEntry("image", true );
+      if(tmpMime )
+	mimes.append("image//*" );
+
+      tmpMime = cfg->readBoolEntry("text", true );
+      if(tmpMime )
+	mimes.append("text//*");
+   
+      tmpMime = cfg->readBoolEntry("video", true );
+      if(tmpMime )
+	mimes.append("video//*" );
+    }
+    return mimes;
+  }
+
+}
+
 
 CategoryTabWidget::CategoryTabWidget( QWidget* parent ) :
     QVBox( parent )
@@ -426,8 +457,8 @@ Launcher::Launcher( QWidget* parent, const char* name, WFlags fl )
     tabs = 0;
     rootFolder = 0;
     docsFolder = 0;
-    int stamp = uidgen.generate();
-    uidgen.store( stamp );
+    int stamp = uidgen.generate(); // this is our timestamp to see which devices we know
+    //uidgen.store( stamp );
     m_timeStamp = QString::number( stamp  );
 
     tabs = new CategoryTabWidget( this );
@@ -511,53 +542,58 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
     delete docsFolder;
     docsFolder = new DocLnkSet;
     qWarning("new DocLnkSet" );
+    DocLnkSet *tmp = 0;
+    QString home = QString(getenv("HOME"))  + "/Documents";
+    tmp = new DocLnkSet( home , QString::null);
+    docsFolder->appendFrom( *tmp );
+    delete tmp;
     // find out wich filesystems are new in this round
     // We will do this by having a timestamp inside each mountpoint
     // if the current timestamp doesn't match this is a new file system and 
     // come up with our MediumMountGui :) let the hacking begin
     int stamp = uidgen.generate();
     
-    QString newStamp = QString::number( stamp );
-    qWarning("new time stamp is: %s", newStamp.latin1() );
+    QString newStamp = QString::number( stamp ); // generates newtime Stamp
     StorageInfo storage;
     const QList<FileSystem> &fileSystems = storage.fileSystems();
-    qWarning("QList<FileSystem>" );
     QListIterator<FileSystem> it ( fileSystems );
-    qWarning("iterator initiliazed" );
     for ( ; it.current(); ++it ) {
-      qWarning("inside for loop" );
-      qWarning("checking device %s", (*it)->path().latin1() );
       if ( (*it)->isRemovable() ) { // let's find out  if we should search on it
 	qWarning("%s is removeable", (*it)->path().latin1() );
 	OConfig cfg( (*it)->path() + "/.opiestorage.cf");
 	cfg.setGroup("main");
 	QString stamp = cfg.readEntry("timestamp", QDateTime::currentDateTime().toString() );
 	if( stamp == m_timeStamp ){ // ok we know this card
-	  qWarning("time stamp match" );
-	  cfg.writeEntry("timestamp", newStamp );
+	  cfg.writeEntry("timestamp", newStamp ); //just write a new timestamp
 	  // we need to scan the list now. Hopefully the cache will be there
-	}else{ // come up with the gui
-	  qWarning("time stamp doesn't match" );
+	  // read the mimetypes from the config and search for documents
+	  QStringList mimetypes = configToMime( &cfg);
+	  tmp = new DocLnkSet( (*it)->path(), mimetypes.join(";")  );
+	  docsFolder->appendFrom( *tmp );
+	  delete tmp;
+
+	}else{ // come up with the gui cause this a new card
 	  MediumMountGui medium((*it)->path() );
-	  qWarning("medium mount gui created" );
-	  if( medium.check() ){
-	    qWarning("need to check this device" );
-	    if( medium.exec()  ){ //ok
+	  if( medium.check() ){ // we did not ask before or ask again is off
+	    if( medium.exec()  ){ // he clicked yes so search it
 	      // speicher
-	      qWarning("execed" );
-	      cfg.read();
+	      cfg.read(); // cause of a race we need to reread
 	      cfg.writeEntry("timestamp", newStamp );
-	    }
-	  }else{
-	    qWarning("wrong :(" );
+	    }// no else
+	  }else{ // we checked
 	    // do something different see what we need to do
+	    // let's see if we should check the device
+	    cfg.setGroup("main" );
+	    bool check = cfg.readBoolEntry("autocheck", true );
+	    if( check ){ // find the documents
+	      tmp = new DocLnkSet( (*it)->path(), configToMime(&cfg ).join(";") );
+	      docsFolder->appendFrom( *tmp );
+	      delete tmp;
+	    }
 	  }
 	} 
       }
     }
-    qWarning("findDocuments" );
-    Global::findDocuments(docsFolder); // get rid of this call later
-    qWarning("done" );
     m_timeStamp = newStamp;
 }
 

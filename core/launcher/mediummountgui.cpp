@@ -80,9 +80,10 @@ void MediumMountGui::writeConfig(bool autocheck) {
   cfg.writeEntry("dirs", ""); 
 
 
-  // if all is checked then add only "null" to the list.
+  // if all is checked then add only "QString::null" to the list.
   if (checkmimeall) {
-    mimeTypeList += ("null");
+    mimeTypeList.clear();
+    mimeTypeList += QString::null;
   } else {
     if (checkmimeaudio) {
       mimeTypeList += ("audio//*");
@@ -97,10 +98,11 @@ void MediumMountGui::writeConfig(bool autocheck) {
       mimeTypeList += ("image//*");
     }
     if (checkmimeall) {
-    mimeTypeList << ("null");
+      mimeTypeList.clear();
+      mimeTypeList << QString::null;
     }
   }
-  cfg.write();
+  cfg.write(); // not really needed here but just to be sure
 }
 
 void MediumMountGui::startGui() {
