@@ -30,8 +30,8 @@
  * SQL Backend for the OPIE-Contact Database.
  */
 
-#ifndef _OContactAccessBackend_SQL_
-#define _OContactAccessBackend_SQL_
+#ifndef _OPimContactAccessBackend_SQL_
+#define _OPimContactAccessBackend_SQL_
 
 #include <opie2/ocontactaccessbackend.h>
 #include <opie2/ocontactaccess.h>
@@ -49,14 +49,14 @@ namespace Opie {
 /* the default xml implementation */
 /**
  * This class is the SQL implementation of a Contact backend
- * it does implement everything available for OContact.
+ * it does implement everything available for OPimContact.
  * @see OPimAccessBackend for more information of available methods
  */
-class OContactAccessBackend_SQL : public OContactAccessBackend {
+class OPimContactAccessBackend_SQL : public OPimContactAccessBackend {
  public:
-	OContactAccessBackend_SQL ( const QString& appname, const QString& filename = QString::null );
+	OPimContactAccessBackend_SQL ( const QString& appname, const QString& filename = QString::null );
 
-	~OContactAccessBackend_SQL ();
+	~OPimContactAccessBackend_SQL ();
 
 	bool save();
 
@@ -68,11 +68,11 @@ class OContactAccessBackend_SQL : public OContactAccessBackend {
 
 	QArray<int> allRecords() const;
 
-	OContact find ( int uid ) const;
+	OPimContact find ( int uid ) const;
 	// FIXME: Add lookahead-cache support !
-	//OContact find(int uid, const QArray<int>&, uint cur, Frontend::CacheDirection )const;
+	//OPimContact find(int uid, const QArray<int>&, uint cur, Frontend::CacheDirection )const;
 
-	QArray<int> queryByExample ( const OContact &query, int settings, 
+	QArray<int> queryByExample ( const OPimContact &query, int settings, 
 				     const QDateTime& d );
 
 	QArray<int> matchRegexp(  const QRegExp &r ) const;
@@ -83,9 +83,9 @@ class OContactAccessBackend_SQL : public OContactAccessBackend {
 
 	// Currently only asc implemented..
 	QArray<int> sorted( bool asc,  int , int ,  int );
-	bool add ( const OContact &newcontact );
+	bool add ( const OPimContact &newcontact );
 
-	bool replace ( const OContact &contact );
+	bool replace ( const OPimContact &contact );
 
 	bool remove ( int uid );
 	bool reload();

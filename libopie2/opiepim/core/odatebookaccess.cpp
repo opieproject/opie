@@ -38,7 +38,7 @@ namespace Opie {
  * @param ac What kind of access is intended
  */
 ODateBookAccess::ODateBookAccess( ODateBookAccessBackend* back, enum Access ac )
-    : OPimAccessTemplate<OEvent>( back )
+    : OPimAccessTemplate<OPimEvent>( back )
 {
     if (!back )
         back = OBackendFactory<ODateBookAccessBackend>::Default("datebook", QString::null );

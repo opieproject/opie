@@ -47,13 +47,13 @@ namespace Opie
 {
 
 class OPimState;
-class ORecur;
+class OPimRecurrence;
 class OPimMaintainer;
 class OPimNotifyManager;
-class OTodo : public OPimRecord
+class OPimTodo : public OPimRecord
 {
   public:
-    typedef QValueList<OTodo> ValueList;
+    typedef QValueList<OPimTodo> ValueList;
     enum RecordFields {
         Uid = Qtopia::UID_ID,
         Category = Qtopia::CATEGORY_ID,
@@ -90,7 +90,7 @@ class OTodo : public OPimRecord
        @param date what is the deadline?
        @param uid what is the UUID of this Event
     **/
-    OTodo( bool completed = false, int priority = Normal,
+    OPimTodo( bool completed = false, int priority = Normal,
            const QStringList &category = QStringList(),
            const QString &summary = QString::null ,
            const QString &description = QString::null,
@@ -98,7 +98,7 @@ class OTodo : public OPimRecord
            bool hasDate = false, QDate date = QDate::currentDate(),
            int uid = 0 /*empty*/ );
 
-    OTodo( bool completed, int priority,
+    OPimTodo( bool completed, int priority,
            const QArray<int>& category,
            const QString& summary = QString::null,
            const QString& description = QString::null,
@@ -109,12 +109,12 @@ class OTodo : public OPimRecord
     /** Copy c'tor
      *
      */
-    OTodo( const OTodo & );
+    OPimTodo( const OPimTodo & );
 
     /**
      *destructor
      */
-    ~OTodo();
+    ~OPimTodo();
 
     /**
      * Is this event completed?
@@ -159,7 +159,7 @@ class OTodo : public OPimRecord
     bool hasState() const;
 
     /**
-     * What is the state of this OTodo?
+     * What is the state of this OPimTodo?
      */
     OPimState state() const;
 
@@ -171,15 +171,15 @@ class OTodo : public OPimRecord
     /**
      * the recurrance of this
      */
-    ORecur recurrence() const;
+    OPimRecurrence recurrence() const;
 
     /**
-     * does this OTodo have a maintainer?
+     * does this OPimTodo have a maintainer?
      */
     bool hasMaintainer() const;
 
     /**
-     * the Maintainer of this OTodo
+     * the Maintainer of this OPimTodo
      */
     OPimMaintainer maintainer() const;
 
@@ -266,7 +266,7 @@ class OTodo : public OPimRecord
      */
     void setCompletedDate( const QDate& date );
 
-    void setRecurrence( const ORecur& );
+    void setRecurrence( const OPimRecurrence& );
 
     void setDescription( const QString& );
     void setSummary( const QString& );
@@ -287,30 +287,30 @@ class OTodo : public OPimRecord
 
     virtual bool match( const QRegExp &r ) const;
 
-    bool operator<( const OTodo &toDoEvent ) const;
-    bool operator<=( const OTodo &toDoEvent ) const;
-    bool operator!=( const OTodo &toDoEvent ) const;
-    bool operator>( const OTodo &toDoEvent ) const;
-    bool operator>=( const OTodo &toDoEvent ) const;
-    bool operator==( const OTodo &toDoEvent ) const;
-    OTodo &operator=( const OTodo &toDoEvent );
+    bool operator<( const OPimTodo &toDoEvent ) const;
+    bool operator<=( const OPimTodo &toDoEvent ) const;
+    bool operator!=( const OPimTodo &toDoEvent ) const;
+    bool operator>( const OPimTodo &toDoEvent ) const;
+    bool operator>=( const OPimTodo &toDoEvent ) const;
+    bool operator==( const OPimTodo &toDoEvent ) const;
+    OPimTodo &operator=( const OPimTodo &toDoEvent );
 
     static int rtti();
 
   private:
-    class OTodoPrivate;
-    struct OTodoData;
+    class OPimTodoPrivate;
+    struct OPimTodoData;
 
     void deref();
     inline void changeOrModify();
-    void copy( OTodoData* src, OTodoData* dest );
-    OTodoPrivate *d;
-    OTodoData *data;
+    void copy( OPimTodoData* src, OPimTodoData* dest );
+    OPimTodoPrivate *d;
+    OPimTodoData *data;
 
 };
 
 
-inline bool OTodo::operator!=( const OTodo &toDoEvent ) const
+inline bool OPimTodo::operator!=( const OPimTodo &toDoEvent ) const
 {
     return !( *this == toDoEvent );
 }

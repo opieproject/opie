@@ -28,7 +28,7 @@
 */
 #include <qtl.h>
 
-#include <opie2/orecur.h>
+#include <opie2/opimrecurrence.h>
 
 #include <opie2/odatebookaccessbackend.h>
 
@@ -36,11 +36,11 @@ using namespace Opie;
 
 namespace {
 /* a small helper to get all NonRepeating events for a range of time */
-    void events( OEffectiveEvent::ValueList& tmpList, const OEvent::ValueList& events,
+    void events( OEffectiveEvent::ValueList& tmpList, const OPimEvent::ValueList& events,
                  const QDate& from, const QDate& to ) {
         QDateTime dtStart, dtEnd;
 
-        for ( OEvent::ValueList::ConstIterator it = events.begin(); it != events.end(); ++it ) {
+        for ( OPimEvent::ValueList::ConstIterator it = events.begin(); it != events.end(); ++it ) {
             dtStart = (*it).startDateTime();
             dtEnd   = (*it).endDateTime();
 
@@ -91,13 +91,13 @@ namespace {
         }
     }
 
-    void repeat( OEffectiveEvent::ValueList& tmpList, const OEvent::ValueList& list,
+    void repeat( OEffectiveEvent::ValueList& tmpList, const OPimEvent::ValueList& list,
                  const QDate& from, const QDate& to ) {
         QDate repeat;
-        for ( OEvent::ValueList::ConstIterator it = list.begin(); it != list.end(); ++it ) {
+        for ( OPimEvent::ValueList::ConstIterator it = list.begin(); it != list.end(); ++it ) {
             int dur = (*it).startDateTime().date().daysTo( (*it).endDateTime().date() );
             QDate itDate = from.addDays(-dur );
-            ORecur rec = (*it).recurrence();
+            OPimRecurrence rec = (*it).recurrence();
             if ( !rec.hasEndDate() || rec.endDate() > to ) {
                 rec.setEndDate( to );
                 rec.setHasEndDate( true );
@@ -152,7 +152,7 @@ namespace {
 namespace Opie {
 
 ODateBookAccessBackend::ODateBookAccessBackend()
-    : OPimAccessBackend<OEvent>()
+    : OPimAccessBackend<OPimEvent>()
 {
 
 }
@@ -162,7 +162,7 @@ ODateBookAccessBackend::~ODateBookAccessBackend() {
 OEffectiveEvent::ValueList ODateBookAccessBackend::effectiveEvents( const QDate& from,
                                                                     const QDate& to ) {
     OEffectiveEvent::ValueList tmpList;
-    OEvent::ValueList list = directNonRepeats();
+    OPimEvent::ValueList list = directNonRepeats();
 
     events( tmpList, list, from, to );
     repeat( tmpList, directRawRepeats(),from,to );
@@ -190,7 +190,7 @@ OEffectiveEvent::ValueList ODateBookAccessBackend::effectiveEvents( const QDateT
 OEffectiveEvent::ValueList ODateBookAccessBackend::effectiveNonRepeatingEvents( const QDate& from,
                                                                     const QDate& to ) {
     OEffectiveEvent::ValueList tmpList;
-    OEvent::ValueList list = directNonRepeats();
+    OPimEvent::ValueList list = directNonRepeats();
 
     events( tmpList, list, from, to );
 

@@ -32,7 +32,7 @@
 #ifndef __OCONTACTACCESSBACKEND_VCARD_H_
 #define __OCONTACTACCESSBACKEND_VCARD_H_
 
-#include <opie2/ocontact.h>
+#include <opie2/opimcontact.h>
 
 #include <opie2/ocontactaccessbackend.h>
 
@@ -41,25 +41,25 @@ class VObject;
 namespace Opie {
 /**
  * This is the vCard 2.1 implementation of the Contact Storage
- * @see OContactAccessBackend_XML
+ * @see OPimContactAccessBackend_XML
  * @see OPimAccessBackend
  */
-class OContactAccessBackend_VCard : public OContactAccessBackend {
+class OPimContactAccessBackend_VCard : public OPimContactAccessBackend {
  public:
-	OContactAccessBackend_VCard ( const QString& appname, const QString& filename = QString::null );
+	OPimContactAccessBackend_VCard ( const QString& appname, const QString& filename = QString::null );
 
 	bool load ();
 	bool reload();
 	bool save();
 	void clear ();
 
-	bool add ( const OContact& newcontact );
+	bool add ( const OPimContact& newcontact );
 	bool remove ( int uid );
-	bool replace ( const OContact& contact );
+	bool replace ( const OPimContact& contact );
 
-	OContact find ( int uid ) const;
+	OPimContact find ( int uid ) const;
 	QArray<int> allRecords() const;
-	QArray<int> queryByExample ( const OContact &query, int settings, const QDateTime& d = QDateTime() );
+	QArray<int> queryByExample ( const OPimContact &query, int settings, const QDateTime& d = QDateTime() );
 	QArray<int> matchRegexp(  const QRegExp &r ) const;
 
 	const uint querySettings();
@@ -68,8 +68,8 @@ class OContactAccessBackend_VCard : public OContactAccessBackend {
 	bool wasChangedExternally();
 
 private:
-	OContact parseVObject( VObject* obj );
-	VObject* createVObject( const OContact& c );
+	OPimContact parseVObject( VObject* obj );
+	VObject* createVObject( const OPimContact& c );
 	QString convDateToVCardDate( const QDate& c ) const;
 	QDate convVCardDateToDate( const QString& datestr );
 	VObject *safeAddPropValue( VObject *o, const char* prop, const QString& value );
@@ -77,7 +77,7 @@ private:
 
 	bool m_dirty : 1;
 	QString m_file;
-	QMap<int, OContact> m_map;
+	QMap<int, OPimContact> m_map;
 };
 
 }

@@ -39,23 +39,23 @@ class OSQLResultItem;
 
 namespace Opie {
 
-class OTodoAccessBackendSQL : public OTodoAccessBackend {
+class OPimTodoAccessBackendSQL : public OPimTodoAccessBackend {
 public:
-    OTodoAccessBackendSQL( const QString& file );
-    ~OTodoAccessBackendSQL();
+    OPimTodoAccessBackendSQL( const QString& file );
+    ~OPimTodoAccessBackendSQL();
 
     bool load();
     bool reload();
     bool save();
     QArray<int> allRecords()const;
 
-    QArray<int> queryByExample( const OTodo& t, int settings, const QDateTime& d = QDateTime() );
-    OTodo find(int uid)const;
-    OTodo find(int uid, const QArray<int>&, uint cur, Frontend::CacheDirection )const;
+    QArray<int> queryByExample( const OPimTodo& t, int settings, const QDateTime& d = QDateTime() );
+    OPimTodo find(int uid)const;
+    OPimTodo find(int uid, const QArray<int>&, uint cur, Frontend::CacheDirection )const;
     void clear();
-    bool add( const OTodo& t );
+    bool add( const OPimTodo& t );
     bool remove( int uid );
-    bool replace( const OTodo& t );
+    bool replace( const OPimTodo& t );
 
     QArray<int> overDue();
     QArray<int> effectiveToDos( const QDate& start,
@@ -71,10 +71,10 @@ private:
     void update()const;
     void fillDict();
     inline bool date( QDate& date, const QString& )const;
-    inline OTodo todo( const OSQLResult& )const;
-    inline OTodo todo( OSQLResultItem& )const;
+    inline OPimTodo todo( const OSQLResult& )const;
+    inline OPimTodo todo( OSQLResultItem& )const;
     inline QArray<int> uids( const OSQLResult& )const;
-    OTodo todo( int uid )const;
+    OPimTodo todo( int uid )const;
     QBitArray sup() const;
 
     QAsciiDict<int> m_dict;

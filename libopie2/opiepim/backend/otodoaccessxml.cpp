@@ -43,25 +43,25 @@
 #include <qpe/stringutil.h>
 #include <qpe/timeconversion.h>
 
-#include <opie2/oconversion.h>
+#include <opie2/opimdateconversion.h>
 #include <opie2/opimstate.h>
-#include <opie2/otimezone.h>
+#include <opie2/opimtimezone.h>
 #include <opie2/opimnotifymanager.h>
-#include <opie2/orecur.h>
+#include <opie2/opimrecurrence.h>
 #include <opie2/otodoaccessxml.h>
 
 using namespace Opie;
 
 namespace {
     time_t rp_end;
-    ORecur* rec;
-    ORecur *recur() {
-        if (!rec ) rec = new ORecur;
+    OPimRecurrence* rec;
+    OPimRecurrence *recur() {
+        if (!rec ) rec = new OPimRecurrence;
         return rec;
     }
     int snd;
     enum MoreAttributes {
-        FRType = OTodo::CompletedDate + 2,
+        FRType = OPimTodo::CompletedDate + 2,
         FRWeekdays,
         FRPosition,
         FRFreq,
@@ -98,19 +98,19 @@ char *strstrlen(const char *haystack, int hLen, const char* needle, int nLen)
 
 namespace Opie {
 
-OTodoAccessXML::OTodoAccessXML( const QString& appName,
+OPimTodoAccessXML::OPimTodoAccessXML( const QString& appName,
                                 const QString& fileName )
-    : OTodoAccessBackend(), m_app( appName ),  m_opened( false ), m_changed( false )
+    : OPimTodoAccessBackend(), m_app( appName ),  m_opened( false ), m_changed( false )
 {
     if (!fileName.isEmpty() )
         m_file = fileName;
     else
         m_file = Global::applicationFileName( "todolist", "todolist.xml" );
 }
-OTodoAccessXML::~OTodoAccessXML() {
+OPimTodoAccessXML::~OPimTodoAccessXML() {
 
 }
-bool OTodoAccessXML::load() {
+bool OPimTodoAccessXML::load() {
     rec = 0;
     m_opened = true;
     m_changed = false;
@@ -120,25 +120,25 @@ bool OTodoAccessXML::load() {
      */
     QAsciiDict<int> dict(26);
     dict.setAutoDelete( TRUE );
-    dict.insert("Categories" ,     new int(OTodo::Category)         );
-    dict.insert("Uid" ,            new int(OTodo::Uid)              );
-    dict.insert("HasDate" ,        new int(OTodo::HasDate)          );
-    dict.insert("Completed" ,      new int(OTodo::Completed)        );
-    dict.insert("Description" ,    new int(OTodo::Description)      );
-    dict.insert("Summary" ,        new int(OTodo::Summary)          );
-    dict.insert("Priority" ,       new int(OTodo::Priority)         );
-    dict.insert("DateDay" ,        new int(OTodo::DateDay)          );
-    dict.insert("DateMonth" ,      new int(OTodo::DateMonth)        );
-    dict.insert("DateYear" ,       new int(OTodo::DateYear)         );
-    dict.insert("Progress" ,       new int(OTodo::Progress)         );
-    dict.insert("CompletedDate",   new int(OTodo::CompletedDate)    );
-    dict.insert("StartDate",       new int(OTodo::StartDate)        );
-    dict.insert("CrossReference",  new int(OTodo::CrossReference)   );
-    dict.insert("State",           new int(OTodo::State)            );
-    dict.insert("Alarms",          new int(OTodo::Alarms)           );
-    dict.insert("Reminders",       new int(OTodo::Reminders)        );
-    dict.insert("Notifiers",       new int(OTodo::Notifiers)        );
-    dict.insert("Maintainer",      new int(OTodo::Maintainer)       );
+    dict.insert("Categories" ,     new int(OPimTodo::Category)         );
+    dict.insert("Uid" ,            new int(OPimTodo::Uid)              );
+    dict.insert("HasDate" ,        new int(OPimTodo::HasDate)          );
+    dict.insert("Completed" ,      new int(OPimTodo::Completed)        );
+    dict.insert("Description" ,    new int(OPimTodo::Description)      );
+    dict.insert("Summary" ,        new int(OPimTodo::Summary)          );
+    dict.insert("Priority" ,       new int(OPimTodo::Priority)         );
+    dict.insert("DateDay" ,        new int(OPimTodo::DateDay)          );
+    dict.insert("DateMonth" ,      new int(OPimTodo::DateMonth)        );
+    dict.insert("DateYear" ,       new int(OPimTodo::DateYear)         );
+    dict.insert("Progress" ,       new int(OPimTodo::Progress)         );
+    dict.insert("CompletedDate",   new int(OPimTodo::CompletedDate)    );
+    dict.insert("StartDate",       new int(OPimTodo::StartDate)        );
+    dict.insert("CrossReference",  new int(OPimTodo::CrossReference)   );
+    dict.insert("State",           new int(OPimTodo::State)            );
+    dict.insert("Alarms",          new int(OPimTodo::Alarms)           );
+    dict.insert("Reminders",       new int(OPimTodo::Reminders)        );
+    dict.insert("Notifiers",       new int(OPimTodo::Notifiers)        );
+    dict.insert("Maintainer",      new int(OPimTodo::Maintainer)       );
     dict.insert("rtype",           new int(FRType)                  );
     dict.insert("rweekdays",       new int(FRWeekdays)              );
     dict.insert("rposition",       new int(FRPosition)              );
@@ -179,7 +179,7 @@ bool OTodoAccessXML::load() {
         i+= strLen;
         qWarning("Found a start at %d %d", i,  (point-dt) );
 
-        OTodo ev;
+        OPimTodo ev;
         m_year = m_month = m_day = 0;
 
         while ( TRUE ) {
@@ -242,8 +242,8 @@ bool OTodoAccessXML::load() {
             ev.setDueDate( QDate(m_year, m_month, m_day) );
         }
         if ( rec && rec->doesRecur() ) {
-            OTimeZone utc = OTimeZone::utc();
-            ORecur recu( *rec ); // call copy c'tor
+            OPimTimeZone utc = OPimTimeZone::utc();
+            OPimRecurrence recu( *rec ); // call copy c'tor
             recu.setEndDate( utc.fromUTCDateTime( rp_end ).date() );
             recu.setStart( ev.dueDate() );
             ev.setRecurrence( recu );
@@ -259,11 +259,11 @@ bool OTodoAccessXML::load() {
     qWarning("counts %d records loaded!", m_events.count() );
     return true;
 }
-bool OTodoAccessXML::reload() {
+bool OPimTodoAccessXML::reload() {
     m_events.clear();
     return load();
 }
-bool OTodoAccessXML::save() {
+bool OPimTodoAccessXML::save() {
 //    qWarning("saving");
     if (!m_opened || !m_changed ) {
 //        qWarning("not saving");
@@ -279,7 +279,7 @@ bool OTodoAccessXML::save() {
     out = "<!DOCTYPE Tasks>\n<Tasks>\n";
 
     // for all todos
-    QMap<int, OTodo>::Iterator it;
+    QMap<int, OPimTodo>::Iterator it;
     for (it = m_events.begin(); it != m_events.end(); ++it ) {
         out+= "<Task " + toString( (*it) ) + " />\n";
         QCString cstr = out.utf8();
@@ -314,9 +314,9 @@ bool OTodoAccessXML::save() {
     m_changed = false;
     return true;
 }
-QArray<int> OTodoAccessXML::allRecords()const {
+QArray<int> OPimTodoAccessXML::allRecords()const {
     QArray<int> ids( m_events.count() );
-    QMap<int, OTodo>::ConstIterator it;
+    QMap<int, OPimTodo>::ConstIterator it;
     int i = 0;
 
     for ( it = m_events.begin(); it != m_events.end(); ++it ) {
@@ -325,49 +325,49 @@ QArray<int> OTodoAccessXML::allRecords()const {
     }
     return ids;
 }
-QArray<int> OTodoAccessXML::queryByExample( const OTodo&, int, const QDateTime& ) {
+QArray<int> OPimTodoAccessXML::queryByExample( const OPimTodo&, int, const QDateTime& ) {
     QArray<int> ids(0);
     return ids;
 }
-OTodo OTodoAccessXML::find( int uid )const {
-    OTodo todo;
+OPimTodo OPimTodoAccessXML::find( int uid )const {
+    OPimTodo todo;
     todo.setUid( 0 ); // isEmpty()
-    QMap<int, OTodo>::ConstIterator it = m_events.find( uid );
+    QMap<int, OPimTodo>::ConstIterator it = m_events.find( uid );
     if ( it != m_events.end() )
         todo = it.data();
 
     return todo;
 }
-void OTodoAccessXML::clear() {
+void OPimTodoAccessXML::clear() {
     if (m_opened )
         m_changed = true;
 
     m_events.clear();
 }
-bool OTodoAccessXML::add( const OTodo& todo ) {
+bool OPimTodoAccessXML::add( const OPimTodo& todo ) {
 //    qWarning("add");
     m_changed = true;
     m_events.insert( todo.uid(), todo );
 
     return true;
 }
-bool OTodoAccessXML::remove( int uid ) {
+bool OPimTodoAccessXML::remove( int uid ) {
     m_changed = true;
     m_events.remove( uid );
 
     return true;
 }
-bool OTodoAccessXML::replace( const OTodo& todo) {
+bool OPimTodoAccessXML::replace( const OPimTodo& todo) {
     m_changed = true;
     m_events.replace( todo.uid(), todo );
 
     return true;
 }
-QArray<int> OTodoAccessXML::effectiveToDos( const QDate& start,
+QArray<int> OPimTodoAccessXML::effectiveToDos( const QDate& start,
                                             const QDate& end,
                                             bool includeNoDates ) {
     QArray<int> ids( m_events.count() );
-    QMap<int, OTodo>::Iterator it;
+    QMap<int, OPimTodo>::Iterator it;
 
     int i = 0;
     for ( it = m_events.begin(); it != m_events.end(); ++it ) {
@@ -385,11 +385,11 @@ QArray<int> OTodoAccessXML::effectiveToDos( const QDate& start,
     ids.resize( i );
     return ids;
 }
-QArray<int> OTodoAccessXML::overDue() {
+QArray<int> OPimTodoAccessXML::overDue() {
     QArray<int> ids( m_events.count() );
     int i = 0;
 
-    QMap<int, OTodo>::Iterator it;
+    QMap<int, OPimTodo>::Iterator it;
     for ( it = m_events.begin(); it != m_events.end(); ++it ) {
         if ( it.data().isOverdue() ) {
             ids[i] = it.key();
@@ -402,7 +402,7 @@ QArray<int> OTodoAccessXML::overDue() {
 
 
 /* private */
-void OTodoAccessXML::todo( QAsciiDict<int>* dict, OTodo& ev,
+void OPimTodoAccessXML::todo( QAsciiDict<int>* dict, OPimTodo& ev,
                             const QCString& attr, const QString& val) {
 //    qWarning("parse to do from XMLElement" );
 
@@ -416,61 +416,61 @@ void OTodoAccessXML::todo( QAsciiDict<int>* dict, OTodo& ev,
     }
 
     switch( *find ) {
-    case OTodo::Uid:
+    case OPimTodo::Uid:
         ev.setUid( val.toInt() );
         break;
-    case OTodo::Category:
+    case OPimTodo::Category:
         ev.setCategories( ev.idsFromString( val ) );
         break;
-    case OTodo::HasDate:
+    case OPimTodo::HasDate:
         ev.setHasDueDate( val.toInt() );
         break;
-    case OTodo::Completed:
+    case OPimTodo::Completed:
         ev.setCompleted( val.toInt() );
         break;
-    case OTodo::Description:
+    case OPimTodo::Description:
         ev.setDescription( val );
         break;
-    case OTodo::Summary:
+    case OPimTodo::Summary:
         ev.setSummary( val );
         break;
-    case OTodo::Priority:
+    case OPimTodo::Priority:
         ev.setPriority( val.toInt() );
         break;
-    case OTodo::DateDay:
+    case OPimTodo::DateDay:
         m_day = val.toInt();
         break;
-    case OTodo::DateMonth:
+    case OPimTodo::DateMonth:
         m_month = val.toInt();
         break;
-    case OTodo::DateYear:
+    case OPimTodo::DateYear:
         m_year = val.toInt();
         break;
-    case OTodo::Progress:
+    case OPimTodo::Progress:
         ev.setProgress( val.toInt() );
         break;
-    case OTodo::CompletedDate:
-        ev.setCompletedDate( OConversion::dateFromString( val ) );
+    case OPimTodo::CompletedDate:
+        ev.setCompletedDate( OPimDateConversion::dateFromString( val ) );
         break;
-    case OTodo::StartDate:
-        ev.setStartDate( OConversion::dateFromString( val ) );
+    case OPimTodo::StartDate:
+        ev.setStartDate( OPimDateConversion::dateFromString( val ) );
         break;
-    case OTodo::State:
+    case OPimTodo::State:
         ev.setState( val.toInt() );
         break;
-    case OTodo::Alarms:{
+    case OPimTodo::Alarms:{
         OPimNotifyManager &manager = ev.notifiers();
         QStringList als = QStringList::split(";", val );
         for (QStringList::Iterator it = als.begin(); it != als.end(); ++it ) {
             QStringList alarm = QStringList::split(":", (*it), TRUE ); // allow empty
             qWarning("alarm: %s", alarm.join("___").latin1() );
-            qWarning("alarm[0]: %s %s", alarm[0].latin1(), OConversion::dateTimeFromString( alarm[0] ).toString().latin1() );
-            OPimAlarm al( alarm[2].toInt(), OConversion::dateTimeFromString( alarm[0] ), alarm[1].toInt() );
+            qWarning("alarm[0]: %s %s", alarm[0].latin1(), OPimDateConversion::dateTimeFromString( alarm[0] ).toString().latin1() );
+            OPimAlarm al( alarm[2].toInt(), OPimDateConversion::dateTimeFromString( alarm[0] ), alarm[1].toInt() );
             manager.add( al );
         }
     }
         break;
-    case OTodo::Reminders:{
+    case OPimTodo::Reminders:{
         OPimNotifyManager &manager = ev.notifiers();
         QStringList rems = QStringList::split(";", val );
         for (QStringList::Iterator it = rems.begin(); it != rems.end(); ++it ) {
@@ -479,7 +479,7 @@ void OTodoAccessXML::todo( QAsciiDict<int>* dict, OTodo& ev,
         }
     }
         break;
-    case OTodo::CrossReference:
+    case OPimTodo::CrossReference:
     {
         /*
          * A cross refernce looks like
@@ -499,17 +499,17 @@ void OTodoAccessXML::todo( QAsciiDict<int>* dict, OTodo& ev,
     /* Recurrence stuff below + post processing later */
     case FRType:
         if ( val == "Daily" )
-            recur()->setType( ORecur::Daily );
+            recur()->setType( OPimRecurrence::Daily );
         else if ( val == "Weekly" )
-            recur()->setType( ORecur::Weekly);
+            recur()->setType( OPimRecurrence::Weekly);
         else if ( val == "MonthlyDay" )
-            recur()->setType( ORecur::MonthlyDay );
+            recur()->setType( OPimRecurrence::MonthlyDay );
         else if ( val == "MonthlyDate" )
-            recur()->setType( ORecur::MonthlyDate );
+            recur()->setType( OPimRecurrence::MonthlyDate );
         else if ( val == "Yearly" )
-            recur()->setType( ORecur::Yearly );
+            recur()->setType( OPimRecurrence::Yearly );
         else
-            recur()->setType( ORecur::NoRepeat );
+            recur()->setType( OPimRecurrence::NoRepeat );
         break;
     case FRWeekdays:
         recur()->setDays( val.toInt() );
@@ -553,7 +553,7 @@ QString customToXml(const QMap<QString, QString>& customMap )
 
 }
 
-QString OTodoAccessXML::toString( const OTodo& ev )const {
+QString OPimTodoAccessXML::toString( const OPimTodo& ev )const {
     QString str;
 
     str += "Completed=\"" + QString::number( ev.isCompleted() ) + "\" ";
@@ -591,9 +591,9 @@ QString OTodoAccessXML::toString( const OTodo& ev )const {
         str += ev.recurrence().toString();
     }
     if ( ev.hasStartDate() )
-        str += "StartDate=\""+ OConversion::dateToString( ev.startDate() ) +"\" ";
+        str += "StartDate=\""+ OPimDateConversion::dateToString( ev.startDate() ) +"\" ";
     if ( ev.hasCompletedDate() )
-        str += "CompletedDate=\""+ OConversion::dateToString( ev.completedDate() ) +"\" ";
+        str += "CompletedDate=\""+ OPimDateConversion::dateToString( ev.completedDate() ) +"\" ";
     if ( ev.hasState() )
         str += "State=\""+QString::number( ev.state().state() )+"\" ";
 
@@ -610,7 +610,7 @@ QString OTodoAccessXML::toString( const OTodo& ev )const {
             for ( ; it != alarms.end(); ++it ) {
                 /* only if time is valid */
                 if ( (*it).dateTime().isValid() ) {
-                    als << OConversion::dateTimeToString( (*it).dateTime() )
+                    als << OPimDateConversion::dateTimeToString( (*it).dateTime() )
                         + ":" + QString::number( (*it).duration() )
                         + ":" + QString::number( (*it).sound() )
                         + ":";
@@ -622,7 +622,7 @@ QString OTodoAccessXML::toString( const OTodo& ev )const {
         }
 
         /*
-         * now the same for reminders but more easy. We just save the uid of the OEvent.
+         * now the same for reminders but more easy. We just save the uid of the OPimEvent.
          */
         OPimNotifyManager::Reminders reminders = manager.reminders();
         if (!reminders.isEmpty() ) {
@@ -639,7 +639,7 @@ QString OTodoAccessXML::toString( const OTodo& ev )const {
 
     return str;
 }
-QString OTodoAccessXML::toString( const QArray<int>& ints ) const {
+QString OPimTodoAccessXML::toString( const QArray<int>& ints ) const {
     return Qtopia::Record::idsToString( ints );
 }
 
@@ -648,29 +648,29 @@ QString OTodoAccessXML::toString( const QArray<int>& ints ) const {
  * Inspired by todoxmlio.cpp from TT
  */
 
-struct OTodoXMLContainer {
-    OTodo todo;
+struct OPimTodoXMLContainer {
+    OPimTodo todo;
 };
 
 namespace {
-    inline QString string( const OTodo& todo) {
+    inline QString string( const OPimTodo& todo) {
         return  todo.summary().isEmpty() ?
             todo.description().left(20 ) :
             todo.summary();
     }
-    inline int completed( const OTodo& todo1, const OTodo& todo2) {
+    inline int completed( const OPimTodo& todo1, const OPimTodo& todo2) {
         int ret = 0;
         if ( todo1.isCompleted() ) ret++;
         if ( todo2.isCompleted() ) ret--;
         return ret;
     }
-    inline int priority( const OTodo& t1, const OTodo& t2) {
+    inline int priority( const OPimTodo& t1, const OPimTodo& t2) {
         return ( t1.priority() - t2.priority() );
     }
-    inline int description( const OTodo& t1, const OTodo& t2) {
+    inline int description( const OPimTodo& t1, const OPimTodo& t2) {
         return QString::compare( string(t1), string(t2) );
     }
-    inline int deadline( const OTodo& t1, const OTodo& t2) {
+    inline int deadline( const OPimTodo& t1, const OPimTodo& t2) {
         int ret = 0;
         if ( t1.hasDueDate() &&
              t2.hasDueDate() )
@@ -703,17 +703,17 @@ namespace {
    *   < 0 (negative integer) if item1 < item2
    *
    */
-class OTodoXMLVector : public QVector<OTodoXMLContainer> {
+class OPimTodoXMLVector : public QVector<OPimTodoXMLContainer> {
 public:
-    OTodoXMLVector(int size, bool asc,  int sort)
-        : QVector<OTodoXMLContainer>( size )
+    OPimTodoXMLVector(int size, bool asc,  int sort)
+        : QVector<OPimTodoXMLContainer>( size )
         {
             setAutoDelete( true );
             m_asc = asc;
             m_sort = sort;
         }
         /* return the summary/description */
-    QString string( const OTodo& todo) {
+    QString string( const OPimTodo& todo) {
         return  todo.summary().isEmpty() ?
             todo.description().left(20 ) :
             todo.summary();
@@ -726,8 +726,8 @@ public:
         bool seComp, sePrio, seDesc, seDeadline;
         seComp = sePrio = seDeadline = seDesc = false;
         int ret =0;
-        OTodoXMLContainer* con1 = (OTodoXMLContainer*)d1;
-        OTodoXMLContainer* con2 = (OTodoXMLContainer*)d2;
+        OPimTodoXMLContainer* con1 = (OPimTodoXMLContainer*)d1;
+        OPimTodoXMLContainer* con2 = (OPimTodoXMLContainer*)d2;
 
         /* same item */
         if ( con1->todo.uid() == con2->todo.uid() )
@@ -816,10 +816,10 @@ public:
 
 };
 
-QArray<int> OTodoAccessXML::sorted( bool asc,  int sortOrder,
+QArray<int> OPimTodoAccessXML::sorted( bool asc,  int sortOrder,
                                     int sortFilter,  int cat ) {
-    OTodoXMLVector vector(m_events.count(), asc,sortOrder );
-    QMap<int, OTodo>::Iterator it;
+    OPimTodoXMLVector vector(m_events.count(), asc,sortOrder );
+    QMap<int, OPimTodo>::Iterator it;
     int item = 0;
 
     bool bCat = sortFilter & 1 ? true : false;
@@ -851,7 +851,7 @@ QArray<int> OTodoAccessXML::sorted( bool asc,  int sortOrder,
         }
 
 
-        OTodoXMLContainer* con = new OTodoXMLContainer();
+        OPimTodoXMLContainer* con = new OPimTodoXMLContainer();
         con->todo = (*it);
         vector.insert(item, con );
         item++;
@@ -866,35 +866,35 @@ QArray<int> OTodoAccessXML::sorted( bool asc,  int sortOrder,
     }
     return array;
 };
-void OTodoAccessXML::removeAllCompleted() {
-    QMap<int, OTodo> events = m_events;
-    for ( QMap<int, OTodo>::Iterator it = m_events.begin(); it != m_events.end(); ++it ) {
+void OPimTodoAccessXML::removeAllCompleted() {
+    QMap<int, OPimTodo> events = m_events;
+    for ( QMap<int, OPimTodo>::Iterator it = m_events.begin(); it != m_events.end(); ++it ) {
         if ( (*it).isCompleted() )
             events.remove( it.key() );
     }
     m_events = events;
 }
-QBitArray OTodoAccessXML::supports()const {
+QBitArray OPimTodoAccessXML::supports()const {
     static QBitArray ar = sup();
     return ar;
 }
-QBitArray OTodoAccessXML::sup() {
-    QBitArray ar( OTodo::CompletedDate +1 );
+QBitArray OPimTodoAccessXML::sup() {
+    QBitArray ar( OPimTodo::CompletedDate +1 );
     ar.fill( true );
-    ar[OTodo::CrossReference] = false;
-    ar[OTodo::State ] = false;
-    ar[OTodo::Reminders] = false;
-    ar[OTodo::Notifiers] = false;
-    ar[OTodo::Maintainer] = false;
+    ar[OPimTodo::CrossReference] = false;
+    ar[OPimTodo::State ] = false;
+    ar[OPimTodo::Reminders] = false;
+    ar[OPimTodo::Notifiers] = false;
+    ar[OPimTodo::Maintainer] = false;
 
     return ar;
 }
-QArray<int> OTodoAccessXML::matchRegexp(  const QRegExp &r ) const
+QArray<int> OPimTodoAccessXML::matchRegexp(  const QRegExp &r ) const
 {
 	QArray<int> m_currentQuery( m_events.count() );
 	uint arraycounter = 0;
 
-        QMap<int, OTodo>::ConstIterator it;
+        QMap<int, OPimTodo>::ConstIterator it;
         for (it = m_events.begin(); it != m_events.end(); ++it ) {
 		if ( it.data().match( r ) )
 			m_currentQuery[arraycounter++] = it.data().uid();

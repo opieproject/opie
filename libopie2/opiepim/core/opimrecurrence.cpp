@@ -27,10 +27,10 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#include "orecur.h"
+#include "opimrecurrence.h"
 
 /* OPIE */
-#include <opie2/otimezone.h>
+#include <opie2/opimtimezone.h>
 #include <qpe/timeconversion.h>
 
 /* QT */
@@ -41,9 +41,9 @@
 
 namespace Opie {
 
-struct ORecur::Data : public QShared {
+struct OPimRecurrence::Data : public QShared {
     Data() : QShared() {
-        type = ORecur::NoRepeat;
+        type = OPimRecurrence::NoRepeat;
         freq = -1;
         days = 0;
         pos = 0;
@@ -52,7 +52,7 @@ struct ORecur::Data : public QShared {
         end = QDate::currentDate();
     }
     char days; // Q_UINT8 for 8 seven days;)
-    ORecur::RepeatType type;
+    OPimRecurrence::RepeatType type;
     int freq;
     int pos;
     bool hasEnd : 1;
@@ -65,25 +65,25 @@ struct ORecur::Data : public QShared {
 };
 
 
-ORecur::ORecur() {
+OPimRecurrence::OPimRecurrence() {
     data = new Data;
 }
 
-ORecur::ORecur( const QMap<int, QString>& map )
+OPimRecurrence::OPimRecurrence( const QMap<int, QString>& map )
 {
-    ORecur();
+    OPimRecurrence();
     fromMap( map );
 }
 
 
-ORecur::ORecur( const ORecur& rec)
+OPimRecurrence::OPimRecurrence( const OPimRecurrence& rec)
     : data( rec.data )
 {
     data->ref();
 }
 
 
-ORecur::~ORecur() {
+OPimRecurrence::~OPimRecurrence() {
     if ( data->deref() ) {
         delete data;
         data = 0l;
@@ -91,7 +91,7 @@ ORecur::~ORecur() {
 }
 
 
-void ORecur::deref() {
+void OPimRecurrence::deref() {
     if ( data->deref() ) {
         delete data;
         data = 0l;
@@ -99,12 +99,12 @@ void ORecur::deref() {
 }
 
 
-bool ORecur::operator==( const ORecur& )const {
+bool OPimRecurrence::operator==( const OPimRecurrence& )const {
     return false;
 }
 
 
-ORecur &ORecur::operator=( const ORecur& re) {
+OPimRecurrence &OPimRecurrence::operator=( const OPimRecurrence& re) {
     if ( *this == re ) return *this;
 
     re.data->ref();
@@ -115,7 +115,7 @@ ORecur &ORecur::operator=( const ORecur& re) {
 }
 
 
-bool ORecur::doesRecur()const {
+bool OPimRecurrence::doesRecur()const {
     return !( type() == NoRepeat );
 }
 
@@ -124,7 +124,7 @@ bool ORecur::doesRecur()const {
  * we try to be smart here
  *
  */
-bool ORecur::doesRecur( const QDate& date ) {
+bool OPimRecurrence::doesRecur( const QDate& date ) {
     /* the day before the recurrance */
     QDate da = date.addDays(-1);
 
@@ -139,7 +139,7 @@ bool ORecur::doesRecur( const QDate& date ) {
 // FIXME unuglify!
 // GPL from Datebookdb.cpp
 // FIXME exception list!
-bool ORecur::nextOcurrence( const QDate& from, QDate& next ) {
+bool OPimRecurrence::nextOcurrence( const QDate& from, QDate& next ) {
     bool stillLooking;
     stillLooking  = p_nextOccurrence( from, next );
     while ( stillLooking && data->list.contains(next) )
@@ -149,7 +149,7 @@ bool ORecur::nextOcurrence( const QDate& from, QDate& next ) {
 }
 
 
-bool ORecur::p_nextOccurrence( const QDate& from, QDate& next ) {
+bool OPimRecurrence::p_nextOccurrence( const QDate& from, QDate& next ) {
 
    // easy checks, first are we too far in the future or too far in the past?
     QDate tmpDate;
@@ -423,122 +423,122 @@ bool ORecur::p_nextOccurrence( const QDate& from, QDate& next ) {
 }
 
 
-ORecur::RepeatType ORecur::type()const{
+OPimRecurrence::RepeatType OPimRecurrence::type()const{
     return data->type;
 }
 
 
-int ORecur::frequency()const {
+int OPimRecurrence::frequency()const {
     return data->freq;
 }
 
 
-int ORecur::position()const {
+int OPimRecurrence::position()const {
     return data->pos;
 }
 
 
-char ORecur::days() const{
+char OPimRecurrence::days() const{
     return data->days;
 }
 
 
-bool ORecur::hasEndDate()const {
+bool OPimRecurrence::hasEndDate()const {
     return data->hasEnd;
 }
 
 
-QDate ORecur::endDate()const {
+QDate OPimRecurrence::endDate()const {
     return data->end;
 }
 
 
-QDate ORecur::start()const{
+QDate OPimRecurrence::start()const{
     return data->start;
 }
 
 
-QDateTime ORecur::createdDateTime()const {
+QDateTime OPimRecurrence::createdDateTime()const {
     return data->create;
 }
 
 
-int ORecur::repetition()const {
+int OPimRecurrence::repetition()const {
     return data->rep;
 }
 
 
-QString ORecur::service()const {
+QString OPimRecurrence::service()const {
     return data->app;
 }
 
 
-ORecur::ExceptionList& ORecur::exceptions() {
+OPimRecurrence::ExceptionList& OPimRecurrence::exceptions() {
     return data->list;
 }
 
 
-void ORecur::setType( const RepeatType& z) {
+void OPimRecurrence::setType( const RepeatType& z) {
     checkOrModify();
     data->type = z;
 }
 
 
-void ORecur::setFrequency( int freq ) {
+void OPimRecurrence::setFrequency( int freq ) {
     checkOrModify();
     data->freq = freq;
 }
 
 
-void ORecur::setPosition( int pos ) {
+void OPimRecurrence::setPosition( int pos ) {
     checkOrModify();
     data->pos = pos;
 }
 
 
-void ORecur::setDays( char c ) {
+void OPimRecurrence::setDays( char c ) {
     checkOrModify();
     data->days = c;
 }
 
 
-void ORecur::setEndDate( const QDate& dt) {
+void OPimRecurrence::setEndDate( const QDate& dt) {
     checkOrModify();
     data->end = dt;
 }
 
 
-void ORecur::setCreatedDateTime( const QDateTime& t) {
+void OPimRecurrence::setCreatedDateTime( const QDateTime& t) {
     checkOrModify();
     data->create = t;
 }
 
 
-void ORecur::setHasEndDate( bool b) {
+void OPimRecurrence::setHasEndDate( bool b) {
     checkOrModify();
     data->hasEnd = b;
 }
 
 
-void ORecur::setRepitition( int rep ) {
+void OPimRecurrence::setRepitition( int rep ) {
     checkOrModify();
     data->rep = rep;
 }
 
 
-void ORecur::setService( const QString& app ) {
+void OPimRecurrence::setService( const QString& app ) {
     checkOrModify();
     data->app = app;
 }
 
 
-void ORecur::setStart( const QDate& dt ) {
+void OPimRecurrence::setStart( const QDate& dt ) {
     checkOrModify();
     data->start = dt;
 }
 
 
-void ORecur::checkOrModify() {
+void OPimRecurrence::checkOrModify() {
     if ( data->count !=  1 ) {
         data->deref();
         Data* d2 = new Data;
@@ -558,51 +558,51 @@ void ORecur::checkOrModify() {
 }
 
 
-QString ORecur::toString()const {
+QString OPimRecurrence::toString()const {
     QString buf;
     QMap<int, QString> recMap = toMap();
 
     buf += " rtype=\"";
-    buf += recMap[ORecur::RType];
+    buf += recMap[OPimRecurrence::RType];
     buf += "\"";
     if (data->days > 0 )
-        buf += " rweekdays=\"" + recMap[ORecur::RWeekdays] + "\"";
+        buf += " rweekdays=\"" + recMap[OPimRecurrence::RWeekdays] + "\"";
     if ( data->pos != 0 )
-        buf += " rposition=\"" + recMap[ORecur::RPosition] + "\"";
+        buf += " rposition=\"" + recMap[OPimRecurrence::RPosition] + "\"";
 
-    buf += " rfreq=\"" + recMap[ORecur::RFreq] + "\"";
-    buf += " rhasenddate=\"" + recMap[ORecur::RHasEndDate]+ "\"";
+    buf += " rfreq=\"" + recMap[OPimRecurrence::RFreq] + "\"";
+    buf += " rhasenddate=\"" + recMap[OPimRecurrence::RHasEndDate]+ "\"";
     if ( data->hasEnd )
         buf += " enddt=\""
-            + recMap[ORecur::EndDate]
+            + recMap[OPimRecurrence::EndDate]
             + "\"";
-    buf += " created=\"" + recMap[ORecur::Created] + "\"";
+    buf += " created=\"" + recMap[OPimRecurrence::Created] + "\"";
 
     if ( data->list.isEmpty() ) return buf;
     buf += " exceptions=\"";
-    buf += recMap[ORecur::Exceptions];
+    buf += recMap[OPimRecurrence::Exceptions];
     buf += "\" ";
 
     return buf;
 }
 
-QString ORecur::rTypeString() const
+QString OPimRecurrence::rTypeString() const
 {
     QString retString;
     switch ( data->type ) {
-    case ORecur::Daily:
+    case OPimRecurrence::Daily:
             retString = "Daily";
             break;
-    case ORecur::Weekly:
+    case OPimRecurrence::Weekly:
             retString = "Weekly";
             break;
-    case ORecur::MonthlyDay:
+    case OPimRecurrence::MonthlyDay:
             retString = "MonthlyDay";
             break;
-    case ORecur::MonthlyDate:
+    case OPimRecurrence::MonthlyDate:
             retString = "MonthlyDate";
             break;
-    case ORecur::Yearly:
+    case OPimRecurrence::Yearly:
             retString = "Yearly";
             break;
     default:
@@ -614,33 +614,33 @@ QString ORecur::rTypeString() const
     return retString;
 }
 
-QMap<QString, ORecur::RepeatType> ORecur::rTypeValueConvertMap() const
+QMap<QString, OPimRecurrence::RepeatType> OPimRecurrence::rTypeValueConvertMap() const
 {
         QMap<QString, RepeatType> convertMap;
 
-        convertMap.insert( QString( "Daily" ), ORecur::Daily );
-        convertMap.insert( QString( "Weekly" ), ORecur::Weekly );
-        convertMap.insert( QString( "MonthlyDay" ), ORecur::MonthlyDay );
-        convertMap.insert( QString( "MonthlyDate" ), ORecur::MonthlyDate );
-        convertMap.insert( QString( "Yearly" ), ORecur::Yearly );
-        convertMap.insert( QString( "NoRepeat" ), ORecur::NoRepeat );
+        convertMap.insert( QString( "Daily" ), OPimRecurrence::Daily );
+        convertMap.insert( QString( "Weekly" ), OPimRecurrence::Weekly );
+        convertMap.insert( QString( "MonthlyDay" ), OPimRecurrence::MonthlyDay );
+        convertMap.insert( QString( "MonthlyDate" ), OPimRecurrence::MonthlyDate );
+        convertMap.insert( QString( "Yearly" ), OPimRecurrence::Yearly );
+        convertMap.insert( QString( "NoRepeat" ), OPimRecurrence::NoRepeat );
 
         return convertMap;
 }
 
 
-QMap<int, QString> ORecur::toMap() const
+QMap<int, QString> OPimRecurrence::toMap() const
 {
     QMap<int, QString> retMap;
     
-    retMap.insert( ORecur::RType, rTypeString() );
-    retMap.insert( ORecur::RWeekdays, QString::number( static_cast<int>( data->days ) ) );
-    retMap.insert( ORecur::RPosition, QString::number(data->pos ) );
-    retMap.insert( ORecur::RFreq, QString::number( data->freq ) );
-    retMap.insert( ORecur::RHasEndDate, QString::number( static_cast<int>( data->hasEnd ) ) );
+    retMap.insert( OPimRecurrence::RType, rTypeString() );
+    retMap.insert( OPimRecurrence::RWeekdays, QString::number( static_cast<int>( data->days ) ) );
+    retMap.insert( OPimRecurrence::RPosition, QString::number(data->pos ) );
+    retMap.insert( OPimRecurrence::RFreq, QString::number( data->freq ) );
+    retMap.insert( OPimRecurrence::RHasEndDate, QString::number( static_cast<int>( data->hasEnd ) ) );
     if( data -> hasEnd )
-            retMap.insert( ORecur::EndDate, QString::number( OTimeZone::utc().fromUTCDateTime( QDateTime( data->end, QTime(12,0,0) ) ) ) );
-    retMap.insert( ORecur::Created, QString::number( OTimeZone::utc().fromUTCDateTime( data->create ) ) );
+            retMap.insert( OPimRecurrence::EndDate, QString::number( OPimTimeZone::utc().fromUTCDateTime( QDateTime( data->end, QTime(12,0,0) ) ) ) );
+    retMap.insert( OPimRecurrence::Created, QString::number( OPimTimeZone::utc().fromUTCDateTime( data->create ) ) );
     
     if ( data->list.isEmpty() ) return retMap;
 
@@ -656,31 +656,31 @@ QMap<int, QString> ORecur::toMap() const
             exceptBuf += QCString().sprintf("%04d%02d%02d", date.year(), date.month(), date.day() );
     }
 
-    retMap.insert( ORecur::Exceptions, exceptBuf );
+    retMap.insert( OPimRecurrence::Exceptions, exceptBuf );
 
     return retMap;
 }
 
-void ORecur::fromMap( const QMap<int, QString>& map )
+void OPimRecurrence::fromMap( const QMap<int, QString>& map )
 {
     QMap<QString, RepeatType> repTypeMap = rTypeValueConvertMap(); 
 
-    data -> type  = repTypeMap[ map [ORecur::RType] ];
-    data -> days  = (char) map[ ORecur::RWeekdays ].toInt();
-    data -> pos   = map[ ORecur::RPosition ].toInt();
-    data -> freq = map[ ORecur::RFreq ].toInt();
-    data -> hasEnd= map[ ORecur::RHasEndDate ].toInt() ? true : false;
-    OTimeZone utc = OTimeZone::utc();
+    data -> type  = repTypeMap[ map [OPimRecurrence::RType] ];
+    data -> days  = (char) map[ OPimRecurrence::RWeekdays ].toInt();
+    data -> pos   = map[ OPimRecurrence::RPosition ].toInt();
+    data -> freq = map[ OPimRecurrence::RFreq ].toInt();
+    data -> hasEnd= map[ OPimRecurrence::RHasEndDate ].toInt() ? true : false;
+    OPimTimeZone utc = OPimTimeZone::utc();
     if ( data -> hasEnd ){
-            data -> end = utc.fromUTCDateTime( (time_t) map[ ORecur::EndDate ].toLong() ).date();
+            data -> end = utc.fromUTCDateTime( (time_t) map[ OPimRecurrence::EndDate ].toLong() ).date();
     }
-    data -> create = utc.fromUTCDateTime( (time_t) map[ ORecur::Created ].toLong() ).date();
+    data -> create = utc.fromUTCDateTime( (time_t) map[ OPimRecurrence::Created ].toLong() ).date();
 
 #if 0
     // FIXME: Exceptions currently not supported...
     // Convert the list of exceptions from QString into ExceptionList
     data -> list.clear();
-    QString exceptStr = map[ ORecur::Exceptions ];
+    QString exceptStr = map[ OPimRecurrence::Exceptions ];
     QStringList exceptList = QStringList::split( " ", exceptStr );
     ...
 #endif

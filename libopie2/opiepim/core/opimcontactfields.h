@@ -33,7 +33,7 @@
 class QStringList;
 
 /* OPIE */
-#include <opie2/ocontact.h>
+#include <opie2/opimcontact.h>
 
 /* QT */
 #include <qmap.h>
@@ -44,12 +44,12 @@ class QStringList;
 
 namespace Opie
 {
-class OContactFields
+class OPimContactFields
 {
 
   public:
-    OContactFields();
-    ~OContactFields();
+    OPimContactFields();
+    ~OPimContactFields();
     /** Set the index for combo boxes.
      *  Sets the <b>index</b> of combo <b>num</b>.
      *  @param num selects the number of the combo
@@ -68,9 +68,9 @@ class OContactFields
     int getFieldOrder( int num, int defIndex );
 
     /** Store fieldorder to contact. */
-    void saveToRecord( OContact& );
+    void saveToRecord( OPimContact& );
     /** Get Fieldorder from contact. */
-    void loadFromRecord( const OContact& );
+    void loadFromRecord( const OPimContact& );
 
   private:
     QString fieldOrder;

@@ -32,7 +32,7 @@
 #include "odatebookaccessbackend.h"
 #include "opimaccesstemplate.h"
 
-#include <opie2/oevent.h>
+#include <opie2/opimevent.h>
 
 namespace Opie {
 /**
@@ -44,7 +44,7 @@ namespace Opie {
  *
  * @author Holger Freyther, Stefan Eilers
  */
-class ODateBookAccess : public OPimAccessTemplate<OEvent> {
+class ODateBookAccess : public OPimAccessTemplate<OPimEvent> {
 public:
     ODateBookAccess( ODateBookAccessBackend* = 0l, enum Access acc = Random );
     ~ODateBookAccess();

@@ -46,8 +46,8 @@
 #include <qtopia/timeconversion.h>
 
 #include <opie2/opimnotifymanager.h>
-#include <opie2/orecur.h>
-#include <opie2/otimezone.h>
+#include <opie2/opimrecurrence.h>
+#include <opie2/opimtimezone.h>
 #include <opie2/odatebookaccessbackend_xml.h>
 
 using namespace Opie;
@@ -81,10 +81,10 @@ char *strstrlen(const char *haystack, int hLen, const char* needle, int nLen)
 
 namespace {
     time_t start, end, created, rp_end;
-    ORecur* rec;
-    ORecur* recur() {
+    OPimRecurrence* rec;
+    OPimRecurrence* recur() {
         if (!rec)
-            rec = new ORecur;
+            rec = new OPimRecurrence;
 
         return rec;
     }
@@ -114,8 +114,8 @@ namespace {
         FExceptions
     };
 
-    // FIXME: Use OEvent::toMap() here !! (eilers)
-    inline void save( const OEvent& ev, QString& buf ) {
+    // FIXME: Use OPimEvent::toMap() here !! (eilers)
+    inline void save( const OPimEvent& ev, QString& buf ) {
         qWarning("Saving %d %s", ev.uid(), ev.description().latin1() );
         buf += " description=\"" + Qtopia::escapeString(ev.description() ) + "\"";
         if (!ev.location().isEmpty() )
@@ -146,9 +146,9 @@ namespace {
          * the QDateTime to a QDateTime in UTC time
          * and then we'll create a nice time_t
          */
-        OTimeZone zone( ev.timeZone().isEmpty() ? OTimeZone::current() : ev.timeZone() );
-        buf += " start=\"" + QString::number( zone.fromUTCDateTime( zone.toDateTime( ev.startDateTime(), OTimeZone::utc() ) ) )  + "\"";
-        buf += " end=\""   + QString::number( zone.fromUTCDateTime( zone.toDateTime( ev.endDateTime()  , OTimeZone::utc() ) ) )   + "\"";
+        OPimTimeZone zone( ev.timeZone().isEmpty() ? OPimTimeZone::current() : ev.timeZone() );
+        buf += " start=\"" + QString::number( zone.fromUTCDateTime( zone.toDateTime( ev.startDateTime(), OPimTimeZone::utc() ) ) )  + "\"";
+        buf += " end=\""   + QString::number( zone.fromUTCDateTime( zone.toDateTime( ev.endDateTime()  , OPimTimeZone::utc() ) ) )   + "\"";
         if (!ev.note().isEmpty() ) {
             buf += " note=\"" + Qtopia::escapeString( ev.note() ) + "\"";
         }
@@ -177,8 +177,8 @@ namespace {
         // skip custom writing
     }
 
-    inline bool forAll( const QMap<int, OEvent>& list, QFile& file ) {
-        QMap<int, OEvent>::ConstIterator it;
+    inline bool forAll( const QMap<int, OPimEvent>& list, QFile& file ) {
+        QMap<int, OPimEvent>::ConstIterator it;
         QString buf;
         QCString str;
         int total_written;
@@ -264,7 +264,7 @@ bool ODateBookAccessBackend_XML::save() {
 QArray<int> ODateBookAccessBackend_XML::allRecords()const {
     QArray<int> ints( m_raw.count()+ m_rep.count() );
     uint i = 0;
-    QMap<int, OEvent>::ConstIterator it;
+    QMap<int, OPimEvent>::ConstIterator it;
 
     for ( it = m_raw.begin(); it != m_raw.end(); ++it ) {
         ints[i] = it.key();
@@ -277,7 +277,7 @@ QArray<int> ODateBookAccessBackend_XML::allRecords()const {
 
     return ints;
 }
-QArray<int> ODateBookAccessBackend_XML::queryByExample(const OEvent&, int,  const QDateTime& ) {
+QArray<int> ODateBookAccessBackend_XML::queryByExample(const OPimEvent&, int,  const QDateTime& ) {
     return QArray<int>();
 }
 void ODateBookAccessBackend_XML::clear() {
@@ -285,13 +285,13 @@ void ODateBookAccessBackend_XML::clear() {
     m_raw.clear();
     m_rep.clear();
 }
-OEvent ODateBookAccessBackend_XML::find( int uid ) const{
+OPimEvent ODateBookAccessBackend_XML::find( int uid ) const{
     if ( m_raw.contains( uid ) )
         return m_raw[uid];
     else
         return m_rep[uid];
 }
-bool ODateBookAccessBackend_XML::add( const OEvent& ev ) {
+bool ODateBookAccessBackend_XML::add( const OPimEvent& ev ) {
     m_changed = true;
     if (ev.hasRecurrence() )
         m_rep.insert( ev.uid(), ev );
@@ -307,7 +307,7 @@ bool ODateBookAccessBackend_XML::remove( int uid ) {
 
     return true;
 }
-bool ODateBookAccessBackend_XML::replace( const OEvent& ev ) {
+bool ODateBookAccessBackend_XML::replace( const OPimEvent& ev ) {
     replace( ev.uid() ); // ??? Shouldn't this be "remove( ev.uid() ) ??? (eilers)
     return add( ev );
 }
@@ -317,7 +317,7 @@ QArray<int> ODateBookAccessBackend_XML::rawEvents()const {
 QArray<int> ODateBookAccessBackend_XML::rawRepeats()const {
     QArray<int> ints( m_rep.count() );
     uint i = 0;
-    QMap<int, OEvent>::ConstIterator it;
+    QMap<int, OPimEvent>::ConstIterator it;
 
     for ( it = m_rep.begin(); it != m_rep.end(); ++it ) {
         ints[i] = it.key();
@@ -329,7 +329,7 @@ QArray<int> ODateBookAccessBackend_XML::rawRepeats()const {
 QArray<int> ODateBookAccessBackend_XML::nonRepeats()const {
     QArray<int> ints( m_raw.count() );
     uint i = 0;
-    QMap<int, OEvent>::ConstIterator it;
+    QMap<int, OPimEvent>::ConstIterator it;
 
     for ( it = m_raw.begin(); it != m_raw.end(); ++it ) {
         ints[i] = it.key();
@@ -338,24 +338,24 @@ QArray<int> ODateBookAccessBackend_XML::nonRepeats()const {
 
     return ints;
 }
-OEvent::ValueList ODateBookAccessBackend_XML::directNonRepeats() {
-    OEvent::ValueList list;
-    QMap<int, OEvent>::ConstIterator it;
+OPimEvent::ValueList ODateBookAccessBackend_XML::directNonRepeats() {
+    OPimEvent::ValueList list;
+    QMap<int, OPimEvent>::ConstIterator it;
     for (it = m_raw.begin(); it != m_raw.end(); ++it )
         list.append( it.data() );
 
     return list;
 }
-OEvent::ValueList ODateBookAccessBackend_XML::directRawRepeats() {
-    OEvent::ValueList list;
-    QMap<int, OEvent>::ConstIterator it;
+OPimEvent::ValueList ODateBookAccessBackend_XML::directRawRepeats() {
+    OPimEvent::ValueList list;
+    QMap<int, OPimEvent>::ConstIterator it;
     for (it = m_rep.begin(); it != m_rep.end(); ++it )
         list.append( it.data() );
 
     return list;
 }
 
-// FIXME: Use OEvent::fromMap() (eilers)
+// FIXME: Use OPimEvent::fromMap() (eilers)
 bool ODateBookAccessBackend_XML::loadFile() {
     m_changed = false;
 
@@ -414,7 +414,7 @@ bool ODateBookAccessBackend_XML::loadFile() {
         alarmTime = -1;
         snd = 0; // silent
 
-        OEvent ev;
+        OPimEvent ev;
         rec = 0;
 
         while ( TRUE ) {
@@ -480,28 +480,28 @@ bool ODateBookAccessBackend_XML::loadFile() {
     return true;
 }
 
-// FIXME: Use OEvent::fromMap() which makes this obsolete.. (eilers)
-void ODateBookAccessBackend_XML::finalizeRecord( OEvent& ev ) {
+// FIXME: Use OPimEvent::fromMap() which makes this obsolete.. (eilers)
+void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev ) {
     /* AllDay is alway in UTC */
     if ( ev.isAllDay() ) {
-        OTimeZone utc = OTimeZone::utc();
+        OPimTimeZone utc = OPimTimeZone::utc();
         ev.setStartDateTime( utc.fromUTCDateTime( start ) );
         ev.setEndDateTime  ( utc.fromUTCDateTime( end   ) );
         ev.setTimeZone( "UTC"); // make sure it is really utc
     }else {
         /* to current date time */
         // qWarning(" Start is %d", start );
-        OTimeZone zone( ev.timeZone().isEmpty() ? OTimeZone::current() : ev.timeZone() );
+        OPimTimeZone zone( ev.timeZone().isEmpty() ? OPimTimeZone::current() : ev.timeZone() );
         QDateTime date = zone.toDateTime( start );
         qWarning(" Start is %s", date.toString().latin1() );
-        ev.setStartDateTime( zone.toDateTime( date, OTimeZone::current() ) );
+        ev.setStartDateTime( zone.toDateTime( date, OPimTimeZone::current() ) );
 
         date = zone.toDateTime( end );
-        ev.setEndDateTime  ( zone.toDateTime( date, OTimeZone::current()   ) );
+        ev.setEndDateTime  ( zone.toDateTime( date, OPimTimeZone::current()   ) );
     }
     if ( rec && rec->doesRecur() ) {
-        OTimeZone utc = OTimeZone::utc();
-        ORecur recu( *rec ); // call copy c'tor;
+        OPimTimeZone utc = OPimTimeZone::utc();
+        OPimRecurrence recu( *rec ); // call copy c'tor;
         recu.setEndDate ( utc.fromUTCDateTime( rp_end ).date() );
         recu.setCreatedDateTime( utc.fromUTCDateTime( created ) );
         recu.setStart( ev.startDateTime().date() );
@@ -524,7 +524,7 @@ void ODateBookAccessBackend_XML::finalizeRecord( OEvent& ev ) {
         m_raw.insert( ev.uid(), ev );
 
 }
-void ODateBookAccessBackend_XML::setField( OEvent& e, int id, const QString& value) {
+void ODateBookAccessBackend_XML::setField( OPimEvent& e, int id, const QString& value) {
 //    qWarning(" setting %s", value.latin1() );
     switch( id ) {
     case FDescription:
@@ -554,17 +554,17 @@ void ODateBookAccessBackend_XML::setField( OEvent& e, int id, const QString& val
         // recurrence stuff
     case FRType:
         if ( value == "Daily" )
-            recur()->setType( ORecur::Daily );
+            recur()->setType( OPimRecurrence::Daily );
         else if ( value == "Weekly" )
-            recur()->setType( ORecur::Weekly);
+            recur()->setType( OPimRecurrence::Weekly);
         else if ( value == "MonthlyDay" )
-            recur()->setType( ORecur::MonthlyDay );
+            recur()->setType( OPimRecurrence::MonthlyDay );
         else if ( value == "MonthlyDate" )
-            recur()->setType( ORecur::MonthlyDate );
+            recur()->setType( OPimRecurrence::MonthlyDate );
         else if ( value == "Yearly" )
-            recur()->setType( ORecur::Yearly );
+            recur()->setType( OPimRecurrence::Yearly );
         else
-            recur()->setType( ORecur::NoRepeat );
+            recur()->setType( OPimRecurrence::NoRepeat );
         break;
     case FRWeekdays:
         recur()->setDays( value.toInt() );
@@ -627,7 +627,7 @@ QArray<int> ODateBookAccessBackend_XML::matchRegexp(  const QRegExp &r ) const
 {
     QArray<int> m_currentQuery( m_raw.count()+ m_rep.count() );
     uint arraycounter = 0;
-    QMap<int, OEvent>::ConstIterator it;
+    QMap<int, OPimEvent>::ConstIterator it;
 
     for ( it = m_raw.begin(); it != m_raw.end(); ++it )
         if ( it.data().match( r ) )

@@ -27,13 +27,13 @@ _;:,     .>    :=|.         This program is free software; you can
 */
 
 /* OPIE */
-#include <opie2/oconversion.h>
+#include <opie2/opimdateconversion.h>
 #include <qpe/timeconversion.h>
 
 namespace Opie
 {
 
-QString OConversion::dateToString( const QDate &d )
+QString OPimDateConversion::dateToString( const QDate &d )
 {
     if ( d.isNull() || !d.isValid() )
         return QString::null;
@@ -52,7 +52,7 @@ QString OConversion::dateToString( const QDate &d )
 }
 
 
-QDate OConversion::dateFromString( const QString& s )
+QDate OPimDateConversion::dateFromString( const QString& s )
 {
     QDate date;
 
@@ -99,7 +99,7 @@ QDate OConversion::dateFromString( const QString& s )
 }
 
 
-QString OConversion::dateTimeToString( const QDateTime& dt )
+QString OPimDateConversion::dateTimeToString( const QDateTime& dt )
 {
     if ( !dt.isValid() || dt.isNull() )
         return QString::null;
@@ -122,7 +122,7 @@ QString OConversion::dateTimeToString( const QDateTime& dt )
 }
 
 
-QDateTime OConversion::dateTimeFromString( const QString& str )
+QDateTime OPimDateConversion::dateTimeFromString( const QString& str )
 {
 
     if ( str.isEmpty() )

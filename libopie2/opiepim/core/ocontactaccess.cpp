@@ -55,20 +55,20 @@
 
 namespace Opie {
 
-OContactAccess::OContactAccess ( const QString appname, const QString ,
-			 OContactAccessBackend* end, bool autosync ):
-	OPimAccessTemplate<OContact>( end )
+OPimContactAccess::OPimContactAccess ( const QString appname, const QString ,
+			 OPimContactAccessBackend* end, bool autosync ):
+	OPimAccessTemplate<OPimContact>( end )
 {
         /* take care of the backend. If there is no one defined, we
 	 * will use the XML-Backend as default (until we have a cute SQL-Backend..).
 	 */
         if( end == 0 ) {
 		qWarning ("Using BackendFactory !");
-		end = OBackendFactory<OContactAccessBackend>::Default( "contact", appname );
+		end = OBackendFactory<OPimContactAccessBackend>::Default( "contact", appname );
         }
 	// Set backend locally and in template
         m_backEnd = end;
-	OPimAccessTemplate<OContact>::setBackEnd (end);
+	OPimAccessTemplate<OPimContact>::setBackEnd (end);
 
 
 	/* Connect signal of external db change to function */
@@ -83,7 +83,7 @@ OContactAccess::OContactAccess ( const QString appname, const QString ,
 
 
 }
-OContactAccess::~OContactAccess ()
+OPimContactAccess::~OPimContactAccess ()
 {
 	/* The user may forget to save the changed database, therefore try to
 	 * do it for him..
@@ -93,16 +93,16 @@ OContactAccess::~OContactAccess ()
 }
 
 
-bool OContactAccess::save ()
+bool OPimContactAccess::save ()
 {
 	/* If the database was changed externally, we could not save the
 	 * Data. This will remove added items which is unacceptable !
 	 * Therefore: Reload database and merge the data...
 	 */
-	if ( OPimAccessTemplate<OContact>::wasChangedExternally() )
+	if ( OPimAccessTemplate<OPimContact>::wasChangedExternally() )
 		reload();
 
-	bool status = OPimAccessTemplate<OContact>::save();
+	bool status = OPimAccessTemplate<OPimContact>::save();
 	if ( !status ) return false;
 
 	/* Now tell everyone that new data is available.
@@ -112,38 +112,38 @@ bool OContactAccess::save ()
 	return true;
 }
 
-const uint OContactAccess::querySettings()
+const uint OPimContactAccess::querySettings()
 {
 	return ( m_backEnd->querySettings() );
 }
 
-bool OContactAccess::hasQuerySettings ( int querySettings ) const
+bool OPimContactAccess::hasQuerySettings ( int querySettings ) const
 {
 	return ( m_backEnd->hasQuerySettings ( querySettings ) );
 }
-ORecordList<OContact> OContactAccess::sorted( bool ascending, int sortOrder, int sortFilter, int cat ) const
+OPimRecordList<OPimContact> OPimContactAccess::sorted( bool ascending, int sortOrder, int sortFilter, int cat ) const
 {
 	QArray<int> matchingContacts = m_backEnd -> sorted( ascending, sortOrder, sortFilter, cat );
-	return ( ORecordList<OContact>(matchingContacts, this) );
+	return ( OPimRecordList<OPimContact>(matchingContacts, this) );
 }
 
 
-bool OContactAccess::wasChangedExternally()const
+bool OPimContactAccess::wasChangedExternally()const
 {
 	return ( m_backEnd->wasChangedExternally() );
 }
 
 
-void OContactAccess::copMessage( const QCString &msg, const QByteArray & )
+void OPimContactAccess::copMessage( const QCString &msg, const QByteArray & )
 {
 	if ( msg == "addressbookUpdated()" ){
-		qWarning ("OContactAccess: Received addressbokUpdated()");
+		qWarning ("OPimContactAccess: Received addressbokUpdated()");
 		emit signalChanged ( this );
 	} else if ( msg == "flush()" ) {
-		qWarning ("OContactAccess: Received flush()");
+		qWarning ("OPimContactAccess: Received flush()");
 		save ();
 	} else if ( msg == "reload()" ) {
-		qWarning ("OContactAccess: Received reload()");
+		qWarning ("OPimContactAccess: Received reload()");
 		reload ();
 		emit signalChanged ( this );
 	}

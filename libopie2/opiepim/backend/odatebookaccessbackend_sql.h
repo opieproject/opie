@@ -55,19 +55,19 @@ public:
 
     QArray<int> allRecords()const;
     QArray<int> matchRegexp(const QRegExp &r) const;
-    QArray<int> queryByExample( const OEvent&, int, const QDateTime& d = QDateTime() );
-    OEvent find( int uid )const;
+    QArray<int> queryByExample( const OPimEvent&, int, const QDateTime& d = QDateTime() );
+    OPimEvent find( int uid )const;
     void clear();
-    bool add( const OEvent& ev );
+    bool add( const OPimEvent& ev );
     bool remove( int uid );
-    bool replace( const OEvent& ev );
+    bool replace( const OPimEvent& ev );
 
     QArray<UID> rawEvents()const;
     QArray<UID> rawRepeats()const;
     QArray<UID> nonRepeats()const;
 
-    OEvent::ValueList directNonRepeats();
-    OEvent::ValueList directRawRepeats();
+    OPimEvent::ValueList directNonRepeats();
+    OPimEvent::ValueList directRawRepeats();
 
 private:
     bool loadFile();

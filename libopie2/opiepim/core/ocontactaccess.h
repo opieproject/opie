@@ -41,7 +41,7 @@
 #include <qvaluelist.h>
 #include <qfileinfo.h>
 
-#include <opie2/ocontact.h>
+#include <opie2/opimcontact.h>
 #include <opie2/ocontactaccessbackend.h>
 #include <opie2/opimaccesstemplate.h>
 
@@ -55,7 +55,7 @@ namespace Opie {
  * @author Stefan Eilers, Holger Freyther
  * @see OPimAccessTemplate
  */
-class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
+class OPimContactAccess: public QObject, public OPimAccessTemplate<OPimContact>
 {
     Q_OBJECT
 
@@ -72,11 +72,11 @@ class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
 	 * automatically if it receives the signals <i>flush()</i> and <i>reload()</i>
 	 * which are used before and after synchronisation. If the application wants
 	 * to react itself, it should be disabled by setting it to <b>false</b>
-	 * @see OContactAccessBackend
+	 * @see OPimContactAccessBackend
 	 */
-	OContactAccess (const QString appname, const QString filename = 0l,
-                    OContactAccessBackend* backend = 0l, bool handlesync = true);
-	~OContactAccess ();
+	OPimContactAccess (const QString appname, const QString filename = 0l,
+                    OPimContactAccessBackend* backend = 0l, bool handlesync = true);
+	~OPimContactAccess ();
 
 	/** Constants for query.
 	 * Use this constants to set the query parameters.
@@ -135,13 +135,13 @@ class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
 	 * is useful if an application has to handle multiple databases at the same time.
 	 * @see reload()
 	 */
-	void signalChanged ( const OContactAccess *which );
+	void signalChanged ( const OPimContactAccess *which );
 
 
  private:
-	// class OContactAccessPrivate;
-	// OContactAccessPrivate* d;
-        OContactAccessBackend *m_backEnd;
+	// class OPimContactAccessPrivate;
+	// OPimContactAccessPrivate* d;
+        OPimContactAccessBackend *m_backEnd;
         bool m_loading:1;
 
  private slots:

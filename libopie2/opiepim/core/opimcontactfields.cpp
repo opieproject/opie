@@ -27,10 +27,10 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#include "ocontactfields.h"
+#include "opimcontactfields.h"
 
 /* OPIE */
-#include <opie2/ocontact.h>
+#include <opie2/opimcontact.h>
 #include <qpe/recordfields.h> // We should use our own enum in the future ..
 #include <qpe/config.h>
 
@@ -45,7 +45,7 @@ namespace Opie
   \internal
   Returns a list of personal field names for a contact.
 */
-QStringList OContactFields::personalfields( bool sorted, bool translated )
+QStringList OPimContactFields::personalfields( bool sorted, bool translated )
 {
     QStringList list;
     QMap<int, QString> mapIdToStr;
@@ -79,7 +79,7 @@ QStringList OContactFields::personalfields( bool sorted, bool translated )
   \internal
   Returns a list of details field names for a contact.
 */
-QStringList OContactFields::detailsfields( bool sorted, bool translated )
+QStringList OPimContactFields::detailsfields( bool sorted, bool translated )
 {
     QStringList list;
     QMap<int, QString> mapIdToStr;
@@ -108,7 +108,7 @@ QStringList OContactFields::detailsfields( bool sorted, bool translated )
   \internal
   Returns a list of phone field names for a contact.
 */
-QStringList OContactFields::phonefields( bool sorted, bool translated )
+QStringList OPimContactFields::phonefields( bool sorted, bool translated )
 {
     QStringList list;
     QMap<int, QString> mapIdToStr;
@@ -141,7 +141,7 @@ QStringList OContactFields::phonefields( bool sorted, bool translated )
   \internal
   Returns a list of field names for a contact.
 */
-QStringList OContactFields::fields( bool sorted, bool translated )
+QStringList OPimContactFields::fields( bool sorted, bool translated )
 {
     QStringList list;
     QMap<int, QString> mapIdToStr;
@@ -178,7 +178,7 @@ QStringList OContactFields::fields( bool sorted, bool translated )
   \internal
   Returns an untranslated list of personal field names for a contact.
 */
-QStringList OContactFields::untrpersonalfields( bool sorted )
+QStringList OPimContactFields::untrpersonalfields( bool sorted )
 {
     return personalfields( sorted, false );
 }
@@ -188,7 +188,7 @@ QStringList OContactFields::untrpersonalfields( bool sorted )
   \internal
   Returns a translated list of personal field names for a contact.
 */
-QStringList OContactFields::trpersonalfields( bool sorted )
+QStringList OPimContactFields::trpersonalfields( bool sorted )
 {
     return personalfields( sorted, true );
 }
@@ -198,7 +198,7 @@ QStringList OContactFields::trpersonalfields( bool sorted )
   \internal
   Returns an untranslated list of details field names for a contact.
 */
-QStringList OContactFields::untrdetailsfields( bool sorted )
+QStringList OPimContactFields::untrdetailsfields( bool sorted )
 {
     return detailsfields( sorted, false );
 }
@@ -208,7 +208,7 @@ QStringList OContactFields::untrdetailsfields( bool sorted )
   \internal
   Returns a translated list of details field names for a contact.
 */
-QStringList OContactFields::trdetailsfields( bool sorted )
+QStringList OPimContactFields::trdetailsfields( bool sorted )
 {
     return detailsfields( sorted, true );
 }
@@ -218,7 +218,7 @@ QStringList OContactFields::trdetailsfields( bool sorted )
   \internal
   Returns a translated list of phone field names for a contact.
 */
-QStringList OContactFields::trphonefields( bool sorted )
+QStringList OPimContactFields::trphonefields( bool sorted )
 {
     return phonefields( sorted, true );
 }
@@ -227,7 +227,7 @@ QStringList OContactFields::trphonefields( bool sorted )
   \internal
   Returns an untranslated list of phone field names for a contact.
 */
-QStringList OContactFields::untrphonefields( bool sorted )
+QStringList OPimContactFields::untrphonefields( bool sorted )
 {
     return phonefields( sorted, false );
 }
@@ -237,7 +237,7 @@ QStringList OContactFields::untrphonefields( bool sorted )
   \internal
   Returns a translated list of field names for a contact.
 */
-QStringList OContactFields::trfields( bool sorted )
+QStringList OPimContactFields::trfields( bool sorted )
 {
     return fields( sorted, true );
 }
@@ -246,12 +246,12 @@ QStringList OContactFields::trfields( bool sorted )
   \internal
   Returns an untranslated list of field names for a contact.
 */
-QStringList OContactFields::untrfields( bool sorted )
+QStringList OPimContactFields::untrfields( bool sorted )
 {
     return fields( sorted, false );
 }
 
-QMap<int, QString> OContactFields::idToTrFields()
+QMap<int, QString> OPimContactFields::idToTrFields()
 {
     QMap<int, QString> ret_map;
 
@@ -317,7 +317,7 @@ QMap<int, QString> OContactFields::idToTrFields()
     return ret_map;
 }
 
-QMap<int, QString> OContactFields::idToUntrFields()
+QMap<int, QString> OPimContactFields::idToUntrFields()
 {
     QMap<int, QString> ret_map;
 
@@ -384,7 +384,7 @@ QMap<int, QString> OContactFields::idToUntrFields()
     return ret_map;
 }
 
-QMap<QString, int> OContactFields::trFieldsToId()
+QMap<QString, int> OPimContactFields::trFieldsToId()
 {
     QMap<int, QString> idtostr = idToTrFields();
     QMap<QString, int> ret_map;
@@ -400,7 +400,7 @@ QMap<QString, int> OContactFields::trFieldsToId()
 
 /* ======================================================================= */
 
-QMap<QString, int> OContactFields::untrFieldsToId()
+QMap<QString, int> OPimContactFields::untrFieldsToId()
 {
     QMap<int, QString> idtostr = idToUntrFields();
     QMap<QString, int> ret_map;
@@ -415,7 +415,7 @@ QMap<QString, int> OContactFields::untrFieldsToId()
 }
 
 
-OContactFields::OContactFields() :
+OPimContactFields::OPimContactFields() :
         fieldOrder( DEFAULT_FIELD_ORDER ),
         changedFieldOrder( false )
 {
@@ -426,7 +426,7 @@ OContactFields::OContactFields() :
     globalFieldOrder = cfg.readEntry( "General", DEFAULT_FIELD_ORDER );
 }
 
-OContactFields::~OContactFields()
+OPimContactFields::~OPimContactFields()
 {
 
     // We will store the fieldorder into the config file
@@ -441,7 +441,7 @@ OContactFields::~OContactFields()
 
 
 
-void OContactFields::saveToRecord( OContact &cnt )
+void OPimContactFields::saveToRecord( OPimContact &cnt )
 {
 
     qDebug( "ocontactfields saveToRecord: >%s<", fieldOrder.latin1() );
@@ -454,7 +454,7 @@ void OContactFields::saveToRecord( OContact &cnt )
 
 }
 
-void OContactFields::loadFromRecord( const OContact &cnt )
+void OPimContactFields::loadFromRecord( const OPimContact &cnt )
 {
     qDebug( "ocontactfields loadFromRecord" );
     qDebug( "loading >%s<", cnt.fullName().latin1() );
@@ -475,7 +475,7 @@ void OContactFields::loadFromRecord( const OContact &cnt )
     qDebug( "effective fieldOrder in loadFromRecord >%s<", fieldOrder.latin1() );
 }
 
-void OContactFields::setFieldOrder( int num, int index )
+void OPimContactFields::setFieldOrder( int num, int index )
 {
     qDebug( "qcontactfields setfieldorder pos %i -> %i", num, index );
 
@@ -489,7 +489,7 @@ void OContactFields::setFieldOrder( int num, int index )
     qDebug( "fieldOrder >%s<", fieldOrder.latin1() );
 }
 
-int OContactFields::getFieldOrder( int num, int defIndex )
+int OPimContactFields::getFieldOrder( int num, int defIndex )
 {
     qDebug( "ocontactfields getFieldOrder" );
     qDebug( "fieldOrder >%s<", fieldOrder.latin1() );

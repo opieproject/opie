@@ -30,7 +30,7 @@
 #include "opimnotifymanager.h"
 
 /* OPIE */
-#include <opie2/oconversion.h>
+#include <opie2/opimdateconversion.h>
 
 /* QT */
 #include <qstringlist.h>
@@ -184,7 +184,7 @@ QString OPimNotifyManager::alarmsToString() const
             /* only if time is valid */
             if ( ( *it ).dateTime().isValid() )
             {
-                als << OConversion::dateTimeToString( ( *it ).dateTime() )
+                als << OPimDateConversion::dateTimeToString( ( *it ).dateTime() )
                 + ":" + QString::number( ( *it ).duration() )
                 + ":" + QString::number( ( *it ).sound() )
                 + ":";
@@ -227,8 +227,8 @@ void OPimNotifyManager::alarmsFromString( const QString& str )
         QStringList alarm = QStringList::split( ":", ( *it ), TRUE ); // allow empty
         qWarning( "alarm: %s", alarm.join( "___" ).latin1() );
         qWarning( "alarm[0]: %s %s", alarm[ 0 ].latin1(),
-                  OConversion::dateTimeFromString( alarm[ 0 ] ).toString().latin1() );
-        OPimAlarm al( alarm[ 2 ].toInt(), OConversion::dateTimeFromString( alarm[ 0 ] ),
+                  OPimDateConversion::dateTimeFromString( alarm[ 0 ] ).toString().latin1() );
+        OPimAlarm al( alarm[ 2 ].toInt(), OPimDateConversion::dateTimeFromString( alarm[ 0 ] ),
                       alarm[ 1 ].toInt() );
         add( al );
     }

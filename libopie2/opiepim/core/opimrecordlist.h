@@ -31,7 +31,7 @@
 #define ORECORDLIST_H
 
 /* OPIE */
-#include <opie2/otemplatebase.h>
+#include <opie2/opimtemplatebase.h>
 #include <opie2/opimrecord.h>
 
 /* QT */
@@ -40,7 +40,7 @@
 namespace Opie
 {
 
-class ORecordListIteratorPrivate;
+class OPimRecordListIteratorPrivate;
 /**
  * Our List Iterator
  * it behaves like STL or Qt
@@ -48,40 +48,40 @@ class ORecordListIteratorPrivate;
  * for(it = list.begin(); it != list.end(); ++it )
  *   doSomeCoolStuff( (*it) );
  */
-template <class T> class ORecordList;
+template <class T> class OPimRecordList;
 template <class T = OPimRecord>
-class ORecordListIterator
+class OPimRecordListIterator
 {
-    friend class ORecordList<T>;
+    friend class OPimRecordList<T>;
 
   public:
     typedef OTemplateBase<T> Base;
 
     /**
      * The c'tor used internally from
-     * ORecordList
+     * OPimRecordList
      */
-    ORecordListIterator( const QArray<int>, const Base* );
+    OPimRecordListIterator( const QArray<int>, const Base* );
 
     /**
      * The standard c'tor
      */
-    ORecordListIterator();
-    ~ORecordListIterator();
+    OPimRecordListIterator();
+    ~OPimRecordListIterator();
 
-    ORecordListIterator( const ORecordListIterator& );
-    ORecordListIterator &operator=( const ORecordListIterator& );
+    OPimRecordListIterator( const OPimRecordListIterator& );
+    OPimRecordListIterator &operator=( const OPimRecordListIterator& );
 
     /**
      * a * operator ;)
      * use it like this T = (*it);
      */
     T operator*();
-    ORecordListIterator &operator++();
-    ORecordListIterator &operator--();
+    OPimRecordListIterator &operator++();
+    OPimRecordListIterator &operator--();
 
-    bool operator==( const ORecordListIterator& it );
-    bool operator!=( const ORecordListIterator& it );
+    bool operator==( const OPimRecordListIterator& it );
+    bool operator!=( const OPimRecordListIterator& it );
 
     /**
      * the current item
@@ -107,30 +107,30 @@ class ORecordListIterator
     bool m_direction : 1;
 
     /* d pointer for future versions */
-    ORecordListIteratorPrivate *d;
+    OPimRecordListIteratorPrivate *d;
 };
 
 
-class ORecordListPrivate;
+class OPimRecordListPrivate;
 /**
  * The recordlist used as a return type
  * from OPimAccessTemplate
  */
 template <class T = OPimRecord >
-class ORecordList
+class OPimRecordList
 {
   public:
     typedef OTemplateBase<T> Base;
-    typedef ORecordListIterator<T> Iterator;
+    typedef OPimRecordListIterator<T> Iterator;
 
     /**
      * c'tor
      */
-    ORecordList ()
+    OPimRecordList ()
     {}
-    ORecordList( const QArray<int>& ids,
+    OPimRecordList( const QArray<int>& ids,
                  const Base* );
-    ~ORecordList();
+    ~OPimRecordList();
 
     /**
      * the first iterator
@@ -162,13 +162,13 @@ class ORecordList
   private:
     QArray<int> m_ids;
     const Base* m_acc;
-    ORecordListPrivate *d;
+    OPimRecordListPrivate *d;
 };
 
 
 /* ok now implement it  */
 template <class T>
-ORecordListIterator<T>::ORecordListIterator()
+OPimRecordListIterator<T>::OPimRecordListIterator()
 {
     m_current = 0;
     m_temp = 0l;
@@ -180,16 +180,16 @@ ORecordListIterator<T>::ORecordListIterator()
 
 
 template <class T>
-ORecordListIterator<T>::~ORecordListIterator()
+OPimRecordListIterator<T>::~OPimRecordListIterator()
 {
     /* nothing to delete */
 }
 
 
 template <class T>
-ORecordListIterator<T>::ORecordListIterator( const ORecordListIterator<T>& it )
+OPimRecordListIterator<T>::OPimRecordListIterator( const OPimRecordListIterator<T>& it )
 {
-    //    qWarning("ORecordListIterator copy c'tor");
+    //    qWarning("OPimRecordListIterator copy c'tor");
     m_uids = it.m_uids;
     m_current = it.m_current;
     m_temp = it.m_temp;
@@ -200,7 +200,7 @@ ORecordListIterator<T>::ORecordListIterator( const ORecordListIterator<T>& it )
 
 
 template <class T>
-ORecordListIterator<T> &ORecordListIterator<T>::operator=( const ORecordListIterator<T>& it )
+OPimRecordListIterator<T> &OPimRecordListIterator<T>::operator=( const OPimRecordListIterator<T>& it )
 {
     m_uids = it.m_uids;
     m_current = it.m_current;
@@ -213,7 +213,7 @@ ORecordListIterator<T> &ORecordListIterator<T>::operator=( const ORecordListIter
 
 
 template <class T>
-T ORecordListIterator<T>::operator*()
+T OPimRecordListIterator<T>::operator*()
 {
     //qWarning("operator* %d %d", m_current,  m_uids[m_current] );
     if ( !m_end )
@@ -228,7 +228,7 @@ T ORecordListIterator<T>::operator*()
 
 
 template <class T>
-ORecordListIterator<T> &ORecordListIterator<T>::operator++()
+OPimRecordListIterator<T> &OPimRecordListIterator<T>::operator++()
 {
     m_direction = true;
     if ( m_current < m_uids.count() )
@@ -244,7 +244,7 @@ ORecordListIterator<T> &ORecordListIterator<T>::operator++()
 
 
 template <class T>
-ORecordListIterator<T> &ORecordListIterator<T>::operator--()
+OPimRecordListIterator<T> &OPimRecordListIterator<T>::operator--()
 {
     m_direction = false;
     if ( m_current > 0 )
@@ -260,7 +260,7 @@ ORecordListIterator<T> &ORecordListIterator<T>::operator--()
 
 
 template <class T>
-bool ORecordListIterator<T>::operator==( const ORecordListIterator<T>& it )
+bool OPimRecordListIterator<T>::operator==( const OPimRecordListIterator<T>& it )
 {
 
     /* if both are at we're the same.... */
@@ -275,14 +275,14 @@ bool ORecordListIterator<T>::operator==( const ORecordListIterator<T>& it )
 
 
 template <class T>
-bool ORecordListIterator<T>::operator!=( const ORecordListIterator<T>& it )
+bool OPimRecordListIterator<T>::operator!=( const OPimRecordListIterator<T>& it )
 {
     return !( *this == it );
 }
 
 
 template <class T>
-ORecordListIterator<T>::ORecordListIterator( const QArray<int> uids,
+OPimRecordListIterator<T>::OPimRecordListIterator( const QArray<int> uids,
         const Base* t )
         : m_uids( uids ), m_current( 0 ), m_temp( t ), m_end( false ),
         m_direction( false )
@@ -294,14 +294,14 @@ ORecordListIterator<T>::ORecordListIterator( const QArray<int> uids,
 
 
 template <class T>
-uint ORecordListIterator<T>::current() const
+uint OPimRecordListIterator<T>::current() const
 {
     return m_current;
 }
 
 
 template <class T>
-void ORecordListIterator<T>::setCurrent( uint cur )
+void OPimRecordListIterator<T>::setCurrent( uint cur )
 {
     if ( cur < m_uids.count() )
     {
@@ -310,28 +310,28 @@ void ORecordListIterator<T>::setCurrent( uint cur )
     }
 }
 template <class T>
-uint ORecordListIterator<T>::count() const
+uint OPimRecordListIterator<T>::count() const
 {
     return m_uids.count();
 }
 
 
 template <class T>
-ORecordList<T>::ORecordList( const QArray<int>& ids,
+OPimRecordList<T>::OPimRecordList( const QArray<int>& ids,
                              const Base* acc )
         : m_ids( ids ), m_acc( acc )
 {}
 
 
 template <class T>
-ORecordList<T>::~ORecordList()
+OPimRecordList<T>::~OPimRecordList()
 {
     /* nothing to do here */
 }
 
 
 template <class T>
-typename ORecordList<T>::Iterator ORecordList<T>::begin()
+typename OPimRecordList<T>::Iterator OPimRecordList<T>::begin()
 {
     Iterator it( m_ids, m_acc );
     return it;
@@ -339,7 +339,7 @@ typename ORecordList<T>::Iterator ORecordList<T>::begin()
 
 
 template <class T>
-typename ORecordList<T>::Iterator ORecordList<T>::end()
+typename OPimRecordList<T>::Iterator OPimRecordList<T>::end()
 {
     Iterator it( m_ids, m_acc );
     it.m_end = true;
@@ -350,14 +350,14 @@ typename ORecordList<T>::Iterator ORecordList<T>::end()
 
 
 template <class T>
-uint ORecordList<T>::count() const
+uint OPimRecordList<T>::count() const
 {
     return m_ids.count();
 }
 
 
 template <class T>
-T ORecordList<T>::operator[] ( uint i )
+T OPimRecordList<T>::operator[] ( uint i )
 {
     if ( i >= m_ids.count() )
         return T();
@@ -367,14 +367,14 @@ T ORecordList<T>::operator[] ( uint i )
 
 
 template <class T>
-int ORecordList<T>::uidAt( uint i )
+int OPimRecordList<T>::uidAt( uint i )
 {
     return m_ids[ i ];
 }
 
 
 template <class T>
-bool ORecordList<T>::remove( int uid )
+bool OPimRecordList<T>::remove( int uid )
 {
     QArray<int> copy( m_ids.count() );
     int counter = 0;

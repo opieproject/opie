@@ -43,7 +43,7 @@ namespace Opie {
  * Class to handle Recurrencies..
  */
 
-class ORecur {
+class OPimRecurrence {
 
   public:
     typedef QValueList<QDate> ExceptionList;
@@ -54,13 +54,13 @@ class ORecur {
     enum Fields{ RType = 0, RWeekdays, RPosition, RFreq, RHasEndDate, 
                 EndDate, Created, Exceptions };
 
-    ORecur();
-    ORecur( const QMap<int, QString>& map );
-    ORecur( const ORecur& );
-    ~ORecur();
+    OPimRecurrence();
+    OPimRecurrence( const QMap<int, QString>& map );
+    OPimRecurrence( const OPimRecurrence& );
+    ~OPimRecurrence();
 
-    ORecur &operator=( const ORecur& );
-    bool operator==(const ORecur& )const;
+    OPimRecurrence &operator=( const OPimRecurrence& );
+    bool operator==(const OPimRecurrence& )const;
 
     bool doesRecur()const;
     /* if it recurrs on that day */
@@ -85,7 +85,7 @@ class ORecur {
     bool nextOcurrence( const QDate& FromWhereToStart, QDate &recurDate );
 
     /**
-     * The module this ORecur belongs to
+     * The module this OPimRecurrence belongs to
      */
     QString service()const;
 
@@ -129,8 +129,8 @@ class ORecur {
 
     class Data;
     Data* data;
-    class ORecurPrivate;
-    ORecurPrivate *d;
+    class OPimRecurrencePrivate;
+    OPimRecurrencePrivate *d;
 };
 
 }

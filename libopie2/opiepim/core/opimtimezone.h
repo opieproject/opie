@@ -27,35 +27,81 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef OCONVERSION_H
-#define OCONVERSION_H
+#ifndef OTIMEZONE_H
+#define OTIMEZONE_H
 
 /* QT */
 #include <qdatetime.h>
 
-namespace Opie {
+/* STD */
+#include <time.h>
 
-class OConversion
+namespace Opie
 {
-public:
-    static QString dateToString( const QDate &d );
-    static QDate dateFromString( const QString &datestr );
+/**
+ * A very primitive class to convert time
+ * from one timezone to another
+ * and to localtime
+ * and time_t
+ */
+class OPimTimeZone {
+
+ public:
+    typedef QString ZoneName;
+    OPimTimeZone( const ZoneName&  = ZoneName::null );
+    virtual ~OPimTimeZone(); // just in case.
+
+    bool isValid()const;
 
     /**
-     * simple function to store DateTime as string and read from string
-     * no timezone changing is done
-     * DDMMYYYYHHMMSS is the simple format
+     * converts the QDateTime to a DateTime
+     * in the local timezone
+     * if QDateTime is 25th Jan and takes place in Europe/Berlin at 12h
+     * and the current timezone is Europe/London the returned
+     * time will be 11h.
      */
-    static QString dateTimeToString( const QDateTime& );
-    static QDateTime dateTimeFromString( const QString& );
+    QDateTime toLocalDateTime( const QDateTime& dt );
+
+    /**
+     * converts the QDateTime to UTC time
+     */
+    QDateTime toUTCDateTime( const QDateTime& dt );
+
+    /**
+     * reads the time_t into a QDateTime using UTC as timezone!
+     */
+    QDateTime fromUTCDateTime( time_t );
+
+    /**
+     * converts the time_t to the time in the timezone
+     */
+    QDateTime toDateTime( time_t );
+
+    /**
+     * converts the QDateTime from one timezone to this timeZone
+     */
+    QDateTime toDateTime( const QDateTime&, const OPimTimeZone& timeZone );
+
+    /**
+     * converts the date time into a time_t. It takes the timezone into account
+     */
+    time_t fromDateTime( const QDateTime& );
+
+    /**
+     * converts the datetime with timezone UTC
+     */
+    time_t fromUTCDateTime( const QDateTime& );
+
+    static OPimTimeZone current();
+    static OPimTimeZone utc();
+
+    QString timeZone() const;
     
-private:
+ private:
+    ZoneName m_name;
     class Private;
-    Private* d;    
-    
+    Private* d;
+};
 };
 
-}
-
-#endif // __oconversion_h__
-
+#endif

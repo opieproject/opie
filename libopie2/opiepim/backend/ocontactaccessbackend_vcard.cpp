@@ -39,7 +39,7 @@
 
 namespace Opie {
 
-OContactAccessBackend_VCard::OContactAccessBackend_VCard ( const QString& , const QString& filename ):
+OPimContactAccessBackend_VCard::OPimContactAccessBackend_VCard ( const QString& , const QString& filename ):
 	m_dirty( false ),
 	m_file( filename )
 {
@@ -47,7 +47,7 @@ OContactAccessBackend_VCard::OContactAccessBackend_VCard ( const QString& , cons
 }
 
 
-bool OContactAccessBackend_VCard::load ()
+bool OPimContactAccessBackend_VCard::load ()
 {
 	m_map.clear();
 	m_dirty = false;
@@ -64,7 +64,7 @@ bool OContactAccessBackend_VCard::load ()
 	}
 
 	while ( obj ) {
-		OContact con = parseVObject( obj );
+		OPimContact con = parseVObject( obj );
 		/*
 		 * if uid is 0 assign a new one
 		 * this at least happens on
@@ -85,11 +85,11 @@ bool OContactAccessBackend_VCard::load ()
 	return true;
 
 }
-bool OContactAccessBackend_VCard::reload()
+bool OPimContactAccessBackend_VCard::reload()
 {
 	return load();
 }
-bool OContactAccessBackend_VCard::save()
+bool OPimContactAccessBackend_VCard::save()
 {
 	if (!m_dirty )
 		return true;
@@ -103,7 +103,7 @@ bool OContactAccessBackend_VCard::save()
 	addPropValue( obj, VCVersionProp, "1.0" );
 
 	VObject *vo;
-	for(QMap<int, OContact>::ConstIterator it=m_map.begin(); it !=m_map.end(); ++it ){
+	for(QMap<int, OPimContact>::ConstIterator it=m_map.begin(); it !=m_map.end(); ++it ){
 		vo = createVObject( *it );
 		writeVObject( file.directHandle() , vo );
 		cleanVObject( vo );
@@ -116,42 +116,42 @@ bool OContactAccessBackend_VCard::save()
 
 
 }
-void OContactAccessBackend_VCard::clear ()
+void OPimContactAccessBackend_VCard::clear ()
 {
 	m_map.clear();
 	m_dirty = true; // ??? sure ? (se)
 }
 
-bool OContactAccessBackend_VCard::add ( const OContact& newcontact )
+bool OPimContactAccessBackend_VCard::add ( const OPimContact& newcontact )
 {
 	m_map.insert( newcontact.uid(), newcontact );
 	m_dirty = true;
 	return true;
 }
 
-bool OContactAccessBackend_VCard::remove ( int uid )
+bool OPimContactAccessBackend_VCard::remove ( int uid )
 {
 	m_map.remove( uid );
 	m_dirty = true;
 	return true;
 }
 
-bool OContactAccessBackend_VCard::replace ( const OContact &contact )
+bool OPimContactAccessBackend_VCard::replace ( const OPimContact &contact )
 {
 	m_map.replace( contact.uid(), contact );
 	m_dirty = true;
 	return true;
 }
 
-OContact OContactAccessBackend_VCard::find ( int uid ) const
+OPimContact OPimContactAccessBackend_VCard::find ( int uid ) const
 {
     return m_map[uid];
 }
 
-QArray<int> OContactAccessBackend_VCard::allRecords() const
+QArray<int> OPimContactAccessBackend_VCard::allRecords() const
 {
 	QArray<int> ar( m_map.count() );
-	QMap<int, OContact>::ConstIterator it;
+	QMap<int, OPimContact>::ConstIterator it;
 	int i = 0;
 	for ( it = m_map.begin(); it != m_map.end(); ++it ) {
 		ar[i] = it.key();
@@ -161,36 +161,36 @@ QArray<int> OContactAccessBackend_VCard::allRecords() const
 }
 
 // Not implemented
-QArray<int> OContactAccessBackend_VCard::queryByExample ( const OContact&, int, const QDateTime& )
+QArray<int> OPimContactAccessBackend_VCard::queryByExample ( const OPimContact&, int, const QDateTime& )
 {
 	QArray<int> ar(0);
 	return ar;
 }
 
 // Not implemented
-QArray<int> OContactAccessBackend_VCard::matchRegexp(  const QRegExp&  ) const
+QArray<int> OPimContactAccessBackend_VCard::matchRegexp(  const QRegExp&  ) const
 {
 	QArray<int> ar(0);
 	return ar;
 }
 
-const uint OContactAccessBackend_VCard::querySettings()
+const uint OPimContactAccessBackend_VCard::querySettings()
 {
 	return 0; // No search possible
 }
 
-bool OContactAccessBackend_VCard::hasQuerySettings (uint ) const
+bool OPimContactAccessBackend_VCard::hasQuerySettings (uint ) const
 {
 	return false; // No search possible, therefore all settings invalid ;)
 }
 
-bool OContactAccessBackend_VCard::wasChangedExternally()
+bool OPimContactAccessBackend_VCard::wasChangedExternally()
 {
 	return false; // Don't expect concurrent access
 }
 
 // Not implemented
-QArray<int> OContactAccessBackend_VCard::sorted( bool , int, int, int )
+QArray<int> OPimContactAccessBackend_VCard::sorted( bool , int, int, int )
 {
 	QArray<int> ar(0);
 	return ar;
@@ -199,9 +199,9 @@ QArray<int> OContactAccessBackend_VCard::sorted( bool , int, int, int )
 // *** Private stuff ***
 
 
-OContact OContactAccessBackend_VCard::parseVObject( VObject *obj )
+OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
 {
-	OContact c;
+	OPimContact c;
 
 	VObjectIterator it;
 	initPropIterator( &it, obj );
@@ -427,7 +427,7 @@ OContact OContactAccessBackend_VCard::parseVObject( VObject *obj )
 }
 
 
-VObject* OContactAccessBackend_VCard::createVObject( const OContact &c )
+VObject* OPimContactAccessBackend_VCard::createVObject( const OPimContact &c )
 {
 	VObject *vcard = newVObject( VCCardProp );
 	safeAddPropValue( vcard, VCVersionProp, "2.1" );
@@ -533,7 +533,7 @@ VObject* OContactAccessBackend_VCard::createVObject( const OContact &c )
 	return vcard;
 }
 
-QString OContactAccessBackend_VCard::convDateToVCardDate( const QDate& d ) const
+QString OPimContactAccessBackend_VCard::convDateToVCardDate( const QDate& d ) const
 {
 		QString str_rfc2425 = QString("%1-%2-%3")
 			.arg( d.year() )
@@ -547,7 +547,7 @@ QString OContactAccessBackend_VCard::convDateToVCardDate( const QDate& d ) const
 		return str_rfc2425;
 }
 
-QDate OContactAccessBackend_VCard::convVCardDateToDate( const QString& datestr )
+QDate OPimContactAccessBackend_VCard::convVCardDateToDate( const QString& datestr )
 {
 	int monthPos = datestr.find('-');
 	int dayPos = datestr.find('-', monthPos+1 );
@@ -572,7 +572,7 @@ QDate OContactAccessBackend_VCard::convVCardDateToDate( const QString& datestr )
 	return date;
 }
 
-VObject* OContactAccessBackend_VCard::safeAddPropValue( VObject *o, const char *prop, const QString &value )
+VObject* OPimContactAccessBackend_VCard::safeAddPropValue( VObject *o, const char *prop, const QString &value )
 {
 	VObject *ret = 0;
 	if ( o && !value.isEmpty() )
@@ -580,7 +580,7 @@ VObject* OContactAccessBackend_VCard::safeAddPropValue( VObject *o, const char *
 	return ret;
 }
 
-VObject* OContactAccessBackend_VCard::safeAddProp( VObject *o, const char *prop)
+VObject* OPimContactAccessBackend_VCard::safeAddProp( VObject *o, const char *prop)
 {
 	VObject *ret = 0;
 	if ( o )

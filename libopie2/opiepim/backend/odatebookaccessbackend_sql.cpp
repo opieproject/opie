@@ -43,7 +43,7 @@
 #include <opie2/osqlmanager.h>
 #include <opie2/osqlquery.h>
 
-#include <opie2/orecur.h>
+#include <opie2/opimrecurrence.h>
 #include <opie2/odatebookaccessbackend_sql.h>
 
 namespace Opie {
@@ -75,27 +75,27 @@ void ODateBookAccessBackend_SQL::initFields()
 
 	// This map contains the translation of the fieldtype id's to 
 	// the names of the table columns
-	m_fieldMap.insert( OEvent::FUid, "uid" );
-	m_fieldMap.insert( OEvent::FCategories, "Categories" );
-	m_fieldMap.insert( OEvent::FDescription, "Description" );
-	m_fieldMap.insert( OEvent::FLocation, "Location" );
-	m_fieldMap.insert( OEvent::FType, "Type" );
-	m_fieldMap.insert( OEvent::FAlarm, "Alarm" );
-	m_fieldMap.insert( OEvent::FSound, "Sound" );
-	m_fieldMap.insert( OEvent::FRType, "RType" );
-	m_fieldMap.insert( OEvent::FRWeekdays, "RWeekdays" );
-	m_fieldMap.insert( OEvent::FRPosition, "RPosition" );
-	m_fieldMap.insert( OEvent::FRFreq, "RFreq" );
-	m_fieldMap.insert( OEvent::FRHasEndDate, "RHasEndDate" );
-	m_fieldMap.insert( OEvent::FREndDate, "REndDate" );
-	m_fieldMap.insert( OEvent::FRCreated, "RCreated" );
-	m_fieldMap.insert( OEvent::FRExceptions, "RExceptions" );
-	m_fieldMap.insert( OEvent::FStart, "Start" );
-	m_fieldMap.insert( OEvent::FEnd, "End" );
-	m_fieldMap.insert( OEvent::FNote, "Note" );
-	m_fieldMap.insert( OEvent::FTimeZone, "TimeZone" );
-	m_fieldMap.insert( OEvent::FRecParent, "RecParent" );
-	m_fieldMap.insert( OEvent::FRecChildren, "Recchildren" );
+	m_fieldMap.insert( OPimEvent::FUid, "uid" );
+	m_fieldMap.insert( OPimEvent::FCategories, "Categories" );
+	m_fieldMap.insert( OPimEvent::FDescription, "Description" );
+	m_fieldMap.insert( OPimEvent::FLocation, "Location" );
+	m_fieldMap.insert( OPimEvent::FType, "Type" );
+	m_fieldMap.insert( OPimEvent::FAlarm, "Alarm" );
+	m_fieldMap.insert( OPimEvent::FSound, "Sound" );
+	m_fieldMap.insert( OPimEvent::FRType, "RType" );
+	m_fieldMap.insert( OPimEvent::FRWeekdays, "RWeekdays" );
+	m_fieldMap.insert( OPimEvent::FRPosition, "RPosition" );
+	m_fieldMap.insert( OPimEvent::FRFreq, "RFreq" );
+	m_fieldMap.insert( OPimEvent::FRHasEndDate, "RHasEndDate" );
+	m_fieldMap.insert( OPimEvent::FREndDate, "REndDate" );
+	m_fieldMap.insert( OPimEvent::FRCreated, "RCreated" );
+	m_fieldMap.insert( OPimEvent::FRExceptions, "RExceptions" );
+	m_fieldMap.insert( OPimEvent::FStart, "Start" );
+	m_fieldMap.insert( OPimEvent::FEnd, "End" );
+	m_fieldMap.insert( OPimEvent::FNote, "Note" );
+	m_fieldMap.insert( OPimEvent::FTimeZone, "TimeZone" );
+	m_fieldMap.insert( OPimEvent::FRecParent, "RecParent" );
+	m_fieldMap.insert( OPimEvent::FRecChildren, "Recchildren" );
 
 	// Create a map that maps the column name to the id
 	QMapConstIterator<int, QString> it;
@@ -165,7 +165,7 @@ QArray<int> ODateBookAccessBackend_SQL::allRecords()const
 	return m_uids;
 }
 
-QArray<int> ODateBookAccessBackend_SQL::queryByExample(const OEvent&, int,  const QDateTime& ) {
+QArray<int> ODateBookAccessBackend_SQL::queryByExample(const OPimEvent&, int,  const QDateTime& ) {
 	return QArray<int>();
 }
 
@@ -181,7 +181,7 @@ void ODateBookAccessBackend_SQL::clear()
 }
 
 
-OEvent ODateBookAccessBackend_SQL::find( int uid ) const{
+OPimEvent ODateBookAccessBackend_SQL::find( int uid ) const{
 	QString qu = "select *";
 	qu += "from datebook where uid = " + QString::number(uid);
 
@@ -192,7 +192,7 @@ OEvent ODateBookAccessBackend_SQL::find( int uid ) const{
 
 	// Create Map for date event and insert UID
 	QMap<int,QString> dateEventMap;
-	dateEventMap.insert( OEvent::FUid, QString::number( uid ) );
+	dateEventMap.insert( OPimEvent::FUid, QString::number( uid ) );
 
 	// Now insert the data out of the columns into the map.
 	QMapConstIterator<int, QString> it;
@@ -201,13 +201,13 @@ OEvent ODateBookAccessBackend_SQL::find( int uid ) const{
 	}
 
 	// Last step: Put map into date event and return it
-	OEvent retDate( dateEventMap );
+	OPimEvent retDate( dateEventMap );
 
 	return retDate;
 }
 
 // FIXME: Speed up update of uid's..
-bool ODateBookAccessBackend_SQL::add( const OEvent& ev ) 
+bool ODateBookAccessBackend_SQL::add( const OPimEvent& ev ) 
 {
 	QMap<int,QString> eventMap = ev.toMap();
 
@@ -272,7 +272,7 @@ bool ODateBookAccessBackend_SQL::remove( int uid )
 	return true;
 }
 
-bool ODateBookAccessBackend_SQL::replace( const OEvent& ev ) 
+bool ODateBookAccessBackend_SQL::replace( const OPimEvent& ev ) 
 {
     remove( ev.uid() );
     return add( ev );
@@ -309,10 +309,10 @@ QArray<int> ODateBookAccessBackend_SQL::nonRepeats()const
 	return extractUids( res );
 }
 
-OEvent::ValueList ODateBookAccessBackend_SQL::directNonRepeats() 
+OPimEvent::ValueList ODateBookAccessBackend_SQL::directNonRepeats() 
 {
 	QArray<int> nonRepUids = nonRepeats();
-	OEvent::ValueList list;
+	OPimEvent::ValueList list;
 
 	for (uint i = 0; i < nonRepUids.count(); ++i ){
 		list.append( find( nonRepUids[i] ) );
@@ -321,10 +321,10 @@ OEvent::ValueList ODateBookAccessBackend_SQL::directNonRepeats()
 	return list;
 
 }
-OEvent::ValueList ODateBookAccessBackend_SQL::directRawRepeats() 
+OPimEvent::ValueList ODateBookAccessBackend_SQL::directRawRepeats() 
 {
 	QArray<int> rawRepUids = rawRepeats();
-	OEvent::ValueList list;
+	OPimEvent::ValueList list;
 
 	for (uint i = 0; i < rawRepUids.count(); ++i ){
 		list.append( find( rawRepUids[i] ) );

@@ -39,7 +39,7 @@
 #include <opie2/otodoaccesssql.h>
 #include <opie2/opimstate.h>
 #include <opie2/opimnotifymanager.h>
-#include <opie2/orecur.h>
+#include <opie2/opimrecurrence.h>
 
 using namespace Opie;
 /*
@@ -73,15 +73,15 @@ namespace {
     };
 
     /**
-     * inserts/adds a OTodo to the table
+     * inserts/adds a OPimTodo to the table
      */
     class InsertQuery : public OSQLQuery {
     public:
-        InsertQuery(const OTodo& );
+        InsertQuery(const OPimTodo& );
         ~InsertQuery();
         QString query()const;
     private:
-        OTodo m_todo;
+        OPimTodo m_todo;
     };
 
     /**
@@ -152,7 +152,7 @@ namespace {
         QString qu;
         qu += "create table todolist( uid PRIMARY KEY, categories, completed, ";
         qu += "description, summary, priority, DueDate, progress ,  state, ";
-	// This is the recurrance-stuff .. Exceptions are currently not supported (see ORecur.cpp) ! (eilers)
+	// This is the recurrance-stuff .. Exceptions are currently not supported (see OPimRecurrence.cpp) ! (eilers)
 	qu += "RType, RWeekdays, RPosition, RFreq, RHasEndDate, EndDate, Created, Exceptions, "; 
 	qu += "reminders, alarms, maintainer, startdate, completeddate);";
 	qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), value VARCHAR(10), PRIMARY KEY /* identifier */ (uid, id) );";
@@ -170,13 +170,13 @@ namespace {
         return qu;
     }
 
-    InsertQuery::InsertQuery( const OTodo& todo )
+    InsertQuery::InsertQuery( const OPimTodo& todo )
         : OSQLQuery(), m_todo( todo ) {
     }
     InsertQuery::~InsertQuery() {
     }
     /*
-     * converts from a OTodo to a query
+     * converts from a OPimTodo to a query
      * we leave out X-Ref + Alarms
      */
     QString InsertQuery::query()const{
@@ -218,14 +218,14 @@ namespace {
 		+       "-" + QString::number( day )              + "'" + ","
 		+       QString::number( m_todo.progress() )            + ","
  		+       QString::number( m_todo.state().state() )       + ","
-		+ "'" + recMap[ ORecur::RType ]                   + "'" + ","
-		+ "'" + recMap[ ORecur::RWeekdays ]               + "'" + ","
-		+ "'" + recMap[ ORecur::RPosition ]               + "'" + ","
-		+ "'" + recMap[ ORecur::RFreq ]                   + "'" + ","
-		+ "'" + recMap[ ORecur::RHasEndDate ]             + "'" + ","
-		+ "'" + recMap[ ORecur::EndDate ]                 + "'" + ","
-		+ "'" + recMap[ ORecur::Created ]                 + "'" + ","
-		+ "'" + recMap[ ORecur::Exceptions ]              + "'" + ",";
+		+ "'" + recMap[ OPimRecurrence::RType ]                   + "'" + ","
+		+ "'" + recMap[ OPimRecurrence::RWeekdays ]               + "'" + ","
+		+ "'" + recMap[ OPimRecurrence::RPosition ]               + "'" + ","
+		+ "'" + recMap[ OPimRecurrence::RFreq ]                   + "'" + ","
+		+ "'" + recMap[ OPimRecurrence::RHasEndDate ]             + "'" + ","
+		+ "'" + recMap[ OPimRecurrence::EndDate ]                 + "'" + ","
+		+ "'" + recMap[ OPimRecurrence::Created ]                 + "'" + ","
+		+ "'" + recMap[ OPimRecurrence::Exceptions ]              + "'" + ",";
 	
 	if ( m_todo.hasNotifiers() ) {
 		OPimNotifyManager manager = m_todo.notifiers();
@@ -329,8 +329,8 @@ namespace {
 
 
 namespace Opie {
-OTodoAccessBackendSQL::OTodoAccessBackendSQL( const QString& file )
-    : OTodoAccessBackend(), m_dict(15), m_driver(NULL), m_dirty(true)
+OPimTodoAccessBackendSQL::OPimTodoAccessBackendSQL( const QString& file )
+    : OPimTodoAccessBackend(), m_dict(15), m_driver(NULL), m_dirty(true)
 {
     QString fi = file;
     if ( fi.isEmpty() )
@@ -341,12 +341,12 @@ OTodoAccessBackendSQL::OTodoAccessBackendSQL( const QString& file )
     // fillDict();
 }
 
-OTodoAccessBackendSQL::~OTodoAccessBackendSQL(){
+OPimTodoAccessBackendSQL::~OPimTodoAccessBackendSQL(){
 	if( m_driver )
 		delete m_driver;
 }
 
-bool OTodoAccessBackendSQL::load(){
+bool OPimTodoAccessBackendSQL::load(){
     if (!m_driver->open() )
         return false;
 
@@ -356,35 +356,35 @@ bool OTodoAccessBackendSQL::load(){
     m_dirty = true;
     return true;
 }
-bool OTodoAccessBackendSQL::reload(){
+bool OPimTodoAccessBackendSQL::reload(){
     return load();
 }
 
-bool OTodoAccessBackendSQL::save(){
+bool OPimTodoAccessBackendSQL::save(){
     return m_driver->close();  // Shouldn't m_driver->sync be better than close ? (eilers)
 }
-QArray<int> OTodoAccessBackendSQL::allRecords()const {
+QArray<int> OPimTodoAccessBackendSQL::allRecords()const {
     if (m_dirty )
         update();
 
     return m_uids;
 }
-QArray<int> OTodoAccessBackendSQL::queryByExample( const OTodo& , int, const QDateTime& ){
+QArray<int> OPimTodoAccessBackendSQL::queryByExample( const OPimTodo& , int, const QDateTime& ){
     QArray<int> ints(0);
     return ints;
 }
-OTodo OTodoAccessBackendSQL::find(int uid ) const{
+OPimTodo OPimTodoAccessBackendSQL::find(int uid ) const{
     FindQuery query( uid );
     return todo( m_driver->query(&query) );
 
 }
-OTodo OTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
+OPimTodo OPimTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
                                    uint cur, Frontend::CacheDirection dir ) const{
     uint CACHE = readAhead();
     qWarning("searching for %d", uid );
     QArray<int> search( CACHE );
     uint size =0;
-    OTodo to;
+    OPimTodo to;
 
     // we try to cache CACHE items
     switch( dir ) {
@@ -412,13 +412,13 @@ OTodo OTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
 
     return todo( res );
 }
-void OTodoAccessBackendSQL::clear() {
+void OPimTodoAccessBackendSQL::clear() {
     ClearQuery cle;
     OSQLResult res = m_driver->query( &cle );
     CreateQuery qu;
     res = m_driver->query(&qu);
 }
-bool OTodoAccessBackendSQL::add( const OTodo& t) {
+bool OPimTodoAccessBackendSQL::add( const OPimTodo& t) {
     InsertQuery ins( t );
     OSQLResult res = m_driver->query( &ins );
 
@@ -430,7 +430,7 @@ bool OTodoAccessBackendSQL::add( const OTodo& t) {
 
     return true;
 }
-bool OTodoAccessBackendSQL::remove( int uid ) {
+bool OPimTodoAccessBackendSQL::remove( int uid ) {
     RemoveQuery rem( uid );
     OSQLResult res = m_driver->query(&rem );
 
@@ -445,17 +445,17 @@ bool OTodoAccessBackendSQL::remove( int uid ) {
  * but we need the cache for that
  * now we remove
  */
-bool OTodoAccessBackendSQL::replace( const OTodo& t) {
+bool OPimTodoAccessBackendSQL::replace( const OPimTodo& t) {
     remove( t.uid() );
     bool b= add(t);
     m_dirty = false; // we changed some stuff but the UID stayed the same
     return b;
 }
-QArray<int> OTodoAccessBackendSQL::overDue() {
+QArray<int> OPimTodoAccessBackendSQL::overDue() {
     OverDueQuery qu;
     return uids( m_driver->query(&qu ) );
 }
-QArray<int> OTodoAccessBackendSQL::effectiveToDos( const QDate& s,
+QArray<int> OPimTodoAccessBackendSQL::effectiveToDos( const QDate& s,
                                                    const QDate& t,
                                                    bool u) {
     EffQuery ef(s, t, u );
@@ -464,7 +464,7 @@ QArray<int> OTodoAccessBackendSQL::effectiveToDos( const QDate& s,
 /*
  *
  */
-QArray<int> OTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
+QArray<int> OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
                                            int sortFilter, int cat ) {
     qWarning("sorted %d, %d", asc, sortOrder );
     QString query;
@@ -530,7 +530,7 @@ QArray<int> OTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
     OSQLRawQuery raw(query );
     return uids( m_driver->query(&raw) );
 }
-bool OTodoAccessBackendSQL::date( QDate& da, const QString& str ) const{
+bool OPimTodoAccessBackendSQL::date( QDate& da, const QString& str ) const{
     if ( str == "0-0-0" )
         return false;
     else{
@@ -543,16 +543,16 @@ bool OTodoAccessBackendSQL::date( QDate& da, const QString& str ) const{
         return true;
     }
 }
-OTodo OTodoAccessBackendSQL::todo( const OSQLResult& res) const{
+OPimTodo OPimTodoAccessBackendSQL::todo( const OSQLResult& res) const{
     if ( res.state() == OSQLResult::Failure ) {
-        OTodo to;
+        OPimTodo to;
         return to;
     }
 
     OSQLResultItem::ValueList list = res.results();
     OSQLResultItem::ValueList::Iterator it = list.begin();
     qWarning("todo1");
-    OTodo to = todo( (*it) );
+    OPimTodo to = todo( (*it) );
     cache( to );
     ++it;
 
@@ -562,7 +562,7 @@ OTodo OTodoAccessBackendSQL::todo( const OSQLResult& res) const{
     }
     return to;
 }
-OTodo OTodoAccessBackendSQL::todo( OSQLResultItem& item )const {
+OPimTodo OPimTodoAccessBackendSQL::todo( OSQLResultItem& item )const {
     qWarning("todo");
     bool hasDueDate = false; QDate dueDate = QDate::currentDate();
     hasDueDate = date( dueDate, item.data("DueDate") );
@@ -570,7 +570,7 @@ OTodo OTodoAccessBackendSQL::todo( OSQLResultItem& item )const {
 
     qWarning("Item is completed: %d", item.data("completed").toInt() );
 
-    OTodo to( (bool)item.data("completed").toInt(), item.data("priority").toInt(),
+    OPimTodo to( (bool)item.data("completed").toInt(), item.data("priority").toInt(),
               cats, item.data("summary"), item.data("description"),
               item.data("progress").toUShort(), hasDueDate, dueDate,
               item.data("uid").toInt() );
@@ -599,65 +599,65 @@ OTodo OTodoAccessBackendSQL::todo( OSQLResultItem& item )const {
     to.setState( pimState );
 
     QMap<int, QString> recMap;
-    recMap.insert( ORecur::RType      , item.data("RType") );
-    recMap.insert( ORecur::RWeekdays  , item.data("RWeekdays") );
-    recMap.insert( ORecur::RPosition  , item.data("RPosition") );
-    recMap.insert( ORecur::RFreq      , item.data("RFreq") );
-    recMap.insert( ORecur::RHasEndDate, item.data("RHasEndDate") );
-    recMap.insert( ORecur::EndDate    , item.data("EndDate") );
-    recMap.insert( ORecur::Created    , item.data("Created") );
-    recMap.insert( ORecur::Exceptions , item.data("Exceptions") );
+    recMap.insert( OPimRecurrence::RType      , item.data("RType") );
+    recMap.insert( OPimRecurrence::RWeekdays  , item.data("RWeekdays") );
+    recMap.insert( OPimRecurrence::RPosition  , item.data("RPosition") );
+    recMap.insert( OPimRecurrence::RFreq      , item.data("RFreq") );
+    recMap.insert( OPimRecurrence::RHasEndDate, item.data("RHasEndDate") );
+    recMap.insert( OPimRecurrence::EndDate    , item.data("EndDate") );
+    recMap.insert( OPimRecurrence::Created    , item.data("Created") );
+    recMap.insert( OPimRecurrence::Exceptions , item.data("Exceptions") );
     
-    ORecur recur;
+    OPimRecurrence recur;
     recur.fromMap( recMap );
     to.setRecurrence( recur );
 
     return to;
 }
-OTodo OTodoAccessBackendSQL::todo( int uid )const {
+OPimTodo OPimTodoAccessBackendSQL::todo( int uid )const {
     FindQuery find( uid );
     return todo( m_driver->query(&find) );
 }
 /*
  * update the dict
  */
-void OTodoAccessBackendSQL::fillDict() {
+void OPimTodoAccessBackendSQL::fillDict() {
     /* initialize dict */
     /*
      * UPDATE dict if you change anything!!!
      * FIXME: Isn't this dict obsolete ? (eilers)
      */
     m_dict.setAutoDelete( TRUE );
-    m_dict.insert("Categories" ,     new int(OTodo::Category)         );
-    m_dict.insert("Uid" ,            new int(OTodo::Uid)              );
-    m_dict.insert("HasDate" ,        new int(OTodo::HasDate)          );
-    m_dict.insert("Completed" ,      new int(OTodo::Completed)        );
-    m_dict.insert("Description" ,    new int(OTodo::Description)      );
-    m_dict.insert("Summary" ,        new int(OTodo::Summary)          );
-    m_dict.insert("Priority" ,       new int(OTodo::Priority)         );
-    m_dict.insert("DateDay" ,        new int(OTodo::DateDay)          );
-    m_dict.insert("DateMonth" ,      new int(OTodo::DateMonth)        );
-    m_dict.insert("DateYear" ,       new int(OTodo::DateYear)         );
-    m_dict.insert("Progress" ,       new int(OTodo::Progress)         );
-    m_dict.insert("Completed",       new int(OTodo::Completed)        ); // Why twice ? (eilers)
-    m_dict.insert("CrossReference",  new int(OTodo::CrossReference)   );
-//    m_dict.insert("HasAlarmDateTime",new int(OTodo::HasAlarmDateTime) ); // old stuff (eilers)
-//    m_dict.insert("AlarmDateTime",   new int(OTodo::AlarmDateTime)    ); // old stuff (eilers)
+    m_dict.insert("Categories" ,     new int(OPimTodo::Category)         );
+    m_dict.insert("Uid" ,            new int(OPimTodo::Uid)              );
+    m_dict.insert("HasDate" ,        new int(OPimTodo::HasDate)          );
+    m_dict.insert("Completed" ,      new int(OPimTodo::Completed)        );
+    m_dict.insert("Description" ,    new int(OPimTodo::Description)      );
+    m_dict.insert("Summary" ,        new int(OPimTodo::Summary)          );
+    m_dict.insert("Priority" ,       new int(OPimTodo::Priority)         );
+    m_dict.insert("DateDay" ,        new int(OPimTodo::DateDay)          );
+    m_dict.insert("DateMonth" ,      new int(OPimTodo::DateMonth)        );
+    m_dict.insert("DateYear" ,       new int(OPimTodo::DateYear)         );
+    m_dict.insert("Progress" ,       new int(OPimTodo::Progress)         );
+    m_dict.insert("Completed",       new int(OPimTodo::Completed)        ); // Why twice ? (eilers)
+    m_dict.insert("CrossReference",  new int(OPimTodo::CrossReference)   );
+//    m_dict.insert("HasAlarmDateTime",new int(OPimTodo::HasAlarmDateTime) ); // old stuff (eilers)
+//    m_dict.insert("AlarmDateTime",   new int(OPimTodo::AlarmDateTime)    ); // old stuff (eilers)
 }
 /*
  * need to be const so let's fool the
  * compiler :(
  */
-void OTodoAccessBackendSQL::update()const {
-    ((OTodoAccessBackendSQL*)this)->m_dirty = false;
+void OPimTodoAccessBackendSQL::update()const {
+    ((OPimTodoAccessBackendSQL*)this)->m_dirty = false;
     LoadQuery lo;
     OSQLResult res = m_driver->query(&lo);
     if ( res.state() != OSQLResult::Success )
         return;
 
-    ((OTodoAccessBackendSQL*)this)->m_uids = uids( res );
+    ((OPimTodoAccessBackendSQL*)this)->m_uids = uids( res );
 }
-QArray<int> OTodoAccessBackendSQL::uids( const OSQLResult& res) const{
+QArray<int> OPimTodoAccessBackendSQL::uids( const OSQLResult& res) const{
 
     OSQLResultItem::ValueList list = res.results();
     OSQLResultItem::ValueList::Iterator it;
@@ -672,10 +672,10 @@ QArray<int> OTodoAccessBackendSQL::uids( const OSQLResult& res) const{
     return ints;
 }
 
-QArray<int> OTodoAccessBackendSQL::matchRegexp(  const QRegExp &r ) const
+QArray<int> OPimTodoAccessBackendSQL::matchRegexp(  const QRegExp &r ) const
 {
 
-#warning OTodoAccessBackendSQL::matchRegexp() not implemented !!
+#warning OPimTodoAccessBackendSQL::matchRegexp() not implemented !!
 
 #if 0
 
@@ -686,7 +686,7 @@ QArray<int> OTodoAccessBackendSQL::matchRegexp(  const QRegExp &r ) const
 
 
 
-        QMap<int, OTodo>::ConstIterator it;
+        QMap<int, OPimTodo>::ConstIterator it;
         for (it = m_events.begin(); it != m_events.end(); ++it ) {
 		if ( it.data().match( r ) )
 			m_currentQuery[arraycounter++] = it.data().uid();
@@ -700,26 +700,26 @@ QArray<int> OTodoAccessBackendSQL::matchRegexp(  const QRegExp &r ) const
 	QArray<int> empty;
 	return empty;
 }
-QBitArray OTodoAccessBackendSQL::supports()const {
+QBitArray OPimTodoAccessBackendSQL::supports()const {
 
 	return sup();
 }
 
-QBitArray OTodoAccessBackendSQL::sup() const{
+QBitArray OPimTodoAccessBackendSQL::sup() const{
 
-	QBitArray ar( OTodo::CompletedDate + 1 );
+	QBitArray ar( OPimTodo::CompletedDate + 1 );
 	ar.fill( true );
-	ar[OTodo::CrossReference] = false;
-	ar[OTodo::State ] = false;
-	ar[OTodo::Reminders] = false;
-	ar[OTodo::Notifiers] = false;
-	ar[OTodo::Maintainer] = false;
+	ar[OPimTodo::CrossReference] = false;
+	ar[OPimTodo::State ] = false;
+	ar[OPimTodo::Reminders] = false;
+	ar[OPimTodo::Notifiers] = false;
+	ar[OPimTodo::Maintainer] = false;
 	
 	return ar;
 }
 
-void OTodoAccessBackendSQL::removeAllCompleted(){
-#warning OTodoAccessBackendSQL::removeAllCompleted() not implemented !!
+void OPimTodoAccessBackendSQL::removeAllCompleted(){
+#warning OPimTodoAccessBackendSQL::removeAllCompleted() not implemented !!
 
 }
 

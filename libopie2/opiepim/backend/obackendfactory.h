@@ -60,7 +60,7 @@ class OBackendPrivate;
  * This class as the whole PIM Api is making use of templates
  *
  * <pre>
- *   OTodoAccessBackend* backend = OBackEndFactory<OTodoAccessBackend>::Default("todo", QString::null );
+ *   OPimTodoAccessBackend* backend = OBackEndFactory<OPimTodoAccessBackend>::Default("todo", QString::null );
  *   backend->load();
  * </pre>
  *
@@ -108,23 +108,23 @@ class OBackendFactory
 		case TODO:
 #ifdef __USE_SQL
 			if ( backend == "sql" )
-				return (T*) new OTodoAccessBackendSQL("");
+				return (T*) new OPimTodoAccessBackendSQL("");
 #else
 			if ( backend == "sql" )
 				qWarning ("OBackendFactory:: sql Backend for TODO not implemented! Using XML instead!");
 #endif
 
-			return (T*) new OTodoAccessXML( appName );
+			return (T*) new OPimTodoAccessXML( appName );
 		case CONTACT:
 #ifdef __USE_SQL
 			if ( backend == "sql" )
-				return (T*) new OContactAccessBackend_SQL("");
+				return (T*) new OPimContactAccessBackend_SQL("");
 #else
 			if ( backend == "sql" )
 				qWarning ("OBackendFactory:: sql Backend for CONTACT not implemented! Using XML instead!");
 #endif
 
-			return (T*) new OContactAccessBackend_XML( appName );
+			return (T*) new OPimContactAccessBackend_XML( appName );
 		case DATE:
 #ifdef __USE_SQL
 			if ( backend == "sql" )

@@ -54,7 +54,7 @@ using namespace Opie;
 
 
 namespace Opie {
-OContactAccessBackend_XML::OContactAccessBackend_XML ( const QString& appname, const QString& filename ):
+OPimContactAccessBackend_XML::OPimContactAccessBackend_XML ( const QString& appname, const QString& filename ):
 	m_changed( false )
 {
 	// Just m_contactlist should call delete if an entry
@@ -78,7 +78,7 @@ OContactAccessBackend_XML::OContactAccessBackend_XML ( const QString& appname, c
 	load ();
 }
 
-bool OContactAccessBackend_XML::save()
+bool OPimContactAccessBackend_XML::save()
 {
 
 	if ( !m_changed )
@@ -104,7 +104,7 @@ bool OContactAccessBackend_XML::save()
 	out = "";
 
 	// Write all contacts
-	QListIterator<OContact> it( m_contactList );
+	QListIterator<OPimContact> it( m_contactList );
 	for ( ; it.current(); ++it ) {
 		// qWarning(" Uid %d at Offset: %x", (*it)->uid(), idx_offset );
 		out += "<Contact ";
@@ -148,7 +148,7 @@ bool OContactAccessBackend_XML::save()
 	return true;
 }
 
-bool OContactAccessBackend_XML::load ()
+bool OPimContactAccessBackend_XML::load ()
 {
 	m_contactList.clear();
 	m_uidToContact.clear();
@@ -167,7 +167,7 @@ bool OContactAccessBackend_XML::load ()
 	return true;
 }
 
-void OContactAccessBackend_XML::clear ()
+void OPimContactAccessBackend_XML::clear ()
 {
 	m_contactList.clear();
 	m_uidToContact.clear();
@@ -175,7 +175,7 @@ void OContactAccessBackend_XML::clear ()
 	m_changed = false;
 }
 
-bool OContactAccessBackend_XML::wasChangedExternally()
+bool OPimContactAccessBackend_XML::wasChangedExternally()
 {
 	QFileInfo fi( m_fileName );
 
@@ -184,12 +184,12 @@ bool OContactAccessBackend_XML::wasChangedExternally()
 	return (lastmod != m_readtime);
 }
 
-QArray<int> OContactAccessBackend_XML::allRecords() const
+QArray<int> OPimContactAccessBackend_XML::allRecords() const
 {
 	QArray<int> uid_list( m_contactList.count() );
 
 	uint counter = 0;
-	QListIterator<OContact> it( m_contactList );
+	QListIterator<OPimContact> it( m_contactList );
 	for( ; it.current(); ++it ){
 		uid_list[counter++] = (*it)->uid();
 	}
@@ -197,11 +197,11 @@ QArray<int> OContactAccessBackend_XML::allRecords() const
 	return ( uid_list );
 }
 
-OContact OContactAccessBackend_XML::find ( int uid ) const
+OPimContact OPimContactAccessBackend_XML::find ( int uid ) const
 {
-	OContact foundContact; //Create empty contact
+	OPimContact foundContact; //Create empty contact
 
-	OContact* found = m_uidToContact.find( QString().setNum( uid ) );
+	OPimContact* found = m_uidToContact.find( QString().setNum( uid ) );
 
 	if ( found ){
 		foundContact = *found;
@@ -210,12 +210,12 @@ OContact OContactAccessBackend_XML::find ( int uid ) const
 	return ( foundContact );
 }
 
-QArray<int> OContactAccessBackend_XML::queryByExample ( const OContact &query, int settings,
+QArray<int> OPimContactAccessBackend_XML::queryByExample ( const OPimContact &query, int settings,
 							const QDateTime& d )
 {
 
 	QArray<int> m_currentQuery( m_contactList.count() );
-	QListIterator<OContact> it( m_contactList );
+	QListIterator<OPimContact> it( m_contactList );
 	uint arraycounter = 0;
 
 	for( ; it.current(); ++it ){
@@ -240,19 +240,19 @@ QArray<int> OContactAccessBackend_XML::queryByExample ( const OContact &query, i
 
 				if ( queryDate->isValid() ){
 					if(  checkDate->isValid() ){
-						if ( settings & OContactAccess::DateYear ){
+						if ( settings & OPimContactAccess::DateYear ){
 							if ( queryDate->year() != checkDate->year() )
 								allcorrect = false;
 						}
-						if ( settings & OContactAccess::DateMonth ){
+						if ( settings & OPimContactAccess::DateMonth ){
 							if ( queryDate->month() != checkDate->month() )
 								allcorrect = false;
 						}
-						if ( settings & OContactAccess::DateDay ){
+						if ( settings & OPimContactAccess::DateDay ){
 							if ( queryDate->day() != checkDate->day() )
 								allcorrect = false;
 						}
-						if ( settings & OContactAccess::DateDiff ) {
+						if ( settings & OPimContactAccess::DateDiff ) {
 							QDate current;
 							// If we get an additional date, we
 							// will take this date instead of
@@ -301,32 +301,32 @@ QArray<int> OContactAccessBackend_XML::queryByExample ( const OContact &query, i
 			default:
 				/* Just compare fields which are not empty in the query object */
 				if ( !query.field(i).isEmpty() ){
-					switch ( settings & ~( OContactAccess::IgnoreCase
-							       | OContactAccess::DateDiff
-							       | OContactAccess::DateYear
-							       | OContactAccess::DateMonth
-							       | OContactAccess::DateDay
-							       | OContactAccess::MatchOne
+					switch ( settings & ~( OPimContactAccess::IgnoreCase
+							       | OPimContactAccess::DateDiff
+							       | OPimContactAccess::DateYear
+							       | OPimContactAccess::DateMonth
+							       | OPimContactAccess::DateDay
+							       | OPimContactAccess::MatchOne
 							       ) ){
 
-					case OContactAccess::RegExp:{
+					case OPimContactAccess::RegExp:{
 						QRegExp expr ( query.field(i),
-							       !(settings & OContactAccess::IgnoreCase),
+							       !(settings & OPimContactAccess::IgnoreCase),
 							       false );
 						if ( expr.find ( (*it)->field(i), 0 ) == -1 )
 							allcorrect = false;
 					}
 						break;
-					case OContactAccess::WildCards:{
+					case OPimContactAccess::WildCards:{
 						QRegExp expr ( query.field(i),
-							       !(settings & OContactAccess::IgnoreCase),
+							       !(settings & OPimContactAccess::IgnoreCase),
 							       true );
 						if ( expr.find ( (*it)->field(i), 0 ) == -1 )
 							allcorrect = false;
 					}
 						break;
-					case OContactAccess::ExactMatch:{
-						if (settings & OContactAccess::IgnoreCase){
+					case OPimContactAccess::ExactMatch:{
+						if (settings & OPimContactAccess::IgnoreCase){
 							if ( query.field(i).upper() !=
 							     (*it)->field(i).upper() )
 								allcorrect = false;
@@ -351,10 +351,10 @@ QArray<int> OContactAccessBackend_XML::queryByExample ( const OContact &query, i
 	return m_currentQuery;
 }
 
-QArray<int> OContactAccessBackend_XML::matchRegexp(  const QRegExp &r ) const
+QArray<int> OPimContactAccessBackend_XML::matchRegexp(  const QRegExp &r ) const
 {
 	QArray<int> m_currentQuery( m_contactList.count() );
-	QListIterator<OContact> it( m_contactList );
+	QListIterator<OPimContact> it( m_contactList );
 	uint arraycounter = 0;
 
 	for( ; it.current(); ++it ){
@@ -369,58 +369,58 @@ QArray<int> OContactAccessBackend_XML::matchRegexp(  const QRegExp &r ) const
 	return m_currentQuery;
 }
 
-const uint OContactAccessBackend_XML::querySettings()
+const uint OPimContactAccessBackend_XML::querySettings()
 {
-	return ( OContactAccess::WildCards
-		 | OContactAccess::IgnoreCase
-		 | OContactAccess::RegExp
-		 | OContactAccess::ExactMatch
-		 | OContactAccess::DateDiff
-		 | OContactAccess::DateYear
-		 | OContactAccess::DateMonth
-		 | OContactAccess::DateDay
+	return ( OPimContactAccess::WildCards
+		 | OPimContactAccess::IgnoreCase
+		 | OPimContactAccess::RegExp
+		 | OPimContactAccess::ExactMatch
+		 | OPimContactAccess::DateDiff
+		 | OPimContactAccess::DateYear
+		 | OPimContactAccess::DateMonth
+		 | OPimContactAccess::DateDay
 		 );
 }
 
-bool OContactAccessBackend_XML::hasQuerySettings (uint querySettings) const
+bool OPimContactAccessBackend_XML::hasQuerySettings (uint querySettings) const
 {
-	/* OContactAccess::IgnoreCase, DateDiff, DateYear, DateMonth, DateDay
+	/* OPimContactAccess::IgnoreCase, DateDiff, DateYear, DateMonth, DateDay
 	 * may be added with any of the other settings. IgnoreCase should never used alone.
 	 * Wildcards, RegExp, ExactMatch should never used at the same time...
 	 */
 
 	// Step 1: Check whether the given settings are supported by this backend
 	if ( ( querySettings & ( 
-				OContactAccess::IgnoreCase
-				| OContactAccess::WildCards
-				| OContactAccess::DateDiff
-				| OContactAccess::DateYear
-				| OContactAccess::DateMonth
-				| OContactAccess::DateDay
-				| OContactAccess::RegExp
-				| OContactAccess::ExactMatch
+				OPimContactAccess::IgnoreCase
+				| OPimContactAccess::WildCards
+				| OPimContactAccess::DateDiff
+				| OPimContactAccess::DateYear
+				| OPimContactAccess::DateMonth
+				| OPimContactAccess::DateDay
+				| OPimContactAccess::RegExp
+				| OPimContactAccess::ExactMatch
 			       ) ) != querySettings )
 		return false;
 
 	// Step 2: Check whether the given combinations are ok..
 
 	// IngoreCase alone is invalid
-	if ( querySettings == OContactAccess::IgnoreCase )
+	if ( querySettings == OPimContactAccess::IgnoreCase )
 		return false;
 
 	// WildCards, RegExp and ExactMatch should never used at the same time 
-	switch ( querySettings & ~( OContactAccess::IgnoreCase
-				    | OContactAccess::DateDiff
-				    | OContactAccess::DateYear
-				    | OContactAccess::DateMonth
-				    | OContactAccess::DateDay
+	switch ( querySettings & ~( OPimContactAccess::IgnoreCase
+				    | OPimContactAccess::DateDiff
+				    | OPimContactAccess::DateYear
+				    | OPimContactAccess::DateMonth
+				    | OPimContactAccess::DateDay
 				    )
 		 ){
-	case OContactAccess::RegExp:
+	case OPimContactAccess::RegExp:
 		return ( true );
-	case OContactAccess::WildCards:
+	case OPimContactAccess::WildCards:
 		return ( true );
-	case OContactAccess::ExactMatch:
+	case OPimContactAccess::ExactMatch:
 		return ( true );
 	case 0: // one of the upper removed bits were set..
 		return ( true );
@@ -430,7 +430,7 @@ bool OContactAccessBackend_XML::hasQuerySettings (uint querySettings) const
 }
 
 // Currently only asc implemented..
-QArray<int> OContactAccessBackend_XML::sorted( bool asc,  int , int ,  int )
+QArray<int> OPimContactAccessBackend_XML::sorted( bool asc,  int , int ,  int )
 {
 	QMap<QString, int> nameToUid;
 	QStringList names;
@@ -438,7 +438,7 @@ QArray<int> OContactAccessBackend_XML::sorted( bool asc,  int , int ,  int )
 
 	// First fill map and StringList with all Names
 	// Afterwards sort namelist and use map to fill array to return..
-	QListIterator<OContact> it( m_contactList );
+	QListIterator<OPimContact> it( m_contactList );
 	for( ; it.current(); ++it ){
 		names.append( (*it)->fileAs() + QString::number( (*it)->uid() ) );
 		nameToUid.insert( (*it)->fileAs() + QString::number( (*it)->uid() ), (*it)->uid() );
@@ -458,7 +458,7 @@ QArray<int> OContactAccessBackend_XML::sorted( bool asc,  int , int ,  int )
 
 }
 
-bool OContactAccessBackend_XML::add ( const OContact &newcontact )
+bool OPimContactAccessBackend_XML::add ( const OPimContact &newcontact )
 {
 	//qWarning("odefaultbackend: ACTION::ADD");
 	updateJournal (newcontact, ACTION_ADD);
@@ -469,14 +469,14 @@ bool OContactAccessBackend_XML::add ( const OContact &newcontact )
 	return true;
 }
 
-bool OContactAccessBackend_XML::replace ( const OContact &contact )
+bool OPimContactAccessBackend_XML::replace ( const OPimContact &contact )
 {
 	m_changed = true;
 
-	OContact* found = m_uidToContact.find ( QString().setNum( contact.uid() ) );
+	OPimContact* found = m_uidToContact.find ( QString().setNum( contact.uid() ) );
 
 	if ( found ) {
-		OContact* newCont = new OContact( contact );
+		OPimContact* newCont = new OPimContact( contact );
 
 		updateJournal ( *newCont, ACTION_REPLACE);
 		m_contactList.removeRef ( found );
@@ -491,11 +491,11 @@ bool OContactAccessBackend_XML::replace ( const OContact &contact )
 		return false;
 }
 
-bool OContactAccessBackend_XML::remove ( int uid )
+bool OPimContactAccessBackend_XML::remove ( int uid )
 {
 	m_changed = true;
 
-	OContact* found = m_uidToContact.find ( QString().setNum( uid ) );
+	OPimContact* found = m_uidToContact.find ( QString().setNum( uid ) );
 
 	if ( found ) {
 		updateJournal ( *found, ACTION_REMOVE);
@@ -507,21 +507,21 @@ bool OContactAccessBackend_XML::remove ( int uid )
 		return false;
 }
 
-bool OContactAccessBackend_XML::reload(){
+bool OPimContactAccessBackend_XML::reload(){
 	/* Reload is the same as load in this implementation */
 	return ( load() );
 }
 
-void OContactAccessBackend_XML::addContact_p( const OContact &newcontact )
+void OPimContactAccessBackend_XML::addContact_p( const OPimContact &newcontact )
 {
-	OContact* contRef = new OContact( newcontact );
+	OPimContact* contRef = new OPimContact( newcontact );
 
 	m_contactList.append ( contRef );
 	m_uidToContact.insert( QString().setNum( newcontact.uid() ), contRef );
 }
 
 /* This function loads the xml-database and the journalfile */
-bool OContactAccessBackend_XML::load( const QString filename, bool isJournal )
+bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal )
 {
 
 	/* We use the time of the last read to check if the file was
@@ -590,7 +590,7 @@ bool OContactAccessBackend_XML::load( const QString filename, bool isJournal )
 	dict.insert( "action", new int(JOURNALACTION) );
 	dict.insert( "actionrow", new int(JOURNALROW) );
 
-	//qWarning( "OContactDefaultBackEnd::loading %s", filename.latin1() );
+	//qWarning( "OPimContactDefaultBackEnd::loading %s", filename.latin1() );
 
 	XMLElement *root = XMLElement::load( filename );
 	if(root != 0l ){ // start parsing
@@ -598,13 +598,13 @@ bool OContactAccessBackend_XML::load( const QString filename, bool isJournal )
 		 * Contact-Class
 		 */
 		XMLElement *element = root->firstChild();
-		//qWarning("OContactAccess::load tagName(): %s", root->tagName().latin1() );
+		//qWarning("OPimContactAccess::load tagName(): %s", root->tagName().latin1() );
 		element = element->firstChild();
 
 		/* Search Tag "Contacts" which is the parent of all Contacts */
 		while( element && !isJournal ){
 			if( element->tagName() != QString::fromLatin1("Contacts") ){
-				//qWarning ("OContactDefBack::Searching for Tag \"Contacts\"! Found: %s",
+				//qWarning ("OPimContactDefBack::Searching for Tag \"Contacts\"! Found: %s",
 				//	  element->tagName().latin1());
 				element = element->nextChild();
 			} else {
@@ -615,7 +615,7 @@ bool OContactAccessBackend_XML::load( const QString filename, bool isJournal )
 		/* Parse all Contacts and ignore unknown tags */
 		while( element ){
 			if( element->tagName() != QString::fromLatin1("Contact") ){
-				//qWarning ("OContactDefBack::Searching for Tag \"Contact\"! Found: %s",
+				//qWarning ("OPimContactDefBack::Searching for Tag \"Contact\"! Found: %s",
 				//	  element->tagName().latin1());
 				element = element->nextChild();
 				continue;
@@ -623,7 +623,7 @@ bool OContactAccessBackend_XML::load( const QString filename, bool isJournal )
 			/* Found alement with tagname "contact", now parse and store all
 			 * attributes contained
 			 */
-			//qWarning("OContactDefBack::load element tagName() : %s",
+			//qWarning("OPimContactDefBack::load element tagName() : %s",
 			//	 element->tagName().latin1() );
 			QString dummy;
 			foundAction = false;
@@ -670,7 +670,7 @@ bool OContactAccessBackend_XML::load( const QString filename, bool isJournal )
 				}
 			}
 			/* now generate the Contact contact */
-			OContact contact( contactMap );
+			OPimContact contact( contactMap );
 
 			for (customIt = customMap.begin(); customIt != customMap.end(); ++customIt ) {
 				contact.setCustomField( customIt.key(),  customIt.data() );
@@ -713,7 +713,7 @@ bool OContactAccessBackend_XML::load( const QString filename, bool isJournal )
 }
 
 
-void OContactAccessBackend_XML::updateJournal( const OContact& cnt,
+void OPimContactAccessBackend_XML::updateJournal( const OPimContact& cnt,
 					       journal_action action )
 {
 	QFile f( m_journalName );
@@ -741,7 +741,7 @@ void OContactAccessBackend_XML::updateJournal( const OContact& cnt,
 	f.writeBlock( cstr.data(), cstr.length() );
 }
 
-void OContactAccessBackend_XML::removeJournal()
+void OPimContactAccessBackend_XML::removeJournal()
 {
 	QFile f ( m_journalName );
 	if ( f.exists() )

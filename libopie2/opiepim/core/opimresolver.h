@@ -30,7 +30,7 @@
 #define OPIMRESOLVER_H
 
 /* OPIE */
-#include <opie2/otemplatebase.h>
+#include <opie2/opimtemplatebase.h>
 
 /* QT */
 #include <qstring.h>

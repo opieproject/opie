@@ -39,7 +39,7 @@
 #ifndef _OCONTACTACCESSBACKEND_H_
 #define _OCONTACTACCESSBACKEND_H_
 
-#include <opie2/ocontact.h>
+#include <opie2/opimcontact.h>
 #include <opie2/opimaccessbackend.h>
 
 #include <qregexp.h>
@@ -52,19 +52,19 @@ namespace Opie {
  * if you want to provide your own storage.
  * In all queries a list of uids is passed on instead of loading the actual record!
  *
- * @see OContactAccessBackend_VCard
- * @see OContactAccessBackend_XML
+ * @see OPimContactAccessBackend_VCard
+ * @see OPimContactAccessBackend_XML
  */
-class OContactAccessBackend: public OPimAccessBackend<OContact> {
+class OPimContactAccessBackend: public OPimAccessBackend<OPimContact> {
  public:
 	/**
 	 * @todo make non line in regard to BC guide of KDE
 	 */
-	OContactAccessBackend() {}
+	OPimContactAccessBackend() {}
 	/**
 	 * @todo make non inline in regard to the BC guide of KDE
 	 */
-	virtual ~OContactAccessBackend() {}
+	virtual ~OPimContactAccessBackend() {}
 
 
 	/**

@@ -31,14 +31,14 @@
 
 #include <qbitarray.h>
 
-#include <opie2/otodo.h>
+#include <opie2/opimtodo.h>
 #include <opie2/opimaccessbackend.h>
 
 namespace Opie {
-class OTodoAccessBackend : public OPimAccessBackend<OTodo> {
+class OPimTodoAccessBackend : public OPimAccessBackend<OPimTodo> {
 public:
-    OTodoAccessBackend();
-    ~OTodoAccessBackend();
+    OPimTodoAccessBackend();
+    ~OPimTodoAccessBackend();
     virtual QArray<int> effectiveToDos( const QDate& start,
                                         const QDate& end,
                                         bool includeNoDates ) = 0;

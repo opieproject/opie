@@ -52,28 +52,28 @@ public:
 
     QArray<int> allRecords()const;
     QArray<int> matchRegexp(const QRegExp &r) const;
-    QArray<int> queryByExample( const OEvent&, int, const QDateTime& d = QDateTime() );
-    OEvent find( int uid )const;
+    QArray<int> queryByExample( const OPimEvent&, int, const QDateTime& d = QDateTime() );
+    OPimEvent find( int uid )const;
     void clear();
-    bool add( const OEvent& ev );
+    bool add( const OPimEvent& ev );
     bool remove( int uid );
-    bool replace( const OEvent& ev );
+    bool replace( const OPimEvent& ev );
 
     QArray<UID> rawEvents()const;
     QArray<UID> rawRepeats()const;
     QArray<UID> nonRepeats()const;
 
-    OEvent::ValueList directNonRepeats();
-    OEvent::ValueList directRawRepeats();
+    OPimEvent::ValueList directNonRepeats();
+    OPimEvent::ValueList directRawRepeats();
 
 private:
     bool m_changed :1 ;
     bool loadFile();
-    inline void finalizeRecord( OEvent& ev );
-    inline void setField( OEvent&, int field, const QString& val );
+    inline void finalizeRecord( OPimEvent& ev );
+    inline void setField( OPimEvent&, int field, const QString& val );
     QString m_name;
-    QMap<int, OEvent> m_raw;
-    QMap<int, OEvent> m_rep;
+    QMap<int, OPimEvent> m_raw;
+    QMap<int, OPimEvent> m_rep;
 
     struct Data;
     Data* data;

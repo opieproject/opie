@@ -27,10 +27,10 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#include "oevent.h"
+#include "opimevent.h"
 
 /* OPIE */
-#include <opie2/orecur.h>
+#include <opie2/opimrecurrence.h>
 #include <opie2/opimresolver.h>
 #include <opie2/opimnotifymanager.h>
 #include <qpe/categories.h>
@@ -70,8 +70,8 @@ int OCalendarHelper::ocurrence( const QDate& date )
 int OCalendarHelper::dayOfWeek( char day )
 {
     int dayOfWeek = 1;
-    char i = ORecur::MON;
-    while ( !( i & day ) && i <= ORecur::SUN )
+    char i = OPimRecurrence::MON;
+    while ( !( i & day ) && i <= OPimRecurrence::SUN )
     {
         i <<= 1;
         ++dayOfWeek;
@@ -87,7 +87,7 @@ int OCalendarHelper::monthDiff( const QDate& first, const QDate& second )
 }
 
 
-struct OEvent::Data : public QShared
+struct OPimEvent::Data : public QShared
 {
     Data() : QShared()
     {
@@ -105,7 +105,7 @@ struct OEvent::Data : public QShared
     QString description;
     QString location;
     OPimNotifyManager* manager;
-    ORecur* recur;
+    OPimRecurrence* recur;
     QString note;
     QDateTime created;
     QDateTime start;
@@ -117,21 +117,21 @@ bool isAllDay : 1;
 };
 
 
-OEvent::OEvent( int uid )
+OPimEvent::OPimEvent( int uid )
         : OPimRecord( uid )
 {
     data = new Data;
 }
 
 
-OEvent::OEvent( const OEvent& ev )
+OPimEvent::OPimEvent( const OPimEvent& ev )
         : OPimRecord( ev ), data( ev.data )
 {
     data->ref();
 }
 
 
-OEvent::OEvent( const QMap<int, QString> map )
+OPimEvent::OPimEvent( const QMap<int, QString> map )
         : OPimRecord( 0 )
 {
     data = new Data;
@@ -140,7 +140,7 @@ OEvent::OEvent( const QMap<int, QString> map )
 }
 
 
-OEvent::~OEvent()
+OPimEvent::~OPimEvent()
 {
     if ( data->deref() )
     {
@@ -150,7 +150,7 @@ OEvent::~OEvent()
 }
 
 
-OEvent& OEvent::operator=( const OEvent& ev )
+OPimEvent& OPimEvent::operator=( const OPimEvent& ev )
 {
     if ( this == &ev ) return * this;
 
@@ -164,33 +164,33 @@ OEvent& OEvent::operator=( const OEvent& ev )
 }
 
 
-QString OEvent::description() const
+QString OPimEvent::description() const
 {
     return data->description;
 }
 
 
-void OEvent::setDescription( const QString& description )
+void OPimEvent::setDescription( const QString& description )
 {
     changeOrModify();
     data->description = description;
 }
 
 
-void OEvent::setLocation( const QString& loc )
+void OPimEvent::setLocation( const QString& loc )
 {
     changeOrModify();
     data->location = loc;
 }
 
 
-QString OEvent::location() const
+QString OPimEvent::location() const
 {
     return data->location;
 }
 
 
-OPimNotifyManager &OEvent::notifiers() const
+OPimNotifyManager &OPimEvent::notifiers() const
 {
     // I hope we can skip the changeOrModify here
     // the notifier should take care of it
@@ -202,7 +202,7 @@ OPimNotifyManager &OEvent::notifiers() const
 }
 
 
-bool OEvent::hasNotifiers() const
+bool OPimEvent::hasNotifiers() const
 {
     if ( !data->manager )
         return false;
@@ -214,59 +214,59 @@ bool OEvent::hasNotifiers() const
 }
 
 
-ORecur OEvent::recurrence() const
+OPimRecurrence OPimEvent::recurrence() const
 {
     if ( !data->recur )
-        data->recur = new ORecur;
+        data->recur = new OPimRecurrence;
 
     return *data->recur;
 }
 
 
-void OEvent::setRecurrence( const ORecur& rec )
+void OPimEvent::setRecurrence( const OPimRecurrence& rec )
 {
     changeOrModify();
     if ( data->recur )
         ( *data->recur ) = rec;
     else
-        data->recur = new ORecur( rec );
+        data->recur = new OPimRecurrence( rec );
 }
 
 
-bool OEvent::hasRecurrence() const
+bool OPimEvent::hasRecurrence() const
 {
     if ( !data->recur ) return false;
     return data->recur->doesRecur();
 }
 
 
-QString OEvent::note() const
+QString OPimEvent::note() const
 {
     return data->note;
 }
 
 
-void OEvent::setNote( const QString& note )
+void OPimEvent::setNote( const QString& note )
 {
     changeOrModify();
     data->note = note;
 }
 
 
-QDateTime OEvent::createdDateTime() const
+QDateTime OPimEvent::createdDateTime() const
 {
     return data->created;
 }
 
 
-void OEvent::setCreatedDateTime( const QDateTime& time )
+void OPimEvent::setCreatedDateTime( const QDateTime& time )
 {
     changeOrModify();
     data->created = time;
 }
 
 
-QDateTime OEvent::startDateTime() const
+QDateTime OPimEvent::startDateTime() const
 {
     if ( data->isAllDay )
         return QDateTime( data->start.date(), QTime( 0, 0, 0 ) );
@@ -274,24 +274,24 @@ QDateTime OEvent::startDateTime() const
 }
 
 
-QDateTime OEvent::startDateTimeInZone() const
+QDateTime OPimEvent::startDateTimeInZone() const
 {
     /* if no timezone, or all day event or if the current and this timeZone match... */
-    if ( data->timezone.isEmpty() || data->isAllDay || data->timezone == OTimeZone::current().timeZone() ) return startDateTime();
+    if ( data->timezone.isEmpty() || data->isAllDay || data->timezone == OPimTimeZone::current().timeZone() ) return startDateTime();
 
-    OTimeZone zone( data->timezone );
-    return zone.toDateTime( data->start, OTimeZone::current() );
+    OPimTimeZone zone( data->timezone );
+    return zone.toDateTime( data->start, OPimTimeZone::current() );
 }
 
 
-void OEvent::setStartDateTime( const QDateTime& dt )
+void OPimEvent::setStartDateTime( const QDateTime& dt )
 {
     changeOrModify();
     data->start = dt;
 }
 
 
-QDateTime OEvent::endDateTime() const
+QDateTime OPimEvent::endDateTime() const
 {
     /*
      * if all Day event the end time needs
@@ -303,36 +303,36 @@ QDateTime OEvent::endDateTime() const
 }
 
 
-QDateTime OEvent::endDateTimeInZone() const
+QDateTime OPimEvent::endDateTimeInZone() const
 {
     /* if no timezone, or all day event or if the current and this timeZone match... */
-    if ( data->timezone.isEmpty() || data->isAllDay || data->timezone == OTimeZone::current().timeZone() ) return endDateTime();
+    if ( data->timezone.isEmpty() || data->isAllDay || data->timezone == OPimTimeZone::current().timeZone() ) return endDateTime();
 
-    OTimeZone zone( data->timezone );
-    return zone.toDateTime( data->end, OTimeZone::current() );
+    OPimTimeZone zone( data->timezone );
+    return zone.toDateTime( data->end, OPimTimeZone::current() );
 }
 
 
-void OEvent::setEndDateTime( const QDateTime& dt )
+void OPimEvent::setEndDateTime( const QDateTime& dt )
 {
     changeOrModify();
     data->end = dt;
 }
 
 
-bool OEvent::isMultipleDay() const
+bool OPimEvent::isMultipleDay() const
 {
     return data->end.date().day() - data->start.date().day();
 }
 
 
-bool OEvent::isAllDay() const
+bool OPimEvent::isAllDay() const
 {
     return data->isAllDay;
 }
 
 
-void OEvent::setAllDay( bool allDay )
+void OPimEvent::setAllDay( bool allDay )
 {
     changeOrModify();
     data->isAllDay = allDay;
@@ -340,21 +340,21 @@ void OEvent::setAllDay( bool allDay )
 }
 
 
-void OEvent::setTimeZone( const QString& tz )
+void OPimEvent::setTimeZone( const QString& tz )
 {
     changeOrModify();
     data->timezone = tz;
 }
 
 
-QString OEvent::timeZone() const
+QString OPimEvent::timeZone() const
 {
     if ( data->isAllDay ) return QString::fromLatin1( "UTC" );
     return data->timezone;
 }
 
 
-bool OEvent::match( const QRegExp& re ) const
+bool OPimEvent::match( const QRegExp& re ) const
 {
     if ( re.match( data->description ) != -1 )
     {
@@ -385,7 +385,7 @@ bool OEvent::match( const QRegExp& re ) const
 }
 
 
-QString OEvent::toRichText() const
+QString OPimEvent::toRichText() const
 {
     QString text, value;
 
@@ -454,7 +454,7 @@ QString OEvent::toRichText() const
 }
 
 
-QString OEvent::toShortText() const
+QString OPimEvent::toShortText() const
 {
     QString text;
     text += QString::number( startDateTime().date().day() );
@@ -472,37 +472,37 @@ QString OEvent::toShortText() const
 }
 
 
-QString OEvent::type() const
+QString OPimEvent::type() const
 {
-    return QString::fromLatin1( "OEvent" );
+    return QString::fromLatin1( "OPimEvent" );
 }
 
 
-QString OEvent::recordField( int /*id */ ) const
+QString OPimEvent::recordField( int /*id */ ) const
 {
     return QString::null;
 }
 
 
-int OEvent::rtti()
+int OPimEvent::rtti()
 {
     return OPimResolver::DateBook;
 }
 
 
-bool OEvent::loadFromStream( QDataStream& )
+bool OPimEvent::loadFromStream( QDataStream& )
 {
     return true;
 }
 
 
-bool OEvent::saveToStream( QDataStream& ) const
+bool OPimEvent::saveToStream( QDataStream& ) const
 {
     return true;
 }
 
 
-void OEvent::changeOrModify()
+void OPimEvent::changeOrModify()
 {
     if ( data->count != 1 )
     {
@@ -515,7 +515,7 @@ void OEvent::changeOrModify()
             d2->manager = new OPimNotifyManager( *data->manager );
 
         if ( data->recur )
-            d2->recur = new ORecur( *data->recur );
+            d2->recur = new OPimRecurrence( *data->recur );
 
         d2->note = data->note;
         d2->created = data->created;
@@ -536,7 +536,7 @@ void OEvent::changeOrModify()
 }
 
 
-void OEvent::deref()
+void OPimEvent::deref()
 {
     if ( data->deref() )
     {
@@ -549,26 +549,26 @@ void OEvent::deref()
 // Thus, we could remove the stuff there and use this
 // for it and for all other places..
 // Encoding should happen at one place, only ! (eilers)
-QMap<int, QString> OEvent::toMap() const
+QMap<int, QString> OPimEvent::toMap() const
 {
     QMap<int, QString> retMap;
 
-    retMap.insert( OEvent::FUid, QString::number( uid() ) );
-    retMap.insert( OEvent::FCategories, Qtopia::escapeString( Qtopia::Record::idsToString( categories() ) ) );
-    retMap.insert( OEvent::FDescription, Qtopia::escapeString( description() ) );
-    retMap.insert( OEvent::FLocation, Qtopia::escapeString( location() ) );
-    retMap.insert( OEvent::FType, isAllDay() ? "AllDay" : "" );
+    retMap.insert( OPimEvent::FUid, QString::number( uid() ) );
+    retMap.insert( OPimEvent::FCategories, Qtopia::escapeString( Qtopia::Record::idsToString( categories() ) ) );
+    retMap.insert( OPimEvent::FDescription, Qtopia::escapeString( description() ) );
+    retMap.insert( OPimEvent::FLocation, Qtopia::escapeString( location() ) );
+    retMap.insert( OPimEvent::FType, isAllDay() ? "AllDay" : "" );
     OPimAlarm alarm = notifiers().alarms() [ 0 ];
-    retMap.insert( OEvent::FAlarm, QString::number( alarm.dateTime().secsTo( startDateTime() ) / 60 ) );
-    retMap.insert( OEvent::FSound, ( alarm.sound() == OPimAlarm::Loud ) ? "loud" : "silent" );
+    retMap.insert( OPimEvent::FAlarm, QString::number( alarm.dateTime().secsTo( startDateTime() ) / 60 ) );
+    retMap.insert( OPimEvent::FSound, ( alarm.sound() == OPimAlarm::Loud ) ? "loud" : "silent" );
 
-    OTimeZone zone( timeZone().isEmpty() ? OTimeZone::current() : timeZone() );
-    retMap.insert( OEvent::FStart, QString::number( zone.fromUTCDateTime( zone.toDateTime( startDateTime(), OTimeZone::utc() ) ) ) );
-    retMap.insert( OEvent::FEnd, QString::number( zone.fromUTCDateTime( zone.toDateTime( endDateTime(), OTimeZone::utc() ) ) ) );
-    retMap.insert( OEvent::FNote, Qtopia::escapeString( note() ) );
-    retMap.insert( OEvent::FTimeZone, timeZone().isEmpty() ? QString( "None" ) : timeZone() );
+    OPimTimeZone zone( timeZone().isEmpty() ? OPimTimeZone::current() : timeZone() );
+    retMap.insert( OPimEvent::FStart, QString::number( zone.fromUTCDateTime( zone.toDateTime( startDateTime(), OPimTimeZone::utc() ) ) ) );
+    retMap.insert( OPimEvent::FEnd, QString::number( zone.fromUTCDateTime( zone.toDateTime( endDateTime(), OPimTimeZone::utc() ) ) ) );
+    retMap.insert( OPimEvent::FNote, Qtopia::escapeString( note() ) );
+    retMap.insert( OPimEvent::FTimeZone, timeZone().isEmpty() ? QString( "None" ) : timeZone() );
     if ( parent() )
-        retMap.insert( OEvent::FRecParent, QString::number( parent() ) );
+        retMap.insert( OPimEvent::FRecParent, QString::number( parent() ) );
     if ( children().count() )
     {
         QArray<int> childr = children();
@@ -578,73 +578,73 @@ QMap<int, QString> OEvent::toMap() const
             if ( i != 0 ) buf += " ";
             buf += QString::number( childr[ i ] );
         }
-        retMap.insert( OEvent::FRecChildren, buf );
+        retMap.insert( OPimEvent::FRecChildren, buf );
     }
 
     // Add recurrence stuff
     if ( hasRecurrence() )
     {
-        ORecur recur = recurrence();
+        OPimRecurrence recur = recurrence();
         QMap<int, QString> recFields = recur.toMap();
-        retMap.insert( OEvent::FRType, recFields[ ORecur::RType ] );
-        retMap.insert( OEvent::FRWeekdays, recFields[ ORecur::RWeekdays ] );
-        retMap.insert( OEvent::FRPosition, recFields[ ORecur::RPosition ] );
-        retMap.insert( OEvent::FRFreq, recFields[ ORecur::RFreq ] );
-        retMap.insert( OEvent::FRHasEndDate, recFields[ ORecur::RHasEndDate ] );
-        retMap.insert( OEvent::FREndDate, recFields[ ORecur::EndDate ] );
-        retMap.insert( OEvent::FRCreated, recFields[ ORecur::Created ] );
-        retMap.insert( OEvent::FRExceptions, recFields[ ORecur::Exceptions ] );
+        retMap.insert( OPimEvent::FRType, recFields[ OPimRecurrence::RType ] );
+        retMap.insert( OPimEvent::FRWeekdays, recFields[ OPimRecurrence::RWeekdays ] );
+        retMap.insert( OPimEvent::FRPosition, recFields[ OPimRecurrence::RPosition ] );
+        retMap.insert( OPimEvent::FRFreq, recFields[ OPimRecurrence::RFreq ] );
+        retMap.insert( OPimEvent::FRHasEndDate, recFields[ OPimRecurrence::RHasEndDate ] );
+        retMap.insert( OPimEvent::FREndDate, recFields[ OPimRecurrence::EndDate ] );
+        retMap.insert( OPimEvent::FRCreated, recFields[ OPimRecurrence::Created ] );
+        retMap.insert( OPimEvent::FRExceptions, recFields[ OPimRecurrence::Exceptions ] );
     }
     else
     {
-        ORecur recur = recurrence();
+        OPimRecurrence recur = recurrence();
         QMap<int, QString> recFields = recur.toMap();
-        retMap.insert( OEvent::FRType, recFields[ ORecur::RType ] );
+        retMap.insert( OPimEvent::FRType, recFields[ OPimRecurrence::RType ] );
     }
 
     return retMap;
 }
 
 
-void OEvent::fromMap( const QMap<int, QString>& map )
+void OPimEvent::fromMap( const QMap<int, QString>& map )
 {
 
     // We just want to set the UID if it is really stored.
-    if ( !map[ OEvent::FUid ].isEmpty() )
-        setUid( map[ OEvent::FUid ].toInt() );
+    if ( !map[ OPimEvent::FUid ].isEmpty() )
+        setUid( map[ OPimEvent::FUid ].toInt() );
 
-    setCategories( idsFromString( map[ OEvent::FCategories ] ) );
-    setDescription( map[ OEvent::FDescription ] );
-    setLocation( map[ OEvent::FLocation ] );
+    setCategories( idsFromString( map[ OPimEvent::FCategories ] ) );
+    setDescription( map[ OPimEvent::FDescription ] );
+    setLocation( map[ OPimEvent::FLocation ] );
 
-    if ( map[ OEvent::FType ] == "AllDay" )
+    if ( map[ OPimEvent::FType ] == "AllDay" )
         setAllDay( true );
     else
         setAllDay( false );
 
     int alarmTime = -1;
-    if ( !map[ OEvent::FAlarm ].isEmpty() )
-        alarmTime = map[ OEvent::FAlarm ].toInt();
+    if ( !map[ OPimEvent::FAlarm ].isEmpty() )
+        alarmTime = map[ OPimEvent::FAlarm ].toInt();
 
-    int sound = ( ( map[ OEvent::FSound ] == "loud" ) ? OPimAlarm::Loud : OPimAlarm::Silent );
+    int sound = ( ( map[ OPimEvent::FSound ] == "loud" ) ? OPimAlarm::Loud : OPimAlarm::Silent );
     if ( ( alarmTime != -1 ) )
     {
         QDateTime dt = startDateTime().addSecs( -1 * alarmTime * 60 );
         OPimAlarm al( sound , dt );
         notifiers().add( al );
     }
-    if ( !map[ OEvent::FTimeZone ].isEmpty() && ( map[ OEvent::FTimeZone ] != "None" ) )
+    if ( !map[ OPimEvent::FTimeZone ].isEmpty() && ( map[ OPimEvent::FTimeZone ] != "None" ) )
     {
-        setTimeZone( map[ OEvent::FTimeZone ] );
+        setTimeZone( map[ OPimEvent::FTimeZone ] );
     }
 
-    time_t start = ( time_t ) map[ OEvent::FStart ].toLong();
-    time_t end = ( time_t ) map[ OEvent::FEnd ].toLong();
+    time_t start = ( time_t ) map[ OPimEvent::FStart ].toLong();
+    time_t end = ( time_t ) map[ OPimEvent::FEnd ].toLong();
 
     /* AllDay is always in UTC */
     if ( isAllDay() )
     {
-        OTimeZone utc = OTimeZone::utc();
+        OPimTimeZone utc = OPimTimeZone::utc();
         setStartDateTime( utc.fromUTCDateTime( start ) );
         setEndDateTime ( utc.fromUTCDateTime( end ) );
         setTimeZone( "UTC" ); // make sure it is really utc
@@ -653,60 +653,60 @@ void OEvent::fromMap( const QMap<int, QString>& map )
     {
         /* to current date time */
         // qWarning(" Start is %d", start );
-        OTimeZone zone( timeZone().isEmpty() ? OTimeZone::current() : timeZone() );
+        OPimTimeZone zone( timeZone().isEmpty() ? OPimTimeZone::current() : timeZone() );
         QDateTime date = zone.toDateTime( start );
         qWarning( " Start is %s", date.toString().latin1() );
-        setStartDateTime( zone.toDateTime( date, OTimeZone::current() ) );
+        setStartDateTime( zone.toDateTime( date, OPimTimeZone::current() ) );
 
         date = zone.toDateTime( end );
-        setEndDateTime ( zone.toDateTime( date, OTimeZone::current() ) );
+        setEndDateTime ( zone.toDateTime( date, OPimTimeZone::current() ) );
     }
 
-    if ( !map[ OEvent::FRecParent ].isEmpty() )
-        setParent( map[ OEvent::FRecParent ].toInt() );
+    if ( !map[ OPimEvent::FRecParent ].isEmpty() )
+        setParent( map[ OPimEvent::FRecParent ].toInt() );
 
-    if ( !map[ OEvent::FRecChildren ].isEmpty() )
+    if ( !map[ OPimEvent::FRecChildren ].isEmpty() )
     {
-        QStringList list = QStringList::split( ' ', map[ OEvent::FRecChildren ] );
+        QStringList list = QStringList::split( ' ', map[ OPimEvent::FRecChildren ] );
         for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
         {
             addChild( ( *it ).toInt() );
         }
     }
 
-    // Fill recurrence stuff and put it directly into the ORecur-Object using fromMap..
-    if ( !map[ OEvent::FRType ].isEmpty() )
+    // Fill recurrence stuff and put it directly into the OPimRecurrence-Object using fromMap..
+    if ( !map[ OPimEvent::FRType ].isEmpty() )
     {
         QMap<int, QString> recFields;
-        recFields.insert( ORecur::RType, map[ OEvent::FRType ] );
-        recFields.insert( ORecur::RWeekdays, map[ OEvent::FRWeekdays ] );
-        recFields.insert( ORecur::RPosition, map[ OEvent::FRPosition ] );
-        recFields.insert( ORecur::RFreq, map[ OEvent::FRFreq ] );
-        recFields.insert( ORecur::RHasEndDate, map[ OEvent::FRHasEndDate ] );
-        recFields.insert( ORecur::EndDate, map[ OEvent::FREndDate ] );
-        recFields.insert( ORecur::Created, map[ OEvent::FRCreated ] );
-        recFields.insert( ORecur::Exceptions, map[ OEvent::FRExceptions ] );
-        ORecur recur( recFields );
+        recFields.insert( OPimRecurrence::RType, map[ OPimEvent::FRType ] );
+        recFields.insert( OPimRecurrence::RWeekdays, map[ OPimEvent::FRWeekdays ] );
+        recFields.insert( OPimRecurrence::RPosition, map[ OPimEvent::FRPosition ] );
+        recFields.insert( OPimRecurrence::RFreq, map[ OPimEvent::FRFreq ] );
+        recFields.insert( OPimRecurrence::RHasEndDate, map[ OPimEvent::FRHasEndDate ] );
+        recFields.insert( OPimRecurrence::EndDate, map[ OPimEvent::FREndDate ] );
+        recFields.insert( OPimRecurrence::Created, map[ OPimEvent::FRCreated ] );
+        recFields.insert( OPimRecurrence::Exceptions, map[ OPimEvent::FRExceptions ] );
+        OPimRecurrence recur( recFields );
         setRecurrence( recur );
     }
 
 }
 
 
-int OEvent::parent() const
+int OPimEvent::parent() const
 {
     return data->parent;
 }
 
 
-void OEvent::setParent( int uid )
+void OPimEvent::setParent( int uid )
 {
     changeOrModify();
     data->parent = uid;
 }
 
 
-QArray<int> OEvent::children() const
+QArray<int> OPimEvent::children() const
 {
     if ( !data->child ) return QArray<int>();
     else
@@ -714,7 +714,7 @@ QArray<int> OEvent::children() const
 }
 
 
-void OEvent::setChildren( const QArray<int>& arr )
+void OPimEvent::setChildren( const QArray<int>& arr )
 {
     changeOrModify();
     if ( data->child ) delete data->child;
@@ -724,7 +724,7 @@ void OEvent::setChildren( const QArray<int>& arr )
 }
 
 
-void OEvent::addChild( int uid )
+void OPimEvent::addChild( int uid )
 {
     changeOrModify();
     if ( !data->child )
@@ -741,7 +741,7 @@ void OEvent::addChild( int uid )
 }
 
 
-void OEvent::removeChild( int uid )
+void OPimEvent::removeChild( int uid )
 {
     if ( !data->child || !data->child->contains( uid ) ) return ;
     changeOrModify();
@@ -764,7 +764,7 @@ struct OEffectiveEvent::Data : public QShared
 {
     Data() : QShared()
     {}
-    OEvent event;
+    OPimEvent event;
     QDate date;
     QTime start, end;
     QDate startDate, endDate;
@@ -781,7 +781,7 @@ OEffectiveEvent::OEffectiveEvent()
 }
 
 
-OEffectiveEvent::OEffectiveEvent( const OEvent& ev, const QDate& startDate,
+OEffectiveEvent::OEffectiveEvent( const OPimEvent& ev, const QDate& startDate,
                                   Position pos )
 {
     data = new Data;
@@ -844,7 +844,7 @@ void OEffectiveEvent::setEndTime( const QTime& en )
 }
 
 
-void OEffectiveEvent::setEvent( const OEvent& ev )
+void OEffectiveEvent::setEvent( const OPimEvent& ev )
 {
     changeOrModify();
     data->event = ev;
@@ -890,7 +890,7 @@ QString OEffectiveEvent::note() const
 }
 
 
-OEvent OEffectiveEvent::event() const
+OPimEvent OEffectiveEvent::event() const
 {
     return data->event;
 }

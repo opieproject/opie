@@ -30,8 +30,8 @@
  * XML Backend for the OPIE-Contact Database.
  */
 
-#ifndef _OContactAccessBackend_XML_
-#define _OContactAccessBackend_XML_
+#ifndef _OPimContactAccessBackend_XML_
+#define _OPimContactAccessBackend_XML_
 
 #include <opie2/ocontactaccessbackend.h>
 #include <opie2/ocontactaccess.h>
@@ -43,12 +43,12 @@ namespace Opie {
 /* the default xml implementation */
 /**
  * This class is the XML implementation of a Contact backend
- * it does implement everything available for OContact.
+ * it does implement everything available for OPimContact.
  * @see OPimAccessBackend for more information of available methods
  */
-class OContactAccessBackend_XML : public OContactAccessBackend {
+class OPimContactAccessBackend_XML : public OPimContactAccessBackend {
  public:
-	OContactAccessBackend_XML ( const QString& appname, const QString& filename = QString::null );
+	OPimContactAccessBackend_XML ( const QString& appname, const QString& filename = QString::null );
 
 	bool save();
 
@@ -60,9 +60,9 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 
 	QArray<int> allRecords() const;
 
-	OContact find ( int uid ) const;
+	OPimContact find ( int uid ) const;
 
-	QArray<int> queryByExample ( const OContact &query, int settings, const QDateTime& d = QDateTime() );
+	QArray<int> queryByExample ( const OPimContact &query, int settings, const QDateTime& d = QDateTime() );
 
 	QArray<int> matchRegexp(  const QRegExp &r ) const;
 
@@ -72,9 +72,9 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 
 	// Currently only asc implemented..
 	QArray<int> sorted( bool asc,  int , int ,  int );
-	bool add ( const OContact &newcontact );
+	bool add ( const OPimContact &newcontact );
 
-	bool replace ( const OContact &contact );
+	bool replace ( const OPimContact &contact );
 
 	bool remove ( int uid );
 	bool reload();
@@ -83,13 +83,13 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 
 	enum journal_action { ACTION_ADD, ACTION_REMOVE, ACTION_REPLACE };
 
-	void addContact_p( const OContact &newcontact );
+	void addContact_p( const OPimContact &newcontact );
 
 	/* This function loads the xml-database and the journalfile */
 	bool load( const QString filename, bool isJournal );
 
 
-	void updateJournal( const OContact& cnt, journal_action action );
+	void updateJournal( const OPimContact& cnt, journal_action action );
 	void removeJournal();
 
  protected:
@@ -97,10 +97,10 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 	QString m_journalName;
 	QString m_fileName;
 	QString m_appName;
-	QList<OContact> m_contactList;
+	QList<OPimContact> m_contactList;
 	QDateTime m_readtime;
 
-	QDict<OContact> m_uidToContact;
+	QDict<OPimContact> m_uidToContact;
 };
 
 }

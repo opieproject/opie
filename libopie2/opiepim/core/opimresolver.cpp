@@ -72,9 +72,9 @@ OPimRecord* OPimResolver::record( int rtti ) {
     OPimRecord* rec = 0l;
     switch( rtti ) {
     case 1: /* todolist */
-        rec = new OTodo();
+        rec = new OPimTodo();
     case 2: /* contact  */
-        rec = new OContact();
+        rec = new OPimContact();
     default:
         break;
     }
@@ -211,12 +211,12 @@ OPimBase* OPimResolver::backend( int rtti ) {
     OPimBase* base = 0l;
     switch( rtti ) {
     case TodoList:
-        base = new OTodoAccess();
+        base = new OPimTodoAccess();
         break;
     case DateBook:
         break;
     case AddressBook:
-        base = new OContactAccess("Resolver");
+        base = new OPimContactAccess("Resolver");
         break;
     default:
         break;

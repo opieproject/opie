@@ -32,7 +32,7 @@
 #include <qarray.h>
 
 #include <opie2/opimaccessbackend.h>
-#include <opie2/oevent.h>
+#include <opie2/opimevent.h>
 
 namespace Opie {
 /**
@@ -40,7 +40,7 @@ namespace Opie {
  * @see OPimAccessBackend
  *
  */
-class ODateBookAccessBackend : public OPimAccessBackend<OEvent> {
+class ODateBookAccessBackend : public OPimAccessBackend<OPimEvent> {
 public:
     typedef int UID;
 
@@ -76,12 +76,12 @@ public:
      * you need to supply it with directNonRepeats.
      * This method can return empty lists if effectiveEvents is implememted
      */
-    virtual OEvent::ValueList directNonRepeats() = 0;
+    virtual OPimEvent::ValueList directNonRepeats() = 0;
 
     /**
      * Same as above but return raw repeats!
      */
-    virtual OEvent::ValueList directRawRepeats() = 0;
+    virtual OPimEvent::ValueList directRawRepeats() = 0;
 
     /* is implemented by default but you can reimplement it*/
     /**

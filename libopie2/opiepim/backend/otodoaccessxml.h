@@ -37,14 +37,14 @@
 namespace Opie {
     class XMLElement;
 
-class OTodoAccessXML : public OTodoAccessBackend {
+class OPimTodoAccessXML : public OPimTodoAccessBackend {
 public:
     /**
      * fileName if Empty we will use the default path
      */
-    OTodoAccessXML( const QString& appName,
+    OPimTodoAccessXML( const QString& appName,
                     const QString& fileName = QString::null );
-    ~OTodoAccessXML();
+    ~OPimTodoAccessXML();
 
     bool load();
     bool reload();
@@ -52,13 +52,13 @@ public:
 
     QArray<int> allRecords()const;
     QArray<int> matchRegexp(const QRegExp &r) const;
-    QArray<int> queryByExample( const OTodo&, int querysettings, const QDateTime& d = QDateTime() );
-    OTodo find( int uid )const;
+    QArray<int> queryByExample( const OPimTodo&, int querysettings, const QDateTime& d = QDateTime() );
+    OPimTodo find( int uid )const;
     void clear();
-    bool add( const OTodo& );
+    bool add( const OPimTodo& );
     bool remove( int uid );
     void removeAllCompleted();
-    bool replace( const OTodo& );
+    bool replace( const OPimTodo& );
 
     /* our functions */
     QArray<int> effectiveToDos( const QDate& start,
@@ -70,16 +70,16 @@ public:
     QBitArray supports()const;
 private:
     static QBitArray sup();
-    void todo( QAsciiDict<int>*, OTodo&,const QCString&,const QString& );
-    QString toString( const OTodo& )const;
+    void todo( QAsciiDict<int>*, OPimTodo&,const QCString&,const QString& );
+    QString toString( const OPimTodo& )const;
     QString toString( const QArray<int>& ints ) const;
-    QMap<int, OTodo> m_events;
+    QMap<int, OPimTodo> m_events;
     QString m_file;
     QString m_app;
     bool m_opened : 1;
     bool m_changed : 1;
-    class OTodoAccessXMLPrivate;
-    OTodoAccessXMLPrivate* d;
+    class OPimTodoAccessXMLPrivate;
+    OPimTodoAccessXMLPrivate* d;
     int m_year, m_month, m_day;
 
 };

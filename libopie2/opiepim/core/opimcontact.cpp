@@ -29,11 +29,11 @@
 
 #define QTOPIA_INTERNAL_CONTACT_MRE
 
-#include "ocontact.h"
+#include "opimcontact.h"
 
 /* OPIE */
 #include <opie2/opimresolver.h>
-#include <opie2/oconversion.h>
+#include <opie2/opimdateconversion.h>
 #include <qpe/stringutil.h>
 #include <qpe/timestring.h>
 #include <qpe/config.h>
@@ -65,7 +65,7 @@ namespace Opie
 /*!
   Creates a new, empty contact.
 */
-OContact::OContact():OPimRecord(), mMap(), d( 0 )
+OPimContact::OPimContact():OPimRecord(), mMap(), d( 0 )
 {}
 
 /*!
@@ -73,7 +73,7 @@ OContact::OContact():OPimRecord(), mMap(), d( 0 )
   Creates a new contact.  The properties of the contact are
   set from \a fromMap.
 */
-OContact::OContact( const QMap<int, QString> &fromMap ):OPimRecord(), mMap( fromMap ), d( 0 )
+OPimContact::OPimContact( const QMap<int, QString> &fromMap ):OPimRecord(), mMap( fromMap ), d( 0 )
 {
     QString cats = mMap[ Qtopia::AddressCategory ];
     if ( !cats.isEmpty() )
@@ -96,344 +96,344 @@ OContact::OContact( const QMap<int, QString> &fromMap ):OPimRecord(), mMap( from
 /*!
   Destroys a contact.
 */
-OContact::~OContact()
+OPimContact::~OPimContact()
 {}
 
-/*! \fn void OContact::setTitle( const QString &str )
+/*! \fn void OPimContact::setTitle( const QString &str )
   Sets the title of the contact to \a str.
 */
 
-/*! \fn void OContact::setFirstName( const QString &str )
+/*! \fn void OPimContact::setFirstName( const QString &str )
   Sets the first name of the contact to \a str.
 */
 
-/*! \fn void OContact::setMiddleName( const QString &str )
+/*! \fn void OPimContact::setMiddleName( const QString &str )
   Sets the middle name of the contact to \a str.
 */
 
-/*! \fn void OContact::setLastName( const QString &str )
+/*! \fn void OPimContact::setLastName( const QString &str )
   Sets the last name of the contact to \a str.
 */
 
-/*! \fn void OContact::setSuffix( const QString &str )
+/*! \fn void OPimContact::setSuffix( const QString &str )
   Sets the suffix of the contact to \a str.
 */
 
-/*! \fn void OContact::setFileAs( const QString &str )
+/*! \fn void OPimContact::setFileAs( const QString &str )
   Sets the contact to filed as \a str.
 */
 
-/*! \fn void OContact::setDefaultEmail( const QString &str )
+/*! \fn void OPimContact::setDefaultEmail( const QString &str )
   Sets the default email of the contact to \a str.
 */
 
-/*! \fn void OContact::setHomeStreet( const QString &str )
+/*! \fn void OPimContact::setHomeStreet( const QString &str )
   Sets the home street address of the contact to \a str.
 */
 
-/*! \fn void OContact::setHomeCity( const QString &str )
+/*! \fn void OPimContact::setHomeCity( const QString &str )
   Sets the home city of the contact to \a str.
 */
 
-/*! \fn void OContact::setHomeState( const QString &str )
+/*! \fn void OPimContact::setHomeState( const QString &str )
   Sets the home state of the contact to \a str.
 */
 
-/*! \fn void OContact::setHomeZip( const QString &str )
+/*! \fn void OPimContact::setHomeZip( const QString &str )
   Sets the home zip code of the contact to \a str.
 */
 
-/*! \fn void OContact::setHomeCountry( const QString &str )
+/*! \fn void OPimContact::setHomeCountry( const QString &str )
   Sets the home country of the contact to \a str.
 */
 
-/*! \fn void OContact::setHomePhone( const QString &str )
+/*! \fn void OPimContact::setHomePhone( const QString &str )
   Sets the home phone number of the contact to \a str.
 */
 
-/*! \fn void OContact::setHomeFax( const QString &str )
+/*! \fn void OPimContact::setHomeFax( const QString &str )
   Sets the home fax number of the contact to \a str.
 */
 
-/*! \fn void OContact::setHomeMobile( const QString &str )
+/*! \fn void OPimContact::setHomeMobile( const QString &str )
   Sets the home mobile phone number of the contact to \a str.
 */
 
-/*! \fn void OContact::setHomeWebpage( const QString &str )
+/*! \fn void OPimContact::setHomeWebpage( const QString &str )
   Sets the home webpage of the contact to \a str.
 */
 
-/*! \fn void OContact::setCompany( const QString &str )
+/*! \fn void OPimContact::setCompany( const QString &str )
   Sets the company for contact to \a str.
 */
 
-/*! \fn void OContact::setJobTitle( const QString &str )
+/*! \fn void OPimContact::setJobTitle( const QString &str )
   Sets the job title of the contact to \a str.
 */
 
-/*! \fn void OContact::setDepartment( const QString &str )
+/*! \fn void OPimContact::setDepartment( const QString &str )
   Sets the department for contact to \a str.
 */
 
-/*! \fn void OContact::setOffice( const QString &str )
+/*! \fn void OPimContact::setOffice( const QString &str )
   Sets the office for contact to \a str.
 */
 
-/*! \fn void OContact::setBusinessStreet( const QString &str )
+/*! \fn void OPimContact::setBusinessStreet( const QString &str )
   Sets the business street address of the contact to \a str.
 */
 
-/*! \fn void OContact::setBusinessCity( const QString &str )
+/*! \fn void OPimContact::setBusinessCity( const QString &str )
   Sets the business city of the contact to \a str.
 */
 
-/*! \fn void OContact::setBusinessState( const QString &str )
+/*! \fn void OPimContact::setBusinessState( const QString &str )
   Sets the business state of the contact to \a str.
 */
 
-/*! \fn void OContact::setBusinessZip( const QString &str )
+/*! \fn void OPimContact::setBusinessZip( const QString &str )
   Sets the business zip code of the contact to \a str.
 */
 
-/*! \fn void OContact::setBusinessCountry( const QString &str )
+/*! \fn void OPimContact::setBusinessCountry( const QString &str )
   Sets the business country of the contact to \a str.
 */
 
-/*! \fn void OContact::setBusinessPhone( const QString &str )
+/*! \fn void OPimContact::setBusinessPhone( const QString &str )
   Sets the business phone number of the contact to \a str.
 */
 
-/*! \fn void OContact::setBusinessFax( const QString &str )
+/*! \fn void OPimContact::setBusinessFax( const QString &str )
   Sets the business fax number of the contact to \a str.
 */
 
-/*! \fn void OContact::setBusinessMobile( const QString &str )
+/*! \fn void OPimContact::setBusinessMobile( const QString &str )
   Sets the business mobile phone number of the contact to \a str.
 */
 
-/*! \fn void OContact::setBusinessPager( const QString &str )
+/*! \fn void OPimContact::setBusinessPager( const QString &str )
   Sets the business pager number of the contact to \a str.
 */
 
-/*! \fn void OContact::setBusinessWebpage( const QString &str )
+/*! \fn void OPimContact::setBusinessWebpage( const QString &str )
   Sets the business webpage of the contact to \a str.
 */
 
-/*! \fn void OContact::setProfession( const QString &str )
+/*! \fn void OPimContact::setProfession( const QString &str )
   Sets the profession of the contact to \a str.
 */
 
-/*! \fn void OContact::setAssistant( const QString &str )
+/*! \fn void OPimContact::setAssistant( const QString &str )
   Sets the assistant of the contact to \a str.
 */
 
-/*! \fn void OContact::setManager( const QString &str )
+/*! \fn void OPimContact::setManager( const QString &str )
   Sets the manager of the contact to \a str.
 */
 
-/*! \fn void OContact::setSpouse( const QString &str )
+/*! \fn void OPimContact::setSpouse( const QString &str )
   Sets the spouse of the contact to \a str.
 */
 
-/*! \fn void OContact::setGender( const QString &str )
+/*! \fn void OPimContact::setGender( const QString &str )
   Sets the gender of the contact to \a str.
 */
 
-/*! \fn void OContact::setNickname( const QString &str )
+/*! \fn void OPimContact::setNickname( const QString &str )
   Sets the nickname of the contact to \a str.
 */
 
-/*! \fn void OContact::setNotes( const QString &str )
+/*! \fn void OPimContact::setNotes( const QString &str )
   Sets the notes about the contact to \a str.
 */
 
-/*! \fn QString OContact::title() const
+/*! \fn QString OPimContact::title() const
   Returns the title of the contact.
 */
 
-/*! \fn QString OContact::firstName() const
+/*! \fn QString OPimContact::firstName() const
   Returns the first name of the contact.
 */
 
-/*! \fn QString OContact::middleName() const
+/*! \fn QString OPimContact::middleName() const
   Returns the middle name of the contact.
 */
 
-/*! \fn QString OContact::lastName() const
+/*! \fn QString OPimContact::lastName() const
   Returns the last name of the contact.
 */
 
-/*! \fn QString OContact::suffix() const
+/*! \fn QString OPimContact::suffix() const
   Returns the suffix of the contact.
 */
 
-/*! \fn QString OContact::fileAs() const
+/*! \fn QString OPimContact::fileAs() const
   Returns the string the contact is filed as.
 */
 
-/*! \fn QString OContact::defaultEmail() const
+/*! \fn QString OPimContact::defaultEmail() const
   Returns the default email address of the contact.
 */
 
-/*! \fn QString OContact::emails() const
+/*! \fn QString OPimContact::emails() const
   Returns the list of email address for a contact separated by ';'s in a single
   string.
 */
 
-/*! \fn QString OContact::homeStreet() const
+/*! \fn QString OPimContact::homeStreet() const
   Returns the home street address of the contact.
 */
 
-/*! \fn QString OContact::homeCity() const
+/*! \fn QString OPimContact::homeCity() const
   Returns the home city of the contact.
 */
 
-/*! \fn QString OContact::homeState() const
+/*! \fn QString OPimContact::homeState() const
   Returns the home state of the contact.
 */
 
-/*! \fn QString OContact::homeZip() const
+/*! \fn QString OPimContact::homeZip() const
   Returns the home zip of the contact.
 */
 
-/*! \fn QString OContact::homeCountry() const
+/*! \fn QString OPimContact::homeCountry() const
   Returns the home country of the contact.
 */
 
-/*! \fn QString OContact::homePhone() const
+/*! \fn QString OPimContact::homePhone() const
   Returns the home phone number of the contact.
 */
 
-/*! \fn QString OContact::homeFax() const
+/*! \fn QString OPimContact::homeFax() const
   Returns the home fax number of the contact.
 */
 
-/*! \fn QString OContact::homeMobile() const
+/*! \fn QString OPimContact::homeMobile() const
   Returns the home mobile number of the contact.
 */
 
-/*! \fn QString OContact::homeWebpage() const
+/*! \fn QString OPimContact::homeWebpage() const
   Returns the home webpage of the contact.
 */
 
-/*! \fn QString OContact::company() const
+/*! \fn QString OPimContact::company() const
   Returns the company for the contact.
 */
 
-/*! \fn QString OContact::department() const
+/*! \fn QString OPimContact::department() const
   Returns the department for the contact.
 */
 
-/*! \fn QString OContact::office() const
+/*! \fn QString OPimContact::office() const
   Returns the office for the contact.
 */
 
-/*! \fn QString OContact::jobTitle() const
+/*! \fn QString OPimContact::jobTitle() const
   Returns the job title of the contact.
 */
 
-/*! \fn QString OContact::profession() const
+/*! \fn QString OPimContact::profession() const
   Returns the profession of the contact.
 */
 
-/*! \fn QString OContact::assistant() const
+/*! \fn QString OPimContact::assistant() const
   Returns the assistant of the contact.
 */
 
-/*! \fn QString OContact::manager() const
+/*! \fn QString OPimContact::manager() const
   Returns the manager of the contact.
 */
 
-/*! \fn QString OContact::businessStreet() const
+/*! \fn QString OPimContact::businessStreet() const
   Returns the business street address of the contact.
 */
 
-/*! \fn QString OContact::businessCity() const
+/*! \fn QString OPimContact::businessCity() const
   Returns the business city of the contact.
 */
 
-/*! \fn QString OContact::businessState() const
+/*! \fn QString OPimContact::businessState() const
   Returns the business state of the contact.
 */
 
-/*! \fn QString OContact::businessZip() const
+/*! \fn QString OPimContact::businessZip() const
   Returns the business zip of the contact.
 */
 
-/*! \fn QString OContact::businessCountry() const
+/*! \fn QString OPimContact::businessCountry() const
   Returns the business country of the contact.
 */
 
-/*! \fn QString OContact::businessPhone() const
+/*! \fn QString OPimContact::businessPhone() const
   Returns the business phone number of the contact.
 */
 
-/*! \fn QString OContact::businessFax() const
+/*! \fn QString OPimContact::businessFax() const
   Returns the business fax number of the contact.
 */
 
-/*! \fn QString OContact::businessMobile() const
+/*! \fn QString OPimContact::businessMobile() const
   Returns the business mobile number of the contact.
 */
 
-/*! \fn QString OContact::businessPager() const
+/*! \fn QString OPimContact::businessPager() const
   Returns the business pager number of the contact.
 */
 
-/*! \fn QString OContact::businessWebpage() const
+/*! \fn QString OPimContact::businessWebpage() const
   Returns the business webpage of the contact.
 */
 
-/*! \fn QString OContact::spouse() const
+/*! \fn QString OPimContact::spouse() const
   Returns the spouse of the contact.
 */
 
-/*! \fn QString OContact::gender() const
+/*! \fn QString OPimContact::gender() const
   Returns the gender of the contact.
 */
 
-/*! \fn QString OContact::nickname() const
+/*! \fn QString OPimContact::nickname() const
   Returns the nickname of the contact.
 */
 
-/*! \fn QString OContact::children() const
+/*! \fn QString OPimContact::children() const
   Returns the children of the contact.
 */
 
-/*! \fn QString OContact::notes() const
+/*! \fn QString OPimContact::notes() const
   Returns the notes relating to the the contact.
 */
 
-/*! \fn QString OContact::groups() const
+/*! \fn QString OPimContact::groups() const
   \internal
   Returns the groups for the contact.
 */
 
-/*! \fn QStringList OContact::groupList() const
+/*! \fn QStringList OPimContact::groupList() const
   \internal
 */
 
-/*! \fn QString OContact::field(int) const
+/*! \fn QString OPimContact::field(int) const
   \internal
 */
 
-/*! \fn void OContact::saveJournal( journal_action, const QString & = QString::null )
+/*! \fn void OPimContact::saveJournal( journal_action, const QString & = QString::null )
   \internal
 */
 
-/*! \fn void OContact::setUid( int id )
+/*! \fn void OPimContact::setUid( int id )
   \internal
   Sets the uid for this record to \a id.
 */
 
-/*! \enum OContact::journal_action
+/*! \enum OPimContact::journal_action
   \internal
 */
 
 /*!
   \internal
 */
-QMap<int, QString> OContact::toMap() const
+QMap<int, QString> OPimContact::toMap() const
 {
     QMap<int, QString> map = mMap;
     QString cats = idsToString( categories() );
@@ -445,7 +445,7 @@ QMap<int, QString> OContact::toMap() const
 /*!
   Returns a rich text formatted QString representing the contents the contact.
 */
-QString OContact::toRichText() const
+QString OPimContact::toRichText() const
 {
     QString text;
     QString value, comp, state;
@@ -780,7 +780,7 @@ QString OContact::toRichText() const
 /*!
   \internal
 */
-void OContact::insert( int key, const QString &v )
+void OPimContact::insert( int key, const QString &v )
 {
     QString value = v.stripWhiteSpace();
     if ( value.isEmpty() )
@@ -792,7 +792,7 @@ void OContact::insert( int key, const QString &v )
 /*!
   \internal
 */
-void OContact::replace( int key, const QString & v )
+void OPimContact::replace( int key, const QString & v )
 {
     QString value = v.stripWhiteSpace();
     if ( value.isEmpty() )
@@ -804,7 +804,7 @@ void OContact::replace( int key, const QString & v )
 /*!
   \internal
 */
-QString OContact::find( int key ) const
+QString OPimContact::find( int key ) const
 {
     return mMap[ key ];
 }
@@ -812,7 +812,7 @@ QString OContact::find( int key ) const
 /*!
   \internal
 */
-QString OContact::displayAddress( const QString &street,
+QString OPimContact::displayAddress( const QString &street,
                                   const QString &city,
                                   const QString &state,
                                   const QString &zip,
@@ -837,7 +837,7 @@ QString OContact::displayAddress( const QString &street,
 /*!
   \internal
 */
-QString OContact::displayBusinessAddress() const
+QString OPimContact::displayBusinessAddress() const
 {
     return displayAddress( businessStreet(), businessCity(),
                            businessState(), businessZip(),
@@ -847,7 +847,7 @@ QString OContact::displayBusinessAddress() const
 /*!
   \internal
 */
-QString OContact::displayHomeAddress() const
+QString OPimContact::displayHomeAddress() const
 {
     return displayAddress( homeStreet(), homeCity(),
                            homeState(), homeZip(),
@@ -857,7 +857,7 @@ QString OContact::displayHomeAddress() const
 /*!
   Returns the full name of the contact
 */
-QString OContact::fullName() const
+QString OPimContact::fullName() const
 {
     QString title = find( Qtopia::Title );
     QString firstName = find( Qtopia::FirstName );
@@ -896,30 +896,30 @@ QString OContact::fullName() const
 /*!
   Returns a list of the names of the children of the contact.
 */
-QStringList OContact::childrenList() const
+QStringList OPimContact::childrenList() const
 {
     return QStringList::split( " ", find( Qtopia::Children ) );
 }
 
-/*! \fn void OContact::insertEmail( const QString &email )
+/*! \fn void OPimContact::insertEmail( const QString &email )
 
   Insert \a email into the email list. Ensures \a email can only be added
   once. If there is no default email address set, it sets it to the \a email.
 */
 
-/*! \fn void OContact::removeEmail( const QString &email )
+/*! \fn void OPimContact::removeEmail( const QString &email )
 
   Removes the \a email from the email list. If the default email was \a email,
   then the default email address is assigned to the first email in the
   email list
 */
 
-/*! \fn void OContact::clearEmails()
+/*! \fn void OPimContact::clearEmails()
 
   Clears the email list.
  */
 
-/*! \fn void OContact::insertEmails( const QStringList &emailList )
+/*! \fn void OPimContact::insertEmails( const QStringList &emailList )
 
   Appends the \a emailList to the exiting email list
  */
@@ -928,7 +928,7 @@ QStringList OContact::childrenList() const
   Returns a list of email addresses belonging to the contact, including
   the default email address.
 */
-QStringList OContact::emailList() const
+QStringList OPimContact::emailList() const
 {
     QString emailStr = emails();
 
@@ -950,7 +950,7 @@ QStringList OContact::emailList() const
   Generates the string for the contact to be filed as from the first,
   middle and last name of the contact.
 */
-void OContact::setFileAs()
+void OPimContact::setFileAs()
 {
     QString lastName, firstName, middleName, fileas;
 
@@ -975,7 +975,7 @@ void OContact::setFileAs()
   \internal
   Appends the contact information to \a buf.
 */
-void OContact::save( QString &buf ) const
+void OPimContact::save( QString &buf ) const
 {
     static const QStringList SLFIELDS = fields();
     // I'm expecting "<Contact " in front of this...
@@ -1008,7 +1008,7 @@ void OContact::save( QString &buf ) const
   Never change order of this list ! It has to be regarding
   enum AddressBookFields !!
 */
-QStringList OContact::fields()
+QStringList OPimContact::fields()
 {
     QStringList list;
 
@@ -1071,7 +1071,7 @@ QStringList OContact::fields()
   Sets the list of email address for contact to those contained in \a str.
   Email address should be separated by ';'s.
 */
-void OContact::setEmails( const QString &str )
+void OPimContact::setEmails( const QString &str )
 {
     replace( Qtopia::Emails, str );
     if ( str.isEmpty() )
@@ -1081,7 +1081,7 @@ void OContact::setEmails( const QString &str )
 /*!
   Sets the list of children for the contact to those contained in \a str.
 */
-void OContact::setChildren( const QString &str )
+void OPimContact::setChildren( const QString &str )
 {
     replace( Qtopia::Children, str );
 }
@@ -1091,7 +1091,7 @@ void OContact::setChildren( const QString &str )
   Returns TRUE if the contact matches the regular expression \a regexp.
   Otherwise returns FALSE.
 */
-bool OContact::match( const QRegExp &r ) const
+bool OPimContact::match( const QRegExp &r ) const
 {
     setLastHitField( -1 );
     bool match;
@@ -1110,19 +1110,19 @@ bool OContact::match( const QRegExp &r ) const
 }
 
 
-QString OContact::toShortText() const
+QString OPimContact::toShortText() const
 {
     return ( fullName() );
 }
 
 
-QString OContact::type() const
+QString OPimContact::type() const
 {
-    return QString::fromLatin1( "OContact" );
+    return QString::fromLatin1( "OPimContact" );
 }
 
 
-class QString OContact::recordField( int pos ) const
+class QString OPimContact::recordField( int pos ) const
 {
     QStringList SLFIELDS = fields(); // ?? why this ? (se)
     return SLFIELDS[ pos ];
@@ -1132,11 +1132,11 @@ class QString OContact::recordField( int pos ) const
 // internally as QDate instead of QString !
 // QString is always too complicate to interprete (DD.MM.YY, DD/MM/YY, MM/DD/YY, etc..)(se)
 
-/*! \fn void OContact::setBirthday( const QDate& date )
+/*! \fn void OPimContact::setBirthday( const QDate& date )
   Sets the birthday for the contact to \a date. If date is null
   the current stored date will be removed.
 */
-void OContact::setBirthday( const QDate &v )
+void OPimContact::setBirthday( const QDate &v )
 {
     if ( v.isNull() )
     {
@@ -1146,16 +1146,16 @@ void OContact::setBirthday( const QDate &v )
     }
 
     if ( v.isValid() )
-        replace( Qtopia::Birthday, OConversion::dateToString( v ) );
+        replace( Qtopia::Birthday, OPimDateConversion::dateToString( v ) );
 
 }
 
 
-/*! \fn void OContact::setAnniversary( const QDate &date )
+/*! \fn void OPimContact::setAnniversary( const QDate &date )
   Sets the anniversary of the contact to \a date. If date is
   null, the current stored date will be removed.
 */
-void OContact::setAnniversary( const QDate &v )
+void OPimContact::setAnniversary( const QDate &v )
 {
     if ( v.isNull() )
     {
@@ -1165,40 +1165,40 @@ void OContact::setAnniversary( const QDate &v )
     }
 
     if ( v.isValid() )
-        replace( Qtopia::Anniversary, OConversion::dateToString( v ) );
+        replace( Qtopia::Anniversary, OPimDateConversion::dateToString( v ) );
 }
 
 
-/*! \fn QDate OContact::birthday() const
+/*! \fn QDate OPimContact::birthday() const
   Returns the birthday of the contact.
 */
-QDate OContact::birthday() const
+QDate OPimContact::birthday() const
 {
     QString str = find( Qtopia::Birthday );
     // qWarning ("Birthday %s", str.latin1() );
     if ( !str.isEmpty() )
-        return OConversion::dateFromString ( str );
+        return OPimDateConversion::dateFromString ( str );
     else
         return QDate();
 }
 
 
-/*! \fn QDate OContact::anniversary() const
+/*! \fn QDate OPimContact::anniversary() const
   Returns the anniversary of the contact.
 */
-QDate OContact::anniversary() const
+QDate OPimContact::anniversary() const
 {
     QDate empty;
     QString str = find( Qtopia::Anniversary );
     // qWarning ("Anniversary %s", str.latin1() );
     if ( !str.isEmpty() )
-        return OConversion::dateFromString ( str );
+        return OPimDateConversion::dateFromString ( str );
     else
         return empty;
 }
 
 
-void OContact::insertEmail( const QString &v )
+void OPimContact::insertEmail( const QString &v )
 {
     //qDebug("insertEmail %s", v.latin1());
     QString e = v.simplifyWhiteSpace();
@@ -1222,7 +1222,7 @@ void OContact::insertEmail( const QString &v )
 }
 
 
-        void OContact::removeEmail( const QString &v )
+        void OPimContact::removeEmail( const QString &v )
 {
     QString e = v.simplifyWhiteSpace();
     QString def = defaultEmail();
@@ -1252,18 +1252,18 @@ void OContact::insertEmail( const QString &v )
 }
 
 
-void OContact::clearEmails()
+void OPimContact::clearEmails()
 {
     mMap.remove( Qtopia::DefaultEmail );
     mMap.remove( Qtopia::Emails );
 }
 
 
-void OContact::setDefaultEmail( const QString &v )
+void OPimContact::setDefaultEmail( const QString &v )
 {
     QString e = v.simplifyWhiteSpace();
 
-    //qDebug("OContact::setDefaultEmail %s", e.latin1());
+    //qDebug("OPimContact::setDefaultEmail %s", e.latin1());
     replace( Qtopia::DefaultEmail, e );
 
     if ( !e.isEmpty() )
@@ -1272,20 +1272,20 @@ void OContact::setDefaultEmail( const QString &v )
 }
 
 
-void OContact::insertEmails( const QStringList &v )
+void OPimContact::insertEmails( const QStringList &v )
 {
     for ( QStringList::ConstIterator it = v.begin(); it != v.end(); ++it )
         insertEmail( *it );
 }
 
 
-int OContact::rtti()
+int OPimContact::rtti()
 {
     return OPimResolver::AddressBook;
 }
 
 
-void OContact::setUid( int i )
+void OPimContact::setUid( int i )
 {
     OPimRecord::setUid( i );
     replace( Qtopia::AddressUid , QString::number( i ) );

@@ -35,28 +35,28 @@
 #include <opie2/obackendfactory.h>
 
 namespace Opie {
-OTodoAccess::OTodoAccess( OTodoAccessBackend* end, enum Access )
-    : QObject(), OPimAccessTemplate<OTodo>( end ),  m_todoBackEnd( end )
+OPimTodoAccess::OPimTodoAccess( OPimTodoAccessBackend* end, enum Access )
+    : QObject(), OPimAccessTemplate<OPimTodo>( end ),  m_todoBackEnd( end )
 {
 //     if (end == 0l )
-//         m_todoBackEnd = new OTodoAccessBackendSQL( QString::null);
+//         m_todoBackEnd = new OPimTodoAccessBackendSQL( QString::null);
 
 	// Zecke: Du musst hier noch fr das XML-Backend einen Appnamen bergeben !
         if (end == 0l )
-		m_todoBackEnd = OBackendFactory<OTodoAccessBackend>::Default ("todo", QString::null);
+		m_todoBackEnd = OBackendFactory<OPimTodoAccessBackend>::Default ("todo", QString::null);
 
     setBackEnd( m_todoBackEnd );
 }
-OTodoAccess::~OTodoAccess() {
-//    qWarning("~OTodoAccess");
+OPimTodoAccess::~OPimTodoAccess() {
+//    qWarning("~OPimTodoAccess");
 }
-void OTodoAccess::mergeWith( const QValueList<OTodo>& list ) {
-    QValueList<OTodo>::ConstIterator it;
+void OPimTodoAccess::mergeWith( const QValueList<OPimTodo>& list ) {
+    QValueList<OPimTodo>::ConstIterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
         replace( (*it) );
     }
 }
-OTodoAccess::List OTodoAccess::effectiveToDos( const QDate& start,
+OPimTodoAccess::List OPimTodoAccess::effectiveToDos( const QDate& start,
                                                const QDate& end,
                                                bool includeNoDates ) {
     QArray<int> ints = m_todoBackEnd->effectiveToDos( start, end, includeNoDates );
@@ -64,29 +64,29 @@ OTodoAccess::List OTodoAccess::effectiveToDos( const QDate& start,
     List lis( ints, this );
     return lis;
 }
-OTodoAccess::List OTodoAccess::effectiveToDos( const QDate& start,
+OPimTodoAccess::List OPimTodoAccess::effectiveToDos( const QDate& start,
                                                bool includeNoDates ) {
     return effectiveToDos( start, QDate::currentDate(),
                            includeNoDates );
 }
-OTodoAccess::List OTodoAccess::overDue() {
+OPimTodoAccess::List OPimTodoAccess::overDue() {
     List lis( m_todoBackEnd->overDue(), this );
     return lis;
 }
 /* sort order */
-OTodoAccess::List OTodoAccess::sorted( bool ascending, int sort,int filter, int cat ) {
+OPimTodoAccess::List OPimTodoAccess::sorted( bool ascending, int sort,int filter, int cat ) {
     QArray<int> ints = m_todoBackEnd->sorted( ascending, sort,
                                       filter, cat );
-    OTodoAccess::List list( ints, this );
+    OPimTodoAccess::List list( ints, this );
     return list;
 }
-void OTodoAccess::removeAllCompleted() {
+void OPimTodoAccess::removeAllCompleted() {
     m_todoBackEnd->removeAllCompleted();
 }
-QBitArray OTodoAccess::backendSupport( const QString& ) const{
+QBitArray OPimTodoAccess::backendSupport( const QString& ) const{
     return m_todoBackEnd->supports();
 }
-bool OTodoAccess::backendSupports( int attr,  const QString& ar) const{
+bool OPimTodoAccess::backendSupports( int attr,  const QString& ar) const{
     return backendSupport(ar).testBit( attr );
 }
 

@@ -37,8 +37,8 @@
 using namespace Opie;
 
 namespace {
-    static OTodo eventByVObj( VObject *obj ){
-        OTodo event;
+    static OPimTodo eventByVObj( VObject *obj ){
+        OPimTodo event;
         VObject *ob;
         QCString name;
         // no uid, attendees, ... and no fun
@@ -91,7 +91,7 @@ namespace {
         event.setUid( 1 );
         return event;
     };
-    static VObject *vobjByEvent( const OTodo &event )  {
+    static VObject *vobjByEvent( const OPimTodo &event )  {
         VObject *task = newVObject( VCTodoProp );
         if( task == 0 )
             return 0l;
@@ -138,13 +138,13 @@ namespace {
 }
 
 namespace Opie {
-OTodoAccessVCal::OTodoAccessVCal( const QString& path )
+OPimTodoAccessVCal::OPimTodoAccessVCal( const QString& path )
     : m_dirty(false), m_file( path )
 {
 }
-OTodoAccessVCal::~OTodoAccessVCal() {
+OPimTodoAccessVCal::~OPimTodoAccessVCal() {
 }
-bool OTodoAccessVCal::load() {
+bool OPimTodoAccessVCal::load() {
     m_map.clear();
     m_dirty = false;
 
@@ -163,7 +163,7 @@ bool OTodoAccessVCal::load() {
         vobj = ::nextVObject( &it );
         QCString name = ::vObjectName( vobj );
         if( name == VCTodoProp ){
-            OTodo to = eventByVObj( vobj );
+            OPimTodo to = eventByVObj( vobj );
             m_map.insert( to.uid(), to );
         }
     }
@@ -172,10 +172,10 @@ bool OTodoAccessVCal::load() {
 
     return true;
 }
-bool OTodoAccessVCal::reload() {
+bool OPimTodoAccessVCal::reload() {
     return load();
 }
-bool OTodoAccessVCal::save() {
+bool OPimTodoAccessVCal::save() {
     if (!m_dirty )
         return true;
 
@@ -187,7 +187,7 @@ bool OTodoAccessVCal::save() {
     obj = newVObject( VCCalProp );
     addPropValue( obj, VCVersionProp, "1.0" );
     VObject *vo;
-    for(QMap<int, OTodo>::ConstIterator it=m_map.begin(); it !=m_map.end(); ++it ){
+    for(QMap<int, OPimTodo>::ConstIterator it=m_map.begin(); it !=m_map.end(); ++it ){
         vo = vobjByEvent( it.data() );
         addVObjectProp(obj, vo );
     }
@@ -198,41 +198,41 @@ bool OTodoAccessVCal::save() {
     m_dirty = false;
     return true;
 }
-void OTodoAccessVCal::clear() {
+void OPimTodoAccessVCal::clear() {
     m_map.clear();
     m_dirty = true;
 }
-bool OTodoAccessVCal::add( const OTodo& to ) {
+bool OPimTodoAccessVCal::add( const OPimTodo& to ) {
     m_map.insert( to.uid(), to );
     m_dirty = true;
     return true;
 }
-bool OTodoAccessVCal::remove( int uid ) {
+bool OPimTodoAccessVCal::remove( int uid ) {
     m_map.remove( uid );
     m_dirty = true;
     return true;
 }
-void OTodoAccessVCal::removeAllCompleted() {
-    for ( QMap<int, OTodo>::Iterator it = m_map.begin(); it != m_map.end(); ++it ) {
+void OPimTodoAccessVCal::removeAllCompleted() {
+    for ( QMap<int, OPimTodo>::Iterator it = m_map.begin(); it != m_map.end(); ++it ) {
         if ( (*it).isCompleted() )
             m_map.remove( it );
     }
 }
-bool OTodoAccessVCal::replace( const OTodo& to ) {
+bool OPimTodoAccessVCal::replace( const OPimTodo& to ) {
     m_map.replace( to.uid(), to );
     m_dirty = true;
     return true;
 }
-OTodo OTodoAccessVCal::find(int uid )const {
+OPimTodo OPimTodoAccessVCal::find(int uid )const {
     return m_map[uid];
 }
-QArray<int> OTodoAccessVCal::sorted( bool, int, int, int ) {
+QArray<int> OPimTodoAccessVCal::sorted( bool, int, int, int ) {
     QArray<int> ar(0);
     return ar;
 }
-QArray<int> OTodoAccessVCal::allRecords()const {
+QArray<int> OPimTodoAccessVCal::allRecords()const {
     QArray<int> ar( m_map.count() );
-    QMap<int, OTodo>::ConstIterator it;
+    QMap<int, OPimTodo>::ConstIterator it;
     int i = 0;
     for ( it = m_map.begin(); it != m_map.end(); ++it ) {
         ar[i] = it.key();
@@ -240,41 +240,41 @@ QArray<int> OTodoAccessVCal::allRecords()const {
     }
     return ar;
 }
-QArray<int> OTodoAccessVCal::matchRegexp(const QRegExp& /* r */)const {
+QArray<int> OPimTodoAccessVCal::matchRegexp(const QRegExp& /* r */)const {
     QArray<int> ar(0);
     return ar;
 }
-QArray<int> OTodoAccessVCal::queryByExample( const OTodo&, int, const QDateTime& ) {
+QArray<int> OPimTodoAccessVCal::queryByExample( const OPimTodo&, int, const QDateTime& ) {
     QArray<int> ar(0);
     return ar;
 }
-QArray<int> OTodoAccessVCal::effectiveToDos( const QDate& ,
+QArray<int> OPimTodoAccessVCal::effectiveToDos( const QDate& ,
                                              const QDate& ,
                                              bool  ) {
     QArray<int> ar(0);
     return ar;
 }
-QArray<int> OTodoAccessVCal::overDue() {
+QArray<int> OPimTodoAccessVCal::overDue() {
     QArray<int> ar(0);
     return ar;
 }
-QBitArray OTodoAccessVCal::supports()const {
+QBitArray OPimTodoAccessVCal::supports()const {
     static QBitArray ar = sup();
 
     return ar;
 }
-QBitArray OTodoAccessVCal::sup() {
-    QBitArray ar ( OTodo::CompletedDate +1 );
+QBitArray OPimTodoAccessVCal::sup() {
+    QBitArray ar ( OPimTodo::CompletedDate +1 );
     ar.fill( true );
 
-    ar[OTodo::CrossReference] = false;
-    ar[OTodo::State ] = false;
-    ar[OTodo::Reminders] = false;
-    ar[OTodo::Notifiers] = false;
-    ar[OTodo::Maintainer] = false;
-    ar[OTodo::Progress] = false;
-    ar[OTodo::Alarms ] = false;
-    ar[OTodo::Recurrence] = false;
+    ar[OPimTodo::CrossReference] = false;
+    ar[OPimTodo::State ] = false;
+    ar[OPimTodo::Reminders] = false;
+    ar[OPimTodo::Notifiers] = false;
+    ar[OPimTodo::Maintainer] = false;
+    ar[OPimTodo::Progress] = false;
+    ar[OPimTodo::Alarms ] = false;
+    ar[OPimTodo::Recurrence] = false;
 
     return ar;
 }

@@ -32,18 +32,18 @@
 #include <qobject.h>
 #include <qvaluelist.h>
 
-#include <opie2/otodo.h>
+#include <opie2/opimtodo.h>
 #include <opie2/otodoaccessbackend.h>
 #include <opie2/opimaccesstemplate.h>
 
 namespace Opie {
 
 /**
- * OTodoAccess
+ * OPimTodoAccess
  * the class to get access to
  * the todolist
  */
-class OTodoAccess : public QObject, public OPimAccessTemplate<OTodo> {
+class OPimTodoAccess : public QObject, public OPimAccessTemplate<OPimTodo> {
     Q_OBJECT
 public:
     enum SortOrder { Completed = 0,
@@ -58,8 +58,8 @@ public:
      * the default resource will be
      * picked up
      */
-    OTodoAccess( OTodoAccessBackend* = 0l, enum Access acc = Random );
-    ~OTodoAccess();
+    OPimTodoAccess( OPimTodoAccessBackend* = 0l, enum Access acc = Random );
+    ~OPimTodoAccess();
 
 
     /* our functions here */
@@ -81,7 +81,7 @@ public:
 
 
     /**
-     * return overdue OTodos
+     * return overdue OPimTodos
      */
     List overDue();
 
@@ -91,10 +91,10 @@ public:
     List sorted( bool ascending, int sortOrder, int sortFilter, int cat );
 
     /**
-     * merge a list of OTodos into
+     * merge a list of OPimTodos into
      * the resource
      */
-    void mergeWith( const QValueList<OTodo>& );
+    void mergeWith( const QValueList<OPimTodo>& );
 
     /**
      * delete all already completed items
@@ -104,7 +104,7 @@ public:
     /**
      * request information about what a backend supports.
      * Supports in the sense of beeing able to store.
-     * This is related to the enum in OTodo
+     * This is related to the enum in OPimTodo
      *
      * @param backend Will be used in the future when we support multiple backend
      */
@@ -118,17 +118,17 @@ public:
     bool backendSupports( int attr, const QString& backend = QString::null  )const;
 signals:
     /**
-     * if the OTodoAccess was changed
+     * if the OPimTodoAccess was changed
      */
-    void changed( const OTodoAccess* );
-    void changed( const OTodoAccess*, int uid );
-    void added( const OTodoAccess*,  int uid );
-    void removed( const OTodoAccess*, int uid );
+    void changed( const OPimTodoAccess* );
+    void changed( const OPimTodoAccess*, int uid );
+    void added( const OPimTodoAccess*,  int uid );
+    void removed( const OPimTodoAccess*, int uid );
 private:
     int m_cat;
-    OTodoAccessBackend* m_todoBackEnd;
-    class OTodoAccessPrivate;
-    OTodoAccessPrivate* d;
+    OPimTodoAccessBackend* m_todoBackEnd;
+    class OPimTodoAccessPrivate;
+    OPimTodoAccessPrivate* d;
 };
 
 }

@@ -46,23 +46,23 @@ QPC_TEMPLATEEXTERN template class QPC_EXPORT QMap<int, QString>;
 
 namespace Opie
 {
-class OContactPrivate;
+class OPimContactPrivate;
 
 /**
- * OContact class represents a specialised PIM Record for contacts.
+ * OPimContact class represents a specialised PIM Record for contacts.
  * It does store all kind of persopn related information.
  *
  * @short Contact Container
  * @author TT, Stefan Eiler, Holger Freyther
  */
-class QPC_EXPORT OContact : public OPimRecord
+class QPC_EXPORT OPimContact : public OPimRecord
 {
     friend class DataSet;
 
   public:
-    OContact();
-    OContact( const QMap<int, QString> &fromMap );
-    virtual ~OContact();
+    OPimContact();
+    OPimContact( const QMap<int, QString> &fromMap );
+    virtual ~OPimContact();
 
     enum DateFormat{
         Zip_City_State = 0,
@@ -232,7 +232,7 @@ class QPC_EXPORT OContact : public OPimRecord
 
   private:
     // The XML Backend needs some access to the private functions
-    friend class OContactAccessBackend_XML;
+    friend class OPimContactAccessBackend_XML;
 
     void insert( int key, const QString &value );
     void replace( int key, const QString &value );
@@ -248,7 +248,7 @@ class QPC_EXPORT OContact : public OPimRecord
                             const QString &country ) const;
 
     QMap<int, QString> mMap;
-    OContactPrivate *d;
+    OPimContactPrivate *d;
 };
 
 }

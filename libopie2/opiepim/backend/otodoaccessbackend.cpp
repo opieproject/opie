@@ -30,11 +30,11 @@
 #include <opie2/otodoaccessbackend.h>
 
 namespace Opie {
-OTodoAccessBackend::OTodoAccessBackend()
-    : OPimAccessBackend<OTodo>()
+OPimTodoAccessBackend::OPimTodoAccessBackend()
+    : OPimAccessBackend<OPimTodo>()
 {
 }
-OTodoAccessBackend::~OTodoAccessBackend() {
+OPimTodoAccessBackend::~OPimTodoAccessBackend() {
 
 }
 

@@ -32,7 +32,7 @@
 #define OEVENT_H
 
 /* OPIE */
-#include <opie2/otimezone.h>
+#include <opie2/opimtimezone.h>
 #include <opie2/opimrecord.h>
 #include <qpe/recordfields.h>
 #include <qpe/palmtopuidgen.h>
@@ -61,17 +61,17 @@ struct OCalendarHelper
 };
 
 class OPimNotifyManager;
-class ORecur;
+class OPimRecurrence;
 
 /**
  * This is the container for all Events. It encapsules all
  * available information for a single Event
  * @short container for events.
  */
-class OEvent : public OPimRecord
+class OPimEvent : public OPimRecord
 {
   public:
-    typedef QValueList<OEvent> ValueList;
+    typedef QValueList<OPimEvent> ValueList;
     /**
      * RecordFields contain possible attributes
      * used in the Results of toMap()..
@@ -101,22 +101,22 @@ class OEvent : public OPimRecord
     };
 
     /**
-     * Start with an Empty OEvent. UID == 0 means that it is empty
+     * Start with an Empty OPimEvent. UID == 0 means that it is empty
      */
-    OEvent( int uid = 0 );
+    OPimEvent( int uid = 0 );
 
     /**
      * copy c'tor
      */
-    OEvent( const OEvent& );
+    OPimEvent( const OPimEvent& );
 
     /**
-     * Create OEvent, initialized by map
+     * Create OPimEvent, initialized by map
      * @see enum RecordFields
      */
-    OEvent( const QMap<int, QString> map );
-    ~OEvent();
-    OEvent &operator=( const OEvent& );
+    OPimEvent( const QMap<int, QString> map );
+    ~OPimEvent();
+    OPimEvent &operator=( const OPimEvent& );
 
     QString description() const;
     void setDescription( const QString& description );
@@ -127,8 +127,8 @@ class OEvent : public OPimRecord
     bool hasNotifiers() const;
     OPimNotifyManager &notifiers() const;
 
-    ORecur recurrence() const;
-    void setRecurrence( const ORecur& );
+    OPimRecurrence recurrence() const;
+    void setRecurrence( const OPimRecurrence& );
     bool hasRecurrence() const;
 
     QString note() const;
@@ -169,7 +169,7 @@ class OEvent : public OPimRecord
     void addChild( int uid );
     void removeChild( int uid );
 
-    /** return the parent OEvent */
+    /** return the parent OPimEvent */
     int parent() const;
     void setParent( int uid );
 
@@ -188,12 +188,12 @@ class OEvent : public OPimRecord
     bool loadFromStream( QDataStream& );
     bool saveToStream( QDataStream& ) const;
 
-    /*    bool operator==( const OEvent& );
-        bool operator!=( const OEvent& );
-        bool operator<( const OEvent& );
-        bool operator<=( const OEvent& );
-        bool operator>( const OEvent& );
-        bool operator>=(const OEvent& );
+    /*    bool operator==( const OPimEvent& );
+        bool operator!=( const OPimEvent& );
+        bool operator<( const OPimEvent& );
+        bool operator<=( const OPimEvent& );
+        bool operator>( const OPimEvent& );
+        bool operator>=(const OPimEvent& );
     */
 
   private:
@@ -226,14 +226,14 @@ class OEffectiveEvent
     // Start | End == StartEnd: for single-day events (default)
     //                          here we draw start time -> end time
     OEffectiveEvent();
-    OEffectiveEvent( const OEvent& event, const QDate& startDate, Position pos = StartEnd );
+    OEffectiveEvent( const OPimEvent& event, const QDate& startDate, Position pos = StartEnd );
     OEffectiveEvent( const OEffectiveEvent& );
     OEffectiveEvent &operator=( const OEffectiveEvent& );
     ~OEffectiveEvent();
 
     void setStartTime( const QTime& );
     void setEndTime( const QTime& );
-    void setEvent( const OEvent& );
+    void setEvent( const OPimEvent& );
     void setDate( const QDate& );
 
     void setEffectiveDates( const QDate& from, const QDate& to );
@@ -241,7 +241,7 @@ class OEffectiveEvent
     QString description() const;
     QString location() const;
     QString note() const;
-    OEvent event() const;
+    OPimEvent event() const;
     QTime startTime() const;
     QTime endTime() const;
     QDate date() const;

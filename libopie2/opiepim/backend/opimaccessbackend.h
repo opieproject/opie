@@ -32,7 +32,7 @@
 #include <qarray.h>
 #include <qdatetime.h>
 
-#include <opie2/otemplatebase.h>
+#include <opie2/opimtemplatebase.h>
 #include <opie2/opimrecord.h>
 
 

@@ -1,4 +1,5 @@
-HEADERS += core/oconversion.h \
+HEADERS += \
+        core/opimdateconversion.h \
         core/opimcache.h \
         core/opimmaintainer.h \
         core/opimresolver.h \
@@ -6,16 +7,17 @@ HEADERS += core/oconversion.h \
         core/opimxref.h \
         core/opimxrefmanager.h \
         core/opimxrefpartner.h \
-        core/orecur.h \
-        core/otemplatebase.h \
-        core/otimezone.h 
+        core/opimrecurrence.h \
+        core/opimtemplatebase.h \
+        core/opimtimezone.h 
 
-SOURCES += core/oconversion.cpp \
+SOURCES += \
+        core/opimdateconversion.cpp \
         core/opimmaintainer.cpp \
         core/opimresolver.cpp \
         core/opimstate.cpp \
         core/opimxref.cpp \
         core/opimxrefmanager.cpp \
         core/opimxrefpartner.cpp \
-        core/orecur.cpp \
-        core/otimezone.cpp 
+        core/opimrecurrence.cpp \
+        core/opimtimezone.cpp 

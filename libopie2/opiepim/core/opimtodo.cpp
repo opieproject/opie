@@ -27,11 +27,11 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#include "otodo.h"
+#include "opimtodo.h"
 
 /* OPIE */
 #include <opie2/opimstate.h>
-#include <opie2/orecur.h>
+#include <opie2/opimrecurrence.h>
 #include <opie2/opimmaintainer.h>
 #include <opie2/opimnotifymanager.h>
 #include <opie2/opimresolver.h>
@@ -49,16 +49,16 @@
 namespace Opie
 {
 
-struct OTodo::OTodoData : public QShared
+struct OPimTodo::OPimTodoData : public QShared
 {
-    OTodoData() : QShared()
+    OPimTodoData() : QShared()
     {
         recur = 0;
         state = 0;
         maintainer = 0;
         notifiers = 0;
     };
-    ~OTodoData()
+    ~OPimTodoData()
     {
         delete recur;
         delete maintainer;
@@ -74,7 +74,7 @@ struct OTodo::OTodoData : public QShared
     QMap<QString, QString> extra;
     ushort prog;
     OPimState *state;
-    ORecur *recur;
+    OPimRecurrence *recur;
     OPimMaintainer *maintainer;
     QDate start;
     QDate completed;
@@ -82,7 +82,7 @@ struct OTodo::OTodoData : public QShared
 };
 
 
-OTodo::OTodo( const OTodo &event )
+OPimTodo::OPimTodo( const OPimTodo &event )
         : OPimRecord( event ), data( event.data )
 {
     data->ref();
@@ -90,20 +90,20 @@ OTodo::OTodo( const OTodo &event )
 }
 
 
-OTodo::~OTodo()
+OPimTodo::~OPimTodo()
 {
 
-    //    qWarning("~OTodo "  );
+    //    qWarning("~OPimTodo "  );
     if ( data->deref() )
     {
-        //        qWarning("OTodo::dereffing");
+        //        qWarning("OPimTodo::dereffing");
         delete data;
         data = 0l;
     }
 }
 
 
-OTodo::OTodo( bool completed, int priority,
+OPimTodo::OPimTodo( bool completed, int priority,
               const QArray<int> &category,
               const QString& summary,
               const QString &description,
@@ -111,10 +111,10 @@ OTodo::OTodo( bool completed, int priority,
               bool hasDate, QDate date, int uid )
         : OPimRecord( uid )
 {
-    //    qWarning("OTodoData " + summary);
+    //    qWarning("OPimTodoData " + summary);
     setCategories( category );
 
-    data = new OTodoData;
+    data = new OPimTodoData;
 
     data->date = date;
     data->isCompleted = completed;
@@ -126,7 +126,7 @@ OTodo::OTodo( bool completed, int priority,
 }
 
 
-OTodo::OTodo( bool completed, int priority,
+OPimTodo::OPimTodo( bool completed, int priority,
               const QStringList &category,
               const QString& summary,
               const QString &description,
@@ -134,10 +134,10 @@ OTodo::OTodo( bool completed, int priority,
               bool hasDate, QDate date, int uid )
         : OPimRecord( uid )
 {
-    //    qWarning("OTodoData" + summary);
+    //    qWarning("OPimTodoData" + summary);
     setCategories( idsFromString( category.join( ";" ) ) );
 
-    data = new OTodoData;
+    data = new OPimTodoData;
 
     data->date = date;
     data->isCompleted = completed;
@@ -149,7 +149,7 @@ OTodo::OTodo( bool completed, int priority,
 }
 
 
-bool OTodo::match( const QRegExp &regExp ) const
+bool OPimTodo::match( const QRegExp &regExp ) const
 {
     if ( QString::number( data->priority ).find( regExp ) != -1 )
     {
@@ -175,80 +175,80 @@ bool OTodo::match( const QRegExp &regExp ) const
 }
 
 
-bool OTodo::isCompleted() const
+bool OPimTodo::isCompleted() const
 {
     return data->isCompleted;
 }
 
 
-bool OTodo::hasDueDate() const
+bool OPimTodo::hasDueDate() const
 {
     return data->hasDate;
 }
 
 
-bool OTodo::hasStartDate() const
+bool OPimTodo::hasStartDate() const
 {
     return data->start.isValid();
 }
 
 
-bool OTodo::hasCompletedDate() const
+bool OPimTodo::hasCompletedDate() const
 {
     return data->completed.isValid();
 }
 
 
-int OTodo::priority() const
+int OPimTodo::priority() const
 {
     return data->priority;
 }
 
 
-QString OTodo::summary() const
+QString OPimTodo::summary() const
 {
     return data->sum;
 }
 
 
-ushort OTodo::progress() const
+ushort OPimTodo::progress() const
 {
     return data->prog;
 }
 
 
-QDate OTodo::dueDate() const
+QDate OPimTodo::dueDate() const
 {
     return data->date;
 }
 
 
-QDate OTodo::startDate() const
+QDate OPimTodo::startDate() const
 {
     return data->start;
 }
 
 
-QDate OTodo::completedDate() const
+QDate OPimTodo::completedDate() const
 {
     return data->completed;
 }
 
 
-QString OTodo::description() const
+QString OPimTodo::description() const
 {
     return data->desc;
 }
 
 
-bool OTodo::hasState() const
+bool OPimTodo::hasState() const
 {
     if ( !data->state ) return false;
     return ( data->state->state() != OPimState::Undefined );
 }
 
 
-OPimState OTodo::state() const
+OPimState OPimTodo::state() const
 {
     if ( !data->state )
     {
@@ -260,22 +260,22 @@ OPimState OTodo::state() const
 }
 
 
-bool OTodo::hasRecurrence() const
+bool OPimTodo::hasRecurrence() const
 {
     if ( !data->recur ) return false;
     return data->recur->doesRecur();
 }
 
 
-ORecur OTodo::recurrence() const
+OPimRecurrence OPimTodo::recurrence() const
 {
-    if ( !data->recur ) return ORecur();
+    if ( !data->recur ) return OPimRecurrence();
 
     return ( *data->recur );
 }
 
 
-bool OTodo::hasMaintainer() const
+bool OPimTodo::hasMaintainer() const
 {
     if ( !data->maintainer ) return false;
 
@@ -283,7 +283,7 @@ bool OTodo::hasMaintainer() const
 }
 
 
-OPimMaintainer OTodo::maintainer() const
+OPimMaintainer OPimTodo::maintainer() const
 {
     if ( !data->maintainer ) return OPimMaintainer();
 
@@ -291,21 +291,21 @@ OPimMaintainer OTodo::maintainer() const
 }
 
 
-void OTodo::setCompleted( bool completed )
+void OPimTodo::setCompleted( bool completed )
 {
     changeOrModify();
     data->isCompleted = completed;
 }
 
 
-void OTodo::setHasDueDate( bool hasDate )
+void OPimTodo::setHasDueDate( bool hasDate )
 {
     changeOrModify();
     data->hasDate = hasDate;
 }
 
 
-void OTodo::setDescription( const QString &desc )
+void OPimTodo::setDescription( const QString &desc )
 {
     //    qWarning( "desc " + desc );
     changeOrModify();
@@ -313,42 +313,42 @@ void OTodo::setDescription( const QString &desc )
 }
 
 
-void OTodo::setSummary( const QString& sum )
+void OPimTodo::setSummary( const QString& sum )
 {
     changeOrModify();
     data->sum = sum;
 }
 
 
-void OTodo::setPriority( int prio )
+void OPimTodo::setPriority( int prio )
 {
     changeOrModify();
     data->priority = prio;
 }
 
 
-void OTodo::setDueDate( const QDate& date )
+void OPimTodo::setDueDate( const QDate& date )
 {
     changeOrModify();
     data->date = date;
 }
 
 
-void OTodo::setStartDate( const QDate& date )
+void OPimTodo::setStartDate( const QDate& date )
 {
     changeOrModify();
     data->start = date;
 }
 
 
-void OTodo::setCompletedDate( const QDate& date )
+void OPimTodo::setCompletedDate( const QDate& date )
 {
     changeOrModify();
     data->completed = date;
 }
 
 
-void OTodo::setState( const OPimState& state )
+void OPimTodo::setState( const OPimState& state )
 {
     changeOrModify();
     if ( data->state )
@@ -358,17 +358,17 @@ void OTodo::setState( const OPimState& state )
 }
 
 
-void OTodo::setRecurrence( const ORecur& rec )
+void OPimTodo::setRecurrence( const OPimRecurrence& rec )
 {
     changeOrModify();
     if ( data->recur )
         ( *data->recur ) = rec;
     else
-        data->recur = new ORecur( rec );
+        data->recur = new OPimRecurrence( rec );
 }
 
 
-void OTodo::setMaintainer( const OPimMaintainer& pim )
+void OPimTodo::setMaintainer( const OPimMaintainer& pim )
 {
     changeOrModify();
 
@@ -379,7 +379,7 @@ void OTodo::setMaintainer( const OPimMaintainer& pim )
 }
 
 
-bool OTodo::isOverdue( )
+bool OPimTodo::isOverdue( )
 {
     if ( data->hasDate && !data->isCompleted )
         return QDate::currentDate() > data->date;
@@ -387,14 +387,14 @@ bool OTodo::isOverdue( )
 }
 
 
-void OTodo::setProgress( ushort progress )
+void OPimTodo::setProgress( ushort progress )
 {
     changeOrModify();
     data->prog = progress;
 }
 
 
-QString OTodo::toShortText() const
+QString OPimTodo::toShortText() const
 {
     return summary();
 }
@@ -403,7 +403,7 @@ QString OTodo::toShortText() const
 /*!
   Returns a richt text string
 */
-QString OTodo::toRichText() const
+QString OPimTodo::toRichText() const
 {
     QString text;
     QStringList catlist;
@@ -473,14 +473,14 @@ QString OTodo::toRichText() const
 }
 
 
-bool OTodo::hasNotifiers() const
+bool OPimTodo::hasNotifiers() const
 {
     if ( !data->notifiers ) return false;
     return !data->notifiers->isEmpty();
 }
 
 
-OPimNotifyManager& OTodo::notifiers()
+OPimNotifyManager& OPimTodo::notifiers()
 {
     if ( !data->notifiers )
         data->notifiers = new OPimNotifyManager;
@@ -488,7 +488,7 @@ OPimNotifyManager& OTodo::notifiers()
 }
 
 
-const OPimNotifyManager& OTodo::notifiers() const
+const OPimNotifyManager& OPimTodo::notifiers() const
 {
     if ( !data->notifiers )
         data->notifiers = new OPimNotifyManager;
@@ -497,7 +497,7 @@ const OPimNotifyManager& OTodo::notifiers() const
 }
 
 
-bool OTodo::operator<( const OTodo &toDoEvent ) const
+bool OPimTodo::operator<( const OPimTodo &toDoEvent ) const
 {
     if ( !hasDueDate() && !toDoEvent.hasDueDate() ) return true;
     if ( !hasDueDate() && toDoEvent.hasDueDate() ) return false;
@@ -516,7 +516,7 @@ bool OTodo::operator<( const OTodo &toDoEvent ) const
 }
 
 
-bool OTodo::operator<=( const OTodo &toDoEvent ) const
+bool OPimTodo::operator<=( const OPimTodo &toDoEvent ) const
 {
     if ( !hasDueDate() && !toDoEvent.hasDueDate() ) return true;
     if ( !hasDueDate() && toDoEvent.hasDueDate() ) return true;
@@ -535,7 +535,7 @@ bool OTodo::operator<=( const OTodo &toDoEvent ) const
 }
 
 
-bool OTodo::operator>( const OTodo &toDoEvent ) const
+bool OPimTodo::operator>( const OPimTodo &toDoEvent ) const
 {
     if ( !hasDueDate() && !toDoEvent.hasDueDate() ) return false;
     if ( !hasDueDate() && toDoEvent.hasDueDate() ) return false;
@@ -554,7 +554,7 @@ bool OTodo::operator>( const OTodo &toDoEvent ) const
 }
 
 
-bool OTodo::operator>=( const OTodo &toDoEvent ) const
+bool OPimTodo::operator>=( const OPimTodo &toDoEvent ) const
 {
     if ( !hasDueDate() && !toDoEvent.hasDueDate() ) return true;
     if ( !hasDueDate() && toDoEvent.hasDueDate() ) return false;
@@ -573,7 +573,7 @@ bool OTodo::operator>=( const OTodo &toDoEvent ) const
 }
 
 
-bool OTodo::operator==( const OTodo &toDoEvent ) const
+bool OPimTodo::operator==( const OPimTodo &toDoEvent ) const
 {
     if ( data->priority != toDoEvent.data->priority ) return false;
     if ( data->priority != toDoEvent.data->prog ) return false;
@@ -589,7 +589,7 @@ bool OTodo::operator==( const OTodo &toDoEvent ) const
 }
 
 
-void OTodo::deref()
+void OPimTodo::deref()
 {
 
     //    qWarning("deref in ToDoEvent");
@@ -602,7 +602,7 @@ void OTodo::deref()
 }
 
 
-OTodo &OTodo::operator=( const OTodo &item )
+OPimTodo &OPimTodo::operator=( const OPimTodo &item )
 {
     if ( this == &item ) return * this;
 
@@ -616,7 +616,7 @@ OTodo &OTodo::operator=( const OTodo &item )
 }
 
 
-QMap<int, QString> OTodo::toMap() const
+QMap<int, QString> OPimTodo::toMap() const
 {
     QMap<int, QString> map;
 
@@ -646,13 +646,13 @@ QMap<int, QString> OTodo::toMap() const
  *  creates a new QShared Object or it can modify it
  * right in place
  */
-void OTodo::changeOrModify()
+void OPimTodo::changeOrModify()
 {
     if ( data->count != 1 )
     {
         qWarning( "changeOrModify" );
         data->deref();
-        OTodoData* d2 = new OTodoData();
+        OPimTodoData* d2 = new OPimTodoData();
         copy( data, d2 );
         data = d2;
     }
@@ -664,7 +664,7 @@ void OTodo::changeOrModify()
  * if you add something to the Data struct
  * be sure to copy it here
  */
-void OTodo::copy( OTodoData* src, OTodoData* dest )
+void OPimTodo::copy( OPimTodoData* src, OPimTodoData* dest )
 {
     dest->date = src->date;
     dest->isCompleted = src->isCompleted;
@@ -679,7 +679,7 @@ void OTodo::copy( OTodoData* src, OTodoData* dest )
         dest->state = new OPimState( *src->state );
 
     if ( src->recur )
-        dest->recur = new ORecur( *src->recur );
+        dest->recur = new OPimRecurrence( *src->recur );
 
     if ( src->maintainer )
         dest->maintainer = new OPimMaintainer( *src->maintainer )
@@ -692,19 +692,19 @@ void OTodo::copy( OTodoData* src, OTodoData* dest )
 }
 
 
-QString OTodo::type() const
+QString OPimTodo::type() const
 {
-    return QString::fromLatin1( "OTodo" );
+    return QString::fromLatin1( "OPimTodo" );
 }
 
 
-QString OTodo::recordField( int /*id*/ ) const
+QString OPimTodo::recordField( int /*id*/ ) const
 {
     return QString::null;
 }
 
 
-int OTodo::rtti()
+int OPimTodo::rtti()
 {
     return OPimResolver::TodoList;
 }

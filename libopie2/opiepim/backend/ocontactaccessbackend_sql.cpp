@@ -39,8 +39,8 @@
 #include <qpe/global.h>
 #include <qpe/recordfields.h>
 
-#include <opie2/ocontactfields.h>
-#include <opie2/oconversion.h>
+#include <opie2/opimcontactfields.h>
+#include <opie2/opimdateconversion.h>
 #include <opie2/osqldriver.h>
 #include <opie2/osqlresult.h>
 #include <opie2/osqlmanager.h>
@@ -105,15 +105,15 @@ namespace Opie {
 	};
 	
 	/**
-	 * inserts/adds a OContact to the table
+	 * inserts/adds a OPimContact to the table
 	 */
 	class InsertQuery : public OSQLQuery {
 	public:
-		InsertQuery(const OContact& );
+		InsertQuery(const OPimContact& );
 		~InsertQuery();
 		QString query()const;
 	private:
-		OContact m_contact;
+		OPimContact m_contact;
 	};
 	
 
@@ -176,7 +176,7 @@ namespace Opie {
 
 		qu += "create table addressbook( uid PRIMARY KEY ";
 
-		QStringList fieldList = OContactFields::untrfields( false );
+		QStringList fieldList = OPimContactFields::untrfields( false );
 		for ( QStringList::Iterator it = ++fieldList.begin(); it != fieldList.end(); ++it ){
 			qu += QString( ",\"%1\" VARCHAR(10)" ).arg( *it );
 		}
@@ -223,7 +223,7 @@ namespace Opie {
 	}
 	
 
-	InsertQuery::InsertQuery( const OContact& contact )
+	InsertQuery::InsertQuery( const OPimContact& contact )
 		: OSQLQuery(), m_contact( contact ) {
 	}
 
@@ -231,7 +231,7 @@ namespace Opie {
 	}
 
 	/*
-	 * converts from a OContact to a query
+	 * converts from a OPimContact to a query
 	 */
 	QString InsertQuery::query()const{
 
@@ -244,8 +244,8 @@ namespace Opie {
 		// Remember: The category is stored in contactMap, too ! 
 		QMap<int, QString> contactMap = m_contact.toMap();
 		
-		QStringList fieldList = OContactFields::untrfields( false );
-		QMap<QString, int> translate = OContactFields::untrFieldsToId();
+		QStringList fieldList = OPimContactFields::untrfields( false );
+		QMap<QString, int> translate = OPimContactFields::untrFieldsToId();
 		for ( QStringList::Iterator it = ++fieldList.begin(); it != fieldList.end(); ++it ){
 			// Convert Column-String to Id and get value for this id..
 			// Hmmm.. Maybe not very cute solution..
@@ -295,7 +295,7 @@ namespace Opie {
 		QMap<QString, QString> addressbook_db;
 		
 		// Get the translation from the ID to the String
-		QMap<int, QString> transMap = OContactFields::idToUntrFields();
+		QMap<int, QString> transMap = OPimContactFields::idToUntrFields();
 		
 		for( QMap<int, QString>::Iterator it = contactMap.begin(); 
 		     it != contactMap.end(); ++it ){
@@ -459,11 +459,11 @@ namespace Opie {
 
 namespace Opie {
 
-OContactAccessBackend_SQL::OContactAccessBackend_SQL ( const QString& /* appname */, 
+OPimContactAccessBackend_SQL::OPimContactAccessBackend_SQL ( const QString& /* appname */, 
 						       const QString& filename ): 
-	OContactAccessBackend(), m_changed(false), m_driver( NULL )
+	OPimContactAccessBackend(), m_changed(false), m_driver( NULL )
 {
-	qWarning("C'tor OContactAccessBackend_SQL starts");
+	qWarning("C'tor OPimContactAccessBackend_SQL starts");
 	QTime t;
 	t.start();
 
@@ -480,16 +480,16 @@ OContactAccessBackend_SQL::OContactAccessBackend_SQL ( const QString& /* appname
 
 	load();
 
-	qWarning("C'tor OContactAccessBackend_SQL ends: %d ms", t.elapsed() );
+	qWarning("C'tor OPimContactAccessBackend_SQL ends: %d ms", t.elapsed() );
 }
 
-OContactAccessBackend_SQL::~OContactAccessBackend_SQL ()
+OPimContactAccessBackend_SQL::~OPimContactAccessBackend_SQL ()
 {
 	if( m_driver )
 		delete m_driver;
 }
 
-bool OContactAccessBackend_SQL::load ()
+bool OPimContactAccessBackend_SQL::load ()
 {
 	if (!m_driver->open() )
 		return false;
@@ -506,18 +506,18 @@ bool OContactAccessBackend_SQL::load ()
 
 }
 
-bool OContactAccessBackend_SQL::reload()
+bool OPimContactAccessBackend_SQL::reload()
 {
 	return load();
 }
 
-bool OContactAccessBackend_SQL::save()
+bool OPimContactAccessBackend_SQL::save()
 {
 	return m_driver->close();  // Shouldn't m_driver->sync be better than close ? (eilers)
 }
 
 
-void OContactAccessBackend_SQL::clear ()
+void OPimContactAccessBackend_SQL::clear ()
 {
 	ClearQuery cle;
 	OSQLResult res = m_driver->query( &cle );
@@ -525,23 +525,23 @@ void OContactAccessBackend_SQL::clear ()
 	reload();
 }
 
-bool OContactAccessBackend_SQL::wasChangedExternally()
+bool OPimContactAccessBackend_SQL::wasChangedExternally()
 {
 	return false;
 }
 
-QArray<int> OContactAccessBackend_SQL::allRecords() const
+QArray<int> OPimContactAccessBackend_SQL::allRecords() const
 {
 
 	// FIXME: Think about cute handling of changed tables..
 	// Thus, we don't have to call update here...
  	if ( m_changed )  
-		((OContactAccessBackend_SQL*)this)->update();
+		((OPimContactAccessBackend_SQL*)this)->update();
 	
 	return m_uids;
 }
 
-bool OContactAccessBackend_SQL::add ( const OContact &newcontact )
+bool OPimContactAccessBackend_SQL::add ( const OPimContact &newcontact )
 {
 	InsertQuery ins( newcontact );
 	OSQLResult res = m_driver->query( &ins );
@@ -557,7 +557,7 @@ bool OContactAccessBackend_SQL::add ( const OContact &newcontact )
 }
 
 
-bool OContactAccessBackend_SQL::remove ( int uid )
+bool OPimContactAccessBackend_SQL::remove ( int uid )
 {
 	RemoveQuery rem( uid );
 	OSQLResult res = m_driver->query(&rem );
@@ -570,7 +570,7 @@ bool OContactAccessBackend_SQL::remove ( int uid )
 	return true;
 }
 
-bool OContactAccessBackend_SQL::replace ( const OContact &contact )
+bool OPimContactAccessBackend_SQL::replace ( const OPimContact &contact )
 {
 	if ( !remove( contact.uid() ) )
 		return false;
@@ -579,28 +579,28 @@ bool OContactAccessBackend_SQL::replace ( const OContact &contact )
 }
 
 
-OContact OContactAccessBackend_SQL::find ( int uid ) const
+OPimContact OPimContactAccessBackend_SQL::find ( int uid ) const
 {
-	qWarning("OContactAccessBackend_SQL::find()");
+	qWarning("OPimContactAccessBackend_SQL::find()");
 	QTime t;
 	t.start();
 
-	OContact retContact( requestNonCustom( uid ) );
+	OPimContact retContact( requestNonCustom( uid ) );
 	retContact.setExtraMap( requestCustom( uid ) );
 
-	qWarning("OContactAccessBackend_SQL::find() needed: %d ms", t.elapsed() );
+	qWarning("OPimContactAccessBackend_SQL::find() needed: %d ms", t.elapsed() );
 	return retContact;
 }
 
 
 
-QArray<int> OContactAccessBackend_SQL::queryByExample ( const OContact &query, int settings, const QDateTime& d = QDateTime() )
+QArray<int> OPimContactAccessBackend_SQL::queryByExample ( const OPimContact &query, int settings, const QDateTime& d = QDateTime() )
 {
 	QString qu = "SELECT uid FROM addressbook WHERE";
 
 	QMap<int, QString> queryFields = query.toMap();
-	QStringList fieldList = OContactFields::untrfields( false );
-	QMap<QString, int> translate = OContactFields::untrFieldsToId();
+	QStringList fieldList = OPimContactFields::untrfields( false );
+	QMap<QString, int> translate = OPimContactFields::untrFieldsToId();
 
 	// Convert every filled field to a SQL-Query
 	bool isAnyFieldSelected = false;
@@ -614,7 +614,7 @@ QArray<int> OContactAccessBackend_SQL::queryByExample ( const OContact &query, i
 				// Switching between case sensitive and insensitive...
 				// LIKE is not case sensitive, GLOB is case sensitive
 				// Do exist a better solution to switch this ?
-				if ( settings & OContactAccess::IgnoreCase )
+				if ( settings & OPimContactAccess::IgnoreCase )
 					qu += "(\"" + *it + "\"" + " LIKE " + "'" 
 						+ queryStr.replace(QRegExp("\\*"),"%") + "'" + ") AND "; 
 				else
@@ -643,57 +643,57 @@ QArray<int> OContactAccessBackend_SQL::queryByExample ( const OContact &query, i
 	return list;		
 }
 
-QArray<int> OContactAccessBackend_SQL::matchRegexp(  const QRegExp &r ) const
+QArray<int> OPimContactAccessBackend_SQL::matchRegexp(  const QRegExp &r ) const
 {
 	QArray<int> nix(0);
 	return nix;
 }
 
-const uint OContactAccessBackend_SQL::querySettings()
+const uint OPimContactAccessBackend_SQL::querySettings()
 {
-	return OContactAccess::IgnoreCase 
-		|| OContactAccess::WildCards;
+	return OPimContactAccess::IgnoreCase 
+		|| OPimContactAccess::WildCards;
 }
 
-bool OContactAccessBackend_SQL::hasQuerySettings (uint querySettings) const
+bool OPimContactAccessBackend_SQL::hasQuerySettings (uint querySettings) const
 {
-	/* OContactAccess::IgnoreCase, DateDiff, DateYear, DateMonth, DateDay
+	/* OPimContactAccess::IgnoreCase, DateDiff, DateYear, DateMonth, DateDay
 	 * may be added with any of the other settings. IgnoreCase should never used alone.
 	 * Wildcards, RegExp, ExactMatch should never used at the same time...
 	 */
 
 	// Step 1: Check whether the given settings are supported by this backend
 	if ( ( querySettings & ( 
-				OContactAccess::IgnoreCase
-				| OContactAccess::WildCards
-// 				| OContactAccess::DateDiff
-// 				| OContactAccess::DateYear
-// 				| OContactAccess::DateMonth
-// 				| OContactAccess::DateDay
-// 				| OContactAccess::RegExp
-// 				| OContactAccess::ExactMatch
+				OPimContactAccess::IgnoreCase
+				| OPimContactAccess::WildCards
+// 				| OPimContactAccess::DateDiff
+// 				| OPimContactAccess::DateYear
+// 				| OPimContactAccess::DateMonth
+// 				| OPimContactAccess::DateDay
+// 				| OPimContactAccess::RegExp
+// 				| OPimContactAccess::ExactMatch
 			       ) ) != querySettings )
 		return false;
 
 	// Step 2: Check whether the given combinations are ok..
 
 	// IngoreCase alone is invalid
-	if ( querySettings == OContactAccess::IgnoreCase )
+	if ( querySettings == OPimContactAccess::IgnoreCase )
 		return false;
 
 	// WildCards, RegExp and ExactMatch should never used at the same time 
-	switch ( querySettings & ~( OContactAccess::IgnoreCase
-				    | OContactAccess::DateDiff
-				    | OContactAccess::DateYear
-				    | OContactAccess::DateMonth
-				    | OContactAccess::DateDay
+	switch ( querySettings & ~( OPimContactAccess::IgnoreCase
+				    | OPimContactAccess::DateDiff
+				    | OPimContactAccess::DateYear
+				    | OPimContactAccess::DateMonth
+				    | OPimContactAccess::DateDay
 				    )
 		 ){
-	case OContactAccess::RegExp:
+	case OPimContactAccess::RegExp:
 		return ( true );
-	case OContactAccess::WildCards:
+	case OPimContactAccess::WildCards:
 		return ( true );
-	case OContactAccess::ExactMatch:
+	case OPimContactAccess::ExactMatch:
 		return ( true );
 	case 0: // one of the upper removed bits were set..
 		return ( true );
@@ -703,7 +703,7 @@ bool OContactAccessBackend_SQL::hasQuerySettings (uint querySettings) const
 
 }
 
-QArray<int> OContactAccessBackend_SQL::sorted( bool asc,  int , int ,  int )
+QArray<int> OPimContactAccessBackend_SQL::sorted( bool asc,  int , int ,  int )
 {
 	QTime t;
 	t.start();
@@ -735,7 +735,7 @@ QArray<int> OContactAccessBackend_SQL::sorted( bool asc,  int , int ,  int )
 }
 
 
-void OContactAccessBackend_SQL::update()
+void OPimContactAccessBackend_SQL::update()
 {
 	qWarning("Update starts");
 	QTime t;
@@ -756,7 +756,7 @@ void OContactAccessBackend_SQL::update()
 	qWarning("Update ends %d ms", t.elapsed() );
 }
 
-QArray<int> OContactAccessBackend_SQL::extractUids( OSQLResult& res ) const
+QArray<int> OPimContactAccessBackend_SQL::extractUids( OSQLResult& res ) const
 {
 	qWarning("extractUids");
 	QTime t;
@@ -778,7 +778,7 @@ QArray<int> OContactAccessBackend_SQL::extractUids( OSQLResult& res ) const
 }
 
 #ifdef __STORE_HORIZONTAL_
-QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
+QMap<int, QString>  OPimContactAccessBackend_SQL::requestNonCustom( int uid ) const
 {
 	QTime t;
 	t.start();
@@ -798,8 +798,8 @@ QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
 	QTime t3;
 	t3.start();
 	// Now loop through all columns
-	QStringList fieldList = OContactFields::untrfields( false );
-	QMap<QString, int> translate = OContactFields::untrFieldsToId();
+	QStringList fieldList = OPimContactFields::untrfields( false );
+	QMap<QString, int> translate = OPimContactFields::untrFieldsToId();
 	for ( QStringList::Iterator it = ++fieldList.begin(); it != fieldList.end(); ++it ){
 		// Get data for the selected column and store it with the
 		// corresponding id into the map..
@@ -820,7 +820,7 @@ QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
 			int day   = (*(++lit)).toInt();
 			if ( ( day != 0 ) && ( month != 0 ) && ( year != 0 ) ){
 			     QDate date( year, month, day );
-			     nonCustomMap.insert( id, OConversion::dateToString( date ) );
+			     nonCustomMap.insert( id, OPimDateConversion::dateToString( date ) );
 			}
 		}
 			break;
@@ -843,7 +843,7 @@ QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
 }
 #else
 
-QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
+QMap<int, QString>  OPimContactAccessBackend_SQL::requestNonCustom( int uid ) const
 {
 	QTime t;
 	t.start();
@@ -866,7 +866,7 @@ QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
 	int t3needed = 0;
 	QTime t3;
 	t3.start();
-	QMap<QString, int> translateMap = OContactFields::untrFieldsToId();
+	QMap<QString, int> translateMap = OPimContactFields::untrFieldsToId();
 
 	OSQLResultItem::ValueList list = res_noncustom.results();
 	OSQLResultItem::ValueList::Iterator it = list.begin();
@@ -887,7 +887,7 @@ QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
 				qWarning("3. %s", (*lit).latin1());
 				qWarning( "RequestNonCustom->Converting:%s to Year: %d, Month: %d, Day: %d ", (*it).data( "value" ).latin1(), year, month, day );
 				QDate date( year, month, day );
-				nonCustomMap.insert( typeId, OConversion::dateToString( date ) );
+				nonCustomMap.insert( typeId, OPimDateConversion::dateToString( date ) );
 			}
 				break;
 			default:
@@ -906,7 +906,7 @@ QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
 
 #endif // __STORE_HORIZONTAL_
 
-QMap<QString, QString>  OContactAccessBackend_SQL::requestCustom( int uid ) const
+QMap<QString, QString>  OPimContactAccessBackend_SQL::requestCustom( int uid ) const
 {
 	QTime t;
 	t.start();

@@ -27,7 +27,7 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#include "otimezone.h"
+#include "opimtimezone.h"
 
 /* STD */
 #include <stdio.h>
@@ -100,16 +100,16 @@ time_t to_Time_t( const QDateTime& utc, const QString& str )
 
 namespace Opie
 {
-OTimeZone::OTimeZone( const ZoneName& zone )
+OPimTimeZone::OPimTimeZone( const ZoneName& zone )
         : m_name( zone )
 {}
 
 
-OTimeZone::~OTimeZone()
+OPimTimeZone::~OPimTimeZone()
 {}
 
 
-bool OTimeZone::isValid() const
+bool OPimTimeZone::isValid() const
 {
     return !m_name.isEmpty();
 }
@@ -118,25 +118,25 @@ bool OTimeZone::isValid() const
  * we will get the current timezone
  * and ask it to convert to the timezone date
  */
-QDateTime OTimeZone::toLocalDateTime( const QDateTime& dt )
+QDateTime OPimTimeZone::toLocalDateTime( const QDateTime& dt )
 {
-    return OTimeZone::current().toDateTime( dt, *this );
+    return OPimTimeZone::current().toDateTime( dt, *this );
 }
 
 
-QDateTime OTimeZone::toUTCDateTime( const QDateTime& dt )
+QDateTime OPimTimeZone::toUTCDateTime( const QDateTime& dt )
 {
-    return OTimeZone::utc().toDateTime( dt, *this );
+    return OPimTimeZone::utc().toDateTime( dt, *this );
 }
 
 
-QDateTime OTimeZone::fromUTCDateTime( time_t t )
+QDateTime OPimTimeZone::fromUTCDateTime( time_t t )
 {
     return utcTime( t );
 }
 
 
-QDateTime OTimeZone::toDateTime( time_t t )
+QDateTime OPimTimeZone::toDateTime( time_t t )
 {
     return utcTime( t, m_name );
 }
@@ -146,7 +146,7 @@ QDateTime OTimeZone::toDateTime( time_t t )
  * convert dt to utc using zone.m_name
  * convert utc -> timeZoneDT using this->m_name
  */
-QDateTime OTimeZone::toDateTime( const QDateTime& dt, const OTimeZone& zone )
+QDateTime OPimTimeZone::toDateTime( const QDateTime& dt, const OPimTimeZone& zone )
 {
     time_t utc = to_Time_t( dt, zone.m_name );
     qWarning( "%d %s", utc, zone.m_name.latin1() );
@@ -154,33 +154,33 @@ QDateTime OTimeZone::toDateTime( const QDateTime& dt, const OTimeZone& zone )
 }
 
 
-time_t OTimeZone::fromDateTime( const QDateTime& time )
+time_t OPimTimeZone::fromDateTime( const QDateTime& time )
 {
     return to_Time_t( time, m_name );
 }
 
 
-time_t OTimeZone::fromUTCDateTime( const QDateTime& time )
+time_t OPimTimeZone::fromUTCDateTime( const QDateTime& time )
 {
     return to_Time_t( time, "UTC" );
 }
 
 
-OTimeZone OTimeZone::current()
+OPimTimeZone OPimTimeZone::current()
 {
     QCString str = ::getenv( "TZ" );
-    OTimeZone zone( str );
+    OPimTimeZone zone( str );
     return zone;
 }
 
 
-OTimeZone OTimeZone::utc()
+OPimTimeZone OPimTimeZone::utc()
 {
-    return OTimeZone( "UTC" );
+    return OPimTimeZone( "UTC" );
 }
 
 
-QString OTimeZone::timeZone() const
+QString OPimTimeZone::timeZone() const
 {
     return m_name;
 }

@@ -33,10 +33,10 @@
 
 #include <opie2/opimrecord.h>
 #include <opie2/opimaccessbackend.h>
-#include <opie2/orecordlist.h>
+#include <opie2/opimrecordlist.h>
 
 #include <opie2/opimcache.h>
-#include <opie2/otemplatebase.h>
+#include <opie2/opimtemplatebase.h>
 
 namespace Opie {
 
@@ -57,7 +57,7 @@ public:
         Random = 0,
         SortedAccess
     };
-    typedef ORecordList<T> List;
+    typedef OPimRecordList<T> List;
     typedef OPimAccessBackend<T> BackEnd;
     typedef OPimCache<T> Cache;
 

@@ -33,10 +33,10 @@
 
 namespace Opie {
 
-class OTodoAccessVCal : public OTodoAccessBackend {
+class OPimTodoAccessVCal : public OPimTodoAccessBackend {
 public:
-    OTodoAccessVCal(const QString& );
-    ~OTodoAccessVCal();
+    OPimTodoAccessVCal(const QString& );
+    ~OPimTodoAccessVCal();
 
     bool load();
     bool reload();
@@ -44,18 +44,18 @@ public:
 
     QArray<int> allRecords()const;
     QArray<int> matchRegexp(const QRegExp &r) const;
-    QArray<int> queryByExample( const OTodo& t, int sort, const QDateTime& d = QDateTime() );
+    QArray<int> queryByExample( const OPimTodo& t, int sort, const QDateTime& d = QDateTime() );
     QArray<int> effectiveToDos( const QDate& start,
                                 const QDate& end,
                                 bool includeNoDates );
     QArray<int> overDue();
     QArray<int> sorted( bool asc, int sortOrder, int sortFilter,
                         int cat );
-    OTodo find(int uid)const;
+    OPimTodo find(int uid)const;
     void clear();
-    bool add( const OTodo& );
+    bool add( const OPimTodo& );
     bool remove( int uid );
-    bool replace( const OTodo& );
+    bool replace( const OPimTodo& );
 
     void removeAllCompleted();
     virtual QBitArray supports()const;
@@ -64,7 +64,7 @@ private:
     static QBitArray sup();
     bool m_dirty : 1;
     QString m_file;
-    QMap<int, OTodo> m_map;
+    QMap<int, OPimTodo> m_map;
 };
 
 }
