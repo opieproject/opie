@@ -1,7 +1,7 @@
 /* 
  *  rfmon mode sniffer
  *
- *  $Id: sniff.cc,v 1.3 2002-12-04 20:41:42 mjm Exp $
+ *  $Id: sniff.cc,v 1.4 2002-12-08 16:26:16 max Exp $
  */
 
 #include "sniff.hh"
@@ -175,15 +175,30 @@ void etheraddr_string(register const u_char *ep, char *text)
   static char hex[] = "0123456789abcdef";
   register unsigned int i, j;
   register char *cp;
-  char buf[sizeof("00:00:00:00:00:00")];
+  char buf[sizeof("00:00:00:00:00:00\0")];
   cp = buf;
   if ((j = *ep >> 4) != 0)
-    *cp++ = hex[j];
+  {
+  	*cp++ = hex[j];
+  }
+  else
+  {
+  	*cp++ = '0';
+  }
   *cp++ = hex[*ep++ & 0xf];
-  for (i = 5; (int)--i >= 0;) {
+  
+  for (i = 5; (int)--i >= 0;) 
+  {
     *cp++ = ':';
     if ((j = *ep >> 4) != 0)
-      *cp++ = hex[j];
+    {
+    	*cp++ = hex[j];
+    }
+    else
+    {
+    	*cp++ = '0';
+    }
+  
     *cp++ = hex[*ep++ & 0xf];
   }
   *cp = '\0';
