@@ -17,7 +17,7 @@ IRCServerTab::IRCServerTab(IRCServer server, MainWindow *mainWindow, QWidget *pa
     QWhatsThis::add(m_textview, tr("Server messages"));
     m_layout->add(m_textview);
     m_field = new IRCHistoryLineEdit(this);
-    QWhatsThis::add(m_textview, tr("Type commands here. A list of available commands can be found inside the OpieIRC help"));
+    QWhatsThis::add(m_field, tr("Type commands here. A list of available commands can be found inside the OpieIRC help"));
     m_layout->add(m_field);
     connect(m_field, SIGNAL(returnPressed()), this, SLOT(processCommand()));
     m_field->setFocus();
