@@ -1,4 +1,7 @@
 #include "ircserver.h"
+#include "ircversion.h"
+
+#include <qobject.h>
 
 IRCServer::IRCServer() {
     m_port = 6667;
@@ -49,7 +52,10 @@ QString IRCServer::name() {
 }
 
 unsigned short int IRCServer::port() {
-    return m_port;
+    if(m_port)
+        return m_port;
+    
+    return 6667;
 }
 
 QString IRCServer::username() {
@@ -65,7 +71,10 @@ QString IRCServer::nick() {
 }
 
 QString IRCServer::realname() {
-    return m_realname;
+    if(!m_realname.isEmpty())
+        return m_realname;
+    
+    return QString(QObject::tr("Using")) + " " + QString(APP_VERSION);
 }
 
 QString IRCServer::channels() {

@@ -59,7 +59,7 @@ void IRCChannelList::adjustNicks() {
         }
         else {
             removeItem(i);
-            insertItem(txt,i);
+            insertItem(txt, i);
         }
     }
 }

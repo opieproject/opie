@@ -31,6 +31,7 @@
 
 #define LISTWIDTH 70
 
+template <class T> class QDict;
 class IRCServerTab;
 class IRCChannelTab : public IRCTab {
     Q_OBJECT
@@ -44,6 +45,7 @@ public:
     IRCChannelList *list();
 public:
     void appendText(QString text);
+    static void enqueue(const QString &channel, const QString &message);
 public slots:
     void remove();
     void settingsChanged();
@@ -70,6 +72,7 @@ protected:
     QPopupMenu         *m_popup;
     bool                m_listVisible;
     int                 m_lines;
+    static              QDict<QString> m_queuedMessages;
 };
 
 #endif /* __IRCCHANNELTAB_H */

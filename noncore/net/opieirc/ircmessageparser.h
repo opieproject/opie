@@ -46,6 +46,8 @@ typedef struct IRCCTCPMessageParserStruct {
 /* Struct representing a numerical command handler */
 typedef struct IRCNumericalMessageParserStruct {
     unsigned short commandNumber; 
+    char *message;
+    char *params;
     IRCMessageParseProc proc;
 };
 
@@ -61,7 +63,6 @@ signals:
     void outputReady(IRCOutput output);
 private:
     /* Parser functions */
-    void nullFunc(IRCMessage *message);
     void parseLiteralPing(IRCMessage *message);
     void parseLiteralNotice(IRCMessage *message);
     void parseLiteralJoin(IRCMessage *message);
@@ -73,8 +74,11 @@ private:
     void parseLiteralMode(IRCMessage *message);
     void parseLiteralKick(IRCMessage *message);
     void parseLiteralTopic(IRCMessage *message);
-    void parseNumericalSecondParam(IRCMessage *message);
-    void parseNumericalAllParams(IRCMessage *message);
+    void parseNumerical(IRCMessage *message, int position);
+    void parseNumericalServerName(IRCMessage *message);
+    void parseNumericalServerFeatures(IRCMessage *message);
+    void parseNumericalServerProtocol(IRCMessage *message);
+    void parseNumericalWhoisIdle(IRCMessage *message);
     void parseNumericalNames(IRCMessage *message);
     void parseNumericalEndOfNames(IRCMessage *message);
     void parseNumericalNicknameInUse(IRCMessage *message);

@@ -17,7 +17,7 @@ IRCServerTab::IRCServerTab(IRCServer server, MainWindow *mainWindow, QWidget *pa
     m_mainWindow = mainWindow;
     m_close = FALSE;
     m_lines = 0;
-    m_description->setText(tr("Connection to")+" <b>" + server.hostname() + ":" + QString::number(server.port()) + "</b>");
+    m_description->setText(tr("Connecting to")+" <b>" + server.hostname() + ":" + QString::number(server.port()) + "</b>");
     m_textview = new QTextView(this);
     m_textview->setHScrollBarMode(QScrollView::AlwaysOff);
     m_textview->setVScrollBarMode(QScrollView::AlwaysOn);
@@ -35,6 +35,7 @@ IRCServerTab::IRCServerTab(IRCServer server, MainWindow *mainWindow, QWidget *pa
     connect(m_field, SIGNAL(returnPressed()), this, SLOT(processCommand()));
     connect(m_session, SIGNAL(outputReady(IRCOutput)), this, SLOT(display(IRCOutput)));
     connect(m_mainWindow, SIGNAL(updateScroll()), this, SLOT(scrolling()));
+    connect(m_session, SIGNAL(updateChannels()), this, SLOT(slotUpdateChannels()));
     settingsChanged();
 
     m_field->setFocus();
@@ -113,7 +114,13 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
   if (command == "JOIN" || command == "J") {
         QString channel;
         stream >> channel;
-        if (channel.length() > 0 && (channel.startsWith("#") || channel.startsWith("+"))) {
+        /* According to RFC 1459 */
+        if (channel.length() > 0 && channel.length() < 200 &&
+            channel.find(",") == -1 && channel.find("") == -1) {
+            
+            if (!channel.startsWith("#") && !channel.startsWith("&")) {
+                channel = channel.prepend("#");
+            }
             m_session->join(channel);
         } else {
             tab->appendText("<font color=\"" + m_errorColor + "\">Unknown channel format!</font><br>");
@@ -345,7 +352,7 @@ void IRCServerTab::display(IRCOutput output) {
                         return;
                     }
                 }
-                appendText("<font color=\"" + m_notificationColor + "\">"+output.htmlMessage()+"</font><br>");
+                IRCChannelTab::enqueue(channel->channelname(), "<font color=\"" + m_notificationColor + "\">"+output.htmlMessage()+"</font><br>");
             }
             break;
         case OUTPUT_QUIT: {
@@ -359,19 +366,22 @@ void IRCServerTab::display(IRCOutput output) {
                 }
             }
             break;
-/*        case OUTPUT_NICKCHANGE: {
-            //WAS HERE
-                QString nick = ((IRCPerson *)output.getParam(0))->nick();
+        case OUTPUT_NICKCHANGE: {
+                QString *nick = static_cast<QString*>(output.getParam(0));
+                if(!nick) {
+                    appendText("<font color=\"" + m_notificationColor + "\">"+output.htmlMessage()+"</font><br>");
+                    break;
+                }
                 QListIterator<IRCChannelTab> it(m_channelTabs);
                 for (; it.current(); ++it) {
-                    if (it.current()->list()->hasPerson(nick)) {
+                    if (it.current()->list()->hasPerson(*nick)) {
                         it.current()->appendText("<font color=\"" + m_notificationColor + "\">"+output.htmlMessage()+"</font><br>");
-                        it.current()->list()->update();
                     }
                 }
+                delete nick;
             }
             break;
-  */      case OUTPUT_OTHERJOIN:
+        case OUTPUT_OTHERJOIN:
         case OUTPUT_OTHERKICK:
         case OUTPUT_CHANPERSONMODE:
         case OUTPUT_OTHERPART: {
@@ -386,8 +396,19 @@ void IRCServerTab::display(IRCOutput output) {
         case OUTPUT_ERROR:
             appendText("<font color=\"" + m_errorColor + "\">" + output.htmlMessage() + "</font><br>");
             break;
+        case OUTPUT_TITLE:
+            m_description->setText(output.message());
+            break;
         default:
             appendText("<font color=\"" + m_serverColor + "\">" + output.htmlMessage() + "</font><br>");
             break;
     }
 }
+
+void IRCServerTab::slotUpdateChannels() {
+    QListIterator<IRCChannelTab> it(m_channelTabs);
+    for (; it.current(); ++it) {
+        it.current()->list()->update();
+    }
+}
+                                                                                                 

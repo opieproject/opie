@@ -1,4 +1,6 @@
 #include <qtextstream.h>
+#include <qdatetime.h>
+
 #include "ircmessageparser.h"
 #include "ircversion.h"
 
@@ -27,36 +29,55 @@ IRCCTCPMessageParserStruct IRCMessageParser::ctcpParserProcTable[] = {
     { 0 , 0 }
 };
 
-/* Lookup table for numerical commands */
+/* Lookup table for numerical commands
+ * According to:
+ * http://www.faqs.org/rfcs/rfc1459.html
+ * http://www.faqs.org/rfcs/rfc2812.html
+*/
+
 IRCNumericalMessageParserStruct IRCMessageParser::numericalParserProcTable[] = {
-    { 1,   FUNC(parseNumericalSecondParam) },   // RPL_WELCOME
-    { 2,   FUNC(parseNumericalSecondParam) },   // RPL_YOURHOST
-    { 3,   FUNC(parseNumericalSecondParam) },   // RPL_CREATED
-    { 4,   FUNC(parseNumericalAllParams) },     // RPL_MYINFO
-    { 5,   FUNC(parseNumericalSecondParam) },   // RPL_BOUNCE, RPL_PROTOCTL
-    { 250, FUNC(parseNumericalAllParams) },     // RPL_STATSCONN
-    { 251, FUNC(parseNumericalSecondParam) },   // RPL_LUSERCLIENT
-    { 252, FUNC(parseNumericalAllParams) },     // RPL_LUSEROP
-    { 253, FUNC(parseNumericalAllParams) },     // RPL_LUSERUNKNOWN
-    { 254, FUNC(parseNumericalAllParams) },     // RPL_LUSERCHANNELS
-    { 255, FUNC(parseNumericalSecondParam) },   // RPL_LUSERME
-    { 265, FUNC(parseNumericalAllParams) },     // RPL_LOCALUSERS
-    { 266, FUNC(parseNumericalAllParams) },     // RPL_GLOBALUSERS
-    { 332, FUNC(parseNumericalTopic) },         // RPL_TOPIC
-    { 333, FUNC(parseNumericalTopicWhoTime) },  // RPL_TOPICWHOTIME
-    { 353, FUNC(parseNumericalNames) },         // RPL_NAMREPLY
-    { 366, FUNC(parseNumericalEndOfNames) },    // RPL_ENDOFNAMES
-    { 372, FUNC(parseNumericalSecondParam) },   // RPL_MOTD
-    { 375, FUNC(parseNumericalSecondParam) },   // RPL_MOTDSTART
-    { 376, FUNC(parseNumericalSecondParam) },   // RPL_ENDOFMOTD
-    { 377, FUNC(parseNumericalSecondParam) },   // RPL_MOTD2
-    { 378, FUNC(parseNumericalSecondParam) },   // RPL_MOTD3
-    { 401, FUNC(parseNumericalNoSuchNick) },    // ERR_NOSUCHNICK
-    { 406, FUNC(parseNumericalNoSuchNick) },    // ERR_WASNOSUCHNICK
-    { 412, FUNC(parseNumericalSecondParam) },   // ERR_NOTEXTTOSEND
-    { 422, FUNC(parseNumericalSecondParam) },   // ERR_NOMOTD
-    { 433, FUNC(parseNumericalNicknameInUse) }, // ERR_NICKNAMEINUSE
-    { 0,   0 }
+    { 1, "%1", "1", FUNC(parseNumericalServerName) },       // RPL_WELCOME
+    { 2, "%1", "1", 0 },                                    // RPL_YOURHOST
+    { 3, "%1", "1", 0 },                                    // RPL_CREATED
+    { 4, QT_TR_NOOP("Server %1 version %2 supports usermodes '%3' and channelmodes '%4'"), "1:4", FUNC(parseNumericalServerFeatures) },   // RPL_MYINFO
+    { 5,  0, 0,  FUNC(parseNumericalServerProtocol) },      // RPL_BOUNCE, RPL_PROTOCTL
+    { 250, "%1", "1", 0 },                                  // RPL_STATSCONN
+    { 251, "%1", "1",  0 },                                 // RPL_LUSERCLIENT
+    { 252, QT_TR_NOOP("There are %1 operators connected"), "1", 0 },    // RPL_LUSEROP
+    { 253, QT_TR_NOOP("There are %1 unknown connection(s)"), "1", 0 },  // RPL_LUSERUNKNOWN
+    { 254, QT_TR_NOOP("There are %1 channels formed"), "1", 0 },        // RPL_LUSERCHANNELS
+    { 255, "%1", "1", 0 },                                  // RPL_LUSERME
+    { 263, QT_TR_NOOP("Please wait a while and try again"), 0, 0 }, // RPL_TRYAGAIN
+    { 265, "%1", "1", 0 },                                  // RPL_LOCALUSERS
+    { 266, "%1", "1", 0 },                                  // RPL_GLOBALUSERS
+    { 311, QT_TR_NOOP("Whois %1 (%2@%3)\nReal name: %4"), "1:3,5" },    // RPL_WHOISUSER
+    { 312, QT_TR_NOOP("%1 is using server %2"), "1,2", 0 },             // RPL_WHOISSERVER
+    { 317, 0, 0, FUNC(parseNumericalWhoisIdle) },           // RPL_WHOISIDLE 
+    { 318, "%1 :%2", "1,2", 0 },                            // RPL_ENDOFWHOIS
+    { 320, "%1 %2", "1,2", 0},                              // RPL_WHOISVIRT
+    { 332, 0, 0, FUNC(parseNumericalTopic) },               // RPL_TOPIC
+    { 333, 0, 0, FUNC(parseNumericalTopicWhoTime) },        // RPL_TOPICWHOTIME*/
+    { 353, QT_TR_NOOP("Names for %1: %2"), "2,3", FUNC(parseNumericalNames) },  // RPL_NAMREPLY
+    { 366, "%1 :%2", "1,2", FUNC(parseNumericalEndOfNames) },       // RPL_ENDOFNAMES
+    { 369, "%1 :%2", "1,2", 0 },                            // RPL_ENDOFWHOWAS
+    { 372, "%1", "1", 0 },                                  // RPL_MOTD
+    { 375, "%1", "1", 0 },                                  // RPL_MOTDSTART
+    { 376, "%1", "1", 0 },                                  // RPL_ENDOFMOTD
+    { 377, "%1", "1", 0 },                                  // RPL_MOTD2
+    { 378, "%1", "1", 0 },                                  // RPL_MOTD3
+    { 391, QT_TR_NOOP("Time on server %1 is %2"), "1,2", 0 },           // RPL_TIME
+    { 401, QT_TR_NOOP("Channel or nick %1 doesn't exists"), "1", 0 },   // ERR_NOSUCHNICK
+    { 406, QT_TR_NOOP("There is no history information for %1"), "1" }, // ERR_WASNOSUCHNICK
+    { 409, "%1", "1", 0 },                                  // ERR_NOORIGIN
+    { 411, "%1", "1", 0 },                                  // ERR_NORECIPIENT
+    { 412, "%1", "1", 0 },                                  // ERR_NOTEXTTOSEND
+    { 421, QT_TR_NOOP("Unknown command: %1"), "1", 0 },                 // ERR_NOMOTD
+    { 422, QT_TR_NOOP("You're not on channel %1"), "1", 0},             // ERR_NOTONCHANNEL
+    { 422, "%1", "1", 0 },                                  // ERR_NOMOTD
+    { 433, QT_TR_NOOP("Can't change nick to %1: %2"), "1,2", FUNC(parseNumericalNicknameInUse) }, // ERR_NICKNAMEINUSE
+    { 477, "%1", "1", 0 },                                  // ERR_NOCHANMODES || ERR_NEEDREGGEDNICK
+    { 482, QT_TR_NOOP("[%1] Operation not permitted, you don't have enough channel privileges"), "1", 0 }, //ERR_CHANOPRIVSNEEDED
+    { 0, 0, 0, 0 }
 };
 
 
@@ -70,7 +91,7 @@ void IRCMessageParser::parse(IRCMessage *message) {
     if (message->isNumerical()) {
         for (int i=0; i<numericalParserProcTable[i].commandNumber; i++) {
             if (message->commandNumber() == numericalParserProcTable[i].commandNumber) {
-                (this->*(numericalParserProcTable[i].proc))(message);
+                parseNumerical(message, i);
                 return;
             }
         }
@@ -94,8 +115,50 @@ void IRCMessageParser::parse(IRCMessage *message) {
     }
 }
 
-void IRCMessageParser::nullFunc(IRCMessage *) {
-    /* Do nothing */
+void IRCMessageParser::parseNumerical(IRCMessage *message, int position) {
+    QString out = tr(numericalParserProcTable[position].message);
+    QString paramString = numericalParserProcTable[position].params;
+    
+    if(!out.isEmpty() && !paramString.isEmpty()) {
+        QStringList params = message->params(numericalParserProcTable[position].params);
+    
+        QStringList::Iterator end = params.end();
+        for (QStringList::Iterator it = params.begin(); it != end; ++it) {
+            out = out.arg(*it);
+        }
+    
+        emit outputReady(IRCOutput(OUTPUT_SERVERMESSAGE, out));
+    }
+    
+    if(numericalParserProcTable[position].proc)
+        (this->*(numericalParserProcTable[position].proc))(message);
+}
+
+void IRCMessageParser::parseNumericalServerName(IRCMessage *message) {
+    emit outputReady(IRCOutput(OUTPUT_TITLE, tr("Connected to")+" <b>" + message->prefix() + "</b>"));
+}
+
+void IRCMessageParser::parseNumericalServerFeatures(IRCMessage *message) {
+    m_session->setValidUsermodes(message->param(2));
+    m_session->setValidChannelmodes(message->param(3));
+
+}
+
+void IRCMessageParser::parseNumericalServerProtocol(IRCMessage *message) {
+    /* XXX: Add some usefull features here */
+    QString out = message->allParameters();
+    out = out.mid(out.find(' ')+1);
+    emit outputReady(IRCOutput(OUTPUT_SERVERMESSAGE, out));
+}
+void IRCMessageParser::parseNumericalWhoisIdle(IRCMessage *message) {
+    QDateTime dt;
+    QTime t;
+    t = t.addSecs(message->param(2).toInt());
+    dt.setTime_t(message->param(3).toInt());
+    
+    emit outputReady(IRCOutput(OUTPUT_SERVERMESSAGE, tr("%1 has been idle for %2").arg(message->param(1)).arg(t.toString())));
+    emit outputReady(IRCOutput(OUTPUT_SERVERMESSAGE, tr("%1 signed on %2").arg(message->param(1)).arg(dt.toString())));
+    
 }
 
 void IRCMessageParser::parseLiteralPing(IRCMessage *message) {
@@ -209,22 +272,22 @@ void IRCMessageParser::parseLiteralPrivMsg(IRCMessage *message) {
 }
 
 void IRCMessageParser::parseLiteralNick(IRCMessage *message) {
-
     IRCPerson mask(message->prefix());
-    /* this way of handling nick changes really sucks */
+    m_session->updateNickname(mask.nick(), message->param(0));
+    /* this way of handling nick changes really sucks 
     if (mask.nick() == m_session->m_server->nick()) {
-        /* We are changing our nickname */
+         We are changing our nickname 
         m_session->m_server->setNick(message->param(0));
         IRCOutput output(OUTPUT_NICKCHANGE, tr("You are now known as %1").arg( message->param(0)));
         output.addParam(0);
         emit outputReady(output);
     } else {
-        /* Someone else is */
-        IRCPerson *person = m_session->getPerson(mask.nick());
+         Someone else is 
+        RCPerson *person = m_session->getPerson(mask.nick());
         if (person) {
             //IRCOutput output(OUTPUT_NICKCHANGE, tr("%1 is now known as %2").arg( mask.nick() ).arg( message->param(0)));
 
-            /* new code starts here -- this removes the person from all channels */
+             new code starts here -- this removes the person from all channels 
             QList<IRCChannel> channels;
             m_session->getChannelsByPerson(person, channels);
             QListIterator<IRCChannel> it(channels);
@@ -237,11 +300,11 @@ void IRCMessageParser::parseLiteralNick(IRCMessage *message) {
               output.addParam(person);
               emit outputReady(output);
             }
-            /* new code ends here */
+             new code ends here 
         } else {
             emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Nickname change of an unknown person")));
         }
-    }
+    }*/
 }
 
 void IRCMessageParser::parseLiteralQuit(IRCMessage *message) {
@@ -324,7 +387,7 @@ void IRCMessageParser::parseCTCPPing(IRCMessage *message) {
 
 void IRCMessageParser::parseCTCPVersion(IRCMessage *message) {
     IRCPerson mask(message->prefix());
-    m_session->m_connection->sendCTCP(mask.nick(), APP_VERSION " "  APP_COPYSTR);
+    m_session->m_connection->sendCTCP(mask.nick(), "VERSION " APP_VERSION " "  APP_COPYSTR);
     emit outputReady(IRCOutput(OUTPUT_CTCP, tr("Received a CTCP VERSION from ")+mask.nick()));
 }
 
@@ -463,15 +526,6 @@ void IRCMessageParser::parseLiteralKick(IRCMessage *message) {
     }
 }
 
-
-void IRCMessageParser::parseNumericalSecondParam(IRCMessage *message) {
-    emit outputReady(IRCOutput(OUTPUT_SERVERMESSAGE, message->param(1)));
-}
-
-void IRCMessageParser::parseNumericalAllParams(IRCMessage *message) {
-    emit outputReady(IRCOutput(OUTPUT_SERVERMESSAGE, message->allParameters()));
-}
-
 void IRCMessageParser::parseNumericalNames(IRCMessage *message) {
     /* Name list sent when joining a channel */
     IRCChannel *channel = m_session->getChannel(message->param(2).lower());
@@ -532,6 +586,10 @@ void IRCMessageParser::parseNumericalEndOfNames(IRCMessage *message) {
 
 
 void IRCMessageParser::parseNumericalNicknameInUse(IRCMessage *) {
+    /* If we are connnected this error is not critical */
+    if(m_session->isLoggedIn())
+        return;
+    
     emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Nickname is in use, please reconnect with a different nickname")));
     m_session->endSession();
 }

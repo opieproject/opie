@@ -57,10 +57,14 @@ public:
     void beginSession();
     bool isSessionActive();
     void endSession();
+    bool isLoggedIn();
     void sendMessage(IRCPerson *person, QString message);
     void sendMessage(IRCChannel *channel, QString message);
     void sendAction(IRCPerson *person, QString message);
     void sendAction(IRCChannel *channel, QString message);
+    void updateNickname(const QString &oldNickname, const QString &newNickname);
+    void setValidUsermodes(const QString &modes);
+    void setValidChannelmodes(const QString &modes);
     IRCChannel *getChannel(QString channelname);
     IRCPerson  *getPerson(QString nickname);
 protected:
@@ -73,12 +77,15 @@ protected slots:
     void handleMessage(IRCMessage *message);
 signals:
     void outputReady(IRCOutput output);
+    void updateChannels();
 protected:
     IRCServer             *m_server;
     IRCConnection         *m_connection;
     IRCMessageParser      *m_parser;
     QList<IRCChannel>      m_channels;
     QList<IRCPerson>       m_people;
+    QString                m_validUsermodes;
+    QString                m_validChannelmodes;
 };
 
 #endif /* __IRCSESSION_H */

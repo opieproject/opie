@@ -62,6 +62,7 @@ public slots:
     void remove();
     void processCommand();
     void settingsChanged();
+    void slotUpdateChannels();
 protected slots:
     void display(IRCOutput output);
 protected:

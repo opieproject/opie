@@ -25,7 +25,7 @@ void IRCSession::beginSession() {
 }
 
 void IRCSession::join(QString channelname) {
-    m_connection->sendLine("JOIN "+channelname);
+    m_connection->sendLine("JOIN " + channelname);
 }
 
 void IRCSession::quit(){
@@ -57,15 +57,15 @@ void IRCSession::raw(QString message){
 }
 
 void IRCSession::kick(IRCChannel *channel, IRCPerson *person) {
-    m_connection->sendLine("KICK "+ channel->channelname() + " " + person->nick() +" :0wn3d - no reason");
+    m_connection->sendLine("KICK " + channel->channelname() + " " + person->nick() +" :0wn3d - no reason");
 }
 
 void IRCSession::op(IRCChannel *channel, IRCPerson *person) {
-    m_connection->sendLine("MODE "+ channel->channelname() + " +ooo " + person->nick());
+    m_connection->sendLine("MODE " + channel->channelname() + " +ooo " + person->nick());
 }
 
 void IRCSession::kick(IRCChannel *channel, IRCPerson *person, QString message) {
-    m_connection->sendLine("KICK "+ channel->channelname() + " " + person->nick() +" :" + message);
+    m_connection->sendLine("KICK " + channel->channelname() + " " + person->nick() +" :" + message);
 } 
 
 void IRCSession::sendMessage(IRCPerson *person, QString message) {
@@ -88,9 +88,13 @@ bool IRCSession::isSessionActive() {
     return m_connection->isConnected(); 
 }
 
+bool IRCSession::isLoggedIn() {
+    return m_connection->isLoggedIn();
+}
+
 void IRCSession::endSession() {
     if (m_connection->isLoggedIn())
-        m_connection->sendLine("QUIT :" APP_VERSION);
+        quit(APP_VERSION);
     else
         m_connection->close();
 }
@@ -99,6 +103,48 @@ void IRCSession::part(IRCChannel *channel) {
     m_connection->sendLine("PART " + channel->channelname() + " :" + APP_VERSION);
 }
 
+void IRCSession::setValidUsermodes(const QString &modes) {
+    m_validUsermodes = modes;
+}
+
+void IRCSession::setValidChannelmodes(const QString &modes) {
+    m_validChannelmodes = modes;
+}
+
+void IRCSession::updateNickname(const QString &oldNickname, const QString &newNickname) {
+    QList<IRCChannel> channels;
+    IRCOutput output;
+    
+    if (oldNickname == m_server->nick()) {
+        m_server->setNick(newNickname);
+        output = IRCOutput(OUTPUT_NICKCHANGE, tr("You are now known as %1").arg(newNickname));
+        channels = m_channels;
+    }
+
+    else {
+        IRCPerson *person = getPerson(oldNickname);
+        
+        if(!person) {
+            emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Nickname change of an unknown person")));
+            return;
+        }
+        
+        getChannelsByPerson(person, channels);
+        output = IRCOutput(OUTPUT_NICKCHANGE, tr("%1 is now known as %2").arg(oldNickname).arg(newNickname));
+    }
+
+    QListIterator<IRCChannel> it(channels);
+    for (;it.current(); ++it) {
+        IRCChannelPerson *chanperson = it.current()->getPerson(oldNickname);
+        it.current()->removePerson(chanperson);
+        chanperson->person->setNick(newNickname);
+        it.current()->addPerson(chanperson);
+    }
+
+    emit updateChannels();
+    output.addParam(new QString(newNickname));
+    emit outputReady(output);
+}
 
 IRCChannel *IRCSession::getChannel(QString channelname) {
     QListIterator<IRCChannel> it(m_channels);

@@ -1,10 +1,13 @@
 #include <qpe/resource.h>
 #include <qwhatsthis.h>
 #include <qhbox.h>
+#include <qdict.h>
 
 #include "ircchanneltab.h"
 #include "ircservertab.h"
 #include "ircmessageparser.h"
+
+QDict<QString> IRCChannelTab::m_queuedMessages (17);
 
 IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainWindow *mainWindow, QWidget *parent, const char *name, WFlags f) : IRCTab(parent, name, f) {
     m_mainWindow = mainWindow;
@@ -53,6 +56,12 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
     connect(m_field, SIGNAL(returnPressed()), this, SLOT(processCommand()));
     connect(m_list,  SIGNAL(doubleClicked ( QListBoxItem * ) ), this, SLOT(popupQuery( QListBoxItem * ) ));
     settingsChanged();
+    
+    if(m_queuedMessages[m_channel->channelname()]) {
+        appendText(*m_queuedMessages[m_channel->channelname()]);
+        delete m_queuedMessages[m_channel->channelname()];
+        m_queuedMessages.remove(m_channel->channelname());
+    }
 }
 
 void IRCChannelTab::scrolling(){
@@ -182,6 +191,13 @@ void IRCChannelTab::remove() {
     }
 }
 
+void IRCChannelTab::enqueue(const QString &channel, const QString &message) {
+    if (m_queuedMessages.count() == (m_queuedMessages.size() - 1) )
+        /* 17 messages max */
+        return;
+    m_queuedMessages.insert(channel, new QString(message));
+}
+
 IRCChannel *IRCChannelTab::channel() {
     return m_channel;
 }
@@ -189,3 +205,4 @@ IRCChannel *IRCChannelTab::channel() {
 IRCChannelList *IRCChannelTab::list() {
     return m_list;
 }
+

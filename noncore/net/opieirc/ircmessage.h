@@ -21,8 +21,8 @@
 #ifndef __IRCMESSAGE_H
 #define __IRCMESSAGE_H
 
-#include <qstring.h>
-#include <qstringlist.h>
+class QString;
+class QStringList;
 
 /* IRCMessage objects are used to encapsulate information
    which the IRC server sent to us. */
@@ -52,6 +52,8 @@ public:
     QString allParameters();
     /* Return one parameter */ 
     QString param(int param);
+    /* Return some parameters */
+    QStringList params(const QString &paramstring) const;
 protected:
     QString         m_prefix;
     QString         m_command;

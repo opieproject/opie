@@ -58,12 +58,12 @@ void IRCServerEditor::accept() {
         QMessageBox::critical(this, tr("Error"), tr("Profile name required"));
     else if (m_hostname->text().length()==0)
         QMessageBox::critical(this, tr("Error"), tr("Host name required"));
-    else if (m_port->text().toInt()<=0)
-        QMessageBox::critical(this, tr("Error"), tr("Port required"));
+    //else if (m_port->text().toInt()<=0)
+    //    QMessageBox::critical(this, tr("Error"), tr("Port required"));
     else if (m_nickname->text().length()==0)
         QMessageBox::critical(this, tr("Error"), tr("Nickname required"));
-    else if (m_realname->text().length()==0)
-        QMessageBox::critical(this, tr("Error"), tr("Realname required"));
+    //else if (m_realname->text().length()==0)
+    //    QMessageBox::critical(this, tr("Error"), tr("Realname required"));
     else {
         /* Now verify whether the channel list has a valid format */
         QStringList channels = QStringList::split(QChar(','), m_channels->text());
