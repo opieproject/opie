@@ -43,6 +43,8 @@ fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl 
     ListView->setSorting( 2, FALSE);
     ListView->addColumn( tr( "Size" ) );
     ListView->setColumnWidth(1,59);
+    ListView->setColumnWidthMode(0,QListView::Manual);
+    ListView->setColumnAlignment(1,QListView::AlignRight);
 //      ListView->setMultiSelection(true);
 //      ListView->setSelectionMode(QListView::Extended);
 
@@ -57,7 +59,7 @@ fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl 
       // signals and slots connections
     connect( ListView, SIGNAL(doubleClicked( QListViewItem*)), SLOT(listDoubleClicked(QListViewItem *)) );
     connect( ListView, SIGNAL(pressed( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
-    
+
 //      tmpFileName=fi.FilePath();
 //      qDebug( tmpFileName);
     currentDir.setPath( QDir::currentDirPath() );
@@ -162,7 +164,7 @@ void fileSaver::listClicked(QListViewItem *selectedItem)
 void fileSaver::closeEvent( QCloseEvent *e )
 {
     if(e->isAccepted()) {
-    e->accept();        
+    e->accept();
     } else {
     qDebug("not accepted");
     done(-1);

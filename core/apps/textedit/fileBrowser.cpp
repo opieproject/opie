@@ -38,7 +38,8 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     ListView->addColumn( tr( "Size" ) );
     ListView->setColumnWidth(1,59);
 //      ListView->addColumn( tr( "" ) );
-//      ListView->setColumnWidth(1,59);
+    ListView->setColumnWidthMode(0,QListView::Manual);
+    ListView->setColumnAlignment(1,QListView::AlignRight);
 //      ListView->setMultiSelection(true);
 //      ListView->setSelectionMode(QListView::Extended);
 
