@@ -14,7 +14,7 @@
 #include "helpwindow.h"
 #include "sfcave.h"
 
-#define CAPTION "SFCave 1.11 by AndyQ"
+#define CAPTION "SFCave 1.12 by AndyQ"
 
 #define UP_THRUST               0.6
 #define NO_THRUST               0.8
@@ -227,12 +227,22 @@ void SFCave :: setUp()
     dir = 1;
     thrust = 0;
 
+    int dist[] = { 100, 60, 40 };
     if ( CURRENT_GAME_TYPE == SFCAVE_GAME )
     {
         thrustUp = UpThrustVals[SFCAVE_GAME_TYPE][currentGameDifficulty];;
         noThrust = DownThrustVals[SFCAVE_GAME_TYPE][currentGameDifficulty];;
         maxUpThrust = MaxUpThrustVals[SFCAVE_GAME_TYPE][currentGameDifficulty];;
         maxDownThrust = MaxDownThrustVals[SFCAVE_GAME_TYPE][currentGameDifficulty];;
+
+        if ( currentCameDifficulty == DIFICULTY_EASY )
+            gateDistance = 100;
+        else if ( currentCameDifficulty == DIFICULTY_EASY )
+            gateDistance = 60;
+        else
+            gateDistance = 40;
+            
+        printf( "GD = %d\n", gateDistance );
     }
     else if ( CURRENT_GAME_TYPE == GATES_GAME )
     {
@@ -240,6 +250,8 @@ void SFCave :: setUp()
         noThrust = DownThrustVals[GATES_GAME_TYPE][currentGameDifficulty];;
         maxUpThrust = MaxUpThrustVals[GATES_GAME_TYPE][currentGameDifficulty];;
         maxDownThrust = MaxDownThrustVals[GATES_GAME_TYPE][currentGameDifficulty];;
+        gateDistance = 75;
+        nextGate = nextInt( 50 ) + gateDistance;
     }
     else
     {
@@ -257,8 +269,6 @@ void SFCave :: setUp()
     blockWidth = 20;
     blockHeight = 70;
     gapHeight = initialGateGaps[currentGameDifficulty];
-    gateDistance = 75;
-    nextGate = nextInt( 50 ) + gateDistance;
 
     for ( int i = 0 ; i < TRAILSIZE ; ++i )
     {
@@ -368,7 +378,7 @@ void SFCave :: handleGameSFCave()
         }
     }
 
-    if ( nrFrames % 100 == 0 )
+    if ( nrFrames % gateDistance == 0 )
         addBlock();
 
     if ( checkCollision() )
