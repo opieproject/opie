@@ -11,7 +11,7 @@
 ************************************************************************************/
 
 /*
- * $Id: vmemo.cpp,v 1.5 2002-02-15 02:36:29 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.6 2002-02-15 02:40:16 llornkcor Exp $
  */
 
 #include <sys/utsname.h>
@@ -307,6 +307,7 @@ int VMemo::openWAV(const char *filename)
   WaveHeader wh;
 
   wh.main_chunk = RIFF;// RIFF
+  wh.length=0;     /* filelen */
   wh.chunk_type = WAVE;//WAVE
   wh.sub_chunk  = FMT;// fmt
   wh.sc_len     = 16;// format length = 16
