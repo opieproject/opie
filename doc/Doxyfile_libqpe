@@ -102,8 +102,8 @@ VERBATIM_HEADERS       = YES
 #---------------------------------------------------------------------------
 ALPHABETICAL_INDEX     = YES
 COLS_IN_ALPHA_INDEX    = 3
-IGNORE_PREFIX          = Q \
-                         QPE
+IGNORE_PREFIX          = QPE \
+                         Q
 #---------------------------------------------------------------------------
 # configuration options related to the HTML output
 #---------------------------------------------------------------------------
