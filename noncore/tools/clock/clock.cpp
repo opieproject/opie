@@ -31,6 +31,8 @@
 #include <qsound.h>
 #include <qtimer.h>
 
+#include <opie/oclickablelabel.h>
+
 #include <qlcdnumber.h>
 #include <qslider.h>
 #include <qlabel.h>
@@ -92,7 +94,7 @@ Clock::Clock( QWidget * parent, const char * name, WFlags f )
     date->setText( TimeString::longDateString( QDate::currentDate() ) );
 
     QWidget *controls = new QWidget( this );
-    QGridLayout *gl = new QGridLayout( controls, 2, 2, 6, 4 );
+    QGridLayout *gl = new QGridLayout( controls, 3, 2, 6, 4 );
 
     QButtonGroup *grp = new QButtonGroup( controls );
     grp->setRadioButtonExclusive( true );
@@ -131,6 +133,11 @@ Clock::Clock( QWidget * parent, const char * name, WFlags f )
     gl->addWidget( alarmBtn, 1, 2 );
     alarmBtn->setText( tr( "Set Alarm" ) );
 
+    OClickableLabel *click = new OClickableLabel(controls, "label" );
+    click->setText(tr("Set date and time." ) );
+    gl->addMultiCellWidget( click,  3,  3,  0, 2,  AlignHCenter);
+    connect( click, SIGNAL(clicked() ), this, SLOT(slotAdjustTime() ) );
+
     connect( set, SIGNAL( pressed() ), SLOT( slotSet() ) );
     connect( reset, SIGNAL( clicked() ), SLOT( slotReset() ) );
 
@@ -167,7 +174,7 @@ Clock::Clock( QWidget * parent, const char * name, WFlags f )
         alarmBool=FALSE;
         snoozeBtn->hide();
     }
-    
+
     QTimer::singleShot( 0, this, SLOT(updateClock()) );
     modeSelect(0);
 }
@@ -184,7 +191,7 @@ void Clock::updateClock()
   QString s;
   if ( ampm ) {
       int hour = tm.hour();
-      if (hour == 0) 
+      if (hour == 0)
     hour = 12;
       if (hour > 12)
     hour -= 12;
@@ -281,7 +288,7 @@ void Clock::modeSelect( int m )
 }
 
 //this sets the alarm time
-void Clock::slotSetAlarm() 
+void Clock::slotSetAlarm()
 {
     if( !snoozeBtn->isHidden())
         slotToggleAlarm();
@@ -303,7 +310,7 @@ void Clock::slotSetAlarm()
         config.writeEntry("clockAlarmMinute",tmp.setNum( minute ),10);
         config.writeEntry("clockAlarmSnooze",tmp.setNum( snoozeTime ),10);
         config.write();
-    } 
+    }
 }
 
 void Clock::slotSnooze()
@@ -320,7 +327,7 @@ void Clock::slotSnooze()
 }
 
 //toggles alarm on/off
-void Clock::slotToggleAlarm() 
+void Clock::slotToggleAlarm()
 {
     Config config( "qpe" );
     config.setGroup("Time");
@@ -473,4 +480,9 @@ QPoint AnalogClock::rotate( QPoint c, QPoint p, int a )
     double ny = c.y() - ( p.y() - c.y() ) * cos( angle ) +
     ( p.x() - c.x() ) * sin( angle );
     return QPoint( nx, ny );
+}
+void Clock::slotAdjustTime()
+{
+    QCopEnvelope e("QPE/System", "execute(QString)");
+    e << QString("systemtime");
 }

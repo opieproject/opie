@@ -6,7 +6,7 @@ SOURCES   = clock.cpp setAlarm.cpp \
       main.cpp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lopie
 INTERFACES  = 
 TARGET    = clock
 
