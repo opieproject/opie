@@ -58,25 +58,6 @@ La memoria se cataloga como sigue:
     </message>
 </context>
 <context>
-    <name>ModulesDetail</name>
-    <message>
-        <source>Send</source>
-        <translation>Enviar</translation>
-    </message>
-    <message>
-        <source>Select a command here and then click the Send button to the right to send the command.</source>
-        <translation>Seleccione aquí una orden y pulse el botón Enviar de la derecha.</translation>
-    </message>
-    <message>
-        <source>This area shows detailed information about this module.</source>
-        <translation>Esta área muestra información detallada sobre esté módulo.</translation>
-    </message>
-    <message>
-        <source>Click here to send the selected command to this module.</source>
-        <translation>Pulse aquí para enviar el comando seleccionado a este módulo.</translation>
-    </message>
-</context>
-<context>
     <name>ModulesInfo</name>
     <message>
         <source>Module</source>
@@ -101,6 +82,24 @@ Click and hold on a module to see additional information about the module, or to
         <translation>Esta es una lista de todos los módulos del kernel actualmente cargados.
 
 Mantenga pulsado un módulo para ver información adicional sobre el módulo, o descargarlo.</translation>
+    </message>
+    <message>
+        <source>Select a command here and then click the Send button to the right to send the command to module selected above.</source>
+        <translation>Seleccione un comando aquí y luego pulse el botón Enviar de la derecha para que lo reciba el módulo seleccionado arriba.</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Enviar</translation>
+    </message>
+    <message>
+        <source>Click here to send the selected command to the module selected above.</source>
+        <translation>Pulse aquí para enviar el comando selecciondo al módulo seleccionado arriba.</translation>
+    </message>
+    <message>
+        <source>You really want to execute
+</source>
+        <translation>Seguro que quiere ejecutar
+</translation>
     </message>
 </context>
 <context>
@@ -191,14 +190,6 @@ Mantenga pulsado un proceso para ver información adicional, o para enviarle una
         <translation>Almac. interno </translation>
     </message>
     <message>
-        <source>Int. Storage /dev/mtdblock/ </source>
-        <translation>Almac. interno /dev/mtdblock/ </translation>
-    </message>
-    <message>
-        <source>Int. Storage /dev/mtdblock </source>
-        <translation>Almac. interno /dev/mtdblock </translation>
-    </message>
-    <message>
         <source>CF</source>
         <translation>CF</translation>
     </message>
@@ -233,6 +224,18 @@ Mantenga pulsado un proceso para ver información adicional, o para enviarle una
     <message>
         <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
         <translation>Este gráfico representa cuanta memoria se usa actualmente de la memoria incorporada (p.e. Flash) en este dispositivo.</translation>
+    </message>
+    <message>
+        <source>RAM disk</source>
+        <translation>Disco RAM</translation>
+    </message>
+    <message>
+        <source>RA</source>
+        <translation>RA</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
+        <translation>Este gráfico representa cuánta memoria usa actualmente el disco RAM temporal.</translation>
     </message>
 </context>
 <context>

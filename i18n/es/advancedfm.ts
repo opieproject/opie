@@ -146,12 +146,6 @@
         <translation>Emitir fichero</translation>
     </message>
     <message>
-        <source> already exists
-Do you really want to delete it?</source>
-        <translation> ya existe
-¿seguro que quiere borrarlo?</translation>
-    </message>
-    <message>
         <source>Copy </source>
         <translation>Copiar </translation>
     </message>
@@ -239,6 +233,12 @@ de los ficheros %1?</translation>
 exists. Ok to overwrite?</source>
         <translation>
 existe. ¿Lo sobrescribo?</translation>
+    </message>
+    <message>
+        <source> already exists.
+Do you really want to delete it?</source>
+        <translation> ya existe.
+¿Seguro que quiere borrarlo?</translation>
     </message>
 </context>
 <context>

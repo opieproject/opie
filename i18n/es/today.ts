@@ -72,10 +72,6 @@
         <translation>Varios</translation>
     </message>
     <message>
-        <source>Check a checkbox to activate/deactivate a plugin ore use the arrow buttons on the right to change the appearance order</source>
-        <translation>Marque una casilla para activar/desactivar un plugin o use las flechas de la derecha para cambiar el orden de aparición</translation>
-    </message>
-    <message>
         <source>Check this if today should be autostarted on resume.</source>
         <translation>Marque aquí si HOY debe ser autoarrancado al arrancar.</translation>
     </message>
@@ -114,6 +110,10 @@ al encender?
     <message>
         <source>never</source>
         <translation>nunca</translation>
+    </message>
+    <message>
+        <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
+        <translation>Pulse en las casillas para activar un módulo o use los botones de desplazamiento para cambiar el orden de aparición</translation>
     </message>
 </context>
 </TS>

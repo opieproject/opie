@@ -177,20 +177,16 @@ e inténtelo de nuevo.
         <translation>Vista de tablas</translation>
     </message>
     <message>
-        <source> day(s)</source>
-        <translation> día(s)</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Ninguna</translation>
+    </message>
+    <message>
+        <source>%1 day(s)</source>
+        <translation>%1 dia(s)</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorAdvanced</name>
-    <message>
-        <source>Form2</source>
-        <translation>Form2</translation>
-    </message>
     <message>
         <source>State:</source>
         <translation>Estado:</translation>

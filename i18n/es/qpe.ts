@@ -174,10 +174,6 @@ Por favor cárguela.</translation>
 <context>
     <name>ShutdownImpl</name>
     <message>
-        <source>Shut down...</source>
-        <translation>Apagar...</translation>
-    </message>
-    <message>
         <source>Terminate</source>
         <translation>Terminar</translation>
     </message>
@@ -206,6 +202,10 @@ Por favor cárguela.</translation>
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
         <translation>&lt;p&gt;
 Estas opciones de terminación se usan principalmente en las pruebas y desarrollo del sistema Opie. En un entorno normal, estos conceptos son innecesarios.</translation>
+    </message>
+    <message>
+        <source>Shutdown...</source>
+        <translation>Apagar...</translation>
     </message>
 </context>
 <context>
