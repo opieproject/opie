@@ -1689,9 +1689,9 @@ void AdvancedFm::showFileMenu() {
   } else {
 
     if ( app )
-      m.insertItem( app->pixmap(), tr( "Open in " + app->name() ), this, SLOT( run() ) );
+      m.insertItem( app->pixmap(), tr( "Open in " + app->name() ), this, SLOT( runThis() ) );
     else if( QFileInfo(fi).isExecutable() )
-      m.insertItem(  tr( "Execute" ), this, SLOT( run() ) );
+      m.insertItem(  tr( "Execute" ), this, SLOT( runThis() ) );
 
     m.insertItem( /*Resource::loadPixmap( "txt" ),*/ tr( "Open as text" ),this, SLOT( runText() ) );
   }
