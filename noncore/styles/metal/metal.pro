@@ -7,5 +7,5 @@ LIBS       += -lqpe
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR      = $(OPIEDIR)/plugins/styles
 #TARGET       = metal
-TARGET = metal
+TARGET = liquid
 VERSION      = 1.0.0
