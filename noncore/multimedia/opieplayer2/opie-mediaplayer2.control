@@ -4,8 +4,8 @@ Priority: optional
 Section: opie/applications
 Maintainer: L.J.Potter <ljp@llornkcor.com>, Maximilian Reiss <harlekin@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal, libopie1, zlib1g, opie-mediaplayer2-skin-default | opie-mediaplayer2-skin-default-landscape , libxine1 | opie-mediaplayer2-codecs
-Description: The Opie media player II
+Depends: task-opie-minimal, libopie1, zlib1g, libstdc++2.10-glibc2.2, opie-mediaplayer2-skin-default | opie-mediaplayer2-skin-default-landscape , libxine1 | opie-mediaplayer2-codecs
+Description: The Opie media player
  The mediaplayer for Opie. It plays mp3, mpeg, wav, ogg, quicktime, divx and
  more. Also it is streaming capable.
 Version: $QPE_VERSION$EXTRAVERSION

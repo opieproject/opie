@@ -1,4 +1,4 @@
- /*
+/*
                             This file is part of the Opie Project
 
                              Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>
@@ -87,7 +87,7 @@ Lib::Lib( InitializationMode initMode, XineVideoWidget* widget )
         ts << "# uncomment if you experience double speed audio \n #audio.oss_sync_method:softsync\n";
         ts << "codec.ffmpeg_pp_quality:3\n";
         ts << "audio.num_buffers:50\n";
-        ts << "audio.size_buffers:4160\n";
+        ts << "audio.size_buffers:4096\n";
         ts << "video.num_buffers:20\n";
         ts << "video.size_buffers:4096\n";
         ts << "audio.out_num_audio_buf:16\n";
@@ -270,7 +270,7 @@ int Lib::length() const {
       int pos, time, length;
 /* dilb: patch to solve the wrong stream length reported to the GUI*/
       int iRetVal=0, iTestLoop=0;
-      
+
       do
       	{
 	iRetVal = xine_get_pos_length( m_stream, &pos, &time, &length );

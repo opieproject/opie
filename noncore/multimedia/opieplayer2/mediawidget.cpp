@@ -26,8 +26,6 @@
 #include "playlistwidget.h"
 #include "skin.h"
 
-#include <assert.h>
-
 MediaWidget::MediaWidget( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QWidget *parent, const char *name )
     : QWidget( parent, name ), mediaPlayerState( _mediaPlayerState ), playList( _playList )
 {
