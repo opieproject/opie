@@ -27,8 +27,8 @@ fi
 
 if [ -e /proc/cpuinfo ] ; then
 	if (grep -qi "Simpad" /proc/cpuinfo) ; then
-
-        export QWS_DISPLAY=Transformed:Rot0:0
+           export QWS_KEYBOARD='SIMpad'
+           export QWS_DISPLAY=Transformed:Rot0:0
     fi
 fi
 
