@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>attach...</source>
-        <translation type="unfinished"></translation>
+        <translation>ahnhängen ...</translation>
     </message>
 </context>
 <context>
@@ -137,34 +137,37 @@
     </message>
     <message>
         <source>Main operation toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauptkontrolleiste</translation>
     </message>
     <message>
         <source>getMail</source>
-        <translation type="unfinished"></translation>
+        <translation>Mail holen</translation>
     </message>
     <message>
         <source>select account</source>
-        <translation type="unfinished"></translation>
+        <translation>Zugang wählen</translation>
     </message>
     <message>
         <source>Click to download mail via all available accounts.
  Press and hold to select the desired account.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie um Mail von allen verfügbaren Servern zu holen.
+Halten Sie den Stift um einen Server auszuwählen.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Löschen</translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>No account associated</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Zugang verknüpft</translation>
     </message>
     <message>
         <source>There is no active account 
 associated to this mail
  it can not be downloaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Es ist kein aktiver Zugang mit 
+dieser Mail verknüpft so dass sie
+nicht heruntergeladen werden kann</translation>
     </message>
 </context>
 <context>
@@ -203,17 +206,19 @@ Mail has NOT been sent</source>
     </message>
     <message>
         <source>Central view area</source>
-        <translation type="unfinished"></translation>
+        <translation>Zentrale Mailansicht</translation>
     </message>
     <message>
         <source>Mail not downloaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Mail nicht heruntergeladen</translation>
     </message>
     <message>
         <source>The mail you have clicked 
 has not been downloaded yet.
  Would you like to do it now ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Die gewählte Nachricht wurde
+nocht nicht heruntergeladen.
+Möchten Sie dies jetzt durchführen ?</translation>
     </message>
 </context>
 <context>
@@ -250,62 +255,68 @@ has not been downloaded yet.
 <context>
     <name>QWidget</name>
     <message>
-        <source>This is the inbox view.
- It keeps the fetched mail which can be viewed by double clicking the entry.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>A blue attachment icon shows whether this mail has attachments.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This is the oubox view.
- It keeps the queued mails to send which can be reviewed by double clicking the entry.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The mail subject should be entered here</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Betreffzeile sollte hier eingegeben werden</translation>
     </message>
     <message>
         <source>Recipients can be entered here</source>
-        <translation type="unfinished"></translation>
+        <translation>Empfänger werden hier eingegeben</translation>
     </message>
     <message>
         <source>If you would like to send copies of your mail they can be entered here</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn Sie Kopien versenden möchten können Sie dies hier angeben</translation>
     </message>
     <message>
         <source>This button opens the address selector with all mail adresses from your OPIE addressbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Schalter öffnet das Adressbuch mit allen Mailadressen Ihres OPIE Addressbuchs</translation>
     </message>
     <message>
         <source>Enter your mail text here</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chose the recipients from this list</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie hier Ihren Text ein</translation>
     </message>
     <message>
         <source>Queue your mail by clicking here</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiermit stellen Sie Ihre Nachricht in die Warteschlange</translation>
     </message>
     <message>
         <source>This is an overview about all attachments in the mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist eine Übersicht aller Nachrichtenanhänge</translation>
+    </message>
+    <message>
+        <source>This is the inbox view.
+It keeps the fetched mail which can be 
+viewed by double clicking the entry.
+blue attachment icon shows whether this 
+mailhas attachments.
+</source>
+        <translation>Dies ist der Posteingang.
+Er enthält Ihre empfangenen Nachrichten
+die durch Doppelklicken gelesen werden 
+können. Ein blaues Symbol weist Sie auf Anhänge hin.</translation>
+    </message>
+    <message>
+        <source>This is the outbox view.
+It keeps the queued mails to send which can be 
+reviewed by double clicking the entry.</source>
+        <translation>Dies ist der Postausgang.
+Er enthält alle wartenden Nachrichten die
+durch Doppelklicken gelesen werden 
+können.</translation>
+    </message>
+    <message>
+        <source>Choose the recipients from this list</source>
+        <translation>Wählen Sie die Empfänger aus dieser Liste</translation>
     </message>
 </context>
 <context>
     <name>ReadMail</name>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;Ansehen</translation>
+        <translation>&amp;Ansicht</translation>
     </message>
     <message>
         <source>&amp;Mail</source>
         <translation>&amp;Mail</translation>
-    </message>
-    <message>
-        <source>Reply</source>
-        <translation>Antworten</translation>
     </message>
     <message>
         <source>Previous</source>
@@ -328,37 +339,67 @@ has not been downloaded yet.
         <translation>Löschen</translation>
     </message>
     <message>
-        <source>Click here to reply to the selected mail</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Weiterleiten</translation>
     </message>
     <message>
         <source>Click here to forward the selected mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier um die Nachricht weiterzuleiten</translation>
     </message>
     <message>
         <source>Read the previous mail in the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Lesen der vorhergehenden Nachricht der Liste</translation>
     </message>
     <message>
         <source>Read the next mail in the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Lesen dernächsten Nachricht der Liste</translation>
     </message>
     <message>
         <source>Click here to add attachments to your mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier um Anhänge hinzuzufügen</translation>
     </message>
     <message>
         <source>The mail view has 2 modes:
 &lt;LI&gt;&lt;B&gt;RichText&lt;/B&gt; shows the mail as HTML with reach features (no standard line breaks)&lt;/LI&gt;&lt;LI&gt;&lt;B&gt;Plain&lt;/B&gt; shows the mail as standard plain text&lt;/LI&gt;Click here to switch between those view modes</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Mailansicht hat 2 Modi:
+&lt;LI&gt;&lt;B&gt;RichText&lt;/B&gt; zeigt die Nachricht als HTMLmit sogenannten &quot;Rich Features&quot; an (ohne Zeilenumbrüche durch bspw. CRLF).
+&lt;/LI&gt;&lt;LI&gt;&lt;B&gt;Plain&lt;/B&gt;  zeigt die Nachricht als reinen Text an&lt;/LI&gt;
+Klicken Sie hier um zwischen beiden Modi umzusachalten</translation>
     </message>
     <message>
         <source>Click here to remove the selected mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier um die gewählte Nachricht zu löschen</translation>
+    </message>
+    <message>
+        <source>Download</source>
+        <translation>Herunterladen</translation>
+    </message>
+    <message>
+        <source>Click here to download the selected mail</source>
+        <translation>Klicken Sie hier um die Mail vom Server
+zu vervolständigen.</translation>
+    </message>
+    <message>
+        <source>reply</source>
+        <translation>antworten</translation>
+    </message>
+    <message>
+        <source>reply to mail</source>
+        <translation>auf die Nachricht antworten</translation>
+    </message>
+    <message>
+        <source>Click here to reply to the selected mail
+Press and hold for more options.</source>
+        <translation>Klicken Sie hier um auf die Nachricht zu antworten.
+Halten Sie den Stift gedrückt für weitere Optionen.</translation>
+    </message>
+    <message>
+        <source>Reply all</source>
+        <translation>An alle antworten</translation>
+    </message>
+    <message>
+        <source>Click here to reply to the selected mail to CC: addresses also</source>
+        <translation>Klicken Sie hier um allen Emfängern zu</translation>
     </message>
 </context>
 <context>
@@ -392,7 +433,7 @@ has not been downloaded yet.
     </message>
     <message>
         <source>Click here to install the attachment to your Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier um den Anhang zu Ihren Dokumenten z u installieren</translation>
     </message>
 </context>
 <context>
@@ -431,75 +472,85 @@ has not been downloaded yet.
     </message>
     <message>
         <source>Attachment</source>
-        <translation type="unfinished"></translation>
+        <translation>Anhang</translation>
     </message>
     <message>
         <source>Click here to attach files to your mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier um Dateien zu Ihrer Nachricht hinzuzufügen</translation>
     </message>
     <message>
         <source>This button puts your mail in the send queue</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Schalter stellt Ihre Nachricht in die Warteschlange</translation>
     </message>
     <message>
         <source>Click here to create a new mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier um eine Nachricht zu erstellen</translation>
     </message>
     <message>
         <source>No recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Empfänger</translation>
     </message>
     <message>
         <source>Send mail to whom?</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachricht senden an ?</translation>
     </message>
     <message>
         <source>OK
 </source>
-        <translation type="unfinished">OK
+        <translation>OK
 </translation>
     </message>
     <message>
         <source>Incorrect recipient separator</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiges Empfängertrennzeichen</translation>
     </message>
     <message>
         <source>Recipients must be separated by ;
 and be valid emailaddresses</source>
-        <translation type="unfinished"></translation>
+        <translation>Empfänger sollten durch ;
+getrennt werden und müssen gültige
+Adressen sein</translation>
     </message>
     <message>
         <source>Incorrect carbon copy separator</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiges Trennzeichen der Kopieempfänger</translation>
     </message>
     <message>
         <source>CC Recipients must be separated by ;
 and be valid emailaddresses</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieempfänger sollten durch ;
+getrennt werden und müssen gültige
+Adressen sein</translation>
     </message>
     <message>
         <source>Re: </source>
-        <translation type="unfinished"></translation>
+        <translation>Re:</translation>
     </message>
     <message>
         <source>======forwarded message from </source>
-        <translation type="unfinished"></translation>
+        <translation>======weitergeleitete Nachricht von </translation>
     </message>
     <message>
         <source> starts======
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>beginnt======
+
+</translation>
     </message>
     <message>
         <source>FWD: </source>
-        <translation type="unfinished"></translation>
+        <translation>FWD:</translation>
     </message>
     <message>
         <source>======end of forwarded message======
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>======Ende der weitergeleiteten Nachricht======</translation>
+    </message>
+    <message>
+        <source> wrote on </source>
+        <translation>schrieb am </translation>
     </message>
 </context>
 </TS>

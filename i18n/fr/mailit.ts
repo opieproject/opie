@@ -251,17 +251,6 @@ has not been downloaded yet.
 <context>
     <name>QWidget</name>
     <message>
-        <source>This is the inbox view.
- It keeps the fetched mail which can be viewed by double clicking the entry.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>A blue attachment icon shows whether this mail has attachments.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This is the oubox view.
- It keeps the queued mails to send which can be reviewed by double clicking the entry.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The mail subject should be entered here</source>
         <translation type="unfinished"></translation>
     </message>
@@ -282,15 +271,30 @@ has not been downloaded yet.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Chose the recipients from this list</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Queue your mail by clicking here</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>This is an overview about all attachments in the mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is the inbox view.
+It keeps the fetched mail which can be 
+viewed by double clicking the entry.
+blue attachment icon shows whether this 
+mailhas attachments.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is the outbox view.
+It keeps the queued mails to send which can be 
+reviewed by double clicking the entry.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose the recipients from this list</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -303,10 +307,6 @@ has not been downloaded yet.
     <message>
         <source>&amp;Mail</source>
         <translation>&amp;Message</translation>
-    </message>
-    <message>
-        <source>Reply</source>
-        <translation>Répondre</translation>
     </message>
     <message>
         <source>Previous</source>
@@ -327,10 +327,6 @@ has not been downloaded yet.
     <message>
         <source>Delete</source>
         <translation>Supprimer</translation>
-    </message>
-    <message>
-        <source>Click here to reply to the selected mail</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Forward</source>
@@ -359,6 +355,35 @@ has not been downloaded yet.
     </message>
     <message>
         <source>Click here to remove the selected mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to download the selected mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reply to mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to reply to the selected mail
+Press and hold for more options.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reply all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to reply to the selected mail to CC: addresses also</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -500,6 +525,10 @@ and be valid emailaddresses</source>
         <source>======end of forwarded message======
 
 </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> wrote on </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
