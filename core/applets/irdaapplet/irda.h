@@ -48,12 +48,14 @@ private:
     QPixmap irdaOnPixmap;
     QPixmap irdaOffPixmap;
     QPixmap irdaDiscoveryOnPixmap;
+    QPixmap receiveActivePixmap;
     int irdaactive; // bool and bitfields later bool irdaactive :1 ;
     int irdaDiscoveryActive;
-
+    bool receiveActive;
+    bool receiveStateChanged;
 private slots:
 
-        
+
 };
 
 
