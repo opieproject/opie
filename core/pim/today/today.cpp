@@ -82,8 +82,8 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
   db = NULL;
   setOwnerField();
   todo = new ToDoDB;
-  getTodo();
   draw();
+  getTodo();
   autoStart();
 }
 
@@ -154,7 +154,7 @@ void Today::draw() {
   getMail();
 
   // if the todolist.xml file was not modified in between, do not parse it.
-  if (checkIfModified()) {
+  if (checkIfModified() || NEW_START==1) {
     if (todo) delete todo;
     todo = new ToDoDB;
     getTodo();
@@ -389,10 +389,10 @@ void Today::getTodo() {
   }
 
   // get total number of still open todos
-  QValueList<ToDoEvent> open = todo->rawToDos();
-  qBubbleSort(open);
-  for ( QValueList<ToDoEvent>::Iterator it=open.begin();
-	it!=open.end(); ++it ) {
+  QValueList<ToDoEvent> openTodo = todo->rawToDos();
+  qBubbleSort(openTodo);
+  for ( QValueList<ToDoEvent>::Iterator it=openTodo.begin();
+	it!=openTodo.end(); ++it ) {
     if (!(*it).isCompleted()){
       count +=1;
       // not the overdues, we allready got them, and not if we are
