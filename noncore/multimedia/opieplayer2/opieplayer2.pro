@@ -26,5 +26,22 @@ OBJECTS_DIR = qpeobj
 
 
 
+TRANSLATIONS = ../../../i18n/de/opieplayer2.ts \
+        ../../../i18n/da/opieplayer2.ts \
+        ../../../i18n/xx/opieplayer2.ts \
+        ../../../i18n/en/opieplayer2.ts \
+        ../../../i18n/es/opieplayer2.ts \
+        ../../../i18n/fr/opieplayer2.ts \
+        ../../../i18n/hu/opieplayer2.ts \
+        ../../../i18n/ja/opieplayer2.ts \
+        ../../../i18n/ko/opieplayer2.ts \
+        ../../../i18n/no/opieplayer2.ts \
+        ../../../i18n/pl/opieplayer2.ts \
+        ../../../i18n/pt/opieplayer2.ts \
+        ../../../i18n/pt_BR/opieplayer2.ts \
+        ../../../i18n/sl/opieplayer2.ts \
+        ../../../i18n/zh_CN/opieplayer2.ts \
+        ../../../i18n/zh_TW/opieplayer2.ts
+
 
 include ( $(OPIEDIR)/include.pro )
