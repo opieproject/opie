@@ -1,4 +1,4 @@
-
+#include <stdlib.h>
 #include "pop3wrapper.h"
 #include "mailtypes.h"
 #include <libetpan/mailpop3.h>
@@ -43,39 +43,46 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail )
 RecBody POP3wrapper::parseBody( const char *message )
 {
     int err = MAILIMF_NO_ERROR;
-    size_t curTok;
-    mailimf_message *result;
+    /* these vars are used recurcive! set it to 0!!!!!!!!!!!!!!!!! */
+    size_t curTok = 0;
+    mailimf_message *result = 0;
     RecBody body;
     
     err = mailimf_message_parse( (char *) message, strlen( message ), &curTok, &result );
-    if ( err != MAILIMF_NO_ERROR ) return body;
+    if ( err != MAILIMF_NO_ERROR ) {
+        if (result) mailimf_message_free(result);
+        return body;
+    }
     
     if ( result && result->msg_body && result->msg_body->bd_text ) {
         qDebug( "POP3: bodytext found" );
-        // TODO: why does this line segfault???? gdb says segfault in strlen(), maybe a bug in libetpan.
+        // when curTok isn't set to 0 this line will fault! 'cause upper line faults!
         body.setBodytext( QString( result->msg_body->bd_text ) );
     }
-
+    if (result) mailimf_message_free(result);
     return body;
 }
 
 void POP3wrapper::listMessages(const QString &, QList<RecMail> &target )
 {
     int err = MAILPOP3_NO_ERROR;
-    char *header;
-    size_t length;
-    carray *messages;
+    char * header = 0;
+    /* these vars are used recurcive! set it to 0!!!!!!!!!!!!!!!!! */
+    size_t length = 0;
+    carray * messages = 0;
 
     login();
     if (!m_pop3) return;
     mailpop3_list( m_pop3, &messages );
 
-    for ( int i = carray_count( messages ); i > 0; i-- ) {
-        mailpop3_msg_info *info = (mailpop3_msg_info *) carray_get( messages, i - 1 );
-
+    //for ( int i = carray_count( messages ); i > 0; i-- ) {
+    for (unsigned int i = 0; i < carray_count(messages);++i) {
+        mailpop3_msg_info *info;
+        int r = mailpop3_get_msg_info(m_pop3,i+1,&info);
         err = mailpop3_header( m_pop3, info->msg_index, &header, &length );
         if ( err != MAILPOP3_NO_ERROR ) {
             qDebug( "POP3: error retrieving header msgid: %i", info->msg_index );
+            free(header);
             logout();
             return;
         }
@@ -83,18 +90,20 @@ void POP3wrapper::listMessages(const QString &, QList<RecMail> &target )
         mail->setNumber( info->msg_index );
         mail->setWrapper(this);
         target.append( mail );
+        free(header);
     }
-
     logout();
 }
 
 RecMail *POP3wrapper::parseHeader( const char *header )
 {
     int err = MAILIMF_NO_ERROR;
-    size_t curTok;
+    size_t curTok = 0;
     RecMail *mail = new RecMail();
     mailimf_fields *fields;
-    
+    mailimf_references * refs;
+    mailimf_keywords*keys;
+
     err = mailimf_fields_parse( (char *) header, strlen( header ), &curTok, &fields );
     for ( clistiter *current = clist_begin( fields->fld_list ); current != NULL; current = current->next ) {
         mailimf_field *field = (mailimf_field *) current->data;
@@ -117,11 +126,27 @@ RecMail *POP3wrapper::parseHeader( const char *header )
             case MAILIMF_FIELD_ORIG_DATE:
                 mail->setDate( parseDateTime( field->fld_data.fld_orig_date->dt_date_time ) );
                 break;
+            case MAILIMF_FIELD_MESSAGE_ID:
+                mail->setMsgid(QString(field->fld_data.fld_message_id->mid_value));
+                break;
+            case MAILIMF_FIELD_REFERENCES:
+                refs = field->fld_data.fld_references;
+                if (refs && refs->mid_list && clist_count(refs->mid_list)) {
+                    char * text = (char*)refs->mid_list->first->data;
+                    mail->setReplyto(QString(text));
+                }
+                break;
+            case MAILIMF_FIELD_KEYWORDS:
+                keys = field->fld_data.fld_keywords;
+                for (clistcell*cur = clist_begin(keys->kw_list);cur!=0;cur=clist_next(cur)) {
+                    qDebug("Keyword: %s",(char*)cur->data);
+                }
+                break;
             default:
                 break;
         }
     }
-    
+    if (fields) mailimf_fields_free(fields);
     return mail;
 }
 

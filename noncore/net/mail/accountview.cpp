@@ -21,12 +21,30 @@ POP3viewItem::~POP3viewItem()
     delete wrapper;
 }
 
-void POP3viewItem::refresh( QList<RecMail> &target )
+AbstractMail *POP3viewItem::getWrapper()
 {
-    qDebug( "POP3: refresh" );
-    wrapper->listMessages("INBOX", target );
+    return wrapper;
 }
 
+void POP3viewItem::refresh( QList<RecMail> & )
+{
+    QList<Folder> *folders = wrapper->listFolders();
+    QListViewItem *child = firstChild();
+    while ( child ) {
+        QListViewItem *tmp = child;
+        child = child->nextSibling();
+        delete tmp;
+    }
+    Folder *it;
+    QListViewItem*item = 0;
+    for ( it = folders->first(); it; it = folders->next() ) {
+        item = new POP3folderItem( it, this , item );
+        item->setSelectable(it->may_select());
+    }
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    folders->setAutoDelete(false);
+    delete folders;
+}
 
 RecBody POP3viewItem::fetchBody( const RecMail &mail )
 {
@@ -34,10 +52,38 @@ RecBody POP3viewItem::fetchBody( const RecMail &mail )
     return wrapper->fetchBody( mail );
 }
 
+POP3folderItem::~POP3folderItem()
+{
+    delete folder;
+}
+
+POP3folderItem::POP3folderItem( Folder *folderInit, POP3viewItem *parent , QListViewItem*after  )
+    : AccountViewItem( parent,after )
+{
+    folder = folderInit;
+    pop3 = parent;
+    if (folder->getDisplayName().lower()!="inbox") {
+        setPixmap( 0, PIXMAP_POP3FOLDER );
+    } else {
+        setPixmap( 0, PIXMAP_INBOXFOLDER);
+    }
+    setText( 0, folder->getDisplayName() );
+}
+
+void POP3folderItem::refresh(QList<RecMail>&target)
+{
+    if (folder->may_select())
+        pop3->getWrapper()->listMessages( folder->getName(),target );
+}
+
+RecBody POP3folderItem::fetchBody(const RecMail&aMail)
+{
+    return pop3->getWrapper()->fetchBody(aMail);
+}
+
 /**
  * IMAP Account stuff
  */
-
 IMAPviewItem::IMAPviewItem( IMAPaccount *a, QListView *parent )
     : AccountViewItem( parent )
 {
@@ -95,7 +141,11 @@ IMAPfolderItem::IMAPfolderItem( Folder *folderInit, IMAPviewItem *parent , QList
 {
     folder = folderInit;
     imap = parent;
-    setPixmap( 0, PIXMAP_IMAPFOLDER );
+    if (folder->getDisplayName().lower()!="inbox") {
+        setPixmap( 0, PIXMAP_IMAPFOLDER );
+    } else {
+        setPixmap( 0, PIXMAP_INBOXFOLDER);
+    }
     setText( 0, folder->getDisplayName() );
 }
 

@@ -31,11 +31,24 @@ public:
     ~POP3viewItem();
     virtual void refresh( QList<RecMail> &target );
     virtual RecBody fetchBody( const RecMail &mail );
-
+    AbstractMail *getWrapper();
 private:
     POP3account *account;
     AbstractMail *wrapper;
 
+};
+
+class POP3folderItem : public AccountViewItem
+{
+
+public:
+    POP3folderItem( Folder *folder, POP3viewItem *parent , QListViewItem*after  );
+    ~POP3folderItem();
+    virtual void refresh(QList<RecMail>&);
+    virtual RecBody fetchBody(const RecMail&);
+private:
+    Folder *folder;
+    POP3viewItem *pop3;
 };
 
 class IMAPviewItem : public AccountViewItem
@@ -63,7 +76,6 @@ public:
 private:
     Folder *folder;
     IMAPviewItem *imap;
-    
 };
 
 class AccountView : public QListView
