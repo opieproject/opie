@@ -377,12 +377,14 @@ void OWirelessNetworkInterface::init()
     memset( &_iwr, 0, sizeof( struct iwreq ) );
 
     // IEEE802.11(b) radio frequency channels
-    //FIXME: get these directly from the interface
-    //FIXME: check if these channels are off-by-one
 
     iwrangestruct range;
+    //ML: work around an ugly HostAP bug, which needs
+    //ML: extra space or will complain with "invalid argument length"... :-(
+    char __extraBufferForBuggyDrivers[sizeof range];
     _iwr.u.data.pointer = (char*) &range;
-    _iwr.u.data.length = sizeof( iwrangestruct );
+    _iwr.u.data.length = (sizeof range) * 2;
+    _iwr.u.data.flags = 0;
     if ( !wioctl( SIOCGIWRANGE ) )
     {
         qDebug( "OWirelessNetworkInterface::init(): SIOCGIWRANGE failed (%s)", strerror( errno ) );
@@ -721,15 +723,30 @@ void OHostAPMonitoringInterface::setEnabled( bool b )
     // IW_MODE_MONITOR was introduced in Wireless Extensions Version 15
     // Wireless Extensions < Version 15 need iwpriv commandos for monitoring
 
-    #if WIRELESS_EXT > 14
-    _if->_iwr.u.mode = IW_MODE_MONITOR;
-    _if->wioctl( SIOCSIWMODE );
-    #else
-    int* args = (int*) &_if->_iwr.u.name;
-    args[0] = 2;
-    args[1] = 0;
-    _if->wioctl( SIOCDEVPRIVATE );
-    #endif
+    if ( b )
+    {
+        #if WIRELESS_EXT > 14
+        _if->_iwr.u.mode = IW_MODE_MONITOR;
+        _if->wioctl( SIOCSIWMODE );
+        #else
+        int* args = (int*) &_if->_iwr.u.name;
+        args[0] = 2;
+        args[1] = 0;
+        _if->wioctl( SIOCDEVPRIVATE );
+        #endif
+    }
+    else
+    {
+        #if WIRELESS_EXT > 14
+        _if->_iwr.u.mode = IW_MODE_INFRA;
+        _if->wioctl( SIOCSIWMODE );
+        #else
+        int* args = (int*) &_if->_iwr.u.name;
+        args[0] = 0;
+        args[1] = 0;
+        _if->wioctl( SIOCDEVPRIVATE );
+        #endif
+    }
 
     OMonitoringInterface::setEnabled( b );
 }
