@@ -38,3 +38,5 @@ HEADERS += mainwindow.h \
            applnkitem.h \
            doclnkitem.h \
            doclnksearch.h 
+
+include ( $(OPIEDIR)/include.pro )
