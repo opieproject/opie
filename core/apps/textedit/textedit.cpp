@@ -37,6 +37,8 @@
 #include <qpe/qpetoolbar.h>
 #include <qpe/qcopenvelope_qws.h>
 
+#include <qdatetime.h>
+#include <qclipboard.h>
 #include <qstringlist.h>
 #include <qaction.h>
 #include <qcolordialog.h>
@@ -50,10 +52,12 @@
 #include <qwidgetstack.h>
 #include <qcheckbox.h>
 #include <qcombo.h>
+
 #include <unistd.h>
 #include <sys/stat.h>
-
 #include <stdlib.h> //getenv
+
+
 /* XPM */
 static char * filesave_xpm[] = {
 "16 16 78 1",
@@ -290,6 +294,13 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     a->addTo( editBar );
     a->addTo( edit );
 
+
+#ifndef QT_NO_CLIPBOARD
+    a = new QAction( tr( "Insert Time and Date" ), Resource::loadPixmap( "paste" ), QString::null, 0, this, 0 );
+    connect( a, SIGNAL( activated() ), this, SLOT( editPasteTimeDate() ) );
+    a->addTo( edit );
+#endif
+    
     a = new QAction( tr( "Find..." ), Resource::loadPixmap( "find" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( editFind() ) );
     edit->insertSeparator();
@@ -511,7 +522,7 @@ void TextEdit::fileOpen()
 {
     Config cfg("TextEdit");
     cfg.setGroup("View");
-    bool b=FALSE;
+    //    bool b=FALSE;
 
     QMap<QString, QStringList> map;
     map.insert(tr("All"), QStringList() );
@@ -981,4 +992,13 @@ void TextEdit::doAdvanced(bool b) {
     Config cfg("TextEdit");
     cfg.setGroup("View");
     cfg.writeEntry("AdvancedFeatures",b);
+}
+
+void TextEdit::editPasteTimeDate() {
+#ifndef QT_NO_CLIPBOARD
+  QClipboard *cb = QApplication::clipboard();
+  QDateTime dt = QDateTime::currentDateTime();
+  cb->setText( dt.toString());
+  editor->paste();
+#endif
 }

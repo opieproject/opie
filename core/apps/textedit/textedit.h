@@ -69,6 +69,7 @@ protected:
     void closeEvent( QCloseEvent *e );
     void doSearchBar();
 private slots:
+    void editPasteTimeDate();
     void doAdvanced(bool);
     void doAbout();
     void setDocument(const QString&);
