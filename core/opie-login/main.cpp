@@ -175,7 +175,8 @@ int main ( int argc, char **argv )
 		}
 		else {
 			if ( !autolog ) {
-				Config cfg ( "opie-login" );
+                QString confFile=QPEApplication::qpeDir() + "/etc/opie-login.conf";
+				Config cfg ( confFile, Config::File );
 				cfg. setGroup ( "General" );
 				QString user = cfg. readEntry ( "AutoLogin" );
 				

@@ -39,6 +39,18 @@
 
 using namespace MultiKey;
 
+static const char * const kb_config_xpm[] = {
+"13 7 2 1",
+"   c None",
+".  c #000000",
+"             ",
+"      .      ",
+"     ...     ",
+"    .....    ",
+"      .      ",
+"      .      ",
+"             "};
+
 /* Keyboard::Keyboard {{{1 */
 Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
     QFrame(parent, _name, f),  shift(0), lock(0), ctrl(0), alt(0), 
@@ -1522,10 +1534,16 @@ void Keys::setKeysFromFile(const char * filename) {
             }
 
         }
+        
         f.close();
+    } else {
+        // We couldnt find the selected keymap, give them a configure button
+        QImage * btn = new QImage((const char ** )kb_config_xpm);
+        setKey(1, 0x1030, 0, 2, btn);
     }
 
 }
+
 
 // Keys::setKey {{{2
 void Keys::setKey(const int row, const int qcode, const ushort unicode, 
