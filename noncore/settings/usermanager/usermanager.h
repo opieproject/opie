@@ -27,7 +27,7 @@ class UserConfig : public QMainWindow
 	Q_OBJECT
 	
 public:
-	static QString appName() { return QString::fromLatin1("appname"); }
+	static QString appName() { return QString::fromLatin1("usermanager"); }
 	UserConfig( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
 	~UserConfig();
 
