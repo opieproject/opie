@@ -1,7 +1,7 @@
 /*
  * today.cpp
  *
- * copyright   : (c) 2002 by Maximilian Reiß
+ * copyright   : (c) 2002,2003 by Maximilian Reiß
  * email       : harlekin@handhelds.org
  *
  */
@@ -70,7 +70,7 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
     m_refreshTimer = new QTimer( this );
     connect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
     m_refreshTimer->start( 15000 );
-    init();
+    //init();
     loadPlugins();
     showMaximized();
 }
@@ -122,7 +122,6 @@ void Today::setOwnerField( QString &message ) {
     }
 }
 
-
 /**
  * Init stuff needed for today. Reads the config file.
  */
@@ -138,14 +137,11 @@ void Today::init() {
     m_iconSize = cfg.readNumEntry( "IconSize", 18 );
     setRefreshTimer(  cfg.readNumEntry( "checkinterval", 15000 ) );
 
-
-    // qDebug(" refresh ");
     // set the date in top label
     QDate date = QDate::currentDate();
     QString time = ( tr( date.toString() ) );
-    
     DateLabel->setText( QString( "<font color=#FFFFFF>" + time + "</font>" ) );
-    
+
     if ( layout ) {
       delete layout;
     }
@@ -154,28 +150,20 @@ void Today::init() {
     layout->addWidget( OwnerField );
 }
 
-
 /**
  * Load the plugins
  */
 void Today::loadPlugins() {
 
-    // extra list for plugins that exclude themself from periodic refresh
-    QMap<QString, TodayPlugin> pluginListRefreshExclude;
-
+    init();
     QValueList<TodayPlugin>::Iterator tit;
     if ( !pluginList.isEmpty() ) {
         for ( tit = pluginList.begin(); tit != pluginList.end(); ++tit ) {
-            if ( (*tit).excludeRefresh ) {
-                pluginListRefreshExclude.insert( (*tit).name , (*tit) );
-                qDebug( "Found a plugin that does not want refresh feature" );
-            } else {
-                (*tit).guiBox->hide();
-                (*tit).guiBox->reparent( 0, QPoint( 0, 0 ) );
-                (*tit).library->unload();
-                delete (*tit).guiBox;
-                delete (*tit).library;
-            }
+            (*tit).guiBox->hide();
+            (*tit).guiBox->reparent( 0, QPoint( 0, 0 ) );
+            (*tit).library->unload();
+            delete (*tit).guiBox;
+            delete (*tit).library;
         }
         pluginList.clear();
     }
@@ -189,7 +177,6 @@ void Today::loadPlugins() {
     QMap<QString, TodayPlugin> tempList;
 
     for ( it = list.begin(); it != list.end(); ++it ) {
-//	TodayPluginInterface *iface = 0;
         QInterfacePtr<TodayPluginInterface> iface;
         QLibrary *lib = new QLibrary( path + "/" + *it );
 
@@ -198,71 +185,58 @@ void Today::loadPlugins() {
 	    qDebug( "accepted: %s", QString( path + "/" + *it ).latin1() );
             qDebug( QString(*it) );
 
-            // If plugin is exludes from refresh, get it in the list again here.
+            TodayPlugin plugin;
+            plugin.library = lib;
+            plugin.iface = iface;
+            plugin.name = QString(*it);
 
-            if ( pluginListRefreshExclude.contains( (*it) ) ) {
-                // if its not in allApplets list, add it to a layout
-                if ( !m_allApplets.contains( pluginListRefreshExclude[(*it)].name ) ) {
-                    layout->addWidget( pluginListRefreshExclude[(*it)].guiBox );
-                    pluginList.append( pluginListRefreshExclude[(*it)] );
-                } else {
-                    tempList.insert( pluginListRefreshExclude[(*it)].name, pluginListRefreshExclude[(*it)] );
-                }
+            // find out if plugins should be shown
+            if ( m_excludeApplets.grep( *it ).isEmpty() ) {
+                plugin.active = true;
             } else {
+                plugin.active = false;
+            }
 
-                TodayPlugin plugin;
-                plugin.library = lib;
-                plugin.iface = iface;
-                plugin.name = QString(*it);
+            plugin.guiPart = plugin.iface->guiPart();
+            plugin.excludeRefresh = plugin.guiPart->excludeFromRefresh();
 
-                // find out if plugins should be shown
-                if ( m_excludeApplets.grep( *it ).isEmpty() ) {
-                    plugin.active = true;
-                } else {
-                    plugin.active = false;
-                }
+            // package the whole thing into a qwidget so it can be shown and hidden
+            plugin.guiBox = new QWidget( this );
+            QHBoxLayout *boxLayout = new QHBoxLayout( plugin.guiBox );
+            QPixmap plugPix;
+            plugPix.convertFromImage( Resource::loadImage( plugin.guiPart->pixmapNameWidget() ).smoothScale( m_iconSize, m_iconSize ), 0 );
+            OClickableLabel* plugIcon = new OClickableLabel( plugin.guiBox );
+            plugIcon->setPixmap( plugPix );
+            QWhatsThis::add( plugIcon, tr("Click here to launch the associated app") );
+            plugIcon->setName( plugin.guiPart->appName() );
+            connect( plugIcon, SIGNAL( clicked() ), this, SLOT( startApplication() ) );
+            // a scrollview for each plugin
+            QScrollView* sv = new QScrollView( plugin.guiBox );
+            QWidget *plugWidget = plugin.guiPart->widget( sv->viewport() );
+            // not sure if that is good .-)
+            sv->setMinimumHeight( 12 );
+            sv->setResizePolicy( QScrollView::AutoOneFit );
+            sv->setHScrollBarMode( QScrollView::AlwaysOff );
+            sv->setFrameShape( QFrame::NoFrame );
+            sv->addChild( plugWidget );
+            // make sure the icon is on the top alligned
+            boxLayout->addWidget( plugIcon, 0, AlignTop );
+            boxLayout->addWidget( sv, 0, AlignTop );
+            boxLayout->setStretchFactor( plugIcon, 1 );
+            boxLayout->setStretchFactor( sv, 9 );
+            // "prebuffer" it in one more list, to get the sorting done
+            tempList.insert( plugin.name, plugin );
 
-                plugin.guiPart = plugin.iface->guiPart();
-                plugin.excludeRefresh = plugin.guiPart->excludeFromRefresh();
+            // on first start the list is off course empty
+            if ( m_allApplets.isEmpty() ) {
+                layout->addWidget( plugin.guiBox );
+                pluginList.append( plugin );
+            }
 
-                // package the whole thing into a qwidget so it can be shown and hidden
-                plugin.guiBox = new QWidget( this );
-                QHBoxLayout *boxLayout = new QHBoxLayout( plugin.guiBox );
-                QPixmap plugPix;
-                plugPix.convertFromImage( Resource::loadImage( plugin.guiPart->pixmapNameWidget() ).smoothScale( m_iconSize, m_iconSize ), 0 );
-                OClickableLabel* plugIcon = new OClickableLabel( plugin.guiBox );
-                plugIcon->setPixmap( plugPix );
-                QWhatsThis::add( plugIcon, tr("Click here to launch the associated app") );
-                plugIcon->setName( plugin.guiPart->appName() );
-                connect( plugIcon, SIGNAL( clicked() ), this, SLOT( startApplication() ) );
-                // a scrollview for each plugin
-                QScrollView* sv = new QScrollView( plugin.guiBox );
-                QWidget *plugWidget = plugin.guiPart->widget( sv->viewport() );
-                // not sure if that is good .-)
-                sv->setMinimumHeight( 10 );
-                sv->setResizePolicy( QScrollView::AutoOneFit );
-                sv->setHScrollBarMode( QScrollView::AlwaysOff );
-                sv->setFrameShape( QFrame::NoFrame );
-                sv->addChild( plugWidget );
-                // make sure the icon is on the top alligned
-                boxLayout->addWidget( plugIcon, 0, AlignTop );
-                boxLayout->addWidget( sv, 0, AlignTop );
-                boxLayout->setStretchFactor( plugIcon, 1 );
-                boxLayout->setStretchFactor( sv, 9 );
-                // "prebuffer" it in one more list, to get the sorting done
-                tempList.insert( plugin.name, plugin );
-
-                // on first start the list is off course empty
-                if ( m_allApplets.isEmpty() ) {
-                    layout->addWidget( plugin.guiBox );
-                    pluginList.append( plugin );
-                }
-
-                // if plugin is not yet in the list, add it to the layout too
-                else if ( !m_allApplets.contains( plugin.name ) ) {
-                    layout->addWidget( plugin.guiBox );
-                    pluginList.append( plugin );
-                }
+            // if plugin is not yet in the list, add it to the layout too
+            else if ( !m_allApplets.contains( plugin.name ) ) {
+                layout->addWidget( plugin.guiBox );
+                pluginList.append( plugin );
             }
         } else {
             qDebug( "could not recognize %s", QString( path + "/" + *it ).latin1() );
@@ -370,6 +344,7 @@ void Today::startConfig() {
  *
  */
 void Today::refresh() {
+
     init();
 
     QValueList<TodayPlugin>::Iterator it;
@@ -377,7 +352,7 @@ void Today::refresh() {
       if ( !(*it).excludeRefresh ) {
 	(*it).guiPart->refresh();
 	qDebug( "refresh" );
-      }    
+      }
     }
 }
 
