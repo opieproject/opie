@@ -53,7 +53,7 @@ void parseEmailTo( const QString &strDefaultEmail,
 
 AbEditor::AbEditor( const Contact &entry, const QValueList<int> *newOrdered,
 		    QStringList *slNewOrdered,
-		    QWidget *parent = 0, const char *name = 0, WFlags fl = 0 )
+		    QWidget *parent, const char *name, WFlags fl )
     : QDialog( parent, name, TRUE, fl ),
       orderedValues( newOrdered ),
       slOrdered( slNewOrdered )
