@@ -16,7 +16,14 @@ signals:
 	
 public:
   Module(){};
- 
+
+  /**
+   * The current profile has been changed and the module should do any
+   * neccesary changes also.
+   * @param newProfile what the profile should be changed to.
+   */ 
+  virtual void setProfile(QString newProfile) = 0;
+  
   /**
    * get the icon name for this device.
    * @param Interface* can be used in determining the icon.

@@ -11,6 +11,7 @@ signals:
 public:
   WLANModule();
   
+  virtual void setProfile(QString newProfile);
   virtual bool isOwner(Interface *);
   virtual QWidget *configure(QTabWidget **tabWidget);
   virtual QWidget *information(QTabWidget **tabWidget);
@@ -22,7 +23,8 @@ public:
 
 private:
   QList<Interface> list;
-  
+  QString profile;
+
 };
 
 extern "C"

@@ -10,6 +10,13 @@ WLANModule::WLANModule() : Module() {
 }
 
 /**
+ * Change the current profile
+ */ 
+void WLANModule::setProfile(QString newProfile){
+  profile = newProfile;
+}
+
+/**
  * get the icon name for this device.
  * @param Interface* can be used in determining the icon.
  * @return QString the icon name (minus .png, .gif etc) 

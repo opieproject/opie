@@ -50,7 +50,6 @@ private:
   // Interface information
   bool status;
   bool attached;
-  QString interfaceName;
   QString hardwareName;
   Module *moduleOwner;
   

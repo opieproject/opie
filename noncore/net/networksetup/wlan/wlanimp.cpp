@@ -26,35 +26,35 @@ void WLANImp::readConfig()
     config.setGroup( "Properties" );
     QString ssid = config.readEntry( "SSID", "any" );
     if( ssid == "any" || ssid == "ANY" ){
-        essNon->setChecked( TRUE );
+        essNon->setChecked( true );
     } else {
-        essSpecific->setChecked( TRUE );
+        essSpecific->setChecked( true );
         essSpecificLineEdit->setText( ssid );
     }
     QString mode = config.readEntry( "Mode", "Managed" );
     if( mode == "adhoc" ) {
-        network802->setChecked( TRUE );
+        network802->setChecked( true );
     } else {
-        networkInfrastructure->setChecked( TRUE );
+        networkInfrastructure->setChecked( true );
     }
     networkChannel->setValue( config.readNumEntry( "CHANNEL", 1 ) );
 //    config.readEntry( "RATE", "auto" );
-    config.readEntry( "dot11PrivacyInvoked" ) == "true" ? wepEnabled->setChecked( TRUE ) : wepEnabled->setChecked( FALSE );
+    config.readEntry( "dot11PrivacyInvoked" ) == "true" ? wepEnabled->setChecked( true ) : wepEnabled->setChecked( false );
     config.readEntry( "AuthType", "opensystem" );
-    config.readEntry( "PRIV_KEY128", "false" ) == "false" ? key40->setChecked( TRUE ) : key128->setChecked( TRUE );
+    config.readEntry( "PRIV_KEY128", "false" ) == "false" ? key40->setChecked( true ) : key128->setChecked( true );
     int defaultkey = config.readNumEntry( "dot11WEPDefaultKeyID", 0 );
     switch( defaultkey ){
     case 0:
-        keyRadio0->setChecked( TRUE );
+        keyRadio0->setChecked( true );
 	break;
     case 1:
-        keyRadio1->setChecked( TRUE );
+        keyRadio1->setChecked( true );
 	break;
     case 2:
-        keyRadio2->setChecked( TRUE );
+        keyRadio2->setChecked( true );
 	break;
     case 3:
-        keyRadio3->setChecked( TRUE );
+        keyRadio3->setChecked( true );
 	break;
     }
     keyLineEdit0->setText(config.readEntry( "dot11WEPDefaultKey0" ));
@@ -97,7 +97,7 @@ bool WLANImp::writeConfig()
     config.writeEntry( "dot11WEPDefaultKey2", keyLineEdit2->text() );
     config.writeEntry( "dot11WEPDefaultKey3", keyLineEdit3->text() );
     return writeWirelessOpts( config );
-//    return TRUE;
+//    return true;
 }
 
 /**
@@ -120,14 +120,14 @@ bool WLANImp::writeWirelessOpts( Config &config, QString scheme )
     QString prev = "/etc/pcmcia/wireless.opts";
     QFile prevFile(prev);
     if ( !prevFile.open( IO_ReadOnly ) )
-	return FALSE;
+	return false;
 
     QString tmp = "/etc/pcmcia/wireless.opts-qpe-new";
     QFile tmpFile(tmp);
     if ( !tmpFile.open( IO_WriteOnly ) )
-	return FALSE;
+	return false;
 
-    bool retval = TRUE;
+    bool retval = true;
     
     QTextStream in( &prevFile );
     QTextStream out( &tmpFile );
@@ -135,8 +135,8 @@ bool WLANImp::writeWirelessOpts( Config &config, QString scheme )
     config.setGroup("Properties");
     
     QString line;
-    bool found=FALSE;
-    bool done=FALSE;
+    bool found=false;
+    bool done=false;
     while ( !in.atEnd() ) {
 	QString line = in.readLine();
 	QString wline = line.simplifyWhiteSpace();
@@ -144,14 +144,14 @@ bool WLANImp::writeWirelessOpts( Config &config, QString scheme )
 	    if ( found ) {
 		// skip existing entry for this scheme, and write our own.
 		if ( wline == ";;" ) {
-		    found = FALSE;
+		    found = false;
 		    continue;
 		} else {
 		    continue;
 		}
 	    } else {
 		if ( wline.left(scheme.length()+7) == scheme + ",*,*,*)" ) {
-		    found=TRUE;
+		    found=true;
 		    continue; // skip this line
 		} else if ( wline == "esac" || wline == "*,*,*,*)" ) {
 		    // end - add new entry
@@ -201,7 +201,7 @@ bool WLANImp::writeWirelessOpts( Config &config, QString scheme )
 			++f;
 		    }
 		    out << "    ;;\n";
-		    done = TRUE;
+		    done = true;
 		}
 	    }
 	}
@@ -221,7 +221,7 @@ bool WLANImp::writeWirelessOpts( Config &config, QString scheme )
 	    system(QString("%1/pcmcia stop").arg(initpath));
 
     if( system( "mv " + tmp + " " + prev ) )
-	retval = FALSE;
+	retval = false;
 //#ifdef USE_SCHEMES
 //    if ( retval )
 //	SchemeChanger::changeScheme(scheme);
