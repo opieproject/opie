@@ -76,7 +76,7 @@ class OInputSystem : public QObject
      */
     void synchronize();
     /**
-     * @internal desctructor
+     * @internal destructor
      */    
      ~OInputSystem();
  
@@ -97,11 +97,32 @@ class OInputDevice : public QObject
     #include "oinputsystemenums.h"    
     
   public:
+    /**
+     * @returns the identity string of this input device
+     */
     QString identity() const;
+    /**
+     * @returns the path of this input device
+     */
     QString path() const;
+    /**
+     * @returns a unique identifier for this input device
+     * @note Only a few devices support this
+     */
     QString uniq() const;
-    bool    hasFeature( Feature ) const;
-    bool    isHeld( Key ) const;
+    /**
+     * @returns whether a certain @a Feature is being supported by this device
+     */
+    bool hasFeature( Feature ) const;
+    /**
+     * @returns whether a given @a Key or Button is being held at the moment
+     */
+    bool isHeld( Key ) const;
+    /**
+     * @internal
+     * @returns a string containing a printable form of the global keymask
+     */
+    QString globalKeyMask() const;
     
   private:
     int _fd;

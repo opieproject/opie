@@ -150,7 +150,10 @@ bool OInputDevice::hasFeature( Feature bit ) const
     BIT_MASK( features, EV_MAX );
             
     if( ioctl( _fd, EVIOCGBIT( 0, EV_MAX ), features) < 0 )
+    {
+        perror( "EVIOCGBIT" );
         return false;
+    }
     else
         return BIT_TEST( features, bit );
 }
@@ -170,3 +173,25 @@ bool OInputDevice::isHeld( Key bit ) const
         return BIT_TEST( keys, bit );
     }
 }
+
+
+QString OInputDevice::globalKeyMask() const
+{
+    BIT_MASK( keys, KEY_MAX );
+
+    if( ioctl( _fd, EVIOCGKEY( sizeof(keys) ), keys ) < 0 )
+    {
+        perror( "EVIOCGKEY" );
+    }
+    else
+    {
+        QString keymask;
+        for ( int i = 0; i < KEY_MAX; ++i )
+        {
+            if ( BIT_TEST( keys, i ) ) keymask.append( QString().sprintf( "%0d, ", i ) );
+        }
+        return keymask;
+        
+    }
+}
+
