@@ -206,7 +206,7 @@ bool FileManager::copyFile( const AppLnk &src, const AppLnk &dest )
     bytesRead -= bytesWritten;
   }
     }
-    
+
     if ( ok )
   ok = dest.writeLink();
     
@@ -224,8 +224,6 @@ bool FileManager::copyFile( const AppLnk &src, const AppLnk &dest )
 
     return ok;
 }
-
-
 
 bool FileManager::copyFile( const QString & src, const QString & dest ) {
    bool success = true;
@@ -317,6 +315,68 @@ bool FileManager::renameFile( const QString & src, const QString & dest ) {
       }
    }
     return false;  
+}
+
+
+=======
+bool FileManager::copyFile( const QString & src, const QString & dest ) {
+   bool success = true;
+   struct stat status;
+   int read_fd=0;
+   int write_fd=0;
+   struct stat stat_buf;
+   off_t offset = 0;
+   QFile srcFile(src);
+   QFile destFile(dest);
+
+   if(!srcFile.open( IO_ReadOnly|IO_Raw)) {
+         return success = false;
+   }
+   read_fd = srcFile.handle();
+   if(read_fd != -1) {
+      fstat (read_fd, &stat_buf);
+      if( !destFile.open( IO_WriteOnly|IO_Raw ) )
+            return success = false;
+      write_fd = destFile.handle();
+      if(write_fd != -1) {
+         int err=0;
+         QString msg;
+         err = sendfile(write_fd, read_fd, &offset, stat_buf.st_size);
+         if( err == -1) {
+            switch(err) {
+            case EBADF : msg = "The input file was not opened for reading or the output file was not opened for writing. ";
+            case EINVAL: msg = "Descriptor is not valid or locked. ";
+            case ENOMEM: msg = "Insufficient memory to read from in_fd.";
+            case EIO: msg = "Unspecified error while reading from in_fd.";
+            };
+            success = false;
+         }
+      } else {
+         qWarning("open write failed %s, %s",src.latin1(), dest.latin1());
+         success = false;
+      }
+   } else {
+      qWarning("open read failed %s, %s",src.latin1(), dest.latin1());
+      success = false;
+   }
+   srcFile.close();
+   destFile.close();
+    // Set file permissions
+  if( stat( (const char *) src, &status ) == 0 ) {
+      chmod( (const char *) dest, status.st_mode );
+    }
+
+  return success;
+}
+
+
+bool FileManager::renameFile( const QString & src, const QString & dest ) {
+   if(copyFile( src, dest )) {
+      if(QFile::remove(src) ) {
+       return true;
+      }
+   }
+    return false;
 }
 
 
