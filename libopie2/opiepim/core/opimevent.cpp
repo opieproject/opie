@@ -643,10 +643,10 @@ void OPimEvent::fromMap( const QMap<int, QString>& map )
     }
     else  {
         /* to current date time */
-        OPimTimeZone   to_zone( ev.timeZone().isEmpty() ? OPimTimeZone::utc() : OPimTimeZone::current() );
+        OPimTimeZone   to_zone( timeZone().isEmpty() ? OPimTimeZone::utc() : OPimTimeZone::current() );
 
-        ev.setStartDateTime(to_zone.toDateTime( start));
-        ev.setEndDateTime  (to_zone.toDateTime( end));
+        setStartDateTime(to_zone.toDateTime( start));
+        setEndDateTime  (to_zone.toDateTime( end));
     }
 
     int alarmTime = -1;
