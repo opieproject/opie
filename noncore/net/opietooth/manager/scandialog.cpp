@@ -134,7 +134,6 @@ namespace OpieTooth {
             deviceItem = new QCheckListItem( ListView1, (*it).name() );
             deviceItem->setText(1, (*it).mac() );
         }
-
     }
 
 /*
@@ -151,7 +150,7 @@ namespace OpieTooth {
 
         QListViewItemIterator it( ListView1 );
         for ( ; it.current(); ++it ) {
-            if ( it.current()->isSelected() ) {
+            if ( ((QCheckListItem*)it.current())->isOn() ) {
                 RemoteDevices* device = new RemoteDevices(  it.current()->text(1), it.current()->text(0));
                    deviceList->append( device );
             }

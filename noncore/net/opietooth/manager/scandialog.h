@@ -21,7 +21,7 @@
 #include <qdialog.h>
 #include <qlist.h>
 
-
+#include <remotedevice.h>
 class QVBoxLayout;
 class QHBoxLayout;
 class QGridLayout;
@@ -35,7 +35,7 @@ class QProgressBar;
 
 namespace OpieTooth {
 
-#include <remotedevices.h>
+
 class Manager;
 class Device;
 

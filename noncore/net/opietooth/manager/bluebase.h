@@ -10,6 +10,8 @@
 
 #include "bluetoothbase.h"
 
+#include <remotedevice.h>
+
 class QVBox;
 class QHBoxLayout;
 class QGridLayout;

@@ -62,7 +62,7 @@ void Manager::searchDevices( const QString& device ){
              this, SLOT(slotHCIOut(OProcess*, char*, int ) ) );
     if (!hcitool->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
         qWarning("could not start");
-        RemoteDevices::ValueList list;
+        RemoteDevice::ValueList list;
         emit foundDevices( device, list );
         delete hcitool;
     }
@@ -112,7 +112,7 @@ void Manager::searchServices( const QString& remDevice ){
         emit foundServices( remDevice, list );
     }
 }
-void Manager::searchServices( const RemoteDevices& dev){
+void Manager::searchServices( const RemoteDevice& dev){
     searchServices( dev.mac() );
 }
 QString Manager::toDevice( const QString& mac ){
@@ -162,7 +162,7 @@ Services::ValueList Manager::parseSDPOutput( const QString& out ) {
 
 void Manager::slotHCIExited(OProcess* proc ) {
     qWarning("process exited");
-    RemoteDevices::ValueList list;
+    RemoteDevice::ValueList list;
     if (proc->normalExit() ) {
         qWarning("normalExit %s",  proc->name() );
         QMap<QString, QString>::Iterator it = m_devices.find(proc->name() );
@@ -190,9 +190,9 @@ void Manager::slotHCIOut(OProcess* proc,  char* ch,  int len) {
 
     m_devices.replace( proc->name(),  string );
 }
-RemoteDevices::ValueList Manager::parseHCIOutput(const QString& output ) {
+RemoteDevice::ValueList Manager::parseHCIOutput(const QString& output ) {
     qWarning("parseHCI %s",  output.latin1() );
-    RemoteDevices::ValueList list;
+    RemoteDevice::ValueList list;
     QStringList strList = QStringList::split('\n',  output );
     QStringList::Iterator it;
     QString str;
@@ -205,7 +205,7 @@ RemoteDevices::ValueList Manager::parseHCIOutput(const QString& output ) {
             str.remove( 0,  17 );
             qWarning("mac %s",  mac.latin1() );
             qWarning("rest:%s",  str.latin1() );
-            RemoteDevices rem( mac , str.stripWhiteSpace() );
+            RemoteDevice rem( mac , str.stripWhiteSpace() );
             list.append( rem );
         }
     }

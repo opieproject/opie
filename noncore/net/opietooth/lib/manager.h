@@ -98,7 +98,7 @@ Q_OBJECT
     /**
      * search for services on a remote device
      */
-    void searchServices( const RemoteDevices& );
+    void searchServices( const RemoteDevice& );
     /*static*/ QString toDevice( const QString& mac );
     /*static*/ QString toMac( const QString &device );
 
@@ -109,7 +109,7 @@ Q_OBJECT
     void addedService(  const QString& service, bool added );
     void removedService( const QString& service, bool removed );
     void foundServices( const QString& device, Services::ValueList );
-    void foundDevices( const QString& device, RemoteDevices::ValueList );
+    void foundDevices( const QString& device, RemoteDevice::ValueList );
 
 private slots:
     void slotProcessExited(OProcess* );
@@ -119,7 +119,7 @@ private slots:
     void slotHCIOut(OProcess*, char*, int );
   private:
       Services::ValueList parseSDPOutput( const QString& );
-      RemoteDevices::ValueList parseHCIOutput( const QString& );
+      RemoteDevice::ValueList parseHCIOutput( const QString& );
       OProcess *m_hcitool;
       OProcess *m_sdp; // not only one
       QString m_device;

@@ -5,15 +5,15 @@
 #include <qvaluelist.h>
 
 namespace OpieTooth{
-  class RemoteDevices {
+  class RemoteDevice {
   public:
-    typedef QValueList<RemoteDevices> ValueList;
-    RemoteDevices();
-    RemoteDevices(const RemoteDevices& );
-    RemoteDevices(const QString &mac, const QString &name );
-    ~RemoteDevices();
-    friend bool operator==(const RemoteDevices&, const RemoteDevices&);
-    RemoteDevices &operator=(const RemoteDevices& );
+    typedef QValueList<RemoteDevice> ValueList;
+    RemoteDevice();
+    RemoteDevice(const RemoteDevice& );
+    RemoteDevice(const QString &mac, const QString &name );
+    ~RemoteDevice();
+    friend bool operator==(const RemoteDevice&, const RemoteDevice&);
+    RemoteDevice &operator=(const RemoteDevice& );
     bool isEmpty()const;
     QString mac()const;
     void setMac(const QString& mac );
