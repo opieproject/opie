@@ -119,7 +119,7 @@ CONFIG_OAPP	core/apps/oapp	oapp.pro
 CONFIG_OBEX	core/applets/obex2	obex.pro
 CONFIG_ODICT	noncore/apps/odict	odict.pro
 CONFIG_OIPKG	noncore/unsupported/oipkg	oipkg.pro
-CONFIG_OPIEALARM	core/opiealarm
+CONFIG_OPIEALARM	core/opiealarm	opiealarm.pro
 CONFIG_OPIE-CONSOLE	noncore/apps/opie-console	opie-console.pro
 CONFIG_OPIE_EYE	noncore/graphics/opie-eye	phunk_view.pro
 CONFIG_OPIE_EYE_SLAVE	noncore/graphics/opie-eye/slave	slave.pro
