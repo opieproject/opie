@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.25.4.6.2.1 2003-08-28 00:00:51 zecke Exp $
+** $Id: datebook.cpp,v 1.25.4.6.2.2 2003-10-04 15:25:19 zecke Exp $
 **
 **********************************************************************/
 
@@ -404,6 +404,8 @@ void DateBook::viewMonth() {
 void DateBook::insertEvent( const Event &e )
 {
 	Event dupEvent=e;
+	if(!dupEvent.isValidUid() ) // tkcRom seems to be different
+	    dupEvent.assignUid();
 	dupEvent.setLocation(defaultLocation);
 	dupEvent.setCategories(defaultCategories);
 	db->addEvent(dupEvent);
@@ -454,6 +456,8 @@ void DateBook::duplicateEvent( const Event &e )
                 Event::RepeatPattern rp = newEv.repeatPattern();
                 rp.createTime = ::time( NULL );
                 newEv.setRepeat( TRUE, rp ); // has repeat and repeatPattern...
+		if( newEv.uid() == e.uid() || !newEv.isValidUid() )
+		    newEv.assignUid();
 
 		db->addEvent(newEv);
 		emit newEvent();
