@@ -1182,7 +1182,11 @@ void TextEdit::gotoLine() {
 void TextEdit::doGoto() {
    QString number = gotoEdit->text();
    gotoEdit->hide();
-   if(gotoEdit) delete gotoEdit;
+   if(gotoEdit) {
+      delete gotoEdit;
+      gotoEdit = 0;
+   }
+   
    bool ok;
    int lineNumber = number.toInt(&ok, 10);
    if(editor->numLines() < lineNumber)
