@@ -53,8 +53,8 @@ namespace OpieTooth {
 
 
         QWidget* privateLayoutWidget = new QWidget( Frame7, "Layout11" );
-        privateLayoutWidget->setGeometry( QRect( 10, 9, 221, 310 ) );
-        Layout11 = new QGridLayout( privateLayoutWidget );
+	privateLayoutWidget->setGeometry( QRect( 10, 9, 221, 280 ) );
+        Layout11 = new QVBoxLayout( privateLayoutWidget );
         Layout11->setSpacing( 6 );
         Layout11->setMargin( 0 );
 
@@ -62,18 +62,19 @@ namespace OpieTooth {
         progress = new QProgressBar(privateLayoutWidget,  "progbar");
         progress->setTotalSteps(20);
 
-        //Layout11->addMultiCellWidget( progress, 1, 1, 0, 1 );
-        Layout11->addWidget(progress,  2, 2);
 
-        StartButton = new QPushButton( privateLayoutWidget, "StartButton" );
+       QFrame *buttonFrame = new QFrame(Frame7, "");	
+	
+        StartButton = new QPushButton( buttonFrame, "StartButton" );
         StartButton->setText( tr( "Start" ) );
 
-        Layout11->addWidget( StartButton, 2, 0 );
-
-        StopButton = new QPushButton( privateLayoutWidget, "StopButton" );
+        StopButton = new QPushButton( buttonFrame, "StopButton" );
         StopButton->setText( tr( "Cancel" ) );
 
-        Layout11->addWidget( StopButton, 2, 1 );
+ 
+        QHBoxLayout *buttonLayout = new QHBoxLayout(buttonFrame);
+        buttonLayout->addWidget(StartButton);
+	buttonLayout->addWidget(StopButton);	
 
         ListView1 = new QListView( privateLayoutWidget, "ListView1" );
 
@@ -81,7 +82,11 @@ namespace OpieTooth {
         ListView1->addColumn( tr( "Device Name" ) );
         //ListView1->addColumn( tr( "Type" ) );
 
-        Layout11->addMultiCellWidget( ListView1, 0, 0, 0, 1 );
+        Layout11->addWidget( ListView1);
+        Layout11->addWidget(progress);
+        Layout11->addWidget( buttonFrame);
+
+        localDevice = new Manager( "hci0" );
 
         connect( (QObject*)StartButton, SIGNAL( clicked() ), this, SLOT( startSearch() ) );
         connect( (QObject*)StopButton, SIGNAL( clicked() ),  this,  SLOT( stopSearch() ) );
@@ -103,8 +108,7 @@ namespace OpieTooth {
     void ScanDialog::startSearch() {
         progress->setProgress(0);
         progressStat = 0;
-         // read it from config later
-        localDevice = new Manager( "hci0" );
+
         progressTimer(20);
         // when finished, it emmite foundDevices()
         // checken ob initialisiert , qcop ans applet.

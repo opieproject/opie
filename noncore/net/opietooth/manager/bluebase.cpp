@@ -57,6 +57,8 @@ namespace OpieTooth {
         pal.setColor(QPalette::Disabled, QColorGroup::Button, col);
         this->setPalette(pal);
 
+        setCaption( tr( "Bluetooth Manager" ) );
+
         readConfig();
         initGui();
     }
@@ -152,7 +154,7 @@ namespace OpieTooth {
  */
     void BlueBase::startScan() {
         ScanDialog *scan = new ScanDialog( this, "", true);
-        scan->exec();
+        scan->showMaximized();
     }
 
 /**

@@ -55,7 +55,7 @@ class Device;
 
 
     protected:
-        QGridLayout* Layout11;
+        QVBoxLayout* Layout11;
 
     private slots:
         void stopSearch();
