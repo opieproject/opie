@@ -3,61 +3,61 @@
     <name>Menu::InstEditDialog</name>
     <message>
         <source>Instrument</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Add High String</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter chaîne haute</translation>
     </message>
     <message>
         <source>Add Low String</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter chaîne basse</translation>
     </message>
 </context>
 <context>
     <name>Menu::MenuWidget</name>
     <message>
         <source>Instr.</source>
-        <translation type="unfinished"></translation>
+        <translation>Instr.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Note</translation>
     </message>
     <message>
         <source>show</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Gamme</translation>
     </message>
 </context>
 <context>
     <name>Menu::ScaleEditDialog</name>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Gamme</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer</translation>
     </message>
 </context>
 </TS>

@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished">Modifier...</translation>
+        <translation>Modifier...</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -120,7 +120,7 @@
     </message>
     <message>
         <source>Do you want to end the game early?</source>
-        <translation type="unfinished">Voulez-vous terminer la partie avant sa fin?</translation>
+        <translation>Voulez-vous terminer la partie avant la fin ?</translation>
     </message>
     <message>
         <source>Yes</source>
