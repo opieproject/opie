@@ -47,6 +47,13 @@ public:
     };
     typedef std::vector<Button> ButtonVector;
 
+    struct SkinButtonInfo
+    {
+        Command command;
+        const char *fileName;
+        ButtonType buttonType;
+    };
+
     MediaWidget( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QWidget *parent = 0, const char *name = 0 );
     virtual ~MediaWidget();
 

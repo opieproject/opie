@@ -56,10 +56,21 @@ namespace
 const int xo = -2; // movable x offset
 const int yo = 22; // movable y offset
 
-const char * const skin_mask_file_names[10] = {
-   "play", "stop", "next", "prev", "up",
-   "down", "loop", "playlist", "forward", "back"
+const MediaWidget::SkinButtonInfo skinInfo[] =
+{
+    { MediaWidget::Play, "play", MediaWidget::ToggleButton },
+    { MediaWidget::Stop, "stop", MediaWidget::NormalButton },
+    { MediaWidget::Next, "next", MediaWidget::NormalButton },
+    { MediaWidget::Previous, "prev", MediaWidget::NormalButton },
+    { MediaWidget::VolumeUp, "up", MediaWidget::NormalButton },
+    { MediaWidget::VolumeDown, "down", MediaWidget::NormalButton },
+    { MediaWidget::Loop, "loop", MediaWidget::ToggleButton },
+    { MediaWidget::PlayList, "playlist", MediaWidget::NormalButton },
+    { MediaWidget::Forward, "forward", MediaWidget::NormalButton },
+    { MediaWidget::Back, "back", MediaWidget::NormalButton }
 };
+
+const uint buttonCount = sizeof( skinInfo ) / sizeof( skinInfo[ 0 ] );
 
 void changeTextColor( QWidget * w) {
    QPalette p = w->palette();
@@ -75,22 +86,11 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     MediaWidget( playList, mediaPlayerState, parent, name ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this ),
     audioSliderBeingMoved( false )
 {
-    Button defaultButton;
-
-    Button toggleButton = defaultButton;
-    toggleButton.buttonType = ToggleButton;
-
-    buttons.reserve( 10 );
-    buttons.push_back( toggleButton ); // play
-    buttons.push_back( defaultButton ); // stop
-    buttons.push_back( defaultButton ); // next
-    buttons.push_back( defaultButton ); // previous
-    buttons.push_back( defaultButton ); // volume up
-    buttons.push_back( defaultButton ); // volume down
-    buttons.push_back( toggleButton ); // repeat/loop
-    buttons.push_back( defaultButton ); // playlist
-    buttons.push_back( defaultButton ); // forward
-    buttons.push_back( defaultButton ); // back
+    for ( uint i = 0; i < buttonCount; ++i ) {
+        Button button;
+        button.buttonType = skinInfo[ i ].buttonType;
+        buttons.push_back( button );
+    }
 
     setCaption( tr("OpiePlayer") );
 
@@ -108,10 +108,10 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     buttonMask = QImage( imgUp.width(), imgUp.height(), 8, 255 );
     buttonMask.fill( 0 );
 
-    masks.reserve( 10 );
+    masks.reserve( buttonCount );
 
     for ( uint i = 0; i < masks.capacity(); i++ ) {
-        QString filename = QString( QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skin_mask_" + skin_mask_file_names[i] + ".png" );
+        QString filename = QString( QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skin_mask_" + skinInfo[i].fileName + ".png" );
         masks.push_back( QBitmap( filename ) );
 
         if ( !masks[i].isNull() ) {
