@@ -8,10 +8,10 @@
 class XineControl : public QObject  {
     Q_OBJECT
 public:
-    XineControl( QObject *parent, const char *name );
+    XineControl( QObject *parent = 0, const char *name =0 );
     ~XineControl();
 
-private slots:
+public slots:
     void play( const QString& fileName );
     void stop();
     void pause( bool );

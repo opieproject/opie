@@ -3,10 +3,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <xine/video_out.h>
-#include <xine/xine_internal.h>
-#include <xine/xineutils.h>
-#include <xine/configfile.h>
+#include <video_out.h>
+#include <xine_internal.h>
+#include <xineutils.h>
+#include <configfile.h>
 
 typedef struct null_driver_s null_driver_t;
 
