@@ -161,15 +161,11 @@ void LightSettings::accept()
     int i_dim =      interval_dim->value();
     int i_lightoff = interval_lightoff->value();
     int i_suspend =  interval_suspend->value();
-    QCopEnvelope e("QPE/System", "setScreenSaverIntervals(int,int,int)" );
-    e << i_dim << i_lightoff << i_suspend;
 
     // ac
     int i_dim_ac =      interval_dim_ac_3->value();
     int i_lightoff_ac = interval_lightoff_ac_3->value();
     int i_suspend_ac =  interval_suspend_ac_3->value();
-    QCopEnvelope e_ac("QPE/System", "setScreenSaverIntervalsAC(int,int,int)" );
-    e << i_dim_ac << i_lightoff_ac << i_suspend_ac;
 
     Config config( "apm" );
 
@@ -177,25 +173,24 @@ void LightSettings::accept()
 
     // bat
     config.writeEntry( "LcdOffOnly", LcdOffOnly->isChecked() );
-    config.writeEntry( "Dim", interval_dim->value() );
-    config.writeEntry( "LightOff", interval_lightoff->value() );
-    config.writeEntry( "Suspend", interval_suspend->value() );
+    config.writeEntry( "Dim", i_dim );
+    config.writeEntry( "LightOff", i_lightoff );
+    config.writeEntry( "Suspend", i_suspend );
     config.writeEntry( "Brightness",
     ( brightness->value() ) * 255 / brightness->maxValue() );
 
     // ac
     config.setGroup( "AC" );
     config.writeEntry( "LcdOffOnly", LcdOffOnly_2_3->isChecked() );
-    config.writeEntry( "Dim", interval_dim_ac_3->value() );
-    config.writeEntry( "LightOff", interval_lightoff_ac_3->value() );
-    config.writeEntry( "Suspend", interval_suspend_ac_3->value() );
+    config.writeEntry( "Dim", i_dim_ac );
+    config.writeEntry( "LightOff", i_lightoff_ac );
+    config.writeEntry( "Suspend", i_suspend_ac );
     config.writeEntry( "Brightness",
     ( brightness_ac_3->value()) * 255 / brightness_ac_3->maxValue() );
 
 
     // only make light sensor stuff appear if the unit has a sensor
     if ( ODevice::inst()->hasLightSensor() ) {
-        config.setGroup( "lightsensor" );
         config.setGroup( "Battery" );
         config.writeEntry( "LightSensor", (int)auto_brightness->isChecked() );
         config.setGroup( "AC" );
@@ -211,10 +206,20 @@ void LightSettings::accept()
     config.writeEntry( "check_interval", warnintervalBox->value()*1000 );
     config.writeEntry( "power_verylow",  lowSpinBox->value() );
     config.writeEntry( "power_critical", criticalSpinBox->value() );
-    QCopEnvelope e_warn("QPE/System", "reloadPowerWarnSettings()");
-
     config.write();
 
+	{
+		QCopEnvelope e ( "QPE/System", "reloadPowerWarnSettings()" );
+	}
+	{
+		QCopEnvelope e ( "QPE/System", "setScreenSaverInterval(int)" );
+		e << -1;
+	}
+	{
+		QCopEnvelope e ( "QPE/System", "setBacklight(int)" );
+		e << -1;
+	}
+    
     QDialog::accept();
 }
 
