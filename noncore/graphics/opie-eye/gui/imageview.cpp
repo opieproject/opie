@@ -105,27 +105,56 @@ void ImageView::contentsMousePressEvent ( QMouseEvent * e)
     if (e->button()==1) {
         return OImageScrollView::contentsMousePressEvent(e);
     }
-    if (!fullScreen()) return;
-#if 0
-    // doesn't work right (repainting problems)
+//    if (!fullScreen()) return;
     odebug << "Popup " << oendl;
     QPopupMenu *m = new QPopupMenu(0);
     if (!m) return;
-    m->insertItem(tr("Previous image"),ShowPrevious);
-    m->insertItem(tr("Next image"),ShowNext);
-    m->insertSeparator();
-    m->insertItem(tr("Toggle fullscreen"),FullScreen);
-    m->insertItem(tr("Toggle autoscale"),Autoscale);
-    m->insertItem(tr("Toggle autorotate"),Autorotate);
-    m->insertItem(tr("Toggle thumbnail"),Zoomer);
+    bool old = fullScreen();
+    m->insertItem(tr("Toggle fullscreen"),this, SIGNAL(toggleFullScreen()));
+    if (fullScreen()) {
+        m->insertSeparator();
+        m->insertItem(tr("Previous image"),this,SIGNAL(dispPrev()));
+        m->insertItem(tr("Next image"),this,SIGNAL(dispNext()));
+        m->insertSeparator();
+        m->insertItem(tr("Toggle autoscale"),this, SIGNAL(toggleAutoscale()));
+        m->insertItem(tr("Toggle autorotate"),this, SIGNAL(toggleAutorotate()));
+        m->insertItem(tr("Toggle thumbnail"),this, SIGNAL(toggleZoomer()));
+    }
     m->setFocus();
     m->exec( QPoint( QCursor::pos().x(), QCursor::pos().y()) );
     delete m;
-    parentWidget()->showFullScreen();
-#endif
+    /* if we were fullScreen() and must overlap the taskbar again */
+    if (fullScreen() && old) {
+          enableFullscreen();
+//        parentWidget()->hide();
+//        parentWidget()->show();
+    }
 }
 
 void ImageView::setFullScreen(bool how)
 {
     m_isFullScreen = how;
 }
+
+void ImageView::focusInEvent(QFocusEvent *) 
+{
+      // Always do it here, no matter the size.
+     /* result in an endless loop */
+//    if (fullScreen()) enableFullscreen();
+}
+
+void ImageView::enableFullscreen()
+{
+      if (!fullScreen()) return;
+      // Make sure size is correct
+      parentWidget()->setFixedSize(qApp->desktop()->size());
+      // This call is needed because showFullScreen won't work
+      // correctly if the widget already considers itself to be fullscreen.
+      parentWidget()->showNormal();
+      // This is needed because showNormal() forcefully changes the window
+      // style to WSTyle_TopLevel.
+      parentWidget()->reparent(0, WStyle_Customize | WStyle_NoBorder, QPoint(0,0));
+      // Enable fullscreen.
+      parentWidget()->showFullScreen();
+}
+

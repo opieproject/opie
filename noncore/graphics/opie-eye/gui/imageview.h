@@ -46,11 +46,13 @@ protected:
     Opie::Core::OKeyConfigManager*m_viewManager;
     void initKeys();
     bool m_isFullScreen:1;
+    void enableFullscreen();
 
 protected slots:
     virtual void slotShowImageInfo();
     virtual void keyReleaseEvent(QKeyEvent * e);
     virtual void contentsMousePressEvent ( QMouseEvent * e);
+    virtual void focusInEvent ( QFocusEvent * );
 };
 
 #endif

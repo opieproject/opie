@@ -329,7 +329,7 @@ void PMainWindow::slotToggleFullScreen()
         odebug << "full" << oendl;
         m_disp->setBackgroundColor(black);
         if (!tFrame) {
-            tFrame = new QWidget(0,0,WType_TopLevel|WStyle_NoBorder|WStyle_StaysOnTop);
+            tFrame = new QWidget(0,0,WStyle_Customize|WStyle_NoBorder);
             tFrame->resize(qApp->desktop()->width(), qApp->desktop()->height());
             tFrame->setMinimumSize(qApp->desktop()->width(), qApp->desktop()->height());
         }
@@ -339,6 +339,7 @@ void PMainWindow::slotToggleFullScreen()
         m_disp->resize(qApp->desktop()->width(), qApp->desktop()->height());
         tFrame->showFullScreen();
     } else {
+        setUpdatesEnabled(false);
         odebug << "window" << oendl;
         m_disp->reparent(0,QPoint(0,0));
         m_disp->showNormal();
@@ -352,6 +353,7 @@ void PMainWindow::slotToggleFullScreen()
         if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
             m_disp->resize(m_disp->minimumSize());
         }
+        setUpdatesEnabled(true);
     }
 }
 
@@ -427,6 +429,7 @@ void PMainWindow::closeEvent( QCloseEvent* ev ) {
 }
 
 void PMainWindow::raiseIconView() {
+    setUpdatesEnabled(false);
     if (m_stack->mode() == Opie::Ui::OWidgetStack::SmallScreen) {
         prevButton->hide();
         nextButton->hide();
@@ -438,6 +441,8 @@ void PMainWindow::raiseIconView() {
         tFrame->hide();
     }
     m_stack->raiseWidget( IconView );
+    setUpdatesEnabled(true);
+    repaint();
 }
 
 void PMainWindow::setDocument( const QString& showImg ) {
