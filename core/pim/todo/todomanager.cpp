@@ -34,10 +34,9 @@ using namespace Todo;
 
 TodoManager::TodoManager( QObject *obj )
     : QObject( obj ) {
-    m_db = new OTodoAccess();
+    m_db = 0l;
     QTime time;
     time.start();
-    m_db->load();
     int el = time.elapsed();
     qWarning("QTimer for loading %d", el/1000 );
 }
@@ -47,8 +46,10 @@ TodoManager::~TodoManager() {
 OTodo TodoManager::event(int uid ) {
     return m_db->find( uid );
 }
-OTodoAccess::List::Iterator TodoManager::begin() {
+void TodoManager::updateList() {
     m_list = m_db->allRecords();
+}
+OTodoAccess::List::Iterator TodoManager::begin() {
     m_it = m_list.begin();
     return m_it;
 }
@@ -56,7 +57,8 @@ OTodoAccess::List::Iterator TodoManager::end() {
     return m_list.end();
 }
 OTodoAccess::List::Iterator TodoManager::overDue() {
-    m_list = m_db->overDue();
+    int filter = 2 & 1;
+    m_list = m_db->sorted(m_asc, m_sortOrder, filter,  m_ca );
     m_it = m_list.begin();
     return m_it;
 }
@@ -111,4 +113,13 @@ int TodoManager::catId( const QString& cats ) {
 void TodoManager::remove( const QArray<int>& ids) {
     for (uint i=0; i < ids.size(); i++ )
         remove( ids[i] );
+}
+bool TodoManager::isLoaded()const {
+    return (m_db == 0 );
+}
+void TodoManager::load() {
+    if (!m_db) {
+        m_db = new OTodoAccess();
+        m_db->load();
+    }
 }

@@ -45,19 +45,32 @@ namespace Todo {
     class TodoManager : public QObject{
         Q_OBJECT
     public:
+        bool isLoaded()const;
+        void load();
         TodoManager(QObject* obj = 0);
         ~TodoManager();
 
         QStringList categories()/*const*/;
         int catId(const QString&);
         OTodo event(int uid );
+
+        void updateList();
+        /** returns the iterator sorted if set sorted*/
         OTodoAccess::List::Iterator begin();
         OTodoAccess::List::Iterator end();
+        OTodoAccess::List& list();
 
         OTodoAccess::List::Iterator overDue();
         OTodoAccess::List::Iterator fromTo( const QDate& start,
                                  const QDate& end );
         OTodoAccess::List::Iterator query( const OTodo& ev, int query );
+
+        void setCategory( bool sort, int category = -1);
+        void setShowOverDue(  bool show );
+        void setSortOrder( int sortOrder );
+        void setSortASC( bool );
+        void sort();
+
         OTodoAccess* todoDB();
         bool saveAll();
 
@@ -80,7 +93,13 @@ namespace Todo {
         OTodoAccess* m_db;
         OTodoAccess::List m_list;
         OTodoAccess::List::Iterator m_it;
+        OTodoAccess::List m_sorted;
         Categories m_cat;
+        int m_ca;
+        /* sort cat */
+        bool m_shCat;
+        int m_sortOrder;
+        bool m_asc;
 
     };
 };

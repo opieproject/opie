@@ -32,6 +32,7 @@
 #include <qpopupmenu.h>
 #include <qwidgetstack.h>
 #include <qaction.h>
+#include <qtimer.h>
 
 #include <qpe/config.h>
 #include <qpe/ir.h>
@@ -69,6 +70,7 @@ MainWindow::MainWindow( QWidget* parent,
 
     populateTemplates();
     raiseCurrentView();
+    QTimer::singleShot(0, this, SLOT(populateCategories() ) );
 }
 void MainWindow::initTemplate() {
     m_curTempEd = new TemplateEditor( this, templateManager() );
@@ -161,7 +163,6 @@ void MainWindow::initActions() {
             this, SLOT( slotShowDeadLine( bool ) ) );
 
     m_options->insertSeparator();
-    populateCategories();
 
     m_bar->insertItem( tr("Data") ,m_edit );
     m_bar->insertItem( tr("Category"),  m_catMenu );
@@ -531,6 +532,8 @@ void MainWindow::slotShowDetails() {
  * Menu
  */
 void MainWindow::populateCategories() {
+    if (m_todoMgr.isLoaded() )
+        m_todoMgr.load();
 
     m_catMenu->clear();
     int id, rememberId;

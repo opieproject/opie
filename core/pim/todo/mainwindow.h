@@ -87,6 +87,7 @@ namespace Todo {
         void populateTemplates();
         Editor* currentEditor();
 private slots:
+        void populateCategories();
         void slotReload();
         void slotFlush();
 
@@ -102,7 +103,6 @@ private slots:
         void initEditor();
         void initShow();
         void initTemplate();
-        void populateCategories();
         void raiseCurrentView();
         ViewBase* currentView();
         ViewBase* m_curView;
