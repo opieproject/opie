@@ -155,6 +155,7 @@ CONFIG_TODAY_STOCKTICKERLIB	noncore/todayplugins/stockticker/stocktickerlib	stoc
 CONFIG_TODAY_TODOLIST	core/pim/today/plugins/todolist	todolist.pro
 CONFIG_TODAY_WEATHER	noncore/todayplugins/weather weather.pro
 CONFIG_TODO	core/pim/todo	todo.pro
+CONFIG_LIBTREMOR core/multimedia/opieplayer/vorbis/tremor tremor.pro
 CONFIG_LIBTREMORPLUGIN core/multimedia/opieplayer/vorbis libtremor.pro
 CONFIG_UBROWSER	noncore/net/ubrowser	ubrowser.pro
 CONFIG_UNIKEYBOARD	inputmethods/unikeyboard	unikeyboard.pro
