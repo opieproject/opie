@@ -30,6 +30,8 @@ class QCheckBox;
 class QLabel;
 class QSpinBox;
 class QTabWidget;
+class TodayConfigWidget;
+class TodayPluginInterface;
 
 namespace Opie {
     namespace Core {
@@ -40,7 +42,6 @@ namespace Opie {
 }
 
 class TodayConfig : public QDialog {
-
     Q_OBJECT
 
 public:
@@ -64,6 +65,7 @@ private:
 
     QListView* m_appletListView;
     QMap<QString,QCheckListItem*> m_applets;
+    QMap<TodayPluginInterface*,TodayConfigWidget*> m_configMap;
 
     int m_autoStart;
     int m_autoStartTimer;

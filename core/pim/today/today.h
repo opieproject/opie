@@ -40,7 +40,6 @@ namespace Opie {
 }
 
 class Today : public TodayBase {
-
     Q_OBJECT
 
 public:

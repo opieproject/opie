@@ -28,6 +28,7 @@
 #include <qdir.h>
 #include <qtimer.h>
 #include <qwhatsthis.h>
+#include <qmessagebox.h>
 
 using namespace Opie::Ui;
 using Opie::Core::OPluginItem;
@@ -54,14 +55,12 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
     QObject::connect( (QObject*)ConfigButton, SIGNAL( clicked() ), this, SLOT( startConfig() ) );
     QObject::connect( (QObject*)OwnerField, SIGNAL( clicked() ), this,  SLOT( editCard() ) );
 
-    #if defined(Q_WS_QWS)
-    #if !defined(QT_NO_COP)
+#if !defined(QT_NO_COP)
 
     QCopChannel *todayChannel = new QCopChannel( "QPE/Today" , this );
     connect ( todayChannel, SIGNAL( received(const QCString&,const QByteArray&) ),
               this, SLOT ( channelReceived(const QCString&,const QByteArray&) ) );
-    #endif
-    #endif
+#endif
 
     setOwnerField();
     m_big_box = 0L;
@@ -84,7 +83,6 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
     init();
     loadPlugins();
     initialize();
-    QPEApplication::showWidget( this );
 }
 
 /**
@@ -179,10 +177,23 @@ void Today::loadPlugins() {
     m_pluginLoader = new OPluginLoader( "today", true );
     m_pluginLoader->setAutoDelete( true );
 
-    OPluginItem::List lst = m_pluginLoader->allAvailable( true );
-
     m_manager = new OPluginManager( m_pluginLoader );
     m_manager->load();
+
+    /*
+     * check if loading of Plugins crashed
+     */
+    if( m_pluginLoader->isInSafeMode() ) {
+        QMessageBox::information(this, tr("Today Error"),
+                                 tr("<qt>The plugin '%1' caused Today to crash."
+                                    " It could be that the plugin is not properly"
+                                    " installed.<br>Today tries to continue loading"
+                                    " plugins.</qt>")
+                                 .arg( m_manager->crashedPlugin().name()));
+    }
+
+    OPluginItem::List lst = m_pluginLoader->filtered( true );
+
 
     for ( OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it ) {
         TodayPluginInterface* iface = m_pluginLoader->load<TodayPluginInterface>( *it, IID_TodayPluginInterface );
@@ -233,7 +244,7 @@ void Today::startConfig() {
     TodayConfig conf( this, "dialog", true );
     conf.setUpPlugins( m_manager, m_pluginLoader );
 
-    if ( conf.exec() == QDialog::Accepted ) {
+    if ( QPEApplication::execDialog(&conf) == QDialog::Accepted ) {
         conf.writeConfig();
         initialize();
     } else {
@@ -344,11 +355,10 @@ void Today::editCard() {
 
 
 Today::~Today() {
-    if (m_pluginLoader) {
-        delete m_pluginLoader;
-    }
-    if (m_manager) {
-        delete m_manager;
-    }
+    for(QMap<QString, TodayPlugin>::Iterator it = pluginList.begin(); it != pluginList.end(); ++it )
+        delete it.data().guiBox;
+
+    delete m_pluginLoader;
+    delete m_manager;
 }
 

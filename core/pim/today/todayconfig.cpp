@@ -96,12 +96,11 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal )
     connect ( m_appletListView , SIGNAL( clicked(QListViewItem*) ), this, SLOT( appletChanged() ) );
     previousItem = 0l;
     readConfig();
-    QPEApplication::showDialog( this );
 }
 
 
 void TodayConfig::setUpPlugins( OPluginManager * plugManager, OPluginLoader *plugLoader ) {
-
+    m_configMap.clear();
 
     m_pluginManager = plugManager;
     m_pluginLoader = plugLoader;
@@ -113,17 +112,19 @@ void TodayConfig::setUpPlugins( OPluginManager * plugManager, OPluginLoader *plu
     	lst.prepend((*it));
 
         TodayPluginInterface* iface = m_pluginLoader->load<TodayPluginInterface>( *it, IID_TodayPluginInterface );
+        TodayConfigWidget *widget = iface->guiPart()->configWidget( TabWidget3 );
 
-        if ( iface->guiPart()->configWidget(this) != 0l ) {
-            TodayConfigWidget* widget = iface->guiPart()->configWidget( TabWidget3  );
-            TabWidget3->addTab( widget, iface->guiPart()->pixmapNameConfig()
-                                , iface->guiPart()->appName() );
-        }
+        if (!widget )
+            continue;
+
+        m_configMap.insert( iface, widget );
+        TabWidget3->addTab( widget, iface->guiPart()->pixmapNameConfig()
+                            , iface->guiPart()->appName() );
     }
 
-    for ( OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it ) {
+    for ( OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it )
         pluginManagement( (*it) );
-    }
+
 
     TabWidget3->setCurrentTab( tab_2 );
 }
@@ -174,10 +175,10 @@ void TodayConfig::writeConfig() {
     int position = m_appletListView->childCount();
 
     QListViewItemIterator list_it( m_appletListView );
-    //
+    OPluginItem::List lst = m_pluginLoader->allAvailable( true );
+
     // this makes sure the names get saved in the order selected
     for ( ; list_it.current(); ++list_it ) {
-        OPluginItem::List lst = m_pluginLoader->allAvailable( true );
         for ( OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it ) {
             if ( QString::compare( (*it).name() , list_it.current()->text(0) ) == 0 ) {
                 (*it).setPosition(position--);
@@ -203,12 +204,11 @@ void TodayConfig::writeConfig() {
     // set autostart settings
     setAutoStart();
 
-    OPluginItem::List lst = m_pluginManager->managedPlugins();
-    for ( OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it ) {
+    OPluginItem::List managedLst = m_pluginManager->managedPlugins();
+    for ( OPluginItem::List::Iterator it = managedLst.begin(); it != managedLst.end(); ++it ) {
         TodayPluginInterface* iface = m_pluginLoader->load<TodayPluginInterface>( *it, IID_TodayPluginInterface );
-        if ( iface->guiPart()->configWidget(this) != 0l ) {
-            iface->guiPart()->configWidget(this)->writeConfig();
-        }
+        if ( m_configMap.contains( iface ) )
+            m_configMap[iface]->writeConfig();
     }
 }
 
