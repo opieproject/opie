@@ -30,7 +30,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
 
   QPixmap logo = Resource::loadPixmap( "today/today_logo"); // logo
   QPixmap opiezilla = Resource::loadPixmap("today/opiezilla" ); //the opiezilla
-  QPixmap config = Resource::loadPixmap( "today/config" );  // config icon
+  QPixmap config = Resource::loadPixmap( "SettingsIcon" );  // config icon
 
   layout = new QVBoxLayout( this );
 
