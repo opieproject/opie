@@ -191,7 +191,7 @@ int main ( int argc, char **argv )
 				if ( !user. isEmpty ( ))
 					autolog = ::strdup ( user. latin1 ( ));
 			}
-
+		
 			if ( autolog && !userExited ) {
 
                 QWSServer::setDesktopBackground( QImage() );
@@ -199,6 +199,7 @@ int main ( int argc, char **argv )
                 ODevice::inst ( )-> setSoftSuspend ( false );
                 LoginApplication *app = new LoginApplication ( argc, argv, ppid );
                 LoginApplication::setLoginAs ( autolog );
+  
 
 				if ( LoginApplication::changeIdentity ( ))
 					::exit ( LoginApplication::login ( ));
