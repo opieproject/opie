@@ -3,7 +3,7 @@ Files:
 Version: 1.10-4
 Priority: optional
 Section: base
-Depends: qte-fonts-common, qpf-bitstream-vera-light, qpf-bitstream-vera-large
+Depends: qte-fonts-common, qpf-bitstream-vera-small, qpf-bitstream-vera-large
 Provides: qpf-bitstream-vera
 Maintainer: Chris Larson <kergoth@handhelds.org>
 Architecture: all
