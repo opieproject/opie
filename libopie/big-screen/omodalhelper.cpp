@@ -76,7 +76,7 @@ void OModalHelperControler::done( int result ) {
     if ( sender() && !sender()->isA("OModalQueuedDialog") )
         m_dia = static_cast<QDialog*>( sender() );
 
-    m_base->done( m_id );
+    m_base->done( result, m_id );
 }
 
 void OModalHelperControler::next() {
@@ -154,6 +154,11 @@ void OModalQueuedDialog::setRecord( int record, int count ) {
         return;
     }else
         show();
+
+    if ( count > 1 )
+        m_bar->show();
+    else
+        m_bar->hide();
 
     m_bar->setText( tr("Editing record %1 out of %2",
                        "Shows the current edited record out of an array of records").arg( record ). arg( count ) );
