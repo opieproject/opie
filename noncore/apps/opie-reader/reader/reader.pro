@@ -41,14 +41,12 @@ HEADERS		= Aportis.h \
                   linktype.h \
                   my_list.h \
                   names.h \
-                  ../OREADERINC/opie.h \
                   pdb.h \
                   plucker.h \
                   plucker_base.h \
                   ppm.h \
                   ppm_expander.h \
                   usenef.h \
-                  ../OREADERINC/useqpe.h \
                   ustring.h \
 		  util.h \
                   utypes.h \
@@ -81,11 +79,9 @@ SOURCES		= BuffDoc.cpp \
 
 INTERFACES	= 
 DESTDIR		= $(OPIEDIR)/bin
-INCLUDEPATH	+= ../OREADERINC $(OPIEDIR)/include
-DEPENDPATH	+= ../OREADERINC $(OPIEDIR)/include
-TARGET		= reader
-LIBS		+= -lopieui2 -lqpe -lreader_codec
-
-DEPENDPATH += ../OREADERINC
+INCLUDEPATH	+= $(OPIEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/include
+TARGET		= opie-reader
+LIBS		+= -lopiecore2 -lopieui2 -lqpe -lreader_codec
 
 include ( $(OPIEDIR)/include.pro )

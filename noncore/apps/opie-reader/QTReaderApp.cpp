@@ -67,7 +67,6 @@
 #include "URLDialog.h"
 #include "util.h"
 #include <qfontdatabase.h>
-#include "opie.h"
 #ifdef USEQPE
 #include <qpe/resource.h>
 #ifdef OPIE

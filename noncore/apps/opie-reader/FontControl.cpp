@@ -1,5 +1,4 @@
 #include <qfontdatabase.h>
-#include "opie.h"
 #include "useqpe.h"
 #include "FontControl.h"
 

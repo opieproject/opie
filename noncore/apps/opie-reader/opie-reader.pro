@@ -1,13 +1,13 @@
 TEMPLATE        = subdirs
 SUBDIRS         = pluckerbaselib \
                   codeclib \
+                  pdblib \
                   PluckerCodec \
                   AportisCodec \
                   CHM \
                   HTMLFilter \
                   WeaselCodec \
                   iSiloCodec \
-                  pdblib \
                   ppmsCodec \
                   reader
 

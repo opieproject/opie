@@ -5,7 +5,6 @@
 #include <qpixmap.h>
 #include <qimage.h>
 #include "useqpe.h"
-#include "opie.h"
 
 CDrawBuffer::~CDrawBuffer()
 {
