@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.34 2002-06-23 14:19:13 zecke Exp $
+ * $Id: vmemo.cpp,v 1.35 2002-06-23 14:43:54 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -477,21 +477,12 @@ void VMemo::record(void)
         if(length<0)
           recording=false;
 
-        //         } else { //ipaq /stereo inputs
-
-
         //           for (int i = 0; i < result; i+=2) {
         //             monoBuffer[j] = sound[i];
         //             //            monoBuffer[j] = (sound[i]+sound[i+1])/2;
 
         //             j++;
         //           }
-
-        //           length+=write(wav, monoBuffer, result);
-        //           if(length<0)
-        //             recording=false;
-        //           //          length+=write(wav, monoBuffer, result/2);
-        //         }
         qApp->processEvents();
         //                 printf("%d\r",length);
         //                 fflush(stdout);
@@ -512,19 +503,11 @@ void VMemo::record(void)
 
         length+=write(wav, monoBuffer, result);
 
-        //         } else { //ipaq /stereo inputs
-
         //           for (int i = 0; i < result; i+=2) {
         //             monoBuffer[j] = (sound[i]+sound[i+1])/2;
         //             j++;
         //           }
-
         //           length+=write(wav, monoBuffer, result/2);
-
-        //           if(length<0)
-        //             recording=false;
-
-        //         }
         length += result;
         //            printf("%d\r",length);
         //               fflush(stdout);
