@@ -4,12 +4,15 @@
 #include <qpoint.h>
 #include <qrect.h>
 #include <qtimer.h>
+#include <qlist.h>
 
-
+#include "random.h"
 
 #define MAPSIZE 52
 #define BLOCKSIZE 6
 #define TRAILSIZE 30
+
+
 
 class SFCave : public QMainWindow
 {
@@ -19,6 +22,12 @@ public:
 	int sWidth;
 	int sHeight;
 	int segSize;
+
+    int currentSeed;
+
+    QList<int> replayList;
+    QListIterator<int> *replayIt;
+    bool replay;
 
 	int blockWidth;
 	int blockHeight;
@@ -79,6 +88,7 @@ public:
 	SFCave( int speed = 3, QWidget *p = 0, char *name = 0 );
 	~SFCave();
 	void start();
+    void setSeed( int seed );
 	int nextInt( int range );
 	void setUp();
     void handleGameSFCave();

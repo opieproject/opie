@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
 
 #ifdef QWS
 #include <qpe/qpeapplication.h>
@@ -26,6 +27,7 @@
 #define STATE_CRASHED           3
 #define STATE_NEWGAME           4
 #define STATE_MENU              5
+#define STATE_REPLAY            6
 
 // Menus
 #define MENU_MAIN_MENU          0
@@ -127,6 +129,7 @@ SFCave :: SFCave( int spd, QWidget *w, char *name )
     : QMainWindow( w, name )
 
 {
+    replayIt = 0;
 #ifdef QWS
     showMaximized();
 #else
@@ -164,8 +167,10 @@ SFCave :: SFCave( int spd, QWidget *w, char *name )
     offscreen = new QPixmap( sWidth, sHeight );
     offscreen->fill( Qt::black );
 
-    setUp();
+//    setUp();
     crashLineLength = -1;
+    state = STATE_MENU;
+    prevState = STATE_MENU;
 
     gameTimer = new QTimer( this, "game timer" );
     connect( gameTimer, SIGNAL( timeout() ),
@@ -182,16 +187,25 @@ void SFCave :: start()
 
 }
 
+void SFCave :: setSeed( int seed )
+{
+    if ( seed == -1 )
+        currentSeed = ((unsigned long) time((time_t *) NULL));
+    else
+        currentSeed = seed;
+    PutSeed( currentSeed );
+}
+    
 int SFCave :: nextInt( int range )
 {
-    return rand() % range;
+    int val = (int)(Random( ) * range);
+
+    return val;
+    
 }
 
 void SFCave :: setUp()
 {
-    state = STATE_MENU;
-    prevState = STATE_MENU;
-
     score = 0;
     offset = 0;
     nrFrames = 0;
@@ -221,6 +235,7 @@ void SFCave :: setUp()
     }
     
     crashLineLength = 0;
+    lastGateBottomY = 0;
 
     user.setRect( 50, sWidth/2, 4, 4 );
 
@@ -254,6 +269,7 @@ void SFCave :: setUp()
     }
     for ( int i = 0 ; i < BLOCKSIZE ; ++i )
         blocks[i].setY( -1 );
+
 }
 
 void SFCave :: run()
@@ -264,10 +280,22 @@ void SFCave :: run()
             displayMenu();
             break;
         case STATE_NEWGAME:
+            setSeed( -1 );
             setUp();
             draw();
             state = STATE_RUNNING;
+            replay = false;
+            replayList.clear();
             break;
+        case STATE_REPLAY:
+            setSeed( currentSeed );
+            setUp();
+            draw();
+            state = STATE_RUNNING;
+            replay = true;
+            if ( replayIt )
+                delete replayIt;
+            replayIt = new QListIterator<int>( replayList );
         case STATE_BOSS:
             drawBoss();
             break;
@@ -284,6 +312,16 @@ void SFCave :: run()
 
             // Apply Game rules
             nrFrames ++;
+
+            if ( replay )
+            {
+                while( replayIt->current() && *(replayIt->current()) == nrFrames )
+                {
+                    press = !press;
+                    ++(*replayIt);
+                }
+            }
+            
             if ( CURRENT_GAME_TYPE == SFCAVE_GAME )
                 handleGameSFCave();
             else if ( CURRENT_GAME_TYPE == GATES_GAME )
@@ -523,11 +561,12 @@ void SFCave :: addGate()
             int b1Height = nextInt(mapBottom[50] - mapTop[50] - gapHeight);
 
             // See if height between last gate and this one is too big
-            if ( b1Height - 200 > lastGateBottomY )
+            if ( b1Height - 100 > lastGateBottomY )
                 b1Height -= 25;
-            else if ( b1Height + 200 < lastGateBottomY )
+            else if ( b1Height + 100 < lastGateBottomY )
                 b1Height += 25;
             lastGateBottomY = b1Height;
+
 
             int x2 = sWidth;
             int y2 = y1 + b1Height + gapHeight;
@@ -773,7 +812,11 @@ void SFCave :: keyPressEvent( QKeyEvent *e )
             case Qt::Key_Up:
             case Qt::Key_F9:
             case Qt::Key_Space:
-                press = true;
+                if ( !press )
+                {
+                    press = true;
+                    replayList.append( new int( nrFrames ) );
+                }
                 break;
             case Qt::Key_M:
             case Qt::Key_Return:
@@ -804,22 +847,26 @@ void SFCave :: keyReleaseEvent( QKeyEvent *e )
         {
             case Qt::Key_F9:
             case Qt::Key_Space:
-                press = false;
+            case Qt::Key_Up:
+                if ( press )
+                {
+                    press = false;
+
+                    replayList.append( new int( nrFrames ) );
+                }
                 break;
 
-            case Qt::Key_Up:
-                press = false;
-                
             case Qt::Key_R:
-            case Qt::Key_Down:
                 if ( state == STATE_CRASHED )
                 {
-                    state = STATE_NEWGAME;
+                    state = STATE_REPLAY;
                 }
-                else
-                    movel = true;
                 break;
 
+            case Qt::Key_Down:
+                if ( state == STATE_CRASHED )
+                    state = STATE_NEWGAME;
+                break;
            default:
                 e->ignore();
                 break;
