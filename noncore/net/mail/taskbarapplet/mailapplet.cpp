@@ -75,7 +75,7 @@ void MailApplet::slotClicked() {
 void MailApplet::startup() {
     Settings *settings = new Settings();
     QList<Account> ma = settings->getAccounts();
-    StatusMail m_statusMail = StatusMail( ma );
+    m_statusMail = new StatusMail( ma );
     delete settings;
 
     m_intervalMs = m_config->readNumEntry( "CheckEvery", 5 ) * 60000;
@@ -90,6 +90,10 @@ void MailApplet::slotCheck() {
     if ( newIntervalMs != m_intervalMs ) {
         m_intervalTimer->changeInterval( newIntervalMs );
         m_intervalMs = newIntervalMs;
+    }
+
+    if (m_statusMail == 0) {
+        return;
     }
 
     folderStat stat;
@@ -113,7 +117,7 @@ void MailApplet::slotCheck() {
         cfg.setGroup( "Status" );
         cfg.writeEntry( "NewMails", m_newMails );
         QCopEnvelope env( "QPE/Pim", "newMails(int)" );
-        env << stat.message_unseen;
+        env <<  m_newMails;
         repaint( true );
 
     } else {
