@@ -1,7 +1,7 @@
 Files:
 Installed-Size:  0 
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base (1.5.0+), opie-sh, opie-sh-launchertab, opie-sh-fsmounter, opie-sh-killproc, opie-sh-rsynchelper, opie-sh-servicemanager, opie-sh-usbnetctrl, opie-sh-hostlist, opie-sh-wavelanchooser, opie-sh-diskfree, opie-sh-launcher-refresh, opie-sh-logviewer
+Depends: opie-base (1.5.0+), opie-sh, opie-sh-fsmounter, opie-sh-killproc, opie-sh-rsynchelper, opie-sh-servicemanager, opie-sh-usbnetctrl, opie-sh-hostlist, opie-sh-wavelanchooser, opie-sh-diskfree, opie-sh-launcher-refresh, opie-sh-logviewer
 Priority: optional
 Section: opie/settings
 Maintainer: gonz <gonz@directbox.com>
