@@ -120,6 +120,7 @@ public:
     void setDate(const QDate &d );
     int week() const { return _week; };
     QDate date();
+    QDate weekDate() const;
 
 public slots:
     void redraw();
