@@ -12,8 +12,8 @@ public:
   ~KRFBOptions();
 
   int encodings();
-  void readSettings( Config *config );
-  void writeSettings( Config *config );
+  void readSettings();
+  void writeSettings();
 
   bool hexTile;
   bool corre;

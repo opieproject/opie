@@ -4,38 +4,42 @@
 
 KRFBOptions::KRFBOptions()
 {
-  Config config( "keypebble" );
-  readSettings( &config );
+  readSettings();
 }
 
 KRFBOptions::~KRFBOptions()
 {
+  writeSettings();
+}
+
+void KRFBOptions::readSettings()
+{
   Config config( "keypebble" );
-  writeSettings( &config );
+  config.setGroup("Settings");
+  hexTile = config.readBoolEntry( "HexTile", 0 );
+  corre = config.readBoolEntry( "CORRE", 0 );
+  rre = config.readBoolEntry( "RRE", 0 );
+  copyrect = config.readBoolEntry( "CopyRect", 1 );
+  colors256 = config.readBoolEntry( "Colors256", 0 );
+  shared = config.readBoolEntry( "Shared", 0 );
+  readOnly = config.readBoolEntry( "ReadOnly", 0 );
+  updateRate = config.readNumEntry( "UpdateRate", 50 );
+  deIconify = config.readBoolEntry( "DeIconify", 0 );
 }
 
-void KRFBOptions::readSettings( Config *config )
+void KRFBOptions::writeSettings()
 {
-  hexTile = config->readBoolEntry( "HexTile" );
-  corre = config->readBoolEntry( "CORRE" );
-  rre = config->readBoolEntry( "RRE" );
-  copyrect = config->readBoolEntry( "CopyRect", true );
-  colors256 = config->readBoolEntry( "Colors256" );
-  shared = config->readBoolEntry( "Shared" );
-  readOnly = config->readBoolEntry( "ReadOnly" );
-  updateRate = config->readNumEntry( "UpdateRate", 50 );
-}
-
-void KRFBOptions::writeSettings( Config *config )
-{
-  config->writeEntry( "HexTile", hexTile );
-  config->writeEntry( "CORRE", corre );
-  config->writeEntry( "RRE", rre );
-  config->writeEntry( "CopyRect", copyrect );
-  config->writeEntry( "Colors256", colors256 );
-  config->writeEntry( "Shared", shared );
-  config->writeEntry( "ReadOnly", readOnly );
-  config->writeEntry( "UpdateRate", updateRate );
+  Config config( "keypebble" );
+  config.setGroup("Settings");
+  config.writeEntry( "HexTile", hexTile );
+  config.writeEntry( "CORRE", corre );
+  config.writeEntry( "RRE", rre );
+  config.writeEntry( "CopyRect", copyrect );
+  config.writeEntry( "Colors256", colors256 );
+  config.writeEntry( "Shared", shared );
+  config.writeEntry( "ReadOnly", readOnly );
+  config.writeEntry( "UpdateRate", updateRate );
+  config.writeEntry( "DeIconify", deIconify );
 }
 
 int KRFBOptions::encodings()

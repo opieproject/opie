@@ -71,7 +71,6 @@ KVNC::KVNC( const char *name ) : QMainWindow( 0, name )
 
 KVNC::~KVNC()
 {
-
 }
 
 void KVNC::openURL( const QUrl &url )

@@ -47,6 +47,7 @@ void KVNCOptionsDlg::accept()
   options->colors256 = bit->isChecked();
   options->shared = shared->isChecked();
   options->updateRate = timeBox->value();
+  options->writeSettings();
 
   QDialog::accept();
 }
