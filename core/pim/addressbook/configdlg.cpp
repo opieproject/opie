@@ -1,4 +1,5 @@
 #include "configdlg.h"
+#include "ocontactfields.h"
 #include <qcheckbox.h>
 #include <qradiobutton.h>
 #include <qlistbox.h>
@@ -9,7 +10,7 @@
 ConfigDlg::ConfigDlg( QWidget *parent = 0, const char *name = 0 ):
 	ConfigDlg_Base(parent, name, true )
 {
-	contFields = OContact::trfields();
+	contFields = OContactFields::trfields();
 
 	// We add all Fields into the Listbox and creating
 	// some translation maps between the translated string and the ID in "recordfields.h".

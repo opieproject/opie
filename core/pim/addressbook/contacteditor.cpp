@@ -21,6 +21,7 @@
 
 #include "contacteditor.h"
 #include "addresspicker.h"
+#include "ocontactfields.h"
 
 #include <qpe/categoryselect.h>
 #include <qpe/qpeapplication.h>
@@ -82,10 +83,10 @@ void ContactEditor::init() {
 		slBusinessAddress.append( "" );
 	}
 
-	trlChooserNames   = OContact::trphonefields();
-	slChooserNames    = OContact::untrphonefields();
-	slDynamicEntries  = OContact::untrdetailsfields();
-	trlDynamicEntries = OContact::trdetailsfields();
+	trlChooserNames   = OContactFields::trphonefields();
+	slChooserNames    = OContactFields::untrphonefields();
+	slDynamicEntries  = OContactFields::untrdetailsfields();
+	trlDynamicEntries = OContactFields::trdetailsfields();
 	for (i = 0; i < slChooserNames.count(); i++)
 	  slChooserValues.append("");
 
