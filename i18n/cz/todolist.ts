@@ -391,222 +391,222 @@ Umožní vám rychle přidat nový úkol do vašeho seznamu. Tuto lištu můžet
     </message>
     <message>
         <source>Complete </source>
-        <translation type="unfinished"></translation>
+        <translation>Hotovo</translation>
     </message>
     <message>
         <source>Work on </source>
-        <translation type="unfinished"></translation>
+        <translation>Pracovat na</translation>
     </message>
     <message>
         <source>Buy </source>
-        <translation type="unfinished"></translation>
+        <translation>Koupit</translation>
     </message>
     <message>
         <source>Organize </source>
-        <translation type="unfinished"></translation>
+        <translation>Zařadit</translation>
     </message>
     <message>
         <source>Get </source>
-        <translation type="unfinished"></translation>
+        <translation>Vzít</translation>
     </message>
     <message>
         <source>Update </source>
-        <translation type="unfinished"></translation>
+        <translation>Obnovit</translation>
     </message>
     <message>
         <source>Create </source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit</translation>
     </message>
     <message>
         <source>Plan </source>
-        <translation type="unfinished"></translation>
+        <translation>Plán</translation>
     </message>
     <message>
         <source>Call </source>
-        <translation type="unfinished"></translation>
+        <translation>Hovor</translation>
     </message>
     <message>
         <source>Mail </source>
-        <translation type="unfinished"></translation>
+        <translation>Mail</translation>
     </message>
     <message>
         <source>Select priority of task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zde nastavte prioritu úkolu.</translation>
     </message>
     <message>
         <source>Very High</source>
-        <translation type="unfinished"></translation>
+        <translation>Velmi vysoká</translation>
     </message>
     <message>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Vysoká</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normální</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Nízká</translation>
     </message>
     <message>
         <source>Very Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Velmi nízká</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie:</translation>
     </message>
     <message>
         <source>Select category to organize this task with.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zařaďte úkol do vybrané kategorie.</translation>
     </message>
     <message>
         <source>Recurring task</source>
-        <translation type="unfinished"></translation>
+        <translation>Opakující se úkol</translation>
     </message>
     <message>
         <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem, jestliže se úkol opakuje. Četnost můžete nastavit na záložce Opakování.</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Popis:</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte sem jakékoliv další informace o tomto úkolu.</translation>
     </message>
     <message>
         <source>Todo List</source>
-        <translation type="unfinished"></translation>
+        <translation>Seznam Todo</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorStatus</name>
     <message>
         <source>Status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stav:</translation>
     </message>
     <message>
         <source>Click here to set the current status of this task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro nastavení aktuálního stavu úkolu.</translation>
     </message>
     <message>
         <source>Started</source>
-        <translation type="unfinished"></translation>
+        <translation>Spuštěno</translation>
     </message>
     <message>
         <source>Postponed</source>
-        <translation type="unfinished"></translation>
+        <translation>Odloženo</translation>
     </message>
     <message>
         <source>Finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokončeno</translation>
     </message>
     <message>
         <source>Not started</source>
-        <translation type="unfinished"></translation>
+        <translation>Nespuštěno</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation type="unfinished"></translation>
+        <translation>Průběh:</translation>
     </message>
     <message>
         <source>Select progress made on this task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavte procento dokončení tohoto úkolu.</translation>
     </message>
     <message>
         <source>0 %</source>
-        <translation type="unfinished"></translation>
+        <translation>0 %</translation>
     </message>
     <message>
         <source>20 %</source>
-        <translation type="unfinished"></translation>
+        <translation>20 %</translation>
     </message>
     <message>
         <source>40 %</source>
-        <translation type="unfinished"></translation>
+        <translation>40 %</translation>
     </message>
     <message>
         <source>60 %</source>
-        <translation type="unfinished"></translation>
+        <translation>60 %</translation>
     </message>
     <message>
         <source>80 %</source>
-        <translation type="unfinished"></translation>
+        <translation>80 %</translation>
     </message>
     <message>
         <source>100 %</source>
-        <translation type="unfinished"></translation>
+        <translation>100 %</translation>
     </message>
     <message>
         <source>Start Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum spuštění:</translation>
     </message>
     <message>
         <source>Click here to set the date this task was started.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro nastavení data spuštění úkolu.</translation>
     </message>
     <message>
         <source>Due Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum dokončení:</translation>
     </message>
     <message>
         <source>Click here to set the date this task needs to be completed by.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro nastavení plánovaného data dokončení úkolu.</translation>
     </message>
     <message>
         <source>Completed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokončeno:</translation>
     </message>
     <message>
         <source>Click here to mark this task as completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro označení úkolu jako dokončeného.</translation>
     </message>
     <message>
         <source>Click here to set the date this task was completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro nastavení data skutečného dokončení úkolu.</translation>
     </message>
     <message>
         <source>Maintainer Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Role správce:</translation>
     </message>
     <message>
         <source>Click here to set the maintainer&apos;s role.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro výběr role správce.</translation>
     </message>
     <message>
         <source>Nothing</source>
-        <translation type="unfinished"></translation>
+        <translation>Žádná</translation>
     </message>
     <message>
         <source>Responsible</source>
-        <translation type="unfinished"></translation>
+        <translation>Odpovědná</translation>
     </message>
     <message>
         <source>Done By</source>
-        <translation type="unfinished"></translation>
+        <translation>Tvůrčí</translation>
     </message>
     <message>
         <source>Coordinating</source>
-        <translation type="unfinished"></translation>
+        <translation>Koordinující</translation>
     </message>
     <message>
         <source>Maintainer:</source>
-        <translation type="unfinished"></translation>
+        <translation>Správce:</translation>
     </message>
     <message>
         <source>This is the name of the current task maintainer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto je jméno aktuálního správce úkolu.</translation>
     </message>
     <message>
         <source>test</source>
-        <translation type="unfinished"></translation>
+        <translation>test</translation>
     </message>
     <message>
         <source>Click here to select the task maintainer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro výběr správce úkolu.</translation>
     </message>
 </context>
 </TS>

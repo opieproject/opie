@@ -3,131 +3,131 @@
     <name>Board</name>
     <message>
         <source>Blanks: </source>
-        <translation type="unfinished"></translation>
+        <translation>Prázdná:</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Storno</translation>
     </message>
     <message>
         <source>Unknown word</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznámé slovo</translation>
     </message>
     <message>
         <source>&lt;p&gt;The word &quot;%1&quot; is not in the dictionary.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Slovo &quot;%1&quot; není ve slovníku.</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorovat</translation>
     </message>
 </context>
 <context>
     <name>NewGameBase</name>
     <message>
         <source>Players</source>
-        <translation type="unfinished"></translation>
+        <translation>Hráči</translation>
     </message>
     <message>
         <source>AI3: Smart AI player</source>
-        <translation type="unfinished"></translation>
+        <translation>AI3: Hráč s umělou inteligencí</translation>
     </message>
     <message>
         <source>Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Pravidla</translation>
     </message>
     <message>
         <source>&amp;Start</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Start</translation>
     </message>
 </context>
 <context>
     <name>RulesBase</name>
     <message>
         <source>Game Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Pravidla hry</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Jméno:</translation>
     </message>
     <message>
         <source>Board</source>
-        <translation type="unfinished"></translation>
+        <translation>Plocha</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost:</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Storno</translation>
     </message>
 </context>
 <context>
     <name>ScoreInfo</name>
     <message>
         <source>&lt;P&gt;Invalid move</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Neplatný tah</translation>
     </message>
     <message>
         <source>&lt;P&gt;Score: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Skóre:</translation>
     </message>
 </context>
 <context>
     <name>WordGame</name>
     <message>
         <source>Word Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Hra se slovy</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Zpět</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Hotovo</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít</translation>
     </message>
     <message>
         <source>End game</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukončit hru</translation>
     </message>
     <message>
         <source>Do you want to end the game early?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu chcete předčasně ukončit hru?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ano</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne</translation>
     </message>
 </context>
 </TS>
