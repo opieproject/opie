@@ -9,13 +9,12 @@ Skin::Skin( const QString &name, const QString &fileNameInfix )
     m_skinPath = "opieplayer2/skins/" + name;
 }
 
-void Skin::preload( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount )
+void Skin::preload( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount, const QSize &buttonAreaSize )
 {
     backgroundImage();
     buttonUpImage();
     buttonDownImage();
-    for ( uint i = 0; i < buttonCount; ++i )
-        ( void )buttonMaskImage( skinButtonInfo[ i ].fileName );
+    ( void )buttonMask( skinButtonInfo, buttonCount, buttonAreaSize );
 }
 
 QImage Skin::backgroundImage() const
@@ -37,6 +36,37 @@ QImage Skin::buttonDownImage() const
     if ( m_buttonDownImage.isNull() )
         m_buttonDownImage = QImage( Resource::findPixmap( QString( "%1/skin%2_down" ).arg( m_skinPath ).arg( m_fileNameInfix ) ) );
     return m_buttonDownImage;
+}
+
+QImage Skin::buttonMask( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount, const QSize &buttonAreaSize ) const
+{
+    if ( buttonAreaSize != m_buttonMask.size() )
+        m_buttonMask = QImage();
+
+    if ( !m_buttonMask.isNull() )
+        return m_buttonMask;
+
+    m_buttonMask = QImage( buttonAreaSize, 8, 255 );
+    m_buttonMask.fill( 0 );
+
+    for ( uint i = 0; i < buttonCount; ++i )
+        addButtonToMask( skinButtonInfo[ i ].command + 1, buttonMaskImage( skinButtonInfo[ i ].fileName ) );
+
+    return m_buttonMask;
+}
+
+void Skin::addButtonToMask( int tag, const QImage &maskImage ) const
+{
+    if ( maskImage.isNull() )
+        return;
+
+    uchar **dest = m_buttonMask.jumpTable();
+    for ( int y = 0; y < m_buttonMask.height(); y++ ) {
+        uchar *line = dest[y];
+        for ( int x = 0; x < m_buttonMask.width(); x++ )
+            if ( !qRed( maskImage.pixel( x, y ) ) )
+                line[x] = tag;
+    }
 }
 
 QImage Skin::buttonMaskImage( const QString &fileName ) const
