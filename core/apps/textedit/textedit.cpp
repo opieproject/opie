@@ -953,6 +953,7 @@ bool TextEdit::saveAs() {
         return true;
     }
     odebug << "returning false" << oendl;
+    currentFileName = "";
     return false;
 } //end saveAs
 
