@@ -49,6 +49,7 @@
 
 class PlayListWidgetPrivate;
 class PlayListSelection;
+class MediaPlayerState;
 
 class Config;
 class QPEToolBar;
@@ -95,7 +96,7 @@ public:
 class PlayListWidgetGui : public QMainWindow {
     Q_OBJECT
 public:
-    PlayListWidgetGui( QWidget* parent=0, const char* name=0, WFlags fl=0 );
+    PlayListWidgetGui( MediaPlayerState &_mediaPlayerState, QWidget* parent=0, const char* name=0 );
     ~PlayListWidgetGui();
 
 protected:
@@ -122,6 +123,7 @@ protected:
     void setActiveWindow(); // need to handle this to show the right view
     void setView( char );
 
+    MediaPlayerState &mediaPlayerState;
 };
 
 #endif

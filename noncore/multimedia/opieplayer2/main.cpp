@@ -16,7 +16,7 @@ int main(int argc, char **argv) {
 
     MediaPlayerState st( 0, "mediaPlayerState" );
     mediaPlayerState = &st;
-    PlayListWidget pl( 0, "playList" );
+    PlayListWidget pl( st, 0, "playList" );
     playList = &pl;
     pl.showMaximized();
     AudioWidget aw( 0, "audioUI" );

@@ -69,7 +69,7 @@ public:
         QString file;
     };
 
-    PlayListWidget( QWidget* parent=0, const char* name=0, WFlags fl=0 );
+    PlayListWidget( MediaPlayerState &mediaPlayerState, QWidget* parent=0, const char* name=0 );
     ~PlayListWidget();
     DocLnkSet files;
     DocLnkSet vFiles;
@@ -134,6 +134,7 @@ private slots:
     void viewPressed( int, QListViewItem *, const QPoint&, int);
     void playlistViewPressed( int, QListViewItem *, const QPoint&, int);
     void playSelected();
+
 };
 
 #endif // PLAY_LIST_WIDGET_H

@@ -59,10 +59,8 @@
 #include "videowidget.h"
 #include "mediaplayerstate.h"
 
-extern MediaPlayerState *mediaPlayerState;
-
-PlayListWidgetGui::PlayListWidgetGui( QWidget* parent, const char* name, WFlags fl )
-    : QMainWindow( parent, name, fl ) {
+PlayListWidgetGui::PlayListWidgetGui( MediaPlayerState &_mediaPlayerState, QWidget* parent, const char* name )
+    : QMainWindow( parent, name ), mediaPlayerState( _mediaPlayerState ) {
 
     d = new PlayListWidgetPrivate;
     d->setDocumentUsed = FALSE;
@@ -221,8 +219,8 @@ void PlayListWidgetGui::setView( char view )  {
 void PlayListWidgetGui::setActiveWindow()  {
     //  qDebug("SETTING active window");
     // When we get raised we need to ensure that it switches views
-    MediaPlayerState::DisplayType origDisplayType = mediaPlayerState->displayType();
-    mediaPlayerState->setDisplayType( MediaPlayerState::MediaSelection ); // invalidate
-    mediaPlayerState->setDisplayType( origDisplayType ); // now switch back
+    MediaPlayerState::DisplayType origDisplayType = mediaPlayerState.displayType();
+    mediaPlayerState.setDisplayType( MediaPlayerState::MediaSelection ); // invalidate
+    mediaPlayerState.setDisplayType( origDisplayType ); // now switch back
 }
 

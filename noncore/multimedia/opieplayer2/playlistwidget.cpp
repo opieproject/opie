@@ -64,8 +64,8 @@ extern MediaPlayerState *mediaPlayerState;
 QString audioMimes ="audio/mpeg;audio/x-wav;audio/x-ogg";
 // no m3u's here please
 
-PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
-    : PlayListWidgetGui( parent, name, fl ) {
+PlayListWidget::PlayListWidget( MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name )
+    : PlayListWidgetGui( mediaPlayerState, parent, name ) {
 
     d->tbAddToList =  new ToolButton( bar, tr( "Add to Playlist" ),
                                       "opieplayer2/add_to_playlist",
@@ -76,9 +76,9 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     d->tbPlay    = new ToolButton( bar, tr( "Play" ), "opieplayer2/play",
                                    this , SLOT( btnPlay( bool) ), TRUE );
     d->tbShuffle = new ToolButton( bar, tr( "Randomize" ),"opieplayer2/shuffle",
-                                   mediaPlayerState, SLOT( setShuffled( bool ) ), TRUE );
+                                   &mediaPlayerState, SLOT( setShuffled( bool ) ), TRUE );
     d->tbLoop    = new ToolButton( bar, tr( "Loop" ), "opieplayer2/loop",
-                                   mediaPlayerState, SLOT( setLooping( bool ) ), TRUE );
+                                   &mediaPlayerState, SLOT( setLooping( bool ) ), TRUE );
 
     (void)new MenuItem( pmPlayList, tr( "Clear List" ), this, SLOT( clearList() ) );
     (void)new MenuItem( pmPlayList, tr( "Add all audio files" ),
@@ -102,11 +102,11 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
                         this,SLOT( scanForVideo() ) );
 
     pmView->insertItem(  Resource::loadPixmap("fullscreen") , tr( "Full Screen"),
-                         mediaPlayerState, SLOT( toggleFullscreen() ) );
+                         &mediaPlayerState, SLOT( toggleFullscreen() ) );
 
     Config cfg( "OpiePlayer" );
     bool b= cfg.readBoolEntry("FullScreen", 0);
-    mediaPlayerState->setFullscreen(  b );
+    mediaPlayerState.setFullscreen(  b );
     pmView->setItemChecked( -16, b );
 
     (void)new ToolButton( vbox1, tr( "Move Up" ),   "opieplayer2/up",
@@ -141,16 +141,16 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
              this, SLOT( loadList( const DocLnk & ) ) );
     connect( tabWidget, SIGNAL ( currentChanged(QWidget*) ),
              this, SLOT( tabChanged( QWidget* ) ) );
-    connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ),
+    connect( &mediaPlayerState, SIGNAL( playingToggled( bool ) ),
              d->tbPlay,  SLOT( setOn( bool ) ) );
-    connect( mediaPlayerState, SIGNAL( loopingToggled( bool ) ),
+    connect( &mediaPlayerState, SIGNAL( loopingToggled( bool ) ),
              d->tbLoop, SLOT( setOn( bool ) ) );
-    connect( mediaPlayerState, SIGNAL( shuffledToggled( bool ) ),
+    connect( &mediaPlayerState, SIGNAL( shuffledToggled( bool ) ),
              d->tbShuffle, SLOT( setOn( bool ) ) );
     connect( d->selectedFiles, SIGNAL( doubleClicked( QListViewItem *) ),
              this, SLOT( playIt( QListViewItem *) ) );
     connect ( gammaSlider,  SIGNAL( valueChanged( int ) ),
-              mediaPlayerState,  SLOT( setVideoGamma( int ) ) );
+              &mediaPlayerState,  SLOT( setVideoGamma( int ) ) );
 
     // see which skins are installed
     videoScan=false;
@@ -172,9 +172,9 @@ PlayListWidget::~PlayListWidget() {
 
 
 void PlayListWidget::initializeStates() {
-    d->tbPlay->setOn( mediaPlayerState->isPlaying() );
-    d->tbLoop->setOn( mediaPlayerState->isLooping() );
-    d->tbShuffle->setOn( mediaPlayerState->isShuffled() );
+    d->tbPlay->setOn( mediaPlayerState.isPlaying() );
+    d->tbLoop->setOn( mediaPlayerState.isLooping() );
+    d->tbShuffle->setOn( mediaPlayerState.isShuffled() );
     d->playListFrame->show();
 }
 
@@ -404,8 +404,8 @@ void PlayListWidget::setDocument( const QString& fileref ) {
         writeCurrentM3u();          
         
         d->setDocumentUsed = TRUE;
-        mediaPlayerState->setPlaying( FALSE );
-        mediaPlayerState->setPlaying( TRUE );
+        mediaPlayerState.setPlaying( FALSE );
+        mediaPlayerState.setPlaying( TRUE );
     }
 }
 
@@ -429,7 +429,7 @@ const DocLnk *PlayListWidget::current() const { // this is fugly
 
 
 bool PlayListWidget::prev() {
-    if ( mediaPlayerState->isShuffled() ) {
+    if ( mediaPlayerState.isShuffled() ) {
         const DocLnk *cur = current();
         int j = 1 + (int)(97.0 * rand() / (RAND_MAX + 1.0));
         for ( int i = 0; i < j; i++ ) {
@@ -443,7 +443,7 @@ bool PlayListWidget::prev() {
         return TRUE;
     } else {
         if ( !d->selectedFiles->prev() ) {
-            if ( mediaPlayerState->isLooping() ) {
+            if ( mediaPlayerState.isLooping() ) {
                 return d->selectedFiles->last();
             } else {
                 return FALSE;
@@ -456,11 +456,11 @@ bool PlayListWidget::prev() {
 
 bool PlayListWidget::next() {
 //qDebug("<<<<<<<<<<<<next()");
-    if ( mediaPlayerState->isShuffled() ) {
+    if ( mediaPlayerState.isShuffled() ) {
         return prev();
     } else {
         if ( !d->selectedFiles->next() ) {
-            if ( mediaPlayerState->isLooping() ) {
+            if ( mediaPlayerState.isLooping() ) {
                 return d->selectedFiles->first();
             } else {
                 return FALSE;
@@ -530,8 +530,8 @@ void PlayListWidget::removeSelected() {
 
 void PlayListWidget::playIt( QListViewItem *it) {
     if(!it) return;
-    mediaPlayerState->setPlaying(FALSE);
-    mediaPlayerState->setPlaying(TRUE);
+    mediaPlayerState.setPlaying(FALSE);
+    mediaPlayerState.setPlaying(TRUE);
     d->selectedFiles->unSelect();
 }
 
@@ -614,7 +614,7 @@ void PlayListWidget::tabChanged(QWidget *) {
 
 void PlayListWidget::btnPlay(bool b) {
 //    mediaPlayerState->setPlaying(false);
-    mediaPlayerState->setPlaying(b);
+    mediaPlayerState.setPlaying(b);
     insanityBool=FALSE;
 }
 
@@ -1049,8 +1049,8 @@ void PlayListWidget::pmViewActivated(int index) {
     switch(index) {
     case -16:
     {
-        mediaPlayerState->toggleFullscreen();
-        bool b=mediaPlayerState->isFullscreen();
+        mediaPlayerState.toggleFullscreen();
+        bool b=mediaPlayerState.isFullscreen();
         pmView->setItemChecked( index, b);
         Config cfg( "OpiePlayer" );
         cfg.writeEntry( "FullScreen", b );
