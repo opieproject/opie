@@ -240,9 +240,9 @@ MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
 : QMainWindow( parent, name, f )
 {
     srand(::time(0));
-    setCaption( tr("Mine Hunt") );
+    setCaption( tr("Mine Sweep") );
     QPEApplication::setInputMethodHint(this, QPEApplication::AlwaysOff );
-    setIcon( Resource::loadPixmap( "minesweep/MineHunt" ) );
+    setIcon( Resource::loadPixmap( "minesweep/MineSweep" ) );
 
     QToolBar *toolBar = new QToolBar( this );
     toolBar->setHorizontalStretchable( TRUE );
