@@ -9,7 +9,7 @@
 
 #include <qmessagebox.h>
 
-#include <opie/oprocess.h>
+#include <opie2/oprocess.h>
 
 #ifdef QWS
 #include <opie2/owait.h>
