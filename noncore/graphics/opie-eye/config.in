@@ -3,7 +3,4 @@
     default "y"
     depends on ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2MM
     
-  config OPIE_EYE_SLAVE
-    boolean
-    default "y" if OPIE_EYE
-    depends on ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2MM
+  source noncore/graphics/opie-eye/slave/config.in
