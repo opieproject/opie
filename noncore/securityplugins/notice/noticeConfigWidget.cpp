@@ -65,19 +65,17 @@ void NoticeConfigWidget::resetNotice()
  * if no text has been defined yet returns defaultNoticeText
  */
 QString NoticeConfigWidget::getNoticeText() {
-    m_config = new Config("Security");
-    m_config->setGroup("NoticePlugin");
+    Config config("Security");
+    config.setGroup("NoticePlugin");
     // Note: C++ processes '\' character, so we have to type \\\\ to mean \\ to QRegExp
-    QString noticeText = m_config->readEntry("noticeText", QObject::tr(defaultNoticeText) ).replace( QRegExp("\\\\n"), "\n" );
-    delete m_config;
+    QString noticeText = config.readEntry("noticeText", QObject::tr(defaultNoticeText) ).replace( QRegExp("\\\\n"), "\n" );
     return noticeText;
 }
 
 /// set the notice text in our m_config config file (escaping new lines)
 void NoticeConfigWidget::setNoticeText(QString noticeText) {
-    m_config = new Config("Security");
-    m_config->setGroup("NoticePlugin");
+    Config config("Security");
+    config.setGroup("NoticePlugin");
     // since Config files do not allow true newlines, we replace them with litteral "\n"
-    m_config->writeEntry("noticeText", noticeText.replace( QRegExp("\n"), "\\n" ));
-    delete m_config;
+    config.writeEntry("noticeText", noticeText.replace( QRegExp("\n"), "\\n" ));
 }

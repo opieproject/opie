@@ -12,8 +12,8 @@ using Opie::Security::MultiauthConfigWidget;
 BluepingConfigWidget::BluepingConfigWidget(QWidget* parent = 0, const char* name = "Blueping configuration widget")
 : MultiauthConfigWidget(parent, name)
 {
-    m_config = new Config("Security");
-    m_config->setGroup("BluepingPlugin");
+    Config config("Security");
+    config.setGroup("BluepingPlugin");
     QVBoxLayout * baseLayout = new QVBoxLayout( this);
     baseLayout->setSpacing(11);
     baseLayout->setMargin(11);
@@ -27,7 +27,7 @@ BluepingConfigWidget::BluepingConfigWidget(QWidget* parent = 0, const char* name
     configLayout->setSpacing(6);
     boxLayout->addLayout(configLayout);
 
-    QString mac = m_config->readEntry("mac");
+    QString mac = config.readEntry("mac");
     if ( mac.isEmpty() )
         mac = "00:00:00:00:00:00";
 
@@ -51,7 +51,9 @@ void BluepingConfigWidget::changeMAC() {
     QRegExp macPattern("[0-9A-Fa-f][0-9A-Fa-f]:[0-9A-Fa-f][0-9A-Fa-f]:[0-9A-Fa-f][0-9A-Fa-f]:[0-9A-Fa-f][0-9A-Fa-f]:[0-9A-Fa-f][0-9A-Fa-f]:[0-9A-Fa-f][0-9A-Fa-f]");
     if ( (mac.length() == 17) && (macPattern.match(mac) == 0) )
     {
-        m_config->writeEntry("mac", mac);
+        Config config("Security");
+        config.setGroup("BluepingPlugin");
+        config.writeEntry("mac", mac);
         QMessageBox success( tr("MAC address saved!"), "<p>" + tr("Make sure that Bluetooth is turned on on the corresponding device when the Blueping plugin needs it.") + "</p>",
                              QMessageBox::Information, QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton );
         success.exec();
@@ -64,9 +66,7 @@ void BluepingConfigWidget::changeMAC() {
 
 /// deletes the m_config pointer
 BluepingConfigWidget::~BluepingConfigWidget()
-{
-    delete m_config;
-}
+{}
 
 // does nothing (there's a button to save the config)
 void BluepingConfigWidget::writeConfig()

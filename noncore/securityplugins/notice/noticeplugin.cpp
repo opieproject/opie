@@ -10,15 +10,11 @@ using Opie::Security::MultiauthConfigWidget;
 
 /// creates and initializes the m_config Config object
 NoticePlugin::NoticePlugin() : MultiauthPluginObject(), m_noticeW(0) {
-    m_config = new Config("Security");
-    m_config->setGroup("NoticePlugin");
 }
 
 /// deletes the m_config Config object and noticeW if necessary
 NoticePlugin::~NoticePlugin() {
-    delete m_config;
-    if (m_noticeW != 0)
-        delete m_noticeW;
+    delete m_noticeW;
 }
 
 /// Simply return its name (Notice plugin)
@@ -81,6 +77,8 @@ int NoticePlugin::authenticate() {
  */
 QString NoticePlugin::getNoticeText() {
       // Note: C++ processes '\' character, so we have to type \\\\ to mean \\ to QRegExp
-    return m_config->readEntry("noticeText", QObject::tr(defaultNoticeText)).replace( QRegExp("\\\\n"), "\n" );
+    Config config("Security");
+    config.setGroup("NoticePlugin");
+    return config.readEntry("noticeText", QObject::tr(defaultNoticeText)).replace( QRegExp("\\\\n"), "\n" );
 }
 

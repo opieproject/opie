@@ -50,7 +50,6 @@ public:
 private:
     QLineEdit *editMAC;
     QPushButton *setMAC;
-    Config *m_config;
 private slots:
     void changeMAC();
 

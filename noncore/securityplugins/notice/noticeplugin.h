@@ -57,7 +57,6 @@ public:
     QString pluginName() const;
 private:
     NoticeConfigWidget * m_noticeW;
-    Config * m_config;
     QString getNoticeText();
 };
 
