@@ -37,6 +37,8 @@ public slots:
     void slotShowInfo( const QString& inf );
     void slotDisplay( const QString& inf );
     void slotReturn();
+    void slotRotateToggled(bool);
+    void slotScaleToggled(bool);
 
 protected:
     void raiseIconView();
@@ -53,6 +55,9 @@ private:
     PIconView* m_view;
     imageinfo *m_info;
     ImageScrollView *m_disp;
+    bool autoRotate;
+    bool autoScale;
+    QToolButton*rotateButton;
 
 
 private slots:

@@ -92,6 +92,20 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     btn->setIconSet( Resource::loadIconSet( "SettingsIcon" ) );
     connect( btn, SIGNAL(clicked() ),
              this, SLOT(slotConfig() ) );
+    
+    rotateButton = new QToolButton(bar);
+    rotateButton->setIconSet( Resource::loadIconSet( "rotate" ) );
+    rotateButton->setToggleButton(true);
+    rotateButton->setOn(true);
+    connect(rotateButton,SIGNAL(toggled(bool)),this,SLOT(slotRotateToggled(bool)));
+    autoRotate = true;
+
+    btn = new QToolButton(bar);
+    btn->setIconSet( Resource::loadIconSet( "1to1" ) );
+    btn->setToggleButton(true);
+    btn->setOn(false);
+    connect(btn,SIGNAL(toggled(bool)),this,SLOT(slotScaleToggled(bool)));
+    autoScale = true;
 
 }
 
@@ -99,6 +113,25 @@ PMainWindow::~PMainWindow() {
     odebug << "Shutting down" << oendl;
 }
 
+void PMainWindow::slotRotateToggled(bool how)
+{
+    autoRotate = how;
+    if (m_disp) {
+        m_disp->setAutoRotate(how);
+    }
+}
+
+void PMainWindow::slotScaleToggled(bool how)
+{
+    autoScale = !how;
+    if (m_disp) {
+        m_disp->setAutoScale(autoScale);
+    }
+    if (!autoScale && autoRotate) {
+        rotateButton->setOn(false);
+    }
+    rotateButton->setEnabled(!how);
+}
 
 void PMainWindow::slotConfig() {
    /*
@@ -180,6 +213,11 @@ void PMainWindow::initInfo() {
 }
 void PMainWindow::initDisp() {
     initT<ImageScrollView>( "Image ScrollView", &m_disp, ImageDisplay );
+    if (m_disp) {
+        m_disp->setAutoScale(autoScale);
+        m_disp->setAutoRotate(autoRotate);
+    }
+
 }
 
 /**
@@ -198,8 +236,9 @@ void PMainWindow::slotShowInfo( const QString& inf ) {
 }
 
 void PMainWindow::slotDisplay( const QString& inf ) {
-    if ( !m_disp )
+    if ( !m_disp ) {
         initDisp();
+    }
     m_disp->setImage( inf );
     m_stack->raiseWidget( ImageDisplay );
 }

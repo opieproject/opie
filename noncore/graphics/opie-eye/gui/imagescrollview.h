@@ -21,6 +21,9 @@ public:
     void setImage( const QString& path );
     void setDestructiveClose();
 
+    void setAutoRotate(bool);
+    void setAutoScale(bool);
+
     enum  Rotation {
         Rotate0,
         Rotate90,
@@ -48,6 +51,7 @@ protected:
     void rescaleImage(int w, int h);
 
     void rotate_into_data(Rotation r);
+    void generateImage();
 
 protected slots:
     virtual void viewportMouseMoveEvent(QMouseEvent* e);

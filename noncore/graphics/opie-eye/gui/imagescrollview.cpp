@@ -32,22 +32,52 @@ void ImageScrollView::setImage(const QImage&img)
 {
     _image_data = QImage();
     _original_data=img;
-    first_resize_done = false;
-    init();
+    if (first_resize_done) {
+        generateImage();
+    }
 }
 
 void ImageScrollView::setImage( const QString& path ) {
-
+    odebug << "load new image " << oendl;
+    _original_data.load(path);
+    _image_data = QImage();
+    if (first_resize_done) {
+        generateImage();
+    }
 }
 
 /* should be called every time the QImage changed it content */
 void ImageScrollView::init()
 {
+    odebug << "init " << oendl;
     viewport()->setBackgroundColor(white);
-    if (_original_data.size().isValid()) {
+    if (first_resize_done) {
+        last_rot = Rotate0;
+        generateImage();
+        odebug << "reinit display " << oendl;
+    } else if (_original_data.size().isValid()) {
         resizeContents(_original_data.width(),_original_data.height());
     }
-    last_rot = Rotate0;
+}
+
+void ImageScrollView::setAutoRotate(bool how)
+{
+    /* to avoid double repaints */
+    if (rotate_to_fit != how) {
+        rotate_to_fit = how;
+        _image_data = QImage();
+        generateImage();
+    }
+}
+
+void ImageScrollView::setAutoScale(bool how)
+{
+    scale_to_fit = how;
+    if (!how) {
+        rotate_to_fit = false;
+    }
+    _image_data = QImage();
+    generateImage();
 }
 
 ImageScrollView::~ImageScrollView()
@@ -181,10 +211,8 @@ void ImageScrollView::rotate_into_data(Rotation r)
     _image_data = dest;
 }
 
-void ImageScrollView::resizeEvent(QResizeEvent * e)
+void ImageScrollView::generateImage()
 {
-    odebug << "ImageScrollView resizeEvent" << oendl;
-    QScrollView::resizeEvent(e);
     Rotation r = Rotate0;
     if (width()>height()&&_original_data.width()<_original_data.height() ||
         width()<height()&&_original_data.width()>_original_data.height()) {
@@ -193,6 +221,7 @@ void ImageScrollView::resizeEvent(QResizeEvent * e)
     odebug << " r = " << r << oendl;
     if (scale_to_fit) {
         if (!_image_data.size().isValid()||width()>_image_data.width()||height()>_image_data.height()) {
+            odebug << "Rescaling data" << oendl;
             if (r==Rotate0) {
                 _image_data = _original_data;
             } else {
@@ -200,8 +229,8 @@ void ImageScrollView::resizeEvent(QResizeEvent * e)
             }
         }
         rescaleImage(width(),height());
-        resizeContents(width()-10,height()-10);
-    }  else if (!first_resize_done||r!=last_rot) {
+        resizeContents(_image_data.width(),_image_data.height());
+    }  else if (!first_resize_done||r!=last_rot||_image_data.width()==0) {
         if (r==Rotate0) {
             _image_data = _original_data;
         } else {
@@ -210,6 +239,13 @@ void ImageScrollView::resizeEvent(QResizeEvent * e)
         last_rot = r;
         resizeContents(_image_data.width(),_image_data.height());
     }
+}
+
+void ImageScrollView::resizeEvent(QResizeEvent * e)
+{
+    odebug << "ImageScrollView resizeEvent" << oendl;
+    QScrollView::resizeEvent(e);
+    generateImage();
     first_resize_done = true;
 }
 
