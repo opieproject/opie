@@ -31,15 +31,15 @@
 
 #include <qstring.h>
 
-#include <qwidget.h>
+#include <qframe.h>
 #include <qvaluelist.h>
 
+#include "obigscreen_p.h"
 
 /* forward declarations */
 class OTabWidget;
 class QHBox;
-struct OSplitterContainer;
-template class QValueList<OSplitterContainer>;
+//template class QValueList<Opie::OSplitterContainer>;
 
 
 /**
@@ -59,10 +59,10 @@ template class QValueList<OSplitterContainer>;
  * @version 0.1
  * @author zecke
  */
-class OSplitter : public QWidget{
+class OSplitter : public QFrame{
     Q_OBJECT
 public:
-    typedef QValueList<OSplitterContainer> ContainerList;
+    typedef QValueList<Opie::OSplitterContainer> ContainerList;
     OSplitter( Qt::Orientation = Horizontal,  QWidget *parent = 0,
                const char* name = 0, WFlags fl = 0 );
     ~OSplitter();
@@ -76,17 +76,19 @@ public:
     void setCurrentWidget( const QString& label );
     QWidget* currentWidget();
 
-    QSize sizeHint()const;
+//    QSize sizeHint()const;
 
 protected:
     void resizeEvent( QResizeEvent* );
 
 private:
-    void relayout();
-    void addToTab( const OSplitterContainer& );
-    void addToBox( const OSplitterContainer& );
+    void addToTab( const Opie::OSplitterContainer& );
+    void addToBox( const Opie::OSplitterContainer& );
     void removeFromTab( QWidget* );
-    void removeFromBox( QWidget* );
+    void changeTab();
+    void changeHBox();
+    void changeVBox();
+    void commonChangeBox();
     QHBox *m_hbox;
     OTabWidget *m_tabWidget;
     Orientation m_orient;

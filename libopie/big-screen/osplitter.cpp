@@ -34,13 +34,6 @@
 #include "osplitter.h"
 
 
-struct OSplitterContainer {
-    QWidget* widget;
-    const QString& icon
-    const QString& name;
-};
-
-
 /**
  *
  * This is the constructor of OSplitter
@@ -58,12 +51,15 @@ struct OSplitterContainer {
  * @short single c'tor of the OSplitter
  */
 OSplitter::OSplitter( Orientation orient, QWidget* parent, const char* name, WFlags fl )
-    : QWidget( parent, name, fl )
+    : QFrame( parent, name, fl )
 {
     m_orient = orient;
     m_hbox = 0;
-    m_tabWidget = 0;
     m_size_policy = 330;
+    setFontPropagation( AllChildren );
+    setPalettePropagation( AllChildren );
+
+    m_tabWidget = new OTabWidget(this);
 }
 
 
@@ -89,7 +85,9 @@ OSplitter::~OSplitter() {
  */
 void OSplitter::setSizeChange( int width_height ) {
     m_size_policy = width_height;
-    relayout();
+    QSize sz(width(), height() );
+    QResizeEvent ev(sz, sz );
+    resizeEvent(&ev);
 }
 
 /**
@@ -112,10 +110,10 @@ void OSplitter::addWidget( QWidget* wid, const QString& icon, const QString& lab
         return;
     }
 #endif
-    OSplitterContainer cont;
+    Opie::OSplitterContainer cont;
     cont.widget = wid;
     cont.icon =icon;
-    cont.label = label;
+    cont.name = label;
 
     m_container.append( cont );
 
@@ -127,31 +125,32 @@ void OSplitter::addWidget( QWidget* wid, const QString& icon, const QString& lab
 
 
 /**
- * Removes the widget from the tab widgets. OSplitter drops ownership
- * of this widget and the widget will be reparented to 0.
+ * Removes the widget from the tab widgets if necessary.
+ * OSplitter drops ownership of this widget and the widget
+ * will be reparented i tto 0.
  * The widget will not be deleted.
  *
  * @param w The widget to be removed
  */
 void OSplitter::removeWidget( QWidget* w) {
-    /* if not widget nor parent or parent not any of my master childs return */
-    if (!w && w->parent() && ( w->parent() != m_hbox || w->parent() != m_tabWidget ) )
+    ContainerList::Iterator it;
+    for ( it = m_container.begin(); it != m_container.end(); ++it )
+        if ( (*it).widget == w )
+            break;
+
+    if (it == m_container.end() )
         return;
+
 
     /* only tab needs to be removed.. box recognizes it */
     if ( !m_hbox )
         removeFromTab( w );
 
 
-    /* Find the widget, reparent it and remove it from our list */
-    ContainerList::Iterator it;
-    for ( it = m_container.begin(); it != m_container.end(); ++it )
-        if ( (*it).widget == w ) {
-            w.reparent( 0, w.getWFlags );
-            it = m_container.remove( it );
-            break;
-        }
+    /* Find reparent it and remove it from our list */
 
+    w->reparent( 0, 0, QPoint(0, 0));
+    it = m_container.remove( it );
 
 }
 
@@ -164,14 +163,15 @@ void OSplitter::removeWidget( QWidget* w) {
  */
 void OSplitter::setCurrentWidget( QWidget*  w) {
     if (m_tabWidget )
-        m_tabWidget->setCurrentWidget( w );
-    else
-        m_hbox->setFocus( w );
+        m_tabWidget->setCurrentTab( w );
+//    else
+    //      m_hbox->setFocus( w );
 
 }
 
 /**
- * This is an overloaded member function and only differs in the argument it takes.
+ * This is an overloaded member function and only differs in the
+ * argument it takes.
  * Searches list of widgets for label. It'll pick the first label it finds
  *
  * @param label Label to look for. First match will be taken
@@ -187,7 +187,7 @@ void OSplitter::setCurrentWidget( const QString& label ) {
 }
 
 /**
- * return the currently activated widget if in tab widget moud
+ * return the currently activated widget if in tab widget mode
  * or null because all widgets are visible
  */
 QWidget* OSplitter::currentWidget() {
@@ -197,17 +197,122 @@ QWidget* OSplitter::currentWidget() {
         return m_tabWidget->currentWidget();
 }
 
-
+#if 0
 /**
  * @reimplented for internal reasons
  * returns the sizeHint of one of its sub widgets
  */
 QSize OSplitter::sizeHint()const {
+    if (m_hbox )
+        return m_hbox->sizeHint();
+    else
+        return m_tabWidget->sizeHint();
 }
+#endif
 
 /**
  * @reimplemented for internal reasons
  */
 void OSplitter::resizeEvent( QResizeEvent* res ) {
+    QFrame::resizeEvent( res );
+    /*
+     *
+     */
+//    qWarning("Old size was width = %d height = %d", res->oldSize().width(), res->oldSize().height() );
+//    qWarning("New size is  width = %d height = %d", res->size().width(), res->size().height() );
+    if ( res->size().width() > m_size_policy &&
+         m_orient == Horizontal ) {
+        changeHBox();
+    }else if ( (res->size().width() <= m_size_policy &&
+               m_orient == Horizontal ) ||
+               (res->size().height() <= m_size_policy &&
+                m_orient == Vertical ) ) {
+        changeTab();
+    }else if ( res->size().height() > m_size_policy &&
+               m_size_policy == Vertical ) {
+        changeVBox();
+    }
+}
 
+
+void OSplitter::addToTab( const Opie::OSplitterContainer& con ) {
+    QWidget *wid = con.widget;
+// not needed widgetstack will reparent as well    wid.reparent(m_tabWidget, wid->getWFlags(), QPoint(0, 0) );
+    m_tabWidget->addTab( wid, con.icon, con.name );
+}
+
+void OSplitter::addToBox( const Opie::OSplitterContainer& con ) {
+    QWidget* wid = con.widget;
+    wid->reparent(m_hbox, 0,  QPoint(0, 0) );
+}
+
+void OSplitter::removeFromTab( QWidget* wid ) {
+    m_tabWidget->removePage( wid );
+}
+
+void OSplitter::changeTab() {
+    if (m_tabWidget ) {
+        m_tabWidget->setGeometry( frameRect() );
+        return;
+    }
+
+    qWarning(" New Tab Widget ");
+    /*
+     * and add all widgets this will reparent them
+     * delete m_hbox set it to 0
+     *
+     */
+    m_tabWidget = new OTabWidget( this );
+
+    for ( ContainerList::Iterator it = m_container.begin(); it != m_container.end(); ++it ) {
+        qWarning("Widget is %s", (*it).name.latin1() );
+        addToTab( (*it) );
+    }
+
+    delete m_hbox;
+    m_hbox = 0;
+    m_tabWidget->setGeometry( frameRect() );
+    m_tabWidget->show();
+
+}
+
+void OSplitter::changeHBox() {
+    if (m_hbox ) {
+        m_hbox->setGeometry( frameRect() );
+        return;
+    }
+
+    qWarning("new HBox");
+    m_hbox = new QHBox( this );
+    commonChangeBox();
+    delete m_tabWidget;
+    m_tabWidget = 0;
+    m_hbox->setGeometry( frameRect() );
+    m_hbox->show();
+}
+
+void OSplitter::changeVBox() {
+    if (m_hbox ) {
+        m_hbox->setGeometry( frameRect() );
+        return;
+    }
+
+    qWarning("New VBOX");
+    m_hbox = new QVBox( this );
+
+    commonChangeBox();
+    delete m_tabWidget;
+    m_tabWidget = 0;
+    m_hbox->setGeometry( frameRect() );
+    m_hbox->show();
+}
+
+
+void OSplitter::commonChangeBox() {
+    for (ContainerList::Iterator it = m_container.begin(); it != m_container.end(); ++it ) {
+        qWarning("Adding to box %s", (*it).name.latin1() );
+        addToBox( (*it) );
+    }
+    delete m_tabWidget;
+    m_tabWidget = 0;
 }
