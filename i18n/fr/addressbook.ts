@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Ecrire un email à</translation>
+        <translation>Ecrire un E-Mail à</translation>
     </message>
     <message>
         <source>Beam Entry</source>
@@ -1346,7 +1346,7 @@ founi gratuitement !</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
-        <translation>Sélectionnez le pour choisir le champ à modifier</translation>
+        <translation>Permet de choisir le champ à modifier</translation>
     </message>
     <message>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
