@@ -1,9 +1,8 @@
 /*
  * TODO
  * make a font selection thing (size too)
- * make a cursor thing
- * add meta key support for german, etc
- *
+ * make vertical keys possible
+ * make a keymap editor
  *
  *
  */

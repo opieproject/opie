@@ -55,8 +55,8 @@ Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
 
     config = new Config("multikey");
     config->setGroup ("general");
-    usePicks = config->readBoolEntry ("usePickboard", "0"); // default closed
-    useRepeat = config->readBoolEntry ("useRepeat", "1");
+    usePicks = config->readBoolEntry ("usePickboard", 0); // default closed
+    useRepeat = config->readBoolEntry ("useRepeat", 1);
     delete config;
 
 
