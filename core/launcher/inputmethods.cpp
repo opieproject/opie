@@ -214,19 +214,15 @@ void InputMethods::loadInputMethods()
     inputMethodList.append( input );
 #endif
     if ( !inputMethodList.isEmpty() ) {
+        method = &inputMethodList[0];
         Config cfg("qpe");
         cfg.setGroup("InputMethod");
         QString curMethod = cfg.readEntry("current","");
-        if(curMethod.isEmpty()) {
-            method = &inputMethodList[0];
-        } else {
-            int i = 0;
-            QValueList<InputMethod>::Iterator it;
-            for ( it = inputMethodList.begin(); it != inputMethodList.end(); ++it, i++ ) {
-                if((*it).interface->name() == curMethod) {
-                    method = &inputMethodList[i];
-//                   qDebug(curMethod);
-                }
+        int i = 0;
+        QValueList<InputMethod>::Iterator it;
+        for ( it = inputMethodList.begin(); it != inputMethodList.end(); ++it, i++ ) {
+            if((*it).interface->name() == curMethod) {
+                method = &inputMethodList[i];
             }
         }
         kbdButton->setPixmap( *method->interface->icon() );
