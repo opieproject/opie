@@ -239,6 +239,10 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
 	    if ( press ) emit power();
 	    return TRUE;
 	  }
+	  if ( ke->simpleData.keycode == Key_SysReq ) {
+	    if ( press ) emit power();
+	    return TRUE;
+	  }
 	  if ( ke->simpleData.keycode == Key_F35 ) {
 	    if ( press ) emit backlight();
 	    return TRUE;
@@ -552,7 +556,7 @@ void Desktop::togglePower()
     blankScreen();
   
   system("apm --suspend");
-  execAutoStart();
+  
   QWSServer::screenSaverActivate( FALSE );
   {
     QCopEnvelope("QPE/Card", "mtabChanged()" ); // might have changed while asleep
@@ -562,7 +566,7 @@ void Desktop::togglePower()
   if ( wasloggedin ) {
     login(TRUE);
   }
-  
+  execAutoStart();
   //qcopBridge->closeOpenConnections();
   //qDebug("called togglePower()!!!!!!");
 }
