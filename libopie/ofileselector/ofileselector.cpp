@@ -1036,6 +1036,8 @@ int OFileSelector::sorting() {
 }
 void OFileSelector::internFileSelected( const QString& s) {
     emit fileSelected( s );
+    DocLnk lnk( s );
+    internFileSelected( lnk );
 }
 void OFileSelector::internFileSelected( const DocLnk& d ) {
     emit fileSelected( d );

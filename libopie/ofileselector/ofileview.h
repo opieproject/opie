@@ -96,6 +96,7 @@ public:
     virtual QStringList selectedNames()const = 0;
     virtual QString selectedPath()const = 0;
     virtual QStringList selectedPaths()const = 0;
+    virtual QString selectedExtra()const = 0;
     virtual int fileCount() = 0;
     virtual void sort() =0;
 
@@ -107,7 +108,7 @@ protected:
      * @param file The file name
      * @param extra The extra information
      */
-    void fileSelected(const QString &dir, const QString& file, const QString& extra = QString::nulll);
+    void fileSelected(const QString &dir, const QString& file, const QString& extra = QString::null);
     void contextMenu();
 
     /**
@@ -117,7 +118,6 @@ protected:
      * @param extra The extra informations
      */
     void changedDir(const QString &dir, const QString& file, const QString& extra = QString::null);
-    void changedDir(const QDir & );
 
     /* updates the file name line of the FileSelector */
   void updateLine( const QString& );

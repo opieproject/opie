@@ -3,7 +3,9 @@
 #include <qpe/applnk.h>
 
 #include "ofileselector.h"
+#include "olister.h"
 #include "ofileview.h"
+
 
 
 OFileView::OFileView( OFileSelector* sel)

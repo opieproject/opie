@@ -33,8 +33,8 @@ public:
 
 
     /* some way a slot */
-    void fileSelected( const QString& dir, const QString& file, const QString& extra ) = 0;
-    void changeDir( const QString& dir, const QString& file, const QString& extra ) = 0;
+    virtual void fileSelected( const QString& dir, const QString& file, const QString& extra ) = 0;
+    virtual void changedDir( const QString& dir, const QString& file, const QString& extra ) = 0;
 protected:
     /**
      * I hate too big classes
@@ -60,6 +60,7 @@ protected:
                   bool isSymlink = FALSE );
     void addDir( const QString& mine,
                  QFileInfo*,
+                 const QString& extra = QString::null,
                  bool isSymlink = FALSE );
     void addDir( const QString& mine,
                  const QString& path,
@@ -77,6 +78,8 @@ protected:
                      bool isSymlink = FALSE );
     OFileSelector* view();
     OPixmapProvider* provider();
+    void internFileSelected( const QString& file );
+    void internChangedDir( const QString& dir );
 private:
     OFileSelector* m_view;
     OPixmapProvider* m_prov;

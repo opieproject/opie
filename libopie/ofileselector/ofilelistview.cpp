@@ -46,7 +46,7 @@ void OFileListView::clear() {
 void OFileListView::addFile( const QPixmap& pix,
                              const QString&,
                              QFileInfo* info,
-                             const QString& /*extra*/,
+                             const QString&  extra,
                              bool isSymlink ) {
     QString dir;
     QString name;
@@ -67,7 +67,7 @@ void OFileListView::addFile( const QPixmap& pix,
     new OFileSelectorItem( this, pix, name,
                            info->lastModified().toString(),
                            QString::number( info->size() ),
-                           dir, locked );
+                           dir, locked, extra );
 }
 void OFileListView::addFile( const QPixmap&,
                              const QString& /*mime*/, const QString& /*dir*/,
@@ -78,7 +78,7 @@ void OFileListView::addFile( const QPixmap&,
 }
 void OFileListView::addDir( const QPixmap& pix, const QString&,
                             QFileInfo* info,
-                            const QString& /*extra */,
+                            const QString& extra ,
                             bool symlink ) {
 
     bool locked = false;
@@ -89,7 +89,7 @@ void OFileListView::addDir( const QPixmap& pix, const QString&,
     new OFileSelectorItem( this, pix, name,
 			   info->lastModified().toString(),
 			   QString::number( info->size() ),
-			   info->dirPath( true ), locked,
+			   info->dirPath( true ), locked, extra,
 			   true );
 
 }
@@ -127,6 +127,13 @@ QString OFileListView::selectedName()const{
 
     return item->text( 1 );
 }
+QString OFileListView::selectedExtra()const{
+    QListViewItem* item = currentItem();
+    if (!item) return QString::null;
+    OFileSelectorItem* fit = (OFileSelectorItem*)fit;
+
+    return fit->extra();
+}
 QStringList OFileListView::selectedNames()const {
     QStringList list;
     list << selectedName();
@@ -137,7 +144,7 @@ QString OFileListView::selectedPath()const {
 }
 QStringList OFileListView::selectedPaths()const {
     QStringList list;
-b    list << selectedPath();
+    list << selectedPath();
     return list;
 }
 int OFileListView::fileCount() {
@@ -161,10 +168,7 @@ void OFileListView::slotCurrentChanged( QListViewItem* item) {
 
         if (selector()->mode() == OFileSelector::Fileselector ) {
             QStringList str = QStringList::split("->", sel->text(1) );
-            QString path =sel->directory() + "/" + str[0].stripWhiteSpace();
-            DocLnk lnk( path );
-            fileSelected(lnk );
-            fileSelected( path );
+            fileSelected(sel->directory(), str[0].stripWhiteSpace(),sel->extra() );
         }
     }
 }
@@ -181,16 +185,10 @@ void OFileListView::slotClicked( int button, QListViewItem* item,
   if(!sel->isLocked() ){
       QStringList str = QStringList::split("->", sel->text(1) );
       if( sel->isDir() ){
-          changedDir( sel->directory() + "/" + str[0].stripWhiteSpace() );
+          changedDir( sel->directory(), str[0].stripWhiteSpace(),sel->extra() );
       }else{
           updateLine(  str[0].stripWhiteSpace() );
-          QString path = sel->directory();
-          path += "/";
-          path += str[0].stripWhiteSpace();
-
-          DocLnk lnk( path );
-          fileSelected( path );
-          fileSelected( lnk );
+          fileSelected(  sel->directory(),str[0].stripWhiteSpace(),  sel->extra() );
       }
   }
 }

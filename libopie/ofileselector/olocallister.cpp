@@ -78,13 +78,13 @@ void OLocalLister::reparse( const QString& path ) {
             for( int i = 0; i<=4; i++) {
                 QFileInfo info( file );
                 if( !info.exists() ){
-                    addSymlink( currentMimeType, fi, TRUE );
+                    addSymlink( currentMimeType, fi, QString::null, TRUE );
                     break;
                 }else if( info.isDir() ){
                     if (!showDirs() )
                         break;
 
-                    addDir( currentMimeType, fi,
+                    addDir( currentMimeType, fi, QString::null,
                             TRUE );
                     break;
                 }else if( info.isFile() ){
@@ -95,7 +95,7 @@ void OLocalLister::reparse( const QString& path ) {
                     /* check if we comply to the mimetype */
                     MimeType type( info.absFilePath() );
                     if (compliesMime( type.id() ) )
-                        addFile( currentMimeType, fi, TRUE );
+                        addFile( currentMimeType, fi, QString::null,  TRUE );
 
                     break;
                 }else if( info.isSymLink() ){
@@ -116,4 +116,10 @@ void OLocalLister::reparse( const QString& path ) {
         ++it;
     } // of while loop
 }
-
+/* more accepting it code */
+void OLocalLister::fileSelected( const QString& dir, const QString& file, const QString& ) {
+    internFileSelected( dir + "/" + file );
+}
+void OLocalLister::changedDir( const QString& dir, const QString& file, const QString& ) {
+    internChangedDir( dir + "/" + file );
+}

@@ -9,6 +9,8 @@ public:
     ~OLocalLister();
     void reparse( const QString& path );
     QMap<QString, QStringList> mimeTypes(const QString& dir );
+    void fileSelected( const QString& dir, const QString& file, const QString& );
+    void changedDir( const QString& dir, const QString& file,const QString& );
 };
 
 #endif

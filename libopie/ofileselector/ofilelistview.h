@@ -28,8 +28,9 @@ public:
 
     void addDir( const QPixmap&,
                  const QString& mime,
+                 QFileInfo* info,
                  const QString& extra = QString::null,
-                 QFileInfo* info, bool = FALSE );
+                 bool = FALSE );
 
     void addDir( const QPixmap&,
                  const QString& mime, const QString& dir,
@@ -45,7 +46,7 @@ public:
     void addSymlink( const QPixmap&,
                      const QString& mine, const QString& path,
                      const QString& file,
-                     const QString& extra,
+                     const QString& extra = QString::null,
                      bool isSymlink = FALSE );
     void cd( const QString& path );
     QWidget* widget();
@@ -56,6 +57,7 @@ public:
 
     QString selectedPath()const;
     QStringList selectedPaths()const;
+    QString selectedExtra()const;
     int fileCount();
 private slots:
     void slotSelectionChanged();

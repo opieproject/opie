@@ -118,6 +118,12 @@ OPixmapProvider* OLister::provider() {
 bool OLister::compliesMime( const QString& mime ) {
     return view()->compliesMime( mime );
 }
+void OLister::internFileSelected( const QString& dir ) {
+    view()->internFileSelected( dir );
+}
+void OLister::internChangedDir( const QString& dir ) {
+    view()->internChangedDir( dir );
+}
 OListerCmbAccess* OLister::comboBox() {
     if (!m_acc )
         m_acc = new OListerCmbAccess( view()->m_location );
@@ -126,7 +132,7 @@ OListerCmbAccess* OLister::comboBox() {
 }
 
 
-OListerCmbAccess::OListerCmbAccess(QComboBox* box )
+OListerCmbAccess::OListerCmbAccess(QComboBox* cmb )
     : m_cmb( cmb )
 {}
 OListerCmbAccess::~OListerCmbAccess() {
@@ -142,10 +148,13 @@ void OListerCmbAccess::setCurrentItem( const QString& add, bool FORCE_ADD) {
     int c = m_cmb->count();
     for ( int i = 0; i < m_cmb->count(); i++ ) {
         if ( m_cmb->text(i) == add ) {
-            bo->setCurrentItem( i );
+            m_cmb->setCurrentItem( i );
             return;
         }
     }
+    if (!FORCE_ADD ) return;
+
+
     m_cmb->insertItem(add );
     m_cmb->setCurrentItem( c );
 }
