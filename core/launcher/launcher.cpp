@@ -79,9 +79,9 @@
 namespace {
   QStringList configToMime( Config *cfg ){
     QStringList mimes;
-    bool tmpMime;
+    bool tmpMime = true;
     cfg->setGroup("mimetypes" );
-    tmpMime = cfg->readBoolEntry("all" ,false);
+    tmpMime = cfg->readBoolEntry("all" ,true);
     if( tmpMime ){
       mimes << QString::null;
       return mimes;
@@ -534,19 +534,34 @@ void Launcher::updateMimeTypes(AppLnkSet* folder)
   }
     }
 }
-
+/** This is a HACK.... 
+ * Reason: scanning huge mediums, microdirvers for examples
+ * consomes time. To avoid that we invented the MediumMountCheck
+ * 
+ * a) the user globally disabled medium checking. We can ignore 
+ *    all removable medium
+ * b) the user enabled medium checking globally and we need to use this mimefilter
+ * c) the user enabled medium checking on a per medium bases
+ *  c1) we already checked and its not ask again turns
+ *  c2) we need to ask and then apply the mimefilter
+ */
 void Launcher::loadDocs() // ok here comes a hack belonging to Global::
 {
-    qWarning("loading Documents" );
-    qWarning("The currentTimeStamp is: %s", m_timeStamp.latin1() );
     delete docsFolder;
     docsFolder = new DocLnkSet;
-    qWarning("new DocLnkSet" );
+
     DocLnkSet *tmp = 0;
     QString home = QString(getenv("HOME"))  + "/Documents";
     tmp = new DocLnkSet( home , QString::null);
     docsFolder->appendFrom( *tmp );
     delete tmp;
+
+    Config mediumCfg( "medium");
+    mediumCfg.setGroup("main");
+    // a) -zecke we don't want to check
+    if(!mediumCfg.readBoolEntry("use", true ) )
+      return;
+
     // find out wich filesystems are new in this round
     // We will do this by having a timestamp inside each mountpoint
     // if the current timestamp doesn't match this is a new file system and
@@ -557,14 +572,27 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
     StorageInfo storage;
     const QList<FileSystem> &fileSystems = storage.fileSystems();
     QListIterator<FileSystem> it ( fileSystems );
-
-
+    
+    // b)
+    if( mediumCfg.readBoolEntry("global", true ) ){
+      QString mime = configToMime(&mediumCfg).join(";");
+      for( ; it.current(); ++it ){
+	if( (*it)->isRemovable() ){
+	  tmp = new DocLnkSet( (*it)->path(), mime );
+	  docsFolder->appendFrom( *tmp );
+	  delete tmp;
+	}
+      } // done
+      return; // save the else
+    }
+    // c) zecke
     for ( ; it.current(); ++it ) {
       if ( (*it)->isRemovable() ) { // let's find out  if we should search on it
-	qWarning("%s is removeable", (*it)->path().latin1() );
-	OConfig cfg( (*it)->path() + "/.opiestorage.cf");
+	Config cfg( (*it)->path() + "/.opiestorage.cf", Config::File);
 	cfg.setGroup("main");
 	QString stamp = cfg.readEntry("timestamp", QDateTime::currentDateTime().toString() );
+	/** This medium is uptodate
+	*/
 	if( stamp == m_timeStamp ){ // ok we know this card
 	  cfg.writeEntry("timestamp", newStamp ); //just write a new timestamp
 	  // we need to scan the list now. Hopefully the cache will be there
@@ -573,19 +601,22 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
 	  tmp = new DocLnkSet( (*it)->path(), mimetypes.join(";")  );
 	  docsFolder->appendFrom( *tmp );
 	  delete tmp;
-
+	 
 	}else{ // come up with the gui cause this a new card
 	  MediumMountGui medium(&cfg, (*it)->path() );
 	  if( medium.check() ){ // we did not ask before or ask again is off
+	    /** c2) */
 	    if( medium.exec()  ){ // he clicked yes so search it
 	      // speicher
 	      //cfg.read(); // cause of a race we need to reread - fixed
+	      cfg.setGroup("main");
 	      cfg.writeEntry("timestamp", newStamp );
 	      cfg.write();
 	      tmp = new DocLnkSet( (*it)->path(), medium.mimeTypes().join(";" ) );
 	      docsFolder->appendFrom( *tmp );
 	      delete tmp;
 	    }// no else
+	    /** c1) */
 	  }else{ // we checked
 	    // do something different see what we need to do
 	    // let's see if we should check the device
