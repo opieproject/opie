@@ -35,7 +35,7 @@
 
 class ExceptListItem : public QListViewItem {
 public:
-	ExceptListItem ( QListView *lv, const QString &t, bool nostyle = true, bool nofont = true, bool nodeco = true ) : QListViewItem ( lv )
+	ExceptListItem ( QListView *lv, QListViewItem *after, const QString &t, bool nostyle = true, bool nofont = true, bool nodeco = true ) : QListViewItem ( lv, after )
 	{
 		m_text = t;
 		

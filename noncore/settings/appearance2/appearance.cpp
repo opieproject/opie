@@ -286,6 +286,7 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 	m_except-> header ( )-> setClickEnabled ( false );
 	m_except-> header ( )-> setResizeEnabled ( false );
 	m_except-> header ( )-> setMovingEnabled ( false );	
+	m_except-> setSorting ( -1 );
 	lay-> addMultiCellWidget ( m_except, 2, 6, 0, 0 );
 	
 	connect ( m_except, SIGNAL( clicked ( QListViewItem *, const QPoint &, int )), this, SLOT( clickedExcept ( QListViewItem *, const QPoint &, int )));
@@ -318,10 +319,11 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 	lay-> setColStretch ( 0, 10 );
 
 	QStringList sl = cfg. readListEntry ( "NoStyle", ';' );
+	QListViewItem *lvit = 0;
 	for ( QStringList::Iterator it = sl. begin ( ); it != sl. end ( ); ++it ) {
 		int fl = ( *it ). left ( 1 ). toInt ( 0, 32 );
 	
-		new ExceptListItem ( m_except, ( *it ). mid ( 1 ), fl & 0x01, fl & 0x02, fl & 0x04 );
+		lvit = new ExceptListItem ( m_except, lvit, ( *it ). mid ( 1 ), fl & 0x01, fl & 0x02, fl & 0x04 );
 	}
 
 
@@ -454,6 +456,8 @@ void Appearance::accept ( )
 			item-> save ( config );
     }
 
+
+	m_except-> setFocus ( ); // if the focus was on the embedded line-edit, we have to move it away first, so the contents are updated
 
 	QStringList sl;
 	for ( ExceptListItem *it = (ExceptListItem *) m_except-> firstChild ( ); it; it = (ExceptListItem *) it-> nextSibling ( )) {
@@ -652,7 +656,7 @@ void Appearance::deleteSchemeClicked()
 
 void Appearance::addExcept ( )
 {
-	ExceptListItem *it = new ExceptListItem ( m_except, tr( "<new>" ), true, true, true );
+	ExceptListItem *it = new ExceptListItem ( m_except, 0, tr( "<new>" ), true, true, true );
 	m_except-> ensureItemVisible ( it );
 	m_except-> setSelected ( it, true );
 }
