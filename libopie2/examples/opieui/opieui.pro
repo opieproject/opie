@@ -1,3 +1,5 @@
 TEMPLATE = subdirs
-SUBDIRS = olistviewdemo
+SUBDIRS = olistviewdemo owidgetstack_example osplitter_example
+
+
 
