@@ -9,8 +9,5 @@ int main(int argc, char **argv) {
     mw.setCaption(QObject::tr("Opie console") );
     app.showMainWidget( &mw );
 
-    app.exec();
-
-
-    return 0;
+    return app.exec();
 }

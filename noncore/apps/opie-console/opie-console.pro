@@ -11,7 +11,8 @@ HEADERS      = io_layer.h io_serial.h \
 	       profilemanager.h  \
 	       configwidget.h \
 	       tabwidget.h \
-	       configdialog.h
+	       configdialog.h \
+		   profileeditordialog.h
 SOURCES      = io_layer.cpp io_serial.cpp \
 	       file_layer.cpp main.cpp \
 	       metafactory.cpp \
@@ -21,7 +22,8 @@ SOURCES      = io_layer.cpp io_serial.cpp \
 	       profileconfig.cpp \
 	       profilemanager.cpp  \
 	       tabwidget.cpp \
-	       configdialog.cpp
+	       configdialog.cpp \
+		   profileeditordialog.cpp
 INTERFACES   = configurebase.ui editbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
