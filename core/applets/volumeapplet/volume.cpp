@@ -581,7 +581,7 @@ VolumeApplet::VolumeApplet( QWidget *parent, const char *name )
   setFixedWidth ( 14 );
 
   m_pixmap = new QPixmap ( Resource::loadPixmap ( "volume" ));
-  m_dialog = new VolumeControl ( this );
+  m_dialog = new VolumeControl ( this, true, this, "volumecontrol" );
 
   connect ( qApp, SIGNAL( volumeChanged ( bool )), m_dialog, SLOT( volumeChanged( bool )));
   connect ( qApp, SIGNAL( micChanged ( bool )), m_dialog, SLOT ( micChanged( bool )));
