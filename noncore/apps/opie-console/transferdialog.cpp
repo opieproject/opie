@@ -1,5 +1,8 @@
 #include "transferdialog.h"
 
+#include "filetransfer.h"
+#include "io_serial.h"
+
 #include "qlayout.h"
 #include "qcombobox.h"
 #include "qlabel.h"
@@ -11,12 +14,14 @@
 #include "opie/ofiledialog.h"
 
 TransferDialog::TransferDialog(QWidget *parent, const char *name)
-: QWidget(parent, name)
+: QDialog(/*parent, name*/NULL, NULL, true)
 {
 	QVBoxLayout *vbox;
 	QHBoxLayout *hbox, *hbox2;
 	QLabel *file, *mode, *progress, *status;
-	QPushButton *selector, *ok, *cancel;
+	QPushButton *selector;
+
+	transfer = NULL;
 
 	file = new QLabel(QObject::tr("Send file"), this);
 	mode = new QLabel(QObject::tr("Transfer mode"), this);
@@ -37,7 +42,7 @@ TransferDialog::TransferDialog(QWidget *parent, const char *name)
 	progressbar->setProgress(0);
 
 	selector = new QPushButton("...", this);
-	ok = new QPushButton(QObject::tr("OK"), this);
+	ok = new QPushButton(QObject::tr("Start transfer"), this);
 	cancel = new QPushButton(QObject::tr("Cancel"), this);
 
 	vbox = new QVBoxLayout(this, 2);
@@ -61,7 +66,7 @@ TransferDialog::TransferDialog(QWidget *parent, const char *name)
 
 	connect(selector, SIGNAL(clicked()), SLOT(slotFilename()));
 	connect(ok, SIGNAL(clicked()), SLOT(slotTransfer()));
-	connect(cancel, SIGNAL(clicked()), SLOT(close()));
+	connect(cancel, SIGNAL(clicked()), SLOT(slotCancel()));
 }
 
 TransferDialog::~TransferDialog()
@@ -86,7 +91,38 @@ void TransferDialog::slotTransfer()
 		return;
 	}
 
+	ok->setEnabled(false);
+
 	statusbar->setText(QObject::tr("Sending..."));
 	progressbar->setProgress(1);
+
+	FileTransfer::Type transfermode = FileTransfer::SX;
+	if(protocol->currentText() == "YModem") transfermode == FileTransfer::SY;
+	if(protocol->currentText() == "ZModem") transfermode == FileTransfer::SZ;
+
+	// dummy profile
+	Profile profile("Dummy", "serial", "vt102", Profile::White, Profile::Black, Profile::VT102);
+
+	transfer = new FileTransfer(transfermode, new IOSerial(profile));
+	transfer->sendFile(filename->text());
+}
+
+void TransferDialog::slotCancel()
+{
+	ok->setEnabled(true);
+
+	if(transfer)
+	{
+		transfer->cancel();
+		delete transfer;
+		transfer = NULL;
+		QMessageBox::information(this,
+			QObject::tr("Cancelled"),
+			QObject::tr("The file transfer has been cancelled."));
+	}
+	else
+	{
+		close();
+	}
 }
 

@@ -55,6 +55,7 @@ private slots:
     void slotConfigure();
     void slotClose();
     void slotProfile(int);
+	void slotTransfer();
 
 private:
     void initUI();
@@ -85,6 +86,7 @@ private:
     QAction* m_connect;
     QAction* m_disconnect;
     QAction* m_terminate;
+	QAction* m_transfer;
     QAction* m_setProfiles;
 
 };

@@ -13,6 +13,7 @@
 #include "profilemanager.h"
 #include "mainwindow.h"
 #include "tabwidget.h"
+#include "transferdialog.h"
 
 MainWindow::MainWindow() {
     m_factory = new MetaFactory();
@@ -62,6 +63,12 @@ void MainWindow::initUI() {
     m_disconnect->addTo( m_console );
     connect(m_disconnect, SIGNAL(activated() ),
             this, SLOT(slotDisconnect() ) );
+
+	m_transfer = new QAction();
+	m_transfer->setText( tr("Transfer file...") );
+	m_transfer->addTo( m_console );
+	connect(m_transfer, SIGNAL(activated() ),
+			this, SLOT(slotTransfer() ) );
 
     /*
      * terminate action
@@ -214,4 +221,13 @@ void MainWindow::create( const Profile& prof ) {
     m_sessions.append( ses );
     tabWidget()->add( ses );
     m_curSession = ses;
+
 }
+
+void MainWindow::slotTransfer()
+{
+	TransferDialog dlg(this);
+	dlg.showMaximized();
+	dlg.exec();
+}
+

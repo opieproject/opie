@@ -1,14 +1,16 @@
 #ifndef TRANSFER_DIALOG_H
 #define TRANSFER_DIALOG_H
 
-#include "qwidget.h"
+#include "qdialog.h"
 
 class QLineEdit;
 class QComboBox;
 class QProgressBar;
 class QLabel;
+class QPushButton;
+class FileTransfer;
 
-class TransferDialog : public QWidget
+class TransferDialog : public QDialog
 {
 	Q_OBJECT
 	public:
@@ -18,12 +20,15 @@ class TransferDialog : public QWidget
 	public slots:
 		void slotFilename();
 		void slotTransfer();
+		void slotCancel();
 
 	private:
 		QLineEdit *filename;
 		QComboBox *protocol;
 		QProgressBar *progressbar;
 		QLabel *statusbar;
+		QPushButton *ok, *cancel;
+		FileTransfer *transfer;
 };
 
 #endif
