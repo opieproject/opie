@@ -12,7 +12,8 @@
 #define BLOCKSIZE 6
 #define TRAILSIZE 30
 
-
+#define NR_MENUS    3
+#define MAX_MENU_OPTIONS 8
 
 class SFCave : public QMainWindow
 {
@@ -53,10 +54,10 @@ public:
     int nextGate;
     int lastGateBottomY;
     
-    static QString menuOptions[2][5];
+    static QString menuOptions[NR_MENUS][MAX_MENU_OPTIONS];
     int currentMenuNr;
-    static int nrMenuOptions[2];
-    static int currentMenuOption[2];
+    static int nrMenuOptions[NR_MENUS];
+    static int currentMenuOption[NR_MENUS];
 
     static QString dificultyOption[3];
     static QString gameTypes[3];
@@ -107,6 +108,7 @@ public:
 	void draw();
 	void handleKeys();
 
+    void handleMenuKeys( QKeyEvent * e );
     void displayMenu();
     void dealWithMenuSelection();
 

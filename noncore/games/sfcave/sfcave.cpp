@@ -33,18 +33,26 @@
 // Menus
 #define MENU_MAIN_MENU          0
 #define MENU_OPTIONS_MENU       1
+#define MENU_REPLAY_MENU        2
 
 // Main Menu Options
 #define MENU_START_GAME         0
-#define MENU_OPTIONS            1
-#define MENU_HELP               2
-#define MENU_QUIT               3
+#define MENU_REPLAY             1
+#define MENU_OPTIONS            2
+#define MENU_HELP               3
+#define MENU_QUIT               4
 
 // Option Menu Options
 #define MENU_GAME_TYPE          0
 #define MENU_GAME_DIFFICULTY    1
 #define MENU_CLEAR_HIGHSCORES   2
 #define MENU_BACK               3
+
+// Replay Menu Options
+#define MENU_REPLAY_START       0
+#define MENU_REPLAY_LOAD        1
+#define MENU_REPLAY_SAVE        2
+#define MENU_REPLAY_BACK        3
 
 
 #define NR_GAME_DIFFICULTIES    3
@@ -69,9 +77,13 @@
 QString SFCave::dificultyOption[] = { EASY, NORMAL, HARD };
 QString SFCave::gameTypes[] = { SFCAVE_GAME, GATES_GAME, FLY_GAME };
 
-QString SFCave::menuOptions[2][5] = { { "Start Game", "Options", "Help", "Quit", "" },
-                                    { "Game Type - %s", "Game Difficulty - %s", "Clear High Scores for this game", "Back", "" } };
+QString SFCave::menuOptions[NR_MENUS][MAX_MENU_OPTIONS] = { { "Start Game", "Replays", "Options", "Help", "Quit", "", "", "" },
+                                    { "Game Type - %s", "Game Difficulty - %s", "Clear High Scores for this game", "Back", "", "", "", "" },
+                                    { "Play Reply", "Load Replay", "Save Replay", "Back", "", "", "", "" } };
 
+int SFCave::nrMenuOptions[NR_MENUS] = { 5, 4, 4 };
+int SFCave ::currentMenuOption[NR_MENUS] = { 0, 0, 0 };
+                                    
 #define UP_THRUST               0.6
 #define NO_THRUST               0.8
 #define MAX_DOWN_THRUST         4.0
@@ -94,8 +106,6 @@ double SFCave::MaxDownThrustVals[3][3]          = {{ 4.0,   4.0, 4.0 },     // S
 
 int SFCave::initialGateGaps[]           = { 75, 50, 25 };
 
-int SFCave::nrMenuOptions[2] = { 4, 4 };
-int SFCave ::currentMenuOption[2] = { 0, 0 };
 
 bool movel;
 
@@ -692,7 +702,7 @@ void SFCave :: draw()
 
             text = "Press OK for menu";
             p.drawText( (sWidth/2) - (fm.width( text )/2), 135, text );
-
+/*
             text = "Press r to replay";
             p.drawText( (sWidth/2) - (fm.width( text )/2), 150, text );
                                                            
@@ -701,6 +711,7 @@ void SFCave :: draw()
 
             text = "Press r to load a saved replay";
             p.drawText( (sWidth/2) - (fm.width( text )/2), 180, text );
+*/
         }
         else
             crashLineLength ++;
@@ -762,63 +773,7 @@ void SFCave :: handleKeys()
 void SFCave :: keyPressEvent( QKeyEvent *e )
 {
     if ( state == STATE_MENU )
-    {
-        switch( e->key() )
-        {
-            case Qt::Key_Down:
-                currentMenuOption[currentMenuNr] ++;
-                if ( menuOptions[currentMenuNr][currentMenuOption[currentMenuNr]] == "" )
-                    currentMenuOption[currentMenuNr] = 0;
-                break;
-            case Qt::Key_Up:
-                currentMenuOption[currentMenuNr] --;
-                if ( currentMenuOption[currentMenuNr] < 0 )
-                    currentMenuOption[currentMenuNr] = nrMenuOptions[currentMenuNr]-1;
-                break;
-
-            case Qt::Key_Left:
-                if ( currentMenuNr == MENU_OPTIONS_MENU )
-                {
-                    if ( currentMenuOption[currentMenuNr] == MENU_GAME_TYPE )
-                    {
-                        currentGameType --;
-                        if ( currentGameType < 0 )
-                            currentGameType = NR_GAME_TYPES - 1;
-                    }
-                    else if ( currentMenuOption[currentMenuNr] == MENU_GAME_DIFFICULTY )
-                    {
-                        currentGameDifficulty --;
-                        if ( currentGameDifficulty < 0 )
-                            currentGameDifficulty = NR_GAME_DIFFICULTIES - 1;
-                    }
-                }
-                break;
-
-            case Qt::Key_Right:
-                if ( currentMenuNr == MENU_OPTIONS_MENU )
-                {
-                    if ( currentMenuOption[currentMenuNr] == MENU_GAME_TYPE )
-                    {
-                        currentGameType ++;
-                        if ( currentGameType == NR_GAME_TYPES )
-                            currentGameType = 0;
-                    }
-                    else if ( currentMenuOption[currentMenuNr] == MENU_GAME_DIFFICULTY )
-                    {
-                        currentGameDifficulty ++;
-                        if ( currentGameDifficulty == NR_GAME_DIFFICULTIES )
-                            currentGameDifficulty = 0;
-                    }
-                }
-                break;
-
-            case Qt::Key_Space:
-            case Qt::Key_Return:
-            case Qt::Key_Enter:
-                dealWithMenuSelection();
-                break;
-        }
-    }
+        handleMenuKeys( e );
     else
     {
         switch( e->key() )
@@ -836,7 +791,11 @@ void SFCave :: keyPressEvent( QKeyEvent *e )
             case Qt::Key_Return:
             case Qt::Key_Enter:
                 if ( state == STATE_CRASHED )
+                {
                     state = STATE_MENU;
+                    currentMenuNr = 0;
+                    currentMenuOption[currentMenuNr] = 0;
+                }
                 break;
 
             case Qt::Key_Z:
@@ -899,6 +858,166 @@ void SFCave :: keyReleaseEvent( QKeyEvent *e )
 
 }
 
+
+void SFCave :: saveScore()
+{
+#ifdef QWS
+    Config cfg( "sfcave" );
+    cfg.setGroup( "settings" );
+    QString key = "highScore_";
+
+    cfg.writeEntry( key + gameTypes[currentGameType] + "_" + dificultyOption[currentGameDifficulty], highestScore[currentGameType][currentGameDifficulty] );
+    key += CURRENT_GAME_TYPE;
+    cfg.writeEntry( key, highestScore[currentGameType] );
+#endif
+}
+
+void SFCave :: saveReplay()
+{
+    FILE *out;
+    out = fopen( (const char *)replayFile, "w" );
+    if ( !out )
+    {
+        printf( "Couldn't write to /home/root/sfcave.replay\n" );
+        return;
+    }
+
+    // Build up string of values
+    // Format is:: <landscape seed> <game type> <difficulty> <framenr> <framenr>.......
+    QString val;
+    val.sprintf( "%d %d %d ", currentSeed, currentGameType, currentGameDifficulty );
+    
+    QListIterator<int> it( replayList );
+    while( it.current() )
+    {
+        QString tmp;
+        tmp.sprintf( "%d ", (*it.current()) );
+        val += tmp;
+
+        ++it;
+    }
+    val += "\n";
+
+    QString line;
+    line.sprintf( "%d\n", val.length() );
+    fwrite( (const char *)line, 1, line.length(), out );
+
+    fwrite( (const char *)val, 1, val.length(), out );
+   
+    fclose( out );
+
+    printf( "Replay saved to %s\n", (const char *)replayFile );
+
+}
+
+void SFCave :: loadReplay()
+{
+    FILE *in = fopen( (const char *)replayFile, "r" );
+
+    if ( in == 0 )
+    {
+        printf( "Couldn't load replay file!\n" );
+        return;
+    }   
+
+    // Read next line - contains the size of the options
+    char line[10+1];
+    fgets( line, 10, in );
+
+    int length = -1;
+    sscanf( line, "%d", &length );
+    char *data = new char[length+1];
+
+    fread( data, 1, length, in );
+//    printf( "data - %s", data );
+
+    QString sep  = " ";
+    QStringList list = QStringList::split( sep, QString( data ) );
+    
+    // print it out
+    QStringList::Iterator it = list.begin();
+    currentSeed = (*it).toInt();
+    ++it;
+    currentGameType = (*it).toInt();
+    ++it;
+    currentGameDifficulty = (*it).toInt();
+    ++it;
+
+    replayList.clear();
+    for ( ; it != list.end(); ++it )
+    {
+        int v = (*it).toInt();
+        replayList.append( new int( v ) );
+    }
+
+    delete data;
+
+    fclose( in );
+    
+    printf( "Replay loaded from %s\n", (const char *)replayFile );
+}
+
+
+//--------------- MENU CODE ---------------------
+void SFCave :: handleMenuKeys( QKeyEvent *e )
+{
+    switch( e->key() )
+    {
+        case Qt::Key_Down:
+            currentMenuOption[currentMenuNr] ++;
+            if ( menuOptions[currentMenuNr][currentMenuOption[currentMenuNr]] == "" )
+                currentMenuOption[currentMenuNr] = 0;
+            break;
+        case Qt::Key_Up:
+            currentMenuOption[currentMenuNr] --;
+            if ( currentMenuOption[currentMenuNr] < 0 )
+                currentMenuOption[currentMenuNr] = nrMenuOptions[currentMenuNr]-1;
+            break;
+
+        case Qt::Key_Left:
+            if ( currentMenuNr == MENU_OPTIONS_MENU )
+            {
+                if ( currentMenuOption[currentMenuNr] == MENU_GAME_TYPE )
+                {
+                    currentGameType --;
+                    if ( currentGameType < 0 )
+                        currentGameType = NR_GAME_TYPES - 1;
+                }
+                else if ( currentMenuOption[currentMenuNr] == MENU_GAME_DIFFICULTY )
+                {
+                    currentGameDifficulty --;
+                    if ( currentGameDifficulty < 0 )
+                        currentGameDifficulty = NR_GAME_DIFFICULTIES - 1;
+                }
+            }
+            break;
+
+        case Qt::Key_Right:
+            if ( currentMenuNr == MENU_OPTIONS_MENU )
+            {
+                if ( currentMenuOption[currentMenuNr] == MENU_GAME_TYPE )
+                {
+                    currentGameType ++;
+                    if ( currentGameType == NR_GAME_TYPES )
+                        currentGameType = 0;
+                }
+                else if ( currentMenuOption[currentMenuNr] == MENU_GAME_DIFFICULTY )
+                {
+                    currentGameDifficulty ++;
+                    if ( currentGameDifficulty == NR_GAME_DIFFICULTIES )
+                        currentGameDifficulty = 0;
+                }
+            }
+            break;
+
+        case Qt::Key_Space:
+        case Qt::Key_Return:
+        case Qt::Key_Enter:
+            dealWithMenuSelection();
+            break;
+    }
+}
+
 void SFCave :: displayMenu()
 {
     offscreen->fill( Qt::black );
@@ -918,7 +1037,7 @@ void SFCave :: displayMenu()
     p.drawText( (sWidth/2) - (fm.width( text )/2), 85, text );
 
     // Draw options
-    int pos = 170;
+    int pos = 140;
     for ( int i = 0 ; menuOptions[currentMenuNr][i] != "" ; ++i, pos += 25 )
     {
         if ( currentMenuOption[currentMenuNr] == i )
@@ -959,6 +1078,11 @@ void SFCave :: dealWithMenuSelection()
                     state = STATE_NEWGAME;
                     break;
 
+                case MENU_REPLAY:
+                    currentMenuNr = MENU_REPLAY_MENU;
+                    currentMenuOption[currentMenuNr] = 0;
+                    break;
+
                 case MENU_OPTIONS:
                     currentMenuNr = MENU_OPTIONS_MENU;
                     currentMenuOption[currentMenuNr] = 0;
@@ -972,7 +1096,7 @@ void SFCave :: dealWithMenuSelection()
                     delete dlg;
                     break;
                 }
-                
+
                 case MENU_QUIT:
                     QApplication::exit();
                     break;
@@ -987,7 +1111,7 @@ void SFCave :: dealWithMenuSelection()
             {
                 case MENU_GAME_TYPE:
                     break;
-                
+
                 case MENU_GAME_DIFFICULTY:
                     break;
 
@@ -995,7 +1119,7 @@ void SFCave :: dealWithMenuSelection()
                     for ( int i = 0 ; i < 3 ; ++i )
                         highestScore[currentGameType][i] = 0;
                     break;
-                    
+
                 case MENU_BACK:
                     currentMenuNr = MENU_MAIN_MENU;
 
@@ -1010,96 +1134,31 @@ void SFCave :: dealWithMenuSelection()
 
             break;
         }
-    }      
-}
 
-void SFCave :: saveScore()
-{
-#ifdef QWS
-    Config cfg( "sfcave" );
-    cfg.setGroup( "settings" );
-    QString key = "highScore_";
+        case MENU_REPLAY_MENU:
+        {
+            switch( currentMenuOption[currentMenuNr] )
+            {
+                case MENU_REPLAY_START:
+                    if ( currentSeed != 0 )
+                        state = STATE_REPLAY;
+                        // Display No Replay
+                    break;
 
-    cfg.writeEntry( key + gameTypes[currentGameType] + "_" + dificultyOption[currentGameDifficulty], highestScore[currentGameType][currentGameDifficulty] );
-    key += CURRENT_GAME_TYPE;
-    cfg.writeEntry( key, highestScore[currentGameType] );
-#endif
-}
+                case MENU_REPLAY_LOAD:
+                    loadReplay();
+                    break;
 
-void SFCave :: saveReplay()
-{
-    FILE *out;
-    out = fopen( (const char *)replayFile, "w" );
-    if ( !out )
-    {
-        printf( "Couldn't write to /home/root/sfcave.replay\n" );
-        return;
+                case MENU_REPLAY_SAVE:
+                    saveReplay();
+                    break;
+
+                case MENU_REPLAY_BACK:
+                    currentMenuNr = MENU_MAIN_MENU;
+                    break;
+
+            }
+        }
     }
-
-    // Build up string of values
-    // Format is:: <landscape seed> <framenr> <framenr>.......
-    QString val;
-    val.sprintf( "%d ", currentSeed );
-    
-    QListIterator<int> it( replayList );
-    while( it.current() )
-    {
-        QString tmp;
-        tmp.sprintf( "%d ", (*it.current()) );
-        val += tmp;
-
-        ++it;
-    }
-    val += "\n";
-
-    QString line;
-    line.sprintf( "%d\n", val.length() );
-    fwrite( (const char *)line, 1, line.length(), out );
-    fwrite( (const char *)val, 1, val.length(), out );
-   
-    fclose( out );
-
-    printf( "Replay saved to %s\n", (const char *)replayFile );
-
 }
 
-void SFCave :: loadReplay()
-{
-    FILE *in = fopen( (const char *)replayFile, "r" );
-
-    if ( in == 0 )
-    {
-        printf( "Couldn't load replay file!\n" );
-        return;
-    }   
-    // Read size of next line
-    char line[10+1];
-    fgets( line, 10, in );
-
-    int length = -1;
-    sscanf( line, "%d", &length );
-    char *data = new char[length+1];
-
-    fread( data, 1, length, in );
-
-    QString sep  = " ";
-    QStringList list = QStringList::split( sep, QString( data ) );
-    
-    // print it out
-    QStringList::Iterator it = list.begin();
-    currentSeed = (*it).toInt();
-    ++it;
-
-    replayList.clear();
-    for ( ; it != list.end(); ++it )
-    {
-        int v = (*it).toInt();
-        replayList.append( new int( v ) );
-    }
-
-    delete data;
-
-    fclose( in );
-    
-    printf( "Replay loaded from %s\n", (const char *)replayFile );
-}
