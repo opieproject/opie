@@ -170,7 +170,7 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
     // ## make customizable in some way?
 #ifdef QT_QWS_CUSTOM
     lockState = new LockKeyState( this );
-y#else
+#else
     lockState = 0;
 #endif
 
