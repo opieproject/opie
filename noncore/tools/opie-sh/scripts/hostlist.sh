@@ -24,10 +24,10 @@ OPIE_SH=opie-sh
 hostlist() {
 (	echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/hostlist.png>"
 	echo "<h3>Hostlist</h3><br>"
-	HOSTLIST=`cat $CFG`
+	HOSTLIST=`cat $CFG | grep -v '#'`
 	for HOST in $HOSTLIST
 	do
-		PT=` ping -c1 $HOST | grep avg|cut -d " " -f4-`
+		PT=` ping -c 1 $HOST | grep avg|cut -d " " -f4-`
 		if [ "$PT" != "" ] 
 		then echo "<b><font color=#00ff00> "
 		     echo "$HOST is up<br></font></b>[$PT]<br>"
