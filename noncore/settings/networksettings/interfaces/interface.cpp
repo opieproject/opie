@@ -1,6 +1,8 @@
+$Header: /media/disk-5/tmp/opie-cvs/cvs/opie/noncore/settings/networksettings/interfaces/interface.cpp,v 1.7 2003-01-13 19:07:40 benmeyer Exp $
+
 /**
  * $Author: benmeyer $
- * $Date: 2003-01-13 19:06:10 $
+ * $Date: 2003-01-13 19:07:40 $
  * $Name:  $
  */ 
 
