@@ -1112,12 +1112,12 @@ namespace {
         str.sprintf("%04d%02d%02dT%02d%02d%02d",
                     dt.date().year(),
                     dt.date().month(),
-                    dt.date().year(),
+                    dt.date().day(),
                     dt.time().hour(),
                     dt.time().minute(),
                     dt.time().second() );
 
-
+        qWarning("Str ist %s", str.data() );
 
         return str;
     }
