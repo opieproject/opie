@@ -58,7 +58,7 @@ public:
     void openFile( const QString & );
 public slots:
     void editorChanged();
-        
+
 protected:
     void closeEvent( QCloseEvent *e );
 
@@ -68,7 +68,6 @@ private slots:
     void fileNew();
     void fileRevert();
     void fileOpen();
-    void newFileOpen();
     void changeStartConfig(bool);
     bool save();
     bool saveAs();
@@ -103,8 +102,6 @@ private:
     void setFontSize(int sz, bool round_down_not_up);
 
 private:
-    QWidgetStack *editorStack;
-    FileSelector *fileSelector;
     fileSaver *fileSaveDlg;
     fileBrowser *browseForFiles;
 
@@ -114,6 +111,7 @@ private:
     DocLnk *doc;
     bool searchVisible;
     bool bFromDocView;
+	 int  viewSelection;
     QAction *zin, *zout;
     QString currentFileName;
 };

@@ -17,27 +17,34 @@ copyright Sun 02-17-2002 22:28:23 L. J. Potter ljp@llornkcor.com
 
 //#include <qvariant.h>
 #include <qdialog.h>
-#include <qfile.h> 
-#include <qdir.h> 
-#include <qstringlist.h> 
+#include <qfile.h>
+#include <qdir.h>
+#include <qstringlist.h>
 #include <qlabel.h>
 #include <qstring.h>
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+#include <qpe/filemanager.h>
+
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QListView;
 class QListViewItem;
 class QPushButton;
+class QComboBox;
+class QWidgetStack;
+class FileSelector;
 
 class fileBrowser : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:
   void populateList();
     fileBrowser( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 ,const QString filter=0);
     ~fileBrowser();
+
+    void setFileView( int );
 
     QPushButton *buttonOk, *buttonCancel, *homeButton, *docButton, *hideButton;
     QListView* ListView;
@@ -48,18 +55,24 @@ public:
     QFile file;
     QStringList fileList;
     QListViewItem * item;
+    QComboBox *SelectionCombo;
+    QWidgetStack *FileStack;
+    FileSelector *fileSelector;
+
 public slots:
     void homeButtonPushed();
-    void docButtonPushed(); 
-    void hideButtonPushed(bool); 
+    void docButtonPushed();
+
 private:
 
-private slots: 
-        void upDir();
-        void listDoubleClicked(QListViewItem *);
-        void listClicked(QListViewItem *);
-        void OnOK();
-protected slots: 
+private slots:
+    void upDir();
+    void listClicked( QListViewItem * );
+    void selectionChanged( const QString & );
+    void OnOK();
+    void docOpen( const DocLnk & );
+
+protected slots:
 
 protected:
 

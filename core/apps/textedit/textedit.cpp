@@ -49,6 +49,7 @@
 #include <qtoolbutton.h>
 #include <qwidgetstack.h>
 #include <qcheckbox.h>
+#include <qcombo.h>
 #include <unistd.h>
 #include <sys/stat.h>
 
@@ -225,14 +226,6 @@ void QpeEditor::find ( const QString &txt, bool caseSensitive,
 #endif
 
 
-
-
-static int u_id = 1;
-static int get_unique_id()
-{
-    return u_id++;
-}
-
 static const int nfontsizes = 6;
 static const int fontsize[nfontsizes] = {8,10,12,14,18,24};
 
@@ -265,17 +258,11 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
     a = new QAction( tr( "Open" ), Resource::loadPixmap( "fileopen" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( fileOpen() ) );
-//    a->addTo( bar );
-    a->addTo( file );
-
-    a = new QAction( tr( "Browse" ), Resource::loadPixmap( "fileopen" ), QString::null, 0, this, 0 );
-    connect( a, SIGNAL( activated() ), this, SLOT( newFileOpen() ) );
     a->addTo( bar );
     a->addTo( file );
 
     a = new QAction( tr( "Save" ), QPixmap(( const char** ) filesave_xpm  ) , QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( save() ) );
-//      a->addTo( bar );
     file->insertSeparator();
     a->addTo( file );
 
@@ -298,13 +285,12 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     a->addTo( editBar );
     a->addTo( edit );
 
-     a = new QAction( tr( "Find..." ), Resource::loadPixmap( "find" ), QString::null, 0, this, 0 );
-     connect( a, SIGNAL( activated() ), this, SLOT( editFind() ) );
-     edit->insertSeparator();
-     a->addTo( bar );
-     a->addTo( edit );
+    a = new QAction( tr( "Find..." ), Resource::loadPixmap( "find" ), QString::null, 0, this, 0 );
+    connect( a, SIGNAL( activated() ), this, SLOT( editFind() ) );
+    edit->insertSeparator();
+    a->addTo( bar );
+    a->addTo( edit );
 
-     
     int defsize;
     bool defb, defi, wrap;
 
@@ -371,36 +357,26 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
        this, SLOT( search() ) );
 
 
-     a = new QAction( tr( "Find Next" ), Resource::loadPixmap( "next" ), QString::null, 0, this, 0 );
-     connect( a, SIGNAL( activated() ), this, SLOT( findNext() ) );
-     a->addTo( searchBar );
-     a->addTo( edit );
+    a = new QAction( tr( "Find Next" ), Resource::loadPixmap( "next" ), QString::null, 0, this, 0 );
+    connect( a, SIGNAL( activated() ), this, SLOT( findNext() ) );
+    a->addTo( searchBar );
+    a->addTo( edit );
 
     a = new QAction( tr( "Close Find" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( findClose() ) );
     a->addTo( searchBar );
 
-     edit->insertSeparator();
-     a = new QAction( tr( "Delete" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
-     connect( a, SIGNAL( activated() ), this, SLOT( editDelete() ) );
-     a->addTo( edit );
-     
+    edit->insertSeparator();
+    a = new QAction( tr( "Delete" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
+    connect( a, SIGNAL( activated() ), this, SLOT( editDelete() ) );
+    a->addTo( edit );
+
     searchBar->hide();
 
-    editorStack = new QWidgetStack( this );
-    setCentralWidget( editorStack );
 
-    searchVisible = FALSE;
-
-    fileSelector = new FileSelector( "text/*", editorStack, "fileselector" , TRUE, TRUE); //buggy
-    connect( fileSelector, SIGNAL( closeMe() ), this, SLOT( showEditTools() ) );
-    connect( fileSelector, SIGNAL( newSelected( const DocLnk &) ), this, SLOT( newFile( const DocLnk & ) ) );
-    connect( fileSelector, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( openFile( const DocLnk & ) ) );
-//      fileOpen();
-
-    editor = new QpeEditor( editorStack );
+    editor = new QpeEditor( this );
+    setCentralWidget( editor );
     editor->setFrameStyle( QFrame::Panel | QFrame::Sunken );
-    editorStack->addWidget( editor, get_unique_id() );
     connect( editor, SIGNAL( textChanged() ), this, SLOT( editorChanged() ) );
 
     resize( 200, 300 );
@@ -429,7 +405,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     } else {
         fileOpen();
     }
-
+    viewSelection = cfg.readNumEntry( "FileView", 0 );
 }
 
 TextEdit::~TextEdit()
@@ -443,6 +419,7 @@ TextEdit::~TextEdit()
     cfg.writeEntry("Bold",f.bold());
     cfg.writeEntry("Italic",f.italic());
     cfg.writeEntry("Wrap",editor->wordWrap() == QMultiLineEdit::WidgetWidth);
+	 cfg.writeEntry( "FileView", viewSelection );
 }
 
 void TextEdit::zoomIn()
@@ -513,33 +490,8 @@ void TextEdit::fileNew()
 
 void TextEdit::fileOpen()
 {
-//      if ( !save() ) {
-//    if ( QMessageBox::critical( this, tr( "Out of space" ),
-//              tr( "Text Editor was unable to\n"
-//            "save your changes.\n"
-//            "Free some space and try again.\n"
-//            "\nContinue anyway?" ),
-//              QMessageBox::Yes|QMessageBox::Escape,
-//              QMessageBox::No|QMessageBox::Default )
-//         != QMessageBox::Yes )
-//        return;
-//    else {
-//        delete doc;
-//        doc = 0;
-//    }
-//      }
-    menu->hide();
-    editBar->hide();
-    searchBar->hide();
-    clearWState (WState_Reserved1 );
-    editorStack->raiseWidget( fileSelector );
-    fileSelector->reread();
-    updateCaption();
-}
-
-void TextEdit::newFileOpen()
-{
     browseForFiles=new fileBrowser(this,"Open File",TRUE,0, "*");
+    browseForFiles->setFileView( viewSelection );
     browseForFiles->showMaximized();
     if( browseForFiles->exec() != -1 ) {
         QString selFile= browseForFiles->selectedFileName;
@@ -557,6 +509,7 @@ void TextEdit::newFileOpen()
                 openFile(fileName );
             }
         }
+        viewSelection = browseForFiles->SelectionCombo->currentItem();
     }
     delete browseForFiles;
     editor->setEdited( FALSE);
@@ -642,7 +595,6 @@ void TextEdit::newFile( const DocLnk &f )
     DocLnk nf = f;
     nf.setType("text/plain");
     clear();
-    editorStack->raiseWidget( editor );
     setWState (WState_Reserved1 );
     editor->setFocus();
     doc = new DocLnk(nf);
@@ -652,6 +604,7 @@ void TextEdit::newFile( const DocLnk &f )
 
 void TextEdit::openFile( const QString &f )
 {
+
     bFromDocView = TRUE;
     DocLnk nf;
     nf.setType("text/plain");
@@ -682,10 +635,10 @@ void TextEdit::openFile( const DocLnk &f )
     if ( !fm.loadFile( f, txt ) ) {
   // ####### could be a new file
         qDebug( "Cannot open file" );
- 
+
   //return;
     }
-    
+
     fileNew();
     if ( doc )
   delete doc;
@@ -705,13 +658,11 @@ void TextEdit::showEditTools()
 //        if ( !doc )
 //      close();
 //    clear();
-    fileSelector->hide();
     menu->show();
     editBar->show();
     if ( searchVisible )
   searchBar->show();
 //    updateCaption();
-    editorStack->raiseWidget( editor );
     setWState (WState_Reserved1 );
 }
 
@@ -886,15 +837,8 @@ void TextEdit::setDocument(const QString& fileref)
 
 void TextEdit::closeEvent( QCloseEvent *e )
 {
-    if ( editorStack->visibleWidget() == fileSelector && !bFromDocView ) {
-        e->ignore();
-        repaint();
-//        fileRevert();
-  
-    } else {
-        bFromDocView = FALSE;
-        e->accept();
-    }
+    bFromDocView = FALSE;
+    e->accept();
 }
 
 void TextEdit::accept()

@@ -14,16 +14,23 @@
 #include "fileBrowser.h"
 #include <qpe/config.h>
 #include <qpe/resource.h>
+#include <qpe/fileselector.h>
 #include <qpe/qpeapplication.h>
 
+#include <qwidgetstack.h>
 #include <qlistview.h>
+#include <qcombo.h>
 #include <qpushbutton.h>
 #include <qfile.h>
 #include <qmessagebox.h>
 #include <qlayout.h>
 #include <unistd.h>
 
-
+static int u_id = 1;
+static int get_unique_id()
+{
+    return u_id++;
+}
 
 fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags fl , const QString filter )
     : QDialog( parent, name, modal, fl )
@@ -44,29 +51,23 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     dirLabel->setMaximumSize( QSize( 250, 15 ) );
     layout->addWidget( dirLabel, 0, 0 );
 
-    hideButton = new QPushButton( Resource::loadIconSet("s_hidden"),"",this,"hideButton");
-    hideButton->setMinimumSize( QSize( 25, 25 ) );
-    hideButton->setMaximumSize( QSize( 25, 25 ) );
-    connect( hideButton,SIGNAL(toggled(bool)),this,SLOT( hideButtonPushed(bool)) );
-    hideButton->setToggleButton(TRUE);
-    hideButton->setFlat(TRUE);
-    layout->addWidget( hideButton, 0, 1 );
-
     docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",this,"docsButton");
     docButton->setMinimumSize( QSize( 25, 25 ) );
     docButton->setMaximumSize( QSize( 25, 25 ) );
     connect( docButton,SIGNAL(released()),this,SLOT( docButtonPushed()) );
     docButton->setFlat(TRUE);
-    layout->addWidget( docButton, 0, 2 );
+    layout->addWidget( docButton, 0, 1 );
 
     homeButton = new QPushButton( Resource::loadIconSet("home"),"",this,"homeButton");
     homeButton->setMinimumSize( QSize( 25, 25 ) );
     homeButton->setMaximumSize( QSize( 25, 25 ) );
     connect(homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
     homeButton->setFlat(TRUE);
-    layout->addWidget( homeButton, 0, 3 );
+    layout->addWidget( homeButton, 0, 2 );
 
-    ListView = new QListView( this, "ListView" );
+    FileStack = new QWidgetStack( this );
+
+	 ListView = new QListView( this, "ListView" );
     ListView->setMinimumSize( QSize( 100, 25 ) );
     ListView->addColumn( tr( "Name" ) );
     ListView->setColumnWidth(0,140);
@@ -78,13 +79,25 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     ListView->setColumnAlignment(1,QListView::AlignRight);
 //      ListView->setMultiSelection(true);
 //      ListView->setSelectionMode(QListView::Extended);
-
     ListView->setAllColumnsShowFocus( TRUE );
-    layout->addMultiCellWidget( ListView, 1, 1, 0, 3 );
-
-    // signals and slots connections
-    connect( ListView, SIGNAL(doubleClicked( QListViewItem*)), SLOT(listDoubleClicked(QListViewItem *)) );
     connect( ListView, SIGNAL(pressed( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
+    FileStack->addWidget( ListView, get_unique_id() );
+
+    fileSelector = new FileSelector( "text/*", FileStack, "fileselector" , FALSE, FALSE); //buggy
+//    connect( fileSelector, SIGNAL( closeMe() ), this, SLOT( showEditTools() ) );
+//    connect( fileSelector, SIGNAL( newSelected( const DocLnk &) ), this, SLOT( newFile( const DocLnk & ) ) );
+    connect( fileSelector, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( docOpen( const DocLnk & ) ) );
+    layout->addMultiCellWidget( FileStack, 1, 1, 0, 2 );
+
+    SelectionCombo = new QComboBox( FALSE, this, "SelectionCombo" );
+    SelectionCombo->setMinimumSize( QSize( 200, 25 ) );
+    SelectionCombo->insertItem( tr( "Documents" ) );
+    SelectionCombo->insertItem( tr( "All files" ) );
+    SelectionCombo->insertItem( tr( "All files (incl. hidden)" ) );
+    layout->addMultiCellWidget( SelectionCombo, 2, 2, 0, 2 );
+    connect( SelectionCombo, SIGNAL( activated( const QString & ) ),
+            this, SLOT( selectionChanged( const QString & ) ) );
+
     currentDir.setPath(QDir::currentDirPath());
     currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden */| QDir::All);
 
@@ -96,6 +109,11 @@ fileBrowser::~fileBrowser()
 {
 }
 
+void fileBrowser::setFileView( int selection )
+{
+    SelectionCombo->setCurrentItem( selection );
+    selectionChanged( SelectionCombo->currentText() );
+}
 
 void fileBrowser::populateList()
 {
@@ -138,10 +156,6 @@ void fileBrowser::populateList()
 void fileBrowser::upDir()
 {
 //    qDebug(currentDir.canonicalPath());
-}
-
-void fileBrowser::listDoubleClicked(QListViewItem *selectedItem)
-{
 }
 
 // you may want to switch these 2 functions. I like single clicks
@@ -216,15 +230,33 @@ void fileBrowser::docButtonPushed() {
 
 }
 
-void fileBrowser::hideButtonPushed(bool b) {
-    if (b)
-    currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
+void fileBrowser::selectionChanged( const QString &select )
+{
+    if ( select == "Documents")
+    {
+        FileStack->raiseWidget( fileSelector );
+        dirLabel->hide();
+        docButton->hide();
+        homeButton->hide();
+    }
     else
-    currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
-        
-//          chdir( QString(QPEApplication::documentDir()+"/text").latin1() );
-//          currentDir.cd( QPEApplication::documentDir()+"/text", TRUE);
-          populateList();
-          update();
+    {
+        if ( select == "All files" )
+            currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::All);
+        else
+            currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
 
+        populateList();
+        update();
+        dirLabel->show();
+        docButton->show();
+        homeButton->show();
+        FileStack->raiseWidget( ListView );
+    }
+}
+
+void fileBrowser::docOpen( const DocLnk &doc )
+{
+    fileList.append( doc.file().latin1() );
+    accept();
 }
