@@ -42,7 +42,7 @@ private:
 
 
 private:
-	static bool sqliteCopyAndConvert( const QString &src, const QString &destination, QString &lastCommand );
+	bool sqliteMoveAndConvert( const QString& name, const QString &src, const QString &destination );
 };
 
 
