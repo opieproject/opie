@@ -1,5 +1,5 @@
 Files: bin/tictac apps/Games/tictac.desktop pics/Tictac.png 
-Package: tictac
+Package: opie-tictac
 Priority: optional
 Section: opie/games
 Maintainer: ljp <ljp@llornkcor.com>
