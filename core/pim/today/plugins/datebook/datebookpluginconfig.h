@@ -24,7 +24,7 @@
 #include <opie/todayconfigwidget.h>
 
 class DatebookPluginConfig : public TodayConfigWidget {
-
+    Q_OBJECT
 
 
 public:
