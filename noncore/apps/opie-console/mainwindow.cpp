@@ -432,7 +432,7 @@ void MainWindow::create( const Profile& prof ) {
 
 
     // is io_layer wants direct connection, then autoconnect
-    if ( ( m_curSession->layer() )->supports()[0] = 1 ) {
+    if ( ( m_curSession->layer() )->supports()[0] == 1 ) {
         slotConnect();
     }
 }
@@ -515,7 +515,7 @@ void MainWindow::slotFullscreen() {
 
 void MainWindow::slotKeyReceived(ushort u, ushort q, bool, bool pressed, bool) {
 
-    qWarning("unicode: %x, qkey: %x, %s", u, q, pressed ? "pressed" : "released");
+    //qWarning("unicode: %x, qkey: %x, %s", u, q, pressed ? "pressed" : "released");
 
     if ( m_curSession ) {
 
