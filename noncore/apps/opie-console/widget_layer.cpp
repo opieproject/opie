@@ -68,13 +68,13 @@ bool WidgetLayer::eventFilter( QObject *obj, QEvent *e )
         return true;
     }
     if ( obj != this /* when embedded */ && obj != parent() /* when standalone */ )
-        return FALSE; // not us
+        return false; // not us
 
 #ifdef FAKE_CTRL_AND_ALT
-    static bool control = FALSE;
-    static bool alt = FALSE;
+    static bool control = false;
+    static bool alt = false;
 //    qDebug(" Has a keyboard with no CTRL and ALT keys, but we fake it:");
-    bool dele=FALSE;
+    bool dele = false;
     if ( e->type() == QEvent::KeyPress || e->type() == QEvent::KeyRelease ) {
         QKeyEvent* ke = (QKeyEvent*)e;
         bool keydown = e->type() == QEvent::KeyPress || ke->isAutoRepeat();

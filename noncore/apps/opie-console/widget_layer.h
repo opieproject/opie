@@ -120,7 +120,7 @@ public:
 	 * @param int value, how much the widget should scroll up (positive value) or down (negative value)
 	 */
 	virtual void scroll( int value ) = 0;
-		
+
 
 	virtual bool eventFilter( QObject *obj, QEvent *event );
 signals:
