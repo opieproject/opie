@@ -154,25 +154,37 @@ void Wellenreiter::addNewItem( QString type, QString essid, QString macaddr, boo
 
     // search, if we had an item with this essid once before
 
-    QListViewItem* item = netview->firstChild();
+    //MScanListItem* item = dynamic_cast<MScanListItem*>( netview->firstChild() );
+    MScanListItem* item = static_cast<MScanListItem*>( netview->firstChild() );
 
     while ( item && ( item->text( 0 ) != essid ) )
     {
         qDebug( "itemtext: %s", (const char*) item->text( 0 ) );
-        item = item->itemBelow();
+        item = dynamic_cast<MScanListItem*>( item->itemBelow() );
     }
     if ( item )
     {
         qDebug( "found!" );
         
-        if ( macaddr != item->text( 2 ) )
-            new MScanListItem( item, type, essid, macaddr, wep, channel, signal );
-        else
-            qDebug( "already there. ignoring..." );
+        // check, if it is the same item (based on MACaddr)
+        
+        if ( macaddr == item->text( 2 ) )
+        {
+            qDebug( "already had item with mac %s", (const char*) item->text( 2 ) );
+            return;
+        }
+               
+        // another item belonging to the same net, so: insert the new item as child
+        
+        new MScanListItem( item, type, essid, macaddr, wep, channel, signal );
     }
+    
     else
     {
-        new MScanListItem( netview, type, essid, macaddr, wep, channel, signal );
+        qDebug( "inserting new network" );
+        MScanListItem* network = new MScanListItem( netview, "networks", essid, QString::null, 0, 0, 0 );
+    
+        new MScanListItem( network, type, essid, macaddr, wep, channel, signal );
     }
 }
 
@@ -183,13 +195,16 @@ void Wellenreiter::buttonClicked()
 
     button->setText( "Stop Scanning" );
 
-    // add some icons, so that we can see if this works
+    // add some test stations, so that we can see if the GUI part works
 
-    addNewItem( "managed", "DummyNet", "04:00:20:EF:A6:43", true, 6, 80 );
-    addNewItem( "adhoc", "DummyNet", "40:03:A3:E7:56:22", false, 11, 30 );
-
+    addNewItem( "managed", "Vanille", "04:00:20:EF:A6:43", true, 6, 80 );
+    addNewItem( "managed", "Vanille", "04:00:20:EF:A6:23", true, 11, 10 );
+    addNewItem( "adhoc", "ELAN", "40:03:43:E7:16:22", false, 3, 10 );
+    addNewItem( "adhoc", "ELAN", "40:03:53:E7:56:62", false, 3, 15 );
+    addNewItem( "adhoc", "ELAN", "40:03:63:E7:56:E2", false, 3, 20 );
+    
     QString command ("98");
 
-    sendcomm( DAEMONADDR, DAEMONPORT, (const char*) command );
+    //sendcomm( DAEMONADDR, DAEMONPORT, (const char*) command );
 
 }

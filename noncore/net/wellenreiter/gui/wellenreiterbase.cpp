@@ -60,11 +60,18 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
     
     netview = new QListView( ap, "netview" );
     netview->addColumn( tr( "SSID" ) );
+    netview->setColumnAlignment( 0, AlignLeft || AlignVCenter );
     netview->addColumn( tr( "Sig" ) );
+    netview->setColumnAlignment( 1, AlignCenter );
     netview->addColumn( tr( "AP" ) );
+    netview->setColumnAlignment( 2, AlignCenter );
     netview->addColumn( tr( "Chn" ) );
+    netview->setColumnAlignment( 3, AlignCenter );
     netview->addColumn( tr( "W" ) );
+    netview->setColumnAlignment( 4, AlignCenter );
     netview->addColumn( tr( "T" ) );
+    netview->setColumnAlignment( 5, AlignCenter );
+    
     netview->setFrameShape( QListView::StyledPanel );
     netview->setFrameShadow( QListView::Sunken );
     netview->setRootIsDecorated( TRUE );

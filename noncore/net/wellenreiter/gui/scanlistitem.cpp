@@ -56,10 +56,14 @@ void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, 
         setPixmap( col_wep, Resource::loadPixmap( "wellenreiter/cracked" ) ); // rename the pixmap!
 
     // set channel and signal text
-    setText( col_sig, QString::number( signal ) );
-    setText( col_channel, QString::number( channel ) );
-    //setText
+    
+    if ( signal != -1 )
+        setText( col_sig, QString::number( signal ) );
+    if ( channel != -1 )
+        setText( col_channel, QString::number( channel ) );
 
     listView()->triggerUpdate();
+    
+    this->type = type;
 
 }

@@ -45,6 +45,10 @@ class MScanListItem: public QListViewItem
 
     virtual void decorateItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal );
 
+  public:
+  
+    QString type;
+    
 };
 
 #endif
