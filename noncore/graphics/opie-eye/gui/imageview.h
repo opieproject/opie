@@ -6,6 +6,8 @@
 #include <qwidget.h>
 
 class QTimer;
+class QActionGroup;
+class QAction;
 
 namespace Opie {
     namespace Core {
@@ -29,12 +31,14 @@ class ImageView:public Opie::MM::OImageScrollView
     };
 
 public:
-    ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name = 0, WFlags fl = 0 );
+    ImageView(Opie::Core::OConfig *cfg,QWidget* parent,const char* name = 0, WFlags fl = 0 );
     virtual ~ImageView();
     Opie::Core::OKeyConfigManager* manager();
     void setFullScreen(bool how);
     bool fullScreen(){return m_isFullScreen;}
     virtual void enableFullscreen();
+    void stopSlide();
+    void setMenuActions(QActionGroup*hGroup,QActionGroup*nextprevGroup, QActionGroup*disptypeGroup);
 
 signals:
     void dispImageInfo(const QString&);
@@ -56,6 +60,7 @@ protected:
     QTimer*m_slideTimer;
     int m_slideValue;
     virtual void focusInEvent ( QFocusEvent * );
+    QActionGroup *m_gDisplayType,*m_gPrevNext,*m_hGroup;
 
 public slots:
     virtual void hide();

@@ -29,6 +29,7 @@ class QMenuBar;
 class QToolBar;
 class QPopupMenu;
 class QAction;
+class QActionGroup;
 class StorageInfo;
 
 class PMainWindow : public QMainWindow {
@@ -42,6 +43,7 @@ public:
 signals:
     void configChanged();
     void changeDir( const QString& );
+    void changeListMode(int);
 
 public slots:
     void slotShowInfo( const QString& inf );
@@ -55,11 +57,13 @@ public slots:
     void slotToggleAutoscale();
     void setDocument( const QString& );
     virtual void slotToggleFullScreen();
+    virtual void slotFullScreenToggled(bool);
 
 protected slots:
     void raiseIconView();
     void closeEvent( QCloseEvent* );
     void showToolbar(bool);
+    void listviewselected(QAction*);
 
 private:
     template<class T>  void initT( const char* name, T**, int );
@@ -75,14 +79,19 @@ private:
     bool autoRotate;
     bool autoScale;
     bool zoomerOn;
-    QToolButton*rotateButton,*fsButton,*viewModeButton;
-    QToolButton*nextButton,*prevButton,*zoomButton,*scaleButton;
-    QMenuBar *menuBar;
+    QToolButton*fsButton;
     QToolBar *toolBar;
-    QPopupMenu *fileMenu,*dispMenu,*fsMenu;
+    QPopupMenu *fileMenu,*dispMenu,*fsMenu,*listviewMenu;
     QAction*m_aShowInfo,*m_aBeam,*m_aTrash,*m_aViewfile,*m_aDirUp,*m_aStartSlide;
-    QAction*m_aHideToolbar;
+    QAction*m_aHideToolbar,*m_aSetup,*m_aDirName,*m_aDirShort,*m_aDirLong;
+    QActionGroup *m_gListViewMode,*m_gDisplayType,*m_gPrevNext,*m_hGroup;
+    QAction *m_aNext,*m_aPrevious,*m_aFullScreen;
+    QAction *m_aAutoRotate,*m_aAutoScale,*m_aZoomer;
 
+    /* init funs */
+    void setupActions();
+    void setupToolbar();
+    void setupMenu();
     /* for the device submenu - ToDo: Merge with the special button */
     StorageInfo *m_storage;
     QMap<QString, QString> m_dev;

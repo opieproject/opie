@@ -8,6 +8,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpopupmenu.h>
 #include <qtimer.h>
+#include <qaction.h>
 
 using namespace Opie::Core;
 
@@ -23,6 +24,16 @@ ImageView::ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name
     QPEApplication::setStylusOperation(viewport(),QPEApplication::RightOnHold);
     initKeys();
     m_slideValue = 5;
+    m_gDisplayType = 0;
+    m_gPrevNext = 0;
+    m_hGroup = 0;
+}
+
+void ImageView::setMenuActions(QActionGroup*hGroup,QActionGroup*nextprevGroup, QActionGroup*disptypeGroup)
+{
+    m_gDisplayType = disptypeGroup;
+    m_gPrevNext = nextprevGroup;
+    m_hGroup = hGroup;
 }
 
 ImageView::~ImageView()
@@ -47,6 +58,16 @@ void ImageView::startSlide(int value)
     m_slideValue=value;
     connect(m_slideTimer,SIGNAL(timeout()),SLOT(nextSlide()));
     m_slideTimer->start(m_slideValue*1000,true);
+}
+
+void ImageView::stopSlide()
+{
+    if (!m_slideTimer) {
+        return;
+    }
+    m_slideTimer->stop();
+    delete m_slideTimer;
+    m_slideTimer = 0;
 }
 
 void ImageView::nextSlide()
@@ -142,18 +163,30 @@ void ImageView::contentsMousePressEvent ( QMouseEvent * e)
     odebug << "Popup " << oendl;
     QPopupMenu *m = new QPopupMenu(0);
     if (!m) return;
-    m->insertItem(tr("Toggle fullscreen"),this, SIGNAL(toggleFullScreen()));
+    if (m_hGroup) {
+        m_hGroup->addTo(m);
+    }
     if (fullScreen()) {
-        m->insertSeparator();
-        m->insertItem(tr("Previous image"),this,SIGNAL(dispPrev()));
-        m->insertItem(tr("Next image"),this,SIGNAL(dispNext()));
-        m->insertSeparator();
-        m->insertItem(tr("Toggle autoscale"),this, SIGNAL(toggleAutoscale()));
-        m->insertItem(tr("Toggle autorotate"),this, SIGNAL(toggleAutorotate()));
-        m->insertItem(tr("Toggle thumbnail"),this, SIGNAL(toggleZoomer()));
+        if (m_gPrevNext) {
+            m->insertSeparator();
+            m_gPrevNext->addTo(m);
+        }
+        if (m_gDisplayType) {
+            m->insertSeparator();
+            m_gDisplayType->addTo(m);
+        }
     }
     m->setFocus();
     m->exec( QPoint( QCursor::pos().x(), QCursor::pos().y()) );
+    if (m_hGroup) {
+        m_hGroup->removeFrom(m);
+    }
+    if (m_gPrevNext) {
+        m_gPrevNext->removeFrom(m);
+    }
+    if (m_gDisplayType) {
+        m_gDisplayType->removeFrom(m);
+    }
     delete m;
 }
 
