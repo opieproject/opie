@@ -607,7 +607,7 @@ void Launcher::properties( AppLnk *appLnk )
     }
 }
 
-void Launcher::storageChanged( const QList<FileSystem> &fs )
+void Launcher::storageChanged( const QList<FileSystem> & )
 {
     // ### update combo boxes if we had a combo box for the storage type
 }
