@@ -10,14 +10,7 @@
 // (c) 2002 Patrick S. Vogt <tille@handhelds.org>
 
 
-#include "mainwindow.h"
 
-#include <qpe/qpemenubar.h>
-#include <qpe/qpemessagebox.h>
-#include <qpe/resource.h>
-#include <qpe/config.h>
-#include <qpe/qpetoolbar.h>
-#include <qpe/qpeapplication.h>
 #include <qaction.h>
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
@@ -32,6 +25,16 @@
 #include <qlineedit.h>
 #include <qtextbrowser.h>
 #include <qregexp.h>
+#include <qwhatsthis.h>
+#include <qpe/qpemenubar.h>
+#include <qpe/qpemessagebox.h>
+#include <qpe/resource.h>
+#include <qpe/config.h>
+#include <qpe/qpetoolbar.h>
+#include <qpe/qpeapplication.h>
+#include <qpe/config.h>
+#include <qpe/global.h>
+#include <opie/owait.h>
 
 #include "olistview.h"
 #include "olistviewitem.h"
@@ -41,35 +44,36 @@
 #include "datebooksearch.h"
 #include "applnksearch.h"
 #include "doclnksearch.h"
+#include "mainwindow.h"
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   QMainWindow( parent, name, f ), _currentItem(0)
 {
   setCaption( tr("OSearch") );
 
-  setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding));
+  setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
 
   QFrame *mainFrame = new QFrame( this, "mainFrame" );
+  mainFrame->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
 
   mainLayout = new QVBoxLayout( mainFrame );
   mainLayout->setSpacing( 0 );
   mainLayout->setMargin( 0 );
 
   resultsList = new OListView( mainFrame );
-  resultsList->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding));
-  mainLayout->addWidget( resultsList, 1 );
+  resultsList->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
+  mainLayout->addWidget( resultsList );
 
   detailsFrame = new QFrame( mainFrame, "detailsFrame" );
   QVBoxLayout *detailsLayout = new QVBoxLayout( detailsFrame );
   richEdit = new QTextView( detailsFrame );
-  richEdit->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding));
-  //richEdit->setSizePolicy( QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum ));
-  detailsLayout->addWidget( richEdit, 1 );
+  QWhatsThis::add( richEdit, tr("The details of the current result") );
+  richEdit->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
+  detailsLayout->addWidget( richEdit );
 
   buttonGroupActions = new QHButtonGroup( this );
   buttonGroupActions->hide();
   _buttonCount = 0;
-//  buttonGroupActions->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
 
   buttonLayout = new QHBoxLayout( detailsFrame );
   detailsLayout->addLayout( buttonLayout );
@@ -77,22 +81,30 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   mainLayout->addWidget( detailsFrame );
   detailsFrame->hide();
 
-  searches.append( new AdressSearch( resultsList, tr("adressbook") ) );
-  searches.append( new TodoSearch( resultsList, tr("todo") ) );
-  searches.append( new DatebookSearch( resultsList, tr("datebook") ) );
   searches.append( new AppLnkSearch( resultsList, tr("applications") ) );
   searches.append( new DocLnkSearch( resultsList, tr("documents") ) );
+  searches.append( new TodoSearch( resultsList, tr("todo") ) );
+  searches.append( new DatebookSearch( resultsList, tr("datebook") ) );
+  searches.append( new AdressSearch( resultsList, tr("adressbook") ) );
 
-  makeMenu();
   setCentralWidget( mainFrame );
 
   popupTimer = new QTimer();
+  searchTimer = new QTimer();
 
   connect(popupTimer, SIGNAL(timeout()), SLOT(showPopup()));
+  connect(searchTimer, SIGNAL(timeout()), SLOT(searchStringChanged()));
   connect(resultsList, SIGNAL(pressed(QListViewItem*)), SLOT(setCurrent(QListViewItem*)));
   connect(resultsList, SIGNAL(clicked(QListViewItem*)), SLOT(stopTimer(QListViewItem*)));
   connect(buttonGroupActions, SIGNAL(clicked(int)), SLOT( slotAction(int) ) );
 
+  makeMenu();
+
+   Config cfg( "osearch", Config::User );
+   cfg.setGroup( "search_settings" );
+   actionCaseSensitiv->setOn( cfg.readBoolEntry( "caseSensitiv", false ) );
+   actionWildcards->setOn( cfg.readBoolEntry( "wildcards", false ) );
+//   actionWholeWordsOnly->setOn( cfg.readBoolEntry( "whole_words_only", false ) );
 }
 
 void MainWindow::makeMenu()
@@ -102,27 +114,49 @@ void MainWindow::makeMenu()
    QPEMenuBar *menuBar = new QPEMenuBar( toolBar );
    QPopupMenu *searchMenu = new QPopupMenu( menuBar );
 //   QPopupMenu *viewMenu = new QPopupMenu( menuBar );
-//   QPopupMenu *cfgMenu = new QPopupMenu( menuBar );
-//
+   QPopupMenu *cfgMenu = new QPopupMenu( menuBar );
+   QPopupMenu *searchOptions = new QPopupMenu( cfgMenu );
+
    setToolBarsMovable( false );
    toolBar->setHorizontalStretchable( true );
    menuBar->insertItem( tr( "Search" ), searchMenu );
-//   menuBar->insertItem( tr( "View" ), viewMenu );
-//   menuBar->insertItem( tr( "Settings" ), cfgMenu );
+   menuBar->insertItem( tr( "Settings" ), cfgMenu );
+
+   //SETTINGS MENU
+   cfgMenu->insertItem( tr( "Search" ), searchOptions );
+   QPopupMenu *pop;
+   for (SearchGroup *s = searches.first(); s != 0; s = searches.next() ){
+		pop = s->popupMenu();
+		if (pop){
+			cfgMenu->insertItem( s->text(0), pop );
+		}
+  }
+
 
   //SEARCH
-  QAction *action = new QAction( tr("Search all"),QString::null,  0, this, 0 );
-  connect( action, SIGNAL(activated()), this, SLOT(searchAll()) );
-  action->addTo( searchMenu );
-  actionCaseSensitiv = new QAction( tr("Case sensitiv"),QString::null,  0, this, 0, true );
-  actionCaseSensitiv->addTo( searchMenu );
-  actionWildcards = new QAction( tr("Use wildcards"),QString::null,  0, this, 0, true );
-  actionWildcards->addTo( searchMenu );
+  SearchAllAction = new QAction( tr("Search all"),QString::null,  0, this, 0 );
+  SearchAllAction->setIconSet( Resource::loadIconSet( "find" ) );
+ // QWhatsThis::add( SearchAllAction, tr("Search everything...") );
+  connect( SearchAllAction, SIGNAL(activated()), this, SLOT(searchAll()) );
+  SearchAllAction->addTo( searchMenu );
+  searchMenu->insertItem( tr( "Options" ), searchOptions );
 
+  //SEARCH OPTIONS
+  //actionWholeWordsOnly = new QAction( tr("Whole words only"),QString::null,  0, this, 0, true );
+  //actionWholeWordsOnly->addTo( searchOptions );
+  actionCaseSensitiv = new QAction( tr("Case sensitiv"),QString::null,  0, this, 0, true );
+  actionCaseSensitiv->addTo( searchOptions );
+  actionWildcards = new QAction( tr("Use wildcards"),QString::null,  0, this, 0, true );
+  actionWildcards->addTo( searchOptions );
+
+  //SEARCH BAR
   addToolBar( searchBar, "Search", QMainWindow::Top, TRUE );
   QLineEdit *searchEdit = new QLineEdit( searchBar, "seachEdit" );
+  QWhatsThis::add( searchEdit, tr("Enter your search terms here") );
+  searchEdit->setFocus();
   searchBar->setHorizontalStretchable( TRUE );
   searchBar->setStretchableWidget( searchEdit );
+  SearchAllAction->addTo( searchBar );
   connect( searchEdit, SIGNAL( textChanged( const QString & ) ),
        this, SLOT( setSearch( const QString & ) ) );
 
@@ -130,6 +164,11 @@ void MainWindow::makeMenu()
 
 MainWindow::~MainWindow()
 {
+   Config cfg( "osearch", Config::User );
+   cfg.setGroup( "search_settings" );
+   cfg.writeEntry( "caseSensitiv", actionCaseSensitiv->isOn() );
+   cfg.writeEntry( "wildcards", actionWildcards->isOn() );
+   //cfg.writeEntry( "whole_words_only", actionWholeWordsOnly->isOn() );
 }
 
 void MainWindow::setCurrent(QListViewItem *item)
@@ -145,9 +184,7 @@ void MainWindow::setCurrent(QListViewItem *item)
 		QButton *button;
 		for (uint i = 0; i < acts.count(); i++){
 			button = buttonGroupActions->find( i );
-			qDebug("action %i >%s<",i,acts[i]->latin1());
 			if (!button) {
-				qDebug("BUTTON");
 				button = new QPushButton( detailsFrame );
 				buttonLayout->addWidget( button, 0 );
 				buttonGroupActions->insert( button, i);
@@ -156,19 +193,13 @@ void MainWindow::setCurrent(QListViewItem *item)
 			button->show();
 		}
 		for (uint i = acts.count(); i < _buttonCount; i++){
-			qDebug("remove button %i of %i",i, _buttonCount);
 			button = buttonGroupActions->find( i );
 			if (button) button->hide();
 		}
 		_buttonCount = acts.count();
-// 		buttonShow = new QPushButton( detailsFrame, "Show" ) ;
-// 		buttonShow->setText( "test" );
-// 		buttonLayout->addWidget( buttonShow, 0 );
-// buttonGroupActions->insert(buttonShow);
 		detailsFrame->show();
 	}else detailsFrame->hide();
-	//_currentItem = (OListViewItem*)item;
-	popupTimer->start( 300 );
+	popupTimer->start( 300, true );
 }
 
 void MainWindow::stopTimer(QListViewItem*)
@@ -178,26 +209,49 @@ void MainWindow::stopTimer(QListViewItem*)
 
 void MainWindow::showPopup()
 {
-	qDebug("showPopup");
+	popupTimer->stop();
         if (!_currentItem) return;
+	QPopupMenu *pop = _currentItem->popupMenu();
+	if (pop) pop->popup( QCursor::pos() );
 }
 
 void MainWindow::setSearch( const QString &key )
 {
-	QRegExp re( key, actionCaseSensitiv->isOn(), actionWildcards->isOn() );
+	searchTimer->stop();
+	_searchString = key;
+	searchTimer->start( 300 );
+}
+
+void MainWindow::searchStringChanged()
+{
+#ifdef NEW_OWAIT
+	OWait("setting search string");
+#endif
+	searchTimer->stop();
+	QString ss = _searchString;
+	//ss = Global::stringQuote( _searchString );
+//	if (actionWholeWordsOnly->isOn())
+//		ss = "\\s"+_searchString+"\\s";
+//	qDebug(" set searchString >%s<",ss.latin1());
+	QRegExp re( ss );
+	re.setCaseSensitive( actionCaseSensitiv->isOn() );
+	re.setWildcard( actionWildcards->isOn() );
 	for (SearchGroup *s = searches.first(); s != 0; s = searches.next() )
 		s->setSearch( re );
 }
 
 void MainWindow::searchAll()
 {
-	bool openState;
+#ifdef NEW_OWAIT
+	OWait("searching...");
+#endif
 	for (SearchGroup *s = searches.first(); s != 0; s = searches.next() ){
 		s->doSearch();
+		//resultsList->repaint();
 	}
 }
 
-void MainWindow::slotAction( int act)
+void MainWindow::slotAction( int act )
 {
 	if (_currentItem->rtti() == OListViewItem::Result){
 		ResultItem *res = (ResultItem*)_currentItem;
@@ -206,3 +260,7 @@ void MainWindow::slotAction( int act)
 	}
 }
 
+void MainWindow::optionChanged(int i)
+{
+	searchStringChanged();
+}

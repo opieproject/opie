@@ -13,6 +13,8 @@
 #include "eventitem.h"
 
 #include <qdatetime.h>
+#include <qpixmap.h>
+#include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <opie/oevent.h>
 
@@ -21,6 +23,7 @@ EventItem::EventItem(OListViewItem* parent, OEvent *event)
 {
 	_event = event;
 	setText(0, _event->toShortText() );
+	setIcon();
 }
 
 
@@ -51,4 +54,31 @@ QIntDict<QString> EventItem::actions()
 	result.insert( 0, new QString( QObject::tr("show") ) );
 	result.insert( 1, new QString( QObject::tr("edit") ) );
 	return result;
+}
+
+void EventItem::setIcon()
+{
+	QPixmap icon;
+	switch ( _event->lastHitField() ) {
+	case -1:
+		icon = Resource::loadPixmap( "reset" );
+		break;
+	case Qtopia::DatebookDescription:
+		icon = Resource::loadPixmap( "osearch/summary" );
+ 		break;
+ 	case Qtopia::Notes:
+		icon = Resource::loadPixmap( "txt" );
+ 		break;
+	case Qtopia::Location:
+		icon = Resource::loadPixmap( "home" );
+ 		break;
+ 	case Qtopia::StartDateTime:
+ 	case Qtopia::EndDateTime:
+		icon = Resource::loadPixmap( "osearch/clock" );
+ 		break;
+	default:
+		icon = Resource::loadPixmap( "DocsIcon" );
+		break;
+	}
+	setPixmap( 0, icon );
 }

@@ -16,6 +16,7 @@
 #include "olistviewitem.h"
 
 class QRegExp;
+class QPopupMenu;
 
 /**
 @author Patrick S. Vogt
@@ -33,14 +34,16 @@ public:
     virtual int rtti() { return Searchgroup;}
 
 protected:
-	QRegExp _search;
 	virtual void load() = 0;
 	virtual int search() = 0;
 	virtual void insertItem( void* ) = 0;
-	void clearList();
+	QRegExp _search;
+	QRegExp _lastSearch;
 	QString _name;
-	bool expanded;
 	bool loaded;
+	int _resultCount;
+private:
+	int realSearch();
 };
 
 #endif

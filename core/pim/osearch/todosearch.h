@@ -16,6 +16,7 @@
 #include "searchgroup.h"
 
 class OTodoAccess;
+class QAction;
 
 /**
 @author Patrick S. Vogt
@@ -24,8 +25,9 @@ class TodoSearch : public SearchGroup
 {
 public:
     TodoSearch(QListView* parent, QString name);
-
     ~TodoSearch();
+
+    virtual QPopupMenu* popupMenu();
 
 protected:
 	virtual void load();
@@ -34,6 +36,8 @@ protected:
 
 private:
     OTodoAccess *_todos;
+    QAction *actionShowCompleted;
+    QPopupMenu *_popupMenu;
 };
 
 #endif

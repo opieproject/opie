@@ -2,7 +2,7 @@
 //
 // C++ Interface: $MODULE$
 //
-// Description: 
+// Description:
 //
 //
 // Author: Patrick S. Vogt <tille@handhelds.org>, (C) 2003
@@ -15,18 +15,27 @@
 
 #include "applnksearch.h"
 
+class QAction;
+class QPopupMenu;
+
 /**
 @author Patrick S. Vogt
 */
-class DocLnkSearch : public AppLnkSearch 
+class DocLnkSearch : public AppLnkSearch
 {
 public:
     DocLnkSearch(QListView* parent, QString name);
     ~DocLnkSearch();
 
+    virtual QPopupMenu* popupMenu();
+
 protected:
 	virtual void load();
+	virtual bool searchFile(AppLnk*);
 	virtual void insertItem( void* );
+private:
+	QAction *actionSearchInFiles;
+	QPopupMenu *_popupMenu;
 
 };
 

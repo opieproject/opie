@@ -16,6 +16,7 @@
 #include "searchgroup.h"
 
 class ODateBookAccess;
+class QAction;
 
 /**
 @author Patrick S. Vogt
@@ -24,8 +25,9 @@ class DatebookSearch : public SearchGroup
 {
 public:
     DatebookSearch(QListView* parent, QString name);
-
     ~DatebookSearch();
+
+    virtual QPopupMenu* popupMenu();
 
 protected:
 	virtual void load();
@@ -34,7 +36,9 @@ protected:
 
 private:
     ODateBookAccess *_dates;
-
+    QAction *actionShowPastEvents;
+    QAction *actionSearchInDates;
+    QPopupMenu *_popupMenu;
 };
 
 #endif

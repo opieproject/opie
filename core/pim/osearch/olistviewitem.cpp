@@ -28,3 +28,14 @@ OListViewItem::~OListViewItem()
 {
 }
 
+void OListViewItem::clearList()
+{
+	QListViewItem *item = firstChild();
+	QListViewItem *toDel;
+	while ( item != 0 ) {
+		toDel = item;
+		item = item->nextSibling();
+	 	delete toDel;
+	}
+}
+

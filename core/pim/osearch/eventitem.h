@@ -32,6 +32,7 @@ public:
     virtual QIntDict<QString> actions();
 
 private:
+    void setIcon();
     OEvent *_event;
 
 };

@@ -33,6 +33,7 @@ public:
 
 
 private:
+	void setIcon();
 	OContact *_contact;
 
 };
