@@ -5,7 +5,8 @@
 
 class OProcess;
 class QString;
-
+class QTimer;
+class QSocket;
 
 class Ntp : public SetDateTime
 {
@@ -23,6 +24,8 @@ private:
 		QString _ntpOutput;
    	float _shiftPerSec;
     OProcess *ntpProcess;
+    QTimer *ntpTimer;
+    QSocket *ntpSock;
 
    	float getTimeShift();
 	  void readLookups();
@@ -33,6 +36,8 @@ private slots:
 	  void preditctTime();
 	  void slotCheckNtp(int);
 	  void setPredictTime();
+	  void slotProbeNtpServer();
+	  void slotNtpDelayChanged(int);
 };
 
 #endif

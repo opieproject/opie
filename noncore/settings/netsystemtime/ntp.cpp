@@ -1,6 +1,7 @@
 #include "ntp.h"
 #include <qpushbutton.h>
 #include <qregexp.h>
+#include <qtimer.h>
 #include <qtable.h>
 #include <qlabel.h>
 #include <qsocket.h>
@@ -23,19 +24,36 @@
 Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
     : SetDateTime( parent, name, fl )
 {
+ 	 	
+	Config ntpSrvs("/etc/ntpservers",Config::File);
+  ntpSrvs.setGroup("servers");
+  int srvCount = ntpSrvs.readNumEntry("count", 0 );
+  for (int i = 0; i < srvCount; i++)
+  {
+	  ntpSrvs.setGroup(QString::number(i));
+   	ComboNtpSrv->insertItem( ntpSrvs.readEntry("name") );
+  }
+  if ( srvCount==0 ) ComboNtpSrv->insertItem(tr("time.fu-berlin.de"));
+
 	Config cfg("ntp",Config::User);
   cfg.setGroup("settings");
 // 	_maxOffset = cfg.readNumEntry("maxOffset",5);
 //  _minLookupDiff = cfg.readNumEntry("minLookupDiff",10);
-	SpinBoxMinLookupDelay->setValue( cfg.readNumEntry("minLookupDiff",60) );
-	SpinBoxNtpDelay->setValue( cfg.readNumEntry("ntpRefreshFreq",60) );
-  LineEditNtpSrv->setText( cfg.readEntry("ntpServer", tr("time.fu-berlin.de")) );
- 	ntpProcess = new OProcess( );
+	SpinBoxMinLookupDelay->setValue( cfg.readNumEntry("minLookupDiff",41) );
+	SpinBoxNtpDelay->setValue( cfg.readNumEntry("ntpRefreshFreq",42) );
+  ComboNtpSrv->setCurrentItem( cfg.readNumEntry("ntpServer", 0) );
 
-  QSocket *ntpSock = new QSocket( this );
-  ntpSock->connectToHost( LineEditNtpSrv->text() ,123);
+  ntpTimer = new QTimer(this);
+	ntpTimer->start(SpinBoxNtpDelay->value()*100);
+
+ 	ntpProcess = new OProcess( );
+  connect( SpinBoxNtpDelay, SIGNAL( valueChanged(int) ),
+  					SLOT(slotNtpDelayChanged(int)) );
+
+  ntpSock = new QSocket( this );
   connect( ntpSock, SIGNAL( error(int) ),
   					SLOT(slotCheckNtp(int)) );
+  slotProbeNtpServer();
 
   connect ( ntpProcess, SIGNAL(receivedStdout(OProcess*,char*,int)),
   					this, SLOT(getNtpOutput(OProcess*,char*,int)));
@@ -43,16 +61,26 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
   					this, SLOT(ntpFinished(OProcess*)));
   connect(runNtp, SIGNAL(clicked()), this, SLOT(slotRunNtp()));
   connect(PushButtonPredict, SIGNAL(clicked()), this, SLOT(preditctTime()));
+  connect(PushButtonSetPredTime, SIGNAL(clicked()), this, SLOT(setPredictTime()));
   slotCheckNtp(-1);
-//  slotRunNtp();
   readLookups();
 }
 
 Ntp::~Ntp()
 {
+	delete ntpProcess;
+	Config ntpSrvs("/etc/ntpservers",Config::File);
+  ntpSrvs.setGroup("servers");
+  int srvCount = ComboNtpSrv->count();
+  ntpSrvs.writeEntry("count", srvCount);
+  for (int i = 0; i < srvCount; i++)
+  {
+	  ntpSrvs.setGroup(QString::number(i));
+   	ntpSrvs.writeEntry( "name", ComboNtpSrv->text(i) );
+  }
 	Config cfg("ntp",Config::User);
   cfg.setGroup("settings");
-  cfg.writeEntry("ntpServer", LineEditNtpSrv->text());
+  cfg.writeEntry("ntpServer", ComboNtpSrv->currentItem());
   cfg.writeEntry( "minLookupDiff", SpinBoxMinLookupDelay->value() );
  	cfg.writeEntry( "ntpRefreshFreq", SpinBoxNtpDelay->value() );
 }
@@ -79,8 +107,9 @@ void Ntp::slotRunNtp()
       }
   }
 	TextLabelStartTime->setText(QDateTime::currentDateTime().toString());
+  MultiLineEditntpOutPut->append( "\n"+tr("Running:")+"\nntpdate "+ ComboNtpSrv->currentText()+"\n");
 	ntpProcess->clearArguments();
-	*ntpProcess << "ntpdate" << LineEditNtpSrv->text();
+	*ntpProcess << "ntpdate" << ComboNtpSrv->currentText();
 	bool ret = ntpProcess->start(OProcess::NotifyOnExit,OProcess::AllOutput);
   if ( !ret ) {
      qDebug("Error while executing ntp");
@@ -190,6 +219,7 @@ void Ntp::preditctTime()
   setenv( "TZ", tz->currentZone(), 1 );
   int now = TimeConversion::toUTC( QDateTime::currentDateTime() );
   int corr = int((now - lastTime) * _shiftPerSec);
+  TextLabelEstimatedShift->setText(QString::number(corr)+tr(" seconds"));
   predictedTime = QDateTime::currentDateTime().addSecs(corr);
  	TextLabelPredTime->setText(predictedTime.toString());
   TextLabelMainPredTime->setText(tr("Predicted time:")+"<br><b>"+predictedTime.toString()+"</b>");
@@ -208,9 +238,35 @@ void Ntp::slotCheckNtp(int i)
     TextLabelMainPredTime->hide();
     ButtonSetTime->setText( tr("Get time from network") );
 	  connect( ButtonSetTime, SIGNAL(clicked()), SLOT(slotRunNtp()) );
+		Config cfg("ntp",Config::User);
+  	cfg.setGroup("lookups");
+		int lookupDiff = TimeConversion::toUTC(QDateTime::currentDateTime()) - cfg.readNumEntry("time",0);
+  	if ( lookupDiff > SpinBoxNtpDelay->value()*60 )
+   	{
+	  	disconnect(ntpTimer, SIGNAL( timeout() ), this, SLOT(slotProbeNtpServer()) );
+    	connect(ntpTimer, SIGNAL( timeout() ), SLOT(slotRunNtp()) );
+	  }else{
+    	disconnect(ntpTimer, SIGNAL( timeout() ), this, SLOT(slotRunNtp()) );
+		  connect(ntpTimer, SIGNAL( timeout() ), SLOT(slotProbeNtpServer()) );
+    }
   }else{
 	  preditctTime();
 		ButtonSetTime->setText( tr("Set predicted time") );
   	connect( ButtonSetTime, SIGNAL(clicked()), SLOT(setPredictTime()) );
-  };
+	  connect( ntpTimer, SIGNAL( timeout() ), SLOT(slotProbeNtpServer()) );
+  }
+}
+
+void Ntp::slotProbeNtpServer()
+{
+	Config cfg("ntp",Config::User);
+  cfg.setGroup("lookups");
+	int lookupDiff = TimeConversion::toUTC(QDateTime::currentDateTime()) - cfg.readNumEntry("time",0);
+  if ( lookupDiff > SpinBoxNtpDelay->value()*60 )
+  ntpSock->connectToHost( ComboNtpSrv->currentText() ,123);
+}
+
+void Ntp::slotNtpDelayChanged(int delay)
+{
+  ntpTimer->changeInterval( delay*100 );
 }
