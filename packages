@@ -152,6 +152,7 @@ CONFIG_TODAY_MAIL	core/pim/today/plugins/mail	mail.pro
 CONFIG_TODAY_STOCKTICKER	noncore/todayplugins/stockticker/stockticker	stockticker.pro
 CONFIG_TODAY_STOCKTICKERLIB	noncore/todayplugins/stockticker/stocktickerlib	stocktickerlib.pro
 CONFIG_TODAY_TODOLIST	core/pim/today/plugins/todolist	todolist.pro
+CONFIG_TODAY_ADDRESSBOOK core/pim/today/plugins/addressbook addressbook.pro
 CONFIG_TODO	core/pim/todo	todo.pro
 CONFIG_UNIKEYBOARD	inputmethods/unikeyboard	unikeyboard.pro
 CONFIG_USERMANAGER	noncore/settings/usermanager	usermanager.pro
