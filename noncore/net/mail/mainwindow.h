@@ -24,8 +24,11 @@ public:
 public slots:
     virtual void slotAdjustColumns();
     virtual void appMessage(const QCString &msg, const QByteArray &data);
+    virtual void slotComposeMail();
     
 protected slots:
+    virtual void slotSendQueued();
+    virtual void slotEditAccounts();
     virtual void slotShowFolders( bool show );
     virtual void refreshMailView(QList<RecMail>*);
     virtual void displayMail();

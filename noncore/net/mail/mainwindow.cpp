@@ -203,3 +203,15 @@ void MainWindow::mailHold(int, QListViewItem *,const QPoint&,int  )
 {
     qDebug("mailHold not reached");
 }
+
+void MainWindow::slotSendQueued()
+{
+}
+    
+void MainWindow::slotEditAccounts()
+{
+}
+
+void MainWindow::slotComposeMail()
+{
+}
