@@ -51,7 +51,7 @@ AddressBookPluginWidget::~AddressBookPluginWidget() {
 
 void AddressBookPluginWidget::refresh( const Opie::OPimContactAccess* )
 {
-	oerr << " AddressBookPluginWidget::Database was changed externally ! " << oendl;
+	owarn << " AddressBookPluginWidget::Database was changed externally ! " << oendl;
 	m_contactdb->reload();
 	getAddress();
 }
@@ -105,7 +105,7 @@ void AddressBookPluginWidget::getAddress() {
 	QDate lookAheadDate = QDate::currentDate().addDays( m_daysLookAhead );
 	int ammount = 0;
 	if ( m_showBirthdays ){
-		oerr << "Searching from now (" << QDate::currentDate().toString() << ") until "
+		owarn << "Searching from now (" << QDate::currentDate().toString() << ") until "
 						<< lookAheadDate.toString() << " ! " << oendl;
     }
 
