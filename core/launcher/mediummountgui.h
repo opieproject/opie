@@ -17,7 +17,7 @@ class MediumMountGui : public QDialog
     Q_OBJECT
 
 public:
-    MediumMountGui( const QString &path = "/tmp/", QWidget* parent = 0, const char* name = 0, bool modal = FALSE    ,WFlags fl = 0 );
+    MediumMountGui( const QString &path = "tmp/", QWidget* parent = 0, const char* name = 0, bool modal = FALSE    ,WFlags fl = 0 );
     ~MediumMountGui();
 
 protected:    
@@ -43,11 +43,12 @@ public:
 private:
     void startGui();
     void readConfig();
-    void writeConfig();	
+    void writeConfig(bool checkagain);	
 
 private slots:
-	void yesPressed();
-	void noPressed();
+    void yesPressed();
+    void noPressed();
+
 private:
     QString mediumPath;
 
@@ -56,8 +57,8 @@ private:
     bool checkmimeimage;
     bool checkmimetext;
     bool checkmimevideo;
-QString limittodirs;
-QStringList mimeTypeList;
+    QString limittodirs;
+    QStringList mimeTypeList;
 
 };
 

@@ -7,6 +7,7 @@ DESTDIR		= $(OPIEDIR)/bin
 HEADERS		= background.h \
 		  desktop.h \
 		  qprocess.h \
+		  mediummountgui.h \
 		  info.h \
 		  appicons.h \
 		  taskbar.h \
@@ -47,6 +48,7 @@ HEADERS		= background.h \
 
 SOURCES		= background.cpp \
 		  desktop.cpp \
+		  mediummountgui.cpp \
 		  qprocess.cpp qprocess_unix.cpp \
 		  info.cpp \
 		  appicons.cpp \
@@ -107,7 +109,7 @@ DEPENDPATH	+= $(OPIEDIR)/rsync
 
 TARGET		= qpe
 
-LIBS		+= -lqpe -lcrypt
+LIBS		+= -lqpe -lcrypt -lopie
 
 TRANSLATIONS = ../i18n/de/qpe.ts
 TRANSLATIONS += ../i18n/pt_BR/qpe.ts

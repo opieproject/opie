@@ -42,13 +42,13 @@ void MediumMountGui::readConfig(){
   checkagain = cfg.readBoolEntry("check", false);
   
   cfg.setGroup("mimetypes");
-  checkmimeaudio = cfg.readBoolEntry("audio", false);
+  checkmimeaudio = cfg.readBoolEntry("audio", true);
   checkmimeimage = cfg.readBoolEntry("image", true);
   checkmimetext  = cfg.readBoolEntry("text", true);
   checkmimevideo = cfg.readBoolEntry("video", true);
 
   cfg.setGroup("dirs");
-  limittodirs = cfg.readEntry("dirs", "/");
+  limittodirs = cfg.readEntry("dirs", "");
 }
 
 bool MediumMountGui::check() {
@@ -60,12 +60,13 @@ QStringList MediumMountGui::dirs() {
   return list;
 }
 
-void MediumMountGui::writeConfig() {
+void MediumMountGui::writeConfig(bool autocheck) {
 
   OConfig cfg (mediumPath +"/.opiestorage.cf");
   cfg.setGroup("main");
   cfg.writeEntry("check",  AskBox->isChecked() );
-  
+  cfg.writeEntry("autocheck", autocheck );  
+
   cfg.setGroup("mimetypes");
   cfg.writeEntry("audio", CheckBoxAudio->isChecked() );
   cfg.writeEntry("image",CheckBoxImage->isChecked() );
@@ -73,7 +74,7 @@ void MediumMountGui::writeConfig() {
   cfg.writeEntry("video",CheckBoxVideo->isChecked() );
 
   cfg.setGroup("dirs");
-  cfg.writeEntry("dirs", "/"); 
+  cfg.writeEntry("dirs", ""); 
 
 
   if (checkmimeaudio) {
@@ -172,8 +173,9 @@ void MediumMountGui::startGui() {
 }
 
 void MediumMountGui::yesPressed() {
-  writeConfig();
+  writeConfig(true);
   // and do something
+  accept();
 }
 
 
@@ -182,7 +184,8 @@ QStringList MediumMountGui::mimeTypes(){
 }
 
 void MediumMountGui::noPressed() {
-  close();
+  writeConfig(false);
+  reject();
 }
 
 MediumMountGui::~MediumMountGui(){
