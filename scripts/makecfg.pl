@@ -10,8 +10,9 @@ open(FILE, "<./packages");
 while(<FILE>){$packages.=$_;}
 close(FILE);
 
-my ($dirname,$dir,$file,@files,$filename,$tagname,$name,$caps,$pre,$post,$sources,@dupecheck);
+my ($dirname,$dir,$file,@files,$filename,$tagname,$name,$caps,$pre,$post,$sources,@dupecheck,$basedir);
 $file = shift || die;
+$basedir = shift;
 push(@files, $file);
 
 foreach(@files){
@@ -52,34 +53,6 @@ close(CFG);
 }
 exit;
 
-open(FILE,">$dir/config.in");
-select(FILE);
-print "menu \"$name\"\n";
-print "\n";
-my @subdirs=();
-my @dirs;
-foreach(grep(/^$dir/, @dirs)){
-	chomp;
-	/^$dir\/$name.pro$/ && next;
-	my $localdir=$_;
-	if($dir=~m,^$localdir$,){
-		next;
-	}
-#($locadir=$_)~s,/[^/]+$,,g;
-	if($localdir=~/^\.$/){next;}
-	if(grep(/^$localdir$/, @subdirs)){next;}
-	my $nslashes = $localdir =~ tr!/!!;
-	my $dirnslashes = $dir =~ tr!/!!;
-	$dirnslashes++;
-	if($dirnslashes != $nslashes ){next;}
-	print STDERR "$localdir/config.in\n";
-	print "  source $localdir/config.in\n";
-	push(@subdirs, $localdir);
-	print "endmenu\n";
-	select(STDOUT);
-	close(FILE);
-}
-
 use vars qw/*name *dir *prune/;
 *name   = *File::Find::name;
 *dir    = *File::Find::dir;
@@ -96,7 +69,11 @@ sub wanted {
 #		print STDERR "dirnslashes is $dirnslashes\n";
 #		print STDERR "nslashes is $nslashes\n";
 		if($dirnslashes != $nslashes){return;}
-		print "  source " . $File::Find::dir . "/config.in\n";
+		my $reldir;
+		if (defined($basedir)) {
+			($reldir=$File::Find::dir)=~s,^$basedir/,,;
+		}
+		print "  source " . $reldir . "/config.in\n";
 		push(@dupecheck, $File::Find::dir . "/config.in");
 	}
 }

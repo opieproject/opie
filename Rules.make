@@ -86,5 +86,5 @@ define makefilegen
 endef
 
 define makecfg
-	$(TOPDIR)/scripts/makecfg.pl $1
+	$(TOPDIR)/scripts/makecfg.pl $1 $(OPIEDIR)
 endef
