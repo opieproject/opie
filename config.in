@@ -16,7 +16,10 @@ choice
     boolean "Mac OS X (DARWIN)"
 
   config TARGET_SHARP
-    boolean "Sharp Zaurus"
+    boolean "Sharp Zaurus w/ SA1100 (5000 and 5500)"
+
+  config TARGET_C700
+    boolean "Sharp Zaurus w/ PXA25x (5600, C7x0, C8x0)"
 
   config TARGET_IPAQ
     boolean "iPAQ"
@@ -51,7 +54,8 @@ config RELEASE
   
 config QUICK_LAUNCH
   boolean "Enable Quick Launch"
-  default n
+  default n if TARGET_X86
+  default y if ! TARGET_X86
   
 config QUICKLAUNCH_PATH
   string "Path to quicklauncher"
@@ -89,6 +93,7 @@ config OPTIMIZATIONS
   default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_SHARP
   default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_RAMSES
   default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_SIMPAD
+  default "-march=armv5te -mtune=xscale -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_C700
 
 config EXPERIMENTAL
   bool "Prompt for development and/or incomplete items"
@@ -103,22 +108,22 @@ config OPIE_NO_OVERRIDE_QT
 
 config OPIE_NO_BUILTIN_SHUTDOWN
   boolean "Disable the built in shutdown application"
-  default n
+  default y
 
 config OPIE_NO_BUILTIN_CALIBRATE
   boolean "Disable the built in calibrate application"
   default y if TARGET_YOPY
-  default n
+  default n if ! TARGET_YOPY
 
 config OPIE_SOUND_FRAGMENT_SHIFT
   string  "The sound fragment used in Opie Player I"
   default "14" if TARGET_IPAQ
-  default "16" if (!TARGET_IPAQ)
+  default "16" if ! TARGET_IPAQ
 
 config USE_REALTIME_AUDIO_THREAD
   boolean "Use a realtime thread in Opie Player I"
   default y if TARGET_IPAQ || TARGET_SIMPAD || TARGET_RAMSES || TARGET_SHARP
-  default n
+  default n if ! (TARGET_IPAQ || TARGET_SIMPAD || TARGET_RAMSES || TARGET_SHARP)
 
 config QT_QWS_ALLOW_OVERCLOCK
   boolean "Allow the user to overclock the device"
@@ -128,17 +133,21 @@ config QT_QWS_ALLOW_OVERCLOCK
 config OPIE_HIGH_RES_SMALL_PHY
   boolean "Resolution is bigger than physical screen"
   default y if TARGET_C700
-  default n
+  default n if ! TARGET_C700
+
+config USE_FILE_NOTIFICATION
+  boolean "Substitute (some) polling interfaces with OFileNotifier"
+  default y
 
 config OPIE_NEW_ALLOC
   boolean "Use malloc and free for the implementation"
   default y if TARGET_RAMSES || TARGET_IPAQ || TARGET_SIMPAD || TARGET_SHARP
-  default n
+  default n if ! (TARGET_IPAQ || TARGET_SIMPAD || TARGET_RAMSES || TARGET_SHARP)
 
 config OPIE_NO_SOUND_PCM_READ_BITS
   boolean "There is not a pcm_read_bits io control"
   default y if TARGET_SHARP
-  default n
+  default n if ! TARGET_SHARP
 
 config OPIE_WE_VERSION_OVERRIDE
   boolean "Override autodetection of wireless extension (WE) version"
