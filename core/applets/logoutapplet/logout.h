@@ -21,6 +21,7 @@
 #define __OPIE_LOGOUT_APPLET_H__
 
 #include <qpe/menuappletinterface.h>
+#include <qobject.h>
 
 class LogoutApplet : public QObject, public MenuAppletInterface
 {

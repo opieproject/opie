@@ -1,15 +1,12 @@
 // coptright Mon 10-21-2002 01:14:03 by L. Potter <ljp@llornkcor.com>
 
+#include "restart.h"
+
+#include <qpe/applnk.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
-#include "restart.h"
-
-// #include <stdlib.h>
-// #include <unistd.h>
-// #include <sys/stat.h>
-//#include <dirent.h>
 /* XPM */
 static char *restart_xpm[] = {
 "16 16 11 1",
@@ -71,7 +68,7 @@ QIconSet RestartApplet::icon ( ) const
   QImage img =  ( const char** ) restart_xpm ;//Resource::loadImage ( "Run" );
   
   if ( !img. isNull ( ))
-    pix. convertFromImage ( img. smoothScale ( 14, 14 ));
+        pix.convertFromImage( img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
   return pix;
 }
 

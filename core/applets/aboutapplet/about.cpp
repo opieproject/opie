@@ -1,6 +1,7 @@
 #include "about.h"
 #include "widget.h"
 
+#include <qpe/applnk.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
@@ -41,13 +42,13 @@ QString AboutApplet::tr( const char* s, const char* p ) const
     return qApp->translate( "AboutApplet", s, p );
 }
 
-QIconSet AboutApplet::icon ( ) const
+QIconSet AboutApplet::icon() const
 {
     QPixmap pix;
     QImage img = Resource::loadImage ( "logo/opielogo" );
 
-    if ( !img. isNull ( ) )
-        pix. convertFromImage ( img. smoothScale ( 14, 14 ) );
+    if ( !img.isNull() )
+        pix.convertFromImage( img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     return pix;
 }
 

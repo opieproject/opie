@@ -15,6 +15,7 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <qpe/applnk.h>
 #include <qpe/resource.h>
 using namespace Opie::Core;
 
@@ -71,7 +72,7 @@ QIconSet VTApplet::icon ( ) const
     QImage img = Resource::loadImage ( "terminal" );
 
     if ( !img. isNull ( ))
-        pix. convertFromImage ( img. smoothScale ( 14, 14 ));
+        pix.convertFromImage( img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     return pix;
 }
 

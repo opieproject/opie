@@ -33,14 +33,14 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/odevice.h>
+#include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/power.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/resource.h>
 using namespace Opie::Core;
 
-/* QT */
-
+/* STD */
 #include <time.h>
 
 RotateApplet::RotateApplet()
@@ -142,7 +142,7 @@ QIconSet RotateApplet::icon() const
     QPixmap pix;
     QImage img = Resource::loadImage( "Rotation" );
     if ( !img.isNull() )
-        pix.convertFromImage( img.smoothScale( 14, 14 ) );
+        pix.convertFromImage( img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     return pix;
 }
 

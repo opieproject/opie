@@ -21,6 +21,7 @@
 #define __OPIE_SUSPEND_APPLET_H__
 
 #include <qpe/menuappletinterface.h>
+#include <qobject.h>
 
 class SuspendApplet : public QObject, public MenuAppletInterface
 {

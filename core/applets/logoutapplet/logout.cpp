@@ -1,3 +1,6 @@
+#include "logout.h"
+
+#include <qpe/applnk.h>
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
@@ -5,9 +8,6 @@
 #include <qmessagebox.h>
 
 #include <unistd.h>
-
-#include "logout.h"
-
 
 LogoutApplet::LogoutApplet ( )
 	: QObject ( 0, "LogoutApplet" )
@@ -49,7 +49,7 @@ QIconSet LogoutApplet::icon ( ) const
 	QImage img = Resource::loadImage ( "logout" );
 
 	if ( !img. isNull ( ))
-		pix. convertFromImage ( img. smoothScale ( 14, 14 ));
+        pix.convertFromImage( img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
 	return pix;
 }
 

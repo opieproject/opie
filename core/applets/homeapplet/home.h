@@ -21,6 +21,7 @@
 #define __OPIE_HOME_APPLET_H__
 
 #include <qpe/menuappletinterface.h>
+#include <qobject.h>
 
 class HomeApplet : public QObject, public MenuAppletInterface
 {

@@ -2,6 +2,7 @@
 
 	Fixed Bugs
 	----------
+	* n.a.	- scale O-Menu-Applets appropriately (mickeyl)
 
 2005-03-25	Opie 1.2.0
 
@@ -11,7 +12,7 @@
 	* #1620 - OFileSelector - show the button on press and not on press on hold (alwin)
 	* #1473 - Opie-Eye - Same as #1620 but we lack a common FileSystem Button class (zecke)
 	* n.a.  - PackageManager - fix bug where messages show up multiple times in install dialog (drw)
-	* n.a   - make qpeglobal.h include qglobal.h (zecke)
+	* n.a.   - make qpeglobal.h include qglobal.h (zecke)
 
 2005-03-20	Opie 1.2.0-rc1
 

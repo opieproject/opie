@@ -1,10 +1,10 @@
+#include "suspend.h"
+
+#include <qpe/applnk.h>
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
 #include <qapplication.h>
-
-#include "suspend.h"
-
 
 SuspendApplet::SuspendApplet ( )
 	: QObject ( 0, "SuspendApplet" )
@@ -46,7 +46,7 @@ QIconSet SuspendApplet::icon ( ) const
 	QImage img = Resource::loadImage ( "suspend" );
 	
 	if ( !img. isNull ( ))
-		pix. convertFromImage ( img. smoothScale ( 14, 14 ));
+        pix.convertFromImage( img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
 	return pix;
 }
 

@@ -1,10 +1,10 @@
+#include "home.h"
+
+#include <qpe/applnk.h>
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
 #include <qapplication.h>
-
-#include "home.h"
-
 
 HomeApplet::HomeApplet ( )
 	: QObject ( 0, "HomeApplet" )
@@ -46,7 +46,7 @@ QIconSet HomeApplet::icon ( ) const
 	QImage img = Resource::loadImage ( "home" );
 	
 	if ( !img. isNull ( ))
-		pix. convertFromImage ( img. smoothScale ( 14, 14 ));
+        pix.convertFromImage( img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
 	return pix;
 }
 
