@@ -1,4 +1,4 @@
-Files: bin/opie-write apps/Applications/opie-write.desktop pics/opie-wrote
+Files: bin/opie-write apps/Applications/opie-write.desktop pics/opie-write
 Priority: optional
 Section: opie/applications
 Maintainer: L.J. Potter <ljp@llornkcor.com> 
