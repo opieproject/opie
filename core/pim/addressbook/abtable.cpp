@@ -470,17 +470,16 @@ void AbTable::resizeRows() {
 }
 
 
-bool AbTable::save( const QString& /* fn */ )
+bool AbTable::save()
 {
 	//     QTime t;
 	//     t.start();
 	qWarning("abtable:Save data");
-	m_contactdb.save();
-	
-	return true;
+
+	return m_contactdb.save();
 }
 
-void AbTable::load( const QString& /* fn */ )
+void AbTable::load()
 {
 	setSorting( false );
 	setUpdatesEnabled( FALSE );
@@ -494,14 +493,18 @@ void AbTable::load( const QString& /* fn */ )
 	for ( it = list.begin(); it != list.end(); ++it )
 		insertIntoTable( *it, row++ );
 	
-	resort();
-	
 	setUpdatesEnabled( TRUE );
-	
+
 	setSorting( true );
-	//resort();
+	resort();
 }
 
+
+void AbTable::reload()
+{
+	m_contactdb.reload();
+	load();
+}
 
 void AbTable::realignTable( int row )
 {

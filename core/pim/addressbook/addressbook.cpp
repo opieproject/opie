@@ -67,18 +67,6 @@
 #include <qdatetime.h>
 
 #include "picker.h"
-static QString addressbookOldXMLFilename()
-{
-	QString filename = QPEApplication::documentDir() + "addressbook.xml";
-	return filename;
-}
-
-static QString addressbookXMLFilename()
-{
-	QString filename = Global::applicationFileName("addressbook",
-						       "addressbook.xml");
-	return filename;
-}
 
 static QString addressbookPersonalVCardName()
 {
@@ -202,21 +190,6 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	a->addTo( edit );
 	
 	// Create Views
-	
-	// This is safe to call without checking to see if it exists...
-	// not to mention it also does the necessary stuff for the
-	// journaling...
-	QString str = addressbookXMLFilename();
-	if ( str.isNull() ) {
-		QMessageBox::warning( 
-				     this, 
-				     tr("Out of Space"),
-				     tr("There is not enough space to create\n"
-					"neccessary startup files.\n"
-					"\nFree up some space before\nentering data!")
-				     );
-	}
-	
 	listContainer = new QWidget( this );
 	
 	QVBoxLayout *vb = new QVBoxLayout( listContainer );
@@ -230,11 +203,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	
 	mView = 0;
 	
-	abList->load( addressbookXMLFilename() );
-	if ( QFile::exists(addressbookOldXMLFilename()) ) {
-		abList->load( addressbookOldXMLFilename() );
-		QFile::remove(addressbookOldXMLFilename());
-	}
+	abList->load();
 	
 	pLabel = new LetterPicker( listContainer );
 	connect(pLabel, SIGNAL(letterClicked(char)), this, SLOT(slotSetLetter(char)));
@@ -709,13 +678,13 @@ void AddressbookWindow::reload()
 {
 	syncing = FALSE;
 	abList->clear();
-	abList->load( addressbookXMLFilename() );
+	abList->reload();
 }
 
 void AddressbookWindow::flush()
 {
 	syncing = TRUE;
-	abList->save( addressbookXMLFilename() );
+	abList->save();
 }
 
 
@@ -755,9 +724,8 @@ void AddressbookWindow::closeEvent( QCloseEvent *e )
 
 bool AddressbookWindow::save()
 {
-	QString str = addressbookXMLFilename();
-	if ( str.isNull() ) {
-		if ( QMessageBox::critical( 0, tr("Out of space"),
+	if ( !abList->save() ) {
+		if ( QMessageBox::critical( 0, tr( "Out of space" ),
 					    tr("Unable to save information.\n"
 					       "Free up some space\n"
 					       "and try again.\n"
@@ -768,20 +736,6 @@ bool AddressbookWindow::save()
 			return TRUE;
 		else
 			return FALSE;
-	} else {
-		if ( !abList->save( str ) ) {
-			if ( QMessageBox::critical( 0, tr( "Out of space" ),
-						    tr("Unable to save information.\n"
-						       "Free up some space\n"
-						       "and try again.\n"
-						       "\nQuit anyway?"),
-						    QMessageBox::Yes|QMessageBox::Escape,
-						    QMessageBox::No|QMessageBox::Default )
-			     != QMessageBox::No )
-				return TRUE;
-			else
-				return FALSE;
-		}
 	}
 	return TRUE;
 }

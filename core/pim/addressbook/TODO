@@ -1,7 +1,8 @@
 Stuff todo:
 
 Urgent:
-- Syncing: abtable not reloaded after sync.
+
+- Font menu is invisible using german translation
 
 Important:
 
@@ -20,7 +21,8 @@ Less important:
    placed verticaly or horizontally (configurable)
 
 
-Should be Fixed:
+Should be Fixed (not absolute sure, need validation):
 - "Nonenglish" translation bug has to be fixed.
 
 Fixed:
+- Syncing: abtable not reloaded after sync.

@@ -77,8 +77,9 @@ public:
     void clearFindRow() { currFindRow = -2; }
     void loadFields();
     void refresh();
-    bool save( const QString &fn );
-    void load( const QString &fn );
+    bool save();
+    void load();
+    void reload();
 
     // addresspicker mode
     void setChoiceNames( const QStringList& list);
