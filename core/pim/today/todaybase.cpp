@@ -56,7 +56,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
 
   QHBoxLayout *frameLayout = new QHBoxLayout( Frame );
   QVBox *box1 = new QVBox( Frame );
-  box1->setMinimumWidth( 100 );
+
   // Today text
   TodayLabel = new QLabel( box1, "TodayText" );
   QFont TodayLabel_font(  TodayLabel->font() );
@@ -83,9 +83,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
 
   // Ownerfield
   OwnerField = new OClickableLabel( this , "Owner" );
-  OwnerField->setGeometry( QRect( 0, 0, this->width(), 12 ) );
   OwnerField->setAlignment( int (QLabel::AlignTop | QLabel::AlignLeft ) );
-  OwnerField->setMaximumHeight(12);
 
   // config
   ConfigButton = new OClickableLabel ( Frame, "PushButton1" );
@@ -93,8 +91,8 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
   QWhatsThis::add( ConfigButton, tr( "Click here to get to the config dialog" ) );
   ConfigButton->setBackgroundOrigin( QLabel::ParentOrigin );
 
-  frameLayout->addWidget( box1 );
-  frameLayout->addStretch( 2 );
+  frameLayout->addWidget( box1, 1 );
+  frameLayout->addStretch( 1 );
   frameLayout->addWidget( ConfigButton,  0, AlignBottom );
   frameLayout->addWidget( Opiezilla );
 }
