@@ -13,6 +13,8 @@
 #include "applnkitem.h"
 
 #include <qpe/applnk.h>
+#include <qfileinfo.h>
+#include <qpe/qcopenvelope_qws.h>
 
 AppLnkItem::AppLnkItem(OListViewItem* parent, AppLnk *app)
 	: ResultItem(parent)
@@ -40,11 +42,20 @@ void AppLnkItem::action( int act )
 {
 	if (!_app->isValid()) qDebug("INVALID");
 	if (act == 0) _app->execute();
+	else if (act == 1){
+		QFileInfo file( _app->file() );
+		qDebug("opening %s in filemanager", file.dirPath().latin1());
+ 		QCopEnvelope e("QPE/Application/advancedfm", "setDocument(QString)");
+ 		e << file.dirPath();
+// 		QCopEnvelope e("QPE/Application/advancedfm", "setDocument(QString)");
+ //		e << _app->file();
+	}
 }
 
 QIntDict<QString> AppLnkItem::actions()
 {
 	QIntDict<QString> result;
 	result.insert( 0, new QString( QObject::tr("execute") ) );
+	result.insert( 1, new QString( QObject::tr("open in filemanager") ) );
 	return result;
 }

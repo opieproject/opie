@@ -15,6 +15,8 @@
 #include <qpe/applnk.h>
 #include <qfile.h>
 #include <qtextstream.h>
+#include <qfileinfo.h>
+#include <qpe/qcopenvelope_qws.h>
 
 DocLnkItem::DocLnkItem(OListViewItem* parent, DocLnk *app)
 	: ResultItem(parent)
@@ -60,11 +62,20 @@ void DocLnkItem::action( int act )
 	qDebug("action %i",act);
 	if (!_doc->isValid()) qDebug("INVALID");
 	if (act == 0) _doc->execute();
+	else if (act == 1){
+		QFileInfo file( _doc->file() );
+		qDebug("opening %s in filemanager", file.dirPath().latin1());
+ 		QCopEnvelope e("QPE/Application/advancedfm", "setDocument(QString)");
+ 		e << file.dirPath();
+// 		QCopEnvelope e("QPE/Application/advancedfm", "setDocument(QString)");
+ //		e << _doc->file();
+	}
 }
 
 QIntDict<QString> DocLnkItem::actions()
 {
 	QIntDict<QString> result;
 	result.insert( 0, new QString( QObject::tr("open with ") + _doc->exec() ) );
+	result.insert( 1, new QString( QObject::tr("open in filemanager") ) );
 	return result;
 }
