@@ -430,6 +430,7 @@ QArray<int> OPimContactAccessBackend_SQL::allRecords() const
 
 bool OPimContactAccessBackend_SQL::add ( const OPimContact &newcontact )
 {
+	qDebug("add in contact SQL-Backend");
 	InsertQuery ins( newcontact );
 	OSQLResult res = m_driver->query( &ins );
 

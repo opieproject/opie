@@ -127,6 +127,11 @@ class OPimContactAccess: public QObject, public OPimAccessTemplate<OPimContact>
 	 * @return true if successful
 	 */
 	bool save();
+	
+	/** 
+	 * Return identification of used records
+	 */
+	int rtti() const;
 
  signals:
 	/* Signal is emitted if the database was changed. Therefore

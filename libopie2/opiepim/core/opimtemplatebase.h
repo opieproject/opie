@@ -1,6 +1,6 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) The Main Author <main-author@whereever.org>
+                             Copyright (C) Holger Freyther <zecke@handhelds.org>
               =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
             .=l.
            .>+-=
@@ -49,10 +49,11 @@ struct OPimBase {
     /**
      * return the rtti
      */
-    virtual int rtti()= 0;
+    virtual int rtti() const = 0;
     virtual OPimRecord* record()const = 0;
     virtual OPimRecord* record(int uid)const = 0;
     virtual bool add( const OPimRecord& ) = 0;
+    virtual bool add( const OPimRecord* ) = 0;
     virtual bool remove( int uid ) = 0;
     virtual bool remove( const OPimRecord& ) = 0;
     virtual void clear() = 0;
@@ -90,8 +91,6 @@ public:
     virtual void cache( const T& )const = 0;
     virtual void setSaneCacheSize( int ) = 0;
 
-    /* reimplement of OPimBase */
-    int rtti();
     OPimRecord* record()const;
     OPimRecord* record(int uid )const;
     static T* rec();
@@ -100,14 +99,7 @@ private:
     OTemplateBasePrivate *d;    
 };
 
-/*
- * implementation
- */
-template <class T>
-int
-OTemplateBase<T>::rtti() {
-    return T::rtti();
-}
+
 template <class T>
 OPimRecord* OTemplateBase<T>::record()const {
     T* t = new T;

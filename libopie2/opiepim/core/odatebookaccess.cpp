@@ -28,6 +28,7 @@
 */
 #include <opie2/obackendfactory.h>
 #include <opie2/odatebookaccess.h>
+#include <opie2/opimresolver.h>
 
 namespace Opie {
 /**
@@ -107,6 +108,10 @@ OEffectiveEvent::ValueList ODateBookAccess::effectiveNonRepeatingEvents( const Q
  */
 OEffectiveEvent::ValueList ODateBookAccess::effectiveNonRepeatingEvents( const QDateTime& start ) const {
     return m_backEnd->effectiveNonRepeatingEvents( start );
+}
+int ODateBookAccess::rtti() const
+{
+	return OPimResolver::DateBook;
 }
 
 }

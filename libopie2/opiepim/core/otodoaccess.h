@@ -116,6 +116,12 @@ public:
      * @param backend Will be used in the future when we support multiple backends
      */
     bool backendSupports( int attr, const QString& backend = QString::null  )const;
+
+
+    /** 
+     * Return identification of used records
+     */
+    int rtti() const;
 signals:
     /**
      * if the OPimTodoAccess was changed

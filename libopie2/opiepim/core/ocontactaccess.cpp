@@ -52,6 +52,7 @@
 #include <stdlib.h>
 
 #include <opie2/ocontactaccessbackend_xml.h>
+#include <opie2/opimresolver.h>
 
 namespace Opie {
 
@@ -147,6 +148,11 @@ void OPimContactAccess::copMessage( const QCString &msg, const QByteArray & )
 		reload ();
 		emit signalChanged ( this );
 	}
+}
+
+int OPimContactAccess::rtti() const
+{
+	return OPimResolver::AddressBook;
 }
 
 }

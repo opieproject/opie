@@ -33,6 +33,7 @@
 // #include "otodoaccesssql.h"
 #include <opie2/otodoaccess.h>
 #include <opie2/obackendfactory.h>
+#include <opie2/opimresolver.h>
 
 namespace Opie {
 OPimTodoAccess::OPimTodoAccess( OPimTodoAccessBackend* end, enum Access )
@@ -88,6 +89,12 @@ QBitArray OPimTodoAccess::backendSupport( const QString& ) const{
 }
 bool OPimTodoAccess::backendSupports( int attr,  const QString& ar) const{
     return backendSupport(ar).testBit( attr );
+}
+
+
+int OPimTodoAccess::rtti() const
+{
+	return OPimResolver::TodoList;
 }
 
 }

@@ -64,6 +64,12 @@ public:
     OEffectiveEvent::ValueList effectiveNonRepeatingEvents( const QDate& from, const QDate& to ) const;
     OEffectiveEvent::ValueList effectiveNonRepeatingEvents( const QDateTime& start ) const;
 
+    /** 
+     * Return identification of used records
+     */
+    int rtti() const;
+
+
 private:
     ODateBookAccessBackend* m_backEnd;
     class Private;

@@ -1,6 +1,7 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) The Main Author <main-author@whereever.org>
+                             Copyright (C) Holger Freyther <zecke@handhelds.org>
+			     Copyright (C) Stefan Eilers <eilers.stefan@epost.de>
               =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
             .=l.
            .>+-=
@@ -137,6 +138,13 @@ public:
      */
     virtual bool add( const T& t ) ;
     bool add( const OPimRecord& );
+    // Needed for real generic access (eilers) 
+    // Info: Take this if  you are working with OPimRecord, which is a generic base class, and 
+    //       you need to add it into any database, you cannot generate a reference to
+    //       it and casting may be not approriate, too. 
+    //       But take care that the accessing database is compatible to the real type of OPimRecord !!
+    bool add( const OPimRecord* );
+
 
     /* only the uid matters */
     /**
@@ -271,15 +279,29 @@ bool OPimAccessTemplate<T>::add( const T& t ) {
     cache( t );
     return m_backEnd->add( t );
 }
+
 template <class T>
 bool OPimAccessTemplate<T>::add( const OPimRecord& rec) {
     /* same type */
-    if ( rec.rtti() == T::rtti() ) {
-        const T &t = static_cast<const T&>(rec);
+    T tempInstance;
+    if ( rec.rtti() == tempInstance.rtti() ) {
+        const T& t = static_cast<const T&>(rec);
         return add(t);
     }
     return false;
 }
+
+template <class T>
+bool OPimAccessTemplate<T>::add( const OPimRecord* rec) {
+    /* same type, but pointer  */
+    T tempInstance;
+    if ( rec -> rtti() == tempInstance.rtti() ) {
+        const T* t = static_cast<const T*>(rec);
+        return add( *t );
+    }
+    return false;
+}
+
 template <class T>
 bool OPimAccessTemplate<T>::remove( const T& t ) {
     return remove( t.uid() );
