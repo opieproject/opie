@@ -27,7 +27,7 @@ QDataStream & operator >> (QDataStream & str, bool & b)
  * ! We don't put a Pixmap in!!!!
  */
 QDataStream &operator<<( QDataStream& s, const PixmapInfo& inf) {
-    owarn << "Image request is " << inf.file.latin1() << " " << inf.width << " " << inf.height << "" << oendl; 
+    owarn << "Image request is " << inf.file.latin1() << " " << inf.width << " " << inf.height << "" << oendl;
     return s << inf.file  << inf.width << inf.height;
 }
 QDataStream &operator>>( QDataStream& s, PixmapInfo& inf ) {
@@ -82,10 +82,10 @@ void SlaveMaster::imageInfo( const QString& str ) {
 
 void SlaveMaster::thumbNail( const QString& str, int w, int h ) {
     if ( str.isEmpty() ) {
-        owarn << "Asking for empty nail" << oendl; 
+        owarn << "Asking for empty nail" << oendl;
         return;
     }
-    owarn << "Asking for thumbNail in size " << w << " " << h << "" + str << oendl; 
+    owarn << "Asking for thumbNail in size " << w << " " << h << "" + str << oendl;
     PixmapInfo item;
     item.file = str; item.width = w; item.height = h;
     item.pixmap = QPixmap();
@@ -109,7 +109,7 @@ void SlaveMaster::recieve( const QCString& str, const QByteArray& at) {
     else if ( str == "pixmapsHandled(StringList)" )
         stream >> infos;
 
-    owarn << "PixInfos " << pixinfos.count() << "" << oendl; 
+    owarn << "PixInfos " << pixinfos.count() << "" << oendl;
 
     bool got_data = ( !infos.isEmpty() || !pixinfos.isEmpty() );
     if ( got_data ) {
@@ -149,6 +149,22 @@ void SlaveMaster::slotTimerStart() {
     m_inThumbNail.clear();
 }
 
-QImage SlaveMaster::image( const QString& str, PDirLister::Factor, int ) {
+QImage SlaveMaster::image( const QString& , PDirLister::Factor, int ) {
     return QImage();
+}
+
+
+namespace SlaveHelper {
+void slaveConnectSignals( QObject* target ) {
+    SlaveMaster* master = SlaveMaster::self();
+
+    QObject::connect( master, SIGNAL(sig_start()), target, SIGNAL(sig_start()) );
+    QObject::connect( master, SIGNAL(sig_end()), target, SIGNAL(sig_end()) );
+    QObject::connect( master, SIGNAL(sig_thumbInfo(const QString&, const QString&)),
+                      target, SIGNAL(sig_thumbInfo(const QString&, const QString&)) );
+    QObject::connect( master, SIGNAL(sig_fullInfo(const QString&, const QString&)),
+                      target, SIGNAL(sig_fullInfo(const QString&, const QString&)) );
+    QObject::connect( master, SIGNAL(sig_thumbNail(const QString&, const QPixmap&)),
+                      target, SIGNAL(sig_thumbNail(const QString&, const QPixmap&)) );
+}
 }

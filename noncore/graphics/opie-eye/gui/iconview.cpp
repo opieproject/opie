@@ -41,7 +41,6 @@ using Opie::Core::OKeyConfigItem;
 namespace {
     static QPixmap* _dirPix = 0;
     static QPixmap* _unkPix = 0;
-    static QPixmap* _picPix = 0;
     static QPixmap* _emptyPix = 0;
     class IconViewItem : public QIconViewItem {
     public:
@@ -98,12 +97,12 @@ namespace {
             _unkPix = new QPixmap( Resource::loadPixmap( "UnknownDocument" ) );
     }
 
-    inline void IconViewItem::setPixmap( const QPixmap & icon, bool recalc, bool redraw)
+    inline void IconViewItem::setPixmap( const QPixmap & , bool, bool )
     {
         m_Pixset = true;
         calcRect(text());
     }
-    inline void IconViewItem::setPixmap( const QPixmap & icon)
+    inline void IconViewItem::setPixmap( const QPixmap & )
     {
         m_Pixset = true;
         calcRect(text());
@@ -253,10 +252,7 @@ void PIconView::initKeys() {
  */
 void PIconView::slotDirUp()
 {
-    if (m_path.isEmpty()) return;
-    QDir dir( m_path );
-    dir.cdUp();
-    slotChangeDir( dir.absPath() );
+    slotChangeDir( currentView()->dirLister()->dirUp( m_path ) );
 }
 
 /*
@@ -379,11 +375,17 @@ void PIconView::slotViewChanged( int i) {
     if (cur) delete cur;
     QString str = m_views->text(i);
     ViewMap* map = viewMap();
-    if (!map) {setCurrentView(0l); return;}
+    if (!map) {
+        setCurrentView(0l);
+        return;
+    }
+
     if (map->find(str) == map->end()) {
         owarn << "Key not found" << oendl;
-        setCurrentView(0l); return;
+        setCurrentView(0l);
+        return;
     }
+
     m_cfg->writeEntry("LastView",str);
     m_cfg->write();
     cur = (*(*map)[str])(*m_cfg);
@@ -401,7 +403,8 @@ void PIconView::slotViewChanged( int i) {
             this, SLOT(slotEnd()) );
 
 
-    /*  reload now */
+    /*  reload now with default Path*/
+    m_path = lis->defaultPath();
     QTimer::singleShot( 0,  this, SLOT(slotReloadDir()));
 }
 

@@ -23,13 +23,17 @@ public:
     virtual QString currentPath()const = 0;
     virtual QStringList folders()const = 0;
     virtual QStringList files()const = 0;
+    virtual QString nameToFname(const QString&name)const = 0;
+    virtual QString dirUp(const QString&)const ;
+
+
 public slots:
     virtual void deleteImage( const QString& ) = 0;
     virtual void imageInfo( const QString&) = 0;
     virtual void fullImageInfo( const QString& ) = 0;
     virtual void thumbNail( const QString&, int max_wid, int max_h ) = 0;
     virtual QImage image(  const QString&, Factor, int max = 0) = 0;
-    virtual QString nameToFname(const QString&name)const = 0;
+
 
 signals:
     void sig_dirchanged();

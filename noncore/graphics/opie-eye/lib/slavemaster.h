@@ -8,6 +8,16 @@
 #include <qstring.h>
 #include <qsize.h>
 
+namespace SlaveHelper {
+/**
+ * Small Helper to create a SlaveMaster
+ * and to connect its' signals to the
+ * object. To use the object as a proxy
+ */
+void slaveConnectSignals( QObject* );
+}
+
+
 class SlaveMaster : public QObject {
     Q_OBJECT
     typedef QValueList<ImageInfo> ImageInfos;

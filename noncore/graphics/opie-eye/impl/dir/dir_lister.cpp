@@ -21,17 +21,7 @@ Dir_DirLister::Dir_DirLister( bool list )
 {
     m_allFiles = list;
     owarn << "All Files " << m_allFiles << "" << oendl;
-
-    SlaveMaster* master = SlaveMaster::self();
-    connect( master, SIGNAL(sig_start()), this, SIGNAL(sig_start()) );
-    connect( master, SIGNAL(sig_end()), this, SIGNAL(sig_end()) );
-    connect( master, SIGNAL(sig_thumbInfo(const QString&, const QString&)),
-             this, SIGNAL(sig_thumbInfo(const QString&, const QString&)) );
-    connect( master, SIGNAL(sig_fullInfo(const QString&, const QString&)),
-             this, SIGNAL(sig_fullInfo(const QString&, const QString&)) );
-    connect( master, SIGNAL(sig_thumbNail(const QString&, const QPixmap&)),
-             this, SIGNAL(sig_thumbNail(const QString&, const QPixmap&)) );
-
+    SlaveHelper::slaveConnectSignals( this );
 }
 
 QString Dir_DirLister::defaultPath()const {

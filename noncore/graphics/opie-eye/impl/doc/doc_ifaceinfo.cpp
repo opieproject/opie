@@ -38,7 +38,7 @@ QString DocInterfaceInfo::name()const {
     return QString::fromLatin1(QObject::tr("DocView" ));
 }
 
-QWidget* DocInterfaceInfo::configWidget(const Config& cfg) {
+QWidget* DocInterfaceInfo::configWidget(const Config& ) {
 #if 0
     DirImageWidget* wid = new DirImageWidget();
     wid->chkbox->setChecked(  cfg.readBoolEntry("Dir_Check_All_Files", true) );
@@ -50,7 +50,7 @@ QWidget* DocInterfaceInfo::configWidget(const Config& cfg) {
 
 void DocInterfaceInfo::writeConfig( QWidget* , Config& ) {
 #if 0
-    owarn << "Write Config" << oendl; 
+    owarn << "Write Config" << oendl;
     DirImageWidget* wid = static_cast<DirImageWidget*>(_wid);
     cfg.writeEntry("Dir_Check_All_Files", wid->chkbox->isChecked() );
 #endif

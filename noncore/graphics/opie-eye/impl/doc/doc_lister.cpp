@@ -21,9 +21,10 @@ using namespace Opie::Core;
 Doc_DirLister::Doc_DirLister()
     : PDirLister( "doc_dir_lister" )
 {
+    /* connect the signals */
     SlaveMaster* master = SlaveMaster::self();
     connect( master, SIGNAL(sig_start()), this, SIGNAL(sig_start()) );
-    connect( master, SIGNAL(sig_end()), this, SIGNAL(sig_end()) );
+    connect( master, SIGNAL(sig_end()),   this, SIGNAL(sig_end()) );
     connect( master, SIGNAL(sig_thumbInfo(const QString&, const QString&)),
              this, SLOT(slotThumbInfo(const QString&, const QString&)) );
     connect( master, SIGNAL(sig_fullInfo(const QString&, const QString&)),
@@ -36,7 +37,7 @@ Doc_DirLister::Doc_DirLister()
 }
 
 QString Doc_DirLister::defaultPath()const {
-    return ""; QPEApplication::documentDir();
+    return QString::null;
 }
 
 QString Doc_DirLister::setStartPath(const QString&) {
@@ -78,7 +79,6 @@ void Doc_DirLister::deleteImage( const QString& )
 
 void Doc_DirLister::thumbNail( const QString& str, int w, int h) {
     if (m_namemap.find(str)==m_namemap.end()) {
-        owarn << "Item " << str << " not found" << oendl;
         return;
     }
     QString fname = m_namemap[str];
@@ -87,7 +87,6 @@ void Doc_DirLister::thumbNail( const QString& str, int w, int h) {
 
 QImage Doc_DirLister::image( const QString& str, Factor f, int m) {
     if (m_namemap.find(str)==m_namemap.end()) {
-        owarn << "Item " << str << " not found" << oendl;
         return QImage();
     }
     QString fname = m_namemap[str];
@@ -96,7 +95,6 @@ QImage Doc_DirLister::image( const QString& str, Factor f, int m) {
 
 void Doc_DirLister::imageInfo( const QString& str) {
     if (m_namemap.find(str)==m_namemap.end()) {
-        owarn << "Item " << str << " not found" << oendl;
         return;
     }
     QString fname = m_namemap[str];
@@ -105,7 +103,6 @@ void Doc_DirLister::imageInfo( const QString& str) {
 
 void Doc_DirLister::fullImageInfo( const QString& str) {
     if (m_namemap.find(str)==m_namemap.end()) {
-        owarn << "Item " << str << " not found" << oendl;
         return;
     }
     QString fname = m_namemap[str];
@@ -115,7 +112,6 @@ void Doc_DirLister::fullImageInfo( const QString& str) {
 void Doc_DirLister::slotFullInfo(const QString&f, const QString&t)
 {
     if (m_filemap.find(f)==m_filemap.end()) {
-        owarn << "Item " << f << " not found" << oendl;
         return;
     }
     QString name = m_filemap[f];
@@ -125,7 +121,6 @@ void Doc_DirLister::slotFullInfo(const QString&f, const QString&t)
 void Doc_DirLister::slotThumbInfo(const QString&f, const QString&t)
 {
     if (m_filemap.find(f)==m_filemap.end()) {
-        owarn << "Item " << f << " not found" << oendl;
         return;
     }
     QString name = m_filemap[f];
@@ -135,7 +130,6 @@ void Doc_DirLister::slotThumbInfo(const QString&f, const QString&t)
 void Doc_DirLister::slotThumbNail(const QString&f, const QPixmap&p)
 {
     if (m_filemap.find(f)==m_filemap.end()) {
-        owarn << "Item " << f << " not found" << oendl;
         return;
     }
     QString name = m_filemap[f];
@@ -145,8 +139,11 @@ void Doc_DirLister::slotThumbNail(const QString&f, const QPixmap&p)
 QString Doc_DirLister::nameToFname(const QString&name)const
 {
     if (m_namemap.find(name)==m_namemap.end()) {
-        owarn << "Item " << name << " not found" << oendl;
         return QString::null;
     }
     return m_namemap[name];
+}
+
+QString Doc_DirLister::dirUp( const QString& p ) const{
+    return p;
 }

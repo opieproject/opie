@@ -29,6 +29,7 @@ public:
     void imageInfo( const QString& );
     void fullImageInfo( const QString& );
     virtual QString nameToFname(const QString&name)const;
+    QString dirUp( const QString& )const;
 
 private:
     QMap<QString,QString> m_namemap,m_filemap;
