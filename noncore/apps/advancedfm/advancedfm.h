@@ -57,38 +57,6 @@ public:
     static QString appName() { return QString::fromLatin1("advancedfm"); }
    AdvancedFm(QWidget *p = 0, const char* name = 0, WFlags fl = 0);
    ~AdvancedFm();
-protected slots:
-   void slotSwitchMenu(int);
-   void selectAll();
-   void addToDocs();
-   void doDirChange();
-   void mkDir();
-   void del();
-   void rn();
-   void populateView();
-   void rePopulate();
-   void showHidden();
-   void showMenuHidden();
-   void writeConfig();
-   void readConfig();
-   void ListClicked(QListViewItem *);
-   void ListPressed( int, QListViewItem *, const QPoint&, int);
-   void makeDir();
-   void doDelete();
-   void tabChanged(QWidget*);
-   void cleanUp();
-   void renameIt();
-   void runThis();
-   void runText();
-   void filePerms();
-   void doProperties();
-   void runCommand();
-   void runCommandStd();
-   QStringList getPath();
-   void mkSym();
-   void switchToLocalTab();
-   void switchToRemoteTab();
-	 void refreshCurrentTab();
 protected:
 
    Opie::Ui::OSplitter *TabWidget;
@@ -130,7 +98,41 @@ protected:
    QListView *OtherView();
    void setOtherTabCurrent();
 
+//protected signals:
+//		void newPath(QString);
+    
 protected slots:
+   void slotSwitchMenu(int);
+   void selectAll();
+   void addToDocs();
+   void doDirChange();
+   void mkDir();
+   void del();
+   void rn();
+   void populateView();
+   void rePopulate();
+   void showHidden();
+   void showMenuHidden();
+   void writeConfig();
+   void readConfig();
+   void ListClicked(QListViewItem *);
+   void ListPressed( int, QListViewItem *, const QPoint&, int);
+   void makeDir();
+   void doDelete();
+   void tabChanged(QWidget*);
+   void cleanUp();
+   void renameIt();
+   void runThis();
+   void runText();
+   void filePerms();
+   void doProperties();
+   void runCommand();
+   void runCommandStd();
+   QStringList getPath();
+   void mkSym();
+   void switchToLocalTab();
+   void switchToRemoteTab();
+	 void refreshCurrentTab();
 
    void openSearch();
    void dirMenuSelected(int);
@@ -142,13 +144,19 @@ protected slots:
    void QPEButtonPushed();
    void upDir();
    void currentPathComboChanged();
+
    void copy();
+   void copyTimer();
    void copyAs();
+   void copyAsTimer();
    void copySameDir();
-   void currentPathComboActivated(const QString &);
+   void copySameDirTimer();
+   void move();
+   void moveTimer();
+
+	 void currentPathComboActivated(const QString &);
    void fillCombo(const QString &);
    bool copyFile( const QString & , const QString & );
-   void move();
    void fileStatus();
    void doAbout();
    void doBeam();
@@ -161,7 +169,7 @@ protected slots:
 
 private:
    MenuButton *menuButton;
-   QString oldName;
+   QString oldName, localViewDir, remoteViewDir;
    void startProcess(const QString &);
    bool eventFilter( QObject * , QEvent * );
    void cancelRename();
@@ -180,6 +188,7 @@ private slots:
    void gotoCustomDir(const QString &);
    void qcopReceive(const QCString&, const QByteArray&);
    void setDocument(const QString &);
+//	 void doMenu(int
 
 };
 

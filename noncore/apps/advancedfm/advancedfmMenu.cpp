@@ -271,9 +271,12 @@ void AdvancedFm::upDir() {
   update();
 }
 
+void AdvancedFm::copyTimer() {
+		QTimer::singleShot(125,this,SLOT(copy()));
+}
+
 void AdvancedFm::copy() {
-   qApp->processEvents();
-   QStringList curFileList = getPath();
+ QStringList curFileList = getPath();
 
    QDir *thisDir = CurrentDir();
    QDir *thatDir = OtherDir();
@@ -312,8 +315,8 @@ void AdvancedFm::copy() {
          if( f.exists()) {
             if(doMsg) {
                switch ( QMessageBox::warning(this,tr("File Exists!"),
-                                             tr("%1 exists. Ok to overwrite?").arg( item ),
-                                             tr("Yes"),tr("No"),0,0,1) ) {
+                                             tr("<p>%1 already  exists. Ok to overwrite?</P>").arg(item),
+                                             tr("Yes"),tr("No"),0,0,1)) {
                case 1:
                   return;
                   break;
@@ -324,13 +327,16 @@ void AdvancedFm::copy() {
 
          if( !copyFile( curFile, destFile) )  {
             QMessageBox::message("AdvancedFm",
-                                 tr( "Could not copy %1 to %2").arg( curFile ).arg( destFile ) );
+                                 tr( "<P>Could not copy %1 to %2</P>").arg(curFile).arg(destFile));
             return;
          }
       }
-            setOtherTabCurrent();
-            rePopulate();
+			rePopulate();
    }
+}
+
+void AdvancedFm::copyAsTimer() {
+		QTimer::singleShot(125,this,SLOT(copyAs()));
 }
 
 void AdvancedFm::copyAs() {
@@ -346,7 +352,7 @@ void AdvancedFm::copyAs() {
       QString destFile;
       item=(*it);
       curFile = thisDir->canonicalPath()+"/"+(*it);
-      fileDlg = new InputDialog( this, tr("Copy "+curFile+" As"), TRUE, 0);
+      fileDlg = new InputDialog( this, tr("Copy %1 As").arg(curFile), TRUE, 0);
 
       fileDlg->setInputText((const QString &) destFile );
       fileDlg->exec();
@@ -358,7 +364,7 @@ void AdvancedFm::copyAs() {
          QFile f( destFile);
          if( f.exists()) {
             switch (QMessageBox::warning(this,tr("File Exists!"),
-                                         item+tr("\nexists. Ok to overwrite?"),
+                                         tr("<P> %1 already exists. Ok to overwrite?</p>").arg(item),
                                          tr("Yes"),tr("No"),0,0,1) ) {
             case 0:
                f.remove();
@@ -369,8 +375,7 @@ void AdvancedFm::copyAs() {
             };
          }
          if( !copyFile( curFile, destFile) ) {
-            QMessageBox::message("AdvancedFm",tr("Could not copy\n")
-                                 +curFile +tr("to\n")+destFile);
+            QMessageBox::message("AdvancedFm",tr("<p>Could not copy %1 to %2</P>").arg(curFile).arg(destFile));
             return;
          }
       }
@@ -378,9 +383,13 @@ void AdvancedFm::copyAs() {
 
    }
 	 rePopulate();
-	 setOtherTabCurrent();
+//	 setOtherTabCurrent();
    qApp->processEvents();
 
+}
+
+void AdvancedFm::copySameDirTimer() {
+		QTimer::singleShot(125,this,SLOT(copySameDir()));
 }
 
 void AdvancedFm::copySameDir() {
@@ -407,7 +416,7 @@ void AdvancedFm::copySameDir() {
           QFile f(destFile);
           if( f.exists()) {
               switch (QMessageBox::warning(this,tr("Delete"),
-                                           destFile+tr(" already exists.\nDo you really want to delete it?"),
+                                           tr("<p> %1 already exists. Do you really want to delete it?</P>").arg(destFile),
                                            tr("Yes"),tr("No"),0,0,1) ) {
               case 0:
 
@@ -419,8 +428,7 @@ void AdvancedFm::copySameDir() {
               };
             }
           if(!copyFile( curFile,destFile) )  {
-              QMessageBox::message("AdvancedFm",tr("Could not copy\n")
-                                   +curFile +tr("to\n")+destFile);
+              QMessageBox::message("AdvancedFm",tr("<P>Could not copy %1 to %2</P>").arg(curFile).arg(destFile));
               return;
             }
 
@@ -431,8 +439,11 @@ void AdvancedFm::copySameDir() {
             rePopulate();
 }
 
+void AdvancedFm::moveTimer() {
+		QTimer::singleShot(125,this,SLOT(move()));
+}
+
 void AdvancedFm::move() {
-  qApp->processEvents();
 
   QStringList curFileList = getPath();
   if( curFileList.count() > 0) {
@@ -460,20 +471,19 @@ void AdvancedFm::move() {
                             rePopulate();
                             return;
           }
-
-                    QFile f( curFile);
+					QFile f( curFile);
           if( f.exists()) {
                             if( !copyFile(  curFile, destFile) )  {
                                     QMessageBox::message(tr("Note"),tr("Could not move\n")+curFile);
                                     return;
               } else
-                                    QFile::remove(curFile);
+									QFile::remove(curFile);
           }
             }
 
   }
-            rePopulate();
-            setOtherTabCurrent();
+	rePopulate();
+//	setOtherTabCurrent();
 }
 
 bool AdvancedFm::moveDirectory( const QString & src, const QString & dest ) {
@@ -506,67 +516,65 @@ bool AdvancedFm::copyDirectory( const QString & src, const QString & dest ) {
 
 
 bool AdvancedFm::copyFile( const QString & src, const QString & dest ) {
+		if(QFileInfo(src).isDir()) {
+				if( copyDirectory( src, dest )) {
+//						setOtherTabCurrent();
+						rePopulate();
+						return true;
+				}
+				else
+						return false;
+		}
 
 
-        if(QFileInfo(src).isDir()) {
-                if( copyDirectory( src, dest )) {
-                        setOtherTabCurrent();
-                        populateView();
-                        return true;
-                }
-                else
-                        return false;
-        }
-
-
-        bool success = true;
-        struct stat status;
-        QFile srcFile(src);
-        QFile destFile(dest);
-        int err=0;
-        int read_fd=0;
-   int write_fd=0;
-   struct stat stat_buf;
-   off_t offset = 0;
-      if(!srcFile.open( IO_ReadOnly|IO_Raw)) {
+		bool success = true;
+		struct stat status;
+		QFile srcFile(src);
+		QFile destFile(dest);
+		int err=0;
+		int read_fd=0;
+		int write_fd=0;
+		struct stat stat_buf;
+		off_t offset = 0;
+		if(!srcFile.open( IO_ReadOnly|IO_Raw)) {
 //         owarn << "open failed" << oendl; 
-         return success = false;
-   }
-   read_fd = srcFile.handle();
-   if(read_fd != -1) {
-      fstat (read_fd, &stat_buf);
-      if( !destFile.open( IO_WriteOnly|IO_Raw ) ) {
+				return success = false;
+		}
+		read_fd = srcFile.handle();
+		if(read_fd != -1) {
+				fstat (read_fd, &stat_buf);
+				if( !destFile.open( IO_WriteOnly|IO_Raw ) ) {
 //       owarn << "destfile open failed" << oendl; 
-       return success = false;
-      }
-      write_fd = destFile.handle();
-      if(write_fd != -1) {
-         err = sendfile(write_fd, read_fd, &offset, stat_buf.st_size);
-           if( err == -1) {
-              QString msg;
-              switch(err) {
-              case EBADF : msg = "The input file was not opened for reading or the output file was not opened for writing. ";
-              case EINVAL: msg = "Descriptor is not valid or locked. ";
-              case ENOMEM: msg = "Insufficient memory to read from in_fd.";
-              case EIO: msg = "Unspecified error while reading from in_fd.";
-              };
-              success = false;
+						return success = false;
+				}
+				write_fd = destFile.handle();
+				if(write_fd != -1) {
+						err = sendfile(write_fd, read_fd, &offset, stat_buf.st_size);
+						if( err == -1) {
+								QString msg;
+								switch(err) {
+									case EBADF : msg = "The input file was not opened for reading or the output file was not opened for writing. ";
+									case EINVAL: msg = "Descriptor is not valid or locked. ";
+									case ENOMEM: msg = "Insufficient memory to read from in_fd.";
+									case EIO: msg = "Unspecified error while reading from in_fd.";
+								};
+								success = false;
 //              owarn << msg << oendl; 
-         }
-      } else {
-         success = false;
-      }
-   } else {
-      success = false;
-   }
-   srcFile.close();
-   destFile.close();
-    // Set file permissions
-  if( stat( QFile::encodeName(src), &status ) == 0 )  {
-      chmod( QFile::encodeName(dest), status.st_mode );
+						}
+				} else {
+						success = false;
+				}
+		} else {
+				success = false;
+		}
+		srcFile.close();
+		destFile.close();
+			// Set file permissions
+		if( stat( QFile::encodeName(src), &status ) == 0 )  {
+				chmod( QFile::encodeName(dest), status.st_mode );
     }
 
-  return success;
+		return success;
 }
 
 void AdvancedFm::runCommand() {
@@ -708,11 +716,9 @@ void AdvancedFm::startProcess(const QString & cmd) {
   QStringList command;
   OProcess *process;
   process = new OProcess();
-  connect(process, SIGNAL(processExited(Opie::Core::OProcess*)),
-          this, SLOT( processEnded(Opie::Core::OProcess*)));
+  connect(process, SIGNAL(processExited(Opie::Core::OProcess*)), this, SLOT( processEnded(Opie::Core::OProcess*)));
 
-  connect(process, SIGNAL( receivedStderr(Opie::Core::OProcess*,char*,int)),
-          this, SLOT( oprocessStderr(Opie::Core::OProcess*,char*,int)));
+  connect(process, SIGNAL( receivedStderr(Opie::Core::OProcess*,char*,int)), this, SLOT( oprocessStderr(Opie::Core::OProcess*,char*,int)));
 
   command << "/bin/sh";
   command << "-c";
@@ -754,13 +760,13 @@ bool AdvancedFm::eventFilter( QObject * o, QEvent * e ) {
     }
    if ( o->inherits( "QListView" ) ) {
        if ( e->type() == QEvent::FocusIn ) {
-           if( o == Local_View) { //keep track of which view
- 							qDebug("local view");
-              whichTab = 1;
-           } else {
-              whichTab = 2;
- 						 qDebug("remote view");
-           }
+//            if( o == Local_View) { //keep track of which view
+//  							qDebug("local view");
+//               whichTab = 1;
+//            } else {
+//               whichTab = 2;
+//  						 qDebug("remote view");
+//            }
        }
        OtherView()->setSelected( OtherView()->currentItem(), FALSE );//make sure there's correct selection
      }
@@ -789,25 +795,18 @@ void AdvancedFm::doRename(QListView * view) {
     QRect r = view->itemRect( view->currentItem( ));
     r = QRect( view->viewportToContents( r.topLeft() ), r.size() );
     r.setX( view->contentsX() );
-
-        if ( r.width() > view->visibleWidth() )
+		if ( r.width() > view->visibleWidth() )
         r.setWidth( view->visibleWidth() );
 
     renameBox = new QLineEdit( view->viewport(), "qt_renamebox" );
     renameBox->setFrame(true);
-
     renameBox->setText(  view->currentItem()->text(0) );
-
     renameBox->selectAll();
     renameBox->installEventFilter( this );
-
     view->addChild( renameBox, r.x(), r.y() );
-
-        renameBox->resize( r.size() );
-
-        view->viewport()->setFocusProxy( renameBox );
-
-        renameBox->setFocus();
+		renameBox->resize( r.size() );
+		view->viewport()->setFocusProxy( renameBox );
+		renameBox->setFocus();
     renameBox->show();
 }
 
