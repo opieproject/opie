@@ -43,6 +43,8 @@ int onac ( void );
 
 static int opiealarm_was_running;
 
+static pid_t startpid = 0;
+
 
 void log_msg ( const char *msg )
 {
@@ -58,6 +60,9 @@ void error_msg_and_die ( int perr, const char *msg )
 		log_msg ( strerror ( errno ));
 	log_msg ( msg );
 
+	if ( getpid ( ) != startpid ) 
+		kill ( startpid, SIGUSR1 );
+
 	while ( 1 )		// pretend we are waiting on RTC, so opiealarm -r can kill us
 		sleep ( 1 );
 }
@@ -65,9 +70,16 @@ void error_msg_and_die ( int perr, const char *msg )
 
 void sig_handler ( int sig )
 {
-	log_msg ( "GOT SIGNAL -> EXITING\n" );
-	fclose ( log );
+	if ( log ) {
+		log_msg ( "GOT SIGNAL -> EXITING\n" );
+		fclose ( log );
+	}
 	remove_pidfile ( );
+	exit ( 0 );
+}
+
+void sig_handler_parent ( int sig )
+{
 	exit ( 0 );
 }
 
@@ -88,8 +100,12 @@ int fork_with_pidfile ( void )
 	
 	pid = fork ( );
 	
-	if ( pid > 0 )
+	if ( pid > 0 ) {
+		signal ( SIGUSR1, sig_handler_parent );
+		while ( 1 )
+			sleep ( 1000 );
 		exit ( 0 );
+	}
 	else if ( pid < 0 ) {
 		perror ( "forking failed" );
 		return 0;
@@ -180,6 +196,7 @@ int main ( int argc, char **argv )
 		usage ( );
 
 	// kill running opiealarm
+	startpid = getpid ( );
 	opiealarm_was_running = kill_with_pidfile ( );
 	remove_pidfile ( );
 
@@ -191,6 +208,7 @@ int main ( int argc, char **argv )
 	return 0;
 }		
 		
+
 
 int suspend ( int fix_rtc )
 {
@@ -209,7 +227,6 @@ int suspend ( int fix_rtc )
 	log_msg ( "STARTING\n" );
 	
 
-
 	if (!( fp = fopen ( "/etc/resumeat", "r" ))) 
 		error_msg_and_die ( 1, "/etc/resumeat" );
 	
@@ -223,8 +240,8 @@ int suspend ( int fix_rtc )
 	if ( alrt == 0 )
 		error_msg_and_die ( 0, "/etc/resumeat contains an invalid time description" );
 	
-	/* subtract 5 sec from event time... */
-	alrt -= 5;
+	alrt -= 5; 	// wake up 5 sec before the specified time
+
 
 	if ( log )	
 		fprintf ( log, "Setting RTC alarm to %d\n", alrt );
@@ -274,7 +291,9 @@ int suspend ( int fix_rtc )
 	if ( ioctl ( fd, RTC_AIE_ON, 0 ) < 0 )
 		error_msg_and_die ( 1, "ioctl RTC_AIE_ON" );
 	
-	log_msg ( "SLEEPING\n" );
+	if ( log )
+		fprintf( log, "SIGUSR: pid %d - SLEEPING: pid %d\n", startpid, getpid ( ));
+	kill ( startpid, SIGUSR1 );
 			
 	// wait for alarm irq
 	if ( read ( fd, buf, sizeof( unsigned long )) < 0 )
@@ -326,6 +345,7 @@ int resume ( int resuspend )
 						
 			if ( !fork_with_pidfile ( ))
 				return 4;
+			kill ( startpid, SIGUSR1 );
 
 			// sleep <resuspend> sec (not less!)
 			time ( &start );
