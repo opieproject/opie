@@ -12,7 +12,7 @@
 #define DEVELOPERS_VERSION
 #include "advancedfm.h"
 
-  #include <opie/otabwidget.h>
+#include <opie/otabwidget.h>
 //  #include <opie/ofileselector.h>
 //  #include <opie/ofiledialog.h>
 
@@ -813,8 +813,8 @@ void AdvancedFm::showFileMenu() {
     if(Ir::supported())
         m->insertItem( tr( "Beam File" ), this, SLOT( doBeam() ));
     m->setFocus();
-    m->exec( QCursor::pos() );
-    sleep(1);
+    m->exec( QPoint( 4,QCursor::pos().y()) );
+
     if(m) delete m;
 }
 
