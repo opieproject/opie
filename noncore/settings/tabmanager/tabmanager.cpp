@@ -59,9 +59,11 @@ TabManager::TabManager( QWidget* parent, const char* name):TabManagerBase(parent
   rescanFolder(HOME_APP_DIR);
 
   // Connect the signals and slots
-  connect(tabList, SIGNAL(doubleClicked(QListViewItem *)), this, SLOT(editItem(QListViewItem*)));
+  connect(tabList, SIGNAL(doubleClicked(QListViewItem *)), 
+          this, SLOT(editItem(QListViewItem*)));
   (tabList->header())->hide();
-  connect(tabList, SIGNAL(moveItem(QListViewItem *, QListViewItem *)), this, SLOT(moveApplication(QListViewItem *, QListViewItem *)));
+  connect(tabList, SIGNAL(moveItem(QListViewItem *, QListViewItem *)),
+          this, SLOT(moveApplication(QListViewItem *, QListViewItem *)));
 }
 
 /**
@@ -70,7 +72,7 @@ TabManager::TabManager( QWidget* parent, const char* name):TabManagerBase(parent
  */
 TabManager::~TabManager(){
   if(changed){
-    //QMessageBox::critical(this, "Message", "Please restart Qtopia to see all new changes.",QString("Ok") );
+    //QMessageBox::critical(this, tr("Message"), tr("Please restart Qtopia to see all new changes."),tr("Ok") );
     //filename = fn;
     QCopEnvelope e("QPE/System", "linkChanged(QString)");
     //e << description << filename << mimetype;
@@ -203,12 +205,14 @@ void TabManager::removeItem(){
   if(!item)
     return;
   if(item->childCount() > 0){
-    QMessageBox::critical(this, "Message", "Can't remove with applications\nstill in the group.",QString("Ok") );
+    QMessageBox::critical(this, tr("Message"), tr("Can't remove with applications\nstill in the group."), 
+                          tr("Ok") );
     return;
   }
 
   // Prompt.
-  int answer = QMessageBox::warning(this, "Message", "Are you sure you want to delete?","Yes", "Cancel", 0, 1 );
+  int answer = QMessageBox::warning(this, tr("Message"), tr("Are you sure you want to delete?"),
+                                    tr("Yes"), tr("Cancel"), 0, 1 );
   if (answer)
     return;
 
@@ -230,7 +234,8 @@ void TabManager::removeItem(){
   // If removing failed.
   if(!removeSuccessfull){
     qDebug((QString("removeItem: ") + location).latin1());
-    QMessageBox::critical(this, "Message", "Can't remove.",QString("Ok") );
+    QMessageBox::critical(this, tr("Message"), tr("Can't remove."), 
+                          tr("Ok") );
     return;
   }
 
@@ -270,7 +275,7 @@ void TabManager::editItem( QListViewItem * item){
     return;
   }
 
-  AppEdit application(this, "Application edit", true);
+  AppEdit application(this, tr("Application edit"), true);
   application.nameLineEdit->setText(app.name());
   application.iconLineEdit->setText(app.pixmapString());
   application.execLineEdit->setText(app.exec());
@@ -279,7 +284,7 @@ void TabManager::editItem( QListViewItem * item){
   if(item->parent() == NULL){
     application.execLineEdit->setEnabled(false);
     application.TextLabel3->setEnabled(false);
-    application.setCaption("Tab");
+    application.setCaption(tr("Tab"));
   }
 
   // Only do somthing if they hit OK
@@ -300,7 +305,8 @@ void TabManager::editItem( QListViewItem * item){
   app.setComment(application.commentLineEdit->text());
   app.setExec(application.execLineEdit->text());
   if(!app.writeLink()){
-    QMessageBox::critical(this, "Message", "Can't save.",QString("Ok") );
+    QMessageBox::critical(this, tr("Message"), tr("Can't save."),
+                          tr("Ok") );
     return;
   }
 
@@ -364,7 +370,8 @@ void TabManager::moveApplication(QListViewItem *item, QListViewItem *newGroup){
   // Move file
   QDir r;
   if(!r.rename(itemList[item], newFolder)){
-    QMessageBox::critical(this, "Message", "Can't move application.",QString("Ok") );
+    QMessageBox::critical(this, tr("Message"), tr("Can't move application."), 
+                          tr("Ok") );
     return;
   }
   //qDebug((QString("moveApplication: ") + itemList[item]).latin1());
