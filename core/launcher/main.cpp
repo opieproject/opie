@@ -35,6 +35,7 @@
 #include <qfile.h>
 #include <qimage.h>
 #include <qwindowsystem_qws.h>
+#include <qwsmouse_qws.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/alarmserver.h>
 
@@ -43,9 +44,7 @@
 #include <signal.h>
 #include <unistd.h>
 
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX)
 #include "../calibrate/calibrate.h"
-#endif
 
 using namespace Opie;
 
