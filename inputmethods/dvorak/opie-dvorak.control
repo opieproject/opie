@@ -4,7 +4,7 @@ Section: opie/inputmethods
 Maintainer: Jeremy Cowgar <jc@cowgar.com>
 Architecture: arm
 Version: $QPE_VERSION-4
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base ($QPE_VERSION) opie-pickboard
 Description: Dvorak keyboard input method
  Dvorak keyboard input method for the Opie environment. This is
  based off of the original keyboard input method. Thanks be to

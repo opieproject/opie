@@ -2,19 +2,15 @@ TEMPLATE	= lib
 CONFIG		+= qt warn_on release
 HEADERS	=   keyboard.h \
             configdlg.h \
-	    ../pickboard/pickboardcfg.h \
-	    ../pickboard/pickboardpicks.h \
 	    keyboardimpl.h 
 SOURCES	=   keyboard.cpp \
             configdlg.cpp \
-	    ../pickboard/pickboardcfg.cpp \
-	    ../pickboard/pickboardpicks.cpp \
 	    keyboardimpl.cpp
 TARGET		= qmultikey
 DESTDIR		= $(OPIEDIR)/plugins/inputmethods
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += ../$(OPIEDIR)/include ../../launcher
-LIBS            += -lqpe
+LIBS            += -lqpe -L$(OPIEDIR)/plugins/inputmethods -lqpickboard
 VERSION		= 1.0.0
 
 TRANSLATIONS    = ../../i18n/pt_BR/libqmultikey.ts
