@@ -73,6 +73,7 @@ using namespace XINE;
 Lib::Lib( InitializationMode initMode, XineVideoWidget* widget ) 
 {
     m_initialized = false;
+    m_duringInitialization = false;
     m_video = false;
     m_wid = widget;
     printf("Lib");
@@ -103,6 +104,7 @@ void Lib::run()
 
 void Lib::initialize()
 {
+    m_duringInitialization = true;
     m_xine =  xine_new( );
 
     QString configPath = QDir::homeDirPath() + "/Settings/opiexine.cf";
@@ -134,6 +136,7 @@ void Lib::initialize()
     m_queue = xine_event_new_queue (m_stream);
 
     xine_event_create_listener_thread (m_queue, xine_event_handler, this);
+    m_duringInitialization = false;
 }
 
 Lib::~Lib() {
@@ -155,7 +158,7 @@ Lib::~Lib() {
 }
 
 void Lib::resize ( const QSize &s ) {
-    assert( m_initialized );
+    assert( m_initialized || m_duringInitialization );
 
     if ( s. width ( ) && s. height ( ) ) {
         ::null_set_gui_width( m_videoOutput,  s. width() );
