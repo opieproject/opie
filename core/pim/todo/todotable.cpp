@@ -231,6 +231,7 @@ TodoTable::TodoTable( QWidget *parent, const char *name )
       currFindRow( -2 ),
       showDeadl( true)
 {
+    setNumRows(0);
     mCat.load( categoryFileName() );
     setSorting( TRUE );
     setSelectionMode( NoSelection );
@@ -246,7 +247,7 @@ TodoTable::TodoTable( QWidget *parent, const char *name )
 
     setColumnStretchable( 3, FALSE );
     setColumnWidth( 3, 20 );
-    horizontalHeader()->setLabel( 3, tr( "Deadline" ) );    
+    horizontalHeader()->setLabel( 3, tr( "Deadline" ) );
 
     if (showDeadl){
       showColumn (3);
@@ -313,7 +314,7 @@ void TodoTable::slotClicked( int row, int col, int, const QPoint &pos )
 	    emit showDetails( *todo );
 	  }
 	  break;
-        case 3: 
+        case 3:
 	  // may as well edit it...
 	  menuTimer->stop();
 	  emit signalEdit();
@@ -438,7 +439,7 @@ void TodoTable::updateVisible()
 {
     if ( !isUpdatesEnabled() )
 	return;
-  
+
     if (showDeadl){
       showColumn (3);
       adjustColumn(3);
@@ -452,6 +453,9 @@ void TodoTable::updateVisible()
     for ( int row = 0; row < numRows(); row++ ) {
 	CheckItem *ci = (CheckItem *)item( row, 0 );
 	ToDoEvent *t = todoList[ci];
+                if (!t)
+                    continue;
+
 	QArray<int> vlCats = t->categories();
 	bool hide = false;
 	if ( !showComp && ci->isChecked() )
@@ -599,7 +603,7 @@ void TodoTable::loadFile( const QString &/*we use the standard*/ )
   for(QValueList<ToDoEvent>::ConstIterator it = vaList.begin(); it != vaList.end(); ++it ){
     ToDoEvent *event = new ToDoEvent( (*it) );
     list.append( event );
-  }   
+  }
   vaList.clear();
   //     qDebug("parsing done=%d", t.elapsed() );
   if ( list.count() > 0 ) {
@@ -681,7 +685,7 @@ void TodoTable::keyPressEvent( QKeyEvent *e )
 			emit signalEdit();
 		default:
 			break;
-		}		
+		}
 	} else
 		QTable::keyPressEvent( e );
 }
@@ -758,7 +762,7 @@ int TodoTable::showCategoryId() const
 	id = mCat.id( "Todo List", showCat );
     return id;
 }
-void TodoTable::applyJournal() 
+void TodoTable::applyJournal()
 {
   // we need to hack
   QFile file( journalFileName() );
@@ -809,7 +813,7 @@ void TodoTable::slotCheckDay()
   if( mDay.daysTo(date )!= 0 ){
     setPaintingEnabled( FALSE );
     for(int i=0; i < numRows(); i++ ){
-      ToDoEvent *t = todoList[static_cast<CheckItem*>(item(i, 0))];      
+      ToDoEvent *t = todoList[static_cast<CheckItem*>(item(i, 0))];
       static_cast<DueTextItem*>(item(i, 3) )->setToDoEvent( t );
 
     }
@@ -918,8 +922,8 @@ static ToDoEvent xmlToEvent( XMLElement *element )
   // category
   dummy = element->attribute("Categories" );
   QStringList ids = QStringList::split(";", dummy );
-  event.setCategories( ids );     
-  
+  event.setCategories( ids );
+
   //uid
   dummy = element->attribute("Uid" );
   dumInt = dummy.toInt(&ok );

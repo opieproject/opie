@@ -192,9 +192,6 @@ private:
 
 inline void TodoTable::insertIntoTable( ToDoEvent *todo, int row )
 {
-    int rows = numRows();
-    ++rows;
-    setNumRows( rows );
     QString sortKey = (char) ((todo->isCompleted() ? 'a' : 'A')
 			      + todo->priority() )
 		      + Qtopia::buildSortKey( todo->description() );
