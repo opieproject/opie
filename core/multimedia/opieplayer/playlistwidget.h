@@ -72,7 +72,11 @@ void keyReleaseEvent( QKeyEvent *e);
 private:
     void doBlank();
     void doUnblank();
- 
+    void readm3u(const QString &);
+    void writem3u(const QString &);
+    void readPls(const QString &);
+
+    
     void initializeStates();
     void readConfig( Config& cfg );
     void writeConfig( Config& cfg ) const;

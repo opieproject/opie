@@ -19,6 +19,7 @@
 **********************************************************************/
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
+#include <qpe/config.h>
 
 #include <qwidget.h>
 #include <qpixmap.h>
@@ -65,20 +66,27 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     QWidget( parent, name, f )
 {
     setCaption( tr("OpiePlayer") );
-
+    Config cfg("OpiePlayer");
+    cfg.setGroup("AudioWidget");
 //     QGridLayout *layout = new QGridLayout( this );
 //     layout->setSpacing( 2);
 //     layout->setMargin( 2);
+    QString backgroundPix, buttonsAllPix, buttonsBigPix, controlsPix, animatedPix;
+    backgroundPix=cfg.readEntry( " backgroundPix", "opieplayer/metalFinish");
+    buttonsAllPix=cfg.readEntry( "buttonsAllPix","opieplayer/mediaButtonsAll");
+    buttonsBigPix=cfg.readEntry( "buttonsBigPix","opieplayer/mediaButtonsBig");
+    controlsPix=cfg.readEntry( "controlsPix","opieplayer/mediaControls");
+    animatedPix=cfg.readEntry( "animatedPix", "opieplayer/animatedButton");
 
-    setBackgroundPixmap( Resource::loadPixmap( "opieplayer/metalFinish" ) );
-    pixmaps[0] = new QPixmap( Resource::loadPixmap( "opieplayer/mediaButtonsAll" ) );
-    pixmaps[1] = new QPixmap( Resource::loadPixmap( "opieplayer/mediaButtonsBig" ) );
-    pixmaps[2] = new QPixmap( Resource::loadPixmap( "opieplayer/mediaControls" ) );
-    pixmaps[3] = new QPixmap( Resource::loadPixmap( "opieplayer/animatedButton" ) );
+    setBackgroundPixmap( Resource::loadPixmap( backgroundPix) );
+    pixmaps[0] = new QPixmap( Resource::loadPixmap( buttonsAllPix ) );
+    pixmaps[1] = new QPixmap( Resource::loadPixmap( buttonsBigPix ) );
+    pixmaps[2] = new QPixmap( Resource::loadPixmap( controlsPix ) );
+    pixmaps[3] = new QPixmap( Resource::loadPixmap( animatedPix) );
 
     songInfo = new Ticker( this );
     songInfo->setFocusPolicy( QWidget::NoFocus );
-     songInfo->setGeometry( QRect( 7, 3, 220, 20 ) );
+    songInfo->setGeometry( QRect( 7, 3, 220, 20 ) );
 //    layout->addMultiCellWidget( songInfo, 0, 0, 0, 2 );
  
     slider = new QSlider( Qt::Horizontal, this );
@@ -86,7 +94,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     slider->setFixedHeight( 20 );
     slider->setMinValue( 0 );
     slider->setMaxValue( 1 );
-    slider->setBackgroundPixmap( Resource::loadPixmap( "opieplayer/metalFinish" ) );
+    slider->setBackgroundPixmap( Resource::loadPixmap( backgroundPix ) );
     slider->setFocusPolicy( QWidget::NoFocus );
     slider->setGeometry( QRect( 7, 262, 220, 20 ) );
       //  layout->addMultiCellWidget( slider, 4, 4, 0, 2 );

@@ -627,15 +627,6 @@ void PlayListWidget::saveList() {
         Config cfg( filename +".playlist");
         writeConfig( cfg );
 
-//             qDebug("same name so delete lnk??");
-//         if( playLists->selected()->name() == filename) {
-
-//             qDebug("same name so delete lnk");
-//             QFile().remove(playLists->selected()->file());
-//             QFile().remove(playLists->selected()->linkFile());
-//             playLists->reread();
-//         }
-//        qDebug("new doclnk");            
         DocLnk lnk;
 //        lnk.setComment( "");
         lnk.setFile(QDir::homeDirPath()+"/Settings/"+filename+".playlist.conf"); //sets File property
@@ -847,6 +838,7 @@ void PlayListWidget::btnPlay(bool b) {
           d->selectedFiles->removeSelected( );
           tabWidget->setCurrentPage(1);
           d->selectedFiles->unSelect();
+          insanityBool=FALSE;         
 //          audioView->clearSelection();
       }
       break;
@@ -858,6 +850,7 @@ void PlayListWidget::btnPlay(bool b) {
           d->selectedFiles->removeSelected( );
           tabWidget->setCurrentPage(2);
           d->selectedFiles->unSelect();
+          insanityBool=FALSE;
 //          videoView->clearSelection();
       }
       break;
@@ -899,7 +892,7 @@ void PlayListWidget::viewPressed( int mouse, QListViewItem *item, const QPoint& 
 void PlayListWidget::playSelected()
 {
     btnPlay( TRUE);
-    d->selectedFiles->unSelect();
+//    d->selectedFiles->unSelect();
 }
 
 void PlayListWidget::playlistViewPressed( int mouse, QListViewItem *item, const QPoint& point, int i)
@@ -1024,38 +1017,32 @@ void PlayListWidget::openFile() {
     fileDlg->exec();
     if( fileDlg->result() == 1 ) {
         filename = fileDlg->LineEdit1->text();
-
-//         InputDialog *fileDlg2;
-//         fileDlg2 = new InputDialog(this,tr("Name"),TRUE, 0);
-//         fileDlg2->exec();
-//         if( fileDlg2->result() == 1 ) {
-//             name = fileDlg2->LineEdit1->text();
-//         }
 //http://205.188.234.129:8030
 // http://66.28.68.70:8000
         qDebug(filename);
-        DocLnk lnk;
-//     if(filename.left(7) == "http://")
-//         name=  filename.right(filename.length()-filename.find("http://")-7);
-//     else name = filename;
-//     qDebug("name is "+name);
-//     lnk.setComment(filename);
-        lnk.setName(filename); //sets file name
-        if(filename.right(1) != "/" && filename.right(3) != "mp3" && filename.right(3) != "MP3")
-            filename += "/";
-        lnk.setFile(filename); //sets File property
+        if(filename.right(3) == "m3u")
+            readm3u( filename);
+        else if(filename.right(3) == "pls")
+            readPls( filename);
+        else {
+            DocLnk lnk;
 
-        lnk.setType("audio/x-mpegurl");
-        lnk.setExec("opieplayer");
-        lnk.setIcon("opieplayer/MPEGPlayer");
+            lnk.setName(filename); //sets file name
+            if(filename.right(1) != "/" && filename.right(3) != "mp3" && filename.right(3) != "MP3")
+                filename += "/";
+            lnk.setFile(filename); //sets File property
 
-        if(!lnk.writeLink()) 
-            qDebug("Writing doclink did not work");
-        d->selectedFiles->addToSelection(  lnk);
+            lnk.setType("audio/x-mpegurl");
+            lnk.setExec("opieplayer");
+            lnk.setIcon("opieplayer/MPEGPlayer");
+
+            if(!lnk.writeLink()) 
+                qDebug("Writing doclink did not work");
+            d->selectedFiles->addToSelection(  lnk);
 //     if(fileDlg2)
 //         delete fileDlg2;
+        }
     }
-
     if(fileDlg)
         delete fileDlg;
 }
@@ -1104,4 +1091,16 @@ void PlayListWidget::doUnblank() {
       }
        QCopEnvelope h("QPE/System", "setBacklight(int)");
        h <<-3;// v[1]; // -3 Force on
+}
+
+void PlayListWidget::readm3u(const QString &filename) {
+
+}
+
+void PlayListWidget::writem3u(const QString &filename) {
+
+}
+
+void PlayListWidget::readPls(const QString &filename) {
+
 }

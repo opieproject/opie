@@ -11,9 +11,7 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+
 class QLineEdit;
 
 class InputDialog : public QDialog
@@ -25,7 +23,8 @@ public:
     ~InputDialog();
     QString inputText;
     QLineEdit* LineEdit1;
-
+protected slots:
+    void browse();
 };
 
 #endif // INPUTDIALOG_H

@@ -19,6 +19,8 @@
 **********************************************************************/
 #include <qpe/resource.h>
 #include <qpe/mediaplayerplugininterface.h>
+#include <qpe/config.h>
+
 #include <qwidget.h>
 #include <qpainter.h>
 #include <qpixmap.h>
@@ -67,16 +69,25 @@ static const int numButtons = (sizeof(videoButtons)/sizeof(MediaButton));
 VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
     QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
     setCaption( tr("OpiePlayer") );
-    setBackgroundPixmap( Resource::loadPixmap( "opieplayer/metalFinish" ) );
-    pixmaps[0] = new QPixmap( Resource::loadPixmap( "opieplayer/mediaButton0a" ) );
-    pixmaps[1] = new QPixmap( Resource::loadPixmap( "opieplayer/mediaButton0b" ) );
-    pixmaps[2] = new QPixmap( Resource::loadPixmap( "opieplayer/mediaControls0" ) );
+    Config cfg("OpiePlayer");
+    cfg.setGroup("VideoWidget");
+
+    QString backgroundPix, Button0aPix, Button0bPix, controlsPix;
+    backgroundPix=cfg.readEntry( "backgroundPix", "opieplayer/metalFinish");
+    Button0aPix=cfg.readEntry( "Button0aPix", "opieplayer/mediaButton0a");
+    Button0bPix=cfg.readEntry( "Button0bPix","opieplayer/mediaButton0b");
+    controlsPix=cfg.readEntry( "controlsPix","opieplayer/mediaControls0" );
+    
+    setBackgroundPixmap( Resource::loadPixmap( backgroundPix) );
+    pixmaps[0] = new QPixmap( Resource::loadPixmap( Button0aPix ) );
+    pixmaps[1] = new QPixmap( Resource::loadPixmap( Button0bPix ) );
+    pixmaps[2] = new QPixmap( Resource::loadPixmap( controlsPix) );
     currentFrame = new QImage( 220 + 2, 160, (QPixmap::defaultDepth() == 16) ? 16 : 32 );
 
     slider = new QSlider( Qt::Horizontal, this );
     slider->setMinValue( 0 );
     slider->setMaxValue( 1 );
-    slider->setBackgroundPixmap( Resource::loadPixmap( "opieplayer/metalFinish" ) );
+    slider->setBackgroundPixmap( Resource::loadPixmap( backgroundPix ) );
     slider->setFocusPolicy( QWidget::NoFocus );
     slider->setGeometry( QRect( 7, 250, 220, 20 ) );
 
