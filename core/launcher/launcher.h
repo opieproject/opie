@@ -150,6 +150,8 @@ private:
     LauncherTabWidget *tabs;
     QStringList ids;
     TaskBar *tb;
+
+    bool docTabEnabled;
 };
 
 #endif // LAUNCHERVIEW_H

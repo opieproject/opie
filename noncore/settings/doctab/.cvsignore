@@ -1,0 +1,4 @@
+Makefile*
+languagesettingsbase.cpp
+languagesettingsbase.h
+moc_*

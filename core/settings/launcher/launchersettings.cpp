@@ -36,6 +36,7 @@
 #include "menusettings.h"
 #include "taskbarsettings.h"
 #include "inputmethodsettings.h"
+#include "doctabsettings.h"
 
 LauncherSettings::LauncherSettings (QWidget*,const char*, WFlags) 
     : QDialog ( 0, "LauncherSettings", false, WStyle_ContextHelp )
@@ -51,12 +52,13 @@ LauncherSettings::LauncherSettings (QWidget*,const char*, WFlags)
 	m_taskbar = new TaskbarSettings ( tw );
 	m_menu = new MenuSettings ( tw );
 	m_imethods = new InputMethodSettings ( tw );
+	m_doctab = new DocTabSettings ( tw );
 
 	tw-> addTab ( m_taskbar, "wait", tr( "Taskbar" ));
 	tw-> addTab ( m_menu, "go", tr( "O-Menu" ));
 	tw-> addTab ( m_tabs, "launchersettings/tabstab.png", tr( "Tabs" ));
 	tw-> addTab ( m_imethods, "launchersettings/inputmethod.png", tr( "InputMethods" ));
-
+	tw-> addTab ( m_doctab, "DocsIcon", tr( "DocTab" ) );
 	tw-> setCurrentTab ( m_taskbar );
 }
 
@@ -66,6 +68,7 @@ void LauncherSettings::accept ( )
 	m_menu-> accept ( );
 	m_tabs-> accept ( );
 	m_imethods-> accept ( );
+	m_doctab-> accept ( );    
 
 	QDialog::accept ( );
 }

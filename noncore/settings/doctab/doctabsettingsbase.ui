@@ -1,0 +1,115 @@
+<!DOCTYPE UI><UI>
+<class>DocTabSettingsBase</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>DocTabSettingsBase</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>273</width>
+            <height>293</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>DocTab Settings</string>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>11</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>6</number>
+        </property>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel1</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>&lt;b&gt;Do you want a Documents Tab?&lt;/b&gt;&lt;p&gt;
+(Note that such a tab scans &lt;i&gt;all&lt;/i&gt; documents
+on &lt;i&gt;all&lt;/i&gt; external media, which can be quite
+slow and annyoing...)</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QButtonGroup</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>ButtonGroup1</cstring>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string>Enable the DocTab</string>
+            </property>
+            <vbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>11</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget>
+                    <class>QRadioButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>yes</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Yes, please!</string>
+                    </property>
+                    <property stdset="1">
+                        <name>checked</name>
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QRadioButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>no</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>No, thanks.</string>
+                    </property>
+                </widget>
+            </vbox>
+        </widget>
+        <spacer>
+            <property>
+                <name>name</name>
+                <cstring>Spacer1</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Vertical</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+    </vbox>
+</widget>
+</UI>

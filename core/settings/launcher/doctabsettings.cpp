@@ -26,7 +26,7 @@
 
 */
 
-#include "inputmethodsettings.h"
+#include "doctabsettings.h"
 
 #include <qpe/config.h>
 #include <qpe/qlibrary.h>
@@ -38,49 +38,34 @@
 #include <qlabel.h>
 #include <qwhatsthis.h>
 
-InputMethodSettings::InputMethodSettings( QWidget *parent, const char *name ):QWidget( parent, name )
+DocTabSettings::DocTabSettings( QWidget *parent, const char *name ):QWidget( parent, name )
 {
     QBoxLayout *lay = new QVBoxLayout( this, 4, 4 );
 
-    _resize = new QCheckBox( tr( "Resize application on Popup" ), this );
-    _float = new QCheckBox( tr( "Enable floating and resizing" ), this );
-
-    QHBoxLayout* hbox = new QHBoxLayout( lay, 4 );
-    hbox->addWidget( new QLabel( "Initial Width:", this ) );
-    _size = new QSpinBox( 10, 100, 10, this );
-    _size->setSuffix( "%" );
-    hbox->addWidget( _size );
-    hbox->addStretch();
+    _enable = new QCheckBox( tr( "Enable the Documents Tab" ), this );
 
     Config cfg( "Launcher" );
-    cfg.setGroup( "InputMethods" );
-    _resize->setChecked( cfg.readBoolEntry( "Resize", true ) );
-    _float->setChecked( cfg.readBoolEntry( "Float", false ) );
-    _size->setValue( cfg.readNumEntry( "Width", 100 ) );
+    cfg.setGroup( "DocTab" );
+    _enable->setChecked( cfg.readBoolEntry( "Enable", true ) );
 
-    lay->addWidget( _resize );
-    lay->addWidget( _float );
+    lay->addWidget( _enable );
     lay->addWidget( new QLabel( tr( "<b>Note:</b> Changing these settings may need restarting Opie to become effective." ), this ) );
 
     lay->addStretch();
 
-    QWhatsThis::add( _resize, tr( "Check, if you want the application to be automatically resized if the input method pops up." ) );
-    QWhatsThis::add( _float, tr( "Check, if you want to move and/or resize input methods" ) );
-    QWhatsThis::add( _size, tr( "Specify the percentage of the screen width for the input method" ) );
+    QWhatsThis::add( _enable, tr( "Check, if you want the Documents Tab to be visible." ) );
 }
 
-void InputMethodSettings::appletChanged()
+void DocTabSettings::appletChanged()
 {
 }
 
-void InputMethodSettings::accept()
+void DocTabSettings::accept()
 {
-    qDebug( "InputMethodSettings::accept()" );
+    qDebug( "DocTabSettings::accept()" );
     Config cfg( "Launcher" );
-    cfg.setGroup( "InputMethods" );
-    cfg.writeEntry( "Resize", _resize->isChecked() );
-    cfg.writeEntry( "Float", _float->isChecked() );
-    cfg.writeEntry( "Width", _size->value() );
+    cfg.setGroup( "DocTab" );
+    cfg.writeEntry( "Enable", _enable->isChecked() );
     cfg.write();
 }
 

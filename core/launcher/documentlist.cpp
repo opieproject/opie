@@ -21,6 +21,7 @@
 #include "serverinterface.h"
 #include "launcherglobal.h"
 
+#include <qtopia/config.h>
 #include <qtopia/mimetype.h>
 #include <qtopia/resource.h>
 #include <qtopia/global.h>
@@ -104,7 +105,21 @@ DocumentList::DocumentList( ServerInterface *serverGui, bool scanDocs,
 void DocumentList::startInitialScan()
 {
     reloadAppLnks();
-    reloadDocLnks();
+
+    Config cfg( "Launcher" );
+    cfg.setGroup( "DocTab" );
+    bool docTabEnabled = cfg.readBoolEntry( "Enable", true );
+    if ( docTabEnabled )
+        reloadDocLnks();
+    else
+    {
+        if ( d->sendDocLnks && d->serverGui )
+        {
+            d->serverGui->documentScanningProgress( 0 );
+            d->serverGui->allDocumentsRemoved();
+        }
+    }
+
 }
 
 DocumentList::~DocumentList()

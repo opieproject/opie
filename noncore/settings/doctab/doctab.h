@@ -17,9 +17,41 @@
 ** not clear to you.
 **
 **********************************************************************/
+#ifndef DOCTAB_H
+#define DOCTAB_H
 
-#include "settings.h"
 
-#include <opie/oapplicationfactory.h>
+#include <qstrlist.h> 
+#include <qasciidict.h>
+#include "doctabsettingsbase.h"
 
-OPIE_EXPORT_APP( OApplicationFactory<LanguageSettings> )
+class QPEDialogListener;
+
+class DocTabSettings : public DocTabSettingsBase
+{ 
+    Q_OBJECT
+
+public:
+    DocTabSettings( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+    ~DocTabSettings();
+
+    static QString appName() { return QString::fromLatin1("doctab"); }
+
+protected:
+    void accept();
+    void reject();
+    void done(int);
+
+private slots:
+    void applyDocTab();
+    void reset();
+
+private:
+    static QString actualDocTab;
+
+    QPEDialogListener *dl;
+};
+
+
+#endif // SETTINGS_H
+

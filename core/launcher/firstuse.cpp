@@ -78,6 +78,8 @@ settingsTable [] =
 {
     { FALSE, "language", "raise()", "accept()", // No tr
 	QT_TR_NOOP("Language") },
+    { FALSE, "doctab", "raise()", "accept()", // No tr
+	QT_TR_NOOP("DocTab") },
 #ifndef Q_OS_WIN32
     { FALSE, "systemtime", "raise()", "accept()", // No tr
 	QT_TR_NOOP("Time and Date") },
