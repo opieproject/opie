@@ -182,4 +182,11 @@ protected:
     void clean();
 };
 
+struct folderStat
+{
+    unsigned int message_count;
+    unsigned int message_unseen;
+    unsigned int message_recent;
+};
+
 #endif

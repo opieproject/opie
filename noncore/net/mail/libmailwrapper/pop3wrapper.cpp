@@ -216,3 +216,14 @@ int POP3wrapper::deleteAllMail(const Folder*)
     }           
     return res;
 }
+
+void POP3wrapper::statusFolder(folderStat&target_stat,const QString&)
+{
+    login();
+    target_stat.message_count = 0;
+    target_stat.message_unseen = 0;
+    target_stat.message_recent = 0;
+    if (!m_pop3) return;
+    int r = mailsession_status_folder(m_folder->fld_session,0,&target_stat.message_count,
+        &target_stat.message_recent,&target_stat.message_unseen);
+}

@@ -11,6 +11,7 @@ class IMAPwrapper;
 class POP3wrapper;
 class Folder;
 class encodedString;
+struct folderStat;
 
 class AbstractMail:public QObject
 {
@@ -20,6 +21,7 @@ public:
     virtual ~AbstractMail(){}
     virtual QList<Folder>* listFolders()=0;
     virtual void listMessages(const QString & mailbox,QList<RecMail>&target )=0;
+    virtual void statusFolder(folderStat&target_stat,const QString & mailbox="INBOX")=0;
     virtual RecBody fetchBody(const RecMail&mail)=0;
     virtual QString fetchTextPart(const RecMail&mail,const RecPart&part)=0;
     virtual encodedString* fetchDecodedPart(const RecMail&mail,const RecPart&part)=0;
@@ -36,7 +38,7 @@ public:
      * if the implementing subclass has prefixes, 
      * them has to be appended automatic.
      */
-    virtual int createMbox(const QString&,const Folder*parentfolder=0,const QString& delemiter="/",bool getsubfolder=false){return 0;}
+    virtual int createMbox(const QString&,const Folder*parentfolder=0,const QString& delemiter="/",bool getsubfolder=false);
 
     static AbstractMail* getWrapper(IMAPaccount *a);
     static AbstractMail* getWrapper(POP3account *a);

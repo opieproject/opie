@@ -18,6 +18,8 @@ public:
     /* mailbox will be ignored */
     virtual void listMessages(const QString & mailbox, QList<RecMail> &target );
     virtual QList<Folder>* listFolders();
+    /* mailbox will be ignored */
+    virtual void statusFolder(folderStat&target_stat,const QString & mailbox="INBOX");
 
     virtual void deleteMail(const RecMail&mail);
     virtual void answeredMail(const RecMail&mail);

@@ -88,3 +88,7 @@ QString AbstractMail::gen_attachment_id()
     return "{" + stream.read().stripWhiteSpace() + "}";
 }
 
+int AbstractMail::createMbox(const QString&,const Folder*,const QString& delemiter,bool)
+{
+    return 0;
+}

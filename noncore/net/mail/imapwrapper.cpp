@@ -934,3 +934,43 @@ int IMAPwrapper::deleteMbox(const Folder*folder)
     }
     return 1;
 }
+
+void IMAPwrapper::statusFolder(folderStat&target_stat,const QString & mailbox)
+{
+    mailimap_status_att_list * att_list =0;
+    mailimap_mailbox_data_status * status=0;
+    clistiter * cur = 0;
+    int r = 0;
+    int res = 0;
+    target_stat.message_count = 0;
+    target_stat.message_unseen = 0;
+    target_stat.message_recent = 0;
+    login();
+    if (!m_imap) {
+        return;
+    }
+    att_list = mailimap_status_att_list_new_empty();
+    if (!att_list) return;
+    r = mailimap_status_att_list_add(att_list, MAILIMAP_STATUS_ATT_MESSAGES);
+    r = mailimap_status_att_list_add(att_list, MAILIMAP_STATUS_ATT_RECENT);
+    r = mailimap_status_att_list_add(att_list, MAILIMAP_STATUS_ATT_UNSEEN);
+    r = mailimap_status(m_imap, mailbox.latin1(), att_list, &status);
+    for (cur = clist_begin(status->st_info_list);
+            cur != NULL ; cur = clist_next(cur)) {
+        mailimap_status_info * status_info;
+        status_info = (mailimap_status_info *)clist_content(cur);
+        switch (status_info->st_att) {
+        case MAILIMAP_STATUS_ATT_MESSAGES:
+            target_stat.message_count = status_info->st_value;
+        break;
+        case MAILIMAP_STATUS_ATT_RECENT:
+             target_stat.message_recent = status_info->st_value;
+        break;
+        case MAILIMAP_STATUS_ATT_UNSEEN:
+             target_stat.message_unseen = status_info->st_value;
+        break;
+        }
+    }
+    mailimap_mailbox_data_status_free(status);
+    mailimap_status_att_list_free(att_list);
+}

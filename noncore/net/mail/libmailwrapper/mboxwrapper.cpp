@@ -301,3 +301,24 @@ int MBOXwrapper::deleteMbox(const Folder*tfolder)
     return 1;
 }
 
+void MBOXwrapper::statusFolder(folderStat&target_stat,const QString & mailbox)
+{
+    mailfolder*folder = 0;
+    mailstorage*storage = mailstorage_new(NULL);
+    target_stat.message_count = 0;
+    target_stat.message_unseen = 0;
+    target_stat.message_recent = 0;
+    QString p = MBOXPath+"/"+mailbox;
+    QFile fi(p);
+    if (!fi.exists()) {
+        Global::statusMessage(tr("Mailbox doesn't exist."));
+        return;
+    }
+    int r = mbox_mailstorage_init(storage,(char*)p.latin1(),0,0,0);
+    folder = mailfolder_new( storage,(char*)p.latin1(),NULL);   
+    r = mailfolder_connect(folder);
+    r = mailsession_status_folder(folder->fld_session,(char*)mailbox.latin1(),&target_stat.message_count,
+        &target_stat.message_recent,&target_stat.message_unseen);
+    if (folder) mailfolder_free(folder);
+    if (storage) mailstorage_free(storage);
+}
