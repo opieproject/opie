@@ -92,41 +92,41 @@ void DateBookWeekView::initNames()
     static bool bFirst = true;
     if ( bFirst ) {
 	if ( bOnMonday ) {
-	    header->addLabel( tr("M", "Monday" ) );
-	    header->addLabel( tr("T", "Tuesday") );
-	    header->addLabel( tr("W", "Wednesday" ) );
-	    header->addLabel( tr("T", "Thursday" ) );
-	    header->addLabel( tr("F", "Friday" ) );
-	    header->addLabel( tr("S", "Saturday" ) );
-	    header->addLabel( tr("S", "Sunday" ) );
+	    header->addLabel( tr("Mo", "Monday" ) );
+	    header->addLabel( tr("Tu", "Tuesday") );
+	    header->addLabel( tr("We", "Wednesday" ) );
+	    header->addLabel( tr("Th", "Thursday" ) );
+	    header->addLabel( tr("Fr", "Friday" ) );
+	    header->addLabel( tr("Sa", "Saturday" ) );
+	    header->addLabel( tr("Su", "Sunday" ) );
 	} else {
-	    header->addLabel( tr("S", "Sunday" ) );
-	    header->addLabel( tr("M", "Monday") );
-	    header->addLabel( tr("T", "Tuesday") );
-	    header->addLabel( tr("W", "Wednesday" ) );
-	    header->addLabel( tr("T", "Thursday" ) );
-	    header->addLabel( tr("F", "Friday" ) );
-	    header->addLabel( tr("S", "Saturday" ) );
+	    header->addLabel( tr("Su", "Sunday" ) );
+	    header->addLabel( tr("Mo", "Monday") );
+	    header->addLabel( tr("Tu", "Tuesday") );
+	    header->addLabel( tr("We", "Wednesday" ) );
+	    header->addLabel( tr("Th", "Thursday" ) );
+	    header->addLabel( tr("Fr", "Friday" ) );
+	    header->addLabel( tr("Sa", "Saturday" ) );
 	}
 	bFirst = false;
     } else {
 	// we are change things...
 	if ( bOnMonday ) {
-	    header->setLabel( 1, tr("M", "Monday") );
-	    header->setLabel( 2, tr("T", "Tuesday") );
-	    header->setLabel( 3, tr("W", "Wednesday" ) );
-	    header->setLabel( 4, tr("T", "Thursday" ) );
-	    header->setLabel( 5, tr("F", "Friday" ) );
-	    header->setLabel( 6, tr("S", "Saturday" ) );
-	    header->setLabel( 7, tr("S", "Sunday" ) );
+	    header->setLabel( 1, tr("Mo", "Monday") );
+	    header->setLabel( 2, tr("Tu", "Tuesday") );
+	    header->setLabel( 3, tr("We", "Wednesday" ) );
+	    header->setLabel( 4, tr("Th", "Thursday" ) );
+	    header->setLabel( 5, tr("Fr", "Friday" ) );
+	    header->setLabel( 6, tr("Sa", "Saturday" ) );
+	    header->setLabel( 7, tr("Su", "Sunday" ) );
 	} else {
-	    header->setLabel( 1, tr("S", "Sunday" ) );
-	    header->setLabel( 2, tr("M", "Monday") );
-	    header->setLabel( 3, tr("T", "Tuesday") );
-	    header->setLabel( 4, tr("W", "Wednesday" ) );
-	    header->setLabel( 5, tr("T", "Thursday" ) );
-	    header->setLabel( 6, tr("F", "Friday" ) );
-	    header->setLabel( 7, tr("S", "Saturday" ) );
+	    header->setLabel( 1, tr("Su", "Sunday" ) );
+	    header->setLabel( 2, tr("Mo", "Monday") );
+	    header->setLabel( 3, tr("Tu", "Tuesday") );
+	    header->setLabel( 4, tr("We", "Wednesday" ) );
+	    header->setLabel( 5, tr("Th", "Thursday" ) );
+	    header->setLabel( 6, tr("Fr", "Friday" ) );
+	    header->setLabel( 7, tr("Sa", "Saturday" ) );
 	}
     }
 }
