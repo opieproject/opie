@@ -20,7 +20,7 @@
 #ifndef PLAY_LIST_SELECTION_H
 #define PLAY_LIST_SELECTION_H
 
-#include <qptrlist.h>
+#include <qlist.h>
 #include <qlistview.h>
 #include <qpe/applnk.h>
 #include <qpe/config.h>

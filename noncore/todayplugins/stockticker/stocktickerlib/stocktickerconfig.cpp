@@ -15,10 +15,12 @@
  ***************************************************************************/
 
 #include "stocktickerconfig.h"
+#include <qpe/config.h>
 #include <opie/todayconfigwidget.h>
 
 
 #include <qapplication.h>
+#include <qlayout.h>
 
 #include <qspinbox.h>
 #include <qcheckbox.h>

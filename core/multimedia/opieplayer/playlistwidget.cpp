@@ -39,7 +39,7 @@
 #include <qdir.h>
 #include <qlayout.h>
 #include <qlabel.h>
-#include <qptrlist.h>
+#include <qlist.h>
 #include <qlistbox.h>
 #include <qmainwindow.h>
 #include <qmessagebox.h>
