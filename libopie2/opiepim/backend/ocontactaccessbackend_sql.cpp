@@ -842,6 +842,7 @@ OPimContact OPimContactAccessBackend_SQL::requestContactsAndCache( int uid, cons
 	// All contacts will be stored in the cache, afterwards the contact with the user id "uid" will be returned
 	// by using the cache..  
 	QArray<int> cachelist = uidlist;
+	OPimContact retContact;
 
 	odebug << "Reqest and cache" << cachelist.size() << "elements !" << oendl;
 
@@ -865,6 +866,8 @@ OPimContact OPimContactAccessBackend_SQL::requestContactsAndCache( int uid, cons
 		contact.setExtraMap( requestCustom( contact.uid() ) );
 		odebug << "Caching uid: " << contact.uid() << oendl;
 		cache( contact );
+		if ( contact.uid() == uid )
+			retContact = contact;
 		resItem = res_noncustom.next();
 	} while ( ! res_noncustom.atEnd() ); //atEnd() is true if we are past(!) the list !!
 	t3needed = t3.elapsed();
@@ -874,7 +877,7 @@ OPimContact OPimContactAccessBackend_SQL::requestContactsAndCache( int uid, cons
 	odebug << "RequestContactsAndCache needed: insg.:" << t.elapsed() << " ms, query: " << t2needed
 	       << " ms, mapping: " << t3needed << " ms" << oendl;
 	
-	return cacheFind( uid );
+	return retContact;
 }
 
 QMap<int, QString> OPimContactAccessBackend_SQL::fillNonCustomMap( const OSQLResultItem& resultItem ) const

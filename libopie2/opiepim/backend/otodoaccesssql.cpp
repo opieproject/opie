@@ -454,7 +454,7 @@ QArray<int> OPimTodoAccessBackendSQL::queryByExample( const OPimTodo& , int, con
 }
 OPimTodo OPimTodoAccessBackendSQL::find(int uid ) const{
     FindQuery query( uid );
-    return todo( m_driver->query(&query) );
+    return parseResultAndCache( uid, m_driver->query(&query) );
 
 }
 
@@ -492,8 +492,7 @@ OPimTodo OPimTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
     if ( res.state() != OSQLResult::Success )
         return to;
 
-    todo( res );  //FIXME: Don't like polymorphism here. It makes the code hard to read here..(eilers)
-    return cacheFind( uid );
+    return parseResultAndCache( uid, res );
 }
 
 void OPimTodoAccessBackendSQL::clear() {
@@ -630,11 +629,13 @@ bool OPimTodoAccessBackendSQL::date( QDate& da, const QString& str ) const{
         return true;
     }
 }
-OPimTodo OPimTodoAccessBackendSQL::todo( const OSQLResult& res ) const{
+OPimTodo OPimTodoAccessBackendSQL::parseResultAndCache( int uid, const OSQLResult& res ) const{
     if ( res.state() == OSQLResult::Failure ) {
         OPimTodo to;
         return to;
     }
+
+    OPimTodo retTodo;
 
     OSQLResultItem::ValueList list = res.results();
     OSQLResultItem::ValueList::Iterator it = list.begin();
@@ -645,9 +646,12 @@ OPimTodo OPimTodoAccessBackendSQL::todo( const OSQLResult& res ) const{
 
     for ( ; it != list.end(); ++it ) {
         odebug << "caching" << oendl;
-        cache( todo( (*it) ) );
+	OPimTodo newTodo = todo( (*it) );
+        cache( newTodo );
+	if ( newTodo.uid() == uid )
+		retTodo = newTodo;
     }
-    return to;
+    return retTodo;
 }
 OPimTodo OPimTodoAccessBackendSQL::todo( OSQLResultItem& item )const {
     odebug << "todo(ResultItem)" << oendl;
@@ -707,9 +711,11 @@ OPimTodo OPimTodoAccessBackendSQL::todo( OSQLResultItem& item )const {
 
     return to;
 }
+
+// FIXME: Where is the difference to "find" ? (eilers)
 OPimTodo OPimTodoAccessBackendSQL::todo( int uid )const {
     FindQuery find( uid );
-    return todo( m_driver->query(&find) );
+    return parseResultAndCache( uid, m_driver->query(&find) );
 }
 /*
  * update the dict

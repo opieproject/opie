@@ -75,7 +75,7 @@ private:
     void update()const;
     void fillDict();
     inline bool date( QDate& date, const QString& )const;
-    inline OPimTodo todo( const Opie::DB::OSQLResult& )const;
+    inline OPimTodo parseResultAndCache( int uid, const Opie::DB::OSQLResult& )const;
     inline OPimTodo todo( Opie::DB::OSQLResultItem& )const;
     inline QArray<int> uids( const Opie::DB::OSQLResult& )const;
     OPimTodo todo( int uid )const;

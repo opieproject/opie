@@ -119,12 +119,12 @@ public:
     /**
      * find the OPimRecord uid
      */
-    virtual T find( int uid )const;
+    T find( int uid )const;
 
     /**
      * read ahead cache find method ;)
      */
-    virtual T find( int uid, const QArray<int>&,
+    T find( int uid, const QArray<int>&,
                     uint current, typename OTemplateBase<T>::CacheDirection dir = OTemplateBase<T>::Forward )const;
 
 
