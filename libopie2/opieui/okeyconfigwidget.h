@@ -67,11 +67,17 @@ public:
 
     void addKeyConfig( const OKeyConfigItem& );
     void removeKeyConfig( const OKeyConfigItem& );
+
+    void handleWidget( QWidget* );
 signals:
     void keyConfigChanged( OKeyConfig* );
+    void actionActivated( QWidget*, QKeyEvent*, const OKeyConfigItem& );
 
 private:
     OKeyConfigItemList m_keys;
+    QValueList<QWidget*> m_widgets;
+    class Private;
+    Private *d;
 };
 
 
@@ -87,6 +93,9 @@ public:
     ChangeMode changeMode()const;
 
     void reload();
+private:
+    class Private;
+    Private *d;
 };
 
 }
