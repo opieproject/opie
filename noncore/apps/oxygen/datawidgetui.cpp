@@ -22,7 +22,7 @@ dataWidgetUI::dataWidgetUI() : QDialog()
     QVBoxLayout *vbox = new QVBoxLayout( this );
     
     dataCombo = new QComboBox( this );
-    DataTable = new QTable( 7,2, this );
+    DataTable = new OxydataTable( 7,2, this );
 
     vbox->addWidget( dataCombo );
     vbox->addWidget( DataTable );

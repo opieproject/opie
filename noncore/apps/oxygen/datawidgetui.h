@@ -22,7 +22,7 @@ class dataWidgetUI : public QDialog
 
     private:
         void createTableLayout();
-        QTable *DataTable;
+        OxydataTable *DataTable;
         QComboBox *dataCombo;
 
     private slots:

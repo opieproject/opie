@@ -11,14 +11,37 @@
 #include "dataTable.h"
 #include <qtable.h>
 
-dataTable::dataTable() : QTable()
+OxydataTable::OxydataTable(int numRows, int numCols, QWidget *parent,
+        const char *name) : QTable(numRows, numRows, parent, name)
 {
 }
 
-void dataTable::paintCell(  QPainter *p, int, int, const QRect &cr, bool )
+
+void OxydataTable::paintCell(  QPainter *p, int row, int col, const QRect &cr, bool selected)
 {
-    if ( currentRow()%2) qDebug("foo" );
+    if (  cr.width() == 0 || cr.height() == 0 )
+        return;
+    if (  selected &&
+            row == currentRow() &&
+            col == currentColumn() )
+        selected = FALSE;
+
+    int w = cr.width();
+    int h = cr.height();
+
+    QTableItem *itm = item(  row, col );
+    if (  itm ) {
+        p->save();
+        itm->paint(  p, colorGroup(), cr, selected );
+        p->restore();
+    } else {
+        if ( currentRow()%2 ) //every even row
+            p->fillRect(  0, 0, w, h, selected ? colorGroup().brush(  QColorGroup::Highlight ) : colorGroup().brush(  QColorGroup::Base ) );
+        else                  //every odd row
+            p->fillRect(  0, 0, w, h, selected ? colorGroup().brush(  QColorGroup::Highlight ) : colorGroup().brush(  QColorGroup::Base ) );
+    }
 }
+
 
 
 
