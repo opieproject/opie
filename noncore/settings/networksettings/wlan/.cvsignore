@@ -5,3 +5,5 @@ info.h
 moc_*
 wlan.cpp
 wlan.h
+.moc
+.obj

@@ -1,4 +1,3 @@
-
 Makefile
 Makefile.in
 interfaceadvanced.cpp
@@ -9,3 +8,5 @@ interfacesetup.cpp
 interfacesetup.h
 lib*.so*
 moc*
+.moc
+.obj

@@ -1,6 +1,6 @@
   config WLAN
     boolean "opie-networksettingsplugin-wlan (wireless LAN module)"
     default "n" if NETWORKSETUP
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && NETWORKSETUP && NETWORKSETUP-CORE && INTERFACES && LIBOPIE2NET
-    #comment "opie-networksettingsplugin-wlan needs libopie, libopie2net and networksetup"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI && NETWORKSETUP && NETWORKSETUP-CORE && INTERFACES && LIBOPIE2NET
+    #comment "opie-networksettingsplugin-wlan needs libopie2ui, libopie2net and networksetup"
     #depends !( LIBOPIE2NET && LIBOPIE && NETWORKSETUP)

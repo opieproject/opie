@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/settings
 Maintainer: Patrick S. Vogt <tille@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal, libopiecore2, libopienet2
+Depends: task-opie-minimal, libopiecore2, libopieui2, libopienet2
 Description: Network settings.
 Replaces: opie-networksetup
 Version: $QPE_VERSION$EXTRAVERSION

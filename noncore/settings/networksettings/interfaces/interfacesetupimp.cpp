@@ -12,7 +12,7 @@
 #include <opie/oprocess.h>
 
 #ifdef QWS
-#include <opie/owait.h>
+#include <opie2/owait.h>
 #include <qpe/global.h>
 #include <qapplication.h>
 #endif
@@ -155,9 +155,9 @@ void InterfaceSetupImp::setProfile(const QString &profile){
       if(!interfaces->setMapping(interface->getInterfaceName())){
         interfaces->addMapping(interface->getInterfaceName());
         if(!interfaces->setMapping(interface->getInterfaceName())){
-	  qDebug("InterfaceSetupImp: Added Mapping, but still can't setInterface.");
+      qDebug("InterfaceSetupImp: Added Mapping, but still can't setInterface.");
           return;
-	}
+    }
       }
       interfaces->setMap("map", newInterfaceName);
       interfaces->setScript("getprofile.sh");

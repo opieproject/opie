@@ -28,7 +28,7 @@
 
 #ifdef QWS
  #include <qpe/resource.h>
- #include <opie/oprocess.h>
+ #include <opie2/oprocess.h>
  #include <opie2/onetwork.h>
  #include <opie2/opcap.h>
 #else
@@ -139,16 +139,16 @@ void WLANImp::parseKeyStr(QString keystr) {
       switch (index) {
         case 1:
           keyRadio0->setChecked(true);
-	  break;
+      break;
         case 2:
           keyRadio1->setChecked(true);
-	  break;
+      break;
         case 3:
           keyRadio2->setChecked(true);
-	  break;
+      break;
         case 4:
           keyRadio3->setChecked(true);
-	  break;
+      break;
       }
     } else {
       // key
@@ -170,16 +170,16 @@ void WLANImp::parseKeyStr(QString keystr) {
       switch (index) {
           case 1:
             keyLineEdit0->setText(key);
-	    break;
+        break;
           case 2:
             keyLineEdit1->setText(key);
-	    break;
+        break;
           case 3:
             keyLineEdit2->setText(key);
-	    break;
+        break;
           case 4:
             keyLineEdit3->setText(key);
-	    break;
+        break;
       }
       key = QString::null;
     }
