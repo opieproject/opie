@@ -56,4 +56,13 @@ public:
     Type type() const;
 };
 
+class NoOptions : public ProfileDialogWidget {
+    Q_OBJECT
+    public:
+    NoOptions( const QString& name, QWidget* parent, const char* na );
+    ~NoOptions() {}
+    void load( const Profile& );
+    void save( Profile& );
+    Type type()const{ return Connection; };
+};
 #endif

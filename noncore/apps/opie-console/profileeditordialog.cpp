@@ -13,14 +13,12 @@
 
 namespace {
     void setCurrent( const QString& str, QComboBox* bo ) {
-        for (uint i = 0; i < bo->count(); i++ ) {
+        for (int i = 0; i < bo->count(); i++ ) {
             if ( bo->text(i) == str ) {
                 bo->setCurrentItem( i );
             }
         }
-    }
-
-
+    };
 }
 
 ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact,
@@ -48,7 +46,7 @@ ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact )
 
 Profile ProfileEditorDialog::profile() const
 {
-	return m_prof;
+  	return m_prof;
 }
 
 void ProfileEditorDialog::initUI()
@@ -181,20 +179,15 @@ void ProfileEditorDialog::slotConActivated( const QString& str ) {
     delete m_con;
     m_con = m_fact->newConnectionPlugin( str, m_tabCon );
 
-    if ( m_con ) {
-        m_con->load( m_prof );
-        m_layCon->addWidget( m_con );
-
-        if(!m_showconntab)
-        {
-            tabWidget->addTab( m_tabCon, "", QObject::tr("Connection") );
-            tabWidget->setCurrentTab( tabprof );
-            m_showconntab = 1;
-        }
-    } else {
-        tabWidget->removePage( m_tabCon );
-        m_showconntab = 0;
+    if ( !m_con ) {
+        m_con = new NoOptions( str, m_tabCon, "name");
     }
+    m_con->load( m_prof );
+    m_layCon->addWidget( m_con );
+
+    tabWidget->addTab( m_tabCon, "", QObject::tr("Connection") );
+    tabWidget->setCurrentTab( tabprof );
+
 }
 /*
  * we need to switch the widget

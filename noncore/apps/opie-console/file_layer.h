@@ -49,9 +49,9 @@ public:
 
 public slots:
 
-    virtual void sendFile( const QString& file,
-                           Mode mode, BlockSize blk,
-                           Features feat ) {};
+    virtual void sendFile( const QString&,
+                           Mode, BlockSize,
+                           Features ) {};
 
     /**
      * send a file over the layer

@@ -96,7 +96,8 @@ void SerialConfigWidget::load( const Profile& prof ) {
  * parity
  */
 void SerialConfigWidget::save( Profile& prof ) {
-    int flow, parity, speed;
+    int flow, parity, speed ;
+    flow = parity = speed = 0;
     prof.writeEntry("Device", m_deviceCmb->currentText() );
 
     switch( m_base->flow() ) {
@@ -136,6 +137,7 @@ void SerialConfigWidget::save( Profile& prof ) {
     case IOLayerBase::Baud_19200:
         speed = 19200;
         break;
+    default:
     case IOLayerBase::Baud_9600:
         speed = 9600;
         break;

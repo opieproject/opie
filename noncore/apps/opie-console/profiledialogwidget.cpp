@@ -1,3 +1,6 @@
+#include <qlayout.h>
+#include <qlabel.h>
+
 #include "profiledialogwidget.h"
 
 ProfileDialogWidget::ProfileDialogWidget( const QString&, QWidget* parent,
@@ -33,11 +36,27 @@ ProfileDialogWidget::Type ProfileDialogConnectionWidget::type()const {
 ProfileDialogKeyWidget::ProfileDialogKeyWidget( const QString &na,
                                                 QWidget *parent,
                                                 const char *name)
-    : ProfileDialogWidget(na, parent, name ) 
+    : ProfileDialogWidget(na, parent, name )
 {
 }
 ProfileDialogKeyWidget::~ProfileDialogKeyWidget() {
 }
 ProfileDialogWidget::Type ProfileDialogKeyWidget::type() const{
     return Keyboard;
+}
+
+NoOptions::NoOptions( const QString& name, QWidget* parent, const char* na )
+    : ProfileDialogWidget( name, parent, na ) {
+    QHBoxLayout* lay = new QHBoxLayout(this);
+    QLabel* lbl = new QLabel( this );
+    lbl->setText( tr("This Plugin does not support any configurations") );
+    lbl->setTextFormat( RichText );
+
+    lay->addWidget( lbl );
+}
+void NoOptions::load( const Profile& ) {
+
+}
+void NoOptions::save( Profile& ) {
+
 }
