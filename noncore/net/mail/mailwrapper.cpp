@@ -8,7 +8,6 @@
 
 #include "mailwrapper.h"
 #include "logindialog.h"
-//#include "mail.h"
 #include "defines.h"
 
 Attachment::Attachment( DocLnk lnk )

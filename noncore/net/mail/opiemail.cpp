@@ -1,6 +1,8 @@
+#include <qmessagebox.h>
 #include "opiemail.h"
 #include "editaccounts.h"
 #include "composemail.h"
+#include "smtpwrapper.h"
 
 OpieMail::OpieMail( QWidget *parent, const char *name, WFlags flags )
     : MainWindow( parent, name, flags )
@@ -28,6 +30,23 @@ void OpieMail::slotComposeMail()
 void OpieMail::slotSendQueued()
 {
     qDebug( "Send Queued" );
+    SMTPaccount *smtp = 0;
+
+    QList<Account> list = settings->getAccounts();
+    Account *it;
+//    if (list.count()==1) {
+        for ( it = list.first(); it; it = list.next() ) {
+            if ( it->getType().compare( "SMTP" ) == 0 ) {
+                smtp = static_cast<SMTPaccount *>(it);
+                break;
+            }
+        }
+//    }
+    if (smtp) {
+        SMTPwrapper * wrap = new SMTPwrapper(settings);
+        wrap->flushOutbox(smtp);
+        QMessageBox::information(0,tr("Info"),tr("Mail queue flushed"));
+    }
 }
 
 void OpieMail::slotSearchMails()

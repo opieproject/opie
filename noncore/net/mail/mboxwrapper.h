@@ -25,6 +25,9 @@ public:
     virtual RecBody fetchBody( const RecMail &mail );
     static void mbox_progress( size_t current, size_t maximum );
 
+    virtual void fetchRawBody(const RecMail&mail,char**target,size_t*length);
+    virtual void deleteMails(const QString & mailbox,QList<RecMail> &target);
+
 protected:
     QString MBOXPath;
 };

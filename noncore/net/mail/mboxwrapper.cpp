@@ -217,3 +217,69 @@ void MBOXwrapper::storeMessage(const char*msg,size_t length, const QString&folde
     }
     mailmbox_done(f);
 }
+
+void MBOXwrapper::fetchRawBody(const RecMail&mail,char**target,size_t*length)
+{
+    RecBody body;
+    mailstorage*storage = mailstorage_new(NULL);
+    QString p = MBOXPath+"/";
+    p+=mail.getMbox();
+    mailmessage * msg;
+    char*data=0;
+    size_t size;
+
+    int r = mbox_mailstorage_init(storage,strdup(p.latin1()),0,0,0);
+    mailfolder*folder;
+    folder = mailfolder_new( storage,strdup(p.latin1()),NULL);   
+    r = mailfolder_connect(folder);
+    if (r != MAIL_NO_ERROR) {
+        qDebug("Error initializing mbox");
+        mailfolder_free(folder);
+        mailstorage_free(storage);
+        return;
+    }
+    r = mailsession_get_message(folder->fld_session, mail.getNumber(), &msg);
+    if (r != MAIL_NO_ERROR) {
+        qDebug("Error fetching mail %i",mail.getNumber());
+        mailfolder_free(folder);
+        mailstorage_free(storage);
+        return;
+    }
+    r = mailmessage_fetch(msg,&data,&size);
+    if (r != MAIL_NO_ERROR) {
+        qDebug("Error fetching mail %i",mail.getNumber());
+        mailfolder_free(folder);
+        mailstorage_free(storage);
+        mailmessage_free(msg);
+        return;
+    }
+    *target = data;
+    *length = size;
+    mailfolder_free(folder);
+    mailstorage_free(storage);
+    mailmessage_free(msg);
+}
+
+void MBOXwrapper::deleteMails(const QString & mailbox,QList<RecMail> &target)
+{
+    QString p = MBOXPath+"/";
+    p+=mailbox;
+    mailmbox_folder*f = 0;
+    int r = mailmbox_init(p.latin1(),0,1,0,&f);
+    if (r != MAIL_NO_ERROR) {
+        qDebug("Error init folder");
+        return;
+    }
+    for (unsigned int i=0; i < target.count();++i) {
+        r = mailmbox_delete_msg(f,target.at(i)->getNumber());
+        if (r!=MAILMBOX_NO_ERROR) {
+            qDebug("error delete mail");
+        }
+    }
+    r = mailmbox_expunge(f);
+    if (r != MAILMBOX_NO_ERROR) {
+        qDebug("error expunge mailbox");
+    }
+    mailmbox_done(f);
+}
+
