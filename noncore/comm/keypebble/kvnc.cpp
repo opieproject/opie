@@ -27,8 +27,8 @@
 #include "krfbserver.h"
 
 static int u_id = 1;
-static int get_unique_id() 
-{   
+static int get_unique_id()
+{
 		return u_id++;
 }
 
@@ -56,7 +56,7 @@ static char * menu_xpm[] = {
 
 const int StatusTextId = 0;
 
-KVNC::KVNC( const char *name ) : QMainWindow( 0, name ,WStyle_ContextHelp)
+KVNC::KVNC(  QWidget *parent, const char *name, WFlags f) : QMainWindow( 0, name ,WStyle_ContextHelp)
 {
     setCaption( tr("VNC Viewer") );
     fullscreen = false;
@@ -66,7 +66,7 @@ KVNC::KVNC( const char *name ) : QMainWindow( 0, name ,WStyle_ContextHelp)
 
 		bookmarkSelector=new KVNCBookmarkDlg();
 		stack->addWidget(bookmarkSelector,get_unique_id());
-		stack->raiseWidget( bookmarkSelector );                                        
+		stack->raiseWidget( bookmarkSelector );
 
 		canvas = new KRFBCanvas( stack, "canvas" );
 		stack->addWidget(canvas,get_unique_id());
@@ -103,7 +103,7 @@ KVNC::KVNC( const char *name ) : QMainWindow( 0, name ,WStyle_ContextHelp)
 		 connect( n, SIGNAL( activated() ),
 						this, SLOT( newConnection() ) );
 		n->addTo( bar );
-								     
+
 		 QAction *o = new QAction( tr( "Open Bookmark" ), Resource::loadPixmap( "fileopen" ),
 				QString::null, 0, this, 0 );
 		 connect( o, SIGNAL( activated() ),
@@ -220,11 +220,11 @@ void KVNC::toggleFullScreen()
 			canvas->setFocus();
 				canvas->grabKeyboard();
 				canvas->show();
-				
+
 				fullScreenAction->setText( tr("Stop Full Screen") );
 		}
-						
-						
+
+
     fullscreen = !fullscreen;
 }
 
@@ -266,7 +266,7 @@ void KVNC::loggedIn()
 void KVNC::disconnected()
 {
 
-		if ( fullscreen ) 
+		if ( fullscreen )
 				toggleFullScreen();
     static QString msg = tr( "Connection closed" );
     statusMessage( msg );
