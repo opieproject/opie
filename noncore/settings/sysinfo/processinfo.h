@@ -21,12 +21,11 @@
 #define PROCESSINFO_H
 
 #include <qwidget.h>
-#include <qlistview.h>
 
 class Detail;
 class QComboBox;
-class QListView;
-class QListViewItem;
+class OListView;
+class OListViewItem;
 
 class ProcessInfo : public QWidget
 {
@@ -36,16 +35,16 @@ public:
     ~ProcessInfo();
 
 private:
-    QListView*   ProcessView;
+    OListView*   ProcessView;
     QComboBox*   SignalCB;
     QPushButton* SendButton;
-    
+
 	Detail *ProcessDtl;
 
 private slots:
     void updateData();
     void slotSendClicked();
-    void viewProcess( QListViewItem * );
+    void viewProcess( OListViewItem * );
 };
 
 #endif

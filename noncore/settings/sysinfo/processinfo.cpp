@@ -21,12 +21,16 @@
 #include "detail.h"
 
 /* OPIE */
+#include <opie2/olistview.h>
 #include <qpe/qpeapplication.h>
 
 /* QT */
+#include <qcombobox.h>
 #include <qdir.h>
 #include <qlayout.h>
 #include <qmessagebox.h>
+#include <qpushbutton.h>
+#include <qtextview.h>
 #include <qtimer.h>
 #include <qwhatsthis.h>
 
@@ -42,7 +46,7 @@ ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
     layout->setMargin( 4 );
 
 
-    ProcessView = new QListView( this, "ProcessView" );
+    ProcessView = new OListView( this, "ProcessView" );
     int colnum = ProcessView->addColumn( tr( "PID" ) );
     ProcessView->setColumnAlignment( colnum, Qt::AlignRight );
     colnum = ProcessView->addColumn( tr( "Command" ),96 );
@@ -51,8 +55,8 @@ ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
     ProcessView->setColumnAlignment( colnum, Qt::AlignRight );
     ProcessView->setAllColumnsShowFocus( TRUE );
     QPEApplication::setStylusOperation( ProcessView->viewport(), QPEApplication::RightOnHold );
-    connect( ProcessView, SIGNAL( rightButtonPressed(QListViewItem*,const QPoint&,int) ),
-             this, SLOT( viewProcess(QListViewItem*) ) );
+    connect( ProcessView, SIGNAL( rightButtonPressed(OListViewItem*,const QPoint&,int) ),
+             this, SLOT( viewProcess(OListViewItem*) ) );
     layout->addMultiCellWidget( ProcessView, 0, 0, 0, 1 );
     QWhatsThis::add( ProcessView, tr( "This is a list of all the processes on this handheld device.\n\nClick and hold on a process to see additional information about the process, or to send a signal to it." ) );
 
@@ -101,7 +105,7 @@ void ProcessInfo::updateData()
     char comm[64];
 
     QString selectedpid;
-    QListViewItem *curritem = ProcessView->currentItem();
+    OListViewItem *curritem = static_cast<OListViewItem*>( ProcessView->currentItem() );
     if ( curritem )
     {
         selectedpid = curritem->text( 0 );
@@ -109,8 +113,8 @@ void ProcessInfo::updateData()
 
     ProcessView->clear();
 
-    QListViewItem *newitem;
-    QListViewItem *selecteditem = 0x0;
+    OListViewItem *newitem;
+    OListViewItem *selecteditem = 0x0;
     QDir *procdir = new QDir("/proc", 0, QDir::Name, QDir::Dirs);
     QFileInfoList *proclist = new QFileInfoList(*(procdir->entryInfoList()));
     if ( proclist )
@@ -140,7 +144,7 @@ void ProcessInfo::updateData()
                     processtime = processtime.rightJustify( 9, ' ' );
                     fclose( procfile );
 
-                    newitem = new QListViewItem( ProcessView, processnum, processcmd, processstatus, processtime );
+                    newitem = new OListViewItem( ProcessView, processnum, processcmd, processstatus, processtime );
                     if ( processnum == selectedpid )
                     {
                         selecteditem = newitem;
@@ -157,7 +161,7 @@ void ProcessInfo::updateData()
 
 void ProcessInfo::slotSendClicked()
 {
-    QListViewItem *currprocess = ProcessView->currentItem();
+    OListViewItem *currprocess = static_cast<OListViewItem*>( ProcessView->currentItem() );
     if ( !currprocess )
     {
         return;
@@ -169,7 +173,7 @@ void ProcessInfo::slotSendClicked()
     if ( QMessageBox::warning( this, currprocess->text( 1 ), capstr,
                                QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape ) == QMessageBox::Yes )
     {
-        currprocess = ProcessView->currentItem();
+        currprocess = static_cast<OListViewItem*>( ProcessView->currentItem() );
         if ( currprocess )
         {
             QString sigstr = SignalCB->currentText();
@@ -181,7 +185,7 @@ void ProcessInfo::slotSendClicked()
 
 }
 
-void ProcessInfo::viewProcess( QListViewItem *process )
+void ProcessInfo::viewProcess( OListViewItem *process )
 {
     QString pid= process->text( 0 ).stripWhiteSpace();
     QString command = process->text( 1 );

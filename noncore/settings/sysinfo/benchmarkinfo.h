@@ -23,9 +23,9 @@
 
 class QClipboard;
 class QComboBox;
-class QCheckListItem;
+class OCheckListItem;
 class QPushButton;
-class QListView;
+class OListView;
 
 class BenchmarkInfo : public QWidget
 {
@@ -35,13 +35,13 @@ public:
     BenchmarkInfo( QWidget *parent = 0, const char *name = 0, int wFlags = 0 );
     ~BenchmarkInfo();
 
-    QCheckListItem* test_alu;
-    QCheckListItem* test_fpu;
-    QCheckListItem* test_txt;
-    QCheckListItem* test_gfx;
-    QCheckListItem* test_ram;
-    QCheckListItem* test_sd;
-    QCheckListItem* test_cf;
+    OCheckListItem* test_alu;
+    OCheckListItem* test_fpu;
+    OCheckListItem* test_txt;
+    OCheckListItem* test_gfx;
+    OCheckListItem* test_ram;
+    OCheckListItem* test_sd;
+    OCheckListItem* test_cf;
 
     bool main_rd;
     bool main_wt;
@@ -52,13 +52,13 @@ public:
 
     QClipboard* clb;
     QComboBox* machineCombo;
-    QListView* tests;
+    OListView* tests;
     QPushButton* startButton;
     QDict <QStringList> machines;
 
     int textRendering( int );
     int gfxRendering( int );
-    void performFileTest( const QString& fname, QCheckListItem* item );
+    void performFileTest( const QString& fname, OCheckListItem* item );
 
 private slots:
     bool writeFile( const QString& );

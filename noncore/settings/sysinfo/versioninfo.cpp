@@ -18,19 +18,20 @@
 **
 **********************************************************************/
 
+#include "versioninfo.h"
+
+/* OPIE */
+#include <opie2/odevice.h>
 #include <qpe/resource.h>
 #include <qpe/version.h>
 
+/* QT */
 #include <qfile.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qscrollview.h>
 #include <qtextstream.h>
 #include <qwhatsthis.h>
-
-#include "versioninfo.h"
-
-#include <opie2/odevice.h>
 
 using namespace Opie;
 

@@ -23,10 +23,8 @@
 #define DETAIL_H
 
 #include <qwidget.h>
-#include <qcombo.h>
-#include <qtextview.h>
-#include <qpushbutton.h>
-#include <qlistview.h>
+
+class QTextView;
 
 class Detail : public QWidget
 {

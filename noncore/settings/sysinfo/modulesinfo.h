@@ -26,8 +26,8 @@
 
 class Detail;
 class QComboBox;
-class QListView;
-class QListViewItem;
+class OListView;
+class OListViewItem;
 
 class ModulesInfo : public QWidget
 {
@@ -37,7 +37,7 @@ public:
     ~ModulesInfo();
 
 private:
-	QListView* ModulesView;
+	OListView* ModulesView;
     QComboBox* CommandCB;
 
 	Detail* ModulesDtl;
@@ -45,7 +45,7 @@ private:
 private slots:
     void updateData();
     void slotSendClicked();
-	void viewModules( QListViewItem * );
+	void viewModules( OListViewItem * );
 };
 
 #endif

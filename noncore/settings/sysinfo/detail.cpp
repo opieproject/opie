@@ -21,9 +21,7 @@
 
 #include "detail.h"
 
-#include <sys/types.h>
-#include <stdio.h>
-
+#include <qtextview.h>
 #include <qlayout.h>
 
 Detail::Detail( QWidget* parent,  const char* name, WFlags )

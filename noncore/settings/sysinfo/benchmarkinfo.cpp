@@ -16,8 +16,11 @@
 **
 **********************************************************************/
 
+#include "benchmarkinfo.h"
+
 /* OPIE */
 #include <opie2/ostorageinfo.h>
+#include <opie2/olistview.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpedecoration_qws.h>
@@ -37,6 +40,7 @@
 #include <qpainter.h>
 #include <qpushbutton.h>
 #include <qtimer.h>
+#include <qwhatsthis.h>
 
 /* STD */
 #include <time.h>
@@ -46,9 +50,6 @@
 #if defined (__GNUC__) && (__GNUC__ < 3)
 extern double round(double);
 #endif
-
-
-#include "benchmarkinfo.h"
 
 extern "C"
 {
@@ -95,47 +96,51 @@ BenchmarkInfo::BenchmarkInfo( QWidget *parent, const char *name, int wFlags )
     vb->setSpacing( 4 );
     vb->setMargin( 4 );
 
-    tests = new QListView( this );
+    tests = new OListView( this );
+    QWhatsThis::add( tests->viewport(), tr( "This area shows the available tests, the results for which the tests "
+                                "have been performed, and comparison values for one selected device. "
+                                "Use the checkboxes to define which tests you want to perform." ) );
     tests->setMargin( 0 );
     tests->addColumn( tr( "Tests" ) );
     tests->addColumn( tr( "Results" ) );
     tests->addColumn( tr( "Comparison" ) );
     tests->setShowSortIndicator( true );
 
-    test_alu = new QCheckListItem( tests, tr( "1. Integer Arithmetic  " ), QCheckListItem::CheckBox );
-    test_fpu = new QCheckListItem( tests, tr( "2. Floating Point Unit  " ), QCheckListItem::CheckBox );
-    test_txt = new QCheckListItem( tests, tr( "3. Text Rendering  " ), QCheckListItem::CheckBox );
-    test_gfx = new QCheckListItem( tests, tr( "4. Gfx Rendering  " ), QCheckListItem::CheckBox );
-    test_ram = new QCheckListItem( tests, tr( "5. RAM Performance  " ), QCheckListItem::CheckBox );
-    test_sd = new QCheckListItem( tests, tr( "6. SD Card Performance  " ), QCheckListItem::CheckBox );
-    test_cf = new QCheckListItem( tests, tr( "7. CF Card Performance  " ), QCheckListItem::CheckBox );   
-       
+    test_alu = new OCheckListItem( tests, tr( "1. Integer Arithmetic  " ), OCheckListItem::CheckBox );
+    test_fpu = new OCheckListItem( tests, tr( "2. Floating Point Unit  " ), OCheckListItem::CheckBox );
+    test_txt = new OCheckListItem( tests, tr( "3. Text Rendering  " ), OCheckListItem::CheckBox );
+    test_gfx = new OCheckListItem( tests, tr( "4. Gfx Rendering  " ), OCheckListItem::CheckBox );
+    test_ram = new OCheckListItem( tests, tr( "5. RAM Performance  " ), OCheckListItem::CheckBox );
+    test_sd = new OCheckListItem( tests, tr( "6. SD Card Performance  " ), OCheckListItem::CheckBox );
+    test_cf = new OCheckListItem( tests, tr( "7. CF Card Performance  " ), OCheckListItem::CheckBox );
+
     test_alu->setText( 1, "n/a" );
-    test_fpu->setText( 1, "n/a" );   
+    test_fpu->setText( 1, "n/a" );
     test_txt->setText( 1, "n/a" );
     test_gfx->setText( 1, "n/a" );
     test_ram->setText( 1, "n/a" );
     test_sd->setText( 1, "n/a" );
-    test_cf->setText( 1, "n/a" );   
-    
+    test_cf->setText( 1, "n/a" );
+
     test_alu->setText( 2, "n/a" );
-    test_fpu->setText( 2, "n/a" );   
+    test_fpu->setText( 2, "n/a" );
     test_txt->setText( 2, "n/a" );
     test_gfx->setText( 2, "n/a" );
     test_ram->setText( 2, "n/a" );
     test_sd->setText( 2, "n/a" );
-    test_cf->setText( 2, "n/a" );   
-    
+    test_cf->setText( 2, "n/a" );
+
     startButton = new QPushButton( tr( "&Start Tests!" ), this );
+    QWhatsThis::add( startButton, tr( "Click here to perform the selected tests." ) );
     connect( startButton, SIGNAL( clicked() ), this, SLOT( run() ) );
-    
     vb->addWidget( tests, 2 );
-    
+
     QFile f( QPEApplication::qpeDir() + "/share/sysinfo/results" );
     if ( f.open( IO_ReadOnly ) )
     {
         machineCombo = new QComboBox( this );
-        
+        QWhatsThis::add( machineCombo, tr( "Choose a model to compare your results with." ) );
+
         QTextStream ts( &f );
         while( !ts.eof() )
         {
@@ -145,13 +150,13 @@ BenchmarkInfo::BenchmarkInfo( QWidget *parent, const char *name, int wFlags )
             machines.insert( machline, new QStringList( QStringList::split( ",", resline ) ) );
             machineCombo->insertItem( machline );
         }
-        
+
         QHBoxLayout* hb = new QHBoxLayout( vb );
         hb->addWidget( new QLabel( tr( "Compare To:" ), this ) );
         hb->addWidget( machineCombo, 2 );
         connect( machineCombo, SIGNAL( activated(int) ), this, SLOT( machineActivated(int) ) );
     }
-    
+
     vb->addWidget( startButton, 2 );
 }
 
@@ -332,7 +337,7 @@ int BenchmarkInfo::gfxRendering( int seconds )
     
 }
 
-void BenchmarkInfo::performFileTest( const QString& fname, QCheckListItem* item )
+void BenchmarkInfo::performFileTest( const QString& fname, OCheckListItem* item )
 {
     QTime time;
     time.start();

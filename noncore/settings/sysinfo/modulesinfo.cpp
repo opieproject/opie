@@ -23,12 +23,16 @@
 #include "detail.h"
 
 /* OPIE */
+#include <opie2/olistview.h>
 #include <qpe/qpeapplication.h>
 
 /* QT */
+#include <qcombobox.h>
 #include <qfile.h>
 #include <qlayout.h>
 #include <qmessagebox.h>
+#include <qpushbutton.h>
+#include <qtextview.h>
 #include <qtimer.h>
 #include <qwhatsthis.h>
 
@@ -39,7 +43,7 @@ ModulesInfo::ModulesInfo( QWidget* parent,  const char* name, WFlags fl )
     layout->setSpacing( 4 );
     layout->setMargin( 4 );
 
-    ModulesView = new QListView( this );
+    ModulesView = new OListView( this );
     int colnum = ModulesView->addColumn( tr( "Module" ) );
     colnum = ModulesView->addColumn( tr( "Size" ) );
     ModulesView->setColumnAlignment( colnum, Qt::AlignRight );
@@ -54,8 +58,8 @@ ModulesInfo::ModulesInfo( QWidget* parent,  const char* name, WFlags fl )
     if ( QFile::exists( "/sbin/modinfo" ) )
     {
         QPEApplication::setStylusOperation( ModulesView->viewport(), QPEApplication::RightOnHold );
-        connect( ModulesView, SIGNAL( rightButtonPressed(QListViewItem*,const QPoint&,int) ),
-                 this, SLOT( viewModules(QListViewItem*) ) );
+        connect( ModulesView, SIGNAL( rightButtonPressed(OListViewItem*,const QPoint&,int) ),
+                 this, SLOT( viewModules(OListViewItem*) ) );
     }
 
     CommandCB = new QComboBox( FALSE, this );
@@ -93,7 +97,7 @@ void ModulesInfo::updateData()
     int modsize, usecount;
 
     QString selectedmod;
-    QListViewItem *curritem = ModulesView->currentItem();
+    OListViewItem *curritem = static_cast<OListViewItem*>( ModulesView->currentItem() );
     if ( curritem )
     {
         selectedmod = curritem->text( 0 );
@@ -105,8 +109,8 @@ void ModulesInfo::updateData()
 
     if ( procfile )
     {
-        QListViewItem *newitem;
-        QListViewItem *selecteditem = 0x0;
+        OListViewItem *newitem;
+        OListViewItem *selecteditem = 0x0;
         while ( true )
         {
             modname[0] = '\0';
@@ -121,7 +125,7 @@ void ModulesInfo::updateData()
             QString qusecount = QString::number( usecount ).rightJustify( 2, ' ' );
             QString qusage = QString( usage );
 
-            newitem = new QListViewItem( ModulesView, qmodname, qmodsize, qusecount, qusage );
+            newitem = new OListViewItem( ModulesView, qmodname, qmodsize, qusecount, qusage );
             if ( qmodname == selectedmod )
             {
                 selecteditem = newitem;
@@ -140,7 +144,7 @@ void ModulesInfo::slotSendClicked()
         return;
     }
 
-    QString capstr = tr( "You really want to execute %1 for this module?" ).arg( CommandCB->currentText() );
+    QString capstr = tr( "You really want to execute\n%1 for this module?" ).arg( CommandCB->currentText() );
 
     QString modname = ModulesView->currentItem()->text( 0 );
 
@@ -159,7 +163,7 @@ void ModulesInfo::slotSendClicked()
 
 }
 
-void ModulesInfo::viewModules( QListViewItem *modules )
+void ModulesInfo::viewModules( OListViewItem *modules )
 {
     QString modname = modules->text( 0 );
     QString capstr = "Module: ";
