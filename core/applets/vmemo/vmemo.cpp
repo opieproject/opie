@@ -236,7 +236,8 @@ VMemo::VMemo( QWidget *parent, const char *_name )
     else
         usingIcon = FALSE;
 //     if( vmCfg.readNumEntry("hideIcon",0) == 1)
-//       hide();
+	if (!usingIcon)
+			hide();
     recording = FALSE;
     // }
 }
@@ -375,7 +376,7 @@ bool VMemo::startRecording() {
 }
 
 void VMemo::stopRecording() {
-    show();
+//    show();
     odebug << "Stopped recording" << oendl;
     recording = FALSE;
     if(useAlerts) {
@@ -485,30 +486,37 @@ int VMemo::openWAV(const char *filename) {
 
 bool VMemo::record() {
         length = 0;
-    int bytesWritten = 0;
+				int bytesWritten = 0;
         int result = 0;
         int value = 0;
+
         QString msg;
         msg.sprintf("Recording format %d", format);
         odebug << msg << oendl;
+
         Config config("Vmemo");
         config.setGroup("Record");
         int sRate = config.readNumEntry("SizeLimit", 30);
-        if(sRate > 0)
-                t_timer->start( sRate * 1000+1000, TRUE);
+				odebug << "VMEMO rate" << sRate << oendl;
 
-    msg.sprintf("Recording format other");
-    odebug << msg << oendl;
+         if(sRate > 0) {
+ 						t_timer->start( sRate * 1000+1000, TRUE);
+ 				}
+
+     msg.sprintf("Recording format other");
+     odebug << msg << oendl;
 
     config.setGroup("Defaults");
     useADPCM = config.readBoolEntry("use_ADPCM", 0);
 
-        int bufsize = config.readNumEntry("BufferSize",1024);
-        unsigned short sound[bufsize]; //, monoBuffer[bufsize];
+    int bufsize = config.readNumEntry("BufferSize",1024);
+    unsigned short sound[bufsize]; //, monoBuffer[bufsize];
     char abuf[bufsize / 2];
     short sbuf[bufsize];
-
+		odebug << "ready to record"<< oendl;
         if(useADPCM) {
+						odebug << "usr ADPCM" << oendl;
+						
                 while(recording) {
                         result = ::read(dsp, sbuf, bufsize); // adpcm read
                         if( result <= 0) {
@@ -529,11 +537,12 @@ bool VMemo::record() {
                                 break;
                                 return FALSE;
                         }
-                            //       printf("%d\r", length);
-                            //       fflush(stdout);
+                                   printf("%d\r", length);
+                                   fflush(stdout);
                         qApp->processEvents();
                 }
         } else {
+						odebug << "use regular wav" << oendl;
                 while(recording) {
                         result = ::read(dsp, sound, bufsize); // read
                         if( result <= 0) {
@@ -542,6 +551,7 @@ bool VMemo::record() {
                                 recording = FALSE;
                                 break;
                                 return FALSE;
+												}
 
                                 bytesWritten = ::write(wav, sound, result); // write
                                 length += bytesWritten;
@@ -553,13 +563,13 @@ bool VMemo::record() {
                                         break;
                                         return FALSE;
                                 }
-                                    //       printf("%d\r", length);
-                                    //       fflush(stdout);
+//                                            printf("%d\r", length);
+//                                            fflush(stdout);
                                 qApp->processEvents();
                         }
+//												odebug << "result is " << result << oendl;
                 }
-        }
-            //  odebug << "file has length of " << length << " lasting " << (( length / speed) / channels) / 2 ) << " seconds" << oendl;
+				odebug << "file has length of " << length << " lasting " << (( length / speed) / channels) / 2  << " seconds" << oendl;
 
         value = length + 36;
 
