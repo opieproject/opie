@@ -4,6 +4,7 @@
 #include "mailwrapper.h"
 
 class RecMail;
+struct mailpop3;
 
 class POP3wrapper : public QObject
 {

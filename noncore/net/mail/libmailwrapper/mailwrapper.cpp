@@ -197,7 +197,7 @@ mailmime *MailWrapper::buildTxtPart( QString str )
     content = mailmime_content_new_with_str( "text/plain" );
     if ( content == NULL ) goto err_free_param;
 
-    err = clist_append( content->parameters, param );
+    err = clist_append( content->ct_parameters, param );
     if ( err != MAILIMF_NO_ERROR ) goto err_free_content;
 
     fields = mailmime_fields_new_encoding( MAILMIME_MECHANISM_8BIT );
@@ -253,7 +253,7 @@ mailmime *MailWrapper::buildFilePart( QString filename, QString mimetype )
                                         strdup( "iso-8859-1" ) );
         if ( param == NULL ) goto err_free_content;
 
-        err = clist_append( content->parameters, param );
+        err = clist_append( content->ct_parameters, param );
         if ( err != MAILIMF_NO_ERROR ) goto err_free_param;
     }
 
@@ -347,10 +347,10 @@ mailimf_field *MailWrapper::getField( mailimf_fields *fields, int type )
     mailimf_field *field;
     clistiter *it;
 
-    it = clist_begin( fields->list );
+    it = clist_begin( fields->fld_list );
     while ( it ) {
         field = (mailimf_field *) it->data;
-        if ( field->type == type ) {
+        if ( field->fld_type == type ) {
             return field;
         }
         it = it->next;
@@ -363,18 +363,18 @@ static void addRcpts( clist *list, mailimf_address_list *addr_list )
 {
     clistiter *it, *it2;
 
-    for ( it = clist_begin( addr_list->list ); it; it = it->next ) {
+    for ( it = clist_begin( addr_list->ad_list ); it; it = it->next ) {
         mailimf_address *addr;
         addr = (mailimf_address *) it->data;
 
-        if ( addr->type == MAILIMF_ADDRESS_MAILBOX ) {
-    	    esmtp_address_list_add( list, addr->mailbox->addr_spec, 0, NULL );
-        } else if ( addr->type == MAILIMF_ADDRESS_GROUP ) {
-            clist *l = addr->group->mb_list->list;
+        if ( addr->ad_type == MAILIMF_ADDRESS_MAILBOX ) {
+    	    esmtp_address_list_add( list, addr->ad_data.ad_mailbox->mb_addr_spec, 0, NULL );
+        } else if ( addr->ad_type == MAILIMF_ADDRESS_GROUP ) {
+            clist *l = addr->ad_data.ad_group->grp_mb_list->mb_list;
     	    for ( it2 = clist_begin( l ); it2; it2 = it2->next ) {
                 mailimf_mailbox *mbox;
     	        mbox = (mailimf_mailbox *) it2->data;
-	            esmtp_address_list_add( list, mbox->addr_spec, 0, NULL );
+	            esmtp_address_list_add( list, mbox->mb_addr_spec, 0, NULL );
 	        }
 	    }
     }
@@ -388,21 +388,21 @@ clist *MailWrapper::createRcptList( mailimf_fields *fields )
     rcptList = esmtp_address_list_new();
 
     field = getField( fields, MAILIMF_FIELD_TO );
-    if ( field && (field->type == MAILIMF_FIELD_TO)
-         && field->field.to->addr_list ) {
-        addRcpts( rcptList, field->field.to->addr_list );
+    if ( field && (field->fld_type == MAILIMF_FIELD_TO)
+         && field->fld_data.fld_to->to_addr_list ) {
+        addRcpts( rcptList, field->fld_data.fld_to->to_addr_list );
     }
 
     field = getField( fields, MAILIMF_FIELD_CC );
-    if ( field && (field->type == MAILIMF_FIELD_CC)
-         && field->field.cc->addr_list ) {
-        addRcpts( rcptList, field->field.cc->addr_list );
+    if ( field && (field->fld_type == MAILIMF_FIELD_CC)
+         && field->fld_data.fld_cc->cc_addr_list ) {
+        addRcpts( rcptList, field->fld_data.fld_cc->cc_addr_list );
     }
 
     field = getField( fields, MAILIMF_FIELD_BCC );
-    if ( field && (field->type == MAILIMF_FIELD_BCC)
-         && field->field.bcc->addr_list ) {
-        addRcpts( rcptList, field->field.bcc->addr_list );
+    if ( field && (field->fld_type == MAILIMF_FIELD_BCC)
+         && field->fld_data.fld_bcc->bcc_addr_list ) {
+        addRcpts( rcptList, field->fld_data.fld_bcc->bcc_addr_list );
     }
 
     return rcptList;
@@ -413,14 +413,14 @@ char *MailWrapper::getFrom( mailmime *mail )
     char *from = NULL;
 
     mailimf_field *ffrom;
-    ffrom = getField( mail->fields, MAILIMF_FIELD_FROM );
-    if ( ffrom && (ffrom->type == MAILIMF_FIELD_FROM)
-         && ffrom->field.from->mb_list && ffrom->field.from->mb_list->list ) {
-        clist *cl = ffrom->field.from->mb_list->list;
+    ffrom = getField( mail->mm_data.mm_message.mm_fields, MAILIMF_FIELD_FROM );
+    if ( ffrom && (ffrom->fld_type == MAILIMF_FIELD_FROM)
+         && ffrom->fld_data.fld_from->frm_mb_list && ffrom->fld_data.fld_from->frm_mb_list->mb_list ) {
+        clist *cl = ffrom->fld_data.fld_from->frm_mb_list->mb_list;
         clistiter *it;
         for ( it = clist_begin( cl ); it; it = it->next ) {
             mailimf_mailbox *mb = (mailimf_mailbox *) it->data;
-            from = strdup( mb->addr_spec );
+            from = strdup( mb->mb_addr_spec );
         }
     }
 
@@ -542,7 +542,7 @@ void MailWrapper::smtpSend( mailmime *mail )
     server = strdup( smtp->getServer().latin1() );
     ssl = smtp->getSSL();
     port = smtp->getPort().toUInt();
-    rcpts = createRcptList( mail->fields );
+    rcpts = createRcptList( mail->mm_data.mm_message.mm_fields );
 
     QString file = getTmpFile();
     writeToFile( file, mail );
