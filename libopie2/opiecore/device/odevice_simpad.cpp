@@ -34,6 +34,7 @@
 #include <qfile.h>
 #include <qtextstream.h>
 #include <qwindowsystem_qws.h>
+#include <qwidgetlist.h>
 
 /* OPIE */
 #include <qpe/config.h>
@@ -315,23 +316,17 @@ void SIMpad::playAlarmSound()
 
 bool SIMpad::suspend() // Must override because SIMpad does NOT have apm
 {
-    qDebug( "ODevice for SIMpad: suspend()" );
     if ( !isQWS( ) ) // only qwsserver is allowed to suspend
         return false;
 
-    /*
-     * we need to save the screen content
-     * then go to suspend using ODevice::suspend
-     * and finally restore the screen content
-     */
-    (void)::system( "cat /dev/fb/0 > /tmp/.buffer" );
     bool res  = ODevice::suspend();
 
     /*
-     * restore
+     * restore the screen content if we really
+     * supended the device
      */
     if ( res )
-        ::system( "cat /tmp/.buffer > /dev/fb/0" );
+        updateAllWidgets();
 
     return res;
 }
@@ -369,3 +364,20 @@ int SIMpad::displayBrightnessResolution() const
     return 255; // All SIMpad models share the same display
 }
 
+
+/*
+ * The MQ200 DRAM content is lost during suspend
+ * so we will just repaint every widget on resume
+ */
+void SIMpad::updateAllWidgets() {
+    QWidgetList *list = QApplication::allWidgets();
+    QWidgetListIt it( *list );
+    QWidget *wid;
+
+    while ((wid=it.current()) != 0 ) {
+        wid->update();
+        ++it;
+    }
+
+    delete list;
+}

@@ -65,6 +65,8 @@ protected:
     int m_power_timer;
 
     OLedState m_leds [2];
+private:
+    static void updateAllWidgets();
 };
 
 struct s_button {
