@@ -57,7 +57,6 @@ class ODict : public QMainWindow
 		QString activated_name;
 	
 	private slots:
-		void slotDisplayAbout();
 		void slotStartQuery();
 		void slotSetErrorcount( int );
 		void slotSettings();

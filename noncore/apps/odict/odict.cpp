@@ -93,11 +93,6 @@ void ODict::saveConfig()
 	cfg.writeEntry( "completewords" , completewords );
 }
 
-void ODict::slotDisplayAbout()
-{
-	QMessageBox::about(  this, tr( "About ODict" ), tr( "OPIE-Dictionary ODict \n (c) 2002, 2003 Carsten  Niehaus \n cniehaus@handhelds.org \n Version 20030111" ) );
-}
-
 void ODict::slotStartQuery()
 {
 	QString querystring = query_le->text();
