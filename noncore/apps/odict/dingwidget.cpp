@@ -63,7 +63,7 @@ void DingWidget::parseInfo( QStringList &lines, QString &top, QString &bottom )
 	{
 		QString current = *it;
 		toplist.append(  current.left( current.find(reg) ) );
-		bottomlist.append(  current.right( current.find(reg) ) );
+		bottomlist.append(  current.right( current.length() - current.find(reg) - 1 ) );
 	}
 		
 
