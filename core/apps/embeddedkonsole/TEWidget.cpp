@@ -809,7 +809,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
 //printf("release [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
   if ( ev->button() == LeftButton)
   {
-    if (QABS(ev->x() - mouse_down_x) < 3 
+    if (QABS(ev->x() - mouse_down_x) < 3
 	&& QABS(ev->y() - mouse_down_y) < 3
 	&& ev->y() < qApp->desktop()->height()/8) {
       emit setFullScreen(false);
@@ -1389,7 +1389,7 @@ void TEWidget::dropEvent(QDropEvent* event)
 #endif
 
 
-void TEWidget::drop_menu_activated(int item)
+void TEWidget::drop_menu_activated(int /*item*/)
 {
 #ifndef QT_NO_DRAGANDDROP
   switch (item)

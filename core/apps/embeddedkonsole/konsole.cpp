@@ -510,15 +510,6 @@ void Konsole::init(const char* _pgm, QStrList & _args)
 
     QMenuBar *menuBar = new QMenuBar( menuToolBar );
 
-    bool c7xx = false;
-    if (qApp->desktop()->width() > 600 || qApp->desktop()->height() > 600)
-    {
-        c7xx = true;
-    }
-    QFont menuFont;
-    menuFont.setPointSize(c7xx? 18 : 10);
-    qApp->setFont(menuFont, true);
-
     setFont(cfont);
 
     configMenu = new QPopupMenu( this);
