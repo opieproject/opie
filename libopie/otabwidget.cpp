@@ -31,6 +31,7 @@
 
 #include "otabwidget.h"
 
+#include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/resource.h>
 #include <opie/otabbar.h>
@@ -326,10 +327,9 @@ void OTabWidget::slotTabListSelected( int index )
 
 QPixmap OTabWidget::loadSmooth( const QString &name )
 {
-    QImage image = Resource::loadImage( name );
-    QPixmap pixmap;
-    pixmap.convertFromImage( image.smoothScale( 14, 14 ) );
-    return pixmap;
+    QPixmap p;
+    p.convertFromImage( Resource::loadImage( name ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    return p;
 }
 
 void OTabWidget::selectTab( OTabInfo *tab )
