@@ -65,9 +65,12 @@ protected:
     void resizeEvent( QResizeEvent * );
     void styleChange( QStyle & );
     void setStatusMessage( const QString &text );
-    
+
 private slots:
     void receive( const QCString &msg, const QByteArray &data );
+
+private:
+    void readConfig();
 
 private:
     QTimer *waitTimer;

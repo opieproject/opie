@@ -74,6 +74,7 @@ public:
     void unloadInputMethods();
     void loadInputMethods();
     virtual bool eventFilter( QObject *, QEvent * );
+    void readConfig();
 
 signals:
     void inputToggled( bool on );

@@ -89,11 +89,7 @@ InputMethods::InputMethods( QWidget *parent ) :
     QWidget( parent, "InputMethods", WStyle_Tool | WStyle_Customize ),
     mkeyboard(0), imethod(0)
 {
-    Config cfg( "Launcher" );
-    cfg.setGroup( "InputMethods" );
-    inputWidgetStyle = QWidget::WStyle_Customize | QWidget::WStyle_StaysOnTop | QWidget::WGroupLeader | QWidget::WStyle_Tool;
-    inputWidgetStyle |= cfg.readBoolEntry( "Float", false ) ? QWidget::WStyle_DialogBorder : 0;
-    inputWidgetWidth = cfg.readNumEntry( "Width", 100 );
+    readConfig();
 
     setBackgroundMode( PaletteBackground );
     QHBoxLayout *hbox = new QHBoxLayout( this );
@@ -532,7 +528,7 @@ void InputMethods::showKbd( bool on )
         mkeyboard->resetState();
 
         int height = QMIN( mkeyboard->widget->sizeHint().height(), 134 );
-        int width = qApp->desktop()->width() * (inputWidgetWidth*0.01);
+        int width = static_cast<int>( qApp->desktop()->width() * (inputWidgetWidth*0.01) );
         int left = 0;
         int top = mapToGlobal( QPoint() ).y() - height;
 
@@ -608,7 +604,7 @@ void InputMethods::sendKey( ushort unicode, ushort scancode, ushort mod, bool pr
 #endif
 }
 
-bool InputMethods::eventFilter( QObject* o, QEvent* e )
+bool InputMethods::eventFilter( QObject* , QEvent* e )
 {
     if ( e->type() == QEvent::Close )
     {
@@ -618,4 +614,14 @@ bool InputMethods::eventFilter( QObject* o, QEvent* e )
         return true;
     }
     return false;
+}
+
+void InputMethods::readConfig() {
+    Config cfg( "Launcher" );
+    cfg.setGroup( "InputMethods" );
+
+    inputWidgetStyle = QWidget::WStyle_Customize | QWidget::WStyle_StaysOnTop | QWidget::WGroupLeader | QWidget::WStyle_Tool;
+    inputWidgetStyle |= cfg.readBoolEntry( "Float", false ) ?
+                        QWidget::WStyle_DialogBorder : 0;
+    inputWidgetWidth = cfg.readNumEntry( "Width", 100 );
 }

@@ -42,9 +42,6 @@ class InputMethodSettings : public QWidget
 
     void accept ( );
 
-  protected slots:
-    void appletChanged ( );
-
   protected:
     void init ( );
 
@@ -52,6 +49,12 @@ class InputMethodSettings : public QWidget
     QCheckBox* _resize;
     QCheckBox* _float;
     QSpinBox* _size;
+
+  private:
+    bool changed()const;
+    bool _wasResize : 1;
+    bool _wasFloat  : 1;
+    int  _wasWidth;
 };
 
 #endif

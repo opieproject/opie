@@ -176,9 +176,8 @@ TaskBar::~TaskBar()
 
 TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOnTop | WGroupLeader)
 {
-    Config cfg( "Launcher" );
-    cfg.setGroup( "InputMethods" );
-    resizeRunningApp = cfg.readBoolEntry( "Resize", true );
+    /* Read InputMethod Config */
+    readConfig();
 
     sm = new StartMenu( this );
     connect( sm, SIGNAL(tabSelected(const QString&)), this,
@@ -335,6 +334,8 @@ void TaskBar::receive( const QCString &msg, const QByteArray &data )
         stream >> name;
 	inputMethods->showInputMethod(name);
     } else if ( msg == "reloadInputMethods()" ) {
+        readConfig();
+        inputMethods->readConfig();
 	inputMethods->loadInputMethods();
     } else if ( msg == "reloadApplets()" ) {
 	sysTray->clearApplets();
@@ -375,6 +376,12 @@ void TaskBar::toggleSymbolInput()
     } else {
 	inputMethods->showInputMethod( unicodeInput );
     }
+}
+
+void TaskBar::readConfig() {
+    Config cfg( "Launcher" );
+    cfg.setGroup( "InputMethods" );
+    resizeRunningApp = cfg.readBoolEntry( "Resize", true );
 }
 
 #include "taskbar.moc"

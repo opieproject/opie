@@ -31,6 +31,7 @@
 /* OPIE */
 #include <qpe/config.h>
 #include <opie2/odebug.h>
+#include <qpe/qcopenvelope_qws.h>
 
 /* QT */
 #include <qspinbox.h>
@@ -56,9 +57,17 @@ InputMethodSettings::InputMethodSettings( QWidget *parent, const char *name ):QW
 
     Config cfg( "Launcher" );
     cfg.setGroup( "InputMethods" );
-    _resize->setChecked( cfg.readBoolEntry( "Resize", true ) );
-    _float->setChecked( cfg.readBoolEntry( "Float", false ) );
-    _size->setValue( cfg.readNumEntry( "Width", 100 ) );
+
+    /*
+     * load the values to see if something was changed
+     */
+    _wasResize = cfg.readBoolEntry( "Resize", true );
+    _wasFloat  = cfg.readBoolEntry( "Float", false );
+    _wasWidth  =  cfg.readNumEntry( "Width", 100 );
+
+    _resize->setChecked( _wasResize );
+    _float ->setChecked( _wasFloat );
+    _size  ->setValue( _wasWidth );
 
     lay->addWidget( _resize );
     lay->addWidget( _float );
@@ -71,8 +80,15 @@ InputMethodSettings::InputMethodSettings( QWidget *parent, const char *name ):QW
     QWhatsThis::add( _size, tr( "Specify the percentage of the screen width for the input method" ) );
 }
 
-void InputMethodSettings::appletChanged()
-{
+bool InputMethodSettings::changed()const{
+    if ( _wasResize != _resize->isChecked() )
+        return true;
+    else if ( _wasFloat != _float->isChecked() )
+        return true;
+    else if ( _wasWidth != _size->value() )
+        return true;
+    else
+        return false;
 }
 
 void InputMethodSettings::accept()
@@ -84,5 +100,8 @@ void InputMethodSettings::accept()
     cfg.writeEntry( "Float", _float->isChecked() );
     cfg.writeEntry( "Width", _size->value() );
     cfg.write();
+
+    if ( changed() )
+        QCopEnvelope( "QPE/TaskBar", "reloadInputMethods()" );
 }
 
