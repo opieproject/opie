@@ -27,22 +27,6 @@
 
 */
 
-#include "appearance.h"
-#include "editScheme.h"
-
-#include <opie/ofiledialog.h>
-#include <opie/otabwidget.h>
-
-#include <qpe/applnk.h>
-#include <qpe/config.h>
-#include <qpe/global.h>
-#include <qpe/resource.h>
-#include <qpe/qpeapplication.h>
-#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
-#include <qpe/qcopenvelope_qws.h>
-#endif
-
-#include <qaction.h>
 #include <qbuttongroup.h>
 #include <qcheckbox.h>
 #include <qcombobox.h>
@@ -53,31 +37,42 @@
 #include <qlineedit.h>
 #include <qlistbox.h>
 #include <qmessagebox.h>
-#include <qmultilineedit.h>
-#include <qpopupmenu.h>
 #include <qpushbutton.h>
 #include <qradiobutton.h>
 #if QT_VERSION >= 300
 #include <qstylefactory.h>
-#else
+#endif
+#include <qtoolbutton.h>
 #include <qwindowsstyle.h>
+#include <qlistview.h>
+#include <qheader.h>
+#include <qvbox.h>
+
+#include <qpe/config.h>
+#include <qpe/global.h>
+#include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
+#include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpestyle.h>
 #include <qpe/lightstyle.h>
 #include <qpe/qlibrary.h>
 #include <qpe/styleinterface.h>
-#endif
-#include <qtabwidget.h>
-#include <qtoolbutton.h>
-#include <qvgroupbox.h>
-#include <qwidget.h>
 
+#include <opie/ofontselector.h>
+#include <opie/odevice.h>
+#include <opie/ofiledialog.h>
+#include <opie/otabwidget.h>
+
+#include "appearance.h"
+#include "editScheme.h"
 #include "stylelistitem.h"
 #include "decolistitem.h"
 #include "colorlistitem.h"
-
+#include "exceptlistitem.h"
 #include "sample.h"
 
-#include <opie/ofontselector.h>
+
+using namespace Opie;
 
 
 class DefaultWindowDecoration : public WindowDecorationInterface
@@ -109,47 +104,71 @@ private:
 
 
 
-void Appearance::loadStyles ( QListBox *list )
-{
-#if QT_VERSION >= 300
-    list->insertStringList(QStyleFactory::styles());
-#else
-    list->insertItem( new StyleListItem ( "Windows", new QWindowsStyle ( )));
-    list->insertItem( new StyleListItem ( "Light", new LightStyle ( )));
-#ifndef QT_NO_STYLE_MOTIF
-    list->insertItem( new StyleListItem ( "Motif", new QMotifStyle ( )));
-#endif
-#ifndef QT_NO_STYLE_MOTIFPLUS
-    list->insertItem( new StyleListItem ( "MotifPlus", new QMotifPlusStyle ( )));
-#endif
-#ifndef QT_NO_STYLE_PLATINUM
-    list->insertItem( new StyleListItem ( "Platinum", new QPlatinumStyle ( )));
-#endif
-#endif
-    list->insertItem( new StyleListItem ( "QPE", new QPEStyle ( )));
 
-#if QT_VERSION < 300
+
+
+
+QWidget *Appearance::createStyleTab ( QWidget *parent, Config &cfg )
+{
+    QWidget* tab = new QWidget( parent, "StyleTab" );
+    QVBoxLayout* vertLayout = new QVBoxLayout( tab, 3, 3 );
+
+    m_style_list = new QListBox( tab, "m_style_list" );
+    vertLayout->addWidget( m_style_list );
+
+    m_style_settings = new QPushButton ( tr( "Settings..." ), tab );
+    connect ( m_style_settings, SIGNAL( clicked ( )), this, SLOT( styleSettingsClicked ( )));
+    vertLayout-> addWidget ( m_style_settings );
+
+    QString s = cfg. readEntry ( "Style", "Light" );
+    
+
+#if QT_VERSION >= 300
+    m_style_list->insertStringList(QStyleFactory::styles());
+#else
+    m_style_list-> insertItem ( new StyleListItem ( "Windows", new QWindowsStyle ( )));
+    m_style_list-> insertItem ( new StyleListItem ( "Light", new LightStyle ( )));
+    m_style_list-> insertItem ( new StyleListItem ( "QPE", new QPEStyle ( )));
+#endif
 	{
-		QString path = QPEApplication::qpeDir() + "/plugins/styles/";
+		QString path = QPEApplication::qpeDir ( ) + "/plugins/styles/";
 		QStringList sl = QDir ( path, "lib*.so" ). entryList ( );
 
 		for ( QStringList::Iterator it = sl. begin ( ); it != sl. end ( ); ++it ) {
 			QLibrary *lib = new QLibrary ( path + "/" + *it );
 			StyleInterface *iface;
 
-			if (( lib-> queryInterface ( IID_Style, (QUnknownInterface **) &iface ) == QS_OK ) && iface )
-				list-> insertItem ( new StyleListItem ( lib, iface ));
+			if (( lib-> queryInterface ( IID_Style, (QUnknownInterface **) &iface ) == QS_OK ) && iface ) {
+				StyleListItem *slit = new StyleListItem ( lib, iface );
+				m_style_list-> insertItem ( slit );
+				
+				if ( slit-> key ( ) == s )
+					m_style_list-> setCurrentItem ( slit );
+			}
 			else
 				delete lib;
 		}
 	}
 
-#endif
+    m_original_style = m_style_list-> currentItem ( );
+    styleClicked ( m_original_style );
+
+    connect( m_style_list, SIGNAL( highlighted( int ) ), this, SLOT( styleClicked( int ) ) );
+
+	return tab;
 }
 
-void Appearance::loadDecos ( QListBox *list )
+QWidget *Appearance::createDecoTab ( QWidget *parent, Config &cfg )
 {
-    list-> insertItem ( new DecoListItem ( "QPE" ));
+    QWidget* tab = new QWidget( parent, "DecoTab" );
+    QVBoxLayout* vertLayout = new QVBoxLayout( tab, 3, 3 );
+
+    m_deco_list = new QListBox( tab, "m_deco_list" );
+    vertLayout->addWidget( m_deco_list );
+
+    QString s = cfg. readEntry ( "Decoration" );
+
+    m_deco_list-> insertItem ( new DecoListItem ( "QPE" ));
 
 	{
 		QString path = QPEApplication::qpeDir() + "/plugins/decorations/";
@@ -159,93 +178,18 @@ void Appearance::loadDecos ( QListBox *list )
 			QLibrary *lib = new QLibrary ( path + "/" + *it );
 			WindowDecorationInterface *iface;
 
-			if ( lib-> queryInterface ( IID_WindowDecoration, (QUnknownInterface **) &iface ) == QS_OK )
-				list-> insertItem ( new DecoListItem ( lib, iface ));
+			if ( lib-> queryInterface ( IID_WindowDecoration, (QUnknownInterface **) &iface ) == QS_OK ) {
+				DecoListItem *dlit = new DecoListItem ( lib, iface );				
+				m_deco_list-> insertItem ( dlit );
+				
+				if ( dlit-> key ( ) == s )
+					m_deco_list-> setCurrentItem ( dlit );
+			}
 			else
 				delete lib;
 		}
 	}
-}
 
-void Appearance::loadColors ( QListBox *list )
-{
-    list-> clear ( );
-    {
-    	Config config ( "qpe" );
-		config. setGroup ( "Appearance" );
-    
-		list-> insertItem ( new ColorListItem ( tr( "Current scheme" ), config ));
-	}
-
-	QString path = QPEApplication::qpeDir ( ) + "/etc/colors/";
-    QStringList sl = QDir ( path ). entryList ( "*.scheme" );
-	
-	for ( QStringList::Iterator it = sl. begin ( ); it != sl. end ( ); ++it ) {
-		QString name = (*it). left ((*it). find ( ".scheme" ));
-		Config config ( path + *it, Config::File );
-		config. setGroup ( "Colors" );
-		
-		list-> insertItem ( new ColorListItem ( name, config ));
-	}
-}
-
-
-QWidget *Appearance::createStyleTab ( QWidget *parent )
-{
-	Config config ( "qpe" );
-	config. setGroup ( "Appearance" );
-
-    QWidget* tab = new QWidget( parent, "StyleTab" );
-    QVBoxLayout* vertLayout = new QVBoxLayout( tab, 4, 4 );
-
-    m_style_list = new QListBox( tab, "m_style_list" );
-    vertLayout->addWidget( m_style_list );
-
-    m_style_settings = new QPushButton ( tr( "Settings..." ), tab );
-    connect ( m_style_settings, SIGNAL( clicked ( )), this, SLOT( styleSettingsClicked ( )));
-    vertLayout-> addWidget ( m_style_settings );
-
-	loadStyles ( m_style_list );
-
-    QString s = config. readEntry ( "Style", "Light" );
-    
-    for ( uint i = 0; i < m_style_list-> count ( ); i++ ) {
-    	if (((StyleListItem *) m_style_list-> item ( i ))-> key ( ) == s ) {
-    		m_style_list-> setCurrentItem ( i );
-    		break;
-    	}
-    }
-    
-    m_original_style = m_style_list-> currentItem ( );
-    styleClicked ( m_original_style );
-
-    connect( m_style_list, SIGNAL( highlighted( int ) ), this, SLOT( styleClicked( int ) ) );
-
-	return tab;
-}
-
-QWidget *Appearance::createDecoTab ( QWidget *parent )
-{
-	Config config ( "qpe" );
-	config. setGroup ( "Appearance" );
-
-    QWidget* tab = new QWidget( parent, "DecoTab" );
-    QVBoxLayout* vertLayout = new QVBoxLayout( tab, 4, 4 );
-
-    m_deco_list = new QListBox( tab, "m_deco_list" );
-    vertLayout->addWidget( m_deco_list );
-
-	loadDecos ( m_deco_list );
-
-    QString s = config. readEntry ( "Decoration" );
-
-    for ( uint i = 0; i < m_deco_list-> count ( ); i++ ) {
-    	if (((DecoListItem *) m_deco_list-> item ( i ))-> key ( ) == s ) {
-    		m_deco_list-> setCurrentItem ( i );
-    		break;
-    	}
-    }
-    
     m_original_deco = m_deco_list-> currentItem ( );
     if ( m_deco_list-> currentItem  ( ) < 0 )
     	m_deco_list-> setCurrentItem ( 0 );
@@ -256,14 +200,11 @@ QWidget *Appearance::createDecoTab ( QWidget *parent )
 	return tab;
 }
 
-QWidget *Appearance::createFontTab ( QWidget *parent )
+QWidget *Appearance::createFontTab ( QWidget *parent, Config &cfg )
 {
-	Config config ( "qpe" );
-	config. setGroup ( "Appearance" );
-
-    QString familyStr = config.readEntry( "FontFamily", "Helvetica" );
-    QString styleStr = config.readEntry( "FontStyle", "Regular" );
-    int size = config.readNumEntry( "FontSize", 10 );
+    QString familyStr = cfg. readEntry ( "FontFamily", "Helvetica" );
+    QString styleStr = cfg. readEntry ( "FontStyle", "Regular" );
+    int size = cfg. readNumEntry ( "FontSize", 10 );
 
     m_fontselect = new OFontSelector ( false, parent, "FontTab" );    
     m_fontselect-> setSelectedFont ( familyStr, styleStr, size );
@@ -274,21 +215,29 @@ QWidget *Appearance::createFontTab ( QWidget *parent )
     return m_fontselect; 
 }
 
-QWidget *Appearance::createColorTab ( QWidget *parent )
+QWidget *Appearance::createColorTab ( QWidget *parent, Config &cfg )
 {
-	Config config ( "qpe" );
-	config. setGroup ( "Appearance" );
-
-
     QWidget *tab = new QWidget( parent, "ColorTab" );
-    QGridLayout *gridLayout = new QGridLayout( tab, 0, 0, 4, 4 );
+    QGridLayout *gridLayout = new QGridLayout( tab, 0, 0, 3, 3 );
     gridLayout->setRowStretch ( 3, 10 );
 
     m_color_list = new QListBox ( tab );
     gridLayout->addMultiCellWidget ( m_color_list, 0, 3, 0, 0 );
     connect( m_color_list, SIGNAL( highlighted( int ) ), this, SLOT( colorClicked( int ) ) );
 
-    loadColors ( m_color_list );
+	m_color_list-> insertItem ( new ColorListItem ( tr( "Current scheme" ), cfg ));
+
+	QString path = QPEApplication::qpeDir ( ) + "/etc/colors/";
+    QStringList sl = QDir ( path ). entryList ( "*.scheme" );
+	
+	for ( QStringList::Iterator it = sl. begin ( ); it != sl. end ( ); ++it ) {
+		QString name = (*it). left ((*it). find ( ".scheme" ));
+		Config config ( path + *it, Config::File );
+		config. setGroup ( "Colors" );
+		
+		m_color_list-> insertItem ( new ColorListItem ( name, config ));
+	}
+	
     m_color_list-> setCurrentItem ( 0 );
 
     QPushButton* tempButton = new QPushButton( tab, "editSchemeButton" );
@@ -309,18 +258,84 @@ QWidget *Appearance::createColorTab ( QWidget *parent )
     return tab;
 }
 
-QWidget *Appearance::createGuiTab ( QWidget *parent )
+QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 {
-	Config config ( "qpe" );
-	config. setGroup ( "Appearance" );
+    QWidget *tab = new QWidget ( parent );
+    QVBoxLayout *vertLayout = new QVBoxLayout( tab, 3, 3 );
 
-    QWidget *tab = new QWidget( parent, "AdvancedTab" );
-    QVBoxLayout *vertLayout = new QVBoxLayout( tab, 4, 4 );
+	QGridLayout *lay = new QGridLayout ( vertLayout, 0, 0, 3, 0 );
+
+	m_force = new QCheckBox ( tr( "Force styling for all applications." ), tab );
+	m_force-> setChecked ( cfg. readBoolEntry ( "ForceStyle" ));
+	lay-> addMultiCellWidget ( m_force, 0, 0, 0, 1 );       
+
+	QLabel *l = new QLabel ( tab );
+	l-> setText ( QString ( "<p>%1</p>" ). arg ( tr( "Disable styling for these applications ( <b>*</b> can be used as a wildcard):" )));
+	lay-> addMultiCellWidget ( l, 1, 1, 0, 1 );
+	
+	m_except = new QListView ( tab );
+	m_except-> addColumn ( Resource::loadIconSet ( "appearance/style.png" ), "", 24 );
+	m_except-> addColumn ( Resource::loadIconSet ( "appearance/font.png" ), "", 24 );
+	m_except-> addColumn ( Resource::loadIconSet ( "appearance/deco.png" ), "", 24 );
+	m_except-> addColumn ( tr( "Binary file(s)" ));
+	m_except-> setColumnAlignment ( 0, AlignCenter );
+	m_except-> setColumnAlignment ( 1, AlignCenter );
+	m_except-> setColumnAlignment ( 2, AlignCenter );
+	m_except-> setAllColumnsShowFocus ( true );
+	m_except-> setMinimumHeight ( 30 );
+	m_except-> header ( )-> setClickEnabled ( false );
+	m_except-> header ( )-> setResizeEnabled ( false );
+	m_except-> header ( )-> setMovingEnabled ( false );	
+	lay-> addMultiCellWidget ( m_except, 2, 6, 0, 0 );
+	
+	connect ( m_except, SIGNAL( clicked ( QListViewItem *, const QPoint &, int )), this, SLOT( clickedExcept ( QListViewItem *, const QPoint &, int )));
+	
+	QToolButton *tb = new QToolButton ( tab );
+	tb-> setIconSet ( Resource::loadIconSet ( "appearance/add" ));
+	tb-> setFocusPolicy ( QWidget::StrongFocus );
+	lay-> addWidget ( tb, 2, 1 ); 
+	connect ( tb, SIGNAL( clicked ( )), this, SLOT( addExcept ( )));
+
+	tb = new QToolButton ( tab );
+	tb-> setIconSet ( Resource::loadIconSet ( "editdelete" ));
+	tb-> setFocusPolicy ( QWidget::StrongFocus );
+	lay-> addWidget ( tb, 3, 1 ); 
+	connect ( tb, SIGNAL( clicked ( )), this, SLOT( delExcept ( )));
+	
+	tb = new QToolButton ( tab );
+	tb-> setIconSet ( Resource::loadIconSet ( "up" ));
+	tb-> setFocusPolicy ( QWidget::StrongFocus );
+	lay-> addWidget ( tb, 4, 1 ); 
+	connect ( tb, SIGNAL( clicked ( )), this, SLOT( upExcept ( )));
+	
+	tb = new QToolButton ( tab );
+	tb-> setIconSet ( Resource::loadIconSet ( "down" ));
+	tb-> setFocusPolicy ( QWidget::StrongFocus );
+	lay-> addWidget ( tb, 5, 1 ); 
+	connect ( tb, SIGNAL( clicked ( )), this, SLOT( downExcept ( )));
+	
+	lay-> setRowStretch ( 6, 10 );
+	lay-> setColStretch ( 0, 10 );
+
+	QStringList sl = cfg. readListEntry ( "NoStyle", ';' );
+	for ( QStringList::Iterator it = sl. begin ( ); it != sl. end ( ); ++it ) {
+		int fl = ( *it ). left ( 1 ). toInt ( 0, 32 );
+	
+		new ExceptListItem ( m_except, ( *it ). mid ( 1 ), fl & 0x01, fl & 0x02, fl & 0x04 );
+	}
+
+
+	vertLayout-> addSpacing ( 3 );	
+	QFrame *f = new QFrame ( tab );
+	f-> setFrameStyle ( QFrame::HLine | QFrame::Sunken );
+	vertLayout-> addWidget ( f ); 
+	vertLayout-> addSpacing ( 3 );   
         
-    QGridLayout* gridLayout = new QGridLayout ( vertLayout );
+        
+    QGridLayout* gridLayout = new QGridLayout ( vertLayout, 0, 0, 3, 0 );
 
-	int style = config. readNumEntry ( "TabStyle", 2 ) - 1;
-	bool tabtop = ( config. readEntry ( "TabPosition", "Top" ) == "Top" );
+	int style = cfg. readNumEntry ( "TabStyle", 2 ) - 1;
+	bool tabtop = ( cfg. readEntry ( "TabPosition", "Top" ) == "Top" );
 
     QLabel* label = new QLabel( tr( "Tab style:" ), tab );
     gridLayout-> addWidget ( label, 0, 0 );
@@ -362,7 +377,7 @@ Appearance::Appearance( QWidget* parent,  const char* name, WFlags )
     Config config( "qpe" );
     config.setGroup( "Appearance" );
 
-    QVBoxLayout *top = new QVBoxLayout ( this, 4, 4 );
+    QVBoxLayout *top = new QVBoxLayout ( this, 3, 3 );
 
 	m_sample = new SampleWindow ( this );
 	m_sample-> setDecoration ( new DefaultWindowDecoration ( ));
@@ -370,22 +385,33 @@ Appearance::Appearance( QWidget* parent,  const char* name, WFlags )
     OTabWidget* tw = new OTabWidget ( this, "tabwidget", OTabWidget::Global, OTabWidget::Bottom );
 	QWidget *styletab;
 	
- 	tw-> addTab ( styletab = createStyleTab ( tw ), "appearance/styletabicon.png", tr( "Style" ));
-    tw-> addTab ( createFontTab ( tw ), "appearance/fonttabicon.png", tr( "Font" ));
-    tw-> addTab ( createColorTab ( tw ), "appearance/colorstabicon.png", tr( "Colors" ) );
-    tw-> addTab ( createDecoTab ( tw ), "appearance/decotabicon.png", tr( "Windows" ) );
-    tw-> addTab ( createGuiTab ( tw ), "appearance/advancedtabicon.png", tr( "Gui" ) );
+ 	tw-> addTab ( styletab = createStyleTab ( tw, config ), "appearance/style.png", tr( "Style" ));
+    tw-> addTab ( createFontTab ( tw, config ), "appearance/font.png", tr( "Font" ));
+    tw-> addTab ( createColorTab ( tw, config ), "appearance/color.png", tr( "Colors" ) );
+    tw-> addTab ( createDecoTab ( tw, config ), "appearance/deco.png", tr( "Windows" ) );
+	tw-> addTab ( m_advtab = createAdvancedTab ( tw, config ), "appearance/advanced.png", tr( "Advanced" ) );
 
 	top-> addWidget ( tw, 10 );	
 	top-> addWidget ( m_sample, 1 );
 
     tw-> setCurrentTab ( styletab );
-    
+	connect ( tw, SIGNAL( currentChanged ( QWidget * )), this, SLOT( tabChanged ( QWidget * )));
+        
     m_style_changed = m_font_changed = m_color_changed = m_deco_changed = false;
 }
 
 Appearance::~Appearance()
 {
+}
+
+void Appearance::tabChanged ( QWidget *w )
+{
+	if ( w == m_advtab ) {
+		m_sample-> hide ( );
+		updateGeometry ( ); // shouldn't be necessary ...
+	}
+	else
+		m_sample-> show ( );
 }
 
 void Appearance::accept ( )
@@ -427,11 +453,23 @@ void Appearance::accept ( )
  		if ( item )   
 			item-> save ( config );
     }
-    
+
+
+	QStringList sl;
+	for ( ExceptListItem *it = (ExceptListItem *) m_except-> firstChild ( ); it; it = (ExceptListItem *) it-> nextSibling ( )) {
+		int fl = 0;
+		fl |= ( it-> noStyle ( ) ? 0x01 : 0 );
+		fl |= ( it-> noFont ( ) ? 0x02 : 0 );
+		fl |= ( it-> noDeco ( ) ? 0x04 : 0 );
+		sl << ( QString::number ( fl, 32 ) + it-> pattern ( ));
+	}
+	config. writeEntry ( "NoStyle", sl, ';' );
+	config. writeEntry ( "ForceStyle", m_force-> isChecked ( ));
+	
 	config. write ( ); // need to flush the config info first
 	Global::applyStyle ( );
 
-	if ( QMessageBox::warning ( this, tr( "Restart" ), tr( "Do you want to restart Opie now?" ),  tr( "Yes" ), tr( "No" ), 0, 0, 1 ) == 0 ) {
+	if ( QMessageBox::warning ( this, tr( "Restart" ), tr( "Do you want to restart %1 now?" ). arg ( ODevice::inst ( )-> system ( ) == System_Zaurus ? "Qtopia" : "Opie" ),  tr( "Yes" ), tr( "No" ), 0, 0, 1 ) == 0 ) {
 		QCopEnvelope e( "QPE/System", "restart()" );
 	}
 	
@@ -462,7 +500,7 @@ void Appearance::styleSettingsClicked ( )
 
 	if ( item && item-> hasSettings ( )) {
 		QDialog *d = new QDialog ( this, "SETTINGS-DLG", true );
-		QVBoxLayout *vbox = new QVBoxLayout ( d, 4, 0 );
+		QVBoxLayout *vbox = new QVBoxLayout ( d, 3, 0 );
 
 		QWidget *w = item-> settings ( d );
 
@@ -562,8 +600,9 @@ void Appearance::saveSchemeClicked()
 
 	QDialog *d = new QDialog ( this, 0, true );
 	d-> setCaption ( tr( "Save Scheme" ));
-	QLineEdit *ed = new QLineEdit ( this );
-	( new QVBoxLayout ( d, 4, 4 ))-> addWidget ( ed );
+	QLineEdit *ed = new QLineEdit ( d );
+	( new QVBoxLayout ( d, 3, 3 ))-> addWidget ( ed );
+	ed-> setFocus ( );
 
     if ( d-> exec ( ) == QDialog::Accepted ) {
         QString schemename = ed-> text ( );
@@ -578,7 +617,8 @@ void Appearance::saveSchemeClicked()
 			item-> save ( config );
 			                
             config. write ( ); // need to flush the config info first
-		    loadColors ( m_color_list );
+            
+            m_color_list-> insertItem ( new ColorListItem ( schemename, config ));
         }
         else
         {
@@ -600,12 +640,115 @@ void Appearance::deleteSchemeClicked()
         if ( QMessageBox::warning ( this, tr( "Delete scheme" ), tr( "Do you really want to delete\n" ) + item-> text ( ) + "?",
                 tr( "Yes" ), tr( "No" ), 0, 0, 1 ) == 0 ) {
 			QFile::remove ( QPEApplication::qpeDir ( ) + "/etc/colors/" + item-> text ( ) + ".scheme" );
-			loadColors ( m_color_list );
+			delete item;
         }
     }
     else
     {
         QMessageBox::information( this, tr( "Delete scheme" ), tr( "Unable to delete current scheme." ));
     }
+}
+
+
+void Appearance::addExcept ( )
+{
+	ExceptListItem *it = new ExceptListItem ( m_except, tr( "<new>" ), true, true, true );
+	m_except-> ensureItemVisible ( it );
+	m_except-> setSelected ( it, true );
+}
+
+void Appearance::delExcept ( )
+{
+	if ( m_except-> selectedItem ( )) {
+		m_except-> setFocus ( );
+		delete m_except-> selectedItem ( );
+	}
+}
+
+void Appearance::upExcept ( )
+{
+	ExceptListItem *it = (ExceptListItem *) m_except-> selectedItem ( );
+	
+	if ( it && it-> itemAbove ( ))
+		it-> itemAbove ( )-> moveItem ( it );
+}
+
+void Appearance::downExcept ( )
+{
+	ExceptListItem *it = (ExceptListItem *) m_except-> selectedItem ( );
+	
+	if ( it && it-> itemBelow ( ))
+		it-> moveItem ( it-> itemBelow ( ));
+}
+
+class ExEdit : public QLineEdit {
+public:
+	ExEdit ( ExceptListItem *item ) 
+		: QLineEdit ( item-> listView ( )-> viewport ( ), "exedit" ), it ( item )
+	{ 
+		setFrame ( false );
+		
+		QRect r = it-> listView ( )-> itemRect ( it );
+		
+		int x = it-> listView ( )-> header ( )-> cellPos ( 3 ) - 1;
+		int y = r. y ( );
+		int w = it-> listView ( )-> viewport ( )-> width ( ) - x;
+		int h = r. height ( ); // + 2;
+		
+		setText ( it-> pattern ( ));		
+		setGeometry ( x, y, w, h );
+		
+		qDebug ( "ExEdit: [%s] at %d,%d %d,%d", it->text(2).latin1(),x,y,w,h);	
+		
+		m_out = true;
+		
+		show ( );
+		setFocus ( );
+		selectAll ( );
+		end ( true );
+	}
+	
+	virtual void focusOutEvent ( QFocusEvent * ) 
+	{
+		hide ( );
+		if ( m_out )
+			it-> setPattern ( text ( ));
+		delete this;
+	}
+	
+	virtual void keyPressEvent ( QKeyEvent *e )
+	{
+		if ( e-> key ( ) == Key_Return )
+			it-> listView ( )-> setFocus ( );
+		else if ( e-> key ( ) == Key_Escape ) {
+			m_out = false;
+			it-> listView ( )-> setFocus ( );
+		}
+		else
+			QLineEdit::keyPressEvent ( e );
+	}
+	
+private:
+	ExceptListItem *it;
+	bool m_out;
+};
+
+void Appearance::clickedExcept ( QListViewItem *item, const QPoint &, int c )
+{
+	if ( !item || c < 0 || c > 3 )
+		return;
+
+	ExceptListItem *it = (ExceptListItem *) item;
+
+	if ( c == 0 )
+		it-> setNoStyle ( !it-> noStyle ( ));
+	else if ( c == 1 )
+		it-> setNoFont ( !it-> noFont ( ));
+	else if ( c == 2 )
+		it-> setNoDeco ( !it-> noDeco ( ));
+	else if ( c == 3 ) {
+		m_except-> ensureItemVisible ( it );
+		new ExEdit ( it );
+	}
 }
 

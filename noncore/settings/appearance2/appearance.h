@@ -31,7 +31,6 @@
 
 #include <qpe/fontdatabase.h>
 
-#include <qmainwindow.h>
 #include <qdialog.h>
 
 class QCheckBox;
@@ -45,6 +44,9 @@ class QRadioButton;
 class QToolButton;
 class SampleWindow;
 class OFontSelector;
+class QListView;
+class QListViewItem;
+class Config;
 
 class Appearance : public QDialog
 {
@@ -68,19 +70,23 @@ protected slots:
     void editSchemeClicked();
     void saveSchemeClicked();
     void deleteSchemeClicked();
+    
+    void tabChanged ( QWidget * );
+    
+    void addExcept ( );
+    void delExcept ( );
+    void upExcept ( );
+    void downExcept ( );
+    void clickedExcept ( QListViewItem *, const QPoint &, int );
 
 private:
-	void loadStyles ( QListBox * );
-	void loadDecos ( QListBox * );
-    void loadColors ( QListBox * );
-
     void changeText();
 	
-	QWidget *createStyleTab ( QWidget *parent );
-	QWidget *createDecoTab ( QWidget *parent );
-	QWidget *createFontTab ( QWidget *parent );
-	QWidget *createColorTab ( QWidget *parent );
-	QWidget *createGuiTab ( QWidget *parent );
+	QWidget *createStyleTab ( QWidget *parent, Config &cfg );
+	QWidget *createDecoTab ( QWidget *parent, Config &cfg );
+	QWidget *createFontTab ( QWidget *parent, Config &cfg );
+	QWidget *createColorTab ( QWidget *parent, Config &cfg );
+	QWidget *createAdvancedTab ( QWidget *parent, Config &cfg );
 
 private:
     bool m_style_changed;
@@ -92,7 +98,7 @@ private:
     int  m_original_style;
     int  m_original_deco;
     int  m_original_tabstyle;
-    bool  m_original_tabpos;
+    bool m_original_tabpos;
     
     QListBox *    m_style_list;
     QPushButton * m_style_settings;
@@ -108,6 +114,10 @@ private:
     QComboBox *   m_tabstyle_list;
     QRadioButton *m_tabstyle_top;
     QRadioButton *m_tabstyle_bottom;
+
+	QWidget *     m_advtab;
+    QListView *   m_except;
+    QCheckBox *   m_force;
 };
 
 #endif
