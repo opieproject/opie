@@ -97,14 +97,46 @@ QPoint Calibrate::fromDevice( const QPoint &p )
 
 bool Calibrate::sanityCheck()
 {
-	QRect r ( cd.devPoints[ QWSPointerCalibrationData::TopLeft ], cd.devPoints[ QWSPointerCalibrationData::BottomRight ] );
-	r = r. normalize ( ); // This should also handle rotated TS controllers
+	QPoint tl = cd.devPoints[QWSPointerCalibrationData::TopLeft];
+	QPoint tr = cd.devPoints[QWSPointerCalibrationData::TopRight];
+	QPoint bl = cd.devPoints[QWSPointerCalibrationData::BottomLeft];
+	QPoint br = cd.devPoints[QWSPointerCalibrationData::BottomRight];
 
-	cd. devPoints [QWSPointerCalibrationData::TopRight]   = r. topRight ( );
-	cd. devPoints [QWSPointerCalibrationData::BottomLeft] = r. bottomLeft ( );
-	cd. devPoints [QWSPointerCalibrationData::Center]     = r. center ( );
+	// not needed anywhere .. just calculate it, so it's there
+	cd. devPoints [QWSPointerCalibrationData::Center] = QRect ( tl, br ). normalize ( ). center ( );
 
-	return true;	
+	int dlx = QABS( bl. x ( ) - tl. x ( ));
+	int dly = QABS( bl. y ( ) - tl. y ( ));
+	int drx = QABS( br. x ( ) - tr. x ( ));
+	int dry = QABS( br. y ( ) - tr. y ( ));
+	int dtx = QABS( tr. x ( ) - tl. x ( ));
+	int dty = QABS( tr. y ( ) - tl. y ( ));
+	int dbx = QABS( br. x ( ) - bl. x ( ));
+	int dby = QABS( br. y ( ) - bl. y ( ));
+
+	int dl = (int) ::sqrt (( dlx * dlx ) + ( dly * dly )); // calculate vector lengths for all sides
+	int dr = (int) ::sqrt (( drx * drx ) + ( dry * dry ));
+	int dt = (int) ::sqrt (( dtx * dtx ) + ( dty * dty ));
+	int db = (int) ::sqrt (( dbx * dbx ) + ( dby * dby ));
+    
+	// Calculate leeway for x/y (we do not care if diff1/diff2 is for x or y here !)	
+	int diff1 = QABS( dl - dr );
+	int avg1  = ( dl + dr ) / 2;
+	int diff2 = QABS( dt - db );
+	int avg2 = ( dt + db ) / 2;
+
+	// Calculate leeway for "real" vector length against "manhattan" vector length
+	// This is a check, if the rect is rotated (other then 0/90/180/270)
+	// It needs to be performed only for the triange (bl, tl, tr)
+	int diff3 = QABS(( dlx + dly + dtx + dty ) - ( dl + dt )); 
+	int avg3 = (( dlx + dly + dtx + dty ) + ( dl + dt )) / 2;
+
+	if (( diff1 > ( avg1 / 20 )) || // 5% leeway
+	    ( diff2 > ( avg2 / 20 )) ||
+	    ( diff3 > ( avg3 / 20 )))
+		return false;
+	else
+		return true;
 }	
 
 void Calibrate::moveCrosshair( QPoint pt )
@@ -166,8 +198,8 @@ void Calibrate::mouseReleaseEvent( QMouseEvent * )
 	bool doMove = TRUE;
 
 	cd.devPoints[ location ] = penPos;
-	if ( location == QWSPointerCalibrationData::TopLeft ) {
-		location = QWSPointerCalibrationData::BottomRight;
+	if ( location < QWSPointerCalibrationData::TopRight ) {
+		location = (QWSPointerCalibrationData::Location) ( int( location ) + 1 );
 	}
 	else {
 		if ( sanityCheck() ) {
