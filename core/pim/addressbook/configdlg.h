@@ -14,10 +14,13 @@ public:
     void setConfig( const AbConfig& cnf );
     AbConfig getConfig();
 
-protected:
-/*     virtual void itemUp(); */
-/*     virtual void itemDown(); */
+protected slots:
+    void slotItemUp();
+    void slotItemDown();
+    void slotItemAdd();
+    void slotItemRemove();
 
+protected:
     QStringList contFields;
     AbConfig m_config;
 };

@@ -2,6 +2,7 @@
 #include <qcheckbox.h>
 #include <qradiobutton.h>
 #include <qlistbox.h>
+#include <qpushbutton.h>
 
 #include <opie/ocontact.h>
 
@@ -17,6 +18,30 @@ ConfigDlg::ConfigDlg( QWidget *parent = 0, const char *name = 0 ):
 
 	for (uint i=0; i < contFields.count(); i++)
 		allFieldListBox->insertItem( contFields[i] );
+	connect ( m_addButton, SIGNAL( clicked() ), this, SLOT( slotItemAdd() ) );
+	connect ( m_removeButton, SIGNAL( clicked() ), this, SLOT( slotItemRemove() ) );
+	connect ( m_upButton, SIGNAL( clicked() ), this, SLOT( slotItemUp() ) );
+	connect ( m_downButton, SIGNAL( clicked() ), this, SLOT( slotItemDown() ) );
+}
+
+void ConfigDlg::slotItemUp()
+{
+	qWarning( "void ConfigDlg::slotItemUp()" );
+}
+
+void ConfigDlg::slotItemDown()
+{
+	qWarning( "void ConfigDlg::slotItemDown()" );
+}
+
+void ConfigDlg::slotItemAdd()
+{
+	qWarning( "void ConfigDlg::slotItemAdd()" );
+}
+
+void ConfigDlg::slotItemRemove()
+{
+	qWarning( "void ConfigDlg::slotItemRemove()" );
 }
     
 void ConfigDlg::setConfig( const AbConfig& cnf )

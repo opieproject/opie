@@ -353,7 +353,7 @@ is provided free !</string>
                         <class>QPushButton</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>upButton</cstring>
+                            <cstring>m_upButton</cstring>
                         </property>
                         <property stdset="1">
                             <name>text</name>
@@ -368,7 +368,7 @@ is provided free !</string>
                         <class>QPushButton</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>downButton</cstring>
+                            <cstring>m_downButton</cstring>
                         </property>
                         <property stdset="1">
                             <name>sizePolicy</name>
@@ -397,7 +397,7 @@ is provided free !</string>
                         <class>QPushButton</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>PushButton6</cstring>
+                            <cstring>m_removeButton</cstring>
                         </property>
                         <property stdset="1">
                             <name>text</name>
@@ -408,7 +408,7 @@ is provided free !</string>
                         <class>QPushButton</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>PushButton5</cstring>
+                            <cstring>m_addButton</cstring>
                         </property>
                         <property stdset="1">
                             <name>text</name>
