@@ -616,11 +616,9 @@ void Konsole::doneSession(TESession*, int )
 void Konsole::newSession() {
     if(nsessions < 15) {    // seems to be something weird about 16 tabs on the Zaurus.... memory?
         TEWidget* te = new TEWidget(tab);
-        if(nsessions == 0) { //set this the first time only
-            Config c("Konsole");
-            c.setGroup("Menubar");
-            te->useBeep=c.readBoolEntry("useBeep",0);
-        }
+        Config c("Konsole");
+        c.setGroup("Menubar");
+        te->useBeep=c.readBoolEntry("useBeep",0);
 
 //  te->setBackgroundMode(PaletteBase); //we want transparent!!
         te->setVTFont(fonts.at(cfont)->getFont());
