@@ -36,6 +36,8 @@ namespace {
 #include "inlinepics_p.h"
 }
 
+static bool g_notUseSet = ::getenv("OVERWRITE_ICON_SET");
+
 /*!
   \class Resource resource.h
   \brief The Resource class provides access to named resources.
@@ -159,14 +161,27 @@ QStringList Resource::allSounds()
 
 static QImage load_image(const QString &name)
 {
-    QImage img = qembed_findImage(name.latin1());
-    if ( img.isNull() ) {
-	// No inlined image, try file
-	QString f = Resource::findPixmap(name);
-	if ( !f.isEmpty() )
-	    img.load(f);
+    if (g_notUseSet ) {
+        // try file
+        QImage img;
+        QString f = Resource::findPixmap(name);
+        if ( !f.isEmpty() )
+            img.load(f);
+        if (img.isNull() )
+            img = qembed_findImage(name.latin1() );
+        return img;
     }
-    return img;
+    else{
+        QImage img = qembed_findImage(name.latin1());
+
+        if ( img.isNull() ) {
+            // No inlined image, try file
+            QString f = Resource::findPixmap(name);
+            if ( !f.isEmpty() )
+                img.load(f);
+        }
+        return img;
+    }
 }
 
 /*!
