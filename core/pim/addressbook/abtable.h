@@ -85,14 +85,17 @@ public:
     QStringList choiceNames() const;
     void setChoiceSelection(int index, const QStringList& list);
     QStringList choiceSelection(int index) const;
-    void setShowCategory( const QString &c );
+    void setShowCategory( const QString &b, const QString &c );
     void setShowByLetter( char c );
     QString showCategory() const;
     QStringList categories();
-    void resizeRows( int size );
+
+    void resizeRows();
 
     void show();
     void setPaintingEnabled( bool e );
+
+    QString showBook() const;
 
 public slots:
     void slotDoFind( const QString &str, bool caseSensitive, bool backwards,
@@ -125,7 +128,7 @@ private:
 			int row = -1 );
     void insertIntoTable( const Contact &contact, int row );
     QString findContactName( const Contact &entry );
-    QString findContactContact( const Contact &entry );
+    QString findContactContact( const Contact &entry, int row );
     void journalFreeReplace( const Contact &cnt, int row );
     void journalFreeRemove( int row );
     void realignTable( int );
@@ -140,6 +143,9 @@ private:
     QStringList choicenames;
     bool enablePainting;
     Categories mCat;
+
+    QString showBk;
+    bool columnVisible;
 
     OContactDB m_contactdb;
 
