@@ -14,6 +14,6 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-cd  $QPEDIR/help/opie-sh/
+cd  $QPEDIR/help/opie-sh/ 
 opie-sh -t "opie-sh-howto" -f index.html
 rm -f /tmp/qcop-opie-sh-howto.sh
