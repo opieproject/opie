@@ -612,7 +612,7 @@ void CBListItem::paintCell( QPainter *p, const QColorGroup &cg, int column, int 
 		p->setBrushOrigin( -listView()->contentsX(), -listView()->contentsY() );
 	}
 	else if ( isAltBackground() )
-		_cg.setColor(QColorGroup::Base, QColor( 200, 255, 200 ) );
+		_cg.setColor(QColorGroup::Base, cg.background() );
 
 	QListViewItem::paintCell(p, _cg, column, width, align);
 }
