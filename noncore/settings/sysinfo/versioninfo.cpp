@@ -21,18 +21,20 @@
 #include <qpe/resource.h>
 #include <qpe/version.h>
 
-
+#include <qfile.h>
+#include <qimage.h>
 #include <qlabel.h>
+#include <qlayout.h>
 #include <qpixmap.h>
 #include <qpainter.h>
-#include <qimage.h>
-#include <qtimer.h>
-#include <qfile.h>
 #include <qtextstream.h>
-#include <qlayout.h>
+#include <qtimer.h>
+#include <qwhatsthis.h>
+
 #include "versioninfo.h"
 
 #include <opie/odevice.h>
+
 using namespace Opie;
 
 VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
@@ -121,7 +123,8 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     QLabel *systemVersion = new QLabel( this );
     systemVersion->setText( systemString );
     hb3->addWidget( systemVersion, 1, Qt::AlignTop + Qt::AlignLeft );
-    
+
+    QWhatsThis::add( this, tr( "This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device." ) );
 }
 
 VersionInfo::~VersionInfo()

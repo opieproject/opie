@@ -21,7 +21,8 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qtimer.h>
-#include <qlayout.h>
+#include <qwhatsthis.h>
+
 #include "graph.h"
 #include "storage.h"
 
@@ -123,29 +124,45 @@ void StorageInfo::updateMounts()
             QString humanname=*it;
 //            qDebug(humanname);
             if ( isCF(humanname) )
-                humanname = tr("CF Card: "+*fsmount+" "+*fsTit+" ");
+                humanname = tr( "CF Card: " );
             else if ( humanname == "/dev/hda1" )
-                humanname = tr("Hard Disk "+*fsmount+" "+*fsTit+" ");
+                humanname = tr( "Hard Disk " );
             else if ( humanname.left(9) == "/dev/mmcd" )
-                humanname = tr("SD Card "+*fsmount+" "+*fsTit+" ");
+                humanname = tr( "SD Card " );
             else if ( humanname.left(7) == "/dev/hd" )
-                humanname = tr("Hard Disk") + " " + humanname.mid(7)+" "+*fsmount+" "+*fsTit+" ";
+                humanname = tr( "Hard Disk /dev/hd " );
             else if ( humanname.left(7) == "/dev/sd" )
-                humanname = tr("SCSI Hard Disk") + " " + humanname.mid(7)+" "+*fsmount+" "+*fsTit+" ";
+                humanname = tr( "SCSI Hard Disk /dev/sd " );
             else if ( humanname == "/dev/mtdblock1" || humanname == "/dev/mtdblock/1" )
-                humanname = tr("Int. Storage "+*fsmount+" "+*fsTit+"\n");
+                humanname = tr( "Int. Storage " );
             else if ( humanname.left(14) == "/dev/mtdblock/" )
-                humanname = tr("Int. Storage") + " " + humanname.mid(14)+" "+*fsmount+" "+*fsTit+" ";
+                humanname = tr( "Int. Storage /dev/mtdblock/ " );
             else if ( humanname.left(13) == "/dev/mtdblock" )
-                humanname = tr("Int. Storage") + " " + humanname.mid(13)+" "+*fsmount+" "+*fsTit+" ";
-             else if ( humanname.left(9) == "/dev/root" )
-                 humanname = tr("Int. Storage "+*fsmount+" "+*fsTit+" ");
+                humanname = tr( "Int. Storage /dev/mtdblock " );
+            else if ( humanname.left(9) == "/dev/root" )
+                humanname = tr( "Int. Storage " );
               // etc.
+            humanname.append( *fsmount );
+            humanname.append( " " );
+            humanname.append( *fsTit );
+            humanname.append( " " );
+
             MountInfo* mi = new MountInfo( *fsit, humanname, this );
             vb->addWidget(mi);
             disks.insert(*fsit,mi);
             mi->show();
             fsmount++;fsTit++;
+            QString tempstr = humanname.left( 2 );
+            if ( tempstr == tr( "CF" ) )
+                QWhatsThis::add( mi, tr( "This graph represents how much memory is currently used on this Compact Flash memory card." ) );
+            else if ( tempstr == tr( "Ha" ) )
+                QWhatsThis::add( mi, tr( "This graph represents how much storage is currently used on this hard drive." ) );
+            else if ( tempstr == tr( "SD" ) )
+                QWhatsThis::add( mi, tr( "This graph represents how much memory is currently used on this Secure Digital memory card." ) );
+            else if ( tempstr == tr( "SC" ) )
+                QWhatsThis::add( mi, tr( "This graph represents how much storage is currently used on this hard drive." ) );
+            else if ( tempstr == tr( "In" ) )
+                QWhatsThis::add( mi, tr( "This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device." ) );
         }
         vb->addStretch();
     } else {

@@ -19,15 +19,17 @@
 **********************************************************************/
 
 #include <qlabel.h>
-#include <qtimer.h>
 #include <qfile.h>
-#include <qtextstream.h>
 #include <qlayout.h>
+#include <qtextstream.h>
+#include <qtimer.h>
+#include <qwhatsthis.h>
+
 #include "graph.h"
 #include "memory.h"
 
 MemoryInfo::MemoryInfo( QWidget *parent, const char *name, WFlags f )
-    : QWidget( parent, name, f )
+    : QWidget( parent, name, WStyle_ContextHelp )
 {
     QVBoxLayout *vb = new QVBoxLayout( this, 5 );
 
@@ -51,6 +53,8 @@ MemoryInfo::MemoryInfo( QWidget *parent, const char *name, WFlags f )
     QTimer *t = new QTimer( this );
     connect( t, SIGNAL( timeout() ), this, SLOT( updateData() ) );
     t->start( 5000 );
+    
+    QWhatsThis::add( this, tr( "This page shows how memory (i.e. RAM) is being allocated on your handheld device.\nMemory is categorized as follows:\n\n1. Used - memory used to by Opie and any running applications.\n2. Buffers - temporary storage used to improve performance\n3. Cached - information that has recently been used, but has not been freed yet.\n4. Free - memory not currently used by Opie or any running applications." ) );
 }
 
 MemoryInfo::~MemoryInfo()

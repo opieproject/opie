@@ -1,7 +1,7 @@
 Files: bin/sysinfo apps/Applications/sysinfo.desktop pics/sysinfo
 Priority: optional
 Section: opie/applications
-Maintainer: Dan Williams <wiliamsdr@acm.org>
+Maintainer: Dan Williams <williamsdr@acm.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION), libopie ($QPE_VERSION)

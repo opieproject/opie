@@ -19,13 +19,16 @@
 **********************************************************************/
 
 #include <stdio.h>
+
+#include <qfile.h>
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qpainter.h>
 #include <qpixmap.h>
-#include <qtimer.h>
-#include <qfile.h>
 #include <qtextstream.h>
+#include <qtimer.h>
+#include <qwhatsthis.h>
+
 #include "load.h"
 
 LoadInfo::LoadInfo( QWidget *parent, const char *name, WFlags f )
@@ -44,6 +47,8 @@ LoadInfo::LoadInfo( QWidget *parent, const char *name, WFlags f )
     l->setPixmap( makeLabel( green, tr("System CPU usage (%)") ) );
     vb->addWidget( l, 1 );
     vb->addStretch(50);
+
+    QWhatsThis::add( this, tr( "This page shows how much this device's processor is being used." ) );
 }
 
 QPixmap LoadInfo::makeLabel( const QColor &col, const QString &text )

@@ -38,7 +38,7 @@
 #include <qlayout.h>
 
 SystemInfo::SystemInfo( QWidget *parent, const char *name, WFlags f )
-    : QWidget( parent, name, f )
+    : QWidget( parent, name, WStyle_ContextHelp )
 {
     setIcon( Resource::loadPixmap( "system_icon" ) );
     setCaption( tr("System Info") );
