@@ -10,17 +10,17 @@ INTERFACES	=
 DESTDIR         = $(OPIEDIR)/bin
 TARGET		= systemtime
 
-TRANSLATIONS = ../../../i18n/de/netsystemtime.ts \
-	 ../../../i18n/en/netsystemtime.ts \
-	 ../../../i18n/es/netsystemtime.ts \
-	 ../../../i18n/fr/netsystemtime.ts \
-	 ../../../i18n/hu/netsystemtime.ts \
-	 ../../../i18n/ja/netsystemtime.ts \
-	 ../../../i18n/ko/netsystemtime.ts \
-	 ../../../i18n/no/netsystemtime.ts \
-	 ../../../i18n/pl/netsystemtime.ts \
-	 ../../../i18n/pt/netsystemtime.ts \
-	 ../../../i18n/pt_BR/netsystemtime.ts \
-	 ../../../i18n/sl/netsystemtime.ts \
-	 ../../../i18n/zh_CN/netsystemtime.ts \
-	 ../../../i18n/zh_TW/netsystemtime.ts
+TRANSLATIONS = ../../../i18n/de/systemtime.ts \
+	 ../../../i18n/en/systemtime.ts \
+	 ../../../i18n/es/systemtime.ts \
+	 ../../../i18n/fr/systemtime.ts \
+	 ../../../i18n/hu/systemtime.ts \
+	 ../../../i18n/ja/systemtime.ts \
+	 ../../../i18n/ko/systemtime.ts \
+	 ../../../i18n/no/systemtime.ts \
+	 ../../../i18n/pl/systemtime.ts \
+	 ../../../i18n/pt/systemtime.ts \
+	 ../../../i18n/pt_BR/systemtime.ts \
+	 ../../../i18n/sl/systemtime.ts \
+	 ../../../i18n/zh_CN/systemtime.ts \
+	 ../../../i18n/zh_TW/systemtime.ts
