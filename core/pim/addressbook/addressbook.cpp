@@ -112,12 +112,12 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	moveToolBar( listTools, m_config.getToolBarPos() );
 
 	// View Icons
-	m_tableViewButton  = new QAction( tr( "List" ), Resource::loadPixmap( "addressbook/weeklst" ),
+	m_tableViewButton  = new QAction( tr( "List" ), Resource::loadPixmap( "addressbook/listview" ),
 					  QString::null, 0, this, 0 );
 	connect( m_tableViewButton, SIGNAL( activated() ), this, SLOT( slotListView() ) );
 	m_tableViewButton->setToggleAction( true );
 	m_tableViewButton->addTo( listTools );
-	m_cardViewButton = new QAction( tr( "Card" ), Resource::loadPixmap( "day" ),  QString::null, 0, this, 0 );
+	m_cardViewButton = new QAction( tr( "Card" ), Resource::loadPixmap( "addressbook/cardview" ),  QString::null, 0, this, 0 );
 	connect( m_cardViewButton, SIGNAL( activated() ), this, SLOT( slotCardView() ) );
 	m_cardViewButton->setToggleAction( true );
 	m_cardViewButton->addTo( listTools );
