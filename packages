@@ -199,7 +199,7 @@ CONFIG_SECURITY	core/settings/security	security.pro
 CONFIG_MULTIAUTH_DEMO core/settings/security/demo	multiauth.pro
 CONFIG_SFCAVE	noncore/games/sfcave	sfcave.pro
 CONFIG_SFCAVE-SDL	noncore/games/sfcave-sdl	sfcave-sdl.pro
-CONFIG_SHOWIMG	noncore/multimedia/showimg	showimg.pro
+CONFIG_SHOWIMG	noncore/unsupported/showimg	showimg.pro
 CONFIG_SIMPLE_EXAMPLE   examples/simple simple.pro
 CONFIG_SIMPLE_ICON      examples/simple-icon    simple-icon.pro
 CONFIG_SIMPLE_MAIN      examples/simple-main    simple-main.pro
