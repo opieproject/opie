@@ -79,7 +79,7 @@ class OPimEvent : public OPimRecord
     enum RecordFields {
         FUid = Qtopia::UID_ID,
         FCategories = Qtopia::CATEGORY_ID,
-        FDescription = 0,
+        FDescription /* = 0 Why this ? (eilers) */,
         FLocation,
         FType,
         FAlarm,

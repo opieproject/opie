@@ -555,9 +555,12 @@ QMap<int, QString> OPimEvent::toMap() const
     retMap.insert( OPimEvent::FDescription, Qtopia::escapeString( description() ) );
     retMap.insert( OPimEvent::FLocation, Qtopia::escapeString( location() ) );
     retMap.insert( OPimEvent::FType, isAllDay() ? "AllDay" : "" );
-    OPimAlarm alarm = notifiers().alarms() [ 0 ];
-    retMap.insert( OPimEvent::FAlarm, QString::number( alarm.dateTime().secsTo( startDateTime() ) / 60 ) );
-    retMap.insert( OPimEvent::FSound, ( alarm.sound() == OPimAlarm::Loud ) ? "loud" : "silent" );
+    if ( notifiers().alarms().count() ){ 
+	    // Currently we just support one alarm.. (eilers)
+	    OPimAlarm alarm = notifiers().alarms() [ 0 ];
+	    retMap.insert( OPimEvent::FAlarm, QString::number( alarm.dateTime().secsTo( startDateTime() ) / 60 ) );
+	    retMap.insert( OPimEvent::FSound, ( alarm.sound() == OPimAlarm::Loud ) ? "loud" : "silent" );
+    }
 
     OPimTimeZone zone( timeZone().isEmpty() ? OPimTimeZone::current() : timeZone() );
     retMap.insert( OPimEvent::FStart, QString::number( zone.fromUTCDateTime( zone.toDateTime( startDateTime(), OPimTimeZone::utc() ) ) ) );
@@ -619,17 +622,6 @@ void OPimEvent::fromMap( const QMap<int, QString>& map )
     else
         setAllDay( false );
 
-    int alarmTime = -1;
-    if ( !map[ OPimEvent::FAlarm ].isEmpty() )
-        alarmTime = map[ OPimEvent::FAlarm ].toInt();
-
-    int sound = ( ( map[ OPimEvent::FSound ] == "loud" ) ? OPimAlarm::Loud : OPimAlarm::Silent );
-    if ( ( alarmTime != -1 ) )
-    {
-        QDateTime dt = startDateTime().addSecs( -1 * alarmTime * 60 );
-        OPimAlarm al( sound , dt );
-        notifiers().add( al );
-    }
     if ( !map[ OPimEvent::FTimeZone ].isEmpty() && ( map[ OPimEvent::FTimeZone ] != "None" ) )
     {
         setTimeZone( map[ OPimEvent::FTimeZone ] );
@@ -658,6 +650,22 @@ void OPimEvent::fromMap( const QMap<int, QString>& map )
         date = zone.toDateTime( end );
         setEndDateTime ( zone.toDateTime( date, OPimTimeZone::current() ) );
     }
+
+    int alarmTime = -1;
+    if ( !map[ OPimEvent::FAlarm ].isEmpty() )
+        alarmTime = map[ OPimEvent::FAlarm ].toInt();
+
+    int sound = ( ( map[ OPimEvent::FSound ] == "loud" ) ? OPimAlarm::Loud : OPimAlarm::Silent );
+    if ( ( alarmTime != -1 ) )
+    {
+	    QDateTime dt = startDateTime().addSecs( -1 * alarmTime * 60 );
+	    OPimAlarm al( sound , dt );
+	    notifiers().add( al );
+    }
+
+
+    if ( !map[ OPimEvent::FNote ].isEmpty() )
+	    setNote( map[ OPimEvent::FNote ] );
 
     if ( !map[ OPimEvent::FRecParent ].isEmpty() )
         setParent( map[ OPimEvent::FRecParent ].toInt() );

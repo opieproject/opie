@@ -138,7 +138,7 @@ void ODateBookAccessBackend_SQL::initFields()
 
 	// Create a map that maps the column name to the id
 	QMapConstIterator<int, QString> it;
-	for ( it = ++m_fieldMap.begin(); it != m_fieldMap.end(); ++it ){
+	for ( it = m_fieldMap.begin(); it != m_fieldMap.end(); ++it ){
 		m_reverseFieldMap.insert( it.data(), it.key() );
 	}
 	
