@@ -60,14 +60,14 @@ IOLayer* MetaFactory::newIOLayer( const QString& str,const Profile& prof ) {
     return lay;
 }
 
-QWidget *MetaFactory::newConfigWidget ( const QString& str, QWidget* parent) {
-    QWidget *w = NULL;
+ProfileEditorPlugin *MetaFactory::newConfigPlugin ( const QString& str, QWidget *parent, const Profile& prof) {
+    ProfileEditorPlugin *p = NULL;
     configWidget c;
 
     c = m_confFact[str];
-    if(c) w = c(parent);
+    if(c) p = c(parent, prof);
 
-    return w;
+    return p;
 }
 
 QString MetaFactory::name( const QString& str ) {

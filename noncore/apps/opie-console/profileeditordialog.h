@@ -12,6 +12,7 @@ class QHBoxLayout;
 class QLineEdit;
 class QComboBox;
 class QLabel;
+class ProfileEditorPlugin;
 
 class ProfileEditorDialog : public QTabDialog {
     Q_OBJECT
@@ -49,7 +50,8 @@ private:
 	QLineEdit *name_line;
 	//QLineEdit *frame_device_line, *frame_number_line;
 	QComboBox *terminal_box, *speed_box, *device_box;
-	QWidget *plugin_base, *plugin_plugin;
+	QWidget *plugin_base;
+	ProfileEditorPlugin *plugin_plugin;
 	QHBoxLayout *plugin_layout;
 };
 

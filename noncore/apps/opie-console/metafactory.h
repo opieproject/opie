@@ -14,10 +14,11 @@
 #include "io_layer.h"
 #include "file_layer.h"
 #include "profile.h"
+#include "profileeditorplugins.h"
 
 class MetaFactory {
 public:
-    typedef QWidget* (*configWidget)(QWidget* parent);
+    typedef ProfileEditorPlugin* (*configWidget)(QWidget* parent, const Profile&);
     typedef IOLayer* (*iolayer)(const Profile& );
     typedef FileTransferLayer* (*filelayer)(IOLayer*);
 
@@ -35,7 +36,7 @@ public:
     QStringList configWidgets()const;
     QStringList fileTransferLayers()const;
     IOLayer* newIOLayer( const QString&,const Profile& );
-    QWidget *newConfigWidget ( const QString&, QWidget* );
+    ProfileEditorPlugin *newConfigPlugin ( const QString&, QWidget*, const Profile& );
 
     QString name( const QString& );
 

@@ -11,71 +11,8 @@
 #include "qbuttongroup.h"
 #include "qstringlist.h"
 
+#include "profileeditorplugins.h"
 #include "metafactory.h"
-
-static QWidget *factory_serial(QWidget *parent)
-{
-	QFrame *device_frame = new QFrame(parent);
-	device_frame->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-
-	QLabel *frame_device = new QLabel(QObject::tr("Device"), device_frame);
-
-	QLineEdit *frame_device_line = new QLineEdit("/dev/ttyS0", device_frame);
-
-	QVBoxLayout *vbox_frame = new QVBoxLayout(device_frame, 2);
-	vbox_frame->add(frame_device);
-	vbox_frame->add(frame_device_line);
-
-	return device_frame;
-}
-
-static QWidget *factory_irda(QWidget *parent)
-{
-	QFrame *device_frame = new QFrame(parent);
-	device_frame->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-
-	QLabel *frame_device = new QLabel(QObject::tr("Device"), device_frame);
-
-	QLineEdit *frame_device_line = new QLineEdit("/dev/ircomm0", device_frame);
-
-	QVBoxLayout *vbox_frame = new QVBoxLayout(device_frame, 2);
-	vbox_frame->add(frame_device);
-	vbox_frame->add(frame_device_line);
-
-	return device_frame;
-}
-
-static QWidget *factory_modem(QWidget *parent)
-{
-	QFrame *device_frame = new QFrame(parent);
-	device_frame->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-
-	QLabel *frame_device = new QLabel(QObject::tr("Device"), device_frame);
-	QLabel *frame_number = new QLabel(QObject::tr("Phone number"), device_frame);
-
-	QLineEdit *frame_device_line = new QLineEdit("/dev/ttyS0", device_frame);
-	QLineEdit *frame_number_line = new QLineEdit(device_frame);
-
-	QVBoxLayout *vbox_frame = new QVBoxLayout(device_frame, 2);
-	vbox_frame->add(frame_device);
-	vbox_frame->add(frame_device_line);
-	vbox_frame->add(frame_number);
-	vbox_frame->add(frame_number_line);
-
-	return device_frame;
-}
-
-// Something like that must be called upon plugin_plugin->save()
-//void save_modem()
-//{
-//	// special settings
-//	p.writeEntry("Device", dlg.conn_device());
-//	p.writeEntry("Baud", dlg.conn_baud());
-//	p.writeEntry("Parity", dlg.conn_parity());
-//	p.writeEntry("DataBits", dlg.conn_databits());
-//	p.writeEntry("StopBits", dlg.conn_stopbits());
-//	p.writeEntry("Flow", dlg.conn_flow());
-//}
 
 ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact,
                                           const Profile& prof )
@@ -139,8 +76,8 @@ void ProfileEditorDialog::initUI()
 	plugin_base = new QWidget(tabconn);
 	plugin_layout = new QHBoxLayout(plugin_base, 0);
 
-	plugin_plugin = m_fact->newConfigWidget("serial", plugin_base);
-	plugin_layout->add(plugin_plugin);
+	plugin_plugin = m_fact->newConfigPlugin("serial", plugin_base, m_prof);
+	plugin_layout->add(plugin_plugin->widget());
 
 	// connection tab, general part
 
@@ -257,8 +194,6 @@ void ProfileEditorDialog::initUI()
 	setOkButton(QObject::tr("OK"));
 	setCancelButton(QObject::tr("Cancel"));
 
-	//connect(this, SIGNAL(applyButtonPressed()), SLOT(slotOk()));
-	connect(this, SIGNAL(defaultButtonPressed()), SLOT(slotOk()));
 	connect(this, SIGNAL(cancelButtonPressed()), SLOT(slotCancel()));
 
 	connect(device_box, SIGNAL(activated(int)), SLOT(slotDevice(int)));
@@ -272,15 +207,15 @@ void ProfileEditorDialog::slotDevice(int id)
 {
 	delete plugin_plugin;
 
-	plugin_plugin = m_fact->newConfigWidget(prof_type(), plugin_base);
-	plugin_layout->add(plugin_plugin);
+	plugin_plugin = m_fact->newConfigPlugin(prof_type(), plugin_base, m_prof);
+	plugin_layout->add(plugin_plugin->widget());
 
 	// Reload profile associated to device, including e.g. conn_device()
 	// m_prof = plugin_plugin->profile()
 	// or, keeping the profile name: m_prof->reload(plugin_plugin->profile())
 
-	plugin_plugin->show();
-	// This would be: plugin_plugin->widget()->show();
+	//plugin_plugin->show();
+	plugin_plugin->widget()->show();
 }
 
 void ProfileEditorDialog::accept()
@@ -294,7 +229,7 @@ void ProfileEditorDialog::accept()
 	}
 
 	// Save profile and plugin profile
-	//if(plugin_plugin) plugin_plugin->save();
+	if(plugin_plugin) plugin_plugin->save();
 
 	QDialog::accept();
 }

@@ -14,6 +14,7 @@ HEADERS      = io_layer.h io_serial.h \
 	       tabwidget.h \
 	       configdialog.h \
                profileeditordialog.h \
+			   profileeditorplugins.h \
                emulation_layer.h \
                widget.h \
                vt102emulation.h \
@@ -33,6 +34,7 @@ SOURCES      = io_layer.cpp io_serial.cpp \
 	       tabwidget.cpp \
 	       configdialog.cpp \
 	       profileeditordialog.cpp \
+		   profileeditorplugins.cpp \
 	       emulation_layer.cpp \
 	       widget.cpp \
 	       vt102emulation.cpp \
