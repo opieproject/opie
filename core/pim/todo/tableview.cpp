@@ -254,11 +254,11 @@ void TableView::removeEvent( int ) {
     updateView();
 }
 void TableView::setShowCompleted( bool b) {
-    qWarning("Show Completed %d" + b );
+    qWarning("Show Completed %d" , b );
     updateView();
 }
 void TableView::setShowDeadline( bool b ) {
-    qWarning( "Show DeadLine %d" + b );
+    qWarning( "Show DeadLine %d" , b );
     if ( b )
         showColumn( 3 );
     else

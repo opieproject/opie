@@ -865,6 +865,7 @@ void MainWindow::show( int uid ) {
     m_todoMgr.load(); // might not be loaded yet
     m_showing = true;
     slotShow( uid );
+    raise();
     QPEApplication::setKeepRunning();
 }
 void MainWindow::edit( int uid ) {
