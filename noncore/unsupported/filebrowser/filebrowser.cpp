@@ -69,14 +69,14 @@ FileItem::FileItem( QListView * parent, const QFileInfo & fi )
     QPixmap pm;
     if( fi.isDir() ){
 	if( !QDir( fi.filePath() ).isReadable() )
-	    pm = Resource::loadPixmap( "lockedfolder" );
+	    pm = Resource::loadPixmap( "filebrowser/lockedfolder" );
 	else
 	    pm = Resource::loadPixmap( "folder" );
     }
     else if( !fi.isReadable() )
-	pm = Resource::loadPixmap( "locked" );
+	pm = Resource::loadPixmap( "filebrowser/locked" );
     else if( isLib() )
-	pm = Resource::loadPixmap( "library" );
+	pm = Resource::loadPixmap( "filebrowser/library" );
     else
 	pm = mt.pixmap();
     if ( pm.isNull() )
@@ -641,7 +641,7 @@ void FileView::showFileMenu()
 		else if( i->isExecutable() )
 			m->insertItem( Resource::loadPixmap( i->text( 0 ) ), tr( "Run" ), this, SLOT( run() ) );
 
-		m->insertItem( Resource::loadPixmap( "txt" ), tr( "View as text" ),
+		m->insertItem( Resource::loadPixmap( "filebrowser/txt" ), tr( "View as text" ),
 					   this, SLOT( viewAsText() ) );
 
 		m->insertSeparator();
@@ -722,7 +722,7 @@ void FileBrowser::init(const QString & dir)
     connect( upAction, SIGNAL( activated() ), fileView, SLOT( parentDir() ) );
     upAction->addTo( toolBar );
 
-    QAction *a = new QAction( tr("New folder"), Resource::loadPixmap( "newfolder" ),
+    QAction *a = new QAction( tr("New folder"), Resource::loadPixmap( "filebrowser/newfolder" ),
 					 QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), fileView, SLOT( newFolder() ) );
     a->addTo( toolBar );

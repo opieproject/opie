@@ -70,13 +70,13 @@ GoMainWidget::GoMainWidget( QWidget *parent, const char* name) :
     connect( a, SIGNAL( activated() ), go, SLOT( newGame() ) );
     a->addTo( file );
 
-    a = new QAction( tr( "Pass" ), Resource::loadPixmap( "pass" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Pass" ), Resource::loadPixmap( "go/pass" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), go, SLOT( pass() ) );
     a->addTo( file );
     a->addTo( toolbar );
-    
-    
-    a = new QAction( tr( "Resign" ), Resource::loadPixmap( "reset" ), QString::null, 0, this, 0 );
+
+
+    a = new QAction( tr( "Resign" ), Resource::loadPixmap( "go/reset" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), go, SLOT( resign() ) );
     a->addTo( file );
 
@@ -84,9 +84,9 @@ GoMainWidget::GoMainWidget( QWidget *parent, const char* name) :
     a->setToggleAction( TRUE );
     connect( a, SIGNAL( toggled(bool) ), go, SLOT( setTwoplayer(bool) ) );
     a->addTo( file );
-    
+
     mb->insertItem( tr( "Game" ), file );
-    
+
     QLabel *turnLabel = new QLabel( toolbar );
     turnLabel->setBackgroundMode( PaletteButton );
     connect( go, SIGNAL(showTurn(const QPixmap&)), 
@@ -127,7 +127,7 @@ GoWidget::GoWidget( QWidget *parent, const char* name) :
     
     d = bx = by = 1;
     
-    QPixmap pix = Resource::loadPixmap( "pine" );
+    QPixmap pix = Resource::loadPixmap( "go/pine" );
     goBrush = new QBrush( black, pix );
     /*
     QString fn = Resource::findPixmap("Go-black");
@@ -137,9 +137,9 @@ GoWidget::GoWidget( QWidget *parent, const char* name) :
     fn = Resource::findPixmap("Go-white");
     whiteStone = new QImage( fn );
     */
-    blackStone = new QPixmap(Resource::loadPixmap( "Go-black" ));
-    whiteStone = new QPixmap(Resource::loadPixmap( "Go-white" ));
-    newBlackStone = new QPixmap(Resource::loadPixmap( "Go-black-highlight" ));
+    blackStone = new QPixmap(Resource::loadPixmap( "go/Go-black" ));
+    whiteStone = new QPixmap(Resource::loadPixmap( "go/Go-white" ));
+    newBlackStone = new QPixmap(Resource::loadPixmap( "go/Go-black-highlight" ));
 
     init();
 }
@@ -207,9 +207,9 @@ void GoWidget::resizeEvent( QResizeEvent * )
 	
 	smallStones = TRUE;
     } else if ( d >= 10 && smallStones ) {
-	blackStone = new QPixmap(Resource::loadPixmap( "Go-black" ));
-	whiteStone = new QPixmap(Resource::loadPixmap( "Go-white" ));
-	newBlackStone = new QPixmap(Resource::loadPixmap( "Go-black-highlight" ));
+	blackStone = new QPixmap(Resource::loadPixmap( "go/Go-black" ));
+	whiteStone = new QPixmap(Resource::loadPixmap( "go/Go-white" ));
+	newBlackStone = new QPixmap(Resource::loadPixmap( "go/Go-black-highlight" ));
 	smallStones = FALSE;
     }
 }
