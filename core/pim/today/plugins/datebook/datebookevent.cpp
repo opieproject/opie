@@ -69,8 +69,11 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
         msg += timeSpacer;
         msg += ampmTime( QTime( (ev).event().start().time() ) )
                // end time of event
-               + "<b> - </b>" + ampmTime( QTime( (ev).event().end().time() ) )
-		+ differDate( (ev).date() /* tempDate*/  );
+               + "<b> - </b>" + ampmTime( QTime( (ev).event().end().time() ) );
+    }
+
+    if ( (ev).date() != QDate::currentDate() )  {
+        msg += differDate( (ev).date() /* tempDate*/ );
     }
 
     // include possible note or not
