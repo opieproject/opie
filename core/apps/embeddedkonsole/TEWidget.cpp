@@ -59,6 +59,11 @@
 
 #include <qclipboard.h>
 
+#ifndef QT_NO_DRAGANDDROP
+#include <qdragobject.h>
+#include <qfile.h>
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
