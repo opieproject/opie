@@ -101,7 +101,7 @@ QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
     for ( int i = 0; i < 7; i++ ) {
         QString filename = QString(getenv("OPIEDIR")) + "/pics/" + skinPath + "/skinV_mask_" + skinV_mask_file_names[i] + ".png";
         masks[i] = new QBitmap( filename );
-        qDebug(filename);
+
         if ( !masks[i]->isNull() ) {
             QImage imgMask = masks[i]->convertToImage();
             uchar **dest = imgButtonMask->jumpTable();
@@ -179,10 +179,7 @@ void VideoWidget::resizeEvent( QResizeEvent * ) {
     int h = height();
     int w = width();
     int Vh = 160;
-          //videoFrame->height();
     int Vw = 220;
-      //videoFrame->width();
-
 
     slider->setFixedWidth( w - 20 );
     slider->setGeometry( QRect( 15, h - 30, w - 90, 20 ) );
@@ -191,9 +188,8 @@ void VideoWidget::resizeEvent( QResizeEvent * ) {
     slider->setBackgroundPixmap( *pixBg );
 
     xoff = 0;// ( imgUp->width() ) / 2;
-    yoff = 180;//(( Vh  - imgUp->height() ) / 2) - 10;
+    yoff = 185;//(( Vh  - imgUp->height() ) / 2) - 10;
     QPoint p( xoff, yoff );
-
 
     QPixmap *pixUp = combineVImageWithBackground( *imgUp, *pixBg, p );
     QPixmap *pixDn = combineVImageWithBackground( *imgDn, *pixBg, p );
@@ -459,14 +455,14 @@ void VideoWidget::keyReleaseEvent( QKeyEvent *e) {
           break;
       case Key_Down:
 //            toggleButton(6);
-//            emit lessClicked();
-//            emit lessReleased();
+            emit lessClicked();
+            emit lessReleased();
 //            toggleButton(6);
           break;
       case Key_Up:
 //             toggleButton(5);
-//             emit moreClicked();
-//             emit moreReleased();
+             emit moreClicked();
+             emit moreReleased();
 //             toggleButton(5);
            break;
       case Key_Right:
