@@ -3,245 +3,245 @@
     <name>FileBrowser</name>
     <message>
         <source>File Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>파일 관리자</translation>
     </message>
     <message>
         <source>Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>위치</translation>
     </message>
     <message>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>정렬</translation>
     </message>
     <message>
         <source>by Name </source>
-        <translation type="unfinished"></translation>
+        <translation>이름순</translation>
     </message>
     <message>
         <source>by Size </source>
-        <translation type="unfinished"></translation>
+        <translation>크기순</translation>
     </message>
     <message>
         <source>by Date </source>
-        <translation type="unfinished"></translation>
+        <translation>날자순</translation>
     </message>
     <message>
         <source>by Type </source>
-        <translation type="unfinished"></translation>
+        <translation>종류순</translation>
     </message>
     <message>
         <source>Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>가나다순</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>숨긴파일</translation>
     </message>
     <message>
         <source>Symlinks</source>
-        <translation type="unfinished"></translation>
+        <translation>시스템 링크</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>보기</translation>
     </message>
     <message>
         <source>Previous dir</source>
-        <translation type="unfinished"></translation>
+        <translation>이전 디렉토리</translation>
     </message>
     <message>
         <source>Parent dir</source>
-        <translation type="unfinished"></translation>
+        <translation>부모 디렉토리</translation>
     </message>
     <message>
         <source>New folder</source>
-        <translation type="unfinished"></translation>
+        <translation>새 폴더</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>자르기</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>복사</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>붙이기</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Thumbnails</source>
-        <translation type="unfinished"></translation>
+        <translation>썹네일</translation>
     </message>
 </context>
 <context>
     <name>FileView</name>
     <message>
         <source>File Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>파일 관리자</translation>
     </message>
     <message>
         <source>Can&apos;t show /dev/ directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>/dev 디렉토리 볼수 없습니다</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>확인</translation>
     </message>
     <message>
         <source>Rename file</source>
-        <translation type="unfinished"></translation>
+        <translation>이름 바꾸기</translation>
     </message>
     <message>
         <source>Rename failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>이름 바꾸기 실패!</translation>
     </message>
     <message>
         <source>Paste file</source>
-        <translation type="unfinished"></translation>
+        <translation>붙이기</translation>
     </message>
     <message>
         <source>Paste failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>붙이기 실패!</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>확인</translation>
     </message>
     <message>
         <source>Cut file</source>
-        <translation type="unfinished"></translation>
+        <translation>파일 자르기</translation>
     </message>
     <message>
         <source>Cut failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>자르기 실패</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>지우기</translation>
     </message>
     <message>
         <source>Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation>확실 합니까?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>예</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>아뇨</translation>
     </message>
     <message>
         <source>Delete failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>지우기 실패!</translation>
     </message>
     <message>
         <source>New folder</source>
-        <translation type="unfinished"></translation>
+        <translation>새 폴더</translation>
     </message>
     <message>
         <source>Folder creation failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>새 폴더 생산 실패!</translation>
     </message>
     <message>
         <source>Launch Application</source>
-        <translation type="unfinished"></translation>
+        <translation>프로그램 실행</translation>
     </message>
     <message>
         <source>Launch failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>실행 실패!</translation>
     </message>
     <message>
         <source>Add to Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>문서에 추가</translation>
     </message>
     <message>
         <source>Run</source>
-        <translation type="unfinished"></translation>
+        <translation>실행</translation>
     </message>
     <message>
         <source>View as text</source>
-        <translation type="unfinished"></translation>
+        <translation>텍스트으로 보기</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>이름 바꾸기</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>자르기</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>복사</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>붙이기</translation>
     </message>
     <message>
         <source>Change Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>권한 바꾸기</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>모두 선택</translation>
     </message>
     <message>
         <source>Deselect all</source>
-        <translation type="unfinished"></translation>
+        <translation>모두 선택 안함</translation>
     </message>
     <message>
         <source>Change permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>권한 바꾸기</translation>
     </message>
 </context>
 <context>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>파일 권한 설정</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation type="unfinished"></translation>
+        <translation>파일 권한 설정:</translation>
     </message>
     <message>
         <source>owner</source>
-        <translation type="unfinished"></translation>
+        <translation>주인</translation>
     </message>
     <message>
         <source>group</source>
-        <translation type="unfinished"></translation>
+        <translation>그룹</translation>
     </message>
     <message>
         <source>others</source>
-        <translation type="unfinished"></translation>
+        <translation>기타</translation>
     </message>
     <message>
         <source>Owner</source>
-        <translation type="unfinished"></translation>
+        <translation>주인</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>그룹</translation>
     </message>
     <message>
         <source>read</source>
-        <translation type="unfinished"></translation>
+        <translation>읽기</translation>
     </message>
     <message>
         <source>write</source>
-        <translation type="unfinished"></translation>
+        <translation>쓰기</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>실행</translation>
     </message>
 </context>
 </TS>
