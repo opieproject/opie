@@ -124,6 +124,8 @@ private:
 
     // an array of doubles holding the conversion ratios
     double* entry_list;
+	double* preoffset_list;
+	double* postoffset_list;
 
     QPixmap xtopowerofy;
     QPixmap ythrootofx;
