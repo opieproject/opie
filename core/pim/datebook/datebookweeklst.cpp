@@ -242,6 +242,7 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
 	// Calculate offset to first day of week.
 	int dayoffset=d.dayOfWeek();
 	if(bStartOnMonday) dayoffset--;
+	else if( dayoffset == 7 ) dayoffset = 0;
 
 	for (int i=0; i<7; i++) {
 	// Header

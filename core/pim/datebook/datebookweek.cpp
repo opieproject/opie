@@ -575,6 +575,8 @@ QDate DateBookWeek::weekDate() const
 	// Calculate offset to first day of week.
 	int dayoffset=d.dayOfWeek();
 	if(bStartOnMonday) dayoffset--;
+	else if( dayoffset == 7 ) 
+	    dayoffset = 0;
 
 	return d.addDays(-dayoffset);
 }
