@@ -4,6 +4,11 @@
 #include <qpe/stringutil.h>
 //#include <qpe/palmtoprecord.h>
 
+ToDoEvent::ToDoEvent(const ToDoEvent &event )
+{
+  *this = event;
+}
+
 ToDoEvent::ToDoEvent(bool completed, int priority, const QString &category, 
 	       const QString &description, bool hasDate, QDate date, int uid )
 {
@@ -140,6 +145,7 @@ ToDoEvent &ToDoEvent::operator=(const ToDoEvent &item )
     m_priority = item.m_priority;
     m_category = item.m_category;
     m_desc = item.m_desc;
+    m_uid = item.m_uid;
     return *this;
 }
 

@@ -12,6 +12,7 @@ class ToDoEvent {
 	       const QString &category = QString::null, 
 	       const QString &description = QString::null , 
 	       bool hasDate = false, QDate date = QDate::currentDate(), int uid = -1 );
+    ToDoEvent(const ToDoEvent & );
     bool isCompleted() const;
     bool hasDate() const;
     int priority()const ;

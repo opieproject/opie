@@ -28,8 +28,8 @@ class ToDoDB
     void setFileName(const QString & );
     QString fileName()const;
     bool save();
-    ToDoResource *resource();
-    void setResource(ToDoResource* res);
+    ToDoResource *resource(); 
+    void setResource(ToDoResource* res); 
 
  private:
     class ToDoDBPrivate;
