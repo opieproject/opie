@@ -937,7 +937,7 @@ void AdvancedFm::localRename()
 
 void AdvancedFm::remoteRename()
 {
-    QString curFile = Local_View->currentItem()->text(0);
+    QString curFile = remote_View->currentItem()->text(0);
     InputDialog *fileDlg;
     fileDlg = new InputDialog(this,tr("Rename"),TRUE, 0);
     fileDlg->setInputText((const QString &)curFile);
