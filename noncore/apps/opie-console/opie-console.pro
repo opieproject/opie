@@ -12,7 +12,15 @@ HEADERS      = io_layer.h io_serial.h \
 	       configwidget.h \
 	       tabwidget.h \
 	       configdialog.h \
-		   profileeditordialog.h
+               profileeditordialog.h \
+               emulation_layer.h \
+               widget.h \
+               vt102emulation.h \
+               common.h \
+               history.h \
+               screen.h \
+	       keytrans.h
+
 SOURCES      = io_layer.cpp io_serial.cpp \
 	       file_layer.cpp main.cpp \
 	       metafactory.cpp \
@@ -23,7 +31,14 @@ SOURCES      = io_layer.cpp io_serial.cpp \
 	       profilemanager.cpp  \
 	       tabwidget.cpp \
 	       configdialog.cpp \
-		   profileeditordialog.cpp
+	       profileeditordialog.cpp \
+	       emulation_layer.cpp \
+	       widget.cpp \
+	       vt102emulation.cpp \
+	       history.cpp \
+	       screen.cpp \
+	       keytrans.cpp
+   
 INTERFACES   = configurebase.ui editbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
