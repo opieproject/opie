@@ -98,11 +98,13 @@ void AdvancedFm::init() {
   fileMenu->insertItem( tr( "Delete" ), this, SLOT( del() ));
   fileMenu->setCheckable(TRUE);
 
-  viewMenu->insertItem( tr( "Switch to Local" ), this, SLOT( switchToLocalTab() ));
-  viewMenu->insertItem( tr( "Switch to Remote" ), this, SLOT( switchToRemoteTab() ));
-//   viewMenu->insertSeparator();
-//   viewMenu->insertItem( tr( "About" ), this, SLOT( doAbout() ));
-  viewMenu->setCheckable(TRUE);
+  viewMenu->insertItem( tr( "Switch to View 1" ), this, SLOT( switchToLocalTab()));
+  viewMenu->insertItem( tr( "Switch to View 2" ), this, SLOT( switchToRemoteTab()));
+//     viewMenu->insertSeparator();
+//     viewMenu->insertItem( tr( "About" ), this, SLOT( doAbout() ));
+  viewMenu->setCheckable(true);
+  viewMenu->setItemChecked( viewMenu->idAt(0), true);
+  viewMenu->setItemChecked( viewMenu->idAt(1), false);
 
   s_addBookmark = tr("Bookmark Directory");
   s_removeBookmark = tr("Remove Current Directory from Bookmarks");
@@ -120,13 +122,14 @@ void AdvancedFm::init() {
   menuButton->insertItem( s_addBookmark);
   menuButton->insertItem( s_removeBookmark);
   menuButton->insertSeparator();
+  menuButton->setFocusPolicy(NoFocus);
 
   customDirsToMenu();
 
   currentPathCombo = new QComboBox( FALSE, lineBox, "currentPathCombo" );
   currentPathCombo->setEditable(TRUE);
   currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
-
+  currentPathCombo->setFocusPolicy(NoFocus);  
   layout->addWidget( lineBox );
 
 
@@ -148,7 +151,9 @@ void AdvancedFm::init() {
   Local_View->setAllColumnsShowFocus(TRUE);
   Local_View->setMultiSelection( TRUE );
   Local_View->setSelectionMode(QListView::Extended);
-
+  Local_View->setFocusPolicy(StrongFocus);
+  Local_View->installEventFilter( this );
+ 
   QPEApplication::setStylusOperation( Local_View->viewport(),QPEApplication::RightOnHold);
 
   tabLayout->addWidget( Local_View, 0, 0 );
@@ -170,8 +175,9 @@ void AdvancedFm::init() {
   Remote_View->setAllColumnsShowFocus(TRUE);
   Remote_View->setMultiSelection( TRUE );
   Remote_View->setSelectionMode(QListView::Extended);
-
-
+  Remote_View->setFocusPolicy(StrongFocus);
+  Remote_View->installEventFilter( this );
+ 
   QPEApplication::setStylusOperation( Remote_View->viewport(),QPEApplication::RightOnHold);
 
   tabLayout_2->addWidget( Remote_View, 0, 0 );
@@ -203,16 +209,11 @@ void AdvancedFm::init() {
 
   ///////////////
 
-
-  struct utsname name; /* check for embedix kernel running on the zaurus*/
-  if (uname(&name) != -1) {
-      QString release=name.release;
-      if(release.find("embedix",0,TRUE) !=-1) {
+    if ( QFile::exists ( "/dev/sharp_buz" ) || QFile::exists ( "/dev/sharp_led" ))
           zaurusDevice=TRUE;
-     } else {
+    else 
           zaurusDevice=FALSE;
-      }
-  }
+
 
   if( !StorageInfo::hasSd() || !StorageInfo::hasMmc()) {
      qDebug("not have sd");
@@ -280,7 +281,8 @@ void AdvancedFm::initConnections()
 
   connect( menuButton, SIGNAL( selected(const QString &)), SLOT(gotoCustomDir(const QString&)));
 //  connect( menuButton, SIGNAL( selected( int)), SLOT( dirMenuSelected(int)));
-
+  connect( viewMenu, SIGNAL( activated(int )), this, SLOT(slotSwitchMenu(int )));
 //  connect( customDirMenu, SIGNAL( activated(int)), this, SLOT( dirMenuSelected(int)));
 
 }
+

@@ -58,6 +58,7 @@ public:
    AdvancedFm();
    ~AdvancedFm();
 protected slots:
+   void slotSwitchMenu(int);
    void selectAll();
    void addToDocs();
    void doDirChange();
@@ -128,8 +129,10 @@ protected:
    QListView *CurrentView();
    QListView *OtherView();
    void setOtherTabCurrent();
+   void dealWithSchmooSchmaa(QWidget *);
 
 protected slots:
+   void openSearch();
    void dirMenuSelected(int);
    void showFileMenu();
    void cancelMenuTimer();
@@ -152,6 +155,8 @@ protected slots:
    void doBeam();
    void fileBeamFinished( Ir *);
 
+//   void slotSwitchtoLocal(int);
+
 private:
    MenuButton *menuButton;
    QString oldName;
@@ -165,7 +170,7 @@ private:
    void addCustomDir();
    void removeCustomDir();
    void gotoDirectory(const QString &);
-   void openSearch();
+   void navigateToSelected();
    void findFile(const QString &);
 
 private slots:
