@@ -41,7 +41,7 @@ void IRCPerson::setUser(QString user) {
 void IRCPerson::setHost(QString host) {
     m_host = host;
 }
-
+ // -- GETTER FUNCS --
 QString IRCPerson::nick() {
     return m_nick;
 }

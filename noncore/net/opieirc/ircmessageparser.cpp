@@ -71,7 +71,7 @@ void IRCMessageParser::parse(IRCMessage *message) {
                 return;
             }
         }
-        emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Received unhandled numeric command : ")+QString::number(message->commandNumber())));
+        emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Received unhandled numeric command: %1").arg( QString::number(message->commandNumber()) )));
     } else if (message->isCTCP()) {
         for (int i=0; ctcpParserProcTable[i].commandName; i++) {
             if (message->ctcpCommand() == ctcpParserProcTable[i].commandName) {
@@ -79,7 +79,7 @@ void IRCMessageParser::parse(IRCMessage *message) {
                 return;
             }
         }
-        emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Received unhandled ctcp command : ")+message->ctcpCommand()));
+        emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Received unhandled ctcp command: %1").arg( message->ctcpCommand())) );
     } else {
         for (int i=0; literalParserProcTable[i].commandName; i++) {
             if (message->command() == literalParserProcTable[i].commandName) {
@@ -87,7 +87,7 @@ void IRCMessageParser::parse(IRCMessage *message) {
                 return;
             }
         }
-        emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Received unhandled literal command : ")+message->command()));
+        emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Received unhandled literal command: %1").arg( message->command()) ));
     }
 }
 
@@ -128,7 +128,7 @@ void IRCMessageParser::parseLiteralJoin(IRCMessage *message) {
                 chanperson->flags = 0;
                 chanperson->person = person;
                 channel->addPerson(chanperson);
-                IRCOutput output(OUTPUT_OTHERJOIN, mask.nick() + tr(" joined channel ") + channelName);
+                IRCOutput output(OUTPUT_OTHERJOIN ,tr("%1 joined channel %2").arg( mask.nick() ).arg( channelName ));
                 output.addParam(channel);
                 output.addParam(chanperson);
                 emit outputReady(output);
@@ -148,7 +148,7 @@ void IRCMessageParser::parseLiteralPart(IRCMessage *message) {
     if (channel) {
         if (mask.nick() == m_session->m_server->nick()) {
             m_session->removeChannel(channel);
-            IRCOutput output(OUTPUT_SELFPART, tr("You left channel ") + channelName);
+            IRCOutput output(OUTPUT_SELFPART, tr("You left channel %1").arg( channelName ));
             output.addParam(channel);
             emit outputReady(output);
             delete channel;
@@ -156,7 +156,7 @@ void IRCMessageParser::parseLiteralPart(IRCMessage *message) {
             IRCChannelPerson *person = channel->getPerson(mask.nick());
             if (person) {
                 channel->removePerson(person);
-                IRCOutput output(OUTPUT_OTHERPART, mask.nick() + tr(" left channel ") + channelName);
+                IRCOutput output(OUTPUT_OTHERPART, tr("%1 left channel %2").arg( mask.nick() ).arg( channelName) );
                 output.addParam(channel);
                 output.addParam(person);
                 emit outputReady(output);
@@ -198,7 +198,7 @@ void IRCMessageParser::parseLiteralPrivMsg(IRCMessage *message) {
                 emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Channel message with unknown sender")));
             }
         } else {
-            emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Channel message with unknown channel ") + message->param(0).lower()));
+            emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Channel message with unknown channel %1").arg(message->param(0).lower()) ));
         }
     } else {
         emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Received PRIVMSG of unknown type")));
@@ -211,14 +211,14 @@ void IRCMessageParser::parseLiteralNick(IRCMessage *message) {
     if (mask.nick() == m_session->m_server->nick()) {
         /* We are changing our nickname */
         m_session->m_server->setNick(message->param(0));
-        IRCOutput output(OUTPUT_NICKCHANGE, tr("You are now known as ")+message->param(0));
+        IRCOutput output(OUTPUT_NICKCHANGE, tr("You are now known as %1").arg( message->param(0)));
         output.addParam(0);
         emit outputReady(output);
     } else {
         /* Someone else is */
         IRCPerson *person = m_session->getPerson(mask.nick());
         if (person) {
-            IRCOutput output(OUTPUT_NICKCHANGE, mask.nick() + tr(" is now known as ") + message->param(0));
+            IRCOutput output(OUTPUT_NICKCHANGE, tr("%1 is now known as %2").arg( mask.nick() ).arg( message->param(0 )));
             output.addParam(person);
             emit outputReady(output);
         } else {
@@ -240,7 +240,7 @@ void IRCMessageParser::parseLiteralQuit(IRCMessage *message) {
             delete chanperson;
         }
         m_session->removePerson(person);
-        IRCOutput output(OUTPUT_QUIT, mask.nick() + tr(" has quit ") + "(" + message->param(0) + ")");
+        IRCOutput output(OUTPUT_QUIT, tr("%1 has quit (%2)" ).arg( mask.nick() ).arg( message->param(0) ));
         output.addParam(person);
         emit outputReady(output);
         delete person;
