@@ -847,6 +847,7 @@ bool MainWindow::remove( int uid ) {
 }
 void MainWindow::beam( int uid) {
     if( uid == 0 ) return;
+
     ::unlink( beamfile );
     m_todoMgr.load();
 
