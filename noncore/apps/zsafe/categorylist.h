@@ -1,11 +1,13 @@
 /*
-** $Id: categorylist.h,v 1.1 2003-07-22 19:23:15 zcarsten Exp $
+** $Id: categorylist.h,v 1.2 2003-08-13 16:54:10 zcarsten Exp $
 */
 #ifndef _CATEGORY_LIST_H_
 #define _CATEGORY_LIST_H_
 
 #include <qstring.h>
-#include <qasciidict.h>
+
+#include <qdict.h>
+
 #include "category.h"
 
 // list of Category
@@ -21,7 +23,7 @@ public:
         void remove (QString key);
         void clear();
 
-        QAsciiDict<Category> categoryList;
+        QDict<Category> categoryList;
 
 private:
 

@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.5 2003-08-06 20:59:20 zcarsten Exp $
+** $Id: zsafe.cpp,v 1.6 2003-08-13 16:54:10 zcarsten Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -13,6 +13,8 @@
 **    Zaurus Opie arm: none
 **    Linux Desktop  : -DDESKTOP
 **    Windows Desktop: -DDESKTOP -DWIN32
+**
+**    for japanese version additional use: -DJPATCH_HDE
 **
 ****************************************************************************/
 #include "zsafe.h"
@@ -454,13 +456,26 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
 #else
     resize( DeskW, DeskH-30 ); 
 #endif
-    // setMinimumSize( QSize( DeskW, DeskH-30 ) );
-    // setMaximumSize( QSize( DeskW, DeskH-30 ) );
+
 #else
-    resize( DeskW, DeskH-30 ); 
-    // setMinimumSize( QSize( DeskW, DeskH-30 ) );
-    // setMaximumSize( QSize( 440, 290 ) );
-    // setMaximumSize( QSize( DeskW+400, DeskH+200 ) );
+
+#ifdef JPATCH_HDE
+   int DeskS;
+   if(DeskW > DeskH)
+   {
+      DeskS = DeskW;
+   }
+   else
+   {
+      DeskS = DeskH;
+   }
+   resize( DeskW, DeskH );
+   setMinimumSize( QSize( DeskS, DeskS ) );
+   setMaximumSize( QSize( DeskS, DeskS ) );
+#else
+    resize( DeskW, DeskH-30 );
+#endif
+
 #endif
     // setCaption( tr( "ZSafe" ) );
 
@@ -760,6 +775,22 @@ void ZSafe::editPwd()
 #endif
        if (result == Accepted)
        {
+#ifdef JPATCH_HDE
+          // edit the selected item
+          QString name = dialog->NameField->text();
+          selectedItem->setText (0, name);
+          QString user = dialog->UsernameField->text();
+          selectedItem->setText (1, user);
+          QString pwd = dialog->PasswordField->text();
+          selectedItem->setText (2, pwd);
+          QString comment = dialog->CommentField->text();
+          comment.replace (QRegExp("\n"), "<br>");
+          selectedItem->setText (3, comment);
+          QString f5 = dialog->Field5->text();
+          selectedItem->setText (4, f5);
+          QString f6 = dialog->Field6->text();
+          selectedItem->setText (5, f6);
+#else
           modified = true;
           // edit the selected item
           QString name = dialog->NameField->text(); 
@@ -775,6 +806,7 @@ void ZSafe::editPwd()
           selectedItem->setText (4, tr (f5));
           QString f6 = dialog->Field6->text(); 
           selectedItem->setText (5, tr (f6));
+#endif
        }
 
        delete dialog;
@@ -839,6 +871,20 @@ retype:
           QListViewItem *i = new ShadedListItem (0, selectedItem);
           i->setOpen (TRUE);
 
+#ifdef JPATCH_HDE
+          i->setText (0, name);
+          QString user = dialog->UsernameField->text();
+          i->setText (1, user);
+          QString pwd = dialog->PasswordField->text();
+          i->setText (2, pwd);
+          QString comment = dialog->CommentField->text();
+          comment.replace (QRegExp("\n"), "<br>");
+          i->setText (3, comment);
+          QString f5 = dialog->Field5->text();
+          i->setText (4, f5);
+          QString f6 = dialog->Field6->text();
+          i->setText (5, f6);
+#else
           i->setText (0, tr (name));
           QString user = dialog->UsernameField->text(); 
           i->setText (1, tr (user));
@@ -851,6 +897,7 @@ retype:
           i->setText (4, tr (f5));
           QString f6 = dialog->Field6->text(); 
           i->setText (5, tr (f6));
+#endif
        }
 
        delete dialog;
@@ -1204,7 +1251,7 @@ bool ZSafe::isCategory(QListViewItem *_item)
       return FALSE;
 
    QString categoryName = _item->text (0);
-   if (categories.find ((const char *)categoryName))
+   if (categories.find (categoryName))
       return TRUE;
    else
       return FALSE;
@@ -1433,7 +1480,11 @@ void ZSafe::readAllEntries()
 #else
 	  char buffer[4048];
 #endif
-      strcpy (buffer, s);
+
+
+      /* modify QString -> QCString::utf8 */
+      
+      strcpy (buffer, s.utf8());
 
       QString name;
       QString user;
@@ -1444,7 +1495,7 @@ void ZSafe::readAllEntries()
 
       // separete the entries
       char *i = strtok (buffer, "|");
-      QString category(&i[1]);
+      QString category(QString::fromUtf8(&i[1]));
       category.truncate(category.length() -1);
 
       int idx=0;
@@ -1453,33 +1504,33 @@ void ZSafe::readAllEntries()
          switch (idx)
          {
             case 0:
-               name = &i[1];
+               name = QString::fromUtf8(&i[1]);
                name.truncate(name.length() -1);
                // name
                break;
             case 1:
                // user
-               user = &i[1];
+               user = QString::fromUtf8(&i[1]);
                user.truncate(user.length() -1);
                break;
             case 2:
                // password
-               password = &i[1];
+               password = QString::fromUtf8(&i[1]);
                password.truncate(password.length() -1);
                break;
             case 3:
                // comment
-               comment = &i[1];
+               comment = QString::fromUtf8(&i[1]);
                comment.truncate(comment.length() -1);
                break;
             case 4:
                // field5
-               field5 = &i[1];
+               field5 = QString::fromUtf8(&i[1]);
                field5.truncate(field5.length() -1);
                break;
             case 5:
                // field6
-               field6 = &i[1];
+               field6 = QString::fromUtf8(&i[1]);
                field6.truncate(field6.length() -1);
                break;
          }
@@ -1494,6 +1545,14 @@ void ZSafe::readAllEntries()
          if (catItem)
          {
             QListViewItem * item = new ShadedListItem( 0, catItem );
+#ifdef JPATCH_HDE
+            item->setText( 0, name );
+            item->setText( 1, user );
+            item->setText( 2, password );
+            item->setText( 3, comment );
+            item->setText( 4, field5 );
+            item->setText( 5, field6 );
+#else
             item->setText( 0, tr( name ) );
             item->setText( 1, tr( user ) );
             item->setText( 2, tr( password ) );
@@ -1501,6 +1560,7 @@ void ZSafe::readAllEntries()
             item->setText( 4, tr( field5 ) );
             item->setText( 5, tr( field6 ) );
             catItem->setOpen( TRUE );
+#endif
          }
       }
       else
@@ -1508,12 +1568,21 @@ void ZSafe::readAllEntries()
          QListViewItem *catI = new ShadedListItem( 1, ListView );
          // create and insert a new item
          QListViewItem * item = new ShadedListItem( 0, catI );
+#ifdef JPATCH_HDE
+         item->setText( 0, name );
+         item->setText( 1, user );
+         item->setText( 2, password );
+         item->setText( 3, comment );
+         item->setText( 4, field5 );
+         item->setText( 5, field6 );
+#else
          item->setText( 0, tr( name ) );
          item->setText( 1, tr( user ) );
          item->setText( 2, tr( password ) );
          item->setText( 3, tr( comment ) );
          item->setText( 4, tr( field5 ) );
          item->setText( 5, tr( field6 ) );
+#endif
          catI->setOpen( TRUE );
 
          Category *c1 = new Category();
@@ -1713,10 +1782,17 @@ void ZSafe::readAllEntries()
          if (catItem)
          {
             QListViewItem * item = new ShadedListItem( 0, catItem );
+#ifdef JPATCH_HDE
+            item->setText( 0, name );
+            item->setText( 1, user );
+            item->setText( 2, password );
+            item->setText( 3, comment );
+#else
             item->setText( 0, tr( name ) );
             item->setText( 1, tr( user ) );
             item->setText( 2, tr( password ) );
             item->setText( 3, tr( comment ) );
+#endif
             catItem->setOpen( TRUE );
          }
       }
@@ -1725,10 +1801,17 @@ void ZSafe::readAllEntries()
          QListViewItem *catI = new ShadedListItem( 1, ListView );
          // create and insert a new item
          QListViewItem * item = new ShadedListItem( 0, catI );
+#ifdef JPATCH_HDE
+         item->setText( 0, name );
+         item->setText( 1, user );
+         item->setText( 2, password );
+         item->setText( 3, comment );
+#else
          item->setText( 0, tr( name ) );
          item->setText( 1, tr( user ) );
          item->setText( 2, tr( password ) );
          item->setText( 3, tr( comment ) );
+#endif
          catI->setOpen( TRUE );
 
          Category *c1 = new Category();
@@ -1909,13 +1992,13 @@ bool ZSafe::openDocument(const char* _filename, const char* )
         int numberOfEntries=0;
 	while (retval == 1) {
 
-                QString category(entry[0]);
-                QString name(entry[1]);
-                QString user(entry[2]);
-                QString password(entry[3]);
-                QString comment(entry[4]);
-                QString field5(entry[5]);
-                QString field6(entry[6]);
+                QString category( QString::fromUtf8(entry[0]) );
+                QString name( QString::fromUtf8(entry[1]) );
+                QString user( QString::fromUtf8(entry[2]) );
+                QString password( QString::fromUtf8(entry[3]) );
+                QString comment( QString::fromUtf8(entry[4]) );
+                QString field5( QString::fromUtf8(entry[5]) );
+                QString field6( QString::fromUtf8(entry[6]) );
                 // add the subitems to the categories
 
                 Category *cat= categories.find (category);
@@ -1926,12 +2009,21 @@ bool ZSafe::openDocument(const char* _filename, const char* )
                    if (catItem)
                    {
                       QListViewItem * item = new ShadedListItem( 0, catItem );
+#ifdef JPATCH_HDE
+                      item->setText( 0, name );
+                      item->setText( 1, user );
+                      item->setText( 2, password );
+                      item->setText( 3, comment );
+                      item->setText( 4, field5 );
+                      item->setText( 5, field6 );
+#else
                       item->setText( 0, tr( name ) );
                       item->setText( 1, tr( user ) );
                       item->setText( 2, tr( password ) );
                       item->setText( 3, tr( comment ) );
                       item->setText( 4, tr( field5 ) );
                       item->setText( 5, tr( field6 ) );
+#endif
                       if (expandTree)
                          catItem->setOpen( TRUE );
                       numberOfEntries++;
@@ -1942,12 +2034,21 @@ bool ZSafe::openDocument(const char* _filename, const char* )
                    QListViewItem *catI = new ShadedListItem( 1, ListView );
                    // create and insert a new item
                    QListViewItem * item = new ShadedListItem( 0, catI );
+#ifdef JPATCH_HDE
+                   item->setText( 0, name );
+                   item->setText( 1, user );
+                   item->setText( 2, password );
+                   item->setText( 3, comment );
+                   item->setText( 4, field5 );
+                   item->setText( 5, field6 );
+#else
                    item->setText( 0, tr( name ) );
                    item->setText( 1, tr( user ) );
                    item->setText( 2, tr( password ) );
                    item->setText( 3, tr( comment ) );
                    item->setText( 4, tr( field5 ) );
                    item->setText( 5, tr( field6 ) );
+#endif
                    if (expandTree)
                       catI->setOpen( TRUE );
 
@@ -2259,21 +2360,20 @@ bool ZSafe::saveDocument(const char* _filename,
                 si = si->nextSibling())
            {
               int j=0;
-	      entry[j] = (char*)malloc(strlen(i->text(0))+1);
-	      strcpy(entry[j++], i->text(0));
-	      entry[j] = (char*)malloc(strlen(si->text(0))+1);
-	      strcpy(entry[j++], si->text(0));
-	      entry[j] = (char*)malloc(strlen(si->text(1))+1);
-	      strcpy(entry[j++], si->text(1));
-	      entry[j] = (char*)malloc(strlen(si->text(2))+1);
-	      strcpy(entry[j++], si->text(2));
-	      entry[j] = (char*)malloc(strlen(si->text(3))+1);
-	      strcpy(entry[j++], si->text(3));
-
-	      entry[j] = (char*)malloc(strlen(si->text(4))+1);
-	      strcpy(entry[j++], si->text(4));
-	      entry[j] = (char*)malloc(strlen(si->text(5))+1);
-	      strcpy(entry[j++], si->text(5));
+         entry[j] = (char*)malloc(strlen(i->text(0).utf8())+1);
+         strcpy(entry[j++], i->text(0).utf8());
+         entry[j] = (char*)malloc(strlen(si->text(0).utf8())+1);
+         strcpy(entry[j++], si->text(0).utf8());
+         entry[j] = (char*)malloc(strlen(si->text(1).utf8())+1);
+         strcpy(entry[j++], si->text(1).utf8());
+         entry[j] = (char*)malloc(strlen(si->text(2).utf8())+1);
+         strcpy(entry[j++], si->text(2).utf8());
+         entry[j] = (char*)malloc(strlen(si->text(3).utf8())+1);
+         strcpy(entry[j++], si->text(3).utf8());
+         entry[j] = (char*)malloc(strlen(si->text(4).utf8())+1);
+         strcpy(entry[j++], si->text(4).utf8());
+         entry[j] = (char*)malloc(strlen(si->text(5).utf8())+1);
+         strcpy(entry[j++], si->text(5).utf8());
 
 	      retval = saveEntry(entry);
               for (int z=0; z<j; z++)
@@ -3203,8 +3303,13 @@ void ZSafe::editCategory()
               if (catItem)
               {
                  qWarning (category);
+#ifdef JPATCH_HDE
+                 catItem->setText( 0, category );
+                 cat->setCategoryName (category);
+#else
                  catItem->setText( 0, tr( category ) );
                  cat->setCategoryName (tr(category));
+#endif
                  cat->initListItem();
                  categories.insert (category, cat);
               }
@@ -3529,6 +3634,27 @@ void ZSafe::saveDocumentWithPwd()
 void ZSafe::about()
 {
    QString info;
+#ifdef JPATCH_HDE
+   info  = "<html><body><div align=""center"">";
+   info += "<b>";
+   info += tr("Zaurus Password Manager<br>");
+   info += tr("ZSafe version 2.1.2-jv01b<br>");
+   info += "</b>";
+   info += tr("by Carsten Schneider<br>");
+   info += "zcarsten@gmx.net<br>";
+   info += "http://z-soft.z-portal.info/zsafe";
+   info += "<br>";
+   info += tr("Translations by Robert Ernst<br>");
+   info += "robert.ernst@linux-solutions.at<br>";
+
+   info += "<br><br>";
+   info += QString::fromUtf8("æ~W¥æ~\\¬èª~^/VGA Zauruså¯¾å¿~\\ã~C~Qã~C~Cã~C~Aä½~\\æ ~H~P<br>");
+   info += "HADECO R&D<br>";
+   info += "r&d@hadeco.co.jp<br>";
+   info += "http://www.hadeco.co.jp/r&d/<br>";
+   info += "<br></div>";
+   info += "</body></html>";
+#else
    info  = "<html><body><div align=""center"">";
    info += "<b>";
    info += tr("Zaurus Password Manager<br>");
@@ -3542,6 +3668,7 @@ void ZSafe::about()
    info += "robert.ernst@linux-solutions.at<br>";
    info += "<br></div>";
    info += "</body></html>";
+#endif
 
    // QMessageBox::information( this, tr("ZSafe"), info, tr("&OK"), 0);
 
