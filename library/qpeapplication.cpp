@@ -175,27 +175,31 @@ public:
 
 	static void show_mx(QWidget* mw, bool nomaximize, QString &strName/* = QString::null */)
 	{
-	if ( mw->isVisible() ) {
-	    mw->raise();
-	} else {
 	    QPoint p;
 	    QSize s;
+		bool max;
+	if ( mw->isVisible() ) {
+		if ( read_widget_rect(strName, max, p, s) && validate_widget_size(mw, p, s) ) {
+		    mw->resize(s);
+		    mw->move(p);
+		}
+		mw->raise();
+	} else {
 
 	    if ( mw->layout() && mw->inherits("QDialog") ) {
-		bool max;
 		if ( read_widget_rect(strName, max, p, s) && validate_widget_size(mw, p, s) ) {
 		    mw->resize(s);
 		    mw->move(p);
 
-		    if ( max && !nomaximize )
+		    if ( max && !nomaximize ) {
 			mw->showMaximized();
-		    else
+		    } else {
 			mw->show();
+				}
 		} else {
-		    qpe_show_dialog((QDialog*)mw,nomaximize);
+			qpe_show_dialog((QDialog*)mw,nomaximize);
 		}
 	    } else {
-		bool max;
 		if ( read_widget_rect(strName, max, p, s) && validate_widget_size(mw, p, s) ) {
 		    mw->resize(s);
 		    mw->move(p);
@@ -302,7 +306,7 @@ static void qpe_show_dialog( QDialog* d, bool nomax )
     static bool read_widget_rect(const QString &app, bool &maximized, QPoint &p, QSize &s)
     {
 	maximized = TRUE;
-
+	qDebug("read_widget_rect");
 	// 350 is the trigger in qwsdefaultdecoration for providing a resize button
 	if ( qApp->desktop()->width() <= 350 )
 	    return FALSE;
@@ -374,7 +378,7 @@ static void qpe_show_dialog( QDialog* d, bool nomax )
 	// 350 is the trigger in qwsdefaultdecoration for providing a resize button
 	if ( qApp->desktop()->width() <= 350 )
 	    return;
-
+	qDebug("store_widget_rect");
 	// we use these to map the offset of geometry and pos.  ( we can only use normalGeometry to
 	// get the non-maximized version, so we have to do it the hard way )
 	int offsetX = w->x() - w->geometry().left();
