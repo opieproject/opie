@@ -1,6 +1,8 @@
 /*
                             This file is part of the Opie Project
                              Copyright (c)  2002 L. Potter <ljp@llornkcor.com>
+														 and Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+														 
               =.
             .=l.
            .>+-=
@@ -20,7 +22,7 @@
 ++=   -.     .`     .:       details.
  :     =  ...= . :.=-
  -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
+  -_. . .   )=.  =           General Public License along with
     --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
