@@ -44,18 +44,18 @@ setmod_text[] =
 	"This feature depends on another which has been configured as a module.\n"
 	"As a result, this feature will be built as a module.",
 nohelp_text[] =
-	"There is no help available for this kernel option.\n",
+	"There is no help available for this option.\n",
 load_config_text[] =
 	"Enter the name of the configuration file you wish to load.  "
 	"Accept the name shown to restore the configuration you "
 	"last retrieved.  Leave blank to abort.",
 load_config_help[] =
 	"\n"
-	"For various reasons, one may wish to keep several different kernel\n"
+	"For various reasons, one may wish to keep several different\n"
 	"configurations available on a single machine.\n"
 	"\n"
 	"If you have saved a previous configuration in a file other than the\n"
-	"kernel's default, entering the name of the file here will allow you\n"
+	"default, entering the name of the file here will allow you\n"
 	"to modify that configuration.\n"
 	"\n"
 	"If you are uncertain, then you have probably never used alternate\n"
@@ -65,7 +65,7 @@ save_config_text[] =
 	"as an alternate.  Leave blank to abort.",
 save_config_help[] =
 	"\n"
-	"For various reasons, one may wish to keep different kernel\n"
+	"For various reasons, one may wish to keep different\n"
 	"configurations available on a single machine.\n"
 	"\n"
 	"Entering a file name here will allow you to later retrieve, modify\n"
