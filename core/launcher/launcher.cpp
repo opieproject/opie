@@ -58,7 +58,7 @@
 #include "syncdialog.h"
 #include "desktop.h"
 #include <qpe/lnkproperties.h>
-#include "mrulist.h"
+//#include "mrulist.h"
 #include "qrsync.h"
 #include <stdlib.h>
 #include <unistd.h>
@@ -730,8 +730,8 @@ void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
     if ( msg == "closing(QString)" ){
         QString app;
         stream >> app;
-        qWarning("app closed %s", app.latin1()  );
-        MRUList::removeTask( app );
+        //qWarning("app closed %s", app.latin1()  );
+        //  MRUList::removeTask( app );
     }else if ( msg == "linkChanged(QString)" ) {
         QString link;
         stream >> link;

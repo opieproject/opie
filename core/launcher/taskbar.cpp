@@ -21,6 +21,7 @@
 #include "startmenu.h"
 #include "inputmethods.h"
 #include "mrulist.h"
+#include "runningappbar.h"
 #include "systray.h"
 #include "calibrate.h"
 #include "wait.h"
@@ -155,8 +156,11 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
     stack->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Minimum ) );
     label = new QLabel(stack);
 
-    mru = new MRUList( stack );
-    stack->raiseWidget( mru );
+    //mru = new MRUList( stack );
+    //stack->raiseWidget( mru );
+
+    runningAppBar = new RunningAppBar(stack);
+    stack->raiseWidget(runningAppBar);
 
     waitIcon = new Wait( this );
     (void) new AppIcons( this );
@@ -166,7 +170,7 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
     // ## make customizable in some way?
 #ifdef QT_QWS_CUSTOM
     lockState = new LockKeyState( this );
-#else
+y#else
     lockState = 0;
 #endif
 
@@ -196,7 +200,8 @@ void TaskBar::setStatusMessage( const QString &text )
 void TaskBar::clearStatusBar()
 {
     label->clear();
-    stack->raiseWidget( mru );
+    stack->raiseWidget(runningAppBar);
+     //  stack->raiseWidget( mru );
 }
 
 void TaskBar::startWait()
@@ -209,13 +214,14 @@ void TaskBar::startWait()
 void TaskBar::stopWait(const QString& app)
 {
     waitTimer->stop();
-    mru->addTask(sm->execToLink(app));
+    //mru->addTask(sm->execToLink(app));
     waitIcon->setWaiting( false );
 }
 
 void TaskBar::stopWait()
 {
     waitTimer->stop();
+
     waitIcon->setWaiting( false );
 }
 
@@ -274,7 +280,7 @@ void TaskBar::receive( const QCString &msg, const QByteArray &data )
 	else if ( msg == "setLed(int,bool)" ) {
 		int led, status;
 		stream >> led >> status;
-		
+
 		ODevice::inst ( )-> setLed ( led, status ? OLED_BlinkSlow : OLED_Off );
 	}
 }
@@ -311,6 +317,7 @@ void TaskBar::toggleSymbolInput()
 
 bool TaskBar::recoverMemory()
 {
-    return mru->quitOldApps();
+    //eturn mru->quitOldApps();
+    return true;
 }
 

@@ -21,7 +21,7 @@
 #include "desktop.h"
 #include "info.h"
 #include "launcher.h"
-#include "mrulist.h"
+//#include "mrulist.h"
 #include "qcopbridge.h"
 #include "shutdownimpl.h"
 #include "startmenu.h"
@@ -318,7 +318,7 @@ void DesktopApplication::switchLCD ( bool on )
 {
 	if ( qApp ) {
 		DesktopApplication *dapp = (DesktopApplication *) qApp;
-		
+
 		if ( dapp-> m_screensaver )
 			dapp-> m_screensaver-> setBacklight ( on ? -3 : -1 );
 	}
@@ -727,7 +727,7 @@ void Desktop::executeOrModify( const QString& appLnkFile )
 		QCString app = lnk.exec().utf8();
 		Global::terminateBuiltin( "calibrate" );
 		if ( QCopChannel::isRegistered( "QPE/Application/" + app ) ) {
-			MRUList::addTask( &lnk );
+                    //	MRUList::addTask( &lnk );
 			if ( hasVisibleWindow( app ) )
 				QCopChannel::send( "QPE/Application/" + app, "nextView()" );
 			else

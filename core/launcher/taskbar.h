@@ -28,7 +28,8 @@ class QTimer;
 class InputMethods;
 class Wait;
 class SysTray;
-class MRUList;
+//class MRUList;
+class RunningAppBar;
 class QWidgetStack;
 class QTimer;
 class QLabel;
@@ -59,18 +60,19 @@ protected:
     void resizeEvent( QResizeEvent * );
     void styleChange( QStyle & );
     void setStatusMessage( const QString &text );
-    
+
 private slots:
     void calcMaxWindowRect();
     void receive( const QCString &msg, const QByteArray &data );
 
 private:
-    
+
     QTimer *waitTimer;
     Wait *waitIcon;
     InputMethods *inputMethods;
     SysTray *sysTray;
-    MRUList *mru;
+    //  MRUList *mru;
+    RunningAppBar* runningAppBar;
     QWidgetStack *stack;
     QTimer *clearer;
     QLabel *label;

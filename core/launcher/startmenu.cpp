@@ -20,7 +20,7 @@
 
 #include "startmenu.h"
 #include "sidething.h"
-#include "mrulist.h"
+//#include "mrulist.h"
 #include "info.h"
 
 #include <qpe/qpeapplication.h>
@@ -75,7 +75,7 @@ void StartMenu::loadOptions()
     useWidePopupMenu  = ( tmpBoolString1 == "TRUE" ) ? TRUE : FALSE;
     QString tmpBoolString2 = config.readEntry( "StartButtonIsFlat", "TRUE" );
     startButtonIsFlat = ( tmpBoolString2 == "TRUE" ) ? TRUE : FALSE;
-    QString tmpBoolString3 = config.readEntry( "UseMRUList", "TRUE" );
+//    QString tmpBoolString3 = config.readEntry( "UseMRUList", "TRUE" );
     popupMenuSidePixmap = config.readEntry( "PopupMenuSidePixmap", "launcher/sidebar" );
     startButtonPixmap = config.readEntry( "StartButtonPixmap", "go" );
 #else
