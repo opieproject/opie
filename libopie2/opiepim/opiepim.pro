@@ -11,7 +11,7 @@ TARGET      = opiepim2
 VERSION     = 1.8.3
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS        += -lopiecore2
+LIBS        += -lopiecore2 -lopiedb2
 
 include ( core/core.pro )
 include ( core/backends/backends.pro )
