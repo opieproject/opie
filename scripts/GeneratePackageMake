@@ -1,0 +1,228 @@
+# generate file containg control name / package name / files
+find . -name *.control | grep -v -- "-mt.control" | while read i
+do
+    i=${i/.\//}
+    CDIR=${i%/*}
+    BNAME=${i##*/}
+    BNAME=${BNAME/.control/}
+    echo "cdir: ${CDIR}" 
+    echo "bname: ${BNAME}" 
+    grep -e "Package:" -e "Files:" ./${i}
+done > /tmp/ALL
+
+#
+# makefile header 
+#
+
+cat << MAKEFILEHEADER
+
+#
+# generate -mt.control file from regular control 
+# arg 1 : path to control file to convert
+#
+
+define GenerateMTControl
+@echo "Generating -mt control file for \$(basename \$<)"
+@\$(OPIEDIR)/scripts/tothreaded \$< \$(OPIEDIR)/AllThreadedPackages
+endef
+
+#
+# package one control file
+# arg 1 : directory from OPIEROOT where control file resides
+# arg 2 : control file basename without -mt (no .control)
+# arg 3 : control file basename with -mt if needed
+# arg 4 : package name (value specified by Package: ...)
+#
+
+define DoPackage
+@echo \"Building ipk of \$(4)\"
+@( \$(ForSubst) ) > \$(TOPDIR)/scripts/subst
+@( \$(ForFileSubst) ) > \$(TOPDIR)/scripts/Filesubst
+@( cd \$(OPIEDIR); \\
+  \$(OPIEDIR)/scripts/mkipkg \\
+      --subst=\$(OPIEDIR)/scripts/subst \\
+      --filesubst=\$(OPIEDIR)/scripts/filesubst \\
+      --control=\$(OPIEDIR)/\$(1)/\$(3).control \\
+      --prerm=\$(OPIEDIR)/\$(1)/\$(2).prerm \\
+      --preinst=\$(OPIEDIR)/\$(1)/\$(2).preinst \\
+      --postrm=\$(OPIEDIR)/\$(1)/\$(2).postrm \\
+      --postinst=\$(OPIEDIR)/\$(1)/\$(2).postinst \\
+      --strip=\$(STRIP) \$(OPIEDIR); \\
+      rm -f \$(OPIEDIR)/Packages/\$(4)_*.ipk; \\
+      mv *.ipk \$(OPIEDIR)/Packages; \\
+      touch \$(OPIEDIR)/Packages/\$(4) \\
+) || true 
+endef
+
+# 
+# prepared for generating the substfile for every build
+# 
+
+define ForSubst
+echo 's,\\\$\$QPE_VERSION,\$(QPE_VERSION),g'; \\
+echo 's,\\\$\$OPIE_VERSION,\$(OPIE_VERSION),g'; \\
+echo 's,\\\$\$QTE_VERSION,\$(QTE_VERSION),g'; \\
+echo 's,\\\$\$QTE_REVISION,\$(QTE_REVISION),g'; \\
+echo 's,\\\$\$SUB_VERSION,\$(SUB_VERSION),g'; \\
+echo 's,\\\$\$EXTRAVERSION,\$(EXTRAVERSION),g'; \\
+echo 's,\\\$\$QTE_BASEVERSION,\$(QTE_BASEVERSION),g'
+endef
+
+define ForFileSubst
+echo 's,\\\$\$OPIEDIR/root/,/,g'; \\
+echo 's,\$(OPIEDIR)/root/,/,g'; \\
+echo 's,\\\$\$OPIEDIR,\$(prefix),g'; \\
+echo 's,\$(OPIEDIR),\$(prefix),g'; \\
+echo 's,\\\$\$QTDIR,\$(prefix),g'; \\
+echo 's,\$(QTDIR),\$(prefix),g'; \\
+echo 's,^\(\./\)*root/,/,g'; \\
+echo 's,^\(\./\)*etc/,\$(prefix)/etc/,g'; \\
+echo 's,^\(\./\)*lib/,\$(prefix)/lib/,g'; \\
+echo 's,^\(\./\)*bin/,\$(prefix)/bin/,g'; \\
+echo 's,^\(\./\)*pics/,\$(prefix)/pics/,g'; \\
+echo 's,^\(\./\)*sounds/,\$(prefix)/sounds/,g'; \\
+echo 's,^\(\./\)*i18n/,\$(prefix)/i18n/,g'; \\
+echo 's,^\(\./\)*plugins/,\$(prefix)/plugins/,g'; \\
+echo 's,^\(\./\)*apps/,\$(prefix)/apps/,g'; \\
+echo 's,^\(\./\)*share/,\$(prefix)/share/,g'; \\
+echo 's,^\(\./\)*i18n/,\$(prefix)/i18n/,g'; \\
+echo 's,^\(\./\)*help/,\$(prefix)/help/,g'
+endef
+
+#
+# Will contain a list of all non-mt control files
+ALLCONTROLFILES=
+
+#
+# Will contain a list of all packaging targets
+ALLPACKAGES=
+
+# s contains now single space
+s=\$(x) \$(x)
+
+#
+# for convenience : generate AllTh
+ATP=\$(OPIEDIR)/AllThreadedPackages
+
+MAKEFILEHEADER
+
+while read k 
+do
+    CDIR="${k#* }"
+    read k
+    BNAME="${k#* }"
+    read k
+    case $k in 
+      *"ackage:"*)
+        Pkg="${k#* }"
+        Pkg="${Pkg// }"
+        ;;
+      *"iles:"*)
+        Files="${k/Files:/}"
+        ;;
+    esac
+    read k
+    case $k in 
+      *"ackage:"*)
+        Pkg="${k#* }"
+        Pkg="${Pkg// }"
+        ;;
+      *"iles:"*)
+        Files="${k/Files:/}"
+        ;;
+    esac
+
+    cat << HERE
+#
+# package $Pkg in ${BNAME}
+#
+
+package-${Pkg} : \$(OPIEDIR)/Packages/$Pkg
+package-${Pkg}-mt : \$(OPIEDIR)/Packages/$Pkg-mt
+
+# collect control files and package targets
+
+ALLCONTROLFILES += ${CDIR}/${BNAME}.control
+ALLPACKAGES += $Pkg
+
+# to generate -mt control file
+\$(OPIEDIR)/${CDIR}/${BNAME}-mt.control : \$(OPIEDIR)/${CDIR}/${BNAME}.control
+	\$(GenerateMTControl)
+
+HERE
+
+    if [ ! -z "${Files}" ]
+    then
+
+      cat << HERE
+# optimize speed
+.phony : \$(wildcard \$(addprefix \$(OPIEDIR)/,${Files}))
+
+# capture missing files (because not built)
+\$(OPIEDIR)/Packages/$Pkg \$(OPIEDIR)/Packages/$Pkg-mt \$(SUBSTFILES): \$(wildcard \$(addprefix \$(OPIEDIR)/,${Files}))
+HERE
+
+# echo "\$(wildcard \$(addprefix \$(OPIEDIR)/,${Files})) : "
+
+    fi
+
+    cat << HERE
+\$(OPIEDIR)/Packages/$Pkg : \$(OPIEDIR)/${CDIR}/${BNAME}.control
+	@\$(call DoPackage,${CDIR},${BNAME},${BNAME},${Pkg})
+\$(OPIEDIR)/Packages/$Pkg-mt : \$(OPIEDIR)/${CDIR}/${BNAME}-mt.control
+	@\$(call DoPackage,${CDIR},${BNAME},${BNAME}-mt,${Pkg}-mt)
+
+HERE
+
+done < /tmp/ALL
+
+cat << HERE
+#
+# regenerate package file if control files are modified
+#
+
+Package.make : \$(addprefix \$(OPIEDIR)/,\$(ALLCONTROLFILES))
+
+#
+# make targets to build packages
+# needs quicklauncher link in location (because dangling
+# links are not considered as true files by the wildcard command)
+#
+# if you want to build one package only then use
+# make package-<basenameof control>
+# or make package-<basenameof control>-mt
+#
+
+packages : /opt/QtPalmtop/bin/quicklauncher \\
+           \$(OPIEDIR)/Packages \\
+           \$(add prefix \$(OPIEDIR)/Packages/,\$(ALLPACKAGES))
+packages-mt : /opt/QtPalmtop/bin/quicklauncher \\
+              \$(ATP) \\
+              \$(OPIEDIR)/Packages \\
+              \$(addprefix \$(OPIEDIR)/Packages/,\$(addsuffix -mt,\$(ALLPACKAGES)))
+
+#
+# capture missing quichlauncher link
+#
+
+/opt/QtPalmtop/bin/quicklauncher :
+	@echo "create a link from /opt/QtPalmtop to \$(OPIEDIR) for this target to work"
+	exit 2
+
+#
+# Create Packages directory
+#
+
+\$(OPIEDIR)/Packages :
+	@mkdir \$(OPIEDIR)/Packages
+
+#
+# update file containing all packages
+#
+
+\$(ATP) : \$(addprefix \$(OPIEDIR)/,\$(ALLCONTROLFILES))
+	@echo "Generating \$(notdir \$(ATP))"
+	@echo -e "\$(subst \$(s),,\$(foreach i,\$(ALLPACKAGES),\$(i)\n))" > \$@
+HERE
+
+rm /tmp/ALL
