@@ -3,75 +3,84 @@
     <name>Clock</name>
     <message>
         <source>Snooze</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>Cabezadita</translation>
     </message>
     <message>
         <source>Clock</source>
-        <translation type="unfinished"></translation>
+        <translation>Reloj</translation>
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation type="unfinished"></translation>
+        <translation>Parar reloj</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicio</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>Set Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Fijar alarma</translation>
     </message>
     <message>
-        <source>Set date and time.</source>
-        <translation type="unfinished"></translation>
+        <source>Alarm On</source>
+        <translation type="obsolete"></translation>
     </message>
     <message>
-        <source>Alarm Is On</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alarm Is Off</source>
-        <translation type="unfinished"></translation>
+        <source>Alarm Off</source>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Parar</translation>
+    </message>
+    <message>
+        <source>PM</source>
+        <translation>PM</translation>
+    </message>
+    <message>
+        <source>Alarm Is On</source>
+        <translation>Alarma activada</translation>
+    </message>
+    <message>
+        <source>Alarm Is Off</source>
+        <translation>Alarma desactivada</translation>
+    </message>
+    <message>
+        <source>Set date and time.</source>
+        <translation>Fijar fecha y hora.</translation>
     </message>
 </context>
 <context>
     <name>Set_Alarm</name>
     <message>
         <source>Set Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Fijar alarma</translation>
     </message>
     <message>
         <source>Hour</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora</translation>
     </message>
     <message>
         <source>Minute</source>
-        <translation type="unfinished"></translation>
+        <translation>Minuto</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>Snooze Delay
 (minutes)</source>
-        <translation type="unfinished"></translation>
+        <translation>Duración cabezadita
+(minutos)</translation>
     </message>
 </context>
 </TS>

@@ -3,341 +3,315 @@
     <name>DrawPad</name>
     <message>
         <source>Delete All</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar todo</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar</translation>
     </message>
     <message>
         <source>Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar...</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar</translation>
     </message>
     <message>
         <source>Export...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Thumbnail View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Thumbnail View...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page Information...</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar...</translation>
     </message>
     <message>
         <source>Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramientas</translation>
     </message>
     <message>
         <source>New Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Nueva página</translation>
     </message>
     <message>
         <source>Clear Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpiar página</translation>
     </message>
     <message>
         <source>Delete Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar página</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>Deshacer</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>Rehacer</translation>
     </message>
     <message>
         <source>First Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Primera página</translation>
     </message>
     <message>
         <source>Previous Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Página anterior</translation>
     </message>
     <message>
         <source>Next Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Página siguiente</translation>
     </message>
     <message>
         <source>Last Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Última página</translation>
     </message>
     <message>
         <source>Draw Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Pintar punto</translation>
     </message>
     <message>
         <source>Draw Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Pintar línea</translation>
     </message>
     <message>
         <source>Draw Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Pintar rectángulo</translation>
     </message>
     <message>
         <source>Draw Filled Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Pintar rectángulo relleno</translation>
     </message>
     <message>
         <source>Draw Ellipse</source>
-        <translation type="unfinished"></translation>
+        <translation>Pintar elipse</translation>
     </message>
     <message>
         <source>Draw Filled Ellipse</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Insert Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Pintar elipse relleno</translation>
     </message>
     <message>
         <source>Fill Region</source>
-        <translation type="unfinished"></translation>
+        <translation>Rellenar región</translation>
     </message>
     <message>
         <source>Erase Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar punto</translation>
     </message>
     <message>
         <source>Pen Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ancho lápiz</translation>
+    </message>
+    <message>
+        <source>More</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>More...</source>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Color lápiz</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to clear
-the current page?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to delete
-the current page?</source>
-        <translation type="unfinished"></translation>
+        <translation>Color relleno</translation>
     </message>
     <message>
         <source>DrawPad</source>
-        <translation type="unfinished"></translation>
+        <translation>Pizarra</translation>
     </message>
     <message>
         <source>Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Página</translation>
+    </message>
+    <message>
+        <source>Insert Text</source>
+        <translation>Insertar texto</translation>
+    </message>
+</context>
+<context>
+    <name>DrawPadCanvas</name>
+    <message>
+        <source>Delete All</source>
+        <translation>Borrar todo</translation>
     </message>
     <message>
         <source>Do you want to delete
 all the pages?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Quiere borrar todas
+las páginas?</translation>
+    </message>
+    <message>
+        <source>Clear Page</source>
+        <translation>Limpiar página</translation>
+    </message>
+    <message>
+        <source>Do you want to clear
+the current page?</source>
+        <translation>¿Quiere limpiar la
+página actual?</translation>
+    </message>
+    <message>
+        <source>Delete Page</source>
+        <translation>Borrar página</translation>
+    </message>
+    <message>
+        <source>Do you want to delete
+the current page?</source>
+        <translation>¿Quiere borrar la
+página actual?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Sí</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>No</translation>
     </message>
 </context>
 <context>
     <name>ExportDialog</name>
     <message>
-        <source>DrawPad - Export</source>
-        <translation type="unfinished"></translation>
+        <source>Export</source>
+        <translation>Exportar</translation>
     </message>
     <message>
         <source>Page Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Selección de páginas</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Todas</translation>
     </message>
     <message>
         <source>Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Actual</translation>
     </message>
     <message>
         <source>Range</source>
-        <translation type="unfinished"></translation>
+        <translation>Rango</translation>
     </message>
     <message>
         <source>To:</source>
-        <translation type="unfinished"></translation>
+        <translation>A:</translation>
     </message>
     <message>
         <source>Export As</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar como</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>Format:</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato:</translation>
     </message>
 </context>
 <context>
     <name>ImportDialog</name>
     <message>
-        <source>DrawPad - Import</source>
-        <translation type="unfinished"></translation>
+        <source>Import</source>
+        <translation>Importar</translation>
     </message>
     <message>
         <source>Automatic preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Vistazo automático</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Vistazo</translation>
     </message>
 </context>
 <context>
     <name>NewPageDialog</name>
     <message>
         <source>New Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Nueva página</translation>
     </message>
     <message>
-        <source>General</source>
-        <translation type="unfinished"></translation>
+        <source>Page Size</source>
+        <translation>Tamaño página</translation>
     </message>
     <message>
-        <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <source>Width :</source>
+        <translation>Ancho:</translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="unfinished"></translation>
+        <source>Height :</source>
+        <translation>Alto:</translation>
     </message>
     <message>
-        <source>Width:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Background</source>
-        <translation type="unfinished"></translation>
+        <source>Contents</source>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>Balnco</translation>
+    </message>
+    <message>
+        <source>Foreground Color</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Background Color</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Background</source>
+        <translation>Fondo</translation>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Color lápiz</translation>
+    </message>
+    <message>
+        <source>Brush Color</source>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Color relleno</translation>
     </message>
 </context>
 <context>
-    <name>PageInformationDialog</name>
+    <name>QColorDialog</name>
     <message>
-        <source>Page Information</source>
-        <translation type="unfinished"></translation>
+        <source>Hue:</source>
+        <translation type="obsolete"></translation>
     </message>
     <message>
-        <source>General</source>
-        <translation type="unfinished"></translation>
+        <source>Sat:</source>
+        <translation type="obsolete"></translation>
     </message>
     <message>
-        <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <source>Val:</source>
+        <translation type="obsolete"></translation>
     </message>
     <message>
-        <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <source>Red:</source>
+        <translation type="obsolete"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="unfinished"></translation>
+        <source>Green:</source>
+        <translation type="obsolete"></translation>
     </message>
     <message>
-        <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <source>Blue:</source>
+        <translation type="obsolete"></translation>
     </message>
     <message>
-        <source>Height:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <source>Alpha channel:</source>
+        <translation type="obsolete"></translation>
     </message>
     <message>
-        <source>Dimension:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <source>Select color</source>
+        <translation type="obsolete"></translation>
     </message>
 </context>
 <context>
     <name>TextToolDialog</name>
     <message>
         <source>Insert Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ThumbnailView</name>
-    <message>
-        <source>DrawPad - Thumbnail View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clear Page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to clear
-the selected page?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete Page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to delete
-the selected page?</source>
-        <translation type="unfinished"></translation>
+        <translation>Insertar texto</translation>
     </message>
 </context>
 </TS>
