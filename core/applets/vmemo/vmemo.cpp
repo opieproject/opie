@@ -218,9 +218,12 @@ VMemo::VMemo( QWidget *parent, const char *_name )
 //     else
       systemZaurus = FALSE;
 
+//    myChannel = new QCopChannel( "QPE/VMemo", this );
     myChannel = new QCopChannel( "QPE/VMemo", this );
+
     connect( myChannel, SIGNAL(received(const QCString&,const QByteArray&)),
              this, SLOT(receive(const QCString&,const QByteArray&)) );
+
 
     if( toggleKey != -1 ) {
                 odebug << "Register key " << toggleKey << "" << oendl;
@@ -228,8 +231,8 @@ VMemo::VMemo( QWidget *parent, const char *_name )
       //           e << 4096; // Key_Escape
       //          e << Key_F5; //4148
       e << toggleKey;
-      e << QString("QPE/VMemo");
-      e << QString("toggleRecord()");
+      e << QCString("QPE/VMemo");
+      e << QCString("toggleRecord()");
     }
     if(toggleKey == 1)
         usingIcon = TRUE;
@@ -251,7 +254,6 @@ int VMemo::position()
 }
 
 void VMemo::receive( const QCString &msg, const QByteArray &data ) {
-  odebug << "Vmemo receive" << oendl;
   QDataStream stream( data, IO_ReadOnly );
 
   if (msg == "toggleRecord()")  {
@@ -520,7 +522,7 @@ bool VMemo::record() {
 		odebug << "ready to record"<< oendl;
         if(useADPCM) {
 						odebug << "usr ADPCM" << oendl;
-						
+
                 while(recording) {
                         result = ::read(dsp, sbuf, bufsize); // adpcm read
                         if( result <= 0) {
@@ -665,5 +667,5 @@ void VMemo::timerBreak() {
 }
 
 
-EXPORT_OPIE_APPLET_v1( VMemo )
+//EXPORT_OPIE_APPLET_v1( VMemo )
 
