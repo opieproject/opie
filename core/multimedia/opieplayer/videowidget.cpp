@@ -565,10 +565,12 @@ bool VideoWidget::playVideo() {
                }
                else
                {
-                  ulong* lout = ((ulong *)out)++ + (w - 1)*spl;
+                  ulong* _out = (ulong *)out;
+                  ulong* lout = _out++ + (w - 1)*spl;
                   for (int y=0; y<w; y++)
                   {
-                     *lout=*((ulong*)in)++;
+                     ulong *_in = (ulong*)in;
+                     *lout=*_in++;
                      lout-=spl;
                   }
                }

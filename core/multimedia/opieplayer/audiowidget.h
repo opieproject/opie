@@ -31,7 +31,7 @@
 #include <qlineedit.h>
 #include <qframe.h>
 
-#include <opie/oticker.h>
+#include <opie2/oticker.h>
 
 class QPixmap;
 
@@ -106,7 +106,7 @@ private:
     QPixmap *buttonPixDown[11];
     
     QPixmap *pixmaps[4];
-    OTicker  songInfo;
+    Opie::Ui::OTicker  songInfo;
     QSlider slider;
     QLineEdit time;
     int xoff, yoff;

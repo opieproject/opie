@@ -34,6 +34,7 @@ extern MediaPlayerState *mediaPlayerState;
 static const int xo = -2; // movable x offset
 static const int yo = 22; // movable y offset
 
+using namespace Opie::Ui;
 struct MediaButton {
    bool isToggle, isHeld, isDown;
 };

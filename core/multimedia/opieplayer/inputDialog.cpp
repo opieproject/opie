@@ -2,11 +2,12 @@
 
 #include <qpe/resource.h>
 
-#include <opie/ofiledialog.h>
+#include <opie2/ofiledialog.h>
 
 #include <qlineedit.h>
 #include <qpushbutton.h>
 
+using namespace Opie::Ui;
 InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl ) {
     if ( !name ) {
