@@ -5,6 +5,6 @@ SOURCES   = ftplib.c
 DESTDIR      = $(OPIEDIR)/lib$(PROJMAK)
 INTERFACES  = 
 TARGET    = ftplib
-
+QMAKE_LINK=gcc
 
 include ( $(OPIEDIR)/include.pro )
