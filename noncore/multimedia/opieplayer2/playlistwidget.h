@@ -68,7 +68,7 @@ public:
     const DocLnk *current();
     void useSelectedDocument();
     int selected;
-    int whichList();
+    int whichList() const;
     TabType currentTab() const;
 
 public slots:
@@ -77,7 +77,7 @@ public slots:
     bool next();
     bool prev();
     void writeDefaultPlaylist( );
-    QString currentFileListPathName();
+    QString currentFileListPathName() const;
 protected:
     void keyReleaseEvent( QKeyEvent *e);
 

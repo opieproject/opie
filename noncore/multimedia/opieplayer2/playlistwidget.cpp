@@ -1142,7 +1142,7 @@ void PlayListWidget::skinsMenuActivated( int item ) {
                                tr( "You must <b>restart</b> Opieplayer<br>to see your changes." ) );
 } 
 
-int PlayListWidget::whichList() {
+int PlayListWidget::whichList() const {
     return tabWidget->currentPageIndex();
 }
 
@@ -1157,7 +1157,7 @@ PlayListWidget::TabType PlayListWidget::currentTab() const
     return indexToTabType[ index ];
 }
 
-QString PlayListWidget::currentFileListPathName() {
+QString PlayListWidget::currentFileListPathName() const {
     switch (whichList()) {
       case 1:
           return audioView->currentItem()->text(3);
