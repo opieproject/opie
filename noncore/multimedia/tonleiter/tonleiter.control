@@ -5,5 +5,5 @@ Section: opie/multimedia
 Maintainer: Ralf Waspe <rwaspe@web.de>
 Architecture: arm
 Depends: task-opie-minimal
-Description: music scales for sting instruments
+Description: Music scales for string instruments
 Version: $QPE_VERSION$EXTRAVERSION
