@@ -116,6 +116,7 @@ public:
 	bool keep_running : 1;
 
 	QString appName;
+        QStringList langs;
 	struct QCopRec
 	{
 		QCopRec( const QCString &ch, const QCString &msg,
@@ -661,8 +662,8 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 
 #ifndef QT_NO_TRANSLATION
 
-	QStringList langs = Global::languageList();
-	for ( QStringList::ConstIterator it = langs.begin(); it != langs.end(); ++it ) {
+	d->langs = Global::languageList();
+	for ( QStringList::ConstIterator it = d->langs.begin(); it != d->langs.end(); ++it ) {
 		QString lang = *it;
 
                 installTranslation( lang + "/libopie.qm");
@@ -740,6 +741,10 @@ void QPEApplication::initApp( int argc, char **argv )
 
     /* overide stored arguments */
     setArgs(argc, argv);
+
+    /* install translation here */
+    for ( QStringList::ConstIterator it = d->langs.begin(); it != d->langs.end(); ++it )
+        installTranslation( (*it) + "/" + d->appName + ".qm" );
 }
 #endif
 
@@ -1404,8 +1409,7 @@ void QPEApplication::pidMessage( const QCString& msg, const QByteArray& data)
 	} else if ( msg == "QPEProcessQCop()" ) {
             processQCopFile();
             d->sendQCopQ();
-        }
-        {
+        }else  {
             bool p = d->keep_running;
             d->keep_running = FALSE;
             emit appMessage( msg, data);
