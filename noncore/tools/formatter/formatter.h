@@ -43,17 +43,23 @@ public:
 protected:
     QGridLayout *FormatterAppLayout, *tabLayout, *tabLayout_2;
     QString getFileSystemType(const QString &);
+
+    void fillCombos();
+    void parsetab();
+    bool doFdisk();
+    int formatCheck(const QString &);
+    int runCommand(const QString &);
     
 protected slots:
-    void doFormat();
-    void fillCombos();
     void cleanUp();
+    void doFormat();
+    void editFstab();
+    bool doFsck();
+    bool doFsckCheck();
+
     void fsComboSelected(int); 
     void storageComboSelected(int );
     void deviceComboSelected(int );
-    void editFstab();
-    void parsetab();
-    void doFsck();
 };
 
 #endif // FORMATTERAPP_H
