@@ -261,8 +261,12 @@ void MainWindow::slotRunScript() {
 }
 
 void MainWindow::slotConnect() {
-    if ( currentSession() )
-        currentSession()->layer()->open();
+    if ( currentSession() ) {
+        bool ret = currentSession()->layer()->open();
+		if(!ret) QMessageBox::warning(currentSession()->widgetStack(),
+			QObject::tr("Failed"),
+			QObject::tr("Connecting failed for this session."));
+	}
 }
 
 void MainWindow::slotDisconnect() {
