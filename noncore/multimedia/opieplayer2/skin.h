@@ -11,6 +11,7 @@ class Skin
 {
 public:
     Skin( const QString &name, const QString &fileNameInfix );
+    Skin( const QString &fileNameInfix );
 
     void preload( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount );
 
@@ -22,10 +23,13 @@ public:
 
     QImage buttonMaskImage( const QString &fileName ) const;
 
+    static QString defaultSkinName();
+
 private:
+    void init( const QString &name );
+
     void addButtonToMask( int tag, const QImage &maskImage ) const;
 
-    QString m_name;
     QString m_fileNameInfix;
     QString m_skinPath;
 

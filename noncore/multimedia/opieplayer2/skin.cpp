@@ -2,9 +2,21 @@
 #include "skin.h"
 
 #include <qpe/resource.h>
+#include <qpe/config.h>
 
 Skin::Skin( const QString &name, const QString &fileNameInfix )
-    : m_name( name ), m_fileNameInfix( fileNameInfix )
+    : m_fileNameInfix( fileNameInfix )
+{
+    init( name );
+}
+
+Skin::Skin( const QString &fileNameInfix )
+    : m_fileNameInfix( fileNameInfix )
+{
+    init( defaultSkinName() );
+}
+
+void Skin::init( const QString &name )
 {
     m_skinPath = "opieplayer2/skins/" + name;
 }
@@ -77,6 +89,13 @@ QImage Skin::buttonMaskImage( const QString &fileName ) const
         it = m_buttonMasks.insert( fileName, QImage( Resource::findPixmap( path ) ) );
     }
     return *it;
+}
+
+QString Skin::defaultSkinName()
+{
+    Config cfg( "OpiePlayer" );
+    cfg.setGroup( "Options" );
+    return cfg.readEntry( "Skin", "default" );
 }
 
 /* vim: et sw=4 ts=4

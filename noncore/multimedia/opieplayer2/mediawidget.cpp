@@ -25,9 +25,6 @@
 #include "playlistwidget.h"
 #include "skin.h"
 
-#include <qpe/config.h>
-#include <qpe/qpeapplication.h>
-
 MediaWidget::MediaWidget( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QWidget *parent, const char *name )
     : QWidget( parent, name ), mediaPlayerState( _mediaPlayerState ), playList( _playList )
 {
@@ -69,11 +66,7 @@ MediaWidget::Button MediaWidget::setupButton( const SkinButtonInfo &buttonInfo, 
 
 void MediaWidget::loadDefaultSkin( const SkinButtonInfo *skinInfo, uint buttonCount, const QString &fileNameInfix )
 {
-    Config cfg( "OpiePlayer" );
-    cfg.setGroup( "Options" );
-    QString name = cfg.readEntry( "Skin","default" );
-
-    Skin skin( name, fileNameInfix );
+    Skin skin( fileNameInfix );
     loadSkin( skinInfo, buttonCount, skin );
 }
 
