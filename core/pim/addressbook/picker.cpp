@@ -17,7 +17,8 @@ PickerLabel::PickerLabel( QWidget *parent, const char *name )
 	letter2 = '\0';
 	letter3 = '\0';
 
-	setFont( QFont( "smallsmooth", 9 ) );
+	// setFont( QFont( "smallsmooth", 9 ) );
+	setFont( QFont::defaultFont() );
 	setTextFormat( Qt::RichText );
 
 }
