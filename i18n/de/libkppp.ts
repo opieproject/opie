@@ -702,7 +702,14 @@ on this information, but it can also cause several
 &lt;a href=&quot;kppp-7.html#autohostname&quot;&gt;problems&lt;/a&gt;.
 
 Don&apos;t enable this unless you really need it.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Bei jeder Verbindung wird Ihr Hostname so
+verändert, dass er der IP Adresse entspricht, die
+vom PPP Server erhalten wurde. Dies kann bei
+Protokollen nützlich sein, die diese Information
+benötigen, kann aber auch zu einigen &lt;a href=&quot;kppp-7.html#autohostname&quot;&gt;Problemen&lt;/a&gt;
+führen.
+
+Bitte nicht anschalten, wenn nicht benötigt.</translation>
     </message>
     <message>
         <source>Selecting this option might cause some weird problems with the X-server and applications while kppp is connected. Don&apos;t use it until you know what you are doing!
@@ -825,7 +832,12 @@ the default of 38400 bits/sec. If everything
 works you can try to increase this value, but to
 no more than 115200 bits/sec (unless you know
 that your serial port supports higher speeds).</source>
-        <translation type="unfinished"></translation>
+        <translation>Gibt die Geschwindigkeit an, mit der sich das
+Modem und die ser. Schnittstelle unterhalten.
+Sie sollten mit 38400 bits/Sek beginnen, wenn
+alles funktioniert, erhöhen Sie, aber nie mehr
+als 115200 bits/Sek, ausser Sie wissen, dass
+Ihre Schnittstelle das unterstützt.</translation>
     </message>
     <message>
         <source>&amp;Use lock file</source>
@@ -841,7 +853,15 @@ Here you can select whether this locking will
 be done.
 
 &lt;b&gt;Default&lt;/b&gt;: On</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Um zu verhindern, dass andere Programme
+das Modem während des Verbindungsaufbaus
+benutzen, kann eine Datei erzeugt werden, die
+es als benutzt markiert. Bei Linux wäre das z.B.
+&lt;tt&gt;/var/lock/LCK..ttyS1&lt;/tt&gt;
+Hier kann eingestellt werden, ob diese 
+Sperrung vollzogen werden soll.
+
+&lt;b&gt;Standard&lt;/b&gt;: An</translation>
     </message>
     <message>
         <source>Modem timeout:</source>
@@ -855,18 +875,20 @@ be done.
         <source>This specifies how long &lt;i&gt;kppp&lt;/i&gt; waits for a
 &lt;i&gt;CONNECT&lt;/i&gt; response from your modem. The
 recommended value is 30 seconds.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies definiert, wie lange &lt;i&gt;kpp&lt;/i&gt; auf eine
+&lt;i&gt;CONNECT&lt;/i&gt; Antwort vom Modem
+warten soll. Ratschlag: 30 Sekunden.</translation>
     </message>
 </context>
 <context>
     <name>ModemWidget2</name>
     <message>
         <source>Busy wait:</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf Besetzt warten:</translation>
     </message>
     <message>
         <source>&amp;Wait for dial tone before dialing</source>
-        <translation type="unfinished"></translation>
+        <translation>Vor der Anwahl auf &amp;Wählton warten</translation>
     </message>
     <message>
         <source>&lt;p&gt;Normally the modem waits for a dial tone
@@ -876,11 +898,18 @@ recognize this sound, or your local phone system
 does not emit such a tone, uncheck this option
 
 &lt;b&gt;Default:&lt;/b&gt;: On</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Normaler Weise wartet ein Modem auf den
+Wählton der Telefonleitung, der anzeigt, dass
+die Nummer gewählt werden kann. Sollte ihr
+Modem das nicht können oder ihr Telefon-
+system so einen Ton nicht senden, schalten
+Sie diese Option aus.
+
+&lt;b&gt;Standard&lt;/b&gt;: An</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation>Sek</translation>
     </message>
     <message>
         <source>Specifies the number of seconds to wait before
@@ -890,11 +919,17 @@ same number is busy too often.
 
 The default is 0 seconds, you should not change
 this unless you need to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gibt die zu wartenden Sekunden vor einer
+Neuanwahl an, wenn alle gewählten Nummern
+besetzt sind. Wichtig, weil manche Modems
+Probleme bei mehrfach besetzter gleicher Nr.
+haben.
+Der Standard ist 0 Sek., das sollte nicht ge-
+ändert werden, außer wenn benötigt.</translation>
     </message>
     <message>
         <source>Modem &amp;volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem &amp;Lautstärke:</translation>
     </message>
     <message>
         <source>Most modems have a speaker which makes
@@ -904,11 +939,17 @@ lower volume.
 
 If this does not work for your modem,
 you must modify the modem volume command.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die meisten Modems haben Lautsprecher, die
+recht laut beim wählen sind. Hier können Sie
+die Lautstärke entweder aus oder leiser stellen.
+
+Wenn das mit Ihrem Modem nicht funktioniert,
+muss das Modem Lautstärke Kommando
+geändert werden.</translation>
     </message>
     <message>
         <source>Modem asserts CD line</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem stellt CD Leitung sicher</translation>
     </message>
     <message>
         <source>This controls how &lt;i&gt;kppp&lt;/i&gt; detects that the modem
@@ -916,7 +957,11 @@ is not responding. Unless you are having
 problems with this, do not modify this setting.
 
 &lt;b&gt;Default&lt;/b&gt;: Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrolliert, wie &lt;i&gt;kppp&lt;/i&gt; ein nicht antwortendes
+Modem erkennt. Wenn Sie keine Probleme hiermit
+haben, ändern Sie diese Einstellung bitte nicht.
+
+&lt;b&gt;Standard&lt;/b&gt;: Aus</translation>
     </message>
     <message>
         <source>Mod&amp;em Commands...</source>
@@ -939,7 +984,12 @@ find out vendor and revision of your modem.
 Press this button to query your modem for
 this information. It can be useful to help
 you setup the modem</source>
-        <translation type="unfinished"></translation>
+        <translation>Die meisten Modems unterstützen en ATI
+Kommandosatz um Lieferant und Revision des
+Modems herauszufinden.
+Betäatigen Sie diesen Knopf, um ihr Modem
+abzufragen. Dies kann beim Setup des 
+Modems helfen</translation>
     </message>
 </context>
 <context>
@@ -1011,11 +1061,11 @@ you setup the modem</source>
     </message>
     <message>
         <source>Unable to open modem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte Modem nicht ansprechen.</translation>
     </message>
     <message>
         <source>Unable to detect state of CD line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte den Status der CD Leitung nicht erkennen.</translation>
     </message>
     <message>
         <source>The modem is not ready.</source>
@@ -1204,11 +1254,11 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>Connected at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbunden mit:</translation>
     </message>
     <message>
         <source>Time connected:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindungsdauer:</translation>
     </message>
     <message>
         <source>Volume:</source>
@@ -1280,7 +1330,7 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>Turning off dial tone waiting...</source>
-        <translation type="unfinished"></translation>
+        <translation>Warte auf Wählton-Abschaltung...</translation>
     </message>
     <message>
         <source>Dialing %1</source>
@@ -1324,7 +1374,7 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>Timeout %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Timeout %1 Sekunden</translation>
     </message>
     <message>
         <source>Hangup</source>
@@ -1344,23 +1394,23 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>Prompting %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebe %1 ein</translation>
     </message>
     <message>
         <source>PW Prompt %1</source>
-        <translation type="unfinished"></translation>
+        <translation>PW Eingabe %1</translation>
     </message>
     <message>
         <source>Loop Start %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Schleifen Start %1</translation>
     </message>
     <message>
         <source>ERROR: Nested too deep, ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>FEHLER: Zu tief verschachtelt, ignoriert.</translation>
     </message>
     <message>
         <source>Loops nested too deeply!</source>
-        <translation type="unfinished"></translation>
+        <translation>Schleifen zu tief verschachtelt!</translation>
     </message>
     <message>
         <source>Loop End %1</source>
@@ -1368,7 +1418,7 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>LoopEnd without matching Start! Line: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>LoopEnd ohne passende Start! Zeile: %1</translation>
     </message>
     <message>
         <source>Starting pppd...</source>
@@ -1376,7 +1426,7 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>Scan Var: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche Var: %1</translation>
     </message>
     <message>
         <source>Found: %1</source>
@@ -1384,11 +1434,11 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>Looping: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Schleife: %1</translation>
     </message>
     <message>
         <source>Script timed out!</source>
-        <translation type="unfinished"></translation>
+        <translation>Skript Zeitabbruch!</translation>
     </message>
     <message>
         <source>Scanning: %1</source>
@@ -1400,7 +1450,7 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>Logging on to network...</source>
-        <translation type="unfinished"></translation>
+        <translation>Am Netzwerk anmelden...</translation>
     </message>
     <message>
         <source>Running startup command...</source>
@@ -1417,19 +1467,19 @@ Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passen
     </message>
     <message>
         <source>&lt;qt&gt;Cannot find the PPP daemon!&lt;br&gt;Make sure that pppd is installed and that you have entered the correct path.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Kann PPP dämon nicht finden!&lt;br&gt;Stellen Sie sicher, dass PPP installiert ist und sie den korrekten Pfad angegeben haben.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Cannot execute:&lt;br&gt; %1&lt;br&gt;Please make sure that you have given setuid permission and that pppd is executable.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Kann folgendes nicht ausführen:&lt;br&gt; %1&lt;br&gt;Bitte stellen Sie sicher, dass Sie die setuid Berechtigung gegeben haben und pppd ausführbar ist.&lt;br&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Cannot find:&lt;br&gt; %1&lt;br&gt;Please make sure you have setup your modem device properly and/or adjust the location of the modem device on the modem tab of the setup dialog.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Kann nicht finden:&lt;br&gt; %1&lt;br&gt;Bitte stellen Sie sicher, dass das Modem Gerät korrekt eingerichtet ist und Sie den Ort des Gerätes im Modem Reiter richtig angegeben haben.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;You have selected the authentication method PAP or CHAP. This requires that you supply a username and a password!&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Sie haben PAP oder CHAP als Authentifizierungsmethode gewählt. Das setzt die Angabe von Benutzername und Passwort voraus!&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Cannot create PAP/CHAP authentication&lt;br&gt;file &quot;%1&quot;&lt;/qt&gt;</source>

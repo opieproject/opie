@@ -4,7 +4,7 @@
     <name>ATConfigDialog</name>
     <message>
         <source>Dialing parameter setup</source>
-        <translation>Wählparameter Einrichtung</translation>
+        <translation>Einrichtung der Wählparameter</translation>
     </message>
     <message>
         <source>Settings1</source>
@@ -16,11 +16,12 @@
     </message>
     <message>
         <source>Init string </source>
-        <translation>Initialisierungszeichenfolge</translation>
+        <translation>Initialisierungs-
+zeichenfolge</translation>
     </message>
     <message>
         <source>Reset string </source>
-        <translation>Zurücksetzzeichenkette</translation>
+        <translation>Zurücksetzzeichenfolge</translation>
     </message>
     <message>
         <source>Dialing prefix #1 </source>
@@ -48,7 +49,8 @@
     </message>
     <message>
         <source>Connect string </source>
-        <translation>Zeichenkette bei Verbindung</translation>
+        <translation>Zeichenkette bei
+Verbindung</translation>
     </message>
     <message>
         <source>Hang-up string </source>
@@ -88,7 +90,7 @@
     </message>
     <message>
         <source>Multi-line untag </source>
-        <translation type="unfinished"></translation>
+        <translation>Multi-line untag </translation>
     </message>
 </context>
 <context>
@@ -186,7 +188,7 @@
     <name>EditBase</name>
     <message>
         <source>Editor Base</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor</translation>
     </message>
     <message>
         <source>Terminal Emulation:</source>
@@ -198,7 +200,7 @@
     </message>
     <message>
         <source>Look</source>
-        <translation type="unfinished"></translation>
+        <translation>Aussehen</translation>
     </message>
     <message>
         <source>Foreground:</source>
@@ -263,7 +265,7 @@
     </message>
     <message>
         <source>Edit Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlüssel bearbeiten</translation>
     </message>
 </context>
 <context>
@@ -506,7 +508,7 @@
     </message>
     <message>
         <source>Enter number</source>
-        <translation>Telefonnummer eingeben</translation>
+        <translation>Nummer</translation>
     </message>
 </context>
 <context>
@@ -691,7 +693,7 @@
     </message>
     <message>
         <source>Special Keys</source>
-        <translation>Spezial Tasten</translation>
+        <translation>Spezial Einstellungen</translation>
     </message>
     <message>
         <source>Invalid profile</source>
