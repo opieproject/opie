@@ -387,14 +387,19 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
 #endif
     } else  if ( msg == "sendVersionInfo()" ) {
     /*
-     * QtopiaDesktop relies on the major number
-     * to start with 1.
-     * we need to fake at least 1.4 to be able
-     * to sync with QtopiaDesktop1.6
+     * @&$*! Qtopiadesktop relies on the major number
+     * to start with 1. (or 2 as the case of version 2.1 will be)
+     * we need to fake 1.7 to be able
+     * to sync with Qtopiadesktop 1.7.
+     * We'll send it Opie's version in the platform string for now,
+     * until such time when QD gets rewritten correctly.
      */
         QCopEnvelope e( "QPE/Desktop", "versionInfo(QString,QString)" );
-        QString opiename = "Opie";
-        e << QString(QPE_VERSION) << opiename;
+
+        QString opiename = "Opie "+QString(QPE_VERSION);
+        QString QDVersion="1.7";
+        e << QDVersion << opiename;
+
     } else if ( msg == "sendCardInfo()" ) {
 #ifndef QT_NO_COP
         QCopEnvelope e( "QPE/Desktop", "cardInfo(QString)" );
