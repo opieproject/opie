@@ -125,6 +125,8 @@ apidox :
 mrproper : clean-configs
 	find . -name ".moc"|xargs rm -rf
 	find . -name ".obj"|xargs rm -rf
+	find lib -name "lib*.*"|xargs rm -f
+	find plugins -name "lib*.*"|xargs rm -f
 	find . -name "*.pro"|xargs touch
 
 include $(TOPDIR)/Rules.make
