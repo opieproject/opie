@@ -100,8 +100,7 @@ QPixmap *KeyboardImpl::icon()
 
 QString KeyboardImpl::name()
 {
-    // return qApp->translate( "InputMethods", "Keyboard" );
-    return "Keyboard";
+    return qApp->translate( "InputMethods", "Keyboard" );
 }
 
 void KeyboardImpl::onKeyPress( QObject *receiver, const char *slot )

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -134,8 +134,8 @@ static char * help_xpm[] = {
 
   Pen input widget.
 */
-QIMPenInput::QIMPenInput( QWidget *parent, const char *name, WFlags flags )
-    : QFrame( parent, name, flags ), helpDlg(0), profile(0)
+QIMPenInput::QIMPenInput( QWidget *parent, const char *name, WFlags f )
+    : QFrame( parent, name, f ), helpDlg(0), profile(0)
 {
     setFrameStyle( Box | Plain );
 
@@ -238,7 +238,7 @@ void QIMPenInput::loadProfiles()
     profile = 0;
     delete shortcutCharSet;
     shortcutCharSet = new QIMPenCharSet();
-    shortcutCharSet->setTitle( "Shortcut" );
+    shortcutCharSet->setTitle( tr("Shortcut") );
     QString path = QPEApplication::qpeDir() + "etc/qimpen";
     QDir dir( path, "*.conf" );
     QStringList list = dir.entryList();
@@ -253,7 +253,6 @@ void QIMPenInput::loadProfiles()
 	    }
 	}
     }
-
 
     Config config( "handwriting" );
     config.setGroup( "Settings" );
@@ -271,10 +270,8 @@ void QIMPenInput::selectProfile( const QString &name )
 	}
     }
 
-    if ( !it.current() ) {
-        qWarning("No profile selected!\n");
-	    return;
-    }
+    if ( !it.current() )
+	return;
 
     pw->clearCharSets();
     baseSets.clear();

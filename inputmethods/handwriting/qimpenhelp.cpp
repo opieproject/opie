@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -135,10 +135,9 @@ void HandwritingHelp::hideEvent( QHideEvent * )
 HandwritingTrainer::HandwritingTrainer( QIMPenProfile *p, QWidget *parent, const char *name )
     : QWidget( parent, name ), profile(p)
 {
-    QGridLayout *gl = new QGridLayout( this, 5, 2, 0, 4 );
-    gl->setRowStretch( 1, 1 );
-    gl->setRowStretch( 2, 1 );
+    QGridLayout *gl = new QGridLayout( this, 4, 2, 0, 4 );
     gl->setColStretch( 1, 1 );
+    gl->setRowStretch(3, 1);
 
     charSetCombo = new QComboBox( this );
     gl->addMultiCellWidget( charSetCombo, 0, 0, 0, 1 );
@@ -150,20 +149,16 @@ HandwritingTrainer::HandwritingTrainer( QIMPenProfile *p, QWidget *parent, const
 
     charList = new QListBox( this );
     charList->setHScrollBarMode( QListBox::AlwaysOff );
-    charList->setFixedWidth( 80 );
+    charList->setFixedWidth(80);
     connect( charList, SIGNAL(highlighted(int)), this, SLOT(selectChar(int)) );
-    gl->addMultiCellWidget( charList, 1, 2, 0, 0 );
-
-    QLabel *help = new QLabel( this );
-    help->setAlignment( AlignLeft | AlignVCenter | WordBreak );
-    gl->addWidget( help, 1, 1 );
-    help->setText(
-	tr( "Select a character from the list.  The writing area on the left "
-	    "shows the reference character.  Practice writing in the area on "
-	    "the right.") );
+    gl->addWidget(charList, 1, 0);
 
     result = new QLabel( this );
-    gl->addMultiCellWidget( result, 2, 3, 1, 1 );
+    result->setAlignment(AlignLeft | AlignVCenter | WordBreak);
+    result->setText(
+	tr( "Select a reference character from the list.  Practice writing in "
+	    "the area on the right."));
+    gl->addMultiCellWidget(result, 1, 2, 1, 1);
 
     matcher = new QIMPenMatch( this );
     matcher->setCharSet( currentSet );
@@ -172,7 +167,7 @@ HandwritingTrainer::HandwritingTrainer( QIMPenProfile *p, QWidget *parent, const
 	     this, SLOT(matched(const QIMPenCharMatchList &)) );
 
     QHBoxLayout *hb = new QHBoxLayout();
-    gl->addLayout( hb, 3, 0 );
+    gl->addLayout( hb, 2, 0 );
     prevBtn = new QPushButton( this );
     prevBtn->setPixmap( QPixmap( (const char **)left_xpm ) );
     connect( prevBtn, SIGNAL(clicked()), SLOT(prevChar()));
@@ -185,7 +180,7 @@ HandwritingTrainer::HandwritingTrainer( QIMPenProfile *p, QWidget *parent, const
 
     refPw = new QIMPenWidget( this );
     refPw->setReadOnly( TRUE );
-    gl->addWidget( refPw, 4, 0 );
+    gl->addWidget( refPw, 3, 0 );
 
     pracPw = new QIMPenWidget( this );
     connect( matcher, SIGNAL(removeStroke()), pracPw, SLOT(removeStroke()) );
@@ -197,7 +192,7 @@ HandwritingTrainer::HandwritingTrainer( QIMPenProfile *p, QWidget *parent, const
 	     matcher, SLOT(beginStroke()) );
     connect( pracPw, SIGNAL(stroke( QIMPenStroke * )),
 	     matcher, SLOT(strokeEntered( QIMPenStroke * )) );
-    gl->addWidget( pracPw, 4, 1 );
+    gl->addWidget( pracPw, 3, 1 );
 
     redrawTimer = new QTimer( this );
     connect( redrawTimer, SIGNAL(timeout()), this, SLOT(redrawChar()) );
@@ -227,12 +222,17 @@ void HandwritingTrainer::setCurrentChar( QIMPenChar *c )
 	prevBtn->setEnabled( findPrev() != 0 );
 	nextBtn->setEnabled( findNext() != 0 );
     }
-    result->setText( "" );
     redrawTimer->start( 5000 );
 }
 
 void HandwritingTrainer::selectChar( int i )
 {
+    static int last_char = 0;
+
+    if (last_char != i) {
+	result->setText("");
+    }
+
     currentChar = 0;
     currentCode = ((CharListItem *)charList->item(i))->code();
     QIMPenCharIterator it(currentSet->characters() );
@@ -252,6 +252,7 @@ void HandwritingTrainer::selectCharSet( int i )
     if ( currentSet ) {
 	refPw->removeCharSet( 0 );
 	pracPw->removeCharSet( 0 );
+	result->setText("");
     }
     currentSet = profile->charSets().at( i );
     fillCharList();
@@ -266,7 +267,7 @@ void HandwritingTrainer::selectCharSet( int i )
 
 void HandwritingTrainer::noMatch()
 {
-    result->setText( "No match" );
+    result->setText( tr("No match") );
 }
 
 void HandwritingTrainer::matched( const QIMPenCharMatchList &ml )

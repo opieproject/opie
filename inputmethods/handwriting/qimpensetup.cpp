@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -235,7 +235,7 @@ QIMPenInputCharDlg::QIMPenInputCharDlg( QWidget *parent, const char *name,
     QHBoxLayout *hb = new QHBoxLayout();
     vb->addLayout( hb );
 
-    QLabel *label = new QLabel( "Character:", this );
+    QLabel *label = new QLabel( tr("Character:"), this );
     hb->addWidget( label );
 
     QComboBox *cb = new QComboBox( TRUE, this );
@@ -373,11 +373,11 @@ QIMPenEdit::QIMPenEdit( QIMPenProfile *p, QWidget *parent,
     //--
 #if !defined(Q_WS_QWS)
     hb = new QHBoxLayout( tvb );
-    pb = new QPushButton( "OK", this );
+    pb = new QPushButton( tr("OK"), this );
     connect( pb, SIGNAL(clicked()), SLOT(accept()) );
     hb->addWidget( pb );
 
-    pb = new QPushButton( "Cancel", this );
+    pb = new QPushButton( tr("Cancel"), this );
     connect( pb, SIGNAL(clicked()), SLOT(reject()) );
     hb->addWidget( pb );
 #endif

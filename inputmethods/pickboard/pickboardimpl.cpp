@@ -70,8 +70,7 @@ QPixmap *PickboardImpl::icon()
 
 QString PickboardImpl::name()
 {
-    // return qApp->translate( "InputMethods", "Pickboard" );
-    return "Pickboard";
+    return qApp->translate( "InputMethods", "Pickboard" );
 }
 
 void PickboardImpl::onKeyPress( QObject *receiver, const char *slot )

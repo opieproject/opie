@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -94,7 +94,7 @@ QString QIMPenProfile::userConfig()
     if ( pos > 0 )
 	un.truncate( pos );
 
-    un = "handwriting-" + un;
+    un = "handwriting-" + un; // No tr
 
     return un;
 }
