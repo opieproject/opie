@@ -180,6 +180,38 @@ void PlayListWidget::initializeStates() {
     d->playListFrame->show();
 }
 
+void PlayListWidget::setButtons(void) {
+    bool hasitem;
+
+    switch ( currentTab() ) {
+    case CurrentPlayList:
+    {
+        hasitem = !d->selectedFiles->isEmpty();
+        d->tbPlay->setEnabled( hasitem );
+        d->tbRemoveFromList->setEnabled( hasitem );
+    }
+    break;
+    case AudioFiles:
+    {
+        d->tbPlay->setEnabled( audioView->hasSelection() );
+        d->tbRemoveFromList->setEnabled( false );
+    }
+    break;
+    case VideoFiles:
+    {
+        d->tbPlay->setEnabled( videoView->hasSelection() );
+        d->tbRemoveFromList->setEnabled( false );
+    }
+    break;
+    case PlayLists:
+    {
+        d->tbPlay->setEnabled( false );
+        d->tbRemoveFromList->setEnabled( false );
+    }
+    break;
+    };
+}
+
 void PlayListWidget::writeDefaultPlaylist() {
 
     Config config( "OpiePlayer" );
@@ -220,6 +252,7 @@ void PlayListWidget::clearList() {
   cfg.setGroup("PlayList");
   cfg.writeEntry("CurrentPlaylist","default");
   setCaption("OpiePlayer");
+  setButtons();
 }
 
 void PlayListWidget::viewPressed( int mouse, QListViewItem *, const QPoint& , int) {
@@ -284,6 +317,8 @@ void PlayListWidget::addAllToList() {
 
     writeCurrentM3u();
     d->selectedFiles->first();
+
+  setButtons();
 }
 
 
@@ -305,6 +340,8 @@ void PlayListWidget::addAllMusicToList() {
     tabWidget->setCurrentPage(0);
     writeCurrentM3u();
     d->selectedFiles->first();
+
+  setButtons();
 }
 
 
@@ -324,6 +361,8 @@ void PlayListWidget::addAllVideoToList() {
     tabWidget->setCurrentPage(0);
     writeCurrentM3u();
     d->selectedFiles->first();
+
+  setButtons();
 }
 
 
@@ -476,6 +515,7 @@ void PlayListWidget::addSelected() {
 void PlayListWidget::removeSelected() {
     d->selectedFiles->removeSelected( );
     writeCurrentM3u();
+    setButtons();
 }
 
 
@@ -510,8 +550,6 @@ void PlayListWidget::addToSelection( QListViewItem *it) {
 
 void PlayListWidget::tabChanged(QWidget *) {
 
-    d->tbPlay->setEnabled( true );
-
     disconnect( audioView, SIGNAL( itemsSelected(bool) ),
                 d->tbPlay, SLOT( setEnabled(bool) ) );
     disconnect( videoView, SIGNAL( itemsSelected(bool) ),
@@ -525,10 +563,8 @@ void PlayListWidget::tabChanged(QWidget *) {
         if( !tbDeletePlaylist->isHidden() )  {
             tbDeletePlaylist->hide();
         }
-        d->tbRemoveFromList->setEnabled(TRUE);
         d->tbAddToList->setEnabled(FALSE);
 
-        d->tbPlay->setEnabled( !d->selectedFiles->isEmpty() );
     }
     break;
     case AudioFiles:
@@ -538,13 +574,10 @@ void PlayListWidget::tabChanged(QWidget *) {
         if( !tbDeletePlaylist->isHidden() ) {
             tbDeletePlaylist->hide();
         }
-        d->tbRemoveFromList->setEnabled(FALSE);
         d->tbAddToList->setEnabled(TRUE);
 
         connect( audioView, SIGNAL( itemsSelected(bool) ),
                  d->tbPlay, SLOT( setEnabled(bool) ) );
-
-        d->tbPlay->setEnabled( audioView->hasSelection() );
 
         currentFileListView = audioView;
     }
@@ -555,13 +588,10 @@ void PlayListWidget::tabChanged(QWidget *) {
         if( !tbDeletePlaylist->isHidden() ) {
             tbDeletePlaylist->hide();
         }
-        d->tbRemoveFromList->setEnabled(FALSE);
         d->tbAddToList->setEnabled(TRUE);
 
         connect( videoView, SIGNAL( itemsSelected(bool) ),
                  d->tbPlay, SLOT( setEnabled(bool) ) );
-
-        d->tbPlay->setEnabled( videoView->hasSelection() );
 
         currentFileListView = videoView;
     }
@@ -574,10 +604,11 @@ void PlayListWidget::tabChanged(QWidget *) {
         playLists->reread();
         d->tbAddToList->setEnabled(FALSE);
 
-        d->tbPlay->setEnabled( false );
     }
     break;
     };
+
+    setButtons();
 }
 
 
@@ -710,6 +741,8 @@ void PlayListWidget::openFile() {
         DocLnk lnk = addFileToPlaylist( str, info.baseName() );
         d->selectedFiles->setSelectedItem( lnk.name() );
     }
+
+    setButtons();
 }
 
 void PlayListWidget::openDirectory() {
@@ -779,6 +812,7 @@ void PlayListWidget::readListFromFile( const QString &filename ) {
     d->selectedFiles->setSelectedItem( s);
     setCaption(tr("OpiePlayer: ")+ QFileInfo(filename).baseName());
 
+    setButtons();
 }
 
 //  writes current playlist to current m3u file */

@@ -77,9 +77,11 @@ void PlayListFileView::populateView()
              dit.current()->file().left( 4 ) == "http" ) {
 
             unsigned long size = QFile( dit.current()->file() ).size();
+            QString sizestr;
+            fileSize(size, sizestr);
 
             newItem = new QListViewItem( this, dit.current()->name(),
-                                               QString::number( size ), "" /*storage*/,
+                                               sizestr, "" /*storage*/,
                                                dit.current()->file() );
             newItem->setPixmap( 0, Resource::loadPixmap( m_itemPixmapName ) );
         }
@@ -89,6 +91,15 @@ void PlayListFileView::populateView()
 void PlayListFileView::checkSelection()
 {
     emit itemsSelected( hasSelection() );
+}
+
+void PlayListFileView::fileSize(unsigned long size, QString &str) {
+    if( size > 1048576 )
+        str.sprintf( "%.0fM", size / 1048576.0 );
+    else if( size > 1024 )
+        str.sprintf( "%.0fK", size / 1024.0 );
+    else
+        str.sprintf( "%d", size );
 }
 
 /* vim: et sw=4 ts=4

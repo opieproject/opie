@@ -132,6 +132,7 @@ private slots:
 
 private:
     DocLnk addFileToPlaylist(const QString& directory, const QString& name);
+    void setButtons(void);
     bool fromSetDocument;
     bool insanityBool;
     QString setDocFileRef, currentPlayList;

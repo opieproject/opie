@@ -25,6 +25,7 @@ private slots:
     void checkSelection();
 
 private:
+    void fileSize(unsigned long size, QString &str);
     QString m_mimeTypePattern;
     QString m_itemPixmapName;
     DocLnkSet m_files;
