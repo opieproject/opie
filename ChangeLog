@@ -29,6 +29,7 @@
 	* n.a. - PackageManager - (Minor UI tweak) fix double entry in source feed configuration when adding a new feed (drw)
 	* n.a. - Battery Applet - fix sizing of battery info popup
 	* #1501 - Fixing bug in todo sql backend (eilers)
+	* #1493 - Fixed one column layout bug of the launcher (hrw)
 
 	Internal
 	--------
