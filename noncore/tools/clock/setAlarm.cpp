@@ -213,7 +213,7 @@ void Set_Alarm::slotChangemp3CkeckBox(bool b) {
         QString str = OFileDialog::getOpenFileName( 2,"/", QString::null, map);//,"", "*", this );
 //        QString str = Opie::OFileDialog::getOpenFileName( 2,"/");//,"", "*", this );
         if(!str.isEmpty() ) {
-            qDebug(str);
+            odebug << str << oendl; 
             config.writeEntry("mp3Alarm",1);
             config.writeEntry("mp3File",str);
         }
