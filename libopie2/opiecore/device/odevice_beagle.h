@@ -36,7 +36,6 @@ namespace Opie {
 namespace Core {
 namespace Internal {
 class Beagle : public ODevice {
-    Q_OBJECT
 public:
     Beagle();
     ~Beagle();
