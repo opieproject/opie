@@ -1009,6 +1009,7 @@ const QString&IMAPwrapper::getType()const
 
 const QString&IMAPwrapper::getName()const
 {
+    qDebug("Get name: %s",account->getAccountName().latin1());
     return account->getAccountName();
 }
 
@@ -1017,4 +1018,34 @@ encodedString* IMAPwrapper::fetchRawBody(const RecMail&mail)
     // dummy
     QValueList<int> path;
     return fetchRawPart(mail,path,false);
+}
+
+void IMAPwrapper::mvcpAllMails(Folder*fromFolder,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
+{
+    qDebug("mvcp mail imap");
+    if (targetWrapper != this) {
+        AbstractMail::mvcpAllMails(fromFolder,targetFolder,targetWrapper,moveit);
+        qDebug("Using generic");
+        return;
+    }
+    qDebug("Using internal");
+    mailimap_set *set = 0;
+
+    int err = mailimap_select( m_imap, fromFolder->getName().latin1());
+    if ( err != MAILIMAP_NO_ERROR ) {
+        Global::statusMessage(tr("error selecting mailbox: %1").arg(m_imap->imap_response));
+        return;
+    }
+
+    int last = m_imap->imap_selection_info->sel_exists;
+    set = mailimap_set_new_interval( 1, last );
+    err = mailimap_copy(m_imap,set,targetFolder.latin1());
+    if ( err != MAILIMAP_NO_ERROR ) {
+        Global::statusMessage(tr("error copy mails: %1").arg(m_imap->imap_response));
+        return;
+    }
+    mailimap_set_free( set );
+    if (moveit) {
+        deleteAllMail(fromFolder);
+    }
 }

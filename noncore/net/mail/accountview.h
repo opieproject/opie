@@ -48,6 +48,7 @@ public:
 
 protected:
     POP3account *account;
+    virtual void refresh();
     AbstractMail *wrapper;
     void disconnect();
     void setOnOffline();

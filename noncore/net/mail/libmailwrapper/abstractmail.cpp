@@ -104,3 +104,22 @@ QString AbstractMail::defaultLocalfolder()
 void AbstractMail::deleteMails(const QString &,QList<RecMail> &)
 {
 }
+
+void AbstractMail::mvcpAllMails(Folder*fromFolder,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
+{
+    QList<RecMail> t;
+    listMessages(fromFolder->getName(),t);
+    encodedString*st = 0;
+    while (t.count()>0) {
+        RecMail*r = t.at(0);
+        st = fetchRawBody(*r);
+        if (st) {
+            targetWrapper->storeMessage(st->Content(),st->Length(),targetFolder);
+            delete st;
+        }
+        t.removeFirst();
+    }
+    if (moveit) {
+        deleteAllMail(fromFolder);
+    }
+}

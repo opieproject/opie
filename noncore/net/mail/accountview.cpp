@@ -7,6 +7,7 @@
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
 
+#define SETPIX(x) if (!account->getOffline()) {setPixmap( 0,x);} else {setPixmap( 0, PIXMAP_OFFLINE );}
 /**
  * POP3 Account stuff
  */
@@ -15,7 +16,14 @@ POP3viewItem::POP3viewItem( POP3account *a, AccountView *parent )
 {
     account = a;
     wrapper = AbstractMail::getWrapper( account );
-    setPixmap( 0, PIXMAP_POP3FOLDER );
+    SETPIX(PIXMAP_POP3FOLDER);
+#if 0
+    if (!account->getOffline()) {
+        setPixmap( 0,  );
+    } else {
+        setPixmap( 0, PIXMAP_OFFLINE );
+    }
+#endif
     setText( 0, account->getAccountName() );
     setOpen( true );
 }
@@ -31,6 +39,11 @@ AbstractMail *POP3viewItem::getWrapper()
 }
 
 void POP3viewItem::refresh( QList<RecMail> & )
+{
+    refresh();
+}
+
+void POP3viewItem::refresh()
 {
     if (account->getOffline()) return;
     QList<Folder> *folders = wrapper->listFolders();
@@ -89,6 +102,8 @@ void POP3viewItem::setOnOffline()
     }
     account->setOffline(!account->getOffline());
     account->save();
+    SETPIX(PIXMAP_POP3FOLDER);
+    refresh();
 }
 
 void POP3viewItem::contextMenuSelected(int which)
@@ -178,7 +193,7 @@ IMAPviewItem::IMAPviewItem( IMAPaccount *a, AccountView *parent )
 {
     account = a;
     wrapper = AbstractMail::getWrapper( account );
-    setPixmap( 0, PIXMAP_IMAPFOLDER );
+    SETPIX(PIXMAP_IMAPFOLDER);
     setText( 0, account->getAccountName() );
     setOpen( true );
 }
@@ -337,6 +352,7 @@ void IMAPviewItem::contextMenuSelected(int id)
         }
         account->setOffline(!account->getOffline());
         account->save();
+        SETPIX(PIXMAP_IMAPFOLDER);
         refreshFolders(false);
     break;
     default:
@@ -665,7 +681,6 @@ void AccountView::setupFolderselect(Selectstore*sels)
 
 void AccountView::downloadMails(Folder*fromFolder,AbstractMail*fromWrapper)
 {
-    unsigned int i = 0;
     AbstractMail*targetMail = 0;
     QString targetFolder = "";
     Selectstore sels;
@@ -677,18 +692,15 @@ void AccountView::downloadMails(Folder*fromFolder,AbstractMail*fromWrapper)
         targetFolder.isEmpty()) {
         return;
     }
-
-    QList<RecMail> t;
-    fromWrapper->listMessages(fromFolder->getName(),t);
-    encodedString*st = 0;
-    for (i = 0; i < t.count();++i) {
-        RecMail*r = t.at(i);
-        st = fromWrapper->fetchRawBody(*r);
-        if (st) {
-            targetMail->storeMessage(st->Content(),st->Length(),targetFolder);
-            delete st;
-        }
+    if (sels.newFolder() && !targetMail->createMbox(targetFolder)) {
+        QMessageBox::critical(0,tr("Error creating new Folder"),
+            tr("<center>Error while creating<br>new folder - breaking.</center>"));
+        return;
     }
+    qDebug("Targetfolder: %s",targetFolder.latin1());
+    qDebug("Fromfolder: %s",fromFolder->getName().latin1());
+    fromWrapper->mvcpAllMails(fromFolder,targetFolder,targetMail,sels.moveMails());
+    refreshCurrent();
 }
 
 /**

@@ -31,6 +31,7 @@ public:
     virtual void answeredMail(const RecMail&mail);
     virtual int deleteAllMail(const Folder*folder);
     virtual void storeMessage(const char*msg,size_t length, const QString&folder);
+    virtual void mvcpAllMails(Folder*fromFolder,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
 
     virtual RecBody fetchBody(const RecMail&mail);
     virtual QString fetchTextPart(const RecMail&mail,const RecPart&part);

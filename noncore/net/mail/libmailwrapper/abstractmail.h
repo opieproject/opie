@@ -35,6 +35,8 @@ public:
     virtual int deleteMbox(const Folder*)=0;
     virtual void storeMessage(const char*msg,size_t length, const QString&folder)=0;
 
+    virtual void mvcpAllMails(Folder*fromFolder,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
+
     virtual void cleanMimeCache(){};    
     /* mail box methods */
     /* parameter is the box to create.

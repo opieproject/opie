@@ -16,6 +16,8 @@
 #define PIC_OUTBOXFOLDER    "mail/outbox"
 #define PIC_LOCALFOLDER     "mail/localfolder"
 
+#define PIC_OFFLINE         "mail/notconnected"
+
 #define ICON_COMPOSEMAIL    QIconSet( Resource::loadPixmap( PIC_COMPOSEMAIL ) ) 
 #define ICON_SENDQUEUED     QIconSet( Resource::loadPixmap( PIC_SENDQUEUED ) ) 
 #define ICON_SHOWFOLDERS    QIconSet( Resource::loadPixmap( PIC_SHOWFOLDERS ) ) 
@@ -30,6 +32,7 @@
 #define PIXMAP_MBOXFOLDER   QPixmap( Resource::loadPixmap( PIC_MBOXFOLDER ) )
 #define PIXMAP_OUTBOXFOLDER QPixmap( Resource::loadPixmap( PIC_OUTBOXFOLDER) )
 #define PIXMAP_LOCALFOLDER  QPixmap( Resource::loadPixmap( PIC_LOCALFOLDER) )
+#define PIXMAP_OFFLINE      QPixmap( Resource::loadPixmap( PIC_OFFLINE) )
 
 #define IMAP_PORT           "143"
 #define IMAP_SSL_PORT       "993"
