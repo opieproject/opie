@@ -45,7 +45,7 @@ short AUSB::generateFileEmbedded( SystemFile & SF,
       // generate mapping stanza for this interface
       SF << "  pre-up " 
          << QPEApplication::qpeDir() 
-         << "bin/setmacaddress.sh " 
+         << "bin/NS2SetMac.sh " 
          << NIC 
          << " || true" 
          << endl;

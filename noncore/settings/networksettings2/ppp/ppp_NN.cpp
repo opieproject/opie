@@ -4,6 +4,12 @@
 #include "ppp_NN.h"
 #include "ppp_NNI.h"
 
+#ifndef MYPLUGIN
+
+#include "netnodeinterface.h"
+
+#endif
+
 QStringList * PPPNetNode::ProperFiles = 0;
 
 static const char * PPPNeeds[] = 
@@ -78,8 +84,17 @@ void PPPNetNode::setSpecificAttribute( QString & , QString & ) {
 void PPPNetNode::saveSpecificAttribute( QTextStream & ) {
 }
 
+#ifdef MYPLUGIN 
+
 extern "C" {
 void create_plugin( QList<ANetNode> & PNN ) {
       PNN.append( new PPPNetNode() );
 }
+
+#else
+
+OPIE_NS2_PLUGIN( NetNodeInterface<PPPNetNode> )
+
+#endif
+
 }

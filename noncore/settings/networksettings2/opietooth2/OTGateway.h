@@ -195,6 +195,6 @@ private :
       PeerVector      AllPeers;
       LinkKeyArray    AllKeys;
 };
-};
+}
 
 #endif

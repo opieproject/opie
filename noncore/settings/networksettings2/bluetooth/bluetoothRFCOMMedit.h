@@ -2,7 +2,6 @@
 #include "bluetoothRFCOMMGUI.h"
 
 #include <Opietooth.h>
-using namespace Opietooth2;
 
 class BluetoothRFCOMMEdit  : public BluetoothRFCOMMGUI {
 
@@ -15,8 +14,8 @@ public :
     void showData( BluetoothRFCOMMData & Data );
     bool commit( BluetoothRFCOMMData & Data );
 
-    bool Modified;
-    OTGateway * OT;
+    bool                    Modified;
+    Opietooth2::OTGateway * OT;
 
 public slots :
 

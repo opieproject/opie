@@ -174,5 +174,5 @@ private slots:
 
 };
 
-};
+}
 #endif

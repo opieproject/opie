@@ -4,6 +4,10 @@
 #include <resources.h>
 #include "bluetoothBNEPrun.h"
 
+using Opietooth2::OTGateway;
+using Opietooth2::OTPANConnection;
+using Opietooth2::PANConnectionVector;
+
 BluetoothBNEPRun::BluetoothBNEPRun( ANetNodeInstance * NNI, 
                   BluetoothBNEPData & D ) : 
                   RuntimeInfo( NNI ),

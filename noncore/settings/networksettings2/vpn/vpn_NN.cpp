@@ -1,6 +1,12 @@
 #include "vpn_NN.h"
 #include "vpn_NNI.h"
 
+#ifndef MYPLUGIN
+
+#include "netnodeinterface.h"
+
+#endif
+
 static const char * VPNNeeds[] = 
     { 0
     };
@@ -47,8 +53,17 @@ void VPNNetNode::setSpecificAttribute( QString & , QString & ) {
 void VPNNetNode::saveSpecificAttribute( QTextStream & ) {
 }
 
+#ifdef MYPLUGIN 
+
 extern "C" {
 void create_plugin( QList<ANetNode> & PNN ) {
       PNN.append( new VPNNetNode() );
 }
+
+#else
+
+OPIE_NS2_PLUGIN(  NetNodeInterface<VPNNetNode> )
+
+#endif
+
 }

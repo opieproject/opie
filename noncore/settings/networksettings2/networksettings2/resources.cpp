@@ -4,13 +4,19 @@
 #include <pwd.h>
 #include <qpixmap.h>
 #include <qdir.h>
+#include <qmessagebox.h>
+
 #include <qpe/qlibrary.h>
 #include <qpe/qpeapplication.h>
+
 #include <opie2/odebug.h>
+#include <opie2/opluginloader.h>
+
 #include <qtopia/resource.h>
 
 #include "netnode.h"
 #include "resources.h"
+#include "netnodeinterface.h"
 
 #define PLUGINDIR "plugins/networksettings2"
 #define ICONDIR "/pics/networksettings2/"
@@ -26,6 +32,9 @@ TheNSResources::TheNSResources( void ) : NodeTypeNameMap(),
     detectCurrentUser();
 
     // load available netnodes
+
+#ifdef MYPLUGIN
+
     findAvailableNetNodes(QPEApplication::qpeDir() + PLUGINDIR );
 
     // compile provides and needs lists
@@ -66,6 +75,52 @@ TheNSResources::TheNSResources( void ) : NodeTypeNameMap(),
       }
     }
 
+#else
+
+    Plugins = 0;
+    findAvailableNetNodes();
+
+    // compile provides and needs lists
+    { const char ** NeedsRun;
+      QDictIterator<ANetNode> OuterIt( AllNodeTypes );
+      bool Done;
+
+      for ( ; OuterIt.current(); ++OuterIt ) {
+        // find needs list
+        ANetNode::NetNodeList * NNLP = new ANetNode::NetNodeList;
+        ANetNode::NetNodeList & NNL = *(NNLP);
+
+        // must iterate this way to avoid duplication pointers
+        for ( QDictIterator<ANetNode> InnerIt( AllNodeTypes );
+              InnerIt.current(); ++InnerIt ) {
+
+          if( InnerIt.current() == OuterIt.current() )
+            // avoid recursive 
+            continue;
+
+          const char ** Provides = InnerIt.current()->provides();
+          NeedsRun = OuterIt.current()->needs();
+
+          for( ; *NeedsRun; NeedsRun ++ ) {
+            const char ** PRun;
+            PRun = Provides;
+            for( ; *PRun; PRun ++ ) {
+              if( strcmp( *PRun, *NeedsRun ) == 0 ) {
+                // inner provides what outer needs
+                NNL.resize( NNL.size() + 1 );
+                NNL[NNL.size()-1] = InnerIt.current();
+                Done = 1; // break from 2 loops
+                break;
+              }
+            }
+          }
+        }
+        OuterIt.current()->setAlternatives( NNLP );
+      }
+    }
+
+#endif
+
     // define built in Node types to Description map
     addNodeType( "device", tr( "Network Device" ),
          tr( "<p>Devices that can handle IP packets</p>" ) );
@@ -84,7 +139,15 @@ TheNSResources::TheNSResources( void ) : NodeTypeNameMap(),
 }
 
 TheNSResources::~TheNSResources( void ) {
+
+#ifndef MYPLUGINS
+    if( Plugins ) {
+      delete Plugins;
+      delete PluginManager;
+    }
+#endif
     delete TheSystem;
+
 }
 
 void TheNSResources::addNodeType( const QString & ID, 
@@ -116,6 +179,7 @@ void TheNSResources::busy( bool ) {
 */
 }
 
+#ifdef MYPLUGIN
 /**
  * Load all modules that are found in the path
  * @param path a directory that is scaned for any plugins that can be loaded
@@ -158,27 +222,6 @@ void TheNSResources::findAvailableNetNodes(const QString &path){
       }
       ++it;
     }
-}
-
-// used to find unique connection number
-int TheNSResources::assignConnectionNumber( void ) {
-      bool found = 1;
-      for( int trial = 0; ; trial ++ ) {
-        found = 1; 
-        for( QDictIterator<NodeCollection> it(ConnectionsMap);
-             it.current();
-             ++it ) {
-          if( it.current()->number() == trial ) {
-            found = 0;
-            break;
-          }
-        }
-
-        if( found ) {
-          Log(("Assign profile number %d\n", trial ));
-          return trial;
-        }
-      }
 }
 
 /**
@@ -225,6 +268,100 @@ bool TheNSResources::loadNetNode(
     }
 
     return 1;
+}
+
+#else
+
+void TheNSResources::findAvailableNetNodes( void ){
+
+    Plugins = new OPluginLoader( "networksettings2" );
+    Plugins->setAutoDelete( true );
+
+    PluginManager = new OPluginManager( Plugins );
+    PluginManager->load();
+
+    if( Plugins->isInSafeMode() ) {
+      QMessageBox::information(
+            0, 
+            tr( "Today Error"),
+            tr( "<qt>The plugin '%1' caused Today to crash."
+                " It could be that the plugin is not properly"
+                " installed.<br>Today tries to continue loading"
+                " plugins.</qt>" )
+             .arg( PluginManager->crashedPlugin().name()));
+    }
+
+    // Get All Plugins
+    OPluginLoader::List allplugins = Plugins->filtered();
+
+    for( OPluginLoader::List::Iterator it = allplugins.begin(); 
+         it != allplugins.end(); 
+         ++it ) {
+
+      // check if this plugin supports the proper interface
+      NetNodeInterface * interface = 
+        Plugins->load<NetNodeInterface>( *it, IID_NetworkSettings2 );
+
+      if( ! interface ) {
+        Log(( "Plugin %s from %s does not support proper interface\n", 
+           it->name().latin1(), it->path().latin1() ));
+        continue;
+      }
+
+      // add the nodes in this plugin to the dictionary
+      { QList<ANetNode> PNN;
+
+        interface->create_plugin( PNN );
+
+        if( PNN.isEmpty() ) {
+          Log(( "Plugin %s from %s does offer any nodes\n", 
+             it->name().latin1(), it->path().latin1() ));
+          delete interface;
+          continue;
+        }
+
+        // merge this node with global node
+        for( QListIterator<ANetNode> it(PNN);
+             it.current();
+             ++it ) {
+          AllNodeTypes.insert( it->current()->name(), it->current() );
+        }
+      }
+
+      // load the translation 
+      QTranslator *trans = new QTranslator(qApp);
+      QString fn = QPEApplication::qpeDir()+
+                "/i18n/"+lang+"/"+ it->name() + ".qm";
+
+      if( trans->load( fn ) )
+          qApp->installTranslator( trans );
+      else
+          delete trans;
+    }
+
+}
+
+#endif
+
+// used to find unique connection number
+int TheNSResources::assignConnectionNumber( void ) {
+      bool found = 1;
+      for( int trial = 0; ; trial ++ ) {
+        found = 1; 
+        for( QDictIterator<NodeCollection> it(ConnectionsMap);
+             it.current();
+             ++it ) {
+          if( it.current()->number() == trial ) {
+            found = 0;
+            break;
+          }
+        }
+
+        if( found ) {
+          Log(("Assign profile number %d\n", trial ));
+          return trial;
+        }
+      }
 }
 
 QPixmap TheNSResources::getPixmap( const QString & QS ) {

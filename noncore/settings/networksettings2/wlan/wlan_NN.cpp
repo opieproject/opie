@@ -2,6 +2,12 @@
 #include "wlan_NN.h"
 #include "wlan_NNI.h"
 
+#ifndef MYPLUGIN
+
+#include "netnodeinterface.h"
+
+#endif
+
 static const char * WLanNeeds[] = 
     { 0
     };
@@ -63,8 +69,17 @@ void WLanNetNode::saveSpecificAttribute( QTextStream & TS ) {
          << endl;
 }
 
+#ifdef MYPLUGIN 
+
 extern "C" {
 void create_plugin( QList<ANetNode> & PNN ) {
       PNN.append( new WLanNetNode() );
 }
+
+#else
+
+OPIE_NS2_PLUGIN( NetNodeInterface<WLanNetNode> )
+
+#endif
+
 }

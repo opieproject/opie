@@ -4,7 +4,9 @@
 #include <OTGateway.h>
 #include "bluetoothRFCOMMrun.h"
 
-using namespace Opietooth2;
+using Opietooth2::OTGateway;
+using Opietooth2::OTDevice;
+using Opietooth2::OTDeviceAddress;
 
 BluetoothRFCOMMRun::~BluetoothRFCOMMRun( void ) {
       if( OT ) {

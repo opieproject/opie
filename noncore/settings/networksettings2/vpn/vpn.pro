@@ -1,5 +1,5 @@
 TEMPLATE        = lib
-CONFIG          += qt warn_on release
+CONFIG          += qt warn_on release plugin
 DESTDIR         = $(OPIEDIR)/plugins/networksettings2
 HEADERS		= vpn_NN.h \
                   vpn_NNI.h \

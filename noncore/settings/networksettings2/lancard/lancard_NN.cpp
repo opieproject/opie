@@ -1,6 +1,12 @@
 #include "lancard_NN.h"
 #include "lancard_NNI.h"
 
+#ifndef MYPLUGIN
+
+#include "netnodeinterface.h"
+
+#endif
+
 static const char * LanCardNeeds[] = 
     { 0
     };
@@ -70,8 +76,17 @@ void LanCardNetNode::saveSpecificAttribute( QTextStream & TS) {
       }
 }
 
+#ifdef MYPLUGIN 
+
 extern "C" {
 void create_plugin( QList<ANetNode> & PNN ) {
       PNN.append( new LanCardNetNode() );
 }
+
+#else
+
+OPIE_NS2_PLUGIN( NetNodeInterface<LanCardNetNode> )
+
+#endif
+
 }

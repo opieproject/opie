@@ -2,7 +2,6 @@
 #include "bluetoothBNEPdata.h"
 
 #include <OTGateway.h>
-using namespace Opietooth2;
 
 class BluetoothBNEPRun  : public RuntimeInfo {
 
@@ -30,6 +29,6 @@ private :
       bool hasFreePANConnection( bool Grab = 0 );
 
       BluetoothBNEPData &         Data;
-      OTGateway *                 OT;
-      QRegExp Pat;
+      Opietooth2::OTGateway *     OT;
+      QRegExp                     Pat;
 };

@@ -228,5 +228,5 @@ private:
       OTGateway *   OT;
 };
 
-};
+}
 #endif

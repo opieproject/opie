@@ -11,9 +11,9 @@ namespace Opie {
 
     class OLedBox;
 
-  };
+  }
 
-};
+}
 
 #include <OTSniffGUI.h>
 namespace Opietooth2 {
@@ -51,7 +51,7 @@ private :
       OTGateway *       OT;
       MyProcess *       HciDump;
 };
-};
+}
 
 #include <OTPairingGUI.h>
 
@@ -80,7 +80,7 @@ private :
       OTIcons *         Icons;
       OTGateway *       OT;
 };
-};
+}
 
 #include <OTScanGUI.h>
 
@@ -158,7 +158,7 @@ private :
       OTPeer *          SelectedPeer;
       int               SelectedChannel;
 };
-};
+}
 
 #include <OTManageGUI.h>
 namespace Opietooth2 {
@@ -196,7 +196,7 @@ private :
       OTGateway *       OT;
       OTInquiry *       Scanning;
 };
-};
+}
 
 #include <OTMainGUI.h>
 
@@ -234,5 +234,5 @@ private :
       OTGateway *       OT;
       QDialog *         SnifWindow;
 };
-};
+}
 #endif

@@ -4,6 +4,12 @@
 #include "GPRS_NN.h"
 #include "GPRS_NNI.h"
 
+#ifndef MYPLUGIN
+
+#include "netnodeinterface.h"
+
+#endif
+
 static const char * GPRSNeeds[] = 
     { "GPRS",
       0
@@ -73,8 +79,17 @@ QStringList GPRSNetNode::properFiles( void ) {
       return SL;
 }
 
+#ifdef MYPLUGIN 
+
 extern "C" {
 void create_plugin( QList<ANetNode> & PNN ) {
       PNN.append( new GPRSNetNode() );
 }
+
+#else
+
+OPIE_NS2_PLUGIN(  NetNodeInterface<GPRSNetNode> )
+
+#endif
+
 }

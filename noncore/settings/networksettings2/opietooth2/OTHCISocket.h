@@ -111,6 +111,6 @@ private slots:
 
 };
 
-};
+}
 
 #endif

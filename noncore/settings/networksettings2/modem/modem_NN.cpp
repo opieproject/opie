@@ -1,6 +1,12 @@
 #include "modem_NN.h"
 #include "modem_NNI.h"
 
+#ifndef MYPLUGIN
+
+#include "netnodeinterface.h"
+
+#endif
+
 static const char * ModemNeeds[] = 
     { "line",
       0
@@ -48,8 +54,17 @@ void ModemNetNode::setSpecificAttribute( QString & , QString & ) {
 void ModemNetNode::saveSpecificAttribute( QTextStream & ) {
 }
 
+#ifdef MYPLUGIN 
+
 extern "C" {
 void create_plugin( QList<ANetNode> & PNN ) {
       PNN.append( new ModemNetNode() );
 }
+
+#else
+
+OPIE_NS2_PLUGIN( NetNodeInterface<ModemNetNode> )
+
+#endif
+
 }

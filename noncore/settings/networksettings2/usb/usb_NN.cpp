@@ -2,6 +2,12 @@
 #include "usb_NN.h"
 #include "usb_NNI.h"
 
+#ifndef MYPLUGIN
+
+#include "netnodeinterface.h"
+
+#endif
+
 static const char * USBNeeds[] = 
     { 0
     };
@@ -55,8 +61,17 @@ void USBNetNode::setSpecificAttribute( QString & , QString & ) {
 void USBNetNode::saveSpecificAttribute( QTextStream & ) {
 }
 
+#ifdef MYPLUGIN 
+
 extern "C" {
 void create_plugin( QList<ANetNode> & PNN ) {
       PNN.append( new USBNetNode() );
 }
+
+#else
+
+OPIE_NS2_PLUGIN( NetNodeInterface<USBNetNode> )
+
+#endif
+
 }

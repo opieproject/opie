@@ -16,8 +16,8 @@ class QTimerEvent;
 namespace Opie {
     namespace Core {
        class OProcess;
-    };
-};
+    }
+}
 
 namespace Opietooth2 {
 
@@ -111,6 +111,6 @@ namespace Opietooth2 {
 	OTGateway *   OT;
 	bool          NeedsAttach;
     };
-};
+}
 
 #endif

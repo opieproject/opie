@@ -2,7 +2,6 @@
 #include "bluetoothRFCOMMdata.h"
 
 #include <OTGateway.h>
-using namespace Opietooth2;
 
 class BluetoothRFCOMMRun  : public RuntimeInfo {
 
@@ -27,7 +26,7 @@ private :
 
       int deviceNrOfConnection( void );
       RFCOMMChannel * getChannel( void );
-      BluetoothRFCOMMData * Data;
+      BluetoothRFCOMMData *   Data;
       Opietooth2::OTGateway * OT;
-      int       DeviceNr; // cached from detection
+      int                     DeviceNr; // cached from detection
 };
