@@ -40,13 +40,15 @@ void StatusMail::initAccounts(QList<Account>&accounts)
             current = AbstractMail::getWrapper(pop3);
             connectionList.append(current);
             current->statusFolder(currentStat);
-            currentPop3Stat.message_count+=currentStat.message_unseen;
-            currentPop3Stat.message_count+=currentStat.message_recent;
             currentPop3Stat.message_count+=currentStat.message_count;
         }
         current->logout();
     }
-    lastPop3Stat = currentPop3Stat;
+    qDebug("Pop3 init count: %i",currentPop3Stat.message_count);
+    currentPop3Stat.message_recent = currentPop3Stat.message_unseen = 0;
+    lastPop3Stat.message_unseen = currentPop3Stat.message_unseen;
+    lastPop3Stat.message_recent = currentPop3Stat.message_recent;
+    lastPop3Stat.message_count = currentPop3Stat.message_count;
 }
 
 void StatusMail::reset_status()

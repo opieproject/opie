@@ -70,7 +70,7 @@ void MailApplet::slotClicked() {
         device->setLedState( led, Led_Off );
     }
 
-    // m_statusMails->reset_status();
+    if (m_statusMail) m_statusMail->reset_status();
 }
 
 void MailApplet::startup() {

@@ -333,3 +333,12 @@ void encodedString::setContent(char*nContent,int nSize)
     content = nContent;
     size = nSize;
 }
+
+folderStat&folderStat::operator=(const folderStat&old)
+{
+    message_count = old.message_count;
+    message_unseen = old.message_unseen;
+    message_recent = old.message_recent;
+    return *this;
+}
+
