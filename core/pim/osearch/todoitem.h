@@ -30,6 +30,7 @@ public:
     virtual QIntDict<QString> actions();
 
 private:
+    void setIcon();
     OTodo *_todo;
 
 };

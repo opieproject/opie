@@ -13,6 +13,8 @@
 #include "todoitem.h"
 
 #include <opie/otodo.h>
+#include <qpixmap.h>
+#include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
 TodoItem::TodoItem(OListViewItem* parent, OTodo *todo)
@@ -20,6 +22,7 @@ TodoItem::TodoItem(OListViewItem* parent, OTodo *todo)
 {
 	_todo = todo;
 	setText( 0, todo->toShortText() );
+	setIcon();
 }
 
 TodoItem::~TodoItem()
@@ -49,4 +52,28 @@ QIntDict<QString> TodoItem::actions()
 	result.insert( 0, new QString( QObject::tr("show") ) );
 	result.insert( 1, new QString( QObject::tr("edit") ) );
 	return result;
+}
+
+void TodoItem::setIcon()
+{
+	QPixmap icon;
+	switch ( _todo->lastHitField() ) {
+	case -1:
+		icon = Resource::loadPixmap( "reset" );
+		break;
+	case OTodo::Description:
+ 	case OTodo::Summary:
+		icon = Resource::loadPixmap( "osearch/personal" );
+ 		break;
+	case OTodo::Priority:
+		icon = Resource::loadPixmap( "todo/priority1" );
+ 		break;
+ 	case OTodo::HasDate:
+		icon = Resource::loadPixmap( "osearch/clock" );
+ 		break;
+	default:
+		icon = Resource::loadPixmap( "DocsIcon" );
+		break;
+	}
+	setPixmap( 0, icon );
 }
