@@ -92,9 +92,9 @@ void OxydataTable::paintCell(  QPainter *p, int row, int col, const QRect &cr, b
     if ( itm ) 
     {
         if ( row%2 )
-            colgrp.setColor(  QColorGroup::Base, QColor( cyan ) );
+            colgrp.setColor(  QColorGroup::Base, QColor( 180,200,210 ) );
         else
-            colgrp.setColor(  QColorGroup::Base, QColor( white ) );
+            colgrp.setColor(  QColorGroup::Base, QColor( 230,235,235 ) );
         p->save();
         itm->paint( p, colgrp, cr, selected );
         p->restore();

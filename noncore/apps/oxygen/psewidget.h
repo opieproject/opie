@@ -28,6 +28,7 @@ class PSEWidget : public QWidget
         QGridLayout *maingrid;
         
         void position( int, int&, int& );
+        QColor PSEColor( QString );
 
     public slots:
         void slotShowElement(QString);

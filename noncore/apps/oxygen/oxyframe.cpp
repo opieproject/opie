@@ -14,10 +14,10 @@
 OxyFrame::OxyFrame(QWidget *parent, const char *name) : QFrame(parent,name)
 {
     N = name;
-    this->setFrameStyle( QFrame::Panel );
-    this->setLineWidth( 2 );
-    this->setFrameShadow( QFrame::Raised );
-    this->setBackgroundColor( QColor( green ) );
+    this->setFrameStyle( QFrame::Box );
+    this->setLineWidth( 0 );
+    this->setMidLineWidth( 1 );
+    this->setFrameShadow( QFrame::Sunken );
 }
 
 void OxyFrame::mousePressEvent (  QMouseEvent * e ){

@@ -23,13 +23,18 @@ PSEWidget::PSEWidget() : QWidget()
     
     QGridLayout *grid = new QGridLayout( 18,10 );
     int h=0, v=0;
+    
+    Config configobj( "oxygendata" );
     for( int n = 0 ; n < 118 ; n++ )
     {
+        configobj.setGroup( QString::number( n+1 ));
+        
         position( n+1,h,v );
         QList<OxyFrame> PSEframe;
         PSEframe.append( new OxyFrame( this , QString::number(n) ) );
         grid->addWidget( PSEframe.current() , v/40+1 , h/40 );
         PSEframe.current()->setMinimumHeight( 11 );
+        PSEframe.current()->setPalette(  QPalette(  PSEColor( configobj.readEntry( "Block" )  ) ) );
         connect( PSEframe.current(), SIGNAL( num(QString) ), this, SLOT( slotShowElement(QString) ));
     }
     
@@ -39,6 +44,16 @@ PSEWidget::PSEWidget() : QWidget()
     vlay->addLayout( grid );
     vlay->addWidget( oxyDW );
 }
+
+QColor PSEWidget::PSEColor( QString block )
+{
+    QColor c;
+    if ( block == "s" ) c.setRgb( 213 , 233 , 231 );
+    else if ( block == "d" ) c.setRgb( 200,230,160 );
+    else if ( block == "p" ) c.setRgb( 238,146,138 );
+    else if ( block == "f" ) c.setRgb( 190 , 190 , 190 );
+    return  c;
+};
 
 void PSEWidget::slotShowElement(QString number)
 { 
