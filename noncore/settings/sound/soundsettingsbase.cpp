@@ -83,163 +83,60 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     QPixmap image1( ( const char** ) image1_data );
     if ( !name )
   setName( "SoundSettingsBase" );
-    resize( 255, 301 ); 
     setCaption( tr( "Vmemo Settings" ) );
 
     SoundSettingsBaseLayout = new QGridLayout( this ); 
-    SoundSettingsBaseLayout->setSpacing( 6 );
-    SoundSettingsBaseLayout->setMargin( 11 );
+    SoundSettingsBaseLayout->setSpacing( 4 );
+    SoundSettingsBaseLayout->setMargin( 6 );
 
-    GroupBox3 = new QGroupBox( this, "GroupBox3" );
-    GroupBox3->setFrameShape( QGroupBox::Box );
-    GroupBox3->setFrameShadow( QGroupBox::Sunken );
-    GroupBox3->setTitle( tr( "Levels" ) );
-    GroupBox3->setColumnLayout(0, Qt::Vertical );
-    GroupBox3->layout()->setSpacing( 0 );
-    GroupBox3->layout()->setMargin( 0 );
-    GroupBox3Layout = new QVBoxLayout( GroupBox3->layout() );
-    GroupBox3Layout->setAlignment( Qt::AlignTop );
-    GroupBox3Layout->setSpacing( 2 );
-    GroupBox3Layout->setMargin( 2 );
+    stereoCheckBox = new QCheckBox( this, "stereoCheckBox" );
+    stereoCheckBox->setText( tr( "Stereo" ) );
+    SoundSettingsBaseLayout->addMultiCellWidget(stereoCheckBox , 0, 0, 0, 0 );
 
-    Layout10 = new QVBoxLayout; 
-    Layout10->setSpacing( 2 );
-    Layout10->setMargin( 2 );
+    sixteenBitCheckBox = new QCheckBox( this, "sixteenBitCheckBox" );
+    sixteenBitCheckBox->setText( tr( "16 bit" ) );
+    SoundSettingsBaseLayout->addMultiCellWidget( sixteenBitCheckBox , 0, 0, 1, 1 );
 
-    Layout16 = new QHBoxLayout; 
-    Layout16->setSpacing( 2 );
-    Layout16->setMargin( 2 );
-    QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
-    Layout16->addItem( spacer );
+    AlertCheckBox = new QCheckBox( this, "AlertCheckBox" );
+    AlertCheckBox->setText( tr( "Visual Alerts" ) );
+    SoundSettingsBaseLayout->addMultiCellWidget( AlertCheckBox  , 0, 0, 2, 2 );
 
-    PixmapLabel1_2 = new QLabel( GroupBox3, "PixmapLabel1_2" );
-    PixmapLabel1_2->setPixmap( image0 );
-    PixmapLabel1_2->setScaledContents( FALSE );
-    Layout16->addWidget( PixmapLabel1_2 );
+    QSpacerItem* spacer0 = new QSpacerItem( 20, 20,QSizePolicy::Expanding, QSizePolicy::Expanding );
+    SoundSettingsBaseLayout->addItem( spacer0, 0, 3 );
+   
+    sampleRateLabel = new QLabel(this, "sampleRateLabel" );
+    sampleRateLabel->setText( tr( "Sample Rate:" ) );
+    SoundSettingsBaseLayout->addMultiCellWidget(  sampleRateLabel  , 1, 1, 0, 0 );
 
-    TextLabel1_2 = new QLabel( GroupBox3, "TextLabel1_2" );
-    TextLabel1_2->setText( tr( "Loud" ) );
-    Layout16->addWidget( TextLabel1_2 );
-    QSpacerItem* spacer_2 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
-    Layout16->addItem( spacer_2 );
-    Layout10->addLayout( Layout16 );
-
-    Layout13 = new QHBoxLayout; 
-    Layout13->setSpacing( 2 );
-    Layout13->setMargin( 2 );
-
-    volLabel = new QLabel( GroupBox3, "volLabel" );
-    volLabel->setText( tr( "Output" ) );
-    Layout13->addWidget( volLabel );
-    QSpacerItem* spacer_3 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
-    Layout13->addItem( spacer_3 );
-
-    micLabel = new QLabel( GroupBox3, "micLabel" );
-    micLabel->setText( tr( "Mic" ) );
-    Layout13->addWidget( micLabel );
-    QSpacerItem* spacer_4 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
-    Layout13->addItem( spacer_4 );
-    Layout10->addLayout( Layout13 );
-
-    Layout12 = new QHBoxLayout; 
-    Layout12->setSpacing( 2 );
-    Layout12->setMargin( 2 );
-
-    volume = new QSlider( GroupBox3, "volume" );
-    volume->setMaxValue( 100 );
-    volume->setValue( 50 );
-    volume->setOrientation( QSlider::Vertical );
-    volume->setTickmarks( QSlider::Right );
-    volume->setTickInterval( 5 );
-    Layout12->addWidget( volume );
-    QSpacerItem* spacer_5 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
-    Layout12->addItem( spacer_5 );
-
-    mic = new QSlider( GroupBox3, "mic" );
-    mic->setMaxValue( 100 );
-    mic->setValue( 50 );
-    mic->setOrientation( QSlider::Vertical );
-    mic->setTickmarks( QSlider::Right );
-    mic->setTickInterval( 5 );
-    Layout12->addWidget( mic );
-    QSpacerItem* spacer_6 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
-    Layout12->addItem( spacer_6 );
-    Layout10->addLayout( Layout12 );
-
-    Layout17 = new QHBoxLayout; 
-    Layout17->setSpacing( 2 );
-    Layout17->setMargin( 2 );
-    QSpacerItem* spacer_7 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
-    Layout17->addItem( spacer_7 );
-
-    PixmapLabel2_2 = new QLabel( GroupBox3, "PixmapLabel2_2" );
-    PixmapLabel2_2->setPixmap( image1 );
-    PixmapLabel2_2->setScaledContents( FALSE );
-    Layout17->addWidget( PixmapLabel2_2 );
-
-    TextLabel2_2 = new QLabel( GroupBox3, "TextLabel2_2" );
-    TextLabel2_2->setText( tr( "Silent" ) );
-    Layout17->addWidget( TextLabel2_2 );
-    QSpacerItem* spacer_8 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
-    Layout17->addItem( spacer_8 );
-    Layout10->addLayout( Layout17 );
-    GroupBox3Layout->addLayout( Layout10 );
-
-    SoundSettingsBaseLayout->addWidget( GroupBox3, 0, 0 );
-
-    Layout12_2 = new QVBoxLayout; 
-    Layout12_2->setSpacing( 2 );
-    Layout12_2->setMargin( 2 );
-
-    GroupBox1 = new QGroupBox( this, "GroupBox1" );
-    GroupBox1->setTitle( tr( "Vmemo" ) );
-
-    QWidget* privateLayoutWidget = new QWidget( GroupBox1, "Layout11" );
-    privateLayoutWidget->setGeometry( QRect( 5, 16, 96, 230 ) ); 
-
-    Layout11 = new QVBoxLayout( privateLayoutWidget ); 
-    Layout11->setSpacing( 2 );
-    Layout11->setMargin( 0 );
-
-    sampleRateLabel = new QLabel( privateLayoutWidget, "sampleRateLabel" );
-    sampleRateLabel->setText( tr( "Sample Rate" ) );
-    Layout11->addWidget( sampleRateLabel );
-
-    sampleRate = new QComboBox( FALSE, privateLayoutWidget, "sampleRate" );
+    sampleRate = new QComboBox( FALSE,this, "sampleRate" );
     sampleRate->insertItem( tr( "8000" ) );
     sampleRate->insertItem( tr( "11025" ) );
     sampleRate->insertItem( tr( "22050" ) );
     sampleRate->insertItem( tr( "33075" ) );
     sampleRate->insertItem( tr( "44100" ) );
-    sampleRate->setFixedWidth(90);
-    Layout11->addWidget( sampleRate );
+//    sampleRate->setFixedWidth(90);
+    SoundSettingsBaseLayout->addMultiCellWidget(  sampleRate, 2, 2, 0, 2 );
 
-    stereoCheckBox = new QCheckBox( privateLayoutWidget, "stereoCheckBox" );
-    stereoCheckBox->setText( tr( "Stereo" ) );
-    Layout11->addWidget( stereoCheckBox );
+//      QSpacerItem* spacer = new QSpacerItem( 20, 20,QSizePolicy::Expanding, QSizePolicy::Expanding );
+//      SoundSettingsBaseLayout->addItem( spacer, 1, 3 );
 
-    sixteenBitCheckBox = new QCheckBox( privateLayoutWidget, "sixteenBitCheckBox" );
-    sixteenBitCheckBox->setText( tr( "16 bit" ) );
-    Layout11->addWidget( sixteenBitCheckBox );
-
-    AlertCheckBox = new QCheckBox( privateLayoutWidget, "AlertCheckBox" );
-    AlertCheckBox->setText( tr( "Visual Alerts" ) );
-    Layout11->addWidget( AlertCheckBox );
-
-    TextLabel1 = new QLabel( privateLayoutWidget, "TextLabel1" );
-    TextLabel1->setText( tr( "Location:" ) );
-    Layout11->addWidget( TextLabel1 );
+    TextLabel1 = new QLabel( this, "TextLabel1" );
+    TextLabel1->setText( tr( "Recording Directory:" ) );
+    SoundSettingsBaseLayout->addMultiCellWidget( TextLabel1, 3, 3, 0, 0 );
 
 
-    LocationComboBox = new QComboBox( FALSE, privateLayoutWidget, "LocationComboBox" );
-    Layout11->addWidget( LocationComboBox );
+    LocationComboBox = new QComboBox( FALSE, this, "LocationComboBox" );
+    SoundSettingsBaseLayout->addMultiCellWidget(  LocationComboBox, 4, 4, 0, 2 );
+
+//      QSpacerItem* spacer1 = new QSpacerItem( 20, 20,QSizePolicy::Expanding, QSizePolicy::Expanding );
+//      SoundSettingsBaseLayout->addItem( spacer1, 2, 3 );
 
     QLabel *TextLabelKey;
-    TextLabelKey = new QLabel( privateLayoutWidget, "TextLabelKey" );
-    TextLabelKey->setText( tr( "Record Key:" ) );
-    Layout11->addWidget( TextLabelKey );
+    TextLabelKey = new QLabel( this, "TextLabelKey" );
+    TextLabelKey->setText( tr( "Recording Key:" ) );
+    SoundSettingsBaseLayout->addMultiCellWidget(TextLabelKey , 5, 5, 0, 0 );
 
-    keyComboBox = new QComboBox( FALSE, privateLayoutWidget, "keyComboBox" );
+    keyComboBox = new QComboBox( FALSE, this, "keyComboBox" );
     keyComboBox->insertItem( tr( "" ) );
     keyComboBox->insertItem( tr( "Taskbar Icon" ) );
     keyComboBox->insertItem( tr( "Key_Escape" ) );
@@ -249,37 +146,31 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     keyComboBox->insertItem( tr( "Key_Contacts" ) );
     keyComboBox->insertItem( tr( "Key_Menu" ) );
     keyComboBox->insertItem( tr( "Key_Mail" ) );
+    SoundSettingsBaseLayout->addMultiCellWidget( keyComboBox , 6, 6, 0, 2 );
 
-    Layout11->addWidget( keyComboBox );
+//      QSpacerItem* spacer2 = new QSpacerItem( 20, 20,QSizePolicy::Expanding, QSizePolicy::Expanding );
+//      SoundSettingsBaseLayout->addItem( spacer2, 3, 3 );
 
     QLabel *timeLimitLabel;
-    timeLimitLabel= new QLabel( privateLayoutWidget, "timeLimitLabel" );
-    timeLimitLabel->setText( tr( "Recording Limit:" ) );
-    Layout11->addWidget( timeLimitLabel );
+    timeLimitLabel= new QLabel( this, "timeLimitLabel" );
+    timeLimitLabel->setText( tr( "Recording Limit in seconds:" ) );
+    SoundSettingsBaseLayout->addMultiCellWidget(  timeLimitLabel  , 7, 7, 0, 0 );
 
-    timeLimitComboBox = new QComboBox( FALSE, privateLayoutWidget, "timeLimitComboBox" );
+    timeLimitComboBox = new QComboBox( FALSE, this, "timeLimitComboBox" );
     timeLimitComboBox->insertItem( tr( "30" ) );
     timeLimitComboBox->insertItem( tr( "20" ) );
     timeLimitComboBox->insertItem( tr( "15" ) );
     timeLimitComboBox->insertItem( tr( "10" ) );
     timeLimitComboBox->insertItem( tr( "5" ) );
+    timeLimitComboBox->insertItem( tr( "Unlimited" ) );
 
-    Layout11->addWidget(timeLimitComboBox);
-    QLabel *timeLimitLabel2;
-    timeLimitLabel2= new QLabel( privateLayoutWidget, "timeLimitLabel2" );
-    timeLimitLabel2->setText( tr( "seconds" ) );
-    Layout11->addWidget( timeLimitLabel2 );
-   
-    Layout12_2->addWidget( GroupBox1 );
-// //     touchsound = new QCheckBox( this, "touchsound" );
-// //     touchsound->setText( tr( "Screen sounds" ) );
-// //     Layout12_2->addWidget( touchsound );
+    SoundSettingsBaseLayout->addMultiCellWidget(timeLimitComboBox  , 8, 8, 0, 2);
 
-// //     keysound = new QCheckBox( this, "keysound" );
-// //     keysound->setText( tr( "Keyboard sounds" ) );
-// //     Layout12_2->addWidget( keysound );
+//      QSpacerItem* spacer3 = new QSpacerItem( 20, 20,QSizePolicy::Expanding, QSizePolicy::Expanding );
+//      SoundSettingsBaseLayout->addItem( spacer3, 4, 3 );
 
-    SoundSettingsBaseLayout->addLayout( Layout12_2, 0, 1 );
+      QSpacerItem* spacer4 = new QSpacerItem( 20, 20,QSizePolicy::Expanding, QSizePolicy::Expanding );
+      SoundSettingsBaseLayout->addItem( spacer4, 9, 0 );
 }
 
 /*  

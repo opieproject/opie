@@ -42,11 +42,6 @@ private slots:
  void setSizeLimitButton(const QString &);
  void setLocation(const QString &);
  void cleanUp();    
- void setVolume(int);
- void setMic(int); 
-
- void volumeChanged( bool muted );
- void micChanged( bool muted );
 };
 
 
