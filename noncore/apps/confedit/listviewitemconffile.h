@@ -25,7 +25,6 @@ public:
   void parseFile();
 	QString fileName();
   virtual void displayText();
-  /** No descriptions */
   void save();
 protected:
 private:

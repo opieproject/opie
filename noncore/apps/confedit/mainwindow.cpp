@@ -86,13 +86,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::setCurrent(QListViewItem *item)
 {
-	qDebug("MainWindow::setCurrent(");
 	if (!item) return;
- 	qDebug("cast ListViewItemConf");
  	ListViewItemConf *i = (ListViewItemConf*) item;
   if (!i) return;
   if (i->getType() == ListViewItemConf::File)
   {
+  	qDebug("start timer");
 	  popupTimer->start( 750, true );
   	editor->hide();
    	updateGeometry();
@@ -100,7 +99,6 @@ void MainWindow::setCurrent(QListViewItem *item)
     _fileItem = (ListViewItemConfFile*)item;
    	return;
   }else editor->show();
- 	qDebug("cast ListViewItemConfigEntry");
   _fileItem = 0;
  	_currentItem = (ListViewItemConfigEntry*)item;
   if (!_currentItem) return;
@@ -165,31 +163,6 @@ void MainWindow::showPopup()
   connect( popupAction, SIGNAL( activated() ),
 	   	this , SLOT( saveConfFile() ) );
 
-//  if ( !activePackage->installed() )
-//  {
-//	  popupMenu->insertItem( tr("Install to"), destsMenu );
-//  	QStringList dests = settings->getDestinationNames();
-//   	QString ad = settings->getDestinationName();
-//	  for (uint i = 0; i < dests.count(); i++ )
-//  	{		
-//	  	popupAction = new QAction( dests[i], QString::null, 0, this, 0 );
-//		  popupAction->addTo( destsMenu );
-//    	if ( dests[i] == ad && activePackage->toInstall() )
-//     	{
-//        popupAction->setToggleAction( true );
-//			  popupAction->setOn(true);
-//  		};
-//  	}
-//	  connect( destsMenu, SIGNAL( activated( int ) ),
-//		   this, SLOT( changePackageDest( int ) ) );
-//   }else{
-//   	popupAction = new QAction( tr("Remove"),QString::null,  0, this, 0 );
-//		popupAction->addTo( popupMenu );
-//  	connect( popupAction, SIGNAL( activated() ),
-//	   	this , SLOT( toggleProcess() ) );
-//   	popupAction = new QAction( tr("Reinstall"),QString::null,  0, this, 0 );
-//		popupAction->addTo( popupMenu );
-//  	popupAction->setEnabled( false );
-//   }
+
   popupMenu->popup( QCursor::pos() );
 }

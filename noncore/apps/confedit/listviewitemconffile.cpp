@@ -21,7 +21,6 @@ ListViewItemConfFile::ListViewItemConfFile(QFileInfo *file, QListView *parent)
 {
   confFileInfo = file;
   parseFile();
-  _changed = false;
   displayText();
 }
 
@@ -32,7 +31,7 @@ ListViewItemConfFile::~ListViewItemConfFile()
 
 void ListViewItemConfFile::displayText()
 {
-  setText(0,(_changed?"*":"*")+confFileInfo->fileName());	
+  setText(0,(_changed?"*":"")+confFileInfo->fileName());	
 }
 
 QString ListViewItemConfFile::fileName()
@@ -42,10 +41,7 @@ QString ListViewItemConfFile::fileName()
 
 void ListViewItemConfFile::parseFile()
 {
-	qDebug(  confFileInfo->absFilePath() );
   QFile confFile(confFileInfo->absFilePath());
-	qDebug(  confFileInfo->absFilePath() );
- // QString fileName = confFileInfo->fileName();
 	if(! confFile.open(IO_ReadOnly))
  		QMessageBox::critical(0,tr("Could not open"),tr("The file ")+confFileInfo->fileName()+tr(" could not be opened."),1,0);	
 	QTextStream t( &confFile );
@@ -64,7 +60,7 @@ void ListViewItemConfFile::parseFile()
     }else
     if ( s[0] == '[' && s[s.length()-1] == ']' )
    	{
-      qDebug("got group"+s);
+  //    qDebug("got group"+s);
       group = s.mid(1,s.length()-2);
       groupItem = new ListViewItemConfigEntry(this, group );
       insertItem( groupItem );
@@ -82,7 +78,22 @@ void ListViewItemConfFile::parseFile()
 
 void ListViewItemConfFile::save()
 {
-	qDebug("ListViewItemConfFile::save()");
+	if (!_changed) return;
+	QString backup = confFileInfo->absFilePath()+"~";
+	qDebug("make backup to "+backup);
+ 	QFile conf(confFileInfo->absFilePath());
+  QFile back(backup);
+
+  if (!conf.open(IO_ReadOnly)) return;
+  if (!back.open(IO_WriteOnly)) return;
+
+  #define SIZE 124
+  char buf[SIZE];
+  while (int c = conf.readBlock(buf, SIZE) ) back.writeBlock(buf,c);
+  conf.close();
+  back.close();
+ 	
+
 	qDebug("no saveing yet...");
  	unchanged();
 }

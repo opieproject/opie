@@ -36,7 +36,7 @@ void ListViewConfDir::readConfFiles()
 
 	confDir.setFilter( QDir::Files | QDir::NoSymLinks );
   confDir.setSorting( QDir::Name );
-
+  confDir.setNameFilter("*.conf");
   const QFileInfoList *list = confDir.entryInfoList();
   QFileInfoListIterator it( *list );
   QFileInfo *fi;
