@@ -1,17 +1,11 @@
 // device.cpp
 
 #include "device.h"
-#include "qtrec.h"
 
-#include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
 
-#include <qslider.h>
-#include <qmessagebox.h>
 
-#include <qfile.h>
-#include <qtextstream.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>

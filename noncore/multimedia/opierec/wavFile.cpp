@@ -2,8 +2,6 @@
 #include "wavFile.h"
 #include "qtrec.h"
 
-#include <qdatetime.h>
-#include <qstring.h>
 #include <qmessagebox.h>
 #include <qdir.h>
 
