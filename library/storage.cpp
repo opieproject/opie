@@ -111,7 +111,7 @@ void StorageInfo::update()
       if ( fs.left(7)=="/dev/hd" || fs.left(7)=="/dev/sd"
            || fs.left(8)=="/dev/mtd" || fs.left(9) == "/dev/mmcd"
            || fs.left( 14 ) == "/dev/mmc/part1"
-           || fs.left(5)=="tmpfs" )
+           || fs.left(5)=="tmpfs" || fs.left(9)=="/dev/root" )
       {
     n++;
     curdisks.append(fs);
@@ -164,6 +164,8 @@ void StorageInfo::update()
       else if ( disk.left(14) == "/dev/mtdblock/" )
     humanname = tr("Internal Storage") + " " + disk;
       else if ( disk.left(13) == "/dev/mtdblock" )
+    humanname = tr("Internal Storage") + " " + disk;
+      else if ( disk.left(9) == "/dev/root" )
     humanname = tr("Internal Storage") + " " + disk;
       else if ( disk.left(5) == "tmpfs" ) //ipaqs /mnt/ramfs
     humanname = tr("Internal Memory");
