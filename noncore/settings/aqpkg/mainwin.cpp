@@ -37,7 +37,7 @@ MainWindow :: MainWindow( QWidget *p, char *name )
     showMaximized();
 #endif
 
-    setCaption( "AQPkg - Package Manager" );
+    setCaption( tr( "AQPkg - Package Manager" ) );
 
     // Create our menu
     help = new QPopupMenu( this );
