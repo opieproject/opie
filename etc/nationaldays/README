@@ -1,0 +1,23 @@
+Config files for the nationalholiday plugin
+
+Format is simple:
+Standard-xml file. 
+It must always enclosed by
+<nationaldays>
+...
+</nationaldays>
+
+then a short description tag.
+<description value="german holidays"/>
+
+for example. It should be used later on.
+
+then a list of non-floating holidays follows, encapsulated with 
+<entries>
+...
+</entries>
+
+Each entry has the form 
+<entry date="M-D" name="description of holiday"/>
+
+floating holidays are not supported this moment.
