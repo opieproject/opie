@@ -1,5 +1,5 @@
   config OPIEPLAYER2
-    boolean "opieplayer2"
+    boolean "opieplayer2 (multimedia player based on libxine)"
     default "n"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBXINE_DEP
     comment "opieplayer2 requires libopie2core, libopie2ui and libxine"
