@@ -42,7 +42,6 @@ public:
     virtual void storeMessage(const char*msg,size_t length, const QString&folder){};
 
 protected:
-    RecMail *parseHeader( const char *header );
     RecBody parseMail( mailmessage * msg );
     QString parseMailboxList( mailimf_mailbox_list *list );
     QString parseMailbox( mailimf_mailbox *box );

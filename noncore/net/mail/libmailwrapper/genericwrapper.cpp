@@ -238,83 +238,6 @@ RecBody Genericwrapper::parseMail( mailmessage * msg )
     return body;
 }
 
-RecMail *Genericwrapper::parseHeader( const char *header )
-{
-    int err = MAILIMF_NO_ERROR;
-    size_t curTok = 0;
-    RecMail *mail = new RecMail();
-    mailimf_fields *fields = 0;
-    mailimf_references * refs = 0;
-    mailimf_keywords*keys = 0;
-    QString status;
-    QString value;
-    QBitArray mFlags(7);
-
-    err = mailimf_fields_parse( (char *) header, strlen( header ), &curTok, &fields );
-    for ( clistiter *current = clist_begin( fields->fld_list ); current != NULL; current = current->next ) {
-        mailimf_field *field = (mailimf_field *) current->data;
-        switch ( field->fld_type ) {
-            case MAILIMF_FIELD_FROM:
-                mail->setFrom( parseMailboxList( field->fld_data.fld_from->frm_mb_list ) );
-                break;
-            case MAILIMF_FIELD_TO:
-                mail->setTo( parseAddressList( field->fld_data.fld_to->to_addr_list ) );
-                break;
-            case MAILIMF_FIELD_CC:
-                mail->setCC( parseAddressList( field->fld_data.fld_cc->cc_addr_list ) );
-                break;
-            case MAILIMF_FIELD_BCC:
-                mail->setBcc( parseAddressList( field->fld_data.fld_bcc->bcc_addr_list ) );
-                break;
-            case MAILIMF_FIELD_SUBJECT:
-                mail->setSubject(convert_String( field->fld_data.fld_subject->sbj_value ) );
-                break;
-            case MAILIMF_FIELD_ORIG_DATE:
-                mail->setDate( parseDateTime( field->fld_data.fld_orig_date->dt_date_time ) );
-                break;
-            case MAILIMF_FIELD_MESSAGE_ID:
-                mail->setMsgid(QString(field->fld_data.fld_message_id->mid_value));
-                break;
-            case MAILIMF_FIELD_REFERENCES:
-                refs = field->fld_data.fld_references;
-                if (refs && refs->mid_list && clist_count(refs->mid_list)) {
-                    char * text = (char*)refs->mid_list->first->data;
-                    mail->setReplyto(QString(text));
-                }
-                break;
-            case MAILIMF_FIELD_KEYWORDS:
-                keys = field->fld_data.fld_keywords;
-                for (clistcell*cur = clist_begin(keys->kw_list);cur!=0;cur=clist_next(cur)) {
-                    qDebug("Keyword: %s",(char*)cur->data);
-                }
-                break;
-            case MAILIMF_FIELD_OPTIONAL_FIELD:
-                status = field->fld_data.fld_optional_field->fld_name;
-                value = field->fld_data.fld_optional_field->fld_value;
-                if (status.lower()=="status") {
-                    if (value.lower()=="ro") {
-                        mFlags.setBit(FLAG_SEEN);
-                    }
-                } else if (status.lower()=="x-status") {
-                    qDebug("X-Status: %s",value.latin1());
-                    if (value.lower()=="a") {
-                        mFlags.setBit(FLAG_ANSWERED);
-                    }
-                } else {
-//                    qDebug("Optionales feld: %s -> %s)",field->fld_data.fld_optional_field->fld_name,
-//                        field->fld_data.fld_optional_field->fld_value);
-                }
-                break;
-            default:
-                qDebug("Non parsed field");
-                break;
-        }
-    }
-    if (fields) mailimf_fields_free(fields);
-    mail->setFlags(mFlags);
-    return mail;
-}
-
 QString Genericwrapper::parseDateTime( mailimf_date_time *date )
 {
     char tmp[23];
@@ -500,9 +423,11 @@ void Genericwrapper::parseList(QList<RecMail> &target,mailsession*session,const 
             mail->setBcc( parseAddressList( single_fields.fld_bcc->bcc_addr_list ) );
         if (single_fields.fld_orig_date)
             mail->setDate( parseDateTime( single_fields.fld_orig_date->dt_date_time ) );
-		// crashes when accessing pop3 account
-		//        if (single_fields.fld_message_id->mid_value)
-        //    mail->setMsgid(QString(single_fields.fld_message_id->mid_value));
+        // crashes when accessing pop3 account?
+        if (single_fields.fld_message_id->mid_value) {
+            mail->setMsgid(QString(single_fields.fld_message_id->mid_value));
+            qDebug("Msqgid == %s",mail->Msgid().latin1());
+        }
         refs = single_fields.fld_references;
         if (refs && refs->mid_list && clist_count(refs->mid_list)) {
             char * text = (char*)refs->mid_list->first->data;
