@@ -713,7 +713,7 @@ void OpieFtp::populateLocalView()
     }
     Local_View->setSorting( 3,FALSE);
     currentPathCombo->lineEdit()->setText( currentDir.canonicalPath() );
-			//   fillCombo( (const QString &)currentDir);
+   fillCombo( (const QString &)currentDir.canonicalPath());
 }
 
 bool OpieFtp::populateRemoteView( )
@@ -1140,7 +1140,6 @@ void OpieFtp::currentPathComboActivated(const QString & currentPath) {
 }
 
 void OpieFtp::fillCombo(const QString &currentPath) {
-		qDebug("Fill Combo "+currentPath);
         currentPathCombo->lineEdit()->setText(currentPath);
 
         if( localDirPathStringList.grep(currentPath,TRUE).isEmpty() ) {
