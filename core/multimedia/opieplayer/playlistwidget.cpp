@@ -85,8 +85,8 @@ extern MediaPlayerState *mediaPlayerState;
 
 static inline QString fullBaseName ( const QFileInfo &fi )
 {
-	QString str = fi. fileName ( );
-	return str. left ( str. findRev ( '.' ));
+  QString str = fi. fileName ( );
+  return str. left ( str. findRev ( '.' ));
 }
 
 
@@ -467,24 +467,36 @@ void PlayListWidget::addAllVideoToList() {
 void PlayListWidget::setDocument(const QString& fileref) {
     qDebug(fileref);
     fromSetDocument = TRUE;
-    if ( fileref.isNull() ) {
-        QMessageBox::critical( 0, tr( "Invalid File" ), tr( "There was a problem in getting the file." ) );
+    QFileInfo fileInfo(fileref);
+    if ( !fileInfo.exists() ) {
+        QMessageBox::critical( 0, tr( "Invalid File" ),
+                               tr( "There was a problem in getting the file." ) );
         return;
     }
 //    qDebug("setDocument "+fileref);
-    if(fileref.find("m3u",0,TRUE) != -1) { //is m3u
+    QString extension = fileInfo.extension(false);
+    if( extension.find( "m3u", 0, false) != -1) { //is m3u
         readm3u( fileref);
     }
-    else if(fileref.find("pls",0,TRUE) != -1) { //is pls
+        else if( extension.find( "pls", 0, false) != -1 ) { //is pls
         readPls( fileref);
     }
-    else if(fileref.find("playlist",0,TRUE) != -1) {//is playlist
+    else if( fileref.find("playlist",0,TRUE) != -1) {//is playlist
         clearList();
-        loadList(DocLnk(fileref));
+        DocLnk lnk;
+        lnk.setName( fileInfo.baseName() ); //sets name
+        lnk.setFile( fileref ); //sets file name
+          //addToSelection( lnk );
+
+        loadList( lnk);
         d->selectedFiles->first();
     } else { 
         clearList();
-        addToSelection( DocLnk( fileref ) );
+        DocLnk lnk;
+        lnk.setName( fileInfo.baseName() ); //sets name
+        lnk.setFile( fileref ); //sets file name
+        addToSelection( lnk );
+//        addToSelection( DocLnk( fileref ) );
         d->setDocumentUsed = TRUE;
         mediaPlayerState->setPlaying( FALSE );
         qApp->processEvents();
@@ -1191,15 +1203,16 @@ void PlayListWidget::writem3u() {
     if( fileDlg->result() == 1 ) {
         name = fileDlg->text();
 //        qDebug( filename );
-
-        if( name.left( 1) != "/" ) {
+        if( name.find("/",0,true) != -1) {// assume they specify a file path
+            filename = name;
+            name = name.right(name.length()- name.findRev("/",-1,true) - 1 );
+        }
+        else //otherwise dump it somewhere noticable
             filename = QPEApplication::documentDir() + "/" + name;
-        }
 
-        if( name.right( 3 ) != "m3u" ) {
-            filename = QPEApplication::documentDir() + "/" +name+".m3u";
-        }
-
+        if( filename.right( 3 ) != "m3u" ) //needs filename extension
+            filename += ".m3u";
+        
         if( d->selectedFiles->first()) {
         m3uList = new Om3u(filename, IO_ReadWrite);
 
