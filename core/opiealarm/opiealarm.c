@@ -92,7 +92,7 @@ int fork_with_pidfile ( void )
 	else if ( pid < 0 ) {
 		perror ( "forking failed" );
 		return 0;
-	}
+	}	
 
 	// child process needs to react to SIGUSR2. This is sent when
 	// a new opiealarm process is started.
@@ -258,6 +258,7 @@ int suspend ( int fix_rtc )
 			break; //  ( 1, TIMEFILE );
 
 		fclose ( fp );
+		fp = 0;
 	
 		alrt = atoi ( buf ); // get the alarm time
 
@@ -286,6 +287,7 @@ int suspend ( int fix_rtc )
 			break; //  ( 1, "ioctl RTC_AIE_OFF" );
 
 		close ( fd );
+		fd = -1;
 		
 		remove_pidfile ( );
 		
