@@ -1,0 +1,10 @@
+TEMPLATE	= app
+DESTDIR         = .
+#CONFIG		= qt warn_on debug
+CONFIG		= qt warn_on release
+HEADERS		= frame.h lib.h
+SOURCES		= frame.cpp lib.cpp main.cpp
+INCLUDEPATH	+= $(OPIEDIR)/include /usr/locale/include
+DEPENDPATH	+= $(OPIEDIR)/include /usr/locale/include
+LIBS            += -lxine -lxineutils
+TARGET          = zeckeplayer
