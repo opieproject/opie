@@ -4,6 +4,6 @@ Section: opie/system
 Maintainer: Maximilian Reiss <max.reiss@gmx.de>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION.1
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base ($QPE_VERSION), libopietooth
 Description: Bluetooth Applet
  An bluetooth taskbar applet for the Opie environment
