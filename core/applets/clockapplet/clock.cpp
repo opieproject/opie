@@ -40,7 +40,7 @@ LauncherClock::LauncherClock( QWidget *parent ) : QLabel( parent )
 {
     // If you want a sunken border around the clock do this:
     // setFrameStyle( QFrame::Panel | QFrame::Sunken );
-    setFont( QFont( "Helvetica", 10, QFont::Normal ) );
+    //setFont( QFont( "Helvetica", , QFont::Normal ) );
     connect( qApp, SIGNAL( timeChanged() ), this, SLOT( updateTime( ) ) );
     connect( qApp, SIGNAL( clockChanged( bool ) ),
        this, SLOT( slotClockChanged( bool ) ) );
@@ -92,12 +92,12 @@ void LauncherClock::changeTime( void )
     QTime tm = QDateTime::currentDateTime().time();
     QString s;
     if( ampmFormat ) {
-  int hour = tm.hour(); 
+  int hour = tm.hour();
   if (hour == 0)
       hour = 12;
   if (hour > 12)
       hour -= 12;
-  s.sprintf( "%2d:%02d %s", hour, tm.minute(), 
+  s.sprintf( "%2d:%02d %s", hour, tm.minute(),
        (tm.hour() >= 12) ? "PM" : "AM" );
     } else
   s.sprintf( "%2d:%02d", tm.hour(), tm.minute() );
