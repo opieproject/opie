@@ -14,7 +14,7 @@ bool IRCServerTab::containsPing( const QString& text, IRCServerTab* tab ) {
 
 IRCServerTab::IRCServerTab(IRCServer server, MainWindow *mainWindow, QWidget *parent, const char *name, WFlags f) : IRCTab(parent, name, f) {
     m_server = server;
-    m_session = new IRCSession(&m_server);
+    m_session = new IRCSession(this, &m_server);
     m_mainWindow = mainWindow;
     m_close = FALSE;
     m_lines = 0;
