@@ -17,7 +17,7 @@
 #include <qapplication.h>
 
 #ifndef NEW_OWAIT
-static OWait *wait = 0;
+static Opie::Ui::OWait *wait = 0;
 #endif
 
 SearchGroup::SearchGroup(QListView* parent, QString name)
@@ -68,7 +68,7 @@ int SearchGroup::realSearch()
 {
 	if (_lastSearch == _search) return _resultCount;
 #ifndef NEW_OWAIT
-	if (!wait) wait = new OWait( qApp->mainWidget(), "osearch" );
+	if (!wait) wait = new Opie::Ui::OWait( qApp->mainWidget(), "osearch" );
 	wait->show();
 	qApp->processEvents();
 #else
