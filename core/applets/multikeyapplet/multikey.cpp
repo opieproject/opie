@@ -24,7 +24,7 @@
 #include <qfileinfo.h>
 #include <qcopchannel_qws.h>
 
-Multikey::Multikey( QWidget *parent ) : QLabel( parent ), current("EN")
+Multikey::Multikey(QWidget *parent) : QLabel(parent), popupMenu(this), current("EN")
 {
     QCopChannel* swChannel = new QCopChannel("MultiKey/Switcher", this);
     connect( swChannel, SIGNAL(received(const QCString &, const QByteArray &)),
@@ -34,13 +34,27 @@ Multikey::Multikey( QWidget *parent ) : QLabel( parent ), current("EN")
     lang = 0;
     QCopEnvelope e("MultiKey/Keyboard", "getmultikey()");
     setText("EN");
+    popupMenu.insertItem("EN", -1);
     show();
 }
 
-void Multikey::mousePressEvent( QMouseEvent * )
+void Multikey::mousePressEvent(QMouseEvent *ev)
 {
+    if (ev->button() == RightButton) {
+
+	QPoint p = mapToGlobal(QPoint(0, 0));
+	QSize s = popupMenu.sizeHint();
+	int opt = popupMenu.exec(QPoint(p.x() + (width() / 2) - (s.width() / 2),
+					p.y() - s.height()), 0);
+
+	if (opt == -1)
+	    return;
+	lang = opt;
+    } else {
+	lang = lang < sw_maps.count()-1 ? lang+1 : 0;
+    }
+
     QCopEnvelope e("MultiKey/Keyboard", "setmultikey(QString)");
-    lang = lang < sw_maps.count()-1 ? lang+1 : 0;
     //qDebug("Lang=%d, count=%d, lab=%s", lang, sw_maps.count(), labels[lang].ascii());
     e << sw_maps[lang];
     setText(labels[lang]);
@@ -60,6 +74,7 @@ void Multikey::message(const QCString &message, const QByteArray &data)
 	lang = 0;
 	labels.clear();
 	sw_maps.clear();
+	popupMenu.clear();
 
 	for (uint i = 0; i < sw.count(); ++i) {
 	    QString keymap_map;
@@ -90,6 +105,7 @@ void Multikey::message(const QCString &message, const QByteArray &data)
 			    }
 			    sw_maps.append(keymap_map);
 			    labels.append(line.right(line.length() - line.find(QChar('=')) - 1).stripWhiteSpace());
+			    popupMenu.insertItem(labels[labels.count()-1], labels.count()-1);
 			} else {
 			    current = line.right(line.length() - line.find(QChar('=')) - 1).stripWhiteSpace();
 			}

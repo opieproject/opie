@@ -12,6 +12,7 @@
 #include <qpe/config.h>
 #include <qpe/resource.h>
 
+#include <qlayout.h>
 #include <qwidget.h>
 #include <qdialog.h>
 #include <qtabwidget.h>
@@ -33,7 +34,7 @@
 #include "keyboard.h"
 
 // ConfigDlg::ConfigDlg() {{{1
-ConfigDlg::ConfigDlg () : QTabWidget ()
+ConfigDlg::ConfigDlg () : QDialog ()
 {
     setCaption( tr("Multikey Configuration") );
     Config config ("multikey");
@@ -44,10 +45,13 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
      * 'general config' tab
      */
 
-    QVBox *gen_box = new QVBox (this);
-    gen_box->setMargin(3);
-    addTab(gen_box, tr("General Settings"));
+    QVBoxLayout *base_lay = new QVBoxLayout(this);
+ 
+    QTabWidget *tabs = new QTabWidget(this, "tabs");
 
+    QWidget *gen_box = new QWidget(tabs, "gen_tab");
+    QVBoxLayout *gen_lay = new QVBoxLayout(gen_box);
+    gen_lay->setMargin(3);
     QGroupBox *map_group = new QGroupBox (2, Qt::Vertical, tr("Keymap File"), gen_box);
 
     QHBox *hbox1 = new QHBox(map_group);
@@ -129,7 +133,6 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
     }
 
     // have to "+1" because the "current language" listItem... remember?
-
     connect(keymaps, SIGNAL(highlighted(int)), SLOT(setMap(int)));
 
     QGrid *add_remove_grid = new QGrid(2, map_group);
@@ -142,9 +145,11 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
 
     remove_button = new QPushButton(tr("Remove"), add_remove_grid);
     remove_button->setFlat(TRUE);
-    if (default_maps.find(QFileInfo(current_map).fileName()) != default_maps.end())
+    if (keymaps->currentItem() == 0 || default_maps.find(QFileInfo(current_map).fileName()) != default_maps.end())
 	remove_button->setDisabled(true);
     connect(remove_button, SIGNAL(clicked()), SLOT(removeMap()));
+
+    gen_lay->addWidget(map_group);
 
     // make a box that will contain the buttons on the bottom
     QGrid *other_grid = new QGrid(2, gen_box);
@@ -157,9 +162,6 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
         pick_button->setChecked(true);
     }
 
-    // by connecting it after checking it, the signal isn't emmited
-    connect (pick_button, SIGNAL(clicked()), this, SLOT(pickTog()));
-
     repeat_button = new QCheckBox(tr("Key Repeat"), other_grid);
     bool repeat_on = config.readBoolEntry ("useRepeat", TRUE);
 
@@ -167,24 +169,30 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
 
         repeat_button->setChecked(true);
     }
-    connect (repeat_button, SIGNAL(clicked()), this, SLOT(repeatTog()));
+
+    gen_lay->addWidget(other_grid);
+    tabs->addTab(gen_box, tr("General Settings"));
 
     /*
      * 'color' tab
      */
 
-    QGrid *color_box = new QGrid(2, this);
-    color_box->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed));
-    color_box->setMargin(3);
-    color_box->setSpacing(3);
-    addTab(color_box, tr("Colors"));
+    QWidget *color_box = new QWidget(tabs, "color_tab");
+    
+    QGridLayout *color_lay = new QGridLayout(color_box);
+    QGrid *color_grid = new QGrid(2, color_box);
+    color_lay->setAlignment(Qt::AlignTop);
+    color_grid->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed));
+    color_grid->layout()->setAlignment(Qt::AlignTop);
+    color_grid->setMargin(3);
+    color_grid->setSpacing(3);
 
     QLabel *label;
     QStringList color;
     config.setGroup("colors");
 
-    label = new QLabel(tr("Key Color"), color_box);
-    keycolor_button = new QPushButton(color_box);
+    label = new QLabel(tr("Key Color"), color_grid);
+    keycolor_button = new QPushButton(color_grid);
     connect(keycolor_button, SIGNAL(clicked()), SLOT(keyColorClicked()));
     keycolor_button->setFlat(TRUE);
     color = config.readListEntry("keycolor", QChar(','));
@@ -200,35 +208,38 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
     keycolor_button->setPalette(QPalette(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt())));
 
 
-    label = new QLabel(tr("Key Pressed Color"), color_box);
-    keycolor_pressed_button = new QPushButton(color_box);
+    label = new QLabel(tr("Key Pressed Color"), color_grid);
+    keycolor_pressed_button = new QPushButton(color_grid);
     connect(keycolor_pressed_button, SIGNAL(clicked()), SLOT(keyColorPressedClicked()));
     keycolor_pressed_button->setFlat(TRUE);
     color = config.readListEntry("keycolor_pressed", QChar(','));
     keycolor_pressed_button->setPalette(QPalette((QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()))));
 
-    label = new QLabel(tr("Line Color"), color_box);
-    keycolor_lines_button = new QPushButton(color_box);
+    label = new QLabel(tr("Line Color"), color_grid);
+    keycolor_lines_button = new QPushButton(color_grid);
     connect(keycolor_lines_button, SIGNAL(clicked()), SLOT(keyColorLinesClicked()));
     keycolor_lines_button->setFlat(TRUE);
     color = config.readListEntry("keycolor_lines", QChar(','));
     keycolor_lines_button->setPalette(QPalette((QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()))));
 
 
-    label = new QLabel(tr("Text Color"), color_box);
-    textcolor_button = new QPushButton(color_box);
+    label = new QLabel(tr("Text Color"), color_grid);
+    textcolor_button = new QPushButton(color_grid);
     connect(textcolor_button, SIGNAL(clicked()), SLOT(textColorClicked()));
     textcolor_button->setFlat(TRUE);
     color = config.readListEntry("textcolor", QChar(','));
     textcolor_button->setPalette(QPalette((QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()))));
 
-    label = new QLabel("", color_box); // a spacer so the above buttons dont expand
+    label = new QLabel("", color_grid); // a spacer so the above buttons dont expand
     label->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
-}
+    /* FIXME: hacked spacer height */
+    QSpacerItem *spacer = new QSpacerItem(0, 300, QSizePolicy::Expanding, QSizePolicy::Maximum);
 
-ConfigDlg::~ConfigDlg()
-{
-    emit reloadSw();
+    color_lay->addWidget(color_grid, 0, 0);
+    color_lay->addItem(spacer);
+
+    tabs->addTab(color_box, tr("Colors"));
+    base_lay->addWidget(tabs);
 }
 
 QStringList ConfigDlg::loadSw()
@@ -248,7 +259,7 @@ QStringList ConfigDlg::loadSw()
     else
     {
 	/* Clear non existents entries */
-	QStringList s_copy = s_maps;
+	QStringList s_copy(s_maps);
 	for (uint i = 0; i < s_copy.count(); ++i) {
 	    if (d_maps.find(s_copy[i]) == d_maps.end()
 		&& c_maps.find(s_copy[i]) == c_maps.end()) {
@@ -272,6 +283,44 @@ QStringList ConfigDlg::loadSw()
     return s_maps;
 }
 
+void ConfigDlg::accept()
+{
+    /* Writing all stuffs to config */
+    Config *config = new Config("multikey");
+    config->setGroup("general");
+    config->writeEntry("usePickboard", pick_button->isChecked()); // default closed
+    config->writeEntry("useRepeat", repeat_button->isChecked()); // default closed
+
+    config->setGroup("keymaps");
+    config->writeEntry("sw", sw_maps, QChar('|'));
+    config->writeEntry("maps", custom_maps, QChar('|'));
+    delete config;
+
+    int index = keymaps->currentItem();
+    if (index == 0) {
+
+        remove_button->setDisabled(true);
+        emit setMapToDefault();
+    }
+    else if (default_maps.find(sw_maps[index-1]) != default_maps.end()) {
+
+        remove_button->setDisabled(true);
+        emit setMapToFile(QPEApplication::qpeDir() + "share/multikey/" + sw_maps[index - 1]);
+
+    } else {
+
+        remove_button->setEnabled(true);
+        emit setMapToFile(sw_maps[index - 1]);
+    }
+
+    emit pickboardToggled(pick_button->isChecked());
+    emit repeatToggled(repeat_button->isChecked());
+    emit reloadSw();
+
+    QDialog::accept();
+    emit configDlgClosed();
+}
+
 void ConfigDlg::moveSelectedUp()
 {
     int i = keymaps->currentItem();
@@ -285,10 +334,6 @@ void ConfigDlg::moveSelectedUp()
 	keymaps->removeItem(i);
 	keymaps->insertItem(item, i-1);
 	keymaps->setCurrentItem(i-1);
-
-	Config config("multikey");
-	config.setGroup("keymaps");
-	config.writeEntry("sw", sw_maps, QChar('|'));
     }
 }
 
@@ -305,29 +350,7 @@ void ConfigDlg::moveSelectedDown()
 	keymaps->removeItem(i);
 	keymaps->insertItem(item, i+1);
 	keymaps->setCurrentItem(i+1);
-
-	Config config("multikey");
-	config.setGroup("keymaps");
-	config.writeEntry("sw", sw_maps, QChar('|'));
     }
-}
-
-void ConfigDlg::pickTog() {
-
-    Config config ("multikey");
-    config.setGroup ("general");
-    config.writeEntry ("usePickboard", pick_button->isChecked()); // default closed
-
-    emit pickboardToggled(pick_button->isChecked());
-}
-
-void ConfigDlg::repeatTog() {
-
-    Config config ("multikey");
-    config.setGroup ("general");
-    config.writeEntry ("useRepeat", repeat_button->isChecked()); // default closed
-
-    emit repeatToggled(repeat_button->isChecked());
 }
 
 void ConfigDlg::closeEvent(QCloseEvent *) {
@@ -336,31 +359,15 @@ void ConfigDlg::closeEvent(QCloseEvent *) {
     emit configDlgClosed();
 }
 
-// ConfigDlg::setMap {{{1
-
-/* 
- * the index is kinda screwy, because in the config file, index 0 is just the
- * first element in the QStringList, but here it's the "Current Language"
- * listItem. therefor you have to minus one to the index before you access it.
- *
- */
-
 void ConfigDlg::setMap(int index) {
 
     if (index == 0) {
-
         remove_button->setDisabled(true);
-        emit setMapToDefault();
     }
     else if (default_maps.find(sw_maps[index-1]) != default_maps.end()) {
-
         remove_button->setDisabled(true);
-        emit setMapToFile(QPEApplication::qpeDir() + "share/multikey/" + sw_maps[index - 1]);
-
     } else {
-
         remove_button->setEnabled(true);
-        emit setMapToFile(sw_maps[index - 1]);
     }
 }
 
@@ -401,12 +408,6 @@ void ConfigDlg::addMap() {
     }
 
     keymaps->setSelected(keymaps->count() - 1, true);
-
-
-    config.writeEntry("maps", maps, QChar('|'));
-    config.writeEntry("sw", sw_maps, QChar('|'));
-    config.writeEntry("current", map);
-
 }
 
 // ConfigDlg::removeMap() {{{1
@@ -419,12 +420,6 @@ void ConfigDlg::removeMap() {
 
     custom_maps.remove(sw_maps[keymaps->currentItem()]);
     sw_maps.remove(sw_maps.at(keymaps->currentItem()));
-
-    // write the changes
-    Config config ("multikey");
-    config.setGroup("keymaps");
-    config.writeEntry("maps", custom_maps, QChar('|'));
-    config.writeEntry("sw", sw_maps, QChar('|'));
 }
 
 /* ConfigDlg::slots for the color buttons {{{1

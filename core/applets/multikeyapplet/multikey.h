@@ -16,6 +16,7 @@
 
 #include <qlabel.h>
 #include <qstringlist.h>
+#include <qpopupmenu.h>
 #include <qcopchannel_qws.h>
 
 class Multikey : public QLabel
@@ -31,6 +32,7 @@ protected:
     void mousePressEvent( QMouseEvent * );
     QStringList sw_maps;
     QStringList labels;
+    QPopupMenu popupMenu;
     QString current;
     uint lang;
 };
