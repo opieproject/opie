@@ -11,15 +11,18 @@
  *      version 2 of the License, or (at your option) any later version.
  * =====================================================================
  * Info: This class could just work with a change in the header-file
- *       of the Contact class ! Therefore our libqpe is not compatilbe
- *       to QPE 1.5.0 ! 
+ *       of the Contact class ! Therefore our libopie only compiles
+ *       with our version of libqpe
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.1 2002-07-01 16:49:46 eilers Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.2 2002-07-05 11:17:19 zecke Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.1  2002-07-01 16:49:46  eilers
+ * Revision 1.1.2.2  2002-07-05 11:17:19  zecke
+ * Some API updates by me
+ *
+ * Revision 1.1.2.1  2002/07/01 16:49:46  eilers
  * First attempt for cross reference
  *
  */
@@ -44,23 +47,23 @@
 using namespace Opie;
 
 OContactDB::OContactDB (const QString appname, const QString &fileName):
-	loc_fileName(fileName)
+	m_loc_fileName(fileName)
 {
 	if ( fileName.isEmpty() ){
-		loc_fileName = Global::applicationFileName("addressbook","addressbook.xml");
+		m_loc_fileName = Global::applicationFileName("addressbook","addressbook.xml");
 	}
 
-	loc_journalName = getenv("HOME");
-	loc_journalName +="/.journal" + appname;
+	m_loc_journalName = getenv("HOME");
+	m_loc_journalName +="/.abjournal" + appname;
 
 	/* Load XML-File and journal if it exists */
-	load (loc_fileName);
-	load (loc_journalName);
+	load (m_loc_fileName);
+	load (m_loc_journalName);
 }
 OContactDB::~OContactDB ()
 {}
 
-void OContactDB::load (QString filename)
+void OContactDB::load (const QString& filename)
 {
 	const int JOURNALACTION = Qtopia::Notes + 1;
 	const int JOURNALROW = JOURNALACTION + 1;
@@ -120,8 +123,8 @@ void OContactDB::load (QString filename)
 	qWarning( "OContactDB::loading %s", filename.latin1() );
 
 	/* Store the date and time when we initialized the database */
-	QFileInfo fi( loc_fileName );
-	readtime = fi.lastModified ();
+	QFileInfo fi( m_loc_fileName );
+	m_readtime = fi.lastModified ();
 	
 	XMLElement *root = XMLElement::load( filename );
 	if(root != 0l ){ // start parsing
@@ -167,6 +170,7 @@ void OContactDB::load (QString filename)
 				int *find = dict[ it.key() ];
 				/* Unknown attributes will be stored as "Custom" elements */
 				if ( !find ) {
+					qWarning("Attribute %s not known.", it.key().latin1());
 					contact.setCustomField(it.key(), it.data());
 					continue;
 				}
@@ -188,7 +192,7 @@ void OContactDB::load (QString filename)
 				case JOURNALROW:
 					journalKey = it.data().toInt();
 					break;
-				default:
+				default: // no conversion needed add them to the map
 					contact.insert( *find, it.data() );
 					break;
 				}
@@ -197,7 +201,7 @@ void OContactDB::load (QString filename)
 				foundAction = false;
 				switch ( action ) {
 				case Contact::ACTION_ADD:
-					contactList.append (contact);
+					m_contactList.append (contact);
 					break;
 				case Contact::ACTION_REMOVE:
 					removeContact (contact.uid(), contact);
@@ -211,7 +215,7 @@ void OContactDB::load (QString filename)
 				}
 			}else{
 				/* Add contact to list */
-				contactList.append (contact);
+				m_contactList.append (contact);
 			}
 			
 			/* Move to next element */
@@ -235,7 +239,7 @@ bool OContactDB::save (bool autoreload)
 	else
 		reload();
 
-	QString strNewFile = loc_fileName + ".new";
+	QString strNewFile = m_loc_fileName + ".new";
 	QFile f( strNewFile );
 	if ( !f.open( IO_WriteOnly|IO_Raw ) )
 		return false;
@@ -248,7 +252,7 @@ bool OContactDB::save (bool autoreload)
 		" <Contacts>\n";
 	//QValueList<Contact>::iterator it;
 	QValueListIterator<Contact> it;
-	for ( it = contactList.begin(); it != contactList.end(); ++it ) {
+	for ( it = m_contactList.begin(); it != m_contactList.end(); ++it ) {
 		out += "<Contact ";
 		(*it).save( out );
 		out += "/>\n";
@@ -274,18 +278,19 @@ bool OContactDB::save (bool autoreload)
 	
 	// move the file over, I'm just going to use the system call
 	// because, I don't feel like using QDir.
-	if ( ::rename( strNewFile.latin1(), loc_fileName.latin1() ) < 0 ) {
+	if ( ::rename( strNewFile.latin1(), m_loc_fileName.latin1() ) < 0 ) {
 		qWarning( "problem renaming file %s to %s, errno: %d",
-			  strNewFile.latin1(), loc_fileName.latin1(), errno );
+			  strNewFile.latin1(), m_loc_fileName.latin1(), errno );
 		// remove the tmp file...
 		QFile::remove( strNewFile );
 	}
 
 	/* The journalfile should be removed now... */
-	QFile::remove (loc_journalName);
+	QFile::remove (m_loc_journalName);
 
 	/* Now tell everyone that new data is available */
-	QCopEnvelope( "QPE/PIM", "addressbookUpdated()" );
+	QCopEnvelope e( "QPE/PIM", "addressbookUpdated(QString)" );
+	e << m_loc_fileName;
 
 	return true;
 }
@@ -293,24 +298,24 @@ bool OContactDB::save (bool autoreload)
 
 bool OContactDB::isChangedExternally()
 {
-	QFileInfo fi( loc_fileName );
+	QFileInfo fi( m_loc_fileName );
 
 	QDateTime lastmod = fi.lastModified ();
 
-	return (lastmod != readtime);
+	return (lastmod != m_readtime);
 }
 
 
-QValueList<Contact> OContactDB::getAllContacts()
+QValueList<Contact> OContactDB::allContacts()const
 {
-	return contactList;
+	return m_contactList;
 }
 
 bool OContactDB::addContact (const Contact &newcontact)
 {
 
 	updateJournal (newcontact, Contact::ACTION_ADD);
-	contactList.append (newcontact);
+	m_contactList.append (newcontact);
 	return true;
 }
 
@@ -318,7 +323,7 @@ bool OContactDB::replaceContact (int uid, const Contact &contact)
 {
 	bool found = false;
 	QValueListIterator<Contact> it;
-	for( it = contactList.begin(); it != contactList.end(); ++it ){
+	for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
 		if ((*it).uid() == uid){
 			found = true;
 			break;
@@ -326,8 +331,8 @@ bool OContactDB::replaceContact (int uid, const Contact &contact)
 	}
 	if (found) {
 		updateJournal (contact, Contact::ACTION_REPLACE);
-		contactList.remove (it);
-		contactList.append (contact);
+		m_contactList.remove (it);
+		m_contactList.append (contact);
 		return true;
 	} else
 		return false;
@@ -337,7 +342,7 @@ bool OContactDB::removeContact (int uid, const Contact &contact)
 {
 	bool found = false;
 	QValueListIterator<Contact> it;
-	for( it = contactList.begin(); it != contactList.end(); ++it ){
+	for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
 		if ((*it).uid() == uid){
 			found = true;
 			break;
@@ -345,7 +350,7 @@ bool OContactDB::removeContact (int uid, const Contact &contact)
 	}
 	if (found) {
 		updateJournal (contact, Contact::ACTION_REMOVE);
-		contactList.remove (it);
+		m_contactList.remove (it);
 		return true;
 	} else
 		return false;
@@ -353,9 +358,9 @@ bool OContactDB::removeContact (int uid, const Contact &contact)
 
 void OContactDB::reload()
 {
-	contactList.clear();
-	load (loc_fileName);
-	load (loc_journalName);
+	m_contactList.clear();
+	load (m_loc_fileName);
+	load (m_loc_journalName);
 }
 
 
@@ -365,7 +370,7 @@ void OContactDB::reload()
 void OContactDB::updateJournal( const Contact &cnt,
 			     Contact::journal_action action)
 {
-    QFile f( loc_journalName );
+    QFile f( m_loc_journalName );
     if ( !f.open(IO_WriteOnly|IO_Append) )
 	 return;
     QString buf;

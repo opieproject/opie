@@ -11,27 +11,28 @@
 **********************************************************************/
 #include <qtable.h>
 
-#ifndef __CHECKITEM_H__
-#define __CHECKITEM_H__
+#ifndef CHECKITEM_H__
+#define CHECKITEM_H__
 
 class OCheckItem : public QTableItem
 {
 public:
+    enum Size { BoxSize = 10 };
     OCheckItem( QTable *t, const QString &sortkey );
 
     void setChecked( bool b );
     void toggle();
     bool isChecked() const;
-    void setKey( const QString &key ) { sortKey = key; }
+    void setKey( const QString &key ) { m_sortKey = key; }
     QString key() const;
 
     void paint( QPainter *p, const QColorGroup &cg, const QRect &cr, bool selected );
 
-    static const int BoxSize = 10;
+    //static const int BoxSize = 10;
 
 private:
-    bool checked;
-    QString sortKey;
+    bool m_checked: 1;
+    QString m_sortKey;
 
 };
 

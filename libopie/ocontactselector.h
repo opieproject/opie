@@ -12,11 +12,14 @@
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactselector.h,v 1.1.2.3 2002-07-03 06:55:54 eilers Exp $
+ * Version: $Id: ocontactselector.h,v 1.1.2.4 2002-07-05 11:17:19 zecke Exp $
  * =====================================================================
  * History:
  * $Log: ocontactselector.h,v $
- * Revision 1.1.2.3  2002-07-03 06:55:54  eilers
+ * Revision 1.1.2.4  2002-07-05 11:17:19  zecke
+ * Some API updates by me
+ *
+ * Revision 1.1.2.3  2002/07/03 06:55:54  eilers
  * Moved to LGPL
  *
  * Revision 1.1.2.2  2002/07/02 16:36:47  eilers
@@ -59,7 +62,7 @@ class ONameItem: public QTableItem
 	QString text() const { return FullName; }
 
 	/** Returns the user id of this entry */
-	int getUid() const { return Uid; }
+	int uid() const { return Uid; }
 
 	/** Toggle selection */
 	void toggle();
@@ -74,7 +77,7 @@ class ONameItem: public QTableItem
 	QString MiddleName;
 	QString sortkey;
 	int Uid;
-	bool selected;
+	bool selected : 1;
 };
 
 /** This Class creates a table with all available contacts.
@@ -93,7 +96,7 @@ class OContactSelector: public QTable
 	/** Get all selected contacts.
 	 * @returns List of user id's from selected users
 	 */
- 	QValueList<int> selected ();
+ 	QValueList<int> selected () const;
 
 	/** Set selected contacts.
 	 * The given list will select the contacts in the table with
@@ -104,7 +107,7 @@ class OContactSelector: public QTable
 
  private:
 	OContactDB contactdb;
-	ONameItem *getItemAtRow (int row);
+	ONameItem *getItemAtRow (int row)const;
 	OCheckItem *getCheckItemAtRow (int row);
 
  private slots:
@@ -127,7 +130,7 @@ class OContactSelectorDialog: public QDialog
 	/** Get all selected contacts.
 	 * @see OContactSelector
 	 */
-	QValueList<int> selected ();
+	QValueList<int> selected () const;
 
 	/** Set selected contacts.
 	 * @see OContactSelector

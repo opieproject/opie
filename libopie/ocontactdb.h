@@ -14,11 +14,14 @@
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactdb.h,v 1.1.2.2 2002-07-03 06:55:54 eilers Exp $
+ * Version: $Id: ocontactdb.h,v 1.1.2.3 2002-07-05 11:17:19 zecke Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.h,v $
- * Revision 1.1.2.2  2002-07-03 06:55:54  eilers
+ * Revision 1.1.2.3  2002-07-05 11:17:19  zecke
+ * Some API updates by me
+ *
+ * Revision 1.1.2.2  2002/07/03 06:55:54  eilers
  * Moved to LGPL
  *
  * Revision 1.1.2.1  2002/07/01 16:49:46  eilers
@@ -35,6 +38,7 @@
 
 // #include <qpe/categories.h>
 #include <qpe/contact.h>
+
 #include <qvaluelist.h> 
 #include <qfileinfo.h> 
 
@@ -45,7 +49,7 @@ class OContactDB {
 	/** Create Database with contacts (addressbook).
 	 * @param appname Name of application which wants access to the database 
 	 * (i.e. "todolist")
-	 * @param fileName Path and name of the xml file. If "NULL" it will open
+	 * @param fileName Path and name of the xml file. If isEmpty() it will open
 	 * the default addressbook file
 	 */
 	OContactDB (const QString appname, const QString &fileName = QString::null);
@@ -54,7 +58,12 @@ class OContactDB {
 	/** Returns all Contacts.
 	 * @return List of all contacts.
 	 */
-	QValueList<Contact> getAllContacts();
+	QValueList<Contact> allContacts()const;
+	
+	/**
+	 * Finds a Contact by the uid	 
+	 */
+	Contact find( int uid )const;
 
 	/** Add Contact to database.
 	 * @param newcontact The contact to add.
@@ -101,16 +110,16 @@ class OContactDB {
 	bool save(bool autoreload = true);
 
  private:
-	QString loc_fileName;
-	QString loc_journalName;
-	QValueList<Contact> contactList;
-	QDateTime readtime;
+	QString m_loc_fileName;
+	QString m_loc_journalName;
+	QValueList<Contact> m_contactList;
+	QDateTime m_readtime;
 
 	/** Load contacts database.
 	 * Future: Bool for locking ...
 	 * @param Name of the file to load
 	 */
-	void load(QString filename);
+	void load(const QString& filename);
 
 	void updateJournal( const Contact &cnt,
 			    Contact::journal_action action);

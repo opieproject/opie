@@ -13,29 +13,29 @@
 #include "ocheckitem.h"
 
 OCheckItem::OCheckItem( QTable *t, const QString &key )
-    : QTableItem( t, Never, "" ), checked( FALSE ), sortKey( key )
+    : QTableItem( t, Never, "" ), m_checked( FALSE ), m_sortKey( key )
 {
 }
 
 QString OCheckItem::key() const
 {
-    return sortKey;
+    return m_sortKey;
 }
 
 void OCheckItem::setChecked( bool b )
 {
-    checked = b;
+    m_checked = b;
     table()->updateCell( row(), col() );
 }
 
 void OCheckItem::toggle()
 {
-    checked = !checked;
+    m_checked = !m_checked;
 }
 
 bool OCheckItem::isChecked() const
 {
-    return checked;
+    return m_checked;
 }
 
 void OCheckItem::paint( QPainter *p, const QColorGroup &cg, const QRect &cr,
@@ -52,7 +52,7 @@ void OCheckItem::paint( QPainter *p, const QColorGroup &cg, const QRect &cr,
     p->setPen( darkGreen );
     x += 1;
     y += 1;
-    if ( checked ) {
+    if ( m_checked ) {
 	QPointArray a( 7*2 );
 	int i, xx, yy;
 	xx = x+1+marg;
