@@ -113,10 +113,6 @@ inténtelo de nuevo.
         <translation>Configurar</translation>
     </message>
     <message>
-        <source>OContacts</source>
-        <translation type="obsolete">Contactos</translation>
-    </message>
-    <message>
         <source>List</source>
         <translation>Lista</translation>
     </message>
@@ -401,10 +397,6 @@ suministra gratis!</translation>
         <translation>Contactos</translation>
     </message>
     <message>
-        <source>Afganistan</source>
-        <translation type="obsolete">Afganistán</translation>
-    </message>
-    <message>
         <source>Albania</source>
         <translation>Albania</translation>
     </message>
@@ -429,16 +421,8 @@ suministra gratis!</translation>
         <translation>Antillas</translation>
     </message>
     <message>
-        <source>Antartica</source>
-        <translation type="obsolete">Antártida</translation>
-    </message>
-    <message>
         <source>Argentina</source>
         <translation>Argentina</translation>
-    </message>
-    <message>
-        <source>Armania</source>
-        <translation type="obsolete">Armenia</translation>
     </message>
     <message>
         <source>Aruba</source>
@@ -497,10 +481,6 @@ suministra gratis!</translation>
         <translation>Bhután</translation>
     </message>
     <message>
-        <source>Boliva</source>
-        <translation type="obsolete">Boliva</translation>
-    </message>
-    <message>
         <source>Botswana</source>
         <translation>Botswana</translation>
     </message>
@@ -531,10 +511,6 @@ suministra gratis!</translation>
     <message>
         <source>Cambodia</source>
         <translation>Camboya</translation>
-    </message>
-    <message>
-        <source>Camaroon</source>
-        <translation type="obsolete">Camerun</translation>
     </message>
     <message>
         <source>Cape Verde</source>
@@ -685,10 +661,6 @@ suministra gratis!</translation>
         <translation>Georgia</translation>
     </message>
     <message>
-        <source>Gahna</source>
-        <translation type="obsolete">Gahna</translation>
-    </message>
-    <message>
         <source>Gibraltar</source>
         <translation>Gibraltar</translation>
     </message>
@@ -705,10 +677,6 @@ suministra gratis!</translation>
         <translation>Granada</translation>
     </message>
     <message>
-        <source>Guadelupe</source>
-        <translation type="obsolete">Guadalupe</translation>
-    </message>
-    <message>
         <source>Guam</source>
         <translation>Guam</translation>
     </message>
@@ -719,10 +687,6 @@ suministra gratis!</translation>
     <message>
         <source>Guinea</source>
         <translation>Guinea</translation>
-    </message>
-    <message>
-        <source>Guinea-bissau</source>
-        <translation type="obsolete">Guinea-bissau</translation>
     </message>
     <message>
         <source>Guyana</source>
@@ -773,10 +737,6 @@ suministra gratis!</translation>
         <translation>Italia</translation>
     </message>
     <message>
-        <source>Jamacia</source>
-        <translation type="obsolete">Jamaica</translation>
-    </message>
-    <message>
         <source>Jordan</source>
         <translation>Jordania</translation>
     </message>
@@ -787,10 +747,6 @@ suministra gratis!</translation>
     <message>
         <source>Kenya</source>
         <translation>Kenia</translation>
-    </message>
-    <message>
-        <source>Kribati</source>
-        <translation type="obsolete">Kribati</translation>
     </message>
     <message>
         <source>Korea</source>
@@ -965,10 +921,6 @@ suministra gratis!</translation>
         <translation>Palau</translation>
     </message>
     <message>
-        <source>Palestinian Territory</source>
-        <translation type="obsolete">Palestina</translation>
-    </message>
-    <message>
         <source>Panama</source>
         <translation>Panamá</translation>
     </message>
@@ -987,10 +939,6 @@ suministra gratis!</translation>
     <message>
         <source>Philippines</source>
         <translation>Filipinas</translation>
-    </message>
-    <message>
-        <source>Pitcairn</source>
-        <translation type="obsolete">Pitcairn</translation>
     </message>
     <message>
         <source>Poland</source>
@@ -1177,10 +1125,6 @@ suministra gratis!</translation>
         <translation>Venezuela</translation>
     </message>
     <message>
-        <source>Viet Nam</source>
-        <translation type="obsolete">Vietnam</translation>
-    </message>
-    <message>
         <source>Virgin Islands</source>
         <translation>Islas Vírgenes</translation>
     </message>
@@ -1215,10 +1159,6 @@ suministra gratis!</translation>
     <message>
         <source>Kuwait</source>
         <translation>Kuwait</translation>
-    </message>
-    <message>
-        <source>Kyrgystan</source>
-        <translation type="obsolete">Kyrgystan</translation>
     </message>
     <message>
         <source>Unknown</source>

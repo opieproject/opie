@@ -114,10 +114,6 @@ Dennoch beenden?</translation>
         <translation>Konfigurations</translation>
     </message>
     <message>
-        <source>OContacts</source>
-        <translation type="obsolete">OContacts</translation>
-    </message>
-    <message>
         <source>Not Found</source>
         <translation>Nicht gefunden</translation>
     </message>
@@ -355,10 +351,6 @@ ist frei erhältlich !</translation>
         <translation>Grossbritannien</translation>
     </message>
     <message>
-        <source>Afganistan</source>
-        <translation type="obsolete">Afganistan</translation>
-    </message>
-    <message>
         <source>Albania</source>
         <translation>Albanien</translation>
     </message>
@@ -383,16 +375,8 @@ ist frei erhältlich !</translation>
         <translation>Anguilla</translation>
     </message>
     <message>
-        <source>Antartica</source>
-        <translation type="obsolete">Antarktis</translation>
-    </message>
-    <message>
         <source>Argentina</source>
         <translation>Argentinien</translation>
-    </message>
-    <message>
-        <source>Armania</source>
-        <translation type="obsolete">Armenien</translation>
     </message>
     <message>
         <source>Aruba</source>
@@ -451,10 +435,6 @@ ist frei erhältlich !</translation>
         <translation>Bhutan</translation>
     </message>
     <message>
-        <source>Boliva</source>
-        <translation type="obsolete">Bolivien</translation>
-    </message>
-    <message>
         <source>Botswana</source>
         <translation>Botswana</translation>
     </message>
@@ -485,10 +465,6 @@ ist frei erhältlich !</translation>
     <message>
         <source>Cambodia</source>
         <translation>Kambodscha</translation>
-    </message>
-    <message>
-        <source>Camaroon</source>
-        <translation type="obsolete">Kamerun</translation>
     </message>
     <message>
         <source>Canada</source>
@@ -651,10 +627,6 @@ ist frei erhältlich !</translation>
         <translation>Deutschland</translation>
     </message>
     <message>
-        <source>Gahna</source>
-        <translation type="obsolete">Ghana</translation>
-    </message>
-    <message>
         <source>Gibraltar</source>
         <translation>Gibraltar</translation>
     </message>
@@ -671,10 +643,6 @@ ist frei erhältlich !</translation>
         <translation>Grenada</translation>
     </message>
     <message>
-        <source>Guadelupe</source>
-        <translation type="obsolete">Guadeloupe</translation>
-    </message>
-    <message>
         <source>Guam</source>
         <translation>Guam</translation>
     </message>
@@ -685,10 +653,6 @@ ist frei erhältlich !</translation>
     <message>
         <source>Guinea</source>
         <translation>Guinea</translation>
-    </message>
-    <message>
-        <source>Guinea-bissau</source>
-        <translation type="obsolete">Guinea-Bissau</translation>
     </message>
     <message>
         <source>Guyana</source>
@@ -739,10 +703,6 @@ ist frei erhältlich !</translation>
         <translation>Italien</translation>
     </message>
     <message>
-        <source>Jamacia</source>
-        <translation type="obsolete">Jamaica</translation>
-    </message>
-    <message>
         <source>Japan</source>
         <translation>Japan</translation>
     </message>
@@ -757,10 +717,6 @@ ist frei erhältlich !</translation>
     <message>
         <source>Kenya</source>
         <translation>Kenja</translation>
-    </message>
-    <message>
-        <source>Kribati</source>
-        <translation type="obsolete">Kiribati</translation>
     </message>
     <message>
         <source>Korea</source>
@@ -939,10 +895,6 @@ ist frei erhältlich !</translation>
         <translation>Palau</translation>
     </message>
     <message>
-        <source>Palestinian Territory</source>
-        <translation type="obsolete">Palästina</translation>
-    </message>
-    <message>
         <source>Panama</source>
         <translation>Panama</translation>
     </message>
@@ -961,10 +913,6 @@ ist frei erhältlich !</translation>
     <message>
         <source>Philippines</source>
         <translation>Philippinen</translation>
-    </message>
-    <message>
-        <source>Pitcairn</source>
-        <translation type="obsolete">Pitcairn</translation>
     </message>
     <message>
         <source>Poland</source>
@@ -1151,10 +1099,6 @@ ist frei erhältlich !</translation>
         <translation>Venezuela</translation>
     </message>
     <message>
-        <source>Viet Nam</source>
-        <translation type="obsolete">Vietnam</translation>
-    </message>
-    <message>
         <source>Virgin Islands</source>
         <translation>Jungfraueninseln</translation>
     </message>
@@ -1213,10 +1157,6 @@ ist frei erhältlich !</translation>
     <message>
         <source>Kuwait</source>
         <translation>Kuwait</translation>
-    </message>
-    <message>
-        <source>Kyrgystan</source>
-        <translation type="obsolete">Kyrgystan</translation>
     </message>
     <message>
         <source>Unknown</source>

@@ -390,10 +390,6 @@ is provided free !</source>
         <translation>Contactos</translation>
     </message>
     <message>
-        <source>Afganistan</source>
-        <translation type="obsolete">Afeganistão</translation>
-    </message>
-    <message>
         <source>Albania</source>
         <translation>Albânia</translation>
     </message>
@@ -418,16 +414,8 @@ is provided free !</source>
         <translation>Anguilla</translation>
     </message>
     <message>
-        <source>Antartica</source>
-        <translation type="obsolete">Antártida</translation>
-    </message>
-    <message>
         <source>Argentina</source>
         <translation>Argetina</translation>
-    </message>
-    <message>
-        <source>Armania</source>
-        <translation type="obsolete">Armânia</translation>
     </message>
     <message>
         <source>Aruba</source>
@@ -486,10 +474,6 @@ is provided free !</source>
         <translation>Bhutam</translation>
     </message>
     <message>
-        <source>Boliva</source>
-        <translation type="obsolete">Bolívia</translation>
-    </message>
-    <message>
         <source>Botswana</source>
         <translation>Botswana</translation>
     </message>
@@ -520,10 +504,6 @@ is provided free !</source>
     <message>
         <source>Cambodia</source>
         <translation>Cambodja</translation>
-    </message>
-    <message>
-        <source>Camaroon</source>
-        <translation type="obsolete">Camarões</translation>
     </message>
     <message>
         <source>Cape Verde</source>
@@ -690,10 +670,6 @@ is provided free !</source>
         <translation>Granada</translation>
     </message>
     <message>
-        <source>Guadelupe</source>
-        <translation type="obsolete">Guadalupe</translation>
-    </message>
-    <message>
         <source>Guam</source>
         <translation type="unfinished"></translation>
     </message>
@@ -704,10 +680,6 @@ is provided free !</source>
     <message>
         <source>Guinea</source>
         <translation>Guiné</translation>
-    </message>
-    <message>
-        <source>Guinea-bissau</source>
-        <translation type="obsolete">Guiné-Bissau</translation>
     </message>
     <message>
         <source>Guyana</source>
@@ -756,10 +728,6 @@ is provided free !</source>
     <message>
         <source>Italy</source>
         <translation>Itália</translation>
-    </message>
-    <message>
-        <source>Jamacia</source>
-        <translation type="obsolete">Jamaica</translation>
     </message>
     <message>
         <source>Jordan</source>
@@ -944,10 +912,6 @@ is provided free !</source>
     <message>
         <source>Palau</source>
         <translation>Palau</translation>
-    </message>
-    <message>
-        <source>Palestinian Territory</source>
-        <translation type="obsolete">Território Palestino</translation>
     </message>
     <message>
         <source>Panama</source>
@@ -1152,10 +1116,6 @@ is provided free !</source>
     <message>
         <source>Venezuela</source>
         <translation>Venezuela</translation>
-    </message>
-    <message>
-        <source>Viet Nam</source>
-        <translation type="obsolete">Vietnam</translation>
     </message>
     <message>
         <source>Virgin Islands</source>

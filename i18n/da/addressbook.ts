@@ -332,10 +332,6 @@ Opie-Mail fås gratis!</translation>
         <translation>Storbritannien</translation>
     </message>
     <message>
-        <source>Afganistan</source>
-        <translation type="obsolete">Afghanistan</translation>
-    </message>
-    <message>
         <source>Albania</source>
         <translation>Albanien</translation>
     </message>
@@ -360,16 +356,8 @@ Opie-Mail fås gratis!</translation>
         <translation>Anguilla</translation>
     </message>
     <message>
-        <source>Antartica</source>
-        <translation type="obsolete">Antarktis</translation>
-    </message>
-    <message>
         <source>Argentina</source>
         <translation>Argentina</translation>
-    </message>
-    <message>
-        <source>Armania</source>
-        <translation type="obsolete">Armenien</translation>
     </message>
     <message>
         <source>Aruba</source>
@@ -428,10 +416,6 @@ Opie-Mail fås gratis!</translation>
         <translation>Bhutan</translation>
     </message>
     <message>
-        <source>Boliva</source>
-        <translation type="obsolete">Bolivia</translation>
-    </message>
-    <message>
         <source>Botswana</source>
         <translation>Botswana</translation>
     </message>
@@ -462,10 +446,6 @@ Opie-Mail fås gratis!</translation>
     <message>
         <source>Cambodia</source>
         <translation>Cambodja</translation>
-    </message>
-    <message>
-        <source>Camaroon</source>
-        <translation type="obsolete">Cameroun</translation>
     </message>
     <message>
         <source>Canada</source>
@@ -628,10 +608,6 @@ Opie-Mail fås gratis!</translation>
         <translation>Tyskland</translation>
     </message>
     <message>
-        <source>Gahna</source>
-        <translation type="obsolete">Ghana</translation>
-    </message>
-    <message>
         <source>Gibraltar</source>
         <translation>Gibraltar</translation>
     </message>
@@ -648,10 +624,6 @@ Opie-Mail fås gratis!</translation>
         <translation>Grenada</translation>
     </message>
     <message>
-        <source>Guadelupe</source>
-        <translation type="obsolete">Guadeloupe</translation>
-    </message>
-    <message>
         <source>Guam</source>
         <translation>Guam</translation>
     </message>
@@ -662,10 +634,6 @@ Opie-Mail fås gratis!</translation>
     <message>
         <source>Guinea</source>
         <translation>Guinea</translation>
-    </message>
-    <message>
-        <source>Guinea-bissau</source>
-        <translation type="obsolete">Guinea-Bissau</translation>
     </message>
     <message>
         <source>Guyana</source>
@@ -716,10 +684,6 @@ Opie-Mail fås gratis!</translation>
         <translation>Italien</translation>
     </message>
     <message>
-        <source>Jamacia</source>
-        <translation type="obsolete">Jamaica</translation>
-    </message>
-    <message>
         <source>Japan</source>
         <translation>Japan</translation>
     </message>
@@ -736,20 +700,12 @@ Opie-Mail fås gratis!</translation>
         <translation>Kenya</translation>
     </message>
     <message>
-        <source>Kribati</source>
-        <translation type="obsolete">Kiribati</translation>
-    </message>
-    <message>
         <source>Korea</source>
         <translation>Korea</translation>
     </message>
     <message>
         <source>Kuwait</source>
         <translation>Kuwait</translation>
-    </message>
-    <message>
-        <source>Kyrgystan</source>
-        <translation type="obsolete">Kurgistan</translation>
     </message>
     <message>
         <source>Laos</source>
@@ -924,10 +880,6 @@ Opie-Mail fås gratis!</translation>
         <translation>Palau</translation>
     </message>
     <message>
-        <source>Palestinian Territory</source>
-        <translation type="obsolete">Palæstinensiske selvstyre områder</translation>
-    </message>
-    <message>
         <source>Panama</source>
         <translation>Panama</translation>
     </message>
@@ -946,10 +898,6 @@ Opie-Mail fås gratis!</translation>
     <message>
         <source>Philippines</source>
         <translation>Filippinerne</translation>
-    </message>
-    <message>
-        <source>Pitcairn</source>
-        <translation type="obsolete">Pitcairn</translation>
     </message>
     <message>
         <source>Poland</source>
@@ -1134,10 +1082,6 @@ Opie-Mail fås gratis!</translation>
     <message>
         <source>Venezuela</source>
         <translation>Venezuela</translation>
-    </message>
-    <message>
-        <source>Viet Nam</source>
-        <translation type="obsolete">Vietnam</translation>
     </message>
     <message>
         <source>Virgin Islands</source>

@@ -391,10 +391,6 @@ is provided free !</source>
         <translation>Contacts</translation>
     </message>
     <message>
-        <source>Afganistan</source>
-        <translation type="obsolete">Afganistan</translation>
-    </message>
-    <message>
         <source>Albania</source>
         <translation>Albanie</translation>
     </message>
@@ -419,16 +415,8 @@ is provided free !</source>
         <translation>Anguilla</translation>
     </message>
     <message>
-        <source>Antartica</source>
-        <translation type="obsolete">Antartique</translation>
-    </message>
-    <message>
         <source>Argentina</source>
         <translation>Argentine</translation>
-    </message>
-    <message>
-        <source>Armania</source>
-        <translation type="obsolete">Arménie</translation>
     </message>
     <message>
         <source>Aruba</source>
@@ -487,10 +475,6 @@ is provided free !</source>
         <translation>Bhoutan</translation>
     </message>
     <message>
-        <source>Boliva</source>
-        <translation type="obsolete">Bolivie</translation>
-    </message>
-    <message>
         <source>Botswana</source>
         <translation>Botswana</translation>
     </message>
@@ -521,10 +505,6 @@ is provided free !</source>
     <message>
         <source>Cambodia</source>
         <translation>Cambodge</translation>
-    </message>
-    <message>
-        <source>Camaroon</source>
-        <translation type="obsolete">Cameroun</translation>
     </message>
     <message>
         <source>Cape Verde</source>
@@ -675,10 +655,6 @@ is provided free !</source>
         <translation>Georgie</translation>
     </message>
     <message>
-        <source>Gahna</source>
-        <translation type="obsolete">Gahna</translation>
-    </message>
-    <message>
         <source>Gibraltar</source>
         <translation>Gibraltare</translation>
     </message>
@@ -695,10 +671,6 @@ is provided free !</source>
         <translation>Grenade</translation>
     </message>
     <message>
-        <source>Guadelupe</source>
-        <translation type="obsolete">Guadeloupe</translation>
-    </message>
-    <message>
         <source>Guam</source>
         <translation>Guam</translation>
     </message>
@@ -709,10 +681,6 @@ is provided free !</source>
     <message>
         <source>Guinea</source>
         <translation>Guinée</translation>
-    </message>
-    <message>
-        <source>Guinea-bissau</source>
-        <translation type="obsolete">Guinée Bissau</translation>
     </message>
     <message>
         <source>Guyana</source>
@@ -763,10 +731,6 @@ is provided free !</source>
         <translation>Italie</translation>
     </message>
     <message>
-        <source>Jamacia</source>
-        <translation type="obsolete">Jamaïque</translation>
-    </message>
-    <message>
         <source>Jordan</source>
         <translation>Jordanie</translation>
     </message>
@@ -777,10 +741,6 @@ is provided free !</source>
     <message>
         <source>Kenya</source>
         <translation>Kénya</translation>
-    </message>
-    <message>
-        <source>Kribati</source>
-        <translation type="obsolete">Kribati</translation>
     </message>
     <message>
         <source>Korea</source>
@@ -955,10 +915,6 @@ is provided free !</source>
         <translation>Belau</translation>
     </message>
     <message>
-        <source>Palestinian Territory</source>
-        <translation type="obsolete">Palestine</translation>
-    </message>
-    <message>
         <source>Panama</source>
         <translation>Panama</translation>
     </message>
@@ -977,10 +933,6 @@ is provided free !</source>
     <message>
         <source>Philippines</source>
         <translation>Philippines</translation>
-    </message>
-    <message>
-        <source>Pitcairn</source>
-        <translation type="obsolete">Pitcairn</translation>
     </message>
     <message>
         <source>Poland</source>
@@ -1165,10 +1117,6 @@ is provided free !</source>
     <message>
         <source>Venezuela</source>
         <translation>Vénézuela</translation>
-    </message>
-    <message>
-        <source>Viet Nam</source>
-        <translation type="obsolete">Viet Nam</translation>
     </message>
     <message>
         <source>Virgin Islands</source>

@@ -77,18 +77,6 @@
         <source>Every</source>
         <translation>Cada</translation>
     </message>
-    <message>
-        <source>Var1</source>
-        <translation>Var1</translation>
-    </message>
-    <message>
-        <source>Var 2</source>
-        <translation>Var 2</translation>
-    </message>
-    <message>
-        <source>WeekVar</source>
-        <translation>VarSemana</translation>
-    </message>
 </context>
 <context>
     <name>OTimePickerDialogBase</name>

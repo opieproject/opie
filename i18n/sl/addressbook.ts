@@ -390,10 +390,6 @@ is provided free !</source>
         <translation>Stiki</translation>
     </message>
     <message>
-        <source>Afganistan</source>
-        <translation type="obsolete">Afganistan</translation>
-    </message>
-    <message>
         <source>Albania</source>
         <translation>Albanija</translation>
     </message>
@@ -418,16 +414,8 @@ is provided free !</source>
         <translation>Anguilla</translation>
     </message>
     <message>
-        <source>Antartica</source>
-        <translation type="obsolete">Antartika</translation>
-    </message>
-    <message>
         <source>Argentina</source>
         <translation>Argentina</translation>
-    </message>
-    <message>
-        <source>Armania</source>
-        <translation type="obsolete">Armanija</translation>
     </message>
     <message>
         <source>Aruba</source>
@@ -486,10 +474,6 @@ is provided free !</source>
         <translation>Bhutan</translation>
     </message>
     <message>
-        <source>Boliva</source>
-        <translation type="obsolete">Bolivija</translation>
-    </message>
-    <message>
         <source>Botswana</source>
         <translation>Botswana</translation>
     </message>
@@ -520,10 +504,6 @@ is provided free !</source>
     <message>
         <source>Cambodia</source>
         <translation>Kambodža</translation>
-    </message>
-    <message>
-        <source>Camaroon</source>
-        <translation type="obsolete">Kamerun</translation>
     </message>
     <message>
         <source>Cape Verde</source>
@@ -674,10 +654,6 @@ is provided free !</source>
         <translation>Džordžija </translation>
     </message>
     <message>
-        <source>Gahna</source>
-        <translation type="obsolete">Gana</translation>
-    </message>
-    <message>
         <source>Gibraltar</source>
         <translation>Gibraltar</translation>
     </message>
@@ -694,10 +670,6 @@ is provided free !</source>
         <translation>Grenada</translation>
     </message>
     <message>
-        <source>Guadelupe</source>
-        <translation type="obsolete">Gvadelup</translation>
-    </message>
-    <message>
         <source>Guam</source>
         <translation>Guam</translation>
     </message>
@@ -708,10 +680,6 @@ is provided free !</source>
     <message>
         <source>Guinea</source>
         <translation>Gvineja</translation>
-    </message>
-    <message>
-        <source>Guinea-bissau</source>
-        <translation type="obsolete">Guinea-bissau</translation>
     </message>
     <message>
         <source>Guyana</source>
@@ -762,10 +730,6 @@ is provided free !</source>
         <translation>Italija</translation>
     </message>
     <message>
-        <source>Jamacia</source>
-        <translation type="obsolete">Jamajka</translation>
-    </message>
-    <message>
         <source>Jordan</source>
         <translation>Jordan</translation>
     </message>
@@ -776,10 +740,6 @@ is provided free !</source>
     <message>
         <source>Kenya</source>
         <translation>Kenija</translation>
-    </message>
-    <message>
-        <source>Kribati</source>
-        <translation type="obsolete">Kribati</translation>
     </message>
     <message>
         <source>Korea</source>
@@ -954,10 +914,6 @@ is provided free !</source>
         <translation>Palau</translation>
     </message>
     <message>
-        <source>Palestinian Territory</source>
-        <translation type="obsolete">Palestinsko ozemlje</translation>
-    </message>
-    <message>
         <source>Panama</source>
         <translation>Panama</translation>
     </message>
@@ -976,10 +932,6 @@ is provided free !</source>
     <message>
         <source>Philippines</source>
         <translation>Filipini</translation>
-    </message>
-    <message>
-        <source>Pitcairn</source>
-        <translation type="obsolete">Pitcairn</translation>
     </message>
     <message>
         <source>Poland</source>
@@ -1166,10 +1118,6 @@ is provided free !</source>
         <translation>Venezuela</translation>
     </message>
     <message>
-        <source>Viet Nam</source>
-        <translation type="obsolete">Viet Nam</translation>
-    </message>
-    <message>
         <source>Virgin Islands</source>
         <translation>Deviški Otoki</translation>
     </message>
@@ -1204,10 +1152,6 @@ is provided free !</source>
     <message>
         <source>Kuwait</source>
         <translation>Kuvajt</translation>
-    </message>
-    <message>
-        <source>Kyrgystan</source>
-        <translation type="obsolete">Kyrgystan</translation>
     </message>
     <message>
         <source>Unknown</source>

@@ -77,18 +77,6 @@
         <source>Every</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Var1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Var 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WeekVar</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>OTimePickerDialogBase</name>

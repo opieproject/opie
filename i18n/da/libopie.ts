@@ -77,18 +77,6 @@
         <source>Every</source>
         <translation>Hver</translation>
     </message>
-    <message>
-        <source>Var1</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Var 2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>WeekVar</source>
-        <translation></translation>
-    </message>
 </context>
 <context>
     <name>OTimePickerDialogBase</name>
