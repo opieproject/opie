@@ -101,8 +101,11 @@ private:
 
     void loadPackageList( OPackageList *packages = 0x0, bool clearList = true );
     void searchForPackage( const QString &text );
+    void installLocalPackage( const QString &ipkFile );
 
 private slots:
+    void setDocument( const QString &ipkFile );
+    
     void initPackageInfo();
     void slotWidgetStackShow( QWidget *widget );
 

@@ -91,7 +91,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags /*fl*/ )
     initUI();
 
     // Initialize package information
-    QTimer::singleShot( 100, this, SLOT( initPackageInfo() ) );
+    QTimer::singleShot( -1, this, SLOT( initPackageInfo() ) );
 }
 
 void MainWindow::closeEvent( QCloseEvent *event )
@@ -309,6 +309,28 @@ void MainWindow::searchForPackage( const QString &text )
     }
 }
 
+void MainWindow::installLocalPackage( const QString &ipkFile )
+{
+    // Install selected file
+    InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Install local package" ), true,
+                                        OPackage::Install, new QStringList( ipkFile ) );
+    connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseDlg()) );
+
+    // Display widget
+    m_widgetStack.addWidget( dlg, 3 );
+    m_widgetStack.raiseWidget( dlg );
+}
+
+void MainWindow::setDocument( const QString &ipkFile )
+{
+    QString file = ipkFile;
+    DocLnk lnk( ipkFile );
+    if ( lnk.isValid() )
+        file = lnk.file();
+    
+    installLocalPackage( file );
+}
+
 void MainWindow::initPackageInfo()
 {
     m_widgetStack.raiseWidget( &m_statusWidget );
@@ -324,7 +346,10 @@ void MainWindow::initPackageInfo()
         delete packageList;
     }
 
-    m_widgetStack.raiseWidget( &m_packageList );
+    QWidget *widget = m_widgetStack.widget( 3 );
+    if ( !widget )
+        widget = &m_packageList;
+    m_widgetStack.raiseWidget( widget );
 }
 
 void MainWindow::slotWidgetStackShow( QWidget *widget )
@@ -537,16 +562,7 @@ void MainWindow::slotInstallLocal()
     QString package = Opie::Ui::OFileDialog::getOpenFileName( Opie::Ui::OFileSelector::NORMAL,
                                                               "/", QString::null, type );
     if ( !package.isNull() )
-    {
-        // Install selected file
-        InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Install local package" ), true,
-                                          OPackage::Install, new QStringList( package ) );
-        connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseDlg()) );
-    
-        // Display widget
-        m_widgetStack.addWidget( dlg, 3 );
-        m_widgetStack.raiseWidget( dlg );
-    }
+        installLocalPackage( package );
 }
 
 void MainWindow::slotCloseDlg()
