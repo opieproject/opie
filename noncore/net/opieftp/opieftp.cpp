@@ -642,7 +642,7 @@ void OpieFtp::populateLocalView()
             if(  fileL.find("->",0,TRUE) != -1) {
                   // overlay link image
                 pm= Resource::loadPixmap( "folder" );
-                QPixmap lnk = Resource::loadPixmap( "symlink" );
+                QPixmap lnk = Resource::loadPixmap( "opie/symlink" );
                 QPainter painter( &pm );
                 painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
                 pm.setMask( pm.createHeuristicMask( FALSE ) );
