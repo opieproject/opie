@@ -31,11 +31,6 @@ MediumMountWidget::MediumMountWidget(const QString &path,
              const char *name )
   : QWidget( parent, name )
 {
-  if(parent == 0){
-    resize(QApplication::desktop()->width(), QApplication::desktop()->height() );
-  }else{
-    resize(parent->width(), parent->height() );
-  }
   m_path = path;
   initGUI();
   m_label->setPixmap(pix );
@@ -108,7 +103,7 @@ void MediumMountWidget::initGUI()
   m_lblPath = new QLabel(tr("Limit search to:"), this );
   m_box->addWidget( m_lblPath );
 
-  
+
   m_subList = new QComboBox(FALSE,this,"docFolderList");
   m_subList->setDuplicatesEnabled(FALSE);
   m_subList->setEditable(TRUE);
@@ -119,7 +114,7 @@ void MediumMountWidget::initGUI()
   m_add->setText( tr("Add") );
   m_del = new QPushButton(m_hboxAdd);
   m_del->setText(tr("Remove"));
-  
+
   connect(m_add, SIGNAL(clicked() ),
     this, SLOT(slotAdd() ) );
   connect(m_del, SIGNAL(clicked() ),
@@ -128,7 +123,7 @@ void MediumMountWidget::initGUI()
   m_box->addWidget(m_hboxAdd );
   m_scan_all_check = new QCheckBox( tr("Scan whole media"), this );
   connect(m_scan_all_check,SIGNAL(stateChanged(int)),this,SLOT(slotScanAllChanged(int)));
- 
+
   m_box->addWidget(m_scan_all_check);
 
   m_always = new QCheckBox( tr("Always check this medium"), this );
