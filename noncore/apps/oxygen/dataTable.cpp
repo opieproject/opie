@@ -43,8 +43,8 @@ OxydataWidget::OxydataWidget(QWidget *parent) : QWidget(parent)
     middle->setFont( bf );
 
     DataTable = new OxydataTable( 9,2, this );
-    DataTable->setColumnWidth ( 1 , 118 );
-    DataTable->setColumnWidth ( 0 , 118 );
+//    DataTable->setColumnWidth ( 1 , 118 );
+//    DataTable->setColumnWidth ( 0 , 118 );
     setTable();
 
     qgrid->addWidget( hbox,0,0 );

@@ -20,48 +20,23 @@
 #include <qapplication.h>
 #include <qpushbutton.h>
 #include <qvbox.h>
+#include <qtabwidget.h>
 #include "calcdlg.h"
 #include "calcdlgui.h"
 #include "datawidgetui.h"
 #include "psewidget.h"
 
-Oxygen::Oxygen()
-  : QMainWindow()
+Oxygen::Oxygen() : QMainWindow()
 {
-    this->setCaption( tr( "Oxygen" ) );
-    vbox = new QVBox( this );
-    QPushButton *dataButton = new QPushButton( "Data", vbox );
-    connect ( dataButton, SIGNAL( clicked() ), this, SLOT( slotData() ) );
-    QPushButton *calcButton = new QPushButton( "Calculations", vbox );
-    connect ( calcButton, SIGNAL( clicked() ), this, SLOT( slotCalculations() ) );
-    QPushButton *pseButton = new QPushButton( "PSE", vbox );
-    connect ( pseButton, SIGNAL( clicked() ), this, SLOT( slotPSE() ) );
-
-    setCentralWidget( vbox );
-}
-
-
-void Oxygen::close() const
-{
-  QApplication::exit();
-}
-
-//SLOTS
-
-void Oxygen::slotCalculations() const{ 
-    calcDlgUI *CalcDlgUI = new calcDlgUI();
-    CalcDlgUI->show();
-};
-
-void Oxygen::slotData() const{ 
-    dataWidgetUI *DataWidgetUI = new dataWidgetUI();
-    DataWidgetUI->showMaximized();
-    DataWidgetUI->show();
-};
-
-void Oxygen::slotPSE() const{
     PSEWidget *pse = new PSEWidget();
-    pse->showMaximized();
-    pse->show();
-};
-
+    calcDlgUI *CalcDlgUI = new calcDlgUI();
+    dataWidgetUI *DataWidgetUI = new dataWidgetUI();
+    
+    this->setCaption( tr( "Oxygen" ) );
+    
+    QTabWidget *tabw = new QTabWidget( this , "qtab" );
+    tabw->addTab( pse, tr( "PSE" ));
+    tabw->addTab( DataWidgetUI , tr( "Data" ) );
+    tabw->addTab( CalcDlgUI, tr( "Calculations" ) );
+     setCentralWidget( tabw );
+}

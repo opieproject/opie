@@ -24,7 +24,6 @@
 
 calcDlgUI::calcDlgUI() : CalcDlg()
 {
-    this->showMaximized();
     kmolcalc = new KMolCalc;
     connect( calculate, SIGNAL( clicked() ), this, SLOT( calc() ) );
     connect( clear_fields, SIGNAL( clicked() ), this, SLOT( clear() ) );

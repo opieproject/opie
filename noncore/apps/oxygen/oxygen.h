@@ -9,18 +9,10 @@
 
 #include <qmainwindow.h>
 
-class  QVBox;
-
 class Oxygen : public QMainWindow
 {
 	Q_OBJECT
 	
     public:
 		Oxygen();
-        QVBox *vbox;
-	private slots:
-        void slotCalculations() const;
-        void slotData() const;
-        void slotPSE() const;
-		void close() const;
 };
