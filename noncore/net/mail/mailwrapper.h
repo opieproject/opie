@@ -71,20 +71,21 @@ class Folder : public QObject
     Q_OBJECT
 
 public:
-    Folder( const QString&init_name );
+    Folder( const QString&init_name,const QString&sep );
     const QString&getDisplayName()const { return nameDisplay; }
     const QString&getName()const { return name; }
     virtual bool may_select()const{return true;};    
+    const QString&Separator()const;
 
 protected:
-    QString nameDisplay, name;
+    QString nameDisplay, name, separator;
     
 };
 
 class IMAPFolder : public Folder
 {
     public:
-        IMAPFolder(const QString&name,bool select=true,const QString&prefix="" );
+        IMAPFolder(const QString&name, const QString&sep, bool select=true,const QString&prefix="" );
         virtual bool may_select()const{return m_MaySelect;}
     private:
         bool m_MaySelect;

@@ -165,6 +165,7 @@ QList<Folder>* IMAPwrapper::listFolders()
     result = clist_new();
     mailimap_mailbox_list *list;
     err = mailimap_list( m_imap, (char*)"", (char*)mask, &result );
+    QString del;
     if ( err == MAILIMAP_NO_ERROR ) {
         current = result->first;
         for ( int i = result->count; i > 0; i-- ) {
@@ -172,7 +173,8 @@ QList<Folder>* IMAPwrapper::listFolders()
             // it is better use the deep copy mechanism of qt itself
             // instead of using strdup!
             temp = list->mb_name;
-            folders->append( new IMAPFolder(temp));
+            del = list->mb_delimiter;
+            folders->append( new IMAPFolder(temp,del,true,account->getPrefix()));
             current = current->next;
         }
     } else {
@@ -206,7 +208,8 @@ QList<Folder>* IMAPwrapper::listFolders()
                 selectable = !(bflags->mbf_type==MAILIMAP_MBX_LIST_FLAGS_SFLAG&&
                             bflags->mbf_sflag==MAILIMAP_MBX_LIST_SFLAG_NOSELECT);
             }
-            folders->append(new IMAPFolder(temp,selectable,account->getPrefix()));
+            del = list->mb_delimiter;
+            folders->append(new IMAPFolder(temp,del,selectable,account->getPrefix()));
         }
     } else {
         qDebug("error fetching folders %s",m_imap->imap_response);

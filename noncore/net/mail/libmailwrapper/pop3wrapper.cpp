@@ -323,7 +323,7 @@ QList<Folder>* POP3wrapper::listFolders()
     */
     QList<Folder> * folders = new QList<Folder>();
     folders->setAutoDelete( false );
-    Folder*inb=new Folder("INBOX");
+    Folder*inb=new Folder("INBOX","/");
     folders->append(inb);
     return folders;
 }

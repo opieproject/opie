@@ -17,7 +17,7 @@ Attachment::Attachment( DocLnk lnk )
     size = QFileInfo( doc.file() ).size();
 }
 
-Folder::Folder(const QString&tmp_name )
+Folder::Folder(const QString&tmp_name, const QString&sep  )
 {
     name = tmp_name;
     nameDisplay = name;
@@ -35,11 +35,16 @@ Folder::Folder(const QString&tmp_name )
         }
     }
     qDebug( "folder " + name + " - displayed as " + nameDisplay );
+    separator = sep;
 }
 
+const QString& Folder::Separator()const
+{
+    return separator;
+}
 
-IMAPFolder::IMAPFolder(const QString&name,bool select,const QString&prefix )
-    : Folder( name ),m_MaySelect(select)
+IMAPFolder::IMAPFolder(const QString&name,const QString&sep, bool select,const QString&prefix )
+    : Folder( name,sep ),m_MaySelect(select)
 {
     if (prefix.length()>0) {
         if (nameDisplay.startsWith(prefix) && nameDisplay.length()>prefix.length()) {

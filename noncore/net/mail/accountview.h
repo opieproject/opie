@@ -70,9 +70,11 @@ class IMAPfolderItem : public AccountViewItem
 
 public:
     IMAPfolderItem( Folder *folder, IMAPviewItem *parent , QListViewItem*after  );
+    IMAPfolderItem( Folder *folder, IMAPfolderItem *parent , QListViewItem*after, IMAPviewItem *master  );
     ~IMAPfolderItem();
     virtual void refresh(QList<RecMail>&);
     virtual RecBody fetchBody(const RecMail&);
+    bool matchName(const QString&name)const;
 private:
     Folder *folder;
     IMAPviewItem *imap;
