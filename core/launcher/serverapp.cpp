@@ -58,26 +58,32 @@ static ServerApplication *serverApp = 0;
 static int loggedin=0;
 
 QCopKeyRegister::QCopKeyRegister()
-    : m_keyCode( 0 ) {
+    : m_keyCode( 0 )
+{
 }
 
 QCopKeyRegister::QCopKeyRegister( int k, const QCString& c, const QCString& m )
-    :m_keyCode( k ), m_channel( c ), m_message( m ) {
+    :m_keyCode( k ), m_channel( c ), m_message( m )
+{
 }
 
-int QCopKeyRegister::keyCode()const {
+int QCopKeyRegister::keyCode() const
+{
     return m_keyCode;
 }
 
-QCString QCopKeyRegister::channel()const {
+QCString QCopKeyRegister::channel() const
+{
     return m_channel;
 }
 
-QCString QCopKeyRegister::message()const {
+QCString QCopKeyRegister::message() const
+{
     return m_message;
 }
 
-bool QCopKeyRegister::send() {
+bool QCopKeyRegister::send()
+{
     if (m_channel.isNull() )
         return false;
 
@@ -157,15 +163,18 @@ void KeyFilter::timerEvent(QTimerEvent* e)
     }
 }
 
-void KeyFilter::registerKey( const QCopKeyRegister& key ) {
+void KeyFilter::registerKey( const QCopKeyRegister& key )
+{
     m_keys.insert( key.keyCode(), key );
 }
 
-void KeyFilter::unregisterKey( const QCopKeyRegister& key ) {
+void KeyFilter::unregisterKey( const QCopKeyRegister& key )
+{
     m_keys.remove( key.keyCode() );
 }
 
-bool KeyFilter::keyRegistered( int key ) {
+bool KeyFilter::keyRegistered( int key )
+{
     /*
      * Check if we've a key registered
      */
@@ -173,7 +182,6 @@ bool KeyFilter::keyRegistered( int key ) {
         return false;
     else
         return true;
-
 }
 
 bool KeyFilter::checkButtonAction(bool db, int keycode,  int press, int autoRepeat)
@@ -195,8 +203,7 @@ bool KeyFilter::checkButtonAction(bool db, int keycode,  int press, int autoRepe
     if (!db ) {
         if (keycode != 0 &&press && !autoRepeat && keyRegistered(keycode) )
             return true;
-    }else {
-
+    } else {
 
         // First check to see if DeviceButtonManager knows something about this button:
         const ODeviceButton* button = ODevice::inst()->buttonForKeycode(keycode);
@@ -266,7 +273,8 @@ bool ServerApplication::doRestart = FALSE;
 bool ServerApplication::allowRestart = TRUE;
 bool ServerApplication::ms_is_starting  = TRUE;
 
-void ServerApplication::switchLCD( bool on ) {
+void ServerApplication::switchLCD( bool on )
+{
     if ( !qApp )
         return;
 
@@ -278,7 +286,7 @@ void ServerApplication::switchLCD( bool on ) {
     if ( on ) {
         dapp-> m_screensaver-> setDisplayState ( true );
         dapp-> m_screensaver-> setBacklight ( -3 );
-    }else
+    } else
         dapp-> m_screensaver-> setDisplayState ( false );
 
 
@@ -359,13 +367,13 @@ ServerApplication::~ServerApplication()
 {
     ungrabKeyboard();
 
-
     delete pa;
     delete m_ps;
     delete m_ps_last;
 }
 
-void ServerApplication::apmTimeout() {
+void ServerApplication::apmTimeout()
+{
     serverApp-> checkMemory( ); // in case no events are generated
     *m_ps_last = *m_ps;
     *m_ps = PowerStatusManager::readStatus();
@@ -408,7 +416,8 @@ void ServerApplication::apmTimeout() {
 }
 
 void ServerApplication::systemMessage( const QCString& msg,
-                                       const QByteArray& data ) {
+                                       const QByteArray& data )
+{
     QDataStream stream ( data, IO_ReadOnly );
 
     if ( msg == "setScreenSaverInterval(int)" ) {
@@ -521,20 +530,20 @@ void ServerApplication::login(bool at_poweron)
 namespace {
     void execAutoStart(const QDateTime& suspendTime ) {
         QString appName;
-    int delay;
-    QDateTime now = QDateTime::currentDateTime();
+        int delay;
+        QDateTime now = QDateTime::currentDateTime();
 
         Config cfg( "autostart" );
-    cfg.setGroup( "AutoStart" );
-    appName = cfg.readEntry( "Apps", "" );
-    delay = cfg.readNumEntry( "Delay", 0  );
+        cfg.setGroup( "AutoStart" );
+        appName = cfg.readEntry( "Apps", "" );
+        delay = cfg.readNumEntry( "Delay", 0  );
 
-    // If the time between suspend and resume was longer then the
-    // value saved as delay, start the app
-    if ( suspendTime.secsTo( now ) >= ( delay * 60 ) && !appName.isEmpty() ) {
-        QCopEnvelope e( "QPE/System", "execute(QString)" );
-        e << QString( appName );
-    }
+        // If the time between suspend and resume was longer then the
+        // value saved as delay, start the app
+        if ( suspendTime.secsTo( now ) >= ( delay * 60 ) && !appName.isEmpty() ) {
+            QCopEnvelope e( "QPE/System", "execute(QString)" );
+            e << QString( appName );
+        }
     }
 }
 
@@ -553,7 +562,6 @@ void ServerApplication::togglePower()
     m_suspendTime = QDateTime::currentDateTime();
 
 #ifdef QWS
-
     if ( Opie::Security::MultiauthPassword::needToAuthenticate ( true ) && qt_screen ) {
         // Should use a big black window instead.
         // But this would not show up fast enough
@@ -616,18 +624,19 @@ bool ServerApplication::qwsEventFilter( QWSEvent *e )
     checkMemory();
 
     if ( e->type == QWSEvent::Mouse ) {
-    QWSMouseEvent *me = (QWSMouseEvent *)e;
-    static bool up = TRUE;
-    if ( me->simpleData.state&LeftButton ) {
-        if ( up ) {
-        up = FALSE;
-        screenClick(TRUE);
+        QWSMouseEvent *me = (QWSMouseEvent *)e;
+        static bool up = TRUE;
+        if ( me->simpleData.state&LeftButton ) {
+            if ( up ) {
+              up = FALSE;
+              screenClick(TRUE);
+            }
+        } else if ( !up ) {
+            up = TRUE;
+            screenClick(FALSE);
         }
-    } else if ( !up ) {
-        up = TRUE;
-        screenClick(FALSE);
-    }
-    }else if ( e->type == QWSEvent::Key ) {
+    } else
+    if ( e->type == QWSEvent::Key ) {
         QWSKeyEvent * ke = static_cast<QWSKeyEvent*>( e );
         if ( kf->checkButtonAction( false,
                                     ke-> simpleData.keycode,
@@ -650,8 +659,9 @@ void ServerApplication::showSafeMode()
         "and the system is now in Safe Mode. "
         "Plugins are not loaded in Safe Mode. "
         "You can use the Plugin Manager to "
-        "disable plugins that cause system error."), tr("OK"), tr("Plugin Manager..."), 0) == 1 ) {
-    Global::execute( "pluginmanager" );
+        "disable plugins that cause system error."), tr("OK"), tr("Plugin Manager..."), 0) == 1 )
+    {
+        Global::execute( "pluginmanager" );
     }
 #endif
 }
@@ -665,7 +675,7 @@ void ServerApplication::clearSafeMode()
     cfg.setGroup( "Global" );
     QString mode = cfg.readEntry( "Mode", "Normal" );
     if ( mode == "MaybeSafe" ) {
-    cfg.writeEntry( "Mode", "Normal" );
+        cfg.writeEntry( "Mode", "Normal" );
     }
 #endif
 }
@@ -674,7 +684,7 @@ void ServerApplication::clearSafeMode()
 void ServerApplication::shutdown()
 {
     if ( type() != GuiServer )
-    return;
+        return;
     ShutdownImpl *sd = new ShutdownImpl( 0, 0, WDestructiveClose );
     connect( sd, SIGNAL(shutdown(ShutdownImpl::Type)),
          this, SLOT(shutdown(ShutdownImpl::Type)) );
@@ -729,9 +739,9 @@ void ServerApplication::restart()
 #ifdef ALL_APPLETS_ON_THIS_WORLD_ARE_FIXED
         /* same as above */
         emit aboutToQuit();
-    prepareForTermination(TRUE);
-    doRestart = TRUE;
-    quit();
+        prepareForTermination(TRUE);
+        doRestart = TRUE;
+        quit();
 #else
         prepareForTermination( true );
         for ( int fd = 3; fd < 100; fd++ )
