@@ -1,4 +1,4 @@
-#ifndef INTERFACEPPP_H 
+#ifndef INTERFACEPPP_H
 #define INTERFACEPPP_H
 
 #include "interface.h"
@@ -18,6 +18,7 @@ public:
 
 signals:
   void begin_connect();
+  void hangup_now();
 
 public slots:
   virtual bool refresh();

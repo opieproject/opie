@@ -12,22 +12,22 @@ class Interface : public QObject{
 signals:
   void updateInterface(Interface *i);
   void updateMessage(const QString &message);
-  
+
 public:
   Interface(QObject * parent=0, const char * name= "unknown", bool status = false);
-  
+
   QString getInterfaceName() const { QString n(this->name()); return n; };
   void setInterfaceName( const QString &n ) { this->setName(n); };
-  
+
   bool getStatus() const { return status; };
   void setStatus(bool newStatus);
 
   bool isAttached() const { return attached; };
   void setAttached(bool isAttached=false);
-  
+
   QString getHardwareName() const { return hardwareName; };
   void setHardwareName(const QString &name="Unknown");
-  
+
   Module* getModuleOwner() const { return moduleOwner; };
   void setModuleOwner(Module *owner=NULL);
 
@@ -47,7 +47,7 @@ public:
   virtual void stop();
   virtual void restart();
 
-private:
+protected:
   // Interface information
   QString hardwareName;
   Module *moduleOwner;

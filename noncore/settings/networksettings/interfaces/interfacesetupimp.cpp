@@ -118,6 +118,9 @@ bool InterfaceSetupImp::saveSettings(){
       QString dns = firstDNSLineEdit->text() + " " + secondDNSLineEdit->text();
       interfaces->setInterfaceOption("up "DNSSCRIPT" -a ", dns);
       interfaces->setInterfaceOption("down "DNSSCRIPT" -r ", dns);
+    }else{
+        interfaces->removeInterfaceOption("up "DNSSCRIPT" -a ");
+        interfaces->removeInterfaceOption("down "DNSSCRIPT" -r");
     }
   }
 

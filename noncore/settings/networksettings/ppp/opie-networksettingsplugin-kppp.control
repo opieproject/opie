@@ -1,5 +1,5 @@
 Package: opie-networksettingsplugin-kppp
-Files: plugins/networksettings/libkppp.so* 
+Files: plugins/networksettings/libkppp.so* root/etc/ppp/peers/*
 Priority: optional
 Section: opie/settings
 Maintainer: Patrick S. Vogt <tille@handhelds.org>

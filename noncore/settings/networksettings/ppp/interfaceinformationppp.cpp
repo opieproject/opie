@@ -31,6 +31,7 @@ InterfaceInformationPPP::InterfaceInformationPPP(QWidget *parent, const char *na
 //    InterfaceInformationLayout->addMultiCellWidget( con, 8, 8, 0, 1 );
      InterfaceInformationLayout->addWidget( con, 1, 0 );
      connect(i, SIGNAL(begin_connect()),con, SLOT(preinit()));
+     connect(i, SIGNAL(hangup_now() ), con, SLOT(cancelbutton() ) );
 }
 
 

@@ -39,8 +39,8 @@ bool InterfacePPP::refresh()
 {
     qDebug("InterfacePPP::refresh()");
     updateInterface(this);
-    QMessageBox::information(0,"Not Implemented","This feature is not yet implemneted... ;-(");
-    return false;
+
+    return true;
 }
 
 void InterfacePPP::start()
@@ -132,6 +132,9 @@ void InterfacePPP::start()
 void InterfacePPP::stop()
 {
     qDebug("InterfacePPP::stop");
+    emit hangup_now();
+    status = false; // not connected
+    refresh();
 
 }
 

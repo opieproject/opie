@@ -1210,6 +1210,29 @@ bool ConnectWidget::execppp() {
   if(_ifaceppp->data()->autoDNS())
     command += " usepeerdns";
 
+
+  // PAP settings
+  if(_ifaceppp->data()->authMethod() == AUTH_PAP) {
+    command += " -chap user ";
+    command = command + _ifaceppp->data()->storedUsername();
+  }
+
+  // CHAP settings
+  if(_ifaceppp->data()->authMethod() == AUTH_CHAP) {
+    command += " -pap user ";
+    command = command  + _ifaceppp->data()->storedUsername();
+  }
+
+  // PAP/CHAP settings
+  if(_ifaceppp->data()->authMethod() == AUTH_PAPCHAP) {
+    command += " user ";
+    command = command + _ifaceppp->data()->storedUsername();
+  }
+
+  // check for debug
+  if(_ifaceppp->data()->getPPPDebug())
+    command += " debug";
+
   QStringList &arglist = _ifaceppp->data()->pppdArgument();
   for ( QStringList::Iterator it = arglist.begin();
         it != arglist.end();
@@ -1218,27 +1241,7 @@ bool ConnectWidget::execppp() {
     command += " " + *it;
   }
 
-  // PAP settings
-  if(_ifaceppp->data()->authMethod() == AUTH_PAP) {
-    command += " -chap user ";
-    command = command + "\"" + _ifaceppp->data()->storedUsername() + "\"";
-  }
-
-  // CHAP settings
-  if(_ifaceppp->data()->authMethod() == AUTH_CHAP) {
-    command += " -pap user ";
-    command = command + "\"" + _ifaceppp->data()->storedUsername() + "\"";
-  }
-
-  // PAP/CHAP settings
-  if(_ifaceppp->data()->authMethod() == AUTH_PAPCHAP) {
-    command += " user ";
-    command = command + "\"" + _ifaceppp->data()->storedUsername() + "\"";
-  }
-
-  // check for debug
-  if(_ifaceppp->data()->getPPPDebug())
-    command += " debug";
+  command += " call opie-kppp";
 
   if (command.length() > MAX_CMDLEN) {
       QMessageBox::critical(this, "error", i18n(
@@ -1248,6 +1251,8 @@ bool ConnectWidget::execppp() {
 
     return false; // nonsensically long command which would bust my buffer buf.
   }
+
+  qWarning("Command IS: %s",command.latin1() );
 
   qApp->flushX();
 
