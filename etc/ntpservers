@@ -1,0 +1,6 @@
+[0]
+name = time.fu-berlin.de
+[1]
+name = swisstime.ethz.ch
+[servers]
+count = 2
