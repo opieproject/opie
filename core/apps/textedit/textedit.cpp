@@ -43,6 +43,7 @@
 #include <qpe/qpetoolbar.h>
 #include <qpe/qcopenvelope_qws.h>
 
+#include <qtextstream.h>
 #include <qdatetime.h>
 #include <qclipboard.h>
 #include <qstringlist.h>
@@ -59,7 +60,7 @@
 #include <qcheckbox.h>
 #include <qcombo.h>
 #include <qlayout.h>
-
+#include <qapplication.h>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <stdlib.h> //getenv
@@ -171,11 +172,10 @@ class QpeEditor : public QMultiLineEdit
     //    Q_OBJECT
 public:
     QpeEditor( QWidget *parent, const char * name = 0 )
-  : QMultiLineEdit( parent, name )
-        {
+  : QMultiLineEdit( parent, name ) {
             clearTableFlags();
             setTableFlags( Tbl_vScrollBar | Tbl_autoHScrollBar );
-        }
+}
 
     void find( const QString &txt, bool caseSensitive,
                             bool backwards );
@@ -224,9 +224,7 @@ void QpeEditor::find ( const QString &txt, bool caseSensitive,
             line++;
             col = 0;
         }
-
     }
-
 }
 
 
@@ -357,6 +355,12 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     filePermAction->setToggleAction(TRUE);
     filePermAction->addTo( advancedMenu);
 
+    searchBarAction = new QAction( tr("Search Bar Open"), QString::null, 0, this, 0 );
+    connect( searchBarAction, SIGNAL( toggled(bool) ), this, SLOT( setSearchBar(bool) ) );
+    searchBarAction->setToggleAction(TRUE);
+    searchBarAction->addTo( advancedMenu);
+
+
     font->insertSeparator();
 
     font->insertItem(tr("About"), this, SLOT( doAbout()) );
@@ -410,14 +414,19 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     defaultFont = QFont ( family, size, weight, italic );
     editor-> setFont ( defaultFont );
 
-    updateCaption();
+//    updateCaption();
 
     cfg.setGroup ( "View" );
 
-    promptExit = cfg. readBoolEntry ( "PromptExit", false );
-    openDesktop = cfg. readBoolEntry ( "OpenDesktop", true );
-    filePerms = cfg. readBoolEntry ( "FilePermissions", false );
-        
+    promptExit = cfg.readBoolEntry ( "PromptExit", false );
+    openDesktop = cfg.readBoolEntry ( "OpenDesktop", true );
+    filePerms = cfg.readBoolEntry ( "FilePermissions", false );
+    useSearchBar = cfg.readBoolEntry ( "SearchBar", false );
+
+    if(useSearchBar) {
+        searchBarAction->setOn(true);
+    } else{
+    }
     if(promptExit )  nAdvanced->setOn ( true );
     if(openDesktop) desktopAction->setOn ( true );
     if(filePerms) filePermAction->setOn ( true );
@@ -426,13 +435,28 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     wa-> setOn ( wrap );
     setWordWrap ( wrap );
 
-     if(cfg.readEntry("startNew","TRUE") == "TRUE") {
-         nStart->setOn(TRUE);
-         fileNew();
-     } else {
-         fileOpen();
-     }
-     
+     if( qApp->argc() > 0) {
+         currentFileName=qApp->argv()[1];
+//         qDebug("<<<<<<<<<<<<<<<<<<<<<<<< "+currentFileName);
+         QFileInfo fi(currentFileName);
+
+         if(fi.baseName().left(1) == "") {
+             openDotFile(currentFileName);
+         } else {
+
+             nStart->setOn(TRUE);
+             openFile(currentFileName);
+         }
+     } else
+        if(cfg.readEntry("startNew","TRUE") == "TRUE") {
+
+        nStart->setOn(TRUE);
+        fileNew();
+    } else {
+
+        fileOpen();
+    }
+
     viewSelection = cfg.readNumEntry( "FileView", 0 );
 }
 
@@ -447,18 +471,19 @@ void TextEdit::cleanUp() {
     Config cfg ( "TextEdit" );
     cfg. setGroup ( "Font" );
     QFont f = editor->font();
-    cfg. writeEntry ( "Family", f. family ( ));
-    cfg. writeEntry ( "Size",   f. pointSize ( ));
-    cfg. writeEntry ( "Weight", f. weight ( ));
-    cfg. writeEntry ( "Italic", f. italic ( ));
+    cfg.writeEntry ( "Family", f. family ( ));
+    cfg.writeEntry ( "Size",   f. pointSize ( ));
+    cfg.writeEntry ( "Weight", f. weight ( ));
+    cfg.writeEntry ( "Italic", f. italic ( ));
     
-    cfg. setGroup ( "View" );
-    cfg. writeEntry ( "Wrap",     editor-> wordWrap ( ) == QMultiLineEdit::WidgetWidth );
-    cfg. writeEntry ( "FileView", viewSelection );
+    cfg.setGroup ( "View" );
+    cfg.writeEntry ( "Wrap",     editor-> wordWrap ( ) == QMultiLineEdit::WidgetWidth );
+    cfg.writeEntry ( "FileView", viewSelection );
 
-    cfg. writeEntry ( "PromptExit", promptExit );
-    cfg. writeEntry ( "OpenDesktop", openDesktop );
-    cfg. writeEntry ( "FilePermissions", filePerms );
+    cfg.writeEntry ( "PromptExit", promptExit );
+    cfg.writeEntry ( "OpenDesktop", openDesktop );
+    cfg.writeEntry ( "FilePermissions", filePerms );
+    cfg.writeEntry ( "SearchBar", useSearchBar );
 }
 
 
@@ -520,6 +545,19 @@ void TextEdit::setWordWrap(bool y) {
     editor->setEdited( state );
 }
 
+void TextEdit::setSearchBar(bool b) {
+    useSearchBar=b;
+    Config cfg("TextEdit");
+    cfg.setGroup("View");
+    cfg.writeEntry ( "SearchBar", b );
+    searchBarAction->setOn(b);
+    if(b)
+        searchBar->show();
+    else
+        searchBar->hide();
+    editor->setFocus();            
+}
+
 void TextEdit::fileNew() {
 //     if( !bFromDocView  ) {
 //         saveAs();
@@ -546,10 +584,10 @@ void TextEdit::fileOpen() {
 }
 
 void TextEdit::doSearchBar() {
-    Config cfg("TextEdit");
-    cfg.setGroup("View");
-    if(cfg.readEntry("SearchBar","Closed") != "Opened")
+    if(!useSearchBar)
         searchBar->hide();
+    else
+        searchBar->show();
 }
 
 #if 0
@@ -598,9 +636,9 @@ void TextEdit::editFind() {
     searchBar->show();
     searchVisible = TRUE;
     searchEdit->setFocus();
-    Config cfg("TextEdit");
-    cfg.setGroup("View");
-    cfg.writeEntry("SearchBar","Opened");
+//     Config cfg("TextEdit");
+//     cfg.setGroup("View");
+//     cfg.writeEntry("SearchBar","Opened");
     
 }
 
@@ -612,10 +650,10 @@ void TextEdit::findNext() {
 void TextEdit::findClose() {
     searchVisible = FALSE;
     searchBar->hide();
-    Config cfg("TextEdit");
-    cfg.setGroup("View");
-    cfg.writeEntry("SearchBar","Closed");
-    cfg.write();
+//     Config cfg("TextEdit");
+//     cfg.setGroup("View");
+//     cfg.writeEntry("SearchBar","Closed");
+//     cfg.write();
 }
 
 void TextEdit::search() {
@@ -635,15 +673,38 @@ void TextEdit::newFile( const DocLnk &f ) {
 //    editor->setEdited( FALSE);
 }
 
+void TextEdit::openDotFile( const QString &f ) {
+    if(!currentFileName.isEmpty()) {
+    currentFileName=f;
+    
+    qDebug("openFile dotfile " + currentFileName);
+    QString txt;
+    QFile file(f);
+    file.open(IO_ReadWrite);
+    QTextStream t(&file);
+    while ( !t.atEnd()) {
+        txt+=t.readLine();
+    }
+    editor->setText(txt);
+    editor->setEdited( FALSE);
+    edited1=FALSE;
+    edited=FALSE;
+
+
+    }
+    updateCaption( currentFileName);
+}
+
 void TextEdit::openFile( const QString &f ) {
     qDebug("filename is "+ f);
     QString filer;
+    QFileInfo fi( f);
 //    bFromDocView = TRUE;
     if(f.find(".desktop",0,TRUE) != -1 && !openDesktop) {
         switch ( QMessageBox::warning(this,tr("Text Editor"),
-        tr("Text Editor has detected<BR>you selected a <B>.desktop</B>
+                                      tr("Text Editor has detected<BR>you selected a <B>.desktop</B>
 file.<BR>Open <B>.desktop</B> file or <B>linked</B> file?"),
-        tr(".desktop File"),tr("Linked Document"),0,1,1) ) {
+                                      tr(".desktop File"),tr("Linked Document"),0,1,1) ) {
           case 0:
               filer = f;
               break;
@@ -652,22 +713,26 @@ file.<BR>Open <B>.desktop</B> file or <B>linked</B> file?"),
               filer = sf.file();
               break;
         }
+    } else if(fi.baseName().left(1) == "") {
+        currentFileName=f;
+        openDotFile(currentFileName);
     } else {
-         DocLnk sf(f);
-         filer = sf.file();
-         if(filer.right(1) == "/")
-         filer = f;
+        DocLnk sf(f);
+        filer = sf.file();
+        if(filer.right(1) == "/")
+            filer = f;
     }
         
     DocLnk nf;
     nf.setType("text/plain");
     nf.setFile(filer);
     currentFileName=filer;
-    QFileInfo fi( currentFileName);
-    nf.setName(fi.baseName());
-    qDebug("openFile string "+currentFileName);
 
-    openFile(nf);
+        nf.setName(fi.baseName());
+        openFile(nf);
+
+        qDebug("openFile string "+currentFileName);
+
     showEditTools();
       // Show filename in caption
     QString name = filer;
@@ -708,7 +773,7 @@ void TextEdit::showEditTools() {
     menu->show();
     editBar->show();
     if ( searchVisible )
-  searchBar->show();
+        searchBar->show();
 //    updateCaption();
     setWState (WState_Reserved1 );
 }
@@ -876,29 +941,43 @@ void TextEdit::clear() {
 }
 
 void TextEdit::updateCaption( const QString &name ) {
-    if ( !doc )
-  setCaption( tr("Text Editor") );
+    
+    if ( name.isEmpty() )
+        setCaption( tr("Text Editor") );
     else {
-  QString s = name;
-  if ( s.isNull() )
-      s = doc->name();
-  if ( s.isEmpty()  ) {
-      s = tr( "Unnamed" );
-       currentFileName=s;
-  }
-  if(s.left(1) == "/")
-      s = s.right(s.length()-1);
-  setCaption( s + " - " + tr("Text Editor") );
+        QString s = name;
+        if ( s.isNull() )
+            s = doc->name();
+        if ( s.isEmpty()  ) {
+            s = tr( "Unnamed" );
+            currentFileName=s;
+        }
+        if(s.left(1) == "/")
+            s = s.right(s.length()-1);
+        setCaption( s + " - " + tr("Text Editor") );
     }
 }
 
 void TextEdit::setDocument(const QString& fileref) {
-    bFromDocView = TRUE;
-    openFile(fileref);
-    editor->setEdited(TRUE);
-    edited1=FALSE;
-    edited=TRUE;
-    doSearchBar();
+    if(fileref != "Unnamed") {
+        currentFileName=fileref;
+        qDebug("setDocument");
+        QFileInfo fi(currentFileName);
+        qDebug("basename:"+fi.baseName()+": current filenmame "+currentFileName);
+        if(fi.baseName().left(1) == "") {
+//        openDotFile(currentFileName);
+        } else {
+            qDebug("setDoc open");
+            bFromDocView = TRUE;
+            openFile(fileref);
+            editor->setEdited(TRUE);
+            edited1=FALSE;
+            edited=TRUE;
+
+//    doSearchBar();
+        }
+    }
+    updateCaption( currentFileName);
 }
 
 void TextEdit::closeEvent( QCloseEvent *e ) {
@@ -1000,3 +1079,4 @@ void TextEdit::editPasteTimeDate() {
   editor->paste();
 #endif
 }
+

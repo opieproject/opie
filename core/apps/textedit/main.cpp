@@ -28,8 +28,8 @@ int main( int argc, char **argv )
     
     TextEdit e;
     a.showMainDocumentWidget(&e);
-    if ( argc == 3 && argv[1] == QCString("-f") )
-	e.openFile(argv[2]);
+//     if ( argc == 3 && argv[1] == QCString("-f") )
+//   e.openFile(argv[2]);
 
     a.exec();
 }

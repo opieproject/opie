@@ -57,7 +57,7 @@ public:
     ~TextEdit();
 
     QPopupMenu *font;
-    QAction *nStart, *nFileDlgOpt, *nAdvanced, *desktopAction, *filePermAction;
+    QAction *nStart, *nFileDlgOpt, *nAdvanced, *desktopAction, *filePermAction, *searchBarAction;
     bool edited, edited1;
     void openFile( const QString & );
         QCopChannel * channel;
@@ -65,7 +65,7 @@ public slots:
     void editorChanged();
 void  receive(const QCString&, const QByteArray&);
 protected:
-    bool fileIs, useAdvancedFeatures, promptExit, openDesktop, filePerms;
+    bool fileIs, useAdvancedFeatures, promptExit, openDesktop, filePerms, useSearchBar;
     void closeEvent( QCloseEvent *e );
     void doSearchBar();
 private slots:
@@ -106,8 +106,10 @@ private slots:
     void setBold(bool y);
     void setItalic(bool y);
     void setWordWrap(bool y);
+    void setSearchBar(bool);
 
 private:
+    void openDotFile(const QString &);
     void colorChanged( const QColor &c );
     void clear();
     void updateCaption( const QString &name=QString::null );
