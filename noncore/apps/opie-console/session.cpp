@@ -45,26 +45,32 @@ void Session::connect() {
     if ( !m_layer || !m_emu )
         return;
 
+    m_connected = true;
+
     qWarning("connection in session");
     QObject::connect(m_layer, SIGNAL(received(const QByteArray&) ),
             m_emu, SLOT(recv(const QByteArray&) ) );
     QObject::connect(m_emu, SIGNAL(send(const QByteArray&) ),
             m_layer, SLOT(send(const QByteArray&) ) );
-
 }
+
 void Session::disconnect() {
 
     if ( !m_layer || !m_emu )
         return;
+
+    m_connected = false;
 
     QObject::disconnect(m_layer, SIGNAL(received(const QByteArray&) ),
             m_emu, SLOT(recv(const QByteArray&) ) );
     QObject::disconnect(m_emu, SIGNAL(send(const QByteArray&) ),
             m_layer, SLOT(send(const QByteArray&) ) );
 }
+
 void Session::setName( const QString& na){
     m_name = na;
 }
+
 void Session::setWidgetStack( QWidgetStack* wid ) {
     delete m_emu;
     m_emu = 0l;
@@ -88,3 +94,7 @@ void Session::setEmulationWidget( WidgetLayer* lay ) {
     m_widLay = lay;
 }
 */
+
+bool Session::isConnected() {
+    return  m_connected;
+}

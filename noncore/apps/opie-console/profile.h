@@ -17,7 +17,9 @@ public:
     typedef QValueList<Profile> ValueList;
     enum Color { Black = 0,
                  White,
-                 Gray };
+                 Gray,
+                 Green,
+                 Orange};
     enum Terminal {VT102 = 0, VT100 };
     enum Font { Micro = 0,  Small, Medium };
     Profile();

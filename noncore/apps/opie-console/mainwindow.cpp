@@ -314,15 +314,20 @@ void MainWindow::slotRunScript() {
 void MainWindow::slotConnect() {
     if ( currentSession() ) {
         bool ret = currentSession()->layer()->open();
-		if(!ret) QMessageBox::warning(currentSession()->widgetStack(),
-			QObject::tr("Failed"),
-			QObject::tr("Connecting failed for this session."));
-	}
+        if(!ret) QMessageBox::warning(currentSession()->widgetStack(),
+                                      QObject::tr("Failed"),
+                                      QObject::tr("Connecting failed for this session."));
+        m_connect->setEnabled( false );
+        m_disconnect->setEnabled( true );
+    }
 }
 
 void MainWindow::slotDisconnect() {
-    if ( currentSession() )
+    if ( currentSession() ) {
         currentSession()->layer()->close();
+        m_connect->setEnabled( true );
+        m_disconnect->setEnabled( false );
+    }
 }
 
 void MainWindow::slotTerminate() {
@@ -405,7 +410,7 @@ void MainWindow::create( const Profile& prof ) {
 
     // dicide if its a local term ( then no connction and no tranfer), maybe make a wrapper method out of it
     m_connect->setEnabled( true );
-    m_disconnect->setEnabled( true );
+    m_disconnect->setEnabled( false );
     m_terminate->setEnabled( true );
     m_transfer->setEnabled( true );
     m_recordScript->setEnabled( true );
@@ -417,11 +422,11 @@ void MainWindow::create( const Profile& prof ) {
 
 void MainWindow::slotTransfer()
 {
-    //   if ( currentSession() ) {
+    if ( currentSession() ) {
 	TransferDialog dlg(this);
 	dlg.showMaximized();
 	dlg.exec();
-         // }
+    }
 }
 
 
@@ -435,6 +440,14 @@ void MainWindow::slotSessionChanged( Session* ses ) {
     if ( ses ) {
         qWarning("changing %s", ses->name().latin1() );
         m_curSession = ses;
+
+        if ( m_curSession->isConnected() ) {
+            m_connect->setEnabled( false );
+            m_disconnect->setEnabled( true );
+        } else {
+            m_connect->setEnabled( true );
+            m_disconnect->setEnabled( false );
+        }
     }
 }
 
@@ -455,7 +468,7 @@ void MainWindow::slotFullscreen() {
         ( m_curSession->widgetStack() )->setFocus();
         ( m_curSession->widgetStack() )->show();
 
-        // QPushButton *cornerButton = new QPushButton( this );
+        //QPushButton *cornerButton = new QPushButton( );
         //cornerButton->setPixmap( QPixmap( (const char**)menu_xpm ) );
         //connect( cornerButton, SIGNAL( pressed() ), this, SLOT( slotFullscreen() ) );
         // need teh scrollbar

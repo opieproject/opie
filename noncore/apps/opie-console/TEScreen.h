@@ -137,7 +137,7 @@ public: // these are all `Screen' operations
     void resizeImage(int new_lines, int new_columns);
     //
     ca*  getCookedImage();
-    
+
     /*! return the number of lines. */
     int  getLines()   { return lines; }
     /*! return the number of columns. */
@@ -166,7 +166,7 @@ private: // helper
 
     void clearImage(int loca, int loce, char c);
     void moveImage(int dst, int loca, int loce);
-    
+
     void scrollUp(int from, int i);
     void scrollDown(int from, int i);
 
@@ -199,7 +199,7 @@ private:
 
     int histCursor;   // display position relative to start of the history buffer
     HistoryScroll hist;
-    
+
     // cursor location
 
     int cuX;
@@ -238,7 +238,7 @@ private:
 
     //
     // save cursor, rendition & states ------------
-    // 
+    //
 
     // cursor location
 

@@ -107,6 +107,15 @@ QColor EmulationHandler::foreColor(int col) {
         qWarning("Foreground white");
         co = Qt::black;
         break;
+    case Profile::Green:
+        qWarning("Foreground green");
+        co = Qt::green;
+        break;
+    case Profile::Orange:
+        qWarning("Foreground orange");
+        // FIXME needs better color here
+        co = Qt::darkYellow;
+        break;
     }
 
     return co;
@@ -124,6 +133,14 @@ QColor EmulationHandler::backColor(int col ) {
     case Profile::Black:
         qWarning("Background black");
         co = Qt::white;
+        break;
+    case Profile::Green:
+        qWarning("Background black");
+        co = Qt::black;
+        break;
+    case Profile::Orange:
+        qWarning("Background black");
+        co = Qt::black;
         break;
     }
 

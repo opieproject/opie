@@ -59,11 +59,14 @@ public:
     void setIOLayer( IOLayer*  );
     void setName( const QString& );
 
+    bool isConnected();
+
 private:
     QString m_name;
     QWidgetStack* m_widget;
     IOLayer* m_layer;
     EmulationHandler* m_emu;
+    bool m_connected;
 
 };
 

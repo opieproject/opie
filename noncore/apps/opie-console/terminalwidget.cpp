@@ -19,7 +19,9 @@ namespace {
 
     enum ColourIds {
         id_term_black,
-        id_term_white
+        id_term_white,
+        id_term_green,
+        id_term_orange
     };
 
     enum FontIds {
@@ -78,6 +80,8 @@ TerminalWidget::TerminalWidget( const QString& name, QWidget* parent,
 
     m_colorCmb->insertItem( tr("black on white"), id_term_black );
     m_colorCmb->insertItem( tr("white on black"), id_term_white );
+    m_colorCmb->insertItem( tr("green on black"), id_term_green );
+    m_colorCmb->insertItem( tr("orange on black"), id_term_orange );
 
     // signals + slots
     /*
@@ -127,6 +131,12 @@ void TerminalWidget::load( const Profile& prof ) {
     case Profile::White:
         m_colorCmb->setCurrentItem(id_term_white );
         break;
+    case Profile::Green:
+        m_colorCmb->setCurrentItem(id_term_green );
+        break;
+    case Profile::Orange:
+        m_colorCmb->setCurrentItem(id_term_orange );
+        break;
     default:
         break;
     };
@@ -174,6 +184,12 @@ void TerminalWidget::save( Profile& profile ) {
         break;
     case id_term_white:
         profile.writeEntry("Color", Profile::White );
+        break;
+    case id_term_green:
+        profile.writeEntry("Color", Profile::Green );
+        break;
+    case id_term_orange:
+        profile.writeEntry("Color", Profile::Orange );
         break;
     default:
         break;
