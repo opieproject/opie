@@ -658,8 +658,6 @@ void LauncherView::setToolsEnabled(bool y)
 	    updateTools();
 	    tools->show();
 
-	    // Always show vscrollbar
-	    icons->setVScrollBarMode( QScrollView::AlwaysOn );
 	} else {
 	    delete tools;
 	    tools = 0;
