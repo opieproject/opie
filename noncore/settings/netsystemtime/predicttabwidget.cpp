@@ -120,7 +120,8 @@ PredictTabWidget::PredictTabWidget( QWidget *parent )
 		tblLookups->setText( i, 2, QString::number( shift ) );
 		tblLookups->setText( i, 1, QString::number( last / ( 60 * 60 ) ) );
 	}
-	_shiftPerSec /= lookupCount;
+        if(lookupCount)
+	    _shiftPerSec /= lookupCount;
 	QString drift = QString::number( _shiftPerSec * 60 * 60);
 	drift.append( tr( " s/h" ) );
 	lblDrift->setText( drift );
