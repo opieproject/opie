@@ -1,5 +1,5 @@
 TEMPLATE	= app
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on release quick-app
 DESTDIR		= $(OPIEDIR)/bin
 HEADERS		= tinykate.h
 SOURCES		= tinykate.cpp main.cpp
@@ -15,7 +15,7 @@ INCLUDEPATH	+= $(OPIEDIR)/include \
 
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -ltinykate -lopie
-TARGET		= tinykate
+TARGET		= kate
 
 
 

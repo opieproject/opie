@@ -4,14 +4,7 @@
 
 #include <qpixmap.h>
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-int main( int argc, char ** argv )
-{
-    QPEApplication a( argc, argv );
+OPIE_EXPORT_APP( OApplicationFactory<MediumMountSetting::MainWindow> )
 
-    MediumMountSetting::MainWindow mw;
-    a.showMainWidget( &mw );
-    mw.showMaximized();
-
-    return a.exec();
-}

@@ -80,6 +80,7 @@ SOURCES		= Aportis.cpp \
                   version.cpp \
                   ztxt.cpp
 
+DESTDIR = $(OPIEDIR)/bin
 TARGET = reader
 
 INCLUDEPATH	+= $(OPIEDIR)/include

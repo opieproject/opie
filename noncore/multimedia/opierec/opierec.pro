@@ -1,5 +1,5 @@
-CONFIG   = qt warn_on release
-#CONFIG    = qt warn_on release quick-app
+#CONFIG   = qt warn_on release
+CONFIG    = qt warn_on release quick-app
 HEADERS   = adpcm.h \
 	pixmaps.h \
 	helpwindow.h \
@@ -22,3 +22,4 @@ TARGET    = opierec
 #TMAKE_CXXFLAGS += -DQT_QWS_VERCEL_IDR -DQWS -fno-exceptions -fno-rtti
 
 include ( $(OPIEDIR)/include.pro )
+
