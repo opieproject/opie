@@ -1,4 +1,4 @@
-Files: bin/bartender apps/Applications/bartender.desktop
+Files: bin/bartender apps/Applications/bartender.desktop etc/drinkdb.txt
 Priority: optional
 Package: opie-bartender
 Section: opie/applications
