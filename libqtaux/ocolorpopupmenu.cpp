@@ -33,9 +33,12 @@
 #include "ocolorpopupmenu.h"
 #include "qcolordialog.h"
 
+/* QT */
 #include <qaction.h>
 #include <qlayout.h>
 #include <qpainter.h>
+
+using namespace Opie;
 
 OColorPanelButton::OColorPanelButton( const QColor& color, QWidget* parent, const char* name )
     : QFrame( parent, name )

@@ -30,14 +30,19 @@
 
 */
 
-#ifndef COLORPOPUPMENU_H
-#define COLORPOPUPMENU_H
+#ifndef OCOLORPOPUPMENU_H
+#define OCOLORPOPUPMENU_H
+
+/* QT */
 
 #include <qframe.h>
 #include <qpopupmenu.h>
 
 class QWidget;
 class QGridLayout;
+
+namespace Opie
+{
 
 /**
  * @class OColorPanelButton
@@ -250,6 +255,8 @@ protected slots:
  * - Hide the menu.
  */
     void moreColorClicked();
+};
+
 };
 
 #endif // COLORPOPUPMENUANEL_H

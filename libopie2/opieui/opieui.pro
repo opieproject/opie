@@ -1,22 +1,32 @@
 TEMPLATE    = lib
 CONFIG      += qt warn_on debug
 DESTDIR     = $(OPIEDIR)/lib
-HEADERS     = olistview.h            \
+HEADERS     = ocheckitem.h           \
+              oclickablelabel.h      \
+              odialog.h              \
+              ofileselector.h        \
+              ofileselector_p.h      \
+              ofiledialog.h          \
+              ofileview.h            \
               oimageeffect.h         \
+              olistview.h            \
               opixmapeffect.h        \
               opopupmenu.h           \
               opixmapprovider.h      \
               oselector.h            \
               oversatileview.h       \
               oversatileviewitem.h   \
-              odialog.h              \
               omessagebox.h          \
               oresource.h            \
               otaskbarapplet.h       \
               oseparator.h
 
-SOURCES     = olistview.cpp          \
+SOURCES     = ocheckitem.cpp         \
+              oclickablelabel.cpp    \
+              ofileselector.cpp      \
+              ofiledialog.cpp        \
               oimageeffect.cpp       \
+              olistview.cpp          \
               opixmapeffect.cpp      \
               opopupmenu.cpp         \
               opixmapprovider.cpp    \
@@ -30,7 +40,7 @@ SOURCES     = olistview.cpp          \
 
 INTERFACES  =
 TARGET      = opieui2
-VERSION     = 1.8.2
+VERSION     = 1.8.3
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
