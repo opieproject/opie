@@ -45,6 +45,7 @@ private:
     QComboBox *serversList;
     QListView *packagesList;
     QPushButton *update;
+    QPushButton *upgrade;
     QPushButton *download;
     QPushButton *apply;
 
@@ -56,12 +57,13 @@ private:
 
     void initGui();
     void setupConnections();
-    void showProgressDialog();
+    void showProgressDialog( char *initialText );
     QString dealWithItem( QCheckListItem *item );
 
 public slots:
     void serverSelected( int index );
     void applyChanges();
+    void upgradePackages();
     void downloadPackage();
     void updateServer();
     void displayText( const QString &t );
