@@ -11,66 +11,66 @@
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>
-        <translation type="unfinished">Thème Liquide</translation>
+        <translation>Thème Liquide</translation>
     </message>
     <message>
         <source>No translucency</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de transparence</translation>
     </message>
     <message>
         <source>Stippled, background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Pointillé, couleur de fond</translation>
     </message>
     <message>
         <source>Stippled, button color</source>
-        <translation type="unfinished"></translation>
+        <translation>Pointillé, couleur de bouton</translation>
     </message>
     <message>
         <source>Translucent stippled, background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Pointillé translucide, couleur de fond</translation>
     </message>
     <message>
         <source>Translucent stippled, button color</source>
-        <translation type="unfinished"></translation>
+        <translation>Pointillé translucide, couleur de bouton</translation>
     </message>
     <message>
         <source>Custom translucency</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalisation de la transparence</translation>
     </message>
     <message>
         <source>Menu color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur des menus</translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur du texte</translation>
     </message>
     <message>
         <source>Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Opacité</translation>
     </message>
     <message>
         <source>Use shadowed menu text</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser des menus ombrés</translation>
     </message>
     <message>
         <source>Make toolbar buttons appear flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Rendre unis les buttons de la barre des outils</translation>
     </message>
     <message>
         <source>Stipple contrast</source>
-        <translation type="unfinished"></translation>
+        <translation>Contraste pointillé</translation>
     </message>
 </context>
 <context>
     <name>Styles</name>
     <message>
         <source>Liquid</source>
-        <translation type="unfinished">Liquide</translation>
+        <translation>Liquide</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation type="unfinished">Thème Liquide haute performance par Mosfet</translation>
+        <translation>Thème liquide haute performance par Mosfet</translation>
     </message>
 </context>
 </TS>

@@ -8,55 +8,55 @@
     </message>
     <message>
         <source>&lt;center&gt;Press or hold the button you want to remap.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;Appuyer le bouton que vous voulez reconfigurer.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;Pressez et gardez appuyé le bouton que vous voulez reconfigurer.&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Press:</source>
-        <translation>Presser:</translation>
+        <translation>Presser :</translation>
     </message>
     <message>
         <source>Hold:</source>
-        <translation>Tenir:</translation>
+        <translation>Tenir :</translation>
     </message>
     <message>
         <source>Beam VCard</source>
-        <translation>Transmettre vCard</translation>
+        <translation>Emission vCard</translation>
     </message>
     <message>
         <source>Send eMail</source>
-        <translation>Envoyer un courriel</translation>
+        <translation>Envoie Courrier</translation>
     </message>
     <message>
         <source>Toggle Menu</source>
-        <translation>Sélectionner le Menu</translation>
+        <translation>Menu</translation>
     </message>
     <message>
         <source>Toggle O-Menu</source>
-        <translation>Sélectionner le O-Menu</translation>
+        <translation>O-Menu</translation>
     </message>
     <message>
         <source>Show Desktop</source>
-        <translation>Montrer le bureau</translation>
+        <translation>Montrer Bureau</translation>
     </message>
     <message>
         <source>Toggle Recording</source>
-        <translation>Sélectionner l&apos;enregistrement</translation>
+        <translation>Sélectionner l&apos;Enregistrement</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Ignored&lt;/nobr&gt;</source>
-        <translation>Ignoré</translation>
+        <translation>&lt;nobr&gt;Ignoré&lt;/nobr&gt;</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Show &lt;b&gt;%1&lt;/b&gt;&lt;/nobr&gt;</source>
-        <translation>Montrer</translation>
+        <translation>&lt;nobr&gt;Montrer &lt;b&gt;%1&lt;/b&gt;&lt;/nobr&gt;</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Call &lt;b&gt;%1&lt;/b&gt;: &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</source>
-        <translation>Appeler&lt;b&gt;%1&lt;/b&gt;: &lt;i&gt;%2&lt;/i&gt;</translation>
+        <translation>&lt;nobr&gt;Appeler &lt;b&gt;%1&lt;/b&gt;: &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Call &lt;b&gt;%1&lt;/b&gt; &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</source>
-        <translation>Appeler&lt;b&gt;%1&lt;/b&gt; &lt;i&gt;%2&lt;/i&gt;</translation>
+        <translation>&lt;nobr&gt;Appeler &lt;b&gt;%1&lt;/b&gt; &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</translation>
     </message>
 </context>
 <context>
@@ -68,7 +68,7 @@
     </message>
     <message>
         <source>Held</source>
-        <translation>Held</translation>
+        <translation>Gardé</translation>
     </message>
     <message>
         <source>Pressed</source>

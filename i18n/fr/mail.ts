@@ -3,11 +3,11 @@
     <name>AccountEditor</name>
     <message>
         <source>Warning</source>
-        <translation>Attention</translation>
+        <translation>Avertissement</translation>
     </message>
     <message>
         <source>&lt;p&gt;Your signature is longer than 4 lines. This is considered inpolite by many people. You should shorten your signature.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Votre signature est supérieure à 4 lignes. Cela est souvent considéré comme impoli. Vous devriez raccourcir votre signature.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Votre signature est supérieure à 4 lignes. Ceci est souvent considéré comme impoli par les Internautes. Vous devriez raccourcir votre signature.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Change</source>
@@ -22,7 +22,7 @@
     <name>AccountEditorBase</name>
     <message>
         <source>Account Editor</source>
-        <translation>Editeur de comptes</translation>
+        <translation>Editeur de Comptes</translation>
     </message>
     <message>
         <source>Server</source>
@@ -46,11 +46,11 @@
     </message>
     <message>
         <source>&lt;b&gt;User:</source>
-        <translation>&lt;b&gt;login:</translation>
+        <translation>&lt;b&gt;Nom Utilisateur :</translation>
     </message>
     <message>
         <source>&lt;b&gt;Pass:</source>
-        <translation>&lt;b&gt;Pass:</translation>
+        <translation>&lt;b&gt;Mot de Passe :</translation>
     </message>
     <message>
         <source>Identity</source>
@@ -62,7 +62,7 @@
     </message>
     <message>
         <source>&lt;b&gt;E-Mail:</source>
-        <translation>&lt;b&gt;@ :</translation>
+        <translation>&lt;b&gt;E-Mail :</translation>
     </message>
     <message>
         <source>&lt;b&gt;Org:</source>
@@ -82,8 +82,7 @@
     </message>
     <message>
         <source>Reply-To</source>
-        <translation>Adresse
-de réponse</translation>
+        <translation>Adr. de Rép</translation>
     </message>
     <message>
         <source>&lt;b&gt;Signature:</source>
@@ -99,7 +98,7 @@ de réponse</translation>
     </message>
     <message>
         <source>Use SSL</source>
-        <translation>utiliser SSL</translation>
+        <translation>Utiliser SSL</translation>
     </message>
     <message>
         <source>993</source>
@@ -133,7 +132,7 @@ de réponse</translation>
     <name>AddressPickerBase</name>
     <message>
         <source>Address Picker</source>
-        <translation>Sélecteur d&apos;adresses</translation>
+        <translation>Sélecteur d&apos;Adresses</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -160,7 +159,7 @@ de réponse</translation>
     </message>
     <message>
         <source>Set Description</source>
-        <translation>Choisir la description</translation>
+        <translation>Fixer Description</translation>
     </message>
     <message>
         <source>&lt;div align=center&gt;Description</source>
@@ -255,7 +254,7 @@ de réponse</translation>
     </message>
     <message>
         <source>Subj.</source>
-        <translation>Sujet</translation>
+        <translation>Objet.</translation>
     </message>
     <message>
         <source>Prio.</source>
@@ -295,7 +294,7 @@ de réponse</translation>
     </message>
     <message>
         <source>Change Description</source>
-        <translation>Changer la description</translation>
+        <translation>Changer description</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -353,7 +352,7 @@ de réponse</translation>
     </message>
     <message>
         <source>[Hidden]</source>
-        <translation>[Hidden]</translation>
+        <translation>[Caché]</translation>
     </message>
     <message>
         <source>New</source>
@@ -417,7 +416,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Create folder</source>
-        <translation>Créer un dossier</translation>
+        <translation>Créer Dossier</translation>
     </message>
     <message>
         <source>Rescan folder list</source>
@@ -453,7 +452,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Foldername</source>
-        <translation>Nom du dossier</translation>
+        <translation>Nom Dossier</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please enter the name of the new folder.&lt;/p&gt;</source>
@@ -521,7 +520,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Folder created. Rescanning...</source>
-        <translation>Dossier créé. Réaffichage ...</translation>
+        <translation>Dossier créé. Réaffichage...</translation>
     </message>
     <message>
         <source>&lt;p&gt;The folder could not be created. (Server said: %1)&lt;/p&gt;</source>
@@ -533,7 +532,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Got folder list.</source>
-        <translation>Réaffiche la liste des dossiers.</translation>
+        <translation>Liste des dossiers rafraichie.</translation>
     </message>
     <message>
         <source>&lt;p&gt;Couldn&apos;t retrieve the folder list. (Server said: %1)&lt;/p&gt;</source>
@@ -576,19 +575,19 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Mark as...</source>
-        <translation>Marqué comme ...</translation>
+        <translation>Marqué comme...</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation>Effacer le message</translation>
+        <translation>Supprimer Message</translation>
     </message>
     <message>
         <source>Mailbox contained no mails.</source>
-        <translation>La boîte ne contient pas de messages.</translation>
+        <translation>La boîte ne contient pas de message.</translation>
     </message>
     <message>
         <source>Getting mail headers...</source>
-        <translation>Charge les en-têtes des messages ...</translation>
+        <translation>Charge les en-têtes des messages...</translation>
     </message>
     <message>
         <source>Error</source>
@@ -596,7 +595,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>&lt;p&gt;An error occoured during the selection of the mailbox. (Server said: %1)&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Une erreur s&apos;est produite lors de la sélection de la boîte. (réponse du serveur : %1)&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Une erreur s&apos;est produite lors de la sélection de la boîte. (message du serveur : %1)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -608,7 +607,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Got all mail headers.</source>
-        <translation>Charger tous les en-têtes de messages.</translation>
+        <translation>Tous les en-têtes de messages sont chargées.</translation>
     </message>
     <message>
         <source>&lt;font color=#ff0000&gt;Couldn&apos;t fetch mail.</source>
@@ -619,7 +618,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     <name>MainWindowBase</name>
     <message>
         <source>E-Mail</source>
-        <translation>Messagerie</translation>
+        <translation>E-Mail</translation>
     </message>
     <message>
         <source>Mail</source>
@@ -639,11 +638,11 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Show/hide folders</source>
-        <translation>Montrer/Cacher les dossiers</translation>
+        <translation>Montrer/Cacher dossiers</translation>
     </message>
     <message>
         <source>Search mails</source>
-        <translation>Chercher des messages</translation>
+        <translation>Chercher messages</translation>
     </message>
     <message>
         <source>Configuration</source>
@@ -655,7 +654,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     <name>OpenDiagBase</name>
     <message>
         <source>Open file...</source>
-        <translation>Ouvrir un fichier ...</translation>
+        <translation>Ouvrir fichier...</translation>
     </message>
     <message>
         <source> Stop </source>
@@ -691,7 +690,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>RAM</source>
-        <translation>Ram</translation>
+        <translation>RAM</translation>
     </message>
     <message>
         <source>CF</source>
@@ -710,11 +709,11 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>&lt;Foldertree not known.&gt;</source>
-        <translation>&lt;Structure des dossiers inconnue.&gt;</translation>
+        <translation>&lt;Structure de dossiers inconnue.&gt;</translation>
     </message>
     <message>
         <source>Inbox</source>
-        <translation>Boîte de réception</translation>
+        <translation>Réception</translation>
     </message>
     <message>
         <source>(no from)</source>
@@ -737,7 +736,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>&lt;div align=center&gt;Renaming</source>
-        <translation>&lt;div align=center&gt;Renommer</translation>
+        <translation>&lt;div align=center&gt;Renommage</translation>
     </message>
     <message>
         <source>&lt;div align=center&gt;to</source>
@@ -811,11 +810,11 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     <name>SearchDiagBase</name>
     <message>
         <source>Mail Search</source>
-        <translation>Recherche de messages</translation>
+        <translation>Recherche Message</translation>
     </message>
     <message>
         <source>&lt;b&gt;Search&amp;nbsp;in:</source>
-        <translation>&lt;b&gt;Dans :</translation>
+        <translation>&lt;b&gt;Recherche&amp;nbsp;dans :</translation>
     </message>
     <message>
         <source>&lt;b&gt;For:</source>
@@ -854,7 +853,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Getting mail body from server. Please wait...</source>
-        <translation>Charge le texte du message depuis le serveur. Veuillez patientez ...</translation>
+        <translation>Charge le corps du texte du message depuis le serveur. Veuillez patientez ...</translation>
     </message>
     <message>
         <source>Error</source>
@@ -862,7 +861,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot reply yet.</source>
-        <translation>&lt;p&gt;Vous ne pouvez pas répondre tant que le texte du message n&apos;a pas été chargé.</translation>
+        <translation>&lt;p&gt;Vous ne pouvez pas répondre tant que le corps du message n&apos;a pas été chargé.</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -870,7 +869,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot forward yet.</source>
-        <translation>&lt;p&gt;Vous ne pouvez pas transférer le mesage tant que son texte n&apos;a pas été chargé.</translation>
+        <translation>&lt;p&gt;Vous ne pouvez pas transférer le mesage tant que le corps du message n&apos;a pas été chargé.</translation>
     </message>
     <message>
         <source>&lt;p&gt;I was unable to retrieve the mail from the server. You can try again later or give up.&lt;/p&gt;</source>
@@ -881,7 +880,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     <name>ViewMailBase</name>
     <message>
         <source>E-Mail by %1</source>
-        <translation>Message de %1</translation>
+        <translation>E-Mail de %1</translation>
     </message>
     <message>
         <source>Mail</source>
@@ -901,7 +900,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation>Supprimer le message</translation>
+        <translation>Supprimer Message</translation>
     </message>
 </context>
 </TS>

@@ -4,7 +4,7 @@
     <name>IrdaApplet</name>
     <message>
         <source>Discovered Device:</source>
-        <translation>Périphérique découvert : </translation>
+        <translation>Dispositif découvert : </translation>
     </message>
     <message>
         <source>Disable IrDA</source>
@@ -16,19 +16,19 @@
     </message>
     <message>
         <source>Disable Discovery</source>
-        <translation>Désactiver la recherche</translation>
+        <translation>Désactiver la Recherche</translation>
     </message>
     <message>
         <source>Enable Discovery</source>
-        <translation>Activer la recherche</translation>
+        <translation>Activer la Recherche</translation>
     </message>
     <message>
         <source>Disable Receive</source>
-        <translation>Désactiver la réception</translation>
+        <translation>Désactiver la Réception</translation>
     </message>
     <message>
         <source>Enable Receive</source>
-        <translation>Activer la réception</translation>
+        <translation>Activer la Réception</translation>
     </message>
     <message>
         <source>Found:</source>

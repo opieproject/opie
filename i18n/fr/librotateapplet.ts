@@ -4,11 +4,11 @@
     <name>RotateApplet</name>
     <message>
         <source>Rotate shortcut</source>
-        <translation>raccourci vers &quot;Pivoter&quot;</translation>
+        <translation>Raccourci Rotation </translation>
     </message>
     <message>
         <source>Rotate</source>
-        <translation>Pivoter</translation>
+        <translation>Rotation</translation>
     </message>
 </context>
 </TS>

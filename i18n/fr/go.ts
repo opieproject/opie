@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Game</source>
-        <translation>Jeux</translation>
+        <translation>Jeu</translation>
     </message>
 </context>
 <context>

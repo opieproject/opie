@@ -1,26 +1,27 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Security</name>
     <message>
         <source>Set passcode</source>
-        <translation>Nouveau code</translation>
+        <translation>Fixer mot de passe</translation>
     </message>
     <message>
         <source>Change passcode</source>
-        <translation>Changer le code</translation>
+        <translation>Changer mot de passe</translation>
     </message>
     <message>
         <source>Enter passcode</source>
-        <translation>Entrez le code secret</translation>
+        <translation>Entrer mot de passe</translation>
     </message>
     <message>
         <source>Passcode incorrect</source>
-        <translation>Code incorrect</translation>
+        <translation>Mot de passe incorrect</translation>
     </message>
     <message>
         <source>The passcode entered is incorrect.
 Access denied</source>
-        <translation>Le code secret est incorrect.
+        <translation>Le mot de passe est incorrect.
 Accès refusé</translation>
     </message>
     <message>
@@ -33,11 +34,11 @@ Accès refusé</translation>
     </message>
     <message>
         <source>Enter new passcode</source>
-        <translation>Entrez le nouveau code</translation>
+        <translation>Entrer le nouveau mot de passe</translation>
     </message>
     <message>
         <source>Re-enter new passcode</source>
-        <translation>Réentrez le code</translation>
+        <translation>Réentrez le mot de passe</translation>
     </message>
 </context>
 <context>
@@ -48,15 +49,15 @@ Accès refusé</translation>
     </message>
     <message>
         <source>Change passcode</source>
-        <translation>Changer le code</translation>
+        <translation>Changer le mot de passe</translation>
     </message>
     <message>
         <source>Clear passcode</source>
-        <translation>Effacer le code</translation>
+        <translation>Effacer le mot de passe</translation>
     </message>
     <message>
         <source>Require pass code at power-on</source>
-        <translation>Demander le code secret au démarrage</translation>
+        <translation>Demander le mot de passe au démarrage</translation>
     </message>
     <message>
         <source>Sync</source>
@@ -88,7 +89,7 @@ Accès refusé</translation>
     </message>
     <message>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
-        <translation>&lt;P&gt;Le code secret permet un niveau de protection minimal pour l&apos;accès à votre organiseur.</translation>
+        <translation>&lt;P&gt;Ce code secret permet un niveau de protection minimal pour l&apos;accès à votre organiseur.</translation>
     </message>
     <message>
         <source>192.168.129.0/24 (default)</source>
@@ -100,19 +101,7 @@ Accès refusé</translation>
     </message>
     <message>
         <source>1.0.0.0/8</source>
-        <translation type="unfinished">1.0.0.0/8</translation>
-    </message>
-    <message>
-        <source>Passcode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Login</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Login Automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>1.0.0.0/8</translation>
     </message>
 </context>
 </TS>

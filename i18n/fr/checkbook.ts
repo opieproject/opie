@@ -4,7 +4,7 @@
     <name>Checkbook</name>
     <message>
         <source>Checkbook</source>
-        <translation>Livre de compte (Checkbook)</translation>
+        <translation>Livre de Compte</translation>
     </message>
     <message>
         <source>New checkbook</source>
@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Info</source>
-        <translation>Info</translation>
+        <translation>Propriétés</translation>
     </message>
     <message>
         <source>Transactions</source>
@@ -24,19 +24,19 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation>Nom:</translation>
+        <translation>Nom :</translation>
     </message>
     <message>
         <source>Enter name of checkbook here.</source>
-        <translation>Entrer le nom du livre de compte ici.</translation>
+        <translation>Entrez le nom du livre de compte ici.</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation>Type:</translation>
+        <translation>Type :</translation>
     </message>
     <message>
         <source>Select type of checkbook here.</source>
-        <translation>Sélectionner le type de livre ici.</translation>
+        <translation>Sélectionnez le type de livre ici.</translation>
     </message>
     <message>
         <source>Savings</source>
@@ -64,7 +64,7 @@
     </message>
     <message>
         <source>Bank:</source>
-        <translation>Banque:</translation>
+        <translation>Banque :</translation>
     </message>
     <message>
         <source>Enter name of the bank for this checkbook here.</source>
@@ -72,15 +72,15 @@
     </message>
     <message>
         <source>Account number:</source>
-        <translation>N° compte:</translation>
+        <translation>N° compte :</translation>
     </message>
     <message>
         <source>Enter account number for this checkbook here.</source>
-        <translation>Entrez ici le n° du compte de ce livre.</translation>
+        <translation>Entrez ici le n° du compte de ce livre de compte.</translation>
     </message>
     <message>
         <source>PIN number:</source>
-        <translation>N° PIN:</translation>
+        <translation>N° PIN :</translation>
     </message>
     <message>
         <source>Enter PIN number for this checkbook here.</source>
@@ -88,7 +88,7 @@
     </message>
     <message>
         <source>Starting balance:</source>
-        <translation>Solde:</translation>
+        <translation>Solde :</translation>
     </message>
     <message>
         <source>Enter the initial balance for this checkbook here.</source>
@@ -96,7 +96,7 @@
     </message>
     <message>
         <source>Notes:</source>
-        <translation>Notes:</translation>
+        <translation>Notes :</translation>
     </message>
     <message>
         <source>Enter any additional information for this checkbook here.</source>
@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>This area shows the current balance in this checkbook.</source>
-        <translation>Cette partie affiche le solde courant dans ce livre de compte.</translation>
+        <translation>Cette partie affiche le solde courant de ce livre de compte.</translation>
     </message>
     <message>
         <source>This is a listing of all transactions entered for this checkbook.
@@ -148,7 +148,7 @@ Pour trier la liste par rapport à un champ spécifique, cliquez sur le nom de l
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here to delete it.</source>
@@ -184,11 +184,11 @@ Pour trier la liste par rapport à un champ spécifique, cliquez sur le nom de l
     </message>
     <message>
         <source>Current balance: %1%2</source>
-        <translation>Solde actuel: %1 %2</translation>
+        <translation>Solde actuel : %1 %2</translation>
     </message>
     <message>
         <source>Delete transaction</source>
-        <translation>Effacer la transaction</translation>
+        <translation>Supprimer la transaction</translation>
     </message>
     <message>
         <source>Password protect</source>
@@ -204,23 +204,23 @@ Pour trier la liste par rapport à un champ spécifique, cliquez sur le nom de l
     </message>
     <message>
         <source>Enter password</source>
-        <translation>Entrez un mot de passe</translation>
+        <translation>Entrer mot de passe</translation>
     </message>
     <message>
         <source>Please enter your password:</source>
-        <translation>Entrez votre mot de passe SVP:</translation>
+        <translation>Veuillez entrer votre mot de passe :</translation>
     </message>
     <message>
         <source>Confirm password</source>
-        <translation>Confirmez le mot de passe</translation>
+        <translation>Confirmer le mot de passe</translation>
     </message>
     <message>
         <source>Please confirm your password:</source>
-        <translation>Confirmez votre mot de passe:</translation>
+        <translation>Veuillez confirmer votre mot de passe :</translation>
     </message>
     <message>
         <source>Please enter your password to confirm removal of password protection:</source>
-        <translation>SVP, entrez votre mot de passe pour confirmer la désactivation de la protection par mot de passe:</translation>
+        <translation>Veuillez entrer votre mot de passe pour confirmer la désactivation de la protection par mot de passe :</translation>
     </message>
 </context>
 <context>
@@ -231,11 +231,11 @@ Pour trier la liste par rapport à un champ spécifique, cliquez sur le nom de l
     </message>
     <message>
         <source>Enter currency symbol:</source>
-        <translation>Symbole de la devise:</translation>
+        <translation>Entrer le symbole de la devise :</translation>
     </message>
     <message>
         <source>Enter your local currency symbol here.</source>
-        <translation>Entrer le symbole de la devise locale ici.</translation>
+        <translation>Entrez le symbole de la devise locale ici.</translation>
     </message>
     <message>
         <source>Show whether checkbook is password
@@ -245,7 +245,7 @@ par mot de passe</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display that the checkbook is protected with a password.</source>
-        <translation>Cliquez ici pour sélectionner si, oui ou non, la fenêtre principale affichera si &quot;livre de compte&quot; est protégé par mot de passe.</translation>
+        <translation>Cliquez ici pour sélectionner si, oui ou non, la fenêtre principale affichera si le &quot;livre de compte&quot; est protégé par mot de passe.</translation>
     </message>
     <message>
         <source>Show checkbook balances</source>
@@ -276,7 +276,7 @@ Vous pouvez aussi sélectionner &quot;Nouveau&quot; à partir du menu de Livre d
     </message>
     <message>
         <source>Edit</source>
-        <translation>Éditer</translation>
+        <translation>Editer</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here to edit it.
@@ -289,7 +289,7 @@ en maintenant appuyé sur le nom d&apos;un livre de compte.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here delete it.
@@ -297,7 +297,7 @@ en maintenant appuyé sur le nom d&apos;un livre de compte.</translation>
 You also can select Delete from the Checkbook menu.</source>
         <translation>Sélectionnez un livre de compte puis cliquez ici pour le détruire.
 
-Vous pouvez aussi cliquer sur &quot;Effacer&quot; à partir du menu de &quot;Livre de compte&quot;.</translation>
+Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;Livre de compte&quot;.</translation>
     </message>
     <message>
         <source>This is a listing of all checkbooks currently available.</source>
@@ -305,7 +305,7 @@ Vous pouvez aussi cliquer sur &quot;Effacer&quot; à partir du menu de &quot;Liv
     </message>
     <message>
         <source>Delete checkbook</source>
-        <translation>Effacer un livre de compte</translation>
+        <translation>Supprimer un livre de compte</translation>
     </message>
     <message>
         <source>Configure</source>
@@ -317,7 +317,7 @@ Vous pouvez aussi cliquer sur &quot;Effacer&quot; à partir du menu de &quot;Liv
     </message>
     <message>
         <source>Checkbook Name</source>
-        <translation>Nom du livre de compte</translation>
+        <translation>Nom du Livre de Compte</translation>
     </message>
     <message>
         <source>Balance</source>
@@ -325,11 +325,11 @@ Vous pouvez aussi cliquer sur &quot;Effacer&quot; à partir du menu de &quot;Liv
     </message>
     <message>
         <source>Enter password</source>
-        <translation>Entrez un mot de passe</translation>
+        <translation>Entrer un mot de passe</translation>
     </message>
     <message>
         <source>Please enter your password:</source>
-        <translation>Entrez un mot de passe SVP:</translation>
+        <translation>Veuillez entrer un mot de passe :</translation>
     </message>
 </context>
 <context>
@@ -356,11 +356,11 @@ Vous pouvez aussi cliquer sur &quot;Effacer&quot; à partir du menu de &quot;Liv
     </message>
     <message>
         <source>Select date of transaction here.</source>
-        <translation>Sélectionnez la date de l&apos;opération.</translation>
+        <translation>Sélectionnez la date de l&apos;opération ici.</translation>
     </message>
     <message>
         <source>Number:</source>
-        <translation>Numéro:</translation>
+        <translation>Numéro :</translation>
     </message>
     <message>
         <source>Enter check number here.</source>
@@ -368,7 +368,7 @@ Vous pouvez aussi cliquer sur &quot;Effacer&quot; à partir du menu de &quot;Liv
     </message>
     <message>
         <source>Description:</source>
-        <translation>Description:</translation>
+        <translation>Description :</translation>
     </message>
     <message>
         <source>Enter description of transaction here.</source>
@@ -376,7 +376,7 @@ Vous pouvez aussi cliquer sur &quot;Effacer&quot; à partir du menu de &quot;Liv
     </message>
     <message>
         <source>Category:</source>
-        <translation>Catégorie:</translation>
+        <translation>Catégorie :</translation>
     </message>
     <message>
         <source>Select transaction category here.</source>
@@ -384,7 +384,7 @@ Vous pouvez aussi cliquer sur &quot;Effacer&quot; à partir du menu de &quot;Liv
     </message>
     <message>
         <source>Type:</source>
-        <translation>Type:</translation>
+        <translation>Type :</translation>
     </message>
     <message>
         <source>Select transaction type here.
@@ -392,11 +392,11 @@ Vous pouvez aussi cliquer sur &quot;Effacer&quot; à partir du menu de &quot;Liv
 The options available vary based on whether the transaction is a deposit or withdrawal.</source>
         <translation>Sélectionnez le type d&apos;opération ici.
 
-Les options disponibles varient suivant le type d&apos;opération: débit ou crédit.</translation>
+Les options disponibles varient suivant le type d&apos;opération : débit ou crédit.</translation>
     </message>
     <message>
         <source>Amount:</source>
-        <translation>Montant:</translation>
+        <translation>Montant :</translation>
     </message>
     <message>
         <source>Enter the amount of transaction here.
@@ -408,7 +408,7 @@ La valeur entrée devrait toujours être positive.</translation>
     </message>
     <message>
         <source>Fee:</source>
-        <translation>Frais:</translation>
+        <translation>Frais :</translation>
     </message>
     <message>
         <source>Enter any fee amount assoiciated with this transaction.
@@ -420,7 +420,7 @@ La valeur entrée devrait toujours être positive.</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation>Notes:</translation>
+        <translation>Notes :</translation>
     </message>
     <message>
         <source>Enter any additional information for this transaction here.</source>
@@ -428,7 +428,7 @@ La valeur entrée devrait toujours être positive.</translation>
     </message>
     <message>
         <source>Automobile</source>
-        <translation>Voiture</translation>
+        <translation>Véhicule</translation>
     </message>
     <message>
         <source>Bills</source>
@@ -452,7 +452,7 @@ La valeur entrée devrait toujours être positive.</translation>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation type="obsolete">Electronique</translation>
+        <translation>Electronique</translation>
     </message>
     <message>
         <source>Entertainment</source>
@@ -508,7 +508,7 @@ La valeur entrée devrait toujours être positive.</translation>
     </message>
     <message>
         <source>Misc. Credit</source>
-        <translation>Divers Crédit</translation>
+        <translation>Crédit Divers</translation>
     </message>
     <message>
         <source>Automatic Payment</source>
@@ -517,10 +517,6 @@ La valeur entrée devrait toujours être positive.</translation>
     <message>
         <source>Cash</source>
         <translation>Liquide</translation>
-    </message>
-    <message>
-        <source>Electronics</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -4,7 +4,7 @@
     <name>Calculator</name>
     <message>
         <source>Experimental Calculator</source>
-        <translation>Calculatrice</translation>
+        <translation>Calculatrice Expérimentale</translation>
     </message>
     <message>
         <source>M+</source>

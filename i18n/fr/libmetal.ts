@@ -4,7 +4,7 @@
     <name>Styles</name>
     <message>
         <source>Metal</source>
-        <translation>Metal</translation>
+        <translation>Métal</translation>
     </message>
 </context>
 </TS>

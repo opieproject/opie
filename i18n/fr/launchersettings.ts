@@ -39,7 +39,7 @@
     </message>
 </context>
 <context>
-    <name>QObject</name>
+    <name>SampleView</name>
     <message>
         <source>Sample 1</source>
         <translation>Exemple 1</translation>
@@ -101,7 +101,7 @@
     </message>
     <message>
         <source>Select...</source>
-        <translation>Parcourir ...</translation>
+        <translation>Parcourir...</translation>
     </message>
     <message>
         <source>Default</source>
@@ -113,11 +113,11 @@
     </message>
     <message>
         <source>Small</source>
-        <translation>Petites</translation>
+        <translation>Petite</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation>Grandes</translation>
+        <translation>Grande</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -132,7 +132,7 @@
     </message>
     <message>
         <source>foobar</source>
-        <translation>toto</translation>
+        <translation>foobar</translation>
     </message>
     <message>
         <source>New</source>

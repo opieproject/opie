@@ -4,15 +4,15 @@
     <name>Clock</name>
     <message>
         <source>Snooze</source>
-        <translation>Rappel</translation>
+        <translation>Sonner</translation>
     </message>
     <message>
         <source>Clock</source>
-        <translation>Montre</translation>
+        <translation>Horloge</translation>
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation>Chrono</translation>
+        <translation>Chronomètre</translation>
     </message>
     <message>
         <source>Start</source>
@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>Set Alarm</source>
-        <translation>Définir le réveil</translation>
+        <translation>Définir l&apos;alarme</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -36,11 +36,11 @@
     </message>
     <message>
         <source>Alarm Is On</source>
-        <translation>Réveil actif</translation>
+        <translation>Alarme Activée</translation>
     </message>
     <message>
         <source>Alarm Is Off</source>
-        <translation>Réveil inactif</translation>
+        <translation>Alarme Désactivée</translation>
     </message>
     <message>
         <source>Set date and time.</source>
@@ -48,18 +48,14 @@
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>
-        <translation>Montre: l&apos;alarme a été manquée.</translation>
-    </message>
-    <message>
-        <source>Alarm set: %1</source>
-        <translation>Réveil à: %1</translation>
+        <translation>Horloge: Alarme manquée.</translation>
     </message>
 </context>
 <context>
     <name>Set_Alarm</name>
     <message>
         <source>Set Alarm</source>
-        <translation>Définir le réveil</translation>
+        <translation>Définir Alarme</translation>
     </message>
     <message>
         <source>Hour</source>
@@ -71,21 +67,21 @@
     </message>
     <message>
         <source>AM</source>
-        <translation>Matin</translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>Après-midi</translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>Snooze Delay
 (minutes)</source>
-        <translation>Délai de rappel
+        <translation>Délai avant Sonnerie
 (minutes)</translation>
     </message>
     <message>
         <source>mp3 alarm</source>
-        <translation>mp3</translation>
+        <translation>alarme mp3</translation>
     </message>
     <message>
         <source>All</source>

@@ -4,63 +4,62 @@
     <name>QObject</name>
     <message>
         <source>Weather plugin</source>
-        <translation>Greffon météo</translation>
+        <translation>Module &quot;Météo&quot;</translation>
     </message>
 </context>
 <context>
     <name>WeatherPluginConfig</name>
     <message>
         <source>Enter ICAO location identifier:</source>
-        <translation>Entrer l&apos;identificant de la localisation ICAO:</translation>
+        <translation>Entrez l&apos;indentificateur de lieu ICAO :</translation>
     </message>
     <message>
         <source>Enter the 4 letter code for the desired location here.  See http://www.nws.noaa.gov/tg/siteloc.shtml to find a location near you.</source>
-        <translation>Entrez le code de 4 lettres pour l&apos;endroit désiré ici. Voir http://www.nws.noaa.gov/tg/siteloc.shtml pour trouver un endroit près de chez vous.</translation>
+        <translation>Entrez les 4 lettres du code du lieu ici. Consulter le site http://www.nws.noaa.gov/tg/siteloc.shtml pour sélectionner le lieu le plus proche de votre position actuelle.</translation>
     </message>
     <message>
         <source>Visit http://www.nws.noaa.gov/tg/siteloc.shtml to find the nearest location.</source>
-        <translation>Voir http://www.nws.noaa.gov/tg/siteloc.shtml pour trouver l&apos;endroit près de chez vous.</translation>
+        <translation>Visitez http://www.nws.noaa.gov/tg/siteloc.shtml pour trouver le lieu le plus proche.</translation>
     </message>
     <message>
         <source>Use metric units</source>
-        <translation>Utiliser le système métrique</translation>
+        <translation>Utiliser l&apos;unité métrique</translation>
     </message>
     <message>
         <source>Click here to select type of units displayed.</source>
-        <translation>Cliquer ici pour séléctionner le type d&apos;unité affiché.</translation>
+        <translation>Cliquez ici pour changer le type des unités à afficher.</translation>
     </message>
     <message>
         <source>Update frequency (in minutes):</source>
-        <translation>Augmenter la fréquence (en min):</translation>
+        <translation>Fréquence de mise à jour (en minutes) :</translation>
     </message>
     <message>
         <source>Select how often (in minutes) you want the weather to be updated.</source>
-        <translation>Sélectionner la fréquence (en min) de mise à jour des données météo.</translation>
+        <translation>Sélectionner la fréquence de mise à jour des infos météo.</translation>
     </message>
 </context>
 <context>
     <name>WeatherPluginWidget</name>
     <message>
         <source>Retreiving current weather information.</source>
-        <translation>Récupérer les informations sur la météo actuelle.</translation>
+        <translation>Récupération des infomations météo.</translation>
     </message>
     <message>
         <source>Temp: </source>
-        <translation>Temp:</translation>
+        <translation>Temps :</translation>
     </message>
     <message>
         <source>  Wind: </source>
-        <translation>Vent:</translation>
+        <translation>Vent :</translation>
     </message>
     <message>
         <source>
 Pres: </source>
-        <translation>
-Pres:</translation>
+        <translation>Pression :</translation>
     </message>
     <message>
         <source>Current weather data not available.</source>
-        <translation>Météo actuelle non disponible.</translation>
+        <translation>Information météo non disponible.</translation>
     </message>
     <message>
         <source>n/a</source>

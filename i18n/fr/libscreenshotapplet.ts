@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>Delay</source>
-        <translation>délai</translation>
+        <translation>Délai</translation>
     </message>
     <message>
         <source>sec</source>
@@ -16,11 +16,11 @@
     </message>
     <message>
         <source>Save named</source>
-        <translation>Sauver</translation>
+        <translation>Enregister</translation>
     </message>
     <message>
         <source>Save screenshot as...</source>
-        <translation>Sauver l&apos;image d&apos;écran sous...</translation>
+        <translation>Enregister image sous...</translation>
     </message>
     <message>
         <source>File</source>
@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>Scap</source>
-        <translation type="unfinished"></translation>
+        <translation>Scap</translation>
     </message>
     <message>
         <source>Success</source>

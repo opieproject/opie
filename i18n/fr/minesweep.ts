@@ -4,11 +4,11 @@
     <name>MineSweep</name>
     <message>
         <source>You won!</source>
-        <translation>Vous avez gagné!</translation>
+        <translation>Vous avez gagné !</translation>
     </message>
     <message>
         <source>You exploded!</source>
-        <translation>Vous avez explosé!</translation>
+        <translation>Vous avez explosé !</translation>
     </message>
     <message>
         <source>Mine Hunt</source>

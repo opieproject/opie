@@ -4,7 +4,7 @@
     <name>Decoration</name>
     <message>
         <source>Polished</source>
-        <translation>Raffiné</translation>
+        <translation>Lissé</translation>
     </message>
 </context>
 </TS>

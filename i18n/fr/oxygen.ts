@@ -11,8 +11,12 @@
         <translation>Effacer</translation>
     </message>
     <message>
+        <source>Form1</source>
+        <translation>Form1</translation>
+    </message>
+    <message>
         <source>Molecular Weight</source>
-        <translation>Masse molaire</translation>
+        <translation>Masse Molaire</translation>
     </message>
     <message>
         <source>Chemical Formula</source>
@@ -20,15 +24,19 @@
     </message>
     <message>
         <source>Molecular Weight (u):</source>
-        <translation>Masse molaire (u):</translation>
+        <translation>Masse Molaire (u):</translation>
     </message>
     <message>
         <source>Elemental Composition (%):</source>
-        <translation>Composition élementaire (%) :</translation>
+        <translation>Composition Elementaire (%) :</translation>
     </message>
 </context>
 <context>
     <name>OxydataWidget</name>
+    <message>
+        <source>Weight:</source>
+        <translation>Masse :</translation>
+    </message>
     <message>
         <source>Block</source>
         <translation>Famille</translation>
@@ -81,10 +89,6 @@
         <source>%1 g/cm^3</source>
         <translation>%1 g/cm3</translation>
     </message>
-    <message>
-        <source>Weight</source>
-        <translation>Poids</translation>
-    </message>
 </context>
 <context>
     <name>Oxygen</name>
@@ -103,6 +107,29 @@
     <message>
         <source>Calculations</source>
         <translation>Calculs</translation>
+    </message>
+</context>
+<context>
+    <name>PSEWidget</name>
+    <message>
+        <source>Periodic System</source>
+        <translation>Tableau Périodique</translation>
+    </message>
+</context>
+<context>
+    <name>calcDlgUI</name>
+    <message>
+        <source>ERROR: 
+</source>
+        <translation>ERREUR :
+</translation>
+    </message>
+</context>
+<context>
+    <name>dataWidgetUI</name>
+    <message>
+        <source>Chemical Data</source>
+        <translation>Données Chimiques</translation>
     </message>
     <message>
         <source>Hydrogen</source>
@@ -131,6 +158,10 @@
     <message>
         <source>Nitrogen</source>
         <translation>Azote</translation>
+    </message>
+    <message>
+        <source>Oxygen</source>
+        <translation>Oxygène</translation>
     </message>
     <message>
         <source>Fluorine</source>
@@ -535,29 +566,6 @@
     <message>
         <source>Meitnerium</source>
         <translation>Meitnerium</translation>
-    </message>
-</context>
-<context>
-    <name>PSEWidget</name>
-    <message>
-        <source>Periodic System</source>
-        <translation>Tableau Périodique</translation>
-    </message>
-</context>
-<context>
-    <name>calcDlgUI</name>
-    <message>
-        <source>ERROR: 
-</source>
-        <translation>ERREUR :
-</translation>
-    </message>
-</context>
-<context>
-    <name>dataWidgetUI</name>
-    <message>
-        <source>Chemical Data</source>
-        <translation>Données chimiques</translation>
     </message>
 </context>
 </TS>

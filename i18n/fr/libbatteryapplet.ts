@@ -56,31 +56,31 @@
     </message>
     <message>
         <source>Battery status</source>
-        <translation>État de la batterie</translation>
+        <translation>Niveau de la batterie</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation>Échec</translation>
+        <translation>Echec</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation>Impossible d&apos;ouvrir le fichier</translation>
+        <translation>le fichier ne peut pas être ouvert</translation>
     </message>
     <message>
         <source>Charging both devices</source>
-        <translation>En cours de chargt des 2 périphériques</translation>
+        <translation>Chargement des deux dispositifs</translation>
     </message>
     <message>
         <source>Percentage battery remaining: </source>
-        <translation>Pourcentage de batterie restant:</translation>
+        <translation>Pourcentage de batterie restant :</translation>
     </message>
     <message>
         <source>Battery time remaining: </source>
-        <translation>Temps de batterie restant:</translation>
+        <translation>Temps restant de la batterie :</translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>
-        <translation>Pas de batterie supplémentaire</translation>
+        <translation>Aucune module d&apos;extention avec batterie présent</translation>
     </message>
 </context>
 </TS>

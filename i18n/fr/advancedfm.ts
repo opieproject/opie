@@ -12,15 +12,15 @@
     </message>
     <message>
         <source>View</source>
-        <translation>Vue</translation>
+        <translation>Affichage</translation>
     </message>
     <message>
         <source>Show Hidden Files</source>
-        <translation>Montrer les fichiers cachés</translation>
+        <translation>Montrer Fichiers Cachés</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation>Créer un répertoire</translation>
+        <translation>Nouveau Dossier</translation>
     </message>
     <message>
         <source>Rename</source>
@@ -28,23 +28,23 @@
     </message>
     <message>
         <source>Run Command</source>
-        <translation>Exécuter une commande</translation>
+        <translation>Exécuter Commande</translation>
     </message>
     <message>
         <source>Run Command with Output</source>
-        <translation>Exécuter une commande avec une sortie</translation>
+        <translation>Exécuter Commande et Afficher</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>Basculer vers &quot;Local&quot;</translation>
+        <translation>Basculer sur &quot;Local&quot;</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>Basculer vers &quot;Remote&quot;</translation>
+        <translation>Basculer sur &quot;Distant&quot;</translation>
     </message>
     <message>
         <source>Size</source>
@@ -80,7 +80,7 @@
     </message>
     <message>
         <source>That directory does not exist</source>
-        <translation>Répertoire inexistant</translation>
+        <translation>Ce répertoire n&apos;existe pas</translation>
     </message>
     <message>
         <source>Copy As</source>
@@ -92,7 +92,7 @@
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation>A traduire</translation>
+        <translation>Envoie AvancedFM</translation>
     </message>
     <message>
         <source>Ir sent.</source>
@@ -128,11 +128,11 @@
     </message>
     <message>
         <source>File Info</source>
-        <translation>Information sur le fichier</translation>
+        <translation>Propriétés Fichier</translation>
     </message>
     <message>
         <source>Set Permissions</source>
-        <translation>Définir les droits</translation>
+        <translation>Définir les Droits</translation>
     </message>
     <message>
         <source>Properties</source>
@@ -140,19 +140,19 @@
     </message>
     <message>
         <source>Beam File</source>
-        <translation>A traduire</translation>
+        <translation>Envoyer fichier</translation>
     </message>
     <message>
         <source>Copy </source>
-        <translation type="unfinished">Copier</translation>
+        <translation>Copier</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="unfinished">Sous</translation>
+        <translation>Sous</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
-        <translation>Copier le même répertoire</translation>
+        <translation>Copier le même Répertoire</translation>
     </message>
     <message>
         <source>Could not copy
@@ -163,7 +163,7 @@
     <message>
         <source>to
 </source>
-        <translation>Vers</translation>
+        <translation>vers</translation>
     </message>
     <message>
         <source>Could not move
@@ -180,33 +180,39 @@
     </message>
     <message>
         <source>Select All</source>
-        <translation>Tout sélectioner</translation>
+        <translation>Tout Sélectioner</translation>
     </message>
     <message>
         <source>Really delete
 %1 files?</source>
-        <translation>Réellement effacer
-le fichier %1?</translation>
+        <translation>Confirmer la suppression
+du fichier %1 ?</translation>
     </message>
     <message>
         <source>Delete Directory?</source>
-        <translation>Effacer le répertoire?</translation>
+        <translation>Supprimer Répertoire ?</translation>
+    </message>
+    <message>
+        <source>Really delete
+</source>
+        <translation>Confirmer l&apos;effacement
+</translation>
     </message>
     <message>
         <source>Really copy
 %1 files?</source>
-        <translation>Vraiment copier
-%1 files?</translation>
+        <translation>Confirmer la copie
+du fichier %1 ?</translation>
     </message>
     <message>
         <source>File Exists!</source>
-        <translation>Le fichier exite!</translation>
+        <translation>Le Fichier Existe !</translation>
     </message>
     <message>
         <source>
 exists. Ok to overwrite?</source>
         <translation>
-exite déjà. D&apos;accord pour écraser?</translation>
+exite déjà. Confirmer l&apos;écrasement ?</translation>
     </message>
     <message>
         <source> already exists.
@@ -216,7 +222,7 @@ Voulez-vous vraiment l&apos;effacer?</translation>
     </message>
     <message>
         <source>%1 exists. Ok to overwrite?</source>
-        <translation>%1 existe déjà. D&apos;accord pour écraser?</translation>
+        <translation>%1 existe déjà. Confirmer son écrasement ?</translation>
     </message>
     <message>
         <source>Could not copy %1 to %2</source>
@@ -228,57 +234,29 @@ is copyright 2002-2003 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
         <translation>Advanced FileManager(new line)
-is copyright 2002-2003 by(new line)
+Copyright 2002-2003 de(new line)
 L.J.Potter&lt;llornkcor@handhelds.org&gt;(new line)
-and is licensed by the GPL</translation>
-    </message>
-    <message>
-        <source>Bookmark Directory</source>
-        <translation>Favoris</translation>
-    </message>
-    <message>
-        <source>Remove Current Directory from Bookmarks</source>
-        <translation>Effacer le répertoire courant des Favoris</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Erreur</translation>
+Sous licence GPL</translation>
     </message>
     <message>
         <source>Cannot remove current directory
 from bookmarks.
-It is not bookmarked!</source>
-        <translation>Impossible d&apos;enlever le répertoire
-courant des favoris.
-Ce n&apos;est pas un favori!</translation>
+It is not bookmarked!!</source>
+        <translation>Impossible d&apos;effacer le répertoire courant
+des favoris.
+Ce n&apos;en est pas un!!</translation>
     </message>
     <message>
-        <source>File Search</source>
-        <translation>Recherche de fichier</translation>
+        <source>Bookmark Directory</source>
+        <translation>Répertoire des Favoris</translation>
     </message>
     <message>
-        <source>Really delete %1
-and all it&apos;s contents ?</source>
-        <translation>Réellement effacer %1
-et tout son contenu?</translation>
+        <source>Remove Current Directory from Bookmarks</source>
+        <translation>Effacer le Répertoire Courant des Favoris</translation>
     </message>
     <message>
-        <source>Really delete
-%1?</source>
-        <translation>Réellement effacer
-%1?</translation>
-    </message>
-    <message>
-        <source>AdvancedFm :: </source>
-        <translation type="obsolete">AdvancedFm ::</translation>
-    </message>
-    <message>
-        <source> kB free</source>
-        <translation type="obsolete">kb libre</translation>
-    </message>
-    <message>
-        <source>Copy &apos;%1&apos; As</source>
-        <translation type="obsolete">Copier &apos;%1&apos; sous</translation>
+        <source>Error</source>
+        <translation>Erreur</translation>
     </message>
 </context>
 <context>
@@ -291,29 +269,12 @@ et tout son contenu?</translation>
         <source>Output</source>
         <translation>Sortie</translation>
     </message>
-    <message>
-        <source>Process could not start</source>
-        <translation>Impossible de démarrer le processus</translation>
-    </message>
-    <message>
-        <source>Error
-</source>
-        <translation>Erreur
-</translation>
-    </message>
-    <message>
-        <source>
-Finished
-</source>
-        <translation>
-Terminé</translation>
-    </message>
 </context>
 <context>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation>Définir les droits</translation>
+        <translation>Définir les Droits</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
@@ -350,27 +311,6 @@ Terminé</translation>
     <message>
         <source>execute</source>
         <translation>exécuter</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation>Attention</translation>
-    </message>
-    <message>
-        <source>Error- no user</source>
-        <translation>Erreur- pas d&apos;utilisateur</translation>
-    </message>
-    <message>
-        <source>Error- no  group</source>
-        <translation>Erreur- pas de groupe</translation>
-    </message>
-    <message>
-        <source>Error setting ownership or group</source>
-        <translation>Erreur lors de l&apos;attribution du
-propriétaire ou du groupe</translation>
-    </message>
-    <message>
-        <source>Error setting mode</source>
-        <translation>Erreur lors de la définition des attributs</translation>
     </message>
 </context>
 </TS>

@@ -16,11 +16,11 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Sauver</translation>
+        <translation>Enregister</translation>
     </message>
     <message>
         <source>Force styling for all applications.</source>
@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation>Désactiver le style pour ces appilcations (&lt;b&gt;*&lt;/b&gt; peut être utilisé comme joker):</translation>
+        <translation>Désactiver le style pour ces applications (&lt;b&gt;*&lt;/b&gt; peut être utilisé comme joker):</translation>
     </message>
     <message>
         <source>Binary file(s)</source>
@@ -100,11 +100,11 @@
     </message>
     <message>
         <source>Save Scheme</source>
-        <translation>Sauver le thème</translation>
+        <translation>Enregister le thème</translation>
     </message>
     <message>
         <source>Save scheme</source>
-        <translation>Sauver le thème</translation>
+        <translation>Enregistrer le thème</translation>
     </message>
     <message>
         <source>Scheme does already exist.</source>
@@ -112,11 +112,11 @@
     </message>
     <message>
         <source>Delete scheme</source>
-        <translation>Effacer le thème</translation>
+        <translation>Supprimer le thème</translation>
     </message>
     <message>
         <source>Unable to delete current scheme.</source>
-        <translation>Impossible d&apos;effacer le thème courant.</translation>
+        <translation>Impossible de supprimer le thème courant.</translation>
     </message>
     <message>
         <source>&lt;new&gt;</source>
@@ -126,17 +126,17 @@
         <source>Styles control the way items such as buttons and scroll bars appear in all applications.
 
 Click here to select an available style.</source>
-        <translation>Les styles contrôles la manière dont les controls comme les boutons ou les barres d&apos;ascenceurs sont représentés dans toutes les applications.
+        <translation>Les styles contrôles la manière dont les champs comme les boutons ou les barres d&apos;ascenceurs sont affichés dans toutes les applications.
 
-Cliquer ici pour sélectionner un style. disponible.</translation>
+Cliquez ici pour sélectionner un style disponible.</translation>
     </message>
     <message>
         <source>Click here to configure the currently selected style.
 
 Note:  This option is not available for all styles.</source>
-        <translation>Cliquer ici pour configurer le style actuellement sélectionné.
+        <translation>Cliquez ici pour configurer le style actuellement sélectionné.
 
-Note: Cette option n&apos;est pas disponible pour tous les styles.</translation>
+Note : Cette option n&apos;est pas disponible pour tous les styles.</translation>
     </message>
     <message>
         <source>Window decorations control the way the application title bar and its buttons appear.
@@ -144,59 +144,59 @@ Note: Cette option n&apos;est pas disponible pour tous les styles.</translation>
 Click here to select an available decoration.</source>
         <translation>Les décorations de fenêtres contrôlent la manière dont les barres de titres et les bouttons des applications apparaissent.
 
-Cliquer ici pour sélectionner une décoration disponible.</translation>
+Cliquez ici pour sélectionner une décoration disponible.</translation>
     </message>
     <message>
         <source>Select the desired name, style and size of the default font applications will use.</source>
-        <translation>Sélectionner le nom, le style et la taille désirés pour la police par défaut que les applications utiliseront.</translation>
+        <translation>Sélectionne le nom, le style et la taille de la police que les applications utiliseront par défaut.</translation>
     </message>
     <message>
         <source>Color schemes are a collection of colors which are used for various parts of the display.
 
 Click here to select an available scheme.</source>
-        <translation>Les thèmes de couleurs sont une collection de couleurs utilisés à différents endroits des fenêtres.
+        <translation>Les thèmes de couleurs sont une collection de couleurs utilisés à différents endroits sur les fenêtres.
 
-Cliquer ici pour sélectionner un thème.</translation>
+Cliquez ici pour sélectionner un thème.</translation>
     </message>
     <message>
         <source>Click here to change the colors in the current color scheme.</source>
-        <translation>Cliquer ici pour changer les couleurs dans le thème de couleur actuel.</translation>
+        <translation>Cliquez ici pour changer les couleurs dans le thème de couleur actuel.</translation>
     </message>
     <message>
         <source>Click here to delete the color scheme selected in the list to the left.</source>
-        <translation>Cliquer ici pour effacer le thème de couleur de la liste.</translation>
+        <translation>Cliquez ici pour effacer le thème de couleur de la liste.</translation>
     </message>
     <message>
         <source>Click here to name and save the current color scheme.</source>
-        <translation>Cliquer ici pour définir un nom et sauvegarder le thème de couleur actuel.</translation>
+        <translation>Cliquez ici pour définir un nom et sauvegarder le thème de couleur actuel.</translation>
     </message>
     <message>
         <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation>Cliquer ici pour permettre à toutes les applications d&apos;utiliser les préférences globales d&apos;apparence.</translation>
+        <translation>Cliquez ici pour permettre à toutes les applications d&apos;utiliser les préférences globales d&apos;apparence.</translation>
     </message>
     <message>
         <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
 
 This area allows you to select an application and which settings you wish to disable.</source>
-        <translation>Si quelques applications ne peuvent afficher correctement les préférence globales d&apos;apparence, certaines fonctionnalité peuvent être désactivées.
+        <translation>Si des applications ne s&apos;affichent pas correctement suite aux choix d&apos;apparence globale, vous pouvez désactiver certaines des fonctionnalités pour celle-ci.
 
-Cette partie vous permet de selectionner une application et quelle préférence vous souhaitez désactiver.</translation>
+Cette partie vous permet de sélectionner une application et de lui attribuer des préférences personnalisées.</translation>
     </message>
     <message>
         <source>Click here to add an application to the list above.</source>
-        <translation>Cliquer ici pour ajouter une application à la liste ci-dessous.</translation>
+        <translation>Cliquez ici pour ajouter une application à la liste ci-dessous.</translation>
     </message>
     <message>
         <source>Click here to delete the currently selected application.</source>
-        <translation>Cliquer ici pour effacer l&apos;application sélectionnée.</translation>
+        <translation>Cliquez ici pour effacer l&apos;application sélectionnée.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application up in the list.</source>
-        <translation>Cliquer ici pour remonter l&apos;application sélectionnée dans la liste.</translation>
+        <translation>Cliquez ici pour remonter l&apos;application sélectionnée dans la liste.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application down in the list.</source>
-        <translation>Cliquer ici pour descendre l&apos;application sélectionnée dans la liste.</translation>
+        <translation>Cliquez ici pour descendre l&apos;application sélectionnée dans la liste.</translation>
     </message>
     <message>
         <source>Click here to select a desired style for tabbed dialogs (such as this application). The styles available are:
@@ -226,11 +226,7 @@ Cette partie vous permet de selectionner une application et quelle préférence 
     </message>
     <message>
         <source>Appearance Settings</source>
-        <translation>Préference d&apos;Apparence</translation>
-    </message>
-    <message>
-        <source>Rotation direction:</source>
-        <translation>Sens de rotation:</translation>
+        <translation>Préferences d&apos;Apparence</translation>
     </message>
 </context>
 <context>
@@ -241,7 +237,7 @@ Cette partie vous permet de selectionner une application et quelle préférence 
     </message>
     <message>
         <source>Click here to select a color for: </source>
-        <translation>Cliquer ici pour sélectionner un couleur pour:</translation>
+        <translation>Cliquez ici pour sélectionner un couleur pour :</translation>
     </message>
 </context>
 <context>
@@ -252,11 +248,11 @@ Cette partie vous permet de selectionner une application et quelle préférence 
     </message>
     <message>
         <source>Normal Item</source>
-        <translation>control normal</translation>
+        <translation>Control Simple</translation>
     </message>
     <message>
         <source>Disabled Item</source>
-        <translation>control désactivé</translation>
+        <translation>Control Désactivé</translation>
     </message>
     <message>
         <source>Menu</source>
@@ -264,23 +260,23 @@ Cette partie vous permet de selectionner une application et quelle préférence 
     </message>
     <message>
         <source>Normal Text</source>
-        <translation>Texte normal</translation>
+        <translation>Texte Simple</translation>
     </message>
     <message>
         <source>Highlighted Text</source>
-        <translation>Texte surligné</translation>
+        <translation>Texte Surligné</translation>
     </message>
     <message>
         <source>Button</source>
-        <translation>Boutton</translation>
+        <translation>Bouton</translation>
     </message>
     <message>
         <source>Check Box</source>
-        <translation>Case à cocher</translation>
+        <translation>Case à Cocher</translation>
     </message>
     <message>
         <source>Sample window using the selected settings.</source>
-        <translation>Exemple de fenêtre utilisant les préférences sélectionnées.</translation>
+        <translation>Fenêtre d&apos;exemple utilisant les nouveaux paramêtres.</translation>
     </message>
 </context>
 </TS>

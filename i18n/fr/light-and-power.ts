@@ -10,7 +10,7 @@
     <name>LightSettingsBase</name>
     <message>
         <source>By sensing the ambient light where you are using your device, the screen light can be adjusted automatically. The brightness setting still affects the average brightness.</source>
-        <translation>En mesurant la lumière ambiente quand vous utilisez votre appareil, la luminosité de l&apos;écran peut être ajustée automatiquement. Le réglage de luminosité affecte la luminosité moyenne.</translation>
+        <translation>Quand vous utilisez votre appareil, la luminosité de l&apos;écran peut être ajustée automatiquement grace au système de mesure de la lumière ambiente. Le réglage de luminosité affecte la luminosité moyenne.</translation>
     </message>
     <message>
         <source>Light off after</source>
@@ -34,11 +34,11 @@
     </message>
     <message>
         <source>on Battery</source>
-        <translation>Sur batterie</translation>
+        <translation>Sur Batterie</translation>
     </message>
     <message>
         <source>General Settings</source>
-        <translation>Réglages généraux</translation>
+        <translation>Réglages Généraux</translation>
     </message>
     <message>
         <source> sec</source>
@@ -50,15 +50,15 @@
     </message>
     <message>
         <source>Deactivate LCD only (does not suspend)</source>
-        <translation>Désactive l&apos;écran (pas de mise en veille)</translation>
+        <translation>Désactive l&apos;écran (ne met pas veille)</translation>
     </message>
     <message>
         <source>Backlight</source>
-        <translation>Retroéclairage</translation>
+        <translation>Rétro-éclairage</translation>
     </message>
     <message>
         <source>set a fix value for backlight</source>
-        <translation>régler le niveau du rétroéclairage</translation>
+        <translation>régler le niveau du rétro-éclairage</translation>
     </message>
     <message>
         <source>Full</source>
@@ -106,22 +106,22 @@
     </message>
     <message>
         <source>very low battery warning at</source>
-        <translation>Niveau &quot;Batterie très faible&quot;</translation>
+        <translation>Message &quot;Batterie très faible&quot;</translation>
     </message>
     <message>
         <source>critical power warning at</source>
-        <translation>Niveau &quot;Batterie vide&quot;</translation>
+        <translation>Message &quot;Batterie critique&quot;</translation>
     </message>
 </context>
 <context>
     <name>SensorBase</name>
     <message>
         <source>Sensor Calibration</source>
-        <translation>Calibration du capteur</translation>
+        <translation>Calibrage du Capteur</translation>
     </message>
     <message>
         <source>Full</source>
-        <translation>Max</translation>
+        <translation>Pleine</translation>
     </message>
     <message>
         <source>Off</source>

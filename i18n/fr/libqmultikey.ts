@@ -12,11 +12,11 @@
     </message>
     <message>
         <source>Keymap File</source>
-        <translation>Fichier &quot;keymap&quot;</translation>
+        <translation>Fichier &quot;Keymap&quot;</translation>
     </message>
     <message>
         <source>Current Language</source>
-        <translation>Langage courant</translation>
+        <translation>Langage Courant</translation>
     </message>
     <message>
         <source>Add</source>
@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Key Repeat</source>
-        <translation>Répétition des touches</translation>
+        <translation>Répétition des Touches</translation>
     </message>
     <message>
         <source>Colors</source>
@@ -40,26 +40,26 @@
     </message>
     <message>
         <source>Key Color</source>
-        <translation>Couleur de la touche</translation>
+        <translation>Couleur Touche</translation>
     </message>
     <message>
         <source>Key Pressed Color</source>
-        <translation>Couleur de la touche pressée</translation>
+        <translation>Couleur Touche Pressée</translation>
     </message>
     <message>
         <source>Line Color</source>
-        <translation>Couleur de la ligne</translation>
+        <translation>Couleur Ligne</translation>
     </message>
     <message>
         <source>Text Color</source>
-        <translation>Couleur du texte</translation>
+        <translation>Couleur Texte</translation>
     </message>
 </context>
 <context>
     <name>InputMethods</name>
     <message>
         <source>Multikey</source>
-        <translation>Clavier</translation>
+        <translation>Multikey</translation>
     </message>
 </context>
 </TS>

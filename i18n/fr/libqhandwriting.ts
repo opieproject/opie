@@ -4,7 +4,7 @@
     <name>HandwritingHelp</name>
     <message>
         <source>Handwriting Help</source>
-        <translation>Aide de la reconnaissance d&apos;écriture</translation>
+        <translation>Reconnaissance d&apos;Ecriture - Aide</translation>
     </message>
     <message>
         <source>&lt;ul&gt;&lt;li&gt;When you start to use the handwriting recogniser write slowly, accurately and firmly.&lt;li&gt;Use the guide lines when drawing your characters.&lt;li&gt;When drawing a character with multiple strokes, each successive stroke must be drawn before the grayed strokes are erased.&lt;li&gt;Practice your handwriting using the handwriting trainer.&lt;li&gt;When adding your own character templates make sure they are sufficiently different from other characters&apos; templates.&lt;/ul&gt;</source>
@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>Character:</source>
-        <translation>Caractère:</translation>
+        <translation>Caractère :</translation>
     </message>
 </context>
 <context>

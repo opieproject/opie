@@ -20,11 +20,11 @@
     </message>
     <message>
         <source>Fuel</source>
-        <translation>Fuel</translation>
+        <translation>Essence</translation>
     </message>
     <message>
         <source>Press Calendar to start playing</source>
-        <translation>Presser le boutton &quot;Calendrier&quot; pour démarrer le jeu</translation>
+        <translation>Pressez le boutton &quot;Calendrier&quot; pour démarrer le jeu</translation>
     </message>
     <message>
         <source>Ship Destroyed.

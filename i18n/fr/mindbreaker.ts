@@ -8,14 +8,14 @@
     </message>
     <message>
         <source>win avg: %1 turns (%2 games)</source>
-        <translation>Moyenne: %1 tours (%2 jeux)</translation>
+        <translation>Moyenne : %1 tours (%2 jeux)</translation>
     </message>
 </context>
 <context>
     <name>MindBreakerBoard</name>
     <message>
         <source>Go%1p%2</source>
-        <translation>Tour%1p%2</translation>
+        <translation>Tour %1p%2</translation>
     </message>
     <message>
         <source>CurrentGo%1</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Reset Statistics</source>
-        <translation>Remettre les statistique à zéro</translation>
+        <translation>Re-initialiser les statistique</translation>
     </message>
     <message>
         <source>Reset the win ratio?</source>

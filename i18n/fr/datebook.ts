@@ -96,10 +96,6 @@ Quitter ?</translation>
         <source>Edit...</source>
         <translation>Éditer...</translation>
     </message>
-    <message>
-        <source>error box</source>
-        <translation>boîte d&apos;erreur</translation>
-    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -197,10 +193,6 @@ Quitter ?</translation>
         <source>Duplicate</source>
         <translation>Dupliquer</translation>
     </message>
-    <message>
-        <source>Beam this occurence</source>
-        <translation>Transmettre cette occurence</translation>
-    </message>
 </context>
 <context>
     <name>DateBookSettings</name>
@@ -285,7 +277,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Default view:</source>
-        <translation>Vue par défaut:</translation>
+        <translation>Vue par défaut :</translation>
     </message>
     <message>
         <source>Day</source>
@@ -341,7 +333,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation>Catégorie:</translation>
+        <translation>Catégorie :</translation>
     </message>
 </context>
 <context>
@@ -366,14 +358,6 @@ Quitter ?</translation>
     </message>
 </context>
 <context>
-    <name>DateBookWeekLstDayHdr</name>
-    <message>
-        <source>MTWTFSSM</source>
-        <comment>Week days</comment>
-        <translation>LMMJVSDL</translation>
-    </message>
-</context>
-<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -394,43 +378,43 @@ Quitter ?</translation>
 <context>
     <name>DateBookWeekView</name>
     <message>
+        <source>M</source>
+        <comment>Monday</comment>
+        <translation>L</translation>
+    </message>
+    <message>
+        <source>T</source>
+        <comment>Tuesday</comment>
+        <translation>M</translation>
+    </message>
+    <message>
+        <source>W</source>
+        <comment>Wednesday</comment>
+        <translation>M</translation>
+    </message>
+    <message>
+        <source>T</source>
+        <comment>Thursday</comment>
+        <translation>J</translation>
+    </message>
+    <message>
+        <source>F</source>
+        <comment>Friday</comment>
+        <translation>V</translation>
+    </message>
+    <message>
+        <source>S</source>
+        <comment>Saturday</comment>
+        <translation>S</translation>
+    </message>
+    <message>
+        <source>S</source>
+        <comment>Sunday</comment>
+        <translation>D</translation>
+    </message>
+    <message>
         <source>p</source>
         <translation>p</translation>
-    </message>
-    <message>
-        <source>Mo</source>
-        <comment>Monday</comment>
-        <translation type="obsolete">Lu</translation>
-    </message>
-    <message>
-        <source>Tu</source>
-        <comment>Tuesday</comment>
-        <translation type="obsolete">Ma</translation>
-    </message>
-    <message>
-        <source>We</source>
-        <comment>Wednesday</comment>
-        <translation type="obsolete">Me</translation>
-    </message>
-    <message>
-        <source>Th</source>
-        <comment>Thursday</comment>
-        <translation type="obsolete">Je</translation>
-    </message>
-    <message>
-        <source>Fr</source>
-        <comment>Friday</comment>
-        <translation type="obsolete">Ve</translation>
-    </message>
-    <message>
-        <source>Sa</source>
-        <comment>Saturday</comment>
-        <translation type="obsolete">Sa</translation>
-    </message>
-    <message>
-        <source>Su</source>
-        <comment>Sunday</comment>
-        <translation type="obsolete">Di</translation>
     </message>
 </context>
 <context>
@@ -565,13 +549,6 @@ Minutes</translation>
     <message>
         <source>Note...</source>
         <translation>Notes...</translation>
-    </message>
-</context>
-<context>
-    <name>DatebookAlldayDisp</name>
-    <message>
-        <source>Info</source>
-        <translation>Info</translation>
     </message>
 </context>
 <context>
@@ -734,10 +711,6 @@ et</translation>
     <message>
         <source>, and </source>
         <translation>, et</translation>
-    </message>
-    <message>
-        <source>on </source>
-        <translation>on</translation>
     </message>
 </context>
 <context>

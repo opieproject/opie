@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>New</source>
-        <translation>Nouvelle</translation>
+        <translation>Nouveau</translation>
     </message>
     <message>
         <source>Connect</source>
@@ -36,15 +36,15 @@
     </message>
     <message>
         <source>Show Hidden Files</source>
-        <translation>Montrer les fichiers cachés</translation>
+        <translation>Montrer Fichiers Cachés</translation>
     </message>
     <message>
         <source>Upload</source>
-        <translation>Télécharger</translation>
+        <translation>Envoyer</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation>Créer un répertoire</translation>
+        <translation>Créer Répertoire</translation>
     </message>
     <message>
         <source>Rename</source>
@@ -60,15 +60,15 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>Aller au répertoire local</translation>
+        <translation>Basculer sur Local</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>Aller au répertoire distant</translation>
+        <translation>Basculer sur Distant</translation>
     </message>
     <message>
         <source>Switch to Config</source>
-        <translation>Aller à la configuration</translation>
+        <translation>Basculer sur la Config</translation>
     </message>
     <message>
         <source>File</source>
@@ -88,7 +88,7 @@
     </message>
     <message>
         <source>Username</source>
-        <translation>Identifiant</translation>
+        <translation>Nom Utilisateur</translation>
     </message>
     <message>
         <source>Password</source>
@@ -116,7 +116,7 @@
     </message>
     <message>
         <source>Please set the server info</source>
-        <translation>Définissez les infos du serveur distant svp</translation>
+        <translation>Veuillez définir les paramêtres du serveur distant</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -141,12 +141,12 @@
     <message>
         <source>Unable to upload
 </source>
-        <translation>Impossible de télécharger
+        <translation>Impossible d&apos;envoyer
 </translation>
     </message>
     <message>
         <source>Cannot upload directories</source>
-        <translation>Impossible de télécharger les répertoires</translation>
+        <translation>Impossible d&apos;envoyer les répertoires</translation>
     </message>
     <message>
         <source>Unable to download 
@@ -173,12 +173,12 @@
     <message>
         <source>Unable to get working dir
 </source>
-        <translation>Impossibled d&apos;obtenir le rép de travail
+        <translation>Impossible d&apos;obtenir le rép de travail
 </translation>
     </message>
     <message>
         <source>Change Directory</source>
-        <translation>Changer de répertoire</translation>
+        <translation>Changer de Répertoire</translation>
     </message>
     <message>
         <source>Do you really want to delete
@@ -208,13 +208,13 @@ Il doit être vide</translation>
     <message>
         <source>Unable to remove directory
 </source>
-        <translation>Impossible d&apos;effacer le répertoire
+        <translation>Impossible de supprimer le répertoire
 </translation>
     </message>
     <message>
         <source>Unable to delete file
 </source>
-        <translation>Impossible d&apos;effacer le fichier
+        <translation>Impossible de supprimer le fichier
 </translation>
     </message>
     <message>
@@ -225,11 +225,15 @@ Il doit être vide</translation>
     </message>
     <message>
         <source>Could not rename</source>
-        <translation>Impossibled de renomer</translation>
+        <translation>Impossible de renomer</translation>
     </message>
     <message>
         <source>That directory does not exist</source>
         <translation>Ce répertoire n&apos;existe pas</translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation>A propos</translation>
     </message>
     <message>
         <source>Rescan</source>
@@ -237,7 +241,7 @@ Il doit être vide</translation>
     </message>
     <message>
         <source>New Server name</source>
-        <translation>nouveau nom de serveur</translation>
+        <translation>Nouveau Nom de Serveur</translation>
     </message>
     <message>
         <source>Sorry name already taken</source>

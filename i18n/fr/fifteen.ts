@@ -16,14 +16,14 @@
     </message>
     <message>
         <source>Fifteen Pieces</source>
-        <translation>Pièces</translation>
+        <translation>Quinze Pièces</translation>
     </message>
 </context>
 <context>
     <name>PiecesTable</name>
     <message>
         <source>Fifteen Pieces</source>
-        <translation>Pièces</translation>
+        <translation>Quinze Pièces</translation>
     </message>
     <message>
         <source>Congratulations!
@@ -33,11 +33,11 @@ Vous avez gagné !</translation>
     </message>
     <message>
         <source>R&amp;andomize Pieces</source>
-        <translation>Mél&amp;anger les pièces</translation>
+        <translation>Mél&amp;anger les Pièces</translation>
     </message>
     <message>
         <source>&amp;Reset Pieces</source>
-        <translation>&amp;Remettre en place les pièces</translation>
+        <translation>&amp;Reinitialiser les Pièces</translation>
     </message>
 </context>
 </TS>

@@ -16,7 +16,11 @@
     </message>
     <message>
         <source>&amp;Change Card Backs</source>
-        <translation type="obsolete">&amp;Changer le dos des cartes</translation>
+        <translation>&amp;Changer le Dos des Cartes</translation>
+    </message>
+    <message>
+        <source>&amp;Snap To Position</source>
+        <translation>&amp;Aider Positionnement</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
@@ -36,11 +40,15 @@
     </message>
     <message>
         <source>Change Card Backs</source>
-        <translation type="obsolete">Changer le dos des cartes</translation>
+        <translation>Changer le Dos des Cartes</translation>
+    </message>
+    <message>
+        <source>Snap To Position</source>
+        <translation>Aider Positionnement</translation>
     </message>
     <message>
         <source>Turn One Card</source>
-        <translation type="obsolete">Retourner une carte</translation>
+        <translation>Retourner Une Carte</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -48,7 +56,7 @@
     </message>
     <message>
         <source>Turn Three Cards</source>
-        <translation type="obsolete">Retourner 3 cartes</translation>
+        <translation>Retourner Trois Cartes</translation>
     </message>
     <message>
         <source>Chicane</source>
@@ -61,30 +69,6 @@
     <message>
         <source>Teeclub</source>
         <translation>Teeclub</translation>
-    </message>
-    <message>
-        <source>&amp;Change card backs</source>
-        <translation>&amp;Changer le dos des cartes</translation>
-    </message>
-    <message>
-        <source>&amp;Snap to position</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Change card backs</source>
-        <translation>Changer le dos des cartes</translation>
-    </message>
-    <message>
-        <source>Snap to position</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Turn one card</source>
-        <translation>Retourner une carte</translation>
-    </message>
-    <message>
-        <source>Turn three cards</source>
-        <translation>Retourner 3 cartes</translation>
     </message>
 </context>
 </TS>

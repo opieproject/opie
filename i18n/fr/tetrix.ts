@@ -1,40 +1,6 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>OHighscore</name>
-    <message>
-        <source>empty</source>
-        <translation>vide</translation>
-    </message>
-    <message>
-        <source>Enter your name!</source>
-        <translation>Entrez votre nom!</translation>
-    </message>
-</context>
-<context>
-    <name>OHighscoreDialog</name>
-    <message>
-        <source>Highscores</source>
-        <translation>Meilleurs scores</translation>
-    </message>
-    <message>
-        <source>#</source>
-        <translation>#</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation>Nom</translation>
-    </message>
-    <message>
-        <source>Points</source>
-        <translation>points</translation>
-    </message>
-    <message>
-        <source>Level</source>
-        <translation>Niveau</translation>
-    </message>
-</context>
-<context>
     <name>QTetrix</name>
     <message>
         <source>Tetrix</source>

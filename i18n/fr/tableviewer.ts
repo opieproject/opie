@@ -41,18 +41,18 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Clear All</source>
-        <translation>Effacer tout</translation>
+        <translation>Supprimer Tout</translation>
     </message>
 </context>
 <context>
     <name>TVListView</name>
     <message>
         <source>List View</source>
-        <translation>Vue en Liste</translation>
+        <translation>Vue Liste</translation>
     </message>
 </context>
 <context>

@@ -8,19 +8,19 @@
     </message>
     <message>
         <source>Save</source>
-        <translation>Sauver</translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Delete?</source>
-        <translation>Effacer?</translation>
+        <translation>Supprimer ?</translation>
     </message>
     <message>
         <source>Do you really want to&lt;BR&gt;&lt;B&gt; delete&lt;/B&gt; this note ?</source>
-        <translation>Voulez-vous réellement&lt;br&gt;&lt;b&gt;effacer&lt;/b&gt; cette note?</translation>
+        <translation>Voulez-vous &lt;BR&gt;&lt;B&gt; détruire&lt;/B&gt; cette note ?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Beam Out</source>
-        <translation>Transmettre</translation>
+        <translation>Envoyer</translation>
     </message>
     <message>
         <source>Search For...</source>
@@ -40,8 +40,7 @@
     </message>
     <message>
         <source>Toggle Maximized</source>
-        <translation>Toggle Maximized
-</translation>
+        <translation>Maximiser</translation>
     </message>
 </context>
 </TS>

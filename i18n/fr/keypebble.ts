@@ -18,13 +18,13 @@
         <source>Read Error: QSocket reported an error reading
 data, the remote host has probably dropped the
 connection.</source>
-        <translation>Erreur de lecure : QSocket a rapporté une erreur de lecture
-des données, l&apos;hôte distant a probablement clos la
+        <translation>Erreur de lecure : QSocket a renvoyé une erreur
+de lecture, l&apos;hôte distant a probablement clos la
 connection.</translation>
     </message>
     <message>
         <source>QSocket reported an invalid error code</source>
-        <translation>QSocket a rapporter un code d&apos;erreur invalide</translation>
+        <translation>QSocket a renvoyé un code d&apos;erreur invalide</translation>
     </message>
 </context>
 <context>
@@ -35,7 +35,7 @@ connection.</translation>
     </message>
     <message>
         <source>Waiting for desktop name...</source>
-        <translation>En attente du nom du poste...</translation>
+        <translation>En attente du nom de poste...</translation>
     </message>
     <message>
         <source>Connected to %1</source>
@@ -54,7 +54,7 @@ connection.</translation>
     <name>KRFBLogin</name>
     <message>
         <source>Waiting for server version...</source>
-        <translation>En attente la version du serveur...</translation>
+        <translation>En attente de la version du serveur...</translation>
     </message>
     <message>
         <source>Error: Invalid server version, %1</source>
@@ -66,12 +66,12 @@ connection.</translation>
     </message>
     <message>
         <source>Logged in</source>
-        <translation>Loggé</translation>
+        <translation>Connexion établie</translation>
     </message>
     <message>
         <source>Error: This server requires a password, but none has been specified.
 </source>
-        <translation>Erreur : Le serveur demande un mot de passe, mais aucun n&apos;a été fourni.
+        <translation>Erreur : Le serveur demande un mot de passe, mais aucun n&apos;a été spécifié.
 </translation>
     </message>
     <message>
@@ -81,12 +81,12 @@ connection.</translation>
     <message>
         <source>Error: Too many invalid login attempts have been made
 to this account, please try later.</source>
-        <translation>Erreur : Trop de tentatives de login infructueuses ont été faites
+        <translation>Erreur : Trop de tentatives de connexion infructueuses ont été faites
 sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Login Failed</source>
-        <translation>Echec du login</translation>
+        <translation>Echec de connexion</translation>
     </message>
     <message>
         <source>Too many failures</source>
@@ -117,23 +117,23 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Logged in to remote host</source>
-        <translation>Loggé sur l&apos;hôte distant</translation>
+        <translation>Connecté sur l&apos;hôte distant</translation>
     </message>
     <message>
         <source>Connection closed</source>
-        <translation>Connection terminée</translation>
+        <translation>Connexion terminée</translation>
     </message>
     <message>
         <source>New Connection</source>
-        <translation>Nouvelle connexion</translation>
+        <translation>Nouvelle Connexion</translation>
     </message>
     <message>
         <source>Open Bookmark</source>
-        <translation>Ouvrir favori</translation>
+        <translation>Ouvrir Favoris</translation>
     </message>
     <message>
         <source>Delete Bookmark</source>
-        <translation>Effacer le favori</translation>
+        <translation>Supprimer favori</translation>
     </message>
     <message>
         <source>Send Contrl-Alt-Delete</source>
@@ -141,11 +141,11 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Next Click is Double Click</source>
-        <translation>Le clique suivant est un double clique</translation>
+        <translation>Le Clique Suivant est un Double Clique</translation>
     </message>
     <message>
         <source>Next Click is Right Click</source>
-        <translation>Le clique suivant est un clique droit</translation>
+        <translation>Le Clique Suivant est un Clique Droit</translation>
     </message>
 </context>
 <context>
@@ -163,7 +163,7 @@ sous ce compte, essayez plus tard.</translation>
     <name>KVNCConnDlgBase</name>
     <message>
         <source>VNC Viewer Connection</source>
-        <translation>VNC Viewer Connection</translation>
+        <translation>Connexion VNC Viewer</translation>
     </message>
     <message>
         <source>Server</source>
@@ -171,23 +171,23 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Show Password</source>
-        <translation>Montrer le mot de passe</translation>
+        <translation>Montrer Mot de Passe</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Mot de passe :</translation>
+        <translation>Mot de Passe :</translation>
     </message>
     <message>
         <source>Bookmark Name:</source>
-        <translation>Nom du favori:</translation>
+        <translation>Nom du Favori :</translation>
     </message>
     <message>
         <source>Host Name:</source>
-        <translation>Hôte :</translation>
+        <translation>Nom d&apos;Hôte :</translation>
     </message>
     <message>
         <source>Display Number:</source>
-        <translation>Numéro de &quot;display&quot; :</translation>
+        <translation>Numéro d&apos;écran :</translation>
     </message>
     <message>
         <source>Options</source>
@@ -195,7 +195,7 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Check for screen updates every:</source>
-        <translation>Vérifier la mise à jour de l&apos;écran toutes les :</translation>
+        <translation>Vérifier mise à jour de l&apos;écran toutes les :</translation>
     </message>
     <message>
         <source>Milliseconds</source>
@@ -247,7 +247,7 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Copy rectangle encoding</source>
-        <translation>Copier l&apos;encodage rectangle</translation>
+        <translation>Encodage Copie de Rectangle</translation>
     </message>
     <message>
         <source>The password of the VNC server</source>
@@ -255,7 +255,7 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Toggle obscuring the password</source>
-        <translation>Sélectionner/Désélectionner le camouflage du mot de passe</translation>
+        <translation>Camoufler le mot de passe</translation>
     </message>
     <message>
         <source>The name of the VNC server</source>
@@ -263,19 +263,19 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>The host name of the VNC server</source>
-        <translation>Le nom d&apos;he du serveur VNC</translation>
+        <translation>Le nom d&apos;hôte du serveur VNC</translation>
     </message>
     <message>
         <source>The display number of the VNC server</source>
-        <translation>Le numéro de &quot;display&quot; du serveur VNC</translation>
+        <translation>Le numéro d&apos;écran du serveur VNC</translation>
     </message>
     <message>
         <source>Delay between requesting updates from the server</source>
-        <translation>Délai avant une requête de mise à jour du serveur</translation>
+        <translation>Délai entre les requêtes de mise à jour du serveur</translation>
     </message>
     <message>
         <source>Request that the VNC server transfer 8 bit color</source>
-        <translation>Demande un transfert de couleur sur 8-bit au serveur</translation>
+        <translation>Demande au serveur d&apos;utiliser les couleurs sur 8-bit </translation>
     </message>
     <message>
         <source>Allow other users to connect to the VNC server</source>
@@ -287,7 +287,7 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Enable transmiting identical rectangles as references to existing data</source>
-        <translation>permettre la transmission de rectangle identique comme référence à des données existantes</translation>
+        <translation>Activé la transmission de rectangles identiques comme référence aux données existantes</translation>
     </message>
 </context>
 </TS>

@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Go!</source>
-        <translation>C&apos;est parti !</translation>
+        <translation>Go !</translation>
     </message>
     <message>
         <source>Congratulation! You have won!</source>
@@ -36,7 +36,7 @@
     </message>
     <message>
         <source>&amp;Undo Move</source>
-        <translation>&amp;Annuler le déplacement</translation>
+        <translation>&amp;Annuler Déplacement</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -68,15 +68,15 @@
     </message>
     <message>
         <source>&amp;Show Numeration</source>
-        <translation>&amp;Afficher les repères</translation>
+        <translation>&amp;Afficher Repères</translation>
     </message>
     <message>
         <source>&amp;English Rules</source>
-        <translation>Règles &amp;anglaises</translation>
+        <translation>Règles &amp;Anglaises</translation>
     </message>
     <message>
         <source>&amp;Russian Rules</source>
-        <translation>Règles &amp;russes</translation>
+        <translation>Règles &amp;Russes</translation>
     </message>
     <message>
         <source>&amp;Green Board</source>
@@ -84,11 +84,11 @@
     </message>
     <message>
         <source>&amp;Marble Board</source>
-        <translation>Echiquier en &amp;marbre</translation>
+        <translation>Echiquier en &amp;Marbre</translation>
     </message>
     <message>
         <source>&amp;Wooden Board</source>
-        <translation>Echiquier en &amp;bois</translation>
+        <translation>Echiquier en &amp;Bois</translation>
     </message>
     <message>
         <source>&amp;Rules of Play</source>
@@ -116,15 +116,15 @@
     </message>
     <message>
         <source> New Game </source>
-        <translation>Nouvelle partie</translation>
+        <translation>Nouvelle Partie</translation>
     </message>
     <message>
         <source> Undo Move </source>
-        <translation>Annuler le déplacement</translation>
+        <translation>Annuler Déplacement</translation>
     </message>
     <message>
         <source> Rules of Play </source>
-        <translation>Règles du jeux</translation>
+        <translation>Règles du Jeu</translation>
     </message>
 </context>
 </TS>

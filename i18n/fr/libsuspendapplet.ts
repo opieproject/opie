@@ -4,7 +4,7 @@
     <name>SuspendApplet</name>
     <message>
         <source>Suspend shortcut</source>
-        <translation>Suspendre les raccoucis</translation>
+        <translation>Raccouci de Suspendre </translation>
     </message>
     <message>
         <source>Suspend</source>

@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>View</source>
-        <translation>Vue</translation>
+        <translation>Aficchage</translation>
     </message>
     <message>
         <source>Thumbnail View</source>
@@ -118,7 +118,7 @@
     </message>
     <message>
         <source>Stop Slideshow</source>
-        <translation>Arrêter diaporama</translation>
+        <translation>Arrêter Diaporama</translation>
     </message>
 </context>
 <context>
@@ -149,7 +149,7 @@
     </message>
     <message>
         <source>Load pictures rotated 90 degrees</source>
-        <translation>Charger les images tournées de 90 degrés</translation>
+        <translation>Charger les images tournées à 90 degrés</translation>
     </message>
     <message>
         <source>Fast load pictures</source>

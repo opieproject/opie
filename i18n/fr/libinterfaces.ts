@@ -4,7 +4,7 @@
     <name>InterfaceAdvanced</name>
     <message>
         <source>Advanced Interface Information</source>
-        <translation>Information avancée sur l&apos;interface</translation>
+        <translation>Informations Avancées sur l&apos;Interface</translation>
     </message>
     <message>
         <source>eth0</source>
@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation>Masque de sous-réseau</translation>
+        <translation>Masque Sous-réseau</translation>
     </message>
     <message>
         <source>0.0.0.0</source>
@@ -36,11 +36,11 @@
     </message>
     <message>
         <source>Lease Expires</source>
-        <translation type="unfinished"></translation>
+        <translation>Expiration du Bail</translation>
     </message>
     <message>
         <source>Lease Obtained</source>
-        <translation type="unfinished"></translation>
+        <translation>Obtension du Bail</translation>
     </message>
     <message>
         <source>Broadcast</source>
@@ -59,19 +59,19 @@
     <name>InterfaceInformation</name>
     <message>
         <source>Interface Information</source>
-        <translation>Information sur l&apos;interface</translation>
+        <translation>Informations Interface</translation>
     </message>
     <message>
         <source>&amp;Refresh</source>
-        <translation>&amp;Rafraîchir</translation>
+        <translation>&amp;Rafraichir</translation>
     </message>
     <message>
         <source>S&amp;top</source>
-        <translation>&amp;Arrêter</translation>
+        <translation>S&amp;topper</translation>
     </message>
     <message>
         <source>R&amp;estart</source>
-        <translation>&amp;Redémarrer</translation>
+        <translation>R&amp;e-démarrer</translation>
     </message>
     <message>
         <source>&amp;Start</source>
@@ -83,7 +83,7 @@
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation>Masque de sous-réseau</translation>
+        <translation>Masque Sous-réseau</translation>
     </message>
     <message>
         <source>MAC Address</source>
@@ -103,22 +103,18 @@
     </message>
     <message>
         <source>&amp;View Advanced Information</source>
-        <translation>&amp;Voir les Informations avancées</translation>
-    </message>
-    <message>
-        <source>be &amp;silent</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Afficher Informations Avancées</translation>
     </message>
 </context>
 <context>
     <name>InterfaceSetup</name>
     <message>
         <source>Interface Configuration</source>
-        <translation>Configuration de l&apos;interface</translation>
+        <translation>Configuration Interface</translation>
     </message>
     <message>
         <source>Automatically bring up</source>
-        <translation>Charger automatiquement</translation>
+        <translation>Activer Automatiquement</translation>
     </message>
     <message>
         <source>DHCP</source>
@@ -126,15 +122,15 @@
     </message>
     <message>
         <source>Static Ip Configuration</source>
-        <translation>Configuration Ip Statique</translation>
+        <translation>Configuration IP Statique</translation>
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation>Masque de sous-réseau</translation>
+        <translation>Masque Sous-réseau</translation>
     </message>
     <message>
         <source>First DNS</source>
-        <translation>1er DNS</translation>
+        <translation>DNS Primaire</translation>
     </message>
     <message>
         <source>IP Address</source>
@@ -146,18 +142,14 @@
     </message>
     <message>
         <source>Second DNS</source>
-        <translation>2nd DNS</translation>
-    </message>
-    <message>
-        <source>255.255.255.0</source>
-        <translation type="unfinished">255.255.255.0</translation>
+        <translation>DNS Secondaire</translation>
     </message>
 </context>
 <context>
     <name>InterfaceSetupImp</name>
     <message>
         <source>Restarting interface</source>
-        <translation>Redémarrer l&apos;interface</translation>
+        <translation>Redémarrage de l&apos;interface</translation>
     </message>
 </context>
 </TS>

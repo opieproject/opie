@@ -20,8 +20,8 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation>Toucher la croix fermement et
-avec précision pour calibrer l&apos;ércan.</translation>
+        <translation>Cliquez sur la croix fermement et
+avec précision pour calibrer l&apos;écran.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
@@ -48,8 +48,8 @@ avec précision pour calibrer l&apos;ércan.</translation>
     <message>
         <source>Battery level is critical!
 Keep power off until power restored!</source>
-        <translation>Le niveau de batterie est critique!
-Restez éteint jusquau moment de la recharge!</translation>
+        <translation>Le niveau de batterie est critique !
+Eteigner la machine jusqu&apos;à ça recharge !</translation>
     </message>
     <message>
         <source>Battery is running very low.</source>
@@ -59,7 +59,7 @@ Restez éteint jusquau moment de la recharge!</translation>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
         <translation>La niveau de la batterie de sauvegarde est très bas.
-Rechargez la batterie de sauvegarde SVP.</translation>
+Veuillez rechargez la batterie de sauvegarde.</translation>
     </message>
     <message>
         <source>business card</source>
@@ -67,13 +67,20 @@ Rechargez la batterie de sauvegarde SVP.</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Information</translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;La date système ne semble pas être valide.
-(%1)&lt;/p&gt;&lt;p&gt; Voulez-vous corriger l&apos;heure?&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;La date système ne semble pas être valide.
+(%1)&lt;/p&gt;&lt;p&gt; Voulez-vous la corriger ?&lt;/p&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>DesktopPowerAlerter</name>
+    <message>
+        <source>Battery Status</source>
+        <translation>Status Batterie</translation>
     </message>
 </context>
 <context>
@@ -92,7 +99,7 @@ Rechargez la batterie de sauvegarde SVP.</translation>
     </message>
     <message>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
-        <translation>&lt;p&gt;Aucune application définie pour ce document&lt;p&gt;Type %1.</translation>
+        <translation>&lt;p&gt;Aucune application définie pour ce document.&lt;p&gt;Type %1.</translation>
     </message>
     <message>
         <source>Finding documents</source>
@@ -111,11 +118,11 @@ Rechargez la batterie de sauvegarde SVP.</translation>
     </message>
     <message>
         <source>All types of file</source>
-        <translation>Tous les type de fichiers</translation>
+        <translation>Tous les types de fichiers</translation>
     </message>
     <message>
         <source>Document View</source>
-        <translation>Vue document</translation>
+        <translation>Vue Document</translation>
     </message>
 </context>
 <context>
@@ -154,7 +161,7 @@ Rechargez la batterie de sauvegarde SVP.</translation>
     </message>
     <message>
         <source>Link apps</source>
-        <translation>liés les applications</translation>
+        <translation>Liés les apps</translation>
     </message>
     <message>
         <source>Limit search to dir: (not used yet)</source>
@@ -174,21 +181,14 @@ Rechargez la batterie de sauvegarde SVP.</translation>
     </message>
 </context>
 <context>
-    <name>QObject</name>
-    <message>
-        <source>Battery Status</source>
-        <translation>Etat de la batterie</translation>
-    </message>
-</context>
-<context>
     <name>ShutdownImpl</name>
     <message>
         <source>Terminate</source>
-        <translation>Arrêter</translation>
+        <translation>Terminer</translation>
     </message>
     <message>
         <source>Terminate Opie</source>
-        <translation>Arrêter Opie</translation>
+        <translation>Terminer Opie</translation>
     </message>
     <message>
         <source>Reboot</source>
@@ -214,7 +214,7 @@ Ces options sont fournies pour être utilisées durant le développement et les 
     </message>
     <message>
         <source>Shutdown...</source>
-        <translation>Arrêter...</translation>
+        <translation>Arrêt...</translation>
     </message>
 </context>
 <context>
@@ -225,7 +225,7 @@ Ces options sont fournies pour être utilisées durant le développement et les 
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation>&lt;p&gt;Un systeme non authorisé demande l&apos;accès à ce périphérique.&lt;p&gt; Si vous utiliser une version de &quot;Qtopia Desktop&quot; plus vieille que 1.5.1, mettez là à jour SVP.</translation>
+        <translation>&lt;p&gt;Un systeme non authorisé demande l&apos;accès à ce périphérique.&lt;p&gt; Si vous utiliser une version de &quot;Qtopia Desktop&quot; plus vieille que 1.5.1, vous devriez la mettre à jour.</translation>
     </message>
     <message>
         <source>Deny</source>
@@ -233,7 +233,7 @@ Ces options sont fournies pour être utilisées durant le développement et les 
     </message>
     <message>
         <source>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</source>
-        <translation>&lt;p&gt;Un systeme non authorisé demande l&apos;accès à ce périphérique.&lt;p&gt; Si vous venez just de démarrer une Synchronisation pour la 1ere fois, c&apos;est normal.</translation>
+        <translation>&lt;p&gt;Un systeme non authorisé demande l&apos;accès à ce périphérique.&lt;p&gt; Si vous venez juste de démarrer une Synchronisation pour la 1ere fois, c&apos;est normal.</translation>
     </message>
     <message>
         <source>Allow</source>
