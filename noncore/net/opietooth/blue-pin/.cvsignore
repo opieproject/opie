@@ -1,0 +1,4 @@
+Makefile
+moc*
+pindlgbase.cpp
+pindlgbase.h
