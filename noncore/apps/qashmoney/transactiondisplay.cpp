@@ -261,7 +261,7 @@ void TransactionDisplay::editTransfer ()
 
         account->updateAccountBalance ( fromaccount );
         if ( account->getParentAccountID ( fromaccount ) != -1 )
-          account->changeParentAccountBalance ( fromaccount );
+          account->changeParentAccountBalance ( account->getParentAccountID ( fromaccount ) );
 
         updateAndDisplay ( toaccount );
       }

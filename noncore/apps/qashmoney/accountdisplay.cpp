@@ -413,6 +413,18 @@ void AccountDisplay::editAccount ()
          {
            account->updateAccount ( accountname->text(), accountdescription->text(), currencybox->currencybox->currentText(), accountid );
            account->displayAccounts ( listview );
+
+           // Try and select the same account that was just edited
+           QListViewItemIterator it ( listview );
+           for ( ; it.current(); ++it )
+             {
+               if ( it.current()->text ( 0 ) == accountname->text() )
+                 {
+                   listview->setSelected ( it.current(), TRUE );
+                   return;
+                 }
+             }
+           maintabs->setTabEnabled ( tab2, FALSE );
          }
       }
   }
