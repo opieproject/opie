@@ -3,99 +3,99 @@
     <name>KCheckers</name>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Izhod</translation>
     </message>
     <message>
         <source>Beginner</source>
-        <translation type="unfinished"></translation>
+        <translation>Začetnik</translation>
     </message>
     <message>
         <source>Novice</source>
-        <translation type="unfinished"></translation>
+        <translation>Novinec</translation>
     </message>
     <message>
         <source>Average</source>
-        <translation type="unfinished"></translation>
+        <translation>Povprečen</translation>
     </message>
     <message>
         <source>Good</source>
-        <translation type="unfinished"></translation>
+        <translation>Dober</translation>
     </message>
     <message>
         <source>Expert</source>
-        <translation type="unfinished"></translation>
+        <translation>Strokovnjak</translation>
     </message>
     <message>
         <source>Master</source>
-        <translation type="unfinished"></translation>
+        <translation>Mojster</translation>
     </message>
     <message>
         <source>English Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Angleška pravila</translation>
     </message>
     <message>
         <source>Russian Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruska pravila</translation>
     </message>
     <message>
         <source>Marble Board</source>
-        <translation type="unfinished"></translation>
+        <translation>Marmornata plošča</translation>
     </message>
     <message>
         <source>Wooden Board</source>
-        <translation type="unfinished"></translation>
+        <translation>Lesena plošča</translation>
     </message>
     <message>
         <source>What&apos;s This</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaj je to</translation>
     </message>
     <message>
         <source>About KCheckers</source>
-        <translation type="unfinished"></translation>
+        <translation>O KCheckers</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>O &amp;QT</translation>
     </message>
     <message>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Igra</translation>
     </message>
     <message>
         <source>Skill</source>
-        <translation type="unfinished"></translation>
+        <translation>Izkušnje</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Možnosti</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomoč</translation>
     </message>
     <message>
         <source>Go!</source>
-        <translation type="unfinished"></translation>
+        <translation>Začni!</translation>
     </message>
     <message>
         <source>Congratulation! You have won!</source>
-        <translation type="unfinished"></translation>
+        <translation>Čestitamo! Zmagali ste!</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosimo počakajte...</translation>
     </message>
     <message>
         <source>You have lost. Game over.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izgubili ste. Konec igre.</translation>
     </message>
     <message>
         <source>Incorrect course.</source>
-        <translation type="unfinished"></translation>
+        <translation>Napačna pot.</translation>
     </message>
 </context>
 </TS>

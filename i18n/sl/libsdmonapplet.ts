@@ -3,19 +3,19 @@
     <name>SdMonitor</name>
     <message>
         <source>Eject card</source>
-        <translation type="unfinished"></translation>
+        <translation>Vstavi kartico</translation>
     </message>
     <message>
         <source>SdMonitor</source>
-        <translation type="unfinished"></translation>
+        <translation>SdZaslon</translation>
     </message>
     <message>
         <source>Card eject failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Vstavitev kartice spodtletela!</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vredu</translation>
     </message>
 </context>
 </TS>

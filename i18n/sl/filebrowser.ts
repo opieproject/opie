@@ -3,241 +3,241 @@
     <name>FileBrowser</name>
     <message>
         <source>File Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravljalec datotek</translation>
     </message>
     <message>
         <source>Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Imenik</translation>
     </message>
     <message>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi</translation>
     </message>
     <message>
         <source>by Name </source>
-        <translation type="unfinished"></translation>
+        <translation>po imenu</translation>
     </message>
     <message>
         <source>by Size </source>
-        <translation type="unfinished"></translation>
+        <translation>po velikosti</translation>
     </message>
     <message>
         <source>by Date </source>
-        <translation type="unfinished"></translation>
+        <translation>po datumu</translation>
     </message>
     <message>
         <source>by Type </source>
-        <translation type="unfinished"></translation>
+        <translation>po tipu</translation>
     </message>
     <message>
         <source>Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>Urejeno</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrite</translation>
     </message>
     <message>
         <source>Symlinks</source>
-        <translation type="unfinished"></translation>
+        <translation>Povezave</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Pogled</translation>
     </message>
     <message>
         <source>Previous dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Predhodni imenik</translation>
     </message>
     <message>
         <source>Parent dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadimenik</translation>
     </message>
     <message>
         <source>New folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Nov imenik</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Izreži</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiraj</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Prilepi</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
 </context>
 <context>
     <name>FileView</name>
     <message>
         <source>File Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravljalec datotek</translation>
     </message>
     <message>
         <source>Can&apos;t show /dev/ directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne morem prikazati /dev/ imenika.</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vredu</translation>
     </message>
     <message>
         <source>Rename file</source>
-        <translation type="unfinished"></translation>
+        <translation>Preimenuj datoteko</translation>
     </message>
     <message>
         <source>Rename failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Preimenovanje spodletelo!</translation>
     </message>
     <message>
         <source>Paste file</source>
-        <translation type="unfinished"></translation>
+        <translation>Prilepi datoteko</translation>
     </message>
     <message>
         <source>Paste failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Prilepi spodletel!</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Vredu</translation>
     </message>
     <message>
         <source>Cut file</source>
-        <translation type="unfinished"></translation>
+        <translation>Izreži datoteko</translation>
     </message>
     <message>
         <source>Cut failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Izreži spodletel!</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši</translation>
     </message>
     <message>
         <source>Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ste prepričani?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Da</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne</translation>
     </message>
     <message>
         <source>Delete failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbris spodletel!</translation>
     </message>
     <message>
         <source>New folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Nov imenik</translation>
     </message>
     <message>
         <source>Folder creation failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustvarjanje imenika spodletelo!</translation>
     </message>
     <message>
         <source>Launch Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaženi aplikacijo</translation>
     </message>
     <message>
         <source>Launch failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Zagon spodletel!</translation>
     </message>
     <message>
         <source>Add to Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj med dokumente</translation>
     </message>
     <message>
         <source>Run</source>
-        <translation type="unfinished"></translation>
+        <translation>Poženi</translation>
     </message>
     <message>
         <source>View as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Poglej kot besedilo</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Preimenuj</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Izreži</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiraj</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Prilepi</translation>
     </message>
     <message>
         <source>Change Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Spremeni pravice</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberi vse</translation>
     </message>
     <message>
         <source>Deselect all</source>
-        <translation type="unfinished"></translation>
+        <translation>Odizberi vse</translation>
     </message>
     <message>
         <source>Change permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Spremeni pravice</translation>
     </message>
 </context>
 <context>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavi pravice</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavi pravice za:</translation>
     </message>
     <message>
         <source>owner</source>
-        <translation type="unfinished"></translation>
+        <translation>lastnik</translation>
     </message>
     <message>
         <source>group</source>
-        <translation type="unfinished"></translation>
+        <translation>skupina</translation>
     </message>
     <message>
         <source>others</source>
-        <translation type="unfinished"></translation>
+        <translation>drugi</translation>
     </message>
     <message>
         <source>Owner</source>
-        <translation type="unfinished"></translation>
+        <translation>Lastnik</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Skupina</translation>
     </message>
     <message>
         <source>read</source>
-        <translation type="unfinished"></translation>
+        <translation>beri</translation>
     </message>
     <message>
         <source>write</source>
-        <translation type="unfinished"></translation>
+        <translation>piši</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>izvrši</translation>
     </message>
 </context>
 </TS>
