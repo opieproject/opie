@@ -4,10 +4,10 @@
 prefix = /opt/QtPalmtop
 
 contains( TEMPLATE, lib ) {
-	target.path = $$prefix/lib
+  target.path = $$prefix/lib
 }
 !contains( TEMPLATE, lib ) {
-	target.path = $$prefix/bin
+  target.path = $$prefix/bin
 }
 INSTALLS += target
 
@@ -73,5 +73,8 @@ ipk.commands = tmp=`mktemp -d /tmp/ipkg-opie.XXXXXXXXXX` && ( $(MAKE) INSTALL_RO
 QMAKE_EXTRA_UNIX_TARGETS += lupdate lrelease ipk opie-lupdate opie-lrelease
 QMAKE_LFLAGS += -Wl,-rpath=$$prefix/lib
 QMAKE_LIBDIR += $(OPIEDIR)/lib
+
+MOC_DIR=.moc/$(PLATFORM)
+OBJECTS_DIR=.obj/$(PLATFORM)
 
 include ( $(OPIEDIR)/gen.pro )
