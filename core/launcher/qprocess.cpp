@@ -61,7 +61,7 @@
   error is read in the same order as the process output it. Please note that
   this is a binary flag, so if you want to activate this together with standard
   input, output and error redirection (the default), you have to specify
-  \c{Stdin|Stdout|Stderr|DupStderr} for the setCommunication() call.
+  \c {Stdin|Stdout|Stderr|DupStderr} for the setCommunication() call.
 
   \sa setCommunication() communication()
 */
@@ -212,7 +212,7 @@ int QProcess::communication() const
 
   \a commFlags is a bitwise OR between the flags defined in \c Communication.
 
-  The default is \c{Stdin|Stdout|Stderr}.
+  The default is \c {Stdin|Stdout|Stderr}.
 
   \sa communication()
 */
@@ -371,7 +371,7 @@ QString QProcess::readLineStderr()
 }
 
 /*!
-  This private function scans for any occurrence of \n or \r\n in the
+  This private function scans for any occurrence of \\n or \\r\\n in the
   buffer \e buf. It stores the text in the byte array \a store if it is
   non-null.
 */

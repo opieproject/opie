@@ -65,14 +65,14 @@ protected:
      * @param aFilter a filter to append
      * @see addHandler
      */
-    virtual void addPreHandler(QWSServer::KeyboardFilter*aFilter)=0;
+    virtual void addPreHandler(QWSServer::KeyboardFilter *aFilter)=0;
     /**
      * Remove the specified filter from list and give back ownership.
      * This is only allowed for friend classes from odevice
      * @param aFilter a filter to remove
      * @see remHandler
      */
-    virtual void remPreHandler(QWSServer::KeyboardFilter*aFilter)=0;
+    virtual void remPreHandler(QWSServer::KeyboardFilter *aFilter)=0;
 
 public:
     virtual ~OKeyFilter();
@@ -81,13 +81,13 @@ public:
      * @param aFilter a filter to append
      * @see addPreHandler
      */
-    virtual void addHandler(QWSServer::KeyboardFilter*)=0;
+    virtual void addHandler(QWSServer::KeyboardFilter *aFilter)=0;
     /**
      * Remove the specified filter from list and give back ownership.
      * @param aFilter a filter to remove
      * @see remPreHandler
      */
-    virtual void remHandler(QWSServer::KeyboardFilter*)=0;
+    virtual void remHandler(QWSServer::KeyboardFilter *aFilter)=0;
 
     /**
      * Returns a handler to an instance of OKeyFilter

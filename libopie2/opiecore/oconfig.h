@@ -118,7 +118,7 @@ private:
  * is unwished.
  *
  * @author Matthias Kalle Dalheimer <Kalle@kde.org>
- * @version $Id: oconfig.h,v 1.9 2004-05-17 21:19:23 zecke Exp $
+ * @version $Id: oconfig.h,v 1.10 2004-10-07 19:36:30 clem Exp $
  * @see OConfig
  */
 
@@ -127,7 +127,7 @@ class OConfigGroupSaver
   public:
     /**
      * Constructor.
-     * Create the object giving a @config object and a @a group to become
+     * Create the object giving a OConfig object and a @a group to become
      * the current group.
      */
     OConfigGroupSaver( OConfig* config, QString group ) :_config(config), _oldgroup(config->group() )

@@ -334,12 +334,12 @@ bool ODevice::setDisplayStatus ( bool on )
 /**
 * This sets the display brightness
 *
-* @param p The brightness to be set on a scale from 0 to 255
+* @param b The brightness to be set on a scale from 0 to 255
 * @return success or failure
 */
-bool ODevice::setDisplayBrightness ( int p)
+bool ODevice::setDisplayBrightness ( int b)
 {
-        Q_UNUSED( p )
+        Q_UNUSED( b )
     return false;
 }
 

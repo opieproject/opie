@@ -54,7 +54,7 @@ class OProcessPrivate;
 /**
  * Child process invocation, monitoring and control.
  *
- * @sect General usage and features
+ * @par General usage and features
  *
  *This class allows a KDE and OPIE application to start child processes without having
  *to worry about UN*X signal handling issues and zombie process reaping.
@@ -110,7 +110,7 @@ class OProcessPrivate;
  *
  *When the child process exits, the respective Qt signal will be emitted.
  *
- *@sect Communication with the child process
+ *@par Communication with the child process
  *
  *OProcess supports communication with the child process through
  *stdin/stdout/stderr.
@@ -138,7 +138,7 @@ class OProcessPrivate;
  *without a communication channel to stderr.
  *
  *
- *@sect QT signals:
+ *@par QT signals:
  *
  *@li void @ref receivedStdout(OProcess  *proc, char  *buffer, int  buflen);
  *@li  void @ref receivedStderr(OProcess  *proc, char  *buffer, int  buflen);
@@ -491,6 +491,7 @@ signals:
      * these signals, the respective communication link (stdout/stderr)
      * has to be turned on in @ref start().
      *
+     * @param proc The process
      * @param buffer The data received.
      * @param buflen The number of bytes that are available.
      *
@@ -524,6 +525,7 @@ signals:
      * these signals, the respective communication link (stdout/stderr)
      * has to be turned on in @ref start().
      *
+     * @param proc The process
      * @param buffer The data received.
      * @param buflen The number of bytes that are available.
      *

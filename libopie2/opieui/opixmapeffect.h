@@ -5,7 +5,7 @@
 
 */
 
-// $Id: opixmapeffect.h,v 1.2 2004-03-13 19:51:49 zecke Exp $
+// $Id: opixmapeffect.h,v 1.3 2004-10-07 19:36:35 clem Exp $
 
 #ifndef __OPIXMAP_EFFECT_H
 #define __OPIXMAP_EFFECT_H
@@ -152,16 +152,11 @@ public:
                    const QColor &ca, const QColor &cb, int ncols=8);
 
     /**
-     * Recolors a pixmap.
-     *
-     * The most dark color will become color a,
-     * the most bright one color b, and in between.
+     * Fades a pixmap to a certain color.
      *
      * @param pixmap The pixmap to process.
-     * @param ca Color a.
-     * @param cb Color b.
-     * @param ncols The number of colors to use. Pass zero to prevent
-     * dithering.
+     * @param val The strength of the effect. 0 <= val <= 1.
+     * @param color The color to blend to.
      * @return Returns the @ref pixmap(), provided for convenience.
      */
     static OPixmap& fade(OPixmap& pixmap, double val, const QColor &color);

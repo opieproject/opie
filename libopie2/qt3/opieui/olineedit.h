@@ -50,7 +50,7 @@ typedef QString KURL; //class KURL;
 /**
  * An enhanced QLineEdit widget for inputting text.
  *
- * @sect Detail
+ * @par Detail
  *
  * This widget inherits from @ref QLineEdit and implements the following
  * additional functionalities: q completion object that provides both
@@ -95,7 +95,7 @@ typedef QString KURL; //class KURL;
  * list. Hence, if the @p EchoMode is not @ref QLineEdit::Normal, the completion
  * mode is automatically disabled.
  *
- * @sect Useage
+ * @par Usage
  *
  * To enable the basic completion feature :
  *
@@ -125,7 +125,7 @@ typedef QString KURL; //class KURL;
  * when you don't need it anymore, or call
  * setAutoDeleteCompletionObject( true );
  *
- * @sect Miscellaneous function calls :
+ * @par Miscellaneous function calls :
  *
  * <pre>
  * // Tell the widget not to handle completion and

@@ -416,13 +416,13 @@ private:
 
 /**
  * Does nothing.
- * @param a stream
+ * @param s stream
  * @return the given @p s
  */
 inline ondbgstream& endl( ondbgstream & s) { return s; }
 /**
  * Does nothing.
- * @param a stream
+ * @param s stream
  * @return the given @p s
  */
 inline ondbgstream& flush( ondbgstream & s) { return s; }
@@ -446,7 +446,7 @@ QString odBacktrace(int levels = -1);
  * @param area an id to identify the output, 0 for default
  * @see odDebug()
  */
-inline ondbgstream ondDebug(int = 0) { return ondbgstream(); }
+inline ondbgstream ondDebug(int area = 0) { return ondbgstream(); }
 inline ondbgstream ondDebug(bool , int  = 0) { return ondbgstream(); }
 inline QString ondBacktrace() { return QString::null; }
 inline QString ondBacktrace(int) { return QString::null; }

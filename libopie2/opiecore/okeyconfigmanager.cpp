@@ -97,7 +97,7 @@ void OKeyPair::setKeycode( int key ) {
 /**
  * Set the modifier key
  *
- * @param the Modifier key
+ * @param mod the Modifier key
  * @see Qt::ButtonState
  * @see modifier()
  */

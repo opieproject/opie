@@ -30,7 +30,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-// $Id: oimageeffect.h,v 1.3 2004-03-13 19:51:49 zecke Exp $
+// $Id: oimageeffect.h,v 1.4 2004-10-07 19:36:35 clem Exp $
 
 #ifndef OIMAGEEFFECT_H
 #define OIMAGEEFFECT_H
@@ -219,7 +219,7 @@ public:
      *
      * The number of colors will not be changed.
      *
-     * @param image The QImage to process.
+     * @param img The QImage to process.
      * @param val The strength of the effect. 0 <= val <= 1.
      * @param color The background color.
      * @return Returns the @ref image(), provided for convenience.
@@ -308,7 +308,7 @@ public:
      * Dither an image using Floyd-Steinberg dithering for low-color
      * situations.
      *
-     * @param image The QImage to process.
+     * @param img The QImage to process.
      * @param palette The color palette to use
      * @param size The size of the palette
      * @return Returns the @ref image(), provided for convenience.
@@ -530,7 +530,7 @@ public:
       * @author Daniel M. Duley (mosfet)
       * @param src The QImage to process.
       * @param amplitude The amplitude of the sine wave.
-      * @param wavelength The frequency of the sine wave.
+      * @param frequency The frequency of the sine wave.
       * @return The new image. The original is not changed.
       */
      static QImage wave(QImage &src, double amplitude=25.0, double frequency=150.0,

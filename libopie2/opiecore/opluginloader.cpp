@@ -523,7 +523,7 @@ QString OGenericPluginLoader::unlibify( const QString& str ) {
  *Return a List of Plugins for a dir and add positions and remove disabled.
  * If a plugin is on the excluded list assign position -2
  *
- * @param dir The dir to look in
+ * @param _dir The dir to look in
  * @param sorted Should positions be read?
  * @param disabled Remove excluded from the list
  */
@@ -681,7 +681,6 @@ OPluginLoader::~OPluginLoader() {
  *
  *
  * @param loader A Pointer to your OGenericPluginLoader
- * @param name The name
  */
 OPluginManager::OPluginManager(  OGenericPluginLoader* loader)
     : m_loader( loader ), m_isSorted( false )
@@ -757,7 +756,7 @@ void OPluginManager::setPosition( const OPluginItem& item) {
  * the item with one that matches name and path internally.
  * @see setPosition
  *
- * @param the Item to enable
+ * @param item the Item to enable
  */
 void OPluginManager::enable(  const OPluginItem& item ) {
     setEnabled( item, true );

@@ -53,7 +53,7 @@ typedef QString OURL;
 /**
  * A combined button, line-edit and a popup list widget.
  *
- * @sect Detail
+ * @par Detail
  *
  * This widget inherits from @ref QComboBox and implements
  * the following additional functionalities:  a completion
@@ -97,7 +97,7 @@ typedef QString OURL;
  * automatically select an item from the list by trying to match the pressed
  * keycode with the first letter of the enteries in the combo box.
  *
- * @sect Useage
+ * @par Usage
  *
  * To enable the basic completion feature:
  *
