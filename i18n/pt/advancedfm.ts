@@ -264,15 +264,23 @@ e os seus conteúdos?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation>Gestor de Ficheiros ::</translation>
+        <translation type="obsolete">Gestor de Ficheiros ::</translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation>KB livres</translation>
+        <translation type="obsolete">KB livres</translation>
     </message>
     <message>
         <source>Copy &apos;%1&apos; As</source>
-        <translation>Copiar &apos;%1&apos; Como</translation>
+        <translation type="obsolete">Copiar &apos;%1&apos; Como</translation>
+    </message>
+    <message>
+        <source>Copy </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> As</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

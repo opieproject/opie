@@ -181,11 +181,11 @@ eksisterer. Overskriv?</translation>
     </message>
     <message>
         <source>Copy </source>
-        <translation type="obsolete">Kopier</translation>
+        <translation type="unfinished">Kopier</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="obsolete">Som</translation>
+        <translation type="unfinished">Som</translation>
     </message>
     <message>
         <source>Could not move
@@ -271,15 +271,15 @@ og alt hvad der er i den?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation>Filstyring :: </translation>
+        <translation type="obsolete">Filstyring :: </translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation>kB ledig</translation>
+        <translation type="obsolete">kB ledig</translation>
     </message>
     <message>
         <source>Copy &apos;%1&apos; As</source>
-        <translation>Kopier &apos;%1&apos; som</translation>
+        <translation type="obsolete">Kopier &apos;%1&apos; som</translation>
     </message>
 </context>
 <context>

@@ -102,5 +102,17 @@ Dostep zabroniony</translation>
         <source>1.0.0.0/8</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Passcode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Login</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Login Automatically</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

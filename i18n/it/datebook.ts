@@ -400,37 +400,37 @@ Uscire comunque?</translation>
     <message>
         <source>Mo</source>
         <comment>Monday</comment>
-        <translation>Lun</translation>
+        <translation type="obsolete">Lun</translation>
     </message>
     <message>
         <source>Tu</source>
         <comment>Tuesday</comment>
-        <translation>Mar</translation>
+        <translation type="obsolete">Mar</translation>
     </message>
     <message>
         <source>We</source>
         <comment>Wednesday</comment>
-        <translation>Mer</translation>
+        <translation type="obsolete">Mer</translation>
     </message>
     <message>
         <source>Th</source>
         <comment>Thursday</comment>
-        <translation>Gio</translation>
+        <translation type="obsolete">Gio</translation>
     </message>
     <message>
         <source>Fr</source>
         <comment>Friday</comment>
-        <translation>Ven</translation>
+        <translation type="obsolete">Ven</translation>
     </message>
     <message>
         <source>Sa</source>
         <comment>Saturday</comment>
-        <translation>Sab</translation>
+        <translation type="obsolete">Sab</translation>
     </message>
     <message>
         <source>Su</source>
         <comment>Sunday</comment>
-        <translation>Dom</translation>
+        <translation type="obsolete">Dom</translation>
     </message>
 </context>
 <context>

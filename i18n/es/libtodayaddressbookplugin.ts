@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation>Para activar configuración: ¡Reinicie la aplicación!</translation>
+        <translation type="obsolete">Para activar configuración: ¡Reinicie la aplicación!</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>

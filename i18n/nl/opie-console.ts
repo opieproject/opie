@@ -480,6 +480,14 @@
         <source>History</source>
         <translation>Geschiedenis</translation>
     </message>
+    <message>
+        <source>New Profile</source>
+        <translation type="unfinished">Nieuw Profiel</translation>
+    </message>
+    <message>
+        <source>Save Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ModemConfigWidget</name>

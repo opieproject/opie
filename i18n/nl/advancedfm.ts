@@ -215,11 +215,11 @@ exists. Ok to overwrite?</source>
     </message>
     <message>
         <source>Copy </source>
-        <translation type="obsolete">Kopiëer</translation>
+        <translation type="unfinished">Kopiëer</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="obsolete">Als</translation>
+        <translation type="unfinished">Als</translation>
     </message>
     <message>
         <source> already exists.
@@ -259,11 +259,11 @@ Wilt u het echt verwijderen?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation>AdvancedFM ::</translation>
+        <translation type="obsolete">AdvancedFM ::</translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation>kB vrij</translation>
+        <translation type="obsolete">kB vrij</translation>
     </message>
     <message>
         <source>Cannot remove current directory
@@ -291,7 +291,7 @@ echt verwijderen?</translation>
     </message>
     <message>
         <source>Copy &apos;%1&apos; As</source>
-        <translation>Kopiëer &apos;%1&apos; als</translation>
+        <translation type="obsolete">Kopiëer &apos;%1&apos; als</translation>
     </message>
 </context>
 <context>

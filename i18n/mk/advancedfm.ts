@@ -227,11 +227,11 @@ exists. Ok to overwrite?</source>
     </message>
     <message>
         <source>Copy </source>
-        <translation type="obsolete">Копирај</translation>
+        <translation type="unfinished">Копирај</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="obsolete">Како</translation>
+        <translation type="unfinished">Како</translation>
     </message>
     <message>
         <source> already exists.
@@ -266,18 +266,6 @@ Do you really want to delete it?</source>
     <message>
         <source>Could not rename</source>
         <translation>Неможе да се преименува</translation>
-    </message>
-    <message>
-        <source>AdvancedFm :: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> kB free</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy &apos;%1&apos; As</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

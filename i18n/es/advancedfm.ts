@@ -143,11 +143,11 @@
     </message>
     <message>
         <source>Copy </source>
-        <translation type="obsolete">Copiar </translation>
+        <translation type="unfinished">Copiar </translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="obsolete"> Como</translation>
+        <translation type="unfinished"> Como</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
@@ -272,15 +272,15 @@ de %1?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation>Gestor de Ficheros Avanzado :: </translation>
+        <translation type="obsolete">Gestor de Ficheros Avanzado :: </translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation> kB libres</translation>
+        <translation type="obsolete"> kB libres</translation>
     </message>
     <message>
         <source>Copy &apos;%1&apos; As</source>
-        <translation>Copiar &quot;%1&quot; como</translation>
+        <translation type="obsolete">Copiar &quot;%1&quot; como</translation>
     </message>
 </context>
 <context>

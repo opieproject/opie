@@ -19,22 +19,41 @@
     </message>
 </context>
 <context>
-    <name>TodolistPluginConfig</name>
-    <message>
-        <source>tasks shown </source>
-        <translation>weergegeven taken</translation>
-    </message>
+    <name>TodoPluginConfigBase</name>
     <message>
         <source>Set the maximum number of task that should be shown</source>
-        <translation>Stel het maximum aantal te tonen taken in</translation>
+        <translation type="unfinished">Stel het maximum aantal te tonen taken in</translation>
     </message>
     <message>
-        <source>Clip line after X chars</source>
-        <translation>Breek af na X tekens</translation>
+        <source>tasks shown</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation>Na hoeveel tekens moet de info over de taak worden afgebroken</translation>
+        <translation type="unfinished">Na hoeveel tekens moet de info over de taak worden afgebroken</translation>
+    </message>
+    <message>
+        <source>Clip line after X chars</source>
+        <translation type="unfinished">Breek af na X tekens</translation>
+    </message>
+</context>
+<context>
+    <name>TodolistPluginConfig</name>
+    <message>
+        <source>tasks shown </source>
+        <translation type="obsolete">weergegeven taken</translation>
+    </message>
+    <message>
+        <source>Set the maximum number of task that should be shown</source>
+        <translation type="obsolete">Stel het maximum aantal te tonen taken in</translation>
+    </message>
+    <message>
+        <source>Clip line after X chars</source>
+        <translation type="obsolete">Breek af na X tekens</translation>
+    </message>
+    <message>
+        <source>After how many chars should be the info about the task be cut off</source>
+        <translation type="obsolete">Na hoeveel tekens moet de info over de taak worden afgebroken</translation>
     </message>
 </context>
 </TS>

@@ -450,7 +450,7 @@ The value entered should always be positive.</source>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation>Електроника</translation>
+        <translation type="obsolete">Електроника</translation>
     </message>
     <message>
         <source>Entertainment</source>
@@ -515,6 +515,10 @@ The value entered should always be positive.</source>
     <message>
         <source>Cash</source>
         <translation>Кеш</translation>
+    </message>
+    <message>
+        <source>Electronics</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

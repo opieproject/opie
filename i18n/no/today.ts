@@ -22,7 +22,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;b&gt;Owned by %1&lt;/b&gt;</source>
+        <source>Owned by </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -68,9 +68,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>autostart on 
-resume?
- (Opie only)</source>
+        <source>Misc</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TodayConfigMiscBase</name>
+    <message>
+        <source>Form1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -78,11 +83,19 @@ resume?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Tiny Banner</source>
+        <source>autostart on resume?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>minutes inactive</source>
+        <source>tiny banner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Have small banner </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> min</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -90,7 +103,11 @@ resume?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Icon size</source>
+        <source>minutes inactive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> pixel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -98,11 +115,7 @@ resume?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Refresh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>How often should Today refresh itself</source>
+        <source>icon size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -114,7 +127,11 @@ resume?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Misc</source>
+        <source>How often should Today refresh itself</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>refresh</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

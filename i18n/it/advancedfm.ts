@@ -148,11 +148,11 @@
     </message>
     <message>
         <source>Copy </source>
-        <translation type="obsolete">Copia</translation>
+        <translation type="unfinished">Copia</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="obsolete">Come</translation>
+        <translation type="unfinished">Come</translation>
     </message>
     <message>
         <source>Could not move
@@ -269,18 +269,6 @@ e tutto il suo contenuto ?</translation>
 %1?</source>
         <translation>Vuoi veramente eliminare
 %1?</translation>
-    </message>
-    <message>
-        <source>AdvancedFm :: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> kB free</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy &apos;%1&apos; As</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

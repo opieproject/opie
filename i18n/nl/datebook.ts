@@ -450,37 +450,37 @@ Zondag</translation>
     <message>
         <source>Mo</source>
         <comment>Monday</comment>
-        <translation>Ma</translation>
+        <translation type="obsolete">Ma</translation>
     </message>
     <message>
         <source>Tu</source>
         <comment>Tuesday</comment>
-        <translation>Di</translation>
+        <translation type="obsolete">Di</translation>
     </message>
     <message>
         <source>We</source>
         <comment>Wednesday</comment>
-        <translation>Wo</translation>
+        <translation type="obsolete">Wo</translation>
     </message>
     <message>
         <source>Th</source>
         <comment>Thursday</comment>
-        <translation>Do</translation>
+        <translation type="obsolete">Do</translation>
     </message>
     <message>
         <source>Fr</source>
         <comment>Friday</comment>
-        <translation>Vr</translation>
+        <translation type="obsolete">Vr</translation>
     </message>
     <message>
         <source>Sa</source>
         <comment>Saturday</comment>
-        <translation>Za</translation>
+        <translation type="obsolete">Za</translation>
     </message>
     <message>
         <source>Su</source>
         <comment>Sunday</comment>
-        <translation>Zo</translation>
+        <translation type="obsolete">Zo</translation>
     </message>
 </context>
 <context>

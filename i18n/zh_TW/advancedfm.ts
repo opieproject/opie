@@ -143,11 +143,11 @@
     </message>
     <message>
         <source>Copy </source>
-        <translation type="obsolete">複製 </translation>
+        <translation type="unfinished">複製 </translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="obsolete"> 為</translation>
+        <translation type="unfinished"> 為</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
@@ -259,18 +259,6 @@ and all it&apos;s contents ?</source>
     <message>
         <source>Really delete
 %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>AdvancedFm :: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> kB free</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy &apos;%1&apos; As</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -442,7 +442,7 @@ Der Wer der Gebühr sollte immer positiv sein.</translation>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation>Elektronik</translation>
+        <translation type="obsolete">Elektronik</translation>
     </message>
     <message>
         <source>Entertainment</source>
@@ -507,6 +507,10 @@ Der Wer der Gebühr sollte immer positiv sein.</translation>
     <message>
         <source>Cash</source>
         <translation>Bar</translation>
+    </message>
+    <message>
+        <source>Electronics</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

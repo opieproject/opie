@@ -66,12 +66,12 @@ Kérem töltse fel a biztonsági-elemt.</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="obsolete">Információ</translation>
+        <translation type="unfinished">Információ</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;A rendszer dátum nem tűnik helyesnek.
+        <translation type="unfinished">&lt;p&gt;A rendszer dátum nem tűnik helyesnek.
 (%1)&lt;/p&gt;&lt;p&gt;Akarja korrigálni az órát?&lt;/p&gt;</translation>
     </message>
 </context>

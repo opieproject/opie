@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Owned by </source>
-        <translation type="obsolete">Bezit van</translation>
+        <translation type="unfinished">Bezit van</translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Owned by %1&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Eigenaar: %1&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Eigenaar: %1&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -75,53 +75,116 @@
         <source>autostart on 
 resume?
  (Opie only)</source>
-        <translation>autostart bij
+        <translation type="obsolete">autostart bij
 opstarten?
 (alleen Opie)</translation>
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation>vink dit aan als Vandaag moet starten vanuit slaapstand.</translation>
+        <translation type="obsolete">vink dit aan als Vandaag moet starten vanuit slaapstand.</translation>
     </message>
     <message>
         <source>Tiny Banner</source>
-        <translation>Kleine bovenbalk</translation>
+        <translation type="obsolete">Kleine bovenbalk</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation>minuten inactief</translation>
+        <translation type="obsolete">minuten inactief</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation>Hoeveel minuten moet de PDA uitstaan voor Vandaag automatisch opkomt bij herstart</translation>
+        <translation type="obsolete">Hoeveel minuten moet de PDA uitstaan voor Vandaag automatisch opkomt bij herstart</translation>
     </message>
     <message>
         <source>Icon size</source>
-        <translation>Icoongrootte</translation>
+        <translation type="obsolete">Icoongrootte</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation>Stel icoongrootte in pixel in</translation>
+        <translation type="obsolete">Stel icoongrootte in pixel in</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation>Ververs</translation>
+        <translation type="obsolete">Ververs</translation>
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation>Hoevaak moet Vandaag zich verversen</translation>
+        <translation type="obsolete">Hoevaak moet Vandaag zich verversen</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation>sec</translation>
+        <translation type="obsolete">sec</translation>
     </message>
     <message>
         <source>never</source>
-        <translation>nooit</translation>
+        <translation type="obsolete">nooit</translation>
     </message>
     <message>
         <source>Misc</source>
         <translation>Div</translation>
+    </message>
+</context>
+<context>
+    <name>TodayConfigMiscBase</name>
+    <message>
+        <source>Form1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check this if today should be autostarted on resume.</source>
+        <translation type="unfinished">vink dit aan als Vandaag moet starten vanuit slaapstand.</translation>
+    </message>
+    <message>
+        <source>autostart on resume?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tiny banner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Have small banner </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
+        <translation type="unfinished">Hoeveel minuten moet de PDA uitstaan voor Vandaag automatisch opkomt bij herstart</translation>
+    </message>
+    <message>
+        <source>minutes inactive</source>
+        <translation type="unfinished">minuten inactief</translation>
+    </message>
+    <message>
+        <source> pixel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set the icon size in pixel</source>
+        <translation type="unfinished">Stel icoongrootte in pixel in</translation>
+    </message>
+    <message>
+        <source>icon size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> sec</source>
+        <translation type="unfinished">sec</translation>
+    </message>
+    <message>
+        <source>never</source>
+        <translation type="unfinished">nooit</translation>
+    </message>
+    <message>
+        <source>How often should Today refresh itself</source>
+        <translation type="unfinished">Hoevaak moet Vandaag zich verversen</translation>
+    </message>
+    <message>
+        <source>refresh</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

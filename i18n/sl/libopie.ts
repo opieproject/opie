@@ -425,10 +425,6 @@ and </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Description:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Priority:</source>
         <translation type="unfinished"></translation>
     </message>

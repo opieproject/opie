@@ -426,7 +426,7 @@ and </source>
     </message>
     <message>
         <source>Description:</source>
-        <translation>Omschrijving:</translation>
+        <translation type="obsolete">Omschrijving:</translation>
     </message>
     <message>
         <source>Priority:</source>

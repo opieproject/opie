@@ -144,11 +144,11 @@
     </message>
     <message>
         <source>Copy </source>
-        <translation type="obsolete">Kopieren</translation>
+        <translation type="unfinished">Kopieren</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="obsolete">Als</translation>
+        <translation type="unfinished">Als</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
@@ -268,15 +268,11 @@ and all it&apos;s contents ?</source>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation>AdvancedFm :: </translation>
+        <translation type="obsolete">AdvancedFm :: </translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation>kB frei</translation>
-    </message>
-    <message>
-        <source>Copy &apos;%1&apos; As</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">kB frei</translation>
     </message>
 </context>
 <context>

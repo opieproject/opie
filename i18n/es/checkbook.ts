@@ -450,7 +450,7 @@ El valor introducido debe siempre ser positivo.</translation>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation>Electrónica</translation>
+        <translation type="obsolete">Electrónica</translation>
     </message>
     <message>
         <source>Entertainment</source>
@@ -515,6 +515,10 @@ El valor introducido debe siempre ser positivo.</translation>
     <message>
         <source>Cash</source>
         <translation>Efectivo</translation>
+    </message>
+    <message>
+        <source>Electronics</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

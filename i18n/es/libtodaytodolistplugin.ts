@@ -19,22 +19,41 @@
     </message>
 </context>
 <context>
-    <name>TodolistPluginConfig</name>
-    <message>
-        <source>tasks shown </source>
-        <translation>tareas mostradas </translation>
-    </message>
+    <name>TodoPluginConfigBase</name>
     <message>
         <source>Set the maximum number of task that should be shown</source>
-        <translation>Fija el número máximo de tareas que deben mostrarse</translation>
+        <translation type="unfinished">Fija el número máximo de tareas que deben mostrarse</translation>
     </message>
     <message>
-        <source>Clip line after X chars</source>
-        <translation>Cortar línea tras X caracteres</translation>
+        <source>tasks shown</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation>Después de cuántos caracteres la información de la tarea debe ser cortada</translation>
+        <translation type="unfinished">Después de cuántos caracteres la información de la tarea debe ser cortada</translation>
+    </message>
+    <message>
+        <source>Clip line after X chars</source>
+        <translation type="unfinished">Cortar línea tras X caracteres</translation>
+    </message>
+</context>
+<context>
+    <name>TodolistPluginConfig</name>
+    <message>
+        <source>tasks shown </source>
+        <translation type="obsolete">tareas mostradas </translation>
+    </message>
+    <message>
+        <source>Set the maximum number of task that should be shown</source>
+        <translation type="obsolete">Fija el número máximo de tareas que deben mostrarse</translation>
+    </message>
+    <message>
+        <source>Clip line after X chars</source>
+        <translation type="obsolete">Cortar línea tras X caracteres</translation>
+    </message>
+    <message>
+        <source>After how many chars should be the info about the task be cut off</source>
+        <translation type="obsolete">Después de cuántos caracteres la información de la tarea debe ser cortada</translation>
     </message>
 </context>
 </TS>

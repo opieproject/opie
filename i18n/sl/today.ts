@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Owned by </source>
-        <translation type="obsolete">Lastnik je</translation>
+        <translation type="unfinished">Lastnik je</translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
@@ -23,10 +23,6 @@
     </message>
     <message>
         <source>Click here to launch the associated app</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Owned by %1&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -64,21 +60,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>autostart on 
-resume?
- (Opie only)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>minutes inactive</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Misc</source>
         <translation type="unfinished">Različno</translation>
     </message>
     <message>
+        <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Today Config</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TodayConfigMiscBase</name>
+    <message>
+        <source>Form1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Check this if today should be autostarted on resume.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>autostart on resume?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tiny banner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Have small banner </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> min</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -86,7 +103,11 @@ resume?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Icon size</source>
+        <source>minutes inactive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> pixel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -94,11 +115,7 @@ resume?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Refresh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>How often should Today refresh itself</source>
+        <source>icon size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -110,15 +127,11 @@ resume?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
+        <source>How often should Today refresh itself</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Today Config</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tiny Banner</source>
+        <source>refresh</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -66,12 +66,12 @@ Reservebatterij opladen aub.</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="obsolete">Informatie</translation>
+        <translation type="unfinished">Informatie</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;De systeemdatum lijkt niet correct.
+        <translation type="unfinished">&lt;p&gt;De systeemdatum lijkt niet correct.
 (%1)&lt;/p&gt;&lt;p&gt;Wilt u deze corrigeren?&lt;/p&gt;</translation>
     </message>
 </context>

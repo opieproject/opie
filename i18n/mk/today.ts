@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Owned by </source>
-        <translation type="obsolete">Сопственост на</translation>
+        <translation type="unfinished">Сопственост на</translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
@@ -24,10 +24,6 @@
     <message>
         <source>No plugins activated</source>
         <translation>Нема активни додатоци</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Owned by %1&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -75,53 +71,116 @@
         <source>autostart on 
 resume?
  (Opie only)</source>
-        <translation>автоматско стартување на 
+        <translation type="obsolete">автоматско стартување на 
 продолжување?
 (само за Opie)</translation>
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation>Избери ако „Денес“ треба автомтски да се стартува.</translation>
+        <translation type="obsolete">Избери ако „Денес“ треба автомтски да се стартува.</translation>
     </message>
     <message>
         <source>Tiny Banner</source>
-        <translation>Мал банер</translation>
+        <translation type="obsolete">Мал банер</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation>минути неактивност</translation>
+        <translation type="obsolete">минути неактивност</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation>Колку минути терминалот беше суспендиран пред модулот за авотстарт продолжил</translation>
+        <translation type="obsolete">Колку минути терминалот беше суспендиран пред модулот за авотстарт продолжил</translation>
     </message>
     <message>
         <source>Icon size</source>
-        <translation>големина на икона</translation>
+        <translation type="obsolete">големина на икона</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation>Намести големина на икони</translation>
+        <translation type="obsolete">Намести големина на икони</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation>Освежување</translation>
+        <translation type="obsolete">Освежување</translation>
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation>Колку често треба „Денес“ да се освежува</translation>
+        <translation type="obsolete">Колку често треба „Денес“ да се освежува</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation>сек</translation>
+        <translation type="obsolete">сек</translation>
     </message>
     <message>
         <source>never</source>
-        <translation>никогаш</translation>
+        <translation type="obsolete">никогаш</translation>
     </message>
     <message>
         <source>Misc</source>
         <translation>Општо</translation>
+    </message>
+</context>
+<context>
+    <name>TodayConfigMiscBase</name>
+    <message>
+        <source>Form1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check this if today should be autostarted on resume.</source>
+        <translation type="unfinished">Избери ако „Денес“ треба автомтски да се стартува.</translation>
+    </message>
+    <message>
+        <source>autostart on resume?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tiny banner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Have small banner </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
+        <translation type="unfinished">Колку минути терминалот беше суспендиран пред модулот за авотстарт продолжил</translation>
+    </message>
+    <message>
+        <source>minutes inactive</source>
+        <translation type="unfinished">минути неактивност</translation>
+    </message>
+    <message>
+        <source> pixel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set the icon size in pixel</source>
+        <translation type="unfinished">Намести големина на икони</translation>
+    </message>
+    <message>
+        <source>icon size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> sec</source>
+        <translation type="unfinished">сек</translation>
+    </message>
+    <message>
+        <source>never</source>
+        <translation type="unfinished">никогаш</translation>
+    </message>
+    <message>
+        <source>How often should Today refresh itself</source>
+        <translation type="unfinished">Колку често треба „Денес“ да се освежува</translation>
+    </message>
+    <message>
+        <source>refresh</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

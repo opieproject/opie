@@ -200,11 +200,11 @@ exists. Ok to overwrite?</source>
     </message>
     <message>
         <source>Copy </source>
-        <translation type="obsolete">Kopier</translation>
+        <translation type="unfinished">Kopier</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="obsolete">Som</translation>
+        <translation type="unfinished">Som</translation>
     </message>
     <message>
         <source> already exists.
@@ -260,18 +260,6 @@ and all it&apos;s contents ?</source>
     <message>
         <source>Really delete
 %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>AdvancedFm :: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> kB free</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy &apos;%1&apos; As</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

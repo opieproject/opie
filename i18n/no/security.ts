@@ -101,5 +101,17 @@ Access denied</source>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Passcode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Login</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Login Automatically</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

@@ -485,7 +485,7 @@ Are you sure?
     </message>
     <message>
         <source>R</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Do you wish to remove or upgrade
@@ -498,7 +498,7 @@ Are you sure?
     </message>
     <message>
         <source>U</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Updating Launcher...</source>

@@ -104,6 +104,10 @@
         <source>&amp;View Advanced Information</source>
         <translation>&amp;Види напредни информации</translation>
     </message>
+    <message>
+        <source>be &amp;silent</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>InterfaceSetup</name>
@@ -142,6 +146,10 @@
     <message>
         <source>Second DNS</source>
         <translation>Втор DNS</translation>
+    </message>
+    <message>
+        <source>255.255.255.0</source>
+        <translation type="unfinished">255.255.255.0</translation>
     </message>
 </context>
 <context>

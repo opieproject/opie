@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fil</translation>
     </message>
     <message>
         <source>Navigation</source>
@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Marks</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Markeringer</translation>
     </message>
     <message>
         <source>Indicators</source>
@@ -141,7 +141,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Slet</translation>
     </message>
     <message>
         <source>Delete Bookmarks</source>
@@ -323,23 +323,23 @@ Leading</source>
     </message>
     <message>
         <source>Goto</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Gå til</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Slet</translation>
     </message>
     <message>
         <source>Autogen</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Autogenerer</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Slet</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Gem</translation>
     </message>
     <message>
         <source>Tidy</source>
@@ -525,7 +525,7 @@ Leading</source>
     <name>CViewBarPrefs</name>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fuld skærm</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -537,7 +537,7 @@ Leading</source>
     </message>
     <message>
         <source>Set Font</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Indstil skrifttype</translation>
     </message>
     <message>
         <source>Encoding</source>
@@ -564,7 +564,7 @@ Leading</source>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fuld skærm</translation>
     </message>
     <message>
         <source>Navigation</source>
@@ -604,11 +604,11 @@ Leading</source>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zoom ind</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zoom ud</translation>
     </message>
     <message>
         <source>Set Font</source>

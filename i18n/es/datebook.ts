@@ -398,37 +398,37 @@ Libere espacio y vuelva a intentarlo.
     <message>
         <source>Mo</source>
         <comment>Monday</comment>
-        <translation>Lu</translation>
+        <translation type="obsolete">Lu</translation>
     </message>
     <message>
         <source>Tu</source>
         <comment>Tuesday</comment>
-        <translation>Ma</translation>
+        <translation type="obsolete">Ma</translation>
     </message>
     <message>
         <source>We</source>
         <comment>Wednesday</comment>
-        <translation>Mi</translation>
+        <translation type="obsolete">Mi</translation>
     </message>
     <message>
         <source>Th</source>
         <comment>Thursday</comment>
-        <translation>Ju</translation>
+        <translation type="obsolete">Ju</translation>
     </message>
     <message>
         <source>Fr</source>
         <comment>Friday</comment>
-        <translation>Vi</translation>
+        <translation type="obsolete">Vi</translation>
     </message>
     <message>
         <source>Sa</source>
         <comment>Saturday</comment>
-        <translation>Sa</translation>
+        <translation type="obsolete">Sa</translation>
     </message>
     <message>
         <source>Su</source>
         <comment>Sunday</comment>
-        <translation>Do</translation>
+        <translation type="obsolete">Do</translation>
     </message>
 </context>
 <context>

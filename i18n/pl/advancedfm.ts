@@ -143,11 +143,11 @@
     </message>
     <message>
         <source>Copy </source>
-        <translation type="obsolete">Kopiuj</translation>
+        <translation type="unfinished">Kopiuj</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="obsolete">Jako</translation>
+        <translation type="unfinished">Jako</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
@@ -263,18 +263,6 @@ wraz z zawartoscia?</translation>
 %1?</source>
         <translation>Czy na pewno usunac
 %1?</translation>
-    </message>
-    <message>
-        <source>AdvancedFm :: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> kB free</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy &apos;%1&apos; As</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

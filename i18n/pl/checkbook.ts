@@ -450,7 +450,7 @@ Wpisana wartosc powinna byc liczba dodatnia.</translation>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation>Elektronika</translation>
+        <translation type="obsolete">Elektronika</translation>
     </message>
     <message>
         <source>Entertainment</source>
@@ -515,6 +515,10 @@ Wpisana wartosc powinna byc liczba dodatnia.</translation>
     <message>
         <source>Cash</source>
         <translation>Gotowka</translation>
+    </message>
+    <message>
+        <source>Electronics</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

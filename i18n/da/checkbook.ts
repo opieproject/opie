@@ -450,7 +450,7 @@ Beløbet skal altid være positivt.</translation>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation>Electronics</translation>
+        <translation type="obsolete">Electronics</translation>
     </message>
     <message>
         <source>Entertainment</source>
@@ -515,6 +515,10 @@ Beløbet skal altid være positivt.</translation>
     <message>
         <source>Cash</source>
         <translation>Kontant</translation>
+    </message>
+    <message>
+        <source>Electronics</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -399,37 +399,37 @@ Sair na mesma?</translation>
     <message>
         <source>Mo</source>
         <comment>Monday</comment>
-        <translation>Se</translation>
+        <translation type="obsolete">Se</translation>
     </message>
     <message>
         <source>Tu</source>
         <comment>Tuesday</comment>
-        <translation>Te</translation>
+        <translation type="obsolete">Te</translation>
     </message>
     <message>
         <source>We</source>
         <comment>Wednesday</comment>
-        <translation>Qu</translation>
+        <translation type="obsolete">Qu</translation>
     </message>
     <message>
         <source>Th</source>
         <comment>Thursday</comment>
-        <translation>Qu</translation>
+        <translation type="obsolete">Qu</translation>
     </message>
     <message>
         <source>Fr</source>
         <comment>Friday</comment>
-        <translation>Se</translation>
+        <translation type="obsolete">Se</translation>
     </message>
     <message>
         <source>Sa</source>
         <comment>Saturday</comment>
-        <translation>Sá</translation>
+        <translation type="obsolete">Sá</translation>
     </message>
     <message>
         <source>Su</source>
         <comment>Sunday</comment>
-        <translation>Do</translation>
+        <translation type="obsolete">Do</translation>
     </message>
 </context>
 <context>

@@ -399,37 +399,37 @@ Wyjsc ?</translation>
     <message>
         <source>Mo</source>
         <comment>Monday</comment>
-        <translation>Pn</translation>
+        <translation type="obsolete">Pn</translation>
     </message>
     <message>
         <source>Tu</source>
         <comment>Tuesday</comment>
-        <translation>Wt</translation>
+        <translation type="obsolete">Wt</translation>
     </message>
     <message>
         <source>We</source>
         <comment>Wednesday</comment>
-        <translation>Sr</translation>
+        <translation type="obsolete">Sr</translation>
     </message>
     <message>
         <source>Th</source>
         <comment>Thursday</comment>
-        <translation>Czw</translation>
+        <translation type="obsolete">Czw</translation>
     </message>
     <message>
         <source>Fr</source>
         <comment>Friday</comment>
-        <translation>Pt</translation>
+        <translation type="obsolete">Pt</translation>
     </message>
     <message>
         <source>Sa</source>
         <comment>Saturday</comment>
-        <translation>So</translation>
+        <translation type="obsolete">So</translation>
     </message>
     <message>
         <source>Su</source>
         <comment>Sunday</comment>
-        <translation>Ni</translation>
+        <translation type="obsolete">Ni</translation>
     </message>
 </context>
 <context>

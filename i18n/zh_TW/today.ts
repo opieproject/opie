@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Owned by </source>
-        <translation type="obsolete">所有人</translation>
+        <translation type="unfinished">所有人</translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
@@ -24,10 +24,6 @@
     <message>
         <source>Click here to launch the associated app</source>
         <translation>按此處啟動聯結的應用程式</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Owned by %1&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -67,13 +63,13 @@
         <source>autostart on 
 resume?
  (Opie only)</source>
-        <translation>Resume後
+        <translation type="obsolete">Resume後
         自動啟動？
         (OPie only)</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation>休眠分鐘數</translation>
+        <translation type="obsolete">休眠分鐘數</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -81,35 +77,35 @@ resume?
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation>打勾開啟喚醒時自動啟動「今日」功能</translation>
+        <translation type="obsolete">打勾開啟喚醒時自動啟動「今日」功能</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation>休眠幾分鐘後才打開喚醒時自動啟動功能</translation>
+        <translation type="obsolete">休眠幾分鐘後才打開喚醒時自動啟動功能</translation>
     </message>
     <message>
         <source>Icon size</source>
-        <translation>圖示大小</translation>
+        <translation type="obsolete">圖示大小</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation>設定圖示的像素點數</translation>
+        <translation type="obsolete">設定圖示的像素點數</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation>更新內容</translation>
+        <translation type="obsolete">更新內容</translation>
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation>「今日」多久自動更新一次內容</translation>
+        <translation type="obsolete">「今日」多久自動更新一次內容</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation>秒</translation>
+        <translation type="obsolete">秒</translation>
     </message>
     <message>
         <source>never</source>
-        <translation>永不</translation>
+        <translation type="obsolete">永不</translation>
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
@@ -119,8 +115,67 @@ resume?
         <source>Today Config</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>TodayConfigMiscBase</name>
     <message>
-        <source>Tiny Banner</source>
+        <source>Form1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check this if today should be autostarted on resume.</source>
+        <translation type="unfinished">打勾開啟喚醒時自動啟動「今日」功能</translation>
+    </message>
+    <message>
+        <source>autostart on resume?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tiny banner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Have small banner </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
+        <translation type="unfinished">休眠幾分鐘後才打開喚醒時自動啟動功能</translation>
+    </message>
+    <message>
+        <source>minutes inactive</source>
+        <translation type="unfinished">休眠分鐘數</translation>
+    </message>
+    <message>
+        <source> pixel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set the icon size in pixel</source>
+        <translation type="unfinished">設定圖示的像素點數</translation>
+    </message>
+    <message>
+        <source>icon size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> sec</source>
+        <translation type="unfinished">秒</translation>
+    </message>
+    <message>
+        <source>never</source>
+        <translation type="unfinished">永不</translation>
+    </message>
+    <message>
+        <source>How often should Today refresh itself</source>
+        <translation type="unfinished">「今日」多久自動更新一次內容</translation>
+    </message>
+    <message>
+        <source>refresh</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

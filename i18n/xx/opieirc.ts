@@ -61,15 +61,15 @@
     <name>IRCMessageParser</name>
     <message>
         <source>Received unhandled numeric command : </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Received unhandled ctcp command : </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Received unhandled literal command : </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Nonexistant channel join - desynchronized?</source>
@@ -77,7 +77,7 @@
     </message>
     <message>
         <source> joined channel </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Person has already joined the channel - desynchronized?</source>
@@ -89,11 +89,11 @@
     </message>
     <message>
         <source>You left channel </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source> left channel </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Parting person not found - desynchronized?</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Channel message with unknown channel </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Received PRIVMSG of unknown type</source>
@@ -117,11 +117,11 @@
     </message>
     <message>
         <source>You are now known as </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source> is now known as </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Nickname change of an unknown person</source>
@@ -129,7 +129,7 @@
     </message>
     <message>
         <source> has quit </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Unknown person quit - desynchronized?</source>

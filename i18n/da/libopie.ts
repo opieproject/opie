@@ -172,7 +172,7 @@
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Størelse</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
@@ -414,7 +414,7 @@ og</translation>
     <name>QObject</name>
     <message>
         <source>Description:</source>
-        <translation>Beskrivelse:</translation>
+        <translation type="obsolete">Beskrivelse:</translation>
     </message>
     <message>
         <source>Priority:</source>

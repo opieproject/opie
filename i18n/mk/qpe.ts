@@ -65,12 +65,12 @@ Please charge the back-up battery.</source>
     </message>
     <message>
         <source>Information</source>
-        <translation type="obsolete">Информации</translation>
+        <translation type="unfinished">Информации</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;Датумот на системот не е валиден.
+        <translation type="unfinished">&lt;p&gt;Датумот на системот не е валиден.
 (%1)&lt;/p&gt;&lt;p&gt;Да се поправи саатот ? &lt;/p&gt;</translation>
     </message>
 </context>

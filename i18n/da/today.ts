@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Owned by </source>
-        <translation type="obsolete">Ejes af </translation>
+        <translation type="unfinished">Ejes af </translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Owned by %1&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Ejes af %1&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Ejes af %1&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -67,45 +67,45 @@
         <source>autostart on 
 resume?
  (Opie only)</source>
-        <translation>Start automatisk
+        <translation type="obsolete">Start automatisk
 ved opvågning?
 (Kun Opie)</translation>
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation>Vælg denne hvis Idag skal startes automatisk ved opvågning.</translation>
+        <translation type="obsolete">Vælg denne hvis Idag skal startes automatisk ved opvågning.</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation>Minutter inaktiv</translation>
+        <translation type="obsolete">Minutter inaktiv</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation>Hvor mange minutter PDA&apos;en har været i dvale før autostart egenskaben er aktiv ved opvågning</translation>
+        <translation type="obsolete">Hvor mange minutter PDA&apos;en har været i dvale før autostart egenskaben er aktiv ved opvågning</translation>
     </message>
     <message>
         <source>Icon size</source>
-        <translation>Ikon størrelse</translation>
+        <translation type="obsolete">Ikon størrelse</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation>Indstil størrelsen på ikonet i pixels</translation>
+        <translation type="obsolete">Indstil størrelsen på ikonet i pixels</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation>Genopfrisk</translation>
+        <translation type="obsolete">Genopfrisk</translation>
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation>Hvor ofte Idag skal genopfriske sig selv</translation>
+        <translation type="obsolete">Hvor ofte Idag skal genopfriske sig selv</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation> sek</translation>
+        <translation type="obsolete"> sek</translation>
     </message>
     <message>
         <source>never</source>
-        <translation>aldrig</translation>
+        <translation type="obsolete">aldrig</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -121,7 +121,70 @@ ved opvågning?
     </message>
     <message>
         <source>Tiny Banner</source>
-        <translation>Mini-banner</translation>
+        <translation type="obsolete">Mini-banner</translation>
+    </message>
+</context>
+<context>
+    <name>TodayConfigMiscBase</name>
+    <message>
+        <source>Form1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check this if today should be autostarted on resume.</source>
+        <translation type="unfinished">Vælg denne hvis Idag skal startes automatisk ved opvågning.</translation>
+    </message>
+    <message>
+        <source>autostart on resume?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tiny banner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Have small banner </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
+        <translation type="unfinished">Hvor mange minutter PDA&apos;en har været i dvale før autostart egenskaben er aktiv ved opvågning</translation>
+    </message>
+    <message>
+        <source>minutes inactive</source>
+        <translation type="unfinished">Minutter inaktiv</translation>
+    </message>
+    <message>
+        <source> pixel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set the icon size in pixel</source>
+        <translation type="unfinished">Indstil størrelsen på ikonet i pixels</translation>
+    </message>
+    <message>
+        <source>icon size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> sec</source>
+        <translation type="unfinished"> sek</translation>
+    </message>
+    <message>
+        <source>never</source>
+        <translation type="unfinished">aldrig</translation>
+    </message>
+    <message>
+        <source>How often should Today refresh itself</source>
+        <translation type="unfinished">Hvor ofte Idag skal genopfriske sig selv</translation>
+    </message>
+    <message>
+        <source>refresh</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

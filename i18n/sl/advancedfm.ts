@@ -143,11 +143,11 @@
     </message>
     <message>
         <source>Copy </source>
-        <translation type="obsolete">Kopiraj</translation>
+        <translation type="unfinished">Kopiraj</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="obsolete">Kot</translation>
+        <translation type="unfinished">Kot</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
@@ -253,14 +253,6 @@ Ni med zaznamki!!</translation>
         <translation>Napaka</translation>
     </message>
     <message>
-        <source>AdvancedFm :: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> kB free</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!</source>
@@ -278,10 +270,6 @@ and all it&apos;s contents ?</source>
     <message>
         <source>Really delete
 %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy &apos;%1&apos; As</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

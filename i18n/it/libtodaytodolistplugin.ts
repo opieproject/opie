@@ -20,22 +20,41 @@
     </message>
 </context>
 <context>
-    <name>TodolistPluginConfig</name>
-    <message>
-        <source>tasks shown </source>
-        <translation>mostra impegni</translation>
-    </message>
+    <name>TodoPluginConfigBase</name>
     <message>
         <source>Set the maximum number of task that should be shown</source>
-        <translation>Imposta il numero massimo di impegni da mostrare</translation>
+        <translation type="unfinished">Imposta il numero massimo di impegni da mostrare</translation>
     </message>
     <message>
-        <source>Clip line after X chars</source>
-        <translation>Taglia la riga dopo X caratteri</translation>
+        <source>tasks shown</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation>Dopo quanti caratteri le informazioni sull&apos;impegno devono essere tagliate</translation>
+        <translation type="unfinished">Dopo quanti caratteri le informazioni sull&apos;impegno devono essere tagliate</translation>
+    </message>
+    <message>
+        <source>Clip line after X chars</source>
+        <translation type="unfinished">Taglia la riga dopo X caratteri</translation>
+    </message>
+</context>
+<context>
+    <name>TodolistPluginConfig</name>
+    <message>
+        <source>tasks shown </source>
+        <translation type="obsolete">mostra impegni</translation>
+    </message>
+    <message>
+        <source>Set the maximum number of task that should be shown</source>
+        <translation type="obsolete">Imposta il numero massimo di impegni da mostrare</translation>
+    </message>
+    <message>
+        <source>Clip line after X chars</source>
+        <translation type="obsolete">Taglia la riga dopo X caratteri</translation>
+    </message>
+    <message>
+        <source>After how many chars should be the info about the task be cut off</source>
+        <translation type="obsolete">Dopo quanti caratteri le informazioni sull&apos;impegno devono essere tagliate</translation>
     </message>
 </context>
 </TS>

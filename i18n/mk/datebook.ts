@@ -396,43 +396,43 @@ Quit anyway?</source>
     <message>
         <source>Mo</source>
         <comment>Monday</comment>
-        <translation>Пон.
+        <translation type="obsolete">Пон.
 Понеделник</translation>
     </message>
     <message>
         <source>Tu</source>
         <comment>Tuesday</comment>
-        <translation>Втор.
+        <translation type="obsolete">Втор.
 Вторник</translation>
     </message>
     <message>
         <source>We</source>
         <comment>Wednesday</comment>
-        <translation>Сред,
+        <translation type="obsolete">Сред,
 Среда</translation>
     </message>
     <message>
         <source>Th</source>
         <comment>Thursday</comment>
-        <translation>Чет.
+        <translation type="obsolete">Чет.
 Четврток</translation>
     </message>
     <message>
         <source>Fr</source>
         <comment>Friday</comment>
-        <translation>Пет.
+        <translation type="obsolete">Пет.
 Петок</translation>
     </message>
     <message>
         <source>Sa</source>
         <comment>Saturday</comment>
-        <translation>Саб.
+        <translation type="obsolete">Саб.
 Сабота</translation>
     </message>
     <message>
         <source>Su</source>
         <comment>Sunday</comment>
-        <translation>Нед.
+        <translation type="obsolete">Нед.
 Недела</translation>
     </message>
     <message>

@@ -66,12 +66,12 @@ Genoplad venligst back-up batteriet.</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="obsolete">Information</translation>
+        <translation type="unfinished">Information</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;Systemets dato ser ikke ud til at være korrekt.
+        <translation type="unfinished">&lt;p&gt;Systemets dato ser ikke ud til at være korrekt.
 (%1)&lt;/p&gt;&lt;p&gt;Ønsker du at indstille uret?&lt;/p&gt;</translation>
     </message>
 </context>

@@ -248,15 +248,11 @@ and all it&apos;s contents ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>AdvancedFm :: </source>
+        <source>Copy </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> kB free</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy &apos;%1&apos; As</source>
+        <source> As</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

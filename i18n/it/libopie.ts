@@ -415,7 +415,7 @@ e </translation>
     <name>QObject</name>
     <message>
         <source>Description:</source>
-        <translation>Descrizione:</translation>
+        <translation type="obsolete">Descrizione:</translation>
     </message>
     <message>
         <source>Priority:</source>
