@@ -44,7 +44,7 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
 
     msg += "<B>" + (ev).description() + "</B>";
     if ( (ev).event().hasAlarm() ) {
-        msg += " <b>[with alarm]</b>";
+        msg += " <b>" + tr("[with alarm]") +"</b>";
     }
 
     // include location or not
@@ -67,7 +67,7 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
 
     // include possible note or not
     if ( show_notes ) {
-        msg += "<br> <i>note</i>:" +( (ev).notes() ).mid( 0, maxCharClip );
+        msg += "<br> <i>" + tr("note") + "</i>:" +( (ev).notes() ).mid( 0, maxCharClip );
     }
     setText( msg );
     connect( this, SIGNAL( clicked() ), this, SLOT( editMe() ) );

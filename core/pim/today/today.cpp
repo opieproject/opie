@@ -15,6 +15,9 @@
  ***************************************************************************/
 
 
+
+#define QTOPIA_INTERNAL_LANGLIST
+
 #include "today.h"
 #include <opie/todayconfigwidget.h>
 
@@ -36,7 +39,7 @@
 #include <opie/otabwidget.h>
 #include <qdialog.h>
 #include <qwhatsthis.h>
-
+#include <qtranslator.h>
 
 struct TodayPlugin {
     TodayPlugin() : library( 0 ), iface( 0 ), guiPart( 0 ), guiBox( 0 ) {}
@@ -161,8 +164,8 @@ void Today::loadPlugins() {
         for ( tit = pluginList.begin(); tit != pluginList.end(); ++tit ) {
             (*tit).guiBox->hide();
             (*tit).guiBox->reparent( 0, QPoint( 0, 0 ) );
-            (*tit).library->unload();
             delete (*tit).guiBox;
+            (*tit).library->unload();
             delete (*tit).library;
         }
         pluginList.clear();
@@ -189,6 +192,20 @@ void Today::loadPlugins() {
             plugin.library = lib;
             plugin.iface = iface;
             plugin.name = QString(*it);
+
+            QString type = (*it).left( (*it).find(".") );
+            QStringList langs = Global::languageList();
+            for (QStringList::ConstIterator lit = langs.begin(); lit!=langs.end(); ++lit) {
+                QString lang = *lit;
+                qDebug( "Languages: " + lang );
+                QTranslator * trans = new QTranslator( qApp );
+                QString tfn = QPEApplication::qpeDir()+"/i18n/" + lang + "/" + type + ".qm";
+                if ( trans->load( tfn ) )  {
+                    qApp->installTranslator( trans );
+                }  else {
+                    delete trans;
+                }
+            }
 
             // find out if plugins should be shown
             if ( m_excludeApplets.grep( *it ).isEmpty() ) {
@@ -303,6 +320,7 @@ void Today::startConfig() {
 
     // disconnect timer to prevent problems while being on config dialog
     disconnect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
+    m_refreshTimer->stop( );
 
     TodayConfig conf( this, "dialog", true );
 
@@ -334,7 +352,8 @@ void Today::startConfig() {
         loadPlugins();
     } else {
         // since refresh is not called in that case , reconnect the signal
-        connect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
+      m_refreshTimer->start( 15000 ); // get the config value in here later
+      connect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
     }
 }
 
