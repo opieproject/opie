@@ -1,208 +1,209 @@
 <!DOCTYPE TS><TS>
+<codec>iso8859-1</codec>
 <context>
     <name>CommandEditDialog</name>
     <message>
         <source>Command Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélection de la commande</translation>
     </message>
 </context>
 <context>
     <name>CommandEditDialogBase</name>
     <message>
         <source>Commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Commandes</translation>
     </message>
     <message>
         <source>&lt;B&gt;Commands&lt;/B&gt;:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;B&gt;Commandes&lt;/B&gt; :</translation>
     </message>
     <message>
         <source>&lt;B&gt;Suggested Commands&lt;/B&gt;:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;B&gt;Commandes suggérées&lt;/B&gt; :</translation>
     </message>
 </context>
 <context>
     <name>Form1</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Form1</translation>
     </message>
 </context>
 <context>
     <name>Konsole</name>
     <message>
         <source>Terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminal</translation>
     </message>
     <message>
         <source>Micro</source>
-        <translation type="unfinished"></translation>
+        <translation>Micro</translation>
     </message>
     <message>
         <source>Small Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Petite à chasse fixe</translation>
     </message>
     <message>
         <source>Medium Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Moyenne à chasse fixe</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Police</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau</translation>
     </message>
     <message>
         <source>Enter</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrée</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Espace</translation>
     </message>
     <message>
         <source>Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabulation</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Monter</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Descendre</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Coller</translation>
     </message>
     <message>
         <source>Show command list</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher la liste des commandes</translation>
     </message>
     <message>
         <source>Hide command list</source>
-        <translation type="unfinished"></translation>
+        <translation>Cacher la liste des commandes</translation>
     </message>
     <message>
         <source>Tabs on Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabs en bas</translation>
     </message>
     <message>
         <source>Green on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Vert sur noir</translation>
     </message>
     <message>
         <source>Black on White</source>
-        <translation type="unfinished"></translation>
+        <translation>Noir sur blanc</translation>
     </message>
     <message>
         <source>White on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Blanc sur noir</translation>
     </message>
     <message>
         <source>Black on Transparent</source>
-        <translation type="unfinished"></translation>
+        <translation>Noir sur transparent</translation>
     </message>
     <message>
         <source>Black on Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Noir sur rouge</translation>
     </message>
     <message>
         <source>Red on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Rouge sur noir</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Vert sur jaune</translation>
     </message>
     <message>
         <source>Blue on Magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Bleue sur magenta</translation>
     </message>
     <message>
         <source>Magenta on Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Magenta sur bleue</translation>
     </message>
     <message>
         <source>Cyan on White</source>
-        <translation type="unfinished"></translation>
+        <translation>Cyan sur blanc</translation>
     </message>
     <message>
         <source>White on Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Blanc sur cyan</translation>
     </message>
     <message>
         <source>Blue on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Bleue sur noir</translation>
     </message>
     <message>
         <source>Amber on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Ambre sur noir</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleurs</translation>
     </message>
     <message>
         <source>Quick Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Edition rapide</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Gauche</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Droite</translation>
     </message>
     <message>
         <source>ScrollBar</source>
-        <translation type="unfinished"></translation>
+        <translation>Barre de défilement</translation>
     </message>
     <message>
         <source>Show Command List</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher la liste des commandes</translation>
     </message>
     <message>
         <source>Hide Command List</source>
-        <translation type="unfinished"></translation>
+        <translation>Cacher la liste des commandes</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Personaliser</translation>
     </message>
 </context>
 <context>
     <name>PlayListSelection</name>
     <message>
         <source>Command Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélection de la commande</translation>
     </message>
 </context>
 <context>
     <name>editCommandBase</name>
     <message>
         <source>Add command</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter une commande</translation>
     </message>
     <message>
         <source>Enter command to add:</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrer la commande à ajouter :</translation>
     </message>
 </context>
 </TS>
