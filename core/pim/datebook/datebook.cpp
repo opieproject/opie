@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.18 2003-03-24 09:06:06 umopapisdn Exp $
+** $Id: datebook.cpp,v 1.19 2003-03-24 10:10:47 umopapisdn Exp $
 **
 **********************************************************************/
 
@@ -597,10 +597,10 @@ void DateBook::initWeekLst() {
 	       this, SLOT( showDay( int, int, int ) ) );
       connect( weekLstView, SIGNAL( addEvent( const QDateTime &,
 					      const QDateTime &,
-					      const QString & ) ),
+					      const QString & , const QString &) ),
 	       this, SLOT( slotNewEntry( const QDateTime &,
 					 const QDateTime &,
-					 const QString & ) ) );
+					 const QString & , const QString &) ) );
       connect( this, SIGNAL( newEvent() ),
 	       weekLstView, SLOT( redraw() ) );
       connect( weekLstView, SIGNAL( editEvent( const Event & ) ),
