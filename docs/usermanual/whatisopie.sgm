@@ -2,7 +2,7 @@
 <para>
 &opie; is a GUI (Graphical User Interface) for the Linux operating system (and
 might work on other OSes as well).  It was originally designed for handheld
-computers (such as the Compaq/HP iPAQ and the Sharp Zaurus), but could
+computers (such as the Compaq/HP &ipaq; and the Sharp &zaurus;), but could
 probably function well in other environments requiring a light GUI, such as an
 old laptop, or an internet kiosk.  It is based upon &qt;/Embedded from Trolltech,
 which is in turn a graphical environment designed for embedded applications,

@@ -43,6 +43,8 @@
 <!ENTITY opie "OPIE">
 <!ENTITY todayapp "Today">
 <!ENTITY qt "Qt">
+<!ENTITY ipaq "iPAQ">
+<!ENTITY zaurus "Zaurus">
 ]>
 <book><title>&opie; User Manual</title>
 <bookinfo><authorgroup><collab>

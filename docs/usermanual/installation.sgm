@@ -1,7 +1,7 @@
 <chapter><title>Installation</title>
-<section><title>iPAQ</title>
+<section><title>&ipaq;</title>
 <para>
-To install opie on an iPAQ, you will need a fresh Familiar installation (ie,
+To install opie on an &ipaq;, you will need a fresh Familiar installation (ie,
 install Familiar, and stop before you do ipkg install task-complete or ipkg
 install task-x), go to http://familiar.handhelds.org to get the latest version,
 and to get installation instructions (again, stop after the initial boot and do
@@ -16,7 +16,7 @@ your /etc/ipkg.conf file before attempting to install opie.
 </para>
 </note>
 <para>
-Once you have Familiar installed, set up a network connection between your iPAQ
+Once you have Familiar installed, set up a network connection between your $ipaq;
 and the ouside world (again, see the Familiar site for instructions on this),
 and then run this command:
 <informalexample>
@@ -31,7 +31,7 @@ then, run:
      ipkg update && ipkg install task-opie
 </literallayout>
 </informalexample>
-If you have a 3100 or 3800 series iPAQ, run:
+If you have a 3100 or 3800 series &ipaq;, run:
 <informalexample>
 <literallayout>
      ipkg install qt-embedded-rotation
@@ -56,11 +56,11 @@ the command line in &opie;.
 </para>
 </section>
 
-<section><title>Zaurus</title>
+<section><title>&zaurus;</title>
 <para>
-To completely install &opie; on the Zaurus, you will have to install OpenZaurus,
+To completely install &opie; on the &zaurus;, you will have to install OpenZaurus,
 which includes &opie;. However, individual &opie; applications will work fine on the
-default Zaurus rom. Do not install &opie;'s launcher on a default Zaurus ROM
+default &zaurus; rom. Do not install &opie;'s launcher on a default &zaurus; ROM
 though.
 </para>
 </section>
