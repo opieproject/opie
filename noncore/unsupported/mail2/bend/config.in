@@ -1,4 +1,4 @@
   config BEND
-    boolean
-    default "y" if MAIL
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && LIBMAIL
+    boolean "bend"
+    default "y" if OPIEMAIL2
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OPIEMAIL2

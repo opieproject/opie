@@ -1,4 +1,5 @@
 QMAKE_CFLAGS = -DHAVE_OPENPTY
+TMAKE_FLAGS += -DHAVE_OPENPTY
 QMAKE_LIBS = -lutil
 TEMPLATE  = app
 CONFIG    += qt warn_on release

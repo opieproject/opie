@@ -95,7 +95,6 @@ CONFIG_LIBQPE-X11	x11/libqpe-x11	libqpe-x11.pro
 CONFIG_LIGHT-AND-POWER	core/settings/light-and-power	light-and-power.pro
 CONFIG_LIQUID	noncore/styles/liquid	liquid.pro
 CONFIG_LOGOUTAPPLET	core/applets/logoutapplet	logoutapplet.pro
-CONFIG_MAIL	noncore/mail	mail.pro
 CONFIG_MANAGER	noncore/net/opietooth/manager	manager.pro
 CONFIG_MEDIUMMOUNT	noncore/settings/mediummount	mediummount.pro
 CONFIG_METAL	noncore/styles/metal	metal.pro
@@ -111,6 +110,7 @@ CONFIG_OCOPSERVER	x11/ipc/server	ocopserver.pro
 CONFIG_OIPKG	core/apps/oipkg	oipkg.pro
 CONFIG_OPIE-CONSOLE	noncore/apps/opie-console	opie-console.pro
 CONFIG_OPIE-LOGIN	core/opie-login	opie-login.pro
+CONFIG_OPIEMAIL2	noncore/mail mail.pro
 CONFIG_OPIE-READER	noncore/apps/opie-reader	opie-reader.pro
 CONFIG_OPIE-SH	noncore/tools/opie-sh	opie-sh.pro
 CONFIG_OPIE-SHEET	noncore/apps/opie-sheet	opie-sheet.pro
@@ -124,6 +124,7 @@ CONFIG_PARASHOOT	noncore/games/parashoot	parashoot.pro
 CONFIG_PICKBOARD	inputmethods/pickboard	pickboard.pro
 CONFIG_QASTEROIDS	noncore/games/qasteroids	qasteroids.pro
 CONFIG_QCOP	core/apps/qcop	qcop.pro
+CONFIG_ODICT	noncore/apps/odict	odict.pro
 CONFIG_QPDF	noncore/graphics/qpdf	qpdf.pro
 CONFIG_REMOTE	noncore/tools/remote	remote.pro
 CONFIG_ROTATION	noncore/settings/rotation	rotation.pro
@@ -154,6 +155,7 @@ CONFIG_TODAY_FORTUNE	noncore/todayplugins/fortune	fortune.pro
 CONFIG_TODAY_MAIL	core/pim/today/plugins/mail	mail.pro
 CONFIG_TODAY_STOCKTICKER	noncore/todayplugins/stockticker/stockticker	stockticker.pro
 CONFIG_TODAY_STOCKTICKERLIB	noncore/todayplugins/stockticker/stocktickerlib	stocktickerlib.pro
+CONFIG_TODAY_WEATHER	noncore/todayplugins/weather weather.pro
 CONFIG_TODAY_TODOLIST	core/pim/today/plugins/todolist	todolist.pro
 CONFIG_TODO	core/pim/todo	todo.pro
 CONFIG_UNIKEYBOARD	inputmethods/unikeyboard	unikeyboard.pro
