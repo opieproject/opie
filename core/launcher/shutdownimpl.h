@@ -20,11 +20,13 @@
 #ifndef SHUTDOWNIMPL_H
 #define SHUTDOWNIMPL_H
 
-#include "shutdown.h"
+#include <qwidget.h>
 
 class QTimer;
+class QLabel;
+class QProgressBar;
 
-class ShutdownImpl : public Shutdown
+class ShutdownImpl : public QWidget
 {
     Q_OBJECT
 public:
@@ -41,9 +43,12 @@ private slots:
     void timeout();
 
 private:
-    QTimer *timer;
-    int progress;
-    Type operation;
+    QTimer *m_timer;
+    int     m_counter;
+    Type    m_operation;
+    
+    QLabel *      m_info;
+    QProgressBar *m_progress;
 };
 
 #endif

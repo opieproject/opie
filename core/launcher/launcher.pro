@@ -91,7 +91,7 @@ SOURCES		= background.cpp \
 	$(OPIEDIR)/rsync/version.c \
 	$(OPIEDIR)/rsync/whole.c \
 	$(OPIEDIR)/rsync/qrsync.cpp
-INTERFACES	= shutdown.ui syncdialog.ui
+INTERFACES	= syncdialog.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include .
 INCLUDEPATH += $(OPIEDIR)/core/apps/calibrate
