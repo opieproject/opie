@@ -1,0 +1,20 @@
+--- mailmime_content.c.orig	2003-12-16 17:45:47.000000000 +0100
++++ mailmime_content.c	2003-12-16 17:45:55.000000000 +0100
+@@ -1549,7 +1549,7 @@
+ /* ************************************************************************* */
+ /* MIME part decoding */
+ 
+-static char get_base64_value(char ch)
++static signed char get_base64_value(char ch)
+ {
+   if ((ch >= 'A') && (ch <= 'Z'))
+     return ch - 'A';
+@@ -1595,7 +1595,7 @@
+ 
+   i = 0;
+   while (1) {
+-    char value;
++    signed char value;
+ 
+     value = -1;
+     while (value == -1) {
