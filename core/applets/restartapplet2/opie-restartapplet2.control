@@ -1,3 +1,4 @@
+Package: opie-restartapplet2
 Files: plugins/applets/librestartapplet.so* 
 Priority: optional
 Section: opie/system

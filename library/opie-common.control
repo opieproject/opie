@@ -1,3 +1,4 @@
+Package: opie-common
 Files: etc/colors bin/opie-reorgfiles apps/*/.directory etc/mime.types apps/Settings/quit.desktop pics/logo/*
 Priority: required
 Section: opie/system

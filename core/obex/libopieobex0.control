@@ -1,3 +1,4 @@
+Package: libopieobex0
 Files: plugins/obex/libopieobex.so* pics/obex/*
 Priority: optional
 Section: opie/system

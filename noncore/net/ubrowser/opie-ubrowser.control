@@ -1,3 +1,4 @@
+Package: opie-ubrowser
 Files: bin/ubrowser apps/Applications/ubrowser.desktop pics/ubrowser/*.png
 Priority: optional
 Section: opie/applications

@@ -1,3 +1,4 @@
+Package: opie-embeddedkonsole
 Files: bin/embeddedkonsole apps/Applications/embeddedkonsole.desktop pics/konsole
 Priority: optional
 Section: opie/applications

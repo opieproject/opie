@@ -1,3 +1,4 @@
+Package: opie-advancedfm
 Files: bin/advancedfm apps/Applications/advancedfm.desktop pics/advancedfm
 Priority: optional
 Section: opie/applications

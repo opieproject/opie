@@ -1,3 +1,4 @@
+Package: opie-today-addressbookplugin
 Files: plugins/today/libtodayaddressbookplugin.so*
 Priority: optional
 Section: opie/applications

@@ -1,3 +1,4 @@
+Package: opie-sh-ssh-askpass
 Files: bin/opie-sh-ssh-askpass.sh
 Installed-Size:  0 
 Version: $QPE_VERSION-$SUB_VERSION

@@ -1,3 +1,4 @@
+Package: opie-qasteroids
 Files: bin/qasteroids apps/Games/qasteroids.desktop pics/qasteroids/*
 Priority: optional
 Section: opie/games

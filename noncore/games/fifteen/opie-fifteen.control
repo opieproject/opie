@@ -1,3 +1,4 @@
+Package: opie-fifteen
 Files: bin/fifteen apps/Games/fifteen.desktop pics/fifteen
 Priority: optional
 Section: opie/games

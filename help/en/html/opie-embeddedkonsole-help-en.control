@@ -1,3 +1,4 @@
+Package: opie-embeddedkonsole-help-en
 Files: help/en/html/opie-embeddedkonsole.html
 Priority: optional
 Section: opie/onlinedoc

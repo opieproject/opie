@@ -1,3 +1,4 @@
+Package: opie-tableviewer
 Files: bin/tableviewer apps/Applications/tableviewer.desktop
 Priority: optional
 Section: opie/applications

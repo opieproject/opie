@@ -1,3 +1,4 @@
+Package: opie-kbill
 Files: bin/kbill apps/Games/kbill.desktop pics/kbill/*
 Priority: optional
 Section: opie/games

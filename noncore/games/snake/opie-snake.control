@@ -1,3 +1,4 @@
+Package: opie-snake
 Files: bin/snake apps/Games/snake.desktop pics/snake
 Priority: optional
 Section: opie/games

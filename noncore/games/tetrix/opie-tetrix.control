@@ -1,3 +1,4 @@
+Package: opie-tetrix
 Files: bin/tetrix apps/Games/tetrix.desktop pics/tetrix/*
 Priority: optional
 Section: opie/games

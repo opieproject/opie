@@ -1,3 +1,4 @@
+Package: opie-parashoot
 Files: bin/parashoot apps/Games/parashoot.desktop pics/parashoot
 Priority: optional
 Section: opie/games

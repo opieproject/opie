@@ -1,3 +1,4 @@
+Package: opie-wellenreiter
 Files: bin/wellenreiter share/wellenreiter pics/wellenreiter apps/Applications/wellenreiter.desktop
 Priority: optional
 Section: opie/applications

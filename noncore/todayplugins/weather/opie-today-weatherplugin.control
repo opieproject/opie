@@ -1,3 +1,4 @@
+Package: opie-today-weatherplugin
 Files: plugins/today/libtodayweatherplugin.so* pics/todayweatherplugin
 Priority: optional
 Section: opie/applications

@@ -1,3 +1,4 @@
+Package: opie-networkapplet
 Files: plugins/applets/libnetworkapplet.so* pics/networkapplet
 Priority: optional
 Section: opie/system

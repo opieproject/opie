@@ -1,3 +1,4 @@
+Package: opie-bounce
 Files: bin/bounce apps/Games/bounce.desktop pics/bounce/*.png
 Version: 0.6-$SUB_VERSION 
 Depends: task-opie-minimal

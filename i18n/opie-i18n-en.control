@@ -1,3 +1,4 @@
+Package: opie-i18n-en
 Files: i18n/en/.directory etc/dict/dawg
 Priority: optional
 Section: opie/i18n

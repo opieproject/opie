@@ -1,3 +1,4 @@
+Package: opie-textedit
 Files: bin/textedit apps/1Pim/textedit.desktop pics/textedit
 Priority: optional
 Section: opie/applications

@@ -1,3 +1,4 @@
+Package: opie-style-flat
 Files: plugins/styles/libflatstyle.so*
 Priority: optional
 Section: opie/styles

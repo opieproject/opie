@@ -1,3 +1,4 @@
+Package: opie-appskey-help-en
 Files: help/en/html/opie-appskey.html
 Priority: optional
 Section: opie/onlinedoc

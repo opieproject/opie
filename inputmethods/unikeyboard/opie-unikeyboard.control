@@ -1,3 +1,4 @@
+Package: opie-unikeyboard
 Files: plugins/inputmethods/libqunikeyboard.so*
 Priority: optional
 Section: opie/inputmethods

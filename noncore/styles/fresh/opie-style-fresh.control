@@ -1,3 +1,4 @@
+Package: opie-style-fresh
 Files: plugins/styles/libfreshstyle.so*
 Priority: optional
 Section: opie/styles

@@ -1,3 +1,4 @@
+Package: opie-console
 Files: bin/opie-console apps/Applications/opie-console.desktop pics/console/* 
 Priority: optional
 Section: opie/applications

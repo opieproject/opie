@@ -1,3 +1,4 @@
+Package: opie-pics
 Files: pics/??*.* pics/opie/*
 Priority: required
 Section: opie/system

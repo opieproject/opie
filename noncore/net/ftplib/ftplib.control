@@ -1,3 +1,4 @@
+Package: ftplib
 Files: $OPIEDIR/lib/libftplib.*
 Priority: optional
 Section: Communications

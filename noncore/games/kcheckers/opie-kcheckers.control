@@ -1,3 +1,4 @@
+Package: opie-kcheckers
 Files: bin/kcheckers apps/Games/kcheckers.desktop pics/kcheckers
 Priority: optional
 Section: opie/games

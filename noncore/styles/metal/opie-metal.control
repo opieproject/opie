@@ -1,3 +1,4 @@
+Package: opie-metal
 Files: plugins/styles/libmetal.so* 
 Priority: optional
 Section: opie/system

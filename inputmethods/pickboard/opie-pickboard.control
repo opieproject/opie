@@ -1,3 +1,4 @@
+Package: opie-pickboard
 Files: plugins/inputmethods/libqpickboard.so*
 Priority: optional
 Section: opie/inputmethods

@@ -1,3 +1,4 @@
+Package: opie-windows2000-ppp-scripts
 Files: root/etc/hosts ipaq/etc/inittab ipaq/etc/ppp
 Priority: optional
 Section: opie/system

@@ -1,3 +1,4 @@
+Package: opie-clock
 Files: bin/clock apps/Applications/clock.desktop
 Priority: optional
 Section: opie/applications

@@ -1,3 +1,4 @@
+Package: opie-tinykate-syntax-unix
 Files: share/tinykate/syntax/cs.xml share/tinykate/syntax/bash.xml share/tinykate/syntax/changelog.xml share/tinykate/syntax/desktop.xml share/tinykate/syntax/diff.xml share/tinykate/syntax/mab.xml share/tinykate/syntax/makefile.xml share/tinykate/syntax/rpmspec.xml share/tinykate/syntax/sml.xml share/tinykate/syntax/winehq.xml 
 Priority: optional
 Section: opie/applications

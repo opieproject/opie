@@ -1,3 +1,4 @@
+Package: opie-wirelessapplet
 Files: plugins/applets/libwirelessapplet.so* 
 Priority: optional
 Section: opie/system

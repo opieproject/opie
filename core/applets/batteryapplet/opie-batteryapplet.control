@@ -1,3 +1,4 @@
+Package: opie-batteryapplet
 Files: plugins/applets/libbatteryapplet.so*
 Priority: optional
 Section: opie/taskbar

@@ -1,3 +1,4 @@
+Package: opie-camera
 Files: bin/opiecam pics/camera apps/Applications/camera.desktop
 Priority: optional
 Section: opie/applications

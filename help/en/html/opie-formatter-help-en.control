@@ -1,3 +1,4 @@
+Package: opie-formatter-help-en
 Files: help/en/html/opie-formatter.html
 Priority: optional
 Section: opie/onlinedoc

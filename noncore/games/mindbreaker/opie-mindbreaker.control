@@ -1,3 +1,4 @@
+Package: opie-mindbreaker
 Files: bin/mindbreaker apps/Games/mindbreaker.desktop pics/mindbreaker
 Priority: optional
 Section: opie/games

@@ -1,3 +1,4 @@
+Package: opie-handwriting-graffitiset
 Files: etc/qimpen/graffiti*
 Priority: optional
 Section: opie/inputmethods

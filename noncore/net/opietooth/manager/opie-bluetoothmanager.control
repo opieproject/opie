@@ -1,3 +1,4 @@
+Package: opie-bluetoothmanager
 Files: bin/bluetooth-manager apps/Settings/bluetooth-manager.desktop pics/opietooth/*
 Priority: optional
 Section: opie/applications

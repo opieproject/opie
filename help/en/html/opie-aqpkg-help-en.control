@@ -1,3 +1,4 @@
+Package: opie-aqpkg-help-en
 Files: help/en/html/aqpkg.html
 Priority: optional
 Section: opie/onlinedoc

@@ -1,3 +1,4 @@
+Package: opie-datebook
 Files: bin/datebook apps/1Pim/datebook.desktop pics/datebook
 Priority: optional
 Section: opie/applications

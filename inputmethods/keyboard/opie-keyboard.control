@@ -1,3 +1,4 @@
+Package: opie-keyboard
 Files: plugins/inputmethods/libqkeyboard.so*
 Priority: optional
 Section: opie/inputmethods

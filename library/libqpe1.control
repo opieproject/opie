@@ -1,3 +1,4 @@
+Package: libqpe1
 Files: $OPIEDIR/lib/libqpe.so.1 $OPIEDIR/lib/libqpe.so.1.5 $OPIEDIR/lib/libqpe.so.1.5.0
 Priority: required
 Section: opie/system

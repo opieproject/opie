@@ -1,3 +1,4 @@
+Package: opie-oxygen
 Files: bin/oxygen apps/Applications/oxygen.desktop pics/oxygen/oxygen.png share/oxygen/*
 Priority: optional
 Section: applications

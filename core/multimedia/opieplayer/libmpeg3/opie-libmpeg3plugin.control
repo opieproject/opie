@@ -1,3 +1,4 @@
+Package: opie-libmpeg3plugin
 Files: plugins/codecs/libmpeg3plugin.so.1.0.0 plugins/codecs/libmpeg3plugin.so.1.0 plugins/codecs/libmpeg3plugin.so.1 plugins/codecs/libmpeg3plugin.so
 Priority: optional
 Section: opie/plugins

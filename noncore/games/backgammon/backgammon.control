@@ -1,3 +1,4 @@
+Package: backgammon
 Files: bin/backgammon apps/Games/backgammon.desktop pics/backgammon help/en/html/backgammon.html
 Priority: optional
 Section: opie/games

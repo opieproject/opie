@@ -1,3 +1,4 @@
+Package: qpf-cyberbit-120-50-t10
 Files: $QTDIR/lib/fonts/cyberbit_120_50_t10.qpf
 Priority: required
 Section: opie/system

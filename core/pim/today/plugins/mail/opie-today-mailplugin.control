@@ -1,3 +1,4 @@
+Package: opie-today-mailplugin
 Files: plugins/today/libtodaymailplugin.so*
 Priority: optional
 Section: opie/applications

@@ -1,3 +1,4 @@
+Package: opie-kjumpx
 Files: plugins/inputmethods/libqkjumpx.so* pics/kjumpx/*
 Priority: optional
 Section: opie/inputmethods

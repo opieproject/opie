@@ -1,3 +1,4 @@
+Package: opie-multikey
 Files: plugins/inputmethods/libqmultikey.so* share/multikey/*
 Priority: optional
 Section: opie/inputmethods

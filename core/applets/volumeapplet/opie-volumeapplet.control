@@ -1,3 +1,4 @@
+Package: opie-volumeapplet
 Files: plugins/applets/libvolumeapplet.so*
 Priority: optional
 Section: opie/taskbar

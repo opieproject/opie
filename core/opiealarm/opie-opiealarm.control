@@ -1,3 +1,4 @@
+Package: opie-opiealarm
 Files: bin/opiealarm root/etc/suspend-scripts/S46opiealarm root/etc/resume-scripts/R46opiealarm
 Priority: required
 Provides: ipaqalarm

@@ -1,3 +1,4 @@
+Package: opie-write
 Files: bin/opie-write apps/Applications/opie-write.desktop pics/opie-write
 Priority: optional
 Section: opie/applications

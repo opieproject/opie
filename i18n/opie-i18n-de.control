@@ -1,3 +1,4 @@
+Package: opie-i18n-de
 Files: i18n/de/.directory i18n/de/*.qm etc/dict/dawg.de
 Priority: optional
 Section: opie/i18n

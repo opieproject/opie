@@ -1,3 +1,4 @@
+Package: opie-clipboardapplet
 Files: plugins/applets/libclipboardapplet.so*
 Priority: optional
 Section: opie/taskbar

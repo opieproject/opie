@@ -1,3 +1,4 @@
+Package: opie-mobilemsg
 Files: bin/mobilemsg apps/Applications/mobilemsg.desktop pics/mobilemsg 
 Priority: optional
 Section: opie/comm

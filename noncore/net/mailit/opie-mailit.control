@@ -1,3 +1,4 @@
+Package: opie-mailit
 Files: bin/mailit apps/1Pim/mailit.desktop pics/mailit
 Priority: optional
 Section: opie

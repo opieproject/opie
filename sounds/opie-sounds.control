@@ -1,3 +1,4 @@
+Package: opie-sounds
 Files: sounds/*.wav
 Priority: required
 Section: opie/system

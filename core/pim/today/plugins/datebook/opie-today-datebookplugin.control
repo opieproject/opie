@@ -1,3 +1,4 @@
+Package: opie-today-datebookplugin
 Files: plugins/today/libtodaydatebookplugin.so*
 Priority: optional
 Section: opie/applications

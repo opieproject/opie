@@ -1,3 +1,4 @@
+Package: opie-clockapplet
 Files: plugins/applets/libclockapplet.so*
 Priority: optional
 Section: opie/taskbar

@@ -1,3 +1,4 @@
+Package: opie-deco-polished
 Files: plugins/decorations/libpolished.so*
 Priority: optional
 Section: opie/decorations

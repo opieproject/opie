@@ -1,3 +1,4 @@
+Package: opie-sh-wavelanchooser
 Files: bin/opie-sh-wavelanchooser.sh apps/Opie-SH/opie-sh-wavelanchooser.desktop pics/opie-sh-scripts/qtwavelan.png
 Installed-Size:  0 
 Version: 0.1-20020527-1

@@ -1,3 +1,4 @@
+Package: opie-tinykate-syntax-web
 Files: share/tinykate/syntax/css.xml share/tinykate/syntax/html.xml share/tinykate/syntax/javascript.xml
 Priority: optional
 Section: opie/applications

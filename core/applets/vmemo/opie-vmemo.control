@@ -1,3 +1,4 @@
+Package: opie-vmemo
 Files: plugins/applets/libvmemoapplet.so*
 Priority: optional
 Section: opie/system

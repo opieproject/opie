@@ -1,3 +1,4 @@
+Package: opie-solitaire
 Files: bin/patience apps/Games/patience.desktop pics/cards
 Priority: optional
 Section: opie/games

@@ -1,3 +1,4 @@
+Package: opie-tinykate-syntax-documentation
 Files: share/tinykate/syntax/latex.xml share/tinykate/syntax/postscript.xml share/tinykate/syntax/sgml.xml
 Priority: optional
 Section: opie/applications

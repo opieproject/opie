@@ -1,3 +1,4 @@
+Package: opie-i18n-pt
 Files: i18n/pt/.directory i18n/pt/*.qm
 Priority: optional
 Section: opie/i18n

@@ -1,3 +1,4 @@
+Package: opie-mediummount
 Files: bin/mediummount apps/Settings/medium.desktop pics/mediummount/*
 Priority: optional
 Section: opie/settings

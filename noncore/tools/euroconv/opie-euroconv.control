@@ -1,3 +1,4 @@
+Package: opie-euroconv
 Files: bin/euroconv pics/euroconv/* apps/Applications/euroconv.desktop
 Priority: optional
 Section: opie/applications

@@ -1,3 +1,4 @@
+Package: opie-sh-usbnetctrl
 Files: bin/usbnetctrl.sh apps/Opie-SH/usbnetctrl.desktop pics/opie-sh-scripts/usbnetctrl.png
 Installed-Size:  0 
 Version: $QPE_VERSION-$SUB_VERSION

@@ -1,3 +1,4 @@
+Package: opie-liquid
 Files: plugins/styles/libliquid.so*
 Priority: optional
 Section: opie/system

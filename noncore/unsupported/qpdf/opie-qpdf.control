@@ -1,3 +1,4 @@
+Package: opie-qpdf
 Files: bin/qpdf apps/Applications/qpdf.desktop pics/qpdf/qpdf_icon.png
 Priority: optional
 Section: opie/applications

@@ -1,3 +1,4 @@
+Package: timezones
 Files: root/usr/share/zoneinfo
 Priority: optional
 Section: base

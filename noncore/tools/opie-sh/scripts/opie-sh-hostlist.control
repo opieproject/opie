@@ -1,3 +1,4 @@
+Package: opie-sh-hostlist
 Files: bin/hostlist.sh pics/opie-sh-scripts/hostlist.png apps/Opie-SH/hostlist.desktop share/config/hostlist.cfg
 Installed-Size:  0 
 Version: $QPE_VERSION-$SUB_VERSION

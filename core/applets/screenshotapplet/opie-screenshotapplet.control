@@ -1,3 +1,4 @@
+Package: opie-screenshotapplet
 Files: plugins/applets/libscreenshotapplet.so* 
 Priority: optional
 Section: opie/system

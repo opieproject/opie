@@ -1,3 +1,4 @@
+Package: opie-bootsplash
 Files: etc/init.d/bootsplash etc/rcS.d/S01bootsplash pics/bootsplash/bootlogo
 Priority: optinal
 Section: opie/system

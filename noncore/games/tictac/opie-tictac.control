@@ -1,3 +1,4 @@
+Package: opie-tictac
 Files: bin/tictac apps/Games/tictac.desktop pics/tictac
 Priority: optional
 Section: opie/games

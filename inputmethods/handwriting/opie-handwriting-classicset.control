@@ -1,3 +1,4 @@
+Package: opie-handwriting-classicset
 Files: etc/qimpen/default.conf etc/qimpen/combining.qpt etc/qimpen/asciilower.qpt etc/qimpen/asciiupper.qpt etc/qimpen/numeric.qpt
 Priority: optional
 Section: opie/inputmethods

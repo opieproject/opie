@@ -1,3 +1,4 @@
+Package: opie-wordgame
 Files: bin/wordgame apps/Games/wordgame.desktop pics/wordgame
 Priority: optional
 Section: opie/games

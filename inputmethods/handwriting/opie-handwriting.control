@@ -1,3 +1,4 @@
+Package: opie-handwriting
 Files: plugins/inputmethods/libqhandwriting.so*
 Priority: optional
 Section: opie/inputmethods

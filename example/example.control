@@ -1,3 +1,4 @@
+Package: example
 Files: bin/example apps/Applications/example.desktop pics/example.png
 Priority: optional
 Section: opie/applications

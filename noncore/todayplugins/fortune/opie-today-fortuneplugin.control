@@ -1,3 +1,4 @@
+Package: opie-today-fortuneplugin
 Files: plugins/today/libtodayfortuneplugin.so*
 Priority: optional
 Section: opie/applications

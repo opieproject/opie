@@ -1,3 +1,4 @@
+Package: opie-drawpad
 Files: bin/drawpad apps/1Pim/drawpad.desktop pics/drawpad
 Priority: optional
 Section: opie/applications

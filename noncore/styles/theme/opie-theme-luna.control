@@ -1,3 +1,4 @@
+Package: opie-theme-luna
 Files: plugins/styles/themes/luna.themerc plugins/styles/pixmaps/luna/*.png
 Priority: optional
 Section: opie/system

@@ -1,3 +1,4 @@
+Package: opie-backup
 Files: bin/backup pics/backup apps/Settings/backup.desktop
 Priority: optional
 Version: $QPE_VERSION-$SUB_VERSION

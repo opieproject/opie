@@ -1,3 +1,4 @@
+Package: opie-quickexec
 Files: bin/quickexec
 Priority: required
 Section: opie/applications

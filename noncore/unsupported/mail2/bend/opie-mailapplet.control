@@ -1,3 +1,4 @@
+Package: opie-mailapplet
 Files: plugins/applets/libbend.so*
 Priority: optional
 Section: opie/applications

@@ -1,3 +1,4 @@
+Package: opie-bluepin
 Files: bin/bluepin
 Priority: optional
 Section: opie/applications

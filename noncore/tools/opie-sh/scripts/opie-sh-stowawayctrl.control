@@ -1,3 +1,4 @@
+Package: opie-sh-stowawayctrl
 Files: bin/stowctrl.sh apps/Opie-SH/stowctrl.desktop pics/opie-sh-scripts/stowctrl.png
 Installed-Size:  0 
 Version: $QPE_VERSION-$SUB_VERSION

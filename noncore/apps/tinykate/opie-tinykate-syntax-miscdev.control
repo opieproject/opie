@@ -1,3 +1,4 @@
+Package: opie-tinykate-syntax-miscdev
 Files: share/tinykate/syntax/ada.xml share/tinykate/syntax/eiffel.xml share/tinykate/syntax/ferite.xml share/tinykate/syntax/fortran.xml share/tinykate/syntax/haskell.xml share/tinykate/syntax/literate-haskell.xml share/tinykate/syntax/objectivec.xml share/tinykate/syntax/sather.xml share/tinykate/syntax/scheme.xml
 Priority: optional
 Section: opie/applications

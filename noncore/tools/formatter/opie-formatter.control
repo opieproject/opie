@@ -1,3 +1,4 @@
+Package: opie-formatter
 Files: bin/formatter pics/formatter/devices.png apps/Settings/formatter.desktop
 Priority: optional
 Section: opie/applications

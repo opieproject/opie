@@ -1,3 +1,4 @@
+Package: opie-tinykate-syntax-misc
 Files: share/tinykate/syntax/idconsole.xml share/tinykate/syntax/matlab.xml share/tinykate/syntax/verilog.xml share/tinykate/syntax/vhdl.xml
 Priority: optional
 Section: opie/applications

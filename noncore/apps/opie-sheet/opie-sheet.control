@@ -1,3 +1,4 @@
+Package: opie-sheet
 Files: bin/sheetqt apps/Applications/opie-sheet.desktop help/en/html/sheetqt.html pics/opie-sheet/sheetqt.png
 Priority: optional
 Section: opie/applications

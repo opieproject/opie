@@ -1,3 +1,4 @@
+Package: opie-bluetoothapplet
 Files: plugins/applets/libbluetoothapplet.so* pics/bluetoothapplet/*
 Priority: optional
 Section: opie/system

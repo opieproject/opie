@@ -1,3 +1,4 @@
+Package: opie-gsmtool
 Files: bin/gsmtool apps/Applications/gsmtool.desktop pics/gsmtool
 Priority: optional
 Section: opie/applications

@@ -1,3 +1,4 @@
+Package: opie-sh-logviewer
 Files: bin/logviewer.sh apps/Opie-SH/logviewer.desktop pics/opie-sh-scripts/logviewer.png
 Installed-Size:  0 
 Version: $QPE_VERSION-$SUB_VERSION

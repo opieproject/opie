@@ -1,3 +1,4 @@
+Package: opie-keytabs
 Files: etc/keytabs/*
 Priority: optional
 Section: opie/applications

@@ -1,3 +1,4 @@
+Package: opie-filebrowser
 Files: bin/filebrowser apps/Applications/filebrowser.desktop pics/filebrowser/
 Priority: optional
 Section: opie/applications

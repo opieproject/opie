@@ -1,3 +1,4 @@
+Package: opie-ftp
 Files: bin/opieftp pics/opieftp apps/Applications/opieftp.desktop
 Priority: optional
 Section: Communications

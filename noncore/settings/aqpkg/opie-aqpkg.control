@@ -1,3 +1,4 @@
+Package: opie-aqpkg
 Files: bin/aqpkg pics/aqpkg apps/Settings/aqpkg.desktop 
 Priority: optional
 Section: Settings

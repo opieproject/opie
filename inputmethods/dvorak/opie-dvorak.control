@@ -1,3 +1,4 @@
+Package: opie-dvorak
 Files: plugins/inputmethods/libqdvorak.so*
 Priority: optional
 Section: opie/inputmethods

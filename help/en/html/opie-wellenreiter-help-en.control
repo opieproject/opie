@@ -1,3 +1,4 @@
+Package: opie-wellenreiter-help-en
 Files: help/en/html/wellenreiter.html
 Priority: optional
 Section: opie/onlinedoc

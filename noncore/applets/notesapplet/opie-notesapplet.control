@@ -1,3 +1,4 @@
+Package: opie-notesapplet
 Files: plugins/applets/libnotesapplet.so* 
 Priority: optional
 Section: opie/system

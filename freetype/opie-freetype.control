@@ -1,3 +1,4 @@
+Package: opie-freetype
 Files: plugins/fontfactories/libfreetypefactory*
 Priority: optional
 Section: opie/plugins

@@ -1,3 +1,4 @@
+Package: opie-minesweep
 Files: bin/minesweep apps/Games/minesweep.desktop pics/minesweep
 Priority: optional
 Section: opie/games

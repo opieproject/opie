@@ -1,3 +1,4 @@
+Package: opie-i18n-ko
 Files: i18n/ko/.directory i18n/ko/*.qm
 Priority: optional
 Section: opie/i18n

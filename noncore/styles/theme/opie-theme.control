@@ -1,3 +1,4 @@
+Package: opie-theme
 Files: plugins/styles/libtheme.so*
 Priority: optional
 Section: opie/system

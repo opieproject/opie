@@ -1,3 +1,4 @@
+Package: opie-helpbrowser
 Files: bin/helpbrowser apps/Applications/helpbrowser.desktop docs pics/helpbrowser
 Priority: optional
 Section: opie/applications

@@ -1,3 +1,4 @@
+Package: opie-go
 Files: bin/go apps/Games/go.desktop pics/go
 Priority: optional
 Section: opie/games

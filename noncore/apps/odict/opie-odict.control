@@ -1,3 +1,4 @@
+Package: opie-odict
 Files: bin/odict apps/Applications/odict.desktop pics/odict/odict.png
 Priority: optional
 Section: applications

@@ -1,3 +1,4 @@
+Package: opie-checkbook
 Files: bin/checkbook apps/Applications/checkbook.desktop pics/checkbook
 Priority: optional
 Section: applications

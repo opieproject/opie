@@ -1,3 +1,4 @@
+Package: opie-deco-flat
 Files: plugins/decorations/libflat.so*
 Priority: optional
 Section: opie/decorations

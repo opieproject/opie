@@ -1,3 +1,4 @@
+Package: opie-button-settings
 Files: bin/buttonsettings apps/Settings/Button.desktop pics/buttonsettings/*.png
 Priority: optional
 Section: opie/settings

@@ -1,3 +1,4 @@
+Package: opie-sysinfo
 Files: bin/sysinfo apps/Settings/sysinfo.desktop pics/sysinfo
 Priority: optional
 Section: opie/applications

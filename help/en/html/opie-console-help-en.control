@@ -1,3 +1,4 @@
+Package: opie-console-help-en
 Files: help/en/html/opie-console.html help/en/html/opie-console/*
 Priority: optional
 Section: opie/onlinedoc

@@ -1,3 +1,4 @@
+Package: opie-login
 Files: bin/opie-login share/opie-login/opie-session share/opie-login/pre-session share/opie-login/post-session
 Priority: optional
 Section: opie/system

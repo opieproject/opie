@@ -1,3 +1,4 @@
+Package: opie-keypebble
 Files: bin/keypebble apps/Applications/keypebble.desktop pics/vnc
 Priority: optional
 Section: opie/applications

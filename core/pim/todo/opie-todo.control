@@ -1,3 +1,4 @@
+Package: opie-todo
 Files: bin/todolist apps/1Pim/todo.desktop pics/todo
 Priority: optional
 Section: opie/applications

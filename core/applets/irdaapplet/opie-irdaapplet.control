@@ -1,3 +1,4 @@
+Package: opie-irdaapplet
 Files: plugins/applets/libirdaapplet.so* pics/irdaapplet/* sounds/irdaapplet/*.wav
 Priority: optional
 Section: opie/system
