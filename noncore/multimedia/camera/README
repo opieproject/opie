@@ -1,0 +1,43 @@
+/************************************************************************
+/*                    Opie - Camera
+/*               ===============================
+/*
+/*                    Version: 1.0.1
+/************************************************************************
+
+----------------------------------------------------
+ Release Notes for Opie-Camera / December 2003
+----------------------------------------------------
+
+=====================
+=  Supported Devices
+=====================
+
+- Sharp CE-AG06 Digital CF Camera
+
+======================
+= Precompiled Binaries
+=====================
+
+- Precompiled binaries are available at http://vanille.de/feed
+
+=====================
+=       Run
+=====================
+
+- If you run this on OpenZaurus, make sure to have the package
+  sharp-camera-support installed.
+
+=====================
+=     Credits       =
+=====================
+
+- Opie-Camera is (C) 2002-2003 Michael 'Mickey' Lauer
+
+=====================
+=      Links        =
+=====================
+
+- Opie-Camera:              http://vanille.de/projects/camera.html
+- Opie Project:             http://opie.handhelds.org
+- OpenZaurus Project:       http://openzaurus.org

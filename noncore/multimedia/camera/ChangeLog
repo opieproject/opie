@@ -1,0 +1,26 @@
+2003-??-??	Michael Lauer		<mickey@Vanille.de>
+
+	* Added persistant configuration settings
+	* Refactored the camera API into a library
+	* Added a command line capturing application (e.g. for web-cam)
+
+2003-04-25	Michael Lauer		<mickey@Vanille.de>
+	
+        * Released as Version 1.0
+	* Added video capturing
+
+2003-04-08	Michael Lauer		<mickey@Vanille.de>
+
+	* Released as Version 0.2 (Beta)
+	* Added photo capturing
+	* Made the main layout a full preview window
+	* Implemented portrait/landscape switching based on OpenZaurus life-rotation
+
+2003-04-06	Michael Lauer 		<mickey@Vanille.de>
+
+	* Released as Version 0.1 (Alpha)
+	* Added picture preview widget
+
+2003-04-01	Michael Lauer		<mickey@Vanille.de>
+
+	* Started with Opie-Camera application by implementing the core camera API
