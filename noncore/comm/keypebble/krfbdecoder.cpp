@@ -209,7 +209,7 @@ void KRFBDecoder::gotDesktopName()
 
   qWarning( "Got desktop name" );
 
-  disconnect( con, SIGNAL( gotEnoughData() ), 
+  disconnect( con, SIGNAL( gotEnoughData() ),
 	      this, SLOT( gotDesktopName() ) );
 
   char *buf = new char[ info->nameLength + 1 ];
@@ -263,7 +263,7 @@ void KRFBDecoder::decidePixelFormat()
 	   "eight bit %d, chosenDepth=%d",
 	   screenDepth,
 	   info->depth,
-	   bestDepth, 
+	   bestDepth,
 	   con->options()->colors256, chosenDepth );
 
   format->depth = chosenDepth;
@@ -373,7 +373,7 @@ void KRFBDecoder::gotUpdateHeader()
 
   //  qWarning( "Got update header" );
 
-  disconnect( con, SIGNAL( gotEnoughData() ), 
+  disconnect( con, SIGNAL( gotEnoughData() ),
 	      this, SLOT( gotUpdateHeader() ) );
 
   CARD8 msgType;
@@ -397,7 +397,7 @@ void KRFBDecoder::gotUpdateHeader()
       currentState = Error;
       emit error( protocolError );
     }
-    return;    
+    return;
   }
 
   CARD8 padding;
@@ -420,7 +420,7 @@ void KRFBDecoder::gotRectHeader()
 
   //  qWarning( "Got rect header" );
 
-  disconnect( con, SIGNAL( gotEnoughData() ), 
+  disconnect( con, SIGNAL( gotEnoughData() ),
 	      this, SLOT( gotRectHeader() ) );
 
   con->read( &x, 2 );
@@ -436,7 +436,7 @@ void KRFBDecoder::gotRectHeader()
   con->read( &encoding, 4 );
 
   //  CARD32 encodingLocal = Swap32IfLE( encoding );
-  //  qWarning( "Rect: x=%d, y= %d, w=%d, h=%d, encoding=%ld", 
+  //  qWarning( "Rect: x=%d, y= %d, w=%d, h=%d, encoding=%ld",
   //	   x, y, w, h, encodingLocal );
 
   //
@@ -520,7 +520,7 @@ void KRFBDecoder::gotRawRectChunk()
 {
   assert( currentState == AwaitingRawRectChunk );
 
-  disconnect( con, SIGNAL( gotEnoughData() ), 
+  disconnect( con, SIGNAL( gotEnoughData() ),
               this, SLOT( gotRawRectChunk() ) );
 
   //  qWarning( "Got raw rect chunk" );
@@ -528,7 +528,7 @@ void KRFBDecoder::gotRawRectChunk()
   //
   // Read the rect data and copy it to the buffer.
   //
-  
+
   // TODO: Replace this!
   int count = lines * w * format->bpp / 8;
   char *hack = new char[ count ];
@@ -720,7 +720,7 @@ void KRFBDecoder::gotServerCutText()
   cutbuf[ serverCutTextLen ] = '\0';
 
   /* For some reason QApplication::clipboard()->setText() segfaults when called
-   * from within keypebble's mass of signals and slots 
+   * from within keypebble's mass of signals and slots
   qWarning( "Server cut: %s", cutbuf );
 
   QString cutText( cutbuf ); // DANGER!!
@@ -798,44 +798,33 @@ void KRFBDecoder::sendKeyReleaseEvent( QKeyEvent *event )
 }
 
 
+
+
+//
+// The RFB protocol spec says 'For most ordinary keys, the 'keysym'
+// is the same as the corresponding ASCII value.', but doesn't
+// elaborate what the most ordinary keys are.  The spec also lists
+// a set (possibly subset, it's unspecified) of mappings for
+// "other common keys" (backspace, tab, return, escape, etc).
+//
 int KRFBDecoder::toKeySym( QKeyEvent *k )
 {
-  int ke = 0;
 
-  ke = k->ascii();
-  // Markus: Crappy hack. I dont know why lower case letters are
-  // not defined in qkeydefs.h. The key() for e.g. 'l' == 'L'. 
-  // This sucks. :-(
+    //
+    // Try and map these "other common keys" first.
+    //
+    if ((k->key() >= Qt::Key_Escape) && (k->key() <= Qt::Key_F12)) {
+	for(int i = 0; keyMap[i].keycode != 0; i++) {
+	    if (k->key() == keyMap[i].keycode) {
+		return keyMap[i].keysym;
+	    }
+	}
+    }
 
-  if ( (ke == 'a') || (ke == 'b') || (ke == 'c') || (ke == 'd') 
-       || (ke == 'e') || (ke == 'f') || (ke == 'g') || (ke == 'h')
-       || (ke == 'i') || (ke == 'j') || (ke == 'k') || (ke == 'l')
-       || (ke == 'm') || (ke == 'n') || (ke == 'o') || (ke == 'p')
-       || (ke == 'q') || (ke == 'r') || (ke == 's') || (ke == 't')
-       || (ke == 'u') || (ke == 'v') ||( ke == 'w') || (ke == 'x')
-       || (ke == 'y') || (ke == 'z') ) {
-    ke = k->key();
-    ke = ke + 0x20;
-    return ke;
-  }
-
-  // qkeydefs = xkeydefs! :-)
-  if ( ( k->key() >= 0x0a0 ) && k->key() <= 0x0ff )
-      return k->key();
-
-  if ( ( k->key() >= 0x20 ) && ( k->key() <= 0x7e ) )
-    return k->key();
-  
-  // qkeydefs != xkeydefs! :-(
-  // This is gonna suck :-(
-
-  int i = 0;
-  while ( keyMap[i].keycode ) {
-    if ( k->key() == keyMap[i].keycode )
-	return keyMap[i].keysym;
-    i++;
-  }
-
-  return 0;
+    //
+    // If these keys aren't matched, return the ascii code and let the
+    // server figure it out.  We don't return k->key(), as the data in
+    // key differs between input methods, and we don't want special cases.
+    //
+    return k->ascii();
 }
-
