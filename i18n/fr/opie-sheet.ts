@@ -205,28 +205,8 @@
         <translation>S&amp;auvegarder sous</translation>
     </message>
     <message>
-        <source>Quit</source>
-        <translation>Quitter</translation>
-    </message>
-    <message>
-        <source>&amp;Quit</source>
-        <translation>&amp;Quitter</translation>
-    </message>
-    <message>
-        <source>General Help</source>
-        <translation>Aide général</translation>
-    </message>
-    <message>
-        <source>&amp;General</source>
-        <translation>&amp;Général</translation>
-    </message>
-    <message>
         <source>About Opie Sheet</source>
         <translation>A propos du tableur Opie</translation>
-    </message>
-    <message>
-        <source>&amp;About</source>
-        <translation>&amp;A propos</translation>
     </message>
     <message>
         <source>Accept</source>
@@ -501,10 +481,6 @@
         <translation>&amp;Donnée</translation>
     </message>
     <message>
-        <source>&amp;Help</source>
-        <translation>&amp;Aide</translation>
-    </message>
-    <message>
         <source>&amp;Row</source>
         <translation>&amp;Rangé</translation>
     </message>
@@ -663,10 +639,6 @@
     <message>
         <source>Functions</source>
         <translation>Fonctions</translation>
-    </message>
-    <message>
-        <source>Help file not found!</source>
-        <translation>Fichier d&apos;aide non trouvé!</translation>
     </message>
     <message>
         <source>&amp;Number of rows:</source>

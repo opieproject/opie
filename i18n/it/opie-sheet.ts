@@ -205,28 +205,8 @@
         <translation>S&amp;alva con nome</translation>
     </message>
     <message>
-        <source>Quit</source>
-        <translation>Esci</translation>
-    </message>
-    <message>
-        <source>&amp;Quit</source>
-        <translation>&amp;Esci</translation>
-    </message>
-    <message>
-        <source>General Help</source>
-        <translation>Aiuto</translation>
-    </message>
-    <message>
-        <source>&amp;General</source>
-        <translation>&amp;Aiuto</translation>
-    </message>
-    <message>
         <source>About Opie Sheet</source>
         <translation>Informazioni su Opie Sheet</translation>
-    </message>
-    <message>
-        <source>&amp;About</source>
-        <translation>&amp;Informazioni</translation>
     </message>
     <message>
         <source>Accept</source>
@@ -501,10 +481,6 @@
         <translation>&amp;Data</translation>
     </message>
     <message>
-        <source>&amp;Help</source>
-        <translation>&amp;Aiuto</translation>
-    </message>
-    <message>
         <source>&amp;Row</source>
         <translation>&amp;Riga</translation>
     </message>
@@ -663,10 +639,6 @@
     <message>
         <source>Functions</source>
         <translation>Funzioni</translation>
-    </message>
-    <message>
-        <source>Help file not found!</source>
-        <translation>File di aiuto non trovato!</translation>
     </message>
     <message>
         <source>&amp;Number of rows:</source>

@@ -204,28 +204,8 @@
         <translation>Grabar &amp;como</translation>
     </message>
     <message>
-        <source>Quit</source>
-        <translation>Salir</translation>
-    </message>
-    <message>
-        <source>&amp;Quit</source>
-        <translation>&amp;Salir</translation>
-    </message>
-    <message>
-        <source>General Help</source>
-        <translation>Ayuda general</translation>
-    </message>
-    <message>
-        <source>&amp;General</source>
-        <translation>&amp;General</translation>
-    </message>
-    <message>
         <source>About Opie Sheet</source>
         <translation>Sobre Opie Sheet</translation>
-    </message>
-    <message>
-        <source>&amp;About</source>
-        <translation>&amp;Sobre</translation>
     </message>
     <message>
         <source>Accept</source>
@@ -500,10 +480,6 @@
         <translation>&amp;Datos</translation>
     </message>
     <message>
-        <source>&amp;Help</source>
-        <translation>&amp;Ayuda</translation>
-    </message>
-    <message>
         <source>&amp;Row</source>
         <translation>Fil&amp;a</translation>
     </message>
@@ -662,34 +638,6 @@
     <message>
         <source>Functions</source>
         <translation>Funciones</translation>
-    </message>
-    <message>
-        <source>Help file not found!</source>
-        <translation>¡No encontré la ayuda!</translation>
-    </message>
-    <message>
-        <source>Opie Sheet
-Spreadsheet Software for Opie
-QWDC Beta Winner (as Sheet/Qt)
-
-Developed by: Serdar Ozler
-Release 1.0.1
-Release Date: July 04, 2002
-
-This product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.
-
-http://qtopia.sitebest.com</source>
-        <translation type="obsolete">Opie Sheet
-Hoja de Cálculo de Opie
-QWDC Beta Winner (as Sheet/Qt)
-
-Desarrollado por: Serdar Ozler
-Versión 1.0.1
-Fecha: 04 julio 2002
-
-Este producto está bajo licencia GPL. Es de libre distribución. Si quiere la última versión y el código fuente, por favor visite el sitio web.
-
-http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>&amp;Number of rows:</source>

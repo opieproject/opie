@@ -204,28 +204,8 @@
         <translation>另存新檔(&amp;A)</translation>
     </message>
     <message>
-        <source>Quit</source>
-        <translation>離開</translation>
-    </message>
-    <message>
-        <source>&amp;Quit</source>
-        <translation>離開(&amp;Q)</translation>
-    </message>
-    <message>
-        <source>General Help</source>
-        <translation>一般說明</translation>
-    </message>
-    <message>
-        <source>&amp;General</source>
-        <translation>一般(&amp;G)</translation>
-    </message>
-    <message>
         <source>About Opie Sheet</source>
         <translation>關於 Opie 試算表</translation>
-    </message>
-    <message>
-        <source>&amp;About</source>
-        <translation>關於(&amp;A)</translation>
     </message>
     <message>
         <source>Accept</source>
@@ -500,10 +480,6 @@
         <translation>資料(&amp;D)</translation>
     </message>
     <message>
-        <source>&amp;Help</source>
-        <translation>說明(&amp;H)</translation>
-    </message>
-    <message>
         <source>&amp;Row</source>
         <translation>列(&amp;R)</translation>
     </message>
@@ -664,34 +640,6 @@
         <translation>函數</translation>
     </message>
     <message>
-        <source>Help file not found!</source>
-        <translation>找不到說明檔!</translation>
-    </message>
-    <message>
-        <source>Opie Sheet
-Spreadsheet Software for Opie
-QWDC Beta Winner (as Sheet/Qt)
-
-Developed by: Serdar Ozler
-Release 1.0.1
-Release Date: July 04, 2002
-
-This product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.
-
-http://qtopia.sitebest.com</source>
-        <translation>Opie 試算表
-Opie 的試算表軟體
-QWDC Beta Winner (以 Sheet/Qt)
-
-開發者: Serdar Ozler
-釋出版本 1.0.1
-釋出日期: 七月 04, 2002
-
-這個產品是依 GPL 授權. 它可以自由地散佈. 如果您想要取得最新的版本和原始碼, 請參觀下列網站.
-
-http://qtopia.sitebest.com</translation>
-    </message>
-    <message>
         <source>&amp;Number of rows:</source>
         <translation>列數(&amp;N):</translation>
     </message>
@@ -746,6 +694,20 @@ http://qtopia.sitebest.com</translation>
     <message>
         <source>Entire &amp;column</source>
         <translation>整欄(&amp;C)</translation>
+    </message>
+    <message>
+        <source>Opie Sheet
+Spreadsheet Software for Opie
+QWDC Beta Winner (as Sheet/Qt)
+
+Developed by: Serdar Ozler
+Release 1.0.2
+Release Date: October 08, 2002
+
+This product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.
+
+http://qtopia.sitebest.com</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

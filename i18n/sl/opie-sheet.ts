@@ -204,27 +204,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Quit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>General Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;General</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>About Opie Sheet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -500,10 +480,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Row</source>
         <translation type="unfinished"></translation>
     </message>
@@ -661,10 +637,6 @@
     </message>
     <message>
         <source>Functions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Help file not found!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
