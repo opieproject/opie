@@ -2,6 +2,6 @@
     boolean "libopie2db (database related classes)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBSQLITE_DEP
-    comment "libopie2db needs a libqpe and libopie2core"
+    comment "libopie2db needs a libqpe, sqlite and libopie2core"
     depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBSQLITE_DEP)
 
