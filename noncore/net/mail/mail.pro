@@ -43,7 +43,7 @@ INTERFACES	 = editaccountsui.ui \
                composemailui.ui
 
 INCLUDEPATH += $(OPIEDIR)/include
-LIBS	    += -lqpe -letpan -lssl -lcrypto
+LIBS	    += -lqpe -letpan -lssl -lcrypto -lopie
 TARGET       = opiemail
 
 include ( $(OPIEDIR)/include.pro )
