@@ -108,17 +108,6 @@ QString Resource::findPixmap( const QString &pix )
     if ( QFile( f ).exists() )
 	return f;
 
-#ifdef LIBQPE_NO_INLINE_IMAGES
-    QString picsPathInline = picsPath + "inline/";
-    // Common case optimizations...
-    f = picsPathInline + pix + ".png";
-    if ( QFile( f ).exists() )
-	return f;
-    f = picsPathInline + pix + ".xpm";
-    if ( QFile( f ).exists() )
-	return f;
-#endif
-
     // All formats...
     QStrList fileFormats = QImageIO::inputFormats();
     QString ff = fileFormats.first();
