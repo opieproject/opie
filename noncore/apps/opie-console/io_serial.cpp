@@ -157,7 +157,7 @@ void IOSerial::errorOccured() {
 }
 
 void IOSerial::dataArrived() {
-    QByteArray array(4096);
+    QByteArray array(4097);
 
     int len = read(m_fd, array.data(), 4096);
     if (len == 0)
@@ -175,3 +175,8 @@ QString IOSerial::identifier() const {
 QString IOSerial::name() const {
     return "RS232 Serial IO Layer";
 }
+int IOSerial::rawIO()const {
+    int fd = ::open(m_device, O_RDWR  );
+
+    return fd;
+};

@@ -12,3 +12,6 @@ IOLayer::IOLayer(const Profile &)
 
 IOLayer::~IOLayer() {
 }
+int IOLayer::rawIO()const{
+    return -1;
+}

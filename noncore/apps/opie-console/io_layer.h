@@ -49,6 +49,13 @@ public:
      * a short name
      */
     virtual QString name() const = 0;
+
+    /**
+     * a file descriptor which opens
+     * the device for io but does not
+     * do any ioctling on it...
+     */
+    virtual int rawIO()const;
 signals:
     /**
      * received input as QCString
