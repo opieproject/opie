@@ -200,7 +200,7 @@ Rechargez la batterie de sauvegarde SVP.</translation>
     </message>
     <message>
         <source>Shutdown</source>
-        <translation>Shutdown</translation>
+        <translation>Arrêter</translation>
     </message>
     <message>
         <source>&lt;p&gt;
@@ -214,7 +214,7 @@ Ces options sont fournies pour être utilisées durant le développement et les 
     </message>
     <message>
         <source>Shutdown...</source>
-        <translation>Shutdown...</translation>
+        <translation>Arrêter...</translation>
     </message>
 </context>
 <context>
