@@ -1,10 +1,10 @@
 Package: opie-camera
-Files: bin/opiecam pics/camera apps/Applications/camera.desktop
+Files: bin/opiecam bin/capture pics/camera apps/Applications/camera.desktop
 Priority: optional
 Section: opie/applications
 Maintainer: Michael 'Mickey' Lauer <mickeyl@handhelds.org> 
 Architecture: arm
-Version: 1.0
+Version: 1.0.1-$SUB_VERSION
 Depends: task-opie-minimal, libopie2 (1.8.1)
 Description: A Camera Application
  A Camera Application to use with the Sharp CE-AG06.
