@@ -4,79 +4,79 @@
     <name>MainWindow</name>
     <message>
         <source>New Task</source>
-        <translation type="unfinished">Nuovo</translation>
+        <translation>Nuovo</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished">Modifica</translation>
+        <translation>Modifica</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation type="unfinished">Visualizza</translation>
+        <translation>Visualizza</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation type="unfinished">Cancella...</translation>
+        <translation>Cancella...</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation type="unfinished">Cancella tutti...</translation>
+        <translation>Cancella tutti...</translation>
     </message>
     <message>
         <source>Delete completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancellazione completata</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished">Copia</translation>
+        <translation>Copia</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished">Trasmetti via IrDA</translation>
+        <translation>Trasmetti via IrDA</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished">Trova</translation>
+        <translation>Trova</translation>
     </message>
     <message>
         <source>Completed tasks</source>
-        <translation type="unfinished">Impegni completati</translation>
+        <translation>Impegni completati</translation>
     </message>
     <message>
         <source>Show Deadline</source>
-        <translation type="unfinished">Mostra scadenza</translation>
+        <translation>Mostra Scadenza</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished">Dati</translation>
+        <translation>Dati</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished">Categoria</translation>
+        <translation>Categoria</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opzioni</translation>
+        <translation>Opzioni</translation>
     </message>
     <message>
         <source>Show over due</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra da fare</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra</translation>
     </message>
     <message>
         <source>New from template</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuovo da modello</translation>
     </message>
     <message>
         <source>All Categories</source>
-        <translation type="unfinished">Tutte</translation>
+        <translation>Tutte</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished">Spazio esaurito</translation>
+        <translation>Spazio esaurito</translation>
     </message>
     <message>
         <source>Todo was unable
@@ -85,7 +85,7 @@ Free up some space
 and try again.
 
 Quit Anyway?</source>
-        <translation type="unfinished">Impossibile salvare le modifiche.
+        <translation>Impossibile salvare le modifiche.
 Liberare dello spazio e
 ritentare.
 
@@ -93,31 +93,31 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Todo</source>
-        <translation type="unfinished">Impegni</translation>
+        <translation>Impegni</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type="unfinished">Impossibile modificare i dati, sincronizzazione in corso</translation>
+        <translation>Impossibile modificare i dati, sincronizzazione in corso</translation>
     </message>
     <message>
         <source>all tasks?</source>
-        <translation type="unfinished"></translation>
+        <translation>tutti gli impegni?</translation>
     </message>
     <message>
         <source>all completed tasks?</source>
-        <translation type="unfinished"></translation>
+        <translation>tutti gli impegni completati?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished">Vuota</translation>
+        <translation>Vuota</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;%1 nuovi impegni inseriti.&lt;p&gt;Vuoi aggiungerli nella tua Todolist?</translation>
     </message>
     <message>
         <source>New Tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuovi Impegni</translation>
     </message>
 </context>
 <context>
@@ -207,82 +207,82 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona</translation>
     </message>
     <message>
         <source>Group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppo:</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished">Modifica</translation>
+        <translation>Modifica</translation>
     </message>
 </context>
 <context>
     <name>TableView</name>
     <message>
         <source>C.</source>
-        <translation type="unfinished">C.</translation>
+        <translation>C.</translation>
     </message>
     <message>
         <source>Prior.</source>
-        <translation type="unfinished">Prior.</translation>
+        <translation>Prior.</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Descrizione</translation>
+        <translation>Descrizione</translation>
     </message>
     <message>
         <source>Deadline</source>
-        <translation type="unfinished">Scadenza</translation>
+        <translation>Scadenza</translation>
     </message>
     <message>
         <source>Table View</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra Tabella</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessuna</translation>
     </message>
 </context>
 <context>
     <name>TemplateDialog</name>
     <message>
         <source>Template Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica Modelli</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina</translation>
     </message>
 </context>
 <context>
     <name>TemplateDialogImpl</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>New Template %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuovo Modello %1</translation>
     </message>
 </context>
 <context>
     <name>TemplateEditor</name>
     <message>
         <source>Configure Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica Modello</translation>
     </message>
 </context>
 <context>

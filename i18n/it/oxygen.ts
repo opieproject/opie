@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CalcDlg</name>
     <message>
@@ -55,7 +56,7 @@
     </message>
     <message>
         <source>Chemical Formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula Chimica</translation>
     </message>
 </context>
 <context>

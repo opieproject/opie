@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CellFormat</name>
     <message>
@@ -759,7 +760,17 @@ Release Date: October 08, 2002
 This product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.
 
 http://qtopia.sitebest.com</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Sheet
+Spreadsheet Software per Opie
+QWDC Beta Winner (come Sheet/Qt)
+
+Sviluppato da: Serdar Ozler
+Versione 1.0.2
+Data Versione: 08 October 2002
+
+Questo prodotto è sotto licenza GPL. E&apos; liberamente distribuibile. Per la versione aggiornata ed il codice sorgente, visitare il sito web:
+
+http://qtopia.sitebest.com</translation>
     </message>
 </context>
 <context>

@@ -48,14 +48,14 @@
     </message>
     <message>
         <source>Click here to launch the associated app</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicca qui per lanciare l&apos;app. associata</translation>
     </message>
 </context>
 <context>
     <name>TodayBase</name>
     <message>
         <source>Today</source>
-        <translation type="unfinished">Oggi</translation>
+        <translation>Oggi</translation>
     </message>
     <message>
         <source>Opiemail not installed</source>
@@ -67,11 +67,11 @@
     </message>
     <message>
         <source>Today by Maximilian Rei&#xdf;</source>
-        <translation type="unfinished"></translation>
+        <translation>Oggi by Maximilian Reiß</translation>
     </message>
     <message>
         <source>Click here to get to the config dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicca qui per andare alle impostazioni</translation>
     </message>
 </context>
 <context>
@@ -114,23 +114,23 @@ resume?(new line)
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin ore use the arrow buttons on the right to change the appearance order</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicca qui per attivare/disattivare il plugin o utilizza le frecce direzionali sulla destra per modificare l&apos;ordine di visualizzazione</translation>
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicca qui se l&apos;applicazione deve partire automaticamente al riavvio.</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Quanti minuti il PDA deve rimanere spento prima che entri in funzione l&apos;autostart</translation>
     </message>
     <message>
         <source>Icon size</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensioni Icona</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation type="unfinished"></translation>
+        <translation>Imposta la dimensione dell&apos;icona in pixel</translation>
     </message>
 </context>
 <context>

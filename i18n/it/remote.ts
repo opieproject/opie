@@ -1,0 +1,22 @@
+<!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
+<context>
+    <name>MainView</name>
+    <message>
+        <source>Remote</source>
+        <translation>Telecomando</translation>
+    </message>
+    <message>
+        <source>Learn</source>
+        <translation>Riconosci</translation>
+    </message>
+    <message>
+        <source>Config</source>
+        <translation>Configurazione</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>Aiuto</translation>
+    </message>
+</context>
+</TS>
