@@ -142,12 +142,13 @@ findFile()
 {
     local path=
     if [ $# = 1 ]; then
-        find $1 -type f -o -type b -o -type c -o -type l -o -type d 
+        find $1 -type f -o -type b -o -type c -o -type l
+        find $1 -type d -a -empty
     else
-        find . -type f -o -type b -o -type c -o -type l -o -type d | \
-	sed -e "s,\./\(.*\),\\1,g"
+        find . -type f -o -type b -o -type c -o -type l | \
+	    sed -e "s,\./\(.*\),\\1,g"
+        find . -type d -a -empty
     fi
-
 }
 
 _pushd() { oldpwd=`pwd`; cd $1; }
@@ -164,13 +165,9 @@ expandMaskToList()
     local _tmpFileList=
     for f in $_list; do
         if [ -d $f ]; then
-            find="`findFile $f`"
-            if [ -z "$find" ]; then
-                find="$f"
-            fi
-            f="$f `findFile $f`"
+            f="`findFile $f`"
         fi
-        _tmpFileList=$f" $_tmpFileList"
+        _tmpFileList="`eval echo $f` $_tmpFileList"
     done
     setVar $2 "$_tmpFileList"
 }
@@ -179,6 +176,9 @@ createFileList()
 {
     local excludeMask
     local includeMask
+    local includemaskpresent=0
+    local excludemaskpresent=0
+
     if (cat $1|grep -q ^FileExcludeMask); then
         excludemaskpresent=1
         excludeMask=$(eval echo '"'$(sed -n -e "s,^FileExcludeMask: *,,p" $1)'"')
@@ -193,25 +193,26 @@ createFileList()
         fi
     fi
  
-    excludeMask="$excludeMask CONTROL/* usr/share/* CVS/* SCCS/*"
+    _pushd $destdir
+    
+    excludeMask="$excludeMask CONTROL/* usr/share/*"
 
-    if [ $includemaskpresent == 1 ]; then
-        if [ -z "$includeMask" ]; then
-            setVar $2 ""
-            return 0
-        fi
-        _pushd $destdir
-        expandMaskToList "$includeMask" _fileList
-	_popd
-    else
-        _fileList=`cd $destdir && findFile`
+    if [ $includemaskpresent != 1 ]; then
+        includeMask="."
     fi
+
+    if [ -z "$includeMask" ]; then
+        setVar $2 ""
+        _popd
+        return 0
+    fi
+
+    expandMaskToList "$includeMask" _fileList
 
     _excludeList=
     if [ -n "$excludeMask" ]; then
-        _pushd $destdir
         expandMaskToList "$excludeMask" _excludeList
-        _popd
+        _excludeList="$_excludeList `find -name \*CVS\* -o -name \*SCCS\*`"
     fi
 
     local realFileList=
@@ -224,13 +225,15 @@ createFileList()
             fi
         done
         if [ $containedInList = 0 ]; then
-            if [ ! -e $file ]; then
-#                echo "$self: $file not found"
+            if ! [ -e $file -o -L $file ]; then
+                echo "$self: $file not found"
                 missing=1
             fi
             realFileList=$file" $realFileList"
         fi
     done
+
+    _popd
 
     if [ $missing = 1 ]; then
         return 1
@@ -252,17 +255,20 @@ substFile()
 
     if [ ! -e $2 ]; then return 1; fi
 
-    if [ -e $oldfile ]; then
-        newfile=./`echo $1|sed -f $2|sed -e's,^/,,g'`
-        olddir=./`dirname $1`
+    if [ -e $oldfile -o -L $oldfile ]; then
+        newfile=`echo $oldfile|sed -f $2|sed -e's,^/,,g'`
+        olddir=`dirname $oldfile`
+        base=`basename $oldfile`
         newdir=`dirname $newfile`
+
+#        echo >&2 moving $oldfile to $newfile
 
         if [ "$newdir" = "$olddir" ]; then
             return 0
         fi
 
         mkdir -p $newdir
-        mv $1 $newfile
+        mv $olddir/$base $newfile
         rmdir -p $olddir 2>/dev/null
     fi
 }
@@ -270,22 +276,22 @@ substFile()
 stripFiles()
 {
     for f in $1; do
-        stripFile $f
+        stripFile ./$f
     done
 }
 
 substFiles()
 {
     for f in $1; do
-        substFile $f
+        substFile ./$f
     done
 }
 
 substAndStripFiles()
 {
     for f in $1; do
-        stripFile $f
-        substFile $f $2
+        stripFile ./$f
+        substFile ./$f $2
     done
 }
 
@@ -293,6 +299,8 @@ installScript()
 {
     if [ -n "$1" -a -f "$1" ]; then
         destfile=`basename $1`
+        filetype=`echo $destfile|cut -d. -f2`
+        if [ -n "$filetype" ]; then destfile=$filetype; fi
         if [ -n "$subst" ]; then
             sed -f $subst < $1 > $ctrldir/$destfile
         else
@@ -309,14 +317,28 @@ if [ $? != 0 ]; then
     exit 1
 fi
 
-cd $destdir; createFileList $control ipkgFileList
+ctrldir=$tempDir/CONTROL
+
+mkdir -p $ctrldir
+
+if [ ! -e $subst ] || [ -z "$subst" ]; then
+    cat $control > $ctrldir/control.new
+else
+    sed -f $subst < $control > $ctrldir/control.new
+fi
+
+createFileList $ctrldir/control.new ipkgFileList
+
 if [ "$?" != "0" ]; then
     echo "$self: ERROR: missing files, not building $control"
     exit 1
 fi
 
-( cd $destdir && tar cf - $ipkgFileList 2>/dev/null ) | \
-( cd $tempDir && tar xf - 2>/dev/null )
+
+cat $ctrldir/control.new | egrep -v '^(Files|FileExcludeMask|FileIncludeMask):' > $ctrldir/control
+rm -f $ctrldir/control.new
+
+( cd $destdir && tar -cf - $ipkgFileList 2>/dev/null ) | ( cd $tempDir && tar -xf - 2>/dev/null )
 
 if [ -z "$filesubst" ]; then
     ( cd $tempDir && stripFiles "$ipkgFileList" )
@@ -345,16 +367,6 @@ if [ -z "$mkfsjffs2" ]; then
     buildsize=`du -h -s $tempDir | awk '{print $1}'`
 else
     buildsize=`$mkfsjffs2 -r $tempDir | wc -c`
-fi
-
-ctrldir=$tempDir/CONTROL
-
-mkdir -p $ctrldir
-
-if [ ! -e $subst ] || [ -z "$subst" ]; then
-    cat $control | egrep -v '^(FileIncludeMask|FileExcludeMask|Files):' > $ctrldir/control
-else
-    sed -f $subst < $control | egrep -v '^(FileIncludeMask|FileExcludeMask|Files):' > $ctrldir/control
 fi
 
 if [ "$buildsize" != "0" ]; then
