@@ -44,12 +44,12 @@
 #include <remotedevice.h>
 #include <services.h>
 
-namespace OpieTooth {
+using namespace OpieTooth;
 
     BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
         : BluetoothBase( parent, name, fl ) {
 
-        localDevice = new Manager( "hci0" );
+        m_localDevice = new Manager( "hci0" );
 
         connect( PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan() ) );
         connect( configApplyButton, SIGNAL(clicked() ), this, SLOT(applyConfigChanges() ) );
@@ -60,16 +60,16 @@ namespace OpieTooth {
                           this, SLOT( startServiceActionClicked( QListViewItem* ) ) );
         connect( ListView2, SIGNAL( rightButtonClicked( QListViewItem *, const QPoint &, int ) ),
                  this,  SLOT(startServiceActionHold( QListViewItem *, const QPoint &, int) ) );
-        connect( localDevice , SIGNAL( foundServices( const QString& , Services::ValueList ) ),
+        connect( m_localDevice , SIGNAL( foundServices( const QString& , Services::ValueList ) ),
                  this, SLOT( addServicesToDevice( const QString& , Services::ValueList ) ) );
-        connect( localDevice, SIGNAL( available( const QString&, bool ) ),
+        connect( m_localDevice, SIGNAL( available( const QString&, bool ) ),
                  this, SLOT( deviceActive( const QString& , bool ) ) );
-        connect( localDevice, SIGNAL( connections( Connection::ValueList ) ),
+        connect( m_localDevice, SIGNAL( connections( Connection::ValueList ) ),
                  this, SLOT( addConnectedDevices( Connection::ValueList ) ) );
 
         //Load all icons needed
-        offPix = Resource::loadPixmap( "editdelete" );
-        onPix = Resource::loadPixmap( "installed" );
+        m_offPix = Resource::loadPixmap( "editdelete" );
+        m_onPix = Resource::loadPixmap( "installed" );
 
         QPalette pal = this->palette();
         QColor col = pal.color( QPalette::Active, QColorGroup::Background );
@@ -88,14 +88,14 @@ namespace OpieTooth {
         ListView2->setRootIsDecorated(true);
 
         BTListItem *topLV2 = new BTListItem( ListView2, "Siemens S45", "", "device" );
-        topLV2->setPixmap( 1, onPix );
+        topLV2->setPixmap( 1, m_onPix );
         (void) new BTListItem( topLV2, "Serial" ,"", "service" );
         (void) new BTListItem( topLV2, "BlueNiC" , "", "service" );
 
         writeToHciConfig();
         // search conncetions
         addConnectedDevices();
-        iconLoader = new BTIconLoader();
+        m_iconLoader = new BTIconLoader();
       }
 
     /**
@@ -106,12 +106,12 @@ namespace OpieTooth {
         Config cfg( "bluetoothmanager" );
         cfg.setGroup( "bluezsettings" );
 
-        deviceName = cfg.readEntry( "name" , "No name" ); // name the device should identify with
-        defaultPasskey = cfg.readEntryCrypt( "passkey" , "" ); // <- hmm, look up how good the trolls did that, maybe too weak
-        useEncryption = cfg.readNumEntry( "useEncryption" , 1 );
-        enableAuthentification = cfg.readNumEntry( "enableAuthentification" , 1 );
-        enablePagescan = cfg.readNumEntry( "enablePagescan" , 1 );
-        enableInquiryscan = cfg.readNumEntry( "enableInquiryscan" , 1 );
+        m_deviceName = cfg.readEntry( "name" , "No name" ); // name the device should identify with
+        m_defaultPasskey = cfg.readEntryCrypt( "passkey" , "" ); // <- hmm, look up how good the trolls did that, maybe too weak
+        m_useEncryption = cfg.readBoolEntry( "useEncryption" , TRUE );
+        m_enableAuthentification = cfg.readBoolEntry( "enableAuthentification" , TRUE );
+        m_enablePagescan = cfg.readBoolEntry( "enablePagescan" , TRUE );
+        m_enableInquiryscan = cfg.readBoolEntry( "enableInquiryscan" , TRUE );
     }
 
     /**
@@ -122,51 +122,29 @@ namespace OpieTooth {
         Config cfg( "bluetoothmanager" );
         cfg.setGroup( "bluezsettings" );
 
-        cfg.writeEntry( "name" , deviceName );
-        cfg.writeEntryCrypt( "passkey" , defaultPasskey );
-        cfg.writeEntry( "useEncryption" , useEncryption );
-        cfg.writeEntry( "enableAuthentification" , enableAuthentification );
-        cfg.writeEntry( "enablePagescan" , enablePagescan );
-        cfg.writeEntry( "enableInquiryscan" , enableInquiryscan );
+        cfg.writeEntry( "name" , m_deviceName );
+        cfg.writeEntryCrypt( "passkey" , m_defaultPasskey );
+        cfg.writeEntry( "useEncryption" , m_useEncryption );
+        cfg.writeEntry( "enableAuthentification" , m_enableAuthentification );
+        cfg.writeEntry( "enablePagescan" , m_enablePagescan );
+        cfg.writeEntry( "enableInquiryscan" , m_enableInquiryscan );
 
         writeToHciConfig();
     }
 
     void BlueBase::writeToHciConfig() {
 
-        HciConfWrapper *hciconf = new HciConfWrapper( "/tmp/hcid.conf" );
-        hciconf->setPinHelper( "/bin/QtPalmtop/bin/blue-pin" );
+        HciConfWrapper hciconf ( "/tmp/hcid.conf" );
+        hciconf.setPinHelper( "/bin/QtPalmtop/bin/blue-pin" );
 
 
         //    hciconf->setPinHelper( "/bin/QtPalmtop/bin/blue-pin" );
 
-        hciconf->setName( deviceName );
-
-        if ( useEncryption == 1) {
-            hciconf->setEncrypt( true );
-        } else {
-            hciconf->setEncrypt( false );
-        }
-
-
-        if ( enableAuthentification == 1) {
-            hciconf->setAuth( true );
-        } else {
-            hciconf->setAuth( false );
-        }
-
-        if ( enablePagescan  == 1) {
-            hciconf->setPscan( true );
-        } else {
-            hciconf->setPscan( false );
-        }
-
-        if ( enableInquiryscan  == 1) {
-            hciconf->setIscan( true );
-        } else {
-            hciconf->setIscan( false );
-        }
-	delete hciconf;
+        hciconf.setName( m_deviceName );
+        hciconf.setEncrypt( m_useEncryption );
+	hciconf.setAuth( m_enableAuthentification );
+        hciconf.setPscan( m_enablePagescan );
+        hciconf.setIscan( m_enableInquiryscan );
     }
 
 
@@ -176,7 +154,7 @@ namespace OpieTooth {
      */
     void BlueBase::readSavedDevices() {
 
-        QList<RemoteDevice> *loadedDevices = new QList<RemoteDevice>;
+        QValueList<RemoteDevice> loadedDevices;
 
         QDir deviceListSave( QDir::homeDirPath() + "/Settings/bluetooth/");
         // list of .conf files
@@ -194,10 +172,10 @@ namespace OpieTooth {
             name = conf.readEntry("name", "Error");
             qDebug("MAC: " + mac);
             qDebug("NAME: " + name);
-            RemoteDevice currentDevice = RemoteDevice( mac , name  );
-            loadedDevices->append( &currentDevice );
+            RemoteDevice currentDevice( mac , name  );
+            loadedDevices.append( currentDevice );
         }
-        addSearchedDevices( *loadedDevices );
+        addSearchedDevices( loadedDevices );
     }
 
     /**
@@ -221,13 +199,13 @@ namespace OpieTooth {
      * Set up the gui
      */
     void BlueBase::initGui() {
-        StatusLabel->setText( getStatus() ); // maybe move it to getStatus()
-        cryptCheckBox->setChecked( useEncryption );
-        authCheckBox->setChecked( enableAuthentification );
-        pagescanCheckBox->setChecked( enablePagescan );
-        inquiryscanCheckBox->setChecked( enableInquiryscan );
-        deviceNameLine->setText( deviceName );
-        passkeyLine->setText( defaultPasskey );
+        StatusLabel->setText( status() ); // maybe move it to getStatus()
+        cryptCheckBox->setChecked( m_useEncryption );
+        authCheckBox->setChecked( m_enableAuthentification );
+        pagescanCheckBox->setChecked( m_enablePagescan );
+        inquiryscanCheckBox->setChecked( m_enableInquiryscan );
+        deviceNameLine->setText( m_deviceName );
+        passkeyLine->setText( m_defaultPasskey );
         // set info tab
         setInfo();
     }
@@ -237,7 +215,7 @@ namespace OpieTooth {
      * Get the status informations and returns it
      * @return QString the status informations gathered
      */
-    QString BlueBase::getStatus(){
+    QString BlueBase::status()const{
         QString infoString = tr( "<b>Device name : </b> Ipaq" );
         infoString += QString( "<br><b>" + tr( "MAC adress: " ) +"</b> No idea" );
         infoString += QString( "<br><b>" + tr( "Class" ) + "</b> PDA" );
@@ -250,36 +228,32 @@ namespace OpieTooth {
      * Read the current values from the gui and invoke writeConfig()
      */
     void BlueBase::applyConfigChanges() {
-        deviceName =  deviceNameLine->text();
-        defaultPasskey = passkeyLine->text();
-        useEncryption = cryptCheckBox->isChecked();
-        enableAuthentification = authCheckBox->isChecked();
-        enablePagescan = pagescanCheckBox->isChecked();
-        enableInquiryscan = inquiryscanCheckBox->isChecked();
+        m_deviceName =  deviceNameLine->text();
+        m_defaultPasskey = passkeyLine->text();
+        m_useEncryption = cryptCheckBox->isChecked();
+        m_enableAuthentification = authCheckBox->isChecked();
+        m_enablePagescan = pagescanCheckBox->isChecked();
+        m_enableInquiryscan = inquiryscanCheckBox->isChecked();
 
         writeConfig();
 
-        QMessageBox*  box = new QMessageBox( this, "Test" );
-        box->setText( tr( "Changes applied" ) );
-        box->show();
+        QMessageBox::information( this, tr("Test") , tr("Changes were applied.") );
    }
 
     /**
      * Add fresh found devices from scan dialog to the listing
      *
      */
-    void BlueBase::addSearchedDevices( QList<RemoteDevice> &newDevices ) {
+    void BlueBase::addSearchedDevices( const QValueList<RemoteDevice> &newDevices ) {
         BTListItem * deviceItem;
-        QListIterator<RemoteDevice> it( newDevices );
+        QValueList<RemoteDevice>::ConstIterator it;
 
-        for( ; it.current() ; ++it ) {
-
-            RemoteDevice *dev = it.current();
-            deviceItem = new BTListItem( ListView2 , dev->name(), dev->mac(), "device" );
+        for( it = newDevices.begin(); it != newDevices.end() ; ++it ) {
+            deviceItem = new BTListItem( ListView2 , (*it).name(), (*it).mac(), "device" );
             deviceItem->setExpandable ( true );
 
             // look if device is avail. atm, async
-            deviceActive( dev );
+            deviceActive( (*it) );
 
             // ggf auch hier?
             addServicesToDevice( deviceItem );
@@ -290,63 +264,63 @@ namespace OpieTooth {
     /**
      * Action that is toggled on entrys on click
      */
-    void BlueBase::startServiceActionClicked( QListViewItem *item ) {
-    }
+void BlueBase::startServiceActionClicked( QListViewItem */*item*/ ) {
+}
 
     /**
      * Action that are toggled on hold (mostly QPopups i guess)
      */
-    void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & point, int column ) {
+void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & point, int /*column*/ ) {
 
-          QPopupMenu *menu = new QPopupMenu();
-          int ret=0;
+    QPopupMenu *menu = new QPopupMenu();
+    int ret=0;
 
-          if ( ((BTListItem*)item)->type() == "device") {
+    if ( ((BTListItem*)item)->type() == "device") {
 
-              QPopupMenu *groups = new QPopupMenu();
+        QPopupMenu *groups = new QPopupMenu();
 
-              menu->insertItem( tr("rescan sevices:"),  0);
-              menu->insertItem( tr("to group"), groups ,  1);
-              menu->insertItem( tr("bound device"), 2);
-              menu->insertItem( tr("delete"),  3);
+        menu->insertItem( tr("rescan sevices:"),  0);
+        menu->insertItem( tr("to group"), groups ,  1);
+        menu->insertItem( tr("bound device"), 2);
+        menu->insertItem( tr("delete"),  3);
 
-              ret = menu->exec( point  , 0);
+        ret = menu->exec( point  , 0);
 
-              switch(ret) {
-              case 0:
-                  break;
-              case 1:
-                  break;
-              case 2:
-                  // make connection
-                  break;
-              case 3:
-                  // delete childs too
-                  delete item;
-                  break;
-              }
-              delete groups;
+        switch(ret) {
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2:
+            // make connection
+            break;
+        case 3:
+            // delete childs too
+            delete item;
+            break;
+        }
+        delete groups;
 
-          } else if ( ((BTListItem*)item)->type() == "service") {
-              menu->insertItem( tr("Test1:"),  0);
-              menu->insertItem( tr("connect"), 1);
-              menu->insertItem( tr("delete"),  2);
+    } else if ( ((BTListItem*)item)->type() == "service") {
+        menu->insertItem( tr("Test1:"),  0);
+        menu->insertItem( tr("connect"), 1);
+        menu->insertItem( tr("delete"),  2);
 
-              ret = menu->exec( point  , 0);
+        ret = menu->exec( point  , 0);
 
-              switch(ret) {
-              case 0:
-                  break;
-              case 1:
-                  break;
-              case 2:
-                  // delete childs too
-                  delete item;
-                  break;
-              }
-          }
-          delete menu;
+        switch(ret) {
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2:
+            // delete childs too
+            delete item;
+            break;
+        }
     }
+    delete menu;
+}
 
     /**
      * Search and display avail. services for a device (on expand from device listing)
@@ -355,11 +329,10 @@ namespace OpieTooth {
     void BlueBase::addServicesToDevice( BTListItem * item ) {
         qDebug("addServicesToDevice");
         // row of mac adress text(3)
-        RemoteDevice *device = new RemoteDevice( item->mac(),  item->name() );
-        deviceList.insert( item->mac() ,  item );
+        RemoteDevice device( item->mac(),  item->name() );
+        m_deviceList.insert( item->mac() ,  item );
         // and some time later I get a signal foundServices( const QString& device, Services::ValueList ); back
-        localDevice->searchServices( *device );
-        delete device;
+        m_localDevice->searchServices( device );
     }
 
 
@@ -375,7 +348,7 @@ namespace OpieTooth {
         BTListItem* deviceItem = 0;
 
         // get the right devices which requested the search
-        for( it = deviceList.begin(); it != deviceList.end(); ++it ) {
+        for( it = m_deviceList.begin(); it != m_deviceList.end(); ++it ) {
             if ( it.key() == device ) {
                 deviceItem = it.data();
             }
@@ -388,7 +361,7 @@ namespace OpieTooth {
             // add services
             for( it2 = servicesList.begin(); it2 != servicesList.end(); ++it2 ) {
                 serviceItem = new BTListItem( deviceItem  ,  (*it2).serviceName() , "" , "service"  );
-                serviceItem->setPixmap( 0, iconLoader->serviceIcon( (*it2).classIdList() ) );
+                serviceItem->setPixmap( 0, m_iconLoader->serviceIcon( (*it2).classIdList() ) );
             }
         } else {
             serviceItem = new BTListItem( deviceItem  , tr("no services found"), "" , "service"  );
@@ -401,7 +374,7 @@ namespace OpieTooth {
      * This one triggers the search
      */
     void BlueBase::addConnectedDevices() {
-        localDevice->searchConnections();
+        m_localDevice->searchConnections();
     }
 
 
@@ -425,9 +398,9 @@ namespace OpieTooth {
     /**
      * Find out if a device can  currently be reached
      */
-    void BlueBase::deviceActive( RemoteDevice *device ) {
+    void BlueBase::deviceActive( const RemoteDevice &device ) {
         // search by mac, async, gets a signal back
-        localDevice->isAvailable( device->mac() );
+        m_localDevice->isAvailable( device.mac() );
     }
 
     /**
@@ -442,16 +415,16 @@ namespace OpieTooth {
         BTListItem* deviceItem = 0;
 
         // get the right devices which requested the search
-        for( it = deviceList.begin(); it != deviceList.end(); ++it ) {
+        for( it = m_deviceList.begin(); it != m_deviceList.end(); ++it ) {
             if ( it.key() == device ) {
                 deviceItem = it.data();
             }
         }
 
         if ( connected ) {
-            deviceItem->setPixmap( 1, onPix );
+            deviceItem->setPixmap( 1, m_onPix );
         } else {
-            deviceItem->setPixmap( 1, offPix );
+            deviceItem->setPixmap( 1, m_offPix );
         }
     }
 
@@ -471,7 +444,7 @@ namespace OpieTooth {
      * Set the informations about the local device in information Tab
      */
     void BlueBase::setInfo() {
-        StatusLabel->setText( getStatus() );
+        StatusLabel->setText( status() );
     }
 
     /**
@@ -479,7 +452,6 @@ namespace OpieTooth {
      */
     BlueBase::~BlueBase() {
         writeSavedDevices();
-        delete iconLoader;
+        delete m_iconLoader;
     }
-}
 

@@ -38,7 +38,7 @@ namespace OpieTooth {
     protected:
 
 
-            private slots:
+    private slots:
         void startScan();
 
     private:
@@ -47,28 +47,28 @@ namespace OpieTooth {
         void readSavedDevices();
         void writeSavedDevices();
         void writeToHciConfig();
-	QString getStatus();
+	QString status()const;
 	void initGui();
         void setInfo();
-        Manager *localDevice;
-        QMap<QString,BTListItem*> deviceList;
+        Manager *m_localDevice;
+        QMap<QString,BTListItem*> m_deviceList;
 
-        void deviceActive( RemoteDevice *device );
+        void deviceActive( const RemoteDevice &device );
 
-	QString deviceName;
-	QString defaultPasskey;
-	int useEncryption;
-	int enableAuthentification;
-	int enablePagescan;
-	int enableInquiryscan;
+	QString m_deviceName;
+	QString m_defaultPasskey;
+	bool m_useEncryption;
+	bool m_enableAuthentification;
+	bool m_enablePagescan;
+	bool m_enableInquiryscan;
 
-        QPixmap offPix;
-        QPixmap onPix;
+        QPixmap m_offPix;
+        QPixmap m_onPix;
 
-        BTIconLoader *iconLoader;
+        BTIconLoader *m_iconLoader;
 
 	private slots:
-        void addSearchedDevices( QList<RemoteDevice> &newDevices );
+        void addSearchedDevices( const QValueList<RemoteDevice> &newDevices );
         void addServicesToDevice( BTListItem *item );
         void addServicesToDevice( const QString& device, Services::ValueList );
         void addConnectedDevices();
