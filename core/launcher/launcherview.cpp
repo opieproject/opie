@@ -164,7 +164,7 @@ public:
     } else {
     logo = Resource::loadImage(backgroundImage );
     }
-    if ( !logo.isNull() )
+    if ( !logo.isNull() && config.readBoolEntry( "UseBackgroundImage", TRUE ) )
         painter.drawImage( (width() - logo.width()) / 2,
                (height() - logo.height()) / 2, logo );
       }
