@@ -26,6 +26,7 @@
 
 
 #define PIDFILE 	"/var/run/opiealarm.pid"
+#define TIMEFILE    "/var/run/resumeat"
 #define APMFILE		"/proc/apm"
 
 int resume ( int resuspend );
@@ -245,23 +246,23 @@ int suspend ( int fix_rtc )
 			// if the difference between system and hardware time is more than 3 seconds,
 			// we have to set the RTC (hwclock --systohc), or alarms won't work reliably.
 
-	    		if ( ioctl ( fd, RTC_SET_TIME, &set ) < 0 )
+			if ( ioctl ( fd, RTC_SET_TIME, &set ) < 0 )
 				break; //  ( 1, "ioctl RTC_SET_TIME" );
 		}
 
-		// read the wakeup time from /etc/resumeat
-		if (!( fp = fopen ( "/etc/resumeat", "r" ))) 
-			break; //  ( 1, "/etc/resumeat" );
+		// read the wakeup time from TIMEFILE
+		if (!( fp = fopen ( TIMEFILE, "r" ))) 
+			break; //  ( 1, TIMEFILE );
 	
 		if ( !fgets ( buf, sizeof( buf ) - 1, fp ))
-			break; //  ( 1, "/etc/resumeat" );
+			break; //  ( 1, TIMEFILE );
 
 		fclose ( fp );
 	
 		alrt = atoi ( buf ); // get the alarm time
 
 		if ( alrt == 0 )
-			break; //  ( 0, "/etc/resumeat contains an invalid time description" );	
+			break; //  ( 0, TIMEFILE " contains an invalid time description" );	
 		alrt -= 5; 	// wake up 5 sec before the specified time	
 	
 		alr = *gmtime ( &alrt );
@@ -290,7 +291,7 @@ int suspend ( int fix_rtc )
 		
 		return 0;	
 
-	} while ( 0 )
+	} while ( 0 );
 
 	if ( fp != NULL )
 		fclose ( fp );
