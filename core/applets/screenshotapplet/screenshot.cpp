@@ -416,7 +416,12 @@ void ScreenshotControl::performGrab()
 				int sock = -1;
 				bool ok = false;
 
-				if (( rhost_info = (struct hostent *) ::gethostbyname ((char *) SCAP_hostname )) != 0 ) {
+				QString displayEnv = getenv("QWS_DISPLAY");
+				qDebug(displayEnv);
+
+				if(( displayEnv.left(2) != ":0" ) && (!displayEnv.isEmpty())) {
+
+						if (( rhost_info = (struct hostent *) ::gethostbyname ((char *) SCAP_hostname )) != 0 ) {
 						::memset ( &raddr, 0, sizeof (struct sockaddr_in));
 						::memcpy ( &raddr. sin_addr, rhost_info-> h_addr, rhost_info-> h_length );
 						raddr. sin_family = rhost_info-> h_addrtype;
@@ -428,8 +433,6 @@ void ScreenshotControl::performGrab()
 										QString header;
 
 										QPixmap pix;
-										QString displayEnv = getenv("QWS_DISPLAY");
-										qDebug(displayEnv);
 
 										QString SCAP_model="";
 #warning FIXME: model string should be filled with actual device model
@@ -456,8 +459,8 @@ void ScreenshotControl::performGrab()
 										if ( !pix.isNull() )  {
 												const char *ascii = header.latin1( );
 												uint ascii_len = ::strlen( ascii );
-												::write ( sock, ascii, ascii_len );
-												::write ( sock, img.bits(), img.numBytes() );
+// 												::write ( sock, ascii, ascii_len );
+// 												::write ( sock, img.bits(), img.numBytes() );
 
 												ok = true;
 										}
@@ -465,12 +468,16 @@ void ScreenshotControl::performGrab()
 								::close ( sock );
 						}
 				}
-				if ( ok )
+				if ( ok ) {
 						QMessageBox::information( 0, tr( "Success" ), QString( "<p>%1</p>" ).arg ( tr( "Screenshot was uploaded to %1" )).arg( SCAP_hostname ));
-				else
+				} else {
 						QMessageBox::warning( 0, tr( "Error" ), QString( "<p>%1</p>" ).arg( tr( "Connection to %1 failed." )).arg( SCAP_hostname ));
+				}
+		} else {
+				QMessageBox::warning( 0, tr( "Error" ),tr("Please set <b>QWS_DISPLAY</b> environmental variable."));
+			}
 		}
-
+				
 }
 
 
