@@ -9,6 +9,7 @@
 
 namespace {
     enum ParityIds {
+        id_parity_none,
         id_parity_odd,
         id_parity_even
     };
@@ -42,6 +43,7 @@ IOLayerBase::IOLayerBase( QWidget* par,  const char* name )
     m_flowNone = new QRadioButton( tr("None"), m_groupFlow );
 
     m_groupParity = new QButtonGroup(tr("Parity"), this );
+    m_parityNone = new QRadioButton(tr("None"), m_groupParity );
     m_parityOdd = new QRadioButton(tr("Odd"), m_groupParity );
     m_parityEven = new QRadioButton(tr("Even"), m_groupParity );
 
@@ -61,6 +63,7 @@ IOLayerBase::IOLayerBase( QWidget* par,  const char* name )
     m_hboxPar = new QHBoxLayout( m_groupParity, 2 );
     m_hboxPar->add(m_parityOdd );
     m_hboxPar->add(m_parityEven );
+    m_hboxPar->add(m_parityNone );
     m_lroot->add(m_groupParity );
     m_lroot->setStretchFactor(m_groupParity, 2 );
 
@@ -90,6 +93,9 @@ void IOLayerBase::setFlow( Flow flo ) {
 
 void IOLayerBase::setParity( Parity par ) {
     switch( par ) {
+    case NonePar:
+        m_parityNone->setChecked( true );
+        break;
     case Odd:
         m_parityOdd->setChecked( true );
         break;
@@ -132,10 +138,13 @@ IOLayerBase::Flow IOLayerBase::flow()const {
     }
 }
 IOLayerBase::Parity IOLayerBase::parity()const {
-    if (m_parityOdd->isChecked() )
+    if ( m_parityOdd->isChecked() ) {
         return Odd;
-    else
+    } else if  ( m_parityEven->isChecked() ) {
         return Even;
+    } else {
+        return NonePar;
+    }
 
 }
 IOLayerBase::Speed IOLayerBase::speed()const{

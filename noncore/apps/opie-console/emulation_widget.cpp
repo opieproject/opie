@@ -21,16 +21,16 @@
 static const ColorEntry color_table[TABLE_COLORS] =
 {
     ColorEntry(QColor(0x00,0x00,0x00), 0, 0 ), ColorEntry( QColor(0xB2,0xB2,0xB2), 1, 0 ), // Dfore, Dback
-  ColorEntry(QColor(0x00,0x00,0x00), 0, 0 ), ColorEntry( QColor(0xB2,0x18,0x18), 0, 0 ), // Black, Red
-  ColorEntry(QColor(0x18,0xB2,0x18), 0, 0 ), ColorEntry( QColor(0xB2,0x68,0x18), 0, 0 ), // Green, Yellow
-  ColorEntry(QColor(0x18,0x18,0xB2), 0, 0 ), ColorEntry( QColor(0xB2,0x18,0xB2), 0, 0 ), // Blue,  Magenta
-  ColorEntry(QColor(0x18,0xB2,0xB2), 0, 0 ), ColorEntry( QColor(0xB2,0xB2,0xB2), 0, 0 ), // Cyan,  White
-  // intensiv
-  ColorEntry(QColor(0x00,0x00,0x00), 0, 1 ), ColorEntry( QColor(0xFF,0xFF,0xFF), 1, 0 ),
-  ColorEntry(QColor(0x68,0x68,0x68), 0, 0 ), ColorEntry( QColor(0xFF,0x54,0x54), 0, 0 ),
-  ColorEntry(QColor(0x54,0xFF,0x54), 0, 0 ), ColorEntry( QColor(0xFF,0xFF,0x54), 0, 0 ),
-  ColorEntry(QColor(0x54,0x54,0xFF), 0, 0 ), ColorEntry( QColor(0xB2,0x18,0xB2), 0, 0 ),
-  ColorEntry(QColor(0x54,0xFF,0xFF), 0, 0 ), ColorEntry( QColor(0xFF,0xFF,0xFF), 0, 0 )
+    ColorEntry(QColor(0x00,0x00,0x00), 0, 0 ), ColorEntry( QColor(0xB2,0x18,0x18), 0, 0 ), // Black, Red
+    ColorEntry(QColor(0x18,0xB2,0x18), 0, 0 ), ColorEntry( QColor(0xB2,0x68,0x18), 0, 0 ), // Green, Yellow
+    ColorEntry(QColor(0x18,0x18,0xB2), 0, 0 ), ColorEntry( QColor(0xB2,0x18,0xB2), 0, 0 ), // Blue,  Magenta
+    ColorEntry(QColor(0x18,0xB2,0xB2), 0, 0 ), ColorEntry( QColor(0xB2,0xB2,0xB2), 0, 0 ), // Cyan,  White
+    // intensiv
+    ColorEntry(QColor(0x00,0x00,0x00), 0, 1 ), ColorEntry( QColor(0xFF,0xFF,0xFF), 1, 0 ),
+    ColorEntry(QColor(0x68,0x68,0x68), 0, 0 ), ColorEntry( QColor(0xFF,0x54,0x54), 0, 0 ),
+    ColorEntry(QColor(0x54,0xFF,0x54), 0, 0 ), ColorEntry( QColor(0xFF,0xFF,0x54), 0, 0 ),
+    ColorEntry(QColor(0x54,0x54,0xFF), 0, 0 ), ColorEntry( QColor(0xB2,0x18,0xB2), 0, 0 ),
+    ColorEntry(QColor(0x54,0xFF,0xFF), 0, 0 ), ColorEntry( QColor(0xFF,0xFF,0xFF), 0, 0 )
 };
 
 EmulationWidget::EmulationWidget( const Profile& config, QWidget *parent, const char* name ) : WidgetLayer( config, parent, name )
@@ -42,6 +42,7 @@ EmulationWidget::EmulationWidget( const Profile& config, QWidget *parent, const 
 	f_width = fm.maxWidth();
 	f_ascent = fm.ascent();
 
+
 	// initialize scrollbar related vars
 	m_scrollbar = new QScrollBar( this );
 	m_scrollbar->setCursor( arrowCursor );
@@ -49,8 +50,8 @@ EmulationWidget::EmulationWidget( const Profile& config, QWidget *parent, const 
 	// give reasonable defaults to m_columns, m_lines
 	calcGeometry();
 
-	// load config
-	reloadConfig( config );
+  	// load config
+        reloadConfig( config );
 
 	m_resizing = false;
 }
@@ -109,6 +110,7 @@ static QChar vt100extended(QChar c)
 QSize EmulationWidget::calcSize( int cols, int lins ) const
 {
     int frw = width() - contentsRect().width();
+
     int frh = height() - contentsRect().height();
     int scw = (scrollLoc == SCRNONE? 0 : m_scrollbar->width() );
     return QSize( f_width * cols + 2 * rimX + frw + scw, f_height * lins + 2 * rimY + frh );
@@ -233,7 +235,11 @@ void EmulationWidget::calcGeometry()
 {
 	m_scrollbar->resize(QApplication::style().scrollBarExtent().width(), contentsRect().height() );
 
-	switch( scrollLoc )
+        qDebug( QString(" TEST").arg( contentsRect().width() ) );
+        qDebug( QString(" TEST").arg( contentsRect().height() ) );
+        qDebug("NEUER TESTT!!!!!!!!");
+
+       	switch( scrollLoc )
 	{
 	case SCRNONE :
 		m_columns = ( contentsRect().width() -2 * rimX ) / f_width;

@@ -78,10 +78,10 @@ Session* ProfileManager::fromProfile( const Profile& prof,  QWidget* parent) {
     session->setIOLayer(m_fact->newIOLayer( m_fact->external(prof.ioLayerName()) ,
                                             prof) );
 
-    QWidgetStack *stack = new QWidgetStack(parent);
+    QWidgetStack *stack = new QWidgetStack( parent );
     session->setWidgetStack( stack );
     QWidget* dummy = new QWidget( stack );
-    QHBoxLayout* lay = new QHBoxLayout(dummy );
+    QHBoxLayout* lay = new QHBoxLayout( dummy );
     stack->addWidget( dummy, 0 );
     stack->raiseWidget( 0 );
     EmulationHandler* handler = new EmulationHandler(prof,dummy );

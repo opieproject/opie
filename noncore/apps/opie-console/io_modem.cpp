@@ -37,6 +37,7 @@ bool IOModem::open() {
 }
 
 void IOModem::reload( const Profile &config ) {
+
     m_device = config.readEntry("Device", MODEM_DEFAULT_DEVICE);
     m_baud = config.readNumEntry("Baud", MODEM_DEFAULT_BAUD);
     m_parity = config.readNumEntry("Parity", MODEM_DEFAULT_PARITY);

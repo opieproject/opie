@@ -59,8 +59,10 @@ void IrdaConfigWidget::load( const Profile& prof ) {
 
     if (rad_parity == 1) {
         m_base->setParity( IOLayerBase::Even );
-    } else {
+    } else if ( rad_parity == 2 ) {
         m_base->setParity( IOLayerBase::Odd );
+    } else {
+        m_base->setParity( IOLayerBase::NonePar );
     }
 
     switch( speed ) {
@@ -114,6 +116,9 @@ void IrdaConfigWidget::save( Profile& prof ) {
         break;
     case IOLayerBase::Even:
         parity = 1;
+        break;
+    case IOLayerBase::NonePar:
+        parity = 0;
         break;
     }
 

@@ -11,10 +11,12 @@ class QButtonGroup;
 class QRadioButton;
 class QHBoxLayout;
 class IOLayerBase : public QWidget {
+
     Q_OBJECT
+
 public:
     enum Flow { Hardware, Software, None };
-    enum Parity{ Odd  =2 , Even =1 };
+    enum Parity{ Odd  =2 , Even =1, NonePar =0 };
     enum Speed{ Baud_115200,
                 Baud_57600,
                 Baud_38400,
@@ -38,7 +40,7 @@ private:
     QRadioButton *m_flowHw, *m_flowSw, *m_flowNone;
 
     QButtonGroup* m_groupParity;
-    QRadioButton *m_parityOdd, *m_parityEven;
+    QRadioButton *m_parityOdd, *m_parityEven, *m_parityNone;
     QHBoxLayout* m_hbox;
     QHBoxLayout* m_hboxPar;
 };
