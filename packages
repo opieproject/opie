@@ -33,6 +33,7 @@ CONFIG_BATTERYAPPLET	core/applets/batteryapplet	batteryapplet.pro
 CONFIG_BEND	noncore/mail/bend	bend.pro
 CONFIG_BLUE-PIN	noncore/net/opietooth/blue-pin	blue-pin.pro
 CONFIG_BOUNCE	noncore/games/bounce	bounce.pro
+CONFIG_BACKGAMMON noncore/games/backgammon backgammon.pro
 CONFIG_BUTTON-SETTINGS	core/settings/button	button.pro
 CONFIG_BUZZWORD	noncore/games/buzzword	buzzword.pro
 CONFIG_CALCULATOR	noncore/tools/calculator	calculator.pro
