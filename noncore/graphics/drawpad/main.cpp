@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 
     DrawPad mw; // = new DrawPad();;
     a.showMainWidget(&mw );
-    
+    mw.finishStartup();
     
     return a.exec();
 }

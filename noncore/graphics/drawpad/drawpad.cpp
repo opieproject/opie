@@ -278,6 +278,11 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
 
     changeBrushColor(Qt::white);
 
+}
+
+
+void DrawPad::finishStartup() 
+{
     // init pages
 
     QFile file(Global::applicationFileName("drawpad", "drawpad.xml"));
@@ -290,6 +295,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     }
 
     loadConfig();
+
 }
 
 DrawPad::~DrawPad()

@@ -40,6 +40,7 @@ public:
     QBrush brush() { return m_brush; }
 
     bool antiAliasing();
+    void finishStartup();
 
 private slots:
     void newPage();
