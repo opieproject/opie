@@ -50,7 +50,7 @@
 #include <qstring.h>
 #include <qtimer.h>
 
-MainWindow::MainWindow( QWidget *parent , const char *name,  bool modal = FALSE, WFlags f )
+MainWindow::MainWindow( QWidget *parent , const char *name,  bool modal, WFlags f )
 	: QDialog( 0x0, 0x0, TRUE, 0 )
 {
 	setCaption( tr( "SystemTime" ) );
