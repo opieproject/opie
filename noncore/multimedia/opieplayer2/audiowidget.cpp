@@ -532,11 +532,12 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e)
       case Key_F10: //contacts
           break;
       case Key_F11: //menu
+              mediaPlayerState->toggleBlank();
           break;
       case Key_F12: //home
           break;
       case Key_F13: //mail
-          mediaPlayerState->toggleBlank();
+             mediaPlayerState->toggleBlank();
           break;
       case Key_Space: {
           if(mediaPlayerState->playing()) {

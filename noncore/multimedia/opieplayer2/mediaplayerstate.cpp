@@ -115,7 +115,7 @@ void MediaPlayerState::setIsStreaming( bool b ) {
 }
 
 
-void MediaPlayerState::setBlank( bool b ) {
+void MediaPlayerState::setFullscreen( bool b ) {
     if ( isFullscreen == b ) {
         return;
     }
@@ -124,7 +124,7 @@ void MediaPlayerState::setBlank( bool b ) {
 }
 
 
-void MediaPlayerState::setFullscreen( bool b ) {
+void MediaPlayerState::setBlanked( bool b ) {
     if ( isBlanked == b ) {
         return;
     }
@@ -274,7 +274,7 @@ void MediaPlayerState::togglePlaying() {
 }
 
 void MediaPlayerState::toggleBlank() {
-    setBlank( !isBlanked);
+    setBlanked( !isBlanked);
 }
 
 

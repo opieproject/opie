@@ -78,7 +78,7 @@ public slots:
     void updatePosition( long p );
     void setLength( long l );
     void setView( char v );
-    void setBlank( bool b );
+    void setBlanked( bool b );
 
     void setPrev();
     void setNext();

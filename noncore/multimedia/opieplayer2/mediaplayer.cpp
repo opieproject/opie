@@ -29,6 +29,8 @@ extern PlayListWidget *playList;
 extern MediaPlayerState *mediaPlayerState;
 
 
+#define FBIOBLANK             0x4611
+
 MediaPlayer::MediaPlayer( QObject *parent, const char *name )
     : QObject( parent, name ), volumeDirection( 0 ), currentFile( NULL ) {
 
@@ -252,8 +254,7 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
 void MediaPlayer::blank( bool b ) {
     fd=open("/dev/fb0",O_RDWR);
     if (fd != -1) {
-
-        if ( !b ) {
+        if ( b ) {
             qDebug("do blanking");
             ioctl( fd, FBIOBLANK, 3 );
             isBlanked = TRUE;
@@ -263,6 +264,8 @@ void MediaPlayer::blank( bool b ) {
             isBlanked = FALSE;
         }
         close( fd );
+    } else {
+        qDebug("<< /dev/fb0 could not be opend  >>");
     }
 }
 
@@ -283,8 +286,8 @@ void MediaPlayer::keyReleaseEvent( QKeyEvent *e) {
           break;
       case Key_F13: //mail
           qDebug("Blank here");
-//           mediaPlayerState->toggleBlank();
-           break;
+          //  mediaPlayerState->toggleBlank();
+          break;
     }
 }
 
