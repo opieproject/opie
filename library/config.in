@@ -1,6 +1,2 @@
 config LIBQPE
   boolean "Qpe Library (Qt/Embedded version)"
-
-config LIBQPE_WITHROHFEEDBACK
-  boolean "Give visual feedback for RightOnHold"
-  depends LIBQPE
