@@ -270,7 +270,7 @@ void NotesControl::populateBox() {
     }
     list.sort();
     box->insertStringList(list,-1);
-    
+    doPopulate=false;
 }
 
 void NotesControl::load() {
@@ -344,15 +344,15 @@ void NotesApplet::mousePressEvent( QMouseEvent *) {
     } else {
 //    vc = new NotesControl;
 //    QPoint curPos = mapToGlobal( rect().topLeft() );
-     vc->show();
-    vc->move( 5, 18);
-    vc->doPopulate=true;
-    vc->populateBox();
-    vc->load();
-    
- 
-    this->setFocus();
-    vc->view->setFocus();
+        vc->show();
+        vc->move( 5, 18);
+        vc->doPopulate=true;
+        vc->populateBox();
+        vc->doPopulate=false;
+
+        vc->load();
+//        this->setFocus();
+        vc->view->setFocus();
     }
 }
 
