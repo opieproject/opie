@@ -138,8 +138,6 @@ void iPAQ::init(const QString& model)
     else
         d->m_model = Model_Unknown;
 
-
-
     switch ( d->m_model ) {
         case Model_iPAQ_H31xx:
         case Model_iPAQ_H38xx:
@@ -157,29 +155,6 @@ void iPAQ::init(const QString& model)
             break;
 
         }
-
-    QFile f( "/etc/familiar-version" );
-    if ( f. open ( IO_ReadOnly )) {
-        d->m_systemstr = "Familiar";
-        d->m_system = System_Familiar;
-
-        QTextStream ts ( &f );
-        d->m_sysverstr = ts. readLine(). mid ( 10 );
-
-        f. close();
-    } else {
-        f. setName ( "/etc/oz_version" );
-
-                    if ( f. open ( IO_ReadOnly )) {
-            d->m_systemstr = "OpenEmbedded/iPaq";
-            d->m_system = System_Familiar;
-
-            QTextStream ts ( &f );
-            ts.setDevice ( &f );
-            d->m_sysverstr = ts. readLine();
-            f. close();
-        }
-    }
 
     m_leds [0] = m_leds [1] = Led_Off;
 

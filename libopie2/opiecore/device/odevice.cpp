@@ -1,27 +1,27 @@
 /*
-                     This file is part of the Opie Project
-                      Copyright (C) The Opie Team <opie-devel@handhelds.org>
+                             This file is part of the Opie Project
+                             Copyright (C) The Opie Team <opie-devel@handhelds.org>
               =.
             .=l.
-     .>+-=
-_;:,   .>  :=|.         This program is free software; you can
-.> <`_,  > .  <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--  :           the terms of the GNU Library General Public
-.="- .-=="i,   .._         License as published by the Free Software
-- .  .-<_>   .<>         Foundation; either version 2 of the License,
-  ._= =}    :          or (at your option) any later version.
-  .%`+i>    _;_.
-  .i_,=:_.   -<s.       This program is distributed in the hope that
-  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
-  : ..  .:,   . . .    without even the implied warranty of
-  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
- _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=    =    ;      Library General Public License for more
-++=  -.   .`   .:       details.
-:   = ...= . :.=-
--.  .:....=;==+<;          You should have received a copy of the GNU
- -_. . .  )=. =           Library General Public License along with
-  --    :-=`           this library; see the file COPYING.LIB.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -143,9 +143,30 @@ ODevice::ODevice()
     d->m_holdtime = 1000; // 1000ms
     d->m_buttons = 0;
     d->m_cpu_frequencies = new QStrList;
+
+    // New distribution detection code first checks for legacy distributions,
+    // identified by /etc/familiar-version or /etc/oz_version.
+    // Then check for OpenEmbedded and lastly, read /etc/issue
+
+    for ( unsigned int i = 0; i < sizeof distributions; ++i )
+    {
+        if ( QFile::exists( distributions[i].sysvfile ) )
+        {
+            d->m_systemstr = distributions[i].sysstr;
+            d->m_system = distributions[i].system;
+            d->m_sysverstr = "<Unknown>";
+            QFile f( distributions[i].sysvfile );
+            if ( f.open( IO_ReadOnly ) )
+            {
+                QTextStream ts( &f );
+                d->m_sysverstr = ts.readLine();
+            }
+            break;
+        }
+    }
 }
 
-void ODevice::systemMessage ( const QCString &msg, const QByteArray & )
+void ODevice::systemMessage( const QCString &msg, const QByteArray & )
 {
     if ( msg == "deviceButtonMappingChanged()" ) {
         reloadButtonMapping();

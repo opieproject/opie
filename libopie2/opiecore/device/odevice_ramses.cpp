@@ -82,17 +82,7 @@ void Ramses::init(const QString&)
     d->m_rotation = Rot0;
     d->m_holdtime = 1000;
 
-    f.setName("/etc/oz_version");
-
-    if (f.open(IO_ReadOnly)) {
-        d->m_systemstr = "OpenEmbedded/Ramses";
-            d->m_system = System_OpenZaurus;
-
-        QTextStream ts(&f);
-        ts.setDevice(&f);
-        d->m_sysverstr = ts.readLine();
-        f.close();
-    }
+    // Distribution detection code now in the base class
 
     m_power_timer = 0;
 

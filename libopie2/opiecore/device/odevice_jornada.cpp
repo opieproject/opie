@@ -114,19 +114,8 @@ void Jornada::init(const QString&)
     d->m_vendor = Vendor_HP;
     d->m_modelstr = "Jornada 56x";
     d->m_model = Model_Jornada_56x;
-    d->m_systemstr = "Familiar";
-    d->m_system = System_Familiar;
     d->m_rotation = Rot0;
-
-    QFile f ( "/etc/familiar-version" );
-    f.setName ( "/etc/familiar-version" );
-    if ( f.open ( IO_ReadOnly )) {
-
-        QTextStream ts ( &f );
-        d->m_sysverstr = ts.readLine().mid( 10 );
-
-        f. close();
-    }
+    //Distribution detecting code is now in base class
 }
 
 void Jornada::initButtons()
@@ -178,9 +167,9 @@ bool Jornada::setDisplayBrightness( int bright )
     	cmdline = QString().sprintf( "echo 4 > /sys/class/backlight/sa1100fb/power");
     else
     	cmdline = QString().sprintf( "echo 0 > /sys/class/backlight/sa1100fb/power; echo %d > /sys/class/backlight/sa1100fb/brightness", value );
-    
+
     res = ( ::system( (const char*) cmdline ) == 0 );
-    
+
     return res;
 }
 
@@ -209,7 +198,7 @@ bool Jornada::suspend( )
 bool Jornada::setDisplayStatus ( bool on )
 {
     bool res = false;
- 
+
     QString cmdline = QString().sprintf( "echo %d > /sys/class/lcd/sa1100fb/power; echo %d > /sys/class/backlight/sa1100fb/power", on ? "0" : "4", on? "0" : "4" );
 
     res = ( ::system( (const char*) cmdline ) == 0 );

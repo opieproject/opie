@@ -1,27 +1,27 @@
 /*
-                     This file is part of the Opie Project
-                      Copyright (C) The Opie Team <opie-devel@handhelds.org>
+                             This file is part of the Opie Project
+                             Copyright (C) The Opie Team <opie-devel@handhelds.org>
               =.
             .=l.
-     .>+-=
-_;:,   .>  :=|.         This program is free software; you can
-.> <`_,  > .  <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--  :           the terms of the GNU Library General Public
-.="- .-=="i,   .._         License as published by the Free Software
-- .  .-<_>   .<>         Foundation; either version 2 of the License,
-  ._= =}    :          or (at your option) any later version.
-  .%`+i>    _;_.
-  .i_,=:_.   -<s.       This program is distributed in the hope that
-  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
-  : ..  .:,   . . .    without even the implied warranty of
-  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
- _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=    =    ;      Library General Public License for more
-++=  -.   .`   .:       details.
-:   = ...= . :.=-
--.  .:....=;==+<;          You should have received a copy of the GNU
- -_. . .  )=. =           Library General Public License along with
-  --    :-=`           this library; see the file COPYING.LIB.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -134,28 +134,7 @@ void SIMpad::init(const QString&)
             break;
     }
 
-    f. setName ( "/etc/familiar-version" );
-    if ( f. open ( IO_ReadOnly )) {
-        d->m_systemstr = "Familiar";
-        d->m_system = System_Familiar;
-
-        QTextStream ts ( &f );
-        d->m_sysverstr = ts. readLine(). mid ( 10 );
-
-        f. close();
-    } else {
-        f. setName ( "/etc/oz_version" );
-
-                    if ( f. open ( IO_ReadOnly )) {
-            d->m_systemstr = "OpenEmbedded/SIMpad";
-            d->m_system = System_OpenZaurus;
-
-            QTextStream ts ( &f );
-            ts.setDevice ( &f );
-            d->m_sysverstr = ts. readLine();
-            f. close();
-        }
-    }
+    //Distribution detecting code is now in base class
 
     m_leds [0] = m_leds [1] = Led_Off;
 

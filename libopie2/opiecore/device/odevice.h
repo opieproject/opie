@@ -1,27 +1,27 @@
 /*
-                     This file is part of the Opie Project
-                      Copyright (C) The Opie Team <opie-devel@handhelds.org>
+                             This file is part of the Opie Project
+                             Copyright (C) The Opie Team <opie-devel@handhelds.org>
               =.
             .=l.
-     .>+-=
-_;:,   .>  :=|.         This program is free software; you can
-.> <`_,  > .  <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--  :           the terms of the GNU Library General Public
-.="- .-=="i,   .._         License as published by the Free Software
-- .  .-<_>   .<>         Foundation; either version 2 of the License,
-  ._= =}    :          or (at your option) any later version.
-  .%`+i>    _;_.
-  .i_,=:_.   -<s.       This program is distributed in the hope that
-  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
-  : ..  .:,   . . .    without even the implied warranty of
-  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
- _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=    =    ;      Library General Public License for more
-++=  -.   .`   .:       details.
-:   = ...= . :.=-
--.  .:....=;==+<;          You should have received a copy of the GNU
- -_. . .  )=. =           Library General Public License along with
-  --    :-=`           this library; see the file COPYING.LIB.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -94,6 +94,11 @@ enum OModel {
     Model_Yopy_3500     = ( Model_Yopy | 0x000002 ),
     Model_Yopy_3700     = ( Model_Yopy | 0x000003 ),
 
+    Model_Beagle        = ( 6 << 24 ),
+
+    Model_Beagle_All    = ( Model_Beagle | 0xffffff ),
+    Model_Beagle_PA100  = ( Model_Beagle | 0x000001 ),
+
 };
 
 /**
@@ -107,6 +112,7 @@ enum OVendor {
     Vendor_SIEMENS,
     Vendor_MundN,
     Vendor_GMate,
+    Vendor_MasterIA,
 };
 
 /**
@@ -119,6 +125,22 @@ enum OSystem {
     System_Zaurus,
     System_OpenZaurus,
     System_Linupy,
+    System_OpenEmbedded,
+};
+
+typedef struct {
+    OSystem system;
+    char* sysstr;
+    char* sysvfile;
+} ODistribution;
+
+static ODistribution distributions[] =
+{
+    { System_Familiar,        "FamiliarLinux",   "/etc/familiar-version" },
+    { System_OpenZaurus,      "OpenZaurus",      "/etc/oz_version" },
+    { System_OpenEmbedded,    "OpenEmbedded",    "/etc/oe-version" },
+    { System_Unknown,         "Linux",           "/etc/issue" },
+
 };
 
 enum OLedState {

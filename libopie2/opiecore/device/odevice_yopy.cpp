@@ -78,18 +78,9 @@ void Yopy::init(const QString&)
     d->m_modelstr = "Yopy3700";
     d->m_model = Model_Yopy_3700;
     d->m_rotation = Rot0;
-
     d->m_systemstr = "Linupy";
     d->m_system = System_Linupy;
-
-    QFile f ( "/etc/issue" );
-    if ( f. open ( IO_ReadOnly ) )
-    {
-        QTextStream ts ( &f );
-        ts.readLine();
-        d->m_sysverstr = ts. readLine();
-        f. close();
-    }
+    // Distribution detection code now in the base class
 }
 
 

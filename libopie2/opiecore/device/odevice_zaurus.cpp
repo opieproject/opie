@@ -115,36 +115,28 @@ struct z_button z_buttons_c700 [] = {
 //
 //       Comments? - mickeyl.
 
-void Zaurus::init(const QString&)
+void Zaurus::init(const QString& cpu_info)
 {
-    d->m_vendorstr = "Sharp";
-    d->m_vendor = Vendor_Sharp;
-    m_embedix = true;  // Not openzaurus means: It has an embedix kernel !
-
-    // QFile f ( "/proc/filesystems" );
-    QString model;
-
-    // It isn't a good idea to check the system configuration to
-    // detect the distribution !
-    // Otherwise it may happen that any other distribution is detected as openzaurus, just
-    // because it uses a jffs2 filesystem..
-    // (eilers)
-    // if ( f. open ( IO_ReadOnly ) && ( QTextStream ( &f ). read(). find ( "\tjffs2\n" ) >= 0 )) {
-    QFile f ("/etc/oz_version");
-    if ( f.exists() ){
+    // generic distribution code already scanned /etc/issue at that point -
+    // embedix releases contain "Embedix <version> | Linux for Embedded Devices"
+    if ( d->m_sysverstr.contains( "embedix", false ) )
+    {
+        d->m_vendorstr = "Sharp";
+        d->m_vendor = Vendor_Sharp;
+        d->m_systemstr = "Zaurus";
+        d->m_system = System_Zaurus;
+        m_embedix = true;
+    }
+    else
+    {
         d->m_vendorstr = "OpenZaurus Team";
         d->m_systemstr = "OpenZaurus";
         d->m_system = System_OpenZaurus;
+        // sysver already gathered
 
-        if ( f. open ( IO_ReadOnly )) {
-            QTextStream ts ( &f );
-            d->m_sysverstr = ts. readLine();//. mid ( 10 );
-            f. close();
-        }
-
-        // Openzaurus sometimes uses the embedix kernel!
-        // => Check whether this is an embedix kernel
+        // Openzaurus sometimes uses the embedix kernel, check if this is one
         FILE *uname = popen("uname -r", "r");
+        QFile f;
         QString line;
         if ( f.open(IO_ReadOnly, uname) ) {
             QTextStream ts ( &f );
@@ -154,27 +146,18 @@ void Zaurus::init(const QString&)
                 m_embedix = true;
             else
                 m_embedix = false;
-            f. close();
+            f.close();
         }
         pclose(uname);
     }
-    else {
-        d->m_systemstr = "Zaurus";
-        d->m_system = System_Zaurus;
-    }
 
-    f. setName ( "/proc/cpuinfo" );
-    if ( f. open ( IO_ReadOnly ) ) {
-        QTextStream ts ( &f );
-        QString line;
-        while( line = ts. readLine() ) {
-            if ( line. left ( 8 ) == "Hardware" )
-                break;
-        }
-        int loc = line. find ( ":" );
-        if ( loc != -1 )
-            model = line. mid ( loc + 2 ). simplifyWhiteSpace( );
-    }
+    // check the Zaurus model
+    QString model;
+    int loc = cpu_info.find( ":" );
+    if ( loc != -1 )
+        model = cpu_info.mid( loc+2 ).simplifyWhiteSpace();
+    else
+        model = cpu_info;
 
     if ( model == "SHARP Corgi" ) {
         d->m_model = Model_Zaurus_SLC7x0;
@@ -193,8 +176,10 @@ void Zaurus::init(const QString&)
         d->m_modelstr = "Zaurus SL-5500 or SL-5000d";
     } else {
         d->m_model = Model_Zaurus_SL5500;
-        d->m_modelstr = "Zaurus (Model unknown)";
+        d->m_modelstr = "Unkown Zaurus";
     }
+
+    // set initial rotation
 
     bool flipstate = false;
     switch ( d->m_model ) {
