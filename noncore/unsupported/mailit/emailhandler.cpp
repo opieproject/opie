@@ -44,14 +44,14 @@ EmailHandler::EmailHandler()
   smtpClient = new SmtpClient();
   popClient = new PopClient();
   
-  connect(smtpClient, SIGNAL(errorOccurred(int)), this,
-      SIGNAL(smtpError(int)) );
+  connect(smtpClient, SIGNAL(errorOccurred(int, const QString &)), this,
+      SIGNAL(smtpError(int, const QString &)) );
   connect(smtpClient, SIGNAL(mailSent()), this, SIGNAL(mailSent()) );
   connect(smtpClient, SIGNAL(updateStatus(const QString &)), this,
       SIGNAL(updateSmtpStatus(const QString &)) );
   
-  connect(popClient, SIGNAL(errorOccurred(int)), this,
-      SIGNAL(popError(int)) );
+  connect(popClient, SIGNAL(errorOccurred(int, const QString &)), this,
+      SIGNAL(popError(int, const QString &)) );
   connect(popClient, SIGNAL(newMessage(const QString &, int, uint, bool)),
       this, SLOT(messageArrived(const QString &, int, uint, bool)) );
   connect(popClient, SIGNAL(updateStatus(const QString &)), this,
@@ -162,7 +162,7 @@ bool EmailHandler::parse(const QString &in, const QString &lineShift, Email *mai
   mail->files.setAutoDelete(TRUE);
   
   temp = lineShift + "." + lineShift;
-  
+
   if (in.right(temp.length()) != temp) {
     mail->rawMail += temp;
   }

@@ -98,8 +98,8 @@ public slots:
   void deleteItem();
   void getNewMail();
   void getAllNewMail();
-  void smtpError(int code);
-  void popError(int code);
+  void smtpError(int code, const QString & Msg );
+  void popError(int code, const QString & Msg);
   void inboxItemSelected();
   void outboxItemSelected();
   void inboxItemPressed();

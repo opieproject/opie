@@ -21,7 +21,7 @@
 #include <qmessagebox.h>
 #include "mailitwindow.h"
 
-MailItWindow::MailItWindow(QWidget *parent, const char *name, WFlags fl)
+MailItWindow::MailItWindow(QWidget *parent, const char *name, WFlags /*fl*/)
   : QMainWindow(parent, name, WStyle_ContextHelp)
 {
   currentCaption = tr("Mailit");

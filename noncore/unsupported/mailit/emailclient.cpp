@@ -59,10 +59,10 @@ EmailClient::EmailClient( QWidget* parent,  const char* name, WFlags fl )
   
   connect(emailHandler, SIGNAL(mailSent()), this, SLOT(mailSent()) );
   
-  connect(emailHandler, SIGNAL(smtpError(int)), this,
-      SLOT(smtpError(int)) );
-  connect(emailHandler, SIGNAL(popError(int)), this,
-      SLOT(popError(int)) );
+  connect(emailHandler, SIGNAL(smtpError(int,const QString &)), this,
+      SLOT(smtpError(int,const QString &)) );
+  connect(emailHandler, SIGNAL(popError(int,const QString &)), this,
+      SLOT(popError(int,const QString &)) );
   
   connect(inboxView, SIGNAL(doubleClicked(QListViewItem *)), this, SLOT(inboxItemSelected()) );
   connect(outboxView, SIGNAL(doubleClicked(QListViewItem *)), this, SLOT(outboxItemSelected()) );
@@ -147,26 +147,26 @@ void EmailClient::init()
   connect(sendMailButton, SIGNAL(activated()), this, SLOT(sendQuedMail()) );
   sendMailButton->addTo(bar);
   sendMailButton->addTo(mail);
-  sendMailButton->setWhatsThis(tr("Send mail queued in the outbox") );
+  sendMailButton->setWhatsThis("Send mail queued in the outbox");
     
   composeButton = new QAction(tr("Compose"), Resource::loadPixmap("new"), QString::null, 0, this, 0);
   connect(composeButton, SIGNAL(activated()), this, SLOT(compose()) );
   composeButton->addTo(bar);
   composeButton->addTo(mail);
-  composeButton->setWhatsThis(tr("Compose a new mail"));
+  composeButton->setWhatsThis("Compose a new mail");
   
   cancelButton = new QAction(tr("Cancel transfer"), Resource::loadPixmap("close"), QString::null, 0, this, 0);
   connect(cancelButton, SIGNAL(activated()), this, SLOT(cancel()) );
   cancelButton->addTo(mail);
   cancelButton->addTo(bar);
   cancelButton->setEnabled(FALSE);
-  cancelButton->setWhatsThis(tr("Stop the currently active mail transfer"));
+  cancelButton->setWhatsThis("Stop the currently active mail transfer");
   
   
   deleteButton = new QAction( tr( "Delete" ), Resource::loadPixmap( "trash" ), QString::null, 0, this, 0 );
   connect( deleteButton, SIGNAL( activated() ), this, SLOT( deleteItem() ) );
   deleteButton->addTo(bar);
-  deleteButton->setWhatsThis(tr("Remove the currently selected eMail(s)"));
+  deleteButton->setWhatsThis("Remove the currently selected eMail(s)");
   
   mailboxView = new OTabWidget( this, "mailboxView" );
 
@@ -257,7 +257,7 @@ void EmailClient::enqueMail(const Email &mail)
 {
  if (accountList.count() == 0) {
     QMessageBox::warning(qApp->activeWindow(),
-      tr("No account selected"), tr("You must create an account"), tr("OK\n") );
+      tr("No account selected"), tr("You must create an account"), "OK\n");
     return;
   }
    
@@ -281,7 +281,7 @@ void EmailClient::sendQuedMail()
   int count = 0;
 
   if (accountList.count() == 0) {
-    QMessageBox::warning(qApp->activeWindow(), tr("No account selected"), tr("You must create an account"), tr("OK\n") );
+    QMessageBox::warning(qApp->activeWindow(), "No account selected", "You must create an account", "OK\n");
     return;
   }
   //traverse listview, find messages to send
@@ -321,8 +321,8 @@ void EmailClient::mailSent()
 void EmailClient::getNewMail() {
   
   if (accountList.count() == 0) {
-    QMessageBox::warning(qApp->activeWindow(),tr("No account selected"),
-      tr("You must create an account"), tr("OK\n") );
+    QMessageBox::warning(qApp->activeWindow(),"No account selected",
+      "You must create an account", "OK\n");
     return;
   }
   
@@ -480,12 +480,12 @@ void EmailClient::mailArrived(const Email &mail, bool fromDisk)
   
 }
 
-void EmailClient::allMailArrived(int count)
+void EmailClient::allMailArrived(int /*count*/)
 {
   // not previewing means all mailtransfer has been done
   /*if (!previewingMail) {*/
     if ( (allAccounts) && ( (currentAccount = accountList.next()) !=0 ) ) {
-      emit newCaption(tr("Mailit - ") + currentAccount->accountName);
+      emit newCaption("Mailit - " + currentAccount->accountName);
       getNewMail();
       return;
     } else {
@@ -494,7 +494,7 @@ void EmailClient::allMailArrived(int count)
       getMailButton->setEnabled(TRUE);
       cancelButton->setEnabled(FALSE);
       selectAccountMenu->setEnabled(TRUE);
-      status1Label->setText(tr("Idle"));
+      status1Label->setText("Idle");
   
       progressBar->reset();
       return;
@@ -518,24 +518,26 @@ void EmailClient::moveMailFront(Email *mailPtr)
   }
 }
 
-void EmailClient::smtpError(int code)
+void EmailClient::smtpError(int code, const QString & Msg)
 {
   QString temp;
   
-  if (code == ErrUnknownResponse)
-    temp = tr("<qt>Unknown response from server</qt>");
-  
-  if (code == QSocket::ErrHostNotFound)
-    temp = tr("<qt>host not found</qt>");
-  if (code == QSocket::ErrConnectionRefused)
-    temp = tr("<qt>connection refused</qt>");
-  if (code == QSocket::ErrSocketRead)
-    temp = tr("<qt>socket packet error</qt>");
+  if (code == ErrUnknownResponse) {
+      temp = tr("<qt>Unknown response from server</qt>");
+     if( ! Msg.isEmpty() )
+       temp += Msg;
+   } else if (code == QSocket::ErrHostNotFound) {
+      temp = tr("<qt>host not found</qt>");
+   } else if (code == QSocket::ErrConnectionRefused) {
+      temp = tr("<qt>connection refused</qt>");
+   } else if (code == QSocket::ErrSocketRead) {
+      temp = tr("<qt>socket packet error</qt>");
+   }
   
   if (code != ErrCancel) {
-    QMessageBox::warning(qApp->activeWindow(), tr("Sending error"), temp, tr("OK\n"));
+    QMessageBox::warning(qApp->activeWindow(), "Sending error", temp, "OK\n");
   } else {
-    status2Label->setText(tr("Aborted by user"));
+    status2Label->setText("Aborted by user");
   }
   
   sending = FALSE;
@@ -544,26 +546,29 @@ void EmailClient::smtpError(int code)
   quedMessages.clear();
 }
 
-void EmailClient::popError(int code)
+void EmailClient::popError(int code, const QString & Msg)
 {
   QString temp;
   
-  if (code == ErrUnknownResponse)
-    temp = tr("<qt>Unknown response from server</qt>");
-  if (code == ErrLoginFailed)
-    temp = tr("<qt>Login failed\nCheck user name and password</qt>");
-  
-  if (code == QSocket::ErrHostNotFound)
-    temp = tr("<qt>host not found</qt>");
-  if (code == QSocket::ErrConnectionRefused)
-    temp = tr("<qt>connection refused</qt>");
-  if (code == QSocket::ErrSocketRead)
-    temp = tr("<qt>socket packet error</qt>");
-    
+   if (code == ErrUnknownResponse) {
+      temp = tr("<qt>Unknown response from server</qt>");
+     if( ! Msg.isEmpty() )
+       temp += Msg;
+   } else if (code == ErrLoginFailed) {
+     temp = tr("<qt>Login failed\nCheck user name and password</qt>");
+   } else if (code == QSocket::ErrHostNotFound) {
+     temp = tr("<qt>host not found</qt>");
+   } else if (code == QSocket::ErrConnectionRefused) {
+     temp = tr("<qt>connection refused</qt>");
+   } else if (code == QSocket::ErrSocketRead) {
+     temp = tr("<qt>socket packet error</qt>");
+   } 
+
   if (code != ErrCancel) {
-    QMessageBox::warning(qApp->activeWindow(), tr("Receiving error"), temp, tr("OK\n"));
+      QMessageBox::warning(qApp->activeWindow(), tr("Receiving error"), temp, tr("OK\n"));
+
   } else {
-    status2Label->setText(tr("Aborted by user"));
+    status2Label->setText("Aborted by user");
   }
   
   receiving = FALSE;
@@ -777,10 +782,10 @@ void EmailClient::selectAccount(int id)
 {
   if (accountList.count() > 0) {
     currentAccount = accountList.at(id);
-    emit newCaption(tr("Mailit - ") + currentAccount->accountName);
+    emit newCaption("Mailit - " + currentAccount->accountName);
     getNewMail();
   } else {
-    emit newCaption(tr("Mailit ! No account defined"));
+    emit newCaption("Mailit ! No account defined");
   }
 }
 
@@ -820,9 +825,9 @@ void EmailClient::deleteAccount(int id)
   QString message;
   
   newAccount = accountList.at(id);
-  message = tr("Delete account:\n") + newAccount->accountName;
-  switch( QMessageBox::warning( this, tr("Mailit"), message,
-      tr("Yes"), tr("No"), 0, 0, 1 ) ) {
+  message = "Delete account:\n" + newAccount->accountName;
+  switch( QMessageBox::warning( this, "Mailit", message,
+      "Yes", "No", 0, 0, 1 ) ) {
     
     case 0: accountList.remove(id);
         updateAccounts();
@@ -841,7 +846,7 @@ void EmailClient::updateAccounts()
   selectAccountMenu->clear();
   deleteAccountMenu->clear();
 
-  newAccountId = editAccountMenu->insertItem(tr("New"), this,
+  newAccountId = editAccountMenu->insertItem("New", this,
       SLOT(editAccount(int)) );
   editAccountMenu->insertSeparator();
   
@@ -898,7 +903,7 @@ void EmailClient::setMailSize(int size)
         progressBar->setTotalSteps(size);
 }
 
-void EmailClient::setTotalSize(int size)
+void EmailClient::setTotalSize(int /*size*/)
 {
   
 }
@@ -920,7 +925,7 @@ void EmailClient::deleteItem()
   QListView* box;
   
   EmailListItem* eli;
-  int pos;
+  //  int pos;
     
   inbox ? box=inboxView : box=outboxView;
   
@@ -946,7 +951,7 @@ void EmailClient::inboxItemReleased()
 
 /*void EmailClient::timerEvent(QTimerEvent *e)
 {
-  /*killTimer(timerID);
+  //killTimer(timerID);
   
   
   QPopupMenu *action = new QPopupMenu(this);
@@ -991,11 +996,11 @@ void EmailClient::download(Email* mail)
           tr("No account associated"), tr("There is no active account \nassociated to this mail\n it can not be downloaded"), "Abort\n");
 }
 
-void EmailClient::receive(const QCString& msg, const QByteArray& data)
+void EmailClient::receive(const QCString& /*msg*/, const QByteArray& /*data*/)
 {
   /*if (msg=="getMail()")
   {
-    /*QDialog qd(qApp->activeWindow(),"Getting mail",true);
+    //QDialog qd(qApp->activeWindow(),"Getting mail",true);
     QVBoxLayout *vbProg = new QVBoxLayout( &qd );
   
     initStatusBar(&qd);

@@ -44,7 +44,7 @@ public:
   
 signals:
   void newMessage(const QString &, int, uint, bool);
-  void errorOccurred(int status);
+  void errorOccurred(int status, const QString & Msg );
   void updateStatus(const QString &);
   void mailTransfered(int);
   void mailboxSize(int);
@@ -53,6 +53,7 @@ signals:
     
 public slots:
   void errorHandling(int);
+  void errorHandlingWithMsg(int, const QString & );
 
 protected slots:
   void connectionEstablished();

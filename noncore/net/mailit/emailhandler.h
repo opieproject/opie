@@ -127,8 +127,8 @@ public:
   
 signals:
   void mailSent();
-  void smtpError(int);
-  void popError(int);
+  void smtpError(int, const QString & Msg );
+  void popError(int, const QString & Msg );
   void mailArrived(const Email &, bool);
   void updatePopStatus(const QString &);
   void updateSmtpStatus(const QString &);
