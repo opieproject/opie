@@ -402,7 +402,7 @@ Opie-Mail - свободная программа!</translation>
     </message>
     <message>
         <source>State</source>
-        <translation>Обл.</translation>
+        <translation>Область</translation>
     </message>
     <message>
         <source>Zip Code</source>
