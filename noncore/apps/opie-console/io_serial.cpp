@@ -1,12 +1,163 @@
+#include <fcntl.h>
+#include <termios.h>
+#include <errno.h>
+#include <unistd.h>
 #include "io_serial.h"
 
 IOSerial::IOSerial(const Config &config) : IOLayer(config) {
+    m_fd = 0;
+    reload(config);
 }
 
 
-void IOSerial::error(int number, const QString &error) {
+IOSerial::~IOSerial() {
+    if (m_fd) {
+        close();
+    }
 }
 
-void IOSerial::received(const QByteArray &array) {
+void IOSerial::send(const QByteArray &data) {
+    if (m_fd) {
+        write(m_fd, data.data(), data.size());
+    } else {
+        emit error(Refuse, tr("Not connected"));
+    }
 }
 
+void IOSerial::close() {
+    if (m_fd) {
+        delete m_read;
+        delete m_error;
+        ::close(m_fd);
+        m_fd = 0;
+    } else {
+        emit error(Refuse, tr("Not connected"));
+    }
+}
+
+bool IOSerial::open() {
+    if (!m_fd) {
+        struct termios tty;
+        m_fd = ::open(m_device, O_RDWR | O_NOCTTY | O_NONBLOCK);
+        if (m_fd < 0) {
+            emit error(CouldNotOpen, strerror(errno));
+            return FALSE;
+        }
+        tcgetattr(m_fd, &tty);
+
+        /* Baud rate */
+        int speed = getBaud(m_baud);
+        if (speed == -1) {
+            emit error(Refuse, tr("Invalid baud rate"));
+        }
+        cfsetospeed(&tty, speed);
+        cfsetispeed(&tty, speed);
+
+        /* Take care of Space / Mark parity */
+        if (m_dbits == 7 && (m_parity == ParitySpace || m_parity == ParityMark)) {
+            m_dbits = 8;
+        }
+        
+        /* Data bits */
+        switch (m_dbits) {
+            case 5: tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS5; break;
+            case 6: tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS6; break;
+            case 7: tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS7; break;
+            case 8: tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS8; break;
+        }
+        
+        /* Raw, no echo mode */
+        tty.c_iflag =  IGNBRK;
+        tty.c_lflag = 0;
+        tty.c_oflag = 0;
+        tty.c_cflag |= CLOCAL | CREAD;
+
+        /* Stop bits */
+        if (m_sbits == 2) {
+            tty.c_cflag |= CSTOPB;
+        } else {
+            tty.c_cflag &= ~CSTOPB;
+        }
+        
+        tty.c_cc[VMIN] = 1;
+        tty.c_cc[VTIME] = 5;
+
+        /* Flow control */
+        if (m_flow & FlowSW)
+            tty.c_iflag |= IXON | IXOFF;
+        else
+            tty.c_iflag &= ~(IXON|IXOFF|IXANY);
+        
+        if (m_flow & FlowHW)
+            tty.c_cflag |= CRTSCTS;
+        else
+            tty.c_cflag &= ~CRTSCTS;
+        
+        /* Parity */
+        tty.c_cflag &= ~(PARENB | PARODD);
+        if (m_parity & ParityEven)
+            tty.c_cflag |= PARENB;
+        else if (m_parity & ParityOdd)
+            tty.c_cflag |= (PARENB | PARODD);
+        
+        /* Set the changes */
+        tcsetattr(m_fd, TCSANOW, &tty);
+
+        /* Notifications on read & errors */
+        m_read = new QSocketNotifier(m_fd, QSocketNotifier::Read, this);
+        m_error = new QSocketNotifier(m_fd, QSocketNotifier::Exception, this);
+        connect(m_read, SIGNAL(activated(int)), this, SLOT(dataArrived()));
+        connect(m_error, SIGNAL(activated(int)), this, SLOT(errorOccured()));
+        return TRUE;
+    } else {
+        emit error(Refuse, tr("Device is already connected"));
+        return FALSE;
+    }
+}
+
+void IOSerial::reload(const Config &config) {
+    m_device = config.readEntry("Device", SERIAL_DEFAULT_DEVICE);
+    m_baud = config.readNumEntry("Baud", SERIAL_DEFAULT_BAUD);
+}
+
+int IOSerial::getBaud(int baud) const {
+    switch (baud) {
+        case 300:    return B300;    break;
+        case 600:    return B600;    break;
+        case 1200:   return B1200;   break;
+        case 2400:   return B2400;   break;
+        case 4800:   return B4800;   break;
+        case 9600:   return B9600;   break;
+        case 19200:  return B19200;  break;
+        case 38400:  return B38400;  break;
+        case 57600:  return B57600;  break;
+        case 115200: return B115200; break;
+    }
+    return -1;
+}
+
+void IOSerial::errorOccured() {
+    emit error(ClosedUnexpected, strerror(errno));
+    close();
+}
+
+void IOSerial::dataArrived() {
+    QByteArray array;
+    char buf[4096];
+
+    int len = read(m_fd, buf, 4096);
+    if (len == 0)
+        close();
+    if (len < 0)
+        return;
+    array.setRawData(buf, len);
+    emit received(array);
+}
+
+QString IOSerial::identifier() const {
+    return "serial";
+}
+
+QString IOSerial::name() const {
+    return "RS232 Serial IO Layer";
+}

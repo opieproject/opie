@@ -2,7 +2,7 @@
 #define OPIE_IO_LAYER_H
 
 #include <qobject.h>
-
+#include <qpe/config.h>
 
 /**
  * This is the base class for IO Layers
@@ -29,7 +29,8 @@ public:
 
     /**
      * create an IOLayer instance from a config file
-     * can be used by session managemnt/profiles
+     * the currently set group stores the profile/session
+     * information
      */
     IOLayer( const Config& );
 
@@ -37,6 +38,16 @@ public:
      * destructor
      */
     virtual ~IOLayer();
+
+    /**
+     * a small internal identifier
+     */
+    virtual QString identifier() const = 0;
+
+    /**
+     * a short name
+     */
+    virtual QString name() const = 0;
 signals:
     /**
      * received input as QCString
@@ -70,17 +81,6 @@ public slots:
      * closes and reloads the settings
      */
     virtual void reload( const Config& ) = 0;
-
-    /**
-     * a small internal identifier
-     */
-    virtual QString identifier()const = 0;
-
-    /**
-     * a short name
-     */
-    virtual QString name()const = 0;
-
 };
 
 #endif

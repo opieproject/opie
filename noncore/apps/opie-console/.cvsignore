@@ -1,0 +1,3 @@
+moc*.cpp
+Makefile
+Makefile.in
