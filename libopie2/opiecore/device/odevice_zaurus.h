@@ -76,15 +76,12 @@
 #define APM_EVT_POWER_BUTTON    (1 << 0)
 
 // Brightness
-#define FL_IOCTL_STEP_CONTRAST    100
-
-#define CORGI_TOSA_BL_IOCTL_ON                  1
-#define CORGI_TOSA_BL_IOCTL_OFF                 2
-#define CORGI_TOSA_BL_IOCTL_STEP_CONTRAST     100
-#define CORGI_TOSA_BL_IOCTL_GET_STEP_CONTRAST 101
-#define CORGI_TOSA_BL_IOCTL_GET_STEP          102
-#define CORGI_BL_PROC_DEVICE             corgi-bl
-#define TOSA_BL_PROC_DEVICE              tosa-bl
+#define SHARP_FL_IOCTL_DEVICE   "/dev/sharp_fl"
+#define SHARP_FL_IOCTL_ON                  1
+#define SHARP_FL_IOCTL_OFF                 2
+#define SHARP_FL_IOCTL_STEP_CONTRAST     100
+#define SHARP_FL_IOCTL_GET_STEP_CONTRAST 101
+#define SHARP_FL_IOCTL_GET_STEP          102
 
 namespace Opie {
 namespace Core {
@@ -96,9 +93,10 @@ class Zaurus : public ODevice
     virtual void initButtons();
 
   public:
-    virtual bool setSoftSuspend ( bool soft );
+    virtual bool setSoftSuspend( bool soft );
 
-    virtual bool setDisplayBrightness ( int b );
+    virtual bool setDisplayBrightness( int b );
+    virtual bool setDisplayStatus( bool on );
     virtual int displayBrightnessResolution() const;
 
     virtual void playAlarmSound();

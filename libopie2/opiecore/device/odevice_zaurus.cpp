@@ -408,65 +408,47 @@ bool Zaurus::setDisplayBrightness( int bright )
 {
     //qDebug( "Zaurus::setDisplayBrightness( %d )", bright );
     bool res = false;
-    int fd;
 
     if ( bright > 255 ) bright = 255;
     if ( bright < 0 ) bright = 0;
 
     if ( m_embedix )
     {
-        if ( d->m_model == Model_Zaurus_SLC7x0 )
+        int numberOfSteps = displayBrightnessResolution();
+        int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_WRONLY|O_NONBLOCK );       
+        if ( fd )
         {
-            //qDebug( "using special treatment for devices with the corgi backlight interface" );
-            // special treatment for devices with the corgi backlight interface
-            if (( fd = ::open ( "/proc/driver/fl/corgi-bl", O_WRONLY )) >= 0 )
-            {
-                int value = ( bright == 1 ) ? 1 : static_cast<int>( bright * ( 17.0 / 255.0 ) );
-                char writeCommand[100];
-                const int count = sprintf( writeCommand, "%x\n", value );
-                res = ( ::write ( fd, writeCommand, count ) != -1 );
-                ::close ( fd );
-            }
-            return res;
-        }
-        else
-        if ( d->m_model == Model_Zaurus_SL6000 )
-        {
-            //qDebug( "using special treatment for devices with the tosa backlight interface" );
-            // special treatment for devices with the tosa backlight interface
-            if (( fd = ::open ( "/proc/driver/fl/tosa-bl", O_WRONLY )) >= 0 )
-            {
-                int value = ( bright == 1 ) ? 1 : static_cast<int>( bright * ( 17.0 / 255.0 ) );
-                char writeCommand[100];
-                const int count = sprintf( writeCommand, "%x\n", value ); 
-                res = ( ::write ( fd, writeCommand, count ) != -1 );
-                ::close ( fd );  
-            }
-            return res;
-        }
-        else
-        {
-            // standard treatment for devices with the dumb embedix frontlight interface
-            if (( fd = ::open ( "/dev/fl", O_WRONLY )) >= 0 ) {
-                int bl = ( bright * 4 + 127 ) / 255; // only 4 steps on zaurus
-                if ( bright && !bl )
-                    bl = 1;
-                res = ( ::ioctl ( fd, FL_IOCTL_STEP_CONTRAST, bl ) == 0 );
-                ::close ( fd );
-            }
+            int val = ( numberOfSteps * 255 ) / 255;
+            res = ( ::ioctl ( fd, SHARP_FL_IOCTL_STEP_CONTRAST, val ) == 0 );
+            ::close ( fd );
         }
     }
     else
     {
-        // special treatment for the OpenZaurus unified interface
-        #define FB_BACKLIGHT_SET_BRIGHTNESS     _IOW('F', 1, u_int)             /* set brightness */
-        if (( fd = ::open ( "/dev/fb0", O_WRONLY )) >= 0 ) {
-            res = ( ::ioctl ( fd , FB_BACKLIGHT_SET_BRIGHTNESS, bright ) == 0 );
-            ::close ( fd );
-        }
+        qDebug( "ODevice handling for non-embedix kernels not yet implemented" );
     }
     return res;
 }
+
+bool Zaurus::setDisplayStatus( bool on )
+{
+    bool res = false;
+    if ( m_embedix )
+    {
+        int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_WRONLY|O_NONBLOCK );       
+        if ( fd )
+        {
+            int ioctlnum = on ? SHARP_FL_IOCTL_ON : SHARP_FL_IOCTL_OFF;
+            res = ( ::ioctl ( fd, ioctlnum, 0 ) == 0 );
+            ::close ( fd );
+        }
+    }
+    else
+    {
+        qDebug( "ODevice handling for non-embedix kernels not yet implemented" );
+    }
+    return res;
+}    
 
 bool Zaurus::suspend()
 {
@@ -486,12 +468,10 @@ bool Zaurus::suspend()
     ::sync(); // flush fs caches
     res = ( ::system ( "apm --suspend" ) == 0 );
 
-    // This is needed because the iPAQ apm implementation is asynchronous and we
+    // This is needed because the apm implementation is asynchronous and we
     // can not be sure when exactly the device is really suspended
-    // This can be deleted as soon as a stable familiar with a synchronous apm implementation exists.
-
     if ( res ) {
-        do { // Yes, wait 15 seconds. This APM bug sucks big time.
+        do { // Yes, wait 15 seconds. This APM sucks big time.
             ::usleep ( 200 * 1000 );
             ::gettimeofday ( &tvn, 0 );
         } while ((( tvn. tv_sec - tvs. tv_sec ) * 1000 + ( tvn. tv_usec - tvs. tv_usec ) / 1000 ) < 15000 );
@@ -541,11 +521,11 @@ ODirection Zaurus::direction() const
     int retval = 0;
     switch ( d->m_model ) {
         case Model_Zaurus_SLC7x0:
-            handle = ::open("/dev/apm_bios", O_RDWR|O_NONBLOCK);
+            handle = ::open( "/dev/apm_bios", O_RDWR|O_NONBLOCK );
             if (handle == -1) {
                 dir = CW;
             } else {
-                retval = ::ioctl(handle, SHARP_IOCTL_GET_ROTATION);
+                retval = ::ioctl( handle, SHARP_IOCTL_GET_ROTATION );
                 ::close (handle);
                 if (retval == 2 )
                     dir = CCW;
@@ -557,8 +537,7 @@ ODirection Zaurus::direction() const
         case Model_Zaurus_SLB600:
         case Model_Zaurus_SL5500:
         case Model_Zaurus_SL5000:
-        default:
-            dir = d->m_direction;
+        default: dir = d->m_direction; 
             break;
     }
     return dir;
@@ -569,13 +548,14 @@ int Zaurus::displayBrightnessResolution() const
 {
     if (m_embedix)
     {
-        if ( d->m_model == Model_Zaurus_SLC7x0 ) return 18;
-        if ( d->m_model == Model_Zaurus_SL6000 ) return 18;
-        return 5;
+        int handle = ::open( SHARP_FL_IOCTL_DEVICE, O_RDWR|O_NONBLOCK );
+        if ( handle != -1 ) return ::ioctl( handle, SHARP_FL_IOCTL_GET_STEP, 0 );
+        else return 1;
     }
     else
     {
-        return 256;
+        qDebug( "ODevice handling for non-embedix kernels not yet implemented" );
+        return 1;
     }
 }
 
