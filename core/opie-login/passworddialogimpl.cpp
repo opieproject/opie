@@ -211,12 +211,13 @@ bool PasswordDialogImpl::needDialog() {
             QString str = QString::fromLatin1(pwd->pw_passwd );
 
             /*
-             * If str is really empty it is passwordless anyway...
+             * If str is really empty it is passwordless anyway... or '*' is a hint to set one
+             * on OE/Familiar
              * else it is shadow based
              */
-            if(str.isEmpty() )
+            if(str.isEmpty() || str == '*' )
                 need = true;
-            else if ( str == '*' || str == 'x' )
+            else if ( str == 'x' )
 #ifdef OPIE_LOGIN_SHADOW_PW
                 need =  QString::fromLatin1( ::getspnam( pwd->pw_name )->sp_pwdp ).isEmpty();
 #else
