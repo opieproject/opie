@@ -541,25 +541,6 @@ void FileView::cut()
  
     flist.clear();
     while( item ){
-        if( ite
-    // ##### a better inmplementation might be to rename the CUT file
-    // ##### to ".QPE-FILEBROWSER-MOVING" rather than copying it.
-    QString cmd, dest, basename, cd = "/tmp/qpemoving";
-  QStringList newflist;
-  newflist.clear();
-  
-  cmd = "rm -rf " + cd;
-  system ( (const char *) cmd );
-  cmd = "mkdir " + cd;
-  system( (const char *) cmd );
-
-// get the names of the files to cut
-    FileItem * item;
- 
-    if((item = (FileItem *) firstChild()) == 0) return;
- 
-    flist.clear();
-    while( item ){
         if( item->isSelected() /*&& !item->isDir()*/ ){
             flist += item->getFilePath();
         }
@@ -1090,25 +1071,6 @@ void FileBrowser::updateShowSymlinks()
 }
 
 void FileBrowser::updateShowThumbnails()
-{
-  bool valShowThumbnails=viewMenu->isItemChecked( viewMenu->idAt( 2 ) );
-  valShowThumbnails=!valShowThumbnails;
-    viewMenu->setItemChecked( viewMenu->idAt( 2 ), valShowThumbnails );
-  fileView->setShowThumbnails(valShowThumbnails);
-
-    Config cfg("Filebrowser");
-    cfg.setGroup("View");
-    cfg.writeEntry("Thumbnails",valShowThumbnails?"TRUE":"FALSE");
-
-  fileView->updateDir();
-}
-
-void FileBrowser::cleanUp() {
-  QString cmdr = "rm -rf /tmp/filebrowserThumbnailCache";
-//  qDebug("exit");  
-  system(cmdr.latin1());
-}
-
 {
   bool valShowThumbnails=viewMenu->isItemChecked( viewMenu->idAt( 2 ) );
   valShowThumbnails=!valShowThumbnails;
