@@ -1,9 +1,7 @@
 #include "statusmail.h"
-#include "mailtypes.h"
-#include "abstractmail.h"
 #include <qlist.h>
 
-StatusMail::StatusMail(QList<Account>*list)
+StatusMail::StatusMail(QList<Account>&list)
 {
     currentImapStat.message_count=0;
     currentImapStat.message_unseen=0;
@@ -19,13 +17,13 @@ StatusMail::~StatusMail()
 {
 }
 
-void StatusMail::initAccounts(QList<Account>*accounts)
+void StatusMail::initAccounts(QList<Account>&accounts)
 {
-    if (!accounts) return;
+
     Account *it;
     folderStat currentStat;
     AbstractMail * current = 0;
-    for ( it = accounts->first(); it; it = accounts->next() ) {
+    for ( it = accounts.first(); it; it = accounts.next() ) {
         if ( it->getType().compare( "IMAP" ) == 0 ) {
             IMAPaccount*ima = static_cast<IMAPaccount *>(it);
             current = AbstractMail::getWrapper(ima);

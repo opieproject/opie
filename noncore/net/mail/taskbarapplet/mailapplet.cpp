@@ -10,6 +10,9 @@
 #include <qpe/config.h>
 
 #include <opie/odevice.h>
+#include <qlist.h>
+
+#include <libmailwrapper/settings.h>
 
 #include "mailapplet.h"
 
@@ -32,7 +35,7 @@ MailApplet::MailApplet( QWidget *parent, const char *name, WFlags fl )
 
 	hide();
 
-	connect( this, SIGNAL( clicked() ), SLOT( slotClicked() ) );
+  	connect( this, SIGNAL( clicked() ), SLOT( slotClicked() ) );
 
 	if ( !m_config->readBoolEntry( "Disabled", false ) ) {
 		m_intervalMs = m_config->readNumEntry( "CheckEvery", 5 ) * 60000;
@@ -40,8 +43,13 @@ MailApplet::MailApplet( QWidget *parent, const char *name, WFlags fl )
 		m_intervalTimer->start( m_intervalMs );
 		connect( m_intervalTimer, SIGNAL(timeout() ), SLOT( slotCheck() ) );
 
-		QTimer::singleShot( 0, this, SLOT( slotCheck() ) );
+                // delay 5 sec until the whole mail backend gets started .-)
+		QTimer::singleShot( 5000, this, SLOT( startup() ) );
 	}
+}
+
+MailApplet::~MailApplet() {
+       delete m_statusMail;
 }
 
 void MailApplet::drawButton(QPainter *) { }
@@ -58,6 +66,15 @@ void MailApplet::slotClicked() {
 
 		device->setLedState( led, Led_Off );
 	}
+
+   //        m_statusMails->reset_status();
+}
+
+void MailApplet::startup() {
+      Settings *settings = new Settings();
+      QList<Account> ma = settings->getAccounts();
+      StatusMail m_statusMail = StatusMail( ma );
+      delete settings;
 }
 
 void MailApplet::slotCheck() {
@@ -68,9 +85,12 @@ void MailApplet::slotCheck() {
 		m_intervalMs = newIntervalMs;
 	}
 
-        int newMails = 0;
 
-       	if ( true ) {
+        folderStat stat;
+        m_statusMail->check_current_stat( stat );
+
+        qDebug( QString( "test %1" ).arg( stat.message_unseen ) );
+       	if ( stat.message_unseen > 0 ) {
 		ODevice *device = ODevice::inst();
 		if ( isHidden() ) show();
 		if ( m_config->readBoolEntry( "BlinkLed", true ) ) {
@@ -82,12 +102,13 @@ void MailApplet::slotCheck() {
 		if ( m_config->readBoolEntry( "PlaySound", false ) )
 			device->alarmSound();
 
+        qDebug( QString( "test %1" ).arg( stat.message_unseen ) );
+
         Config cfg( "mail" );
         cfg.setGroup( "Status" );
-        cfg.writeEntry( "NewMails", newMails ); // todo
-
+        cfg.writeEntry( "NewMails", ( int )stat.message_unseen  );
     QCopEnvelope env( "QPE/Pim", "newMails(int)" );
-    env << newMails;
+    env << stat.message_unseen;
 
 	} else {
 		ODevice *device = ODevice::inst();
