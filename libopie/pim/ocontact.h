@@ -44,8 +44,6 @@ public:
     OContact( const QMap<int, QString> &fromMap );
     virtual ~OContact();
 
-    enum journal_action { ACTION_ADD, ACTION_REMOVE, ACTION_REPLACE };
-
     /*
      * do we need to inline them
      * if yes do we need to inline them this way?

@@ -13,11 +13,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.8 2002-11-14 17:04:24 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.h,v 1.9 2002-12-08 12:48:57 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.8  2002-11-14 17:04:24  eilers
+ * Revision 1.9  2002-12-08 12:48:57  eilers
+ * Moved journal-enum from ocontact into i the xml-backend..
+ *
+ * Revision 1.8  2002/11/14 17:04:24  eilers
  * Sorting will now work if fullname is identical on some entries
  *
  * Revision 1.7  2002/11/13 15:02:46  eilers
@@ -342,7 +345,7 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 	bool add ( const OContact &newcontact )
 		{
 			//qWarning("odefaultbackend: ACTION::ADD");
-			updateJournal (newcontact, OContact::ACTION_ADD);
+			updateJournal (newcontact, ACTION_ADD);
 			addContact_p( newcontact );
 			
 			m_changed = true;
@@ -364,7 +367,7 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 				}
 			}
 			if (found) {
-				updateJournal (contact, OContact::ACTION_REPLACE);
+				updateJournal (contact, ACTION_REPLACE);
 				m_contactList.remove (it);
 				m_contactList.append (contact);
 				return true;
@@ -385,7 +388,7 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 				}
 			}
 			if (found) {
-				updateJournal ( *it, OContact::ACTION_REMOVE);
+				updateJournal ( *it, ACTION_REMOVE);
 				m_contactList.remove (it);
 				return true;
 			} else
@@ -398,6 +401,9 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 	}
 	
  private:
+
+	enum journal_action { ACTION_ADD, ACTION_REMOVE, ACTION_REPLACE };
+
 	void addContact_p( const OContact &newcontact ){
 		m_contactList.append (newcontact);
 	}
@@ -417,7 +423,7 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 		const int JOURNALROW = JOURNALACTION + 1;
 		
 		bool foundAction = false;
-		OContact::journal_action action = OContact::ACTION_ADD;
+		journal_action action = ACTION_ADD;
 		int journalKey = 0;
 		QMap<int, QString> contactMap;
 		QMap<QString, QString> customMap;
@@ -538,7 +544,7 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 						  break;
 						*/
 					case JOURNALACTION:
-						action = OContact::journal_action(it.data().toInt());
+						action = journal_action(it.data().toInt());
 						foundAction = true;
 						qWarning ("ODefBack(journal)::ACTION found: %d", action);
 						break;
@@ -560,15 +566,15 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 				if (foundAction){
 					foundAction = false;
 					switch ( action ) {
-					case OContact::ACTION_ADD:
+					case ACTION_ADD:
 						addContact_p (contact);
 						break;
-					case OContact::ACTION_REMOVE:
+					case ACTION_REMOVE:
 						if ( !remove (contact.uid()) )
 							qWarning ("ODefBack(journal)::Unable to remove uid: %d",
 								  contact.uid() );
 						break;
-					case OContact::ACTION_REPLACE:
+					case ACTION_REPLACE:
 						if ( !replace ( contact ) )
 							qWarning ("ODefBack(journal)::Unable to replace uid: %d",
 								  contact.uid() );
@@ -595,7 +601,7 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 	
 	
 	void updateJournal( const OContact& cnt,
-			    OContact::journal_action action ) {
+			    journal_action action ) {
 		QFile f( m_journalName );
 		bool created = !f.exists();
 		if ( !f.open(IO_WriteOnly|IO_Append) )
