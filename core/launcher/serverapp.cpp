@@ -96,14 +96,14 @@ class DesktopPowerAlerter : public QMessageBox
     Q_OBJECT
 public:
     DesktopPowerAlerter( QWidget *parent, const char *name = 0 )
-	: QMessageBox( tr("Battery Status"), tr("Low Battery"),
-		       QMessageBox::Critical,
-		       QMessageBox::Ok | QMessageBox::Default,
-		       QMessageBox::NoButton, QMessageBox::NoButton,
-		       parent, name, FALSE )
+    : QMessageBox( tr("Battery Status"), tr("Low Battery"),
+               QMessageBox::Critical,
+               QMessageBox::Ok | QMessageBox::Default,
+               QMessageBox::NoButton, QMessageBox::NoButton,
+               parent, name, FALSE )
     {
-	currentPriority = INT_MAX;
-	alertCount = 0;
+    currentPriority = INT_MAX;
+    alertCount = 0;
     }
 
     void alert( const QString &text, int priority );
@@ -117,9 +117,9 @@ void DesktopPowerAlerter::alert( const QString &text, int priority )
 {
     alertCount++;
     if ( alertCount < priority )
-	return;
+    return;
     if ( priority > currentPriority )
-	return;
+    return;
     currentPriority = priority;
     setText( text );
     show();
@@ -146,13 +146,13 @@ KeyFilter::KeyFilter(QObject* parent) : QObject(parent), held_tid(0), heldButton
 void KeyFilter::timerEvent(QTimerEvent* e)
 {
     if ( e->timerId() == held_tid ) {
-	killTimer(held_tid);
-	// button held
-	if ( heldButton ) {
-	    emit activate(heldButton, TRUE);
-	    heldButton = 0;
-	}
-	held_tid = 0;
+    killTimer(held_tid);
+    // button held
+    if ( heldButton ) {
+        emit activate(heldButton, TRUE);
+        heldButton = 0;
+    }
+    held_tid = 0;
     }
 }
 
@@ -178,17 +178,17 @@ bool KeyFilter::keyRegistered( int key ) {
 bool KeyFilter::checkButtonAction(bool db, int keycode,  int press, int autoRepeat)
 {
     if ( !loggedin
-	    // Permitted keys
-	    && keycode != Key_F34 // power
-	    && keycode != Key_F30 // select
-	    && keycode != Key_Enter
-	    && keycode != Key_Return
-	    && keycode != Key_Space
-	    && keycode != Key_Left
-	    && keycode != Key_Right
-	    && keycode != Key_Up
-	    && keycode != Key_Down )
-	return TRUE;
+        // Permitted keys
+        && keycode != Key_F34 // power
+        && keycode != Key_F30 // select
+        && keycode != Key_Enter
+        && keycode != Key_Return
+        && keycode != Key_Space
+        && keycode != Key_Left
+        && keycode != Key_Right
+        && keycode != Key_Up
+        && keycode != Key_Down )
+    return TRUE;
 
         /* check if it was registered */
     if (!db ) {
@@ -320,7 +320,7 @@ ServerApplication::ServerApplication( int& argc, char **argv, Type t )
     /* ### PluginLoader libqtopia SafeMode */
 #if 0
     if ( PluginLoader::inSafeMode() )
-	QTimer::singleShot(500, this, SLOT(showSafeMode()) );
+    QTimer::singleShot(500, this, SLOT(showSafeMode()) );
     QTimer::singleShot(20*1000, this, SLOT(clearSafeMode()) );
 #endif
 
@@ -379,29 +379,29 @@ void ServerApplication::apmTimeout() {
 
     if ( bat < m_ps_last-> batteryPercentRemaining() ) {
         if ( bat <= m_powerCritical ) {
-	    QMessageBox battlow(
-		tr("WARNING"),
-		tr("<p>The battery level is critical!"
-		    "<p>Keep power off until AC is restored"),
-		QMessageBox::Warning,
-		QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton,
-		0, QString::null, TRUE, WStyle_StaysOnTop);
-	    battlow.setButtonText(QMessageBox::Cancel, tr("Ok"));
-	    battlow.exec();
+        QMessageBox battlow(
+        tr("WARNING"),
+        tr("<p>The battery level is critical!"
+            "<p>Keep power off until AC is restored"),
+        QMessageBox::Warning,
+        QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton,
+        0, QString::null, TRUE, WStyle_StaysOnTop);
+        battlow.setButtonText(QMessageBox::Cancel, tr("Ok"));
+        battlow.exec();
         } else if ( bat <= m_powerVeryLow )
             pa->alert( tr( "The battery is running very low. "), 2 );
     }
 
     if ( m_ps-> backupBatteryStatus() == PowerStatus::VeryLow ) {
-	    QMessageBox battlow(
-		tr("WARNING"),
-		tr("<p>The Back-up battery is very low"
-		    "<p>Please charge the back-up battery"),
-		QMessageBox::Warning,
-		QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton,
-		0, QString::null, TRUE, WStyle_StaysOnTop);
-	    battlow.setButtonText(QMessageBox::Cancel, tr("Ok"));
-	    battlow.exec();
+        QMessageBox battlow(
+        tr("WARNING"),
+        tr("<p>The Back-up battery is very low"
+            "<p>Please charge the back-up battery"),
+        QMessageBox::Warning,
+        QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton,
+        0, QString::null, TRUE, WStyle_StaysOnTop);
+        battlow.setButtonText(QMessageBox::Cancel, tr("Ok"));
+        battlow.exec();
     }
 }
 
@@ -495,11 +495,11 @@ bool ServerApplication::screenLocked()
 void ServerApplication::login(bool at_poweron)
 {
     if ( !loggedin ) {
-	Global::terminateBuiltin("calibrate"); // No tr
-	Password::authenticate(at_poweron);
-	loggedin=1;
+    Global::terminateBuiltin("calibrate"); // No tr
+    Password::authenticate(at_poweron);
+    loggedin=1;
 #ifndef QT_NO_COP
-	QCopEnvelope e( "QPE/Desktop", "unlocked()" );
+    QCopEnvelope e( "QPE/Desktop", "unlocked()" );
 #endif
     }
 }
@@ -547,64 +547,64 @@ static void darkScreen()
 namespace {
     void execAutoStart(const QDateTime& suspendTime ) {
         QString appName;
-	int delay;
-	QDateTime now = QDateTime::currentDateTime();
+    int delay;
+    QDateTime now = QDateTime::currentDateTime();
 
         Config cfg( "autostart" );
-	cfg.setGroup( "AutoStart" );
-	appName = cfg.readEntry( "Apps", "" );
-	delay = cfg.readNumEntry( "Delay", 0  );
+    cfg.setGroup( "AutoStart" );
+    appName = cfg.readEntry( "Apps", "" );
+    delay = cfg.readNumEntry( "Delay", 0  );
 
-	// If the time between suspend and resume was longer then the
-	// value saved as delay, start the app
-	if ( suspendTime.secsTo( now ) >= ( delay * 60 ) && !appName.isEmpty() ) {
-		QCopEnvelope e( "QPE/System", "execute(QString)" );
-		e << QString( appName );
-	}
+    // If the time between suspend and resume was longer then the
+    // value saved as delay, start the app
+    if ( suspendTime.secsTo( now ) >= ( delay * 60 ) && !appName.isEmpty() ) {
+        QCopEnvelope e( "QPE/System", "execute(QString)" );
+        e << QString( appName );
+    }
     }
 }
 
 
 void ServerApplication::togglePower()
 {
-	static bool excllock = false;
+    static bool excllock = false;
 
-	if ( excllock )
-		return ;
+    if ( excllock )
+        return ;
 
-	excllock = true;
+    excllock = true;
 
-	bool wasloggedin = loggedin;
-	loggedin = 0;
-	m_suspendTime = QDateTime::currentDateTime();
+    bool wasloggedin = loggedin;
+    loggedin = 0;
+    m_suspendTime = QDateTime::currentDateTime();
 
 #ifdef QWS
 
-	if ( Password::needToAuthenticate ( true ) && qt_screen ) {
-		// Should use a big black window instead.
-		// But this would not show up fast enough
-		QGfx *g = qt_screen-> screenGfx ( );
-		g-> fillRect ( 0, 0, qt_screen-> width ( ), qt_screen-> height ( ));
-		delete g;
-	}
+    if ( Password::needToAuthenticate ( true ) && qt_screen ) {
+        // Should use a big black window instead.
+        // But this would not show up fast enough
+        QGfx *g = qt_screen-> screenGfx ( );
+        g-> fillRect ( 0, 0, qt_screen-> width ( ), qt_screen-> height ( ));
+        delete g;
+    }
 #endif
 
-	ODevice::inst ( )-> suspend ( );
+    ODevice::inst ( )-> suspend ( );
 
-	ServerApplication::switchLCD ( true ); // force LCD on without slow qcop call
-	QWSServer::screenSaverActivate ( false );
+    ServerApplication::switchLCD ( true ); // force LCD on without slow qcop call
+    QWSServer::screenSaverActivate ( false );
 
-	{
-		QCopEnvelope( "QPE/Card", "mtabChanged()" ); // might have changed while asleep
-	}
+    {
+        QCopEnvelope( "QPE/Card", "mtabChanged()" ); // might have changed while asleep
+    }
 
-	if ( wasloggedin )
-		login ( true );
+    if ( wasloggedin )
+        login ( true );
 
-	execAutoStart(m_suspendTime);
-	//qcopBridge->closeOpenConnections();
+    execAutoStart(m_suspendTime);
+    //qcopBridge->closeOpenConnections();
 
-	excllock = false;
+    excllock = false;
 }
 
 void ServerApplication::toggleLight()
@@ -642,17 +642,17 @@ bool ServerApplication::qwsEventFilter( QWSEvent *e )
     checkMemory();
 
     if ( e->type == QWSEvent::Mouse ) {
-	QWSMouseEvent *me = (QWSMouseEvent *)e;
-	static bool up = TRUE;
-	if ( me->simpleData.state&LeftButton ) {
-	    if ( up ) {
-		up = FALSE;
-		screenClick(TRUE);
-	    }
-	} else if ( !up ) {
-	    up = TRUE;
-	    screenClick(FALSE);
-	}
+    QWSMouseEvent *me = (QWSMouseEvent *)e;
+    static bool up = TRUE;
+    if ( me->simpleData.state&LeftButton ) {
+        if ( up ) {
+        up = FALSE;
+        screenClick(TRUE);
+        }
+    } else if ( !up ) {
+        up = TRUE;
+        screenClick(FALSE);
+    }
     }else if ( e->type == QWSEvent::Key ) {
         QWSKeyEvent * ke = static_cast<QWSKeyEvent*>( e );
         if ( kf->checkButtonAction( false,
@@ -673,11 +673,11 @@ void ServerApplication::showSafeMode()
 {
 #if 0
     if ( QMessageBox::warning(0, tr("Safe Mode"), tr("<P>A system startup error occurred, "
-		"and the system is now in Safe Mode. "
-		"Plugins are not loaded in Safe Mode. "
-		"You can use the Plugin Manager to "
-		"disable plugins that cause system error."), tr("OK"), tr("Plugin Manager..."), 0) == 1 ) {
-	Global::execute( "pluginmanager" );
+        "and the system is now in Safe Mode. "
+        "Plugins are not loaded in Safe Mode. "
+        "You can use the Plugin Manager to "
+        "disable plugins that cause system error."), tr("OK"), tr("Plugin Manager..."), 0) == 1 ) {
+    Global::execute( "pluginmanager" );
     }
 #endif
 }
@@ -691,7 +691,7 @@ void ServerApplication::clearSafeMode()
     cfg.setGroup( "Global" );
     QString mode = cfg.readEntry( "Mode", "Normal" );
     if ( mode == "MaybeSafe" ) {
-	cfg.writeEntry( "Mode", "Normal" );
+    cfg.writeEntry( "Mode", "Normal" );
     }
 #endif
 }
@@ -700,13 +700,11 @@ void ServerApplication::clearSafeMode()
 void ServerApplication::shutdown()
 {
     if ( type() != GuiServer )
-	return;
+    return;
     ShutdownImpl *sd = new ShutdownImpl( 0, 0, WDestructiveClose );
     connect( sd, SIGNAL(shutdown(ShutdownImpl::Type)),
-	     this, SLOT(shutdown(ShutdownImpl::Type)) );
+         this, SLOT(shutdown(ShutdownImpl::Type)) );
     QPEApplication::showWidget( sd );
-	sd->move(0,0);
-
 }
 
 void ServerApplication::shutdown( ShutdownImpl::Type t )
@@ -723,7 +721,7 @@ void ServerApplication::shutdown( ShutdownImpl::Type t )
 
         if ( execl( "/sbin/shutdown", "shutdown", opt, "now", ( void* ) 0) < 0 )
             perror("shutdown");
-//		        		::syslog ( LOG_ERR, "Erroring execing shutdown\n" );
+//                      ::syslog ( LOG_ERR, "Erroring execing shutdown\n" );
 
         break;
     case ShutdownImpl::RestartDesktop:
@@ -757,13 +755,13 @@ void ServerApplication::restart()
 #ifdef ALL_APPLETS_ON_THIS_WORLD_ARE_FIXED
         /* same as above */
         emit aboutToQuit();
-	prepareForTermination(TRUE);
-	doRestart = TRUE;
-	quit();
+    prepareForTermination(TRUE);
+    doRestart = TRUE;
+    quit();
 #else
         prepareForTermination( true );
         for ( int fd = 3; fd < 100; fd++ )
-		close( fd );
+        close( fd );
         execl( ( qpeDir() + "/bin/qpe" ).latin1(), "qpe", 0 );
         exit( 1 );
 #endif
@@ -788,35 +786,35 @@ void ServerApplication::checkMemory()
     static bool existingMessage=FALSE;
 
     if(existingMessage)
-	return; // don't show a second message while still on first
+    return; // don't show a second message while still on first
 
     existingMessage = TRUE;
     switch ( memstate ) {
-	case MemUnknown:
-	    break;
-	case MemLow:
-	    memstate = MemUnknown;
-	    if ( !recoverMemory() ) {
-		QMessageBox::warning( 0 , tr("Memory Status"),
-		    tr("Memory Low\nPlease save data.") );
-		ignoreNormal = FALSE;
-	    }
-	    break;
-	case MemNormal:
-	    memstate = MemUnknown;
-	    if ( !ignoreNormal ) {
-		ignoreNormal = TRUE;
-		QMessageBox::information ( 0 , tr("Memory Status"),
-		    "Memory OK" );
-	    }
-	    break;
-	case MemVeryLow:
-	    memstate = MemUnknown;
-	    QMessageBox::critical( 0 , tr("Memory Status"),
-		tr("Critical Memory Shortage\n"
-		"Please end this application\n"
-		"immediately.") );
-	    recoverMemory();
+    case MemUnknown:
+        break;
+    case MemLow:
+        memstate = MemUnknown;
+        if ( !recoverMemory() ) {
+        QMessageBox::warning( 0 , tr("Memory Status"),
+            tr("Memory Low\nPlease save data.") );
+        ignoreNormal = FALSE;
+        }
+        break;
+    case MemNormal:
+        memstate = MemUnknown;
+        if ( !ignoreNormal ) {
+        ignoreNormal = TRUE;
+        QMessageBox::information ( 0 , tr("Memory Status"),
+            "Memory OK" );
+        }
+        break;
+    case MemVeryLow:
+        memstate = MemUnknown;
+        QMessageBox::critical( 0 , tr("Memory Status"),
+        tr("Critical Memory Shortage\n"
+        "Please end this application\n"
+        "immediately.") );
+        recoverMemory();
     }
     existingMessage = FALSE;
 #endif
@@ -847,7 +845,7 @@ void ServerApplication::soundAlarm() {
 
 ServerApplication *ServerApplication::me ( )
 {
-	return static_cast<ServerApplication*>( qApp );
+    return static_cast<ServerApplication*>( qApp );
 }
 
 bool ServerApplication::isStarting()
