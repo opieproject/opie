@@ -214,6 +214,9 @@ int set=0;
    StorageInfo storageInfo;
    QString sName, sPath;
    QStringList list;
+   list << "Documents : "+QPEApplication::documentDir();
+   list << "tmp : /tmp";
+
    const QList<FileSystem> &fs = storageInfo.fileSystems();
     QListIterator<FileSystem> it ( fs );
         for( ; it.current(); ++it ){
@@ -226,6 +229,7 @@ int set=0;
 //             if(dit.current()->file().find(path) != -1 ) storage=name;
             i++;
         }
+
         LocationComboBox->insertStringList(list);
         qDebug("set item %d", set);
         LocationComboBox->setCurrentItem(set);
