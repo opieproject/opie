@@ -28,7 +28,6 @@ class QTimer;
 class InputMethods;
 class Wait;
 class SysTray;
-//class MRUList;
 class RunningAppBar;
 class QWidgetStack;
 class QTimer;
@@ -72,7 +71,6 @@ private:
     Wait *waitIcon;
     InputMethods *inputMethods;
     SysTray *sysTray;
-    //  MRUList *mru;
     RunningAppBar* runningAppBar;
     QWidgetStack *stack;
     QTimer *clearer;

@@ -53,34 +53,7 @@
 
 using namespace Opie;
 
-#define FACTORY(T) \
-    static QWidget *new##T( bool maximized ) { \
-  QWidget *w = new T( 0, "test", QWidget::WDestructiveClose | QWidget::WGroupLeader ); \
-  if ( maximized ) { \
-      if ( qApp->desktop()->width() <= 350 ) { \
-    w->showMaximized(); \
-      } else { \
-    w->resize( QSize( 300, 300 ) ); \
-      } \
-  } \
-  w->show(); \
-  return w; \
-    }
-
-
-#ifdef SINGLE_APP
-#define APP(a,b,c,d) FACTORY(b)
-#include "../launcher/apps.h"
-#undef APP
-#endif // SINGLE_APP
-
 static Global::Command builtins[] = {
-
-#ifdef SINGLE_APP
-#define APP(a,b,c,d) { a, new##b, c },
-#include "../launcher/apps.h"
-#undef APP
-#endif
 
 #if defined(QT_QWS_IPAQ) || defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_SL5XXX)
         { "calibrate",          TaskBar::calibrate, 1, 0 },
@@ -151,14 +124,10 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
     inputMethods = new InputMethods( this );
     connect( inputMethods, SIGNAL(inputToggled(bool)),
        this, SLOT(calcMaxWindowRect()) );
-    //new QuickLauncher( this );
 
     stack = new QWidgetStack( this );
     stack->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Minimum ) );
     label = new QLabel(stack);
-
-    //mru = new MRUList( stack );
-    //stack->raiseWidget( mru );
 
     runningAppBar = new RunningAppBar(stack);
     stack->raiseWidget(runningAppBar);
@@ -262,48 +231,50 @@ void TaskBar::calcMaxWindowRect()
 
 void TaskBar::receive( const QCString &msg, const QByteArray &data )
 {
-	QDataStream stream( data, IO_ReadOnly );
-	if ( msg == "message(QString)" ) {
-		QString text;
-		stream >> text;
-		setStatusMessage( text );
-	} else if ( msg == "hideInputMethod()" ) {
-		inputMethods->hideInputMethod();
-	} else if ( msg == "showInputMethod()" ) {
-		inputMethods->showInputMethod();
-	} else if ( msg == "reloadInputMethods()" ) {
-		inputMethods->loadInputMethods();
-	} else if ( msg == "reloadApps()" ) {
-		sm->reloadApps();    			
-	} else if ( msg == "reloadApplets()" ) {
-		sysTray->clearApplets();
-		sysTray->addApplets();
-		sm->reloadApplets();
-	} else if ( msg == "soundAlarm()" ) {
-		DesktopApplication::soundAlarm ( );
-	}
-	else if ( msg == "setLed(int,bool)" ) {
-		int led, status;
-		stream >> led >> status;
+    QDataStream stream( data, IO_ReadOnly );
+    if ( msg == "message(QString)" ) {
+        QString text;
+        stream >> text;
+        setStatusMessage( text );
+    } else if ( msg == "hideInputMethod()" ) {
+        inputMethods->hideInputMethod();
+    } else if ( msg == "showInputMethod()" ) {
+        inputMethods->showInputMethod();
+    } else if ( msg == "reloadInputMethods()" ) {
+        inputMethods->loadInputMethods();
+    } else if ( msg == "toggleInputMethod()" ) {
+        inputMethods->shown() ? inputMethods->hideInputMethod() : inputMethods->showInputMethod();
+    } else if ( msg == "reloadApps()" ) {
+        sm->reloadApps();
+    } else if ( msg == "reloadApplets()" ) {
+        sysTray->clearApplets();
+        sysTray->addApplets();
+        sm->reloadApplets();
+    } else if ( msg == "soundAlarm()" ) {
+        DesktopApplication::soundAlarm ( );
+    }
+    else if ( msg == "setLed(int,bool)" ) {
+        int led, status;
+        stream >> led >> status;
 
-		QValueList <OLed> ll = ODevice::inst ( )-> ledList ( );
-		if ( ll. count ( ))	{
-			OLed l = ll. contains ( Led_Mail ) ? Led_Mail : ll [0];
-			bool canblink = ODevice::inst ( )-> ledStateList ( l ). contains ( Led_BlinkSlow );
-			
-			ODevice::inst ( )-> setLedState ( l, status ? ( canblink ? Led_BlinkSlow : Led_On ) : Led_Off );
-		}
-	}
-	else if ( msg == "toggleMenu()" ) {
-		if ( sm-> launchMenu-> isVisible ( ))
-			sm-> launch ( );
-		else {
-			QCopEnvelope e ( "QPE/System", "toggleApplicationMenu()" );
-		}
-	}
-	else if ( msg == "toggleStartMenu()" ) {
-		sm-> launch ( );
-	}
+        QValueList <OLed> ll = ODevice::inst ( )-> ledList ( );
+        if ( ll. count ( ))	{
+            OLed l = ll. contains ( Led_Mail ) ? Led_Mail : ll [0];
+            bool canblink = ODevice::inst ( )-> ledStateList ( l ). contains ( Led_BlinkSlow );
+
+            ODevice::inst ( )-> setLedState ( l, status ? ( canblink ? Led_BlinkSlow : Led_On ) : Led_Off );
+        }
+    }
+    else if ( msg == "toggleMenu()" ) {
+        if ( sm-> launchMenu-> isVisible ( ))
+            sm-> launch ( );
+        else {
+            QCopEnvelope e ( "QPE/System", "toggleApplicationMenu()" );
+        }
+    }
+    else if ( msg == "toggleStartMenu()" ) {
+        sm-> launch ( );
+    }
 }
 
 QWidget *TaskBar::calibrate(bool)
@@ -338,7 +309,7 @@ void TaskBar::toggleSymbolInput()
 
 bool TaskBar::recoverMemory()
 {
-    //eturn mru->quitOldApps();
+    //mru->quitOldApps() is no longer supported
     return true;
 }
 
