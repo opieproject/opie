@@ -73,9 +73,9 @@ Checkbook::Checkbook( QWidget *parent, const QString &n, const QString &fd, char
 	mainWidget = new OTabWidget( this );
 	layout->addWidget( mainWidget );
 
-	mainWidget->addTab( initInfo(), "help_icon", tr( "Info" ) );
-	mainWidget->addTab( initTransactions(), "Spreadsheet", tr( "Transactions" ) );
-	mainWidget->addTab( initCharts(), "DocumentTypePowerPoint", tr( "Charts" ) );
+	mainWidget->addTab( initInfo(), "checkbook/infotab", tr( "Info" ) );
+	mainWidget->addTab( initTransactions(), "checkbook/trantab", tr( "Transactions" ) );
+	mainWidget->addTab( initCharts(), "checkbook/charttab", tr( "Charts" ) );
 	mainWidget->setCurrentTab( tr( "Info" ) );
 
 	// Load checkbook information
@@ -247,7 +247,7 @@ QWidget *Checkbook::initCharts()
 	layout->addMultiCellWidget( graphWidget, 0, 0, 0, 1 );
 	graphWidget->setBackgroundMode( QWidget::PaletteBase );
 
-	QPushButton *btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Draw" ), control );
+	QPushButton *btn = new QPushButton( Resource::loadPixmap( "checkbook/drawbtn" ), tr( "Draw" ), control );
 	QWhatsThis::add( btn, tr( "Click here to draw the graph." ) );
 	connect( btn, SIGNAL( clicked() ), this, SLOT( slotDrawGraph() ) );
 	layout->addWidget( btn, 1, 1 );
