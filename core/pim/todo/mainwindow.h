@@ -118,6 +118,7 @@ private slots:
         void raiseCurrentView();
         ViewBase* currentView();
         ViewBase* m_curView;
+        bool m_showing : 1; // used to see if we show a todo in the cases we shouldn't change the table
         QuickEditBase* m_curQuick;
         Editor* m_curEdit;
         TodoShow* currentShow();
@@ -167,6 +168,7 @@ private slots:
         void slotDuplicate();
 
         void slotDelete();
+        void slotDelete(int uid );
         void slotDeleteAll();
         void slotDeleteCompleted();
 
@@ -185,6 +187,8 @@ private slots:
         void slotBeam();
         void beamDone( Ir* );
         void slotShowDetails();
+        void slotShowNext();
+        void slotShowPrev();
         void slotShowDue( bool );
         void slotReturnFromView(); // for TodoShow...
         /* reimplementation from opimmainwindow */

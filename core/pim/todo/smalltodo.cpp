@@ -25,7 +25,6 @@
                              Boston, MA 02111-1307, USA.
 
 */
-#include <qshared.h>
 
 #include "smalltodo.h"
 

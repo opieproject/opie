@@ -37,8 +37,7 @@ private:
     TaskEditorAlarms   *m_alarm;
     TaskEditorAlarms   *m_remind;
     ORecurranceWidget  *m_rec;
-    int                 m_uid;
-
+    OTodo		m_todo;
 };
 
 #endif

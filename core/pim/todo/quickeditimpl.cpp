@@ -31,12 +31,17 @@ QuickEditImpl::QuickEditImpl( QWidget* parent, bool visible )
     setStretchableWidget( m_edit );
     QWhatsThis::add( m_edit, QWidget::tr( "Enter description of new task here.\n\nThis area is called the quick task bar.\n\nIt allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options->'Show quick task bar' from the menu above." ) );
 
+    /*
+     * it's not implemented and won't be implemented for 1.0
+     */
+#if 0
     QAction *a = new QAction( QWidget::tr( "More" ), Resource::loadPixmap( "todo/more" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( slotMore() ) );
     a->addTo( this );
     a->setWhatsThis( QWidget::tr( "Click here to enter additional information for new task.\n\nThis area is called the quick task bar.\n\nIt allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options->'Show quick task bar' from the menu above." ) );
+#endif
 
-    a = new QAction( QWidget::tr( "Enter" ), Resource::loadPixmap( "enter" ), QString::null, 0, this, 0 );
+    QAction *a = new QAction( QWidget::tr( "Enter" ), Resource::loadPixmap( "enter" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( slotEnter() ) );
     a->addTo( this );
     a->setWhatsThis( QWidget::tr( "Click here to add new task.\n\nThis area is called the quick task bar.\n\nIt allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options->'Show quick task bar' from the menu above." ) );

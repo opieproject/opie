@@ -53,6 +53,16 @@ namespace Todo {
         virtual QString currentRepresentation() = 0;
         virtual void showOverDue( bool ) = 0;
 
+        /**
+         * the next record in the view or 0 if none is there
+         */
+        virtual int next()  = 0;
+
+        /**
+         * the previous record or 0 if none is there..
+         */
+        virtual int prev()  = 0;
+
         /*
          * update the view
          */
@@ -111,6 +121,8 @@ namespace Todo {
         void update(int uid, const SmallTodo& to );
         void update(int uid, const OTodo& ev);
         void remove( int uid );
+        /* will ask the user if the item should be deleted */
+        void removeQuery(int uid );
         void complete( int uid );
         void complete( const OTodo& ev );
     private:

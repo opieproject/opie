@@ -50,6 +50,8 @@ namespace Todo {
         virtual QWidget* widget() = 0;
     protected:
         void escapeView();
+        void showNext();
+        void showPrev();
     private:
         MainWindow *m_win;
     };

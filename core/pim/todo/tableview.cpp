@@ -27,11 +27,11 @@
 */
 #include <stdlib.h>
 #include <cmath>
+#include <cctype>
 
 #include <qcombobox.h>
 #include <qlineedit.h>
 #include <qtimer.h>
-#include <qpoint.h>
 #include <qpopupmenu.h>
 
 #include <qpe/config.h>
@@ -48,6 +48,27 @@ using namespace Todo;
 namespace {
     static const int BoxSize = 14;
     static const int RowHeight = 20;
+}
+
+TableView::EditorWidget::EditorWidget() : m_wid(0l), m_row(-1), m_col(-1) {
+}
+void TableView::EditorWidget::setCellWidget(QWidget* wid, int row, int col ) {
+    m_wid = wid;
+    m_row = row;
+    m_col = col;
+}
+void TableView::EditorWidget::releaseCellWidget() {
+    m_wid = 0;
+    m_row = m_col = -1;
+}
+QWidget* TableView::EditorWidget::cellWidget()const {
+    return m_wid;
+}
+int TableView::EditorWidget::cellRow()const {
+    return m_row;
+}
+int TableView::EditorWidget::cellCol()const {
+    return m_col;
 }
 
 
@@ -143,10 +164,23 @@ QString TableView::type() const {
     return QString::fromLatin1( tr("Table View") );
 }
 int TableView::current() {
-    if (numRows() == 0 ) return 1;
+    if (numRows() == 0 ) return 0;
     int uid = sorted().uidAt(currentRow() );
 
     return uid;
+}
+int TableView::next() {
+    if ( numRows() == 0 ) return 0;
+    if ( currentRow() + 1 >= numRows() ) return 0;
+    setCurrentCell( currentRow() +1, currentColumn()  );
+    return sorted().uidAt( currentRow() );
+}
+int TableView::prev() {
+    if ( numRows() == 0 ) return 0;
+    if ( currentRow() - 1 < 0 ) return 0;
+    setCurrentCell( currentRow() -1, currentColumn()  );
+    return sorted().uidAt( currentRow() );
+
 }
 QString TableView::currentRepresentation() {
     OTodo to = sorted()[currentRow()];
@@ -219,11 +253,11 @@ void TableView::removeEvent( int ) {
     updateView();
 }
 void TableView::setShowCompleted( bool b) {
-    qWarning("Show Completed %d" + b );
+    qWarning("Show Completed %d" , b );
     updateView();
 }
 void TableView::setShowDeadline( bool b ) {
-    qWarning( "Show DeadLine %d" + b );
+    qWarning( "Show DeadLine %d" , b );
     if ( b )
         showColumn( 3 );
     else
@@ -259,6 +293,13 @@ void TableView::clear() {
 }
 void TableView::slotClicked(int row, int col, int,
                             const QPoint& point) {
+    if ( m_editorWidget.cellWidget() ) {
+        //setCellContentFromEditor(m_editorWidget.cellRow(), m_editorWidget.cellCol() );
+        endEdit(m_editorWidget.cellRow(), m_editorWidget.cellCol(),
+                true, true );
+        m_editorWidget.releaseCellWidget();
+    }
+
     if ( !cellGeometry(row, col ).contains(point ) )
         return;
 
@@ -280,7 +321,11 @@ void TableView::slotClicked(int row, int col, int,
     }
         break;
 
-    case 1:
+        // Priority emit a double click...
+    case 1:{
+        QWidget* wid = beginEdit( row, col, FALSE );
+        m_editorWidget.setCellWidget( wid, row, col );
+    }
         break;
 
     case 2: {
@@ -446,6 +491,7 @@ QWidget* TableView::createEditor(int row, int col, bool )const {
     }
 }
 void TableView::setCellContentFromEditor(int row, int col ) {
+    qWarning("set cell content from editor");
     if ( col == 1 ) {
         QWidget* wid = cellWidget(row, 1 );
         if ( wid->inherits("QComboBox") ) {
@@ -542,13 +588,41 @@ void TableView::contentsMouseMoveEvent( QMouseEvent* e ) {
     QTable::contentsMouseMoveEvent( e );
 }
 void TableView::keyPressEvent( QKeyEvent* event) {
+    if ( m_editorWidget.cellWidget() ) {
+//        setCellContentFromEditor(m_editorWidget.cellRow(), m_editorWidget.cellCol() );
+        endEdit(m_editorWidget.cellRow(), m_editorWidget.cellCol(),
+                true, true );
+        m_editorWidget.releaseCellWidget();
+        setFocus();
+    }
+    int row = currentRow();
+    int col = currentColumn();
+
+    char key = ::toupper( event->ascii() );
+    /* let QTable also handle the d later */
+    if ( key == 'D' )
+        removeQuery( sorted().uidAt( row ) );
+
+
     switch( event->key() ) {
     case Qt::Key_F33:
     case Qt::Key_Enter:
     case Qt::Key_Return:
-        showTodo( sorted().uidAt( currentRow() ) );
+    case Qt::Key_Space:
+        if ( col == 0 ) {
+            TodoView::complete(sorted()[row]);
+        }else if ( col == 1 ) {
+            QWidget* wid = beginEdit(row, col, FALSE );
+            m_editorWidget.setCellWidget( wid, row, col );
+        }else if ( col == 2 ) {
+            showTodo( sorted().uidAt( currentRow() ) );
+        }else if ( col == 3 ) {
+            TodoView::edit( sorted().uidAt(row) );
+        }
+
         break;
     default:
         QTable::keyPressEvent( event );
     }
 }
+

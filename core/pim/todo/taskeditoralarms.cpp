@@ -34,14 +34,9 @@
 
 #include <qpe/datebookmonth.h>
 #include <qpe/resource.h>
-#include <qpe/timestring.h>
 
-#include <qdatetime.h>
 #include <qlistview.h>
-#include <qpushbutton.h>
-#include <qpopupmenu.h>
 #include <qlayout.h>
-#include <qwhatsthis.h>
 
 
 class AlarmItem : public QListViewItem {

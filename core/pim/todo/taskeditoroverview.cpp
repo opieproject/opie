@@ -33,10 +33,8 @@
 #include <qpe/categoryselect.h>
 #include <qpe/datebookmonth.h>
 #include <qpe/resource.h>
-#include <qpe/timestring.h>
 
 #include <qcheckbox.h>
-#include <qcombobox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qmultilineedit.h>
@@ -68,7 +66,7 @@ TaskEditorOverView::TaskEditorOverView( QWidget* parent,  const char* name, WFla
     QGridLayout *layout = new QGridLayout( container, 7, 2, 4, 4 );
 
     // Description
-    QLabel *label = new QLabel( tr( "Description:" ), container );
+    QLabel *label = new QLabel( tr( "Summary:" ), container );
     layout->addWidget( label, 0, 0 );
     QWhatsThis::add( label, tr( "Enter brief description of the task here." ) );
     cmbDesc = new QComboBox( TRUE, container );
@@ -116,7 +114,7 @@ TaskEditorOverView::TaskEditorOverView( QWidget* parent,  const char* name, WFla
     connect( ckbRecurrence, SIGNAL(clicked() ), this, SLOT( slotRecClicked() ) );
 
     // Notes
-    label = new QLabel( tr( "Notes:" ), container );
+    label = new QLabel( tr( "Description:" ), container );
     layout->addWidget( label, 5, 0 );
     QWhatsThis::add( label, tr( "Enter any additional information about this task here." ) );
     mleNotes = new QMultiLineEdit( container );

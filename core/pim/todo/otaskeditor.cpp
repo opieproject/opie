@@ -1,7 +1,4 @@
-#include <qdatetime.h>
-#include <qlabel.h>
 #include <qlayout.h>
-#include <qmultilineedit.h>
 
 #include <opie/orecurrancewidget.h>
 
@@ -26,19 +23,17 @@ OTaskEditor::~OTaskEditor() {
 }
 void OTaskEditor::init( int cur ) {
     OTodo to;
+    to.setUid( 1 ); // generate a new uid
     if ( cur != 0 )
         to.setCategories( cur );
     load(to);
-    m_uid = 1; // generate a new one
 }
 void OTaskEditor::init( const OTodo& to ) {
     load( to );
-    m_uid = to.uid();
 }
 OTodo OTaskEditor::todo()const{
     qWarning("saving!");
-    OTodo to;
-    to.setUid(m_uid );
+    OTodo to ( m_todo );
     m_overView->save( to );
     m_stat->save( to );
     to.setRecurrence( m_rec->recurrence() );
@@ -50,11 +45,12 @@ void OTaskEditor::load(const OTodo& to) {
     m_overView->load( to );
     m_stat->load( to );
     m_rec->setRecurrence( to.recurrence(), to.hasDueDate() ? to.dueDate() : QDate::currentDate() );
-    m_alarm->setEnabled( !to.hasRecurrence() );
     m_alarm->load( to );
+    
+    m_todo = to;
 }
 void OTaskEditor::init() {
-    setCaption("Task Editor");
+    setCaption(tr("Task Editor") );
 
     QVBoxLayout* layo = new QVBoxLayout( this );
     m_tab = new OTabWidget( this );

@@ -1,4 +1,3 @@
-#include <qlistview.h>
 #include <qlineedit.h>
 
 #include "mainwindow.h"

@@ -50,6 +50,8 @@ namespace Todo {
         QString type()const;
         int current();
         QString currentRepresentation();
+        int next();
+        int prev();
 
         void clear();
         void showOverDue( bool );
@@ -91,6 +93,22 @@ namespace Todo {
         void timerEvent( QTimerEvent* e );
         QWidget* createEditor(int row, int col, bool initFromCell )const;
         void setCellContentFromEditor( int row, int col );
+        /**
+         * for inline editing on single click and to work around some
+         * bug in qt2.3.5
+         */
+        struct EditorWidget {
+            EditorWidget();
+            void setCellWidget(QWidget*, int row, int col );
+            void releaseCellWidget();
+            QWidget* cellWidget()const;
+            int cellRow()const;
+            int cellCol()const;
+        private:
+            QWidget* m_wid;
+            int m_row, m_col;
+        };
+        EditorWidget m_editorWidget;
 
 private slots:
         void slotShowMenu();

@@ -33,15 +33,11 @@
 #include <opie/opimstate.h>
 
 #include <qpe/datebookmonth.h>
-#include <qpe/resource.h>
-#include <qpe/timestring.h>
 
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qscrollview.h>
-#include <qtoolbutton.h>
 #include <qwhatsthis.h>
 
 // FIXME add the hack slots instead of setPopup!!!!
@@ -303,4 +299,5 @@ void TaskEditorStatus::slotDueChanged(int y, int m, int d)
 {
     m_due.setYMD( y, m, d );
     btnDue->setText( TimeString::longDateString( m_due ) );
+    emit dueDateChanged( m_due );
 }

@@ -1,10 +1,10 @@
 Package: opie-todo
-Files: bin/todolist apps/1Pim/todo.desktop pics/todo
+Files: bin/todolist apps/1Pim/todo.desktop
 Priority: optional
 Section: opie/applications
 Maintainer: Holger 'zecke' Freyther <zecke@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: task-opie-minimal, libopie1
+Depends: task-opie-minimal, libopie1, opie-pics
 Description: TODO-list manager
  A Todo-list manager for the Opie environment.
+Version: $QPE_VERSION$EXTRAVERSION

@@ -71,6 +71,7 @@ MainWindow::MainWindow( QWidget* parent,
     : OPimMainWindow( "Todolist", parent, name, WType_TopLevel | WStyle_ContextHelp )
 {
     m_syncing = false;
+    m_showing = false;
     m_counter = 0;
     m_tempManager = new TemplateManager();
     m_tempManager->load();
@@ -161,6 +162,7 @@ void MainWindow::initActions() {
         a->addTo( m_tool );
     }
 
+#if 0
     // Options menu
     a = new QAction( QWidget::tr("Find"), Resource::loadIconSet( "mag" ),
                      QString::null, 0, this, 0 );
@@ -168,7 +170,9 @@ void MainWindow::initActions() {
     a->addTo( m_options );
     m_findAction = a;
 
+
     m_options->insertSeparator();
+#endif
 
     m_completedAction = new QAction( QString::null, QWidget::tr("Show completed tasks"),
                                      0, this, 0, TRUE );
@@ -352,6 +356,7 @@ void MainWindow::slotReload() {
 }
 void MainWindow::closeEvent( QCloseEvent* e ) {
     if (m_stack->visibleWidget() == currentShow()->widget() ) {
+        m_showing = false;
         raiseCurrentView();
         e->ignore();
         return;
@@ -409,7 +414,7 @@ void MainWindow::populateTemplates() {
 /*
  * slotNewFromTemplate
  * We use the edit widget to do
- * the config but we setUid(-1)
+ * the config but we setUid(1)
  * to get a new uid
  */
 /*
@@ -425,12 +430,14 @@ void MainWindow::slotNewFromTemplate( int id ) {
 
     if ( currentEditor()->accepted() ) {
         /* assign new todo */
-        event.setUid( -1 );
-        currentView()->addEvent( event );
+        event.setUid( 1 );
+        handleAlarms( OTodo(), event );
         m_todoMgr.add( event );
+        currentView()->addEvent( event );
 
         populateCategories();
     }
+    raiseCurrentView();
 }
 void MainWindow::slotNew() {
     create();
@@ -438,12 +445,12 @@ void MainWindow::slotNew() {
 void MainWindow::slotDuplicate() {
     if(m_syncing) {
         QMessageBox::warning(this, QWidget::tr("Todo"),
-                             QWidget::tr("Can not edit data, currently syncing"));
+							 QWidget::tr("Data can not be edited, currently syncing"));
         return;
     }
     OTodo ev = m_todoMgr.event( currentView()->current() );
     /* let's generate a new uid */
-    ev.setUid(-1);
+    ev.setUid(1);
     m_todoMgr.add( ev );
 
     currentView()->addEvent( ev );
@@ -455,22 +462,38 @@ void MainWindow::slotDelete() {
 
     if(m_syncing) {
 	QMessageBox::warning(this, QWidget::tr("Todo"),
-			     QWidget::tr("Can not edit data, currently syncing"));
+							 QWidget::tr("Data can not be edited, currently syncing"));
 	return;
     }
     QString strName = currentView()->currentRepresentation();
     if (!QPEMessageBox::confirmDelete(this, QWidget::tr("Todo"), strName ) )
         return;
 
-    handleAlarms( OTodo(), m_todoMgr.event( currentView()->current() ) );
+    handleAlarms( m_todoMgr.event( currentView()->current() ), OTodo() );
     m_todoMgr.remove( currentView()->current() );
     currentView()->removeEvent( currentView()->current() );
+    raiseCurrentView();
+}
+void MainWindow::slotDelete(int uid ) {
+    if( uid == 0 ) return;
+    if(m_syncing) {
+	QMessageBox::warning(this, QWidget::tr("Todo"),
+							 QWidget::tr("Data can not be edited, currently syncing"));
+	return;
+    }
+    OTodo to = m_todoMgr.event(uid);
+    if (!QPEMessageBox::confirmDelete(this, QWidget::tr("Todo"), to.toShortText() ) )
+        return;
+
+    handleAlarms(to, OTodo() );
+    m_todoMgr.remove( to.uid() );
+    currentView()->removeEvent( to.uid() );
     raiseCurrentView();
 }
 void MainWindow::slotDeleteAll() {
     if(m_syncing) {
         QMessageBox::warning(this, QWidget::tr("Todo"),
-                             QWidget::tr("Can not edit data, currently syncing"));
+                             QWidget::tr("Data can not be edited, currently syncing"));
         return;
     }
 
@@ -486,7 +509,7 @@ void MainWindow::slotDeleteAll() {
 void MainWindow::slotDeleteCompleted() {
     if(m_syncing) {
         QMessageBox::warning(this, QWidget::tr("Todo"),
-                             QWidget::tr("Can not edit data, currently syncing"));
+                             QWidget::tr("Data can not be edited, currently syncing"));
         return;
     }
 
@@ -566,20 +589,24 @@ void MainWindow::beamDone( Ir* ir) {
 }
 void MainWindow::receiveFile( const QString& filename ) {
     OTodoAccessVCal* cal = new OTodoAccessVCal(filename );
+
     OTodoAccess acc( cal );
     acc.load();
     OTodoAccess::List list = acc.allRecords();
 
-    QString message = QWidget::tr("<P>%1 new tasks arrived.<p>Would you like to add them to your Todolist?").arg(list.count() );
+    if (list.count()){
 
-    if ( QMessageBox::information(this, QWidget::tr("New Tasks"),
-                                  message, QMessageBox::Ok,
-                                  QMessageBox::Cancel ) == QMessageBox::Ok ) {
-        OTodoAccess::List::Iterator it;
-        for ( it = list.begin(); it != list.end(); ++it )
-            m_todoMgr.add( (*it) );
+	    QString message = QWidget::tr("<P>%1 new tasks arrived.<p>Would you like to add them to your Todolist?").arg(list.count() );
 
-        currentView()->updateView();
+	    if ( QMessageBox::information(this, QWidget::tr("New Tasks"),
+					  message, QMessageBox::Ok,
+					  QMessageBox::Cancel ) == QMessageBox::Ok ) {
+		    OTodoAccess::List::Iterator it;
+		    for ( it = list.begin(); it != list.end(); ++it )
+			    m_todoMgr.add( (*it) );
+		    
+		    currentView()->updateView();
+	    }
     }
 }
 
@@ -634,6 +661,13 @@ ViewBase* MainWindow::currentView() {
     return m_curView;
 }
 void MainWindow::raiseCurrentView() {
+    // due QPE/Application/todolist show(int)
+    // we might not have the populateCategories slot called once
+    // we would show the otodo but then imediately switch to the currentView
+    // if we're initially showing we shouldn't raise the table
+    // in returnFromView we fix up m_showing
+    if (m_showing ) return;
+
     m_stack->raiseWidget( m_curView->widget() );
 }
 void MainWindow::slotShowDue(bool ov) {
@@ -642,15 +676,26 @@ void MainWindow::slotShowDue(bool ov) {
     raiseCurrentView();
 }
 void MainWindow::slotShow( int uid ) {
+    if ( uid == 0 ) return;
     qWarning("slotShow");
     currentShow()->slotShow( event( uid ) );
     m_stack->raiseWidget( currentShow()->widget() );
 }
+void MainWindow::slotShowNext() {
+    int l = currentView()->next();
+    if (l!=0)
+        slotShow(l);
+}
+void MainWindow::slotShowPrev() {
+    int l = currentView()->prev();
+    if (l!=0)
+        slotShow(l);
+}
 void MainWindow::slotEdit( int uid ) {
-    if (uid == 1 ) return;
+    if (uid == 0 ) return;
     if(m_syncing) {
 	QMessageBox::warning(this, QWidget::tr("Todo"),
-			     QWidget::tr("Can not edit data, currently syncing"));
+			     QWidget::tr("Data can't be edited, currently syncing"));
 	return;
     }
 
@@ -660,7 +705,6 @@ void MainWindow::slotEdit( int uid ) {
 
     /* if completed */
     if ( currentEditor()->accepted() ) {
-        qWarning("Replacing now" );
         handleAlarms( old_todo, todo );
         m_todoMgr.update( todo.uid(), todo );
 	currentView()->replaceEvent( todo );
@@ -718,6 +762,10 @@ void MainWindow::slotComplete( const OTodo& todo ) {
      * and update the items duedate to the next
      * possible recurrance of this item...
      * the spinned off one will loose the
+     * recurrence.
+     * We calculate the difference between the old due date and the
+     * new one and add this diff to start, completed and alarm dates
+     * -zecke
      */
     if ( to.hasRecurrence() && to.isCompleted() ) {
         OTodo to2( to );
@@ -734,6 +782,8 @@ void MainWindow::slotComplete( const OTodo& todo ) {
          */
         QDate date;
         if ( to2.recurrence().nextOcurrence( to2.dueDate().addDays(1), date ) ) {
+            int dayDiff = to.dueDate().daysTo( date );
+            qWarning("day diff is %d", dayDiff );
             QDate inval;
             /* generate a new uid for the old record */
             to.setUid( 1 );
@@ -747,9 +797,30 @@ void MainWindow::slotComplete( const OTodo& todo ) {
              * and complete date
              */
             to2.setDueDate( date );
-            to2.setStartDate( inval );
+            rec.setStart( date );
+            to2.setRecurrence( rec );  // could be Monday, TuesDay, Thursday every week
+
+            /* move start date */
+            if (to2.hasStartDate() )
+                to2.setStartDate( to2.startDate().addDays( dayDiff ) );
+
+            /* now the alarms */
+            if (to2.hasNotifiers() ) {
+                OPimNotifyManager::Alarms _als = to2.notifiers().alarms();
+                OPimNotifyManager::Alarms als;
+
+                /* for every alarm move the day */
+                for ( OPimNotifyManager::Alarms::Iterator it = _als.begin(); it != _als.end(); ++it ) {
+                    OPimAlarm al = (*it);
+                    al.setDateTime( al.dateTime().addDays( dayDiff ) );
+                    als.append( al );
+                }
+                to2.notifiers().setAlarms( als );
+                handleAlarms( OTodo(), todo );
+            }
             to2.setCompletedDate( inval );
             to2.setCompleted( false );
+
             updateTodo( to2 );
         }else
             updateTodo( to );
@@ -769,9 +840,10 @@ int MainWindow::create() {
     int uid = 0;
     if(m_syncing) {
 	QMessageBox::warning(this, QWidget::tr("Todo"),
-			     QWidget::tr("Can not edit data, currently syncing"));
+			     QWidget::tr("Data can not be edited, currently syncing"));
 	return uid;
     }
+    m_todoMgr.load();
 
 
     OTodo todo = currentEditor()->newTodo( currentCatId(),
@@ -804,7 +876,11 @@ bool MainWindow::remove( int uid ) {
     return m_todoMgr.remove( uid );
 }
 void MainWindow::beam( int uid) {
+    if( uid == 0 ) return;
+
     ::unlink( beamfile );
+    m_todoMgr.load();
+
     OTodo todo = event( uid );
     OTodoAccessVCal* cal = new OTodoAccessVCal(QString::fromLatin1(beamfile) );
     OTodoAccess acc( cal );
@@ -817,13 +893,19 @@ void MainWindow::beam( int uid) {
     ir->send(beamfile, todo.summary(), "text/x-vCalendar" );
 }
 void MainWindow::show( int uid ) {
+    m_todoMgr.load(); // might not be loaded yet
+    m_showing = true;
     slotShow( uid );
+    raise();
+    QPEApplication::setKeepRunning();
 }
 void MainWindow::edit( int uid ) {
+    m_todoMgr.load();
     slotEdit( uid );
 }
 void MainWindow::add( const OPimRecord& rec) {
     if ( rec.rtti() != OTodo::rtti() ) return;
+    m_todoMgr.load(); // might not be loaded
 
     const OTodo& todo = static_cast<const OTodo&>(rec);
 
@@ -837,6 +919,7 @@ void MainWindow::add( const OPimRecord& rec) {
     populateCategories();
 }
 void MainWindow::slotReturnFromView() {
+    m_showing = false;
     raiseCurrentView();
 }
 
@@ -932,7 +1015,7 @@ void MainWindow::doAlarm( const QDateTime& dt, int uid ) {
     connect( btnOk, SIGNAL(clicked() ), &dlg, SLOT(accept() ) );
     lay->addWidget( btnOk );
 
-    QString text = tr("<h1>Alarm at %0</h1><br>").arg( TimeString::dateString( dt ) );
+    QString text = tr("<h1>Alarm at %1</h1><br>").arg( TimeString::dateString( dt ) );
     text += todo.toRichText();
     view->setText( text );
 
@@ -943,10 +1026,11 @@ void MainWindow::doAlarm( const QDateTime& dt, int uid ) {
         killAlarm();
 
     if (needToStay) {
-        showMaximized();
-        raise();
+//        showMaximized();
+//        raise();
         QPEApplication::setKeepRunning();
-        setActiveWindow();
+//        setActiveWindow();
     }
 
 }
+

@@ -14,3 +14,11 @@ void TodoShow::escapeView() {
         m_win->slotReturnFromView();
 }
 
+void TodoShow::showNext() {
+    if (m_win)
+        m_win->slotShowNext();
+}
+void TodoShow::showPrev() {
+    if (m_win)
+        m_win->slotShowPrev();
+}
