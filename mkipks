@@ -10,7 +10,7 @@ ln -sf ../init.d/opie $OPIEDIR/etc/rc2.d/S98opie
 mkdir -p $OPIEDIR/etc/rcS.d
 ln -sf ../init.d/bootsplash $OPIEDIR/etc/rcS.d/S01bootsplash
 
-ln -sf ../init.d/opieatd $OPIEDIR/ipaq/etc/rc2.d/S96opieatd
+ln -sf ../init.d/opieatd $OPIEDIR/root/etc/rc2.d/S96opieatd
 
 
 
@@ -130,8 +130,8 @@ do
 		    BASE=$(dirname /opt/QtPalmtop/${ff#$QTDIR/})
 		;; etc/*.d/*)
 		    BASE=$(dirname /$ff)
-		;; ipaq/*)
-		    BASE=$(dirname ${ff#ipaq})
+		;; root/*)
+		    BASE=$(dirname ${ff#root})
 		;; *)
 		    # For SHARP ROM compatibility. Should change to Qtopia.
 		    BASE=/opt/QtPalmtop/$(dirname $ff)

@@ -1,4 +1,4 @@
-Files: bin/opiealarm bin/opieatd ipaq/etc/init.d/opieatd ipaq/etc/rc2.d/S96opieatd ipaq/etc/suspend-scripts/S46opiealarm ipaq/etc/resume-scripts/R46opiealarm
+Files: bin/opiealarm bin/opieatd root/etc/init.d/opieatd root/etc/rc2.d/S96opieatd root/etc/suspend-scripts/S46opiealarm root/etc/resume-scripts/R46opiealarm
 Priority: required
 Provides: ipaqalarm
 Conflicts: ipaqalarm

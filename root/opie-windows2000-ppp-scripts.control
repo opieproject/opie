@@ -1,4 +1,4 @@
-Files: ipaq/etc/hosts ipaq/etc/inittab ipaq/etc/ppp
+Files: root/etc/hosts ipaq/etc/inittab ipaq/etc/ppp
 Priority: optional
 Section: opie/system
 Maintainer: Trenton Schulz <twschulz@trolltech.com>

@@ -1,4 +1,4 @@
-Files: ipaq/usr/share/zoneinfo
+Files: root/usr/share/zoneinfo
 Priority: optional
 Section: base
 Maintainer: Warwick Allison <warwick@trolltech.com>

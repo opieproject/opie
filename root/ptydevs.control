@@ -1,4 +1,4 @@
-Files: ipaq/dev
+Files: root/dev
 Priority: optional
 Section: base
 Maintainer: Warwick Allison <warwick@trolltech.com>

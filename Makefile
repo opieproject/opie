@@ -107,7 +107,7 @@ APPS=$(LOCALAPPS) $(PIMAPPS)  $(COREAPPS)     \
     
     
 
-NONTMAKEAPPS := ipaq/opiealarm 
+NONTMAKEAPPS := root/opiealarm 
 
 DOCS = docs/src/opie-policy
 
