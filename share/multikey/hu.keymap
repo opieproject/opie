@@ -1,5 +1,6 @@
 # Created by Kunszt Arpad (arpad@kunszt.hu)
 title = Hungarian
+sw = HU
 
 1 0x1000    0       2 # and you can write whatever you want after the last element
 
