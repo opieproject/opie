@@ -1,0 +1,291 @@
+# comment lines must start with a '#' (for now...)
+# order is: row qcode unicode length blah
+#
+# please don't write anything between a key definition and its xpm (except for spaces)
+title = Greek
+sw = GR
+
+1 0x1000    0       2 # and you can write whatever you want after the last element
+    "9 9 2 1"
+    ". c None"
+    "a c #000000"
+    "........."
+    "........."
+    ".aa.aa.aa"
+    ".a..a..a."
+    ".aa.aa.a."
+    ".a...a.a."
+    ".aa.aa.aa"
+    "........."
+    "........."
+
+1 0         0x60    2  # but not after xpm images... k?
+1 0         0x31    2
+1 0         0x32    2
+1 0         0x33    2
+1 0         0x34    2
+1 0         0x35    2
+1 0         0x36    2
+1 0         0x37    2
+1 0         0x38    2
+1 0         0x39    2
+1 0         0x30    2
+1 0         0x2d    2
+1 0         0x3d    2
+0x60  0x7e
+0x31  0x21
+0x32  0x40
+0x33  0x23
+0x34  0x24
+0x35  0x25
+0x36  0x5e
+0x37  0x26
+0x38  0x2a
+0x39  0x28
+0x30  0x29
+0x2d  0x5f
+0x3d  0x2b
+
+1 0x1003    0       2
+
+        "9 9 2 1"
+        ". c None"
+        "a c #000000"
+        "........."
+        "........."
+        "...a....."
+        "..aa....."
+        ".aaaaaaaa"
+        "..aa....."
+        "...a....."
+        "........."
+        "........."
+
+
+2 0x1001    0x9     3 # tab char, but why doesnt this work...?
+
+
+        "11 9 2 1"
+        ". c None"
+        "a c #000000"
+        "..........."
+        "..........."
+        ".....a..a.."
+        ".....aa.a.."
+        ".aaaaaaaa.."
+        ".....aa.a.."
+        ".....a..a.."
+        "..........."
+        "..........."
+2 0         0x3b    2 #Q
+0x3b	0x3a
+2 0         0x3c2    2 #sigma telikon
+0x3c2	0x3a3
+2 0         0x3b5    2 #epsilon
+0x3b5	0x395
+c 0x3b5 0x3ad
+c 0x395 0x388
+2 0         0x3c1    2 #rho
+0x3c1	0x3a1
+2 0         0x3c4    2 #tau
+0x3c4	0x3a4
+2 0         0x3c5    2 #ipsilon
+0x3c5	0x3a5
+c 0x3c5 0x3cd
+d 0x3c5 0x3cb
+c 0x3a5 0x394
+d 0x3a5	0x3ab
+2 0         0x3b8    2 #theta
+0x3b8	0x398
+2 0         0x3b9    2 #iota
+0x3b9	0x399
+c 0x3b9 0x3af
+d 0x3b9 0x3ca
+c 0x399 0x38a
+d 0x399 0x3aa
+2 0         0x3bf    2 #omikron
+0x3bf	0x39f
+c 0x3bf 0x3cc
+c 0x39f 0x38c
+2 0         0x3c0    2 #pi
+0x3c0	0x3a0
+2 0         0x5b    2
+2 0         0x5d    2
+2 0         0x5c    2
+0x5b  0x7b
+0x5d  0x7d
+0x5c  0x7c
+
+
+3 0x1024    0       4
+        "17 7 2 1"
+        "   c None"
+        ".  c #000000"
+        "                 "
+        "  ..  .  ..   .. "
+        " .   . . . . .   "
+        " .   ... ..   .  "
+        " .   . . .     . "
+        "  .. . . .   ..  "
+        "                 "
+3 0         0x3b1    2 # alpha
+0x3b1	0x391
+c 0x3b1 0x3ac
+c 0x391 0x386
+3 0         0x3c3    2 # sigma
+0x3c3	0x3a3
+3 0         0x3b4    2 # delta
+0x3b4	0x394
+3 0         0x3c6    2 # phi
+0x3c6	0x3a6
+3 0         0x3b3    2 #gamma
+0x3b3	0x393
+3 0         0x3b7    2 #itta
+0x3b7	0x397
+c 0x3b7 0x3ae
+c 0x397 0x389
+3 0         0x3be    2 #ksi
+0x3be	0x39e
+3 0         0x3ba    2 #kappa
+0x3ba	0x39a
+3 0         0x3bb    2 #lamda
+0x3bb	0x39b
+3 0         0x2c6   2 # circumflex
+    "9 9 2 1"
+    ". c None"
+    "a c #000000"
+    "........."
+    "..aa..aa."
+    "..aa..aa."
+    "........."
+    "........."
+    ".....aaa."
+    "....aaa.."
+    "...aa...."
+    "........."
+0x2c6       0xa8      # diaeresis
+3 0         0x27    2
+0x27  0x22
+
+3 0x1004    0       4 # enter
+        "16 9 2 1"
+        ". c None"
+        "a c #000000"
+        "................"
+        "................"
+        "...........a...."
+        "....aa.....a...."
+        "...aa......a...."
+        "..aaaaaaaaaa...."
+        "...aa..........."
+        "....aa.........."
+        "................"
+
+4 0x1020    0       5
+        "21 7 2 1"
+        "   c None"
+        ".  c #000000"
+        "                     "
+        "  .. . . ... ... ... "
+        " .   . .  .  .    .  "
+        "  .  ...  .  ..   .  "
+        "   . . .  .  .    .  "
+        " ..  . . ... .    .  "
+        "                     "
+4 0         0x3b6    2 #zita
+0x3b6	0x396
+4 0         0x3c7    2 # chi
+0x3c7	0x3a7
+4 0         0x3c8    2 #psi
+0x3c8	0x3a8
+4 0         0x3c9    2 #omega
+0x3c9	0x3a9
+c 0x3c9 0x3ce
+c 0x3a9 0x38f
+4 0         0x3b2    2 #beta
+0x3b2	0x392
+4 0         0x3bd    2 #ni
+0x3bd	0x39d
+4 0         0x3bc    2 #mi
+0x3bc	0x39c
+4 0         0x2c    2
+4 0         0x2e    2
+4 0         0x2f    2
+0x2c	0x3c
+0x2e	0x3e
+0x2f	0x3f
+
+4 0x1020    0       5
+        "21 7 2 1"
+        "   c None"
+        ".  c #000000"
+        "                     "
+        "  .. . . ... ... ... "
+        " .   . .  .  .    .  "
+        "  .  ...  .  ..   .  "
+        "   . . .  .  .    .  "
+        " ..  . . ... .    .  "
+        "                     "
+
+5 0x1021    0       3
+        "17 7 2 1"
+        "   c None"
+        ".  c #000000"
+        "                 "
+        "  .. ... ..  .   "
+        " .    .  . . .   "
+        " .    .  ..  .   "
+        " .    .  . . .   "
+        "  ..  .  . . ... "
+        "                 "
+5 0x1023    0       3
+        "13 7 2 1"
+        "   c None"
+        ".  c #000000"
+        "             "
+        "  .  .   ... "
+        " . . .    .  "
+        " ... .    .  "
+        " . . .    .  "
+        " . . ...  .  "
+        "             "
+5 0         0x20    16
+5 0x1023    0       3
+        "13 7 2 1"
+        "   c None"
+        ".  c #000000"
+        "             "
+        "  .  .   ... "
+        " . . .    .  "
+        " ... .    .  "
+        " . . .    .  "
+        " . . ...  .  "
+        "             "
+5 0x1021    0       3
+        "17 7 2 1"
+        "   c None"
+        ".  c #000000"
+        "                 "
+        "  .. ... ..  .   "
+        " .    .  . . .   "
+        " .    .  ..  .   "
+        " .    .  . . .   "
+        "  ..  .  . . ... "
+        "                 "
+5 0x1030    0       2 #original code is F1, but i'll use it for turning on/off the config dialog
+        "13 7 2 1"
+        "   c None"
+        ".  c #000000"
+        "             "
+        "      .      "
+        "     ...     "
+        "    .....    "
+        "      .      "
+        "      .      "
+        "             "
+
+
+
+
+
+
