@@ -1,8 +1,7 @@
 TEMPLATE    = lib
 CONFIG      += qt warn_on debug
 DESTDIR     = $(OPIEDIR)/lib
-HEADERS     = ocheckitem.h           \
-              oclickablelabel.h      \
+HEADERS     = oclickablelabel.h      \
               odialog.h              \
               ofontselector.h        \
               oimageeffect.h         \
@@ -22,8 +21,7 @@ HEADERS     = ocheckitem.h           \
               otaskbarapplet.h       \
               oseparator.h
 
-SOURCES     = ocheckitem.cpp         \
-              oclickablelabel.cpp    \
+SOURCES     = oclickablelabel.cpp    \
               ofontselector.cpp      \
               oimageeffect.cpp       \
               olistview.cpp          \
