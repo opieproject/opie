@@ -57,12 +57,12 @@ private slots:
     void slotConfigure();
     void slotClose();
     void slotProfile(int);
-	void slotTransfer();
+    void slotTransfer();
     void slotOpenKeb(bool);
     void slotRecordScript();
     void slotSaveScript();
     void slotRunScript();
-    void setOn();
+    void slotFullscreen();
     void slotSessionChanged( Session* );
 private:
     void initUI();
@@ -102,8 +102,11 @@ private:
     QAction* m_recordScript;
     QAction* m_saveScript;
     QAction* m_runScript;
+    QAction* m_fullscreen;
+    QAction* m_closewindow;
 
     FunctionKeyboard *m_kb;
+    bool m_isFullscreen;
 };
 
 

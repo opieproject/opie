@@ -8,6 +8,7 @@
 #include <qpopupmenu.h>
 #include <qtoolbar.h>
 #include <qmessagebox.h>
+#include <qpushbutton.h>
 
 #include <qpe/resource.h>
 #include <opie/ofiledialog.h>
@@ -25,6 +26,29 @@
 #include "transferdialog.h"
 #include "function_keyboard.h"
 #include "script.h"
+
+
+
+static char * menu_xpm[] = {
+"12 12 5 1",
+" 	c None",
+".	c #000000",
+"+	c #FFFDAD",
+"@	c #FFFF00",
+"#	c #E5E100",
+"            ",
+"            ",
+"  ......... ",
+"  .+++++++. ",
+"  .+@@@@#.  ",
+"  .+@@@#.   ",
+"  .+@@#.    ",
+"  .+@#.     ",
+"  .+#.      ",
+"  .+.       ",
+"  ..        ",
+"            "};
+
 
 MainWindow::MainWindow() {
     KeyTrans::loadAll();
@@ -93,6 +117,19 @@ void MainWindow::initUI() {
     connect(m_transfer, SIGNAL(activated() ),
             this, SLOT(slotTransfer() ) );
 
+
+    /*
+     * fullscreen
+     */
+    m_isFullscreen = false;
+
+    m_fullscreen = new QAction( tr("Full screen"), Resource::loadPixmap( "fullscreen" )
+                           , QString::null, 0, this, 0);
+    m_fullscreen->addTo( m_console );
+    m_fullscreen->addTo( m_icons );
+    connect( m_fullscreen, SIGNAL( activated() ),
+             this,  SLOT( slotFullscreen() ) );
+
     /*
      * terminate action
      */
@@ -102,10 +139,10 @@ void MainWindow::initUI() {
     connect(m_terminate, SIGNAL(activated() ),
             this, SLOT(slotTerminate() ) );
 
-    a = new QAction();
-    a->setText( tr("Close Window") );
-    a->addTo( m_console );
-    connect(a, SIGNAL(activated() ),
+    m_closewindow = new QAction();
+    m_closewindow->setText( tr("Close Window") );
+    m_closewindow->addTo( m_console );
+    connect( m_closewindow, SIGNAL(activated() ),
             this, SLOT(slotClose() ) );
 
     /*
@@ -178,6 +215,8 @@ void MainWindow::initUI() {
     m_recordScript->setEnabled( false );
     m_saveScript->setEnabled( false );
     m_runScript->setEnabled( false );
+    m_fullscreen->setEnabled( false );
+    m_closewindow->setEnabled( false );
 
     /*
      * connect to the menu activation
@@ -325,6 +364,18 @@ void MainWindow::slotClose() {
     m_sessions.remove( m_curSession );
     m_curSession = m_sessions.first();
     tabWidget()->setCurrent( m_curSession );
+
+    if (!currentSession() ) {
+        m_connect->setEnabled( false );
+        m_disconnect->setEnabled( false );
+        m_terminate->setEnabled( false );
+        m_transfer->setEnabled( false );
+        m_recordScript->setEnabled( false );
+        m_saveScript->setEnabled( false );
+        m_runScript->setEnabled( false );
+        m_fullscreen->setEnabled( false );
+        m_closewindow->setEnabled( false );
+    }
 }
 
 /*
@@ -352,7 +403,7 @@ void MainWindow::create( const Profile& prof ) {
     tabWidget()->add( ses );
     m_curSession = ses;
 
-    // dicide if its a local term ( then no connction and no tranfer)
+    // dicide if its a local term ( then no connction and no tranfer), maybe make a wrapper method out of it
     m_connect->setEnabled( true );
     m_disconnect->setEnabled( true );
     m_terminate->setEnabled( true );
@@ -360,8 +411,8 @@ void MainWindow::create( const Profile& prof ) {
     m_recordScript->setEnabled( true );
     m_saveScript->setEnabled( true );
     m_runScript->setEnabled( true );
-
-
+    m_fullscreen->setEnabled( true );
+    m_closewindow->setEnabled( true );
 }
 
 void MainWindow::slotTransfer()
@@ -387,17 +438,31 @@ void MainWindow::slotSessionChanged( Session* ses ) {
     }
 }
 
-void MainWindow::setOn() {
+void MainWindow::slotFullscreen() {
 
-/*
-    m_connect
-     m_disconnect
-     m_terminate
-     m_transfer
-     m_recordScript
-     m_saveScript
-     m_runScript
-*/
+    if ( m_isFullscreen ) {
+        ( m_curSession->widgetStack() )->reparent( m_consoleWindow, 0, QPoint(0,0), false );
+        ( m_curSession->widgetStack() )->setFrameStyle( QFrame::Panel | QFrame::Sunken );
+        setCentralWidget( m_consoleWindow );
+        ( m_curSession->widgetStack() )->show();
+        m_fullscreen->setText( tr("Full screen") );
 
+    } else {
+        ( m_curSession->widgetStack() )->setFrameStyle( QFrame::NoFrame );
+        ( m_curSession->widgetStack() )->reparent( 0,WStyle_Tool | WStyle_Customize | WStyle_StaysOnTop,
+                                                   QPoint(0,0), false);
+        ( m_curSession->widgetStack() )->resize(qApp->desktop()->width(), qApp->desktop()->height());
+        ( m_curSession->widgetStack() )->setFocus();
+        ( m_curSession->widgetStack() )->show();
+
+        // QPushButton *cornerButton = new QPushButton( this );
+        //cornerButton->setPixmap( QPixmap( (const char**)menu_xpm ) );
+        //connect( cornerButton, SIGNAL( pressed() ), this, SLOT( slotFullscreen() ) );
+        // need teh scrollbar
+        //          ( m_curSession->widgetStack() )->setCornerWidget( cornerButton );
+        m_fullscreen->setText( tr("Stop full screen") );
+    }
+
+    m_isFullscreen = !m_isFullscreen;
 
 }
