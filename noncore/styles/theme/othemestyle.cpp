@@ -309,6 +309,14 @@ void OThemeStyle::drawBevelButton( QPainter *p, int x, int y, int w, int h,
 	drawBaseButton( p, x, y, w, h, *colorGroup( g, type ), sunken, false, type );
 }
 
+void OThemeStyle::drawToolButton( QPainter *p, int x, int y, int w, int h,
+                                  const QColorGroup &g, bool sunken,
+                                  const QBrush * )
+{
+	WidgetType type = sunken ? ToolButtonDown : ToolButton;
+	drawBaseButton( p, x, y, w, h, *colorGroup( g, type ), sunken, false, type );
+}
+
 #if 0
 void OThemeStyle::drawKToolBarButton( QPainter *p, int x, int y, int w, int h,
                                       const QColorGroup &g, bool sunken,

@@ -109,6 +109,12 @@ public:
 	virtual void drawBevelButton( QPainter *p, int x, int y, int w, int h,
 	                              const QColorGroup &g, bool sunken = FALSE,
 	                              const QBrush *fill = 0 );
+	/**
+	 * Draw a toolbar button.
+	 */
+	virtual void drawToolButton ( QPainter *p, int x, int y, int w, int h,
+	                              const QColorGroup &g, bool sunken = FALSE,
+	                              const QBrush *fill = 0 );
 #if 0
 	/**
 	 * Draw a toolbar button.
