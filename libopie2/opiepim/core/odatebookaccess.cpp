@@ -42,7 +42,7 @@ ODateBookAccess::ODateBookAccess( ODateBookAccessBackend* back, enum Access ac )
     : OPimAccessTemplate<OPimEvent>( back )
 {
     if (!back )
-        back = OBackendFactory<ODateBookAccessBackend>::Default("datebook", QString::null );
+        back = OBackendFactory<ODateBookAccessBackend>::defaultBackend("datebook", QString::null );
 
     m_backEnd = back;
     setBackEnd( m_backEnd );

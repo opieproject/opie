@@ -178,7 +178,7 @@ class OBackendFactory
          * @param backendName the type of the backend (use "todo", "contact" or "datebook" )
          * @param appName The name of your application. It will be passed on to the backend
          */
-	static T* Default( const QString backendName, const QString& appName ){
+	static T* defaultBackend( const QString backendName, const QString& appName ){
 
 		QAsciiDict<int> dictBackends( OPimGlobal::_END_PimType );
  		dictBackends.setAutoDelete ( TRUE );

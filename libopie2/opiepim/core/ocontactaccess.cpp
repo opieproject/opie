@@ -65,7 +65,7 @@ OPimContactAccess::OPimContactAccess ( const QString appname, const QString ,
 	 */
         if( end == 0 ) {
 		qWarning ("Using BackendFactory !");
-		end = OBackendFactory<OPimContactAccessBackend>::Default( "contact", appname );
+		end = OBackendFactory<OPimContactAccessBackend>::defaultBackend( "contact", appname );
         }
 	// Set backend locally and in template
         m_backEnd = end;

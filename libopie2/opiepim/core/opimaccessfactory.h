@@ -104,7 +104,7 @@ class OPimAccessFactory
 	 * @see OPimGlobal
 	 * 
 	 */
-	static T* Default( typename OPimGlobal::PimType type, const QString& appName ){
+	static T* defaultAccess( typename OPimGlobal::PimType type, const QString& appName ){
 
 		return create( type, OPimGlobal::DEFAULT, appName );
 

@@ -44,7 +44,7 @@ OPimTodoAccess::OPimTodoAccess( OPimTodoAccessBackend* end, enum Access )
 
 	// Zecke: Du musst hier noch fr das XML-Backend einen Appnamen bergeben !
         if (end == 0l )
-		m_todoBackEnd = OBackendFactory<OPimTodoAccessBackend>::Default ("todo", QString::null);
+		m_todoBackEnd = OBackendFactory<OPimTodoAccessBackend>::defaultBackend ("todo", QString::null);
 
     setBackEnd( m_todoBackEnd );
 }
