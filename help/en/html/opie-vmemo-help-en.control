@@ -1,5 +1,5 @@
 Package: opie-vmemo-help-en
-Files: help/en/html/opie-vmemo.html
+Files: help/en/html/vmemo.html
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: ljp <llornkcor@handhelds.org>
