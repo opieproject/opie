@@ -23,8 +23,10 @@
 #include <qdrawutil.h>
 #include <qapplication.h>
 #include <kglobalsettings.h>
-#include "kcolordialog.h"
+//#include "kcolordialog.h"
 #include "kcolorbtn.h"
+
+#include <opie/colordialog.h>
 
 KColorButton::KColorButton( QWidget *parent, const char *name )
   : QPushButton( parent, name ), dragFlag(false)
@@ -34,7 +36,7 @@ KColorButton::KColorButton( QWidget *parent, const char *name )
 }
 
 KColorButton::KColorButton( const QColor &c, QWidget *parent,
-			    const char *name )
+          const char *name )
   : QPushButton( parent, name ), col(c), dragFlag(false)
 {
 
@@ -73,12 +75,11 @@ void KColorButton::drawButtonLabel( QPainter *painter )
 
 void KColorButton::chooseColor()
 {
-  if( KColorDialog::getColor( col) == QDialog::Rejected )
+  QColor newCol=OColorDialog::getColor( col);
+  if( newCol != QDialog::Rejected )
   {
-    return;
-  }
-
+  col=newCol;
   repaint( false );
   emit changed( col );
+  }
 }
-
