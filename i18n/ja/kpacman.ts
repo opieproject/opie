@@ -191,10 +191,6 @@ or is of an unknown format.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>RNK   SCORE  NAME   DATE</source>
         <translation type="unfinished"></translation>
     </message>
@@ -226,6 +222,10 @@ To use a different directory or filename for the highscores,specify them in the 
     </message>
     <message>
         <source>@YY@/@MM@/@DD@</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>                          </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
