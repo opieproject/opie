@@ -91,6 +91,7 @@ public:
     void setCurrentWidget( int );
     QWidget* currentWidget()const;
 
+
 signals:
     /**
      * Emitted if in tab  and comes directly from the tab widget
@@ -108,8 +109,8 @@ signals:
      */
     void sizeChanged( bool b, Orientation ori);
 public:
-    QSize sizeHint()const;
-    QSize minimumSizeHint()const;
+//    QSize sizeHint()const;
+//    QSize minimumSizeHint()const;
 
 protected:
     void resizeEvent( QResizeEvent* );

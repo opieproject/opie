@@ -306,8 +306,8 @@ QWidget* OSplitter::currentWidget() const{
 
     return 0l;
 }
-
-
+/* wrong */
+#if 0
 /**
  * @reimplented for internal reasons
  * returns the sizeHint of one of its sub widgets
@@ -330,7 +330,7 @@ QSize OSplitter::minimumSizeHint()const {
     else
         return m_tabWidget->sizeHint();
 }
-
+#endif
 
 /**
  * @reimplemented for internal reasons
@@ -515,6 +515,7 @@ void OSplitter::commonChangeBox() {
         m_hbox->show();
         delete m_tabWidget;
         m_tabWidget = 0;
+        show(); // also show this widget
     }
 }
 
