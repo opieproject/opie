@@ -25,14 +25,14 @@
                              Boston, MA 02111-1307, USA.
 
 */
-#ifndef SETTINGS_H
-#define SETTINGS_H
+#ifndef __LIGHT_H__
+#define __LIGHT_H__
 
 
-#include <qstrlist.h>
-#include <qasciidict.h>
+#include <qstringlist.h>
 #include "lightsettingsbase.h"
 
+class QTimer;
 
 class LightSettings : public LightSettingsBase
 {
@@ -43,22 +43,22 @@ public:
     ~LightSettings();
 
 protected:
-    void accept();
-    void reject();
-
-    void done ( int r );
+    virtual void accept();
+    virtual void done ( int r );
 
 protected slots:
-    void setBacklight ( int );
     virtual void calibrateSensor ( );
     virtual void calibrateSensorAC ( );
+    void setBacklight ( int );
+    void resetBacklight ( );
 
 private:
     int m_res;
+    QTimer *m_resettimer;
     QStringList m_sensordata;
     QStringList m_sensordata_ac;
 };
 
 
-#endif // SETTINGS_H
+#endif
 
