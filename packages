@@ -168,4 +168,3 @@ CONFIG_WLAN	noncore/settings/networksettings/wlan	wlan.pro
 CONFIG_PPP	noncore/settings/networksettings/ppp	ppp.pro
 CONFIG_WORDGAME	noncore/games/wordgame	wordgame.pro
 CONFIG_QUICKLAUNCHER core/tools/quicklauncher quicklauncher.pro
-

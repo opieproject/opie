@@ -32,6 +32,22 @@ ipks: $(OPIEDIR)/scripts/subst $(OPIEDIR)/scripts/filesubst FORCE $(TOPDIR)/.con
 		cd $(OPIEDIR); $(OPIEDIR)/scripts/mkipkg --subst=$(OPIEDIR)/scripts/subst --filesubst=$(OPIEDIR)/scripts/filesubst --control=$$ctrl --prerm=$$prerm --preinst=$$preinst --postrm=$$postrm --postinst=$$postinst --strip=$(STRIP) $(OPIEDIR); \
 		done )
 
+ipks-mt: $(OPIEDIR)/scripts/subst $(OPIEDIR)/scripts/filesubst FORCE $(TOPDIR)/.config$(TGT)
+	@> $(OPIEDIR)/AllThreadedPackages
+	@find $(OPIEDIR)/ -type f -name \*.control$(TGT) | grep -v -- "-mt" | while read ctrl ; do \
+		grep "Package[ ]*:" $${ctrl} | sed "s+Package[ ]*:[ ]*++"; \
+		done | sort | uniq >> $(OPIEDIR)/AllThreadedPackages
+	@find $(OPIEDIR)/ -type f -name \*.control$(TGT) | while read ctrl ; do \
+		echo "Converting $$ctrl to -mt package"; \
+		nctrl=`$(OPIEDIR)/scripts/tothreaded $$ctrl $(OPIEDIR)/AllThreadedPackages`; \
+		echo "Building ipk of $$ctrl"; \
+		[ -n $$nctrl ] && cd $(OPIEDIR) && $(OPIEDIR)/scripts/mkipkg --subst=$(OPIEDIR)/scripts/subst --filesubst=$(OPIEDIR)/scripts/filesubst --control=$$nctrl --prerm=$${nctrl/\.control$$/.prerm/} --preinst=$${nctrl/\.control$$/.preinst/} --postrm=$${nctrl/\.control$$/.postrm/} --postinst=$${nctrl/\.control$$/.postinst/} --strip=$(STRIP) $(OPIEDIR); \
+		done
+	@rm -f $(OPIEDIR)/AllThreadedPackages
+ 
+# added force target
+FORCE :
+ 
 $(TOPDIR)/.config : $(TOPDIR)/.depends.cfgs
 
 all menuconfig xconfig oldconfig config randconfig allyesconfig allnoconfig defconfig : $(TOPDIR)/.depends.cfgs
