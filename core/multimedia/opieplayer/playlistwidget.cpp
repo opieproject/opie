@@ -31,6 +31,7 @@
 #include <qpe/config.h>
 #include <qpe/global.h>
 #include <qpe/resource.h>
+
 #include <qaction.h>
 #include <qimage.h>
 #include <qfile.h>
@@ -47,6 +48,7 @@
 #include <qpoint.h>
 #include <qlineedit.h>
 #include <qpushbutton.h>
+#include <qregexp.h>
 
 //#include <qtimer.h>
 
@@ -117,7 +119,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     setBackgroundMode( PaletteButton );
 
     setCaption( tr("OpiePlayer") );
-    setIcon( Resource::loadPixmap( "MPEGPlayer" ) );
+    setIcon( Resource::loadPixmap( "opieplayer/MPEGPlayer" ) );
 
     setToolBarsMovable( FALSE );
 
@@ -131,23 +133,23 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
     QPEToolBar *bar = new QPEToolBar( this );
     bar->setLabel( tr( "Play Operations" ) );
-//      d->tbPlayCurList =  new ToolButton( bar, tr( "play List" ), "mpegplayer/play_current_list",
+//      d->tbPlayCurList =  new ToolButton( bar, tr( "play List" ), "opieplayer/play_current_list",
 //                                        this , SLOT( addSelected()) );
     tbDeletePlaylist = new QPushButton( Resource::loadIconSet("trash"),"",bar,"close");
     tbDeletePlaylist->setFlat(TRUE);
     tbDeletePlaylist->setFixedSize(20,20);
     connect(tbDeletePlaylist,(SIGNAL(released())),SLOT( deletePlaylist()));
     
-    d->tbAddToList =  new ToolButton( bar, tr( "Add to Playlist" ), "mpegplayer/add_to_playlist",
+    d->tbAddToList =  new ToolButton( bar, tr( "Add to Playlist" ), "opieplayer/add_to_playlist",
                                       this , SLOT(addSelected()) );
-    d->tbRemoveFromList = new ToolButton( bar, tr( "Remove from Playlist" ), "mpegplayer/remove_from_playlist",
+    d->tbRemoveFromList = new ToolButton( bar, tr( "Remove from Playlist" ), "opieplayer/remove_from_playlist",
                                           this , SLOT(removeSelected()) );
-//    d->tbPlay    = new ToolButton( bar, tr( "Play" ), "mpegplayer/play", /*this */mediaPlayerState , SLOT(setPlaying(bool) /* btnPlay() */), TRUE );
-    d->tbPlay    = new ToolButton( bar, tr( "Play" ), "mpegplayer/play",
+//    d->tbPlay    = new ToolButton( bar, tr( "Play" ), "opieplayer/play", /*this */mediaPlayerState , SLOT(setPlaying(bool) /* btnPlay() */), TRUE );
+    d->tbPlay    = new ToolButton( bar, tr( "Play" ), "opieplayer/play",
                                    this , SLOT( btnPlay(bool) ), TRUE );
-    d->tbShuffle = new ToolButton( bar, tr( "Randomize" ),"mpegplayer/shuffle",
+    d->tbShuffle = new ToolButton( bar, tr( "Randomize" ),"opieplayer/shuffle",
                                    mediaPlayerState, SLOT(setShuffled(bool)), TRUE );
-    d->tbLoop    = new ToolButton( bar, tr( "Loop" ),"mpegplayer/loop",
+    d->tbLoop    = new ToolButton( bar, tr( "Loop" ),"opieplayer/loop",
                                    mediaPlayerState, SLOT(setLooping(bool)), TRUE );
     tbDeletePlaylist->hide();
 
@@ -168,7 +170,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     fullScreenButton = new QAction(tr("Full Screen"), Resource::loadPixmap("fullscreen"), QString::null, 0, this, 0);
     connect( fullScreenButton, SIGNAL(activated()), mediaPlayerState, SLOT(toggleFullscreen()) );
     fullScreenButton->addTo(pmView);
-    scaleButton = new QAction(tr("Scale"), Resource::loadPixmap("mpegplayer/scale"), QString::null, 0, this, 0);
+    scaleButton = new QAction(tr("Scale"), Resource::loadPixmap("opieplayer/scale"), QString::null, 0, this, 0);
     connect( scaleButton, SIGNAL(activated()), mediaPlayerState, SLOT(toggleScaled()) );
     scaleButton->addTo(pmView);
 
@@ -204,9 +206,9 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
           
      QVBox *stretch1 = new QVBox( vbox1 ); stretch1->setBackgroundMode( PaletteButton ); // add stretch
-     new ToolButton( vbox1, tr( "Move Up" ),   "mpegplayer/up",   d->selectedFiles, SLOT(moveSelectedUp()) );
-     new ToolButton( vbox1, tr( "Remove" ),    "mpegplayer/cut",  d->selectedFiles, SLOT(removeSelected()) );
-     new ToolButton( vbox1, tr( "Move Down" ), "mpegplayer/down", d->selectedFiles, SLOT(moveSelectedDown()) );
+     new ToolButton( vbox1, tr( "Move Up" ),   "opieplayer/up",   d->selectedFiles, SLOT(moveSelectedUp()) );
+     new ToolButton( vbox1, tr( "Remove" ),    "opieplayer/cut",  d->selectedFiles, SLOT(removeSelected()) );
+     new ToolButton( vbox1, tr( "Move Down" ), "opieplayer/down", d->selectedFiles, SLOT(moveSelectedDown()) );
      QVBox *stretch2 = new QVBox( vbox1 ); stretch2->setBackgroundMode( PaletteButton ); // add stretch
 
     QWidget *aTab;
@@ -429,14 +431,15 @@ void PlayListWidget::setDocument(const QString& fileref) {
         return;
     }
 //    qDebug("setDocument "+fileref);
-    if(fileref.find("m3u",0,TRUE) != -1) { //is m3u
-        clearList();
-        addToSelection( DocLnk( fileref ) );
-        d->setDocumentUsed = TRUE;
-        d->selectedFiles->first();
-        qApp->processEvents();
-    }
-    else if(fileref.find("playlist",0,TRUE) != -1) {//is playlist
+//     if(fileref.find("m3u",0,TRUE) != -1) { //is m3u
+//         clearList();
+//         addToSelection( DocLnk( fileref ) );
+//         d->setDocumentUsed = TRUE;
+//         d->selectedFiles->first();
+//         qApp->processEvents();
+//     }
+//    else
+    if(fileref.find("playlist",0,TRUE) != -1) {//is playlist
         clearList();
         loadList(DocLnk(fileref));
         d->selectedFiles->first();
@@ -619,7 +622,7 @@ void PlayListWidget::saveList() {
 //        lnk.setComment( "");
         lnk.setFile(QDir::homeDirPath()+"/Settings/"+filename+".playlist.conf"); //sets File property
         lnk.setType("playlist/plain");// hey is this a REGISTERED mime type?!?!? ;D
-        lnk.setIcon("mpegplayer/playlist2");
+        lnk.setIcon("opieplayer/playlist2");
         lnk.setName( filename); //sets file name
 //        qDebug(filename);
         if(!lnk.writeLink())
@@ -946,7 +949,7 @@ void PlayListWidget::populateAudioView() {
         QListViewItem * newItem;
         if ( QFile( dit.current()->file()).exists() ) {
             newItem= /*(void)*/ new QListViewItem( audioView, dit.current()->name(), QString::number( QFile( dit.current()->file()).size() ), storage);
-            newItem->setPixmap(0, Resource::loadPixmap( "mpegplayer/musicfile" ));
+            newItem->setPixmap(0, Resource::loadPixmap( "opieplayer/musicfile" ));
         }
     }
 }
@@ -970,34 +973,49 @@ void PlayListWidget::populateVideoView() {
         QListViewItem * newItem;
         if ( QFile( Vdit.current()->file()).exists() ) {
             newItem= /*(void)*/ new QListViewItem( videoView, Vdit.current()->name(), QString::number( QFile( Vdit.current()->file()).size() ), storage);
-            newItem->setPixmap(0, Resource::loadPixmap( "mpegplayer/videofile" ));
+            newItem->setPixmap(0, Resource::loadPixmap( "opieplayer/videofile" ));
         }
     }
 }
 
 void PlayListWidget::openFile() {
-    QString filename;
+    QString filename, name;
     InputDialog *fileDlg;
     fileDlg = new InputDialog(this,tr("Open file or URL"),TRUE, 0);
     fileDlg->exec();
     if( fileDlg->result() == 1 ) {
         filename = fileDlg->LineEdit1->text();
-    }
-    qDebug(filename);
-    DocLnk lnk;
-    QString name =  filename.right(filename.length()-filename.find("http://")-7);
-    qDebug(name);
-    lnk.setName( name); //sets file name
-//    lnk.setComment();
-    lnk.setFile(filename); //sets File property
-// problem is, the launcher sees this as a broken link and does not display it :(
-    lnk.setType("audio/x-mpegurl");
-    lnk.setExec("opieplayer");
-    lnk.setIcon("opieplayer/MPEGPlayer");
 
-    if(!lnk.writeLink()) 
-        qDebug("Writing doclink did not work");
-     d->selectedFiles->addToSelection(  lnk);
+//         InputDialog *fileDlg2;
+//         fileDlg2 = new InputDialog(this,tr("Name"),TRUE, 0);
+//         fileDlg2->exec();
+//         if( fileDlg2->result() == 1 ) {
+//             name = fileDlg2->LineEdit1->text();
+//         }
+//http://205.188.234.129:8030
+        qDebug(filename);
+        DocLnk lnk;
+//     if(filename.left(7) == "http://")
+//         name=  filename.right(filename.length()-filename.find("http://")-7);
+//     else name = filename;
+//     qDebug("name is "+name);
+//     lnk.setComment(filename);
+        lnk.setName(filename); //sets file name
+        if(filename.right(1) != "/" && filename.right(3) != "mp3" && filename.right(3) != "MP3")
+            filename += "/";
+        lnk.setFile(filename); //sets File property
+
+        lnk.setType("audio/x-mpegurl");
+        lnk.setExec("opieplayer");
+        lnk.setIcon("opieplayer/MPEGPlayer");
+
+        if(!lnk.writeLink()) 
+            qDebug("Writing doclink did not work");
+        d->selectedFiles->addToSelection(  lnk);
+//     if(fileDlg2)
+//         delete fileDlg2;
+    }
+
     if(fileDlg)
-    delete fileDlg;
+        delete fileDlg;
 }
