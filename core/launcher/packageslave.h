@@ -21,7 +21,7 @@
 #ifndef __packageslave_h__
 #define __packageslave_h__
 
-#include <qtopia/qpeglobal.h>
+#include <qtopia/global.h>
 #include <qobject.h>
 
 class QCopChannel;
@@ -36,7 +36,7 @@ public:
 
 public slots:
     void redoPackages();
-    
+
 protected:
     void installPackage( const QString &package );
     void removePackage( const QString &package );
@@ -46,9 +46,9 @@ protected:
 
     void cleanupPackageFiles( const QString &listfile );
     void cleanupPackages( const QString &location );
-    
+
     void prepareInstall( const QString& size, const QString& path );
-    
+
 protected slots:
     void qcopMessage( const QCString &msg, const QByteArray &data );
     void iProcessExited();
