@@ -403,6 +403,6 @@ void BenchmarkInfo::performFileTest( const QString& fname, OCheckListItem* item 
         writeSpeed /= 1024.0;
         writeUnit = "MB/s";
     }
-    item->setText( 1, QString().sprintf( "%.2f %s, %.2f %s", readSpeed, readUnit.latin1(), writeSpeed, writeUnit.latin1() ) );
+    item->setText( 1, QString().sprintf( "%.2f %s; %.2f %s", readSpeed, readUnit.latin1(), writeSpeed, writeUnit.latin1() ) );
     item->setOn( false );
 }
