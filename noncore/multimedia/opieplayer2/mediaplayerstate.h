@@ -47,7 +47,7 @@ class Config;
 class MediaPlayerState : public QObject {
 Q_OBJECT
 public:
-    enum MediaType { Audio, Video };
+    enum DisplayType { Audio, Video, MediaSelection };
 
     MediaPlayerState( QObject *parent, const char *name );
     ~MediaPlayerState();
@@ -64,7 +64,7 @@ public:
     long position() const { return curPosition; }
     long length() const { return curLength; }
     char view() const { return curView; }
-    MediaType mediaType() const;
+    DisplayType displayType() const;
 
 public slots:
     void setIsStreaming( bool b );
@@ -111,7 +111,7 @@ signals:
     void positionUpdated( long ); // When the media file progresses
     void lengthChanged( long );
     void viewChanged( char );
-    void mediaTypeChanged( MediaPlayerState::MediaType type );
+    void displayTypeChanged( MediaPlayerState::DisplayType type );
     void isSeekableToggled( bool );
     void blankToggled( bool );
     void videoGammaChanged( int );

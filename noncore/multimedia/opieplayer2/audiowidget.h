@@ -81,7 +81,7 @@ public slots:
     void setPosition( long );
     void setLength( long );
     void setSeekable( bool );
-    void setMediaType( MediaPlayerState::MediaType mediaType );
+    void setDisplayType( MediaPlayerState::DisplayType displayType );
 
 signals:
     void moreClicked();

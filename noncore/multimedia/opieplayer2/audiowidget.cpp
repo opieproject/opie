@@ -160,7 +160,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     resizeEvent( NULL );
 
     connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
-    connect( mediaPlayerState, SIGNAL( mediaTypeChanged(MediaPlayerState::MediaType) ),    this, SLOT( setMediaType(MediaPlayerState::MediaType) ) );
+    connect( mediaPlayerState, SIGNAL( displayTypeChanged(MediaPlayerState::DisplayType) ),    this, SLOT( setDisplayType(MediaPlayerState::DisplayType) ) );
     connect( mediaPlayerState, SIGNAL( loopingToggled(bool) ), this, SLOT( setLooping(bool) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
     connect( mediaPlayerState, SIGNAL( isSeekableToggled( bool ) ), this, SLOT( setSeekable( bool ) ) );
@@ -264,15 +264,15 @@ void AudioWidget::setLength( long max ) {
 }
 
 
-void AudioWidget::setMediaType( MediaPlayerState::MediaType mediaType ) {
-    if ( mediaType == MediaPlayerState::Video ) {
-        killTimers();
-        hide();
+void AudioWidget::setDisplayType( MediaPlayerState::DisplayType mediaType ) {
+    if ( mediaType == MediaPlayerState::Audio ) {
+        // startTimer( 150 );
+        showMaximized();
         return;
     }
 
-    // startTimer( 150 );
-    showMaximized();
+    killTimers();
+    hide();
 }
 
 

@@ -41,7 +41,7 @@
 #include <qdir.h>
 #include "mediaplayerstate.h"
 
-
+#include <assert.h>
 
 //#define MediaPlayerDebug(x) qDebug x
 #define MediaPlayerDebug(x)
@@ -85,9 +85,17 @@ void MediaPlayerState::writeConfig( Config& cfg ) const {
     cfg.writeEntry( "VideoGamma",  videoGamma );
 }
 
-MediaPlayerState::MediaType MediaPlayerState::mediaType() const
+MediaPlayerState::DisplayType MediaPlayerState::displayType() const
 {
-    return view() == 'a' ? MediaPlayerState::Audio : MediaPlayerState::Video;
+    char v = view();
+    switch ( v ) {
+        case 'a': return MediaPlayerState::Audio;
+        case 'v': return MediaPlayerState::Video;
+        case 'l': return MediaPlayerState::MediaSelection;
+        default: assert( false );
+    }
+    // never reached
+    return MediaPlayerState::MediaSelection;
 }
 
 // slots
@@ -208,7 +216,7 @@ void MediaPlayerState::setView( char v ) {
     }
     curView = v;
     emit viewChanged(v);
-    emit mediaTypeChanged( mediaType() );
+    emit displayTypeChanged( displayType() );
 }
 
 void MediaPlayerState::setPrev(){
