@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=Manage SSH keys
+Exec=sshkeys
+Icon=sshkeys/sshkeys
+Type=Application
+Name=SSH Keys
