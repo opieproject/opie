@@ -154,14 +154,13 @@ ORecordListIterator<T> &ORecordListIterator<T>::operator=( const ORecordListIter
 
 template <class T>
 T ORecordListIterator<T>::operator*() {
-//    qWarning("operator* %d %d", m_current,  m_uids[m_current] );
+    qWarning("operator* %d %d", m_current,  m_uids[m_current] );
     if (!m_end )
         /* FIXME
 	 * until the cache is in place
 	 * we do the uid match uid check
 	 */
-        if(m_record.uid() != m_uids[m_current] )
-           m_record = m_temp->find( m_uids[m_current] );
+        m_record = m_temp->find( m_uids[m_current] );
     else
         m_record = T();
 

@@ -2,7 +2,7 @@
 
 #include <qpe/alarmserver.h>
 
-#include "otodoaccessxml.h"
+#include "otodoaccesssql.h"
 #include "otodoaccess.h"
 
 
@@ -10,7 +10,7 @@ OTodoAccess::OTodoAccess( OTodoAccessBackend* end )
     : QObject(), OPimAccessTemplate<OTodo>( end ),  m_todoBackEnd( end )
 {
     if (end == 0l )
-        m_todoBackEnd = new OTodoAccessXML( "Todolist" );
+        m_todoBackEnd = new OTodoAccessBackendSQL( QString::null);
 
     setBackEnd( m_todoBackEnd );
 }

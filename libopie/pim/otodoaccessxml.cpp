@@ -119,6 +119,7 @@ bool OTodoAccessXML::load() {
         m_events.insert(ev.uid(), ev );
     }
 
+    qWarning("counts %d", m_events.count() );
     return true;
 }
 bool OTodoAccessXML::reload() {
