@@ -52,6 +52,7 @@ public:
 protected:
     RecMail*parse_list_result(mailimap_msg_att*);
     void login();
+    bool start_tls(bool force=true);
 
     virtual QString fetchTextPart(const RecMail&mail,const QValueList<int>&path,bool internal_call=false,const QString&enc="");
     virtual encodedString*fetchRawPart(const RecMail&mail,const QValueList<int>&path,bool internal_call);

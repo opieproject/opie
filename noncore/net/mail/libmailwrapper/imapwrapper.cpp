@@ -41,6 +41,58 @@ void IMAPwrapper::imap_progress( size_t current, size_t maximum )
     qDebug( "IMAP: %i of %i", current, maximum );
 }
 
+bool IMAPwrapper::start_tls(bool force_tls)
+{
+    int err;
+    bool try_tls;
+    mailimap_capability_data * cap_data = 0;
+
+    err = mailimap_capability(m_imap,&cap_data);
+    if (err != MAILIMAP_NO_ERROR) {
+        Global::statusMessage("error getting capabilities!");
+        qDebug("error getting capabilities!");
+        return false;
+    }
+    clistiter * cur;
+    for(cur = clist_begin(cap_data->cap_list) ; cur != NULL;cur = clist_next(cur)) {
+        struct mailimap_capability * cap;
+        cap  = (struct mailimap_capability *)clist_content(cur);
+        if (cap->cap_type == MAILIMAP_CAPABILITY_NAME) {
+            if (strcasecmp(cap->cap_data.cap_name, "STARTTLS") == 0) {
+                try_tls = true;
+                break;
+            }
+        }
+    }
+    if (cap_data) {
+        mailimap_capability_data_free(cap_data);
+    }
+    if (try_tls) {
+        err =  mailimap_starttls(m_imap);
+        if (err != MAILIMAP_NO_ERROR && force_tls) {
+            Global::statusMessage(tr("Server has no TLS support!"));
+            qDebug("Server has no TLS support!");
+            try_tls = false;
+        } else {
+            mailstream_low * low;
+            mailstream_low * new_low;
+            low = mailstream_get_low(m_imap->imap_stream);
+            if (!low) {
+                try_tls = false;
+            } else {
+                int fd = mailstream_low_get_fd(low);
+                if (fd > -1 && (new_low = mailstream_low_ssl_open(fd))!=0) {
+                    mailstream_low_free(low);
+                    mailstream_set_low(m_imap->imap_stream, new_low);
+                } else {
+                    try_tls = false;
+                }
+            }
+        }
+   }
+   return try_tls;
+}
+
 void IMAPwrapper::login()
 {
     const char *server, *user, *pass;
@@ -80,14 +132,16 @@ void IMAPwrapper::login()
 
     m_imap = mailimap_new( 20, &imap_progress );
 
-
-
     /* connect */
-
     bool ssl = false;
+    bool try_tls = false;
+    bool force_tls = false;
 
     if  ( account->ConnectionType() == 2 ) {
         ssl = true;
+    }
+    if (account->ConnectionType()==1) {
+        force_tls = true;
     }
 
     if ( ssl ) {
@@ -112,10 +166,28 @@ void IMAPwrapper::login()
          return;
     }
 
+    if (!ssl) {
+        try_tls = start_tls(force_tls);
+    }
+
+    bool ok = true;
+    if (force_tls && !try_tls) {
+        Global::statusMessage(tr("Server has no TLS support!"));
+        qDebug("Server has no TLS support!");
+        ok = false;
+    }
+
+
     /* login */
-    err = mailimap_login_simple( m_imap, (char*)user, (char*)pass );
-    if ( err != MAILIMAP_NO_ERROR ) {
-        Global::statusMessage(tr("error logging in imap server: %1").arg(m_imap->imap_response));
+
+    if (ok) {
+        err = mailimap_login_simple( m_imap, (char*)user, (char*)pass );
+        if ( err != MAILIMAP_NO_ERROR ) {
+            Global::statusMessage(tr("error logging in imap server: %1").arg(m_imap->imap_response));
+            ok = false;
+        }
+    }
+    if (!ok) {
         err = mailimap_close( m_imap );
         mailimap_free( m_imap );
         m_imap = 0;
