@@ -22,6 +22,7 @@
 	* #1558 - Fixed opie-login breaking opie startup (mickeyl)
 	* #1570 - Confirmation needed befor Restore a backup and overwrite local data (ar)
 	* n.a.  - PackageManager - fixed where last package in status file was not shown as installed when it should be (drw)
+	* n.a.  - Netsystemtime - fixed UI to prevent error dialog from displaying when it shouldn't, get rid of some compiler warnings
 
 	Internal
 	--------
