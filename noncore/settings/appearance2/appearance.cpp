@@ -111,22 +111,6 @@ private:
 };
 
 
-struct {
-	QColorGroup::ColorRole role;
-	const char *key;
-	const char *def;
-} colorLUT [] = {
-	{ QColorGroup::Base,            "Base",            "#FFFFFF" },
-	{ QColorGroup::Background,      "Background",      "#E5E1D5" },
-	{ QColorGroup::Button,          "Button",          "#D6CDBB" },
-	{ QColorGroup::ButtonText,      "ButtonText",      "#000000" },
-	{ QColorGroup::Highlight,       "Highlight",       "#800000" },
-	{ QColorGroup::HighlightedText, "HighlightedText", "#FFFFFF" },
-	{ QColorGroup::Text,            "Text",            "#000000" },
-	
-	{ QColorGroup::NColorRoles,     0,                 0         }
-};
-
 
 void Appearance::loadStyles ( QListBox *list )
 {
@@ -186,28 +170,6 @@ void Appearance::loadDecos ( QListBox *list )
 	}
 }
 
-static QPalette readColorPalette ( Config &config )
-{
-	QColor bgcolor( config. readEntry( "Background", "#E5E1D5" ) );
-	QColor btncolor( config. readEntry( "Button", "#D6CDBB" ) );
-	QPalette pal( btncolor, bgcolor );
-	
-	QString color = config. readEntry( "Highlight", "#800000" );
-	pal.setColor( QColorGroup::Highlight, QColor(color) );
-	color = config. readEntry( "HighlightedText", "#FFFFFF" );
-	pal.setColor( QColorGroup::HighlightedText, QColor(color) );
-	color = config. readEntry( "Text", "#000000" );
-	pal.setColor( QColorGroup::Text, QColor(color) );
-	color = config. readEntry( "ButtonText", "#000000" );
-	pal.setColor( QPalette::Active, QColorGroup::ButtonText, QColor(color) );
-	color = config. readEntry( "Base", "#FFFFFF" );
-	pal.setColor( QColorGroup::Base, QColor(color) );
-                                                    
-	pal.setColor( QPalette::Disabled, QColorGroup::Text, pal.color(QPalette::Active, QColorGroup::Background).dark() );
-		
-	return pal;
-}                                                                  		
-		
 void Appearance::loadColors ( QListBox *list )
 {
     list-> clear ( );
@@ -215,7 +177,7 @@ void Appearance::loadColors ( QListBox *list )
     	Config config ( "qpe" );
 		config. setGroup ( "Appearance" );
     
-		list-> insertItem ( new ColorListItem ( tr( "Current scheme" ), readColorPalette ( config )));
+		list-> insertItem ( new ColorListItem ( tr( "Current scheme" ), config ));
 	}
 
 	QString path = QPEApplication::qpeDir ( ) + "/etc/colors/";
@@ -226,7 +188,7 @@ void Appearance::loadColors ( QListBox *list )
 		Config config ( path + *it, Config::File );
 		config. setGroup ( "Colors" );
 		
-		list-> insertItem ( new ColorListItem ( name, readColorPalette ( config )));
+		list-> insertItem ( new ColorListItem ( name, config ));
 	}
 }
 
@@ -484,16 +446,15 @@ void Appearance::accept ( )
         config.writeEntry( "FontSize", m_font_size_list-> text ( newfontsize ));
     }
 
-/*
-    if ( schemeChanged )
+
+    if ( m_color_changed )
     {
-        int i;
-        for ( i = 0; i < MAX_CONTROL; i++ )
-        {
-            config.writeEntry( controlList[i], controlColor[i] );
-        }
+    	ColorListItem *item = (ColorListItem *) m_color_list-> item ( m_color_list-> currentItem ( ));
+ 
+ 		if ( item )   
+			item-> save ( config );
     }
-*/
+    
 	config. write ( ); // need to flush the config info first
 	Global::applyStyle ( );
 
@@ -652,21 +613,40 @@ void Appearance::editSchemeClicked ( )
 {
 	ColorListItem *item = (ColorListItem *) m_color_list-> item ( m_color_list-> currentItem ( ));
 
-/*
-    EditScheme* editdlg = new EditScheme( this, "editScheme", TRUE, 0,
-                                         9, controlLabel, controlColor );
-    editdlg->showMaximized();
-    if ( editdlg->exec() == QDialog::Accepted )
-    {
-        int i;
-        for ( i = 0; i < MAX_CONTROL; i++ )
-        {
-            controlColor[i] = editdlg->colorList[i];
+	int cnt = 0;
+	QString controlLabel [QColorGroup::NColorRoles];
+	QString controlColor [QColorGroup::NColorRoles];
+	
+	for ( QColorGroup::ColorRole role = (QColorGroup::ColorRole) 0; role != QColorGroup::NColorRoles; ((int) role )++ ) {
+		QColor col = item-> color ( role );
+		
+		if ( col. isValid ( )) {
+			controlLabel [cnt] = item-> label ( role );
+			controlColor [cnt] = col. name ( );
+		
+			cnt++;
+		}
+	}
+
+    EditScheme* editdlg = new EditScheme( this, "editScheme", true, 0,  cnt, controlLabel, controlColor );
+    editdlg-> showMaximized ( );
+    if ( editdlg-> exec ( ) == QDialog::Accepted ) {
+    	ColorListItem *citem = (ColorListItem *) m_color_list-> item ( 0 );
+		cnt = 0;
+		    
+		for ( QColorGroup::ColorRole role = (QColorGroup::ColorRole) 0; role != QColorGroup::NColorRoles; ((int) role )++ ) {
+			if ( item-> color ( role ). isValid ( )) {
+        		citem-> setColor ( role, QColor ( controlColor [cnt] ));	
+        		cnt++;
+        	}
         }
+        
+        m_color_list-> setCurrentItem ( 0 );
+        colorClicked ( 0 );
+        
         m_color_changed = true;
     }
     delete editdlg;
-    */
 }
 
 
@@ -690,11 +670,10 @@ void Appearance::saveSchemeClicked()
         	QPalette p = item-> palette ( );
         
             Config config ( file.name(), Config::File );
-            config.setGroup( "Colors" );
+            config. setGroup( "Colors" );
 
-            for ( int i = 0; colorLUT [i]. role != QColorGroup::NColorRoles; i++ ) 
-                config.writeEntry ( colorLUT [i]. key, p. color ( QPalette::Active, colorLUT [i]. role ). name ( ));
-                
+			item-> save ( config );
+			                
             config. write ( ); // need to flush the config info first
 		    loadColors ( m_color_list );
         }

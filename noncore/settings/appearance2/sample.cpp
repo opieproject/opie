@@ -10,6 +10,7 @@
 #include <qpixmapcache.h>
 #include <qtimer.h>
 #include <qobjectlist.h>
+#include <qcommonstyle.h>
 
 #include "sample.h"
 
@@ -67,6 +68,7 @@ void SampleWindow::setFont( const QFont &f )
 
 static void setStyleRecursive ( QWidget *w, QStyle *s )
 {
+	w->setStyle( s );
 	QObjectList *childObjects=(QObjectList*)w->children();
 	if ( childObjects ) {
 		QObject * o;
@@ -76,16 +78,21 @@ static void setStyleRecursive ( QWidget *w, QStyle *s )
 			}
 		}
 	}
-	w->setStyle( s );
 }
                                                     
                                                     
 void SampleWindow::setStyle2 ( QStyle *sty )
 {
+	typedef void (QStyle::*QDrawMenuBarItemImpl) (QPainter *, int, int, int, int, QMenuItem *, QColorGroup &, bool, bool);
+
+	extern QDrawMenuBarItemImpl qt_set_draw_menu_bar_impl(QDrawMenuBarItemImpl);
+
 	QPixmapCache::clear ( );
 	QPalette p = palette ( );
 	sty-> polish ( p );
+	qt_set_draw_menu_bar_impl ( 0 );
 	setStyleRecursive ( this, sty );
+	setPalette ( p );
 	QTimer::singleShot ( 0, this, SLOT( fixGeometry ( )));	
 }
 
@@ -206,12 +213,12 @@ void SampleWindow::paletteChange( const QPalette &old )
 	popup-> setPalette ( palette ( ));
 }
 
+
 void SampleWindow::setPalette ( const QPalette &pal )
 {
 	QPixmapCache::clear ( );
 	QPalette p = pal;
 	style ( ). polish ( p );
-	
 	QWidget::setPalette ( p );
 }
 

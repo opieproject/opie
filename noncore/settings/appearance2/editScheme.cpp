@@ -29,7 +29,7 @@
 #include <qtoolbutton.h>
 
 EditScheme::EditScheme( QWidget* parent,  const char* name, bool modal, WFlags fl,
-                        int max, QString list[], QString colors[] )
+                        int max, QString *list, QString *colors )
     : QDialog( parent, name, modal, fl )
 {
     setCaption( tr( "Edit scheme" ) );
@@ -39,13 +39,16 @@ EditScheme::EditScheme( QWidget* parent,  const char* name, bool modal, WFlags f
 
 
     maxCount = max;
+    colorList = colors;
+    surfaceList = list;
+    colorButtons = new QToolButton * [max];
     int i;
     QLabel* label;
     ColorPopupMenu* colorPopupMenu;
     for ( i = 0; i < max; i++ )
     {
-        colorList[i] = colors[i];
-        surfaceList[i] = list[i];
+//        colorList[i] = colors[i];
+//        surfaceList[i] = list[i];
         label = new QLabel( tr( surfaceList[i] ), this );
         layout->addWidget( label, i, 0 );
         colorButtons[i] = new QToolButton( this, list[i] );
@@ -61,6 +64,7 @@ EditScheme::EditScheme( QWidget* parent,  const char* name, bool modal, WFlags f
 
 EditScheme::~EditScheme()
 {
+	delete [] colorButtons;
 }
 
 void EditScheme::changeColor( const QColor& color )

@@ -31,15 +31,15 @@ class EditScheme : public QDialog
 
 public:
     EditScheme( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0,
-                int = 0, QString[] = 0, QString[] = 0 );
+                int = 0, QString * = 0, QString * = 0 );
     ~EditScheme();
 
     int maxCount;
-    QString surfaceList[9];
-    QString colorList[9];
+    QString * surfaceList;
+    QString * colorList;
 
 
-    QToolButton* colorButtons[9];
+    QToolButton** colorButtons;
 
 protected slots:
     void changeColor( const QColor& );
