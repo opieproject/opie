@@ -13,8 +13,8 @@
 #include <qpe/config.h>
 #include <qpe/ir.h>
 
-#include <opie/oapplicationfactory.h>
-#include <opie/otabwidget.h>
+#include <opie2/oapplicationfactory.h>
+#include <opie2/otabwidget.h>
 
 #include <iface/ifaceinfo.h>
 #include <iface/dirview.h>
@@ -24,7 +24,7 @@
 
 #include "mainwindow.h"
 
-OPIE_EXPORT_APP( OApplicationFactory<PMainWindow> )
+OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<PMainWindow> )
 
 PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     : QMainWindow( wid, name, style ), m_cfg("phunkview")
@@ -84,7 +84,7 @@ void PMainWindow::slotConfig() {
     dlg.setCaption( tr("Phunk View - Config" ) );
 
     QHBoxLayout *lay = new QHBoxLayout(&dlg);
-    OTabWidget *wid = new OTabWidget(&dlg );
+    Opie::Ui::OTabWidget *wid = new Opie::Ui::OTabWidget(&dlg );
     lay->addWidget( wid );
     ViewMap *vM = viewMap();
     ViewMap::Iterator _it = vM->begin();

@@ -52,6 +52,8 @@ private:
     QTimer *m_inf, *m_pix, *m_out;
     StringList m_inList, m_outList;
     PixmapList m_inPix, m_outPix;
+private:
+    int m_refs;
 };
 
 

@@ -93,7 +93,7 @@ PIconView::PIconView( QWidget* wid, Config* cfg )
     : QVBox( wid ), m_cfg( cfg )
 {
     {
-//        QCopEnvelope( "QPE/Application/opie-eye_slave", "foo()" );
+        QCopEnvelope( "QPE/Application/opie-eye_slave", "refUp()" );
     }
     m_path = QDir::homeDirPath();
 
@@ -122,6 +122,9 @@ PIconView::PIconView( QWidget* wid, Config* cfg )
 }
 
 PIconView::~PIconView() {
+    {
+        QCopEnvelope( "QPE/Application/opie-eye_slave", "refDown()" );
+    }
 }
 
 void PIconView::slotDirUp() {

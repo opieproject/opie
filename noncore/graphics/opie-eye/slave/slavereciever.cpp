@@ -57,7 +57,7 @@ SlaveObjects* slaveObjects() {
 }
 
 SlaveReciever::SlaveReciever( QObject* par)
-    : QObject( par )
+    : QObject( par ), m_refs( 0 )
 {
     m_inf = new QTimer(this);
     connect(m_inf,SIGNAL(timeout()),
@@ -120,6 +120,10 @@ void SlaveReciever::recieveAnswer( const QCString& string, const QByteArray& ar)
             qWarning( "Got %d %d " + (*it).file, (*it).width , (*it).height );
             m_inPix.append(*it);
         }
+    }else if ( string == "refUp()" ) {
+        m_refs++;
+    }else if ( string == "refDown()" ) {
+        m_refs--;
     }
 
     if (!m_inf->isActive() && !m_inList.isEmpty() )
@@ -128,7 +132,10 @@ void SlaveReciever::recieveAnswer( const QCString& string, const QByteArray& ar)
     if (!m_pix->isActive() && !m_inPix.isEmpty() )
         m_pix->start(5);
 
-    QPEApplication::setKeepRunning();
+    if ( m_refs )
+        QPEApplication::setKeepRunning();
+    else
+        qApp->quit();
 
 }
 
