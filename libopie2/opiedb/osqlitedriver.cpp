@@ -34,6 +34,8 @@
 #include <opie2/odebug.h>
 
 #include <stdlib.h>
+#include <regex.h>
+#include <stdio.h>
 
 // fromLocal8Bit() does not work as expected. Thus it
 // is replaced by fromLatin1() (eilers)
@@ -82,6 +84,33 @@ void OSQLiteDriver::setUrl( const QString& url ) {
 void OSQLiteDriver::setOptions( const QStringList& ) {
 }
 
+/*------------------------------------------------------------------/*
+ * Functions to patch a regex search into sqlite
+ * -----------------------------------------------------------------*/
+int sqliteRlikeCompare(const char *zPattern, const char *zString){
+	  regex_t regex;
+	int res;
+	if ( zPattern==NULL || zString==NULL ) {
+		printf("One of the args was null!\n");
+		return 0;
+	}
+	res = regcomp(&regex, zPattern, REG_EXTENDED);
+	if ( res != 0 ) {
+		printf("Regcomp failed with code %u on string %s\n",res,zPattern);
+
+		return 0;
+	}
+	res = (regexec(&regex, zString, 0, NULL, 0)==0);
+	regfree(&regex);
+	return res;
+}
+
+void rlikeFunc(sqlite_func *context, int arg, const char **argv){
+	if( argv[0]==0 || argv[1]==0 ) return;
+		sqlite_set_result_int(context,
+		sqliteRlikeCompare((const char*)argv[0],
+	(const char*)argv[1]));
+}
 
 /*
  * try to open a db specified via setUrl
@@ -101,6 +130,7 @@ bool OSQLiteDriver::open() {
         free( error );
         return false;
     }
+    sqlite_create_function(m_sqlite,"rlike",2,rlikeFunc,NULL);
     return true;
 }
 
