@@ -23,7 +23,9 @@ else
 	echo DEFINES += "OPIE_NO_DEBUG" >> $@
 endif
 ifeq ($(CONFIG_STATIC),y)
+	echo !contains\( TARGET,qpe \) \{ >> $@
 	echo CONFIG += staticlib >> $@
+	echo \} >> $@
 endif
 ifeq ($(filter 3.%,$(QTE_VERSION)),) # not qt3
 	echo CONFIG -= qt3 >> $@
