@@ -6,17 +6,17 @@ SOURCES		= quickexec.cpp
 LIBS += -ldl -lqpe
 TARGET		= quickexec
 
-TRANSLATIONS = ../i18n/de/quickexec.pro \
-	 ../i18n/en/quickexec.pro \
-	 ../i18n/es/quickexec.pro \
-	 ../i18n/fr/quickexec.pro \
-	 ../i18n/hu/quickexec.pro \
-	 ../i18n/ja/quickexec.pro \
-	 ../i18n/ko/quickexec.pro \
-	 ../i18n/no/quickexec.pro \
-	 ../i18n/pl/quickexec.pro \
-	 ../i18n/pt/quickexec.pro \
-	 ../i18n/pt_BR/quickexec.pro \
-	 ../i18n/sl/quickexec.pro \
-	 ../i18n/zh_CN/quickexec.pro \
-	 ../i18n/zh_TW/quickexec.pro
+TRANSLATIONS = ../i18n/de/quickexec.ts \
+	 ../i18n/en/quickexec.ts \
+	 ../i18n/es/quickexec.ts \
+	 ../i18n/fr/quickexec.ts \
+	 ../i18n/hu/quickexec.ts \
+	 ../i18n/ja/quickexec.ts \
+	 ../i18n/ko/quickexec.ts \
+	 ../i18n/no/quickexec.ts \
+	 ../i18n/pl/quickexec.ts \
+	 ../i18n/pt/quickexec.ts \
+	 ../i18n/pt_BR/quickexec.ts \
+	 ../i18n/sl/quickexec.ts \
+	 ../i18n/zh_CN/quickexec.ts \
+	 ../i18n/zh_TW/quickexec.ts

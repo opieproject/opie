@@ -15,18 +15,19 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 INTERFACES	= 
+TARGET		= tetrix
 
-TRANSLATIONS = ../../../i18n/de/tetrix.pro.in.ts \
-	 ../../../i18n/en/tetrix.pro.in.ts \
-	 ../../../i18n/es/tetrix.pro.in.ts \
-	 ../../../i18n/fr/tetrix.pro.in.ts \
-	 ../../../i18n/hu/tetrix.pro.in.ts \
-	 ../../../i18n/ja/tetrix.pro.in.ts \
-	 ../../../i18n/ko/tetrix.pro.in.ts \
-	 ../../../i18n/no/tetrix.pro.in.ts \
-	 ../../../i18n/pl/tetrix.pro.in.ts \
-	 ../../../i18n/pt/tetrix.pro.in.ts \
-	 ../../../i18n/pt_BR/tetrix.pro.in.ts \
-	 ../../../i18n/sl/tetrix.pro.in.ts \
-	 ../../../i18n/zh_CN/tetrix.pro.in.ts \
-	 ../../../i18n/zh_TW/tetrix.pro.in.ts
+TRANSLATIONS = ../../../i18n/de/tetrix.ts \
+	 ../../../i18n/en/tetrix.ts \
+	 ../../../i18n/es/tetrix.ts \
+	 ../../../i18n/fr/tetrix.ts \
+	 ../../../i18n/hu/tetrix.ts \
+	 ../../../i18n/ja/tetrix.ts \
+	 ../../../i18n/ko/tetrix.ts \
+	 ../../../i18n/no/tetrix.ts \
+	 ../../../i18n/pl/tetrix.ts \
+	 ../../../i18n/pt/tetrix.ts \
+	 ../../../i18n/pt_BR/tetrix.ts \
+	 ../../../i18n/sl/tetrix.ts \
+	 ../../../i18n/zh_CN/tetrix.ts \
+	 ../../../i18n/zh_TW/tetrix.ts
