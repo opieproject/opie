@@ -93,7 +93,7 @@ ODevice *ODevice::inst()
         }
         else
         {
-            qWarning( "ODevice() - can't open '%s' - unknown hardware - using default." );
+            qWarning( "ODevice() - can't open '%s' - unknown hardware - using default.", PATH_PROC_CPUINFO );
         }
         if ( !dev ) dev = new ODevice();
         dev->init();
