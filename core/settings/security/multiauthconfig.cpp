@@ -157,7 +157,7 @@ static void test_and_start() {
     QString path = QPEApplication::qpeDir() + "plugins/security";
     QDir dir( path, "lib*.so" );
     QStringList list = dir.entryList();
-    
+
     m_pluginsInstalled = ! list.isEmpty();
     if (m_pluginsInstalled == false)
         owarn << "no authentication plugins installed! Talking about it in the last tab..." << oendl;
@@ -275,12 +275,12 @@ MultiauthConfig::~MultiauthConfig()
 
 /// saves the general and plugin(s) configurations
 void MultiauthConfig::writeConfigs() {
-    writeConfig();
-
     MultiauthConfigWidget* confWidget = 0;
     for ( confWidget = configWidgetList.first(); confWidget != 0;
           confWidget = configWidgetList.next() )
         confWidget->writeConfig();
+	
+    writeConfig();
 }
 
 /// on QDialog::accept, we save all the configurations and exit the QDialog normally
@@ -399,11 +399,11 @@ void MultiauthConfig::readConfig()
 
 void MultiauthConfig::writeConfig()
 {
-    Config* pcfg = new Config("Security");
+    Config pcfg("Security");
 
     if (m_pluginsInstalled)
     {
-        pcfg->setGroup( "Plugins" );
+        pcfg.setGroup( "Plugins" );
         QStringList exclude;
         QStringList include;
         QStringList allPlugins;
@@ -424,38 +424,38 @@ void MultiauthConfig::writeConfig()
                 }
             }
         }
-        pcfg->writeEntry( "ExcludePlugins", exclude, ',' );
-        pcfg->writeEntry( "IncludePlugins", include, ',' );
-        pcfg->writeEntry( "AllPlugins",  allPlugins, ',' );
+        pcfg.writeEntry( "ExcludePlugins", exclude, ',' );
+        pcfg.writeEntry( "IncludePlugins", include, ',' );
+        pcfg.writeEntry( "AllPlugins",  allPlugins, ',' );
 
-        pcfg->setGroup( "Misc" );
-        pcfg->writeEntry( "onStart",  m_generalConfig->m_onStart->isChecked() );
-        pcfg->writeEntry( "onResume",  m_generalConfig->m_onResume->isChecked() );
-        pcfg->writeEntry( "nbSuccessMin",  m_generalConfig->m_nbSuccessMin->text() );
-        pcfg->writeEntry( "noProtectConfig",  m_generalConfig->m_noProtectConfig->isChecked() );
-        pcfg->writeEntry( "explanScreens",  m_generalConfig->m_explanScreens->isChecked() );
+        pcfg.setGroup( "Misc" );
+        pcfg.writeEntry( "onStart",  m_generalConfig->m_onStart->isChecked() );
+        pcfg.writeEntry( "onResume",  m_generalConfig->m_onResume->isChecked() );
+        pcfg.writeEntry( "nbSuccessMin",  m_generalConfig->m_nbSuccessMin->text() );
+        pcfg.writeEntry( "noProtectConfig",  m_generalConfig->m_noProtectConfig->isChecked() );
+        pcfg.writeEntry( "explanScreens",  m_generalConfig->m_explanScreens->isChecked() );
     }
 
     /* Login and Sync stuff */
 
-    pcfg->setGroup("Sync");
+    pcfg.setGroup("Sync");
     int auth_peer=0;
     int auth_peer_bits;
     QString sn = m_syncWidget->syncnet->currentText();
     parseNet(sn,auth_peer,auth_peer_bits);
 
     //this is the *selected* (active) net range
-    pcfg->writeEntry("auth_peer",auth_peer);
-    pcfg->writeEntry("auth_peer_bits",auth_peer_bits);
+    pcfg.writeEntry("auth_peer",auth_peer);
+    pcfg.writeEntry("auth_peer_bits",auth_peer_bits);
 
     //write back all other net ranges in *cleartext*
     for (int i=0; i<10; i++) {
         QString target;
         target.sprintf("net%d", i);
         if ( i < m_syncWidget->syncnet->count() )
-            pcfg->writeEntry(target, m_syncWidget->syncnet->text(i));
+            pcfg.writeEntry(target, m_syncWidget->syncnet->text(i));
         else // no more entry in the syncnet list -> we clear the line
-            pcfg->writeEntry(target, "");
+            pcfg.writeEntry(target, "");
     }
 
 #ifdef ODP
@@ -474,20 +474,20 @@ void MultiauthConfig::writeConfig()
             value = 0x04;
             break;
     }
-    pcfg->setGroup("SyncMode");
-    pcfg->writeEntry( "Mode", value );
+    pcfg.setGroup("SyncMode");
+    pcfg.writeEntry( "Mode", value );
 
     /*
-       pcfg->setGroup("Remote");
+       pcfg.setGroup("Remote");
        if ( telnetAvailable() )
-       pcfg->writeEntry("allow_telnet",telnet->isChecked());
+       pcfg.writeEntry("allow_telnet",telnet->isChecked());
        if ( sshAvailable() )
-       pcfg->writeEntry("allow_ssh",ssh->isChecked());
+       pcfg.writeEntry("allow_ssh",ssh->isChecked());
     // ### write ssh/telnet sys config files
     */
 
     //release the Config handler
-    delete pcfg;
+    pcfg.write();
 
     QString configFile = QPEApplication::qpeDir() + "etc/opie-login.conf";
     Config loginCfg(configFile,Config::File);
