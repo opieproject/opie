@@ -421,11 +421,6 @@ void MainWindow::create( const Profile& prof ) {
     tabWidget()->add( ses );
     m_curSession = ses;
 
-    // is io_layer wants direct connection, then autoconnect
-    if ( ( m_curSession->layer() )->supports()[0] = 1 ) {
-        slotConnect();
-    }
-
     // dicide if its a local term ( then no connction and no tranfer), maybe make a wrapper method out of it
     m_connect->setEnabled( true );
     m_disconnect->setEnabled( false );
@@ -436,6 +431,12 @@ void MainWindow::create( const Profile& prof ) {
     m_runScript->setEnabled( true );
     m_fullscreen->setEnabled( true );
     m_closewindow->setEnabled( true );
+
+
+    // is io_layer wants direct connection, then autoconnect
+    if ( ( m_curSession->layer() )->supports()[0] = 1 ) {
+        slotConnect();
+    }
 }
 
 void MainWindow::slotTransfer()
