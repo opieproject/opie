@@ -263,7 +263,7 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>Edit Key</source>
-        <translation>Editer Clé</translation>
+        <translation>Editer Touche</translation>
     </message>
 </context>
 <context>
