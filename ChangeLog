@@ -7,6 +7,7 @@
 
 	Fixed Bugs
 	----------
+	* #1017 - Tetrix doesn't display correctly for high resolution screens (drw)
         * #1269 - VCards were imported into personal area if it was activated (eilers)
 	* #1464 - Packagemanager dont set active filter after install a package (drw)
 	* n.a. - PackageManager - (Minor UI tweak) in filter dialog, when option is enabled, set focus to widget that corresponds to that option (drw)
