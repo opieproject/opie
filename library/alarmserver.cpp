@@ -316,8 +316,56 @@ void TimerReceiverObject::timerEvent( QTimerEvent * )
     the Linux kernel which implements this at the kernel level to minimize
     battery usage while asleep.
 
+    A small example on how to use AlarmServer.
+
+    First we need to connect a slot the AppMessage QCOP call. appMessage
+    will be emitted if QPE/Application/appname gets called.
+
+    \code
+     TestApp::TestApp(QWidget *parent, const char* name, WFlags fl )
+         : QMainWindow(parent,name,fl){
+         connect(qApp,SIGNAL(appMessage(const QCString&,const QByteArray&)),
+                 this,SLOT(slotAppMessage(const QCString&,const QByteArray&)));
+     }
+    \endcode
+
+    To add / delete an alarm, you can use the static method AlarmServer::addAlarm and
+    AlarmServer::deleteAlarm. Note that an old (expired) alarm will automatically be deleted
+    from the alarmserver list, but a change in timing will have the effect, that both
+    alarms will be emitted. So if you change an Alarm be sure to delete the old one!
+    @see addAlarm
+
+    \code
+       QDateTime oldDt = oldAlarmDateTime();
+       QPEApplication::execDialog(ourDlg);
+       QDateTime newDt = ourDlg->dateTime();
+       if(newDt == oldDt ) return;
+       @slash* code is missing for unsetting an alarm *@slash
+
+       AlarmServer::deleteAlarm(oldDt,"QPE/Application/appname","checkAlarm(QDateTime,int)",0);
+       AlarmServer::addAlarm(   newDt,"QPE/AlarmServer/appname","checkAlarm(QDateTime,int)",0);
+
+    \endcode
+
+    Now once the Alarm is emitted you need to check the appMessage and then do what you want.
+    \code
+       void TestApp::slotAppMessage(const QCString& str, const QByteArray& ar ){
+           QDataStream stream(ar,IO_ReadOnly);
+           if(str == "checkAlarm(QDateTime,int)" ){
+              QDateTime dt;
+              int a;
+              stream >> dt >> a;
+              // fire up alarm
+           }
+       }
+    \endcode
+
     \ingroup qtopiaemb
     \sa QCopEnvelope
+    @see QPEApplication::appMessage(const QCString&,const QByteArray&)
+    @see OPimMainWindow
+    @see ODevice::alarmSound()
+    @see Sound::soundAlarm()
 */
 
 /*!
@@ -329,6 +377,18 @@ void TimerReceiverObject::timerEvent( QTimerEvent * )
   call the subsequent call is ignored, so there is only ever one alarm
   with a given set of parameters.
 
+  Once an alarm is emitted. The \a channel with a  \a message will be emitted
+  and data will be send.
+  The QDateTime and int  are the two parameters included in the QCOP message.
+  You can specify channel, message and the integer parameter. QDateTime will be
+  the datetime of the QCop call.
+
+  @param when The QDateTime of the alarm
+  @param channel The channel which gets called once the alarm is emitted
+  @param message The message to be send to the channel
+  @param data Additional data as integer
+
+  @see QCopChannel
   \sa deleteAlarm()
 */
 void AlarmServer::addAlarm ( QDateTime when, const QCString& channel,

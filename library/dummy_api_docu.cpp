@@ -309,3 +309,61 @@
  *
  * From left to right. 0 is left. The clock uses 10
  */
+
+
+/**
+ * \class WindowDecorationInterface
+ *
+ * Interface class for Window Decorations. Yu need to implement
+ * metric and drawing functions.
+ */
+
+/**
+ * \class WindowDecorationInterface::WindowData
+ *
+ * Window informations like the QRect, Palette, Caption
+ * and flag
+ */
+
+/**
+ * \fn int WindowDecorationInterface::metric(Metric m,const WindowData* )
+ *
+ * Return the width for the item out of Metric.
+ * Normally you will case Metric and default: should call the interface
+ * method. Also return 0
+ */
+
+/**
+ * \fn void WindowDecorationInterface::drawArea( Area a, QPainter* , const WindowData* )const
+ *
+ * draw the Area specefic in a to the QPainter
+ */
+
+/**
+ * \fn void WindowDecorationInterface::drawButton(Button b,QPainter*p ,const WindowData* d, int x, int y, int w,int h, QWSButton::State s)const
+ *
+ * @param b The Button to be drawn
+ * @param p The painter to draw at
+ * @param d The Window Data
+ * @param x The X position of the button
+ * @param y The Y position of the button
+ * @param w The width of the button
+ * @param h The height of the button
+ * @param s The state of the button
+ */
+
+/**
+ * \fn QRegion WindowDecorationInterface::mask( const WindowData* )const
+ *
+ * The mask of the Decoration.
+ *
+ * \code
+ *     int th = metric(TitleHeight,wd);
+ *   QRect rect( wd->rect );
+ *   QRect r(rect.left() - metric(LeftBorder,wd),
+ *          rect.top() - th - metric(TopBorder,wd),
+ *          rect.width() + metric(LeftBorder,wd) + metric(RightBorder,wd),
+ *          rect.height() + th + metric(TopBorder,wd) + metric(BottomBorder,wd));
+ *  return QRegion(r) - rect;
+ * \endcode
+ */
