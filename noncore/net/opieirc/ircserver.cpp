@@ -1,7 +1,12 @@
+#include <qpe/global.h>
+#include <qpe/contact.h>
+
+#include <qobject.h>
+#include <qfile.h>
+
 #include "ircserver.h"
 #include "ircversion.h"
 
-#include <qobject.h>
 
 IRCServer::IRCServer() {
     m_port = 6667;
@@ -73,8 +78,16 @@ QString IRCServer::nick() {
 QString IRCServer::realname() {
     if(!m_realname.isEmpty())
         return m_realname;
-    
-    return QString(QObject::tr("Using")) + " " + QString(APP_VERSION);
+    // Try to fetch realname from addressbook
+    QString file = Global::applicationFileName( "addressbook", "businesscard.vcf" );
+    if ( QFile::exists( file ) ) {
+        Contact cont = Contact::readVCard( file )[0];
+        QString realName = cont.fullName();
+        if(!realName.isEmpty())
+            return realName;
+    }
+              
+    return QString(APP_VERSION + QObject::tr(" User"));
 }
 
 QString IRCServer::channels() {
