@@ -111,7 +111,7 @@ signals:
     void positionUpdated( long ); // When the media file progresses
     void lengthChanged( long );
     void viewChanged( char );
-    void mediaTypeChanged( MediaType type );
+    void mediaTypeChanged( MediaPlayerState::MediaType type );
     void isSeekableToggled( bool );
     void blankToggled( bool );
     void videoGammaChanged( int );
