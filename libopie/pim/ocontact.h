@@ -187,8 +187,12 @@ public:
 //         { return find( Custom- + key ); }
 
     static QStringList fields();
-    static QStringList trfields();
-    static QStringList untrfields();
+    static QStringList trphonefields( bool sorted = true );
+    static QStringList untrphonefields( bool sorted = true );
+    static QStringList trdetailsfields( bool sorted = true );
+    static QStringList untrdetailsfields( bool sorted = true );
+    static QStringList trfields( bool sorted = true );
+    static QStringList untrfields( bool sorted = true );
 
     QString toRichText() const;
     QMap<int, QString> toMap() const;

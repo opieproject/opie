@@ -818,6 +818,29 @@ void OContact::save( QString &buf ) const
 
 /*!
   \internal
+  Returns a  list of details field names for a contact.
+*/
+QStringList OContact::untrdetailsfields( bool sorted )
+{
+    QStringList list;
+
+    list.append( "Office" );
+    list.append( "Profession" );
+    list.append( "Assistant" );
+    list.append( "Manager" );
+    list.append( "Spouse" );
+    list.append( "Gender" );
+    list.append( "Birthday" );
+    list.append( "Anniversary" );
+    list.append( "Nickname" );
+    list.append( "Children" );
+
+    if (sorted) list.sort();
+
+    return list;
+}
+/*!
+  \internal
   Returns the list of fields belonging to a contact
 */
 QStringList OContact::fields()
@@ -853,11 +876,6 @@ QStringList OContact::fields()
     list.append( "BusinessPager" );
     list.append( "BusinessWebPage" );
 
-    list.append( "Office" );
-    list.append( "Profession" );
-    list.append( "Assistant" );
-    list.append( "Manager" );
-
     list.append( "HomeStreet" );
     list.append( "HomeCity" );
     list.append( "HomeState" );
@@ -865,12 +883,7 @@ QStringList OContact::fields()
     list.append( "HomeCountry" );
     list.append( "HomeWebPage" );
 
-    list.append( "Spouse" );
-    list.append( "Gender" );
-    list.append( "Birthday" );
-    list.append( "Anniversary" );
-    list.append( "Nickname" );
-    list.append( "Children" );
+    list += untrdetailsfields();
 
     list.append( "Notes" );
     list.append( "Groups" );
@@ -880,9 +893,58 @@ QStringList OContact::fields()
 
 /*!
   \internal
+  Returns a translated list of phone field names for a contact.
+*/
+QStringList OContact::trphonefields( bool sorted )
+{
+    QStringList list;
+    list.append( QObject::tr( "Business Phone" ) );
+    list.append( QObject::tr( "Business Fax" ) );
+    list.append( QObject::tr( "Business Mobile" ) );
+
+    list.append( QObject::tr( "Default Email" ) );
+    list.append( QObject::tr( "Emails" ) );
+
+    list.append( QObject::tr( "Home Phone" ) );
+    list.append( QObject::tr( "Home Fax" ) );
+    list.append( QObject::tr( "Home Mobile" ) );
+
+    if (sorted) list.sort();
+
+    return list;
+}
+
+
+/*!
+  \internal
+  Returns a translated list of details field names for a contact.
+*/
+QStringList OContact::trdetailsfields( bool sorted )
+{
+    QStringList list;
+
+    list.append( QObject::tr( "Office" ) );
+    list.append( QObject::tr( "Profession" ) );
+    list.append( QObject::tr( "Assistant" ) );
+    list.append( QObject::tr( "Manager" ) );
+
+    list.append( QObject::tr( "Spouse" ) );
+    list.append( QObject::tr( "Gender" ) );
+    list.append( QObject::tr( "Birthday" ) );
+    list.append( QObject::tr( "Anniversary" ) );
+    list.append( QObject::tr( "Nickname" ) );
+    list.append( QObject::tr( "Children" ) );
+
+    if (sorted) list.sort();
+    return list;
+}
+
+
+/*!
+  \internal
   Returns a translated list of field names for a contact.
 */
-QStringList OContact::trfields()
+QStringList OContact::trfields( bool sorted )
 {
     QStringList list;
 
@@ -896,16 +958,8 @@ QStringList OContact::trfields()
     list.append( QObject::tr( "Job Title" ) );
     list.append( QObject::tr( "Department" ) );
     list.append( QObject::tr( "Company" ) );
-    list.append( QObject::tr( "Business Phone" ) );
-    list.append( QObject::tr( "Business Fax" ) );
-    list.append( QObject::tr( "Business Mobile" ) );
 
-    list.append( QObject::tr( "Default Email" ) );
-    list.append( QObject::tr( "Emails" ) );
-
-    list.append( QObject::tr( "Home Phone" ) );
-    list.append( QObject::tr( "Home Fax" ) );
-    list.append( QObject::tr( "Home Mobile" ) );
+    list += trphonefields();
 
     list.append( QObject::tr( "Business Street" ) );
     list.append( QObject::tr( "Business City" ) );
@@ -915,27 +969,41 @@ QStringList OContact::trfields()
     list.append( QObject::tr( "Business Pager" ) );
     list.append( QObject::tr( "Business WebPage" ) );
 
-    list.append( QObject::tr( "Office" ) );
-    list.append( QObject::tr( "Profession" ) );
-    list.append( QObject::tr( "Assistant" ) );
-    list.append( QObject::tr( "Manager" ) );
-
     list.append( QObject::tr( "Home Street" ) );
     list.append( QObject::tr( "Home City" ) );
     list.append( QObject::tr( "Home State" ) );
     list.append( QObject::tr( "Home Zip" ) );
     list.append( QObject::tr( "Home Country" ) );
     list.append( QObject::tr( "Home Web Page" ) );
-
-    list.append( QObject::tr( "Spouse" ) );
-    list.append( QObject::tr( "Gender" ) );
-    list.append( QObject::tr( "Birthday" ) );
-    list.append( QObject::tr( "Anniversary" ) );
-    list.append( QObject::tr( "Nickname" ) );
-    list.append( QObject::tr( "Children" ) );
-
+    list += trdetailsfields();
     list.append( QObject::tr( "Notes" ) );
     list.append( QObject::tr( "Groups" ) );
+
+    if (sorted) list.sort();
+
+    return list;
+}
+
+/*!
+  \internal
+  Returns a list of phone field names for a contact.
+*/
+QStringList OContact::untrphonefields( bool sorted )
+{
+    QStringList list;
+
+    list.append( "Business Phone" );
+    list.append( "Business Fax" );
+    list.append( "Business Mobile" );
+
+    list.append( "Default Email" );
+    list.append( "Emails" );
+
+    list.append( "Home Phone" );
+    list.append( "Home Fax" );
+    list.append( "Home Mobile" );
+
+    if (sorted) list.sort();
 
     return list;
 }
@@ -944,7 +1012,7 @@ QStringList OContact::trfields()
   \internal
   Returns an untranslated list of field names for a contact.
 */
-QStringList OContact::untrfields()
+QStringList OContact::untrfields( bool sorted )
 {
     QStringList list;
 
@@ -958,17 +1026,7 @@ QStringList OContact::untrfields()
     list.append( "Job Title" );
     list.append( "Department" );
     list.append( "Company" );
-    list.append( "Business Phone" );
-    list.append( "Business Fax" );
-    list.append( "Business Mobile" );
-
-    list.append( "Default Email" );
-    list.append( "Emails" );
-
-    list.append( "Home Phone" );
-    list.append( "Home Fax" );
-    list.append( "Home Mobile" );
-
+    list += untrphonefields();
     list.append( "Business Street" );
     list.append( "Business City" );
     list.append( "Business State" );
@@ -998,6 +1056,8 @@ QStringList OContact::untrfields()
 
     list.append( "Notes" );
     list.append( "Groups" );
+
+    if (sorted) list.sort();
 
     return list;
 }
