@@ -285,7 +285,7 @@ public:
     virtual int lightSensorResolution() const;
 
     virtual bool hasHingeSensor() const;
-    virtual OHingeStatus readHingeSensor();
+    virtual OHingeStatus readHingeSensor()const;
 
     const QStrList &allowedCpuFrequencies() const;
     bool setCurrentCpuFrequency(uint index);

@@ -515,7 +515,7 @@ bool ODevice::hasHingeSensor() const
 /**
 * @return a value from the hinge sensor
 */
-OHingeStatus ODevice::readHingeSensor()
+OHingeStatus ODevice::readHingeSensor()const
 {
     return CASE_UNKNOWN;
 }
