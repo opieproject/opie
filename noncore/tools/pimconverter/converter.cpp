@@ -249,7 +249,7 @@ bool Converter::sqliteMoveAndConvert( const QString& name, const QString& src, c
 
     if ( error ){
 		QMessageBox::critical( this, tr("Pim-Converter"),
-                                       tr("<qt>Conversion not possible: \n"
+                                       tr("<qt>Conversion not possible: <br>"
                                           "Problem: %1</qt>").arg(cmd) );
 		return error;
     }
@@ -274,13 +274,27 @@ bool Converter::sqliteMoveAndConvert( const QString& name, const QString& src, c
 	    }
     }
 
+
+    /*
+     * Check whether conversion really worked. If not, move old database back to recover it
+     */
+    if ( !QFile::exists( src ) ){
+	    cmd = "mv " + Global::shellQuote(dest) + " " + Global::shellQuote(src);
+	    if ( ::system( cmd ) != 0 ){
+	    }
+	    error = true;
+	    cmd = "Database-Format is not V2!?";	    
+    }
+
     if ( error ){
 	    QMessageBox::critical( this, tr("Pim-Converter"),
-				   tr("<qt>An internal error occurred: "
-				      "Converting the database was impossible! "
-				      "Command: '%1' </qt>").arg(cmd) );
+				   tr("<qt>An internal error occurred: <br>"
+				      "Converting the database was impossible! <br>"
+				      "Command/Reason: '%1' </qt>").arg(cmd) );
 	    
     }
+
+
 }
 
 
