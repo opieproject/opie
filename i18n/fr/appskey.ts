@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Agenda</translation>
     </message>
 </context>
 </TS>

@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="unfinished">Changer de répertoire</translation>
+        <translation>Changer de répertoire</translation>
     </message>
     <message>
         <source>Execute</source>
@@ -161,81 +161,90 @@
     <message>
         <source>Could not copy
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de copier
+</translation>
     </message>
     <message>
         <source>to
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Vers</translation>
     </message>
     <message>
         <source>Could not move
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de déplacer</translation>
     </message>
     <message>
         <source>Advanced FileManager
 is copyright 2002 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation type="unfinished"></translation>
+        <translation>Advanced FileManager(new line)
+is copyright 2002 by(new line)
+L.J.Potter&lt;llornkcor@handhelds.org&gt;(new line)
+and is licensed by the GPL</translation>
     </message>
     <message>
         <source>Add To Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter aux Documents</translation>
     </message>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Actions</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout sélectioner</translation>
     </message>
     <message>
         <source>Really delete
 %1 files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Réellement effacer
+le fichier %1?</translation>
     </message>
     <message>
         <source>Delete Directory?</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer le répertoire?</translation>
     </message>
     <message>
         <source>Really delete
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Vraiment effacer
+</translation>
     </message>
     <message>
         <source>Delete Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer le répertoire</translation>
     </message>
     <message>
         <source>Really copy
 %1 files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vraiment copier
+%1 files?</translation>
     </message>
     <message>
         <source>File Exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier exite!</translation>
     </message>
     <message>
         <source>
 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>
+exite déjà. D&apos;accord pour écraser?</translation>
     </message>
     <message>
         <source> already exists.
 Do you really want to delete it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Existe déjà.
+Voulez-vous vraiment l&apos;effacer?</translation>
     </message>
     <message>
         <source>%1 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 existe déjà. D&apos;accord pour écraser?</translation>
     </message>
     <message>
         <source>Could not copy %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de copier %1 vers %2</translation>
     </message>
 </context>
 <context>
@@ -246,7 +255,7 @@ Do you really want to delete it?</source>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortie</translation>
     </message>
 </context>
 <context>

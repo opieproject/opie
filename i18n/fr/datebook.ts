@@ -294,7 +294,7 @@ Quitter ?</translation>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>W: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>W:%1</translation>
     </message>
 </context>
 <context>

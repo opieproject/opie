@@ -1,29 +1,30 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>ButtonSettings</name>
     <message>
         <source>Button Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Définition des bouttons</translation>
     </message>
     <message>
         <source>&lt;center&gt;Press or hold the button you want to remap.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Appuyer le bouton que vous voulez reconfigurer.&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Press:</source>
-        <translation type="unfinished"></translation>
+        <translation>Presser:</translation>
     </message>
     <message>
         <source>Hold:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tenir:</translation>
     </message>
     <message>
         <source>Beam VCard</source>
-        <translation type="unfinished"></translation>
+        <translation>Transmettre vCard</translation>
     </message>
     <message>
         <source>Send eMail</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoyer un courriel</translation>
     </message>
     <message>
         <source>Toggle Menu</source>

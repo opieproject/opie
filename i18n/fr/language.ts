@@ -4,11 +4,11 @@
     <name>LanguageSettings</name>
     <message>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Anglais</translation>
     </message>
     <message>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>Défaut</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Language Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Définition de la langue</translation>
     </message>
 </context>
 </TS>

@@ -104,7 +104,7 @@
     </message>
     <message>
         <source>.</source>
-        <translation type="unfinished">,</translation>
+        <translation>,</translation>
     </message>
     <message>
         <source>5</source>
@@ -131,7 +131,7 @@
     </message>
     <message>
         <source>Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard</translation>
     </message>
 </context>
 </TS>
