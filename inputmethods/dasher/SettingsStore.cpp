@@ -16,6 +16,11 @@ using namespace std;
 /* TODO: Consider using Template functions to make this neater. */
 
 
+CSettingsStore::~CSettingsStore()
+{
+}
+
+
 bool CSettingsStore::GetBoolOption(const string& Key)
 {
 	if (BoolMap.find(Key)==BoolMap.end()) {

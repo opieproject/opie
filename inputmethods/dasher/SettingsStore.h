@@ -27,6 +27,7 @@
 class CSettingsStore
 {
 public:
+	virtual ~CSettingsStore();
 	bool GetBoolOption(const std::string& Key);
 	long GetLongOption(const std::string& Key);
 	std::string& GetStringOption(const std::string& Key);

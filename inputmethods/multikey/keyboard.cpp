@@ -143,19 +143,19 @@ QSize KeyboardPicks::sizeHint() const
 
 
 /* KeyboardConfig::generateText {{{1 */
-void  KeyboardConfig::generateText(const QString &s)
+void KeyboardConfig::generateText(const QString &s)
 {
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
     for (int i=0; i<(int)backspaces; i++) {
-	parent->emitKey( 0, Qt::Key_Backspace, 0, true, false );
-	parent->emitKey( 0, Qt::Key_Backspace, 0, false, false );
+	parent->emitKey( 0, ::Qt::Key_Backspace, 0, true, false );
+	parent->emitKey( 0, ::Qt::Key_Backspace, 0, false, false );
     }
     for (int i=0; i<(int)s.length(); i++) {
 	parent->emitKey( s[i].unicode(), 0, 0, true, false );
 	parent->emitKey( s[i].unicode(), 0, 0, false, false );
     }
-    parent->emitKey( 0, Qt::Key_Space, 0, true, false );
-    parent->emitKey( 0, Qt::Key_Space, 0, false, false );
+    parent->emitKey( 0, ::Qt::Key_Space, 0, true, false );
+    parent->emitKey( 0, ::Qt::Key_Space, 0, false, false );
     backspaces = 0;
 #endif
 }
