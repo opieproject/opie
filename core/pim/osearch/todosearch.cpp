@@ -14,13 +14,18 @@
 
 #include <opie/otodoaccess.h>
 #include <opie/otodo.h>
-
+#include <qiconset.h>
+#include <qpe/resource.h>
 #include "todoitem.h"
 
 TodoSearch::TodoSearch(QListView* parent, QString name)
 : SearchGroup(parent, name)
 {
 	_todos = 0;
+//	AppLnkSet als(QPEApplication::qpeDir());
+//	setPixmap( 0, als.findExec("todolist")->pixmap() );
+	QIconSet is = Resource::loadIconSet( "todo/TodoList" );
+	setPixmap( 0, is.pixmap( QIconSet::Small, true ) );
 }
 
 

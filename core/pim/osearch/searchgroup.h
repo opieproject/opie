@@ -20,8 +20,9 @@ class QRegExp;
 /**
 @author Patrick S. Vogt
 */
-class SearchGroup : public OListViewItem
+class SearchGroup : public OListViewItem //, QObject
 {
+//Q_OBJECT
 public:
     SearchGroup(QListView* parent, QString name);
 
@@ -32,6 +33,9 @@ public:
     virtual void setSearch(QRegExp);
     virtual int rtti() { return Searchgroup;}
 
+// signals:
+// 	isSearching(QString);
+
 protected:
 	QRegExp _search;
 	virtual void load() = 0;
@@ -39,8 +43,9 @@ protected:
 	virtual void insertItem( void* ) = 0;
 	void clearList();
 	QString _name;
-	bool expanded;
 	bool loaded;
+private:
+	int realSearch();
 };
 
 #endif

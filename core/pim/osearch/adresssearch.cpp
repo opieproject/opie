@@ -14,14 +14,22 @@
 
 #include <opie/ocontactaccess.h>
 #include <qstring.h>
+#include <qiconset.h>
+#include <qpe/resource.h>
 
 #include "contactitem.h"
-//#include <qdir.h>
 
 AdressSearch::AdressSearch(QListView* parent, QString name):
 	SearchGroup(parent, name)
 {
 	_contacts = 0;
+	QIconSet is = Resource::loadIconSet( "addressbook/AddressBook" );
+	setPixmap( 0, is.pixmap( QIconSet::Small, true ) );
+/*	QPixmap pix = Resource::loadPixmap( "addressbook/AddressBook" );
+	QImage img = pix.convertToImage();
+	img.smoothScale( 14, 14 );
+	pix.convertFromImage( img );
+	setPixmap( 0, pix );*/
 }
 
 

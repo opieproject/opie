@@ -2,7 +2,7 @@
 //
 // C++ Implementation: $MODULE$
 //
-// Description: 
+// Description:
 //
 //
 // Author: Patrick S. Vogt <tille@handhelds.org>, (C) 2003
@@ -14,12 +14,16 @@
 
 #include <qpe/applnk.h>
 #include <qpe/qpeapplication.h>
+#include <qiconset.h>
+#include <qpe/resource.h>
 
 #include "doclnkitem.h"
 
 DocLnkSearch::DocLnkSearch(QListView* parent, QString name)
 : AppLnkSearch(parent, name)
 {
+	QIconSet is = Resource::loadIconSet( "osearch/documents" );
+	setPixmap( 0, is.pixmap( QIconSet::Small, true ) );
 }
 
 

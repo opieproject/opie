@@ -87,8 +87,10 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   setCentralWidget( mainFrame );
 
   popupTimer = new QTimer();
+  searchTimer = new QTimer();
 
   connect(popupTimer, SIGNAL(timeout()), SLOT(showPopup()));
+  connect(searchTimer, SIGNAL(timeout()), SLOT(searchStringChanged()));
   connect(resultsList, SIGNAL(pressed(QListViewItem*)), SLOT(setCurrent(QListViewItem*)));
   connect(resultsList, SIGNAL(clicked(QListViewItem*)), SLOT(stopTimer(QListViewItem*)));
   connect(buttonGroupActions, SIGNAL(clicked(int)), SLOT( slotAction(int) ) );
@@ -111,9 +113,10 @@ void MainWindow::makeMenu()
 //   menuBar->insertItem( tr( "Settings" ), cfgMenu );
 
   //SEARCH
-  QAction *action = new QAction( tr("Search all"),QString::null,  0, this, 0 );
-  connect( action, SIGNAL(activated()), this, SLOT(searchAll()) );
-  action->addTo( searchMenu );
+  SearchAllAction = new QAction( tr("Search all"),QString::null,  0, this, 0 );
+  SearchAllAction->setIconSet( Resource::loadIconSet( "find" ) );
+  connect( SearchAllAction, SIGNAL(activated()), this, SLOT(searchAll()) );
+  SearchAllAction->addTo( searchMenu );
   actionCaseSensitiv = new QAction( tr("Case sensitiv"),QString::null,  0, this, 0, true );
   actionCaseSensitiv->addTo( searchMenu );
   actionWildcards = new QAction( tr("Use wildcards"),QString::null,  0, this, 0, true );
@@ -123,6 +126,7 @@ void MainWindow::makeMenu()
   QLineEdit *searchEdit = new QLineEdit( searchBar, "seachEdit" );
   searchBar->setHorizontalStretchable( TRUE );
   searchBar->setStretchableWidget( searchEdit );
+  SearchAllAction->addTo( searchBar );
   connect( searchEdit, SIGNAL( textChanged( const QString & ) ),
        this, SLOT( setSearch( const QString & ) ) );
 
@@ -184,16 +188,24 @@ void MainWindow::showPopup()
 
 void MainWindow::setSearch( const QString &key )
 {
-	QRegExp re( key, actionCaseSensitiv->isOn(), actionWildcards->isOn() );
+	searchTimer->stop();
+	_searchString = key;
+	searchTimer->start( 300 );
+}
+
+void MainWindow::searchStringChanged()
+{
+	searchTimer->stop();
+	QRegExp re( _searchString, actionCaseSensitiv->isOn(), actionWildcards->isOn() );
 	for (SearchGroup *s = searches.first(); s != 0; s = searches.next() )
 		s->setSearch( re );
 }
 
 void MainWindow::searchAll()
 {
-	bool openState;
 	for (SearchGroup *s = searches.first(); s != 0; s = searches.next() ){
 		s->doSearch();
+		//resultsList->repaint();
 	}
 }
 

@@ -16,11 +16,16 @@
 
 #include <opie/oevent.h>
 #include <opie/odatebookaccess.h>
+#include <qiconset.h>
+#include <qpe/resource.h>
 
 DatebookSearch::DatebookSearch(QListView* parent, QString name)
 : SearchGroup(parent, name)
 {
 	_dates = 0;
+	QIconSet is = Resource::loadIconSet( "datebook/DateBook" );
+	setPixmap( 0, is.pixmap( QIconSet::Small, true ) );
+
 }
 
 

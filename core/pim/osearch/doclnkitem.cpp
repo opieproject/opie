@@ -23,6 +23,7 @@ DocLnkItem::DocLnkItem(OListViewItem* parent, DocLnk *app)
 {
 	_doc = app;
 	setText(0, _doc->name() );
+	setPixmap(0, _doc->pixmap() );
 }
 
 DocLnkItem::~DocLnkItem()

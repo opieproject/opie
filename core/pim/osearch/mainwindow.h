@@ -43,14 +43,15 @@ public:
 
 public slots:
   void setCurrent(QListViewItem*);
-  void showPopup();
-  void stopTimer( QListViewItem* );
   void setSearch( const QString& );
   void searchAll();
 
 protected slots:
   void slotAction(int);
-
+  void showPopup();
+  void stopTimer( QListViewItem* );
+  void searchStringChanged();
+  
 private:
   OListView *resultsList;
   QTextView *richEdit;
@@ -59,9 +60,12 @@ private:
   QHBoxLayout *buttonLayout;
   QFrame *detailsFrame;
   QTimer *popupTimer;
+  QTimer *searchTimer;
 
+  QString _searchString;
   QList<SearchGroup> searches;
   QHButtonGroup *buttonGroupActions;
+  QAction *SearchAllAction;
   QAction *actionCaseSensitiv;
   QAction *actionWildcards;
   uint _buttonCount;

@@ -21,6 +21,7 @@ AppLnkItem::AppLnkItem(OListViewItem* parent, AppLnk *app)
 {
 	_app = app;
 	setText(0, _app->name() );
+	setPixmap(0, _app->pixmap() );
 }
 
 
