@@ -91,6 +91,8 @@ do
     files=$(eval echo $(sed -n -e "s/^Files://p" $i))
     arch=$(eval echo $(sed -n -e "s/^Arch://p" $i))
     section=$(sed -n -e "s/^Section: *//p" $i)
+    provides=$(sed -n -e "s/^Provides: *//p" $i)
+    conflicts=$(sed -n -e "s/^Conflicts: *//p" $i)
     license=$(sed -n -e "s/^License: *//p" $i)
     summary=$(sed -n -e "s/^Description: *//p" $i)
     package=${packagename}_${version}_$ARCH
@@ -117,7 +119,7 @@ do
 		;;	*.control)
 		    continue
 		;; $QTDIR/*)
-		    BASE=$(dirname /usr/${ff#$QTDIR/})
+		    BASE=$(dirname /opt/QtPalmtop/${ff#$QTDIR/})
 		;; etc/*.d/*)
 		    BASE=$(dirname /$ff)
 		;; ipaq/*)
@@ -188,6 +190,8 @@ do
 	    echo "Filename: ./$package.ipk" >>$CTRLDIR/control
 	    echo "Version: $version" >>$CTRLDIR/control
 	    echo "Depends: $depends" >>$CTRLDIR/control
+	    echo "Provides: $provides" >>$CTRLDIR/control
+	    echo "Conflicts: $conflicts" >>$CTRLDIR/control
 	    egrep -v "^(Files|Version|Depends):" >>$CTRLDIR/control $i
 	    echo "$DEB_VERSION" >$TDIR/debian-binary
 	    base=${i%.control}
