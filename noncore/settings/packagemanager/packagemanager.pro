@@ -27,9 +27,15 @@ HEADERS      = opackage.h        \
 DEFINES     += IPKG_LIB
 DEFINES     += HAVE_MKDTEMP
 TARGET       = packagemanager
-INCLUDEPATH += $(OPIEDIR)/include $(IPKGDIR)
+INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lqpe -lopiecore2 -lopieui2 -lipkg
 
 include ( $(OPIEDIR)/include.pro )
 
+!isEmpty( LIBIPK_INC_DIR ) {
+	INCLUDEPATH += $$LIBIPK_INC_DIR
+}
+!isEmpty( LIBIPK_LIB_DIR ) {
+	LIBS += -L$$LIBIPK_LIB_DIR
+}
