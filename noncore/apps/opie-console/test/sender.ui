@@ -46,6 +46,17 @@
                 <string>&amp;Send</string>
             </property>
         </widget>
+        <widget>
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PushButton2</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Send &amp;File</string>
+            </property>
+        </widget>
     </vbox>
 </widget>
 <connections>
@@ -56,5 +67,12 @@
         <slot>slotSend()</slot>
     </connection>
     <slot access="public">slotSend()</slot>
+    <connection>
+        <sender>PushButton2</sender>
+        <signal>clicked()</signal>
+        <receiver>Form1</receiver>
+        <slot>slotSendFile()</slot>
+    </connection>
+    <slot access="public">slotSendFile()</slot>
 </connections>
 </UI>

@@ -5,6 +5,7 @@
 
 #include "../profile.h"
 #include "../io_serial.h"
+#include "../sz_transfer.h"
 
 
 #include "senderui.h"
@@ -14,7 +15,7 @@ SenderUI::SenderUI()
 
     /* we do that manually */
     Profile prof;
-    QString str = "/dev/ttyS0";
+    QString str = "/dev/ttyS1";
     prof.writeEntry("Device",str );
     prof.writeEntry("Baud", 115200 );
 
@@ -34,6 +35,15 @@ SenderUI::SenderUI()
 SenderUI::~SenderUI() {
 
 }
+void SenderUI::slotSendFile() {
+
+    sz = new SzTransfer(SzTransfer::SZ, ser);
+    sz->sendFile("/home/jake/test");
+
+    connect (sz, SIGNAL(sent()), 
+             this, SLOT(fileTransComplete()));
+}
+
 void SenderUI::slotSend() {
     QCString str = MultiLineEdit1->text().utf8();
     qWarning("sending: %s", str.data() );
@@ -44,4 +54,9 @@ void SenderUI::got(const QByteArray& ar) {
         printf("%c", ar[i] );
     }
     //printf("\n");
+}
+
+void SenderUI::fileTransComplete() {
+
+    qWarning("file transfer compete");
 }
