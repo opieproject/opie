@@ -38,6 +38,7 @@ HEADERS   = ofontmenu.h \
 
 SOURCES   = ofontmenu.cc  \
         ocolorbutton.cpp \
+        sharp_compat.cpp \
       xmltree.cc \
       ofiledialog.cc ofileselector.cc \
             ocheckitem.cpp tododb.cpp todoevent.cpp \
