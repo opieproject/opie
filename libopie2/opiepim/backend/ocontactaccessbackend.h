@@ -15,11 +15,16 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactaccessbackend.h,v 1.5 2003-04-13 18:07:10 zecke Exp $
+ * Version: $Id: ocontactaccessbackend.h,v 1.5.4.1 2003-06-30 14:34:19 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend.h,v $
- * Revision 1.5  2003-04-13 18:07:10  zecke
+ * Revision 1.5.4.1  2003-06-30 14:34:19  eilers
+ * Patches from Zecke:
+ * Fixing and cleaning up extraMap handling
+ * Adding d_ptr for binary compatibility in the future
+ *
+ * Revision 1.5  2003/04/13 18:07:10  zecke
  * More API doc
  * QString -> const QString&
  * QString = 0l -> QString::null
@@ -102,6 +107,10 @@ class OContactAccessBackend: public OPimAccessBackend<OContact> {
          * Returns a sorted list of records either ascendinf or descending for a giving criteria and category
          */
         virtual QArray<int> sorted( bool ascending, int sortOrder, int sortFilter, int cat ) = 0;
-
+	
+	
+private:
+	class Private;
+	Private *d;
 };
 #endif

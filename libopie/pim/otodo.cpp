@@ -465,9 +465,6 @@ QMap<int, QString> OTodo::toMap() const {
     return map;
 }
 
-QMap<QString, QString> OTodo::toExtraMap()const {
-    return data->extra;
-}
 /**
  *  change or modify looks at the ref count and either
  *  creates a new QShared Object or it can modify it

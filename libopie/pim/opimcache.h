@@ -5,6 +5,8 @@
 
 #include "opimrecord.h"
 
+class OPimCacheItemPrivate;
+
 template <class T = OPimRecord>
 class OPimCacheItem {
 public:
@@ -18,8 +20,11 @@ public:
     void setRecord( const T& );
 private:
     T m_t;
+    OPimCacheItemPrivate *d;
 };
 
+
+class OPimCachePrivate;
 /**
  * OPimCache for caching the items
  * We support adding, removing
@@ -46,6 +51,7 @@ public:
 
 private:
     QIntCache<Item> m_cache;
+    OPimCachePrivate* d;
 };
 
 // Implementation

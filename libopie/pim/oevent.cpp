@@ -236,14 +236,14 @@ bool OEvent::match( const QRegExp& re )const {
 }
 QString OEvent::toRichText()const {
     QString text, value;
-    
+
     // description
-    text += "<b><h3><img src=\"datebook/DateBook\"> ";
+    text += "<b><h3><img src=\"datebook/DateBook\">";
     if ( !description().isEmpty() ) {
         text += Qtopia::escapeString(description() ).replace(QRegExp( "[\n]"),  "" );
     }
     text += "</h3></b><br><hr><br>";
-    
+
     // location
     if ( !(value = location()).isEmpty() ) {
         text += "<b>" + QObject::tr( "Location:" ) + "</b> ";
@@ -274,14 +274,14 @@ QString OEvent::toRichText()const {
                     replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
         }
     }
-    
+
     // categories
     if ( categoryNames("Calendar").count() ){
 	    text += "<b>" + QObject::tr( "Category:") + "</b> ";
 	    text += categoryNames("Calendar").join(", ");
 	    text += "<br>";
     }
-    
+
     //notes
     if ( !note().isEmpty() ) {
         text += "<b>" + QObject::tr( "Note:") + "</b><br>";
@@ -359,9 +359,6 @@ void OEvent::deref() {
 // FIXME
 QMap<int, QString> OEvent::toMap()const {
     return QMap<int, QString>();
-}
-QMap<QString, QString> OEvent::toExtraMap()const {
-    return QMap<QString, QString>();
 }
 int OEvent::parent()const {
     return data->parent;

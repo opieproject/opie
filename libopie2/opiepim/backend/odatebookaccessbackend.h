@@ -68,6 +68,10 @@ public:
      */
     virtual OEffectiveEvent::ValueList effecticeEvents( const QDateTime& start );
 
+private:
+    class Private;
+    Private *d;
+
 };
 
 #endif

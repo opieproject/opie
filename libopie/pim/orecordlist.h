@@ -7,6 +7,7 @@
 #include "otemplatebase.h"
 #include "opimrecord.h"
 
+class ORecordListIteratorPrivate;
 /**
  * Our List Iterator
  * it behaves like STL or Qt
@@ -71,9 +72,10 @@ private:
     bool m_direction :1;
 
     /* d pointer for future versions */
-    class IteratorPrivate;
-    IteratorPrivate *d;
+    ORecordListIteratorPrivate *d;
 };
+
+class ORecordListPrivate;
 /**
  * The recordlist used as a return type
  * from OPimAccessTemplate
@@ -123,6 +125,7 @@ ORecordList( const QArray<int>& ids,
 private:
     QArray<int> m_ids;
     const Base* m_acc;
+    ORecordListPrivate *d;
 };
 
 /* ok now implement it  */

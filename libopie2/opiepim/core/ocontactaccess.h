@@ -13,11 +13,16 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactaccess.h,v 1.8 2003-05-08 13:55:09 tille Exp $
+ * Version: $Id: ocontactaccess.h,v 1.8.2.1 2003-06-30 14:34:19 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.h,v $
- * Revision 1.8  2003-05-08 13:55:09  tille
+ * Revision 1.8.2.1  2003-06-30 14:34:19  eilers
+ * Patches from Zecke:
+ * Fixing and cleaning up extraMap handling
+ * Adding d_ptr for binary compatibility in the future
+ *
+ * Revision 1.8  2003/05/08 13:55:09  tille
  * search stuff
  * and match, toRichText & toShortText in oevent
  *
@@ -165,6 +170,9 @@ class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
  private slots:
 	void copMessage( const QCString &msg, const QByteArray &data );
 
+ private:
+        class Private;
+	Private *d;
 
 };
 #endif

@@ -32,7 +32,7 @@ QPC_TEMPLATEEXTERN template class QPC_EXPORT QMap<int, QString>;
 // MOC_SKIP_END
 #endif
 
-class ContactPrivate;
+class OContactPrivate;
 
 /**
  * OContact class represents a specialised PIM Record for contacts.
@@ -238,7 +238,7 @@ private:
 			    const QString &country ) const;
 
     QMap<int, QString> mMap;
-    ContactPrivate *d;
+    OContactPrivate *d;
 };
 
 

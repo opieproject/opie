@@ -132,7 +132,6 @@ public:
     QString type()const;
 
     QMap<int, QString> toMap()const;
-    QMap<QString, QString> toExtraMap()const;
     QString recordField(int )const;
 
     static int rtti();

@@ -14,6 +14,7 @@
  * You may not want to use that interface internaly
  * POOR mans interface
  */
+class OPimBasePrivate;
 struct OPimBase {
     /**
      * return the rtti
@@ -32,12 +33,15 @@ struct OPimBase {
      * ADD editing here?
      * -zecke
      */
+private:
+    OPimBasePrivate* d;     
 
 };
 /**
  * internal template base
  * T needs to implement the copy c'tor!!!
  */
+class OTemplateBasePrivate;
 template <class T = OPimRecord>
 class OTemplateBase : public OPimBase {
 public:
@@ -61,6 +65,9 @@ public:
     OPimRecord* record()const;
     OPimRecord* record(int uid )const;
     static T* rec();
+    
+private:
+    OTemplateBasePrivate *d;    
 };
 
 /*
