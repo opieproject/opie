@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>MindBreaker</name>
     <message>
@@ -22,7 +23,7 @@
     </message>
     <message>
         <source>Answer%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Antwort%1</translation>
     </message>
     <message>
         <source>Reset Statistics</source>

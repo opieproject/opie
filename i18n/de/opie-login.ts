@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Calibrate</name>
     <message>
@@ -33,11 +34,11 @@ kalibrieren.</translation>
     </message>
     <message>
         <source>Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausschalten</translation>
     </message>
     <message>
         <source>Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menü</translation>
     </message>
 </context>
 <context>
@@ -67,19 +68,22 @@ kalibrieren.</translation>
 by an uncaught signal
 (%1)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>OPIE wurde durch
+ein nicht abgefangenes
+Signal beendet: %1
+</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlgeschlagen</translation>
     </message>
     <message>
         <source>Could not start OPIE.</source>
-        <translation type="unfinished"></translation>
+        <translation>OPIE konnte nicht gestartet werden.</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte nicht zu einer anderen Identität wechseln</translation>
     </message>
 </context>
 </TS>

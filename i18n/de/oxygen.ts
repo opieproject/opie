@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CalcDlg</name>
     <message>
@@ -11,7 +12,7 @@
     </message>
     <message>
         <source>Molecular Weight</source>
-        <translation>Moleculargewicht</translation>
+        <translation>Molekulargewicht</translation>
     </message>
     <message>
         <source>Chemical Formula</source>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AudioDevice</name>
     <message>
@@ -6,78 +7,83 @@
 your sound device.
 open(&quot;/dev/dsp&quot;)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Irgend etwas stimmt
+nicht mit Ihrem Sounddevice.
+open(&quot;/dev/dsp&quot;)
+</translation>
     </message>
     <message>
         <source>
 
 Closing player now.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Der Player wird beendet.</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 <context>
     <name>AudioWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation type="unfinished"></translation>
+        <translation>OPIEPlayer</translation>
     </message>
 </context>
 <context>
     <name>MediaPlayer</name>
     <message>
         <source>No file</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Datei</translation>
     </message>
     <message>
         <source>Error: There is no file selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler: Keine Datei ausgewählt</translation>
     </message>
     <message>
         <source>File not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei nicht gefunden</translation>
     </message>
     <message>
         <source>The following file was not found: &lt;i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Die folgende Datei wurde nicht gefunden: &lt;i&gt;</translation>
     </message>
     <message>
         <source>No decoder found</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Dekoder gefunden</translation>
     </message>
     <message>
         <source>Sorry, no appropriate decoders found for this file: &lt;i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedaure, kein entsprechender Dekoder für diese Datei gefunden: &lt;i&gt;</translation>
     </message>
     <message>
         <source>Error opening file</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Fileöffnen</translation>
     </message>
     <message>
         <source>Sorry, an error occured trying to play the file: &lt;i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedaure, ein Fehler trat auf beim Versuch des Abspielens der Datei: &lt;i&gt;</translation>
     </message>
     <message>
         <source> File: </source>
-        <translation type="unfinished"></translation>
+        <translation>Datei:</translation>
     </message>
     <message>
         <source>, Length: </source>
-        <translation type="unfinished"></translation>
+        <translation>, Länge:</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Lautstärke</translation>
     </message>
 </context>
 <context>
     <name>PlayListSelection</name>
     <message>
         <source>Playlist Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Abspiellistenauswahl</translation>
     </message>
 </context>
 <context>
@@ -262,7 +268,7 @@ this playlist?</source>
     <name>VideoWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation type="unfinished"></translation>
+        <translation>OPIEPlayer</translation>
     </message>
 </context>
 </TS>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>InstallDialog</name>
     <message>
@@ -50,15 +51,15 @@
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished">Ansicht</translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Einstellugnen</translation>
+        <translation>Einstellugnen</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished">Hilfe</translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -66,51 +67,51 @@
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Auffrischen</translation>
+        <translation>Auffrischen</translation>
     </message>
     <message>
         <source>Setups</source>
-        <translation type="unfinished">Einstellugnen</translation>
+        <translation>Einstellugnen</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished">Server</translation>
+        <translation>Server</translation>
     </message>
     <message>
         <source>Destinations</source>
-        <translation type="unfinished">Ziele</translation>
+        <translation>Ziele</translation>
     </message>
     <message>
         <source>Close Section</source>
-        <translation type="unfinished">schliesse Sektion</translation>
+        <translation>schliesse Sektion</translation>
     </message>
     <message>
         <source>Sections</source>
-        <translation type="unfinished">Sektionen</translation>
+        <translation>Sektionen</translation>
     </message>
     <message>
         <source>Filter: </source>
-        <translation type="unfinished">Filter:</translation>
+        <translation>Filter:</translation>
     </message>
     <message>
         <source>Clear Find</source>
-        <translation type="unfinished">lösche Finden</translation>
+        <translation>lösche Finden</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation type="unfinished">schliesse Finden</translation>
+        <translation>schliesse Finden</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished">Filter</translation>
+        <translation>Filter</translation>
     </message>
     <message>
         <source>Clear Search</source>
-        <translation type="unfinished">lösche Suchen</translation>
+        <translation>lösche Suchen</translation>
     </message>
     <message>
         <source>Do Search</source>
-        <translation type="unfinished">suche</translation>
+        <translation>suche</translation>
     </message>
     <message>
         <source>Search</source>
@@ -118,23 +119,23 @@
     </message>
     <message>
         <source>Destination: </source>
-        <translation type="unfinished">Ziel</translation>
+        <translation>Ziel</translation>
     </message>
     <message>
         <source>Link</source>
-        <translation type="unfinished">Linke</translation>
+        <translation>Linke</translation>
     </message>
     <message>
         <source>Close Destinations</source>
-        <translation type="unfinished">schliesse Ziele</translation>
+        <translation>schliesse Ziele</translation>
     </message>
     <message>
         <source>Package Actions</source>
-        <translation type="unfinished">Paket Aktionen</translation>
+        <translation>Paket Aktionen</translation>
     </message>
     <message>
         <source>Install</source>
-        <translation type="unfinished">Installiere </translation>
+        <translation>Installiere </translation>
     </message>
     <message>
         <source>Remove</source>
@@ -142,43 +143,43 @@
     </message>
     <message>
         <source>Package Status</source>
-        <translation type="unfinished">Paket Status</translation>
+        <translation>Paket Status</translation>
     </message>
     <message>
         <source>New version, installed</source>
-        <translation type="unfinished">Neue Version, installiert</translation>
+        <translation>Neue Version, installiert</translation>
     </message>
     <message>
         <source>New version, not installed</source>
-        <translation type="unfinished">Neue Version, nicht installiert</translation>
+        <translation>Neue Version, nicht installiert</translation>
     </message>
     <message>
         <source>Old version, installed</source>
-        <translation type="unfinished">Alte Version, installiert</translation>
+        <translation>Alte Version, installiert</translation>
     </message>
     <message>
         <source>Old version, not installed</source>
-        <translation type="unfinished">Alte Version, nicht installiert</translation>
+        <translation>Alte Version, nicht installiert</translation>
     </message>
     <message>
         <source>Old version, new version installed</source>
-        <translation type="unfinished">Alte Version, neue Version installiert</translation>
+        <translation>Alte Version, neue Version installiert</translation>
     </message>
     <message>
         <source>New version, old version installed</source>
-        <translation type="unfinished">NeueVersion, alte Version installiert</translation>
+        <translation>NeueVersion, alte Version installiert</translation>
     </message>
     <message>
         <source>documents</source>
-        <translation type="unfinished">Dokumente</translation>
+        <translation>Dokumente</translation>
     </message>
     <message>
         <source>ipkgfind&amp;killefiz</source>
-        <translation type="unfinished">Netz Suche</translation>
+        <translation>Netz Suche</translation>
     </message>
     <message>
         <source>Section:</source>
-        <translation type="unfinished">Sektion:</translation>
+        <translation>Sektion:</translation>
     </message>
     <message>
         <source>Search: </source>
@@ -189,21 +190,21 @@
     <name>PackageListView</name>
     <message>
         <source>Package</source>
-        <translation type="unfinished">Paket</translation>
+        <translation>Paket</translation>
     </message>
 </context>
 <context>
     <name>PackageManagerSettings</name>
     <message>
         <source>New</source>
-        <translation type="unfinished">Neu</translation>
+        <translation>Neu</translation>
     </message>
 </context>
 <context>
     <name>PackageManagerSettingsBase</name>
     <message>
         <source>Package Servers</source>
-        <translation type="unfinished">Paket Server</translation>
+        <translation>Paket Server</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -211,11 +212,11 @@
     </message>
     <message>
         <source>Install destination:</source>
-        <translation type="unfinished">Installations Ziele:</translation>
+        <translation>Installations Ziele:</translation>
     </message>
     <message>
         <source>Link to root destination</source>
-        <translation type="unfinished">Linke auf das root Ziel</translation>
+        <translation>Linke auf das root Ziel</translation>
     </message>
     <message>
         <source>New</source>
@@ -223,7 +224,7 @@
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Entferne</translation>
+        <translation>Entferne</translation>
     </message>
     <message>
         <source>Servers</source>
@@ -239,27 +240,27 @@
     </message>
     <message>
         <source>Destinations</source>
-        <translation type="unfinished">Ziele</translation>
+        <translation>Ziele</translation>
     </message>
     <message>
         <source>link to /</source>
-        <translation type="unfinished">Linke auf /</translation>
+        <translation>Linke auf /</translation>
     </message>
     <message>
         <source>Remove links</source>
-        <translation type="unfinished">Entferne Links</translation>
+        <translation>Entferne Links</translation>
     </message>
     <message>
         <source>volatile</source>
-        <translation type="unfinished">flüchtig</translation>
+        <translation>flüchtig</translation>
     </message>
     <message>
         <source>removeable</source>
-        <translation type="unfinished">entfernbar</translation>
+        <translation>entfernbar</translation>
     </message>
     <message>
         <source>Used servers: (Highlighted feeds are active)</source>
-        <translation type="unfinished">Verwendetet Server: (Markierte Server sind aktiv)</translation>
+        <translation>Verwendetet Server: (Markierte Server sind aktiv)</translation>
     </message>
 </context>
 <context>
@@ -267,28 +268,28 @@
     <message>
         <source>
 All done.</source>
-        <translation type="unfinished">
+        <translation>
 Alles fertig.</translation>
     </message>
     <message>
         <source>Removing</source>
-        <translation type="unfinished">Entferne</translation>
+        <translation>Entferne</translation>
     </message>
     <message>
         <source>please wait</source>
-        <translation type="unfinished">bitte warten</translation>
+        <translation>bitte warten</translation>
     </message>
     <message>
         <source>Error while removing </source>
-        <translation type="unfinished">Fehler beim entfernen</translation>
+        <translation>Fehler beim entfernen</translation>
     </message>
     <message>
         <source>Installing</source>
-        <translation type="unfinished">Installiere</translation>
+        <translation>Installiere</translation>
     </message>
     <message>
         <source>Error while installing</source>
-        <translation type="unfinished">Fehler beim Installieren</translation>
+        <translation>Fehler beim Installieren</translation>
     </message>
 </context>
 <context>
@@ -339,11 +340,11 @@ Alles fertig.</translation>
     </message>
     <message>
         <source>Install to</source>
-        <translation type="unfinished">Installiere auf</translation>
+        <translation>Installiere nach</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Entfernen</translation>
+        <translation>Entfernen</translation>
     </message>
 </context>
 <context>

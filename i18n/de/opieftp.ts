@@ -1,239 +1,248 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>OpieFtp</name>
     <message>
         <source>OpieFtp</source>
-        <translation type="unfinished"></translation>
+        <translation>OpieFtp</translation>
     </message>
     <message>
         <source>Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindung</translation>
     </message>
     <message>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokal</translation>
     </message>
     <message>
         <source>Remote</source>
-        <translation type="unfinished"></translation>
+        <translation>Remote</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Neu</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Berbinden</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Trennen</translation>
     </message>
     <message>
         <source>Show Hidden Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Versteckte Dateien anz.</translation>
     </message>
     <message>
         <source>Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Uploac</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Verz. erstellen</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Umbennen</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Download</translation>
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Wechseln zu Lokal</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation type="unfinished"></translation>
+        <translation>Wechsel zu Remote</translation>
     </message>
     <message>
         <source>Switch to Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Wechsel zu Konfig.</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzeichnis</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzername</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>PAsswort</translation>
     </message>
     <message>
         <source>Remote server</source>
-        <translation type="unfinished"></translation>
+        <translation>Remoteserver</translation>
     </message>
     <message>
         <source>Remote path</source>
-        <translation type="unfinished"></translation>
+        <translation>Remotepfad</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Port</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration</translation>
     </message>
     <message>
         <source>Ftp</source>
-        <translation type="unfinished"></translation>
+        <translation>Ftp</translation>
     </message>
     <message>
         <source>Please set the server info</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte setzen Sie die Serverinfo</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Notiz</translation>
     </message>
     <message>
         <source>Unable to connect to
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte nicht verbinden nach
+</translation>
     </message>
     <message>
         <source>Unable to log in
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Anmelden nicht möglich
+</translation>
     </message>
     <message>
         <source>Unable to upload
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Upload nicht möglich</translation>
     </message>
     <message>
         <source>Cannot upload directories</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzeichnis-Upload nicht möglich</translation>
     </message>
     <message>
         <source>Unable to download 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Download nicht möglich</translation>
     </message>
     <message>
         <source>Unable to list the directory
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Verzeichnis-Listing nicht möglich</translation>
     </message>
     <message>
         <source>Unable to change directories
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Verzeichniswechsel nicht möglich
+</translation>
     </message>
     <message>
         <source>Unable to cd up
 </source>
-        <translation type="unfinished"></translation>
+        <translation>cd nach oben nicht möglich</translation>
     </message>
     <message>
         <source>Unable to get working dir
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Holen des Arbeitsverzeichnisses nicht möglich
+</translation>
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzeichniswechsel</translation>
     </message>
     <message>
         <source>Do you really want to delete
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie wirklich löschen
+</translation>
     </message>
     <message>
         <source> ?
 It must be empty</source>
-        <translation type="unfinished"></translation>
+        <translation>? Es muss leer sein.</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nein</translation>
     </message>
     <message>
         <source>Unable to make directory
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Verzeichniserstelleung nicht möglich
+</translation>
     </message>
     <message>
         <source>Unable to remove directory
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Verzeichnis löschen nicht möglich
+</translation>
     </message>
     <message>
         <source>Unable to delete file
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Datei löschen icht möglich</translation>
     </message>
     <message>
         <source>Unable to rename file
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Datei umbennen nicht möglich
+</translation>
     </message>
     <message>
         <source>Could not rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte nicht umbennen </translation>
     </message>
     <message>
         <source>That directory does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Verzeichnis existiert nicht</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Über</translation>
     </message>
     <message>
         <source>Rescan</source>
-        <translation type="unfinished"></translation>
+        <translation>Neu scannen</translation>
     </message>
     <message>
         <source>New Server name</source>
-        <translation type="unfinished"></translation>
+        <translation>Neuer Servername</translation>
     </message>
     <message>
         <source>Sorry name already taken</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedaure, der Name wird bereits verwendet.</translation>
     </message>
 </context>
 </TS>
