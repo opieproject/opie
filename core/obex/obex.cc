@@ -1,5 +1,6 @@
 
 #include <qapplication.h>
+#include <qfile.h>
 #include <qmessagebox.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <opie/oprocess.h>
@@ -48,7 +49,7 @@ void Obex::receive()  {
 void Obex::send( const QString& fileName) { // if currently receiving stop it send receive
     m_count = 0;
     m_file = fileName;
-    qWarning("send");
+    qWarning("send %s", fileName.latin1() );
     if (m_rec != 0 ) {
         qWarning("running");
         if (m_rec->isRunning() ) {
@@ -75,7 +76,7 @@ void Obex::sendNow(){
     // OProcess inititialisation
     m_send = new OProcess();
     *m_send << "irobex_palm3";
-    *m_send << m_file;
+    *m_send << QFile::encodeName(m_file);
 
     // connect to slots Exited and and StdOut
     connect(m_send,  SIGNAL(processExited(OProcess*) ),

@@ -32,11 +32,11 @@ void SendWidget::initUI() {
 
     QCopChannel* chan = new QCopChannel("QPE/IrDaAppletBack", this );
     connect(chan, SIGNAL(received(const QCString&, const QByteArray& ) ),
-            this, SLOT(dispatchBt(const QCString&, const QByteArray& ) ) );
+            this, SLOT(dispatchIrda(const QCString&, const QByteArray& ) ) );
 
     chan = new QCopChannel("QPE/BluetoothBack", this );
     connect(chan, SIGNAL(received(const QCString&, const QByteArray& ) ),
-            this, SLOT(dispatchIrda(const QCString&, const QByteArray& ) ) );
+            this, SLOT(dispatchBt(const QCString&, const QByteArray& ) ) );
 
     QVBoxLayout* lay = new QVBoxLayout(this);
 
@@ -103,14 +103,15 @@ void SendWidget::send( const QString& file, const QString& desc ) {
         QCopEnvelope e2("QPE/IrDaApplet", "listDevices()");
         QCopEnvelope e3("QPE/Bluetooth", "listDevices()");
     }
-    QTimer::singleShot(5000, this, SLOT(testIt() ) );
 }
 void SendWidget::slotIrDaDevices( const QStringList& list) {
+    qWarning("slot it irda devices ");
     m_irDa = list;
     m_start = 0;
     for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it )
         m_devBox->addDevice( (*it), DeviceBox::IrDa, tr("Scheduling for beam.") );
-    m_devBox->removeDevice( tr("Search for IrDa Devices.") );
+
+    m_devBox->removeDevice( tr("Searching for IrDa Devices.") );
 
     slotStartIrda();
 }
@@ -126,12 +127,13 @@ void SendWidget::slotSelectedDevice( const QString& name, int dev ) {
     if ( name == tr("Search again for IrDa.") ) {
         for (QStringList::Iterator it= m_irDa.begin(); it != m_irDa.end(); ++it )
             m_devBox->removeDevice( (*it) );
+
         QCopEnvelope e2("QPE/IrDaApplet", "listDevices()");
     }
 }
 void SendWidget::dispatchIrda( const QCString& str, const QByteArray& ar ) {
     qWarning("dispatch irda %s", str.data() );
-    if ( str == "listDevices(QStringList)" ) {
+    if ( str == "devices(QStringList)" ) {
         QDataStream stream( ar, IO_ReadOnly );
         QStringList list;
         stream >> list;
@@ -145,20 +147,21 @@ void SendWidget::slotIrError( int ) {
 
 }
 void SendWidget::slotIrSent( bool b) {
+    qWarning("irda sent!!");
     QString text = b ? tr("Sent") : tr("Failure");
-    m_devBox->setStatus( m_irDa[m_start], text );
+//    m_devBox->setStatus( m_irDa[m_start], text );
     m_start++;
     slotStartIrda();
 }
 void SendWidget::slotIrTry(unsigned int trI) {
-    m_devBox->setStatus( m_irDa[m_start], tr("Try %1").arg( QString::number( trI ) ) );
+//    m_devBox->setStatus( m_irDa[m_start], tr("Try %1").arg( QString::number( trI ) ) );
 }
 void SendWidget::slotStartIrda() {
     if (m_start >= m_irDa.count() ) {
         m_devBox->addDevice(tr("Search again for IrDa."), DeviceBox::Search );
         return;
     }
-    m_devBox->setStatus( m_irDa[m_start], tr("Start sending") );
+//    m_devBox->setStatus( m_irDa[m_start], tr("Start sending") );
     m_obex->send( m_file );
 }
 void SendWidget::slotDone() {

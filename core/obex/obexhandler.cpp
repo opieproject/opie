@@ -56,7 +56,7 @@ void ObexHandler::irdaMessage( const QCString& msg, const QByteArray& data) {
         stream >> desc;
         m_wasRec = (m_receiver != 0 );
         doReceive( false );
-        doSend(name, desc);
+        doSend(desc, name);
     }else if (msg == "receive(int)") {
         int rec;
         stream >> rec;
