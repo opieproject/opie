@@ -439,8 +439,8 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                         return;
                     }
                 case AudioStop:       mediaPlayerState->setPlaying(FALSE); return;
-                case AudioNext:       if( playList->whichList() ==0 ) mediaPlayerState->setNext(); return;
-                case AudioPrevious:   if( playList->whichList() ==0 ) mediaPlayerState->setPrev(); return;
+		case AudioNext:       if( playList->currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState->setNext(); return;
+		case AudioPrevious:   if( playList->currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState->setPrev(); return;
                 case AudioLoop:       mediaPlayerState->setLooping(audioButtons[i].isDown); return;
                 case AudioVolumeUp:   emit moreReleased(); return;
                 case AudioVolumeDown: emit lessReleased(); return;
