@@ -47,7 +47,7 @@ QString TodolistPlugin::pixmapNameConfig() const {
 }
 
 TodayConfigWidget* TodolistPlugin::configWidget( QWidget* wid ) {
-    return new TodolistPluginConfig( wid , "Todolist" );
+    return new TodolistPluginConfig( wid , "Todolist Config" );
 }
 
 QString TodolistPlugin::appName() const {

@@ -56,12 +56,15 @@ private slots:
     void refresh();
 
 private:
-    void init();
     void setOwnerField();
     void setOwnerField(QString &string);
-    void initialize();
 
     void setRefreshTimer( int );
+
+    void clearPluginWidgets();
+    void loadPluginWidgets();
+    void loadShellContent();
+
 
 private slots:
     void channelReceived(const QCString &msg, const QByteArray & data);
@@ -75,6 +78,7 @@ private:
     QScrollView *m_sv;
     QWidget* m_big_box;
     QVBoxLayout *m_bblayout;
+    QLabel *m_informationLabel;
 
     Opie::Core::OPluginLoader *m_pluginLoader;
     Opie::Core::OPluginManager *m_manager;

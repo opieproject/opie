@@ -93,7 +93,6 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal )
     tab3Layout->addWidget( m_guiMisc );
     TabWidget3->addTab( tab_3, "SettingsIcon", tr( "Misc" ) );
 
-    connect ( m_appletListView , SIGNAL( clicked(QListViewItem*) ), this, SLOT( appletChanged() ) );
     previousItem = 0l;
     readConfig();
 }
@@ -181,12 +180,17 @@ void TodayConfig::writeConfig() {
     for ( ; list_it.current(); ++list_it ) {
         for ( OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it ) {
             if ( QString::compare( (*it).name() , list_it.current()->text(0) ) == 0 ) {
+                qWarning( "Enabling %d  and make it %d", position-1,
+                          ((QCheckListItem*)list_it.current())->isOn() );
                 (*it).setPosition(position--);
                 m_pluginManager->setEnabled( (*it),((QCheckListItem*)list_it.current())->isOn() );
             }
         }
     }
 
+    /*
+     * save and get the changes back
+     */
     m_pluginManager->save();
 
     cfg.setGroup( "Autostart" );
@@ -209,6 +213,7 @@ void TodayConfig::writeConfig() {
         TodayPluginInterface* iface = m_pluginLoader->load<TodayPluginInterface>( *it, IID_TodayPluginInterface );
         if ( m_configMap.contains( iface ) )
             m_configMap[iface]->writeConfig();
+
     }
 }
 

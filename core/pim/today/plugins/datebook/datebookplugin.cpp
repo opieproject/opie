@@ -46,7 +46,7 @@ QString DatebookPlugin::pixmapNameConfig() const {
 }
 
 TodayConfigWidget* DatebookPlugin::configWidget( QWidget* wid ) {
-    return new DatebookPluginConfig( wid , "Datebook" );
+    return new DatebookPluginConfig( wid , "Datebook Config" );
 }
 
 QString DatebookPlugin::appName()  const {
