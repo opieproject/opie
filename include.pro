@@ -99,6 +99,9 @@ QMAKE_EXTRA_UNIX_TARGETS += lupdate lrelease ipk opie-lupdate opie-lrelease mess
 CONFTEST = $$system( echo $CONFIG_TARGET_MACOSX )
 contains( CONFTEST, y ){
 QMAKE_LFLAGS += -Wl
+LIBS -= -ldl
+LIBS -= -lcrypt 
+LIBS -= -lm
 }
 else {
 QMAKE_LFLAGS += -Wl,-rpath=$$prefix/lib
