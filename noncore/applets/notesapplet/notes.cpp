@@ -144,10 +144,8 @@ NotesControl::NotesControl( QWidget *parent, const char *name )
 }
 
 void NotesControl::slotSaveButton() {
-    if(edited) {
-        save();
-        populateBox();
-    }
+    slotNewButton();
+    populateBox();
 }
 
 void NotesControl::slotDeleteButtonClicked() {
