@@ -172,7 +172,7 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
 
     connect(ComboBoxFunction, SIGNAL(activated(int) ), this, SLOT(function_button(int) ) );
 
-    captions.append("Standard");
+    captions.append(tr("Standard"));
     ComboBoxFunction->insertItem(captions.last());
 
     // now add in the conversion modes
