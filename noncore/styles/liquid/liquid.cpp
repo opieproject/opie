@@ -854,8 +854,7 @@ void LiquidStyle::polish(QWidget *w)
     }
    
     
-    if ( !w-> inherits("QFrame") || (((QFrame*) w)-> frameShape () == QFrame::NoFrame ))
-	    w-> setBackgroundOrigin ( QWidget::ParentOrigin );
+		
 
     if(w->inherits("QComboBox") ||
        w->inherits("QLineEdit") || w->inherits("QRadioButton") ||
@@ -873,6 +872,7 @@ void LiquidStyle::polish(QWidget *w)
     }
     if(w->inherits("QButton") || w-> inherits("QComboBox")){
     	w-> setBackgroundMode ( QWidget::PaletteBackground );
+    	w->setBackgroundOrigin ( QWidget::ParentOrigin);
     }
 
     bool isViewport = qstrcmp(w->name(), "qt_viewport") == 0 ||
@@ -908,6 +908,9 @@ void LiquidStyle::polish(QWidget *w)
     	if ( flatTBButtons )
     		w->setBackgroundOrigin(QWidget::ParentOrigin);
     }
+    if(w-> inherits("QToolBarSeparator")&&w->parent()->inherits("QToolBar")) {
+    	((QFrame *) w)-> setFrameShape ( QFrame::NoFrame );
+    }
     if(w->ownPalette() && !w->inherits("QButton") && !w->inherits("QComboBox")){
         return;
     }
@@ -921,10 +924,19 @@ void LiquidStyle::polish(QWidget *w)
 	   !( !w-> inherits("QLineEdit") && w-> parent() && w-> parent()-> isWidgetType ( ) && w-> parent()-> inherits ( "QMultiLineEdit" ))) {
         if(w->backgroundMode() == QWidget::PaletteBackground ||
            w->backgroundMode() == QWidget::PaletteButton){
-            w->setBackgroundMode(QWidget::X11ParentRelative);
+            w->setBackgroundMode(w->parentWidget()->backgroundMode( )/*QWidget::X11ParentRelative*/);
+            w->setBackgroundOrigin(QWidget::ParentOrigin);
+//			w->setBackgroundMode(QWidget::NoBackground);
         }
     }
+    if ( !w-> inherits("QFrame") || (((QFrame*) w)-> frameShape () == QFrame::NoFrame ))
+	    w-> setBackgroundOrigin ( QWidget::ParentOrigin );	    
+	else if ( w-> inherits("QFrame") )
+	    w->setBackgroundOrigin ( QWidget::WidgetOrigin );
 
+	if ( w->parentWidget()->inherits ( "QWidgetStack" )) {
+	    w->setBackgroundOrigin ( QWidget::WidgetOrigin );
+	}
 }
 
 void LiquidStyle::unPolish(QWidget *w)
