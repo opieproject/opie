@@ -6,6 +6,11 @@
 #include <qgroupbox.h>
 #include <qmessagebox.h>
 
+#ifdef QTE_VERSION 
+#else
+ #define showMaximized show
+#endif
+
 /**
  * Constructor for the InterfaceInformationImp class.  This class pretty much
  * just display's information about the interface that is passed to it.
@@ -48,7 +53,7 @@ void InterfaceInformationImp::updateInterface(Interface *){
  * Display it.
  */ 
 void InterfaceInformationImp::advanced(){
-  InterfaceAdvanced *a = new InterfaceAdvanced(0, "InterfaceAdvanced");
+  InterfaceAdvanced *a = new InterfaceAdvanced(this, "InterfaceAdvanced", Qt::WShowModal | Qt::WDestructiveClose | Qt::WType_Dialog);
   a->interfaceName->setText(interface->getInterfaceName());
   a->macAddressLabel->setText(interface->getMacAddress());
   a->ipAddressLabel->setText(interface->getIp());
@@ -58,9 +63,7 @@ void InterfaceInformationImp::advanced(){
   a->leaseObtainedLabel->setText(interface->getLeaseObtained());
   a->leaseExpiresLabel->setText(interface->getLeaseExpires());
   a->dhcpInformation->setEnabled(interface->isDhcp());
-	 
   a->showMaximized();
-  a->show();
 }
 
 /**
