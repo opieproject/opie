@@ -42,6 +42,7 @@ public:
 protected:
 	QString deHtml(const QString &string);
     AttachItem* searchParent(const QValueList<int>&path);
+    AttachItem* lastChild(AttachItem*parent);
 
 protected slots:
 	void slotReply();

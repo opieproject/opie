@@ -62,6 +62,18 @@ AttachItem* ViewMail::searchParent(const QValueList<int>&path)
     return 0;
 }
 
+AttachItem* ViewMail::lastChild(AttachItem*parent)
+{
+    if (!parent) return 0;
+    AttachItem* item = (AttachItem*)parent->firstChild();
+    if (!item) return item;
+    AttachItem*temp=0;
+    while( (temp=(AttachItem*)item->nextSibling())) {
+        item = temp;
+    }
+    return item;
+}
+
 void ViewMail::setBody( RecBody body ) {
 
 m_body = body;
@@ -146,6 +158,8 @@ for (unsigned int i = 0; i < body.Parts().count();++i) {
     desc = body.Parts()[i].Description();
     parentItem = searchParent(body.Parts()[i].Positionlist());
     if (parentItem) {
+        AttachItem*temp = lastChild(parentItem);
+        if (temp) curItem = temp;
         curItem=new AttachItem(parentItem,curItem,type,desc,filename,fsize,i,body.Parts()[i].Positionlist());
         attachments->setRootIsDecorated(true);
         curItem = parentItem;
