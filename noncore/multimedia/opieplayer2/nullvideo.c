@@ -535,7 +535,7 @@ int null_is_scaling( xine_vo_driver_t* self ){
 
 void null_set_videoGamma( xine_vo_driver_t* self , int value ) {
   ((null_driver_t*) self->driver) ->yuv2rgb_gamma = value;
-  ((null_driver_t*) self->driver) ->yuv2rgb_factory->set_gamma( ((null_driver_t*) self) ->yuv2rgb_factory, value );
+  ((null_driver_t*) self->driver) ->yuv2rgb_factory->set_gamma( ((null_driver_t*) self->driver) ->yuv2rgb_factory, value );
 }
 
 void null_set_scaling( xine_vo_driver_t* self, int scale ) {
