@@ -61,6 +61,8 @@ void ShapeTool::mouseReleaseEvent(QMouseEvent* e)
     m_pDrawPadCanvas->viewport()->update(viewportRect);
 
     m_mousePressed = false;
+
+    m_pDrawPadCanvas->backupPage();
 }
 
 void ShapeTool::mouseMoveEvent(QMouseEvent* e)

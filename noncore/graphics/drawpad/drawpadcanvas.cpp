@@ -328,6 +328,22 @@ uint DrawPadCanvas::pageCount()
     return m_pages.count();
 }
 
+void DrawPadCanvas::backupPage()
+{
+    QPixmap* currentBackup = m_pageBackups.current();
+    while (m_pageBackups.last() != currentBackup) {
+        m_pageBackups.removeLast();
+    }
+
+    while (m_pageBackups.count() >= (5 + 1)) {
+        m_pageBackups.removeFirst();
+    }
+
+    m_pageBackups.append(new QPixmap(*(m_pages.current())));
+
+    emit pageBackupsChanged();
+}
+
 void DrawPadCanvas::deleteAll()
 {
    QMessageBox messageBox(tr("Delete All"), tr("Do you want to delete\nall the pages?"),
@@ -513,19 +529,6 @@ void DrawPadCanvas::contentsMousePressEvent(QMouseEvent* e)
 void DrawPadCanvas::contentsMouseReleaseEvent(QMouseEvent* e)
 {
     m_pDrawPad->tool()->mouseReleaseEvent(e);
-
-    QPixmap* currentBackup = m_pageBackups.current();
-    while (m_pageBackups.last() != currentBackup) {
-        m_pageBackups.removeLast();
-    }
-
-    while (m_pageBackups.count() >= (5 + 1)) {
-        m_pageBackups.removeFirst();
-    }
-
-    m_pageBackups.append(new QPixmap(*(m_pages.current())));
-
-    emit pageBackupsChanged();
 }
 
 void DrawPadCanvas::contentsMouseMoveEvent(QMouseEvent* e)

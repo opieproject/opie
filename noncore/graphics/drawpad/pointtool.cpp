@@ -41,6 +41,8 @@ void PointTool::mouseReleaseEvent(QMouseEvent* e)
     Q_UNUSED(e)
 
     m_mousePressed = false;
+
+    m_pDrawPadCanvas->backupPage();
 }
 
 void PointTool::mouseMoveEvent(QMouseEvent* e)

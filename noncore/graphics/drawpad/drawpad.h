@@ -45,6 +45,7 @@ private slots:
     void setFilledRectangleTool();
     void setEllipseTool();
     void setFilledEllipseTool();
+    void setTextTool();
     void setFillTool();
     void setEraseTool();
 
@@ -82,9 +83,11 @@ private:
     QAction* m_pFilledRectangleToolAction;
     QAction* m_pEllipseToolAction;
     QAction* m_pFilledEllipseToolAction;
+    QAction* m_pTextToolAction;
     QAction* m_pFillToolAction;
     QAction* m_pEraseToolAction;
 
+    QToolButton* m_pLineToolButton;
     QToolButton* m_pRectangleToolButton;
     QToolButton* m_pEllipseToolButton;
     QToolButton* m_pPenColorToolButton;

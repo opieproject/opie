@@ -41,6 +41,8 @@ void EraseTool::mouseReleaseEvent(QMouseEvent* e)
     Q_UNUSED(e)
 
     m_mousePressed = false;
+
+    m_pDrawPadCanvas->backupPage();
 }
 
 void EraseTool::mouseMoveEvent(QMouseEvent* e)

@@ -26,6 +26,7 @@
 #include "linetool.h"
 #include "pointtool.h"
 #include "rectangletool.h"
+#include "texttool.h"
 
 #include <qpe/applnk.h>
 #include <qpe/global.h>
@@ -129,15 +130,21 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
 
     QPEToolBar* drawModeToolBar = new QPEToolBar(this);
 
-    m_pPointToolAction = new QAction(tr("Draw Point"), Resource::loadIconSet("drawpad/point.png"), QString::null, 0, this);
-    m_pPointToolAction->setToggleAction(true);
-    connect(m_pPointToolAction, SIGNAL(activated()), this, SLOT(setPointTool()));
-    m_pPointToolAction->addTo(drawModeToolBar);
+    m_pLineToolButton = new QToolButton(drawModeToolBar);
+    m_pLineToolButton->setToggleButton(true);
 
-    m_pLineToolAction = new QAction(tr("Draw Line"), Resource::loadIconSet("drawpad/line.png"), QString::null, 0, this);
-    m_pLineToolAction->setToggleAction(true);
+    QPopupMenu* linePopupMenu = new QPopupMenu(m_pLineToolButton);
+
+    m_pPointToolAction = new QAction(tr("Draw Point"), Resource::loadIconSet("drawpad/point.png"), "", 0, this);
+    connect(m_pPointToolAction, SIGNAL(activated()), this, SLOT(setPointTool()));
+    m_pPointToolAction->addTo(linePopupMenu);
+
+    m_pLineToolAction = new QAction(tr("Draw Line"), Resource::loadIconSet("drawpad/line.png"), "", 0, this);
     connect(m_pLineToolAction, SIGNAL(activated()), this, SLOT(setLineTool()));
-    m_pLineToolAction->addTo(drawModeToolBar);
+    m_pLineToolAction->addTo(linePopupMenu);
+
+    m_pLineToolButton->setPopup(linePopupMenu);
+    m_pLineToolButton->setPopupDelay(0);
 
     m_pRectangleToolButton = new QToolButton(drawModeToolBar);
     m_pRectangleToolButton->setToggleButton(true);
@@ -170,6 +177,11 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
 
     m_pEllipseToolButton->setPopup(ellipsePopupMenu);
     m_pEllipseToolButton->setPopupDelay(0);
+
+    m_pTextToolAction = new QAction(tr("Insert Text"), Resource::loadIconSet("drawpad/text.png"), QString::null, 0, this);
+    m_pTextToolAction->setToggleAction(true);
+    connect(m_pTextToolAction, SIGNAL(activated()), this, SLOT(setTextTool()));
+    m_pTextToolAction->addTo(drawModeToolBar);
 
     m_pFillToolAction = new QAction(tr("Fill Region"), Resource::loadIconSet("drawpad/fill.png"), QString::null, 0, this);
     m_pFillToolAction->setToggleAction(true);
@@ -273,10 +285,16 @@ void DrawPad::setPointTool()
 
     m_pTool = new PointTool(this, m_pDrawPadCanvas);
 
-    m_pPointToolAction->setOn(true);
-    m_pLineToolAction->setOn(false);
+    m_pLineToolButton->setIconSet(m_pPointToolAction->iconSet());
+    QToolTip::add(m_pLineToolButton, m_pPointToolAction->text());
+
+    disconnect(m_pLineToolButton, SIGNAL(clicked()), 0, 0);
+    connect(m_pLineToolButton, SIGNAL(clicked()), m_pPointToolAction, SIGNAL(activated()));
+
+    m_pLineToolButton->setOn(true);
     m_pRectangleToolButton->setOn(false);
     m_pEllipseToolButton->setOn(false);
+    m_pTextToolAction->setOn(false);
     m_pFillToolAction->setOn(false);
     m_pEraseToolAction->setOn(false);
 }
@@ -289,10 +307,16 @@ void DrawPad::setLineTool()
 
     m_pTool = new LineTool(this, m_pDrawPadCanvas);
 
-    m_pPointToolAction->setOn(false);
-    m_pLineToolAction->setOn(true);
+    m_pLineToolButton->setIconSet(m_pLineToolAction->iconSet());
+    QToolTip::add(m_pLineToolButton, m_pLineToolAction->text());
+
+    disconnect(m_pLineToolButton, SIGNAL(clicked()), 0, 0);
+    connect(m_pLineToolButton, SIGNAL(clicked()), m_pLineToolAction, SIGNAL(activated()));
+
+    m_pLineToolButton->setOn(true);
     m_pRectangleToolButton->setOn(false);
     m_pEllipseToolButton->setOn(false);
+    m_pTextToolAction->setOn(false);
     m_pFillToolAction->setOn(false);
     m_pEraseToolAction->setOn(false);
 }
@@ -311,10 +335,10 @@ void DrawPad::setRectangleTool()
     disconnect(m_pRectangleToolButton, SIGNAL(clicked()), 0, 0);
     connect(m_pRectangleToolButton, SIGNAL(clicked()), m_pRectangleToolAction, SIGNAL(activated()));
 
-    m_pPointToolAction->setOn(false);
-    m_pLineToolAction->setOn(false);
+    m_pLineToolButton->setOn(false);
     m_pRectangleToolButton->setOn(true);
     m_pEllipseToolButton->setOn(false);
+    m_pTextToolAction->setOn(false);
     m_pFillToolAction->setOn(false);
     m_pEraseToolAction->setOn(false);
 }
@@ -333,10 +357,10 @@ void DrawPad::setFilledRectangleTool()
     disconnect(m_pRectangleToolButton, SIGNAL(clicked()), 0, 0);
     connect(m_pRectangleToolButton, SIGNAL(clicked()), m_pFilledRectangleToolAction, SIGNAL(activated()));
 
-    m_pPointToolAction->setOn(false);
-    m_pLineToolAction->setOn(false);
+    m_pLineToolButton->setOn(false);
     m_pRectangleToolButton->setOn(true);
     m_pEllipseToolButton->setOn(false);
+    m_pTextToolAction->setOn(false);
     m_pFillToolAction->setOn(false);
     m_pEraseToolAction->setOn(false);
 }
@@ -355,10 +379,10 @@ void DrawPad::setEllipseTool()
     disconnect(m_pEllipseToolButton, SIGNAL(clicked()), 0, 0);
     connect(m_pEllipseToolButton, SIGNAL(clicked()), m_pEllipseToolAction, SIGNAL(activated()));
 
-    m_pPointToolAction->setOn(false);
-    m_pLineToolAction->setOn(false);
+    m_pLineToolButton->setOn(false);
     m_pRectangleToolButton->setOn(false);
     m_pEllipseToolButton->setOn(true);
+    m_pTextToolAction->setOn(false);
     m_pFillToolAction->setOn(false);
     m_pEraseToolAction->setOn(false);
 }
@@ -377,10 +401,26 @@ void DrawPad::setFilledEllipseTool()
     disconnect(m_pEllipseToolButton, SIGNAL(clicked()), 0, 0);
     connect(m_pEllipseToolButton, SIGNAL(clicked()), m_pFilledEllipseToolAction, SIGNAL(activated()));
 
-    m_pPointToolAction->setOn(false);
-    m_pLineToolAction->setOn(false);
+    m_pLineToolButton->setOn(false);
     m_pRectangleToolButton->setOn(false);
     m_pEllipseToolButton->setOn(true);
+    m_pTextToolAction->setOn(false);
+    m_pFillToolAction->setOn(false);
+    m_pEraseToolAction->setOn(false);
+}
+
+void DrawPad::setTextTool()
+{
+    if (m_pTool) {
+        delete m_pTool;
+    }
+
+    m_pTool = new TextTool(this, m_pDrawPadCanvas);
+
+    m_pLineToolButton->setOn(false);
+    m_pRectangleToolButton->setOn(false);
+    m_pEllipseToolButton->setOn(false);
+    m_pTextToolAction->setOn(true);
     m_pFillToolAction->setOn(false);
     m_pEraseToolAction->setOn(false);
 }
@@ -393,10 +433,10 @@ void DrawPad::setFillTool()
 
     m_pTool = new FillTool(this, m_pDrawPadCanvas);
 
-    m_pPointToolAction->setOn(false);
-    m_pLineToolAction->setOn(false);
+    m_pLineToolButton->setOn(false);
     m_pRectangleToolButton->setOn(false);
     m_pEllipseToolButton->setOn(false);
+    m_pTextToolAction->setOn(false);
     m_pFillToolAction->setOn(true);
     m_pEraseToolAction->setOn(false);
 }
@@ -409,10 +449,10 @@ void DrawPad::setEraseTool()
 
     m_pTool = new EraseTool(this, m_pDrawPadCanvas);
 
-    m_pPointToolAction->setOn(false);
-    m_pLineToolAction->setOn(false);
+    m_pLineToolButton->setOn(false);
     m_pRectangleToolButton->setOn(false);
     m_pEllipseToolButton->setOn(false);
+    m_pTextToolAction->setOn(false);
     m_pFillToolAction->setOn(false);
     m_pEraseToolAction->setOn(true);
 }

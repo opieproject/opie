@@ -48,6 +48,8 @@ public:
     uint pagePosition();
     uint pageCount();
 
+    void backupPage();
+
 public slots:
     void deleteAll();
     void newPage();

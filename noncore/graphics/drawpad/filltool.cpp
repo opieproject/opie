@@ -42,6 +42,8 @@ void FillTool::mousePressEvent(QMouseEvent* e)
 
         m_pDrawPadCanvas->currentPage()->convertFromImage(m_image);
         m_pDrawPadCanvas->viewport()->update();
+
+        m_pDrawPadCanvas->backupPage();
     }
 }
 

@@ -16,6 +16,7 @@ HEADERS		= colordialog.h \
 		  pointtool.h \
 		  rectangletool.h \
 		  shapetool.h \
+		  texttool.h \
 		  tool.h
 SOURCES		= colordialog.cpp \
 		  colorpanel.cpp \
@@ -34,6 +35,7 @@ SOURCES		= colordialog.cpp \
 		  pointtool.cpp \
 		  rectangletool.cpp \
 		  shapetool.cpp \
+		  texttool.cpp \
 		  tool.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include \
 		  $(QTDIR)/src/3rdparty/zlib
