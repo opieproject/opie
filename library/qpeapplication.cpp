@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.29 2002-11-30 16:46:36 sandman Exp $
+** $Id: qpeapplication.cpp,v 1.30 2002-12-03 22:51:55 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -993,7 +993,7 @@ void QPEApplication::applyStyle()
 		fs = 10;
 	}
 	
-	setFont( QFont(ff, fs) );
+	setFont ( QFont ( ff, fs ), true );
 	
 	// revert to global blocking policy ...
 	opie_block_style = config. readBoolEntry ( "ForceStyle", false ) ? 0xff : 0x00;
