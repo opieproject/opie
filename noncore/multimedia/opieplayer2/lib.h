@@ -90,6 +90,7 @@ namespace XINE {
         int currentPosition()/*const*/;
         //in seconds
         int currentTime()/*const*/;
+
         int length() /*const*/;
 
         bool isSeekable()/*const*/;
@@ -172,7 +173,9 @@ namespace XINE {
         int error() /*const*/;
 
     signals:
+
         void stopped();
+
     private:
         int m_bytes_per_pixel;
         int m_length,  m_pos,  m_time;

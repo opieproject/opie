@@ -439,7 +439,7 @@ static int null_gui_data_exchange( xine_vo_driver_t* self,
   return 0;
 }
 
-static void null_exit( xine_vo_driver_t* self ){
+static void null_dispose ( xine_vo_driver_t* self ){
   null_driver_t* this = (null_driver_t*)self;
   free ( this );
 }
@@ -478,7 +478,7 @@ xine_vo_driver_t* init_video_out_plugin( config_values_t* conf,
   vo->vo_driver.set_property          = null_set_property;
   vo->vo_driver.get_property_min_max  = null_get_property_min_max;
   vo->vo_driver.gui_data_exchange     = null_gui_data_exchange;
-  vo->vo_driver.exit                  = null_exit;
+  vo->vo_driver.dispose               = null_dispose;
   vo->vo_driver.redraw_needed         = null_redraw_needed;
     
 
@@ -490,9 +490,9 @@ xine_vo_driver_t* init_video_out_plugin( config_values_t* conf,
   return ( xine_vo_driver_t*) vo;
 }
 
+#if 0
 static vo_info_t vo_info_null = {
   5,
-  "null plugin",
   XINE_VISUAL_TYPE_FB
 };
 
@@ -500,6 +500,8 @@ vo_info_t *get_video_out_plugin_info(){
   vo_info_null.description = _("xine video output plugin using null device");
   return &vo_info_null;
 }
+
+#endif
 
 /* this is special for this device */
 /**

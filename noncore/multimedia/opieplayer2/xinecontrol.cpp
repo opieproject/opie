@@ -79,6 +79,8 @@ void XineControl::play( const QString& fileName ) {
 
     if ( !libXine->play( fileName ) ) {
         QMessageBox::warning( 0l , tr( "Failure" ), getErrorCode() );
+        // toggle stop so the the play button is reset
+        mediaPlayerState->setPlaying( false );
         return;
     }
     mediaPlayerState->setPlaying( true );
@@ -225,10 +227,19 @@ QString XineControl::getMetaInfo() {
 }
 
 QString XineControl::getErrorCode() {
+
     int errorCode = libXine->error();
+
+    qDebug( QString("ERRORCODE: %1 ").arg(errorCode) );
 
     if ( errorCode == 1 ) {
         return tr( "No input plugin found for this media type" );
+    } else if ( errorCode == 2 ) {
+         return tr( "No demux plugin found for this media type" );
+    } else if ( errorCode == 3 ) {
+        return tr( "Demuxing failed for this media type" );
+    } else if ( errorCode == 4 ) {
+        return tr( "Malformed MRL" );
     } else {
         return tr( "Some other error" );
     }

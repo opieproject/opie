@@ -201,7 +201,8 @@ bool Lib::isSeekable() {
 
 void Lib::seekTo( int time ) {
     //xine_trick_mode ( m_stream, XINE_TRICK_MODE_SEEK_TO_TIME, time ); NOT IMPLEMENTED YET IN XINE :_(
-    xine_play( m_stream, 0, time );
+    // since its now milliseconds we need *1000
+    xine_play( m_stream, 0, time*1000 );
 }
 
 
