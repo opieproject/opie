@@ -19,7 +19,7 @@
 
 #include <qpe/qpetoolbar.h>
 #include <qmenubar.h>
-#include <opie/colorpopupmenu.h>
+//#include <opie2/colorpopupmenu.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 
@@ -76,12 +76,12 @@ Bartender::Bartender( QWidget* parent,  const char* name, WFlags fl )
     fileMenu->insertItem(tr("Open Drink"));
     fileMenu->insertItem(tr("Find by Drink Name"));
     fileMenu->insertItem(tr("Find by Alcohol"));
-    
+
     QPopupMenu *editMenu;
     editMenu = new QPopupMenu( this);
     menuBar->insertItem( tr("Edit"), editMenu );
     editMenu->insertItem(tr("edit"));
-    
+
     connect( fileMenu, SIGNAL( activated(int) ), this, SLOT( fileMenuActivated(int) ));
     connect( editMenu, SIGNAL( activated(int) ), this, SLOT( editMenuActivated(int) ));
 
@@ -105,10 +105,10 @@ Bartender::Bartender( QWidget* parent,  const char* name, WFlags fl )
     QPushButton *t;
     t= new QPushButton( "BAC", ToolBar1, "bacButtin");
     connect( t, SIGNAL( clicked() ), this, SLOT( doBac() ) );
-    
+
     DrinkView = new QListView( this, "DrinkView" );
     DrinkView->addColumn( tr( "Name of Drink" ) );
-//    DrinkView->setRootIsDecorated( TRUE ); 
+//    DrinkView->setRootIsDecorated( TRUE );
     DrinkView->header()->hide();
 
     QPEApplication::setStylusOperation( DrinkView->viewport(),QPEApplication::RightOnHold);
@@ -186,10 +186,10 @@ void Bartender::fileNew() {
         dbFile.writeBlock( newDrink.latin1(), newDrink.length());
         clearList();
         dbFile.close();
-        
+
         initDrinkDb();
     }
-    delete newDrinks;   
+    delete newDrinks;
 }
 
 void Bartender::showDrink(int mouse, QListViewItem * item, const QPoint&, int) {
@@ -210,7 +210,7 @@ void Bartender::showDrink( QListViewItem *item) {
     QString myDrink=item->text(0);
     showDrinks = new Show_Drink(this, myDrink, TRUE);
     QTextStream t( &dbFile);
-    
+
     QString s, s2;
     while ( !t.eof()) {
         s = t.readLine();
@@ -275,7 +275,7 @@ void Bartender::doSearchByDrink() {
 //    if( DrinkView->currentItem() == NULL) return;
     QStringList searchList;
     QString searchForDrinkName, lastDrinkName, tempName;
-    
+
     InputDialog *fileDlg;
     fileDlg = new InputDialog(this,tr("Find by Alcohol"),TRUE, 0);
     fileDlg->exec();
@@ -284,12 +284,12 @@ void Bartender::doSearchByDrink() {
 
         dbFile.at(0);
         QTextStream t( &dbFile);
-    
+
         QString s, s2;
         while ( !t.eof()) {
             s = t.readLine();
             if(s.find("#",0,TRUE) != -1) {
-                lastDrinkName=s.right(s.length()-2);    
+                lastDrinkName=s.right(s.length()-2);
 //                qDebug("last drink name "+lastDrinkName);
             }
             else if( s.find( searchForDrinkName ,0, FALSE) != -1 && lastDrinkName != tempName ) {
@@ -313,7 +313,7 @@ void Bartender::showSearchResult(QStringList &searchList) {
     Search_Results *searchDlg;
 
     searchList.sort();
-        
+
     searchDlg = new Search_Results(this, "Search Results", TRUE);
     searchDlg->ListBox1->insertStringList( searchList,-1);
     QPEApplication::execDialog( searchDlg );
@@ -375,7 +375,7 @@ void Bartender::doEdit() {
         }
         int fd = dbFile.handle();
         lseek( fd, foundAt, SEEK_SET);
-        
+
 //        dbFile.at( foundAt);
 #warning FIXME problems with editing drinks db
         ////////// FIXME write to user file
@@ -384,9 +384,9 @@ void Bartender::doEdit() {
         qDebug("writing "+newDrink);
         dbFile.writeBlock( newDrink.latin1(), newDrink.length());
         clearList();
-        
+
         dbFile.flush();
-        
+
         initDrinkDb();
     }
 }
@@ -424,7 +424,7 @@ void Bartender::fileMenuActivated( int item) {
           doSearchByDrink();
 
           break;
-          
+
     }
 }
 
@@ -435,9 +435,9 @@ void Bartender::editMenuActivated(int item) {
       */
     switch(item) {
       case -8:
-          doEdit() ;          
+          doEdit() ;
           break;
-          
+
     }
 }
 

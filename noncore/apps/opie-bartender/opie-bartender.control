@@ -5,6 +5,6 @@ Section: opie/applications
 Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: qpe-base ($QPE_VERSION)
+Depends: task-opie-minimal
 Description: Bartender drink receipe database lookup, and
-blood alcohol estimator.
+ blood alcohol estimator.
