@@ -56,7 +56,7 @@ NONCORESETTINGS  =noncore/settings/language noncore/settings/rotation \
 	noncore/settings/appearance2 noncore/settings/sound \
 	noncore/settings/mediummount \
 	noncore/settings/tabmanager noncore/settings/appskey \
-	noncore/settings/netsystemtime noncore/settings/wlansetup \
+	noncore/settings/netsystemtime \
 	noncore/settings/sshkeys noncore/settings/usermanager \
 	noncore/settings/backup
 
