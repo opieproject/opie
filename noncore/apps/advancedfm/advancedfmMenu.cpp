@@ -38,12 +38,14 @@
 #include <qlineedit.h>
 #include <qlistview.h>
 
+#include <errno.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <dirent.h>
 #include <sys/sendfile.h>
 #include <fcntl.h>
+
 
 void AdvancedFm::doDirChange()
 {
@@ -170,89 +172,85 @@ void AdvancedFm::makeDir()
 
 void AdvancedFm::doDelete()
 {
-
-  QStringList curFileList = getPath();
-  bool doMsg=true;
-  int count = curFileList.count();
-  if( count > 0)
-    {
-      if(count > 1 )
-        {
-          QString msg;
-          msg=tr("Really delete\n%1 files?").arg(count);
-          switch ( QMessageBox::warning(this,tr("Delete"),msg
-                                        ,tr("Yes"),tr("No"),0,0,1) )
-            {
-            case 0:
-                doMsg=false;
-                break;
-            case 1:
-                return;
-                break;
-          };
+   QStringList curFileList = getPath();
+   bool doMsg=true;
+   int count = curFileList.count();
+   if( count > 0)  {
+      if(count > 1 ) {
+         QString msg;
+         msg=tr("Really delete\n%1 files?").arg(count);
+         switch ( QMessageBox::warning(this,tr("Delete"),msg
+                                       ,tr("Yes"),tr("No"),0,0,1) )
+         {
+         case 0:
+            doMsg=false;
+            break;
+         case 1:
+            return;
+            break;
+         };
       }
 
       QString myFile;
-    for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it )
-      {
-      myFile = (*it);
-      if( myFile.find(" -> ",0,TRUE) != -1)
-        myFile = myFile.left( myFile.find(" -> ",0,TRUE));
 
-      QString f = CurrentDir()->canonicalPath();
-      if(f.right(1).find("/",0,TRUE) == -1)
-        f += "/";
-      f += myFile;
-      if(QDir(f).exists() && !QFileInfo(f).isSymLink() ) //if file is a directory
-        {
-        switch ( QMessageBox::warning( this, tr("Delete Directory?"), 
-					tr("Really delete %1\nand all it's contents ?" ).arg( f ) ,
-					tr("Yes"),
-					tr("No"),
-					0,
-					0,
-					1) )
-          {
-        case 0:
-        {
-          f=f.left(f.length()-1);
-          QString cmd="rm -rf "+f;
-          startProcess( (const QString)cmd.latin1() );
-          populateView();
-        }
-          break;
-        case 1:
-          // exit
-          break;
-        };
+      for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+         myFile = (*it);
+         if( myFile.find(" -> ",0,TRUE) != -1)
+            myFile = myFile.left( myFile.find(" -> ",0,TRUE));
 
-      } else {
-          if(doMsg) {
-        switch ( QMessageBox::warning(this,tr("Delete"),
-					tr("Really delete\n%1?").arg( f ),
-				 tr("Yes"),
-				 tr("No"),
-				 0,
-				 0,
-				 1) ) {
-          case 1:
-              return;
-              break;
-        };
-          }
-        QString cmd="rm "+f;
-        QFile file(f);
-        if(QFileInfo(myFile).fileName().find("../",0,TRUE)==-1) {
-            qDebug("remove link files "+f);
-//             AppLnk lnk(f);
-//             qDebug(lnk.linkFile());
-//             lnk.removeLinkFile();
-           file.remove();
-        }
+         QString f = CurrentDir()->canonicalPath();
+         if(f.right(1).find("/",0,TRUE) == -1)
+            f += "/";
+         f += myFile;
+         if(QDir(f).exists() && !QFileInfo(f).isSymLink() ) {
+            //if file is a directory
+
+            switch ( QMessageBox::warning( this, tr("Delete Directory?"), 
+                                           tr("Really delete %1\nand all it's contents ?" ).arg( f ) ,
+                                           tr("Yes"), tr("No"), 0, 0, 1) ) {
+            case 0:
+            {
+               f=f.left(f.length()-1);
+               QString cmd="rm -rf "+f;
+               startProcess( (const QString)cmd.latin1() );
+               populateView();
+            }
+            break;
+            case 1:
+               // exit
+               break;
+            };
+
+         } else {
+            if(doMsg) {
+               switch ( QMessageBox::warning(this,tr("Delete"),
+                                             tr("Really delete\n%1?").arg( myFile ),
+                                             tr("Yes"), tr("No"), 0, 0, 1) ) {
+               case 1:
+                  return;
+                  break;
+               };
+            }
+      
+            QString cmd="rm "+f;
+            QFile file(f);
+            QFileInfo fi(myFile);
+            if( fi.fileName().find("../",0,TRUE)==-1) {
+               qDebug("remove link files "+myFile);
+               
+//               DocLnk lnk(f);
+                 DocLnk *lnk;
+                 lnk = new DocLnk(f);
+                 qDebug("Deleting doclnk " + lnk->linkFile());
+                 if(lnk->isValid())
+                    lnk->removeLinkFile();
+               // delete lnk;
+               file.remove();
+            }
+         }
       }
-    }
-  }
-  populateView();
+   }
+   populateView();
 }
 
 void AdvancedFm::filePerms()
@@ -367,8 +365,7 @@ void AdvancedFm::copy()
             f.remove();
           }
 
-        if( !copyFile( curFile, destFile) )
-          {
+        if( !copyFile( curFile, destFile) )  {
             QMessageBox::message("AdvancedFm",
                                  tr( "Could not copy %1 to %2").arg( curFile ).arg( destFile ) );
             return;
@@ -420,8 +417,7 @@ void AdvancedFm::copyAs()
                   break;
                 };
             }
-          if( !copyFile( curFile, destFile) )
-            {
+          if( !copyFile( curFile, destFile) ) {
               QMessageBox::message("AdvancedFm",tr("Could not copy\n")
                                    +curFile +tr("to\n")+destFile);
               return;
@@ -473,8 +469,7 @@ void AdvancedFm::copySameDir()
                 break;
               };
             }
-          if(!copyFile( curFile,destFile) )
-            {
+          if(!copyFile( curFile,destFile) )  {
               QMessageBox::message("AdvancedFm",tr("Could not copy\n")
                                    +curFile +tr("to\n")+destFile);
               return;
@@ -516,8 +511,7 @@ void AdvancedFm::move()
 
           QFile f( curFile);
           if( f.exists()) {
-            if( !copyFile(  curFile, destFile) )
-              {
+            if( !copyFile(  curFile, destFile) )  {
                 QMessageBox::message(tr("Note"),tr("Could not move\n")+curFile);
                 return;
               } else
@@ -533,25 +527,39 @@ void AdvancedFm::move()
 
 bool AdvancedFm::copyFile( const QString & src, const QString & dest )
 {
-//    char bf[ 50000 ];
-//    int  bytesRead;
    bool success = true;
    struct stat status;
-
-//    QFile s( src );
-//    QFile d( dest );
-
+   QFile srcFile(src);
+   QFile destFile(dest);
+   int err=0;   
    int read_fd=0;
    int write_fd=0;
    struct stat stat_buf;
    off_t offset = 0;
-   read_fd = ::open(src.latin1(), O_RDONLY);
+      if(!srcFile.open( IO_ReadOnly|IO_Raw)) {
+         qWarning("open failed");
+         return success = false;
+   }
+   read_fd = srcFile.handle();
    if(read_fd != -1) {
       fstat (read_fd, &stat_buf);
-      write_fd = ::open(dest.latin1(), O_WRONLY | O_CREAT, stat_buf.st_mode);
+      if( !destFile.open( IO_WriteOnly|IO_Raw ) ) {
+       qWarning("destfile open failed");
+       return success = false;
+      }
+      write_fd = destFile.handle(); 
       if(write_fd != -1) {
-         if(sendfile(write_fd, read_fd, &offset, stat_buf.st_size) == -1) {
-            success = false;
+         err =sendfile(write_fd, read_fd, &offset, stat_buf.st_size);
+           if( err == -1) {
+              QString msg;
+              switch(err) {
+              case EBADF : msg = "The input file was not opened for reading or the output file was not opened for writing. ";
+              case EINVAL: msg = "Descriptor is not valid or locked. ";
+              case ENOMEM: msg = "Insufficient memory to read from in_fd.";
+              case EIO: msg = "Unspecified error while reading from in_fd.";
+              };
+              success = false;
+              qWarning(msg);
          }
       } else {
          success = false;
@@ -559,34 +567,10 @@ bool AdvancedFm::copyFile( const QString & src, const QString & dest )
    } else {
       success = false;
    }
-
-   ::close (read_fd);
-   ::close (write_fd);
-
-
-//    if( s.open( IO_ReadOnly | IO_Raw ) &&  d.open( IO_WriteOnly | IO_Raw ) )
-// {
-//    while( (bytesRead = s.readBlock( bf, sizeof( bf ) )) == sizeof( bf ) )
-//         {
-//         if( d.writeBlock( bf, sizeof( bf ) ) != sizeof( bf ) ){
-//           success = FALSE;
-//           break;
-//         }
-//       }
-//       if( success && (bytesRead > 0) )
-//         {
-//           d.writeBlock( bf, bytesRead );
-//         }
-
-//     }
-//   else
-//     {
-//       success = FALSE;
-//     }
-
+   srcFile.close();
+   destFile.close();
     // Set file permissions
-  if( stat( (const char *) src, &status ) == 0 )
-    {
+  if( stat( (const char *) src, &status ) == 0 )  {
       chmod( (const char *) dest, status.st_mode );
     }
 
@@ -712,30 +696,23 @@ void AdvancedFm::mkSym()
 
 void AdvancedFm::doBeam()
 {
-  Ir ir;
-  if(!ir.supported())
-    {
-    }
-  else
-    {
+   Ir ir;
+   if(!ir.supported())  {
+   } else {
       QStringList curFileList = getPath();
-      if( curFileList.count() > 0)
-        {
-          for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it )
-            {
-
-              QString curFile =  CurrentDir()->canonicalPath()+"/"+(*it);
-              if( curFile.right(1) == "/")
-                {
-                  curFile = curFile.left( curFile.length() -1);
-                }
-              Ir *file = new Ir(this, "IR");
-              connect(file, SIGNAL(done(Ir*)), this, SLOT( fileBeamFinished( Ir * )));
-              file->send( curFile, curFile );
+      if( curFileList.count() > 0)  {
+         for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+            QString curFile = (*it);
+            QString curFilePath =  CurrentDir()->canonicalPath()+"/"+curFile;
+            if( curFilePath.right(1) == "/") {
+               curFilePath = curFilePath.left( curFilePath.length() -1);
             }
-        }
-    }
-
+            Ir *file = new Ir(this, "IR");
+            connect(file, SIGNAL(done(Ir*)), this, SLOT( fileBeamFinished( Ir * )));
+            file->send( curFilePath, curFile );
+         }
+      }
+   }
 }
 
 void AdvancedFm::fileBeamFinished( Ir *)
