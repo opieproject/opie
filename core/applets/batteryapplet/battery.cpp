@@ -21,6 +21,7 @@
 #include "batterystatus.h"
 
 #include <qpe/power.h>
+#include <qpe/applnk.h>
 
 #include <qpainter.h>
 #include <qtimer.h>
@@ -31,7 +32,7 @@ BatteryMeter::BatteryMeter( QWidget *parent )
 {
     ps = new PowerStatus;
     startTimer( 10000 );
-    setFixedHeight(12);
+    setFixedHeight( AppLnk::smallIconSize()  );
     chargeTimer = new QTimer( this );
     connect( chargeTimer, SIGNAL(timeout()), this, SLOT(chargeTimeout()) );
     timerEvent(0);
@@ -44,7 +45,7 @@ BatteryMeter::~BatteryMeter()
 
 QSize BatteryMeter::sizeHint() const
 {
-    return QSize(10,12);
+    return QSize(10, height() );
 }
 
 void BatteryMeter::mouseReleaseEvent( QMouseEvent *)
@@ -116,12 +117,12 @@ void BatteryMeter::paintEvent( QPaintEvent* )
 	lightc = c.light(160);
     }
 
-    int w = 6;
-    int h = height()-3;
+    int w = height() / 2 ;
+    int h = height() - 4;
     int pix = (percent * h) / 100;
-    int y2 = height() - 2;
+    int y2 = height() -2;
     int y = y2 - pix;
-    int x1 = (width() - w) / 2;
+    int x1 = (width() - w ) / 2;
 
     p.setPen(QColor(80,80,80));
     p.drawLine(x1+w/4,0,x1+w/4+w/2,0);
@@ -140,7 +141,7 @@ void BatteryMeter::paintEvent( QPaintEvent* )
     p.setPen( gray.dark(120) );
     DRAWUPPER(4);
 
-#define DRAW(i) { if ( Y(i) < y2 ) p.drawLine(i+x1,Y(i)+1,i+x1,y2); }
+#define DRAW(i) { if ( Y(i) < y2 ) p.drawLine(i+x1,Y(i)+1, i+x1,y2); }
     p.setPen( c );
     DRAW(1);
     DRAW(3);

@@ -23,6 +23,8 @@
 
 #include <opie/odevice.h>
 
+#include <qpe/applnk.h>
+
 #include <qcopchannel_qws.h>
 #include <qpainter.h>
 #include <qmessagebox.h>
@@ -46,8 +48,7 @@
 using namespace Opie;
 
 CardMonitor::CardMonitor(QWidget * parent):QWidget(parent),
-pm(Resource::
-   loadPixmap("cardmon/pcmcia"))
+                                           pm( Resource::loadPixmap("cardmon/pcmcia") )
 {
 
     QCopChannel *pcmciaChannel = new QCopChannel("QPE/Card", this);
@@ -64,7 +65,11 @@ pm(Resource::
     cardInPcmcia1 = FALSE;
     cardInSd = FALSE;
 
-    setFixedSize(pm.size());
+    setFocusPolicy( NoFocus );
+
+    setFixedWidth ( AppLnk::smallIconSize()  );
+    setFixedHeight ( AppLnk::smallIconSize()  );
+
     getStatusPcmcia(TRUE);
     getStatusSd(TRUE);
     repaint(FALSE);
@@ -335,7 +340,7 @@ void CardMonitor::paintEvent(QPaintEvent *)
     QPainter p(this);
 
     if ( cardInPcmcia0 || cardInPcmcia1 || cardInSd ) {
-	p.drawPixmap(0, 0, pm);
+	p.drawPixmap(0, 0, pm  );
 	show();
     } else {
 	//p.eraseRect(rect());

@@ -24,6 +24,7 @@
 
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/applnk.h>
 #include <qpe/config.h>
 #if ( defined Q_WS_QWS || defined(_WS_QWS_) ) && !defined(QT_NO_COP)
 #include <qpe/qcopenvelope_qws.h>
@@ -725,8 +726,8 @@ void VolumeControl::writeConfigEntry ( const char *entry, int val, eUpdate upd )
 VolumeApplet::VolumeApplet( QWidget *parent, const char *name )
     : QWidget( parent, name )
 {
-  setFixedHeight ( 18 );
-  setFixedWidth ( 14 );
+  setFixedWidth ( AppLnk::smallIconSize()  );
+  setFixedHeight ( AppLnk::smallIconSize() );
 
   m_pixmap = new QPixmap ( Resource::loadPixmap ( "volume" ));
   m_dialog = new VolumeControl ( this, true, this, "volumecontrol" );

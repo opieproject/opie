@@ -3,7 +3,7 @@
  *
  * ---------------------
  *
- * copyright   : (c) 2002 by Maximilian Reiss
+ * copyright   : (c) 2003 by Maximilian Reiss
  * email       : max.reiss@gmx.de
  * based on two apps by Devin Butterfield
  */
