@@ -276,7 +276,7 @@ void ODevice::init ( )
 		
 		if (( ib-> model & Model_iPAQ_H36xx ) == Model_iPAQ_H36xx ) {		
 			b. setKeycode ( ib-> code );
-			b. setUserText ( qApp-> translate ( "Button", ib-> utext ));
+			b. setUserText ( QObject::tr ( "Button", ib-> utext ));
 			b. setPixmap ( Resource::loadPixmap ( ib-> pix ));
 			b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( ib-> fpressedservice ), ib-> fpressedaction ));
 			b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( ib-> fheldservice ), ib-> fheldaction ));
@@ -634,7 +634,7 @@ void iPAQ::init ( )
 		
 		if (( ib-> model & d-> m_model ) == d-> m_model ) {		
 			b. setKeycode ( ib-> code );
-			b. setUserText ( qApp-> translate ( "Button", ib-> utext ));
+			b. setUserText ( QObject::tr ( "Button", ib-> utext ));
 			b. setPixmap ( Resource::loadPixmap ( ib-> pix ));
 			b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( ib-> fpressedservice ), ib-> fpressedaction ));
 			b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( ib-> fheldservice ), ib-> fheldaction ));
@@ -999,7 +999,7 @@ void Zaurus::init ( )
 		ODeviceButton b;
 		
 		b. setKeycode ( zb-> code );
-		b. setUserText ( qApp-> translate ( "Button", zb-> utext ));
+		b. setUserText ( QObject::tr ( "Button", zb-> utext ));
 		b. setPixmap ( Resource::loadPixmap ( zb-> pix ));
 		b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( zb-> fpressedservice ), zb-> fpressedaction ));
 		b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( zb-> fheldservice ), zb-> fheldaction ));
