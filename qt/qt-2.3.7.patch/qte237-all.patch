@@ -812,3 +812,14 @@
  
  inline QChar::QChar()
  {
+--- 2.3.7/src/tools/qcstring.h~gcc34-compliance	2004-04-27 20:21:48.000000000 +0200
++++ 2.3.7/src/tools/qcstring.h	2004-04-27 20:22:52.000000000 +0200
+@@ -119,7 +119,7 @@
+ //                   We want to keep source compatibility for 2.x
+ // ### TODO for 4.0: completely remove these and the cstr* functions
+ 
+-#if !defined(QT_GENUINE_STR)
++#if 0
+ 
+ #undef	strlen
+ #define strlen qstrlen
