@@ -11,6 +11,7 @@
 #include <qlistview.h>
 #include <qheader.h>
 #include <qlabel.h>
+#include <qtabwidget.h> // in order to disable the profiles tab
 
 #include <qmessagebox.h>
 
@@ -58,6 +59,10 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
   connect(setCurrentProfileButton, SIGNAL(clicked()), this, SLOT(changeProfile()));
 
   connect(newProfile, SIGNAL(textChanged(const QString&)), this, SLOT(newProfileChanged(const QString&)));
+
+  //FIXME: disable profiles for the moment:
+  tabWidget->setTabEnabled( tab, false );
+
   // Load connections.
   // /usr/local/kde/lib/libinterfaces.la
 #ifdef QWS
@@ -94,8 +99,9 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
 
   Config cfg("NetworkSetup");
   profiles = QStringList::split(" ", cfg.readEntry("Profiles", "All"));
-  for ( QStringList::Iterator it = profiles.begin(); it != profiles.end(); ++it)
-    profilesList->insertItem((*it));
+  for ( QStringList::Iterator it = profiles.begin();
+        it != profiles.end(); ++it)
+      profilesList->insertItem((*it));
   currentProfileLabel->setText(cfg.readEntry("CurrentProfile", "All"));
   advancedUserMode = cfg.readBoolEntry("AdvancedUserMode", false);
   scheme = cfg.readEntry("SchemeFile", DEFAULT_SCHEME);
