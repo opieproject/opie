@@ -228,6 +228,8 @@ int suspend ( int fix_rtc )
 
 	if ( log )	
 		fprintf ( log, "Setting RTC alarm to %d\n", alrt );
+
+	tzset ( );
 	
 	alr = *gmtime ( &alrt );
 
@@ -240,9 +242,17 @@ int suspend ( int fix_rtc )
 		error_msg_and_die ( 1, "/dev/misc/rtc" );	
 		
 	// get RTC time
+	memset ( &rtc, 0, sizeof ( struct tm ));
 	if ( ioctl ( fd, RTC_ALM_SET, &rtc ) < 0 )
 		error_msg_and_die ( 1, "ioctl RTC_RD_TIME" );		
 	rtct = mktime ( &rtc );
+
+	fprintf ( log, "System  time: %02d.%02d.%04d %02d:%02d:%02d DST: %d (TZ: %s, offset: %d)\n", sys. tm_mday, sys. tm_mon + 1, sys. tm_year + 1900, sys. tm_hour, sys. tm_min, sys. tm_sec, sys. tm_isdst, sys. tm_zone, sys. tm_gmtoff );
+	fprintf ( log, "RTC     time: %02d.%02d.%04d %02d:%02d:%02d DST: %d (TZ: %s, offset: %d)\n", rtc. tm_mday, rtc. tm_mon + 1, rtc. tm_year + 1900, rtc. tm_hour, rtc. tm_min, rtc. tm_sec, rtc. tm_isdst, rtc. tm_zone, rtc. tm_gmtoff );
+	fprintf ( log, "Wakeup  time: %02d.%02d.%04d %02d:%02d:%02d DST: %d (TZ: %s, offset: %d)\n", alr. tm_mday, alr. tm_mon + 1, alr. tm_year + 1900, alr. tm_hour, alr. tm_min, alr. tm_sec, alr. tm_isdst, alr. tm_zone, alr. tm_gmtoff );
+
+	fprintf ( log, "System/RTC diff: %d seconds\n", (  syst - rtct ) - sys. tm_gmtoff );
+
 
 	rtc_sys_diff = ( syst - rtct ) - sys. tm_gmtoff;
 	
