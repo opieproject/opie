@@ -58,15 +58,15 @@ tiden fra serveren </translation>
     </message>
     <message>
         <source>offset [s]</source>
-        <translation type="unfinished"></translation>
+        <translation>offset [s]</translation>
     </message>
     <message>
         <source>shift [s/h]</source>
-        <translation type="unfinished"></translation>
+        <translation>forskydning [s/t]</translation>
     </message>
     <message>
         <source> s/h</source>
-        <translation type="unfinished"></translation>
+        <translation> s/t</translation>
     </message>
     <message>
         <source>Get time from network</source>
@@ -82,7 +82,7 @@ tiden fra serveren </translation>
     </message>
     <message>
         <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup. &lt;br&gt; Rerun NTP?</source>
-        <translation type="unfinished"></translation>
+        <translation>Du bad om en pause på %1 minutter, men kun %2 minutter er gået siden sidste opslag. &lt;br&gt; Kør NTP igen?</translation>
     </message>
 </context>
 <context>
@@ -113,7 +113,7 @@ tiden fra serveren </translation>
     </message>
     <message>
         <source>Time Shift:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tids forskydning:</translation>
     </message>
     <message>
         <source>New Time:</source>
@@ -125,7 +125,7 @@ tiden fra serveren </translation>
     </message>
     <message>
         <source>Esimated Shift:</source>
-        <translation type="unfinished"></translation>
+        <translation>Beregnet forskydning:</translation>
     </message>
     <message>
         <source>Predicted Time:</source>
@@ -133,7 +133,7 @@ tiden fra serveren </translation>
     </message>
     <message>
         <source>Mean shift:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gennemsnitlig forskydning:</translation>
     </message>
     <message>
         <source>Set predicted time</source>

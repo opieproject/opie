@@ -27,11 +27,11 @@
     </message>
     <message>
         <source>Help Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Hjælpesøger</translation>
     </message>
     <message>
         <source>HelpBrowser</source>
-        <translation type="unfinished"></translation>
+        <translation>Hjælpesøger</translation>
     </message>
 </context>
 </TS>

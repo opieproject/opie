@@ -41,87 +41,87 @@
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation type="unfinished">Ny fra skabelon</translation>
+        <translation>Ny fra skabelon</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation type="unfinished">Ny opgave</translation>
+        <translation>Ny opgave</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation type="unfinished">Klik her for at oprette en ny opgave.</translation>
+        <translation>Klik her for at oprette en ny opgave.</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished">Rediger opgave</translation>
+        <translation>Rediger opgave</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation type="unfinished">Klik her for at redigere den valgte opgave.</translation>
+        <translation>Klik her for at redigere den valgte opgave.</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation type="unfinished">Vis opgave</translation>
+        <translation>Vis opgave</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation type="unfinished">Slet...</translation>
+        <translation>Slet...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation type="unfinished">Klik her for at fjerne den valgte opgave.</translation>
+        <translation>Klik her for at fjerne den valgte opgave.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation type="unfinished">Slet alle...</translation>
+        <translation>Slet alle...</translation>
     </message>
     <message>
         <source>Delete completed</source>
-        <translation type="unfinished">Slet afsluttede</translation>
+        <translation>Slet afsluttede</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished">Send</translation>
+        <translation>Send</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation type="unfinished">Klik her for at sende den valgte opgave til en anden enhed.</translation>
+        <translation>Klik her for at sende den valgte opgave til en anden enhed.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished">Find</translation>
+        <translation>Find</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
-        <translation type="unfinished">Vis afsluttede opgaver</translation>
+        <translation>Vis afsluttede opgaver</translation>
     </message>
     <message>
         <source>Show only over-due tasks</source>
-        <translation type="unfinished">Vis kun forfaldne opgaver</translation>
+        <translation>Vis kun forfaldne opgaver</translation>
     </message>
     <message>
         <source>Show task deadlines</source>
-        <translation type="unfinished">Vis opgave deadlines</translation>
+        <translation>Vis opgave deadlines</translation>
     </message>
     <message>
         <source>Show quick task bar</source>
-        <translation type="unfinished">Vis genvejspanel</translation>
+        <translation>Vis genvejspanel</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished">Data</translation>
+        <translation>Data</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished">Kategori</translation>
+        <translation>Kategori</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Valgmuligheder</translation>
+        <translation>Valgmuligheder</translation>
     </message>
     <message>
         <source>QuickEdit</source>
-        <translation type="unfinished"></translation>
+        <translation>Hurtig Redigering</translation>
     </message>
     <message>
         <source>This is a listing of all current tasks.
@@ -131,21 +131,21 @@ The list displays the following information:
 2. Priority - a graphical representation of task priority.  Double-click here to modify.
 3. Description - description of task.  Click here to select the task.
 4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
-        <translation type="unfinished">Dette er en liste over alle nuværende opgaver.
+        <translation>Dette er en liste over alle nuværende opgaver.
 
 Listen viser følgende information:
 1. Afsluttet - Et grønt hak indikerer at opgaven er afsluttet. Klik her for at afslutte en opgave.
-2. Prioritet - En grafisk repræsentation af opgavens prioritet. Dobbelt-klik her for at ændre.
+2. Prioritet - En grafisk repræsentation af opgavens prioritet. Dobbel-klik her for at ændre.
 3. Beskrivelse - Beskrivelse af opgaven. Klik her for at vælge opgaven.
 4. Deadline - Viser hvornår opgaven skal være afsluttet. Denne kolonne kan blive vist eller skjules ved at vælge Valgmuligheder-&gt;&apos;Vis opgave deadlines&apos; fra menuen ovenover.</translation>
     </message>
     <message>
         <source>All Categories</source>
-        <translation type="unfinished">Alle kategorier</translation>
+        <translation>Alle kategorier</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished">Ikke mere plads</translation>
+        <translation>Ikke mere plads</translation>
     </message>
     <message>
         <source>Todo was unable
@@ -154,7 +154,7 @@ Free up some space
 and try again.
 
 Quit Anyway?</source>
-        <translation type="unfinished">Opgaveliste kunne ikke
+        <translation>Opgaveliste kunne ikke
 gemme dine ændringer.
 Frigør noget lagerplads
 og prøv igen.
@@ -163,59 +163,59 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Todo</source>
-        <translation type="unfinished">Opgaveliste</translation>
+        <translation>Opgaveliste</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type="unfinished">Kan ikke redigere data da en synkronisering er igang</translation>
+        <translation>Kan ikke redigere data da en synkronisering er igang</translation>
     </message>
     <message>
         <source>all tasks?</source>
-        <translation type="unfinished">Alle opgaver?</translation>
+        <translation>Alle opgaver?</translation>
     </message>
     <message>
         <source>all completed tasks?</source>
-        <translation type="unfinished">Alle afsluttede opgaver?</translation>
+        <translation>Alle afsluttede opgaver?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished">Ikke-arkiverede</translation>
+        <translation>Ikke-arkiverede</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
-        <translation type="unfinished">&lt;P&gt;%1 nye opgaver er modtaget.&lt;p&gt;Vil du tilføje dem til din opgaveliste?</translation>
+        <translation>&lt;P&gt;%1 nye opgaver er modtaget.&lt;p&gt;Vil du tilføje dem til din opgaveliste?</translation>
     </message>
     <message>
         <source>New Tasks</source>
-        <translation type="unfinished">Nye opgaver</translation>
+        <translation>Nye opgaver</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished">Duplikere</translation>
+        <translation>Duplikere</translation>
     </message>
     <message>
         <source>C.</source>
-        <translation type="unfinished">C.</translation>
+        <translation>A.</translation>
     </message>
     <message>
         <source>Priority</source>
-        <translation type="unfinished">Prioritet</translation>
+        <translation>Prioritet</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Beskrivelse</translation>
+        <translation>Beskrivelse</translation>
     </message>
     <message>
         <source>Deadline</source>
-        <translation type="unfinished">Deadline</translation>
+        <translation>Deadline</translation>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation type="unfinished">Konfigurer skabeloner</translation>
+        <translation>Konfigurer skabeloner</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation type="unfinished">Prioritet:</translation>
+        <translation>Prioritet:</translation>
     </message>
 </context>
 <context>

@@ -21,7 +21,7 @@
     <name>ImageViewer</name>
     <message>
         <source>Image Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Billedviser</translation>
     </message>
     <message>
         <source>Open</source>
@@ -33,7 +33,7 @@
     </message>
     <message>
         <source>Slide show</source>
-        <translation type="unfinished"></translation>
+        <translation>Lysbilledshow</translation>
     </message>
     <message>
         <source>Preferences..</source>
@@ -45,11 +45,11 @@
     </message>
     <message>
         <source>Horizontal flip</source>
-        <translation type="unfinished"></translation>
+        <translation>Vandret spejling</translation>
     </message>
     <message>
         <source>Vertical flip</source>
-        <translation type="unfinished"></translation>
+        <translation>Lodret spejling</translation>
     </message>
     <message>
         <source>Open ...</source>
@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Stop Slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Stop lysbilledshow</translation>
     </message>
     <message>
         <source>File</source>
@@ -101,7 +101,7 @@
     </message>
     <message>
         <source> - Image Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation> - Billedviser</translation>
     </message>
     <message>
         <source>%1 colors</source>
@@ -128,7 +128,7 @@
     </message>
     <message>
         <source>Slide Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Lysbilledshow</translation>
     </message>
     <message>
         <source>Delay between pictures</source>
@@ -140,7 +140,7 @@
     </message>
     <message>
         <source>Repeat slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Gentag lysbilledshow</translation>
     </message>
     <message>
         <source>Show pictures in reverse</source>

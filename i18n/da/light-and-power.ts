@@ -3,7 +3,7 @@
     <name>Calibration</name>
     <message>
         <source>%1 Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 trin</translation>
     </message>
 </context>
 <context>
@@ -137,11 +137,11 @@
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Trin</translation>
     </message>
     <message>
         <source>Check interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrol interval</translation>
     </message>
     <message>
         <source> sec</source>

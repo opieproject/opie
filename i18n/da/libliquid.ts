@@ -3,66 +3,66 @@
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Liquid Stil</translation>
     </message>
     <message>
         <source>No translucency</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen gennemsigtighed</translation>
     </message>
     <message>
         <source>Stippled, background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Stiplet, baggrundsfarve</translation>
     </message>
     <message>
         <source>Stippled, button color</source>
-        <translation type="unfinished"></translation>
+        <translation>Stiplet, knap farve</translation>
     </message>
     <message>
         <source>Translucent stippled, background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Gennemsigtigt stiplet, baggrundsfarve</translation>
     </message>
     <message>
         <source>Translucent stippled, button color</source>
-        <translation type="unfinished"></translation>
+        <translation>Gennemsigtigt stiplet, knap farve</translation>
     </message>
     <message>
         <source>Custom translucency</source>
-        <translation type="unfinished"></translation>
+        <translation>Brugerdefineret gennemsigtighed</translation>
     </message>
     <message>
         <source>Menu color</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu farve</translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst farve</translation>
     </message>
     <message>
         <source>Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Uigennemsigtighed</translation>
     </message>
     <message>
         <source>Use shadowed menu text</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis menu tekst med skygge</translation>
     </message>
     <message>
         <source>Make toolbar buttons appear flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Flade knapper på værktøjslinien</translation>
     </message>
     <message>
         <source>Stipple contrast</source>
-        <translation type="unfinished"></translation>
+        <translation>Stiplet kontrast</translation>
     </message>
 </context>
 <context>
     <name>Styles</name>
     <message>
         <source>Liquid</source>
-        <translation type="unfinished"></translation>
+        <translation>Liquid</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation type="unfinished"></translation>
+        <translation>Høj ydelses Liquid stil af Mosfet</translation>
     </message>
 </context>
 </TS>

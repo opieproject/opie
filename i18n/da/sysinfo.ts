@@ -85,24 +85,25 @@ Klik og hold på et modul for at se yderligere information om modulet eller for 
     </message>
     <message>
         <source>Select a command here and then click the Send button to the right to send the command to module selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg en kommando her og klik på Send knappen til højre for at sende kommandoen til det valgte modul oven over.</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Send</translation>
+        <translation>Send</translation>
     </message>
     <message>
         <source>Click here to send the selected command to the module selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik her for at sende den valgte kommando til det valgte modul oven over.</translation>
     </message>
     <message>
         <source>This area shows detailed information about this module.</source>
-        <translation type="unfinished">Dette område viser detaljeret information om dette modul.</translation>
+        <translation>Dette område viser detaljeret information om dette modul.</translation>
     </message>
     <message>
         <source>You really want to execute
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du virkelig køre
+</translation>
     </message>
 </context>
 <context>
@@ -148,24 +149,25 @@ Klik og hold på en proces for at se yderligere information om processen eller f
     </message>
     <message>
         <source>Select a signal here and then click the Send button to the right to send to this process.</source>
-        <translation type="unfinished">Vælg et signal her og klik på Send-knappen til højre for at sende til denne proces.</translation>
+        <translation>Vælg et signal her og klik på Send-knappen til højre for at sende til denne proces.</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Send</translation>
+        <translation>Send</translation>
     </message>
     <message>
         <source>Click here to send the selected signal to this process.</source>
-        <translation type="unfinished">Klik her for at sende det valgte signal til denne proces.</translation>
+        <translation>Klik her for at sende det valgte signal til denne proces.</translation>
     </message>
     <message>
         <source>This area shows detailed information about this process.</source>
-        <translation type="unfinished">Dette område viser detaljeret information omkring denne proces.</translation>
+        <translation>Dette område viser detaljeret information omkring denne proces.</translation>
     </message>
     <message>
         <source>You really want to send
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du sende
+</translation>
     </message>
 </context>
 <context>
@@ -232,15 +234,15 @@ Klik og hold på en proces for at se yderligere information om processen eller f
     </message>
     <message>
         <source>RAM disk</source>
-        <translation type="unfinished"></translation>
+        <translation>RAM disk</translation>
     </message>
     <message>
         <source>RA</source>
-        <translation type="unfinished"></translation>
+        <translation>RA</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
-        <translation type="unfinished"></translation>
+        <translation>Denne graf repræsenterer hvor meget hukommelse der iøjeblikket er i brug af den midlertidige RAM disk.</translation>
     </message>
 </context>
 <context>

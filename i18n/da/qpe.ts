@@ -86,11 +86,11 @@ Genoplad venligst back-up batteriet.</translation>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>Starter</translation>
     </message>
     <message>
         <source> - Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation> - Starter</translation>
     </message>
     <message>
         <source>No application</source>
@@ -205,7 +205,7 @@ Disse muligheder er primært givet til brug under udvikling og test af Opie syst
     </message>
     <message>
         <source>Shutdown...</source>
-        <translation type="unfinished"></translation>
+        <translation>Luk ned...</translation>
     </message>
 </context>
 <context>

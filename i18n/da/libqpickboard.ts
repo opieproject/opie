@@ -3,7 +3,7 @@
     <name>InputMethods</name>
     <message>
         <source>Pickboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Pegeplade</translation>
     </message>
 </context>
 </TS>

@@ -27,11 +27,11 @@
     </message>
     <message>
         <source>Pickboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Pegeplade</translation>
     </message>
     <message>
         <source>Key Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Tast gentagelse</translation>
     </message>
     <message>
         <source>Colors</source>
@@ -58,7 +58,7 @@
     <name>InputMethods</name>
     <message>
         <source>Multikey</source>
-        <translation type="unfinished"></translation>
+        <translation>Multikey</translation>
     </message>
 </context>
 </TS>

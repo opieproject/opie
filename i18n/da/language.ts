@@ -18,7 +18,7 @@
     </message>
     <message>
         <source>Language Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprog indstillinger</translation>
     </message>
 </context>
 </TS>
