@@ -76,13 +76,13 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     buttonsAllPix=cfg.readEntry( "buttonsAllPix","opieplayer/mediaButtonsAll");
     buttonsBigPix=cfg.readEntry( "buttonsBigPix","opieplayer/mediaButtonsBig");
     controlsPix=cfg.readEntry( "controlsPix","opieplayer/mediaControls");
-    animatedPix=cfg.readEntry( "animatedPix", "opieplayer/animatedButton");
+//    animatedPix=cfg.readEntry( "animatedPix", "opieplayer/animatedButton");
 
     setBackgroundPixmap( Resource::loadPixmap( backgroundPix) );
     pixmaps[0] = new QPixmap( Resource::loadPixmap( buttonsAllPix ) );
     pixmaps[1] = new QPixmap( Resource::loadPixmap( buttonsBigPix ) );
     pixmaps[2] = new QPixmap( Resource::loadPixmap( controlsPix ) );
-    pixmaps[3] = new QPixmap( Resource::loadPixmap( animatedPix) );
+//    pixmaps[3] = new QPixmap( Resource::loadPixmap( animatedPix) );
 
     songInfo = new Ticker( this );
     songInfo->setFocusPolicy( QWidget::NoFocus );
@@ -120,7 +120,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
 
 AudioWidget::~AudioWidget() {
     mediaPlayerState->isStreaming = FALSE;
-    for ( int i = 0; i < 4; i++ )
+    for ( int i = 0; i < 3; i++ )
   delete pixmaps[i];
 }
 
@@ -220,12 +220,12 @@ void AudioWidget::timerEvent( QTimerEvent * ) {
     static int frame = 0;
     if ( !mediaPlayerState->paused() && audioButtons[ AudioPlay ].isDown ) {
   frame = frame >= 7 ? 0 : frame + 1;
-  int x = audioButtons[AudioPlay].xPos;
-  int y = audioButtons[AudioPlay].yPos;
-  QPainter p( this );
-  // Optimize to only draw the little bit of the changing images which is different
-  p.drawPixmap( x + 14, y +  8, *pixmaps[3], 32 * frame, 0, 32, 32 );
-  p.drawPixmap( x + 37, y + 37, *pixmaps[2], 18 * AudioPlay, 0, 6, 3 );
+//   int x = audioButtons[AudioPlay].xPos;
+//   int y = audioButtons[AudioPlay].yPos;
+//   QPainter p( this );
+//   // Optimize to only draw the little bit of the changing images which is different
+//   p.drawPixmap( x + 14, y +  8, *pixmaps[3], 32 * frame, 0, 32, 32 );
+//   p.drawPixmap( x + 37, y + 37, *pixmaps[2], 18 * AudioPlay, 0, 6, 3 );
     }
 }
 
