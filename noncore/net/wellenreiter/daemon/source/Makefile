@@ -1,8 +1,8 @@
-# $Id: Makefile,v 1.7 2002-12-27 16:57:37 mjm Exp $
+# $Id: Makefile,v 1.8 2003-02-09 19:16:30 mjm Exp $
 
 CPP		= g++
 CPPFLAGS	= -g -Wall  -pedantic -DDEBUG -I ../../
-LIBS		= -lpcap ../../libwellenreiter/source/libwellenreiter.a
+LIBS		= -lpthread -lpcap ../../libwellenreiter/source/libwellenreiter.a
 OBJ		= daemon.o
 
 .SUFFIXES:
