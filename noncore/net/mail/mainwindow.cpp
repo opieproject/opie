@@ -5,6 +5,7 @@
 #include <qlayout.h>
 
 #include <qpe/qpeapplication.h>
+#include <qpe/resource.h>
 
 #include "defines.h"
 #include "mainwindow.h"
@@ -81,6 +82,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     layout->addWidget( folderView );
 
     mailView = new QListView( view );
+    mailView->addColumn( tr( "Status" ) );
     mailView->addColumn( tr( "Subject" ),QListView::Manual );
     mailView->addColumn( tr( "Sender" ),QListView::Manual );
     mailView->addColumn( tr( "Date" ));
@@ -121,9 +123,10 @@ void MainWindow::slotAdjustColumns()
     folderView->setColumnWidth( 0, folderView->visibleWidth() );
     if ( hidden ) folderView->hide();
 
-    mailView->setColumnWidth( 0, mailView->visibleWidth() - 130 );
-    mailView->setColumnWidth( 1, 80 );
-    mailView->setColumnWidth( 2, 50 );
+    mailView->setColumnWidth( 0, 10 );
+    mailView->setColumnWidth( 1, mailView->visibleWidth() - 130 );
+    mailView->setColumnWidth( 2, 80 );
+    mailView->setColumnWidth( 3, 50 );
 }
 
 void MainWindow::slotShowFolders( bool show )
@@ -159,6 +162,7 @@ void MainWindow::displayMail(QListViewItem*item)
     readMail.setMail( mail );
     readMail.showMaximized();
     readMail.exec();
+    ( (MailListViewItem*)item )->setPixmap( 0, Resource::loadPixmap( "opiemail/kmmsgunseen") );
 }
 
 MailListViewItem::MailListViewItem(QListView * parent, MailListViewItem * after )
@@ -168,9 +172,14 @@ MailListViewItem::MailListViewItem(QListView * parent, MailListViewItem * after 
 
 void MailListViewItem::showEntry()
 {
-    setText(0,mail_data.getSubject());
-    setText(1,mail_data.getFrom());
-    setText(2,mail_data.getDate());
+    if ( mail_data.getFlags().testBit( FLAG_SEEN ) == true )  {
+        setPixmap( 0, Resource::loadPixmap( "opiemail/kmmsgunseen") );
+    } else  {
+        setPixmap( 0, Resource::loadPixmap( "opiemail/kmmsgnew") );
+    }
+    setText(1,mail_data.getSubject());
+    setText(2,mail_data.getFrom());
+    setText(3,mail_data.getDate());
 }
 
 void MailListViewItem::storeData(const RecMail&data)
