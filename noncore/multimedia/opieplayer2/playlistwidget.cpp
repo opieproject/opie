@@ -330,7 +330,7 @@ const DocLnk *PlayListWidget::current() { // this is fugly
           } else if ( d->setDocumentUsed && d->current ) {
               return d->current;
           } else {
-              return d->files->selected();
+              return &(d->files->selectedDocument());
           }
       }
       break;
@@ -648,8 +648,8 @@ void PlayListWidget::deletePlaylist() {
                                     (tr("You really want to delete\nthis playlist?")),
                                     (tr("Yes")), (tr("No")), 0 )){
   case 0: // Yes clicked,
-    QFile().remove(playLists->selected()->file());
-    QFile().remove(playLists->selected()->linkFile());
+    QFile().remove(playLists->selectedDocument().file());
+    QFile().remove(playLists->selectedDocument().linkFile());
     playLists->reread();
     break;
   case 1: // Cancel
@@ -1048,10 +1048,10 @@ int PlayListWidget::whichList() {
 
 QString PlayListWidget::currentFileListPathName() {
     switch (whichList()) {
-      case 1: 
+      case 1:
           return audioView->currentItem()->text(3);
           break;
-      case 2: 
+      case 2:
           return videoView->currentItem()->text(3);
           break;
     };
