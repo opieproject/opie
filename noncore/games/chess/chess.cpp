@@ -21,6 +21,8 @@
 
 // human is not offered a promotion yet
 
+#include <stdlib.h>
+
 #include <qcanvas.h>
 #include <qmainwindow.h>
 #include <qlist.h>
@@ -338,9 +340,9 @@ BoardView::BoardView(QCanvas *c, QWidget *w, const char *name)
     activePiece = 0;
     list.setAutoDelete(TRUE);
     setCanvas(new QCanvas());
-    Config c("Chess", Config::User);
-    c.setGroup("Theme");
-    QString theme = c.readEntry("imagefile", "simple-28");
+    Config conf("Chess", Config::User);
+    conf.setGroup("Theme");
+    QString theme = conf.readEntry("imagefile", "simple-28");
     setTheme(theme);
     crafty = new CraftyProcess(this);
     crafty->addArgument("crafty");
