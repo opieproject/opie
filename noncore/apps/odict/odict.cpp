@@ -22,7 +22,6 @@
 #include <qpopupmenu.h>
 #include <qmenubar.h>
 #include <qmessagebox.h>
-#include <qpe/config.h>
 #include <qhbox.h>
 #include <qvbox.h>
 #include <qlabel.h>
@@ -35,7 +34,7 @@
 #include <qcombobox.h>
 
 #include <qpe/resource.h>
-
+#include <qpe/config.h>
 
 ODict::ODict() : QMainWindow()
 {
@@ -63,7 +62,7 @@ ODict::ODict() : QMainWindow()
 
 	ding = new DingWidget();
 	ding->loadValues();
-	
+
 	loadConfig();
 	setCentralWidget( vbox );
 }
@@ -79,7 +78,6 @@ void ODict::loadConfig()
 	cfg.setGroup( "generalsettings" );
 	casesens = cfg.readEntry( "casesens" ).toInt();
 	regexp = cfg.readEntry( "regexp" ).toInt();
-	completewords = cfg.readEntry( "completewords" ).toInt();
 
 	QString lastDict = cfg.readEntry( "lastdict" );
 	int i = 0, e = 0;
@@ -109,6 +107,7 @@ void ODict::loadConfig()
 	 */
 
 	lookupLanguageNames( lastname );
+	ding->loadDict( lastname );
 
 	query_co->setCurrentItem( e );
 	top_name->setText( top_name_content );
@@ -129,14 +128,11 @@ void ODict::saveConfig()
 	cfg.setGroup( "generalsettings" );
 	cfg.writeEntry( "casesens" , casesens );
 	cfg.writeEntry( "regexp" , regexp );
-	cfg.writeEntry( "completewords" , completewords );
 	cfg.writeEntry( "lastdict" , query_co->currentText() );
 }
 
 void ODict::slotStartQuery()
 {
-	qDebug( "bin in slotStartQuery()" );
-	
 	QString querystring = query_le->text();
 	if ( !querystring.isEmpty() )
 	{
@@ -149,7 +145,7 @@ void ODict::slotStartQuery()
 						tr( "No dictionary defined" ),
 						tr( "&Define one" ), 
 						tr( "&Cancel" ),
-						0,      // Define a dict choosen
+						0,      // Define a dict
 						1 ) )   // Cancel choosen
 			{ 
 				case 0:
@@ -164,22 +160,8 @@ void ODict::slotStartQuery()
 		 * ok, the user has defined a dict
 		 */
 		ding->setCaseSensitive( casesens ); 
-		ding->setCompleteWord( completewords ); 
-
-		qDebug( "activated_name ist:" );
-		qDebug( activated_name );
-		
-		ding->setDict( activated_name );
-
-//X 		if ( activated_name != ding->loadedDict() )
-			ding->loadDict(activated_name);
 
 		BroswerContent test = ding->setText( querystring );
-
-		qDebug( querystring );
-		if ( ding->isCaseSensitive )
-			qDebug( "ist CS");
-		else qDebug( "kein CS" );
 
 		browser_top->setText( test.top );
 		browser_bottom->setText( test.bottom );
@@ -205,13 +187,6 @@ void ODict::slotSetParameter( int count )
 
  	if ( count == 1 )
 	{
-		if ( completewords )
-			completewords = false;
-		else
-			completewords = true;
-	}
- 	if ( count == 2 )
-	{
 		if ( regexp )
 			regexp = false;
 		else
@@ -226,8 +201,9 @@ void ODict::slotMethodChanged( const QString& methodnumber )
 	
 	qDebug( "activated_name in slotMethodChanged() ist:" );
 	qDebug( activated_name );
+	qDebug( ding->loadedDict() );
 	
-//X 	if ( activated_name != ding->loadedDict() )
+	if ( activated_name != ding->loadedDict() )
 	{
 		ding->loadDict(activated_name);
 		
@@ -250,7 +226,6 @@ void ODict::setupMenus()
 	parameter = new QPopupMenu( menu );
 	connect(  parameter, SIGNAL( activated( int ) ), this, SLOT( slotSetParameter( int ) ) );
 	parameter->insertItem( tr( "C&ase sensitive" ), 0 ,0 );
-	parameter->insertItem( tr( "Only &complete Words" ), 1 , 1) ;
 	parameter->insertItem( tr( "Allow &reg. expressions" ), 2 );
 	parameter->insertSeparator();
 	

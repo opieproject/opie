@@ -32,17 +32,14 @@ DingWidget::DingWidget( )
 
 void DingWidget::loadDict( QString name )
 {
-	qDebug( "bin in DingWidget::loadDict(). name ist:" );
-	qDebug( name );
+	lines.clear(); //as we will load a new list we have to
+	               //remove the old one
+	qDebug( "DingWidget::loadDict( ... )" );
 	
-	dictName = name;
 	Config cfg(  "odict" );
-	if ( !methodname ) { return; }
-	cfg.setGroup( "Method_" + methodname );
+	cfg.setGroup( "Method_" + name );
 	QFile file( cfg.readEntry( "file" )  );
 
-	qDebug( cfg.readEntry( "file" ) );
-	
 	if(  file.open(  IO_ReadOnly ) )
 	{
 		QTextStream stream(  &file );
@@ -53,7 +50,6 @@ void DingWidget::loadDict( QString name )
 		file.close();
 	}
 	loadValues();
-
 }
 
 QString DingWidget::loadedDict() const
@@ -69,11 +65,6 @@ void DingWidget::setCaseSensitive( bool caseS )
 void DingWidget::setDict( QString dict )
 {
 	methodname = dict;
-}
-
-void DingWidget::setCompleteWord( bool cword )
-{
-	isCompleteWord = cword;
 }
 
 void DingWidget::setQueryWord( QString qword )
@@ -101,15 +92,11 @@ BroswerContent DingWidget::setText( QString word )
 
 BroswerContent DingWidget::parseInfo()
 {
-	qDebug( "bin in DingWidget::parseInfo()" );
-
-	if ( isCompleteWord ) 
-		queryword = " " + queryword + " ";
 	QStringList search = lines.grep( queryword , isCaseSensitive );
 
- 	QString current;
- 	QString left;
- 	QString right;
+	QString current;
+	QString left;
+	QString right;
 	QRegExp reg_div( trenner );
 	QRegExp reg_word( queryword );
 	reg_word.setCaseSensitive( isCaseSensitive );
@@ -139,6 +126,7 @@ BroswerContent DingWidget::parseInfo()
 
 	s_strings.top = toplist.join( "<br>" );
 	s_strings.bottom = bottomlist.join( "<br>" );
-
+	
 	return s_strings;
 }
+
