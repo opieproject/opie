@@ -1,11 +1,3 @@
-Shall we write what the plans are here? 
-Ok I'll do
-
-I think we sould take the TE* stuff from embeddedconsole and use them for the
-TE here. TE isn't going to be easy starting from scratch. If nobody is doing 
-TE yet, i'll try to port that stuff over here. -hash
-ibotty is doing it.
-
 From a UNIX point of view we want to do something like minicom
 with a better GUI.
 It should feature some terminal emulation vt100/102, ansi,
@@ -26,7 +18,7 @@ Saving and Restoring Profiles
 
 TASKS in progress:
 Profile->Session and MainWidget --- Harlekin
-FilesendingLayer - hash
+FilesendingLayer & UI - hash
 IOLayer - wazlaf
 Configuration - josef
 TE - ibotty
@@ -37,4 +29,3 @@ Scripting - wazlaf
 Keys - open
 IRDA-Layer - open
 Bluetooth-Layer - open
-FilesendingUI - open
