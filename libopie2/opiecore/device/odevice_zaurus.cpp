@@ -516,16 +516,29 @@ bool Zaurus::suspend()
 
 Transformation Zaurus::rotation() const
 {
+    qDebug( "Zaurus::rotation()" );
     Transformation rot;
 
     switch ( d->m_model ) {
         case Model_Zaurus_SLC3000: // fallthrough
-        case Model_Zaurus_SLC7x0: {
-                OHingeStatus hs = readHingeSensor();
+        case Model_Zaurus_SLC7x0:
+        {
+            OHingeStatus hs = readHingeSensor();
+            qDebug( "Zaurus::rotation() - hinge sensor = %d", (int) hs );
+
+            if ( m_embedix )
+            {
                 if ( hs == CASE_PORTRAIT ) rot = Rot0;
                 else if ( hs == CASE_UNKNOWN ) rot = Rot0;
                 else rot = Rot270;
             }
+            else
+            {
+                if ( hs == CASE_PORTRAIT ) rot = Rot270;
+                else if ( hs == CASE_UNKNOWN ) rot = Rot0;
+                else rot = Rot0;
+            }
+        }
             break;
         case Model_Zaurus_SL6000:
         case Model_Zaurus_SLB600:
