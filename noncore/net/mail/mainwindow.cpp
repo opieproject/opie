@@ -6,6 +6,7 @@
 
 #include "defines.h"
 #include "mainwindow.h"
+#include "viewmail.h"
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     : QMainWindow( parent, name, flags )
@@ -138,7 +139,12 @@ void MainWindow::displayMail(QListViewItem*item)
     RecMail mail = ((MailListViewItem*)item)->data();
     QString body = folderView->fetchBody(mail);
 
-    qDebug(body);
+    ViewMail readMail( this );
+    readMail.setMailInfo( mail.getFrom(), "", mail.getSubject(), "", "", body );
+    readMail.showMaximized();
+    readMail.exec();
+
+    qDebug(body );
 }
 
 void MailListViewItem::showEntry()

@@ -8,6 +8,8 @@ HEADERS	     = defines.h \
                composemail.h \
 	           accountview.h \
 	           mainwindow.h \
+		viewmail.h \
+		viewmailbase.h \
 	           opiemail.h \
 				imapwrapper.h
                
@@ -21,6 +23,8 @@ SOURCES	     = main.cpp \
                addresspicker.cpp \
                editaccounts.cpp \
                logindialog.cpp \
+		viewmail.cpp \
+		viewmailbase.cpp \
                settings.cpp 
                
 INTERFACES	 = editaccountsui.ui \
