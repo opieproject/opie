@@ -8,7 +8,8 @@ HEADERS     = oapplication.h            \
               oglobalsettings.h         \
               oprocess.h                \
               oprocctrl.h               \
-              ostorageinfo.h
+              ostorageinfo.h            \
+              xmltree.h
 
 SOURCES     = oapplication.cpp          \
               oconfig.cpp               \
@@ -17,7 +18,8 @@ SOURCES     = oapplication.cpp          \
               oglobalsettings.cpp       \
               oprocess.cpp              \
               oprocctrl.cpp             \
-              ostorageinfo.cpp
+              ostorageinfo.cpp          \
+              xmltree.cc
 
 include ( device/device.pro )
 
