@@ -116,7 +116,7 @@ static uint32_t null_get_capabilities( vo_driver_t *self ){
 static void null_frame_copy (vo_frame_t *vo_img, uint8_t **src) {
   opie_frame_t  *frame = (opie_frame_t *) vo_img ;
  
-  vo_img->copy_called = 1;
+  vo_img->proc_called = 1;
 
   if (!frame->output->m_show_video) { 
     /* printf("nullvideo: no video\n");  */
@@ -186,7 +186,7 @@ static vo_frame_t* null_alloc_frame( vo_driver_t* self ){
   
   /* initialize the frame*/
   frame->frame.driver = self;
-  frame->frame.copy = null_frame_copy;
+  frame->frame.proc_slice = null_frame_copy;
   frame->frame.field = null_frame_field;
   frame->frame.dispose = null_frame_dispose;
   
@@ -200,7 +200,7 @@ static vo_frame_t* null_alloc_frame( vo_driver_t* self ){
 
 static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
               uint32_t width, uint32_t height,
-              int ratio_code,  int format, int flags ){
+              double ratio_code,  int format, int flags ){
   null_driver_t* this = (null_driver_t*) self;
   opie_frame_t*  frame = (opie_frame_t*)img;
   /* not needed now */
@@ -215,7 +215,7 @@ static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
 
   if ((width != frame->sc.delivered_width)
       || (height != frame->sc.delivered_height)
-      || (ratio_code != frame->sc.delivered_ratio_code)
+      || (ratio_code != frame->sc.delivered_ratio)
       || (flags != frame->flags)
       || (format != frame->format)
       || (this->sc.user_ratio != frame->sc.user_ratio)
@@ -224,7 +224,7 @@ static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
 
     frame->sc.delivered_width      = width;
     frame->sc.delivered_height     = height;
-    frame->sc.delivered_ratio_code = ratio_code;
+    frame->sc.delivered_ratio      = ratio_code;
     frame->flags                   = flags;
     frame->format                  = format;
     frame->sc.user_ratio           = this->sc.user_ratio;
@@ -355,7 +355,7 @@ static void null_display_frame( vo_driver_t* self, vo_frame_t *frame_gen ){
          frame->bytes_per_line );
   }
   
-  frame->frame.displayed (&frame->frame);
+  frame->frame.free(&frame->frame);
 }
 
 
@@ -486,7 +486,7 @@ xine_vo_driver_t* init_video_out_plugin( xine_t *xine,
     
 
   /* capabilities */
-  vo->m_capabilities = VO_CAP_COPIES_IMAGE | VO_CAP_YUY2 | VO_CAP_YV12;
+  vo->m_capabilities = /* VO_CAP_COPIES_IMAGE | */ VO_CAP_YUY2 | VO_CAP_YV12;
   vo->yuv2rgb_factory = yuv2rgb_factory_init (MODE_16_RGB, vo->yuv2rgb_swap, 
                 vo->yuv2rgb_cmap);
 
