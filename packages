@@ -1,3 +1,4 @@
+CONFIG_ABOUTAPPLET	core/applets/aboutapplet	aboutapplet.pro
 CONFIG_ADDRESSBOOK	core/pim/addressbook	addressbook.pro
 CONFIG_ADVANCEDFM	noncore/apps/advancedfm	advancedfm.pro
 CONFIG_APPEARANCE2	noncore/settings/appearance2	appearance2.pro

@@ -1,0 +1,485 @@
+<!DOCTYPE UI><UI>
+<class>AboutDialog</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>AboutDialog</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>418</width>
+            <height>201</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>About</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <grid>
+        <property stdset="1">
+            <name>margin</name>
+            <number>2</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>1</number>
+        </property>
+        <widget row="0"  column="0"  rowspan="1"  colspan="2" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel1</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.2&lt;/b&gt;&lt;/center&gt;</string>
+            </property>
+        </widget>
+        <widget row="1"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>logo</cstring>
+            </property>
+            <property stdset="1">
+                <name>palette</name>
+                <palette>
+                    <active>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                        <color>
+                            <red>197</red>
+                            <green>196</green>
+                            <blue>185</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>226</red>
+                            <green>225</green>
+                            <blue>220</blue>
+                        </color>
+                        <color>
+                            <red>98</red>
+                            <green>97</green>
+                            <blue>92</blue>
+                        </color>
+                        <color>
+                            <red>131</red>
+                            <green>130</green>
+                            <blue>123</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>128</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                    </active>
+                    <disabled>
+                        <color>
+                            <red>128</red>
+                            <green>128</green>
+                            <blue>128</blue>
+                        </color>
+                        <color>
+                            <red>197</red>
+                            <green>196</green>
+                            <blue>185</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>226</red>
+                            <green>225</green>
+                            <blue>212</blue>
+                        </color>
+                        <color>
+                            <red>98</red>
+                            <green>97</green>
+                            <blue>92</blue>
+                        </color>
+                        <color>
+                            <red>131</red>
+                            <green>130</green>
+                            <blue>123</blue>
+                        </color>
+                        <color>
+                            <red>128</red>
+                            <green>128</green>
+                            <blue>128</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>128</red>
+                            <green>128</green>
+                            <blue>128</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>128</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                    </disabled>
+                    <inactive>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                        <color>
+                            <red>197</red>
+                            <green>196</green>
+                            <blue>185</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>226</red>
+                            <green>225</green>
+                            <blue>212</blue>
+                        </color>
+                        <color>
+                            <red>98</red>
+                            <green>97</green>
+                            <blue>92</blue>
+                        </color>
+                        <color>
+                            <red>131</red>
+                            <green>130</green>
+                            <blue>123</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>128</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                    </inactive>
+                </palette>
+            </property>
+            <property stdset="1">
+                <name>frameShape</name>
+                <enum>Panel</enum>
+            </property>
+            <property stdset="1">
+                <name>frameShadow</name>
+                <enum>Sunken</enum>
+            </property>
+            <property stdset="1">
+                <name>lineWidth</name>
+                <number>1</number>
+            </property>
+            <property stdset="1">
+                <name>midLineWidth</name>
+                <number>0</number>
+            </property>
+            <property stdset="1">
+                <name>pixmap</name>
+                <pixmap>image0</pixmap>
+            </property>
+            <property stdset="1">
+                <name>scaledContents</name>
+                <bool>false</bool>
+            </property>
+        </widget>
+        <widget row="1"  column="1" >
+            <class>QTabWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>tab</cstring>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>About</string>
+                </attribute>
+                <vbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>1</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>1</number>
+                    </property>
+                    <widget>
+                        <class>QTextBrowser</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextBrowser1</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>&lt;p&gt;
+The &lt;b&gt;Open Palmtop Desktop Environment&lt;/b&gt; is written and maintained by the Opie Team, a world-wide network of software engineers committed to free software development.
+&lt;/p&gt;
+&lt;p&gt;
+No single group, company or organization controls the Opie source code. Everyone is welcome to contribute to Opie.
+&lt;/p&gt;
+&lt;p&gt;
+Visit &lt;a href="http://opie.handhelds.org/"&gt;http://opie.handhelds.org&lt;/a&gt; for more information on the Opie Project.
+&lt;/p&gt;</string>
+                        </property>
+                        <property stdset="1">
+                            <name>textFormat</name>
+                            <enum>RichText</enum>
+                        </property>
+                    </widget>
+                </vbox>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>Authors</string>
+                </attribute>
+                <hbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>1</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>1</number>
+                    </property>
+                    <widget>
+                        <class>QTextBrowser</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextBrowser2</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>&lt;p&gt;
+&lt;b&gt;Rajko 'alwin' Albrecht&lt;/b&gt; (alwin@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Holger 'Zecke' Freyther&lt;/b&gt; (zecke@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Chris 'Kergoth' Larson&lt;/b&gt; (kergoth@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Michael 'Mickey' Lauer&lt;/b&gt; (mickeyl@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Lorn 'ljp' Potter&lt;/b&gt; (ljp@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Max 'Harlekin' Reiss&lt;/b&gt; (harlekin@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Dan 'drw' Williams&lt;/b&gt; (williamsdr@acm.org)&lt;/tt&gt;&lt;br/&gt;
+&lt;/p&gt;</string>
+                        </property>
+                    </widget>
+                </hbox>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>Report</string>
+                </attribute>
+                <hbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>1</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>1</number>
+                    </property>
+                    <widget>
+                        <class>QTextBrowser</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextBrowser3</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>&lt;p&gt;
+Software can always be improved, and the KDE Team is ready to do so. However, you - the user - must tell us when something does not work as expected or could be done better.
+&lt;/p&gt;
+&lt;p&gt;
+The Open Palmtop Desktop Environment has a bug tracking system. Visit &lt;a href="http://opie.handhelds.org/"&gt;http://opie.handhelds.org/&lt;/a&gt; to report bugs.
+&lt;/p&gt;
+&lt;p&gt;
+If you have a suggestion for improvement then you are welcome to use the bug tracking system to register your wish. Make sure you use the severity called "Wishlist".
+&lt;/p&gt;</string>
+                        </property>
+                    </widget>
+                </hbox>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>Join</string>
+                </attribute>
+                <vbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>1</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>1</number>
+                    </property>
+                    <widget>
+                        <class>QTextBrowser</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextBrowser4</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>&lt;p&gt;
+You don't have to be a software developer to be a member of the Opie Team. You can join the national teams that translate program interfaces. You can provide graphics, themes, sounds and improved documentation. You decide!
+&lt;/p&gt;
+&lt;p&gt;
+Visit &lt;a href="http://opie.handhelds.org/"&gt;http://opie.handhelds.org/&lt;/a&gt; for information on some projects in which you can participate.
+&lt;/p&gt;
+&lt;p&gt;
+If you need more information or documentation, then a visit to &lt;a href="http://opie.handhelds.org/"&gt;http://opie.handhelds.org/&lt;/a&gt; will provide you with what you need.
+&lt;/p&gt;</string>
+                        </property>
+                    </widget>
+                </vbox>
+            </widget>
+        </widget>
+    </grid>
+</widget>
+<images>
+    <image>
+        <name>image0</name>
+        <data format="XPM.GZ" length="29954">789ced9bd792e43a92a6effb29ca1a776d6b98d0c2c6e6223222b5161129c6f6029200333352cbb57df701e9bfa3c44955a27bcfd92ea3d1985f39093a7e381c8251fff18f4f473b9b9ffef11f7fbbb955b7d17c32415d7ffa87bd3b3f7ffaeffffd5fffe76f7f1f0c3e351b8d4ffd4ee753ebefffeb6f7f77779fcc27d168343a8d46c5c52578401c42e6416d1f10a7426a76b8bf09bbdc276ea53b2ab657e00eb15a040fc0116c9af5f3c111b71bc4fa1adc2196bbe001ec026c5a7579a525ee34888b19b8432cf0fece8038a0bc0e9e97cb998735af11771bc401f5e976611f8187b017cced66fdfe3ed8923dee3093dde1fe5e93584dc1785e9d66ae9f174b603c2ff732933fb7cc1db243cf7e93ec5a82bbb8ff028cf2e535339e5f0173799e78d024b668ff4117f6d5ccaa66c4d700e58966e6daae26ccdd3a1e5509b6783e33d92dfc1d36615f00e37dc133d3fd12fe0d51be1d67a6e79951bebccf5cdbc531b16ac2fe00e6f2110f4a814f33d7cf5bd44f39e288f6d63de25281717f7c62eed5e5952633dd8f78d70eac894d8b38c25fd3a3e7c34e66b2a33f18941f0699c97e0476648f3e33d90f892dde17d0ded6f5db35235e9c228eabcc0362f427e7fabae64766d837897d0bf61b700fbcce8cfbb733d7f6d0062bdcbfc58cfb3732d3fd5cbea7fb8b5566babf58cb5cdb2d9597b223f2e314dca1fc174ec09c3f9f33d776df236e221f8a1618f9d03bb02196edcc543ef5cf01e757d7ca4ce59f81395f6e80912fe53a18e559ca87839c6f1f98291faa1918f9330a30fc0d9199ec7a1f8c7caae00fe7633fca5ce71b7700ee203fa27e293f533ea2f81874919f22caeb22df098ad7419ff30fec43f4d730ca4cfd19eda310dfa241ac5bc405da2bb7ff53668a8f15e661a7d6af5371b3c1f160efc186da3b46e23c5e4ec068ffe2048cf611068cf6291c31b75fec83b9fd0e98495f3b25e6f6941366b40feee7f6741d661a4f0233dee72233c6cb56661aef96c178bf58cb4ceddb26e6f6368fcc18ff96c0dcfe288fdbdff699d1fe0330caf7a7cc549e9e66a6f10e7a76f13e89fa7731fee95b30c7d71518f1e502710fe3a73f06e37963c1785e2b668ac75212f7315e46f8c7f15a8c88737c3d32537cc5ba3f55d141f1638e98110f3d629e4f854566cc7ff03cc7873b246e237ff84766f4efd3ccd4be8a99f413cb60c48fef82d15eda32d3fdc681f17e7f9099faf72633e64bd7c41c2fc58419f1b29d99fcbb04237ed43133e2f90e0cffdc0933ca3b0373fc68626eff3864a6f6f2cfc41c0fe11ccced093db8fdfd7a66ca3fa81fcfcfac20cef1b19099e60fb8bfcff39b2d30ca2bae9829dfe91918f3276199c92ea83f0e06285fdf3163fed2c94cef5f0263bee3ae32d7760fff78fe16573253f9f760bcdf3c6426ffa00fe76b759899ec889f21dea76fc0283f50ff1df0785ea0fcdc9f3699a93f155b994ddd3f6bff5b29fa315e6f66a6fc1a98297ecd3198f3a7c94cf17200c6f8efae33537fbd05637c709e19f94e11b7f17e75c08c7cd707e37d05db11dfa2c78c7c7702467c87d3ccf4fc0231f717b14ddce5fe659911cff097f3a7db0323fff94330f797f3ccd49ea85f0ff1eeba60ee2f4bc41cfffa118cf857b0e7f8c2fb399ee49498e3c7dc33d3f8aee00fc793bf6226bb843f1c5f669b99ecde64267f8ec01ccf9e19f38b4e66b217c40afe889bcc64df00c31fb59c99ec881f85f97a01bd73bcdf33537cdbba7fb7864d9e9fec12e7f87e04237ecc2a18f1691acc981f3ae23c5f988031fec88219f1b70546fc79aadf90db5f9c82393e9e99291ff84562ce6f7e190c7b78ca4c7a50fc0f737e9a81b9fde01fc78ba7f81f72bc842530da2f68e2dc3e01ccedf100467b887b665affc83e18eb277fc14c764ff133d4584fe94366b2174362af90bf507f6edfe28859d576578f27ed26b7b75b05637fc7dd12b79847c46dbe7f90b96eeff28c99da3776c1783e5e82313f93e760e497704fcce35f6189fbc8f71ef63eda4bc1dfdc7e4f60f447b743ccede1fa60b487bf6426fdc41d98dba307e6f5ea9c98f59633708fd8f532d7fd4b421f8df5a55f63a6f582d804633d5be0fddc5ea164a6f6b2f5f8d71ef2f8502e10b3dee52218eb057bc64cfdb53c05f3fc708919e3d53a33e633d98ef9c7006ca83dcd4e665a6f3699e1cf0333f2c51d33955f4666e4736aef21cfd7d42533ec1de23ee7f36330f74fd26bc8f9563f81914fdd2e33da0fcfe7f8c88cf61c67a6f5ff05b84beca03fc78b829de3236c67a6e70d98e36308c6fe863e2236b8dfcf99293ed467aeed02fa19ec671468efdcdf5bcc889fba7d3a4ddebf358698d7ff7a17ccf9fd16ccebc51131cfe7ed1398d7177bccb0cf99315f9866a6f94bc94ced6b6660c453b9cc8cf5c10a33e603179969fed920ee203fe9d3cc149f1bcca8ef0a33d6230bccf4bed8cc4cf39f3d66bc9fcbe3fc5666a6fe75c68cf5de1a333daf9fc1a8bfdf27e6fce687c4038cfffe847888782dd6c1c867ee9e98e3d3a37e8af3cf8058633f2c3c826117ccc8476e3333c5eb2131c7a3e882519e5799a9bc2d30e7bba7ccd47fd05e06ef1365668a6730c76f719ab98e6f47fa29de4f1114bf8af733d40d18f94e49667c4f688179feb2c68cfdb31933be1790de8adbbfbc03a3fded72667a1fdf8ff6b6f0a783f97e349929de3798517ec84cedbbcf8cf5d11318f9d87699717f9319e327b5a7e2fce7299e15c74781fbb9bd15c58fcaed29c0b08707669a6f78d4cf223fb92d708fecf22873dd7e3e82315ff12133e5af6d626eefe29c59d3fca5d6b7dbe2f1287688597fdd60c6783306436fbbc78cf6f1cc589f3e83517ee83363fd6d33d37a423163beb946dc457caa0633d62b27cc588f17e02eddef1f98b1debe01637e1b04b1c2f8e1a7c4067a0b09e6f6b923e6f6f0d083f577476087f69930a3ffdd12e7f688ccd41ea25e5f7655de5f3a24eea07f69cf0c7d2f8853fd297fef8091ffdc0c3c447c47667c0f41795d8bfe7fc58cf9f919b1e6f53eee37882fbf4accf1e63518f5f5545fe55aa87f20cef56f3353fd6ddd7f7b2dce476a8f98f7dbe33931d7a7bc07c37fb79c99f6775798b1be5820ee35e97e1999b11fbd9199f429c188a7728d19e3499bd8b6d0df8e89b93e4591d9d6ed57c77f4ff1fb8c07a3fce832533e3d67c6f79f0330ea2f3533c6b30be2a437f9a388b33f4b996b7f8a39b3e9d67ad7fef4db3c9f117bc43c1f3503e2de10df9bda60e85fae3263bd3e66c6fd8bc47de86f0e99b19e3b63a6fb359eef431f77ce8cfcbb456c15eabb4bec7aa8ef0d5811fb6db0835d12fb16783173ad4f603b3fbf9bb9b6fb2698f514cca4a7abe3a7af733c2f10f3f7857242cc7a7801467de53633e5273307a3fd55c14c76bb06e6feac9991df1ac45cbf62070cff7d8b19fed7f51fb4f97d66c84cf30ddd05e37d7a9519f3a306f180fbdb3333be0f9e80515fb1ca8cf59c214ee9a2f6c7ef80e15fa133d7febbbafe83acb7d827e6f9886911f7901ff41933d65b97c47dd8c31e71f29fdaeb11ccfd7537337dffb1cc18bf8760e8270e9931fe77c1dc5e17cc6437b57dd8e9627d2a86c483218d3766118ce7632b337dcf6a30e3fb99241e36f1bde31eccf1f6c48cf1acce1f43c37a9a13e2541eed77cd888768dfa832d3fc609b19fbbf1760cea7a3cca4ef1233eebf02433fdd63c6fb6fc15cff0633d9753dbf519d3eb7ef3331bfdff498697c0a4330de17ef32533e9c30d3fd3a80f17eeb32533c3498e97eb944ac9ad83f9a82e14f3166c67ab36e4f95f5571bc4fd21f2719378002e0be2eccf09b142fbd81e33e5cb3806737bdc66a6fa5e3263bdf0005688d71d66d857c00efaf1fd0ef67afda13b5c1f3d20667ddd2331fba347cc947f4b07c6fbed3033c5db2933e613160c7fec6a66ea1f5366badfec12eb16ea3763467987e01ec6a3babf689bdb87ea63f37ecd2531d7cf907f96cbf73233c5ff1333e5633305e37d62ce4cf63801430f75c28ce70fc05cff8299ecb65ecf982efb1fe7c4fc3ebb0246f9e579668a8f0566cac7253f8ff7b99bcca4778799eeb7c7c486f5ee33933db01dfe44c98ce7ebf987c9fa1bf0c0e27bfd33f190fbcb06b1ea8227c4ecaf1a32d378620d31fbe71699613f02c33fb5c64cf618c0d04ff2f38aec3a82f9fdfbcc18cfeaf1cde6f6518298eb672e88b93d22ee677fca15665beb65c660f81347ccb0ef83e18fdc6186fd99d8420fbbc00c7b01c6fbc31133d9439d7face3f24d9f383def6afb3e98f50ccc64d71330f7ff0766b29b0846f9619d99ecb68e5fd763fdd42d718a07d273813897bfcfec7a75796330ca1799c96e4a62077dd41533d9f53298f38763c6f3757bb8ecbfb3cc8eea4fe53b2edf2c3393ddec8151be14ccb00730c76366b2ab6b30dea76aff7cafdbc5fee116711fbf87341de2acdf35d8617fe82e33cdb73688750fe3d50d71d663ceec6b3dac06737e6b32935db7c11caf2d66d897883df4928699ece21c8cf7a93aff7bcfbf5f512330eaaffa60d45f5f65a6fdc91de25e13fba19760fc7e553d33a3bc9dcc64ef81f1fb56f544dc47794633e3799b99ec37607e9f01a33cbd0db6f87dd205f1a089df8f3d66a6e7bbe02eecdb99c9be0546794a67267f1433fc7d201ef2fb601fa27c8df252bea6789933e37e8a37af9ae8bff7ccb06f8215e25130a37cb6231e8d24d62d94d706f7f0fe7330e2d96c66a6e7d1fe06cfeb2118efd7f097e3530c98bdafed14cf9ee3538c98616f81b93fcf99615f04737fe6f214d9776fc19ef9af75fcf6f9b7cfbf7dfeedf36f9fff9cc7bfafcf524825b5347f299fad74d2cb4286bf90cf5196f2549ec97339ff0bf97c212fe595bc96377f199fb5bc9577f25e3ec847f9f417f1f9598e523cdfc905399613b9f897f079492ecb15b92ad7e4badc909b724b6e4bf127f77947eeca3db92f0fe454cee4a13c92c7f2443692a5f9a7f5b925dbc9e38eecca9eeccb811c0a29845042ff7a8f7f8dcfb2298d30c20a27bc28ea23c8be88a214a7e2acca7eb229ce776fabf3ffa5cf622e2ec4a5dca1d61757e23a797c93bcbd4de75d3aefc58378144fe2593e27fba8ba2bd56dfe7ab4a47b76c48218ffb37c1613b1285744ea796259ac8855b126d66537abccc786d8145b625ba066afc7b618a75aef8a3db12f0ec454ccfe293e1f8a23712c4ee4956888a66889b6e8248f59e3cfd7077928baa227fa49c5793a5be9d901a9cd23668a9ba1924a28a5b432ca2aa7bc2a7ebdcf2aa8289aaa4cf978419daa33759e542e5e3836c4839aab0b75a9ae64535d579ecbb9ba4e9e1a525d06a9d48dba5577ea5e3da847f5a49ed5482d88d55fed73f27a9c469155e9d5442daa25d955cb7fd018712dfb6a45ada6bed8443c677deb72d652bf18aa75b5a13693d75b6a3b79bda376d59edaff553e439db9ba5207299e57d454cdd4e1d791ac8ebed63ae5902775ac4ed28cb595f46d256d9be9dc914f62453564439caba66aa9b6aa7ec656fdb4a7a7fa6af07a7c7cbfce954e29269b6a2837b4d442ab3a96bfd0566b6d6addbfd0bafa4a25c6aad2ba255b62a6bd2e74d05197fa5435c5853ed3e795d77aae2f94d197fa4aadffead8a85bf9495fa79164aa6fbe8962af6fe5babe63d6f7fa413fea27fd5ce9ac477a418ff5442feaa5742eeb95f46fab7a4dafeb0dbda9b7d4964ef1a177f4eecffbcc512146290a9bd535e97396b2dcd77999b5ded3fbfa2065ed64d3533dd387fa481feb13dd48fe96baa95bba5d7defd45ddd4b650d745f0ff4d0a4c149551f7a8dd1e6d555cff7e85c8d63ea3abde15cb6aaab147ad5d817f2f2677d6ff57da63de38c37856e9a908e684a3d31a7a6ea9bc29c9bb9b93097e6ca5ca7a87e50dbe6c6bceac70fc47393c6b5945747e6cedcbf9133f2d53c9847f3649e93b66d33320b3a9ab1999845b36496d3b16256cd9a8c66dd6c984dca1f66eb57c473d2d554abd5e4af5155bf9fab7d39f93667fcf130dba99977cc6eadef9e7936fbe6c04c93bf337398b276c31c996373a2ae93ef0dd3342dd336a927565f667fcee75adb41955f4d5f3e9b41d26468a5196a933cf66f68ecadb04a07ab93c2a55930636bacb5ce3c596f8b94fba20de22265bad46a36da525a7b6acff4a63db7f3d75796df131bf59ca1d05295f6c25e6a69af6c35337a4363aded4d8ada4adf22299cf4b5b7c6db3b7b6f1fc4cc3e9aa1baa231b1d2b92edfd827fb6c4776e1753f3ee2338d5f55ae9073ebe5b51dcbb138b113bb987ad80b39e3f3d52ed9656beaf8ddb72b76d5aed975bb6137ed96ddb63bf62195d912a32a03a5de31a87a895eb5bb76cfbe3a067ec467aa7b35ffad7345539dd8032d4533cd342ee5faabf38c7cd8a99dd9437b648fed896dd8a66dd976f2b993325c555e2bc5c73cf58d94b793c74135ab2fd6efad6d3e1ecf3c1babbc964e4de49eedabf35ae7b77286b5033bb42b4e3ae1946d3b9d3c6edb8e33ce42db39e5fc8fef8c7c44e72f73b27329e20ae75d21165d50e7dfcc2d5e385c4cb977aa0b57d6dea6d39dda2d77e6ce2b9d9dabf4ade721a6da85aadef1733ed34cbd8a38d974739a0157112817dd85bb745749bae53734aeaf7acf5debe06edc6df27533e9dc76caddb97b7962f7eb781ed4b9735e955c6b3e784ff38ff5418a8a3a3f87ea5a69e2bcbe7f7d0cfc2a435bdb700feed1deb9a75ae76737720b6eec267a4d9cb94519ea0869d6e57f2042ded179fe59e76a3411832a9756fd3cf59603b3fd9131b0baba25b7ec56ec895b4d1aafb975b7e136dd96db763b6ed7edb9fd94e7e695e695ced55ae6677446dd6b6d55bdcea8e239c59c502762adce19de6ca7d5487837aa0fcc939ba6e164e666e6c0a519933b72c7ee44ce5c23cdad432ad3a41cd2acaf4d5aa7ff4c6c7c9e33cb96dd764dedec816bb9b6d66ae63aaeeb7a49ed77b4767d7deb066ee893085ee85bafdc96d762cd9be4f59ee8d77398f9db2bdd8fc6c6973acbe06dca174d3952d13bef7d2187e918249d37de8fea74b4edd48d52ee5b14851cf8e0a32ffda9eb09256695bea90d69cdf8c33ae7f9dbbceedb69e629853fd342b4fcb93c16d2cfc5a3ecfb8be4efbbf14c577f99ce2b7fedfa62c3cffd8dbff577698efde0efab39f4e73191f7437e3436be180777fc837ff44f428852447d9856791fd4d75ffb673fd20772a20fd28ae520fdadfd42f279ec277ed12ff965bb9dcaafd7e3e9fa13b1f1b5ce6292fc5d4931b82aba7e4d3c7c4c5bd9f5eb72e237fca6dff2db7ec7efa6733bfdbde7f7fd81dbd34f7e9aea3013abbf4ae72acb551a57639598f9c34ae11487471f8cdec21f277f4e7cc3377d2b9d3b7fb8b67dc7777dcf75e5338d8934f7a834affbd12b7ebf3f0e623c99fbbe1fa49c76ff917c5cc5ad9af961216b0f77524a6c15ea8b5354ff5ee8f49729d254403ed7faccf31ec89bf1f1b6cef598476b92ebb4fe9ca9f33facb15f3cf49d9c14bef6561545118a5894c5697186b32cced3bfcd49f3e2a2b8acd629757e9e57d71fd7b9ee7d1899aaab95fe34ada43aef6b5c5c15d7c54d6aff56f2ecb6b82bee8b87e2b1784ae733aea3f4af65f299b45e28c6f51cfacb787e63247ccde76a7e9b3daff386594e6d387d7ffd67af8b49b198bc594a7a2e27ef568ad5fa58fbe6fa98345faadb625daf72dee07dbc1f890d716983ddaff3c6931a573abb79b161aff31ce3158dd552ea558d3a22ee8a4d78f8dab9556c2795778add628ff34675fdd1bca1ae8afde2a09816632d8a99aae22d88996b8b37d726c9b6ee6f53449c16872906fea8edb7d7a3e238c5d06e719072c62fc81bfa39e589ede2445ec83d71b17beb6cd1284ed4923a34dbea288d652f68ed4745b368a5f87daa23e22d8de91c15ed2a87a4dcd1f91579434c8aaed82a7a72a398b9f3341b6816fd62e04772fae29e3ee93c2b86294edfd6f6cbeb7371e65b2135a1d0f57ae5abf9c6f7ebac9a4105ede7c1046bd6c54e70c18722047b9d72ef8beb40b51c62edf1fbfae633947e359c8633eb6966feb3e3a02a428add30d747e1225cdaab7025bdbb0bd7fefa953ced430c371fd6b8be86db7067e6e1de1cd36cff23dfb6de1c534cb16fee93a6f772101ec263784a7dd084e77a97fcc57d0d7dfd3d1ad73a8fc2421887495834cbb406777315aa75f88ff95c7debf1a7754e2ed2ac739e669f5b295296e446587e79bdad6661e5e31a278f57adb2d614614db4c438ac17531bc346d8543fb14e914dbd16b6fc55ea773762236cd7f3e54274ecf5cbeb407f1a76be47e7b01bf6dc4ad80f07619a227166d7ccb3d90b87ea87e71bd5118ed21cf49a7245d6f6d591d05ecb8b8fc7b39db80d7b6b57c2b193e12434f4b26e9bd294a149abac1fd5b91a11434bdfa75c9146edd7f2b2c8f3e594393eaa713b7442d7ae9a89198786594c6a8f93ca0ba117fa3f3eafcb51bd9ad6abf795d6f518f8e67cc38fc2e063f12cc761cd9ed05e9e99a6731c8ecdbe790e4371b87b1ba5d47aa1faeefc633e57bb956e89b44e6360959bfd6bfb1a6a498e3ea6731451b987dae3b135e94cd7a8c37e344527dae8ecb19dbdfc9b9b0fae07e749eb88b84e794476537ef62f2b1e62f4efc7732cec4d15cbf63886cfa719bb9518f5a93daaf6ac63f9f2efc8bee3dbc4523cd5b34aebac77471d557a7fadb95d92cbefeb1ccf4223c5f2c1678de91acf530ed94f513d8ef378f1e3f19cf7eb16e365bc22ade94c7e3bb3fdade6f1da4ede8ee778136fe39d5ba922e34b9dad89f714d7f6282cc4871ff7f9f39a25cd71b53e70d01a7a43f3d43b29ceabff46bd18df9c77c4a7f85ced957eadf197d7f4d7d26bde7ceff714711e47debaa514015fe84d9aabc34af7ea8c0b7239b45fd75a34c3411cc7c9971a7f7dc645bbfd733e7fb9cf5fcdb98a715c8acb71e5b3dedf9e7aaa655c8d6b713dc5c1467d6ec6ad746ea7733deec45d374d6abea8b1a96ab3f76bbe5bd573da50edf9aba65d88fbf1c0456dc2799cda25ce297cea7b35b39771968ec3788473167d7d1e8bc578f296cec6c7c6eb7efcd877d84a83d88c2dbb16dbba889dd835abb117fbfac1b5e3200e5db0a294ae652f4a51aa527f71566c4a1b775f8fe7d299b3b73cf8fe78e67d0fbb5d7a7be21eccd4add4e76e1c9745e8a671789ee60f6be6a80cf1b238f05d17432b44b1565d7d576ee9b532966518fe316fd4b9e3b83cfdb96f6d2f783ea71c6296cb331dcaf31495d597b4a3ea5aceabab199b05ddb6374547b652a61169553a96c2cda5a8f6f35db55fb2a85ae5851da631fbe86b8ded517cae7e73f56b7dfeacb98dba6bedb75a996968847dbd6c8fc455fee645ebe87a079fd67ae6acbc2cafd2dc7937f97a40b53507e53ccda487efbdfbc77ca679571c999dcf63195fddb0bc36bb615cde88297f87aaf7aff11d90d6a872a73c8baabc2a6fddd44bb792ce8778579e8ac9fb6fffe1df049ed7dfa6631a81eb3983d92def48e7f2de9d970f6e563e9af56a4f957e8354ede1d3de455aa5d6fb45e593594df9e1a47c8ef7e5488f6dc39cc977a2e2e77ca6c3ee970b9467cb71b1574ecab919978bf57ed04eb95474ea36f9e6b75e9fe7c66905782156cc5db9acd7f46ab9f2d1b7fe8ccfb5074b66e6a6665eae56733fb3641be51ae2f6ab18aefee63dfc8f7de9f967e95c1d62a75c2f37aaf96a954fea3d3efa7eddaaf785720cbff77bd17fa5cf7f3cd8ab9fd5f35fe3f34bdefe7acfff7dff1fd06f9f7ffbfce7387efbfcdbe7df3efff6f9b7cf7fcee3b7cfbf7dfeffcae7fffb9f7ffb1f566acf06</data>
+    </image>
+</images>
+</UI>
