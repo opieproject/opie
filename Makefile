@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-export TOPDIR:=$(shell pwd)
+export TOPDIR:=$(OPIEDIR)
 
 include $(TOPDIR)/Vars.make
 ifneq ($(wildcard $(TOPDIR)/Vars.local),)
