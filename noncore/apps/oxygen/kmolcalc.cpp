@@ -16,7 +16,6 @@
 #include <qdir.h>
 #include <qfile.h>
 #include <qpe/qpeapplication.h>
-#include <iostream>
 
 
 /**
