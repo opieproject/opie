@@ -125,15 +125,6 @@
  	 (code == 55 || ( code >= 71 && code <= 83 )) )
  	keypad = Qt::Keypad;
  
-@@ -751,7 +798,7 @@
- 	bool bShift = shift;
- 	int unicode = 0;
- 	if (code < keyMSize) {
--	    if (!extended) {
-+	    if (extended == 0) {
-                 bool bCaps = caps ^ shift;
- #if defined(QT_QWS_CUSTOM)
- 		if (fn) {
 @@ -790,7 +837,7 @@
  		    unicode =  QWSServer::keyMap()[code].shift_unicode ?  QWSServer::keyMap()[code].shift_unicode : 0xffff;
  		else
