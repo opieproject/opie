@@ -5,6 +5,7 @@
 
 #include "opluginloader.h"
 #include "oconfig.h"
+#include "odebug.h"
 
 #include <qpe/qpeapplication.h>
 
@@ -555,11 +556,12 @@ OPluginItem::List OGenericPluginLoader::plugins( const QString& _dir, bool sorte
     for ( QStringList::Iterator it = excludes.begin(); it != excludes.end(); ++it )
         excludedMap.insert( *it, -2 );
 
-    if ( m_isSorted ) {
+    if ( sorted ) {
         QStringList pos =  cfg.readListEntry( "Positions", '.' );
         QStringList::Iterator it = pos.begin();
         while ( it != pos.end() )
             positionMap.insert(  *it++, (*it++).toInt() );
+
     }
 
 
