@@ -146,7 +146,7 @@
     </message>
     <message>
         <source>Inconsistency error!</source>
-        <translation>Erreur d&apos;incohérence!</translation>
+        <translation>Erreur d&apos;incohérence !</translation>
     </message>
     <message>
         <source>File cannot be saved!</source>
@@ -195,15 +195,15 @@
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>&amp;Sauvegarder</translation>
+        <translation>&amp;Enregistrer</translation>
     </message>
     <message>
         <source>Save File As</source>
-        <translation>Sauver Fichier Sous</translation>
+        <translation>Enregister Fichier Sous</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
-        <translation>S&amp;auver Sous</translation>
+        <translation>Enregistrer &amp;Sous</translation>
     </message>
     <message>
         <source>About Opie Sheet</source>
@@ -223,7 +223,7 @@
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Annuler</translation>
+        <translation>A&amp;nnuler</translation>
     </message>
     <message>
         <source>Cell Selector</source>
@@ -239,7 +239,7 @@
     </message>
     <message>
         <source>Cu&amp;t</source>
-        <translation>Cou&amp;per</translation>
+        <translation>Co&amp;uper</translation>
     </message>
     <message>
         <source>Copy Cells</source>
@@ -255,7 +255,7 @@
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation>Co&amp;ller</translation>
+        <translation>C&amp;oller</translation>
     </message>
     <message>
         <source>Paste Contents</source>
@@ -311,7 +311,7 @@
     </message>
     <message>
         <source>&amp;Cells</source>
-        <translation>&amp;Cellules</translation>
+        <translation>C&amp;ellules</translation>
     </message>
     <message>
         <source>Row Height</source>
@@ -319,7 +319,7 @@
     </message>
     <message>
         <source>H&amp;eight</source>
-        <translation>Haut&amp;eur</translation>
+        <translation>&amp;Hauteur</translation>
     </message>
     <message>
         <source>Adjust Row</source>
@@ -379,7 +379,7 @@
     </message>
     <message>
         <source>R&amp;emove</source>
-        <translation>E&amp;ffacer</translation>
+        <translation>&amp;Effacer</translation>
     </message>
     <message>
         <source>Sort Data</source>
@@ -459,7 +459,7 @@
     </message>
     <message>
         <source>&amp;Comma</source>
-        <translation>&amp;Virgule</translation>
+        <translation>Vir&amp;gule</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -495,11 +495,11 @@
     </message>
     <message>
         <source>&amp;Function</source>
-        <translation>&amp;Function</translation>
+        <translation>F&amp;unction</translation>
     </message>
     <message>
         <source>&amp;Standard</source>
-        <translation>&amp;Standard</translation>
+        <translation>S&amp;tandard</translation>
     </message>
     <message>
         <source>Summation</source>
@@ -523,7 +523,7 @@
     </message>
     <message>
         <source>Si&amp;ne</source>
-        <translation>Si&amp;nus</translation>
+        <translation>&amp;Sinus</translation>
     </message>
     <message>
         <source>Arc Sine</source>
@@ -543,11 +543,11 @@
     </message>
     <message>
         <source>ArcCosine</source>
-        <translation>ArcCosinus</translation>
+        <translation>Arc Cosinus</translation>
     </message>
     <message>
         <source>Arc Cos&amp;ine</source>
-        <translation>Arc Cos&amp;inus</translation>
+        <translation>Arc C&amp;osinus</translation>
     </message>
     <message>
         <source>Tangent</source>
@@ -607,7 +607,7 @@
     </message>
     <message>
         <source>&amp;Average</source>
-        <translation>&amp;M&amp;oyenne</translation>
+        <translation>&amp;Moyenne</translation>
     </message>
     <message>
         <source>Maximum</source>
@@ -623,7 +623,7 @@
     </message>
     <message>
         <source>&amp;Minimum</source>
-        <translation>&amp;Minimum</translation>
+        <translation>Min&amp;imum</translation>
     </message>
     <message>
         <source>Count</source>
@@ -643,15 +643,15 @@
     </message>
     <message>
         <source>&amp;Number of rows:</source>
-        <translation>&amp;Nombre de rangés:</translation>
+        <translation>Nombre de &amp;rangés:</translation>
     </message>
     <message>
         <source>&amp;Number of columns:</source>
-        <translation>&amp;Nombre de colonnes:</translation>
+        <translation>Nombre de &amp;colonnes:</translation>
     </message>
     <message>
         <source>&amp;Number of sheets:</source>
-        <translation>&amp;Nombre de feuille:</translation>
+        <translation>Nombre de &amp;feuille :</translation>
     </message>
     <message>
         <source>Sheet</source>
@@ -659,15 +659,15 @@
     </message>
     <message>
         <source>&amp;Height of each row:</source>
-        <translation>&amp;Hauteur de chaque rangé:</translation>
+        <translation>&amp;Hauteur de chaque rangé :</translation>
     </message>
     <message>
         <source>&amp;Width of each column:</source>
-        <translation>&amp;Largeur de chaque colonne:</translation>
+        <translation>&amp;Largeur de chaque colonne :</translation>
     </message>
     <message>
         <source>&amp;Sheet Name:</source>
-        <translation>&amp;Nom de la feuille:</translation>
+        <translation>Nom de la &amp;Feuille :</translation>
     </message>
     <message>
         <source>There is only one sheet!</source>
@@ -683,11 +683,11 @@
     </message>
     <message>
         <source>Shift cells &amp;down</source>
-        <translation>&amp;Déplacer cellule vers le bas</translation>
+        <translation>Déplacer cellule vers le &amp;bas</translation>
     </message>
     <message>
         <source>Shift cells &amp;right</source>
-        <translation>Déplacer Cellule à d&amp;roite</translation>
+        <translation>Déplacer Cellule à &amp;droite</translation>
     </message>
     <message>
         <source>Entire ro&amp;w</source>

@@ -47,7 +47,7 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>The following file was not found: &lt;i&gt;</source>
-        <translation>Le fichier suivant n&apos;a pas été trouvé: &lt;i&gt;</translation>
+        <translation>Le fichier suivant n&apos;a pas été trouvé : &lt;i&gt;</translation>
     </message>
     <message>
         <source>No decoder found</source>
@@ -63,11 +63,11 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>Sorry, an error occured trying to play the file: &lt;i&gt;</source>
-        <translation>Désolé, une erreur est survenue lors de la lecture du fichier: &lt;i&gt;</translation>
+        <translation>Une erreur est survenue lors l&apos;essai de la lecture du fichier: &lt;i&gt;</translation>
     </message>
     <message>
         <source> File: </source>
-        <translation>Fichier:</translation>
+        <translation>Fichier :</translation>
     </message>
     <message>
         <source>, Length: </source>

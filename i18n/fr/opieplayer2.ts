@@ -96,7 +96,7 @@
     </message>
     <message>
         <source>Save Playlist</source>
-        <translation>Sauver la liste</translation>
+        <translation>Enregistrer liste</translation>
     </message>
     <message>
         <source>Open File or URL</source>
@@ -166,7 +166,7 @@ la liste ?</translation>
     </message>
     <message>
         <source>Save m3u Playlist </source>
-        <translation>Sauver la liste m3u</translation>
+        <translation>Enregistrer Liste m3u</translation>
     </message>
 </context>
 <context>

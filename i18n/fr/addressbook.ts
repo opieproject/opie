@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Find</source>
-        <translation>Trouver</translation>
+        <translation>Chercher</translation>
     </message>
     <message>
         <source>Write Mail To</source>

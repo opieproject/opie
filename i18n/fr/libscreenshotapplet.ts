@@ -16,11 +16,11 @@
     </message>
     <message>
         <source>Save named</source>
-        <translation>Sauver</translation>
+        <translation>Enregister</translation>
     </message>
     <message>
         <source>Save screenshot as...</source>
-        <translation>Sauver l&apos;image d&apos;écran sous...</translation>
+        <translation>Enregister image sous...</translation>
     </message>
     <message>
         <source>File</source>

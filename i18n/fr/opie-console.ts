@@ -236,7 +236,7 @@
     <name>FileTransfer</name>
     <message>
         <source>Was not able to fork</source>
-        <translation>Problème de fork</translation>
+        <translation>Erreur lors du fork</translation>
     </message>
     <message>
         <source>Could not start</source>

@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Save</source>
-        <translation>Sauver</translation>
+        <translation>Enregister</translation>
     </message>
     <message>
         <source>Force styling for all applications.</source>
@@ -100,11 +100,11 @@
     </message>
     <message>
         <source>Save Scheme</source>
-        <translation>Sauver le thème</translation>
+        <translation>Enregister le thème</translation>
     </message>
     <message>
         <source>Save scheme</source>
-        <translation>Sauver le thème</translation>
+        <translation>Enregistrer le thème</translation>
     </message>
     <message>
         <source>Scheme does already exist.</source>
@@ -148,7 +148,7 @@ Cliquez ici pour sélectionner une décoration disponible.</translation>
     </message>
     <message>
         <source>Select the desired name, style and size of the default font applications will use.</source>
-        <translation>Sélection du nom, du style et la taille désirés de la police par défaut que les applications utiliseront.</translation>
+        <translation>Sélectionne le nom, le style et la taille de la police que les applications utiliseront par défaut.</translation>
     </message>
     <message>
         <source>Color schemes are a collection of colors which are used for various parts of the display.
@@ -178,9 +178,9 @@ Cliquez ici pour sélectionner un thème.</translation>
         <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
 
 This area allows you to select an application and which settings you wish to disable.</source>
-        <translation>Si quelques applications ne peuvent afficher correctement les préférence globales d&apos;apparence, certaines fonctionnalité peuvent être désactivées.
+        <translation>Si des applications ne s&apos;affichent pas correctement suite aux choix d&apos;apparence globale, vous pouvez désactiver certaines des fonctionnalités pour celle-ci.
 
-Cette partie vous permet de selectionner une application et quelle préférence vous souhaitez désactiver.</translation>
+Cette partie vous permet de sélectionner une application et de lui attribuer des préférences personnalisées.</translation>
     </message>
     <message>
         <source>Click here to add an application to the list above.</source>
@@ -226,7 +226,7 @@ Cette partie vous permet de selectionner une application et quelle préférence 
     </message>
     <message>
         <source>Appearance Settings</source>
-        <translation>Préference d&apos;Apparence</translation>
+        <translation>Préferences d&apos;Apparence</translation>
     </message>
 </context>
 <context>

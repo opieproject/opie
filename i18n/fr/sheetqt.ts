@@ -161,11 +161,11 @@
     </message>
     <message>
         <source>Save File</source>
-        <translation>Sauver Fichier</translation>
+        <translation>Enregistrer Fichier</translation>
     </message>
     <message>
         <source>Do you want to save the current file?</source>
-        <translation>Voulez-vous sauvegarder le fichier courant ?</translation>
+        <translation>Voulez-vous enregistrer le fichier courant ?</translation>
     </message>
     <message>
         <source>&amp;File Name:</source>
@@ -193,15 +193,15 @@
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>&amp;Sauver</translation>
+        <translation>&amp;Enregistrer</translation>
     </message>
     <message>
         <source>Save File As</source>
-        <translation>Sauver Fichier Comme</translation>
+        <translation>Enregistrer Fichier Sous</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
-        <translation>Sauver &amp;Comme</translation>
+        <translation>Enregistrer &amp;Sous</translation>
     </message>
     <message>
         <source>Accept</source>
@@ -265,7 +265,7 @@
     </message>
     <message>
         <source>C&amp;lear</source>
-        <translation>E&amp;ffacer</translation>
+        <translation>&amp;Effacer</translation>
     </message>
     <message>
         <source>Insert Cells</source>
@@ -273,7 +273,7 @@
     </message>
     <message>
         <source>C&amp;ells</source>
-        <translation>C&amp;ellules</translation>
+        <translation>&amp;Cellules</translation>
     </message>
     <message>
         <source>Insert Rows</source>
@@ -313,7 +313,7 @@
     </message>
     <message>
         <source>H&amp;eight</source>
-        <translation>Haut&amp;eur</translation>
+        <translation>&amp;Hauteur</translation>
     </message>
     <message>
         <source>Adjust Row</source>
@@ -337,7 +337,7 @@
     </message>
     <message>
         <source>&amp;Hide</source>
-        <translation>Cac&amp;her</translation>
+        <translation>&amp;Cacher</translation>
     </message>
     <message>
         <source>Column Width</source>
@@ -517,7 +517,7 @@
     </message>
     <message>
         <source>Si&amp;ne</source>
-        <translation>Si&amp;nus</translation>
+        <translation>&amp;Sinus</translation>
     </message>
     <message>
         <source>Arc Sine</source>
@@ -525,7 +525,7 @@
     </message>
     <message>
         <source>A&amp;rc Sine</source>
-        <translation>A&amp;rc Sinus</translation>
+        <translation>Arc S&amp;inus</translation>
     </message>
     <message>
         <source>Cosine</source>
@@ -541,7 +541,7 @@
     </message>
     <message>
         <source>Arc Cos&amp;ine</source>
-        <translation>Arc Cos&amp;inus</translation>
+        <translation>Arc C&amp;osinus</translation>
     </message>
     <message>
         <source>Tangent</source>
@@ -617,7 +617,7 @@
     </message>
     <message>
         <source>&amp;Minimum</source>
-        <translation>&amp;Minimum</translation>
+        <translation>M&amp;inimum</translation>
     </message>
     <message>
         <source>Count</source>

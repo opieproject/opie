@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Error: There is no file selected</source>
-        <translation>Erreur: auncun fichier sélectionné</translation>
+        <translation>Erreur : auncun fichier sélectionné</translation>
     </message>
     <message>
         <source>File not found</source>
@@ -109,11 +109,11 @@
     </message>
     <message>
         <source>Save PlayList</source>
-        <translation>Sauver Liste</translation>
+        <translation>Enregister Liste</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Vue</translation>
+        <translation>Affichage</translation>
     </message>
     <message>
         <source>Full Screen</source>
@@ -209,11 +209,11 @@ cette liste ?</translation>
     </message>
     <message>
         <source>OpiePlayer: </source>
-        <translation>Lecteur Opie:</translation>
+        <translation>Lecteur Opie :</translation>
     </message>
     <message>
         <source>Save Playlist</source>
-        <translation>Sauver Liste</translation>
+        <translation>Enregister Liste</translation>
     </message>
     <message>
         <source>Properties</source>
