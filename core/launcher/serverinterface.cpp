@@ -87,7 +87,7 @@ bool LayoutManager::eventFilter( QObject *object, QEvent *event )
 	    if ( item )
 		layout();
 	    break;
-	
+
 	default:
 	    break;
     }
@@ -104,25 +104,27 @@ void LayoutManager::layout()
 	QWidget *w = item->w;
 	if ( !w->isVisible() )
 	    continue;
+
+        QSize sh = w->sizeHint();
 	switch ( item->p ) {
 	    case ServerInterface::Top:
-		w->resize( mwr.width(), w->sizeHint().height() );
-		w->move( mwr.topLeft() );
+                w->setGeometry( mwr.left(), mwr.top(),
+                                mwr.width(), sh.height() );
 		mwr.setTop( w->geometry().bottom() + 1 );
 		break;
 	    case ServerInterface::Bottom:
-		w->resize( mwr.width(), w->sizeHint().height() );
-		w->move( mwr.left(), mwr.bottom()-w->height()+1 );
+                w->setGeometry( mwr.left(), mwr.bottom() - sh.height(),
+                                mwr.width(), sh.height() );
 		mwr.setBottom( w->geometry().top() - 1 );
 		break;
 	    case ServerInterface::Left:
-		w->resize( w->sizeHint().width(), mwr.height() );
-		w->move( mwr.topLeft() );
+                w->setGeometry( mwr.left(), mwr.top(),
+                                sh.width(), mwr.height() );
 		mwr.setLeft( w->geometry().right() + 1 );
 		break;
 	    case ServerInterface::Right:
-		w->resize( w->sizeHint().width(), mwr.height() );
-		w->move( mwr.right()-w->width()+1, mwr.top() );
+                w->setGeometry( mwr.right() - sh.width(), mwr.top(),
+                                sh.width(), mwr.height() );
 		mwr.setRight( w->geometry().left() - 1 );
 		break;
 	}
@@ -336,7 +338,7 @@ LayoutManager::Item *LayoutManager::findWidget( const QWidget *w ) const
   according to the order that it was docked, its sizeHint() and whether
   previously docked widgets are visible.  The desktop area available to
   QWidget::showMaximized() will exclude any visible docked widgets.
-  
+
   For example, if a widget is
   docked at the bottom of the screen, its sizeHint() will define its
   height and it will use the full width of the screen.  If a widget is
