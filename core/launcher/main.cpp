@@ -237,6 +237,8 @@ public:
 			case OMODEL_iPAQ_H38xx: {
 				if ( keycode == Key_SysReq ) {
 					if ( isPress ) {
+						if ( m_power_timer )
+							killTimer ( m_power_timer );
 						m_power_timer = startTimer ( 500 );
 					}
 					else if ( m_power_timer ) {
