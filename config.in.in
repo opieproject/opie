@@ -41,6 +41,11 @@ config SPECFILE
 #  default "linux-oz-g++" if TARGET_OZ
   default "linux-ipaq-g++" if TARGET_IPAQ
 
+config CUSTOMFILE
+  string
+  default "custom-ipaq.h" if TARGET_IPAQ
+  default "custom-sharp.h" if TARGET_SHARP
+  
 #config CROSS
 #  string "Crosscompilation prefix"
 #  default "arm-linux-"

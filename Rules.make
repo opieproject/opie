@@ -10,7 +10,7 @@ $(TOPDIR)/.depends : $(shell if [ -e $(TOPDIR)/config.in ]\; then echo $(TOPDIR)
 		awk '{print \
 			".PHONY : " $$2 "\n" \
 			"subdir-$$(" $$1 ") += " $$2 "\n\n"; \
-			print $$2 " : " $$2 "/Makefile\n\t$$(call descend,$$@)\n"; }' > $(TOPDIR)/.depends
+			print $$2 " : " $$2 "/Makefile\n\t$$(call descend,$$@,$(filter-out $$@,$$(MAKECMDGOALS)))\n"; }' > $(TOPDIR)/.depends
 	cat $(TOPDIR)/packages | grep -v '^#' | \
 		perl -ne '($$cfg, $$dir, $$pro) = $$_ =~ /^(\S+)\s+(\S+)\s+(\S+)/; if ( -e "$$dir/$$pro" ) { print "$$dir/Makefile : $$dir/$$pro \$$(TOPDIR)/qmake/qmake\n\t\$$(call makefilegen,\$$@)\n\n"; }' \
 			>> $(TOPDIR)/.depends
@@ -37,7 +37,12 @@ $(TOPDIR)/stamp-headers :
 	ln -sf ../../libopie/$$generatedHeader $$generatedHeader; done )
 	touch $@
 	
-	
+$(TOPDIR)/library/custom.h : $(TOPDIR)/.config
+	@-rm -f $@
+	$(if $(patsubst "%",%,$(CONFIG_CUSTOMFILE)),\
+		ln -sf $(patsubst "%",%,$(CONFIG_CUSTOMFILE)) $@,\
+		touch $@\
+	)
 
 $(TOPDIR)/scripts/lxdialog/lxdialog $(TOPDIR)/scripts/kconfig/conf scripts/kconfig/conf $(TOPDIR)/scripts/kconfig/mconf scripts/kconfig/mconf $(TOPDIR)/scripts/kconfig/qconf scripts/kconfig/qconf $(TOPDIR)/qmake/qmake :
 	$(call descend,$(shell dirname $@),$(shell basename $@))

@@ -40,7 +40,7 @@ $(TOPDIR)/.config: $(TOPDIR)/.depends.cfgs $(configs)
 # config rules must have the $(configs) var defined
 # at the time that they run. we must ensure that .depends.cfgs
 # is built and included by the time we reach this point.
-	
+
 xconfig :
 	$(call descend,scripts/kconfig,qconf)
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(TOPDIR)/scripts/kconfig \
@@ -75,20 +75,16 @@ defconfig :
 	./scripts/kconfig/conf -d ./config.in
 
 
-ifeq ($(if $(filter clean%,$(MAKECMDGOALS)),clean,notclean),notclean)
 -include $(TOPDIR)/.config
-endif
-ifeq ($(shell if [ -e $(TOPDIR)/..config.cmd ]; then echo exists; fi),exists)
 -include $(TOPDIR)/..config.cmd
-endif
-ifeq ($(if $(filter clean%,$(MAKECMDGOALS)),clean,notclean),notclean)
 -include $(TOPDIR)/.depends
-endif
 
 export QMAKESPEC=$(QMAKESPECSDIR)/qws/$(patsubst "%",%,$(CONFIG_SPECFILE))
 
-all : $(subdir-y)
+all clean: $(subdir-y)
 
-$(subdir-y) : $(TOPDIR)/stamp-headers
+$(subdir-y) : $(TOPDIR)/stamp-headers $(TOPDIR)/library/custom.h
+
+clean : $(TOPDIR)/.config
 
 include $(TOPDIR)/Rules.make
