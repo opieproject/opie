@@ -105,6 +105,7 @@ void SyntaxDocument::setupModeList(bool force)
         }
     }
   }
+  config->write();
 //  config->sync();
 }
 

@@ -22,8 +22,7 @@ int main( int argc, char ** argv )
 {
     QPEApplication a( argc, argv );
 
-    TinyKate *m = new TinyKate();
-    a.setMainWidget( m );
-    m->showMaximized();
+    TinyKate m;
+    a.showMainWidget(&m );
     return a.exec();
 }
