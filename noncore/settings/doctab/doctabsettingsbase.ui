@@ -39,7 +39,7 @@
                 <string>&lt;b&gt;Do you want a Documents Tab?&lt;/b&gt;&lt;p&gt;
 (Note that such a tab scans &lt;i&gt;all&lt;/i&gt; documents
 on &lt;i&gt;all&lt;/i&gt; external media, which can be quite
-slow and annyoing...)</string>
+slow and annoying...)</string>
             </property>
         </widget>
         <widget>
