@@ -297,6 +297,7 @@ void MainWindow::slotSaveScript() {
         QStringList script;
         script << "text/plain";
         script << "text/all";
+        script << "application/octet-stream";
         types.insert("Script", script);
         QString filename = OFileDialog::getSaveFileName(2, "/", QString::null, types);
         if (!filename.isEmpty()) {
@@ -312,6 +313,7 @@ void MainWindow::slotRunScript() {
         QStringList script;
         script << "text/plain";
         script << "text/all";
+        script << "application/octet-stream";
         types.insert("Script", script);
         QString filename = OFileDialog::getOpenFileName(2, "/", QString::null, types);
         if (!filename.isEmpty()) {
