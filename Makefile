@@ -39,7 +39,7 @@ APPS=$(LOCALAPPS) core/addressbook calculator clock datebook \
     solitaire spreadsheet tetrix textedit \
     todo wordgame embeddedkonsole launcher sysinfo \
     parashoot snake citytime showimg netsetup core/wlansetup tableviewer \
-    qipkg mindbreaker go qasteroids qcop fifteen keypebble  today opiemail/converter opiemail \
+    core/oipkg mindbreaker go qasteroids qcop fifteen keypebble  today opiemail/converter opiemail \
     noncore/tictac noncore/opieftp noncore/drawpad noncore/kcheckers noncore/appskey noncore/qpdf \
     noncore/kpacman noncore/advancedfm noncore/kbill
 
