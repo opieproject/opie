@@ -4,42 +4,42 @@
     <name>DocTabSettings</name>
     <message>
         <source>Enable the Documents Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer l&apos;onglet Documents</translation>
     </message>
     <message>
         <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Note :&lt;/b&gt; Modifier ce paramêtre peut nécessiter le redémarrage d&apos;Opie pour qu&apos;il preinne effet.</translation>
     </message>
     <message>
         <source>Check, if you want the Documents Tab to be visible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cochez cette option si vous désirez voir un onglet Documents.</translation>
     </message>
 </context>
 <context>
     <name>InputMethodSettings</name>
     <message>
         <source>Resize application on Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Redimensionner les applications à l&apos;ouverture</translation>
     </message>
     <message>
         <source>Enable floating and resizing</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer redimension et déplacement</translation>
     </message>
     <message>
         <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Note :&lt;/b&gt; Modifier ce paramêtre peut nécessiter le redémarrage d&apos;Opie pour qu&apos;il preinne effet.</translation>
     </message>
     <message>
         <source>Check, if you want the application to be automatically resized if the input method pops up.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cochez si vous désirez que la fenêtre des applications soit automatiquement redimensionnées pour les méthodes d&apos;entrée.</translation>
     </message>
     <message>
         <source>Check, if you want to move and/or resize input methods</source>
-        <translation type="unfinished"></translation>
+        <translation>Cochez si vous désirez pouvoir déplacer ou redimensionner les fenêtres des méthodes d&apos;entrées</translation>
     </message>
     <message>
         <source>Specify the percentage of the screen width for the input method</source>
-        <translation type="unfinished"></translation>
+        <translation>Pourcentage de l&apos;écran devant être utilisé par les méthodes d&apos;entrée</translation>
     </message>
 </context>
 <context>
@@ -62,11 +62,11 @@
     </message>
     <message>
         <source>InputMethods</source>
-        <translation type="unfinished"></translation>
+        <translation>Méthodes d&apos;entrée</translation>
     </message>
     <message>
         <source>DocTab</source>
-        <translation type="unfinished"></translation>
+        <translation>Onglet Document</translation>
     </message>
 </context>
 <context>
@@ -89,7 +89,7 @@
     </message>
     <message>
         <source>Show Applications in subpopups</source>
-        <translation type="unfinished"></translation>
+        <translation>Show Applications in subpopups (**)</translation>
     </message>
 </context>
 <context>
@@ -265,11 +265,11 @@
     </message>
     <message>
         <source>Enable animated busy indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer l&apos;Indicateur d&apos;état &apos;occupé&apos;</translation>
     </message>
     <message>
         <source>Activate this, if you want an animatedbusy indicator for starting applications in the Launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cocher cette option si vous désirez afficher un indicateur animé lors du lancement des applications.</translation>
     </message>
 </context>
 <context>

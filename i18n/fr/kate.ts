@@ -4,59 +4,59 @@
     <name>TinyKate</name>
     <message>
         <source>TinyKATE</source>
-        <translation type="unfinished">TinyKATE</translation>
+        <translation>TinyKATE</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Nouveau</translation>
+        <translation>Nouveau</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Ouvrir</translation>
+        <translation>Ouvrir</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Enregistrer</translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished">Enregistrer sous</translation>
+        <translation>Enregistrer sous</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Fermer</translation>
+        <translation>Fermer</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished">Fichier</translation>
+        <translation>Fichier</translation>
     </message>
     <message>
         <source>Font +</source>
-        <translation type="unfinished">Police +</translation>
+        <translation>Police +</translation>
     </message>
     <message>
         <source>Font -</source>
-        <translation type="unfinished">Police -</translation>
+        <translation>Police -</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished">Affichage</translation>
+        <translation>Vue</translation>
     </message>
     <message>
         <source>Utils</source>
-        <translation type="unfinished">Outils</translation>
+        <translation>Outils</translation>
     </message>
     <message>
         <source>Highlighting</source>
-        <translation type="unfinished">Mise en relief</translation>
+        <translation>Mise en relief</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Paramètres</translation>
+        <translation>Paramètres</translation>
     </message>
     <message>
         <source>Unnamed %1</source>
-        <translation type="unfinished">Sans nom %1</translation>
+        <translation>Sans nom %1</translation>
     </message>
 </context>
 </TS>

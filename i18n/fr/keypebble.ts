@@ -43,7 +43,7 @@ connection.</translation>
     </message>
     <message>
         <source>Protocol Error: Message Id %1 was found when expecting an update message.</source>
-        <translation type="unfinished">Erreur de protocole : le message d&apos;Id %1 a été recu lors de l&apos;attente d&apos;un nouveau message.</translation>
+        <translation>Erreur de protocole : le message Id %1 a été reçu à la place du message attendu de mise à jour.</translation>
     </message>
     <message>
         <source>Protocol Error: An unknown encoding was used by the server %1</source>
