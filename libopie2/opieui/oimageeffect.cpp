@@ -27,7 +27,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-// $Id: oimageeffect.cpp,v 1.1 2003-03-28 15:11:52 mickeyl Exp $
+// $Id: oimageeffect.cpp,v 1.2 2003-03-30 03:12:23 mickeyl Exp $
 
 #include <math.h>
 
@@ -64,9 +64,7 @@ QImage OImageEffect::gradient(const QSize &size, const QColor &ca,
     QImage image(size, 32);
 
     if (size.width() == 0 || size.height() == 0) {
-#ifndef NDEBUG
-      cerr << "WARNING: OImageEffect::gradient: invalid image" << endl;
-#endif
+      qDebug( "WARNING: OImageEffect::gradient: invalid image" );
       return image;
     }
 
@@ -352,9 +350,7 @@ QImage OImageEffect::unbalancedGradient(const QSize &size, const QColor &ca,
     QImage image(size, 32);
 
     if (size.width() == 0 || size.height() == 0) {
-#ifndef NDEBUG
-      cerr << "WARNING: OImageEffect::unbalancedGradient : invalid image\n";
-#endif
+      qDebug( "WARNING: OImageEffect::unbalancedGradient : invalid image" );
       return image;
     }
 
@@ -573,9 +569,7 @@ QImage OImageEffect::unbalancedGradient(const QSize &size, const QColor &ca,
 QImage& OImageEffect::intensity(QImage &image, float percent)
 {
     if (image.width() == 0 || image.height() == 0) {
-#ifndef NDEBUG
-      cerr << "WARNING: OImageEffect::intensity : invalid image\n";
-#endif
+      qDebug( "WARNING: OImageEffect::intensity : invalid image" );
       return image;
     }
 
@@ -640,9 +634,7 @@ QImage& OImageEffect::channelIntensity(QImage &image, float percent,
                                        RGBComponent channel)
 {
     if (image.width() == 0 || image.height() == 0) {
-#ifndef NDEBUG
-      cerr << "WARNING: OImageEffect::channelIntensity : invalid image\n";
-#endif
+      qDebug( "WARNING: OImageEffect::channelIntensity : invalid image" );
       return image;
     }
 
@@ -732,10 +724,8 @@ QImage& OImageEffect::modulate(QImage &image, QImage &modImage, bool reverse,
 {
     if (image.width() == 0 || image.height() == 0 ||
         modImage.width() == 0 || modImage.height() == 0) {
-#ifndef NDEBUG
-      cerr << "WARNING: OImageEffect::modulate : invalid image\n";
-#endif
-      return image;
+          qDebug( "WARNING: OImageEffect::modulate : invalid image" );
+          return image;
     }
 
     int r, g, b, h, s, v, a;
@@ -860,18 +850,16 @@ QImage& OImageEffect::modulate(QImage &image, QImage &modImage, bool reverse,
 QImage& OImageEffect::blend(const QColor& clr, QImage& dst, float opacity)
 {
     if (dst.width() <= 0 || dst.height() <= 0)
-	return dst;
+        return dst;
 
     if (opacity < 0.0 || opacity > 1.0) {
-#ifndef NDEBUG
-	cerr << "WARNING: OImageEffect::blend : invalid opacity. Range [0, 1]\n";
-#endif
-	return dst;
+        qDebug( "WARNING: OImageEffect::blend : invalid opacity. Range [0, 1] ");
+        return dst;
     }
 
     int depth = dst.depth();
     if (depth != 32)
-	dst = dst.convertDepth(32);
+        dst = dst.convertDepth(32);
 
     int pixels = dst.width() * dst.height();
     int rcol, gcol, bcol;
@@ -903,22 +891,18 @@ QImage& OImageEffect::blend(const QColor& clr, QImage& dst, float opacity)
 QImage& OImageEffect::blend(QImage& src, QImage& dst, float opacity)
 {
     if (src.width() <= 0 || src.height() <= 0)
-	return dst;
+        return dst;
     if (dst.width() <= 0 || dst.height() <= 0)
-	return dst;
+        return dst;
 
     if (src.width() != dst.width() || src.height() != dst.height()) {
-#ifndef NDEBUG
-	cerr << "WARNING: OImageEffect::blend : src and destination images are not the same size\n";
-#endif
-	return dst;
+        qDebug( "WARNING: OImageEffect::blend : src and destination images are not the same size" );
+        return dst;
     }
 
     if (opacity < 0.0 || opacity > 1.0) {
-#ifndef NDEBUG
-	cerr << "WARNING: OImageEffect::blend : invalid opacity. Range [0, 1]\n";
-#endif
-	return dst;
+        qDebug( "WARNING: OImageEffect::blend : invalid opacity. Range [0, 1]" );
+        return dst;
     }
 
     if (src.depth() != 32) src = src.convertDepth(32);
@@ -957,10 +941,8 @@ QImage& OImageEffect::blend(QImage &image, float initial_intensity,
                             bool anti_dir)
 {
     if (image.width() == 0 || image.height() == 0 || image.depth()!=32 ) {
-#ifndef NDEBUG
-      cerr << "WARNING: OImageEffect::blend : invalid image\n";
-#endif
-      return image;
+        qDebug( "WARNING: OImageEffect::blend : invalid image" );
+        return image;
     }
 
     int r_bgnd = bgnd.red(), g_bgnd = bgnd.green(), b_bgnd = bgnd.blue();
@@ -1152,9 +1134,7 @@ QImage& OImageEffect::blend(QImage &image, float initial_intensity,
             }
         }
     }
-#ifndef NDEBUG
-    else cerr << "OImageEffect::blend effect not implemented" << endl;
-#endif
+    else qDebug( "OImageEffect::blend effect not implemented" );
     return image;
 }
 
@@ -1184,10 +1164,8 @@ QImage& OImageEffect::blend(QImage &image1, QImage &image2,
     if (image1.width() == 0 || image1.height() == 0 ||
         image2.width() == 0 || image2.height() == 0 ||
         blendImage.width() == 0 || blendImage.height() == 0) {
-#ifndef NDEBUG
-      cerr << "OImageEffect::blend effect invalid image" << endl;
-#endif
-      return image1;
+            qDebug( "OImageEffect::blend effect invalid image" );
+            return image1;
     }
 
     int r, g, b;
@@ -1284,10 +1262,8 @@ unsigned int OImageEffect::uHash(unsigned int c)
 QImage& OImageEffect::hash(QImage &image, Lighting lite, unsigned int spacing)
 {
     if (image.width() == 0 || image.height() == 0) {
-#ifndef NDEBUG
-      cerr << "OImageEffect::hash effect invalid image" << endl;
-#endif
-      return image;
+        qDebug( "OImageEffect::hash effect invalid image" );
+        return image;
     }
 
     register int x, y;
@@ -1794,10 +1770,8 @@ bool OImageEffect::blend(
       lower.depth() != 32
   )
   {
-#ifndef NDEBUG
-    cerr << "OImageEffect::blend : Sizes not correct\n" ;
-#endif
-    return false;
+      qDebug( "OImageEffect::blend : Sizes not correct" );
+      return false;
   }
 
   output = lower.copy();
