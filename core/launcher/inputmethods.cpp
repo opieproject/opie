@@ -81,7 +81,10 @@ class IMToolButton : public QToolButton
 {
 public:
     IMToolButton::IMToolButton( QWidget *parent ) : QToolButton( parent )
-    { setWFlags( WStyle_Tool ); }
+    { setWFlags( WStyle_Tool ); 
+      setBackgroundOrigin( ParentOrigin );
+      setBackgroundMode( PaletteBackground );
+    }
 };
 
 
@@ -91,6 +94,7 @@ InputMethods::InputMethods( QWidget *parent ) :
 {
     readConfig();
 
+    setBackgroundOrigin( ParentOrigin );
     setBackgroundMode( PaletteBackground );
     QHBoxLayout *hbox = new QHBoxLayout( this );
 
