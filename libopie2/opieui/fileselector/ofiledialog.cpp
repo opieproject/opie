@@ -172,8 +172,7 @@ QString OFileDialog::getOpenFileName(int selector,
 
     OFileDialog dlg( caption.isEmpty() ? tr("Open") : caption,
                      wid, OFileSelector::Open, selector, startDir, file, mimes);
-    dlg.showMaximized();
-    if( dlg.exec() )
+    if( QPEApplication::execDialog(&dlg ) )
     {
         ret = dlg.fileName();
         saveLastDir( "FileDialog-OPEN", ret );
@@ -200,8 +199,7 @@ QString OFileDialog::getSaveFileName(int selector,
 
     OFileDialog dlg( caption.isEmpty() ? tr("Save") : caption,
                      wid, OFileSelector::Save, selector, startDir, file, mimes);
-    dlg.showMaximized();
-    if( dlg.exec() )
+    if( QPEApplication::execDialog(&dlg) )
     {
         ret = dlg.fileName();
         saveLastDir( "FileDialog-SAVE", ret );
@@ -231,8 +229,8 @@ QString OFileDialog::getDirectory(int selector,
 
     OFileDialog dlg( caption.isEmpty() ? tr( "Select Directory" ) : caption,
                      wid, OFileSelector::DirectorySelector, selector, startDir );
-    dlg.showMaximized();
-    if ( dlg.exec() )
+
+    if ( QPEApplication::execDialog(&dlg) )
     {
         ret = dlg.fileName();
         saveLastDir( "FileDialog-SELECTDIR", ret );
