@@ -1,4 +1,3 @@
-TEMPLATE	= app
 CONFIG		= qt warn_on release
 HEADERS		= global.h \
 		  mainwin.h \
@@ -37,7 +36,6 @@ TARGET		= aqpkg
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lqpe -lopie -lstdc++
-DESTDIR = $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/aqpkg.ts \
 	 ../../../i18n/nl/aqpkg.ts \
