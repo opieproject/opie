@@ -10,10 +10,11 @@
 #include <qhbox.h>
 #include <qvbox.h>
 
-DatebookPluginConfig::DatebookPluginConfig( QWidget* parent,  const char* name)
+DatebookPluginConfig::DatebookPluginConfig( QWidget* parent, const char* name)
     : ConfigWidget( parent, name ) {
 
     QVBoxLayout * layout = new QVBoxLayout( this );
+    layout->setMargin( 20 );
 
     QHBox *box1 = new QHBox( this );
     QLabel* TextLabel4 = new QLabel( box1, "TextLabel4" );
@@ -27,8 +28,7 @@ DatebookPluginConfig::DatebookPluginConfig( QWidget* parent,  const char* name)
 
     QHBox *box3 = new QHBox( this );
     QLabel* TextLabel6 = new QLabel( box3, "All Day");
-    TextLabel6->setText( tr( "Show only later\n"
-                             "appointments") );
+    TextLabel6->setText( tr( "Show only later\n appointments") );
     CheckBox3 = new QCheckBox ( box3, "CheckBox3" );
 
     QHBox *box4 = new QHBox( this );
