@@ -4,5 +4,5 @@ Section: Communications
 Maintainer: Wenzel Jakob <root@wazlaf.de>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base ($QPE_VERSION), libopie ($QPE_VERSION)
 Description: The Opie IRC client lets you chat on your favorite IRC server using your handheld computer

@@ -28,27 +28,6 @@
 #include <qcolor.h>
 #include <qarray.h>
 
-/* IRCFramedColorLabel is used to display a color */
-
-class IRCColorLabel : public QLabel {
-    Q_OBJECT
-public:
-    IRCColorLabel(QColor color, QWidget *parent = 0, const char *name = 0, WFlags f = 0);
-    QColor color();
-    void mousePressEvent(QMouseEvent *event); 
-protected:
-    QColor m_color;
-};
-
-class IRCFramedColorLabel : public QWidget {
-    Q_OBJECT
-public:
-    IRCFramedColorLabel(QColor color, QWidget *parent = 0, const char *name = 0, WFlags f = 0); 
-    QColor color();
-protected:
-    IRCColorLabel *m_label;
-};
-
 /* Custom colored QTabWidget */
 
 class QExtTab : public QTab {

@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(
     connect(a, SIGNAL(activated()), this, SLOT(newConnection()));
     a->setWhatsThis(tr("Create a new connection to an IRC server"));
     a->addTo(irc);
-    a = new QAction(tr("Settings"), Resource::loadPixmap("SettingsIcon"), QString::null, 0, this, 0);
+    a = new QAction(tr("Settings"), Resource::loadPixmap("opieirc/settings"), QString::null, 0, this, 0);
     a->setWhatsThis(tr("Configure OpieIRC's behavior and appearance"));
     connect(a, SIGNAL(activated()), this, SLOT(settings()));
     a->addTo(irc);

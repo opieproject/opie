@@ -25,24 +25,25 @@
 #include <qdialog.h>
 #include <qlineedit.h>
 
+class OColorButton;
+
 class IRCSettings : public QDialog {
     Q_OBJECT
 public:
     IRCSettings(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags f = 0);
-    QString getColorString(QWidget *widget);
     ~IRCSettings();
 protected slots:
     void accept();
 protected:
-    Config    *m_config;
-    QWidget   *m_background;
-    QWidget   *m_text;
-    QWidget   *m_error;
-    QWidget   *m_self;
-    QWidget   *m_server;
-    QWidget   *m_other;
-    QWidget   *m_notification;
-    QLineEdit *m_lines;
+    Config       *m_config;
+    OColorButton *m_background;
+    OColorButton *m_text;
+    OColorButton *m_error;
+    OColorButton *m_self;
+    OColorButton *m_server;
+    OColorButton *m_other;
+    OColorButton *m_notification;
+    QLineEdit    *m_lines;
 };
 
 #endif /* __IRCSETTINGS_H */
