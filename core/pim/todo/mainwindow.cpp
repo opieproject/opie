@@ -411,7 +411,7 @@ void MainWindow::populateTemplates() {
 /*
  * slotNewFromTemplate
  * We use the edit widget to do
- * the config but we setUid(-1)
+ * the config but we setUid(1)
  * to get a new uid
  */
 /*
@@ -427,7 +427,7 @@ void MainWindow::slotNewFromTemplate( int id ) {
 
     if ( currentEditor()->accepted() ) {
         /* assign new todo */
-        event.setUid( -1 );
+        event.setUid( 1 );
         currentView()->addEvent( event );
         m_todoMgr.add( event );
 
@@ -445,7 +445,7 @@ void MainWindow::slotDuplicate() {
     }
     OTodo ev = m_todoMgr.event( currentView()->current() );
     /* let's generate a new uid */
-    ev.setUid(-1);
+    ev.setUid(1);
     m_todoMgr.add( ev );
 
     currentView()->addEvent( ev );
