@@ -1,4 +1,4 @@
   config LIBOPIE
     boolean "libopie1 (compatibility only, use libopie2* for new applications)"
     default "n"
-    depends LIBQPE || LIBQPE-X11 || LIBOPIE2DB
+    depends ( LIBQPE || LIBQPE-X11 )
