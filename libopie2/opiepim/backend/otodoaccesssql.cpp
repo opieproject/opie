@@ -457,6 +457,8 @@ OPimTodo OPimTodoAccessBackendSQL::find(int uid ) const{
     return todo( m_driver->query(&query) );
 
 }
+
+// Remember: uid is already in the list of uids, called ints !
 OPimTodo OPimTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
                                    uint cur, Frontend::CacheDirection dir ) const{
     uint CACHE = readAhead();
@@ -468,7 +470,7 @@ OPimTodo OPimTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
     // we try to cache CACHE items
     switch( dir ) {
         /* forward */
-    case 0: // FIXME: Not a good style to use magic numbers here (eilers)
+    case Frontend::Forward:
         for (uint i = cur; i < ints.count() && size < CACHE; i++ ) {
             odebug << "size " << size << " " << ints[i] << "" << oendl;
             search[size] = ints[i];
@@ -476,21 +478,24 @@ OPimTodo OPimTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
         }
         break;
         /* reverse */
-    case 1: // FIXME: Not a good style to use magic numbers here (eilers)
+    case Frontend::Reverse: 
         for (uint i = cur; i != 0 && size <  CACHE; i-- ) {
             search[size] = ints[i];
             size++;
         }
         break;
     }
+
     search.resize( size );
     FindQuery query( search );
     OSQLResult res = m_driver->query( &query  );
     if ( res.state() != OSQLResult::Success )
         return to;
 
-    return todo( res );
+    todo( res );  //FIXME: Don't like polymorphism here. It makes the code hard to read here..(eilers)
+    return cacheFind( uid );
 }
+
 void OPimTodoAccessBackendSQL::clear() {
     ClearQuery cle;
     OSQLResult res = m_driver->query( &cle );
