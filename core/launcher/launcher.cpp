@@ -18,6 +18,10 @@
 **
 **********************************************************************/
 
+// WARNING: Do *NOT* define this yourself. The SL5xxx from SHARP does NOT
+//      have this class.
+#define QTOPIA_INTERNAL_FSLP
+
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/resource.h>
 #include <qpe/applnk.h>
@@ -697,20 +701,22 @@ void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
 
 	for ( QListIterator<DocLnk> it( docsFolder->children() ); it.current(); ++it ) {
 	    DocLnk *doc = it.current();
-	    QString lfn = doc->linkFile();
 	    QFileInfo fi( doc->file() );
 	    if ( !fi.exists() )
 		continue;
 
-
-
-	    QFile f( lfn );
-	    if ( f.open( IO_ReadOnly ) ) {
-		QTextStream ts( &f );
-		ts.setEncoding( QTextStream::UnicodeUTF8 );
-		contents += ts.read();
-		f.close();
-	    } else {
+	    bool fake = !doc->linkFileKnown();
+	    if ( !fake ) {
+		QFile f( doc->linkFile() );
+		if ( f.open( IO_ReadOnly ) ) {
+		    QTextStream ts( &f );
+		    ts.setEncoding( QTextStream::UnicodeUTF8 );
+		    contents += ts.read();
+		    f.close();
+		} else
+		    fake = TRUE;
+	    }
+	    if (fake) {
 		contents += "[Desktop Entry]\n";
 		contents += "Categories = " + Qtopia::Record::idsToString( doc->categories() ) + "\n";
 		contents += "File = "+doc->file()+"\n";

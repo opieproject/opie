@@ -25,6 +25,7 @@ TARGET1 = lib$(TARGET).so.$(VER_MAJ)
 
 HEADERS =	background.h \
 		desktop.h \
+		qprocess.h \
 		info.h \
 		appicons.h \
 		taskbar.h \
@@ -63,6 +64,8 @@ HEADERS =	background.h \
 		$(QPEDIR)/rsync/qrsync.h
 SOURCES =	background.cpp \
 		desktop.cpp \
+		qprocess.cpp \
+		qprocess_unix.cpp \
 		info.cpp \
 		appicons.cpp \
 		taskbar.cpp \
@@ -110,6 +113,8 @@ SOURCES =	background.cpp \
 		$(QPEDIR)/rsync/qrsync.cpp
 OBJECTS =	background.o \
 		desktop.o \
+		qprocess.o \
+		qprocess_unix.o \
 		info.o \
 		appicons.o \
 		taskbar.o \
@@ -165,6 +170,7 @@ UICIMPLS =      shutdown.cpp \
 		syncdialog.cpp
 SRCMOC	=	moc_background.cpp \
 		moc_desktop.cpp \
+		moc_qprocess.cpp \
 		moc_info.cpp \
 		moc_appicons.cpp \
 		moc_taskbar.cpp \
@@ -180,11 +186,13 @@ SRCMOC	=	moc_background.cpp \
 		moc_qcopbridge.cpp \
 		moc_packageslave.cpp \
 		moc_irserver.cpp \
+		qprocess_unix.moc \
 		appicons.moc \
 		moc_shutdown.cpp \
 		moc_syncdialog.cpp
 OBJMOC	=	moc_background.o \
 		moc_desktop.o \
+		moc_qprocess.o \
 		moc_info.o \
 		moc_appicons.o \
 		moc_taskbar.o \
@@ -290,7 +298,6 @@ desktop.o: desktop.cpp \
 		qcopbridge.h \
 		startmenu.h \
 		taskbar.h \
-		$(QPEDIR)/include/qpe/custom.h \
 		transferserver.h \
 		irserver.h \
 		packageslave.h \
@@ -300,6 +307,13 @@ desktop.o: desktop.cpp \
 		$(QPEDIR)/include/qpe/power.h \
 		$(QPEDIR)/include/qpe/qcopenvelope_qws.h \
 		$(QPEDIR)/include/qpe/global.h
+
+qprocess.o: qprocess.cpp \
+		qprocess.h
+
+qprocess_unix.o: qprocess_unix.cpp \
+		qprocess_unix.moc \
+		qprocess.h
 
 info.o: info.cpp \
 		info.h \
@@ -331,7 +345,6 @@ taskbar.o: taskbar.cpp \
 		$(QPEDIR)/include/qpe/resource.h \
 		appicons.h \
 		taskbar.h \
-		$(QPEDIR)/include/qpe/custom.h \
 		desktop.h \
 		shutdownimpl.h \
 		shutdown.h \
@@ -344,6 +357,8 @@ taskbar.o: taskbar.cpp \
 		$(QPEDIR)/include/qpe/datebookdb.h \
 		$(QPEDIR)/include/qpe/event.h \
 		$(QPEDIR)/include/qpe/palmtoprecord.h \
+		$(QPEDIR)/include/qpe/timeconversion.h \
+		$(QPEDIR)/include/qpe/qpcglobal.h \
 		../helpbrowser/helpbrowser.h \
 		../minesweep/minesweep.h \
 		../textedit/textedit.h \
@@ -419,8 +434,13 @@ launcher.o: launcher.cpp \
 		$(QPEDIR)/include/qpe/qpeapplication.h \
 		$(QPEDIR)/include/qpe/mimetype.h \
 		$(QPEDIR)/include/qpe/storage.h \
+		$(QPEDIR)/include/qpe/palmtoprecord.h \
 		launcherview.h \
 		launcher.h \
+		syncdialog.h \
+		desktop.h \
+		shutdownimpl.h \
+		shutdown.h \
 		$(QPEDIR)/include/qpe/lnkproperties.h \
 		mrulist.h \
 		$(QPEDIR)/rsync/qrsync.h
@@ -442,8 +462,9 @@ $(QPEDIR)/calibrate/calibrate.o: $(QPEDIR)/calibrate/calibrate.cpp \
 		$(QPEDIR)/include/qpe/resource.h
 
 transferserver.o: transferserver.cpp \
-		$(QPEDIR)/include/qpe/qprocess.h \
 		$(QPEDIR)/include/qpe/process.h \
+		$(QPEDIR)/include/qpe/config.h \
+		$(QPEDIR)/include/qpe/qcopenvelope_qws.h \
 		transferserver.h
 
 packageslave.o: packageslave.cpp \
@@ -461,6 +482,7 @@ irserver.o: irserver.cpp \
 
 qcopbridge.o: qcopbridge.cpp \
 		qcopbridge.h \
+		transferserver.h \
 		$(QPEDIR)/include/qpe/qcopenvelope_qws.h \
 		$(QPEDIR)/include/qpe/qpeapplication.h
 
@@ -482,7 +504,6 @@ main.o: main.cpp \
 		shutdown.h \
 		$(QPEDIR)/include/qpe/qpeapplication.h \
 		taskbar.h \
-		$(QPEDIR)/include/qpe/custom.h \
 		stabmon.h \
 		$(QPEDIR)/include/qpe/network.h \
 		$(QPEDIR)/include/qpe/config.h \
@@ -727,7 +748,8 @@ syncdialog.cpp: syncdialog.ui
 shutdown.o: shutdown.cpp \
 		shutdown.h
 
-syncdialog.o: syncdialog.cpp
+syncdialog.o: syncdialog.cpp \
+		syncdialog.h
 
 moc_background.o: moc_background.cpp \
 		background.h
@@ -738,6 +760,9 @@ moc_desktop.o: moc_desktop.cpp \
 		shutdown.h \
 		$(QPEDIR)/include/qpe/qpeapplication.h
 
+moc_qprocess.o: moc_qprocess.cpp \
+		qprocess.h
+
 moc_info.o: moc_info.cpp \
 		info.h \
 		background.h
@@ -746,8 +771,7 @@ moc_appicons.o: moc_appicons.cpp \
 		appicons.h
 
 moc_taskbar.o: moc_taskbar.cpp \
-		taskbar.h \
-		$(QPEDIR)/include/qpe/custom.h
+		taskbar.h
 
 moc_sidething.o: moc_sidething.cpp \
 		sidething.h \
@@ -796,19 +820,23 @@ moc_packageslave.o: moc_packageslave.cpp \
 moc_irserver.o: moc_irserver.cpp \
 		irserver.h
 
-moc_shutdown.o: appicons.moc \
+moc_shutdown.o: qprocess_unix.moc \
+		qprocess_unix.cpp \
+		qprocess.h
+
+moc_syncdialog.o: appicons.moc \
 		appicons.cpp \
 		appicons.h \
 		$(QPEDIR)/include/qpe/qcopenvelope_qws.h
-
-moc_syncdialog.o: moc_shutdown.cpp \
-		shutdown.h
 
 moc_background.cpp: background.h
 	$(MOC) background.h -o moc_background.cpp
 
 moc_desktop.cpp: desktop.h
 	$(MOC) desktop.h -o moc_desktop.cpp
+
+moc_qprocess.cpp: qprocess.h
+	$(MOC) qprocess.h -o moc_qprocess.cpp
 
 moc_info.cpp: info.h
 	$(MOC) info.h -o moc_info.cpp
@@ -854,6 +882,9 @@ moc_packageslave.cpp: packageslave.h
 
 moc_irserver.cpp: irserver.h
 	$(MOC) irserver.h -o moc_irserver.cpp
+
+qprocess_unix.moc: qprocess_unix.cpp
+	$(MOC) qprocess_unix.cpp -o qprocess_unix.moc
 
 appicons.moc: appicons.cpp
 	$(MOC) appicons.cpp -o appicons.moc
