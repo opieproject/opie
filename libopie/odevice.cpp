@@ -57,27 +57,27 @@ public:
 
 	QString m_vendorstr;
 	OVendor m_vendor;
-	
+
 	QString m_modelstr;
 	OModel m_model;
 
 	QString m_systemstr;
 	OSystem m_system;
-	
+
 	QString m_sysverstr;
 
 	Transformation m_rotation;
-	
+
 	QValueList <ODeviceButton> *m_buttons;
 	uint                        m_holdtime;
 };
 
 
 class iPAQ : public ODevice, public QWSServer::KeyboardFilter {
-protected: 
+protected:
 	virtual void init ( );
 	virtual void initButtons ( );
-	
+
 public:
 	virtual bool setSoftSuspend ( bool soft );
 
@@ -85,7 +85,7 @@ public:
 	virtual int displayBrightnessResolution ( ) const;
 
 	virtual void alarmSound ( );
-	
+
     virtual QValueList <OLed> ledList ( ) const;
 	virtual QValueList <OLedState> ledStateList ( OLed led ) const;
 	virtual OLedState ledState ( OLed led ) const;
@@ -94,13 +94,13 @@ public:
 	virtual bool hasLightSensor ( ) const;
 	virtual int readLightSensor ( );
 	virtual int lightSensorResolution ( ) const;
-	
+
 protected:
 	virtual bool filter ( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
 	virtual void timerEvent ( QTimerEvent *te );
-	
+
 	int m_power_timer;
-	
+
 	OLedState m_leds [2];
 };
 
@@ -109,7 +109,7 @@ protected:
 	virtual void init ( );
 	virtual void initButtons ( );
 
-public:	
+public:
 	virtual bool setSoftSuspend ( bool soft );
 
 	virtual bool setDisplayBrightness ( int b );
@@ -117,16 +117,16 @@ public:
 
 	virtual void alarmSound ( );
 	virtual void keySound ( );
-	virtual void touchSound ( );	
+	virtual void touchSound ( );
 
     virtual QValueList <OLed> ledList ( ) const;
 	virtual QValueList <OLedState> ledStateList ( OLed led ) const;
 	virtual OLedState ledState ( OLed led ) const;
 	virtual bool setLedState ( OLed led, OLedState st );
-	
+
 protected:
 	virtual void buzzer ( int snd );
-	
+
 	OLedState m_leds [1];
 };
 
@@ -141,34 +141,34 @@ struct i_button {
     char *fheldservice;
     char *fheldaction;
 } ipaq_buttons [] = {
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx, 
-    Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"), 
-	"devicebuttons/ipaq_calendar", 
-	"datebook", "nextView()", 
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx,
+    Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
+	"devicebuttons/ipaq_calendar",
+	"datebook", "nextView()",
 	"today", "raise()" },
     { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx,
-    Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"), 
-	"devicebuttons/ipaq_contact",  
+    Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
+	"devicebuttons/ipaq_contact",
 	"addressbook", "raise()",
 	"addressbook", "beamBusinessCard()" },
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx, 
-    Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"), 
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx,
+    Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
 	"devicebuttons/ipaq_menu",
  	"QPE/TaskBar", "toggleMenu()",
 	"QPE/TaskBar", "toggleStartMenu()" },
     { Model_iPAQ_H38xx | Model_iPAQ_H39xx,
-    Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"), 
+    Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
 	"devicebuttons/ipaq_mail",
 	"mail", "raise()",
 	"mail", "newMail()" },
     { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx,
-    Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"), 
-	"devicebuttons/ipaq_home", 
+    Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
+	"devicebuttons/ipaq_home",
 	"QPE/Launcher", "home()",
 	"buttonsettings", "raise()" },
     { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx,
-    Qt::Key_F24, QT_TRANSLATE_NOOP("Button", "Record Button"), 
-	"devicebuttons/ipaq_record", 
+    Qt::Key_F24, QT_TRANSLATE_NOOP("Button", "Record Button"),
+	"devicebuttons/ipaq_record",
 	"QPE/VMemo", "toggleRecord()",
 	"sound", "raise()" },
 };
@@ -218,7 +218,7 @@ static QCString makeChannel ( const char *str )
 ODevice *ODevice::inst ( )
 {
 	static ODevice *dev = 0;
-	
+
 	if ( !dev ) {
 		if ( QFile::exists ( "/proc/hal/model" ))
 			dev = new iPAQ ( );
@@ -226,7 +226,7 @@ ODevice *ODevice::inst ( )
 			dev = new Zaurus ( );
 		else
 			dev = new ODevice ( );
-			
+
 		dev-> init ( );
 	}
 	return dev;
@@ -254,7 +254,7 @@ ODevice::ODevice ( )
 	d-> m_system = System_Unknown;
 	d-> m_sysverstr = "0.0";
 	d-> m_rotation = Rot0;
-	
+
 	d-> m_holdtime = 1000; // 1000ms
 	d-> m_buttons = 0;
 }
@@ -263,7 +263,7 @@ void ODevice::systemMessage ( const QCString &msg, const QByteArray & )
 {
 	if ( msg == "deviceButtonMappingChanged()" ) {
 		reloadButtonMapping ( );
-	} 
+	}
 }
 
 void ODevice::init ( )
@@ -281,10 +281,10 @@ void ODevice::initButtons ( )
 	d-> m_buttons = new QValueList <ODeviceButton>;
 
 	for ( uint i = 0; i < ( sizeof( ipaq_buttons ) / sizeof( i_button )); i++ ) {
-		i_button *ib = ipaq_buttons + i;	
+		i_button *ib = ipaq_buttons + i;
 		ODeviceButton b;
-		
-		if (( ib-> model & Model_iPAQ_H36xx ) == Model_iPAQ_H36xx ) {		
+
+		if (( ib-> model & Model_iPAQ_H36xx ) == Model_iPAQ_H36xx ) {
 			b. setKeycode ( ib-> code );
 			b. setUserText ( QObject::tr ( "Button", ib-> utext ));
 			b. setPixmap ( Resource::loadPixmap ( ib-> pix ));
@@ -294,9 +294,9 @@ void ODevice::initButtons ( )
 		}
 	}
 	reloadButtonMapping ( );
-	
+
 	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
-	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));	                     	
+	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));
 }
 
 ODevice::~ODevice ( )
@@ -323,10 +323,10 @@ bool ODevice::suspend ( )
 		return false;
 
 	bool res = false;
-	
+
 	struct timeval tvs, tvn;
 	::gettimeofday ( &tvs, 0 );
-	
+
 	::sync ( ); // flush fs caches
 	res = ( ::system ( "apm --suspend" ) == 0 );
 
@@ -334,13 +334,13 @@ bool ODevice::suspend ( )
 	// can not be sure when exactly the device is really suspended
 	// This can be deleted as soon as a stable familiar with a synchronous apm implementation exists.
 
-	if ( res ) {	
+	if ( res ) {
 		do { // wait at most 1.5 sec: either suspend didn't work or the device resumed
 			::usleep ( 200 * 1000 );
-			::gettimeofday ( &tvn, 0 );				
+			::gettimeofday ( &tvn, 0 );
 		} while ((( tvn. tv_sec - tvs. tv_sec ) * 1000 + ( tvn. tv_usec - tvs. tv_usec ) / 1000 ) < 1500 );
 	}
-	
+
 	return res;
 }
 
@@ -362,11 +362,11 @@ bool ODevice::setDisplayStatus ( bool on )
 
 	bool res = false;
 	int fd;
-	
+
 	if (( fd = ::open ( "/dev/fb0", O_RDWR )) >= 0 ) {
 		res = ( ::ioctl ( fd, FBIOBLANK, on ? VESA_NO_BLANKING : VESA_POWERDOWN ) == 0 );
 		::close ( fd );
-	}	                                                                                       
+	}
 	return res;
 }
 
@@ -515,7 +515,7 @@ void ODevice::reloadButtonMapping ( )
 	initButtons ( );
 
 	Config cfg ( "ButtonSettings" );
-	
+
 	for ( uint i = 0; i < d-> m_buttons-> count ( ); i++ ) {
 		ODeviceButton &b = ( *d-> m_buttons ) [i];
 		QString group = "Button" + QString::number ( i );
@@ -523,7 +523,7 @@ void ODevice::reloadButtonMapping ( )
 		QCString pch, hch;
 		QCString pm, hm;
 		QByteArray pdata, hdata;
-		
+
 		if ( cfg. hasGroup ( group )) {
 			cfg. setGroup ( group );
 			pch = cfg. readEntry ( "PressedActionChannel" ). latin1 ( );
@@ -534,9 +534,9 @@ void ODevice::reloadButtonMapping ( )
 			hm  = cfg. readEntry ( "HeldActionMessage" ). latin1 ( );
 			// hdata = decodeBase64 ( buttonFile. readEntry ( "HeldActionArgs" ));
 		}
-				
+
 		b. setPressedAction ( OQCopMessage ( pch, pm, pdata ));
-		
+
 		b. setHeldAction ( OQCopMessage ( hch, hm, hdata ));
 	}
 }
@@ -546,10 +546,10 @@ void ODevice::remapPressedAction ( int button, const OQCopMessage &action )
 	initButtons ( );
 
 	QString mb_chan;
-	
+
 	if ( button >= (int) d-> m_buttons-> count ( ))
 		return;
-		
+
 	ODeviceButton &b = ( *d-> m_buttons ) [button];
         b. setPressedAction ( action );
 
@@ -571,7 +571,7 @@ void ODevice::remapHeldAction ( int button, const OQCopMessage &action )
 
 	if ( button >= (int) d-> m_buttons-> count ( ))
 		return;
-		
+
 	ODeviceButton &b = ( *d-> m_buttons ) [button];
     	b. setHeldAction ( action );
 
@@ -636,22 +636,38 @@ void iPAQ::init ( )
 	}
 
 	f. setName ( "/etc/familiar-version" );
-	if ( f. open ( IO_ReadOnly )) { 
+	if ( f. open ( IO_ReadOnly )) {
 		d-> m_systemstr = "Familiar";
 		d-> m_system = System_Familiar;
-		
+
 		QTextStream ts ( &f );
 		d-> m_sysverstr = ts. readLine ( ). mid ( 10 );
-		
+
 		f. close ( );
-	}
+	} else {
+	    f. setName ( "/etc/oz_version" );
+
+                    if ( f. open ( IO_ReadOnly )) {
+	    	d-> m_systemstr = "OpenEmbedded/iPaq";
+    		d-> m_system = System_Familiar;
+
+	    	QTextStream ts ( &f );
+		    ts.setDevice ( &f );
+	    	d-> m_sysverstr = ts. readLine ( );
+		    f. close ( );
+        }
+    }
+
+
+
+
 
 	m_leds [0] = m_leds [1] = Led_Off;
-	
+
 	m_power_timer = 0;
-	
+
 	if ( d-> m_qwsserver )
-		QWSServer::setKeyboardFilter ( this );	
+		QWSServer::setKeyboardFilter ( this );
 }
 
 void iPAQ::initButtons ( )
@@ -662,21 +678,21 @@ void iPAQ::initButtons ( )
 	d-> m_buttons = new QValueList <ODeviceButton>;
 
 	for ( uint i = 0; i < ( sizeof( ipaq_buttons ) / sizeof( i_button )); i++ ) {
-		i_button *ib = ipaq_buttons + i;	
+		i_button *ib = ipaq_buttons + i;
 		ODeviceButton b;
-		
-		if (( ib-> model & d-> m_model ) == d-> m_model ) {		
+
+		if (( ib-> model & d-> m_model ) == d-> m_model ) {
 			b. setKeycode ( ib-> code );
 			b. setUserText ( QObject::tr ( "Button", ib-> utext ));
 			b. setPixmap ( Resource::loadPixmap ( ib-> pix ));
 			b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( ib-> fpressedservice ), ib-> fpressedaction ));
 			b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( ib-> fheldservice ), ib-> fheldaction ));
-                                        
+
 			d-> m_buttons-> append ( b );
 		}
 	}
-	reloadButtonMapping ( );	
-	
+	reloadButtonMapping ( );
+
 	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
 	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));
 }
@@ -719,12 +735,12 @@ QValueList <OLedState> iPAQ::ledStateList ( OLed l ) const
 		vl << Led_Off << Led_On << Led_BlinkSlow << Led_BlinkFast;
 	else if ( l == Led_BlueTooth && d-> m_model == Model_iPAQ_H38xx )
 		vl << Led_Off; // << Led_On << ???
-		
+
 	return vl;
 }
 
 OLedState iPAQ::ledState ( OLed l ) const
-{	
+{
 	switch ( l ) {
 		case Led_Power:
 			return m_leds [0];
@@ -735,7 +751,7 @@ OLedState iPAQ::ledState ( OLed l ) const
 	}
 }
 
-bool iPAQ::setLedState ( OLed l, OLedState st ) 
+bool iPAQ::setLedState ( OLed l, OLedState st )
 {
 	static int fd = ::open ( "/dev/touchscreen/0", O_RDWR | O_NONBLOCK );
 
@@ -773,19 +789,19 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
 		// H38xx/H39xx have no "Q" key anymore - this is now the Mail key
 		case HardKey_Menu: {
 			if (( d-> m_model == Model_iPAQ_H38xx ) ||
-			    ( d-> m_model == Model_iPAQ_H39xx )) {			    
+			    ( d-> m_model == Model_iPAQ_H39xx )) {
 				newkeycode = HardKey_Mail;
 			}
 			break;
 		}
-				
+
 		// Rotate cursor keys 180°
-		case Key_Left : 
-		case Key_Right: 
-		case Key_Up   : 
+		case Key_Left :
+		case Key_Right:
+		case Key_Up   :
 		case Key_Down : {
 			if (( d-> m_model == Model_iPAQ_H31xx ) ||
-			    ( d-> m_model == Model_iPAQ_H38xx )) {			    
+			    ( d-> m_model == Model_iPAQ_H38xx )) {
 				newkeycode = Key_Left + ( keycode - Key_Left + 2 ) % 4;
 			}
 			break;
@@ -804,11 +820,11 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
 				QWSServer::sendKeyEvent ( -1, HardKey_Suspend, 0, true, false );
 				QWSServer::sendKeyEvent ( -1, HardKey_Suspend, 0, false, false );
 			}
-			newkeycode = Key_unknown;	
-			break;	
+			newkeycode = Key_unknown;
+			break;
 		}
 	}
-			
+
 	if ( newkeycode != keycode ) {
 		if ( newkeycode != Key_unknown )
 			QWSServer::sendKeyEvent ( -1, newkeycode, modifiers, isPress, autoRepeat );
@@ -869,18 +885,18 @@ bool iPAQ::setSoftSuspend ( bool soft )
 {
 	bool res = false;
 	int fd;
-	
+
 	if (( fd = ::open ( "/proc/sys/ts/suspend_button_mode", O_WRONLY )) >= 0 ) {
 		if ( ::write ( fd, soft ? "1" : "0", 1 ) == 1 )
 			res = true;
 		else
 			::perror ( "write to /proc/sys/ts/suspend_button_mode" );
-		
+
 		::close ( fd );
 	}
 	else
 		::perror ( "/proc/sys/ts/suspend_button_mode" );
-	
+
 	return res;
 }
 
@@ -889,7 +905,7 @@ bool iPAQ::setDisplayBrightness ( int bright )
 {
 	bool res = false;
 	int fd;
-	
+
 	if ( bright > 255 )
 		bright = 255;
 	if ( bright < 0 )
@@ -913,14 +929,14 @@ int iPAQ::displayBrightnessResolution ( ) const
 		case Model_iPAQ_H36xx:
 		case Model_iPAQ_H37xx:
 			return 128;  	// really 256, but >128 could damage the LCD
-			
+
 		case Model_iPAQ_H38xx:
 		case Model_iPAQ_H39xx:
 			return 64;
-		
+
 		default:
 			return 2;
-	}	
+	}
 }
 
 
@@ -933,19 +949,19 @@ int iPAQ::readLightSensor ( )
 {
 	int fd;
 	int val = -1;
-	
+
 	if (( fd = ::open ( "/proc/hal/light_sensor", O_RDONLY )) >= 0 ) {
 		char buffer [8];
-	
+
 		if ( ::read ( fd, buffer, 5 ) == 5 ) {
 			char *endptr;
-		
+
 			buffer [4] = 0;
 			val = ::strtol ( buffer + 2, &endptr, 16 );
-			
+
 			if ( *endptr != 0 )
 				val = -1;
-		}	
+		}
 		::close ( fd );
 	}
 
@@ -980,7 +996,7 @@ void Zaurus::init ( )
 		f. close ( );
 
 		f. setName ( "/etc/oz_version" );
-		if ( f. open ( IO_ReadOnly )) { 
+		if ( f. open ( IO_ReadOnly )) {
 			QTextStream ts ( &f );
 			d-> m_sysverstr = ts. readLine ( );//. mid ( 10 );
 			f. close ( );
@@ -1036,24 +1052,24 @@ void Zaurus::initButtons ( )
 {
 	if ( d-> m_buttons )
 		return;
-		
+
 	d-> m_buttons = new QValueList <ODeviceButton>;
 
 	for ( uint i = 0; i < ( sizeof( z_buttons ) / sizeof( z_button )); i++ ) {
-		z_button *zb = z_buttons + i;	
+		z_button *zb = z_buttons + i;
 		ODeviceButton b;
-		
+
 		b. setKeycode ( zb-> code );
 		b. setUserText ( QObject::tr ( "Button", zb-> utext ));
 		b. setPixmap ( Resource::loadPixmap ( zb-> pix ));
 		b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( zb-> fpressedservice ), zb-> fpressedaction ));
 		b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( zb-> fheldservice ), zb-> fheldaction ));
-                                        
+
 		d-> m_buttons-> append ( b );
 	}
-	
+
 	reloadButtonMapping ( );
-	
+
 	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
 	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));
 }
@@ -1128,7 +1144,7 @@ typedef struct sharp_led_status {
 void Zaurus::buzzer ( int sound )
 {
 	static int fd = ::open ( "/dev/sharp_buz", O_WRONLY|O_NONBLOCK );
-  
+
 	if ( fd >= 0 ) {
 		::ioctl ( fd, SHARP_BUZZER_MAKESOUND, sound );
 		::close ( fd );
@@ -1136,17 +1152,17 @@ void Zaurus::buzzer ( int sound )
 }
 
 
-void Zaurus::alarmSound ( ) 
+void Zaurus::alarmSound ( )
 {
 	buzzer ( SHARP_BUZ_SCHEDULE_ALARM );
 }
 
-void Zaurus::touchSound ( ) 
+void Zaurus::touchSound ( )
 {
 	buzzer ( SHARP_BUZ_TOUCHSOUND );
 }
 
-void Zaurus::keySound ( ) 
+void Zaurus::keySound ( )
 {
 	buzzer ( SHARP_BUZ_KEYSOUND );
 }
@@ -1162,7 +1178,7 @@ QValueList <OLed> Zaurus::ledList ( ) const
 QValueList <OLedState> Zaurus::ledStateList ( OLed l ) const
 {
 	QValueList <OLedState> vl;
-	
+
 	if ( l == Led_Mail )
 		vl << Led_Off << Led_On << Led_BlinkSlow;
 	return vl;
@@ -1172,13 +1188,13 @@ OLedState Zaurus::ledState ( OLed which ) const
 {
 	if ( which == Led_Mail )
 		return m_leds [0];
-	else	
+	else
 		return Led_Off;
 }
 
 bool Zaurus::setLedState ( OLed which, OLedState st )
 {
-	static int fd = ::open ( "/dev/sharp_led", O_RDWR|O_NONBLOCK ); 
+	static int fd = ::open ( "/dev/sharp_led", O_RDWR|O_NONBLOCK );
 
 	if ( which == Led_Mail ) {
 		if ( fd >= 0 ) {
@@ -1186,19 +1202,19 @@ bool Zaurus::setLedState ( OLed which, OLedState st )
 			::memset ( &leds, 0, sizeof( leds ));
 			leds. which = SHARP_LED_MAIL_EXISTS;
 			bool ok = true;
-			
+
 			switch ( st ) {
 				case Led_Off      : leds. status = LED_MAIL_NO_UNREAD_MAIL; break;
 				case Led_On       : leds. status = LED_MAIL_NEWMAIL_EXISTS; break;
 				case Led_BlinkSlow: leds. status = LED_MAIL_UNREAD_MAIL_EX; break;
 				default            : ok = false;
 			}
-		
+
 			if ( ok && ( ::ioctl ( fd, SHARP_LED_SETSTATUS, &leds ) >= 0 )) {
 				m_leds [0] = st;
 				return true;
 			}
-		}		
+		}
 	}
 	return false;
 }
@@ -1226,12 +1242,12 @@ bool Zaurus::setSoftSuspend ( bool soft )
 		}
 		else
 			perror ( "APM_IOCGEVTSRC" );
-		
+
 		::close ( fd );
 	}
 	else
 		perror ( "/dev/apm_bios or /dev/misc/apm_bios" );
-		
+
     return res;
 }
 
@@ -1240,12 +1256,12 @@ bool Zaurus::setDisplayBrightness ( int bright )
 {
 	bool res = false;
 	int fd;
-	
+
 	if ( bright > 255 )
 		bright = 255;
 	if ( bright < 0 )
 		bright = 0;
-	
+
 	if (( fd = ::open ( "/dev/fl", O_WRONLY )) >= 0 ) {
 		int bl = ( bright * 4 + 127 ) / 255; // only 4 steps on zaurus
 		if ( bright && !bl )
@@ -1257,7 +1273,7 @@ bool Zaurus::setDisplayBrightness ( int bright )
 }
 
 
-int Zaurus::displayBrightnessResolution ( ) const 
+int Zaurus::displayBrightnessResolution ( ) const
 {
 	return 5;
 }
