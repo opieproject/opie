@@ -487,27 +487,36 @@ void Wellenreiter::doAction( const QString& action, const QString& protocol, OPa
     else if ( action == "LogMessage" )
         logwindow->log( QString().sprintf( "Got packet with protocol '%s'", (const char*) protocol ) );
     else if ( action == "MessageBox" )
-        QMessageBox::information ( this, "Notification!",
+        QMessageBox::information( this, "Notification!",
         QString().sprintf( "Got packet with protocol '%s'", (const char*) protocol ) );
 }
 
 void Wellenreiter::joinNetwork(const QString& type, const QString& essid, int channel, const QString& macaddr)
 {
-    // we need the interface too:
-    const QString iface = "wlan0";
-    qDebug( "joinNetwork() - %s, %s, %d, %s",
+    if ( !iface )
+    {
+        QMessageBox::warning( this, tr( "Can't do that!" ), tr( "No wireless\ninterface available." ) );
+        return;
+    }
+
+    if ( sniffing )
+    {
+        QMessageBox::warning( this, tr( "Can't do that!" ), tr( "Stop sniffing before\njoining a net." ) );
+        return;
+    }
+
+    qDebug( "joinNetwork() with Interface %s: %s, %s, %d, %s",
+        (const char*) iface->name(),
         (const char*) type,
         (const char*) essid,
         channel,
         (const char*) macaddr );
 
-    // TODO: Stop scanning here
-
     QCopEnvelope msg( "QPE/Application/networksettings", "wlan(QString,QString,QString)" );
-    msg << iface << QString("Mode") << type;
-    msg << iface << QString("ESSID") << essid;
-    msg << iface << QString("Channel") << channel;
-    msg << iface << QString("MacAddr") << macaddr;
+    msg << iface->name() << QString("Mode") << type;
+    msg << iface->name() << QString("ESSID") << essid;
+    msg << iface->name() << QString("Channel") << channel;
+    msg << iface->name() << QString("MacAddr") << macaddr;
 
 }
 
