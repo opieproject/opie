@@ -4,6 +4,7 @@ Section: opie/system
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Arch: iPAQ
+Depends: libjpeg62
 Version: 2.3.2-3
 Description: Qt/Embedded 0,90,180 rotation fonts
  The iPAQ's "normal" orientation is 270-degree rotated.
