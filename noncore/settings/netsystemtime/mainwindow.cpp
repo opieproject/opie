@@ -32,7 +32,6 @@
 #include "settingstabwidget.h"
 #include "ntptabwidget.h"
 #include "predicttabwidget.h"
-#include "systemtimeconfig.h"
 
 #include <opie/oprocess.h>
 #include <opie/otabwidget.h>
