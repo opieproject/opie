@@ -69,7 +69,7 @@
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation type="unfinished"></translation>
+        <translation>Bardzo wydajny styl Liquid autorstwa Mosfet&apos;a</translation>
     </message>
 </context>
 </TS>
