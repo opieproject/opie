@@ -378,7 +378,7 @@ QtRec::QtRec( QWidget* parent,  const char* name, WFlags fl )
 //    signal(SIGPIPE, SIG_IGN);
 
    if ( !name )
-      setName( "QpeRec" );
+      setName( "OpieRec" );
    init();
    initConfig();
    initConnections();
@@ -440,7 +440,7 @@ void QtRec::init() {
    QPixmap image6( ( const char** ) image6_data );
 
    stopped=true;
-   setCaption( tr( "QpeRecord " ) + QString::number(VERSION) );
+   setCaption( tr( "OpieRecord " ) + QString::number(VERSION) );
    QGridLayout *layout = new QGridLayout( this );
    layout->setSpacing( 2);
    layout->setMargin( 2);
@@ -735,7 +735,7 @@ void QtRec::init() {
 
    ///////////////////////////////////////////// FIXME change to a real helpfile path
    QString url="/index.html";
-   HelpWindow *help = new HelpWindow( url, ".", tab_4, "qperec_help");
+   HelpWindow *help = new HelpWindow( url, ".", tab_4, "opierec_help");
    layout4->addMultiCellWidget( help, 0, 1, 0, 1);
    if( !QFile(url).exists()) {
       help->hide();
@@ -743,11 +743,11 @@ void QtRec::init() {
       QLabel *helpLabel;
       helpLabel = new QLabel( tab_4, "TimeLabel" );
       layout4->addMultiCellWidget( helpLabel, 0, 3, 0, 4 );
-      helpLabel->setText( "<B>QpeRec</B><br>"
+      helpLabel->setText( "<B>OpieRec</B><br>"
                           "Records files in standard wav format<br>"
                           "or a compressed version<br>"
                           "For help, please email the author<br>"
-                          "<B>QpeRec</B> is copyright&copy; 2002 by"
+                          "<B>OpieRec</B> is copyright&copy; 2002 by"
                           " L.J. Potter<br>llornkcor@handhelds.org<BR>"
                           "and is licensed under the <B>QPL</B>");
    }
@@ -758,7 +758,7 @@ void QtRec::init() {
 void QtRec::initIconView() {
 
    ListView1->clear();
-   Config cfg("QpeRec");
+   Config cfg("OpieRec");
    cfg.setGroup("Sounds");
    QString temp;
    QPixmap image0( ( const char** ) image0_data );
@@ -823,7 +823,7 @@ void QtRec::initConnections() {
 
 void QtRec::initConfig() {
    int index, fred, i;
-   Config cfg("QpeRec");
+   Config cfg("OpieRec");
    cfg.setGroup("Settings");
 
    index = cfg.readNumEntry("samplerate",22050);
@@ -935,7 +935,7 @@ bool QtRec::rec() { //record
          if(setUpFile())  {
             qDebug("Ok to start recording");
             int fileSize=0;
-            Config cfg("QpeRec");
+            Config cfg("OpieRec");
             cfg.setGroup("Settings");
             qDebug( "<<<<<<<Device bits %d, device rate %d, device channels %d",
                     soundDevice->getDeviceBits(),
@@ -1135,7 +1135,7 @@ bool QtRec::setupAudio( bool b) {
       monitoring=false;
       stopped=true;
       update();
-      setCaption( tr( "QpeRecord " ) + QString::number(VERSION) );
+      setCaption( tr( "OpieRecord " ) + QString::number(VERSION) );
       stopped=true;
       return false;
    }
@@ -1331,7 +1331,7 @@ bool QtRec::doPlay() {
 
 
 void QtRec::changebitrateCombo(int i) {
-   Config cfg("QpeRec");
+   Config cfg("OpieRec");
    cfg.setGroup("Settings");
    int bits=0;
    if(i==0) { bits=16; }
@@ -1342,7 +1342,7 @@ void QtRec::changebitrateCombo(int i) {
 }
 
 void QtRec::changesamplerateCombo(int i) {
-   Config cfg("QpeRec");
+   Config cfg("OpieRec");
    cfg.setGroup("Settings");
    int rate=0;
    bool ok;
@@ -1366,7 +1366,7 @@ void QtRec::changesamplerateCombo(int i) {
 
 
 void QtRec::changeDirCombo(int index) {
-   Config cfg("QpeRec");
+   Config cfg("OpieRec");
    cfg.setGroup("Settings");
    QString sName = directoryComboBox->text(index);
 
@@ -1388,7 +1388,7 @@ void QtRec::changeDirCombo(int index) {
 
 
 void QtRec::changeSizeLimitCombo(int) {
-   Config cfg("QpeRec");
+   Config cfg("OpieRec");
    cfg.setGroup("Settings");
    cfg.writeEntry("sizeLimit", getCurrentSizeLimit() );
    cfg.write();
@@ -1407,11 +1407,11 @@ void QtRec::newSound() {
 
 void QtRec::itClick(QListViewItem *item) {
    currentFile=item->text(0);
-   setCaption("QpeRecord  "+currentFile);
+   setCaption("OpieRecord  "+currentFile);
 }
 
 void QtRec::deleteSound() {
-   Config cfg("QpeRec");
+   Config cfg("OpieRec");
    cfg.setGroup("Sounds");
    if(  ListView1->currentItem() == NULL)
       return;
@@ -1464,7 +1464,7 @@ void QtRec::deleteSound() {
 #ifndef DEV_VERSION
    };
 #endif
-   setCaption( tr( "QpeRecord " ) + QString::number(VERSION) );
+   setCaption( tr( "OpieRecord " ) + QString::number(VERSION) );
 
 }
 
@@ -1638,7 +1638,7 @@ void QtRec::endRecording() {
       }
 
       qDebug("Just moved "+wavFile->currentFileName);
-      Config cfg("QpeRec");
+      Config cfg("OpieRec");
       cfg.setGroup("Sounds");
 
       int nFiles = cfg.readNumEntry( "NumberofFiles",0);
@@ -1704,12 +1704,12 @@ bool QtRec::openPlayFile() {
 
    qApp->processEvents();
    if( currentFile.isEmpty()) {
-      QMessageBox::message(tr("Qperec"),tr("Please select file to  play"));
+      QMessageBox::message(tr("Opierec"),tr("Please select file to  play"));
       endPlaying();
       return false;
    }
    QString currentFileName;
-   Config cfg("QpeRec");
+   Config cfg("OpieRec");
    cfg.setGroup("Sounds");
    int nFiles = cfg.readNumEntry("NumberofFiles",0);
    for(int i=0;i<nFiles+1;i++) { //look for file
@@ -1726,7 +1726,7 @@ bool QtRec::openPlayFile() {
       //  if(!track.open(IO_ReadOnly)) {
       QString errorMsg=(QString)strerror(errno);
       monitoring=false;
-      setCaption( tr( "QpeRecord " ) + QString::number(VERSION) );
+      setCaption( tr( "OpieRecord " ) + QString::number(VERSION) );
       QMessageBox::message(tr("Note"),tr("Could not open audio file.\n")
                            +errorMsg+"\n"+currentFile);
       return false;
@@ -1754,7 +1754,7 @@ void QtRec::listPressed( int mouse, QListViewItem *item, const QPoint &, int ) {
          cancelRename();
 
       currentFile=item->text(0);
-      setCaption( "QpeRecord  "+currentFile);
+      setCaption( "OpieRecord  "+currentFile);
    }
       break;
    case 2:
@@ -1793,7 +1793,7 @@ void QtRec::doBeam() {
    Ir ir;
    if( ir.supported()) {
       QString file = ListView1->currentItem()->text(0);
-      Config cfg("QpeRec");
+      Config cfg("OpieRec");
       cfg.setGroup("Sounds");
 
       int nFiles = cfg.readNumEntry("NumberofFiles",0);
@@ -1803,7 +1803,7 @@ void QtRec::doBeam() {
             QString filePath = cfg.readEntry(file,"");
             Ir *file = new Ir(this, "IR");
             connect(file, SIGNAL(done(Ir*)), this, SLOT( fileBeamFinished( Ir * )));
-            file->send( filePath, "QpeRec audio file\n"+filePath );
+            file->send( filePath, "OPieRec audio file\n"+filePath );
          }
       }
    }
@@ -1845,7 +1845,7 @@ void QtRec::okRename() {
    if(  ListView1->currentItem() == NULL)
       return;
 
-   Config cfg("QpeRec");
+   Config cfg("OpieRec");
    cfg.setGroup("Sounds");
 
    QString file = ListView1->currentItem()->text(0);
@@ -1932,7 +1932,7 @@ void QtRec::doMicMuting(bool b) {
 }
 
 void QtRec::compressionSelected(bool b) {
-   Config cfg("QpeRec");
+   Config cfg("OpieRec");
    cfg.setGroup("Settings");
    cfg.writeEntry("wavCompression", b);
    cfg.writeEntry("bitrate",16); filePara.resolution=16;
@@ -2193,7 +2193,7 @@ void QtRec::fillDirectoryCombo() {
    if( directoryComboBox->count() > 0)
       directoryComboBox->clear();
    int index=0;
-   Config cfg("QpeRec");
+   Config cfg("OpieRec");
    cfg.setGroup("Settings");
    QString dir= cfg.readEntry("directory", "/");
    StorageInfo storageInfo;
@@ -2224,7 +2224,7 @@ void QtRec::doMute(bool b) {
 
 void QtRec::slotAutoMute(bool b) {
    autoMute=b;
-   Config cfg("QpeRec");
+   Config cfg("OpieRec");
    cfg.setGroup("Settings");
    cfg.writeEntry("useAutoMute",b);
    doMute(b);

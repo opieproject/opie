@@ -44,7 +44,7 @@ qDebug("new wave file");
 bool WavFile::newFile() {
 
   qDebug("Set up new file");
-  Config cfg("QpeRec");
+  Config cfg("OpieRec");
   cfg.setGroup("Settings");
 
   currentFileName=cfg.readEntry("directory",QDir::homeDirPath());
