@@ -1,6 +1,3 @@
-/* config.h.  Generated automatically by configure.  */
-/* config.h.in.  Generated automatically from configure.in by autoheader 2.13.  */
-
 /* Define to empty if the keyword does not work.  */
 /* #undef const */
 
@@ -18,12 +15,6 @@
 
 /* How many bits would you like to have in an off_t? */
 #define _FILE_OFFSET_BITS 64
-
-/* Define to include GNU C library extensions. */
-#define _GNU_SOURCE 1
-
-/* GNU extension of saving argv[0] to program_invocation_short_name */
-#define HAVE_PROGRAM_INVOCATION_NAME 1
 
 /* Define to a replacement type if intmax_t is not a builtin, or in
    sys/types.h or stdlib.h or stddef.h */
