@@ -24,7 +24,8 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/odevice.h>
-#include <qtopia/password.h>
+#include <opie2/multiauthpassword.h>
+
 #include <qtopia/config.h>
 #include <qtopia/power.h>
 
@@ -350,6 +351,7 @@ ServerApplication::ServerApplication( int& argc, char **argv, Type t )
 
     /* make sure the event filter is installed */
     const ODeviceButton* but = ODevice::inst()->buttonForKeycode( -1 );
+    Q_CONST_UNUSED( but )
 }
 
 
@@ -495,11 +497,11 @@ bool ServerApplication::screenLocked()
 void ServerApplication::login(bool at_poweron)
 {
     if ( !loggedin ) {
-    Global::terminateBuiltin("calibrate"); // No tr
-    Password::authenticate(at_poweron);
-    loggedin=1;
+        Global::terminateBuiltin("calibrate"); // No tr
+        Opie::Security::MultiauthPassword::authenticate(at_poweron);
+        loggedin=1;
 #ifndef QT_NO_COP
-    QCopEnvelope e( "QPE/Desktop", "unlocked()" );
+        QCopEnvelope e( "QPE/Desktop", "unlocked()" );
 #endif
     }
 }
@@ -552,7 +554,7 @@ void ServerApplication::togglePower()
 
 #ifdef QWS
 
-    if ( Password::needToAuthenticate ( true ) && qt_screen ) {
+    if ( Opie::Security::MultiauthPassword::needToAuthenticate ( true ) && qt_screen ) {
         // Should use a big black window instead.
         // But this would not show up fast enough
         QGfx *g = qt_screen-> screenGfx ( );
