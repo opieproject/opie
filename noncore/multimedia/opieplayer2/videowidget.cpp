@@ -447,11 +447,6 @@ void VideoWidget::paintEvent( QPaintEvent * pe) {
 }
 
 
-void VideoWidget::closeEvent( QCloseEvent* ) {
-    mediaPlayerState.setList();
-}
-
-
 void VideoWidget::keyReleaseEvent( QKeyEvent *e) {
     switch ( e->key() ) {
 ////////////////////////////// Zaurus keys

@@ -85,7 +85,6 @@ protected:
     void mousePressEvent( QMouseEvent *event );
     void mouseReleaseEvent( QMouseEvent *event );
     void timerEvent( QTimerEvent *event );
-    void closeEvent( QCloseEvent *event );
     void keyReleaseEvent( QKeyEvent *e);
 private slots:
     void skipFor();

@@ -38,6 +38,11 @@ MediaWidget::~MediaWidget()
 {
 }
 
+void MediaWidget::closeEvent( QCloseEvent * )
+{
+    mediaPlayerState.setList();
+}
+
 void MediaWidget::handleCommand( Command command, bool buttonDown )
 {
     switch ( command ) {

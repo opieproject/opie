@@ -45,6 +45,8 @@ signals:
     void backReleased();
 
 protected:
+    virtual void closeEvent( QCloseEvent * );
+
     void handleCommand( Command command, bool buttonDown );
 
     MediaPlayerState &mediaPlayerState;

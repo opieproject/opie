@@ -438,11 +438,6 @@ void AudioWidget::showEvent( QShowEvent* ) {
 }
 
 
-void AudioWidget::closeEvent( QCloseEvent* ) {
-    mediaPlayerState.setList();
-}
-
-
 void AudioWidget::paintEvent( QPaintEvent * pe ) {
     if ( !pe->erased() ) {
           // Combine with background and double buffer

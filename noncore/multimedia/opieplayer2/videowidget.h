@@ -91,7 +91,6 @@ protected:
     void mouseMoveEvent( QMouseEvent *event );
     void mousePressEvent( QMouseEvent *event );
     void mouseReleaseEvent( QMouseEvent *event );
-    void closeEvent( QCloseEvent *event );
     void keyReleaseEvent( QKeyEvent *e);
 
 private:
