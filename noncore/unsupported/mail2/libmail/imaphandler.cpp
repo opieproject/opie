@@ -5,6 +5,7 @@
 IMAPHandler::IMAPHandler(const Account &account)
 	: QObject(), _account(account)
 {
+	_ready = false;
 	_loggingin = false;
 	_loggedin = false;
 	_tag = 0;
@@ -289,6 +290,14 @@ QString IMAPHandler::tag(bool count)
 
 void IMAPHandler::slotDataReceived(const QString &data)
 {
+	if (!_ready) {
+		// The first data is always the greeting string.
+		// We can ignore it.
+		_ready = true;
+		return;
+	}
+
+
 	IMAPResponseParser parser(data);
 	IMAPResponse response = parser.response();
 	response.setImapHandler(this);

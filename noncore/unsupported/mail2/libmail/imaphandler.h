@@ -79,7 +79,7 @@ private:
 	Account _account;
 	IMAPBase *_ibase;
 	unsigned int _tag;
-	bool _loggingin, _loggedin;
+	bool _ready, _loggingin, _loggedin;
 
 };
 
