@@ -23,6 +23,9 @@
 // enhancements added by Phillip Kuhn
 
 #include <stdlib.h>
+#include <sys/types.h>
+#include <pwd.h>
+#include <unistd.h>
 
 #ifdef  QT_QWS_OPIE
 #include <opie2/ocolorpopupmenu.h>
@@ -220,11 +223,49 @@ static const char *commonCmds[] =
     };
 
 
+static void konsoleInit(const char** shell) {
+    if(setuid(getuid()) !=0) qDebug("setuid failed");
+    if(setgid(getgid()) != 0) qDebug("setgid failed"); // drop privileges
+
+
+//  QPEApplication::grabKeyboard(); // for CTRL and ALT
+
+    qDebug("keyboard grabbed");
+#ifdef FAKE_CTRL_AND_ALT
+    qDebug("Fake Ctrl and Alt defined");
+    QPEApplication::grabKeyboard(); // for CTRL and ALT
+#endif
+
+    *shell = getenv("SHELL");
+    qWarning("SHell initially is %s", *shell );
+
+    if (shell == NULL || *shell == '\0') {
+        struct passwd *ent = 0;
+        uid_t me = getuid();
+        *shell = "/bin/sh";
+
+        while ( (ent = getpwent()) != 0 ) {
+            if (ent->pw_uid == me) {
+                if (ent->pw_shell != "")
+                    *shell = ent->pw_shell;
+                break;
+            }
+        }
+        endpwent();
+    }
+
+    if( putenv((char*)"COLORTERM=") !=0)
+        qDebug("putenv failed"); // to trigger mc's color detection
+}
+
+
 Konsole::Konsole(QWidget* parent, const char* name, WFlags fl) :
         QMainWindow(parent, name, fl)
 {
-    QStrList args;
-    init("/bin/bash",args);
+    QStrList tmp; const char* shell;
+
+    konsoleInit( &shell);
+    init(shell,tmp);
 }
 
 Konsole::Konsole(const char* name, const char* _pgm, QStrList & _args, int)
