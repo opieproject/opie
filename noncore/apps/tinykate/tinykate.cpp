@@ -26,11 +26,6 @@
 #include <opie/ofiledialog.h>
 
 #include "tinykate.h"
-#include "pics/file-new.xpm"
-#include "pics/file-open.xpm"
-#include "pics/file-save.xpm"
-#include "pics/edit-undo.xpm"
-#include "pics/edit-redo.xpm"
 
 #include <katedocument.h>
 #include <katehighlight.h>
@@ -39,7 +34,7 @@
 
 TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
     QMainWindow( parent, name, f )
-{ 
+{
   nextUnnamed=0;
   currentView=0;
   viewCount=0;
@@ -61,31 +56,31 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
         QPopupMenu *popup = new QPopupMenu( this );
 
   // Action for creating a new document
-        QAction *a = new QAction( tr( "New" ), QPixmap((const char**)file_new_xpm ), QString::null, 0, this, 0 );
+        QAction *a = new QAction( tr( "New" ),  Resource::loadPixmap( "new" ), QString::null, 0, this, 0 );
         a->addTo( popup );
         connect(a, SIGNAL(activated()), this, SLOT(slotNew()));
 
   // Action for opening an exisiting document
-        a = new QAction( tr( "Open" ), QPixmap((const char**)file_open_xpm), QString::null, 0, this, 0 );
+        a = new QAction( tr( "Open" ),Resource::loadPixmap( "fileopen" ) , QString::null, 0, this, 0 );
   a->addTo(popup);
         connect(a, SIGNAL(activated()), this, SLOT(slotOpen()));
 
 
   // Action for saving  document
-        a = new QAction( tr( "Save" ), QPixmap((const char**)file_save_xpm), QString::null, 0, this, 0 );
+        a = new QAction( tr( "Save" ), Resource::loadPixmap( "save" ) , QString::null, 0, this, 0 );
   a->addTo(popup);
         connect(a, SIGNAL(activated()), this, SLOT(slotSave()));
 
   // Action for saving document to a new name
-        a = new QAction( tr( "Save As" ), QPixmap((const char**)file_save_xpm), QString::null, 0, this, 0 );
+        a = new QAction( tr( "Save As" ),Resource::loadPixmap( "save" ) , QString::null, 0, this, 0 );
   a->addTo(popup);
         connect(a, SIGNAL(activated()), this, SLOT(slotSaveAs()));
 
   // Action for closing the currently active document
-        a = new QAction( tr( "Close" ), QPixmap(), QString::null, 0, this, 0 );
+        a = new QAction( tr( "Close" ), Resource::loadPixmap( "quit_icon" ) , QString::null, 0, this, 0 );
   a->addTo(popup);
         connect(a, SIGNAL(activated()), this, SLOT(slotClose()));
-  
+
 
   mb->insertItem(tr("File"),popup);
 
@@ -109,16 +104,16 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
         editFindReplace->addTo( bar );
 
   // Action for undo
-        editUndo = new QAction( tr( "Undo" ), QPixmap((const char**)edit_undo_xpm), QString::null, 0, this, 0 );
+        editUndo = new QAction( tr( "Undo" ),Resource::loadPixmap( "undo" ) , QString::null, 0, this, 0 );
         editUndo->addTo( bar );
 
   // Action for redo
-        editRedo = new QAction( tr( "Redo" ), QPixmap((const char**)edit_redo_xpm), QString::null, 0, this, 0 );
+        editRedo = new QAction( tr( "Redo" ),Resource::loadPixmap( "redo" ) , QString::null, 0, this, 0 );
         editRedo->addTo( bar );
 
 //VIEW ACITONS
         popup = new QPopupMenu( this );
-  
+
         viewIncFontSizes = new QAction( tr( "Font +" ), QString::null, 0, this, 0 );
         viewIncFontSizes->addTo( popup );
 
@@ -198,7 +193,7 @@ void TinyKate::slotCurrentChanged( QWidget * view)
   }
 
   currentView=(KTextEditor::View*)view;
-  
+
   connect(editCopy,SIGNAL(activated()),currentView,SLOT(copy()));
   connect(editCut,SIGNAL(activated()),currentView,SLOT(cut()));
   connect(editPaste,SIGNAL(activated()),currentView,SLOT(paste()));
