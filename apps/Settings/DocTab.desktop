@@ -2,7 +2,7 @@
 Exec=doctab
 Icon=DocumentTypeWord
 Type=Application
-Name=Language
+Name=DocTab
 Comment=DocTab settings dialog
 Name[de]=DokumentenTab
 Comment[de]=DokumentenTab Einstellungen
