@@ -45,6 +45,7 @@ DatebookPluginWidget::DatebookPluginWidget( QWidget *parent, const char* name )
 
     readConfig();
     getDates();
+    m_layoutDates->addStretch(5);
 }
 
 DatebookPluginWidget::~DatebookPluginWidget() {
@@ -65,7 +66,15 @@ void DatebookPluginWidget::readConfig() {
 
 void DatebookPluginWidget::refresh()  {
     m_eventsList.clear();
+
+    if ( m_layoutDates )  {
+        delete m_layoutDates;
+    }
+    m_layoutDates = new QVBoxLayout( this );
+    m_layoutDates->setAutoAdd( true );
+
     getDates();
+    m_layoutDates->addStretch(5);
 }
 
 /**
@@ -89,7 +98,7 @@ void DatebookPluginWidget::getDates() {
                     m_eventsList.append( l );
                     l->show();
                     QObject::connect ( l, SIGNAL( editEvent( const Event & ) ), l, SLOT( editEventSlot( const Event & ) ) );
-                } else if ( QDateTime::currentDateTime()  <= (*it).event().end() ) {
+                } else if ( QDateTime::currentDateTime()  <= (*it).event().end() ||  (*it).event().start().date() != date  ) {
                     count++;
                     // show only later appointments
                     DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes );
@@ -112,4 +121,5 @@ void DatebookPluginWidget::getDates() {
         noEvents->setText( QObject::tr( "No appointments today" ) );
     }
 }
+
 
