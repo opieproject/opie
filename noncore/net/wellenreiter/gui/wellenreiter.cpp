@@ -126,7 +126,7 @@ void Wellenreiter::receivePacket(OPacket* p)
         type = "managed";
 
     OWaveLanManagementSSID* ssid = static_cast<OWaveLanManagementSSID*>( p->child( "802.11 SSID" ) );
-    QString essid = ssid ? ssid->ID() : "<unknown>";
+    QString essid = ssid ? ssid->ID() : QString("<unknown>");
     OWaveLanManagementDS* ds = static_cast<OWaveLanManagementDS*>( p->child( "802.11 DS" ) );
     int channel = ds ? ds->channel() : -1;
 
