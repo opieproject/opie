@@ -5,7 +5,7 @@ QMAKE_CC = $(CXX)
 TEMPLATE  =   lib
 CONFIG    +=  qt warn_on release
 HEADERS   =   libmpeg3plugin.h   libmpeg3pluginimpl.h
-SOURCES   =   $(if $(CONFIG_TARGET_X86),video/mmxidct.S video/reconmmx.s) libmpeg3plugin.cpp libmpeg3pluginimpl.cpp \
+SOURCES   =   libmpeg3plugin.cpp libmpeg3pluginimpl.cpp \
         bitstream.c \
         libmpeg3.c \
         mpeg3atrack.c \
