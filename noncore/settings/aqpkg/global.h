@@ -18,7 +18,7 @@
 #ifndef __GLOBAL_H
 #define __GLOBAL_H
 
-#define VERSION_TEXT "AQPkg Version 1.6 BETA"
+#define VERSION_TEXT "AQPkg Version 1.7"
 
 // Uncomment the below line to run on a Linux box rather than a Zaurus
 // box this allows you to change where root is, and where to load config files from
@@ -37,18 +37,18 @@
 #else
 
 // Running QT/Embedded on a X86 linux box
-#define IPKG_CONF "/home/andy/projects/aqpkg/aqpkg/data/ipkg.conf"
-#define ROOT "/home/andy/projects/aqpkg/aqpkg/data/root"
-#define IPKG_DIR "/home/andy/projects/aqpkg/aqpkg/data/"
+#define IPKG_CONF "/home/andy/projects/aqpkg/data/ipkg.conf"
+#define ROOT "/home/andy/projects/aqpkg/data/root"
+#define IPKG_DIR "/home/andy/projects/aqpkg/data/"
 
 #endif
 
 #else
 
 // Running QT on a X86 linux box
-#define IPKG_CONF "/home/andy/projects/aqpkg/aqpkg/data/ipkg.conf"
-#define ROOT "/home/andy/projects/aqpkg/aqpkg/data/root"
-#define IPKG_DIR "/home/andy/projects/aqpkg/aqpkg/data/"
+#define IPKG_CONF "/home/andy/projects/aqpkg/data/ipkg.conf"
+#define ROOT "/home/andy/projects/aqpkg/data/root"
+#define IPKG_DIR "/home/andy/projects/aqpkg/data/"
 
 #endif
 
