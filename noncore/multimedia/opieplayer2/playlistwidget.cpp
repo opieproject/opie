@@ -250,10 +250,7 @@ void PlayListWidget::addAllToList() {
 //   QTime t;
 //   t.start();
 
-  if(!audioView->scannedFiles()) {
-    if(audioView->childCount() < 1)
-      audioView->populateView();
-  }
+  audioView->populateView();
 
   QListViewItemIterator audioIt( audioView );
   DocLnk lnk;
@@ -266,10 +263,7 @@ void PlayListWidget::addAllToList() {
     d->selectedFiles->addToSelection(  lnk);
   }      
 
-  if(!videoView->scannedFiles()) {
-    if(videoView->childCount() < 1)
-      videoView->populateView();
-  }
+  videoView->populateView();
 
   QListViewItemIterator videoIt( videoView );
   for ( ; videoIt.current(); ++videoIt ) {
@@ -310,10 +304,7 @@ void PlayListWidget::addAllToList() {
 
 void PlayListWidget::addAllMusicToList() {
 
-  if(!audioView->scannedFiles()) {
-    if(audioView->childCount() < 1)
-      audioView->populateView();
-  }
+  audioView->populateView();
 
   QListViewItemIterator audioIt( audioView );
   DocLnk lnk;
@@ -343,10 +334,7 @@ void PlayListWidget::addAllMusicToList() {
 
 void PlayListWidget::addAllVideoToList() {
 
-  if(!videoView->scannedFiles()) {
-    if(videoView->childCount() < 1)
-      videoView->populateView();
-  }
+  videoView->populateView();
 
   QListViewItemIterator videoIt( videoView );
   DocLnk lnk;
