@@ -1,0 +1,7 @@
+[Desktop Entry]
+Comment=A dictionary lookup application
+Exec=odict
+Icon=odict/odict
+Type=Application
+Name=ODict
+Name[de]=Wörterbuch
