@@ -7,6 +7,7 @@
 
 #include <qpe/config.h>
 
+#include "emulation_handler.h"
 #include "widget_layer.h"
 #include "emulation_widget.h"
 #include "metafactory.h"
@@ -83,12 +84,14 @@ Session* ProfileManager::fromProfile( const Profile& prof,  QWidget* parent) {
     QHBoxLayout* lay = new QHBoxLayout(dummy );
     stack->addWidget( dummy, 0 );
     stack->raiseWidget( 0 );
-    WidgetLayer* wid = new EmulationWidget( prof, dummy );
-    lay->addWidget( wid );
+    EmulationHandler* handler = new EmulationHandler(prof,dummy );
+    lay->addWidget( handler->widget() );
+//    WidgetLayer* wid = new EmulationWidget( prof, dummy );
+//    lay->addWidget( wid );
 
-    session->setEmulationWidget( wid );
-    session->setEmulationLayer( m_fact->newEmulationLayer( m_fact->external( prof.terminalName() ),
-                                                        wid ) );
+//    session->setEmulationWidget( wid );
+//    session->setEmulationLayer( m_fact->newEmulationLayer( m_fact->external( prof.terminalName() ),
+//                                                        wid ) );
     session->connect();
 
     return session;

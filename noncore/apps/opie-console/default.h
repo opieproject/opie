@@ -22,9 +22,9 @@ extern "C" {
     ProfileDialogWidget* newIrDaWidget  (const QString&, QWidget* );
     ProfileDialogWidget* newBTWidget    (const QString&, QWidget* );
 
-    ProfileDialogWidget* newTerminalWidget(const QString&, QWidget* );
+//    ProfileDialogWidget* newTerminalWidget(const QString&, QWidget* );
 
-    EmulationLayer* newVT102( WidgetLayer* );
+//    EmulationLayer* newVT102( WidgetLayer* );
 };
 
 class MetaFactory;

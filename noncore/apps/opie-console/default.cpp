@@ -62,15 +62,15 @@ extern "C" {
 
 
     // Terminal Widget(s)
-    ProfileDialogWidget* newTerminalWidget(const QString& na, QWidget* wid) {
+/*    ProfileDialogWidget* newTerminalWidget(const QString& na, QWidget* wid) {
         return new TerminalWidget(na, wid,0 );
     }
-
-    // VT Emulations
+*/
+/*    // VT Emulations
     EmulationLayer* newVT102( WidgetLayer* wid ) {
         return new Vt102Emulation( wid );
     }
-
+*/
 };
 
 Default::Default( MetaFactory* fact ) {
@@ -91,9 +91,9 @@ Default::Default( MetaFactory* fact ) {
     fact->addConnectionWidgetFactory( "modem", QObject::tr("Modem"), newModemWidget );
     fact->addConnectionWidgetFactory( "bt", QObject::tr("Bluetooth"), newBTWidget );
 
-    fact->addTerminalWidgetFactory( "default", QObject::tr("Default Terminal"),  newTerminalWidget );
+//    fact->addTerminalWidgetFactory( "default", QObject::tr("Default Terminal"),  newTerminalWidget );
 
-    fact->addEmulationLayer( "default", QObject::tr("Default Terminal"), newVT102 );
+//    fact->addEmulationLayer( "default", QObject::tr("Default Terminal"), newVT102 );
 }
 Default::~Default() {
 

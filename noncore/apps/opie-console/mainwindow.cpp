@@ -214,13 +214,14 @@ void MainWindow::slotNew() {
 }
 
 void MainWindow::slotRecordScript() {
-    if (currentSession()) {
+/*    if (currentSession()) {
         currentSession()->emulationLayer()->startRecording();
     }
+    */
 }
 
 void MainWindow::slotSaveScript() {
-    if (currentSession() && currentSession()->emulationLayer()->isRecording()) {
+/*    if (currentSession() && currentSession()->emulationLayer()->isRecording()) {
         MimeTypes types;
         QStringList script;
         script << "text/plain";
@@ -231,9 +232,11 @@ void MainWindow::slotSaveScript() {
             currentSession()->emulationLayer()->clearScript();
         }
     }
+    */
 }
 
 void MainWindow::slotRunScript() {
+/*
     if (currentSession()) {
         MimeTypes types;
         QStringList script;
@@ -245,6 +248,7 @@ void MainWindow::slotRunScript() {
             currentSession()->emulationLayer()->runScript(&script);
         }
     }
+    */
 }
 
 void MainWindow::slotConnect() {

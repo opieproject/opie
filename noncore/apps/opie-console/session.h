@@ -41,7 +41,7 @@ public:
      */
     IOLayer* layer();
 
-    EmulationLayer* emulationLayer();
+//    EmulationLayer* emulationLayer();
     WidgetLayer* emulationWidget();
 
     /*
@@ -57,8 +57,8 @@ public:
     void disconnect();
 
     void setWidgetStack( QWidgetStack* widget );
-    void setEmulationLayer( EmulationLayer* lay );
-    void setEmulationWidget( WidgetLayer* lay );
+//    void setEmulationLayer( EmulationLayer* lay );
+//    void setEmulationWidget( WidgetLayer* lay );
     void setIOLayer( IOLayer*  );
     void setName( const QString& );
 
@@ -66,8 +66,8 @@ private:
     QString m_name;
     QWidgetStack* m_widget;
     IOLayer* m_layer;
-    EmulationLayer* m_emLay;
-    WidgetLayer* m_widLay;
+//    EmulationLayer* m_emLay;
+//    WidgetLayer* m_widLay;
 
 };
 

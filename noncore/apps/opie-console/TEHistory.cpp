@@ -1,6 +1,6 @@
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* [history.c]                   History Buffer                             */
+/* [TEHistory.C]                   History Buffer                             */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
@@ -15,14 +15,8 @@
 /* Copyright (C) 2000 by John Ryland <jryland@trolltech.com>                  */
 /*									      */
 /* -------------------------------------------------------------------------- */
-/*									      */
-/* Ported embedded-Konsole to opie-console                                    */
-/*									      */
-/* Copyright (C) 2002 by opie developers <opie@handhelds.org>                 */
-/*									      */
-/* -------------------------------------------------------------------------- */
 
-#include "history.h"
+#include "TEHistory.h"
 #include <stdlib.h>
 #include <assert.h>
 #include <stdio.h>
@@ -67,7 +61,7 @@ FIXME: There is noticable decrease in speed, also. Perhaps,
 //       this is here one for debugging purpose.
 
 //#define tmpfile xTmpFile
-/*
+
 FILE* xTmpFile()
 {
   static int fid = 0;
@@ -75,7 +69,7 @@ FILE* xTmpFile()
   sprintf(fname,"TmpFile.%d",fid++);
   return fopen(fname,"w");
 }
-*/
+
 
 // History Buffer ///////////////////////////////////////////
 
@@ -183,7 +177,7 @@ int HistoryScroll::getLines()
 int HistoryScroll::getLineLen(int lineno)
 {
   if (!hasScroll()) return 0;
-  return (startOfLine(lineno+1) - startOfLine(lineno)) / sizeof(Character);
+  return (startOfLine(lineno+1) - startOfLine(lineno)) / sizeof(ca);
 }
 
 int HistoryScroll::startOfLine(int lineno)
@@ -198,16 +192,16 @@ int HistoryScroll::startOfLine(int lineno)
   return cells.len();
 }
 
-void HistoryScroll::getCells(int lineno, int colno, int count, Character res[])
+void HistoryScroll::getCells(int lineno, int colno, int count, ca res[])
 {
   assert(hasScroll());
-  cells.get((unsigned char*)res,count*sizeof(Character),startOfLine(lineno)+colno*sizeof(Character));
+  cells.get((unsigned char*)res,count*sizeof(ca),startOfLine(lineno)+colno*sizeof(ca));
 }
 
-void HistoryScroll::addCells(Character text[], int count)
+void HistoryScroll::addCells(ca text[], int count)
 {
   if (!hasScroll()) return;
-  cells.add((unsigned char*)text,count*sizeof(Character));
+  cells.add((unsigned char*)text,count*sizeof(ca));
 }
 
 void HistoryScroll::addLine()

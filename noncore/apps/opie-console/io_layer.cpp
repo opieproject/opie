@@ -18,3 +18,5 @@ int IOLayer::rawIO()const{
 void IOLayer::closeRawIO(int) {
 
 }
+void IOLayer::setSize(int, int ) {
+}

@@ -64,6 +64,8 @@ public:
      * and will listen to it's data again...
      */
     virtual void closeRawIO(int);
+
+
 signals:
     /**
      * received input as QCString
@@ -97,6 +99,12 @@ public slots:
      * closes and reloads the settings
      */
     virtual void reload( const Profile& ) = 0;
+
+    /**
+     * set the size
+     * needed for pty
+     */
+    virtual void setSize(int rows, int cols );
 };
 
 #endif
