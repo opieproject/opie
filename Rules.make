@@ -18,7 +18,7 @@ ifeq ($(filter 3.%,$(QTE_VERSION)),) # not qt3
 else
 	echo CONFIG += qt3 >> $@
 endif
-ifeq ($(CONFIG_QUICK_LAUNCH),)
+ifneq ($(CONFIG_QUICK_LAUNCH),)
 	echo contains\( CONFIG, quick-app \) \{ >> $@
 	echo CONFIG -= quick-app >> $@
 	echo CONFIG += quick-app-lib >> $@

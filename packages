@@ -84,6 +84,7 @@ CONFIG_LIQUID	noncore/styles/liquid	liquid.pro
 CONFIG_LOGOUTAPPLET	core/applets/logoutapplet	logoutapplet.pro
 CONFIG_MAILIT		noncore/net/mailit		mailit.pro
 CONFIG_MEDIUMMOUNT	noncore/settings/mediummount	mediummount.pro
+CONFIG_MEMORYAPPLET	noncore/applets/memoryapplet	memoryapplet.pro
 CONFIG_METAL	noncore/styles/metal	metal.pro
 CONFIG_MINDBREAKER	noncore/games/mindbreaker	mindbreaker.pro
 CONFIG_MINESWEEP	noncore/games/minesweep	minesweep.pro
@@ -121,7 +122,8 @@ CONFIG_PICKBOARD	inputmethods/pickboard	pickboard.pro
 CONFIG_QASTEROIDS	noncore/games/qasteroids	qasteroids.pro
 CONFIG_QCOP	core/apps/qcop	qcop.pro
 CONFIG_QPDF	noncore/graphics/qpdf	qpdf.pro
-CONFIG_QUICKEXEC	quickexec	quickexec.pro
+CONFIG_QPDF2	noncore/graphics/qpdf2	qpdf2.pro
+CONFIG_QUICKLAUNCHER core/tools/quicklauncher quicklauncher.pro
 CONFIG_QWS	core/qws	qws.pro
 CONFIG_REMOTE	noncore/tools/remote	remote.pro
 CONFIG_RESTARTAPPLET	core/applets/restartapplet	restartapplet.pro
@@ -179,5 +181,11 @@ CONFIG_MAIN_TAB_EXAMPLE	examples/main-tab	example.pro
 CONFIG_SIMPLE_EXAMPLE	examples/simple	example.pro
 CONFIG_SIMPLE_ICON	examples/simple-icon	example.pro
 CONFIG_SIMPLE_MAIN	examples/simple-main	example.pro
+<<<<<<< packages
+CONFIG_SIMPLE_PIM	examples/simple-pim	example.pro
+CONFIG_BIGSCREEN_EXAMPLE       libopie/big-screen/example      osplitter_mail.pro
+
+=======
 CONFIG_SIMPLE_PIM	examples/simple-pim	example.pro
 CONFIG_APPLET_EXAMPLE	examples/applet	example.pro
+>>>>>>> 1.56
