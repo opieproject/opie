@@ -1,3 +1,5 @@
+2005-03-18 Stefan Eilers <stefan@eilers-online.net>
+	* Rewrote generic sorted filter and added filter for "DoNotShowWithCategory", needed by addressbook (other filters need to be added!)
 2005-01-16 Stefan Eilers <stefan@eilers-online.net>
 	* Added new OPimEventSortVector class, improved OPimSortVector
 	* OPimAccessBackend now supports generic sorting.

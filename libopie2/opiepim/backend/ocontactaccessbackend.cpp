@@ -246,8 +246,7 @@ UIDArray OPimContactAccessBackend::sorted( const UIDArray& ar, bool asc, int sor
     int item = 0;
     uint cat_count = categories.count();
     uint eve_count = ar.count();
-    bool bCat = filter  & OPimContactAccess::FilterCategory ? true : false;
-    bool catPassed = false;
+    bool contactPassed = false;
     int cat;
 
     for ( uint i = 0; i < eve_count; ++i ) {
@@ -255,26 +254,38 @@ UIDArray OPimContactAccessBackend::sorted( const UIDArray& ar, bool asc, int sor
         if ( contact.isEmpty() )
             continue;
 
+        contactPassed = true;
+
+	// Filter all Contacts which have any category
+	if ( (filter & OPimContactAccess::DoNotShowWithCategory) ? true : false ){
+		if ( !contact.categories().isEmpty() )
+			continue;
+	}
+
         /* show category */
         /* -1 == unfiled */
-        catPassed = false;
         for ( uint cat_nu = 0; cat_nu < cat_count; ++cat_nu ) {
             cat = categories[cat_nu];
-            if ( bCat && cat == -1 ) {
-                if(!contact.categories().isEmpty() )
-                    continue;
-            } else if ( bCat && cat != 0)
-                if (!contact.categories().contains( cat ) )
-                    continue;
-            catPassed = true;
-            break;
+
+	    if ( (filter  & OPimContactAccess::FilterCategory) ? true : false ){
+		    if ( cat == -1 ) { 
+			    // We should search unfiled contacts. 
+			    // Unfiled categories have no category set, thus continue if 
+			    // this contact has no empty category.
+			    if( !contact.categories().isEmpty() )
+				    contactPassed = false;
+		    } else if ( cat != 0 )
+			    if ( !contact.categories().contains( cat ) )
+				    contactPassed = false;
+	    }
+
         }
 
         /*
          * If none of the Categories matched
          * continue
          */
-        if ( !catPassed )
+        if ( !contactPassed )
             continue;
 
         vector.insert(item++, contact );
