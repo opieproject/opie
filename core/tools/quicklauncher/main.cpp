@@ -44,6 +44,14 @@ using namespace Opie::Core;
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+
+#ifdef _OS_LINUX_
+#include <sys/prctl.h>
+#ifndef PR_SET_NAME
+#define PR_SET_NAME 15
+#endif
+#endif
+
 #include <unistd.h>
 
 
@@ -166,6 +174,7 @@ private:
 #ifdef _OS_LINUX_
         // Change name of process
         setproctitle(myargv[0]);
+        prctl( PR_SET_NAME, (unsigned long)myargv[0], 0, 0, 0 );
 #endif
 
         connect(app, SIGNAL(lastWindowClosed()), app, SLOT(hideOrQuit()));
