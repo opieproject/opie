@@ -1,4 +1,0 @@
-  config JUMPX
-    boolean "Jumpx"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,0 @@
-  config WLAN
-    boolean "Wireless LAN Module"
-    default "y" if NETWORKSETUP
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && NETWORKSETUP && NETWORKSETUP-CORE && INTERFACES

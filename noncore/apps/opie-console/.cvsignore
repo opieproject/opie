@@ -1,7 +1,0 @@
-Makefile
-Makefile.in
-configurebase.cpp
-configurebase.h
-editbase.cpp
-editbase.h
-moc*.cpp

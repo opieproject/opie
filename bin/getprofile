@@ -1,8 +1,0 @@
-#!/bin/sh
-source /var/lib/pcmcia/scheme
-iface="$1"
-while read profile; do
-    if [ "$profile" == "$iface_$SCEME" ]; then echo "$profile"; exit 0;  fi;
-done;
-echo "$iface";
-exit 0;

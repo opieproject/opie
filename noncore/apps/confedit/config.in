@@ -1,4 +1,0 @@
-  config CONFEDIT
-    boolean "confedit"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

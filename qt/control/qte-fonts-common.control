@@ -1,8 +1,0 @@
-Package: qte-fonts-common
-Files: $OPIEDIR/root/usr/sbin/update-qtfontdir
-Priority: required
-Section: opie/system
-Maintainer: Opie Team <opie@handhelds.org>
-Architecture: arm
-Version: 1:$QTE_VERSION-$QTE_REVISION-1
-Description: Qt/Embedded font common files
