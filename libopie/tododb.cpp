@@ -126,7 +126,7 @@ public:
 
 }
 
-ToDoDB::ToDoDB(const QString &fileName = QString::null, ToDoResource *res ){
+ToDoDB::ToDoDB(const QString &fileName, ToDoResource *res ){
     m_fileName = fileName;
     if( fileName.isEmpty() && res == 0 ){
 	m_fileName = Global::applicationFileName("todolist","todolist.xml");
