@@ -178,6 +178,7 @@ public:
  *
  * Constructs a new OColorPopupMenu control with parent, name and initial color selected.
  */
+ // FIXME add Wflags? -zecke
     OColorPopupMenu( const QColor& color, QWidget* parent = 0, const char* name = 0 );
 
 /**

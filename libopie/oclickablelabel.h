@@ -49,7 +49,7 @@ public:
 
     /**
      * emitted when the labels gets toggled
-     * @param the new new state of the label
+     * @param on the new new state of the label
      */
     void toggled(bool on);
  private:
@@ -59,6 +59,10 @@ public:
 
     void showState(bool on);
     void setInverted(bool on);
+    
+ private:
+    class Private;
+    Private *d; // private d pointer
 };
 
 #endif

@@ -50,6 +50,8 @@ private:
 	void init ( const QCString &m_channel, const QCString &message, const QByteArray &args );
 
 	OQCopMessageData *d;
+	class Private;
+	Private* data;
 };
 
 
@@ -94,6 +96,8 @@ private:
 	OQCopMessage m_PressedAction;
 	OQCopMessage m_FactoryPresetHeldAction;
 	OQCopMessage m_HeldAction;
+	class Private;
+	Private *d;
 };
 
 }

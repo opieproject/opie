@@ -71,6 +71,10 @@ protected:
  * @param has_focus Boolean value not used, retained for compatibility reasons.
  */
     void paintLabel( QPainter *, const QRect &, QTab *, bool ) const;
+    
+private:
+    class Private;
+    Private *d;
 };
 
 #endif

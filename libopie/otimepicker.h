@@ -77,5 +77,7 @@ class OTimePickerDialog: public OTimePickerDialogBase {
 
  private:
 	QTime m_time;
+	class Private;
+	Private* d;
 };
 #endif

@@ -76,7 +76,10 @@ signals:
     /**
      * if the OTodoAccess was changed
      */
-    void signalChanged( const OTodoAccess* );
+    void changed( const OTodoAccess* );
+    void changed( const OTodoAccess*, int uid );
+    void added( const OTodoAccess*,  int uid );
+    void removed( const OTodoAccess*, int uid );
 private:
     int m_cat;
     OTodoAccessBackend* m_todoBackEnd;

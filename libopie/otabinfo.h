@@ -121,6 +121,8 @@ private:
     QWidget *c;
     QString  p;
     QString  l;
+    class Private;
+    Private *d;
 };
 
 /**

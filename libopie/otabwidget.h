@@ -221,6 +221,8 @@ private:
     QComboBox    *tabList;
 
     QWidgetStack *widgetStack;
+    class Private;
+    Private* d;
 
 /**
  * @fn loadSmooth( const QString &name )

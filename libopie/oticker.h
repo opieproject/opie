@@ -86,6 +86,7 @@ public:
  * @param color QColor color of text
  *
  */
+    // FIXME const QColor& please -zecke
     void setForegroundColor(QColor color);
 /*!
  * @fn setFrame(int style)

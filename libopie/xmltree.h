@@ -110,6 +110,8 @@ private:
 
     XMLElement( const XMLElement &rhs );
     XMLElement &operator=( const XMLElement &rhs );
+    class Private;
+    Private* d;
 };
 
 } // namespace Opie

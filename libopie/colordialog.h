@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: colordialog.h,v 1.5 2003-04-16 10:59:24 zecke Exp $
+** $Id: colordialog.h,v 1.6 2003-05-07 14:45:49 zecke Exp $
 **
 ** Definition of OColorDialog class
 **
@@ -68,6 +68,7 @@ public:
 private:
     ~OColorDialog();
 
+    // FIXME add WFlags? -zecke
     OColorDialog( QWidget* parent=0, const char* name=0, bool modal=FALSE );
     void setColor( const QColor& );
     QColor color() const;

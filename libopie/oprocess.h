@@ -306,12 +306,6 @@ public:
   pid_t pid() const;
 
   /**
-   * Use pid().
-   * @deprecated
-   */
-  pid_t getPid() const { return pid(); }
-
-  /**
    * Suspend processing of data from stdout of the child process.
    */
   void suspend();

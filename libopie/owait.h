@@ -39,6 +39,7 @@ class OWait : public QDialog {
     Q_OBJECT
 
 public:
+    // FIXME Wflags -zecke?
     OWait(QWidget *parent=0,const char* name=0, bool dispIcon=TRUE);
     ~OWait();
 
@@ -69,6 +70,8 @@ public:
     QTimer *m_waitTimer;
     int m_timerLength;
     int m_aniSize;
+    class Private;
+    Private *d;
 };
 
 #endif

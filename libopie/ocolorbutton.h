@@ -44,6 +44,7 @@ class QColor;
 class OColorButton : public QPushButton {
 	Q_OBJECT
 public:
+    // FIXME Wflags? -zecke
 	OColorButton ( QWidget *parent = 0, const QColor & = black, const char *name = 0 );
 	virtual ~OColorButton ( );
 
