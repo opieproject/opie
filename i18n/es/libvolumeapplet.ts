@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Screen Taps</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantalla sonora</translation>
     </message>
 </context>
 </TS>

@@ -361,7 +361,7 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>p</source>
-        <translation type="unfinished"></translation>
+        <translation>p</translation>
     </message>
 </context>
 <context>
@@ -384,7 +384,7 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>Monthly...</source>
-        <translation type="unfinished">Cada mes...</translation>
+        <translation>Cada mes...</translation>
     </message>
     <message>
         <source>Yearly...</source>
