@@ -64,7 +64,7 @@ TaskEditorStatus::TaskEditorStatus( QWidget* parent,  const char* name, WFlags f
     QWidget *container = new QWidget( sv->viewport() );
     sv->addChild( container );
 
-    QGridLayout *layout = new QGridLayout( container, 7, 3, 4, 4 ); 
+    QGridLayout *layout = new QGridLayout( container, 7, 3, 4, 4 );
 
     // Status
     QLabel *label = new QLabel( tr( "Status:" ), container );
@@ -91,7 +91,7 @@ TaskEditorStatus::TaskEditorStatus( QWidget* parent,  const char* name, WFlags f
     cmbProgress->insertItem( tr( "100 %" ) );
     layout->addMultiCellWidget( cmbProgress, 1, 1, 1, 2 );
     QWhatsThis::add( cmbProgress, tr( "Select progress made on this task here." ) );
-    
+
     // Start date
     ckbStart = new QCheckBox( tr( "Start Date:" ), container );
     layout->addWidget( ckbStart, 2, 0 );
@@ -107,7 +107,7 @@ TaskEditorStatus::TaskEditorStatus( QWidget* parent,  const char* name, WFlags f
     btnStart->setPopup( popup );
     connect( m_startBook, SIGNAL( dateClicked( int, int, int ) ),
              this, SLOT( slotStartChanged( int, int, int ) ) );
-        
+
     // Due date
     ckbDue = new QCheckBox( tr( "Due Date:" ), container );
     layout->addWidget( ckbDue, 3, 0 );
@@ -123,7 +123,7 @@ TaskEditorStatus::TaskEditorStatus( QWidget* parent,  const char* name, WFlags f
     btnDue->setPopup( popup );
     connect( m_dueBook, SIGNAL( dateClicked( int, int, int ) ),
              this, SLOT( slotDueChanged( int, int, int ) ) );
-    
+
     // Completed
     ckbComp = new QCheckBox( tr( "Completed:" ), container );
     layout->addWidget( ckbComp, 4, 0 );
@@ -179,14 +179,14 @@ void TaskEditorStatus::load( const OTodo &todo )
     QString str = TimeString::longDateString( date );
 
     // Status
-    int state = todo.state().state();
+    int state = todo.hasState()? todo.state().state() : OPimState::NotStarted;
     if ( state == OPimState::Undefined )
         state = OPimState::NotStarted;
     cmbStatus->setCurrentItem( state );
 
     // Progress
     cmbProgress->setCurrentItem( todo.progress() / 20 );
-    
+
     // Start date
     ckbStart->setChecked( todo.hasStartDate() );
     btnStart->setEnabled( todo.hasStartDate() );
@@ -216,7 +216,7 @@ void TaskEditorStatus::load( const OTodo &todo )
         btnComp->setText( str );
 
     // Maintainer Mode
-    state = todo.maintainer().mode();
+    state = todo.hasMaintainer() ? todo.maintainer().mode() : OPimMaintainer::Nothing;
     if ( state == OPimMaintainer::Undefined )
         state = OPimMaintainer::Nothing;
     cmbMaintMode->setCurrentItem( state );
@@ -230,7 +230,7 @@ void TaskEditorStatus::save( OTodo &todo )
 
     // Status
     todo.setState( OPimState( cmbStatus->currentItem() ) );
-    
+
     // Progress
     todo.setProgress( cmbProgress->currentItem() * 20 );
 
@@ -259,7 +259,7 @@ void TaskEditorStatus::save( OTodo &todo )
     }
     else
         todo.setCompletedDate( inval );
-    
+
     // Maintainer mode - not implemented yet
 
     // Maintainer

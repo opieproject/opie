@@ -142,8 +142,8 @@ void TaskEditorOverView::load( const OTodo& todo )
     cmbCategory->setCategories( todo.categories(), "Todo List", tr( "Todo List" ) );
 
     // Recurrence
-    ckbRecurrence->setChecked( todo.recurrence().doesRecur() );
-    emit recurranceEnabled( todo.recurrence().doesRecur() );
+    ckbRecurrence->setChecked( todo.hasRecurrence() );
+    emit recurranceEnabled( todo.hasRecurrence() );
 
     // Notes
     mleNotes->setText( todo.description() );
