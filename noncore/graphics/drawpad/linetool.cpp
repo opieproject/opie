@@ -56,16 +56,8 @@ void LineTool::drawFinalShape(QPainter& p)
     bigAreaPainter.begin(&bigAreaPixmap);
     bigAreaPainter.setPen(bigAreaPen);
 
-    if (((m_polyline[2].x() < m_polyline[0].x()) && (m_polyline[2].y() < m_polyline[0].y()))
-        || ((m_polyline[2].x() > m_polyline[0].x()) && (m_polyline[2].y() > m_polyline[0].y()))) {
-
-        bigAreaPainter.drawLine(bigAreaPen.width() + 1, bigAreaPen.width() + 1,
-                                bigAreaPixmap.width() - bigAreaPen.width() - 2,
-                                bigAreaPixmap.height() - bigAreaPen.width() - 2);
-    } else {
-        bigAreaPainter.drawLine(bigAreaPen.width() + 1, bigAreaPixmap.height() - bigAreaPen.width() - 2,
-                                bigAreaPixmap.width() - bigAreaPen.width() - 2, bigAreaPen.width() + 1);
-    }
+    bigAreaPainter.drawLine((m_polyline[2].x() - r.x()) * 3 + 1, (m_polyline[2].y() - r.y()) * 3 + 1,
+                            (m_polyline[0].x() - r.x()) * 3 + 1, (m_polyline[0].y() - r.y()) * 3 + 1);
 
     bigAreaPainter.end();
 
