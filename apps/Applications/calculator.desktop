@@ -14,8 +14,7 @@ Name[fr]=Calculatrice
 Comment[fr]=Calculatrice scientifique et de conversion d'unité
 Name[hu]=Számológép
 Name[it]=Calcolatrice
-Comment[it]=Calcolatrice e convertitore di unit�
-Name[no]=Kalkulator
+Comment[it]=Calcolatrice e convertitore di unit�Name[no]=Kalkulator
 Name[pt]=Calculadora
 Comment[pt]=Calculadora científica e conversor de unidades
 Name[pt_BR]=Calculadora
@@ -24,3 +23,5 @@ Name[zh_TW]=計算機
 Name[sl]=Kalkulator
 Comment[sl]=Kalkulator
 Name[nl]=Rekenmachine
+Name[ru]=Калькулятор
+Comment[ru]=Программа Калькулятор
