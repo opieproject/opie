@@ -46,7 +46,7 @@ InputDialog::~InputDialog()
 
 void InputDialog::browse() {
 
-    QString str = OFileDialog::getOpenFileName( 1,"/","", "playlist/plain", 0 );
+    QString str = OFileDialog::getOpenFileName( 1,"/","", "playlist/plain;audio/x-mpegurl", 0 );
     LineEdit1->setText(str);
 }
 
