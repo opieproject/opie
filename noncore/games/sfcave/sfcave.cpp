@@ -14,7 +14,7 @@
 #include "helpwindow.h"
 #include "sfcave.h"
 
-#define CAPTION "SFCave 1.12 by AndyQ"
+#define CAPTION "SFCave 1.13 by AndyQ"
 
 #define UP_THRUST               0.6
 #define NO_THRUST               0.8
@@ -104,6 +104,27 @@ double SFCave::MaxDownThrustVals[3][3]          = {{ 4.0,   4.0, 4.0 },     // S
                                                    { 4.0,   5.0, 5.5 },     // Gates
                                                    { 3.5,   4.0, 5.0 } };   // Fly
 
+int SFCave::flyEasyScores[7][3] = { { 0, 10, 5 },
+                                   { 10, 20, 3 },
+                                   { 20, 30, 2 },
+                                   { 30, 40, 1 },
+                                   { 50, 70, -2 },
+                                   { 70, 300, -5 },
+                                   { -1, -1, -1 } };
+int SFCave::flyNormalScores[7][3] = { { 0, 10, 5 },
+                                     { 10, 20, 3 },
+                                     { 20, 30, 2 },
+                                     { 30, 40, 1 },
+                                     { 50, 70, -2 },
+                                     { 70, 300, -5 },
+                                     { -1, -1, -1 } };
+int SFCave::flyHardScores[7][3] = { { 0, 20, 5 },
+                                   { 20, 40, 3 },
+                                   { 40, 100, 1 },
+                                   { 100, 150, -2 },
+                                   { 150, 300, -5 },
+                                   { -1, -1, -1 } };
+
 int SFCave::initialGateGaps[]           = { 75, 50, 25 };
 
 
@@ -178,6 +199,7 @@ SFCave :: SFCave( int spd, QWidget *w, char *name )
 #endif
     speed = spd; // Change to 2 for PC
     press = false;
+    showEyeCandy = false;
 
     offscreen = new QPixmap( sWidth, sHeight );
     offscreen->fill( Qt::black );
@@ -226,6 +248,8 @@ void SFCave :: setUp()
     nrFrames = 0;
     dir = 1;
     thrust = 0;
+    startScoring = false;
+    press = false;
 
     if ( CURRENT_GAME_TYPE == SFCAVE_GAME )
     {
@@ -236,7 +260,7 @@ void SFCave :: setUp()
 
         if ( currentGameDifficulty == DIFICULTY_EASY )
             gateDistance = 100;
-        else if ( currentGameDifficulty == DIFICULTY_EASY )
+        else if ( currentGameDifficulty == DIFICULTY_NORMAL )
             gateDistance = 60;
         else
             gateDistance = 40;
@@ -256,6 +280,13 @@ void SFCave :: setUp()
         noThrust = DownThrustVals[FLY_GAME_TYPE][currentGameDifficulty];
         maxUpThrust = MaxUpThrustVals[FLY_GAME_TYPE][currentGameDifficulty];
         maxDownThrust = MaxDownThrustVals[FLY_GAME_TYPE][currentGameDifficulty];
+
+        if ( currentGameDifficulty == DIFICULTY_EASY )
+            flyScores = flyEasyScores;
+        else if ( currentGameDifficulty == DIFICULTY_NORMAL )
+            flyScores = flyNormalScores;
+        else
+            flyScores = flyHardScores;
     }
     
     crashLineLength = 0;
@@ -318,12 +349,14 @@ void SFCave :: run()
             if ( replayIt )
                 delete replayIt;
             replayIt = new QListIterator<int>( replayList );
+            break;
         case STATE_BOSS:
             drawBoss();
             break;
 
         case STATE_CRASHING:
         case STATE_CRASHED:
+            press = false;
             draw();
             break;
 
@@ -432,21 +465,31 @@ void SFCave :: handleGameGates()
 
 void SFCave :: handleGameFly()
 {
+    int diff = mapBottom[10] - user.y();
+
     if ( nrFrames % 4 == 0 )
     {
-        // Update score
-        // get distance between landscape and ship
-        int diff = mapBottom[10] - user.y();
+        if ( !startScoring )
+        {
+            if ( diff < 40 )
+                startScoring = true;
+        }
 
-        // the closer the difference is to 0 means more points
-        if ( diff < 10 )
-            score += 5;
-        else if ( diff < 20 )
-            score += 3;
-        else if ( diff < 30 )
-            score += 2;
-        else if ( diff < 40 )
-            score += 1;
+        if ( startScoring )
+        {
+            // Update score
+            // get distance between landscape and ship
+
+            // the closer the difference is to 0 means more points
+            for ( int i = 0 ; i < 10 && flyScores[i][0] != -1 ; ++i )
+            {
+                if ( flyScores[i][0] <= diff && flyScores[i][1] > diff )
+                {
+                    score += flyScores[i][2];
+                    break;
+                }
+            }
+        }
     }
 
     if ( checkFlyGameCollision() )
@@ -650,11 +693,15 @@ void SFCave :: draw()
 
         if ( CURRENT_GAME_TYPE == FLY_GAME && showScoreZones )
         {
-            p.setPen( Qt::red );
-            p.drawLine( (i*segSize) - (offset*speed), mapBottom[i]-10, ((i+1)*segSize)-(offset*speed), mapBottom[i+1]-10 );
-            p.drawLine( (i*segSize) - (offset*speed), mapBottom[i]-20, ((i+1)*segSize)-(offset*speed), mapBottom[i+1]-20 );
-            p.drawLine( (i*segSize) - (offset*speed), mapBottom[i]-30, ((i+1)*segSize)-(offset*speed), mapBottom[i+1]-30 );
-            p.drawLine( (i*segSize) - (offset*speed), mapBottom[i]-40, ((i+1)*segSize)-(offset*speed), mapBottom[i+1]-40 );
+            p.setPen( Qt::blue );
+            for ( int j = 1 ; j < 10 && flyScores[j][0] != -1 ; ++j )
+            {
+                if ( flyScores[j][2] < 0 )
+                    p.setPen( Qt::red );
+
+                p.drawLine( (i*segSize) - (offset*speed), mapBottom[i]-flyScores[j][0], ((i+1)*segSize)-(offset*speed), mapBottom[i+1]-flyScores[j][0] );
+            }
+
             p.setPen( Qt::white );
         }        
     }
@@ -670,8 +717,13 @@ void SFCave :: draw()
     // Draw trails
     for ( int i = 0 ; i < TRAILSIZE ; ++i )
         if ( trail[i].x() >= 0 )
+        {
+            if ( showEyeCandy )
+                p.setPen( Qt::white.light((int)(100.0-3*(user.x()/100.0)* (user.x()-trail[i].x())) ) );
             p.drawRect( trail[i].x(), trail[i].y(), 2, 2 );
+        }
 
+    p.setPen( Qt::white );
     // Draw blocks
     for ( int i = 0 ; i < BLOCKSIZE ; ++i )
         if ( blocks[i].y() != -1 )
@@ -788,13 +840,20 @@ void SFCave :: keyPressEvent( QKeyEvent *e )
             case Qt::Key_Up:
             case Qt::Key_F9:
             case Qt::Key_Space:
-                if ( state == STATE_RUNNING && !replay && !press )
+                if ( state == STATE_RUNNING )
                 {
-                    press = true;
-                    replayList.append( new int( nrFrames ) );
+                    if ( !replay && !press )
+                    {
+                        press = true;
+                        replayList.append( new int( nrFrames ) );
+                    }
                 }
-                else if ( state == STATE_CRASHED && e->key() == Key_Up )
-                    state = STATE_NEWGAME;
+                else if ( state == STATE_CRASHED )
+                {
+                    if ( e->key() == Key_Up )
+                        state = STATE_NEWGAME;
+                }
+                
                 break;
             case Qt::Key_M:
             case Qt::Key_Return:
@@ -830,17 +889,23 @@ void SFCave :: keyReleaseEvent( QKeyEvent *e )
             case Qt::Key_F9:
             case Qt::Key_Space:
             case Qt::Key_Up:
-                press = false;
-                if ( state == STATE_RUNNING && !replay && press )
-                    replayList.append( new int( nrFrames ) );
-
+                if ( state == STATE_RUNNING )
+                {
+                    if ( !replay && press )
+                    {
+                        press = false;
+                        replayList.append( new int( nrFrames ) );
+                    }
+                }
                 break;
 
+            case Qt::Key_E:
+                showEyeCandy = !showEyeCandy;
+                break;
+                
             case Qt::Key_R:
                 if ( state == STATE_CRASHED )
-                {
                     state = STATE_REPLAY;
-                }
                 break;
 
             case Qt::Key_Down:

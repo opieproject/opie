@@ -38,12 +38,20 @@ public:
 	int prevState;
 	int speed;
     int crashLineLength;
+    bool startScoring;
+    bool showEyeCandy;
 
     static double UpThrustVals[3][3];
     static double DownThrustVals[3][3];
     static double MaxUpThrustVals[3][3];
     static double MaxDownThrustVals[3][3];
     static int initialGateGaps[];
+
+    static int flyEasyScores[7][3];
+    static int flyNormalScores[7][3];
+    static int flyHardScores[7][3];
+    int flyScores[7][3];
+
     
     double thrustUp;
     double noThrust;
