@@ -1,8 +1,8 @@
 #include "mboxwrapper.h"
 #include "mailtypes.h"
 #include "mailwrapper.h"
-#include "libetpan/libetpan.h"
-#include "libetpan/mailstorage.h"
+#include <libetpan/libetpan.h>
+#include <libetpan/mailstorage.h>
 #include <qdir.h>
 
 MBOXwrapper::MBOXwrapper(const QString & mbox_dir)
@@ -67,7 +67,6 @@ void MBOXwrapper::listMessages(const QString & mailbox, QList<RecMail> &target )
         mail_flags * flag_result = 0;
         r = mailmessage_get_flags(msg,&flag_result);
         if (r == MAIL_ERROR_NOT_IMPLEMENTED) {
-            qDebug("flag fetching not implemented");
             mFlags.setBit(FLAG_SEEN);
         }
         mailimf_single_fields single_fields;
@@ -196,4 +195,25 @@ RecBody MBOXwrapper::fetchBody( const RecMail &mail )
 void MBOXwrapper::mbox_progress( size_t current, size_t maximum )
 {
     qDebug("MBOX %i von %i",current,maximum);
+}
+
+void MBOXwrapper::createFolder(const QString&)
+{
+}
+
+void MBOXwrapper::storeMessage(const char*msg,size_t length, const QString&folder)
+{
+    QString p = MBOXPath+"/";
+    p+=folder;
+    mailmbox_folder*f = 0;
+    int r = mailmbox_init(p.latin1(),0,1,0,&f);
+    if (r != MAIL_NO_ERROR) {
+        qDebug("Error init folder");
+        return;
+    }
+    r = mailmbox_append_message(f,msg,length);
+    if (r != MAIL_NO_ERROR) {
+        qDebug("Error writing message folder");
+    }
+    mailmbox_done(f);
 }

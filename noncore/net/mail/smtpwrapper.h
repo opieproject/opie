@@ -24,7 +24,7 @@ class SMTPwrapper : public QObject
 public:
     SMTPwrapper( Settings *s ); 
     virtual ~SMTPwrapper(){}
-    void sendMail(const Mail& mail );
+    void sendMail(const Mail& mail,bool later=false );
 
 protected:
     mailimf_mailbox *newMailbox(const QString&name,const QString&mail );
@@ -35,18 +35,20 @@ protected:
     void addFileParts( mailmime *message,const QList<Attachment>&files );
     mailmime *buildTxtPart(const QString&str );
     mailmime *buildFilePart(const QString&filename,const QString&mimetype );
-    void smtpSend( mailmime *mail );
+    void smtpSend( mailmime *mail,bool later );
     mailimf_field *getField( mailimf_fields *fields, int type );
     clist *createRcptList( mailimf_fields *fields );
     char *getFrom( mailmime *mail );
     SMTPaccount *getAccount(const QString&from );
     void writeToFile(const QString&file, mailmime *mail );
     void readFromFile(const QString&file, char **data, size_t *size );
+    void storeMail(char*mail, size_t length, const QString&box);
     
     static QString mailsmtpError( int err );
     static QString getTmpFile();
     static void progress( size_t current, size_t maximum );
     static void addRcpts( clist *list, mailimf_address_list *addr_list );
+    void storeMail(mailmime*mail, const QString&box);
     Settings *settings;
 };
 

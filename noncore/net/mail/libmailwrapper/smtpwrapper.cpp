@@ -6,14 +6,17 @@
 #include <string.h>
 #include <qdir.h>
 
-#include <libetpan/mailmime.h>
+#include <libetpan/libetpan.h>
+#if 0
 #include <libetpan/mailimf.h>
 #include <libetpan/mailsmtp.h>
 #include <libetpan/mailstorage.h>
 #include <libetpan/maildriver.h>
+#endif
 
 #include "smtpwrapper.h"
 #include "mailwrapper.h"
+#include "mboxwrapper.h"
 #include "logindialog.h"
 #include "defines.h"
 
@@ -465,6 +468,23 @@ void SMTPwrapper::writeToFile(const QString&file, mailmime *mail )
 
 void SMTPwrapper::readFromFile(const QString&file, char **data, size_t *size )
 {
+
+    QFile msg_cache(file);
+    QString msg = "";
+    msg_cache.open(IO_ReadOnly);
+    char*message = new char[4096];
+    memset(message,0,4096);
+    while (msg_cache.readBlock(message,4095)>0) {
+         msg+=message;
+         memset(message,0,4096);
+    }
+    delete message;
+    *data = (char*)malloc(msg.length()+1*sizeof(char));
+    memset(*data,0,msg.length()+1);
+    memcpy(*data,msg.ascii(),msg.length());
+    *size=msg.length();
+
+#if 0
     char *buf;
     struct stat st;
     int fd, count = 0, total = 0;
@@ -495,6 +515,7 @@ err_free:
     free( buf );
 err_close:
     close( fd );
+#endif
 }
 
 void SMTPwrapper::progress( size_t current, size_t maximum )
@@ -502,7 +523,16 @@ void SMTPwrapper::progress( size_t current, size_t maximum )
     qDebug( "Current: %i of %i", current, maximum );
 }
 
-void SMTPwrapper::smtpSend( mailmime *mail )
+void SMTPwrapper::storeMail(char*mail, size_t length, const QString&box)
+{
+    if (!mail) return;
+    QString localfolders = (QString) getenv( "HOME" ) + QString("/Applications/opiemail/localmail/");
+    MBOXwrapper*wrap = new MBOXwrapper(localfolders);
+    wrap->storeMessage(mail,length,box);
+    delete wrap;
+}
+
+void SMTPwrapper::smtpSend( mailmime *mail,bool later )
 {
     mailsmtp *session;
     clist *rcpts;
@@ -519,17 +549,27 @@ void SMTPwrapper::smtpSend( mailmime *mail )
         free(from);
         return;
     }
-    server = strdup( smtp->getServer().latin1() );
-    ssl = smtp->getSSL();
-    port = smtp->getPort().toUInt();
     rcpts = createRcptList( mail->mm_data.mm_message.mm_fields );
 
     QString file = getTmpFile();
     writeToFile( file, mail );
+    
     readFromFile( file, &data, &size );
     QFile f( file );
     f.remove();
+    
+    storeMail(data,size,(later?"Outgoing":"Sent"));
 
+    if (later) {
+        smtp_address_list_free( rcpts );
+        if (data) free( data );
+        if (from) free(from);
+        return;
+    }
+    server = strdup( smtp->getServer().latin1() );
+    ssl = smtp->getSSL();
+    port = smtp->getPort().toUInt();
+    
     session = mailsmtp_new( 20, &progress );
     if ( session == NULL ) goto free_mem;
 
@@ -581,8 +621,9 @@ free_mem_session:
     mailsmtp_free( session );
 free_mem:
     smtp_address_list_free( rcpts );
-    free( data );
-    free( server );
+    if (data) free( data );
+    if (from) free(from);
+    if (server) free( server );
     if ( smtp->getLogin() ) {
         free( user );
         free( pass );
@@ -590,15 +631,15 @@ free_mem:
     free( from );
 }
 
-void SMTPwrapper::sendMail(const Mail&mail )
+void SMTPwrapper::sendMail(const Mail&mail,bool later )
 {
-    mailmime *mimeMail;
+    mailmime * mimeMail;
 
     mimeMail = createMimeMail(mail );
     if ( mimeMail == NULL ) {
         qDebug( "sendMail: error creating mime mail" );
     } else {
-        smtpSend( mimeMail );
+        smtpSend( mimeMail,later );
         mailmime_free( mimeMail );
     }
 }

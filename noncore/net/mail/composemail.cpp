@@ -168,6 +168,7 @@ void ComposeMail::accept()
             smtpAccounts.at( fromBox->currentItem() )->getAccountName() );
     Mail *mail = new Mail();
     SMTPaccount *smtp = smtpAccounts.at( fromBox->currentItem() );
+    
     mail->setMail( smtp->getMail() );
     mail->setName( smtp->getName() );
 
@@ -195,7 +196,7 @@ void ComposeMail::accept()
     }
 
     SMTPwrapper wrapper( settings );
-    wrapper.sendMail( *mail );
+    wrapper.sendMail( *mail,checkBoxLater->isChecked() );
 
     QDialog::accept();
 }

@@ -19,6 +19,8 @@ public:
 
     virtual void deleteMail(const RecMail&mail);
     virtual void answeredMail(const RecMail&mail);
+    virtual void createFolder(const QString&aFolder);
+    virtual void storeMessage(const char*msg,size_t length, const QString&folder);
 
     virtual RecBody fetchBody( const RecMail &mail );
     static void mbox_progress( size_t current, size_t maximum );
