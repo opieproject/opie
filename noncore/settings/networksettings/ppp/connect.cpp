@@ -1010,8 +1010,9 @@ void ConnectWidget::cancelbutton() {
   }
   prompt->setConsumed();
 
-  messg->setText(tr("offline"));
-
+  _ifaceppp->setStatus( false );
+  _ifaceppp->refresh();
+//  messg->setText(tr("offline"));
   refresh();
 }
 
