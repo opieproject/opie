@@ -98,7 +98,6 @@ private slots:
     void viewPressed( int, QListViewItem *, const QPoint&, int);
     void playlistViewPressed( int, QListViewItem *, const QPoint&, int);
     void playSelected();
-    void listDelete();
 
 protected slots:
 /*     void cancelMenuTimer(); */

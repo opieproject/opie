@@ -837,8 +837,6 @@ void PlayListWidget::viewPressed( int mouse, QListViewItem *, const QPoint& , in
     QPopupMenu  m;
     m.insertItem( tr( "Play" ), this, SLOT( playSelected() ));
     m.insertItem( tr( "Add to Playlist" ), this, SLOT( addSelected() ));
-    m.insertSeparator();
-    m.insertItem( tr( "Properties" ), this, SLOT( listDelete() ));
     m.exec( QCursor::pos() );
   }
     break;
@@ -865,36 +863,6 @@ void PlayListWidget::playlistViewPressed( int mouse, QListViewItem *, const QPoi
   };
 }
 
-void PlayListWidget::listDelete() {
-  Config cfg( "OpiePlayer" );
-  cfg.setGroup("PlayList");
-  QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
-  QString file;
-  //    int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
-  switch ( tabWidget->currentPageIndex()) {
-  case 0:
-    break;
-  case 1:
-    {
-      file = audioView->currentItem()->text(0);
-      QListIterator<DocLnk> Pdit( files.children() );
-      for ( ; Pdit.current(); ++Pdit ) {
-        if( Pdit.current()->name() == file) {
-          LnkProperties prop( Pdit.current() );
-          prop.showMaximized();
-          prop.exec();
-        }
-      }
-      populateAudioView();
-    }
-    break;
-  case 2:
-    {
-
-    }
-    break;
-  };
-}
 
 void PlayListWidget::scanForAudio() {
   qDebug("scan for audio");
