@@ -1,1 +1,3 @@
 CONFIG_NETWORKSETUP	noncore/net/networksetup	networksetup.pro
+CONFIG_INTERFACES	noncore/net/networksetup/interfaces	interfaces.pro
+CONFIG_WLAN		noncore/net/networksetup/wlan	wlan.pro
