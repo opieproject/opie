@@ -17,6 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+#ifdef QWS
 #define QTOPIA_INTERNAL_LANGLIST
 #include <qapplication.h>
 #include <qstyle.h>
@@ -24,6 +25,7 @@
 #include <qpainter.h>
 #include <qtimer.h>
 #include <qwhatsthis.h>
+#include <qpopupmenu.h>
 #include "qcopenvelope_qws.h"
 #include "qpedecoration_qws.h"
 #include <qdialog.h>
@@ -34,12 +36,13 @@
 #include "global.h"
 #include "qlibrary.h"
 #include "windowdecorationinterface.h"
+#include <qpe/qlibrary.h>
 #include <qfile.h>
 #include <qsignal.h>
 
 #include <stdlib.h>
 
-extern QRect qt_maxWindowRect;
+extern Q_EXPORT QRect qt_maxWindowRect;
 
 #define WHATSTHIS_MODE
 
@@ -95,12 +98,13 @@ static const char * const qpe_accept_xpm[] = {
 
 #endif // QT_NO_IMAGEIO_XPM
 
-class HackWidget : public QWidget
+class DecorHackWidget : public QWidget
 {
 public:
     bool needsOk() {
 	return (getWState() & WState_Reserved1 ) ||
-		 (inherits( "QDialog" ) && !inherits( "QMessageBox" ) );
+		 (inherits("QDialog") && !inherits("QMessageBox")
+		  && !inherits("QWizard") );
     }
 };
 
@@ -188,19 +192,19 @@ bool QPEManager::eventFilter( QObject *o, QEvent *e )
 		    QString text;
 		    switch ( inRegion ) {
 			case QWSDecoration::Close:
-			    if ( ((HackWidget*)w)->needsOk() )
-				text = QObject::tr("Click to close this window, discarding changes.");
+			    if ( ((DecorHackWidget*)w)->needsOk() )
+				text = tr("Click to close this window, discarding changes.");
 			    else
-				text = QObject::tr("Click to close this window.");
+				text = tr("Click to close this window.");
 			    break;
 			case QWSDecoration::Minimize:
-			    text = QObject::tr("Click to close this window and apply changes.");
+			    text = tr("Click to close this window and apply changes.");
 			    break;
 			case QWSDecoration::Maximize:
 			    if ( w->isMaximized() )
-				text = QObject::tr("Click to make this window moveable.");
+				text = tr("Click to make this window movable.");
 			    else
-				text = QObject::tr("Click to make this window use all available screen area.");
+				text = tr("Click to make this window use all available screen area.");
 			    break;
 			default:
 			    break;
@@ -454,9 +458,10 @@ QRegion WindowDecorationInterface::mask( const WindowData *wd ) const
 class DefaultWindowDecoration : public WindowDecorationInterface
 {
 public:
-    DefaultWindowDecoration() : ref(0) {}
+    DefaultWindowDecoration(){}
     QString name() const {
-	return "Default";
+	return qApp->translate("WindowDecoration", "Default",
+		"List box text for default window decoration");
     }
     QPixmap icon() const {
 	return QPixmap();
@@ -467,6 +472,8 @@ public:
 	    *iface = this;
 	else if ( uuid == IID_WindowDecoration )
 	    *iface = this;
+        else
+            return QS_FALSE;
 
 	if ( *iface )
 	    (*iface)->addRef();
@@ -474,39 +481,58 @@ public:
     }
     Q_REFCOUNT
 
-private:
-    ulong ref;
 };
 
 static WindowDecorationInterface *wdiface = 0;
-static QLibrary *wdlib = 0;
+static QLibrary* wdlib = 0;
 static QString libname;
 
 //===========================================================================
+bool QPEDecoration::helpExists() const
+{
+    if ( helpFile.isNull() ) {
+	QStringList helpPath = Global::helpPath();
+	QString hf = QString(qApp->argv()[0]) + ".html";
+	bool he = FALSE;
+	for (QStringList::ConstIterator it=helpPath.begin(); it!=helpPath.end() && !he; ++it)
+	    he = QFile::exists( *it + "/" + hf );
+	((QPEDecoration*)this)->helpFile = hf;
+	((QPEDecoration*)this)->helpexists = he;
+	return he;
+    }
+    return helpexists;
+}
 
 QPEDecoration::QPEDecoration()
     : QWSDefaultDecoration()
 {
-    init ( libname );
+    if ( wdlib ) {
+	delete wdlib;
+	wdlib = 0;
+    } else {
+	delete wdiface;
+    }
+    wdiface = new DefaultWindowDecoration;
+
+    helpexists = FALSE; // We don't know (flagged by helpFile being null)
+    qpeManager = new QPEManager( this );
+    imageOk = Resource::loadImage( "OKButton" );
+    imageClose = Resource::loadImage( "CloseButton" );
+    imageHelp = Resource::loadImage( "HelpButton" );
 }
 
 QPEDecoration::QPEDecoration( const QString &plugin )
     : QWSDefaultDecoration()
 {
-    init ( plugin );
-}
-
-void QPEDecoration::init ( const QString &plugin )
-{
     libname = plugin;
 
     if ( wdlib ) {
-	wdiface->release();
-	wdlib->unload();
-	delete wdlib;
-	wdlib = 0;
+        wdiface->release();
+        wdlib->unload();
+        delete wdlib;
+        wdlib = 0;
     } else {
-	delete wdiface;
+        delete wdiface;
     }
 
     WindowDecorationInterface *iface = 0;
@@ -536,19 +562,10 @@ void QPEDecoration::init ( const QString &plugin )
 	wdiface = new DefaultWindowDecoration;
     }
 
-    helpFile = QString(qApp->argv()[0]) + ".html";
-    QStringList helpPath = Global::helpPath();
-    helpExists = FALSE;
-    for (QStringList::ConstIterator it=helpPath.begin(); it!=helpPath.end() && !helpExists; ++it) {
-	helpExists = QFile::exists( *it + "/" + helpFile );
-    	//qDebug ( "Checking %s/%s for help: %d", (*it).latin1(), helpFile.latin1(),helpExists);
-    }
-    qpeManager = new QPEManager( this );
 
-    // Qtopia 1.5 compatibility
-    imageOk    = *okImage ( 15 );
-    imageClose = *closeImage ( 15 );
-    imageHelp  = *helpImage ( 15 );
+
+    helpexists = FALSE; // We don't know (flagged by helpFile being null)
+    qpeManager = new QPEManager( this );
 }
 
 QPEDecoration::~QPEDecoration()
@@ -614,14 +631,14 @@ QRegion QPEDecoration::region(const QWidget *widget, const QRect &rect, QWSDecor
 	    if ( !widget->inherits( "QDialog" ) && qApp->desktop()->width() > 350 ) {
 		int maximizeWidth = wdiface->metric(WindowDecorationInterface::MaximizeWidth,&wd);
 		int left = rect.right() - maximizeWidth - closeWidth;
-		if ( ((HackWidget *)widget)->needsOk() )
+		if ( ((DecorHackWidget *)widget)->needsOk() )
 		    left -= okWidth;
 		QRect r(left, rect.top() - titleHeight, closeWidth, titleHeight);
 		region = r;
 	    }
 	    break;
 	case Minimize:
-	    if ( ((HackWidget *)widget)->needsOk() ) {
+	    if ( ((DecorHackWidget *)widget)->needsOk() ) {
 		QRect r(rect.right() - okWidth,
 		    rect.top() - titleHeight, okWidth, titleHeight);
 		if (r.left() > rect.left() + titleHeight)
@@ -631,7 +648,7 @@ QRegion QPEDecoration::region(const QWidget *widget, const QRect &rect, QWSDecor
 	case Close:
 	    {
 		int left = rect.right() - closeWidth;
-		if ( ((HackWidget *)widget)->needsOk() )
+		if ( ((DecorHackWidget *)widget)->needsOk() )
 		    left -= okWidth;
 		QRect r(left, rect.top() - titleHeight, closeWidth, titleHeight);
 		region = r;
@@ -640,7 +657,7 @@ QRegion QPEDecoration::region(const QWidget *widget, const QRect &rect, QWSDecor
     	case Title:
 	    if ( !widget->isMaximized() ) {
 		int width = rect.width() - helpWidth - closeWidth;
-		if ( ((HackWidget *)widget)->needsOk() )
+		if ( ((DecorHackWidget *)widget)->needsOk() )
 		    width -= okWidth;
 		QRect r(rect.left()+helpWidth, rect.top() - titleHeight,
 			width, titleHeight);
@@ -649,7 +666,7 @@ QRegion QPEDecoration::region(const QWidget *widget, const QRect &rect, QWSDecor
 	    }
 	    break;
 	case Help:
-	    if ( helpExists || widget->testWFlags(Qt::WStyle_ContextHelp) ) {
+	    if ( helpExists() || widget->testWFlags(Qt::WStyle_ContextHelp) ) {
 		QRect r(rect.left(), rect.top() - titleHeight,
 			  helpWidth, titleHeight);
 		region = r;
@@ -752,11 +769,11 @@ void QPEDecoration::paint(QPainter *painter, const QWidget *widget)
     QRect rect(widget->rect());
 
     // title bar rect
-    QRect tr( rect.left(), rect.top() - titleHeight, rect.width(), titleHeight );
+    QRect tbr( rect.left(), rect.top() - titleHeight, rect.width(), titleHeight );
 
 #ifndef QT_NO_PALETTE
     QRegion oldClip = painter->clipRegion();
-    painter->setClipRegion( oldClip - QRegion( tr ) );	// reduce flicker
+    painter->setClipRegion( oldClip - QRegion( tbr ) );	// reduce flicker
     wdiface->drawArea( WindowDecorationInterface::Border, painter, &wd );
     painter->setClipRegion( oldClip );
 
@@ -796,9 +813,9 @@ void QPEDecoration::paintButton(QPainter *painter, const QWidget *w,
 	    b = WindowDecorationInterface::Close;
 	    break;
 	case Minimize:
-	    if ( ((HackWidget *)w)->needsOk() )
+	    if ( ((DecorHackWidget *)w)->needsOk() )
 		b = WindowDecorationInterface::OK;
-	    else if ( helpExists )
+	    else if ( helpExists() )
 		b = WindowDecorationInterface::Help;
 	    else
 		return;
@@ -818,7 +835,7 @@ void QPEDecoration::paintButton(QPainter *painter, const QWidget *w,
 
     int titleHeight = wdiface->metric(WindowDecorationInterface::TitleHeight,&wd);
     QRect rect(w->rect());
-    QRect tr( rect.left(), rect.top() - titleHeight, rect.width(), titleHeight );
+    QRect tbr( rect.left(), rect.top() - titleHeight, rect.width(), titleHeight );
     QRect brect(region(w, w->rect(), type).boundingRect());
 
     const QColorGroup &cg = w->palette().active();
@@ -828,7 +845,7 @@ void QPEDecoration::paintButton(QPainter *painter, const QWidget *w,
 	painter->setPen( cg.color(QColorGroup::Text) );
 
     QRegion oldClip = painter->clipRegion();
-    painter->setClipRegion( QRect(brect.x(), tr.y(), brect.width(), tr.height()) ); // reduce flicker
+    painter->setClipRegion( QRect(brect.x(), tbr.y(), brect.width(), tbr.height()) ); // reduce flicker
     wdiface->drawArea( WindowDecorationInterface::Title, painter, &wd );
     wdiface->drawButton( b, painter, &wd, brect.x(), brect.y(), brect.width(), brect.height(), (QWSButton::State)state );
     painter->setClipRegion( oldClip );
@@ -846,6 +863,20 @@ void QPEDecoration::maximize( QWidget *widget )
 	{
 	QWSDecoration::maximize( widget );
     }
+}
+
+QPopupMenu *QPEDecoration::menu( const QWidget *, const QPoint & )
+{
+    QPopupMenu *m = new QPopupMenu();
+
+    m->insertItem(QPEManager::tr("Restore"), (int)Normalize);
+    m->insertItem(QPEManager::tr("Move"), (int)Title);
+    m->insertItem(QPEManager::tr("Size"), (int)BottomRight);
+    m->insertItem(QPEManager::tr("Maximize"), (int)Maximize);
+    m->insertSeparator();
+    m->insertItem(QPEManager::tr("Close"), (int)Close);
+
+    return m;
 }
 
 #ifndef QT_NO_DIALOG
@@ -871,7 +902,7 @@ void QPEDecoration::minimize( QWidget *widget )
         d->acceptIt();
     }
 #endif
-    else if ( ((HackWidget *)widget)->needsOk() ) {
+    else if ( ((DecorHackWidget *)widget)->needsOk() ) {
 	QSignal s;
 	s.connect( widget, SLOT( accept() ) );
 	s.activate();
@@ -882,11 +913,20 @@ void QPEDecoration::minimize( QWidget *widget )
 
 void QPEDecoration::help( QWidget *w )
 {
-    if ( helpExists ) {
-	Global::execute( "helpbrowser", helpFile );
+    if ( helpExists() ) {
+	QString hf = helpFile;
+	QString localHelpFile = QString(qApp->argv()[0]) + "-" + w->name() + ".html";
+	QStringList helpPath = Global::helpPath();
+	for (QStringList::ConstIterator it=helpPath.begin(); it!=helpPath.end(); ++it) {
+	    if ( QFile::exists( *it + "/" + localHelpFile ) ) {
+		hf = localHelpFile;
+		break;
+	    }
+	}
+	Global::execute( "helpbrowser", hf );
     } else if ( w && w->testWFlags(Qt::WStyle_ContextHelp) ) {
 	QWhatsThis::enterWhatsThisMode();
-	QWhatsThis::leaveWhatsThisMode( QObject::tr(
+        QWhatsThis::leaveWhatsThisMode( QObject::tr(
 	    "<Qt>Comprehensive help is not available for this application, "
 	    "however there is context-sensitive help.<p>To use context-sensitive help:<p>"
 	    "<ol><li>click and hold the help button."
@@ -899,7 +939,7 @@ void QPEDecoration::windowData( const QWidget *w, WindowDecorationInterface::Win
 {
     wd.rect = w->rect();
     if ( qpeManager->whatsThisWidget() == w )
-	wd.caption = QObject::tr("What's this..." );
+        wd.caption = QObject::tr( "What's this..." );
     else
 	wd.caption = w->caption();
     wd.palette = qApp->palette();
@@ -924,3 +964,4 @@ QPopupMenu *QPEDecoration::menu(QWSManager*, const QWidget*, const QPoint&)
 
 
 #endif // QT_NO_QWS_QPE_WM_STYLE
+#endif

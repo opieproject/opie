@@ -22,6 +22,7 @@
 
 
 #ifdef QWS
+#include <qpe/global.h>
 #include <qwsdefaultdecoration_qws.h>
 #include <qimage.h>
 #include <qdatetime.h>
@@ -33,6 +34,7 @@
 
 class QPEManager;
 class QTimer;
+#include <qwidget.h>
 
 class QPEDecoration : public QWSDefaultDecoration
 {
@@ -47,6 +49,7 @@ public:
 
     void maximize( QWidget * );
     void minimize( QWidget * );
+    virtual QPopupMenu *menu( const QWidget *, const QPoint & );
     virtual void help( QWidget * );
 
     enum QPERegion { Help=LastRegion+1 };
@@ -63,14 +66,14 @@ protected:
 private:
     void windowData( const QWidget *w, WindowDecorationInterface::WindowData &wd ) const;
 
-	void init ( const QString & );
+    bool helpExists() const;
 
 protected:
     QImage imageOk;
     QImage imageClose;
     QImage imageHelp;
     QString helpFile;
-    bool helpExists;
+    bool helpexists : 1;
     QPEManager *qpeManager;
 };
 
@@ -101,7 +104,7 @@ protected:
     int helpState;
     QTime pressTime;
     QTimer *wtTimer;
-    bool inWhatsThis;
+    bool inWhatsThis : 1;
     QGuardedPtr<QWidget> whatsThis;
 };
 
