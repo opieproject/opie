@@ -64,7 +64,8 @@ void DingWidget::parseInfo( QStringList &lines, QString &top, QString &bottom )
  	QString right;
 	QRegExp reg_div( "\\" );
 	QRegExp reg_word( queryword );
-	QString substitute = "<font color='#FF0000'>"+queryword+"</font>";
+	//rot:	QString substitute = "<font color='#FF0000'>"+queryword+"</font>";
+	QString substitute = "<a href=''>"+queryword+"</a>";
 	QStringList toplist, bottomlist;
 	for( QStringList::Iterator it = lines.begin() ; it != lines.end() ; ++it )
 	{
