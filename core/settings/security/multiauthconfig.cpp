@@ -524,7 +524,7 @@ void MultiauthConfig::restoreDefaults()
 {
     QMessageBox unrecbox(
                          tr("Attention"),
-                         tr( "<p>All user-defined net ranges will be lost."),
+                         "<p>" + tr("All user-defined net ranges will be lost.") + "</p>",
                          QMessageBox::Warning,
                          QMessageBox::Cancel, QMessageBox::Yes, QMessageBox::NoButton,
                          0, QString::null, TRUE, WStyle_StaysOnTop);
@@ -541,12 +541,12 @@ void MultiauthConfig::restoreDefaults()
 
 void MultiauthConfig::insertDefaultRanges()
 {
-    m_syncWidget->syncnet->insertItem( tr( "192.168.129.0/24" ) );
-    m_syncWidget->syncnet->insertItem( tr( "192.168.1.0/24" ) );
-    m_syncWidget->syncnet->insertItem( tr( "192.168.0.0/16" ) );
-    m_syncWidget->syncnet->insertItem( tr( "172.16.0.0/12" ) );
-    m_syncWidget->syncnet->insertItem( tr( "10.0.0.0/8" ) );
-    m_syncWidget->syncnet->insertItem( tr( "1.0.0.0/8" ) );
+    m_syncWidget->syncnet->insertItem( "192.168.129.0/24" );
+    m_syncWidget->syncnet->insertItem( "192.168.1.0/24" );
+    m_syncWidget->syncnet->insertItem( "192.168.0.0/16" );
+    m_syncWidget->syncnet->insertItem( "172.16.0.0/12" );
+    m_syncWidget->syncnet->insertItem( "10.0.0.0/8" );
+    m_syncWidget->syncnet->insertItem( "1.0.0.0/8" );
     m_syncWidget->syncnet->insertItem( tr( "Any" ) );
     m_syncWidget->syncnet->insertItem( tr( "None" ) );
 }
@@ -600,7 +600,7 @@ void MultiauthConfig::selectNet(int auth_peer,int auth_peer_bits, bool update)
                         }
                     }
                     if (! already_there) {
-                        m_syncWidget->syncnet->insertItem( tr( netrange ) );
+                        m_syncWidget->syncnet->insertItem( netrange );
                     } else {
                         already_there=FALSE;
                     }

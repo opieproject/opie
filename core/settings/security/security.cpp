@@ -124,7 +124,7 @@ void Security::restoreDefaults()
 {
     QMessageBox unrecbox(
     tr("Attention"),
-    tr( "<p>All user-defined net ranges will be lost."),
+    "<p>" + tr("All user-defined net ranges will be lost.") + "</p>",
     QMessageBox::Warning,
     QMessageBox::Cancel, QMessageBox::Yes, QMessageBox::NoButton,
     0, QString::null, TRUE, WStyle_StaysOnTop);
@@ -141,12 +141,12 @@ void Security::restoreDefaults()
 
 void Security::insertDefaultRanges()
 {
-    syncnet->insertItem( tr( "192.168.129.0/24" ) );
-    syncnet->insertItem( tr( "192.168.1.0/24" ) );
-    syncnet->insertItem( tr( "192.168.0.0/16" ) );
-    syncnet->insertItem( tr( "172.16.0.0/12" ) );
-    syncnet->insertItem( tr( "10.0.0.0/8" ) );
-    syncnet->insertItem( tr( "1.0.0.0/8" ) );
+    syncnet->insertItem( "192.168.129.0/24" );
+    syncnet->insertItem( "192.168.1.0/24" );
+    syncnet->insertItem( "192.168.0.0/16" );
+    syncnet->insertItem( "172.16.0.0/12" );
+    syncnet->insertItem( "10.0.0.0/8" );
+    syncnet->insertItem( "1.0.0.0/8" );
     syncnet->insertItem( tr( "Any" ) );
     syncnet->insertItem( tr( "None" ) );
 }
@@ -223,7 +223,7 @@ void Security::selectNet(int auth_peer,int auth_peer_bits, bool update)
     //insert user-defined list of netranges upon start
     if (update) {
     //User selected/active netrange first
-    syncnet->insertItem( tr( sn ) );
+    syncnet->insertItem( sn );
 
     Config cfg("Security");
     cfg.setGroup("Sync");
@@ -248,7 +248,7 @@ void Security::selectNet(int auth_peer,int auth_peer_bits, bool update)
                         }
                     }
                     if (! already_there) {
-                        syncnet->insertItem( tr( netrange ) );
+                        syncnet->insertItem( netrange );
                     } else {
                         already_there=FALSE;
                     }
