@@ -119,7 +119,7 @@ void QPEMenuToolFocusManager::moveFocus( bool next )
 	    --it;
 	}
 	QWidget *w = (*it);
-	if ( w && w->isEnabled() && w->isVisible() &&
+	if ( w && w->isEnabled() && w->isVisible() && !w->inherits("QToolBarSeparator") &&
 	     w->topLevelWidget() == qApp->activeWindow() ) {
 	    setFocus( w, next );
 	    return;
