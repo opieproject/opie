@@ -822,6 +822,8 @@ void OContact::save( QString &buf ) const
 /*!
   \internal
   Returns the list of fields belonging to a contact
+  Never change order of this list ! It has to be regarding
+  enum AddressBookFields !! 
 */
 QStringList OContact::fields()
 {
@@ -856,6 +858,11 @@ QStringList OContact::fields()
     list.append( "BusinessPager" );
     list.append( "BusinessWebPage" );
 
+    list.append( "Office" );
+    list.append( "Profession" );
+    list.append( "Assistant" );
+    list.append( "Manager" );
+
     list.append( "HomeStreet" );
     list.append( "HomeCity" );
     list.append( "HomeState" );
@@ -863,10 +870,6 @@ QStringList OContact::fields()
     list.append( "HomeCountry" );
     list.append( "HomeWebPage" );
 
-    list.append( "Office" );
-    list.append( "Profession" );
-    list.append( "Assistant" );
-    list.append( "Manager" );
     list.append( "Spouse" );
     list.append( "Gender" );
     list.append( "Birthday" );
