@@ -83,7 +83,8 @@ QStringList Doc_DirLister::files()const {
     QStringList out;
     QListIterator<DocLnk> dit(m_ds.children());
     for( ; dit.current(); ++dit) {
-        if (!(*dit)->isValid()) continue;
+        /* check if the real file exists! */
+        if (!(*dit)->fileKnown()||!QFile::exists( (*dit)->file())) continue;
         if (!matchCat((*dit))) continue;
         QString s = (*dit)->name();
         s+=char(0);
