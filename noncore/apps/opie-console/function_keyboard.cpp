@@ -238,9 +238,9 @@ void FunctionKeyboard::loadDefaults() {
 
     keys.insert( "r0c7", FKey ("Ho", 0, 4112, 0));
     keys.insert( "r0c8", FKey ("End", 0, 4113, 0));
-    keys.insert( "r0c9", FKey ("PU", 0, 4118, 0));
-    keys.insert( "r0c10", FKey ("PD", 0, 4119, 0));
-    keys.insert( "r0c11", FKey ("esc", 0, Qt::Key_Escape, 0xfff));
+    keys.insert( "r0c9", FKey ("Pu", 0, 4118, 0));
+    keys.insert( "r0c10", FKey ("Pd", 0, 4119, 0));
+    keys.insert( "r0c11", FKey ("Esc", 0, Qt::Key_Escape, 0xfff));
 
     keys.insert( "r1c0", FKey ("F1", 0, 4144, 0));
     keys.insert( "r1c1", FKey ("F2", 0, 4145, 0));
