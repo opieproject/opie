@@ -123,11 +123,6 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
     brightness_ac_3->setPageStep( QMAX(1,maxbright_ac/16) );
     brightness_ac_3->setValue( (maxbright_ac*255 - initbright_ac*maxbright_ac)/255 );
 
-    // advanced settings
-    config.setGroup( "APM" );
-    warnintervalBox->setValue( config.readNumEntry("check_interval", 10000)/1000 );
-    lowSpinBox->setValue( config.readNumEntry("power_verylow", 10 ) );
-    criticalSpinBox->setValue( config.readNumEntry("power_critical", 5 ) );
 
     // ipaq sensor
     config.setGroup( "Ipaq_light_sensor" );
@@ -137,6 +132,15 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
     LightMinValueSlider->setValue( config.readNumEntry("MinValue", 70 ) );
     connect( LightStepSpin, SIGNAL( valueChanged( int ) ), this, SLOT( slotSliderTicks( int ) ) ) ;
     LightShiftSpin->setValue( config.readNumEntry("Shift", 0 ) );
+
+    // advanced settings
+    Config conf("apm");
+    conf.setGroup( "warnings" );
+    warnintervalBox->setValue( conf.readNumEntry("checkinterval", 10000)/1000 );
+    lowSpinBox->setValue( conf.readNumEntry("powerverylow", 10 ) );
+    criticalSpinBox->setValue( conf.readNumEntry("powercritical", 5 ) );
+
+
 
     connect( brightness, SIGNAL( valueChanged(int) ), this, SLOT( applyBrightness() ) );
     connect( brightness_ac_3, SIGNAL( valueChanged(int) ), this, SLOT( applyBrightnessAC() ) );
@@ -208,13 +212,6 @@ void LightSettings::accept()
     config.writeEntry( "BrightnessAC",
     (brightness_ac_3->maxValue() - brightness_ac_3->value())*255/brightness_ac_3->maxValue() );
 
-    // advanced
-    config.setGroup( "APM" );
-    config.writeEntry( "check_interval", warnintervalBox->value()*1000 );
-    config.writeEntry( "power_verylow",  lowSpinBox->value() );
-    config.writeEntry( "power_critical", criticalSpinBox->value() );
-    QCopEnvelope e_warn("QPE/System", "reloadPowerWarnSettings()");
-
 
     // only make ipaq light sensor entries in config file if on an ipaq
     if ( ODevice::inst()->model() ==  Model_iPAQ_H31xx ||
@@ -233,6 +230,16 @@ void LightSettings::accept()
     }
 
     config.write();
+
+    // advanced
+    Config conf("apm");
+    conf.setGroup( "Warnings" );
+    conf.writeEntry( "check_interval", warnintervalBox->value()*1000 );
+    conf.writeEntry( "power_verylow",  lowSpinBox->value() );
+    conf.writeEntry( "power_critical", criticalSpinBox->value() );
+    QCopEnvelope e_warn("QPE/System", "reloadPowerWarnSettings()");
+    conf.write();
+
 
     QDialog::accept();
 }
