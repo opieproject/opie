@@ -68,20 +68,12 @@
 
 #include "stylelistitem.h"
 #include "decolistitem.h"
-#include "fontlistitem.h"
 #include "colorlistitem.h"
 
 #include "sample.h"
 
+#include <opie/ofontselector.h>
 
-static int findItemCB ( QComboBox *box, const QString &str )
-{
-	for ( int i = 0; i < box-> count ( ); i++ ) {
-		if ( box-> text ( i ) == str )
-			return i;
-	}
-	return -1;
-}
 
 class DefaultWindowDecoration : public WindowDecorationInterface
 {
@@ -192,15 +184,6 @@ void Appearance::loadColors ( QListBox *list )
 	}
 }
 
-void Appearance::loadFonts ( QListBox *list )
-{
-	FontDatabase fd;
-	QStringList f = fd. families ( );
-	
-	for ( QStringList::ConstIterator it = f. begin ( ); it != f. end ( ); ++it )
-		list-> insertItem ( new FontListItem ( *it, fd. styles ( *it ), fd. pointSizes ( *it )));
-}
-
 
 QWidget *Appearance::createStyleTab ( QWidget *parent )
 {
@@ -259,52 +242,17 @@ QWidget *Appearance::createFontTab ( QWidget *parent )
 	Config config ( "qpe" );
 	config. setGroup ( "Appearance" );
 
-
-    QWidget *tab = new QWidget( parent, "FontTab" );
-    QGridLayout *gridLayout = new QGridLayout ( tab, 0, 0, 4, 4 );
-    gridLayout->setRowStretch ( 4, 10 );
-
-    m_font_family_list = new QListBox( tab, "FontListBox" );
-    gridLayout->addMultiCellWidget( m_font_family_list, 0, 4, 0, 0 );
-    connect( m_font_family_list, SIGNAL( highlighted( int ) ), this, SLOT( fontFamilyClicked( int ) ) );
-
-    QLabel *label = new QLabel( tr( "Style" ), tab );
-    gridLayout->addWidget( label, 0, 1 );
-
-    m_font_style_list = new QComboBox( tab, "StyleListBox" );
-    connect( m_font_style_list, SIGNAL(  activated( int ) ), this, SLOT( fontStyleClicked( int ) ) );
-    gridLayout->addWidget( m_font_style_list, 1, 1 );
-
-    label = new QLabel( tr( "Size" ), tab );
-    gridLayout->addWidget( label, 2, 1 );
-
-    m_font_size_list = new QComboBox( tab, "SizeListBox" );
-    connect( m_font_size_list, SIGNAL(  activated( int ) ),
-             this, SLOT( fontSizeClicked( int ) ) );
-    gridLayout->addWidget( m_font_size_list, 3, 1 );
-
-	loadFonts ( m_font_family_list );
-
     QString familyStr = config.readEntry( "FontFamily", "Helvetica" );
     QString styleStr = config.readEntry( "FontStyle", "Regular" );
-    QString sizeStr = config.readEntry( "FontSize", "10" );
+    int size = config.readNumEntry( "FontSize", 10 );
 
-    m_font_family_list-> setCurrentItem ( m_font_family_list-> findItem ( familyStr ));
-    m_original_fontfamily = m_font_family_list-> currentItem ( );
-    if ( m_font_family_list-> currentItem ( ) < 0 )
-    	 m_font_family_list-> setCurrentItem ( 0 );
+    m_fontselect = new OFontSelector ( parent, "FontTab" );    
+    m_fontselect-> setSelectedFont ( familyStr, styleStr, size );
     
-    fontFamilyClicked ( m_original_fontfamily );
+    connect( m_fontselect, SIGNAL( fontSelected ( const QFont & )),
+             this, SLOT( fontClicked ( const QFont & )));
 
-	m_font_style_list-> setCurrentItem ( findItemCB ( m_font_style_list, styleStr ));
-	m_original_fontstyle = m_font_style_list-> currentItem ( );
-	fontStyleClicked ( m_original_fontstyle );
-
-	m_font_size_list-> setCurrentItem ( findItemCB ( m_font_size_list, sizeStr ));
-	m_original_fontsize = m_font_size_list-> currentItem ( );
-	fontSizeClicked ( m_original_fontsize );
-
-    return tab; 
+    return m_fontselect; 
 }
 
 QWidget *Appearance::createColorTab ( QWidget *parent )
@@ -352,7 +300,8 @@ QWidget *Appearance::createGuiTab ( QWidget *parent )
         
     QGridLayout* gridLayout = new QGridLayout ( vertLayout );
 
-	int style = config. readNumEntry ( "TabStyle", 2 );
+	int style = config. readNumEntry ( "TabStyle", 2 ) - 1;
+	bool tabtop = ( config. readEntry ( "TabPosition", "Top" ) == "Top" );
 
     QLabel* label = new QLabel( tr( "Tab style:" ), tab );
     gridLayout-> addWidget ( label, 0, 0 );
@@ -365,7 +314,7 @@ QWidget *Appearance::createGuiTab ( QWidget *parent )
     m_tabstyle_list-> insertItem ( tr( "Tabs w/icons" ));
     m_tabstyle_list-> insertItem ( tr( "Drop down list" ));
     m_tabstyle_list-> insertItem ( tr( "Drop down list w/icons" ));
-    m_tabstyle_list-> setCurrentItem ( style & 0xff );
+    m_tabstyle_list-> setCurrentItem ( style );
     gridLayout-> addMultiCellWidget ( m_tabstyle_list, 0, 0, 1, 2 );
 
     m_tabstyle_top = new QRadioButton( tr( "Top" ), tab, "tabpostop" );
@@ -373,14 +322,14 @@ QWidget *Appearance::createGuiTab ( QWidget *parent )
     gridLayout-> addWidget( m_tabstyle_top, 1, 1 );
     
     m_tabstyle_bottom = new QRadioButton( tr( "Bottom" ), tab, "tabposbottom" );
-    btngrp-> insert ( m_tabstyle_top );
+    btngrp-> insert ( m_tabstyle_bottom );
     gridLayout-> addWidget( m_tabstyle_bottom, 1, 2 );
 
-    bool tabtop = ( style & 0xff00 ) == 0;    
     m_tabstyle_top-> setChecked ( tabtop );
     m_tabstyle_bottom-> setChecked ( !tabtop );
 
 	m_original_tabstyle = style;
+	m_original_tabpos = tabtop;
 
 	return tab;
 }
@@ -423,27 +372,25 @@ void Appearance::accept ( )
     Config config("qpe");
     config.setGroup( "Appearance" );
 
-	int newstyle = m_style_list-> currentItem ( );
-	int newtabstyle = ( m_tabstyle_list-> currentItem ( ) & 0xff ) | \
-	                  ( m_tabstyle_top-> isChecked ( ) ? 0x000 : 0x100 );
-	int newfontfamily = m_font_family_list-> currentItem ( );
-	int newfontstyle = m_font_style_list-> currentItem ( );
-	int newfontsize = m_font_size_list-> currentItem ( );
+	int newtabstyle = m_tabstyle_list-> currentItem ( );
+	bool newtabpos = m_tabstyle_top-> isChecked ( );
 
 
     if ( m_style_changed ) { 
-	    StyleListItem *item = (StyleListItem *) m_style_list-> item ( newstyle );
+	    StyleListItem *item = (StyleListItem *) m_style_list-> item ( m_style_list-> currentItem ( ));
 	    if ( item )
             config.writeEntry( "Style", item-> key ( ));
 	}
-	if ( newtabstyle != m_original_tabstyle ) {
-		config. writeEntry ( "TabStyle", newtabstyle );
+
+	if (( newtabstyle != m_original_tabstyle ) || ( newtabpos != m_original_tabpos )) {
+		config. writeEntry ( "TabStyle", newtabstyle + 1 );
+		config. writeEntry ( "TabPosition", newtabpos ? "Top" : "Bottom" );
 	}
 
     if ( m_font_changed ) {
-        config.writeEntry( "FontFamily", m_font_family_list-> text ( newfontfamily ));
-        config.writeEntry( "FontStyle", m_font_style_list-> text ( newfontstyle ));
-        config.writeEntry( "FontSize", m_font_size_list-> text ( newfontsize ));
+        config. writeEntry ( "FontFamily", m_fontselect-> fontFamily ( ));
+        config. writeEntry ( "FontStyle", m_fontselect-> fontStyle ( ));
+        config. writeEntry ( "FontSize", m_fontselect-> fontSize ( ));
     }
 
 
@@ -521,81 +468,10 @@ void Appearance::decoClicked ( int index )
 	m_deco_changed |= ( index != m_original_deco );
 }
 
-void Appearance::fontFamilyClicked ( int index )
+void Appearance::fontClicked ( const QFont &f )
 {
-	QString oldstyle = m_font_style_list-> currentText ( );
-	QString oldsize  = m_font_size_list-> currentText ( );
-	
-    FontListItem *fli = (FontListItem *) m_font_family_list-> item ( index );
-    
-	m_font_style_list-> clear ( );    
-	m_font_style_list-> insertStringList ( fli-> styles ( ));
-	m_font_style_list-> setEnabled ( !fli-> styles ( ). isEmpty ( ));
-
-	int i;
-		
-	i = findItemCB ( m_font_style_list, oldstyle );
-	if ( i < 0 )
-		i = findItemCB ( m_font_style_list, "Regular" );
-	if (( i < 0 ) && ( m_font_style_list-> count ( ) > 0 ))
-		i = 0;
-		
-	if ( i >= 0 ) {
-		m_font_style_list-> setCurrentItem ( i );		
-		fontStyleClicked ( i );
-	}
-	
-	m_font_size_list-> clear ( );
-	QValueList<int> sl = fli-> sizes ( );
-	
-	for ( QValueList<int>::Iterator it = sl. begin ( ); it != sl. end ( ); ++it ) 
-		m_font_size_list-> insertItem ( QString::number ( *it ));
-
-	i = findItemCB ( m_font_size_list, oldsize );
-	if ( i < 0 )
-		i = findItemCB ( m_font_size_list, "10" );
-	if (( i < 0 ) && ( m_font_size_list-> count ( ) > 0 ))
-		i = 0;
-		
-	if ( i >= 0 ) {
-		m_font_size_list-> setCurrentItem ( i );	                                
-		fontSizeClicked ( i );
-	}
-	changeText ( );
-	
-	m_font_changed |= ( index != m_original_fontfamily );
-}
-
-void Appearance::fontStyleClicked ( int index )
-{
-	changeText ( );
-	
-	m_font_changed |= ( index != m_original_fontstyle );	
-}
-
-void Appearance::fontSizeClicked ( int index )
-{
-	changeText ( );
-
-	m_font_changed |= ( index != m_original_fontsize );
-}
-
-void Appearance::changeText ( )
-{
-    int ffa = m_font_family_list-> currentItem ( );
-    int fst = m_font_style_list-> currentItem ( ); 
-    int fsi = m_font_size_list-> currentItem ( );
-    
-    FontListItem *fli = (FontListItem *) m_font_family_list-> item ( ffa );
-    
-    if ( fli ) {
-    	FontDatabase fdb;
-    
-		m_sample-> setFont ( fdb. font ( fli-> family ( ), \
-		                     fst >= 0 ? fli-> styles ( ) [fst] : QString::null, \
-		                     fsi >= 0 ? fli-> sizes ( ) [fsi] : 10, \
-		                     fdb. charSets ( fli-> family ( )) [0] ));
-	}
+	m_font_changed |= ( f != m_sample-> font ( ));	
+	m_sample-> setFont ( f );
 }
 
 void Appearance::colorClicked ( int index )

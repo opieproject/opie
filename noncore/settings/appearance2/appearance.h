@@ -40,6 +40,7 @@ class QPushButton;
 class QRadioButton;
 class QToolButton;
 class SampleWindow;
+class OFontSelector;
 
 class Appearance : public QDialog
 {
@@ -57,11 +58,8 @@ protected slots:
     void styleClicked ( int );
     void styleSettingsClicked ( );
     void decoClicked ( int );
-    void fontFamilyClicked ( int );
-    void fontStyleClicked ( int );
-    void fontSizeClicked ( int );
+    void fontClicked ( const QFont & );
     void colorClicked ( int );
-//    void tabStyleClicked ( int );
 
     void editSchemeClicked();
     void saveSchemeClicked();
@@ -70,7 +68,6 @@ protected slots:
 private:
 	void loadStyles ( QListBox * );
 	void loadDecos ( QListBox * );
-	void loadFonts ( QListBox * );
     void loadColors ( QListBox * );
 
     void changeText();
@@ -90,10 +87,8 @@ private:
 
     int  m_original_style;
     int  m_original_deco;
-    int  m_original_fontfamily;
-    int  m_original_fontstyle;
-    int  m_original_fontsize;
     int  m_original_tabstyle;
+    bool  m_original_tabpos;
     
     QListBox *    m_style_list;
     QPushButton * m_style_settings;
@@ -102,9 +97,7 @@ private:
 
     QListBox *    m_color_list;
 
-    QListBox *    m_font_family_list;
-    QComboBox *   m_font_style_list;
-    QComboBox *   m_font_size_list;
+	OFontSelector *m_fontselect;
 
 	SampleWindow *m_sample;
     
@@ -113,4 +106,4 @@ private:
     QRadioButton *m_tabstyle_bottom;
 };
 
-#endif // APPEARANCESETTINGS_H
+#endif
