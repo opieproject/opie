@@ -9,7 +9,11 @@
 	* #1464 - Packagemanager dont set active filter after install a package (drw)
 	* n.a. - PackageManager - (Minor UI tweak) in filter dialog, when option is enabled, set focus to widget that corresponds to that option (drw)
 	* n.a. - PackageManager - (Minor UI tweak) fix double entry in source feed configuration when adding a new feed (drw)
-    
+	
+	Internal
+	--------
+	* Moved libopie1 to unsupported (mickeyl)
+
 2004-11-14	Opie 1.1.7
 
 	New Features
@@ -54,8 +58,11 @@
 	* n.a.  - Build system: Enable distcc and ccache when crosscompiling too, and use them everywhere we can (clem)
 	* n.a.  - Build system: Fix deps in several config.in (and fix scripts/deps.pl too) to stop breaking builds, especially with make -j highNumber (clem)
 	* n.a.  - Removed hardcoded icon size in a couple of applets (mickeyl)
-	* n.a.  - Opie-Qashmoney has been moved to unsupported (mickeyl)
-	* n.a.  - Opie-Ubrowser has been moved to unsupported (mickeyl)
+
+	Internal
+	--------
+	* Opie-Qashmoney has been moved to unsupported (mickeyl)
+	* Opie-Ubrowser has been moved to unsupported (mickeyl)
 
 2004-09-17	Opie 1.1.6
 

@@ -11,7 +11,7 @@ CONFIG_BACKUP	noncore/settings/backup	backup.pro
 CONFIG_BARTENDER noncore/apps/opie-bartender	bartender.pro
 CONFIG_BATTERYAPPLET	core/applets/batteryapplet	batteryapplet.pro
 CONFIG_BEND	noncore/unsupported/mail2/bend	bend.pro
-CONFIG_BIGSCREEN_EXAMPLE       libopie/big-screen/example      osplitter_mail.pro
+CONFIG_BIGSCREEN_EXAMPLE       unsupported/libopie/big-screen/example      osplitter_mail.pro
 CONFIG_BINARY	noncore/tools/calc2/binary	binary.pro
 CONFIG_BLUE-PIN	noncore/net/opietooth/blue-pin	blue-pin.pro
 CONFIG_BOUNCE	noncore/games/bounce	bounce.pro
@@ -85,9 +85,8 @@ CONFIG_LIBOPIE2NET	libopie2/opienet	opienet.pro
 CONFIG_LIBOPIE2PIM	libopie2/opiepim	opiepim.pro
 CONFIG_LIBOPIE2SECURITY	libopie2/opiesecurity opiesecurity.pro
 CONFIG_LIBOPIE2UI	libopie2/opieui	opieui.pro
-CONFIG_LIBOPIE	libopie	libopie.pro
-CONFIG_LIBOPIE_PIM	libopie/pim	pim.pro
 CONFIG_LIBOPIETOOTH	noncore/net/opietooth/lib	lib.pro
+CONFIG_LIBOPIE	noncore/unsupported/libopie libopie.pro
 CONFIG_LIBQPE	library	library.pro
 CONFIG_LIBQPE-X11	x11/libqpe-x11	libqpe-x11.pro
 CONFIG_LIBQRSYNC    rsync   rsync.pro

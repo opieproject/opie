@@ -181,8 +181,6 @@ menu "Base"
     source library/config.in
     source x11/config.in
   endchoice
-  source libopie/config.in
-
   source libopie2/config.in
   source libqtaux/config.in
   source rsync/config.in
