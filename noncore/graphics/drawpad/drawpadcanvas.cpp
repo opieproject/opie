@@ -346,10 +346,13 @@ void DrawPadCanvas::backupPage()
 
 void DrawPadCanvas::deleteAll()
 {
-   QMessageBox messageBox(tr("Delete All"), tr("Do you want to delete\nall the pages?"),
+    QMessageBox messageBox(tr("Delete All"), tr("Do you want to delete\nall the pages?"),
                            QMessageBox::Information, QMessageBox::Yes,
                            QMessageBox::No | QMessageBox::Escape | QMessageBox::Default,
                            QMessageBox::NoButton, this);
+
+    messageBox.setButtonText(QMessageBox::Yes, tr("Yes"));
+    messageBox.setButtonText(QMessageBox::No, tr("No"));
 
     if (messageBox.exec() == QMessageBox::Yes) {
         m_pages.clear();
@@ -398,6 +401,9 @@ void DrawPadCanvas::clearPage()
                            QMessageBox::No | QMessageBox::Escape | QMessageBox::Default,
                            QMessageBox::NoButton, this);
 
+    messageBox.setButtonText(QMessageBox::Yes, tr("Yes"));
+    messageBox.setButtonText(QMessageBox::No, tr("No"));
+
     if (messageBox.exec() == QMessageBox::Yes) {
         m_pages.current()->fill(Qt::white);
 
@@ -411,6 +417,9 @@ void DrawPadCanvas::deletePage()
                            QMessageBox::Information, QMessageBox::Yes,
                            QMessageBox::No | QMessageBox::Escape | QMessageBox::Default,
                            QMessageBox::NoButton, this);
+
+    messageBox.setButtonText(QMessageBox::Yes, tr("Yes"));
+    messageBox.setButtonText(QMessageBox::No, tr("No"));
 
     if (messageBox.exec() == QMessageBox::Yes) {
         m_pages.remove(m_pages.current());
