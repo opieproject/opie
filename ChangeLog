@@ -5,6 +5,7 @@
 
 	Fixed Bugs
 	----------
+	* #1501 - Fixing bug in todo sql backend (eilers)
 
 	Internal
 	--------
@@ -28,7 +29,6 @@
 	* n.a. - PackageManager - (Minor UI tweak) in filter dialog, when option is enabled, set focus to widget that corresponds to that option (drw)
 	* n.a. - PackageManager - (Minor UI tweak) fix double entry in source feed configuration when adding a new feed (drw)
 	* n.a. - Battery Applet - fix sizing of battery info popup
-	* #1501 - Fixing bug in todo sql backend (eilers)
 	* #1493 - Fixed one column layout bug of the launcher (hrw)
 
 	Internal
