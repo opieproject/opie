@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.11.2.4 2003-07-29 14:38:51 tille Exp $
+ * $Id: pppdata.cpp,v 1.11.2.5 2003-07-29 14:58:45 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -50,7 +50,11 @@ PPPData::PPPData()
       pppdisrunning(false),
       pppderror(0)
 {
-    highcount = readNumConfig(GENERAL_GRP, NUMACCOUNTS_KEY, 0) - 1;
+  highcount = readNumConfig(GENERAL_GRP, NUMACCOUNTS_KEY, 0) - 1;
+
+  Config cfg = config();
+  cfg.setGroup(GENERAL_GRP);
+  _deleted = cfg.readListEntry("Deleted_Accounts", ',' );
 
   if (highcount > MAX_ACCOUNTS)
     highcount = MAX_ACCOUNTS;
@@ -84,6 +88,10 @@ void PPPData::save()
     QString key;
     QStringList keys;
     Config cfg = config();
+    if (!_deleted.isEmpty()){
+        cfg.setGroup(GENERAL_GRP);
+        cfg.writeEntry("Deleted_Accounts", _deleted, ',' );
+    }
     for( QMap<QString,QString>::Iterator it = stringEntries.begin();
          it != stringEntries.end(); ++it ){
         QString val = it.data();
@@ -762,6 +770,7 @@ bool PPPData::deleteAccount() {
     cfg.setGroup(cgroup);
     cfg.clearGroup();
     _deleted << cgroup;
+    highcount--;
     return false;
 }
 
@@ -783,8 +792,13 @@ int PPPData::newaccount() {
   if (highcount >= MAX_ACCOUNTS) return -1;
 
   highcount++;
-  setAccountbyIndex(highcount);
-
+  if (_deleted.isEmpty()){
+      setAccountbyIndex(highcount);
+  }else{
+      int firstFree = highcount;
+      //FIXME wich is first free
+      setAccountbyIndex(firstFree);
+  }
   setpppdArgumentDefaults();
   qDebug("PPPData::newaccount -> %i",caccount);
   return caccount;

@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.cpp,v 1.9.2.2 2003-07-29 14:38:51 tille Exp $
+ * $Id: accounts.cpp,v 1.9.2.3 2003-07-29 14:58:45 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -80,7 +80,7 @@ AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name )
 
   delete_b = new QPushButton(tr("De&lete"), this);
   connect(delete_b, SIGNAL(clicked()), SLOT(deleteaccount()));
-  delete_b->setEnabled( false );
+  //delete_b->setEnabled( false );
   l1->addWidget(delete_b);
   QWhatsThis::add(delete_b,
 		  tr("<p>Deletes the selected account\n\n"
@@ -112,7 +112,8 @@ AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name )
 
 
 void AccountWidget::slotListBoxSelect(int idx) {
-//FIXME  delete_b->setEnabled((bool)(idx != -1));
+//FIXME
+    delete_b->setEnabled((bool)(idx != -1));
   edit_b->setEnabled((bool)(idx != -1));
 //FIXME  copy_b->setEnabled((bool)(idx != -1));
   if(idx!=-1) {
