@@ -135,13 +135,13 @@ void Today::autoStart() {
     int AUTOSTART = cfg.readNumEntry("autostart",1);
 //    qDebug(QString("%1").arg(AUTOSTART));
     if (AUTOSTART) {
-        QCopEnvelope e("QPE/System", "autoStart(QString, QString, QString)");
+        QCopEnvelope e("QPE/System", "autoStart(QString,QString,QString)");
         e << QString("add");
         e << QString("today");
         e << AUTOSTART_TIMER;
     } else {
         qDebug("Nun in else bei autostart");
-        QCopEnvelope e("QPE/System", "autoStart(QString, QString)");
+        QCopEnvelope e("QPE/System", "autoStart(QString,QString)");
         e << QString("remove");
         e << QString("today");
     }
@@ -421,7 +421,6 @@ void Today::getTodo() {
   TodoField->setText(tr(output));
 }
 
-
 /*
  * launch addressbook (personal card)
  */
@@ -429,6 +428,7 @@ void Today::editCard() {
     QCopEnvelope w("QPE/System", "execute(QString)");
     w << QString("addressbook");
 
+    //  while( !QCopChannel::isRegistered("QPE/Addressbook"))
     QCopEnvelope v("QPE/Addressbook", "editPersonalAndClose()");
 }
 

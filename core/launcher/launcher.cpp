@@ -534,11 +534,11 @@ void Launcher::updateMimeTypes(AppLnkSet* folder)
   }
     }
 }
-/** This is a HACK.... 
+/** This is a HACK....
  * Reason: scanning huge mediums, microdirvers for examples
  * consomes time. To avoid that we invented the MediumMountCheck
- * 
- * a) the user globally disabled medium checking. We can ignore 
+ *
+ * a) the user globally disabled medium checking. We can ignore
  *    all removable medium
  * b) the user enabled medium checking globally and we need to use this mimefilter
  * c) the user enabled medium checking on a per medium bases
@@ -572,7 +572,7 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
     StorageInfo storage;
     const QList<FileSystem> &fileSystems = storage.fileSystems();
     QListIterator<FileSystem> it ( fileSystems );
-    
+
     // b)
     if( mediumCfg.readBoolEntry("global", true ) ){
       QString mime = configToMime(&mediumCfg).join(";");
@@ -601,7 +601,7 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
 	  tmp = new DocLnkSet( (*it)->path(), mimetypes.join(";")  );
 	  docsFolder->appendFrom( *tmp );
 	  delete tmp;
-	 
+
 	}else{ // come up with the gui cause this a new card
 	  MediumMountGui medium(&cfg, (*it)->path() );
 	  if( medium.check() ){ // we did not ask before or ask again is off
@@ -718,65 +718,65 @@ void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
 {
     QDataStream stream( data, IO_ReadOnly );
     if ( msg == "closing(QString)" ){
-      QString app;
-      stream >> app;
-      qWarning("app closed %s", app.latin1()  );
-      MRUList::removeTask( app );
+        QString app;
+        stream >> app;
+        qWarning("app closed %s", app.latin1()  );
+        MRUList::removeTask( app );
     }else if ( msg == "linkChanged(QString)" ) {
-      QString link;
-      stream >> link;
-  if ( in_lnk_props ) {
-      got_lnk_change = TRUE;
-      lnk_change = link;
-  } else {
-      updateLink(link);
-  }
+        QString link;
+        stream >> link;
+        if ( in_lnk_props ) {
+            got_lnk_change = TRUE;
+            lnk_change = link;
+        } else {
+            updateLink(link);
+        }
     } else if ( msg == "busy()" ) {
-  emit busy();
+        emit busy();
     } else if ( msg == "notBusy(QString)" ) {
-  QString app;
-  stream >> app;
-  tabs->setBusy(FALSE);
-  emit notBusy(app);
+        QString app;
+        stream >> app;
+        tabs->setBusy(FALSE);
+        emit notBusy(app);
     } else if ( msg == "mkdir(QString)" ) {
-  QString dir;
-  stream >> dir;
-  if ( !dir.isEmpty() )
-      mkdir( dir );
+        QString dir;
+        stream >> dir;
+        if ( !dir.isEmpty() )
+            mkdir( dir );
     } else if ( msg == "rdiffGenSig(QString,QString)" ) {
-  QString baseFile, sigFile;
-  stream >> baseFile >> sigFile;
-  QRsync::generateSignature( baseFile, sigFile );
+        QString baseFile, sigFile;
+        stream >> baseFile >> sigFile;
+        QRsync::generateSignature( baseFile, sigFile );
     } else if ( msg == "rdiffGenDiff(QString,QString,QString)" ) {
-  QString baseFile, sigFile, deltaFile;
-  stream >> baseFile >> sigFile >> deltaFile;
-  QRsync::generateDiff( baseFile, sigFile, deltaFile );
+        QString baseFile, sigFile, deltaFile;
+        stream >> baseFile >> sigFile >> deltaFile;
+        QRsync::generateDiff( baseFile, sigFile, deltaFile );
     } else if ( msg == "rdiffApplyPatch(QString,QString)" ) {
-  QString baseFile, deltaFile;
-  stream >> baseFile >> deltaFile;
-  if ( !QFile::exists( baseFile ) ) {
-      QFile f( baseFile );
-      f.open( IO_WriteOnly );
-      f.close();
-  }
-  QRsync::applyDiff( baseFile, deltaFile );
-  QCopEnvelope e( "QPE/Desktop", "patchApplied(QString)" );
-  e << baseFile;
+        QString baseFile, deltaFile;
+        stream >> baseFile >> deltaFile;
+        if ( !QFile::exists( baseFile ) ) {
+            QFile f( baseFile );
+            f.open( IO_WriteOnly );
+            f.close();
+        }
+        QRsync::applyDiff( baseFile, deltaFile );
+        QCopEnvelope e( "QPE/Desktop", "patchApplied(QString)" );
+        e << baseFile;
     } else if ( msg == "rdiffCleanup()" ) {
-  mkdir( "/tmp/rdiff" );
-  QDir dir;
-  dir.setPath( "/tmp/rdiff" );
-  QStringList entries = dir.entryList();
-  for ( QStringList::Iterator it = entries.begin(); it != entries.end(); ++it )
-      dir.remove( *it );
+        mkdir( "/tmp/rdiff" );
+        QDir dir;
+        dir.setPath( "/tmp/rdiff" );
+        QStringList entries = dir.entryList();
+        for ( QStringList::Iterator it = entries.begin(); it != entries.end(); ++it )
+            dir.remove( *it );
     } else if ( msg == "sendHandshakeInfo()" ) {
-  QString home = getenv( "HOME" );
-  QCopEnvelope e( "QPE/Desktop", "handshakeInfo(QString,bool)" );
-  e << home;
-  int locked = (int) Desktop::screenLocked();
-  e << locked;
-  // register an app for autostart
-  // if clear is send the list is cleared.
+        QString home = getenv( "HOME" );
+        QCopEnvelope e( "QPE/Desktop", "handshakeInfo(QString,bool)" );
+        e << home;
+        int locked = (int) Desktop::screenLocked();
+        e << locked;
+        // register an app for autostart
+        // if clear is send the list is cleared.
     } else if ( msg == "autoStart(QString)" ) {
         QString appName;
         stream >> appName;
@@ -819,106 +819,105 @@ void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
             }
         } else {
         }
-   } else if ( msg == "sendCardInfo()" ) {
+    } else if ( msg == "sendCardInfo()" ) {
         QCopEnvelope e( "QPE/Desktop", "cardInfo(QString)" );
         const QList<FileSystem> &fs = storage->fileSystems();
-  QListIterator<FileSystem> it ( fs );
-  QString s;
-  QString homeDir = getenv("HOME");
-  QString hardDiskHome;
-  for ( ; it.current(); ++it ) {
-      if ( (*it)->isRemovable() )
-    s += (*it)->name() + "=" + (*it)->path() + "/Documents "
-         + QString::number( (*it)->availBlocks() * (*it)->blockSize() )
-         + " " + (*it)->options() + ";";
-      else if ( (*it)->disk() == "/dev/mtdblock1" ||
-          (*it)->disk() == "/dev/mtdblock/1" )
-    s += (*it)->name() + "=" + homeDir + "/Documents "
-         + QString::number( (*it)->availBlocks() * (*it)->blockSize() )
-         + " " + (*it)->options() + ";";
-      else if ( (*it)->name().contains( "Hard Disk") &&
-          homeDir.contains( (*it)->path() ) &&
-          (*it)->path().length() > hardDiskHome.length() )
-    hardDiskHome =
-        (*it)->name() + "=" + homeDir + "/Documents "
-        + QString::number( (*it)->availBlocks() * (*it)->blockSize() )
-        + " " + (*it)->options() + ";";
-  }
-  if ( !hardDiskHome.isEmpty() )
-      s += hardDiskHome;
+        QListIterator<FileSystem> it ( fs );
+        QString s;
+        QString homeDir = getenv("HOME");
+        QString hardDiskHome;
+        for ( ; it.current(); ++it ) {
+            if ( (*it)->isRemovable() )
+                s += (*it)->name() + "=" + (*it)->path() + "/Documents "
+                     + QString::number( (*it)->availBlocks() * (*it)->blockSize() )
+                     + " " + (*it)->options() + ";";
+            else if ( (*it)->disk() == "/dev/mtdblock1" ||
+                      (*it)->disk() == "/dev/mtdblock/1" )
+                s += (*it)->name() + "=" + homeDir + "/Documents "
+                     + QString::number( (*it)->availBlocks() * (*it)->blockSize() )
+                     + " " + (*it)->options() + ";";
+            else if ( (*it)->name().contains( "Hard Disk") &&
+                      homeDir.contains( (*it)->path() ) &&
+                      (*it)->path().length() > hardDiskHome.length() )
+                hardDiskHome =
+                    (*it)->name() + "=" + homeDir + "/Documents "
+                    + QString::number( (*it)->availBlocks() * (*it)->blockSize() )
+                    + " " + (*it)->options() + ";";
+        }
+        if ( !hardDiskHome.isEmpty() )
+            s += hardDiskHome;
 
-  e << s;
+        e << s;
     } else if ( msg == "sendSyncDate(QString)" ) {
-  QString app;
-  stream >> app;
-  Config cfg( "qpe" );
-  cfg.setGroup("SyncDate");
-  QCopEnvelope e( "QPE/Desktop", "syncDate(QString,QString)" );
-  e  << app  << cfg.readEntry( app );
-  //qDebug("QPE/System sendSyncDate for %s: response %s", app.latin1(),
-  //cfg.readEntry( app ).latin1() );
+        QString app;
+        stream >> app;
+        Config cfg( "qpe" );
+        cfg.setGroup("SyncDate");
+        QCopEnvelope e( "QPE/Desktop", "syncDate(QString,QString)" );
+        e  << app  << cfg.readEntry( app );
+        //qDebug("QPE/System sendSyncDate for %s: response %s", app.latin1(),
+        //cfg.readEntry( app ).latin1() );
     } else if ( msg == "setSyncDate(QString,QString)" ) {
-  QString app, date;
-  stream >> app >> date;
-  Config cfg( "qpe" );
-  cfg.setGroup("SyncDate");
-  cfg.writeEntry( app, date );
-  //qDebug("setSyncDate(QString,QString) %s %s", app.latin1(), date.latin1());
+        QString app, date;
+        stream >> app >> date;
+        Config cfg( "qpe" );
+        cfg.setGroup("SyncDate");
+        cfg.writeEntry( app, date );
+        //qDebug("setSyncDate(QString,QString) %s %s", app.latin1(), date.latin1());
     } else if ( msg == "startSync(QString)" ) {
-  QString what;
-  stream >> what;
-  delete syncDialog; syncDialog = 0;
-  syncDialog = new SyncDialog( this, "syncProgress", FALSE,
-             WStyle_Tool | WStyle_Customize |
-             Qt::WStyle_StaysOnTop );
-  syncDialog->showMaximized();
-  syncDialog->whatLabel->setText( "<b>" + what + "</b>" );
-  connect( syncDialog->buttonCancel, SIGNAL( clicked() ),
-     SLOT( cancelSync() ) );
-    }
-    else if ( msg == "stopSync()") {
-  delete syncDialog; syncDialog = 0;
+        QString what;
+        stream >> what;
+        delete syncDialog; syncDialog = 0;
+        syncDialog = new SyncDialog( this, "syncProgress", FALSE,
+                                     WStyle_Tool | WStyle_Customize |
+                                     Qt::WStyle_StaysOnTop );
+        syncDialog->showMaximized();
+        syncDialog->whatLabel->setText( "<b>" + what + "</b>" );
+        connect( syncDialog->buttonCancel, SIGNAL( clicked() ),
+                 SLOT( cancelSync() ) );
+    } else if ( msg == "stopSync()") {
+        delete syncDialog; syncDialog = 0;
     } else if ( msg == "getAllDocLinks()" ) {
-  loadDocs();
+        loadDocs();
 
-  QString contents;
+        QString contents;
 
-  for ( QListIterator<DocLnk> it( docsFolder->children() ); it.current(); ++it ) {
-      DocLnk *doc = it.current();
-      QFileInfo fi( doc->file() );
-      if ( !fi.exists() )
-    continue;
+        for ( QListIterator<DocLnk> it( docsFolder->children() ); it.current(); ++it ) {
+            DocLnk *doc = it.current();
+            QFileInfo fi( doc->file() );
+            if ( !fi.exists() )
+                continue;
 
-      bool fake = !doc->linkFileKnown();
-      if ( !fake ) {
-    QFile f( doc->linkFile() );
-    if ( f.open( IO_ReadOnly ) ) {
-        QTextStream ts( &f );
-        ts.setEncoding( QTextStream::UnicodeUTF8 );
-        contents += ts.read();
-        f.close();
-    } else
-        fake = TRUE;
-      }
-      if (fake) {
-    contents += "[Desktop Entry]\n";
-    contents += "Categories = " + Qtopia::Record::idsToString( doc->categories() ) + "\n";
-    contents += "File = "+doc->file()+"\n";
-    contents += "Name = "+doc->name()+"\n";
-    contents += "Type = "+doc->type()+"\n";
-      }
-      contents += QString("Size = %1\n").arg( fi.size() );
-  }
+            bool fake = !doc->linkFileKnown();
+            if ( !fake ) {
+                QFile f( doc->linkFile() );
+                if ( f.open( IO_ReadOnly ) ) {
+                    QTextStream ts( &f );
+                    ts.setEncoding( QTextStream::UnicodeUTF8 );
+                    contents += ts.read();
+                    f.close();
+                } else
+                    fake = TRUE;
+            }
+            if (fake) {
+                contents += "[Desktop Entry]\n";
+                contents += "Categories = " + Qtopia::Record::idsToString( doc->categories() ) + "\n";
+                contents += "File = "+doc->file()+"\n";
+                contents += "Name = "+doc->name()+"\n";
+                contents += "Type = "+doc->type()+"\n";
+            }
+            contents += QString("Size = %1\n").arg( fi.size() );
+        }
 
-  //qDebug( "sending length %d", contents.length() );
-  QCopEnvelope e( "QPE/Desktop", "docLinks(QString)" );
-  e << contents;
+        //qDebug( "sending length %d", contents.length() );
+        QCopEnvelope e( "QPE/Desktop", "docLinks(QString)" );
+        e << contents;
 
-  qDebug( "================ \n\n%s\n\n===============",
-  contents.latin1() );
+        qDebug( "================ \n\n%s\n\n===============",
+                contents.latin1() );
 
-  delete docsFolder;
-  docsFolder = 0;
+        delete docsFolder;
+        docsFolder = 0;
     }
 }
 
