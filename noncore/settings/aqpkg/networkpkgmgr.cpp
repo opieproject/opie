@@ -288,7 +288,11 @@ void NetworkPackageManager :: serverSelected( int )
         }
         
         if ( !it->isPackageStoredLocally() )
+        {
             new QCheckListItem( item, QString( "Description - " ) + it->getDescription() );
+            new QCheckListItem( item, QString( "Size - " ) + it->getPackageSize() );
+            new QCheckListItem( item, QString( "Section - " ) + it->getSection() );
+        }
         else
             new QCheckListItem( item, QString( "Filename - " ) + it->getFilename() );
         
@@ -306,8 +310,6 @@ void NetworkPackageManager :: serverSelected( int )
 			}
 		}
 
-        new QCheckListItem( item, QString( "Size - " ) + it->getPackageSize() );
-        new QCheckListItem( item, QString( "Section - " ) + it->getSection() );
         packagesList->insertItem( item );
     }
 

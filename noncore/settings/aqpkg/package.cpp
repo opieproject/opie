@@ -21,6 +21,12 @@
 Package::Package( QString &name )
 {
     packageName = name;
+
+    version = "N/A";
+    description = "N/A";
+    packageSize = "N/A";
+    section = "N/A";
+    
     localPackage = 0;
     installed = false;
     packageStoredLocally = false;
@@ -32,6 +38,12 @@ Package::Package( QString &name )
 Package::Package( char *name )
 {
     packageName = name;
+
+    version = "N/A";
+    description = "N/A";
+    packageSize = "N/A";
+    section = "N/A";
+    
     localPackage = 0;
     installed = false;
     packageStoredLocally = false;
