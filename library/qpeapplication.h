@@ -203,26 +203,31 @@ extern Q_EXPORT QRect qt_maxWindowRect;
 
 inline void QPEApplication::showWidget( QWidget* wg, bool nomax )
 {
-    if ( !nomax
-            && ( qApp->desktop()->width() <= 320 ) )
-    {
-        wg->showMaximized();
-    } else {
-        #ifdef Q_WS_QWS
-            QSize desk = QSize( qApp->desktop()->width(), qApp->desktop()->height() );
-        #else
-            QSize desk = QSize( qt_maxWindowRect.width(), qt_maxWindowRect.height() );
-        #endif
-
-        QSize sh = wg->sizeHint();
-        int w = QMAX( sh.width(), wg->width() );
-        int h = QMAX( sh.height(), wg->height() );
-        //              desktop                              widget-frame                      taskbar
-        w = QMIN( w, ( desk.width() - ( wg->frameGeometry().width() - wg->geometry().width() ) - 25 ) );
-        h = QMIN( h, ( desk.height() - ( wg->frameGeometry().height() - wg->geometry().height() ) - 25 ) );
-
-        wg->resize( w, h );
+    if ( wg->isVisible() )
         wg->show();
+    else
+    {
+        if ( !nomax
+                && ( qApp->desktop()->width() <= 320 ) )
+        {
+            wg->showMaximized();
+        } else {
+            #ifdef Q_WS_QWS
+                QSize desk = QSize( qApp->desktop()->width(), qApp->desktop()->height() );
+            #else
+                QSize desk = QSize( qt_maxWindowRect.width(), qt_maxWindowRect.height() );
+            #endif
+
+            QSize sh = wg->sizeHint();
+            int w = QMAX( sh.width(), wg->width() );
+            int h = QMAX( sh.height(), wg->height() );
+            //              desktop                              widget-frame                      taskbar
+            w = QMIN( w, ( desk.width() - ( wg->frameGeometry().width() - wg->geometry().width() ) - 25 ) );
+            h = QMIN( h, ( desk.height() - ( wg->frameGeometry().height() - wg->geometry().height() ) - 25 ) );
+
+            wg->resize( w, h );
+            wg->show();
+        }
     }
 }
 
