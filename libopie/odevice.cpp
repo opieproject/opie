@@ -1493,6 +1493,19 @@ int iPAQ::lightSensorResolution ( ) const
  **************************************************/
 
 // Check whether this device is the sharp zaurus..
+// FIXME This gets unnecessary complicated. We should think about splitting the Zaurus
+//       class up into individual classes. We need three classes
+//
+//       Zaurus-Collie (SA-model  w/ 320x240 lcd, for SL5500 and SL5000)
+//       Zaurus-Poodle (PXA-model w/ 320x240 lcd, for SL5600)
+//       Zaurus-Corgi  (PXA-model w/ 640x480 lcd, for C700, C750, C760, and C860)
+//
+//       Only question right now is: Do we really need to do it? Because as soon
+//       as the OpenZaurus kernel is ready, there will be a unified interface for all
+//       Zaurus models (concerning apm, backlight, buttons, etc.)
+//
+//       Comments? - mickeyl.
+
 bool Zaurus::isZaurus()
 {
 
@@ -1623,6 +1636,7 @@ void Zaurus::init ( )
 			// and 2) check to see if the user overrode the rotation direction
 			// using appearance, and if so, remove that item from the Config to
 			// ensure the rotate applet flips us back to the previous state.
+			// treke said he has patches for detecting the phys. so where are they, treke? -mickeyl.
 			if ( flipstate ) {
 				// 480x640
 				d-> m_rotation = Rot0;
@@ -1936,6 +1950,9 @@ bool Zaurus::setSoftSuspend ( bool soft )
 
 bool Zaurus::setDisplayBrightness ( int bright )
 {
+// FIXME The C7x0 have a proc-interface (/proc/drivers/corgi-bl) which
+//       is nice to use. Currently it exposes 16+1 levels. Implement this!
+//       (or wait for kergoth unifying the interfaces in the OpenZaurus kernel.)
 	bool res = false;
 	int fd;
 
