@@ -28,6 +28,7 @@ public:
 
     virtual void setAutoRotate(bool);
     virtual void setAutoScale(bool);
+    virtual void setShowZoomer(bool);
 
     enum  Rotation {
         Rotate0,
@@ -54,6 +55,7 @@ protected:
 
     bool scale_to_fit;
     bool rotate_to_fit;
+    bool show_zoomer;
     bool first_resize_done;
     Rotation last_rot;
     QString m_lastName;
@@ -61,6 +63,8 @@ protected:
 
     virtual void rotate_into_data(Rotation r);
     virtual void generateImage();
+    bool image_fit_into(const QSize&s);
+    void check_zoomer();
 
 protected slots:
     virtual void viewportMouseMoveEvent(QMouseEvent* e);

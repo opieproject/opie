@@ -41,6 +41,7 @@ public slots:
     void slotReturn();
     void slotRotateToggled(bool);
     void slotScaleToggled(bool);
+    void slotZoomerToggled(bool);
     void setDocument( const QString& );
 
 protected:
@@ -60,6 +61,7 @@ private:
     ImageView *m_disp;
     bool autoRotate;
     bool autoScale;
+    bool zoomerOn;
     QToolButton*rotateButton;
 
 

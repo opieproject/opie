@@ -106,10 +106,24 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     connect(btn,SIGNAL(toggled(bool)),this,SLOT(slotScaleToggled(bool)));
     autoScale = true;
 
+    btn = new QToolButton(bar);
+    btn->setIconSet( Resource::loadIconSet( "mag" ) );
+    btn->setToggleButton(true);
+    btn->setOn(true);
+    connect(btn,SIGNAL(toggled(bool)),this,SLOT(slotZoomerToggled(bool)));
+    zoomerOn = true;
 }
 
 PMainWindow::~PMainWindow() {
     odebug << "Shutting down" << oendl;
+}
+
+void PMainWindow::slotZoomerToggled(bool how)
+{
+    zoomerOn = how;
+    if (m_disp) {
+        m_disp->setShowZoomer(zoomerOn);
+    }
 }
 
 void PMainWindow::slotRotateToggled(bool how)
@@ -231,6 +245,7 @@ void PMainWindow::initDisp() {
     if (m_disp) {
         m_disp->setAutoScale(autoScale);
         m_disp->setAutoRotate(autoRotate);
+        m_disp->setShowZoomer(zoomerOn);
         connect(m_disp,SIGNAL(dispImageInfo(const QString&)),this,SLOT(slotShowInfo(const QString&)));
     }
 }

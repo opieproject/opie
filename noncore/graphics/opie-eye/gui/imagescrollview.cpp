@@ -9,14 +9,14 @@ using namespace Opie::Core;
 
 ImageScrollView::ImageScrollView( QWidget* parent, const char* name,  WFlags f )
     :QScrollView(parent,name,f|Qt::WRepaintNoErase ),_image_data(),_original_data(),scale_to_fit(true),
-     rotate_to_fit(true),first_resize_done(false),m_lastName("")
+     rotate_to_fit(true),show_zoomer(true),first_resize_done(false),m_lastName("")
 {
     init();
 }
 
 ImageScrollView::ImageScrollView (const QImage&img, QWidget * parent, const char * name, WFlags f,bool always_scale,bool rfit)
     :QScrollView(parent,name,f|Qt::WRepaintNoErase),_image_data(),_original_data(img),scale_to_fit(always_scale),
-    rotate_to_fit(rfit),first_resize_done(false),m_lastName("")
+    rotate_to_fit(rfit),show_zoomer(true),first_resize_done(false),m_lastName("")
 {
     _original_data.convertDepth(QPixmap::defaultDepth());
     _original_data.setAlphaBuffer(false);
@@ -25,7 +25,7 @@ ImageScrollView::ImageScrollView (const QImage&img, QWidget * parent, const char
 
 ImageScrollView::ImageScrollView (const QString&img, QWidget * parent, const char * name, WFlags f,bool always_scale,bool rfit)
     :QScrollView(parent,name,f|Qt::WRepaintNoErase),_image_data(),_original_data(),scale_to_fit(always_scale),
-    rotate_to_fit(rfit),first_resize_done(false),m_lastName("")
+    rotate_to_fit(rfit),show_zoomer(true),first_resize_done(false),m_lastName("")
 {
     init();
     setImage(img);
@@ -80,8 +80,8 @@ void ImageScrollView::init()
     if (first_resize_done) {
         last_rot = Rotate0;
         generateImage();
-        odebug << "reinit display " << oendl;
     } else if (_original_data.size().isValid()) {
+        if (image_fit_into(_original_data.size()) || !show_zoomer) _zoomer->hide();
         resizeContents(_original_data.width(),_original_data.height());
     }
 }
@@ -266,14 +266,21 @@ void ImageScrollView::generateImage()
         resizeContents(_image_data.width(),_image_data.height());
     }
     _pdata.convertFromImage(_image_data);
+    
 
     /*
      * update the zoomer
      */
+    check_zoomer();    
     emit imageSizeChanged( _image_data.size() );
     rescaleImage( 128, 128 );
+    /*
+     * move scrollbar
+     */
+    _zoomer->setGeometry( viewport()->width()-_image_data.width()/2, viewport()->height()-_image_data.height()/2,
+         _image_data.width()/2, _image_data.height()/2 );
+    
     _zoomer->setImage( _image_data );
-
     /*
      * invalidate
      */
@@ -288,10 +295,6 @@ void ImageScrollView::resizeEvent(QResizeEvent * e)
     first_resize_done = true;
     emit viewportSizeChanged( viewport()->size() );
 
-   /*
-    * move scrollbar
-    */
-    _zoomer->setGeometry( viewport()->width()-100, viewport()->height()-50, 100, 50 );
 }
 
 void ImageScrollView::keyPressEvent(QKeyEvent * e)
@@ -397,4 +400,27 @@ void ImageScrollView::setDestructiveClose() {
     fl &= ~WDestructiveClose;
     fl |= WDestructiveClose;
     setWFlags( fl );
+}
+
+bool ImageScrollView::image_fit_into(const QSize&s )
+{
+    if (s.width()>width()||s.height()>height()) {
+        return false;
+    }
+    return true;
+}
+
+void ImageScrollView::setShowZoomer(bool how)
+{
+    show_zoomer = how;
+    check_zoomer();
+}
+
+void ImageScrollView::check_zoomer()
+{
+    if ( (!show_zoomer||image_fit_into(_pdata.size()) ) && _zoomer->isVisible()) {
+        _zoomer->hide();
+    } else if ( show_zoomer && !image_fit_into(_pdata.size()) && _zoomer->isHidden()){
+        _zoomer->show();
+    }
 }
