@@ -22,10 +22,6 @@
             <vsizetype>1</vsizetype>
         </sizepolicy>
     </property>
-    <property stdset="1">
-        <name>caption</name>
-        <string>TimePicker</string>
-    </property>
     <property>
         <name>layoutMargin</name>
     </property>
