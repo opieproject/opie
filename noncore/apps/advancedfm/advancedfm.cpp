@@ -1181,7 +1181,7 @@ void AdvancedFm::runCommand() {
 
         int err=0;
         Output *outDlg;
-        outDlg = new Output(this, tr("Formatter Output"),FALSE);
+        outDlg = new Output(this, tr("AdvancedFm Output"),FALSE);
         outDlg->showMaximized();
         outDlg->show();
         qApp->processEvents();
@@ -1239,7 +1239,7 @@ void AdvancedFm::fileStatus() {
     QString command = " stat -l "+ curFile +" 2>&1";
     int err=0;
     Output *outDlg;
-    outDlg = new Output(this, tr("Formatter Output"),FALSE);
+    outDlg = new Output(this, tr("AdvancedFm Output"),FALSE);
     outDlg->showMaximized();
     outDlg->show();
     qApp->processEvents();
