@@ -278,7 +278,8 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
         if (item->att_data.att_static->att_type==MAILIMAP_MSG_ATT_ENVELOPE) {
             mailimap_envelope * head = item->att_data.att_static->att_data.att_env;
             m->setDate(head->env_date);
-            m->setSubject(head->env_subject);
+            m->setSubject(convert_String((const char*)head->env_subject));
+            //m->setSubject(head->env_subject);
             if (head->env_from!=NULL) {
                 addresslist = address_list_to_stringlist(head->env_from->frm_list);
                 if (addresslist.count()) {
@@ -434,7 +435,8 @@ QStringList IMAPwrapper::address_list_to_stringlist(clist*list)
         named_from = false;
         current_address=(mailimap_address*)current->data;
         if (current_address->ad_personal_name){
-            from+=QString(current_address->ad_personal_name);
+            from+=convert_String((const char*)current_address->ad_personal_name);
+            //from+=QString(current_address->ad_personal_name);
             from+=" ";
             named_from = true;
         }
