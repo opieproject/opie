@@ -763,7 +763,7 @@ bool TextEdit::saveAs()
     }
 
     
-    fileSaveDlg=new fileSaver(this,"SaveFile",TRUE,0, currentFileName);
+    fileSaveDlg=new fileSaver(this,"SaveFile",TRUE, 0, currentFileName);
     qDebug("wanna save filename "+currentFileName);
     fileSaveDlg->exec();
     if( fileSaveDlg->result() == 1 ) {
@@ -889,6 +889,7 @@ void TextEdit::editDelete()
           if(doc) {
               doc->removeFiles();
               clear();
+              setCaption( tr("Text Editor") );
           }
           break;
       case 1: 

@@ -50,7 +50,7 @@ public:
  
 QListViewItem * item;
 public slots:
-
+void homeButtonPushed();
 private:
 
 private slots: 

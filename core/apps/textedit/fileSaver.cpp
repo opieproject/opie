@@ -13,6 +13,8 @@
 ****************************************************************************/
 #include "fileSaver.h"
 #include <qpe/config.h>
+#include <qpe/resource.h>
+
 #include <qpe/qpeapplication.h>
 #include <qlistview.h>
 #include <qpushbutton.h>
@@ -28,16 +30,20 @@ fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl 
 {
     if ( !name )
   setName( "fileSaver" );
-    resize( 236, 280 );
+    resize( 240, 280 );
     setCaption(tr( "Save file" ) );
     QFileInfo fi(currentFileName);
     QString tmpFileName=fi.fileName();
 //    qDebug( tmpFileName);
-
     dirLabel = new QLabel(this, "DirLabel");
     dirLabel->setText(currentDir.canonicalPath());
-    dirLabel->setGeometry(10,4,230,30);
+    dirLabel->setGeometry(10,20,230,15);
 
+    QPushButton *homeButton;
+    homeButton = new QPushButton(Resource::loadIconSet("home"),"",this,"homeButton");
+    homeButton->setGeometry(200,4,25,25);
+    connect(homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
+    
     ListView = new QListView( this, "ListView" );
     ListView->addColumn( tr( "Name" ) );
     ListView->setColumnWidth(0,140);
@@ -50,16 +56,16 @@ fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl 
 //      ListView->setSelectionMode(QListView::Extended);
 
     ListView->setAllColumnsShowFocus( TRUE );
-    ListView->setGeometry( QRect( 10, 35, 220, 160 ) );
+    ListView->setGeometry( QRect( 10,35,220,125));
 
     fileEdit= new QLineEdit(this);
-    fileEdit->setGeometry( QRect( 10, 200, 200, 22));
+    fileEdit->setGeometry( QRect( 10, 162, 205, 17));
 
     fileEdit->setText( tmpFileName);
 
     filePermCheck = new QCheckBox( this, "SetFilePerms" );
     filePermCheck->setText("set file permissions");
-    filePermCheck->setGeometry(10, 220, 150,22);
+    filePermCheck->setGeometry(10, 178, 150,17);
       // signals and slots connections
     connect( ListView, SIGNAL(doubleClicked( QListViewItem*)), SLOT(listDoubleClicked(QListViewItem *)) );
     connect( ListView, SIGNAL(pressed( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
@@ -68,6 +74,8 @@ fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl 
 //      qDebug( tmpFileName);
     currentDir.setPath( QDir::currentDirPath() );
     populateList();
+    move(0,15);
+
 }
 
 fileSaver::~fileSaver()
@@ -109,7 +117,7 @@ void fileSaver::populateList()
         ++it;
     }
     ListView->setSorting( 2, FALSE);
-    dirLabel->setText("Current Directory:\n"+currentDir.canonicalPath());
+    dirLabel->setText(currentDir.canonicalPath());
 
 
 }
@@ -185,4 +193,11 @@ void fileSaver::accept() {
     }
     qDebug("going to save "+selectedFileName);
     done(1);
+}
+
+void fileSaver::homeButtonPushed() {
+        chdir( QDir::homeDirPath().latin1() );
+        currentDir.cd(  QDir::homeDirPath(), TRUE);
+        populateList();
+        update();
 }

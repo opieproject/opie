@@ -13,6 +13,7 @@
 ****************************************************************************/
 #include "fileBrowser.h"
 #include <qpe/config.h>
+#include <qpe/resource.h>
 
 #include <qlistview.h>
 #include <qpushbutton.h>
@@ -25,12 +26,19 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
 {
     if ( !name )
   setName( "fileBrowser" );
-    resize( 236, 280 );
+    resize( 240, 280 );
     setCaption(tr( "Browse for file" ) );
     filterStr=filter;
+
     dirLabel = new QLabel(this, "DirLabel");
     dirLabel->setText(currentDir.canonicalPath());
-    dirLabel->setGeometry(10,4,230,30);
+    dirLabel->setGeometry(10,20,230,15);
+
+    QPushButton *homeButton;
+    homeButton = new QPushButton(Resource::loadIconSet("home"),"",this,"homeButton");
+    homeButton->setGeometry(200,4,25,25);
+    connect(homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
+
     ListView = new QListView( this, "ListView" );
     ListView->addColumn( tr( "Name" ) );
     ListView->setColumnWidth(0,140);
@@ -51,6 +59,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     connect( ListView, SIGNAL(pressed( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
     currentDir.setPath(QDir::currentDirPath());
     populateList();
+    move(0,15); 
 }
 
 fileBrowser::~fileBrowser()
@@ -94,7 +103,7 @@ void fileBrowser::populateList()
         ++it;
     }
     ListView->setSorting( 2, FALSE);
-    dirLabel->setText("Current Directory:\n"+currentDir.canonicalPath());
+    dirLabel->setText(currentDir.canonicalPath());
 }
 
 void fileBrowser::upDir()
@@ -161,4 +170,11 @@ void fileBrowser::OnOK()
       }
     }
   accept();
+}
+
+void fileBrowser::homeButtonPushed() {
+        chdir( QDir::homeDirPath().latin1() );
+        currentDir.cd(  QDir::homeDirPath(), TRUE);
+        populateList();
+        update();
 }
