@@ -8,6 +8,7 @@
 #include <qmessagebox.h>
 #include <qpushbutton.h>
 #include <qwhatsthis.h>
+#include <qfileinfo.h>
 
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
@@ -141,6 +142,7 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(
     m_curSession = 0;
     m_manager = new ProfileManager( m_factory );
     m_manager->load();
+    m_scriptsData.setAutoDelete(TRUE);
 
     initUI();
     populateProfiles();
@@ -358,8 +360,11 @@ void MainWindow::populateScripts() {
     QListIterator<DocLnk> dit(files.children());
     for (; dit.current(); ++dit) {
         if (*dit && (*dit)->name().length()>0) {
-            m_scriptsData.append((*dit));
-            m_scriptsPop->insertItem((*dit)->name());
+            QFileInfo info((*dit)->file());
+            if (info.extension(false) == "script") {
+                m_scriptsData.append(new DocLnk(**dit));
+                m_scriptsPop->insertItem((*dit)->name());
+            }
         }
     }
 
@@ -408,10 +413,13 @@ void MainWindow::slotSaveScript() {
         map.insert(tr("Script"), text );
         QString filename = OFileDialog::getSaveFileName(2, QPEApplication::documentDir(), QString::null, map);
         if (!filename.isEmpty()) {
+            QFileInfo info(filename);
+            if (info.extension(FALSE) != "script")
+                filename += ".script";
             DocLnk nf;
             nf.setType("text/plain");
             nf.setFile(filename);
-            nf.setName(filename);
+            nf.setName(info.fileName());
             FileManager fm;
             fm.saveFile(nf, currentSession()->emulationHandler()->script()->script());
             currentSession()->emulationHandler()->clearScript();
@@ -424,9 +432,9 @@ void MainWindow::slotSaveScript() {
 
 void MainWindow::slotRunScript(int id) {
     if (currentSession()) {
-        DocLnk *lnk = m_scriptsData.at(m_scriptsPop->indexOf(id));
+        int index = m_scriptsPop->indexOf(id);
+        DocLnk *lnk = m_scriptsData.at(index);
         QString filePath = lnk->file();
-        printf("path is : %s\n", filePath.latin1());
         Script script(filePath);
         currentSession()->emulationHandler()->runScript(&script);
     }
