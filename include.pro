@@ -18,9 +18,10 @@ contains ( CONFIG, quick-app-bin ) {
     TEMPLATE = app
     DESTDIR  = $(OPIEDIR)/bin
     DEFINES -= OPIE_APP_INTERFACE
-    message( Touching plugins/application/lib$$TARGET.so )
-    system( touch $$(OPIEDIR)/plugins/application/lib$$TARGET.so )
+    message( Touching plugins/application/lib$${TARGET}.so )
+    system( touch $$(OPIEDIR)/plugins/application/lib$${TARGET}.so )
 }
+
 
 contains( TEMPLATE, lib ) {
   target.path = $$prefix/lib
