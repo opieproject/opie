@@ -39,6 +39,7 @@ void DingWidget::loadDict( QString name )
 	if(  file.open(  IO_ReadOnly ) )
 	{
 		QTextStream stream(  &file );
+		stream.setEncoding(QTextStream::UnicodeUTF8);		
 		while ( !stream.eof() )
 		{
 			lines.append(  stream.readLine() );
