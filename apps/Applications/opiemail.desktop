@@ -5,6 +5,7 @@ Icon=opiemail/opiemail
 Type=Application
 Name=EMail
 Name[pt]=E-Mail
+Name[de]=EMail
 Name[es]=Correo-e
 Name[it]=Posta
 Name[zh_TW]=電子郵件
