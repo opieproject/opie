@@ -3,34 +3,34 @@
     <name>PinDlgBase</name>
     <message>
         <source>Please enter pin</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosím zadejte pin</translation>
     </message>
     <message>
         <source>Please enter PIN:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosím zadejte PIN:</translation>
     </message>
     <message>
         <source>Save pin</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit pin</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Storno</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Outgoing connection to </source>
-        <translation type="unfinished"></translation>
+        <translation>Odchozí připojení k</translation>
     </message>
     <message>
         <source>Incoming connection from </source>
-        <translation type="unfinished"></translation>
+        <translation>Příchozí spojení od</translation>
     </message>
 </context>
 </TS>

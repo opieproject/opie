@@ -3,629 +3,644 @@
     <name>Checkbook</name>
     <message>
         <source>Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Šeko</translation>
     </message>
     <message>
         <source>New checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>nová knížka</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>Transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>Transakce</translation>
     </message>
     <message>
         <source>Charts</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafy</translation>
     </message>
     <message>
         <source>Password protect</source>
-        <translation type="unfinished"></translation>
+        <translation>Ochrana heslem</translation>
     </message>
     <message>
         <source>Click here to enable/disable password protection of this checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro zapnutí/vypnutí ochrany heslem této knížky.</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Jméno:</translation>
     </message>
     <message>
         <source>Enter name of checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte jméno šekové knížky.</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ:</translation>
     </message>
     <message>
         <source>Select type of checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte typ šekové knížky.</translation>
     </message>
     <message>
         <source>Bank:</source>
-        <translation type="unfinished"></translation>
+        <translation>Banka:</translation>
     </message>
     <message>
         <source>Enter name of the bank for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte název banky pro tuto knížku.</translation>
     </message>
     <message>
         <source>Account number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo účtu:</translation>
     </message>
     <message>
         <source>Enter account number for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte číslo účtu pro tuto šekovou knížku.</translation>
     </message>
     <message>
         <source>PIN number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo PIN:</translation>
     </message>
     <message>
         <source>Enter PIN number for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte PIN pro tuto šekovou knížku.</translation>
     </message>
     <message>
         <source>Starting balance:</source>
-        <translation type="unfinished"></translation>
+        <translation>Počáteční bilance:</translation>
     </message>
     <message>
         <source>Enter the initial balance for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte počáteční bilanci pro tuto knížku.</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Poznámky:</translation>
     </message>
     <message>
         <source>Enter any additional information for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte jakékoliv další informace pro tuto knížku.</translation>
     </message>
     <message>
         <source>Sort by:</source>
-        <translation type="unfinished"></translation>
+        <translation>Řadit podle:</translation>
     </message>
     <message>
         <source>Select checkbook sorting here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zde vyberete řazení v knížce.</translation>
     </message>
     <message>
         <source>Entry Order</source>
-        <translation type="unfinished"></translation>
+        <translation>Podle vstupu</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo</translation>
     </message>
     <message>
         <source>This is a listing of all transactions entered for this checkbook.
 
 To sort entries by a specific field, click on the column name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto je výpis všech transakcí vložených do knížky.
+
+Pro seřazení položek klikněte na název příslušného sloupce.</translation>
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id</translation>
     </message>
     <message>
         <source>SortDate</source>
-        <translation type="unfinished"></translation>
+        <translation>SortDatum</translation>
     </message>
     <message>
         <source>Num</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Popis</translation>
     </message>
     <message>
         <source>Amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Částka</translation>
     </message>
     <message>
         <source>Balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilance</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nová</translation>
     </message>
     <message>
         <source>Click here to add a new transaction.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro přidání nové transakce.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit</translation>
     </message>
     <message>
         <source>Select a transaction and then click here to edit it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Označte transakci a klikněte sem pro úpravu.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here to delete it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte knížku a klikněte sem pro smazání.</translation>
     </message>
     <message>
         <source>Select the desired chart below and then click on the Draw button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte dole požadovaný graf a pak klikněte na tlačítko Vykreslit.</translation>
     </message>
     <message>
         <source>Click here to select the desired chart type.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro výběr požadovaného grafu.</translation>
     </message>
     <message>
         <source>Account balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilance účtu</translation>
     </message>
     <message>
         <source>Withdrawals by category</source>
-        <translation type="unfinished"></translation>
+        <translation>Výběry dle kategorie</translation>
     </message>
     <message>
         <source>Deposits by category</source>
-        <translation type="unfinished"></translation>
+        <translation>Vklady dle kategorie</translation>
     </message>
     <message>
         <source>Draw</source>
-        <translation type="unfinished"></translation>
+        <translation>Vykreslit</translation>
     </message>
     <message>
         <source>Click here to draw the selected chart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro vykreslení grafu klikněte sem.</translation>
     </message>
     <message>
         <source>Enter password</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte heslo</translation>
     </message>
     <message>
         <source>Please enter your password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosím zadejte vaše heslo:</translation>
     </message>
     <message>
         <source>Confirm password</source>
-        <translation type="unfinished"></translation>
+        <translation>Potvrzení hesla</translation>
     </message>
     <message>
         <source>Please confirm your password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosím potvrďte vaše heslo:</translation>
     </message>
     <message>
         <source>Please enter your password to confirm removal of password protection:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosím zadejte vaše heslo pro potvrzení odstranění ochrany heslem:</translation>
     </message>
     <message>
         <source>Delete transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Checkbook</translation>
     </message>
 </context>
 <context>
     <name>Configuration</name>
     <message>
         <source>Configure Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurovat šekovou knížku</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nastavení</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <source>New Account Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový typ účtu</translation>
     </message>
     <message>
         <source>&amp;Account Types</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Typy účtů</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie</translation>
     </message>
     <message>
         <source>New Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Nová kategorie</translation>
     </message>
     <message>
         <source>Expense</source>
-        <translation type="unfinished"></translation>
+        <translation>Výdaj</translation>
     </message>
     <message>
         <source>Income</source>
-        <translation type="unfinished"></translation>
+        <translation>Výnos</translation>
     </message>
     <message>
         <source>&amp;Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kategorie</translation>
     </message>
     <message>
         <source>Payee</source>
-        <translation type="unfinished"></translation>
+        <translation>Příjemce</translation>
     </message>
     <message>
         <source>New Payee</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový příjemce</translation>
     </message>
     <message>
         <source>&amp;Payees</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Příjemci</translation>
     </message>
     <message>
         <source>Enter currency symbol:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte symbol měny:</translation>
     </message>
     <message>
         <source>Enter your local currency symbol here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem zadejte symbol vaší měny.</translation>
     </message>
     <message>
         <source>Show whether checkbook is password
 protected</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat, zda-li je šeková knížka chráněna
+heslem</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display that the checkbook is protected with a password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem, zda-li hlavní okno má, či nemá zobrazovat, zda-li je šeková knížka chráněna heslem.</translation>
     </message>
     <message>
         <source>Show checkbook balances</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat bilance knížky</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display the current balance for each checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem, zda-li hlavní okno má, či nemá zobrazovat momentální bilanci pro každou knížku.</translation>
     </message>
     <message>
         <source>Open last checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Otevírat poslední knížku</translation>
     </message>
     <message>
         <source>Click here to select whether the last open checkbook will be opened at startup.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro výběr, zda-li se bude při spuštění otevírat naposledy otevřená knížka.</translation>
     </message>
     <message>
         <source>Show last checkbook tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat poslední záložku v knížce</translation>
     </message>
     <message>
         <source>Click here to select whether the last tab in a checkbook should be displayed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro výběr, zda-li se bude zobrazovat poslední záložka v knížce.</translation>
     </message>
     <message>
         <source>Save new description as payee</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit nový popis jako příjemce</translation>
     </message>
     <message>
         <source>Click here to save new descriptions in the list of payess.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro uložení nových popisů v seznamu příjemců.</translation>
     </message>
 </context>
 <context>
     <name>ListEdit</name>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Checkbook</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nová</translation>
     </message>
     <message>
         <source>Click here to create a new checkbook.
 
 You also can select New from the Checkbook menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro vytvoření nové šekové knížky.
+
+Můžete také vybrat Nová z menu Šeková knížka.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here to edit it.
 
 You also can select Edit from the Checkbook menu, or click and hold on a checkbook name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte šekovou knížku a potom klikněte sem pro její úpravu.
+
+Můžete také vybrat Upravit z menu Šeková knížka, nebo podržet ukazatel na názvu šekové knížky.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here delete it.
 
 You also can select Delete from the Checkbook menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte šekovou knížku a klikněte sem pro její smazání.
+
+Můžete také vybrat Smazat v menu Šeková knížka.</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurovat</translation>
     </message>
     <message>
         <source>Click here to configure this app.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro nastavení této aplikace.</translation>
     </message>
     <message>
         <source>This is a listing of all checkbooks currently available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto je výpis všech momentálně dostupných šekových knížek.</translation>
     </message>
     <message>
         <source>Checkbook Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Název Šekové knížky</translation>
     </message>
     <message>
         <source>Balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilance</translation>
     </message>
     <message>
         <source>Enter password</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte heslo</translation>
     </message>
     <message>
         <source>Please enter your password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosím zadejte vaše heslo:</translation>
     </message>
     <message>
         <source>Delete checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat šekovou knížku</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <source>Savings</source>
-        <translation type="unfinished"></translation>
+        <translation>Úspory</translation>
     </message>
     <message>
         <source>Checking</source>
-        <translation type="unfinished"></translation>
+        <translation>Ověřování</translation>
     </message>
     <message>
         <source>CD</source>
-        <translation type="unfinished"></translation>
+        <translation>CD</translation>
     </message>
     <message>
         <source>Money market</source>
-        <translation type="unfinished"></translation>
+        <translation>Peněžní trh</translation>
     </message>
     <message>
         <source>Mutual fund</source>
-        <translation type="unfinished"></translation>
+        <translation>Podílový fond</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Jiný</translation>
     </message>
     <message>
         <source>Expense</source>
-        <translation type="unfinished"></translation>
+        <translation>Výdaj</translation>
     </message>
     <message>
         <source>Automobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Automobil</translation>
     </message>
     <message>
         <source>Bills</source>
-        <translation type="unfinished"></translation>
+        <translation>Účtenky</translation>
     </message>
     <message>
         <source>CDs</source>
-        <translation type="unfinished"></translation>
+        <translation>CD nosiče</translation>
     </message>
     <message>
         <source>Clothing</source>
-        <translation type="unfinished"></translation>
+        <translation>Oblečení</translation>
     </message>
     <message>
         <source>Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Počítač</translation>
     </message>
     <message>
         <source>DVDs</source>
-        <translation type="unfinished"></translation>
+        <translation>DVD nosiče</translation>
     </message>
     <message>
         <source>Electronics</source>
-        <translation type="unfinished"></translation>
+        <translation>Elektronika</translation>
     </message>
     <message>
         <source>Entertainment</source>
-        <translation type="unfinished"></translation>
+        <translation>Zábava</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation type="unfinished"></translation>
+        <translation>Jídlo</translation>
     </message>
     <message>
         <source>Gasoline</source>
-        <translation type="unfinished"></translation>
+        <translation>Palivo</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatní</translation>
     </message>
     <message>
         <source>Movies</source>
-        <translation type="unfinished"></translation>
+        <translation>Filmy</translation>
     </message>
     <message>
         <source>Rent</source>
-        <translation type="unfinished"></translation>
+        <translation>Činže</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cestování</translation>
     </message>
     <message>
         <source>Income</source>
-        <translation type="unfinished"></translation>
+        <translation>Plat</translation>
     </message>
     <message>
         <source>Work</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaměstnání</translation>
     </message>
     <message>
         <source>Family Member</source>
-        <translation type="unfinished"></translation>
+        <translation>Člen rodiny</translation>
     </message>
     <message>
         <source>Misc. Credit</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatní kredit</translation>
     </message>
 </context>
 <context>
     <name>Transaction</name>
     <message>
         <source>Transaction for </source>
-        <translation type="unfinished"></translation>
+        <translation>Transakce pro</translation>
     </message>
     <message>
         <source>Withdrawal</source>
-        <translation type="unfinished"></translation>
+        <translation>Výběr</translation>
     </message>
     <message>
         <source>Select whether the transaction is a withdrawal or deposit here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte, zda-li se jedná o výběr či vklad.</translation>
     </message>
     <message>
         <source>Deposit</source>
-        <translation type="unfinished"></translation>
+        <translation>Vklad</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum:</translation>
     </message>
     <message>
         <source>Select date of transaction here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zde vyberete datum transakce.</translation>
     </message>
     <message>
         <source>Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo:</translation>
     </message>
     <message>
         <source>Enter check number here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zde zadejte číslo paragonu.</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Popis:</translation>
     </message>
     <message>
         <source>Enter description of transaction here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zde zadejte popis transakce.</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie:</translation>
     </message>
     <message>
         <source>Select transaction category here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zde vyberte kategorii transakce.</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ:</translation>
     </message>
     <message>
         <source>Select transaction type here.
 
 The options available vary based on whether the transaction is a deposit or withdrawal.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte typ transakce.
+
+Možnosti se mění podle toho, jestli se jedná o výdej, nebo o vklad.</translation>
     </message>
     <message>
         <source>Amount:</source>
-        <translation type="unfinished"></translation>
+        <translation>Částka:</translation>
     </message>
     <message>
         <source>Enter the amount of transaction here.
 
 The value entered should always be positive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem zadejte částku.
+
+Hodnota by měla být vždy kladná.</translation>
     </message>
     <message>
         <source>Fee:</source>
-        <translation type="unfinished"></translation>
+        <translation>Poplatek:</translation>
     </message>
     <message>
         <source>Enter any fee amount assoiciated with this transaction.
 
 The value entered should always be positive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte jakýkoliv poplatek vztahující se k transakci.
+
+Hodnota by měla být vždy kladná.</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Poznámky:</translation>
     </message>
     <message>
         <source>Enter any additional information for this transaction here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte jakékoliv další informace pro tuto transakci.</translation>
     </message>
     <message>
         <source>Debit Charge</source>
-        <translation type="unfinished"></translation>
+        <translation>Dlužní položka</translation>
     </message>
     <message>
         <source>Written Check</source>
-        <translation type="unfinished"></translation>
+        <translation>Napsaný šek</translation>
     </message>
     <message>
         <source>Transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Převod</translation>
     </message>
     <message>
         <source>Credit Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Kreditní karta</translation>
     </message>
     <message>
         <source>Automatic Payment</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatická platba</translation>
     </message>
     <message>
         <source>Cash</source>
-        <translation type="unfinished"></translation>
+        <translation>Hotovost</translation>
     </message>
 </context>
 </TS>

@@ -3,332 +3,333 @@
     <name>BlueBase</name>
     <message>
         <source>Bluetooth Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Bluetooth Manager</translation>
     </message>
     <message>
         <source>&lt;b&gt;Device name : &lt;/b&gt; Ipaq</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Název zařízení : &lt;/b&gt; Ipaq</translation>
     </message>
     <message>
         <source>MAC adress: </source>
-        <translation type="unfinished"></translation>
+        <translation>MAC adresa:</translation>
     </message>
     <message>
         <source>Class</source>
-        <translation type="unfinished"></translation>
+        <translation>Třída</translation>
     </message>
     <message>
         <source>Test</source>
-        <translation type="unfinished"></translation>
+        <translation>Test</translation>
     </message>
     <message>
         <source>Changes were applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Změny byly aplikovány.</translation>
     </message>
     <message>
         <source>rescan sevices</source>
-        <translation type="unfinished"></translation>
+        <translation>prohledat služby</translation>
     </message>
     <message>
         <source>to group</source>
-        <translation type="unfinished"></translation>
+        <translation>do skupiny</translation>
     </message>
     <message>
         <source>delete</source>
-        <translation type="unfinished"></translation>
+        <translation>smazat</translation>
     </message>
     <message>
         <source>Test1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Test1:</translation>
     </message>
     <message>
         <source>no services found</source>
-        <translation type="unfinished"></translation>
+        <translation>žádné služby nenalezeny</translation>
     </message>
     <message>
         <source>No connections found</source>
-        <translation type="unfinished"></translation>
+        <translation>Žádná připojení nenalezena</translation>
     </message>
 </context>
 <context>
     <name>BluetoothBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Form1</translation>
     </message>
     <message>
         <source>Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Zařízení</translation>
     </message>
     <message>
         <source>Device Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Jméno zařízení</translation>
     </message>
     <message>
         <source>Online</source>
-        <translation type="unfinished"></translation>
+        <translation>Online</translation>
     </message>
     <message>
         <source>Scan for Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat zařízení</translation>
     </message>
     <message>
         <source>Connections</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojení</translation>
     </message>
     <message>
         <source>Connection type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ připojení</translation>
     </message>
     <message>
         <source>Signal</source>
-        <translation type="unfinished"></translation>
+        <translation>Signál</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení</translation>
     </message>
     <message>
         <source>Bluetooh Basic Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Základní konfigurace Bluetooth</translation>
     </message>
     <message>
         <source>Default Passkey</source>
-        <translation type="unfinished"></translation>
+        <translation>Implicitní klíč</translation>
     </message>
     <message>
         <source>enable authentification</source>
-        <translation type="unfinished"></translation>
+        <translation>zapnutí autentizace</translation>
     </message>
     <message>
         <source>enable encryption</source>
-        <translation type="unfinished"></translation>
+        <translation>zapnutí šifrování</translation>
     </message>
     <message>
         <source>Enable Page scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Skenování vyvolávání</translation>
     </message>
     <message>
         <source>Enable Inquiry scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Skenování dotazování</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít</translation>
     </message>
     <message>
         <source>Rfcomm Bind Table</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabulka spojených Rfcomm</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Stav</translation>
     </message>
     <message>
         <source>Status Label</source>
-        <translation type="unfinished"></translation>
+        <translation>Značka stavu</translation>
     </message>
 </context>
 <context>
     <name>DeviceDialog</name>
     <message>
         <source>Form2</source>
-        <translation type="unfinished"></translation>
+        <translation>Form2</translation>
     </message>
     <message>
         <source>Devicename</source>
-        <translation type="unfinished"></translation>
+        <translation>Jméno zařízení</translation>
     </message>
     <message>
         <source>Services</source>
-        <translation type="unfinished"></translation>
+        <translation>Služby</translation>
     </message>
     <message>
         <source>change settings</source>
-        <translation type="unfinished"></translation>
+        <translation>změnit nastavení</translation>
     </message>
     <message>
         <source>active</source>
-        <translation type="unfinished"></translation>
+        <translation>aktivní</translation>
     </message>
     <message>
         <source>service name</source>
-        <translation type="unfinished"></translation>
+        <translation>jméno služby</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení</translation>
     </message>
     <message>
         <source>Change device 
 name</source>
-        <translation type="unfinished"></translation>
+        <translation>Změna jména
+zařízení</translation>
     </message>
     <message>
         <source>Default PIN 
 Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí PIN</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informace</translation>
     </message>
     <message>
         <source>TextLabel9</source>
-        <translation type="unfinished"></translation>
+        <translation>TextLabel9</translation>
     </message>
 </context>
 <context>
     <name>DunPopup</name>
     <message>
         <source>connect</source>
-        <translation type="unfinished"></translation>
+        <translation>připojit</translation>
     </message>
     <message>
         <source>connect+conf</source>
-        <translation type="unfinished"></translation>
+        <translation>připojit+konf</translation>
     </message>
     <message>
         <source>disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>odpojit</translation>
     </message>
 </context>
 <context>
     <name>ObexDialog</name>
     <message>
         <source>beam files </source>
-        <translation type="unfinished"></translation>
+        <translation>poslat soubory</translation>
     </message>
     <message>
         <source>Which file should be beamed?</source>
-        <translation type="unfinished"></translation>
+        <translation>Který soubor by měl být odeslán?</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Poslat</translation>
     </message>
 </context>
 <context>
     <name>OpieTooth::ScanDialog</name>
     <message>
         <source>Scan for devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat zařízení</translation>
     </message>
     <message>
         <source>Start scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustit hledání</translation>
     </message>
     <message>
         <source>Add Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat zařízení</translation>
     </message>
     <message>
         <source>Stop scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Zastavit hledání</translation>
     </message>
 </context>
 <context>
     <name>PPPDialog</name>
     <message>
         <source>ppp connection </source>
-        <translation type="unfinished"></translation>
+        <translation>připojení ppp</translation>
     </message>
     <message>
         <source>Enter an ppp script name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte název ppp skriptu:</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojit</translation>
     </message>
 </context>
 <context>
     <name>PanPopup</name>
     <message>
         <source>connect</source>
-        <translation type="unfinished"></translation>
+        <translation>připojit</translation>
     </message>
     <message>
         <source>connect+conf</source>
-        <translation type="unfinished"></translation>
+        <translation>připojit+konf</translation>
     </message>
     <message>
         <source>disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>odpojit</translation>
     </message>
 </context>
 <context>
     <name>RfcommAssignDialogBase</name>
     <message>
         <source>Rfcomm Bind</source>
-        <translation type="unfinished"></translation>
+        <translation>Rfcomm spojení</translation>
     </message>
     <message>
         <source>Bind device to a interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Spojit zařízení s rozhraním</translation>
     </message>
 </context>
 <context>
     <name>RfcommDialogItemBase</name>
     <message>
         <source>Form2</source>
-        <translation type="unfinished"></translation>
+        <translation>Form2</translation>
     </message>
     <message>
         <source>Mac</source>
-        <translation type="unfinished"></translation>
+        <translation>Mac</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanál</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation>3</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>4</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation>6</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation>7</translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation>8</translation>
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished"></translation>
+        <translation>9</translation>
     </message>
     <message>
         <source>10</source>
-        <translation type="unfinished"></translation>
+        <translation>10</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation type="unfinished"></translation>
+        <translation>Komentář:</translation>
     </message>
 </context>
 </TS>
