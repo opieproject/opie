@@ -1,0 +1,10 @@
+TEMPLATE  = app
+CONFIG    += qt warn_on release
+HEADERS   = formatter.h inputDialog.h output.h
+SOURCES   = formatter.cpp inputDialog.cpp output.cpp main.cpp
+TARGET    = formatter
+REQUIRES = medium-config
+DESTDIR   = $(OPIEDIR)/bin
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH  += $(OPIEDIR)/include
+LIBS            += -lqpe
