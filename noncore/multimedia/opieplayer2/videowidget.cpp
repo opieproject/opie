@@ -384,12 +384,11 @@ void VideoWidget::makeVisible() {
         resize( qApp->desktop()->size() );
         slider->hide();
         videoFrame-> setGeometry ( 0, 0, width ( ), height ( ));
-//        qApp->processEvents();
     } else {
         showNormal();
         showMaximized();
         setBackgroundPixmap( *pixBg );
-        if ( mediaPlayerState->streaming() ) {
+        if ( mediaPlayerState->seekable() ) {
             slider->hide();
             disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
             disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
@@ -399,8 +398,8 @@ void VideoWidget::makeVisible() {
             connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
         }
         QWidget *d = QApplication::desktop();
-        int w=d->width();
-        int h=d->height();
+        int w = d->width();
+        int h = d->height();
 
         if(w>h) {
             int newW=(w/2)-(246/2); //this will only work with 320x240

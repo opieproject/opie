@@ -94,6 +94,7 @@ public slots:
     void setPlaying( bool b) { setToggleButton( AudioPlay, b ); }
     void setPosition( long );
     void setLength( long );
+    void setSeekable( bool );
     void setView( char );
 
 signals:

@@ -52,6 +52,7 @@ MediaPlayerState::MediaPlayerState( QObject *parent, const char *name )
     Config cfg( "OpiePlayer" );
     readConfig( cfg );
     isStreaming = false;
+    isSeekable = true;
 }
 
 
@@ -95,6 +96,10 @@ bool MediaPlayerState::streaming() {
     return isStreaming;
 }
 
+bool MediaPlayerState::seekable() {
+    return isSeekable;
+}
+
 bool MediaPlayerState::fullscreen() {
     return isFullscreen;
 }
@@ -112,7 +117,7 @@ bool MediaPlayerState::shuffled() {
 }
 
 
-bool MediaPlayerState:: playlist() {
+bool MediaPlayerState::playlist() {
     return usePlaylist;
 }
 
@@ -147,6 +152,15 @@ void MediaPlayerState::setIsStreaming( bool b ) {
         return;
     }
     isStreaming = b;
+}
+
+void MediaPlayerState::setIsSeekable( bool b ) {
+
+    //if ( isSeekable == b ) {
+    //    return;
+    // }
+    isSeekable = b;
+    emit isSeekableToggled(b);
 }
 
 

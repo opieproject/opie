@@ -301,7 +301,7 @@ void MediaPlayer::blank( bool b ) {
     fd=open("/dev/fb0",O_RDWR);
 #ifdef QT_QWS_EBX
     fl= open( "/dev/fl", O_RDWR );
-#endif        
+#endif
     if (fd != -1) {
         if ( b ) {
             qDebug("do blanking");

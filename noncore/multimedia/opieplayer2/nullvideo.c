@@ -497,7 +497,7 @@ static vo_info_t vo_info_null = {
 };
 
 vo_info_t *get_video_out_plugin_info(){
-  vo_info_null.description = _("xine video output plugin using null device");
+  vo_info_null.description = ("xine video output plugin using null device");
   return &vo_info_null;
 }
 

@@ -189,21 +189,19 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
 
     resizeEvent( NULL );
 
-    connect( &slider,           SIGNAL( sliderPressed() ),      this, SLOT( sliderPressed() ) );
-    connect( &slider,           SIGNAL( sliderReleased() ),     this, SLOT( sliderReleased() ) );
+    connect( &slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
+    connect( &slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
 
     connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
     connect( mediaPlayerState, SIGNAL( viewChanged(char) ),    this, SLOT( setView(char) ) );
     connect( mediaPlayerState, SIGNAL( loopingToggled(bool) ), this, SLOT( setLooping(bool) ) );
-    //    connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( setPaused(bool) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
+    connect( mediaPlayerState, SIGNAL( isSeekableToggled( bool ) ), this, SLOT( setSeekable( bool ) ) );
 
     connect( this,  SIGNAL( forwardClicked() ), this, SLOT( skipFor() ) );
     connect( this,  SIGNAL( backClicked() ),  this, SLOT( skipBack() ) );
     connect( this,  SIGNAL( forwardReleased() ), this, SLOT( stopSkip() ) );
     connect( this,  SIGNAL( backReleased() ), this, SLOT( stopSkip() ) );
-
-
 
     // Intialise state
     setLength( mediaPlayerState->length() );
@@ -308,9 +306,20 @@ void AudioWidget::setLength( long max ) {
 
 void AudioWidget::setView( char view ) {
 
-    // this isnt working for some reason
+if ( view == 'a' ) {
+        // startTimer( 150 );
+        showMaximized();
+    } else {
+        killTimers();
+        hide();
+    }
+    //  qApp->processEvents();
+}
 
-    if ( mediaPlayerState->streaming() ) {
+
+void AudioWidget::setSeekable( bool isSeekable ) {
+
+    if ( isSeekable ) {
         qDebug("<<<<<<<<<<<<<<file is STREAMING>>>>>>>>>>>>>>>>>>>");
         if( !slider.isHidden()) {
             slider.hide();
@@ -321,18 +330,10 @@ void AudioWidget::setView( char view ) {
         // this stops the slider from being moved, thus
         // does not stop stream when it reaches the end
         slider.show();
+        qDebug( " CONNECT SET POSTION " );
         connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
         connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
     }
-
-    if ( view == 'a' ) {
-        // startTimer( 150 );
-        showMaximized();
-    } else {
-        killTimers();
-        hide();
-    }
-    //  qApp->processEvents();
 }
 
 

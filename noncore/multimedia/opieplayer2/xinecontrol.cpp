@@ -75,9 +75,9 @@ void XineControl::play( const QString& fileName ) {
     hasAudioChannel = FALSE;
     m_fileName = fileName;
 
-    //qDebug("<<FILENAME: " + fileName  + ">>>>");
+    qDebug("<<FILENAME: " + fileName  + ">>>>");
 
-    if ( !libXine->play( fileName ) ) {
+    if ( !libXine->play( fileName, 0, 0 ) ) {
         QMessageBox::warning( 0l , tr( "Failure" ), getErrorCode() );
         // toggle stop so the the play button is reset
         mediaPlayerState->setPlaying( false );
@@ -99,7 +99,8 @@ void XineControl::play( const QString& fileName ) {
         hasVideoChannel = TRUE;
     }
     // determine if slider is shown
-    mediaPlayerState->setIsStreaming( !libXine->isSeekable() );
+    mediaPlayerState->setIsSeekable( !libXine->isSeekable() );
+
     // which gui (video / audio)
     mediaPlayerState->setView( whichGui );
 

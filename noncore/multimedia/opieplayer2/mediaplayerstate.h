@@ -54,6 +54,7 @@ public:
     bool isPlaying;
     bool isStoped;
     bool streaming();
+    bool seekable();
     bool fullscreen();
     bool scaled();
     bool looping();
@@ -68,6 +69,7 @@ public:
 
 public slots:
     void setIsStreaming( bool b );
+    void setIsSeekable( bool b );
     void setFullscreen( bool b );
     void setScaled( bool b );
     void setLooping( bool b );
@@ -113,6 +115,7 @@ signals:
     void positionUpdated( long ); // When the media file progresses
     void lengthChanged( long );
     void viewChanged( char );
+    void isSeekableToggled( bool );
     void blankToggled( bool );
     void videoGammaChanged( int );
     void prev();
@@ -120,6 +123,7 @@ signals:
 
 private:
     bool isStreaming;
+    bool isSeekable;
     bool isFullscreen;
     bool isScaled;
     bool isBlanked;
