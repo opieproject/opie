@@ -45,7 +45,14 @@ enum IRCOutputType {
     OUTPUT_CHANACTION     = 14,  /* parameters : channel (IRCChannel) person (IRCChannelPerson) */
     OUTPUT_QUERYACTION    = 15,  /* parameters : person (IRCPerson) */
     OUTPUT_CHANPERSONMODE = 16,  /* parameters : channel (IRCCHannel) person (IRCChannelPerson) */
-    OUTPUT_TOPIC          = 17   /* parameters : channel (IRCChannel) */
+    OUTPUT_TOPIC          = 17,  /* parameters : channel (IRCChannel) */
+    OUTPUT_TITLE          = 18   /* parameters : channel (IRCChannel) */
+};
+
+typedef struct IRCOutputEscapeSecuences {
+    char escape;
+    char *open;
+    char *close;
 };
 
 /* The IRCOutput class is used as a kind of message which is sent by the
@@ -54,7 +61,7 @@ enum IRCOutputType {
 
 class IRCOutput {
 public:
-    IRCOutput(IRCOutputType type, QString message);
+    IRCOutput(IRCOutputType type = OUTPUT_SERVERMESSAGE, QString message = QString::null);
     /* Used to add a parameter to this IRCOutput. Parameters are dependent
        on which IRCOutputType we are using (see above) */
     void addParam(void *data);
@@ -63,13 +70,17 @@ public:
     QString message();
     /* Return the message with all HTML code escaped (for example &lt; instead of '<') */
     QString htmlMessage();
-
-    static QString toHTML(QString message);
+    
+    void setType(IRCOutputType);
+    void setMessage(const QString &message);
+    
+    static QString toHTML(const QString &message);
     void *getParam(int index);
 protected:
     IRCOutputType      m_type;
     QString            m_message;
     QList<void>        m_parameters;
+    static IRCOutputEscapeSecuences m_escapeSecuences[];
 };
 
 #endif
