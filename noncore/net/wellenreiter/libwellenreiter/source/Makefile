@@ -1,8 +1,8 @@
-# $Id: Makefile,v 1.3 2002-11-25 20:43:21 mickeyl Exp $
+# $Id: Makefile,v 1.4 2002-11-27 22:34:42 mjm Exp $
 
 INCLUDES = 
 LIBRARIES =
-LIBOBJ = sock.o log.o
+LIBOBJ = proto.o sock.o log.o cardmode.o sniff.o
 CXX = g++ -Wall -pedantic -g  $(INCLUDES) -DDEBUG
 
 static:	libwellenreiter.a
