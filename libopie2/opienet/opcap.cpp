@@ -30,6 +30,7 @@
 
 /* OPIE */
 #include <opie2/opcap.h>
+#include <opie2/odebug.h>
 
 /* QT */
 #include <qapplication.h> // don't use oapplication here (will decrease reusability in other projects)
@@ -59,22 +60,22 @@ OPacket::OPacket( int datalink, packetheaderstruct header, const unsigned char* 
     switch ( datalink )
     {
         case DLT_EN10MB:
-            qDebug( "OPacket::OPacket(): Received Packet. Datalink = ETHERNET" );
+            odebug << "OPacket::OPacket(): Received Packet. Datalink = ETHERNET" << oendl;
             new OEthernetPacket( _end, (const struct ether_header*) data, this );
             break;
 
         case DLT_IEEE802_11:
-            qDebug( "OPacket::OPacket(): Received Packet. Datalink = IEEE802.11" );
+            odebug << "OPacket::OPacket(): Received Packet. Datalink = IEEE802.11" << oendl;
             new OWaveLanPacket( _end, (const struct ieee_802_11_header*) data, this );
             break;
 
         case DLT_PRISM_HEADER:
-            qDebug( "OPacket::OPacket(): Received Packet. Datalink = PRISM_HEADER" );
+            odebug << "OPacket::OPacket(): Received Packet. Datalink = PRISM_HEADER" << oendl;
             new OPrismHeaderPacket( _end, (const struct prism_hdr*) (unsigned char*) data, this );
             break;
 
         default:
-            qWarning( "OPacket::OPacket(): Received Packet over unsupported datalink (type %d)!", datalink );
+            owarn << "OPacket::OPacket(): Received Packet over unsupported datalink, type " << datalink << "!" << oendl;
     }
 }
 
@@ -112,7 +113,7 @@ void OPacket::updateStats( QMap<QString,int>& stats, QObjectList* l )
 void OPacket::dumpStructure( QObjectList* l )
 {
     QString packetString( "[ |" + _dumpStructure( l ) + " ]" );
-    qDebug( "OPacket::dumpStructure: %s", (const char*) packetString );
+    odebug << "OPacket::dumpStructure: " << packetString << oendl;
 }
 
 
@@ -186,20 +187,20 @@ OEthernetPacket::OEthernetPacket( const unsigned char* end, const struct ether_h
                 :QObject( parent, "Ethernet" ), _ether( data )
 {
 
-    qDebug( "Source = %s", (const char*) sourceAddress().toString() );
-    qDebug( "Destination = %s", (const char*) destinationAddress().toString() );
+    odebug << "Source = " << sourceAddress().toString();
+    odebug << "Destination = " << destinationAddress().toString();
 
     if ( sourceAddress() == OMacAddress::broadcast )
-        qDebug( "Source is broadcast address" );
+        odebug << "Source is broadcast address" << oendl;
     if ( destinationAddress() == OMacAddress::broadcast )
-        qDebug( "Destination is broadcast address" );
+        odebug << "Destination is broadcast address" << oendl;
 
     switch ( type() )
     {
         case ETHERTYPE_IP: new OIPPacket( end, (const struct iphdr*) (data+1), this ); break;
         case ETHERTYPE_ARP: new OARPPacket( end, (const struct myarphdr*) (data+1), this ); break;
-        case ETHERTYPE_REVARP: { qDebug( "OPacket::OPacket(): Received Ethernet Packet : Type = RARP" ); break; }
-        default: qDebug( "OPacket::OPacket(): Received Ethernet Packet : Type = UNKNOWN" );
+        case ETHERTYPE_REVARP: { odebug << "OPacket::OPacket(): Received Ethernet Packet : Type = RARP" << oendl; break; }
+        default: odebug << "OPacket::OPacket(): Received Ethernet Packet : Type = UNKNOWN" << oendl;
     }
 
 }
@@ -235,19 +236,16 @@ int OEthernetPacket::type() const
 OIPPacket::OIPPacket( const unsigned char* end, const struct iphdr* data, QObject* parent )
           :QObject( parent, "IP" ), _iphdr( data )
 {
-    qDebug( "OIPPacket::OIPPacket(): decoding IP header..." );
+    odebug << "OIPPacket::OIPPacket(): decoding IP header..." << oendl;
 
-    //qDebug( "FromAddress: %s", (const char*) inet_ntoa( *src ) );
-    //qDebug( "  ToAddress: %s", (const char*) inet_ntoa( *dst ) );
-
-    qDebug( "FromAddress: %s", (const char*) fromIPAddress().toString() );
-    qDebug( "  toAddress: %s", (const char*) toIPAddress().toString() );
+    odebug << "FromAddress = " << fromIPAddress().toString();
+    odebug << "  toAddress = " << toIPAddress().toString();
 
     switch ( protocol() )
     {
         case IPPROTO_UDP: new OUDPPacket( end, (const struct udphdr*) (data+1), this ); break;
         case IPPROTO_TCP: new OTCPPacket( end, (const struct tcphdr*) (data+1), this ); break;
-        default: qDebug( "OIPPacket::OIPPacket(): unknown IP protocol type = %d", protocol() );
+        default: odebug << "OIPPacket::OIPPacket(): unknown IP protocol, type = " << protocol() << oendl;
     }
 
 }
@@ -318,10 +316,10 @@ int OIPPacket::checksum() const
 OARPPacket::OARPPacket( const unsigned char* end, const struct myarphdr* data, QObject* parent )
            :QObject( parent, "ARP" ), _arphdr( data )
 {
-    qDebug( "OARPPacket::OARPPacket(): decoding ARP header..." );
-    qDebug( "ARP type seems to be %02d - '%s'", EXTRACT_16BITS( &_arphdr->ar_op ), (const char*) type() );
-    qDebug( "Sender: MAC %s = IP %s", (const char*) senderMacAddress().toString(), (const char*) senderIPV4Address().toString() );
-    qDebug( "Target: MAC %s = IP %s", (const char*) targetMacAddress().toString(), (const char*) targetIPV4Address().toString() );
+    odebug << "OARPPacket::OARPPacket(): decoding ARP header..." << oendl;
+    odebug << "ARP type seems to be " << EXTRACT_16BITS( &_arphdr->ar_op ) << " = " << type() << oendl;
+    odebug << "Sender: MAC " << senderMacAddress().toString() << " = IP " << senderIPV4Address().toString() << oendl;
+    odebug << "Target: MAC " << targetMacAddress().toString() << " = IP " << targetIPV4Address().toString() << oendl;
 }
 
 
@@ -379,16 +377,16 @@ OUDPPacket::OUDPPacket( const unsigned char* end, const struct udphdr* data, QOb
            :QObject( parent, "UDP" ), _udphdr( data )
 
 {
-    qDebug( "OUDPPacket::OUDPPacket(): decoding UDP header..." );
-    qDebug( "fromPort = %d", fromPort() );
-    qDebug( "  toPort = %d", toPort() );
+    odebug << "OUDPPacket::OUDPPacket(): decoding UDP header..." << oendl;
+    odebug << "fromPort = " << fromPort() << oendl;
+    odebug << "  toPort = " << toPort() << oendl;
 
     // TODO: Make this a case or a hash if we know more udp protocols
 
     if ( fromPort() == UDP_PORT_BOOTPS || fromPort() == UDP_PORT_BOOTPC ||
          toPort() == UDP_PORT_BOOTPS || toPort() == UDP_PORT_BOOTPC )
     {
-        qDebug( "seems to be part of a DHCP conversation => creating DHCP packet." );
+        odebug << "seems to be part of a DHCP conversation => creating DHCP packet." << oendl;
         new ODHCPPacket( end, (const struct dhcp_packet*) (data+1), this );
     }
 }
@@ -432,13 +430,13 @@ ODHCPPacket::ODHCPPacket( const unsigned char* end, const struct dhcp_packet* da
            :QObject( parent, "DHCP" ), _dhcphdr( data )
 
 {
-    qDebug( "ODHCPPacket::ODHCPPacket(): decoding DHCP information..." );
-    qDebug( "DHCP opcode seems to be %02d - '%s'", _dhcphdr->op, isRequest() ? "REQUEST" : "REPLY" );
-    qDebug( "clientAddress: %s", (const char*) clientAddress().toString() );
-    qDebug( "  yourAddress: %s", (const char*) yourAddress().toString() );
-    qDebug( "serverAddress: %s", (const char*) serverAddress().toString() );
-    qDebug( " relayAddress: %s", (const char*) relayAddress().toString() );
-    qDebug( "parsing DHCP options..." );
+    odebug << "ODHCPPacket::ODHCPPacket(): decoding DHCP information..." << oendl;
+    odebug << "DHCP opcode seems to be " << _dhcphdr->op << ": " << ( isRequest() ? "REQUEST" : "REPLY" ) << oendl;
+    odebug << "clientAddress = " << clientAddress().toString() << oendl;
+    odebug << "  yourAddress = " << yourAddress().toString() << oendl;
+    odebug << "serverAddress = " << serverAddress().toString() << oendl;
+    odebug << " relayAddress = " << relayAddress().toString() << oendl;
+    odebug << "parsing DHCP options..." << oendl;
 
     _type = 0;
 
@@ -449,7 +447,7 @@ ODHCPPacket::ODHCPPacket( const unsigned char* end, const struct dhcp_packet* da
     while ( ( tag = *option++ ) != -1 /* end of option field */ )
     {
         len = *option++;
-        qDebug( "recognized DHCP option #%d, length %d", tag, len );
+        odebug << "recognized DHCP option #" << tag << ", length " << len << oendl;
 
         if ( tag == DHO_DHCP_MESSAGE_TYPE )
             _type = *option;
@@ -457,12 +455,12 @@ ODHCPPacket::ODHCPPacket( const unsigned char* end, const struct dhcp_packet* da
         option += len;
         if ( option >= end )
         {
-            qWarning( "DHCP parsing ERROR: sanity check says the packet is at its end!" );
+            owarn << "DHCP parsing ERROR: sanity check says the packet is at its end!" << oendl;
             break;
         }
     }
 
-    qDebug( "DHCP type seems to be '%s'", (const char*) type() );
+    odebug << "DHCP type seems to be << " << type() << oendl;
 }
 
 
@@ -539,7 +537,7 @@ OTCPPacket::OTCPPacket( const unsigned char* end, const struct tcphdr* data, QOb
            :QObject( parent, "TCP" ), _tcphdr( data )
 
 {
-    qDebug( "OTCPPacket::OTCPPacket(): decoding TCP header..." );
+    odebug << "OTCPPacket::OTCPPacket(): decoding TCP header..." << oendl;
 }
 
 
@@ -592,9 +590,9 @@ OPrismHeaderPacket::OPrismHeaderPacket( const unsigned char* end, const struct p
                 :QObject( parent, "Prism" ), _header( data )
 
 {
-    qDebug( "OPrismHeaderPacket::OPrismHeaderPacket(): decoding PRISM header..." );
+    odebug << "OPrismHeaderPacket::OPrismHeaderPacket(): decoding PRISM header..." << oendl;
 
-    qDebug( "Signal Strength = %d", data->signal.data );
+    odebug << "Signal Strength = " << data->signal.data << oendl;
 
     new OWaveLanPacket( end, (const struct ieee_802_11_header*) (data+1), this );
 }
@@ -618,23 +616,23 @@ OWaveLanPacket::OWaveLanPacket( const unsigned char* end, const struct ieee_802_
                 :QObject( parent, "802.11" ), _wlanhdr( data )
 
 {
-    qDebug( "OWaveLanPacket::OWaveLanPacket(): decoding IEEE 802.11 header..." );
-    qDebug( "type: %0X", type() );
-    qDebug( "subType: %0X", subType() );
-    qDebug( "duration: %d", duration() );
-    qDebug( "powermanagement: %d", usesPowerManagement() );
-    qDebug( "payload is encrypted: %s", usesWep() ? "yes" : "no" );
-    qDebug( "MAC1: %s", (const char*) macAddress1().toString() );
-    qDebug( "MAC2: %s", (const char*) macAddress2().toString() );
-    qDebug( "MAC3: %s", (const char*) macAddress3().toString() );
-    qDebug( "MAC4: %s", (const char*) macAddress4().toString() );
+    odebug << "OWaveLanPacket::OWaveLanPacket(): decoding IEEE 802.11 header..." << oendl;
+    odebug << "type = " << type() << oendl;
+    odebug << "subType = " << subType() << oendl;
+    odebug << "duration = " << duration() << oendl;
+    odebug << "powermanagement = " << usesPowerManagement() << oendl;
+    odebug << "payload is encrypted = " << ( usesWep() ? "yes" : "no" ) << oendl;
+    odebug << "MAC1 = " << macAddress1().toString() << oendl;
+    odebug << "MAC2 = " << macAddress2().toString() << oendl;
+    odebug << "MAC3 = " << macAddress3().toString() << oendl;
+    odebug << "MAC4 = " << macAddress4().toString() << oendl;
 
     switch ( type() )
     {
         case T_MGMT: new OWaveLanManagementPacket( end, (const struct ieee_802_11_mgmt_header*) data, this ); break;
         case T_DATA: new OWaveLanDataPacket( end, (const struct ieee_802_11_data_header*) data, this ); break;
         case T_CTRL: new OWaveLanControlPacket( end, (const struct ieee_802_11_control_header*) data, this ); break;
-        default: qDebug( "OWaveLanPacket::OWaveLanPacket(): Warning: Unknown major type '%d'!", type() );
+        default: odebug << "OWaveLanPacket::OWaveLanPacket(): Warning: Unknown major type = " << type() << oendl;
     }
 }
 
@@ -723,8 +721,8 @@ OWaveLanManagementPacket::OWaveLanManagementPacket( const unsigned char* end, co
                 :QObject( parent, "802.11 Management" ), _header( data ),
                 _body( (const struct ieee_802_11_mgmt_body*) (data+1) )
 {
-    qDebug( "OWaveLanManagementPacket::OWaveLanManagementPacket(): decoding frame..." );
-    qDebug( "Detected subtype is '%s'", (const char*) managementType() );
+    odebug << "OWaveLanManagementPacket::OWaveLanManagementPacket(): decoding frame..." << oendl;
+    odebug << "Detected subtype is " << managementType() << oendl;
 
     // grab tagged values
     const unsigned char* ptr = (const unsigned char*) (_body+1);
@@ -823,7 +821,7 @@ bool OWaveLanManagementPacket::canPrivacy() const
 OWaveLanManagementSSID::OWaveLanManagementSSID( const unsigned char* end, const struct ssid_t* data, QObject* parent )
                 :QObject( parent, "802.11 SSID" ), _data( data )
 {
-    qDebug( "OWaveLanManagementSSID()" );
+    odebug << "OWaveLanManagementSSID()" << oendl;
 }
 
 
@@ -850,7 +848,7 @@ QString OWaveLanManagementSSID::ID() const
 OWaveLanManagementRates::OWaveLanManagementRates( const unsigned char* end, const struct rates_t* data, QObject* parent )
                 :QObject( parent, "802.11 Rates" ), _data( data )
 {
-    qDebug( "OWaveLanManagementRates()" );
+    odebug << "OWaveLanManagementRates()" << oendl;
 }
 
 
@@ -865,7 +863,7 @@ OWaveLanManagementRates::~OWaveLanManagementRates()
 OWaveLanManagementCF::OWaveLanManagementCF( const unsigned char* end, const struct cf_t* data, QObject* parent )
                 :QObject( parent, "802.11 CF" ), _data( data )
 {
-    qDebug( "OWaveLanManagementCF()" );
+    odebug << "OWaveLanManagementCF()" << oendl;
 }
 
 
@@ -880,7 +878,7 @@ OWaveLanManagementCF::~OWaveLanManagementCF()
 OWaveLanManagementFH::OWaveLanManagementFH( const unsigned char* end, const struct fh_t* data, QObject* parent )
                 :QObject( parent, "802.11 FH" ), _data( data )
 {
-    qDebug( "OWaveLanManagementFH()" );
+    odebug << "OWaveLanManagementFH()" << oendl;
 }
 
 
@@ -895,7 +893,7 @@ OWaveLanManagementFH::~OWaveLanManagementFH()
 OWaveLanManagementDS::OWaveLanManagementDS( const unsigned char* end, const struct ds_t* data, QObject* parent )
                 :QObject( parent, "802.11 DS" ), _data( data )
 {
-    qDebug( "OWaveLanManagementDS()" );
+    odebug << "OWaveLanManagementDS()" << oendl;
 }
 
 
@@ -916,7 +914,7 @@ int OWaveLanManagementDS::channel() const
 OWaveLanManagementTim::OWaveLanManagementTim( const unsigned char* end, const struct tim_t* data, QObject* parent )
                 :QObject( parent, "802.11 Tim" ), _data( data )
 {
-    qDebug( "OWaveLanManagementTim()" );
+    odebug << "OWaveLanManagementTim()" << oendl;
 }
 
 
@@ -931,7 +929,7 @@ OWaveLanManagementTim::~OWaveLanManagementTim()
 OWaveLanManagementIBSS::OWaveLanManagementIBSS( const unsigned char* end, const struct ibss_t* data, QObject* parent )
                 :QObject( parent, "802.11 IBSS" ), _data( data )
 {
-    qDebug( "OWaveLanManagementIBSS()" );
+    odebug << "OWaveLanManagementIBSS()" << oendl;
 }
 
 
@@ -946,7 +944,7 @@ OWaveLanManagementIBSS::~OWaveLanManagementIBSS()
 OWaveLanManagementChallenge::OWaveLanManagementChallenge( const unsigned char* end, const struct challenge_t* data, QObject* parent )
                 :QObject( parent, "802.11 Challenge" ), _data( data )
 {
-    qDebug( "OWaveLanManagementChallenge()" );
+    odebug << "OWaveLanManagementChallenge()" << oendl;
 }
 
 
@@ -961,7 +959,7 @@ OWaveLanManagementChallenge::~OWaveLanManagementChallenge()
 OWaveLanDataPacket::OWaveLanDataPacket( const unsigned char* end, const struct ieee_802_11_data_header* data, OWaveLanPacket* parent )
                 :QObject( parent, "802.11 Data" ), _header( data )
 {
-    qDebug( "OWaveLanDataPacket::OWaveLanDataPacket(): decoding frame..." );
+    odebug << "OWaveLanDataPacket::OWaveLanDataPacket(): decoding frame..." << oendl;
 
     const unsigned char* payload = (const unsigned char*) data + sizeof( struct ieee_802_11_data_header );
 
@@ -984,19 +982,18 @@ OWaveLanDataPacket::~OWaveLanDataPacket()
 OLLCPacket::OLLCPacket( const unsigned char* end, const struct ieee_802_11_802_2_header* data, QObject* parent )
                 :QObject( parent, "802.11 LLC" ), _header( data )
 {
-    qDebug( "OLLCPacket::OLLCPacket(): decoding frame..." );
+    odebug << "OLLCPacket::OLLCPacket(): decoding frame..." << oendl;
 
     if ( !(_header->oui[0] || _header->oui[1] || _header->oui[2]) )
     {
-        qDebug( "OLLCPacket::OLLCPacket(): contains an encapsulated Ethernet frame (type=%04X)", EXTRACT_16BITS( &_header->type ) );
+        owarn << "OLLCPacket::OLLCPacket(): contains an encapsulated Ethernet frame (type = " << EXTRACT_16BITS( &_header->type ) << ")" << oendl;
 
         switch ( EXTRACT_16BITS( &_header->type ) ) // defined in linux/if_ether.h
         {
             case ETH_P_IP: new OIPPacket( end, (const struct iphdr*) (data+1), this ); break;
             case ETH_P_ARP: new OARPPacket( end, (const struct myarphdr*) (data+1), this ); break;
-            default: qWarning( "OLLCPacket::OLLCPacket(): Unknown Encapsulation (type=%04X)", EXTRACT_16BITS( &_header->type ) );
+            default: owarn << "OLLCPacket::OLLCPacket(): Unknown Encapsulation type = " << EXTRACT_16BITS( &_header->type ) << oendl;
         }
-
     }
 }
 
@@ -1013,7 +1010,7 @@ OLLCPacket::~OLLCPacket()
 OWaveLanControlPacket::OWaveLanControlPacket( const unsigned char* end, const struct ieee_802_11_control_header* data, OWaveLanPacket* parent )
                 :QObject( parent, "802.11 Control" ), _header( data )
 {
-    qDebug( "OWaveLanControlPacket::OWaveLanDataControl(): decoding frame..." );
+    odebug << "OWaveLanControlPacket::OWaveLanDataControl(): decoding frame..." << oendl;
     //TODO: Implement this
 }
 
@@ -1038,7 +1035,7 @@ OPacketCapturer::~OPacketCapturer()
 {
     if ( _open )
     {
-        qDebug( "OPacketCapturer::~OPacketCapturer(): pcap still open, autoclosing." );
+        odebug << "OPacketCapturer::~OPacketCapturer(): pcap still open, autoclosing." << oendl;
         close();
     }
 }
@@ -1048,11 +1045,11 @@ void OPacketCapturer::setBlocking( bool b )
 {
     if ( pcap_setnonblock( _pch, 1-b, _errbuf ) != -1 )
     {
-        qDebug( "OPacketCapturer::setBlocking(): blocking mode changed successfully." );
+        odebug << "OPacketCapturer::setBlocking(): blocking mode changed successfully." << oendl;
     }
     else
     {
-        qDebug( "OPacketCapturer::setBlocking(): can't change blocking mode: %s", _errbuf );
+        odebug << "OPacketCapturer::setBlocking(): can't change blocking mode: " << _errbuf << oendl;
     }
 }
 
@@ -1062,7 +1059,7 @@ bool OPacketCapturer::blocking() const
     int b = pcap_getnonblock( _pch, _errbuf );
     if ( b == -1 )
     {
-        qDebug( "OPacketCapturer::blocking(): can't get blocking mode: %s", _errbuf );
+        odebug << "OPacketCapturer::blocking(): can't get blocking mode: " << _errbuf << oendl;
         return -1;
     }
     return !b;
@@ -1093,11 +1090,11 @@ void OPacketCapturer::close()
     _open = false;
     }
 
-    qDebug( "OPacketCapturer::close() --- dumping capturing statistics..." );
-    qDebug( "--------------------------------------------------" );
+    odebug << "OPacketCapturer::close() --- dumping capturing statistics..." << oendl;
+    odebug << "--------------------------------------------------" << oendl;
     for( QMap<QString,int>::Iterator it = _stats.begin(); it != _stats.end(); ++it )
-        qDebug( "%s : %d", (const char*) it.key(), it.data() );
-    qDebug( "--------------------------------------------------" );
+        odebug << it.key() << " = " << it.data() << oendl;
+    odebug << "--------------------------------------------------" << oendl;
 
 }
 
@@ -1151,9 +1148,9 @@ OPacket* OPacketCapturer::next( int time )
 OPacket* OPacketCapturer::next()
 {
     packetheaderstruct header;
-    qDebug( "==> OPacketCapturer::next()" );
+    odebug << "==> OPacketCapturer::next()" << oendl;
     const unsigned char* pdata = pcap_next( _pch, &header );
-    qDebug( "<== OPacketCapturer::next()" );
+    odebug << "<== OPacketCapturer::next()" << oendl;
 
     if ( pdata && header.len )
     {
@@ -1198,11 +1195,11 @@ bool OPacketCapturer::open( const QString& name )
 
     if ( !handle )
     {
-        qWarning( "OPacketCapturer::open(): can't open libpcap with '%s': %s", (const char*) name, _errbuf );
+        owarn << "OPacketCapturer::open(): can't open libpcap with '" << name << "': " << _errbuf << oendl;
         return false;
     }
 
-    qDebug( "OPacketCapturer::open(): libpcap [%s] opened successfully.", (const char*) name );
+    odebug << "OPacketCapturer::open(): libpcap [" << name << "] opened successfully." << oendl;
     _pch = handle;
     _open = true;
     _stats.clear();
@@ -1223,10 +1220,10 @@ bool OPacketCapturer::openDumpFile( const QString& filename )
     pcap_dumper_t* dump = pcap_dump_open( _pch, const_cast<char*>( (const char*) filename ) );
     if ( !dump )
     {
-        qWarning( "OPacketCapturer::open(): can't open dump with '%s': %s", (const char*) filename, _errbuf );
+        owarn << "OPacketCapturer::open(): can't open dump with '" << filename << "': " << _errbuf << oendl;
         return false;
     }
-    qDebug( "OPacketCapturer::open(): dump [%s] opened successfully.", (const char*) filename );
+    odebug << "OPacketCapturer::open(): dump [" << filename << "] opened successfully." << oendl;
     _pcd = dump;
 
     return true;
@@ -1256,7 +1253,7 @@ bool OPacketCapturer::open( const QFile& file )
 
     if ( handle )
     {
-        qDebug( "OPacketCapturer::open(): libpcap opened successfully." );
+        odebug << "OPacketCapturer::open(): libpcap opened successfully." << oendl;
         _pch = handle;
         _open = true;
 
@@ -1271,7 +1268,7 @@ bool OPacketCapturer::open( const QFile& file )
     }
     else
     {
-        qDebug( "OPacketCapturer::open(): can't open libpcap with '%s': %s", (const char*) name, _errbuf );
+        odebug << "OPacketCapturer::open(): can't open libpcap with '" << name << "': " << _errbuf << oendl;
         return false;
     }
 
@@ -1286,7 +1283,7 @@ bool OPacketCapturer::isOpen() const
 
 void OPacketCapturer::readyToReceive()
 {
-    qDebug( "OPacketCapturer::readyToReceive(): about to emit 'receivePacket(p)'" );
+    odebug << "OPacketCapturer::readyToReceive(): about to emit 'receivePacket(p)'" << oendl;
     OPacket* p = next();
     emit receivedPacket( p );
     // emit is synchronous - packet has been dealt with, now it's safe to delete

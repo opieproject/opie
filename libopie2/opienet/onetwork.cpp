@@ -32,6 +32,7 @@
 
 #include <opie2/onetwork.h>
 #include <opie2/ostation.h>
+#include <opie2/odebug.h>
 
 /* QT */
 
@@ -67,8 +68,8 @@ ONetwork* ONetwork::_instance = 0;
 
 ONetwork::ONetwork()
 {
-    qDebug( "ONetwork::ONetwork()" );
-    qDebug( "ONetwork: This code has been compiled against Wireless Extensions V%d", WIRELESS_EXT );
+    odebug << "ONetwork::ONetwork()" << oendl;
+    odebug << "ONetwork: This code has been compiled against Wireless Extensions V" << WIRELESS_EXT << oendl;
     synchronize();
 }
 
@@ -85,7 +86,7 @@ void ONetwork::synchronize()
     bool hasFile = f.open( IO_ReadOnly );
     if ( !hasFile )
     {
-        qDebug( "ONetwork: /proc/net/dev not existing. No network devices available" );
+        odebug << "ONetwork: /proc/net/dev not existing. No network devices available" << oendl;
         return;
     }
     QTextStream s( &f );
@@ -95,12 +96,12 @@ void ONetwork::synchronize()
     {
         s >> str;
         str.truncate( str.find( ':' ) );
-        qDebug( "ONetwork: found interface '%s'", (const char*) str );
+        odebug << "ONetwork: found interface '" << str << "'" << oendl;
         ONetworkInterface* iface;
         if ( isWirelessInterface( str ) )
         {
             iface = new OWirelessNetworkInterface( this, (const char*) str );
-            qDebug( "ONetwork: interface '%s' has Wireless Extensions", (const char*) str );
+            odebug << "ONetwork: interface '" << str << "' has Wireless Extensions" << oendl;
         }
         else
         {
@@ -161,7 +162,7 @@ ONetworkInterface::ONetworkInterface( QObject* parent, const char* name )
                  :QObject( parent, name ),
                  _sfd( socket( AF_INET, SOCK_DGRAM, 0 ) ), _mon( 0 )
 {
-    qDebug( "ONetworkInterface::ONetworkInterface()" );
+    odebug << "ONetworkInterface::ONetworkInterface()" << oendl;
     init();
 }
 
@@ -174,13 +175,13 @@ struct ifreq& ONetworkInterface::ifr() const
 
 void ONetworkInterface::init()
 {
-    qDebug( "ONetworkInterface::init()" );
+    odebug << "ONetworkInterface::init()" << oendl;
 
     memset( &_ifr, 0, sizeof( struct ifreq ) );
 
     if ( _sfd == -1 )
     {
-        qDebug( "ONetworkInterface::init(): Warning - can't get socket for device '%s'", name() );
+        odebug << "ONetworkInterface::init(): Warning - can't get socket for device '" << name() << "'" << oendl;
         return;
     }
 }
@@ -191,9 +192,11 @@ bool ONetworkInterface::ioctl( int call, struct ifreq& ifreq ) const
     #ifndef NODEBUG
     int result = ::ioctl( _sfd, call, &ifreq );
     if ( result == -1 )
-        qDebug( "ONetworkInterface::ioctl (%s) call %s (0x%04X) - Status: Failed: %d (%s)", name(), (const char*) debugmapper->map( call ), call, result, strerror( errno ) );
+        odebug << "ONetworkInterface::ioctl (" << name() << ") call '" << debugmapper->map( call )
+               << "' FAILED! " << result << " (" << strerror( errno ) << ")" << oendl;
     else
-        qDebug( "ONetworkInterface::ioctl (%s) call %s (0x%04X) - Status: Ok.", name(), (const char*) debugmapper->map( call ), call );
+        odebug << "ONetworkInterface::ioctl (" << name() << ") call '" << debugmapper->map( call )
+               << "' - Status: Ok." << oendl;
     return ( result != -1 );
     #else
     return ::ioctl( _sfd, call, &ifreq ) != -1;
@@ -315,7 +318,7 @@ int ONetworkInterface::dataLinkType() const
 void ONetworkInterface::setMonitoring( OMonitoringInterface* m )
 {
     _mon = m;
-    qDebug( "ONetwork::setMonitoring(): Installed monitoring driver '%s' on interface '%s'", (const char*) m->name(), name() );
+    odebug << "ONetwork::setMonitoring(): Installed monitoring driver '" << m->name() << "' on interface '" << name() << "'" << oendl;
 }
 
 
@@ -327,7 +330,7 @@ OMonitoringInterface* ONetworkInterface::monitoring() const
 
 ONetworkInterface::~ONetworkInterface()
 {
-    qDebug( "ONetworkInterface::~ONetworkInterface()" );
+    odebug << "ONetworkInterface::~ONetworkInterface()" << oendl;
     if ( _sfd != -1 ) ::close( _sfd );
 }
 
@@ -404,8 +407,7 @@ void OChannelHopper::timerEvent( QTimerEvent* )
 {
     _iface->setChannel( *_channel );
     emit( hopped( *_channel ) );
-    qDebug( "OChannelHopper::timerEvent(): set channel %d on interface '%s'",
-            *_channel, (const char*) _iface->name() );
+    odebug << "OChannelHopper::timerEvent(): set channel " << *_channel << " on interface '" << _iface->name() << "'" << oendl;
     if ( ++_channel == _channels.end() ) _channel = _channels.begin();
 }
 
@@ -441,7 +443,7 @@ int OChannelHopper::interval() const
 OWirelessNetworkInterface::OWirelessNetworkInterface( QObject* parent, const char* name )
                          :ONetworkInterface( parent, name ), _hopper( 0 )
 {
-    qDebug( "OWirelessNetworkInterface::OWirelessNetworkInterface()" );
+    odebug << "OWirelessNetworkInterface::OWirelessNetworkInterface()" << oendl;
     init();
 }
 
@@ -459,7 +461,7 @@ struct iwreq& OWirelessNetworkInterface::iwr() const
 
 void OWirelessNetworkInterface::init()
 {
-    qDebug( "OWirelessNetworkInterface::init()" );
+    odebug << "OWirelessNetworkInterface::init()" << oendl;
     memset( &_iwr, 0, sizeof( struct iwreq ) );
     buildInformation();
     buildPrivateList();
@@ -506,7 +508,7 @@ void OWirelessNetworkInterface::buildInformation()
 
     if ( ::ioctl( _sfd, SIOCGIWRANGE, &wrq ) == -1 )
     {
-        qDebug( "OWirelessNetworkInterface::buildInformation(): SIOCGIWRANGE failed (%s) - using default values.", strerror( errno ) );
+        owarn << "OWirelessNetworkInterface::buildInformation(): Can't get channel information - using default values." << oendl;
         _channels.insert( 2412,  1 ); // 2.412 GHz
         _channels.insert( 2417,  2 ); // 2.417 GHz
         _channels.insert( 2422,  3 ); // 2.422 GHz
@@ -530,15 +532,15 @@ void OWirelessNetworkInterface::buildInformation()
                 max = r;
         if (max > 0)
         {
-            qWarning( "OWirelessNetworkInterface::buildInformation(): Driver for wireless interface '%s' sucks!\n"
-                    "It overwrote the buffer end with at least %i bytes!\n", name(), max - sizeof( struct iw_range ) );
+            owarn << "OWirelessNetworkInterface::buildInformation(): Driver for wireless interface '" << name()
+                  << "' sucks! It overwrote the buffer end with at least " << max - sizeof( struct iw_range ) << " bytes!" << oendl;
         }
         // </check if the driver overwrites stuff>
 
         struct iw_range range;
         memcpy( &range, buffer, sizeof range );
 
-        qDebug( "OWirelessNetworkInterface::buildInformation(): Interface %s reported to have %d channels.", name(), range.num_frequency );
+        odebug << "OWirelessNetworkInterface::buildInformation(): Interface reported to have " << (int) range.num_frequency << " channels." << oendl;
         for ( int i = 0; i < range.num_frequency; ++i )
         {
             int freq = (int) ( double( range.freq[i].m ) * pow( 10.0, range.freq[i].e ) / 1000000.0 );
@@ -547,14 +549,14 @@ void OWirelessNetworkInterface::buildInformation()
     }
 
     memcpy( &_range, buffer, sizeof( struct iw_range ) );
-    qDebug( "OWirelessNetworkInterface::buildInformation(): Information block constructed." );
+    odebug << "OWirelessNetworkInterface::buildInformation(): Information block constructed." << oendl;
     free(buffer);
 }
 
 
 void OWirelessNetworkInterface::buildPrivateList()
 {
-    qDebug( "OWirelessNetworkInterface::buildPrivateList()" );
+    odebug << "OWirelessNetworkInterface::buildPrivateList()" << oendl;
 
     struct iw_priv_args priv[IW_MAX_PRIV_DEF];
 
@@ -564,7 +566,7 @@ void OWirelessNetworkInterface::buildPrivateList()
 
     if ( !wioctl( SIOCGIWPRIV ) )
     {
-        qDebug( "OWirelessNetworkInterface::buildPrivateList(): SIOCGIWPRIV failed (%s) - can't get private ioctl information.", strerror( errno ) );
+        owarn << "OWirelessNetworkInterface::buildPrivateList(): Can't get private ioctl information." << oendl;
         return;
     }
 
@@ -572,18 +574,18 @@ void OWirelessNetworkInterface::buildPrivateList()
     {
         new OPrivateIOCTL( this, priv[i].name, priv[i].cmd, priv[i].get_args, priv[i].set_args );
     }
-    qDebug( "OWirelessNetworkInterface::buildPrivateList(): Private IOCTL list constructed." );
+    odebug << "OWirelessNetworkInterface::buildPrivateList(): Private ioctl list constructed." << oendl;
 }
 
 
 void OWirelessNetworkInterface::dumpInformation() const
 {
-    qDebug( "OWirelessNetworkInterface::() -------------- dumping information block ----------------" );
+    odebug << "OWirelessNetworkInterface::() -------------- dumping information block ----------------" << oendl;
 
     qDebug( " - driver's idea of maximum throughput is %d bps = %d byte/s = %d Kb/s = %f.2 Mb/s", _range.throughput, _range.throughput / 8, _range.throughput / 8 / 1024, float( _range.throughput ) / 8.0 / 1024.0 / 1024.0 );
     qDebug( " - driver for '%s' has been compiled against WE V%d (source=V%d)", name(), _range.we_version_compiled, _range.we_version_source );
 
-    qDebug( "OWirelessNetworkInterface::() ---------------------------------------------------------" );
+    odebug << "OWirelessNetworkInterface::() ---------------------------------------------------------" << oendl;
 }
 
 
@@ -610,7 +612,7 @@ void OWirelessNetworkInterface::setChannel( int c ) const
 {
     if ( !c )
     {
-        qWarning( "OWirelessNetworkInterface::setChannel( 0 ) called - fix your application!" );
+        oerr << "OWirelessNetworkInterface::setChannel( 0 ) called - fix your application!" << oendl;
         return;
     }
 
@@ -681,7 +683,7 @@ void OWirelessNetworkInterface::setMode( const QString& newMode )
     if ( currentMode == newMode ) return;
     #endif
 
-    qDebug( "OWirelessNetworkInterface::setMode(): trying to set mode '%s' (%d)", (const char*) newMode, stringToMode( newMode ) );
+    odebug << "OWirelessNetworkInterface::setMode(): trying to set mode " << newMode << oendl;
 
     _iwr.u.mode = stringToMode( newMode );
 
@@ -695,11 +697,11 @@ void OWirelessNetworkInterface::setMode( const QString& newMode )
 
         if ( mode() == "monitor" )
         {
-            qDebug( "OWirelessNetworkInterface::setMode(): SIOCSIWMODE not sufficient - trying fallback to iwpriv..." );
+            odebug << "OWirelessNetworkInterface::setMode(): SIOCSIWMODE not sufficient - trying fallback to iwpriv..." << oendl;
             if ( _mon )
                 _mon->setEnabled( false );
             else
-                qDebug( "ONetwork(): can't switch monitor mode without installed monitoring interface" );
+                odebug << "ONetwork(): can't switch monitor mode without installed monitoring interface" << oendl;
         }
 
     }
@@ -707,16 +709,16 @@ void OWirelessNetworkInterface::setMode( const QString& newMode )
     {
         if ( wioctl( SIOCSIWMODE ) )
         {
-            qDebug( "OWirelessNetworkInterface::setMode(): IW_MODE_MONITOR ok" );
+            odebug << "OWirelessNetworkInterface::setMode(): IW_MODE_MONITOR ok" << oendl;
         }
         else
         {
-            qDebug( "OWirelessNetworkInterface::setMode(): SIOCSIWMODE not working - trying fallback to iwpriv..." );
+            odebug << "OWirelessNetworkInterface::setMode(): SIOCSIWMODE not working - trying fallback to iwpriv..." << oendl;
 
             if ( _mon )
                 _mon->setEnabled( true );
             else
-                qDebug( "ONetwork(): can't switch monitor mode without installed monitoring interface" );
+                odebug << "ONetwork(): can't switch monitor mode without installed monitoring interface" << oendl;
         }
     }
 }
@@ -731,7 +733,7 @@ QString OWirelessNetworkInterface::mode() const
         return "<unknown>";
     }
 
-    qDebug( "DEBUG: WE's idea of current mode seems to be '%s'", (const char*) modeToString( _iwr.u.mode ) );
+    odebug << "OWirelessNetworkInterface::setMode(): WE's idea of current mode seems to be " << modeToString( _iwr.u.mode ) << oendl;
 
     // legacy compatible monitor mode check
 
@@ -775,16 +777,18 @@ void OWirelessNetworkInterface::setPrivate( const QString& call, int numargs, ..
     OPrivateIOCTL* priv = static_cast<OPrivateIOCTL*>( child( (const char*) call ) );
     if ( !priv )
     {
-        qDebug( "OWirelessNetworkInterface::setPrivate(): interface '%s' does not support private ioctl '%s'", name(), (const char*) call );
+        owarn << "OWirelessNetworkInterface::setPrivate(): interface '" << name()
+              << "' does not support private ioctl '" << call << "'" << oendl;
         return;
     }
     if ( priv->numberSetArgs() != numargs )
     {
-        qDebug( "OWirelessNetworkInterface::setPrivate(): parameter count not matching. '%s' expects %d arguments, but got %d", (const char*) call, priv->numberSetArgs(), numargs );
+        owarn << "OWirelessNetworkInterface::setPrivate(): parameter count not matching. '"
+              << call << "' expects " << priv->numberSetArgs() << ", but got " << numargs << oendl;
         return;
     }
 
-    qDebug( "OWirelessNetworkInterface::setPrivate(): about to call '%s' on interface '%s'", (const char*) call, name() );
+    odebug << "OWirelessNetworkInterface::setPrivate(): about to call '" << call << "' on interface '" << name() << "'" << oendl;
     memset( &_iwr, 0, sizeof _iwr );
     va_list argp;
     va_start( argp, numargs );
@@ -799,7 +803,7 @@ void OWirelessNetworkInterface::setPrivate( const QString& call, int numargs, ..
 
 void OWirelessNetworkInterface::getPrivate( const QString& call )
 {
-    qWarning( "OWirelessNetworkInterface::getPrivate() is not implemented yet." );
+    oerr << "OWirelessNetworkInterface::getPrivate() is not implemented yet." << oendl;
 }
 
 
@@ -846,7 +850,7 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
 
     int timeout = 1000000;
 
-    qDebug( "ONetworkInterface::scanNetwork() - scan started." );
+    odebug << "ONetworkInterface::scanNetwork() - scan started." << oendl;
 
     bool results = false;
     struct timeval tv;
@@ -869,7 +873,7 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
         }
         else if ( errno == EAGAIN)
         {
-            qDebug( "ONetworkInterface::scanNetwork() - scan in progress..." );
+            odebug << "ONetworkInterface::scanNetwork() - scan in progress..." << oendl;
             #if 0
             if ( qApp )
             {
@@ -883,18 +887,18 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
         }
     }
 
-    qDebug( "ONetworkInterface::scanNetwork() - scan finished." );
+    odebug << "ONetworkInterface::scanNetwork() - scan finished." << oendl;
 
     if ( results )
     {
-        qDebug( " - result length = %d", _iwr.u.data.length );
+        odebug << " - result length = " << _iwr.u.data.length << oendl;
         if ( !_iwr.u.data.length )
         {
-            qDebug( " - no results (empty neighbourhood)" );
+            odebug << " - no results (empty neighbourhood)" << oendl;
             return stations;
         }
 
-        qDebug( " - results are in!" );
+        odebug << " - results are in!" << oendl;
         dumpBytes( (const unsigned char*) &buffer[0], _iwr.u.data.length );
 
         // parse results
@@ -906,42 +910,42 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
         {
             //const char* cmd = *(*_ioctlmap)[we->cmd];
             //if ( !cmd ) cmd = "<unknown>";
-            qDebug( "reading next event... cmd=%d, len=%d", we->cmd, we->len );
+            odebug << " - reading next event... cmd=" << we->cmd << ", len=" << we->len << oendl;
             switch (we->cmd)
             {
                 case SIOCGIWAP:
                 {
-                    qDebug( "SIOCGIWAP" );
+                    odebug << "SIOCGIWAP" << oendl;
                     stations->append( new OStation() );
                     stations->last()->macAddress = (const unsigned char*) &we->u.ap_addr.sa_data[0];
                     break;
                 }
                 case SIOCGIWMODE:
                 {
-                    qDebug( "SIOCGIWMODE" );
+                    odebug << "SIOCGIWMODE" << oendl;
                     stations->last()->type = modeToString( we->u.mode );
                     break;
                 }
                 case SIOCGIWFREQ:
                 {
-                    qDebug( "SIOCGIWFREQ" );
+                    odebug << "SIOCGIWFREQ" << oendl;
                     stations->last()->channel = _channels[ static_cast<int>(double( we->u.freq.m ) * pow( 10.0, we->u.freq.e ) / 1000000) ];
                     break;
                 }
                 case SIOCGIWESSID:
                 {
-                    qDebug( "SIOCGIWESSID" );
+                    odebug << "SIOCGIWESSID" << oendl;
                     stations->last()->ssid = we->u.essid.pointer;
                     break;
                 }
-                case SIOCGIWSENS: qDebug( "SIOCGIWSENS" ); break;
-                case SIOCGIWENCODE: qDebug( "SIOCGIWENCODE" ); break;
-                case IWEVTXDROP: qDebug( "IWEVTXDROP" ); break;         /* Packet dropped to excessive retry */
-                case IWEVQUAL: qDebug( "IWEVQUAL" ); break;             /* Quality part of statistics (scan) */
-                case IWEVCUSTOM: qDebug( "IWEVCUSTOM" ); break;         /* Driver specific ascii string */
-                case IWEVREGISTERED: qDebug( "IWEVREGISTERED" ); break; /* Discovered a new node (AP mode) */
-                case IWEVEXPIRED: qDebug( "IWEVEXPIRED" ); break;       /* Expired a node (AP mode) */
-                default: qDebug( "unhandled event" );
+                case SIOCGIWSENS: odebug << "SIOCGIWSENS" << oendl; break;
+                case SIOCGIWENCODE: odebug << "SIOCGIWENCODE" << oendl; break;
+                case IWEVTXDROP: odebug << "IWEVTXDROP" << oendl; break;         /* Packet dropped to excessive retry */
+                case IWEVQUAL: odebug << "IWEVQUAL" << oendl; break;             /* Quality part of statistics (scan) */
+                case IWEVCUSTOM: odebug << "IWEVCUSTOM" << oendl; break;         /* Driver specific ascii string */
+                case IWEVREGISTERED: odebug << "IWEVREGISTERED" << oendl; break; /* Discovered a new node (AP mode) */
+                case IWEVEXPIRED: odebug << "IWEVEXPIRED" << oendl; break;       /* Expired a node (AP mode) */
+                default: odebug << "unhandled event" << oendl;
             }
 
             offset += we->len;
@@ -954,7 +958,7 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
     }
     else
     {
-        qDebug( " - no results (timeout) :(" );
+        odebug << " - no results (timeout) :(" << oendl;
         return stations;
     }
 }
@@ -964,10 +968,14 @@ bool OWirelessNetworkInterface::wioctl( int call, struct iwreq& iwreq ) const
 {
     #ifndef NODEBUG
     int result = ::ioctl( _sfd, call, &iwreq );
+
     if ( result == -1 )
-        qDebug( "ONetworkInterface::wioctl (%s) call %s (0x%04X) - Status: Failed: %d (%s)", name(), (const char*) debugmapper->map( call ), call, result, strerror( errno ) );
+        odebug << "ONetworkInterface::wioctl (" << name() << ") call '"
+               << debugmapper->map( call ) << "' FAILED! " << result << " (" << strerror( errno ) << ")" << oendl;
     else
-        qDebug( "ONetworkInterface::wioctl (%s) call %s (0x%04X) - Status: Ok.", name(), (const char*) debugmapper->map( call ), call );
+        odebug << "ONetworkInterface::wioctl (" << name() << ") call '"
+               << debugmapper->map( call ) << "' - Status: Ok." << oendl;
+
     return ( result != -1 );
     #else
     return ::ioctl( _sfd, call, &iwreq ) != -1;

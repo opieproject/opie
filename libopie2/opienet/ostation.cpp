@@ -29,6 +29,7 @@
 */
 
 #include <opie2/ostation.h>
+#include <opie2/odebug.h>
 
 /*======================================================================================
  * OStation
@@ -36,7 +37,7 @@
 
 OStation::OStation()
 {
-    qDebug( "OStation::OStation()" );
+    odebug << "OStation::OStation()" << oendl;
 
     type = "<unknown>";
     macAddress = OMacAddress::unknown;
@@ -49,13 +50,13 @@ OStation::OStation()
 
 OStation::~OStation()
 {
-    qDebug( "OStation::~OStation()" );
+    odebug << "OStation::~OStation()" << oendl;
 }
 
 
 void OStation::dump()
 {
-    qDebug( "------- OStation::dump() ------------" );
+    odebug << "------- OStation::dump() ------------" << oendl;
     qDebug( "type: %s", (const char*) type );
     qDebug( "mac:  %s", (const char*) macAddress.toString() );
     qDebug( "ap:   %s", (const char*) apAddress.toString() );
