@@ -1,7 +1,7 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.15 2002-12-31 12:38:28 mjm Exp $
+ * $Id: daemon.cc,v 1.16 2003-02-07 03:36:42 max Exp $
  */
 
 #include "config.hh"
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 
   if(!card_into_monitormode(&handletopcap, sniffer_device, card_type))
   {
-    wl_logerr("Cannot set card into mon mode, aborting");
+    wl_logerr("Cannot initialize the wireless-card, aborting");
     exit(-1);
   }
   wl_loginfo("Set card into monitor mode");
@@ -52,16 +52,6 @@ int main(int argc, char **argv)
     pcap_setnonblock(handletopcap, 1, NULL);
 #endif
       
-    /* getting the datalink type */
-    retval = pcap_datalink(handletopcap);
-    if (retval != DLT_IEEE802_11) /* Rawmode is IEEE802_11 */
-    {
-	wl_logerr("Interface %s does not work in the correct 802.11 raw mode", 
-		   sniffer_device);
-	pcap_close(handletopcap);
-	exit(-1);;
-    }
-    wl_loginfo("Your successfully listen on %s in 802.11 raw mode", sniffer_device);
     ////////////////////////////////////////
  
   /* Setup socket for incoming commands */
