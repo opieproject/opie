@@ -71,9 +71,9 @@ namespace {
             _unkPix = new QPixmap( Resource::loadPixmap( "UnknownDocument" ) );
     }
     inline QPixmap* IconViewItem::pixmap()const {
-      qWarning(  "Name is " + m_path.right( 15 ) + " rect is %d %d %d %d | %d %d",
-                 rect().x(),rect().y(),rect().width(),rect().height(),
-                 iconView()->contentsX(), iconView()->contentsY());
+//      qWarning(  "Name is " + m_path.right( 15 ) + " rect is %d %d %d %d | %d %d",
+//                 rect().x(),rect().y(),rect().width(),rect().height(),
+//                 iconView()->contentsX(), iconView()->contentsY());
 
         if ( m_isDir )
             return _dirPix;
@@ -157,19 +157,19 @@ void PIconView::initKeys() {
     m_viewManager = new Opie::Ui::OKeyConfigManager(m_cfg, "View-KeyBoard-Config",
                                                     lst, false,this, "keyconfig name" );
     m_viewManager->addKeyConfig( OKeyConfigItem(tr("Beam Current Item") , "beam",
-                                                QString::fromLatin1("beam"), BeamItem,
+                                                Resource::loadPixmap("beam"), BeamItem,
                                                 Opie::Ui::OKeyPair(Qt::Key_B, Qt::ShiftButton),
                                                 this, SLOT(slotBeam())) );
     m_viewManager->addKeyConfig( OKeyConfigItem(tr("Delete Current Item"), "delete",
-                                                QString::fromLatin1("trash"), DeleteItem,
+                                                Resource::loadPixmap("trash"), DeleteItem,
                                                 Opie::Ui::OKeyPair(Qt::Key_D, Qt::ShiftButton),
                                                 this, SLOT(slotTrash())) );
     m_viewManager->addKeyConfig( OKeyConfigItem(tr("View Current Item"), "view",
-                                                QString::fromLatin1("1to1"), ViewItem,
+                                                Resource::loadPixmap("1to1"), ViewItem,
                                                 Opie::Ui::OKeyPair(Qt::Key_V, Qt::ShiftButton),
                                                 this, SLOT(slotShowImage())));
     m_viewManager->addKeyConfig( OKeyConfigItem(tr("Show Image Info") , "info",
-                                                QString::fromLatin1("DocumentTypeWord"), InfoItem,
+                                                Resource::loadPixmap("DocumentTypeWord"), InfoItem,
                                                 Opie::Ui::OKeyPair(Qt::Key_I, Qt::ShiftButton ),
                                                 this, SLOT(slotImageInfo()) ) );
     m_viewManager->load();
