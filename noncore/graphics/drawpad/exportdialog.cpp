@@ -13,7 +13,7 @@
 
 #include "exportdialog.h"
 
-#include <opie/ofileselector.h>
+#include <opie2/ofileselector.h>
 
 #include <qbuttongroup.h>
 #include <qcombobox.h>
@@ -66,8 +66,8 @@ ExportDialog::ExportDialog(uint pageAt, uint pageCount, QWidget* parent, const c
     m_pFormatComboBox->insertStrList(QImageIO::outputFormats());
 
     MimeTypes types; types.insert( tr("All Images"), "image/*" );
-    OFileSelector* fileSelector = new OFileSelector(this, OFileSelector::FileSelector,
-						   OFileSelector::Normal,
+    Opie::OFileSelector* fileSelector = new Opie::OFileSelector(this, Opie::OFileSelector::FileSelector,
+						   Opie::OFileSelector::Normal,
 						   QString::null, QString::null,
 						   types );
     fileSelector->setNameVisible( false );

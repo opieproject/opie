@@ -40,7 +40,7 @@ SOURCES		= drawpad.cpp \
 		  tool.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS		+= -lqpe -lopie
+LIBS		+= -lqpe -lopiecore2 -lopieui2 -lqtaux2
 
 TARGET		= drawpad
 

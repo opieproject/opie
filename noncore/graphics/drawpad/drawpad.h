@@ -15,7 +15,6 @@
 #define DRAWPAD_H
 
 #include <qmainwindow.h>
-
 #include <qpen.h>
 
 class DrawPadCanvas;
@@ -62,7 +61,7 @@ private slots:
     void changePenWidth(int value);
     void changePenColor(const QColor& color);
     void changeBrushColor(const QColor& color);
-    
+
     void updateView();
 
     void deleteAll();

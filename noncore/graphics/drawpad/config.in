@@ -1,4 +1,4 @@
   config DRAWPAD
     boolean "opie-drawpad (take simple notes or draw images)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBQTAUX

@@ -13,7 +13,7 @@
 
 #include "importdialog.h"
 
-#include <opie/ofileselector.h>
+#include <qpe/mimetype.h>
 
 #include <qcheckbox.h>
 #include <qimage.h>
@@ -27,9 +27,9 @@ ImportDialog::ImportDialog(QWidget* parent, const char* name)
     setCaption(tr("DrawPad - Import"));
 
     MimeTypes types; types.insert( tr("All images"),"image/*" );
-    m_pFileSelector = new OFileSelector(this,
-				        OFileSelector::FileSelector,
-					OFileSelector::Normal,
+    m_pFileSelector = new Opie::OFileSelector(this,
+				    Opie::OFileSelector::FileSelector,
+					Opie::OFileSelector::Normal,
 					QString::null,
 					QString::null, types );
     m_pFileSelector->setNameVisible( false );

@@ -14,16 +14,17 @@
 #ifndef IMPORTDIALOG_H
 #define IMPORTDIALOG_H
 
+#include <opie2/ofileselector.h>
+
 #include <qdialog.h>
 
 class DocLnk;
-class OFileSelector;
 
 class QCheckBox;
 class QLabel;
 
 class ImportDialog : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:
@@ -37,7 +38,7 @@ private slots:
     void preview();
 
 private:
-    OFileSelector* m_pFileSelector;
+    Opie::OFileSelector* m_pFileSelector;
     QLabel* m_pPreviewLabel;
     QCheckBox* m_pAutomaticPreviewCheckBox;
 };

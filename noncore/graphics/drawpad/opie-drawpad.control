@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/pim
 Maintainer: Sébastien Prud'homme <prudhomme@laposte.net>
 Architecture: arm
-Depends: task-opie-minimal, libopie1
+Depends: task-opie-minimal, libopiecore2, libopieui2, libqtaux2
 Description: A note taking program with basic draw tools
  DrawPad is an easy note taking program for Zaurus.  It can also
  be used to draw simple images. DrawPad was developed for the Opie

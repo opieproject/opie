@@ -30,8 +30,8 @@
 #include "texttool.h"
 #include "thumbnailview.h"
 
-#include <opie/colordialog.h>
-#include <opie/colorpopupmenu.h>
+#include <opie2/qcolordialog.h>
+#include <opie2/ocolorpopupmenu.h>
 
 #include <qpe/applnk.h>
 #include <qpe/config.h>
@@ -48,7 +48,7 @@
 #include <qtooltip.h>
 #include <qwhatsthis.h>
 
-DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags fl )
+DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags /*fl*/ )
     : QMainWindow(parent, name, WStyle_ContextHelp)
 {
     // init members
@@ -255,7 +255,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags fl )
     m_pPenColorToolButton->setPixmap(Resource::loadPixmap("drawpad/pencolor"));
     QWhatsThis::add( m_pPenColorToolButton, tr( "Click here to select the color used when drawing." ) );
 
-    OColorPopupMenu* penColorPopupMenu = new OColorPopupMenu(Qt::black, m_pPenColorToolButton);
+    Opie::OColorPopupMenu* penColorPopupMenu = new Opie::OColorPopupMenu(Qt::black, m_pPenColorToolButton);
     connect(penColorPopupMenu, SIGNAL(colorSelected(const QColor&)), this, SLOT(changePenColor(const QColor&)));
 
     QToolTip::add(m_pPenColorToolButton, tr("Pen Color"));
@@ -268,7 +268,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags fl )
     m_pBrushColorToolButton->setPixmap(Resource::loadPixmap("drawpad/brushcolor"));
     QWhatsThis::add( m_pBrushColorToolButton, tr( "Click here to select the color used when filling in areas." ) );
 
-    OColorPopupMenu* brushColorPopupMenu = new OColorPopupMenu(Qt::white, m_pBrushColorToolButton);
+    Opie::OColorPopupMenu* brushColorPopupMenu = new Opie::OColorPopupMenu(Qt::white, m_pBrushColorToolButton);
     connect(brushColorPopupMenu, SIGNAL(colorSelected(const QColor&)), this, SLOT(changeBrushColor(const QColor&)));
 
     QToolTip::add(m_pBrushColorToolButton, tr("Fill Color"));
