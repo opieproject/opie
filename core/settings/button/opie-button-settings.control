@@ -4,6 +4,6 @@ Section: opie/settings
 Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base
+Depends: task-opie-minimal
 Description: Device-buttons settings dialog
  For the Opie environment.

@@ -6,6 +6,6 @@ Architecture: arm
 Arch: iPAQ
 Version: $QPE_VERSION-$SUB_VERSION
 Conflicts: opie-sound
-Depends: opie-base
+Depends: task-opie-minimal
 Description: Sound settings dialog
  For the Opie environment.

@@ -4,6 +4,6 @@ Section: opie/taskbar
 Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base
+Depends: task-opie-minimal
 Description: Clipboard applet
  Clipboard applet for the Opie environment taskbar.

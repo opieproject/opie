@@ -6,6 +6,6 @@ Provides: opie-netsystemtime
 Maintainer: Patrick S. Vogt <tille@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base, ntpdate, libopie1
+Depends: task-opie-minimal, ntpdate, libopie1
 Description: ntp (Network  Time  Protocol) gui
  This utility syncs system time with a atomic timerserver via internet

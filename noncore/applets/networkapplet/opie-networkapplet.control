@@ -4,6 +4,6 @@ Section: opie/system
 Maintainer: Michael 'Mickey' Lauer <mickeyl@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base, libopie2 (1.8.1), opie-networksettings
+Depends: task-opie-minimal, libopie2 (1.8.1), opie-networksettings
 Description: Network Applet
  A taskbar applet for controlling network interfaces

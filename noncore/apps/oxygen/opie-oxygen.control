@@ -4,6 +4,6 @@ Section: applications
 Maintainer: Carsten Niehaus <cniehaus@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base
+Depends: task-opie-minimal
 Description: Periodic System of the Elements 
  The chemistry application for the Opie-environment

@@ -4,7 +4,7 @@ Section: Communications
 Maintainer: L.J. Potter <ljp@llornkcor.com> 
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base, ftplib
+Depends: task-opie-minimal, ftplib
 Replaces: opieftp
 Description: Opie-Ftp
  The ftp client for the Opie environment.

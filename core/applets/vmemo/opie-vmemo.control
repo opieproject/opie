@@ -4,6 +4,6 @@ Section: opie/system
 Maintainer: L.J. Potter <ljp@llornkcor.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base, opie-vmemo-settings
+Depends: task-opie-minimal, opie-vmemo-settings
 Description: Voice Memo Recorder Applet
  The voice memo recorder for the Opie environment

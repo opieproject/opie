@@ -5,6 +5,6 @@ Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Arch: iPAQ
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base
+Depends: task-opie-minimal
 Description: Browse HTML help documents
  The HTML help browser for the Opie environment.

@@ -4,7 +4,7 @@ Section: opie/games
 Maintainer: Martin Imobersteg <imm@gmx.ch> 
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base
+Depends: task-opie-minimal
 Description: Crossword game
  A crossword game for the Opie environment.
  Play against the computer or human opponents.

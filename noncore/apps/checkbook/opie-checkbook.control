@@ -4,6 +4,6 @@ Section: applications
 Maintainer: Dan Williams <drw@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base, libopie1
+Depends: task-opie-minimal, libopie1
 Description: Checkbook keeping program.
  The checkbook accounting program for the Opie environment.

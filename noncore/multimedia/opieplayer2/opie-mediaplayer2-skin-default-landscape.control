@@ -4,5 +4,5 @@ Section: opie/playerskins
 Maintainer: L.J.Potter <ljp@llornkcor.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base, opie-mediaplayer2
+Depends: task-opie-minimal, opie-mediaplayer2
 Description: Landscape skin for opie mediaplayer 2

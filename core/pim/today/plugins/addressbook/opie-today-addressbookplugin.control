@@ -4,5 +4,5 @@ Section: opie/applications
 Maintainer: Stefan Eilers <eilers.stefan@epost.de>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: libqt2-emb, opie-today
+Depends: libqte2, opie-today
 Description: Addressbook plugin for today shows Birthdays and Anniversaries

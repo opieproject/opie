@@ -4,6 +4,6 @@ Section: opie/applications
 Maintainer: Michael 'Mickey' Lauer <mickeyl@handhelds.org> 
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base, libopie2 (1.8.1)
+Depends: task-opie-minimal, libopie2 (1.8.1)
 Description: A Camera Application
  A Camera Application to use with the Sharp CE-AG06.

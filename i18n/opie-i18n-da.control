@@ -4,6 +4,6 @@ Section: opie/i18n
 Maintainer: Tais M. Hansen <mellen@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base, opie-language
+Depends: task-opie-minimal, opie-language
 Description: i18n: Danish
  Danish UI texts for OPIE environment.

@@ -4,5 +4,5 @@ Section: opie/plugins
 Maintainer: Opie <opie@llornkcor.com> 
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base, libfreetype6
+Depends: task-opie-minimal, libfreetype6
 Description: Freetype fontfactory plugin

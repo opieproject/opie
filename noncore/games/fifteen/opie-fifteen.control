@@ -5,6 +5,6 @@ Maintainer: Martin Imobersteg <imm@gmx.ch>
 Architecture: arm
 Arch: iPAQ
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base
+Depends: task-opie-minimal
 Description: Fifteen pieces game
  A game for the Opie environment.

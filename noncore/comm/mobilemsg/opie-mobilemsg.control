@@ -4,6 +4,6 @@ Section: opie/comm
 Maintainer: Bruno Rodrigues <bruno.rodrigues@litux.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base
+Depends: task-opie-minimal
 Description: Mobile Messaging
  For the Opie environment.

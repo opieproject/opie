@@ -4,6 +4,6 @@ Section: opie/games
 Maintainer: Martin Imobersteg <imm@gmx.ch>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base
+Depends: task-opie-minimal
 Description: Game: solitaire card games
  A solitaire game for the Opie environment.

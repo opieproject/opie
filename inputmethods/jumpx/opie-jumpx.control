@@ -4,7 +4,7 @@ Section: opie/inputmethods
 Maintainer: Markus Gritsch <gritsch@iue.tuwien.ac.at>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base
+Depends: task-opie-minimal
 License: GPL
 Description: JumpX input method
  Keyboard-like input method for the Opie environment.

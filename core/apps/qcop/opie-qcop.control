@@ -4,6 +4,6 @@ Section: opie/system
 Maintainer: Martin Jones <mjones@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: libqt2-emb
+Depends: libqte2
 Description: Interprocess communication client
  Interprocess communication client for the Opie environment.

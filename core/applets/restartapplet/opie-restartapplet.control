@@ -4,6 +4,6 @@ Section: opie/system
 Maintainer: L. J. Potter <ljp@llornkcor.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION.1
-Depends: opie-base
+Depends: task-opie-minimal
 Description: Restart Applet
  A simple taskbar applet to restart the  Opie environment

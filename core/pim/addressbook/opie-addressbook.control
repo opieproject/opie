@@ -5,6 +5,6 @@ Conflicts: qpe-tkcaddressbook
 Maintainer: Stefan Eilers <eilers.stefan@epost.de>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base, libopie1
+Depends: task-opie-minimal, libopie1
 Description: Contacts
  A simple addressbook for the Opie environment.

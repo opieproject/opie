@@ -4,7 +4,7 @@ Section: opie/settings
 Maintainer: Holger Freyther <zecke@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION.1
-Depends: opie-base
+Depends: task-opie-minimal
 License: GPL
 Description: Configure app for the medium mounter
  Configure app for the medium mounter
