@@ -56,6 +56,11 @@ MediaPlayer::MediaPlayer( PlayListWidget &_playList, MediaPlayerState &_mediaPla
     cfg.setGroup("PlayList");
     QString currentPlaylist = cfg.readEntry( "CurrentPlaylist", "default");
     playList.setCaption( tr( "OpiePlayer: " ) + QFileInfo(currentPlaylist).baseName() );
+
+    m_skinLoader = new SkinLoader;
+    m_skinLoader->schedule( AudioWidget::guiInfo() );
+    m_skinLoader->schedule( VideoWidget::guiInfo() );
+    m_skinLoader->start();
 }
 
 MediaPlayer::~MediaPlayer() {
@@ -347,6 +352,8 @@ void MediaPlayer::cleanUp() {// this happens on closing
 
 void MediaPlayer::recreateAudioAndVideoWidgets() const
 {
+    delete m_skinLoader;
+
     delete m_xineControl;
     delete m_audioUI;
     delete m_videoUI;

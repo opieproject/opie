@@ -25,6 +25,7 @@
 
 #include <qcache.h>
 #include <qmap.h>
+#include <qtimer.h>
 
 #include <qpe/resource.h>
 #include <qpe/config.h>
@@ -182,10 +183,14 @@ SkinData *SkinCache::lookupAndTake( const QString &skinPath, const QString &file
     SkinData *data = m_cache.take( key );
     if ( !data )
         data = new SkinData;
+    else
+        qDebug( "SkinCache: hit" );
 
     QImage *bgImage = m_backgroundImageCache.find( skinPath );
-    if ( bgImage )
+    if ( bgImage ) {
+        qDebug( "SkinCache: hit on bgimage" );
         data->backgroundImage = *bgImage;
+    }
     else
         data->backgroundImage = QImage();
 
@@ -209,32 +214,114 @@ void SkinCache::store( const QString &skinPath, const QString &fileNameInfix, Sk
         delete backgroundImage;
 }
 
+SkinLoader::IncrementalLoader::IncrementalLoader( const Info &info )
+    : m_skin( info.skinName, info.fileNameInfix ), m_info( info )
+{
+    m_currentState = LoadBackgroundImage;
+}
+
+SkinLoader::IncrementalLoader::LoaderResult SkinLoader::IncrementalLoader::loadStep()
+{
+    switch ( m_currentState ) {
+        case LoadBackgroundImage:
+            qDebug( "load bgimage" );
+            m_skin.backgroundImage();
+            m_currentState = LoadButtonUpImage;
+            break;
+        case LoadButtonUpImage:
+            qDebug( "load upimage" );
+            m_skin.buttonUpImage();
+            m_currentState = LoadButtonDownImage;
+            break;
+        case LoadButtonDownImage:
+            qDebug( "load downimage" );
+            m_skin.buttonDownImage();
+            m_currentState = LoadButtonMasks;
+            m_currentButton = 0;
+            break;
+        case LoadButtonMasks:
+            qDebug( "load button masks %i", m_currentButton );
+            m_skin.buttonMaskImage( m_info.buttonInfo[ m_currentButton ].fileName );
+
+            m_currentButton++;
+            if ( m_currentButton >= m_info.buttonCount )
+                m_currentState = LoadButtonMask;
+
+            break;
+        case LoadButtonMask:
+            qDebug( "load whole mask" );
+            m_skin.buttonMask( m_info.buttonInfo, m_info.buttonCount );
+            return LoadingCompleted;
+    }
+
+    return MoreToCome;
+}
+
 SkinLoader::SkinLoader()
+    : m_currentLoader( 0 ), m_timerId( -1 )
 {
 }
 
-void SkinLoader::schedule( const QString &skinName, const QString &fileNameInfix, 
-                           const MediaWidget::SkinButtonInfo *skinButtonInfo, const uint buttonCount )
+SkinLoader::~SkinLoader()
 {
-    assert( isRunning() == false );
-
-    pendingSkins << Info( skinName, fileNameInfix, skinButtonInfo, buttonCount );
+    qDebug( "SkinLoader::~SkinLoader()" );
+    killTimers();
+    delete m_currentLoader;
 }
 
-void SkinLoader::run()
+void SkinLoader::schedule( const MediaWidget::GUIInfo &guiInfo )
 {
-    qDebug( "SkinLoader::run()" );
-    for ( InfoList::ConstIterator it = pendingSkins.begin(); it != pendingSkins.end(); ++it )
-        load( *it );
-    qDebug( "SkinLoader is done." );
+    schedule( Skin::defaultSkinName(), guiInfo );
 }
 
-void SkinLoader::load( const Info &nfo )
+void SkinLoader::schedule( const QString &skinName, const MediaWidget::GUIInfo &guiInfo )
 {
-    qDebug( "preloading %s with infix %s", nfo.skinName.ascii(), nfo.fileNameInfix.ascii() );
+    pendingSkins << Info( skinName, guiInfo );
+}
 
-    Skin skin( nfo.skinName, nfo.fileNameInfix );
-    skin.preload( nfo.skinButtonInfo, nfo.buttonCount );
+void SkinLoader::start()
+{
+    assert( m_timerId == -1 );
+    m_timerId = startTimer( 100 /* ms */ );
+    qDebug( "SkinLoader::start() %d jobs", pendingSkins.count() );
+}
+
+void SkinLoader::timerEvent( QTimerEvent *ev )
+{
+    if ( ev->timerId() != m_timerId ) {
+        QObject::timerEvent( ev );
+        return;
+    }
+
+    if ( !m_currentLoader ) {
+
+        if ( pendingSkins.isEmpty() ) {
+            qDebug( "all jobs done" );
+            killTimer( m_timerId );
+            m_timerId = -1;
+            // ### qt3: use deleteLater();
+            QTimer::singleShot( 0, this, SLOT( deleteMe() ) );
+            return;
+        }
+
+        Info nfo = *pendingSkins.begin();
+        pendingSkins.remove( pendingSkins.begin() );
+
+        m_currentLoader = new IncrementalLoader( nfo );
+        qDebug( "new loader %i jobs left", pendingSkins.count() );
+    }
+
+    if ( m_currentLoader->loadStep() == IncrementalLoader::LoadingCompleted ) {
+        delete m_currentLoader;
+        m_currentLoader = 0;
+    }
+
+    qDebug( "finished step" );
+}
+
+void SkinLoader::deleteMe()
+{
+    delete this;
 }
 
 /* vim: et sw=4 ts=4

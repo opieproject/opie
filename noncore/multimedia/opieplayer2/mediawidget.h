@@ -91,6 +91,7 @@ public:
         const SkinButtonInfo *buttonInfo;
         const uint buttonCount;
     };
+    typedef QValueList<GUIInfo> GUIInfoList;
 
     MediaWidget( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QWidget *parent = 0, const char *name = 0 );
     virtual ~MediaWidget();

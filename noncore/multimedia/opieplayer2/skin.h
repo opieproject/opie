@@ -25,9 +25,9 @@
 
 #include <qstring.h>
 #include <qimage.h>
+#include <qobject.h>
 
 #include "mediawidget.h"
-#include "threadutil.h"
 
 struct SkinData;
 
@@ -66,38 +66,57 @@ private:
     Skin &operator=( const Skin & );
 };
 
-class SkinLoader : public ThreadUtil::Thread
+class SkinLoader : public QObject
 {
+    Q_OBJECT
 public:
     SkinLoader();
+    virtual ~SkinLoader();
 
-    void schedule( const QString &skinName, const QString &fileNameInfix, 
-                   const MediaWidget::SkinButtonInfo *skinButtonInfo, const uint buttonCount );
+    void schedule( const MediaWidget::GUIInfo &guiInfo );
+    void schedule( const QString &skinName, const MediaWidget::GUIInfo &guiInfo );
+
+    void start();
 
 protected:
-    virtual void run();
+    virtual void timerEvent( QTimerEvent *ev );
+
+private slots:
+    void deleteMe();
 
 private:
-    struct Info
+    struct Info : public MediaWidget::GUIInfo
     {
-        Info() : skinButtonInfo( 0 ), buttonCount( 0 ) {}
-        Info( const QString &_skinName, const QString &_fileNameInfix, 
-              const MediaWidget::SkinButtonInfo *_skinButtonInfo, const uint _buttonCount )
-            : skinName( _skinName ), fileNameInfix( _fileNameInfix ), 
-              skinButtonInfo( _skinButtonInfo ), buttonCount( _buttonCount )
+        Info() {}
+        Info( const QString &_skinName, const MediaWidget::GUIInfo &guiInfo )
+            : MediaWidget::GUIInfo( guiInfo ), skinName( _skinName )
         {}
 
-        const QString skinName;
-        const QString fileNameInfix;
-        const MediaWidget::SkinButtonInfo *skinButtonInfo;
-        const uint buttonCount;
+        QString skinName;
     };
     typedef QValueList<Info> InfoList;
 
-    void load( const Info &nfo );
+    class IncrementalLoader
+    {
+    public:
+        enum LoaderResult { LoadingCompleted, MoreToCome };
+
+        IncrementalLoader( const Info &info );
+
+        LoaderResult loadStep();
+
+    private:
+        enum State { LoadBackgroundImage, LoadButtonUpImage, LoadButtonDownImage, LoadButtonMasks, LoadButtonMask };
+
+        Skin m_skin;
+        Info m_info;
+        State m_currentState;
+        uint m_currentButton;
+    };
 
     InfoList pendingSkins;
-    ThreadUtil::Mutex guard;
+    IncrementalLoader *m_currentLoader;
+    int m_timerId;
 };
 
 #endif // SKIN_H

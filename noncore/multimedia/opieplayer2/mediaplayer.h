@@ -40,6 +40,7 @@
 #include "xinecontrol.h"
 
 #include "playlistwidget.h"
+#include "skin.h"
 
 class DocLnk;
 class VolumeControl;
@@ -89,6 +90,8 @@ private:
     mutable XineControl *m_xineControl;
     mutable AudioWidget *m_audioUI;
     mutable VideoWidget *m_videoUI;
+
+    QGuardedPtr<SkinLoader> m_skinLoader;
 };
 
 
