@@ -152,7 +152,7 @@ CommandEditDialog::~CommandEditDialog()
 void CommandEditDialog::accept()
 {
 int i = 0;
-  Config *cfg = new Config("Qkonsole");
+  Config *cfg = new Config("Konsole");
   cfg->setGroup("Commands");
   cfg->clearGroup();
 

@@ -369,7 +369,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
     fromMenu = FALSE;
     fullscreen = false;
 
-    setCaption( "Qkonsole" );
+    setCaption( "Konsole" );
     setIcon( Resource::loadPixmap( "qkonsole/qkonsole" ) );
 
     Config cfg( "Konsole" );
@@ -1313,7 +1313,7 @@ void Konsole::switchSession(QWidget* w)
     }
     else
     {
-        setCaption( "Qkonsole" );
+        setCaption( "Konsole" );
     }
     //  colorMenuSelected(te->color_menu_item);
 }

@@ -6,11 +6,11 @@
 /*                                                                            */
 /* Copyright (c) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>            */
 /*                                                                            */
-/* This file is part of Qkonsole - an X terminal for KDE                       */
+/* This file is part of Konsole - an X terminal for KDE                       */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                        */
-/* Ported Qkonsole to Qt/Embedded                                              */
+/* Ported Konsole to Qt/Embedded                                              */
 /*                        */
 /* Copyright (C) 2000 by John Ryland <jryland@trolltech.com>                  */
 /*                        */
