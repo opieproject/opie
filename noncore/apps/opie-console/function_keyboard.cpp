@@ -1,11 +1,32 @@
 #include "function_keyboard.h"
 #include <qsizepolicy.h> 
+#include <qwindowsystem_qws.h>
 
 FunctionKeyboard::FunctionKeyboard(QWidget *parent) : 
-    QFrame(parent), numRows(2), numCols(15), 
+    QFrame(parent), numRows(1), numCols(11), 
     pressedRow(0), pressedCol(0) {
 
-    setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
+    setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed));
+
+    Config conf("opie-console-keys");
+    conf.setGroup("keys");
+    for (int r = 0; r < numRows; r++)
+        for (int c = 0; c < numCols; c++) {
+
+            QString handle = "r" + QString::number(r) + "c" + QString::number(c);
+            QStringList value_list = conf.readListEntry( handle, '|');
+
+            if (value_list.isEmpty()) continue;
+
+            keys.insert(
+
+                 handle, 
+                 FKey (value_list[0], value_list[1].toUShort(), value_list[2].toUShort())
+            );
+        }
+    qWarning("loaded %d keys", keys.count());
+
+
 
 }
 
@@ -19,27 +40,53 @@ void FunctionKeyboard::paintEvent(QPaintEvent *e) {
     p.setClipRect(e->rect());
     p.fillRect(0, 0, width(), height(), QColor(255,255,255));
 
+    p.setPen(QColor(0,0,0));
+
     /* those decimals do count! becomes short if use plain int */
     for (double i = 0; i <= width(); i += keyWidth) {
 
-        p.setPen(QColor(0,0,0));
         p.drawLine((int)i, 0, (int)i, height());
     }
 
-    for (int i = 0; i <= height(); i += height()/numRows) {
+    // sometimes the last line doesnt get drawn
+    p.drawLine(width() -1, 0, width() -1, height());
 
-        p.setPen(QColor(0,0,0));
+    for (int i = 0; i <= height(); i += keyHeight) {
+
         p.drawLine(0, i, width(), i);
     }
 
+    for (int r = 0; r < numRows; r++) {
+        for (int c = 0; c < numCols; c++) {
+
+            QString handle = "r" + QString::number(r) + "c" + QString::number(c);
+            if (keys.contains(handle)) {
+
+                p.drawText(
+                                c * keyWidth + 1, r * keyHeight + 1, 
+                                keyWidth, keyHeight, 
+                                Qt::AlignHCenter | Qt::AlignVCenter, 
+                                keys[handle].getL()
+                );
+            }
+        }
+    }
 }
 
 void FunctionKeyboard::paintKey(int row, int col) {
 
     QPainter p(this);
+    
     p.fillRect(QRect(QPoint(col * keyWidth + 1, row * keyHeight + 1), 
                      QPoint((col + 1) * keyWidth - 1, row * keyHeight + keyHeight- 1)), 
                (pressedRow != -1 && pressedCol != -1 ) ? QColor(97,119,155) : QColor(255,255,255));
+    p.drawText(
+                    col * keyWidth + 1, row * keyHeight + 1, 
+                    keyWidth, keyHeight, 
+                    Qt::AlignHCenter | Qt::AlignVCenter, 
+                    keys["r" + QString::number(row) + "c" + QString::number(col)].getL()
+    );
+
 }
 
 void FunctionKeyboard::mousePressEvent(QMouseEvent *e) {
@@ -48,6 +95,12 @@ void FunctionKeyboard::mousePressEvent(QMouseEvent *e) {
     pressedCol = e->x() / keyWidth;
 
     paintKey(pressedRow, pressedCol);
+
+    // emit that sucker!
+    FKey k = keys["r" + QString::number(pressedRow) + "c" + QString::number(pressedCol)];
+    //QWSServer::sendKeyEvent(k.getU(), k.getQ(), 0, 1, 0);
+    //qwsServer->sendKeyEvent(k.getU(), k.getQ(), 0, 1, 0);
+    qwsServer->sendKeyEvent(0x41, 0, 0, 1, 0);
 }
 
 void FunctionKeyboard::mouseReleaseEvent(QMouseEvent *) {
@@ -57,7 +110,12 @@ void FunctionKeyboard::mouseReleaseEvent(QMouseEvent *) {
         int row = pressedRow; pressedRow = -1;
         int col = pressedCol; pressedCol = -1;
         paintKey(row, col);
+
+        FKey k = keys["r" + QString::number(row) + "c" + QString::number(col)];
+        //QWSServer::sendKeyEvent(k.getU(), k.getQ(), 0, 0, 0);
+        //qwsServer->sendKeyEvent(k.getU(), k.getQ(), 0, 0, 0);
     }
+
 }
 
 
