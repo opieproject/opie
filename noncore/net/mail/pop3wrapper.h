@@ -3,6 +3,8 @@
 
 #include "mailwrapper.h"
 #include "abstractmail.h"
+#include <qmap.h>
+#include <qstring.h>
 
 class RecMail;
 class RecBody;
@@ -44,7 +46,9 @@ protected:
     QString parseAddressList( mailimf_address_list *list );
     QString parseDateTime( mailimf_date_time *date );
     
-    static void traverseBody(RecBody&target,mailmessage*message,mailmime*mime,unsigned int current_rek=0);
+    void cleanUpCache();
+    
+    void traverseBody(RecBody&target,mailmessage*message,mailmime*mime,unsigned int current_rek=0);
     static void fillSingleBody(RecPart&target,mailmessage*message,mailmime*mime);
     static void fillParameters(RecPart&target,clist*parameters);
     static QString POP3wrapper::getencoding(mailmime_mechanism*aEnc);
@@ -53,6 +57,7 @@ protected:
     mailpop3 *m_pop3;
     QString msgTempName;
     unsigned int last_msg_id;
+    QMap<QString,encodedString*> bodyCache;
 };
 
 #endif

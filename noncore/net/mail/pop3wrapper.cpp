@@ -16,6 +16,7 @@ POP3wrapper::POP3wrapper( POP3account *a )
     m_pop3 = NULL;
     msgTempName = a->getFileName()+"_msg_cache";
     last_msg_id = 0;
+    bodyCache.clear();
 }
 
 POP3wrapper::~POP3wrapper()
@@ -25,6 +26,18 @@ POP3wrapper::~POP3wrapper()
     if (msg_cache.exists()) {
         msg_cache.remove();
     }
+    cleanUpCache();
+}
+
+void POP3wrapper::cleanUpCache()
+{
+    QMap<QString,encodedString*>::Iterator it = bodyCache.begin();
+    for (;it!=bodyCache.end();++it) {
+        encodedString*t = it.data();
+        //it.setValue(0);
+        if (t) delete t;
+    }
+    bodyCache.clear();
 }
 
 void POP3wrapper::pop3_progress( size_t current, size_t maximum )
@@ -51,6 +64,7 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail )
         qDebug("Message to large: %i",mail.Msgsize());
         return body;
     }
+    cleanUpCache();
     if (mail.getNumber()!=last_msg_id) {
         if (msg_cache.exists()) {
             msg_cache.remove();
@@ -405,9 +419,12 @@ QList<Folder>* POP3wrapper::listFolders()
     return folders;
 }
 
-QString POP3wrapper::fetchTextPart(const RecMail&,const RecPart&)
+QString POP3wrapper::fetchTextPart(const RecMail&mail,const RecPart&part)
 {
-    return "";
+    encodedString*t = fetchDecodedPart(mail,part);
+    QString text=t->Content();
+    delete t;
+    return text;
 }
 
 void POP3wrapper::deleteMail(const RecMail&mail)
@@ -424,14 +441,20 @@ void POP3wrapper::answeredMail(const RecMail&)
 {
 }
 
-encodedString* POP3wrapper::fetchDecodedPart(const RecMail&,const RecPart&)
+encodedString* POP3wrapper::fetchDecodedPart(const RecMail&,const RecPart&part)
 {
-    return new encodedString();
+    QMap<QString,encodedString*>::ConstIterator it = bodyCache.find(part.Identifier());
+    if (it==bodyCache.end()) return new encodedString();
+    encodedString*t = decode_String(it.data(),part.Encoding());
+    return t;
 }
 
-encodedString* POP3wrapper::fetchRawPart(const RecMail&,const RecPart&)
+encodedString* POP3wrapper::fetchRawPart(const RecMail&mail,const RecPart&part)
 {
-    return new encodedString();
+    QMap<QString,encodedString*>::ConstIterator it = bodyCache.find(part.Identifier());
+    if (it==bodyCache.end()) return new encodedString();
+    encodedString*t = it.data();
+    return t;
 }
 
 void POP3wrapper::traverseBody(RecBody&target,mailmessage*message,mailmime*mime,unsigned int current_rec)
@@ -465,8 +488,9 @@ void POP3wrapper::traverseBody(RecBody&target,mailmessage*message,mailmime*mime,
             target.setBodytext(b);
             target.setDescription(part);
         } else {
-            /* TODO: Add the content to a list and store it for later use */
-            if (data) free(data);
+            b = gen_attachment_id();
+            part.setIdentifier(b);
+            bodyCache[b]=new encodedString(data,len);
             target.addPart(part);
         }
         break;

@@ -4,6 +4,8 @@
 #include "mailtypes.h"
 
 #include <qstring.h>
+#include <qfile.h>
+#include <qtextstream.h>
 #include <stdlib.h>
 #include <libetpan/mailmime_content.h>
 
@@ -66,3 +68,16 @@ QString AbstractMail::convert_String(const char*text)
     }
     return QString(text);
 }
+
+/* cp & paste from launcher */
+QString AbstractMail::gen_attachment_id()
+{
+    QFile file( "/proc/sys/kernel/random/uuid" );
+    if (!file.open(IO_ReadOnly ) )
+        return QString::null;
+
+    QTextStream stream(&file);
+
+    return "{" + stream.read().stripWhiteSpace() + "}";
+}
+

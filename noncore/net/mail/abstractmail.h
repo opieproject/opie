@@ -30,7 +30,10 @@ public:
 
     static AbstractMail* getWrapper(IMAPaccount *a);
     static AbstractMail* getWrapper(POP3account *a);
+
+protected:
     static encodedString*decode_String(const encodedString*text,const QString&enc);
     static QString convert_String(const char*text);
+    static QString gen_attachment_id();
 };
 #endif
