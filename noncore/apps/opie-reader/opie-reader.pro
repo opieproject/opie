@@ -43,6 +43,6 @@ INTERFACES	=
 DESTDIR		= $(OPIEDIR)/bin
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-TARGET		= uqtreader
+TARGET		= reader
 LIBS		+= -lqpe
 

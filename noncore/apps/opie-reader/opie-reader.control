@@ -1,4 +1,4 @@
-Files: bin/uqtreader apps/Applications/uqtreader.desktop pics/uqtreader.png pics/panel-arrow-down.png
+Files: bin/reader apps/Applications/opie-reader.desktop pics/opie-reader/*
 Priority: optional
 Section: applications
 Maintainer: Tim Wentford <timwentford@hotmail.com>
