@@ -53,6 +53,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
                                0, 0, this, 0, true );
     showFolders->addTo( toolBar );
     showFolders->addTo( mailMenu );
+    showFolders->setOn( true );
     connect(showFolders, SIGNAL( toggled( bool ) ),
             SLOT( slotShowFolders( bool ) ) );
 
@@ -84,7 +85,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     folderView->header()->hide();
     folderView->setRootIsDecorated( false );
     folderView->addColumn( tr( "Mailbox" ) );
-    folderView->hide();
+    //folderView->hide();
 
     layout->addWidget( folderView );
 
@@ -108,6 +109,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     connect(folderView, SIGNAL(refreshMailview(QList<RecMail>*)),this,SLOT(refreshMailView(QList<RecMail>*)));
 
    QTimer::singleShot( 1000, this, SLOT( slotAdjustColumns() ) );
+
 }
 
 
