@@ -1,0 +1,11 @@
+Package: opie-dagger
+Files: plugins/application/libdagger.so* bin/dagger pics/dagger apps/Applications/dagger.desktop
+Priority: optional
+Section: opie/applications
+Depends: task-opie-minimal, libopiecore2, libopieui2
+Replaces: dagger
+Architecture: arm
+Source: http://draknor.net/dagger/
+Maintainer: Dan Williams (drw@handhelds.org)
+Description: A Bible study program utilizing the Sword library.
+Version: 0.9.0

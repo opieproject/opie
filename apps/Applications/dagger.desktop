@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=dagger
+Icon=dagger/dagger
+Type=Application
+Name=Dagger
+Comment=A Bible study program utilizing the Sword library.
