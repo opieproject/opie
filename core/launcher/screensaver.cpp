@@ -176,7 +176,7 @@ void OpieScreenSaver::setIntervals ( int dim, int lightoff, int suspend )
 /**
  * Set suspend time. Will read the dim and lcd-off times from the config file.
  *
- * @param suspend  time in seconds to go into APM suspend, -1 to
+ * @param interval time in seconds to go into APM suspend, -1 to
  *                 read value from config file, 0 to disable
  */
 void OpieScreenSaver::setInterval ( int interval )
