@@ -7,3 +7,7 @@ devicedialog.h
 moc_*
 scandialog.cpp
 scandialog.h
+rfcommassigndialogbase.cpp
+rfcommassigndialogbase.h
+rfcommdialogitembase.cpp
+rfcommdialogitembase.h
