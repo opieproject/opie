@@ -119,7 +119,6 @@ void Server :: readLocalIpks( Server *local )
         QString file = (*it)->file();
 
         // Changed to display the filename (excluding the path)
-//        QString packageName = Utils::getFilenameFromIpkFilename( file );
         QString packageName = Utils::getPackageNameFromIpkFilename( file );      
         QString ver = Utils::getPackageVersionFromIpkFilename( file );
         Package *package = new Package( packageName );
@@ -140,10 +139,8 @@ void Server :: readLocalIpks( Server *local )
 		packageList.push_back( Package( tmp ) );
 		int p2 = file.find( "_", p+1 );
 		tmp = file.mid( p+1, p2-(p+1) );
-//		packageList.back().setVersion( tmp );
-//		packageList.back().setPackageStoredLocally( true );
-		packageList.setVersion( tmp );
-		packageList.setPackageStoredLocally( true );
+		packageList.back().setVersion( tmp );
+		packageList.back().setPackageStoredLocally( true );
 	}
 #endif
 
@@ -265,10 +262,13 @@ void Server :: buildLocalPackages( Server *local )
             curr->setLocalPackage( p );
             if ( p )
             {
-                // Replace local version
-                int pos = locallist->at();
-                locallist->remove( p );
-                locallist->insert( pos, curr );
+                // Replace local version 
+                if ( curr->getVersion() > p->getVersion() )
+                {
+                    int pos = locallist->at();
+                    locallist->remove( p );
+                    locallist->insert( pos, curr );
+                }
                 
                 // Set some default stuff like size and things
                 if ( p->getInstalledVersion() == curr->getVersion() )
