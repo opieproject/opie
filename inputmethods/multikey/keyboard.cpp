@@ -231,6 +231,7 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
 
             ushort c = keys->uni(row, col);
 
+            p.setPen(textcolor);
             if (!pix) {
                 if ((shift || lock) && keys->shift(c)) 
                     c = keys->shift(c);
@@ -238,7 +239,7 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
                     c = keys->meta(c);
 
                 p.drawText(x, y, 
-                   defaultKeyWidth * keyWidth + 3, keyHeight,
+                   keyWidthPix + 3, keyHeight,
                    AlignCenter, (QChar)c);
             }
             else {
@@ -256,6 +257,7 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
 
 
     }
+    p.setPen(keycolor_lines);
     p.drawLine(0, height() - 1, width(), height() - 1);
     p.drawLine(width() - 1, 0, width() - 1, height());
     }
