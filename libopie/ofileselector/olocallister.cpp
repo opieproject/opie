@@ -43,7 +43,8 @@ QMap<QString, QStringList> OLocalLister::mimeTypes( const QString& curDir ) {
 
     return mimes;
 }
-/* FIXME mimecheck
+/**
+ * FIXME mimecheck
  * use mime check for that
  * filter dirs
  * filter filters

@@ -16,28 +16,37 @@ public:
     void addFile( const QPixmap&,
                   const QString& mine,
                   QFileInfo* info,
+                  const QString& extra = QString::null,
                   bool isSymlink = FALSE );
 
     void addFile( const QPixmap&,
                   const QString& mime,
                   const QString& dir,
                   const QString& file,
+                  const QString& extra = QString::null,
                   bool = false );
 
     void addDir( const QPixmap&,
                  const QString& mime,
+                 const QString& extra = QString::null,
                  QFileInfo* info, bool = FALSE );
 
     void addDir( const QPixmap&,
                  const QString& mime, const QString& dir,
-                 const QString& file,  bool = FALSE );
+                 const QString& file,
+                 const QString& extra = QString::null,
+                 bool = FALSE );
 
     void addSymlink( const QPixmap&,
                      const QString& mime,
-                     QFileInfo* info,  bool = FALSE );
+                     QFileInfo* info,
+                     const QString& extra = QString::null,
+                     bool = FALSE );
     void addSymlink( const QPixmap&,
                      const QString& mine, const QString& path,
-                     const QString& file, bool isSymlink = FALSE );
+                     const QString& file,
+                     const QString& extra,
+                     bool isSymlink = FALSE );
     void cd( const QString& path );
     QWidget* widget();
     void sort();

@@ -46,6 +46,7 @@ void OFileListView::clear() {
 void OFileListView::addFile( const QPixmap& pix,
                              const QString&,
                              QFileInfo* info,
+                             const QString& /*extra*/,
                              bool isSymlink ) {
     QString dir;
     QString name;
@@ -70,11 +71,15 @@ void OFileListView::addFile( const QPixmap& pix,
 }
 void OFileListView::addFile( const QPixmap&,
                              const QString& /*mime*/, const QString& /*dir*/,
-                             const QString& /*file*/,  bool /*isSyml*/ ) {
+                             const QString& /*file*/,
+                             const QString& /*extra*/,
+                             bool /*isSyml*/ ) {
 
 }
 void OFileListView::addDir( const QPixmap& pix, const QString&,
-                            QFileInfo* info,  bool symlink ) {
+                            QFileInfo* info,
+                            const QString& /*extra */,
+                            bool symlink ) {
 
     bool locked = false;
     QString name;
@@ -90,18 +95,23 @@ void OFileListView::addDir( const QPixmap& pix, const QString&,
 }
 void OFileListView::addDir( const QPixmap&,
                             const QString& /*mime*/,  const QString& /*dir*/,
-                            const QString& /*file*/, bool ) {
+                            const QString& /*file*/,
+                            const QString& /*extra*/,
+                            bool ) {
 
 }
 void OFileListView::addSymlink( const QPixmap&,
                                 const QString& /*mime*/,
                                 QFileInfo* /*info*/,
+                                const QString& /*extra*/,
                                 bool /*isSym*/ ) {
 
 }
 void OFileListView::addSymlink(const QPixmap&,
                                const QString& /*m*/,  const QString& /*path*/,
-                               const QString& /*file*/,  bool /*isSym*/ ) {
+                               const QString& /*file*/,
+                               const QString& /*extra*/,
+                               bool /*isSym*/ ) {
 
 }
 void OFileListView::cd( const QString& ) {
@@ -127,7 +137,7 @@ QString OFileListView::selectedPath()const {
 }
 QStringList OFileListView::selectedPaths()const {
     QStringList list;
-    list << selectedPath();
+b    list << selectedPath();
     return list;
 }
 int OFileListView::fileCount() {

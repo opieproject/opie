@@ -6,6 +6,7 @@ OFileSelectorItem::OFileSelectorItem( QListView*view,
                                       const QString& date,
                                       const QString& size,
                                       const QString& dir,
+                                      const QString& extra,
                                       bool isLocked,
                                       bool isDir )
     : QListViewItem( view )
@@ -17,6 +18,7 @@ OFileSelectorItem::OFileSelectorItem( QListView*view,
     m_dir = isDir;
     m_locked = isLocked;
     m_dirStr = dir;
+    m_extra = extra;
 }
 OFileSelectorItem::~OFileSelectorItem() {
 }
@@ -50,4 +52,7 @@ QString OFileSelectorItem::key( int id, bool ) {
     }
 
     return ke;
+}
+QString OFileSelector::extra()const {
+    return m_extra;
 }

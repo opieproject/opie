@@ -56,29 +56,37 @@ public:
     virtual void addFile(const QPixmap&,
                          const QString &mine,
                          QFileInfo *info,
+                         const QString& extra = QString::null,
                          bool isSymlink = FALSE ) = 0;
 
     virtual void addFile(const QPixmap&,
                          const QString& mine, const QString& dir,
-                         const QString& file, bool = FALSE ) = 0;
+                         const QString& file,
+                         const QString& extra = QString::null,
+                         bool = FALSE ) = 0;
 
     virtual void addDir (const QPixmap&,
                          const QString &mine,
                          QFileInfo *info,
+                         const QString& extra = QString::null,
                          bool isSymlink = FALSE ) = 0;
     virtual void addDir (const QPixmap&,
                          const QString& mine, const QString& dir,
-                         const QString& file, bool = FALSE) = 0;
+                         const QString& file,
+                         const QString& extra = QString::null,
+                         bool = FALSE) = 0;
 
     virtual void addSymlink(const QPixmap&,
                             const QString &mime,
                             QFileInfo *info,
+                            const QString& extra = QString::null,
                             bool isSymlink = FALSE ) = 0;
 
     virtual void addSymlink(const QPixmap&,
                             const QString& mine,
                             const QString& path,
                             const QString& file,
+                            const QString& extra = QString::null,
                             bool isSymlink = FALSE ) = 0;
 
     virtual void cd(const QString &path ) = 0;
@@ -94,11 +102,22 @@ public:
 /*signals:*/
 protected:
 
-  void fileSelected(const QString &);
-  void fileSelected(const DocLnk & );
-  void contextMenu();
-  void changedDir(const QString &);
-  void changedDir(const QDir & );
+    /**
+     * @param dir The dir name
+     * @param file The file name
+     * @param extra The extra information
+     */
+    void fileSelected(const QString &dir, const QString& file, const QString& extra = QString::nulll);
+    void contextMenu();
+
+    /**
+     *
+     * @param dir The dir name
+     * @param file The file name
+     * @param extra The extra informations
+     */
+    void changedDir(const QString &dir, const QString& file, const QString& extra = QString::null);
+    void changedDir(const QDir & );
 
     /* updates the file name line of the FileSelector */
   void updateLine( const QString& );

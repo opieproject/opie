@@ -1,3 +1,5 @@
+#include <qcombobox.h>
+
 #include "olister.h"
 #include "ofileview.h"
 #include "opixmapprovider.h"
@@ -5,7 +7,7 @@
 
 
 OLister::OLister( OFileSelector* view)
-    : m_view( view )
+    : m_view( view ), m_acc( 0l )
 {
     m_prov = new OPixmapProvider( view );
 }
@@ -24,6 +26,7 @@ bool OLister::showDirs()const {
 }
 void OLister::addFile( const QString& mine,
                        QFileInfo* info,
+                       const QString& extra,
                        bool isSymlink ) {
     int t = isSymlink ?  OPixmapProvider::File | OPixmapProvider::Symlink :
             OPixmapProvider::File;
@@ -32,11 +35,13 @@ void OLister::addFile( const QString& mine,
     view()->currentView()->addFile( pix,
                                     mine,
                                     info,
+                                    extra,
                                     isSymlink );
 }
 void OLister::addFile( const QString& mine,
                        const QString& path,
                        const QString& file,
+                       const QString& extra,
                        bool isSymlink ) {
     int t = isSymlink ? OPixmapProvider::File | OPixmapProvider::Symlink :
             OPixmapProvider::File;
@@ -46,10 +51,12 @@ void OLister::addFile( const QString& mine,
                                     mine,
                                     path,
                                     file,
+                                    extra,
                                     isSymlink );
 }
 void OLister::addDir( const QString& mine,
                       QFileInfo* info,
+                      const QString& extra,
                       bool isSymlink  ) {
     int t = isSymlink ? OPixmapProvider::Dir | OPixmapProvider::Symlink :
             OPixmapProvider::Dir;
@@ -57,11 +64,13 @@ void OLister::addDir( const QString& mine,
     view()->currentView()->addDir( pix,
                                    mine,
                                    info,
+                                   extra,
                                    isSymlink );
 }
 void OLister::addDir( const QString& mine,
                       const QString& path,
                       const QString& dir,
+                      const QString& extra,
                       bool isSymlink ) {
 
     int t = isSymlink ? OPixmapProvider::Dir | OPixmapProvider::Symlink :
@@ -72,20 +81,24 @@ void OLister::addDir( const QString& mine,
                                    mine,
                                    path,
                                    dir,
+                                   extra,
                                    isSymlink );
 }
 void OLister::addSymlink( const QString& mine,
                           QFileInfo* info,
+                          const QString& extra,
                           bool isSymlink ) {
     QPixmap pix = provider()->pixmap( OPixmapProvider::Symlink, mine, info );
     view()->currentView()->addSymlink( pix,
                                        mine,
                                        info,
+                                       extra,
                                        isSymlink );
 }
 void OLister::addSymlink( const QString& mine,
                           const QString& path,
                           const QString& name,
+                          const QString& extra,
                           bool isSymlink ) {
     QPixmap pix = provider()->pixmap( OPixmapProvider::Symlink, mine,
                                       path, name );
@@ -93,6 +106,7 @@ void OLister::addSymlink( const QString& mine,
                                        mine,
                                        path,
                                        name,
+                                       extra,
                                        isSymlink );
 }
 OFileSelector* OLister::view() {
@@ -103,4 +117,46 @@ OPixmapProvider* OLister::provider() {
 }
 bool OLister::compliesMime( const QString& mime ) {
     return view()->compliesMime( mime );
+}
+OListerCmbAccess* OLister::comboBox() {
+    if (!m_acc )
+        m_acc = new OListerCmbAccess( view()->m_location );
+
+    return m_acc;
+}
+
+
+OListerCmbAccess::OListerCmbAccess(QComboBox* box )
+    : m_cmb( cmb )
+{}
+OListerCmbAccess::~OListerCmbAccess() {
+}
+void OListerCmbAccess::clear() {
+    if ( m_cmb )
+        m_cmb->clear();
+}
+void OListerCmbAccess::setCurrentItem( const QString& add, bool FORCE_ADD) {
+    if ( !m_cmb ) return;
+
+
+    int c = m_cmb->count();
+    for ( int i = 0; i < m_cmb->count(); i++ ) {
+        if ( m_cmb->text(i) == add ) {
+            bo->setCurrentItem( i );
+            return;
+        }
+    }
+    m_cmb->insertItem(add );
+    m_cmb->setCurrentItem( c );
+}
+void OListerCmbAccess::insert( const QString& str ) {
+    if ( m_cmb )
+        m_cmb->insertItem( str );
+}
+QString OListerCmbAccess::currentText()const {
+    QString str;
+    if (m_cmb )
+        str = m_cmb->currentText();
+
+    return str;
 }

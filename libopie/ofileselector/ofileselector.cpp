@@ -393,21 +393,20 @@ QString OFileSelector::currentMimeType() const{
 }
 void OFileSelector::slotMimeCheck(const QString &mime)
 {
-  if( m_selector == Normal ){
-      initializeOldSelector();
+    if( m_selector == Normal ){
+        initializeOldSelector();
 
-      updateMimes();
-      updateMimeCheck();
-      m_mimeCheck->setCurrentItem(indexByString( m_mimeCheck, mime) );
-  }else{ // others
-    qWarning("Mime %s", mime.latin1() );
-    if(m_shChooser ){
-      qWarning("Current Text %s", m_mimeCheck->currentText().latin1() );
-      //m_mimeCheck->setCurrentItem(indexByString( m_mimeCheck, mime)  );
+        updateMimes();
+        updateMimeCheck();
+        m_mimeCheck->setCurrentItem(indexByString( m_mimeCheck, mime) );
+    }else{ // others
+        qWarning("Mime %s", mime.latin1() );
+        if(m_shChooser ){
+            qWarning("Current Text %s", m_mimeCheck->currentText().latin1() );
+            //m_mimeCheck->setCurrentItem(indexByString( m_mimeCheck, mime)  );
+        }
+        reparse();
     }
-    reparse();
-  }
-
 }
 /*
  * Ok if a non dir gets inserted into this combobox

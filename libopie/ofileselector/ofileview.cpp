@@ -12,20 +12,14 @@ OFileView::OFileView( OFileSelector* sel)
 }
 OFileView::~OFileView() {
 }
-void OFileView::fileSelected( const QString& s ) {
-    m_sel->internFileSelected( s );
-}
-void OFileView::fileSelected( const DocLnk& s) {
-    m_sel->internFileSelected( s );
+void OFileView::fileSelected( const QString& dir,const QString& file,const QString& extra ) {
+    m_sel->currentLister()->fileSelected( dir,file,extra );
 }
 void OFileView::contextMenu() {
     m_sel->internContextMenu();
 }
-void OFileView::changedDir( const QString& s) {
-    m_sel->internChangedDir( s );
-}
-void OFileView::changedDir( const QDir& d ) {
-    m_sel->internChangedDir( d );
+void OFileView::changedDir( const QString& s,  const QString& file, const QString& extra) {
+    m_sel->currentLister()->changedDir( s, file,extra );
 }
 OFileSelector* OFileView::selector() const {
     return m_sel;
