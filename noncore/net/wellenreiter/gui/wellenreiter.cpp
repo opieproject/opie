@@ -123,11 +123,19 @@ Wellenreiter::~Wellenreiter()
     // no need to delete child widgets, Qt does it all for us
 
     delete manufacturerdb;
+
+    // X11-only - Hmm... Closing the socket here segfaults on exit,
+    // Maybe because the notifier still has a handle to it!? Seems not to
+    // occur on Qt/Embedded
+
+    #ifdef QWS
     if ( daemon_fd != -1 )
     {
         qDebug( "closing comm socket" );
         close( daemon_fd );
     }
+    #endif
+
 }
 
 void Wellenreiter::setConfigWindow( WellenreiterConfigWindow* cw )

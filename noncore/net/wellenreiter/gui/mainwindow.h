@@ -51,6 +51,7 @@ class WellenreiterMainWindow: public QMainWindow
     void demoAddStations();
     void fileSaveLog();
     void fileSaveSession();
+    void fileLoadSession();
 };
 
 #endif

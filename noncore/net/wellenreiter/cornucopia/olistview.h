@@ -33,14 +33,17 @@
 #ifndef OLISTVIEW_H
 #define OLISTVIEW_H
 
-#include <qlistview.h>
 #include <qcolor.h>
+#include <qlistview.h>
 #include <qpen.h>
+#include <qdatastream.h>
+
+class OListViewFactory;
 
 /**
- * A @ref QListView variant featuring visual enhancements
- * like an alternate background for odd rows and an autostretch
- * mode for the width of the widget.
+ * A @ref QListView variant featuring visual and functional enhancements
+ * like an alternate background for odd rows, an autostretch mode
+ * for the width of the widget ( >= Qt 3 only ) and persistence capabilities.
  *
  * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
  * @short OListView list/tree widget.
@@ -112,12 +115,50 @@
     */
     const QPen& columnSeparator() const;
 
+    #ifndef QT_NO_DATASTREAM
+   /**
+    * serialize this object to a @ref QDataStream
+    * @param s the stream used to serialize this object.
+    */
+    virtual void serializeTo( QDataStream& s ) const;
+
+   /**
+    * serialize this object from a @ref QDataStream
+    * @param s the stream used to serialize this object.
+    */
+    virtual void serializeFrom( QDataStream& s );
+    #endif
+
+   /**
+    * returns a factory for OListView classes
+    * creates one on the fly if it doesn't exist
+    * @return the XML Factory
+    */
+    #ifndef QT_NO_XML
+    //OListViewFactory* Factory();
+    #endif
+
   private:
     QColor m_alternateBackground;
     bool m_fullWidth;
     QPen m_columnSeparator;
-
+    #ifndef QT_NO_XML
+    //OListViewFactory* m_Factory;
+    #endif
 };
+
+#ifndef QT_NO_DATASTREAM
+/**
+  * \relates QListView
+  * Writes a listview to the stream and returns a reference to the stream.
+  */
+QDataStream& operator<<( QDataStream& s, const OListView& lv );
+/**
+  * \relates QListView
+  * Reads a listview from the stream and returns a reference to the stream.
+  */
+QDataStream& operator>>( QDataStream& s, OListView& lv );
+#endif // QT_NO_DATASTREAM
 
 //****************************** OListViewItem ******************************************************************
 
@@ -146,23 +187,51 @@ class OListViewItem: public QListViewItem
         QString = QString::null, QString = QString::null,
         QString = QString::null, QString = QString::null,
         QString = QString::null, QString = QString::null );
-    
+
     OListViewItem( QListViewItem * parent, QListViewItem * after,
         QString,     QString = QString::null,
         QString = QString::null, QString = QString::null,
         QString = QString::null, QString = QString::null,
         QString = QString::null, QString = QString::null );
-    
+
     virtual ~OListViewItem();
-    
+
     const QColor& backgroundColor();
     bool isAlternate();
     void paintCell( QPainter *p, const QColorGroup &cg, int column, int width, int alignment );
     void init();
+
+    #ifndef QT_NO_DATASTREAM
+   /**
+    * serialize this object to or from a @ref QDataStream
+    * @param s the stream used to serialize this object.
+    */
+    virtual void serializeTo( QDataStream& s ) const;
+
+   /**
+    * serialize this object to or from a @ref QDataStream
+    * @param s the stream used to serialize this object.
+    */
+    virtual void serializeFrom( QDataStream& s );
+    #endif
 
   private:
     bool m_known;
     bool m_odd;
 };
 
-#endif
+#ifndef QT_NO_DATASTREAM
+/**
+  * \relates QListViewItem
+  * Writes a listview item and all subitems recursively to the stream
+  * and returns a reference to the stream.
+  */
+QDataStream& operator<<( QDataStream &s, const OListViewItem& lvi );
+/**
+  * \relates QListViewItem
+  * Reads a listview item from the stream and returns a reference to the stream.
+  */
+QDataStream& operator>>( QDataStream &s, OListViewItem& lvi );
+#endif // QT_NO_DATASTREAM
+
+#endif // OLISTVIEW_H

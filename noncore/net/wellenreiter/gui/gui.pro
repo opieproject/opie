@@ -7,7 +7,6 @@ CONFIG          = qt warn_on debug
 HEADERS         = wellenreiterbase.h \
                   mainwindow.h \
                   wellenreiter.h \
-                  scanlistitem.h \
                   scanlist.h \
                   logwindow.h \
                   hexwindow.h \
@@ -20,7 +19,6 @@ SOURCES         = main.cpp \
                   mainwindow.cpp \
                   wellenreiterbase.cpp \
                   wellenreiter.cpp \
-                  scanlistitem.cpp \
                   scanlist.cpp \
                   logwindow.cpp \
                   hexwindow.cpp \

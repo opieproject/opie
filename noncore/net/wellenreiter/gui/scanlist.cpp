@@ -14,12 +14,10 @@
 **********************************************************************/
 
 #include "scanlist.h"
-#include "scanlistitem.h"
 
 #include <assert.h>
-
 #include "manufacturers.h"
-
+#include <qdatetime.h>
 #include <qtextstream.h>
 
 MScanListView::MScanListView( QWidget* parent, const char* name )
@@ -50,10 +48,22 @@ MScanListView::MScanListView( QWidget* parent, const char* name )
     setRootIsDecorated( true );
     setAllColumnsShowFocus( true );
 };
-    
+
 MScanListView::~MScanListView()
 {
 };
+
+void MScanListView::serializeTo( QDataStream& s) const
+{
+    qDebug( "serializing MScanListView" );
+    OListView::serializeTo( s );
+}
+
+void MScanListView::serializeFrom( QDataStream& s)
+{
+    qDebug( "serializing MScanListView" );
+    OListView::serializeFrom( s );
+}
 
 void MScanListView::setManufacturerDB( ManufacturerDB* manufacturerdb )
 {
@@ -69,9 +79,9 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
         (const char*) essid,
         (const char*) macaddr,
         channel );
-        
+
     // search, if we already have seen this net
-      
+
     QString s;
     MScanListItem* network;
     MScanListItem* item = static_cast<MScanListItem*> ( firstChild() );
@@ -98,9 +108,9 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
         else if ( pixmap == ani4 )
             nextpixmap = ani1;
         item->setPixmap( 0, *nextpixmap ); */
-        
+
         //qDebug( "current pixmap %d, next %d", pixmap, nextpixmap );
-        
+
         // we have already seen this net, check all childs if MAC exists
         
         network = item;
@@ -113,7 +123,7 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
             qDebug( "subitemtext: %s", (const char*) item->text( 2 ) );
             item = static_cast<MScanListItem*> ( item->itemBelow() );
         }
-        
+
         if ( item )
         {
             // we have already seen this item, it's a dupe
@@ -153,15 +163,101 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
 
 }
 
-void MScanListView::dump( QTextStream& t ) const
+#ifdef QWS
+#include <qpe/resource.h>
+#else
+#include "resource.h"
+#endif
+
+const int col_type = 0;
+const int col_essid = 0;
+const int col_sig = 1;
+const int col_ap = 2;
+const int col_channel = 3;
+const int col_wep = 4;
+const int col_traffic = 5;
+const int col_manuf = 6;
+const int col_firstseen = 7;
+const int col_lastseen = 8;
+
+MScanListItem::MScanListItem( QListView* parent, QString type, QString essid, QString macaddr,
+                              bool wep, int channel, int signal )
+               :OListViewItem( parent, essid, QString::null, macaddr, QString::null, QString::null ),
+                _type( type ), _essid( essid ), _macaddr( macaddr ), _wep( wep ),
+                _channel( channel ), _signal( signal ), _beacons( 0 )
 {
-    qDebug( "dumping scanlist..." );
-
-    QListViewItemIterator it( const_cast<MScanListView*>( this ) );
-    for ( ; it.current(); ++it )
-    {
-        static_cast<MScanListItem*>( it.current() )->dump( t );
-    }
-
-    qDebug( "dump finished." );
+    qDebug( "creating scanlist item" );
+    decorateItem( type, essid, macaddr, wep, channel, signal );
 }
+
+MScanListItem::MScanListItem( QListViewItem* parent, QString type, QString essid, QString macaddr,
+                              bool wep, int channel, int signal )
+               :OListViewItem( parent, essid, QString::null, macaddr, QString::null, QString::null )
+{
+    qDebug( "creating scanlist item" );
+    decorateItem( type, essid, macaddr, wep, channel, signal );
+}
+
+void MScanListItem::serializeTo( QDataStream& s ) const
+{
+    OListViewItem::serializeTo( s );
+}
+
+void MScanListItem::serializeFrom( QDataStream& s )
+{
+    OListViewItem::serializeFrom( s );
+}
+
+void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal )
+{
+    qDebug( "decorating scanlist item %s / %s / %s [%d]",
+        (const char*) type,
+        (const char*) essid,
+        (const char*) macaddr,
+        channel );
+
+    // set icon for managed or adhoc mode
+    QString name;
+    name.sprintf( "wellenreiter/%s", (const char*) type );
+    setPixmap( col_type, Resource::loadPixmap( name ) );
+
+    // set icon for wep (wireless encryption protocol)
+    if ( wep )
+        setPixmap( col_wep, Resource::loadPixmap( "wellenreiter/cracked" ) ); //FIXME: rename the pixmap!
+
+    // set channel and signal text
+
+    if ( signal != -1 )
+        setText( col_sig, QString::number( signal ) );
+    if ( channel != -1 )
+        setText( col_channel, QString::number( channel ) );
+
+    setText( col_firstseen, QTime::currentTime().toString() );
+    //setText( col_lastseen, QTime::currentTime().toString() );
+
+    listView()->triggerUpdate();
+
+    this->type = type;
+    _type = type;
+    _essid = essid;
+    _macaddr = macaddr;
+    _channel = channel;
+    _beacons = 0;
+    _signal = 0;
+}
+
+void MScanListItem::setManufacturer( const QString& manufacturer )
+{
+    setText( col_manuf, manufacturer );
+}
+
+void MScanListItem::receivedBeacon()
+{
+    _beacons++;
+    #ifdef DEBUG
+    qDebug( "MScanListItem %s: received beacon #%d", (const char*) _macaddr, _beacons );
+    #endif
+    setText( col_sig, QString::number( _beacons ) );
+    setText( col_lastseen, QTime::currentTime().toString() );
+}
+

@@ -32,15 +32,88 @@ class MScanListView: public OListView
     virtual ~MScanListView();
 
     void setManufacturerDB( ManufacturerDB* manufacturerdb );
-    void dump( QTextStream& t ) const;
+
+    virtual void serializeTo( QDataStream& s ) const;
+    virtual void serializeFrom( QDataStream& s );
 
   public slots:
     void addNewItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal );
-    
+
   private:
     ManufacturerDB* _manufacturerdb;
 
 };
+
+//****************************** MScanListItem ****************************************************************
+
+class MScanListItem: public OListViewItem
+{
+  public:
+    MScanListItem::MScanListItem( QListView* parent,
+                                  QString type,
+                                  QString essid,
+                                  QString macaddr,
+                                  bool wep,
+                                  int channel,
+                                  int signal );
+
+    MScanListItem::MScanListItem( QListViewItem* parent,
+                                  QString type,
+                                  QString essid,
+                                  QString macaddr,
+                                  bool wep,
+                                  int channel,
+                                  int signal );
+
+
+  protected:
+    virtual void decorateItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal );
+
+  public:
+    QString type;
+
+  public:
+    //const QString& type() { return _type; };
+    const QString& essid() { return _essid; };
+    const QString& macaddr() { return _macaddr; };
+    bool wep() { return _wep; };
+    int channel() { return _channel; };
+    int signal() { return _signal; };
+    int beacons() { return _beacons; };
+
+    void setSignal( int signal ) { /* TODO */ };
+    void receivedBeacon();
+
+    void setManufacturer( const QString& manufacturer );
+
+    virtual void serializeTo( QDataStream& s ) const;
+    virtual void serializeFrom( QDataStream& s );
+
+  private:
+    QString _type;
+    QString _essid;
+    QString _macaddr;
+    bool _wep;
+    int _channel;
+    int _signal;
+    int _beacons;
+
+};
+
+//****************************** MScanListViewFactory ****************************************************************
+
+/*
+
+class MScanListViewFactory : public OListViewFactory
+{
+public:
+    virtual QListView* listViewFactory();
+    virtual QListViewItem* listViewItemFactory( QListView* lv );
+    virtual QListViewItem* listViewItemFactory( QListViewItem* lvi );
+    virtual void setColumnText( int depth, QListViewItem* lvi, int column, const QString& text );
+    virtual void setCustomData( int depth, QListViewItem* lvi, const QString& text );
+}
+*/
 
 #endif
 

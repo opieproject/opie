@@ -123,6 +123,82 @@ void OListView::setColumnSeparator( const QPen& p )
     repaint();
 }
 
+#ifndef QT_NO_DATASTREAM
+void OListView::serializeTo( QDataStream& s ) const
+{
+    #warning Caution... the binary format is still under construction...
+    qDebug( "storing OListView..." );
+
+    // store number of columns and the labels
+    s << columns();
+    for ( int i = 0; i < columns(); ++i )
+        s << columnText( i );
+
+    // calculate the number of top-level items to serialize
+    int items = 0;
+    QListViewItem* item = firstChild();
+    while ( item )
+    {
+        item = item->nextSibling();
+        items++;
+    }
+
+    // store number of items and the items itself
+    s << items;
+    item = firstChild();
+    for ( int i = 0; i < items; ++i )
+    {
+        s << *static_cast<OListViewItem*>( item );
+        item = item->nextSibling();
+    }
+
+    qDebug( "OListview stored." );
+}
+
+void OListView::serializeFrom( QDataStream& s )
+{
+    #warning Caution... the binary format is still under construction...
+    qDebug( "loading OListView..." );
+
+    int cols;
+    s >> cols;
+    qDebug( "read number of columns = %d", cols );
+
+    while ( columns() < cols ) addColumn( QString::null );
+
+    for ( int i = 0; i < cols; ++i )
+    {
+        QString coltext;
+        s >> coltext;
+        qDebug( "read text '%s' for column %d", (const char*) coltext, i );
+        setColumnText( i, coltext );
+    }
+
+    int items;
+    s >> items;
+    qDebug( "read number of items = %d", items );
+
+    for ( int i = 0; i < items; ++i )
+    {
+        OListViewItem* item = new OListViewItem( this );
+        s >> *item;
+    }
+
+    qDebug( "OListView loaded." );
+
+}
+
+QDataStream& operator<<( QDataStream& s, const OListView& lv )
+{
+    lv.serializeTo( s );
+}
+
+QDataStream& operator>>( QDataStream& s, OListView& lv )
+{
+    lv.serializeFrom( s );
+}
+#endif // QT_NO_DATASTREAM
+
 //****************************** OListViewItem ***********************************************************************
 
 OListViewItem::OListViewItem(QListView *parent)
@@ -245,18 +321,87 @@ void OListViewItem::paintCell(QPainter *p, const QColorGroup &cg, int column, in
     const QPixmap *pm = listView()->viewport()->backgroundPixmap();
     if (pm && !pm->isNull())
     {
-        _cg.setBrush(QColorGroup::Base, QBrush(backgroundColor(), *pm));
+        _cg.setBrush( QColorGroup::Base, QBrush(backgroundColor(), *pm) );
         p->setBrushOrigin( -listView()->contentsX(), -listView()->contentsY() );
     }
     else if ( isAlternate() )
     {
         _cg.setColor( QColorGroup::Base, static_cast<OListView*>( listView() )->alternateBackground() );
     }
-    QListViewItem::paintCell(p, _cg, column, width, alignment);
+    QListViewItem::paintCell( p, _cg, column, width, alignment );
 
-    //FIXME: Use styling here?
+    //FIXME: Use styling here!
 
     const QPen& pen = static_cast<OListView*>( listView() )->columnSeparator();
     p->setPen( pen );
     p->drawLine( width-1, 0, width-1, height() );
 }
+
+#ifndef QT_NO_DATASTREAM
+void OListViewItem::serializeTo( QDataStream& s ) const
+{
+    #warning Caution... the binary format is still under construction...
+    qDebug( "storing OListViewItem..." );
+
+    // store item text
+    for ( int i = 0; i < listView()->columns(); ++i )
+    {
+        s << text( i );
+    }
+
+    // calculate the number of children to serialize
+    int items = 0;
+    QListViewItem* item = firstChild();
+    while ( item )
+    {
+        item = item->nextSibling();
+        items++;
+    }
+
+    // store number of items and the items itself
+    s << items;
+    item = firstChild();
+    for ( int i = 0; i < items; ++i )
+    {
+        s << *static_cast<OListViewItem*>( item );
+        item = item->nextSibling();
+    }
+
+    qDebug( "OListviewItem stored." );
+}
+void OListViewItem::serializeFrom( QDataStream& s )
+{
+    #warning Caution... the binary format is still under construction...
+    qDebug( "loading OListViewItem..." );
+
+    for ( int i = 0; i < listView()->columns(); ++i )
+    {
+        QString coltext;
+        s >> coltext;
+        qDebug( "read text '%s' for column %d", (const char*) coltext, i );
+        setText( i, coltext );
+    }
+
+    int items;
+    s >> items;
+    qDebug( "read number of items = %d", items );
+
+    for ( int i = 0; i < items; ++i )
+    {
+        OListViewItem* item = new OListViewItem( this );
+        s >> (*item);
+    }
+
+    qDebug( "OListViewItem loaded." );
+}
+
+QDataStream& operator<<( QDataStream& s, const OListViewItem& lvi )
+{
+    lvi.serializeTo( s );
+}
+
+QDataStream& operator>>( QDataStream& s, OListViewItem& lvi )
+{
+    lvi.serializeFrom( s );
+}
+#endif // QT_NO_DATASTREAM

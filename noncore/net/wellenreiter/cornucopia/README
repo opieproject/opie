@@ -1,3 +1,124 @@
----------------------------------------------------------------
-Dies ist ein Testballon für opielibs1.2 - Codename: Cornucopia
----------------------------------------------------------------
+/********************************************************************
+/*     This is an overview of the opielibs 1.2 project
+/********************************************************************/
+
+  Origin: opielibs is about creating classes to
+          * optimize Qt classes for the embedded environment
+          * provide sophisticated abstractions for developers
+          * provide complete documentation and working examples
+          * provide end users with a common look and feel
+          * reduce memory footprint through sharing code
+          * reduce possible bugs through reusing tested code
+
+--------------------------------------------------------
+1. General Overview
+--------------------------------------------------------
+
+Separation into the following libraries:
+ - libopiecore
+ - libopieui
+ - libopiepim
+ - libopienet
+
+1.1 Contents of libopiecore [ opiecore ]
+--------------------------------------------------------
+
+ - oprocctrl
+ - oprocess
+ - odevice
+ - odevicebutton
+
+ - oconfig
+ - oconfiggroupsaver
+ - ocompletionbase
+ - ocompletion
+ - ocomptreenodelist
+ - ocomptreenode
+ - ocompletionwrapper
+ - oglobal
+ - oglobalsettings
+ - osortableitem
+ - osortablevaluelist
+
+1.2 Contents of libopieui [ opieui ]
+--------------------------------------------------------
+
+ - oapplication
+
+ - ofiledialog
+ - colordialog
+ - oclickablelabel
+ - ocolorbutton
+ - colorpopupmenu
+ - otabinfo
+ - otabbar
+ - otabwidget
+ - ofontmenu
+ - ofontselector
+ - ofileview
+ - oticker
+
+ - olistview
+ - olistviewitem
+ - oversatileview
+ - oversatileviewitem
+ - ocompletionbox
+ - olineedit
+ - ocombobox
+ - ohistorycombo
+
+ - omessagebox
+ - odialogbase
+
+ - todayconfigwidget  (rather into opiepim?)
+ - orecurrancewidget  (rather into opiepim?)
+ - otimepicker        (rather into opiepim?)
+
+1.3 Contents of libopiepim [ opiepim ]
+--------------------------------------------------------
+
+ - ocheckitem
+ - todoevent
+ - todoresource
+ - todayplugininterface
+ - todovcalresource
+
+1.4 Contents of libopiedb [ opiedb ]
+--------------------------------------------------------
+
+ - tododb
+ - xmltree
+
+1.5 Contents of libopienet [ opienet ]
+--------------------------------------------------------
+
+ <libmail stuff>
+ <libbend stuff>
+ <libftp stuff>
+
+--------------------------------------------------------
+2.0 Feature Description
+--------------------------------------------------------
+
+2.1 libopiecore
+
+...
+
+2.2 libopieui
+
+...
+
+2.2.x OListView, OListViewItem, OListViewFactory
+
+...
+
+2.3 libopiepim
+
+...
+
+2.4 libopiedb
+
+...
+
+2.5 libopienet
+

@@ -21,6 +21,7 @@
 #include "scanlist.h"
 
 #include <qcombobox.h>
+#include <qdatastream.h>
 #include <qfile.h>
 #include <qiconset.h>
 #include <qmenubar.h>
@@ -43,6 +44,13 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     mw = new Wellenreiter( this );
     mw->setConfigWindow( cw );
     setCentralWidget( mw );
+
+    // setup application icon
+
+    #ifndef QWS
+    setIcon( Resource::loadPixmap( "wellenreiter/appicon-trans" ) );
+    setIconText( "Wellenreiter/X11" );
+    #endif
 
     // setup icon sets
 
@@ -99,11 +107,10 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
 
     QPopupMenu* fileLoad = new QPopupMenu( mb );
     fileLoad->insertItem( "&Session", this, SLOT( fileLoadSession() ) );
-    fileLoad->insertItem( "&Log", this, SLOT( fileLoadLog() ) );
+    //fileLoad->insertItem( "&Log", this, SLOT( fileLoadLog() ) );
 
     QPopupMenu* file = new QPopupMenu( mb );
     id = file->insertItem( "&Load", fileLoad );
-    file->setItemEnabled( id, false );
     file->insertItem( "&Save", fileSave );
 
     QPopupMenu* view = new QPopupMenu( mb );
@@ -185,7 +192,7 @@ WellenreiterMainWindow::~WellenreiterMainWindow()
 void WellenreiterMainWindow::demoAddStations()
 {
     mw->netView()->addNewItem( "managed", "Vanille", "00:00:20:EF:A6:43", true, 6, 80 );
-    mw->netView()->addNewItem( "managed", "Vanille", "00:00:1c:EF:A6:23", true, 11, 10 );
+    mw->netView()->addNewItem( "managed", "Vanille", "00:30:6D:EF:A6:23", true, 11, 10 );
     mw->netView()->addNewItem( "adhoc", "ELAN", "00:A0:F8:E7:16:22", false, 3, 10 );
     mw->netView()->addNewItem( "adhoc", "ELAN", "00:AA:01:E7:56:62", false, 3, 15 );
     mw->netView()->addNewItem( "adhoc", "ELAN", "00:B0:8E:E7:56:E2", false, 3, 20 );
@@ -215,8 +222,8 @@ void WellenreiterMainWindow::fileSaveSession()
     QFile f( fname );
     if ( f.open(IO_WriteOnly) )
     {
-        QTextStream t( &f );
-        mw->netView()->dump( t );
+        QDataStream t( &f );
+        t << *mw->netView();
         f.close();
         qDebug( "Saved session to file '%s'", (const char*) fname );
     }
@@ -224,6 +231,25 @@ void WellenreiterMainWindow::fileSaveSession()
     {
         qDebug( "Problem saving session to file '%s'", (const char*) fname );
     }
+}
+
+void WellenreiterMainWindow::fileLoadSession()
+{
+    const QString fname( "/tmp/session.xml" );
+    QFile f( fname );
+
+    if ( f.open(IO_ReadOnly) )
+    {
+        QDataStream t( &f );
+        t >> *mw->netView();
+        f.close();
+        qDebug( "Loaded session from file '%s'", (const char*) fname );
+    }
+    else
+    {
+        qDebug( "Problem loading session from file '%s'", (const char*) fname );
+    }
+
 }
 
 void WellenreiterMainWindow::closeEvent( QCloseEvent* e )
