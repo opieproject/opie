@@ -59,7 +59,6 @@ void AccountView::populate( QList<Account> list )
 
     imapAccounts.clear();
     mhAccounts.clear();
-
     mhAccounts.append(new MHviewItem(AbstractMail::defaultLocalfolder(),this));
 
     Account *it;

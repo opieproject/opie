@@ -81,12 +81,9 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
                                 0, 0, this );
     editAccounts->addTo( settingsMenu );
 
-    //setCentralWidget( view );
 
-    QVBox* wrapperBox = new QVBox( this );
-    setCentralWidget( wrapperBox );
-
-    QWidget *view = new QWidget( wrapperBox );
+    QWidget *view = new QWidget( this );
+    setCentralWidget( view );
     layout = new QBoxLayout ( view, QBoxLayout::LeftToRight );
 
     folderView = new AccountView( view );
@@ -106,9 +103,6 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     mailView->setShowSortIndicator(true);
     mailView->setSorting(4,false);
 
-    statusWidget = new StatusWidget( wrapperBox );
-    statusWidget->hide();
-
     layout->addWidget( mailView );
     layout->setStretchFactor( folderView, 1 );
     layout->setStretchFactor( mailView, 2 );
@@ -124,14 +118,18 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
              SLOT( mailLeftClicked(int,QListViewItem*,const QPoint&,int) ) );
     connect( mailView, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int) ),this,
              SLOT( mailHold(int,QListViewItem*,const QPoint&,int) ) );
+
     connect(folderView, SIGNAL(refreshMailview(const QValueList<RecMailP>&)),
             this,SLOT(refreshMailView(const QValueList<RecMailP>&)));
+
     connect( composeMail, SIGNAL( activated() ), SLOT( slotComposeMail() ) );
     connect( sendQueued, SIGNAL( activated() ), SLOT( slotSendQueued() ) );
+
 //    connect( searchMails, SIGNAL( activated() ), SLOT( slotSearchMails() ) );
     connect( editAccounts, SIGNAL( activated() ), SLOT( slotEditAccounts() ) );
     // Added by Stefan Eilers to allow starting by addressbook..
     // copied from old mail2
+
 #if !defined(QT_NO_COP)
     connect( qApp, SIGNAL( appMessage(const QCString&,const QByteArray&) ),
              this, SLOT( appMessage(const QCString&,const QByteArray&) ) );
@@ -140,7 +138,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
         this, SLOT( systemMessage(const QCString&,const QByteArray&) ) );
 #endif
 
-    QTimer::singleShot( 1000, this, SLOT( slotAdjustColumns() ) );
+    QTimer::singleShot( 10, this, SLOT( slotAdjustColumns() ) );
 }
 
 MainWindow::~MainWindow()

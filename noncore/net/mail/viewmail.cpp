@@ -196,7 +196,7 @@ void ViewMail::setBody(const RecBodyP&body )
 void ViewMail::slotShowHtml( bool state )
 {
     m_showHtml = state;
-    setText();
+    setMainText();
 }
 
 void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int )
@@ -206,7 +206,7 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
 
     if (  ( ( AttachItem* )item )->Partnumber() == -1 )
     {
-        setText();
+        setMainText();
         return;
     }
     QPopupMenu *menu = new QPopupMenu();
@@ -250,6 +250,15 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
 
     case 2:
         {
+            if (m_lastimagepart== (( AttachItem* )item )->Partnumber()) {
+                if (m_lastdlg) {
+                    setUpdatesEnabled(false);
+                    browser->hide();
+                    m_lastdlg->show();
+                    setUpdatesEnabled(true);
+                    return;
+                }
+            }
             QString tmpfile = QString("/tmp/opiemail-image-%1").arg(_icounter++);
             encodedString*content = m_recMail->Wrapper()->fetchDecodedPart( m_recMail, m_body->Parts()[ ( ( AttachItem* )item )->Partnumber() ] );
             if (content && content->Length()) {
@@ -276,18 +285,29 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
             } else {
                 QMessageBox::critical(this, tr("Reading attachment"), tr("Could not read content of attachment"));
             }
+            m_lastimagepart=(( AttachItem* )item )->Partnumber();
         }
         break;
     case 1:
         if (  ( ( AttachItem* )item )->Partnumber() == -1 )
         {
-            setText();
+            setMainText();
         }
         else
         {
             if (  m_recMail->Wrapper() != 0l )
             { // make sure that there is a wrapper , even after delete or simular actions
-                browser->setText( m_recMail->Wrapper()->fetchTextPart( m_recMail, m_body->Parts()[ ( ( AttachItem* )item )->Partnumber() ] ) );
+                if (m_lastdlg) {
+                    m_lastdlg->hide();
+                    browser->show();
+                }
+                if (m_lasttextpart == ( ( AttachItem* )item )->Partnumber() ) return;
+                m_lasttextpart = ( ( AttachItem* )item )->Partnumber();
+                QString s = m_recMail->Wrapper()->fetchTextPart( m_recMail, m_body->Parts()[ ( ( AttachItem* )item )->Partnumber() ] );;
+                if (item->text(0).right(4)!="html") {
+                    s = QString("<html><body>\n<font face=fixed>%1</font></body></html>").arg(QStyleSheet::convertFromPlainText(s));
+                }
+                browser->setText(s);
             }
         }
         break;
@@ -311,7 +331,7 @@ void ViewMail::setMail(const RecMailP&mail )
     m_mail2[2] = mail->Bcc();
 
     setCaption(tr("E-Mail by %1").arg( m_mail[0] ) );
-    setText();
+    setMainText();
 }
 
 
@@ -332,6 +352,8 @@ ViewMail::ViewMail( QWidget *parent, const char *name, WFlags fl)
     connect( attachments,  SIGNAL( clicked(QListViewItem*,const QPoint&, int) ), SLOT( slotItemClicked(QListViewItem*,const QPoint&, int) ) );
     m_lastdlg = 0;
     _icounter = 0;
+    m_lastimagepart = -1;
+    m_lasttextpart = -2;
 
     readConfig();
     attachments->setSorting(-1);
@@ -348,6 +370,7 @@ void ViewMail::slotImageInline(bool how)
         m_lastdlg->reparent(0,QPoint(0,0),false);
         delete m_lastdlg;
         m_lastdlg = 0;
+        m_lastimagepart = -1;
     }
 }
 
@@ -361,7 +384,7 @@ void ViewMail::readConfig()
     showHtml->setOn( m_showHtml );
 }
 
-void ViewMail::setText()
+void ViewMail::setMainText()
 {
     QString toString;
     QString ccString;
@@ -372,6 +395,8 @@ void ViewMail::setText()
         m_lastdlg->hide();
     }
     browser->show();
+    if (m_lasttextpart == -1) return;
+    m_lasttextpart = -1;
     for ( QStringList::Iterator it = ( m_mail2[0] ).begin(); it != ( m_mail2[0] ).end(); ++it )
     {
         toString += (*it);

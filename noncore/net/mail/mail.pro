@@ -11,7 +11,6 @@ HEADERS         = defines.h \
                opiemail.h \
                mailistviewitem.h \
                settingsdialog.h \
-               statuswidget.h \
                newmaildir.h \
                selectstore.h \
                selectsmtp.h \
@@ -30,7 +29,6 @@ SOURCES         = main.cpp \
                viewmailbase.cpp \
                mailistviewitem.cpp \
                settingsdialog.cpp \
-               statuswidget.cpp \
                newmaildir.cpp \
                selectstore.cpp \
                selectsmtp.cpp \
@@ -46,7 +44,6 @@ INTERFACES     = editaccountsui.ui \
                addresspickerui.ui \
                composemailui.ui \
                settingsdialogui.ui \
-               statuswidgetui.ui \
                newmaildirui.ui \
                selectstoreui.ui \
                nntpgroupsui.ui

@@ -9,7 +9,6 @@
 #include <qmenubar.h>
 
 #include "accountview.h"
-#include "statuswidget.h"
 
 #include <libmailwrapper/mailtypes.h>
 #include <opie2/osmartpointer.h>
@@ -45,7 +44,6 @@ protected slots:
 
 protected:
     QToolBar *toolBar;
-    StatusWidget *statusWidget;
     QMenuBar *menuBar;
     QPopupMenu *mailMenu, *settingsMenu;
     QAction *composeMail, *sendQueued, *showFolders, *searchMails, *deleteMails,

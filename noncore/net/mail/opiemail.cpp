@@ -107,14 +107,7 @@ OpieMail::OpieMail( QWidget *parent, const char *name, WFlags  )
 {
     setup_signalblocking();
     settings = new Settings();
-
     folderView->populate( settings->getAccounts() );
-#if 0
-    tvaluelist s = ValueExplode("a=1&b=holladiewaldfee&c=3&d=&e=3450");
-    for (int i = 0; i < s.count();++i) {
-        odebug<<"Key: " << s[i].key << " Value: " << s[i].data << oendl;
-    }
-#endif
 }
 
 OpieMail::~OpieMail()
@@ -248,10 +241,11 @@ void OpieMail::slotEditAccounts()
     odebug << "Edit Accounts" << oendl;
     EditAccounts eaDialog( settings, this, 0, true,  WStyle_ContextHelp );
     eaDialog.slotAdjustColumns();
-    QPEApplication::execDialog( &eaDialog );
+    if (QPEApplication::execDialog( &eaDialog )==QDialog::Rejected);// return;
+
     if ( settings ) delete settings;
     settings = new Settings();
-
+    mailView->clear();
     folderView->populate( settings->getAccounts() );
 }
 

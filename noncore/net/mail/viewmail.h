@@ -55,7 +55,7 @@ protected:
 protected slots:
     void slotReply();
     void slotForward();
-    void setText();
+    void setMainText();
     void slotItemClicked( QListViewItem * item , const QPoint & point, int c );
     void slotDeleteMail( );
     void slotShowHtml( bool );
@@ -72,6 +72,8 @@ private:
     bool m_showHtml:1;
     bool m_PicsInline:1;
     unsigned int _icounter;
+    int m_lastimagepart;
+    int m_lasttextpart;
 
     // 0 from  1 subject  2 bodytext 3 date
     QMap <int,QString>  m_mail;
