@@ -19,7 +19,9 @@
 /*                        */
 /* -------------------------------------------------------------------------- */
 // enhancements added by L.J. Potter <ljp@llornkcor.com>
-#define QT_QWS_OPIE
+//#define QT_QWS_OPIE
+
+#include "signal.h"
 
 #include <qpe/resource.h>
 
@@ -49,7 +51,7 @@
 #include <unistd.h>
 #include <pwd.h>
 #include <sys/types.h>
-#include <sys/wait.h>
+//#include <sys/wait.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -61,6 +63,10 @@
 #ifdef  QT_QWS_OPIE
 #include <opie/colorpopupmenu.h>
 #endif
+
+#include <qfontdatabase.h>	// U.B.
+#include <qstringlist.h>	// U.B.
+#include <qvaluelist.h>		// U.B.
 
 class EKNumTabBar : public QTabBar {
 public:
@@ -178,17 +184,18 @@ static void konsoleInit(const char** shell) {
     if(setuid(getuid()) !=0) qDebug("setuid failed");
     if(setgid(getgid()) != 0) qDebug("setgid failed"); // drop privileges
 
-
+//		signal (SIGSTOP, SIG_IGN);
+ 
 //  QPEApplication::grabKeyboard(); // for CTRL and ALT
 
-    qDebug("keyboard grabbed");
+//    qDebug("keyboard grabbed");
 #ifdef FAKE_CTRL_AND_ALT
     qDebug("Fake Ctrl and Alt defined");
     QPEApplication::grabKeyboard(); // for CTRL and ALT
 #endif
 
     *shell = getenv("SHELL");
-    qWarning("SHell initially is %s", *shell );
+//    qWarning("SHell initially is %s", *shell );
 
     if (shell == NULL || *shell == '\0') {
         struct passwd *ent = 0;
@@ -205,7 +212,7 @@ static void konsoleInit(const char** shell) {
         endpwent();
     }
 
-    qWarning("SHELL now is %s", *shell );
+//    qWarning("SHELL now is %s", *shell );
 
     if( putenv((char*)"COLORTERM=") !=0)
         qDebug("putenv failed"); // to trigger mc's color detection
@@ -219,7 +226,7 @@ Konsole::Konsole(QWidget* parent, const char* name, WFlags fl) :
     setCaption( tr("Terminal") );
 
     konsoleInit( &shell);
-    qWarning("Using shell %s", shell);
+//    qWarning("Using shell %s", shell);
     init(shell,tmp);
 }
 
@@ -261,6 +268,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   QString tmp;
   // initialize the list of allowed fonts ///////////////////////////////////
   cfont = cfg.readNumEntry("FontID", 1);
+
   QFont f = QFont("Micro", 4, QFont::Normal);
   f.setFixedPitch(TRUE);
   fonts.append(new VTFont(tr("Micro"), f));
@@ -273,7 +281,70 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   f.setFixedPitch(TRUE);
   fonts.append(new VTFont(tr("Medium Fixed"), f));
 
-  // create terminal emulation framework ////////////////////////////////////
+// NEW STUFF
+
+	QStringList ignfont = cfg.readListEntry("IgnFont", ',');
+    /* If there is no "IgnFont = ..." entry in "myonsole.conf",
+     * put some Japanese fonts of the SL-C7x0 to "ignfont".  */
+	
+	if (ignfont.isEmpty()) { 
+			ignfont = QStringList::split (',',"jisupasp,mmkjg1,mmkjg4,mmkjg5");
+	}
+
+//	QFont
+ 	f = QFont("Fixed", 16, QFont::Normal);
+  	f.setFixedPitch(true);
+  	fonts.append(new VTFont(tr("Default"), f));
+
+	int  fcount = 1;
+
+ 	f.setCharSet(QFont::AnyCharSet);
+ 	f.setStyleHint(QFont::TypeWriter, QFont::PreferMatch);
+//  f.setWeight(QFont::Normal);
+
+    /*
+     * Look for installed font families. If the family is not in
+     * the "ignfont" list, look for available sizes.
+     * If it is fixed pitch font, put the font and the size
+     * to the fontlist.
+     */
+	QFontDatabase fdb;
+	QStringList ff = fdb.families(false);
+
+	for (QStringList::Iterator it = ff.begin(); it != ff.end(); ++it ) {
+			QString fit = *it;
+
+			if( fit != "fixed" && fit != "micro" ) {
+					if ( ignfont.contains(*it) == 0) {
+							QValueList<int> pt = fdb.pointSizes(*it);
+
+							for (QValueList<int>::Iterator  itv  = pt.begin();
+									 itv != pt.end(); ++itv ) {
+									int  size = (*itv)/10;
+									if(size > 0) {
+											f.setFamily(*it);
+											f.setPointSize(size);
+									}
+
+									QFontMetrics fm(f);
+
+//qDebug("%s %d:\twidth('i')=%d, width('w')=%d", (*it).latin1(), (*itv)/10, fm.width('i'), fm.width('w'));
+
+									if (fm.width('i') == fm.width('w') ) {
+											qDebug((*it));
+											f.setFixedPitch(true);
+											fonts.append(new VTFont(*it + ' ' + QString::number(size), f));
+											fcount++;
+									}
+							}
+					}
+			}
+	}
+
+// END NEW STUFF
+	
+
+// create terminal emulation framework ////////////////////////////////////
   nsessions = 0;
 
   tab = new EKNumTabWidget(this);
@@ -292,6 +363,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
     VTFont *fnt = fonts.at(i);
     fontList->insertItem(fnt->getName(), i);
   }
+
   fontChanged(cfont);
 
   configMenu = new QPopupMenu( this);
@@ -625,13 +697,14 @@ void Konsole::setFont(int fontno)
 // --| color selection |-------------------------------------------------------
 
 void Konsole::changeColumns(int columns)
-{ //FIXME this seems to cause silliness when reset command is executed
-//     qDebug("change columns");
-//   TEWidget* te = getTe();
-//   if (te != 0) {
-//   setColLin(columns,te->Lines());
-//   te->update();
-//   }
+{
+			//FIXME this seems to cause silliness when reset command is executed
+// 		qDebug("change columns");
+// 		TEWidget* te = getTe();
+// 		if (te != 0) {
+// 				setColLin(columns,te->Lines());
+// 				te->update();
+// 		}
 }
 
 //FIXME: If a child dies during session swap,
