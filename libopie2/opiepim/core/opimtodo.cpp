@@ -117,6 +117,10 @@ OPimTodo::OPimTodo( bool completed, int priority,
     data->date = date;
     data->isCompleted = completed;
     data->hasDate = hasDate;
+    if ( priority < 1 )
+        priority = 1;
+    else if ( priority > 5 )
+        priority = 5;
     data->priority = priority;
     data->sum = summary;
     data->prog = progress;
@@ -139,6 +143,10 @@ OPimTodo::OPimTodo( bool completed, int priority,
     data->date = date;
     data->isCompleted = completed;
     data->hasDate = hasDate;
+    if ( priority < 1 )
+        priority = 1;
+    else if ( priority > 5 )
+        priority = 5;
     data->priority = priority;
     data->sum = summary;
     data->prog = progress;
@@ -339,6 +347,10 @@ void OPimTodo::setSummary( const QString& sum )
 void OPimTodo::setPriority( int prio )
 {
     changeOrModify();
+    if ( prio < 1 )
+        prio = 1;
+    else if ( prio > 5 )
+        prio = 5;
     data->priority = prio;
 }
 
