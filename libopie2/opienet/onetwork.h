@@ -39,6 +39,7 @@
 /* OPIE */
 
 #include <opie2/onetutils.h>
+#include <opie2/ostation.h>
 
 /* QT */
 
@@ -406,7 +407,7 @@ class OWirelessNetworkInterface : public ONetworkInterface
      * @returns the MAC address of the Access Point if the device is in infrastructure mode.
      * @returns a (more or less random) cell ID address if the device is in adhoc mode.
      */
-    virtual QString associatedAP() const;
+    virtual OMacAddress associatedAP() const;
     /**
      * Set the @a ssid (Service Set ID) string. This is used to decide
      * which network to associate with (use "any" to let the driver decide).
@@ -420,7 +421,7 @@ class OWirelessNetworkInterface : public ONetworkInterface
      * Perform scanning the wireless network neighbourhood.
      * @note: UNSTABLE API - UNDER CONSTRUCTION - DON'T USE!
      */
-    virtual int scanNetwork();
+    virtual OStationList* scanNetwork();
 
   protected:
     void buildInformation();

@@ -38,6 +38,13 @@
 OStation::OStation()
 {
     qDebug( "OStation::OStation()" );
+
+    type = "<unknown>";
+    macAddress = OMacAddress::unknown;
+    ssid = "<unknown>";
+    channel = 0;
+    apAddress = OMacAddress::unknown;
+
 }
 
 
@@ -47,3 +54,11 @@ OStation::~OStation()
 }
 
 
+void OStation::dump()
+{
+    qDebug( "------- OStation::dump() ------------" );
+    qDebug( "type: %s", (const char*) type );
+    qDebug( "mac:  %s", (const char*) macAddress.toString() );
+    qDebug( "ap:   %s", (const char*) apAddress.toString() );
+    qDebug( "ip:   %s", (const char*) ipAddress.toString() );
+}

@@ -34,8 +34,7 @@
 
 #include <opie2/onetutils.h>
 
-#include <qdict.h>
-#include <qmap.h>
+#include <qlist.h>
 #include <qstring.h>
 #include <qhostaddress.h>
 #include <qobject.h>
@@ -44,7 +43,7 @@
 
 class OStation;
 
-typedef QDict<OStation> OStationDict;
+typedef QList<OStation> OStationList;
 
 /*======================================================================================
  * OStation
@@ -56,12 +55,20 @@ class OStation
     OStation();
     ~OStation();
 
-  private:
+    void dump();
+
+    /* Ethernet */
+    QString type;
     OMacAddress macAddress;
     QHostAddress ipAddress;
+
+    /* WaveLan */
     QString ssid;
-    QString type;
+    OMacAddress apAddress;
+    int channel;
+    bool encrypted;
 };
+
 
 #endif // OSTATION_H
 

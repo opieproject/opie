@@ -1,4 +1,5 @@
 #include <opie2/onetwork.h>
+#include <opie2/ostation.h>
 #include <opie2/omanufacturerdb.h>
 
 int main( int argc, char** argv )
@@ -27,7 +28,7 @@ int main( int argc, char** argv )
 
             //if ( iface->mode() == OWirelessNetworkInterface::adhoc )
             //{
-                qDebug( "DEMO: Associated AP has MAC Address '%s'", (const char*) iface->associatedAP() );
+                qDebug( "DEMO: Associated AP has MAC Address '%s'", (const char*) iface->associatedAP().toString() );
             //}
 
             // nickname
@@ -58,11 +59,18 @@ int main( int argc, char** argv )
 
             // network scan
 
-            int stations = iface->scanNetwork();
-            if ( stations != -1 )
+            OStationList* stations = iface->scanNetwork();
+            if ( stations )
             {
-                qDebug( "DEMO: # of stations around = %d", stations );
+                qDebug( "DEMO: # of stations around = %d", stations->count() );
+                OStation* station;
+                for ( station = stations->first(); station != 0; station = stations->next() )
+                {
+                    qDebug( "DEMO: station dump following..." );
+                    station->dump();
+                }
             }
+
             else
             {
                 qDebug( "DEMO: Warning! Scan didn't work!" );

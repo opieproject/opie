@@ -256,6 +256,7 @@ QString ONetworkInterface::ipV4Address() const
     }
     else
         return "<unknown>";
+
 }
 
 
@@ -474,30 +475,16 @@ void OWirelessNetworkInterface::init()
 bool OWirelessNetworkInterface::isAssociated() const
 {
     //FIXME: handle different modes
-    return associatedAP() != "44:44:44:44:44:44";
+    return !(associatedAP() == OMacAddress::unknown);
 }
 
 
-QString OWirelessNetworkInterface::associatedAP() const
+OMacAddress OWirelessNetworkInterface::associatedAP() const
 {
-    //FIXME: use OMacAddress
-    QString mac;
-
     if ( ioctl( SIOCGIWAP ) )
-    {
-        mac.sprintf( "%.2X:%.2X:%.2X:%.2X:%.2X:%.2X",
-        _ifr.ifr_hwaddr.sa_data[0]&0xff,
-        _ifr.ifr_hwaddr.sa_data[1]&0xff,
-        _ifr.ifr_hwaddr.sa_data[2]&0xff,
-        _ifr.ifr_hwaddr.sa_data[3]&0xff,
-        _ifr.ifr_hwaddr.sa_data[4]&0xff,
-        _ifr.ifr_hwaddr.sa_data[5]&0xff );
-    }
+        return (const unsigned char*) &_ifr.ifr_hwaddr.sa_data[0];
     else
-    {
-        mac = "<Unknown>";
-    }
-    return mac;
+        return OMacAddress::unknown;
 }
 
 
@@ -688,18 +675,7 @@ OChannelHopper* OWirelessNetworkInterface::channelHopper() const
 
 void OWirelessNetworkInterface::setMode( const QString& mode )
 {
-    if ( mode == "auto" )            _iwr.u.mode = IW_MODE_AUTO;
-    else if ( mode == "adhoc" )      _iwr.u.mode = IW_MODE_ADHOC;
-    else if ( mode == "managed" )    _iwr.u.mode = IW_MODE_INFRA;
-    else if ( mode == "master" )     _iwr.u.mode = IW_MODE_MASTER;
-    else if ( mode == "repeater" )   _iwr.u.mode = IW_MODE_REPEAT;
-    else if ( mode == "secondary" )  _iwr.u.mode = IW_MODE_SECOND;
-    else if ( mode == "monitor" )    _iwr.u.mode = IW_MODE_MONITOR;
-    else
-    {
-        qDebug( "ONetwork: Warning! Invalid IEEE 802.11 mode '%s' specified.", (const char*) mode );
-        return;
-    }
+    _iwr.u.mode = stringToMode( mode );
     wioctl( SIOCSIWMODE );
 }
 
@@ -710,17 +686,7 @@ QString OWirelessNetworkInterface::mode() const
     {
         return "<unknown>";
     }
-    switch ( _iwr.u.mode )
-    {
-        case IW_MODE_AUTO: return "auto";
-        case IW_MODE_ADHOC: return "adhoc";
-        case IW_MODE_INFRA: return "managed";
-        case IW_MODE_MASTER: return "master";
-        case IW_MODE_REPEAT: return "repeater";
-        case IW_MODE_SECOND: return "secondary";
-        case IW_MODE_MONITOR: return "monitor";
-        default: assert( 0 ); // shouldn't happen
-    }
+    return modeToString( _iwr.u.mode );
 }
 
 
@@ -830,14 +796,16 @@ void OWirelessNetworkInterface::setSSID( const QString& ssid )
 }
 
 
-int OWirelessNetworkInterface::scanNetwork()
+OStationList* OWirelessNetworkInterface::scanNetwork()
 {
     _iwr.u.param.flags = IW_SCAN_DEFAULT;
     _iwr.u.param.value = 0;
     if ( !wioctl( SIOCSIWSCAN ) )
     {
-        return -1;
+        return 0;
     }
+
+    OStationList* stations = new OStationList();
 
     int timeout = 1000000;
 
@@ -886,13 +854,11 @@ int OWirelessNetworkInterface::scanNetwork()
         if ( !_iwr.u.data.length )
         {
             qDebug( " - no results (empty neighbourhood)" );
-            return 0;
+            return stations;
         }
 
         qDebug( " - results are in!" );
         dumpBytes( (const unsigned char*) &buffer[0], _iwr.u.data.length );
-
-        int stations = 0;
 
         // parse results
 
@@ -906,10 +872,31 @@ int OWirelessNetworkInterface::scanNetwork()
             qDebug( "reading next event... cmd=%d, len=%d", we->cmd, we->len );
             switch (we->cmd)
             {
-                case SIOCGIWAP: qDebug( "SIOCGIWAP" ); stations++; break;
-                case SIOCGIWMODE: qDebug( "SIOCGIWMODE" ); break;
-                case SIOCGIWFREQ: qDebug( "SIOCGIWFREQ" ); break;
-                case SIOCGIWESSID: qDebug( "SIOCGIWESSID" ); break;
+                case SIOCGIWAP:
+                {
+                    qDebug( "SIOCGIWAP" );
+                    stations->append( new OStation() );
+                    stations->last()->macAddress = (const unsigned char*) &we->u.ap_addr.sa_data[0];
+                    break;
+                }
+                case SIOCGIWMODE:
+                {
+                    qDebug( "SIOCGIWMODE" );
+                    stations->last()->type = modeToString( we->u.mode );
+                    break;
+                }
+                case SIOCGIWFREQ:
+                {
+                    qDebug( "SIOCGIWFREQ" );
+                    stations->last()->channel = _channels[ static_cast<int>(double( we->u.freq.m ) * pow( 10.0, we->u.freq.e ) / 1000000) ];
+                    break;
+                }
+                case SIOCGIWESSID:
+                {
+                    qDebug( "SIOCGIWESSID" );
+                    stations->last()->ssid = we->u.essid.pointer;
+                    break;
+                }
                 case SIOCGIWSENS: qDebug( "SIOCGIWSENS" ); break;
                 case SIOCGIWENCODE: qDebug( "SIOCGIWENCODE" ); break;
                 case IWEVTXDROP: qDebug( "IWEVTXDROP" ); break;         /* Packet dropped to excessive retry */
@@ -924,11 +911,13 @@ int OWirelessNetworkInterface::scanNetwork()
             we = (struct iw_event*) &buffer[offset];
         }
 
+        return stations;
+
     }
     else
     {
         qDebug( " - no results (timeout) :(" );
-        return 0;
+        return stations;
     }
 }
 

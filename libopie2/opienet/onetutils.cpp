@@ -34,7 +34,7 @@
 #include <opie2/omanufacturerdb.h>
 
 #include <net/if.h>
-
+#include <cassert>
 #include <cstdio>
 using namespace std;
 
@@ -213,3 +213,31 @@ void dumpBytes( const unsigned char* data, int num )
     printf( "\n\n" );
 }
 
+
+int stringToMode( const QString& mode )
+{
+    if ( mode == "auto" )            return IW_MODE_AUTO;
+    else if ( mode == "adhoc" )      return IW_MODE_ADHOC;
+    else if ( mode == "managed" )    return IW_MODE_INFRA;
+    else if ( mode == "master" )     return IW_MODE_MASTER;
+    else if ( mode == "repeater" )   return IW_MODE_REPEAT;
+    else if ( mode == "secondary" )  return IW_MODE_SECOND;
+    else if ( mode == "monitor" )    return IW_MODE_MONITOR;
+    else assert( 0 );
+}
+
+
+QString modeToString( int mode )
+{
+    switch ( mode )
+    {
+        case IW_MODE_AUTO:          return "auto";
+        case IW_MODE_ADHOC:         return "adhoc";
+        case IW_MODE_INFRA:         return "managed";
+        case IW_MODE_MASTER:        return "master";
+        case IW_MODE_REPEAT:        return "repeater";
+        case IW_MODE_SECOND:        return "second";
+        case IW_MODE_MONITOR:       return "monitor";
+        default: assert( 0 );
+    }
+}

@@ -84,9 +84,10 @@ bool operator==( const OMacAddress &m1, const OMacAddress &m2 );
 
 class OHostAddress : public QHostAddress
 {
-  public:
+  /*public:
     OHostAddress();
     ~OHostAddress();
+  */
 };
 
 
@@ -120,9 +121,9 @@ class OPrivateIOCTL : public QObject
  * Miscellaneous
  *======================================================================================*/
 
-/* dump bytes */
-
 void dumpBytes( const unsigned char* data, int num );
+QString modeToString( int );
+int stringToMode( const QString& );
 
 /* Network to host order macros */
 
