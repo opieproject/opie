@@ -55,6 +55,7 @@ private:
 
     int m_autoStart;
     int m_autoStartTimer;
+    int m_iconSize;
     QStringList m_excludeApplets;
     bool m_applets_changed;
 
@@ -66,6 +67,7 @@ private:
     QSpinBox* SpinBox7;
     QLabel* TimeLabel;
     QSpinBox* SpinBoxTime;
+    QSpinBox* SpinBoxIconSize;
 };
 
 #endif

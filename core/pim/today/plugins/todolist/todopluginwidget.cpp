@@ -30,7 +30,7 @@
 TodolistPluginWidget::TodolistPluginWidget( QWidget *parent,  const char* name )
     : QWidget( parent, name ) {
 
-    todoLabel= 0l;
+    todoLabel = 0l;
     todo = 0l;
 
     if ( todo ) {

@@ -28,7 +28,7 @@ TodolistPlugin::~TodolistPlugin() {
 }
 
 QString TodolistPlugin::pluginName() const {
-    return "Todolist plugin";
+    return QObject::tr( "Todolist plugin" );
 }
 
 double TodolistPlugin::versionNumber() const {
@@ -52,7 +52,7 @@ TodayConfigWidget* TodolistPlugin::configWidget( QWidget* wid ) {
 }
 
 QString TodolistPlugin::appName() const {
-    return  QObject::tr( "Todolist" );
+    return  "todolist";
 }
 
 

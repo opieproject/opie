@@ -114,6 +114,8 @@ void Today::init() {
 
     m_excludeApplets = cfg.readListEntry( "ExcludeApplets", ',' );
     m_allApplets = cfg.readListEntry( "AllApplets", ',' );
+    cfg.setGroup( "General" );
+    m_iconSize = cfg.readNumEntry( "IconSize", 18 );
 }
 
 
@@ -134,7 +136,6 @@ void Today::loadPlugins() {
 
     QStringList list = dir.entryList();
     QStringList::Iterator it;
-
 
     QMap<QString, TodayPlugin> tempList;
 
@@ -163,9 +164,11 @@ void Today::loadPlugins() {
             plugin.guiBox = new QWidget( this );
             QHBoxLayout *boxLayout = new QHBoxLayout( plugin.guiBox );
             QPixmap plugPix;
-            plugPix.convertFromImage( Resource::loadImage( plugin.guiPart->pixmapNameWidget() ).smoothScale( 18, 18 ), 0 );
+            plugPix.convertFromImage( Resource::loadImage( plugin.guiPart->pixmapNameWidget() ).smoothScale( m_iconSize, m_iconSize ), 0 );
             OClickableLabel* plugIcon = new OClickableLabel( plugin.guiBox );
             plugIcon->setPixmap( plugPix );
+            plugIcon->setName( plugin.guiPart->appName() );
+            connect( plugIcon, SIGNAL( clicked() ), this, SLOT( startApplication() ) );
             // a scrollview for each plugin
             QScrollView* sv = new QScrollView( plugin.guiBox );
             QWidget *plugWidget = plugin.guiPart->widget( sv->viewport() );
@@ -251,7 +254,7 @@ void Today::startConfig() {
 
     TodayConfig conf( this, "dialog", true );
 
-    TodayPlugin plugin;
+     TodayPlugin plugin;
     QList<TodayConfigWidget> configWidgetList;
 
     for ( int i = pluginList.count() - 1  ; i >= 0; i-- ) {
@@ -310,6 +313,11 @@ void Today::startAddressbook() {
     e << QString( "addressbook" );
 }
 
+
+void Today::startApplication() {
+    QCopEnvelope e( "QPE/System", "execute(QString)" );
+    e << QString( sender()->name() );
+}
 
 /**
  * launch addressbook (personal card)

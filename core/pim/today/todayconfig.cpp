@@ -29,6 +29,7 @@
 #include <qhbox.h>
 #include <qvbox.h>
 #include <qtoolbutton.h>
+#include <qtooltip.h>
 
 class ToolButton : public QToolButton {
 
@@ -81,11 +82,19 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal, WFlags 
     TextLabel2->setText( tr( "autostart on \nresume?\n (Opie only)" ) );
     CheckBoxAuto = new QCheckBox( hbox_auto, "CheckBoxAuto" );
     QHBox *hbox_inactive = new QHBox( tab_3 );
-    TimeLabel = new QLabel( hbox_inactive  , "TimeLabel" );
+    TimeLabel = new QLabel( hbox_inactive, "TimeLabel" );
     TimeLabel->setText( tr( "minutes inactive" ) );
     SpinBoxTime = new QSpinBox( hbox_inactive, "TimeSpinner" );
+    QHBox *hbox_iconSize = new QHBox( tab_3 );
+    QLabel *iconSizeLabel = new QLabel( hbox_iconSize, "iconSizeLabel" );
+    iconSizeLabel->setText( tr( "Icon size" ) );
+    //  iconSizeLabel->setToolTip( tr( "Set the icon size in pixel" ) );
+    SpinBoxIconSize = new QSpinBox( hbox_iconSize, "TimeSpinner" );
+    SpinBoxIconSize->setMaxValue( 32 );
+
     tab3Layout->addWidget( hbox_auto );
     tab3Layout->addWidget( hbox_inactive );
+    tab3Layout->addWidget( hbox_iconSize );
     TabWidget3->addTab( tab_3, "SettingsIcon", tr( "Misc" ) );
 
     m_applets_changed = false;
@@ -108,7 +117,7 @@ void TodayConfig::setAutoStart() {
         QCopEnvelope e( "QPE/System", "autoStart(QString,QString,QString)" );
         e << QString( "add" );
         e << QString( "today" );
-        e << QString("%1").arg( m_autoStartTimer );
+        e << QString( "%1" ).arg( m_autoStartTimer );
     } else {
         QCopEnvelope e( "QPE/System", "autoStart(QString,QString)" );
         e << QString( "remove" );
@@ -126,6 +135,10 @@ void TodayConfig::readConfig() {
     CheckBoxAuto->setChecked( m_autoStart );
     m_autoStartTimer = cfg.readNumEntry( "autostartdelay", 0 );
     SpinBoxTime->setValue( m_autoStartTimer );
+
+    cfg.setGroup( "General" );
+    m_iconSize = cfg.readNumEntry( "IconSize", 18 );
+    SpinBoxIconSize->setValue( m_iconSize );
 
     cfg.setGroup( "Plugins" );
     m_excludeApplets = cfg.readListEntry( "ExcludeApplets", ',' );
@@ -168,6 +181,11 @@ void TodayConfig::writeConfig() {
     cfg.writeEntry( "autostart",  m_autoStart );
     m_autoStartTimer = SpinBoxTime->value();
     cfg.writeEntry( "autostartdelay", m_autoStartTimer );
+    m_iconSize = SpinBoxIconSize->value();
+
+    cfg.setGroup( "General" );
+    cfg.writeEntry( "IconSize", m_iconSize );
+
 
     // set autostart settings
     setAutoStart();

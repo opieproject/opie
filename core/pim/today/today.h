@@ -32,7 +32,7 @@
 #include <opie/todayplugininterface.h>
 
 class QVBoxLayout;
-
+class OClickableLabel;
 
 
 class Today : public TodayBase {
@@ -46,6 +46,7 @@ class Today : public TodayBase {
 private slots:
     void startConfig();
     void startAddressbook();
+    void startApplication();
     void editCard();
     void refresh();
 
@@ -64,9 +65,8 @@ private slots:
     QStringList m_excludeApplets;
     QStringList m_allApplets;
 
-    // QString m_autoStartTimer;
     int m_newStart;
-    //  int m_autoStart;
+    int m_iconSize;
     int m_maxCharClip;
 };
 

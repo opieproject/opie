@@ -26,11 +26,11 @@ MailPlugin::~MailPlugin() {
 }
 
 QString MailPlugin::pluginName() const {
-    return "Mail plugin";
+    return QObject::tr( "Mail plugin" );
 }
 
 double MailPlugin::versionNumber() const {
-    return 0.5;
+    return 0.6;
 }
 
 QString MailPlugin::pixmapNameWidget() const {
@@ -50,7 +50,7 @@ TodayConfigWidget* MailPlugin::configWidget( QWidget* wid ) {
 }
 
 QString MailPlugin::appName() const {
-    return "Mail";
+    return "mail";
 }
 
 

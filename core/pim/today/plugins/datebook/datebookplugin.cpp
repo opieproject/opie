@@ -30,7 +30,7 @@ DatebookPlugin::~DatebookPlugin() {
 }
 
 QString DatebookPlugin::pluginName() const {
-    return "Datebook plugin";
+    return QObject::tr( "Datebook plugin");
 }
 
 double DatebookPlugin::versionNumber() const {
@@ -54,6 +54,6 @@ TodayConfigWidget* DatebookPlugin::configWidget( QWidget* wid ) {
 }
 
 QString DatebookPlugin::appName()  const {
-    return QObject::tr( "Datebook" );
+    return "datebook";
 }
 
