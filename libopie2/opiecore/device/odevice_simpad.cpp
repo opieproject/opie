@@ -55,10 +55,22 @@
 #include <linux/soundcard.h>
 #endif
 
-using namespace Opie::Core;
-using namespace Opie::Core::Internal;
+namespace Opie {
+namespace Core {
+namespace Internal {
+namespace {
+struct s_button {
+    uint model;
+    Qt::Key code;
+    char *utext;
+    char *pix;
+    char *fpressedservice;
+    char *fpressedaction;
+    char *fheldservice;
+    char *fheldaction;
+};
 
-struct s_button simpad_buttons [] = {
+static struct s_button simpad_buttons [] = {
     { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
     Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Lower+Up"),
     "devicebuttons/simpad_lower_up",
@@ -113,6 +125,8 @@ struct s_button simpad_buttons [] = {
     "buttonsettings", "raise()" },
     */
 };
+}
+
 
 void SIMpad::init(const QString&)
 {
@@ -149,7 +163,8 @@ void SIMpad::initButtons()
 
     d->m_buttons = new QValueList <ODeviceButton>;
 
-    for ( uint i = 0; i < ( sizeof( simpad_buttons ) / sizeof( s_button )); i++ ) {
+    uint size = sizeof(simpad_buttons)/sizeof(s_button);
+    for ( uint i = 0; i < size; i++ ) {
         s_button *sb = simpad_buttons + i;
         ODeviceButton b;
 
@@ -380,4 +395,8 @@ void SIMpad::updateAllWidgets() {
     }
 
     delete list;
+}
+
+}
+}
 }

@@ -68,18 +68,6 @@ protected:
 private:
     static void updateAllWidgets();
 };
-
-struct s_button {
-    uint model;
-    Qt::Key code;
-    char *utext;
-    char *pix;
-    char *fpressedservice;
-    char *fpressedaction;
-    char *fheldservice;
-    char *fheldaction;
-};
-
 }
 }
 }
