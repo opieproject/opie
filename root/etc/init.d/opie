@@ -1,93 +1,85 @@
 #!/bin/sh
 # 
 
-export LOGNAME=root
-export HOME=/$LOGNAME
+[ -z $LOGNAME ] && export LOGNAME=root
+[ -z $HOME ] && export HOME=/$LOGNAME
+
 export QTDIR=/opt/QtPalmtop
 export OPIEDIR=/opt/QtPalmtop
 export QPEDIR=/opt/QtPalmtop
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$OPIEDIR/lib
 export PATH=$PATH:$OPIEDIR/bin
 
+if [ -e /proc/hal/model ] ; then
+	ipaq=`cat /proc/hal/model`
+
+    case "$ipaq" in 
+        "3100" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
+        "3600" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
+        "3700" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
+        "3800" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
+        "3900" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
+        *)       echo "Unknown iPAQ model: $ipaq" ;;
+    esac
+else
+    export QWS_DISPLAY=Transformed:Rot270:0
+fi
+
+
 if [ ! -x $OPIEDIR/bin/qpe ] ; then 
     echo Opie not installed
     exit 0  
 fi
 
-$OPIEDIR/bin/opie-reorgfiles
-
 . /etc/profile
-
-killproc() {
-        pid=`/bin/ps -e | /bin/sed -n -e '/\<'$1'\>/ s/^ *\([0-9][0-9]*\).*/\1/p'`
-        [ "$pid" != "" ] && kill $pid
-}
 
 case $1 in
 'start')
-
-	cd $HOME
-	rm -f /etc/rc2.d/S99x # Can't have both running!
-
-	if [ -e /proc/hal/model ] ; then
-
-	    IPAQ=`cat /proc/hal/model`
-	
-	    echo iPAQ type $IPAQ  
-	    case $IPAQ in 
-    		"3100" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
-    		"3600" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
-    		"3700" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
-    		"3800" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
-    		"3900" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
-    		*) echo "Unknown processor type -`module_id`-!" ;;
-   	    esac
-	 else
-    	    export QWS_DISPLAY=Transformed:Rot270:0
-	 fi
-
-	
-	 if [ -x /usr/bin/ssh-agent ]; then
-               SSHAGENT=/usr/bin/ssh-agent
-         else
-               SSHAGENT=""
-         fi
-
-	if [ -x $OPIEDIR/bin/opie-sh-ssh-askpass.sh ]; then
-		export SSH_ASKPASS=$OPIEDIR/bin/opie-sh-ssh-askpass.sh
-	fi
-
-	if [ -x $OPIEDIR/bin/opie-login ]; then
-	    if ! killall -0 syslogd 2>/dev/null >/dev/null; then
-    		echo Starting Opie-login....
-		$SSHAGENT $OPIEDIR/bin/opie-login 2>/dev/null >/dev/null &
-	    else
-		echo Starting Opie-login with syslog logging.....
-		($SSHAGENT $OPIEDIR/bin/opie-login  2>&1 | logger ) &
-	    fi
-	else
-	    if ! killall -0 syslogd 2>/dev/null >/dev/null; then
-    		echo Starting Opie....
-		$SSHAGENT $OPIEDIR/bin/qpe 2>/dev/null >/dev/null &
-	    else
-		echo Starting Opie with syslog logging.....
-		($SSHAGENT $OPIEDIR/bin/qpe 2>&1 | logger ) &
-	    fi
-	fi
-
-	;;
-'stop')
-        echo "Killing Opie..."
-        if [ -f /var/run/opie.pid ]; then
-        	kill -TERM `cat /var/run/opie.pid`
+    cd $HOME
+    rm -f /etc/rc2.d/S99x # Can't have both running!
+    
+    if [ -x $OPIEDIR/bin/opie-login ]; then
+        if ! killall -0 syslogd 2>/dev/null >/dev/null; then
+            echo Starting Opie-login....
+            $OPIEDIR/bin/opie-login 2>/dev/null >/dev/null &
         else
-        	killproc qpe
+            echo Starting Opie-login with syslog logging.....
+            ( $OPIEDIR/bin/opie-login  2>&1 | logger ) &
         fi
+    else
+        $OPIEDIR/bin/opie-reorgfiles
+        if [ -x /usr/bin/ssh-agent ]; then
+             SSHAGENT=/usr/bin/ssh-agent
+        else
+             SSHAGENT=""
+        fi
+        
+        if [ -x $OPIEDIR/bin/opie-sh-ssh-askpass.sh ]; then
+            export SSH_ASKPASS=$OPIEDIR/bin/opie-sh-ssh-askpass.sh
+        fi
+            
+        if ! killall -0 syslogd 2>/dev/null >/dev/null; then
+            echo Starting Opie....
+            $SSHAGENT $OPIEDIR/bin/qpe 2>/dev/null >/dev/null &
+        else
+            echo Starting Opie with syslog logging.....
+            ( $SSHAGENT $OPIEDIR/bin/qpe 2>&1 | logger ) &
+        fi
+    fi
 
-        killproc opie-login
-        ;;
+    ;;
+
+'stop')
+    echo "Killing Opie..."
+    killall qpe
+    killall opie-login
+
+    ;;
+
 *)
-        echo "usage: $0 { start | stop }"
-        ;;
+    echo "usage: $0 { start | stop }"
+
+    ;;
+
 esac
 
