@@ -15,12 +15,15 @@
 #include "file_layer.h"
 #include "profile.h"
 #include "profiledialogwidget.h"
+#include "emulation_layer.h"
 
+class Widget;
 class MetaFactory {
 public:
     typedef ProfileDialogWidget* (*configWidget)(const QString&, QWidget* parent);
     typedef IOLayer* (*iolayer)(const Profile& );
     typedef FileTransferLayer* (*filelayer)(IOLayer*);
+    typedef EmulationLayer* (*emulationLayer)(Widget* );
 
     MetaFactory();
     ~MetaFactory();
@@ -50,14 +53,31 @@ public:
                                const QString&,
                                filelayer );
 
+    /**
+     * adds a Factory for Emulation to the Layer..
+     */
+    void addEmulationLayer ( const QCString& name,
+                              const QString& uiString,
+                              emulationLayer );
+
     /* translated UI Strings */
     QStringList ioLayers()const;
     QStringList connectionWidgets()const;
+
+    /**
+     * Terminal Configuration widgets
+     */
     QStringList terminalWidgets()const;
     QStringList fileTransferLayers()const;
+    QStringList emulationLayers()const;
+
+    /**
+     * the generation...
+     */
     IOLayer* newIOLayer( const QString&,const Profile& );
     ProfileDialogWidget *newConnectionPlugin ( const QString&, QWidget* );
     ProfileDialogWidget* newTerminalPlugin( const QString&, QWidget* );
+    EmulationLayer* newEmulationLayer(const QString&, Widget* );
 
     /*
      * internal takes the maybe translated
@@ -79,6 +99,7 @@ private:
     QMap<QString, configWidget> m_termFact;
     QMap<QString, iolayer> m_layerFact;
     QMap<QString, filelayer> m_fileFact;
+    QMap<QString, emulationLayer> m_emu;
 };
 
 

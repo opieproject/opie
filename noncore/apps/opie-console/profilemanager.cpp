@@ -2,9 +2,12 @@
 #include <stdlib.h>
 
 #include <qfile.h>
+#include <qlayout.h>
+#include <qwidgetstack.h>
 
 #include <qpe/config.h>
 
+#include "widget.h"
 #include "metafactory.h"
 #include "profileconfig.h"
 #include "profilemanager.h"
@@ -51,17 +54,40 @@ void ProfileManager::clear() {
 Profile::ValueList ProfileManager::all()const {
     return m_list;
 }
-Session* ProfileManager::fromProfile( const Profile& prof) {
+/*
+ * Our goal is to create a Session
+ * We will load the the IOLayer and EmulationLayer
+ * from the factory
+ * we will generate a QWidgetStack
+ * add a dummy widget with layout
+ * add "Widget" to the layout
+ * add the dummy to the stack
+ * raise the dummy
+ * call session->connect(=
+ * this way we only need to reparent
+ * in TabWidget
+ */
+Session* ProfileManager::fromProfile( const Profile& prof,  QWidget* parent) {
     Session* session = new Session();
     session->setName( prof.name() );
-    session->setIOLayer(m_fact->newIOLayer(prof.ioLayerName(),
-                                           prof) );
-    /*
-     * FIXME
-     * load emulation
-     * load widget?
-     * set colors + fonts
-     */
+    /* translate the internal name to the external */
+    session->setIOLayer(m_fact->newIOLayer( m_fact->external(prof.ioLayerName()) ,
+                                            prof) );
+
+    QWidgetStack *stack = new QWidgetStack(parent);
+    session->setWidgetStack( stack );
+    QWidget* dummy = new QWidget(stack );
+    QHBoxLayout* lay = new QHBoxLayout(dummy );
+    stack->addWidget( dummy, 0 );
+    stack->raiseWidget( 0 );
+    Widget* wid = new Widget(dummy );
+    lay->addWidget( wid );
+
+    session->setEmulationWidget( wid );
+    session->setEmulationLayer( m_fact->newEmulationLayer( m_fact->external( prof.terminalName() ),
+                                                        wid ) );
+    session->connect();
+
     return session;
 }
 void ProfileManager::save(  ) {

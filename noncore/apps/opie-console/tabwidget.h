@@ -2,20 +2,21 @@
 #define OPIE_TAB_WIDGET_H
 
 #include <qmap.h>
-#include <opie/otabwidget.h>
+#include <qtabwidget.h>
 
 #include "session.h"
 /**
  * This is our central tab widget
  * we can add sessions here
  */
-class TabWidget : public OTabWidget{
+class TabWidget : public QTabWidget{
     Q_OBJECT
 public:
     TabWidget(QWidget *parent, const char* name );
     ~TabWidget();
     void add( Session* );
     void remove( Session* );
+    void setCurrent( Session* );
 
 signals:
     void activated(Session* ses );

@@ -622,7 +622,7 @@ void Vt102Emulation::sendString(const char* s)
   emit sndBlock( tmp);
 }
 
-void Vt102Emulation::sendString(const QByteArray s)
+void Vt102Emulation::sendString(const QByteArray& s)
 {
   emit sndBlock( s );
 }

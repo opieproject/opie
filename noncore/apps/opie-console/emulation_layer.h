@@ -26,7 +26,7 @@
 #ifndef EMULATION_LAYER_H
 #define EMULATION_LAYER_H
 
-#include "widget.h"
+#include "widget_layer.h"
 #include "screen.h"
 #include <qtimer.h>
 #include <stdio.h>

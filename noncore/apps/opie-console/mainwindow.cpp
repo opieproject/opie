@@ -5,9 +5,11 @@
 #include <qpopupmenu.h>
 #include <qtoolbar.h>
 
+#include "profileeditordialog.h"
 #include "configdialog.h"
 #include "default.h"
 #include "metafactory.h"
+#include "profile.h"
 #include "profilemanager.h"
 #include "mainwindow.h"
 #include "tabwidget.h"
@@ -109,7 +111,9 @@ void MainWindow::initUI() {
 ProfileManager* MainWindow::manager() {
     return m_manager;
 }
-
+TabWidget* MainWindow::tabWidget() {
+    return m_consoleWindow;
+}
 void MainWindow::populateProfiles() {
     m_sessionsPop->clear();
     Profile::ValueList list = manager()->all();
@@ -137,6 +141,12 @@ QList<Session> MainWindow::sessions() {
 
 void MainWindow::slotNew() {
     qWarning("New Connection");
+    ProfileEditorDialog dlg(factory() );
+    int ret = dlg.exec();
+
+    if ( ret == QDialog::Accepted ) {
+        create( dlg.profile() );
+    }
 }
 
 void MainWindow::slotConnect() {
@@ -152,8 +162,8 @@ void MainWindow::slotDisconnect() {
 void MainWindow::slotTerminate() {
     if ( currentSession() )
         currentSession()->layer()->close();
-    delete m_curSession;
-    m_curSession = 0l;
+
+    slotClose();
     /* FIXME move to the next session */
 }
 
@@ -170,11 +180,37 @@ void MainWindow::slotConfigure() {
         populateProfiles();
     }
 }
-
+/*
+ * we will remove
+ * this window from the tabwidget
+ * remove it from the list
+ * delete it
+ * and set the currentSession()
+ */
 void MainWindow::slotClose() {
+    if (!currentSession() )
+        return;
+
+    tabWidget()->remove( currentSession() );
+    tabWidget()->setCurrent( m_sessions.first() );
+    m_sessions.remove( m_curSession );
+    delete m_curSession;
+    m_curSession = m_sessions.first();
 }
 
-void MainWindow::slotProfile( int ) {
+/*
+ * We will get the name
+ * Then the profile
+ * and then we will make a profile
+ */
+void MainWindow::slotProfile( int id) {
+    Profile prof = manager()->profile( m_sessionsPop->text( id)  );
+    create( prof );
+}
+void MainWindow::create( const Profile& prof ) {
+    Session *ses = manager()->fromProfile( prof, tabWidget() );
 
-
+    m_sessions.append( ses );
+    tabWidget()->add( ses );
+    m_curSession = ses;
 }

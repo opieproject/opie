@@ -1,5 +1,7 @@
 can we please get a working serial connection for now? if that works
 i can test file transfers and stuff. -hash
+sure. I finished the ConfigDialog and now doing the Profile->Session
+stuff. Then you just need to click Open -zecke
 
 From a UNIX point of view we want to do something like minicom
 with a better GUI.
@@ -18,17 +20,19 @@ the future
 Framework
 Serial IOLayer
 Saving and Restoring Profiles
+ConfigDialog Framework
+FilesendingLayer - hash
 
 TASKS in progress:
 Profile->Session and MainWidget --- Harlekin
-FilesendingLayer - hash
 IOLayer - wazlaf
-Configuration - josef
 TE - ibotty
-
-OPEN tasks:
 Session->Profile - hash
 Scripting - wazlaf 
+
+OPEN tasks:
+Irda  ConfigWidget
+BT ConfigWidget
 Keys - open
 IRDA-Layer - open
 Bluetooth-Layer - open

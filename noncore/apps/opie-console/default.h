@@ -3,6 +3,8 @@
 
 #include "metafactory.h"
 
+class Widget;
+
 extern "C" {
     FileTransferLayer* newSZTransfer(IOLayer*);
     FileTransferLayer* newSYTransfer(IOLayer*);
@@ -17,6 +19,8 @@ extern "C" {
     ProfileDialogWidget* newBTWidget    (const QString&, QWidget* );
 
     ProfileDialogWidget* newTerminalWidget(const QString&, QWidget* );
+
+    EmulationLayer* newVT102( Widget* );
 };
 
 class MetaFactory;

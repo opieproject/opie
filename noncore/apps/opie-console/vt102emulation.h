@@ -86,7 +86,7 @@ public:
   /**
    * sends a list of bytes to the IOLayer
    */
-  void sendString(const QByteArray);
+  void sendString(const QByteArray&);
 
   /**
    * @deprecated use QByteArray instead

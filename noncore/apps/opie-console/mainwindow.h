@@ -17,7 +17,7 @@ class QAction;
 class MetaFactory;
 class TabWidget;
 class ProfileManager;
-
+class Profile;
 class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
@@ -45,6 +45,7 @@ public:
      *
      */
     ProfileManager* manager();
+    TabWidget* tabWidget();
 
 private slots:
     void slotNew();
@@ -58,6 +59,7 @@ private slots:
 private:
     void initUI();
     void populateProfiles();
+    void create( const Profile& );
     /**
      * the current session
      */

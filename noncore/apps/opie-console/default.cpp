@@ -2,6 +2,7 @@
 #include "sz_transfer.h"
 #include "serialconfigwidget.h"
 #include "terminalwidget.h"
+#include "vt102emulation.h"
 
 #include "default.h"
 
@@ -44,6 +45,11 @@ extern "C" {
         return new TerminalWidget(na, wid,0 );
     }
 
+    // VT Emulations
+    EmulationLayer* newVT102( Widget* wid ) {
+        return new Vt102Emulation( wid );
+    }
+
 };
 
 Default::Default( MetaFactory* fact ) {
@@ -61,6 +67,7 @@ Default::Default( MetaFactory* fact ) {
 
     fact->addTerminalWidgetFactory( "default", QObject::tr("Default Terminal"),  newTerminalWidget );
 
+    fact->addEmulationLayer( "default", QObject::tr("Default Terminal"), newVT102 );
 }
 Default::~Default() {
 

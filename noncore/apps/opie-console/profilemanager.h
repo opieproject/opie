@@ -22,7 +22,7 @@ public:
     void add( const Profile& prof );
     void remove( const Profile& prof );
     Profile profile(const QString& name )const;
-    Session* fromProfile( const Profile& );
+    Session* fromProfile( const Profile& , QWidget* parent = 0l);
     void setProfiles( const Profile::ValueList& );
     void save();
 private:

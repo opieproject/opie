@@ -30,6 +30,12 @@ void MetaFactory::addFileTransferLayer( const QCString& name,
     m_strings.insert(str, name );
     m_fileFact.insert( str, lay );
 }
+void MetaFactory::addEmulationLayer( const QCString& name,
+                                     const QString& str,
+                                     emulationLayer em) {
+    m_strings.insert(str, name );
+    m_emu.insert( str, em );
+}
 QStringList MetaFactory::ioLayers()const {
     QStringList list;
     QMap<QString, iolayer>::ConstIterator it;
@@ -58,6 +64,14 @@ QStringList MetaFactory::fileTransferLayers()const {
     QStringList list;
     QMap<QString, filelayer>::ConstIterator it;
     for ( it = m_fileFact.begin(); it != m_fileFact.end(); ++it ) {
+        list << it.key();
+    }
+    return list;
+}
+QStringList MetaFactory::emulationLayers()const {
+    QStringList list;
+    QMap<QString, emulationLayer>::ConstIterator it;
+    for ( it = m_emu.begin(); it != m_emu.end(); ++it ) {
         list << it.key();
     }
     return list;
@@ -100,6 +114,17 @@ ProfileDialogWidget *MetaFactory::newTerminalPlugin( const QString& str, QWidget
         wid = (*(it.data() ) )(str,parent);
     }
     return wid;
+}
+EmulationLayer* MetaFactory::newEmulationLayer( const QString& str, Widget* wid) {
+    EmulationLayer* lay = 0l;
+
+    QMap<QString, emulationLayer>::Iterator it;
+    it = m_emu.find( str );
+    if ( it != m_emu.end() ) {
+        lay = (*(it.data() ) )(wid);
+    }
+
+    return lay;
 }
 QCString MetaFactory::internal( const QString& str )const {
     return m_strings[str];

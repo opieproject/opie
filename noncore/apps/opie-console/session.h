@@ -1,9 +1,11 @@
 #ifndef OPIE_SESSION_H
 #define OPIE_SESSION_H
 
-#include <qwidget.h>
+#include <qwidgetstack.h>
 
 class IOLayer;
+class EmulationLayer;
+class Widget;
 /**
  * This is a Session. A session contains
  * a QWidget pointer and a IOLayer
@@ -17,7 +19,7 @@ public:
      * ownership get's transfered
      */
     Session();
-    Session( const QString&, QWidget* widget, IOLayer* );
+    Session( const QString&, QWidgetStack* widget, IOLayer* );
     ~Session();
 
     /**
@@ -26,22 +28,46 @@ public:
     QString name()const;
 
     /**
-     * return the widget
+     * return the widgetstack
+     * this is used to be semi modal
+     * for FileTransfer
+     *
+     * semi modal == SessionModal
      */
-    QWidget* widget();
+    QWidgetStack* widgetStack();
 
     /**
      * return the layer
      */
     IOLayer* layer();
-    void setWidget( QWidget* widget );
+
+    EmulationLayer* emulationLayer();
+    Widget* emulationWidget();
+
+    /*
+     * connects the data flow from
+     * the IOLayer to the EmulationLayer
+     */
+    void connect();
+
+    /*
+     * disconnect the dataflow
+     * this will be done for ft
+     */
+    void disconnect();
+
+    void setWidgetStack( QWidgetStack* widget );
+    void setEmulationLayer( EmulationLayer* lay );
+    void setEmulationWidget( Widget* lay );
     void setIOLayer( IOLayer*  );
     void setName( const QString& );
 
 private:
     QString m_name;
-    QWidget* m_widget;
+    QWidgetStack* m_widget;
     IOLayer* m_layer;
+    EmulationLayer* m_emLay;
+    Widget* m_widLay;
 
 };
 
