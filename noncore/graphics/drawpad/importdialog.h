@@ -38,7 +38,7 @@ private slots:
     void preview();
 
 private:
-    Opie::OFileSelector* m_pFileSelector;
+    Opie::Ui::OFileSelector* m_pFileSelector;
     QLabel* m_pPreviewLabel;
     QCheckBox* m_pAutomaticPreviewCheckBox;
 };

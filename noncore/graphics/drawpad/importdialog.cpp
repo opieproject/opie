@@ -21,15 +21,16 @@
 #include <qlayout.h>
 #include <qpushbutton.h>
 
+using namespace Opie::Ui;
 ImportDialog::ImportDialog(QWidget* parent, const char* name)
     : QDialog(parent, name, true)
 {
     setCaption(tr("DrawPad - Import"));
 
     MimeTypes types; types.insert( tr("All images"),"image/*" );
-    m_pFileSelector = new Opie::OFileSelector(this,
-				    Opie::OFileSelector::FileSelector,
-					Opie::OFileSelector::Normal,
+    m_pFileSelector = new OFileSelector(this,
+                                        OFileSelector::FileSelector,
+					OFileSelector::Normal,
 					QString::null,
 					QString::null, types );
     m_pFileSelector->setNameVisible( false );

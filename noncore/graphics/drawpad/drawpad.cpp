@@ -35,7 +35,7 @@
 
 #include <qpe/applnk.h>
 #include <qpe/config.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 
@@ -48,6 +48,8 @@
 #include <qtooltip.h>
 #include <qwhatsthis.h>
 
+using namespace Opie::Ui;
+using namespace Opie::Ui;
 DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags /*fl*/ )
     : QMainWindow(parent, name, WStyle_ContextHelp)
 {

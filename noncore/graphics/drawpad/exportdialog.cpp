@@ -26,6 +26,7 @@
 
 #include <stdlib.h>
 
+using namespace Opie::Ui;
 ExportDialog::ExportDialog(uint pageAt, uint pageCount, QWidget* parent, const char* name)
     : QDialog(parent, name, true)
 {
@@ -66,8 +67,8 @@ ExportDialog::ExportDialog(uint pageAt, uint pageCount, QWidget* parent, const c
     m_pFormatComboBox->insertStrList(QImageIO::outputFormats());
 
     MimeTypes types; types.insert( tr("All Images"), "image/*" );
-    Opie::OFileSelector* fileSelector = new Opie::OFileSelector(this, Opie::OFileSelector::FileSelector,
-						   Opie::OFileSelector::Normal,
+    OFileSelector* fileSelector = new OFileSelector(this, OFileSelector::FileSelector,
+						   OFileSelector::Normal,
 						   QString::null, QString::null,
 						   types );
     fileSelector->setNameVisible( false );
