@@ -44,6 +44,7 @@ class QPopupMenu;
 class QFile;
 class QListViewItem;
 class QLineEdit;
+
 //class QPushButton;
 class QToolButton;
 class Ir;
@@ -116,7 +117,8 @@ protected:
   bool zaurusDevice;
   QGridLayout *tabLayout, *tabLayout_2, *tabLayout_3;
   QStringList remoteDirPathStringList, localDirPathStringList;
-
+  QLineEdit *renameBox;
+ 
   void init();
   void initConnections();
   void keyReleaseEvent( QKeyEvent *);
@@ -149,8 +151,13 @@ protected slots:
   void fileBeamFinished( Ir *);
 
 private:
-      QTimer menuTimer;
-      void startProcess(const QString &);
+    QString oldName;
+    QTimer menuTimer;
+    void startProcess(const QString &);
+    bool eventFilter( QObject * , QEvent * );
+    void cancelRename();
+    void doRename(QListView *);
+    void okRename();
 private slots:
     void processEnded();
 };

@@ -339,44 +339,6 @@ void AdvancedFm::remoteDelete() {
     populateRemoteView();
 }
 
-void AdvancedFm::localRename() {
-  QString curFile = Local_View->currentItem()->text(0);
-  qDebug("currentItem "+curFile);
-  if( curFile !="../") {
-    InputDialog *fileDlg;
-    fileDlg = new InputDialog(this,tr("Rename"),TRUE, 0);
-    fileDlg->setInputText((const QString &)curFile);
-    fileDlg->exec();
-    if( fileDlg->result() == 1 ) {
-      QString oldname = currentDir.canonicalPath() + "/" + curFile;
-      QString newName = currentDir.canonicalPath() + "/" + fileDlg->LineEdit1->text();
-//+".playlist";
-      if( rename(oldname.latin1(), newName.latin1())== -1)
-        QMessageBox::message(tr("Note"),tr("Could not rename"));
-    }
-    populateLocalView();
-  }
-}
-
-void AdvancedFm::remoteRename()
-{
-  QString curFile = Remote_View->currentItem()->text(0);
-  if( curFile !="../") {
-    InputDialog *fileDlg;
-    fileDlg = new InputDialog(this,tr("Rename"),TRUE, 0);
-    fileDlg->setInputText((const QString &)curFile);
-    fileDlg->exec();
-    if( fileDlg->result() == 1 ) {
-      QString oldname = currentRemoteDir.canonicalPath() + "/" + curFile;
-      QString newName = currentRemoteDir.canonicalPath() + "/" + fileDlg->LineEdit1->text();
-//+".playlist";
-      if( rename(oldname.latin1(), newName.latin1())== -1)
-        QMessageBox::message(tr("Note"),tr("Could not rename"));
-    }
-    populateRemoteView();
-  }
-}
-
 
 void AdvancedFm::filePerms() {
 
@@ -1046,4 +1008,118 @@ void AdvancedFm::startProcess(const QString & cmd) {
 void AdvancedFm::processEnded() {
   populateLocalView();
   populateRemoteView();
+}
+
+bool AdvancedFm::eventFilter( QObject * o, QEvent * e ) {
+    if ( o->inherits( "QLineEdit" ) ) {
+        if ( e->type() == QEvent::KeyPress ) {
+            QKeyEvent *ke = (QKeyEvent*)e;
+            if ( ke->key() == Key_Return ||
+                 ke->key() == Key_Enter ) {
+                okRename();
+                return true;
+            } else if ( ke->key() == Key_Escape ) {
+                cancelRename();
+                return true;
+            }
+        } else if ( e->type() == QEvent::FocusOut ) {
+            cancelRename();
+            return true;
+        }
+    }
+    return QWidget::eventFilter( o, e );
+}
+
+
+void AdvancedFm::cancelRename() {
+    qDebug("cancel rename");
+    QListView * view;
+    if (TabWidget->getCurrentTab() == 0) {
+        view = Local_View;
+    }
+    else
+      {
+          view = Remote_View;
+      }
+
+    bool resetFocus = view->viewport()->focusProxy() == renameBox;
+    delete renameBox;
+    renameBox = 0;
+    if ( resetFocus ) {
+        view->viewport()->setFocusProxy( view);
+        view->setFocus();
+    }
+}
+
+void AdvancedFm::doRename(QListView * view) {
+
+    QRect r = view->itemRect( view->currentItem( ));
+    r = QRect( view->viewportToContents( r.topLeft() ), r.size() );
+    r.setX( view->contentsX() );
+    if ( r.width() > view->visibleWidth() )
+        r.setWidth( view->visibleWidth() );
+
+    renameBox = new QLineEdit( view->viewport(), "qt_renamebox" );
+    renameBox->setFrame(true);
+
+    renameBox->setText(  view->currentItem()->text(0) );
+
+    renameBox->selectAll();
+    renameBox->installEventFilter( this );
+    view->addChild( renameBox, r.x(), r.y() );
+    renameBox->resize( r.size() );
+    view->viewport()->setFocusProxy( renameBox );
+    renameBox->setFocus();
+    renameBox->show();
+
+}
+
+
+void AdvancedFm::localRename() {
+    oldName = Local_View->currentItem()->text(0);
+    doRename(Local_View );
+    populateLocalView();
+}
+
+void AdvancedFm::remoteRename()
+{
+    oldName = Remote_View->currentItem()->text(0);
+    doRename(Local_View );
+    populateRemoteView();
+}
+
+void AdvancedFm::okRename() {
+    QString newName = renameBox->text();
+    cancelRename();
+    int tabs=0;
+     QListView * view;
+     tabs = TabWidget->getCurrentTab();
+     if ( tabs == 0)
+       {
+           view = Local_View;
+           QString path =  currentDir.canonicalPath() + "/";
+           oldName = path + oldName;
+           newName = path + newName;
+        }
+     else
+       {
+           view = Remote_View;
+           QString path =  currentRemoteDir.canonicalPath() + "/";
+           oldName = path + oldName;
+           newName = path + newName;
+       }
+
+     if(  view->currentItem() == NULL)
+         return;
+       if( rename(oldName.latin1(), newName.latin1())== -1)
+         QMessageBox::message(tr("Note"),tr("Could not rename"));
+       else
+           oldName = "";
+
+    view->takeItem( view->currentItem() );
+    delete view->currentItem();
+    if ( tabs == 0)
+        populateLocalView();
+    else
+        populateRemoteView();
 }
