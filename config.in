@@ -46,6 +46,11 @@ config OE_HOST_SYS
   depends TARGET_OE
   string "OE host system"
   default "i686-linux"
+
+config OE_TARGET_SYS
+  depends TARGET_OE
+  string "OE target system"
+  default "arm-linux"
       
 config OPTIMIZE
   boolean "Use optimizations"

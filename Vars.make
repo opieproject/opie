@@ -17,11 +17,12 @@ ifndef CONFIG_TARGET_OE
     endif
 else
     OEDIR:=$(shell echo $(CONFIG_OE_BUILD_DIR) | sed -e's/"//g')
-    QTDIR:=$(shell echo $(OEDIR) | sed -e's/"//g')/tmp/staging/arm-linux/qt2
+    OEHOSTSYS:=$(shell echo $(CONFIG_OE_HOST_SYS) | sed -e's/"//g')
+    OETARGETSYS:=$(shell echo $(CONFIG_OE_TARGET_SYS) | sed -e's/"//g')
+    QTDIR:=$(shell echo $(OEDIR) | sed -e's/"//g')/tmp/staging/$(OETARGETSYS)/qt2
     $(shell mkdir -p $(QTDIR)/src/moc)
     $(shell echo -e "all: \n\t" >>$(QTDIR)/src/moc/Makefile)
     PLATFORM=sharp-linux
-    OEHOSTSYS:=$(shell echo $(CONFIG_OE_HOST_SYS) | sed -e's/"//g')
 endif
 
 ifdef CONFIG_TARGET_X86
