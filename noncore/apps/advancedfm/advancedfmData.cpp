@@ -128,7 +128,7 @@ void AdvancedFm::init() {
 	 menuButton->insertItem( s_addBookmark);
 	 menuButton->insertItem( s_removeBookmark);
 	 menuButton->insertSeparator();
-	 menuButton->setFocusPolicy(NoFocus);
+// menuButton->setFocusPolicy(NoFocus);
 	 CBHB->addWidget( menuButton );
 
 	 customDirsToMenu();
@@ -136,7 +136,7 @@ void AdvancedFm::init() {
 	 currentPathCombo = new QComboBox( FALSE, this, "currentPathCombo" );
 	 currentPathCombo->setEditable(TRUE);
 	 currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
-	 currentPathCombo->setFocusPolicy(NoFocus);
+//	 currentPathCombo->setFocusPolicy(NoFocus);
 	 CBHB->addWidget( currentPathCombo );
 
 	 layout->addLayout( CBHB );

@@ -282,13 +282,13 @@ void AdvancedFm::refreshCurrentTab() {
 
 void AdvancedFm::switchToLocalTab() {
 		TabWidget->setCurrentWidget(0);
-		Local_View->setFocus();
+//		Local_View->setFocus();
 		whichTab = 1;
 }
 
 void AdvancedFm::switchToRemoteTab() {
 		TabWidget->setCurrentWidget(1);
-		Remote_View->setFocus();
+//		Remote_View->setFocus();
 		whichTab = 2;
 }
 
@@ -381,9 +381,13 @@ void AdvancedFm::keyPressEvent( QKeyEvent *e) {
 }
 
 void AdvancedFm::keyReleaseEvent( QKeyEvent *e) {
-   if( CurrentView()->hasFocus() )
-      e->ignore();
-		if(  e->key() ==  Key_Left ) 
+//     if( CurrentView()->hasFocus() )
+//        e->ignore();
+		if( currentPathCombo->lineEdit()->hasFocus()) {
+//				qDebug("shout!");
+		}
+
+				else if(  e->key() ==  Key_Left ) 
 				upDir();
 		else if( e->key() == Key_Return || e->key() == Key_Enter)
 				navigateToSelected();
@@ -755,7 +759,7 @@ void AdvancedFm::setOtherTabCurrent() {
    } else {
       TabWidget->setCurrentWidget(0);
    }
-    OtherView()->setFocus();
+//    OtherView()->setFocus();
     OtherView()->setSelected( CurrentView()->firstChild(), true);
 }
 

@@ -45,7 +45,7 @@ void AdvancedFm::doDirChange() {
       if( pathItem.find(" -> ",0,TRUE) != -1)
          pathItem = dealWithSymName((const QString&)pathItem)+"/";
 //      owarn << pathItem << oendl; 
-      gotoDirectory( CurrentDir()->path()+"/"+pathItem.left( pathItem.length() - 1) );
+      changeTo( CurrentDir()->path()+"/"+pathItem.left( pathItem.length() - 1) );
    }
 }
 
@@ -740,25 +740,26 @@ void AdvancedFm::oprocessStderr(OProcess*, char *buffer, int ) {
 }
 
 bool AdvancedFm::eventFilter( QObject * o, QEvent * e ) {
-  if ( o->inherits( "QLineEdit" ) )  {
-      if ( e->type() == QEvent::KeyPress ) {
-          QKeyEvent *ke = (QKeyEvent*)e;
-          if ( ke->key() == Key_Return ||
-               ke->key() == Key_Enter )  {
-              okRename();
-              return true;
+		if ( o->inherits( "QLineEdit" ) )  {
+				qDebug("QLineEdit event");
+				if ( e->type() == QEvent::KeyPress ) {
+						QKeyEvent *ke = (QKeyEvent*)e;
+						if ( ke->key() == Key_Return ||
+								 ke->key() == Key_Enter )  {
+								okRename();
+								return true;
             }
-          else if ( ke->key() == Key_Escape ) {
+						else if ( ke->key() == Key_Escape ) {
                 cancelRename();
                 return true;
-              }
+						}
         }
-      else if ( e->type() == QEvent::FocusOut ) {
+				else if ( e->type() == QEvent::FocusOut ) {
             cancelRename();
             return true;
-          }
+				}
     }
-   if ( o->inherits( "QListView" ) ) {
+/*   if ( o->inherits( "QListView" ) ) {
        if ( e->type() == QEvent::FocusIn ) {
 //            if( o == Local_View) { //keep track of which view
 //  							qDebug("local view");
@@ -770,7 +771,7 @@ bool AdvancedFm::eventFilter( QObject * o, QEvent * e ) {
        }
        OtherView()->setSelected( OtherView()->currentItem(), FALSE );//make sure there's correct selection
      }
-
+*/
   return QWidget::eventFilter( o, e );
 }
 
@@ -812,30 +813,31 @@ void AdvancedFm::doRename(QListView * view) {
 
 
 void AdvancedFm::renameIt() {
-        if( !CurrentView()->currentItem()) return;
+		if( !CurrentView()->currentItem()) return;
 
-        QListView *thisView = CurrentView();
+		QListView *thisView = CurrentView();
     oldName = thisView->currentItem()->text(0);
     doRename( thisView );
 }
 
 void AdvancedFm::okRename() {
-   if( !renameBox) return;
+		qDebug("okrename");
+		if( !renameBox) return;
 
-   QString newName = renameBox->text();
-     cancelRename();
-     QListView * view = CurrentView();
-   QString path =  CurrentDir()->canonicalPath() + "/";
-   oldName = path + oldName;
-   newName = path + newName;
-   if( rename( oldName.latin1(), newName.latin1())== -1)
-      QMessageBox::message(tr("Note"),tr("Could not rename"));
-   else
-      oldName = "";
-   QListViewItem *item = view->currentItem();
-   view->takeItem( item );
-   delete item;
-     rePopulate();
+		QString newName = renameBox->text();
+		cancelRename();
+		QListView * view = CurrentView();
+		QString path =  CurrentDir()->canonicalPath() + "/";
+		oldName = path + oldName;
+		newName = path + newName;
+		if( rename( oldName.latin1(), newName.latin1())== -1)
+				QMessageBox::message(tr("Note"),tr("Could not rename"));
+		else
+				oldName = "";
+		QListViewItem *item = view->currentItem();
+		view->takeItem( item );
+		delete item;
+		rePopulate();
 }
 
 void AdvancedFm::openSearch() {
