@@ -33,6 +33,8 @@
 
 
 #include <qtimer.h>
+#include <qpe/qcopenvelope_qws.h>
+#include <qpe/qpeapplication.h>
 #include "xinecontrol.h"
 #include "mediaplayerstate.h"
 #include "videowidget.h"
@@ -50,9 +52,18 @@ XineControl::XineControl( QObject *parent, const char *name )
     connect( mediaPlayerState, SIGNAL( fullscreenToggled( bool ) ), this, SLOT( setFullscreen( bool ) ) );
     connect( mediaPlayerState, SIGNAL( positionChanged( long ) ),  this,  SLOT( seekTo( long ) ) );
     connect( libXine, SIGNAL( stopped() ),  this, SLOT( nextMedia() ) );
+
+    disabledSuspendScreenSaver = FALSE;
 }
 
 XineControl::~XineControl() {
+#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+    if ( disabledSuspendScreenSaver ) {
+        disabledSuspendScreenSaver = FALSE;
+        // Re-enable the suspend mode
+        QCopEnvelope("QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
+    }
+#endif
     delete libXine;
 }
 
@@ -79,6 +90,16 @@ void XineControl::play( const QString& fileName ) {
     mediaPlayerState->setIsStreaming( !libXine->isSeekable() );
     // which gui (video / audio)
     mediaPlayerState->setView( whichGui );
+
+#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+    if ( !disabledSuspendScreenSaver ) {
+        disabledSuspendScreenSaver = TRUE;
+        // Stop the screen from blanking and power saving state
+        QCopEnvelope("QPE/System", "setScreenSaverMode(int)" )
+            << ( whichGui == 'v' ? QPEApplication::Disable : QPEApplication::DisableSuspend );
+    }
+#endif
+
     length();
     position();
 }
@@ -92,6 +113,15 @@ void XineControl::stop( bool isSet ) {
         libXine->stop( );
         mediaPlayerState->setList();
         //mediaPlayerState->setPlaying( false );
+
+#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+        if ( disabledSuspendScreenSaver ) {
+            disabledSuspendScreenSaver = FALSE;
+            // Re-enable the suspend mode
+            QCopEnvelope("QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
+        }
+#endif
+
     } else {
         // play again
     }

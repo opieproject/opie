@@ -64,6 +64,7 @@ private:
     long m_currentTime;
     long m_position;
     QString m_fileName;
+    bool disabledSuspendScreenSaver;
 signals:
     void positionChanged( long );
 
