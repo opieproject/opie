@@ -63,7 +63,7 @@ private:
     MediaDetect mdetect;
     long m_currentTime;
     long m_position;
-
+    QString m_fileName;
 signals:
     void positionChanged( long );
 

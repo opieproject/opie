@@ -46,7 +46,6 @@ XineControl::XineControl( QObject *parent, const char *name )
 	connect ( videoUI, SIGNAL( videoResized ( const QSize & )), this, SLOT( videoResized ( const QSize & )));
     connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( pause(bool) ) );
     connect( this, SIGNAL( positionChanged( long ) ), mediaPlayerState, SLOT( updatePosition( long ) ) );
-    connect( this, SIGNAL( positionChanged( long ) ), mediaPlayerState, SLOT( setPosition( long ) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( stop( bool ) ) );
     connect( mediaPlayerState, SIGNAL( fullscreenToggled( bool ) ), this, SLOT( setFullscreen( bool ) ) );
     connect( mediaPlayerState, SIGNAL( positionChanged( long ) ),  this,  SLOT( seekTo( long ) ) );
@@ -58,6 +57,7 @@ XineControl::~XineControl() {
 }
 
 void XineControl::play( const QString& fileName ) {
+    m_fileName = fileName;
     libXine->play( fileName );
     mediaPlayerState->setPlaying( true );
     // default to audio view until we know how to handle video
@@ -111,7 +111,7 @@ void  XineControl::length() {
 
 long XineControl::position() {
     m_position = ( currentTime()  );
-    mediaPlayerState->setPosition( m_position  );
+    mediaPlayerState->updatePosition( m_position  );
     long emitPos = (long)m_position;
     emit positionChanged( emitPos );
     if(mediaPlayerState->isPlaying)
@@ -126,7 +126,8 @@ void XineControl::setFullscreen( bool isSet ) {
 }
 
 void XineControl::seekTo( long second ) {
-    //  libXine->
+    qDebug("seek triggered!!");
+    libXine->play( m_fileName , 0, (int)second );
 }
 
 

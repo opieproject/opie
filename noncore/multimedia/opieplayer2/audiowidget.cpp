@@ -76,7 +76,7 @@ MediaButton audioButtons[] = {
    { TRUE,  FALSE, FALSE }, // repeat/loop
    { FALSE, FALSE, FALSE }, // playlist
    { FALSE, FALSE, FALSE }, // forward
-   { FALSE, FALSE, FALSE }  // back 
+   { FALSE, FALSE, FALSE }  // back
 };
 
 const char *skin_mask_file_names[11] = {
@@ -98,7 +98,7 @@ static const int numButtons = (sizeof(audioButtons)/sizeof(MediaButton));
 AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
         QWidget( parent, name, f ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this ) {
     setCaption( tr("OpiePlayer") );
-    
+
     Config cfg("OpiePlayer");
     cfg.setGroup("AudioWidget");
     skin = cfg.readEntry("Skin","default");
@@ -122,8 +122,8 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
             uchar **dest = imgButtonMask->jumpTable();
             for ( int y = 0; y < imgUp->height(); y++ ) {
                 uchar *line = dest[y];
-                for ( int x = 0; x < imgUp->width(); x++ ) 
-                    if ( !qRed( imgMask.pixel( x, y ) ) ) 
+                for ( int x = 0; x < imgUp->width(); x++ )
+                    if ( !qRed( imgMask.pixel( x, y ) ) )
                         line[x] = i + 1;
             }
         }
@@ -161,7 +161,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     connect( mediaPlayerState, SIGNAL( loopingToggled(bool) ), this, SLOT( setLooping(bool) ) );
     connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( setPaused(bool) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
- 
+
     // Intialise state
     setLength( mediaPlayerState->length() );
     setPosition( mediaPlayerState->position() );
@@ -172,7 +172,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
 }
 
 AudioWidget::~AudioWidget() {
-    
+
     for ( int i = 0; i < 11; i++ ) {
         delete buttonPixUp[i];
         delete buttonPixDown[i];
@@ -274,7 +274,7 @@ void AudioWidget::setView( char view ) {
 //     } else {
         // this stops the slider from being moved, thus
         // does not stop stream when it reaches the end
-        slider.show();
+        //    slider.show();
         connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
         connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
 //    }
@@ -299,7 +299,7 @@ void AudioWidget::updateSlider( long i, long max ) {
 
     time.setText( timeAsString( i ) + " / " + timeAsString( max ) );
 //    qDebug( timeAsString( i ) + " / " + timeAsString( max ) ) ;
-    
+
     if ( max == 0 ) {
         return;
     }
@@ -360,16 +360,16 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
             bool isOnButton = ( x > 0 && y > 0 && x < imgButtonMask->width()
                                 && y < imgButtonMask->height() && imgButtonMask->pixelIndex( x, y ) == i + 1 );
 
-            if ( isOnButton && i == AudioVolumeUp ) 
+            if ( isOnButton && i == AudioVolumeUp )
                 qDebug("on up");
 
             if ( isOnButton && !audioButtons[i].isHeld ) {
                 audioButtons[i].isHeld = TRUE;
                 toggleButton(i);
                 switch (i) {
-                  case AudioVolumeUp:   
+                  case AudioVolumeUp:
                       qDebug("more clicked");
-                      emit moreClicked(); 
+                      emit moreClicked();
                       return;
                   case AudioVolumeDown: emit lessClicked(); return;
                 }
