@@ -192,10 +192,14 @@ void VideoWidget::resizeEvent( QResizeEvent * ) {
     slider->setFixedWidth( w - 110 );
     slider->setGeometry( QRect( 15, h - 30, w - 90, 20 ) );
     slider->setBackgroundOrigin( QWidget::ParentOrigin );
+    slider->setFocusPolicy( QWidget::NoFocus );
+make    slider->setBackgroundPixmap( *pixBg );
+
 //    time.setGeometry( QRect( w - 85, h - 30, 70, 20 ) );
     xoff = 0;// ( imgUp->width() ) / 2;
     yoff = 180;//(( Vh  - imgUp->height() ) / 2) - 10;
     QPoint p( xoff, yoff );
+
 
     QPixmap *pixUp = combineVImageWithBackground( *imgUp, *pixBg, p );
     QPixmap *pixDn = combineVImageWithBackground( *imgDn, *pixBg, p );
@@ -340,7 +344,6 @@ void VideoWidget::makeVisible() {
     slider->hide();
   videoFrame-> setGeometry ( 0, 0, width ( ), height ( ));
   } else {
-    setBackgroundPixmap( Resource::loadPixmap(  backgroundPix ) );
     showNormal();
     showMaximized();
     slider->show();
