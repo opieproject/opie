@@ -1,0 +1,5 @@
+Shall we write what the plans are here? 
+
+I think we sould take the TE* stuff from embeddedconsole and use them for the
+TE here. TE isn't going to be easy starting from scratch. If nobody is doing 
+TE yet, i'll try to port that stuff over here. -hash
