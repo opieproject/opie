@@ -28,7 +28,7 @@ class MainWindow : public QMainWindow {
 public:
     MainWindow( QWidget *parent = 0, const char *name = 0, WFlags fl = 0 );
     ~MainWindow();
-    static QString appName() {return QString::fromLatin1("console"); }
+    static QString appName() {return QString::fromLatin1("opie-console"); }
 
     /**
      * our factory to generate IOLayer and so on
