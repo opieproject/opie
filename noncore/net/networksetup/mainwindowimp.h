@@ -2,12 +2,13 @@
 #define MAINWINOWIMP_H
 
 #include "mainwindow.h"
-#include "module.h"
-#include "interface.h"
-#include "kprocess.h"
 #include <qmap.h>
+#include <qstringlist.h>
 
+class Module;
+class Interface;
 class QLibrary;
+class KProcess;
 
 class MainWindowImp : public MainWindow {
   Q_OBJECT
@@ -45,6 +46,8 @@ private:
   QMap<QListViewItem*, Interface*> interfaceItems;
   
   QMap<KProcess*, QString> threads;
+  QStringList profiles;
+
 };
 
 #endif

@@ -195,7 +195,7 @@ bool Interface::refresh(){
   long time = 0;
   // Grab the start time  
   //                     pid com state ppid pgrp session tty_nr tpgid flags
-  int r = sscanf(line.latin1(), "%*d %*s %*c   %*d  %*d  %*d     %*d    %*d   %*u "
+  sscanf(line.latin1(), "%*d %*s %*c   %*d  %*d  %*d     %*d    %*d   %*u "
   //   minflt cminflt majflt cmajflt utime stime cutime cstime priority
       "%*u    %*u    %*u    %*u     %*u   %*u   %*d   %*d   %*d "
   //   nice 0   itrealvalue starttime

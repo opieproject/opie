@@ -2,6 +2,9 @@
 #include "addserviceimp.h"
 #include "interfaceinformationimp.h"
 #include "interfacesetupimp.h"
+#include "interface.h"
+#include "kprocess.h"
+#include "module.h"
 
 #include <qpushbutton.h>
 #include <qdir.h>
@@ -50,12 +53,20 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
   loadModules(path);
   getInterfaceList();
   serviceList->header()->hide();
+
+
+  Config cfg("NetworkSetup");
+  profiles = QStringList::split(" ", cfg.readEntry("Profiles", "All"));
 }
 
 /**
- * Deconstructor.  Unload libraries and save.
+ * Deconstructor.  Unload libraries and save profile list.
  */
 MainWindowImp::~MainWindowImp(){
+  if(profiles.count() > 1){
+    Config cfg("NetworkSetup");
+    cfg.writeEntry("Profiles", profiles.join(" "));
+  }
 }
 
 void MainWindowImp::loadModules(QString path){
@@ -252,7 +263,7 @@ void MainWindowImp::jobDone(KProcess *process){
       if(macAddress == -1)
         macAddress = line.length();
       if(hardwareName != -1)
-        i->setHardwareName(line.mid(hardwareName+11, macAddress-(hardwareName+11)));
+        i->setHardwareName(line.mid(hardwareName+11, macAddress-(hardwareName+11)) + QString(" (%1)").arg(i->getInterfaceName()));
       // We have found an interface
       //qDebug(QString("MainWindowImp: Found Interface: %1").arg(line).latin1());
       interfaceNames.insert(i->getInterfaceName(), i);

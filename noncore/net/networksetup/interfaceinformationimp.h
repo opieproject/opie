@@ -18,9 +18,9 @@ private slots:
   void refresh();
   void restart();
   void advanced();
-  Interface *interface;
 
 private:
+  Interface *interface;
   void updateInterface();
   
 };
