@@ -1,0 +1,12 @@
+wl_log
+
+#include <wellenreiter/wl_log.hh>
+
+void wl_loginfo(const char *string, ...)
+void wl_logerr(const char *string, ...)
+
+wl_loginfo() and wl_err() write string to syslog(), 
+either to INFO or to ERR.
+
+no return values
+

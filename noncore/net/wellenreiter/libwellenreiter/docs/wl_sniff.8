@@ -1,0 +1,21 @@
+sniff.cc
+
+#include <wellenreiter/sniff.hh>
+
+void process_packets(const struct pcap_pkthdr *pkthdr, 
+		     const unsigned char *packet, 
+		     char *guihost, 
+		     int guiport)
+
+The function process_packets() will use libpcap to get the
+informations for a 802.11b packet. When it finds a valid 
+network it calls the wl_send function and sends a found
+network packet to the guiport on the guihost.
+
+
+Return value
+
+none
+
+NOTE: process_packets() is void at the moment because there
+will be alot of non-critical and annoying errors.
