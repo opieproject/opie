@@ -223,6 +223,7 @@ void WellenreiterMainWindow::demoAddStations()
     mw->netView()->addNewItem( "adhoc", "ELAN", "00:B0:8E:E7:56:E2", false, 3, 20 );
 }
 
+
 QString WellenreiterMainWindow::getFileName( bool save )
 {
     QMap<QString, QStringList> map;
@@ -256,6 +257,7 @@ QString WellenreiterMainWindow::getFileName( bool save )
     }
     return str;
 }
+
 
 void WellenreiterMainWindow::fileSaveLog()
 {

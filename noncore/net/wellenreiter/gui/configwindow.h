@@ -21,10 +21,19 @@
 #include <qcombobox.h>
 #include <qstring.h>
 
+const int DEVTYPE_SELECT = 0;
+const int DEVTYPE_CISCO = 1;
+const int DEVTYPE_WLAN_NG = 2;
+const int DEVTYPE_HOSTAP = 3;
+const int DEVTYPE_ORINOCO = 4;
+const int DEVTYPE_MANUAL = 5;
+const int DEVTYPE_FILE = 6;
+
 class WellenreiterConfigWindow;
 
 class WellenreiterConfigWindow : public WellenreiterConfigBase
 {
+  Q_OBJECT
 
   public:
     WellenreiterConfigWindow( QWidget * parent = 0, const char * name = "WellenreiterConfigWindow", WFlags f = 0 );
@@ -34,11 +43,14 @@ class WellenreiterConfigWindow : public WellenreiterConfigBase
     const QString soundOnBeacon() const { return beaconSound->currentText(); };
     static WellenreiterConfigWindow* instance() { return _instance; };
 
+  public slots:
+    void changedDeviceType(int);
+
   protected:
     QMap<QString, int> _devicetype;
     static WellenreiterConfigWindow* _instance;
+    int _guess;
 
 };
 
 #endif
-

@@ -169,6 +169,12 @@
                             <string>&lt;manual&gt;</string>
                         </property>
                     </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>&lt;file&gt;</string>
+                        </property>
+                    </item>
                     <property stdset="1">
                         <name>name</name>
                         <cstring>deviceType</cstring>

@@ -49,6 +49,9 @@ class Wellenreiter : public WellenreiterBase {
 
     bool sniffing;
 
+  protected:
+    virtual void timerEvent( QTimerEvent* );
+
   public slots:
     void channelHopped(int);
     void receivePacket(OPacket*);

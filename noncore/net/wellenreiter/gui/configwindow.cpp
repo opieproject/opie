@@ -15,8 +15,10 @@
 
 /* LOCAL */
 #include "configwindow.h"
+#include "mainwindow.h"
 
 /* QT */
+#include <qapplication.h>
 #include <qcombobox.h>
 #include <qfile.h>
 #include <qlayout.h>
@@ -33,11 +35,12 @@ WellenreiterConfigWindow* WellenreiterConfigWindow::_instance = 0;
 WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char * name, WFlags f )
            :WellenreiterConfigBase( parent, name, true, f )
 {
-    _devicetype[ "cisco" ] = 1;
-    _devicetype[ "wlan-ng" ] = 2;
-    _devicetype[ "hostap" ] = 3;
-    _devicetype[ "orinoco" ] = 4;
-    _devicetype[ "<manual>" ] = 5;
+    _devicetype[ "cisco" ] = DEVTYPE_CISCO;
+    _devicetype[ "wlan-ng" ] = DEVTYPE_WLAN_NG;
+    _devicetype[ "hostap" ] = DEVTYPE_HOSTAP;
+    _devicetype[ "orinoco" ] = DEVTYPE_ORINOCO;
+    _devicetype[ "<manual>" ] = DEVTYPE_MANUAL;
+    _devicetype[ "<file>" ] = DEVTYPE_FILE;
 
     // gather possible interface names from ONetwork
     ONetwork* net = ONetwork::instance();
@@ -59,15 +62,16 @@ WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char
         while( !modules.atEnd() && !devicetype )
         {
             modules >> line;
-            if ( line.contains( "cisco" ) ) devicetype = 1;
-            else if ( line.contains( "hostap" ) ) devicetype = 3;
-            else if ( line.contains( "prism" ) ) devicetype = 2;
-            else if ( line.contains( "orinoco" ) ) devicetype = 4;
+            if ( line.contains( "cisco" ) ) devicetype = DEVTYPE_CISCO;
+            else if ( line.contains( "hostap" ) ) devicetype = DEVTYPE_HOSTAP;
+            else if ( line.contains( "prism" ) ) devicetype = DEVTYPE_WLAN_NG;
+            else if ( line.contains( "orinoco" ) ) devicetype = DEVTYPE_ORINOCO;
         }
         if ( devicetype )
         {
             deviceType->setCurrentItem( devicetype );
-            qDebug( "Wellenreiter: guessed device type to be %d", devicetype );
+            _guess = devicetype;
+            qDebug( "Wellenreiter: guessed device type to be #%d", devicetype );
         }
     }
 
@@ -79,7 +83,10 @@ WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char
     #endif
 
     WellenreiterConfigWindow::_instance = this;
+
+    connect( deviceType, SIGNAL( activated(int) ), this, SLOT( changedDeviceType(int) ) );
 };
+
 
 int WellenreiterConfigWindow::daemonDeviceType()
 {
@@ -94,7 +101,26 @@ int WellenreiterConfigWindow::daemonDeviceType()
     }
 };
 
+
 int WellenreiterConfigWindow::daemonHopInterval()
 {
     return hopInterval->cleanText().toInt();
 }
+
+
+void WellenreiterConfigWindow::changedDeviceType(int t)
+{
+    if ( t != DEVTYPE_FILE ) return;
+    QString name = ( (WellenreiterMainWindow*) qApp->mainWidget() )->getFileName(false);
+    if ( !name.isNull() && QFile::exists( name ) )
+    {
+        interfaceName->insertItem( name );
+        interfaceName->setCurrentItem( interfaceName->count()-1 );
+    }
+    else
+    {
+        deviceType->setCurrentItem( _guess );
+    }
+
+}
+

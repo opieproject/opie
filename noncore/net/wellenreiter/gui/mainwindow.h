@@ -30,6 +30,7 @@ class WellenreiterMainWindow: public QMainWindow
   public:
     WellenreiterMainWindow( QWidget * parent = 0, const char * name = "mainwindow", WFlags f = 0 );
     ~WellenreiterMainWindow();
+    QString getFileName( bool save );
 
   protected:
     Wellenreiter* mw;
@@ -48,9 +49,6 @@ class WellenreiterMainWindow: public QMainWindow
   protected:
     virtual void closeEvent( QCloseEvent* );
     void updateToolButtonState();
-
-  private:
-    QString getFileName( bool save );
 
   public slots:
     void showConfigure();

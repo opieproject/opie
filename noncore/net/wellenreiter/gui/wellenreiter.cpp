@@ -221,28 +221,28 @@ void Wellenreiter::receivePacket(OPacket* p)
 
 void Wellenreiter::stopClicked()
 {
-    disconnect( SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
-    disconnect( SIGNAL( hopped(int) ), this, SLOT( channelHopped(int) ) );
-    iface->setChannelHopping(); // stop hopping channels
+    if ( iface )
+    {
+        disconnect( SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
+        disconnect( SIGNAL( hopped(int) ), this, SLOT( channelHopped(int) ) );
+        iface->setChannelHopping(); // stop hopping channels
+    }
+    else
+        killTimers();
+
     pcap->close();
     sniffing = false;
-    #ifdef QWS
-    oApp->setTitle();
-    #else
-    qApp->mainWidget()->setCaption( "Wellenreiter II" );
-    #endif
 
-    // get interface name from config window
-    const QString& interface = configwindow->interfaceName->currentText();
-    ONetwork* net = ONetwork::instance();
-    iface = static_cast<OWirelessNetworkInterface*>(net->interface( interface ));
+    if ( iface )
+    {
+        // switch off monitor mode
+        iface->setMonitorMode( false );
+        // switch off promisc flag
+        iface->setPromiscuousMode( false );
 
-    // switch off monitor mode
-    iface->setMonitorMode( false );
-    // switch off promisc flag
-    iface->setPromiscuousMode( false );
+        system( "cardctl reset; sleep 1" ); //FIXME: Use OProcess
+    }
 
-    system( "cardctl reset; sleep 1" ); //FIXME: Use OProcess
     logwindow->log( "(i) Stopped Scanning." );
     assert( parent() );
     ( (QMainWindow*) parent() )->setCaption( "Wellenreiter II" );
@@ -297,25 +297,32 @@ void Wellenreiter::startClicked()
 
     switch ( cardtype )
     {
-        case 1: iface->setMonitoring( new OCiscoMonitoringInterface( iface ) ); break;
-        case 2: iface->setMonitoring( new OWlanNGMonitoringInterface( iface ) ); break;
-        case 3: iface->setMonitoring( new OHostAPMonitoringInterface( iface ) ); break;
-        case 4: iface->setMonitoring( new OOrinocoMonitoringInterface( iface ) ); break;
-        default:
-            QMessageBox::information( this, "Wellenreiter II", "Bring your device into\nmonitor mode now." );
+        case DEVTYPE_CISCO: iface->setMonitoring( new OCiscoMonitoringInterface( iface ) ); break;
+        case DEVTYPE_WLAN_NG: iface->setMonitoring( new OWlanNGMonitoringInterface( iface ) ); break;
+        case DEVTYPE_HOSTAP: iface->setMonitoring( new OHostAPMonitoringInterface( iface ) ); break;
+        case DEVTYPE_ORINOCO: iface->setMonitoring( new OOrinocoMonitoringInterface( iface ) ); break;
+        case DEVTYPE_MANUAL: QMessageBox::information( this, "Wellenreiter II", "Bring your device into\nmonitor mode now." ); break;
+        case DEVTYPE_FILE: qDebug( "Wellenreiter: Capturing from file '%s'", (const char*) interface ); break;
+        default: assert( 0 ); // shouldn't reach this
     }
 
-    if ( cardtype > 0 && cardtype < 5 )
-        iface->setMonitorMode( true );
-
-    if ( !iface->monitorMode() )
+    // switch device into monitor mode
+    if ( cardtype < DEVTYPE_FILE )
     {
-        QMessageBox::warning( this, "Wellenreiter II", "Can't set device into monitor mode." );
-        return;
+        if ( cardtype != DEVTYPE_MANUAL )
+            iface->setMonitorMode( true );
+        if ( !iface->monitorMode() )
+        {
+            QMessageBox::warning( this, "Wellenreiter II", "Can't set device into monitor mode." );
+            return;
+        }
     }
 
     // open pcap and start sniffing
-    pcap->open( interface );
+    if ( cardtype != DEVTYPE_FILE )
+        pcap->open( interface );
+    else
+        pcap->open( QFile( interface ) );
 
     if ( !pcap->isOpen() )
     {
@@ -327,13 +334,32 @@ void Wellenreiter::startClicked()
     pcap->setBlocking( false );
 
     // start channel hopper
-    iface->setChannelHopping( 1000 ); //use interval from config window
+    if ( cardtype != DEVTYPE_FILE )
+        iface->setChannelHopping( 1000 ); //use interval from config window
 
-    // connect
-    connect( pcap, SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
-    connect( iface->channelHopper(), SIGNAL( hopped(int) ), this, SLOT( channelHopped(int) ) );
+    if ( cardtype != DEVTYPE_FILE )
+    {
+        // connect socket notifier and start channel hopper
+        connect( pcap, SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
+        connect( iface->channelHopper(), SIGNAL( hopped(int) ), this, SLOT( channelHopped(int) ) );
+    }
+    else
+    {
+        // start timer for reading packets
+        startTimer( 100 );
+    }
 
     logwindow->log( "(i) Started Scanning." );
     sniffing = true;
     emit( startedSniffing() );
 }
+
+
+void Wellenreiter::timerEvent( QTimerEvent* )
+{
+    qDebug( "Wellenreiter::timerEvent()" );
+    OPacket* p = pcap->next();
+    receivePacket( p );
+    delete p;
+}
+
