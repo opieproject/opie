@@ -1,9 +1,0 @@
-Package: opie-mailit
-Files: plugins/application/libmailit.so* bin/mailit apps/1Pim/mailit.desktop pics/mailit
-Priority: optional
-Section: opie/pim
-Maintainer: L.J. Potter <llornkcor@handhelds.org>
-Architecture: arm
-Version: $QPE_VERSION$EXTRAVERSION
-Description: EMail
- A simple POP3 email client for the Opie environment.
