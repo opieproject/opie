@@ -200,7 +200,9 @@ vwijzigt al categorieen.</translation>
     <message>
         <source>End reached, starting at %1</source>
         <comment>Date using TimeString::shortDate</comment>
-        <translation type="unfinished"></translation>
+        <translation>Einde bereikt, begin bij %1
+
+Datum uit TimeString::shortDate</translation>
     </message>
 </context>
 <context>
@@ -345,7 +347,7 @@ vwijzigt al categorieen.</translation>
     </message>
     <message>
         <source>Arguments:</source>
-        <translation type="unfinished"></translation>
+        <translation>Argumenten:</translation>
     </message>
 </context>
 <context>
@@ -879,12 +881,16 @@ wilt verwijderen?</translation>
     <message>
         <source>D</source>
         <comment>Shortcut for Day</comment>
-        <translation type="unfinished">D</translation>
+        <translation>D
+
+Kort voor Dag</translation>
     </message>
     <message>
         <source>M</source>
         <comment>Shortcur for Month</comment>
-        <translation type="unfinished">M</translation>
+        <translation>M
+
+Kort voor Maand</translation>
     </message>
 </context>
 <context>
@@ -909,15 +915,15 @@ wilt verwijderen?</translation>
     <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="unfinished">Klik om dit venster te sluiten zoner op te slaan.</translation>
+        <translation>Klik om dit venster te sluiten zonder op te slaan.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="unfinished">Klik om dit venster te sluiten.</translation>
+        <translation>Klik om dit venster te sluiten.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="unfinished">Klik om dit venster te sluiten en de veranderingen aktief te maken.</translation>
+        <translation>Klik om dit venster te sluiten en de veranderingen aktief te maken.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
@@ -925,31 +931,31 @@ wilt verwijderen?</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="unfinished">Klik om te maximaliseren.</translation>
+        <translation>Klik om te maximaliseren.</translation>
     </message>
     <message>
         <source>Click to make this window movable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik om dit venster te kunnen verschuiven.</translation>
     </message>
     <message>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstel</translation>
     </message>
     <message>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Grootte</translation>
     </message>
     <message>
         <source>Maximize</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximaliseer</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluit</translation>
     </message>
 </context>
 <context>
@@ -1044,7 +1050,9 @@ ninor mimetype / major mimetype</translation>
     <message>
         <source>Default</source>
         <comment>List box text for default window decoration</comment>
-        <translation type="unfinished"></translation>
+        <translation>Standaard
+
+Keuzevlak tekst voor standaard vensterdecoratie</translation>
     </message>
 </context>
 </TS>

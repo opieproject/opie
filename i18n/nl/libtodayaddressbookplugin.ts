@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation type="unfinished">Om instellingen te activeren: Herstart programma!</translation>
+        <translation>Herstart programma om instellingen te activeren!</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>
@@ -65,23 +65,23 @@ als minder dan</translation>
     </message>
     <message>
         <source>Enable/Disable Views</source>
-        <translation type="unfinished"></translation>
+        <translation>In- en Uitschakelen aanzicht</translation>
     </message>
     <message>
         <source>Show &amp;Birthdays</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat &amp;Verjaardagen zien</translation>
     </message>
     <message>
         <source>Show &amp;Anniveraries</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat &amp;Feestdagen zien</translation>
     </message>
     <message>
         <source>The next birthdays will just be shown, if enabled!</source>
-        <translation type="unfinished"></translation>
+        <translation>Verjaardagen zijn alleen zichtbaar indien ingeschakeld!</translation>
     </message>
     <message>
         <source>The next anniversaries will just be shown, if enabled !</source>
-        <translation type="unfinished"></translation>
+        <translation>Feestdagen zijn alleen zichtbaar indien ingeschakeld!</translation>
     </message>
 </context>
 <context>

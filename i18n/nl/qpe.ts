@@ -3,66 +3,66 @@
     <name>@default</name>
     <message>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Taal</translation>
     </message>
     <message>
         <source>Time and Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Tijd en Datum</translation>
     </message>
     <message>
         <source>Personal Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Persoonlijke Informatie</translation>
     </message>
     <message>
         <source>DocTab</source>
-        <translation type="unfinished"></translation>
+        <translation>DocTab</translation>
     </message>
 </context>
 <context>
     <name>AppLauncher</name>
     <message>
         <source>Application Problem</source>
-        <translation type="unfinished">Programma probleem</translation>
+        <translation>Programma probleem</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 is not responding.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;%1 reageert niet.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;%1 reageert niet.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Would you like to force the application to exit?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Wilt u het programma geforceerd verlaten?&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Wilt u het programma geforceerd verlaten?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;&lt;p&gt;Fast loading has been disabled for this application.  Tap and hold the application icon to reenable it.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;&lt;p&gt;Snelladen is uitgeschakeld vorr dit programma. Druk lang op programma-icoon om weer in te schakelen&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;&lt;b&gt;%1&lt;/b&gt; was terminated due to signal code %2&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;&lt;b&gt;%1&lt;/b&gt; was gestopt door signaal code %2&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Application terminated</source>
-        <translation type="unfinished"></translation>
+        <translation>Programma gestopt</translation>
     </message>
     <message>
         <source>Application not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Programma niet gevonden</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Could not locate application &lt;b&gt;%1&lt;/b&gt;&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Kon programma &lt;b&gt;%1&lt;/b&gt; niet vinden.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Could not find the application %1&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Kon programma %1 niet vinden.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -85,12 +85,12 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="unfinished">Raak de richtkruizen duidelijk en
+        <translation>Raak de richtkruizen duidelijk en
 precies aan om het scherm in te stellen.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished">Welkom bij Opie</translation>
+        <translation>Welkom bij Opie</translation>
     </message>
 </context>
 <context>
@@ -145,56 +145,56 @@ Reservebatterij opladen aub.</translation>
     <name>DesktopPowerAlerter</name>
     <message>
         <source>Battery Status</source>
-        <translation type="unfinished">Batterijstatus</translation>
+        <translation>Batterijstatus</translation>
     </message>
     <message>
         <source>Low Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterij bija leeg</translation>
     </message>
 </context>
 <context>
     <name>FirstUse</name>
     <message>
         <source>&lt;&lt; Back</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;&lt; Terug</translation>
     </message>
     <message>
         <source>Next &gt;&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Volgende &gt;&gt;</translation>
     </message>
     <message>
         <source>Tap anywhere on the screen to continue.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tik ergens op het scherm om door te gaan.</translation>
     </message>
     <message>
         <source>Please wait, loading %1 settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachten aub, inladen van %1 instellingen.</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachten aub...</translation>
     </message>
     <message>
         <source>FirstUseBackground</source>
-        <translation type="unfinished"></translation>
+        <translation>FirstUseBackground</translation>
     </message>
     <message>
         <source>Finish</source>
-        <translation type="unfinished"></translation>
+        <translation>Beeindig</translation>
     </message>
 </context>
 <context>
     <name>InputMethods</name>
     <message>
         <source>Unicode</source>
-        <translation type="unfinished"></translation>
+        <translation>Unicode</translation>
     </message>
 </context>
 <context>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
-        <translation type="unfinished">Launcher</translation>
+        <translation>Launcher</translation>
     </message>
     <message>
         <source>Finding documents</source>
@@ -206,46 +206,46 @@ Reservebatterij opladen aub.</translation>
     </message>
     <message>
         <source> - Launcher</source>
-        <translation type="unfinished">- Launcher</translation>
+        <translation>- Launcher</translation>
     </message>
     <message>
         <source>No application</source>
-        <translation type="unfinished">Geen programma</translation>
+        <translation>Geen programma</translation>
     </message>
     <message>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
-        <translation type="unfinished">Er is geen programma ingesteld voor dit document.&lt;p&gt;Type is %1.</translation>
+        <translation>&lt;p&gt;Er is geen programma ingesteld voor dit document.&lt;p&gt;Type is %1.</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation type="unfinished">Documenten</translation>
+        <translation>Documenten</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>View as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Bekijk als tekst</translation>
     </message>
 </context>
 <context>
     <name>LauncherTabWidget</name>
     <message>
         <source>Icon View</source>
-        <translation type="unfinished">Icoonaanzicht</translation>
+        <translation>Icoonaanzicht</translation>
     </message>
     <message>
         <source>List View</source>
-        <translation type="unfinished">Lijstaanzicht</translation>
+        <translation>Lijstaanzicht</translation>
     </message>
     <message>
         <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Bestanden opzoeken...&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;The Documents Tab&lt;p&gt;has been disabled.&lt;p&gt;Use Settings-&gt;Launcher-&gt;DocTab&lt;p&gt;to reenable it.&lt;/b&gt;&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Het Documenten Tabblad&lt;p&gt;is uitgeschakeld.&lt;p&gt;Gebruik Instellingen-&gt;Launcher-&gt;DocTab&lt;p&gt;om het weer aan te schakelen.&lt;/b&gt;&lt;/center&gt;</translation>
     </message>
 </context>
 <context>
@@ -260,22 +260,22 @@ Reservebatterij opladen aub.</translation>
     </message>
     <message>
         <source>Document View</source>
-        <translation type="unfinished">Documentaanzicht</translation>
+        <translation>Documentaanzicht</translation>
     </message>
     <message>
         <source>All types</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle types</translation>
     </message>
 </context>
 <context>
     <name>Mediadlg</name>
     <message>
         <source>A new storage media detected:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw opslagmedium ontdekt:</translation>
     </message>
     <message>
         <source>What should I do with it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wat moet ik er mee doen?</translation>
     </message>
 </context>
 <context>
@@ -337,51 +337,51 @@ Reservebatterij opladen aub.</translation>
     <name>MediumMountSetting::MediumMountWidget</name>
     <message>
         <source>Configure this medium. The changes will go into effect when the application gets closed. To update the Document Tab you need to remove and insert this medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel dit medium in. De veranderingen gaan in bij het afsluiten van het programma. Om het Document Tabblad te vernieuwen moet het medium verwijderd en opnoeiw ingevoerd worden.</translation>
     </message>
     <message>
         <source>Which media files</source>
-        <translation type="unfinished">Welke mediabestanden</translation>
+        <translation>Welke mediabestanden</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished">Audio</translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished">Alle</translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Plaatjes</translation>
+        <translation>Plaatjes</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Tekst</translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Video</translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Limit search to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Beperk zoeken tot:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Voeg toe</translation>
+        <translation>Voeg toe</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Scan whole media</source>
-        <translation type="unfinished"></translation>
+        <translation>Doorzoek heel medium</translation>
     </message>
     <message>
         <source>Always check this medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Contoleer dit medium altijd</translation>
     </message>
 </context>
 <context>
@@ -395,31 +395,31 @@ Reservebatterij opladen aub.</translation>
     <name>SafeMode</name>
     <message>
         <source>Safe Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Veilige modus</translation>
     </message>
     <message>
         <source>Plugin Manager...</source>
-        <translation type="unfinished"></translation>
+        <translation>Plugin Manager...</translation>
     </message>
     <message>
         <source>Restart Qtopia</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstart Opie</translation>
     </message>
     <message>
         <source>Help...</source>
-        <translation type="unfinished"></translation>
+        <translation>Hulp...</translation>
     </message>
 </context>
 <context>
     <name>ServerApplication</name>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Informatie</translation>
+        <translation>Informatie</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;De systeemdatum lijkt niet correct.
+        <translation>&lt;p&gt;De systeemdatum lijkt niet correct.
 (%1)&lt;/p&gt;&lt;p&gt;Wilt u deze corrigeren?&lt;/p&gt;</translation>
     </message>
     <message>
@@ -436,102 +436,105 @@ Reservebatterij opladen aub.</translation>
     </message>
     <message>
         <source>business card</source>
-        <translation type="unfinished">visitekaartje</translation>
+        <translation>visitekaartje</translation>
     </message>
     <message>
         <source>Safe Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Veilige modus</translation>
     </message>
     <message>
         <source>&lt;P&gt;A system startup error occurred, and the system is now in Safe Mode. Plugins are not loaded in Safe Mode. You can use the Plugin Manager to disable plugins that cause system error.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Een fout is opgetreden bij de systeemopstart, en het systeem is nu in Veilige Modus. Plugins worden niet geladen in Velige Modus. De Plugin Manager kan worden gebruikt om de foute plugins uit te schakelen.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Plugin Manager...</source>
-        <translation type="unfinished"></translation>
+        <translation>Plugin Manager...</translation>
     </message>
     <message>
         <source>Memory Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Geheugen Status</translation>
     </message>
     <message>
         <source>Memory Low
 Please save data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geheugen bijna vol
+Data opslaan aub.</translation>
     </message>
     <message>
         <source>Critical Memory Shortage
 Please end this application
 immediately.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kritiek geheugengebrek
+Dit programma aub
+direct afsluiten.</translation>
     </message>
     <message>
         <source>WARNING</source>
-        <translation type="unfinished"></translation>
+        <translation>WAARSCHUWING</translation>
     </message>
     <message>
         <source>&lt;p&gt;The battery level is critical!&lt;p&gt;Keep power off until AC is restored</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;De batterijlading is kritiek laag!&lt;p&gt;Schakel uit tot stroom weer wordt aangesloten</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>The battery is running very low. </source>
-        <translation type="unfinished"></translation>
+        <translation>De batterijlading is erg laag.</translation>
     </message>
     <message>
         <source>&lt;p&gt;The Back-up battery is very low&lt;p&gt;Please charge the back-up battery</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;De backup-batterij lading is kritiek laag!&lt;p&gt;Aub backup-batterij opladen</translation>
     </message>
 </context>
 <context>
     <name>ShutdownImpl</name>
     <message>
         <source>Shutdown...</source>
-        <translation type="unfinished">Afsluiten...</translation>
+        <translation>Afsluiten...</translation>
     </message>
     <message>
         <source>Terminate</source>
-        <translation type="unfinished">Beeindigen</translation>
+        <translation>Beeindigen</translation>
     </message>
     <message>
         <source>Terminate Opie</source>
-        <translation type="unfinished">Opie beeindigen</translation>
+        <translation>Opie beeindigen</translation>
     </message>
     <message>
         <source>Reboot</source>
-        <translation type="unfinished">Herstarten</translation>
+        <translation>Herstarten</translation>
     </message>
     <message>
         <source>Restart Opie</source>
-        <translation type="unfinished">Opie herstarten</translation>
+        <translation>Opie herstarten</translation>
     </message>
     <message>
         <source>Shutdown</source>
-        <translation type="unfinished">Afsluiten</translation>
+        <translation>Afsluiten</translation>
     </message>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation type="unfinished">&lt;p&gt;
+        <translation>&lt;p&gt;
 Deze afsluitopties worden voornamelijk voor gebruik tijdens ontwikkeling en tests van het Opie systeem. In een normale omgeving zijn deze opties niet nodig.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annuleren</translation>
+        <translation>Annuleren</translation>
     </message>
 </context>
 <context>
     <name>SyncAuthentication</name>
     <message>
         <source>Sync Connection</source>
-        <translation type="unfinished">Synchronisatieverbinding</translation>
+        <translation>Synchronisatieverbinding</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
@@ -539,23 +542,23 @@ Deze afsluitopties worden voornamelijk voor gebruik tijdens ontwikkeling en test
     </message>
     <message>
         <source>Deny</source>
-        <translation type="unfinished">Weiger</translation>
+        <translation>Weiger</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</source>
-        <translation type="unfinished">&lt;p&gt;Een onbekend systeem probeert toegang te krijgen tot dit apparaat. Dit is normaal als dit de eerste keer is dat u synchroniseert.</translation>
+        <translation>&lt;p&gt;Een onbekend systeem probeert toegang te krijgen tot dit apparaat. Dit is normaal als dit de eerste keer is dat u synchroniseert.</translation>
     </message>
     <message>
         <source>Allow</source>
-        <translation type="unfinished">Sta toe</translation>
+        <translation>Sta toe</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade or change the security setting to use IntelliSync.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Een ongeauthoriseerd systeem vraagt om toegang tot dit apparaat.&lt;p&gt;Als u een versie van Qtopia Desktop ouder dan 1.5.1 gebruikt, kunt u het best upgraden, anders de veiligheidsinstellingen wijzigen naar IntelliSync.</translation>
     </message>
     <message>
         <source>&lt;qt&gt;&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;You chose IntelliSync so you may I allow or deny this connection.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;&lt;p&gt;Een ongeauthoriseerd systeem vraagt om toegang tot dit apparaat.&lt;p&gt;Instellingen staan op IntelliSync, dus ik kan deze verbinding weigeren of toelaten.&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>
@@ -574,11 +577,11 @@ Deze afsluitopties worden voornamelijk voor gebruik tijdens ontwikkeling en test
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbreken</translation>
     </message>
     <message>
         <source>Syncing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Synchroniseren:</translation>
     </message>
 </context>
 </TS>

@@ -245,7 +245,7 @@ Het moet leeg zijn</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Toevoegen</translation>
     </message>
 </context>
 </TS>

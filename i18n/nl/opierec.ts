@@ -209,11 +209,11 @@ echt &lt;font size=+2&gt;&lt;B&gt;VERWIJDEREN&lt;/B&gt;&lt;/font&gt;?</translati
     </message>
     <message>
         <source>Auto Mute</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto Stil</translation>
     </message>
     <message>
         <source>Stereo Channels</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereokanalen</translation>
     </message>
 </context>
 </TS>

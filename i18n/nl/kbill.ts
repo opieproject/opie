@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>&lt;b&gt;The Story&lt;/b&gt;&lt;p&gt;Yet again, the fate of the world rests in your hands!  An evil computer hacker, known only by his handle &apos;Bill&apos;, has created the ultimate computer virus.  A virus so powerful that it has the power to transmute an ordinary computer into a toaster oven.  (oooh!) &apos;Bill&apos; has cloned himself into a billion-jillion micro-Bills.  Their sole purpose is to deliver the nefarious virus, which has been cleverly disguised as a popular operating system. As System Administrator and Exterminator, your job is to keep Bill from succeeding at his task.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;De Regels&lt;/b&gt;&lt;p&gt;Na jaren, nee dagen van minutieus onderzoek - met behulp van de goedkoopste programmeurs die er te vinden zijn -  naar de meest makkelijke weergave, is het ons mogelijk gebleken dit programma zo eenvoudig te maken dat het geschikt is voor de hele familie, en de huiskat, en toch niet te laten lijken op een Macintosh.&lt;p&gt;&lt;UL&gt;&lt;LI&gt;Mep de Bill&apos;s (klik)&lt;/LI&gt;&lt;LI&gt;Herstart de computer (klik)&lt;/LI&gt;&lt;LI&gt;Pak de gestolen OSen op &amp; en breng ze terug (sleep) ze naar hun respectievelijjke computers&lt;/LI&gt;&lt;LI&gt;Sleep de emmer om brandjes te blussen&lt;/LI&gt;&lt;LI&gt;Scores zijn gebaseerd op stbiliteit van het computersysteem, met bonussen voor het meppen van de Bills.&lt;/LI&gt;&lt;/UL&gt;&lt;P&gt;De rest kun je vast zelf wel uitvissen. Ons lukte het, dus jou vast ook wel.</translation>
     </message>
 </context>
 <context>

@@ -95,7 +95,7 @@ signaal (%1)
     </message>
     <message>
         <source>&lt;center&gt;Welcome to OPIE %1&lt;/center&gt;&lt;center&gt;&amp; %2 %3&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Welkom bij OPIE %1&lt;/center&gt;&lt;center&gt;&amp; %2 %3&lt;/center&gt;</translation>
     </message>
 </context>
 </TS>

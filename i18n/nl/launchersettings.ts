@@ -3,42 +3,42 @@
     <name>DocTabSettings</name>
     <message>
         <source>Enable the Documents Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet Documenttabblad aan</translation>
     </message>
     <message>
         <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Let op:&lt;/b&gt; Om deze verandering door te voeren kan het noodzakelijk zijn Opie opnieuw op te starten.</translation>
     </message>
     <message>
         <source>Check, if you want the Documents Tab to be visible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vink dit aan als het Documenttablad zichtbaar moet zijn.</translation>
     </message>
 </context>
 <context>
     <name>InputMethodSettings</name>
     <message>
         <source>Resize application on Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas schermgrootte aan bij popup</translation>
     </message>
     <message>
         <source>Enable floating and resizing</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet verplaatsen en verschalen aan</translation>
     </message>
     <message>
         <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Let op:&lt;/b&gt; Om deze verandering door te voeren kan het noodzakelijk zijn Opie opnieuw op te starten.</translation>
     </message>
     <message>
         <source>Check, if you want the application to be automatically resized if the input method pops up.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activeer dit als je vensters automatisch wilt laten verschalen als een invulveld opkomt.</translation>
     </message>
     <message>
         <source>Check, if you want to move and/or resize input methods</source>
-        <translation type="unfinished"></translation>
+        <translation>Activeer dit als je invulvelden wilt kunnen verschalen en verplaatsen</translation>
     </message>
     <message>
         <source>Specify the percentage of the screen width for the input method</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel het percentage in dat invulvelden maximaal in de breedte mogen zijn</translation>
     </message>
 </context>
 <context>
@@ -61,11 +61,11 @@
     </message>
     <message>
         <source>InputMethods</source>
-        <translation type="unfinished"></translation>
+        <translation>Invoermethoden</translation>
     </message>
     <message>
         <source>DocTab</source>
-        <translation type="unfinished"></translation>
+        <translation>DocTab</translation>
     </message>
 </context>
 <context>
@@ -88,7 +88,7 @@
     </message>
     <message>
         <source>Show Applications in subpopups</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat programma&apos;s in sub-popups zien</translation>
     </message>
 </context>
 <context>
@@ -264,11 +264,11 @@
     </message>
     <message>
         <source>Enable animated busy indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik bewegend &apos;bezig&apos; icoon</translation>
     </message>
     <message>
         <source>Activate this, if you want an animatedbusy indicator for starting applications in the Launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activeer dit als je een bewegend &apos;bezig&apos; icoon in het midden van het scherm wilt ipv een in de taakbalk.</translation>
     </message>
 </context>
 <context>

@@ -765,7 +765,13 @@ to. On Linux/x86, typically this is either /dev/ttyS0
 If you have an internal ISDN card with AT command
 emulation (most cards under Linux support this), you
 should select one of the /dev/ttyIx devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit geeft de seriele poort weer waar de modem aangesloten is.
+Onder Linux/x86 is dit meestal /dev/ttyS0 (COM1 onder DOS)
+of /dev/ttyS1 (COM2 onder DOS).
+
+Als een interne ISDN kaart met AT commando emulatie gebruikt
+wordt (de meeste Linux apparaten ondersteunen dit), moet er 
+voor een van de /dev/ttylx apparaten gekozen worden.</translation>
     </message>
     <message>
         <source>&amp;Flow control:</source>
@@ -789,11 +795,15 @@ communicate. You should not change this unless
 you know what you are doing.
 
 &lt;b&gt;Default&lt;/b&gt;: CRTSCTS</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Geeft aan hoe de seriele poort en het modem
+moeten communiceren. Laat dit onveranderd als je
+niet zeker weet dat dit gewijzigd moet worden.
+
+&lt;b&gt;Standaard&lt;/b&gt;: CRTSCTS</translation>
     </message>
     <message>
         <source>&amp;Line termination:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Lijnafsluiting:</translation>
     </message>
     <message>
         <source>&lt;p&gt;Specifies how AT commands are sent to your
@@ -803,7 +813,13 @@ to the init string, you should try different
 settings here
 
 &lt;b&gt;Default&lt;/b&gt;: CR/LF</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Geeft aan hoe AT commando&apos;s naar het modem
+verzonden worden. De meeste modems werken goed
+met de standaard &lt;i&gt;CR/LF&lt;/i&gt;. Als het modem niet
+op de init string reageert, moeten er specifiekere
+instellingen worden gemaakt.
+
+&lt;b&gt;Standaard&lt;/b&gt;: CR/LF</translation>
     </message>
     <message>
         <source>Co&amp;nnection speed:</source>
@@ -816,7 +832,13 @@ the default of 38400 bits/sec. If everything
 works you can try to increase this value, but to
 no more than 115200 bits/sec (unless you know
 that your serial port supports higher speeds).</source>
-        <translation type="unfinished"></translation>
+        <translation>Geeft de snelheid weer waarmee het modem
+en de seriele poort communiceren. Begin met de
+standaardinstelling van 38400 bits/sec. Als dit
+werkt kunnen hogere instelleningen tot
+115200 bits/sec geprobeerd worden (alleen op
+speciale seriele poorten kunnen de hogere standen
+gebruikt worden).</translation>
     </message>
     <message>
         <source>&amp;Use lock file</source>
@@ -832,7 +854,15 @@ Here you can select whether this locking will
 be done.
 
 &lt;b&gt;Default&lt;/b&gt;: On</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Om te voorkomen dat andere programma&apos;s
+het modem willen aanspreken terwijl het bezig is,
+kan een bestand worden aangemaakt dat aangeeft of
+het modem in gebruik is. Onder linux zou dit bestand
+te vinden zijn als &lt;tt&gt;/var/lock/LCK..ttyS1&lt;/tt&gt;
+Hiermee kan gekozen worden dit wel of niet te
+gebruiken.
+
+&lt;b&gt;Standaard&lt;/b&gt;:Aan</translation>
     </message>
     <message>
         <source>Modem timeout:</source>
@@ -846,7 +876,9 @@ be done.
         <source>This specifies how long &lt;i&gt;kppp&lt;/i&gt; waits for a
 &lt;i&gt;CONNECT&lt;/i&gt; response from your modem. The
 recommended value is 30 seconds.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit geeft aan hoe lang &lt;i&gt;kppp&lt;/i&gt; wacht op een
+&lt;i&gt;CONNECT&lt;/i&gt; antwoord van het modem.
+De aanbevolen tijd is 30 seconden.</translation>
     </message>
 </context>
 <context>
@@ -867,7 +899,13 @@ recognize this sound, or your local phone system
 does not emit such a tone, uncheck this option
 
 &lt;b&gt;Default:&lt;/b&gt;: On</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Normaal wacht het modem op een kiestoon
+van de telefoonlijn, die aangeeft dat het een nummer
+kan gaan kiezen. Als het modem dit geluid niet
+herkent, of het er gewoon niet is, zet deze optie
+dan uit.
+
+&lt;b&gt;Standaard&lt;/b&gt;: Aan</translation>
     </message>
     <message>
         <source> sec</source>
@@ -881,7 +919,14 @@ same number is busy too often.
 
 The default is 0 seconds, you should not change
 this unless you need to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geeft aan hoeveel seconden er gewacht moet
+worden voor de volgende poging als alle gebelde num-
+mers bezet zijn. Dit is nodig omdat sommigge modems
+vasthangen als er te vaak een bezet toon van hetzelfde
+nummer komt.
+
+Standaard is 0 seconden, dit hoeft normaal niet
+veranderd te worden.</translation>
     </message>
     <message>
         <source>Modem &amp;volume:</source>
@@ -895,11 +940,16 @@ lower volume.
 
 If this does not work for your modem,
 you must modify the modem volume command.</source>
-        <translation type="unfinished"></translation>
+        <translation>De meeste modems hebben een luidspreker
+die een hoop geluid maakt tijdens het kiezen.
+Hier kan dit lager- en uitgeschakeld worden.
+
+Als het modem hierop niet reageert, moet het
+modem volume commando aangepast worden.</translation>
     </message>
     <message>
         <source>Modem asserts CD line</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem monitort CD lijn</translation>
     </message>
     <message>
         <source>This controls how &lt;i&gt;kppp&lt;/i&gt; detects that the modem
@@ -907,7 +957,11 @@ is not responding. Unless you are having
 problems with this, do not modify this setting.
 
 &lt;b&gt;Default&lt;/b&gt;: Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit geeft aan hoe &lt;i&gt;kppp&lt;/i&gt; merkt als het modem niet
+reageert. Als je hier geen problemen mee hebt, verander
+deze instelling dan niet.
+
+&lt;b&gt;Standaard&lt;/b&gt;: Uit</translation>
     </message>
     <message>
         <source>Mod&amp;em Commands...</source>
@@ -916,11 +970,11 @@ problems with this, do not modify this setting.
     <message>
         <source>Allows you to change the AT command for
 your modem.</source>
-        <translation type="unfinished"></translation>
+        <translation>AT commando van het modem wijzigen.</translation>
     </message>
     <message>
         <source>&amp;Query Modem...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vraag modeminfo op...</translation>
     </message>
     <message>
         <source>Most modems support the ATI command set to
@@ -929,7 +983,11 @@ find out vendor and revision of your modem.
 Press this button to query your modem for
 this information. It can be useful to help
 you setup the modem</source>
-        <translation type="unfinished"></translation>
+        <translation>De meeste modems gebruiken de ATI commando
+set om merk/type en revisiegegevens over te sturen.
+Druk deze knop om het modem deze info te
+vragen. Het kan belangrijk zijn bij het instellen van
+het modem</translation>
     </message>
 </context>
 <context>
@@ -960,7 +1018,7 @@ you setup the modem</source>
     </message>
     <message>
         <source>&amp;Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Apparaten</translation>
     </message>
 </context>
 <context>
@@ -1009,210 +1067,217 @@ you setup the modem</source>
     </message>
     <message>
         <source>Unable to open modem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan modem niet aanspreken.</translation>
     </message>
     <message>
         <source>Unable to detect state of CD line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan status van de CD lijn niet uitlezen.</translation>
     </message>
     <message>
         <source>The modem is not ready.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem is niet gereed.</translation>
     </message>
     <message>
         <source>The modem is busy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem is bezet.</translation>
     </message>
     <message>
         <source>Modem Ready.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem gereed.</translation>
     </message>
     <message>
         <source>Can&apos;t restore tty settings: tcsetattr()
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kan tty instellingen niet terugzetten: tcsetattr()
+</translation>
     </message>
     <message>
         <source>The modem does not respond.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het modem reageert niet.</translation>
     </message>
     <message>
         <source>Unknown speed</source>
-        <translation type="unfinished"></translation>
+        <translation>onbekende snelheid</translation>
     </message>
     <message>
         <source>ATI Query</source>
-        <translation type="unfinished"></translation>
+        <translation>ATI Quiery</translation>
     </message>
     <message>
         <source>Unable to create modem lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan modem lock file niet aanmaken.</translation>
     </message>
     <message>
         <source>Looking for modem...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoek naar modem...</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <source>Modem Query timed out.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem Query timed out.</translation>
     </message>
     <message>
         <source>Modem device is locked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem is gelockt.</translation>
     </message>
     <message>
         <source>Modem Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem gereed</translation>
     </message>
     <message>
         <source>One moment please...</source>
-        <translation type="unfinished"></translation>
+        <translation>Een moment aub...</translation>
     </message>
     <message>
         <source>Modem Query Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem Query resutaten</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluit</translation>
     </message>
     <message>
         <source>You&apos;re not allowed to dial out with kppp.
 Contact your system administrator.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitbellen met kppp niet toegestaan.
+Vraag uw systeembeheerder.</translation>
     </message>
     <message>
         <source>Cannot find the PPP daemon!
 Make sure that pppd is installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan PPP daeman niet vinden!
+Controleer of pppd geinstalleerd is.</translation>
     </message>
     <message>
         <source>You do not have the permission to start pppd!
 Contact your system administrator and ask to get access to pppd.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitbellen met kppp niet toegestaan.
+Vraag uw systeembeheerder, en vraag om pppd toegang.</translation>
     </message>
     <message>
         <source>You don&apos;t have sufficient permission to run
 %1
 Please make sure that kppp is owned by root and has the SUID bit set.</source>
-        <translation type="unfinished"></translation>
+        <translation>Onvoldoende rechten voor hetuitvoeren
+van %1
+Zorg dat kppp het SUID bit heeft, en van root is.</translation>
     </message>
     <message>
         <source>%1 is missing or can&apos;t be read!
 Ask your system administrator to create this file (can be empty) with appropriate read and write permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 is vermist en kan niet worden gelezen!
+Vraag de systeembeheerder om dit bestand aan te maken (kan leeg zijn) met de juiste lees- en schrijfrechten.</translation>
     </message>
     <message>
         <source>Edit Modem Commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig modem commando&apos;s</translation>
     </message>
     <message>
         <source>Pre-init delay (sec/100):</source>
-        <translation type="unfinished"></translation>
+        <translation>Pre-init vertraging (sec/100):</translation>
     </message>
     <message>
         <source>Initialization string %1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingsregel %1:</translation>
     </message>
     <message>
         <source>Post-init delay (sec/100):</source>
-        <translation type="unfinished"></translation>
+        <translation>Post-init vertraging (sec/100):</translation>
     </message>
     <message>
         <source>Dialing speed (sec/100):</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiessnelheid (sec/100):</translation>
     </message>
     <message>
         <source>Init response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Init antwoord:</translation>
     </message>
     <message>
         <source>No dial tone detection:</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen kiestoondetectie:</translation>
     </message>
     <message>
         <source>Dial string:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiesstring:</translation>
     </message>
     <message>
         <source>Connect response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindingsantwoord:</translation>
     </message>
     <message>
         <source>Busy response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bezig antwoord:</translation>
     </message>
     <message>
         <source>No carrier response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen lijnreactie:</translation>
     </message>
     <message>
         <source>No dial tone response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen kiestoon:</translation>
     </message>
     <message>
         <source>Hangup string:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ophang string:</translation>
     </message>
     <message>
         <source>Hangup response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ophangreactie:</translation>
     </message>
     <message>
         <source>Answer string:</source>
-        <translation type="unfinished"></translation>
+        <translation>Antwoordstring:</translation>
     </message>
     <message>
         <source>Ring response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rinkelantwoord:</translation>
     </message>
     <message>
         <source>Answer response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Opneemantwoord:</translation>
     </message>
     <message>
         <source>Escape string:</source>
-        <translation type="unfinished"></translation>
+        <translation>Escape string:</translation>
     </message>
     <message>
         <source>Escape response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Escape antwoord:</translation>
     </message>
     <message>
         <source>Guard time (sec/50):</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachttijd (sec/50):</translation>
     </message>
     <message>
         <source>Volume off/low/high:</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume uit/laag/hoog:</translation>
     </message>
     <message>
         <source>Connected at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbonden met:</translation>
     </message>
     <message>
         <source>Time connected:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tijd verbonden:</translation>
     </message>
     <message>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume:</translation>
     </message>
     <message>
         <source>Session Bill:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sessiekosten:</translation>
     </message>
     <message>
         <source>Total Bill:</source>
-        <translation type="unfinished"></translation>
+        <translation>Totale kosten:</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbreek verbinding</translation>
     </message>
     <message>
         <source>Byte</source>
@@ -1232,199 +1297,199 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>Connecting to: </source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinden met:</translation>
     </message>
     <message>
         <source>Online</source>
-        <translation type="unfinished"></translation>
+        <translation>Online</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Offline</translation>
     </message>
     <message>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Log</translation>
     </message>
     <message>
         <source>Connecting to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinden met: %1</translation>
     </message>
     <message>
         <source>Running pre-startup command...</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef pre-startup commando...</translation>
     </message>
     <message>
         <source>Initializing modem...</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellen modem...</translation>
     </message>
     <message>
         <source>Setting </source>
-        <translation type="unfinished"></translation>
+        <translation>Instelling</translation>
     </message>
     <message>
         <source>Setting speaker volume...</source>
-        <translation type="unfinished"></translation>
+        <translation>Instelling volume...</translation>
     </message>
     <message>
         <source>Turning off dial tone waiting...</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakel wachten op kiestoon uit...</translation>
     </message>
     <message>
         <source>Dialing %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiezen %1</translation>
     </message>
     <message>
         <source>Line busy. Hanging up...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijn bezet. Opgehangen.</translation>
     </message>
     <message>
         <source>Line busy. Waiting: %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijn bezet. Wachten: %1 seconden</translation>
     </message>
     <message>
         <source>No Dialtone</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen kiestoon</translation>
     </message>
     <message>
         <source>No Carrier</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen lijn</translation>
     </message>
     <message>
         <source>Scanning %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Scannen van %1</translation>
     </message>
     <message>
         <source>Saving %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslaan van %1</translation>
     </message>
     <message>
         <source>Sending %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzenden van %1</translation>
     </message>
     <message>
         <source>Expecting %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwacht %1</translation>
     </message>
     <message>
         <source>Pause %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Pauzeer %1 seconden</translation>
     </message>
     <message>
         <source>Timeout %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Timeout in %1 seconden</translation>
     </message>
     <message>
         <source>Hangup</source>
-        <translation type="unfinished"></translation>
+        <translation>Ophangen</translation>
     </message>
     <message>
         <source>Answer</source>
-        <translation type="unfinished"></translation>
+        <translation>Beantwoord</translation>
     </message>
     <message>
         <source>ID %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ID %1</translation>
     </message>
     <message>
         <source>Password %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachtwoord %1</translation>
     </message>
     <message>
         <source>Prompting %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Invoer %1</translation>
     </message>
     <message>
         <source>PW Prompt %1</source>
-        <translation type="unfinished"></translation>
+        <translation>WW invoer %1</translation>
     </message>
     <message>
         <source>Loop Start %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Loop Start %1</translation>
     </message>
     <message>
         <source>ERROR: Nested too deep, ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>FOUT: Te diep genest, genegeerd.</translation>
     </message>
     <message>
         <source>Loops nested too deeply!</source>
-        <translation type="unfinished"></translation>
+        <translation>Loops te diep genest!</translation>
     </message>
     <message>
         <source>Loop End %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Loop beeindigd %1</translation>
     </message>
     <message>
         <source>LoopEnd without matching Start! Line: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>LoopEnd zonder Start! regel tegen te komen: %1</translation>
     </message>
     <message>
         <source>Starting pppd...</source>
-        <translation type="unfinished"></translation>
+        <translation>Starten van pppd...</translation>
     </message>
     <message>
         <source>Scan Var: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Scan Var: %1</translation>
     </message>
     <message>
         <source>Found: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Gevonden: %1</translation>
     </message>
     <message>
         <source>Looping: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Looping: %1</translation>
     </message>
     <message>
         <source>Script timed out!</source>
-        <translation type="unfinished"></translation>
+        <translation>Script timeout!</translation>
     </message>
     <message>
         <source>Scanning: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoeken: %1</translation>
     </message>
     <message>
         <source>Expecting: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwacht: %1</translation>
     </message>
     <message>
         <source>Logging on to network...</source>
-        <translation type="unfinished"></translation>
+        <translation>Aanmelden op netwerk...</translation>
     </message>
     <message>
         <source>Running startup command...</source>
-        <translation type="unfinished"></translation>
+        <translation>Startcommando wordt uitgevoerd...</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaar</translation>
     </message>
     <message>
         <source>pppd command + command-line arguments exceed 2024 characters in length.</source>
-        <translation type="unfinished"></translation>
+        <translation>pppd commando + commandoregel argumenten zijn meer dan 2024 tekens lang.</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Cannot find the PPP daemon!&lt;br&gt;Make sure that pppd is installed and that you have entered the correct path.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Kan de PPP daemon niet vinden!&lt;br&gt;Zorg dat pppd geinstalleerd is en het juiste pad bekend is.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Cannot execute:&lt;br&gt; %1&lt;br&gt;Please make sure that you have given setuid permission and that pppd is executable.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Kan niet uitvoeren:&lt;br&gt; %1&lt;br&gt;Zorg ervoor dat SUID ingeschakeld is en pppd uitvoerbaar is.&lt;br&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Cannot find:&lt;br&gt; %1&lt;br&gt;Please make sure you have setup your modem device properly and/or adjust the location of the modem device on the modem tab of the setup dialog.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Kan niet vinden:&lt;br&gt; %1&lt;br&gt;Zorg ervoor dat het modem juist ingesteld is en/of stel de juiste juiste modemverbinding in op het modemtabblad van de instellingsdialoog.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;You have selected the authentication method PAP or CHAP. This requires that you supply a username and a password!&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Er is gekozen voor PAP of CHAP authenticatie. Dit vereist dat gebruikersnaam en wachtwoord ingevuld wordt! &lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Cannot create PAP/CHAP authentication&lt;br&gt;file &quot;%1&quot;&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Kan PAP/CHAP authenticatiebestand niet&lt;br&gt;maken: &quot;%1&quot;&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>You must specify a telephone number!</source>
-        <translation type="unfinished"></translation>
+        <translation>Er moet een telefoonnummer ingevuld worden!</translation>
     </message>
 </context>
 <context>

@@ -3,7 +3,7 @@
     <name>Decoration</name>
     <message>
         <source>Liquid</source>
-        <translation type="unfinished">Vloeibaar</translation>
+        <translation>Vloeibaar</translation>
     </message>
 </context>
 <context>

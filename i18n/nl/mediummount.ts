@@ -50,7 +50,7 @@
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -97,11 +97,11 @@
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Scan whole media</source>
-        <translation type="unfinished"></translation>
+        <translation>Doorzoek heel medium</translation>
     </message>
 </context>
 </TS>

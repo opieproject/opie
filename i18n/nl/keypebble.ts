@@ -50,7 +50,7 @@ de verbiding verbroken.</translation>
     </message>
     <message>
         <source>Waiting for server initialization...</source>
-        <translation type="unfinished"></translation>
+        <translation>Wacht op serverinitialisatie...</translation>
     </message>
 </context>
 <context>

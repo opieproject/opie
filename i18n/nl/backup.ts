@@ -57,11 +57,11 @@
     </message>
     <message>
         <source>Backup Successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Backup gelukt.</translation>
     </message>
     <message>
         <source>Restore Successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstel gelukt.</translation>
     </message>
 </context>
 <context>

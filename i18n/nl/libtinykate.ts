@@ -3,574 +3,575 @@
     <name>ColorConfig</name>
     <message>
         <source>Background:</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtergrond:</translation>
     </message>
     <message>
         <source>Selected:</source>
-        <translation type="unfinished"></translation>
+        <translation>Geselecteerd:</translation>
     </message>
     <message>
         <source>Sets the background color of the editing area</source>
-        <translation type="unfinished"></translation>
+        <translation>Stelt de achtergrondkleur van het editvlak in</translation>
     </message>
     <message>
         <source>Sets the background color of the selection. To set the text color for selected text, use the &amp;quot;&lt;b&gt;Configure Highlighting&lt;/b&gt;&amp;quot; dialog.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stelt de achtergrondkleur van de selectie in. Gebruik &amp;quot;&lt;b&gt;Stel Highlighting in&lt;/b&gt;&amp;quot; om de tekstkleur van de geselecteerde tekst in te stellen.</translation>
     </message>
 </context>
 <context>
     <name>EditConfigTab</name>
     <message>
         <source>&amp;Word wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Woord afbreking</translation>
     </message>
     <message>
         <source>Replace &amp;tabs with spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>Vervang &amp;tabs met spaties</translation>
     </message>
     <message>
         <source>&amp;Remove trailing spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>Ve&amp;rwijder opvolgende spaties</translation>
     </message>
     <message>
         <source>&amp;Auto brackets</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Auto-bracket</translation>
     </message>
     <message>
         <source>Group &amp;undos</source>
-        <translation type="unfinished"></translation>
+        <translation>Goepeer &amp;undo&apos;s</translation>
     </message>
     <message>
         <source>&amp;Show tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Geef Tabs weer</translation>
     </message>
     <message>
         <source>Smart &amp;home</source>
-        <translation type="unfinished"></translation>
+        <translation>Slim T&amp;huis</translation>
     </message>
     <message>
         <source>&amp;Page up/down moves cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pagina omhoog/laag verschuift cursor</translation>
     </message>
     <message>
         <source>Wrap &amp;cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>Breek &amp;cursor af</translation>
     </message>
     <message>
         <source>Wrap Words At:</source>
-        <translation type="unfinished"></translation>
+        <translation>Breek af op:</translation>
     </message>
     <message>
         <source>Tab/Indent Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tab/Inspring Breedte:</translation>
     </message>
     <message>
         <source>Undo steps:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ont-doe stappen:</translation>
     </message>
     <message>
         <source>Encoding:</source>
-        <translation type="unfinished"></translation>
+        <translation>Codering:</translation>
     </message>
     <message>
         <source>Word wrap is a feature that causes the editor to automatically start a new line of text and move (wrap) the cursor to the beginning of that new line. KateView will automatically start a new line of text when the current line reaches the length specified by the Wrap Words At: option.&lt;p&gt;&lt;b&gt;NOTE:&lt;b&gt; Word Wrap will not change existing lines or wrap them for easy reading as in some applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Woordafbreking is een optie die de editor automatisch een nieuwe regel laat beginnen en de cursor laat verspringen naar deze nieuwe regel. KateView zal automatisch een nieuwe tekstregel laten beginnen zodra de lengte meer wordt dan aangegeven wordt in de &quot;Breek af op:&quot; optie.&lt;p&gt;&lt;b&gt;LET OP:&lt;b&gt; Woordafbreking zal bestaande regels niet aanpassen of afbreken zoals andere applicaties wel doen.</translation>
     </message>
     <message>
         <source>If the Word Wrap option is selected this entry determines the length (in characters) at which the editor will automatically start a new line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als Woordafbreking gekozen is, geeft deze waarde aan na hoeveel karakters een woordafbreking
+wordt toegepast.</translation>
     </message>
     <message>
         <source>KateView will replace any tabs with the number of spaces indicated in the Tab Width: entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>KateView zal tabs vervangen door het aantal spaties aangegeven in de waarde &quot;Tab/Inspring Breedte:&quot;.</translation>
     </message>
     <message>
         <source>If the Replace Tabs By Spaces option is selected this entry determines the number of spaces with which the editor will automatically replace tabs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als &quot;Vervang tabs door spaties&quot; aangeschakeld is, geeft deze waarde het aantal spaties aan dat gebruikt wordt om tabs te vervangen.</translation>
     </message>
     <message>
         <source>KateView will automatically eliminate extra spaces at the ends of lines of text.</source>
-        <translation type="unfinished"></translation>
+        <translation>KateView zal automatisch extra spaties aan het einde van regels tekst verwijderen.</translation>
     </message>
     <message>
         <source>When the user types a left bracket ([,(, or {) KateView automatically enters the right bracket (}, ), or ]) to the right of the cursor.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als er een linker haakje ([,( of{) wordt getypt, zal KateView automatisch het rechter haakje (},) of ]) aan de rechterkant van de cursor invoegen.</translation>
     </message>
     <message>
         <source>Checking this will cause sequences of similar actions to be undone at once.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit aanvinken zal ervoor zorgen dat opeenvolgingen van soortgelijke acties gelijkertijd ont-daan worden.</translation>
     </message>
     <message>
         <source>The editor will display a symbol to indicate the presence of a tab in the text.</source>
-        <translation type="unfinished"></translation>
+        <translation>De editor zal een teken plaatsen om de aanwezigheid van een tab weer te geven.</translation>
     </message>
     <message>
         <source>Not yet implemented.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nog niet geimplementeerd.</translation>
     </message>
     <message>
         <source>If this is selected, the insertion cursor will be moved to the first/last line when pressing the page up/down buttons.&lt;p&gt;If not selected, it will remain at it&apos;s relative position in the visible text.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als dit geselecteerd is, zal de invoegcursor naar de eerste/laatste regel worden verplaatst als de omhoog/omlaag knop wordt gedrukt.&lt;p&gt;Als niet geselecteerd, zal hij op zijn relatieve positie in de tekst blijven.</translation>
     </message>
     <message>
         <source>Sets the number of undo/redo steps to record. More steps uses more memory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stelt het aantal on-doe/her-doe stappen in. Meer stappen gebruiken meer geheugen.</translation>
     </message>
     <message>
         <source>When on, moving the insertion cursor using the &lt;b&gt;Left&lt;/b&gt; and &lt;b&gt;Right&lt;/b&gt; keys will go on to previous/next line at beginning/end of the line, similar to most editors.&lt;p&gt;When off, the insertion cursor cannot be moved left of the line start, but it can be moved off the line end, which can be very handy for programmers.</source>
-        <translation type="unfinished"></translation>
+        <translation>Indien aan, zal het verschuiven van de invoercursor met de &lt;b&gt;Links&lt;/b&gt; en &lt;b&gt;Rechts&lt;/b&gt; vrder gaan met de nieuwe regel, zoals de meeste andere editors.&lt;p&gt;Indien uit, kan de invoercursor niet verder dan de kantlijn naar links worden verschoven, maar wel na het regeleinde, wat erg handig kan zijn voor programmeurs.</translation>
     </message>
 </context>
 <context>
     <name>GotoLineDialog</name>
     <message>
         <source>Goto Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Ga naar regel</translation>
     </message>
     <message>
         <source>&amp;Goto Line:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ga naar regel:</translation>
     </message>
 </context>
 <context>
     <name>HighlightDialog</name>
     <message>
         <source>Highlight Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Highlight instellingen</translation>
     </message>
 </context>
 <context>
     <name>HighlightDialogPage</name>
     <message>
         <source>&amp;Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Standaardwaarden</translation>
     </message>
     <message>
         <source>Default Item Styles</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard Item Stijlen</translation>
     </message>
     <message>
         <source>Item:</source>
-        <translation type="unfinished"></translation>
+        <translation>Item:</translation>
     </message>
     <message>
         <source>&amp;Highlight Modes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Highlight Modus</translation>
     </message>
     <message>
         <source>Config Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Selectie Configuratie</translation>
     </message>
     <message>
         <source>Item Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Item Stijl</translation>
     </message>
     <message>
         <source>Highlight Auto Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Highlight Auto Selectie</translation>
     </message>
     <message>
         <source>Highlight:</source>
-        <translation type="unfinished"></translation>
+        <translation>Highlight:</translation>
     </message>
     <message>
         <source>File Extensions:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestands extensies:</translation>
     </message>
     <message>
         <source>Mime Types:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mime Types:</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard</translation>
     </message>
 </context>
 <context>
     <name>HlEditDialog</name>
     <message>
         <source>Highlight Conditions</source>
-        <translation type="unfinished"></translation>
+        <translation>Highlight Condities</translation>
     </message>
     <message>
         <source>Syntax structure</source>
-        <translation type="unfinished"></translation>
+        <translation>Syntax structuur</translation>
     </message>
     <message>
         <source>New Context</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe Context</translation>
     </message>
     <message>
         <source>New Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw Item</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opties</translation>
     </message>
     <message>
         <source>Can&apos;t find template file</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan template niet vinden</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Omschrijving:</translation>
     </message>
     <message>
         <source>Attribute:</source>
-        <translation type="unfinished"></translation>
+        <translation>Attribuut:</translation>
     </message>
     <message>
         <source>LineEnd:</source>
-        <translation type="unfinished"></translation>
+        <translation>RegelEind:</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Type:</translation>
     </message>
     <message>
         <source>Parameter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Parameter:</translation>
     </message>
     <message>
         <source>Context switch:</source>
-        <translation type="unfinished"></translation>
+        <translation>Context schakelaar:</translation>
     </message>
     <message>
         <source>Delete this item</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder dit item</translation>
     </message>
 </context>
 <context>
     <name>HlManager</name>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normaal</translation>
     </message>
     <message>
         <source>Keyword</source>
-        <translation type="unfinished"></translation>
+        <translation>Sleutelwoord</translation>
     </message>
     <message>
         <source>Data Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Data Type</translation>
     </message>
     <message>
         <source>Decimal/Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Decimaal/Waarde</translation>
     </message>
     <message>
         <source>Base-N Integer</source>
-        <translation type="unfinished"></translation>
+        <translation>Base-N Integer</translation>
     </message>
     <message>
         <source>Floating Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Drijvende komma</translation>
     </message>
     <message>
         <source>Character</source>
-        <translation type="unfinished"></translation>
+        <translation>Karakter</translation>
     </message>
     <message>
         <source>String</source>
-        <translation type="unfinished"></translation>
+        <translation>String</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Commentaar</translation>
     </message>
     <message>
         <source>Others</source>
-        <translation type="unfinished"></translation>
+        <translation>Andere</translation>
     </message>
 </context>
 <context>
     <name>IndentConfigTab</name>
     <message>
         <source>&amp;Auto Indent</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Auto-inspringing</translation>
     </message>
     <message>
         <source>Indent With &amp;Spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>Inspringing met &amp;Spaties</translation>
     </message>
     <message>
         <source>&amp;Backspace Key Indents</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Backspace Toets Inspringing</translation>
     </message>
     <message>
         <source>&amp;Tab Key Indents</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tab Toets Inspringing</translation>
     </message>
     <message>
         <source>Keep Indent &amp;Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Houd Inspringings &amp;Profiel</translation>
     </message>
     <message>
         <source>&amp;Keep Extra Spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Houd extra spaties</translation>
     </message>
     <message>
         <source>When &lt;b&gt;Auto indent&lt;/b&gt; is on, KateView will indent new lines to equal the indent on the previous line.&lt;p&gt;If the previous line is blank, the nearest line above with text is used</source>
-        <translation type="unfinished"></translation>
+        <translation>Als &lt;b&gt;Auto-inspringing&lt;/b&gt; aanstaat, zal KateView nieuwe lijnen automatisch laten inspringen naar het niveau van de inspringing op de vorige regel.&lt;p&gt;Als de voorgaande regel leeg is, wordt de dichtbijzijndste regel erboven gebruikt</translation>
     </message>
     <message>
         <source>Check this if you want to indent with spaces rather than tabs.&lt;br&gt;A Tab will be converted to &lt;u&gt;Tab-width&lt;/u&gt; as set in the &lt;b&gt;edit&lt;/b&gt; options</source>
-        <translation type="unfinished"></translation>
+        <translation>Vink aan als inspringing met spaties i.p.v. met tabs gedaan moet worden. &lt;br&gt;Een tab zal worden omgezet naar &lt;u&gt;Tabbreedte&lt;/u&gt; zoals ingesteld in de &lt;b&gt;Wijzig&lt;/b&gt; opties</translation>
     </message>
     <message>
         <source>This allows the &lt;b&gt;backspace&lt;/b&gt; key to be used to indent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit laat de &lt;b&gt;backspace&lt;/b&gt; toets toe als inspringingstoets.</translation>
     </message>
     <message>
         <source>This allows the &lt;b&gt;tab&lt;/b&gt; key to be used to indent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit laat de &lt;b&gt;tab&lt;/b&gt; toets toe als inspringingstoets.</translation>
     </message>
     <message>
         <source>This retains current indentation settings for future documents.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit bevat de huidige inspringingsregels voor nieuwe documenten.</translation>
     </message>
     <message>
         <source>Indentations of more than the selected number of spaces will not be shortened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inspringingen van meer dan dit aantal spaties zullen niet worden ingekort.</translation>
     </message>
 </context>
 <context>
     <name>KDialogBase</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitvoeren</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluiten</translation>
     </message>
 </context>
 <context>
     <name>KLocale</name>
     <message>
         <source>pm</source>
-        <translation type="unfinished"></translation>
+        <translation>pm</translation>
     </message>
     <message>
         <source>am</source>
-        <translation type="unfinished"></translation>
+        <translation>am</translation>
     </message>
     <message>
         <source>concatenation of dates and time</source>
         <comment>%1 %2</comment>
-        <translation type="unfinished"></translation>
+        <translation>samenvoeging van datum en tijd</translation>
     </message>
     <message>
         <source>Monday</source>
         <comment>Mon</comment>
-        <translation type="unfinished"></translation>
+        <translation>Maandag</translation>
     </message>
     <message>
         <source>Tuesday</source>
         <comment>Tue</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dinsdag</translation>
     </message>
     <message>
         <source>Wednesday</source>
         <comment>Wed</comment>
-        <translation type="unfinished"></translation>
+        <translation>Woensdag</translation>
     </message>
     <message>
         <source>Thursday</source>
         <comment>Thu</comment>
-        <translation type="unfinished"></translation>
+        <translation>Donderdag</translation>
     </message>
     <message>
         <source>Friday</source>
         <comment>Fri</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vrijdag</translation>
     </message>
     <message>
         <source>Saturday</source>
         <comment>Sat</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zaterdag</translation>
     </message>
     <message>
         <source>Sunday</source>
         <comment>Sun</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zondag</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>Maandag</translation>
     </message>
     <message>
         <source>Tuesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Dinsdag</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Woensdag</translation>
     </message>
     <message>
         <source>Thursday</source>
-        <translation type="unfinished"></translation>
+        <translation>Donderdag</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation type="unfinished"></translation>
+        <translation>Vrijdag</translation>
     </message>
     <message>
         <source>Saturday</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaterdag</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
+        <translation>Zondag</translation>
     </message>
     <message>
         <source>January</source>
         <comment>Jan</comment>
-        <translation type="unfinished"></translation>
+        <translation>Januari</translation>
     </message>
     <message>
         <source>February</source>
         <comment>Feb</comment>
-        <translation type="unfinished"></translation>
+        <translation>Februari</translation>
     </message>
     <message>
         <source>March</source>
         <comment>Mar</comment>
-        <translation type="unfinished"></translation>
+        <translation>Maart</translation>
     </message>
     <message>
         <source>April</source>
         <comment>Apr</comment>
-        <translation type="unfinished"></translation>
+        <translation>April</translation>
     </message>
     <message>
         <source>May short</source>
         <comment>May</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mei</translation>
     </message>
     <message>
         <source>June</source>
         <comment>Jun</comment>
-        <translation type="unfinished"></translation>
+        <translation>Juni</translation>
     </message>
     <message>
         <source>July</source>
         <comment>Jul</comment>
-        <translation type="unfinished"></translation>
+        <translation>Juli</translation>
     </message>
     <message>
         <source>August</source>
         <comment>Aug</comment>
-        <translation type="unfinished"></translation>
+        <translation>Augustus</translation>
     </message>
     <message>
         <source>September</source>
         <comment>Sep</comment>
-        <translation type="unfinished"></translation>
+        <translation>September</translation>
     </message>
     <message>
         <source>October</source>
         <comment>Oct</comment>
-        <translation type="unfinished"></translation>
+        <translation>Oktober</translation>
     </message>
     <message>
         <source>November</source>
         <comment>Nov</comment>
-        <translation type="unfinished"></translation>
+        <translation>November</translation>
     </message>
     <message>
         <source>December</source>
         <comment>Dec</comment>
-        <translation type="unfinished"></translation>
+        <translation>December</translation>
     </message>
     <message>
         <source>January</source>
-        <translation type="unfinished"></translation>
+        <translation>Januari</translation>
     </message>
     <message>
         <source>February</source>
-        <translation type="unfinished"></translation>
+        <translation>Februari</translation>
     </message>
     <message>
         <source>March</source>
-        <translation type="unfinished"></translation>
+        <translation>Maart</translation>
     </message>
     <message>
         <source>April</source>
-        <translation type="unfinished"></translation>
+        <translation>April</translation>
     </message>
     <message>
         <source>May long</source>
         <comment>May</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mei</translation>
     </message>
     <message>
         <source>June</source>
-        <translation type="unfinished"></translation>
+        <translation>Juni</translation>
     </message>
     <message>
         <source>July</source>
-        <translation type="unfinished"></translation>
+        <translation>Juli</translation>
     </message>
     <message>
         <source>August</source>
-        <translation type="unfinished"></translation>
+        <translation>Augustus</translation>
     </message>
     <message>
         <source>September</source>
-        <translation type="unfinished"></translation>
+        <translation>September</translation>
     </message>
     <message>
         <source>October</source>
-        <translation type="unfinished"></translation>
+        <translation>Oktober</translation>
     </message>
     <message>
         <source>November</source>
-        <translation type="unfinished"></translation>
+        <translation>November</translation>
     </message>
     <message>
         <source>December</source>
-        <translation type="unfinished"></translation>
+        <translation>December</translation>
     </message>
 </context>
 <context>
     <name>KMessageBox</name>
     <message>
         <source>Sorry</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorry</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarschuwing</translation>
     </message>
     <message>
         <source>Question</source>
-        <translation type="unfinished"></translation>
+        <translation>Vraag</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informatie</translation>
     </message>
 </context>
 <context>
@@ -580,198 +581,209 @@
 Do you want to reload it?
 
 If you cancel you will lose these changes next time you save this file</source>
-        <translation type="unfinished"></translation>
+        <translation>Het bestand %1 is veranderd op schijf.
+Wilt u het herladen?
+
+Als u op annuleer klikt zullen deze veranderingen verloren gaan bij het opslaan</translation>
     </message>
     <message>
         <source>File has changed on Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand gewijzihd op schijf</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
 </context>
 <context>
     <name>KateView</name>
     <message>
         <source>Undo/Redo &amp;History...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ont-doe/Her-doe Gesc&amp;hiedenis...</translation>
     </message>
     <message>
         <source>&amp;Configure Editor...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Stel editor in...</translation>
     </message>
     <message>
         <source>&amp;Highlight Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Highlight Modus</translation>
     </message>
     <message>
         <source>&amp;Deselect All</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Deselecteer alles</translation>
     </message>
     <message>
         <source>Invert &amp;Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Draai &amp;Selectie om</translation>
     </message>
     <message>
         <source>Increase Font Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>Vergroot Font</translation>
     </message>
     <message>
         <source>Decrease Font Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>Verklein Font</translation>
     </message>
     <message>
         <source>Apply Word Wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik woordafbreking</translation>
     </message>
     <message>
         <source>Editing Co&amp;mmand</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzigingsco&amp;mmando</translation>
     </message>
     <message>
         <source>Toggle &amp;Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakel &amp;Favoriet</translation>
     </message>
     <message>
         <source>Clear Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Scoon Favorieten</translation>
     </message>
     <message>
         <source>&amp;Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Favorieten</translation>
     </message>
     <message>
         <source>Show &amp;IconBorder</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat &amp;IcoonRand zien</translation>
     </message>
     <message>
         <source>&amp;Indent</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Inspringing</translation>
     </message>
     <message>
         <source>&amp;Unindent</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;ont-Inspringing</translation>
     </message>
     <message>
         <source>&amp;Clean Indentation</source>
-        <translation type="unfinished"></translation>
+        <translation>S&amp;choon Inspringingen</translation>
     </message>
     <message>
         <source>C&amp;omment</source>
-        <translation type="unfinished"></translation>
+        <translation>C&amp;ommentaar</translation>
     </message>
     <message>
         <source>Unco&amp;mment</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;ont-Commentaar</translation>
     </message>
     <message>
         <source>&amp;Vertical Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Verticale selectie</translation>
     </message>
     <message>
         <source>&amp;End Of Line</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Einde-regel</translation>
     </message>
     <message>
         <source>Und&amp;o</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ont-doe</translation>
     </message>
     <message>
         <source>Re&amp;do</source>
-        <translation type="unfinished"></translation>
+        <translation>Her-&amp;doe</translation>
     </message>
     <message>
         <source>The current Document has been modified.
 Would you like to save it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Het huidige Document is gewijzigd.
+Bestand opslaan?</translation>
     </message>
     <message>
         <source>Could not save the document.
 Discard it and continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan Document niet opslaan.
+Weggooien en verdergaan?</translation>
     </message>
     <message>
         <source>&amp;Discard</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gooi weg</translation>
     </message>
     <message>
         <source>Undo/Redo History</source>
-        <translation type="unfinished"></translation>
+        <translation>Ont-doe/Her-doe Geschiedenis</translation>
     </message>
     <message>
         <source>End of document reached.
 Continue from the beginning?</source>
-        <translation type="unfinished"></translation>
+        <translation>Einde van document bereikt.
+Bij begin doorgaan?</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Vind</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Ga door</translation>
     </message>
     <message>
         <source>Beginning of document reached.
 Continue from the end?</source>
-        <translation type="unfinished"></translation>
+        <translation>Begin van document bereikt.
+Bij einde doorgaan?</translation>
     </message>
     <message>
         <source>Search string &apos;%1&apos; not found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoekstring %1 niet gevonden!</translation>
     </message>
     <message>
         <source>%1 replacement(s) made</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 vervangingen gedaan</translation>
     </message>
     <message>
         <source>Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>Vervang</translation>
     </message>
     <message>
         <source>%1 replacement(s) made.
 End of document reached.
 Continue from the beginning?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 vervangingen gedaan.
+Eind van document bereikt.
+Bij begin doorgaan?</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Stop</translation>
     </message>
     <message>
         <source>%1 replacement(s) made.
 Beginning of document reached.
 Continue from the end?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 vervangingen gedaan.
+Begin van document bereikt.
+Bij einde doorgaan?</translation>
     </message>
     <message>
         <source>Configure Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel editor in</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleuren</translation>
     </message>
     <message>
         <source>Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettertypen</translation>
     </message>
     <message>
         <source>Indent</source>
-        <translation type="unfinished"></translation>
+        <translation>Inspringing</translation>
     </message>
     <message>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig</translation>
     </message>
     <message>
         <source>Highlighting</source>
-        <translation type="unfinished"></translation>
+        <translation>Highlighting</translation>
     </message>
 </context>
 <context>
@@ -799,178 +811,178 @@ en probeer het nog eens.</translation>
     <name>ReplacePrompt</name>
     <message>
         <source>Replace Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Vervang Tekst</translation>
     </message>
     <message>
         <source>&amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Alle</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nee</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ja</translation>
     </message>
     <message>
         <source>Replace this occurence?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vervang deze versie?</translation>
     </message>
 </context>
 <context>
     <name>SearchDialog</name>
     <message>
         <source>Find Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Vind tekst</translation>
     </message>
     <message>
         <source>&amp;Text To Find:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Te vinden Tekst:</translation>
     </message>
     <message>
         <source>Regular Expression</source>
-        <translation type="unfinished"></translation>
+        <translation>Reguliere Expressie</translation>
     </message>
     <message>
         <source>Replace Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Vervang Tekst</translation>
     </message>
     <message>
         <source>&amp;Replace With:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vervang Door:</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opties</translation>
     </message>
     <message>
         <source>C&amp;ase Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hoofdlettergevoelig</translation>
     </message>
     <message>
         <source>&amp;Whole Words Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Alleen Hele &amp;Woorden</translation>
     </message>
     <message>
         <source>&amp;From Beginning</source>
-        <translation type="unfinished"></translation>
+        <translation>Vanaf Het &amp;Begin</translation>
     </message>
     <message>
         <source>Find &amp;Backwards</source>
-        <translation type="unfinished"></translation>
+        <translation>Vind &amp;Achterwaarts</translation>
     </message>
     <message>
         <source>&amp;Selected Text</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Geselecteerde Tekst</translation>
     </message>
     <message>
         <source>&amp;Prompt On Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>V&amp;raag bij vervanging</translation>
     </message>
 </context>
 <context>
     <name>SelectConfigTab</name>
     <message>
         <source>&amp;Persistent Selections</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Persistente Selecties</translation>
     </message>
     <message>
         <source>&amp;Overwrite Selections</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Overschrijf Selecties</translation>
     </message>
     <message>
         <source>Mouse &amp;Autocopy</source>
-        <translation type="unfinished"></translation>
+        <translation>Muis &amp;Autocopieer</translation>
     </message>
     <message>
         <source>&amp;X11-like Single Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;X11-achtige Enkele Selectie</translation>
     </message>
     <message>
         <source>&amp;Vertical Selections</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Verticale Selecties</translation>
     </message>
     <message>
         <source>&amp;Toggle Old</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Schakel Oud</translation>
     </message>
     <message>
         <source>Enabling this prevents key input or cursor movement by way of the arrow keys from causing the elimination of text selection.&lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; If the Overwrite Selections option is activated then any typed character input or paste operation will replace the selected text.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze optie zal voorkomen dat toetsinvoer of cursorverplaatsingen geselecteerde tekst kunnen wissen. &lt;p&gt;&lt;b&gt;Let Op:&lt;/b&gt; Als de &quot;Overschrijf Selecties&quot; optie aanstaat, dan zal een ingevoerd karakter of plakaktie de geselecteerde tekst vervangen.</translation>
     </message>
     <message>
         <source>When this is on, any keyed character input or paste operation will replace the selected text.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als dit aanstaat, vervangt iedere directe karakterinvoer of plakactie de geselecteerde tekst.</translation>
     </message>
     <message>
         <source>When this is on, any text selected with the mouse will be automatically copied to the clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als dit aanstaat, wordt iedere tekst geselecteerd door de muis direct gekopieerd naar het plakbord.</translation>
     </message>
     <message>
         <source>Not implemented yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nog niet geimplementeerd.</translation>
     </message>
     <message>
         <source>Enabling this allows you to make vertical selections.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik van deze optie laat vertical selecties toe.</translation>
     </message>
     <message>
         <source>Not yet implemented.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nog niet geimplementeerd.</translation>
     </message>
 </context>
 <context>
     <name>StyleChanger</name>
     <message>
         <source>Normal:</source>
-        <translation type="unfinished"></translation>
+        <translation>Normaal:</translation>
     </message>
     <message>
         <source>Selected:</source>
-        <translation type="unfinished"></translation>
+        <translation>Geselecteerd:</translation>
     </message>
     <message>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Vet</translation>
     </message>
     <message>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Schreef</translation>
     </message>
 </context>
 <context>
     <name>SyntaxDocument</name>
     <message>
         <source>Can&apos;t open %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan %1 niet openen</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Ander</translation>
     </message>
 </context>
 <context>
     <name>UndoHistory</name>
     <message>
         <source>Undo List</source>
-        <translation type="unfinished"></translation>
+        <translation>Ont-doe Lijst</translation>
     </message>
     <message>
         <source>Redo List</source>
-        <translation type="unfinished"></translation>
+        <translation>Her-doe Lijst</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ont-doe</translation>
     </message>
     <message>
         <source>&amp;Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Her-doe</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sluit</translation>
     </message>
 </context>
 </TS>

@@ -79,11 +79,11 @@
     </message>
     <message>
         <source>Search for: </source>
-        <translation type="unfinished"></translation>
+        <translation>Zoek naar:</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

@@ -86,15 +86,15 @@
     </message>
     <message>
         <source>Ionization Energy</source>
-        <translation type="unfinished"></translation>
+        <translation>Ionisatie-energie</translation>
     </message>
     <message>
         <source>Boiling point</source>
-        <translation type="unfinished"></translation>
+        <translation>Kookpunt</translation>
     </message>
     <message>
         <source>Melting point</source>
-        <translation type="unfinished"></translation>
+        <translation>Smeltpunt</translation>
     </message>
 </context>
 <context>

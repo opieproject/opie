@@ -237,11 +237,11 @@ Wilt u het echt verwijderen?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="unfinished">AdvancedFM ::</translation>
+        <translation>AdvancedFM ::</translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="unfinished">kB vrij</translation>
+        <translation>kB vrij</translation>
     </message>
     <message>
         <source>Cannot remove current directory
@@ -269,22 +269,24 @@ echt verwijderen?</translation>
     </message>
     <message>
         <source>Switch to View 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakel naar venster 1</translation>
     </message>
     <message>
         <source>Switch to View 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakel naar venster 2</translation>
     </message>
     <message>
         <source>Not Yet Implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Nog niet in gebruik</translation>
     </message>
     <message>
         <source>Could not copy 
 %1 
 to 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Kon niet van
+%1 naar
+%2 kopieren</translation>
     </message>
 </context>
 <context>
@@ -380,7 +382,7 @@ Klaar
     </message>
     <message>
         <source>filePermissions</source>
-        <translation type="unfinished"></translation>
+        <translation>bestandspermissies</translation>
     </message>
 </context>
 </TS>

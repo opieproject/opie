@@ -3,215 +3,221 @@
     <name>AddAtt</name>
     <message>
         <source>Adding attachments</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijlagen toevoegen</translation>
     </message>
     <message>
         <source>attach...</source>
-        <translation type="unfinished"></translation>
+        <translation>bijvoegen...</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Verijder</translation>
     </message>
     <message>
         <source>Attached</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijgevoegd</translation>
     </message>
     <message>
         <source>File type</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestandstype</translation>
     </message>
 </context>
 <context>
     <name>EditAccount</name>
     <message>
         <source>Edit Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig Account</translation>
     </message>
     <message>
         <source>Create new Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak nieuw Account</translation>
     </message>
     <message>
         <source>Account name</source>
-        <translation type="unfinished"></translation>
+        <translation>Account Naam</translation>
     </message>
     <message>
         <source>Your name</source>
-        <translation type="unfinished"></translation>
+        <translation>Uw naam</translation>
     </message>
     <message>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Email</translation>
     </message>
     <message>
         <source>POP username</source>
-        <translation type="unfinished"></translation>
+        <translation>POP gebruikersnaam</translation>
     </message>
     <message>
         <source>POP password</source>
-        <translation type="unfinished"></translation>
+        <translation>POP wachtwoord</translation>
     </message>
     <message>
         <source>POP server</source>
-        <translation type="unfinished"></translation>
+        <translation>POP server</translation>
     </message>
     <message>
         <source>SMTP server</source>
-        <translation type="unfinished"></translation>
+        <translation>SMTP server</translation>
     </message>
     <message>
         <source>Synchronize</source>
-        <translation type="unfinished"></translation>
+        <translation>Synchroniseer</translation>
     </message>
     <message>
         <source>Mail Size (k)</source>
-        <translation type="unfinished"></translation>
+        <translation>Mail Grootte (k)</translation>
     </message>
 </context>
 <context>
     <name>EmailClient</name>
     <message>
         <source>Main operation toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Algemene toolbar</translation>
     </message>
     <message>
         <source>&amp;Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Mail</translation>
     </message>
     <message>
         <source>Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Accounts</translation>
     </message>
     <message>
         <source>Get Mail in</source>
-        <translation type="unfinished"></translation>
+        <translation>Haal mail op</translation>
     </message>
     <message>
         <source>Edit account</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig Account</translation>
     </message>
     <message>
         <source>Delete account</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder Account</translation>
     </message>
     <message>
         <source>getMail</source>
-        <translation type="unfinished"></translation>
+        <translation>haalMail</translation>
     </message>
     <message>
         <source>select account</source>
-        <translation type="unfinished"></translation>
+        <translation>selecteer account</translation>
     </message>
     <message>
         <source>Click to download mail via all available accounts.
  Press and hold to select the desired account.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik om mail op te halen van alle bekende accounts.
+Houd account ingedrukt om alleen deze te selecteren.</translation>
     </message>
     <message>
         <source>Send mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzend mail</translation>
     </message>
     <message>
         <source>Compose</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak mail</translation>
     </message>
     <message>
         <source>Cancel transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleer verzending</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>Van</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderwerp</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Inbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Inbox</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Aan</translation>
     </message>
     <message>
         <source>Outbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitmap</translation>
     </message>
     <message>
         <source>Idle</source>
-        <translation type="unfinished"></translation>
+        <translation>Wacht</translation>
     </message>
     <message>
         <source>No account selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen account gekozen</translation>
     </message>
     <message>
         <source>You must create an account</source>
-        <translation type="unfinished"></translation>
+        <translation>Account moet worden aangemaakt</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Unknown response from server&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Onbekend antwoord van server&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;host not found&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;host niet gevonden&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;connection refused&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;verbinding geweigerd&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;socket packet error&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;socket packet fout&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Login failed
 Check user name and password&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Aanmelden mislukt
+Controleer gebruikersnaam en wachtwoord &lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Receiving error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij ontvangst</translation>
     </message>
     <message>
         <source>OK
 </source>
-        <translation type="unfinished"></translation>
+        <translation>OK
+</translation>
     </message>
     <message>
         <source>No account associated</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gekoppeld account</translation>
     </message>
     <message>
         <source>There is no active account 
 associated to this mail
  it can not be downloaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Er is geen actieve account
+gekoppeld aan deze mail
+kan niet downloaden</translation>
     </message>
     <message>
         <source>Mailit ! No account defined</source>
-        <translation type="unfinished"></translation>
+        <translation>MailIt! Geen account ingesteld</translation>
     </message>
     <message>
         <source>Delete account:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder account:
+</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw</translation>
     </message>
 </context>
 <context>
@@ -219,85 +225,88 @@ associated to this mail
     <message>
         <source>Could not locate all files in 
 mail with subject: </source>
-        <translation type="unfinished"></translation>
+        <translation>Kan niet alle bestanden
+vinden in de mail met onderwerp:</translation>
     </message>
     <message>
         <source>
 Mail has NOT been sent</source>
-        <translation type="unfinished"></translation>
+        <translation>Mail werd NIET verzonden</translation>
     </message>
     <message>
         <source>Attachment error</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijlagefout</translation>
     </message>
     <message>
         <source>OK
 </source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
     <name>MailItWindow</name>
     <message>
         <source>Mailit</source>
-        <translation type="unfinished"></translation>
+        <translation>MailIt</translation>
     </message>
     <message>
         <source>Central view area</source>
-        <translation type="unfinished"></translation>
+        <translation>Centraal aanzicht</translation>
     </message>
     <message>
         <source>Write mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Schrijf mail</translation>
     </message>
     <message>
         <source>Mail not downloaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Mail niet opgehaald</translation>
     </message>
     <message>
         <source>The mail you have clicked 
 has not been downloaded yet.
  Would you like to do it now ?</source>
-        <translation type="unfinished"></translation>
+        <translation>De geselecteerde mail
+is nog niet gedownload.
+Wilt u dit nu doen?</translation>
     </message>
     <message>
         <source>Read Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Lees mail</translation>
     </message>
 </context>
 <context>
     <name>PopClient</name>
     <message>
         <source>DNS lookup</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS Lookup</translation>
     </message>
     <message>
         <source>Connection established</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinding gemaakt</translation>
     </message>
     <message>
         <source>Error Occured</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout opgetreden</translation>
     </message>
     <message>
         <source>Retrieving </source>
-        <translation type="unfinished"></translation>
+        <translation>Ophalen</translation>
     </message>
     <message>
         <source>Completing message </source>
-        <translation type="unfinished"></translation>
+        <translation>Bericht afmaken</translation>
     </message>
     <message>
         <source>No new Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen nieuwe berichten</translation>
     </message>
     <message>
         <source> new messages</source>
-        <translation type="unfinished"></translation>
+        <translation>nieuwe berichten</translation>
     </message>
     <message>
         <source>No new messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen nieuwe berichten</translation>
     </message>
 </context>
 <context>
@@ -309,310 +318,329 @@ viewed by double clicking the entry.
 blue attachment icon shows whether this 
 mailhas attachments.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Dit is de inbox aanzicht.
+Hij bevat de opgehaalde mail die kan
+worden bekeken door te dubbelkikken.
+Het blauwe bijlage icoon laat zien of
+er bijlagen in de mail zitten.
+</translation>
     </message>
     <message>
         <source>This is the outbox view.
 It keeps the queued mails to send which can be 
 reviewed by double clicking the entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit is de uitmap aanzicht.
+Hij bevat de te verzenden mails die kunnen
+worden bekeken door te dubbelkikken.
+</translation>
     </message>
     <message>
         <source>The mail subject should be entered here</source>
-        <translation type="unfinished"></translation>
+        <translation>Het mail onderwerp kan hier ingevuld worden</translation>
     </message>
     <message>
         <source>Recipients can be entered here</source>
-        <translation type="unfinished"></translation>
+        <translation>Ontvangers kunnen hier worden ingevoerd</translation>
     </message>
     <message>
         <source>If you would like to send copies of your mail they can be entered here</source>
-        <translation type="unfinished"></translation>
+        <translation>Als kopieen moeten worden verzonden kunnen die hier worden aangegeven</translation>
     </message>
     <message>
         <source>This button opens the address selector with all mail adresses from your Opie addressbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze knop opent een adres selectievak met alle adressen uit het Opie Adresboek</translation>
     </message>
     <message>
         <source>Enter your mail text here</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer hier de emailtekst in</translation>
     </message>
     <message>
         <source>Choose the recipients from this list</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies de ontvangers uit deze lijst</translation>
     </message>
     <message>
         <source>Queue your mail by clicking here</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiermee wordt mail in de wachtrij gezet</translation>
     </message>
     <message>
         <source>This is an overview about all attachments in the mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit is een overzicht van alle bijlagen in de mail</translation>
     </message>
 </context>
 <context>
     <name>ReadMail</name>
     <message>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bekijk</translation>
     </message>
     <message>
         <source>&amp;Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Mail</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Haal op</translation>
     </message>
     <message>
         <source>Click here to download the selected mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om de geselecteerde mail op te halen</translation>
     </message>
     <message>
         <source>Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorige</translation>
     </message>
     <message>
         <source>Read the previous mail in the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Lees de vorige email uit de lijst</translation>
     </message>
     <message>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Volgende</translation>
     </message>
     <message>
         <source>Read the next mail in the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Lees de volgende email uit de lijst</translation>
     </message>
     <message>
         <source>Attatchments</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijlagen</translation>
     </message>
     <message>
         <source>Click here to add attachments to your mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om bijlagen aan de mail toe te voegen</translation>
     </message>
     <message>
         <source>Text Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstformaat</translation>
     </message>
     <message>
         <source>The mail view has 2 modes:
 &lt;LI&gt;&lt;B&gt;RichText&lt;/B&gt; shows the mail as HTML with reach features (no standard line breaks)&lt;/LI&gt;&lt;LI&gt;&lt;B&gt;Plain&lt;/B&gt; shows the mail as standard plain text&lt;/LI&gt;Click here to switch between those view modes</source>
-        <translation type="unfinished"></translation>
+        <translation>Het mailaanzicht heeft 2 modussen:
+&lt;li&gt;&lt;b&gt;Uitgebreid&lt;/b&gt;Laat de mail als HTML met extra mogelijkheden (geen standaard line breaks)&lt;/li&gt;&lt;li&gt;&lt;b&gt;Gewoon&lt;/b&gt;Laat de mail zien als standaardtekst&lt;/li&gt;Klik hier om te schakelen tussen de aanzichten</translation>
     </message>
     <message>
         <source>reply</source>
-        <translation type="unfinished"></translation>
+        <translation>beantwoord</translation>
     </message>
     <message>
         <source>reply to mail</source>
-        <translation type="unfinished"></translation>
+        <translation>beantwoord mail</translation>
     </message>
     <message>
         <source>Click here to reply to the selected mail
 Press and hold for more options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik om te antwoorden op de geselecteerde mail
+Houd ingedrukt voor meer opties.</translation>
     </message>
     <message>
         <source>Reply all</source>
-        <translation type="unfinished"></translation>
+        <translation>Beantwoord alle</translation>
     </message>
     <message>
         <source>Click here to reply to the selected mail to CC: addresses also</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om ook aan de CC adressen te antwoorden</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Doorsturen</translation>
     </message>
     <message>
         <source>Click here to forward the selected mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om de geselecteerde mail door te sturen</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Click here to remove the selected mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om de geselecteerde mail te verwijderen</translation>
     </message>
 </context>
 <context>
     <name>SmtpClient</name>
     <message>
         <source>DNS lookup</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS Lookup</translation>
     </message>
     <message>
         <source>Connection established</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinding gemaakt</translation>
     </message>
     <message>
         <source>Sending: </source>
-        <translation type="unfinished"></translation>
+        <translation>Verzenden:</translation>
     </message>
     <message>
         <source>Sent </source>
-        <translation type="unfinished"></translation>
+        <translation>Verzonden</translation>
     </message>
     <message>
         <source> messages</source>
-        <translation type="unfinished"></translation>
+        <translation>berichten</translation>
     </message>
 </context>
 <context>
     <name>ViewAtt</name>
     <message>
         <source>Exploring attatchments</source>
-        <translation type="unfinished"></translation>
+        <translation>Doorzoeken bijlagen</translation>
     </message>
     <message>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer</translation>
     </message>
     <message>
         <source>Click here to install the attachment to your Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om de bijlagen te kopieren naar Documenten</translation>
     </message>
     <message>
         <source>Attatchment</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijlage</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type</translation>
     </message>
     <message>
         <source>Installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Geinstalleerd</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nee</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
 </context>
 <context>
     <name>WriteMail</name>
     <message>
         <source>&amp;Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Mail</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Toevoegen</translation>
     </message>
     <message>
         <source>Attachment</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijlage</translation>
     </message>
     <message>
         <source>Click here to attach files to your mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om bestanden aan de mail toe te voegen</translation>
     </message>
     <message>
         <source>Enque mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Plaats in wachtrij</translation>
     </message>
     <message>
         <source>This button puts your mail in the send queue</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze knop zet je mail in de verzendlijst</translation>
     </message>
     <message>
         <source>New mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe mail</translation>
     </message>
     <message>
         <source>Click here to create a new mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om een nieuwe mail te maken</translation>
     </message>
     <message>
         <source>To:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aan:</translation>
     </message>
     <message>
         <source>CC:</source>
-        <translation type="unfinished"></translation>
+        <translation>CC:</translation>
     </message>
     <message>
         <source>Subject:</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderwerp:</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <source>EMail</source>
-        <translation type="unfinished"></translation>
+        <translation>EMail</translation>
     </message>
     <message>
         <source>No recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen ontvanger</translation>
     </message>
     <message>
         <source>Send mail to whom?</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuur mail naar?</translation>
     </message>
     <message>
         <source>OK
 </source>
-        <translation type="unfinished"></translation>
+        <translation>OK
+</translation>
     </message>
     <message>
         <source>Incorrect recipient separator</source>
-        <translation type="unfinished"></translation>
+        <translation>Foutieve ontvangst scheiding</translation>
     </message>
     <message>
         <source>Recipients must be separated by ;
 and be valid emailaddresses</source>
-        <translation type="unfinished"></translation>
+        <translation>Ontvangers moeten worden 
+gescheiden door ; en echte
+emailadressen zijn</translation>
     </message>
     <message>
         <source>Incorrect carbon copy separator</source>
-        <translation type="unfinished"></translation>
+        <translation>Foutieve CC scheiding</translation>
     </message>
     <message>
         <source>CC Recipients must be separated by ;
 and be valid emailaddresses</source>
-        <translation type="unfinished"></translation>
+        <translation>CC Ontvangers moeten worden 
+gescheiden door ; en echte
+emailadressen zijn</translation>
     </message>
     <message>
         <source>Re: </source>
-        <translation type="unfinished"></translation>
+        <translation>Re:</translation>
     </message>
     <message>
         <source> wrote on </source>
-        <translation type="unfinished"></translation>
+        <translation>schreef op</translation>
     </message>
     <message>
         <source>======forwarded message from </source>
-        <translation type="unfinished"></translation>
+        <translation>======doorgestuurd bericht van</translation>
     </message>
     <message>
         <source> starts======
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>start=======
+
+</translation>
     </message>
     <message>
         <source>FWD: </source>
-        <translation type="unfinished"></translation>
+        <translation>FWD:</translation>
     </message>
     <message>
         <source>======end of forwarded message======
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>======einde doorgestuurd bericht======
+
+</translation>
     </message>
 </context>
 </TS>

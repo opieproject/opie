@@ -3,263 +3,263 @@
     <name>InstallDialog</name>
     <message>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer</translation>
     </message>
     <message>
         <source>Ipkg options</source>
-        <translation type="unfinished"></translation>
+        <translation>Ipkg opties</translation>
     </message>
     <message>
         <source>-force-depends</source>
-        <translation type="unfinished"></translation>
+        <translation>-forceer-dependencies</translation>
     </message>
     <message>
         <source>-force-reinstall</source>
-        <translation type="unfinished"></translation>
+        <translation>-forceer-herinstallatie</translation>
     </message>
     <message>
         <source>-force-removal-of-essential-packages</source>
-        <translation type="unfinished"></translation>
+        <translation>-forceer-verwijdering-essentiele-pakketten</translation>
     </message>
     <message>
         <source>-force-overwrite</source>
-        <translation type="unfinished"></translation>
+        <translation>-forceer-overschrijven</translation>
     </message>
     <message>
         <source>To remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Te verwijderen</translation>
     </message>
     <message>
         <source>To install</source>
-        <translation type="unfinished"></translation>
+        <translation>Te installeren</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Package Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakket Manager</translation>
     </message>
     <message>
         <source>feeds</source>
-        <translation type="unfinished"></translation>
+        <translation>feeds</translation>
     </message>
     <message>
         <source>ipkgfind&amp;killefiz</source>
-        <translation type="unfinished"></translation>
+        <translation>ipkgfind&amp;killefiz</translation>
     </message>
     <message>
         <source>documents</source>
-        <translation type="unfinished"></translation>
+        <translation>documenten</translation>
     </message>
     <message>
         <source>Package</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakket</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Aanzicht</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Hulp</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitvoeren</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Vernieuwen</translation>
     </message>
     <message>
         <source>Setups</source>
-        <translation type="unfinished"></translation>
+        <translation>Opstellingen</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Servers</translation>
     </message>
     <message>
         <source>Destinations</source>
-        <translation type="unfinished"></translation>
+        <translation>Doelen</translation>
     </message>
     <message>
         <source>Section:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sectie:</translation>
     </message>
     <message>
         <source>Close Section</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluit sectie</translation>
     </message>
     <message>
         <source>Sections</source>
-        <translation type="unfinished"></translation>
+        <translation>Secties</translation>
     </message>
     <message>
         <source>Filter: </source>
-        <translation type="unfinished"></translation>
+        <translation>Filter:</translation>
     </message>
     <message>
         <source>Clear Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Leeg zoekveld</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluit zoekveld</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter</translation>
     </message>
     <message>
         <source>Search: </source>
-        <translation type="unfinished"></translation>
+        <translation>Zoek:</translation>
     </message>
     <message>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Leeg zoekopdracht</translation>
     </message>
     <message>
         <source>Do Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Nu zoeken</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoek</translation>
     </message>
     <message>
         <source>Destination: </source>
-        <translation type="unfinished"></translation>
+        <translation>Doel:</translation>
     </message>
     <message>
         <source>Link</source>
-        <translation type="unfinished"></translation>
+        <translation>Link</translation>
     </message>
     <message>
         <source>Close Destinations</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluit Doelen</translation>
     </message>
     <message>
         <source>Package Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakketakties</translation>
     </message>
     <message>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijderen</translation>
     </message>
     <message>
         <source>Package Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakketstatus</translation>
     </message>
     <message>
         <source>New version, installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe versie, geinstalleerd</translation>
     </message>
     <message>
         <source>New version, not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe versie, niet geinstalleerd</translation>
     </message>
     <message>
         <source>Old version, installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Oude versie, geinstalleerd</translation>
     </message>
     <message>
         <source>Old version, not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Oude versie, niet geinstalleerd</translation>
     </message>
     <message>
         <source>Old version, new version installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Oude versie, nieuwer geinstalleerd</translation>
     </message>
     <message>
         <source>New version, old version installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe versie, oude versie geinstalleerd</translation>
     </message>
 </context>
 <context>
     <name>PackageListView</name>
     <message>
         <source>Package</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakket</translation>
     </message>
 </context>
 <context>
     <name>PackageManagerSettings</name>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw</translation>
     </message>
 </context>
 <context>
     <name>PackageManagerSettingsBase</name>
     <message>
         <source>Package Servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakket Servers</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>Install destination:</source>
-        <translation type="unfinished"></translation>
+        <translation>Installatiedoel:</translation>
     </message>
     <message>
         <source>Link to root destination</source>
-        <translation type="unfinished"></translation>
+        <translation>Link naar root doel</translation>
     </message>
     <message>
         <source>Used servers: (Highlighted feeds are active)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruikte servers: (Vetgedrukt is aktief)</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Servers</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam:</translation>
     </message>
     <message>
         <source>URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>URL:</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw</translation>
     </message>
     <message>
         <source>Destinations</source>
-        <translation type="unfinished"></translation>
+        <translation>Doelen</translation>
     </message>
     <message>
         <source>link to /</source>
-        <translation type="unfinished"></translation>
+        <translation>link naar /</translation>
     </message>
     <message>
         <source>Remove links</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder links</translation>
     </message>
     <message>
         <source>volatile</source>
-        <translation type="unfinished"></translation>
+        <translation>vluchtig</translation>
     </message>
     <message>
         <source>removeable</source>
-        <translation type="unfinished"></translation>
+        <translation>verwijderbaar</translation>
     </message>
 </context>
 <context>
@@ -267,89 +267,89 @@
     <message>
         <source>
 All done.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaar.</translation>
     </message>
     <message>
         <source>Removing</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijderen</translation>
     </message>
     <message>
         <source>please wait</source>
-        <translation type="unfinished"></translation>
+        <translation>wachten aub</translation>
     </message>
     <message>
         <source>Error while removing </source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij verwijderen</translation>
     </message>
     <message>
         <source>Installing</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeren</translation>
     </message>
     <message>
         <source>Error while installing</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij installeren</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Description: </source>
-        <translation type="unfinished"></translation>
+        <translation>Omschrijving:</translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation type="unfinished"></translation>
+        <translation>Grootte:</translation>
     </message>
     <message>
         <source>other</source>
-        <translation type="unfinished"></translation>
+        <translation>andere</translation>
     </message>
     <message>
         <source>Install Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>Installatienaam:</translation>
     </message>
     <message>
         <source> on </source>
-        <translation type="unfinished"></translation>
+        <translation>op</translation>
     </message>
     <message>
         <source>Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>Naam:</translation>
     </message>
     <message>
         <source>Link: </source>
-        <translation type="unfinished"></translation>
+        <translation>Link:</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nee</translation>
     </message>
     <message>
         <source>Destination: </source>
-        <translation type="unfinished"></translation>
+        <translation>Doel:</translation>
     </message>
     <message>
         <source>Status: </source>
-        <translation type="unfinished"></translation>
+        <translation>Status:</translation>
     </message>
     <message>
         <source>Install to</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer op</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
 </context>
 <context>
     <name>RunWindow</name>
     <message>
         <source>running...</source>
-        <translation type="unfinished"></translation>
+        <translation>bezig...</translation>
     </message>
 </context>
 </TS>

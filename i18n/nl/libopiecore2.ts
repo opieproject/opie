@@ -3,82 +3,82 @@
     <name>Button</name>
     <message>
         <source>Calendar Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Agenda toets</translation>
     </message>
     <message>
         <source>Contacts Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontakten toets</translation>
     </message>
     <message>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu toets</translation>
     </message>
     <message>
         <source>Mail Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Mail toets</translation>
     </message>
     <message>
         <source>Home Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Thuis toets</translation>
     </message>
     <message>
         <source>Record Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Opname toets</translation>
     </message>
     <message>
         <source>Lower+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Onder+Omhoog</translation>
     </message>
     <message>
         <source>Lower+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Onder+Omlaag</translation>
     </message>
     <message>
         <source>Lower+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Onder+Rechts</translation>
     </message>
     <message>
         <source>Lower+Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Onder+Links</translation>
     </message>
     <message>
         <source>Upper+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoger+Omhoog</translation>
     </message>
     <message>
         <source>Upper+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoger+Omlaag</translation>
     </message>
     <message>
         <source>Upper+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoger+Rechts</translation>
     </message>
     <message>
         <source>Upper+Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoger+Links</translation>
     </message>
     <message>
         <source>Display Rotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef rotatie weer</translation>
     </message>
     <message>
         <source>Action Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktie toets</translation>
     </message>
     <message>
         <source>OK Button</source>
-        <translation type="unfinished"></translation>
+        <translation>OK toets</translation>
     </message>
     <message>
         <source>End Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Einde toets</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Trash</source>
-        <translation type="unfinished"></translation>
+        <translation>Afval</translation>
     </message>
 </context>
 </TS>

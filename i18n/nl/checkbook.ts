@@ -223,31 +223,31 @@ Klik op de kolomnaam om te sorteren op een bepaald veld. </translation>
     </message>
     <message>
         <source>Sort by:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorteer op:</translation>
     </message>
     <message>
         <source>Select checkbook sorting here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selekteer sorteervolgorde voor kasboek.</translation>
     </message>
     <message>
         <source>Entry Order</source>
-        <translation type="unfinished"></translation>
+        <translation>Invoervolgorde</translation>
     </message>
     <message>
         <source>Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Nummer</translation>
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id</translation>
     </message>
     <message>
         <source>SortDate</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorteerdatum</translation>
     </message>
     <message>
         <source>Balance</source>
-        <translation type="unfinished">Saldo</translation>
+        <translation>Saldo</translation>
     </message>
 </context>
 <context>
@@ -283,86 +283,86 @@ protected</source>
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>In&amp;stellingen</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type</translation>
     </message>
     <message>
         <source>New Account Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw rekeningtype</translation>
     </message>
     <message>
         <source>&amp;Account Types</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rekeningtypes</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie</translation>
     </message>
     <message>
         <source>New Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe kategorie</translation>
     </message>
     <message>
         <source>Expense</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitgaven</translation>
     </message>
     <message>
         <source>Income</source>
-        <translation type="unfinished"></translation>
+        <translation>Inkomsten</translation>
     </message>
     <message>
         <source>&amp;Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kategorieen</translation>
     </message>
     <message>
         <source>Payee</source>
-        <translation type="unfinished"></translation>
+        <translation>Debiteur</translation>
     </message>
     <message>
         <source>New Payee</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe Debiteur</translation>
     </message>
     <message>
         <source>&amp;Payees</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Debiteuren</translation>
     </message>
     <message>
         <source>Open last checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Open laatste kasboek</translation>
     </message>
     <message>
         <source>Click here to select whether the last open checkbook will be opened at startup.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om in te stellen of het laatst geopende kasboek bij het starten geopend moet worden.</translation>
     </message>
     <message>
         <source>Show last checkbook tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Open &quot;laatste kasboek&quot; blad</translation>
     </message>
     <message>
         <source>Click here to select whether the last tab in a checkbook should be displayed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om in te stellen of het laatst geopende blad in een kasboek getoond moet worden.</translation>
     </message>
     <message>
         <source>Save new description as payee</source>
-        <translation type="unfinished"></translation>
+        <translation>Sla nieuwe omschtijving op als debiteur</translation>
     </message>
     <message>
         <source>Click here to save new descriptions in the list of payess.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om de nieuwe omschrijving in de lijst van debiteuren op te slaan.</translation>
     </message>
 </context>
 <context>
     <name>ListEdit</name>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Toevoegen</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Verwijder</translation>
+        <translation>Verwijder</translation>
     </message>
 </context>
 <context>
@@ -444,119 +444,119 @@ U kunt ook Verwijder uit het Kasboek menu kiezen.</translation>
     <name>QWidget</name>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Datum</translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Wijzig</translation>
+        <translation>Wijzig</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Nieuw</translation>
+        <translation>Nieuw</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Verwijder</translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Savings</source>
-        <translation type="unfinished">Spaargeld</translation>
+        <translation>Spaargeld</translation>
     </message>
     <message>
         <source>Checking</source>
-        <translation type="unfinished">Cheques</translation>
+        <translation>Cheques</translation>
     </message>
     <message>
         <source>CD</source>
-        <translation type="unfinished">Belastingen</translation>
+        <translation>Belastingen</translation>
     </message>
     <message>
         <source>Money market</source>
-        <translation type="unfinished">Geldmarkt</translation>
+        <translation>Geldmarkt</translation>
     </message>
     <message>
         <source>Mutual fund</source>
-        <translation type="unfinished">Aandelen</translation>
+        <translation>Aandelen</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished">Anders</translation>
+        <translation>Anders</translation>
     </message>
     <message>
         <source>Expense</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitgaven</translation>
     </message>
     <message>
         <source>Automobile</source>
-        <translation type="unfinished">Auto</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>Bills</source>
-        <translation type="unfinished">Vaste lasten</translation>
+        <translation>Vaste lasten</translation>
     </message>
     <message>
         <source>CDs</source>
-        <translation type="unfinished">CD&apos;s</translation>
+        <translation>CD&apos;s</translation>
     </message>
     <message>
         <source>Clothing</source>
-        <translation type="unfinished">Kleding</translation>
+        <translation>Kleding</translation>
     </message>
     <message>
         <source>Computer</source>
-        <translation type="unfinished">Computer</translation>
+        <translation>Computer</translation>
     </message>
     <message>
         <source>DVDs</source>
-        <translation type="unfinished">DVD&apos;s</translation>
+        <translation>DVD&apos;s</translation>
     </message>
     <message>
         <source>Electronics</source>
-        <translation type="unfinished">Electronisch</translation>
+        <translation>Electronica</translation>
     </message>
     <message>
         <source>Entertainment</source>
-        <translation type="unfinished">Amusement</translation>
+        <translation>Amusement</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation type="unfinished">Eten/Drinken</translation>
+        <translation>Eten/Drinken</translation>
     </message>
     <message>
         <source>Gasoline</source>
-        <translation type="unfinished">Benzine</translation>
+        <translation>Benzine</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished">Overig</translation>
+        <translation>Overig</translation>
     </message>
     <message>
         <source>Movies</source>
-        <translation type="unfinished">Films</translation>
+        <translation>Films</translation>
     </message>
     <message>
         <source>Rent</source>
-        <translation type="unfinished">Huur</translation>
+        <translation>Huur</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished">Reizen</translation>
+        <translation>Reizen</translation>
     </message>
     <message>
         <source>Income</source>
-        <translation type="unfinished"></translation>
+        <translation>Inkomen</translation>
     </message>
     <message>
         <source>Work</source>
-        <translation type="unfinished">Werk</translation>
+        <translation>Werk</translation>
     </message>
     <message>
         <source>Family Member</source>
-        <translation type="unfinished">Familie</translation>
+        <translation>Familie</translation>
     </message>
     <message>
         <source>Misc. Credit</source>
-        <translation type="unfinished">Diverse inkomsten</translation>
+        <translation>Diverse inkomsten</translation>
     </message>
 </context>
 <context>

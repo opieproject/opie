@@ -346,7 +346,7 @@ Deze staat u toe om snel een nieuwe taak aan de lijst toe te voegen. Dit vlak ka
     </message>
     <message>
         <source>Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Overzicht</translation>
     </message>
 </context>
 <context>

@@ -126,7 +126,7 @@
     </message>
     <message>
         <source>Use ADPCM compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik ADPCM compressie</translation>
     </message>
 </context>
 </TS>

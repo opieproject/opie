@@ -10,7 +10,7 @@
     <name>LightSettings</name>
     <message>
         <source>Backlight &amp;&amp; Contrast</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtergrondlicht &amp;&amp; Contrast</translation>
     </message>
 </context>
 <context>
@@ -121,27 +121,27 @@
     </message>
     <message>
         <source>CPU Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>processorfrequentie</translation>
     </message>
     <message>
         <source>set a fix value for contrast</source>
-        <translation type="unfinished"></translation>
+        <translation>stel een vaste contrastwaarde in</translation>
     </message>
     <message>
         <source>On closing the hinge</source>
-        <translation type="unfinished"></translation>
+        <translation>Bij sluiten van de klep</translation>
     </message>
     <message>
         <source>ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>negeer</translation>
     </message>
     <message>
         <source>display off</source>
-        <translation type="unfinished"></translation>
+        <translation>scherm uit</translation>
     </message>
     <message>
         <source>suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>slaap</translation>
     </message>
 </context>
 <context>

@@ -21,43 +21,43 @@
     <name>FilterDlg</name>
     <message>
         <source>All</source>
-        <translation type="unfinished">Alle</translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <source>Installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Geinstalleerd</translation>
     </message>
     <message>
         <source>Not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet geinstalleerd</translation>
     </message>
     <message>
         <source>Updated</source>
-        <translation type="unfinished"></translation>
+        <translation>Vernieuwd</translation>
     </message>
     <message>
         <source>Filter packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter pakketten</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie:</translation>
     </message>
     <message>
         <source>Names containing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Namen met daarin:</translation>
     </message>
     <message>
         <source>With the status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Met de status:</translation>
     </message>
     <message>
         <source>Available from the following server:</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschikbaar van de volgende server:</translation>
     </message>
     <message>
         <source>Installed on device at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Geinstalleerd op:</translation>
     </message>
 </context>
 <context>
@@ -75,76 +75,77 @@
     <name>InstallDlg</name>
     <message>
         <source>Destination</source>
-        <translation type="unfinished">Doel</translation>
+        <translation>Doel</translation>
     </message>
     <message>
         <source>Space Avail</source>
-        <translation type="unfinished">Beschikbare ruimte</translation>
+        <translation>Beschikbare ruimte</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished">Uitvoer</translation>
+        <translation>Uitvoer</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished">Start</translation>
+        <translation>Start</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opties</translation>
+        <translation>Opties</translation>
     </message>
     <message>
         <source>Packages to </source>
-        <translation type="unfinished"></translation>
+        <translation>Pakketten te</translation>
     </message>
     <message>
         <source>install</source>
-        <translation type="unfinished"></translation>
+        <translation>installeren</translation>
     </message>
     <message>
         <source>remove</source>
-        <translation type="unfinished"></translation>
+        <translation>verwijderen</translation>
     </message>
     <message>
         <source>upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>vernieuwen</translation>
     </message>
     <message>
         <source>download</source>
-        <translation type="unfinished"></translation>
+        <translation>downloaden</translation>
     </message>
     <message>
         <source>Press the start button to begin.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Druk op de startknop om te beginnen.
+</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Onbekend</translation>
+        <translation>Onbekend</translation>
     </message>
     <message>
         <source>%1 Kb</source>
-        <translation type="unfinished">%1 kB</translation>
+        <translation>%1 kB</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished">Afbreken</translation>
+        <translation>Afbreken</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Sluit</translation>
+        <translation>Sluit</translation>
     </message>
     <message>
         <source>Save output</source>
-        <translation type="unfinished">Sla utivoer op</translation>
+        <translation>Sla utivoer op</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished">Alle</translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Tekst</translation>
+        <translation>Tekst</translation>
     </message>
 </context>
 <context>
@@ -651,185 +652,191 @@ A blue dot next to the package name indicates that the package is currently inst
 A blue dot with a star indicates that a newer version of the package is available from the server feed.
 
 Click inside the box at the left to select a package.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit is een lijst van alle pakketten.
+
+Een blauwe stip naast een pakket betekent dat het momenteel is geinstalleerd.
+
+Een blauwe stip met een ster betekent dat er een nieuwere versie beschikbaar is op de pakketserver.
+
+Klik in het selectievak links om een pakket te selecteren.</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter</translation>
     </message>
     <message>
         <source>Click here to apply current filter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om het filter te activeren.</translation>
     </message>
     <message>
         <source>Filter settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Filterinstellingen</translation>
     </message>
     <message>
         <source>Click here to change the package filter criteria.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om de filtercriteria vast te stellen.</translation>
     </message>
     <message>
         <source>Package Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakket Manager</translation>
     </message>
     <message>
         <source>Update package information</source>
-        <translation type="unfinished"></translation>
+        <translation>Ververs Pakketinformatie</translation>
     </message>
     <message>
         <source>Upgrade installed packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Vernieuw geinstalleerde programma&apos;s</translation>
     </message>
     <message>
         <source>Enter path to download package to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer pad in om programma naartoe te downloaden:</translation>
     </message>
     <message>
         <source>Download packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Download pakketten</translation>
     </message>
     <message>
         <source>Remove or upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder of vernieuw</translation>
     </message>
     <message>
         <source>Remove or reinstall</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder of installeer</translation>
     </message>
     <message>
         <source>Reinstall</source>
-        <translation type="unfinished"></translation>
+        <translation>Herinstalleer</translation>
     </message>
     <message>
         <source>Config updated</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuratie vernieuwd</translation>
     </message>
     <message>
         <source>The configuration has been updated.  Do you want to update server and package information now?</source>
-        <translation type="unfinished"></translation>
+        <translation>De configuratie is vernieuwd, Wilt u nu de server en pakket informatie verversen?</translation>
     </message>
 </context>
 <context>
     <name>OIpkg</name>
     <message>
         <source>OIpkg</source>
-        <translation type="unfinished"></translation>
+        <translation>Olpkg</translation>
     </message>
     <message>
         <source>Error initialing libipkg</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij instellen libipkg</translation>
     </message>
     <message>
         <source>Error freeing libipkg</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij vrijgeven libipkg</translation>
     </message>
 </context>
 <context>
     <name>OIpkgConfigDlg</name>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished">Instellingen</translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished">Servers</translation>
+        <translation>Servers</translation>
     </message>
     <message>
         <source>Destinations</source>
-        <translation type="unfinished">Doelen</translation>
+        <translation>Doelen</translation>
     </message>
     <message>
         <source>Proxies</source>
-        <translation type="unfinished">Proxies</translation>
+        <translation>Proxies</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opties</translation>
+        <translation>Opties</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Nieuw</translation>
+        <translation>Nieuw</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Verwijder</translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished">Server</translation>
+        <translation>Server</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Naam:</translation>
+        <translation>Naam:</translation>
     </message>
     <message>
         <source>Address:</source>
-        <translation type="unfinished">Adres:</translation>
+        <translation>Adres:</translation>
     </message>
     <message>
         <source>Active Server</source>
-        <translation type="unfinished">Aktieve Server</translation>
+        <translation>Aktieve Server</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Vernieuw</translation>
+        <translation>Vernieuw</translation>
     </message>
     <message>
         <source>HTTP Proxy</source>
-        <translation type="unfinished">HTTP Proxy</translation>
+        <translation>HTTP Proxy</translation>
     </message>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">Ingeschakeld</translation>
+        <translation>Ingeschakeld</translation>
     </message>
     <message>
         <source>FTP Proxy</source>
-        <translation type="unfinished">FTP Proxy</translation>
+        <translation>FTP Proxy</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation type="unfinished">Gebruikersnaam:</translation>
+        <translation>Gebruikersnaam:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished">Wachtwoord:</translation>
+        <translation>Wachtwoord:</translation>
     </message>
     <message>
         <source>Force Depends</source>
-        <translation type="unfinished">Forceer Afhankelijkheden</translation>
+        <translation>Forceer Afhankelijkheden</translation>
     </message>
     <message>
         <source>Force Reinstall</source>
-        <translation type="unfinished">Forceer Herinstallatie</translation>
+        <translation>Forceer Herinstallatie</translation>
     </message>
     <message>
         <source>Force Remove</source>
-        <translation type="unfinished">Forceer Verwijderen</translation>
+        <translation>Forceer Verwijderen</translation>
     </message>
     <message>
         <source>Force Overwrite</source>
-        <translation type="unfinished">Forceer Overschrijven</translation>
+        <translation>Forceer Overschrijven</translation>
     </message>
     <message>
         <source>Information Level</source>
-        <translation type="unfinished">Informatieniveau</translation>
+        <translation>Informatieniveau</translation>
     </message>
     <message>
         <source>Errors only</source>
-        <translation type="unfinished">Alleen Fouten</translation>
+        <translation>Alleen Fouten</translation>
     </message>
     <message>
         <source>Normal messages</source>
-        <translation type="unfinished">Normale berichten</translation>
+        <translation>Normale berichten</translation>
     </message>
     <message>
         <source>Informative messages</source>
-        <translation type="unfinished">Informatieve berichten</translation>
+        <translation>Informatieve berichten</translation>
     </message>
     <message>
         <source>Troubleshooting output</source>
-        <translation type="unfinished">Foutopsporingsuitvoer</translation>
+        <translation>Foutopsporingsuitvoer</translation>
     </message>
 </context>
 <context>
@@ -837,31 +844,33 @@ Click inside the box at the left to select a package.</source>
     <message>
         <source>Reading available packages:
 <byte value="x9"/></source>
-        <translation type="unfinished"></translation>
+        <translation>Inlezen beschikbare pakketten:
+<byte value="x9"/></translation>
     </message>
     <message>
         <source>Reading installed packages:
 <byte value="x9"/></source>
-        <translation type="unfinished"></translation>
+        <translation>Inlezen geinstalleerde pakketten:
+<byte value="x9"/></translation>
     </message>
 </context>
 <context>
     <name>PackageInfoDlg</name>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informatie</translation>
     </message>
     <message>
         <source>Unable to retrieve package information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan pakketinfo niet ophalen.</translation>
     </message>
     <message>
         <source>Retrieve file list</source>
-        <translation type="unfinished"></translation>
+        <translation>Haal bestandslijst op</translation>
     </message>
     <message>
         <source>File list</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestandslijst</translation>
     </message>
 </context>
 <context>

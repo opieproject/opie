@@ -183,67 +183,67 @@
     <name>OKeyChooserConfigDialog</name>
     <message>
         <source>Configure Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel sleutel in</translation>
     </message>
 </context>
 <context>
     <name>OKeyConfigWidget</name>
     <message>
         <source>Pixmap</source>
-        <translation type="unfinished"></translation>
+        <translation>Pixmap</translation>
     </message>
     <message>
         <source>Name</source>
         <comment>Name of the Action in the ListView Header</comment>
-        <translation type="unfinished">Naam</translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <source>Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Sleutel</translation>
     </message>
     <message>
         <source>Default Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaardsleutel</translation>
     </message>
     <message>
         <source>Shortcut for Selected Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Sneltoets voor geselecteerde actie</translation>
     </message>
     <message>
         <source>&amp;None</source>
-        <translation type="unfinished"></translation>
+        <translation>Gee&amp;n</translation>
     </message>
     <message>
         <source>&amp;Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Stan&amp;daard</translation>
     </message>
     <message>
         <source>C&amp;ustom</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Aangepast</translation>
     </message>
     <message>
         <source>Configure Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel sleutel in</translation>
     </message>
     <message>
         <source>Default: </source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard:</translation>
     </message>
     <message>
         <source>Key is on BlackList</source>
-        <translation type="unfinished"></translation>
+        <translation>Sleutel staat op de zwarte lijst</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The Key you choose is on the black list and may not be used with this manager. Please use a different key.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;De gekozen sleutel staat op de zwarte lijst en mag niet worden gebruikt, Kies een andere sleutel a.u.b.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Key is already assigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Sleutel is al toegekend</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The Key you choose is already taken by a different Item of your config. Please tryusing a different key.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;De gekozen sleutel is al door een andere functie in gebruik, Kies een andere sleutel a.u.b.&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>
@@ -478,33 +478,33 @@ and </source>
     </message>
     <message>
         <source>OTimePickerDialogBase</source>
-        <translation type="unfinished"></translation>
+        <translation>OTimePickerDialogBase</translation>
     </message>
 </context>
 <context>
     <name>Opie::Ui::OFileSelector</name>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Naam:</translation>
+        <translation>Naam:</translation>
     </message>
 </context>
 <context>
     <name>Opie::Ui::Private::OFileViewFileListView</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Naam</translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Grootte</translation>
+        <translation>Grootte</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Datum</translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Mime Type</source>
-        <translation type="unfinished">Mime Type</translation>
+        <translation>Mime Type</translation>
     </message>
 </context>
 <context>
@@ -739,7 +739,7 @@ and </source>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Geen</translation>
+        <translation>Geen</translation>
     </message>
 </context>
 <context>

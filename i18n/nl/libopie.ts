@@ -3,27 +3,27 @@
     <name>Button</name>
     <message>
         <source>Calendar Button</source>
-        <translation>Kalenderknop</translation>
+        <translation>Agenda toets</translation>
     </message>
     <message>
         <source>Contacts Button</source>
-        <translation>Contaktenknop</translation>
+        <translation>Kontakten toets</translation>
     </message>
     <message>
         <source>Menu Button</source>
-        <translation>Menuknop</translation>
+        <translation>Menu toets</translation>
     </message>
     <message>
         <source>Mail Button</source>
-        <translation>Mailknop</translation>
+        <translation>Mail toets</translation>
     </message>
     <message>
         <source>Home Button</source>
-        <translation>Thuisknop</translation>
+        <translation>Thuis toets</translation>
     </message>
     <message>
         <source>Record Button</source>
-        <translation>Opnameknop</translation>
+        <translation>Opname toets</translation>
     </message>
     <message>
         <source>Display Rotate</source>
@@ -63,15 +63,15 @@
     </message>
     <message>
         <source>Action Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktie toets</translation>
     </message>
     <message>
         <source>OK Button</source>
-        <translation type="unfinished"></translation>
+        <translation>OK toets</translation>
     </message>
     <message>
         <source>End Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Einde toets</translation>
     </message>
 </context>
 <context>
@@ -423,7 +423,7 @@ and </source>
     </message>
     <message>
         <source>OTimePickerDialogBase</source>
-        <translation type="unfinished"></translation>
+        <translation>OTimePickerDialogBase</translation>
     </message>
 </context>
 <context>
@@ -442,7 +442,7 @@ and </source>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Omschrijving:</translation>
+        <translation>Omschrijving:</translation>
     </message>
     <message>
         <source>Priority:</source>
@@ -658,183 +658,183 @@ and </source>
     </message>
     <message>
         <source>&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;b&gt;Werkadres:&lt;b&gt;</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;b&gt;Thuisadres:&lt;b&gt;</translation>
     </message>
     <message>
         <source>User Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruikers Id</translation>
     </message>
     <message>
         <source>Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorieen</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam Titel</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Voornaam</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Tussenvoegsel</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Achternaam</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtervoegsel</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslaan als</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Functietitel</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation type="unfinished"></translation>
+        <translation>Afdeling</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijf</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfstelefoon</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfsfax</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfsmobieltje</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard Email</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation type="unfinished"></translation>
+        <translation>Emails</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Privetelefoon</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Privefax</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Privemobieltje</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfsstraatnaam</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijf Plaats</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfs provincie</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfspostcode</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfslaandnaam</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfspieper</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfswebsite</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished"></translation>
+        <translation>Kantoor</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation type="unfinished"></translation>
+        <translation>Beroep</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation type="unfinished"></translation>
+        <translation>Assistent</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Manager</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Priveadres</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation type="unfinished"></translation>
+        <translation>Prive Plaats</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation type="unfinished"></translation>
+        <translation>Prive Provincie</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Prive Postcode</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Prive Landnaam</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Prive webpagina</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Echtgen(o)ot(e)</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Geslacht</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Verjaardag</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation type="unfinished"></translation>
+        <translation>Jaardag</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijnaam</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Kinderen</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>

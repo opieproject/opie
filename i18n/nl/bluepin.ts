@@ -3,34 +3,34 @@
     <name>PinDlgBase</name>
     <message>
         <source>Please enter pin</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer PIN in a.u.b.</translation>
     </message>
     <message>
         <source>Please enter PIN:</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer PIN in a.u.b:</translation>
     </message>
     <message>
         <source>Save pin</source>
-        <translation type="unfinished"></translation>
+        <translation>Sla PIN op</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Annuleer</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Outgoing connection to </source>
-        <translation type="unfinished"></translation>
+        <translation>Uitgaande verbinding naar</translation>
     </message>
     <message>
         <source>Incoming connection from </source>
-        <translation type="unfinished"></translation>
+        <translation>Inkomende verbinding naar</translation>
     </message>
 </context>
 </TS>

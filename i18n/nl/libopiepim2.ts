@@ -183,216 +183,216 @@
     <name>OPimRecurrenceBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation type="unfinished">Terugkerende gebeurtenis</translation>
+        <translation>Terugkerende gebeurtenis</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Geen</translation>
+        <translation>Geen</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished">Dag</translation>
+        <translation>Dag</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished">Week</translation>
+        <translation>Week</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished">Maand</translation>
+        <translation>Maand</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished">Jaar</translation>
+        <translation>Jaar</translation>
     </message>
     <message>
         <source>Every:</source>
-        <translation type="unfinished">Iedere:</translation>
+        <translation>Iedere:</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished">Frequentie</translation>
+        <translation>Frequentie</translation>
     </message>
     <message>
         <source>End On:</source>
-        <translation type="unfinished">Beeindig op:</translation>
+        <translation>Beeindig op:</translation>
     </message>
     <message>
         <source>No End Date</source>
-        <translation type="unfinished">Geen einddatum</translation>
+        <translation>Geen einddatum</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished">Herhaal op</translation>
+        <translation>Herhaal op</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished">Ma</translation>
+        <translation>Ma</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished">Di</translation>
+        <translation>Di</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished">Wo</translation>
+        <translation>Wo</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished">Do</translation>
+        <translation>Do</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished">Vr</translation>
+        <translation>Vr</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished">Za</translation>
+        <translation>Za</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished">Zo</translation>
+        <translation>Zo</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished">Iedere</translation>
+        <translation>Iedere</translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation type="unfinished">Var 1</translation>
+        <translation>Var 1</translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="unfinished">Var 2</translation>
+        <translation>Var 2</translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="unfinished">WeekVar</translation>
+        <translation>WeekVar</translation>
     </message>
 </context>
 <context>
     <name>OPimRecurrenceWidget</name>
     <message>
         <source>No End Date</source>
-        <translation type="unfinished">Geen einddatum</translation>
+        <translation>Geen einddatum</translation>
     </message>
     <message>
         <source>days</source>
-        <translation type="unfinished">dagen</translation>
+        <translation>dagen</translation>
     </message>
     <message>
         <source>day</source>
-        <translation type="unfinished">dag</translation>
+        <translation>dag</translation>
     </message>
     <message>
         <source>weeks</source>
-        <translation type="unfinished">weken</translation>
+        <translation>weken</translation>
     </message>
     <message>
         <source>week</source>
-        <translation type="unfinished">week</translation>
+        <translation>week</translation>
     </message>
     <message>
         <source>months</source>
-        <translation type="unfinished">maanden</translation>
+        <translation>maanden</translation>
     </message>
     <message>
         <source>month</source>
-        <translation type="unfinished">maand</translation>
+        <translation>maand</translation>
     </message>
     <message>
         <source>years</source>
-        <translation type="unfinished">jaren</translation>
+        <translation>jaren</translation>
     </message>
     <message>
         <source>year</source>
-        <translation type="unfinished">jaar</translation>
+        <translation>jaar</translation>
     </message>
     <message>
         <source> and </source>
-        <translation type="unfinished">en</translation>
+        <translation>en</translation>
     </message>
     <message>
         <source>,
 and </source>
-        <translation type="unfinished">,
+        <translation>,
  en</translation>
     </message>
     <message>
         <source>, and </source>
-        <translation type="unfinished">, en</translation>
+        <translation>, en</translation>
     </message>
     <message>
         <source>on </source>
-        <translation type="unfinished">op</translation>
+        <translation>op</translation>
     </message>
     <message>
         <source>No Repeat</source>
-        <translation type="unfinished">Geen herhaling</translation>
+        <translation>Geen herhaling</translation>
     </message>
     <message>
         <source>day(s)</source>
-        <translation type="unfinished">dag(en)</translation>
+        <translation>dag(en)</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished">Herhaal op</translation>
+        <translation>Herhaal op</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished">Ma</translation>
+        <translation>Ma</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished">Di</translation>
+        <translation>Di</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished">Wo</translation>
+        <translation>Wo</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished">Do</translation>
+        <translation>Do</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished">Vr</translation>
+        <translation>Vr</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished">Za</translation>
+        <translation>Za</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished">Zo</translation>
+        <translation>Zo</translation>
     </message>
     <message>
         <source>week(s)</source>
-        <translation type="unfinished">we(e)k(en)</translation>
+        <translation>we(e)k(en)</translation>
     </message>
     <message>
         <source>Repeat By</source>
-        <translation type="unfinished">Herhaal op</translation>
+        <translation>Herhaal op</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished">Dag</translation>
+        <translation>Dag</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Datum</translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>month(s)</source>
-        <translation type="unfinished">maand(en)</translation>
+        <translation>maand(en)</translation>
     </message>
     <message>
         <source>year(s)</source>
-        <translation type="unfinished">ja(a)r(en)</translation>
+        <translation>ja(a)r(en)</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished">Iedere</translation>
+        <translation>Iedere</translation>
     </message>
 </context>
 <context>
@@ -642,7 +642,7 @@ and </source>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Omschrijving:</translation>
+        <translation>Omschrijving:</translation>
     </message>
     <message>
         <source>Priority:</source>
@@ -858,183 +858,183 @@ and </source>
     </message>
     <message>
         <source>&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;b&gt;Werkadres:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;b&gt;Prive-adres:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>User Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruikers Id</translation>
     </message>
     <message>
         <source>Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorieen</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam Titel</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Voornaam</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Tussenvoegsel</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Achternaam</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtervoegsel</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslaan als</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Functienaam</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation type="unfinished"></translation>
+        <translation>Afdeling</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijf</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfs telefoon</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfs fax</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfs mobiel</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard email</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation type="unfinished"></translation>
+        <translation>Emails</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Prive telefoon</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Prive Fax</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Prive mobiel</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfs adres</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfs stad</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfs provincie</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfs postcode</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfs land</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfs pieper</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijfswebpagina</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedrijf</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation type="unfinished"></translation>
+        <translation>Beroep</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation type="unfinished"></translation>
+        <translation>Assistent</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Manager</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Prive straat</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation type="unfinished"></translation>
+        <translation>Prive stad</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation type="unfinished"></translation>
+        <translation>Prive provincie</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Prive postcode</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Prive land</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Prive webpagina</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Wederhelft</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Geslacht</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Verjaardag</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation type="unfinished"></translation>
+        <translation>Jaardag</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijnaam</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Kinderen</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 <context>

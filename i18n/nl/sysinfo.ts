@@ -3,67 +3,67 @@
     <name>BenchmarkInfo</name>
     <message>
         <source>This area shows the available tests, the results for which the tests have been performed, and comparison values for one selected device. Use the checkboxes to define which tests you want to perform.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit vlak toont de beschikbare tests, de resultaten van de uitgevoerde tests, en vergelikingswaarden voor een geslecteerd apparaat. Gebruik de keuzevlakken om de gewenste tests uit te kiezen.</translation>
     </message>
     <message>
         <source>Tests</source>
-        <translation type="unfinished"></translation>
+        <translation>Tests</translation>
     </message>
     <message>
         <source>Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Resultaat</translation>
     </message>
     <message>
         <source>Comparison</source>
-        <translation type="unfinished"></translation>
+        <translation>Vergelijking</translation>
     </message>
     <message>
         <source>1. Integer Arithmetic  </source>
-        <translation type="unfinished"></translation>
+        <translation>1. Integer rekenen</translation>
     </message>
     <message>
         <source>2. Floating Point Unit  </source>
-        <translation type="unfinished"></translation>
+        <translation>2. Breukrekenen</translation>
     </message>
     <message>
         <source>3. Text Rendering  </source>
-        <translation type="unfinished"></translation>
+        <translation>3. Tekstrendering</translation>
     </message>
     <message>
         <source>4. Gfx Rendering  </source>
-        <translation type="unfinished"></translation>
+        <translation>4. Beeldrendering</translation>
     </message>
     <message>
         <source>5. RAM Performance  </source>
-        <translation type="unfinished"></translation>
+        <translation>5. RAM Prestaties</translation>
     </message>
     <message>
         <source>6. SD Card Performance  </source>
-        <translation type="unfinished"></translation>
+        <translation>6. SD Kaart Prestaties</translation>
     </message>
     <message>
         <source>7. CF Card Performance  </source>
-        <translation type="unfinished"></translation>
+        <translation>6. CF Kaart Prestaties</translation>
     </message>
     <message>
         <source>&amp;Start Tests!</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Start Tests!</translation>
     </message>
     <message>
         <source>Click here to perform the selected tests.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om de geselecteerde tests uit te voeren.</translation>
     </message>
     <message>
         <source>Choose a model to compare your results with.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een model om de resultaten mee te vergelijken.</translation>
     </message>
     <message>
         <source>Compare To:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vergelijk met:</translation>
     </message>
     <message>
         <source>error</source>
-        <translation type="unfinished"></translation>
+        <translation>fout</translation>
     </message>
 </context>
 <context>
@@ -178,11 +178,17 @@ Memory is categorized as follows:
 2. Buffers - temporary storage used to improve performance
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze pagina geeft weer hoeveel geheugen (dwz RAM) in gebruik is op uw handheld.
+Gehugen wordt als volgt onderverdeeld:
+
+1. Gebruikt - Geheugen dat in gebruik is door Opie en lopende programma&apos;s.
+2. Buffers - Tijdelijke opslag tbv verbetering snelheid.
+3. Cache - Recent gebruikte informatie, die nog niet vrijgegeven is.
+4. Vrij - Geheugen dat momenteel niet in gebruik is door Opie of lopende programma&apos;s.</translation>
     </message>
     <message>
         <source>Total Swap: %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>Tataal Swap: %1 kB</translation>
     </message>
 </context>
 <context>
@@ -244,7 +250,8 @@ Druk een tijd op een module om meer informatie over de module te zien, of hem te
     <message>
         <source>You really want to execute
 %1 for this module?</source>
-        <translation type="unfinished"></translation>
+        <translation>Moet %1 echt
+gebruikt worden op deze module?</translation>
     </message>
 </context>
 <context>
@@ -317,7 +324,8 @@ Druk een tijd op een module om meer informatie over de module te zien, of een si
     <message>
         <source>Really want to send %1
 to this process?</source>
-        <translation type="unfinished"></translation>
+        <translation>Moet %1 echt naar
+dit proces gestuurd worden?</translation>
     </message>
 </context>
 <context>
@@ -352,7 +360,7 @@ to this process?</source>
     </message>
     <message>
         <source>Benchmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Benchmark</translation>
     </message>
 </context>
 <context>
@@ -391,11 +399,11 @@ to this process?</source>
     </message>
     <message>
         <source>&lt;br&gt;Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;Model:</translation>
     </message>
     <message>
         <source>&lt;br&gt;Vendor: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;Merk:</translation>
     </message>
 </context>
 </TS>

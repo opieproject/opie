@@ -41,43 +41,43 @@ Toegang geweigerd</translation>
     </message>
     <message>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation>Attentie</translation>
     </message>
     <message>
         <source>&lt;p&gt;All user-defined net ranges will be lost.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Alle gebruikersinstellingen zullen verloren gaan.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>192.168.129.0/24</source>
-        <translation type="unfinished">192.168.129.0/24</translation>
+        <translation>192.168.129.0/24</translation>
     </message>
     <message>
         <source>192.168.1.0/24</source>
-        <translation type="unfinished">192.168.1.0/24</translation>
+        <translation>192.168.1.0/24</translation>
     </message>
     <message>
         <source>192.168.0.0/16</source>
-        <translation type="unfinished">192.168.0.0/16</translation>
+        <translation>192.168.0.0/16</translation>
     </message>
     <message>
         <source>172.16.0.0/12</source>
-        <translation type="unfinished">172.16.0.0/12</translation>
+        <translation>172.16.0.0/12</translation>
     </message>
     <message>
         <source>10.0.0.0/8</source>
-        <translation type="unfinished">10.0.0.0/8</translation>
+        <translation>10.0.0.0/8</translation>
     </message>
     <message>
         <source>1.0.0.0/8</source>
-        <translation type="unfinished">1.0.0.0/8</translation>
+        <translation>1.0.0.0/8</translation>
     </message>
 </context>
 <context>
@@ -158,46 +158,63 @@ Toegang geweigerd</translation>
         <source>This button will let you change the security passcode.  
 
 Note: This is *not* the sync password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Met deze toets kan het bebeiligingswachtwoord gewijzigd worden.
+
+Let op: Dit is *niet* het synchronisatiewachtwoord.</translation>
     </message>
     <message>
         <source>Delete the current passcode.  
 You can enter a new one at any time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder huidig wachtwoord.
+Een nieuwe kan altijd worden ingevoerd.</translation>
     </message>
     <message>
         <source>If you enable this option, a passcode must be entered after every resume event of your Zaurus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als deze optie gebruikt wordt, moet iedere keer dat dit apparaat ingeschakeld wordt een wachtwoord ingevoerd worden.</translation>
     </message>
     <message>
         <source>If you select this option, opie-login will automagically log you in with the user you have selected in the drop-down list.  
 
 For the Zaurus 5x00 this is always the user &quot;root&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als deze optie gebruikt wordt, zal opie-login automagisch voor u inloggen als de gebruiker die geselecteerd is in de lijst hieronder.
+
+Voor de Zaurus 5x00 is dit altijd &quot;root&quot;.</translation>
     </message>
     <message>
         <source>This drop-down list allows you to select the user for auto-login
 (if enabled above).  
 
 You can only select an actually configured user.</source>
-        <translation type="unfinished"></translation>
+        <translation>Op deze lijst  kunt u de gebruiker voor auto-login selecteren
+(als deze optie aanstaat)
+
+Alleen een geconfigureerd gebruiker kan geselecteerd worden.</translation>
     </message>
     <message>
-        <source>Select a net-range or enter a new one.  
+        <source>Select a net-range or enter a new one.
 
-This drop-down list lets you select a net range which is allowed to connect to your Zaurus.  
+This drop-down list lets you select a net range which is allowed to connect to your Zaurus.
 
-For example, a net range of 192.168.1.0/24 will allow any machine with an IP between 192.168.1.1 and 192.168.1.254 to connect to (and sync with) your Zaurus.  
+For example, a net range of 192.168.1.0/24 will allow any machine with an IP between 192.168.1.1 and 192.168.1.254 to connect to (and sync with) your Zaurus.
 
-The entry &quot;All&quot; will allow *any* IP to connect. 
-The entry &quot;None&quot; will *deny* any connection.  
+The entry &quot;All&quot; will allow *any* IP to connect.
+The entry &quot;None&quot; will *deny* any connection.
 
 If unsure, select &quot;Any&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer een net-bereik of vul een nieuwe in.
+
+Met deze lijst kan een net-bereik gekozen worden waarmee de handheld tegestaan is te verbinden.
+
+Bijvoorbeeld, als een net-bereik ingesteld wordt als 192.168.1.0/24 kan iedere machine met een IP adres tussen 192.168.1.1 en 192.168.1.254 verbinden (en synchroniseren)met deze handheld.
+
+De instelling &quot;Iedere&quot; zal *alle* IP adressen toelaten,
+De instelling &quot;Geen&quot; zal alle IP adressen *weigeren*.
+
+Bij twifel tijdelijk &quot;Iedere&quot; gebruiken.</translation>
     </message>
     <message>
         <source>Delete Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder invoer</translation>
     </message>
     <message>
         <source>Delete the selected net range from the list
@@ -206,42 +223,54 @@ If you press this button, the currently selected net range will be deleted from 
 
 If you hit this button in error, the button &quot;Restore Defaults&quot; will restore
 the list to the state it has been when you initially booted your Zaurus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder het net-bereik uit de lijst
+
+Als deze knop gebruikt wordt, wordt het huidige net-bereik gewist uit de lijst met net-bereiken.
+
+Als deze knop per ongeluk gebruikt wordt, kunnen de standaardinstellingen
+worden teruggezet met de knop &quot;Herstel standaardinstelling&quot;.</translation>
     </message>
     <message>
         <source>Restore Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstel standaardinstelling</translation>
     </message>
     <message>
         <source>This button will restore the list of net ranges
 to the defaults.
 
 Beware that all manually entered net ranges will be lost!</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze knop zal de lijst met net-bereiken terugbrengen
+naar zijn standaardinstelling.
+
+Let erop dat daarmee al uw ingevulde net-bereiken zullen worden gewist!</translation>
     </message>
     <message>
         <source>Select your sync software</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies de synchronisatiesoftware</translation>
     </message>
     <message>
         <source>IntelliSync</source>
-        <translation type="unfinished"></translation>
+        <translation>IntelliSync</translation>
     </message>
     <message>
         <source>Qtopia 1.7</source>
-        <translation type="unfinished"></translation>
+        <translation>Qtopia 1.7</translation>
     </message>
     <message>
         <source>Opie 1.0</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie 1.0</translation>
     </message>
     <message>
         <source>Alter the Sync Protocol to tweak for the different devices.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
-        <translation type="unfinished"></translation>
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></source>
+        <translation>Verander het Sync protocol om aan te sluiten op de verschillende mogelijkheden.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync zal de wachtwoordcontrole uitschakelen, maar er zal wel worden gevraagd om bevestiging van de verbinding.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 moet worden gebruit voor QtopiaDesktop, MultiSync en KitchenSync
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 heeft de wijze van dataverzending veranderd, en zal dus niet werken met oudere versies.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></translation>
     </message>
 </context>
 </TS>

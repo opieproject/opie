@@ -218,69 +218,69 @@ sichern</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation>Symbol</translation>
+        <translation>Icoon</translation>
     </message>
     <message>
         <source>Field 1</source>
-        <translation>Feld 1</translation>
+        <translation>Veld 1</translation>
     </message>
     <message>
         <source>Field 2</source>
-        <translation>Feld 2</translation>
+        <translation>Veld 2</translation>
     </message>
     <message>
         <source>Field 3</source>
-        <translation>Feld 3</translation>
+        <translation>Veld 3</translation>
     </message>
     <message>
         <source>Field 4</source>
-        <translation>Feld 4</translation>
+        <translation>Veld 4</translation>
     </message>
     <message>
         <source>Field 5</source>
-        <translation>Feld 5</translation>
+        <translation>Veld 5</translation>
     </message>
     <message>
         <source>Field 6</source>
-        <translation>Feld 6</translation>
+        <translation>Veld 6</translation>
     </message>
 </context>
 <context>
     <name>InfoForm</name>
     <message>
         <source>Information:</source>
-        <translation>Information:</translation>
+        <translation>Informatie:</translation>
     </message>
 </context>
 <context>
     <name>NewDialog</name>
     <message>
         <source>New Entry</source>
-        <translation>Neuer Eintrag</translation>
+        <translation>Nieuw Record</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Kommentar</translation>
+        <translation>Commentaar</translation>
     </message>
     <message>
         <source>Field 6</source>
-        <translation>Feld 6</translation>
+        <translation>Veld 6</translation>
     </message>
     <message>
         <source>Field 5</source>
-        <translation>Feld 5</translation>
+        <translation>Veld 5</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Passwort</translation>
+        <translation>Wachtwoord</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Benutzername</translation>
+        <translation>Gebruikersnaam</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>Naam</translation>
     </message>
 </context>
 <context>
@@ -291,44 +291,46 @@ sichern</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Passwort</translation>
+        <translation>Wachtwoord</translation>
     </message>
 </context>
 <context>
     <name>ScQtFileDlg</name>
     <message>
         <source>FileDlg</source>
-        <translation>Dateidialog</translation>
+        <translation>Bestandsdialoog</translation>
     </message>
     <message>
         <source>file type filter</source>
-        <translation>Dateityp Filter</translation>
+        <translation>Bestandstype Filter</translation>
     </message>
     <message>
         <source>ComboBox FileTypeFilter
 
 edit or select the filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Combibox Bestandtype Filter
+
+wijzig of selecteer het filter</translation>
     </message>
     <message>
         <source>confirms the selection and closes the form</source>
-        <translation type="unfinished"></translation>
+        <translation>bevestigt de selectie en sluit het formulier</translation>
     </message>
     <message>
         <source>OKButton</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>cancels the selection and closes the form</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleert de huidige selectie en sluit het formulier</translation>
     </message>
     <message>
         <source>CancelButton</source>
-        <translation type="unfinished">Abbruch</translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <source>shows the selected filename</source>
-        <translation type="unfinished"></translation>
+        <translation>laat de geselecteerde bestandsnaam zien</translation>
     </message>
     <message>
         <source>Filename LineEdit
@@ -336,20 +338,26 @@ edit or select the filter</source>
 shows the selected file
 and allows the direct filename
 edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig Bestandsnaam
+
+Laat het geselecteerde
+bestand zien, en laat
+de bestandsnaam wijzigen</translation>
     </message>
     <message>
         <source>ComboBox Directory 
 edit or select the directories name</source>
-        <translation type="unfinished"></translation>
+        <translation>Combibox Map
+
+wijzig of selecteer de mapnaam</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Name</translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <source>size</source>
-        <translation>Größe</translation>
+        <translation>grootte</translation>
     </message>
     <message>
         <source>type</source>
@@ -357,58 +365,60 @@ edit or select the directories name</source>
     </message>
     <message>
         <source>directory listview</source>
-        <translation>Dateilistenansicht</translation>
+        <translation>Bestandslijstweergave</translation>
     </message>
     <message>
         <source>Directory ListView
 
 shows the list of dirs and files</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijstaanzicht mappen
+
+laat de lijst van mappen en bestanden zien</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>ScQtFileEditDlg</name>
     <message>
         <source>dir</source>
-        <translation type="unfinished">Verz.</translation>
+        <translation>Map</translation>
     </message>
     <message>
         <source>file</source>
-        <translation>Datei</translation>
+        <translation>Bestand</translation>
     </message>
     <message>
         <source>link</source>
-        <translation>Verknüpfung</translation>
+        <translation>koppeling</translation>
     </message>
 </context>
 <context>
     <name>SearchDialog</name>
     <message>
         <source>Search</source>
-        <translation>Suchen</translation>
+        <translation>Zoek</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Benutzername</translation>
+        <translation>Gebruikersnaam</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Kommentar</translation>
+        <translation>Commentaar</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>Naam</translation>
     </message>
 </context>
 <context>
     <name>Wait</name>
     <message>
         <source>Please Wait...</source>
-        <translation>Bitte warten...</translation>
+        <translation>een moment aub...</translation>
     </message>
 </context>
 <context>
@@ -422,87 +432,87 @@ shows the list of dirs and files</source>
 %1
 
 ZSafe will now exit.</source>
-        <translation>Kann das Verzeichnis
+        <translation>Kan de map
 %1
-nicht anlegen
+niet maken.
 
-ZSafe wird sich jetzt beenden.</translation>
+ZSafe zal nu afsluiten.</translation>
     </message>
     <message>
         <source>&amp;Save document</source>
-        <translation>&amp;Speichern</translation>
+        <translation>&amp;Opslaan</translation>
     </message>
     <message>
         <source>S&amp;ave document with new Password</source>
-        <translation>Speichern mit neuem &amp;Passwort</translation>
+        <translation>Opslaan met nieuw &amp;Wachtwoord</translation>
     </message>
     <message>
         <source>&amp;Export text file</source>
-        <translation>Textdatei &amp;Exportieren</translation>
+        <translation>&amp;Exporteer tekstbestand</translation>
     </message>
     <message>
         <source>&amp;Import text file</source>
-        <translation>Textdatei &amp;Importieren</translation>
+        <translation>&amp;Importeer tekstbestand</translation>
     </message>
     <message>
         <source>&amp;Remove text file</source>
-        <translation>Textdatei &amp;löschen</translation>
+        <translation>Verwijde&amp;r tekstbestand</translation>
     </message>
     <message>
         <source>&amp;Open entries expanded</source>
-        <translation>&amp;Expandiert Öffnen</translation>
+        <translation>&amp;Geexpandeerd openen</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation>&amp;Beenden</translation>
+        <translation>&amp;Afsluiten</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;Datei</translation>
+        <translation>&amp;Bestand</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;Neu</translation>
+        <translation>&amp;Nieuw</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Ändern</translation>
+        <translation>&amp;Wijzigen</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;Löschen</translation>
+        <translation>&amp;Verwijderen</translation>
     </message>
     <message>
         <source>&amp;Category</source>
-        <translation>&amp;Kategorie</translation>
+        <translation>&amp;Categorie</translation>
     </message>
     <message>
         <source>&amp;Cut</source>
-        <translation>&amp;Ausschneiden</translation>
+        <translation>&amp;Knip</translation>
     </message>
     <message>
         <source>C&amp;opy</source>
-        <translation>&amp;Kopieren</translation>
+        <translation>&amp;Kopieer</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation>&amp;Einfügen</translation>
+        <translation>&amp;Plak</translation>
     </message>
     <message>
         <source>&amp;Search</source>
-        <translation>&amp;Suchen</translation>
+        <translation>&amp;Zoek</translation>
     </message>
     <message>
         <source>&amp;Entry</source>
-        <translation>&amp;Eintrag</translation>
+        <translation>&amp;Record</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation>&amp;Über</translation>
+        <translation>&amp;Over</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation>&amp;Hilfe</translation>
+        <translation>&amp;Help</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -522,183 +532,183 @@ ZSafe wird sich jetzt beenden.</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <source>Field 2</source>
-        <translation>Feld 2</translation>
+        <translation>Veld 2</translation>
     </message>
     <message>
         <source>Field 3</source>
-        <translation>Feld 3</translation>
+        <translation>Veld 3</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Kommentar</translation>
+        <translation>Commentaar</translation>
     </message>
     <message>
         <source>Field 4</source>
-        <translation>Feld 4</translation>
+        <translation>Veld 4</translation>
     </message>
     <message>
         <source>Field 5</source>
-        <translation>Feld 5</translation>
+        <translation>Veld 5</translation>
     </message>
     <message>
         <source>Do you want to delete?</source>
-        <translation type="unfinished">Wollen Sie wirklich löschen?</translation>
+        <translation>Echt verwijderen?</translation>
     </message>
     <message>
         <source>D&amp;on&apos;t Delete</source>
-        <translation type="unfinished">&amp;Nicht löschen</translation>
+        <translation>&amp;Niet verwijderen</translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation type="unfinished">Eintrag ändern</translation>
+        <translation>Invoer wijzigen</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished">Benutzername</translation>
+        <translation>Gebruikersnaam</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished">Passwort</translation>
+        <translation>Wachtwoord</translation>
     </message>
     <message>
         <source>New Entry</source>
-        <translation type="unfinished">Neuer Eintrag</translation>
+        <translation>Nieuwe Invoer</translation>
     </message>
     <message>
         <source>Entry name must be different
 from the category name.</source>
-        <translation type="unfinished">Die Namen der Einträge
-müssen sich von der
-Kategorie unterscheiden.</translation>
+        <translation>De naam van de invoer moet
+zich van de categorienaam
+onderscheiden.</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Suchen</translation>
+        <translation>Zoek</translation>
     </message>
     <message>
         <source>Entry not found</source>
-        <translation type="unfinished">Eintrag nicht gefunden</translation>
+        <translation>Gegeven niet gevonden</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished">&amp;Ok</translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <source>Could not remove text file.</source>
-        <translation type="unfinished">Konnte Textdatei nicht löschen.</translation>
+        <translation>Kan tekstbestand niet verwijderen.</translation>
     </message>
     <message>
         <source>Could not export to text file.</source>
-        <translation type="unfinished">Konnte Textdatei nicht exportieren.</translation>
+        <translation>Kan tekstbestand niet exporteren.</translation>
     </message>
     <message>
         <source>Could not import text file.</source>
-        <translation type="unfinished">Konnte Textdatei nicht importieren.</translation>
+        <translation>Kan tekstbestand niet importeren.</translation>
     </message>
     <message>
         <source>Enter Password</source>
-        <translation type="unfinished">Passwort eingeben</translation>
+        <translation>Wachtwoord invoeren</translation>
     </message>
     <message>
         <source>Wrong password.
 
 ZSafe will now exit.</source>
-        <translation type="unfinished">Falsches Passwort
+        <translation>Foutief wachtwoord.
 
-ZSafe wird sich jetzt beenden.</translation>
+ZSafe zal nu afsluiten.</translation>
     </message>
     <message>
         <source>Wrong password.
 Enter again?</source>
-        <translation type="unfinished">Falsches Passwort.
-Neu eingeben?</translation>
+        <translation>Foutief wachtwoord.
+
+Nogmaals invoeren?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished">&amp;Ja</translation>
+        <translation>&amp;Ja</translation>
     </message>
     <message>
         <source>&amp;No.</source>
-        <translation type="unfinished">&amp;Nein.</translation>
+        <translation>&amp;Nee</translation>
     </message>
     <message>
         <source>Empty document or
 wrong password.
 Continue?</source>
-        <translation type="unfinished">Leeres Dokument oder
-falsches Passwort.
-Fortfahren?</translation>
+        <translation>Leeg bestand of
+foutief wachtwoord.
+Doorgaan?</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished">&amp;Nein</translation>
+        <translation>&amp;Nee</translation>
     </message>
     <message>
         <source>&amp;Yes.</source>
-        <translation type="unfinished">&amp;Ja.</translation>
+        <translation>&amp;Ja.</translation>
     </message>
     <message>
         <source>Password is empty.
 Please enter again.</source>
-        <translation type="unfinished">Das Passwort ist leer.
-Bitte nochmals eingeben.</translation>
+        <translation>Leeg wachtwoord.
+Nogmaals invoeren.</translation>
     </message>
     <message>
         <source>Reenter Password</source>
-        <translation type="unfinished">Passwort nochmals eingeben</translation>
+        <translation>Wachtwoord nogmaals invoeren</translation>
     </message>
     <message>
         <source>Passwords must be identical.
 Please enter again.</source>
-        <translation type="unfinished">Die Passwörter müssen
-gleich sein. Bitte nochmals
-Passwort eingeben.</translation>
+        <translation>Wachtwoorden moeten identiek zijn.
+Nogmaals invoeren.</translation>
     </message>
     <message>
         <source>Password file saved.</source>
-        <translation type="unfinished">Passwort-Datei gesichert.</translation>
+        <translation>Wachtwoordbestand opgeslagen.</translation>
     </message>
     <message>
         <source>Do you want to save
 before exiting?</source>
-        <translation type="unfinished">Wollen Sie vor dem Beenden
-die Daten speichern?</translation>
+        <translation>Wilt u de data opslaan
+voor het afsluiten?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Sichern</translation>
+        <translation>&amp;Opslaan</translation>
     </message>
     <message>
         <source>S&amp;ave with
 new
 password</source>
-        <translation type="unfinished">Mit neuem
-&amp;Passwort
-sichern</translation>
+        <translation>Met nieuw 
+&amp;Wachtwoord
+opslaan</translation>
     </message>
     <message>
         <source>&amp;Don&apos;t Save</source>
-        <translation type="unfinished">&amp;Nicht sichern</translation>
+        <translation>&amp;Niet opslaan</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished">Kategorie</translation>
+        <translation>Categorie</translation>
     </message>
     <message>
         <source>Wait dialog</source>
-        <translation type="unfinished">Bitte warten</translation>
+        <translation>een moment aub...</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation type="unfinished">Suche nach Symbolen...</translation>
+        <translation>Zoek naar Symbolen...</translation>
     </message>
     <message>
         <source>Zaurus Password Manager&lt;br&gt;</source>
-        <translation type="unfinished">Zaurus Passwort Manager&lt;br&gt;</translation>
+        <translation>Handheld Wachtwoord Manager&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.0.1ern&lt;br&gt;</source>
@@ -706,117 +716,131 @@ sichern</translation>
     </message>
     <message>
         <source>by Carsten Schneider&lt;br&gt;</source>
-        <translation type="unfinished">von Carsten Schneider&lt;br&gt;</translation>
+        <translation>door Carsten Schneider&lt;br&gt;</translation>
     </message>
     <message>
         <source>Translations by Robert Ernst&lt;br&gt;</source>
-        <translation type="unfinished">Übersetzungen von Robert Ernst&lt;br&gt;</translation>
+        <translation>Vertaling door Ruben Lubbes&lt;br&gt;</translation>
     </message>
     <message>
         <source>&amp;New document</source>
-        <translation>&amp;Neue Datei</translation>
+        <translation>&amp;Nieuw document</translation>
     </message>
     <message>
         <source>&amp;Open document</source>
-        <translation>&amp;Öffne Datei</translation>
+        <translation>&amp;Open document</translation>
     </message>
     <message>
         <source>&amp;Save document as ..</source>
-        <translation>&amp;Speichere Datei als..</translation>
+        <translation>Bestand &amp;opslaan als..</translation>
     </message>
     <message>
         <source>Create new ZSafe document</source>
-        <translation type="unfinished">Erzeuge neue ZSafe Datei</translation>
+        <translation>Maak nieuw ZSafe Bestand</translation>
     </message>
     <message>
         <source>Open ZSafe document</source>
-        <translation type="unfinished">Öffne ZSafe Datei</translation>
+        <translation>Open ZSafe Bestand</translation>
     </message>
     <message>
         <source>Save ZSafe document as..</source>
-        <translation type="unfinished">Speichere ZSafe Datei als..</translation>
+        <translation>ZSafe document opslaan als..</translation>
     </message>
     <message>
         <source>Can&apos;t create directory
 .../Documents/application
 
 ZSafe will now exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan de map
+.../Documents/application
+niet maken.
+
+ZSafe zal nu afsluiten.
+</translation>
     </message>
     <message>
         <source>Can&apos;t create directory
 ...//Documents/application/zsafe
 
 ZSafe will now exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan de map
+.../Documents/application/zsafe
+niet maken.
+
+ZSafe zal nu afsluiten.
+</translation>
     </message>
     <message>
         <source>New entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe Invoer</translation>
     </message>
     <message>
         <source>Edit category or entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig categorie of record</translation>
     </message>
     <message>
         <source>Delete category or entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder categorie of record</translation>
     </message>
     <message>
         <source>Find entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Vind Record</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>Remove text file</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder tekstbestand</translation>
     </message>
     <message>
         <source>No document defined.
 You have to create a new document</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen document gekozen.
+Er moet een nieuw document aangemaakt worden</translation>
     </message>
     <message>
         <source>Export text file</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteer tekstbestand</translation>
     </message>
     <message>
         <source>Import text file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importeer tekstbestand</translation>
     </message>
     <message>
         <source>Do you want to save </source>
-        <translation type="unfinished"></translation>
+        <translation>Wilt u opslaan</translation>
     </message>
     <message>
         <source>
 before continuing?</source>
-        <translation type="unfinished"></translation>
+        <translation>
+voor u verdergaat?</translation>
     </message>
     <message>
         <source>Now you have to enter
 a password twice for your
 newly created document.</source>
-        <translation type="unfinished"></translation>
+        <translation>U moet tweemaal een wacht-
+woord invoeren voor
+uw nieuwe bestand.</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>ZSafe versie 2.1.2-jv01b&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>ZSafe versie 2.1.2&lt;br&gt;</translation>
     </message>
 </context>
 </TS>
