@@ -28,7 +28,7 @@
 #include <qstringlist.h>
 #include <qregexp.h>
 #include <qtextbrowser.h>
-#include <stdlib.h> // for getenv
+//#include <stdlib.h> // for getenv
 
 DingWidget::DingWidget( )
 {
@@ -40,9 +40,8 @@ DingWidget::DingWidget( )
 void DingWidget::loadDict( QString name )
 {
 	dictName = name;
-  	QString opie_dir = getenv("OPIEDIR");
-	
 	Config cfg(  "odict" );
+	if ( !methodname ) return;
 	cfg.setGroup( "Method_" + methodname );
 	QFile file( cfg.readEntry( "file" )  );
 	
@@ -86,6 +85,7 @@ void DingWidget::setQueryWord( QString qword )
 
 void DingWidget::loadValues()
 {
+	if ( !methodname ) return;
 	Config cfg(  "odict" );
 	cfg.setGroup( "Method_" + methodname );
 	trenner = cfg.readEntry( "Seperator" );

@@ -44,7 +44,6 @@ ODict::ODict() : QMainWindow()
 	vbox = new QVBox( this );
 	setCaption( tr( "OPIE-Dictionary" ) );
 	setupMenus();
-	
 
 	QHBox *hbox = new QHBox( vbox );
 	QLabel* query_label = new QLabel( tr( "Query:" ) , hbox ); query_label->show();
@@ -96,30 +95,17 @@ void ODict::saveConfig()
 void ODict::slotStartQuery()
 {
 	QString querystring = query_le->text();
-//X 	qDebug("opening dict >%s< for >%s<", activated_name.latin1(),querystring.latin1());
-//X 	if (querystring.isEmpty()){
-//X 		qWarning("empty querystring");
-//X 		return;
-//X 	}
-//X 	if (!activated_name || activated_name.isEmpty())
-//X 		QMessageBox::warning(this,tr("No Dictionary"),tr("Please choose a dictonary") );
-//X 	else
-//X 	{
+	ding->setCaseSensitive( casesens ); 
+	ding->setCompleteWord( completewords ); 
+	ding->setDict( activated_name );
 
-		ding->setCaseSensitive( casesens ); 
-		ding->setCompleteWord( completewords ); 
-		ding->setDict( activated_name );
-		
-		if ( activated_name != ding->loadedDict() )
-			ding->loadDict(activated_name);
-		
-		BroswerContent test = ding->setText( querystring );
+	if ( activated_name != ding->loadedDict() )
+		ding->loadDict(activated_name);
 
-		browser_top->setText( test.top );
-		browser_bottom->setText( test.bottom );
-		
-		qDebug( "Text sollte gesetzt sein..." );
-//X 	}
+	BroswerContent test = ding->setText( querystring );
+
+	browser_top->setText( test.top );
+	browser_bottom->setText( test.bottom );
 }
 
 
@@ -176,10 +162,10 @@ void ODict::setupMenus()
 	menu = new QMenuBar( this );
 	
 	settings = new QPopupMenu( menu );
-	setting_a = new QAction(tr(  "Config" ), Resource::loadPixmap(  "today/config" ), QString::null, 0, this, 0 );
+	setting_a = new QAction(tr( "Configuration" ), Resource::loadPixmap( "new" ), QString::null, 0, this, 0 );
 	connect( setting_a, SIGNAL( activated() ), this, SLOT( slotSettings() ) );
 	setting_a->addTo( settings );
-	setting_b = new QAction(tr(  "Searchmethods" ), Resource::loadPixmap(  "today/config" ), QString::null, 0, this, 0 );
+	setting_b = new QAction(tr(  "Searchmethods" ), Resource::loadPixmap( "edit" ), QString::null, 0, this, 0 );
 	
 	parameter = new QPopupMenu( menu );
 	connect(  parameter, SIGNAL( activated( int ) ), this, SLOT( slotSetParameter( int ) ) );

@@ -76,6 +76,7 @@ void ConfigDlg::slotNewMethod()
 	SearchMethodDlg dlg( this, "SearchMethodDlg", true );
 	if ( dlg.exec() == QDialog::Accepted )
 	{
+		//if ( !dlg.nameLE->text() ) return; //XXX
 		dlg.saveItem();
 		QListViewItem *item = new QListViewItem( list );
 		item->setText( 0 , dlg.nameLE->text() );
@@ -90,6 +91,7 @@ void ConfigDlg::slotChangeMethod()
 		SearchMethodDlg dlg( this, "SearchMethodDlg", true, list->selectedItem()->text( 0 ) );
 		if ( dlg.exec() == QDialog::Accepted )
 		{
+			//if ( !dlg.nameLE->text() ) return; //XXX geht vielleich nicht
 			dlg.saveItem();
 			QListViewItem *item = list->selectedItem();
 			item->setText( 0 , dlg.nameLE->text() );
