@@ -73,9 +73,15 @@ defconfig :
 	./scripts/kconfig/conf -d ./config.in
 
 
+ifeq ($(if $(filter clean%,$(MAKECMDGOALS)),clean,notclean),notclean)
 -include $(TOPDIR)/.config
+endif
+ifeq ($(shell if [ -e $(TOPDIR)/..config.cmd ]; then echo exists; fi),exists)
 -include $(TOPDIR)/..config.cmd
+endif
+ifeq ($(if $(filter clean%,$(MAKECMDGOALS)),clean,notclean),notclean)
 -include $(TOPDIR)/.depends
+endif
 
 all : $(subdir-y)
 	
