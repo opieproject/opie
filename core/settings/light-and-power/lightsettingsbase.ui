@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>343</width>
+            <width>331</width>
             <height>532</height>
         </rect>
     </property>
@@ -105,38 +105,7 @@
                                 <name>spacing</name>
                                 <number>3</number>
                             </property>
-                            <widget row="1"  column="1" >
-                                <class>QSpinBox</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>interval_lightoff</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>suffix</name>
-                                    <string> sec</string>
-                                </property>
-                                <property stdset="1">
-                                    <name>specialValueText</name>
-                                    <string>never</string>
-                                </property>
-                                <property stdset="1">
-                                    <name>buttonSymbols</name>
-                                    <enum>PlusMinus</enum>
-                                </property>
-                                <property stdset="1">
-                                    <name>maxValue</name>
-                                    <number>3600</number>
-                                </property>
-                                <property stdset="1">
-                                    <name>minValue</name>
-                                    <number>0</number>
-                                </property>
-                                <property stdset="1">
-                                    <name>lineStep</name>
-                                    <number>10</number>
-                                </property>
-                            </widget>
-                            <widget row="0"  column="0" >
+                            <widget row="0"  column="0"  rowspan="1"  colspan="2" >
                                 <class>QLabel</class>
                                 <property stdset="1">
                                     <name>name</name>
@@ -154,7 +123,72 @@
                                     <string>Dim light after</string>
                                 </property>
                             </widget>
-                            <widget row="0"  column="1" >
+                            <widget row="2"  column="0"  rowspan="1"  colspan="2" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>TL3</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>1</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Suspend after</string>
+                                </property>
+                            </widget>
+                            <widget row="4"  column="0"  rowspan="1"  colspan="3" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>LcdOffOnly</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>7</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Deactivate LCD only (does not suspend)</string>
+                                </property>
+                            </widget>
+                            <widget row="3"  column="0"  rowspan="1"  colspan="2" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>frequencyLabel</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>1</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>CPU Frequency</string>
+                                </property>
+                            </widget>
+                            <widget row="5"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>closeHingeLabel</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>On closing the hinge</string>
+                                </property>
+                            </widget>
+                            <widget row="0"  column="2" >
                                 <class>QSpinBox</class>
                                 <property stdset="1">
                                     <name>name</name>
@@ -185,79 +219,38 @@
                                     <number>10</number>
                                 </property>
                             </widget>
-                            <widget row="4"  column="0"  rowspan="1"  colspan="2" >
-                                <class>QCheckBox</class>
+                            <widget row="1"  column="2" >
+                                <class>QSpinBox</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>LcdOffOnly</cstring>
+                                    <cstring>interval_lightoff</cstring>
                                 </property>
                                 <property stdset="1">
-                                    <name>sizePolicy</name>
-                                    <sizepolicy>
-                                        <hsizetype>7</hsizetype>
-                                        <vsizetype>0</vsizetype>
-                                    </sizepolicy>
+                                    <name>suffix</name>
+                                    <string> sec</string>
                                 </property>
                                 <property stdset="1">
-                                    <name>text</name>
-                                    <string>Deactivate LCD only (does not suspend)</string>
+                                    <name>specialValueText</name>
+                                    <string>never</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>buttonSymbols</name>
+                                    <enum>PlusMinus</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>maxValue</name>
+                                    <number>3600</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>minValue</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>lineStep</name>
+                                    <number>10</number>
                                 </property>
                             </widget>
-                            <widget row="2"  column="0" >
-                                <class>QLabel</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>TL3</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>sizePolicy</name>
-                                    <sizepolicy>
-                                        <hsizetype>3</hsizetype>
-                                        <vsizetype>1</vsizetype>
-                                    </sizepolicy>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>Suspend after</string>
-                                </property>
-                            </widget>
-                            <widget row="1"  column="0" >
-                                <class>QLabel</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>TL2</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>sizePolicy</name>
-                                    <sizepolicy>
-                                        <hsizetype>3</hsizetype>
-                                        <vsizetype>1</vsizetype>
-                                    </sizepolicy>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>Light off after</string>
-                                </property>
-                            </widget>
-                            <widget row="3"  column="0" >
-                                <class>QLabel</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>TL3_2</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>sizePolicy</name>
-                                    <sizepolicy>
-                                        <hsizetype>3</hsizetype>
-                                        <vsizetype>1</vsizetype>
-                                    </sizepolicy>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>CPU Frequency</string>
-                                </property>
-                            </widget>
-                            <widget row="2"  column="1" >
+                            <widget row="2"  column="2" >
                                 <class>QSpinBox</class>
                                 <property stdset="1">
                                     <name>name</name>
@@ -288,11 +281,54 @@
                                     <number>10</number>
                                 </property>
                             </widget>
-                            <widget row="3"  column="1" >
+                            <widget row="3"  column="2" >
                                 <class>QComboBox</class>
                                 <property stdset="1">
                                     <name>name</name>
                                     <cstring>frequency</cstring>
+                                </property>
+                            </widget>
+                            <widget row="5"  column="1"  rowspan="1"  colspan="2" >
+                                <class>QComboBox</class>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>ignore</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>display off</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>suspend</string>
+                                    </property>
+                                </item>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>closeHingeAction</cstring>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>TL2</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>1</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Light off after</string>
                                 </property>
                             </widget>
                         </grid>
@@ -552,11 +588,11 @@
                 <vbox>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>-1</number>
+                        <number>5</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>-1</number>
+                        <number>3</number>
                     </property>
                     <widget>
                         <class>QGroupBox</class>
@@ -616,24 +652,6 @@
                                 <property stdset="1">
                                     <name>lineStep</name>
                                     <number>10</number>
-                                </property>
-                            </widget>
-                            <widget row="0"  column="0" >
-                                <class>QLabel</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>TextLabel1_3_2</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>sizePolicy</name>
-                                    <sizepolicy>
-                                        <hsizetype>3</hsizetype>
-                                        <vsizetype>1</vsizetype>
-                                    </sizepolicy>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>Dim light after</string>
                                 </property>
                             </widget>
                             <widget row="2"  column="1" >
@@ -698,6 +716,31 @@
                                     <number>10</number>
                                 </property>
                             </widget>
+                            <widget row="3"  column="1" >
+                                <class>QComboBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>frequency_ac</cstring>
+                                </property>
+                            </widget>
+                            <widget row="3"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>frequencyLabel_ac</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>1</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>CPU Frequency</string>
+                                </property>
+                            </widget>
                             <widget row="1"  column="0" >
                                 <class>QLabel</class>
                                 <property stdset="1">
@@ -714,6 +757,24 @@
                                 <property stdset="1">
                                     <name>text</name>
                                     <string>Light off after</string>
+                                </property>
+                            </widget>
+                            <widget row="0"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>TextLabel1_3_2</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>1</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Dim light after</string>
                                 </property>
                             </widget>
                             <widget row="2"  column="0" >
@@ -734,14 +795,7 @@
                                     <string>Suspend after</string>
                                 </property>
                             </widget>
-                            <widget row="3"  column="1" >
-                                <class>QComboBox</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>frequency_ac</cstring>
-                                </property>
-                            </widget>
-                            <widget row="4"  column="0" >
+                            <widget row="4"  column="0"  rowspan="1"  colspan="2" >
                                 <class>QCheckBox</class>
                                 <property stdset="1">
                                     <name>name</name>
@@ -759,22 +813,40 @@
                                     <string>Deactivate LCD only (does not suspend)</string>
                                 </property>
                             </widget>
-                            <widget row="3"  column="0" >
+                            <widget row="5"  column="1" >
+                                <class>QComboBox</class>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>ignore</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>display off</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>suspend</string>
+                                    </property>
+                                </item>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>closeHingeAction_ac</cstring>
+                                </property>
+                            </widget>
+                            <widget row="5"  column="0" >
                                 <class>QLabel</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>TextLabel1_2_2_3_2</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>sizePolicy</name>
-                                    <sizepolicy>
-                                        <hsizetype>3</hsizetype>
-                                        <vsizetype>1</vsizetype>
-                                    </sizepolicy>
+                                    <cstring>closeHingeLabel_ac</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>CPU frequency</string>
+                                    <string>On closing the hinge</string>
                                 </property>
                             </widget>
                         </grid>

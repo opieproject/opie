@@ -16,7 +16,7 @@
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
 ..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:       
+++=   -.     .`     .:
  :     =  ...= . :.=-        You should have received a copy of the GNU
  -.   .:....=;==+<;          General Public License along with this file;
   -_. . .   )=.  =           see the file COPYING. If not, write to the
@@ -34,6 +34,7 @@
 #include <qpe/qcopenvelope_qws.h>
 #endif
 
+#include <qlabel.h>
 #include <qcheckbox.h>
 #include <qtabwidget.h>
 #include <qslider.h>
@@ -54,12 +55,17 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 	m_bres = ODevice::inst ( )-> displayBrightnessResolution ( );
 	m_cres = ODevice::inst ( )-> displayContrastResolution ( );
 
+    // check whether to show the light sensor stuff
+
 	if ( !ODevice::inst ( )-> hasLightSensor ( )) {
 		auto_brightness-> hide ( );
 		CalibrateLightSensor-> hide ( );
 		auto_brightness_ac-> hide ( );
 		CalibrateLightSensor_ac-> hide ( );
 	}
+
+    // check whether to show the contrast stuff
+
 	if (m_cres) {
 		GroupLight->setTitle(tr("Backlight && Contrast"));
 		GroupLight_ac->setTitle(GroupLight->title());
@@ -68,14 +74,27 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 		contrast_ac->hide();
 	}
 
+    // check whether to show the cpu frequency stuff
+
 	QStrList freq = ODevice::inst()->allowedCpuFrequencies();
 	if ( freq.count() ) {
 		frequency->insertStrList( freq );
 		frequency_ac->insertStrList( freq );
 	} else {
+		frequencyLabel->hide();
 		frequency->hide();
+		frequencyLabel_ac->hide();
 		frequency_ac->hide();
 	}
+
+    // check whether to show the hinge action stuff
+
+    if ( !ODevice::inst()->hasHingeSensor() ) {
+        closeHingeLabel->hide();
+        closeHingeAction->hide();
+        closeHingeLabel_ac->hide();
+        closeHingeAction_ac->hide();
+    }
 
 	Config config ( "apm" );
 	config. setGroup ( "Battery" );
@@ -91,7 +110,10 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 	// CPU frequency
 	frequency->setCurrentItem( config.readNumEntry("Freq", 0) );
 
-	int bright = config. readNumEntry ( "Brightness", 127 );
+	// hinge action
+	closeHingeAction->setCurrentItem( config.readNumEntry("CloseHingeAction", 0) );
+
+    int bright = config. readNumEntry ( "Brightness", 127 );
 	int contr  = m_oldcontrast = config. readNumEntry ( "Contrast", 127 );
 	brightness-> setTickInterval ( QMAX( 16, 256 / m_bres ));
 	brightness-> setLineStep ( QMAX( 1, 256 / m_bres ));
@@ -110,7 +132,7 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 	m_sensordata = config. readListEntry ( "LightSensorData", ';' );
 
 	config. setGroup ( "AC" );
-	
+
 	// ac spinboxes
 	interval_dim_ac->      setValue ( config. readNumEntry ( "Dim", 60 ));
 	interval_lightoff_ac-> setValue ( config. readNumEntry ( "LightOff", 120 ));
@@ -121,6 +143,9 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 
 	// CPU frequency
 	frequency_ac->setCurrentItem( config.readNumEntry("Freq", 0) );
+
+	// hinge action
+	closeHingeAction_ac->setCurrentItem( config.readNumEntry("CloseHingeAction", 0) );
 
 	bright = config. readNumEntry ( "Brightness", 255 );
 	brightness_ac-> setTickInterval ( QMAX( 16, 256 / m_bres ));
@@ -139,8 +164,8 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 	// light sensor
 	auto_brightness_ac-> setChecked ( config. readBoolEntry ( "LightSensor", false ));
 	m_sensordata_ac = config. readListEntry ( "LightSensorData", ';' );
-	
-	// advanced settings
+
+	// warnings
 	config. setGroup ( "Warnings" );
 	warnintervalBox-> setValue ( config. readNumEntry ( "checkinterval", 10000 ) / 1000 );
 	lowSpinBox->      setValue ( config. readNumEntry ( "powerverylow", 10 ) );
@@ -150,22 +175,25 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 	connect ( m_resettimer, SIGNAL( timeout ( )), this, SLOT( resetBacklight ( )));
 
 	if ( PowerStatusManager::readStatus ( ). acStatus ( ) != PowerStatus::Online ) {
-		tabs-> setCurrentPage ( 0 );		
+		tabs-> setCurrentPage ( 0 );
 	}
 	else {
 		tabs-> setCurrentPage ( 1 );
 	}
-	
+
 	connect ( brightness, SIGNAL( valueChanged ( int )), this, SLOT( setBacklight ( int )));
 	connect ( brightness_ac, SIGNAL( valueChanged ( int )), this, SLOT( setBacklight ( int )));
 	if (m_cres) {
 		connect ( contrast,    SIGNAL( valueChanged ( int )), this, SLOT( setContrast ( int )));
 		connect ( contrast_ac, SIGNAL( valueChanged ( int )), this, SLOT( setContrast ( int )));
 	}
-        connect( frequency, SIGNAL( activated(int) ),          this, SLOT( setFrequency(int) ) );
+	connect( frequency, SIGNAL( activated(int) ), this, SLOT( setFrequency(int) ) );
+	connect( frequency_ac, SIGNAL( activated(int) ), this, SLOT( setFrequency(int) ) );
+	connect( closeHingeAction, SIGNAL( activated(int) ), this, SLOT( setCloseHingeAction(int) ) );
+	connect( closeHingeAction_ac, SIGNAL( activated(int) ), this, SLOT( setCloseHingeAction(int) ) );
 }
 
-LightSettings::~LightSettings ( ) 
+LightSettings::~LightSettings ( )
 {
 }
 
@@ -191,23 +219,22 @@ void LightSettings::setBacklight ( int bright )
 {
 	QCopEnvelope e ( "QPE/System", "setBacklight(int)" );
 	e << bright;
-	
+
 	if ( bright != -1 ) {
 		m_resettimer-> stop ( );
 		m_resettimer-> start ( 4000, true );
-	}	
+	}
 }
 
 void LightSettings::setContrast ( int contr )
 {
 	if (contr == -1) contr = m_oldcontrast;
-	
 	ODevice::inst ( )-> setDisplayContrast(contr);
 }
 
 void LightSettings::setFrequency ( int index )
 {
-qWarning("LightSettings::setFrequency(%d)", index);
+	qWarning("LightSettings::setFrequency(%d)", index);
 	ODevice::inst ( )-> setCurrentCpuFrequency(index);
 }
 
@@ -215,6 +242,11 @@ void LightSettings::resetBacklight ( )
 {
 	setBacklight ( -1 );
 	setContrast ( -1 );
+}
+
+void LightSettings::setCloseHingeAction ( int index )
+{
+    qWarning("LightSettings::setCloseHingeStatus(%d)", index);
 }
 
 void LightSettings::accept ( )
@@ -231,6 +263,7 @@ void LightSettings::accept ( )
 	if (m_cres)
 	config. writeEntry ( "Contrast",   contrast-> value () );
 	config. writeEntry ( "Freq",       frequency->currentItem() );
+	config. writeEntry ( "CloseHingeAction", closeHingeAction->currentItem() );
 
 	// ac
 	config. setGroup ( "AC" );
@@ -242,8 +275,9 @@ void LightSettings::accept ( )
 	if (m_cres)
 	config. writeEntry ( "Contrast",   contrast_ac-> value () );
 	config. writeEntry ( "Freq",       frequency_ac->currentItem() );
+	config. writeEntry ( "CloseHingeAction", closeHingeAction_ac->currentItem() );
 
-	// only make light sensor stuff appear if the unit has a sensor	
+	// only make light sensor stuff appear if the unit has a sensor
 	if ( ODevice::inst ( )-> hasLightSensor ( )) {
 		config. setGroup ( "Battery" );
 		config. writeEntry ( "LightSensor", auto_brightness->isChecked() );
@@ -275,7 +309,7 @@ void LightSettings::done ( int r )
 {
 	m_resettimer-> stop ( );
 	resetBacklight ( );
-	
+
 	LightSettingsBase::done ( r );
 	close ( );
 }

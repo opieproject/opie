@@ -54,6 +54,7 @@ protected slots:
     void setBacklight ( int );
     void setContrast ( int );
     void setFrequency ( int );
+    void setCloseHingeAction ( int );
     void resetBacklight ( );
 
 private:
