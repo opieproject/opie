@@ -1,6 +1,6 @@
 /*
                =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 hOlgAr <zecke@handhelds.org>
+             .=l.            Copyright (c)  2003 hOlgAr <zecke@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This library is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
@@ -74,9 +74,18 @@ public:
 
     void setCurrentWidget( QWidget* );
     void setCurrentWidget( const QString& label );
+    void setCurrentWidget( int );
     QWidget* currentWidget();
 
+signals:
+    /**
+     * Emitted if in tab  and comes directly from the tab widget
+     *
+     */
+    void currentChanged( QWidget* );
+public:
 //    QSize sizeHint()const;
+//    QSize minimumSizeHint()const;
 
 protected:
     void resizeEvent( QResizeEvent* );

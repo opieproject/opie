@@ -116,6 +116,6 @@ TRANSLATIONS = ../i18n/de/libopie.ts \
    ../i18n/zh_TW/libopie.ts \
    ../i18n/da/libopie.ts
 
-
+include ( big-screen/big-screen.pro )
 
 include ( $(OPIEDIR)/include.pro )

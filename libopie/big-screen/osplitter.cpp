@@ -1,6 +1,6 @@
 /*
                =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 hOlgAr <zecke@handhelds.org>
+             .=l.            Copyright (c)  2003 hOlgAr <zecke@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This library is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
@@ -59,7 +59,10 @@ OSplitter::OSplitter( Orientation orient, QWidget* parent, const char* name, WFl
     setFontPropagation( AllChildren );
     setPalettePropagation( AllChildren );
 
-    m_tabWidget = new OTabWidget(this);
+    /* start by default with the tab widget */
+    m_tabWidget = 0;
+    changeTab();
+
 }
 
 
@@ -77,8 +80,12 @@ OSplitter::~OSplitter() {
 /**
  * This function sets the size change policy of the splitter.
  * If this size marked is crossed the splitter will relayout.
- * Note that depending on the set Orientation it'll either look
+ * Note: that depending on the set Orientation it'll either look
  * at the width or height.
+ * Note: If you want to from side to side view to tabbed view you need
+ * to make sure that the size you supply is not smaller than the minimum
+ * size of your added widgets. Note that if you use widgets like QComboBoxes
+ * you need to teach them to accept smaller sizes as well @see QWidget::setSizePolicy
  *
  * @param width_height The mark that will be watched. Interpreted depending on the Orientation of the Splitter.
  * @return void
@@ -187,6 +194,18 @@ void OSplitter::setCurrentWidget( const QString& label ) {
 }
 
 /**
+ * This will only work when the TabWidget is active
+ * If everything is visible this signal is kindly ignored
+ * @see OTabWidget::setCurrentTab(int)
+ *
+ * @param tab The tab to make current
+ */
+void OSplitter::setCurrentWidget( int tab ) {
+    if (m_tabWidget )
+        m_tabWidget->setCurrentTab( tab );
+}
+
+/**
  * return the currently activated widget if in tab widget mode
  * or null because all widgets are visible
  */
@@ -203,10 +222,16 @@ QWidget* OSplitter::currentWidget() {
  * returns the sizeHint of one of its sub widgets
  */
 QSize OSplitter::sizeHint()const {
+    return QSize(10, 10);
+
     if (m_hbox )
         return m_hbox->sizeHint();
     else
         return m_tabWidget->sizeHint();
+}
+
+QSize OSplitter::minimumSizeHint()const {
+    return QSize(10, 10 );
 }
 #endif
 
@@ -219,7 +244,7 @@ void OSplitter::resizeEvent( QResizeEvent* res ) {
      *
      */
 //    qWarning("Old size was width = %d height = %d", res->oldSize().width(), res->oldSize().height() );
-//    qWarning("New size is  width = %d height = %d", res->size().width(), res->size().height() );
+    qWarning("New size is  width = %d height = %d", res->size().width(), res->size().height() );
     if ( res->size().width() > m_size_policy &&
          m_orient == Horizontal ) {
         changeHBox();
@@ -263,6 +288,8 @@ void OSplitter::changeTab() {
      *
      */
     m_tabWidget = new OTabWidget( this );
+    connect(m_tabWidget, SIGNAL(currentChanged(QWidget*) ),
+            this, SIGNAL(currentChanged(QWidget*) ) );
 
     for ( ContainerList::Iterator it = m_container.begin(); it != m_container.end(); ++it ) {
         qWarning("Widget is %s", (*it).name.latin1() );
