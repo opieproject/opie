@@ -255,7 +255,7 @@ VolumeControl::VolumeControl ( VolumeApplet *icon, bool /*showMic*/, QWidget *pa
       break;
   }
 
-  if ( !ODevice::series == Model_iPAQ ) {
+  if ( !ODevice::inst ( )-> series ( ) == Model_iPAQ ) {
     has_bass = false;
     has_treble = false;
   }
