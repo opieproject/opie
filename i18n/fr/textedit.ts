@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Choose font</source>
-        <translation>Choisir une font</translation>
+        <translation>Choisir une police</translation>
     </message>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
@@ -97,7 +97,7 @@ du disque?&lt;br&gt; C&apos;est &lt;b&gt;irréversible!!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Wrap lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Couper les lignes</translation>
     </message>
     <message>
         <source>Start with new file</source>
@@ -133,7 +133,7 @@ du disque?&lt;br&gt; C&apos;est &lt;b&gt;irréversible!!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation>Fonte</translation>
+        <translation>Police</translation>
     </message>
     <message>
         <source>About</source>
@@ -165,7 +165,7 @@ du disque?&lt;br&gt; C&apos;est &lt;b&gt;irréversible!!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Prompt on Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Avertir en quittant</translation>
     </message>
     <message>
         <source>Always open linked file</source>
@@ -177,7 +177,7 @@ du disque?&lt;br&gt; C&apos;est &lt;b&gt;irréversible!!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Search Bar Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Barre de recherche affichée</translation>
     </message>
 </context>
 <context>

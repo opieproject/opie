@@ -20,11 +20,11 @@
     </message>
     <message>
         <source>Days look ahead: </source>
-        <translation type="unfinished"></translation>
+        <translation>Jours à chercher :</translation>
     </message>
     <message>
         <source>How many days we should search forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de jours pour lequel il faut rechercher des évènements</translation>
     </message>
     <message>
         <source>To activate settings: Restart application !</source>
@@ -36,11 +36,11 @@
     </message>
     <message>
         <source>Colors for the headlines !</source>
-        <translation>Couleurs pour les titres!</translation>
+        <translation>Couleurs des titres !</translation>
     </message>
     <message>
         <source>Set Entry Color: </source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur des entrées :</translation>
     </message>
     <message>
         <source>This color will be used for shown birthdays/anniversaries !</source>
@@ -49,46 +49,48 @@
     <message>
         <source>Set Urgent
 Color if below </source>
-        <translation type="unfinished">Définir </translation>
+        <translation>Délai pour
+être &quot;Urgent&quot;</translation>
     </message>
     <message>
         <source> days: </source>
-        <translation>jours:</translation>
+        <translation>
+jours</translation>
     </message>
     <message>
         <source>This urgent color will be used if we are close to the event !</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur à utiliser si l&apos;évènement est proche !</translation>
     </message>
     <message>
         <source>The urgent color will be used if the birthday/anniversary is closer than given days !</source>
-        <translation type="unfinished"></translation>
+        <translation>La couleur &quot;Urgent&quot; sera utilisée si les dates sont plus proches que le nombre défini de jours !</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>AddressBook plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Module &quot;Répertoire&quot;</translation>
     </message>
     <message>
         <source>Next birthdays in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prochaine date de naissance dans &lt;b&gt; %1 &lt;/b&gt; jours :</translation>
     </message>
     <message>
         <source>No birthdays in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de date(s) de naissance dans les &lt;b&gt; %1 &lt;/b&gt; prochains jours !</translation>
     </message>
     <message>
         <source>Next anniversaries in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prochain anniversaire dans &lt;b&gt; %1 &lt;/b&gt; jours :</translation>
     </message>
     <message>
         <source>No anniversaries in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas d&apos;anniversaire(s) dans les &lt;b&gt; %1 &lt;/b&gt; prochains jours !</translation>
     </message>
     <message>
         <source>Database does not provide this search query ! Please upgrade libOpie !&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>La base de données ne permet pas ce type de recherche ! Mettez à jour libOpie !&lt;br&gt;</translation>
     </message>
 </context>
 </TS>

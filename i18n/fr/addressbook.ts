@@ -371,7 +371,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Full Name...</source>
-        <translation>Nom complet</translation>
+        <translation>Nom entier</translation>
     </message>
     <message>
         <source>Organization</source>

@@ -8,19 +8,19 @@
     </message>
     <message>
         <source>Owned by </source>
-        <translation>Propriété de</translation>
+        <translation>Propriétaire : </translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
-        <translation>Please fill out the business card</translation>
+        <translation>Remplissez vos paramètres personnels</translation>
     </message>
     <message>
         <source>No plugins found</source>
-        <translation>Aucun plugin trouvé</translation>
+        <translation>Aucun module trouvé</translation>
     </message>
     <message>
         <source>No plugins activated</source>
-        <translation>Aucun plugin activé</translation>
+        <translation>Aucun module activé</translation>
     </message>
     <message>
         <source>Click here to launch the associated app</source>
@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>Load which plugins in what order:</source>
-        <translation>Charger quel add-on dans quel ordre:</translation>
+        <translation>Chargement et Ordre des modules :</translation>
     </message>
     <message>
         <source>Move Up</source>
@@ -74,7 +74,7 @@ resume?
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation>minutes inactive</translation>
+        <translation>minutes inactives</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -86,7 +86,7 @@ resume?
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation>Combien de minutes le PDA a été en veille avant que la fonction Démarrage auto s&apos;arrete.</translation>
+        <translation>Après combien de minutes de  veille du PDA la fonction &quot;Démarrage auto&quot; doit-elle être activée ?</translation>
     </message>
     <message>
         <source>Icon size</source>
@@ -94,7 +94,7 @@ resume?
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation>Définir la taille de l&apos;icone ne pixel</translation>
+        <translation>Définir la taille de l&apos;icone en pixel</translation>
     </message>
     <message>
         <source>Refresh</source>
@@ -114,7 +114,7 @@ resume?
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
-        <translation>Sélectionner une case à cocher pour activer/désactiver un plugin ou utiliser les flèches à droite pour changer l&apos;ordre d&apos;apparition</translation>
+        <translation>Sélectionner une case à cocher pour activer/désactiver un module ou utiliser les flèches de droite pour changer l&apos;ordre d&apos;apparition</translation>
     </message>
 </context>
 </TS>
