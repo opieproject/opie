@@ -1124,12 +1124,14 @@ bool QPEApplication::qwsEventFilter( QWSEvent * e )
 			        ( int ) active->winId() == ke->simpleData.window &&
 			        !active->testWFlags( WStyle_Dialog | WStyle_Customize | WType_Popup | WType_Desktop ) ) {
 				if ( active->inherits( "QDialog" ) ) {
-					qDebug("dialog hack");
 					HackDialog * d = ( HackDialog * ) active;
 					d->rejectIt();
 					return TRUE;
+				} else /*if ( strcmp( argv() [ 0 ], "embeddedkonsole" ) != 0 )*/ {
+				active->close();
 				}
 			}
+
 		}
 		else if ( ke->simpleData.keycode >= Qt::Key_F1 && ke->simpleData.keycode <= Qt::Key_F29 ) {
 			// this should be if ( ODevice::inst ( )-> buttonForKeycode ( ... ))
