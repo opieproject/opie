@@ -1,0 +1,30 @@
+/**
+	* @mainpage The OPIE API Reference
+	*
+	* This section contains the OPIE online class reference for the current
+	* development version of OPIE. You can also download (???&nbsp;MB)
+	* the complete API documentation.  Additionally, you can subscribe or
+	* read the mailing lists for any additions and/or modifications to the API.
+	*
+	* - <a href="qt/index.html"><b>qt</b></a>
+        *   (<a href="qt/classes.html">classes</a>)\n
+	*   <i>Qt classes</i>
+	* - <a href="libqpe/html/index.html"><b>Qtopia library</b></a>
+	*   (<a href="libqpe/html/classes.html">classes</a>)\n
+	*   <i>Qtopia lib</i>
+	* - <a href="libopie/html/index.html"><b>libopie</b></a>
+	*   (<a href="libopie/html/classes.html">classes</a>)\n
+	*   <i>libopie</i>
+	* - <a href="pim/html/index.html"><b>PIM</b></a>
+	*   (<a href="pim/html/classes.html">classes</a>)\n
+	*   <i>Libopie PIM</i>
+	*
+	*/
+
+/**
+	* @page search Search the API documentation
+	*
+	* <br>Under construction.
+	*
+	*/
+
