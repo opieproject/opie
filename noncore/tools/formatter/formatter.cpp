@@ -21,11 +21,12 @@
 
 #include <qmultilineedit.h>
 #include <qstring.h>
+#include <qlist.h>
 #include <qstringlist.h>
 #include <qdir.h>
 #include <qfile.h>
 
-#include <qtextstream.h>
+#include <qtstream.h>
 
 #include <qcombobox.h>
 #include <qpopupmenu.h>
@@ -53,7 +54,7 @@
 
 /* 
    Blah blah blah blah */
-FormatterApp::FormatterApp( QWidget* parent,  const char* name, bool modal, WFlags fl )
+FormatterApp::FormatterApp( QWidget* parent,  const char* name, bool , WFlags fl )
         : QMainWindow( parent, name, fl )
 //    : QDialog( parent, name, modal, fl )
 {
@@ -120,9 +121,9 @@ FormatterApp::FormatterApp( QWidget* parent,  const char* name, bool modal, WFla
 
     TextLabel5 = new QLabel( tab_2, "TextLabel5" );
     TextLabel5->setText( tr( "CAUTION:\n"
-                             "Changing parameters on this \n"
-                             "page may cause your system \n"
-                             "to stop functioning properly!!" ) );//idiot message
+                             "Changing parameters on this\n"
+                             "page may cause your system\n"
+                             "to stop functioning properly!" ) );//idiot message
 
     tabLayout_2->addMultiCellWidget( TextLabel5, 6, 6, 0, 1);
 
@@ -203,8 +204,14 @@ void FormatterApp::doFormat() {
 //         remountS = "/etc/sdcontrol insert";
     }
 
-    switch ( QMessageBox::warning(this,tr("Format?!?"),tr("Really format\n") +diskName+" "+ currentText +
-                                  tr("\nwith ") + fs + tr(" filesystem?!?\nYou will loose all data!!"),tr("Yes"),tr("No"),0,1,1) ) {
+    switch ( QMessageBox::warning(this,tr("Format?") 
+                , tr("Really format\n") +diskName+" "+ currentText +
+                                  tr("\nwith %1 filesystem?\nYou will loose all data!!").arg( fs )
+                  ,tr("Yes")
+                  ,tr("No")
+                  ,0
+                  ,1
+                  ,1) ) {
       case 0: {
           if(fs == "vfat")
               cmd = "mkdosfs -v " + diskDevice+" 2>&1";
@@ -221,13 +228,15 @@ void FormatterApp::doFormat() {
           qApp->processEvents();
           FILE *fp;
           char line[130];
-          outDlg->OutputEdit->append( tr("Trying to umount.") + currentText );
+
+
+          outDlg->OutputEdit->append( tr("Trying to umount %1.").arg( currentText) );
           outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
 
           sleep(1);
           qDebug("Command is "+umountS);
           fp = popen(  (const char *) umountS, "r");
-          qDebug("%d", fp);
+          //          qDebug("%d", fp);
           if ( !fp ) {
               qDebug("Could not execute '" + umountS + "'! err=%d\n" +(QString)strerror(errno), err); 
               QMessageBox::warning( this, tr("Formatter"), tr("umount failed!"), tr("&OK") );
@@ -276,7 +285,7 @@ void FormatterApp::doFormat() {
           outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
           pclose(fp);             
 
-          outDlg->OutputEdit->append( tr("Trying to mount.") + currentText );
+          outDlg->OutputEdit->append( tr("Trying to mount %1.").arg( currentText) );
           outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
           fp = popen(  (const char *) remountS, "r"); 
           if ( !fp) {
@@ -284,7 +293,7 @@ void FormatterApp::doFormat() {
               QMessageBox::warning( this, tr("Formatter"), tr("Card mount failed!"), tr("&OK") );
 
           } else {
-              outDlg->OutputEdit->append( currentText + tr("\nhas been successfully mounted."));
+              outDlg->OutputEdit->append(tr("%1\nhas been successfully mounted.").arg( currentText ));
               while ( fgets( line, sizeof line, fp)) {
                   QString lineStr = line;
                   lineStr=lineStr.left(lineStr.length()-1);
@@ -335,7 +344,7 @@ void FormatterApp::fillCombos() {
 }
 
 
-void FormatterApp::fsComboSelected(int index) {
+void FormatterApp::fsComboSelected(int ) {
 
 }
     
@@ -344,7 +353,7 @@ void FormatterApp::storageComboSelected(int index ) {
     QString currentText = storageComboBox->text(index);
     QString nameS = currentText.left( currentText.find("->",0,TRUE));
 
-    TextLabel4->setText( tr( "Storage Type : ") + nameS );
+    TextLabel4->setText( tr( "Storage Type: %1").arg( nameS) );
     currentText = currentText.right( currentText.length() - currentText.find(" -> ",0,TRUE) - 4);
 
     QString fsType = getFileSystemType((const QString &) currentText);
@@ -391,7 +400,7 @@ void FormatterApp::deviceComboSelected(int index) {
     }
     fsType = getFileSystemType((const QString &)selectedText);
 
-    TextLabel5->setText("Type: "+ nameS+"\nFormatted with "+ fsType + " \n" + totalS + usedS + avS);
+    TextLabel5->setText(tr("Type: %1\nFormatted with %1\n%1, %1, %1").arg( nameS).arg( fsType).arg(totalS).arg( usedS).arg( avS )); 
 //     storageComboSelected(0);
 }
 
@@ -563,12 +572,12 @@ bool FormatterApp::doFsckCheck() {
     return FALSE;
 }
 
-int FormatterApp::formatCheck(const QString &deviceStr) {
+int FormatterApp::formatCheck(const QString &) {
 
     return -1;
 }
 
-int FormatterApp::runCommand(const QString &command) {
+int FormatterApp::runCommand(const QString &) {
 
     return -1;
 }
