@@ -449,12 +449,12 @@ void fileBrowser::showType(const QString &t) {
 //      if(fileSelector) {
 //      disconnect( fileSelector, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( docOpen( const DocLnk & ) ) );
 //          delete fileSelector;
-    }
+      //  }
       //   fileSelector = new FileSelector( mimeType, FileStack, "fileselector" , FALSE, FALSE); //buggy
 //    connect( fileSelector, SIGNAL( closeMe() ), this, SLOT( showEditTools() ) );
 //    connect( fileSelector, SIGNAL( newSelected( const DocLnk &) ), this, SLOT( newFile( const DocLnk & ) ) );
       //   connect( fileSelector, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( docOpen( const DocLnk & ) ) );
-    fileSelector->reread();
+//    fileSelector->reread();
     repaint();
 //      if ( t == tr("All") ) {
 //          icons->setTypeFilter("",TRUE);
