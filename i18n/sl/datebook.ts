@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>WeekLst</source>
-        <translation>TedenSeznam</translation>
+        <translation>Teden. seznam</translation>
     </message>
     <message>
         <source>Month</source>
@@ -265,7 +265,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Jump to current time (dayview)</source>
-        <translation>Skoči na trenuten čas (dnvenipogled)</translation>
+        <translation>Skoči na trenuten čas</translation>
     </message>
 </context>
 <context>
@@ -719,15 +719,15 @@ in</translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation type="unfinished">Spremenljivka1</translation>
+        <translation>Spremenljivka1</translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="unfinished">Spremenljivka 2</translation>
+        <translation>Spremenljivka 2</translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="unfinished">TedenskaSpremenljivka</translation>
+        <translation>TedenskaSpremenljivka</translation>
     </message>
     <message>
         <source>months</source>

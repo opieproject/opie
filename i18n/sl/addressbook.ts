@@ -100,7 +100,7 @@
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Prežarčen vnos</translation>
+        <translation>Prežarči vnos</translation>
     </message>
     <message>
         <source>My Personal Details</source>
@@ -172,7 +172,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Work</source>
-        <translation>Delo</translation>
+        <translation>Služba</translation>
     </message>
     <message>
         <source>Mb</source>
@@ -192,7 +192,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Privzeta Epošta</translation>
+        <translation>Privzeta epošta</translation>
     </message>
     <message>
         <source>Gender</source>
@@ -231,15 +231,15 @@ Izhod?</translation>
     <name>ContactEditor</name>
     <message>
         <source>Default Email</source>
-        <translation>Privzeta Epošta</translation>
+        <translation>Privzeta epošta</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation>Esporočila</translation>
+        <translation>Epošta</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Naziv</translation>
+        <translation>Imenski naslov</translation>
     </message>
     <message>
         <source>First Name</source>
@@ -315,7 +315,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Business</source>
-        <translation>Poslovno</translation>
+        <translation>Službeno</translation>
     </message>
     <message>
         <source>Home</source>
@@ -499,7 +499,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Bulgaria</source>
-        <translation>bulgarija</translation>
+        <translation>Bulgarija</translation>
     </message>
     <message>
         <source>Burkina Faso</source>
@@ -1187,7 +1187,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>Poslovni faks</translation>
+        <translation>Službeni faks</translation>
     </message>
     <message>
         <source>Home Fax</source>
@@ -1195,7 +1195,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation>Poslovni telefon</translation>
+        <translation>Službeni telefon</translation>
     </message>
     <message>
         <source>Home Phone</source>
@@ -1203,7 +1203,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>Poslovni mobitel</translation>
+        <translation>Službeni mobitel</translation>
     </message>
     <message>
         <source>Home Mobile</source>
@@ -1211,7 +1211,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>Poslovna spletna stran</translation>
+        <translation>Službena spletna stran</translation>
     </message>
     <message>
         <source>Home Web Page</source>
@@ -1219,7 +1219,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>Poslovni pozivnik</translation>
+        <translation>Službeni pozivnik</translation>
     </message>
     <message>
         <source>Business Street</source>
@@ -1259,7 +1259,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation></translation>
+        <translation>Domača država</translation>
     </message>
     <message>
         <source>Department</source>
@@ -1303,35 +1303,35 @@ Izhod?</translation>
     </message>
     <message>
         <source>Work Phone</source>
-        <translation>Delovni telefon</translation>
+        <translation>Službeni telefon</translation>
     </message>
     <message>
         <source>Work Fax</source>
-        <translation>Delovni faks</translation>
+        <translation>Službeni faks</translation>
     </message>
     <message>
         <source>work Mobile</source>
-        <translation>delovni mobitel</translation>
+        <translation>službeni mobitel</translation>
     </message>
     <message>
         <source>Work Pager</source>
-        <translation>Delovni pozivnik</translation>
+        <translation>Službeni pozivnik</translation>
     </message>
     <message>
         <source>Work Web Page</source>
-        <translation>Delovna spletna stran</translation>
+        <translation>Službena spletna stran</translation>
     </message>
     <message>
         <source>Work Mobile</source>
-        <translation>Delovni mobitel</translation>
+        <translation>Službeni mobitel</translation>
     </message>
     <message>
         <source>Kuwait</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvajt</translation>
     </message>
     <message>
         <source>Kyrgystan</source>
-        <translation type="unfinished"></translation>
+        <translation>Kyrgystan</translation>
     </message>
 </context>
 </TS>

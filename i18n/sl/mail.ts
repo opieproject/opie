@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>&lt;p&gt;Your signature is longer than 4 lines. This is considered inpolite by many people. You should shorten your signature.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Vaš podpis je daljši od 4 vrstic. To jenevljudno za mnogo ljudi. Dobro bi bilo, da skrajšate podpis.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Vaš podpis je daljši od 4 vrstic. To za mnogo ljudi ni vljudno. Dobro bi bilo, da skrajšate podpis.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Change</source>
@@ -421,7 +421,7 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>Rescan folder list</source>
-        <translation type="unfinished"></translation>
+        <translation>Preglej seznam map</translation>
     </message>
     <message>
         <source>Error</source>
@@ -429,7 +429,7 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>&lt;p&gt;Please select an item first.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Prosim prvo izberite.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -441,7 +441,7 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete &lt;pre&gt;%1&lt;/pre&gt;?</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ali res želite izbrisati &lt;pre&gt;%1&lt;/pre&gt;?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -449,7 +449,7 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>No</source>
-        <translation>ne</translation>
+        <translation>Ne</translation>
     </message>
     <message>
         <source>Foldername</source>
@@ -457,7 +457,7 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>&lt;p&gt;Please enter the name of the new folder.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Prosim vpišite ime nove mape.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Looking up host...</source>
@@ -469,161 +469,161 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>Connected to host.</source>
-        <translation>Priklopljen na gostitelja.</translation>
+        <translation>Povezan z gostiteljem.</translation>
     </message>
     <message>
         <source>&lt;p&gt;The IMAP connection was refused.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;IMAP povezava je bila zavrjena.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;The host was not found.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Gostitelj ni bil najden.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;There was an error while reading from the socket.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Prišlo je do napake pri branju iz vtiča.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Login failed. Check your password/username.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Prijava ni uspela. Preverite svoje geslo/uporabniško ime.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unknown error was encountered.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Pojavila se je neznana napaka.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Disconnected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Povezava prekinjena.</translation>
     </message>
     <message>
         <source>Login successfull!</source>
-        <translation type="unfinished"></translation>
+        <translation>Prijava uspela!</translation>
     </message>
     <message>
         <source>&lt;p&gt;Login failed. Go away.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Prijava ni uspela. Pojdite stran.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Renaming successfull!</source>
-        <translation type="unfinished"></translation>
+        <translation>Preimenovanje uspelo!</translation>
     </message>
     <message>
         <source>&lt;p&gt;Renaming failed. (Server said: %1)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Preimenovanje ni uspelo. (Strežnik je odgovoril: %1)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Deletion successfull!</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbris uspel!</translation>
     </message>
     <message>
         <source>&lt;p&gt;Delete failed. (Server said: %1)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Izbris ni uspel. (Strežnik je odgovoril: %1)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Folder created. Rescanning...</source>
-        <translation type="unfinished"></translation>
+        <translation>Imenik ustvarjen. Pregledujem...</translation>
     </message>
     <message>
         <source>&lt;p&gt;The folder could not be created. (Server said: %1)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Mapa ne more biti ustvarjena. (Strežnik je odgovoril: %1)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Couldn&apos;t open folder cache file for writing!&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ne morem odpreti predpomnilnika za pisanje!&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Got folder list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dobil seznam map.</translation>
     </message>
     <message>
         <source>&lt;p&gt;Couldn&apos;t retrieve the folder list. (Server said: %1)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Nisem dobil seznama map. (Strežnik je odgovoril: %1)&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
     <name>MailTable</name>
     <message>
         <source>From</source>
-        <translation type="unfinished">Od</translation>
+        <translation>Od</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadeva</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished">Kopiraj</translation>
+        <translation>Kopiraj</translation>
     </message>
     <message>
         <source>Seen</source>
-        <translation type="unfinished"></translation>
+        <translation>Pregledano</translation>
     </message>
     <message>
         <source>Unseen</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepregledano</translation>
     </message>
     <message>
         <source>Marked</source>
-        <translation type="unfinished"></translation>
+        <translation>Označeno</translation>
     </message>
     <message>
         <source>Unmarked</source>
-        <translation type="unfinished"></translation>
+        <translation>Neoznačeno</translation>
     </message>
     <message>
         <source>Mark as...</source>
-        <translation type="unfinished"></translation>
+        <translation>Označi kot...</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši pošto</translation>
     </message>
     <message>
         <source>Mailbox contained no mails.</source>
-        <translation type="unfinished"></translation>
+        <translation>Poštni predal ne vsebuje pošte.</translation>
     </message>
     <message>
         <source>Getting mail headers...</source>
-        <translation type="unfinished"></translation>
+        <translation>Pobiram poštne glave...</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Napaka</translation>
+        <translation>Napaka</translation>
     </message>
     <message>
         <source>&lt;p&gt;An error occoured during the selection of the mailbox. (Server said: %1)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Prišlo je do napake med izbiranjem poštnega predala. (Strežnik je odgovoril: %1)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished">Vredu</translation>
+        <translation>Vredu</translation>
     </message>
     <message>
         <source>Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustavljeno</translation>
     </message>
     <message>
         <source>Got all mail headers.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dobil vse poštne glave.</translation>
     </message>
     <message>
         <source>&lt;font color=#ff0000&gt;Couldn&apos;t fetch mail.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font color=#ff0000&gt;Ne morem pobrati pošte.</translation>
     </message>
 </context>
 <context>
     <name>MainWindowBase</name>
     <message>
         <source>E-Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>E-pošta</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished">Pošta</translation>
+        <translation>Pošta</translation>
     </message>
     <message>
         <source>Servers</source>
@@ -631,7 +631,7 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>Compose new mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Sestavi novo sporočilo</translation>
     </message>
     <message>
         <source>Send queued mails</source>
@@ -643,11 +643,11 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>Search mails</source>
-        <translation type="unfinished"></translation>
+        <translation>Išči pošto</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished">Nastavitve</translation>
+        <translation>Nastavitve</translation>
     </message>
 </context>
 <context>

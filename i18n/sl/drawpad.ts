@@ -161,7 +161,7 @@ vse strani?</translation>
     </message>
     <message>
         <source>Anti-Aliasing</source>
-        <translation>Antialiasing</translation>
+        <translation>Mehčanje robov</translation>
     </message>
 </context>
 <context>
@@ -200,7 +200,7 @@ vse strani?</translation>
     </message>
     <message>
         <source>DrawPad - Export</source>
-        <translation>DrawPad - Izvoz</translation>
+        <translation>Risalna plošča - Izvoz</translation>
     </message>
 </context>
 <context>
@@ -215,7 +215,7 @@ vse strani?</translation>
     </message>
     <message>
         <source>DrawPad - Import</source>
-        <translation>DrawPad - Uvoz</translation>
+        <translation>Risalna plošča - Uvoz</translation>
     </message>
 </context>
 <context>
@@ -318,7 +318,7 @@ vse strani?</translation>
     <name>ThumbnailView</name>
     <message>
         <source>DrawPad - Thumbnail View</source>
-        <translation>DrawPad - Ikoniziran pogled</translation>
+        <translation>Risalna plošča - Ikoniziran pogled</translation>
     </message>
     <message>
         <source>Clear Page</source>
