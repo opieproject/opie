@@ -1,0 +1,29 @@
+Hija,
+dunno if that is to call a manifest but here is
+an quick overview how the OFileSelector is implemented
+and whats the whole purpose is.
+
+OFileSelector is meant to be extendable by design. It's divided
+into a shell the class OFileSelector which is a dispatcher 
+between worlds and gives a common interface to the programmer.
+Then there is the OLister class which is a lister of files. 
+It's responsible for taking care of a filesystem... but it's not limited
+to local filesystem. You can have a FTP lister, Bluetooth Device Lister,
+IrdaDevice Lister, Local Documents Lister, a PIM Lister an X-Ref lister...
+they will operate on the level of filesystems....
+
+A  OFileView is the other part of the FileSelector it's responsible
+for the things represented to the USER.
+There is a ListView and a IconView and possible more views to come.
+
+Then there is a PixmapProvider which is responsible for providing pixmaps
+for a mimetype. This can be used for something like a Pixmap preview....
+
+
+The lister is told to reparse() then it adds it things to the mainview
+on selection the URL get's generated in more than one step.
+1. The UI notifies the lister about activation
+2. The Lister assembles the URL
+3. the Lister notifies the OFileSelector
+4. the OFileSelector emits a signal
+

@@ -1,0 +1,6 @@
+  config LIBOPIE
+    boolean "Opie library"
+    default "y"
+
+  source libopie/ofileselector/config.in
+  source libopie/pim/config.in
