@@ -82,33 +82,14 @@ OManufacturerDB::OManufacturerDB()
         while (!s.atEnd())
         {
             s >> addr;
-            if ( !addr ) // read nothing!?
-            {
-                continue;
-            }
-            else
-            if ( addr[0] == '#' )
-            {
-                continue;
-            }
-            s.skipWhiteSpace();
             s >> manu;
-            s.skipWhiteSpace();
             s >> extManu;
-            if ( extManu[0] == '#' ) // we have an extended manufacturer
-            {
-                s.skipWhiteSpace();
-                extManu = s.readLine();
-                odebug << "OManufacturerDB: read " << extManu << " as extended manufacturer string" << oendl;
-                manufacturersExt.insert( addr, extManu );
-            }
-            else
-                s.readLine();
-            odebug << "OManufacturerDB: read tuple " << addr << ", " << manu << oendl;
+
             manufacturers.insert( addr, manu );
+            manufacturersExt.insert( addr, extManu );
+            odebug << "OmanufacturerDB: parse '" << addr << "' as '" << manu << "' (" << extManu << ")" << oendl;
         }
     }
-
 }
 
 
