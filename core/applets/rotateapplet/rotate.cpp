@@ -66,7 +66,9 @@ void RotateApplet::channelReceived( const QCString &msg, const QByteArray & data
     QDataStream stream( data, IO_ReadOnly );
     if ( msg == "flip()" ) {
         activated ( );
-    }
+    } else if ( msg == "rotateDefault()") {
+		rotateDefault();
+	}
 }
 
 
@@ -111,6 +113,45 @@ QPopupMenu *RotateApplet::popup ( QWidget * ) const
 	return 0;
 }
 
+void RotateApplet::rotateDefault ( )
+{
+
+	int rot = ODevice::inst()->rotation();
+
+	switch (rot) {
+		case Rot0:
+			rot=0;
+			break;
+		case Rot90:
+			rot=90;
+			break;
+		case Rot180:
+			rot=180;
+			break;
+		case Rot270:
+			rot=270;
+			break;
+		default:
+			rot=0;
+			break;
+	}
+    Config cfg( "qpe" );
+    cfg.setGroup( "Appearance" );
+
+    bool rotateDisabled = cfg.readBoolEntry( "rotateEnabled",false );
+
+    if (rotateDisabled == true)
+		return;
+
+    // hide inputs methods before rotation
+    QCopEnvelope en( "QPE/TaskBar", "hideInputMethod()" );
+
+    QCopEnvelope env( "QPE/System", "setCurrentRotation(int)" );
+    env << rot;
+
+    m_flipped = false;
+
+}
 void RotateApplet::activated ( )
 {
 

@@ -58,6 +58,7 @@ public:
     */
     virtual QPopupMenu *popup ( QWidget *parent ) const;
      virtual void activated ( );
+     virtual void rotateDefault ( );
 
 private slots:
     void channelReceived( const QCString &msg, const QByteArray & data );

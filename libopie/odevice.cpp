@@ -141,6 +141,11 @@ public:
 	virtual bool setLedState ( OLed led, OLedState st );
 
 	static bool isZaurus();
+	
+	// Does this break BC? 
+	virtual bool suspend ( );
+	virtual Transformation rotation ( ) const;
+	virtual ODirection direction ( ) const;
 
 protected:
 	virtual void buzzer ( int snd );
@@ -289,10 +294,10 @@ struct z_button z_buttons_c700 [] = {
 	"devicebuttons/z_menu",
  	"QPE/TaskBar", "toggleMenu()",
 	"QPE/TaskBar", "toggleStartMenu()" },
-    { Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Display Rotate"),
+    { Qt::Key_F14, QT_TRANSLATE_NOOP("Button", "Display Rotate"),
 	"",
-	"QPE/Rotation", "flip()",
-	"QPE/Rotation", "flip()" },
+	"QPE/Rotation", "rotateDefault()",
+	"QPE/Rotation", "rotateDefault()" },
 };
 
 struct s_button {
@@ -1632,20 +1637,8 @@ void Zaurus::init ( )
 			d-> m_rotation = Rot0;
 			break;
 		case Model_Zaurus_SLC7x0:
-			// Note: need to 1) set flipstate based on physical screen orientation
-			// and 2) check to see if the user overrode the rotation direction
-			// using appearance, and if so, remove that item from the Config to
-			// ensure the rotate applet flips us back to the previous state.
-			// treke said he has patches for detecting the phys. so where are they, treke? -mickeyl.
-			if ( flipstate ) {
-				// 480x640
-				d-> m_rotation = Rot0;
-				d-> m_direction = CW;
-			} else {
-				// 640x480
-				d-> m_rotation = Rot270;
-				d-> m_direction = CCW;
-			}
+			d-> m_rotation = rotation();
+			d-> m_direction = direction();
 			break;
 		case Model_Zaurus_SLB600:
 		case Model_Zaurus_SL5500:
@@ -1745,6 +1738,8 @@ void Zaurus::initButtons ( )
 
 #define	SHARP_LED_IOCTL_START (SHARP_DEV_IOCTL_COMMAND_START)
 #define SHARP_LED_SETSTATUS   (SHARP_LED_IOCTL_START+1)
+
+#define  SHARP_IOCTL_GET_ROTATION 0x413c
 
 typedef struct sharp_led_status {
   int which;   /* select which LED status is wanted. */
@@ -1979,6 +1974,101 @@ bool Zaurus::setDisplayBrightness ( int bright )
 	return res;
 }
 
+bool Zaurus::suspend ( )
+{
+	qDebug("ODevice::suspend");
+	if ( !isQWS( ) ) // only qwsserver is allowed to suspend
+		return false;
+
+	if ( d-> m_model == Model_Unknown ) // better don't suspend in qvfb / on unkown devices
+		return false;
+
+	bool res = false;
+
+	struct timeval tvs, tvn;
+	::gettimeofday ( &tvs, 0 );
+
+	::sync ( ); // flush fs caches
+	res = ( ::system ( "apm --suspend" ) == 0 );
+
+	// This is needed because the iPAQ apm implementation is asynchronous and we
+	// can not be sure when exactly the device is really suspended
+	// This can be deleted as soon as a stable familiar with a synchronous apm implementation exists.
+
+	if ( res ) {
+		do { // Yes, wait 15 seconds. This APM bug sucks big time.
+			::usleep ( 200 * 1000 );
+			::gettimeofday ( &tvn, 0 );
+		} while ((( tvn. tv_sec - tvs. tv_sec ) * 1000 + ( tvn. tv_usec - tvs. tv_usec ) / 1000 ) < 15000 );
+	}
+
+	QCopEnvelope ( "QPE/Rotation", "rotateDefault()" );
+	return res;
+}
+
+
+Transformation Zaurus::rotation ( ) const
+{
+	Transformation rot;
+	int handle = 0;
+	int retval = 0;
+
+	switch ( d-> m_model ) {
+		case Model_Zaurus_SLC7x0:
+			handle = ::open("/dev/apm_bios", O_RDWR|O_NONBLOCK);
+			if (handle == -1) {
+				return Rot270;
+			} else {
+				retval = ::ioctl(handle, SHARP_IOCTL_GET_ROTATION);
+				::close (handle);
+
+				if (retval == 2 ) 
+					rot = Rot0;
+				else 
+					rot = Rot270;
+			}
+			break;
+		case Model_Zaurus_SLA300:
+		case Model_Zaurus_SLB600:
+		case Model_Zaurus_SL5500:
+		case Model_Zaurus_SL5000:
+		default:
+			rot = d-> m_rotation;
+			break;
+	}
+
+	return rot;
+}
+ODirection Zaurus::direction ( ) const 
+{
+	ODirection dir;
+	int handle = 0;
+	int retval = 0;
+	switch ( d-> m_model ) {
+		case Model_Zaurus_SLC7x0:
+			handle = ::open("/dev/apm_bios", O_RDWR|O_NONBLOCK);
+			if (handle == -1) {
+				dir = Rot270;
+			} else {
+				retval = ::ioctl(handle, SHARP_IOCTL_GET_ROTATION);
+				::close (handle);
+				if (retval == 2 ) 
+					dir = CCW;
+				else 
+					dir = CW;
+			}
+			break;
+		case Model_Zaurus_SLA300:
+		case Model_Zaurus_SLB600:
+		case Model_Zaurus_SL5500:
+		case Model_Zaurus_SL5000:
+		default:
+			dir = d-> m_direction;
+			break;
+	}
+	return dir;
+
+}
 
 int Zaurus::displayBrightnessResolution ( ) const
 {

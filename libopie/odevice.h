@@ -187,8 +187,8 @@ public:
 
 	QString systemVersionString ( ) const;
 
-	Transformation rotation ( ) const;
-	ODirection direction ( ) const;
+	virtual Transformation rotation ( ) const;
+	virtual ODirection direction ( ) const;
 
 // system
 

@@ -408,3 +408,14 @@ diff -ru qt-2.3.5_fresh/src/widgets/qtoolbutton.cpp qt-2.3.5/src/widgets/qtoolbu
  	QPixmap pm = iconSet(TRUE).pixmap(QIconSet::Small, QIconSet::Normal);
  	w = pm.width();
  	h = pm.height();
+--- qt-2.3.7/src/kernel/qkeyboard_qws.cpp~c7xxrotate	2003-07-16 18:20:25.000000000 -0700
++++ qt-2.3.7/src/kernel/qkeyboard_qws.cpp	2003-12-07 15:54:10.000000000 -0800
+@@ -238,7 +238,7 @@
+     {	Qt::Key_unknown,	0xffff  , 0xffff  , 0xffff  }, // 63
+     {	Qt::Key_unknown,	0xffff  , 0xffff  , 0xffff  }, // 64
+     {	Qt::Key_unknown,	0xffff  , 0xffff  , 0xffff  }, // 65
+-    {	Qt::Key_unknown,	0xffff  , 0xffff  , 0xffff  }, // 66
++    {   Qt::Key_F14,    0xffff  , 0xffff  , 0xffff  }, // 66
+     {	Qt::Key_Meta,		0xffff  , 0xffff  , 0xffff  }, // 67
+     {	Qt::Key_unknown,	0xffff  , 0xffff  , 0xffff  }, // 68
+     {	Qt::Key_unknown,	0xffff  , 0xffff  , 0xffff  }, // 69
