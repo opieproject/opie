@@ -65,7 +65,7 @@ CardMonitor::~CardMonitor() {
     if( popupMenu ) { delete popupMenu; }
 }
 
-void CardMonitor::popUp( QString message, QString icon = QString::null ) {
+void CardMonitor::popUp( QString message, QString icon ) {
     if ( ! popupMenu ) {
 	popupMenu = new QPopupMenu();
     }
