@@ -250,33 +250,37 @@ y está bajo licencia GPL
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!</source>
-        <translation type="unfinished"></translation>
+        <translation>No pude borrar el directorio actual
+de los favoritos.
+¡No está marcado como favorito!</translation>
     </message>
     <message>
         <source>File Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar archivo</translation>
     </message>
     <message>
         <source>Really delete %1
 and all it&apos;s contents ?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Seguro que quiere borrar %1
+y todo su contenido?</translation>
     </message>
     <message>
         <source>Really delete
 %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Confirma el borrado
+de %1?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="unfinished"></translation>
+        <translation>Gestor de Ficheros Avanzado :: </translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="unfinished"></translation>
+        <translation> kB libres</translation>
     </message>
     <message>
         <source>Copy &apos;%1&apos; As</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar &quot;%1&quot; como</translation>
     </message>
 </context>
 <context>
@@ -291,18 +295,21 @@ and all it&apos;s contents ?</source>
     </message>
     <message>
         <source>Process could not start</source>
-        <translation type="unfinished"></translation>
+        <translation>El proceso no pudo empezar</translation>
     </message>
     <message>
         <source>Error
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Error
+</translation>
     </message>
     <message>
         <source>
 Finished
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Finalizado
+</translation>
     </message>
 </context>
 <context>
@@ -349,23 +356,23 @@ Finished
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso</translation>
     </message>
     <message>
         <source>Error- no user</source>
-        <translation type="unfinished"></translation>
+        <translation>Error - sin usuario</translation>
     </message>
     <message>
         <source>Error- no  group</source>
-        <translation type="unfinished"></translation>
+        <translation>Error - sin grupo</translation>
     </message>
     <message>
         <source>Error setting ownership or group</source>
-        <translation type="unfinished"></translation>
+        <translation>Error fijando propietario o grupo</translation>
     </message>
     <message>
         <source>Error setting mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Error fijando modo</translation>
     </message>
 </context>
 </TS>

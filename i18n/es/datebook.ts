@@ -96,7 +96,7 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>error box</source>
-        <translation type="unfinished"></translation>
+        <translation>diálogo de error</translation>
     </message>
 </context>
 <context>
@@ -197,7 +197,7 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>Beam this occurence</source>
-        <translation type="unfinished"></translation>
+        <translation>Emitir esta aparición</translation>
     </message>
 </context>
 <context>
@@ -368,7 +368,7 @@ Libere espacio y vuelva a intentarlo.
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation type="unfinished"></translation>
+        <translation>LMXJVSDL</translation>
     </message>
 </context>
 <context>
@@ -398,37 +398,37 @@ Libere espacio y vuelva a intentarlo.
     <message>
         <source>Mo</source>
         <comment>Monday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lu</translation>
     </message>
     <message>
         <source>Tu</source>
         <comment>Tuesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ma</translation>
     </message>
     <message>
         <source>We</source>
         <comment>Wednesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mi</translation>
     </message>
     <message>
         <source>Th</source>
         <comment>Thursday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ju</translation>
     </message>
     <message>
         <source>Fr</source>
         <comment>Friday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vi</translation>
     </message>
     <message>
         <source>Sa</source>
         <comment>Saturday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sa</translation>
     </message>
     <message>
         <source>Su</source>
         <comment>Sunday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Do</translation>
     </message>
 </context>
 <context>
@@ -565,7 +565,7 @@ Libere espacio y vuelva a intentarlo.
     <name>DatebookAlldayDisp</name>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
 </context>
 <context>
@@ -731,7 +731,7 @@ y </translation>
     </message>
     <message>
         <source>on </source>
-        <translation type="unfinished"></translation>
+        <translation>en </translation>
     </message>
 </context>
 <context>

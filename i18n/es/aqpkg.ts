@@ -110,7 +110,7 @@
     </message>
     <message>
         <source>%1 Kb</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Kb</translation>
     </message>
 </context>
 <context>
@@ -160,80 +160,81 @@
     <name>Ipkg</name>
     <message>
         <source>Dealing with package %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tratando con el paquete %1</translation>
     </message>
     <message>
         <source>Removing symbolic links...
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminando enlaces simbólicos...
+</translation>
     </message>
     <message>
         <source>Creating symbolic links for %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Creando enlaces simbólicos para %1.</translation>
     </message>
     <message>
         <source>Creating symbolic links for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Creando enlaces simbólicos para %1</translation>
     </message>
     <message>
         <source>Finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Finalizado</translation>
     </message>
     <message>
         <source>Removing status entry...</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminando entrada de estado...</translation>
     </message>
     <message>
         <source>status file - </source>
-        <translation type="unfinished"></translation>
+        <translation>fichero de estado - </translation>
     </message>
     <message>
         <source>package - </source>
-        <translation type="unfinished"></translation>
+        <translation>paquete - </translation>
     </message>
     <message>
         <source>Couldn&apos;t open status file - </source>
-        <translation type="unfinished"></translation>
+        <translation>No pude abrir fichero de estado - </translation>
     </message>
     <message>
         <source>Couldn&apos;t create tempory status file - </source>
-        <translation type="unfinished"></translation>
+        <translation>No pude crear fichero temporal de estado - </translation>
     </message>
     <message>
         <source>Couldn&apos;t start ipkg process</source>
-        <translation type="unfinished"></translation>
+        <translation>No pude iniciar proceso ipkg</translation>
     </message>
     <message>
         <source>Could not open :</source>
-        <translation type="unfinished"></translation>
+        <translation>No pude abrir :</translation>
     </message>
     <message>
         <source>Creating directory </source>
-        <translation type="unfinished"></translation>
+        <translation>Creando directorio </translation>
     </message>
     <message>
         <source>Linked %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Enlazando %1 a %2</translation>
     </message>
     <message>
         <source>Failed to link %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo al enlazar %1 a %2</translation>
     </message>
     <message>
         <source>Removed %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminado %1</translation>
     </message>
     <message>
         <source>Failed to remove %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo al borrar %1</translation>
     </message>
     <message>
         <source>Removed </source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminado </translation>
     </message>
     <message>
         <source>Failed to remove </source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo al borrar </translation>
     </message>
 </context>
 <context>
@@ -569,44 +570,46 @@ Opie/Qtopia está corriendo!
     <name>QObject</name>
     <message>
         <source>Installed packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Paquetes instalados</translation>
     </message>
     <message>
         <source>Local packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Paquetes locales</translation>
     </message>
     <message>
         <source>N/A</source>
-        <translation type="unfinished"></translation>
+        <translation>N/D</translation>
     </message>
     <message>
         <source>Package - %1
               version - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Paquete - %1
+             versión - %2</translation>
     </message>
     <message>
         <source>
               inst version - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+             versión inst - %1</translation>
     </message>
     <message>
         <source>Version string is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cadena de versión vacía.</translation>
     </message>
     <message>
         <source>Epoch in version is not number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Época en versión no numérica.</translation>
     </message>
     <message>
         <source>Nothing after colon in version number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nada después del punto en el número de verisión.</translation>
     </message>
 </context>
 <context>
     <name>QuestionDlg</name>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Borrar</translation>
+        <translation>Borrar</translation>
     </message>
 </context>
 <context>
