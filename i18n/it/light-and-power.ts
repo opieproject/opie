@@ -3,7 +3,7 @@
     <name>LightSettingsBase</name>
     <message>
         <source>Light and Power Settings</source>
-        <translation>Settaggi Luminosità e Risp. Energ.</translation>
+        <translation>Risparmio Energetico</translation>
     </message>
     <message>
         <source>Adjust to environment</source>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Power saving</source>
-        <translation>Risparmio energetico</translation>
+        <translation>Luminosità</translation>
     </message>
     <message>
         <source> seconds</source>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Dim light after</source>
-        <translation>Riduci luminosità dopo</translation>
+        <translation>Riduci dopo</translation>
     </message>
     <message>
         <source>Suspend after</source>
@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Only deactivate LCD during Suspend</source>
-        <translation>Disattiva LCD durante la sospensione</translation>
+        <translation>Disattiva LCD durante sospensione</translation>
     </message>
     <message>
         <source>Light off after</source>

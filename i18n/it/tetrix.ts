@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Tetrix</source>
-        <translation type="unfinished"></translation>
+        <translation>Tetrix</translation>
     </message>
 </context>
 </TS>

@@ -72,23 +72,23 @@
     </message>
     <message>
         <source>Check the categories this document belongs to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Controllare le categorie a cui questo documento appartiene.</translation>
     </message>
     <message>
         <source>Enter a new category here.  Press &lt;b&gt;Add&lt;/b&gt; to add it to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci una nuova categoria.  Premi &lt;b&gt;Aggiungi&lt;/b&gt; per aggiungerla alla lista.</translation>
     </message>
     <message>
         <source>Enter a new category to the left and press to add it to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci una nuova categoria sulla sinistra e premi per aggiungerla alla lista.</translation>
     </message>
     <message>
         <source>Press to delete the highlighted category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Premi per cancellare la categoria evidenziata.</translation>
     </message>
     <message>
         <source>Check to make this property available to all applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spunta per rendere questa proprietà disponibile a tutte le applicazioni.</translation>
     </message>
 </context>
 <context>
@@ -127,19 +127,19 @@ modificando le categorie.</translation>
     <name>DateBookMonthHeader</name>
     <message>
         <source>Show January in the selected year</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra Gennaio nell&apos;anno selezionato</translation>
     </message>
     <message>
         <source>Show the previous month</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra il mese precedente</translation>
     </message>
     <message>
         <source>Show the next month</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra il mese successivo</translation>
     </message>
     <message>
         <source>Show December in the selected year</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra Dicembre nell&apos;anno selezionato</translation>
     </message>
 </context>
 <context>
@@ -158,27 +158,27 @@ modificando le categorie.</translation>
     </message>
     <message>
         <source>Show documents of this type</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra i documenti di questo tipo</translation>
     </message>
     <message>
         <source>Document View</source>
-        <translation type="unfinished">Vista Documento</translation>
+        <translation>Mostra Documento</translation>
     </message>
     <message>
         <source>Show documents in this category</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra documenti in questa categoria</translation>
     </message>
     <message>
         <source>Click to select a document from the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Premi per selezionare un documento dalla lista</translation>
     </message>
     <message>
         <source>, or select &lt;b&gt;New Document&lt;/b&gt; to create a new document.</source>
-        <translation type="unfinished"></translation>
+        <translation>, o seleziona &lt;b&gt;Nuovo Documento&lt;/b&gt; per creare un nuovo documento.</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;Click and hold for document properties.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;Tieni premuto per le proprietà del documento.</translation>
     </message>
 </context>
 <context>
@@ -196,7 +196,7 @@ modificando le categorie.</translation>
     <name>FindDialog</name>
     <message>
         <source>Find</source>
-        <translation type="unfinished">Trova</translation>
+        <translation>Trova</translation>
     </message>
 </context>
 <context>
@@ -293,11 +293,11 @@ modificando le categorie.</translation>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation type="unfinished">Hard Disk</translation>
+        <translation>Hard Disk</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Proprietà</translation>
     </message>
 </context>
 <context>
@@ -344,27 +344,27 @@ modificando le categorie.</translation>
     </message>
     <message>
         <source>The media the document resides on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il supporto su cui è salvato il documento.</translation>
     </message>
     <message>
         <source>The name of this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il nome di questo documento.</translation>
     </message>
     <message>
         <source>Preload this application so that it is available instantly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Carica questa applicazione così da renderla istantaneamente disponibile.</translation>
     </message>
     <message>
         <source>Delete this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancella questo documento.</translation>
     </message>
     <message>
         <source>Make a copy of this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea una copia di questo documento.</translation>
     </message>
     <message>
         <source>Beam this document to another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Trasmetti via IrDA questo documento.</translation>
     </message>
 </context>
 <context>
@@ -799,48 +799,48 @@ riprovare.</translation>
     </message>
     <message>
         <source>New Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuovo Documento</translation>
     </message>
 </context>
 <context>
     <name>QPEApplication</name>
     <message>
         <source>%1 document</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 documento</translation>
     </message>
 </context>
 <context>
     <name>QPEDecoration</name>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Qt&gt;La guida completa non è disponibile per questa applicazione, è comunque presente la guida base.&lt;p&gt;Per usare la guida:&lt;p&gt;&lt;ol&gt;&lt;li&gt;tieni premuto il tasto di aiuto.&lt;li&gt;quando apparirà &lt;b&gt;Cos&apos;è...&lt;/b&gt;, premi un qualunque tasto.&lt;/ol&gt;&lt;/Qt&gt;</translation>
     </message>
     <message>
         <source>What&apos;s this...</source>
-        <translation type="unfinished"></translation>
+        <translation>Cos&apos;è...</translation>
     </message>
 </context>
 <context>
     <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Premi per chiudere questa finestra, abbandonando le modifiche effettuate.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Premi per chiudere questa finestra.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Premi per chiudere questa finestra e salvare le modifiche effettuate.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Premi per spostare la finestra.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="unfinished"></translation>
+        <translation>Premi per ingrandire al massimo questa finestra.</translation>
     </message>
 </context>
 <context>
@@ -867,14 +867,14 @@ riprovare.</translation>
     </message>
     <message>
         <source>Internal Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Memoria Interna</translation>
     </message>
 </context>
 <context>
     <name>TZCombo</name>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessuna</translation>
     </message>
 </context>
 <context>
@@ -895,20 +895,20 @@ riprovare</translation>
     <name>TypeCombo</name>
     <message>
         <source>%1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 file</translation>
     </message>
     <message>
         <source>%1 %2</source>
         <comment>minor mimetype / major mimetype</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2</translation>
     </message>
     <message>
         <source>All %1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>Tutti i %1 file</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Tutti i file</translation>
     </message>
 </context>
 </TS>

@@ -1323,15 +1323,15 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Paese Lavoro</translation>
     </message>
     <message>
         <source>Kuwait</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuwait</translation>
     </message>
     <message>
         <source>Kyrgystan</source>
-        <translation type="unfinished"></translation>
+        <translation>Kyrgystan</translation>
     </message>
 </context>
 </TS>

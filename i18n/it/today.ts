@@ -40,11 +40,11 @@
     </message>
     <message>
         <source>No plugins found</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessun plugin trovato</translation>
     </message>
     <message>
         <source>No plugins activated</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessun plugin attivato</translation>
     </message>
 </context>
 <context>
@@ -59,44 +59,46 @@
     </message>
     <message>
         <source>Today&#xb2;</source>
-        <translation type="unfinished"></translation>
+        <translation>Oggi²</translation>
     </message>
 </context>
 <context>
     <name>TodayConfig</name>
     <message>
         <source>Today config</source>
-        <translation type="unfinished">Configurazione di &apos;Oggi&apos;</translation>
+        <translation>Configurazione</translation>
     </message>
     <message>
         <source>Load which plugins in what order:</source>
-        <translation type="unfinished"></translation>
+        <translation>Carica i plugin nell&apos;ordine:</translation>
     </message>
     <message>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta Sopra</translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta Sotto</translation>
     </message>
     <message>
         <source>active/order</source>
-        <translation type="unfinished"></translation>
+        <translation>attivo/ordine</translation>
     </message>
     <message>
         <source>autostart on 
 resume?
  (Opie only)</source>
-        <translation type="unfinished"></translation>
+        <translation>avvio automatico al(new line)
+resume?(new line)
+(solo Opie)</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation type="unfinished"></translation>
+        <translation>minuti inattivi</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished">Varie</translation>
+        <translation>Varie</translation>
     </message>
 </context>
 <context>
