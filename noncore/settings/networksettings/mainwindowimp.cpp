@@ -20,6 +20,7 @@
 #include <qpe/config.h>
 #include <qpe/qlibrary.h>
 #include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
 
 #include <qlist.h>
 #include <qdir.h>
