@@ -140,13 +140,6 @@ private slots:
             *m_edit,
             *m_options,
             *m_template;
-        /* box with two rows
-         * top will be the quick edit
-         * this will bite my ass once
-         * we want to have all parts
-         * exchangeable
-         */
-        QVBox* m_mainBox;
 
         bool m_syncing:1;
         bool m_deadline:1;

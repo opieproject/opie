@@ -35,6 +35,7 @@
 #include <qpopupmenu.h>
 
 #include <qpe/config.h>
+#include <qpe/resource.h>
 
 #include <opie/orecur.h>
 
@@ -64,29 +65,21 @@ TableView::TableView( MainWindow* window, QWidget* wid )
     setNumRows(0);
     setNumCols(4);
 
+    horizontalHeader()->setLabel( 0, tr("C.") );
+    horizontalHeader()->setLabel( 1, tr("Prior.") );
+    horizontalHeader()->setLabel( 2, tr("Description" ) );
+    horizontalHeader()->setLabel( 3, tr("Deadline") );
+
     setSorting( TRUE );
     setSelectionMode( NoSelection );
-//    setColumnStretchable( 2, TRUE );
-    setColumnStretchable( 3, FALSE );
-    setColumnWidth(0, 20 );
-    setColumnWidth(1, 35 );
-    setColumnWidth(3, 18 );
-
+    
     setLeftMargin( 0 );
     verticalHeader()->hide();
 
-    horizontalHeader()->setLabel(0, tr("C.") );
-    horizontalHeader()->setLabel(1, tr("Prior.") );
-    horizontalHeader()->setLabel(2, tr("Description" ) );
-
-//    setColumnStretchable(3, FALSE );
-
-    horizontalHeader()->setLabel(3, tr("Deadline") );
-
     if ( todoWindow()->showDeadline() )
-        showColumn( 3);
+        showColumn( 3 );
     else
-        hideColumn(3 );
+        hideColumn( 3 );
 
     connect((QTable*)this, SIGNAL( clicked( int, int, int, const QPoint& ) ),
             this, SLOT( slotClicked(int, int, int, const QPoint& ) ) );
@@ -108,6 +101,29 @@ TableView::TableView( MainWindow* window, QWidget* wid )
     setSortOrder( 0 );
     setAscending( TRUE );
     m_first = true;
+
+    // Load icons
+    // TODO - probably should be done globally somewhere else, see also quickeditimpl.cpp/h
+    m_pic_completed = Resource::loadPixmap( "todo/completed" );
+    QString namestr;
+    for ( unsigned int i = 1; i < 6; i++ ) {
+        namestr = "todo/priority";
+        namestr.append( QString::number( i ) );
+        m_pic_priority[ i - 1 ] = Resource::loadPixmap( namestr );
+    }
+
+    // Try to intelligently size columns
+    int col2width = 240;
+    int width = m_pic_completed.width();
+    setColumnWidth( 0, width );
+    col2width -= width;
+    width = fontMetrics().boundingRect( horizontalHeader()->label( 1 ) ).width()+8;
+    setColumnWidth( 1, width );
+    col2width -= width;
+    width = fontMetrics().boundingRect( horizontalHeader()->label( 3 ) ).width()+8;
+    setColumnWidth( 3, width );
+    col2width -= width;
+    setColumnWidth( 2, col2width - 2 );
 
     /* now let's init the config */
     initConfig();
@@ -315,59 +331,48 @@ void TableView::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool 
 
     OTodo task = sorted()[row];
 
-    p->fillRect( 0, 0, cr.width(), cr.height(), cg.brush( QColorGroup::Base ) );
+    // TODO - give user option for grid or bars?
 
-    QPen op = p->pen();
-    p->setPen(cg.mid());
-    p->drawLine( 0, cr.height() - 1, cr.width() - 1, cr.height() - 1 );
-    p->drawLine( cr.width() - 1, 0, cr.width() - 1, cr.height() - 1 );
-    p->setPen(op);
+    // Paint alternating background bars
+    if (  (row % 2 ) == 0 ) {
+        p->fillRect( 0, 0, cr.width(), cr.height(), cg.brush( QColorGroup::Base ) );
+    }
+    else {
+        p->fillRect( 0, 0, cr.width(), cr.height(), cg.brush( QColorGroup::Background ) );
+    }
+
+    // Paint grid
+    //p->fillRect( 0, 0, cr.width(), cr.height(), cg.brush( QColorGroup::Base ) );
+    //QPen op = p->pen();
+    //p->setPen(cg.mid());
+    //p->drawLine( 0, cr.height() - 1, cr.width() - 1, cr.height() - 1 );
+    //p->drawLine( cr.width() - 1, 0, cr.width() - 1, cr.height() - 1 );
+    //p->setPen(op);
 
     QFont f = p->font();
     QFontMetrics fm(f);
 
+    int marg = ( cr.width() - BoxSize ) / 2;
+    int x = 0;
+    int y = ( cr.height() - BoxSize ) / 2;
+
     switch(col) {
-	case 0:
-        {
-            // completed field
-            int marg = ( cr.width() - BoxSize ) / 2;
-            int x = 0;
-            int y = ( cr.height() - BoxSize ) / 2;
-            p->setPen( QPen( cg.text() ) );
-            p->drawRect( x + marg, y, BoxSize, BoxSize );
-            p->drawRect( x + marg+1, y+1, BoxSize-2, BoxSize-2 );
-            p->setPen( darkGreen );
-            x += 1;
-            y += 1;
-            if ( task.isCompleted() ) {
-                QPointArray a( 9*2 );
-                int i, xx, yy;
-                xx = x+2+marg;
-                yy = y+4;
-                for ( i=0; i<4; i++ ) {
-                    a.setPoint( 2*i,   xx, yy );
-                    a.setPoint( 2*i+1, xx, yy+2 );
-                    xx++; yy++;
-                }
-                yy -= 2;
-                for ( i=4; i<9; i++ ) {
-                    a.setPoint( 2*i,   xx, yy );
-                    a.setPoint( 2*i+1, xx, yy+2 );
-                    xx++; yy--;
-                }
-                p->drawLineSegments( a );
-            }
-        }
-        break;
-    case 1:
-        // priority field
+    case 0:  // completed field
     {
-        QString text = QString::number(task.priority());
-        p->drawText(2,2 + fm.ascent(), text);
+        //p->setPen( QPen( cg.text() ) );
+        //p->drawRect( x + marg, y, BoxSize, BoxSize );
+        //p->drawRect( x + marg+1, y+1, BoxSize-2, BoxSize-2 );
+        if ( task.isCompleted() ) {
+            p->drawPixmap( x + marg, y, m_pic_completed );
+        }       
     }
     break;
-    case 2:
-        // description field
+    case 1:  // priority field
+    {
+       p->drawPixmap( x + marg, y, m_pic_priority[ task.priority() - 1 ] );
+    }
+    break;
+    case 2:  // description field
     {
         QString text = task.summary().isEmpty() ?
                        task.description().left(20) :
@@ -408,11 +413,9 @@ QWidget* TableView::createEditor(int row, int col, bool )const {
     case 1: {
         /* the priority stuff */
         QComboBox* combo = new QComboBox( viewport() );
-        combo->insertItem( "1" );
-        combo->insertItem( "2" );
-        combo->insertItem( "3" );
-        combo->insertItem( "4" );
-        combo->insertItem( "5" );
+        for ( int i = 0; i < 5; i++ ) {
+            combo->insertItem( m_pic_priority[ i ] );
+        }
         combo->setCurrentItem( sorted()[row].priority()-1 );
         return combo;
     }

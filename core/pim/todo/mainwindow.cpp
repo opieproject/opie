@@ -210,10 +210,8 @@ void MainWindow::initConfig() {
     m_quicktask = config.readBoolEntry("ShowQuickTask", TRUE);
 }
 void MainWindow::initUI() {
-    m_mainBox = new QVBox(this, "main box ");
-
-    m_stack = new QWidgetStack(m_mainBox,  "main stack");
-    setCentralWidget( m_mainBox );
+    m_stack = new QWidgetStack(this,  "main stack");
+    setCentralWidget( m_stack );
 
     setToolBarsMovable( FALSE );
 

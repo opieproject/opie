@@ -31,6 +31,7 @@
 
 #include <qtable.h>
 #include <qmap.h>
+#include <qpixmap.h>
 
 #include "todoview.h"
 
@@ -79,6 +80,9 @@ namespace Todo {
         bool m_enablePaint:1;
         QString m_oleCat;
         bool m_first : 1;
+
+        QPixmap m_pic_completed;
+        QPixmap m_pic_priority[ 5 ];
 
     protected:
         void contentsMouseReleaseEvent( QMouseEvent* );

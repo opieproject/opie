@@ -14,7 +14,7 @@ QuickEditImpl::QuickEditImpl( QWidget* parent, bool visible )
     setHorizontalStretchable( TRUE );
 
     // Load priority icons
-    // TODO - probably should be done globally somewhere else
+    // TODO - probably should be done globally somewhere else, see also tableview.cpp/h
     priority1 = Resource::loadPixmap( "todo/priority1" );
     priority3 = Resource::loadPixmap( "todo/priority3" );
     priority5 = Resource::loadPixmap( "todo/priority5" );
