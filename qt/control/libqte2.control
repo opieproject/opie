@@ -5,8 +5,8 @@ Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
 Version: 1:$QTE_VERSION-$QTE_REVISION
 Depends: libjpeg62, libpng3, zlib1g
-Provides: qt-embedded
-Replaces: qt-embedded
+Provides: qt-embedded, libqt2-emb
+Replaces: qt-embedded, libqt2-emb
 Description: Qt/Embedded environment
  A complete windowing system and GUI toolkit for handhelds.
  See "QPE" for applications.
