@@ -77,21 +77,36 @@ void OTicker::setFrame(int frameStyle) {
 void OTicker::setText( const QString& text ) {
     pos = 0; // reset it everytime the text is changed
     scrollText = text;
-
-    int pixelLen = fontMetrics().width( text );
-    QPixmap pm( pixelLen, contentsRect().height() );
+qDebug(scrollText);
+ 
+ int pixelLen = 0;
+   bool bigger = false;
+   int contWidth = contentsRect().width();
+   int contHeight = contentsRect().height();
+    int pixelTextLen = fontMetrics().width( text );
+    printf("<<<<<<<height %d, width %d, text width %d %d\n", contHeight, contWidth, pixelTextLen, scrollText.length());
+  if( pixelTextLen < contWidth)
+    {
+      pixelLen = contWidth;
+    }
+  else
+    {
+        bigger = true;
+      pixelLen = pixelTextLen;
+    }
+    QPixmap pm( pixelLen, contHeight);
 //    pm.fill( QColor( 167, 212, 167 ));
  
     pm.fill(backgroundcolor);
     QPainter pmp( &pm );
     pmp.setPen(foregroundcolor );
-    pmp.drawText( 0, 0, pixelLen, contentsRect().height(), AlignVCenter, scrollText );
+    pmp.drawText( 0, 0, pixelTextLen, contHeight, AlignVCenter, scrollText );
     pmp.end();
     scrollTextPixmap = pm;
 
     killTimers();
     //    qDebug("Scrollupdate %d", updateTimerTime);
-    if ( pixelLen > contentsRect().width() )
+    if ( bigger /*pixelTextLen > contWidth*/ )
         startTimer( updateTimerTime);
     update();
 }
