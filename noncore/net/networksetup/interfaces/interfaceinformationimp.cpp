@@ -6,16 +6,11 @@
 #include <qgroupbox.h>
 #include <qmessagebox.h>
 
-#include <assert.h>
-
 /**
  * Constructor for the InterfaceInformationImp class.  This class pretty much
  * just display's information about the interface that is passed to it.
  */ 
-InterfaceInformationImp::InterfaceInformationImp(QWidget *parent, const char *name, Interface *i, WFlags f):InterfaceInformation(parent, name, f){
-  assert(i);
-  
-  interface = i;
+InterfaceInformationImp::InterfaceInformationImp(QWidget *parent, const char *name, Interface *i, WFlags f):InterfaceInformation(parent, name, f), interface(i){
   connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
   connect(i, SIGNAL(updateMessage(const QString &)), this, SLOT(showMessage(const QString &)));
   updateInterface(interface);
