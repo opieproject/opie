@@ -762,7 +762,8 @@ bool OpieFtp::populateRemoteView( )
 
 void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
 {
-    if( selectedItem) {
+     if( selectedItem) {
+        //   if(selectedItem!= NULL) {
 //         QCopEnvelope ( "QPE/System", "busy()" );
         QString  oldRemoteCurrentDir =  currentRemoteDir;
         QString strItem=selectedItem->text(0);
@@ -908,10 +909,12 @@ void OpieFtp::showRemoteMenu(QListViewItem * item)
 {
     QPopupMenu * m;// = new QPopupMenu( Local_View );
     m = new QPopupMenu(this);
-    if( /*item->text(0).right(1) == "/" ||*/ item->text(0).find("/",0,TRUE) != -1)
-        m->insertItem( tr( "Change Directory" ), this, SLOT( doRemoteCd() ));
-    else
-    m->insertItem( tr( "Download" ), this, SLOT( remoteDownload() ));
+    if(item != NULL ) {
+       if(  item->text(0).find("/",0,TRUE) != -1)
+          m->insertItem( tr( "Change Directory" ), this, SLOT( doRemoteCd() ));
+       else
+          m->insertItem( tr( "Download" ), this, SLOT( remoteDownload() ));
+    }
     m->insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
     m->insertItem( tr("Rescan"), this, SLOT( populateLocalView() ));
     m->insertItem( tr( "Rename" ), this, SLOT( remoteRename() ));
@@ -928,10 +931,12 @@ void OpieFtp::showLocalMenu(QListViewItem * item)
  m = new QPopupMenu( this);
     m->insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
     m->insertSeparator();
-    if( /*item->text(0).right(1) == "/" ||*/ item->text(0).find("/",0,TRUE) !=-1)
-    m->insertItem( tr( "Change Directory" ), this, SLOT( doLocalCd() ));
-    else
-    m->insertItem( tr( "Upload" ), this, SLOT( localUpload() ));
+    if(item != NULL ) {
+       if( item->text(0).find("/",0,TRUE) !=-1)
+          m->insertItem( tr( "Change Directory" ), this, SLOT( doLocalCd() ));
+       else
+          m->insertItem( tr( "Upload" ), this, SLOT( localUpload() ));
+    }
     m->insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
     m->insertItem( tr("Rescan"), this, SLOT( populateRemoteView() ));
     m->insertItem( tr( "Rename" ), this, SLOT( localRename() ));
