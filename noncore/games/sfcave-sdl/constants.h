@@ -3,7 +3,6 @@
 
 #include <string>
 using namespace std;
-#define QString string
 
 #ifdef QWS
 #define IMAGES_PATH "/opt/QtPalmtop/pics/sfcave/data/"
@@ -55,13 +54,31 @@ using namespace std;
 #define MENU_DIFFICULTY_EASY	16
 #define MENU_DIFFICULTY_NORMAL	17
 #define MENU_DIFFICULTY_HARD	18
-#define MENU_SOUNDS				19
-#define MENU_SOUND_ON			20
-#define MENU_SOUND_OFF			21
-#define MENU_MUSIC_ON			22
-#define MENU_MUSIC_OFF			23
+#define MENU_DIFFICULTY_HARD	18
+#define MENU_DIFFICULTY_CUSTOM	19
+#define MENU_SOUNDS				20
+#define MENU_SOUND_ON			21
+#define MENU_SOUND_OFF			22
+#define MENU_MUSIC_ON			23
+#define MENU_MUSIC_OFF			24
+#define MENU_CUSTOM_THRUST      25
+#define MENU_CUSTOM_GRAVITY     26
+#define MENU_CUSTOM_MAXSPEEDUP  27
+#define MENU_CUSTOM_MAXSPEEDDOWN    28
+#define MENU_CUSTOM_INCREASE    29
+#define MENU_CUSTOM_DECREASE    30
+#define MENU_CUSTOM_SAVE        31
+#define MENU_CUSTOM_CANCEL      32
 
 // Sounds
 #define SND_EXPLOSION		0
 #define SND_THRUST			1
+#define INGAME_MUSIC		SOUND_PATH "ingame.mod"
+
+// Constants for player values
+#define PLAYER_THRUST           0
+#define PLAYER_GRAVITY          1  
+#define PLAYER_MAX_SPEED_UP     2
+#define PLAYER_MAX_SPEED_DOWN   3
+
 #endif

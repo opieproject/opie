@@ -25,10 +25,10 @@ public:
 	void setReplay( bool val ) { replay = val; }
 
 	void handleKeys( SDL_KeyboardEvent &key );
-	QString getGameName() { return gameName; }
+	string getGameName() { return gameName; }
 	int getDifficulty() { return difficulty; }
-	QString getGameDifficultyText();
-	void setDifficulty( int diff ) { difficulty = diff; }
+	string getGameDifficultyText();
+	void setDifficulty( int diff );
 	void setDifficulty( string diff );
 
 	long getScore() { return score; }
@@ -39,15 +39,16 @@ public:
 	bool isReplayAvailable() { return replayList.size() > 0; }
 
 	Terrain *getTerrain() { return terrain; }
+	Player *getPlayer() { return player; }
 
 	void setSeed( int seed );
-	void loadReplay( QString file );
-	void saveReplay( QString file );
+	void loadReplay( string file );
+	void saveReplay( string file );
 
 	static Game *createGame( SFCave *p, int w, int h, string game, string difficulty );
 
 protected:
-	QString gameName;
+	string gameName;
 
 	int thrustChannel;
 
@@ -69,12 +70,10 @@ protected:
 	// Stuff for the replays
     int currentSeed;
 
-//    QListIterator<int> *replayIt;
 	list<int> replayList;
 	list<int>::iterator replayIt;
-//	QList<int> replayList;
     bool replay;
-    QString replayFile;
+    string replayFile;
 
 private:
 };

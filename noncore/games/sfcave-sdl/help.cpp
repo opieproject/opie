@@ -35,7 +35,7 @@ void Help :: handleKeys( SDL_KeyboardEvent &key )
                 textSpeed = 0;
             else textSpeed = 1;
         }
-            
+
 	}
 	else if ( key.type == SDL_KEYUP )
 	{
@@ -48,7 +48,7 @@ void Help :: init()
 	startPos = 320;
 	currLine = 0;
 	textSpeed = 1;
-	
+
 	// Create our coloured font
 	FontHandler :: changeColor( FONT_HELP_FONT, 0, 0, 255 );
 }
@@ -57,7 +57,6 @@ void Help :: draw( SDL_Surface *screen )
 {
     stars->draw( screen );
 
-    
 	list<string>::iterator it = textList.begin();
 
 	// Move to start of text
@@ -75,13 +74,13 @@ void Help :: draw( SDL_Surface *screen )
 		pos += FontHandler::FontHeight( FONT_COLOURED_TEXT );
 		it ++;
 	}
-	
+
 }
 
 void Help :: update()
 {
     stars->move();
-    
+
 	startPos -= textSpeed;
 	if ( startPos <= -FontHandler::FontHeight( FONT_COLOURED_TEXT ) )
 	{

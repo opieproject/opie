@@ -18,6 +18,7 @@ GatesGame :: GatesGame( SFCave *p, int w, int h, int diff )
 
 GatesGame :: ~GatesGame()
 {
+	// terrain and player get deleted by parent class
 }
 
 void GatesGame :: init()
@@ -46,6 +47,19 @@ void GatesGame :: init()
 			gapHeight = 25;
 			player->setMovementInfo( 0.6, 0.8, 6, 7 );
 			break;
+        case MENU_DIFFICULTY_CUSTOM:
+        {
+            // Read custom difficulty settings for this game
+            gapHeight = parent->loadIntSetting( "Gates_custom_gapHeight", 75 );
+        
+            double thrust = parent->loadDoubleSetting( "Gates_custom_player_thrust", 0.4 );
+            double gravity = parent->loadDoubleSetting( "Gates_custom_player_gravity", 0.6 );
+            double maxUp = parent->loadDoubleSetting( "Gates_custom_player_maxupspeed", 4.0 );
+            double maxDown = parent->loadDoubleSetting( "Gates_custom_player_maxdownspeed", 5.0 );
+			player->setMovementInfo( thrust, gravity, maxUp, maxDown );
+
+            break;
+        }
 	}
 
     for ( int i = 0 ; i < BLOCKSIZE ; ++i )
@@ -77,7 +91,6 @@ void GatesGame ::  update( int state )
 
 		if ( checkCollisions() )
 		{
-//			printf( "Crashed!\n" );
 			parent->changeState( STATE_CRASHING );
 			return;
 		}

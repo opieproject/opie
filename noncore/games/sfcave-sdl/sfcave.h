@@ -15,7 +15,6 @@ public:
 	SFCave( int argc, char *argv[] );
 	~SFCave();
 
-	void drawGameScreen();
 	void initSDL( int argc, char *argv[] );
 	void mainEventLoop();
 
@@ -30,21 +29,44 @@ public:
 
 	void saveSetting( string key, string val );
 	void saveSetting( string key, int val );
+	void saveSetting( string key, long val );
+	void saveSetting( string key, double val );
 	string loadSetting( string key, string defaultVal = "" );
+	bool loadBoolSetting( string key, bool defaultVal);
+	int loadIntSetting( string key, int defaultVal );
+	double loadDoubleSetting( string key, double defaultVal );
+
 private:
 	SDL_Surface *screen;
+	bool setupOK;
 
 	Game *currentGame;
 	Menu *menu;
 	Help *help;
 	int state;
-	int maxFPS;
-	int actualFPS;
 	bool showFps;
 	string musicPath;
 	string musicType;
+	bool finish;
+
+	bool limitFPS;
+	int maxFPS;
+	int actualFPS;
+	int FPS;
+	long time1;
+	long start;
+	long end;
+	
+	// This is used when the user is setting the custom
+	// values in the menu
+	int customPlayerMenuVal;
+	double origValue;
 
 	void handleMenuSelect( int menuId );
+	void handleGameState();
+	void handleEvents();
+	void calcFPS();
+	void FPSDelay();
 };
 
 #endif

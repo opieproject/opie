@@ -22,7 +22,13 @@ public:
 	int getY() { return pos.y(); }
 	int getHeight() { return pos.h(); }
 	bool updateCrashing();
-	void setMovementInfo( double up, double down, double maxUp, double maxDown );
+	void setMovementInfo( double up, double grav, double maxUp, double maxDown );
+	void incValue( int valType );
+	void decValue( int valType );
+	double getValue( int valueType );
+    string getValueString( int valueType );
+    string getValueTypeString( int valueType );
+    void setValue( int valueType, double val );	
 
 private:
 	AnimatedImage *explosion;
@@ -36,10 +42,10 @@ private:
 	bool crashed;
 	int crashLineLength;
 	Rect pos;
-	double thrust;
+	double currentThrust;
 
-	double thrustUp;
-	double thrustDown;
+	double thrust;
+	double gravity;
 	double maxUpSpeed;
 	double maxDownSpeed;
 

@@ -161,7 +161,7 @@ void StarField :: move( )
 			//Move Star
 			pos_x[i] += vel_x[i];
 			pos_y[i] += vel_y[i];
-			
+
 			if (pos_x[i] < 0)
 				pos_x[i] = pos_x[i] + 240;
 
@@ -221,3 +221,75 @@ void StarField :: draw( SDL_Surface *screen, int w, int h )
 		SDL_UnlockSurface( screen );
 	}
 }
+
+
+
+// Test
+#ifdef DEBUG_STARS
+SDL_Surface *screen;
+StarField *stars;
+
+void go()
+{
+	/* Initialize SDL */
+	if ( SDL_Init(SDL_INIT_VIDEO) < 0 )
+	{
+		fprintf(stderr, "Couldn't initialize SDL: %s\n",SDL_GetError());
+		exit(1);
+	}
+	atexit(SDL_Quit);
+
+	int videoflags = SDL_SWSURFACE ;
+
+ 	if ( (screen=SDL_SetVideoMode(240, 320,32,videoflags)) == NULL )
+ 	{
+ 		fprintf(stderr, "Couldn't set %ix%i video mode: %s\n",240,320,SDL_GetError());
+ 		exit(2);
+ 	}
+
+	stars = new StarField( false, 200 );
+
+	bool done = false;
+	while ( !done )
+	{
+		SDL_FillRect( screen, 0, 0 );
+		stars->draw( screen );
+		stars->move( );
+
+ 		SDL_Flip( screen );
+
+		SDL_Delay( 10 );
+
+		SDL_Event event;
+		while ( SDL_PollEvent(&event) )
+		{
+			switch (event.type)
+			{
+				case SDL_KEYDOWN:
+					// Escape keypress quits the app
+					if ( event.key.keysym.sym != SDLK_ESCAPE )
+					{
+						break;
+					}
+				case SDL_QUIT:
+					done = 1;
+					break;
+				default:
+					break;
+			}
+		}
+ 	}
+ }
+
+
+
+
+#ifdef __cplusplus
+extern "C"
+#endif
+int main( int argc, char *argv[] )
+{
+	go();
+}
+
+#endif

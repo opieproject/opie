@@ -6,7 +6,7 @@
 class AnimatedImage
 {
 public:
-	AnimatedImage( QString file, int nFrames );
+	AnimatedImage( string file, int nFrames );
 	~AnimatedImage();
 
 	bool nextFrame();

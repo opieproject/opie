@@ -8,7 +8,7 @@ BFont *FontHandler :: whiteFont;
 BFont *FontHandler :: colouredFont;
 BFont *FontHandler :: helpFont;
 
-void FontHandler :: init()
+bool FontHandler :: init()
 {
 	// Load font images
 	// Convert to fonts
@@ -17,15 +17,27 @@ void FontHandler :: init()
 	whiteFont = new BFont( IMAGES_PATH "score_font.bmp" );
 	helpFont = new BFont( IMAGES_PATH "help_font.bmp" );
 	colouredFont = 0;
+	
+	// Check if we are installed correctly (we need fonts to function)
+	if ( menuSelFont == 0 || menuUnSelFont == 0 || whiteFont == 0 || helpFont == 0 )
+	{
+	   printf( "One or more fonts are not installed correctly\n" );
+	   return false;
+	}
+	
+	return true;
 }
 
 void FontHandler :: cleanUp()
 {
-	delete menuSelFont;
-	delete menuUnSelFont;
-	delete whiteFont;
-	delete helpFont;
-
+	if ( menuSelFont )
+		delete menuSelFont;
+	if ( menuUnSelFont )
+		delete menuUnSelFont;
+	if ( whiteFont )
+		delete whiteFont;
+	if ( helpFont )
+		delete helpFont;
 	if ( colouredFont )
 		delete colouredFont;
 }

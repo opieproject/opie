@@ -4,7 +4,7 @@
 #include "constants.h"
 #include "animatedimage.h"
 
-AnimatedImage :: AnimatedImage( QString file, int nFrames )
+AnimatedImage :: AnimatedImage( string file, int nFrames )
 {
 	nrFrames = nFrames;
 	currentFrame = 0;
@@ -19,9 +19,6 @@ AnimatedImage :: AnimatedImage( QString file, int nFrames )
 	}
 
 	SDL_SetColorKey(image, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB( image->format, 0, 0, 0 ) );
-//	image = SDL_DisplayFormat( tmp );
-
-//	SDL_FreeSurface( tmp );
 	frameWidth = image->w/nrFrames;
 	frameHeight = image->h;
 }
@@ -47,6 +44,9 @@ bool AnimatedImage :: nextFrame()
 
 void AnimatedImage :: draw( SDL_Surface *screen, int x, int y )
 {
+	if ( !image )
+		return;
+
 	SDL_Rect dst;
 	dst.x = currentFrame * frameWidth;
 	dst.y = 0;

@@ -32,6 +32,7 @@ public:
    bool readSetting(const string key_str,unsigned int& result);
    bool readSetting(const string key_str,long int& result);
    bool readSetting(const string key_str,unsigned long& result);
+   bool readSetting(const string key_str,double & result);
    bool readSetting(const string key_str,bool& result);
 
    void writeSetting(const string key_str,const string value);
@@ -39,10 +40,11 @@ public:
    void writeSetting(const string key_str,const unsigned int result);
    void writeSetting(const string key_str,const long int result);
    void writeSetting(const string key_str,const unsigned long result);
+   void writeSetting(const string key_str,const double value);
    void writeSetting(const string key_str,const bool value);
 
    void deleteFile(void);
-   
+
 private:
 
 	string envFile;

@@ -5,6 +5,6 @@
 using namespace std;
 
 Uint32 getpixel(SDL_Surface *surface, int x, int y);
-const char *chooseRandomFile( string path, string fileType );
-
+string chooseRandomFile( string path, string fileType );
+string getHomeDir();
 #endif

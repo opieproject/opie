@@ -8,7 +8,7 @@
 #include "font.h"
 #include "starfield.h"
 
-MenuOption :: MenuOption( QString text, int id )
+MenuOption :: MenuOption( string text, int id )
 {
 	menuText = text;
 	menuId = id;
@@ -115,6 +115,7 @@ Menu :: Menu( SFCave *p )
 	typeMenu->setNextMenu( gameType );
 
 	// Game Difficulty menu
+	MenuOption *customMenu = 0;
 	Menu *gameDifficulty = new Menu( options );
 	item = gameDifficulty->addMenuOption( "Easy", MENU_DIFFICULTY_EASY );
 	item->setNextMenu( options, false );
@@ -122,6 +123,7 @@ Menu :: Menu( SFCave *p )
 	item->setNextMenu( options, false );
 	item = gameDifficulty->addMenuOption( "Hard", MENU_DIFFICULTY_HARD );
 	item->setNextMenu( options, false );
+	customMenu = gameDifficulty->addMenuOption( "Custom", MENU_DIFFICULTY_CUSTOM );
 	item = gameDifficulty->addMenuOption( "Back", MENU_BACK );
 	item->setNextMenu( options, false );
 	difficultyMenu->setNextMenu( gameDifficulty );
@@ -135,6 +137,29 @@ Menu :: Menu( SFCave *p )
 	item = sounds->addMenuOption( "Back", MENU_BACK );
 	item->setNextMenu( options, false );
 	soundsMenu->setNextMenu( sounds );
+	
+	// Custom Menu
+	Menu *custom = new Menu( gameDifficulty );
+	Menu *updown = new Menu( custom );
+	item = custom->addMenuOption( "Thrust", MENU_CUSTOM_THRUST );
+	item->setNextMenu( updown );
+	item = custom->addMenuOption( "Gravity", MENU_CUSTOM_GRAVITY );
+	item->setNextMenu( updown );
+	item = custom->addMenuOption( "Max Speed Up", MENU_CUSTOM_MAXSPEEDUP );
+	item->setNextMenu( updown );
+	item = custom->addMenuOption( "Max Speed Down", MENU_CUSTOM_MAXSPEEDDOWN );
+	item->setNextMenu( updown );
+	item = custom->addMenuOption( "Back", MENU_BACK );
+	item->setNextMenu( gameDifficulty, false );
+	customMenu->setNextMenu( custom );
+
+    // Up down menu
+	item = updown->addMenuOption( "Increase", MENU_CUSTOM_INCREASE );
+	item = updown->addMenuOption( "Decrease", MENU_CUSTOM_DECREASE );
+	item = updown->addMenuOption( "Save", MENU_CUSTOM_SAVE );
+	item->setNextMenu( custom, false );
+	item = updown->addMenuOption( "Cancel", MENU_CUSTOM_CANCEL );
+	item->setNextMenu( custom, false );
 
 	// Set static variables for menu selection up
 	mainMenu = this;
@@ -215,7 +240,6 @@ int Menu :: handleKeys( SDL_KeyboardEvent &key )
 	if ( key.type != SDL_KEYDOWN )
 		return -1;
 
-	statusText = "";
 	switch( key.keysym.sym )
 	{
 		case SDLK_DOWN:
@@ -276,8 +300,8 @@ int Menu :: handleKeys( SDL_KeyboardEvent &key )
 		case SDLK_LEFT:
 			if ( currentMenu->parentMenu != 0 )
 			{
+            	statusText = "";
 				currentMenu = currentMenu->parentMenu;
-							printf( "HERE\n" );
 
 				return -1;
 			}
@@ -286,9 +310,11 @@ int Menu :: handleKeys( SDL_KeyboardEvent &key )
 		case SDLK_RETURN:
 		case SDLK_SPACE:
 		{
+        	statusText = "";
 			// select menu item
 			int id = currentMenu->currentMenuOption->getMenuId();
-//			// if the current item has a child menu then move to that menu
+
+			// if the current item has a child menu then move to that menu
 			Menu *next = currentMenu->currentMenuOption->getNextMenu();
 			if ( next != 0 )
 			{
@@ -296,12 +322,9 @@ int Menu :: handleKeys( SDL_KeyboardEvent &key )
 				currentMenu = next;
 				if ( down )
 					initCurrentMenu();
-//				return -1;
 			}
-//			else
-			{
-				return id;
-			}
+
+			return id;
 
 			break;
 		}
@@ -313,7 +336,7 @@ int Menu :: handleKeys( SDL_KeyboardEvent &key )
 	return -1;
 }
 
-MenuOption *Menu :: addMenuOption( QString text, int id )
+MenuOption *Menu :: addMenuOption( string text, int id )
 {
 	MenuOption *item = new MenuOption( text, id );
 

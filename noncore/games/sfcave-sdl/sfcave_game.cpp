@@ -39,6 +39,19 @@ void SFCaveGame :: init()
 		case MENU_DIFFICULTY_HARD:
 			blockDistance = 30;
 			break;
+        case MENU_DIFFICULTY_CUSTOM:
+        {
+            // Read custom difficulty settings for this game
+            blockDistance = parent->loadIntSetting( "SFCave_custom_blockdistance", 50 );
+
+            double thrust = parent->loadDoubleSetting( "SFCave_custom_player_thrust", 0.4 );
+            double gravity = parent->loadDoubleSetting( "SFCave_custom_player_gravity", 0.6 );
+            double maxUp = parent->loadDoubleSetting( "SFCave_custom_player_maxupspeed", 4.0 );
+            double maxDown = parent->loadDoubleSetting( "SFCave_custom_player_maxdownspeed", 5.0 );
+   			player->setMovementInfo( thrust, gravity, maxUp, maxDown );
+
+            break;
+        }
 	}
 
     for ( int i = 0 ; i < BLOCKSIZE ; ++i )
@@ -68,7 +81,6 @@ void SFCaveGame ::  update( int state )
 
 		if ( checkCollisions() )
 		{
-//			printf( "Crashed!\n" );
 			parent->changeState( STATE_CRASHING );
 			return;
 		}

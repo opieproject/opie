@@ -54,7 +54,7 @@ void Game :: init()
 		setSeed( -1 );
 		replayList.clear();
 	}
-
+	
 	score = 0;
 	nrFrames = 0;
 	press = false;
@@ -76,9 +76,6 @@ void Game :: handleKeys( SDL_KeyboardEvent &key )
 			if ( !press )
 				replayList.push_back( nrFrames );
 			press = true;
-
-//			if ( thrustChannel == -1 && parent->getState() == STATE_PLAYING )
-//				thrustChannel = SoundHandler :: playSound( SND_THRUST, -1, -1, false );
 		}
 		else
 		{
@@ -86,20 +83,15 @@ void Game :: handleKeys( SDL_KeyboardEvent &key )
 				replayList.push_back( nrFrames );
 			press = false;
 
-			if ( thrustChannel != -1 )
-			{
-//				SoundHandler :: stopSound( thrustChannel, true, 300 );
-//				thrustChannel = -1;
-			}
 		}
 	}
 }
 
 
 
-QString Game :: getGameDifficultyText()
+string Game :: getGameDifficultyText()
 {
-	QString ret;
+	string ret;
 
 	if ( difficulty == MENU_DIFFICULTY_EASY )
 		ret =  "Easy";
@@ -107,6 +99,8 @@ QString Game :: getGameDifficultyText()
 		ret = "Medium";
 	else if ( difficulty == MENU_DIFFICULTY_HARD )
 		ret = "Hard";
+	else if ( difficulty == MENU_DIFFICULTY_CUSTOM )
+		ret = "Custom";
 
 	return ret;
 }
@@ -119,6 +113,16 @@ void Game :: setDifficulty( string diff )
 		difficulty = MENU_DIFFICULTY_NORMAL;
 	else if ( diff == "Hard" )
 		difficulty = MENU_DIFFICULTY_HARD;
+    else if ( diff == "Custom" )
+		difficulty = MENU_DIFFICULTY_CUSTOM;
+		
+    init();
+}
+
+void Game :: setDifficulty( int diff )
+{
+    difficulty = diff;
+    init();
 }
 
 void Game :: update( int state )
@@ -131,7 +135,7 @@ void Game :: update( int state )
 
 	if ( state == STATE_PLAYING )
 	{
-        if ( replay ) 
+        if ( replay )
         {
             while( replayIt != replayList.end() && (*replayIt) == nrFrames-1 )
             {
@@ -166,14 +170,13 @@ void Game :: preDraw( SDL_Surface *screen )
 void Game :: draw( SDL_Surface *screen )
 {
 	char tmp[100];
-	QString scoreText;
+	string scoreText;
 	sprintf( tmp, "Score: %06ld   High Score: %06ld", score, highScore );
-//	printf( "%s\n", (const char *)scoreText );
 	FontHandler::draw( screen, FONT_WHITE_TEXT, tmp, 3, 10 );
 
 	if ( parent->getState() == STATE_CRASHED )
 	{
-		QString crashText;
+		string crashText;
 		crashText = "Game Over";
 		int x = (240 - FontHandler::TextWidth( FONT_WHITE_TEXT, (const char *)crashText.c_str() )) / 2;
 		FontHandler::draw( screen, FONT_WHITE_TEXT, (const char *)crashText.c_str(), x, 150 );
@@ -223,7 +226,7 @@ void Game :: setSeed( int seed )
     PutSeed( currentSeed );
 }
 
-void Game :: saveReplay( QString file )
+void Game :: saveReplay( string file )
 {
     FILE *out;
     out = fopen( file.c_str(), "w" );
@@ -236,7 +239,7 @@ void Game :: saveReplay( QString file )
 
     // Build up string of values
     // Format is:: <landscape seed> <game type> <difficulty> <framenr> <framenr>.......
-    QString val;
+    string val;
     char tmp[20];
     sprintf( tmp, "%d %d ", currentSeed, difficulty );
     val = tmp;
@@ -251,7 +254,7 @@ void Game :: saveReplay( QString file )
     }
     val += "\n";
 
-    QString line;
+    string line;
     sprintf( tmp, "%d\n", val.length() );
     line = tmp;
     fwrite( line.c_str(), 1, line.length(), out );
@@ -259,12 +262,9 @@ void Game :: saveReplay( QString file )
     fwrite( val.c_str(), 1, val.length(), out );
 
     fclose( out );
-
-    printf( "Replay saved to %s\n", (const char *)file.c_str() );
-
 }
 
-void Game :: loadReplay( QString file )
+void Game :: loadReplay( string file )
 {
 
     FILE *in = fopen( (const char *)file.c_str(), "r" );
@@ -285,9 +285,8 @@ void Game :: loadReplay( QString file )
     char *data = new char[length+1];
 
     fread( data, 1, length, in );
-//    printf( "data - %s", data );
 
-    QString sep  = " ";
+    string sep  = " ";
 
     StringTokenizer st( data, sep );
 
@@ -308,9 +307,6 @@ void Game :: loadReplay( QString file )
     delete data;
 
     fclose( in );
-
-    printf( "Replay loaded from %s\n", (const char *)file.c_str() );
-
 }
 
 

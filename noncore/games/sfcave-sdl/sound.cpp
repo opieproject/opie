@@ -31,6 +31,7 @@ bool SoundHandler :: init( )
 	music = 0;
 
 	soundOn = true;
+	musicOn = true;
 
 	return true;
 }
@@ -38,8 +39,10 @@ bool SoundHandler :: init( )
 void SoundHandler :: cleanUp()
 {
 	// Free audio sounds
-	Mix_FreeChunk( sounds[SND_EXPLOSION] );
-	Mix_FreeChunk( sounds[SND_THRUST] );
+	if ( sounds[SND_EXPLOSION] )
+    	Mix_FreeChunk( sounds[SND_EXPLOSION] );
+	if ( sounds[SND_THRUST] )
+    	Mix_FreeChunk( sounds[SND_THRUST] );
 
 	if ( music )
 		Mix_FreeMusic( music );
@@ -52,7 +55,7 @@ int SoundHandler :: playSound( int soundNr, int channel, int nrLoops, int playBe
 	if ( !soundOn )
 		return -1;
 
-	if ( soundNr >= NR_SOUNDS )
+	if ( soundNr >= NR_SOUNDS || !sounds[soundNr] )
 		return -1;
 
 	Mix_Chunk *chunk = sounds[soundNr];
@@ -101,14 +104,14 @@ void SoundHandler :: playMusic( string musicFile )
 
 void SoundHandler :: playMusic( bool fade )
 {
-	if ( !soundOn )
+	if ( !musicOn )
 		return;
 
 	if ( music )
 	{
 		Mix_VolumeMusic( MIX_MAX_VOLUME );
 		Mix_RewindMusic();
-		
+
 		if ( fade )
     		Mix_FadeInMusic( music, -1, 1000 );
         else
@@ -146,7 +149,7 @@ void SoundHandler :: setSoundsOn( bool val )
 void SoundHandler :: setMusicOn( bool val )
 {
 	musicOn = val;
-	
+
 	if ( !musicOn )
 	   stopMusic();
     else

@@ -47,6 +47,7 @@ void Terrain :: initTerrain()
 		setPoint( i );
 
 	SDL_FillRect( terrainSurface, 0, 0 );
+
 	// Draw Terrain into surface
 	Sint16 px[5];
 	Sint16 py[5];
@@ -91,7 +92,6 @@ void Terrain :: moveTerrain( int amountToMove )
 	offset += amountToMove;
 	speed = offset/segSize;
 
-//	printf( "offset - %d, speed - %d\n", offset, speed );
 	if ( offset >= segSize )
 	{
 		for ( int i = 0 ; i < (MAPSIZE)-speed ; ++i )
@@ -195,7 +195,6 @@ void Terrain :: drawTerrain( SDL_Surface *screen )
 	dst.y = 0;
 	dst.w = sWidth;
 	dst.h = sHeight;
-//	dst.h = maxHeight;
 
 	SDL_Rect dst2;
 	dst2.x = 0;
@@ -204,28 +203,13 @@ void Terrain :: drawTerrain( SDL_Surface *screen )
     SDL_BlitSurface(terrainSurface, &dst, screen, &dst2 );
 
     stars->draw( screen );
-
-//	dst.y = sHeight - maxHeight;
-//	dst2.y = sHeight - maxHeight;
-//	SDL_BlitSurface(terrainSurface, &dst, screen, &dst2 );
-
-/*
-	for ( int i = 0 ; i < MAPSIZE ; ++i )
-	{
-		int x1 = (i*segSize) - (offset*speed);
-		int x2 = ((i+1)*segSize)-(offset*speed);
-		if ( x2 >= sWidth )
-			x2 = sWidth-1;
-		aalineRGBA( screen, x1, mapTop[i], x2, mapTop[i+1], 0, 220, 0, 255 );
-		aalineRGBA( screen, x1, mapBottom[i], x2, mapBottom[i+1], 0, 220, 0, 255 );
-	}
-*/
 }
 
 bool Terrain :: checkCollision( int x, int y, int h )
 {
 	if ( y < 0 || y > sHeight )
 		return true;
+
 	// First get segment that matches x
 	SDL_LockSurface( terrainSurface );
 
@@ -247,7 +231,7 @@ Terrain *terrain;
 
 void go()
 {
-	/* Initialize SDL */
+	// Initialize SDL
 	if ( SDL_Init(SDL_INIT_VIDEO) < 0 )
 	{
 		fprintf(stderr, "Couldn't initialize SDL: %s\n",SDL_GetError());

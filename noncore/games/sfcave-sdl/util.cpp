@@ -35,7 +35,7 @@ Uint32 getpixel(SDL_Surface *surface, int x, int y)
     }
 }
 
-const char *chooseRandomFile( string path, string fileType )
+string chooseRandomFile( string path, string fileType )
 {
     vector<string> files;
     DIR *d = opendir( path.c_str() );
@@ -50,15 +50,26 @@ const char *chooseRandomFile( string path, string fileType )
         // Rip extension from file
         int pos = file.find( ".", 1 ) + 1;
         string tmp = file.substr( pos );
-        printf( "pos = %d, tmp =%s\n", pos, tmp.c_str() );
         if ( tmp.size() > 0 && fileType.find( tmp ) != -1 )
         {
-            printf( "Matching <%s> - %s with <%s>\n", file.substr( pos ).c_str(), file.c_str(), fileType.c_str() );
             files.push_back( file );
         }
         item = readdir( d );
     }
 
     closedir( d );
-    return files[nextInt( files.size() )].c_str();
+    return files[nextInt( files.size() )];
+}
+
+
+string getHomeDir()
+{
+	string home;
+#ifdef QWS
+	home = getenv( "HOME" );
+#else
+	home = ".";
+#endif
+
+	return home;
 }

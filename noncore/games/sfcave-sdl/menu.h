@@ -13,7 +13,7 @@ class Menu;
 class MenuOption
 {
 public:
-	MenuOption( QString text, int id );
+	MenuOption( string text, int id );
 	~MenuOption();
 
 	void highlight( bool val ) { highlighted = val; }
@@ -25,7 +25,7 @@ public:
 
 private:
 	int menuId;
-	QString menuText;
+	string menuText;
 	bool highlighted;
 	bool downMenuTree;
 
@@ -40,11 +40,11 @@ public:
 
 	void draw( SDL_Surface *screen );
 	int handleKeys( SDL_KeyboardEvent & );
-	MenuOption *addMenuOption( QString text, int id );
+	MenuOption *addMenuOption( string text, int id );
 	void resetToTopMenu();
 	void initCurrentMenu();
 
-	void setStatusText( QString text ) { statusText = text; }
+	void setStatusText( string text ) { statusText = text; }
 
 protected:
 
@@ -58,7 +58,7 @@ private:
 
 	StarField *stars;
 
-	QString statusText;
+	string statusText;
 
 	SFCave *parent;
 	list<MenuOption *> listItems;

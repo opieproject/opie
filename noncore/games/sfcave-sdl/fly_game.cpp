@@ -17,6 +17,7 @@ FlyGame :: FlyGame( SFCave *p, int w, int h, int diff )
 
 FlyGame :: ~FlyGame()
 {
+	// terrain and player get deleted by parent class
 }
 
 void FlyGame :: init()
@@ -34,6 +35,15 @@ void FlyGame :: init()
 		case MENU_DIFFICULTY_HARD:
 			player->setMovementInfo( 0.4, 0.6, 4, 5 );
 			break;
+        case MENU_DIFFICULTY_CUSTOM:
+        {
+            double thrust = parent->loadDoubleSetting( "Fly_custom_player_thrust", 0.3 );
+            double gravity = parent->loadDoubleSetting( "Fly_custom_player_gravity", 0.2 );
+            double maxUp = parent->loadDoubleSetting( "Fly_custom_player_maxupspeed", 1.5 );
+            double maxDown = parent->loadDoubleSetting( "Fly_custom_player_maxdownspeed", 1.5 );
+			player->setMovementInfo( thrust, gravity, maxUp, maxDown );
+            break;
+        }
 	}
 
 	startScoring = false;
@@ -50,7 +60,7 @@ void FlyGame ::  update( int state )
 		{
 		    int diff = terrain->getMapBottom( 10 ) - player->getY();
 			int tmpScore = ((FlyTerrain *)terrain)->getScore( 1, diff );
-//			printf( "diff - %d  score - %d\n", diff, tmpScore );
+
 			if ( !startScoring )
 			{
 				if ( tmpScore > 0 )
@@ -69,7 +79,6 @@ void FlyGame ::  update( int state )
 
 		if ( checkCollisions() )
 		{
-//			printf( "Crashed!\n" );
 			parent->changeState( STATE_CRASHING );
 			return;
 		}

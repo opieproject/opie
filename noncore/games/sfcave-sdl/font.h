@@ -13,7 +13,7 @@
 class FontHandler
 {
 public:
-	static void init();
+	static bool init();
 	static void cleanUp();
 
 	static int TextWidth( int font, const char *text );

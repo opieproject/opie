@@ -73,10 +73,6 @@ void BFont::LoadFont (const char *filename)
             InitFont(); // Init the font
         }
     }
-    else
-    {
-        cerr << "Error! The font has not been loaded!" << endl;
-    }
 }
 
 BFont * BFont :: SetFontColor(Uint8 r, Uint8 g, Uint8 b)
@@ -113,7 +109,6 @@ BFont * BFont :: SetFontColor(Uint8 r, Uint8 g, Uint8 b)
 
 			color_key =  xGetPixel(Surface, 0, Surface->h-1);
 
-			printf("looking...\n");
 			for( x=0; x < Surface->w; x++) {
 				for( y=0; y < Surface->h; y++) {
 					old_r = old_g = old_b = 0;
@@ -131,7 +126,7 @@ BFont * BFont :: SetFontColor(Uint8 r, Uint8 g, Uint8 b)
 					PutPixel(surface,x,y,pixel);
 				}
 			}
-			printf("unlooking...\n");
+
 			if (SDL_MUSTLOCK(surface))       SDL_UnlockSurface(surface);
 			if (SDL_MUSTLOCK(Surface)) SDL_UnlockSurface(Surface);
 

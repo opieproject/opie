@@ -5,6 +5,8 @@
 
 #include "settings.h"
 
+// Defined in util.h
+string getHomeDir();
 
 #define DEFAULT_DIR "."
 #define DEFAULT_FILE "Settings.cfg"
@@ -16,15 +18,8 @@ Settings::Settings( char * env_file, char * env_dir )
 	// Store the correct environment directory
 	if (env_dir == NULL)
 	{
-		char * homeDir = getenv( "HOME" );;
-
-		if ( homeDir )
-		{
-			envFile.append(homeDir);
-			envFile.append("/");
-		}
-		else
-			printf( "Environment var HOME not set!\n" );
+		envFile = getHomeDir();
+		envFile.append("/");
 
 		envFile.append(DEFAULT_DIR);
 	}
@@ -42,15 +37,8 @@ Settings::Settings( char * env_file, char * env_dir )
 
 Settings::Settings()
 {
-	char * homeDir = getenv("HOME");
-
-	if ( homeDir)
-	{
-		envFile.append(homeDir);
-		envFile.append("/");
-	}
-	else
-		printf( "Environment var HOME not set!\n" );
+	envFile = getHomeDir();
+	envFile.append("/");
 
 	envFile.append(DEFAULT_DIR);
 	envFile.append("/");
@@ -110,6 +98,18 @@ bool Settings::readSetting(const string key_str,unsigned long& result)
 		return false;
 }
 
+bool Settings::readSetting(const string key_str,double& result)
+{
+	string Buffer;
+	if (readSetting(key_str,Buffer))
+	{
+        result = atof( Buffer.c_str() );
+		return true;
+	}
+	else
+		return false;
+}
+
 bool Settings::readSetting(const string key_str,bool& result)
 {
 	string Buffer;
@@ -159,6 +159,14 @@ void Settings::writeSetting(const string key_str,const bool value)
 	value ?	writeSetting(key_str,string("true")) :writeSetting(key_str,string("false"));
 }
 
+void Settings::writeSetting(const string key_str,const double value)
+{
+	char Buffer[30];
+
+	sprintf(Buffer,"%lf",value);
+	writeSetting(key_str,string(Buffer));
+}
+
 void Settings::writeSetting(const string key_str,const int value)
 {
 	char Buffer[30];
@@ -195,41 +203,34 @@ void Settings::writeSetting(const string key_str,const string value)
 {
 	// This function will write a value for the key key_str. If the key_str
 	// already exists then it will be overwritten.
-
-	std::vector<string> FileEntries;
 	FILE *fd=NULL,*ftemp=NULL;
-	char * dir_str;
-	char * dir_ptr;
 	char  buf[MAX_LINE_SIZE];
-	char tempname[12];
 
-	dir_str = strdup(envFile.c_str());
-	printf( "dir = %s, file - %s\n", dir_str, envFile.c_str() );
-	if (dir_str)
+	string tmp = getHomeDir() + "/tmpsfcave.dat";
+
+	// if file exists we need to save contents
+	fd = fopen( envFile.c_str(), "r" );
+	ftemp = fopen( tmp.c_str(), "w" );
+	if ( fd != NULL && ftemp != NULL )
 	{
-		// remove file from the directory string
-		dir_ptr = strrchr(dir_str, (int)'/');
-		if (dir_ptr)
+		while (fgets(buf, MAX_LINE_SIZE-1, fd))
 		{
-			*dir_ptr = 0;
+			if ( strncmp( buf, key_str.c_str(), key_str.size() ) != 0 )
+				fprintf( ftemp, "%s", buf );
+		}
+		fclose(fd);
+	}
 
-			// make the directory path if it does not exist
-//			mkdir(dir_str, 777 );
+	if ( ftemp != NULL )
+	{
+		fprintf(ftemp, "%s\t%s\n", key_str.c_str(),value.c_str());
+		fclose( ftemp );
 
-			// if file exists we need to save contents
-			if ((fd = fopen(envFile.c_str(), "r")) != NULL)
-			{
-				while (fgets(buf, MAX_LINE_SIZE-1, fd))
-					FileEntries.push_back(string(buf));
-				fclose(fd);
-			}
-
-			char *home = getenv( "HOME" );
-			string tmp;
-			if ( home )
-				tmp = home + string( "/" ) + "tmpsfcave.dat";
-			else
-				tmp = "./tmpsfcave.dat";
+		remove(envFile.c_str());
+		rename( tmp.c_str(), envFile.c_str() );
+	}
+/*
+			string tmp = getHomeDir() + "/tmpsfcave.dat";
 			strcpy(tempname,tmp.c_str() );
 			printf( "tmp - %s\n", tempname );
 			if ((ftemp = fopen(tempname,"w")) != NULL)
@@ -254,10 +255,6 @@ void Settings::writeSetting(const string key_str,const string value)
 				fprintf(ftemp, "%s\t%s\n", key_str.c_str(),value.c_str());
 				fflush(ftemp);
 				fclose(ftemp);
-
-				remove(envFile.c_str());
-
-				rename( tempname, envFile.c_str() );
 			}
 			else
 				printf( "Can't open file %s\n", envFile.c_str() );
@@ -265,6 +262,7 @@ void Settings::writeSetting(const string key_str,const string value)
 
 		delete dir_str;
 	}
+*/
 }
 
 void Settings::deleteFile(void)
