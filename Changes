@@ -1,0 +1,31 @@
+Version 1.4.0
+-------------
+
+General:
+- Input methods are plugins
+- Taskbar applets are plugins
+- Handwriting input improved
+- Alarm server wakes from deep sleep
+- User interface consistancy fixes for all applications
+- Nearly all applications save state when closed
+- Performance improvements in many applications
+- Make better use of buttons on device
+- Documentation for developers
+
+Launcher:
+- Documents can now be categorized
+- Document view allows easy filtering on type, category and name
+- .desktop files are not required - all files in ~/Documents/ are visible
+- Allow applications to be preloaded to ensure instant launch
+- Automatic shutdown of least recently used applications
+- Recently used application icons displayed in taskbar
+
+Applications:
+- Addressbook bug fixes and improvements
+- Datebook bug fixes and improvements
+- Todo items can be filtered by category
+- Calculator bug fixes and improvements
+- Media player audio playback and user interface improved. Add support for wav
+- Image viewer user interface improved
+- File manager can launch applications to view files based on MIME type
+- LAN setup utility

@@ -1,0 +1,48 @@
+# This is a Qt message file in .po format.  Each msgid starts with
+# a scope.  This scope should *NOT* be translated - eg. translating
+# from French to English, "Foo::Bar" would be translated to "Pub",
+# not "Foo::Pub".
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2001-03-07 14:55:37 EST\n"
+"PO-Revision-Date: 2001-05-14\n"
+"Last-Translator: Oliver M. Bolzer <oliver@gol.com>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: helpbrowser.cpp:111
+msgid "HelpBrowser::About ..."
+msgstr "ヘルプについて..."
+
+#: helpbrowser.cpp:112
+msgid "HelpBrowser::About Qt ..."
+msgstr "Qtについて..."
+
+#: helpbrowser.cpp:115
+msgid "HelpBrowser::Add Bookmark"
+msgstr "ブックマークを追加"
+
+#: helpbrowser.cpp:89
+msgid "HelpBrowser::Backward"
+msgstr "戻る"
+
+#: helpbrowser.cpp:125
+msgid "HelpBrowser::Bookmarks"
+msgstr "ブックマーク"
+
+#: helpbrowser.cpp:97
+msgid "HelpBrowser::Forward"
+msgstr "進む"
+
+#: helpbrowser.cpp:124
+msgid "HelpBrowser::Go"
+msgstr "スタート"
+
+#: helpbrowser.cpp:126
+msgid "HelpBrowser::Help"
+msgstr "ヘルプ"
+
+#: helpbrowser.cpp:105
+msgid "HelpBrowser::Home"
+msgstr "スタートページ"
+

@@ -1,0 +1,235 @@
+#############################################################################
+
+####### Compiler, tools and options
+
+CXX	=	$(SYSCONF_CXX) $(QT_CXX_MT)
+CXXFLAGS=	$(SYSCONF_CXXFLAGS_QT) $(SYSCONF_CXXFLAGS)
+CC	=	$(SYSCONF_CC) $(QT_C_MT)
+CFLAGS	=	$(SYSCONF_CFLAGS)
+INCPATH =	-I$(QPEDIR)/include
+LFLAGS	=	$(SYSCONF_LFLAGS_QT) $(SYSCONF_RPATH_QT) $(SYSCONF_LFLAGS) $(QT_LFLAGS_MT)
+LIBS	=	$(SUBLIBS) -lqpe $(SYSCONF_LIBS_QT) $(SYSCONF_LIBS) $(SYSCONF_LIBS_QTAPP)
+MOC	=	$(SYSCONF_MOC)
+UIC	=	$(SYSCONF_UIC)
+
+####### Target
+
+DESTDIR = $(QPEDIR)/bin/
+VER_MAJ = 1
+VER_MIN = 0
+VER_PATCH = 0
+TARGET	= patience
+TARGET1 = lib$(TARGET).so.$(VER_MAJ)
+
+####### Files
+
+HEADERS =	canvascard.h \
+		canvasshapes.h \
+		cardgame.h \
+		cardgamelayout.h \
+		cardpile.h \
+		card.h \
+		carddeck.h \
+		canvascardgame.h \
+		freecellcardgame.h \
+		patiencecardgame.h \
+		canvascardwindow.h
+SOURCES =	canvascard.cpp \
+		canvasshapes.cpp \
+		cardgame.cpp \
+		cardgamelayout.cpp \
+		cardpile.cpp \
+		card.cpp \
+		carddeck.cpp \
+		canvascardgame.cpp \
+		freecellcardgame.cpp \
+		patiencecardgame.cpp \
+		canvascardwindow.cpp \
+		main.cpp
+OBJECTS =	canvascard.o \
+		canvasshapes.o \
+		cardgame.o \
+		cardgamelayout.o \
+		cardpile.o \
+		card.o \
+		carddeck.o \
+		canvascardgame.o \
+		freecellcardgame.o \
+		patiencecardgame.o \
+		canvascardwindow.o \
+		main.o
+INTERFACES =    
+UICDECLS =      
+UICIMPLS =      
+SRCMOC	=	moc_canvascardwindow.cpp
+OBJMOC	=	moc_canvascardwindow.o
+
+
+####### Implicit rules
+
+.SUFFIXES: .cpp .cxx .cc .C .c
+
+.cpp.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.cxx.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.cc.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.C.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.c.o:
+	$(CC) -c $(CFLAGS) $(INCPATH) -o $@ $<
+
+####### Build rules
+
+
+all: $(DESTDIR)$(TARGET)
+
+$(DESTDIR)$(TARGET): $(UICDECLS) $(OBJECTS) $(OBJMOC) $(SUBLIBS)
+	$(SYSCONF_LINK) $(LFLAGS) -o $(DESTDIR)$(TARGET) $(OBJECTS) $(OBJMOC) $(LIBS)
+
+moc: $(SRCMOC)
+
+tmake:
+	tmake solitaire.pro
+
+clean:
+	-rm -f $(OBJECTS) $(OBJMOC) $(SRCMOC) $(UICIMPLS) $(UICDECLS)
+	-rm -f *~ core
+	-rm -f allmoc.cpp
+
+####### Extension Modules
+
+listpromodules:
+	@echo 
+
+listallmodules:
+	@echo 
+
+listaddonpromodules:
+	@echo 
+
+listaddonentmodules:
+	@echo 
+
+
+REQUIRES=patience
+
+####### Sub-libraries
+
+
+###### Combined headers
+
+
+
+####### Compile
+
+canvascard.o: canvascard.cpp \
+		cardgame.h \
+		card.h \
+		cardpile.h \
+		carddeck.h \
+		cardgamelayout.h \
+		canvascard.h \
+		$(QPEDIR)/include/qpe/resource.h
+
+canvasshapes.o: canvasshapes.cpp \
+		canvasshapes.h
+
+cardgame.o: cardgame.cpp \
+		cardgame.h \
+		card.h \
+		cardpile.h \
+		carddeck.h \
+		cardgamelayout.h
+
+cardgamelayout.o: cardgamelayout.cpp \
+		cardgamelayout.h \
+		cardpile.h
+
+cardpile.o: cardpile.cpp \
+		cardpile.h \
+		card.h \
+		$(QPEDIR)/include/qpe/config.h
+
+card.o: card.cpp \
+		card.h \
+		$(QPEDIR)/include/qpe/config.h
+
+carddeck.o: carddeck.cpp \
+		card.h \
+		carddeck.h
+
+canvascardgame.o: canvascardgame.cpp \
+		cardgame.h \
+		card.h \
+		cardpile.h \
+		carddeck.h \
+		cardgamelayout.h \
+		canvasshapes.h \
+		canvascard.h \
+		canvascardgame.h \
+		$(QPEDIR)/include/qpe/resource.h \
+		$(QPEDIR)/include/qpe/config.h \
+		$(QPEDIR)/include/qpe/qpemenubar.h
+
+freecellcardgame.o: freecellcardgame.cpp \
+		freecellcardgame.h \
+		patiencecardgame.h \
+		canvascardgame.h \
+		cardgame.h \
+		card.h \
+		cardpile.h \
+		carddeck.h \
+		cardgamelayout.h \
+		canvasshapes.h \
+		canvascard.h \
+		$(QPEDIR)/include/qpe/resource.h \
+		$(QPEDIR)/include/qpe/config.h \
+		$(QPEDIR)/include/qpe/qpemenubar.h
+
+patiencecardgame.o: patiencecardgame.cpp \
+		patiencecardgame.h \
+		canvascardgame.h \
+		cardgame.h \
+		card.h \
+		cardpile.h \
+		carddeck.h \
+		cardgamelayout.h \
+		canvasshapes.h \
+		canvascard.h \
+		$(QPEDIR)/include/qpe/resource.h \
+		$(QPEDIR)/include/qpe/config.h \
+		$(QPEDIR)/include/qpe/qpemenubar.h
+
+canvascardwindow.o: canvascardwindow.cpp \
+		canvascardwindow.h \
+		patiencecardgame.h \
+		canvascardgame.h \
+		cardgame.h \
+		card.h \
+		cardpile.h \
+		carddeck.h \
+		cardgamelayout.h \
+		canvasshapes.h \
+		canvascard.h \
+		$(QPEDIR)/include/qpe/resource.h \
+		$(QPEDIR)/include/qpe/config.h \
+		$(QPEDIR)/include/qpe/qpemenubar.h \
+		freecellcardgame.h
+
+main.o: main.cpp \
+		canvascardwindow.h \
+		$(QPEDIR)/include/qpe/qpeapplication.h
+
+moc_canvascardwindow.o: moc_canvascardwindow.cpp \
+		canvascardwindow.h
+
+moc_canvascardwindow.cpp: canvascardwindow.h
+	$(MOC) canvascardwindow.h -o moc_canvascardwindow.cpp
+
+

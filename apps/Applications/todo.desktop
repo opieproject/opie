@@ -1,0 +1,9 @@
+[Desktop Entry]
+Comment=A Todo List Program
+Exec=todolist
+Icon=TodoList
+Type=Application
+Name=Todo List
+Name[no]=Oppgaveliste
+Name[de]=Aufgabenliste
+Name[hu]=Feladatok

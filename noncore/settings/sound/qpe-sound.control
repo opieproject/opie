@@ -1,0 +1,10 @@
+Files: bin/sound apps/Settings/Sound.desktop
+Priority: optional
+Section: qpe/settings
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Arch: iPAQ
+Version: $QPE_VERSION-1
+Depends: qpe-base ($QPE_VERSION)
+Description: Sound settings dialog
+ For the Qtopia environment.

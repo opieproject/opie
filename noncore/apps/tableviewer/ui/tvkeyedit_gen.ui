@@ -1,0 +1,239 @@
+<!DOCTYPE UI><UI>
+<class>TVKeyEdit_gen</class>
+<comment>Dialog for editing the keys and key types</comment>
+<author>Ian Walters</author>
+<forward>class QListViewItem;</forward>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>TVKeyEdit_gen</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>194</width>
+            <height>418</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>TableViewer - Edit Keys</string>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>0</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>0</number>
+        </property>
+        <widget>
+            <class>QListView</class>
+            <column>
+                <property>
+                    <name>text</name>
+                    <string>Key Name</string>
+                </property>
+                <property>
+                    <name>clickable</name>
+                    <bool>false</bool>
+                </property>
+                <property>
+                    <name>resizeable</name>
+                    <bool>false</bool>
+                </property>
+            </column>
+            <column>
+                <property>
+                    <name>text</name>
+                    <string>Key Type</string>
+                </property>
+                <property>
+                    <name>clickable</name>
+                    <bool>false</bool>
+                </property>
+                <property>
+                    <name>resizeable</name>
+                    <bool>false</bool>
+                </property>
+            </column>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>display</cstring>
+            </property>
+        </widget>
+        <widget>
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout4</cstring>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <spacer>
+                    <property>
+                        <name>name</name>
+                        <cstring>Spacer2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>orientation</name>
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>sizeType</name>
+                        <enum>Expanding</enum>
+                    </property>
+                    <property>
+                        <name>sizeHint</name>
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>newKeyButton</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>maximumSize</name>
+                        <size>
+                            <width>50</width>
+                            <height>32767</height>
+                        </size>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>New</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>deleteKeyButton</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>maximumSize</name>
+                        <size>
+                            <width>50</width>
+                            <height>32767</height>
+                        </size>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Delete</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>clearKeysButton</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>maximumSize</name>
+                        <size>
+                            <width>60</width>
+                            <height>32767</height>
+                        </size>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Clear All</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget>
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout3</cstring>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget>
+                    <class>QLineEdit</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>keyNameEdit</cstring>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QComboBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>keyTypeEdit</cstring>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+    </vbox>
+</widget>
+<connections>
+    <connection>
+        <sender>newKeyButton</sender>
+        <signal>clicked()</signal>
+        <receiver>TVKeyEdit_gen</receiver>
+        <slot>newTerm()</slot>
+    </connection>
+    <connection>
+        <sender>deleteKeyButton</sender>
+        <signal>clicked()</signal>
+        <receiver>TVKeyEdit_gen</receiver>
+        <slot>deleteTerm()</slot>
+    </connection>
+    <connection>
+        <sender>clearKeysButton</sender>
+        <signal>clicked()</signal>
+        <receiver>TVKeyEdit_gen</receiver>
+        <slot>clearTerms()</slot>
+    </connection>
+    <connection>
+        <sender>display</sender>
+        <signal>selectionChanged(QListViewItem*)</signal>
+        <receiver>TVKeyEdit_gen</receiver>
+        <slot>setTerm(QListViewItem *)</slot>
+    </connection>
+    <connection>
+        <sender>keyNameEdit</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>TVKeyEdit_gen</receiver>
+        <slot>updateTerm(const QString &amp;)</slot>
+    </connection>
+    <connection>
+        <sender>keyTypeEdit</sender>
+        <signal>activated(int)</signal>
+        <receiver>TVKeyEdit_gen</receiver>
+        <slot>updateTerm(int)</slot>
+    </connection>
+    <slot access="protected">clearTerms()</slot>
+    <slot access="protected">deleteTerm()</slot>
+    <slot access="protected">newTerm()</slot>
+    <slot access="public">new_slot()</slot>
+    <slot access="protected">setTerm(QListViewItem *)</slot>
+    <slot access="protected">updateTerm(int)</slot>
+    <slot access="protected">updateTerm(const QString &amp;)</slot>
+</connections>
+</UI>

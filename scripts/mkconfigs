@@ -1,0 +1,9 @@
+#!/usr/bin/perl
+
+system('rm -f configs/linux-*');
+for $p ( split /\s+/, `\$QTDIR/util/scripts/mkconfigs -p qws` ) {
+    system("cp \$QTDIR/$p configs");
+    if ( $ARGV[0] eq '-v' ) {
+	print "$p\n";
+    }
+}

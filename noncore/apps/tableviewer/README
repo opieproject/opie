@@ -1,0 +1,29 @@
+Table Viewer;
+
+This application is still in development, very buggy and leaks memory like 
+a sieve.  There are still a few major features/design work to be done.  Once
+The app has settled (i.e. implementation of initial design completed) the 
+focus will switch from features to making the code worthy of Trolltech.  
+This means finding all the memory leaks, possibly some restructoring of code
+for future maintainability and ensuring that the code is readable 
+(reasonable names for classes and vars.)
+
+For convenience there is a db.xml file included that is generated from the 
+CIA World fact book, 11-May-01.  The current version of this file should always work with the current version of the tableviewer application 
+
+Major design work yet to be completed
+
+* ensure that only reasonable controls are enabled.
+* implement delete item & delete keys
+* loading dialogs
+* filterview -> dialog
+* only do sensible things if no keys set. includes;
+	No list view,
+	No filter view,
+	No edit item.
+* Tool bar in both 'views'
+* only build widgets as needed
+* click on scrollview to change key type, (remove key dialog)
+* fix navigate buttons
+
+This README will also be removed once the major design work is done.

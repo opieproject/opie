@@ -1,0 +1,4 @@
+moc_*
+Makefile
+lightsettingsbase.h
+lightsettingsbase.cpp

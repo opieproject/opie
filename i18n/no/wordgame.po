@@ -1,0 +1,88 @@
+# This is a Qt message file in .po format.  Each msgid starts with
+# a scope.  This scope should *NOT* be translated - eg. translating
+# from French to English, "Foo::Bar" would be translated to "Pub",
+# not "Foo::Pub".
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2001-03-07 18:31:18 EST\n"
+"PO-Revision-Date: YYYY-MM-DD\n"
+"Last-Translator: FULLNAME <EMAIL@ADDRESS>\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+
+#: newgamebase.cpp:66
+msgid "NewGameBase::"
+msgstr ""
+
+#: newgamebase.cpp:102
+msgid "NewGameBase::&Cancel"
+msgstr "&Avbryt"
+
+#: newgamebase.cpp:96
+msgid "NewGameBase::&OK"
+msgstr "&OK"
+
+#: newgamebase.cpp:67
+msgid "NewGameBase::AI3: Smart AI player"
+msgstr "AI3: Smart AI-spiller"
+
+#: newgamebase.cpp:19
+msgid "NewGameBase::New Game"
+msgstr "Nytt spill"
+
+#: newgamebase.cpp:26
+msgid "NewGameBase::Players"
+msgstr "Spillere"
+
+#: newgamebase.cpp:73
+msgid "NewGameBase::Rules"
+msgstr "Regler"
+
+#: rulesbase.cpp:93
+msgid "RulesBase::&Cancel"
+msgstr "&Avbryt"
+
+#: rulesbase.cpp:87
+msgid "RulesBase::&OK"
+msgstr "&OK"
+
+#: rulesbase.cpp:41
+msgid "RulesBase::Board"
+msgstr "Brett"
+
+#: rulesbase.cpp:80
+msgid "RulesBase::Delete"
+msgstr "Slett"
+
+#: rulesbase.cpp:68
+msgid "RulesBase::Edit..."
+msgstr "Rediger..."
+
+#: rulesbase.cpp:22
+msgid "RulesBase::Game Rules"
+msgstr "Spilleregler"
+
+#: rulesbase.cpp:33
+msgid "RulesBase::Name:"
+msgstr "Navn:"
+
+#: rulesbase.cpp:52
+msgid "RulesBase::Size:"
+msgstr "Størrelse:"
+
+#: wordgame.cpp:336
+msgid "WordGame::Do you want to end the game early?"
+msgstr "Vil du avslutte spillet?"
+
+#: wordgame.cpp:335
+msgid "WordGame::End game"
+msgstr "Slutt spillet"
+
+#: wordgame.cpp:337
+msgid "WordGame::No"
+msgstr "Nei"
+
+#: wordgame.cpp:337
+msgid "WordGame::Yes"
+msgstr "Ja"
+

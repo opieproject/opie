@@ -1,0 +1,148 @@
+# This is a Qt message file in .po format.  Each msgid starts with
+# a scope.  This scope should *NOT* be translated - eg. translating
+# from French to English, "Foo::Bar" would be translated to "Pub",
+# not "Foo::Pub".
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2001-03-07 14:58:06 EST\n"
+"PO-Revision-Date: YYYY-MM-DD\n"
+"Last-Translator: FULLNAME <EMAIL@ADDRESS>\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+
+#: todoentry.cpp:63
+msgid "NewTaskDialogBase::&Description:"
+msgstr "&Beskrivelse"
+
+#: todoentry.cpp:86
+msgid "NewTaskDialogBase::&Done"
+msgstr "&Ferdig"
+
+#: todoentry.cpp:40
+msgid "NewTaskDialogBase::&Priority:"
+msgstr "&Prioritet"
+
+#: todoentry.cpp:45
+msgid "NewTaskDialogBase::1 - Very High"
+msgstr "1 - Svært Høy"
+
+#: todoentry.cpp:46
+msgid "NewTaskDialogBase::2 - High"
+msgstr "2 - Høy"
+
+#: todoentry.cpp:47
+msgid "NewTaskDialogBase::3 - Normal"
+msgstr "3 - Normal"
+
+#: todoentry.cpp:48
+msgid "NewTaskDialogBase::4 - Low"
+msgstr "4 - Lav"
+
+#: todoentry.cpp:49
+msgid "NewTaskDialogBase::5 - Very Low"
+msgstr "5 - Svært Lav"
+
+#: todoentry.cpp:68
+msgid "NewTaskDialogBase::<Nothing>"
+msgstr "<Ingenting>"
+
+#: todoentry.cpp:57
+msgid "NewTaskDialogBase::Business"
+msgstr ""
+
+#: todoentry.cpp:35
+msgid "NewTaskDialogBase::C&ategory:"
+msgstr "&Kategori"
+
+#: todoentry.cpp:90
+msgid "NewTaskDialogBase::D&ue"
+msgstr "F&rist"
+
+#: todoentry.cpp:71
+msgid "NewTaskDialogBase::Dinner"
+msgstr "Middag"
+
+#: todoentry.cpp:119
+msgid "NewTaskDialogBase::Image"
+msgstr "Bilde"
+
+#: todoentry.cpp:94
+msgid "NewTaskDialogBase::Jan 02 2000"
+msgstr "02 Jan 2000"
+
+#: todoentry.cpp:70
+msgid "NewTaskDialogBase::Lunch"
+msgstr "Lunch"
+
+#: todoentry.cpp:69
+msgid "NewTaskDialogBase::Meeting"
+msgstr "Møte"
+
+#: todoentry.cpp:25
+msgid "NewTaskDialogBase::New Task"
+msgstr "Ny Oppgave"
+
+#: todoentry.cpp:56
+msgid "NewTaskDialogBase::Private"
+msgstr "Privat"
+
+#: todoentry.cpp:110
+msgid "NewTaskDialogBase::Text"
+msgstr "Tekst"
+
+#: todoentry.cpp:72
+msgid "NewTaskDialogBase::Travel"
+msgstr "Reise"
+
+#: todotable.cpp:124
+msgid "TodoTable::C."
+msgstr "K."
+
+#: todotable.cpp:126
+msgid "TodoTable::Description"
+msgstr "Beskrivelse"
+
+#: todotable.cpp:125
+msgid "TodoTable::Prior."
+msgstr "Prior."
+
+#: mainwindow.cpp:140
+msgid "TodoWindow::<Nothing>"
+msgstr "<Ingenting>"
+
+#: mainwindow.cpp:47
+msgid "TodoWindow::Close"
+msgstr "Lukk"
+
+#: mainwindow.cpp:57
+msgid "TodoWindow::Delete"
+msgstr "Slett"
+
+#: mainwindow.cpp:125
+msgid "TodoWindow::Edit Task"
+msgstr "Rediger Oppgave"
+
+#: mainwindow.cpp:49
+msgid "TodoWindow::Edit"
+msgstr "Rediger"
+
+#: mainwindow.cpp:65
+msgid "TodoWindow::File"
+msgstr "Fil"
+
+#: mainwindow.cpp:41
+msgid "TodoWindow::New Task"
+msgstr "Ny Oppgave"
+
+#: mainwindow.cpp:66
+msgid "TodoWindow::Task"
+msgstr "Oppgave"
+
+#: mainwindow.cpp:141
+msgid "TodoWindow::Todo"
+msgstr "Oppgaver"
+
+#: mainwindow.cpp:141
+msgid "TodoWindow::You haven't entered a description!"
+msgstr "Du har ikke skrevet inn en beskrivelse!"
+

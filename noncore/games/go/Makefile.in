@@ -1,0 +1,158 @@
+#############################################################################
+
+####### Compiler, tools and options
+
+CXX	=	$(SYSCONF_CXX) $(QT_CXX_MT)
+CXXFLAGS=	$(SYSCONF_CXXFLAGS_QT) $(SYSCONF_CXXFLAGS)
+CC	=	$(SYSCONF_CC) $(QT_C_MT)
+CFLAGS	=	$(SYSCONF_CFLAGS)
+INCPATH =	-I$(QPEDIR)/include
+LFLAGS	=	$(SYSCONF_LFLAGS_QT) $(SYSCONF_RPATH_QT) $(SYSCONF_LFLAGS) $(QT_LFLAGS_MT)
+LIBS	=	$(SUBLIBS) -lqpe $(SYSCONF_LIBS_QT) $(SYSCONF_LIBS) $(SYSCONF_LIBS_QTAPP)
+MOC	=	$(SYSCONF_MOC)
+UIC	=	$(SYSCONF_UIC)
+
+####### Target
+
+DESTDIR = ../bin/
+VER_MAJ = 1
+VER_MIN = 0
+VER_PATCH = 0
+TARGET	= go
+TARGET1 = lib$(TARGET).so.$(VER_MAJ)
+
+####### Files
+
+HEADERS =	amigo.h \
+		go.h \
+		goplayutils.h \
+		gowidget.h
+SOURCES =	amigo.c \
+		goplayer.c \
+		goplayutils.c \
+		killable.c \
+		gowidget.cpp \
+		main.cpp
+OBJECTS =	amigo.o \
+		goplayer.o \
+		goplayutils.o \
+		killable.o \
+		gowidget.o \
+		main.o
+INTERFACES =    
+UICDECLS =      
+UICIMPLS =      
+SRCMOC	=	moc_gowidget.cpp
+OBJMOC	=	moc_gowidget.o
+
+
+####### Implicit rules
+
+.SUFFIXES: .cpp .cxx .cc .C .c
+
+.cpp.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.cxx.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.cc.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.C.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.c.o:
+	$(CC) -c $(CFLAGS) $(INCPATH) -o $@ $<
+
+####### Build rules
+
+
+all: $(DESTDIR)$(TARGET)
+
+$(DESTDIR)$(TARGET): $(UICDECLS) $(OBJECTS) $(OBJMOC) $(SUBLIBS)
+	$(SYSCONF_LINK) $(LFLAGS) -o $(DESTDIR)$(TARGET) $(OBJECTS) $(OBJMOC) $(LIBS)
+
+moc: $(SRCMOC)
+
+tmake:
+	tmake go.pro
+
+clean:
+	-rm -f $(OBJECTS) $(OBJMOC) $(SRCMOC) $(UICIMPLS) $(UICDECLS)
+	-rm -f *~ core
+	-rm -f allmoc.cpp
+
+####### Extension Modules
+
+listpromodules:
+	@echo 
+
+listallmodules:
+	@echo 
+
+listaddonpromodules:
+	@echo 
+
+listaddonentmodules:
+	@echo 
+
+
+REQUIRES=
+
+####### Sub-libraries
+
+
+###### Combined headers
+
+
+
+####### Compile
+
+amigo.o: amigo.c \
+		go.h \
+		goplayutils.h \
+		amigo.h
+
+goplayer.o: goplayer.c \
+		go.h \
+		goplayutils.h \
+		amigo.h
+
+goplayutils.o: goplayutils.c \
+		goplayutils.h \
+		amigo.h \
+		go.h
+
+killable.o: killable.c \
+		go.h \
+		goplayutils.h \
+		amigo.h
+
+gowidget.o: gowidget.cpp \
+		gowidget.h \
+		amigo.h \
+		go.h \
+		goplayutils.h \
+		$(QPEDIR)/include/qpe/config.h \
+		$(QPEDIR)/include/qpe/resource.h \
+		$(QPEDIR)/include/qpe/qpetoolbar.h \
+		$(QPEDIR)/include/qpe/qpemenubar.h
+
+main.o: main.cpp \
+		gowidget.h \
+		amigo.h \
+		go.h \
+		goplayutils.h \
+		$(QPEDIR)/include/qpe/qpeapplication.h
+
+moc_gowidget.o: moc_gowidget.cpp \
+		gowidget.h \
+		amigo.h \
+		go.h \
+		goplayutils.h
+
+moc_gowidget.cpp: gowidget.h
+	$(MOC) gowidget.h -o moc_gowidget.cpp
+
+

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=A table/database viewer
+Exec=tableviewer
+Type=Application
+Name=Table Viewer
+Name[hu]=Adatbázis nézõ

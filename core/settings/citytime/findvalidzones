@@ -1,0 +1,38 @@
+#!/usr/bin/perl
+
+# A Little utility to help tidy up messy zoneinfo directories.
+
+use File::Find;
+
+find sub {
+    if ( -f $_ ) {
+	my $a;
+	open T, $_;
+	read T, $a, 4;
+	if ( $a eq "TZif" ) {
+	    my $d="$File::Find::dir/$_";
+	    $d =~ s/^.\///;
+	    $D{$d}=1;
+	}
+	close T;
+    }
+}, ".";
+
+open Z, "zone.tab" || die;
+
+while (<Z>) {
+    next if /^#/;
+    if ( ($cc, $north, $east, $z, $comment) = 
+	$_ =~ /^(\S\S)\s+([+-]\d+)([+-]\d+)\s+(\S+)\s*(\S*)/ )
+    {
+	$Z{$z}=1;
+    }
+}
+
+for $d ( sort keys %D ) {
+    print "rm $d\n" if !$Z{$d};
+}
+
+for $z ( sort keys %Z ) {
+    print "zone $z, but no such file\n" if !$D{$z};
+}

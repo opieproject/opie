@@ -1,0 +1,8 @@
+moc_*
+Makefile
+tvbrowseview_gen.h
+tvfilterview_gen.h
+tvkeyedit_gen.h
+tvbrowseview_gen.cpp
+tvfilterview_gen.cpp
+tvkeyedit_gen.cpp

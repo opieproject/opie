@@ -1,0 +1,108 @@
+# This is a Qt message file in .po format.  Each msgid starts with
+# a scope.  This scope should *NOT* be translated - eg. translating
+# from French to English, "Foo::Bar" would be translated to "Pub",
+# not "Foo::Pub".
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2001-02-23 18:22:10 EST\n"
+"PO-Revision-Date: YYYY-MM-DD\n"
+"Last-Translator: FULLNAME <EMAIL@ADDRESS>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: textedit.cpp:110
+msgid "TextEdit::Edit"
+msgstr "편집"
+
+#: textedit.cpp:109
+msgid "TextEdit::File"
+msgstr "파일"
+
+#: textedit.cpp:102
+msgid "TextEdit::Insert"
+msgstr "삽입"
+
+#: textedit.cpp:115
+msgid "TextEdit::Bold"
+msgstr ""
+
+#: textedit.cpp:191
+msgid "TextEdit::Bullet List"
+msgstr ""
+
+#: textedit.cpp:140
+msgid "TextEdit::Center"
+msgstr ""
+
+#: textedit.cpp:170
+msgid "TextEdit::Close Find"
+msgstr ""
+
+#: textedit.cpp:69
+msgid "TextEdit::Close"
+msgstr "닫기"
+
+#: textedit.cpp:79
+msgid "TextEdit::Copy"
+msgstr "복사"
+
+#: textedit.cpp:74
+msgid "TextEdit::Cut"
+msgstr "자르기"
+
+#: textedit.cpp:194
+msgid "TextEdit::Enumerated List"
+msgstr ""
+
+#: textedit.cpp:94
+msgid "TextEdit::Find Next"
+msgstr "다음 찾기"
+
+#: textedit.cpp:89
+msgid "TextEdit::Find..."
+msgstr "찾기..."
+
+#: textedit.cpp:120
+msgid "TextEdit::Italic"
+msgstr ""
+
+#: textedit.cpp:134
+msgid "TextEdit::Left"
+msgstr ""
+
+#: textedit.cpp:61
+msgid "TextEdit::New"
+msgstr "새로운"
+
+#: textedit.cpp:65
+msgid "TextEdit::Open"
+msgstr "열기"
+
+#: textedit.cpp:84
+msgid "TextEdit::Paste"
+msgstr "붙여넣기"
+
+#: textedit.cpp:145
+msgid "TextEdit::Right"
+msgstr ""
+
+#: textedit.cpp:188
+msgid "TextEdit::Standard"
+msgstr ""
+
+#: textedit.cpp:104
+msgid "TextEdit::Table..."
+msgstr ""
+
+#: textedit.cpp:570
+msgid "TextEdit::Text Editor"
+msgstr "글월 편집기"
+
+#: textedit.cpp:125
+msgid "TextEdit::Underline"
+msgstr ""
+
+#: textedit.cpp:569
+msgid "TextEdit::Unnamed"
+msgstr "이름없음"
+

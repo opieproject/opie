@@ -1,0 +1,10 @@
+Files: bin/wordgame apps/Games/wordgame.desktop
+Priority: optional
+Section: qpe/games
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-3
+Depends: qpe-base ($QPE_VERSION)
+Description: Crossword game
+ A crossword game for the Qtopia environment.
+ Play against the computer or human opponents.

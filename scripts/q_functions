@@ -1,0 +1,232 @@
+#!/bin/sh
+#
+# Common helper functions used by the other scripts
+#
+# Copyright 1999-2000 Trolltech AS.  All rights reserved.
+#
+
+
+function print_example_usage
+{
+cat << END
+Example of what you do:
+ ~/qpe$ q_add_application foo Foo MyFooBarApp "A FooBar Application"
+ ~/qpe$ cd foo
+ ~/qpe/foo$ q_add_class foo Bar
+ ~/qpe/foo$ q_add_function public: void Bar::barFoo "( int a, int b )"
+ ~/qpe/foo$ q_add_variable private: int Bar::fooBarInt
+END
+}
+
+
+function print_copyright_header
+{
+cat << END
+/**********************************************************************
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+**
+** This file is part of Qtopia Environment.
+**
+** This file may be distributed and/or modified under the terms of the
+** GNU General Public License version 2 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.
+**
+** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+**
+** See http://www.trolltech.com/gpl/ for GPL licensing information.
+**
+** Contact info@trolltech.com if any conditions of this licensing are
+** not clear to you.
+**
+**********************************************************************/
+END
+}
+
+
+function print_main_file
+{
+print_copyright_header
+cat << END
+#include <qpeapplication.h>
+#include <qmainwindow.h>
+#include "$NEW_CLASS_HEADER_FILE"
+
+
+int main( int argc, char ** argv )
+{
+    QPEApplication a( argc, argv );
+
+    $NEW_CLASS_NAME *m = new $NEW_CLASS_NAME();
+    a.setMainWidget( m );
+    m->show();
+
+    return a.exec();
+}
+END
+}
+
+
+function print_source_file
+{
+print_copyright_header
+cat << END
+#include <qwidget.h>
+#include <pixmaploader.h>
+#include "$NEW_CLASS_HEADER_FILE"
+
+
+$NEW_CLASS_NAME::$NEW_CLASS_NAME( QWidget *parent=0, const char *name=0, WFlags f = 0) :
+    QWidget( parent, name, f )
+{
+}
+
+
+void $NEW_CLASS_NAME::exampleFunction( )
+{
+}
+END
+}
+
+
+function print_header_file
+{
+print_copyright_header
+cat << END
+#ifndef $NEW_CLASS_HEADER_DEFINE
+#define $NEW_CLASS_HEADER_DEFINE
+
+
+#include <qwidget.h>
+
+
+class $NEW_CLASS_NAME : public QWidget
+{
+Q_OBJECT
+public:
+    $NEW_CLASS_NAME( QWidget *parent=0, const char *name=0, WFlags f = 0);
+protected:
+    void exampleFunction( );
+private:
+    int exampleVariable;
+};
+
+
+#endif // $NEW_CLASS_HEADER_DEFINE
+END
+}
+
+
+function print_pro_file
+{
+cat << END
+TEMPLATE	= app
+CONFIG		= qt warn_on release
+DESTDIR		= ../bin
+HEADERS		= $NEW_CLASS_HEADER_FILE
+SOURCES		= $NEW_CLASS_SOURCE_FILE $NEW_APP_MAIN_FILE
+INTERFACES	= 
+INCLUDEPATH	+= ../library
+DEPENDPATH	+= ../library
+LIBS            += -lqpe
+TARGET		= $NEW_APP_NAME
+END
+}
+
+
+function print_install_file
+{
+cat << END
+#!/bin/sh
+if [ a\$QPEDIR = a ]
+then
+echo QPEDIR must be set
+exit
+fi
+[ -f \$QPEDIR/pics/$NEW_APP_ICON_FILE ] || cp $NEW_APP_ICON_FILE \$QPEDIR/pics/
+[ -f \$QPEDIR/apps/$NEW_APP_DESKTOP_FILE ] || cp $NEW_APP_DESKTOP_FILE \$QPEDIR/apps/
+mv \$QPEDIR/Makefile \$QPEDIR/Makefile.orig
+sed "s/APPS=/&$NEW_APP_NAME \\\\\\\\ \\\\
+    /" \$QPEDIR/Makefile.orig >> \$QPEDIR/Makefile
+echo You may wish to move the desktop file in to
+echo an appropriate subdirectory of the menus.
+END
+}
+
+
+function print_desktop_file
+{
+cat << END
+[Desktop Entry]
+Type=Application
+Exec=$NEW_APP_NAME
+Icon=$NEW_APP_ICON_FILE
+Name=$NEW_APP_MENU_NAME
+Comment=$NEW_APP_DESCRIPTION
+END
+}
+
+
+function print_icon_file
+{
+XPM_NAME="$NEW_APP_NAME"_xpm
+cat << END
+/* XPM */
+static char *$XPM_NAME[] = {
+"14 14 3 1",
+" 	c None",
+".	c #000000",
+"a	c #FFFFFF",
+"              ",
+" aaaaaaaaaaaa ",
+" a..........a ",
+" a..aaaaaa..a ",
+" a.a.aaaa.a.a ",
+" a.aa.aa.aa.a ",
+" a.aaa..aaa.a ",
+" a.aaa..aaa.a ",
+" a.aa.aa.aa.a ",
+" a.a.aaaa.a.a ",
+" a..aaaaaa..a ",
+" a..........a ",
+" aaaaaaaaaaaa ",
+"              "};
+END
+}
+
+
+function add_class_to_pro_file
+{
+cat << END
+HEADERS		+= $NEW_CLASS_HEADER_FILE
+SOURCES		+= $NEW_CLASS_SOURCE_FILE
+END
+}
+
+
+function get_number_of_lines
+{
+# Get the number of lines in the file
+LINES=`wc -l $ORIGINAL_CLASS_HEADER_FILE | cut -d " " -f 6`
+}
+
+
+function get_first_line_of_class_definition
+{
+# First look for class definition with Q_OBJECT a few lines below
+LINE=`grep -n -A 3 "class $EXISTING_CLASS_NAME " $ORIGINAL_CLASS_HEADER_FILE | grep "Q_OBJECT" | cut -d "-" -f 1`
+if [ -z "$LINE" ]
+then
+# else look for class definition with open brace on same line
+LINE=`grep -n "class $EXISTING_CLASS_NAME.*[{]" $ORIGINAL_CLASS_HEADER_FILE | cut -d ":" -f 1`
+#elif doesn't work here
+fi;if [ -z "$LINE" ]
+then
+# else look for class with open brace a few lines below
+LINE=`grep -n -A 3 "class $EXISTING_CLASS_NAME " $ORIGINAL_CLASS_HEADER_FILE | grep "\-.*[{]" | cut -d "-" -f 1`
+#elif doesn't work here
+fi
+}
+
+

@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Keystone README</title>
+  </head>
+
+  <body>
+    <h1>Keystone README</h1>
+        <div align="justify"> <!-- #BeginEditable "Body" -->
+          <h3>Contents</h3>
+          <ul>
+            <li><a href="#whatisvnc">What is Keystone?</a></li>
+            <li><a href="#servers">Servers</a></li>
+            <li><a href="#status">Status</a></li>
+            <li><a href="#bugs">Bugs</a></li>
+            <li><a href="#download">Download</a></li>
+            <li><a href="#faq">FAQs</a></li>
+            <li><a href="#todo">Todo</a></li>
+            <li><a href="#credits">Credits</a></li>
+            <li><a href="#references">References</a></li>
+          </ul>
+          <h3><a name="whatiskvnc">What is Keystone?</a></h3>
+          <p>Keystone is a tool for <a href="http://www.kde.org/">KDE</a> that
+            allows you to remotely access the desktops of machines using the cross-platform
+            VNC system. Keystone can access machines running a variety of operating
+            systems (including most UNIX systems and Windows 95/98/NT/2000) providing
+            they are running a VNC server. Note that Keystone is only a client
+            program, you will need to download a server separately in order to
+            use it.</p>
+          <p>The protocol used by Keystone (called RFB) was developed, and released
+            as GPL by ORL (now the UK branch of AT&amp;T research), they also
+            wrote and maintain GPL servers for several platforms. You can find
+            both information about the protocol and links to servers for a range
+            of platforms on their <a href="http://www.uk.research.att.com/vnc/">website</a>.</p>
+          <p>Keystone started life as a port of Markus Wuebben's kvncviewer program
+            to KDE 2, but in the course porting the code, I have rewritten and
+            redesigned most of the system. The new implementation builds on several
+            new facilities that were not available in KDE 1, such as KPixmapIO
+            and QSocket. There is so little of the original code left that I have
+            decided on a name change, and to put the version number back to 0.1.</p>
+          <p>You can see a few screenshots of <a href="http://www.ipso-facto.demon.co.uk/keystone/screenshots.html">Keystone
+            in action</a> on my screenshots page. The screenshots may or may not
+            reflect the look of the current version as I have some look and feel
+            improvements planned.</p>
+          <h3><a name="servers">Servers</a></h3>
+          <p>Most Linux distributions include the standard Xvnc server (usually
+            run via the <i>vncserver</i> script), you can also download this and
+            servers for other platforms such as MS Windows from the <a href="http://www.uk.research.att.com/vnc/">VNC
+            website</a>. If you have a problem with setting up a server then you
+            should read the <a href="http://www.uk.research.att.com/vnc/faq.html">VNC
+            FAQ</a>, and if that does not help join the VNC mailing list. Do not
+            mail me on this topic - I can't help and won't even reply.</p>
+          <p>I may in future write a server that operates in the same manner as
+            the Win32 server for KDE. The Win32 server differs from the X11 server
+            in that it does not virtualise the entire desktop. This has both advantages
+            and disadvatages, it means that you can make an existing session available
+            over the network, but only allows you to run a single server. I may
+            also put a GUI together that makes it easy to configure the ORL server.</p>
+          <h3><a name="status">Status</a></h3>
+          <p><font color="#000000">The current version is 0.4, and the following
+            are now working:</font></p>
+          <p>
+          <ul>
+            <li><b>0.1</b>
+              <ul>
+                <li>Non-blocking socket handling</li>
+                <li>Authentication and logon</li>
+                <li>KDE 2 user interface</li>
+                <li>Raw and CopyRect encodings</li>
+                <li>Full screen mode</li>
+                <li>Grab keyboard mode</li>
+                <li>Graphics</li>
+                <li>Taking screenshots of the remote desktop</li>
+                <li>Event dispatching</li>
+                <li>Konqueror helper application support (you can run Keystone
+                  by entering a vnc: URL anywhere in KDE).</li>
+                <li>Options, login, password and about dialogs</li>
+              </ul>
+            </li>
+            <li><b>0.2</b>
+              <ul>
+                <li>XSHM support using KPixmapIO</li>
+                <li>Now uses KXMLGUI (thanks to Kurt)</li>
+                <li>Tru64 patch from Tom Leitner</li>
+                <li>Status reporting improvements</li>
+                <li>Config handling fixed</li>
+                <li>Recent connections list implemented</li>
+                <li>Update frequency respected</li>
+              </ul>
+            </li>
+            <li><b>0.3 [KDE 2.0]</b>
+              <ul>
+                <li>Portability fixes for FreeBSD (and maybe others)</li>
+              </ul>
+            </li>
+            <li><b>0.4</b>
+              <ul>
+                <li>Icons for the full screen mode now reflect the current state</li>
+                <li>Added a toolbar (optional of course)</li>
+                <li>Added support for the clipboard (you can cut and paste between the
+                local and remote machines)</li>
+                <li>Added some what's this help to the options dialog</li>
+              </ul>
+            </li>
+          </ul>
+          <h3><a name="bugs">Bugs</a></h3>
+          <p>Version 0.4 contains the following known bugs:
+          <ul>
+            <li><b>Custom about dialog is not shown</b><br>
+            I can't see a clean way to fix this without creating a complete custom
+            help menu. For now I've left the standard about dialog in place.
+            </li>
+            <li><b>Crash when you connect to a non-existant server</b><br>
+            I can reproduce this every time, but I can't figure out what's wrong
+            other developers have reported similar problems and they seem to be
+            down to QSocket. The only known fix so far is to use KSocket instead.
+            I'd prefer to fix the problem at the source, but I'm having no luck and
+            I suspect QSocket may also be causing some other weird network issues
+            I've seen, so if I can't track down the bug soon I'll give in and switch
+            to KSocket like everyone else.
+            </li>
+          </ul>
+          </p>
+          <h3><a name="download"></a>Download</h3>
+          <p>Keystone is available in the kdenetwork module of the
+          <a href="http://www.kde.org/anoncvs.html">KDE CVS</a>, and
+            is included in the KDE 2.0 release. The current version is 0.4.
+            Note that Keystone <b>requires KDE 2</b>, you cannot use KDE 1.x.</p>
+          <h3><a name="faq"></a>FAQs</h3>
+          <p>
+          <ul>
+            <li><b>Why don't the shortcut keys work in full screen mode?</b><br>
+              When you're in full screen mode Keystone grabs the keyboard to send
+              every key press to the remote screen. This means that you can send key
+              combinations that are used by Keystone or KDE to the remote screen. If
+              you really hate it, then you can add -nograb to the command line
+              arguments to disable all keyboard grabs. I will add an option to allow
+              this behaviour to be overridden in a future release.
+            </li>
+            <li><b>Why is Keystone so slow?</b><br>
+              Currently only the simplest of the RFB encodings are supported, this
+              means that Keystone is only useful on fairly fast networks. This is
+              a serious bug and is being addressed.
+          </ul>
+          </p>
+          <h3><a name="todo">Todo</a></h3>
+          These are the things I'm hoping to add to future versions of Keystone.
+          They're vaguely sorted in order of importance.
+          <p>
+          <ul>
+            <li>RRE encoding.<br>
+             I've started this, but the implementation has some
+              bugs so it did not make the cut for Keystone 0.3.</li>
+            <li>CoRRE and Hextile encodings</li>
+            <li>Session management</li>
+            <li>Support for Windows Terminal Server.<br>
+            There is now a GPL implementation
+            of the protocol, and the author is happy for me to use the code. If someone
+            can offer me an account to test it on then this is possible.</li>
+            <li>Zoom support.<br>
+             This will be handled using the same protocol extension
+              as is used in the Palm client, this will allow you to make use of
+              server side scaling to reduce the amount of network traffic. You
+              will also be able to do client side zooms, but in this case the
+              full screen needs to transmitted over the network.</li>
+            <li>Macros</li>
+            <li>Monitor mode (thumbnails of several machines)</li>
+            <li>ZLib extension support</li>
+            <li>Bookmarks</li>
+            <li>URL specific settings</li>
+            <li>Possibly a DnD extension using a mechanism based on mulitpart
+              MIME attachments.</li>
+          </ul>
+          <h3>Credits<a name="credits"></a></h3>
+          <p>Keystone owes a lot to Markus Wuebben's kvncviewer which some of
+            the code is derived from. Thanks are also due to Espen Sand the author
+            of khexedit from which I borrowed some code for the about dialog.
+            Alison Burch drew the bridge image used in the background of this
+            page (and in future versions of Keystone too of course). Finally thanks
+            go to ORL for making the RFB protocol and servers GPL.</p>
+          <h3><a name="references">References</a><br>
+          </h3>
+          <p>
+          <ul>
+            <li>The Keystone homepage<br>
+            <a href="http://www.ipso-facto.demon.co.uk/keystone/">http://www.ipso-facto.demon.co.uk/keystone/</a></li>
+            <li>The VNC Homepage<br>
+              <a href="http://www.uk.research.att.com/vnc/">http://www.uk.research.att.com/vnc/</a></li>
+            <li>The VNC FAQ<br>
+              <a href="http://www.uk.research.att.com/vnc/faq.html">http://www.uk.research.att.com/vnc/faq.html</a></li>
+            <li>The KDE Homepage<br>
+              <a href="http://www.kde.org/">http://www.kde.org/</a> </li>
+          </ul>
+          <p></p>
+          <!-- #EndEditable --> </div>
+
+
+
+    <hr>
+    <address><a href="mailto:rich@kde.org">Richard Moore</a></address>
+<!-- Created: Tue Dec  5 01:35:56 GMT 2000 -->
+<!-- hhmts start -->
+Last modified: Tue Dec  5 01:37:17 GMT 2000
+<!-- hhmts end -->
+  </body>
+</html>

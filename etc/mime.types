@@ -1,0 +1,126 @@
+application/activemessage
+application/andrew-inset	ez
+application/applefile
+application/atomicmail
+application/cu-seeme		csm cu
+application/dca-rft
+application/dec-dx
+application/excel		xls
+application/ghostview		
+application/ipkg	ipk
+application/mac-binhex40	hqx
+application/mac-compactpro	cpt
+application/macwriteii
+application/msword		doc dot wrd
+application/news-message-id
+application/news-transmission
+application/octet-stream	bin dms lha lzh exe class
+application/oda			oda
+application/pdf			pdf
+application/pgp			pgp
+application/pgp-signature	pgp
+application/postscript		ai eps ps
+application/powerpoint		ppt
+application/remote-printing
+application/rtf			rtf
+application/slate
+application/wita
+application/wordperfect5.1	wp5
+application/x-123		wk
+application/x-Wingz		wz
+application/x-bcpio		bcpio
+application/x-cdlink		vcd
+application/x-chess-pgn		pgn
+application/x-compress		z Z
+application/x-cpio		cpio
+application/x-csh		csh
+application/x-debian-package	deb
+application/x-director		dcr dir dxr
+application/x-dvi		dvi
+application/x-gtar		gtar tgz
+application/x-gunzip		gz
+application/x-gzip		gz
+application/x-hdf		hdf
+application/x-httpd-php		phtml pht php
+application/x-javascript	js
+application/x-koan		skp skd skt skm
+application/x-latex		latex
+application/x-maker		frm maker frame fm fb book fbdoc
+application/x-mif		mif
+application/x-msdos-program	com exe bat
+application/x-netcdf		nc cdf
+application/x-ns-proxy-autoconfig	pac
+application/x-perl		pl pm
+application/x-sh		sh
+application/x-shar		shar
+application/x-stuffit		sit
+application/x-sv4cpio		sv4cpio
+application/x-sv4crc		sv4crc
+application/x-tar		tar
+application/x-tcl		tcl
+application/x-tex		tex
+application/x-texinfo		texinfo texi
+application/x-troff		t tr roff
+application/x-troff-man		man
+application/x-troff-me		me
+application/x-troff-ms		ms
+application/x-ustar		ustar
+application/x-wais-source	src
+application/zip			zip
+audio/prs.sid			sid psid
+audio/basic			au snd
+audio/midi			mid midi kar
+audio/mpeg			mpga mp2 mp3
+audio/x-aiff			aif aifc aiff
+audio/x-pn-realaudio		ra ram
+audio/x-pn-realaudio-plugin
+audio/x-realaudio		ra
+audio/x-wav			wav
+chemical/x-pdb			pdb xyz
+image/gif			gif
+image/ief			ief
+image/jpeg			jpeg jpg jpe
+image/png			png
+image/tiff			tiff tif
+image/x-bmp			bmp
+image/x-cmu-raster		ras
+image/x-portable-anymap		pnm
+image/x-portable-bitmap		pbm
+image/x-portable-graymap	pgm
+image/x-portable-pixmap		ppm
+image/x-rgb			rgb
+image/x-xbitmap			xbm
+image/x-xpixmap			xpm
+image/x-xwindowdump		xwd
+message/external-body
+message/news
+message/partial
+message/rfc822
+model/iges			igs iges
+model/mesh			msh mesh silo
+model/vrml			wrl vrml
+multipart/alternative
+multipart/appledouble
+multipart/digest
+multipart/mixed
+multipart/parallel
+text/css			css
+text/html			html htm
+text/plain			asc txt c cc h hh cpp hpp
+text/richtext			rtx
+text/tab-separated-values	tsv
+text/x-setext			etx
+text/x-sgml			sgml sgm
+text/x-vCalendar		vcs
+text/x-vCard			vcf
+text/x-xml-tableviewer		xmlt
+text/xml			xml dtd
+video/dl			dl
+video/fli			fli
+video/gl			gl
+video/mpeg			mp2 mpe mpeg mpg
+video/quicktime			qt mov
+video/x-msvideo			avi
+video/x-sgi-movie		movie
+x-conference/x-cooltalk		ice
+x-world/x-vrml			wrl vrml

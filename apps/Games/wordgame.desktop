@@ -1,0 +1,9 @@
+[Desktop Entry]
+Comment=A word arranging game
+Exec=wordgame
+Icon=WordGame
+Type=Application
+Name=Word Game
+Name[no]=Kryss-Ord
+Name[de]=Wortspiel
+Name[hu]=Szójáték

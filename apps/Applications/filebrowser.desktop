@@ -1,0 +1,10 @@
+[Desktop Entry]
+Comment = A File Manager Program
+Exec = filebrowser
+File = ../apps/Applications/filebrowser
+Icon = FileBrowser
+Name = File Manager
+Name[de] = Datei Manager
+Name[no] = Filviser
+Type = Application
+Name[hu]=Intézõ

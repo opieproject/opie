@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=A Board Strategy Game
+Exec=go
+Icon=Go
+Type=Application
+Name=Go

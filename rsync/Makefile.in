@@ -1,0 +1,391 @@
+#############################################################################
+
+####### Compiler, tools and options
+
+CXX	=	$(SYSCONF_CXX) $(QT_CXX_MT)
+CXXFLAGS=	$(SYSCONF_CXXFLAGS_QT) $(SYSCONF_CXXFLAGS) $(SYSCONF_CXXFLAGS_LIB)
+CC	=	$(SYSCONF_CC) $(QT_C_MT)
+CFLAGS	=	$(SYSCONF_CFLAGS) $(SYSCONF_CFLAGS_LIB)
+INCPATH =	-I.
+LFLAGS	=	$(SYSCONF_LFLAGS_QT) $(SYSCONF_RPATH_QT) $(SYSCONF_LFLAGS) $(QT_LFLAGS_MT)
+LIBS	=	$(SUBLIBS) $(SYSCONF_LIBS_QT) $(SYSCONF_LIBS_QTAPP)
+MOC	=	$(SYSCONF_MOC)
+UIC	=	$(SYSCONF_UIC)
+
+####### Target
+
+DESTDIR = $(QTDIR)/lib$(PROJMAK)/
+VER_MAJ = 1
+VER_MIN = 0
+VER_PATCH = 0
+TARGET	= rsync
+TARGET1 = lib$(TARGET).so.$(VER_MAJ)
+
+####### Files
+
+HEADERS =	buf.h \
+		checksum.h \
+		command.h \
+		emit.h \
+		fileutil.h \
+		job.h \
+		netint.h \
+		protocol.h \
+		prototab.h \
+		rsync.h \
+		search.h \
+		stream.h \
+		sumset.h \
+		trace.h \
+		types.h \
+		util.h \
+		whole.h \
+		config.h
+SOURCES =	base64.c \
+		buf.c \
+		checksum.c \
+		command.c \
+		delta.c \
+		emit.c \
+		fileutil.c \
+		hex.c \
+		job.c \
+		mdfour.c \
+		mksum.c \
+		msg.c \
+		netint.c \
+		patch.c \
+		prototab.c \
+		readsums.c \
+		scoop.c \
+		search.c \
+		stats.c \
+		stream.c \
+		sumset.c \
+		trace.c \
+		tube.c \
+		util.c \
+		version.c \
+		whole.c
+OBJECTS =	base64.o \
+		buf.o \
+		checksum.o \
+		command.o \
+		delta.o \
+		emit.o \
+		fileutil.o \
+		hex.o \
+		job.o \
+		mdfour.o \
+		mksum.o \
+		msg.o \
+		netint.o \
+		patch.o \
+		prototab.o \
+		readsums.o \
+		scoop.o \
+		search.o \
+		stats.o \
+		stream.o \
+		sumset.o \
+		trace.o \
+		tube.o \
+		util.o \
+		version.o \
+		whole.o
+INTERFACES =    
+UICDECLS =      
+UICIMPLS =      
+SRCMOC	=	
+OBJMOC	=	
+
+
+####### Implicit rules
+
+.SUFFIXES: .cpp .cxx .cc .C .c
+
+.cpp.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.cxx.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.cc.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.C.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.c.o:
+	$(CC) -c $(CFLAGS) $(INCPATH) -o $@ $<
+
+####### Build rules
+
+
+all: $(DESTDIR)$(SYSCONF_LINK_TARGET)
+
+$(DESTDIR)$(SYSCONF_LINK_TARGET): $(UICDECLS) $(OBJECTS) $(OBJMOC) $(SUBLIBS)
+	$(SYSCONF_LINK_LIB)
+
+moc: $(SRCMOC)
+
+tmake: Makefile.in
+
+Makefile.in: rsync.pro
+	tmake rsync.pro -o Makefile.in
+
+clean:
+	-rm -f $(OBJECTS) $(OBJMOC) $(SRCMOC) $(UICIMPLS) $(UICDECLS)
+	-rm -f *~ core
+	-rm -f allmoc.cpp
+
+####### Extension Modules
+
+listpromodules:
+	@echo 
+
+listallmodules:
+	@echo 
+
+listaddonpromodules:
+	@echo 
+
+listaddonentmodules:
+	@echo 
+
+
+REQUIRES=
+
+####### Sub-libraries
+
+
+###### Combined headers
+
+
+
+####### Compile
+
+base64.o: base64.c \
+		config.h \
+		config_linux.h \
+		rsync.h
+
+buf.o: buf.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		trace.h \
+		buf.h \
+		util.h
+
+checksum.o: checksum.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		checksum.h
+
+command.o: command.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		command.h
+
+delta.o: delta.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		emit.h \
+		stream.h \
+		util.h \
+		sumset.h \
+		job.h \
+		trace.h \
+		checksum.h \
+		search.h \
+		types.h
+
+emit.o: emit.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		command.h \
+		protocol.h \
+		trace.h \
+		emit.h \
+		prototab.h \
+		netint.h \
+		sumset.h \
+		job.h
+
+fileutil.o: fileutil.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		fileutil.h \
+		trace.h
+
+hex.o: hex.c \
+		config.h \
+		config_linux.h \
+		rsync.h
+
+job.o: job.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		stream.h \
+		util.h \
+		sumset.h \
+		job.h \
+		trace.h
+
+mdfour.o: mdfour.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		trace.h \
+		types.h
+
+mksum.o: mksum.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		stream.h \
+		util.h \
+		sumset.h \
+		job.h \
+		protocol.h \
+		netint.h \
+		trace.h \
+		checksum.h
+
+msg.o: msg.c \
+		config.h \
+		config_linux.h \
+		rsync.h
+
+netint.o: netint.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		job.h \
+		netint.h \
+		trace.h \
+		stream.h
+
+patch.o: patch.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		util.h \
+		trace.h \
+		protocol.h \
+		netint.h \
+		command.h \
+		sumset.h \
+		prototab.h \
+		stream.h \
+		job.h
+
+prototab.o: prototab.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		protocol.h \
+		command.h \
+		prototab.h
+
+readsums.o: readsums.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		sumset.h \
+		job.h \
+		trace.h \
+		netint.h \
+		protocol.h \
+		util.h \
+		stream.h
+
+scoop.o: scoop.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		job.h \
+		stream.h \
+		trace.h \
+		util.h
+
+search.o: search.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		trace.h \
+		util.h \
+		sumset.h \
+		search.h \
+		checksum.h
+
+stats.o: stats.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		trace.h
+
+stream.o: stream.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		stream.h \
+		util.h \
+		trace.h
+
+sumset.o: sumset.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		sumset.h \
+		util.h \
+		trace.h
+
+trace.o: trace.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		util.h \
+		trace.h
+
+tube.o: tube.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		trace.h \
+		util.h \
+		job.h \
+		stream.h
+
+util.o: util.c \
+		config.h \
+		config_linux.h \
+		util.h \
+		rsync.h \
+		trace.h
+
+version.o: version.c \
+		config.h \
+		config_linux.h \
+		rsync.h
+
+whole.o: whole.c \
+		config.h \
+		config_linux.h \
+		rsync.h \
+		trace.h \
+		fileutil.h \
+		sumset.h \
+		job.h \
+		buf.h \
+		whole.h \
+		util.h
+
+

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Comment=A World Clock and Time Zone Editor
+Exec=citytime
+Icon=CityTime
+Type=Application
+Name=City Time
+Name[no]=Verdensur
+Name[de]=Weltzeituhr
+Name[ja]=世界時計
+Name[hu]=Idõzóna

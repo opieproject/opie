@@ -1,0 +1,8 @@
+Files: ipaq/etc
+Priority: optional
+Section: qpe/system
+Maintainer: Trenton Schulz <twschulz@trolltech.com>
+Architecture: arm
+Version: 1.0
+Depends: none
+Description: PPP configuration file needed for Windows 2000 and syncing

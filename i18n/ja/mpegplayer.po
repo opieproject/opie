@@ -1,0 +1,44 @@
+# This is a Qt message file in .po format.  Each msgid starts with
+# a scope.  This scope should *NOT* be translated - eg. translating
+# from French to English, "Foo::Bar" would be translated to "Pub",
+# not "Foo::Pub".
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2001-03-07 14:56:12 EST\n"
+"PO-Revision-Date: 2001-05-14\n"
+"Last-Translator: Oliver M. Bolzer <oliver@gol.com>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: mpegplayer.cpp:78
+msgid "MpegPlayer::1:1"
+msgstr "1:1"
+
+#: mpegplayer.cpp:62
+msgid "MpegPlayer::Fullscreen"
+msgstr "フルスクリーン"
+
+#: mpegplayer.cpp:92
+msgid "MpegPlayer::Loop"
+msgstr "繰り返し"
+
+#: mpegplayer.cpp:132
+msgid "MpegPlayer::MPEG Player"
+msgstr "MPEGプレイヤー"
+
+#: mpegplayer.cpp:73
+msgid "MpegPlayer::Mute"
+msgstr "ミュート"
+
+#: mpegplayer.cpp:58
+msgid "MpegPlayer::Open"
+msgstr "開く"
+
+#: mpegplayer.cpp:84
+msgid "MpegPlayer::Play"
+msgstr "再生"
+
+#: mpegplayer.cpp:88
+msgid "MpegPlayer::Stop"
+msgstr "停止"
+

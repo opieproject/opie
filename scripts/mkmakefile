@@ -1,0 +1,23 @@
+#!/bin/sh
+
+if [ $# -lt 1 ]
+then
+    echo "Usage: mkmakefile <dir> ..."
+    exit 1
+fi
+
+while [ $# -gt 0 ]
+do
+    DIR=`echo $1 | sed -e 's/\/$//'`
+    echo "Making $DIR/Makefile.in..."
+    H=`pwd`
+    cd $DIR
+    FILE=`basename $DIR`
+    TMAKEPATH=$QTDIR/tmake:$TMAKEPATH tmake CONFIG+=embedded -t $H/qt/tmake/propagate.t -o Makefile.in $FILE.pro
+    echo "Done."
+    shift
+    cd -
+done
+
+exit 0
+

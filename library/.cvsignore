@@ -1,0 +1,13 @@
+moc_*
+*.moc
+Makefile
+proxiesbase_p.h
+proxiesbase_p.cpp
+passwordbase_p.h
+passwordbase_p.cpp
+categoryeditbase_p.cpp
+categoryeditbase_p.h
+findwidgetbase_p.cpp
+findwidgetbase_p.h
+lnkpropertiesbase_p.cpp
+lnkpropertiesbase_p.h

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Comment=An Address Book Program
+Exec=addressbook
+Icon=AddressBook
+Type=Application
+Name=Contacts
+Name[no]=Adressebok
+Name[de]=Adressbuch
+Name[hu]=Címtár

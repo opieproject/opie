@@ -1,0 +1,9 @@
+Files: bin/qipkg apps/Settings/qipkg.desktop
+Priority: optional
+Section: qpe/settings
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-3
+Depends: qpe-base ($QPE_VERSION)
+Description: Package Manager
+ A GUI front-end to ipkg for the Qtopia environment.

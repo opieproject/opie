@@ -1,0 +1,285 @@
+#############################################################################
+
+####### Compiler, tools and options
+
+CXX	=	$(SYSCONF_CXX) $(QT_CXX_MT)
+CXXFLAGS=	$(SYSCONF_CXXFLAGS_QT) $(SYSCONF_CXXFLAGS)
+CC	=	$(SYSCONF_CC) $(QT_C_MT)
+CFLAGS	=	$(SYSCONF_CFLAGS)
+INCPATH =	-I$(QPEDIR)/include
+LFLAGS	=	$(SYSCONF_LFLAGS_QT) $(SYSCONF_RPATH_QT) $(SYSCONF_LFLAGS) $(QT_LFLAGS_MT)
+LIBS	=	$(SUBLIBS) -lqpe $(SYSCONF_LIBS_QT) $(SYSCONF_LIBS) $(SYSCONF_LIBS_QTAPP)
+MOC	=	$(SYSCONF_MOC)
+UIC	=	$(SYSCONF_UIC)
+
+####### Target
+
+DESTDIR = $(QPEDIR)/bin/
+VER_MAJ = 1
+VER_MIN = 0
+VER_PATCH = 0
+TARGET	= embeddedkonsole
+TARGET1 = lib$(TARGET).so.$(VER_MAJ)
+
+####### Files
+
+HEADERS =	TEWidget.h \
+		TEScreen.h \
+		TECommon.h \
+		TEHistory.h \
+		TEmulation.h \
+		TEmuVt102.h \
+		session.h \
+		keytrans.h \
+		konsole.h \
+		MyPty.h
+SOURCES =	TEScreen.cpp \
+		TEWidget.cpp \
+		TEHistory.cpp \
+		TEmulation.cpp \
+		TEmuVt102.cpp \
+		session.cpp \
+		keytrans.cpp \
+		konsole.cpp \
+		main.cpp \
+		MyPty.cpp
+OBJECTS =	TEScreen.o \
+		TEWidget.o \
+		TEHistory.o \
+		TEmulation.o \
+		TEmuVt102.o \
+		session.o \
+		keytrans.o \
+		konsole.o \
+		main.o \
+		MyPty.o
+INTERFACES =    
+UICDECLS =      
+UICIMPLS =      
+SRCMOC	=	moc_TEWidget.cpp \
+		moc_TEmulation.cpp \
+		moc_TEmuVt102.cpp \
+		moc_session.cpp \
+		moc_konsole.cpp \
+		moc_MyPty.cpp
+OBJMOC	=	moc_TEWidget.o \
+		moc_TEmulation.o \
+		moc_TEmuVt102.o \
+		moc_session.o \
+		moc_konsole.o \
+		moc_MyPty.o
+
+
+####### Implicit rules
+
+.SUFFIXES: .cpp .cxx .cc .C .c
+
+.cpp.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.cxx.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.cc.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.C.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.c.o:
+	$(CC) -c $(CFLAGS) $(INCPATH) -o $@ $<
+
+####### Build rules
+
+
+all: $(DESTDIR)$(TARGET)
+
+$(DESTDIR)$(TARGET): $(UICDECLS) $(OBJECTS) $(OBJMOC) $(SUBLIBS)
+	$(SYSCONF_LINK) $(LFLAGS) -o $(DESTDIR)$(TARGET) $(OBJECTS) $(OBJMOC) $(LIBS)
+
+moc: $(SRCMOC)
+
+tmake:
+	tmake embeddedkonsole.pro
+
+clean:
+	-rm -f $(OBJECTS) $(OBJMOC) $(SRCMOC) $(UICIMPLS) $(UICDECLS)
+	-rm -f *~ core
+	-rm -f allmoc.cpp
+
+####### Extension Modules
+
+listpromodules:
+	@echo 
+
+listallmodules:
+	@echo 
+
+listaddonpromodules:
+	@echo 
+
+listaddonentmodules:
+	@echo 
+
+
+REQUIRES=embeddedkonsole
+
+####### Sub-libraries
+
+
+###### Combined headers
+
+
+
+####### Compile
+
+TEScreen.o: TEScreen.cpp \
+		TEScreen.h \
+		TECommon.h \
+		TEHistory.h
+
+TEWidget.o: TEWidget.cpp \
+		TEWidget.h \
+		TECommon.h \
+		session.h \
+		MyPty.h \
+		TEmuVt102.h \
+		TEScreen.h \
+		TEHistory.h \
+		TEmulation.h \
+		keytrans.h
+
+TEHistory.o: TEHistory.cpp \
+		TEHistory.h \
+		TECommon.h
+
+TEmulation.o: TEmulation.cpp \
+		TEmulation.h \
+		TEWidget.h \
+		TECommon.h \
+		TEScreen.h \
+		TEHistory.h \
+		keytrans.h
+
+TEmuVt102.o: TEmuVt102.cpp \
+		TEmuVt102.h \
+		TEWidget.h \
+		TECommon.h \
+		TEScreen.h \
+		TEHistory.h \
+		TEmulation.h \
+		keytrans.h
+
+session.o: session.cpp \
+		session.h \
+		MyPty.h \
+		TEWidget.h \
+		TECommon.h \
+		TEmuVt102.h \
+		TEScreen.h \
+		TEHistory.h \
+		TEmulation.h \
+		keytrans.h
+
+keytrans.o: keytrans.cpp \
+		keytrans.h \
+		$(QPEDIR)/include/qpe/qpeapplication.h \
+		default.keytab.h
+
+konsole.o: konsole.cpp \
+		$(QPEDIR)/include/qpe/resource.h \
+		$(QPEDIR)/include/qpe/qpetoolbar.h \
+		$(QPEDIR)/include/qpe/qpemenubar.h \
+		konsole.h \
+		MyPty.h \
+		TEWidget.h \
+		TECommon.h \
+		TEmuVt102.h \
+		TEScreen.h \
+		TEHistory.h \
+		TEmulation.h \
+		keytrans.h \
+		session.h
+
+main.o: main.cpp \
+		konsole.h \
+		MyPty.h \
+		TEWidget.h \
+		TECommon.h \
+		TEmuVt102.h \
+		TEScreen.h \
+		TEHistory.h \
+		TEmulation.h \
+		keytrans.h \
+		session.h \
+		$(QPEDIR)/include/qpe/qpeapplication.h
+
+MyPty.o: MyPty.cpp \
+		MyPty.h
+
+moc_TEWidget.o: moc_TEWidget.cpp \
+		TEWidget.h \
+		TECommon.h
+
+moc_TEmulation.o: moc_TEmulation.cpp \
+		TEmulation.h \
+		TEWidget.h \
+		TECommon.h \
+		TEScreen.h \
+		TEHistory.h \
+		keytrans.h
+
+moc_TEmuVt102.o: moc_TEmuVt102.cpp \
+		TEmuVt102.h \
+		TEWidget.h \
+		TECommon.h \
+		TEScreen.h \
+		TEHistory.h \
+		TEmulation.h \
+		keytrans.h
+
+moc_session.o: moc_session.cpp \
+		session.h \
+		MyPty.h \
+		TEWidget.h \
+		TECommon.h \
+		TEmuVt102.h \
+		TEScreen.h \
+		TEHistory.h \
+		TEmulation.h \
+		keytrans.h
+
+moc_konsole.o: moc_konsole.cpp \
+		konsole.h \
+		MyPty.h \
+		TEWidget.h \
+		TECommon.h \
+		TEmuVt102.h \
+		TEScreen.h \
+		TEHistory.h \
+		TEmulation.h \
+		keytrans.h \
+		session.h
+
+moc_MyPty.o: moc_MyPty.cpp \
+		MyPty.h
+
+moc_TEWidget.cpp: TEWidget.h
+	$(MOC) TEWidget.h -o moc_TEWidget.cpp
+
+moc_TEmulation.cpp: TEmulation.h
+	$(MOC) TEmulation.h -o moc_TEmulation.cpp
+
+moc_TEmuVt102.cpp: TEmuVt102.h
+	$(MOC) TEmuVt102.h -o moc_TEmuVt102.cpp
+
+moc_session.cpp: session.h
+	$(MOC) session.h -o moc_session.cpp
+
+moc_konsole.cpp: konsole.h
+	$(MOC) konsole.h -o moc_konsole.cpp
+
+moc_MyPty.cpp: MyPty.h
+	$(MOC) MyPty.h -o moc_MyPty.cpp
+
+

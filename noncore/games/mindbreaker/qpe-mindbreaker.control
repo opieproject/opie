@@ -1,0 +1,9 @@
+Files: bin/mindbreaker apps/Games/mindbreaker.desktop pics/mindbreaker
+Priority: optional
+Section: qpe/games
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-3
+Depends: qpe-base ($QPE_VERSION)
+Description: Game: crack the coloured code
+ A game for the Qtopia environment.

@@ -1,0 +1,96 @@
+# This is a Qt message file in .po format.  Each msgid starts with
+# a scope.  This scope should *NOT* be translated - eg. translating
+# from French to English, "Foo::Bar" would be translated to "Pub",
+# not "Foo::Pub".
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2001-03-15 12:29:55 EST\n"
+"PO-Revision-Date: YYYY-MM-DD\n"
+"Last-Translator: FULLNAME <EMAIL@ADDRESS>\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+
+#: inputmethods.cpp:238
+msgid "InputMethods::Handwriting"
+msgstr "Håndskrift"
+
+#: inputmethods.cpp:243
+msgid "InputMethods::Keyboard"
+msgstr "Tastatur"
+
+#: inputmethods.cpp:245
+msgid "InputMethods::Opti"
+msgstr ""
+
+#: inputmethods.cpp:241
+msgid "InputMethods::Pickboard"
+msgstr ""
+
+#: inputmethods.cpp:248
+msgid "InputMethods::Unicode"
+msgstr ""
+
+#: ../launcher/launcher.cpp:181
+msgid "Launcher:: - Launcher"
+msgstr " - Hurtigstarter"
+
+# #: ../launcher/launcher.cpp:243
+# msgid "Launcher::All"
+# msgstr "Alle"
+
+#: ../launcher/launcher.cpp:161
+msgid "Launcher::Launcher"
+msgstr "Hurtigstarter"
+
+#: launcherclock.cpp:31
+msgid "LauncherClock::City Time"
+msgstr "Verdensur"
+
+#: launcherclock.cpp:32
+msgid "LauncherClock::Set time"
+msgstr "Still klokken"
+
+#: ../inputmethods/qimpensetup.cpp:31
+msgid "QIMPenSetup::Setup pen input"
+msgstr "Oppsett av penn"
+
+#: shutdown.cpp:246
+msgid "Shutdown::<p>\nThese termination options are provided primarily for use while developing and testing the QPE system. In a normal environment, these concepts are unnecessary."
+msgstr "<p>Disse opsjonene er hovedsakelig beregnet for utvikling og testing av QPE-systemet. Ved normal bruk er de ikke nødvendige."
+
+#: shutdown.cpp:252
+msgid "Shutdown::Cancel"
+msgstr "Avbryt"
+
+#: shutdown.cpp:89
+msgid "Shutdown::Reboot"
+msgstr "Omstart maskin"
+
+#: shutdown.cpp:141
+msgid "Shutdown::Restart Server"
+msgstr "Omstart QPE"
+
+#: shutdown.cpp:19
+msgid "Shutdown::Shut down..."
+msgstr "Skru av..."
+
+#: shutdown.cpp:193
+msgid "Shutdown::Shutdown"
+msgstr "Skru av"
+
+#: shutdown.cpp:35
+msgid "Shutdown::Terminate Server"
+msgstr "Avslutt QPE"
+
+#: shutdown.cpp:25
+msgid "Shutdown::Terminate"
+msgstr "Avslutt"
+
+#: volume.cpp:29
+msgid "VolumeApplet::Mute"
+msgstr "Stille"
+
+#: volume.cpp:43
+msgid "VolumeApplet::Volume"
+msgstr "Volum"
+
