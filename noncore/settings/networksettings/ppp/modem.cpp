@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.cpp,v 1.7.2.1 2003-07-15 15:29:08 tille Exp $
+ * $Id: modem.cpp,v 1.7.2.2 2003-07-24 08:51:50 harlekin Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -932,6 +932,7 @@ bool Modem::execpppd(const char *arguments) {
 
 
 bool Modem::killpppd() {
+    qDebug("In killpppd and pid is %d", pppdPid );
   if(pppdPid > 0) {
     qDebug("In killpppd(): Sending SIGTERM to %d\n", pppdPid);
     if(kill(pppdPid, SIGTERM) < 0) {
@@ -1021,3 +1022,15 @@ bool Modem::setHostname(const QString & name)
     return sethostname(name, name.length()) == 0;
 }
 
+QString Modem::pppDevice()const {
+    return "ppp0";
+}
+pid_t Modem::pppPID()const {
+    return pppdPid;
+}
+void Modem::setPPPDPid( pid_t pid ) {
+    qDebug("Modem setting pid");
+    _pppdExitStatus = -1;
+    pppdPid = pid;
+    modemfd = -1;
+}

@@ -15,7 +15,7 @@ InterfacePPP::InterfacePPP(QObject *parent, const char *name, bool status)
     qDebug("InterfacePPP::InterfacePPP(");
 }
 
-PPPData* InterfacePPP::data()
+PPPData* InterfacePPP::data()const
 {
     if (!_dataPtr){
         qDebug("creating new Data obj");
@@ -26,7 +26,7 @@ PPPData* InterfacePPP::data()
     return _dataPtr;
 }
 
-Modem* InterfacePPP::modem()
+Modem* InterfacePPP::modem()const
 {
     if (!_modemPtr){
         qDebug("creating new modem obj");
@@ -142,4 +142,14 @@ void InterfacePPP::save()
 {
     data()->save();
     emit updateInterface((Interface*) this);
+}
+QString InterfacePPP::pppDev()const {
+    return modem()->pppDevice();
+}
+pid_t InterfacePPP::pppPID()const{
+    return modem()->pppPID();
+}
+void InterfacePPP::setPPPDpid( pid_t pid) {
+    setStatus( true );
+    modem()->setPPPDPid( pid );
 }

@@ -1,6 +1,8 @@
 #ifndef INTERFACEPPP_H
 #define INTERFACEPPP_H
 
+#include <sys/types.h>
+
 #include "interface.h"
 
 class PPPData;
@@ -13,8 +15,10 @@ class InterfacePPP : public Interface
 public:
     InterfacePPP(QObject *parent=0, const char *name="PPP", bool status=false);
 
-    PPPData* data();
-    Modem* modem();
+    PPPData* data()const;
+    Modem* modem()const;
+    QString pppDev()const; // returns the ppp device.... /dev/ppp0...
+    pid_t pppPID()const;
 
 signals:
   void begin_connect();
@@ -25,10 +29,11 @@ public slots:
   virtual void start();
   virtual void stop();
   void save();
+  void setPPPDpid( pid_t ); // sets the pppd pid for modem...
 
  private:
-  Modem *_modemPtr;
-  PPPData *_dataPtr;
+  mutable Modem *_modemPtr;
+  mutable PPPData *_dataPtr;
 };
 
 
