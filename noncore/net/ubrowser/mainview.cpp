@@ -57,10 +57,19 @@ MainView::MainView(QWidget *parent, const char *name) : QMainWindow(parent, name
 	connect(browser, SIGNAL(textChanged()), this, SLOT(textChanged()) );
 
 	http = new HttpFactory(browser);
+	
+	if( qApp->argc() > 1 )
+	{
+		char **argv = qApp->argv();
+		location->setEditText( argv[1] );
+		goClicked();
+	}
 }
 
 void MainView::goClicked()
 {
+	location->insertItem( location->currentText() );
+	
 	if(location->currentText().startsWith("http://") )
 	{
 		location->setEditText(location->currentText().lower());
