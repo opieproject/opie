@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.45 2002-07-29 12:18:47 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.46 2002-07-29 12:22:11 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 extern "C" {
@@ -366,6 +366,7 @@ bool VMemo::startRecording() {
   fileName.replace(QRegExp(" "),"_");
   fileName.replace(QRegExp(":"),".");
   fileName.replace(QRegExp(","),"");
+  fileName += ".wav";
   
   qDebug("filename is "+fileName);
 // open tmp file here
