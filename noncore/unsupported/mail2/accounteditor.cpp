@@ -2,9 +2,12 @@
 #include <qbuttongroup.h>
 #include <qradiobutton.h>
 #include <qmessagebox.h>
+#include <qtoolbutton.h>
 #include <qtabwidget.h>
 #include <qlineedit.h>
 #include <qcheckbox.h>
+
+#include <qpe/resource.h>
 
 #include "accounteditor.h"
 #include "miscfunctions.h"
@@ -13,8 +16,20 @@ AccountEditor::AccountEditor(Account account, QWidget *parent, const char *name,
 	: AccountEditorBase(parent, name, modal, fl), _account(account)
 {
 	TabWidget2->removePage(sslTab);
+	showPasswd->setPixmap(Resource::loadPixmap("mail/showpasswd"));
+
+	connect(showPasswd, SIGNAL(toggled(bool)), 
+		SLOT(showPasswdToggled(bool)));
 
 	fillValues();
+}
+
+void AccountEditor::showPasswdToggled(bool toggled)
+{
+	if (toggled) 
+		pass->setEchoMode(QLineEdit::Normal);
+	else
+		pass->setEchoMode(QLineEdit::Password);
 }
 
 void AccountEditor::accept()

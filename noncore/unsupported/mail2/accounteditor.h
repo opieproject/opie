@@ -15,6 +15,7 @@ public:
 
 protected slots:
 	void accept();
+	void showPasswdToggled(bool toggled);
 
 protected:
 	void fillValues();
