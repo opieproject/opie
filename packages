@@ -101,7 +101,7 @@ CONFIG_NOTESAPPLET	noncore/applets/notesapplet	notesapplet.pro
 CONFIG_OAPP	core/apps/oapp	oapp.pro
 CONFIG_OBEX	core/applets/obex2	obex.pro
 CONFIG_ODICT	noncore/apps/odict	odict.pro
-CONFIG_OIPKG	noncore/unmaintained/oipkg	oipkg.pro
+CONFIG_OIPKG	noncore/unsupported/oipkg	oipkg.pro
 CONFIG_OPIE-CONSOLE	noncore/apps/opie-console	opie-console.pro
 CONFIG_OPIE-LOGIN	core/opie-login	opie-login.pro
 CONFIG_OPIE-READER	noncore/apps/opie-reader	opie-reader.pro
