@@ -99,21 +99,7 @@ VideoWidget::~VideoWidget()
 {
 }
 
-QPixmap *combineVImageWithBackground( QImage img, QPixmap bg, QPoint offset ) {
-    QPixmap pix( img.width(), img.height() );
-    QPainter p( &pix );
-    p.drawTiledPixmap( pix.rect(), bg, offset );
-    p.drawImage( 0, 0, img );
-    return new QPixmap( pix );
-}
-
-QPixmap maskVPixToMask( QPixmap pix, QBitmap mask ) {
-    QPixmap pixmap( pix );
-    pixmap.setMask( mask );
-    return pixmap;
-}
-
-void VideoWidget::resizeEvent( QResizeEvent * ) {
+void VideoWidget::resizeEvent( QResizeEvent *e ) {
     int h = height();
     int w = width();
     //int Vh = 160;
@@ -130,22 +116,8 @@ void VideoWidget::resizeEvent( QResizeEvent * ) {
         upperLeftOfButtonMask.ry() = 0;
     else
         upperLeftOfButtonMask.ry() = 185;//(( Vh  - imgUp->height() ) / 2) - 10;
-    QPoint p = upperLeftOfButtonMask;
 
-    QPixmap *pixUp = combineVImageWithBackground( buttonUpImage, backgroundPixmap, p );
-    QPixmap *pixDn = combineVImageWithBackground( buttonDownImage, backgroundPixmap, p );
-
-    for ( ButtonVector::iterator it = buttons.begin(); it != buttons.end(); ++it ) {
-        Button &button = *it;
-
-        if ( !button.mask.isNull() ) {
-            button.pixUp = maskVPixToMask( *pixUp, button.mask );
-            button.pixDown = maskVPixToMask( *pixDn, button.mask );
-        }
-    }
-
-    delete pixUp;
-    delete pixDn;
+    MediaWidget::resizeEvent( e );
 }
 
 void VideoWidget::sliderPressed() {

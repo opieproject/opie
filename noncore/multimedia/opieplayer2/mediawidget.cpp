@@ -109,6 +109,23 @@ void MediaWidget::paintEvent( QPaintEvent *pe )
     }
 }
 
+void MediaWidget::resizeEvent( QResizeEvent *e )
+{
+    QPixmap pixUp = combineImageWithBackground( buttonUpImage, backgroundPixmap, upperLeftOfButtonMask );
+    QPixmap pixDn = combineImageWithBackground( buttonDownImage, backgroundPixmap, upperLeftOfButtonMask );
+
+    for ( ButtonVector::iterator it = buttons.begin(); it != buttons.end(); ++it ) {
+        Button &button = *it;
+
+        if ( button.mask.isNull() )
+            continue;
+        button.pixUp = addMaskToPixmap( pixUp, button.mask );
+        button.pixDown = addMaskToPixmap( pixDn, button.mask );
+    }
+
+    QWidget::resizeEvent( e );
+}
+
 MediaWidget::Button *MediaWidget::buttonAt( const QPoint &position )
 {
     if ( position.x() <= 0 || position.y() <= 0 ||
@@ -228,6 +245,22 @@ void MediaWidget::toggleButton( Button &button )
     button.isDown = !button.isDown;
 
     paintButton( button );
+}
+
+QPixmap MediaWidget::combineImageWithBackground( const QImage &image, const QPixmap &background, const QPoint &offset )
+{
+    QPixmap pix( image.size() );
+    QPainter p( &pix );
+    p.drawTiledPixmap( pix.rect(), background, offset );
+    p.drawImage( 0, 0, image );
+    return pix;
+}
+
+QPixmap MediaWidget::addMaskToPixmap( const QPixmap &pix, const QBitmap &mask )
+{
+    QPixmap result( pix );
+    result.setMask( mask );
+    return result;
 }
 
 /* vim: et sw=4 ts=4

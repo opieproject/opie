@@ -112,6 +112,8 @@ protected:
 
     virtual void paintEvent( QPaintEvent *pe );
 
+    virtual void resizeEvent( QResizeEvent *e );
+
     Button *buttonAt( const QPoint &position );
 
     virtual void mousePressEvent( QMouseEvent *event );
@@ -143,6 +145,9 @@ protected:
     QPixmap backgroundPixmap;
     QImage buttonUpImage;
     QImage buttonDownImage;
+
+    static QPixmap combineImageWithBackground( const QImage &background, const QPixmap &pixmap, const QPoint &offset );
+    static QPixmap addMaskToPixmap( const QPixmap &pix, const QBitmap &mask );
 };
 
 #endif // MEDIAWIDGET_H

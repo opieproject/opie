@@ -130,7 +130,7 @@ QPixmap maskPixToMask( QPixmap pix, QBitmap mask ) {
 
 };
 
-void AudioWidget::resizeEvent( QResizeEvent * ) {
+void AudioWidget::resizeEvent( QResizeEvent *e ) {
     int h = height();
     int w = width();
 
@@ -142,17 +142,8 @@ void AudioWidget::resizeEvent( QResizeEvent * ) {
 
     upperLeftOfButtonMask.rx() = ( w - buttonUpImage.width() ) / 2;
     upperLeftOfButtonMask.ry() = (( h - buttonUpImage.height() ) / 2) - 10;
-    QPoint p = upperLeftOfButtonMask;
 
-    QPixmap pixUp = combineImageWithBackground( buttonUpImage, backgroundPixmap, p );
-    QPixmap pixDn = combineImageWithBackground( buttonDownImage, backgroundPixmap, p );
-
-    for ( uint i = 0; i < buttons.size(); i++ ) {
-        if ( !buttons[i].mask.isNull() ) {
-            buttons[i].pixUp = maskPixToMask( pixUp, buttons[i].mask );
-            buttons[i].pixDown = maskPixToMask( pixDn, buttons[i].mask );
-        }
-    }
+    MediaWidget::resizeEvent( e );
 }
 
 void AudioWidget::sliderPressed() {
