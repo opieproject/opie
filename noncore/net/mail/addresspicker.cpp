@@ -5,6 +5,9 @@
 #include <qfile.h>
 
 #include <qpe/resource.h>
+#include <opie/ocontactaccess.h>
+#include <opie/ocontact.h>
+
 
 #include <stdlib.h>
 
@@ -13,81 +16,47 @@
 AddressPicker::AddressPicker( QWidget *parent, const char *name, bool modal, WFlags flags ) 
     : AddressPickerUI( parent, name, modal, flags )
 {
-	okButton->setIconSet( Resource::loadPixmap( "enter" ) );
-	cancelButton->setIconSet( Resource::loadPixmap( "editdelete" ) );
+    okButton->setIconSet( Resource::loadPixmap( "enter" ) );
+    cancelButton->setIconSet( Resource::loadPixmap( "editdelete" ) );
 
-	connect(okButton, SIGNAL(clicked()), SLOT(accept()));
-	connect(cancelButton, SIGNAL(clicked()), SLOT(close()));
+    connect(okButton, SIGNAL(clicked()), SLOT(accept()));
+    connect(cancelButton, SIGNAL(clicked()), SLOT(close()));
+    OContactAccess::List::Iterator it;
 
-	QFile f((QString) getenv("HOME") + "/Applications/"
-		+ "addressbook/addressbook.xml");
-
-	if ( f.open( IO_ReadOnly ) ) {
-		QTextStream stream( &f );
-		stream.setEncoding( QTextStream::UnicodeUTF8 );
-		QString content;
-		while ( !f.atEnd() ) {
-            content += stream.readLine() + "\n";
+    QString lineEmail, lineName, contactLine;
+    /* what name has to set here???? */
+    OContactAccess m_contactdb("addressbook");
+    QStringList mails;
+    QString pre,suf;
+    OContactAccess::List m_list = m_contactdb.sorted( true, 0, 0, 0 );
+    for ( it = m_list.begin(); it != m_list.end(); ++it ) {
+        if ((*it).defaultEmail().length()!=0) {
+            mails = (*it).emailList();
+            if ((*it).fileAs().length()>0) {
+                pre = "\""+(*it).fileAs()+"\" <";
+                suf = ">";
+            } else {
+                pre = "";
+                suf = "";
+            }
+            QStringList::ConstIterator sit = mails.begin();
+            for (;sit!=mails.end();++sit) {
+                contactLine=pre+(*sit)+suf;
+                addressList->insertItem(contactLine);
+            }            
         }
-		QStringList lines = QStringList::split( QRegExp( "\\n" ), content );
-		QStringList::Iterator it;
-		for ( it = lines.begin(); it != lines.end(); it++ ) {
-			if ( (*it).find( QRegExp( "^<Contact.*" ) ) != -1 ) {
-				int pos = (*it).find( "FirstName=\"" );
-				QString fname;
-				if ( pos != -1 ) {
-					int i = 1;
-					QChar c;
-					while ( c != '"' ) {
-						c = (*it)[pos + 10 + i];
-						if ( c != '"' ) fname += c;
-						i++;
-					}
-				}
-				pos = (*it).find( "LastName=\"" );
-				QString lname;
-				if ( pos != -1 ) {
-					int i = 1;
-					QChar c;
-					while ( c != '"' ) {
-						c = (*it)[pos + 9 + i];
-						if ( c != '"' ) lname += c;
-						i++;
-					}
-				}
-				pos = (*it).find( "DefaultEmail=\"" );
-				QString email;
-				if ( pos != -1 ) {
-					int i = 1;
-					QChar c;	
-					while ( c != '"' ) {
-						c = (*it)[pos + 13 + i];
-						if ( c != '"' ) email += c;
-						i++;
-					}
-				}
-				QString tname, temail;
-				if ( !fname.isEmpty() ) {
-                    tname += fname;
-                }
-				if ( !lname.isEmpty() ) {
-                    tname += fname.isEmpty() ? lname : (" " + lname);
-                }
-				if ( !email.isEmpty() ) {
-                    temail += tname.isEmpty() ? email : (" <" + email + ">");
-                }
-				if ( !email.isEmpty() ) {
-                    addressList->insertItem( tname + temail );
-                }
-			}
-		}
-	}
+    }
 	if ( addressList->count() <= 0 ) {
+#if 0
+    // makes this realy sense??
 		addressList->insertItem( 
             tr( "There are no entries in the addressbook." ) );
+#endif
 		addressList->setEnabled( false );
 		okButton->setEnabled( false );
-	}
+	} else {
+//        addressList->sort();
+    }
 }
 
 void AddressPicker::accept()
