@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>233</width>
+            <width>229</width>
             <height>268</height>
         </rect>
     </property>
@@ -150,4 +150,9 @@
         <slot>accept()</slot>
     </connection>
 </connections>
+<tabstops>
+    <tabstop>registeredServicesList</tabstop>
+    <tabstop>addButton</tabstop>
+    <tabstop>cancelButton</tabstop>
+</tabstops>
 </UI>

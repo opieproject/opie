@@ -757,8 +757,6 @@
     <tabstop>speed</tabstop>
     <tabstop>crtscts</tabstop>
     <tabstop>connectdelay</tabstop>
-    <tabstop>dial_manual</tabstop>
-    <tabstop>dial_idle</tabstop>
     <tabstop>dial_demand</tabstop>
     <tabstop>idletime</tabstop>
     <tabstop>defaultroute</tabstop>
@@ -766,5 +764,7 @@
     <tabstop>usepeerdns</tabstop>
     <tabstop>dns1</tabstop>
     <tabstop>dns2</tabstop>
+    <tabstop>dial_manual</tabstop>
+    <tabstop>dial_idle</tabstop>
 </tabstops>
 </UI>
