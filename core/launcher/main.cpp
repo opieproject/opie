@@ -72,14 +72,9 @@ void initEnvironment()
     setenv( "QWS_SIZE", "240x320", 0 );
 #endif
 
-    /*
-     * Rotation:
-     * 1. use env var if set
-     * 2. use saved default if set
-     * 3. use physical orientation (currently fails due to ODevice
-     *    using a QPixmap and therefore requiring a QApplication)
-     */
-    if ( getenv("QWS_DISPLAY") == NULL ) {
+    QString env(getenv("QWS_DISPLAY"));
+    if (env.contains("Transformed")) {
+        // transformed driver default rotation is controlled by the hardware.
         Config config("qpe");
         config.setGroup( "Rotation" );
         if ( ( rot = config.readNumEntry( "Rot", -1 ) ) == -1 )
