@@ -714,8 +714,6 @@ int iPAQ::lightSensorResolution ( ) const
 
 void Zaurus::init ( )
 {
-	d-> m_modelstr = "Zaurus SL5000";
-	d-> m_model = Model_Zaurus_SL5000;
 	d-> m_vendorstr = "Sharp";
 	d-> m_vendor = Vendor_Sharp;
 
@@ -739,6 +737,23 @@ void Zaurus::init ( )
 		d-> m_system = System_Zaurus;
 	}
 
+	f. setName ( "/proc/deviceinfo/product" );
+	if ( f. open ( IO_ReadOnly ) ) {
+		QTextStream ts ( &f );
+		QString model = ts. readLine ( );
+		f. close ( );
+		if ( model == "SL-5000D" ) {
+			d-> m_model = Model_Zaurus_SL5000;
+			d-> m_modelstr = "Zaurus SL-5000D";
+		} else if ( model == "SL-5500" ) {
+			d-> m_model = Model_Zaurus_SL5500;
+			d-> m_modelstr = "Zaurus SL-5500";
+		}
+	}
+	else {
+		d-> m_model = Model_Zaurus_SL5000;
+		d-> m_modelstr = "Zaurus SL-5000D (unverified)";
+	}
 
 	m_leds [0] = Led_Off;
 }

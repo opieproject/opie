@@ -44,6 +44,7 @@ enum OModel {
 	Model_Zaurus        = ( 2 << 24 ),
 
 	Model_Zaurus_SL5000 = ( Model_Zaurus | 0x000001 ),
+	Model_Zaurus_SL5500 = ( Model_Zaurus | 0x000002 ),
 };
 
 enum OVendor {	
