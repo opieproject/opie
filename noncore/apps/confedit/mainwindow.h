@@ -41,6 +41,7 @@ public slots:
   void showPopup();
   void stopTimer( QListViewItem* );
   void saveConfFile();
+  void revertConfFile();
 
 private:
 	ListViewConfDir *settingList;
@@ -48,7 +49,14 @@ private:
   ListViewItemConfigEntry *_currentItem;
   ListViewItemConfFile *_fileItem;
   QTimer *popupTimer;
-  QPopupMenu *popupMenu;
+  QPopupMenu *popupMenuFile;
+  QPopupMenu *popupMenuEntry;
+	QAction *popupActionSave;
+	QAction *popupActionRevert;
+	QAction *popupActionDelete;
+	QAction *popupActionNew;
+//	QAction *popupAction;
+//	QAction *popupAction;
 
   void makeMenu();
 };

@@ -25,7 +25,9 @@ public:
   void parseFile();
 	QString fileName();
   virtual void displayText();
+  bool revertable();
   void save();
+  void revert();
 protected:
 private:
 	bool _valid;

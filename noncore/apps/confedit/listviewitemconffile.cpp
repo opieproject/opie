@@ -73,7 +73,30 @@ void ListViewItemConfFile::parseFile()
     }
   }	
 	confFile.close();
+ 	unchanged();
 	setExpandable( _valid );
+}
+
+
+void ListViewItemConfFile::revert()
+{
+	if (_changed)
+ 	{
+    parseFile();
+  }else{
+		QString backup = confFileInfo->absFilePath()+"~";
+	 	QFile conf(confFileInfo->absFilePath());
+  	QFile back(backup);
+
+	  if (!back.open(IO_ReadOnly)) return;
+  	if (!conf.open(IO_WriteOnly)) return;
+
+	  #define SIZE 124
+  	char buf[SIZE];
+	  while (int c = back.readBlock(buf, SIZE) ) conf.writeBlock(buf,c);
+  	conf.close();
+	  back.close();
+  }
 }
 
 void ListViewItemConfFile::save()
@@ -101,6 +124,11 @@ void ListViewItemConfFile::save()
    	((ListViewItemConfigEntry*)it)->save(t);
   }
 	conf.close();
-	qDebug("no saveing yet...");
  	unchanged();
+}
+
+
+bool ListViewItemConfFile::revertable()
+{
+ 	return _changed || QFile(confFileInfo->absFilePath()+"~").exists();
 }

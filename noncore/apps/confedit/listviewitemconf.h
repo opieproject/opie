@@ -25,6 +25,7 @@ public:
  	int getType();
   virtual void displayText() = 0;
   virtual void changed();
+  bool isChanged() {return _changed;};
   virtual void unchanged();
 
 protected:

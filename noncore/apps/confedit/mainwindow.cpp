@@ -38,9 +38,6 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
 {	
   setCaption( tr("Conf File Editor") );
 
-  popupTimer = new QTimer(this);
-  popupMenu = new QPopupMenu(this);
-
   QWidget *mainWidget = new  QWidget(this);
   setCentralWidget( mainWidget);
 
@@ -58,10 +55,6 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   connect(settingList, SIGNAL( pressed(QListViewItem*) ),
 						this, SLOT(setCurrent(QListViewItem*)));
 
-  connect( popupTimer, SIGNAL(timeout()),
-		  			this, SLOT(showPopup()) );
-	connect( settingList, SIGNAL( clicked( QListViewItem* ) ),
-					   this, SLOT( stopTimer( QListViewItem* ) ) );	
 
  	connect( editor->LineEditGroup, SIGNAL( textChanged(const QString&) ),
 	           SLOT( groupChanged(const QString&) ) );
@@ -76,6 +69,22 @@ void MainWindow::makeMenu()
 {
 
 
+  popupTimer = new QTimer(this);
+  popupMenuFile = new QPopupMenu(this);
+
+	popupActionSave = new QAction( tr("Save"),QString::null,  0, this, 0 );
+	popupActionSave->addTo( popupMenuFile );
+  connect( popupActionSave, SIGNAL( activated() ),
+		  	 	this , SLOT( saveConfFile() ) );
+	popupActionRevert = new QAction( tr("Revert"),QString::null,  0, this, 0 );
+	popupActionRevert->addTo( popupMenuFile );
+  connect( popupActionRevert, SIGNAL( activated() ),
+		  	 	this , SLOT( revertConfFile() ) );
+
+  connect( popupTimer, SIGNAL(timeout()),
+		  			this, SLOT(showPopup()) );
+	connect( settingList, SIGNAL( clicked( QListViewItem* ) ),
+					   this, SLOT( stopTimer( QListViewItem* ) ) );	
 }
 
 MainWindow::~MainWindow()
@@ -151,18 +160,22 @@ void MainWindow::saveConfFile()
  	_fileItem->save();
 }
 
+void MainWindow::revertConfFile()
+{
+	if (!_fileItem) return;	
+ 	_fileItem->revert();
+}
+
 void MainWindow::showPopup()
 {
 	qDebug("showPopup");
- 	if (!_fileItem) return;
-  popupMenu->clear();
- 		
- 	QAction *popupAction;
-  popupAction = new QAction( tr("Save"),QString::null,  0, this, 0 );
-	popupAction->addTo( popupMenu );
-  connect( popupAction, SIGNAL( activated() ),
-	   	this , SLOT( saveConfFile() ) );
+ 	if (_fileItem)
+  {
+ 		popupActionSave->setEnabled(_fileItem->isChanged());
+ 		popupActionRevert->setEnabled(_fileItem->revertable());
+    popupMenuFile->popup( QCursor::pos() );
+  }else if(_currentItem->isChanged())
+  {
 
-
-  popupMenu->popup( QCursor::pos() );
+  }
 }
