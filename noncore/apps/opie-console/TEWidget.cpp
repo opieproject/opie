@@ -355,6 +355,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   font_a   = 1;
   word_selection_mode = FALSE;
   vcolumns = 0;
+  hposition = 0;
 
   setMouseMarks(TRUE);
   setVTFont( QFont("fixed") );
