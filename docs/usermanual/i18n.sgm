@@ -85,22 +85,21 @@
 	<para>
 		In the next paragraph you see an example of what the XML looks like.
 	</para>
-<!--
-	<programlisting>
-		<message> 
-			<source>New</source> 
-			<translation>Neu</translation>
-		</message> 
-		<message> 
-			<source>Today</source>
-			<translation>Heute</translation>
-		</message>
-		<message> 
-			<source>Day</source> 
-			<translation type="unfinished"></translation> 
-		</message>
-	</programlisting>
--->
+<literallayout>
+		&lt;message&gt;
+			&lt;source&gt;New&lt;/source&gt; 
+			&lt;translation&gt;Neu&lt;/translation&gt;
+		&lt;/message&gt; 
+		&lt;message&gt; 
+			&lt;source&gt;Today&lt;/source&gt;
+			&lt;translation&gt;Heute&lt;/translation&gt;
+		&lt;/message&gt;
+		&lt;message&gt; 
+			&lt;source&gt;Day&lt;/source&gt; 
+			&lt;translation type="unfinished"&gt;&lt;/translation&gt; 
+		&lt;/message&gt;
+</literallayout>
+
 	<para>
 		As you can see the markup is very simple.  The part between two source-tags is
 		the english text which appears if there is no translation yet. In the first
