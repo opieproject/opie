@@ -169,13 +169,17 @@ void ProcessInfo::slotSendClicked()
 	capstr.append( "\nto this process?" );
 
 	
-    if ( QMessageBox::warning( this, currprocess->text( 1 ), capstr,
-         QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape ) == QMessageBox::Yes )
+	if ( QMessageBox::warning( this, currprocess->text( 1 ), capstr,
+		 QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape ) == QMessageBox::Yes )
 	{
-		QString sigstr = SignalCB->currentText();
-		sigstr.truncate(2);
-		int sigid = sigstr.toUInt();
-        kill( currprocess->text( 0 ).stripWhiteSpace().toUInt(), sigid );
+		currprocess = ProcessView->currentItem();
+		if ( currprocess )
+		{
+			QString sigstr = SignalCB->currentText();
+			sigstr.truncate(2);
+			int sigid = sigstr.toUInt();
+			kill( currprocess->text( 0 ).stripWhiteSpace().toUInt(), sigid );
+		}
     }
 
 }
