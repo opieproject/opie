@@ -1,4 +1,4 @@
-/**********************************************************************
+ba/**********************************************************************
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
 ** This file is part of Qtopia Environment.
@@ -138,8 +138,6 @@ private:
 void DesktopPowerAlerter::alert( const QString &text, int priority )
 {
 	alertCount++;
-	if ( alertCount < priority )
-		return ;
 	if ( priority > currentPriority )
 		return ;
 	currentPriority = priority;
