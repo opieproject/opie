@@ -384,6 +384,20 @@ void BenchmarkInfo::performFileTest( const QString& fname, OCheckListItem* item 
     }
 
     QFile::remove( filename );
-    item->setText( 1, QString().sprintf( "%.2f kb/s, %.2f kb/s", FILE_TEST_COUNT / ( read / 1000.0 ), FILE_TEST_COUNT / ( write / 1000.0 ) ) );
+    double readSpeed = FILE_TEST_COUNT / ( read / 1000.0 );
+    QString readUnit = "kb/s";
+    if ( readSpeed > 1024 )
+    {
+        readSpeed = readSpeed / 1024.0;
+        readUnit = "mb/s";
+    }
+    double writeSpeed = FILE_TEST_COUNT / ( write / 1000.0 );
+    QString writeUnit = "kb/s";
+    if ( writeSpeed > 1024 )
+    {
+        writeSpeed = writeSpeed / 1024.0;
+        writeUnit = "mb/s";
+    }
+    item->setText( 1, QString().sprintf( "%.2f %s, %.2f %s", readSpeed, readUnit.latin1(), writeSpeed, writeUnit.latin1() ) );
     item->setOn( false );
 }
