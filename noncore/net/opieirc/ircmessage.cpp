@@ -52,24 +52,31 @@ IRCMessage::IRCMessage(QString line) {
     /* Is this a CTCP command */
     if ((m_command == "PRIVMSG" || m_command == "NOTICE") && m_trailing.length()>0 && m_trailing.left(1) == QChar(1)) {
         m_ctcp = TRUE;
+        if (m_command == "PRIVMSG") {
+	    m_ctcpRequest = TRUE;
+        }
+        else {
+            m_ctcpRequest = FALSE;
+        }
+        
         /* Strip CTCP \001 characters */
         m_allParameters = m_allParameters.replace(QRegExp(QChar(1)), "");
         QTextIStream ctcpStream(&m_allParameters);
-        if (m_command == "PRIVMSG")
-            ctcpStream >> m_ctcpDestination;
+        ctcpStream >> m_ctcpDestination;
         ctcpStream >> temp;
         m_ctcpCommand = temp.upper().right(temp.length()-1);
         m_parameters.clear();
         int length = m_allParameters.length() - m_ctcpCommand.length() - 1;
-        if (m_command == "PRIVMSG")
-            length -= m_ctcpDestination.length() + 1;
+        length -= m_ctcpDestination.length() + 1;
         if (length <= 0) {
             m_allParameters = "";
-        } else {
+        } 
+        else {
             m_allParameters = m_allParameters.right(length);
             m_parameters << m_allParameters;
         }
-    } else {
+    } 
+    else {
         m_ctcp = FALSE;
     }
 
@@ -142,6 +149,14 @@ bool IRCMessage::isNumerical() {
 
 bool IRCMessage::isCTCP() {
     return m_ctcp;
+}
+
+bool IRCMessage::isCTCPRequest() {
+    return m_ctcpRequest;
+}
+
+bool IRCMessage::isCTCPReply() {
+    return !m_ctcpRequest;
 }
 
 QString IRCMessage::trailing() {

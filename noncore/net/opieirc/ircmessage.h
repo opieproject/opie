@@ -38,6 +38,8 @@ public:
     bool isNumerical();
     /* CHeck if this IRCMessage is a CTCP message */
     bool isCTCP();
+    bool isCTCPRequest();
+    bool isCTCPReply();
     /* Return the IRC command (literal commands) */
     QString command();
     /* Return the CTCP command */
@@ -65,6 +67,7 @@ protected:
     QStringList     m_parameters;
     bool            m_isNumerical;
     bool            m_ctcp;
+    bool            m_ctcpRequest;
 };
 
 #endif
