@@ -48,7 +48,7 @@
     <message>
         <source>Do you want to apply your changes?
 </source>
-        <translation>Aplicar alterações?
+        <translation type="obsolete">Aplicar alterações?
 </translation>
     </message>
     <message>
@@ -76,6 +76,30 @@
     <message>
         <source>Current scheme</source>
         <translation>Esquema actual</translation>
+    </message>
+    <message>
+        <source>Font</source>
+        <translation>Fonte</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Tamanho</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation>A rápida raposa castanha salta sobre o cão molenga</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation>Aplicar</translation>
+    </message>
+    <message>
+        <source>Restart</source>
+        <translation>Reiniciar</translation>
+    </message>
+    <message>
+        <source>Do you want to restart Opie now?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

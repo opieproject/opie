@@ -327,7 +327,7 @@ as categorias.</translation>
     <name>QObject</name>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sem Espaço</translation>
     </message>
     <message>
         <source>There was a problem creating
@@ -416,11 +416,11 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Todas</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vazio</translation>
     </message>
     <message>
         <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>

@@ -228,7 +228,7 @@ Sair na mesma?</translation>
     </message>
     <message>
         <source>SMS Entry</source>
-        <translation>Enviar SMS</translation>
+        <translation type="obsolete">Enviar SMS</translation>
     </message>
 </context>
 <context>
@@ -959,7 +959,7 @@ Sair na mesma?</translation>
     </message>
     <message>
         <source>Netherlands</source>
-        <translation type="unfinished"></translation>
+        <translation>Holanda</translation>
     </message>
     <message>
         <source>New Caledonia</source>

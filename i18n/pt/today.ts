@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; new mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
-        <translation type="obsolete">&lt;b&gt;%1&lt;/b&gt; novo(s) email(s), &lt;b&gt;%2&lt;/b&gt; na caixa de saída</translation>
+        <translation type="unfinished">&lt;b&gt;%1&lt;/b&gt; novo(s) email(s), &lt;b&gt;%2&lt;/b&gt; na caixa de saída</translation>
     </message>
     <message>
         <source>There is &lt;b&gt; 1&lt;/b&gt; active task:  &lt;br&gt;</source>
@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>&lt;b&gt; 1&lt;/b&gt; new mail</source>
-        <translation>&lt;b&gt; 1&lt;/b&gt; novo email</translation>
+        <translation type="obsolete">&lt;b&gt; 1&lt;/b&gt; novo email</translation>
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; new mail(s)</source>
@@ -51,15 +51,15 @@
     </message>
     <message>
         <source>&lt;b&gt; 1&lt;/b&gt; outgoing</source>
-        <translation>&lt;b&gt; 1&lt;/b&gt; na caixa de saída</translation>
+        <translation type="obsolete">&lt;b&gt; 1&lt;/b&gt; na caixa de saída</translation>
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; outgoing</source>
-        <translation>&lt;b&gt;%1&lt;/&gt; na caixa de saída</translation>
+        <translation type="obsolete">&lt;b&gt;%1&lt;/&gt; na caixa de saída</translation>
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; new mails</source>
-        <translation>&lt;b&gt;%1&lt;/b&gt; novos emails</translation>
+        <translation type="obsolete">&lt;b&gt;%1&lt;/b&gt; novos emails</translation>
     </message>
 </context>
 <context>
