@@ -347,7 +347,7 @@ void  AdvancedFm::currentPathComboChanged()
 
 void  AdvancedFm::fillCombo(const QString &currentPath)
 {
-//    qDebug("%d",TabWidget->getCurrentTab());
+//    qDebug("%d",TabWidget->currentTab());
   if ( whichTab == 1)
     {
       currentPathCombo->lineEdit()->setText( currentPath);

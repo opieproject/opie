@@ -708,7 +708,7 @@ void AdvancedFm::fileBeamFinished( Ir *)
 
 void AdvancedFm::selectAll()
 {
-//    if (TabWidget->getCurrentTab() == 0) {
+//    if (TabWidget->currentTab() == 0) {
   QListView *thisView = CurrentView();
   thisView->selectAll(true);
   thisView->setSelected( thisView->firstChild(),false);

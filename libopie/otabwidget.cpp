@@ -78,7 +78,7 @@ OTabWidget::OTabWidget( QWidget *parent, const char *name, TabStyle s, TabPositi
     setTabStyle( s );
     setTabPosition( p );
 
-    currentTab= 0x0;
+    currTab= 0x0;
 }
 
 OTabWidget::~OTabWidget()
@@ -147,8 +147,8 @@ void OTabWidget::removePage( QWidget *childwidget )
             widgetStack->removeWidget( childwidget );
             tabs.remove( tab );
             delete tab;
-            currentTab = tabs.current();
-            if ( !currentTab )
+            currTab = tabs.current();
+            if ( !currTab )
             {
                 widgetStack->setFrameStyle( QFrame::NoFrame );
             }
@@ -250,7 +250,7 @@ void OTabWidget::setTabStyle( TabStyle s )
             if ( tabBarStyle == IconTab )
             {
                 currtab->iconset = new QIconSet( loadSmooth( tabinfo->icon() ) );
-                if ( tabinfo == currentTab )
+                if ( tabinfo == currTab )
                     currtab->setText( tabinfo->label() );
                 else
                     currtab->setText( QString::null );
@@ -335,9 +335,9 @@ void OTabWidget::selectTab( OTabInfo *tab )
 {
     if ( tabBarStyle == IconTab )
     {
-        if ( currentTab )
+        if ( currTab )
         {
-            tabBar->tab( currentTab->id() )->setText( QString::null );
+            tabBar->tab( currTab->id() )->setText( QString::null );
             setUpLayout();
         }
         tabBar->tab( tab->id() )->setText( tab->label() );
@@ -354,7 +354,7 @@ void OTabWidget::selectTab( OTabInfo *tab )
 
     emit currentChanged( tab->control() );
 
-    currentTab = tab;
+    currTab = tab;
 }
 
 void OTabWidget::setUpLayout()
@@ -398,11 +398,11 @@ void OTabWidget::resizeEvent( QResizeEvent * )
     setUpLayout();
 }
 
-int OTabWidget::getCurrentTab()
+int OTabWidget::currentTab()
 {
-    if ( currentTab )
+    if ( currTab )
     {
-        return currentTab->id();
+        return currTab->id();
     }
     return -1;
 }

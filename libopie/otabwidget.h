@@ -195,11 +195,10 @@ public:
     QSize sizeHint() const;
 
 /**
- * @fn getCurrentTab( )
+ * @fn currentTab( )
  * @brief returns current tab id.
  */
- //FIXME TT coding style currentTab() -zecke
-    int getCurrentTab();
+    int currentTab();
 
 
 protected:
@@ -212,7 +211,7 @@ protected:
 
 private:
     OTabInfoList  tabs;
-    OTabInfo     *currentTab;
+    OTabInfo     *currTab;
 
     TabStyle    tabBarStyle;
     TabPosition tabBarPosition;
