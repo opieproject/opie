@@ -6,7 +6,7 @@
     email                : sc@schulte-ac.de
  ***************************************************************************/
 
-/* $Id: scqtfileedit.h,v 1.1 2003-07-22 19:23:19 zcarsten Exp $ */
+/* $Id: scqtfileedit.h,v 1.2 2003-11-18 16:01:58 chicken Exp $ */
 
 /***************************************************************************
  *                                                                         *
@@ -28,7 +28,7 @@
 #include <qcombobox.h>
 #include <qtimer.h>
 
-#include <scqtfiledlg.h>
+#include "scqtfiledlg.h"
 
 #define MAXDIRCOMBOCOUNT  8
 #define MAXTYPECOMBOCOUNT 8
