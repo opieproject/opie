@@ -244,7 +244,7 @@ using namespace OpieTooth;
      * Add fresh found devices from scan dialog to the listing
      *
      */
-    void BlueBase::addSearchedDevices( QValueList<RemoteDevice> &newDevices ) {
+    void BlueBase::addSearchedDevices( const QValueList<RemoteDevice> &newDevices ) {
         BTListItem * deviceItem;
         QValueList<RemoteDevice>::ConstIterator it;
 
@@ -434,8 +434,8 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
     void BlueBase::startScan() {
         ScanDialog *scan = new ScanDialog( this, "ScanDialog",
                                            true, WDestructiveClose );
-        QObject::connect( scan, SIGNAL( selectedDevices( QValueList<RemoteDevice>& ) ),
-                         this, SLOT( addSearchedDevices( QValueList<RemoteDevice>& ) ) );
+        QObject::connect( scan, SIGNAL( selectedDevices( const QValueList<RemoteDevice>& ) ),
+                         this, SLOT( addSearchedDevices( const QValueList<RemoteDevice>& ) ) );
 
         scan->showMaximized();
     }
