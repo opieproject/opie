@@ -1,10 +1,16 @@
 TEMPLATE	= app
-CONFIG		= qt warn_on release
-DESTDIR		= ../bin
-HEADERS		= 
-SOURCES		= main.cpp
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH	+= $(QPEDIR)/include
-LIBS            += -lqpe
-INTERFACES	= 
+DESTDIR		= $$(QPEDIR)/bin
+
+CONFIG		+= qtopialib
+
+HEADERS		= qcopimpl.h
+SOURCES		= main.cpp qcopimpl.cpp 
+
+target.path     = /bin
+INSTALLS        += target
 TARGET		= qcop
+
+PACKAGE_DESCRIPTION=Interprocess communication client for the Qtopia environment.
+PACKAGE_DEPEND+=qt-embedded (>=$${QTE_VERSION})
+
+TRANSLATIONS=
