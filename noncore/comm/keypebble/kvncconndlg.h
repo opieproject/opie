@@ -20,6 +20,7 @@ class KVNCConnDlg : public KVNCConnDlgBase
 				void accept();
 		private slots:
 				void save();
+				void showPassword(int);
 
 		private:
 				KRFBServer tmpOptions;

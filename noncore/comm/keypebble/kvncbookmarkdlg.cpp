@@ -161,6 +161,8 @@ void KVNCBookmarkDlg::readBookmarks(void)
 								server->deIconify=val.toInt();
 						else if (key=="updaterate") 
 								server->updateRate=val.toInt();
+						else if (key=="scalefactor") 
+								server->scaleFactor=val.toInt();
 
 				}
 				if (server){
@@ -200,6 +202,7 @@ void KVNCBookmarkDlg::writeBookmarks(void)
 					t << "\treadonly=" << server->readOnly << '\n';
 					t << "\tdeiconify=" << server->deIconify << '\n';
 					t << "\tupdaterate=" << server->updateRate << '\n';
+					t << "\tscalefactor=" << server->scaleFactor << '\n';
 
 				}
 				f.close();

@@ -195,7 +195,7 @@ void KRFBDecoder::gotServerInit()
   qWarning( "RedShift = %d, GreenShift = %d, BlueShift = %d",
 	   info->redShift, info->greenShift,info-> blueShift );
 
-  buf->resize( info->width, info->height );
+  buf->resize( info->width/con->options()->scaleFactor, info->height /con->options()->scaleFactor);
 
   // Wait for desktop name
   qWarning( "Waiting for desktop name" );
@@ -642,8 +642,9 @@ void KRFBDecoder::sendMouseEvent( QMouseEvent *e )
     }
   }
 
-  CARD16 x = Swap16IfLE( e->x() );
-  CARD16 y = Swap16IfLE( e->y() );
+	// HACK: Scaling
+  CARD16 x = Swap16IfLE( e->x() * con->options()->scaleFactor );
+  CARD16 y = Swap16IfLE( e->y() *	con->options()->scaleFactor );
 
   con->write( &PointerEventId, 1 );
   con->write( &buttonMask, 1 );

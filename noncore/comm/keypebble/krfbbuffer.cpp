@@ -6,6 +6,8 @@
 #include <qapplication.h>
 #include "krfbdecoder.h"
 #include "krfbbuffer.h"
+#include "krfbconnection.h"
+#include "krfbserver.h"
 #include "krfbserverinfo.h"
 
 //
@@ -86,6 +88,7 @@ void KRFBBuffer::drawRawRectChunk( void *data,
 {
   QImage img( w, h, 32 );
 
+	int scaleFactor=decoder->con->options()->scaleFactor;
   int redMax = Swap16IfLE( decoder->format->redMax );
   int greenMax = Swap16IfLE( decoder->format->greenMax );
   int blueMax = Swap16IfLE( decoder->format->blueMax );
@@ -97,7 +100,8 @@ void KRFBBuffer::drawRawRectChunk( void *data,
 
     uint r,g,b;
 
-    for ( int j = 0; j < h; j++ ) {
+		
+    for ( int j = 0; j < h; j++) {
       for ( int i = 0; i < w ; i++ ) {
 	r = d[ j * w + i ];
 	r = r >> decoder->format->redShift;
@@ -187,8 +191,13 @@ void KRFBBuffer::drawRawRectChunk( void *data,
     p.drawRect( x, y, w, h );
   }
 
-  p.drawImage( x, y, img );
-
-  emit updated( x, y, w, h );
+	if (scaleFactor > 1) {
+		 p.drawImage( x/scaleFactor, y/scaleFactor, img.smoothScale(w/scaleFactor,h/scaleFactor) );
+		 emit updated( x/scaleFactor, y/scaleFactor, w/scaleFactor, h/scaleFactor );
+	} 
+	else {
+		 p.drawImage( x, y, img);
+		 emit updated( x, y, w, h );
+	}
 }
 

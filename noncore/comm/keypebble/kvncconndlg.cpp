@@ -1,6 +1,7 @@
 #include <qframe.h>
 #include <qvbox.h>
 #include <qcheckbox.h>
+#include <qcombobox.h>
 #include <qspinbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
@@ -29,6 +30,12 @@ KVNCConnDlg::KVNCConnDlg( KRFBServer *options,
 		rre->setChecked( options->rre );
 		copyRect->setChecked( options->copyrect );
 
+		for (int i=0; i < scaleFactor->count(); ++i) {
+				if (scaleFactor->text(i).toInt()==tmpOptions.scaleFactor) {
+						scaleFactor->setCurrentItem(i);
+				}
+		}
+
 		// TODO
 		hex->setEnabled( false );
 		corre->setEnabled( false );
@@ -40,9 +47,12 @@ KVNCConnDlg::KVNCConnDlg( KRFBServer *options,
 		shared->setChecked( options->shared );
 		timeBox->setValue( options->updateRate );
 		    
+		serverPassword->setEchoMode(QLineEdit::Password);
+
+		connect(togglePassword, SIGNAL( stateChanged(int) ), this, SLOT( showPassword(int) ) );
+
 
 }
-
 KVNCConnDlg::~KVNCConnDlg()
 {
 }
@@ -66,10 +76,19 @@ void KVNCConnDlg::save()
 		tmpOptions.password = serverPassword->text();
 		tmpOptions.display = serverDisplay->value();
 		tmpOptions.name = serverBookmark->text();
+		tmpOptions.scaleFactor = scaleFactor->currentText().toInt();
 
 		if (!serverBookmark->text().isEmpty()) {
        if ( options) {
           *options=tmpOptions;
         }
     }
+}
+
+void KVNCConnDlg::showPassword(int show)
+{
+		if (show)
+				serverPassword->setEchoMode(QLineEdit::Normal);
+		else
+			serverPassword->setEchoMode(QLineEdit::Password);
 }

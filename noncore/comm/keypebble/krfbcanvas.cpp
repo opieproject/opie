@@ -22,7 +22,8 @@ KRFBCanvas::KRFBCanvas( QWidget *parent, const char *name )
 	    this, SLOT( loggedIn() ) );
 
     loggedIn_ = false;
-		QPEApplication::setStylusOperation(viewport(), QPEApplication::RightOnHold);
+
+		//QPEApplication::setStylusOperation(viewport(), QPEApplication::RightOnHold);
 
     viewport()->setFocusPolicy( QWidget::StrongFocus );
     viewport()->setFocus();
@@ -104,6 +105,8 @@ void KRFBCanvas::viewportPaintEvent( QPaintEvent *e )
   QRect r = e->rect();
 
   if ( loggedIn_ ) {
+			QPixmap p;
+
     bitBlt( viewport(), r.x(), r.y(),
 	    connection_->buffer()->pixmap(),
 	    r.x() + contentsX(), r.y() + contentsY(),

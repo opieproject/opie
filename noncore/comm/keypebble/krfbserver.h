@@ -29,6 +29,7 @@ public:
   bool deIconify;
 
   int updateRate;
+  int scaleFactor;
 };
 
 #endif // KRFBOPTIONS_H

@@ -72,6 +72,7 @@ KVNC::KVNC( const char *name ) : QMainWindow( 0, name )
 		stack->addWidget(canvas,get_unique_id());
     setCentralWidget( stack );
 
+
     connect( bookmarkSelector->bookmarkList, SIGNAL(doubleClicked(QListBoxItem *)),
 	    this, SLOT(openConnection(QListBoxItem *)) );
     connect( canvas->connection(), SIGNAL(statusChanged(const QString &)),
@@ -92,7 +93,10 @@ KVNC::KVNC( const char *name ) : QMainWindow( 0, name )
 		stack->raiseWidget( bookmarkSelector );
 
 
-		QPEToolBar *bar = new QPEToolBar( this );
+		bar= new QToolBar( this );
+		setToolBarsMovable( false );
+		setRightJustification(false);
+
 
 		 QAction *n = new QAction( tr( "New Connection" ), Resource::loadPixmap( "new" ),
 				QString::null, 0, this, 0 );
@@ -235,6 +239,7 @@ void KVNC::connected()
     disconnectAction->setEnabled( true );
     fullScreenAction->setEnabled( true );
 		stack->raiseWidget(canvas);
+	 	bar->hide();
 }
 
 void KVNC::loggedIn()
@@ -254,6 +259,7 @@ void KVNC::disconnected()
     disconnectAction->setEnabled( false );
     fullScreenAction->setEnabled( false );
 		stack->raiseWidget(bookmarkSelector);
+	 	bar->show();
 }
 
 void KVNC::statusMessage( const QString &m )

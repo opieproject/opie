@@ -4,7 +4,7 @@
 #define KVNC_H
 
 #include <qmainwindow.h>
-#include <qurl.h>
+#include <qtoolbar.h>
 #include <qwidgetstack.h>
 #include "kvncbookmarkdlg.h"
 
@@ -17,7 +17,7 @@ class QToolBar;
  * Top level window for Keystone.
  *
  * @author Richard Moore, rich@kde.org
- * @version $Id: kvnc.h,v 1.2 2002-09-04 17:53:13 treke Exp $
+ * @version $Id: kvnc.h,v 1.3 2002-09-05 04:42:25 treke Exp $
  */
 class KVNC : public QMainWindow
 {
@@ -57,6 +57,7 @@ private:
   QAction *disconnectAction;
   QAction *ctlAltDelAction;;
   QAction *connectAction;
+	QToolBar * bar;
 
 	KVNCBookmarkDlg * bookmarkSelector;
 	QWidgetStack * stack;

@@ -98,6 +98,9 @@ signals:
   void error( const QString & );
   void status( const QString & );
 
+protected:
+  /** The connection to the server. */
+  KRFBConnection *con;
 private:
   State currentState;
 
@@ -118,8 +121,6 @@ private:
 
   /** Where we draw the data (and the source of our events). */
   KRFBBuffer *buf;
-  /** The connection to the server. */
-  KRFBConnection *con;
 
   /** Info about the RFB server. */
   KRFBServerInfo *info;

@@ -9,6 +9,8 @@ KRFBServer::KRFBServer()
 	QString password;
 	display=0;
 
+	scaleFactor=1;
+
   hexTile=0;
   corre=0;
   rre=0;
