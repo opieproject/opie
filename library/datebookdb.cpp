@@ -461,6 +461,9 @@ QValueList<EffectiveEvent> DateBookDB::getEffectiveEvents( const QDate &from,
 	      dtEnd;
 
     for (it = eventList.begin(); it != eventList.end(); ++it ) {
+	if (!(*it).isValidUid()) 
+	    (*it).assignUid(); // FIXME: Hack to restore cleared uids
+
         dtTmp = (*it).start(TRUE);
 	dtEnd = (*it).end(TRUE);
 
@@ -503,6 +506,8 @@ QValueList<EffectiveEvent> DateBookDB::getEffectiveEvents( const QDate &from,
     // check for repeating events...
     QDateTime repeat;
     for ( it = repeatEvents.begin(); it != repeatEvents.end(); ++it ) {
+	if (!(*it).isValidUid()) 
+	    (*it).assignUid(); // FIXME: Hack to restore cleared uids
 
 	/* create a false end date, to short circuit on hard
 	   MonthlyDay recurences */
@@ -582,6 +587,19 @@ QValueList<EffectiveEvent> DateBookDB::getEffectiveEvents( const QDateTime &dt)
     return tmpList;
 }
 
+Event DateBookDB::getEvent( int uid ) {
+    QValueList<Event>::ConstIterator it;
+    
+    for (it = eventList.begin(); it != eventList.end(); it++) {
+	if ((*it).uid() == uid) return *it;
+    }
+    for (it = repeatEvents.begin(); it != repeatEvents.end(); it++) {
+	if ((*it).uid() == uid) return *it;
+    }
+
+    qDebug("Event not found: uid=%d\n", uid);
+}
+
 
 void DateBookDB::addEvent( const Event &ev, bool doalarm )
 {
@@ -615,10 +633,12 @@ void DateBookDB::editEvent( const Event &old, Event &editedEv )
 	oldIndex = eventList.findIndex( old );
     saveJournalEntry( editedEv, ACTION_REPLACE, oldIndex, oldHadRepeat );
 
+    // Delete old event
     if ( old.hasAlarm() )
 	delEventAlarm( old );
     if ( oldHadRepeat ) {
-	if ( oldHadRepeat && editedEv.hasRepeat() ) {
+	if ( editedEv.hasRepeat() ) { // This mean that origRepeat was run above and 
+ 	                              // orig is initialized
 	    // assumption, when someone edits a repeating event, they
 	    // want to change them all, maybe not perfect, but it works
 	    // for the moment...
@@ -630,12 +650,15 @@ void DateBookDB::editEvent( const Event &old, Event &editedEv )
 	if ( it != eventList.end() )
 	    eventList.remove( it );
     }
+
+    // Add new event
     if ( editedEv.hasAlarm() )
 	addEventAlarm( editedEv );
     if ( editedEv.hasRepeat() )
 	repeatEvents.append( editedEv );
     else
 	eventList.append( editedEv );
+
     d->clean = false;
 }
 
