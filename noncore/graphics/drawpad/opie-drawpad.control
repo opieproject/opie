@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: Sébastien Prud'homme <prudhomme@laposte.net>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION-0.9.3post
+Version: $QPE_VERSION-$SUB_VERSION-0.9.4
 Depends: opie-base ($QPE_VERSION), libopie ($QPE_VERSION)
 Description: A note taking program with basic draw tools
  DrawPad is an easy note taking program for Zaurus.  It can also
