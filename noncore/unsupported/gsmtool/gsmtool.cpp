@@ -31,6 +31,11 @@ GSMTool::GSMTool( QWidget* parent,  const char* name, WFlags fl )
 	setConnected(FALSE);
 	/* FIXME: Persistent settings for device/baudrate */
 	connect(ConnectButton, SIGNAL(clicked()), this, SLOT(doConnectButton()));
+	connect(SMSDeleteButton, SIGNAL(clicked()), this, SLOT(doSMSDeleteButton()));
+	connect(SMSSendButton, SIGNAL(clicked()), this, SLOT(doSMSSendButton()));
+	connect(NewSMSClearButton, SIGNAL(clicked()), this, SLOT(doNewSMSClearButton()));
+	connect(NewSMSSaveButton, SIGNAL(clicked()), this, SLOT(doNewSMSSaveButton()));
+	connect(NewSMSSendButton, SIGNAL(clicked()), this, SLOT(doNewSMSSendButton()));
 	connect(ScanButton, SIGNAL(clicked()), this, SLOT(doScanButton()));
 	connect(TabWidget2, SIGNAL(currentChanged(QWidget *)), this, SLOT(doTabChanged()));
 	connect(SMSStoreList, SIGNAL(activated(int)), this, SLOT(doSMSStoreChanged()));
@@ -69,6 +74,7 @@ void GSMTool::setConnected( bool conn )
 {
 	TabWidget2->setTabEnabled(tab_2, conn);
 	TabWidget2->setTabEnabled(tab_3, conn);
+	TabWidget2->setTabEnabled(tab_4, conn);
 	MfrLabel->setEnabled(conn);
 	MfrText->setEnabled(conn);
 	ModelLabel->setEnabled(conn);
@@ -144,7 +150,8 @@ void GSMTool::doSMSStoreChanged()
 	if (!strcmp(storename, "None")) {
 		sms_store = NULL;
 	} else try {
-		sms_store = me->getSMSStore(storename);
+		sms_store = new SortedSMSStore(me->getSMSStore(storename));
+		sms_store->setSortOrder(ByIndex);
 
 		qDebug("got store of size %d", sms_store->size());
 	} catch (GsmException) {
@@ -153,6 +160,7 @@ void GSMTool::doSMSStoreChanged()
 	}
 	
 	SMSList->setEnabled(!(sms_store == NULL));
+	NewSMSSaveButton->setEnabled(!(sms_store == NULL));
 	doSMSTypeChanged();
 }
 
@@ -160,27 +168,32 @@ void GSMTool::doSMSTypeChanged()
 {
 	int direction = SMSViewType->currentItem();
 	qDebug("direction %s\n", direction?"outgoing":"incoming");
+	if (direction)
+		SMSSendButton->setText("Send");
+	else 
+		SMSSendButton->setText("Reply");
 
 	SMSList->clear();
 	doSelectedSMSChanged(NULL);
 
 	if (sms_store == NULL)
 		return;
-	for (int i = 0; i < sms_store->size(); i++) {
-		qDebug("Message %d", i);
-		qDebug("Is%sempty", sms_store()[i].empty()?" ":" not ");
-		if (sms_store()[i].empty())
+	for (SortedSMSStore::iterator e = sms_store->begin();
+	     e != sms_store->end(); e++) {
+		//		qDebug("Message %d", i);
+		qDebug("Is%sempty", e->empty()?" ":" not ");
+		if (e->empty())
 			continue;
 
-		qDebug("Status %d", sms_store()[i].status());
-		SMSMessageRef message = sms_store()[i].message();
+		qDebug("Status %d", e->status());
+		SMSMessageRef message = e->message();
 		qDebug("Got message.");
 		
 		//		qDebug(message->toString().c_str());
 		if (direction == message->messageType()) {
 			qDebug("yes\n");
 			char buf[3];
-			snprintf(buf, 3,  "%d", i);
+			snprintf(buf, 3,  "%d", e->index());
 			new QListViewItem(SMSList, message->address()._number.c_str(), message->serviceCentreTimestamp().toString().c_str(), buf);
 		} 
 	}		
@@ -207,7 +220,7 @@ void GSMTool::doSelectedSMSChanged(QListViewItem *item)
 	qDebug("text(2) is %s\n", item->text(2).ascii());
 	int index = atoi(item->text(2).ascii());
 	qDebug("index %d\n", index);
-	SMSMessageRef message = sms_store()[index].message();
+	SMSMessageRef message = sms_store->find(index)->message();
 
 	SMSText->setText(message->userData().c_str());
 	SMSText->setEnabled(TRUE);
@@ -215,6 +228,104 @@ void GSMTool::doSelectedSMSChanged(QListViewItem *item)
 	SMSSendButton->setEnabled(TRUE);
 
 }
+
+void GSMTool::doSMSSendButton()
+{
+	qDebug("SMSSendButton");
+
+	QListViewItem *item = SMSList->currentItem();
+	if (!item)
+		return;
+
+	int index = atoi(item->text(2).ascii());
+	qDebug("index %d\n", index);
+
+	int direction = SMSViewType->currentItem();
+	qDebug("direction %s\n", direction?"outgoing":"incoming");
+
+	SMSMessageRef message = sms_store->find(index)->message();
+
+	if (direction)
+		NewSMSText->setText(message->userData().c_str());
+	else 
+		NewSMSText->setText("");
+	NewSMSToBox->insertItem(message->address()._number.c_str(), 0);
+	TabWidget2->setCurrentPage(3);
+
+}
+
+void GSMTool::doNewSMSClearButton()
+{
+	NewSMSText->setText("");
+}
+
+void GSMTool::doNewSMSSaveButton()
+{
+	qDebug("NewSMSSaveButton");
+	const char *msgtext = strdup(NewSMSText->text().local8Bit());
+	const char *dest = NewSMSToBox->currentText().ascii();
+
+	NewSMSStatusLabel->setText("Sending...");
+	me->setMessageService(1);
+
+	qDebug("NewSMSSendButton: '%s' to '%s'", msgtext, dest);
+
+        SMSMessageRef m = new SMSSubmitMessage (msgtext, dest);
+	sms_store->insert(m);
+	free((void *)msgtext);
+		
+}
+void GSMTool::doNewSMSSendButton()
+{
+	const char *msgtext = strdup(NewSMSText->text().local8Bit());
+	const char *dest = NewSMSToBox->currentText().ascii();
+
+	NewSMSStatusLabel->setText("Sending...");
+	me->setMessageService(1);
+
+	qDebug("NewSMSSendButton: '%s' to '%s'", msgtext, dest);
+
+        SMSSubmitMessage m(msgtext, dest);
+	try {
+		Ref<SMSMessage> ackPDU;
+		m.setAt(new GsmAt(*me));
+		m.send(ackPDU);
+		
+		// print acknowledgement if available
+		if (! ackPDU.isnull())
+			cout << ackPDU->toString();
+		NewSMSStatusLabel->setText("Message sent.");
+	} catch (GsmException &ge) {
+		NewSMSStatusLabel->setText("Failed.");
+		qDebug(ge.what());
+	}
+	free((void *)msgtext);
+		
+
+}
+
+
+void GSMTool::doSMSDeleteButton()
+{
+	QListViewItem *item = SMSList->currentItem();
+	if (!item)
+		return;
+
+	int index = atoi(item->text(2).ascii());
+	qDebug("delete SMS with index %d\n", index);
+
+
+
+	SortedSMSStore::iterator e = sms_store->find(index);
+
+	if (e != sms_store->end()) {
+		qDebug("message is %s\n", e->message()->userData().c_str());
+			sms_store->erase(e);
+		
+	}
+	doSMSTypeChanged();
+}
+
 void GSMTool::doScanButton()
 {
 	qDebug("ScanButton");

@@ -5,6 +5,7 @@
 #include <termios.h>
 
 #include <gsmlib/gsm_me_ta.h>
+#include <gsmlib/gsm_sorted_sms_store.h>
 
 class GSMTool : public GSMToolBase
 { 
@@ -24,14 +25,18 @@ private slots:
 	void doSMSStoreChanged();
 	void doSMSTypeChanged();
 	void doSelectedSMSChanged(QListViewItem *);
-
+	void doSMSSendButton();
+	void doSMSDeleteButton();
+	void doNewSMSClearButton();
+	void doNewSMSSaveButton();
+	void doNewSMSSendButton();
 private:
  static const speed_t baudrates[];
  int devicelocked;
  int timerid;
 
  gsmlib::MeTa *me;
- gsmlib::SMSStoreRef sms_store;
+ gsmlib::SortedSMSStoreRef sms_store;
 
  char *devicename; 
  speed_t baudrate;
