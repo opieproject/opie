@@ -35,14 +35,14 @@ MediaPlayer::MediaPlayer( PlayListWidget &_playList, MediaPlayerState &_mediaPla
     //    QPEApplication::grabKeyboard(); // EVIL
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
-    connect( &mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( setPlaying( bool ) ) );
+    connect( &mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
 
 // What is pauseCheck good for? (Simon)
-//    connect( &mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pauseCheck( bool ) ) );
+//    connect( &mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( pauseCheck(bool) ) );
 
     connect( &mediaPlayerState, SIGNAL( next() ), this, SLOT( next() ) );
     connect( &mediaPlayerState, SIGNAL( prev() ), this, SLOT( prev() ) );
-    connect( &mediaPlayerState, SIGNAL( blankToggled( bool ) ), this, SLOT ( blank( bool ) ) );
+    connect( &mediaPlayerState, SIGNAL( blankToggled(bool) ), this, SLOT ( blank(bool) ) );
 
     volControl = new VolumeControl;
     Config cfg( "OpiePlayer" );

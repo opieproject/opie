@@ -141,17 +141,17 @@ Output::Output( const QStringList commands, QWidget* parent,  const char* name, 
 
     proc = new OProcess();
 
-    connect(proc, SIGNAL(processExited(OProcess *)),
+    connect(proc, SIGNAL(processExited(OProcess*)),
             this, SLOT( processFinished()));
 
-    connect(proc, SIGNAL(receivedStdout(OProcess *, char *, int)),
-            this, SLOT(commandStdout(OProcess *, char *, int)));
+    connect(proc, SIGNAL(receivedStdout(OProcess*,char*,int)),
+            this, SLOT(commandStdout(OProcess*,char*,int)));
 
-    connect(proc, SIGNAL(receivedStderr(OProcess *, char *, int)),
-            this, SLOT(commandStderr(OProcess *, char *, int)));
+    connect(proc, SIGNAL(receivedStderr(OProcess*,char*,int)),
+            this, SLOT(commandStderr(OProcess*,char*,int)));
 
-//     connect( , SIGNAL(received(const QByteArray &)),
-//             this, SLOT(commandStdin(const QByteArray &)));
+//     connect( , SIGNAL(received(const QByteArray&)),
+//             this, SLOT(commandStdin(const QByteArray&)));
 
 //    * proc << commands.latin1();
       for ( QStringList::Iterator it = cmmds.begin(); it != cmmds.end(); ++it ) {
@@ -240,8 +240,8 @@ void Output::processFinished() {
     OutputEdit->append( tr("\nFinished\n") );
     OutputEdit->setCursorPosition( OutputEdit->numLines() + 1,0,FALSE);
 //    close();
-//     disconnect( layer(), SIGNAL(received(const QByteArray &)),
-//                this, SLOT(commandStdin(const QByteArray &)));
+//     disconnect( layer(), SIGNAL(received(const QByteArray&)),
+//                this, SLOT(commandStdin(const QByteArray&)));
 }
 
 //==============================

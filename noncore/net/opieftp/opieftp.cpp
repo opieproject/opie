@@ -176,12 +176,12 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
 
     tabLayout->addWidget( Local_View, 0, 0 );
 
-     connect( Local_View, SIGNAL( clicked( QListViewItem*)),
-              this,SLOT( localListClicked(QListViewItem *)) );
-//     connect( Local_View, SIGNAL( doubleClicked( QListViewItem*)),
-//              this,SLOT( localListClicked(QListViewItem *)) );
-     connect( Local_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-              this,SLOT( ListPressed(int, QListViewItem *, const QPoint&, int)) );
+     connect( Local_View, SIGNAL( clicked(QListViewItem*)),
+              this,SLOT( localListClicked(QListViewItem*)) );
+//     connect( Local_View, SIGNAL( doubleClicked(QListViewItem*)),
+//              this,SLOT( localListClicked(QListViewItem*)) );
+     connect( Local_View, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int)),
+              this,SLOT( ListPressed(int,QListViewItem*,const QPoint&,int)) );
 
     TabWidget->insertTab( tab, tr( "Local" ) );
 
@@ -207,10 +207,10 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
 
     QPEApplication::setStylusOperation( Remote_View->viewport(),QPEApplication::RightOnHold);
 
-    connect( Remote_View, SIGNAL( clicked( QListViewItem*)),
-             this,SLOT( remoteListClicked(QListViewItem *)) );
-    connect( Remote_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-             this,SLOT( RemoteListPressed(int, QListViewItem *, const QPoint&, int)) );
+    connect( Remote_View, SIGNAL( clicked(QListViewItem*)),
+             this,SLOT( remoteListClicked(QListViewItem*)) );
+    connect( Remote_View, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int)),
+             this,SLOT( RemoteListPressed(int,QListViewItem*,const QPoint&,int)) );
 
     tabLayout_2->addWidget( Remote_View, 0, 0 );
 
@@ -229,8 +229,8 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
     UsernameComboBox->setEditable(TRUE);
     tabLayout_3->addMultiCellWidget( UsernameComboBox, 1, 1, 0, 1 );
 
-    connect( UsernameComboBox,SIGNAL(textChanged(const QString &)),this,
-             SLOT( UsernameComboBoxEdited(const QString & ) ));
+    connect( UsernameComboBox,SIGNAL(textChanged(const QString&)),this,
+             SLOT( UsernameComboBoxEdited(const QString&) ));
 
     TextLabel2 = new QLabel( tab_3, "TextLabel2" );
     TextLabel2->setText( tr( "Password" ) );
@@ -240,8 +240,8 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
     PasswordEdit->setEchoMode(QLineEdit::Password);
     tabLayout_3->addMultiCellWidget( PasswordEdit, 1, 1, 2, 3 );
 
-    connect( PasswordEdit,SIGNAL(textChanged(const QString &)),this,
-             SLOT( PasswordEditEdited(const QString & ) ));
+    connect( PasswordEdit,SIGNAL(textChanged(const QString&)),this,
+             SLOT( PasswordEditEdited(const QString&) ));
 
 //PasswordEdit->setFixedWidth(85);
     TextLabel3 = new QLabel( tab_3, "TextLabel3" );
@@ -252,9 +252,9 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
     ServerComboBox->setEditable(TRUE);
     tabLayout_3->addMultiCellWidget( ServerComboBox, 3, 3, 0, 1 );
 
-    connect(ServerComboBox,SIGNAL(activated(int)),this,SLOT(serverComboSelected(int ) ));
-    connect(ServerComboBox,SIGNAL(textChanged(const QString &)),this,
-            SLOT(serverComboEdited(const QString & ) ));
+    connect(ServerComboBox,SIGNAL(activated(int)),this,SLOT(serverComboSelected(int) ));
+    connect(ServerComboBox,SIGNAL(textChanged(const QString&)),this,
+            SLOT(serverComboEdited(const QString&) ));
 
     QLabel *TextLabel5 = new QLabel( tab_3, "TextLabel5" );
     TextLabel5->setText( tr( "Remote path" ) );
@@ -275,13 +275,13 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
     serverListView = new QListBox( tab_3, "ServerListView" );
     tabLayout_3->addMultiCellWidget( serverListView , 5, 5, 0, 5);
 
-    connect( serverListView, SIGNAL( highlighted( const QString &)),
-             this,SLOT( serverListClicked( const QString &) ) );
+    connect( serverListView, SIGNAL( highlighted(const QString&)),
+             this,SLOT( serverListClicked(const QString&) ) );
 
     connectServerBtn = new QPushButton( tr("Connect"), tab_3 , "ConnectButton" );
     tabLayout_3->addMultiCellWidget( connectServerBtn, 6, 6, 0, 1);
     connectServerBtn->setToggleButton(TRUE);
-    connect(connectServerBtn,SIGNAL( toggled( bool)),SLOT( connectorBtnToggled(bool) ));
+    connect(connectServerBtn,SIGNAL( toggled(bool)),SLOT( connectorBtnToggled(bool) ));
 
     newServerButton= new QPushButton( tr("Add"), tab_3 , "NewServerButton" );
     tabLayout_3->addMultiCellWidget( newServerButton, 6, 6, 2, 2);
@@ -300,7 +300,7 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
     TabWidget->insertTab( tab_3, tr( "Config" ) );
 
 #if 0
-    connect(TabWidget,SIGNAL(currentChanged(QWidget *)),
+    connect(TabWidget,SIGNAL(currentChanged(QWidget*)),
             this,SLOT(tabChanged(QWidget*)));
 #endif
 
@@ -315,8 +315,8 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
     currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
 
 #if 0
-    connect( currentPathCombo, SIGNAL( activated( const QString & ) ),
-              this, SLOT(  currentPathComboActivated( const QString & ) ) );
+    connect( currentPathCombo, SIGNAL( activated(const QString&) ),
+              this, SLOT(  currentPathComboActivated(const QString&) ) );
 
     connect( currentPathCombo->lineEdit(),SIGNAL(returnPressed()),
              this,SLOT(currentPathComboChanged()));

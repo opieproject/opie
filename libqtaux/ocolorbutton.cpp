@@ -59,7 +59,7 @@ OColorButton::OColorButton ( QWidget *parent, const QColor &color, const char *n
     d-> m_menu = new OColorPopupMenu ( color, 0, 0 );
     setPopup ( d-> m_menu );
     //	setPopupDelay ( 0 );
-    connect ( d-> m_menu, SIGNAL( colorSelected ( const QColor & )), this, SLOT( updateColor ( const QColor & )));
+    connect ( d-> m_menu, SIGNAL( colorSelected(const QColor&)), this, SLOT( updateColor(const QColor&)));
 
     updateColor ( color );
 

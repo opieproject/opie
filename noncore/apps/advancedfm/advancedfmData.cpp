@@ -253,33 +253,33 @@ void AdvancedFm::initConnections()
            this,SLOT( docButtonPushed()) );
   connect( homeButton,SIGNAL(released()),
            this,SLOT( homeButtonPushed()) );
-  connect( currentPathCombo, SIGNAL( activated( const QString & ) ),
-           this, SLOT(  currentPathComboActivated( const QString & ) ) );
+  connect( currentPathCombo, SIGNAL( activated(const QString&) ),
+           this, SLOT(  currentPathComboActivated(const QString&) ) );
 
   connect( currentPathCombo->lineEdit(),SIGNAL(returnPressed()),
            this,SLOT(currentPathComboChanged()));
 
-  connect( Local_View, SIGNAL( clicked( QListViewItem*)),
-           this,SLOT( ListClicked(QListViewItem *)) );
+  connect( Local_View, SIGNAL( clicked(QListViewItem*)),
+           this,SLOT( ListClicked(QListViewItem*)) );
 
-  connect( Local_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-           this,SLOT( ListPressed(int, QListViewItem *, const QPoint&, int)) );
+  connect( Local_View, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int)),
+           this,SLOT( ListPressed(int,QListViewItem*,const QPoint&,int)) );
 
   connect( Local_View, SIGNAL( selectionChanged() ), SLOT( cancelMenuTimer() ) );
 
-  connect( Remote_View, SIGNAL( clicked( QListViewItem*)),
-           this,SLOT( ListClicked(QListViewItem *)) );
-  connect( Remote_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-           this,SLOT( ListPressed(int, QListViewItem *, const QPoint&, int)) );
+  connect( Remote_View, SIGNAL( clicked(QListViewItem*)),
+           this,SLOT( ListClicked(QListViewItem*)) );
+  connect( Remote_View, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int)),
+           this,SLOT( ListPressed(int,QListViewItem*,const QPoint&,int)) );
 
-  connect( TabWidget,SIGNAL(currentChanged(QWidget *)),
+  connect( TabWidget,SIGNAL(currentChanged(QWidget*)),
           this,SLOT(tabChanged(QWidget*)));
 
   connect( &menuTimer, SIGNAL( timeout() ), SLOT( showFileMenu() ) );
 
-  connect( menuButton, SIGNAL( selected(const QString &)), SLOT(gotoCustomDir(const QString&)));
-//  connect( menuButton, SIGNAL( selected( int)), SLOT( dirMenuSelected(int)));
-  connect( viewMenu, SIGNAL( activated(int )), this, SLOT(slotSwitchMenu(int )));
+  connect( menuButton, SIGNAL( selected(const QString&)), SLOT(gotoCustomDir(const QString&)));
+//  connect( menuButton, SIGNAL( selected(int)), SLOT( dirMenuSelected(int)));
+  connect( viewMenu, SIGNAL( activated(int)), this, SLOT(slotSwitchMenu(int)));
 //  connect( customDirMenu, SIGNAL( activated(int)), this, SLOT( dirMenuSelected(int)));
 
 }

@@ -33,8 +33,8 @@ Kpacman::Kpacman(QWidget *parent, const char *name)
 
     view->referee->setFocus();
 
-    connect(view->referee, SIGNAL(setScore(int, int)),
-            view->score, SLOT(setScore(int, int)));
+    connect(view->referee, SIGNAL(setScore(int,int)),
+            view->score, SLOT(setScore(int,int)));
     connect(view->referee, SIGNAL(setPoints(int)),
             view->score, SLOT(set(int)));
     connect(view->referee, SIGNAL(setLifes(int)),

@@ -106,18 +106,18 @@ EmulationLayer::EmulationLayer( WidgetLayer* gui )
   connected  = FALSE;
 
   QObject::connect(&bulk_timer, SIGNAL( timeout() ), this, SLOT( showBulk() ) );
-  QObject::connect(gui,SIGNAL( imageSizeChanged( int, int ) ),
-                   this,SLOT( onImageSizeChange( int, int ) ) );
-  QObject::connect(gui,SIGNAL( changedHistoryCursor( int ) ),
-                   this,SLOT( historyCursorChange( int ) ) );
-  QObject::connect(gui,SIGNAL( keyPressed( QKeyEvent* ) ),
-                   this,SLOT( onKeyPress( QKeyEvent* ) ) );
-  QObject::connect(gui,SIGNAL( selectionBegin( const int, const int) ),
-		   this,SLOT( onSelectionBegin( const int, const int ) ) );
-  QObject::connect(gui,SIGNAL( selectionExtended( const int, const int ) ),
-		   this,SLOT( onSelectionExtend( const int,const int ) ) );
-  QObject::connect(gui,SIGNAL( selectionEnd( const bool ) ),
-		   this,SLOT( setSelection( const bool ) ) );
+  QObject::connect(gui,SIGNAL( imageSizeChanged(int,int) ),
+                   this,SLOT( onImageSizeChange(int,int) ) );
+  QObject::connect(gui,SIGNAL( changedHistoryCursor(int) ),
+                   this,SLOT( historyCursorChange(int) ) );
+  QObject::connect(gui,SIGNAL( keyPressed(QKeyEvent*) ),
+                   this,SLOT( onKeyPress(QKeyEvent*) ) );
+  QObject::connect(gui,SIGNAL( selectionBegin(const int,const int) ),
+		   this,SLOT( onSelectionBegin(const int,const int) ) );
+  QObject::connect(gui,SIGNAL( selectionExtended(const int,const int) ),
+		   this,SLOT( onSelectionExtend(const int,const int) ) );
+  QObject::connect(gui,SIGNAL( selectionEnd(const bool) ),
+		   this,SLOT( setSelection(const bool) ) );
   QObject::connect(gui,SIGNAL( selectionCleared() ),
 		   this,SLOT( clearSelection() ) );
 }

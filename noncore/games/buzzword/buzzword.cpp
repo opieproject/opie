@@ -111,7 +111,7 @@ void BuzzWord::drawGrid()
 
 			QString word = QStringList::split(" ", l[pos]).join("\n");
 			BuzzItem* bi = new BuzzItem( c, r, word, grid );
-			connect( bi, SIGNAL(clicked(int, int)), this, SLOT(clicked(int,int)) );
+			connect( bi, SIGNAL(clicked(int,int)), this, SLOT(clicked(int,int)) );
 			map[c][r] = 0;
 
 			l.remove( l.at( pos ));

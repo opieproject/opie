@@ -55,7 +55,7 @@ StyleChanger::StyleChanger( QWidget *parent )
 
   col = new KColorButton(this);
   CHECK_PTR(col);
-  connect(col,SIGNAL(changed(const QColor &)),this,SLOT(changed()));
+  connect(col,SIGNAL(changed(const QColor&)),this,SLOT(changed()));
   label = new QLabel(col,i18n("Normal:"),this);
   CHECK_PTR(label);
   glay->addWidget(label,0,0);
@@ -63,7 +63,7 @@ StyleChanger::StyleChanger( QWidget *parent )
 
   selCol = new KColorButton(this);
   CHECK_PTR(selCol);
-  connect(selCol,SIGNAL(changed(const QColor &)),this,SLOT(changed()));
+  connect(selCol,SIGNAL(changed(const QColor&)),this,SLOT(changed()));
   label = new QLabel(selCol,i18n("Selected:"),this);
   CHECK_PTR(label);
   glay->addWidget(label,2,0);
@@ -286,7 +286,7 @@ HlEditDialog::HlEditDialog(HlManager *,QWidget *parent, const char *name, bool m
     setMainWidget(wid);
     if (data!=0) loadFromDocument(data);
     else newDocument();
-    connect(contextList,SIGNAL(currentChanged( QListViewItem*)),this,SLOT(currentSelectionChanged ( QListViewItem * )));
+    connect(contextList,SIGNAL(currentChanged(QListViewItem*)),this,SLOT(currentSelectionChanged(QListViewItem*)));
     connect(addContext,SIGNAL(clicked()),this,SLOT(contextAddNew()));
     connect(addItem,SIGNAL(clicked()),this,SLOT(ItemAddNew()));
     }

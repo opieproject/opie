@@ -54,8 +54,8 @@ TVBrowseView::TVBrowseView(TableState *t, QWidget* parent, const char *name,
 
     /* connect the signals down */
 
-    connect(keyEntry, SIGNAL(searchOnKey(int, TVVariant)),
-        this, SIGNAL(searchOnKey(int, TVVariant)));
+    connect(keyEntry, SIGNAL(searchOnKey(int,TVVariant)),
+        this, SIGNAL(searchOnKey(int,TVVariant)));
     connect(keyEntry, SIGNAL(sortChanged(int)),
         this, SIGNAL(sortChanged(int)));
 

@@ -66,8 +66,8 @@ namespace OpieTooth {
         localDevice = new Manager( "hci0" );
 
         connect( StartStopButton, SIGNAL( clicked() ), this, SLOT( startSearch() ) );
-        connect( localDevice, SIGNAL( foundDevices( const QString& , RemoteDevice::ValueList ) ),
-                 this, SLOT( fillList( const QString& , RemoteDevice::ValueList ) ) ) ;
+        connect( localDevice, SIGNAL( foundDevices(const QString&,RemoteDevice::ValueList) ),
+                 this, SLOT( fillList(const QString&,RemoteDevice::ValueList) ) ) ;
 
         progressStat = 0;
         m_search = false;

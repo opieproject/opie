@@ -25,14 +25,14 @@ void SzTransfer::sendFile(const QString& file) {
     proc = new OProcess;
     *proc << "sz";
     *proc << "-v" << "-v" << "-b" << file;
-    connect(proc, SIGNAL(processExited(OProcess *)),
+    connect(proc, SIGNAL(processExited(OProcess*)),
             this, SLOT(sent()));
-    connect(proc, SIGNAL(receivedStdout(OProcess *, char *, int)),
-            this, SLOT(SzReceivedStdout(OProcess *, char *, int)));
-    connect(proc, SIGNAL(receivedStderr(OProcess *, char *, int)),
-            this, SLOT(SzReceivedStderr(OProcess *, char *, int)));
-    connect(layer(), SIGNAL(received(const QByteArray &)),
-            this, SLOT(receivedStdin(const QByteArray &)));
+    connect(proc, SIGNAL(receivedStdout(OProcess*,char*,int)),
+            this, SLOT(SzReceivedStdout(OProcess*,char*,int)));
+    connect(proc, SIGNAL(receivedStderr(OProcess*,char*,int)),
+            this, SLOT(SzReceivedStderr(OProcess*,char*,int)));
+    connect(layer(), SIGNAL(received(const QByteArray&)),
+            this, SLOT(receivedStdin(const QByteArray&)));
     proc->start(OProcess::NotifyOnExit, OProcess::All);
 
 }
@@ -78,7 +78,7 @@ void SzTransfer::sent() {
 
 
     delete proc;
-    disconnect(layer(), SIGNAL(received(const QByteArray &)),
-            this, SLOT(receivedStdin(const QByteArray &)));
+    disconnect(layer(), SIGNAL(received(const QByteArray&)),
+            this, SLOT(receivedStdin(const QByteArray&)));
 
 }

@@ -206,7 +206,7 @@ void ODict::setupMenus()
 	setting_b = new QAction(tr(  "Searchmethods" ), Resource::loadPixmap( "edit" ), QString::null, 0, this, 0 );
 
 	parameter = new QPopupMenu( menu );
-	connect(  parameter, SIGNAL( activated( int ) ), this, SLOT( slotSetParameter( int ) ) );
+	connect(  parameter, SIGNAL( activated(int) ), this, SLOT( slotSetParameter(int) ) );
 	parameter->insertItem( tr( "C&ase sensitive" ), 0 ,0 );
 	parameter->insertSeparator();
 

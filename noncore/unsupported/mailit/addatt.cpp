@@ -90,14 +90,14 @@ AddAtt::AddAtt(QWidget *parent, const char *name, WFlags f)
 	
 	/*listView = new QListView(this, "AttView");
 	listView->addColumn("Documents");*
-	connect(listView, SIGNAL(doubleClicked(QListViewItem *)), this,
+	connect(listView, SIGNAL(doubleClicked(QListViewItem*)), this,
 		SLOT(addattachment()) );*/
 	
 	
 	attView = new QListView(this, "Selected");
 	attView->addColumn(tr("Attached"));
 	attView->addColumn(tr("File type"));
-	connect(attView, SIGNAL(doubleClicked(QListViewItem *)), this,
+	connect(attView, SIGNAL(doubleClicked(QListViewItem*)), this,
 		SLOT(removeattachment()) );
 
 	//top->addWidget(ofs, 0,0);

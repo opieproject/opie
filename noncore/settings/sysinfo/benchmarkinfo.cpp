@@ -145,7 +145,7 @@ BenchmarkInfo::BenchmarkInfo( QWidget *parent, const char *name, int wFlags )
         QHBoxLayout* hb = new QHBoxLayout( vb );
         hb->addWidget( new QLabel( tr( "Compare To:" ), this ) );
         hb->addWidget( machineCombo, 2 );
-        connect( machineCombo, SIGNAL( activated( int ) ), this, SLOT( machineActivated( int ) ) );
+        connect( machineCombo, SIGNAL( activated(int) ), this, SLOT( machineActivated(int) ) );
     }
     
     vb->addWidget( startButton, 2 );

@@ -322,10 +322,10 @@ int MHwrapper::deleteMbox(const Folder*tfolder)
     command << cmd.latin1();
     OProcess *process = new OProcess();
     
-    connect(process, SIGNAL(processExited(OProcess *)),
-            this, SLOT( processEnded(OProcess *)));
-    connect(process, SIGNAL( receivedStderr(OProcess *, char *, int)),
-            this, SLOT( oprocessStderr(OProcess *, char *, int)));
+    connect(process, SIGNAL(processExited(OProcess*)),
+            this, SLOT( processEnded(OProcess*)));
+    connect(process, SIGNAL( receivedStderr(OProcess*,char*,int)),
+            this, SLOT( oprocessStderr(OProcess*,char*,int)));
 
     *process << command;
     removeMboxfailed = false;

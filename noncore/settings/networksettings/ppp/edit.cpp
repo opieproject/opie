@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: edit.cpp,v 1.10 2004-02-21 16:02:02 ar Exp $
+ * $Id: edit.cpp,v 1.11 2004-03-02 12:21:30 alwin Exp $
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
  *
@@ -572,8 +572,8 @@ DNSWidget::DNSWidget( PPPData *pd, QWidget *parent, bool isnewaccount, const cha
     dnsipaddr = new IPLineEdit(this);
     connect(dnsipaddr, SIGNAL(returnPressed()),
             SLOT(adddns()));
-    connect(dnsipaddr, SIGNAL(textChanged(const QString &)),
-            SLOT(DNS_Edit_Changed(const QString &)));
+    connect(dnsipaddr, SIGNAL(textChanged(const QString&)),
+            SLOT(DNS_Edit_Changed(const QString&)));
     l2->addWidget(dnsipaddr, 1);
     l2->addStretch(1);
     tmp = tr("<p>Allows you to specify a new DNS server to be\n"
@@ -1184,8 +1184,8 @@ PhoneNumberDialog::PhoneNumberDialog(QWidget *parent)
     le = new QLineEdit(this, "lineEdit");
     layout->addWidget( le );
 
-    connect(le, SIGNAL(textChanged(const QString &)),
-            this, SLOT(textChanged(const QString &)));
+    connect(le, SIGNAL(textChanged(const QString&)),
+            this, SLOT(textChanged(const QString&)));
 
     le->setFocus();
     textChanged("");

@@ -172,7 +172,7 @@ void MainWindow::buildList()
     cbList->setAllColumnsShowFocus( TRUE );
     cbList->setSorting( posName );
     QPEApplication::setStylusOperation( cbList->viewport(), QPEApplication::RightOnHold );
-    connect( cbList, SIGNAL( rightButtonPressed( QListViewItem *, const QPoint &, int ) ),
+    connect( cbList, SIGNAL( rightButtonPressed(QListViewItem*,const QPoint&,int) ),
              this, SLOT( slotEdit() ) );
     setCentralWidget( cbList );
 

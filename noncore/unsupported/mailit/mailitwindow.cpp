@@ -37,32 +37,32 @@ MailItWindow::MailItWindow(QWidget *parent, const char *name, WFlags /*fl*/)
                         
   connect(emailClient, SIGNAL(composeRequested()),
     this, SLOT(compose()) );
-  connect(emailClient, SIGNAL(viewEmail(QListView *, Email *)), this,
-      SLOT(viewMail(QListView *, Email *)) );
-  connect(emailClient, SIGNAL(mailUpdated(Email *)), this,
-      SLOT(updateMailView(Email *)) );
+  connect(emailClient, SIGNAL(viewEmail(QListView*,Email*)), this,
+      SLOT(viewMail(QListView*,Email*)) );
+  connect(emailClient, SIGNAL(mailUpdated(Email*)), this,
+      SLOT(updateMailView(Email*)) );
 
   connect(writeMail, SIGNAL(cancelMail()), this, SLOT(showEmailClient()) );
-  connect(writeMail, SIGNAL(sendMailRequested(const Email &)), this,
+  connect(writeMail, SIGNAL(sendMailRequested(const Email&)), this,
       SLOT(showEmailClient()) );
-  connect(writeMail, SIGNAL(sendMailRequested(const Email &)), emailClient,
-      SLOT(enqueMail(const Email &)) );
+  connect(writeMail, SIGNAL(sendMailRequested(const Email&)), emailClient,
+      SLOT(enqueMail(const Email&)) );
   
   connect(readMail, SIGNAL(cancelView()), this, SLOT(showEmailClient()) );
-  connect(readMail, SIGNAL(replyRequested(Email &, bool&)), this,
-    SLOT(composeReply(Email &, bool&)) );
-  connect(readMail, SIGNAL(forwardRequested(Email &)), this,
-    SLOT(composeForward(Email &)) );
+  connect(readMail, SIGNAL(replyRequested(Email&,bool&)), this,
+    SLOT(composeReply(Email&,bool&)) );
+  connect(readMail, SIGNAL(forwardRequested(Email&)), this,
+    SLOT(composeForward(Email&)) );
 
-  connect(readMail, SIGNAL(removeItem(EmailListItem *, bool &)), emailClient,
-    SLOT(deleteMail(EmailListItem *, bool &)) );
-  connect(readMail, SIGNAL(viewingMail(Email *)), emailClient,
-    SLOT(moveMailFront(Email *)) );
+  connect(readMail, SIGNAL(removeItem(EmailListItem*,bool&)), emailClient,
+    SLOT(deleteMail(EmailListItem*,bool&)) );
+  connect(readMail, SIGNAL(viewingMail(Email*)), emailClient,
+    SLOT(moveMailFront(Email*)) );
   
-  connect(emailClient, SIGNAL(newCaption(const QString &)),
-    this, SLOT(updateCaption(const QString &)) );
+  connect(emailClient, SIGNAL(newCaption(const QString&)),
+    this, SLOT(updateCaption(const QString&)) );
     
-  connect(readMail, SIGNAL(download(Email *)), emailClient, SLOT(download(Email*)) );
+  connect(readMail, SIGNAL(download(Email*)), emailClient, SLOT(download(Email*)) );
   
   viewingMail = FALSE;  
 }

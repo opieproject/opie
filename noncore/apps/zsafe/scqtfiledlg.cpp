@@ -195,13 +195,13 @@ ScQtFileDlg::ScQtFileDlg( QWidget* parent,  const char* name, bool modal, WFlags
 
     // signals and slots connections
     connect( OkButton, SIGNAL( clicked() ), this, SLOT( slotOK() ) );
-    connect( DirComboBox, SIGNAL( activated(int) ), this, SLOT( slotDirComboBoxChanged( int ) ) );
-    connect( TypeComboBox, SIGNAL( activated(int) ), this, SLOT( slotTypeComboBoxChanged( int ) ) );
+    connect( DirComboBox, SIGNAL( activated(int) ), this, SLOT( slotDirComboBoxChanged(int) ) );
+    connect( TypeComboBox, SIGNAL( activated(int) ), this, SLOT( slotTypeComboBoxChanged(int) ) );
     connect( CancelButton, SIGNAL( clicked() ), this, SLOT( slotCancel() ) );
-    connect( ListView, SIGNAL( returnPressed(QListViewItem*) ), this, SLOT( slotSelectionChanged(QListViewItem *) ) );
-    connect( ListView, SIGNAL( selectionChanged(QListViewItem*) ), this, SLOT( slotSelectionChanged(QListViewItem *) ) );
-    connect( ListView, SIGNAL( doubleClicked(QListViewItem*) ), this, SLOT( slotDoubleClicked(QListViewItem *) ) );
-    connect( FNameLineEdit, SIGNAL( textChanged(const QString&) ), this, SLOT( slotFileTextChanged( const QString & ) ) );
+    connect( ListView, SIGNAL( returnPressed(QListViewItem*) ), this, SLOT( slotSelectionChanged(QListViewItem*) ) );
+    connect( ListView, SIGNAL( selectionChanged(QListViewItem*) ), this, SLOT( slotSelectionChanged(QListViewItem*) ) );
+    connect( ListView, SIGNAL( doubleClicked(QListViewItem*) ), this, SLOT( slotDoubleClicked(QListViewItem*) ) );
+    connect( FNameLineEdit, SIGNAL( textChanged(const QString&) ), this, SLOT( slotFileTextChanged(const QString&) ) );
     connect( FNameLineEdit, SIGNAL( returnPressed() ), this, SLOT( slotOK() ) );
     connect( MkDirButton, SIGNAL( clicked() ), this, SLOT( slotMkDir() ) );
 }

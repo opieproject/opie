@@ -384,13 +384,13 @@ PowerchordBase::PowerchordBase( QWidget* parent,  const char* name, WFlags fl )
     connect( chordkey, SIGNAL( activated(int) ), frets, SLOT( Chord(int) ) );
     connect( chordfret, SIGNAL( activated(int) ), frets, SLOT( Fret(int) ) );
     connect( list_remove_btn, SIGNAL( clicked() ), this, SLOT( list_remove_cb() ) );
-    connect( frets, SIGNAL( s1nameChanged(const QString &) ), s1_1, SLOT( setText(const QString&) ) );
-    connect( frets, SIGNAL( s2nameChanged(const QString &) ), s1_2, SLOT( setText(const QString&) ) );
-    connect( frets, SIGNAL( s3nameChanged(const QString &) ), s1_3, SLOT( setText(const QString&) ) );
-    connect( frets, SIGNAL( s4nameChanged(const QString &) ), s1_4, SLOT( setText(const QString&) ) );
-    connect( frets, SIGNAL( s5nameChanged(const QString &) ), s1_5, SLOT( setText(const QString&) ) );
-    connect( frets, SIGNAL( s6nameChanged(const QString &) ), s1_6, SLOT( setText(const QString&) ) );
-    connect( frets, SIGNAL( nameChanged(const QString &) ), chordname, SLOT( setText(const QString&) ) );
+    connect( frets, SIGNAL( s1nameChanged(const QString&) ), s1_1, SLOT( setText(const QString&) ) );
+    connect( frets, SIGNAL( s2nameChanged(const QString&) ), s1_2, SLOT( setText(const QString&) ) );
+    connect( frets, SIGNAL( s3nameChanged(const QString&) ), s1_3, SLOT( setText(const QString&) ) );
+    connect( frets, SIGNAL( s4nameChanged(const QString&) ), s1_4, SLOT( setText(const QString&) ) );
+    connect( frets, SIGNAL( s5nameChanged(const QString&) ), s1_5, SLOT( setText(const QString&) ) );
+    connect( frets, SIGNAL( s6nameChanged(const QString&) ), s1_6, SLOT( setText(const QString&) ) );
+    connect( frets, SIGNAL( nameChanged(const QString&) ), chordname, SLOT( setText(const QString&) ) );
 }
 
 

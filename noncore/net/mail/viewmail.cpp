@@ -285,11 +285,11 @@ ViewMail::ViewMail( QWidget *parent, const char *name, WFlags fl)
 
     connect( reply, SIGNAL(activated()), SLOT(slotReply()));
     connect( forward, SIGNAL(activated()), SLOT(slotForward()));
-    connect( deleteMail, SIGNAL( activated() ),  SLOT( slotDeleteMail(  ) ) );
-    connect( showHtml, SIGNAL( toggled( bool ) ), SLOT( slotShowHtml( bool ) ) );
+    connect( deleteMail, SIGNAL( activated() ),  SLOT( slotDeleteMail() ) );
+    connect( showHtml, SIGNAL( toggled(bool) ), SLOT( slotShowHtml(bool) ) );
 
     attachments->setEnabled(m_gotBody);
-    connect( attachments,  SIGNAL( clicked ( QListViewItem *, const QPoint & , int ) ), SLOT( slotItemClicked(  QListViewItem *,  const QPoint & , int ) ) );
+    connect( attachments,  SIGNAL( clicked(QListViewItem*,const QPoint&, int) ), SLOT( slotItemClicked(QListViewItem*,const QPoint&, int) ) );
 
     readConfig();
     attachments->setSorting(-1);

@@ -98,8 +98,8 @@ CameraMainWindow::CameraMainWindow( QWidget * parent, const char * name, WFlags 
 
     // construct a System Channel to receive setRotation messages
     _sysChannel = new QCopChannel( "QPE/System", this );
-    connect( _sysChannel, SIGNAL( received( const QCString&, const QByteArray& ) ),
-             this, SLOT( systemMessage( const QCString&, const QByteArray& ) ) );
+    connect( _sysChannel, SIGNAL( received(const QCString&,const QByteArray&) ),
+             this, SLOT( systemMessage(const QCString&,const QByteArray&) ) );
 
     connect( preview, SIGNAL( contextMenuRequested() ), this, SLOT( showContextMenu() ) );
 

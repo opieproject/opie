@@ -111,16 +111,16 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
     vmCfg.setGroup("Defaults");
     adpcmCheckBox->setChecked( vmCfg.readBoolEntry("use_ADPCM", 0));
 
-    connect( LocationComboBox,SIGNAL(activated(const QString &)), this,
-             SLOT( setLocation(const QString &)));
-    connect( keyComboBox,SIGNAL(activated( int)), this,
-             SLOT( setKeyButton( int)));
-    connect( timeLimitComboBox,SIGNAL(activated( const QString &)), this,
-             SLOT( setSizeLimitButton(const QString &)));
-    connect( restartCheckBox,SIGNAL( toggled( bool)), this,
-             SLOT( restartOpie( bool)));
-    connect( adpcmCheckBox,SIGNAL( toggled( bool)), this,
-             SLOT( slotAdpcm( bool)));
+    connect( LocationComboBox,SIGNAL(activated(const QString&)), this,
+             SLOT( setLocation(const QString&)));
+    connect( keyComboBox,SIGNAL(activated(int)), this,
+             SLOT( setKeyButton(int)));
+    connect( timeLimitComboBox,SIGNAL(activated(const QString&)), this,
+             SLOT( setSizeLimitButton(const QString&)));
+    connect( restartCheckBox,SIGNAL( toggled(bool)), this,
+             SLOT( restartOpie(bool)));
+    connect( adpcmCheckBox,SIGNAL( toggled(bool)), this,
+             SLOT( slotAdpcm(bool)));
 
    //     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 }

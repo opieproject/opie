@@ -48,8 +48,8 @@ KRFBLogin::KRFBLogin( KRFBConnection *con )
   this->con = con;
   currentState = AwaitingServerVersion;
 
-  connect( this, SIGNAL( error( const QString & ) ),
-	   con, SIGNAL( error( const QString & ) ) );
+  connect( this, SIGNAL( error(const QString&) ),
+	   con, SIGNAL( error(const QString&) ) );
 
 
   qWarning( "Waiting for server version..." );

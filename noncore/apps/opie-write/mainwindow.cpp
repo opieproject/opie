@@ -123,8 +123,8 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags fl  )
 
     QObject::connect( fileSelector, SIGNAL(closeMe()),
           this, SLOT(showEditTools()) );
-    QObject::connect( fileSelector, SIGNAL(fileSelected(const DocLnk &)),
-          this, SLOT(openFile(const DocLnk &)) );
+    QObject::connect( fileSelector, SIGNAL(fileSelected(const DocLnk&)),
+          this, SLOT(openFile(const DocLnk&)) );
     QObject::connect( fileSelector, SIGNAL(newSelected(const DocLnk&)),
           this, SLOT(newFile(const DocLnk&)) );
 
@@ -213,8 +213,8 @@ void MainWindow::setupActions()
     FontDatabase db;
     QStringList f= db.families();
     comboFont->insertStringList( db.families() );
-    connect( comboFont, SIGNAL( activated( const QString & ) ),
-       this, SLOT( textFamily( const QString & ) ) );
+    connect( comboFont, SIGNAL( activated(const QString&) ),
+       this, SLOT( textFamily(const QString&) ) );
     comboFont->setCurrentItem( comboFont->listBox()->index( comboFont->listBox()->findItem( QApplication::font().family() ) ) );
     comboFont->setMaximumWidth(90);
 
@@ -223,8 +223,8 @@ void MainWindow::setupActions()
     QValueList<int>::Iterator it = sizes.begin();
     for ( ; it != sizes.end(); ++it )
   comboSize->insertItem( QString::number( *it ) );
-    connect( comboSize, SIGNAL( activated( const QString & ) ),
-       this, SLOT( textSize( const QString & ) ) );
+    connect( comboSize, SIGNAL( activated(const QString&) ),
+       this, SLOT( textSize(const QString&) ) );
     comboSize->lineEdit()->setText( QString::number( QApplication::font().pointSize() ) );
     comboSize->setFixedWidth( 38 );
 
@@ -270,12 +270,12 @@ Qt3::QTextEdit *MainWindow::currentEditor() const
 
 void MainWindow::doConnections( Qt3::QTextEdit *e )
 {
-    connect( e, SIGNAL( currentFontChanged( const QFont & ) ),
-       this, SLOT( fontChanged( const QFont & ) ) );
-    connect( e, SIGNAL( currentColorChanged( const QColor & ) ),
-       this, SLOT( colorChanged( const QColor & ) ) );
-    connect( e, SIGNAL( currentAlignmentChanged( int ) ),
-       this, SLOT( alignmentChanged( int ) ) );
+    connect( e, SIGNAL( currentFontChanged(const QFont&) ),
+       this, SLOT( fontChanged(const QFont&) ) );
+    connect( e, SIGNAL( currentColorChanged(const QColor&) ),
+       this, SLOT( colorChanged(const QColor&) ) );
+    connect( e, SIGNAL( currentAlignmentChanged(int) ),
+       this, SLOT( alignmentChanged(int) ) );
 }
 
 void MainWindow::updateFontSizeCombo( const QFont &f )

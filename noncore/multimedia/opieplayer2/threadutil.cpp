@@ -240,7 +240,7 @@ OnewayNotifier::OnewayNotifier()
     m_writeFd = fds[ 1 ];
 
     m_notifier = new QSocketNotifier( m_readFd, QSocketNotifier::Read );
-    connect( m_notifier, SIGNAL( activated( int ) ),
+    connect( m_notifier, SIGNAL( activated(int) ),
              this, SLOT( wakeUp() ) );
 }
 

@@ -11,7 +11,7 @@ IMAPHandler::IMAPHandler(const Account &account)
 	_tag = 0;
 	_ibase = new IMAPBase(account);
 
-	connect(_ibase, SIGNAL(dataReceived(const QString &)), SLOT(slotDataReceived(const QString &)));
+	connect(_ibase, SIGNAL(dataReceived(const QString&)), SLOT(slotDataReceived(const QString&)));
 	connect(_ibase, SIGNAL(lookingUpHost()), SLOT(slotLookingUpHost()));
 	connect(_ibase, SIGNAL(hostFound()), SLOT(slotHostFound()));
 	connect(_ibase, SIGNAL(connected()), SLOT(slotConnected()));
@@ -299,10 +299,10 @@ void IMAPHandler::slotDataReceived(const QString &data)
 
 
 	IMAPResponseParser parser;
-//	connect ( &parser, SIGNAL( needMoreData ( QString & )), _ibase, SLOT( tryRead ( QString & )));
+//	connect ( &parser, SIGNAL( needMoreData(QString&)), _ibase, SLOT( tryRead(QString&)));
 	parser. parse ( data );
 	IMAPResponse response = parser.response();
-//	disconnect ( &parser, SIGNAL( needMoreData ( QString & )), _ibase, SLOT( tryRead ( QString & )));
+//	disconnect ( &parser, SIGNAL( needMoreData(QString&)), _ibase, SLOT( tryRead(QString&)));
 	response.setImapHandler(this);
 
 	if (!_loggingin) { qDebug("Emitting gotResponse!\n" ); emit gotResponse(response); }

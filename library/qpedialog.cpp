@@ -49,8 +49,8 @@
 QPEDialogListener::QPEDialogListener(QDialog *di ) : QObject(di)
 {
     dialog = di;
-    connect(qApp, SIGNAL(appMessage(const QCString&, const QByteArray&)),
-	    this, SLOT(appMessage(const QCString&, const QByteArray&)) );
+    connect(qApp, SIGNAL(appMessage(const QCString&,const QByteArray&)),
+	    this, SLOT(appMessage(const QCString&,const QByteArray&)) );
 }
 
 

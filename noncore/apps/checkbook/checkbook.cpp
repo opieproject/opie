@@ -93,7 +93,7 @@ Checkbook::Checkbook( QWidget *parent, CBInfo *i, Cfg *cfg )
         mainWidget->setCurrentTab( info->getLastTab() );
     else
         mainWidget->setCurrentTab( tr( "Info" ) );
-    connect( mainWidget, SIGNAL( currentChanged(QWidget *) ), this, SLOT( slotTab(QWidget *) ) );
+    connect( mainWidget, SIGNAL( currentChanged(QWidget*) ), this, SLOT( slotTab(QWidget*) ) );
 
     // Load checkbook information
     loadCheckbook();
@@ -134,8 +134,8 @@ QWidget *Checkbook::initInfo()
     layout->addWidget( label, 1, 0 );
     nameEdit = new QLineEdit( container );
     QWhatsThis::add( nameEdit, tr( "Enter name of checkbook here." ) );
-    connect( nameEdit, SIGNAL( textChanged( const QString & ) ),
-             this, SLOT( slotNameChanged( const QString & ) ) );
+    connect( nameEdit, SIGNAL( textChanged(const QString&) ),
+             this, SLOT( slotNameChanged(const QString&) ) );
     layout->addWidget( nameEdit, 1, 1 );
 
     // Type of account
@@ -177,8 +177,8 @@ QWidget *Checkbook::initInfo()
     layout->addWidget( label, 6, 0 );
     balanceEdit = new QLineEdit( container );
     QWhatsThis::add( balanceEdit, tr( "Enter the initial balance for this checkbook here." ) );
-    connect( balanceEdit, SIGNAL( textChanged( const QString & ) ),
-             this, SLOT( slotStartingBalanceChanged( const QString & ) ) );
+    connect( balanceEdit, SIGNAL( textChanged(const QString&) ),
+             this, SLOT( slotStartingBalanceChanged(const QString&) ) );
     layout->addWidget( balanceEdit, 6, 1 );
 
     // Notes
@@ -213,7 +213,7 @@ QWidget *Checkbook::initTransactions()
     _cbSortType->insertItem( tr("Date") );
     _cbSortType->insertItem( tr("Number") );
     layout->addMultiCellWidget( _cbSortType, 0, 0, 1, 2 );
-    connect( _cbSortType, SIGNAL( activated(const QString &) ), this, SLOT( slotSortChanged( const QString & ) ) );
+    connect( _cbSortType, SIGNAL( activated(const QString&) ), this, SLOT( slotSortChanged(const QString&) ) );
 
     // Table
     tranTable = new QListView( control );
@@ -239,9 +239,9 @@ QWidget *Checkbook::initTransactions()
     tranTable->setSorting( -1 );
     layout->addMultiCellWidget( tranTable, 1, 1, 0, 2 );
     QPEApplication::setStylusOperation( tranTable->viewport(), QPEApplication::RightOnHold );
-    connect( tranTable, SIGNAL( rightButtonPressed( QListViewItem *, const QPoint &, int ) ),
-          this, SLOT( slotMenuTran(QListViewItem *, const QPoint &) ) );
-    connect( tranTable, SIGNAL( doubleClicked( QListViewItem * ) ),
+    connect( tranTable, SIGNAL( rightButtonPressed(QListViewItem*,const QPoint&,int) ),
+          this, SLOT( slotMenuTran(QListViewItem*,const QPoint&) ) );
+    connect( tranTable, SIGNAL( doubleClicked(QListViewItem*) ),
           this, SLOT( slotEditTran() ) );
     _sortCol=COL_ID;
 

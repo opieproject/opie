@@ -95,8 +95,8 @@ StorageInfo::StorageInfo( QObject *parent )
 {
     mFileSystems.setAutoDelete( TRUE );
     channel = new QCopChannel( "QPE/Card", this );
-    connect( channel, SIGNAL(received(const QCString &, const QByteArray &)),
-             this, SLOT(cardMessage( const QCString &, const QByteArray &)) );
+    connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+             this, SLOT(cardMessage(const QCString&,const QByteArray&)) );
     update();
 }
 

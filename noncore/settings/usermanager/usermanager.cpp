@@ -77,7 +77,7 @@ void UserConfig::setupTabAccounts() {
 	usersIconView->setAllColumnsShowFocus(true);
 	layout->addWidget(usersIconView);
 	
-	connect(usersIconView,SIGNAL(returnPressed(QListViewItem *)),this,SLOT(showUserMenu(QListViewItem *)));
+	connect(usersIconView,SIGNAL(returnPressed(QListViewItem*)),this,SLOT(showUserMenu(QListViewItem*)));
 	
 	myTabWidget->addTab(tabpage,"Users");
 }

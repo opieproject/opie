@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qtextedit.cpp,v 1.3 2004-03-01 19:44:43 chicken Exp $
+** $Id: qtextedit.cpp,v 1.4 2004-03-02 12:21:20 alwin Exp $
 **
 ** Implementation of the QTextEdit class
 **
@@ -677,8 +677,8 @@ void QTextEdit::init()
     readonly = TRUE;
     setReadOnly( FALSE );
     d = new QTextEditPrivate;
-    connect( doc, SIGNAL( minimumWidthChanged( int ) ),
-	     this, SLOT( documentWidthChanged( int ) ) );
+    connect( doc, SIGNAL( minimumWidthChanged(int) ),
+	     this, SLOT( documentWidthChanged(int) ) );
 
     mousePressed = FALSE;
     inDoubleClick = FALSE;

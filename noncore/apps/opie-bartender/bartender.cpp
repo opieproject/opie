@@ -102,9 +102,9 @@ Bartender::Bartender( QWidget* parent,  const char* name, WFlags fl )
 
     QPEApplication::setStylusOperation( DrinkView->viewport(),QPEApplication::RightOnHold);
 
-    connect(DrinkView, SIGNAL( doubleClicked(QListViewItem*)),this,SLOT(showDrink( QListViewItem*)));
-    connect(DrinkView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-            this,SLOT( showDrink(int, QListViewItem *, const QPoint&, int)));
+    connect(DrinkView, SIGNAL( doubleClicked(QListViewItem*)),this,SLOT(showDrink(QListViewItem*)));
+    connect(DrinkView, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int)),
+            this,SLOT( showDrink(int,QListViewItem*,const QPoint&,int)));
 
     layout->addMultiCellWidget( DrinkView, 1, 2, 0, 4 );
     if(QDir("db").exists()) {

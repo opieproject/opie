@@ -53,7 +53,7 @@ private:
 		(DateFormat::Order)config.readNumEntry("LongOrder", DateFormat::DayMonthYear));
 
 	connect( qApp, SIGNAL( dateFormatChanged(DateFormat) ),
-		 this, SLOT( formatChanged( DateFormat ) ) );
+		 this, SLOT( formatChanged(DateFormat) ) );
     }
 };
 

@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.11 2004-03-01 20:04:34 chicken Exp $
+** $Id: zsafe.cpp,v 1.12 2004-03-02 12:21:23 alwin Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -690,12 +690,12 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     connect( Delete, SIGNAL( clicked() ), this, SLOT( deletePwd() ) );
     connect( Find, SIGNAL( clicked() ), this, SLOT( findPwd() ) );
     // signals and slots connections for QListView
-    connect( ListView, SIGNAL( selectionChanged( QListViewItem* ) ),
-             this, SLOT( listViewSelected( QListViewItem* ) ) );
-    connect( ListView, SIGNAL( doubleClicked( QListViewItem* ) ),
-             this, SLOT( showInfo( QListViewItem* ) ) );
-    connect( ListView, SIGNAL( returnPressed( QListViewItem* ) ),
-             this, SLOT( showInfo( QListViewItem* ) ) );
+    connect( ListView, SIGNAL( selectionChanged(QListViewItem*) ),
+             this, SLOT( listViewSelected(QListViewItem*) ) );
+    connect( ListView, SIGNAL( doubleClicked(QListViewItem*) ),
+             this, SLOT( showInfo(QListViewItem*) ) );
+    connect( ListView, SIGNAL( returnPressed(QListViewItem*) ),
+             this, SLOT( showInfo(QListViewItem*) ) );
 
 }
 
@@ -2579,8 +2579,8 @@ void ZSafe::addCategory()
 #endif
            dialog = categoryDialog;
            connect( dialog->CategoryField,
-                    SIGNAL( activated ( const QString &)),
-                    this, SLOT( categoryFieldActivated( const QString & ) ) );
+                    SIGNAL( activated(const QString&)),
+                    this, SLOT( categoryFieldActivated(const QString&) ) );
            initIcons = true;
         }
 
@@ -2986,8 +2986,8 @@ void ZSafe::editCategory()
 #endif
            dialog = categoryDialog;
            connect( dialog->CategoryField,
-                    SIGNAL( activated ( const QString &)),
-                    this, SLOT( categoryFieldActivated( const QString & ) ) );
+                    SIGNAL( activated(const QString&)),
+                    this, SLOT( categoryFieldActivated(const QString&) ) );
            initIcons = true;
         }
         setCategoryDialogFields(dialog);

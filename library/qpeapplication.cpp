@@ -628,8 +628,8 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 
 
 	sysChannel = new QCopChannel( "QPE/System", this );
-	connect( sysChannel, SIGNAL( received( const QCString &, const QByteArray & ) ),
-	         this, SLOT( systemMessage( const QCString &, const QByteArray & ) ) );
+	connect( sysChannel, SIGNAL( received(const QCString&,const QByteArray&) ),
+	         this, SLOT( systemMessage(const QCString&,const QByteArray&) ) );
 
 /* COde now in initapp */
 #if 0
@@ -650,8 +650,8 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 	d->appName = channel;
 	channel = "QPE/Application/" + channel;
 	pidChannel = new QCopChannel( channel, this );
-	connect( pidChannel, SIGNAL( received( const QCString &, const QByteArray & ) ),
-	         this, SLOT( pidMessage( const QCString &, const QByteArray & ) ) );
+	connect( pidChannel, SIGNAL( received(const QCString&,const QByteArray&) ),
+	         this, SLOT( pidMessage(const QCString&,const QByteArray&) ) );
 
 	if ( f.isOpen() ) {
 		d->keep_running = FALSE;
@@ -751,8 +751,8 @@ void QPEApplication::initApp( int argc, char **argv )
 
     channel = "QPE/Application/" + channel;
     pidChannel = new QCopChannel( channel, this);
-    connect( pidChannel, SIGNAL(received(const QCString &, const QByteArray &)),
-	    this, SLOT(pidMessage(const QCString &, const QByteArray &)));
+    connect( pidChannel, SIGNAL(received(const QCString&,const QByteArray&)),
+	    this, SLOT(pidMessage(const QCString&,const QByteArray&)));
 
 
 

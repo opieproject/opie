@@ -168,7 +168,7 @@ KateDocument::KateDocument(bool bSingleViewMode, bool bBrowserView,
 
   myCmd = new KateCmd (this);
 
-  connect(this,SIGNAL(modifiedChanged ()),this,SLOT(slotModChanged ()));
+  connect(this,SIGNAL(modifiedChanged()),this,SLOT(slotModChanged()));
 
   buffer = new KWBuffer;
   connect(buffer, SIGNAL(linesChanged(int)), this, SLOT(slotBufferChanged()));

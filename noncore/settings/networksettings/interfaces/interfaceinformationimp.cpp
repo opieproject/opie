@@ -25,8 +25,8 @@
  */
 InterfaceInformationImp::InterfaceInformationImp(QWidget *parent, const char *name, Interface *i, WFlags f):InterfaceInformation(parent, name, f), interface(i)
 {
-    connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
-    connect(i, SIGNAL(updateMessage(const QString &)), this, SLOT(showMessage(const QString &)));
+    connect(i, SIGNAL(updateInterface(Interface*)), this, SLOT(updateInterface(Interface*)));
+    connect(i, SIGNAL(updateMessage(const QString&)), this, SLOT(showMessage(const QString&)));
     updateInterface(interface);
     connect(startButton, SIGNAL(clicked()), interface, SLOT(start()));
     connect(stopButton, SIGNAL(clicked()), interface, SLOT(stop()));

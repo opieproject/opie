@@ -68,8 +68,8 @@
 
   \code
       myChannel = new QCopChannel( "QPE/FooBar", this );
-      connect( myChannel, SIGNAL(received(const QCString &, const QByteArray &)),
-               this, SLOT(fooBarMessage( const QCString &, const QByteArray &)) );
+      connect( myChannel, SIGNAL(received(const QCString&,const QByteArray&)),
+               this, SLOT(fooBarMessage(const QCString&,const QByteArray&)) );
   \endcode
 
   See also, the \link qcop.html list of Qtopia messages\endlink.

@@ -38,21 +38,21 @@ BudgetDisplay::BudgetDisplay ( QWidget *parent ) : QWidget ( parent )
     menu->insertItem ( "Budget", budgetmenu );
     menu->insertItem ( "Line Item", lineitemsmenu );
     menu->insertItem ( "Date", datemenu );
-    budgetmenu->insertItem ( "New", this, SLOT ( newBudget () ), 0, 1 );
-    budgetmenu->insertItem ( "Edit", this, SLOT ( editBudget () ), 0, 2 );
-    budgetmenu->insertItem ( "Delete", this, SLOT ( deleteBudget () ), 0, 3 );
-    lineitemsmenu->insertItem ( "New", this, SLOT ( newLineItem () ), 0, 1 );
-    lineitemsmenu->insertItem ( "Edit", this, SLOT ( editLineItem () ), 0, 2 );
-    lineitemsmenu->insertItem ( "Delete", this, SLOT ( deleteLineItem () ), 0, 3 );
+    budgetmenu->insertItem ( "New", this, SLOT ( newBudget() ), 0, 1 );
+    budgetmenu->insertItem ( "Edit", this, SLOT ( editBudget() ), 0, 2 );
+    budgetmenu->insertItem ( "Delete", this, SLOT ( deleteBudget() ), 0, 3 );
+    lineitemsmenu->insertItem ( "New", this, SLOT ( newLineItem() ), 0, 1 );
+    lineitemsmenu->insertItem ( "Edit", this, SLOT ( editLineItem() ), 0, 2 );
+    lineitemsmenu->insertItem ( "Delete", this, SLOT ( deleteLineItem() ), 0, 3 );
     datemenu->insertItem ( "Change", this, SLOT ( showCalendar() ) );
 
     budgetbox = new QComboBox ( firstline );
-    connect ( budgetbox, SIGNAL ( activated ( int ) ), this, SLOT ( setCurrentBudget ( int ) ) );
+    connect ( budgetbox, SIGNAL ( activated(int) ), this, SLOT ( setCurrentBudget(int) ) );
 
     budgetview = new QComboBox ( firstline );
     budgetview->insertItem ( "Month" );
     budgetview->insertItem ( "Year" );
-    connect ( budgetview, SIGNAL ( activated ( int ) ), this, SLOT ( setCurrentView ( int ) ) );
+    connect ( budgetview, SIGNAL ( activated(int) ), this, SLOT ( setCurrentView(int) ) );
 
     budgeted = new QLabel ( secondline );
     budgeted->setFont ( font );
@@ -78,8 +78,8 @@ BudgetDisplay::BudgetDisplay ( QWidget *parent ) : QWidget ( parent )
     listview->setColumnWidthMode ( 3, QListView::Manual );
 
     listview->header()->setTracking ( FALSE );
-    connect ( listview->header(), SIGNAL ( sizeChange ( int, int, int ) ), this, SLOT ( saveColumnSize ( int, int, int ) ) );
-    connect ( listview->header(), SIGNAL ( clicked ( int ) ), this, SLOT ( saveSortingPreference ( int ) ) );
+    connect ( listview->header(), SIGNAL ( sizeChange(int,int,int) ), this, SLOT ( saveColumnSize(int,int,int) ) );
+    connect ( listview->header(), SIGNAL ( clicked(int) ), this, SLOT ( saveSortingPreference(int) ) );
 
     // pull the column sorting preference from the preferences table, and configure the listview accordingly
     int column = 0;

@@ -105,7 +105,7 @@ void WeatherPluginWidget::retreiveData()
 	OProcess *proc = new OProcess;
 
 	*proc << "wget" << "-q" << remoteFile << "-O" << localFile;
-	connect( proc, SIGNAL( processExited( OProcess * ) ), this, SLOT( dataRetrieved( OProcess * ) ) );
+	connect( proc, SIGNAL( processExited(OProcess*) ), this, SLOT( dataRetrieved(OProcess*) ) );
 	proc->start();
 }
 

@@ -20,11 +20,11 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags fl)
 {
 	status->setStopEnabled(false);
 
-	connect(folderView, SIGNAL(status(const QString &)), status, SLOT(setStatusText(const QString &)));
+	connect(folderView, SIGNAL(status(const QString&)), status, SLOT(setStatusText(const QString&)));
 	connect(folderView, SIGNAL(folderSelected(Folder)), mailView, SLOT(setFolder(Folder)));
 
-	connect(mailView, SIGNAL(mailClicked(IMAPResponseFETCH, IMAPHandler *)), SLOT(mailClicked(IMAPResponseFETCH, IMAPHandler *)));
-	connect(mailView, SIGNAL(status(const QString &)), status, SLOT(setStatusText(const QString &)));
+	connect(mailView, SIGNAL(mailClicked(IMAPResponseFETCH,IMAPHandler*)), SLOT(mailClicked(IMAPResponseFETCH,IMAPHandler*)));
+	connect(mailView, SIGNAL(status(const QString&)), status, SLOT(setStatusText(const QString&)));
 	connect(mailView, SIGNAL(totalSteps(int)), status, SLOT(setProgressTotalSteps(int)));
 	connect(mailView, SIGNAL(progress(int)), status, SLOT(setProgress(int)));
 	connect(mailView, SIGNAL(resetProgress()), status, SLOT(resetProgress()));
@@ -40,10 +40,10 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags fl)
 	// Added by Stefan Eilers to allow starting by addressbook..
 #if !defined(QT_NO_COP) 
 // 	QCopChannel *addressChannel = new QCopChannel("QPE/Application/mail" , this );
-// 	connect (addressChannel, SIGNAL( received(const QCString &, const QByteArray &)),
-// 		 this, SLOT ( appMessage(const QCString &, const QByteArray &) ) );
-	connect( qApp, SIGNAL( appMessage( const QCString&, const QByteArray& ) ),
-	         this, SLOT( appMessage( const QCString&, const QByteArray& ) ) );
+// 	connect (addressChannel, SIGNAL( received(const QCString&,const QByteArray&)),
+// 		 this, SLOT ( appMessage(const QCString&,const QByteArray&) ) );
+	connect( qApp, SIGNAL( appMessage(const QCString&,const QByteArray&) ),
+	         this, SLOT( appMessage(const QCString&,const QByteArray&) ) );
 #endif
 }
 

@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdargs.cpp,v 1.6 2003-08-09 17:14:55 kergoth Exp $
+ * $Id: pppdargs.cpp,v 1.7 2004-03-02 12:21:30 alwin Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -55,8 +55,8 @@ PPPdArguments::PPPdArguments( PPPData *pd, QWidget *parent, const char *name)
   connect(argument, SIGNAL(returnPressed()),
 	  SLOT(addbutton()));
   l11->addWidget(argument);
-  connect(argument, SIGNAL(textChanged(const QString &)),
-	  this, SLOT(textChanged(const QString &)));
+  connect(argument, SIGNAL(textChanged(const QString&)),
+	  this, SLOT(textChanged(const QString&)));
 
   arguments = new QListBox(this);
   arguments->setMinimumSize(1, fontMetrics().lineSpacing()*10);

@@ -50,9 +50,9 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags f
             this, SLOT(backup()));
     connect(restoreButton, SIGNAL(clicked()),
             this, SLOT(restore()));
-    connect(backupList, SIGNAL(clicked( QListViewItem * )),
+    connect(backupList, SIGNAL(clicked(QListViewItem*)),
             this, SLOT(selectItem(QListViewItem*)));
-    connect(restoreSource, SIGNAL(activated( int  )),
+    connect(restoreSource, SIGNAL(activated(int)),
             this, SLOT(sourceDirChanged(int)));
     connect(updateList, SIGNAL(clicked()),
             this, SLOT( fileListUpdate()));

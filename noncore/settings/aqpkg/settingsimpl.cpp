@@ -111,7 +111,7 @@ QWidget *SettingsImpl :: initServerTab()
 
     servers = new QListBox( container );
     servers->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Preferred ) );
-    connect( servers, SIGNAL( highlighted( int ) ), this, SLOT( editServer( int ) ) );
+    connect( servers, SIGNAL( highlighted(int) ), this, SLOT( editServer(int) ) );
     layout->addMultiCellWidget( servers, 0, 0, 0, 1 );
 
     QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), container );
@@ -169,7 +169,7 @@ QWidget *SettingsImpl :: initDestinationTab()
 
     destinations = new QListBox( container );
     destinations->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Preferred ) );
-    connect( destinations, SIGNAL( highlighted( int ) ), this, SLOT( editDestination( int ) ) );
+    connect( destinations, SIGNAL( highlighted(int) ), this, SLOT( editDestination(int) ) );
     layout->addMultiCellWidget( destinations, 0, 0, 0, 1 );
 
     QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), container );

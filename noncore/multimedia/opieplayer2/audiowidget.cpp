@@ -79,7 +79,7 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     loadSkin();
 
     connect( &mediaPlayerState, SIGNAL( loopingToggled(bool) ), this, SLOT( setLooping(bool) ) );
-    connect( &mediaPlayerState, SIGNAL( isSeekableToggled( bool ) ), this, SLOT( setSeekable( bool ) ) );
+    connect( &mediaPlayerState, SIGNAL( isSeekableToggled(bool) ), this, SLOT( setSeekable(bool) ) );
 
     connect( this,  SIGNAL( forwardClicked() ), this, SLOT( skipFor() ) );
     connect( this,  SIGNAL( backClicked() ),  this, SLOT( skipBack() ) );

@@ -131,10 +131,10 @@ void ProfileEditorDialog::initUI()
 
 
     // signal and slots
-    connect(m_conCmb, SIGNAL(activated(const QString& ) ),
+    connect(m_conCmb, SIGNAL(activated(const QString&) ),
             this, SLOT(slotConActivated(const QString&) ) );
-    connect(m_termCmb, SIGNAL(activated(const QString& ) ),
-            this, SLOT(slotTermActivated(const QString& ) ) );
+    connect(m_termCmb, SIGNAL(activated(const QString&) ),
+            this, SLOT(slotTermActivated(const QString&) ) );
 
 }
 

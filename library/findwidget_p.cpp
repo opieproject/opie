@@ -47,8 +47,8 @@ FindWidget::FindWidget( const QString &appName, QWidget *parent,
     m1->insertItem( dtPicker );
     cmdStartDate->setPopup( m1 );
     cmdStartDate->setText( TimeString::shortDate(mDate) );
-    QObject::connect( dtPicker, SIGNAL(dateClicked(int, int, int)),
-		      this, SLOT(slotDateChanged(int, int, int)) );
+    QObject::connect( dtPicker, SIGNAL(dateClicked(int,int,int)),
+		      this, SLOT(slotDateChanged(int,int,int)) );
 
     QObject::connect( cmdFind, SIGNAL(clicked()),
 		      this, SLOT(slotFindClicked()) );

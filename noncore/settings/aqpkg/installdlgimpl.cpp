@@ -172,8 +172,8 @@ void InstallDlgImpl :: init( bool displayextrainfo )
         layout->addWidget( label, 0, 0 );
         destination = new QComboBox( FALSE, this );
         layout->addWidget( destination, 0, 1 );
-        connect( destination, SIGNAL( highlighted( const QString & ) ),
-                this, SLOT( displayAvailableSpace( const QString & ) ) );
+        connect( destination, SIGNAL( highlighted(const QString&) ),
+                this, SLOT( displayAvailableSpace(const QString&) ) );
 
         QLabel *label2 = new QLabel( tr( "Space Avail" ), this );
         layout->addWidget( label2, 1, 0 );
@@ -278,7 +278,7 @@ void InstallDlgImpl :: installSelected()
     if ( pIpkg )
     {
         output->setText( "" );
-        connect( pIpkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
+        connect( pIpkg, SIGNAL(outputText(const QString&)), this, SLOT(displayText(const QString&)));
         connect( pIpkg, SIGNAL(ipkgFinished()), this, SLOT(ipkgFinished()));
         pIpkg->runIpkg();
     }
@@ -300,7 +300,7 @@ void InstallDlgImpl :: installSelected()
 #endif
 
         pIpkg = new Ipkg;
-        connect( pIpkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
+        connect( pIpkg, SIGNAL(outputText(const QString&)), this, SLOT(displayText(const QString&)));
         connect( pIpkg, SIGNAL(ipkgFinished()), this, SLOT(ipkgFinished()));
 
         firstPackage = TRUE;

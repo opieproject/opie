@@ -45,7 +45,7 @@ ObexDialog::ObexDialog( QWidget* parent,  const char* name, bool modal, WFlags f
     layout->addWidget(chNameLine);
     layout->addWidget(sendButton);
 
-    connect( sendButton, SIGNAL( clicked() ), this,  SLOT( sendData()  ) );
+    connect( sendButton, SIGNAL( clicked() ), this,  SLOT( sendData() ) );
 
 }
 

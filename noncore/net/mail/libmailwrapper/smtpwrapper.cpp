@@ -32,7 +32,7 @@ SMTPwrapper::SMTPwrapper(SMTPaccount * aSmtp )
     cfg.setGroup( "Status" );
     m_queuedMail =  cfg.readNumEntry( "outgoing", 0 );
     emit queuedMails( m_queuedMail );
-    connect( this, SIGNAL( queuedMails( int ) ), this, SLOT( emitQCop( int ) )  );
+    connect( this, SIGNAL( queuedMails(int) ), this, SLOT( emitQCop(int) )  );
     m_smtp = 0;
 }
 

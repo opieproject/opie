@@ -54,8 +54,8 @@ ModulesInfo::ModulesInfo( QWidget* parent,  const char* name, WFlags fl )
     if ( QFile::exists( "/sbin/modinfo" ) )
     {
         QPEApplication::setStylusOperation( ModulesView->viewport(), QPEApplication::RightOnHold );
-        connect( ModulesView, SIGNAL( rightButtonPressed( QListViewItem *, const QPoint &, int ) ),
-                 this, SLOT( viewModules( QListViewItem * ) ) );
+        connect( ModulesView, SIGNAL( rightButtonPressed(QListViewItem*,const QPoint&,int) ),
+                 this, SLOT( viewModules(QListViewItem*) ) );
     }
 
     CommandCB = new QComboBox( FALSE, this );

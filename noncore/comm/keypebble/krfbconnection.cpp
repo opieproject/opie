@@ -40,7 +40,7 @@ void KRFBConnection::connectTo( KRFBServer server)
 		CHECK_PTR( sock );
 
 		// Connect to something to notice connection or error
-		connect( sock, SIGNAL( error( int ) ), SLOT( gotSocketError( int ) ) );
+		connect( sock, SIGNAL( error(int) ), SLOT( gotSocketError(int) ) );
 		connect( sock, SIGNAL( connected() ), SLOT( gotSocketConnection() ) );
 
 		qWarning( "Connecting..." );
@@ -106,8 +106,8 @@ void KRFBConnection::gotRFBConnection()
 		CHECK_PTR( buffer_ );
 		decoder_->setBuffer( buffer_ );
 
-		connect( decoder_, SIGNAL( status( const QString & ) ),
-						this, SIGNAL( statusChanged( const QString & ) ) );
+		connect( decoder_, SIGNAL( status(const QString&) ),
+						this, SIGNAL( statusChanged(const QString&) ) );
 		emit loggedIn();
 
 		decoder_->start();

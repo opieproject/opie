@@ -60,12 +60,12 @@ KVNC::KVNC(  QWidget *parent, const char *name, WFlags f) : QMainWindow( 0, name
     setCentralWidget( stack );
 
 
-    connect( bookmarkSelector->bookmarkList, SIGNAL(clicked(QListBoxItem *)),
-	    this, SLOT(openConnection(QListBoxItem *)) );
-    connect( canvas->connection(), SIGNAL(statusChanged(const QString &)),
-	    this, SLOT(statusMessage(const QString &)) );
-    connect( canvas->connection(), SIGNAL(error(const QString &)),
-	    this, SLOT(error(const QString &)) );
+    connect( bookmarkSelector->bookmarkList, SIGNAL(clicked(QListBoxItem*)),
+	    this, SLOT(openConnection(QListBoxItem*)) );
+    connect( canvas->connection(), SIGNAL(statusChanged(const QString&)),
+	    this, SLOT(statusMessage(const QString&)) );
+    connect( canvas->connection(), SIGNAL(error(const QString&)),
+	    this, SLOT(error(const QString&)) );
     connect( canvas->connection(), SIGNAL(connected()), this, SLOT(connected()) );
     connect( canvas->connection(), SIGNAL(loggedIn()), this, SLOT(loggedIn()) );
     connect( canvas->connection(), SIGNAL(disconnected()), this, SLOT(disconnected()) );

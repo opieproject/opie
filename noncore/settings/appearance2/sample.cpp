@@ -91,7 +91,7 @@ void SampleWindow::setFont( const QFont &f )
 {
 	QWidget::setFont( f );
 	popup->setFont( f );
-	QTimer::singleShot ( 0, this, SLOT( fixGeometry ( )));	
+	QTimer::singleShot ( 0, this, SLOT( fixGeometry()));	
 }
 
 static void setStyleRecursive ( QWidget *w, QStyle *s )
@@ -121,7 +121,7 @@ void SampleWindow::setStyle2 ( QStyle *sty, const QPalette &pal )
 	qt_set_draw_menu_bar_impl ( 0 );
 	setStyleRecursive ( this, sty );
 	setPalette ( p );
-	QTimer::singleShot ( 0, this, SLOT( fixGeometry ( )));	
+	QTimer::singleShot ( 0, this, SLOT( fixGeometry()));	
 }
 
 

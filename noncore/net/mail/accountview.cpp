@@ -17,10 +17,10 @@
 AccountView::AccountView( QWidget *parent, const char *name, WFlags flags )
         : QListView( parent, name, flags )
 {
-    connect( this, SIGNAL( selectionChanged( QListViewItem * ) ),
-             SLOT( refresh( QListViewItem * ) ) );
-    connect( this, SIGNAL( mouseButtonPressed(int, QListViewItem *,const QPoint&,int  ) ),this,
-             SLOT( slotHold( int, QListViewItem *,const QPoint&,int  ) ) );
+    connect( this, SIGNAL( selectionChanged(QListViewItem*) ),
+             SLOT( refresh(QListViewItem*) ) );
+    connect( this, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int) ),this,
+             SLOT( slotHold(int,QListViewItem*,const QPoint&,int) ) );
     setSorting(0);
 }
 

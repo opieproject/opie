@@ -74,14 +74,14 @@ MailTable::MailTable(QWidget *parent, const char *name, WFlags fl)
 	menu->insertItem(tr("Delete Mail"), MENU_DELETE);
 	setPopup(menu);
 
-	connect(this, SIGNAL(clicked(QListViewItem *)), SLOT(itemClicked(QListViewItem *)));
+	connect(this, SIGNAL(clicked(QListViewItem*)), SLOT(itemClicked(QListViewItem*)));
 }
 
 void MailTable::setFolder(Folder folder)
 {
 	folder.topFolder().handler()->iSelect(folder.fullName());
 	_handler = folder.topFolder().handler();
-	connect(folder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPSelect(IMAPResponse &)));
+	connect(folder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse&)), SLOT(slotIMAPSelect(IMAPResponse&)));
 }
 
 void MailTable::setHeaders(QValueList<IMAPResponseFETCH> response)
@@ -95,7 +95,7 @@ void MailTable::setHeaders(QValueList<IMAPResponseFETCH> response)
 
 void MailTable::slotIMAPSelect(IMAPResponse &response)
 {
-	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), this, SLOT(slotIMAPSelect(IMAPResponse &)));
+	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse&)), this, SLOT(slotIMAPSelect(IMAPResponse&)));
 
 	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
 		clear();
@@ -118,7 +118,7 @@ void MailTable::slotIMAPSelect(IMAPResponse &response)
 
 		response.imapHandler()->iFetch(QString("1:%1").arg((a == 0) ? b : 5), "ENVELOPE FLAGS UID");
 		emit status(tr("Getting mail headers..."));
-		connect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPFetch(IMAPResponse &)));
+		connect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse&)), SLOT(slotIMAPFetch(IMAPResponse&)));
 	} else {
 		QMessageBox::warning(this, tr("Error"), tr("<p>An error occoured during the selection of the mailbox. (Server said: %1)</p>").arg(response.statusResponse().comment()), tr("Ok"));
 	}
@@ -126,7 +126,7 @@ void MailTable::slotIMAPSelect(IMAPResponse &response)
 
 void MailTable::slotIMAPFetch(IMAPResponse &response)
 {
-	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), this, SLOT(slotIMAPFetch(IMAPResponse &)));
+	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse&)), this, SLOT(slotIMAPFetch(IMAPResponse&)));
 
 	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
 		QValueList<IMAPResponseFETCH>::Iterator it;
@@ -147,7 +147,7 @@ void MailTable::slotIMAPFetch(IMAPResponse &response)
 				emit stopEnabled(false);
 			} else {
 				response.imapHandler()->iFetch(QString("%1:%2").arg(_currentProgress * 5 + 1).arg((_currentProgress + 1 == _downloadSteps) ? _currentProgress * 5 + _lastStep : _currentProgress * 5 + 5), "ENVELOPE FLAGS UID");
-				connect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPFetch(IMAPResponse &)));
+				connect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse&)), SLOT(slotIMAPFetch(IMAPResponse&)));
 			}
 		} else {
 			_currentProgress = 0;

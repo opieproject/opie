@@ -118,8 +118,8 @@ void MainWindow::initPackageList()
     m_packageList.addColumn( tr( "Packages" ) );
     QWhatsThis::add( &m_packageList, tr( "This is a listing of all packages.\n\nA blue dot next to the package name indicates that the package is currently installed.\n\nA blue dot with a star indicates that a newer version of the package is available from the server feed.\n\nClick inside the box at the left to select a package." ) );
     QPEApplication::setStylusOperation( m_packageList.viewport(), QPEApplication::RightOnHold );
-    connect( &m_packageList, SIGNAL(rightButtonPressed(QListViewItem *,const QPoint &,int)),
-             this, SLOT(slotDisplayPackageInfo(QListViewItem *)) );
+    connect( &m_packageList, SIGNAL(rightButtonPressed(QListViewItem*,const QPoint&,int)),
+             this, SLOT(slotDisplayPackageInfo(QListViewItem*)) );
 }
 
 void MainWindow::initStatusWidget()
@@ -130,7 +130,7 @@ void MainWindow::initStatusWidget()
     layout->addWidget( &m_statusText );
 
     connect( &m_packman, SIGNAL(initStatus(int)), this, SLOT(slotInitStatusBar(int)) );
-    connect( &m_packman, SIGNAL(statusText(const QString &)), this, SLOT(slotStatusText(const QString &)) );
+    connect( &m_packman, SIGNAL(statusText(const QString&)), this, SLOT(slotStatusText(const QString&)) );
     connect( &m_packman, SIGNAL(statusBar(int)), this, SLOT(slotStatusBar(int)) );
 
     layout->addWidget( &m_statusBar );
@@ -151,7 +151,7 @@ void MainWindow::initUI()
     m_findEdit = new QLineEdit( &m_findBar );
     QWhatsThis::add( m_findEdit, tr( "Type the text to search for here." ) );
     m_findBar.setStretchableWidget( m_findEdit );
-    connect( m_findEdit, SIGNAL(textChanged(const QString &)), this, SLOT(slotFindChanged(const QString &)) );
+    connect( m_findEdit, SIGNAL(textChanged(const QString&)), this, SLOT(slotFindChanged(const QString&)) );
 
     // Packages menu
     QPopupMenu *popup = new QPopupMenu( this );

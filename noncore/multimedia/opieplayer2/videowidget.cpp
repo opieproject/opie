@@ -71,8 +71,8 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
 
     videoFrame = new XineVideoWidget ( this, "Video frame" );
 
-    connect ( videoFrame, SIGNAL( videoResized ( const QSize & )), this, SIGNAL( videoResized ( const QSize & )));
-    connect ( videoFrame,  SIGNAL( clicked () ),  this,  SLOT ( backToNormal() ) );
+    connect ( videoFrame, SIGNAL( videoResized(const QSize&)), this, SIGNAL( videoResized(const QSize&)));
+    connect ( videoFrame,  SIGNAL( clicked() ),  this,  SLOT ( backToNormal() ) );
 
     slider = 0;
 

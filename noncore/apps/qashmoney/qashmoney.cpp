@@ -28,10 +28,10 @@ QashMoney::QashMoney () : QWidget ()
     utilitiesmenu = new QPopupMenu ( this );
     mainmenu->insertItem ( "Preferences", preferencesmenu );
     mainmenu->insertItem ( "Utilities", utilitiesmenu );
-    preferencesmenu->insertItem ( "Date", this, SLOT ( displayDatePreferencesDialog () ) );
-    preferencesmenu->insertItem ( "Account", this, SLOT ( displayAccountPreferencesDialog () ) );
-    preferencesmenu->insertItem ( "Transaction", this, SLOT ( displayTransactionPreferencesDialog () ) );
-    utilitiesmenu->insertItem ( "Memory", this, SLOT ( displayMemoryDialog () ) );
+    preferencesmenu->insertItem ( "Date", this, SLOT ( displayDatePreferencesDialog() ) );
+    preferencesmenu->insertItem ( "Account", this, SLOT ( displayAccountPreferencesDialog() ) );
+    preferencesmenu->insertItem ( "Transaction", this, SLOT ( displayTransactionPreferencesDialog() ) );
+    utilitiesmenu->insertItem ( "Memory", this, SLOT ( displayMemoryDialog() ) );
 
     // create the main tabwidget for displaying accounts and transactions
     maintabs = new QTabWidget ( this );
@@ -47,10 +47,10 @@ QashMoney::QashMoney () : QWidget ()
     // create a new account display object
     accountdisplay = new AccountDisplay ( maintabs );
     accountdisplay->setTabs ( tab_2, maintabs );
-    connect ( accountdisplay->listview, SIGNAL ( selectionChanged () ), this, SLOT ( setTransactionTab () ) );
+    connect ( accountdisplay->listview, SIGNAL ( selectionChanged() ), this, SLOT ( setTransactionTab() ) );
 
     // set the connection to disable the one touch account viewing if we are transfering money
-    connect ( accountdisplay->transferbutton, SIGNAL ( toggled ( bool ) ), this, SLOT ( toggleOneTouchViewing ( bool ) ) );
+    connect ( accountdisplay->transferbutton, SIGNAL ( toggled(bool) ), this, SLOT ( toggleOneTouchViewing(bool) ) );
 
     // create a new transactiondisplay object
     transactiondisplay = new TransactionDisplay ( maintabs );
@@ -67,7 +67,7 @@ QashMoney::QashMoney () : QWidget ()
     tabslayout->addWidget ( budgetdisplay );
 
     // connect a change in the maintabs with changing the tab display
-    connect ( maintabs, SIGNAL ( currentChanged ( QWidget * ) ), this, SLOT ( changeTabDisplay () ) );
+    connect ( maintabs, SIGNAL ( currentChanged(QWidget*) ), this, SLOT ( changeTabDisplay() ) );
 
     // create layout that will contain the menubar and the maintabs
     layout = new QVBoxLayout ( this, 2, 2 );
@@ -352,14 +352,14 @@ void QashMoney::showTransactions ()
 void QashMoney::enableOneTouchViewing ()
   {
     if ( preferences->getPreference ( 5 ) == 1 )
-      connect ( accountdisplay->listview, SIGNAL ( selectionChanged () ), this, SLOT ( showTransactions () ) );
+      connect ( accountdisplay->listview, SIGNAL ( selectionChanged() ), this, SLOT ( showTransactions() ) );
     else
-      disconnect ( accountdisplay->listview, SIGNAL ( selectionChanged () ), this, SLOT ( showTransactions () ) );
+      disconnect ( accountdisplay->listview, SIGNAL ( selectionChanged() ), this, SLOT ( showTransactions() ) );
   }
 
 void QashMoney::disableOneTouchViewing ()
   {
-    disconnect ( accountdisplay->listview, SIGNAL ( selectionChanged () ), this, SLOT ( showTransactions () ) );
+    disconnect ( accountdisplay->listview, SIGNAL ( selectionChanged() ), this, SLOT ( showTransactions() ) );
   }
 
 void QashMoney::toggleOneTouchViewing ( bool state )

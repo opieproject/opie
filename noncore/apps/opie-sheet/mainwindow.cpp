@@ -41,9 +41,9 @@ MainWindow::MainWindow(QWidget *parent, const char* n, WFlags fl)
   fileSelector=new FileSelector("application/sheet-qt", this, QString::null);
   ExcelSelector=new FileSelector("application/excel",this,QString::null,FALSE);
   connect(fileSelector, SIGNAL(closeMe()), this, SLOT(selectorHide()));
-  connect(fileSelector, SIGNAL(newSelected(const DocLnk &)), this, SLOT(selectorFileNew(const DocLnk &)));
-  connect(fileSelector, SIGNAL(fileSelected(const DocLnk &)), this, SLOT(selectorFileOpen(const DocLnk &)));
-  connect(ExcelSelector,SIGNAL(fileSelected(const DocLnk &)),this,SLOT(slotImportExcel(const DocLnk &)));
+  connect(fileSelector, SIGNAL(newSelected(const DocLnk&)), this, SLOT(selectorFileNew(const DocLnk&)));
+  connect(fileSelector, SIGNAL(fileSelected(const DocLnk&)), this, SLOT(selectorFileOpen(const DocLnk&)));
+  connect(ExcelSelector,SIGNAL(fileSelected(const DocLnk&)),this,SLOT(slotImportExcel(const DocLnk&)));
   connect(ExcelSelector,SIGNAL(closeMe()), this, SLOT(ExcelSelectorHide()));
 
 
@@ -580,7 +580,7 @@ void MainWindow::initStandardToolbar()
 
   comboSheets=new QComboBox(toolbarStandard);
   toolbarStandard->setStretchableWidget(comboSheets);
-  connect(comboSheets, SIGNAL(activated(const QString &)), this, SLOT(slotSheetChanged(const QString &)));
+  connect(comboSheets, SIGNAL(activated(const QString&)), this, SLOT(slotSheetChanged(const QString&)));
 }
 
 void MainWindow::initFunctionsToolbar()
@@ -639,8 +639,8 @@ void MainWindow::initSheet()
   sheet=new Sheet(DEFAULT_NUM_ROWS, DEFAULT_NUM_COLS, this);
   setCentralWidget(sheet);
 
-  connect(sheet, SIGNAL(currentDataChanged(const QString &)), editData, SLOT(setText(const QString &)));
-  connect(sheet, SIGNAL(cellClicked(const QString &)), this, SLOT(slotCellClicked(const QString &)));
+  connect(sheet, SIGNAL(currentDataChanged(const QString&)), editData, SLOT(setText(const QString&)));
+  connect(sheet, SIGNAL(cellClicked(const QString&)), this, SLOT(slotCellClicked(const QString&)));
   connect(sheet, SIGNAL(sheetModified()), this, SLOT(slotDocModified()));
 
   connect(editCut, SIGNAL(activated()), sheet, SLOT(editCut()));

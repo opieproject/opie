@@ -34,9 +34,9 @@ TabManager::TabManager( QWidget* parent, const char* name):TabManagerBase(parent
   rescanFolder(HOME_APP_DIR);
 
   // Connect the signals and slots
-  connect(tabList, SIGNAL(doubleClicked(QListViewItem *)), this, SLOT(editItem(QListViewItem*)));
+  connect(tabList, SIGNAL(doubleClicked(QListViewItem*)), this, SLOT(editItem(QListViewItem*)));
   (tabList->header())->hide();
-  connect(tabList, SIGNAL(moveItem(QListViewItem *, QListViewItem *)), this, SLOT(moveApplication(QListViewItem *, QListViewItem *)));
+  connect(tabList, SIGNAL(moveItem(QListViewItem*,QListViewItem*)), this, SLOT(moveApplication(QListViewItem*,QListViewItem*)));
 }
 
 /**

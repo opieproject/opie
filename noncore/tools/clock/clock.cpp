@@ -121,7 +121,7 @@ Clock::Clock( QWidget * parent, const char * name, WFlags f )
   gl->addWidget( swatchRB, 1, 0 );
   grp->insert( swatchRB );
 
-  connect( grp, SIGNAL( clicked( int ) ), this, SLOT( modeSelect( int ) ) );
+  connect( grp, SIGNAL( clicked(int) ), this, SLOT( modeSelect(int) ) );
   grp->setButton( 0 );
 
   set = new QPushButton ( controls );
@@ -157,8 +157,8 @@ Clock::Clock( QWidget * parent, const char * name, WFlags f )
   connect( snoozeBtn, SIGNAL( clicked() ), SLOT( slotSnooze() ) );
   connect( alarmOffBtn, SIGNAL( clicked() ), SLOT( slotToggleAlarm() ) );
 
-  connect( qApp, SIGNAL( appMessage( const QCString&, const QByteArray& ) ),
-           this, SLOT( appMessage( const QCString&, const QByteArray& ) ) );
+  connect( qApp, SIGNAL( appMessage(const QCString&,const QByteArray&) ),
+           this, SLOT( appMessage(const QCString&,const QByteArray&) ) );
 
   t = new QTimer( this );
   connect( t, SIGNAL( timeout() ), SLOT( updateClock() ) );
@@ -169,7 +169,7 @@ Clock::Clock( QWidget * parent, const char * name, WFlags f )
   swatch_running = FALSE;
   swatch_totalms = 0;
 
-  connect( qApp, SIGNAL( clockChanged( bool ) ), this, SLOT( changeClock( bool ) ) );
+  connect( qApp, SIGNAL( clockChanged(bool) ), this, SLOT( changeClock(bool) ) );
 
 
   Config config( "qpe" );

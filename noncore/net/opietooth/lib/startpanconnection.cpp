@@ -40,10 +40,10 @@ void StartPanConnection::start()  {
     qDebug( "IM START " + m_mac );
     *m_panConnect << "pand" << "--connect" << m_mac;
 
-    connect( m_panConnect, SIGNAL( processExited( OProcess* ) ) ,
-             this, SLOT( slotExited( OProcess* ) ) );
-    connect( m_panConnect, SIGNAL( receivedStdout( OProcess*, char*, int ) ),
-             this, SLOT( slotStdOut( OProcess*, char*, int ) ) );
+    connect( m_panConnect, SIGNAL( processExited(OProcess*) ) ,
+             this, SLOT( slotExited(OProcess*) ) );
+    connect( m_panConnect, SIGNAL( receivedStdout(OProcess*,char*,int) ),
+             this, SLOT( slotStdOut(OProcess*,char*,int) ) );
     if (!m_panConnect->start( OProcess::NotifyOnExit, OProcess::AllOutput) ) {
         qWarning( "could not start" );
         delete m_panConnect;
@@ -70,10 +70,10 @@ void StartPanConnection::stop()  {
 
     *m_panConnect << "pand" << "--kill" << m_mac;
 
-    connect( m_panConnect, SIGNAL( processExited( OProcess* ) ) ,
-             this, SLOT( slotExited( OProcess* ) ) );
-    connect( m_panConnect, SIGNAL( receivedStdout( OProcess*, char*, int ) ),
-             this, SLOT( slotStdOut( OProcess*, char*, int ) ) );
+    connect( m_panConnect, SIGNAL( processExited(OProcess*) ) ,
+             this, SLOT( slotExited(OProcess*) ) );
+    connect( m_panConnect, SIGNAL( receivedStdout(OProcess*,char*,int) ),
+             this, SLOT( slotStdOut(OProcess*,char*,int) ) );
     if (!m_panConnect->start( OProcess::NotifyOnExit, OProcess::AllOutput) ) {
         qWarning( "could not stop" );
         delete m_panConnect;

@@ -97,7 +97,7 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name, WFlags) : MainWi
                 i->setHardwareName(tr("Disconnected"));
                 interfaceNames.insert(i->getInterfaceName(), i);
                 updateInterface(i);
-                connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
+                connect(i, SIGNAL(updateInterface(Interface*)), this, SLOT(updateInterface(Interface*)));
             }
         }
     }
@@ -252,8 +252,8 @@ void MainWindowImp::getAllInterfaces()
         qWarning("Adding interface %s to interfaceNames\n", ifr.ifr_name);
         interfaceNames.insert(i->getInterfaceName(), i);
         updateInterface(i);
-        connect(i, SIGNAL(updateInterface(Interface *)),
-                this, SLOT(updateInterface(Interface *)));
+        connect(i, SIGNAL(updateInterface(Interface*)),
+                this, SLOT(updateInterface(Interface*)));
     }
     // now lets ask the plugins too ;)
     QMap<Module*, QLibrary*>::Iterator it;
@@ -268,8 +268,8 @@ void MainWindowImp::getAllInterfaces()
                 qWarning("Adding interface %s to interfaceNames\n", i->getInterfaceName().latin1() );
                 interfaceNames.insert(i->getInterfaceName(), i);
                 updateInterface(i);
-                connect(i, SIGNAL(updateInterface(Interface *)),
-                        this, SLOT(updateInterface(Interface *)));
+                connect(i, SIGNAL(updateInterface(Interface*)),
+                        this, SLOT(updateInterface(Interface*)));
             }
         }
     }
@@ -712,8 +712,8 @@ void MainWindowImp::changeProfile()
 void MainWindowImp::makeChannel()
 {
     channel = new QCopChannel( "QPE/Application/networksettings", this );
-    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-             this, SLOT(receive(const QCString&, const QByteArray&)) );
+    connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+             this, SLOT(receive(const QCString&,const QByteArray&)) );
 }
 
 void MainWindowImp::receive(const QCString &msg, const QByteArray &arg)

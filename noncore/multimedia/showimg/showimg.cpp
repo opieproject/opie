@@ -308,8 +308,8 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
     //fileSelector->setNewVisible(FALSE);
     //fileSelector->setCloseVisible(FALSE);
     connect( fileSelector, SIGNAL( closeMe() ), this, SLOT( closeFileSelector() ) );
-    connect( fileSelector, SIGNAL( fileSelected( const DocLnk &) ),
-             this, SLOT( openFile( const DocLnk & ) ) );
+    connect( fileSelector, SIGNAL( fileSelected(const DocLnk&) ),
+             this, SLOT( openFile(const DocLnk&) ) );
 
     imageList = fileSelector->fileList();
     slideAction->setEnabled( imageList.count() != 0);

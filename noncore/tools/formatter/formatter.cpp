@@ -160,9 +160,9 @@ FormatterApp::FormatterApp( QWidget* parent,  const char* name, WFlags fl, bool 
     connect( editPushButton ,SIGNAL(released()),this,SLOT( editFstab()) );
     connect( fsckButton ,SIGNAL(released()),this,SLOT( doFsck()) );
 
-    connect( fileSystemsCombo,SIGNAL(activated(int)),this,SLOT( fsComboSelected(int ) ));
-    connect( storageComboBox,SIGNAL(activated(int)),this,SLOT( storageComboSelected(int ) ));
-    connect( deviceComboBox,SIGNAL(activated(int)),this,SLOT( deviceComboSelected(int ) ));
+    connect( fileSystemsCombo,SIGNAL(activated(int)),this,SLOT( fsComboSelected(int) ));
+    connect( storageComboBox,SIGNAL(activated(int)),this,SLOT( storageComboSelected(int) ));
+    connect( deviceComboBox,SIGNAL(activated(int)),this,SLOT( deviceComboSelected(int) ));
 
 
     fillCombos();

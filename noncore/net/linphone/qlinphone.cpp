@@ -112,7 +112,7 @@ _QLinphoneMainWidget( parent, name, fl ) {
 
      readConfig();
      createLinphoneCore();
-     connect( CheckBox1,  SIGNAL( toggled( bool )  ), this,  SLOT( slotHide( bool ) ) );
+     connect( CheckBox1,  SIGNAL( toggled(bool) ), this,  SLOT( slotHide(bool) ) );
      CheckBox1->setChecked( true );
 }
 

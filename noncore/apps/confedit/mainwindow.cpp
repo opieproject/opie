@@ -48,8 +48,8 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
 
   connect(settingList, SIGNAL( pressed(QListViewItem*) ),
 						this, SLOT(setCurrent(QListViewItem*)));
-	connect( settingList, SIGNAL( clicked( QListViewItem* ) ),
-					   this, SLOT( stopTimer( QListViewItem* ) ) );
+	connect( settingList, SIGNAL( clicked(QListViewItem*) ),
+					   this, SLOT( stopTimer(QListViewItem*) ) );
 
  	connect( editor->LineEditGroup, SIGNAL( textChanged(const QString&) ),
 	           SLOT( groupChanged(const QString&) ) );

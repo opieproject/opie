@@ -120,9 +120,9 @@ LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
 
 	changeType ( m_type );
 	
-	connect ( cb, SIGNAL( highlighted ( int ) ), this, SLOT( changeType ( int ) ) );
-	connect ( shadow, SIGNAL( toggled ( bool ) ), this, SLOT( changeShadow ( bool ) ) );
-	connect ( flattb, SIGNAL( toggled ( bool ) ), this, SLOT( changeFlat ( bool ) ) );
+	connect ( cb, SIGNAL( highlighted(int) ), this, SLOT( changeType(int) ) );
+	connect ( shadow, SIGNAL( toggled(bool) ), this, SLOT( changeShadow(bool) ) );
+	connect ( flattb, SIGNAL( toggled(bool) ), this, SLOT( changeFlat(bool) ) );
 }
 
 void LiquidSettings::changeType ( int t )

@@ -30,7 +30,7 @@ TransferDialog::TransferDialog ( QWidget *parent, int fromaccountid, int toaccou
     date->setDisabled ( TRUE );
     datebutton = new QPushButton ( datebox );
     datebutton->setPixmap ( QPixmap ( "/opt/QtPalmtop/pics/date.png" ) );
-    connect ( datebutton, SIGNAL ( released () ), this, SLOT ( showCalendar () ) );
+    connect ( datebutton, SIGNAL ( released() ), this, SLOT ( showCalendar() ) );
 
     amounttlabel = new QLabel ( "Amount", this );
 

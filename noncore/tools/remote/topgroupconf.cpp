@@ -36,7 +36,7 @@ TopGroupConf::TopGroupConf(QWidget *parent, const char *name):QWidget(parent,nam
 	remotes->insertItem(QString("Remotes"));
 	layout->addWidget(remotes);
 	layout->setStretchFactor(remotes, 1);
-	connect(remotes, SIGNAL(activated(const QString &)), this->parentWidget(), SLOT(remoteSelected(const QString &)) );
+	connect(remotes, SIGNAL(activated(const QString&)), this->parentWidget(), SLOT(remoteSelected(const QString&)) );
 
 
 	QPushButton *newrem = new QPushButton("New", this, "new");
@@ -45,7 +45,7 @@ TopGroupConf::TopGroupConf(QWidget *parent, const char *name):QWidget(parent,nam
 
 
 /*	remotes = new QComboBox(false, this, "remotes");
-	connect(remotes, SIGNAL(activated(const QString &)), this->parentWidget(), SLOT(remoteSelected(const QString &)) );
+	connect(remotes, SIGNAL(activated(const QString&)), this->parentWidget(), SLOT(remoteSelected(const QString&)) );
 	remotes->insertItem("Select Remote");
 //	remotes->setGeometry(135,5,95,20);
 

@@ -89,7 +89,7 @@ TVFilterView::TVFilterView(TableState *t, QWidget* parent,
     connect(keyNameCombo, SIGNAL(activated(int)), this, SLOT( updateTerm() ));
 
     connect(display, SIGNAL(selectionChanged(QListViewItem*)), this, 
-	    SLOT(setTerm(QListViewItem *)));
+	    SLOT(setTerm(QListViewItem*)));
 
     ts = t;
     current = 0;

@@ -49,8 +49,8 @@ AdvancedFm::AdvancedFm(QWidget *,const char*, WFlags )
    rePopulate();
    currentPathCombo->setFocus();
    channel = new QCopChannel( "QPE/Application/advancedfm", this );
-   connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-            this, SLOT( qcopReceive(const QCString&, const QByteArray&)) );
+   connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+            this, SLOT( qcopReceive(const QCString&,const QByteArray&)) );
 }
 
 AdvancedFm::~AdvancedFm() {

@@ -18,8 +18,8 @@ ZkbWidget::ZkbWidget(QWidget* parent):QLabel(parent),keymap(0),
 	loadKeymap();
 
 	channel = new QCopChannel("QPE/zkb", this);
-	connect(channel, SIGNAL(received(const QCString&, const QByteArray&)),
-		this, SLOT(signalReceived(const QCString&, const QByteArray&)));
+	connect(channel, SIGNAL(received(const QCString&,const QByteArray&)),
+		this, SLOT(signalReceived(const QCString&,const QByteArray&)));
     setFixedWidth ( AppLnk::smallIconSize()  );
     setFixedHeight ( AppLnk::smallIconSize()  );
 }

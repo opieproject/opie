@@ -27,8 +27,8 @@ bool IOIrda::open() {
     m_attach = new OProcess();
     *m_attach << "irattach /dev/ttyS2 -s";
 
-    connect( m_attach, SIGNAL( processExited( OProcess* ) ),
-            this, SLOT( slotExited( OProcess* ) ) );
+    connect( m_attach, SIGNAL( processExited(OProcess*) ),
+            this, SLOT( slotExited(OProcess*) ) );
 
     if ( m_attach->start() ) {
         ret= IOSerial::open();

@@ -64,8 +64,8 @@ void FortunePluginWidget::getFortune() {
 	fortuneProcess = new OProcess();
 	*fortuneProcess << "fortune";
 	
-	connect(fortuneProcess,  SIGNAL(receivedStdout(OProcess*, char*,  int ) ),
-		this,  SLOT(slotStdOut(OProcess*, char*, int) ) );
+	connect(fortuneProcess,  SIGNAL(receivedStdout(OProcess*,char*,int) ),
+		this,  SLOT(slotStdOut(OProcess*,char*,int) ) );
 	
 	if(!fortuneProcess->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
 		qWarning("could not start :(");

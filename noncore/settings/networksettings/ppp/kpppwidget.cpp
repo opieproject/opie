@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: kpppwidget.cpp,v 1.6 2003-08-09 17:14:55 kergoth Exp $
+ * $Id: kpppwidget.cpp,v 1.7 2004-03-02 12:21:30 alwin Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -396,11 +396,11 @@ void KPPPWidget::log_window_toggled(bool on) {
 // 	PW_Edit->setText(_pppdata->storedPassword());
 //     }
 
-//   connect(ID_Edit, SIGNAL(textChanged(const QString &)),
-//  	  this, SLOT(usernameChanged(const QString &)));
+//   connect(ID_Edit, SIGNAL(textChanged(const QString&)),
+//  	  this, SLOT(usernameChanged(const QString&)));
 
-//   connect(PW_Edit, SIGNAL(textChanged(const QString &)),
-//  	  this, SLOT(passwordChanged(const QString &)));
+//   connect(PW_Edit, SIGNAL(textChanged(const QString&)),
+//  	  this, SLOT(passwordChanged(const QString&)));
 
 //   if (ID_Edit->text().isEmpty())
 //       ID_Edit->setFocus();
@@ -721,8 +721,8 @@ void KPPPWidget::quitbutton() {
 //     //    acct = new ExecutableAccounting(this);
 
 //   // connect to the accounting object
-//   connect(acct, SIGNAL(changed(QString, QString)),
-// 	  con_win, SLOT(slotAccounting(QString, QString)));
+//   connect(acct, SIGNAL(changed(QString,QString)),
+// 	  con_win, SLOT(slotAccounting(QString,QString)));
 
 // //   if(!acct->loadRuleSet(_pppdata->accountingFile())) {
 // //     QString s= QObject::tr("Can not load the accounting "

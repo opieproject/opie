@@ -55,8 +55,8 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     showFolders->addTo( toolBar );
     showFolders->addTo( mailMenu );
     showFolders->setOn( true );
-    connect(showFolders, SIGNAL( toggled( bool ) ),
-            SLOT( slotShowFolders( bool ) ) );
+    connect(showFolders, SIGNAL( toggled(bool) ),
+            SLOT( slotShowFolders(bool) ) );
 
     /*
       searchMails = new QAction( tr( "Search mails" ), QIconSet( Resource::loadPixmap("find") ),
@@ -117,10 +117,10 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     QPEApplication::setStylusOperation( mailView->viewport(),QPEApplication::RightOnHold);
     QPEApplication::setStylusOperation( folderView->viewport(),QPEApplication::RightOnHold);
 
-    connect( mailView, SIGNAL( mouseButtonClicked(int, QListViewItem *,const QPoint&,int  ) ),this,
-             SLOT( mailLeftClicked( int, QListViewItem *,const QPoint&,int  ) ) );
-    connect( mailView, SIGNAL( mouseButtonPressed(int, QListViewItem *,const QPoint&,int  ) ),this,
-             SLOT( mailHold( int, QListViewItem *,const QPoint&,int  ) ) );
+    connect( mailView, SIGNAL( mouseButtonClicked(int,QListViewItem*,const QPoint&,int) ),this,
+             SLOT( mailLeftClicked(int,QListViewItem*,const QPoint&,int) ) );
+    connect( mailView, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int) ),this,
+             SLOT( mailHold(int,QListViewItem*,const QPoint&,int) ) );
     connect(folderView, SIGNAL(refreshMailview(QList<RecMail>*)),this,SLOT(refreshMailView(QList<RecMail>*)));
     connect( composeMail, SIGNAL( activated() ), SLOT( slotComposeMail() ) );
     connect( sendQueued, SIGNAL( activated() ), SLOT( slotSendQueued() ) );
@@ -129,8 +129,8 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     // Added by Stefan Eilers to allow starting by addressbook..
     // copied from old mail2
 #if !defined(QT_NO_COP)
-    connect( qApp, SIGNAL( appMessage( const QCString&, const QByteArray& ) ),
-             this, SLOT( appMessage( const QCString&, const QByteArray& ) ) );
+    connect( qApp, SIGNAL( appMessage(const QCString&,const QByteArray&) ),
+             this, SLOT( appMessage(const QCString&,const QByteArray&) ) );
 #endif
 
     QTimer::singleShot( 1000, this, SLOT( slotAdjustColumns() ) );

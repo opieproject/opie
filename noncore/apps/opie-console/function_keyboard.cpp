@@ -260,8 +260,8 @@ FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* par
 
 
     kb = new FunctionKeyboard(this);
-    connect (kb, SIGNAL(keyPressed(FKey, ushort, ushort, bool)),
-             this, SLOT(slotKeyPressed(FKey, ushort, ushort, bool)));
+    connect (kb, SIGNAL(keyPressed(FKey,ushort,ushort,bool)),
+             this, SLOT(slotKeyPressed(FKey,ushort,ushort,bool)));
 
     QGroupBox *dimentions = new QGroupBox(2, Qt::Horizontal, tr("Dimensions"), this);
     QLabel *l = new QLabel("Rows", dimentions);
@@ -284,21 +284,21 @@ FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* par
         m_labels->insertItem( Resource::loadPixmap("console/keys/" + files[i]), files[i]);
     }
     connect (m_labels, SIGNAL(activated(int)), this, SLOT(slotChangeIcon(int)));
-    connect (m_labels, SIGNAL(textChanged(const QString &)), this, SLOT(slotChangeLabelText(const QString&)));
+    connect (m_labels, SIGNAL(textChanged(const QString&)), this, SLOT(slotChangeLabelText(const QString&)));
 
     l = new QLabel("Q Keycode", editKey);
     m_qvalues = new QComboBox(true, editKey);
     m_qvalues->setInsertionPolicy(QComboBox::AtTop);
     m_qvalues->setDuplicatesEnabled(false);
     m_qvalues->insertItem("");
-    connect (m_qvalues, SIGNAL(textChanged(const QString &)), this, SLOT(slotChangeQCode(const QString&)));
+    connect (m_qvalues, SIGNAL(textChanged(const QString&)), this, SLOT(slotChangeQCode(const QString&)));
 
     l = new QLabel("Unicode Value", editKey);
     m_uniValues = new QComboBox(true, editKey);
     m_uniValues->setInsertionPolicy(QComboBox::AtTop);
     m_uniValues->setDuplicatesEnabled(false);
     m_uniValues->insertItem("");
-    connect (m_uniValues, SIGNAL(textChanged(const QString &)), this, SLOT(slotChangeUnicode(const QString&)));
+    connect (m_uniValues, SIGNAL(textChanged(const QString&)), this, SLOT(slotChangeUnicode(const QString&)));
 
     QVBoxLayout *root = new QVBoxLayout(this, 2);
     root->addWidget(kb);

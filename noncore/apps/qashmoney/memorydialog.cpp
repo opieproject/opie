@@ -16,15 +16,15 @@ MemoryDialog::MemoryDialog () : QDialog ( 0, 0, TRUE )
 
     newbutton = new QPushButton ( secondline );
     newbutton->setPixmap( QPixmap ("/opt/QtPalmtop/pics/new.png") );
-    connect ( newbutton, SIGNAL ( released () ), this, SLOT ( addItem () ) );
+    connect ( newbutton, SIGNAL ( released() ), this, SLOT ( addItem() ) );
 
     editbutton = new QPushButton ( secondline );
     editbutton->setPixmap( QPixmap ("/opt/QtPalmtop/pics/edit.png") );
-    connect ( editbutton, SIGNAL ( released () ), this, SLOT ( editItem () ) );
+    connect ( editbutton, SIGNAL ( released() ), this, SLOT ( editItem() ) );
 
     deletebutton = new QPushButton( secondline );
     deletebutton->setPixmap( QPixmap ("/opt/QtPalmtop/pics/delete.png") );
-    connect ( deletebutton, SIGNAL ( released () ), this, SLOT ( deleteItem () ) );
+    connect ( deletebutton, SIGNAL ( released() ), this, SLOT ( deleteItem() ) );
 
     lineedit = new QLineEdit ( this );
 

@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.cpp,v 1.6 2004-02-21 18:32:38 ar Exp $
+ * $Id: general.cpp,v 1.7 2004-03-02 12:21:30 alwin Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -84,8 +84,8 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
 
     //   connect(modemdevice, SIGNAL(activated(int)),
     // 	  SLOT(setmodemdc(int)));
-    //   connect(modemdevice, SIGNAL(textChanged( const QString & ) ),
-    //           SLOT( setmodemdc( const QString &) ) );
+    //   connect(modemdevice, SIGNAL(textChanged(const QString&) ),
+    //           SLOT( setmodemdc(const QString&) ) );
 
     QString tmp = tr("This specifies the serial port your modem is attached \n"
                      "to. On Linux/x86, typically this is either /dev/ttyS0 \n"

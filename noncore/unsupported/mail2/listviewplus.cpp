@@ -28,8 +28,8 @@ void ListViewPlus::setPopup(QPopupMenu *popup, int delay)
 	_popup = popup;
 	_delay = delay;
 
-	connect(this, SIGNAL(pressed(QListViewItem *, const QPoint &, int)), SLOT(_initPopup(QListViewItem *, const QPoint &, int)));
-	connect(this, SIGNAL(clicked(QListViewItem *, const QPoint &, int)), SLOT(_cancelPopup(QListViewItem *, const QPoint &, int)));
+	connect(this, SIGNAL(pressed(QListViewItem*,const QPoint&,int)), SLOT(_initPopup(QListViewItem*,const QPoint&,int)));
+	connect(this, SIGNAL(clicked(QListViewItem*,const QPoint&,int)), SLOT(_cancelPopup(QListViewItem*,const QPoint&,int)));
 }
 
 void ListViewPlus::_initPopup(QListViewItem *, const QPoint &point, int)

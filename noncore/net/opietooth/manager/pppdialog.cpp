@@ -39,7 +39,7 @@ PPPDialog::PPPDialog( QWidget* parent,  const char* name, bool modal, WFlags fl,
     layout->addWidget(outPut);
     layout->addWidget(connectButton);
 
-    connect( connectButton, SIGNAL( clicked() ), this,  SLOT( connectToDevice()  ) );
+    connect( connectButton, SIGNAL( clicked() ), this,  SLOT( connectToDevice() ) );
 
 }
 
@@ -52,8 +52,8 @@ void PPPDialog::connectToDevice() {
     QString connectScript = "/etc/ppp/peers/" + cmdLine->text();
     OProcess* pppDial = new OProcess();
     *pppDial << "pppd" << m_device << "call" << connectScript;
-    connect( pppDial, SIGNAL(receivedStdout(OProcess*, char*, int ) ),
-                this, SLOT(fillOutPut(OProcess*, char*, int ) ) );
+    connect( pppDial, SIGNAL(receivedStdout(OProcess*,char*,int) ),
+                this, SLOT(fillOutPut(OProcess*,char*,int) ) );
      if (!pppDial->start(OProcess::DontCare, OProcess::AllOutput) ) {
         qWarning("could not start");
         delete pppDial;

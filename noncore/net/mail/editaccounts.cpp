@@ -284,7 +284,7 @@ SelectMailType::SelectMailType( QString *selection, QWidget *parent, const char 
 {
     selected = selection;
     selected->replace( 0, selected->length(), typeBox->currentText() );
-    connect( typeBox, SIGNAL( activated( const QString & ) ), SLOT( slotSelection( const QString & ) ) );
+    connect( typeBox, SIGNAL( activated(const QString&) ), SLOT( slotSelection(const QString&) ) );
 }
 
 void SelectMailType::slotSelection( const QString &sel )
@@ -303,7 +303,7 @@ IMAPconfig::IMAPconfig( IMAPaccount *account, QWidget *parent, const char *name,
 
     fillValues();
 
-    connect( ComboBox1, SIGNAL( activated( int ) ), SLOT( slotConnectionToggle( int ) ) );
+    connect( ComboBox1, SIGNAL( activated(int) ), SLOT( slotConnectionToggle(int) ) );
     ComboBox1->insertItem( "Only if available", 0 );
     ComboBox1->insertItem( "Always, Negotiated", 1 );
     ComboBox1->insertItem( "Connect on secure port", 2 );
@@ -363,7 +363,7 @@ POP3config::POP3config( POP3account *account, QWidget *parent, const char *name,
     data = account;
     fillValues();
 
-    connect( ComboBox1, SIGNAL( activated( int ) ), SLOT( slotConnectionToggle( int ) ) );
+    connect( ComboBox1, SIGNAL( activated(int) ), SLOT( slotConnectionToggle(int) ) );
     ComboBox1->insertItem( "Only if available", 0 );
     ComboBox1->insertItem( "Always, Negotiated", 1 );
     ComboBox1->insertItem( "Connect on secure port", 2 );
@@ -421,12 +421,12 @@ SMTPconfig::SMTPconfig( SMTPaccount *account, QWidget *parent, const char *name,
 {
     data = account;
 
-    connect( loginBox, SIGNAL( toggled( bool ) ), userLine, SLOT( setEnabled( bool ) ) );
-    connect( loginBox, SIGNAL( toggled( bool ) ), passLine, SLOT( setEnabled( bool ) ) );
+    connect( loginBox, SIGNAL( toggled(bool) ), userLine, SLOT( setEnabled(bool) ) );
+    connect( loginBox, SIGNAL( toggled(bool) ), passLine, SLOT( setEnabled(bool) ) );
 
     fillValues();
 
-    connect( ComboBox1, SIGNAL( activated( int ) ), SLOT( slotConnectionToggle( int ) ) );
+    connect( ComboBox1, SIGNAL( activated(int) ), SLOT( slotConnectionToggle(int) ) );
     ComboBox1->insertItem( "Only if available", 0 );
     ComboBox1->insertItem( "Always, Negotiated", 1 );
     ComboBox1->insertItem( "Connect on secure port", 2 );
@@ -486,12 +486,12 @@ NNTPconfig::NNTPconfig( NNTPaccount *account, QWidget *parent, const char *name,
 {
     data = account;
 
-    connect( loginBox, SIGNAL( toggled( bool ) ), userLine, SLOT( setEnabled( bool ) ) );
-    connect( loginBox, SIGNAL( toggled( bool ) ), passLine, SLOT( setEnabled( bool ) ) );
+    connect( loginBox, SIGNAL( toggled(bool) ), userLine, SLOT( setEnabled(bool) ) );
+    connect( loginBox, SIGNAL( toggled(bool) ), passLine, SLOT( setEnabled(bool) ) );
 
     fillValues();
 
-    connect( sslBox, SIGNAL( toggled( bool ) ), SLOT( slotSSL( bool ) ) );
+    connect( sslBox, SIGNAL( toggled(bool) ), SLOT( slotSSL(bool) ) );
 }
 
 void NNTPconfig::slotSSL( bool enabled )

@@ -29,7 +29,7 @@ OYatzee::OYatzee( QWidget *parent , const char *name, WFlags fl ) : QMainWindow(
 	QVBoxLayout *vbox = new QVBoxLayout( thing );
 
 	sb = new Scoreboard( ps, thing , "sb" );
-	connect( sb->pb , SIGNAL( item( int ) ), this , SLOT( slotEndRound( int ) ) );
+	connect( sb->pb , SIGNAL( item(int) ), this , SLOT( slotEndRound(int) ) );
 	
 	dw = new DiceWidget( thing , "dw" );
 	dw->setMaximumHeight( this->height()/4 );
@@ -646,7 +646,7 @@ Possibilityboard::Possibilityboard( QWidget *parent , const char* name ) : Board
 	begriffe.append( "Chance" );
 	begriffe.append( "Score" );
 	
-	connect( this , SIGNAL( clicked( QPoint ) ), this , SLOT( slotClicked( QPoint ) ) );
+	connect( this , SIGNAL( clicked(QPoint) ), this , SLOT( slotClicked(QPoint) ) );
 }
 
 void Possibilityboard::slotClicked( QPoint p)

@@ -104,8 +104,8 @@ TVListView::TVListView(TableState *t, QWidget* parent,
     listViewDisplay = new TVListViewPrivate(this, "listViewDisplay");
     layout->addWidget(listViewDisplay);
 
-    connect(listViewDisplay, SIGNAL(currentChanged(QListViewItem *)), this,
-    		SLOT(setCurrent(QListViewItem *)));
+    connect(listViewDisplay, SIGNAL(currentChanged(QListViewItem*)), this,
+    		SLOT(setCurrent(QListViewItem*)));
     connect(listViewDisplay, SIGNAL(sortChanged(int)), this, 
     		SLOT(setSorting(int)));
 

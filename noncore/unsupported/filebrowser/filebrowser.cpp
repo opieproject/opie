@@ -260,10 +260,10 @@ FileView::FileView( const QString & dir, QWidget * parent,
 
     generateDir( dir );
 
-    connect( this, SIGNAL( clicked( QListViewItem * )),
-       SLOT( itemClicked( QListViewItem * )) );
-    connect( this, SIGNAL( doubleClicked( QListViewItem * )),
-       SLOT( itemDblClicked( QListViewItem * )) );
+    connect( this, SIGNAL( clicked(QListViewItem*)),
+       SLOT( itemClicked(QListViewItem*)) );
+    connect( this, SIGNAL( doubleClicked(QListViewItem*)),
+       SLOT( itemDblClicked(QListViewItem*)) );
     connect( this, SIGNAL( selectionChanged() ), SLOT( cancelMenuTimer() ) );
     connect( &menuTimer, SIGNAL( timeout() ), SLOT( showFileMenu() ) );
 }
@@ -908,8 +908,8 @@ void FileBrowser::init(const QString & dir)
     updateDirMenu();
 
     QCopChannel* pcmciaChannel = new QCopChannel( "QPE/Card", this );
-    connect( pcmciaChannel, SIGNAL(received(const QCString &, const QByteArray &)),
-   this, SLOT(pcmciaMessage( const QCString &, const QByteArray &)) );
+    connect( pcmciaChannel, SIGNAL(received(const QCString&,const QByteArray&)),
+   this, SLOT(pcmciaMessage(const QCString&,const QByteArray&)) );
 }
 
 void FileBrowser::pcmciaMessage( const QCString &msg, const QByteArray &)

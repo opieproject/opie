@@ -36,8 +36,8 @@ bool IOBt::open() {
 
         // then start hcid, then rcfomm handling (m_mac)
 
-        connect( m_attach, SIGNAL( processExited( OProcess* ) ),
-                 this, SLOT( slotExited( OProcess* ) ) );
+        connect( m_attach, SIGNAL( processExited(OProcess*) ),
+                 this, SLOT( slotExited(OProcess*) ) );
 
         if ( m_attach->start() ) {
             ret = IOSerial::open();

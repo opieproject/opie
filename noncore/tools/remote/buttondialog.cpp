@@ -43,7 +43,7 @@ ButtonDialog::ButtonDialog(QString buttonName, QWidget *parent, const char*name,
 	hlayout1->addSpacing(5);
 	remote->insertItem("Remote  ");
 	remote->insertStringList(getRemotes());
-	connect(remote, SIGNAL(activated(const QString &)), this, SLOT(remoteSelected(const QString&)) );
+	connect(remote, SIGNAL(activated(const QString&)), this, SLOT(remoteSelected(const QString&)) );
 
 	button = new QComboBox(false, this, "button");
 	QLabel *buttonLabel = new QLabel(remote, "Button: ", this, "buttonLabel");
@@ -53,7 +53,7 @@ ButtonDialog::ButtonDialog(QString buttonName, QWidget *parent, const char*name,
 	hlayout2->addWidget(button);
 	hlayout2->addSpacing(5);
 	button->insertItem("Button       ");
-	connect(button, SIGNAL(activated(const QString &)), this, SLOT(buttonSelected(const QString&)) );
+	connect(button, SIGNAL(activated(const QString&)), this, SLOT(buttonSelected(const QString&)) );
 	
 	label = new QLineEdit(this, "label");
 	label->setText(buttonName);

@@ -21,32 +21,32 @@ AccountDisplay::AccountDisplay ( QWidget *parent ) : QWidget ( parent )
 
     newaccount = new QPushButton ( firstline );
     newaccount->setPixmap ( QPixmap ("/opt/QtPalmtop/pics/new.png") );
-    connect ( newaccount, SIGNAL ( released () ), this, SLOT ( addAccount () ) );
+    connect ( newaccount, SIGNAL ( released() ), this, SLOT ( addAccount() ) );
 
     editaccount = new QPushButton ( firstline );
     editaccount->setPixmap ( QPixmap ("/opt/QtPalmtop/pics/edit.png") );
-    connect ( editaccount, SIGNAL ( released () ), this, SLOT ( editAccount () ) );
+    connect ( editaccount, SIGNAL ( released() ), this, SLOT ( editAccount() ) );
 
     deleteaccount = new QPushButton ( firstline );
     deleteaccount->setPixmap( QPixmap ( "/opt/QtPalmtop/pics/delete.png") );
-    connect ( deleteaccount, SIGNAL ( released () ), this, SLOT ( deleteAccount () ) );
+    connect ( deleteaccount, SIGNAL ( released() ), this, SLOT ( deleteAccount() ) );
 
     transferbutton = new QPushButton ( firstline );
     transferbutton->setPixmap( QPixmap ( "/opt/QtPalmtop/pics/transfer.png") );
     transferbutton->setToggleButton ( TRUE );
-    connect ( transferbutton, SIGNAL ( toggled ( bool ) ), this, SLOT ( accountTransfer ( bool ) ) );
+    connect ( transferbutton, SIGNAL ( toggled(bool) ), this, SLOT ( accountTransfer(bool) ) );
 
     listview = new QListView ( this );
     listview->setAllColumnsShowFocus ( TRUE );
     listview->setShowSortIndicator ( TRUE );
     listview->setRootIsDecorated ( TRUE );
     listview->setMultiSelection ( FALSE );
-    connect ( listview, SIGNAL ( expanded ( QListViewItem * ) ), this, SLOT ( setAccountExpanded ( QListViewItem * ) ) );
-    connect ( listview, SIGNAL ( collapsed ( QListViewItem * ) ), this, SLOT ( setAccountCollapsed ( QListViewItem * ) ) );
+    connect ( listview, SIGNAL ( expanded(QListViewItem*) ), this, SLOT ( setAccountExpanded(QListViewItem*) ) );
+    connect ( listview, SIGNAL ( collapsed(QListViewItem*) ), this, SLOT ( setAccountCollapsed(QListViewItem*) ) );
     
     listview->header()->setTracking ( FALSE );
-    connect ( listview->header(), SIGNAL ( sizeChange ( int, int, int ) ), this, SLOT ( saveColumnSize ( int, int, int ) ) );
-    connect ( listview->header(), SIGNAL ( clicked ( int ) ), this, SLOT ( saveSortingPreference ( int ) ) );
+    connect ( listview->header(), SIGNAL ( sizeChange(int,int,int) ), this, SLOT ( saveColumnSize(int,int,int) ) );
+    connect ( listview->header(), SIGNAL ( clicked(int) ), this, SLOT ( saveSortingPreference(int) ) );
     
     layout = new QVBoxLayout ( this, 2, 5 );
     layout->addWidget ( firstline );
@@ -225,7 +225,7 @@ void AccountDisplay::accountTransfer ( bool state )
         listview->clearSelection ();
         listview->setMultiSelection ( TRUE );
         disableParentsWithChildren ();
-        connect ( listview, SIGNAL ( clicked ( QListViewItem * ) ), this, SLOT ( getTransferAccounts ( QListViewItem * ) ) );
+        connect ( listview, SIGNAL ( clicked(QListViewItem*) ), this, SLOT ( getTransferAccounts(QListViewItem*) ) );
       }
     else
       {
@@ -234,7 +234,7 @@ void AccountDisplay::accountTransfer ( bool state )
         listview->clearSelection ();
 	listview->setMultiSelection ( FALSE );
         enableAccounts ();
-        disconnect ( listview, SIGNAL ( clicked ( QListViewItem * ) ), this, SLOT ( getTransferAccounts ( QListViewItem * ) ) );
+        disconnect ( listview, SIGNAL ( clicked(QListViewItem*) ), this, SLOT ( getTransferAccounts(QListViewItem*) ) );
       }
   }
 
@@ -291,7 +291,7 @@ void AccountDisplay::getTransferAccounts ( QListViewItem * item )
             secondaccountid = -1;
             listview->clearSelection ();
 	    listview->setMultiSelection ( FALSE );
-            disconnect ( listview, SIGNAL ( clicked ( QListViewItem * ) ), this, SLOT ( getTransferAccounts ( QListViewItem * ) ) );
+            disconnect ( listview, SIGNAL ( clicked(QListViewItem*) ), this, SLOT ( getTransferAccounts(QListViewItem*) ) );
           }
 
        // reset the accounts display window

@@ -210,8 +210,8 @@ void MainWindow::initUI() {
     m_keyBar->hide();
 
     m_kb = new FunctionKeyboard(m_keyBar);
-    connect(m_kb, SIGNAL(keyPressed(FKey, ushort, ushort, bool)),
-            this, SLOT(slotKeyReceived(FKey, ushort, ushort, bool)));
+    connect(m_kb, SIGNAL(keyPressed(FKey,ushort,ushort,bool)),
+            this, SLOT(slotKeyReceived(FKey,ushort,ushort,bool)));
 
 
     a = new QAction(tr("Copy"),
@@ -248,8 +248,8 @@ void MainWindow::initUI() {
     /*
      * connect to the menu activation
      */
-    connect( m_sessionsPop, SIGNAL(activated( int ) ),
-             this, SLOT(slotProfile( int ) ) );
+    connect( m_sessionsPop, SIGNAL(activated(int) ),
+             this, SLOT(slotProfile(int) ) );
 
     m_consoleWindow = new TabWidget( this, "blah");
     connect(m_consoleWindow, SIGNAL(activated(Session*) ),

@@ -27,10 +27,10 @@ PackageListView::PackageListView(QWidget *p, const char* n, PackageManagerSettin
 
   connect( popupTimer, SIGNAL(timeout()),
 	   this, SLOT(showPopup()) );
-  connect( this, SIGNAL( pressed( QListViewItem* ) ),
-	   this, SLOT( setCurrent( QListViewItem* ) ) );
-  connect( this, SIGNAL( clicked( QListViewItem* ) ),
-	   this, SLOT( stopTimer( QListViewItem* ) ) );	
+  connect( this, SIGNAL( pressed(QListViewItem*) ),
+	   this, SLOT( setCurrent(QListViewItem*) ) );
+  connect( this, SIGNAL( clicked(QListViewItem*) ),
+	   this, SLOT( stopTimer(QListViewItem*) ) );	
 
 }
 

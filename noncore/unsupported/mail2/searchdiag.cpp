@@ -28,7 +28,7 @@ SearchDiag::SearchDiag(QWidget *parent, const char *name, WFlags fl)
 
 	connect(folderView, SIGNAL(folderSelected(Folder)), SLOT(folderSelected(Folder)));
 	connect(in, SIGNAL(activated(int)), SLOT(slotInItemActivated(int)));
-	connect(mailTable, SIGNAL(mailClicked(IMAPResponseFETCH, IMAPHandler *)), SLOT(slotMailClicked(IMAPResponseFETCH, IMAPHandler *)));
+	connect(mailTable, SIGNAL(mailClicked(IMAPResponseFETCH,IMAPHandler*)), SLOT(slotMailClicked(IMAPResponseFETCH,IMAPHandler*)));
 }
 
 void SearchDiag::accept()
@@ -49,7 +49,7 @@ void SearchDiag::accept()
 	}
 
 	_folder.topFolder().handler()->iSelect(_folder.fullName());
-	connect(_folder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPSelect(IMAPResponse &)));
+	connect(_folder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse&)), SLOT(slotIMAPSelect(IMAPResponse&)));
 }
 
 void SearchDiag::folderSelected(Folder folder)
@@ -60,7 +60,7 @@ void SearchDiag::folderSelected(Folder folder)
 
 void SearchDiag::slotIMAPSelect(IMAPResponse &response)
 {
-	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), this, SLOT(slotIMAPSelect(IMAPResponse &)));
+	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse&)), this, SLOT(slotIMAPSelect(IMAPResponse&)));
 
 	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
 		if (in->currentItem() == INMENU_BODY) {
@@ -75,7 +75,7 @@ void SearchDiag::slotIMAPSelect(IMAPResponse &response)
 			response.imapHandler()->iSearch("TO \"" + searchFor->text() + "\"");
 		} else return;
 
-		connect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPSearch(IMAPResponse &)));
+		connect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse&)), SLOT(slotIMAPSearch(IMAPResponse&)));
 	} else {
 		QMessageBox::warning(this, tr("Error"), tr("<p>Could not select the folder. Aborting. (Server said: %1)").arg(response.statusResponse().comment()), tr("Ok"));
 	}
@@ -83,7 +83,7 @@ void SearchDiag::slotIMAPSelect(IMAPResponse &response)
 
 void SearchDiag::slotIMAPSearch(IMAPResponse &response)
 {
-	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), this, SLOT(slotIMAPSearch(IMAPResponse &)));
+	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse&)), this, SLOT(slotIMAPSearch(IMAPResponse&)));
 
 	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
 		IMAPResponseSEARCH results = response.SEARCH()[0];
@@ -93,7 +93,7 @@ void SearchDiag::slotIMAPSearch(IMAPResponse &response)
 		}
 
 		response.imapHandler()->iFetch(results.mails().join(","), "ENVELOPE FLAGS UID");
-		connect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPFetch(IMAPResponse &)));
+		connect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse&)), SLOT(slotIMAPFetch(IMAPResponse&)));
 	} else {
 		QMessageBox::warning(this, tr("Error"), tr("<p>Search failed. (Server said: %1)").arg(response.statusResponse().comment()), tr("Ok"));
 	}
@@ -101,7 +101,7 @@ void SearchDiag::slotIMAPSearch(IMAPResponse &response)
 
 void SearchDiag::slotIMAPFetch(IMAPResponse &response)
 {
-	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), this, SLOT(slotIMAPSearch(IMAPResponse &)));
+	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse&)), this, SLOT(slotIMAPSearch(IMAPResponse&)));
 
 	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
 		mailTable->setHeaders(response.FETCH());

@@ -127,10 +127,10 @@ NotesControl::NotesControl( QWidget *, const char * )
 
 
 
-    connect( box, SIGNAL( mouseButtonPressed( int, QListBoxItem *, const QPoint&)),
-             this,SLOT( boxPressed(int, QListBoxItem *, const QPoint&)) );
+    connect( box, SIGNAL( mouseButtonPressed(int,QListBoxItem*,const QPoint&)),
+             this,SLOT( boxPressed(int,QListBoxItem*,const QPoint&)) );
 
-    connect(box, SIGNAL(highlighted(const QString&)), this, SLOT(slotBoxSelected(const QString &)));
+    connect(box, SIGNAL(highlighted(const QString&)), this, SLOT(slotBoxSelected(const QString&)));
 
     connect( &menuTimer, SIGNAL( timeout() ), SLOT( showMenu() ) );
 
@@ -222,7 +222,7 @@ void NotesControl::slotBeamButton() {
         QString file = QDir::homeDirPath()+"/"+selectedText;
         QFile f(file);
            Ir *irFile = new Ir(this, "IR");
-          connect( irFile, SIGNAL(done(Ir*)), this, SLOT( slotBeamFinished( Ir * )));
+          connect( irFile, SIGNAL(done(Ir*)), this, SLOT( slotBeamFinished(Ir*)));
           irFile->send( file, "Note", "text/plain" );
     }
   }

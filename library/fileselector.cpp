@@ -308,12 +308,12 @@ FileSelector::FileSelector( const QString &f, QWidget *parent, const char *name,
 
     view = new FileSelectorView( this, "fileview" );
     QPEApplication::setStylusOperation( view->viewport(), QPEApplication::RightOnHold );
-    connect( view, SIGNAL( mouseButtonClicked( int, QListViewItem *, const QPoint &, int ) ),
-	     this, SLOT( fileClicked( int, QListViewItem *, const QPoint &, int ) ) );
-    connect( view, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint &, int ) ),
-	     this, SLOT( filePressed( int, QListViewItem *, const QPoint &, int ) ) );
-    connect( view, SIGNAL( returnPressed( QListViewItem * ) ),
-	     this, SLOT( fileClicked( QListViewItem * ) ) );
+    connect( view, SIGNAL( mouseButtonClicked(int,QListViewItem*,const QPoint&,int) ),
+	     this, SLOT( fileClicked(int,QListViewItem*,const QPoint&,int) ) );
+    connect( view, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int) ),
+	     this, SLOT( filePressed(int,QListViewItem*,const QPoint&,int) ) );
+    connect( view, SIGNAL( returnPressed(QListViewItem*) ),
+	     this, SLOT( fileClicked(QListViewItem*) ) );
 
     QHBox *hb = new QHBox( this );
 
@@ -335,8 +335,8 @@ FileSelector::FileSelector( const QString &f, QWidget *parent, const char *name,
     setCloseVisible( closeVisible );
 
     QCopChannel *channel = new QCopChannel( "QPE/Card", this );
-    connect( channel, SIGNAL(received(const QCString &, const QByteArray &)),
-	    this, SLOT(cardMessage( const QCString &, const QByteArray &)) );
+    connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+	    this, SLOT(cardMessage(const QCString&,const QByteArray&)) );
 
     reread();
     updateWhatsThis();

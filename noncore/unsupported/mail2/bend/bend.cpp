@@ -86,7 +86,7 @@ void BenD::slotCheck()
 			      (*ot).imapSslPort().isEmpty())) {
 				IMAPHandler *handler = new IMAPHandler(*ot);
 				handler->iStatus("INBOX", "RECENT");
-				connect(handler, SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPStatus(IMAPResponse &)));
+				connect(handler, SIGNAL(gotResponse(IMAPResponse&)), SLOT(slotIMAPStatus(IMAPResponse&)));
 			}
 		}
 	}
@@ -94,7 +94,7 @@ void BenD::slotCheck()
 
 void BenD::slotIMAPStatus(IMAPResponse &response)
 {
-	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), this, SLOT(slotIMAPStatus(IMAPResponse &)));
+	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse&)), this, SLOT(slotIMAPStatus(IMAPResponse&)));
 
 	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
 		if (response.STATUS()[0].recent().toInt() > 0) {

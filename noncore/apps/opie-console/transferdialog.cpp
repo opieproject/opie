@@ -125,9 +125,9 @@ void TransferDialog::slotTransfer()
         m_lay = m_win->factory()->newFileTransfer(protocol->currentText(), m_win->currentSession()->layer());
         m_lay->sendFile(filename->text());
 
-        connect(m_lay, SIGNAL(progress(const QString&, int, int, int, int, int)),
-            SLOT(slotProgress(const QString&, int, int, int, int, int)));
-        connect(m_lay, SIGNAL(error(int, const QString&)), SLOT(slotError(int, const QString&)));
+        connect(m_lay, SIGNAL(progress(const QString&,int,int,int,int,int)),
+            SLOT(slotProgress(const QString&,int,int,int,int,int)));
+        connect(m_lay, SIGNAL(error(int,const QString&)), SLOT(slotError(int,const QString&)));
         connect(m_lay, SIGNAL(sent()), SLOT(slotSent()));
     }
     else
@@ -135,9 +135,9 @@ void TransferDialog::slotTransfer()
         m_recvlay = m_win->factory()->newReceive(protocol->currentText(), m_win->currentSession()->layer());
         m_recvlay->receive();
 
-        connect(m_recvlay, SIGNAL(progress(const QString&, int, int, int, int, int)),
-            SLOT(slotProgress(const QString&, int, int, int, int, int)));
-        connect(m_recvlay, SIGNAL(error(int, const QString&)), SLOT(slotError(int, const QString&)));
+        connect(m_recvlay, SIGNAL(progress(const QString&,int,int,int,int,int)),
+            SLOT(slotProgress(const QString&,int,int,int,int,int)));
+        connect(m_recvlay, SIGNAL(error(int,const QString&)), SLOT(slotError(int,const QString&)));
         connect(m_recvlay, SIGNAL(received(const QString&)), SLOT(slotReceived(const QString&)));
     }
 }

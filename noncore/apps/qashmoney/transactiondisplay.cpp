@@ -29,23 +29,23 @@ TransactionDisplay::TransactionDisplay ( QWidget* parent ) : QWidget ( parent )
 
     newtransaction = new QPushButton ( firstline );
     newtransaction->setPixmap ( QPixmap ("/opt/QtPalmtop/pics/new.png") );
-    connect ( newtransaction, SIGNAL ( released () ), this, SLOT ( addTransaction () ) );
+    connect ( newtransaction, SIGNAL ( released() ), this, SLOT ( addTransaction() ) );
 
     edittransaction = new QPushButton ( firstline );
     edittransaction->setPixmap( QPixmap ("/opt/QtPalmtop/pics/edit.png") );
-    connect ( edittransaction, SIGNAL ( released () ), this, SLOT ( checkListViewEdit () ) );
+    connect ( edittransaction, SIGNAL ( released() ), this, SLOT ( checkListViewEdit() ) );
 
     deletetransaction = new QPushButton ( firstline );
     deletetransaction->setPixmap( QPixmap ( "/opt/QtPalmtop/pics/delete.png") );
-    connect ( deletetransaction, SIGNAL ( released () ), this, SLOT ( checkListViewDelete () ) );
+    connect ( deletetransaction, SIGNAL ( released() ), this, SLOT ( checkListViewDelete() ) );
 
     toggletransaction = new QPushButton ( firstline );
     toggletransaction->setPixmap( QPixmap ( "/opt/QtPalmtop/pics/redo.png") );
-    connect ( toggletransaction, SIGNAL ( released () ), this, SLOT ( checkListViewToggle () ) );
+    connect ( toggletransaction, SIGNAL ( released() ), this, SLOT ( checkListViewToggle() ) );
 
     viewtransactionnotes = new QPushButton ( firstline );
     viewtransactionnotes->setPixmap( QPixmap ( "/opt/QtPalmtop/pics/info.png") );
-    connect ( viewtransactionnotes, SIGNAL ( released () ), this, SLOT ( showTransactionNotes () ) );
+    connect ( viewtransactionnotes, SIGNAL ( released() ), this, SLOT ( showTransactionNotes() ) );
 
     secondline = new QHBox ( this );
     secondline->setSpacing ( 5 );
@@ -56,14 +56,14 @@ TransactionDisplay::TransactionDisplay ( QWidget* parent ) : QWidget ( parent )
     QLabel *limit = new QLabel ( "Limit", secondline );
     limitbox = new QLineEdit ( secondline );
     limitbox->setMinimumWidth ( ( int ) ( this->width() / 6 ) );
-    connect ( limitbox, SIGNAL ( textChanged ( const QString & ) ), this, SLOT ( limitDisplay ( const QString & ) ) );
+    connect ( limitbox, SIGNAL ( textChanged(const QString&) ), this, SLOT ( limitDisplay(const QString&) ) );
 
     listview = new QListView ( this );
     listview->setAllColumnsShowFocus ( TRUE );
     listview->setShowSortIndicator ( TRUE );
     listview->header()->setTracking ( FALSE );
-    connect ( listview->header(), SIGNAL ( sizeChange ( int, int, int ) ), this, SLOT ( saveColumnSize ( int, int, int ) ) );
-    connect ( listview->header(), SIGNAL ( clicked ( int ) ), this, SLOT ( saveSortingPreference ( int ) ) );
+    connect ( listview->header(), SIGNAL ( sizeChange(int,int,int) ), this, SLOT ( saveColumnSize(int,int,int) ) );
+    connect ( listview->header(), SIGNAL ( clicked(int) ), this, SLOT ( saveSortingPreference(int) ) );
 
     layout = new QVBoxLayout ( this, 2, 2 );
     layout->addWidget ( firstline );
@@ -213,7 +213,7 @@ void TransactionDisplay::editTransfer ()
     date->setText ( preferences->getDate ( year, month, day ) );
     QPushButton *datebutton = new QPushButton ( datebox );
     datebutton->setPixmap ( QPixmap ( "/opt/QtPalmtop/pics/date.png" ) );
-    connect ( datebutton, SIGNAL ( released () ), this, SLOT ( showCalendar () ) );
+    connect ( datebutton, SIGNAL ( released() ), this, SLOT ( showCalendar() ) );
 
     QLabel *amounttlabel = new QLabel ( "Amount", editransfer );
 

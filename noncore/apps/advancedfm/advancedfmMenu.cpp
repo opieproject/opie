@@ -681,7 +681,7 @@ void AdvancedFm::doBeam() {
                curFilePath = curFilePath.left( curFilePath.length() -1);
             }
             Ir *file = new Ir(this, "IR");
-            connect(file, SIGNAL(done(Ir*)), this, SLOT( fileBeamFinished( Ir * )));
+            connect(file, SIGNAL(done(Ir*)), this, SLOT( fileBeamFinished(Ir*)));
             file->send( curFilePath, curFile );
          }
       }
@@ -702,11 +702,11 @@ void AdvancedFm::startProcess(const QString & cmd) {
   QStringList command;
   OProcess *process;
   process = new OProcess();
-  connect(process, SIGNAL(processExited(OProcess *)),
-          this, SLOT( processEnded(OProcess *)));
+  connect(process, SIGNAL(processExited(OProcess*)),
+          this, SLOT( processEnded(OProcess*)));
 
-  connect(process, SIGNAL( receivedStderr(OProcess *, char *, int)),
-            this, SLOT( oprocessStderr(OProcess *, char *, int)));
+  connect(process, SIGNAL( receivedStderr(OProcess*,char*,int)),
+            this, SLOT( oprocessStderr(OProcess*,char*,int)));
 
   command << "/bin/sh";
   command << "-c";

@@ -535,8 +535,8 @@ FontConfig::FontConfig( QWidget *parent, char *name )
 //   QWhatsThis::add( m_fontselect,
 //   tr( "Select the desired name, style and size of the default font applications will use." ) );
 
-    connect( m_fontselect, SIGNAL( fontSelected ( const QFont & )),
-             this, SLOT( slotFontSelected( const QFont & )));
+    connect( m_fontselect, SIGNAL( fontSelected(const QFont&)),
+             this, SLOT( slotFontSelected(const QFont&)));
    grid->addWidget(  m_fontselect, 0, 0);
 
 
@@ -545,7 +545,7 @@ FontConfig::FontConfig( QWidget *parent, char *name )
 //   m_fontchooser->enableColumn(KFontChooser::StyleList, false);
 //   grid->addWidget( m_fontchooser, 0, 0);
 
-//   connect (m_fontchooser, SIGNAL (fontSelected( const QFont & )), this, SLOT (slotFontSelected( const QFont & )));
+//   connect (m_fontchooser, SIGNAL (fontSelected(const QFont&)), this, SLOT (slotFontSelected(const QFont&)));
 // #endif
 }
 

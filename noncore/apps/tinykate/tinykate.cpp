@@ -42,7 +42,7 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
 
   tabwidget=new OTabWidget(this);
   setCentralWidget(tabwidget);
-  connect(tabwidget,SIGNAL(currentChanged( QWidget *)),this,SLOT(slotCurrentChanged(QWidget *)));
+  connect(tabwidget,SIGNAL(currentChanged(QWidget*)),this,SLOT(slotCurrentChanged(QWidget*)));
 
 //FILE ACTIONS
         QPopupMenu *popup = new QPopupMenu( this );

@@ -76,12 +76,12 @@ NewAccount::NewAccount ( QWidget *parent, const char *name, bool modal ) : QDial
     layout->addWidget ( typelabel, 5, 1, Qt::AlignLeft );
     layout->addWidget ( accounttype, 6, 1, Qt::AlignLeft );
 
-    connect ( childcheckbox, SIGNAL ( clicked () ), this, SLOT ( showChildPulldownMenu() ) );
+    connect ( childcheckbox, SIGNAL ( clicked() ), this, SLOT ( showChildPulldownMenu() ) );
     connect ( balancecalculator, SIGNAL ( released() ), this, SLOT ( showCalculator() ) );
     connect ( creditlimitcalculator, SIGNAL ( released() ), this, SLOT ( showCreditLimitCalculator() ) );
-    connect ( accounttype, SIGNAL ( activated ( int ) ), this, SLOT ( activateCreditLimit ( int ) ) );
-    connect ( datebutton, SIGNAL ( released () ), this, SLOT ( showCalendar () ) );
-    connect ( descriptionbutton, SIGNAL ( released () ), this, SLOT ( addAccountDescription() ) );
+    connect ( accounttype, SIGNAL ( activated(int) ), this, SLOT ( activateCreditLimit(int) ) );
+    connect ( datebutton, SIGNAL ( released() ), this, SLOT ( showCalendar() ) );
+    connect ( descriptionbutton, SIGNAL ( released() ), this, SLOT ( addAccountDescription() ) );
 }
 
 NewAccount::~NewAccount ()

@@ -48,8 +48,8 @@ Ir::Ir( QObject *parent, const char *name )
 {
 #ifndef QT_NO_COP
     ch = new QCopChannel( "QPE/Obex" );
-    connect( ch, SIGNAL(received(const QCString &, const QByteArray &)),
-	     this, SLOT(obexMessage( const QCString &, const QByteArray &)) );
+    connect( ch, SIGNAL(received(const QCString&,const QByteArray&)),
+	     this, SLOT(obexMessage(const QCString&,const QByteArray&)) );
 #endif
 }
 

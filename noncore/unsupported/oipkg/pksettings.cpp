@@ -46,7 +46,7 @@ PackageManagerSettings::PackageManagerSettings( QWidget* parent,  const char* na
   //    				 activeLinkDestination, SLOT(setEnabled(bool)) );
 
 //  connect( settingName, SIGNAL(activated(int)), this, SLOT(installationSettingChange(int)) );
-//  connect( settingName, SIGNAL(textChanged(const QString &)), this, SLOT(installationSettingSetName(const QString &)) );
+//  connect( settingName, SIGNAL(textChanged(const QString&)), this, SLOT(installationSettingSetName(const QString&)) );
 //  connect( newsetting, SIGNAL(clicked()), this, SLOT(newInstallationSetting()) );
 //  connect( renamesetting, SIGNAL(clicked()), this, SLOT(renameInstallationSetting()) );
  // connect( removesetting, SIGNAL(clicked()), this, SLOT(removeInstallationSetting()) );

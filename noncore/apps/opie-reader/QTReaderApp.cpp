@@ -329,7 +329,7 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
 
     m_annoWin = new CAnnoEdit(editorStack);
     editorStack->addWidget(m_annoWin, get_unique_id());
-    connect( m_annoWin, SIGNAL( finished(const QString&, const QString&) ), this, SLOT( addAnno(const QString&, const QString&) ) );
+    connect( m_annoWin, SIGNAL( finished(const QString&,const QString&) ), this, SLOT( addAnno(const QString&,const QString&) ) );
     connect( m_annoWin, SIGNAL( cancelled() ), this, SLOT( infoClose() ) );
 
     m_infoWin = new infowin(editorStack);
@@ -349,7 +349,7 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
 
 /*
     importSelector = new FileSelector( "*", editorStack, "importselector", false );
-    connect( importSelector, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( importFile( const DocLnk & ) ) );
+    connect( importSelector, SIGNAL( fileSelected(const DocLnk&) ), this, SLOT( importFile(const DocLnk&) ) );
 
     editorStack->addWidget( importSelector, get_unique_id() );
 
@@ -453,7 +453,7 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
     connect( reader, SIGNAL( OnShowPicture(QImage&) ), this, SLOT( showgraphic(QImage&) ) );
 
     connect( reader, SIGNAL( OnRedraw() ), this, SLOT( OnRedraw() ) );
-    connect( reader, SIGNAL( OnWordSelected(const QString&, size_t, const QString&) ), this, SLOT( OnWordSelected(const QString&, size_t, const QString&) ) );
+    connect( reader, SIGNAL( OnWordSelected(const QString&,size_t,const QString&) ), this, SLOT( OnWordSelected(const QString&,size_t,const QString&) ) );
     connect( reader, SIGNAL( OnURLSelected(const QString&) ), this, SLOT( OnURLSelected(const QString&) ) );
     editorStack->addWidget( reader, get_unique_id() );
 
@@ -726,11 +726,11 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
 
 
 #ifdef __ISEARCH
-    connect( searchEdit, SIGNAL( textChanged( const QString & ) ),
-	     this, SLOT( search( const QString& ) ) );
+    connect( searchEdit, SIGNAL( textChanged(const QString&) ),
+	     this, SLOT( search(const QString&) ) );
 #else
-    connect( searchEdit, SIGNAL( returnPressed( ) ),
-	     this, SLOT( search( ) ) );
+    connect( searchEdit, SIGNAL( returnPressed() ),
+	     this, SLOT( search() ) );
 #endif
      QAction*a = new QAction( tr( "Find Next" ), geticon( "next" ), QString::null, 0, this, 0 );
      connect( a, SIGNAL( activated() ), this, SLOT( findNext() ) );
@@ -752,7 +752,7 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
 
     regBar->setStretchableWidget( regEdit );
 
-    connect( regEdit, SIGNAL( returnPressed( ) ),
+    connect( regEdit, SIGNAL( returnPressed() ),
 	     this, SLOT( do_regaction() ) );
 
     a = new QAction( tr( "Do Reg" ), geticon( "enter" ), QString::null, 0, this, 0 );
@@ -790,16 +790,16 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
 	}
 	if (!realfont) reader->m_fontname = flist[0];
     } // delete the FontDatabase!!!
-    connect( m_fontSelector, SIGNAL( activated(const QString& ) ),
+    connect( m_fontSelector, SIGNAL( activated(const QString&) ),
 	     this, SLOT( do_setfont(const QString&) ) );
-    connect( m_fontSelector, SIGNAL( activated(int ) ),
+    connect( m_fontSelector, SIGNAL( activated(int) ),
 	     this, SLOT( do_setencoding(int) ) );
 
     m_fontBar->hide();
     m_fontVisible = false;
 #ifdef USEMSGS
-    connect(qApp, SIGNAL( appMessage(const QCString&, const QByteArray& ) ),
-	     this, SLOT( msgHandler(const QCString&, const QByteArray&) ) );
+    connect(qApp, SIGNAL( appMessage(const QCString&,const QByteArray&) ),
+	     this, SLOT( msgHandler(const QCString&,const QByteArray&) ) );
 #endif
 //    qDebug("Initing");
   reader->init();

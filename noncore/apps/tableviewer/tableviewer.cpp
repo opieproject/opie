@@ -155,14 +155,14 @@ TableViewerWindow::TableViewerWindow(QWidget *parent, const char *name, WFlags f
     cw->raiseWidget(current_view);
     fileSelector->reread();
 
-    connect(browseView, SIGNAL(searchOnKey(int, TVVariant)), 
-            this, SLOT(searchOnKey(int, TVVariant)));
+    connect(browseView, SIGNAL(searchOnKey(int,TVVariant)), 
+            this, SLOT(searchOnKey(int,TVVariant)));
     connect(browseView, SIGNAL(sortChanged(int)), 
             this, SLOT(setPrimaryKey(int)));
 
     connect(fileSelector, SIGNAL(closeMe()), this, SLOT(browseViewSlot()));
-    connect(fileSelector, SIGNAL(fileSelected(const DocLnk &)), 
-             this, SLOT(openDocument(const DocLnk &)));
+    connect(fileSelector, SIGNAL(fileSelected(const DocLnk&)), 
+             this, SLOT(openDocument(const DocLnk&)));
 
     main_layout->addWidget(menu);
     main_layout->addWidget(cw);

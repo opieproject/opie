@@ -18,17 +18,17 @@ DatePreferences::DatePreferences ( QWidget* parent ) : QDialog ( parent, 0, TRUE
     dateformat->insertItem ( "yyddmm" );
     dateformat->insertItem ( "ddmmyyyy" );
     dateformat->insertItem ( "ddmmyy" );
-    connect ( dateformat, SIGNAL ( activated ( int ) ), this, SLOT ( changeDateFormat ( int ) ) );
+    connect ( dateformat, SIGNAL ( activated(int) ), this, SLOT ( changeDateFormat(int) ) );
 
     QLabel *dateseparatorlabel = new QLabel ( "Separator", this );
     dateseparator = new QComboBox ( this );
     dateseparator->insertItem ( "/" );
     dateseparator->insertItem ( "-" );
     dateseparator->insertItem ( "." );
-    connect ( dateseparator, SIGNAL ( activated ( int ) ), this, SLOT ( changeDateSeparator ( int ) ) );
+    connect ( dateseparator, SIGNAL ( activated(int) ), this, SLOT ( changeDateSeparator(int) ) );
 
     defaults = new QPushButton ( QPixmap ( "/opt/QtPalmtop/pics/defaults.png" ), "Defaults", this );
-    connect ( defaults, SIGNAL ( released () ), this, SLOT ( setDefaultDatePreferences () ) );
+    connect ( defaults, SIGNAL ( released() ), this, SLOT ( setDefaultDatePreferences() ) );
 
     dateformat->setCurrentItem ( ( preferences->getPreference ( 1 ) ) - 1 );
     dateseparator->setCurrentItem ( ( preferences->getPreference ( 2 ) ) - 1 );
@@ -102,7 +102,7 @@ TransactionPreferences::TransactionPreferences ( QWidget* parent ) : QDialog ( p
       excludetransfers->setChecked ( FALSE );
 
     defaults = new QPushButton ( QPixmap ( "/opt/QtPalmtop/pics/defaults.png" ), "Defaults", this );
-    connect ( defaults, SIGNAL ( released () ), this, SLOT ( setDefaultTransactionPreferences () ) );
+    connect ( defaults, SIGNAL ( released() ), this, SLOT ( setDefaultTransactionPreferences() ) );
 
     layout = new QVBoxLayout ( this, 2, 2 );
     layout->addWidget ( showclearedtransactions );
@@ -111,9 +111,9 @@ TransactionPreferences::TransactionPreferences ( QWidget* parent ) : QDialog ( p
     layout->insertSpacing ( 3, 5 );
     layout->addWidget ( defaults );
 
-    connect ( showclearedtransactions, SIGNAL ( toggled ( bool ) ), this, SLOT ( changeShowClearedPreference ( bool ) ) );
-    connect ( excludetransfers, SIGNAL ( toggled ( bool ) ), this, SLOT ( changeExcludeTranfersPreference ( bool ) ) );
-    connect ( limittransactions, SIGNAL ( activated ( int ) ), this, SLOT ( changeLimitTransactionsPreference ( int ) ) );
+    connect ( showclearedtransactions, SIGNAL ( toggled(bool) ), this, SLOT ( changeShowClearedPreference(bool) ) );
+    connect ( excludetransfers, SIGNAL ( toggled(bool) ), this, SLOT ( changeExcludeTranfersPreference(bool) ) );
+    connect ( limittransactions, SIGNAL ( activated(int) ), this, SLOT ( changeLimitTransactionsPreference(int) ) );
 }
 
 TransactionPreferences::~TransactionPreferences ()
@@ -174,7 +174,7 @@ AccountPreferences::AccountPreferences ( QWidget* parent ) : QDialog ( parent, 0
       onetouch->setChecked ( FALSE );
 
     defaults = new QPushButton ( QPixmap ( "/opt/QtPalmtop/pics/defaults.png" ), "Defaults", this );
-    connect ( defaults, SIGNAL ( released () ), this, SLOT ( setDefaultAccountPreferences () ) );
+    connect ( defaults, SIGNAL ( released() ), this, SLOT ( setDefaultAccountPreferences() ) );
 
     layout = new QVBoxLayout ( this, 2, 2 );
     layout->addWidget ( currencysupport );
@@ -182,8 +182,8 @@ AccountPreferences::AccountPreferences ( QWidget* parent ) : QDialog ( parent, 0
     layout->insertSpacing ( 2, 5 );
     layout->addWidget ( defaults );
 
-    connect ( currencysupport, SIGNAL ( toggled ( bool ) ), this, SLOT ( changeCurrencySupport ( bool ) ) );
-    connect ( onetouch, SIGNAL ( toggled ( bool ) ), this, SLOT ( changeOneTouchViewing ( bool ) ) );
+    connect ( currencysupport, SIGNAL ( toggled(bool) ), this, SLOT ( changeCurrencySupport(bool) ) );
+    connect ( onetouch, SIGNAL ( toggled(bool) ), this, SLOT ( changeOneTouchViewing(bool) ) );
 }
 
 AccountPreferences::~AccountPreferences ()

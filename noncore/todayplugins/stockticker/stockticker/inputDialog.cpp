@@ -63,7 +63,7 @@ void InputDialog::doLookup() {
       proc << "/usr/bin/wget";
       proc<<"-O"<< tempHtml<< url;
     
-      connect( &proc, SIGNAL( processExited( OProcess *)),this, SLOT( showBrowser(OProcess *)));
+      connect( &proc, SIGNAL( processExited(OProcess*)),this, SLOT( showBrowser(OProcess*)));
       proc.start( OProcess::NotifyOnExit);
 */
      system(cmd.latin1());

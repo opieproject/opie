@@ -62,7 +62,7 @@ ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool m
         return;
     }
 
-    connect( smtpAccountBox, SIGNAL( activated( int ) ), SLOT( fillValues( int ) ) );
+    connect( smtpAccountBox, SIGNAL( activated(int) ), SLOT( fillValues(int) ) );
     connect( toButton, SIGNAL( clicked() ), SLOT( pickAddressTo() ) );
     connect( ccButton, SIGNAL( clicked() ), SLOT( pickAddressCC() ) );
     connect( bccButton, SIGNAL( clicked() ), SLOT( pickAddressBCC() ) );

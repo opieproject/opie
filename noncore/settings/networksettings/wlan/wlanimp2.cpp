@@ -54,7 +54,7 @@ WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, W
   }
 
   connect( rescanButton, SIGNAL( clicked() ), this, SLOT( rescanNeighbourhood() ) );
-  connect( netView, SIGNAL( clicked( QListViewItem* ) ), this, SLOT( selectNetwork( QListViewItem* ) ) );
+  connect( netView, SIGNAL( clicked(QListViewItem*) ), this, SLOT( selectNetwork(QListViewItem*) ) );
   netView->setColumnAlignment( col_chn, AlignCenter );
   netView->setItemMargin( 3 );
   netView->setAllColumnsShowFocus( true );

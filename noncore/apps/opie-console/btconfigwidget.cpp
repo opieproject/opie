@@ -32,7 +32,7 @@ BTConfigWidget::BTConfigWidget( const QString& name,
     m_device = new QLabel( tr( "Device" ), this );
     QHBox *deviceBox = new QHBox( this );
     m_devRadio = new QRadioButton( deviceBox );
-    connect( m_devRadio, SIGNAL( toggled( bool ) ), this, SLOT( slotDevRadio( bool ) ) );
+    connect( m_devRadio, SIGNAL( toggled(bool) ), this, SLOT( slotDevRadio(bool) ) );
     m_deviceCmb = new QComboBox( deviceBox );
     m_deviceCmb->setEditable( TRUE );
 
@@ -40,7 +40,7 @@ BTConfigWidget::BTConfigWidget( const QString& name,
     macLabel->setText( tr( "Or peer mac address" ) );
     QHBox *macBox = new QHBox( this );
     m_macRadio = new QRadioButton( macBox );
-    connect( m_macRadio, SIGNAL( toggled( bool ) ), this, SLOT( slotMacRadio( bool ) ) );
+    connect( m_macRadio, SIGNAL( toggled(bool) ), this, SLOT( slotMacRadio(bool) ) );
     m_mac = new QLineEdit( macBox );
 
     m_base = new IOLayerBase(this, "base");

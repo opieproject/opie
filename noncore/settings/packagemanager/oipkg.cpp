@@ -316,7 +316,7 @@ bool OIpkg::executeCommand( OPackage::Command command, QStringList *parameters, 
     if ( rawOutput )
     {
 //        if ( slotOutput )
-//            connect( this, SIGNAL(signalIpkgMessage(char *)), receiver, slotOutput );
+//            connect( this, SIGNAL(signalIpkgMessage(char*)), receiver, slotOutput );
     }
     else
     {
@@ -326,17 +326,17 @@ bool OIpkg::executeCommand( OPackage::Command command, QStringList *parameters, 
     switch( command )
     {
         case OPackage::Update : {
-                connect( this, SIGNAL(signalIpkgMessage(char *)), receiver, slotOutput );
+                connect( this, SIGNAL(signalIpkgMessage(char*)), receiver, slotOutput );
                 ipkg_lists_update( &m_ipkgArgs );
             };
             break;
         case OPackage::Upgrade : {
-                connect( this, SIGNAL(signalIpkgMessage(char *)), receiver, slotOutput );
+                connect( this, SIGNAL(signalIpkgMessage(char*)), receiver, slotOutput );
                 ipkg_packages_upgrade( &m_ipkgArgs );
             };
             break;
         case OPackage::Install : {
-                connect( this, SIGNAL(signalIpkgMessage(char *)), receiver, slotOutput );
+                connect( this, SIGNAL(signalIpkgMessage(char*)), receiver, slotOutput );
                 for ( QStringList::Iterator it = parameters->begin(); it != parameters->end(); ++it )
                 {
                     ipkg_packages_install( &m_ipkgArgs, (*it) );
@@ -344,7 +344,7 @@ bool OIpkg::executeCommand( OPackage::Command command, QStringList *parameters, 
             };
             break;
         case OPackage::Remove : {
-                connect( this, SIGNAL(signalIpkgMessage(char *)), receiver, slotOutput );
+                connect( this, SIGNAL(signalIpkgMessage(char*)), receiver, slotOutput );
                 for ( QStringList::Iterator it = parameters->begin(); it != parameters->end(); ++it )
                 {
                     ipkg_packages_remove( &m_ipkgArgs, (*it), true );
@@ -352,7 +352,7 @@ bool OIpkg::executeCommand( OPackage::Command command, QStringList *parameters, 
             };
             break;
         case OPackage::Download : {
-                connect( this, SIGNAL(signalIpkgMessage(char *)), receiver, slotOutput );
+                connect( this, SIGNAL(signalIpkgMessage(char*)), receiver, slotOutput );
                 for ( QStringList::Iterator it = parameters->begin(); it != parameters->end(); ++it )
                 {
                     ipkg_packages_download( &m_ipkgArgs, (*it) );
@@ -360,12 +360,12 @@ bool OIpkg::executeCommand( OPackage::Command command, QStringList *parameters, 
             };
             break;
         case OPackage::Info : {
-                connect( this, SIGNAL(signalIpkgStatus(char *)), receiver, slotOutput );
+                connect( this, SIGNAL(signalIpkgStatus(char*)), receiver, slotOutput );
                 ipkg_packages_info( &m_ipkgArgs, (*parameters->begin()), &fIpkgStatus, 0x0 );
             };
             break;
         case OPackage::Files : {
-                connect( this, SIGNAL(signalIpkgList(char *)), receiver, slotOutput );
+                connect( this, SIGNAL(signalIpkgList(char*)), receiver, slotOutput );
                 ipkg_package_files( &m_ipkgArgs, (*parameters->begin()), &fIpkgFiles, 0x0 );
             };
             break;

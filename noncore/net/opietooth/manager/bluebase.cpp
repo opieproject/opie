@@ -65,20 +65,20 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
 
     connect( rfcommBindButton,  SIGNAL( clicked() ),  this,  SLOT( rfcommDialog() ) );
     // not good since lib is async
-    //       connect( ListView2, SIGNAL( expanded ( QListViewItem* ) ),
-    //                  this, SLOT( addServicesToDevice( QListViewItem * ) ) );
-    connect( ListView2, SIGNAL( clicked( QListViewItem* )),
-             this, SLOT( startServiceActionClicked( QListViewItem* ) ) );
-    connect( ListView2, SIGNAL( rightButtonClicked( QListViewItem *, const QPoint &, int ) ),
-             this,  SLOT(startServiceActionHold( QListViewItem *, const QPoint &, int) ) );
-    connect( m_localDevice , SIGNAL( foundServices( const QString& , Services::ValueList ) ),
-             this, SLOT( addServicesToDevice( const QString& , Services::ValueList ) ) );
-    connect( m_localDevice, SIGNAL( available( const QString&, bool ) ),
-             this, SLOT( deviceActive( const QString& , bool ) ) );
-    connect( m_localDevice, SIGNAL( connections( ConnectionState::ValueList ) ),
-             this, SLOT( addConnectedDevices( ConnectionState::ValueList ) ) );
-    connect( m_localDevice, SIGNAL( signalStrength( const QString&, const QString& ) ),
-             this, SLOT( addSignalStrength( const QString&, const QString& ) ) );
+    //       connect( ListView2, SIGNAL( expanded(QListViewItem*) ),
+    //                  this, SLOT( addServicesToDevice(QListViewItem*) ) );
+    connect( ListView2, SIGNAL( clicked(QListViewItem*)),
+             this, SLOT( startServiceActionClicked(QListViewItem*) ) );
+    connect( ListView2, SIGNAL( rightButtonClicked(QListViewItem*,const QPoint&,int) ),
+             this,  SLOT(startServiceActionHold(QListViewItem*,const QPoint&,int) ) );
+    connect( m_localDevice , SIGNAL( foundServices(const QString&,Services::ValueList) ),
+             this, SLOT( addServicesToDevice(const QString&,Services::ValueList) ) );
+    connect( m_localDevice, SIGNAL( available(const QString&,bool) ),
+             this, SLOT( deviceActive(const QString&,bool) ) );
+    connect( m_localDevice, SIGNAL( connections(ConnectionState::ValueList) ),
+             this, SLOT( addConnectedDevices(ConnectionState::ValueList) ) );
+    connect( m_localDevice, SIGNAL( signalStrength(const QString&,const QString&) ),
+             this, SLOT( addSignalStrength(const QString&,const QString&) ) );
 
 
     // let hold be rightButtonClicked()
@@ -637,8 +637,8 @@ void BlueBase::startScan()
 {
     ScanDialog *scan = new ScanDialog( this, "ScanDialog",
                                        true, WDestructiveClose );
-    QObject::connect( scan, SIGNAL( selectedDevices( const QValueList<RemoteDevice>& ) ),
-                      this, SLOT( addSearchedDevices( const QValueList<RemoteDevice>& ) ) );
+    QObject::connect( scan, SIGNAL( selectedDevices(const QValueList<RemoteDevice>&) ),
+                      this, SLOT( addSearchedDevices(const QValueList<RemoteDevice>&) ) );
 
     QPEApplication::showDialog( scan );
 }

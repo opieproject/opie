@@ -99,8 +99,8 @@ Transaction::Transaction( QWidget *parent, bool bNew, const QString &acctname,
 	datePicker = new DateBookMonth( m1, 0, TRUE );
 	m1->insertItem( datePicker );
 	dateBtn->setPopup( m1 );
-	connect( datePicker, SIGNAL( dateClicked( int, int, int ) ),
-			 this, SLOT( slotDateChanged( int, int, int ) ) );
+	connect( datePicker, SIGNAL( dateClicked(int,int,int) ),
+			 this, SLOT( slotDateChanged(int,int,int) ) );
 	layout->addWidget( dateBtn, 1, 1 );
 
 	// Check number
@@ -120,7 +120,7 @@ Transaction::Transaction( QWidget *parent, bool bNew, const QString &acctname,
     _cbDesc->insertStringList( _pCfg->getPayees() );
 	QWhatsThis::add( _cbDesc, tr( "Enter description of transaction here." ) );
 	layout->addMultiCellWidget( _cbDesc, 2, 2, 1, 3 );
-    connect( _cbDesc, SIGNAL( activated(const QString &) ), this, SLOT( slotActivated(const QString &) ) );
+    connect( _cbDesc, SIGNAL( activated(const QString&) ), this, SLOT( slotActivated(const QString&) ) );
 
 
 	// Category
@@ -170,10 +170,10 @@ Transaction::Transaction( QWidget *parent, bool bNew, const QString &acctname,
     // not new handlers
     connect( withBtn, SIGNAL( toggled(bool) ), this, SLOT( slotNotNew() ) );
     connect( depBtn, SIGNAL( toggled(bool) ), this, SLOT( slotNotNew() ) );
-    connect( catList, SIGNAL(activated(const QString &)), this, SLOT( slotNotNew() ) );
-    connect( typeList, SIGNAL(activated(const QString &)), this, SLOT( slotNotNew() ) );
-    connect( amtEdit, SIGNAL(textChanged(const QString &)), this, SLOT( slotNotNew() ) );
-    connect( feeEdit, SIGNAL(textChanged(const QString &)), this, SLOT( slotNotNew() ) );
+    connect( catList, SIGNAL(activated(const QString&)), this, SLOT( slotNotNew() ) );
+    connect( typeList, SIGNAL(activated(const QString&)), this, SLOT( slotNotNew() ) );
+    connect( amtEdit, SIGNAL(textChanged(const QString&)), this, SLOT( slotNotNew() ) );
+    connect( feeEdit, SIGNAL(textChanged(const QString&)), this, SLOT( slotNotNew() ) );
     connect( noteEdit, SIGNAL(textChanged()), this, SLOT( slotNotNew() ) );
 }
 

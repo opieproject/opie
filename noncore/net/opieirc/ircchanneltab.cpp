@@ -28,7 +28,7 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
     m_lines = 0;
     /* Required so that embedded-style "right" clicks work */
     QPEApplication::setStylusOperation(m_list->viewport(), QPEApplication::RightOnHold);
-    connect(m_list, SIGNAL(mouseButtonPressed(int, QListBoxItem *, const QPoint&)), this, SLOT(mouseButtonPressed(int, QListBoxItem *, const QPoint &)));
+    connect(m_list, SIGNAL(mouseButtonPressed(int,QListBoxItem*,const QPoint&)), this, SLOT(mouseButtonPressed(int,QListBoxItem*,const QPoint&)));
     /* Construct the popup menu */
     QPopupMenu *ctcpMenu = new QPopupMenu(m_list);
     m_popup->insertItem(Resource::loadPixmap("opieirc/ctcp"), tr("CTCP"), ctcpMenu);

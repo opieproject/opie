@@ -12,8 +12,8 @@ QCopChannel::QCopChannel( const QCString& channel, QObject* parent,
     if (!m_list ) {
         m_list = new QList<QCopChannel>;
         /* only connect once */
-        connect(OCOPClient::self(), SIGNAL(called(const QCString&, const QCString&, const QByteArray& ) ),
-                this, SLOT(rev(const QCString&, const QCString&, const QByteArray&) ) );
+        connect(OCOPClient::self(), SIGNAL(called(const QCString&,const QCString&,const QByteArray&) ),
+                this, SLOT(rev(const QCString&,const QCString&,const QByteArray&) ) );
     }
     /* first registration  or ref count is 0 for m_chan*/
     if (!m_refCount.contains( m_chan ) || !m_refCount[m_chan]  ) {

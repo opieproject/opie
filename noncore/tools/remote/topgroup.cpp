@@ -33,7 +33,7 @@ TopGroup::TopGroup(QWidget *parent, const char *name):QWidget(parent,name)
 	//	source->setGeometry(50,5,40,20);
 
 	remotes = new QComboBox(false, this, "remotes");
-	connect(remotes, SIGNAL(activated(const QString &)), this->parentWidget(), SLOT(remoteSelected(const QString &)) );
+	connect(remotes, SIGNAL(activated(const QString&)), this->parentWidget(), SLOT(remoteSelected(const QString&)) );
 	remotes->insertItem("Select Remote");
 //	remotes->setGeometry(135,5,95,20);
 

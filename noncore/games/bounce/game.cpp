@@ -321,13 +321,13 @@ JezzGame::JezzGame( int ballNum, QWidget *parent, const char *name )
    for ( int x=0; x<FIELD_WIDTH; x++ )
          m_field->setTile( x, FIELD_HEIGHT-1, TILE_BORDER );
 
-   connect( m_field, SIGNAL(ballCollision(Ball *, int, int, int)), this, SLOT(ballCollision(Ball *, int, int, int)) );
+   connect( m_field, SIGNAL(ballCollision(Ball*,int,int,int)), this, SLOT(ballCollision(Ball*,int,int,int)) );
 
    // create view
    m_view = new JezzView( m_field, this, "m_view" );
    m_view->move( 0, 0 );
    m_view->adjustSize();
-   connect( m_view, SIGNAL(buildWall(int, int, bool)), this, SLOT(buildWall(int, int, bool)) );
+   connect( m_view, SIGNAL(buildWall(int,int,bool)), this, SLOT(buildWall(int,int,bool)) );
 
    // create balls
    for ( int n=0; n<ballNum; n++ )
@@ -525,8 +525,8 @@ void JezzGame::buildWall( int x, int y, bool vertical )
                              vertical? Wall::Up : Wall::Left,
                              vertical? TILE_WALLUP : TILE_WALLLEFT,
                              this, "m_wall1" );
-         connect( m_wall1, SIGNAL(finished(Wall *, int)),
-                  this, SLOT(wallFinished(Wall *, int)) );            }
+         connect( m_wall1, SIGNAL(finished(Wall*,int)),
+                  this, SLOT(wallFinished(Wall*,int)) );            }
 
       if ( !m_wall2 )
       {
@@ -534,8 +534,8 @@ void JezzGame::buildWall( int x, int y, bool vertical )
                              vertical? Wall::Down: Wall::Right,
                              vertical? TILE_WALLDOWN : TILE_WALLRIGHT,
                              this, "m_wall2" );
-         connect( m_wall2, SIGNAL(finished(Wall *, int)),
-                  this, SLOT(wallFinished(Wall *, int)) );
+         connect( m_wall2, SIGNAL(finished(Wall*,int)),
+                  this, SLOT(wallFinished(Wall*,int)) );
       }
    }
 }

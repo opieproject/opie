@@ -63,11 +63,11 @@ PlayListWidget::PlayListWidget(QWidget* parent, const char* name, WFlags fl )
                                           "opieplayer2/remove_from_playlist",
                                           this , SLOT(removeSelected() ) );
     d->tbPlay    = new ToolButton( bar, tr( "Play" ), "opieplayer2/play",
-                                   this , SLOT( btnPlay( bool) ), TRUE );
+                                   this , SLOT( btnPlay(bool) ), TRUE );
     d->tbShuffle = new ToolButton( bar, tr( "Randomize" ),"opieplayer2/shuffle",
-                                   mediaPlayerState, SLOT( setShuffled( bool ) ), TRUE );
+                                   mediaPlayerState, SLOT( setShuffled(bool) ), TRUE );
     d->tbLoop    = new ToolButton( bar, tr( "Loop" ), "opieplayer2/loop",
-                                   mediaPlayerState, SLOT( setLooping( bool ) ), TRUE );
+                                   mediaPlayerState, SLOT( setLooping(bool) ), TRUE );
 
     (void)new MenuItem( pmPlayList, tr( "Clear List" ), this, SLOT( clearList() ) );
     (void)new MenuItem( pmPlayList, tr( "Add all audio files" ),
@@ -108,38 +108,38 @@ PlayListWidget::PlayListWidget(QWidget* parent, const char* name, WFlags fl )
 
     connect( tbDeletePlaylist, ( SIGNAL( released() ) ),
              SLOT( deletePlaylist() ) );
-    connect( pmView, SIGNAL( activated( int ) ),
-             this, SLOT( pmViewActivated( int ) ) );
-    connect( skinsMenu, SIGNAL( activated( int ) ) ,
-             this, SLOT( skinsMenuActivated( int ) ) );
-    connect( d->selectedFiles, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int) ),
-             this,SLOT( playlistViewPressed( int, QListViewItem *, const QPoint&, int ) ) );
-    connect( audioView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int ) ),
-             this,SLOT( viewPressed( int, QListViewItem *, const QPoint&, int ) ) );
-    connect( audioView, SIGNAL( returnPressed( QListViewItem *) ),
-             this,SLOT( playIt( QListViewItem *) ) );
-    connect( audioView, SIGNAL( doubleClicked( QListViewItem *) ),
-             this, SLOT( addToSelection( QListViewItem *) ) );
-    connect( videoView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int) ),
-             this,SLOT( viewPressed( int, QListViewItem *, const QPoint&, int) ) );
-    connect( videoView, SIGNAL( returnPressed( QListViewItem *) ),
-             this,SLOT( playIt( QListViewItem *) ) );
-    connect( videoView, SIGNAL( doubleClicked( QListViewItem *) ),
-             this, SLOT( addToSelection( QListViewItem *) ) );
-    connect( playLists, SIGNAL( fileSelected( const DocLnk &) ),
-             this, SLOT( loadList( const DocLnk & ) ) );
+    connect( pmView, SIGNAL( activated(int) ),
+             this, SLOT( pmViewActivated(int) ) );
+    connect( skinsMenu, SIGNAL( activated(int) ) ,
+             this, SLOT( skinsMenuActivated(int) ) );
+    connect( d->selectedFiles, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int) ),
+             this,SLOT( playlistViewPressed(int,QListViewItem*,const QPoint&,int) ) );
+    connect( audioView, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int) ),
+             this,SLOT( viewPressed(int,QListViewItem*,const QPoint&,int) ) );
+    connect( audioView, SIGNAL( returnPressed(QListViewItem*) ),
+             this,SLOT( playIt(QListViewItem*) ) );
+    connect( audioView, SIGNAL( doubleClicked(QListViewItem*) ),
+             this, SLOT( addToSelection(QListViewItem*) ) );
+    connect( videoView, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int) ),
+             this,SLOT( viewPressed(int,QListViewItem*,const QPoint&,int) ) );
+    connect( videoView, SIGNAL( returnPressed(QListViewItem*) ),
+             this,SLOT( playIt(QListViewItem*) ) );
+    connect( videoView, SIGNAL( doubleClicked(QListViewItem*) ),
+             this, SLOT( addToSelection(QListViewItem*) ) );
+    connect( playLists, SIGNAL( fileSelected(const DocLnk&) ),
+             this, SLOT( loadList(const DocLnk&) ) );
     connect( tabWidget, SIGNAL ( currentChanged(QWidget*) ),
-             this, SLOT( tabChanged( QWidget* ) ) );
-    connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ),
-             d->tbPlay,  SLOT( setOn( bool ) ) );
-    connect( mediaPlayerState, SIGNAL( loopingToggled( bool ) ),
-             d->tbLoop, SLOT( setOn( bool ) ) );
-    connect( mediaPlayerState, SIGNAL( shuffledToggled( bool ) ),
-             d->tbShuffle, SLOT( setOn( bool ) ) );
-    connect( d->selectedFiles, SIGNAL( doubleClicked( QListViewItem *) ),
-             this, SLOT( playIt( QListViewItem *) ) );
-    connect ( gammaSlider,  SIGNAL( valueChanged( int ) ),
-              mediaPlayerState,  SLOT( setVideoGamma( int ) ) );
+             this, SLOT( tabChanged(QWidget*) ) );
+    connect( mediaPlayerState, SIGNAL( playingToggled(bool) ),
+             d->tbPlay,  SLOT( setOn(bool) ) );
+    connect( mediaPlayerState, SIGNAL( loopingToggled(bool) ),
+             d->tbLoop, SLOT( setOn(bool) ) );
+    connect( mediaPlayerState, SIGNAL( shuffledToggled(bool) ),
+             d->tbShuffle, SLOT( setOn(bool) ) );
+    connect( d->selectedFiles, SIGNAL( doubleClicked(QListViewItem*) ),
+             this, SLOT( playIt(QListViewItem*) ) );
+    connect ( gammaSlider,  SIGNAL( valueChanged(int) ),
+              mediaPlayerState,  SLOT( setVideoGamma(int) ) );
 
     connect( this, SIGNAL(skinSelected() ),
              m_mp, SLOT( reloadSkins() ) );
@@ -149,8 +149,8 @@ PlayListWidget::PlayListWidget(QWidget* parent, const char* name, WFlags fl )
     initializeStates();
 
     channel = new QCopChannel( "QPE/Application/opieplayer2", this );
-    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-        this, SLOT( qcopReceive(const QCString&, const QByteArray&)) );
+    connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+        this, SLOT( qcopReceive(const QCString&,const QByteArray&)) );
 
 
     cfg.setGroup("PlayList");
@@ -503,10 +503,10 @@ void PlayListWidget::tabChanged(QWidget *) {
 
     d->tbPlay->setEnabled( true );
 
-    disconnect( audioView, SIGNAL( itemsSelected( bool ) ),
-                d->tbPlay, SLOT( setEnabled( bool ) ) );
-    disconnect( videoView, SIGNAL( itemsSelected( bool ) ),
-                d->tbPlay, SLOT( setEnabled( bool ) ) );
+    disconnect( audioView, SIGNAL( itemsSelected(bool) ),
+                d->tbPlay, SLOT( setEnabled(bool) ) );
+    disconnect( videoView, SIGNAL( itemsSelected(bool) ),
+                d->tbPlay, SLOT( setEnabled(bool) ) );
 
     currentFileListView = 0;
 
@@ -532,8 +532,8 @@ void PlayListWidget::tabChanged(QWidget *) {
         d->tbRemoveFromList->setEnabled(FALSE);
         d->tbAddToList->setEnabled(TRUE);
 
-        connect( audioView, SIGNAL( itemsSelected( bool ) ),
-                 d->tbPlay, SLOT( setEnabled( bool ) ) );
+        connect( audioView, SIGNAL( itemsSelected(bool) ),
+                 d->tbPlay, SLOT( setEnabled(bool) ) );
 
         d->tbPlay->setEnabled( audioView->hasSelection() );
 
@@ -549,8 +549,8 @@ void PlayListWidget::tabChanged(QWidget *) {
         d->tbRemoveFromList->setEnabled(FALSE);
         d->tbAddToList->setEnabled(TRUE);
 
-        connect( videoView, SIGNAL( itemsSelected( bool ) ),
-                 d->tbPlay, SLOT( setEnabled( bool ) ) );
+        connect( videoView, SIGNAL( itemsSelected(bool) ),
+                 d->tbPlay, SLOT( setEnabled(bool) ) );
 
         d->tbPlay->setEnabled( videoView->hasSelection() );
 

@@ -25,7 +25,7 @@ NewTransaction::NewTransaction ( QWidget* parent ) : QDialog ( parent, 0, TRUE )
     transactionname->setEditable ( TRUE );
     descriptionbutton = new QPushButton ( transactionnamebox );
     descriptionbutton->setPixmap ( QPixmap ( "/opt/QtPalmtop/pics/info.png" ) );
-    connect ( descriptionbutton, SIGNAL ( released () ), this, SLOT ( addTransactionDescription() ) );
+    connect ( descriptionbutton, SIGNAL ( released() ), this, SLOT ( addTransactionDescription() ) );
 
     amountlabel = new QLabel ( "Amount", this );
 
@@ -45,7 +45,7 @@ NewTransaction::NewTransaction ( QWidget* parent ) : QDialog ( parent, 0, TRUE )
     transactiondate->setDisabled ( TRUE );
     datebutton = new QPushButton( transactiondatebox );
     datebutton->setPixmap ( QPixmap ( "/opt/QtPalmtop/pics/date.png" ) );
-    connect ( datebutton, SIGNAL ( released () ), this, SLOT ( showCalendar () ) );
+    connect ( datebutton, SIGNAL ( released() ), this, SLOT ( showCalendar() ) );
 
     clearedcheckbox = new QCheckBox ( "Cleared", this );
     depositbox = new QCheckBox ( "Credit", this );
@@ -84,8 +84,8 @@ NewTransaction::NewTransaction ( QWidget* parent ) : QDialog ( parent, 0, TRUE )
         budgetbox->insertStringList ( *budgetnameslist );
         lineitemlabel->setEnabled ( FALSE );
         lineitembox->setEnabled ( FALSE );
-        connect ( budgetbox, SIGNAL ( activated ( int ) ), this, SLOT ( setCurrentBudget ( int ) ) );
-        connect ( lineitembox, SIGNAL ( activated ( int ) ), this, SLOT ( setCurrentLineItem ( int ) ) );
+        connect ( budgetbox, SIGNAL ( activated(int) ), this, SLOT ( setCurrentBudget(int) ) );
+        connect ( lineitembox, SIGNAL ( activated(int) ), this, SLOT ( setCurrentLineItem(int) ) );
       }
     else
       {

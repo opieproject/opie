@@ -13,13 +13,13 @@ DatePicker::DatePicker ( QDate entrydate ) : QDialog ( 0, 0, TRUE )
     yearlabel = new QLabel ( "Year", this );
 
     daybox = new QComboBox ( this, "daybox" );
-    connect ( daybox, SIGNAL ( activated ( int ) ), this, SLOT ( setDay ( int ) ) );
+    connect ( daybox, SIGNAL ( activated(int) ), this, SLOT ( setDay(int) ) );
     displayDays ( daybox );
     monthbox = new QComboBox ( this, "monthbox" );
-    connect ( monthbox, SIGNAL ( activated ( int ) ), this, SLOT ( setMonth ( int ) ) );
+    connect ( monthbox, SIGNAL ( activated(int) ), this, SLOT ( setMonth(int) ) );
     displayMonths ( monthbox );
     yearbox = new QComboBox ( this, "yearbox" );
-    connect ( yearbox, SIGNAL ( activated ( int ) ), this, SLOT ( setYear ( int ) ) );
+    connect ( yearbox, SIGNAL ( activated(int) ), this, SLOT ( setYear(int) ) );
     displayYears ( yearbox );
 
     layout = new QGridLayout ( this, 2, 3, 5, 5, "datepickerlayout" );

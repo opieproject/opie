@@ -17,7 +17,7 @@ QBusyBar::QBusyBar ( QWidget *parent, const char *name, int flags ) : QWidget ( 
 	m_speed = 500;
 	
 	m_timer = new QTimer ( this );	
-	connect ( m_timer, SIGNAL( timeout ( )), this, SLOT( slotTimeout ( )));	
+	connect ( m_timer, SIGNAL( timeout()), this, SLOT( slotTimeout()));	
 
 	setParameters ( 12, 8, 200 );
 }

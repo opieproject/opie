@@ -288,14 +288,14 @@ int Ipkg :: executeIpkgCommand( QStringList &cmd, const QString /*option*/ )
 
 
     // Connect up our slots
-    connect(proc, SIGNAL(processExited(OProcess *)),
+    connect(proc, SIGNAL(processExited(OProcess*)),
             this, SLOT( processFinished()));
 
-    connect(proc, SIGNAL(receivedStdout(OProcess *, char *, int)),
-            this, SLOT(commandStdout(OProcess *, char *, int)));
+    connect(proc, SIGNAL(receivedStdout(OProcess*,char*,int)),
+            this, SLOT(commandStdout(OProcess*,char*,int)));
 
-    connect(proc, SIGNAL(receivedStderr(OProcess *, char *, int)),
-            this, SLOT(commandStderr(OProcess *, char *, int)));
+    connect(proc, SIGNAL(receivedStderr(OProcess*,char*,int)),
+            this, SLOT(commandStderr(OProcess*,char*,int)));
 
     for ( QStringList::Iterator it = cmd.begin(); it != cmd.end(); ++it )
     {

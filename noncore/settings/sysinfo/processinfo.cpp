@@ -51,8 +51,8 @@ ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
     ProcessView->setColumnAlignment( colnum, Qt::AlignRight );
     ProcessView->setAllColumnsShowFocus( TRUE );
     QPEApplication::setStylusOperation( ProcessView->viewport(), QPEApplication::RightOnHold );
-    connect( ProcessView, SIGNAL( rightButtonPressed( QListViewItem *, const QPoint &, int ) ),
-             this, SLOT( viewProcess( QListViewItem * ) ) );
+    connect( ProcessView, SIGNAL( rightButtonPressed(QListViewItem*,const QPoint&,int) ),
+             this, SLOT( viewProcess(QListViewItem*) ) );
     layout->addMultiCellWidget( ProcessView, 0, 0, 0, 1 );
     QWhatsThis::add( ProcessView, tr( "This is a list of all the processes on this handheld device.\n\nClick and hold on a process to see additional information about the process, or to send a signal to it." ) );
 

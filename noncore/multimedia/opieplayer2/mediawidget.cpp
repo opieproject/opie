@@ -29,12 +29,12 @@
 MediaWidget::MediaWidget( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QWidget *parent, const char *name )
     : QWidget( parent, name ), mediaPlayerState( _mediaPlayerState ), playList( _playList )
 {
-    connect( &mediaPlayerState, SIGNAL( displayTypeChanged( MediaPlayerState::DisplayType ) ),
-             this, SLOT( setDisplayType( MediaPlayerState::DisplayType ) ) );
-    connect( &mediaPlayerState, SIGNAL( lengthChanged( long ) ),
-             this, SLOT( setLength( long ) ) );
-    connect( &mediaPlayerState, SIGNAL( playingToggled( bool ) ),
-             this, SLOT( setPlaying( bool ) ) );
+    connect( &mediaPlayerState, SIGNAL( displayTypeChanged(MediaPlayerState::DisplayType) ),
+             this, SLOT( setDisplayType(MediaPlayerState::DisplayType) ) );
+    connect( &mediaPlayerState, SIGNAL( lengthChanged(long) ),
+             this, SLOT( setLength(long) ) );
+    connect( &mediaPlayerState, SIGNAL( playingToggled(bool) ),
+             this, SLOT( setPlaying(bool) ) );
 
     setBackgroundMode( NoBackground );
 }

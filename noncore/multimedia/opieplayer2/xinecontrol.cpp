@@ -65,14 +65,14 @@ XineControl::XineControl( XINE::Lib *xine, XineVideoWidget *xineWidget,
 
 void XineControl::init()
 {
-    connect( &mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pause( bool ) ) );
-    connect( this, SIGNAL( positionChanged( long ) ), &mediaPlayerState, SLOT( updatePosition( long ) ) );
-    connect( &mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( stop( bool ) ) );
-    connect( &mediaPlayerState, SIGNAL( fullscreenToggled( bool ) ), this, SLOT( setFullscreen( bool ) ) );
-    connect( &mediaPlayerState, SIGNAL( positionChanged( long ) ),  this,  SLOT( seekTo( long ) ) );
-    connect( &mediaPlayerState,  SIGNAL( videoGammaChanged( int ) ), this,  SLOT( setGamma( int ) ) );
+    connect( &mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( pause(bool) ) );
+    connect( this, SIGNAL( positionChanged(long) ), &mediaPlayerState, SLOT( updatePosition(long) ) );
+    connect( &mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( stop(bool) ) );
+    connect( &mediaPlayerState, SIGNAL( fullscreenToggled(bool) ), this, SLOT( setFullscreen(bool) ) );
+    connect( &mediaPlayerState, SIGNAL( positionChanged(long) ),  this,  SLOT( seekTo(long) ) );
+    connect( &mediaPlayerState,  SIGNAL( videoGammaChanged(int) ), this,  SLOT( setGamma(int) ) );
     connect( libXine, SIGNAL( stopped() ), this, SLOT( nextMedia() ) );
-    connect( xineVideoWidget, SIGNAL( videoResized( const QSize & ) ), this, SLOT( videoResized ( const QSize & ) ) );
+    connect( xineVideoWidget, SIGNAL( videoResized(const QSize&) ), this, SLOT( videoResized(const QSize&) ) );
 
     disabledSuspendScreenSaver = FALSE;
 }

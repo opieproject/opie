@@ -37,7 +37,7 @@ DateEdit::DateEdit( QWidget *parent, const char *name, WFlags f )
     setPopup(m1);
     setPopupDelay(0);
 
-    connect(dateSelector, SIGNAL(dateClicked(int, int, int)),
+    connect(dateSelector, SIGNAL(dateClicked(int,int,int)),
         this, SLOT(subValueChanged()));
         
     setText(dateSelector->selectedDate().toString());

@@ -26,7 +26,7 @@ SenderUI::SenderUI()
 
     qWarning("prof " + prof.readEntry("Device")  + " " + str);
     ser = new IOSerial(prof);
-    connect(ser, SIGNAL(received(const QByteArray& ) ),
+    connect(ser, SIGNAL(received(const QByteArray&) ),
             this, SLOT(got(const QByteArray&) ) );
 
     if ( ser->open() )

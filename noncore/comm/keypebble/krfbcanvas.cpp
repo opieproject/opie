@@ -85,9 +85,9 @@ void KRFBCanvas::loggedIn()
   setBackgroundMode( NoBackground );
 
   // Start using the buffer
-  connect( connection_->buffer(), SIGNAL( sizeChanged( int, int ) ),
+  connect( connection_->buffer(), SIGNAL( sizeChanged(int,int) ),
            this, SLOT( resizeContents(int,int) ) );
-  connect( connection_->buffer(), SIGNAL( updated( int, int, int, int ) ),
+  connect( connection_->buffer(), SIGNAL( updated(int,int,int,int) ),
            this, SLOT( viewportUpdate(int,int,int,int) ) );
   connect( connection_->buffer(), SIGNAL( bell() ),
            this, SLOT( bell() ) );

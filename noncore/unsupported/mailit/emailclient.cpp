@@ -59,19 +59,19 @@ EmailClient::EmailClient( QWidget* parent,  const char* name, WFlags fl )
 
   connect(emailHandler, SIGNAL(mailSent()), this, SLOT(mailSent()) );
 
-  connect(emailHandler, SIGNAL(smtpError(int,const QString &)), this,
-      SLOT(smtpError(int,const QString &)) );
-  connect(emailHandler, SIGNAL(popError(int,const QString &)), this,
-      SLOT(popError(int,const QString &)) );
+  connect(emailHandler, SIGNAL(smtpError(int,const QString&)), this,
+      SLOT(smtpError(int,const QString&)) );
+  connect(emailHandler, SIGNAL(popError(int,const QString&)), this,
+      SLOT(popError(int,const QString&)) );
 
-  connect(inboxView, SIGNAL(doubleClicked(QListViewItem *)), this, SLOT(inboxItemSelected()) );
-  connect(outboxView, SIGNAL(doubleClicked(QListViewItem *)), this, SLOT(outboxItemSelected()) );
+  connect(inboxView, SIGNAL(doubleClicked(QListViewItem*)), this, SLOT(inboxItemSelected()) );
+  connect(outboxView, SIGNAL(doubleClicked(QListViewItem*)), this, SLOT(outboxItemSelected()) );
 
-  connect(inboxView, SIGNAL(pressed(QListViewItem *)), this, SLOT(inboxItemPressed()) );
-  connect(inboxView, SIGNAL(clicked(QListViewItem *)), this, SLOT(inboxItemReleased()) );
+  connect(inboxView, SIGNAL(pressed(QListViewItem*)), this, SLOT(inboxItemPressed()) );
+  connect(inboxView, SIGNAL(clicked(QListViewItem*)), this, SLOT(inboxItemReleased()) );
 
-  connect(emailHandler, SIGNAL(mailArrived(const Email &, bool)), this,
-      SLOT(mailArrived(const Email &, bool)) );
+  connect(emailHandler, SIGNAL(mailArrived(const Email&,bool)), this,
+      SLOT(mailArrived(const Email&,bool)) );
   connect(emailHandler, SIGNAL(mailTransfered(int)), this,
       SLOT(allMailArrived(int)) );
 
@@ -89,8 +89,8 @@ EmailClient::EmailClient( QWidget* parent,  const char* name, WFlags fl )
   mailboxView->setCurrentTab(0);  //ensure that inbox has focus
 
   /*channel = new QCopChannel( "QPE/Application/mailit", this );
-  connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-        this, SLOT(receive(const QCString&, const QByteArray&)) );*/
+  connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+        this, SLOT(receive(const QCString&,const QByteArray&)) );*/
 
 }
 
@@ -217,10 +217,10 @@ void EmailClient::initStatusBar(QWidget* parent)
 
   status1Label = new QLabel( tr("Idle"), statusBar);
   status2Label = new QLabel("", statusBar);
-  connect(emailHandler, SIGNAL(updatePopStatus(const QString &)),
-    status2Label, SLOT(setText(const QString &)) );
-  connect(emailHandler, SIGNAL(updateSmtpStatus(const QString &)),
-    status2Label, SLOT(setText(const QString &)) );
+  connect(emailHandler, SIGNAL(updatePopStatus(const QString&)),
+    status2Label, SLOT(setText(const QString&)) );
+  connect(emailHandler, SIGNAL(updateSmtpStatus(const QString&)),
+    status2Label, SLOT(setText(const QString&)) );
 
   progressBar = new QProgressBar(statusBar);
 

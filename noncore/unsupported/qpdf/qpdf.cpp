@@ -85,7 +85,7 @@ QPdfDlg::QPdfDlg ( ) : QMainWindow ( )
 	setCentralWidget ( m_stack );
 
 	m_outdev = new QPEOutputDev ( m_stack );
-	connect ( m_outdev, SIGNAL( selectionChanged ( const QRect & )), this, SLOT( copyToClipboard ( const QRect & )));
+	connect ( m_outdev, SIGNAL( selectionChanged(const QRect&)), this, SLOT( copyToClipboard(const QRect&)));
 
 #ifdef QPDF_QPE_ONLY
 	m_filesel = new FileSelector ( "application/pdf", m_stack, "fs", false, true );
@@ -93,8 +93,8 @@ QPdfDlg::QPdfDlg ( ) : QMainWindow ( )
 	m_filesel = new OFileSelector ( "application/pdf", m_stack, "fs", false, true );
 #endif
 
-	connect ( m_filesel, SIGNAL( closeMe ( )), this, SLOT( closeFileSelector ( )));
-	connect ( m_filesel, SIGNAL( fileSelected ( const DocLnk & )), this, SLOT( openFile ( const DocLnk & )));
+	connect ( m_filesel, SIGNAL( closeMe()), this, SLOT( closeFileSelector()));
+	connect ( m_filesel, SIGNAL( fileSelected(const DocLnk&)), this, SLOT( openFile(const DocLnk&)));
 
 	m_tb_menu = new QToolBar ( this );
 	m_tb_menu-> setHorizontalStretchable ( true );
@@ -116,23 +116,23 @@ QPdfDlg::QPdfDlg ( ) : QMainWindow ( )
 	m_pm_zoom-> insertItem ( tr( "150%" ), 150 );
 	m_pm_zoom-> insertItem ( tr( "200%" ), 200 );
 	
-	connect ( m_pm_zoom, SIGNAL( activated ( int )), this, SLOT( setZoom ( int )));
+	connect ( m_pm_zoom, SIGNAL( activated(int)), this, SLOT( setZoom(int)));
 
 	m_tb_tool = new QToolBar ( this );
 		
-	new QToolButton ( Resource::loadIconSet ( "fileopen" ),    tr( "Open..." ),       QString::null, this, SLOT( openFile ( )),  m_tb_tool, "open" );
+	new QToolButton ( Resource::loadIconSet ( "fileopen" ),    tr( "Open..." ),       QString::null, this, SLOT( openFile()),  m_tb_tool, "open" );
 	m_tb_tool-> addSeparator ( );
-	m_to_find = new QToolButton ( Resource::loadIconSet ( "find" ),        tr( "Find..." ),       QString::null, this, SLOT( toggleFindBar ( )),     m_tb_tool, "find" );
+	m_to_find = new QToolButton ( Resource::loadIconSet ( "find" ),        tr( "Find..." ),       QString::null, this, SLOT( toggleFindBar()),     m_tb_tool, "find" );
 	m_to_find-> setToggleButton ( true );
 	m_tb_tool-> addSeparator ( );
-	m_to_full = new QToolButton ( Resource::loadIconSet ( "fullscreen" ),  tr( "Fullscreen" ),    QString::null, this, SLOT( toggleFullscreen ( )),  m_tb_tool, "fullscreen" );
+	m_to_full = new QToolButton ( Resource::loadIconSet ( "fullscreen" ),  tr( "Fullscreen" ),    QString::null, this, SLOT( toggleFullscreen()),  m_tb_tool, "fullscreen" );
 	m_to_full-> setToggleButton ( true );
 	m_tb_tool-> addSeparator ( );
-	new QToolButton ( Resource::loadIconSet ( "fastback" ),    tr( "First page" ),    QString::null, this, SLOT( firstPage ( )), m_tb_tool, "first" );
-	new QToolButton ( Resource::loadIconSet ( "back" ),        tr( "Previous page" ), QString::null, this, SLOT( prevPage ( )),  m_tb_tool, "prev" );
-	new QToolButton ( Resource::loadIconSet ( "down" ),        tr( "Goto page..." ),  QString::null, this, SLOT( gotoPageDialog ( )),  m_tb_tool, "goto" );
-	new QToolButton ( Resource::loadIconSet ( "forward" ),     tr( "Next page" ),     QString::null, this, SLOT( nextPage ( )),  m_tb_tool, "next" );
-	new QToolButton ( Resource::loadIconSet ( "fastforward" ), tr( "Last page" ),     QString::null, this, SLOT( lastPage ( )),  m_tb_tool, "last" );
+	new QToolButton ( Resource::loadIconSet ( "fastback" ),    tr( "First page" ),    QString::null, this, SLOT( firstPage()), m_tb_tool, "first" );
+	new QToolButton ( Resource::loadIconSet ( "back" ),        tr( "Previous page" ), QString::null, this, SLOT( prevPage()),  m_tb_tool, "prev" );
+	new QToolButton ( Resource::loadIconSet ( "down" ),        tr( "Goto page..." ),  QString::null, this, SLOT( gotoPageDialog()),  m_tb_tool, "goto" );
+	new QToolButton ( Resource::loadIconSet ( "forward" ),     tr( "Next page" ),     QString::null, this, SLOT( nextPage()),  m_tb_tool, "next" );
+	new QToolButton ( Resource::loadIconSet ( "fastforward" ), tr( "Last page" ),     QString::null, this, SLOT( lastPage()),  m_tb_tool, "last" );
 
 	m_tb_find = new QToolBar ( this );
 	addToolBar ( m_tb_find, "Search", QMainWindow::Top, true );
@@ -141,9 +141,9 @@ QPdfDlg::QPdfDlg ( ) : QMainWindow ( )
 
 	m_findedit = new QLineEdit ( m_tb_find, "findedit" );
 	m_tb_find-> setStretchableWidget ( m_findedit );
-	connect ( m_findedit, SIGNAL( textChanged ( const QString & )), this, SLOT( findText ( const QString & )));
+	connect ( m_findedit, SIGNAL( textChanged(const QString&)), this, SLOT( findText(const QString&)));
 
-	new QToolButton ( Resource::loadIconSet ( "next" ),        tr( "Next" ),          QString::null, this, SLOT( findText ( )),  m_tb_find, "findnext" );
+	new QToolButton ( Resource::loadIconSet ( "next" ),        tr( "Next" ),          QString::null, this, SLOT( findText()),  m_tb_find, "findnext" );
 
 	openFile ( );
 }
@@ -495,7 +495,7 @@ void QPdfDlg::openFile ( const DocLnk &f )
 			m_pages = m_doc-> getNumPages ( );
 			m_currentpage = 0;
 		
-			QTimer::singleShot ( 0, this, SLOT( delayedInit ( )));
+			QTimer::singleShot ( 0, this, SLOT( delayedInit()));
 		}
 		else {
 			delete m_doc;

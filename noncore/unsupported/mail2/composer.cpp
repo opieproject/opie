@@ -158,8 +158,8 @@ void Composer::slotSendMail()
 
 	SmtpHandler *handler = new SmtpHandler(header, message, accountsLoaded[from->currentItem()], to->text());
 	connect(handler, SIGNAL(finished()), SLOT(slotSendFinished()));
-	connect(handler, SIGNAL(error(const QString &)), SLOT(slotSendError(const QString &)));
-	connect(handler, SIGNAL(status(const QString &)), status, SLOT(setStatusText(const QString &)));
+	connect(handler, SIGNAL(error(const QString&)), SLOT(slotSendError(const QString&)));
+	connect(handler, SIGNAL(status(const QString&)), status, SLOT(setStatusText(const QString&)));
 }
 
 void Composer::slotSendQueued()
@@ -247,8 +247,8 @@ void Composer::slotSendQueued()
 	    SmtpHandler *handler = new SmtpHandler(header, message, accnt ,toAdr);
    	  effSendCount++;
     	connect(handler, SIGNAL(finished()), SLOT(slotSendQueuedFinished()));
-  	  connect(handler, SIGNAL(error(const QString &)), SLOT(slotSendQueuedError(const QString &)));
-	    connect(handler, SIGNAL(status(const QString &)), status, SLOT(setStatusText(const QString &)));
+  	  connect(handler, SIGNAL(error(const QString&)), SLOT(slotSendQueuedError(const QString&)));
+	    connect(handler, SIGNAL(status(const QString&)), status, SLOT(setStatusText(const QString&)));
 
    	}
  	if (effSendCount < _toSend)

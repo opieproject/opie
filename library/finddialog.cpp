@@ -43,14 +43,10 @@ FindDialog::FindDialog( const QString &appName, QWidget *parent,
     vb = new QVBoxLayout( this );
     fw = new FindWidget( appName, this, "Find Widget" );
     vb->addWidget( fw );
-    QObject::connect( fw, SIGNAL(signalFindClicked(const QString&,
-						   bool,bool,int)),
-		      this, SIGNAL(signalFindClicked(const QString&,
-						     bool,bool,int)) );
-    QObject::connect( fw, SIGNAL(signalFindClicked(const QString&,const QDate&,
-						   bool,bool,int)),
-		      this, SIGNAL(signalFindClicked(const QString&,
-						     const QDate&,bool,bool,int)) );
+    QObject::connect( fw, SIGNAL(signalFindClicked(const QString&,bool,bool,int)),
+		      this, SIGNAL(signalFindClicked(const QString&,bool,bool,int)) );
+    QObject::connect( fw, SIGNAL(signalFindClicked(const QString&,const QDate&,bool,bool,int)),
+		      this, SIGNAL(signalFindClicked(const QString&,const QDate&,bool,bool,int)) );
     d = 0;
 }
 

@@ -291,8 +291,8 @@ QPEApplication::QPEApplication(int &arg, char** argv, Type t)
      * past the QApplication
      */
     m_sys = new QCopChannel( "QPE/System", 0l);
-    connect(m_sys, SIGNAL( received( const QCString&, const QByteArray& ) ),
-            this, SLOT(systemMessage( const QCString&, const QByteArray& ) ) );
+    connect(m_sys, SIGNAL( received(const QCString&,const QByteArray&) ),
+            this, SLOT(systemMessage(const QCString&,const QByteArray&) ) );
 
     // private channel QPE/Application/appname
     QCString channel = QCString( argv[0] );
@@ -300,8 +300,8 @@ QPEApplication::QPEApplication(int &arg, char** argv, Type t)
     d->appName = channel;
     channel = "QPE/Application/"+ channel;
     m_pid = new QCopChannel( channel, 0l );
-    connect(m_pid, SIGNAL( received( const QCString&, const QByteArray& ) ),
-            this, SLOT( pidMessage( const QCString&, const QByteArray& ) ) );
+    connect(m_pid, SIGNAL( received(const QCString&,const QByteArray&) ),
+            this, SLOT( pidMessage(const QCString&,const QByteArray&) ) );
 
     // read the Pre QCOP Stuff  from the file
     if ( file.isOpen() ) {

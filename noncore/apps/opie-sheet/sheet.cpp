@@ -43,8 +43,8 @@ Sheet::Sheet(int numRows, int numCols, QWidget *parent)
     horizontalHeader()->setLabel(i, getHeaderString(i+1), DEFAULT_COL_WIDTH);
 
 
-  connect(this, SIGNAL(currentChanged(int, int)), this, SLOT(slotCellSelected(int, int)));
-  connect(this, SIGNAL(valueChanged(int, int)), this, SLOT(slotCellChanged(int, int)));
+  connect(this, SIGNAL(currentChanged(int,int)), this, SLOT(slotCellSelected(int,int)));
+  connect(this, SIGNAL(valueChanged(int,int)), this, SLOT(slotCellChanged(int,int)));
 }
 
 Sheet::~Sheet()

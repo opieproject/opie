@@ -75,7 +75,7 @@ Password::Password( QWidget *parent, const char *caption, const char *prompt )
 	QPushButton *btn = new QPushButton( ( QIconSet ) *pic, QString::null, this );
 	btn->setMaximumSize( pic->width() + 10, pic->height() + 10 );
 	btn->setToggleButton( TRUE );
-	connect( btn, SIGNAL( toggled( bool ) ), this, SLOT( slotTogglePassword( bool ) ) );
+	connect( btn, SIGNAL( toggled(bool) ), this, SLOT( slotTogglePassword(bool) ) );
 	layout->addWidget( btn, 1, 1 );
 	
 	password == "";

@@ -49,9 +49,9 @@ void RecordDialog::retPressed()
 
 	if(where == 0)
 	{
-		connect(record, SIGNAL(receivedStdout(OProcess *, char *, int)), this, SLOT(incoming(OProcess *, char *, int)) );
-		connect(record, SIGNAL(receivedStderr(OProcess *, char *, int)), this, SLOT(incoming(OProcess *, char *, int)) );
-		connect(record, SIGNAL(processExited(OProcess *)), this, SLOT(done(OProcess *)) );
+		connect(record, SIGNAL(receivedStdout(OProcess*,char*,int)), this, SLOT(incoming(OProcess*,char*,int)) );
+		connect(record, SIGNAL(receivedStderr(OProcess*,char*,int)), this, SLOT(incoming(OProcess*,char*,int)) );
+		connect(record, SIGNAL(processExited(OProcess*)), this, SLOT(done(OProcess*)) );
 		printf("RecordDialog::retPressed: starting irrecord\n");
 		QString file = "/tmp/" + input->text();
 		*record<<"irrecord"<<file.latin1();

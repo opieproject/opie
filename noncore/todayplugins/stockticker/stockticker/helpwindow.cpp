@@ -43,8 +43,8 @@ HelpWindow::HelpWindow( const QString& home_, const QString& _path, QWidget* par
         browser->setSource( home_ );
 
 ////////////////////////////////
-    connect( browser, SIGNAL( highlighted( const QString&) ),
-       statusBar(), SLOT( message( const QString&)) );
+    connect( browser, SIGNAL( highlighted(const QString&) ),
+       statusBar(), SLOT( message(const QString&)) );
 
     setGeometry( 0,0,236,280);
 
@@ -73,7 +73,7 @@ HelpWindow::HelpWindow( const QString& home_, const QString& _path, QWidget* par
     QStringList::Iterator it = history.begin();
     for ( ; it != history.end(); ++it )
     mHistory[ hist->insertItem( *it ) ] = *it;
-    connect( hist, SIGNAL( activated( int ) ), this, SLOT( histChosen( int ) ) );
+    connect( hist, SIGNAL( activated(int) ), this, SLOT( histChosen(int) ) );
 
     bookm = new QPopupMenu( this );
     bookm->insertItem( tr( "Add Bookmark" ), this, SLOT( addBookmark() ) );
@@ -82,8 +82,8 @@ HelpWindow::HelpWindow( const QString& home_, const QString& _path, QWidget* par
     QStringList::Iterator it2 = bookmarks.begin();
     for ( ; it2 != bookmarks.end(); ++it2 )
    mBookmarks[ bookm->insertItem( *it2 ) ] = *it2;
-    connect( bookm, SIGNAL( activated( int ) ),
-       this, SLOT( bookmChosen( int ) ) );
+    connect( bookm, SIGNAL( activated(int) ),
+       this, SLOT( bookmChosen(int) ) );
 
     menuBar()->insertItem( tr("&File"), file );
     menuBar()->insertItem( tr("&Go"), go );
@@ -94,8 +94,8 @@ HelpWindow::HelpWindow( const QString& home_, const QString& _path, QWidget* par
 
     menuBar()->setItemEnabled( forwardId, FALSE);
     menuBar()->setItemEnabled( backwardId, FALSE);
-    connect( browser, SIGNAL( backwardAvailable( bool ) ), this, SLOT( setBackwardAvailable( bool ) ) );
-    connect( browser, SIGNAL( forwardAvailable( bool ) ), this, SLOT( setForwardAvailable( bool ) ) );
+    connect( browser, SIGNAL( backwardAvailable(bool) ), this, SLOT( setBackwardAvailable(bool) ) );
+    connect( browser, SIGNAL( forwardAvailable(bool) ), this, SLOT( setForwardAvailable(bool) ) );
 
 
     QToolBar* toolbar = new QToolBar( this );
@@ -113,7 +113,7 @@ HelpWindow::HelpWindow( const QString& home_, const QString& _path, QWidget* par
     toolbar->addSeparator();
 
     pathCombo = new QComboBox( TRUE, toolbar );
-    connect( pathCombo, SIGNAL( activated( const QString & ) ), this, SLOT( pathSelected( const QString & ) ) );
+    connect( pathCombo, SIGNAL( activated(const QString&) ), this, SLOT( pathSelected(const QString&) ) );
     toolbar->setStretchableWidget( pathCombo );
 
 //    pathCombo->setMaximumWidth(190);

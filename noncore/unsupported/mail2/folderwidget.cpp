@@ -60,7 +60,7 @@ FolderWidget::FolderWidget(QWidget *parent, const char *name, WFlags fl)
 	getAccounts();
 
 	connect(menu, SIGNAL(activated(int)), SLOT(slotMenuActivated(int)));
-	connect(this, SIGNAL(clicked(QListViewItem *)), SLOT(slotItemClicked(QListViewItem *)));
+	connect(this, SIGNAL(clicked(QListViewItem*)), SLOT(slotItemClicked(QListViewItem*)));
 }
 
 FolderWidget::~FolderWidget()
@@ -143,7 +143,7 @@ void FolderWidget::slotMenuActivated(int itemid)
 		if (newName.isNull()) return;
 
 		folder.topFolder().handler()->iRename(folder.fullName(), newName);
-		connect(folder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPRename(IMAPResponse &)));
+		connect(folder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse&)), SLOT(slotIMAPRename(IMAPResponse&)));
 	} else if (itemid == MENU_DELETE) {
 		if (((FolderWidgetItem *)currentItem())->folder().fullName().isEmpty()) return;
 
@@ -155,7 +155,7 @@ void FolderWidget::slotMenuActivated(int itemid)
 		_createFolder = folder;
 
 		folder.topFolder().handler()->iDelete(folder.fullName());
-		connect(folder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPDelete(IMAPResponse &)));
+		connect(folder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse&)), SLOT(slotIMAPDelete(IMAPResponse&)));
 	} else if (itemid == MENU_MOVE) {
 
 	} else if (itemid == MENU_COPY) {
@@ -168,13 +168,13 @@ void FolderWidget::slotMenuActivated(int itemid)
 		if (folderName.isNull()) return;
 
 		folder.topFolder().handler()->iCreate(folder.fullName() + folder.separator() + folderName);
-		connect(folder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPCreate(IMAPResponse &)));
+		connect(folder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse&)), SLOT(slotIMAPCreate(IMAPResponse&)));
 	} else if (itemid == MENU_RESCAN) {
 		Folder folder = (((FolderWidgetItem *)currentItem())->folder());
 		_rescanAccount = folder.topFolder().account();
 
 		folder.topFolder().handler()->iList("", "*");
-		connect(folder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPList(IMAPResponse &)));
+		connect(folder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse&)), SLOT(slotIMAPList(IMAPResponse&)));
 	}
 }
 
@@ -227,7 +227,7 @@ void FolderWidget::slotIMAPDisconnected()
 
 void FolderWidget::slotIMAPLogin(IMAPResponse &response)
 {
-	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), this, SLOT(slotIMAPLogin(IMAPResponse &)));
+	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse&)), this, SLOT(slotIMAPLogin(IMAPResponse&)));
 
 	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
 		emit status(tr("Login successful!"));
@@ -238,7 +238,7 @@ void FolderWidget::slotIMAPLogin(IMAPResponse &response)
 
 void FolderWidget::slotIMAPRename(IMAPResponse &response)
 {
-	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), this, SLOT(slotIMAPRename(IMAPResponse &)));
+	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse&)), this, SLOT(slotIMAPRename(IMAPResponse&)));
 
 	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
 		emit status(tr("Renaming successful!"));
@@ -249,7 +249,7 @@ void FolderWidget::slotIMAPRename(IMAPResponse &response)
 
 void FolderWidget::slotIMAPDelete(IMAPResponse &response)
 {
-	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), this, SLOT(slotIMAPDelete(IMAPResponse &)));
+	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse&)), this, SLOT(slotIMAPDelete(IMAPResponse&)));
 
 	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
 		emit status(tr("Deletion successful!"));
@@ -257,7 +257,7 @@ void FolderWidget::slotIMAPDelete(IMAPResponse &response)
 		_rescanAccount = _createFolder.topFolder().account();
 
 		_createFolder.topFolder().handler()->iList(".", "*");
-		connect(_createFolder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPList(IMAPResponse &)));
+		connect(_createFolder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse&)), SLOT(slotIMAPList(IMAPResponse&)));
 	} else {
 		QMessageBox::warning(this, tr("Error"), tr("<p>Delete failed. (Server said: %1)</p>").arg(response.statusResponse().comment()), tr("Ok"));
 	}
@@ -265,7 +265,7 @@ void FolderWidget::slotIMAPDelete(IMAPResponse &response)
 
 void FolderWidget::slotIMAPCreate(IMAPResponse &response)
 {
-	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), this, SLOT(slotIMAPCreate(IMAPResponse &)));
+	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse&)), this, SLOT(slotIMAPCreate(IMAPResponse&)));
 
 	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
 		emit status(tr("Folder created. Rescanning..."));
@@ -273,7 +273,7 @@ void FolderWidget::slotIMAPCreate(IMAPResponse &response)
 		_rescanAccount = _createFolder.topFolder().account();
 
 		_createFolder.topFolder().handler()->iList(".", "*");
-		connect(_createFolder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPList(IMAPResponse &)));
+		connect(_createFolder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse&)), SLOT(slotIMAPList(IMAPResponse&)));
 	} else {
 		QMessageBox::warning(this, tr("Error"), tr("<p>The folder could not be created. (Server said: %1)</p>").arg(response.statusResponse().comment()), tr("Ok"));
 	}
@@ -281,7 +281,7 @@ void FolderWidget::slotIMAPCreate(IMAPResponse &response)
 
 void FolderWidget::slotIMAPList(IMAPResponse &response)
 {
-	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), this, SLOT(slotIMAPList(IMAPResponse &)));
+	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse&)), this, SLOT(slotIMAPList(IMAPResponse&)));
 
 	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
 		QDir d((QString) getenv("HOME") + "/Applications/mail/foldercache");

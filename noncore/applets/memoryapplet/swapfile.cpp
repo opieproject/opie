@@ -110,9 +110,9 @@ Swapfile::Swapfile( QWidget *parent, const char *name, WFlags f )
     sdRB->setEnabled(FALSE);
 
     QCopChannel *pcmciaChannel = new QCopChannel("QPE/Card", this);
-    connect(pcmciaChannel, SIGNAL(received(const QCString &, const QByteArray &)), this, SLOT(cardnotify(const QCString &, const QByteArray &)));
+    connect(pcmciaChannel, SIGNAL(received(const QCString&,const QByteArray&)), this, SLOT(cardnotify(const QCString&,const QByteArray&)));
     QCopChannel *sdChannel = new QCopChannel("QPE/Card", this);
-    connect(sdChannel, SIGNAL(received(const QCString &, const QByteArray &)), this, SLOT(cardnotify(const QCString &, const QByteArray &)));
+    connect(sdChannel, SIGNAL(received(const QCString&,const QByteArray&)), this, SLOT(cardnotify(const QCString&,const QByteArray&)));
 
     cardInPcmcia0 = FALSE;
     cardInPcmcia1 = FALSE;

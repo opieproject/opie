@@ -77,8 +77,8 @@ TZCombo::TZCombo( QWidget *p, const char* n )
     // listen on QPE/System
 #if !defined(QT_NO_COP)
     QCopChannel *channel = new QCopChannel( "QPE/System", this );
-    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-  this, SLOT(handleSystemChannel(const QCString&, const QByteArray&)) );
+    connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+  this, SLOT(handleSystemChannel(const QCString&,const QByteArray&)) );
 #endif
 
 
@@ -218,8 +218,8 @@ TimeZoneSelector::TimeZoneSelector(QWidget* p, const char* n) :
 
     // set up a connection to catch a newly selected item and throw our
     // signal
-    QObject::connect( cmbTz, SIGNAL( activated( int ) ),
-                      this, SLOT( slotTzActive( int ) ) );
+    QObject::connect( cmbTz, SIGNAL( activated(int) ),
+                      this, SLOT( slotTzActive(int) ) );
     QObject::connect( cmdTz, SIGNAL( clicked() ),
                       this, SLOT( slotExecute() ) );
 }

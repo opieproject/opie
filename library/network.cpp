@@ -161,8 +161,8 @@ public:
 	up = FALSE;
 	examineNetworks( TRUE );
 	QCopChannel* card = new QCopChannel("QPE/Card",parent);
-	connect(card,SIGNAL(received(const QCString &, const QByteArray&)),
-	    this,SLOT(cardMessage(const QCString &, const QByteArray&)));
+	connect(card,SIGNAL(received(const QCString&,const QByteArray&)),
+	    this,SLOT(cardMessage(const QCString&,const QByteArray&)));
     }
 
     ~NetworkServer()

@@ -101,7 +101,7 @@ PlayListWidgetGui::PlayListWidgetGui(QWidget* parent, const char* name )
     gammaMenu->insertItem( gammaSlider );
     gammaMenu->insertItem( gammaLCD );
 
-    connect( gammaSlider, SIGNAL( valueChanged( int ) ), gammaLCD, SLOT( display( int ) ) );
+    connect( gammaSlider, SIGNAL( valueChanged(int) ), gammaLCD, SLOT( display(int) ) );
 
     vbox5 = new QVBox( this );
     QVBox *vbox4 = new QVBox( vbox5 );

@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(
     setCaption(tr("IRC Client"));
     m_tabWidget = new IRCTabWidget(this);
     QWhatsThis::add(m_tabWidget, tr("Server connections, channels, queries and other things will be placed here"));
-    connect(m_tabWidget, SIGNAL(currentChanged(QWidget *)), this, SLOT(selected(QWidget *)));
+    connect(m_tabWidget, SIGNAL(currentChanged(QWidget*)), this, SLOT(selected(QWidget*)));
     setCentralWidget(m_tabWidget);
     setToolBarsMovable(FALSE);
     QMenuBar *menuBar = new QMenuBar(this);
@@ -51,7 +51,7 @@ void MainWindow::selected(QWidget *) {
 }
 
 void MainWindow::addTab(IRCTab *tab) {
-    connect(tab, SIGNAL(changed(IRCTab *)), this, SLOT(changeEvent(IRCTab *)));
+    connect(tab, SIGNAL(changed(IRCTab*)), this, SLOT(changeEvent(IRCTab*)));
     m_tabWidget->addTab(tab, tab->title());
     m_tabWidget->showPage(tab);
     tab->setID(m_tabWidget->currentPageIndex());

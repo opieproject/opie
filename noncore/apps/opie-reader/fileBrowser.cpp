@@ -74,10 +74,10 @@ fileBrowser::fileBrowser( bool allownew, QWidget* parent,  const char* name, boo
     // signals and slots connections
     connect( buttonShowHidden, SIGNAL( toggled(bool) ), this, SLOT( setHidden(bool) ) );
     connect( buttonOk, SIGNAL( clicked() ), this, SLOT( OnRoot() ) );
-    connect( ListView, SIGNAL(doubleClicked( QListViewItem*)), SLOT(listDoubleClicked(QListViewItem *)) );
-    connect( ListView, SIGNAL(clicked( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
-    connect( ListView, SIGNAL(OnOKButton( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
-    connect( ListView, SIGNAL(OnCentreButton( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
+    connect( ListView, SIGNAL(doubleClicked(QListViewItem*)), SLOT(listDoubleClicked(QListViewItem*)) );
+    connect( ListView, SIGNAL(clicked(QListViewItem*)), SLOT(listClicked(QListViewItem*)) );
+    connect( ListView, SIGNAL(OnOKButton(QListViewItem*)), SLOT(listClicked(QListViewItem*)) );
+    connect( ListView, SIGNAL(OnCentreButton(QListViewItem*)), SLOT(listClicked(QListViewItem*)) );
     connect( ListView, SIGNAL(OnCancelButton()), SLOT(OnCancel()) );
 
     QVBoxLayout* grid = new QVBoxLayout(this);

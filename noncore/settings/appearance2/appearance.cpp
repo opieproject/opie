@@ -121,7 +121,7 @@ QWidget *Appearance::createStyleTab ( QWidget *parent, Config &cfg )
     QWhatsThis::add( m_style_list, tr( "Styles control the way items such as buttons and scroll bars appear in all applications.\n\nClick here to select an available style." ) );
 
     m_style_settings = new QPushButton ( tr( "Settings..." ), tab );
-    connect ( m_style_settings, SIGNAL( clicked ( )), this, SLOT( styleSettingsClicked ( )));
+    connect ( m_style_settings, SIGNAL( clicked()), this, SLOT( styleSettingsClicked()));
     vertLayout-> addWidget ( m_style_settings );
     QWhatsThis::add( m_style_settings, tr( "Click here to configure the currently selected style.\n\nNote:  This option is not available for all styles." ) );
 
@@ -165,7 +165,7 @@ QWidget *Appearance::createStyleTab ( QWidget *parent, Config &cfg )
     m_original_style = m_style_list-> currentItem ( );
     styleClicked ( m_original_style );
 
-    connect( m_style_list, SIGNAL( highlighted( int ) ), this, SLOT( styleClicked( int ) ) );
+    connect( m_style_list, SIGNAL( highlighted(int) ), this, SLOT( styleClicked(int) ) );
 
     return tab;
 }
@@ -214,7 +214,7 @@ QWidget *Appearance::createDecoTab ( QWidget *parent, Config &cfg )
         m_deco_list-> setCurrentItem ( 0 );
     decoClicked ( m_original_deco );
 
-    connect( m_deco_list, SIGNAL( highlighted( int ) ), this, SLOT( decoClicked( int ) ) );
+    connect( m_deco_list, SIGNAL( highlighted(int) ), this, SLOT( decoClicked(int) ) );
 
     return tab;
 }
@@ -229,8 +229,8 @@ QWidget *Appearance::createFontTab ( QWidget *parent, Config &cfg )
     m_fontselect-> setSelectedFont ( familyStr, styleStr, size );
     QWhatsThis::add( m_fontselect, tr( "Select the desired name, style and size of the default font applications will use." ) );
 
-    connect( m_fontselect, SIGNAL( fontSelected ( const QFont & )),
-             this, SLOT( fontClicked ( const QFont & )));
+    connect( m_fontselect, SIGNAL( fontSelected(const QFont&)),
+             this, SLOT( fontClicked(const QFont&)));
 
     return m_fontselect;
 }
@@ -243,7 +243,7 @@ QWidget *Appearance::createColorTab ( QWidget *parent, Config &cfg )
 
     m_color_list = new QListBox ( tab );
     gridLayout->addMultiCellWidget ( m_color_list, 0, 3, 0, 0 );
-    connect( m_color_list, SIGNAL( highlighted( int ) ), this, SLOT( colorClicked( int ) ) );
+    connect( m_color_list, SIGNAL( highlighted(int) ), this, SLOT( colorClicked(int) ) );
     QWhatsThis::add( m_color_list, tr( "Color schemes are a collection of colors which are used for various parts of the display.\n\nClick here to select an available scheme." ) );
 
     m_color_list-> insertItem ( new ColorListItem ( tr( "Current scheme" ), cfg ));
@@ -320,34 +320,34 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
     lay-> addMultiCellWidget ( m_except, 2, 6, 0, 0 );
     QWhatsThis::add( m_except, tr( "If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.\n\nThis area allows you to select an application and which settings you wish to disable." ) );
 
-    connect ( m_except, SIGNAL( clicked ( QListViewItem *, const QPoint &, int )), this, SLOT( clickedExcept ( QListViewItem *, const QPoint &, int )));
+    connect ( m_except, SIGNAL( clicked(QListViewItem*,const QPoint&,int)), this, SLOT( clickedExcept(QListViewItem*,const QPoint&,int)));
 
     QToolButton *tb = new QToolButton ( tab );
     tb-> setIconSet ( Resource::loadIconSet ( "appearance/add" ));
     tb-> setFocusPolicy ( QWidget::StrongFocus );
     lay-> addWidget ( tb, 2, 1 );
-    connect ( tb, SIGNAL( clicked ( )), this, SLOT( addExcept ( )));
+    connect ( tb, SIGNAL( clicked()), this, SLOT( addExcept()));
     QWhatsThis::add( tb, tr( "Click here to add an application to the list above." ) );
 
     tb = new QToolButton ( tab );
     tb-> setIconSet ( Resource::loadIconSet ( "editdelete" ));
     tb-> setFocusPolicy ( QWidget::StrongFocus );
     lay-> addWidget ( tb, 3, 1 );
-    connect ( tb, SIGNAL( clicked ( )), this, SLOT( delExcept ( )));
+    connect ( tb, SIGNAL( clicked()), this, SLOT( delExcept()));
     QWhatsThis::add( tb, tr( "Click here to delete the currently selected application." ) );
 
     tb = new QToolButton ( tab );
     tb-> setIconSet ( Resource::loadIconSet ( "up" ));
     tb-> setFocusPolicy ( QWidget::StrongFocus );
     lay-> addWidget ( tb, 4, 1 );
-    connect ( tb, SIGNAL( clicked ( )), this, SLOT( upExcept ( )));
+    connect ( tb, SIGNAL( clicked()), this, SLOT( upExcept()));
     QWhatsThis::add( tb, tr( "Click here to move the currently selected application up in the list." ) );
 
     tb = new QToolButton ( tab );
     tb-> setIconSet ( Resource::loadIconSet ( "down" ));
     tb-> setFocusPolicy ( QWidget::StrongFocus );
     lay-> addWidget ( tb, 5, 1 );
-    connect ( tb, SIGNAL( clicked ( )), this, SLOT( downExcept ( )));
+    connect ( tb, SIGNAL( clicked()), this, SLOT( downExcept()));
     QWhatsThis::add( tb, tr( "Click here to move the currently selected application down in the list." ) );
 
     lay-> setRowStretch ( 6, 10 );
@@ -487,7 +487,7 @@ Appearance::Appearance( QWidget* parent,  const char* name, WFlags )
     top-> addWidget ( m_sample, 1 );
 
     tw-> setCurrentTab ( styletab );
-    connect ( tw, SIGNAL( currentChanged ( QWidget * )), this, SLOT( tabChanged ( QWidget * )));
+    connect ( tw, SIGNAL( currentChanged(QWidget*)), this, SLOT( tabChanged(QWidget*)));
 
     m_style_changed = m_font_changed = m_color_changed = m_deco_changed = false;
 }

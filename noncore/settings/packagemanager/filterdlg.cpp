@@ -68,7 +68,7 @@ FilterDlg::FilterDlg( QWidget *parent, OPackageManager *pm, const QString &name,
     m_statusCB = new QCheckBox( tr( "With the status:" ), container );
     connect( m_statusCB, SIGNAL(toggled(bool)), this, SLOT(slotStatusSelected(bool)) );
     m_status = new QComboBox( container );
-    connect( m_status, SIGNAL(activated(const QString &)), this, SLOT(slotStatusChanged(const QString &)) );
+    connect( m_status, SIGNAL(activated(const QString&)), this, SLOT(slotStatusChanged(const QString&)) );
     QString currStatus;
     switch ( status )
     {

@@ -761,40 +761,40 @@ void QtRec::initConnections() {
 						 this, SLOT( doPlayBtn() ));
 		connect( Rec_PushButton, SIGNAL(released()),
 						 this, SLOT( newSound() ) );
-		connect( TabWidget, SIGNAL( currentChanged( QWidget*)),
+		connect( TabWidget, SIGNAL( currentChanged(QWidget*)),
 						 this, SLOT(thisTab(QWidget*) ));
 		connect( OutputSlider, SIGNAL(sliderReleased()),
 						 this, SLOT( changedOutVolume()) );
 		connect( InputSlider, SIGNAL(sliderReleased()),
 						 this, SLOT( changedInVolume()) );
 
-		connect( sampleRateComboBox, SIGNAL(activated( int)),
+		connect( sampleRateComboBox, SIGNAL(activated(int)),
 						 this, SLOT( changesamplerateCombo(int)) );
-		connect( bitRateComboBox, SIGNAL(activated( int)),
+		connect( bitRateComboBox, SIGNAL(activated(int)),
 						 this, SLOT( changebitrateCombo(int)) );
 
-		connect( directoryComboBox, SIGNAL(activated( int)),
+		connect( directoryComboBox, SIGNAL(activated(int)),
 						 this, SLOT( changeDirCombo(int)) );
-		connect( sizeLimitCombo, SIGNAL(activated( int)),
+		connect( sizeLimitCombo, SIGNAL(activated(int)),
 						 this, SLOT( changeSizeLimitCombo(int)) );
 
-		connect( stereoCheckBox, SIGNAL(toggled( bool)),
+		connect( stereoCheckBox, SIGNAL(toggled(bool)),
 						 this, SLOT( changeStereoCheck(bool)) );
    
-		connect( outMuteCheckBox, SIGNAL(toggled( bool)),
+		connect( outMuteCheckBox, SIGNAL(toggled(bool)),
 						 this, SLOT( doVolMuting(bool)) );
-		connect( inMuteCheckBox , SIGNAL(toggled( bool)),
+		connect( inMuteCheckBox , SIGNAL(toggled(bool)),
 						 this, SLOT( doMicMuting(bool)) );
 
-		connect( ListView1,SIGNAL(doubleClicked( QListViewItem*)),
+		connect( ListView1,SIGNAL(doubleClicked(QListViewItem*)),
 						 this,SLOT( itClick(QListViewItem*)));
-		connect( ListView1, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-						 this,SLOT( listPressed(int, QListViewItem *, const QPoint&, int)) );
-		connect( timeSlider, SIGNAL( sliderMoved( int)),
+		connect( ListView1, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int)),
+						 this,SLOT( listPressed(int,QListViewItem*,const QPoint&,int)) );
+		connect( timeSlider, SIGNAL( sliderMoved(int)),
 						 this, SLOT( changeTimeSlider(int) ));
-		connect( timeSlider, SIGNAL( sliderPressed( )),
+		connect( timeSlider, SIGNAL( sliderPressed()),
 						 this, SLOT( timeSliderPressed() ));
-		connect( timeSlider, SIGNAL( sliderReleased( )),
+		connect( timeSlider, SIGNAL( sliderReleased()),
 						 this, SLOT( timeSliderReleased() ));
 		connect( compressionCheckBox, SIGNAL( toggled(bool)),
 						 this, SLOT( compressionSelected(bool)));
@@ -1656,7 +1656,7 @@ void QtRec::doBeam() {
 								QString filePath = cfg.readEntry(file,"");
 								Ir *file = new Ir(this, "IR");
 								connect( file, SIGNAL( done(Ir*)),
-												 this, SLOT( fileBeamFinished( Ir * )));
+												 this, SLOT( fileBeamFinished(Ir*)));
 								file->send( filePath, "OPieRec audio file\n" + filePath );
 						}
 				}

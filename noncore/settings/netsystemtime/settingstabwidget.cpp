@@ -78,12 +78,12 @@ SettingsTabWidget::SettingsTabWidget( QWidget *parent )
 
 	// Display time server information selector
 	chNtpTab = new QCheckBox( tr( "Display time server information" ), container );
-	connect( chNtpTab, SIGNAL( toggled( bool ) ), this, SIGNAL( displayNTPTab( bool ) ) );
+	connect( chNtpTab, SIGNAL( toggled(bool) ), this, SIGNAL( displayNTPTab(bool) ) );
 	layout->addMultiCellWidget( chNtpTab, 5, 5, 0, 1 );
 
 	// Display time prediction information selector
 	chPredictTab = new QCheckBox( tr( "Display time prediction information" ), container );
-	connect( chPredictTab, SIGNAL( toggled( bool ) ), this, SIGNAL( displayPredictTab( bool ) ) );
+	connect( chPredictTab, SIGNAL( toggled(bool) ), this, SIGNAL( displayPredictTab(bool) ) );
 	layout->addMultiCellWidget( chPredictTab, 6, 6, 0, 1 );
 
 	// Space filler

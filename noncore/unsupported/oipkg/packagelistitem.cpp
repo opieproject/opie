@@ -211,13 +211,13 @@ QPopupMenu* PackageListItem::getPopupMenu()
 	      popupAction->setOn(true);
 	    }
     }
-  connect( destsMenu, SIGNAL( activated( int ) ),
-	       this, SLOT( menuAction( int ) ) );
+  connect( destsMenu, SIGNAL( activated(int) ),
+	       this, SLOT( menuAction(int) ) );
       popupMenu->popup( QCursor::pos() );
   }else{
     popupMenu->insertItem( QObject::tr("Remove"));
-  connect( popupMenu, SIGNAL( activated( int ) ),
-	       this, SLOT( menuAction( int ) ) );
+  connect( popupMenu, SIGNAL( activated(int) ),
+	       this, SLOT( menuAction(int) ) );
       popupMenu->popup( QCursor::pos() );   
   }
   return popupMenu;

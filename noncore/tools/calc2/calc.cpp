@@ -43,8 +43,8 @@ LCD->setSegmentStyle(QLCDNumber::Filled);
   calculatorLayout->addWidget (pluginWidgetStack);
 
 // no formatting of display for now
-  connect (&engine, SIGNAL(display (double)), LCD, SLOT(display (double)));
-  connect (&engine, SIGNAL(display (const QString &)), LCD, SLOT(display (const QString &)));
+  connect (&engine, SIGNAL(display(double)), LCD, SLOT(display(double)));
+  connect (&engine, SIGNAL(display(const QString&)), LCD, SLOT(display(const QString&)));
     connect (&engine, SIGNAL(setBinMode()), LCD, SLOT(setBinMode()));
     connect (&engine, SIGNAL(setOctMode()), LCD, SLOT(setOctMode()));
     connect (&engine, SIGNAL(setDecMode()), LCD, SLOT(setDecMode()));

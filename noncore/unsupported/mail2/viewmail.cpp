@@ -59,7 +59,7 @@ ViewMail::ViewMail(IMAPResponseFETCH &mail, IMAPHandler *handler, QWidget *paren
 	browser->setText(QString(_mailHtml).arg(tr("Getting mail body from server. Please wait...")));
 
 	_handler->iUid("FETCH", QString("%1 (BODY[1])").arg(mail.uid()));
-	connect(_handler, SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPUid(IMAPResponse &)));
+	connect(_handler, SIGNAL(gotResponse(IMAPResponse&)), SLOT(slotIMAPUid(IMAPResponse&)));
 }
 
 ViewMail::~ViewMail()
@@ -179,7 +179,7 @@ void ViewMail::slotForward()
 
 void ViewMail::slotIMAPUid(IMAPResponse &response)
 {
-	disconnect(_handler, SIGNAL(gotResponse(IMAPResponse &)), this, SLOT(slotIMAPUid(IMAPResponse &)));
+	disconnect(_handler, SIGNAL(gotResponse(IMAPResponse&)), this, SLOT(slotIMAPUid(IMAPResponse&)));
 
 	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
 		QValueList<IMAPResponseBodyPart> bodyParts;

@@ -176,7 +176,7 @@ void MainWindow::makeMenu()
   findBar->setHorizontalStretchable( TRUE );
   findEdit = new QLineEdit( findBar, "findEdit" );
   findBar->setStretchableWidget( findEdit );
-  connect( findEdit, SIGNAL( textChanged( const QString & ) ),
+  connect( findEdit, SIGNAL( textChanged(const QString&) ),
        this, SLOT( displayList() ) );
   a = new QAction( tr( "Clear Find" ), Resource::loadPixmap( "back" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), findEdit, SLOT( clear() ) );
@@ -197,7 +197,7 @@ void MainWindow::makeMenu()
   searchBar->setHorizontalStretchable( TRUE );
   searchEdit = new QLineEdit( searchBar, "seachEdit" );
   searchBar->setStretchableWidget( searchEdit );
-//  connect( searchEdit, SIGNAL( textChanged( const QString & ) ),
+//  connect( searchEdit, SIGNAL( textChanged(const QString&) ),
 //       this, SLOT( displayList() ) );
   a = new QAction( tr( "Clear Search" ), Resource::loadPixmap( "back" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), searchEdit, SLOT( clear() ) );
@@ -468,8 +468,8 @@ void MainWindow::setDocument(const QString &fileName)
 void MainWindow::makeChannel()
 {   	
 	channel = new QCopChannel( "QPE/Application/oipkg", this );
-	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-		this, SLOT(receive(const QCString&, const QByteArray&)) );
+	connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+		this, SLOT(receive(const QCString&,const QByteArray&)) );
 }
 
 

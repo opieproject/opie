@@ -17,10 +17,10 @@ EmulationHandler::EmulationHandler( const Profile& prof, QWidget* parent,const c
     parent->resize( m_teWid->calcSize(80, 24 ) );
     m_teEmu = new TEmuVt102(m_teWid );
 
-    connect(m_teEmu,SIGNAL(ImageSizeChanged(int, int) ),
-            this, SIGNAL(changeSize(int, int) ) );
-    connect(m_teEmu, SIGNAL(sndBlock(const char*, int) ),
-            this, SLOT(recvEmulation(const char*, int) ) );
+    connect(m_teEmu,SIGNAL(ImageSizeChanged(int,int) ),
+            this, SIGNAL(changeSize(int,int) ) );
+    connect(m_teEmu, SIGNAL(sndBlock(const char*,int) ),
+            this, SLOT(recvEmulation(const char*,int) ) );
     m_teEmu->setConnect( true );
     m_teEmu->setHistory( TRUE );
     load( prof );

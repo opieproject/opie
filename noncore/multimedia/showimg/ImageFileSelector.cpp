@@ -99,12 +99,12 @@ ImageFileSelector::ImageFileSelector( CURRENT_VIEW scv,QWidget *parent,const cha
 
 
 
-    connect( detailed, SIGNAL( mouseButtonClicked( int, QListViewItem *, const QPoint &, int ) ),
-             this, SLOT( fileClicked( int, QListViewItem *, const QPoint &, int ) ) );
-    connect( detailed, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint &, int ) ),
-             this, SLOT( filePressed( int, QListViewItem *, const QPoint &, int ) ) );
-    connect( detailed, SIGNAL( returnPressed( QListViewItem * ) ),
-             this, SLOT( fileClicked( QListViewItem * ) ) );
+    connect( detailed, SIGNAL( mouseButtonClicked(int,QListViewItem*,const QPoint&,int) ),
+             this, SLOT( fileClicked(int,QListViewItem*,const QPoint&,int) ) );
+    connect( detailed, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int) ),
+             this, SLOT( filePressed(int,QListViewItem*,const QPoint&,int) ) );
+    connect( detailed, SIGNAL( returnPressed(QListViewItem*) ),
+             this, SLOT( fileClicked(QListViewItem*) ) );
 
     cView=UNKNOWN;
     setView(scv);
@@ -213,7 +213,7 @@ void ImageFileSelector::reread(bool)
                 j++;
             }
             tList.append(l);
-            connect(l,SIGNAL(clicked(const DocLnk &)),this,SLOT(thumbClicked(const DocLnk &)));
+            connect(l,SIGNAL(clicked(const DocLnk&)),this,SLOT(thumbClicked(const DocLnk&)));
         }
     }
 

@@ -62,7 +62,7 @@ DialDialog::DialDialog(  QWidget* parent, const char* name, bool modal, WFlags f
         }
     }
 
-    connect( dialButtons, SIGNAL( clicked( int ) ), this, SLOT( slotEnterNumber( int ) ) );
+    connect( dialButtons, SIGNAL( clicked(int) ), this, SLOT( slotEnterNumber(int) ) );
 
     mainLayout->addStretch( 2 );
     mainLayout->addWidget( textLabel );

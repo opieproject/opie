@@ -37,10 +37,10 @@ GSMTool::GSMTool( QWidget* parent,  const char* name, WFlags fl )
 	connect(NewSMSSaveButton, SIGNAL(clicked()), this, SLOT(doNewSMSSaveButton()));
 	connect(NewSMSSendButton, SIGNAL(clicked()), this, SLOT(doNewSMSSendButton()));
 	connect(ScanButton, SIGNAL(clicked()), this, SLOT(doScanButton()));
-	connect(TabWidget2, SIGNAL(currentChanged(QWidget *)), this, SLOT(doTabChanged()));
+	connect(TabWidget2, SIGNAL(currentChanged(QWidget*)), this, SLOT(doTabChanged()));
 	connect(SMSStoreList, SIGNAL(activated(int)), this, SLOT(doSMSStoreChanged()));
 	connect(SMSViewType, SIGNAL(activated(int)), this, SLOT(doSMSTypeChanged()));
-	connect(SMSList, SIGNAL(selectionChanged(QListViewItem *)), this, SLOT(doSelectedSMSChanged(QListViewItem *)));
+	connect(SMSList, SIGNAL(selectionChanged(QListViewItem*)), this, SLOT(doSelectedSMSChanged(QListViewItem*)));
 	timerid = -1; // Is this not possible normally? 
 }
 

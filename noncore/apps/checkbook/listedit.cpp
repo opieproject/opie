@@ -55,7 +55,7 @@ ListEdit::ListEdit( QWidget *parent, const char *sName )
         _typeTable->addColumn( def->getName() );
         def=next();
     }
-    connect( _typeTable, SIGNAL( clicked(QListViewItem *, const QPoint &, int) ), this, SLOT( slotClick(QListViewItem *, const QPoint &, int ) ) );
+    connect( _typeTable, SIGNAL( clicked(QListViewItem*,const QPoint&,int) ), this, SLOT( slotClick(QListViewItem*,const QPoint&,int) ) );
     layout->addMultiCellWidget(_typeTable, 0,4,0,4);
     _currentItem=NULL;
 
@@ -65,11 +65,11 @@ ListEdit::ListEdit( QWidget *parent, const char *sName )
     layout->addMultiCellWidget(_stack, 5,5,0,2);
     _typeEdit = new QLineEdit( _stack );
     _stack->raiseWidget(_typeEdit );
-    connect( _typeEdit, SIGNAL( textChanged(const QString &) ), this, SLOT( slotEditChanged(const QString &) ) );
+    connect( _typeEdit, SIGNAL( textChanged(const QString&) ), this, SLOT( slotEditChanged(const QString&) ) );
 
     // combo box
     _box=new QComboBox( _stack );
-    connect( _box, SIGNAL( activated(const QString &) ), this, SLOT( slotActivated(const QString &) ) );
+    connect( _box, SIGNAL( activated(const QString&) ), this, SLOT( slotActivated(const QString&) ) );
 
 
     // add button

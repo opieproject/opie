@@ -102,7 +102,7 @@ TimeTabWidget::TimeTabWidget( QWidget *parent )
 	// Timezone
 	layout->addMultiCellWidget( new QLabel( tr( "Time zone" ), container ), 6, 6, 0, 1 );
 	selTimeZone = new TimeZoneSelector( container );
-	connect( selTimeZone, SIGNAL(signalNewTz(const QString &)), this, SLOT(slotTZChanged(const QString &)) );
+	connect( selTimeZone, SIGNAL(signalNewTz(const QString&)), this, SLOT(slotTZChanged(const QString&)) );
 	layout->addMultiCellWidget( selTimeZone, 6, 6, 2, 5 );
 
 	// Space filler

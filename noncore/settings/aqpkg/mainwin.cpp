@@ -100,7 +100,7 @@ MainWindow :: MainWindow( QWidget* parent, const char* name, WFlags fl )
     findEdit = new QLineEdit( findBar );
     QWhatsThis::add( findEdit, tr( "Type the text to search for here." ) );
     findBar->setStretchableWidget( findEdit );
-    connect( findEdit, SIGNAL( textChanged( const QString & ) ), this, SLOT( findPackage( const QString & ) ) );
+    connect( findEdit, SIGNAL( textChanged(const QString&) ), this, SLOT( findPackage(const QString&) ) );
 
     // Quick jump toolbar
     jumpBar = new QToolBar( this );
@@ -117,7 +117,7 @@ MainWindow :: MainWindow( QWidget* parent, const char* name, WFlags fl )
     {
         text[0] = 'A' + i;
         LetterPushButton *b = new LetterPushButton( text, w );
-        connect( b, SIGNAL( released( QString ) ), this, SLOT( letterPushed( QString ) ) );
+        connect( b, SIGNAL( released(QString) ), this, SLOT( letterPushed(QString) ) );
         layout->addWidget( b, i / 13, i % 13);
     }
 
@@ -265,8 +265,8 @@ void MainWindow :: initMainWidget()
     packagesList->addColumn( tr( "Packages" ), 225 );
     QWhatsThis::add( packagesList, tr( "This is a listing of all packages for the server feed selected above.\n\nA blue dot next to the package name indicates that the package is currently installed.\n\nA blue dot with a star indicates that a newer version of the package is available from the server feed.\n\nClick inside the box at the left to select a package." ) );
     QPEApplication::setStylusOperation( packagesList->viewport(), QPEApplication::RightOnHold );
-    connect( packagesList, SIGNAL(rightButtonPressed(QListViewItem *,const QPoint &,int)),
-             this, SLOT(slotDisplayPackage(QListViewItem *)) );
+    connect( packagesList, SIGNAL(rightButtonPressed(QListViewItem*,const QPoint&,int)),
+             this, SLOT(slotDisplayPackage(QListViewItem*)) );
 
     QVBoxLayout *vbox = new QVBoxLayout( networkPkgWindow, 0, -1 );
     QHBoxLayout *hbox1 = new QHBoxLayout( vbox, -1 );
@@ -306,10 +306,10 @@ void MainWindow :: init()
     stack->raiseWidget( progressWindow );
 
     mgr = new DataManager();
-    connect( mgr, SIGNAL( progressSetSteps( int ) ), this, SLOT( setProgressSteps( int ) ) );
-    connect( mgr, SIGNAL( progressSetMessage( const QString & ) ),
-             this, SLOT( setProgressMessage( const QString & ) ) );
-    connect( mgr, SIGNAL( progressUpdate( int ) ), this, SLOT( updateProgress( int ) ) );
+    connect( mgr, SIGNAL( progressSetSteps(int) ), this, SLOT( setProgressSteps(int) ) );
+    connect( mgr, SIGNAL( progressSetMessage(const QString&) ),
+             this, SLOT( setProgressMessage(const QString&) ) );
+    connect( mgr, SIGNAL( progressUpdate(int) ), this, SLOT( updateProgress(int) ) );
     mgr->loadServers();
 
     showUninstalledPkgs = false;
@@ -770,7 +770,7 @@ void MainWindow :: updateServer()
 
     InstallDlgImpl *dlg = new InstallDlgImpl( ipkg, tr( "Refreshing server package lists" ),
                           tr( "Update lists" ) );
-    connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
+    connect( dlg, SIGNAL( reloadData(InstallDlgImpl*) ), this, SLOT( reloadData(InstallDlgImpl*) ) );
     reloadDocuments = FALSE;
     stack->addWidget( dlg, 3 );
     stack->raiseWidget( dlg );
@@ -801,7 +801,7 @@ void MainWindow :: upgradePackages()
 
         InstallDlgImpl *dlg = new InstallDlgImpl( ipkg, tr( "Upgrading installed packages" ),
                               tr ( "Upgrade" ) );
-        connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
+        connect( dlg, SIGNAL( reloadData(InstallDlgImpl*) ), this, SLOT( reloadData(InstallDlgImpl*) ) );
         reloadDocuments = TRUE;
         stack->addWidget( dlg, 3 );
         stack->raiseWidget( dlg );
@@ -906,7 +906,7 @@ void MainWindow :: downloadSelectedPackages()
 
     // Download each package
     Ipkg ipkg;
-    connect( &ipkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
+    connect( &ipkg, SIGNAL(outputText(const QString&)), this, SLOT(displayText(const QString&)));
 
     ipkg.setOption( "download" );
     ipkg.setRuntimeDirectory( dir );
@@ -944,7 +944,7 @@ void MainWindow :: downloadRemotePackage()
     workingPackages.append( item );
 
     InstallDlgImpl *dlg = new InstallDlgImpl( workingPackages, mgr, tr( "Download" ) );
-    connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
+    connect( dlg, SIGNAL( reloadData(InstallDlgImpl*) ), this, SLOT( reloadData(InstallDlgImpl*) ) );
     reloadDocuments = TRUE;
     stack->addWidget( dlg, 3 );
     stack->raiseWidget( dlg );
@@ -988,7 +988,7 @@ void MainWindow :: applyChanges()
 
     // do the stuff
     InstallDlgImpl *dlg = new InstallDlgImpl( workingPackages, mgr, tr( "Apply changes" ) );
-    connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
+    connect( dlg, SIGNAL( reloadData(InstallDlgImpl*) ), this, SLOT( reloadData(InstallDlgImpl*) ) );
     reloadDocuments = TRUE;
     stack->addWidget( dlg, 3 );
     stack->raiseWidget( dlg );

@@ -69,9 +69,9 @@ DateBookMonthHeader::DateBookMonthHeader( QWidget *parent, const char *name )
     end->setFixedSize( end->sizeHint() );
     QWhatsThis::add( end, tr("Show December in the selected year") );
 
-    connect( month, SIGNAL( activated( int ) ),
+    connect( month, SIGNAL( activated(int) ),
 	     this, SLOT( updateDate() ) );
-    connect( year, SIGNAL( valueChanged( int ) ),
+    connect( year, SIGNAL( valueChanged(int) ),
 	     this, SLOT( updateDate() ) );
     connect( begin, SIGNAL( clicked() ),
 	     this, SLOT( firstMonth() ) );
@@ -187,10 +187,10 @@ DateBookMonthTable::DateBookMonthTable( QWidget *parent, const char *name,
 
     setSelectionMode( NoSelection );
 
-    connect( this, SIGNAL( clicked( int, int, int, const QPoint & ) ),
-	     this, SLOT( dayClicked( int, int ) ) );
-    connect( this, SIGNAL( currentChanged( int, int ) ),
-             this, SLOT( dragDay( int, int ) ) );
+    connect( this, SIGNAL( clicked(int,int,int,const QPoint&) ),
+	     this, SLOT( dayClicked(int,int) ) );
+    connect( this, SIGNAL( currentChanged(int,int) ),
+             this, SLOT( dragDay(int,int) ) );
     setVScrollBarMode( AlwaysOff );
     setHScrollBarMode( AlwaysOff );
 }
@@ -394,10 +394,10 @@ DateBookMonth::DateBookMonth( QWidget *parent, const char *name, bool ac,
     table->setDate( year, month, QDate::currentDate().day() );
     header->setFocusPolicy(NoFocus);
     table->setFocusPolicy(NoFocus);
-    connect( header, SIGNAL( dateChanged( int, int ) ),
-	     this, SLOT( setDate( int, int ) ) );
-    connect( table, SIGNAL( dateClicked( int, int, int ) ),
-	     this, SLOT( finalDate(int, int, int) ) );
+    connect( header, SIGNAL( dateChanged(int,int) ),
+	     this, SLOT( setDate(int,int) ) );
+    connect( table, SIGNAL( dateClicked(int,int,int) ),
+	     this, SLOT( finalDate(int,int,int) ) );
     connect( qApp, SIGNAL(weekChanged(bool)), this,
 	     SLOT(slotWeekChange(bool)) );
     table->setFocus();
@@ -696,10 +696,10 @@ void DateButton::pickDate()
 	m1 = new QPopupMenu( this );
 	picker = new DateBookMonth( m1, 0, TRUE );
 	m1->insertItem( picker );
-	connect( picker, SIGNAL( dateClicked( int, int, int ) ),
-		 this, SLOT( setDate( int, int, int ) ) );
-	connect( picker, SIGNAL( dateClicked( int, int, int ) ),
-		 this, SIGNAL( dateSelected( int, int, int ) ) );
+	connect( picker, SIGNAL( dateClicked(int,int,int) ),
+		 this, SLOT( setDate(int,int,int) ) );
+	connect( picker, SIGNAL( dateClicked(int,int,int) ),
+		 this, SIGNAL( dateSelected(int,int,int) ) );
 	connect( m1, SIGNAL( aboutToHide() ),
 		 this, SLOT( gotHide() ) );
     }

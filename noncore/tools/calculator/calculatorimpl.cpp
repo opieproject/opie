@@ -220,7 +220,7 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
         bgr_function.insert(tmpbutton);
     }
     connect( &bgr_function, SIGNAL(clicked(int) ) , this, SLOT(do_convert(int) ) );
-    connect( &bgr_function, SIGNAL(clicked(int) ) , this, SLOT(std_funcs (int) ) );
+    connect( &bgr_function, SIGNAL(clicked(int) ) , this, SLOT(std_funcs(int) ) );
 
     connect(ComboBoxFunction, SIGNAL(activated(int) ), this, SLOT(function_button(int) ) );
 

@@ -121,8 +121,8 @@ WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const
     updateSlider->setSteps( 1, 1 );
     updateSlider->setFocusPolicy( QWidget::NoFocus );
     grid->addWidget( updateSlider, 1, 1 );
-    connect( updateSlider, SIGNAL( valueChanged( int ) ),
-             this, SLOT( updateDelayChange( int ) ) );
+    connect( updateSlider, SIGNAL( valueChanged(int) ),
+             this, SLOT( updateDelayChange(int) ) );
 
     setFixedSize( sizeHint() );
     setFocusPolicy( QWidget::NoFocus );
@@ -130,8 +130,8 @@ WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const
     applet->displayStyleChange( displayStyle );
     applet->updateDelayChange( updateFrequency );
 
-    connect( group, SIGNAL( clicked( int ) ),
-             this, SLOT( displayStyleChange( int ) ) );
+    connect( group, SIGNAL( clicked(int) ),
+             this, SLOT( displayStyleChange(int) ) );
 
     applet->updateDHCPConfig( rocESSID, rocFREQ, rocAP, rocMODE );
 }

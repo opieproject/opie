@@ -29,7 +29,7 @@ Search_Results::Search_Results( QWidget* parent,  const char* name, bool modal, 
     ListBox1 = new QListBox( this, "ListBox1" );
     
     Layout5->addMultiCellWidget(  ListBox1, 0, 1, 0, 3 );
-    connect( ListBox1, SIGNAL( clicked( QListBoxItem *)), SLOT( listSelected( QListBoxItem *)) );
+    connect( ListBox1, SIGNAL( clicked(QListBoxItem*)), SLOT( listSelected(QListBoxItem*)) );
 }
 
 Search_Results::~Search_Results() {

@@ -75,8 +75,8 @@ InputDialog :: InputDialog( const QString &label, QWidget* parent, const char* n
 
     connect( lineEdit, SIGNAL( returnPressed() ),
 	     this, SLOT( tryAccept() ) );
-    connect( lineEdit, SIGNAL( textChanged( const QString & ) ),
-	     this, SLOT( textChanged( const QString & ) ) );
+    connect( lineEdit, SIGNAL( textChanged(const QString&) ),
+	     this, SLOT( textChanged(const QString&) ) );
 
     connect( ok, SIGNAL( clicked() ), this, SLOT( accept() ) );
     connect( cancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
