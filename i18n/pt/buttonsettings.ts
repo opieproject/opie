@@ -97,10 +97,6 @@
 <context>
     <name>RemapDlgBase</name>
     <message>
-        <source>RemapDlgBase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Action</source>
         <translation type="unfinished"></translation>
     </message>
