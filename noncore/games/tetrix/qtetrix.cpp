@@ -28,10 +28,7 @@
 #include <qlabel.h>
 #include <qdatetime.h>
 #include <qlayout.h>
-#include "/home/carsten/opie/qt2/include/qinputdialog.h"
-//#include <qinputdialog.h>
 #include <qstring.h>
-
 
 #include "ohighscoredlg.h"
 
@@ -170,10 +167,7 @@ void QTetrix::gameOver()
 	OHighscore *hs = new OHighscore( showScore->text().toInt() );
 	if ( hs->isNewhighscore )
 	{
-		qDebug( "ist nun in der ifcondition" );
-		hs->insertData( /*hs->getName()*/"oscars" , showScore->text().toInt() );
-		qDebug( "Ende der ifcondition" );
-		hs->writeList();
+		hs->insertData( hs->getName(), showScore->text().toInt() );
 	}
 		OHighscoreDialog hscdlg( hs, this, "OHighscoreDialog", true );
 		hscdlg.exec();

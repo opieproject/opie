@@ -22,13 +22,8 @@
 #include <qhbox.h>
 #include <qvbox.h>
 #include <qlabel.h>
-#include <qpushbutton.h>
-#include <qstrlist.h>
-#include <qvaluelist.h>
 #include <qlistview.h>
 #include <qlineedit.h>
-
-#include <qmap.h>
 
 #include "ohighscoredlg.h"
 
@@ -59,7 +54,7 @@ void OHighscore::getList()
 		cfg.setGroup( QString::number( i ) );
 		int temp = cfg.readNumEntry( "Points" );
  		
-		t_playerData* pPlayerData = new t_playerData;
+		t_playerData *pPlayerData = new t_playerData;
 		pPlayerData->sName = cfg.readEntry( "Name" );
 		pPlayerData->points = temp;
 
@@ -76,18 +71,14 @@ void OHighscore::getList()
 
 void OHighscore::checkIfItIsANewhighscore( int points)
 {
-	qDebug( "Die niedrigste Zahl ist" );
-	qDebug( QString::number( lowest ) );
-	if ( points > lowest ) {
-		qDebug( "isNewhighscore == true" ) ; isNewhighscore = true;
-	}
-	else { 
-		qDebug( "isNewhighscore == true" ) ;isNewhighscore = false;
-	}
+	if ( points > lowest ) isNewhighscore = true; 
+	else isNewhighscore = false;
 }
 
 void OHighscore::insertData( QString name , int punkte )
 {
+	Config cfg ( "tetrix" );
+	int entryNumber = 1;
 	std::list<t_playerData*>::iterator insertIterator = playerData.begin();
 	while ( insertIterator != playerData.end() )
 	{
@@ -97,26 +88,36 @@ void OHighscore::insertData( QString name , int punkte )
 			temp->sName = name;
 			temp->points = punkte;
 			playerData.insert( insertIterator , temp );
+			
+			//now we have to delete the last entry
 			insertIterator = playerData.end();
 			insertIterator--;
-//X 			delete *insertIterator;              //memleak?
+//X 		delete *insertIterator;              //memleak?
 			playerData.erase( insertIterator );
+			
+		/////////////////////////////////////////
+		//this block just rewrites the highscore
+			insertIterator = playerData.begin();
+			while ( insertIterator != playerData.end() )
+			{
+				cfg.setGroup( QString::number( entryNumber ) );
+				cfg.writeEntry( "Name" , ( *insertIterator )->sName );
+				entryNumber++;	
+				insertIterator++;
+			}
+		////////////////////////////////////////	
+
 			return;
 		}
 		insertIterator++;
 	} 
 }
 
-void OHighscore::writeList()
-{
-	qDebug( "writeList()" );
-}
-
 QString OHighscore::getName()
 {
 	QString name;
 	QDialog *d = new QDialog ( this, 0, true );
-	d->setCaption( tr( "New highscore!\nEnter your name!" ));
+	d->setCaption( tr( "Enter your name!" ));
 	QLineEdit *ed = new QLineEdit ( d );
 	( new QVBoxLayout ( d, 3, 3 ))->addWidget ( ed );
 	ed->setFocus ( );
@@ -153,7 +154,7 @@ void OHighscoreDialog::createHighscoreListView()
 	for ( ; iListe != hs_->playerData.end() ; iListe++ )
 	{
 		QListViewItem *item = new QListViewItem(  list );
-		item->setText(  0 , QString::number( pos ) );           //number
+		item->setText(  0 , QString::number( pos ) );                   //number
 		item->setText(  1 , ( *iListe )->sName );                       //name
 		item->setText(  2 , QString::number( ( *iListe )->points ) );   //points
 		pos++;

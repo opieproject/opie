@@ -8,7 +8,6 @@
  **************************************************************************/
 
 class QWidget;
-class QLabel;
 class QVBoxLayout;
 class QListView;
 
@@ -32,8 +31,7 @@ class OHighscore : public QWidget
 
 	public:
 		/*
-		 *An OHighscore-Object contains all Points and playernames sorted in a
-		 *QMap.
+		 *An OHighscore-Object contains all Points and playernames sorted in a stl::vector
 		 */
 		OHighscore( int );
 		~OHighscore();
@@ -69,7 +67,7 @@ class OHighscore : public QWidget
 		int lowest;
 		
 		/*
-		 * get all scores in a QMap and give "lowest" a value
+		 * get all scores in a vector and give "lowest" a value
 		 */
 		void getList();
 };
