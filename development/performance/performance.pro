@@ -1,6 +1,4 @@
-TEMPLATE  = app
-CONFIG    += qt warn_on release
-#DESTDIR    = $(QPEDIR)/bin
+CONFIG    += qt quick-app
 HEADERS   = performancetest.h
 SOURCES   = main.cpp performancetest.cpp
 INTERFACES  = performancetestbase.ui
