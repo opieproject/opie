@@ -62,10 +62,6 @@ template<class T>
 class OPimAccessFactory
 {
  public:
-
-	// Maybe we should introduce a global class for storing such global enums
-	// (something like opimglobal.h) ? (eilers)
-
 	OPimAccessFactory() {};
 
 	/**
@@ -75,19 +71,25 @@ class OPimAccessFactory
 	 * @param appName "Name" of your application. This should be any constant string which is used
 	 *                by some backends for creating special files (i.e.journal files). Please keep the
 	 *                string unique for your application !
-	 * @see OPimGlobal
+	 * @param fileName Filename of database if something different as the default should be used.
+	 * @see OPimGlobal()
 	 */
-	static T* create( OPimGlobal::PimType type, OPimGlobal::DatabaseStyle dbStyle, const QString& appName ){
+	static T* create( OPimGlobal::PimType type, OPimGlobal::DatabaseStyle dbStyle, const QString& appName, 
+			  const QString& fileName = QString::null ){
             OPimBase *base;
 		switch ( type ){
 		case OPimGlobal::TODOLIST:
-		        base = new OPimTodoAccess( OBackendFactory<OPimTodoAccessBackend>::create( type, dbStyle, appName ) );
+		        base = new OPimTodoAccess( OBackendFactory<OPimTodoAccessBackend>::create( type, dbStyle, 
+												   appName, fileName ) );
                         break;
 		case OPimGlobal::CONTACTLIST:
-		        base = new OPimContactAccess( QString::null, QString::null, OBackendFactory<OPimContactAccessBackend>::create( type, dbStyle, appName ) );
+		        base = new OPimContactAccess( QString::null, QString::null, 
+						      OBackendFactory<OPimContactAccessBackend>::create( type, dbStyle, 
+													 appName, fileName ) );
                         break;
 		case OPimGlobal::DATEBOOK:
-		        base = new ODateBookAccess( OBackendFactory<ODateBookAccessBackend>::create( type, dbStyle, appName ) );
+		        base = new ODateBookAccess( OBackendFactory<ODateBookAccessBackend>::create( type, dbStyle, 
+												     appName, fileName ) );
                         break;
 		default:
 			return 0l;
@@ -104,7 +106,7 @@ class OPimAccessFactory
 	 * @param appName "Name" of your application. This should be any constant string which is used
 	 *                by some backends for creating special files (i.e.journal files). Please keep the
 	 *                string unique for your application !
-	 * @see OPimGlobal
+	 * @see OPimGlobal()
 	 *
 	 */
 	static T* defaultAccess( typename OPimGlobal::PimType type, const QString& appName ){

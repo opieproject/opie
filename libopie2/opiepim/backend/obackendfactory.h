@@ -67,7 +67,7 @@ class OBackendPrivate;
  * This class - as the whole PIM Api - is making use of templates
  *
  * <pre>
- *   OPimTodoAccessBackend* backend = OBackEndFactory<OPimTodoAccessBackend>::Default("todo", QString::null );
+ *   OPimTodoAccessBackend* backend = OBackEndFactory<OPimTodoAccessBackend>::Default( OPimGlobal::TODOLIST, QString::null );
  *   backend->load();
  * </pre>
  *
@@ -86,6 +86,7 @@ class OBackendFactory
 	 * @param database the type of the used database
          * @param appName The name of your application. It will be passed on to the backend.
 	 * @param filename Filename of the database file if you don't want to access the default 
+	 * @see OPimGlobal()
          */
 	static T* create( OPimGlobal::PimType type, OPimGlobal::DatabaseStyle database,
 			  const QString& appName, const QString& filename = QString::null ){
@@ -165,7 +166,7 @@ class OBackendFactory
 	/**
 	 * Returns the style of the default database which is used to contact PIM data.
          * @param type the type of the backend
-	 * @see OPimGlobal
+	 * @see OPimGlobal()
 	 */
 	static OPimGlobal::DatabaseStyle defaultDB( OPimGlobal::PimType type ){
 		QString group_name;
@@ -208,6 +209,7 @@ class OBackendFactory
 	 * by the configfile "pimaccess.conf".
          * @param type The type of the backend (@see OPimGlobal())
          * @param appName The name of your application. It will be passed on to the backend
+	 * @see OPimGlobal()
          */
 	static T* defaultBackend( OPimGlobal::PimType type, const QString& appName ){
 		return create( type, OPimGlobal::DEFAULT, appName );
