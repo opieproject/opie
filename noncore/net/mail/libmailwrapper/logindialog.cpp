@@ -5,8 +5,8 @@
 LoginDialog::LoginDialog(const QString&user,const QString&pass, QWidget *parent, const char *name, bool modal, WFlags flags )
     : LoginDialogUI( parent, name, modal, flags )
 {
-    userLine->setText( (user.isEmpty()?"":user) );
-    passLine->setText( (pass.isEmpty()?"":pass) );
+    userLine->setText( (user.isEmpty()?QString(""):user) );
+    passLine->setText( (pass.isEmpty()?QString(""):pass) );
     _user = user;
     _pass = pass;
 
