@@ -1,2 +1,7 @@
 moc_*
 Makefile
+Makefile.in
+wlan.cpp
+wlan.h
+info.cpp
+info.h
