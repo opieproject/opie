@@ -338,7 +338,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   editCommandListMenu->insertItem( tr( "Quick Edit" ) );
   if( listHidden) {
       secondToolBar->hide();
-      editCommandListMenu->setItemEnabled(-22 ,FALSE);
+      editCommandListMenu->setItemEnabled(-23 ,FALSE);
   }
   editCommandListMenu->insertItem(tr(  "Edit" ) );
 
@@ -834,18 +834,18 @@ void Konsole::editCommandListMenuSelected(int iD)
             secondToolBar->hide();
             configMenu->changeItem( iD,tr( "Show Command List" ));
             cfg.writeEntry("Hidden","TRUE");
-            configMenu->setItemEnabled(-22 ,FALSE);
+            configMenu->setItemEnabled(-23 ,FALSE);
         } else {
             secondToolBar->show();
             configMenu->changeItem( iD,tr( "Hide Command List" ));
             cfg.writeEntry("Hidden","FALSE");
-            configMenu->setItemEnabled(-22 ,TRUE);
+            configMenu->setItemEnabled(-23 ,TRUE);
 
             if(cfg.readEntry("EditEnabled","FALSE")=="TRUE") {
-                configMenu->setItemChecked(-22,TRUE);
+                configMenu->setItemChecked(-23,TRUE);
                 commonCombo->setEditable( TRUE );
             } else {
-                configMenu->setItemChecked(-22,FALSE);
+                configMenu->setItemChecked(-23,FALSE);
                 commonCombo->setEditable( FALSE );
             }
         }
