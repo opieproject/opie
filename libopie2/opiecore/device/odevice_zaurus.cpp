@@ -345,10 +345,10 @@ void Zaurus::buzzer ( int sound )
     // If a soundname is defined, we expect that this device has
     // sound capabilities.. Otherwise we expect to have the buzzer
     // device..
-    if ( snd ){
+    if ( snd && snd->isFinished() ){
         changeMixerForAlarm( 0, "/dev/sound/mixer", snd );
         snd-> play();
-    } else {
+    } else if( !snd ) {
         int fd = ::open ( "/dev/sharp_buz", O_WRONLY|O_NONBLOCK );
 
         if ( fd >= 0 ) {

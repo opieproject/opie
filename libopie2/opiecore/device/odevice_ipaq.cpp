@@ -331,6 +331,8 @@ void iPAQ::playAlarmSound()
 {
 #ifndef QT_NO_SOUND
     static Sound snd ( "alarm" );
+    if(!snd.isFinished())
+	return;
 
     changeMixerForAlarm(0, "/dev/sound/mixer", &snd );
     snd. play();
