@@ -28,7 +28,13 @@
 #include <qpixmapcache.h>
 #include <qpainter.h>
 
+// this namespace is just a workaround for a gcc bug
+// gcc exports inline functions in the generated file
+// inlinepics_p.h
+
+namespace {
 #include "inlinepics_p.h"
+}
 
 /*!
   \class Resource resource.h
