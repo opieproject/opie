@@ -1,6 +1,6 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) The Main Author <main-author@whereever.org>
+                             Copyright (C) Stefan Eilers <eilers.stefan@epost.de>
               =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
             .=l.
            .>+-=
@@ -38,6 +38,7 @@
 #include <qasciidict.h>
 #include <qpe/config.h>
 
+#include <opie2/opimglobal.h>
 #include <opie2/otodoaccessxml.h>
 #include <opie2/ocontactaccessbackend_xml.h>
 #include <opie2/odatebookaccessbackend_xml.h>
@@ -48,6 +49,9 @@
 #include <opie2/odatebookaccessbackend_sql.h>
 #endif
 
+using namespace Opie;
+using namespace Opie::Pim;
+
 namespace Opie {
 
 class OBackendPrivate;
@@ -57,7 +61,7 @@ class OBackendPrivate;
  * of at least Todolist, Contacts and Datebook. In the future this class will
  * allow users to switch the backend with ( XML->SQLite ) without the need
  * to recompile.#
- * This class as the whole PIM Api is making use of templates
+ * This class - as the whole PIM Api - is making use of templates
  *
  * <pre>
  *   OPimTodoAccessBackend* backend = OBackEndFactory<OPimTodoAccessBackend>::Default("todo", QString::null );
@@ -73,76 +77,93 @@ class OBackendFactory
  public:
 	OBackendFactory() {};
 
-	enum BACKENDS {
-		TODO,
-		CONTACT,
-		DATE
-	};
-
         /**
-         * Returns a backend implementation for backendName
-         * @param backendName the type of the backend
-         * @param appName will be passed on to the backend
+         * Returns a backend implementation
+         * @param type the type of the backend
+	 * @param database the type of the used database
+         * @param appName The name of your application. It will be passed on to the backend.
          */
-	static T* Default( const QString backendName, const QString& appName ){
+	static T* create( OPimGlobal::PimType type, OPimGlobal::DatabaseStyle database, 
+			  const QString& appName ){
+		qWarning("Selected backend for %d is: %d", type, database ); 
 
-		// __asm__("int3");
-
-		Config config( "pimaccess" );
-		config.setGroup ( backendName );
-		QString backend = config.readEntry( "usebackend" );
-
-		qWarning("Selected backend for %s is: %s", backendName.latin1(), backend.latin1() ); 
-
-		QAsciiDict<int> dict ( 3 );
-		dict.setAutoDelete ( TRUE );
-
-		dict.insert( "todo", new int (TODO) );
-		dict.insert( "contact", new int (CONTACT) );
-                dict.insert( "datebook", new int(DATE) );
-
-                int *find = dict[ backendName ];
-                if (!find ) return 0;
-
-		switch ( *find ){
-		case TODO:
+		switch ( type ){
+		case OPimGlobal::TODOLIST:
 #ifdef __USE_SQL
-			if ( backend == "sql" )
+			if ( database == OPimGlobal::SQL )
 				return (T*) new OPimTodoAccessBackendSQL("");
 #else
-			if ( backend == "sql" )
+			if ( database == OPimGlobal::SQL )
 				qWarning ("OBackendFactory:: sql Backend for TODO not implemented! Using XML instead!");
 #endif
 
 			return (T*) new OPimTodoAccessXML( appName );
-		case CONTACT:
+		case OPimGlobal::CONTACTLIST:
 #ifdef __USE_SQL
-			if ( backend == "sql" )
+			if ( database == OPimGlobal::SQL )
 				return (T*) new OPimContactAccessBackend_SQL("");
 #else
-			if ( backend == "sql" )
+			if ( database == OPimGlobal::SQL )
 				qWarning ("OBackendFactory:: sql Backend for CONTACT not implemented! Using XML instead!");
 #endif
 
 			return (T*) new OPimContactAccessBackend_XML( appName );
-		case DATE:
+		case OPimGlobal::DATEBOOK:
 #ifdef __USE_SQL
-			if ( backend == "sql" )
+			if ( database == OPimGlobal::SQL )
 				return (T*) new ODateBookAccessBackend_SQL("");
 #else
-			if ( backend == "sql" )
+			if ( database == OPimGlobal::SQL )
                             qWarning("OBackendFactory:: sql Backend for DATEBOOK not implemented! Using XML instead!");
 #endif
 
 			return (T*) new ODateBookAccessBackend_XML( appName );
 		default:
-			return NULL;
+			return (T*) NULL;
 		}
 
 
 	}
+
+        /**
+         * Returns the default backend implementation for backendName. Which one is used, is defined
+	 * by the configfile "pimaccess.conf".
+         * @param backendName the type of the backend (use "todo", "contact" or "datebook" )
+         * @param appName The name of your application. It will be passed on to the backend
+         */
+	static T* Default( const QString backendName, const QString& appName ){
+
+		QAsciiDict<int> dictBackends( OPimGlobal::_END_PimType );
+ 		dictBackends.setAutoDelete ( TRUE );
+
+		dictBackends.insert( "todo", new int (OPimGlobal::TODOLIST) );
+		dictBackends.insert( "contact", new int (OPimGlobal::CONTACTLIST) );
+                dictBackends.insert( "datebook", new int(OPimGlobal::DATEBOOK) );
+
+		QAsciiDict<int> dictDbTypes( OPimGlobal::_END_DatabaseStyle );
+		dictDbTypes.setAutoDelete( TRUE );
+
+		dictDbTypes.insert( "xml", new int (OPimGlobal::XML) );
+		dictDbTypes.insert( "sql", new int (OPimGlobal::SQL) );
+		dictDbTypes.insert( "vcard", new int (OPimGlobal::VCARD) );
+
+		Config config( "pimaccess" );
+		config.setGroup ( backendName );
+		QString db_String = config.readEntry( "usebackend" );
+
+		int* db_find = dictDbTypes[ db_String ];
+                int* backend_find = dictBackends[ backendName ];
+                if ( !backend_find || !db_find ) return NULL;
+
+		qDebug( "OBackendFactory::Default -> Backend is %s, Database is %s", backendName.latin1(), 
+			db_String.latin1() );
+		
+		return create( (OPimGlobal::PimType) *backend_find, (OPimGlobal::DatabaseStyle) *db_find, appName );
+
+	}
     private:
 	OBackendPrivate* d;
+	
 };
 
 }
