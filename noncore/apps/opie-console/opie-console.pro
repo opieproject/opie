@@ -64,7 +64,7 @@ INTERFACES   = configurebase.ui editbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lqpe -lopiecore2 -lopieui2 -lutil
-TARGET       = console
+TARGET       = opie-console
 
 DEFINES += HAVE_OPENPTY
 
