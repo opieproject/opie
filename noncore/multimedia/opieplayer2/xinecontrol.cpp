@@ -101,6 +101,7 @@ int XineControl::currentTime() {
     // todo: jede sekunde überprüfen
     m_currentTime =  libXine->currentTime();
     return m_currentTime;
+    QTimer::singleShot( 1000, this, SLOT( currentTime() ) );
 }
 
 void  XineControl::length() {
@@ -114,6 +115,7 @@ long XineControl::position() {
     mediaPlayerState->setPosition( m_position  );
     long emitPos = (long)m_position;
     emit positionChanged( emitPos );
+    // needs to be stopped the media is stopped
     QTimer::singleShot( 1000, this, SLOT( position() ) );
     qDebug("POSITION : " +  m_position);
     return m_position;
