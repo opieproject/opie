@@ -93,8 +93,10 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
         timeLimitComboBox->setCurrentItem(2);
     else if(sRate == 10)
         timeLimitComboBox->setCurrentItem(3);
-    else
+    else if(sRate == 5)
         timeLimitComboBox->setCurrentItem(4);
+    else 
+        timeLimitComboBox->setCurrentItem(5);
 
     sixteenBitCheckBox->setChecked(cfg.readNumEntry("SixteenBit", 1));
 
