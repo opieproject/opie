@@ -25,12 +25,13 @@
 
 */
 
+#include <opie2/odevice.h>
+
+#include <qpe/applnk.h>
+
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qtimer.h>
-
-
-#include <opie2/odevice.h>
 
 #include "buttonsettings.h"
 #include "buttonutils.h"
@@ -153,12 +154,15 @@ void ButtonSettings::updateLabels ( )
 	for ( QListIterator <buttoninfo> it ( m_infos ); *it; ++it ) {
 		qCopInfo cip = ButtonUtils::inst ( )-> messageToInfo ((*it)-> m_pmsg );
 
-		(*it)-> m_picon-> setPixmap ( cip. m_icon );
+		QPixmap pic;
+		pic.convertFromImage( cip.m_icon.convertToImage().smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+		(*it)-> m_picon-> setPixmap ( pic );
 		(*it)-> m_plabel-> setText ( cip. m_name );
 
 		qCopInfo cih = ButtonUtils::inst ( )-> messageToInfo ((*it)-> m_hmsg );
 
-		(*it)-> m_hicon-> setPixmap ( cih. m_icon );
+		pic.convertFromImage( cih.m_icon.convertToImage().smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+		(*it)-> m_hicon-> setPixmap ( pic );
 		(*it)-> m_hlabel-> setText ( cih. m_name );
 	}
 }
