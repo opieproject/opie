@@ -208,6 +208,11 @@ void Zaurus::init(const QString& cpu_info)
             break;
     }
     m_leds[0] = Led_Off;
+
+    if ( m_embedix )
+        qDebug( "Zaurus::init() - Using the Embedix HAL on a %s", (const char*) d->m_modelstr );
+    else
+        qDebug( "Zaurus::init() - Using the OpenZaurus HAL on a %s", (const char*) d->m_modelstr );
 }
 
 void Zaurus::initButtons()
@@ -220,6 +225,7 @@ void Zaurus::initButtons()
     struct z_button * pz_buttons;
     int buttoncount;
     switch ( d->m_model ) {
+        case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC7x0:
             pz_buttons = z_buttons_c700;
             buttoncount = ARRAY_SIZE(z_buttons_c700);
@@ -234,15 +240,12 @@ void Zaurus::initButtons()
         struct z_button *zb = pz_buttons + i;
         ODeviceButton b;
 
-        b. setKeycode ( zb->code );
-        b. setUserText ( QObject::tr ( "Button", zb->utext ));
-        b. setPixmap ( Resource::loadPixmap ( zb->pix ));
-        b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( zb->fpressedservice ),
-                                zb->fpressedaction ));
-        b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( zb->fheldservice ),
-                                zb->fheldaction ));
-
-        d->m_buttons->append ( b );
+        b.setKeycode( zb->code );
+        b.setUserText( QObject::tr( "Button", zb->utext ));
+        b.setPixmap( Resource::loadPixmap( zb->pix ));
+        b.setFactoryPresetPressedAction( OQCopMessage( makeChannel ( zb->fpressedservice ), zb->fpressedaction ));
+        b.setFactoryPresetHeldAction( OQCopMessage( makeChannel ( zb->fheldservice ), zb->fheldaction ));
+        d->m_buttons->append( b );
     }
 
     reloadButtonMapping();
@@ -390,7 +393,7 @@ bool Zaurus::setSoftSuspend ( bool soft )
     if ((( fd = ::open ( "/dev/apm_bios", O_RDWR )) >= 0 ) ||
         (( fd = ::open ( "/dev/misc/apm_bios",O_RDWR )) >= 0 )) {
 
-        int sources = ::ioctl ( fd, APM_IOCGEVTSRC, 0 ); // get current event sources
+        int sources = ::ioctl( fd, APM_IOCGEVTSRC, 0 ); // get current event sources
 
         if ( sources >= 0 ) {
             if ( soft )
@@ -398,7 +401,7 @@ bool Zaurus::setSoftSuspend ( bool soft )
             else
                 sources |= APM_EVT_POWER_BUTTON;
 
-            if ( ::ioctl ( fd, APM_IOCSEVTSRC, sources ) >= 0 ) // set new event sources
+            if ( ::ioctl( fd, APM_IOCSEVTSRC, sources ) >= 0 ) // set new event sources
                 res = true;
             else
                 perror ( "APM_IOCGEVTSRC" );
@@ -406,11 +409,37 @@ bool Zaurus::setSoftSuspend ( bool soft )
         else
             perror ( "APM_IOCGEVTSRC" );
 
-        ::close ( fd );
+        ::close( fd );
     }
     else
-        perror ( "/dev/apm_bios or /dev/misc/apm_bios" );
+        perror( "/dev/apm_bios or /dev/misc/apm_bios" );
 
+    return res;
+}
+
+int Zaurus::displayBrightnessResolution() const
+{
+    int res = 1;
+    if (m_embedix)
+    {
+        int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_RDWR|O_NONBLOCK );
+        if ( fd )
+        {
+            int value = ::ioctl( fd, SHARP_FL_IOCTL_GET_STEP, 0 );
+            ::close( fd );
+            return value ? value : res;
+        }
+    }
+    else
+    {
+        int fd = ::open( "/sys/class/backlight/corgi-bl/max_brightness", O_RDONLY|O_NONBLOCK );
+        if ( fd )
+        {
+            char buf[100];
+            if ( ::read( fd, &buf[0], sizeof buf ) ) ::sscanf( &buf[0], "%d", &res );
+            ::close( fd );
+        }
+    }
     return res;
 }
 
@@ -422,20 +451,28 @@ bool Zaurus::setDisplayBrightness( int bright )
     if ( bright > 255 ) bright = 255;
     if ( bright < 0 ) bright = 0;
 
+    int numberOfSteps = displayBrightnessResolution();
+    int val = ( bright == 1 ) ? 1 : ( bright * numberOfSteps ) / 255;
+
     if ( m_embedix )
     {
-        int numberOfSteps = displayBrightnessResolution();
         int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_WRONLY|O_NONBLOCK );
         if ( fd )
         {
-            int val = ( bright * numberOfSteps ) / 255;
-            res = ( ::ioctl ( fd, SHARP_FL_IOCTL_STEP_CONTRAST, val ) == 0 );
-            ::close ( fd );
+            res = ( ::ioctl( fd, SHARP_FL_IOCTL_STEP_CONTRAST, val ) == 0 );
+            ::close( fd );
         }
     }
     else
     {
-        qDebug( "Zaurus::setDisplayBrightness: ODevice handling for non-embedix kernels not yet implemented" );
+        int fd = ::open( "/sys/class/backlight/corgi-bl/brightness", O_WRONLY|O_NONBLOCK );
+        if ( fd )
+        {
+            char buf[100];
+            int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
+            res = ( ::write( fd, &buf[0], len ) == 0 );
+            ::close( fd );
+        }
     }
     return res;
 }
@@ -455,7 +492,15 @@ bool Zaurus::setDisplayStatus( bool on )
     }
     else
     {
-        qDebug( "Zaurus::setDisplayStatus: ODevice handling for non-embedix kernels not yet implemented" );
+        int fd = ::open( "/sys/class/backlight/corgi-bl/power", O_WRONLY|O_NONBLOCK );
+        if ( fd )
+        {
+            char buf[10];
+            buf[0] = on ? '0' : '1';
+            buf[1] = '\0';
+            res = ( ::write( fd, &buf[0], 2 ) == 0 );
+            ::close( fd );
+        }
     }
     return res;
 }
@@ -556,21 +601,6 @@ ODirection Zaurus::direction() const
     }
     return dir;
 
-}
-
-int Zaurus::displayBrightnessResolution() const
-{
-    if (m_embedix)
-    {
-        int handle = ::open( SHARP_FL_IOCTL_DEVICE, O_RDWR|O_NONBLOCK );
-        if ( handle != -1 ) return ::ioctl( handle, SHARP_FL_IOCTL_GET_STEP, 0 );
-        else return 1;
-    }
-    else
-    {
-        qDebug( "Zaurus::displayBrightnessResolution: ODevice handling for non-embedix kernels not yet implemented" );
-        return 1;
-    }
 }
 
 bool Zaurus::hasHingeSensor() const

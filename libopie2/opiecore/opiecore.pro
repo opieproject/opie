@@ -46,7 +46,7 @@ include( device/device.pro )
 
 INTERFACES  =
 TARGET      = opiecore2
-VERSION     = 1.9.1
+VERSION     = 1.9.2
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 
