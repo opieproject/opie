@@ -1,2 +1,4 @@
 moc_*
 Makefile*
+backuprestorebase.h
+backuprestorebase.cpp
