@@ -139,18 +139,21 @@ QCString Lib::version() {
 }
 
 int Lib::majorVersion() {
-     xine_get_version ( &m_major_version, &m_minor_version, &m_sub_version );
-     return m_major_version;
+     int major, minor, sub;
+     xine_get_version ( &major, &minor, &sub );
+     return major;
 }
 
 int Lib::minorVersion() {
-    xine_get_version ( &m_major_version, &m_minor_version, &m_sub_version );
-     return m_minor_version;
+     int major, minor, sub;
+     xine_get_version ( &major, &minor, &sub );
+     return minor;
 }
 
 int Lib::subVersion() {
-    xine_get_version ( &m_major_version, &m_minor_version, &m_sub_version );
-     return m_sub_version;
+     int major, minor, sub;
+     xine_get_version ( &major, &minor, &sub );
+     return sub;
 }
 
 int Lib::play( const QString& fileName, int startPos, int start_time ) {
@@ -170,7 +173,7 @@ void Lib::pause() {
     xine_set_param( m_stream, XINE_PARAM_SPEED,  XINE_SPEED_PAUSE );
 }
 
-int Lib::speed() {
+int Lib::speed() const {
     return  xine_get_param ( m_stream, XINE_PARAM_SPEED );
 }
 
@@ -178,26 +181,29 @@ void Lib::setSpeed( int speed ) {
     xine_set_param ( m_stream, XINE_PARAM_SPEED, speed );
 }
 
-int Lib::status() {
+int Lib::status() const {
     return xine_get_status( m_stream );
 }
 
-int Lib::currentPosition() {
-    xine_get_pos_length( m_stream, &m_pos, &m_time, &m_length );
-    return m_pos;
+int Lib::currentPosition() const {
+    int pos, time, length;
+    xine_get_pos_length( m_stream, &pos, &time, &length );
+    return pos;
 }
 
-int Lib::currentTime() {
-     xine_get_pos_length( m_stream, &m_pos, &m_time, &m_length );
-    return m_time/1000;
+int Lib::currentTime() const {
+    int pos, time, length;
+    xine_get_pos_length( m_stream, &pos, &time, &length );
+    return time/1000;
 }
 
-int Lib::length() {
-      xine_get_pos_length( m_stream, &m_pos, &m_time, &m_length );
-      return m_length/1000;
+int Lib::length() const {
+      int pos, time, length;
+      xine_get_pos_length( m_stream, &pos, &time, &length );
+      return length/1000;
 }
 
-bool Lib::isSeekable() {
+bool Lib::isSeekable() const {
     return xine_get_stream_info( m_stream, XINE_STREAM_INFO_SEEKABLE );
 }
 
@@ -208,16 +214,16 @@ void Lib::seekTo( int time ) {
 }
 
 
-Frame Lib::currentFrame() {
+Frame Lib::currentFrame() const {
     Frame frame;
     return frame;
 };
 
-QString Lib::metaInfo( int number) {
+QString Lib::metaInfo( int number) const {
     return xine_get_meta_info( m_stream, number );
 }
 
-int Lib::error() {
+int Lib::error() const {
     return xine_get_error( m_stream );
 };
 
@@ -244,11 +250,11 @@ void Lib::setShowVideo( bool video ) {
     ::null_set_show_video( m_videoOutput, video );
 }
 
-bool Lib::isShowingVideo() {
+bool Lib::isShowingVideo() const {
     return ::null_is_showing_video( m_videoOutput );
 }
 
-bool Lib::hasVideo() {
+bool Lib::hasVideo() const {
     return  xine_get_stream_info( m_stream, 18 );
 }
 
@@ -256,7 +262,7 @@ void Lib::showVideoFullScreen( bool fullScreen ) {
     ::null_set_fullscreen( m_videoOutput, fullScreen );
 }
 
-bool Lib::isVideoFullScreen() {
+bool Lib::isVideoFullScreen() const {
     return ::null_is_fullscreen( m_videoOutput );
 }
 
@@ -270,7 +276,7 @@ void Lib::setGamma( int value ) {
   ::null_set_videoGamma( m_videoOutput, value );
 }
 
-bool Lib::isScaling() {
+bool Lib::isScaling() const {
     return ::null_is_scaling( m_videoOutput );
 }
 

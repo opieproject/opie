@@ -61,9 +61,9 @@ namespace XINE {
         Lib(XineVideoWidget* = 0);
         ~Lib();
         QCString version();
-        int majorVersion()/*const*/;
-        int minorVersion()/*const*/;
-        int subVersion()/*const*/;
+        static int majorVersion();
+        static int minorVersion();
+        static int subVersion();
 
 
 		void resize ( const QSize &s );
@@ -71,10 +71,10 @@ namespace XINE {
         int play( const QString& fileName,
                   int startPos = 0,
                   int start_time = 0 );
-        void stop() /*const*/;
-        void pause()/*const*/;
+        void stop();
+        void pause();
 
-        int speed() /*const*/;
+        int speed() const;
 
         /**
          * Set the speed of the stream, if codec supports it
@@ -87,15 +87,15 @@ namespace XINE {
          */
         void setSpeed( int speed = XINE_SPEED_PAUSE );
 
-        int status() /*const*/;
+        int status() const;
 
-        int currentPosition()/*const*/;
+        int currentPosition()const;
         //in seconds
-        int currentTime()/*const*/;
+        int currentTime()const;
 
-        int length() /*const*/;
+        int length() const;
 
-        bool isSeekable()/*const*/;
+        bool isSeekable()const;
 
         /**
          * Whether or not to show video output
@@ -105,7 +105,7 @@ namespace XINE {
         /**
          * is we show video
          */
-        bool isShowingVideo() /*const*/;
+        bool isShowingVideo() const;
 
         /**
          *
@@ -115,7 +115,7 @@ namespace XINE {
         /**
          *
          */
-        bool isVideoFullScreen()/*const*/ ;
+        bool isVideoFullScreen() const;
 
 
         /**
@@ -131,12 +131,12 @@ namespace XINE {
          * XINE_META_INFO_SYSTEMLAYER         8
          * XINE_META_INFO_INPUT_PLUGIN        9
          */
-        QString metaInfo( int number );
+        QString metaInfo( int number ) const;
 
         /**
          *
          */
-        bool isScaling();
+        bool isScaling() const;
 
         /**
          * seek to a position
@@ -147,7 +147,7 @@ namespace XINE {
          *
          * @return is media stream has video
          */
-        bool hasVideo();
+        bool hasVideo() const;
 
         /**
          *
@@ -163,7 +163,7 @@ namespace XINE {
         /**
          * test
          */
-        Frame currentFrame()/*const*/;
+        Frame currentFrame() const;
 
         /**
          * Returns the error code
@@ -172,7 +172,7 @@ namespace XINE {
          * XINE_ERROR_NO_DEMUXER_PLUGIN       2
          * XINE_ERROR_DEMUXER_FAILED          3
          */
-        int error() /*const*/;
+        int error() const;
 
     signals:
 
@@ -183,8 +183,6 @@ namespace XINE {
 
     private:
         int m_bytes_per_pixel;
-        int m_length,  m_pos,  m_time;
-        int m_major_version,  m_minor_version,  m_sub_version;
         bool m_video:1;
         XineVideoWidget *m_wid;
         xine_t *m_xine;
