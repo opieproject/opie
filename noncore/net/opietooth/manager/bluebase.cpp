@@ -292,22 +292,28 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
 
         menu->insertItem( tr("rescan sevices:"),  0);
         menu->insertItem( tr("to group"), groups ,  1);
-        menu->insertItem( tr("bound device"), 2);
+        //      menu->insertItem( tr("bound device"), 2);
         menu->insertItem( tr("delete"),  3);
 
         ret = menu->exec( point  , 0);
 
         switch(ret) {
         case -1:
-
+            break;
+        case 0:
+            addServicesToDevice( (BTDeviceItem*)item );
             break;
         case 1:
+
             break;
-        case 2:
+
+            // NO need to, since hcid does that on the fly
+            // case 2:
             // make connection
-            break;
+            //m_localDevice->connectTo( ((BTDeviceItem*)item)->mac() );
+            //break;
         case 3:
-            // delete childs too
+            // deletes childs too
             delete item;
             break;
         }
@@ -409,8 +415,9 @@ void BlueBase::addServicesToDevice( const QString& device, Services::ValueList s
             list = (*it2).classIdList();
             classIt = list.begin();
             int classId=0;
-            if ( classIt != list.end() )
+            if ( classIt != list.end() ) {
                 classId = classIt.key();
+            }
 
             serviceItem->setPixmap( 0, m_iconLoader->serviceIcon( classId ) );
         }
