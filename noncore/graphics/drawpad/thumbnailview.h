@@ -40,6 +40,7 @@ public:
 
     void updateView();
 
+    void select(Page* page);
     Page* selected() const;
 
 protected:
@@ -62,6 +63,7 @@ public:
 
 public slots:
     void deletePage();
+    void changePage();
 
 private:
     bool inLoop;

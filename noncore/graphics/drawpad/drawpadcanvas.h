@@ -47,6 +47,7 @@ public:
     uint pagePosition();
     uint pageCount();
 
+    void selectPage(Page* page);
     void backupPage();
 
 public slots:

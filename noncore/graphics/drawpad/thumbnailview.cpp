@@ -100,6 +100,9 @@ void PageListView::updateView()
         for (; it.current(); ++it) {
             new PageListViewItem(it.current(), this);
         }
+        
+        setSorting(0, false);
+        select(m_pDrawPadCanvas->currentPage());
     }
 }
 
@@ -108,6 +111,21 @@ void PageListView::resizeEvent(QResizeEvent* e)
     Q_UNUSED(e);
 
     setColumnWidth(1, contentsRect().width() - columnWidth(0) - verticalScrollBar()->width());
+}
+
+void PageListView::select(Page* page)
+{
+    PageListViewItem* item = (PageListViewItem*)firstChild();
+
+    while (item) {
+        if (item->page() == page) {
+            setSelected(item, true);
+            ensureItemVisible(item);
+            break;
+        }
+
+        item = (PageListViewItem*)(item->nextSibling());
+    }
 }
 
 Page* PageListView::selected() const
@@ -124,7 +142,6 @@ Page* PageListView::selected() const
 
     return page;
 }
-
 
 ThumbnailView::ThumbnailView(DrawPadCanvas* drawPadCanvas, QWidget* parent, const char* name)
     : QWidget(parent, name, Qt::WType_Modal | Qt::WType_TopLevel)
@@ -145,6 +162,7 @@ ThumbnailView::ThumbnailView(DrawPadCanvas* drawPadCanvas, QWidget* parent, cons
     QToolButton* deletePageButton = new QToolButton(this);
     deletePageButton->setIconSet(Resource::loadIconSet("trash"));
     deletePageButton->setAutoRaise(true);
+    connect(deletePageButton, SIGNAL(clicked()), this, SLOT(deletePage()));
 
     QToolButton* movePageUpButton = new QToolButton(this);
     movePageUpButton->setIconSet(Resource::loadIconSet("up"));
@@ -155,6 +173,7 @@ ThumbnailView::ThumbnailView(DrawPadCanvas* drawPadCanvas, QWidget* parent, cons
     movePageDownButton->setAutoRaise(true);
 
     m_pPageListView = new PageListView(m_pDrawPadCanvas, this);
+    connect(m_pPageListView, SIGNAL(selectionChanged()), this, SLOT(changePage()));
 
     QVBoxLayout* mainLayout = new QVBoxLayout(this, 4, 4);
     QHBoxLayout* buttonLayout = new QHBoxLayout(0);
@@ -207,5 +226,11 @@ void ThumbnailView::deletePage()
 
     if (messageBox.exec() == QMessageBox::Yes) {
         m_pDrawPadCanvas->deletePage();
+        m_pPageListView->updateView();
     }
+}
+
+void ThumbnailView::changePage()
+{
+    m_pDrawPadCanvas->selectPage(m_pPageListView->selected());
 }

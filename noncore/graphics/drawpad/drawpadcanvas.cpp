@@ -327,6 +327,19 @@ uint DrawPadCanvas::pageCount()
     return m_pages.count();
 }
 
+void DrawPadCanvas::selectPage(Page* page)
+{
+    m_pages.findRef(page);
+    m_pageBackups.clear();
+    m_pageBackups.append(new Page(*(m_pages.current())));
+
+    resizeContents(m_pages.current()->width(), m_pages.current()->height());
+    viewport()->update();
+
+    emit pagesChanged();
+    emit pageBackupsChanged();
+}
+
 void DrawPadCanvas::backupPage()
 {
     QPixmap* currentBackup = m_pageBackups.current();
