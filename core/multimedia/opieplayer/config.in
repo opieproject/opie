@@ -4,7 +4,6 @@ menu "opieplayer"
     boolean "opieplayer"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
-  source core/multimedia/opieplayer/libffmpeg/config.in
   source core/multimedia/opieplayer/libflash/config.in
   source core/multimedia/opieplayer/libmad/config.in
   source core/multimedia/opieplayer/libmpeg3/config.in
