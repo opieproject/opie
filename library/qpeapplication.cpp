@@ -16,9 +16,10 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.2 2002-01-28 23:28:15 kergoth Exp $
+** $Id: qpeapplication.cpp,v 1.3 2002-02-04 22:14:18 kergoth Exp $
 **
 **********************************************************************/
+#define QTOPIA_INTERNAL_LANGLIST
 #include <stdlib.h>
 #include <unistd.h>
 #include <qfile.h>
@@ -137,22 +138,7 @@ class ResourceMimeFactory : public QMimeSourceFactory {
 public:
     ResourceMimeFactory()
     {
-	QStringList path;
-	QString lang = getenv("LANG");
-	if ( !lang.isEmpty() )
-	    path += QPEApplication::qpeDir() + "/help/" + lang + "/html";
-	path += QPEApplication::qpeDir() + "/pics";
-	path += QPEApplication::qpeDir() + "/help/en/html";
-	path += QPEApplication::qpeDir() + "/docs";
-	QString dir = QDir::current().canonicalPath();
-	if ( dir == "/" )
-	    dir += "/docs";
-	else {
-	    path += dir + "/../pics";
-	    dir += "/../docs";
-	    path += dir;
-	}
-	setFilePath( path );
+	setFilePath( Global::helpPath() );
 	setExtensionType("html","text/html;charset=UTF-8");
     }
 
@@ -537,23 +523,12 @@ QPEApplication::QPEApplication( int& argc, char **argv, Type t )
     qwsSetDecoration( new QPEDecoration() );
 
 #ifndef QT_NO_TRANSLATION
-    char *l = getenv( "LANG" );
-    QString lang;
-    if ( l ) {
-	lang = l;
+    QStringList langs = Global::languageList();
+    for (QStringList::ConstIterator it = langs.begin(); it!=langs.end(); ++it) {
+	QString lang = *it;
 
-	/*
-    Config config("qpe");
-    config.setGroup( "Appearance" );
-    lang = config.readEntry( "Language", lang );
-    */
-
-	QTranslator * trans = new QTranslator(this);
-	QString tfn = qpeDir()+"/i18n/"+lang+"/"+d->appName+".qm";
-	if ( trans->load( tfn ))
-	    installTranslator( trans );
-	else
-	    delete trans;
+	QTranslator * trans;
+	QString tfn;
 
 	trans = new QTranslator(this);
 	tfn = qpeDir()+"/i18n/"+lang+"/libqpe.qm";
@@ -562,7 +537,14 @@ QPEApplication::QPEApplication( int& argc, char **argv, Type t )
 	else
 	    delete trans;
 
-    //###language/font hack; should look it up somewhere
+	trans = new QTranslator(this);
+	tfn = qpeDir()+"/i18n/"+lang+"/"+d->appName+".qm";
+	if ( trans->load( tfn ))
+	    installTranslator( trans );
+	else
+	    delete trans;
+
+	//###language/font hack; should look it up somewhere
 	if ( lang == "ja" || lang == "zh_CN" || lang == "zh_TW" || lang == "ko" ) {
 	    QFont fn = FontManager::unicodeFont( FontManager::Proportional );
 	    setFont( fn );
