@@ -422,7 +422,7 @@ founi gratuitement !</translation>
     </message>
     <message>
         <source>Notes...</source>
-        <translation>Notes...</translation>
+        <translation>Note...</translation>
     </message>
     <message>
         <source>General</source>
@@ -486,7 +486,7 @@ founi gratuitement !</translation>
     </message>
     <message>
         <source>Enter Note</source>
-        <translation>Notes</translation>
+        <translation>Note</translation>
     </message>
     <message>
         <source>Edit Name</source>
@@ -1517,7 +1517,7 @@ founi gratuitement !</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Notes</translation>
+        <translation>Note</translation>
     </message>
 </context>
 </TS>
