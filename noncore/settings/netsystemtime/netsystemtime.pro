@@ -1,6 +1,4 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on debug
-#CONFIG		= qt warn_on release
+CONFIG		= qt warn_on release quick-app
 HEADERS		= mainwindow.h          \
 				timetabwidget.h     \
 				formattabwidget.h   \
@@ -17,9 +15,6 @@ SOURCES		= main.cpp                \
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS		+= -lqpe -lopie
-INTERFACES	= 
-DESTDIR		= $(OPIEDIR)/bin
-TARGET		= systemtime
 
 TRANSLATIONS = ../../../i18n/de/systemtime.ts \
 	 ../../../i18n/nl/systemtime.ts \

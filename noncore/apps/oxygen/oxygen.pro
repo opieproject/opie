@@ -1,5 +1,4 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on release quick-app
 HEADERS		= oxygen.h \
             kmolcalc.h \
             kmolelements.h \
@@ -22,8 +21,6 @@ INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS		+= -lqpe -lstdc++
 INTERFACES	= calcdlg.ui 
-TARGET 		= oxygen
-DESTDIR		= $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/oxygen.ts \
 	 ../../../i18n/nl/oxygen.ts \
@@ -43,7 +40,6 @@ TRANSLATIONS = ../../../i18n/de/oxygen.ts \
 	 ../../../i18n/zh_TW/oxygen.ts \
    	 ../../../i18n/it/oxygen.ts \
    	 ../../../i18n/da/oxygen.ts
-
 
 
 include ( $(OPIEDIR)/include.pro )

@@ -25,15 +25,15 @@
 #include "psewidget.h"
 
 
-Oxygen::Oxygen() : QMainWindow()
+Oxygen::Oxygen( QWidget *parent, const char *name,  WFlags f) : QMainWindow( parent, name, f )
 {
     loadNames();
     calcDlgUI *CalcDlgUI = new calcDlgUI();
     PSEWidget *pse = new PSEWidget(names);
     dataWidgetUI *DataWidgetUI = new dataWidgetUI(names);
-    
+
     setCaption( tr( "Oxygen" ) );
-    
+
     QTabWidget *tabw = new QTabWidget( this , "qtab" );
     tabw->addTab( pse, tr( "PSE" ));
     tabw->addTab( DataWidgetUI , tr( "Data" ) );

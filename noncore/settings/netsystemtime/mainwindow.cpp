@@ -50,7 +50,7 @@
 #include <qstring.h>
 #include <qtimer.h>
 
-MainWindow::MainWindow()
+MainWindow::MainWindow( QWidget *parent , const char *name,  bool modal = FALSE, WFlags f )
 	: QDialog( 0x0, 0x0, TRUE, 0 )
 {
 	setCaption( tr( "SystemTime" ) );
@@ -66,7 +66,7 @@ MainWindow::MainWindow()
 	ntpProcess = 0x0;
 	ntpTab = 0x0;
 
-	// Add tab widgets 
+	// Add tab widgets
 	mainWidget->addTab( timeTab = new TimeTabWidget( mainWidget ), "netsystemtime/DateTime", tr( "Time" ) );
 	mainWidget->addTab( formatTab = new FormatTabWidget( mainWidget ), "netsystemtime/formattab", tr( "Format" ) );
 	mainWidget->addTab( settingsTab = new SettingsTabWidget( mainWidget ), "SettingsIcon", tr( "Settings" ) );
@@ -165,7 +165,7 @@ void MainWindow::runNTP()
 	if ( !ntpDelayElapsed() && ntpInteractive )
 	{
 		QString msg = tr( "You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.<br>Continue?" ).arg( QString::number( ntpDelay ) ).arg( QString::number( _lookupDiff / 60 ) );
-		
+
 		switch (
 			QMessageBox::warning( this, tr( "Continue?" ), msg, QMessageBox::Yes, QMessageBox::No )
 			)
@@ -198,8 +198,8 @@ void MainWindow::runNTP()
 
 	else
 		ntpProcess->clearArguments();
-	
-	*ntpProcess << "ntpdate" << srv;
+
+	*ntpProcess << "ntpdate"  << srv;
 	bool ret = ntpProcess->start( OProcess::NotifyOnExit, OProcess::AllOutput );
 	if ( !ret )
 	{
@@ -297,7 +297,7 @@ void MainWindow::slotNtpFinished( OProcess *p )
 {
 	QString output;
 	QDateTime dt = QDateTime::currentDateTime();
-	
+
 	//  Verify run was successful
 	if ( p->exitStatus() != 0 || !p->normalExit() )
 	{
@@ -338,7 +338,7 @@ void MainWindow::slotNtpFinished( OProcess *p )
 		return;
 	int secsSinceLast = time - lastLookup;
 	output = tr( "%1 seconds").arg(QString::number( timeShift ));
-	
+
 	// Display information on time server tab
 	if ( ntpTabEnabled )
 	{

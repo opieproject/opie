@@ -48,8 +48,9 @@ class MainWindow : public QDialog
 	Q_OBJECT
 
 public:
-	MainWindow();
+	MainWindow( QWidget *parent = 0, const char *name = 0,  bool modal = FALSE,WFlags f = 0);
 	~MainWindow();
+	static QString appName() { return QString::fromLatin1("systemtime"); }
 
 protected:
 	void accept();

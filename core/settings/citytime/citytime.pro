@@ -1,10 +1,6 @@
-CONFIG += qt warn_on release
-TEMPLATE = app
-DESTDIR         = $(OPIEDIR)/bin
-#INTERFACES = citytimebase.ui
+CONFIG += qt warn_on release quick-app
 HEADERS = citytime.h citytimebase.h zonemap.h sun.h stylusnormalizer.h
 SOURCES = citytime.cpp citytimebase.cpp zonemap.cpp main.cpp sun.c stylusnormalizer.cpp
-TARGET = citytime
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe
