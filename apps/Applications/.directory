@@ -1,5 +1,5 @@
 [Desktop Entry]
-File=/opt/opie//apps/Applications/.directory
+File=/opt/opie/apps/Applications/.directory
 Icon=AppsIcon
 Type=application/octet-stream
 Name=Applications
@@ -13,6 +13,7 @@ Name[eo]=Aplikaĵoj
 Name[es]=Aplicaciones
 Name[et]=Rakendused
 Name[fi]=Sovellukset
+Name[fr]=Applications
 Name[gl]=Aplicacións
 Name[he]=םימושיי
 Name[hr]=Programi

@@ -596,9 +596,9 @@ Cliquez et garder la pression pour plus d&apos;options.</translation>
     <message>
         <source>Recipients must be separated by ;
 and be valid emailaddresses</source>
-        <translation>Les destinataires doivent être
-séparés par ; et être des
-adresses E-Mails valides</translation>
+        <translation>Les destinataires doivent être séparés
+par des points virgule et être des
+adresses e-mails valides</translation>
     </message>
     <message>
         <source>Incorrect carbon copy separator</source>
@@ -607,9 +607,9 @@ adresses E-Mails valides</translation>
     <message>
         <source>CC Recipients must be separated by ;
 and be valid emailaddresses</source>
-        <translation>Les destinataires en copie doivent
-être séparés par ; et être des
-adresses E-Mails valides</translation>
+        <translation>Les destinataires en copie doivent être
+séparés par des points virgules et être
+des adresses e-mails valides</translation>
     </message>
     <message>
         <source>Re: </source>

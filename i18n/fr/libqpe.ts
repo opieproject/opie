@@ -505,7 +505,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Email Addresses: </source>
-        <translation>Adresses E-Mails : </translation>
+        <translation>Adresses e-mails : </translation>
     </message>
     <message>
         <source>Home Phone: </source>
@@ -637,7 +637,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>E-mail par Défaut</translation>
+        <translation>E-mail par défaut</translation>
     </message>
     <message>
         <source>Emails</source>

@@ -5,3 +5,5 @@ Icon=opierdesktop/appicon
 Type=Application
 Name=o-rdesktop
 Comment=Remote Desktop Protocol Client
+Name[fr]=Opie rdesktop
+Comment[fr]=Client RDP (Remote Desktop Protocol)
