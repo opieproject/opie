@@ -589,7 +589,8 @@ bool ExcelBook::ParseBook(char *file)
 {
     dateformat=QString("");
     DetectEndian();
-    OpenFile(file);
+    if ( !OpenFile( file ) )
+	    return false;
     SeekBOF();
     ParseSheets();
     GetSheets();

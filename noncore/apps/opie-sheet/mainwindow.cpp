@@ -877,7 +877,10 @@ void MainWindow::slotFileSaveAs()
 void MainWindow::slotImportExcel(const DocLnk &lnkDoc)
 {
     ExcelBook file1;
-    file1.ParseBook((char *)lnkDoc.file().ascii());
+    if ( !file1.ParseBook((char *)lnkDoc.file().ascii()) ){
+	    QMessageBox::critical(this, tr("Error"), tr("<td>Unable to open or parse file!</td>"));
+	    return;
+    }
     int NumOfSheets=file1.Sheets.count();
     printf("OpieSheet::NumberOfSheets:%d\r\n",NumOfSheets);
     if (documentModified && saveCurrentFile()==QMessageBox::Cancel) return;
@@ -893,7 +896,7 @@ void MainWindow::slotImportExcel(const DocLnk &lnkDoc)
     for(w1=1;w1<=NumOfSheets;w1++)
     {
         sh1=file1.Sheets[w1-1];
-        printf("OpieSheet:newSheet:%x,r=%d,c=%d\r\n",sh1,sh1->rows,sh1->cols);
+        // printf("OpieSheet:newSheet:%x,r=%d,c=%d\r\n",sh1, sh1->rows,sh1->cols);
         newSheet=new typeSheet;
         newSheet->data.setAutoDelete(TRUE);
         newSheet->name=sh1->name;
