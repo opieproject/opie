@@ -58,10 +58,26 @@ void MainWindow::initUI() {
     m_console = new QPopupMenu( this );
     m_scripts = new QPopupMenu( this );
     m_sessionsPop= new QPopupMenu( this );
-    m_settings = new QPopupMenu( this );
+    //m_settings = new QPopupMenu( this );
 
     /* add a toolbar for icons */
     m_icons = new QToolBar(this);
+
+
+
+
+    /*
+     * the settings action
+     */
+    m_setProfiles = new QAction(tr("Configure Profiles"),
+                             Resource::loadPixmap( "SettingsIcon" ),
+                             QString::null, 0, this, 0);
+    //  m_setProfiles->addTo( m_settings );
+    m_setProfiles->addTo( m_icons );
+    m_setProfiles->addTo( m_console );
+    connect( m_setProfiles, SIGNAL(activated() ),
+             this, SLOT(slotConfigure() ) );
+
 
     /*
      * new Action for new sessions
@@ -126,16 +142,6 @@ void MainWindow::initUI() {
     connect( m_closewindow, SIGNAL(activated() ),
             this, SLOT(slotClose() ) );
 
-    /*
-     * the settings action
-     */
-    m_setProfiles = new QAction(tr("Configure Profiles"),
-                             Resource::loadPixmap( "SettingsIcon" ),
-                             QString::null, 0, this, 0);
-    m_setProfiles->addTo( m_settings );
-    m_setProfiles->addTo( m_icons );
-    connect( m_setProfiles, SIGNAL(activated() ),
-             this, SLOT(slotConfigure() ) );
 
     /*
      * script actions
@@ -177,7 +183,7 @@ void MainWindow::initUI() {
     m_bar->insertItem( tr("Scripts"), m_scripts );
 
     /* the settings menu */
-    m_bar->insertItem( tr("Settings"), m_settings );
+    // m_bar->insertItem( tr("Settings"), m_settings );
 
     /* and the keyboard */
     m_keyBar = new QToolBar(this);
