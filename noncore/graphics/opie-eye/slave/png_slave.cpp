@@ -66,7 +66,8 @@ static const char* interlaceModes[] = {
 static void read_comment( const QString& inf,
                           bool readComments,  QString& str ) {
     QFile f(inf);
-    f.open(IO_ReadOnly);
+    if (!f.exists()) return;
+    if (!f.open(IO_ReadOnly)) return;
 
     if (f.size() < 26) return;
     // the technical group will be read from the first 26 bytes. If the file
