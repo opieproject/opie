@@ -12,6 +12,11 @@ else
 	echo CONFIG -= debug >> $@
 	echo CONFIG += release >> $@
 endif
+ifeq ($(filter 3.%,$(QTE_VERSION)),) # not qt3
+	echo CONFIG -= qt3 >> $@
+else
+	echo CONFIG += qt3 >> $@
+endif
 
 $(TOPDIR)/.depends : $(shell if [ -e $(TOPDIR)/config.in ]\; then echo $(TOPDIR)/config.in\; fi\;) $(TOPDIR)/.config $(TOPDIR)/packages
 	@echo Generating dependency information...
