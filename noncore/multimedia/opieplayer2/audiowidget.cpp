@@ -15,9 +15,46 @@
 
 extern MediaPlayerState *mediaPlayerState;
 
-
 static const int xo = -2; // movable x offset
 static const int yo = 22; // movable y offset
+
+
+Ticker::Ticker( QWidget* parent=0 ) : QFrame( parent ) {
+        setFrameStyle( WinPanel | Sunken );
+        setText( "No Song" );
+}
+
+Ticker::~Ticker() {
+}
+
+void Ticker::setText( const QString& text ) {
+    pos = 0; // reset it everytime the text is changed
+    scrollText = text;
+    pixelLen = fontMetrics().width( scrollText );
+    killTimers();
+    if ( pixelLen > width() ) {
+        startTimer( 50 );
+    }
+    update();
+}
+
+
+void Ticker::timerEvent( QTimerEvent * ) {
+    pos = ( pos + 1 > pixelLen ) ? 0 : pos + 1;
+    repaint( FALSE );
+}
+
+void Ticker::drawContents( QPainter *p ) {
+    QPixmap pm( width(), height() );
+    pm.fill( colorGroup().base() );
+    QPainter pmp( &pm );
+    for ( int i = 0; i - pos < width() && (i < 1 || pixelLen > width()); i += pixelLen ) {
+        pmp.drawText( i - pos, 0, INT_MAX, height(), AlignVCenter, scrollText );
+    }
+    p->drawPixmap( 0, 0, pm );
+}
+
+
 
 
 struct MediaButton {
@@ -25,6 +62,8 @@ struct MediaButton {
     int  color;
     bool isToggle, isBig, isHeld, isDown;
 };
+
+
 
 
 // Layout information for the audioButtons (and if it is a toggle button or not)
@@ -39,7 +78,6 @@ MediaButton audioButtons[] = {
     {    5*30+xo,    1*30+yo, 0,  TRUE, FALSE, FALSE, FALSE }, // repeat/loop
     {    1*30+xo,    1*30+yo, 0, FALSE, FALSE, FALSE, FALSE }  // playlist
 };
-
 
 static const int numButtons = (sizeof(audioButtons)/sizeof(MediaButton));
 
@@ -145,7 +183,6 @@ void AudioWidget::setView( char view ) {
 
     if ( view == 'a' ) {
         startTimer( 150 );
-        // show();
         showMaximized();
     } else {
         killTimers();

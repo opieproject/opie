@@ -30,45 +30,15 @@ enum AudioButtons {
 
 class Ticker : public QFrame {
     Q_OBJECT
+
 public:
-    Ticker( QWidget* parent=0 ) : QFrame( parent ) {
-        setFrameStyle( WinPanel | Sunken );
-        setText( "No Song" );
-    }
-    ~Ticker() { }
-    void setText( const QString& text ) {
-        pos = 0; // reset it everytime the text is changed
-        scrollText = text;
-        pixelLen = fontMetrics().width( scrollText );
-        killTimers();
-        if ( pixelLen > width() )
-            startTimer( 50 );
-        update();
-    }
+    Ticker( QWidget* parent=0 );
+    ~Ticker();
+    void setText( const QString& text ) ;
+
 protected:
-    void timerEvent( QTimerEvent * ) {
-  pos = ( pos + 1 > pixelLen ) ? 0 : pos + 1;
-#ifndef USE_DBLBUF
-  scroll( -1, 0, contentsRect() );
-#else
-  repaint( FALSE );
-#endif
-    }
-    void drawContents( QPainter *p ) {
-#ifndef USE_DBLBUF
-  for ( int i = 0; i - pos < width() && (i < 1 || pixelLen > width()); i += pixelLen )
-      p->drawText( i - pos, 0, INT_MAX, height(), AlignVCenter, scrollText );
-#else
-  // Double buffering code.
-  // Looks like qvfb makes it look like it flickers but I don't think it really is
-  QPixmap pm( width(), height() );
-  pm.fill( colorGroup().base() );
-  QPainter pmp( &pm );
-  for ( int i = 0; i - pos < width() && (i < 1 || pixelLen > width()); i += pixelLen )
-      pmp.drawText( i - pos, 0, INT_MAX, height(), AlignVCenter, scrollText );
-  p->drawPixmap( 0, 0, pm );
-#endif
-    }
+    void timerEvent( QTimerEvent * );
+    void drawContents( QPainter *p );
 private:
     QString scrollText;
     int pos, pixelLen;

@@ -1,11 +1,4 @@
-/****************************************************************************
-** Form interface generated from reading ui file 'inputDialog.ui'
-**
-** Created: Sat Mar 2 07:54:46 2002
-**      by:  The User Interface Compiler (uic)
-**
-** WARNING! All changes made in this file will be lost!
-****************************************************************************/
+
 #ifndef INPUTDIALOG_H
 #define INPUTDIALOG_H
 
@@ -14,8 +7,7 @@
 
 class QLineEdit;
 
-class InputDialog : public QDialog
-{ 
+class InputDialog : public QDialog {
     Q_OBJECT
 
 public:

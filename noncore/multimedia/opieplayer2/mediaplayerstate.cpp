@@ -12,20 +12,12 @@
 
 
 
-#ifdef QT_NO_COMPONENT
-// Plugins which are compiled in when no plugin architecture available
-#include "libmad/libmadpluginimpl.h"
-#include "libmpeg3/libmpeg3pluginimpl.h"
-#include "wavplugin/wavpluginimpl.h"
-#endif
-
-
 //#define MediaPlayerDebug(x) qDebug x
 #define MediaPlayerDebug(x)
 
 
 MediaPlayerState::MediaPlayerState( QObject *parent, const char *name )
-        : QObject( parent, name ), decoder( NULL ), libmpeg3decoder( NULL ) {
+        : QObject( parent, name ), decoder( NULL ) {
     Config cfg( "OpiePlayer" );
     readConfig( cfg );
 }

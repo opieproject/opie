@@ -30,8 +30,7 @@ public:
 
     MediaPlayerDecoder *newDecoder( const QString& file );
     MediaPlayerDecoder *curDecoder();
-    MediaPlayerDecoder *libMpeg3Decoder(); // ### Yucky hack needed to use libmpeg3plugin to get the
-             // number of audio samples if we are using the libmad plugin
+
 public slots:
     void setFullscreen( bool b ) { if ( isFullscreen == b ) return; isFullscreen = b; emit fullscreenToggled(b); }
     void setScaled( bool b )     { if ( isScaled     == b ) return; isScaled = b;     emit scaledToggled(b); }
@@ -88,8 +87,6 @@ private:
     char curView;
 
     MediaPlayerDecoder *decoder;
-    MediaPlayerDecoder *libmpeg3decoder;
-//    MediaPlayerDecoder *libwavdecoder;
 
     void readConfig( Config& cfg );
     void writeConfig( Config& cfg ) const;

@@ -1,11 +1,3 @@
-/****************************************************************************
-** Form implementation generated from reading ui file 'inputDialog.ui'
-**
-** Created: Sat Mar 2 07:55:03 2002
-**      by:  The User Interface Compiler (uic)
-**
-** WARNING! All changes made in this file will be lost!
-****************************************************************************/
 #include "inputDialog.h"
 
 #include <qpe/resource.h>
