@@ -705,7 +705,7 @@ void MainWindow::slotComplete( const OTodo& todo ) {
      * possible recurrance of this item...
      * the spinned off one will loose the
      */
-    if ( to.recurrence().doesRecur() && to.isCompleted() ) {
+    if ( to.hasRecurrence() && to.isCompleted() ) {
         OTodo to2( to );
 
         /* the spinned off one won't recur anymore */
