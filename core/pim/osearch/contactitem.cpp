@@ -37,14 +37,14 @@ QString ContactItem::toRichText()
 
 void ContactItem::editItem()
 {
-	QCopEnvelope e("QPE/Application/addressbook", "editEvent(int)");
+	QCopEnvelope e("QPE/Application/addressbook", "edit(int)");
 //	QCopEnvelope e("QPE/Addressbook", "editEvent(int)");
 	e << _contact->uid();
 }
 
 void ContactItem::showItem()
 {
-	QCopEnvelope e("QPE/Application/addressbook", "editEvent(int)");
+	QCopEnvelope e("QPE/Application/addressbook", "show(int)");
 //	QCopEnvelope e("QPE/Addressbook", "viewDefault(QDate)");
 	e << _contact->uid();
 }
