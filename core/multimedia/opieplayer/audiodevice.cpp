@@ -193,7 +193,7 @@ void AudioDevice::setVolume( unsigned int leftVolume, unsigned int rightVolume, 
 
 AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
     qDebug("creating new audio device");
-//     QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE; 
+     QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE; 
     d = new AudioDevicePrivate;
     d->frequency = f;
     d->channels = chs;
@@ -245,7 +245,7 @@ AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
         if(ioctl( d->handle, SNDCTL_DSP_CHANNELS, &d->channels )==-1)
             perror("ioctl(\"SNDCTL_DSP_CHANNELS\")");
     }
-//   QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << FALSE; 
+   QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << FALSE; 
 
     d->bufferSize = sound_fragment_bytes;
     d->unwrittenBuffer = new char[d->bufferSize];
@@ -264,7 +264,7 @@ AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
 
 AudioDevice::~AudioDevice() {
     qDebug("destryo audiodevice");
-    //    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE;
+    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE;
     
 // #ifdef Q_OS_WIN32
 //     waveOutClose( (HWAVEOUT)d->handle );
@@ -275,7 +275,7 @@ AudioDevice::~AudioDevice() {
     delete d->unwrittenBuffer;
     delete d;
 //#endif
-//    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << FALSE;
+   QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << FALSE;
     
 }
 
