@@ -1,4 +1,4 @@
-
+#include <qtimer.h>
 #include "xinecontrol.h"
 #include "mediaplayerstate.h"
 
@@ -12,7 +12,7 @@ XineControl::XineControl( QObject *parent, const char *name )
     connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( pause(bool) ) );
     connect( this, SIGNAL( positionChanged( int position ) ),  mediaPlayerState, SLOT( updatePosition( long p ) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( stop( bool ) ) );
-
+    connect( mediaPlayerState, SIGNAL( fullscreenToggled( bool ) ), this, SLOT( setFullscreen( bool ) ) );
 }
 
 XineControl::~XineControl() {
@@ -30,11 +30,12 @@ void XineControl::play( const QString& fileName ) {
         return;
     }
 
-    // which gui (video / audio)
-    mediaPlayerState->setView(  whichGui  );
-
     // determine if slider is shown
     mediaPlayerState->setIsStreaming( mdetect.isStreaming( fileName ) );
+
+    // which gui (video / audio)
+    mediaPlayerState->setView( whichGui );
+
 }
 
 void XineControl::stop( bool isSet ) {
@@ -67,4 +68,9 @@ int XineControl::position() {
     mediaPlayerState->setPosition( m_position  );
     return m_position;
     emit positionChanged( m_position );
+    QTimer::singleShot( 1000, this, SLOT( position ) );
+}
+
+void XineControl::setFullscreen( bool isSet ) {
+    libXine-> showVideoFullScreen( isSet);
 }

@@ -16,7 +16,7 @@ public slots:
     void play( const QString& fileName );
     void stop( bool );
     void pause( bool );
-
+    void setFullscreen( bool );
     int currentTime();
 
     // get length of media file and set it
