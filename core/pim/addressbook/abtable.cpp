@@ -28,6 +28,7 @@
 #include <qasciidict.h>
 #include <qdatetime.h>
 #include <qfile.h>
+#include <qregexp.h>
 
 #include "abtable.h"
 
