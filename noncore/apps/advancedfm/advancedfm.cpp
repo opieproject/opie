@@ -138,6 +138,7 @@ AdvancedFm::AdvancedFm( )
   fileMenu->insertItem( tr( "Run Command" ), this, SLOT( runCommandStd() ));
   fileMenu->insertItem( tr( "Run Command with Output" ), this, SLOT( runCommand() ));
   fileMenu->insertSeparator();
+  fileMenu->insertItem( tr( "Add To Documents" ), this, SLOT( addToDocs() ));
   fileMenu->insertItem( tr( "Delete" ), this, SLOT( del() ));
   fileMenu->setCheckable(TRUE);
 
@@ -294,7 +295,7 @@ void AdvancedFm::cleanUp()
     file.remove();
 }
 
-void AdvancedFm::tabChanged(QWidget *w)
+void AdvancedFm::tabChanged(QWidget *)
 {
   if (TabWidget->currentPageIndex() == 0) {
     currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
@@ -332,11 +333,11 @@ void AdvancedFm::populateLocalView()
     if (fi->isSymLink() ) {
       QString symLink=fi->readLink();
       QFileInfo sym( symLink);
-      fileS.sprintf( "%10li", sym.size() );
+      fileS.sprintf( "%10i", sym.size() );
       fileL.sprintf( "%s ->  %s",  fi->fileName().data(),sym.absFilePath().data() );
       fileDate = sym.lastModified().toString();
     } else {
-      fileS.sprintf( "%10li", fi->size() );
+      fileS.sprintf( "%10i", fi->size() );
       fileL.sprintf( "%s",fi->fileName().data() );
       fileDate= fi->lastModified().toString();
       if( QDir(QDir::cleanDirPath( currentDir.canonicalPath()+"/"+fileL)).exists() ) {
@@ -431,12 +432,12 @@ void AdvancedFm::populateRemoteView()
       QString symLink=fi->readLink();
       //         qDebug("Symlink detected "+symLink);
       QFileInfo sym( symLink);
-      fileS.sprintf( "%10li", sym.size() );
+      fileS.sprintf( "%10i", sym.size() );
       fileL.sprintf( "%s ->  %s",  fi->fileName().data(),sym.absFilePath().data() );
       fileDate = sym.lastModified().toString();
     } else {
       //        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
-      fileS.sprintf( "%10li", fi->size() );
+      fileS.sprintf( "%10i", fi->size() );
       fileL.sprintf( "%s",fi->fileName().data() );
       fileDate= fi->lastModified().toString();
       if( QDir(QDir::cleanDirPath( currentRemoteDir.canonicalPath()+"/"+fileL)).exists() ) {
@@ -629,7 +630,7 @@ void AdvancedFm::showRemoteHidden()
   populateRemoteView();
 }
 
-void AdvancedFm::localListPressed( int mouse, QListViewItem *item, const QPoint &point, int i)
+void AdvancedFm::localListPressed( int mouse, QListViewItem *, const QPoint& , int )
 {
   qDebug("list pressed");
   switch (mouse) {
@@ -642,7 +643,7 @@ void AdvancedFm::localListPressed( int mouse, QListViewItem *item, const QPoint 
   };
 }
 
-void AdvancedFm::remoteListPressed( int mouse, QListViewItem *item, const QPoint &point, int i)
+void AdvancedFm::remoteListPressed( int mouse, QListViewItem*, const QPoint&, int )
 {
 
   switch (mouse) {
@@ -1299,7 +1300,7 @@ void AdvancedFm::copySameDir() {
                                        destFile+tr(" already exists\nDo you really want to delete it?"),
                                        tr("Yes"),tr("No"),0,0,1) ) {
           case 0:
-            qDebug("");
+
             f.remove();
             break;
           case 1:
@@ -1800,7 +1801,7 @@ void AdvancedFm::doBeam() {
 
 }
 
-void AdvancedFm::fileBeamFinished( Ir *ir) {
+void AdvancedFm::fileBeamFinished( Ir *) {
   QMessageBox::message( tr("Advancedfm Beam out"), tr("Ir sent.") ,tr("Ok") );
 
 }
@@ -1856,11 +1857,12 @@ void AdvancedFm::showFileMenu() {
   m->insertItem( tr( "Copy Same Dir" ), this, SLOT( copySameDir() ));
   m->insertItem( tr( "Move" ), this, SLOT( move() ));
   m->insertSeparator();
+  m->insertItem( tr( "Add To Documents" ), this, SLOT( addToDocs() ));
 
-  if(isLocalView)
-    m->insertItem( tr( "Rescan" ), this, SLOT( populateLocalView() ));
-  else
-    m->insertItem( tr( "Rescan" ), this, SLOT( populateRemoteView() ));
+//   if(isLocalView)
+//     m->insertItem( tr( "Rescan" ), this, SLOT( populateLocalView() ));
+//   else
+//     m->insertItem( tr( "Rescan" ), this, SLOT( populateRemoteView() ));
 
   m->insertItem( tr( "Run Command" ), this, SLOT( runCommand() ));
   m->insertItem( tr( "File Info" ), this, SLOT( fileStatus() ));
@@ -1881,6 +1883,7 @@ void AdvancedFm::showFileMenu() {
     m->setItemChecked(m->idAt(0),TRUE);
   else
     m->setItemChecked(m->idAt(0),FALSE);
+
   if(Ir::supported())
     m->insertItem( tr( "Beam File" ), this, SLOT( doBeam() ));
   m->setFocus();
@@ -1915,3 +1918,31 @@ QString AdvancedFm::checkDiskSpace(const QString &path) {
   return "";
 }
 
+void AdvancedFm::addToDocs() {
+    QStringList strListPaths = getPath();
+    if( strListPaths.count() > 0) {
+        QString curFile;
+        if (TabWidget->currentPageIndex() == 0) {
+            for ( QStringList::Iterator it = strListPaths.begin(); it != strListPaths.end(); ++it ) {
+                curFile = currentDir.canonicalPath()+"/"+(*it);
+                qDebug(curFile);
+                DocLnk f;
+//                curFile.replace(QRegExp("\\..*"),"");
+                f.setName((*it));
+                f.setFile( curFile);
+                f.writeLink();
+            }
+        } else {
+            for ( QStringList::Iterator it = strListPaths.begin(); it != strListPaths.end(); ++it ) {
+                curFile =  currentRemoteDir.canonicalPath()+"/"+(*it);
+                qDebug(curFile);
+
+                DocLnk f;
+//                curFile.replace(QRegExp("\\..*"),"");
+                f.setName((*it));
+                f.setFile( curFile);
+                f.writeLink();
+            }
+        }
+    }
+}

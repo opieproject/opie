@@ -67,6 +67,7 @@ public:
     QStringList fileSystemTypeList, fsList;
     int currentServerConfig;
 protected slots:
+    void addToDocs();
     void doLocalCd();
     void doRemoteCd();
 //    void copy();
