@@ -117,15 +117,15 @@ z serwera:</translation>
     <name>NTPTabWidget</name>
     <message>
         <source>Start time</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas poczatkowy</translation>
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
+        <translation>brak</translation>
     </message>
     <message>
         <source>Time shift</source>
-        <translation type="unfinished"></translation>
+        <translation>Przesuniecie czasu</translation>
     </message>
     <message>
         <source>New time</source>
@@ -140,11 +140,11 @@ z serwera:</translation>
     <name>PredictTabWidget</name>
     <message>
         <source>Predicted time drift</source>
-        <translation type="unfinished"></translation>
+        <translation>Przewidziany upływ czasu</translation>
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
+        <translation>brak</translation>
     </message>
     <message>
         <source>Estimated shift</source>
@@ -156,15 +156,15 @@ z serwera:</translation>
     </message>
     <message>
         <source>Shift [s/h]</source>
-        <translation type="unfinished"></translation>
+        <translation>Pszesuniecie [s/g]</translation>
     </message>
     <message>
         <source>Last [h]</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatnia [g]</translation>
     </message>
     <message>
         <source>Offset [s]</source>
-        <translation type="unfinished"></translation>
+        <translation>Ofset [s]</translation>
     </message>
     <message>
         <source>Predict time</source>
@@ -176,7 +176,7 @@ z serwera:</translation>
     </message>
     <message>
         <source> s/h</source>
-        <translation type="unfinished"></translation>
+        <translation>s/g</translation>
     </message>
     <message>
         <source> seconds</source>
@@ -210,7 +210,7 @@ z serwera:</translation>
     <name>TimeTabWidget</name>
     <message>
         <source>Hour</source>
-        <translation>GodzinaGodzin</translation>
+        <translation>Godzina</translation>
     </message>
     <message>
         <source>Minute</source>

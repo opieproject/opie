@@ -226,7 +226,10 @@ Czy na pewno chcesz go usunac?</translation>
 is copyright 2002-2003 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaawansowany Menedzer Plikow
+prawa autorskie 2002-2003
+L.J.Potter&lt;llornkcor@handhelds.org&gt;
+na licencji GPL</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
