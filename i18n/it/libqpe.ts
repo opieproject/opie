@@ -748,31 +748,31 @@ riprovare.</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished">Lun</translation>
+        <translation>Lun</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished">Mar</translation>
+        <translation>Mar</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished">Mer</translation>
+        <translation>Mer</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished">Gio</translation>
+        <translation>Gio</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished">Ven</translation>
+        <translation>Ven</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished">Sab</translation>
+        <translation>Sab</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished">Dom</translation>
+        <translation>Dom</translation>
     </message>
 </context>
 <context>
