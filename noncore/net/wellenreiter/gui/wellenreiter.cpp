@@ -198,6 +198,12 @@ void Wellenreiter::startStopClicked()
 
         iface->setMonitorMode( true );
 
+        if ( !iface->monitorMode() )
+        {
+            QMessageBox::warning( this, "Wellenreiter II", "Can't set device into monitor mode." );
+            return;
+        }
+
         // open pcap and start sniffing
         pcap->open( interface );
 
