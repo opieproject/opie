@@ -104,8 +104,8 @@ void AdvancedFm::init() {
 
   viewMenu->insertItem( tr( "Switch to Local" ), this, SLOT( switchToLocalTab() ));
   viewMenu->insertItem( tr( "Switch to Remote" ), this, SLOT( switchToRemoteTab() ));
-  viewMenu->insertSeparator();
-  viewMenu->insertItem( tr( "About" ), this, SLOT( doAbout() ));
+//   viewMenu->insertSeparator();
+//   viewMenu->insertItem( tr( "About" ), this, SLOT( doAbout() ));
   viewMenu->setCheckable(TRUE);
 
   s_addBookmark = tr("Bookmark Directory");
@@ -234,19 +234,19 @@ void AdvancedFm::initConnections()
 {
 
   connect( qApp,SIGNAL( aboutToQuit()),
-					 this, SLOT( cleanUp()) );
+           this, SLOT( cleanUp()) );
   connect( qpeDirButton ,SIGNAL(released()),
-					 this,SLOT( QPEButtonPushed()) );
+           this,SLOT( QPEButtonPushed()) );
   connect( cfButton ,SIGNAL(released()),
-					 this,SLOT( CFButtonPushed()) );
+           this,SLOT( CFButtonPushed()) );
   connect( sdButton ,SIGNAL(released()),
-					 this,SLOT( SDButtonPushed()) );
+           this,SLOT( SDButtonPushed()) );
   connect( cdUpButton ,SIGNAL(released()),
-					 this,SLOT( upDir()) );
+           this,SLOT( upDir()) );
   connect( docButton,SIGNAL(released()),
-					 this,SLOT( docButtonPushed()) );
+           this,SLOT( docButtonPushed()) );
   connect( homeButton,SIGNAL(released()),
-					 this,SLOT( homeButtonPushed()) );
+           this,SLOT( homeButtonPushed()) );
   connect( currentPathCombo, SIGNAL( activated( const QString & ) ),
            this, SLOT(  currentPathComboActivated( const QString & ) ) );
 
