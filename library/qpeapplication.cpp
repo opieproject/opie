@@ -167,7 +167,7 @@ public:
         QCString message;
         QByteArray data;
     };
-    QWidget* qpe_main_widget;
+    QGuardedPtr<QWidget> qpe_main_widget;
         QGuardedPtr<QWidget> lastraised;
     QQueue<QCopRec> qcopq;
         QString styleName;
@@ -319,6 +319,9 @@ public:
 
     static void store_widget_rect(QWidget *w, QString &app)
     {
+    if( !w )
+	return;
+
     // 350 is the trigger in qwsdefaultdecoration for providing a resize button
     if ( qApp->desktop()->width() <= 350 )
         return;
