@@ -39,9 +39,8 @@
 
 
 RotateApplet::RotateApplet ( )
-	: QObject ( 0, "RotateApplet" ), ref ( 0 )
+	: QObject ( 0, "RotateApplet" ), ref ( 0 ), m_flipped( false )
 {
-    m_flipped = false;
 }
 
 RotateApplet::~RotateApplet ( )
@@ -90,7 +89,7 @@ QPopupMenu *RotateApplet::popup ( QWidget * ) const
 
 void RotateApplet::activated ( )
 {
-    int currentRotation = QPEApplication::defaultRotation();
+    int defaultRotation = QPEApplication::defaultRotation();
 
     int newRotation;
 
@@ -98,28 +97,25 @@ void RotateApplet::activated ( )
     cfg.setGroup( "Appearance" );
 
     // 0 -> 90° clockwise, 1 -> 90° counterclockwise
-    bool rotDirection = cfg.readBoolEntry( "rotatedir" );
+    bool rotDirection = cfg.readBoolEntry( "rotatedir", 0 );
 
     // hide inputs methods before rotation
     QCopEnvelope en( "QPE/TaskBar", "hideInputMethod()" );
 
     if ( m_flipped )  {
-        if ( rotDirection  )  {
-            newRotation = ( currentRotation + 270 ) % 360;
-        } else {
-            newRotation = ( currentRotation + 90 ) % 360;
-        }
+	// if flipped, flip back to the original state,
+	// regardless of rotation direction
+        newRotation = defaultRotation;
     } else {
         if ( rotDirection )  {
-            newRotation = ( currentRotation + 90 ) % 360;
+            newRotation = ( defaultRotation + 90 ) % 360;
         } else {
-            newRotation = ( currentRotation + 270 ) % 360;
-         }
+            newRotation = ( defaultRotation + 270 ) % 360;
+        }
     }
+
     QCopEnvelope env( "QPE/System", "setCurrentRotation(int)" );
     env << newRotation;
-    QCopEnvelope env2( "QPE/System", "setDefaultRotation(int)" );
-    env2 << newRotation;
 
     m_flipped = !m_flipped;
 }
