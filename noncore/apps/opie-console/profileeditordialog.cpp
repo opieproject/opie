@@ -7,7 +7,6 @@
 #include <qcheckbox.h>
 #include <qscrollview.h>
 
-//#include "profileeditorplugins.h"
 #include "metafactory.h"
 #include "profileeditordialog.h"
 
@@ -201,7 +200,7 @@ void ProfileEditorDialog::slotConActivated( const QString& str ) {
     // FIXME ugly hack right. Right solution would be to look into the layer and see if it
     // supports auto connect and then set it as prefered
     //if (  (  )->layer()->supports()[0] == 1 ) {
-    if ( m_conCmb ->currentText() == "local Console" ) {
+    if ( m_conCmb ->currentText() == tr("local Console") ) {
         m_autoConnect->setChecked( true );
     } else {
         m_autoConnect->setChecked( false );
