@@ -67,7 +67,7 @@
     </message>
     <message>
         <source>Percentage battery remaining: </source>
-        <translation>Percentatem de bateria restante:</translation>
+        <translation>Percentagem de bateria restante:</translation>
     </message>
     <message>
         <source>Battery time remaining: </source>
@@ -79,7 +79,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechar</translation>
     </message>
 </context>
 </TS>

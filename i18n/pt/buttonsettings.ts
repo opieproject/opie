@@ -19,11 +19,11 @@
     </message>
     <message>
         <source>Beam VCard</source>
-        <translation type="unfinished"></translation>
+        <translation>Irradiar vCard</translation>
     </message>
     <message>
         <source>Send eMail</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar E-Mail</translation>
     </message>
     <message>
         <source>Toggle Menu</source>

@@ -3,11 +3,11 @@
     <name>SoundSettings</name>
     <message>
         <source>Shows icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar ícone</translation>
     </message>
     <message>
         <source>Hides icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Esconder ícone</translation>
     </message>
 </context>
 <context>
@@ -78,51 +78,51 @@
     </message>
     <message>
         <source>30</source>
-        <translation type="unfinished">30</translation>
+        <translation>30</translation>
     </message>
     <message>
         <source>20</source>
-        <translation type="unfinished">20</translation>
+        <translation>20</translation>
     </message>
     <message>
         <source>15</source>
-        <translation type="unfinished">15</translation>
+        <translation>15</translation>
     </message>
     <message>
         <source>10</source>
-        <translation type="unfinished">10</translation>
+        <translation>10</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished">5</translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Frequência:</translation>
     </message>
     <message>
         <source>Recording Directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>Directoria de Gravação:</translation>
     </message>
     <message>
         <source>Recording Key:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tecla de Gravação:</translation>
     </message>
     <message>
         <source>Recording Limit in seconds:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo Limite de gravação (seg):</translation>
     </message>
     <message>
         <source>Unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>Ilimitada</translation>
     </message>
     <message>
         <source>Restart Opie if needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiniciar Opie se necessário</translation>
     </message>
     <message>
         <source>Key_Record</source>
-        <translation type="unfinished"></translation>
+        <translation>Key_Record</translation>
     </message>
 </context>
 </TS>

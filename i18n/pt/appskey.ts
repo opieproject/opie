@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Calendário</translation>
     </message>
 </context>
 </TS>

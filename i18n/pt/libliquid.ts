@@ -1,8 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>Decoration</name>
-</context>
-<context>
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>
@@ -10,7 +7,7 @@
     </message>
     <message>
         <source>No translucency</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem transparência</translation>
     </message>
     <message>
         <source>Stippled, background color</source>
@@ -34,19 +31,19 @@
     </message>
     <message>
         <source>Menu color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor do menu</translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor do texto</translation>
     </message>
     <message>
         <source>Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Opacidade</translation>
     </message>
     <message>
         <source>Use shadowed menu text</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar texto do menu com sombreado</translation>
     </message>
     <message>
         <source>Make toolbar buttons appear flat</source>
@@ -61,11 +58,11 @@
     <name>Styles</name>
     <message>
         <source>Liquid</source>
-        <translation type="unfinished"></translation>
+        <translation>Líquido</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Estilo </translation>
     </message>
 </context>
 </TS>

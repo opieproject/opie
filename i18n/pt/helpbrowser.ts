@@ -3,35 +3,35 @@
     <name>HelpBrowser</name>
     <message>
         <source>Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>Trás</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Frente</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Início</translation>
     </message>
     <message>
         <source>Add Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar Atalho</translation>
     </message>
     <message>
         <source>Remove from Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar dos Atalhos</translation>
     </message>
     <message>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Atalhos</translation>
     </message>
     <message>
         <source>Help Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu de Ajuda</translation>
     </message>
     <message>
         <source>HelpBrowser</source>
-        <translation type="unfinished"></translation>
+        <translation>MenuAjuda</translation>
     </message>
 </context>
 </TS>

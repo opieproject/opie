@@ -7,22 +7,22 @@
     </message>
     <message>
         <source>Group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupo:</translation>
     </message>
     <message>
         <source>Key:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tecla:</translation>
     </message>
     <message>
         <source>Value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor:</translation>
     </message>
 </context>
 <context>
     <name>ListViewConfDir</name>
     <message>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheiros</translation>
     </message>
     <message>
         <source>Could not open</source>
@@ -30,11 +30,11 @@
     </message>
     <message>
         <source>The directory </source>
-        <translation type="unfinished"></translation>
+        <translation>A directoria</translation>
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>não pode ser acedida.</translation>
     </message>
 </context>
 <context>
@@ -45,7 +45,7 @@
     </message>
     <message>
         <source>The file </source>
-        <translation type="unfinished"></translation>
+        <translation>O ficheiro</translation>
     </message>
     <message>
         <source> could not be opened.</source>

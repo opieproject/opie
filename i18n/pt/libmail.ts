@@ -46,15 +46,15 @@
     </message>
     <message>
         <source>Connected to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligado a %1</translation>
     </message>
     <message>
         <source>SMTP &gt; %3</source>
-        <translation type="unfinished"></translation>
+        <translation>SMTP &gt; %3</translation>
     </message>
     <message>
         <source>SMTP&gt; EHLO *</source>
-        <translation type="unfinished"></translation>
+        <translation>SMTP &gt; EHLO *</translation>
     </message>
     <message>
         <source>SMTP&gt; AUTH CRAM-MD5</source>

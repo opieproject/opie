@@ -3,42 +3,42 @@
     <name>PIMSpreadsheetWindow</name>
     <message>
         <source>Spreadsheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Folha de Cálculo</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechar</translation>
     </message>
     <message>
         <source>Equation</source>
-        <translation type="unfinished"></translation>
+        <translation>Equação</translation>
     </message>
     <message>
         <source>Clear Cell</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpar Célula</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheiro</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar</translation>
     </message>
 </context>
 <context>
     <name>SpreadsheetWidget</name>
     <message>
         <source>SpreadsheetWidget</source>
-        <translation type="unfinished"></translation>
+        <translation>SpreadsheetWidget</translation>
     </message>
 </context>
 </TS>

@@ -7,14 +7,14 @@
     </message>
     <message>
         <source>note</source>
-        <translation type="unfinished"></translation>
+        <translation>nota</translation>
     </message>
 </context>
 <context>
     <name>DatebookPluginConfig</name>
     <message>
         <source>Show location</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Motrar </translation>
     </message>
     <message>
         <source>Check this if the location of an appointment should be shown for each one</source>
@@ -22,7 +22,7 @@
     </message>
     <message>
         <source>Show notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar notas</translation>
     </message>
     <message>
         <source>Check this if the note attached to an appointment should be shown for each one</source>

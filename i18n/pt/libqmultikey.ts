@@ -3,62 +3,62 @@
     <name>ConfigDlg</name>
     <message>
         <source>Multikey Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuração de Múltiplas Teclas</translation>
     </message>
     <message>
         <source>General Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações Gerais</translation>
     </message>
     <message>
         <source>Keymap File</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheiro do Mapa do Teclado</translation>
     </message>
     <message>
         <source>Current Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Língua Corrente</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover</translation>
     </message>
     <message>
         <source>Pickboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Pickboard</translation>
     </message>
     <message>
         <source>Key Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Repetição das Teclas</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Cores</translation>
     </message>
     <message>
         <source>Key Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor da Tecla</translation>
     </message>
     <message>
         <source>Key Pressed Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor da Tecla Pressionada</translation>
     </message>
     <message>
         <source>Line Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor da Linha</translation>
     </message>
     <message>
         <source>Text Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor do Texto</translation>
     </message>
 </context>
 <context>
     <name>InputMethods</name>
     <message>
         <source>Multikey</source>
-        <translation type="unfinished"></translation>
+        <translation>Multikey</translation>
     </message>
 </context>
 </TS>

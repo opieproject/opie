@@ -22,7 +22,7 @@
     </message>
     <message>
         <source>Use metric units</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar unidades métricas</translation>
     </message>
     <message>
         <source>Click here to select type of units displayed.</source>
@@ -45,16 +45,17 @@
     </message>
     <message>
         <source>Temp: </source>
-        <translation type="unfinished"></translation>
+        <translation>Temp:</translation>
     </message>
     <message>
         <source>  Wind: </source>
-        <translation type="unfinished"></translation>
+        <translation>Vento:</translation>
     </message>
     <message>
         <source>
 Pres: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Pressão:</translation>
     </message>
     <message>
         <source>Current weather data not available.</source>

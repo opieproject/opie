@@ -3,47 +3,47 @@
     <name>ScreenshotControl</name>
     <message>
         <source>Name of screenshot </source>
-        <translation type="unfinished"></translation>
+        <translation>Nome da captura do ecrâ</translation>
     </message>
     <message>
         <source>Delay</source>
-        <translation type="unfinished"></translation>
+        <translation>Espera</translation>
     </message>
     <message>
         <source>sec</source>
-        <translation type="unfinished"></translation>
+        <translation>seg</translation>
     </message>
     <message>
         <source>Save named</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome a gravar</translation>
     </message>
     <message>
         <source>Save screenshot as...</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar captura como...</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheiro</translation>
     </message>
     <message>
         <source>Scap</source>
-        <translation type="unfinished"></translation>
+        <translation>Scap</translation>
     </message>
     <message>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>Sucesso</translation>
     </message>
     <message>
         <source>Screenshot was uploaded to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>A captura foi enviada para %1</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <source>Connection to %1 failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou a ligação a %1.</translation>
     </message>
 </context>
 </TS>

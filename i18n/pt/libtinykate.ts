@@ -3,7 +3,7 @@
     <name>QObject</name>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem espaço</translation>
     </message>
     <message>
         <source>There was a problem creating
@@ -12,7 +12,11 @@ for this program.
 
 Please free up some space and
 try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocorreu um problema ao criar
+a configuração deste programa.
+
+Liberte algum espaço e tente 
+novamente.</translation>
     </message>
 </context>
 </TS>

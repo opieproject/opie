@@ -7,27 +7,27 @@
     </message>
     <message>
         <source>&amp;New game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Novo jogo</translation>
     </message>
     <message>
         <source>&amp;Pause game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pausar jogo</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Acerca</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Jogo</translation>
     </message>
     <message>
         <source>Score: 00</source>
-        <translation type="unfinished"></translation>
+        <translation>Pontuação: 00</translation>
     </message>
     <message>
         <source>Lives: 0%</source>
-        <translation type="unfinished"></translation>
+        <translation>Vidas: 0%</translation>
     </message>
     <message>
         <source>Filled: 00%</source>
@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>Time: 00</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo: 00</translation>
     </message>
     <message>
         <source>Bounce Level %1</source>
@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Score: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pontuação: %1</translation>
     </message>
     <message>
         <source>Game paused.
@@ -57,11 +57,11 @@ Score: %1</source>
     </message>
     <message>
         <source>Time: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo: %1</translation>
     </message>
     <message>
         <source>Lives: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vidas: %1</translation>
     </message>
     <message>
         <source>Filled: %1%</source>
