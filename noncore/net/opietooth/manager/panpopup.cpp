@@ -14,50 +14,42 @@ PanPopup::PanPopup( OpieTooth::BTDeviceItem* item ) : QPopupMenu()  {
     qWarning("PanPopup c'tor");
 
     m_item = item;
-    m_panconnect = 0l;
-    QAction *a, *b;
+    QAction *a, *b, *c;
 
+    m_panconnection = 0l;
     /* connect action */
-    a = new QAction( ); // so it's get deleted
-    a->setText( "connect" );
+
+
+    a = new QAction(); // so it's get deleted
+    a->setText( tr("connect") );
     a->addTo( this );
     connect( a, SIGNAL( activated() ), this, SLOT( slotConnect() ) );
 
+
     b = new QAction();
-    b->setText( "connect+conf" );
+    b->setText( tr( "connect+conf" ) );
     b->addTo( this );
     connect( b, SIGNAL( activated() ), this, SLOT( slotConnectAndConfig() ) );
+
+    c = new QAction();
+    c->setText( tr( "disconnect" ) );
+    c->addTo( this );
+    connect( c, SIGNAL( activated() ), this, SLOT( slotDisconnect() ) );
+
 };
 
 PanPopup::~PanPopup() {
-    delete m_panconnect;
+
 }
 
 void PanPopup::slotConnect() {
-
-
-    // SHOULD move to lib
-    // before pand must be in "pand --listen --role panu" mode ( client )
-
-    m_panconnect = new OProcess();
-    *m_panconnect << "pand" << "--connect" << m_item->mac();
-
-    connect( m_panconnect, SIGNAL( processExited( OProcess* ) ) ,
-             this, SLOT( slotConnectExited( OProcess* ) ) );
-    connect( m_panconnect, SIGNAL( receivedStdout( OProcess*, char*, int ) ),
-             this, SLOT( slotConnectOut( OProcess*, char*, int ) ) );
-    if (!m_panconnect->start( OProcess::NotifyOnExit, OProcess::AllOutput) ) {
-        qWarning( "could not start" );
-        delete m_panconnect;
-    }
+    m_panconnection = new StartPanConnection( m_item->mac() );
+    m_panconnection->start();
 }
 
-void PanPopup::slotExited( OProcess* proc ) {
-    delete m_panconnect;
+void PanPopup::slotDisconnect()  {
+    m_panconnection->stop();
 }
-
-void PanPopup::slotStdOut(OProcess* proc, char* chars, int len)
-{}
 
 
 void PanPopup::slotConnectAndConfig() {

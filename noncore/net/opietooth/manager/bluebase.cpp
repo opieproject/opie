@@ -333,7 +333,7 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
         QPopupMenu *popup =0l;
         if ( it != list.end() ) {
 	    qWarning("Searching id %d %s", it.key(), it.data().latin1() );
-            popup = m_popHelper.find( it.key() /*1*/,
+            popup = m_popHelper.find( 4358,
                                       service->services(),
                                       (BTDeviceItem*)service->parent() );
 	}else {

@@ -3,6 +3,10 @@
 
 using namespace OpieTooth;
 
+
+
+
+
 ConnectionState::ConnectionState() {
     m_direction = Incoming;
     m_handle = -1;

@@ -3,9 +3,11 @@
 
 #include <qpopupmenu.h>
 #include <qaction.h>
-#include <opie/oprocess.h>
+
+#include <startpanconnection.h>
 
 #include "btdeviceitem.h"
+
 
 namespace OpieTooth {
 
@@ -19,14 +21,13 @@ namespace OpieTooth {
 
     private:
         QAction* m_push;
-	OProcess* m_panconnect;
+	OpieTooth::StartPanConnection* m_panconnection;
 	OpieTooth::BTDeviceItem *m_item;
     private slots:
         void slotConnect();
+        void slotDisconnect();
         void slotConnectAndConfig();
-	void slotExited( OProcess* proc );
-	void slotStdOut( OProcess* proc, char* chars, int len );
-    };
+   };
 };
 
 #endif

@@ -4,8 +4,39 @@
 
 #include <qstring.h>
 #include <qvaluelist.h>
+#include <qobject.h>
 
 namespace OpieTooth {
+
+	
+
+
+    /**
+     * Parent class for all kinds of starting connection 
+     * subclasses
+     *
+     */
+    class StartConnection : public QObject {
+
+    protected:
+
+	enum ConnectionType{
+	    Pan = 0,
+	    Rfcomm,
+	    Obex,
+	    Hci
+	};
+
+	virtual ~StartConnection() {};
+
+	virtual QString name() = 0;
+	virtual void setName( QString name ) = 0;
+	virtual ConnectionType type() = 0;
+	virtual void setConnectionType() = 0;
+        virtual void start() = 0;
+	virtual void stop() = 0;
+
+    };
 
     enum LinkDirection { Incoming= true, Outgoing = false };
     enum LinkMode { Master =0, Client };
