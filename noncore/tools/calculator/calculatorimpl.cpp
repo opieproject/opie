@@ -118,6 +118,58 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
     current_mode = max_mode = conversion_mode_count = 0;
     last_conversion = -1;
 
+    // translation trick mode - with this stuff parsed in from a file is translatable
+    QObject::tr("Standard");
+    QObject::tr("Weight");
+    QObject::tr("Distance");
+    QObject::tr("Area");
+    QObject::tr("Temperatures");
+    QObject::tr("Volume");
+    QObject::tr("acres");
+    QObject::tr("°C");
+    QObject::tr("carats");
+    QObject::tr("cm");
+    QObject::tr("cu cm");
+    QObject::tr("cu ft");
+    QObject::tr("cu in");
+    QObject::tr("°F");
+    QObject::tr("fl oz (US)");
+    QObject::tr("ft");
+    QObject::tr("g");
+    QObject::tr("gal (US)");
+    QObject::tr("hectares");
+    QObject::tr("in");
+    QObject::tr("kg");
+    QObject::tr("km");
+    QObject::tr("l");
+    QObject::tr("lb");
+    QObject::tr("Lg tons");
+    QObject::tr("m");
+    QObject::tr("mg");
+    QObject::tr("mi");
+    QObject::tr("ml");
+    QObject::tr("mm");
+    QObject::tr("naut. mi");
+    QObject::tr("oz");
+    QObject::tr("points");
+    QObject::tr("pt");
+    QObject::tr("qt");
+    QObject::tr("sq cm");
+    QObject::tr("sq ft");
+    QObject::tr("sq in");
+    QObject::tr("sq km");
+    QObject::tr("sq m");
+    QObject::tr("sq mi");
+    QObject::tr("sq mm");
+    QObject::tr("sq yd");
+    QObject::tr("st");
+    QObject::tr("St tons");
+    QObject::tr("tblspoon");
+    QObject::tr("teaspoons");
+    QObject::tr("tonnes");
+    QObject::tr("yd");
+
+
 //bgr_command.insert( PushButtonFunction);
     bgr_command.insert( PushButtonMPlus);
     bgr_command.insert( PushButtonMR);
@@ -208,12 +260,12 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
         while ( ! ts2.eof() ) {
                 line = ts2.readLine();
                 if ( line.contains("STARTTYPE") ) {
-                        captions << line.remove(0,10);
+                        captions << tr( line.remove(0,10) );
       ComboBoxFunction->insertItem(captions.last());
                         while ( !line.contains("ENDTYPE") ) {
                             line = ts2.readLine();
                             if ( line.contains("NAME") ) {
-                                faces << line.remove(0,5);
+                                faces << tr( line.remove(0,5) );
                                 line2 = ts2.readLine();
                                 line2.remove(0,6);
                                 entry_list[x] = line2.toDouble();
