@@ -1158,6 +1158,10 @@ void TEWidget::calcGeometry()
   scrollbar->resize(QApplication::style().scrollBarExtent().width(),
                     contentsRect().height() - hwidth);
 
+  if(!showhscrollbar) cornerButton()->move(0, 0);
+  else cornerButton()->move(contentsRect().width() - hwidth, contentsRect().height() - hwidth);
+
+
   if(showhscrollbar == 1)
   {
     hscrollbar->resize(contentsRect().width() - hwidth, hwidth);
@@ -1207,8 +1211,8 @@ void TEWidget::calcGeometry()
 
   if(showhscrollbar == 1)
   {
-    //bY = bY - 10;
-    lines = lines - 1;
+    lines = lines - (hwidth / font_h) - 1;
+	if(lines < 1) lines = 1;
   }
 }
 
