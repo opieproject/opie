@@ -367,6 +367,7 @@ void OpieFtp::tabChanged(QWidget *)
             cdUpButton->show();
         if(homeButton->isHidden())
             homeButton->show();
+				if(currentPathCombo->isHidden()) currentPathCombo->show();
 
     }
     if (TabWidget->currentPageIndex() == 1) {
@@ -377,6 +378,7 @@ void OpieFtp::tabChanged(QWidget *)
         if(cdUpButton->isHidden())
             cdUpButton->show();
         homeButton->hide();
+				if(currentPathCombo->isHidden()) currentPathCombo->show();
 
     }
     if (TabWidget->currentPageIndex() == 2) {
@@ -385,6 +387,7 @@ void OpieFtp::tabChanged(QWidget *)
         tabMenu->setItemChecked(tabMenu->idAt(1),FALSE);
         cdUpButton->hide();
         homeButton->hide();
+				if(!currentPathCombo->isHidden()) currentPathCombo->hide();
     }
 }
 
