@@ -1,6 +1,6 @@
 #include "wlanmodule.h"
 #include "wlanimp.h"
-#include "info.h"
+#include "infoimp.h"
 #include "wextensions.h"
 
 #include <qlabel.h>
@@ -72,22 +72,8 @@ QWidget *WLANModule::information(Interface *i, QTabWidget **tabWidget){
   if(!we.doesHaveWirelessExtensions())
     return NULL;
  
-  WlanInfo *info = new WlanInfo(0, "wireless info", Qt::WDestructiveClose);
+  WlanInfoImp *info = new WlanInfoImp(0, i->getInterfaceName(), Qt::WDestructiveClose);
   (*tabWidget) = info->tabWidget;
-  
-  info->essidLabel->setText(we.essid());
-  info->apLabel->setText(we.ap());
-  info->stationLabel->setText(we.station());
-  info->modeLabel->setText(we.mode());
-  info->freqLabel->setText(QString("%1 GHz").arg(we.frequency()));
-  int signal = 0;
-  int noise = 0;
-  int quality = 0;
-  we.stats(signal, noise, quality);
-  info->signalProgressBar->setProgress(signal);
-  info->noiseProgressBar->setProgress(noise);
-  info->qualityProgressBar->setProgress(quality);
-  info->rateLabel->setText(QString("%1 Mb/s").arg(we.rate()));
   return info;
 }
 
