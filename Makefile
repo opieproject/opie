@@ -18,7 +18,8 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	mpegplayer/libmpeg3 \
 	mpegplayer/libmad \
 	mpegplayer/wavplugin \
-	cardmon
+	cardmon \
+	sdmon
 
 APPS=$(LOCALAPPS) addressbook calculator clock datebook \
     filebrowser helpbrowser minesweep mpegplayer \
