@@ -51,7 +51,13 @@ MainWindow::MainWindow()
 
   // construct objects
   currentDoc=0;
-  fileSelector=new FileSelector("application/sheet-qt", this, QString::null);
+  
+  QStringList lst; lst << "application/sheet-qt"; lst << "*/*";
+  MimeTypes types; types.insert( tr("Sheets"), lst );
+  fileSelector=new OFileSelector(this, OFileSelector::FileSelector,
+				 OFileSelector::Normal,
+				 QString::null, QString::null,
+				 types, TRUE );
   connect(fileSelector, SIGNAL(closeMe()), this, SLOT(selectorHide()));
   connect(fileSelector, SIGNAL(newSelected(const DocLnk &)), this, SLOT(selectorFileNew(const DocLnk &)));
   connect(fileSelector, SIGNAL(fileSelected(const DocLnk &)), this, SLOT(selectorFileOpen(const DocLnk &)));

@@ -17,7 +17,7 @@
 #include <qdialog.h>
 
 class DocLnk;
-class FileSelector;
+class OFileSelector;
 
 class QCheckBox;
 class QLabel;
@@ -37,7 +37,7 @@ private slots:
     void preview();
 
 private:
-    FileSelector* m_pFileSelector;
+    OFileSelector* m_pFileSelector;
     QLabel* m_pPreviewLabel;
     QCheckBox* m_pAutomaticPreviewCheckBox;
 };

@@ -165,7 +165,7 @@ TinyKate::~TinyKate( )
 void TinyKate::slotOpen( )
 {
     QString filename = OFileDialog::getOpenFileName( OFileSelector::EXTENDED_ALL,
-                                                QPEApplication::documentDir());
+                                                QString::null);
   if (!filename.isEmpty()) {
     open(filename);
   }
@@ -260,7 +260,7 @@ void TinyKate::slotSaveAs() {
   KateDocument *kd = (KateDocument*) currentView->document();
 
   QString filename=OFileDialog::getSaveFileName(OFileSelector::EXTENDED_ALL,
-                                                QPEApplication::documentDir());
+                                                QString::null);
   if (!filename.isEmpty()) {
     qDebug("saving file "+filename);
     QFileInfo fi(filename);

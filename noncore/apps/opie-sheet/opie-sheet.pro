@@ -5,7 +5,7 @@ HEADERS		= mainwindow.h sheet.h cellformat.h finddlg.h numberdlg.h sortdlg.h tex
 SOURCES		= main.cpp mainwindow.cpp sheet.cpp cellformat.cpp finddlg.cpp numberdlg.cpp sortdlg.cpp textdlg.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lopie
 TARGET		= sheetqt
 
 TRANSLATIONS = ../../../i18n/de/sheetqt.ts \

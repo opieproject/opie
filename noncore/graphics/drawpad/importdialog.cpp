@@ -14,7 +14,7 @@
 #include "importdialog.h"
 
 #include <qpe/applnk.h>
-#include <qpe/fileselector.h>
+#include <opie/ofileselector.h>
 
 #include <qcheckbox.h>
 #include <qimage.h>
@@ -27,10 +27,14 @@ ImportDialog::ImportDialog(QWidget* parent, const char* name)
 {
     setCaption(tr("DrawPad - Import"));
 
-    m_pFileSelector = new FileSelector("image/*", this, "fileselector");
+    MimeTypes types; types.insert( tr("All images"),"image/*" );
+    m_pFileSelector = new OFileSelector(this,
+				        OFileSelector::FileSelector,
+					OFileSelector::Normal,
+					QString::null,
+					QString::null, types );
+    m_pFileSelector->setNameVisible( false );
     connect(m_pFileSelector, SIGNAL(fileSelected(const DocLnk&)), this, SLOT(fileChanged()));
-    m_pFileSelector->setNewVisible(false);
-    m_pFileSelector->setCloseVisible(false);
 
     m_pPreviewLabel = new QLabel(this);
     m_pPreviewLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
@@ -68,7 +72,7 @@ ImportDialog::~ImportDialog()
 const DocLnk* ImportDialog::selected()
 {
     // FIXME change from pointer to reference -zecke
-    DocLnk *lnk = new DocLnk( m_pFileSelector->selectedDocument() );    
+    DocLnk *lnk = new DocLnk( m_pFileSelector->selectedDocument() );
     return lnk;
 }
 
