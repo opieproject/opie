@@ -22,8 +22,6 @@ SFCaveGame :: ~SFCaveGame()
 
 void SFCaveGame :: init()
 {
-	Game :: init();
-
 	blockDistance = 50;
 	blockHeight = 80;
 	blockWidth = 20;
@@ -56,6 +54,8 @@ void SFCaveGame :: init()
 
     for ( int i = 0 ; i < BLOCKSIZE ; ++i )
         blocks[i].y( -1 );
+
+	Game :: init();
 }
 
 void SFCaveGame ::  update( int state )

@@ -23,8 +23,6 @@ GatesGame :: ~GatesGame()
 
 void GatesGame :: init()
 {
-	Game :: init();
-
 	blockHeight = 80;
 	blockWidth = 20;
 	lastGateBottomY = 0;
@@ -64,6 +62,8 @@ void GatesGame :: init()
 
     for ( int i = 0 ; i < BLOCKSIZE ; ++i )
         blocks[i].y( -1 );
+
+	Game :: init();
 }
 
 void GatesGame ::  update( int state )

@@ -22,8 +22,6 @@ FlyGame :: ~FlyGame()
 
 void FlyGame :: init()
 {
-	Game :: init();
-
 	switch( difficulty )
 	{
 		case MENU_DIFFICULTY_EASY:
@@ -47,6 +45,7 @@ void FlyGame :: init()
 	}
 
 	startScoring = false;
+	Game :: init();
 }
 
 void FlyGame ::  update( int state )

@@ -33,7 +33,7 @@ void Player :: init()
 	pos.y( sWidth/2 );
 	pos.h( 2 );
 	pos.w( 4 );
-	thrust = 0;
+	currentThrust = 0;
 	crashing = false;
 	crashLineLength = 0;
 	crashed = false;
