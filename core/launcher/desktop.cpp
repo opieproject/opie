@@ -375,7 +375,6 @@ DesktopApplication::~DesktopApplication()
 
 void DesktopApplication::desktopMessage( const QCString &msg, const QByteArray &data )
 {
-#ifdef Q_WS_QWS
   QDataStream stream( data, IO_ReadOnly );
   if ( msg == "keyRegister(int key, QString channel, QString message)" ) {
     int k;
@@ -387,13 +386,11 @@ void DesktopApplication::desktopMessage( const QCString &msg, const QByteArray &
     qWarning( "KeyRegisterReceived: %i, %s, %s", k, ( const char* ) c, ( const char * ) m );
     keyRegisterList.append( QCopKeyRegister( k, c, m ) );
   }
-#endif
 }
 
 
 void DesktopApplication::systemMessage( const QCString & msg, const QByteArray & data )
 {
-#ifdef Q_WS_QWS
   QDataStream stream ( data, IO_ReadOnly );
 
   if ( msg == "setScreenSaverInterval(int)" ) {
@@ -424,7 +421,6 @@ void DesktopApplication::systemMessage( const QCString & msg, const QByteArray &
   else if ( msg == "suspend()" ) {
     emit power();
   }
-#endif
 }
 
 enum MemState { Unknown, VeryLow, Low, Normal } memstate = Unknown;

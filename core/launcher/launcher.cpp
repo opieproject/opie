@@ -624,7 +624,7 @@ Launcher::Launcher( QWidget* parent, const char* name, WFlags fl )
     connect( tabs, SIGNAL(rightPressed(AppLnk*)),
 	this, SLOT(properties(AppLnk*)));
 
-#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+#if !defined(QT_NO_COP)
     QCopChannel* sysChannel = new QCopChannel( "QPE/System", this );
     connect( sysChannel, SIGNAL(received(const QCString &, const QByteArray &)),
              this, SLOT(systemMessage( const QCString &, const QByteArray &)) );
