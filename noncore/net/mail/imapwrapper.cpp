@@ -159,8 +159,8 @@ QList<Folder>* IMAPwrapper::listFolders()
 {
     const char *path, *mask;
     int err = MAILIMAP_NO_ERROR;
-    clist *result;
-    clistcell *current;
+    clist *result = 0;
+    clistcell *current = 0;
 
     QList<Folder> * folders = new QList<Folder>();
     folders->setAutoDelete( false );
@@ -176,7 +176,6 @@ QList<Folder>* IMAPwrapper::listFolders()
  */
     QString temp;
     mask = "INBOX" ;
-    result = clist_new();
     mailimap_mailbox_list *list;
     err = mailimap_list( m_imap, (char*)"", (char*)mask, &result );
     QString del;
@@ -202,7 +201,6 @@ QList<Folder>* IMAPwrapper::listFolders()
     mask = "*" ;
     path = account->getPrefix().latin1();
     if (!path) path = "";
-    result = clist_new();
     qDebug(path);
     bool selectable = true;
     mailimap_mbx_list_flags*bflags;
@@ -228,7 +226,7 @@ QList<Folder>* IMAPwrapper::listFolders()
     } else {
         qDebug("error fetching folders %s",m_imap->imap_response);
     }
-    mailimap_list_result_free( result );
+    if (result) mailimap_list_result_free( result );
     return folders;
 }
 
@@ -347,12 +345,12 @@ RecBody IMAPwrapper::fetchBody(const RecMail&mail)
     RecBody body;
     const char *mb;
     int err = MAILIMAP_NO_ERROR;
-    clist *result;
+    clist *result = 0;
     clistcell *current;
-    mailimap_fetch_att *fetchAtt;
-    mailimap_fetch_type *fetchType;
-    mailimap_set *set;
-    mailimap_body*body_desc;
+    mailimap_fetch_att *fetchAtt = 0;
+    mailimap_fetch_type *fetchType = 0;
+    mailimap_set *set = 0;
+    mailimap_body*body_desc = 0;
 
     mb = mail.getMbox().latin1();
 
@@ -367,7 +365,6 @@ RecBody IMAPwrapper::fetchBody(const RecMail&mail)
         return body;
     }
  
-    result = clist_new();
     /* the range has to start at 1!!! not with 0!!!! */
     set = mailimap_set_new_interval( mail.getNumber(),mail.getNumber() );
     fetchAtt = mailimap_fetch_att_new_bodystructure();
@@ -390,7 +387,7 @@ RecBody IMAPwrapper::fetchBody(const RecMail&mail)
     } else {
         qDebug("error fetching body: %s",m_imap->imap_response);
     }
-    mailimap_fetch_list_free(result);
+    if (result) mailimap_fetch_list_free(result);
     return body;
 }
 
@@ -509,7 +506,7 @@ encodedString*IMAPwrapper::fetchRawPart(const RecMail&mail,const QValueList<int>
     
     fetchType = mailimap_fetch_type_new_fetch_att(fetch_att);
     
-    clist*result = clist_new();
+    clist*result = 0;
     
     err = mailimap_fetch( m_imap, set, fetchType, &result );
     mailimap_set_free( set );
@@ -533,7 +530,7 @@ encodedString*IMAPwrapper::fetchRawPart(const RecMail&mail,const QValueList<int>
     } else {
         qDebug("error fetching text: %s",m_imap->imap_response);
     }
-    mailimap_fetch_list_free(result);
+    if (result) mailimap_fetch_list_free(result);
     return res;
 }
 
