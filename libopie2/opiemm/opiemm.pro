@@ -8,10 +8,6 @@ TARGET      = opiemm2
 VERSION     = 1.8.2
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS        +=
-MOC_DIR     = moc
-OBJECTS_DIR = obj
-
 
 !contains( platform, x11 ) {
   include ( $(OPIEDIR)/include.pro )

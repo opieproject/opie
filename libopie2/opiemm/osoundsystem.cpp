@@ -30,6 +30,7 @@
 */
 
 #include <opie2/osoundsystem.h>
+#include <opie2/odebug.h>
 
 #include <errno.h>
 #include <fcntl.h>
@@ -49,7 +50,7 @@ OSoundSystem* OSoundSystem::_instance = 0;
 
 OSoundSystem::OSoundSystem()
 {
-    qDebug( "OSoundSystem::OSoundSystem()" );
+    odebug << "OSoundSystem::OSoundSystem()" << oendl;
     synchronize();
 }
 
@@ -65,15 +66,12 @@ void OSoundSystem::synchronize()
 
     /*
 
-
-
-
     QString str;
     QFile f( "/dev/sound" );
     bool hasFile = f.open( IO_ReadOnly );
     if ( !hasFile )
     {
-        qDebug( "OSoundSystem: /dev/sound not existing. No sound devices available" );
+        odebug << "OSoundSystem: /dev/sound not existing. No sound devices available" << oendl;
         return;
     }
     QTextStream s( &f );
@@ -126,7 +124,7 @@ OSoundSystem::CardIterator OSoundSystem::iterator() const
 OSoundCard::OSoundCard( QObject* parent, const char* name )
                  :QObject( parent, name ), _audio( 0 ), _mixer( 0 )
 {
-    qDebug( "OSoundCard::OSoundCard()" );
+    odebug << "OSoundCard::OSoundCard()" << oendl;
     init();
 }
 
@@ -150,7 +148,7 @@ void OSoundCard::init()
 OAudioInterface::OAudioInterface( QObject* parent, const char* name )
                  :QObject( parent, name )
 {
-    qDebug( "OAudioInterface::OAudioInterface()" );
+    odebug << "OAudioInterface::OAudioInterface()" << oendl;
     init();
 }
 
@@ -174,7 +172,7 @@ void OAudioInterface::init()
 OMixerInterface::OMixerInterface( QObject* parent, const char* name )
                  :QObject( parent, name )
 {
-    qDebug( "OMixerInterface::OMixerInterface()" );
+    odebug << "OMixerInterface::OMixerInterface()" << oendl;
     init();
 }
 
@@ -190,7 +188,7 @@ void OMixerInterface::init()
     _fd = ::open( name(), O_RDWR );
     if ( _fd == -1 )
     {
-        qWarning( "can't open mixer." );
+        owarn << "OMixerInterface::init(): Can't open mixer." << oendl;
         return;
     }
 
@@ -212,7 +210,7 @@ void OMixerInterface::init()
         if ( devmask & ( 1 << SOUND_MIXER_RECLEV ) )    _channels.insert( "PlayRecord", SOUND_MIXER_RECLEV );
         if ( devmask & ( 1 << SOUND_MIXER_IGAIN ) )     _channels.insert( "PlayInputGain", SOUND_MIXER_IGAIN );
         if ( devmask & ( 1 << SOUND_MIXER_OGAIN ) )     _channels.insert( "PlayOutputGain", SOUND_MIXER_OGAIN );
-        //qDebug( "devmask available and constructed." );
+        //odebug << "devmask available and constructed." << oendl;
     }
 
     devmask = 0;
@@ -232,7 +230,7 @@ void OMixerInterface::init()
         if ( devmask & ( 1 << SOUND_MIXER_RECLEV ) )    _channels.insert( "RecRecord", SOUND_MIXER_RECLEV );
         if ( devmask & ( 1 << SOUND_MIXER_IGAIN ) )     _channels.insert( "RecInputGain", SOUND_MIXER_IGAIN );
         if ( devmask & ( 1 << SOUND_MIXER_OGAIN ) )     _channels.insert( "RecOutputGain", SOUND_MIXER_OGAIN );
-        //qDebug( "recmask available and constructed." );
+        //odebug << "recmask available and constructed." << oendl;
     }
 
 /*    ChannelIterator it;
@@ -259,13 +257,13 @@ QStringList OMixerInterface::allChannels() const
 
 QStringList OMixerInterface::recChannels() const
 {
-    qWarning( "NYI" );
+    owarn << "NYI" << oendl;
 }
 
 
 QStringList OMixerInterface::playChannels() const
 {
-    qWarning( "NYI" );
+    owarn << "NYI" << oendl;
 }
 
 
@@ -285,13 +283,13 @@ void OMixerInterface::setVolume( const QString& channel, int left, int right )
         int result = ioctl( _fd, MIXER_WRITE( _channels[channel] ), &volume );
         if ( result == -1 )
         {
-            qWarning( "Can't set volume: %s", strerror( errno ) );
+            owarn << "Can't set volume: " << strerror( errno ) << oendl;
         }
         else
         {
             if ( result & 0xff != left )
             {
-                qWarning( "Device adjusted volume from %d to %d", left, result & 0xff );
+                owarn << "Device adjusted volume from " << left << " to " << (result & 0xff) << oendl;
             }
         }
     }
@@ -306,7 +304,7 @@ int OMixerInterface::volume( const QString& channel ) const
     {
         if ( ioctl( _fd, MIXER_READ( _channels[channel] ), &volume ) == -1 )
         {
-            qWarning( "Can't get volume: %s", strerror( errno ) );
+            owarn << "Can't get volume: " << strerror( errno ) << oendl;
         }
         else return volume;
     }
