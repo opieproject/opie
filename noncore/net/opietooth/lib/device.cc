@@ -1,4 +1,6 @@
 
+#include <signal.h>
+
 #include "kprocess.h"
 
 #include "device.h"
@@ -41,7 +43,7 @@ void Device::detach(){
   // kill the pid we got
   if(m_attached )
     //kill the pid
-    ;
+    kill(pid, 9);
 }
 bool Device::isLoaded()const{
   return m_attached;
@@ -90,7 +92,7 @@ void Device::slotStdOut(KProcess* proc, char* chars, int len)
   if( len <1 )
     return; 
   if(proc == m_process ){
-    QCString string( chars );
+    QCString string( chars, len+1 );
     if(string.left(3) != "CSR" ){ // it's the pid
       pid = string.toInt();
     };
