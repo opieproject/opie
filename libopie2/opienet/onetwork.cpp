@@ -144,6 +144,17 @@ ONetwork::InterfaceIterator ONetwork::iterator() const
 }
 
 
+bool ONetwork::isPresent( const char* name ) const
+{
+    int sfd = socket( AF_INET, SOCK_STREAM, 0 );
+    struct ifreq ifr;
+    memset( &ifr, 0, sizeof( struct ifreq ) );
+    strcpy( (char*) &ifr.ifr_name, name );
+    int result = ::ioctl( sfd, SIOCGIFFLAGS, &ifr );
+    return result != -1;
+}
+
+
 bool ONetwork::isWirelessInterface( const char* name ) const
 {
     int sfd = socket( AF_INET, SOCK_STREAM, 0 );
@@ -582,11 +593,11 @@ void OWirelessNetworkInterface::dumpInformation() const
 {
     odebug << "OWirelessNetworkInterface::() -------------- dumping information block ----------------" << oendl;
 
-    qDebug( " - driver's idea of maximum throughput is %d bps = %d byte/s = %d Kb/s = %f.2 Mb/s", 
+    qDebug( " - driver's idea of maximum throughput is %d bps = %d byte/s = %d Kb/s = %f.2 Mb/s",
             _range.throughput, _range.throughput / 8, _range.throughput / 8 / 1024, float( _range.throughput ) / 8.0 / 1024.0 / 1024.0 );
     qDebug( " - driver for '%s' (V%d) has been compiled against WE V%d",
              name(), _range.we_version_source, _range.we_version_compiled );
-             
+
     if ( _range.we_version_compiled != WIRELESS_EXT )
     {
         owarn << "Version mismatch! WE_DRIVER = " << _range.we_version_compiled << " and WE_OPIENET = " << WIRELESS_EXT << oendl;
@@ -972,23 +983,23 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
 
 
 int OWirelessNetworkInterface::signalStrength() const
-{   
+{
     iw_statistics stat;
     ::memset( &stat, 0, sizeof stat );
     _iwr.u.data.pointer = (char*) &stat;
     _iwr.u.data.flags = 0;
     _iwr.u.data.length = sizeof stat;
-    
+
     if ( !wioctl( SIOCGIWSTATS ) )
     {
         return -1;
     }
-   
+
     int max = _range.max_qual.qual;
     int cur = stat.qual.qual;
     int lev = stat.qual.level; //FIXME: Do something with them?
     int noi = stat.qual.noise; //FIXME: Do something with them?
-    
+
     return cur*100/max;
 }
 

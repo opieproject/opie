@@ -94,6 +94,10 @@ class ONetwork : public QObject
      */
     InterfaceIterator iterator() const;
     /**
+     * @returns true, if the @a interface is present.
+     */
+    bool isPresent( const char* interface ) const;
+    /**
      * @returns true, if the @a interface supports the wireless extension protocol.
      */
     bool isWirelessInterface( const char* interface ) const;
