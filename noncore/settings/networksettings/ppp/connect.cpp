@@ -213,7 +213,8 @@ void ConnectWidget::init() {
 
     qApp->processEvents();
     QApplication::flushX();
-    pid_t id = execute_command(_ifaceppp->data()->command_before_connect());
+    (void)execute_command(_ifaceppp->data()->command_before_connect());
+
 //     int i, status;
 
 //     do {
@@ -473,7 +474,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
         scriptCommand = *(comlist->at(scriptindex));
         scriptArgument = *(arglist->at(scriptindex));
       } else {
-       odebug << "End of script" << oendl; 
+       odebug << "End of script" << oendl;
 	vmain = 10;
         return;
       }
@@ -839,7 +840,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       killTimer( main_timer_ID );
 
       if_timeout_timer->start(_ifaceppp->data()->pppdTimeout()*1000);
-      odebug << "started if timeout timer with " << _ifaceppp->data()->pppdTimeout()*1000 << "" << oendl; 
+      odebug << "started if timeout timer with " << _ifaceppp->data()->pppdTimeout()*1000 << "" << oendl;
 
       // find out PPP interface and notify the stats module
 //      stats->setUnit(pppInterfaceNumber());
@@ -849,7 +850,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       result = execppp();
 
       emit debugMessage(QObject::tr("Starting pppd..."));
-      odebug << "execppp() returned with return-code " << result << "" << oendl; 
+      odebug << "execppp() returned with return-code " << result << "" << oendl;
 
       if(result) {
         if(!_ifaceppp->data()->autoDNS())
@@ -1065,7 +1066,7 @@ void ConnectWidget::setExpect(const QString &n) {
 void ConnectWidget::if_waiting_timed_out() {
   if_timer->stop();
   if_timeout_timer->stop();
-  odebug << "if_waiting_timed_out()" << oendl; 
+  odebug << "if_waiting_timed_out()" << oendl;
 
   _ifaceppp->data()->setpppdError(E_IF_TIMEOUT);
 
@@ -1272,7 +1273,7 @@ bool ConnectWidget::execppp() {
     return false; // nonsensically long command which would bust my buffer buf.
   }
 
-  owarn << "Command IS: " << command.latin1() << "" << oendl; 
+  owarn << "Command IS: " << command.latin1() << "" << oendl;
 
   qApp->flushX();
 

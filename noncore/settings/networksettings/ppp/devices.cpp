@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: devices.cpp,v 1.5 2004-04-09 15:00:07 mickeyl Exp $
+ * $Id: devices.cpp,v 1.6 2004-09-10 11:16:55 zecke Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -74,11 +74,11 @@ DevicesWidget::DevicesWidget( InterfacePPP* ip, QWidget *parent, const char *nam
 //  delete_b->setEnabled( false ); //FIXME
 
   QStringList tmp = _pppdata->getDevicesNamesList();
-  odebug << "DevicesWidget::DevicesWidget got devices " << tmp.join("--").latin1() << "" << oendl; 
+  odebug << "DevicesWidget::DevicesWidget got devices " << tmp.join("--").latin1() << "" << oendl;
   listListbox->insertStringList(tmp);
 
   for (uint i = 0; i < listListbox->count(); i++){
-      odebug << "listListbox->text(i) " << listListbox->text(i).latin1() << " == _pppdata->devname() " << _pppdata->devname().latin1() << "" << oendl; 
+      odebug << "listListbox->text(i) " << listListbox->text(i).latin1() << " == _pppdata->devname() " << _pppdata->devname().latin1() << "" << oendl;
       if ( listListbox->text(i) == _pppdata->devname() )
           listListbox->setCurrentItem( i );
   }
@@ -87,7 +87,7 @@ DevicesWidget::DevicesWidget( InterfacePPP* ip, QWidget *parent, const char *nam
 
 
 void DevicesWidget::slotListBoxSelect(int idx) {
-    bool ok = _pppdata->setDevice( listListbox->text(idx) );
+    _pppdata->setDevice( listListbox->text(idx) );
     delete_b->setEnabled((bool)(idx != -1));
     edit_b->setEnabled((bool)(idx != -1));
 //FIXME  copy_b->setEnabled((bool)(idx != -1));

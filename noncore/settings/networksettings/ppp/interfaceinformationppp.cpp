@@ -21,10 +21,10 @@ using namespace Opie::Core;
  * Constructor for the InterfaceInformationImp class.  This class pretty much
  * just display's information about the interface that is passed to it.
  */
-InterfaceInformationPPP::InterfaceInformationPPP(QWidget *parent, const char *name, Interface *i, WFlags f)
+InterfaceInformationPPP::InterfaceInformationPPP(QWidget *parent, const char *name, Interface *i, WFlags )
     :InterfaceInformationImp(parent, name, i, Qt::WStyle_ContextHelp)
 {
-    odebug << "InterfaceInformationPPP::InterfaceInformationPPP " << name << "" << oendl; 
+    odebug << "InterfaceInformationPPP::InterfaceInformationPPP " << name << "" << oendl;
     con = new ConnectWidget( (InterfacePPP*)i, this, "con" );
     con->setSizePolicy( QSizePolicy(QSizePolicy::MinimumExpanding,
                                     QSizePolicy::Fixed) );

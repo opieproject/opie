@@ -11,12 +11,12 @@ KeyEdit::~KeyEdit()
 {
 }
 
-void KeyEdit::focusInEvent(QFocusEvent *event)
+void KeyEdit::focusInEvent(QFocusEvent *)
 {
 	setEchoMode(Normal);
 }
 
-void KeyEdit::focusOutEvent(QFocusEvent *event)
+void KeyEdit::focusOutEvent(QFocusEvent *)
 {
 	setEchoMode(Password);
 }

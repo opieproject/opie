@@ -25,7 +25,7 @@
  */
 using namespace Opie::Ui;
 using namespace Opie::Core;
-InterfaceSetupImp::InterfaceSetupImp(QWidget* parent, const char* name, Interface *i, Interfaces *j, WFlags fl) : InterfaceSetup(parent, name, fl), interface(i), interfaces(j), delInterfaces(false){
+InterfaceSetupImp::InterfaceSetupImp(QWidget* parent, const char* name, Interface *i, Interfaces *j, WFlags fl) : InterfaceSetup(parent, name, fl), interfaces(j), interface(i), delInterfaces(false){
   if (j == 0) {
     delInterfaces = true;
     interfaces = new Interfaces;
@@ -47,7 +47,7 @@ InterfaceSetupImp::~InterfaceSetupImp(){
 bool InterfaceSetupImp::saveChanges(){
   bool error;
   QString iface = interfaces->getInterfaceName(error);
-  odebug << "InterfaceSetupImp::saveChanges saves interface " << iface.latin1() << "" << oendl; 
+  odebug << "InterfaceSetupImp::saveChanges saves interface " << iface.latin1() << "" << oendl;
   if(!saveSettings())
     return false;
 
@@ -73,7 +73,7 @@ bool InterfaceSetupImp::saveChanges(){
     qApp->processEvents();
 
     if (!restart.start(OProcess::Block, OProcess::NoCommunication) ) {
-      owarn << "unstable to spawn ifdown/ifup" << oendl; 
+      owarn << "unstable to spawn ifdown/ifup" << oendl;
     }
 
     owait->hide();
@@ -158,7 +158,7 @@ void InterfaceSetupImp::setProfile(const QString &profile){
       if(!interfaces->setMapping(interface->getInterfaceName())){
         interfaces->addMapping(interface->getInterfaceName());
         if(!interfaces->setMapping(interface->getInterfaceName())){
-      odebug << "InterfaceSetupImp: Added Mapping, but still can't setInterface." << oendl; 
+      odebug << "InterfaceSetupImp: Added Mapping, but still can't setInterface." << oendl;
           return;
     }
       }
@@ -168,7 +168,7 @@ void InterfaceSetupImp::setProfile(const QString &profile){
     else{
       interfaces->addInterface(newInterfaceName, INTERFACES_FAMILY_INET, INTERFACES_METHOD_DHCP);
       if(!interfaces->setInterface(newInterfaceName)){
-        odebug << "InterfaceSetupImp: Added interface, but still can't setInterface." << oendl; 
+        odebug << "InterfaceSetupImp: Added interface, but still can't setInterface." << oendl;
         return;
       }
     }
@@ -186,7 +186,7 @@ void InterfaceSetupImp::setProfile(const QString &profile){
   // IP Information
   autoStart->setChecked(interfaces->isAuto(interface->getInterfaceName()));
   QString dns = interfaces->getInterfaceOption("up "DNSSCRIPT" -a", error);
-  odebug << "dns >" << dns.latin1() << "<" << oendl; 
+  odebug << "dns >" << dns.latin1() << "<" << oendl;
   if(dns.contains(" ")){
     firstDNSLineEdit->setText(dns.mid(0, dns.find(" ")));
     secondDNSLineEdit->setText(dns.mid(dns.find(" ")+1, dns.length()));
@@ -200,8 +200,8 @@ void InterfaceSetupImp::setProfile(const QString &profile){
 
 
 
-  owarn << "InterfaceSetupImp::setProfile(" << profile.latin1() << ")\n" << oendl; 
-  owarn << "InterfaceSetupImp::setProfile: iface is " << interfaces->getInterfaceName(error).latin1() << "\n" << oendl; 
+  owarn << "InterfaceSetupImp::setProfile(" << profile.latin1() << ")\n" << oendl;
+  owarn << "InterfaceSetupImp::setProfile: iface is " << interfaces->getInterfaceName(error).latin1() << "\n" << oendl;
 
 }
 

@@ -22,7 +22,7 @@ public:
   virtual Interface *addNewInterface(const QString &name);
   virtual bool remove(Interface* i);
   virtual QString getPixmapName(Interface* i);
-  virtual void receive(const QCString &msg, const QByteArray &arg) {};
+  virtual void receive(const QCString &, const QByteArray &) {};
 
 private:
   QList<Interface> list;

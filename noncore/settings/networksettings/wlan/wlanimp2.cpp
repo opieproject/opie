@@ -116,7 +116,6 @@ void WLANImp::parseOpts() {
 }
 
 void WLANImp::parseKeyStr(QString keystr) {
-  int loc = 0;
   int index = 1;
   QString key;
   QStringList keys = QStringList::split(QRegExp("\\s+"), keystr);

@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: edit.cpp,v 1.11 2004-03-02 12:21:30 alwin Exp $
+ * $Id: edit.cpp,v 1.12 2004-09-10 11:16:55 zecke Exp $
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
  *
@@ -1202,7 +1202,7 @@ QString PhoneNumberDialog::phoneNumber()
 }
 
 
-void PhoneNumberDialog::textChanged(const QString &s)
+void PhoneNumberDialog::textChanged(const QString &)
 {
     //  enableButtonOK(s.length() > 0);
 }
