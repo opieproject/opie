@@ -605,39 +605,41 @@ nově vytvořenému dokumentu.</translation>
     </message>
     <message>
         <source>&lt;P&gt;Can&apos;t create directory %1&lt;/P&gt;&lt;P&gt;ZSafe will now exit.&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Nelze vytvořit adresář %1&lt;/P&gt;&lt;P&gt;ZSafe se nyní ukončí.&lt;/P&gt;</translation>
     </message>
     <message>
         <source>ZSafe: </source>
-        <translation type="unfinished"></translation>
+        <translation>ZSafe: </translation>
     </message>
     <message>
         <source>&lt;P&gt;No document defined. You have to create a new document&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Nebyl definován dokument. Měli byste vytvořit nový&lt;/P&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;You must create a new document first. Ok to create?&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Musíte nejdříve vytvořit nový dokument. Vytvořit?&lt;/P&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus Password Manager&lt;br&gt;ZSafe version 2.1.2&lt;br&gt;&lt;/b&gt;by Carsten Schneider&lt;br&gt;zcarsten@gmx.net&lt;br&gt;http://z-soft.z-portal.info/zsafe&lt;br&gt;Translations by Robert Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus správce hesel&lt;br&gt;ZSafe verze 2.1.2&lt;br&gt;&lt;/b&gt;vytvořil Carsten
+Schneider&lt;br&gt;zcarsten@gmx.net&lt;br&gt;http://z-soft.z-portal.info/zsafe&lt;br&gt;Přeložil Robert
+Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Copy to Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovat do schránky</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit</translation>
     </message>
     <message>
         <source>Show Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit Info</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Storno</translation>
     </message>
 </context>
 </TS>

@@ -3,35 +3,35 @@
     <name>MainWindow</name>
     <message>
         <source>My MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation>Moje hlavní okno</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Konec</translation>
     </message>
     <message>
         <source>Fire</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeď</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor</translation>
     </message>
 </context>
 <context>
     <name>Simple</name>
     <message>
         <source>My Simple Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Moje jednoduchá aplikace</translation>
     </message>
     <message>
         <source>Click on the button or follow the white rabbit</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte na tlačítko, nebo následujte bílého králíka</translation>
     </message>
     <message>
         <source>Fire</source>
         <comment>translatable quit string</comment>
-        <translation type="unfinished"></translation>
+        <translation>Konec</translation>
     </message>
 </context>
 </TS>

@@ -23,15 +23,15 @@
     </message>
     <message>
         <source>Today</source>
-        <translation type="unfinished">Today</translation>
+        <translation>Today</translation>
     </message>
     <message>
         <source>Today Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Today Chyba</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The plugin &apos;%1&apos; caused Today to crash. It could be that the plugin is not properly installed.&lt;br&gt;Today tries to continue loading plugins.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Plugin &apos;%1&apos; způsobil havárii Today. Je možné, že plugin není řádně nainstalován.&lt;br&gt;Today zkusí pokračovat v nahrávání pluginů.&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>

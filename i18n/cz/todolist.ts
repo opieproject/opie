@@ -11,26 +11,26 @@
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Vše</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished">Nezařazené</translation>
+        <translation>Nezařazené</translation>
     </message>
 </context>
 <context>
     <name>NewTaskDlg</name>
     <message>
         <source>New Task</source>
-        <translation type="unfinished">Nový úkol</translation>
+        <translation>Nový úkol</translation>
     </message>
     <message>
         <source>Blank task</source>
-        <translation type="unfinished"></translation>
+        <translation>Prázdný úkol</translation>
     </message>
     <message>
         <source>Using template:</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít šablonu:</translation>
     </message>
 </context>
 <context>
@@ -60,11 +60,11 @@
     <name>Opie</name>
     <message>
         <source>Todo List</source>
-        <translation type="unfinished">Seznam Todo</translation>
+        <translation>Seznam úkolů</translation>
     </message>
     <message>
         <source>Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Úkol</translation>
     </message>
 </context>
 <context>

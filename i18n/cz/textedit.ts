@@ -202,7 +202,7 @@ Chcete je uložit?</translation>
     </message>
     <message>
         <source>Save Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložení selhalo</translation>
     </message>
 </context>
 <context>

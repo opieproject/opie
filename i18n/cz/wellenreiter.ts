@@ -187,7 +187,7 @@ připojením k síti.</translation>
     </message>
     <message>
         <source>&lt;p&gt;The Wireless Extension Versions&lt;br&gt;do not match!&lt;p&gt;  Wellenreiter II : WE V%1&lt;br&gt;Interface driver: WE V%2</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Verze bezdrátových rozšíření&lt;br&gt;nesouhlasí!&lt;p&gt;  Wellenreiter II : WE V%1&lt;br&gt;Ovladač rozhraní: WE V%2</translation>
     </message>
 </context>
 <context>
@@ -621,11 +621,11 @@ připojením k síti.</translation>
     </message>
     <message>
         <source>Wellenreiter II Configuration Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Wellenreiter II konfigurační okno</translation>
     </message>
     <message>
         <source>Send probe requests</source>
-        <translation type="unfinished"></translation>
+        <translation>Provádět sondování</translation>
     </message>
 </context>
 <context>

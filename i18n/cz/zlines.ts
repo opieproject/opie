@@ -3,39 +3,39 @@
     <name>KLines</name>
     <message>
         <source>&amp;New game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nová hra</translation>
     </message>
     <message>
         <source>Ne&amp;xt</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Další</translation>
     </message>
     <message>
         <source>&amp;Show next</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zobrazit další</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Konec</translation>
     </message>
     <message>
         <source>Und&amp;o</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vrátit</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hra</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Upravit</translation>
     </message>
     <message>
         <source>Points: 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Bodů: 0</translation>
     </message>
     <message>
         <source> Score: %1 </source>
-        <translation type="unfinished"></translation>
+        <translation>Skóre: %1 </translation>
     </message>
 </context>
 </TS>

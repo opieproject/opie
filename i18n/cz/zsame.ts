@@ -3,27 +3,27 @@
     <name>ZSameWidget</name>
     <message>
         <source>ZSame</source>
-        <translation type="unfinished"></translation>
+        <translation>ZSame</translation>
     </message>
     <message>
         <source>New Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Nová hra</translation>
     </message>
     <message>
         <source>Restart This Board</source>
-        <translation type="unfinished"></translation>
+        <translation>Restartovat tuto desku</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>Vrátit</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Konec</translation>
     </message>
     <message>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Hra</translation>
     </message>
 </context>
 </TS>

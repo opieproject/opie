@@ -324,7 +324,7 @@ tomuto procesu?</translation>
     </message>
     <message>
         <source>Syslog</source>
-        <translation type="unfinished"></translation>
+        <translation>Syslog</translation>
     </message>
 </context>
 <context>
@@ -363,7 +363,7 @@ tomuto procesu?</translation>
     </message>
     <message>
         <source>Built against Qt/E </source>
-        <translation type="unfinished"></translation>
+        <translation>Sestaveno proti Qt/E </translation>
     </message>
 </context>
 </TS>
