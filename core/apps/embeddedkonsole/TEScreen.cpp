@@ -549,65 +549,7 @@ ca* TEScreen::getCookedImage()
   if (getMode(MODE_Cursor) && (cuY+(hist.getLines()-histCursor) < lines)) // cursor visible
     reverseRendition(&merged[loc(cuX,cuY+(hist.getLines()-histCursor))]);
   return merged;
-
-    /*
-    int x, y, z;
-
-  ca* merged = (ca*)malloc( lines * columns * sizeof( ca));
-
-  ca dft(' ',DEFAULT_FORE_COLOR,DEFAULT_BACK_COLOR,DEFAULT_RENDITION);
-
-//      qDebug("hist lines %d, historyCursor %d, minus %d ,lines %d, columns %d",
-//               hist.getLines(), histCursor, hist.getLines() - histCursor , lines, columns);
-  for (y = 0; (y < lines) && (y < ( hist.getLines() - histCursor )); y++)  {
-
-    int len = QMIN( columns, hist.getLineLen( y + histCursor) );
-    int yp  = y * columns;
-    int yq  = ( y + histCursor) * columns;
-//     qDebug("horzCursor %d, columns %d, len %d", horzCursor, columns, len);    
-//     qDebug("lineno %d, colno %d, count %d\n",  y + histCursor, (horzCursor / 2), len );
-    qDebug("Y %d", y);    
-    hist.getCells( y + histCursor, (horzCursor / 2), len, merged + yp);
-
-    for (x = len; x < columns; x++)
-        merged[yp + x] = dft;
-    for (x = 0; x < columns; x++) {
-        int p = x + yp; int q = x + yq;
-        if ( ( q >= sel_TL ) && ( q <= sel_BR ) )
-            reverseRendition(&merged[p]); // for selection
-    }
-  }
-
-  if (lines >= hist.getLines() - histCursor)  {
-      for (y = ( hist.getLines() - histCursor); y < lines ; y++)  {
-       int z = horzCursor;
-       int yp  = y * columns;
-       int yq  = ( y + histCursor) * columns;
-       int yr =  ( y - hist.getLines() + histCursor) * columns;
-//        qDebug("y %d, yp %d, yq %d, columns %d, z cursor %d", y,  yp, yq, columns, z);
-       for (x = 0; x < columns; x++) {
-           int p = x + yp; int q = x + yq; int r = (x + (horzCursor/2) ) + yr;
-           merged[p] = image[r];
-           if ( q >= sel_TL && q <= sel_BR )
-               reverseRendition( &merged[p]); // for selection
-       }
-    }
- }
-
-      
-// evtl. inverse display
-  if (getMode(MODE_Screen))
-  { int i, n = lines * columns;
-    for (i = 0; i < n; i++)
-      reverseRendition( &merged[i]); // for reverse display
-  }
-  if (getMode(MODE_Cursor) && ( cuY + ( hist.getLines() - histCursor) < lines)) // cursor visible
-
-      reverseRendition( &merged[ loc( cuX, cuY + ( hist.getLines() - histCursor))] );
-
-  return merged;
-      */
-  
+ 
 }
 
 

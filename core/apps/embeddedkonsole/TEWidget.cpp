@@ -1055,12 +1055,12 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
         actSel=0; // Key stroke implies a screen update, so TEWidget won't
           // know where the current selection is.
 
-//     qDebug("key pressed is 0x%x, state %d",ke->key(), ke->state());
+//     qDebug("key pressed is 0x%x, ascii is 0x%x, state %d", ke->key(), ke->ascii(), ke->state());
 
         if( ke->state() == ShiftButton && ke->key() == Key_Tab) {
           //lets hardcode this sucker
 
-//     qDebug("key pressed 2 is 0x%x",ke->key());
+//     qDebug("key pressed 2 is 0x%x", ke->key());
             emitText("\\"); // expose
         }
         else if( ke->state() == ControlButton && ke->key() == Key_V) {
@@ -1207,65 +1207,6 @@ void TEWidget::calcGeometry()
         lines = lines - (hwidth / font_h) - 1;
         if(lines < 1) lines = 1;
     }
-
-      /*//FIXME: set rimX == rimY == 0 when running in full screen mode.
-  Config cfg("Konsole");
-  cfg.setGroup("ScrollBar");
-  useHorzScroll=cfg.readBoolEntry("HorzScroll",0);
-
-  scrollbar->resize( QApplication::style().scrollBarExtent().width(),
-                    contentsRect().height());
-  qDebug("font_w %d", font_w);
-  switch(scrollLoc)
-  {
-    case SCRNONE :
-     columns = ( contentsRect().width() - 2 * rimX ) / font_w;
-     blX = (contentsRect().width() - (columns*font_w) ) / 2;
-     brX = blX;
-     scrollbar->hide();
-     break;
-    case SCRLEFT :
-     columns = ( contentsRect().width() - 2 * rimX - scrollbar->width()) / font_w;
-     if(useHorzScroll) columns = columns * (font_w/2);
-     brX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
-     blX = brX + scrollbar->width();
-     scrollbar->move(contentsRect().topLeft());
-     scrollbar->show();
-     break;
-    case SCRRIGHT:
-      columns = ( contentsRect().width()  - 2 * rimX - scrollbar->width() ) / font_w;
-      if(useHorzScroll) columns = columns * (font_w/2);
-      blX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
-      if(useHorzScroll) {
-          brX = blX =2;
-      } else {
-         brX=blX;
-      }
-     scrollbar->move(contentsRect().topRight() - QPoint(scrollbar->width()-1,0) );
-     scrollbar->show();
-     break;
-  }
-
-   if( !scrollbar->isHidden())
-       hScrollbar->resize( contentsRect().width()-SCRWIDTH, QApplication::style()
-                      .scrollBarExtent().height());
-   else
-       hScrollbar->resize( contentsRect().width(), QApplication::style()
-                      .scrollBarExtent().height());
-
-   hScrollbar->move( 0, contentsRect().height() - SCRWIDTH);
-      
-
-  if(useHorzScroll) {
-      hScrollbar->show();
-      lines   = ( (contentsRect().height() - SCRWIDTH)  - 2 * rimY  ) / font_h;
-      bY = ((contentsRect().height() - SCRWIDTH) - (lines  *font_h)) / 2;
-  } else {
-      hScrollbar->hide();
-      lines   = (contentsRect().height()  - 2 * rimY  ) / font_h;
-      bY = (contentsRect().height() - (lines  *font_h)) / 2;
-  }     
-      */      
   //FIXME: support 'rounding' styles
 }
 
