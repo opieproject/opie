@@ -11,7 +11,7 @@
 *********************************************************************************************/
 
 /*
- * $Id: vmemo.h,v 1.6 2002-03-27 04:29:54 llornkcor Exp $
+ * $Id: vmemo.h,v 1.7 2002-04-20 14:19:27 llornkcor Exp $
  */
 
 #ifndef __VMEMO_H__
@@ -30,6 +30,7 @@ public:
   VMemo( QWidget *parent, const char *name = NULL);
   ~VMemo();
   QFile track;  
+  QString fileName, errorMsg;
 
 public slots:
   void record();
