@@ -1,5 +1,5 @@
 TEMPLATE	= app
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on debug
 DESTDIR		= $(OPIEDIR)/bin
 
 HEADERS	= smalltodo.h \
@@ -37,7 +37,7 @@ INTERFACES	= todoentry.ui
 TARGET		= todolist
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe -lopie
+LIBS            += -lqpe -lopie -lopiesql
 
 TRANSLATIONS = ../../../i18n/de/todolist.ts \
 	 ../../../i18n/en/todolist.ts \
