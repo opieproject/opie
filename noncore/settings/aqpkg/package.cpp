@@ -72,7 +72,7 @@ void Package :: setStatus( const QString &s )
 {
     status = s;
 
-    if ( status.find( "installed" ) != -1 )
+    if ( status.find( "ok installed" ) != -1 )
         installed = true;
 }
 
