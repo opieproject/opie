@@ -24,15 +24,9 @@
 
 #include "security.h"
 
+#include <opie/oapplicationfactory.h>
 
-int main(int argc, char** argv)
-{
-    QPEApplication a(argc,argv);
+OPIE_EXPORT_APP( OApplicationFactory<Security> )
 
-    Security dlg;
 
-    a.showMainWidget(&dlg);
-
-    return a.exec();
-}
 

@@ -54,7 +54,7 @@ private:
 	QListView *m_list;
 	QMap <QString, QCheckListItem *> m_applets;
 	bool m_applets_changed;
-	QCheckBox *m_menutabs;
+	QCheckBox *m_menutabs, *m_menusubpopup;
 };
 
 #endif

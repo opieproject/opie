@@ -36,7 +36,7 @@ class CityTime : public CityTimeBase
 public:
     CityTime(QWidget* parent = 0, const char *name = 0, WFlags fl = 0);
     ~CityTime();
-
+    static QString appName() { return QString::fromLatin1("citytime"); }
 public slots:
     void beginNewTz();
     void slotNewTz( const QString& strNewCountry, const QString& strNewCity );

@@ -28,16 +28,8 @@
 #include "launchersettings.h"
 
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
+OPIE_EXPORT_APP( OApplicationFactory<LauncherSettings> )
 
-int main ( int argc, char** argv )
-{
-	QPEApplication a ( argc,argv );
-
-	LauncherSettings dlg;
-	a. showMainWidget ( &dlg );
-	dlg. showMaximized ( );
-
-	return a. exec ( );
-}
 

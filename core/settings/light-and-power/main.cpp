@@ -23,16 +23,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/global.h>
+#include <opie/oapplicationfactory.h>
 
 
-int main(int argc, char** argv)
-{
-    QPEApplication a(argc,argv);
-
-    LightSettings dlg;
-
-    a.showMainWidget(&dlg);
-
-    return a.exec();
-}
-
+OPIE_EXPORT_APP( OApplicationFactory<LightSettings> )

@@ -16,7 +16,7 @@
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
 ..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:       
+++=   -.     .`     .:
  :     =  ...= . :.=-        You should have received a copy of the GNU
  -.   .:....=;==+<;          General Public License along with this file;
   -_. . .   )=.  =           see the file COPYING. If not, write to the
@@ -60,9 +60,12 @@ MenuSettings::MenuSettings ( QWidget *parent, const char *name )
 	m_list-> header ( )-> hide ( );
 
 	lay-> addWidget ( m_list );
-	
+
 	m_menutabs = new QCheckBox ( tr( "Show Launcher tabs in O-Menu" ), this );
 	lay-> addWidget ( m_menutabs );
+
+	m_menusubpopup = new QCheckBox ( tr( "Show Applications in subpopups" ), this );
+	lay-> addWidget ( m_menusubpopup );
 
 	QWhatsThis::add ( m_list, tr( "Check the applets that you want to have included in the O-Menu." ));
 	QWhatsThis::add ( m_menutabs, tr( "Adds the contents of the Launcher Tabs as menus in the O-Menu." ));
@@ -119,6 +122,7 @@ void MenuSettings::init ( )
 
 	cfg. setGroup ( "Menu" );
 	m_menutabs-> setChecked ( cfg. readBoolEntry ( "LauncherTabs", true ));
+                m_menusubpopup-> setChecked ( cfg. readBoolEntry ( "LauncherSubPopup", true ));
 }
 
 void MenuSettings::appletChanged()
@@ -149,7 +153,12 @@ void MenuSettings::accept ( )
 		apps_changed = true;
 		cfg. writeEntry ( "LauncherTabs", m_menutabs-> isChecked ( ));
 	}
-        
+
+                if ( m_menusubpopup-> isChecked ( ) != cfg. readBoolEntry ( "LauncherSubPopup", true )) {
+		 apps_changed = true;
+		cfg. writeEntry ( "LauncherSubPopup", m_menusubpopup-> isChecked ( ));
+	}
+
 	cfg. write ( );
 
 	if ( m_applets_changed ) {
@@ -157,7 +166,10 @@ void MenuSettings::accept ( )
 		m_applets_changed = false;
 	}
 	if ( apps_changed ) {
+                                 // currently use reloadApplets() since reloadApps is now used exclusive for server
+                                 // to refresh the tabs. But what we want here is also a refresh of the startmenu entries
 		QCopEnvelope ( "QPE/TaskBar", "reloadApps()" );
+                                QCopEnvelope ( "QPE/TaskBar", "reloadApplets()" );
 	}
 }
 

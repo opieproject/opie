@@ -42,9 +42,10 @@ class ButtonSettings : public QDialog {
 	Q_OBJECT
 
 public:
-	ButtonSettings ( );
+	ButtonSettings ( QWidget *parent = 0, const char *name = 0,  bool modal = FALSE,WFlags f = 0 );
 	~ButtonSettings ( );
 
+	static QString appName() { return QString::fromLatin1("buttonsettings"); }
 	virtual void accept ( );
 	virtual void done ( int r );
 

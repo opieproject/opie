@@ -120,7 +120,6 @@ void Security::show()
         //if ( passcode.isEmpty() )
         //reject();
     } else {
-
 		if (!valid) // security passcode was not asked yet, so ask now
 		{
 			QString pc = enterPassCode(tr("Enter passcode"));
@@ -239,7 +238,6 @@ void Security::setSyncNet(const QString& sn)
 void Security::applySecurity()
 {
     if ( valid ) {
-
         Config cfg("Security");
         cfg.setGroup("Passcode");
         cfg.writeEntry("passcode",passcode);
@@ -269,9 +267,6 @@ void Security::applySecurity()
         } else {
             loginCfg.removeEntry("AutoLogin");
         }
-
-	cfg.setGroup("SyncMode");
-	cfg.writeEntry("Mode", syncModeCombo->currentItem()+1 );
 
     }
 }

@@ -20,11 +20,6 @@
 
 #include "citytime.h"
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-int main( int argc, char** argv )
-{
-    QPEApplication a( argc, argv );
-    CityTime main;
-    a.showMainWidget( &main );
-    return a.exec();
-}
+OPIE_EXPORT_APP( OApplicationFactory<CityTime> )

@@ -1,6 +1,5 @@
-TEMPLATE     = app
-CONFIG      += qt warn_on release
-DESTDIR      = $(OPIEDIR)/bin
+CONFIG      += qt warn_on release quick-app
+
 HEADERS      = buttonsettings.h \
                buttonutils.h \
                remapdlg.h
@@ -15,7 +14,7 @@ INTERFACES   = remapdlgbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lqpe -lopie
-TARGET       = buttonsettings
+TARGET	     = buttonsettings
 
 TRANSLATIONS = ../../../i18n/de/buttonsettings.ts \
 	 ../../../i18n/nl/buttonsettings.ts \
@@ -34,7 +33,5 @@ TRANSLATIONS = ../../../i18n/de/buttonsettings.ts \
 	 ../../../i18n/zh_CN/buttonsettings.ts \
 	 ../../../i18n/zh_TW/buttonsettings.ts \
 	 ../../../i18n/da/buttonsettings.ts
-
-
 
 include ( $(OPIEDIR)/include.pro )

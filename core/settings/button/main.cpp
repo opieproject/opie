@@ -15,7 +15,7 @@
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
 ..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:       
+++=   -.     .`     .:
  :     =  ...= . :.=-        You should have received a copy of the GNU
  -.   .:....=;==+<;          General Public License along with this file;
   -_. . .   )=.  =           see the file COPYING. If not, write to the
@@ -28,16 +28,6 @@
 #include "buttonsettings.h"
 
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-
-int main ( int argc, char** argv )
-{
-	QPEApplication a ( argc,argv );
-
-	ButtonSettings dlg;
-	a. showMainWidget ( &dlg );
-	dlg. showMaximized ( );
-
-	return a. exec ( );
-}
-
+OPIE_EXPORT_APP( OApplicationFactory<ButtonSettings> )
