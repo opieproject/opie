@@ -21,7 +21,6 @@
 #include "desktop.h"
 #include "info.h"
 #include "launcher.h"
-//#include "mrulist.h"
 #include "qcopbridge.h"
 #include "shutdownimpl.h"
 #include "startmenu.h"
@@ -169,6 +168,7 @@ public:
     m_enable_dim_ac = false;
     m_enable_lightoff_ac = false;
     m_enable_onlylcdoff_ac = false;
+    m_disable_apm_ac = false;
 
     m_lcd_status = true;
 
@@ -215,6 +215,10 @@ public:
           return true;
           break;
       case 2:
+          if ( m_disable_apm_ac && onAC ) {
+              return true;
+          }
+
           if ( m_enable_onlylcdoff_ac && onAC ) {
               ODevice::inst ( ) -> setDisplayStatus ( false );
               m_lcd_status = false;
@@ -273,7 +277,7 @@ public:
     v [ 3 ] = 0;
     m_enable_dim = ( ( i1 != 0 ) ? config. readNumEntry ( "Dim", 1 ) : false );
     m_enable_lightoff = ( ( i2 != 0 ) ? config. readNumEntry ( "LightOff", 1 ) : false );
-    m_enable_onlylcdoff = config. readNumEntry ( "LcdOffOnly", 0 );
+    m_enable_onlylcdoff = config.readNumEntry ( "LcdOffOnly", 0 );
 
     if ( !i1 && !i2 && !i3 )
       QWSServer::setScreenSaverInterval( 0 );
@@ -300,6 +304,7 @@ public:
     m_enable_dim_ac = ( ( i1 != 0 ) ? config.readNumEntry ( "DimAC", 1 ) : false );
     m_enable_lightoff_ac = ( ( i2 != 0 ) ? config.readNumEntry ( "LightOffAC", 1 ) : false );
     m_enable_onlylcdoff_ac = config.readNumEntry ( "LcdOffOnlyAC", 0 );
+    m_disable_apm_ac =  config.readNumEntry ( "NoApmAC", 0 );
 
     if ( !i1 && !i2 && !i3 )
       QWSServer::setScreenSaverInterval( 0 );
@@ -372,6 +377,7 @@ private:
   bool m_enable_dim_ac;
   bool m_enable_lightoff_ac;
   bool m_enable_onlylcdoff_ac;
+  bool m_disable_apm_ac;
 
   bool m_lcd_status;
 
