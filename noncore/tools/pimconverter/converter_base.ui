@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>269</width>
-            <height>324</height>
+            <width>308</width>
+            <height>323</height>
         </rect>
     </property>
     <property stdset="1">
@@ -57,6 +57,17 @@
                     <number>2</number>
                 </property>
                 <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>PushButton2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Upgrade to SQLite3</string>
+                    </property>
+                </widget>
+                <widget>
                     <class>QGroupBox</class>
                     <property stdset="1">
                         <name>name</name>
@@ -66,14 +77,20 @@
                         <name>title</name>
                         <string>Select Database:</string>
                     </property>
+                    <property>
+                        <name>layoutMargin</name>
+                    </property>
+                    <property>
+                        <name>layoutSpacing</name>
+                    </property>
                     <grid>
                         <property stdset="1">
                             <name>margin</name>
-                            <number>11</number>
+                            <number>4</number>
                         </property>
                         <property stdset="1">
                             <name>spacing</name>
-                            <number>6</number>
+                            <number>2</number>
                         </property>
                         <widget row="0"  column="1" >
                             <class>QComboBox</class>
@@ -112,14 +129,20 @@
                         <name>title</name>
                         <string>Source/Destination:</string>
                     </property>
+                    <property>
+                        <name>layoutMargin</name>
+                    </property>
+                    <property>
+                        <name>layoutSpacing</name>
+                    </property>
                     <grid>
                         <property stdset="1">
                             <name>margin</name>
-                            <number>11</number>
+                            <number>4</number>
                         </property>
                         <property stdset="1">
                             <name>spacing</name>
-                            <number>6</number>
+                            <number>2</number>
                         </property>
                         <widget row="1"  column="0" >
                             <class>QLabel</class>
@@ -193,14 +216,20 @@
                         <name>title</name>
                         <string>Config:</string>
                     </property>
+                    <property>
+                        <name>layoutMargin</name>
+                    </property>
+                    <property>
+                        <name>layoutSpacing</name>
+                    </property>
                     <grid>
                         <property stdset="1">
                             <name>margin</name>
-                            <number>11</number>
+                            <number>4</number>
                         </property>
                         <property stdset="1">
                             <name>spacing</name>
-                            <number>6</number>
+                            <number>4</number>
                         </property>
                         <widget row="0"  column="0" >
                             <class>QCheckBox</class>
@@ -225,14 +254,20 @@
                         <name>title</name>
                         <string>Progress:</string>
                     </property>
+                    <property>
+                        <name>layoutMargin</name>
+                    </property>
+                    <property>
+                        <name>layoutSpacing</name>
+                    </property>
                     <vbox>
                         <property stdset="1">
                             <name>margin</name>
-                            <number>11</number>
+                            <number>4</number>
                         </property>
                         <property stdset="1">
                             <name>spacing</name>
-                            <number>6</number>
+                            <number>2</number>
                         </property>
                         <widget>
                             <class>QProgressBar</class>
@@ -283,9 +318,16 @@
         <receiver>converter_base</receiver>
         <slot>selectedDestFormat(int)</slot>
     </connection>
+    <connection>
+        <sender>PushButton2</sender>
+        <signal>clicked()</signal>
+        <receiver>converter_base</receiver>
+        <slot>start_upgrade()</slot>
+    </connection>
     <slot access="public">selectedDatabase(int)</slot>
     <slot access="public">selectedDestFormat(int)</slot>
     <slot access="public">selectedSourceFormat(int)</slot>
     <slot access="public">start_conversion()</slot>
+    <slot access="public">start_upgrade()</slot>
 </connections>
 </UI>

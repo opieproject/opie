@@ -12,6 +12,7 @@ public:
 
 	// Slots defined in the ui-description file
 	void start_conversion();
+	void start_upgrade();
 	void selectedDatabase( int num );
 	void selectedDestFormat( int num );
 	void selectedSourceFormat( int num );
@@ -22,6 +23,7 @@ private:
 	// Caution:
 	// The order and value of the following enums must be regarding
 	// the predefinition in the UI-File !!
+	// If you don't understand what I am talking about: Keep your fingers away!!
 	enum DataBases{
 		ADDRESSBOOK = 0,
 		TODOLIST    = 1,
