@@ -31,5 +31,5 @@ int main( int argc, char **argv )
 //     if ( argc == 3 && argv[1] == QCString("-f") )
 //   e.openFile(argv[2]);
 
-    a.exec();
+    return a.exec();
 }
