@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=Set Application Key
+Exec=appskey
+Icon=CustomizeKeys
+Type=Application
+Name=Application Key
+CanFastload=0
+Name[de]=Anwendungstasten
