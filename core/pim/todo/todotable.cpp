@@ -306,9 +306,6 @@ void TodoTable::slotClicked( int row, int col, int, const QPoint &pos )
         case 1:
             break;
         case 2:
-	  // may as well edit it...
-	  // menuTimer->stop();
-	  // emit signalEdit();
 	  // Show detailed view of the selected entry
 	  {
 	    menuTimer->stop();
@@ -319,7 +316,7 @@ void TodoTable::slotClicked( int row, int col, int, const QPoint &pos )
         case 3: 
 	  // may as well edit it...
 	  menuTimer->stop();
-	  // emit signalEdit();
+	  emit signalEdit();
 	  break;
     }
 }
@@ -659,26 +656,32 @@ void TodoTable::journalFreeRemoveEntry( int row )
 
 void TodoTable::keyPressEvent( QKeyEvent *e )
 {
-    if ( e->key() == Key_Space || e->key() == Key_Return ) {
-	switch ( currentColumn() ) {
-	    case 0: {
-		CheckItem *i = static_cast<CheckItem*>(item(currentRow(),
-							    currentColumn()));
-		if ( i )
-		    i->toggle();
-		break;
-	    }
-	    case 1:
-		break;
-	    case 2:
-		emit signalEdit();
-	    default:
-		break;
-	}
-    } else {
-	QTable::keyPressEvent( e );
-    }
+	if ( e->key() == Key_Space || e->key() == Key_Return ) {
+		switch ( currentColumn() ) {
+		case 0: {
+			CheckItem *i = static_cast<CheckItem*>(item(currentRow(),
+								    currentColumn()));
+			if ( i )
+				i->toggle();
+			break;
+		}
+		case 1:
+			break;
+		case 2:{
+			ToDoEvent *todo = todoList[static_cast<CheckItem*>(item(currentRow(), 0))];
+			emit showDetails(*todo);
+			break;
+		}
+		case 3:
+			// Future: Let us change the dueDate directly...
+			emit signalEdit();
+		default:
+			break;
+		}		
+	} else
+		QTable::keyPressEvent( e );
 }
+
 
 QStringList TodoTable::categories()
 {

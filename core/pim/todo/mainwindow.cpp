@@ -257,6 +257,9 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f ) :
     table->setPaintingEnabled( TRUE );
     table->viewport()->setUpdatesEnabled( TRUE );
 
+    // Initialize the table
+    table->updateVisible();
+
     connect( completedAction, SIGNAL( toggled(bool) ), this, SLOT( showCompleted(bool) ) );
     connect( showdeadlineAction, SIGNAL( toggled(bool) ), this, SLOT( showDeadline(bool) ) );
     connect( catMenu, SIGNAL(activated(int)), this, SLOT(setCategory(int)) );
