@@ -1,4 +1,4 @@
-Files: bin/powerchord apps/Applications/powerchord.desktop pics/powerchord share/powerchord
+Files: plugins/applications/libpowerchord.so* bin/powerchord apps/Applications/powerchord.desktop pics/powerchord share/powerchord
 Priority: optional
 Section: opie/multimedia
 Maintainer: Camilo Mesias <camilo@mesias.co.uk>, ljp <lpotter@trolltech.com>

@@ -9,6 +9,8 @@ class Powerchord : public PowerchordBase
 public:
     Powerchord( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~Powerchord();
+    
+    static QString appName() { return QString::fromLatin1("powerchord"); }
 
 private slots:
     void goodBye();

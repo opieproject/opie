@@ -1,5 +1,4 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on 
+CONFIG		= qt quick-app
 
 HEADERS		= powerchord.h   \
                   fretboard.h    \
@@ -19,7 +18,6 @@ SOURCES		= main.cpp        \
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopiecore2
-DESTDIR         = $(OPIEDIR)/bin
 TARGET		= powerchord
 
 include ( $(OPIEDIR)/include.pro )
