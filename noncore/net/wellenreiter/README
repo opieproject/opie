@@ -2,11 +2,11 @@
 /*                W e l l e n r e i t e r   I I                          */
 /*               ===============================                         */
 /*                                                                       */
-/*                                                  Version: Opie-ALPHA  */
+ /*                                          Version: Opie-ALPHA-January */
 /*************************************************************************/
 
 --------------------------------------------------
-Release Notes for Opie-ALPHA Version December 2002
+Release Notes for Opie-ALPHA Version January 2002
 --------------------------------------------------
 
 =====================
@@ -14,9 +14,6 @@ Release Notes for Opie-ALPHA Version December 2002
 =====================
 
 * low-level orinoco_cs-based (including prism2 and spectrum_cs)
-
-* Supported Interfaces: wlan0 (yes, I know this is hardcoded and
-  lame, but we're in a hurry and this can be configured soon...)
 
 =====================
 =      Build        =
@@ -32,16 +29,32 @@ noncore/net/wellenreiter/gui
 
 ./configure and rebuild. Note that you need libpcap in your toolchain.
 
+To compile Wellenreiter within the OZ build environment, add the
+following lines to $OPIEDIR/packages
+CONFIG_WELLENREITER noncore/net/wellenreiter/libwellenreiter libwellenreiter.pro
+CONFIG_WELLENREITER noncore/net/wellenreiter/daemon daemon.pro
+CONFIG_WELLENREITER noncore/net/wellenreiter/gui gui.pro
+CONFIG_WELLENREITER noncore/net/wellenreiter/contrib/orinoco_hopper orinoco_hopper.pro
+
+make -f Makefile.test clean-configs
+cd <BUILDROOT>
+make SUBDIRS=packages/opie package
+
 =====================
 =     Install       =
 =====================
 
 Alternatively, you can use our precompiled ipk. Get it from
-http://opie.net.wox.org/elan/current. You will also need libpcap.
+http://opie.net.wox.org/wellenreiter/current/. This also includes a recent libpcap.
 
 =====================
 =       Run         =
 =====================
+
+There are two possible modes: <Manual> and <Automatic>. I suggest, you
+start with the <Automatic> Mode. This works just using the "Start"
+and "Stop" Pushbuttons in the Wellenreiter GUI. If this doesn't work,
+then use the following strategy:
 
 1. Place card in monitor mode. This is device dependent.
 
@@ -49,7 +62,7 @@ http://opie.net.wox.org/elan/current. You will also need libpcap.
    or otherwise using the wireless interface - your connection
    will freeze: The card can't be used normally when sniffing!
 
-   For most orinoco-based cards this can be done using
+   For most orinoco-based cards this can be done using either
    'iwpriv <interface> 2' or 'iwpriv <interface> 2 1'.  
    
    You can check if this works, by calling 'ifconfig <interface>'.

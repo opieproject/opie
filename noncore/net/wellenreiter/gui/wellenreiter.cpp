@@ -112,7 +112,7 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
     // setup GUI
         
     connect( button, SIGNAL( clicked() ), this, SLOT( buttonClicked() ) );
-    button->setEnabled( false );
+    // button->setEnabled( false );
     netview->setColumnWidthMode( 1, QListView::Manual );
     
     if ( manufacturerdb )
@@ -235,11 +235,28 @@ void Wellenreiter::buttonClicked()
         system( "killall orinoco_hopper" );
         system( "killall wellenreiterd" );
         
-        // FIXME: reset the card trying to get into a usable state again
+        // get configuration from config window
         
-        // for now, just message the user
+        const QString& interface = configwindow->interfaceName->currentText();
+        const QString& cardtype = configwindow->deviceType->currentText();
+        const QString& interval = configwindow->hopInterval->cleanText();
+        
+        // reset the card trying to get into a usable state again
+        
+        QString cmdline;
+        cmdline.sprintf( "iwpriv %s monitor 1", (const char*) interface );
+        system( cmdline );
+        cmdline.sprintf( "iwpriv %s monitor 1 6", (const char*) interface );
+        system( cmdline );
+        cmdline.sprintf( "ifconfig %s -promisc", (const char*) interface );
+        system( cmdline );
+        cmdline.sprintf( "killall -14 dhcpcd" );
+        system( cmdline );
+        cmdline.sprintf( "killall -10 udhcpc" );
+        
+        // message the user
 
-        QMessageBox::information( this, "Wellenreiter/Opie", "You should reset your\ndevice before using it again." );
+        QMessageBox::information( this, "Wellenreiter/Opie", "Your wireless card\nshould now be usable again." );
     }
     
     else
@@ -265,7 +282,6 @@ void Wellenreiter::buttonClicked()
         /* Global::Execute definitely does not work very well with non-gui stuff! :( */
         
         QString cmdline;
-        
         cmdline.sprintf( "iwpriv %s monitor 2", (const char*) interface );
         system( cmdline );
         cmdline.sprintf( "iwpriv %s monitor 2 1", (const char*) interface );
