@@ -255,7 +255,7 @@ void PMainWindow::initDisp() {
     initT<ImageView>( "Image ScrollView", &m_disp, ImageDisplay );
     if (m_disp) {
         if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
-            m_disp->setMinimumSize(QApplication::desktop()->size()/2);
+            //m_disp->setMinimumSize(QApplication::desktop()->size()/2);
         }
         m_disp->setMenuActions(m_hGroup,m_gPrevNext,m_gDisplayType);
         m_disp->setAutoScale(!m_aUnscaled->isOn());
@@ -294,22 +294,26 @@ void PMainWindow::slotFullScreenButton(bool current)
 
 void PMainWindow::setupViewWindow(bool current, bool forceDisplay)
 {
-    if (!m_disp) return;
+    if (!m_disp) {
+        return;
+    }
     if (current) {
         m_disp->setBackgroundColor(black);
         m_disp->reparent(0, WStyle_Customize | WStyle_NoBorder, QPoint(0,0));
         m_disp->setVScrollBarMode(QScrollView::AlwaysOff);
         m_disp->setHScrollBarMode(QScrollView::AlwaysOff);
         m_disp->resize(qApp->desktop()->width(), qApp->desktop()->height());
+        m_disp->setFullScreen(current,forceDisplay);
     } else {
         setUpdatesEnabled(false);
         if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
-            m_disp->setMinimumSize(QApplication::desktop()->size()/2);
+
+            //m_disp->setMinimumSize(QApplication::desktop()->size()/2);
         } else {
-            m_disp->setMinimumSize(10,10);
+            //m_disp->setMinimumSize(10,10);
         }
         if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
-            m_disp->reparent(0,QPoint(50,50));
+            m_disp->reparent(0,QPoint(10,10));
         } else {
             m_disp->reparent(0,QPoint(0,0));
         }
@@ -317,10 +321,12 @@ void PMainWindow::setupViewWindow(bool current, bool forceDisplay)
         m_stack->addWidget(m_disp,ImageDisplay);
         m_disp->setVScrollBarMode(QScrollView::Auto);
         m_disp->setHScrollBarMode(QScrollView::Auto);
-        if (forceDisplay || m_disp->isVisible())
-            m_stack->raiseWidget(m_disp);
         if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
-            m_disp->resize(m_disp->minimumSize());
+            m_disp->setGeometry(30,30,QApplication::desktop()->width()-60,QApplication::desktop()->height()-60);
+        }
+        if (forceDisplay || m_disp->isVisible()) {
+            m_stack->raiseWidget(m_disp);
+            m_disp->setFocus();
         }
         setUpdatesEnabled(true);
     }

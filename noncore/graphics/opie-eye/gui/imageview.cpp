@@ -6,6 +6,8 @@
 
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/qcopenvelope_qws.h>
+
 #include <qpopupmenu.h>
 #include <qtimer.h>
 #include <qaction.h>
@@ -27,7 +29,35 @@ ImageView::ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name
     m_gDisplayType = 0;
     m_gPrevNext = 0;
     m_hGroup = 0;
+    m_Rotated = false;
     closeIfHide = false;
+    int min = QApplication::desktop()->size().width()>QApplication::desktop()->size().height()?
+        QApplication::desktop()->size().height():QApplication::desktop()->size().width();
+    if (min>320) {
+        // bigscreen
+        setMinimumSize(min/3,min/3);
+    } else {
+        setMinimumSize(10,10);
+    }
+    m_sysChannel = new QCopChannel( "QPE/System", this );
+    connect( m_sysChannel, SIGNAL( received(const QCString&,const QByteArray&) ),
+        this, SLOT( systemMessage(const QCString&,const QByteArray&) ) );
+}
+
+void ImageView::systemMessage( const QCString& msg, const QByteArray& data )
+{
+    int _newrotation;
+    QDataStream stream( data, IO_ReadOnly );
+    odebug << "received system message: " << msg << oendl;
+    if ( msg == "setCurrentRotation(int)" )
+    {
+        stream >> _newrotation;
+        odebug << "received setCurrentRotation(" << _newrotation << ")" << oendl;
+        if (!fullScreen()) {
+            m_rotation = _newrotation;
+            return;
+        }
+    }
 }
 
 void ImageView::setMenuActions(QActionGroup*hGroup,QActionGroup*nextprevGroup, QActionGroup*disptypeGroup)
@@ -179,7 +209,7 @@ void ImageView::contentsMousePressEvent ( QMouseEvent * e)
         return OImageScrollView::contentsMousePressEvent(e);
     }
     odebug << "Popup " << oendl;
-    QPopupMenu *m = new QPopupMenu(0);
+    QPopupMenu *m = new QPopupMenu(this);
     if (!m) return;
     if (m_hGroup) {
         m_hGroup->addTo(m);
@@ -213,10 +243,11 @@ void ImageView::setFullScreen(bool how,bool force)
     m_isFullScreen = how;
     if (how) {
         m_ignore_next_in = true;
-        setFixedSize(qApp->desktop()->size());
+//        setFixedSize(qApp->desktop()->size());
+        setGeometry(0,0,qApp->desktop()->size().width(),qApp->desktop()->size().height());
         if (force) showFullScreen();
     } else {
-        setMinimumSize(10,10);
+//        setMinimumSize(10,10);
     }
 }
 

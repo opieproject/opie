@@ -9,6 +9,8 @@ class QTimer;
 class QActionGroup;
 class QAction;
 
+class QCopChannel;
+
 namespace Opie {
     namespace Core {
         class OConfig;
@@ -57,17 +59,22 @@ protected:
     void initKeys();
     bool m_isFullScreen:1;
     bool m_ignore_next_in:1;
+    bool m_Rotated:1;
+
     int focus_in_count;
     QTimer*m_slideTimer;
     int m_slideValue;
     virtual void focusInEvent ( QFocusEvent * );
     QActionGroup *m_gDisplayType,*m_gPrevNext,*m_hGroup;
     bool closeIfHide:1;
+    QCopChannel* m_sysChannel;
+    int m_rotation;
 
 public slots:
     virtual void hide();
     virtual void startSlide(int);
     virtual void nextSlide();
+    virtual void systemMessage( const QCString&, const QByteArray& );
 
 protected slots:
     virtual void slotShowImageInfo();
