@@ -4,6 +4,7 @@ menu "libopie2"
   source libopie2/opienet/config.in
   source libopie2/opiepim/config.in
   source libopie2/opieui/config.in
+  source libopie2/opiemm/config.in
   comment ""
   source libopie2/examples/config.in
 endmenu

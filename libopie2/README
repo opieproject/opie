@@ -20,6 +20,7 @@ libopie is functionally seperated into the following libraries:
  - libopiepim
  - libopiedb
  - libopienet
+ - libopiemm
 
 1.1 Contents of libopiecore [ opiecore ]
 --------------------------------------------------------
@@ -132,6 +133,12 @@ USE THE CLASSES IN libopie/pim INSTEAD !(eilers)
  <libbend stuff>
  <libftp stuff>
 
+1.6 Contents of libopiemm [ opiemm ]
+--------------------------------------------------------
+
+ - osoundsystem
+ - oaudiointerface
+ - osoundserver
 
 --------------------------------------------------------
 2.0 Feature Description
@@ -155,3 +162,8 @@ USE THE CLASSES IN libopie/pim INSTEAD !(eilers)
 
 2.5 libopienet
 
+...
+
+2.6 libopiemm
+
+...
