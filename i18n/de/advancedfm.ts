@@ -209,7 +209,8 @@ unter der GPL</translation>
     <message>
         <source>Really delete
 </source>
-        <translation type="unfinished">Wirklich löschen?
+        <translation>Wirklich löschen
+
 </translation>
     </message>
     <message>
@@ -228,20 +229,22 @@ unter der GPL</translation>
     <message>
         <source>
 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>
+existiert. Überschreiben?</translation>
     </message>
     <message>
         <source> already exists.
 Do you really want to delete it?</source>
-        <translation type="unfinished"></translation>
+        <translation>existiert bereits.
+Soll wirklich gelöscht werden?</translation>
     </message>
     <message>
         <source>%1 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 existiert. Überschreiben?</translation>
     </message>
     <message>
         <source>Could not copy %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 konnte nicht zu %2 kopiert werden</translation>
     </message>
 </context>
 <context>

@@ -22,7 +22,7 @@
     <name>MemoryInfo</name>
     <message>
         <source>Used (%1 kB)</source>
-        <translation>Genutzt Speicher (%1 kB)</translation>
+        <translation>Genutzter Speicher (%1 kB)</translation>
     </message>
     <message>
         <source>Buffers (%1 kB)</source>
@@ -162,31 +162,31 @@ Click and hold on a process to see additional information about the process, or 
     <name>StorageInfo</name>
     <message>
         <source>CF Card: </source>
-        <translation type="unfinished"></translation>
+        <translation>CF-Karte:</translation>
     </message>
     <message>
         <source>Hard Disk </source>
-        <translation type="unfinished"></translation>
+        <translation>Festplatte</translation>
     </message>
     <message>
         <source>SD Card </source>
-        <translation type="unfinished"></translation>
+        <translation>SD-Karte</translation>
     </message>
     <message>
         <source>Hard Disk /dev/hd </source>
-        <translation type="unfinished"></translation>
+        <translation>Festplatte /dev/hd</translation>
     </message>
     <message>
         <source>SCSI Hard Disk /dev/sd </source>
-        <translation type="unfinished"></translation>
+        <translation>SCSI-Festplatte /dev/sd</translation>
     </message>
     <message>
         <source>Int. Storage </source>
-        <translation type="unfinished"></translation>
+        <translation>Int. Speicher</translation>
     </message>
     <message>
         <source>CF</source>
-        <translation type="unfinished"></translation>
+        <translation>CF</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
@@ -202,7 +202,7 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>SD</source>
-        <translation type="unfinished"></translation>
+        <translation>SD</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
