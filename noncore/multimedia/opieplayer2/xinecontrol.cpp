@@ -38,14 +38,16 @@
 #include <qpe/qpeapplication.h>
 #include "xinecontrol.h"
 #include "mediaplayerstate.h"
-#include "videowidget.h"
 
-XineControl::XineControl( VideoWidget *videoWidget, MediaPlayerState &_mediaPlayerState, QObject *parent, const char *name )
-    : QObject( parent, name ), mediaPlayerState( _mediaPlayerState ), videoUI( videoWidget ) {
+XineControl::XineControl( QWidget *videoContainerWidget, XineVideoWidget *xineWidget, 
+                          MediaPlayerState &_mediaPlayerState, 
+                          QObject *parent, const char *name )
+    : QObject( parent, name ), mediaPlayerState( _mediaPlayerState )
+{
 
-    libXine = new XINE::Lib( videoUI->vidWidget() );
+    libXine = new XINE::Lib( xineWidget );
 
-    connect ( videoUI, SIGNAL( videoResized( const QSize & )), this, SLOT( videoResized ( const QSize & ) ) );
+    connect ( videoContainerWidget, SIGNAL( videoResized( const QSize & )), this, SLOT( videoResized ( const QSize & ) ) );
     connect( &mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pause( bool ) ) );
     connect( this, SIGNAL( positionChanged( long ) ), &mediaPlayerState, SLOT( updatePosition( long ) ) );
     connect( &mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( stop( bool ) ) );

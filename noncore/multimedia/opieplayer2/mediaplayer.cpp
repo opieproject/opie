@@ -363,6 +363,6 @@ void MediaPlayer::recreateAudioAndVideoWidgets()
     connect( videoUI,  SIGNAL( moreReleased() ), this, SLOT( stopChangingVolume() ) );
     connect( videoUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
 
-    xineControl = new XineControl( videoUI, mediaPlayerState );
+    xineControl = new XineControl( videoUI, videoUI->vidWidget(), mediaPlayerState );
 }
 
