@@ -1,0 +1,4 @@
+  config KEYHELPER
+    boolean "keyhelper applet (Config keyboard layout on the fly)"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE

@@ -1,0 +1,569 @@
+<!DOCTYPE UI><UI>
+<class>KHCWidgetBase</class>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>KHCWidgetBase</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>431</width>
+            <height>388</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>KeyHelperConf</string>
+    </property>
+    <widget>
+        <class>QPushButton</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>btnCtrl</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>280</x>
+                <y>150</y>
+                <width>121</width>
+                <height>31</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Disable</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QPushButton</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>btnGen</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>10</x>
+                <y>150</y>
+                <width>110</width>
+                <height>31</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Generate</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QPushButton</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>btnCopy</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>140</x>
+                <y>150</y>
+                <width>121</width>
+                <height>31</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Copy</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>lblOrgK</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>20</x>
+                <y>50</y>
+                <width>50</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>K</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>lblMapK</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>20</x>
+                <y>120</y>
+                <width>20</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>K</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>lblMapKeycode</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>40</x>
+                <y>120</y>
+                <width>80</width>
+                <height>21</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>sizePolicy</name>
+            <sizepolicy>
+                <hsizetype>7</hsizetype>
+                <vsizetype>1</vsizetype>
+            </sizepolicy>
+        </property>
+        <property stdset="1">
+            <name>frameShape</name>
+            <enum>Panel</enum>
+        </property>
+        <property stdset="1">
+            <name>frameShadow</name>
+            <enum>Sunken</enum>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>keycode</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>txtMapKey</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>200</x>
+                <y>80</y>
+                <width>200</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
+        <class>QLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>txtOrgKey</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>190</x>
+                <y>10</y>
+                <width>200</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>lblOriginal</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>10</x>
+                <y>10</y>
+                <width>120</width>
+                <height>31</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>frameShape</name>
+            <enum>Box</enum>
+        </property>
+        <property stdset="1">
+            <name>frameShadow</name>
+            <enum>Raised</enum>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Original Key</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>lblMapping</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>10</x>
+                <y>80</y>
+                <width>120</width>
+                <height>21</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>frameShape</name>
+            <enum>Box</enum>
+        </property>
+        <property stdset="1">
+            <name>frameShadow</name>
+            <enum>Raised</enum>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Mapping Key</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QMultiLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>mleDefine</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>10</x>
+                <y>200</y>
+                <width>391</width>
+                <height>110</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>readOnly</name>
+            <bool>true</bool>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>lblOrgKeycode</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>50</x>
+                <y>50</y>
+                <width>70</width>
+                <height>21</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>sizePolicy</name>
+            <sizepolicy>
+                <hsizetype>7</hsizetype>
+                <vsizetype>1</vsizetype>
+            </sizepolicy>
+        </property>
+        <property stdset="1">
+            <name>frameShape</name>
+            <enum>Panel</enum>
+        </property>
+        <property stdset="1">
+            <name>frameShadow</name>
+            <enum>Sunken</enum>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>keycode</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>lblOrgU</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>130</x>
+                <y>50</y>
+                <width>20</width>
+                <height>21</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>U</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>lblOrgUnicode</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>150</x>
+                <y>50</y>
+                <width>80</width>
+                <height>21</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>sizePolicy</name>
+            <sizepolicy>
+                <hsizetype>7</hsizetype>
+                <vsizetype>1</vsizetype>
+            </sizepolicy>
+        </property>
+        <property stdset="1">
+            <name>frameShape</name>
+            <enum>Panel</enum>
+        </property>
+        <property stdset="1">
+            <name>frameShadow</name>
+            <enum>Sunken</enum>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>unicode</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>lblMapU</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>130</x>
+                <y>120</y>
+                <width>20</width>
+                <height>21</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>U</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>lblMapUnicode</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>150</x>
+                <y>120</y>
+                <width>80</width>
+                <height>21</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>sizePolicy</name>
+            <sizepolicy>
+                <hsizetype>7</hsizetype>
+                <vsizetype>1</vsizetype>
+            </sizepolicy>
+        </property>
+        <property stdset="1">
+            <name>frameShape</name>
+            <enum>Panel</enum>
+        </property>
+        <property stdset="1">
+            <name>frameShadow</name>
+            <enum>Sunken</enum>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>unicode</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QCheckBox</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>chkMapShift</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>260</x>
+                <y>120</y>
+                <width>33</width>
+                <height>19</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>S</string>
+        </property>
+        <property stdset="1">
+            <name>autoResize</name>
+            <bool>true</bool>
+        </property>
+    </widget>
+    <widget>
+        <class>QCheckBox</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>chkMapCtrl</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>310</x>
+                <y>120</y>
+                <width>34</width>
+                <height>19</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>C</string>
+        </property>
+        <property stdset="1">
+            <name>autoResize</name>
+            <bool>true</bool>
+        </property>
+    </widget>
+    <widget>
+        <class>QCheckBox</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>chkMapAlt</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>360</x>
+                <y>120</y>
+                <width>34</width>
+                <height>19</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>A</string>
+        </property>
+        <property stdset="1">
+            <name>autoResize</name>
+            <bool>true</bool>
+        </property>
+    </widget>
+    <widget>
+        <class>QCheckBox</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>chkOrgShift</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>250</x>
+                <y>50</y>
+                <width>33</width>
+                <height>19</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>S</string>
+        </property>
+        <property stdset="1">
+            <name>autoResize</name>
+            <bool>true</bool>
+        </property>
+    </widget>
+    <widget>
+        <class>QCheckBox</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>chkOrgCtrl</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>300</x>
+                <y>50</y>
+                <width>34</width>
+                <height>19</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>C</string>
+        </property>
+        <property stdset="1">
+            <name>autoResize</name>
+            <bool>true</bool>
+        </property>
+    </widget>
+    <widget>
+        <class>QCheckBox</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>chkOrgAlt</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>350</x>
+                <y>50</y>
+                <width>34</width>
+                <height>19</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>A</string>
+        </property>
+        <property stdset="1">
+            <name>autoResize</name>
+            <bool>true</bool>
+        </property>
+    </widget>
+</widget>
+<tabstops>
+    <tabstop>txtOrgKey</tabstop>
+    <tabstop>chkOrgShift</tabstop>
+    <tabstop>chkOrgCtrl</tabstop>
+    <tabstop>chkOrgAlt</tabstop>
+    <tabstop>txtMapKey</tabstop>
+    <tabstop>chkMapShift</tabstop>
+    <tabstop>chkMapCtrl</tabstop>
+    <tabstop>chkMapAlt</tabstop>
+    <tabstop>btnGen</tabstop>
+    <tabstop>btnCopy</tabstop>
+    <tabstop>btnCtrl</tabstop>
+    <tabstop>mleDefine</tabstop>
+</tabstops>
+</UI>

@@ -71,6 +71,7 @@ CONFIG_JUMPX	inputmethods/jumpx	jumpx.pro
 CONFIG_KBILL	noncore/games/kbill	kbill.pro
 CONFIG_KCHECKERS	noncore/games/kcheckers	kcheckers.pro
 CONFIG_KEYBOARD	inputmethods/keyboard	keyboard.pro
+CONFIG_KEYHELPER noncore/applets/keyhelper keyhelper.pro
 CONFIG_KEYPEBBLE	noncore/comm/keypebble	keypebble.pro
 CONFIG_KEYVIEW	development/keyview	keyview.pro
 CONFIG_KJUMPX	inputmethods/kjumpx	kjumpx.pro
