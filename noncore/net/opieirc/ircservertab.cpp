@@ -122,19 +122,13 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
  else if (command == "OP"){
 		QString nickname;
         stream >> nickname;
-        if (nickname.length() > 0) {
-            if (line.length() > 7 + nickname.length()) {
-                QString text = line.right(line.length()-nickname.length()-7);
+        if (nickname.length() > 0) { 
+                QString text = line.right(line.length()-nickname.length()-5);
                 IRCPerson person;
                 person.setNick(nickname);
-                m_session->kick(((IRCChannelTab *)tab)->channel(), &person, text);
-            } else {
-                IRCPerson person;
-                person.setNick(nickname);
-                m_session->kick(((IRCChannelTab *)tab)->channel(), &person);
+                m_session->op(((IRCChannelTab *)tab)->channel(), &person);
             }
         }
-	}
   
   //SEND MODES
   else if (command == "MODE"){
@@ -346,7 +340,19 @@ void IRCServerTab::display(IRCOutput output) {
                 }
             }
             break;
-        case OUTPUT_OTHERJOIN:
+/*        case OUTPUT_NICKCHANGE: {
+            //WAS HERE
+                QString nick = ((IRCPerson *)output.getParam(0))->nick();
+                QListIterator<IRCChannelTab> it(m_channelTabs);
+                for (; it.current(); ++it) {
+                    if (it.current()->list()->hasPerson(nick)) {
+                        it.current()->appendText("<font color=\"" + m_notificationColor + "\">"+output.htmlMessage()+"</font><br>");
+                        it.current()->list()->update();
+                    }
+                }
+            }
+            break;
+  */      case OUTPUT_OTHERJOIN:
         case OUTPUT_OTHERKICK:
         case OUTPUT_CHANPERSONMODE:
         case OUTPUT_OTHERPART: {

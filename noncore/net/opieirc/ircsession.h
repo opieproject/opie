@@ -51,6 +51,7 @@ public:
     void mode(IRCPerson *person, QString message);
     void mode(QString message);
     void part(IRCChannel *channel);
+    void op(IRCChannel *channel, IRCPerson *person);
     void kick(IRCChannel *channel, IRCPerson *person);
     void kick(IRCChannel *channel, IRCPerson *person, QString message);
     void beginSession();

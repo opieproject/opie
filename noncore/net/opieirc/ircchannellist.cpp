@@ -35,3 +35,14 @@ bool IRCChannelList::hasPerson(QString nick) {
     }
     return FALSE;
 }
+
+bool IRCChannelList::removePerson(QString nick) {
+    for (unsigned int i=0; i<count(); i++) {
+        if (text(i) == nick){
+            removeItem(i);
+            return TRUE;
+            }
+    }
+    return FALSE;
+}
+

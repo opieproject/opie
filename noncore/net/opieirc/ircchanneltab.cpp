@@ -62,6 +62,7 @@ void IRCChannelTab::appendText(QString text) {
     } else {
         m_lines++;
     }
+    m_textview->ensureVisible(0, m_textview->contentsHeight());
     m_textview->setText(txt);
     m_textview->ensureVisible(0, m_textview->contentsHeight());
     emit changed(this);
