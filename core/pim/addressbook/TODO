@@ -11,6 +11,7 @@ Known Bugs:
 - "Unfiled" is always in listview ..
 - Personal Details not working
 - Contact-Editor is dropped. Wait for replacement.
+- If category changed, the letterpicker should be resetted
 
 Urgent:
 

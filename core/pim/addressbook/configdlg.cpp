@@ -6,9 +6,6 @@
 
 #include <opie/ocontact.h>
 
-#include "addresssettings.h"
-
-
 ConfigDlg::ConfigDlg( QWidget *parent = 0, const char *name = 0 ):
 	ConfigDlg_Base(parent, name, true )
 {

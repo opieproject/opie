@@ -24,7 +24,7 @@
 #include "ablabel.h"
 #include "abview.h"
 #include "abtable.h"
-#include "addresssettings.h"
+// #include "addresssettings.h"
 #include "addressbook.h"
 
 
