@@ -147,7 +147,7 @@ void FretBoard::paintScale(QPainter* p)
 
                 if(data->isDrawNames())
                 {
-                    p->setPen(QColor(0,255,0));
+                    p->setPen(QColor(255,155,0));
                     p->drawText(x-dotsize/2,y-dotsize/2,Note::getNameOfNote(note));
                 }
 
