@@ -1,5 +1,3 @@
 moc_*
 *.moc
 Makefile*
-citytimebase.cpp
-citytimebase.h

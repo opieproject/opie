@@ -18,6 +18,8 @@
 **
 **********************************************************************/
 
+// changes by Maximilian Reiss <harlekin@handhelds.org>
+
 #include "sun.h"
 #include "zonemap.h"
 
@@ -37,6 +39,10 @@
 #include <qtextstream.h>
 #include <qtimer.h>
 #include <qtoolbutton.h>
+#include <qlayout.h>
+#include <qhbox.h>
+#include <qlistview.h>
+#include <qwhatsthis.h>
 
 #include <limits.h>
 
@@ -457,11 +463,66 @@ void ZoneMap::showZones( void ) const
     }
 }
 
+
+QWidget* ZoneMap::selectionWidget( QWidget *parent) {
+
+    QWidget *returnWidget = new QWidget( parent );
+
+    QVBoxLayout *layout = new QVBoxLayout( returnWidget );
+    QHBox *hBox = new QHBox( returnWidget );
+    QListView *continentView = new QListView( hBox );
+    continentView->addColumn( tr("Continent") );
+    QWhatsThis::add( continentView, tr("Select a continent/country here, then select a city") );
+    connect ( continentView, SIGNAL( clicked ( QListViewItem * ) ), this, SLOT( slotGetCities(  QListViewItem * ) ) );
+
+    QStringList continentList;
+    QListIterator<ZoneField> itZone( zones );
+    for ( itZone.toFirst(); itZone.current(); ++itZone ) {
+	ZoneField *pZone = itZone.current();
+        if ( continentList.contains( pZone->country() ) == 0 ) {
+            QString name;
+            QListViewItem *item;
+            if ( !(pZone->country().length() > 24) ) {
+                name = pZone->country().left(pZone->country().length()-1 );
+            } else {
+                name = pZone->country().left( 24 );
+            }
+            item = new QListViewItem( continentView, name, pZone->country() );
+            continentList.append( pZone->country() );
+        }
+    }
+
+    cityView = new QListView( hBox );
+    cityView->addColumn( tr("City") );
+
+    layout->addWidget( hBox );
+    return returnWidget;
+}
+
+void ZoneMap::slotGetCities( QListViewItem * contItem) {
+
+    cityView->clear();
+    selectedCont = contItem->text( 1 );
+    QListIterator<ZoneField> itZone( zones );
+    for ( itZone.toFirst(); itZone.current(); ++itZone ) {
+	ZoneField *pZone = itZone.current();
+        if ( pZone->country() == contItem->text( 1 ) ) {
+            QListViewItem *item;
+            item = new QListViewItem( cityView, pZone->city() );
+            connect ( cityView, SIGNAL( clicked ( QListViewItem* ) ), this, SLOT( slotCitySelected( QListViewItem* ) ) );
+        }
+    }
+}
+
+void ZoneMap::slotCitySelected( QListViewItem *cityItem ) {
+    if ( cityItem ) {
+        emit signalTz( selectedCont, cityItem->text( 0 ) );
+    }
+}
+
 void ZoneMap::drawCities( QPainter *p )
 {
-    int x,
-        y,
-        j;
+    int x, y, j;
     // draw in the cities
     // for testing only as when you put it
     // on the small screen it looks awful and not to mention useless

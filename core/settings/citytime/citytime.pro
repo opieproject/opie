@@ -1,10 +1,10 @@
-# $Id: citytime.pro,v 1.10 2002-06-26 23:13:52 sandman Exp $
-CONFIG += qt warn_on release
+#CONFIG += qt warn_on release
+CONFIG += qt warn_on debug
 TEMPLATE = app
 DESTDIR         = $(OPIEDIR)/bin
-INTERFACES = citytimebase.ui
-HEADERS = citytime.h zonemap.h sun.h stylusnormalizer.h
-SOURCES = citytime.cpp zonemap.cpp main.cpp sun.c stylusnormalizer.cpp
+#INTERFACES = citytimebase.ui
+HEADERS = citytime.h citytimebase.h zonemap.h sun.h stylusnormalizer.h
+SOURCES = citytime.cpp citytimebase.cpp zonemap.cpp main.cpp sun.c stylusnormalizer.cpp
 TARGET = citytime
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include

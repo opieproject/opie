@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-**********************************************************************/ 
+**********************************************************************/
 
 #ifndef TIMEWIDGETIMPL_H
 #define TIMEWIDGETIMPL_H
@@ -55,7 +55,9 @@ private:
     bool bAdded;        // a flag to indicate things have been added...
     bool bWhichClock;
     int timerId;
-    
+
+
+    QWidget* selWidget;
     // a spot to hold the time zone for each city
     QString strCityTz[CITIES];
     QList<QToolButton> listCities;

@@ -18,6 +18,8 @@
 **
 **********************************************************************/
 
+// changes by Maximilian Reiss <harlekin@handhelds.org>
+
 #include "zonemap.h"
 #include "citytime.h"
 
@@ -29,7 +31,6 @@
 #include <qpe/qcopenvelope_qws.h>
 #endif
 
-
 #include <qdir.h>
 #include <qfile.h>
 #include <qlabel.h>
@@ -37,6 +38,7 @@
 #include <qregexp.h>
 #include <qtextstream.h>
 #include <qtoolbutton.h>
+#include <qlayout.h>
 
 #include <stdlib.h>
 
@@ -77,7 +79,6 @@ CityTime::CityTime( QWidget *parent, const char* name,
     QWidget *d = QApplication::desktop();
     if ( d->width() < d->height() ) {
         // append for that 4 down look
-
         listCities.append( cmdCity4 );
         listCities.append( cmdCity5 );
         listCities.append( cmdCity6 );
@@ -104,11 +105,15 @@ CityTime::CityTime( QWidget *parent, const char* name,
         cmdCity5->hide();
         cmdCity6->hide();
     }
+
+    selWidget = frmMap->selectionWidget( this );
+    selWidget->hide();
+    CityTimeBaseLayout->addWidget( selWidget );
     bAdded = true;
     readInTimes();
     changed = FALSE;
-    QObject::connect( qApp, SIGNAL( clockChanged(bool) ),
-                      this, SLOT( changeClock(bool) ) );
+    QObject::connect( qApp, SIGNAL( clockChanged( bool ) ),
+                      this, SLOT( changeClock( bool ) ) );
     // now start the timer so we can update the time quickly every second
     timerEvent( 0 );
 }
@@ -199,7 +204,10 @@ void CityTime::showTime( void )
 
 void CityTime::beginNewTz()
 {
+    buttonWidget->hide();
     frmMap->setFocus();
+    selWidget->show();
+    // CityTimeBaseLayout->addWidget( selWidget );
 }
 
 void CityTime::slotNewTz( const QString & strNewCountry,
@@ -223,6 +231,8 @@ void CityTime::slotNewTz( const QString & strNewCountry,
         }
     }
     showTime();
+    buttonWidget->show();
+    selWidget->hide();
 }
 
 void CityTime::readInTimes( void )

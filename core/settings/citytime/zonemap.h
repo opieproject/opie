@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-**********************************************************************/ 
+**********************************************************************/
 
 #ifndef ZONEMAP_H
 #define ZONEMAP_H
@@ -34,7 +34,8 @@ class QComboBox;
 class QLabel;
 class QTimer;
 class QToolButton;
-
+class QListViewItem;
+class QListView;
 
 
 class ZoneField
@@ -63,6 +64,7 @@ public:
     ZoneMap( QWidget *parent = 0, const char *name = 0 );
     ~ZoneMap();
     void showZones( void ) const;
+    QWidget* selectionWidget( QWidget* parent );
     // convert between the pixels on the image and the coordinates in the
     // database
     inline bool zoneToWin( int zoneX, int zoneY, int &winX, int &winY ) const;
@@ -87,6 +89,9 @@ protected:
     virtual void resizeEvent( QResizeEvent *);
     virtual void drawContents( QPainter *p, int cx, int cy, int cw, int ch );
 
+private slots:
+    void slotGetCities( QListViewItem * );
+    void slotCitySelected(  QListViewItem * );
 private:
     ZoneField *findCityNear( ZoneField *city, int key );
     void showCity( ZoneField *city );
@@ -103,6 +108,9 @@ private:
     ZoneField *pRepaint; // save the location to maximize the repaint...
     QList<ZoneField> zones; // a linked list to hold all this information
     StylusNormalizer norm;
+
+    QListView *cityView;
+    QString selectedCont;
 
     //the True width and height of the map...
     int wImg;
@@ -143,8 +151,8 @@ inline bool ZoneMap::zoneToWin( int zoneX, int zoneY,
     // for now just return true...
     return true;
 }
- 
-inline bool ZoneMap::winToZone( int winX, int winY, 
+
+inline bool ZoneMap::winToZone( int winX, int winY,
                                 int &zoneX, int &zoneY ) const
 {
     zoneY = ( 648000 * ( oy - winY ) ) / hImg;
@@ -152,6 +160,6 @@ inline bool ZoneMap::winToZone( int winX, int winY,
     // perhaps in the future there will be some real error checking
     // for now just return true...
     return true;
-} 
+}
 
 #endif
