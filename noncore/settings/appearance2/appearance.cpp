@@ -677,14 +677,14 @@ void Appearance::editSchemeClicked ( )
     QString labels [QColorGroup::NColorRoles];
     QColor colors [QColorGroup::NColorRoles];
 
-    for ( QColorGroup::ColorRole role = (QColorGroup::ColorRole) 0; role != QColorGroup::NColorRoles; ((int) role )++ )
+    for ( int role = 0; role < (int) QColorGroup::NColorRoles; ++role )
     {
-        QColor col = item-> color ( role );
+        QColor col = item->color( static_cast<QColorGroup::ColorRole>( role ) );
 
         if ( col. isValid ( ))
         {
-            labels [cnt] = item-> label ( role );
-            colors [cnt] = col;
+            labels[cnt] = item->label( static_cast<QColorGroup::ColorRole>( role ) );
+            colors[cnt] = col;
 
             cnt++;
         }
@@ -696,11 +696,11 @@ void Appearance::editSchemeClicked ( )
         ColorListItem *citem = (ColorListItem *) m_color_list-> item ( 0 );
         cnt = 0;
 
-        for ( QColorGroup::ColorRole role = (QColorGroup::ColorRole) 0; role != QColorGroup::NColorRoles; ((int) role )++ )
+        for ( int role = 0; role < (int) QColorGroup::NColorRoles; ++role )
         {
-            if ( item-> color ( role ). isValid ( ))
+            if ( item->color( static_cast<QColorGroup::ColorRole>( role ) ).isValid() )
             {
-                citem-> setColor ( role, colors [cnt] );
+                citem->setColor( static_cast<QColorGroup::ColorRole>( role ), colors[cnt] );
                 cnt++;
             }
         }
