@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: colordialog.h,v 1.2 2002-04-30 01:09:14 drw Exp $
+** $Id: colordialog.h,v 1.3 2002-08-27 01:36:02 llornkcor Exp $
 **
 ** Definition of OColorDialog class
 **
@@ -44,6 +44,18 @@
 
 class OColorDialogPrivate;
 
+/**
+ * @class OColorDialog
+ * @brief The OColorDialog class is a copy of QColorDialog for use in Opie.
+ *
+ * OColorDialog is a copy of TrollTech's QColorDialog for use in Opie.  The default
+ * build of QT/Embedded used by Opie does not include QColorDialog, so it is provided
+ * here.  It is renamed to prevent conflicts in the event the QColorDialog is included
+ * at a later date in QP/E.
+ *
+ * See http://doc.trolltech.com/2.3/qcolordialog.html for complete documentation of
+ * QColorDialog.
+ */
 class Q_EXPORT OColorDialog : public QDialog
 {
     Q_OBJECT
