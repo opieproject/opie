@@ -177,7 +177,7 @@ Soll es nach neuen Dokumenten durchsucht werden ?</translation>
     <name>ShutdownImpl</name>
     <message>
         <source>Terminate</source>
-        <translation>Herunerfahren</translation>
+        <translation>Herunterfahren</translation>
     </message>
     <message>
         <source>Terminate Opie</source>
