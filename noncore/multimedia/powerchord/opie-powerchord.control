@@ -6,5 +6,5 @@ Architecture: arm
 Version: 0.0.8
 Depends: task-opie-minimal
 Description: Guitar Chord generator application
-Allows naming of chords using base note and key. Fretboard diagrams are
-produced illustrating ways to play the chord.
+ Allows naming of chords using base note and key. Fretboard diagrams are
+ produced illustrating ways to play the chord.
