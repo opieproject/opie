@@ -2,7 +2,6 @@
 #define _O_HOLIDAY_PLUGIN_IF_H
 #include <opie2/odebug.h>
 #include <qpe/qcom.h>
-#include <qpe/quuid.h>
 
 #ifndef QT_NO_COMPONENT
 //"b981b4e9-6d5d-4ee0-a193-f8d0e443809b"
@@ -37,7 +36,7 @@ public:
         } else {
             return  QS_FALSE;
         }
-        if (*iface) *iface->addRef();
+        if (*iface) (*iface)->addRef();
         return QS_OK;
     }
 
