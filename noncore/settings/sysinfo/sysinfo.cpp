@@ -30,7 +30,7 @@
 #include "versioninfo.h"
 #include "sysinfo.h"
 
-#include <opie/otabwidget.h>
+#include <opie2/otabwidget.h>
 
 #include <qpe/config.h>
 #include <qpe/resource.h>

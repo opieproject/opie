@@ -30,7 +30,7 @@
 
 #include "versioninfo.h"
 
-#include <opie/odevice.h>
+#include <opie2/odevice.h>
 
 using namespace Opie;
 
