@@ -1,4 +1,4 @@
- /*
+/*
                             This file is part of the Opie Project
 
                              Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>
@@ -494,7 +494,7 @@ xine_vo_driver_t* init_video_out_plugin( xine_t *xine,
   vo->frameDis = frameDisplayFunc;
 
   /* return ( vo_driver_t*) vo; */
-  return vo_new_port( xine, ( vo_driver_t* )vo, 1 );
+  return vo_new_port( xine, ( vo_driver_t* )vo, 0 );
 }
 
 #if 0
