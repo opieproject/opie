@@ -96,7 +96,7 @@ MainWindow :: MainWindow()
     a->addTo( popup );
     a->addTo( bar );
 
-    mb->insertItem( tr( "Packages" ), popup );
+    mb->insertItem( tr( "Actions" ), popup );
 
     // View menu
     popup = new QPopupMenu( this );
