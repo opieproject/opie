@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -21,27 +21,31 @@
 #include "interface.h"
 #include "man.h"
 
-#include <qpe/resource.h>
-#include <qpe/qpeapplication.h>
+#include <qtopia/qpeapplication.h>
+#include <qtopia/resource.h>
 
 #include <qlabel.h>
 #include <qmessagebox.h>
 #include <qapplication.h>
 #include <qstyle.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qtoolbutton.h>
 
 ParaShoot::ParaShoot(QWidget* parent, const char* name, WFlags f) :
     QMainWindow(parent,name,f),
-    canvas(232, 258),
+    canvas( 232, 258 ),
+    cannon(NULL),
+    base(NULL),
+    gamestopped( true ),
+    waitover( false ),
     fanfare("level_up"),
     score(0)
 {
     QPEApplication::grabKeyboard();
     QPEApplication::setInputMethodHint(this, QPEApplication::AlwaysOff );
+
+    updatespeed = 80;
     canvas.setAdvancePeriod(80);
-    QPixmap bg = Resource::loadPixmap("parashoot/sky");
-    canvas.setBackgroundPixmap(bg);
 
     pb = new QCanvasView(&canvas, this);
     pb->setFocus();
@@ -52,9 +56,7 @@ ParaShoot::ParaShoot(QWidget* parent, const char* name, WFlags f) :
     toolbar->setHorizontalStretchable( TRUE );
 
     setCaption( tr("ParaShoot") );
-    QPixmap newicon = Resource::loadPixmap("parashoot/manicon");
-    setIcon(newicon);
-    new QToolButton(newicon, tr("New Game"), 0,
+    new QToolButton( Resource::loadIconSet("new"), tr("New Game"), 0,
                            this, SLOT(newGame()), toolbar, "New Game");
 
     levelscore = new QLabel(toolbar);
@@ -72,8 +74,6 @@ ParaShoot::ParaShoot(QWidget* parent, const char* name, WFlags f) :
     connect(pauseTimer, SIGNAL(timeout()), this, SLOT(wait()) );
 
     setFocusPolicy(StrongFocus);
-
-    newGame();
 }
 
 
@@ -82,8 +82,34 @@ void ParaShoot::resizeEvent(QResizeEvent *)
     QSize s = centralWidget()->size();
     int fw = style().defaultFrameWidth();
     canvas.resize( s.width() - fw - 2, s.height() - fw - 2);
+
+    QImage bgimage = Resource::loadImage("parashoot/sky");
+    QPixmap bgpixmap;
+
+    bgpixmap.convertFromImage(bgimage.smoothScale(canvas.width(),
+	canvas.height()), QPixmap::Auto);
+    canvas.setBackgroundPixmap(bgpixmap);
+
+    if (base) {
+	base->reposition();
+    }
+
+    if (cannon) {
+	cannon->reposition();
+    }
 }
 
+void ParaShoot::focusOutEvent (QFocusEvent *)
+{
+    if (!gamestopped)
+	canvas.setAdvancePeriod(-1);
+}
+
+void ParaShoot::focusInEvent (QFocusEvent *)
+{
+    if (!gamestopped)
+	canvas.setAdvancePeriod(updatespeed);
+}
 
 void ParaShoot::showScore( int score, int level )
 {
@@ -150,8 +176,9 @@ void ParaShoot::gameOver()
 			 "        Accuracy: %3% " ).arg(score).arg(shots).arg(shots * 100 / shotsFired ),
 		                     &canvas);
     gameover->setColor(red);
-    gameover->setFont( QFont("times", 18, QFont::Bold) );
-    gameover->move(canvas.width()/2 -110, canvas.height()/2 -50);
+    gameover->setFont( QFont("times", 16, QFont::Bold) );
+    gameover->move((canvas.width() - gameover->boundingRect().width()) / 2,
+	(canvas.height() - gameover->boundingRect().height()) / 2);
     gameover->setZ(500);
     gameover->show();
     gamestopped = true;
@@ -227,16 +254,21 @@ void ParaShoot::keyPressEvent(QKeyEvent* event)
 	  case Key_F1:
 	  case Key_F9:
 	  case Key_Space:
-	    cannon->shoot();
+              if ( cannon )
+                  cannon->shoot();
 	    break;
-	  case Key_Left:
-	    cannon->pointCannon(Cannon::Left);
+        case Key_Left:{
+              if (cannon )
+                  cannon->pointCannon(Cannon::Left);
 	    lastcannonkey=Key_Left;
 	    break;
-	  case Key_Right:
-	    cannon->pointCannon(Cannon::Right);
+        }
+        case Key_Right:{
+              if ( cannon )
+                  cannon->pointCannon(Cannon::Right);
 	    lastcannonkey=Key_Right;
 	    break;
+        }
 	  default:
 	    return;
 	}
@@ -245,6 +277,6 @@ void ParaShoot::keyPressEvent(QKeyEvent* event)
 
 void ParaShoot::keyReleaseEvent(QKeyEvent* event)
 {
-    if ( lastcannonkey == event->key() )
+    if ( cannon && lastcannonkey == event->key() )
 	cannon->pointCannon(Cannon::NoDir);
 }

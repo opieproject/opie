@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -18,11 +18,11 @@
 **
 **********************************************************************/
 
-#include "codes.h"  
+#include "codes.h"
 #include "man.h"
 #include "base.h"
 
-#include <qpe/resource.h>
+#include <qtopia/resource.h>
 
 #include <qregexp.h>
 
@@ -30,12 +30,12 @@ int mancount;
 
 Man::Man(QCanvas* canvas) :
     QCanvasSprite(0, canvas),
-    splat("lose")
+    splat("lose") // No tr
 {
     manarray = new QCanvasPixmapArray();
     QString m0 = Resource::findPixmap("parashoot/man0001");
     m0.replace(QRegExp("0001"),"%1");
-    manarray->readPixmaps(m0, 7);  
+    manarray->readPixmaps(m0, 7);
     setSequence(manarray);
     setAnimated(true);
     mancount++;
@@ -45,7 +45,7 @@ Man::Man(QCanvas* canvas) :
 
 Man::Man(QCanvas* canvas, int x, int y) :
     QCanvasSprite(0, canvas),
-    splat("bang")
+    splat("bang") // No tr
 {
     manarray = new QCanvasPixmapArray();
     QString m0 = Resource::findPixmap("parashoot/man0001");
@@ -62,7 +62,7 @@ Man::Man(QCanvas* canvas, int x, int y) :
         first_time = FALSE;
         QTime midnight(0, 0, 0);
         srand(midnight.secsTo(QTime::currentTime()) );
-    } 
+    }
     int yfallspeed = 0;
     yfallspeed = (rand() % 3) + 1;
     setVelocity(0, yfallspeed);
@@ -92,9 +92,16 @@ void Man::advance(int phase)
 	    f++;
 	    move(x(), canvas()->height()-26);
 	    setVelocity(-2, 0);
-	} 
+	} else if (xVelocity() == -2) {
+	    //
+	    // There's been a resize event while this Man has
+	    // been on the ground.  Move the man back to the
+	    // new ground location.  This is not neat.
+	    //
+	    move(x(), canvas()->height()-26);
+	}
     }
-} 
+}
 
 void Man::setInitialCoords()
 {
@@ -110,7 +117,7 @@ void Man::setInitialCoords()
 
 //check if man has reached the base
 void Man::checkCollision()
-{ 
+{
     if ( (x() < 23) && (y() == canvas()->height()-26)) {
        QCanvasItem* item;
        QCanvasItemList l=collisions(FALSE);
@@ -122,6 +129,16 @@ void Man::checkCollision()
                  start();
              }
           }
+    }
+
+    //
+    // resize events may cause Man objects to appear
+    // outside the screen.  Get rid of them if this
+    // is the case.
+    //
+    if ((x() < 0) || (x() > canvas()->width())) {
+	delete this;
+	return;
     }
 }
 

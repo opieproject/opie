@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -18,7 +18,7 @@
 **
 **********************************************************************/
 
-#include <qpe/resource.h>
+#include <qtopia/resource.h>
 
 #include <qregexp.h>
 
@@ -38,10 +38,9 @@ shotsfired=0;
     cannonarray->readPixmaps(c0,17);
     setSequence(cannonarray);
     setFrame(index);
-    move(canvas->width()/2-20, canvas->height()-32);
-    // co ords for barrel of cannon when upright
-    barrelypos = canvas->height()-32;
-    barrelxpos = canvas->width()/2;
+
+    reposition();
+
     movedir = NoDir;
     moveDelay = 0;
     setAnimated(TRUE);
@@ -137,4 +136,15 @@ Cannon::~Cannon()
 int Cannon::rtti() const
 {
    return cannon_rtti;
+}
+
+void Cannon::reposition(void)
+{
+    move(canvas()->width()/2-20, canvas()->height()-32);
+    // co ords for barrel of cannon when upright
+    barrelypos = canvas()->height()-32;
+    barrelxpos = canvas()->width()/2;
+
+    setFrame(index);
+    setCoords();
 }

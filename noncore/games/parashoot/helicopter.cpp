@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -22,7 +22,7 @@
 #include "man.h"
 #include "codes.h"
 
-#include <qpe/resource.h>
+#include <qtopia/resource.h>
 
 #include <qregexp.h>
 
@@ -37,7 +37,8 @@ Helicopter::Helicopter(QCanvas* canvas) :
     QCanvasPixmapArray* helicopterarray = new QCanvasPixmapArray();
     QString h0 = Resource::findPixmap("parashoot/helicopter0001");
     h0.replace(QRegExp("0001"),"%1");
-    helicopterarray->readPixmaps(h0,3 );
+    helicopterarray->readPixmaps(h0,4 );
+
     setSequence(helicopterarray);
     setAnimated(true);
     move(canvas->width(), 5);
@@ -57,9 +58,18 @@ void Helicopter::advance(int phase)
 {
    QCanvasSprite::advance(phase);
    if (phase == 0) {
-          setFrame(fr%3);
-          fr++;
-          checkCollision();
+	if (frame() == 3) {
+	    delete this;
+	    return;
+	}
+
+	if (hits >= 2) {
+	    setFrame(3);
+	} else {
+	    setFrame(fr%3);
+	    fr++;
+	    checkCollision();
+	}
    }
 }
 
@@ -83,10 +93,6 @@ void Helicopter::dropman()
 void Helicopter::done()
 {
     hits++;
-    if (hits >= 2) {
-        setAnimated(false);
-        delete this;
-    }
 }
 
 void Helicopter::takeOff()

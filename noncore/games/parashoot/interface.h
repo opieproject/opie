@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -22,7 +22,7 @@
 #include "base.h"
 #include "helicopter.h"
 
-#include <qpe/sound.h>
+#include <qtopia/sound.h>
 
 #include <qmainwindow.h>
 #include <qtimer.h>
@@ -32,15 +32,16 @@ class QCanvas;
 class Helicopter;
 
 //enum Direction{
-//      left, right, up, down };   
+//      left, right, up, down };
 
 class ParaShoot : public QMainWindow {
     Q_OBJECT
- 
+
 public:
-    static QString appName() { return QString::fromLatin1("parashoot"); }
     ParaShoot(QWidget* parent=0, const char* name=0, WFlags f=0);
-    
+    static QString appName() {
+        return QString::fromLatin1("parashoot");
+    }
     void clear();
     void gameOver();
     int mancount;
@@ -51,7 +52,9 @@ protected:
     virtual void keyPressEvent(QKeyEvent*);
     virtual void keyReleaseEvent(QKeyEvent*);
     virtual void resizeEvent(QResizeEvent *e);
- 
+    virtual void focusOutEvent(QFocusEvent *);
+    virtual void focusInEvent(QFocusEvent *);
+
 private slots:
     void increaseScore(int);
     void newGame();
@@ -64,7 +67,6 @@ private:
     QCanvas canvas;
     Cannon* cannon;
     Base* base;
-    QCanvasText* gameover;
     QLabel* levelscore;
     int nomen;
     int level;
@@ -77,4 +79,4 @@ private:
     Sound fanfare;
     int score;
     int lastcannonkey;
-};           
+};
