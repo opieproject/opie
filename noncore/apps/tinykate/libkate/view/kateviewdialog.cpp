@@ -532,7 +532,7 @@ FontConfig::FontConfig( QWidget *parent, char *name )
 //     int size = cfg. readNumEntry ( "FontSize", 10 );
 //  OFontSelector *m_fontselect;
 
-    m_fontselect = new OFontSelector ( false, this, "FontTab" );
+    m_fontselect = new Opie::OFontSelector ( false, this, "FontTab" );
 //    m_fontselect-> setSelectedFont ( familyStr, styleStr, size );
 //   QWhatsThis::add( m_fontselect,
 //   tr( "Select the desired name, style and size of the default font applications will use." ) );

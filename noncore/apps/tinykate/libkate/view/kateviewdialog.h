@@ -31,7 +31,7 @@ class KColorButton;
 class QComboBox;
 
 #include <kdialogbase.h>
-#include <opie/ofontselector.h>
+#include <opie2/ofontselector.h>
 #include "kateview.h"
 
 class SearchDialog : public KDialogBase
@@ -184,7 +184,7 @@ public:
   QFont getFont ( ) { return myFont; };
 
   private:
-  OFontSelector *m_fontselect;
+  Opie::OFontSelector *m_fontselect;
 //    class KFontChooser *m_fontchooser;
     QFont myFont;
 
