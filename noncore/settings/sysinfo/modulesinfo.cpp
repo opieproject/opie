@@ -112,6 +112,8 @@ void ModulesInfo::updateData()
         QListViewItem *newitem;
         QListViewItem *selecteditem = 0x0;
         while ( true ) {
+            modname[0] = '\0';
+            usage[0] = '\0';
             int success = fscanf( procfile, "%s%d%d%[^\n]", modname, &modsize, &usecount, usage );
 
             if ( success == EOF )
