@@ -15,7 +15,7 @@
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     : QMainWindow( parent, name, flags )
 {
-    setCaption( tr( "Opie-Mail" ) );
+    setCaption( tr( "Mail" ) );
     setToolBarsMovable( false );
 
     toolBar = new QToolBar( this );

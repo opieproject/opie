@@ -27,16 +27,22 @@ void IMAPwrapper::login()
     const char *server, *user, *pass;
     uint16_t port;
     int err = MAILIMAP_NO_ERROR;
-    
+
     server = account->getServer().latin1();
     port = account->getPort().toUInt();
     user = account->getUser().latin1();
     pass = account->getPassword().latin1();
-    
-    m_imap = mailimap_new( 20, &imap_progress ); 
+
+    m_imap = mailimap_new( 20, &imap_progress );
     /* connect */
-    err = mailimap_socket_connect( m_imap, (char*)server, port );
-    if ( err != MAILIMAP_NO_ERROR &&  
+  //  err = mailimap_socket_connect( m_imap, (char*)server, port );
+  if (account->getSSL()) {
+        err = mailimap_ssl_connect( m_imap, (char*)server, port );
+    } else {
+        err = mailimap_socket_connect( m_imap, (char*)server, port );
+    }
+
+    if ( err != MAILIMAP_NO_ERROR &&
          err != MAILIMAP_NO_ERROR_AUTHENTICATED &&
          err != MAILIMAP_NO_ERROR_NON_AUTHENTICATED ) {
          qDebug("error connecting server: %s",m_imap->response);
@@ -44,7 +50,7 @@ void IMAPwrapper::login()
          m_imap = 0;
          return;
     }
-    
+
     /* login */
     err = mailimap_login_simple( m_imap, (char*)user, (char*)pass );
     if ( err != MAILIMAP_NO_ERROR ) {
@@ -74,7 +80,7 @@ void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
     mailimap_fetch_att *fetchAtt,*fetchAttFlags,*fetchAttDate;
     mailimap_fetch_type *fetchType;
     mailimap_set *set;
-    
+
     mb = mailbox.latin1();
     login();
     if (!m_imap) {
@@ -95,20 +101,20 @@ void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
         logout();
         return;
     }
-    
-    result = clist_new();  
+
+    result = clist_new();
     /* the range has to start at 1!!! not with 0!!!! */
     set = mailimap_set_new_interval( 1, last );
     fetchAtt = mailimap_fetch_att_new_envelope();
     fetchAttFlags = mailimap_fetch_att_new_flags();
     fetchAttDate = mailimap_fetch_att_new_internaldate();
-    
+
     //fetchType = mailimap_fetch_type_new_fetch_att(fetchAtt);
     fetchType = mailimap_fetch_type_new_fetch_att_list_empty();
     mailimap_fetch_type_new_fetch_att_list_add(fetchType,fetchAtt);
     mailimap_fetch_type_new_fetch_att_list_add(fetchType,fetchAttFlags);
     mailimap_fetch_type_new_fetch_att_list_add(fetchType,fetchAttDate);
-    
+
     err = mailimap_fetch( m_imap, set, fetchType, &result );
     mailimap_set_free( set );
     /* cleans up the fetch_att's too! */
@@ -144,14 +150,14 @@ QList<IMAPFolder>* IMAPwrapper::listFolders()
     int err = MAILIMAP_NO_ERROR;
     clist *result;
     clistcell *current;
-   
+
     QList<IMAPFolder> * folders = new QList<IMAPFolder>();
     folders->setAutoDelete( true );
     login();
     if (!m_imap) {
         return folders;
     }
-        
+
 /*
  * First we have to check for INBOX 'cause it sometimes it's not inside the path.
  * We must not forget to filter them out in next loop!
@@ -176,11 +182,11 @@ QList<IMAPFolder>* IMAPwrapper::listFolders()
         qDebug("error fetching folders: %s",m_imap->response);
     }
     mailimap_list_result_free( result );
-    
+
 /*
  * second stage - get the other then inbox folders
  */
-    mask = "*" ;    
+    mask = "*" ;
     path = account->getPrefix().latin1();
     result = clist_new();
     qDebug(path);
@@ -196,7 +202,7 @@ QList<IMAPFolder>* IMAPwrapper::listFolders()
             if (temp.lower()=="inbox")
                 continue;
             folders->append(new IMAPFolder(temp));
-            
+
         }
     } else {
         qDebug("error fetching folders %s",m_imap->response);
@@ -214,7 +220,7 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
     mailimap_flag_fetch*cflag;
     QBitArray mFlags(7);
     QStringList addresslist;
-    
+
     if (!m_att) {
         return m;
     }
@@ -329,9 +335,9 @@ RecBody IMAPwrapper::fetchBody(const RecMail&mail)
     mailimap_fetch_type *fetchType;
     mailimap_set *set;
     mailimap_body*body_desc;
-    
+
     mb = mail.getMbox().latin1();
-    
+
     login();
     if (!m_imap) {
         return body;
@@ -343,10 +349,10 @@ RecBody IMAPwrapper::fetchBody(const RecMail&mail)
         logout();
         return body;
     }
-    result = clist_new();  
+    result = clist_new();
     /* the range has to start at 1!!! not with 0!!!! */
     set = mailimap_set_new_interval( mail.getNumber(),mail.getNumber() );
-    fetchAtt = mailimap_fetch_att_new_body();    
+    fetchAtt = mailimap_fetch_att_new_body();
     fetchType = mailimap_fetch_type_new_fetch_att(fetchAtt);
     err = mailimap_fetch( m_imap, set, fetchType, &result );
     mailimap_set_free( set );
@@ -361,13 +367,13 @@ RecBody IMAPwrapper::fetchBody(const RecMail&mail)
             searchBodyText(mail,body_desc->body_1part,body);
         } else {
         }
-    
+
     } else {
         qDebug("error fetching body: %s",m_imap->response);
     }
 
     clist_free(result);
-    logout(); 
+    logout();
     return body;
 }
 
@@ -396,14 +402,14 @@ void IMAPwrapper::fillPlainBody(const RecMail&mail,RecBody&target_body, mailimap
     mailimap_fetch_att *fetchAtt;
     mailimap_fetch_type *fetchType;
     mailimap_set *set;
-    
+
     mb = mail.getMbox().latin1();
-    
+
     if (!m_imap) {
         return;
     }
 
-    result = clist_new();  
+    result = clist_new();
     /* the range has to start at 1!!! not with 0!!!! */
     set = mailimap_set_new_interval( mail.getNumber(),mail.getNumber() );
     fetchAtt = mailimap_fetch_att_new_rfc822_text();
@@ -411,7 +417,7 @@ void IMAPwrapper::fillPlainBody(const RecMail&mail,RecBody&target_body, mailimap
     err = mailimap_fetch( m_imap, set, fetchType, &result );
     mailimap_set_free( set );
     mailimap_fetch_type_free( fetchType );
-    
+
     if (err == MAILIMAP_NO_ERROR && (current=clist_begin(result)) ) {
         mailimap_msg_att * msg_att;
         msg_att = (mailimap_msg_att*)current->data;
