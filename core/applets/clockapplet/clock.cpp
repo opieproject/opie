@@ -1,5 +1,6 @@
 /**********************************************************************
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2002 Trolltech AS.  All rights reserved.
 **
 ** This file is part of Qtopia Environment.
 **
@@ -17,15 +18,21 @@
 ** not clear to you.
 **
 **********************************************************************/
+// merged in the StyleFix. Applets should raise Popup!
+// by zecke@handhelds.org 6th of may 2004
 
 #include "clock.h"
 
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/otaskbarapplet.h>
+
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
+#include <qpe/resource.h>
+
+#include <qpopupmenu.h>
 
 using namespace Opie::Core;
 using namespace Opie::Ui;
@@ -57,11 +64,40 @@ void LauncherClock::readConfig() {
     format = config.readNumEntry("ClockApplet",0);
 }
 
-void LauncherClock::mouseReleaseEvent( QMouseEvent * )
+void LauncherClock::mousePressEvent( QMouseEvent * )
 {
-    QCString setTimeApp;
-    setTimeApp="systemtime";
-    QCopEnvelope e("QPE/Application/"+setTimeApp, "raise()");
+    QPopupMenu *menu = new QPopupMenu(this);
+    menu->insertItem(tr("Set time..."), 0);
+    menu->insertSeparator();
+    menu->insertItem(tr("Clock.."), 1);
+
+
+    Config config( "Clock" );
+    config.setGroup( "Daily Alarm" );
+    bool alarmOn = config.readBoolEntry("Enabled", FALSE);
+    menu->insertItem(Resource::loadIconSet(alarmOn?"clockapplet/smallalarm":"clockapplet/smallalarm_off" ),
+                     tr("Alarm..."), 2);
+
+
+    /* FIXME use OTaskBarApplet ### */
+    QPoint curPos = mapToGlobal( QPoint(0,0) );
+    QSize sh = menu->sizeHint();
+    switch (menu->exec( curPos-QPoint((sh.width()-width())/2,sh.height()) )) {
+	case 0:
+	    Global::execute( "systemtime" );
+	    break;
+	case 1: {
+	    QCopEnvelope e("QPE/Application/clock", "showClock()" );
+	    }
+	    break;
+	case 2: {
+		QCopEnvelope e("QPE/Application/clock", "editDailyAlarm()" );
+	    }
+	    break;
+	default:
+	    break;
+    }
+    delete menu;
 }
 
 
@@ -113,7 +149,7 @@ void LauncherClock::changeTime( void )
     }
 }
 
-void LauncherClock::slotClockChanged( bool pm )
+void LauncherClock::slotClockChanged( bool  )
 {
     readConfig();
     updateTime();

@@ -36,7 +36,7 @@ protected slots:
     void slotClockChanged( bool pm );
 
 protected:
-    void mouseReleaseEvent( QMouseEvent * );
+    void mousePressEvent( QMouseEvent * );
     void timerEvent( QTimerEvent * );
     void changeTime( void );
     void readConfig();
