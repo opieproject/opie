@@ -4,7 +4,7 @@ Section: opie/system
 Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
 Version: $QTE_VERSION-3
-Depends: libjpeg62, libpng2, zlib1g
+Depends: libjpeg62, libpng3, zlib1g
 Description: Qt/Embedded environment
  A complete windowing system and GUI toolkit for handhelds.
  See "QPE" for applications.
