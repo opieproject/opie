@@ -33,93 +33,61 @@
 
 #define oApp OApplication::oApplication()
 
-// the below stuff will fail with moc because moc does not pre process headers
-// This will make usage of signal and slots hard inside QPEApplication -zecke
-
-#ifdef QWS
- #include <qpe/qpeapplication.h>
- #define OApplicationBaseClass QPEApplication
-#else
- #include <qapplication.h>
- #define OApplicationBaseClass QApplication
-#endif
+#include <qpe/qpeapplication.h>
 
 class OApplicationPrivate;
 class OConfig;
 
-class OApplication: public OApplicationBaseClass
+class OApplication: public QPEApplication
 {
-// Q_OBJECT would fail -zecke 
+  Q_OBJECT
+  
   public:
-
-   /**
-    * Constructor. Parses command-line arguments and sets the window caption.
-    *
-    * @param rAppName application name. Will be used for finding the
-    * associated message, icon and configuration files
-    *
-    */
+    /**
+     * Constructor. Parses command-line arguments and sets the window caption.
+     *
+     * @param rAppName application name. Will be used for finding the
+     * associated message, icon and configuration files
+     *
+     */
     OApplication( int& argc, char** argv, const QCString& rAppName );
-   /**
-    * Destructor. Destroys the application object and its children.
-    */
+    /**
+     * Destructor. Destroys the application object and its children.
+     */
     virtual ~OApplication();
-
-   /**
-    * Returns the current application object.
-    *
-    * This is similar to the global @ref QApplication pointer qApp. It
-    * allows access to the single global OApplication object, since
-    * more than one cannot be created in the same application. It
-    * saves you the trouble of having to pass the pointer explicitly
-    * to every function that may require it.
-    *
-    * @return the current application object
-    */
+    /**
+     * @returns the process-wide application object
+     *
+     * This is similar to the global @ref QApplication pointer qApp. It
+     * allows access to the single global OApplication object, since
+     * more than one cannot be created in the same application. It
+     * saves you the trouble of having to pass the pointer explicitly
+     * to every function that may require it.
+     */
     static const OApplication* oApplication() { return _instance; };
-
-   /**
-    * Returns the application name as given during creation.
-    *
-    * @return A reference to the application name
-    */
+    /**
+     * Returns the application name as given during creation.
+     *
+     * @returns a reference to the application name
+     */
     const QCString& appName() const { return _appname; };
-
-   /**
-    * Returns the application session config object.
-    *
-    * @return A pointer to the application's instance specific
-    * @ref OConfig object.
-    * @see OConfig
-    */
+    /**
+     * @returns the application session config object.
+     *
+     * @see OConfig
+     */
     OConfig* config();
-
-   /**
-    * Sets the main widget - reimplemented to call showMainWidget()
-    * on Qt/Embedded.
-    *
-    * @param mainWidget the widget to become the main widget
-    * @see QWidget object
-    */
-    virtual void setMainWidget( QWidget *mainWidget );
-
-   /**
-    * Shows the main widget - reimplemented to call setMainWidget()
-    * on platforms other than Qt/Embedded.
-    *
-    * @param mainWidget the widget to become the main widget
-    * @see QWidget object
-    */
+    /**
+     * Shows the main @a widget and sets the name of the application as window caption.
+     */
     virtual void showMainWidget( QWidget* widget, bool nomax = false );
-
-   /**
-    * Set the application title. The application title will be concatenated
-    * to the application name given in the constructor.
-    *
-    * @param title the title. If not given, resets caption to appname
-    */
+    /**
+     * Set the application title. The application title will be concatenated
+     * to the application name given in the constructor.
+     *
+     * @param title the title. If not given, resets caption to appname
+     */
     virtual void setTitle( const QString& title = QString::null ) const;
-    //virtual void setTitle() const;
 
   protected:
     void init();
