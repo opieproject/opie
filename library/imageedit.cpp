@@ -20,7 +20,7 @@
 #include "imageedit.h"
 #include <qpainter.h>
 
-ImageEdit::ImageEdit( QWidget *parent = 0, const char *name = 0 )
+ImageEdit::ImageEdit( QWidget *parent, const char *name )
     : QScrollView( parent, name, WNorthWestGravity | WResizeNoErase ), buffer()
 {
     buffer.resize( size() );

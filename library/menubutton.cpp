@@ -101,7 +101,7 @@ void MenuButton::insertItems( const QStringList& items )
 /*!
   Inserts an \a icon and \a text into the menu.
 */
-void MenuButton::insertItem( const QIconSet& icon, const QString& text=QString::null )
+void MenuButton::insertItem( const QIconSet& icon, const QString& text )
 {
     pop->insertItem(icon, text, nitems++);
     if ( nitems==1 ) select(0);
