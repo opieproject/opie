@@ -34,6 +34,8 @@
 #ifndef BLUEPING_PLUGIN_H
 #define BLUEPING_PLUGIN_H
 
+#include "bluepingConfigWidget.h"
+
 #include <opie2/multiauthplugininterface.h>
 
 #include <opie2/oprocess.h>
@@ -72,7 +74,7 @@ class BluepingPlugin : public QObject, public Opie::Security::MultiauthPluginObj
         
      private:
         Opie::Core::OProcess *m_ping;
-        Config * m_config;
+        BluepingConfigWidget * m_bluepingW;
         bool bluetoothAlreadyRestarted;
         QString macToPing;
 

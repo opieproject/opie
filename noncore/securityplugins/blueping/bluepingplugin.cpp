@@ -16,17 +16,16 @@ using Opie::Security::MultiauthPluginObject;
 using Opie::Security::MultiauthConfigWidget;
 
 
-/// creates and initializes the m_config Config object
-BluepingPlugin::BluepingPlugin() : MultiauthPluginObject(), m_ping(0) {
-    m_config = new Config("Security");
-    m_config->setGroup("BluepingPlugin");
+/// standard c'tor
+BluepingPlugin::BluepingPlugin() : MultiauthPluginObject(), m_ping(0), m_bluepingW(0) {
     bluetoothAlreadyRestarted = false;
 }
 
-/// deletes the m_config Config object and noticeW if necessary
+/// cleans m_ping if we need to
 BluepingPlugin::~BluepingPlugin() {
-    delete m_config;
     delete m_ping;
+    if (m_bluepingW != 0)
+        delete m_bluepingW;
 }
 
 /// Simply return its name (Blueping plugin)
@@ -34,15 +33,17 @@ QString BluepingPlugin::pluginName() const {
     return "Blueping plugin";
 }
 
-/// no configuration widget for the moment
+/// returns a BluepingConfigWidget
 MultiauthConfigWidget * BluepingPlugin::configWidget(QWidget * parent) {
-    return 0l;
+    if (m_bluepingW == 0)
+        m_bluepingW = new BluepingConfigWidget(parent, "Blueping configuration widget");
+    return m_bluepingW;
 }
 QString BluepingPlugin::pixmapNameWidget() const {
     return "security/bluepingplugin";
 }
 QString BluepingPlugin::pixmapNameConfig() const {
-    return 0l;
+    return "security/bluepingplugin";
 }
 
 /// Emit the MultiauthPluginObject::Success emitCode
@@ -106,7 +107,7 @@ int BluepingPlugin::authenticate() {
     if (!macToPing.isEmpty())
     {
         /* Standard, inescapable authentication dialog
-         */
+        */
         QDialog bluepingDialog(0,
                                "Blueping dialog",
                                TRUE,
@@ -135,6 +136,8 @@ int BluepingPlugin::authenticate() {
         // connect the signal emitting functions to the bluepingDialog done(int) finishing function
         QObject::connect(this, SIGNAL(emitCode(int)), &bluepingDialog, SLOT(done(int)));
 
+        // we can uncomment the following when testing
+        //bluetoothAlreadyRestarted = true;
         if (!bluetoothAlreadyRestarted)
         {
             // we have just started or resumed the device, so Bluetooth has to be (re)started

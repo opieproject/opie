@@ -1,9 +1,9 @@
 TEMPLATE = lib
 CONFIG += qt warn_on
 
-HEADERS		= bluepingplugin.h bluepingpluginimpl.h
+HEADERS		= bluepingplugin.h bluepingpluginimpl.h bluepingConfigWidget.h
 
-SOURCES		= bluepingplugin.cpp bluepingpluginimpl.cpp
+SOURCES		= bluepingplugin.cpp bluepingpluginimpl.cpp bluepingConfigWidget.cpp
 
 
 INCLUDEPATH	+= $(OPIEDIR)/include
