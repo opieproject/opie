@@ -1,5 +1,5 @@
 TEMPLATE        = subdirs
-unix:SUBDIRS    = libwellenreiter daemon gui contrib/orinoco_hopper
+unix:SUBDIRS    = libwellenreiter daemon gui
 
 
 

@@ -19,10 +19,13 @@
 #include <qmainwindow.h>
 
 class Wellenreiter;
+class WellenreiterConfigWindow;
 class QIconSet;
+class QToolButton;
 
 class WellenreiterMainWindow: public QMainWindow
 {
+  Q_OBJECT
 
   public:
     WellenreiterMainWindow( QWidget * parent = 0, const char * name = "mainwindow", WFlags f = 0 );
@@ -30,14 +33,17 @@ class WellenreiterMainWindow: public QMainWindow
 
   protected:
     Wellenreiter* mw;
+    WellenreiterConfigWindow* cw;
 
     const QIconSet* searchIconSet;
     const QIconSet* infoIconSet;
     const QIconSet* settingsIconSet;
     const QIconSet* cancelIconSet;
 
+    QToolButton* startStopButton;
 
+  public slots:
+    void showConfigure();
 };
 
 #endif
-

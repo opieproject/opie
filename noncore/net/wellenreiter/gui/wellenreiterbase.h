@@ -18,16 +18,15 @@
 
 #include <qvariant.h>
 #include <qwidget.h>
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QLabel;
 class MScanListView;
 class MScanListItem;
 class QPushButton;
 class MLogWindow;
 class MHexWindow;
-class WellenreiterConfigWindow;
 
 #ifdef QWS
 class OTabWidget;
@@ -36,7 +35,7 @@ class QTabWidget;
 #endif
 
 class WellenreiterBase : public QWidget
-{ 
+{
     Q_OBJECT
 
 public:
@@ -52,18 +51,16 @@ public:
     MScanListView* netview;
     MLogWindow* logwindow;
     MHexWindow* hexwindow;
-    WellenreiterConfigWindow* configwindow;
     QWidget* about;
     QLabel* PixmapLabel1_3_2;
     QLabel* TextLabel1_4_2;
-    QPushButton* button;
 
 protected:
     QVBoxLayout* WellenreiterBaseLayout;
     QVBoxLayout* apLayout;
     QGridLayout* aboutLayout;
     bool event( QEvent* );
-    
+
     QPixmap* ani1;
     QPixmap* ani2;
     QPixmap* ani3;

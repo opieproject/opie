@@ -1,9 +1,11 @@
+MOC_DIR         = ./tmp
+OBJECTS_DIR     = ./tmp
 DESTDIR         = $(OPIEDIR)/bin
 TEMPLATE        = app
 CONFIG          = qt warn_on debug
-#CONFIG         = qt warn_on release
-HEADERS         = mainwindow.h \
-                  wellenreiterbase.h \
+
+HEADERS         = wellenreiterbase.h \
+                  mainwindow.h \
                   wellenreiter.h \
                   scanlistitem.h \
                   scanlist.h \
@@ -13,6 +15,7 @@ HEADERS         = mainwindow.h \
                   wlan.h \
                   cardconfig.h \
                   manufacturers.h
+
 SOURCES         = main.cpp \
                   mainwindow.cpp \
                   wellenreiterbase.cpp \
@@ -24,7 +27,8 @@ SOURCES         = main.cpp \
                   configwindow.cpp \
                   wlan.cpp \
                   cardconfig.cpp \
-                  manufacturers.h
+                  manufacturers.cpp
+
 INCLUDEPATH     += $(OPIEDIR)/include ../
 DEPENDPATH      += $(OPIEDIR)/include ../
 LIBS            += -lqpe -lopie -L. -lwellenreiter

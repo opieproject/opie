@@ -1,7 +1,7 @@
 <!DOCTYPE UI><UI>
 <class>WellenreiterConfigBase</class>
 <widget>
-    <class>QWidget</class>
+    <class>QDialog</class>
     <property stdset="1">
         <name>name</name>
         <cstring>WellenreiterConfigBase</cstring>
@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>224</width>
+            <width>220</width>
             <height>267</height>
         </rect>
     </property>

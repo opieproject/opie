@@ -34,17 +34,17 @@ ManufacturerDB::ManufacturerDB( const QString& filename )
         QTextStream s( &file );
         QString addr;
         QString manu;
-        
+
         while (!s.atEnd())
         {
             s >> addr;
-            s.skipWhiteSpace(); 
+            s.skipWhiteSpace();
             manu = s.readLine();
             #ifdef DEBUG
-            qDebug( "ManufacturerDB: read pair %s, %s", (const char*) addr, (const char*) manu );
+            //qDebug( "ManufacturerDB: read pair %s, %s", (const char*) addr, (const char*) manu );
             #endif
             manufacturers.insert( addr, manu );
-            
+
         }
     }
 

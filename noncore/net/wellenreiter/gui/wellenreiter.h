@@ -38,28 +38,28 @@ using namespace Opie;
 #include <libwellenreiter/source/wl_sock.hh>
 #include <libwellenreiter/source/wl_proto.hh>
 
-
 class QTimerEvent;
 class QPixmap;
 class ManufacturerDB;
+class WellenreiterConfigWindow;
 
 class Wellenreiter : public WellenreiterBase {
     Q_OBJECT
 
-public:
-
-    Wellenreiter( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+  public:
+    Wellenreiter( QWidget* parent = 0 );
     ~Wellenreiter();
 
-protected:
-    
+    void setConfigWindow( WellenreiterConfigWindow* cw );
+
+  protected:
     bool daemonRunning;
 
-public slots:
-    void buttonClicked();
+  public slots:
     void dataReceived();
+    void startStopClicked();
 
-private:
+  private:
     int daemon_fd;                  // socket filedescriptor for udp communication socket
     #ifdef QWS
     OSystem _system;                // Opie Operating System identifier
@@ -67,8 +67,9 @@ private:
     void handleMessage();
 
     ManufacturerDB* manufacturerdb;
+    WellenreiterConfigWindow* configwindow;
     struct sockaddr_in sockaddr;
-        
+
     //void readConfig();
     //void writeConfig();
 };

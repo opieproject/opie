@@ -19,7 +19,7 @@
 #include <qspinbox.h>
 
 WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char * name, WFlags f )
-           :WellenreiterConfigBase( parent, name, f )
+           :WellenreiterConfigBase( parent, name, true, f )
 {
     _devicetype[ "cisco" ] = 1;
     _devicetype[ "wlan-ng" ] = 2;

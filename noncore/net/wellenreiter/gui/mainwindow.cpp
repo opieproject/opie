@@ -13,9 +13,11 @@
 **
 **********************************************************************/
 
+#include "configwindow.h"
 #include "mainwindow.h"
 #include "wellenreiter.h"
 
+#include <qcombobox.h>
 #include <qiconset.h>
 #include <qmenubar.h>
 #include <qpopupmenu.h>
@@ -31,7 +33,9 @@
 WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * name, WFlags f )
            :QMainWindow( parent, name, f )
 {
+    cw = new WellenreiterConfigWindow( this );
     mw = new Wellenreiter( this );
+    mw->setConfigWindow( cw );
     setCentralWidget( mw );
 
     // setup icon sets
@@ -43,11 +47,13 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
 
     // setup tool buttons
 
-    QToolButton* b = new QToolButton( 0 );
-    b->setAutoRaise( true );
-    b->setOnIconSet( *cancelIconSet );
-    b->setOffIconSet( *searchIconSet );
-    b->setToggleButton( true );
+    startStopButton = new QToolButton( 0 );
+    startStopButton->setAutoRaise( true );
+    startStopButton->setOnIconSet( *cancelIconSet );
+    startStopButton->setOffIconSet( *searchIconSet );
+    startStopButton->setToggleButton( true );
+    connect( startStopButton, SIGNAL( clicked() ), mw, SLOT( startStopClicked() ) );
+    startStopButton->setEnabled( false );
 
     QToolButton* c = new QToolButton( 0 );
     c->setAutoRaise( true );
@@ -57,25 +63,67 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     QToolButton* d = new QToolButton( 0 );
     d->setAutoRaise( true );
     d->setIconSet( *settingsIconSet );
+    connect( d, SIGNAL( clicked() ), this, SLOT( showConfigure() ) );
 
     // setup menu bar
 
     QMenuBar* mb = menuBar();
 
-    QPopupMenu* p = new QPopupMenu( mb );
-    p->insertItem( "&Load" );
-    p->insertItem( "&Save" );
+    QPopupMenu* file = new QPopupMenu( mb );
+    file->insertItem( "&Load" );
+    file->insertItem( "&Save" );
 
-    mb->insertItem( "&File", p );
-    mb->setItemEnabled( mb->insertItem( b ), false );
-    mb->setItemEnabled( mb->insertItem( c ), false );
+    QPopupMenu* view = new QPopupMenu( mb );
+    view->insertItem( "&Configure" );
+
+    QPopupMenu* sniffer = new QPopupMenu( mb );
+    sniffer->insertItem( "&Configure" );
+    sniffer->insertSeparator();
+
+    int id;
+
+    id = mb->insertItem( "&File", file );
+    mb->setItemEnabled( id, false );
+    id = mb->insertItem( "&View", view );
+    mb->setItemEnabled( id, false );
+    id = mb->insertItem( "&Sniffer", sniffer );
+    mb->setItemEnabled( id, false );
+
+    mb->insertItem( startStopButton );
+    mb->insertItem( c );
     mb->insertItem( d );
 
-    // setup status bar
+    // setup status bar (for now only on X11)
 
-    // statusBar()->message( "Ready." );
+    #ifndef QWS
+    statusBar()->message( "Ready." );
+    #endif
 
 };
+
+void WellenreiterMainWindow::showConfigure()
+{
+    qDebug( "show configure..." );
+    cw->setCaption( tr( "Configure" ) );
+    cw->showMaximized();
+    int result = cw->exec();
+
+    if ( result )
+    {
+        // check configuration from config window
+
+        const QString& interface = cw->interfaceName->currentText();
+        const int cardtype = cw->daemonDeviceType();
+        const int interval = cw->daemonHopInterval();
+
+        if ( ( interface != "<select>" ) && ( cardtype != 0 ) )
+            startStopButton->setEnabled( true );
+            //TODO ...
+        else
+            startStopButton->setEnabled( false );
+            //TODO ...
+    }
+}
 
 WellenreiterMainWindow::~WellenreiterMainWindow()
 {

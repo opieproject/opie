@@ -61,8 +61,9 @@ using namespace Opie;
 #include <libwellenreiter/source/wl_sock.hh>
 #include <libwellenreiter/source/wl_proto.hh>
 
-Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
-    : WellenreiterBase( parent, name, fl ), daemonRunning( false ), manufacturerdb( 0 )
+Wellenreiter::Wellenreiter( QWidget* parent )
+    : WellenreiterBase( parent, 0, 0 ),
+      daemonRunning( false ), manufacturerdb( 0 ), configwindow( 0 )
 {
 
     //
@@ -78,11 +79,11 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
     manufacturerdb = new ManufacturerDB( manufile );
 
     logwindow->log( "(i) Wellenreiter has been started." );
-    
+
     //
     // detect operating system
     //
-    
+
     #ifdef QWS
     QString sys;
     sys.sprintf( "(i) Running on '%s'.", (const char*) ODevice::inst()->systemString() );
@@ -110,21 +111,23 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
     }
 
     // setup GUI
-        
-    connect( button, SIGNAL( clicked() ), this, SLOT( buttonClicked() ) );
-    // button->setEnabled( false );
     netview->setColumnWidthMode( 1, QListView::Manual );
 
     if ( manufacturerdb )
         netview->setManufacturerDB( manufacturerdb );
-        
+
 }
 
 Wellenreiter::~Wellenreiter()
 {
     // no need to delete child widgets, Qt does it all for us
-    
+
     delete manufacturerdb;
+}
+
+void Wellenreiter::setConfigWindow( WellenreiterConfigWindow* cw )
+{
+    configwindow = cw;
 }
 
 void Wellenreiter::handleMessage()
@@ -211,24 +214,13 @@ void Wellenreiter::dataReceived()
     handleMessage();
 }
 
-void Wellenreiter::buttonClicked()
+void Wellenreiter::startStopClicked()
 {
-        /*
-        // add some test stations, so that we can see if the GUI part works
-        addNewItem( "managed", "Vanille", "04:00:20:EF:A6:43", true, 6, 80 );
-        addNewItem( "managed", "Vanille", "04:00:20:EF:A6:23", true, 11, 10 );
-        addNewItem( "adhoc", "ELAN", "40:03:43:E7:16:22", false, 3, 10 );
-        addNewItem( "adhoc", "ELAN", "40:03:53:E7:56:62", false, 3, 15 );
-        addNewItem( "adhoc", "ELAN", "40:03:63:E7:56:E2", false, 3, 20 );
-        */
-
-
     if ( daemonRunning )
     {
         daemonRunning = false;
 
         logwindow->log( "(i) Daemon has been stopped." );
-        button->setText( tr( "Start Scanning" ) );
         setCaption( tr( "Wellenreiter/Opie" ) );
 
         // Stop daemon - ugly for now... later better
@@ -261,7 +253,7 @@ void Wellenreiter::buttonClicked()
 
         if ( ( interface == "<select>" ) || ( cardtype == 0 ) )
         {
-            QMessageBox::information( this, "Wellenreiter/Opie", "You must configure your\ndevice before scanning." );
+            QMessageBox::information( this, "Wellenreiter/Opie", "Your device is not\nptoperly configured. Please reconfigure!" );
             return;
         }
 
@@ -276,7 +268,6 @@ void Wellenreiter::buttonClicked()
 
         logwindow->log( "(i) Daemon has been started." );
         daemonRunning = true;
-        button->setText( tr( "Stop Scanning" ) );
         setCaption( tr( "Scanning ..." ) );
 
     }
