@@ -42,7 +42,7 @@ OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<PMainWindow>)
 PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     : QMainWindow( wid, name, style ), m_info( 0 ), m_disp( 0 )
 {
-    setCaption( QObject::tr("Opie Eye Caramba" ) );
+    setCaption( QObject::tr("Opie Eye" ) );
     m_cfg = new Opie::Core::OConfig("opie-eye");
     m_cfg->setGroup("main" );
     readConfig();
