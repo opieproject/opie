@@ -116,7 +116,7 @@ void MainWindow::closeEvent( QCloseEvent *event )
 void MainWindow::initPackageList()
 {
     m_packageList.addColumn( tr( "Packages" ) );
-    QWhatsThis::add( &m_packageList, tr( "This is a listing of all packages.\n\nA blue dot next to the package name indicates that the package is currently installed.\n\nA blue dot with a star indicates that a newer version of the package is available from the server feed.\n\nClick inside the box at the left to select a package." ) );
+    QWhatsThis::add( &m_packageList, tr( "This is a listing of all packages.\n\nA blue dot next to the package name indicates that the package is currently installed.\n\nA blue dot with a star indicates that a newer version of the package is available from the server feed.\n\nTap inside the box at the left to select a package.  Tap and hold to view package details." ) );
     QPEApplication::setStylusOperation( m_packageList.viewport(), QPEApplication::RightOnHold );
     connect( &m_packageList, SIGNAL(rightButtonPressed(QListViewItem*,const QPoint&,int)),
              this, SLOT(slotDisplayPackageInfo(QListViewItem*)) );
@@ -157,13 +157,13 @@ void MainWindow::initUI()
     QPopupMenu *popup = new QPopupMenu( this );
 
     QAction *a = new QAction( tr( "Update lists" ), Resource::loadPixmap( "packagemanager/update" ), QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here to update package lists from servers." ) );
+    a->setWhatsThis( tr( "Tap here to update package lists from servers." ) );
     connect( a, SIGNAL(activated()), this, SLOT(slotUpdate()) );
     a->addTo( popup );
     a->addTo( &m_toolBar );
 
     QAction *actionUpgrade = new QAction( tr( "Upgrade" ), Resource::loadPixmap( "packagemanager/upgrade" ), QString::null, 0, this, 0 );
-    actionUpgrade->setWhatsThis( tr( "Click here to upgrade all installed packages if a newer version is available." ) );
+    actionUpgrade->setWhatsThis( tr( "Tap here to upgrade all installed packages if a newer version is available." ) );
     connect( actionUpgrade, SIGNAL(activated()), this, SLOT(slotUpgrade()) );
     actionUpgrade->addTo( popup );
     actionUpgrade->addTo( &m_toolBar );
@@ -171,13 +171,13 @@ void MainWindow::initUI()
     QPixmap iconDownload = Resource::loadPixmap( "packagemanager/download" );
     QPixmap iconRemove = Resource::loadPixmap( "packagemanager/remove" );
     QAction *actionDownload = new QAction( tr( "Download" ), iconDownload, QString::null, 0, this, 0 );
-    actionDownload->setWhatsThis( tr( "Click here to download the currently selected package(s)." ) );
+    actionDownload->setWhatsThis( tr( "Tap here to download the currently selected package(s)." ) );
     connect( actionDownload, SIGNAL(activated()), this, SLOT(slotDownload()) );
     actionDownload->addTo( popup );
     actionDownload->addTo( &m_toolBar );
 
     a = new QAction( tr( "Apply changes" ), Resource::loadPixmap( "packagemanager/apply" ), QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here to install, remove or upgrade currently selected package(s)." ) );
+    a->setWhatsThis( tr( "Tap here to install, remove or upgrade currently selected package(s)." ) );
     connect( a, SIGNAL(activated()), this, SLOT(slotApply()) );
     a->addTo( popup );
     a->addTo( &m_toolBar );
@@ -185,7 +185,7 @@ void MainWindow::initUI()
     popup->insertSeparator();
 
     a = new QAction( tr( "Configure" ), Resource::loadPixmap( "SettingsIcon" ), QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here to configure this application." ) );
+    a->setWhatsThis( tr( "Tap here to configure this application." ) );
     connect( a, SIGNAL(activated()), this, SLOT(slotConfigure()) );
     a->addTo( popup );
     mb->insertItem( tr( "Actions" ), popup );
@@ -195,19 +195,19 @@ void MainWindow::initUI()
 
     m_actionShowNotInstalled = new QAction( tr( "Show packages not installed" ), QString::null, 0, this, 0 );
     m_actionShowNotInstalled->setToggleAction( true );
-    m_actionShowNotInstalled->setWhatsThis( tr( "Click here to show packages available which have not been installed." ) );
+    m_actionShowNotInstalled->setWhatsThis( tr( "Tap here to show packages available which have not been installed." ) );
     connect( m_actionShowNotInstalled, SIGNAL(activated()), this, SLOT(slotShowNotInstalled()) );
     m_actionShowNotInstalled->addTo( popup );
 
     m_actionShowInstalled = new QAction( tr( "Show installed packages" ), QString::null, 0, this, 0 );
     m_actionShowInstalled->setToggleAction( true );
-    m_actionShowInstalled->setWhatsThis( tr( "Click here to show packages currently installed on this device." ) );
+    m_actionShowInstalled->setWhatsThis( tr( "Tap here to show packages currently installed on this device." ) );
     connect( m_actionShowInstalled, SIGNAL(activated()), this, SLOT(slotShowInstalled()) );
     m_actionShowInstalled->addTo( popup );
 
     m_actionShowUpdated = new QAction( tr( "Show updated packages" ), QString::null, 0, this, 0 );
     m_actionShowUpdated->setToggleAction( true );
-    m_actionShowUpdated->setWhatsThis( tr( "Click here to show packages currently installed on this device which have a newer version available." ) );
+    m_actionShowUpdated->setWhatsThis( tr( "Tap here to show packages currently installed on this device which have a newer version available." ) );
     connect( m_actionShowUpdated, SIGNAL(activated()), this, SLOT(slotShowUpdated()) );
     m_actionShowUpdated->addTo( popup );
 
@@ -216,25 +216,25 @@ void MainWindow::initUI()
     m_actionFilter = new QAction( tr( "Filter" ), Resource::loadPixmap( "packagemanager/filter" ),
                                          QString::null, 0, this, 0 );
     m_actionFilter->setToggleAction( true );
-    m_actionFilter->setWhatsThis( tr( "Click here to apply current filter." ) );
+    m_actionFilter->setWhatsThis( tr( "Tap here to apply current filter." ) );
     connect( m_actionFilter, SIGNAL(toggled(bool)), this, SLOT(slotFilter(bool)) );
     m_actionFilter->addTo( popup );
 
     a = new QAction( tr( "Filter settings" ),  QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here to change the package filter criteria." ) );
+    a->setWhatsThis( tr( "Tap here to change the package filter criteria." ) );
     connect( a, SIGNAL(activated()), this, SLOT(slotFilterChange()) );
     a->addTo( popup );
 
     popup->insertSeparator();
 
     a = new QAction( tr( "Find" ), Resource::loadPixmap( "find" ), QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here to search for text in package names." ) );
+    a->setWhatsThis( tr( "Tap here to search for text in package names." ) );
     connect( a, SIGNAL(activated()), this, SLOT(slotFindShowToolbar()) );
     a->addTo( popup );
 
     m_actionFindNext = new QAction( tr( "Find next" ), Resource::loadIconSet( "next" ), QString::null, 0, this, 0 );
     m_actionFindNext->setEnabled( false );
-    m_actionFindNext->setWhatsThis( tr( "Click here to find the next package name containing the text you are searching for." ) );
+    m_actionFindNext->setWhatsThis( tr( "Tap here to find the next package name containing the text you are searching for." ) );
     connect( m_actionFindNext, SIGNAL(activated()), this, SLOT(slotFindNext()) );
     m_actionFindNext->addTo( popup );
     m_actionFindNext->addTo( &m_findBar );
@@ -243,7 +243,7 @@ void MainWindow::initUI()
 
     // Finish find toolbar creation
     a = new QAction( QString::null, Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here to hide the find toolbar." ) );
+    a->setWhatsThis( tr( "Tap here to hide the find toolbar." ) );
     connect( a, SIGNAL(activated()), this, SLOT(slotFindHideToolbar()) );
     a->addTo( &m_findBar );
     m_findBar.hide();

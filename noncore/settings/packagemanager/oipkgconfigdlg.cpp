@@ -39,12 +39,13 @@
 #include <qlistbox.h>
 #include <qpushbutton.h>
 #include <qscrollview.h>
+#include <qwhatsthis.h>
 
 #include <qpe/resource.h>
 
 using namespace Opie::Ui;
 OIpkgConfigDlg::OIpkgConfigDlg( OIpkg *ipkg, bool installOptions, QWidget *parent )
-    : QDialog( parent, QString::null, true )
+    : QDialog( parent, QString::null, true, WStyle_ContextHelp )
     , m_ipkg( ipkg )
     , m_configs( 0x0 )
     , m_installOptions( installOptions )
@@ -167,15 +168,18 @@ void OIpkgConfigDlg::initServerWidget()
     QGridLayout *layout = new QGridLayout( container, 3, 2, 2, 4 );
 
     m_serverList = new QListBox( container );
+    QWhatsThis::add( m_serverList, tr( "This is a list of all servers configured.  Select one here to edit or delete, or add a new one below." ) );
     m_serverList->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Preferred ) );
     connect( m_serverList, SIGNAL(highlighted(int)), this, SLOT(slotServerEdit(int)) );
     layout->addMultiCellWidget( m_serverList, 0, 0, 0, 1 );
 
     QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), container );
+    QWhatsThis::add( btn, tr( "Tap here to create a new entry.  Fill in the fields below and then tap on Update." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotServerNew()) );
     layout->addWidget( btn, 1, 0 );
 
     btn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), container );
+    QWhatsThis::add( btn, tr( "Tap here to delete the entry selected above." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotServerDelete()) );
     layout->addWidget( btn, 1, 1 );
 
@@ -187,19 +191,25 @@ void OIpkgConfigDlg::initServerWidget()
     QGridLayout *grplayout = new QGridLayout( grpbox->layout() );
 
     QLabel *label = new QLabel( tr( "Name:" ), grpbox );
+    QWhatsThis::add( label, tr( "Enter the name of this entry here." ) );
     grplayout->addWidget( label, 0, 0 );
     m_serverName = new QLineEdit( grpbox );
+    QWhatsThis::add( m_serverName, tr( "Enter the name of this entry here." ) );
     grplayout->addWidget( m_serverName, 0, 1 );
 
     label = new QLabel( tr( "Address:" ), grpbox );
+    QWhatsThis::add( label, tr( "Enter the URL address of this entry here." ) );
     grplayout->addWidget( label, 1, 0 );
     m_serverLocation = new QLineEdit( grpbox );
+    QWhatsThis::add( m_serverLocation, tr( "Enter the URL address of this entry here." ) );
     grplayout->addWidget( m_serverLocation, 1, 1 );
 
-    m_serverActive = new QCheckBox( tr( "Active Server" ), grpbox );
+    m_serverActive = new QCheckBox( tr( "Active" ), grpbox );
+    QWhatsThis::add( m_serverActive, tr( "Tap here to indicate whether this entry is active or not." ) );
     grplayout->addMultiCellWidget( m_serverActive, 2, 2, 0, 1 );
 
     btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Update" ), grpbox );
+    QWhatsThis::add( btn, tr( "Tap here to update the entry's information." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotServerUpdate()) );
     grplayout->addMultiCellWidget( btn, 3, 3, 0, 1 );
 }
@@ -219,15 +229,18 @@ void OIpkgConfigDlg::initDestinationWidget()
     QGridLayout *layout = new QGridLayout( container, 3, 2, 2, 4 );
 
     m_destList = new QListBox( container );
+    QWhatsThis::add( m_destList, tr( "This is a list of all destinations configured for this device.  Select one here to edit or delete, or add a new one below." ) );
     m_destList->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Preferred ) );
     connect( m_destList, SIGNAL(highlighted(int)), this, SLOT(slotDestEdit(int)) );
     layout->addMultiCellWidget( m_destList, 0, 0, 0, 1 );
 
     QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), container );
+    QWhatsThis::add( btn, tr( "Tap here to create a new entry.  Fill in the fields below and then tap on Update." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotDestNew()) );
     layout->addWidget( btn, 1, 0 );
 
     btn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), container );
+    QWhatsThis::add( btn, tr( "Tap here to delete the entry selected above." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotDestDelete()) );
     layout->addWidget( btn, 1, 1 );
 
@@ -239,19 +252,25 @@ void OIpkgConfigDlg::initDestinationWidget()
     QGridLayout *grplayout = new QGridLayout( grpbox->layout() );
 
     QLabel *label = new QLabel( tr( "Name:" ), grpbox );
+    QWhatsThis::add( label, tr( "Enter the name of this entry here." ) );
     grplayout->addWidget( label, 0, 0 );
     m_destName = new QLineEdit( grpbox );
+    QWhatsThis::add( m_destName, tr( "Enter the name of this entry here." ) );
     grplayout->addWidget( m_destName, 0, 1 );
 
-    label = new QLabel( tr( "Address:" ), grpbox );
+    label = new QLabel( tr( "Location:" ), grpbox );
+    QWhatsThis::add( label, tr( "Enter the absolute directory path of this entry here." ) );
     grplayout->addWidget( label, 1, 0 );
     m_destLocation = new QLineEdit( grpbox );
+    QWhatsThis::add( m_destLocation, tr( "Enter the absolute directory path of this entry here." ) );
     grplayout->addWidget( m_destLocation, 1, 1 );
 
-    m_destActive = new QCheckBox( tr( "Active Server" ), grpbox );
+    m_destActive = new QCheckBox( tr( "Active" ), grpbox );
+    QWhatsThis::add( m_destActive, tr( "Tap here to indicate whether this entry is active or not." ) );
     grplayout->addMultiCellWidget( m_destActive, 2, 2, 0, 1 );
 
     btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Update" ), grpbox );
+    QWhatsThis::add( btn, tr( "Tap here to update the entry's information." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotDestUpdate()) );
     grplayout->addMultiCellWidget( btn, 3, 3, 0, 1 );
 }
@@ -277,8 +296,10 @@ void OIpkgConfigDlg::initProxyWidget()
     layout->addMultiCellWidget( grpbox, 0, 0, 0, 1 );
     QVBoxLayout *grplayout = new QVBoxLayout( grpbox->layout() );
     m_proxyHttpServer = new QLineEdit( grpbox );
+    QWhatsThis::add( m_proxyHttpServer, tr( "Enter the URL address of the HTTP proxy server here." ) );
     grplayout->addWidget( m_proxyHttpServer );
     m_proxyHttpActive = new QCheckBox( tr( "Enabled" ), grpbox );
+    QWhatsThis::add( m_proxyHttpActive, tr( "Tap here to enable or disable the HTTP proxy server." ) );
     grplayout->addWidget( m_proxyHttpActive );
 
     // FTP proxy server configuration
@@ -288,19 +309,25 @@ void OIpkgConfigDlg::initProxyWidget()
     layout->addMultiCellWidget( grpbox, 1, 1, 0, 1 );
     grplayout = new QVBoxLayout( grpbox->layout() );
     m_proxyFtpServer = new QLineEdit( grpbox );
+    QWhatsThis::add( m_proxyFtpServer, tr( "Enter the URL address of the FTP proxy server here." ) );
     grplayout->addWidget( m_proxyFtpServer );
     m_proxyFtpActive = new QCheckBox( tr( "Enabled" ), grpbox );
+    QWhatsThis::add( m_proxyFtpActive, tr( "Tap here to enable or disable the FTP proxy server." ) );
     grplayout->addWidget( m_proxyFtpActive );
 
     // Proxy server username and password configuration
     QLabel *label = new QLabel( tr( "Username:" ), container );
+    QWhatsThis::add( label, tr( "Enter the username for the proxy servers here." ) );
     layout->addWidget( label, 2, 0 );
     m_proxyUsername = new QLineEdit( container );
+    QWhatsThis::add( m_proxyUsername, tr( "Enter the username for the proxy servers here." ) );
     layout->addWidget( m_proxyUsername, 2, 1 );
 
     label = new QLabel( tr( "Password:" ), container );
+    QWhatsThis::add( label, tr( "Enter the password for the proxy servers here." ) );
     layout->addWidget( label, 3, 0 );
     m_proxyPassword = new QLineEdit( container );
+    QWhatsThis::add( m_proxyPassword, tr( "Enter the password for the proxy servers here." ) );
     layout->addWidget( m_proxyPassword, 3, 1 );
 }
 
@@ -319,21 +346,27 @@ void OIpkgConfigDlg::initOptionsWidget()
     QVBoxLayout *layout = new QVBoxLayout( container, 2, 4 );
 
     m_optForceDepends = new QCheckBox( tr( "Force Depends" ), container );
+    QWhatsThis::add( m_optForceDepends, tr( "Tap here to enable or disable the '-force-depends' option for Ipkg." ) );
     layout->addWidget( m_optForceDepends );
 
     m_optForceReinstall = new QCheckBox( tr( "Force Reinstall" ), container );
+    QWhatsThis::add( m_optForceReinstall, tr( "Tap here to enable or disable the '-force-reinstall' option for Ipkg." ) );
     layout->addWidget( m_optForceReinstall );
 
     m_optForceRemove = new QCheckBox( tr( "Force Remove" ), container );
+    QWhatsThis::add( m_optForceRemove, tr( "Tap here to enable or disable the '-force-removal-of-dependent-packages' option for Ipkg." ) );
     layout->addWidget( m_optForceRemove );
 
     m_optForceOverwrite = new QCheckBox( tr( "Force Overwrite" ), container );
+    QWhatsThis::add( m_optForceOverwrite, tr( "Tap here to enable or disable the '-force-overwrite' option for Ipkg." ) );
     layout->addWidget( m_optForceOverwrite );
 
     QLabel *l = new QLabel( tr( "Information Level" ), container );
+    QWhatsThis::add( l, tr( "Select information level for Ipkg." ) );
     layout->addWidget( l );
 
     m_optVerboseIpkg = new QComboBox( container );
+    QWhatsThis::add( m_optVerboseIpkg, tr( "Select information level for Ipkg." ) );
     m_optVerboseIpkg->insertItem( tr( "Errors only" ) );
     m_optVerboseIpkg->insertItem( tr( "Normal messages" ) );
     m_optVerboseIpkg->insertItem( tr( "Informative messages" ) );

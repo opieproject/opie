@@ -29,10 +29,12 @@
 
 #include "filterdlg.h"
 
+#include <qwhatsthis.h>
+
 FilterDlg::FilterDlg( QWidget *parent, OPackageManager *pm, const QString &name,
                const QString &server, const QString &destination,
                OPackageManager::Status status, const QString &category )
-    : QDialog( parent, QString::null, true )
+    : QDialog( parent, QString::null, true, WStyle_ContextHelp )
 {
     setCaption( tr( "Filter packages" ) );
 
@@ -47,8 +49,10 @@ FilterDlg::FilterDlg( QWidget *parent, OPackageManager *pm, const QString &name,
 
     // Category
     m_categoryCB = new QCheckBox( tr( "Category:" ), container );
+    QWhatsThis::add( m_categoryCB, tr( "Tap here to filter package list by application category." ) );
     connect( m_categoryCB, SIGNAL(toggled(bool)), this, SLOT(slotCategorySelected(bool)) );
     m_category = new QComboBox( container );
+    QWhatsThis::add( m_category, tr( "Select the application category to filter by here." ) );
     m_category->insertStringList( pm->categories() );
     initItem( m_category, m_categoryCB, category );
     layout->addWidget( m_categoryCB );
@@ -56,8 +60,10 @@ FilterDlg::FilterDlg( QWidget *parent, OPackageManager *pm, const QString &name,
 
     // Package name
     m_nameCB = new QCheckBox( tr( "Names containing:" ), container );
+    QWhatsThis::add( m_nameCB, tr( "Tap here to filter package list by package name." ) );
     connect( m_nameCB, SIGNAL(toggled(bool)), this, SLOT(slotNameSelected(bool)) );
     m_name = new QLineEdit( name, container );
+    QWhatsThis::add( m_name, tr( "Enter the package name to filter by here." ) );
     if ( !name.isNull() )
         m_nameCB->setChecked( true );
     m_name->setEnabled( !name.isNull() );
@@ -66,8 +72,10 @@ FilterDlg::FilterDlg( QWidget *parent, OPackageManager *pm, const QString &name,
 
     // Status
     m_statusCB = new QCheckBox( tr( "With the status:" ), container );
+    QWhatsThis::add( m_statusCB, tr( "Tap here to filter package list by the package status." ) );
     connect( m_statusCB, SIGNAL(toggled(bool)), this, SLOT(slotStatusSelected(bool)) );
     m_status = new QComboBox( container );
+    QWhatsThis::add( m_status, tr( "Select the package status to filter by here." ) );
     connect( m_status, SIGNAL(activated(const QString&)), this, SLOT(slotStatusChanged(const QString&)) );
     QString currStatus;
     switch ( status )
@@ -92,8 +100,10 @@ FilterDlg::FilterDlg( QWidget *parent, OPackageManager *pm, const QString &name,
 
     // Server
     m_serverCB = new QCheckBox( tr( "Available from the following server:" ), container );
+    QWhatsThis::add( m_serverCB, tr( "Tap here to filter package list by source server." ) );
     connect( m_serverCB, SIGNAL(toggled(bool)), this, SLOT(slotServerSelected(bool)) );
     m_server = new QComboBox( container );
+    QWhatsThis::add( m_server, tr( "Select the source server to filter by here." ) );
     m_server->insertStringList( *(pm->servers()) );
     initItem( m_server, m_serverCB, server );
     layout->addWidget( m_serverCB );
@@ -101,14 +111,14 @@ FilterDlg::FilterDlg( QWidget *parent, OPackageManager *pm, const QString &name,
 
     // Destination
     m_destCB = new QCheckBox( tr( "Installed on device at:" ), container );
+    QWhatsThis::add( m_destCB, tr( "Tap here to filter package list by destination where the package is installed to on this device." ) );
     connect( m_destCB, SIGNAL(toggled(bool)), this, SLOT(slotDestSelected(bool)) );
     m_destination = new QComboBox( container );
+    QWhatsThis::add( m_destination, tr( "Select the destination location to filter by here." ) );
     m_destination->insertStringList( *(pm->destinations()) );
     initItem( m_destination, m_destCB, destination );
     layout->addWidget( m_destCB );
     layout->addWidget( m_destination );
-
-    //showMaximized();
 }
 
 void FilterDlg::initItem( QComboBox *comboBox, QCheckBox *checkBox, const QString &selection )
