@@ -4,7 +4,7 @@
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Thème Liquide</translation>
     </message>
     <message>
         <source>No translucency</source>
@@ -59,11 +59,11 @@
     <name>Styles</name>
     <message>
         <source>Liquid</source>
-        <translation type="unfinished">Liquid</translation>
+        <translation>Liquide</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation type="unfinished"></translation>
+        <translation>Thème Liquide haute performance par Mosfet</translation>
     </message>
 </context>
 </TS>

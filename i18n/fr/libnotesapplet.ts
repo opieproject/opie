@@ -40,7 +40,8 @@
     </message>
     <message>
         <source>Toggle Maximized</source>
-        <translation type="unfinished"></translation>
+        <translation>Toggle Maximized
+</translation>
     </message>
 </context>
 </TS>

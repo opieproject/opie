@@ -1,45 +1,46 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>WLAN</name>
     <message>
         <source>Wireless Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration &quot;sans fils&quot;</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Général</translation>
     </message>
     <message>
         <source>Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode</translation>
     </message>
     <message>
         <source>ESS-ID</source>
-        <translation type="unfinished"></translation>
+        <translation>ESS-ID</translation>
     </message>
     <message>
         <source>MAC</source>
-        <translation type="unfinished"></translation>
+        <translation>MAC</translation>
     </message>
     <message>
         <source>Specify &amp;Access Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Spécifier le point d&apos;&amp;Accès</translation>
     </message>
     <message>
         <source>Specify &amp;Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Spcifier le &amp;Canal</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>Managed</source>
-        <translation type="unfinished"></translation>
+        <translation>Géré</translation>
     </message>
     <message>
         <source>Ad-Hoc</source>
-        <translation type="unfinished"></translation>
+        <translation>Ad-Hoc</translation>
     </message>
     <message>
         <source>any</source>
@@ -47,90 +48,90 @@
     </message>
     <message>
         <source>Encryption</source>
-        <translation type="unfinished"></translation>
+        <translation>Cryptage</translation>
     </message>
     <message>
         <source>&amp;Enable Encryption</source>
-        <translation type="unfinished"></translation>
+        <translation>Activ&amp;er le cryptage</translation>
     </message>
     <message>
         <source>&amp;Key Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres des &amp;clés</translation>
     </message>
     <message>
         <source>Key &amp;1</source>
-        <translation type="unfinished"></translation>
+        <translation>Clé &amp;1</translation>
     </message>
     <message>
         <source>Key &amp;2</source>
-        <translation type="unfinished"></translation>
+        <translation>Clé &amp;2</translation>
     </message>
     <message>
         <source>Key &amp;3</source>
-        <translation type="unfinished"></translation>
+        <translation>Clé &amp;3</translation>
     </message>
     <message>
         <source>Key &amp;4</source>
-        <translation type="unfinished"></translation>
+        <translation>Clé &amp;4</translation>
     </message>
     <message>
         <source>Non-encrypted Packets</source>
-        <translation type="unfinished"></translation>
+        <translation>Paquets non cryptés</translation>
     </message>
     <message>
         <source>&amp;Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Accepter</translation>
     </message>
     <message>
         <source>&amp;Reject</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rejeté</translation>
     </message>
 </context>
 <context>
     <name>WlanInfo</name>
     <message>
         <source>Interface Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Information sur l&apos;interface</translation>
     </message>
     <message>
         <source>802.11b</source>
-        <translation type="unfinished"></translation>
+        <translation>802.11b</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Canal</translation>
     </message>
     <message>
         <source>Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode</translation>
     </message>
     <message>
         <source>ESSID</source>
-        <translation type="unfinished"></translation>
+        <translation>ESSID</translation>
     </message>
     <message>
         <source>Station</source>
-        <translation type="unfinished"></translation>
+        <translation>Station</translation>
     </message>
     <message>
         <source>AP</source>
-        <translation type="unfinished"></translation>
+        <translation>AP</translation>
     </message>
     <message>
         <source>Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Taux</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Qualité</translation>
     </message>
     <message>
         <source>Noise</source>
-        <translation type="unfinished"></translation>
+        <translation>Bruit</translation>
     </message>
     <message>
         <source>Signal</source>
-        <translation type="unfinished"></translation>
+        <translation>Signal</translation>
     </message>
 </context>
 </TS>
