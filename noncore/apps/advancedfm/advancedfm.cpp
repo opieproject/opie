@@ -320,7 +320,8 @@ void AdvancedFm::populateLocalView()
 //                 item->setPixmap( 0,pm );
             } else if( (fileInfo.permission( QFileInfo::ExeUser)
                      | fileInfo.permission( QFileInfo::ExeGroup)
-                       | fileInfo.permission( QFileInfo::ExeOther)) & fs.find("vfat",0,TRUE) == -1) {
+                       | fileInfo.permission( QFileInfo::ExeOther))
+                       | fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
                     pm = Resource::loadPixmap( "exec");
 //                 else { //is exec
 //                  pm = Resource::loadPixmap( "exec");
@@ -442,7 +443,8 @@ void AdvancedFm::populateRemoteView()
 //                 item->setPixmap( 0,pm );
             } else if( (fileInfo.permission( QFileInfo::ExeUser)
                      | fileInfo.permission( QFileInfo::ExeGroup)
-                       | fileInfo.permission( QFileInfo::ExeOther)) & fs.find("vfat",0,TRUE) == -1) {
+                       | fileInfo.permission( QFileInfo::ExeOther))
+                       | fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
 /////                }  else if(fileInfo.isExecutable()){ //is exec <<<< BROKEN!!
                   pm = Resource::loadPixmap( "exec");
 //                     item->setPixmap( 0,pm);
