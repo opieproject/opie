@@ -515,7 +515,7 @@ void VolumeControl::show ( bool /*showMic*/ )
   if (( x + w ) > QPEApplication::desktop ( )-> width ( ))
     x = QPEApplication::desktop ( )-> width ( ) - w;
 
-  move ( x, curPos. y ( ) - sizeHint ( ). height ( ));
+  move ( QMAX(x,0), curPos. y ( ) - sizeHint ( ). height ( ));
   QFrame::show ( );
 
 }
