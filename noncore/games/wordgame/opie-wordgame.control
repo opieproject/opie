@@ -1,10 +1,10 @@
 Package: opie-wordgame
-Files: bin/wordgame apps/Games/wordgame.desktop pics/wordgame
+Files: plugins/application/libwordgame.so* bin/wordgame apps/Games/wordgame.desktop pics/wordgame
 Priority: optional
 Section: opie/games
-Maintainer: Martin Imobersteg <imm@gmx.ch> 
+Maintainer: Martin Imobersteg <imm@gmx.ch>
 Architecture: arm
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2
 Description: Crossword game
  A crossword game for the Opie environment.
  Play against the computer or human opponents.
