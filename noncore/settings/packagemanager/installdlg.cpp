@@ -50,12 +50,13 @@ _;:,   .>  :=|.         This file is free software; you can
 
 #include "opackagemanager.h"
 
-InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &caption, bool showDestInfo,
+InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &caption,
                         OPackage::Command command1, const QStringList &packages1,
                         OPackage::Command command2, const QStringList &packages2,
                         OPackage::Command command3, const QStringList &packages3 )
     : QWidget( 0x0 )
     , m_packman( pm )
+    , m_installFound( false )
     , m_numCommands( 0 )
     , m_currCommand( 0 )
     , m_destItem( 0x0 )
@@ -66,18 +67,27 @@ InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &cap
         m_command[ m_numCommands ] = command1;
         m_packages[ m_numCommands ] = packages1;
         ++m_numCommands;
+        
+        if ( command1 == OPackage::Install )
+            m_installFound = true;
     }
     if ( command2 != OPackage::NotDefined )
     {
         m_command[ m_numCommands ] = command2;
         m_packages[ m_numCommands ] = packages2;
         ++m_numCommands;
+        
+        if ( command2 == OPackage::Install )
+            m_installFound = true;
     }
     if ( command3 != OPackage::NotDefined )
     {
         m_command[ m_numCommands ] = command3;
         m_packages[ m_numCommands ] = packages3;
         ++m_numCommands;
+        
+        if ( command3 == OPackage::Install )
+            m_installFound = true;
     }
 
     // Initialize UI
@@ -86,7 +96,7 @@ InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &cap
 
     QGridLayout *layout = new QGridLayout( this, 4, 2, 2, 4 );
 
-    if ( showDestInfo )
+    if ( m_installFound )
     {
         QLabel *label = new QLabel( tr( "Destination" ), this );
         layout->addWidget( label, 0, 0 );
@@ -220,7 +230,7 @@ void InstallDlg::slotBtnStart()
 
     // Start was clicked, start executing
     QString dest;
-    if ( m_destination )
+    if ( m_installFound )
     {
         dest = m_destination->currentText();
         m_destination->setEnabled( false );
@@ -237,47 +247,73 @@ void InstallDlg::slotBtnStart()
         m_btnStart->setEnabled( false );
     }
 
+    Opie::Core::OProcess process( this );
     for ( m_currCommand = 0; m_currCommand < m_numCommands; m_currCommand++ )
     {
         // Execute next command
         m_packman->executeCommand( m_command[ m_currCommand ], m_packages[ m_currCommand ], dest,
                                    this, SLOT(slotOutput(char*)), true );
+                                   
+        // Link/Unlink application if the package was removed from or installed to a destination
+        // other than root
+        if ( ( m_command[ m_currCommand ] == OPackage::Install && dest != "root" ) ||
+             ( m_command[ m_currCommand ] == OPackage::Remove ) )
+        {
+            //m_packman->findPackage( m_packages[ m_currCommand ]->destination() != "root"*/ ) 
+            
+            // Loop through all package names in the command group
+            for ( QStringList::Iterator it = m_packages[ m_currCommand ].begin();
+                  it != m_packages[ m_currCommand ].end();
+                  ++it )
+            {
+                OPackage *currPackage = m_packman->findPackage( (*it) );
+                
+                // Skip package if it is not found or being removed from 'root'
+                if ( !currPackage || ( m_command[ m_currCommand ] == OPackage::Remove &&
+                                       currPackage->destination() == "root" ) )
+                    continue;
+                    
+                // Display feedback to user
+                if ( m_command[ m_currCommand ] == OPackage::Install )
+                    m_output->append( tr( QString( "Running ipkg-link to link package '%1'." )
+                                            .arg( currPackage->name() ) ) );
+                else
+                    m_output->append( tr( QString( "Running ipkg-link to remove links for package '%1'." )
+                                            .arg( currPackage->name() ) ) );
+                m_output->setCursorPosition( m_output->numLines(), 0 );
+                
+                // Execute ipkg-link
+                process.clearArguments();
+                process << "ipkg-link"
+                        << ( ( m_command[ m_currCommand ] == OPackage::Install ) ? "add" : "remove" )
+                        << currPackage->name();
+                if ( !process.start( Opie::Core::OProcess::Block,
+                                    Opie::Core::OProcess::NoCommunication ) )
+                {
+                    slotProcessDone( 0x0 );
+                    m_output->append( tr( "Unable to run ipkg-link." ) );
+                    m_output->setCursorPosition( m_output->numLines(), 0 );
+                    return;
+                }
+            }
+                           
+        }
     }
-    slotProcessDone(0l);
-
-    // Get destination
-/*
-    if ( dest == "root" )
-    {
-        slotProcessDone(0l);
-        return;
-    }
-
-    m_destItem = m_packman->findConfItem( OConfItem::Destination, dest );
-    if ( m_destItem )
-    {
-        QString path = m_destItem->value();
-        Opie::Core::OProcess *process = new Opie::Core::OProcess( this, "ipkg-link process" );
-        connect( process, SIGNAL(processExited(Opie::Core::OProcess*)),
-                 this, SLOT(slotProcessDone(Opie::Core::OProcess*)) );
-
-        *process << "ipkg-link" << "mount" << path;
-        if ( !process->start( Opie::Core::OProcess::NotifyOnExit,
-                              Opie::Core::OProcess::NoCommunication ) )
-            slotProcessDone( 0l );
-        m_output->append( tr( "Starting ipkg-link to link installed applications." ) );
-        m_output->setCursorPosition( m_output->numLines(), 0 );
-    }
-*/
+    
+    slotProcessDone( 0x0 );
 }
 
 void InstallDlg::slotProcessDone( Opie::Core::OProcess *proc )
 {
-    delete proc;
-
-    m_output->append( tr( "The package linking is done." ) );
-    m_output->setCursorPosition( m_output->numLines(), 0 );
-
+    if ( proc )
+    {
+        // Display message pnly if linking was done
+        m_output->append( tr( "The package linking is done." ) );
+        m_output->setCursorPosition( m_output->numLines(), 0 );
+        
+        delete proc;
+    }
+    
     // All commands executed, allow user to close dialog
     m_btnStart->setEnabled( true );
     m_btnStart->setText( tr( "Close" ) );

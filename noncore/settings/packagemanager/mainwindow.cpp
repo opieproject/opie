@@ -312,8 +312,8 @@ void MainWindow::searchForPackage( const QString &text )
 void MainWindow::installLocalPackage( const QString &ipkFile )
 {
     // Install selected file
-    InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Install local package" ), true,
-                                        OPackage::Install, ipkFile );
+    InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Install local package" ),
+                                      OPackage::Install, ipkFile );
     connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseDlg()) );
 
     // Display widget
@@ -386,7 +386,7 @@ void MainWindow::slotStatusBar( int currStep )
 void MainWindow::slotUpdate()
 {
     // Create package manager output widget
-    InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Update package information" ), false,
+    InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Update package information" ),
                                       OPackage::Update );
     connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseDlg()) );
 
@@ -398,7 +398,7 @@ void MainWindow::slotUpdate()
 void MainWindow::slotUpgrade()
 {
     // Create package manager output widget
-    InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Upgrade installed packages" ), false,
+    InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Upgrade installed packages" ),
                                       OPackage::Upgrade );
     connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseDlg()) );
 
@@ -445,8 +445,8 @@ void MainWindow::slotDownload()
         QDir::setCurrent( workingDir );
 
         // Create package manager output widget
-        InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Download packages" ), false,
-                                        OPackage::Download, workingPackages );
+        InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Download packages" ),
+                                          OPackage::Download, workingPackages );
         connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseDlg()) );
 
         // Display widget
@@ -520,18 +520,15 @@ void MainWindow::slotApply()
     }
 
     // Send command only if there are packages to process
-    OPackage::Command removeCmd = OPackage::NotDefined;
-    if ( !removeList.isEmpty() )
-        removeCmd = OPackage::Remove;
-    OPackage::Command installCmd = OPackage::NotDefined;
-    if ( !installList.isEmpty() )
-        installCmd = OPackage::Install;
-    OPackage::Command upgradeCmd = OPackage::NotDefined;
-    if ( !upgradeList.isEmpty() )
-        upgradeCmd = OPackage::Upgrade;
+    OPackage::Command removeCmd = !removeList.isEmpty() ? OPackage::Remove
+                                                        : OPackage::NotDefined;
+    OPackage::Command installCmd = !installList.isEmpty() ? OPackage::Install
+                                                          : OPackage::NotDefined;
+    OPackage::Command upgradeCmd = !upgradeList.isEmpty() ? OPackage::Upgrade
+                                                          : OPackage::NotDefined;
 
     // Create package manager output widget
-    InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Apply changes" ), !installList.isEmpty(),
+    InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Apply changes" ),
                                       removeCmd, removeList,
                                       installCmd, installList,
                                       upgradeCmd, upgradeList );

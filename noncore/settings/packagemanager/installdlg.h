@@ -55,8 +55,8 @@ class InstallDlg : public QWidget
     Q_OBJECT
 
 public:
-    InstallDlg( QWidget *parent = 0x0, OPackageManager *pm = 0x0, const QString &caption = QString::null,
-                bool showDestInfo = true,
+    InstallDlg( QWidget *parent = 0x0, OPackageManager *pm = 0x0,
+                const QString &caption = QString::null,
                 OPackage::Command command1 = OPackage::NotDefined,
                 const QStringList &packages1 = QStringList(),
                 OPackage::Command command2 = OPackage::NotDefined,
@@ -66,6 +66,9 @@ public:
 
 private:
     OPackageManager *m_packman;     // Pointer to application instance of package manager
+    
+    bool m_installFound; // Indicates if an install is being done, controls display of
+                         // destination selection, available space
 
     // UI controls
     QComboBox       *m_destination; // Destination selection list

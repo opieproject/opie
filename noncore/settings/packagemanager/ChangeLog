@@ -1,3 +1,11 @@
+2004-11-18 Dan Williams <drw@handhelds.org>
+
+    * Released version 0.5.0
+    * All v1.0 functionality implemented
+    * Implemented installation of local packages
+    * Implemented linking of non-root apps (using ipkg-link)
+    * Many UI tweaks for installation and filter dialogs
+
 2004-04-21 Dan Williams <drw@handhelds.org>
 
     * Released version 0.4.0
