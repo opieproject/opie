@@ -62,7 +62,7 @@
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Send postering</translation>
+        <translation>Send kontakt</translation>
     </message>
     <message>
         <source>Import vCard</source>

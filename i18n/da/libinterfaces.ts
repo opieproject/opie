@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished"></translation>
+        <translation>IP-adresse</translation>
     </message>
     <message>
         <source>Interface</source>
@@ -19,19 +19,19 @@
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation type="unfinished"></translation>
+        <translation>Undernet maske</translation>
     </message>
     <message>
         <source>0.0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>DHCP Information</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>DHCP Server</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Lease Expires</source>
@@ -47,11 +47,11 @@
     </message>
     <message>
         <source>MAC Address</source>
-        <translation type="unfinished"></translation>
+        <translation>MAC-adresse</translation>
     </message>
     <message>
         <source>00:00:00:00:00:00</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -66,27 +66,27 @@
     </message>
     <message>
         <source>S&amp;top</source>
-        <translation type="unfinished"></translation>
+        <translation>S&amp;top</translation>
     </message>
     <message>
         <source>R&amp;estart</source>
-        <translation type="unfinished"></translation>
+        <translation>G&amp;enstart</translation>
     </message>
     <message>
         <source>&amp;Start</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Start</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished"></translation>
+        <translation>IP-adresse</translation>
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation type="unfinished"></translation>
+        <translation>Undernet maske</translation>
     </message>
     <message>
         <source>MAC Address</source>
-        <translation type="unfinished"></translation>
+        <translation>MAC-adresse</translation>
     </message>
     <message>
         <source>Broadcast</source>
@@ -94,61 +94,61 @@
     </message>
     <message>
         <source>0.0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>00:00:00:00:00:00</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&amp;View Advanced Information</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vis avanceret information</translation>
     </message>
 </context>
 <context>
     <name>InterfaceSetup</name>
     <message>
         <source>Interface Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Interface opsætning</translation>
     </message>
     <message>
         <source>Automatically bring up</source>
-        <translation type="unfinished"></translation>
+        <translation>Start automatisk</translation>
     </message>
     <message>
         <source>DHCP</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Static Ip Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Statisk IP opsætning</translation>
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation type="unfinished"></translation>
+        <translation>Subnet maske</translation>
     </message>
     <message>
         <source>First DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>Første DNS</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished"></translation>
+        <translation>IP-adresse</translation>
     </message>
     <message>
         <source>Gateway</source>
-        <translation type="unfinished"></translation>
+        <translation>Gateway</translation>
     </message>
     <message>
         <source>Second DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>Anden DNS</translation>
     </message>
 </context>
 <context>
     <name>InterfaceSetupImp</name>
     <message>
         <source>Restarting interface</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>

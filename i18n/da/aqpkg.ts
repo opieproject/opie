@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>%1 Kb</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Kb</translation>
     </message>
 </context>
 <context>
@@ -159,24 +159,25 @@
     <name>Ipkg</name>
     <message>
         <source>Dealing with package %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Håndterer pakken %1</translation>
     </message>
     <message>
         <source>Removing symbolic links...
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Fjerner symbolske links...
+</translation>
     </message>
     <message>
         <source>Creating symbolic links for %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Laver symlinks til%1.</translation>
     </message>
     <message>
         <source>Creating symbolic links for %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Laver symlinks til %1</translation>
     </message>
     <message>
         <source>Finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Færdig</translation>
     </message>
     <message>
         <source>Removing status entry...</source>
@@ -208,11 +209,11 @@
     </message>
     <message>
         <source>Creating directory </source>
-        <translation type="unfinished"></translation>
+        <translation>Opretter mappe</translation>
     </message>
     <message>
         <source>Linked %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Link fra %1 til %1 oprettet</translation>
     </message>
     <message>
         <source>Failed to link %1 to %2</source>
@@ -220,15 +221,15 @@
     </message>
     <message>
         <source>Removed %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 fjernet</translation>
     </message>
     <message>
         <source>Failed to remove %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke fjerne %1</translation>
     </message>
     <message>
         <source>Removed </source>
-        <translation type="unfinished"></translation>
+        <translation>Fjernet</translation>
     </message>
     <message>
         <source>Failed to remove </source>
@@ -569,11 +570,11 @@ Er du sikker?
     <name>QObject</name>
     <message>
         <source>Installed packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Installerede pakker</translation>
     </message>
     <message>
         <source>Local packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokale pakker</translation>
     </message>
     <message>
         <source>N/A</source>
@@ -582,7 +583,7 @@ Er du sikker?
     <message>
         <source>Package - %1
               version - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakke - %1 version - %2</translation>
     </message>
     <message>
         <source>
@@ -606,7 +607,7 @@ Er du sikker?
     <name>QuestionDlg</name>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Fjern</translation>
+        <translation>Fjern</translation>
     </message>
 </context>
 <context>

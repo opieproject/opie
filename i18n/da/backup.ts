@@ -20,15 +20,15 @@
     </message>
     <message>
         <source>Backup Failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Fejl! Der er ikke taget backup.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Detaljer</translation>
     </message>
     <message>
         <source>Backup and Restore.. Failed !!</source>
@@ -36,7 +36,7 @@
     </message>
     <message>
         <source>Backup Successfull.</source>
-        <translation type="unfinished"></translation>
+        <translation>Backup gennemført.</translation>
     </message>
     <message>
         <source>Please select something to restore.</source>
@@ -48,7 +48,7 @@
     </message>
     <message>
         <source>Unable to open File: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke åbne filen %1</translation>
     </message>
     <message>
         <source>Restore Successfull.</source>
@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>Update Filelist</source>
-        <translation type="unfinished"></translation>
+        <translation>Opdater fil-listen</translation>
     </message>
 </context>
 <context>
@@ -110,7 +110,7 @@
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
 </context>
 </TS>
