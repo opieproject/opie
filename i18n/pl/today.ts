@@ -7,11 +7,11 @@
     </message>
     <message>
         <source>Please fill out the business card</source>
-        <translation>Wypelnij wizytowke</translation>
+        <translation>Wypełnij wizytowkę</translation>
     </message>
     <message>
         <source>No plugins found</source>
-        <translation>Nie znaleziono zadnych wtyczek</translation>
+        <translation>Nie znaleziono żadnych wtyczek</translation>
     </message>
     <message>
         <source>No plugins activated</source>
@@ -19,11 +19,11 @@
     </message>
     <message>
         <source>Click here to launch the associated app</source>
-        <translation>Kliknij tu zeby uruchomic powiazana aplikacje</translation>
+        <translation>Kliknij tu żeby uruchomić powiązana aplikacją</translation>
     </message>
     <message>
         <source>Owned by </source>
-        <translation>Wlasciciel</translation>
+        <translation>Właściciel </translation>
     </message>
 </context>
 <context>
@@ -34,38 +34,38 @@
     </message>
     <message>
         <source>Today by Maximilian Rei&#xdf;</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzisiaj - autor: Maximilian Reiß</translation>
     </message>
     <message>
         <source>Click here to get to the config dialog</source>
-        <translation>Kliknij tu zeby wyswietlic okno konfiguracyjne</translation>
+        <translation>Kliknij tu ąeby wyświetlic okno konfiguracyjne</translation>
     </message>
 </context>
 <context>
     <name>TodayConfig</name>
     <message>
         <source>Load which plugins in what order:</source>
-        <translation>Ktore wtyczki i w jakiej kolejnosci ladowac:</translation>
+        <translation>Które wtyczki i w jakiej kolejności ładowac:</translation>
     </message>
     <message>
         <source>Move Up</source>
-        <translation>Do Gory</translation>
+        <translation>Do góry</translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation>Do Dolu</translation>
+        <translation>Do dołu</translation>
     </message>
     <message>
         <source>active/order</source>
-        <translation>aktywne/kolejnosc</translation>
+        <translation>aktywne/kolejność</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation>Rozne</translation>
+        <translation>różne</translation>
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
-        <translation>Zaznacz/odznacz pole by wlaczyc/wylaczyc wtyczke lub uzywajac przyciskow ze strzalkami po prawej stronie zmien kolejnosc wyswietlania</translation>
+        <translation>Zaznacz/odznacz pole by włączyć/wyłączyć wtyczkę lub używając przycisków ze strzałkami po prawej stronie zmień kolejność wyświetlania</translation>
     </message>
     <message>
         <source>Today Config</source>
@@ -80,7 +80,7 @@
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation>Zaznacz to jesli program ma byc automatycznie uruchamiany po wznowieniu.</translation>
+        <translation>Zaznacz to jeśli program ma być automatycznie uruchamiany po wznowieniu.</translation>
     </message>
     <message>
         <source>autostart on resume?</source>
@@ -92,7 +92,7 @@
     </message>
     <message>
         <source>Have small banner </source>
-        <translation>Pokazuj maly baner</translation>
+        <translation>Pokazuj mały baner</translation>
     </message>
     <message>
         <source> min</source>
@@ -128,11 +128,11 @@
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation>Jak czesto program powinien sie odswiezac</translation>
+        <translation>Jak często program powinien odświeżać dane</translation>
     </message>
     <message>
         <source>refresh</source>
-        <translation>odswiez</translation>
+        <translation>odśwież</translation>
     </message>
 </context>
 </TS>

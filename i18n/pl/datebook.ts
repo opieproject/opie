@@ -11,23 +11,23 @@
     </message>
     <message>
         <source>Today</source>
-        <translation>Dzis</translation>
+        <translation>Dziś</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation>Dzien</translation>
+        <translation>Dzień</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation>Tydzien</translation>
+        <translation>Tydzień</translation>
     </message>
     <message>
         <source>WeekLst</source>
-        <translation>Tydzien - lista</translation>
+        <translation>Tydzień - lista</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation>Miesiac</translation>
+        <translation>Miesiąc</translation>
     </message>
     <message>
         <source>Find</source>
@@ -36,12 +36,12 @@
     <message>
         <source>Event duration is potentially longer
 than interval between repeats.</source>
-        <translation>Czas zdarzenia jest potencjalnie dluzszy
-niz odstep pomiedzy jego powtorzeniami.</translation>
+        <translation>Czas zdarzenia jest potencjalnie dluższy
+niż odstęp pomiędzy jego powtórzeniami.</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Nie mozna zmieniac danych podczas synchronizacji</translation>
+        <translation>Nie można zmieniać danych podczas synchronizacji</translation>
     </message>
     <message>
         <source>Edit Event</source>
@@ -57,7 +57,7 @@ niz odstep pomiedzy jego powtorzeniami.</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Brak miejsca w pamieci</translation>
+        <translation>Brak miejsca w pamięci</translation>
     </message>
     <message>
         <source>Calendar was unable to save
@@ -65,11 +65,11 @@ your changes.
 Free up some space and try again.
 
 Quit anyway?</source>
-        <translation>Kaledarz nie moze
-zapisac zmian.
-Zwolnij miejsce w pamieci i sprobuj ponownie.
+        <translation>Kaledarz nie może
+zapisać zmian.
+Zwolnij miejsce w pamięci i spróbuj ponownie.
 
-Wyjsc ?</translation>
+Wyjść?</translation>
     </message>
     <message>
         <source>(Unknown)</source>
@@ -77,7 +77,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Error!</source>
-        <translation>Blad!</translation>
+        <translation>Błąd!</translation>
     </message>
     <message>
         <source>Fix it</source>
@@ -85,7 +85,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation>Kontynuowac</translation>
+        <translation>Kontynuować</translation>
     </message>
     <message>
         <source>Duplicate Event</source>
@@ -97,7 +97,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>error box</source>
-        <translation>okienko bledu</translation>
+        <translation>okienko błędu</translation>
     </message>
 </context>
 <context>
@@ -124,7 +124,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation>Poniedzialek</translation>
+        <translation>Poniedziałek</translation>
     </message>
     <message>
         <source>Tuesday</source>
@@ -132,7 +132,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation>Sroda</translation>
+        <translation>Środa</translation>
     </message>
     <message>
         <source>Thursday</source>
@@ -140,7 +140,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation>Piatek</translation>
+        <translation>Piątek</translation>
     </message>
     <message>
         <source>Saturday</source>
@@ -162,11 +162,11 @@ Wyjsc ?</translation>
     <name>DateBookDayWidget</name>
     <message>
         <source>Start</source>
-        <translation>Poczatek</translation>
+        <translation>Od</translation>
     </message>
     <message>
         <source>End</source>
-        <translation>Koniec</translation>
+        <translation>Do</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -174,7 +174,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Usun</translation>
+        <translation>Usuń</translation>
     </message>
     <message>
         <source>Beam</source>
@@ -182,7 +182,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>This is an all day event.</source>
-        <translation>To jest zdarzenie calodniowe.</translation>
+        <translation>To jest zdarzenie całodobowe.</translation>
     </message>
     <message>
         <source>Time</source>
@@ -236,7 +236,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Start viewing events</source>
-        <translation>Rozpocznij przeglad zdarzen</translation>
+        <translation>Rozpocznij przegląd zdarzeń</translation>
     </message>
     <message>
         <source>Start Time:</source>
@@ -260,7 +260,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation>Rozne</translation>
+        <translation>Różne</translation>
     </message>
     <message>
         <source>Row style:</source>
@@ -268,15 +268,15 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Domyslne</translation>
+        <translation>Domyślne</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation>Srednie</translation>
+        <translation>Średnie</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation>Duze</translation>
+        <translation>Duże</translation>
     </message>
     <message>
         <source>Views</source>
@@ -284,23 +284,23 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Default view:</source>
-        <translation>Domyslny widok:</translation>
+        <translation>Domyślny widok:</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation>Dzien</translation>
+        <translation>Dzień</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation>Tydzien</translation>
+        <translation>Tydzień</translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation>Tydzien - lista</translation>
+        <translation>Tydzień - lista</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation>Miesiac</translation>
+        <translation>Miesiąc</translation>
     </message>
     <message>
         <source>Jump to current time</source>
@@ -308,7 +308,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Time display</source>
-        <translation>Wyswietlanie czasu</translation>
+        <translation>Wyświetlanie czasu</translation>
     </message>
     <message>
         <source>None</source>
@@ -316,15 +316,15 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation>Poczatek</translation>
+        <translation>Początek</translation>
     </message>
     <message>
         <source>Start-End</source>
-        <translation>Poczatek-koniec</translation>
+        <translation>Początek - koniec</translation>
     </message>
     <message>
         <source>Defaults</source>
-        <translation>Domyslne</translation>
+        <translation>Domyślne</translation>
     </message>
     <message>
         <source>Location:</source>
@@ -347,7 +347,7 @@ Wyjsc ?</translation>
     <name>DateBookWeek</name>
     <message>
         <source>This is an all day event.</source>
-        <translation>To jest zdarzenie calodniowe.</translation>
+        <translation>To jest zdarzenie całodobowe.</translation>
     </message>
 </context>
 <context>
@@ -369,7 +369,7 @@ Wyjsc ?</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation type="unfinished"></translation>
+        <translation>PWŚCPSNP</translation>
     </message>
 </context>
 <context>
@@ -452,7 +452,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Monthly...</source>
-        <translation>Miesiecznie...</translation>
+        <translation>Miesięcznie...</translation>
     </message>
     <message>
         <source>Yearly...</source>
@@ -460,15 +460,15 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>No Repeat...</source>
-        <translation>Jednorazowo...</translation>
+        <translation>Jednorazowe...</translation>
     </message>
     <message>
         <source>Start Time</source>
-        <translation>Poczatek</translation>
+        <translation>Od</translation>
     </message>
     <message>
         <source>End Time</source>
-        <translation>Koniec</translation>
+        <translation>Do</translation>
     </message>
 </context>
 <context>
@@ -499,7 +499,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation>Podroz</translation>
+        <translation>Podróż</translation>
     </message>
     <message>
         <source>Office</source>
@@ -515,11 +515,11 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation type="unfinished">Poczatek</translation>
+        <translation>Początek</translation>
     </message>
     <message>
         <source>All day</source>
-        <translation>Caly dzien</translation>
+        <translation>Cały dzień</translation>
     </message>
     <message>
         <source>Time zone</source>
@@ -535,11 +535,11 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation>Cicho</translation>
+        <translation>Cichy</translation>
     </message>
     <message>
         <source>Loud</source>
-        <translation>Glosno</translation>
+        <translation>Glośny</translation>
     </message>
     <message>
         <source>Repeat</source>
@@ -555,7 +555,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Start - End </source>
-        <translation>Poczatek - Koniec</translation>
+        <translation>Od - do</translation>
     </message>
     <message>
         <source>Note...</source>
@@ -588,7 +588,7 @@ Wyjsc ?</translation>
     <name>QObject</name>
     <message>
         <source>Start</source>
-        <translation>Poczatek</translation>
+        <translation>Początek</translation>
     </message>
     <message>
         <source>End</source>
@@ -600,23 +600,23 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>%1 %2 every </source>
-        <translation>%1 %2 kazdy</translation>
+        <translation>%1 %2 co </translation>
     </message>
     <message>
         <source>The %1 every </source>
-        <translation>%1 kazdy </translation>
+        <translation>%1 co </translation>
     </message>
     <message>
         <source>The %1 %1 of every</source>
-        <translation>%1 %1 kazdego</translation>
+        <translation>%1 %1 co </translation>
     </message>
     <message>
         <source>Every </source>
-        <translation>Kazdy </translation>
+        <translation>Co </translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation>Poniedzialek</translation>
+        <translation>Poniedziałek</translation>
     </message>
     <message>
         <source>Tuesday</source>
@@ -624,7 +624,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation>Sroda</translation>
+        <translation>Środa</translation>
     </message>
     <message>
         <source>Thursday</source>
@@ -632,7 +632,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation>Piatek</translation>
+        <translation>Piątek</translation>
     </message>
     <message>
         <source>Saturday</source>
@@ -678,23 +678,23 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Repeat By</source>
-        <translation>Powtarzaj co</translation>
+        <translation>Powtarzaj według</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation>Dzien</translation>
+        <translation>Dnia</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Data</translation>
+        <translation>Daty</translation>
     </message>
     <message>
         <source>month(s)</source>
-        <translation>miesieczne</translation>
+        <translation>miesiące</translation>
     </message>
     <message>
         <source>year(s)</source>
-        <translation>roczne</translation>
+        <translation>lata</translation>
     </message>
     <message>
         <source>days</source>
@@ -702,7 +702,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>day</source>
-        <translation>dzien</translation>
+        <translation>dzień</translation>
     </message>
     <message>
         <source>weeks</source>
@@ -710,11 +710,11 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>week</source>
-        <translation>tydzien</translation>
+        <translation>tydzień</translation>
     </message>
     <message>
         <source>month</source>
-        <translation>miesiac</translation>
+        <translation>miesiąc</translation>
     </message>
     <message>
         <source>year</source>
@@ -736,7 +736,7 @@ i </translation>
     </message>
     <message>
         <source>on </source>
-        <translation>w</translation>
+        <translation>w </translation>
     </message>
 </context>
 <context>
@@ -795,7 +795,7 @@ i </translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation>Sro</translation>
+        <translation>Śro</translation>
     </message>
     <message>
         <source>Thu</source>
@@ -803,7 +803,7 @@ i </translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation>Pia</translation>
+        <translation>Pią</translation>
     </message>
     <message>
         <source>Sat</source>
@@ -831,11 +831,11 @@ i </translation>
     </message>
     <message>
         <source>months</source>
-        <translation>miesiecy</translation>
+        <translation>miesiące</translation>
     </message>
     <message>
         <source>years</source>
-        <translation>lat</translation>
+        <translation>lata</translation>
     </message>
 </context>
 </TS>

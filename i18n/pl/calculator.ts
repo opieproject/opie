@@ -130,7 +130,7 @@
     </message>
     <message>
         <source>Standard</source>
-        <translation>Standard</translation>
+        <translation>Standardowy</translation>
     </message>
 </context>
 <context>
@@ -145,7 +145,7 @@
     </message>
     <message>
         <source>Distance</source>
-        <translation>Odleglosc</translation>
+        <translation>Odległości</translation>
     </message>
     <message>
         <source>Area</source>
@@ -157,7 +157,7 @@
     </message>
     <message>
         <source>Volume</source>
-        <translation>Dzwiek</translation>
+        <translation>Objętości</translation>
     </message>
     <message>
         <source>acres</source>
@@ -177,15 +177,15 @@
     </message>
     <message>
         <source>cu cm</source>
-        <translation>cm sz</translation>
+        <translation>cm^3</translation>
     </message>
     <message>
         <source>cu ft</source>
-        <translation>st sz</translation>
+        <translation>st^3</translation>
     </message>
     <message>
         <source>cu in</source>
-        <translation>cal sz</translation>
+        <translation>cal^3</translation>
     </message>
     <message>
         <source>&#xb0;F</source>
@@ -193,7 +193,7 @@
     </message>
     <message>
         <source>fl oz (US)</source>
-        <translation>fl oz (US)</translation>
+        <translation type="unfinished">uncja fl (US)</translation>
     </message>
     <message>
         <source>ft</source>
@@ -229,7 +229,7 @@
     </message>
     <message>
         <source>lb</source>
-        <translation type="unfinished">lb</translation>
+        <translation>funt</translation>
     </message>
     <message>
         <source>Lg tons</source>
@@ -245,7 +245,7 @@
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mila</translation>
     </message>
     <message>
         <source>ml</source>
@@ -257,11 +257,11 @@
     </message>
     <message>
         <source>naut. mi</source>
-        <translation>mi mor</translation>
+        <translation>mila mor</translation>
     </message>
     <message>
         <source>oz</source>
-        <translation type="unfinished">oz</translation>
+        <translation>uncja</translation>
     </message>
     <message>
         <source>points</source>
@@ -277,35 +277,35 @@
     </message>
     <message>
         <source>sq cm</source>
-        <translation>cm kw</translation>
+        <translation>cm^2</translation>
     </message>
     <message>
         <source>sq ft</source>
-        <translation>st kw</translation>
+        <translation>st^2</translation>
     </message>
     <message>
         <source>sq in</source>
-        <translation>cal kw</translation>
+        <translation>cal^2</translation>
     </message>
     <message>
         <source>sq km</source>
-        <translation>km kw</translation>
+        <translation>km^2</translation>
     </message>
     <message>
         <source>sq m</source>
-        <translation>m kw</translation>
+        <translation>m^2</translation>
     </message>
     <message>
         <source>sq mi</source>
-        <translation>mi kw</translation>
+        <translation>mila^2</translation>
     </message>
     <message>
         <source>sq mm</source>
-        <translation>mm kw</translation>
+        <translation>mm^2</translation>
     </message>
     <message>
         <source>sq yd</source>
-        <translation type="unfinished">yd kw</translation>
+        <translation>jard^2</translation>
     </message>
     <message>
         <source>st</source>
@@ -317,11 +317,11 @@
     </message>
     <message>
         <source>tblspoon</source>
-        <translation>lyzka stolowa</translation>
+        <translation>łyżka stołowa</translation>
     </message>
     <message>
         <source>teaspoons</source>
-        <translation>lyzeczka</translation>
+        <translation>łyżeczka</translation>
     </message>
     <message>
         <source>tonnes</source>
@@ -329,7 +329,7 @@
     </message>
     <message>
         <source>yd</source>
-        <translation type="unfinished">yd</translation>
+        <translation>jard</translation>
     </message>
 </context>
 </TS>
