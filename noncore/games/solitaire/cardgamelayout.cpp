@@ -18,7 +18,7 @@
 **
 **********************************************************************/
 #include "cardgamelayout.h"
-
+#include "card.h"
 
 CardGameLayout::~CardGameLayout()
 {
