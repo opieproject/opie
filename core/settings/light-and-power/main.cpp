@@ -18,7 +18,7 @@
 **
 **********************************************************************/
 
-#include "settings.h"
+#include "light.h"
 
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>

@@ -43,6 +43,10 @@ public:
 	QPoint startPoint ( ) const;
 	QPoint endPoint ( ) const;	
 
+signals:
+	void startPointChanged ( const QPoint & );
+	void endPointChanged ( const QPoint & );
+
 public slots:
 	void setScale ( const QSize &s );
 	void setLineSteps ( int step );

@@ -26,7 +26,7 @@
 
 */
 
-#include "settings.h"
+#include "light.h"
 
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
@@ -38,6 +38,7 @@
 #include <qcheckbox.h>
 #include <qtabwidget.h>
 #include <qslider.h>
+#include <qtimer.h>
 #include <qspinbox.h>
 #include <qpushbutton.h>
 
@@ -48,7 +49,7 @@
 using namespace Opie;
 
 LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
-	: LightSettingsBase( parent, name, true, WStyle_ContextHelp )
+	: LightSettingsBase( parent, name, false, WStyle_ContextHelp )
 {
 	m_res = ODevice::inst ( )-> displayBrightnessResolution ( );
 
@@ -63,14 +64,14 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 	config. setGroup ( "Battery" );
 
 	// battery spinboxes
-	interval_dim->      setValue ( config. readNumEntry ( "Dim", 20 ));
-	interval_lightoff-> setValue ( config. readNumEntry ( "LightOff", 30 ));
+	interval_dim->      setValue ( config. readNumEntry ( "Dim", 30 ));
+	interval_lightoff-> setValue ( config. readNumEntry ( "LightOff", 20 ));
 	interval_suspend->  setValue ( config. readNumEntry ( "Suspend", 60 ));
 
 	// battery check and slider
 	LcdOffOnly-> setChecked ( config. readBoolEntry ( "LcdOffOnly", false ));
 
-	int bright = config. readNumEntry ( "Brightness", 255 );
+	int bright = config. readNumEntry ( "Brightness", 127 );
 	brightness-> setMaxValue ( m_res - 1 );
 	brightness-> setTickInterval ( QMAX( 1, m_res / 16 ));
 	brightness-> setLineStep ( QMAX( 1, m_res / 16 ));
@@ -84,9 +85,9 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 	config. setGroup ( "AC" );
 	
 	// ac spinboxes
-	interval_dim_ac_3->      setValue ( config. readNumEntry ( "Dim", 20 ));
-	interval_lightoff_ac_3-> setValue ( config. readNumEntry ( "LightOff", 30 ));
-	interval_suspend_ac_3->  setValue ( config. readNumEntry ( "Suspend", 60 ));
+	interval_dim_ac_3->      setValue ( config. readNumEntry ( "Dim", 60 ));
+	interval_lightoff_ac_3-> setValue ( config. readNumEntry ( "LightOff", 120 ));
+	interval_suspend_ac_3->  setValue ( config. readNumEntry ( "Suspend", 0 ));
 
 	// ac check and slider
 	LcdOffOnly_2_3-> setChecked ( config. readBoolEntry ( "LcdOffOnly", false ));
@@ -108,24 +109,28 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 	lowSpinBox->      setValue ( config. readNumEntry ( "powerverylow", 10 ) );
 	criticalSpinBox-> setValue ( config. readNumEntry ( "powercritical", 5 ) );
 
+	m_resettimer = new QTimer ( this );
+	connect ( m_resettimer, SIGNAL( timeout ( )), this, SLOT( resetBacklight ( )));
+
 	if ( PowerStatusManager::readStatus ( ). acStatus ( ) != PowerStatus::Online ) {
-		connect ( brightness, SIGNAL( valueChanged ( int )), this, SLOT( setBacklight ( int )));
 		tabs-> setCurrentPage ( 0 );		
 	}
 	else {
-		connect ( brightness_ac_3, SIGNAL( valueChanged ( int )), this, SLOT( setBacklight ( int )));
 		tabs-> setCurrentPage ( 1 );
 	}
+	
+	connect ( brightness, SIGNAL( valueChanged ( int )), this, SLOT( setBacklight ( int )));
+	connect ( brightness_ac_3, SIGNAL( valueChanged ( int )), this, SLOT( setBacklight ( int )));
 }
 
 LightSettings::~LightSettings ( ) 
 {
 }
 
-
 void LightSettings::calibrateSensor ( )
 {
 	Sensor *s = new Sensor ( m_sensordata, this );
+	connect ( s, SIGNAL( viewBacklight ( int )), this, SLOT( setBacklight ( int )));
 	s-> showMaximized ( );
 	s-> exec ( );
 	delete s;
@@ -134,6 +139,7 @@ void LightSettings::calibrateSensor ( )
 void LightSettings::calibrateSensorAC ( )
 {
 	Sensor *s = new Sensor ( m_sensordata_ac, this );
+	connect ( s, SIGNAL( viewBacklight ( int )), this, SLOT( setBacklight ( int )));
 	s-> showMaximized ( );
 	s-> exec ( );
 	delete s;
@@ -141,18 +147,21 @@ void LightSettings::calibrateSensorAC ( )
 
 void LightSettings::setBacklight ( int bright )
 {
-	bright = bright * 255 / ( m_res - 1 );
+	if ( bright >= 0 )
+		bright = bright * 255 / ( m_res - 1 );
+	
 	QCopEnvelope e ( "QPE/System", "setBacklight(int)" );
 	e << bright;
+	
+	if ( bright != -1 ) {
+		m_resettimer-> stop ( );
+		m_resettimer-> start ( 2000, true );
+	}	
 }
 
-void LightSettings::reject ( )
+void LightSettings::resetBacklight ( )
 {
-	{
-		QCopEnvelope e ( "QPE/System", "setBacklight(int)" );
-		e << -1;
-	}
-	QDialog::reject ( );
+	setBacklight ( -1 );
 }
 
 void LightSettings::accept ( )
@@ -200,16 +209,14 @@ void LightSettings::accept ( )
 		QCopEnvelope e ( "QPE/System", "setScreenSaverInterval(int)" );
 		e << -1;
 	}
-	{
-		QCopEnvelope e ( "QPE/System", "setBacklight(int)" );
-		e << -1;
-	}
-	
-	QDialog::accept ( );
+	LightSettingsBase::accept ( );
 }
 
 void LightSettings::done ( int r )
 {
-	QDialog::done ( r );
+	m_resettimer-> stop ( );
+	resetBacklight ( );
+	
+	LightSettingsBase::done ( r );
 	close ( );
 }

@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>379</width>
+            <width>371</width>
             <height>532</height>
         </rect>
     </property>
@@ -1188,90 +1188,6 @@
     </image>
 </images>
 <connections>
-    <connection>
-        <sender>auto_brightness</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>brightness</receiver>
-        <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>auto_brightness_ac_3</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>brightness_ac_3</receiver>
-        <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>auto_brightness_ac_3</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>TextLabel1_3_2</receiver>
-        <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>auto_brightness</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>TextLabel1_3</receiver>
-        <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>auto_brightness</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>interval_dim</receiver>
-        <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>auto_brightness_ac_3</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>interval_dim_ac_3</receiver>
-        <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>auto_brightness</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>PixmapLabel2</receiver>
-        <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>auto_brightness</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>TextLabel4</receiver>
-        <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>auto_brightness</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>TextLabel5</receiver>
-        <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>auto_brightness</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>PixmapLabel1</receiver>
-        <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>auto_brightness_ac_3</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>PixmapLabel2_2_3</receiver>
-        <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>auto_brightness_ac_3</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>TextLabel6</receiver>
-        <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>auto_brightness_ac_3</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>TextLabel7</receiver>
-        <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>auto_brightness_ac_3</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>PixmapLabel1_2_3</receiver>
-        <slot>setDisabled(bool)</slot>
-    </connection>
     <connection>
         <sender>CalibrateLightSensor</sender>
         <signal>clicked()</signal>

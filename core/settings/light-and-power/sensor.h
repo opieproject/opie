@@ -34,10 +34,18 @@ class Calibration;
 class QStringList;
 
 class Sensor : public SensorBase {
+	Q_OBJECT
+
 public:
 	Sensor ( QStringList &params, QWidget *parent = 0, const char *name = 0 );
 	
 	virtual void accept ( );
+
+signals:
+	void viewBacklight ( int );
+
+private slots:
+	void pointDrag ( const QPoint & );
 	
 private:
 	QStringList &m_params;

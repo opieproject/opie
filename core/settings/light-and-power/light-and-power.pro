@@ -1,7 +1,7 @@
 TEMPLATE	= app
-CONFIG		+= qt warn_on release
+CONFIG		+= qt warn_on debug
 DESTDIR		= $(OPIEDIR)/bin
-HEADERS		= settings.h sensor.h calibration.h
+HEADERS		= light.h sensor.h calibration.h
 SOURCES		= light.cpp main.cpp sensor.cpp calibration.cpp
 INTERFACES	= lightsettingsbase.ui sensorbase.ui
 INCLUDEPATH += $(OPIEDIR)/include

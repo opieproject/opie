@@ -30,6 +30,10 @@
 #include <qslider.h>
 #include <qspinbox.h>
 
+#include <opie/odevice.h>
+
+using namespace Opie;
+
 #include "calibration.h"
 #include "sensor.h"
 
@@ -52,34 +56,48 @@ Sensor::Sensor ( QStringList &params, QWidget *parent, const char *name )
 		case 2: steps = params [1]. toInt ( );
 		case 1: inter = params [0]. toInt ( ) / 1000;
 	}
+
+	int xscale = ODevice::inst ( )-> lightSensorResolution ( );
+	int yscale = ODevice::inst ( )-> displayBrightnessResolution ( );
 	
 	QVBoxLayout *lay = new QVBoxLayout ( frame );
 	lay-> setMargin ( 2 );
 	m_calib = new Calibration ( frame );
-	lay-> add ( m_calib );
+	lay-> add ( m_calib );	
 
-	m_calib-> setScale ( QSize ( 256, 256 ));
+	m_calib-> setScale ( QSize ( xscale, yscale ));
 	m_calib-> setLineSteps ( steps );
 	m_calib-> setInterval ( inter );
-	m_calib-> setStartPoint ( QPoint ( smin, lmax ));
-	m_calib-> setEndPoint ( QPoint ( smax, lmin ));
+	m_calib-> setStartPoint ( QPoint ( smin * xscale / 256, lmax * yscale / 256 ));
+	m_calib-> setEndPoint ( QPoint ( smax * xscale / 256, lmin * yscale / 256 ));
 	
 	interval-> setValue ( inter );
 	linesteps-> setValue ( steps );
 	
 	connect ( interval, SIGNAL( valueChanged ( int )), m_calib, SLOT( setInterval ( int )));
 	connect ( linesteps, SIGNAL( valueChanged ( int )), m_calib, SLOT( setLineSteps ( int )));
+	
+	connect ( m_calib, SIGNAL( startPointChanged ( const QPoint & )), this, SLOT( pointDrag ( const QPoint & )));
+	connect ( m_calib, SIGNAL( endPointChanged ( const QPoint & )), this, SLOT( pointDrag ( const QPoint & )));
 }                
 
 void Sensor::accept ( )
 {
+	int xscale = ODevice::inst ( )-> lightSensorResolution ( );
+	int yscale = ODevice::inst ( )-> displayBrightnessResolution ( );
+
 	m_params. clear ( );
 	m_params << QString::number ( m_calib-> interval ( ) * 1000 )
 	         << QString::number ( m_calib-> lineSteps ( ))
-	         << QString::number ( m_calib-> startPoint ( ). x ( ))
-	         << QString::number ( m_calib-> endPoint ( ). x ( ))
-	         << QString::number ( m_calib-> endPoint ( ). y ( ))
-	         << QString::number ( m_calib-> startPoint ( ). y ( ));
+	         << QString::number ( m_calib-> startPoint ( ). x ( ) * 256 / xscale )
+	         << QString::number ( m_calib-> endPoint ( ). x ( ) * 256 / xscale )
+	         << QString::number ( m_calib-> endPoint ( ). y ( ) * 256 / yscale )
+	         << QString::number ( m_calib-> startPoint ( ). y ( ) * 256 / yscale );
 
 	QDialog::accept ( );
+}
+
+void Sensor::pointDrag ( const QPoint &p )
+{
+	emit viewBacklight ( p. y ( ));
 }
