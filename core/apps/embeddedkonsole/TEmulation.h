@@ -9,11 +9,11 @@
 /* This file is part of Konsole - an X terminal for KDE                       */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-/*									      */
+/*                        */
 /* Ported Konsole to Qt/Embedded                                              */
-/*									      */
+/*                        */
 /* Copyright (C) 2000 by John Ryland <jryland@trolltech.com>                  */
-/*									      */
+/*                        */
 /* -------------------------------------------------------------------------- */
 
 #ifndef EMULATION_H
@@ -42,6 +42,7 @@ public slots: // signals incoming from TEWidget
 
   virtual void onImageSizeChange(int lines, int columns);
   virtual void onHistoryCursorChange(int cursor);
+  virtual void onHorzCursorChange(int cursor);
   virtual void onKeyPress(QKeyEvent*);
  
   virtual void clearSelection();

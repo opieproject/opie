@@ -81,6 +81,7 @@ private slots:
     void changeForegroundColor(const QColor &);
     void changeBackgroundColor(const QColor &);
 private:
+    void doWrap();
   void init(const char* _pgm, QStrList & _args);
   void initSession(const char* _pgm, QStrList & _args);
   void runSession(TESession* s);

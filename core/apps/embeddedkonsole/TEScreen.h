@@ -9,11 +9,11 @@
 /* This file is part of Konsole - an X terminal for KDE                       */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-/*									      */
+/*                        */
 /* Ported Konsole to Qt/Embedded                                              */
-/*									      */
+/*                        */
 /* Copyright (C) 2000 by John Ryland <jryland@trolltech.com>                  */
-/*									      */
+/*                        */
 /* -------------------------------------------------------------------------- */
 
 #ifndef TESCREEN_H
@@ -140,6 +140,7 @@ public: // these are all `Screen' operations
     
     /*! return the number of lines. */
     int  getLines()   { return lines; }
+
     /*! return the number of columns. */
     int  getColumns() { return columns; }
 
@@ -147,6 +148,11 @@ public: // these are all `Screen' operations
     void setHistCursor(int cursor);
     /*! return the position of the history cursor. */
     int  getHistCursor();
+
+    /*! set the position of the horizontal cursor. */
+    void setHorzCursor(int cursor);
+    /*! return the position of the horizontal cursor. */
+    int  getHorzCursor();
 
     int  getHistLines ();
     void setScroll(bool on);
@@ -199,6 +205,8 @@ private:
 
     int histCursor;   // display position relative to start of the history buffer
     HistoryScroll hist;
+
+    int horzCursor;
     
     // cursor location
 

@@ -332,7 +332,8 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   font_a   = 1;
   word_selection_mode = FALSE;
   hposition = 0;
-
+vcolumns = 0;
+ 
   setMouseMarks(TRUE);
   setVTFont( QFont("fixed") );
   setColorTable(base_color_table); // init color table
@@ -1403,5 +1404,3 @@ void TEWidget::setWrapAt(int columns)
     propagateSize();
     update();
 }
-
-

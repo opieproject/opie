@@ -358,10 +358,13 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   scrollMenu->insertItem(tr( "None" ));
   scrollMenu->insertItem(tr( "Left" ));
   scrollMenu->insertItem(tr( "Right" ));
-  scrollMenu->insertSeparator(4);
-  scrollMenu->insertItem(tr( "Horizontal" ));
+//   scrollMenu->insertSeparator(4);
+//   scrollMenu->insertItem(tr( "Horizontal" ));
  
   configMenu->insertItem(tr( "ScrollBar" ),scrollMenu);
+
+  configMenu->insertItem(tr( "Wrap" ));
+  
 //scrollMenuSelected(-29);
 //   cfg.setGroup("ScrollBar");
 //   if(cfg.readBoolEntry("HorzScroll",0)) {
@@ -399,6 +402,7 @@ void Konsole::show()
     newSession();
   }
   QMainWindow::show();
+  
 }
 
 void Konsole::initSession(const char*, QStrList &)
@@ -598,17 +602,18 @@ void Konsole::newSession() {
     if(nsessions < 15) {    // seems to be something weird about 16 tabs on the Zaurus.... memory?
         TEWidget* te = new TEWidget(tab);
 //  te->setBackgroundMode(PaletteBase); //we want transparent!!
-    te->setVTFont(fonts.at(cfont)->getFont());
-    tab->addTab(te);
-    TESession* se = new TESession(this, te, se_pgm, se_args, "xterm");
-    te->currentSession = se;
-    connect( se, SIGNAL(done(TESession*,int)), this, SLOT(doneSession(TESession*,int)) );
-    se->run();
-    se->setConnect(TRUE);
-    se->setHistory(b_scroll);
-    tab->setCurrentPage(nsessions);
-    nsessions++;
-    setColor();
+        te->setVTFont(fonts.at(cfont)->getFont());
+        tab->addTab(te);
+        TESession* se = new TESession(this, te, se_pgm, se_args, "xterm");
+        te->currentSession = se;
+        connect( se, SIGNAL(done(TESession*,int)), this, SLOT(doneSession(TESession*,int)) );
+        se->run();
+        se->setConnect(TRUE);
+        se->setHistory(b_scroll);
+        tab->setCurrentPage(nsessions);
+        nsessions++;
+        doWrap();
+        setColor();
     }
 }
 
@@ -773,8 +778,8 @@ void Konsole::colorMenuSelected(int iD)
 
 void Konsole::configMenuSelected(int iD)
 {
-//        QString temp;
-//        qDebug( temp.sprintf("configmenu %d",iD));
+        QString temp;
+        qDebug( temp.sprintf("configmenu %d",iD));
     TEWidget* te = getTe();
     Config cfg("Konsole");
     cfg.setGroup("Menubar");
@@ -792,6 +797,20 @@ void Konsole::configMenuSelected(int iD)
             cfg.writeEntry("Position","Top");
         }
     }
+    if( iD  == -29) {
+    cfg.setGroup("ScrollBar");
+          bool b=cfg.readBoolEntry("HorzScroll",0);
+          b=!b;
+          cfg.writeEntry("HorzScroll", b );
+          cfg.write();
+          doWrap();
+          if(cfg.readNumEntry("Position",2) == 0) {
+              te->setScrollbarLocation(1);
+          } else {
+              te->setScrollbarLocation(0);
+          }
+          te->setScrollbarLocation( cfg.readNumEntry("Position",2));
+    }   
 }
 
 void Konsole::changeCommand(const QString &text, int c)
@@ -832,20 +851,21 @@ void Konsole::scrollMenuSelected(int index)
         te->setScrollbarLocation(2);
         cfg.writeEntry("Position",2);
         break;
-      case -29: {
-          bool b=cfg.readBoolEntry("HorzScroll",0);
-          cfg.writeEntry("HorzScroll", !b );
-          cfg.write();
-          if(cfg.readNumEntry("Position",2) == 0)
-              te->setScrollbarLocation(1);
-          else
-              te->setScrollbarLocation(0);
-          te->setScrollbarLocation( cfg.readNumEntry("Position",2));
-          te->setWrapAt(120);
-      }
-        break;
+//       case -29: {
+//           bool b=cfg.readBoolEntry("HorzScroll",0);
+//           cfg.writeEntry("HorzScroll", !b );
+//           cfg.write();
+//           if(cfg.readNumEntry("Position",2) == 0) {
+//               te->setScrollbarLocation(1);
+//           te->setWrapAt(0);
+//           } else {
+//               te->setScrollbarLocation(0);
+//           te->setWrapAt(120);
+//           }
+//           te->setScrollbarLocation( cfg.readNumEntry("Position",2));
+//       }
+//         break;
     };
-
 }
 
 void Konsole::editCommandListMenuSelected(int iD)
@@ -970,4 +990,18 @@ void Konsole::changeBackgroundColor(const QColor &color) {
 //     colors.sprintf("%d,%d,%d"color.red,color.green,color.blue);
     cfg.writeEntry("background",color.name());
     cfg.write();
+}
+
+void Konsole::doWrap() {
+    Config cfg("Konsole");
+    cfg.setGroup("ScrollBar");
+    TEWidget* te = getTe();
+    if( !cfg.readBoolEntry("HorzScroll",0)) {
+        te->setWrapAt(0);
+        configMenu->setItemChecked(-29,FALSE);
+    } else {
+        te->setWrapAt(90);
+//        te->setWrapAt(120);
+        configMenu->setItemChecked(-29,TRUE);
+    }       
 }
