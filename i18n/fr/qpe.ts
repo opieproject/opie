@@ -103,11 +103,11 @@ Rechargez la batterie de sauvegarde SVP.</translation>
     </message>
     <message>
         <source>Finding documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Recherche de documents</translation>
     </message>
     <message>
         <source>Searching documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Recherche de documents</translation>
     </message>
 </context>
 <context>

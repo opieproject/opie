@@ -11,11 +11,11 @@
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>
-        <translation type="unfinished">Style Liquid</translation>
+        <translation>Thème &quot;Liquid&quot;</translation>
     </message>
     <message>
         <source>No translucency</source>
-        <translation type="unfinished">Pas de transparence</translation>
+        <translation>Pas de transparence</translation>
     </message>
     <message>
         <source>Stippled, background color</source>
@@ -35,27 +35,27 @@
     </message>
     <message>
         <source>Custom translucency</source>
-        <translation type="unfinished">Personalisation de la transparence</translation>
+        <translation>Personalisation de la transparence</translation>
     </message>
     <message>
         <source>Menu color</source>
-        <translation type="unfinished">Couleur des menus</translation>
+        <translation>Couleur des menus</translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation type="unfinished">Couleur des textes</translation>
+        <translation>Couleur des textes</translation>
     </message>
     <message>
         <source>Opacity</source>
-        <translation type="unfinished">Opacité</translation>
+        <translation>Opacité</translation>
     </message>
     <message>
         <source>Use shadowed menu text</source>
-        <translation type="unfinished">Utiliser des menus ombrés</translation>
+        <translation>Utiliser des menus ombrés</translation>
     </message>
     <message>
         <source>Make toolbar buttons appear flat</source>
-        <translation type="unfinished">Rendre unis les buttons de la barre des outils</translation>
+        <translation>Rendre unis les buttons de la barre des outils</translation>
     </message>
     <message>
         <source>Stipple contrast</source>
@@ -66,11 +66,11 @@
     <name>Styles</name>
     <message>
         <source>Liquid</source>
-        <translation type="unfinished">Liquid</translation>
+        <translation>Liquid</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation type="unfinished">Style &quot;High Performance Liquid&quot; par Mosfet</translation>
+        <translation>Thème &quot;High Performance Liquid&quot; par Mosfet</translation>
     </message>
 </context>
 </TS>
