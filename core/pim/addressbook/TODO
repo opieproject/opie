@@ -1,0 +1,16 @@
+Stuff todo:
+
+Urgent:
+- "Nonenglish" translation bug has to be fixed.
+
+Important:
+
+- Finishing of new View functions (List, Phonebook...)
+- Reload if contacts were changed externally
+
+Less important:
+
+- Find widget should be replaced by something like 
+  qpdf has.
+-  The picker (alphabetical sort widget) should be
+   placed verticaly or horizontally (configurable)
