@@ -166,13 +166,6 @@ static QImage load_image(const QString &name)
 
 #ifndef LIBQPE_NO_INLINE_IMAGES
     img = qembed_findImage(name.latin1());
-#else
-    QString f = Resource::findPixmap( "/inline/" + name );
-    if ( !f.isEmpty() )
-    {
-        img.load(f);
-        return img;
-    }
 #endif
     if ( img.isNull() )
     {
