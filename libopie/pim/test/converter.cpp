@@ -1,24 +1,18 @@
+#include "converter.h"
+
+#include <qdatetime.h>
+#include <qprogressbar.h>
+
 #include <qpe/qpeapplication.h>
 
 #include <opie/ocontactaccess.h>
 #include <opie/ocontactaccessbackend_xml.h>
 #include <opie/ocontactaccessbackend_sql.h>
 
-#include "converter_base.h"
+Converter::Converter(){
+}
 
-class ConvertXMLToSQL: public converter_base {
-public:
-	ConvertXMLToSQL()
-	{
-		convertContact();
-	}
-private:
-	void convertContact();
-
-};
-
-
-void ConvertXMLToSQL::convertContact(){
+void Converter::start_conversion(){
 	qWarning("Converting Contacts from XML to SQL..");
 	
 	// Creating backends to the requested databases..
@@ -34,19 +28,29 @@ void ConvertXMLToSQL::convertContact(){
 	OContactAccess* sqlAccess = new OContactAccess ( "addressbook_sql", 
 							 QString::null , sqlBackend, true );
 	
+	QTime t;
+	t.start();
+
 	// Clean the sql-database..
 	sqlAccess->clear();
 	
 	// Now trasmit every contact from the xml database to the sql-database
 	OContactAccess::List contactList = xmlAccess->allRecords();
+	m_progressBar->setTotalSteps( contactList.count() );
+	int count = 0;
 	if ( sqlAccess && xmlAccess ){
 		OContactAccess::List::Iterator it;
-		for ( it = contactList.begin(); it != contactList.end(); ++it )
+		for ( it = contactList.begin(); it != contactList.end(); ++it ){
 			sqlAccess->add( *it );
+			m_progressBar->setProgress( ++count );
+		}
 	}
 	
 	// Delete the frontends. Backends will be deleted automatically, too !
 	delete sqlAccess;
+
+	qWarning("Conversion is finished and needed %d ms !", t.elapsed());
+
 	delete xmlAccess;
 }
 
@@ -54,7 +58,7 @@ int main( int argc, char** argv ) {
 
 	QPEApplication a( argc, argv );
 
-	ConvertXMLToSQL dlg;
+	Converter dlg;
 
 	a.showMainWidget( &dlg );
 	// dlg. showMaximized ( );
