@@ -3,6 +3,6 @@
 
 #define VERSION "0.0.9"
 
-#define USERAGENT "LISAMail/" + VERSION
+#define USERAGENT "OpieMail/" + VERSION
 
 #endif
