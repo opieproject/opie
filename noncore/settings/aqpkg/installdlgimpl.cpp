@@ -35,6 +35,7 @@
 InstallDlgImpl::InstallDlgImpl( vector<QString> &packageList, DataManager *dataManager, QWidget * parent, const char* name, bool modal, WFlags fl )
     : InstallDlg( parent, name, modal, fl )
 {
+    upgradePackages = false;
     dataMgr = dataManager;
     vector<Destination>::iterator dit;
 
@@ -99,6 +100,15 @@ InstallDlgImpl::InstallDlgImpl( vector<QString> &packageList, DataManager *dataM
     connect( &ipkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
 }
 
+InstallDlgImpl::InstallDlgImpl( QWidget *parent, const char *name, bool modal, WFlags fl )
+    : InstallDlg( parent, name, modal, fl )
+{
+    upgradePackages = true;
+    output->setText( "Upgrading installed packages" );
+    connect( &ipkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
+}
+
+
 InstallDlgImpl::~InstallDlgImpl()
 {
 }
@@ -146,43 +156,55 @@ void InstallDlgImpl :: installSelected()
 
 	btnInstall->setEnabled( false );
 
-    output->setText( "" );
-    Destination *d = dataMgr->getDestination( destination->currentText() );
-    QString dest = d->getDestinationName();
-    QString destDir = d->getDestinationPath();
-
+    if ( upgradePackages )
+    {
+        output->setText( "" );
+        
+        Ipkg ipkg;
+        connect( &ipkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
+        ipkg.setOption( "upgrade" );
+        ipkg.runIpkg();
+    }
+    else
+    {
+        output->setText( "" );
+        Destination *d = dataMgr->getDestination( destination->currentText() );
+        QString dest = d->getDestinationName();
+        QString destDir = d->getDestinationPath();
+    
 #ifdef QWS
-    // Save settings
-    Config cfg( "aqpkg" );
-    cfg.setGroup( "settings" );
-    cfg.writeEntry( "dest", dest );
+        // Save settings
+        Config cfg( "aqpkg" );
+        cfg.setGroup( "settings" );
+        cfg.writeEntry( "dest", dest );
 #endif
 
-    // First run through the remove list, then the install list then the upgrade list
-	vector<QString>::iterator it;
-    ipkg.setOption( "remove" );
-    ipkg.setDestination( dest );
-    ipkg.setDestinationDir( destDir );
-    ipkg.setFlags( flags );
-    for ( it = removeList.begin() ; it != removeList.end() ; ++it )
-    {
-        ipkg.setPackage( *it );
-        ipkg.runIpkg();
-    }
-    
-    ipkg.setOption( "install" );
-    for ( it = installList.begin() ; it != installList.end() ; ++it )
-    {
-        ipkg.setPackage( *it );
-        ipkg.runIpkg();
-    }
-    
-    flags |= FORCE_REINSTALL;
-    ipkg.setFlags( flags );
-    for ( it = updateList.begin() ; it != updateList.end() ; ++it )
-    {
-        ipkg.setPackage( *it );
-        ipkg.runIpkg();
+        // First run through the remove list, then the install list then the upgrade list
+    	vector<QString>::iterator it;
+        ipkg.setOption( "remove" );
+        ipkg.setDestination( dest );
+        ipkg.setDestinationDir( destDir );
+        ipkg.setFlags( flags );
+        for ( it = removeList.begin() ; it != removeList.end() ; ++it )
+        {
+            ipkg.setPackage( *it );
+            ipkg.runIpkg();
+        }
+
+        ipkg.setOption( "install" );
+        for ( it = installList.begin() ; it != installList.end() ; ++it )
+        {
+            ipkg.setPackage( *it );
+            ipkg.runIpkg();
+        }
+
+        flags |= FORCE_REINSTALL;
+        ipkg.setFlags( flags );
+        for ( it = updateList.begin() ; it != updateList.end() ; ++it )
+        {
+            ipkg.setPackage( *it );
+            ipkg.runIpkg();
+        }
     }
 
 	btnInstall->setEnabled( true );
