@@ -26,60 +26,60 @@
 enum t_strType { Word, Number};
 enum t_lineType {NewLine, LastLine};
 
-const uint MAX_ELEMENTS = 200;		//Should be dynamic
-const uint MAX_LINES = 500;			//Should be dynamic
+const uint MAX_ELEMENTS = 200;    //Should be dynamic
+const uint MAX_LINES = 500;     //Should be dynamic
 
 struct t_splitElm
 {
-	QChar separator;
-	int strType;
-	QString str;
+  QChar separator;
+  int strType;
+  QString str;
 };
 
 struct t_splitLine
 {
-	t_lineType lineType;
-	QString str;					//a bit redundant...
-	t_splitElm elm[MAX_ELEMENTS];
-	int elmCount;
+  t_lineType lineType;
+  QString str;          //a bit redundant...
+  t_splitElm elm[MAX_ELEMENTS];
+  int elmCount;
 };
 
 class TextParser: public QObject
 {
-	Q_OBJECT
-	
+  Q_OBJECT
+  
 public:
-	TextParser(QString in, QString lineBreak);
-	TextParser(QString in, QString lineBreak, QString sep);
-	int find(QString target, QChar sep, int pos, bool upperCase);
-	int elmCount();
-	QChar separatorAt(int pos);
-	QChar nextSeparator();
-	bool hasNextSeparator();
-	QString wordAt(int pos);
-	QString nextWord();
-	bool hasNextWord();
-    QString getString(int *pos, QChar stop, bool lineEnd = false);
+  TextParser(QString in, QString lineBreak);
+  TextParser(QString in, QString lineBreak, QString sep);
+  int find(QString target, QChar sep, int pos, bool upperCase);
+  int elmCount();
+  QChar separatorAt(int pos);
+  QChar nextSeparator();
+  bool hasNextSeparator();
+  QString wordAt(int pos);
+  QString nextWord();
+  bool hasNextWord();
+    QString getString(int *pos, QChar stop, bool lineEnd);
     QString getNextLine();
     bool hasNextLine();
     int endLinePos(int pos);
 
 private:
-	void init();
-	void createSeparators();
-	t_splitLine nextLine();
-	void split();
-	t_splitLine splitLine(t_splitLine line);
-	bool isSeparator(QChar chr);
-	t_splitLine splitDone[MAX_LINES];
-	int getLineReference(int pos, int *line, int *inLinePos);
-	
-	int lineCount, linePos, totalElmCount;
-	int separatorPos, wordPos;
-	QString data, separators, lineSep;
-	int sepAtLine, sepAtPosElm;
-	int wordAtLine, wordAtPosElm;
-	int atLine, atPosElm;
+  void init();
+  void createSeparators();
+  t_splitLine nextLine();
+  void split();
+  t_splitLine splitLine(t_splitLine line);
+  bool isSeparator(QChar chr);
+  t_splitLine splitDone[MAX_LINES];
+  int getLineReference(int pos, int *line, int *inLinePos);
+  
+  int lineCount, linePos, totalElmCount;
+  int separatorPos, wordPos;
+  QString data, separators, lineSep;
+  int sepAtLine, sepAtPosElm;
+  int wordAtLine, wordAtPosElm;
+  int atLine, atPosElm;
 };
 
 #endif
