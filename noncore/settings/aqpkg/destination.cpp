@@ -22,6 +22,7 @@ Destination::Destination( const char *name, const char *path )
 {
 	destName = name;
 	destPath = path;
+    linkToRootDir = true;
 }
 
 Destination::~Destination()
