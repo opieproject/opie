@@ -21,7 +21,7 @@
 **********************************************************************/
 
 #include <qpe/storage.h>
-#ifdef QT_QWS_SL5XXX
+#if defined(QT_QWS_SL5XXX)
 #include <qpe/custom.h>
 #endif
 

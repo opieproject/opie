@@ -33,7 +33,7 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/global.h>
 
-#if defined( QT_QWS_SL5XXX ) || defined( QT_QWS_IPAQ )
+#if defined( QT_QWS_SL5XXX ) || defined( QT_QWS_IPAQ ) || defined( QT_QWS_RAMSES)
 #include <qpe/custom.h>
 #endif
 
@@ -55,7 +55,7 @@ using namespace Opie;
 
 static Global::Command builtins[] = {
 
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_SL5XXX)
+#if defined(QT_QWS_IPAQ) || defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_SL5XXX) || defined(QT_QWS_RAMSES)
         { "calibrate",          TaskBar::calibrate, 1, 0 },
 #endif
 #if !defined(QT_QWS_CASSIOPEIA)

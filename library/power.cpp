@@ -20,7 +20,7 @@
 
 #include "power.h"
 
-#ifdef QT_QWS_SL5XXX
+#if defined(QT_QWS_SL5XXX) || defined(QT_QWS_RAMSES)
 #include "custom.h"
 #endif
 

@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.50 2003-05-22 13:41:36 mickeyl Exp $
+** $Id: qpeapplication.cpp,v 1.51 2003-06-03 16:58:40 schurig Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -152,11 +152,11 @@ public:
             // Addendum: Only Sharp currently has models with high resolution but (physically) small displays,
             // so this is only useful if QT_QWS_SHARP is defined. E.g. SIMpad has 800x600 but has
             // a (physically) large enough display to use the small icons
-            #ifdef QT_QWS_SHARP
+#ifdef QT_QWS_SHARP
             if ( QPEApplication::desktop() ->width() >= 600 && ( mw->inherits("QMainWindow") || mw->isA("QMainWindow") ) )  {
                 ( (  QMainWindow* ) mw )->setUsesBigPixmaps( true );
             }
-            #endif
+#endif
 
 		if ( mw->layout() && mw->inherits("QDialog") ) {
 			QPEApplication::showDialog((QDialog*)mw, nomaximize);
@@ -527,13 +527,13 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 		AppLnk::setSmallIconSize( 10 );
 		AppLnk::setBigIconSize( 28 );
 	}
-    #ifdef QT_QWS_SHARP
+#ifdef QT_QWS_SHARP
 	else if ( dw > 600 ) {
                                setFont( QFont( "vera", 16 ) );
                                 AppLnk::setSmallIconSize( 24 );
 		AppLnk::setBigIconSize( 48 );
 	}
-    #endif
+#endif
 	else if ( dw > 200 ) {
 		setFont( QFont( "vera", 10 ) );
 		AppLnk::setSmallIconSize( 14 );
@@ -1759,7 +1759,7 @@ void QPEApplication::hideOrQuit()
 }
 
 
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX)
+#if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX) || defined(QT_QWS_RAMSES)
 
 // The libraries with the skiff package (and possibly others) have
 // completely useless implementations of builtin new and delete that
