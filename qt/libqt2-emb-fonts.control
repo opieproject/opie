@@ -4,5 +4,6 @@ Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Depends: libqt2-emb
-Version: $QTE_VERSION-$QTE_REVISION
+Replaces: qt-embedded-rotation
+Version: $QTE_VERSION-$QTE_REVISION.1
 Description: Qt/Embedded fonts - 0,90,180,270 rotation
