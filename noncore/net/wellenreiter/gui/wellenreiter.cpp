@@ -161,10 +161,43 @@ void Wellenreiter::handleNotification( OPacket* p )
 
 void Wellenreiter::handleManagementFrame( OPacket* p, OWaveLanManagementPacket* manage )
 {
-    if ( manage->managementType() != "Beacon" ) return; // only handling beacons at that time
+    if ( manage->managementType() == "Beacon" ) handleManagementFrameBeacon( p, manage );
+    else if ( manage->managementType() == "ProbeRequest" ) handleManagementFrameProbeRequest( p, manage );
+    else if ( manage->managementType() == "ProbeResponse" ) handleManagementFrameProbeResponse( p, manage );
+    else qWarning( "Wellenreiter::handleManagementFrame(): '%s' - please handle me!", (const char*) manage->managementType() );
+}
 
-    OWaveLanManagementPacket* beacon = manage;
 
+void Wellenreiter::handleManagementFrameProbeRequest( OPacket* p, OWaveLanManagementPacket* request )
+{
+    OWaveLanManagementSSID* ssid = static_cast<OWaveLanManagementSSID*>( p->child( "802.11 SSID" ) );
+    QString essid = ssid ? ssid->ID( true /* decloak */ ) : QString("<unknown>");
+    OWaveLanManagementDS* ds = static_cast<OWaveLanManagementDS*>( p->child( "802.11 DS" ) );
+    int channel = ds ? ds->channel() : -1;
+    OWaveLanPacket* header = static_cast<OWaveLanPacket*>( p->child( "802.11" ) );
+
+    GpsLocation loc( -111, -111 );
+    if ( configwindow->enableGPS->isChecked() )
+    {
+        // TODO: add check if GPS is working!?
+        qDebug( "Wellenreiter::gathering GPS data..." );
+        loc = gps->position();
+        qDebug( "Wellenreiter::GPS data received is ( %f , %f ) - dms string = '%s'", loc.latitude(), loc.longitude(), loc.dmsPosition().latin1() );
+    }
+
+    if ( essid.length() )
+        netView()->addNewItem( "adhoc", essid, header->macAddress2(), false /* should check FrameControl field */, -1, 0, loc, true /* only probed */ );
+    qDebug( "Wellenreiter::invalid frame [possibly noise] detected!" );
+}
+
+
+void Wellenreiter::handleManagementFrameProbeResponse( OPacket* p, OWaveLanManagementPacket* response )
+{
+}
+
+
+void Wellenreiter::handleManagementFrameBeacon( OPacket* p, OWaveLanManagementPacket* beacon )
+{
     QString type;
     if ( beacon->canIBSS() )
     {
@@ -216,7 +249,7 @@ void Wellenreiter::handleControlFrame( OPacket* p, OWaveLanControlPacket* contro
 
     if ( control->controlType() == "Acknowledge" )
     {
-        netView()->addNewItem( "adhoc", "???", header->macAddress1(), false, -1, 0, GpsLocation( -111, -111 ) );
+        netView()->addNewItem( "adhoc", "<unknown>", header->macAddress1(), false, -1, 0, GpsLocation( -111, -111 ) );
     }
     else
     {

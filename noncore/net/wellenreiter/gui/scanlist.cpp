@@ -120,7 +120,8 @@ void MScanListView::addNewItem( const QString& type,
                                 bool wep,
                                 int channel,
                                 int signal,
-                                const GpsLocation& loc )
+                                const GpsLocation& loc,
+                                bool probe )
 {
     QString macaddr = mac.toString(true);
 
@@ -173,7 +174,7 @@ void MScanListView::addNewItem( const QString& type,
     {
         s.sprintf( "(i) New network: ESSID '%s'", (const char*) essid );
         MLogWindow::logwindow()->log( s );
-        network = new MScanListItem( this, "network", essid, QString::null, 0, 0, 0 );
+        network = new MScanListItem( this, "network", essid, QString::null, 0, 0, 0, probe );
     }
 
 
@@ -197,7 +198,6 @@ void MScanListView::addNewItem( const QString& type,
         s.sprintf( "(i) New AdHoc station in '%s' [%d]", (const char*) essid, channel );
     }
     MLogWindow::logwindow()->log( s );
-
 }
 
 
@@ -410,7 +410,7 @@ void MScanListView::contextMenuRequested( QListViewItem* item, const QPoint&, in
 //============================================================
 
 MScanListItem::MScanListItem( QListView* parent, const QString& type, const QString& essid, const QString& macaddr,
-                              bool wep, int channel, int signal )
+                              bool wep, int channel, int signal, bool probed )
                :OListViewItem( parent, essid, QString::null, macaddr, QString::null, QString::null ),
                 _type( type ), _essid( essid ), _macaddr( macaddr ), _wep( wep ),
                 _channel( channel ), _signal( signal ), _beacons( 1 )
@@ -422,7 +422,7 @@ MScanListItem::MScanListItem( QListView* parent, const QString& type, const QStr
     if ( WellenreiterConfigWindow::instance() )
         WellenreiterConfigWindow::instance()->performAction( type, essid, macaddr, wep, channel, signal ); // better use signal/slot combination here
 
-    decorateItem( type, essid, macaddr, wep, channel, signal );
+    decorateItem( type, essid, macaddr, wep, channel, signal, probed );
 }
 
 MScanListItem::MScanListItem( QListViewItem* parent, const QString& type, const QString& essid, const QString& macaddr,
@@ -432,7 +432,7 @@ MScanListItem::MScanListItem( QListViewItem* parent, const QString& type, const 
     #ifdef DEBUG
     qDebug( "creating scanlist item" );
     #endif
-    decorateItem( type, essid, macaddr, wep, channel, signal );
+    decorateItem( type, essid, macaddr, wep, channel, signal, false );
 }
 
 const QString& MScanListItem::essid() const
@@ -479,7 +479,7 @@ void MScanListItem::serializeFrom( QDataStream& s )
     listView()->triggerUpdate();
 }
 
-void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal )
+void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal, bool probed )
 {
     #ifdef DEBUG
     qDebug( "decorating scanlist item %s / %s / %s [%d]",
@@ -493,6 +493,12 @@ void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, 
     QString name;
     name.sprintf( "wellenreiter/%s", (const char*) type );
     setPixmap( col_type, Resource::loadPixmap( name ) );
+
+    // special case for probed networks FIXME: This is ugly at present
+    if ( type == "network" && probed )
+    {
+        setPixmap( col_type, Resource::loadPixmap( "wellenreiter/network-probed.png" ) );
+    }
 
     // set icon for wep (wireless encryption protocol)
     if ( wep )

@@ -75,7 +75,10 @@ class Wellenreiter : public WellenreiterBase {
     void stoppedSniffing();
 
   private:
-    void handleManagementFrame( OPacket* p, OWaveLanManagementPacket* manage );
+    void handleManagementFrame( OPacket* p, OWaveLanManagementPacket* );
+    void handleManagementFrameBeacon( OPacket* p, OWaveLanManagementPacket* );
+    void handleManagementFrameProbeRequest( OPacket* p, OWaveLanManagementPacket* );
+    void handleManagementFrameProbeResponse( OPacket* p, OWaveLanManagementPacket* );
     void handleControlFrame( OPacket* p, OWaveLanControlPacket* control );
     void handleWlanData( OPacket* p, OWaveLanDataPacket* data, OMacAddress& from, OMacAddress& to );
     void handleEthernetData( OPacket* p, OEthernetPacket* data, OMacAddress& from, OMacAddress& to );

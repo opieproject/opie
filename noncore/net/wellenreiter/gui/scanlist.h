@@ -41,7 +41,7 @@ class MScanListView: public OListView
     virtual void serializeFrom( QDataStream& s );
 
   public slots:
-    void addNewItem( const QString& type, const QString& essid, const OMacAddress& macaddr, bool wep, int channel, int signal, const GpsLocation& location );
+    void addNewItem( const QString& type, const QString&, const OMacAddress&, bool, int, int, const GpsLocation&, bool = false );
     void addService( const QString& name, const OMacAddress& macaddr, const QString& ip );
 
     void fromDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via );
@@ -73,7 +73,8 @@ class MScanListItem: public OListViewItem
                                   const QString& macaddr = "unknown",
                                   bool wep = false,
                                   int channel = 0,
-                                  int signal = 0 );
+                                  int signal = 0,
+                                  bool probed = false );
 
     MScanListItem::MScanListItem( QListViewItem* parent,
                                   const QString& type = "unknown",
@@ -85,7 +86,7 @@ class MScanListItem: public OListViewItem
 
 
   protected:
-    virtual void decorateItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal );
+    virtual void decorateItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal, bool probed );
 
   public:
     QString type;
