@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.10 2003-06-03 14:08:04 tille Exp $
+ * $Id: pppdata.cpp,v 1.11 2003-06-06 13:38:57 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -484,7 +484,7 @@ const QString PPPData::modemInitStr(int i) {
 
 void PPPData::setModemInitStr(int i, const QString &n) {
   assert(i >= 0 && i < NumInitStrings);
-  QString k = INITSTR_KEY + (i > 0 ? QString::number(i) : "");
+  QString k = INITSTR_KEY + (i > 0 ? QString::number(i) : QString(""));
   writeConfig(modemGroup(), k, n);
 }
 
