@@ -363,10 +363,10 @@ bool LoopControl::init( const QString& filename ) {
    
     // ### Hack to use libmpeg3plugin to get the number of audio samples if we are using the libmad plugin
     if ( mediaPlayerState->curDecoder()->pluginName() == QString("LibMadPlugin") ) {
-  if ( mediaPlayerState->libMpeg3Decoder() && mediaPlayerState->libMpeg3Decoder()->open( filename ) ) {
-      total_audio_samples = mediaPlayerState->libMpeg3Decoder()->audioSamples( 0 );
-      mediaPlayerState->libMpeg3Decoder()->close();
-  }
+        if ( mediaPlayerState->libMpeg3Decoder() && mediaPlayerState->libMpeg3Decoder()->open( filename )) {
+            total_audio_samples = mediaPlayerState->libMpeg3Decoder()->audioSamples( 0 );
+            mediaPlayerState->libMpeg3Decoder()->close();
+        }
     }
     
     if ( !mediaPlayerState->curDecoder()|| !mediaPlayerState->curDecoder()->open( filename ) ) {
@@ -386,7 +386,7 @@ bool LoopControl::init( const QString& filename ) {
   if ( !total_audio_samples )
       total_audio_samples = mediaPlayerState->curDecoder()->audioSamples( astream );
 
-//  total_audio_samples += 1000;
+  total_audio_samples += 1000;
 
   mediaPlayerState->setLength( total_audio_samples );
   
