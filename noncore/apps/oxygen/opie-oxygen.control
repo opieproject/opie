@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: Carsten Niehaus <cniehaus@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2
 Description: Periodic System of the Elements
  The chemistry application for the Opie-environment
 Version: $QPE_VERSION$EXTRAVERSION

@@ -1,5 +1,5 @@
-CONFIG		= qt warn_on release quick-app
-HEADERS		= oxygen.h \
+CONFIG        = qt warn_on release quick-app
+HEADERS        = oxygen.h \
             kmolcalc.h \
             kmolelements.h \
             calcdlgui.h \
@@ -8,8 +8,8 @@ HEADERS		= oxygen.h \
             oxyframe.h \
             datawidgetui.h
 
-SOURCES		= main.cpp \
-		  oxygen.cpp \
+SOURCES        = main.cpp \
+          oxygen.cpp \
           kmolcalc.cpp \
           calcdlgui.cpp \
           kmolelements.cpp \
@@ -19,9 +19,9 @@ SOURCES		= main.cpp \
           datawidgetui.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS		+= -lqpe 
-INTERFACES	= calcdlg.ui 
+LIBS        += -lqpe -lopiecore2
+INTERFACES    = calcdlg.ui
 
-TARGET	= oxygen
+TARGET    = oxygen
 
 include ( $(OPIEDIR)/include.pro )
