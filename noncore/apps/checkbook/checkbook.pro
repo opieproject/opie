@@ -30,4 +30,5 @@ INTERFACES	= qcheckdetailsbase.ui \
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS		+= -lqpe
-TARGET 		= $(OPIEDIR)/bin/checkbook
+TARGET 		= checkbook
+DESTDIR		= $(OPIEDIR)/bin
