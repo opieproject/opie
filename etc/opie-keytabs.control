@@ -1,4 +1,4 @@
-Files: etc/keytabs/default.Keytab 
+Files: etc/keytabs/*
 Priority: optional
 Section: opie/applications
 Maintainer: Opie team <opie@handhelds.org>

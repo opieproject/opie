@@ -3,11 +3,11 @@
     <name>KCheckers</name>
     <message>
         <source>What&apos;s This</source>
-        <translation type="unfinished"></translation>
+        <translation>Was ist das </translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Über &amp;Qt</translation>
     </message>
     <message>
         <source>Go!</source>
@@ -67,63 +67,63 @@
     </message>
     <message>
         <source>&amp;Show Numeration</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zeige Numerierung</translation>
     </message>
     <message>
         <source>&amp;English Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Englische Regeln</translation>
     </message>
     <message>
         <source>&amp;Russian Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Russische Regeln</translation>
     </message>
     <message>
         <source>&amp;Green Board</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Grünes Brett</translation>
     </message>
     <message>
         <source>&amp;Marble Board</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Marmorbrett</translation>
     </message>
     <message>
         <source>&amp;Wooden Board</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Holzbrett</translation>
     </message>
     <message>
         <source>&amp;Rules of Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielregeln</translation>
     </message>
     <message>
         <source>&amp;About KCheckers</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Über kCheckers</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Spiel</translation>
     </message>
     <message>
         <source>&amp;Skill</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Schwierigkeit</translation>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Einstellung</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hilfe</translation>
     </message>
     <message>
         <source> New Game </source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Spiel</translation>
     </message>
     <message>
         <source> Undo Move </source>
-        <translation type="unfinished"></translation>
+        <translation>Zug rückg.</translation>
     </message>
     <message>
         <source> Rules of Play </source>
-        <translation type="unfinished"></translation>
+        <translation>Spielregeln</translation>
     </message>
 </context>
 </TS>

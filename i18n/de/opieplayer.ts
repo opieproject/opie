@@ -90,7 +90,7 @@ Der Player wird beendet.</translation>
     <name>PlayListWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OpiePlayer</translation>
     </message>
     <message>
         <source>Play Operations</source>

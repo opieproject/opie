@@ -1,227 +1,228 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CellFormat</name>
     <message>
         <source>&amp;Borders</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ränder</translation>
     </message>
     <message>
         <source>Back&amp;ground</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinter&amp;grund</translation>
     </message>
     <message>
         <source>&amp;Font</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Font</translation>
     </message>
     <message>
         <source>&amp;Alignment</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ausrichtung</translation>
     </message>
     <message>
         <source>&amp;Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Breite: </translation>
     </message>
     <message>
         <source>&amp;Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Farbe: </translation>
     </message>
     <message>
         <source>&amp;Default Borders</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Defaultränder</translation>
     </message>
     <message>
         <source>&amp;Style:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Stil: </translation>
     </message>
     <message>
         <source>&amp;Default Background</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Defaulthintergrund</translation>
     </message>
     <message>
         <source>&amp;Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Font: </translation>
     </message>
     <message>
         <source>&amp;Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Größe: </translation>
     </message>
     <message>
         <source>&amp;Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fett</translation>
     </message>
     <message>
         <source>&amp;Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Italic</translation>
     </message>
     <message>
         <source>&amp;Default Font</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Defaultfont</translation>
     </message>
     <message>
         <source>&amp;Vertical:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vertikal: </translation>
     </message>
     <message>
         <source>&amp;Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Horizontal: </translation>
     </message>
     <message>
         <source>&amp;Word Wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Umbruch</translation>
     </message>
     <message>
         <source>&amp;Default Alignment</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Defaultausrichtung</translation>
     </message>
     <message>
         <source>Format Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Zellen formatieren</translation>
     </message>
     <message>
         <source>Opie Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Sheet</translation>
     </message>
 </context>
 <context>
     <name>FindDialog</name>
     <message>
         <source>&amp;Find &amp;&amp; Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Suchen&amp;&amp;Ersetzen</translation>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Optionen</translation>
     </message>
     <message>
         <source>&amp;Search for:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Suchen nach_ </translation>
     </message>
     <message>
         <source>&amp;Replace with:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ersetzen mit: </translation>
     </message>
     <message>
         <source>&amp;Type</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Typ: </translation>
     </message>
     <message>
         <source>&amp;Find</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Suchen: </translation>
     </message>
     <message>
         <source>&amp;Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ersetzen: </translation>
     </message>
     <message>
         <source>Replace &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Alle ersetzen</translation>
     </message>
     <message>
         <source>Match &amp;case</source>
-        <translation type="unfinished"></translation>
+        <translation>Groß-/&amp;Kleinschreibung egal</translation>
     </message>
     <message>
         <source>Current &amp;selection only</source>
-        <translation type="unfinished"></translation>
+        <translation>Nur Aktuelle Au&amp;swahl</translation>
     </message>
     <message>
         <source>&amp;Entire cell</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ganze Zelle</translation>
     </message>
     <message>
         <source>Find &amp; Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchen &amp; Ersetzen</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Opie Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Sheet</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Inconsistency error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Inkonsistenzfehler</translation>
     </message>
     <message>
         <source>File cannot be saved!</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei kann nicht gesichert werden !</translation>
     </message>
     <message>
         <source>File cannot be opened!</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei kann nicht geöffnet werden !</translation>
     </message>
     <message>
         <source>Invalid file format!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiges Dateiformat !</translation>
     </message>
     <message>
         <source>Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei sichern</translation>
     </message>
     <message>
         <source>Do you want to save the current file?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie die aktuelle Datei sichern ?</translation>
     </message>
     <message>
         <source>&amp;File Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Dateiname: </translation>
     </message>
     <message>
         <source>UnnamedFile</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbenannte Datei</translation>
     </message>
     <message>
         <source>New File</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Datei</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Neu</translation>
     </message>
     <message>
         <source>Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei öffnen</translation>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Öffnen</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Speichern</translation>
     </message>
     <message>
         <source>Save File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei speichern als...</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern &amp;als</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Verlassen</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Verlassen</translation>
     </message>
     <message>
         <source>General Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Allgemeine Hilfe</translation>
     </message>
     <message>
         <source>&amp;General</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Allgemein</translation>
     </message>
     <message>
         <source>About Opie Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Über OPIE-Sheet</translation>
     </message>
     <message>
         <source>&amp;About</source>
@@ -742,74 +743,74 @@ http://qtopia.sitebest.com</source>
     <name>Sheet</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Syntax error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Syntaxfehler !</translation>
     </message>
     <message>
         <source>Search key not found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchtext nicht gefunden !</translation>
     </message>
 </context>
 <context>
     <name>SortDialog</name>
     <message>
         <source>&amp;Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sortieren</translation>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Optionen</translation>
     </message>
     <message>
         <source>&amp;Sort by</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sortieren nach</translation>
     </message>
     <message>
         <source>&amp;Then by</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Dann nach</translation>
     </message>
     <message>
         <source>Then &amp;by</source>
-        <translation type="unfinished"></translation>
+        <translation>Dann &amp;nach</translation>
     </message>
     <message>
         <source>&amp;Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Groß-/Kleinschreibung beachten</translation>
     </message>
     <message>
         <source>&amp;Direction</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Richtung</translation>
     </message>
     <message>
         <source>&amp;Top to bottom (rows)</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Oben nach unten (Reihen)</translation>
     </message>
     <message>
         <source>&amp;Left to right (columns)</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rechts nach Links (Spalten)</translation>
     </message>
     <message>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortieren</translation>
     </message>
     <message>
         <source>&amp;Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Aufsteigen</translation>
     </message>
     <message>
         <source>&amp;Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Absteigend</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>One cell cannot be sorted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine einzelne Zelle kann nicht sortiert werden !</translation>
     </message>
 </context>
 </TS>
