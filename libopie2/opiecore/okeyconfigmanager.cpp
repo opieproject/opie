@@ -505,7 +505,7 @@ OKeyConfigManager::~OKeyConfigManager() {
  * @see OKeyPair::emptyKey
  */
 void OKeyConfigManager::load() {
-    Opie::Core::OConfigGroupSaver( m_conf, m_group );
+    Opie::Core::OConfigGroupSaver grp( m_conf, m_group );
 
     /*
      * Read each item
@@ -532,7 +532,7 @@ void OKeyConfigManager::load() {
  * to the previous
  */
 void OKeyConfigManager::save() {
-    Opie::Core::OConfigGroupSaver( m_conf, m_group );
+    Opie::Core::OConfigGroupSaver grp( m_conf, m_group );
 
     /*
      * Write each item
