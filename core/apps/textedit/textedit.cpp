@@ -973,8 +973,9 @@ void TextEdit::setDocument(const QString& fileref) {
         qDebug("setDocument");
          QFileInfo fi(currentFileName);
          qDebug("basename:"+fi.baseName()+": current filenmame "+currentFileName);
-         if(fi.baseName().left(1) == "") {
- //        openDotFile(currentFileName);
+         if( (fi.baseName().left(1)).isEmpty() ) {
+        openDotFile(currentFileName);
+
          } else {
              qDebug("setDoc open");
              bFromDocView = true;
