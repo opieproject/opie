@@ -140,7 +140,7 @@ public:
 	    	if ( busytimer )
 	    	    killTimer ( busytimer );
 	    	timerEvent ( 0 );
-	    	busytimer = startTimer ( 180 );
+	    	busytimer = startTimer ( 200 );
 	    }
 	    else {
 		killTimer ( busytimer );
@@ -157,7 +157,7 @@ public:
 		if ( busystate > 5 )
 			busystate = -4;
 			
-		bsy-> repaint ( );
+		QScrollView::updateContents ( bsy-> pixmapRect ( false ));
 	    }
 	}
     }
@@ -202,7 +202,21 @@ public:
     }
 
     void setBackgroundPixmap( const QPixmap &pm ) {
-	bgPixmap = pm;
+	if ( pm. isNull ( )) {
+	    bgPixmap = pm;
+	}
+	else {    
+	    // This is need for bg images with alpha channel	
+	
+	    QPixmap tmp ( pm. size ( ), pm. depth ( ));
+    	
+	    QPainter p ( &tmp );
+	    p. fillRect ( 0, 0, pm. width ( ), pm. height ( ), bgColor. isValid ( ) ? bgColor : white );
+	    p. drawPixmap ( 0, 0, pm );    	
+	    p. end ( );
+    
+	   bgPixmap = tmp;
+	}
     }
 
     void setBackgroundColor( const QColor &c ) {
@@ -212,7 +226,7 @@ public:
     void drawBackground( QPainter *p, const QRect &r )
     {
 	if ( !bgPixmap.isNull() ) {
-	    p-> fillRect ( r, bgColor );
+	    //p-> fillRect ( r, bgColor );
 	    p->drawTiledPixmap( r, bgPixmap,
                    QPoint( (r.x() + contentsX()) % bgPixmap.width(),
                            (r.y() + contentsY()) % bgPixmap.height() ) );
