@@ -16,6 +16,7 @@
 
 class QLabel;
 class OxydataTable;
+//class QStringList;
 
 /*
  * A OxydataWidget shows all known data of an element. It can 
@@ -31,7 +32,7 @@ class OxydataWidget : public QWidget
     Q_OBJECT
 
     public:
-        OxydataWidget(QWidget *parent=0);
+        OxydataWidget(QWidget *parent=0, const char *name=0, QStringList *list =0 );
 
         QLabel *left, *middle, *right;
         void setLayout();

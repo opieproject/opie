@@ -25,7 +25,9 @@
 #include <qlayout.h>
 #include <qpe/qpeapplication.h>
 
-OxydataWidget::OxydataWidget(QWidget *parent) : QWidget(parent)
+#include <qstringlist.h>
+
+OxydataWidget::OxydataWidget(QWidget *parent, const char *name, QStringList *list ) : QWidget( parent,name )
 {
     QGridLayout *qgrid = new QGridLayout( this, 2,1 );
 

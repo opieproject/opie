@@ -24,6 +24,8 @@ class OxydataWidget;
 class OxydataTable;
 
 class QComboBox;
+class QStringList;
+
 #include <qwidget.h>
 
 class dataWidgetUI : public QWidget
@@ -32,10 +34,13 @@ class dataWidgetUI : public QWidget
 	
     public:
 		dataWidgetUI();
+		QStringList *names;
 
     private:
         OxydataTable *DataTable;
         QComboBox *dataCombo;
         OxydataWidget *oxyDW;
+
+		void loadNames();
 };
 #endif
