@@ -246,7 +246,7 @@ Tem de estar vazia</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar</translation>
     </message>
 </context>
 </TS>

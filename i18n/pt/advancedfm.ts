@@ -268,7 +268,7 @@ e os seus conteúdos?</translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="unfinished">KB livres</translation>
+        <translation>KB livres</translation>
     </message>
     <message>
         <source>Copy &apos;%1&apos; As</source>
@@ -284,15 +284,15 @@ e os seus conteúdos?</translation>
     </message>
     <message>
         <source>Switch to View 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar para a Vista 1</translation>
     </message>
     <message>
         <source>Switch to View 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar para a Vista 2</translation>
     </message>
     <message>
         <source>Not Yet Implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Ainda Não Implementado</translation>
     </message>
 </context>
 <context>
@@ -388,7 +388,7 @@ Terminado
     </message>
     <message>
         <source>filePermissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Permissões de Ficheiro</translation>
     </message>
 </context>
 </TS>

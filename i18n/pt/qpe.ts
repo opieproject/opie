@@ -3,62 +3,62 @@
     <name>@default</name>
     <message>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Idioma</translation>
     </message>
     <message>
         <source>Time and Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora e Data</translation>
     </message>
     <message>
         <source>Personal Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informação Pessoal</translation>
     </message>
 </context>
 <context>
     <name>AppLauncher</name>
     <message>
         <source>Application Problem</source>
-        <translation type="unfinished">Problema na Aplicação</translation>
+        <translation>Problema na Aplicação</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 is not responding.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;A aplicação %1 não está a responder.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;A aplicação %1 não está a responder.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Would you like to force the application to exit?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Quer forçar o término da aplicação?&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Quer forçar o término da aplicação?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;&lt;p&gt;Fast loading has been disabled for this application.  Tap and hold the application icon to reenable it.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;&lt;p&gt;Foi desactivado o carregamento rápido da aplicação. Toque e espere no icon da aplicação para reactivar.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;&lt;b&gt;%1&lt;/b&gt; was terminated due to signal code %2&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;&lt;b&gt;A aplicação %1 terminou com o código %2.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Application terminated</source>
-        <translation type="unfinished"></translation>
+        <translation>A aplicação terminou</translation>
     </message>
     <message>
         <source>Application not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi encontrada a aplicação</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Could not locate application &lt;b&gt;%1&lt;/b&gt;&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Não foi possível localizar a aplicação &lt;b&gt;%1&lt;/b&gt;&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Could not find the application %1&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Não foi possível encontrar a aplicação %1&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -141,49 +141,49 @@ Deve carregá-la.</translation>
     <name>DesktopPowerAlerter</name>
     <message>
         <source>Battery Status</source>
-        <translation type="unfinished">Estado da Bateria</translation>
+        <translation>Estado da Bateria</translation>
     </message>
     <message>
         <source>Low Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Bateria Fraca</translation>
     </message>
 </context>
 <context>
     <name>FirstUse</name>
     <message>
         <source>&lt;&lt; Back</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;&lt; Voltar</translation>
     </message>
     <message>
         <source>Next &gt;&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Próxima &gt;&gt;</translation>
     </message>
     <message>
         <source>Tap anywhere on the screen to continue.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toque no ecrâ para continuar.</translation>
     </message>
     <message>
         <source>Please wait, loading %1 settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aguarde um momento. A carregar a configuração de %1.</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Aguarde um momento...</translation>
     </message>
     <message>
         <source>FirstUseBackground</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecrâ de Fundo no Primeiro Uso</translation>
     </message>
     <message>
         <source>Finish</source>
-        <translation type="unfinished"></translation>
+        <translation>Finalizar</translation>
     </message>
 </context>
 <context>
     <name>InputMethods</name>
     <message>
         <source>Unicode</source>
-        <translation type="unfinished"></translation>
+        <translation>Unicode</translation>
     </message>
 </context>
 <context>
@@ -214,30 +214,30 @@ Deve carregá-la.</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation type="unfinished">Documentos</translation>
+        <translation>Documentos</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>View as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver como texto</translation>
     </message>
 </context>
 <context>
     <name>LauncherTabWidget</name>
     <message>
         <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;A procurar documentos...&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Icon View</source>
-        <translation type="unfinished">Vista em Icones</translation>
+        <translation>Vista em Icones</translation>
     </message>
     <message>
         <source>List View</source>
-        <translation type="unfinished">Vista em Lista</translation>
+        <translation>Vista em Lista</translation>
     </message>
 </context>
 <context>
@@ -256,7 +256,7 @@ Deve carregá-la.</translation>
     </message>
     <message>
         <source>All types</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos os tipos</translation>
     </message>
 </context>
 <context>
@@ -325,83 +325,85 @@ Deve carregá-la.</translation>
     <name>SafeMode</name>
     <message>
         <source>Safe Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo Salvaguarda</translation>
     </message>
     <message>
         <source>Plugin Manager...</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestor de &quot;Plugins&quot;...</translation>
     </message>
     <message>
         <source>Restart Qtopia</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiniciar Opie</translation>
     </message>
     <message>
         <source>Help...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajuda...</translation>
     </message>
 </context>
 <context>
     <name>ServerApplication</name>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Informação</translation>
+        <translation>Informação</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;A data do sistema não parece ser válida.
+        <translation>&lt;p&gt;A data do sistema não parece ser válida.
 (%1)&lt;/p&gt;&lt;p&gt;Deseja acertar o relógio?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Battery level is critical!
 Keep power off until power restored!</source>
-        <translation type="unfinished">O nível de energia está muito baixo.
+        <translation>O nível de energia está muito baixo.
 Desligue o dispositivo ou ligue-o à corrente!</translation>
     </message>
     <message>
         <source>Battery is running very low. </source>
-        <translation type="unfinished"></translation>
+        <translation>O nível de energia da bateria está muito baixo.</translation>
     </message>
     <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
-        <translation type="unfinished">O nível de energia da bateria extra está baixo.
+        <translation>O nível de energia da bateria extra está baixo.
 Deve carregá-la.</translation>
     </message>
     <message>
         <source>business card</source>
-        <translation type="unfinished">Cartão de Visita</translation>
+        <translation>Cartão de Visita</translation>
     </message>
     <message>
         <source>Safe Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo de Salvaguarda</translation>
     </message>
     <message>
         <source>&lt;P&gt;A system startup error occurred, and the system is now in Safe Mode. Plugins are not loaded in Safe Mode. You can use the Plugin Manager to disable plugins that cause system error.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ocorreu um erro ao iniciar. O sistema está agora em modo de salvaguarda e os &quot;plugins&quot; não foram carregados. Poderá usar o gestor de &quot;plugins&quot; para desactivar os que estiverem a causar o erro.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Plugin Manager...</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestor de &quot;Plugins&quot;...</translation>
     </message>
     <message>
         <source>Memory Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Estado da Memória</translation>
     </message>
     <message>
         <source>Memory Low
 Please save data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Memória Baixa
+Grave os seus dados.</translation>
     </message>
     <message>
         <source>Critical Memory Shortage
 Please end this application
 immediately.</source>
-        <translation type="unfinished"></translation>
+        <translation>Memória Criticamente em Baixo
+Termine esta aplicação imediatamente.</translation>
     </message>
 </context>
 <context>
@@ -480,11 +482,11 @@ Estas operações estão disponíveis principalmente para desenvolvimento e test
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Abortar</translation>
     </message>
     <message>
         <source>Syncing:</source>
-        <translation type="unfinished"></translation>
+        <translation>A Sincronizar:</translation>
     </message>
 </context>
 </TS>
