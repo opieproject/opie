@@ -146,6 +146,8 @@ void OXYSelector::wheelEvent( QWheelEvent *e )
         setValues( xValue(), yValue() + e->delta()/120 );
 
     emit valueChanged( xPos, yPos );
+    #else
+    Q_UNUSED( e )
     #endif
 }
 

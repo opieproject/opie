@@ -187,7 +187,7 @@ void OListView::serializeFrom( QDataStream& s )
     {
         QString coltext;
         s >> coltext;
-        odebug << "read text '" <<  coltext << "' for column " << i << "" << oendl; 
+        odebug << "read text '" <<  coltext << "' for column " << i << "" << oendl;
         setColumnText( i, coltext );
     }
 
@@ -232,11 +232,13 @@ void OListView::collapse()
 QDataStream& operator<<( QDataStream& s, const OListView& lv )
 {
     lv.serializeTo( s );
+    return s;
 }
 
 QDataStream& operator>>( QDataStream& s, OListView& lv )
 {
     lv.serializeFrom( s );
+    return s;
 }
 #endif // QT_NO_DATASTREAM
 
@@ -442,13 +444,13 @@ void OListViewItem::serializeFrom( QDataStream& s )
     {
         QString coltext;
         s >> coltext;
-        odebug << "read text '" <<  coltext << "' for column " << i << "" << oendl; 
+        odebug << "read text '" <<  coltext << "' for column " << i << "" << oendl;
         setText( i, coltext );
     }
 
     int items;
     s >> items;
-    odebug << "read number of items = " << items << "" << oendl; 
+    odebug << "read number of items = " << items << "" << oendl;
 
     for ( int i = 0; i < items; ++i )
     {
@@ -463,12 +465,14 @@ void OListViewItem::serializeFrom( QDataStream& s )
 QDataStream& operator<<( QDataStream& s, const OListViewItem& lvi )
 {
     lvi.serializeTo( s );
+    return s;
 }
 
 
 QDataStream& operator>>( QDataStream& s, OListViewItem& lvi )
 {
     lvi.serializeFrom( s );
+    return s;
 }
 #endif // QT_NO_DATASTREAM
 
@@ -615,7 +619,7 @@ void ONamedListView::addColumns( const QStringList& columns )
 {
     for ( QStringList::ConstIterator it = columns.begin(); it != columns.end(); ++it )
     {
-        odebug << "adding column " <<  *it << "" << oendl; 
+        odebug << "adding column " <<  *it << "" << oendl;
         addColumn( *it );
     }
 }
@@ -644,11 +648,11 @@ ONamedListViewItem* ONamedListView::find( ONamedListViewItem* item, int column, 
     ONamedListViewItem* result;
     while ( item && item->text( column ) != text )
     {
-        odebug << "checked " <<  item->text( column ) << "" << oendl; 
+        odebug << "checked " <<  item->text( column ) << "" << oendl;
 
         if ( recurse < 0 || recurse > 0 )
         {
-            odebug << "recursion is " << recurse << " - recursing into..." << oendl; 
+            odebug << "recursion is " << recurse << " - recursing into..." << oendl;
             result = find( (ONamedListViewItem*) item->firstChild(), column, text, recurse-1 );
             if ( result ) return result;
         }
@@ -725,7 +729,7 @@ void ONamedListViewItem::setText( const QStringList& texts )
     int col = 0;
     for ( QStringList::ConstIterator it = texts.begin(); it != texts.end(); ++it )
     {
-        odebug << "setting column " << col << " = text " <<  *it << "" << oendl; 
+        odebug << "setting column " << col << " = text " <<  *it << "" << oendl;
         OListViewItem::setText( col++, *it );
     }
 
@@ -741,7 +745,7 @@ void ONamedListViewItem::setText( const QString& column, const QString& text )
     if ( col != -1 )
         OListViewItem::setText( col, text );
     else
-        owarn << "ONamedListViewItem::setText(): Warning! Columntext '" <<  column << "' not found." << oendl; 
+        owarn << "ONamedListViewItem::setText(): Warning! Columntext '" <<  column << "' not found." << oendl;
 }
 
 

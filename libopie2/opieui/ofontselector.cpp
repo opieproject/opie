@@ -193,6 +193,7 @@ bool OFontSelector::setSelectedFont ( const QFont &f )
  */
 bool OFontSelector::setSelectedFont( const QString &familyStr, const QString &styleStr, int sizeVal, const QString & charset )
 {
+    Q_CONST_UNUSED( charset )
     QString sizeStr = QString::number ( sizeVal );
 
     QListBoxItem *family = d->m_font_family_list->findItem ( familyStr );

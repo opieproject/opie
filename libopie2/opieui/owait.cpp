@@ -55,6 +55,7 @@ OWait::OWait( QWidget *parent, const char* msg, bool dispIcon )
       :QDialog( parent, msg, TRUE, WStyle_Customize )
 {
 
+    Q_UNUSED( dispIcon )
 
     QHBoxLayout * hbox = new QHBoxLayout( this );
 
