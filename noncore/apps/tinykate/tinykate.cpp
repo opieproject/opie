@@ -162,8 +162,11 @@ void TinyKate::open(const QString & filename)
     KateDocument *kd= new KateDocument(false, false, this,0,this);
     KTextEditor::View *kv;
     QFileInfo fi(filename);
-      tabwidget->addTab(kv=kd->createView(tabwidget,"bLAH"),"tinykate/tinykate",fi.fileName());
+    QString filenamed = fi.fileName();
+    tabwidget->addTab(kv=kd->createView(tabwidget,"bLAH"),"tinykate/tinykate", filenamed );
     qDebug(filename);
+
+    kd->setDocName( filenamed);
     kd->open(filename);
     viewCount++;
 }
