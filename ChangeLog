@@ -6,6 +6,7 @@
 	* Ported brightnessapplet from Qtopia 1.7 (mickeyl)
 	* Opie Eye got a Digital Camera File Backend (alwin,zecke)
 	* Support for Tuxpad 1 of Tradesquare.NL (mickeyl,zecke)
+	* Opie-Console use Custom Font and Size in a Profile (harlekin)
 
 	Fixed Bugs
 	----------
