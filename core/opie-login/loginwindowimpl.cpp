@@ -47,6 +47,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "passworddialogimpl.h"
 #include "loginwindowimpl.h"
 #include "loginapplication.h"
 #include "inputmethods.h"
@@ -90,7 +91,7 @@ LoginWindowImpl::LoginWindowImpl ( ) : LoginWindow ( 0, "LOGIN-WINDOW", WStyle_C
 		TextLabel2-> setBackgroundPixmap ( bgpix);
 	}
 
-	m_caption-> setText ( tr("<center>Welcome to OPIE %1</center><center>& %2 %3</center>"). arg(QPE_VERSION). arg ( ODevice::inst ( )-> systemString ( )). arg ( ODevice::inst ( )-> systemVersionString ( )));
+//	m_caption-> setText ( tr("<center>Welcome to OPIE %1</center><center>& %2 %3</center>"). arg(QPE_VERSION). arg ( ODevice::inst ( )-> systemString ( )). arg ( ODevice::inst ( )-> systemVersionString ( )));
 
 	Config cfg ( "opie-login" );
 	cfg. setGroup ( "General" );
@@ -100,6 +101,11 @@ LoginWindowImpl::LoginWindowImpl ( ) : LoginWindow ( 0, "LOGIN-WINDOW", WStyle_C
 		m_user-> setEditText ( last );
 
 	calcMaxWindowRect ( );
+
+        if ( PasswordDialogImpl::needDialog() )
+            QTimer::singleShot(10, this,  SLOT(showPasswordDialog()) );
+
+
 }
 
 LoginWindowImpl::~LoginWindowImpl ( )
@@ -247,4 +253,10 @@ void LoginWindowImpl::login ( )
 		QMessageBox::warning ( this, tr( "Wrong password" ), tr( "The given password is incorrect." ));
 		m_password-> clear ( );
 	}
+}
+
+void LoginWindowImpl::showPasswordDialog() {
+    PasswordDialogImpl dia( this );
+    dia.showMaximized();
+    dia.exec();
 }

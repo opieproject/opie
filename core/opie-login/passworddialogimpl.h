@@ -1,6 +1,6 @@
 /*
                =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 Robert Griebl <sandman@handhelds.org>
+             .=l.            Copyright (c)  2004 Holger Hans Peter Freyther <zecke@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This file is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or modify it under
@@ -25,40 +25,41 @@
 
 */
 
-#ifndef __OPIE_LOGINWINDOW_IMPL_H__
-#define __OPIE_LOGINWINDOW_IMPL_H__
 
-#include "loginwindow.h"
+#ifndef OPIE_LOGIN_PASSWORDIMPL_DIALOG_H
+#define OPIE_LOGIN_PASSWORDIMPL_DIALOG_H
 
-class InputMethods;
+#include "passworddialog.h"
 
-class LoginWindowImpl : public LoginWindow {
-	Q_OBJECT
 
+class QLineEdit;
+/**
+ * Small Dialog and Class to set the root password if it
+ * is not empty.
+ * \code
+ * if(PasswordDialogImpl::needDialog()) {
+ *   PasswordDialogImpl *dia = new PasswordDialogImpl()
+ *   dia->exec();
+ *   dia->delete();
+ * }
+ */
+class PasswordDialogImpl : public PasswordDialog {
+    Q_OBJECT
 public:
-	LoginWindowImpl ( );
-	virtual ~LoginWindowImpl ( );
+    PasswordDialogImpl( QWidget *parent );
+    ~PasswordDialogImpl();
+    static bool needDialog();
 
 protected slots:
-	void restart ( );
-	void quit ( );
-	void showIM ( );
-	void suspend ( );
-	void backlight ( );
-	void login ( );
-	void toggleEchoMode ( bool );
-	void calcMaxWindowRect ( );
-	void receive ( const QCString &, const QByteArray & );
-        void showPasswordDialog();
-
-protected:
-	virtual void keyPressEvent ( QKeyEvent *e );
-
-	QStringList getAllUsers ( );
-	bool changeIdentity ( const char *user );
+    void done( int );
+    void slotToggleEcho( bool );
 
 private:
-	InputMethods *m_input;
+    void writePassword();
+    void writeShadow();
+    void error( const QString&, const QString& );
+    bool m_isSet : 1;
 };
+
 
 #endif

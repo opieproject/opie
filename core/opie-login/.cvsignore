@@ -2,6 +2,8 @@
 Makefile*
 loginwindow.cpp
 loginwindow.h
+passworddialog.h
+passworddialog.cpp
 moc_*
 .moc
 .obj
