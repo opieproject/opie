@@ -152,7 +152,11 @@ void DateBookDayHeader::goForwardWeek()
 void DateBookDayHeader::setDate( int y, int m, int d )
 {
     currDate.setYMD( y, m, d );
-    date->setText( TimeString::dateString( currDate ) );
+    //QString datestring = TimeString::dateString( currDate );
+    QString datestring = TimeString::dateString( currDate );
+    datestring=datestring.left( datestring.length() - 5 );
+    datestring.replace(2,1,"");
+    date->setText( datestring  );
 
     int iDayOfWeek = currDate.dayOfWeek();
     // cleverly adjust the day depending on how we start the week
