@@ -1,4 +1,4 @@
-/* $Id: cardmode.hh,v 1.13 2003-02-07 03:34:48 max Exp $ */
+/* $Id: cardmode.hh,v 1.14 2003-02-07 10:28:23 max Exp $ */
 
 #ifndef CARDMODE_HH
 #define CARDMODE_HH
@@ -22,10 +22,11 @@ extern "C"
 
 /* Defines, used for the card setup */
 #define   DEFAULT_PATH       "/proc/driver/aironet/%s/Config"
-#define	  CISCO_STATUS       "/proc/driver/aironet/%s/Status"
-#define   CARD_TYPE_CISCO	1
-#define   CARD_TYPE_NG	        2
+#define   CISCO_STATUS       "/proc/driver/aironet/%s/Status"
+#define   CARD_TYPE_CISCO	 1
+#define   CARD_TYPE_NG	    2
 #define   CARD_TYPE_HOSTAP	3
+#define   CARD_TYPE_ORINOCCO  4
 
 /* only for now, until we have the daemon running */
 /*the config file should provide these information */
@@ -38,5 +39,6 @@ extern "C"
 int card_check_rfmon_datalink (char *device);
 int card_into_monitormode (pcap_t **, char *, int);
 int card_set_promisc_up (const char *);
+int card_set_channel (const char *device, int channel,int cardtype); 
 
 #endif /* CARDMODE_HH */

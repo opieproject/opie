@@ -1,7 +1,7 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.11 2003-02-07 03:34:48 max Exp $
+ * $Id: cardmode.cc,v 1.12 2003-02-07 10:28:23 max Exp $
  */
 
 #include "cardmode.hh"
@@ -63,6 +63,16 @@ int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
  	wl_logerr("Could not set %s in raw mode, check cardtype", device);
 	return 0;
      }
+  }
+  else if (cardtype == CARD_TYPE_ORINOCCO)
+  {
+     char lucentcmd[62];
+     snprintf(lucentcmd, sizeof(lucentcmd) - 1, "$(which iwpriv) %s monitor 2 %d", device, 1);
+      if (system(lucentcmd) != 0)
+      {
+	  wl_logerr("Could not set %s in raw mode, check cardtype", device);
+	  return 0;
+      }
   }
 
   /* Setting the promiscous and up flag to the interface */
@@ -142,3 +152,36 @@ int card_set_promisc_up (const char *device)
      return 0;
     }
 }
+
+/* Set channel (Wireless frequency) of the device */
+int card_set_channel (const char *device, int channel, int cardtype)
+{
+    
+    if (cardtype == CARD_TYPE_CISCO)
+    {
+    	/* Cisco cards don't need channelswitching */
+    	return 1;
+    }
+    /* If it is a lucent orinocco card */ 
+    else if (cardtype == CARD_TYPE_ORINOCCO)
+    {
+	char lucentreset[63];
+        char lucentcmd[62];
+	snprintf(lucentreset, sizeof(lucentreset) -1,"$(which iwpriv) %s card_reset", device);
+        if (system(lucentreset) != 0)
+        {
+	  wl_logerr("Could not reset the card %s",device);
+	  return 0;
+	}
+        snprintf(lucentcmd, sizeof(lucentcmd) - 1, "$(which iwpriv) %s monitor 2 %d", device, channel);
+        if (system(lucentcmd) != 0)
+      {
+          wl_logerr("Could not set %s in raw mode, check cardtype", device);
+          return 0;
+      }
+    }
+   
+    /* For undefined situations */
+	return 0;
+}
+
