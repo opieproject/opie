@@ -20,7 +20,7 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	mpegplayer/libmad \
 	mpegplayer/wavplugin \
 	cardmon \
-	sdmon opiemail/ifaces/pop3
+	sdmon 
 
 APPS=$(LOCALAPPS) addressbook calculator clock datebook \
     filebrowser helpbrowser minesweep mpegplayer \
@@ -34,7 +34,7 @@ APPS=$(LOCALAPPS) addressbook calculator clock datebook \
     solitaire spreadsheet tetrix textedit \
     todo tux wordgame embeddedkonsole taskbar sysinfo \
     parashoot snake citytime showimg netsetup \
-    qipkg mindbreaker go qasteroids qcop fifteen keypebble opiemail/converter opiemail today 
+    qipkg mindbreaker go qasteroids qcop fifteen keypebble  today 
 
 DOCS = docs/src/opie-policy
 single: mpegplayer/libmpeg3
