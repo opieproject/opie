@@ -37,7 +37,7 @@ if [ -e /proc/cpuinfo ] ; then
 fi
 
 
-if [ ! -x $OPIEDIR/bin/qpe ] ; then 
+if [ ! -x $OPIEDIR/bin/opie ] ; then 
     echo Opie not installed
     exit 0  
 fi
@@ -71,10 +71,10 @@ case $1 in
             
         if ! killall -0 syslogd 2>/dev/null >/dev/null; then
             echo Starting Opie....
-            $SSHAGENT $OPIEDIR/bin/qpe 2>/dev/null >/dev/null &
+            $SSHAGENT $OPIEDIR/bin/opie 2>/dev/null >/dev/null &
         else
             echo Starting Opie with syslog logging.....
-            ( $SSHAGENT $OPIEDIR/bin/qpe 2>&1 | logger ) &
+            ( $SSHAGENT $OPIEDIR/bin/opie 2>&1 | logger ) &
         fi
     fi
 
@@ -82,7 +82,7 @@ case $1 in
 
 'stop')
     echo "Killing Opie..."
-    killall qpe
+    killall opie
     killall opie-login
 
     ;;
