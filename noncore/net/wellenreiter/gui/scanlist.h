@@ -68,17 +68,17 @@ class MScanListItem: public OListViewItem
 {
   public:
     MScanListItem::MScanListItem( QListView* parent,
-                                  QString type = "unknown",
-                                  QString essid = "unknown",
-                                  QString macaddr = "unknown",
+                                  const QString& type = "unknown",
+                                  const QString& essid = "unknown",
+                                  const QString& macaddr = "unknown",
                                   bool wep = false,
                                   int channel = 0,
                                   int signal = 0 );
 
     MScanListItem::MScanListItem( QListViewItem* parent,
-                                  QString type = "unknown",
-                                  QString essid = "unknown",
-                                  QString macaddr = "unknown",
+                                  const QString& type = "unknown",
+                                  const QString& essid = "unknown",
+                                  const QString& macaddr = "unknown",
                                   bool wep = false,
                                   int channel = 0,
                                   int signal = 0 );

@@ -409,7 +409,7 @@ void MScanListView::contextMenuRequested( QListViewItem* item, const QPoint&, in
 // MScanListItem
 //============================================================
 
-MScanListItem::MScanListItem( QListView* parent, QString type, QString essid, QString macaddr,
+MScanListItem::MScanListItem( QListView* parent, const QString& type, const QString& essid, const QString& macaddr,
                               bool wep, int channel, int signal )
                :OListViewItem( parent, essid, QString::null, macaddr, QString::null, QString::null ),
                 _type( type ), _essid( essid ), _macaddr( macaddr ), _wep( wep ),
@@ -420,12 +420,12 @@ MScanListItem::MScanListItem( QListView* parent, QString type, QString essid, QS
     #endif
 
     if ( WellenreiterConfigWindow::instance() )
-        WellenreiterConfigWindow::instance()->performAction( type ); // better use signal/slot combination here
+        WellenreiterConfigWindow::instance()->performAction( type, essid, macaddr, wep, channel, signal ); // better use signal/slot combination here
 
     decorateItem( type, essid, macaddr, wep, channel, signal );
 }
 
-MScanListItem::MScanListItem( QListViewItem* parent, QString type, QString essid, QString macaddr,
+MScanListItem::MScanListItem( QListViewItem* parent, const QString& type, const QString& essid, const QString& macaddr,
                               bool wep, int channel, int signal )
                :OListViewItem( parent, essid, QString::null, macaddr, QString::null, QString::null )
 {

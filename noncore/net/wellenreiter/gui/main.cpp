@@ -121,7 +121,7 @@ int main( int argc, char **argv )
             result = QMessageBox::warning( w, " - Wellenreiter II -  (dhcp)", QObject::tr( "Restart your dhcp client?" ), QMessageBox::Yes, QMessageBox::No );
             if ( result == QMessageBox::Yes )
             {
-                system( QString().sprintf( "dhclient &; udhcpcd &; dhcpcd &" ) );
+                ::system( QString().sprintf( "dhclient &; udhcpcd &; dhcpcd &" ) );
             }
         }
 

@@ -17,6 +17,9 @@
 #define WELLENREITERCONFIGWINDOW_H
 
 #include "configbase.h"
+#include "gps.h"
+
+/* QT */
 #include <qmap.h>
 #include <qcombobox.h>
 #include <qstring.h>
@@ -63,7 +66,7 @@ class WellenreiterConfigWindow : public WellenreiterConfigBase
     void getCaptureFileNameClicked();
     void performAutodetection();
     void channelAllClicked(int);
-    void performAction( const QString& );
+    void performAction( const QString&, const QString&, const QString&, bool, int, int /* , const GpsLocation& */ );
 
   protected:
     void synchronizeActionsAndScripts();

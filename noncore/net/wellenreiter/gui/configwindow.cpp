@@ -22,6 +22,8 @@
 #ifdef QWS
 #include <opie2/oapplication.h>
 #include <opie2/oconfig.h>
+#include <opie/odevice.h>
+using namespace Opie;
 #endif
 
 /* QT */
@@ -38,6 +40,8 @@
 #include <qspinbox.h>
 #include <qtextstream.h>
 
+/* POSIX */
+#include <assert.h>
 
 WellenreiterConfigWindow* WellenreiterConfigWindow::_instance = 0;
 
@@ -272,7 +276,13 @@ int WellenreiterConfigWindow::gpsPort() const
 }
 
 
-void WellenreiterConfigWindow::performAction( const QString& type )
+void WellenreiterConfigWindow::performAction( const QString& type,
+                                              const QString& essid,
+                                              const QString& mac,
+                                              bool wep,
+                                              int channel,
+                                              int signal
+                                              /* , const GpsLocation& loc */ )
 {
     int action;
     QString script;
@@ -294,20 +304,42 @@ void WellenreiterConfigWindow::performAction( const QString& type )
     }
     else
     {
-        qWarning( "WellenreiterConfigWindow::performAction(): unknown type '%s'", (const char*) type ); 
+        qWarning( "WellenreiterConfigWindow::performAction(): unknown type '%s'", (const char*) type );
         return;
     }
 
     qDebug( "going to perform action %d (script='%s')", action, (const char*) script );
 
-    /*
+    switch( action )
+    {
+        case 0: /* Ignore */ return;
+        case 1: /* Play Alarm */ ODevice::inst()->alarmSound(); return;
+        case 2: /* Play Click */ ODevice::inst()->touchSound(); return;
+        case 3: /* Blink LED */ break; //FIXME: Implement this
+        case 4: /* Run Script */
+        {
+            /**
+                *
+                * Script Substitution Information:
+                *
+                * $SSID = SSID
+                * $MAC = MAC
+                * $WEP = Wep
+                * $CHAN = Channel
+                *
+                **/
+            script = script.replace( QRegExp( "$SSID" ), essid );
+            script = script.replace( QRegExp( "$MAC" ), mac );
+            script = script.replace( QRegExp( "$WEP" ), wep ? QString( "true" ) : QString( "false" ) );
+            script = script.replace( QRegExp( "$CHAN" ), QString::number( channel ) );
 
-    if ( sound == "Ignore" ) return;
-    else if ( sound == "Touch" ) ODevice::inst()->touchSound();
-    else if ( sound == "Key" ) ODevice::inst()->keySound();
-    else if ( sound == "Alarm" ) ODevice::inst()->alarmSound();
-
-    */
+            qDebug( "going to call script '%s'", (const char*) script );
+            ::system( script );
+            qDebug( "script returned." );
+            return;
+        }
+        default: assert( false );
+    }
 }
 
 
