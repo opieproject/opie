@@ -1,5 +1,40 @@
 Shall we write what the plans are here? 
+Ok I'll do
 
 I think we sould take the TE* stuff from embeddedconsole and use them for the
 TE here. TE isn't going to be easy starting from scratch. If nobody is doing 
 TE yet, i'll try to port that stuff over here. -hash
+ibotty is doing it.
+
+From a UNIX point of view we want to do something like minicom
+with a better GUI.
+It should feature some terminal emulation vt100/102, ansi,
+filetransfer via {x,y,z}modem, and some sort of session management.
+Besides this requirement we would like to be able to execute 'scripts'
+in a session.
+A script would just write to the TEmulation and then be sent via
+an IOlayer.
+Then we would like to send keys? Do we want that?
+
+We want a modular architecture which might support plugins in
+the future
+
+(Almost) DONE:
+Framework
+Serial IOLayer
+Saving and Restoring Profiles
+
+TASKS in progress:
+Profile->Session and MainWidget --- Harlekin
+FilesendingLayer - hash
+IOLayer - wazlaf
+Configuration - josef
+TE - ibotty
+
+OPEN tasks:
+Session->Profile -  open
+Scripting -  open
+Keys - open
+IRDA-Layer - open
+Bluetooth-Layer - open
+FilesendingUI - open

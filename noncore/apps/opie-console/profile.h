@@ -10,7 +10,7 @@
  * profile. A profile contains the iolayername
  * a name.
  * We can generate a Session from a Profile
- * No configuration is contained here....
+ * Configuration is contained here too
  */
 class Profile {
 public:
