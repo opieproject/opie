@@ -147,7 +147,7 @@ ODevice *ODevice::inst()
         {
             qWarning( "ODevice() - can't open '%s' - unknown hardware - using default.", PATH_PROC_CPUINFO );
         }
-        if ( !dev ) dev = new Internal::Zaurus();
+        if ( !dev ) dev = new ODevice();
         dev->init(cpu_info);
     }
     return dev;
