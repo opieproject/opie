@@ -14,6 +14,8 @@
 
 #include "screenshot.h"
 #include <qapplication.h>
+#include <stdlib.h>
+
 
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
@@ -23,7 +25,7 @@
 #include <qpe/applnk.h>
 #include <qpe/config.h>
 
-
+#include <qdir.h>
 #include <qfileinfo.h>
 #include <qpoint.h>
 #include <qpushbutton.h>
@@ -127,7 +129,13 @@ void ScreenshotControl::savePixmap()
     QString fileName = "sc_"+TimeString::dateString( QDateTime::currentDateTime(),false,true);
     fileName.replace(QRegExp("'"),"");  fileName.replace(QRegExp(" "),"_");  fileName.replace(QRegExp(":"),".");  fileName.replace(QRegExp(","),"");
 
-    fileName="/home/root/Documents/image/png/"+fileName+".png";
+    QString dirName = QDir::homeDirPath()+"/Documents/image/png/";
+    if( !QDir( dirName).exists() ) {
+        qDebug("making dir "+dirName);
+       QString  msg = "mkdir -p "+dirName;
+        system(msg.latin1());
+    }
+    fileName=dirName+fileName+".png";
     lnk.setFile(fileName); //sets File property
     snapshot.save( fileName,"PNG");
     qDebug("saving file "+fileName);
