@@ -32,6 +32,8 @@
 
 /* OPIE */
 #include <opie2/onetwork.h>
+#include <opie2/oapplication.h>
+#include <opie2/oconfig.h>
 
 WellenreiterConfigWindow* WellenreiterConfigWindow::_instance = 0;
 
@@ -126,7 +128,7 @@ int WellenreiterConfigWindow::hoppingInterval() const
 
 bool WellenreiterConfigWindow::usePrismHeader() const
 {
-    return prismHeader->isOn();
+    return prismHeader->isChecked();
 }
 
 
@@ -226,7 +228,40 @@ bool WellenreiterConfigWindow::load()
     return false;
 #else
     qDebug( "loading configuration settings..." );
-    return true;
+
+    /* This is dumb monkey typing stuff... We _need_ to do this automatically! */
+
+    OConfig* c = oApp->config();
+
+    c->setGroup( "Interface" );
+    //interfaceName->setCurrentText( c->readEntry( "name" ) );
+    //deviceType->setCurrentText( c->readEntry( "type", "<select>" ) );
+    prismHeader->setChecked( c->readBoolEntry( "prism", false ) );
+    hopChannels->setChecked( c->readBoolEntry( "hop", true ) );
+    hopInterval->setValue( c->readNumEntry( "interval", 100 ) );
+    adaptiveHopping->setChecked( c->readBoolEntry( "adaptive", true ) );
+
+    c->setGroup( "Capture" );
+    captureFileName->setText( c->readEntry( "filename", "/tmp/capture" ) );
+
+    c->setGroup( "UI" );
+    lookupVendor->setChecked( c->readBoolEntry( "lookupVendor", true ) );
+    openTree->setChecked( c->readBoolEntry( "openTree", true ) );
+    disablePM->setChecked( c->readBoolEntry( "disablePM", true ) );
+
+    c->setGroup( "GPS" );
+    enableGPS->setChecked( c->readBoolEntry( "use", false ) );
+#if QT_VERSION < 300
+    gpsdHost->insertItem( c->readEntry( "host", "localhost" ), 0 );
+    gpsdHost->setCurrentItem( 0 );
+#else
+    gpsdHost->setCurrentText( c->readEntry( "host", "localhost" ) );
+#endif
+    gpsdPort->setValue( c->readNumEntry( "port", 2947 ) );
+    startGPS->setChecked( c->readBoolEntry( "start", false ) );
+    commandGPS->setText( c->readEntry( "command", "gpsd -p /dev/ttyS3 -s 57600" ) );
+
+    return false; // false = perform autodetection; true = use config settings
 #endif
 }
 
@@ -237,5 +272,33 @@ void WellenreiterConfigWindow::save()
     #warning Persistent Configuration not yet implemented for standalone X11 build
 #else
     qDebug( "saving configuration settings..." );
+
+    /* This is dumb monkey typing stuff... We _need_ to do this automatically! */
+
+    OConfig* c = oApp->config();
+
+    c->setGroup( "Interface" );
+    c->writeEntry( "name", interfaceName->currentText() );
+    c->writeEntry( "type", deviceType->currentText() );
+    c->writeEntry( "prism", prismHeader->isChecked() );
+    c->writeEntry( "hop", hopChannels->isChecked() );
+    c->writeEntry( "interval", hopInterval->value() );
+    c->writeEntry( "adaptive", adaptiveHopping->isChecked() );
+
+    c->setGroup( "Capture" );
+    c->writeEntry( "filename", captureFileName->text() );
+
+    c->setGroup( "UI" );
+    c->writeEntry( "lookupVendor", lookupVendor->isChecked() );
+    c->writeEntry( "openTree", openTree->isChecked() );
+    c->writeEntry( "disablePM", disablePM->isChecked() );
+
+    c->setGroup( "GPS" );
+    c->writeEntry( "use", enableGPS->isChecked() );
+    c->writeEntry( "host", gpsdHost->currentText() );
+    c->writeEntry( "port", gpsdPort->value() );
+    c->writeEntry( "start", startGPS->isChecked() );
+    c->writeEntry( "command", commandGPS->text() );
+
 #endif
 }

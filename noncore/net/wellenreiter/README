@@ -2,11 +2,11 @@
 /*                W e l l e n r e i t e r   I I
 /*               ===============================
 /*
-/*                    Version: 1.0-rc2
+/*                    Version: 1.0.2
 /************************************************************************
 
 ----------------------------------------------------
-Release Notes for Wellenreiter II / July 2003
+Release Notes for Wellenreiter II / October 2003
 ----------------------------------------------------
 
 =====================
@@ -17,7 +17,7 @@ Release Notes for Wellenreiter II / July 2003
 - PRISM2 chipset [ orinoco or hostap ], e.g. D-Link, Buffallo, ...
 - SYMBOL/SPECTRUM chipset [ orinoco ], e.g. Symbol Spectrum 24, Socket Lowpower CF, ...
 - CISCO chipset
-- wlan-ng supported chipsets
+- WLAN-NG supported chipsets, e.g. D-Link USB cards
 
 =====================
 =        Build
@@ -29,7 +29,7 @@ packages for Qt3, e.g. libqt3-devel.
  * Set $QTDIR to the appropriate directory (e.g. /usr/lib/qt3)
  * './build make'
  * as root, './build install'
- * Wellenreiter will be installed in /usr/local
+ * Wellenreiter will be installed in /usr/local (sorry, no relocation possible yet)
 
 =====================
 = Precompiled Binaries
@@ -37,7 +37,7 @@ packages for Qt3, e.g. libqt3-devel.
 
 Precompiled binaries are available for the PDA-Version.
 Get them from http://opie.net.wox.org/wellenreiter/
-Sorry, RPMS are not yet available but will follow soon.
+Sorry, no RPMS available. Volunteers?
 
 =====================
 =       Run
@@ -53,9 +53,9 @@ if your device has been properly configured.
 
 Wellenreiter II is (C) 2002-2003 M-M-M
 
+Michael Lauer    <mickeyl@handhelds.org>
 Max Moser        <max@remote-exploit.org>
 Martin J. Muench <mjm@remote-exploit.org>
-Michael Lauer    <mickeyl@handhelds.org>
 
 =====================
 =      Links        =
