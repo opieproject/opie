@@ -65,7 +65,7 @@
 /*!
 */
 
-Vt102Emulation::Vt102Emulation(Widget* gui) : EmulationLayer(gui)
+Vt102Emulation::Vt102Emulation(WidgetLayer* gui) : EmulationLayer(gui)
 {
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
                    this,SLOT(onMouse(int,int,int)));
@@ -349,7 +349,7 @@ void Vt102Emulation::tau( int token, int p, int q )
     case TY_CTL___('D'      ) : /* EOT: ignored                      */ break;
     case TY_CTL___('E'      ) :      reportAnswerBack     (          ); break; //VT100
     case TY_CTL___('F'      ) : /* ACK: ignored                      */ break;
-    case TY_CTL___('G'      ) : gui->Bell                 (          ); break; //VT100
+    case TY_CTL___('G'      ) : gui->bell                 (          ); break; //VT100
     case TY_CTL___('H'      ) : scr->BackSpace            (          ); break; //VT100
     case TY_CTL___('I'      ) : scr->Tabulate             (          ); break; //VT100
     case TY_CTL___('J'      ) : scr->NewLine              (          ); break; //VT100
@@ -737,11 +737,11 @@ void Vt102Emulation::onKeyPress( QKeyEvent* ev )
     {
       switch(cmd) // ... and execute if found.
         {
-	case CMD_emitSelection  : gui->emitSelection();           return;
-	case CMD_scrollPageUp   : gui->doScroll(-gui->Lines()/2); return;
-	case CMD_scrollPageDown : gui->doScroll(+gui->Lines()/2); return;
-	case CMD_scrollLineUp   : gui->doScroll(-1             ); return;
-	case CMD_scrollLineDown : gui->doScroll(+1             ); return;
+	case CMD_emitSelection  : gui->insertSelection();         return;
+	case CMD_scrollPageUp   : gui->scroll(-gui->lines()/2); return;
+	case CMD_scrollPageDown : gui->scroll(+gui->lines()/2); return;
+	case CMD_scrollLineUp   : gui->scroll(-1             ); return;
+	case CMD_scrollLineDown : gui->scroll(+1             ); return;
 	case CMD_send           : sendString( txt );              return;
 	case CMD_prevSession    : emit prevSession();             return;
 	case CMD_nextSession    : emit nextSession();             return;
@@ -924,7 +924,7 @@ void Vt102Emulation::setMode(int m)
   currParm.mode[m] = TRUE;
   switch (m)
   {
-    case MODE_Mouse1000 : gui->setMouseMarks(FALSE);
+    case MODE_Mouse1000 : //gui->setMouseMarks(FALSE);
     break;
     case MODE_AppScreen : screen[1]->clearSelection();
                           screen[1]->clearEntireScreen();
@@ -943,7 +943,7 @@ void Vt102Emulation::resetMode(int m)
   currParm.mode[m] = FALSE;
   switch (m)
   {
-    case MODE_Mouse1000 : gui->setMouseMarks(TRUE);
+    case MODE_Mouse1000 : //gui->setMouseMarks(TRUE);
     break;
     case MODE_AppScreen : screen[0]->clearSelection();
                           setScreen(0);

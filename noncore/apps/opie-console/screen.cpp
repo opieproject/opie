@@ -68,7 +68,7 @@ Screen::Screen(int lines, int columns)
   this->lines   = lines;
   this->columns = columns;
 
-  image      = (Character*) malloc(lines*columns*sizeof(Character));
+  image      = QArray<Character>( lines*columns );
   tabstops   = NULL; initTabStops();
 
   histCursor = 0;
@@ -82,7 +82,7 @@ Screen::Screen(int lines, int columns)
 
 Screen::~Screen()
 {
-  free(image);
+  delete image;
   if (tabstops) free(tabstops);
 }
 
@@ -394,7 +394,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
   }
 
   // make new image
-  Character* newimg = (Character*) malloc(new_lines*new_columns*sizeof(Character));
+  QArray<Character> newimg = QArray<Character>( new_lines * new_columns );
 
   clearSelection();
 
@@ -418,7 +418,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
     newimg[y*new_columns+x].b = image[loc(x,y)].b;
     newimg[y*new_columns+x].r = image[loc(x,y)].r;
   }
-  free(image);
+  delete image;
   image = newimg;
   lines = new_lines;
   columns = new_columns;
@@ -466,7 +466,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
    into RE_BOLD and RE_INTENSIVE.
 */
 
-void Screen::reverseRendition(Character* p)
+void Screen::reverseRendition(Character *p)
 { UINT8 f = p->f; UINT8 b = p->b;
   p->f = b; p->b = f; //p->r &= ~RE_TRANSPARENT;
 }
@@ -504,9 +504,9 @@ void Screen::effectiveRendition()
 
 */
 
-Character* Screen::getCookedImage()
+QArray<Character> Screen::getCookedImage()
 { int x,y;
-  Character* merged = (Character*) malloc(lines*columns*sizeof(Character));
+  Character* merged = (Character*) malloc( lines * columns * sizeof( Character ) );
   Character dft(' ',DEFAULT_FORE_COLOR,DEFAULT_BACK_COLOR,DEFAULT_RENDITION);
 
   for (y = 0; (y < lines) && (y < (hist.getLines()-histCursor)); y++)
@@ -515,7 +515,7 @@ Character* Screen::getCookedImage()
     int yp  = y*columns;
     int yq  = (y+histCursor)*columns;
 
-    hist.getCells(y+histCursor,0,len,merged+yp);
+    hist.getCells( y+histCursor, 0, len, merged+yp );
     for (x = len; x < columns; x++) merged[yp+x] = dft;
     for (x = 0; x < columns; x++)
     {   int p=x + yp; int q=x + yq;
@@ -547,7 +547,9 @@ Character* Screen::getCookedImage()
   }
   if (getMode(MODE_Cursor) && (cuY+(hist.getLines()-histCursor) < lines)) // cursor visible
     reverseRendition(&merged[loc(cuX,cuY+(hist.getLines()-histCursor))]);
-  return merged;
+  QArray<Character> res( sizeof( merged ) / sizeof( Character ) );
+  res.assign( merged, sizeof( merged ) / sizeof( Character ) );
+  return res;
 }
 
 
@@ -1159,7 +1161,7 @@ void Screen::addHistLine()
     while (end >= 0 && image[end] == dft)
       end -= 1;
 
-    hist.addCells(image,end+1);
+    hist.addCells(image.data(), end+1);
     hist.addLine();
 
     // adjust history cursor

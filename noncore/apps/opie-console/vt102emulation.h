@@ -60,7 +60,7 @@ class Vt102Emulation: public EmulationLayer
 
 public:
 
-  Vt102Emulation(Widget* gui);
+  Vt102Emulation(WidgetLayer* gui);
   ~Vt102Emulation();
 
 public slots: // signals incoming from Widget

@@ -136,7 +136,7 @@ public: // these are all `Screen' operations
     //
     void resizeImage(int new_lines, int new_columns);
     //
-    Character*  getCookedImage();
+    QArray<Character> getCookedImage();
     
     /*! return the number of lines. */
     int  getLines()   { return lines; }
@@ -175,7 +175,7 @@ private: // helper
     void initTabStops();
 
     void effectiveRendition();
-    void reverseRendition(Character* p);
+    void reverseRendition( Character *p );
 
 private:
 
@@ -193,7 +193,7 @@ private:
 
     int lines;
     int columns;
-    Character *image; // [lines][columns]
+    QArray<Character> image; // [lines][columns]
 
     // history buffer ---------------
 

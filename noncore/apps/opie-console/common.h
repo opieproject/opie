@@ -1,6 +1,6 @@
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* [TECommon.h]                  Common Definitions                           */
+/* [Common.h]                  Common Definitions                           */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
@@ -16,12 +16,12 @@
 /*                        */
 /* -------------------------------------------------------------------------- */
 
-/*! \file TECommon.h
+/*! \file Common.h
     \brief Definitions shared between TEScreen and TEWidget.
 */
 
-#ifndef TECOMMON_H
-#define TECOMMON_H
+#ifndef COMMON_H
+#define COMMON_H
 
 #include <qcolor.h>
 
@@ -111,4 +111,4 @@ struct ColorEntry
   bool   bold;        // if used on fg
 };
 
-#endif // TECOMMON_H
+#endif // COMMON_H

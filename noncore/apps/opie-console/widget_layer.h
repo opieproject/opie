@@ -106,6 +106,17 @@ public:
 	virtual void reloadConfig() = 0;
 
 
+	/**
+	 * sets the scrollbar (if implemented by successor of this class)
+	 */
+	virtual void setScroll( int cursor, int slines );
+
+	/**
+	 * scrolls (if implemented, by successor of this class)
+	 * @param int value, how much the widget should scroll up (positive value) or down (negative value)
+	 */
+	virtual void scroll( int value );
+		
 signals:
 
 	/**

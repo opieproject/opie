@@ -76,7 +76,7 @@
 */
 
 #include "emulation_layer.h"
-#include "widget.h"
+#include "widget_layer.h"
 #include "screen.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -95,34 +95,34 @@
 /*!
 */
 
-EmulationLayer::EmulationLayer(Widget* gui)
+EmulationLayer::EmulationLayer( WidgetLayer* gui )
 : decoder((QTextDecoder*)NULL)
 {
   this->gui = gui;
 
-  screen[0] = new Screen(gui->Lines(),gui->Columns());
-  screen[1] = new Screen(gui->Lines(),gui->Columns());
+  screen[0] = new Screen(gui->lines(),gui->columns());
+  screen[1] = new Screen(gui->lines(),gui->columns());
   scr = screen[0];
 
   bulk_nlcnt = 0; // reset bulk newline counter
   bulk_incnt = 0; // reset bulk counter
   connected  = FALSE;
 
-  QObject::connect(&bulk_timer, SIGNAL(timeout()), this, SLOT(showBulk()) );
-  QObject::connect(gui,SIGNAL(changedImageSizeSignal(int,int)),
-                   this,SLOT(onImageSizeChange(int,int)));
-  QObject::connect(gui,SIGNAL(changedHistoryCursor(int)),
-                   this,SLOT(onHistoryCursorChange(int)));
-  QObject::connect(gui,SIGNAL(keyPressedSignal(QKeyEvent*)),
-                   this,SLOT(onKeyPress(QKeyEvent*)));
-  QObject::connect(gui,SIGNAL(beginSelectionSignal(const int,const int)),
-		   this,SLOT(onSelectionBegin(const int,const int)) );
-  QObject::connect(gui,SIGNAL(extendSelectionSignal(const int,const int)),
-		   this,SLOT(onSelectionExtend(const int,const int)) );
-  QObject::connect(gui,SIGNAL(endSelectionSignal(const BOOL)),
-		   this,SLOT(setSelection(const BOOL)) );
-  QObject::connect(gui,SIGNAL(clearSelectionSignal()),
-		   this,SLOT(clearSelection()) );
+  QObject::connect(&bulk_timer, SIGNAL( timeout() ), this, SLOT( showBulk() ) );
+  QObject::connect(gui,SIGNAL( imageSizeChanged( int, int ) ),
+                   this,SLOT( onImageSizeChange( int, int ) ) );
+  QObject::connect(gui,SIGNAL( changedHistoryCursor( int ) ),
+                   this,SLOT( historyCursorChange( int ) ) );
+  QObject::connect(gui,SIGNAL( keyPressed( QKeyEvent* ) ),
+                   this,SLOT( onKeyPress( QKeyEvent* ) ) );
+  QObject::connect(gui,SIGNAL( selectionBegin( const int, const int) ),
+		   this,SLOT( onSelectionBegin( const int, const int ) ) );
+  QObject::connect(gui,SIGNAL( selectionExtended( const int, const int ) ),
+		   this,SLOT( onSelectionExtend( const int,const int ) ) );
+  QObject::connect(gui,SIGNAL( selectionEnd( const bool ) ),
+		   this,SLOT( setSelection( const bool ) ) );
+  QObject::connect(gui,SIGNAL( selectionCleared() ),
+		   this,SLOT( clearSelection() ) );
 }
 
 /*!
@@ -197,7 +197,7 @@ void EmulationLayer::onRcvChar(int c)
     case '\t'      : scr->Tabulate();                  break;
     case '\n'      : scr->NewLine();                   break;
     case '\r'      : scr->Return();                    break;
-    case 0x07      : gui->Bell();                      break;
+    case 0x07      : gui->bell();                      break;
     default        : scr->ShowCharacter(c);            break;
   };
 }
@@ -303,11 +303,11 @@ void EmulationLayer::showBulk()
   bulk_incnt = 0;                       // reset bulk counter
   if (connected)
   {
-    Character* image = scr->getCookedImage();    // get the image
+    QArray<Character> image = scr->getCookedImage();    // get the image
     gui->setImage(image,
                   scr->getLines(),
                   scr->getColumns());     // actual refresh
-    free(image);
+    delete image;
     //FIXME: check that we do not trigger other draw event here.
     gui->setScroll(scr->getHistCursor(),scr->getHistLines());
   }
@@ -320,7 +320,7 @@ void EmulationLayer::bulkStart()
 
 void EmulationLayer::bulkEnd()
 {
-  if ( bulk_nlcnt > gui->Lines() || bulk_incnt > 20 )
+  if ( bulk_nlcnt > gui->lines() || bulk_incnt > 20 )
     showBulk();                         // resets bulk_??cnt to 0, too.
   else
     bulk_timer.start(BULK_TIMEOUT,TRUE);
@@ -331,7 +331,7 @@ void EmulationLayer::setConnect(bool c)
   connected = c;
   if ( connected)
   {
-    onImageSizeChange(gui->Lines(), gui->Columns());
+    onImageSizeChange(gui->lines(), gui->columns());
     showBulk();
   }
   else

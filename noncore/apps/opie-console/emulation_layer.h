@@ -38,7 +38,7 @@ class EmulationLayer : public QObject
 
 public:
 
-  EmulationLayer(Widget* gui);
+  EmulationLayer( WidgetLayer* gui );
   ~EmulationLayer();
 
 public:
@@ -54,7 +54,7 @@ public slots: // signals incoming from Widget
   virtual void clearSelection();
   virtual void onSelectionBegin(const int x, const int y);
   virtual void onSelectionExtend(const int x, const int y);
-  virtual void setSelection(const BOOL preserve_line_breaks);
+  virtual void setSelection(const bool preserve_line_breaks);
 
 public slots: // signals incoming from data source
 
@@ -106,7 +106,7 @@ public:
 
 protected:
 
-  Widget* gui;
+  WidgetLayer* gui;
   Screen* scr;         // referes to one `screen'
   Screen* screen[2];   // 0 = primary, 1 = alternate
   void setScreen(int n); // set `scr' to `screen[n]'
