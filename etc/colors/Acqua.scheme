@@ -1,0 +1,10 @@
+[Colors]
+Background = #E0E0E0
+Base = #FFFFFF
+Button = #96c8fa
+ButtonText = #000000
+Highlight = #73adef
+HighlightedText = #FFFFFF
+LauncherBackground = #FF0000
+LauncherIconText = #000000
+Text = #000000
