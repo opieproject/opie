@@ -10,7 +10,7 @@
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
  ***************************************************************************/
-#include <opie/oapplicationfactory.h>
+#include <opie2/oapplicationfactory.h>
 #include "opieftp.h"
 
 OPIE_EXPORT_APP( OApplicationFactory<OpieFtp> )
