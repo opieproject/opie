@@ -1,0 +1,29 @@
+--- qtoolbutton.orig	2003-04-19 18:59:13.000000000 +0200
++++ qtoolbutton.cpp	2003-04-19 19:00:56.000000000 +0200
+@@ -230,7 +230,7 @@
+ 	else
+ 	    QToolTip::add( this, textLabel );
+     }
+-#endif	
++#endif
+ }
+ 
+ 
+@@ -324,12 +324,12 @@
+ 	QPixmap pm = iconSet(TRUE).pixmap(QIconSet::Large, QIconSet::Normal);
+ 	w = pm.width();
+ 	h = pm.height();
+-	if ( w < 32 )
+-	    w = 32;
+-	if ( h < 32 )
+-	    h = 32;
++	if ( w < 24 )
++	    w = 24;
++	if ( h < 24 )
++	    h = 24;
+     } else {
+-	w = h = 16;
++	w = h = 14;
+ 	QPixmap pm = iconSet(TRUE).pixmap(QIconSet::Small, QIconSet::Normal);
+ 	w = pm.width();
+ 	h = pm.height();
