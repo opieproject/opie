@@ -43,7 +43,7 @@ dataWidgetUI::dataWidgetUI() : QWidget()
     
     OxydataWidget *oxyDW = new OxydataWidget(this);
     connect ( dataCombo, SIGNAL( activated(int) ), oxyDW, SLOT( setElement(int) ) );
-    oxyDW->setElement( 1 );
+    oxyDW->setElement( 0 );
 
     qgrid->addWidget(  dataCombo, 0,0);
     qgrid->addWidget(  oxyDW , 1,0 );

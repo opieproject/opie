@@ -59,6 +59,7 @@ void OxydataWidget::setElement( int el )
     middle->setText( configobj.readEntry( "Name" ) );
     right->setText( QString::number( el+1 ) );
 
+
     DataTable->setText( 0,1,configobj.readEntry( "Weight" ) ); 
     DataTable->setText( 1,1,configobj.readEntry( "Block" ) ); 
     DataTable->setText( 2,1,configobj.readEntry( "Group" ) ); 
@@ -68,6 +69,7 @@ void OxydataWidget::setElement( int el )
     DataTable->setText( 6,1,configobj.readEntry( "Density" ) ); 
     DataTable->setText( 7,1,configobj.readEntry( "BP" ) ); 
     DataTable->setText( 8,1,configobj.readEntry( "MP" ) ); 
+    
 }
 
 void OxydataWidget::setTable() const
@@ -81,11 +83,21 @@ void OxydataWidget::setTable() const
     DataTable->setText( 6,0, tr( "Density" )) ;
     DataTable->setText( 7,0, tr( "Boilingpoint" ) );
     DataTable->setText( 8,0, tr( "Meltingpoint" ) );
+    
 }
 
 OxydataTable::OxydataTable(int numRows, int numCols, QWidget *parent,
-        const char *name) : QTable(numRows, numRows, parent, name)
+        const char *name) : QTable(numRows, numCols,parent, name)
 {
+
+    for (int zeile = 0; zeile < numRows; zeile++)
+        for ( int spalte = 0; spalte < numCols; spalte++ )
+        {
+            OxydataQTI *testus = new OxydataQTI (this, OxydataQTI::Never, "hm" );
+            setItem(zeile, spalte, (QTableItem*)testus);
+        }
+
+
     this->setShowGrid( false );
     this->setHScrollBarMode(QScrollView::AlwaysOff);
     this->horizontalHeader()->hide();
@@ -93,13 +105,6 @@ OxydataTable::OxydataTable(int numRows, int numCols, QWidget *parent,
     this->setTopMargin( 0 );
     this->setLeftMargin( 0 );
 }
-
-int OxydataTable::alignment() const
-{
-    return AlignLeft | AlignVCenter;
-};
-
-
 
 void OxydataTable::paintCell(  QPainter *p, int row, int col, const QRect &cr, bool selected)
 {
@@ -120,3 +125,17 @@ void OxydataTable::paintCell(  QPainter *p, int row, int col, const QRect &cr, b
         p->restore();
     }
 }
+
+OxydataQTI::OxydataQTI(QTable * table, EditType et, const QString & text )
+    : QTableItem ( table, et, text )
+{
+}
+
+int OxydataQTI::alignment() const
+{
+    if ( col()%2 ) 
+    {
+        return AlignRight | AlignVCenter; 
+    }else return AlignLeft | AlignVCenter;
+};
+
