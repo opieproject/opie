@@ -33,7 +33,7 @@ class OxyFrame : public QLabel
 
     signals:
         /*
-         * this signal emits the name ( the elemen-number ) 
+         * this signal emits the name (the element-number) 
          */
         void num(QString);
 };

@@ -1,7 +1,7 @@
 TODO:
 
 small things:
-* there are bug in the layouting of the table
+* there are bugs in the layouting of the table
 * Elementar symbols should be small enough to fit the boxes
     (font problem?)
 
@@ -14,6 +14,6 @@ big things:
 
 wishes:
 * add radio active decay 
-* let the use choose the units
+* let the user choose the units
 	i.e.  pm <-> \AA; J <-> eV <-> Hartree; K <-> °C
-* add aditional attributes: oxidation numbers, different radii
+* add additional attributes: oxidation numbers, different radii
