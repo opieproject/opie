@@ -132,7 +132,7 @@
     </message>
     <message>
         <source>Limit search to:</source>
-        <translation>Limiter la recherche à :</translation>
+        <translation>Limiter la recherche à : </translation>
     </message>
     <message>
         <source>Add</source>
@@ -171,7 +171,7 @@
     </message>
     <message>
         <source>Limit search to:</source>
-        <translation type="obsolete">Limiter la recherche à :</translation>
+        <translation type="obsolete">Limiter la recherche à : </translation>
     </message>
     <message>
         <source>Add</source>

@@ -287,7 +287,7 @@ et tout son contenu ?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="unfinished"></translation>
+        <translation>Explorateur :: </translation>
     </message>
 </context>
 <context>
@@ -327,7 +327,7 @@ Terminé
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation>Définir permissions de :</translation>
+        <translation>Définir permissions de : </translation>
     </message>
     <message>
         <source>owner</source>

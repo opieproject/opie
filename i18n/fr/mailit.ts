@@ -213,7 +213,7 @@ Vérifiez le nom d&apos;utilisateur et le mot de passe&lt;/qt&gt;</translation>
     <message>
         <source>Delete account:
 </source>
-        <translation>Supprimer compte :
+        <translation>Supprimer compte : 
 </translation>
     </message>
     <message>
@@ -227,7 +227,7 @@ Vérifiez le nom d&apos;utilisateur et le mot de passe&lt;/qt&gt;</translation>
         <source>Could not locate all files in 
 mail with subject: </source>
         <translation>Impossible de trouver tous 
-les fichiers du message intitulé :</translation>
+les fichiers du message intitulé : </translation>
     </message>
     <message>
         <source>
@@ -461,7 +461,7 @@ Cliquez et garder la pression pour plus d&apos;options.</translation>
     </message>
     <message>
         <source>Click here to reply to the selected mail to CC: addresses also</source>
-        <translation>Cliquez ici pour répondre à toutes les personnes du message sélectionné</translation>
+        <translation>Cliquez ici pour répondre à toutes les destinataires du message</translation>
     </message>
 </context>
 <context>
@@ -476,7 +476,7 @@ Cliquez et garder la pression pour plus d&apos;options.</translation>
     </message>
     <message>
         <source>Sending: </source>
-        <translation>Envoi :</translation>
+        <translation>Envoi : </translation>
     </message>
     <message>
         <source>Sent </source>
@@ -542,15 +542,15 @@ Cliquez et garder la pression pour plus d&apos;options.</translation>
     </message>
     <message>
         <source>To:</source>
-        <translation>A :</translation>
+        <translation>A : </translation>
     </message>
     <message>
         <source>CC:</source>
-        <translation>Cc :</translation>
+        <translation>Cc : </translation>
     </message>
     <message>
         <source>Subject:</source>
-        <translation>Sujet :</translation>
+        <translation>Sujet : </translation>
     </message>
     <message>
         <source>...</source>
@@ -608,7 +608,7 @@ et être des adresses Emails valides</translation>
     </message>
     <message>
         <source>Re: </source>
-        <translation>Re :</translation>
+        <translation>Re : </translation>
     </message>
     <message>
         <source>======forwarded message from </source>
@@ -624,7 +624,7 @@ et être des adresses Emails valides</translation>
     </message>
     <message>
         <source>FWD: </source>
-        <translation>FWD:</translation>
+        <translation>FWD : </translation>
     </message>
     <message>
         <source>======end of forwarded message======

@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Battery status: </source>
-        <translation>Niveau batterie(s) :</translation>
+        <translation>Niveau batterie(s) : </translation>
     </message>
     <message>
         <source>Good</source>
@@ -72,11 +72,11 @@
     </message>
     <message>
         <source>Percentage battery remaining: </source>
-        <translation>Pourcentage de batterie chargé :</translation>
+        <translation>Pourcentage de batterie chargé : </translation>
     </message>
     <message>
         <source>Battery time remaining: </source>
-        <translation>Temps restant de la batterie :</translation>
+        <translation>Temps restant de la batterie : </translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>
@@ -84,15 +84,15 @@
     </message>
     <message>
         <source>no data</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune donné</translation>
     </message>
     <message>
         <source>Ipaq  </source>
-        <translation type="unfinished"></translation>
+        <translation>iPaq </translation>
     </message>
     <message>
         <source>Jacket  </source>
-        <translation type="unfinished"></translation>
+        <translation>Jaquette </translation>
     </message>
 </context>
 </TS>

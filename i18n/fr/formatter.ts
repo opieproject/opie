@@ -153,7 +153,7 @@ la fenêtre &quot;sortie&quot;.</translation>
     </message>
     <message>
         <source>Storage Type : </source>
-        <translation type="obsolete">Type de Support :</translation>
+        <translation type="obsolete">Type de Support : </translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)

@@ -37,7 +37,7 @@
     </message>
     <message>
         <source>Tab style:</source>
-        <translation>Type Onglets :</translation>
+        <translation>Type Onglets : </translation>
     </message>
     <message>
         <source>Tabs</source>
@@ -231,7 +231,7 @@ Cette partie vous permet de sélectionner une application et de lui attribuer de
     </message>
     <message>
         <source>Rotation direction:</source>
-        <translation>Rotation :</translation>
+        <translation>Rotation : </translation>
     </message>
 </context>
 <context>
@@ -242,7 +242,7 @@ Cette partie vous permet de sélectionner une application et de lui attribuer de
     </message>
     <message>
         <source>Click here to select a color for: </source>
-        <translation>Cliquez ici pour sélectionner un couleur pour :</translation>
+        <translation>Cliquez ici pour sélectionner un couleur pour : </translation>
     </message>
 </context>
 <context>

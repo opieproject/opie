@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>Load which plugins in what order:</source>
-        <translation>Chargement et ordre des modules :</translation>
+        <translation>Chargement et ordre des modules : </translation>
     </message>
     <message>
         <source>Move Up</source>

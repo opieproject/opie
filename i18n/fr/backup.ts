@@ -110,7 +110,7 @@
     </message>
     <message>
         <source>Error Message:</source>
-        <translation>Message d&apos;Erreur :</translation>
+        <translation>Message d&apos;Erreur : </translation>
     </message>
     <message>
         <source>&amp;OK</source>

@@ -4,7 +4,7 @@
     <name>Board</name>
     <message>
         <source>Blanks: </source>
-        <translation>Vides :</translation>
+        <translation>Vides : </translation>
     </message>
     <message>
         <source>OK</source>
@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation>Nom :</translation>
+        <translation>Nom : </translation>
     </message>
     <message>
         <source>Board</source>
@@ -66,7 +66,7 @@
     </message>
     <message>
         <source>Size:</source>
-        <translation>Taille :</translation>
+        <translation>Taille : </translation>
     </message>
     <message>
         <source>Edit...</source>
@@ -93,7 +93,7 @@
     </message>
     <message>
         <source>&lt;P&gt;Score: </source>
-        <translation>&lt;P&gt;Score :</translation>
+        <translation>&lt;P&gt;Score : </translation>
     </message>
 </context>
 <context>

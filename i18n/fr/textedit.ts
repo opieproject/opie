@@ -214,7 +214,7 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation>Fixer les Permissions du fichier pour :</translation>
+        <translation>Fixer les Permissions du fichier pour : </translation>
     </message>
     <message>
         <source>owner</source>

@@ -284,7 +284,7 @@
     </message>
     <message>
         <source>Could not open :</source>
-        <translation>Ouverture impossible de :</translation>
+        <translation>Ouverture impossible de : </translation>
     </message>
     <message>
         <source>Creating directory </source>
@@ -467,7 +467,7 @@
     </message>
     <message>
         <source>Servers:</source>
-        <translation>Serveurs :</translation>
+        <translation>Serveurs : </translation>
     </message>
     <message>
         <source>Click here to select a package feed.</source>
@@ -759,11 +759,11 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="obsolete">Nom :</translation>
+        <translation type="obsolete">Nom : </translation>
     </message>
     <message>
         <source>URL:</source>
-        <translation type="obsolete">URL :</translation>
+        <translation type="obsolete">URL : </translation>
     </message>
     <message>
         <source>Change</source>
@@ -858,11 +858,11 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Nom :</translation>
+        <translation>Nom : </translation>
     </message>
     <message>
         <source>Address:</source>
-        <translation>Addresse :</translation>
+        <translation>Addresse : </translation>
     </message>
     <message>
         <source>Active Server</source>
@@ -878,7 +878,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation>Emplacement :</translation>
+        <translation>Emplacement : </translation>
     </message>
     <message>
         <source>Link to root</source>
@@ -898,11 +898,11 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation>Nom Utilisateur :</translation>
+        <translation>Nom Utilisateur : </translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Mot de passe :</translation>
+        <translation>Mot de passe : </translation>
     </message>
 </context>
 </TS>

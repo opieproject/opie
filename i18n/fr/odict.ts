@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Query:</source>
-        <translation>Requête :</translation>
+        <translation>Requête : </translation>
     </message>
     <message>
         <source>&amp;Ok</source>
@@ -126,7 +126,7 @@
     <name>SearchMethodDlg</name>
     <message>
         <source>Name:</source>
-        <translation>Nom :</translation>
+        <translation>Nom : </translation>
     </message>
     <message>
         <source>Dictionary file</source>

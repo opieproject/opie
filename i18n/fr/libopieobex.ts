@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>Sending:</source>
-        <translation type="obsolete">Envoie :</translation>
+        <translation type="obsolete">Envoie : </translation>
     </message>
     <message>
         <source>filename</source>

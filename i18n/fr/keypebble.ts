@@ -175,19 +175,19 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Mot de Passe :</translation>
+        <translation>Mot de Passe : </translation>
     </message>
     <message>
         <source>Bookmark Name:</source>
-        <translation>Nom du Favori :</translation>
+        <translation>Nom du Favori : </translation>
     </message>
     <message>
         <source>Host Name:</source>
-        <translation>Nom d&apos;Hôte :</translation>
+        <translation>Nom d&apos;Hôte : </translation>
     </message>
     <message>
         <source>Display Number:</source>
-        <translation>Numéro écran :</translation>
+        <translation>Numéro écran : </translation>
     </message>
     <message>
         <source>Options</source>
@@ -195,7 +195,7 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Check for screen updates every:</source>
-        <translation>Vérifier mise à jour écran toutes les :</translation>
+        <translation>Vérifier mise à jour écran toutes les : </translation>
     </message>
     <message>
         <source>Milliseconds</source>

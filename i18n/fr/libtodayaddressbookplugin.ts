@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Days look ahead: </source>
-        <translation>Jours en avant :</translation>
+        <translation>Jours en avant : </translation>
     </message>
     <message>
         <source>How many days we should search forward</source>
@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Set Headline Color: </source>
-        <translation>Couleurs des Titres :</translation>
+        <translation>Couleurs des Titres : </translation>
     </message>
     <message>
         <source>Colors for the headlines !</source>
@@ -40,7 +40,7 @@
     </message>
     <message>
         <source>Set Entry Color: </source>
-        <translation>Couleur des Entrées :</translation>
+        <translation>Couleur des Entrées : </translation>
     </message>
     <message>
         <source>This color will be used for shown birthdays/anniversaries !</source>

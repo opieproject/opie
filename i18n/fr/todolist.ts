@@ -242,7 +242,7 @@ Voulez-vous quitter ?</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation>Priorité :</translation>
+        <translation>Priorité : </translation>
     </message>
     <message>
         <source>Data can not be edited, currently syncing</source>
@@ -395,7 +395,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     <name>TaskEditorOverView</name>
     <message>
         <source>Description:</source>
-        <translation>Description :</translation>
+        <translation>Description : </translation>
     </message>
     <message>
         <source>Enter brief description of the task here.</source>
@@ -467,7 +467,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Category:</source>
-        <translation>Catégorie :</translation>
+        <translation>Catégorie : </translation>
     </message>
     <message>
         <source>Select category to organize this task with.</source>
@@ -483,7 +483,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="obsolete">Notes :</translation>
+        <translation type="obsolete">Notes : </translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>
@@ -495,14 +495,14 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Summary:</source>
-        <translation>Résumé :</translation>
+        <translation>Résumé : </translation>
     </message>
 </context>
 <context>
     <name>TaskEditorStatus</name>
     <message>
         <source>Status:</source>
-        <translation>Etat :</translation>
+        <translation>Etat : </translation>
     </message>
     <message>
         <source>Click here to set the current status of this task.</source>
@@ -526,7 +526,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Progress:</source>
-        <translation>Avancement :</translation>
+        <translation>Avancement : </translation>
     </message>
     <message>
         <source>Select progress made on this task here.</source>
@@ -558,7 +558,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Start Date:</source>
-        <translation>Date de début :</translation>
+        <translation>Date de début : </translation>
     </message>
     <message>
         <source>Click here to set the date this task was started.</source>
@@ -566,7 +566,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Due Date:</source>
-        <translation>Date d&apos;écheance :</translation>
+        <translation>Date d&apos;écheance : </translation>
     </message>
     <message>
         <source>Click here to set the date this task needs to be completed by.</source>
@@ -574,7 +574,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Completed:</source>
-        <translation>Terminée :</translation>
+        <translation>Terminée : </translation>
     </message>
     <message>
         <source>Click here to mark this task as completed.</source>
@@ -586,7 +586,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Maintainer Mode:</source>
-        <translation>Mode Maintenance :</translation>
+        <translation>Mode Maintenance : </translation>
     </message>
     <message>
         <source>Click here to set the maintainer&apos;s role.</source>
@@ -610,7 +610,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Maintainer:</source>
-        <translation>Mainteneur :</translation>
+        <translation>Mainteneur : </translation>
     </message>
     <message>
         <source>This is the name of the current task maintainer.</source>

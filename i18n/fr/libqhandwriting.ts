@@ -23,11 +23,11 @@
     <name>HandwritingTrainer</name>
     <message>
         <source>Matched: </source>
-        <translation>Ressemblance :</translation>
+        <translation>Ressemblance : </translation>
     </message>
     <message>
         <source>Similar to: </source>
-        <translation>Similaire à :</translation>
+        <translation>Similaire à : </translation>
     </message>
     <message>
         <source>%1%</source>
@@ -95,14 +95,14 @@
     </message>
     <message>
         <source>Character:</source>
-        <translation>Caractère :</translation>
+        <translation>Caractère : </translation>
     </message>
 </context>
 <context>
     <name>QIMPenPrefBase</name>
     <message>
         <source>Multi-stroke character timeout:</source>
-        <translation>Délais d&apos;écriture des caractères multi-trait :</translation>
+        <translation>Délais d&apos;écriture des caractères multi-trait : </translation>
     </message>
     <message>
         <source>ms</source>
@@ -129,7 +129,7 @@
     </message>
     <message>
         <source>Character Profile:</source>
-        <translation>Profile du caractère :</translation>
+        <translation>Profile du caractère : </translation>
     </message>
     <message>
         <source>Preferences</source>

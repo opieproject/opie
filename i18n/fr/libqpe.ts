@@ -215,11 +215,11 @@ de cette liste</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation>Catégorie :</translation>
+        <translation>Catégorie : </translation>
     </message>
     <message>
         <source>Start Search at:</source>
-        <translation>Débuter la recherche à :</translation>
+        <translation>Débuter la recherche à : </translation>
     </message>
     <message>
         <source>Dec 02 01</source>
@@ -285,19 +285,19 @@ de cette liste</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation>Infos :</translation>
+        <translation>Infos : </translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation>Type :</translation>
+        <translation>Type : </translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Nom :</translation>
+        <translation>Nom : </translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation>Emplacement :</translation>
+        <translation>Emplacement : </translation>
     </message>
     <message>
         <source>Fast load (consumes memory)</source>

@@ -253,7 +253,7 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>To:</source>
-        <translation>A :</translation>
+        <translation>A : </translation>
     </message>
     <message>
         <source>Export As</source>
@@ -261,11 +261,11 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Nom :</translation>
+        <translation>Nom : </translation>
     </message>
     <message>
         <source>Format:</source>
-        <translation>Format :</translation>
+        <translation>Format : </translation>
     </message>
     <message>
         <source>DrawPad - Export</source>
@@ -323,7 +323,7 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Titre :</translation>
+        <translation>Titre : </translation>
     </message>
     <message>
         <source>Size</source>
@@ -331,11 +331,11 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Largeur :</translation>
+        <translation>Largeur : </translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Hauteur :</translation>
+        <translation>Hauteur : </translation>
     </message>
 </context>
 <context>
@@ -350,11 +350,11 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Titre :</translation>
+        <translation>Titre : </translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation>Date :</translation>
+        <translation>Date : </translation>
     </message>
     <message>
         <source>Size</source>
@@ -362,11 +362,11 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Largeur :</translation>
+        <translation>Largeur : </translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Hauteur :</translation>
+        <translation>Hauteur : </translation>
     </message>
 </context>
 <context>

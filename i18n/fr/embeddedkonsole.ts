@@ -15,11 +15,11 @@
     </message>
     <message>
         <source>&lt;B&gt;Commands&lt;/B&gt;:</source>
-        <translation>&lt;B&gt;Commandes de l&apos;actuelle liste&lt;/B&gt; :</translation>
+        <translation>&lt;B&gt;Commandes de l&apos;actuelle liste&lt;/B&gt; : </translation>
     </message>
     <message>
         <source>&lt;B&gt;Suggested Commands&lt;/B&gt;:</source>
-        <translation>&lt;B&gt;Autres commandes suggérées&lt;/B&gt; :</translation>
+        <translation>&lt;B&gt;Autres commandes suggérées&lt;/B&gt; : </translation>
     </message>
 </context>
 <context>
@@ -212,7 +212,7 @@
     </message>
     <message>
         <source>Enter command to add:</source>
-        <translation>&lt;B&gt;Entrez commande à ajouter&lt;/B&gt; :</translation>
+        <translation>&lt;B&gt;Entrez commande à ajouter&lt;/B&gt; : </translation>
     </message>
 </context>
 </TS>

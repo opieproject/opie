@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation>Nom :</translation>
+        <translation>Nom : </translation>
     </message>
     <message>
         <source>Enter name of checkbook here.</source>
@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Type:</source>
-        <translation>Type :</translation>
+        <translation>Type : </translation>
     </message>
     <message>
         <source>Select type of checkbook here.</source>
@@ -64,7 +64,7 @@
     </message>
     <message>
         <source>Bank:</source>
-        <translation>Banque :</translation>
+        <translation>Banque : </translation>
     </message>
     <message>
         <source>Enter name of the bank for this checkbook here.</source>
@@ -72,7 +72,7 @@
     </message>
     <message>
         <source>Account number:</source>
-        <translation>N° compte :</translation>
+        <translation>N° compte : </translation>
     </message>
     <message>
         <source>Enter account number for this checkbook here.</source>
@@ -80,7 +80,7 @@
     </message>
     <message>
         <source>PIN number:</source>
-        <translation>N° PIN :</translation>
+        <translation>N° PIN : </translation>
     </message>
     <message>
         <source>Enter PIN number for this checkbook here.</source>
@@ -88,7 +88,7 @@
     </message>
     <message>
         <source>Starting balance:</source>
-        <translation>Solde :</translation>
+        <translation>Solde : </translation>
     </message>
     <message>
         <source>Enter the initial balance for this checkbook here.</source>
@@ -96,7 +96,7 @@
     </message>
     <message>
         <source>Notes:</source>
-        <translation>Notes :</translation>
+        <translation>Notes : </translation>
     </message>
     <message>
         <source>Enter any additional information for this checkbook here.</source>
@@ -208,7 +208,7 @@ Pour trier la liste par rapport à un champ spécifique, cliquez sur le nom de l
     </message>
     <message>
         <source>Please enter your password:</source>
-        <translation>Veuillez entrer votre mot de passe :</translation>
+        <translation>Veuillez entrer votre mot de passe : </translation>
     </message>
     <message>
         <source>Confirm password</source>
@@ -216,11 +216,11 @@ Pour trier la liste par rapport à un champ spécifique, cliquez sur le nom de l
     </message>
     <message>
         <source>Please confirm your password:</source>
-        <translation>Veuillez confirmer votre mot de passe :</translation>
+        <translation>Veuillez confirmer votre mot de passe : </translation>
     </message>
     <message>
         <source>Please enter your password to confirm removal of password protection:</source>
-        <translation>Veuillez entrer votre mot de passe pour confirmer la désactivation de la protection par mot de passe :</translation>
+        <translation>Veuillez entrer votre mot de passe pour confirmer la désactivation de la protection par mot de passe : </translation>
     </message>
 </context>
 <context>
@@ -231,7 +231,7 @@ Pour trier la liste par rapport à un champ spécifique, cliquez sur le nom de l
     </message>
     <message>
         <source>Enter currency symbol:</source>
-        <translation>Entrer le symbole de la devise :</translation>
+        <translation>Entrer le symbole de la devise : </translation>
     </message>
     <message>
         <source>Enter your local currency symbol here.</source>
@@ -329,7 +329,7 @@ Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;L
     </message>
     <message>
         <source>Please enter your password:</source>
-        <translation>Veuillez entrer un mot de passe :</translation>
+        <translation>Veuillez entrer un mot de passe : </translation>
     </message>
 </context>
 <context>
@@ -360,7 +360,7 @@ Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;L
     </message>
     <message>
         <source>Number:</source>
-        <translation>Numéro :</translation>
+        <translation>Numéro : </translation>
     </message>
     <message>
         <source>Enter check number here.</source>
@@ -368,7 +368,7 @@ Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;L
     </message>
     <message>
         <source>Description:</source>
-        <translation>Description :</translation>
+        <translation>Description : </translation>
     </message>
     <message>
         <source>Enter description of transaction here.</source>
@@ -376,7 +376,7 @@ Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;L
     </message>
     <message>
         <source>Category:</source>
-        <translation>Catégorie :</translation>
+        <translation>Catégorie : </translation>
     </message>
     <message>
         <source>Select transaction category here.</source>
@@ -384,7 +384,7 @@ Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;L
     </message>
     <message>
         <source>Type:</source>
-        <translation>Type :</translation>
+        <translation>Type : </translation>
     </message>
     <message>
         <source>Select transaction type here.
@@ -396,7 +396,7 @@ Les options disponibles varient suivant le type d&apos;opération : débit ou cr
     </message>
     <message>
         <source>Amount:</source>
-        <translation>Montant :</translation>
+        <translation>Montant : </translation>
     </message>
     <message>
         <source>Enter the amount of transaction here.
@@ -408,7 +408,7 @@ La valeur entrée devrait toujours être positive.</translation>
     </message>
     <message>
         <source>Fee:</source>
-        <translation>Frais :</translation>
+        <translation>Frais : </translation>
     </message>
     <message>
         <source>Enter any fee amount assoiciated with this transaction.
@@ -420,7 +420,7 @@ La valeur entrée devrait toujours être positive.</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation>Notes :</translation>
+        <translation>Notes : </translation>
     </message>
     <message>
         <source>Enter any additional information for this transaction here.</source>

@@ -12,11 +12,11 @@
     </message>
     <message>
         <source>Press:</source>
-        <translation>Presser :</translation>
+        <translation>Presser : </translation>
     </message>
     <message>
         <source>Hold:</source>
-        <translation>Tenir :</translation>
+        <translation>Tenir : </translation>
     </message>
     <message>
         <source>Beam VCard</source>

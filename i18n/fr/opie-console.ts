@@ -155,11 +155,11 @@
     </message>
     <message>
         <source>Name :</source>
-        <translation>Nom :</translation>
+        <translation>Nom : </translation>
     </message>
     <message>
         <source>Value :</source>
-        <translation>Valeur :</translation>
+        <translation>Valeur : </translation>
     </message>
     <message>
         <source>Remove</source>
@@ -189,11 +189,11 @@
     </message>
     <message>
         <source>Terminal Emulation:</source>
-        <translation>Emulation de Terminal :</translation>
+        <translation>Emulation de Terminal : </translation>
     </message>
     <message>
         <source>IO Layer:</source>
-        <translation>Gestionnaire d&apos;Entrée/Sortie :</translation>
+        <translation>Gestionnaire d&apos;Entrée/Sortie : </translation>
     </message>
     <message>
         <source>Look</source>
@@ -201,7 +201,7 @@
     </message>
     <message>
         <source>Foreground:</source>
-        <translation>Premier plan :</translation>
+        <translation>Premier plan : </translation>
     </message>
     <message>
         <source>Black</source>
@@ -217,11 +217,11 @@
     </message>
     <message>
         <source>Background:</source>
-        <translation>Arrière plan :</translation>
+        <translation>Arrière plan : </translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation>Fonte :</translation>
+        <translation>Fonte : </translation>
     </message>
     <message>
         <source>Micro</source>
@@ -493,11 +493,11 @@
     <name>ModemConfigWidget</name>
     <message>
         <source>Modem is attached to:</source>
-        <translation>Modem attaché à :</translation>
+        <translation>Modem attaché à : </translation>
     </message>
     <message>
         <source>Enter telefon number here:</source>
-        <translation>Entrer le numéro de téléphone ici :</translation>
+        <translation>Entrer le numéro de téléphone ici : </translation>
     </message>
     <message>
         <source>AT commands</source>

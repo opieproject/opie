@@ -32,11 +32,11 @@
     </message>
     <message>
         <source>Found:</source>
-        <translation>Trouvé :</translation>
+        <translation>Trouvé : </translation>
     </message>
     <message>
         <source>Lost:</source>
-        <translation>Perdu :</translation>
+        <translation>Perdu : </translation>
     </message>
 </context>
 </TS>

@@ -55,7 +55,7 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>Sorry, no appropriate decoders found for this file: &lt;i&gt;</source>
-        <translation>Désolé, impossible de trouvé un décodeur approprié pour ce fichier: &lt;i&gt;</translation>
+        <translation>Désolé, impossible de trouvé un décodeur approprié pour ce fichier : &lt;i&gt;</translation>
     </message>
     <message>
         <source>Error opening file</source>
@@ -63,15 +63,15 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>Sorry, an error occured trying to play the file: &lt;i&gt;</source>
-        <translation>Une erreur est survenue lors l&apos;essai de la lecture du fichier: &lt;i&gt;</translation>
+        <translation>Une erreur est survenue lors de l&apos;essai de lecture du fichier : &lt;i&gt;</translation>
     </message>
     <message>
         <source> File: </source>
-        <translation>Fichier :</translation>
+        <translation>Fichier : </translation>
     </message>
     <message>
         <source>, Length: </source>
-        <translation>, Durée:</translation>
+        <translation>, Durée :</translation>
     </message>
     <message>
         <source>Volume</source>
@@ -201,7 +201,7 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>OpiePlayer: </source>
-        <translation>OpiePlayer :</translation>
+        <translation>OpiePlayer : </translation>
     </message>
     <message>
         <source>Out of space</source>

@@ -99,19 +99,19 @@
     </message>
     <message>
         <source>Sample Rate:</source>
-        <translation>Taux d&apos;échantillonage :</translation>
+        <translation>Taux d&apos;échantillonage : </translation>
     </message>
     <message>
         <source>Recording Directory:</source>
-        <translation>Répertoire d&apos;enregistrement :</translation>
+        <translation>Répertoire d&apos;enregistrement : </translation>
     </message>
     <message>
         <source>Recording Key:</source>
-        <translation>Touche d&apos;enregistrement :</translation>
+        <translation>Touche d&apos;enregistrement : </translation>
     </message>
     <message>
         <source>Recording Limit in seconds:</source>
-        <translation>Temps d&apos;enreg. max en secondes :</translation>
+        <translation>Temps d&apos;enreg. max en secondes : </translation>
     </message>
     <message>
         <source>Unlimited</source>

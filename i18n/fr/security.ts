@@ -65,7 +65,7 @@ Accès refusé</translation>
     </message>
     <message>
         <source>Accept sync from network:</source>
-        <translation>Accepter la synchronisation par réseau de :</translation>
+        <translation>Accepter la synchronisation par réseau de : </translation>
     </message>
     <message>
         <source>192.168.0.0/16</source>

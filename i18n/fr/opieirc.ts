@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>Socket error : </source>
-        <translation>Erreur de socket :</translation>
+        <translation>Erreur de socket : </translation>
     </message>
     <message>
         <source>Connection closed</source>
@@ -61,15 +61,15 @@
     <name>IRCMessageParser</name>
     <message>
         <source>Received unhandled numeric command : </source>
-        <translation type="obsolete">Commande numérique reçu non supporté :</translation>
+        <translation type="obsolete">Commande numérique reçu non supporté : </translation>
     </message>
     <message>
         <source>Received unhandled ctcp command : </source>
-        <translation type="obsolete">Commande ctcp reçu non supporté :</translation>
+        <translation type="obsolete">Commande ctcp reçu non supporté : </translation>
     </message>
     <message>
         <source>Received unhandled literal command : </source>
-        <translation type="obsolete">Commande littérale reçu non supporté :</translation>
+        <translation type="obsolete">Commande littérale reçu non supporté : </translation>
     </message>
     <message>
         <source>Nonexistant channel join - desynchronized?</source>
@@ -283,7 +283,7 @@
     <name>IRCServerEditor</name>
     <message>
         <source>Profile name :</source>
-        <translation>Nom profile :</translation>
+        <translation>Nom profile : </translation>
     </message>
     <message>
         <source>The name of this server profile in the overview</source>
@@ -291,7 +291,7 @@
     </message>
     <message>
         <source>Hostname :</source>
-        <translation>Nom d&apos;hôte :</translation>
+        <translation>Nom d&apos;hôte : </translation>
     </message>
     <message>
         <source>The server to connect to - can be any valid host name or IP address</source>
@@ -299,7 +299,7 @@
     </message>
     <message>
         <source>Port :</source>
-        <translation>Port :</translation>
+        <translation>Port : </translation>
     </message>
     <message>
         <source>The server port to connect to. Usually 6667</source>
@@ -307,7 +307,7 @@
     </message>
     <message>
         <source>Nickname :</source>
-        <translation>Surnom :</translation>
+        <translation>Surnom : </translation>
     </message>
     <message>
         <source>Your nick name on the IRC network</source>
@@ -315,7 +315,7 @@
     </message>
     <message>
         <source>Realname :</source>
-        <translation>Nom Réel :</translation>
+        <translation>Nom Réel : </translation>
     </message>
     <message>
         <source>Your real name</source>
@@ -323,7 +323,7 @@
     </message>
     <message>
         <source>Password :</source>
-        <translation>Mot de passe :</translation>
+        <translation>Mot de passe : </translation>
     </message>
     <message>
         <source>Password to connect to the server (if required)</source>
@@ -331,7 +331,7 @@
     </message>
     <message>
         <source>Channels :</source>
-        <translation>Canaux :</translation>
+        <translation>Canaux : </translation>
     </message>
     <message>
         <source>Comma-Separated list of all channels you would like to join automatically</source>
@@ -432,7 +432,7 @@ par des virgules et commancent par &apos;#&apos; or &apos;+&apos;</translation>
     <name>IRCSettings</name>
     <message>
         <source>Lines displayed :</source>
-        <translation>Lignes affichées :</translation>
+        <translation>Lignes affichées : </translation>
     </message>
     <message>
         <source>Amount of lines to be displayed in chats before old lines get deleted - this is necessary to restrain memory consumption. Set to 0 if you don&apos;t need this</source>
@@ -444,7 +444,7 @@ par des virgules et commancent par &apos;#&apos; or &apos;+&apos;</translation>
     </message>
     <message>
         <source>Background color :</source>
-        <translation>Couleur d&apos;arrière plan :</translation>
+        <translation>Couleur d&apos;arrière plan : </translation>
     </message>
     <message>
         <source>Background color to be used in chats</source>
@@ -452,7 +452,7 @@ par des virgules et commancent par &apos;#&apos; or &apos;+&apos;</translation>
     </message>
     <message>
         <source>Normal text color :</source>
-        <translation>Couleur du texte simple :</translation>
+        <translation>Couleur du texte simple : </translation>
     </message>
     <message>
         <source>Text color to be used in chats</source>
@@ -460,7 +460,7 @@ par des virgules et commancent par &apos;#&apos; or &apos;+&apos;</translation>
     </message>
     <message>
         <source>Error color :</source>
-        <translation>Couleur d&apos;erreur :</translation>
+        <translation>Couleur d&apos;erreur : </translation>
     </message>
     <message>
         <source>Text color to be used to display errors</source>
@@ -468,7 +468,7 @@ par des virgules et commancent par &apos;#&apos; or &apos;+&apos;</translation>
     </message>
     <message>
         <source>Text written by yourself :</source>
-        <translation>Couleur de votre texte :</translation>
+        <translation>Couleur de votre texte : </translation>
     </message>
     <message>
         <source>Text color to be used to identify text written by yourself</source>
@@ -476,7 +476,7 @@ par des virgules et commancent par &apos;#&apos; or &apos;+&apos;</translation>
     </message>
     <message>
         <source>Text written by others :</source>
-        <translation>Couleur du texte des autres :</translation>
+        <translation>Couleur du texte des autres : </translation>
     </message>
     <message>
         <source>Text color to be used to identify text written by others</source>
@@ -484,7 +484,7 @@ par des virgules et commancent par &apos;#&apos; or &apos;+&apos;</translation>
     </message>
     <message>
         <source>Text written by the server :</source>
-        <translation>Couleur du texte du serveur :</translation>
+        <translation>Couleur du texte du serveur : </translation>
     </message>
     <message>
         <source>Text color to be used to identify text written by the server</source>
@@ -492,7 +492,7 @@ par des virgules et commancent par &apos;#&apos; or &apos;+&apos;</translation>
     </message>
     <message>
         <source>Notifications :</source>
-        <translation>Notifications :</translation>
+        <translation>Notifications : </translation>
     </message>
     <message>
         <source>Text color to be used to display notifications</source>

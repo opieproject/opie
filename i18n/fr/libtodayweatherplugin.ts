@@ -11,7 +11,7 @@
     <name>WeatherPluginConfig</name>
     <message>
         <source>Enter ICAO location identifier:</source>
-        <translation>Entrez l&apos;indentificateur de lieu ICAO :</translation>
+        <translation>Entrez l&apos;indentificateur de lieu ICAO : </translation>
     </message>
     <message>
         <source>Enter the 4 letter code for the desired location here.  See http://www.nws.noaa.gov/tg/siteloc.shtml to find a location near you.</source>
@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Update frequency (in minutes):</source>
-        <translation>Fréquence de mise à jour (en minutes) :</translation>
+        <translation>Fréquence de mise à jour (en minutes) : </translation>
     </message>
     <message>
         <source>Select how often (in minutes) you want the weather to be updated.</source>
@@ -46,16 +46,16 @@
     </message>
     <message>
         <source>Temp: </source>
-        <translation>Temps :</translation>
+        <translation>Temps : </translation>
     </message>
     <message>
         <source>  Wind: </source>
-        <translation>Vent :</translation>
+        <translation>Vent : </translation>
     </message>
     <message>
         <source>
 Pres: </source>
-        <translation>Pression :</translation>
+        <translation>Pression : </translation>
     </message>
     <message>
         <source>Current weather data not available.</source>

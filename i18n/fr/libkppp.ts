@@ -48,7 +48,7 @@ the account &quot;%1&quot;?</source>
     </message>
     <message>
         <source>Edit Account: </source>
-        <translation>Editer Compte :</translation>
+        <translation>Editer Compte : </translation>
     </message>
     <message>
         <source>Dial</source>
@@ -103,7 +103,7 @@ the account &quot;%1&quot;?</source>
     <name>AuthWidget</name>
     <message>
         <source>Authentication: </source>
-        <translation>Authentification :</translation>
+        <translation>Authentification : </translation>
     </message>
     <message>
         <source>Script-based</source>
@@ -148,7 +148,7 @@ sécurisé qu&apos;il procure. Si vous ne connaissez par la méthode de connexio
     </message>
     <message>
         <source>Username: </source>
-        <translation>Nom Utilisateur :</translation>
+        <translation>Nom Utilisateur : </translation>
     </message>
     <message>
         <source>Enter your username here...</source>
@@ -156,7 +156,7 @@ sécurisé qu&apos;il procure. Si vous ne connaissez par la méthode de connexio
     </message>
     <message>
         <source>Password: </source>
-        <translation>Mot de Passe :</translation>
+        <translation>Mot de Passe : </translation>
     </message>
     <message>
         <source>Enter your password here</source>
@@ -216,7 +216,7 @@ Attention à ne pas donner les droits de lecture à d&apos;autres personnes !</t
     <name>DNSWidget</name>
     <message>
         <source>Domain name:</source>
-        <translation>Nom de domaine :</translation>
+        <translation>Nom de domaine : </translation>
     </message>
     <message>
         <source>If you enter a domain name here, this domain
@@ -236,7 +236,7 @@ Laissez le champs vide pour désactiver cette fonctionnalité.</translation>
     </message>
     <message>
         <source>Configuration:</source>
-        <translation>Configuration :</translation>
+        <translation>Configuration : </translation>
     </message>
     <message>
         <source>Automatic</source>
@@ -248,7 +248,7 @@ Laissez le champs vide pour désactiver cette fonctionnalité.</translation>
     </message>
     <message>
         <source>DNS IP address:</source>
-        <translation>Adresse IP DNS :</translation>
+        <translation>Adresse IP DNS : </translation>
     </message>
     <message>
         <source>&lt;p&gt;Allows you to specify a new DNS server to be
@@ -289,7 +289,7 @@ sélectionné de la liste des DNS</translation>
     </message>
     <message>
         <source>DNS address list:</source>
-        <translation>Liste des Adresses DNS :</translation>
+        <translation>Liste des Adresses DNS : </translation>
     </message>
     <message>
         <source>&lt;p&gt;This shows all defined DNS servers to use
@@ -344,7 +344,7 @@ dispositif &quot;%1&quot; ?</translation>
     </message>
     <message>
         <source>Edit Device: </source>
-        <translation>Editer Dispositif :</translation>
+        <translation>Editer Dispositif : </translation>
     </message>
     <message>
         <source>&amp;Device</source>
@@ -389,7 +389,7 @@ nouveaux paramêtres</translation>
     <name>DialWidget</name>
     <message>
         <source>Connection name:</source>
-        <translation>Nom de la Connexion :</translation>
+        <translation>Nom de la Connexion : </translation>
     </message>
     <message>
         <source>Type in a unique name for this connection</source>
@@ -397,7 +397,7 @@ nouveaux paramêtres</translation>
     </message>
     <message>
         <source>Phone number:</source>
-        <translation>Numéro de téléphone :</translation>
+        <translation>Numéro de téléphone : </translation>
     </message>
     <message>
         <source>&amp;Add...</source>
@@ -437,7 +437,7 @@ de composer le numéro suivant et ainsi de suite</translation>
     </message>
     <message>
         <source>Before connect:</source>
-        <translation>Avant connexion :</translation>
+        <translation>Avant connexion : </translation>
     </message>
     <message>
         <source>Allows you to run a program &lt;b&gt;before&lt;/b&gt; a connection
@@ -454,7 +454,7 @@ de réception de fax qui utiliserait la ligne.</translation>
     </message>
     <message>
         <source>Upon connect:</source>
-        <translation>A la connexion :</translation>
+        <translation>A la connexion : </translation>
     </message>
     <message>
         <source>Allows you to run a program &lt;b&gt;after&lt;/b&gt; a connection
@@ -470,7 +470,7 @@ Très utile pour lancer le gestionnaire d&apos;E-Mail ou de Nouvelles</translati
     </message>
     <message>
         <source>Before disconnect:</source>
-        <translation>Avant déconnexion :</translation>
+        <translation>Avant déconnexion : </translation>
     </message>
     <message>
         <source>Allows you to run a program &lt;b&gt;before&lt;/b&gt; a connection
@@ -482,7 +482,7 @@ programme n&apos;est pas terminé.</translation>
     </message>
     <message>
         <source>Upon disconnect:</source>
-        <translation>Après déconnexion :</translation>
+        <translation>Après déconnexion : </translation>
     </message>
     <message>
         <source>Allows you to run a program &lt;b&gt;after&lt;/b&gt; a connection
@@ -530,7 +530,7 @@ to use as gateway (see &lt;i&gt;Default Gateway&lt;/i&gt; above)</source>
     </message>
     <message>
         <source>Gateway IP address:</source>
-        <translation>Adresse IP passerelle :</translation>
+        <translation>Adresse IP passerelle : </translation>
     </message>
     <message>
         <source>Assign the default route to this gateway</source>
@@ -589,7 +589,7 @@ faites.</translation>
     </message>
     <message>
         <source>IP address:</source>
-        <translation>Adresse IP :</translation>
+        <translation>Adresse IP : </translation>
     </message>
     <message>
         <source>If your computer has a permanent internet
@@ -599,7 +599,7 @@ vous devez l&apos;entrer ici.</translation>
     </message>
     <message>
         <source>Subnet mask:</source>
-        <translation>Masque de sous réseau :</translation>
+        <translation>Masque de sous réseau : </translation>
     </message>
     <message>
         <source>&lt;p&gt;If your computer has a static Internet address,
@@ -677,11 +677,11 @@ Veuillez entrer un mot de passe</translation>
     <name>ModemWidget</name>
     <message>
         <source>Modem &amp;name:</source>
-        <translation>&amp;Nom de modem :</translation>
+        <translation>&amp;Nom de modem : </translation>
     </message>
     <message>
         <source>Modem de&amp;vice:</source>
-        <translation>&amp;Device :</translation>
+        <translation>&amp;Device : </translation>
     </message>
     <message>
         <source>This specifies the serial port your modem is attached 
@@ -701,7 +701,7 @@ sélectionner /dev/ttyIx (avec x de 0 à 9 en général).</translation>
     </message>
     <message>
         <source>&amp;Flow control:</source>
-        <translation>&amp;Controle de flux :</translation>
+        <translation>&amp;Controle de flux : </translation>
     </message>
     <message>
         <source>Hardware [CRTSCTS]</source>
@@ -728,7 +728,7 @@ En général, il s&apos;agit du controle de flux matériel RTS/CTS</translation>
     </message>
     <message>
         <source>&amp;Line termination:</source>
-        <translation>&amp;Fin de ligne :</translation>
+        <translation>&amp;Fin de ligne : </translation>
     </message>
     <message>
         <source>&lt;p&gt;Specifies how AT commands are sent to your
@@ -748,7 +748,7 @@ devriez essayer un autre paramêtrage ici.
     </message>
     <message>
         <source>Co&amp;nnection speed:</source>
-        <translation>&amp;Vitesse de connexion :</translation>
+        <translation>&amp;Vitesse de connexion : </translation>
     </message>
     <message>
         <source>Specifies the speed your modem and the serial
@@ -790,7 +790,7 @@ ce type de fichier.
     </message>
     <message>
         <source>Modem timeout:</source>
-        <translation>Délai d&apos;attente :</translation>
+        <translation>Délai d&apos;attente : </translation>
     </message>
     <message>
         <source> sec</source>
@@ -809,7 +809,7 @@ La  valeur recommandée est de 30 secondes.</translation>
     <name>ModemWidget2</name>
     <message>
         <source>Busy wait:</source>
-        <translation>Attente Tonalité :</translation>
+        <translation>Attente Tonalité : </translation>
     </message>
     <message>
         <source>&amp;Wait for dial tone before dialing</source>
@@ -853,7 +853,7 @@ La valeur par défaut est 0.
     </message>
     <message>
         <source>Modem &amp;volume:</source>
-        <translation>&amp;Volume modem :</translation>
+        <translation>&amp;Volume modem : </translation>
     </message>
     <message>
         <source>Most modems have a speaker which makes
@@ -946,7 +946,7 @@ de vous envoyer ces informations</translation>
     </message>
     <message>
         <source>Argument:</source>
-        <translation>Argument :</translation>
+        <translation>Argument : </translation>
     </message>
     <message>
         <source>Add</source>
@@ -969,7 +969,7 @@ de vous envoyer ces informations</translation>
     </message>
     <message>
         <source>Enter a phone number:</source>
-        <translation>Entrer un numéro de téléphone :</translation>
+        <translation>Entrer un numéro de téléphone : </translation>
     </message>
 </context>
 <context>

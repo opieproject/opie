@@ -263,7 +263,7 @@ founi gratuitement !</translation>
     </message>
     <message>
         <source>Select Contact Order:</source>
-        <translation>Ordre de recherche de contact :</translation>
+        <translation>Ordre de recherche de contact : </translation>
     </message>
     <message>
         <source>Up</source>

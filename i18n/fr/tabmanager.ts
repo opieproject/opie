@@ -8,19 +8,19 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation>Nom :</translation>
+        <translation>Nom : </translation>
     </message>
     <message>
         <source>Icon:</source>
-        <translation>Icône :</translation>
+        <translation>Icône : </translation>
     </message>
     <message>
         <source>Exec:</source>
-        <translation>Exec :</translation>
+        <translation>Exec : </translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation>Commentaire :</translation>
+        <translation>Commentaire : </translation>
     </message>
 </context>
 <context>

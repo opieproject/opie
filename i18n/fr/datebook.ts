@@ -242,7 +242,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Start Time:</source>
-        <translation>Heure de début :</translation>
+        <translation>Heure de début : </translation>
     </message>
     <message>
         <source>:00</source>
@@ -266,7 +266,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Row style:</source>
-        <translation>Style de lignes :</translation>
+        <translation>Style de lignes : </translation>
     </message>
     <message>
         <source>Default</source>
@@ -287,7 +287,7 @@ Quitter ?</translation>
     <message>
         <source>Default view:</source>
         <translation>Démarrer 
-dans :</translation>
+dans : </translation>
     </message>
     <message>
         <source>Day</source>
@@ -343,7 +343,7 @@ dans :</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation>Catégorie :</translation>
+        <translation>Catégorie : </translation>
     </message>
 </context>
 <context>
@@ -772,7 +772,7 @@ et </translation>
     </message>
     <message>
         <source>Every:</source>
-        <translation>Chaque :</translation>
+        <translation>Chaque : </translation>
     </message>
     <message>
         <source>Frequency</source>
@@ -780,7 +780,7 @@ et </translation>
     </message>
     <message>
         <source>End On:</source>
-        <translation>Fin le :</translation>
+        <translation>Fin le : </translation>
     </message>
     <message>
         <source>No End Date</source>
