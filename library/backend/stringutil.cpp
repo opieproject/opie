@@ -61,11 +61,11 @@ static const char  collationHack[] = {
 0x19, //C-Y
 0x1a, //C-Z
 0x1b, //C-[
-0x1c, //C-\ 
+0x1c, /* C-\ */
 0x1d, //C-]
 0x1e, //C-^
 0x1f, //C-_
-' ', // 
+' ', //
 '!', //!
 '"', //"
 '#', //#
@@ -125,7 +125,7 @@ static const char  collationHack[] = {
 'Y', //Y
 'Z', //Z
 '[', //[
-'\\', //\ 
+'\\', /* \ */
 ']', //]
 '^', //^
 '_', //_
@@ -189,7 +189,7 @@ static const char  collationHack[] = {
 0x99, //C-M-Y
 0x9a, //C-M-Z
 0x9b, //C-M-[
-0x9c, //C-M-\ 
+0x9c, /* C-M-\ */
 0x9d, //C-M-]
 0x9e, //C-M-^
 0x9f, //C-M-_
@@ -319,7 +319,7 @@ QString buildSortKey( const QString & s1, const QString & s2 )
     return res;
 }
 
-QString buildSortKey( const QString & s1, const QString & s2, 
+QString buildSortKey( const QString & s1, const QString & s2,
 		      const QString & s3 )
 {
     QString res = s1 + QChar( '\0' ) +  s2 + QChar( '\0' ) + s3;
@@ -337,7 +337,7 @@ int compare( const QString & s1, const QString & s2 )
 {
     const QChar* u1 = s1.unicode();
     const QChar* u2 = s2.unicode();
-    
+
     if ( u1 == u2 )
 	return 0;
     if ( u1 == 0 )
