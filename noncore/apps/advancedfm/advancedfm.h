@@ -18,6 +18,7 @@
 #include <qdir.h>
 #include <qstring.h>
 #include <qpoint.h>
+#include <qstringlist.h>
 
 class QVBoxLayout;
 class QHBoxLayout;
@@ -93,14 +94,15 @@ protected slots:
     void doProperties();
     void runCommand();
     void runCommandStd();
-    QString getPath();
+    QStringList getPath();
+    void mkSym();
   void switchToLocalTab();
   void switchToRemoteTab();
 
 protected:
-    QGridLayout *tabLayout, *tabLayout_2, *tabLayout_3;
+  QGridLayout *tabLayout, *tabLayout_2, *tabLayout_3;
   QStringList remoteDirPathStringList, localDirPathStringList;
-    
+  void keyReleaseEvent( QKeyEvent *);    
 protected slots:
   void homeButtonPushed();
   void docButtonPushed();
