@@ -1,4 +1,4 @@
-  config NS2NS2WORK
+  config NS2NETWORK
     boolean "opie-networksettings2plugin-ipsetup (set up TCP/IP)"
     default "n" if NS2
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && NS2 && NS2CORE
