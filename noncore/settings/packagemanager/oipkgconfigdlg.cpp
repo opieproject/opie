@@ -31,6 +31,8 @@ _;:,   .>  :=|.         This program is free software; you can
 
 #include "oipkgconfigdlg.h"
 
+#include <opie2/ofiledialog.h>
+
 #include <qpe/resource.h>
 
 #include <qcheckbox.h>
@@ -83,8 +85,6 @@ OIpkgConfigDlg::OIpkgConfigDlg( OIpkg *ipkg, bool installOptions, QWidget *paren
     {
         m_tabWidget.addTab( m_optionsWidget, "exec", tr( "Options" ) );
     }
-
-    //showMaximized();
 }
 
 void OIpkgConfigDlg::accept()
@@ -255,7 +255,7 @@ void OIpkgConfigDlg::initDestinationWidget()
     grplayout->addWidget( label, 0, 0 );
     m_destName = new QLineEdit( grpbox );
     QWhatsThis::add( m_destName, tr( "Enter the name of this entry here." ) );
-    grplayout->addWidget( m_destName, 0, 1 );
+    grplayout->addMultiCellWidget( m_destName, 0, 0, 1, 2 );
 
     label = new QLabel( tr( "Location:" ), grpbox );
     QWhatsThis::add( label, tr( "Enter the absolute directory path of this entry here." ) );
@@ -263,15 +263,20 @@ void OIpkgConfigDlg::initDestinationWidget()
     m_destLocation = new QLineEdit( grpbox );
     QWhatsThis::add( m_destLocation, tr( "Enter the absolute directory path of this entry here." ) );
     grplayout->addWidget( m_destLocation, 1, 1 );
+    btn = new QPushButton( Resource::loadPixmap( "folder" ), QString::null, grpbox );
+    btn->setMaximumWidth( btn->height() );
+    QWhatsThis::add( btn, tr( "Tap here to select the desired location." ) );
+    connect( btn, SIGNAL(clicked()), this, SLOT(slotDestSelectPath()) );
+    grplayout->addWidget( btn, 1, 2 );
 
     m_destActive = new QCheckBox( tr( "Active" ), grpbox );
     QWhatsThis::add( m_destActive, tr( "Tap here to indicate whether this entry is active or not." ) );
-    grplayout->addMultiCellWidget( m_destActive, 2, 2, 0, 1 );
+    grplayout->addMultiCellWidget( m_destActive, 2, 2, 0, 2 );
 
     btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Update" ), grpbox );
     QWhatsThis::add( btn, tr( "Tap here to update the entry's information." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotDestUpdate()) );
-    grplayout->addMultiCellWidget( btn, 3, 3, 0, 1 );
+    grplayout->addMultiCellWidget( btn, 3, 3, 0, 2 );
 }
 
 void OIpkgConfigDlg::initProxyWidget()
@@ -582,6 +587,14 @@ void OIpkgConfigDlg::slotDestDelete()
         m_configs->removeRef( destination );
         m_destList->removeItem( m_destCurrent );
     }
+}
+
+void OIpkgConfigDlg::slotDestSelectPath()
+{
+    QString path = Opie::Ui::OFileDialog::getDirectory( 0, m_destLocation->text() );
+    if ( path.at( path.length() - 1 ) == '/' )
+        path.truncate( path.length() - 1 );
+    m_destLocation->setText( path );
 }
 
 void OIpkgConfigDlg::slotDestUpdate()
