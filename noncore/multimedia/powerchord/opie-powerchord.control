@@ -1,7 +1,7 @@
 Files: bin/powerchord apps/Applications/powerchord.desktop pics/powerchord share/powerchord
 Priority: optional
 Section: opie/multimedia
-Maintainer: Camilo Mesias <camilo@mesias.co.uk>
+Maintainer: Camilo Mesias <camilo@mesias.co.uk>, ljp <lpotter@trolltech.com>
 Architecture: arm
 Version: 0.0.8
 Depends: task-opie-minimal

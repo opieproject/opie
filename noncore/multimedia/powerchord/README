@@ -1,11 +1,14 @@
-This tarball is a collection of the sources of Powerchord as a work in progress. It is provided to fulfil the conditions of the GPL.
+This tarball is a collection of the sources of Powerchord as a work in progress. It is provided to 
+fulfil the conditions of the GPL.
 
 -Cam 15 Apr 2002 camilo@mesias.co.uk
 
 
 These files are the ones I used to make the release 0.0.7 of Powerchord.
 
-Originally I had intended to release under the GPL, then under pressure of time I wanted to release as closed-source freeware, to be relicensed at a later date. For simplicity though, I have opted to provide this crude tarball and release from the start under the GPL.
+Originally I had intended to release under the GPL, then under pressure of time I wanted to release 
+as closed-source freeware, to be relicensed at a later date. For simplicity though, I have opted to 
+provide this crude tarball and release from the start under the GPL.
 
 Some of the source files do not contain the proper copyright notice yet.
 
@@ -28,10 +31,20 @@ Some of the source files do not contain the proper copyright notice yet.
 
 The make system is not foolproof.
 
-Under pressure of time I abandoned using designer and carefully hacked code into auto-generated files. I plan to go back to designer and learn how to insert these bits of code in a way that is in harmony with the original Trolltech example make files.
+Under pressure of time I abandoned using designer and carefully hacked code into auto-generated files. 
+I plan to go back to designer and learn how to insert these bits of code in a way that is in harmony 
+with the original Trolltech example make files.
 
 Credits.
-This is all my own work, with the exception that some of it is derived from the Trolltech example code. The chord algorithm was originally written in Javascript by Jim Cranwell and is used with his permission. Some of the code dates back to the original version of Powerchord that I wrote for the Agenda VR3. That was my first Agenda app and was in turn related to the code for the Agenda Power Meter application. Some of the original Agenda (fltk) include directives remain in the code, commented out... The name derives from the use of the Agenda Power application as a starting point. Power + Chord = Powerchord. Credit to a number of web resources on computing music, especially the first one I read that talked about the 12th root of 2! Credit finally to 4Front Technologies, their document 'Open Sound System - A Programmers' Guide' was most useful. This is my first use of OSS.
+This is all my own work, with the exception that some of it is derived from the Trolltech example code. 
+The chord algorithm was originally written in Javascript by Jim Cranwell and is used with his permission. 
+Some of the code dates back to the original version of Powerchord that I wrote for the Agenda VR3. 
+That was my first Agenda app and was in turn related to the code for the Agenda Power Meter application. 
+Some of the original Agenda (fltk) include directives remain in the code, commented out... 
+The name derives from the use of the Agenda Power application as a starting point. 
+Power + Chord = Powerchord. Credit to a number of web resources on computing music, especially the 
+first one I read that talked about the 12th root of 2! Credit finally to 4Front Technologies, 
+their document 'Open Sound System - A Programmers' Guide' was most useful. This is my first use of OSS.
 
 Here is a breakdown of the essential parts of this archive:
 
