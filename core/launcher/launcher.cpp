@@ -340,14 +340,29 @@ void LauncherTabWidget::setProgressStyle()
     }
 }
 
+/*
+ * FIXME
+ * The following NULL check is triggered by inserting, then removing a tab on the fly
+ * as you would if you had removable media (which I do). Without this check
+ * the first app launched after a tab removal causes qpe to Segfault.
+ * This obviously has a more sinister cause, but this works around it with no
+ * obvious adverse effects. Please FIXME
+ * bkc - 17/6/2004
+ *
+ */
+
 void LauncherTabWidget::setBusy(bool on)
 {
     if ( on )
     currentView()->setBusy(TRUE);
     else {
     for ( int i = 0; i < categoryBar->count(); i++ ) {
-        LauncherView *view = ((LauncherTab *)categoryBar->tab(i))->view;
-        view->setBusy( FALSE );
+	if (categoryBar->tab(i)) {
+	    LauncherView *view = ((LauncherTab *)categoryBar->tab(i))->view;
+	    view->setBusy( FALSE );
+	} else {
+	    odebug << "Averting Disaster with tab " << i << " == NULL! " << oendl;
+	}
     }
     }
 }
