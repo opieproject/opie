@@ -29,13 +29,13 @@ permin ()
 if [ -e /proc/hal/model ]; then
 	# fix for misconfigured devfsd
 	chmod +x /dev/sound /dev/touchscreen /dev/fb /dev/vc
-	devs = /dev/sound/dsp /dev/sound/mixer /dev/touchscreen/0 \
+	devs=/dev/sound/dsp /dev/sound/mixer /dev/touchscreen/0 \
 		/dev/fb/0 /dev/vc/0
 else
-	devs = /dev/dsp /dev/dsp1 /dev/mixer /dev/ts /dev/fb0 \
+	devs=/dev/dsp /dev/dsp1 /dev/mixer /dev/ts /dev/fb0 \
 		/dev/sharp* /dev/collie*
 fi
 
 for i in $devs; do
-	permin( $i )
+	permin $i
 done
