@@ -174,7 +174,7 @@ for a in $TOMAKE ; do
 	)
 	echo -n "."
 	appname=`grep '^TARGET' $a/$f.pro | sed 's/^TARGET.*=//' | sed 's/ //g'`
-	translation=`grep '^TRANSLATION' $a/$f.pro | sed 's,^TRANSL.*=.*i18n\/.*\/,,' | sed 's/ //g' | sed 's,\.ts.*,,' | sed 's,^lib,,' `
+	translation=`grep '^TRANSLATION.*[^+]=.*' $a/$f.pro | sed 's,^TRANSL.*=.*i18n\/.*\/,,' | sed 's/ //g' | sed 's,\.ts.*,,' | sed 's,^lib,,' `
 	if [ -n "$translation" -a -n "$appname" ]
 	then
 	    if [ $appname != $translation ]
