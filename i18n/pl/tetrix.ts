@@ -3,41 +3,41 @@
     <name>OHighscore</name>
     <message>
         <source>empty</source>
-        <translation type="unfinished"></translation>
+        <translation>pusty</translation>
     </message>
     <message>
         <source>Enter your name!</source>
-        <translation type="unfinished"></translation>
+        <translation>Wpisz swoje imie!</translation>
     </message>
 </context>
 <context>
     <name>OHighscoreDialog</name>
     <message>
         <source>Highscores</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyniki</translation>
     </message>
     <message>
         <source>#</source>
-        <translation type="unfinished"></translation>
+        <translation>#</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Imie</translation>
     </message>
     <message>
         <source>Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkty</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="unfinished">Poziom</translation>
+        <translation>Poziom</translation>
     </message>
 </context>
 <context>
     <name>QTetrix</name>
     <message>
         <source>Tetrix</source>
-        <translation type="unfinished"></translation>
+        <translation>Tetrix</translation>
     </message>
     <message>
         <source>Next</source>
@@ -57,7 +57,7 @@
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Start</translation>
     </message>
 </context>
 </TS>

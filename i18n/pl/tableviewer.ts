@@ -14,11 +14,11 @@
     <name>TVBrowseKeyEntry</name>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Przywroc</translation>
     </message>
     <message>
         <source>key</source>
-        <translation type="unfinished"></translation>
+        <translation>klucz</translation>
     </message>
 </context>
 <context>
@@ -29,41 +29,41 @@
     </message>
     <message>
         <source>Key Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa Klucza</translation>
     </message>
     <message>
         <source>Key Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ Klucza</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowy</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Usun</translation>
     </message>
     <message>
         <source>Clear All</source>
-        <translation type="unfinished"></translation>
+        <translation>Czysc Wszystkie</translation>
     </message>
 </context>
 <context>
     <name>TVListView</name>
     <message>
         <source>List View</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista</translation>
     </message>
 </context>
 <context>
     <name>TableViewerWindow</name>
     <message>
         <source>Table Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Table Viewer</translation>
     </message>
     <message>
         <source>could not load Document</source>
-        <translation type="unfinished"></translation>
+        <translation>nie mozna zaladowac Dokumentu</translation>
     </message>
 </context>
 </TS>

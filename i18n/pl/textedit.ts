@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Czcionka</translation>
     </message>
     <message>
         <source>Start with new file</source>
@@ -83,83 +83,83 @@
     </message>
     <message>
         <source>.desktop File</source>
-        <translation type="unfinished"></translation>
+        <translation>plik .desktop</translation>
     </message>
     <message>
         <source>Linked Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokument Zlinkowany</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished">Wszystkie</translation>
+        <translation>Wszystkie</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>Insert Time and Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Wstaw Czas i Date</translation>
     </message>
     <message>
         <source>Advanced Features</source>
-        <translation type="unfinished"></translation>
+        <translation>Funkcje Zaawansowane</translation>
     </message>
     <message>
         <source>Prompt on Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Pytaj przy Wychodzeniu</translation>
     </message>
     <message>
         <source>Always open linked file</source>
-        <translation type="unfinished"></translation>
+        <translation>Zawsze otwieraj zlinkowany plik</translation>
     </message>
     <message>
         <source>File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Uprawnienia Pliku</translation>
     </message>
     <message>
         <source>Search Bar Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Listwa Wyszukiwania Otwarta</translation>
     </message>
     <message>
         <source>Goto Line...</source>
-        <translation type="unfinished"></translation>
+        <translation>Idz do Linii...</translation>
     </message>
     <message>
         <source>Auto Save 5 min.</source>
-        <translation type="unfinished"></translation>
+        <translation>Autozapis co 5 min.</translation>
     </message>
     <message>
         <source>Text Editor has detected&lt;BR&gt;you selected a &lt;B&gt;.desktop&lt;/B&gt;file.&lt;BR&gt;Open&lt;B&gt;.desktop&lt;/B&gt; file or &lt;B&gt;linked&lt;/B&gt; file?</source>
-        <translation type="unfinished"></translation>
+        <translation>Edytor wykryl, ze&lt;br&gt;wybrales plik &lt;b&gt;.desktop&lt;/b&gt;.&lt;br&gt;Czy otworzyc plik &lt;b&gt;.desktop&lt;/b&gt; lub &lt;b&gt;zlinkowany&lt;/b&gt; plik?</translation>
     </message>
     <message>
         <source>Text Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Text Edit</translation>
     </message>
     <message>
         <source>Write Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapis sie nie powiodl</translation>
     </message>
     <message>
         <source>Unnamed</source>
-        <translation type="unfinished">Nienazwany</translation>
+        <translation>Nienazwany</translation>
     </message>
     <message>
         <source>Permissions</source>
-        <translation type="unfinished">Uprawnienia</translation>
+        <translation>Uprawnienia</translation>
     </message>
     <message>
         <source>Choose font</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz czcionke</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Tak</translation>
+        <translation>Tak</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Nie</translation>
+        <translation>Nie</translation>
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
@@ -167,35 +167,39 @@
     </message>
     <message>
         <source>Textedit</source>
-        <translation type="unfinished"></translation>
+        <translation>Textedit</translation>
     </message>
     <message>
         <source>Textedit detected
 you have unsaved changes
 Go ahead and save?
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Textedit wykryl, ze
+nie zapisales zmian.
+Kontynuowac i zapisac?
+</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie zapisuj</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Anuluj</translation>
     </message>
     <message>
         <source>Not enough lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Za malo linii</translation>
     </message>
     <message>
         <source>%1 - Text Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Edytor Tekstu</translation>
     </message>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy na pewno chcesz&lt;BR&gt;&lt;b&gt;usunac&lt;/b&gt; aktualny plik
+z dysku?&lt;BR&gt;Operacja jest &lt;b&gt;nieodwracalna!&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -246,7 +250,7 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
     </message>
     <message>
         <source>Error- no user</source>
-        <translation>Blad- nie ma uzytkownika</translation>
+        <translation>Blad- brak uzytkownika</translation>
     </message>
     <message>
         <source>Error- no  group</source>
@@ -254,7 +258,7 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
     </message>
     <message>
         <source>Error setting ownership or group</source>
-        <translation>Blad ustawiania uprawnien</translation>
+        <translation>Blad ustawiania grupy</translation>
     </message>
     <message>
         <source>Error setting mode</source>
@@ -262,7 +266,7 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
     </message>
     <message>
         <source>File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Uprawnienia Pliku</translation>
     </message>
 </context>
 </TS>
