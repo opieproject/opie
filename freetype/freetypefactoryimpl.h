@@ -36,5 +36,4 @@ public:
 
 private:
     QFontFactoryFT *factory;
-    ulong ref;
 };

@@ -22,7 +22,7 @@
 
 
 FreeTypeFactoryImpl::FreeTypeFactoryImpl()
-    : factory(0), ref(0)
+    : factory(0)
 {
 }
 
