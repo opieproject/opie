@@ -505,7 +505,7 @@ void Global::invoke(const QString &c)
 	    // Try bindir first, so that foo/bar works too
 	    ::execv( qpeDir()+"/bin/"+args[0], (char * const *)args );
 	    ::execvp( args[0], (char * const *)args );
-	    exit( -1 );
+	    _exit( -1 );
 	}
     }
     StartingAppList::add( list[0] );

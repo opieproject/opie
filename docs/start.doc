@@ -58,18 +58,18 @@ To compile the example program for running on the Linux desktop:
 
     <p>
 <pre>
-    export OPIEDIR=/opt/Qtopia
-    export QTDIR=/opt/Qtopia
-    export PATH=$QTDIR/bin:$PATH
-    export TMAKEPATH=/opt/Qtopia/tmake/lib/qws/linux-generic-g++
-    export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
+   export QPEDIR=/opt/Qtopia
+   export QTDIR=/opt/Qtopia
+   export PATH=$QTDIR/bin:$PATH
+   export TMAKEPATH=/opt/Qtopia/tmake/lib/qws/linux-generic-g++
+   export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
 </pre>
 
  <li> Take a copy of the example:
 
 <pre>
    cd somewhere
-   cp -r $OPIEDIR/example .
+   cp -r $QPEDIR/example .
    cd example
 </pre>
 
@@ -89,9 +89,9 @@ To compile the example program for running on the Linux desktop:
 
 <pre>
    su # root privileges required to install
-   cp example.desktop $OPIEDIR/apps/Applications
-   cp Example.png $OPIEDIR/pics
-   cp example $OPIEDIR/bin
+   cp example.desktop $QPEDIR/apps/Applications
+   cp Example.png $QPEDIR/pics
+   cp example $QPEDIR/bin
    exit # no need to be root anymore
 </pre>
 
@@ -135,24 +135,39 @@ on the desktop, the process is similar:
 
     <p>
 <pre>
-    export OPIEDIR=/opt/Qtopia/sharp
-    export QTDIR=/opt/Qtopia/sharp
-    export PATH=$QTDIR/bin:/usr/local/arm/bin:$PATH
-    export TMAKEPATH=/opt/Qtopia/tmake/lib/qws/linux-sharp-g++
+   export QPEDIR=/opt/Qtopia/sharp
+   export QTDIR=/opt/Qtopia/sharp
+   export PATH=$QTDIR/bin:/usr/local/arm/bin:$PATH
+   export TMAKEPATH=/opt/Qtopia/tmake/lib/qws/linux-sharp-g++
 </pre>
 
- <li> Build and install exactly the same as you did for the desktop
-    (note that the generated Makefile is different):
+ <li> Rebuild the makefile ($TMAKEPATH has changed) above:
 <pre>
    make clean
    tmake -o Makefile example.pro
-   ... <i>etc.</i>
 </pre>
 
- <li> To install it on a device, build an ipk package file (you should be root
-	to do this, since then it will strip the executable for you):
+ <li> Build it:
 <pre>
+   make
+</pre>
+
+ <li> Install it (note that this is now going into the /opt/Qtopia/sharp/ directory):
+<pre>
+   su # root privileges required to install
+   cp example.desktop $QPEDIR/apps/Applications
+   cp Example.png $QPEDIR/pics
+   cp example $QPEDIR/bin
+   exit # no need to be root anymore
+</pre>
+
+</pre>
+
+ <li> To install it on a device, build an ipk package file:
+<pre>
+   su # root privileges required to strip the executable
    mkipks example.control
+   exit # no need to be root anymore
 </pre>
 
 <p>

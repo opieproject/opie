@@ -65,8 +65,10 @@ $(DESTDIR)$(SYSCONF_LINK_TARGET): $(UICDECLS) $(OBJECTS) $(OBJMOC) $(SUBLIBS)
 
 moc: $(SRCMOC)
 
-tmake:
-	tmake wavplugin.pro
+tmake: Makefile.in
+
+Makefile.in: wavplugin.pro
+	tmake wavplugin.pro -o Makefile.in
 
 clean:
 	-rm -f $(OBJECTS) $(OBJMOC) $(SRCMOC) $(UICIMPLS) $(UICDECLS)
@@ -100,13 +102,10 @@ REQUIRES=
 ####### Compile
 
 wavplugin.o: wavplugin.cpp \
-		wavplugin.h \
-		../mediaplayerplugininterface.h
+		wavplugin.h
 
 wavpluginimpl.o: wavpluginimpl.cpp \
 		wavplugin.h \
-		../mediaplayerplugininterface.h \
-		wavpluginimpl.h \
-		../mediaplayerplugininterface.h
+		wavpluginimpl.h
 
 

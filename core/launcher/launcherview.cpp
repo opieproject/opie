@@ -212,10 +212,8 @@ public:
 	case Name:
 	    return a->name().compare(b->name());
 	case Date: {
-	    QFileInfo fa(a->linkFile());
-	    if ( !fa.exists() ) fa.setFile(a->file());
-	    QFileInfo fb(b->linkFile());
-	    if ( !fb.exists() ) fb.setFile(b->file());
+	    QFileInfo fa(a->linkFileKnown() ? a->linkFile() : a->file());
+	    QFileInfo fb(b->linkFileKnown() ? b->linkFile() : b->file());
 	    return fa.lastModified().secsTo(fb.lastModified());
 	}
 	case Type:
@@ -362,6 +360,8 @@ void LauncherIconView::hideOrShowItems(bool resort)
 	links.append(item->takeAppLnk());
 	item = (LauncherItem*)item->nextItem();
     }
+    bool oldAutoArrange = autoArrange();
+    setAutoArrange( FALSE );
     clear();
     QListIterator<AppLnk> it(links);
     AppLnk* l;
@@ -371,28 +371,35 @@ void LauncherIconView::hideOrShowItems(bool resort)
     }
     if ( resort )
 	sort();
+    setAutoArrange( oldAutoArrange );
 }
 
 bool LauncherIconView::removeLink(const QString& linkfile)
 {
     LauncherItem* item = (LauncherItem*)firstItem();
+    AppLnk* l;
+    bool did = FALSE;
+    DocLnk dl(linkfile);
     while (item) {
-	if ( item->appLnk()->linkFile() == linkfile ) {
+	l = item->appLnk();
+	if (  l->linkFileKnown() && l->linkFile() == linkfile || l->file() == linkfile
+		|| dl.isValid() && dl.file() == l->file() ) {
 	    delete item;
-	    return TRUE;
+	    did = TRUE;
 	}
 	item = (LauncherItem*)item->nextItem();
     }
     QListIterator<AppLnk> it(hidden);
-    AppLnk* l;
     while ((l=it.current())) {
 	++it;
-	if ( l->linkFile() == linkfile ) {
+	if ( l->linkFileKnown() && l->linkFile() == linkfile
+		|| l->file() == linkfile
+		|| dl.isValid() && dl.file() == l->file() ) {
 	    hidden.removeRef(l);
-	    return TRUE;
+	   did = TRUE;
 	}
     }
-    return FALSE;
+    return did;
 }
 
 LauncherView::LauncherView( QWidget* parent, const char* name, WFlags fl )

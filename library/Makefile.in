@@ -31,12 +31,12 @@ HEADERS =	calendar.h \
 		menubutton.h \
 		network.h \
 		networkinterface.h \
-		proxies.h \
 		filemanager.h \
 		fontmanager.h \
 		qdawg.h \
 		datebookmonth.h \
 		fileselector.h \
+		fileselector_p.h \
 		imageedit.h \
 		qcopenvelope_qws.h \
 		qpedecoration_qws.h \
@@ -78,12 +78,7 @@ HEADERS =	calendar.h \
 		backend/vobject_p.h \
 		findwidget_p.h \
 		finddialog.h \
-		lnkproperties.h \
-		quuid.h \
-		qcom.h \
-		qlibrary.h \
-		qlibrary_p.h \
-		qprocess.h
+		lnkproperties.h
 SOURCES =	calendar.cpp \
 		global.cpp \
 		xmlreader.cpp \
@@ -91,7 +86,6 @@ SOURCES =	calendar.cpp \
 		menubutton.cpp \
 		network.cpp \
 		networkinterface.cpp \
-		proxies.cpp \
 		filemanager.cpp \
 		fontmanager.cpp \
 		qdawg.cpp \
@@ -139,12 +133,7 @@ SOURCES =	calendar.cpp \
 		backend/vobject.cpp \
 		findwidget_p.cpp \
 		finddialog.cpp \
-		lnkproperties.cpp \
-		quuid.cpp \
-		qlibrary.cpp \
-		qlibrary_unix.cpp \
-		qprocess.cpp \
-		qprocess_unix.cpp
+		lnkproperties.cpp
 OBJECTS =	calendar.o \
 		global.o \
 		xmlreader.o \
@@ -152,7 +141,6 @@ OBJECTS =	calendar.o \
 		menubutton.o \
 		network.o \
 		networkinterface.o \
-		proxies.o \
 		filemanager.o \
 		fontmanager.o \
 		qdawg.o \
@@ -201,35 +189,26 @@ OBJECTS =	calendar.o \
 		findwidget_p.o \
 		finddialog.o \
 		lnkproperties.o \
-		quuid.o \
-		qlibrary.o \
-		qlibrary_unix.o \
-		qprocess.o \
-		qprocess_unix.o \
 		passwordbase_p.o \
-		proxiesbase_p.o \
 		categoryeditbase_p.o \
 		findwidgetbase_p.o \
 		lnkpropertiesbase_p.o
 INTERFACES =    passwordbase_p.ui \
-		proxiesbase_p.ui \
 		categoryeditbase_p.ui \
 		findwidgetbase_p.ui \
 		lnkpropertiesbase_p.ui
 UICDECLS =      passwordbase_p.h \
-		proxiesbase_p.h \
 		categoryeditbase_p.h \
 		findwidgetbase_p.h \
 		lnkpropertiesbase_p.h
 UICIMPLS =      passwordbase_p.cpp \
-		proxiesbase_p.cpp \
 		categoryeditbase_p.cpp \
 		findwidgetbase_p.cpp \
 		lnkpropertiesbase_p.cpp
 SRCMOC	=	moc_menubutton.cpp \
-		moc_proxies.cpp \
 		moc_datebookmonth.cpp \
 		moc_fileselector.cpp \
+		moc_fileselector_p.cpp \
 		moc_imageedit.cpp \
 		moc_qpedecoration_qws.cpp \
 		moc_qpeapplication.cpp \
@@ -247,23 +226,19 @@ SRCMOC	=	moc_menubutton.cpp \
 		moc_findwidget_p.cpp \
 		moc_finddialog.cpp \
 		moc_lnkproperties.cpp \
-		moc_qlibrary_p.cpp \
-		moc_qprocess.cpp \
 		global.moc \
 		network.moc \
 		password.moc \
 		process_unix.moc \
 		timestring.moc \
-		qprocess_unix.moc \
 		moc_passwordbase_p.cpp \
-		moc_proxiesbase_p.cpp \
 		moc_categoryeditbase_p.cpp \
 		moc_findwidgetbase_p.cpp \
 		moc_lnkpropertiesbase_p.cpp
 OBJMOC	=	moc_menubutton.o \
-		moc_proxies.o \
 		moc_datebookmonth.o \
 		moc_fileselector.o \
+		moc_fileselector_p.o \
 		moc_imageedit.o \
 		moc_qpedecoration_qws.o \
 		moc_qpeapplication.o \
@@ -281,10 +256,7 @@ OBJMOC	=	moc_menubutton.o \
 		moc_findwidget_p.o \
 		moc_finddialog.o \
 		moc_lnkproperties.o \
-		moc_qlibrary_p.o \
-		moc_qprocess.o \
 		moc_passwordbase_p.o \
-		moc_proxiesbase_p.o \
 		moc_categoryeditbase_p.o \
 		moc_findwidgetbase_p.o \
 		moc_lnkpropertiesbase_p.o
@@ -319,8 +291,10 @@ $(DESTDIR)$(SYSCONF_LINK_TARGET): $(UICDECLS) $(OBJECTS) $(OBJMOC) $(SUBLIBS)
 
 moc: $(SRCMOC)
 
-tmake:
-	tmake library.pro
+tmake: Makefile.in
+
+Makefile.in: library.pro
+	tmake library.pro -o Makefile.in
 
 clean:
 	-rm -f $(OBJECTS) $(OBJMOC) $(SRCMOC) $(UICIMPLS) $(UICDECLS)
@@ -381,11 +355,6 @@ networkinterface.o: networkinterface.cpp \
 		network.h \
 		config.h
 
-proxies.o: proxies.cpp \
-		proxies.h \
-		config.h \
-		proxiesbase_p.h
-
 filemanager.o: filemanager.cpp \
 		filemanager.h \
 		applnk.h
@@ -410,6 +379,7 @@ fileselector.o: fileselector.cpp \
 		fileselector.h \
 		filemanager.h \
 		applnk.h \
+		fileselector_p.h \
 		global.h \
 		resource.h \
 		config.h \
@@ -534,8 +504,7 @@ fontdatabase.o: fontdatabase.cpp \
 		fontdatabase.h
 
 power.o: power.cpp \
-		power.h \
-		custom.h
+		power.h
 
 storage.o: storage.cpp
 
@@ -633,36 +602,11 @@ lnkproperties.o: lnkproperties.cpp \
 		lnkpropertiesbase_p.h \
 		ir.h
 
-quuid.o: quuid.cpp \
-		quuid.h
-
-qlibrary.o: qlibrary.cpp \
-		qlibrary_p.h \
-		qlibrary.h
-
-qlibrary_unix.o: qlibrary_unix.cpp \
-		qlibrary_p.h \
-		qlibrary.h
-
-qprocess.o: qprocess.cpp \
-		qprocess.h
-
-qprocess_unix.o: qprocess_unix.cpp \
-		qprocess_unix.moc \
-		qprocess.h \
-		qcleanuphandler_p.h
-
 passwordbase_p.h: passwordbase_p.ui
 	$(UIC) passwordbase_p.ui -o $(INTERFACE_DECL_PATH)/passwordbase_p.h
 
 passwordbase_p.cpp: passwordbase_p.ui
 	$(UIC) passwordbase_p.ui -i passwordbase_p.h -o passwordbase_p.cpp
-
-proxiesbase_p.h: proxiesbase_p.ui
-	$(UIC) proxiesbase_p.ui -o $(INTERFACE_DECL_PATH)/proxiesbase_p.h
-
-proxiesbase_p.cpp: proxiesbase_p.ui
-	$(UIC) proxiesbase_p.ui -i proxiesbase_p.h -o proxiesbase_p.cpp
 
 categoryeditbase_p.h: categoryeditbase_p.ui
 	$(UIC) categoryeditbase_p.ui -o $(INTERFACE_DECL_PATH)/categoryeditbase_p.h
@@ -684,8 +628,6 @@ lnkpropertiesbase_p.cpp: lnkpropertiesbase_p.ui
 
 passwordbase_p.o: passwordbase_p.cpp
 
-proxiesbase_p.o: proxiesbase_p.cpp
-
 categoryeditbase_p.o: categoryeditbase_p.cpp
 
 findwidgetbase_p.o: findwidgetbase_p.cpp
@@ -694,10 +636,6 @@ lnkpropertiesbase_p.o: lnkpropertiesbase_p.cpp
 
 moc_menubutton.o: moc_menubutton.cpp \
 		menubutton.h
-
-moc_proxies.o: moc_proxies.cpp \
-		proxies.h \
-		config.h
 
 moc_datebookmonth.o: moc_datebookmonth.cpp \
 		datebookmonth.h \
@@ -708,6 +646,9 @@ moc_fileselector.o: moc_fileselector.cpp \
 		fileselector.h \
 		filemanager.h \
 		applnk.h
+
+moc_fileselector_p.o: moc_fileselector_p.cpp \
+		fileselector_p.h
 
 moc_imageedit.o: moc_imageedit.cpp \
 		imageedit.h
@@ -766,20 +707,13 @@ moc_finddialog.o: moc_finddialog.cpp \
 moc_lnkproperties.o: moc_lnkproperties.cpp \
 		lnkproperties.h
 
-moc_qlibrary_p.o: moc_qlibrary_p.cpp \
-		qlibrary_p.h \
-		qlibrary.h
-
-moc_qprocess.o: moc_qprocess.cpp \
-		qprocess.h
-
 moc_passwordbase_p.o: global.moc \
 		global.cpp
 
-moc_proxiesbase_p.o: network.moc \
+moc_categoryeditbase_p.o: network.moc \
 		network.cpp
 
-moc_categoryeditbase_p.o: password.moc \
+moc_findwidgetbase_p.o: password.moc \
 		password.cpp \
 		password.h \
 		config.h \
@@ -787,28 +721,21 @@ moc_categoryeditbase_p.o: password.moc \
 		backend/contact.h \
 		passwordbase_p.h
 
-moc_findwidgetbase_p.o: process_unix.moc \
+moc_lnkpropertiesbase_p.o: process_unix.moc \
 		process_unix.cpp \
 		process.h
 
-moc_lnkpropertiesbase_p.o: timestring.moc \
-		timestring.cpp \
-		timestring.h \
-		qpeapplication.h \
-		qpedecoration_qws.h \
-		config.h
-
 moc_menubutton.cpp: menubutton.h
 	$(MOC) menubutton.h -o moc_menubutton.cpp
-
-moc_proxies.cpp: proxies.h
-	$(MOC) proxies.h -o moc_proxies.cpp
 
 moc_datebookmonth.cpp: datebookmonth.h
 	$(MOC) datebookmonth.h -o moc_datebookmonth.cpp
 
 moc_fileselector.cpp: fileselector.h
 	$(MOC) fileselector.h -o moc_fileselector.cpp
+
+moc_fileselector_p.cpp: fileselector_p.h
+	$(MOC) fileselector_p.h -o moc_fileselector_p.cpp
 
 moc_imageedit.cpp: imageedit.h
 	$(MOC) imageedit.h -o moc_imageedit.cpp
@@ -861,12 +788,6 @@ moc_finddialog.cpp: finddialog.h
 moc_lnkproperties.cpp: lnkproperties.h
 	$(MOC) lnkproperties.h -o moc_lnkproperties.cpp
 
-moc_qlibrary_p.cpp: qlibrary_p.h
-	$(MOC) qlibrary_p.h -o moc_qlibrary_p.cpp
-
-moc_qprocess.cpp: qprocess.h
-	$(MOC) qprocess.h -o moc_qprocess.cpp
-
 global.moc: global.cpp
 	$(MOC) global.cpp -o global.moc
 
@@ -882,14 +803,8 @@ process_unix.moc: process_unix.cpp
 timestring.moc: timestring.cpp
 	$(MOC) timestring.cpp -o timestring.moc
 
-qprocess_unix.moc: qprocess_unix.cpp
-	$(MOC) qprocess_unix.cpp -o qprocess_unix.moc
-
 moc_passwordbase_p.cpp: passwordbase_p.h
 	$(MOC) passwordbase_p.h -o moc_passwordbase_p.cpp
-
-moc_proxiesbase_p.cpp: proxiesbase_p.h
-	$(MOC) proxiesbase_p.h -o moc_proxiesbase_p.cpp
 
 moc_categoryeditbase_p.cpp: categoryeditbase_p.h
 	$(MOC) categoryeditbase_p.h -o moc_categoryeditbase_p.cpp

@@ -6,6 +6,7 @@ DESTDIR		= $(OPIEDIR)/bin
 
 HEADERS		= background.h \
 		  desktop.h \
+		  qprocess.h \
 		  info.h \
 		  appicons.h \
 		  taskbar.h \
@@ -46,6 +47,7 @@ HEADERS		= background.h \
 
 SOURCES		= background.cpp \
 		  desktop.cpp \
+		  qprocess.cpp qprocess_unix.cpp \
 		  info.cpp \
 		  appicons.cpp \
 		  taskbar.cpp \
