@@ -7,21 +7,13 @@
 
 #include <qpe/qpeapplication.h>
 
-#include <opie2/ocontactaccess.h>
-#include <opie2/ocontactaccessbackend_xml.h>
-#include <opie2/ocontactaccessbackend_sql.h>
-
-#include <opie2/otodoaccess.h>
-#include <opie2/otodoaccessxml.h>
-#include <opie2/otodoaccesssql.h>
-
-#include <opie2/odatebookaccess.h>
-#include <opie2/odatebookaccessbackend_xml.h>
-#include <opie2/odatebookaccessbackend_sql.h>
-
-// #define _ADDRESSBOOK_ACCESS
+#include <opie2/opimglobal.h>
+// Include SQL related header files
+#define __USE_SQL
+#include <opie2/opimaccessfactory.h>
 
 using namespace Opie;
+using namespace Pim;
 
 Converter::Converter():
 	m_selectedDatabase( ADDRESSBOOK ), 
@@ -60,17 +52,14 @@ void Converter::start_conversion(){
 		qDebug("XMLSourceDB = %d", m_selectedDatabase);
 		switch( m_selectedDatabase ){
 		case ADDRESSBOOK:{
-			OPimContactAccessBackend* sourceBackend = new OPimContactAccessBackend_XML( "Converter", QString::null );
-			sourceDB = new OPimContactAccess ( "addressbook_xml", QString::null , sourceBackend, true );
+			sourceDB = OPimAccessFactory<OPimContactAccess>::create( OPimGlobal::CONTACTLIST, OPimGlobal::XML, "converter" );
 		        } 
 			break;
 		case TODOLIST:{
-			OPimTodoAccessBackend* sourceBackend = new OPimTodoAccessXML( "Converter" );
-			sourceDB = new OPimTodoAccess( sourceBackend );
+			sourceDB = OPimAccessFactory<OPimTodoAccess>::create( OPimGlobal::TODOLIST, OPimGlobal::XML, "converter" );
 			}break;
 		case DATEBOOK:{
-			ODateBookAccessBackend_XML* sourceBackend = new ODateBookAccessBackend_XML( "Converter", QString::null );
-			sourceDB = new ODateBookAccess ( sourceBackend );
+			sourceDB = OPimAccessFactory<ODateBookAccess>::create( OPimGlobal::DATEBOOK, OPimGlobal::XML, "converter" );
 		        }
 			break;
 		default:
@@ -82,19 +71,15 @@ void Converter::start_conversion(){
 		qDebug("SQLSourceDB = %d", m_selectedDatabase);
 		switch( m_selectedDatabase ){
 		case ADDRESSBOOK:{
-			qDebug("SQLSourceDB = %d", m_selectedDatabase);
-			OPimContactAccessBackend* sourceBackend = new OPimContactAccessBackend_SQL( QString::null, QString::null );
-			sourceDB =  new OPimContactAccess ( "Converter", QString::null, sourceBackend, true );
-			}
+			sourceDB = OPimAccessFactory<OPimContactAccess>::create( OPimGlobal::CONTACTLIST, OPimGlobal::SQL, "converter" );
+		        } 
 			break;
 		case TODOLIST:{
-			OPimTodoAccessBackend* sourceBackend = new OPimTodoAccessBackendSQL( QString::null );
-			sourceDB = new OPimTodoAccess( sourceBackend );
+			sourceDB = OPimAccessFactory<OPimTodoAccess>::create( OPimGlobal::TODOLIST, OPimGlobal::SQL, "converter" );
 			}break;
-		case DATEBOOK: {
-			ODateBookAccessBackend_SQL* sourceBackend = new ODateBookAccessBackend_SQL( "Converter", QString::null );
-			sourceDB = new ODateBookAccess ( sourceBackend );
-			}
+		case DATEBOOK:{
+			sourceDB = OPimAccessFactory<ODateBookAccess>::create( OPimGlobal::DATEBOOK, OPimGlobal::SQL, "converter" );
+		        }
 			break;
 		default:
 			qWarning( "Unknown database selected (%d)", m_selectedDatabase );
@@ -111,18 +96,15 @@ void Converter::start_conversion(){
 		qDebug("XMLDestDB = %d", m_selectedDatabase);
 		switch( m_selectedDatabase ){
 		case ADDRESSBOOK:{
-			OPimContactAccessBackend* destBackend = new OPimContactAccessBackend_XML( "Converter", QString::null );
-			destDB = new OPimContactAccess ( "Converter", QString::null , destBackend, true );
-			}
+			destDB = OPimAccessFactory<OPimContactAccess>::create( OPimGlobal::CONTACTLIST, OPimGlobal::XML, "converter" );
+		        } 
 			break;
 		case TODOLIST:{
-			OPimTodoAccessBackend* destBackend = new OPimTodoAccessXML( "Converter" );
-			destDB = new OPimTodoAccess( destBackend );
+			destDB = OPimAccessFactory<OPimTodoAccess>::create( OPimGlobal::TODOLIST, OPimGlobal::XML, "converter" );
 			}break;
 		case DATEBOOK:{
-			ODateBookAccessBackend_XML* destBackend = new ODateBookAccessBackend_XML( "Converter", QString::null );
-			destDB = new ODateBookAccess ( destBackend );
-			}
+			destDB = OPimAccessFactory<ODateBookAccess>::create( OPimGlobal::DATEBOOK, OPimGlobal::XML, "converter" );
+		        }
 			break;
 		default:
 			qWarning( "Unknown database selected (%d)", m_selectedDatabase );
@@ -133,18 +115,15 @@ void Converter::start_conversion(){
 		qDebug("SQLDestDB = %d", m_selectedDatabase);
 		switch( m_selectedDatabase ){
 		case ADDRESSBOOK:{
-			OPimContactAccessBackend* destBackend = new OPimContactAccessBackend_SQL( QString::null, QString::null );
-			destDB = new OPimContactAccess ( "addressbook_xml", QString::null , destBackend, true );
-			}
+			destDB = OPimAccessFactory<OPimContactAccess>::create( OPimGlobal::CONTACTLIST, OPimGlobal::SQL, "converter" );
+		        } 
 			break;
 		case TODOLIST:{
-			OPimTodoAccessBackend* destBackend = new OPimTodoAccessBackendSQL( QString::null );
-			destDB = new OPimTodoAccess( destBackend );
+			destDB = OPimAccessFactory<OPimTodoAccess>::create( OPimGlobal::TODOLIST, OPimGlobal::SQL, "converter" );
 			}break;
 		case DATEBOOK:{
-			ODateBookAccessBackend_SQL* destBackend = new ODateBookAccessBackend_SQL( "Converter", QString::null );
-			destDB = new ODateBookAccess ( destBackend );
-			}
+			destDB = OPimAccessFactory<ODateBookAccess>::create( OPimGlobal::DATEBOOK, OPimGlobal::SQL, "converter" );
+		        }
 			break;
 		default:
 			qWarning( "Unknown database selected (%d)", m_selectedDatabase );
