@@ -955,7 +955,7 @@ void AddressbookWindow::slotSetCategory( int c )
 				cat = QString::null;
 			}else if ( i == (unsigned int)catMenu->count() - 1 ){ // last menu option (seperator is counted, too) will be Unfiled
 				cat = "Unfiled";
-				qWarning ("Unfiled selected!!!");
+				qWarning ("Unfiled selected!");
 			}else{
 				cat = m_abView->categories()[i - 4];
 			}
