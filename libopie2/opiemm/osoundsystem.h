@@ -202,7 +202,11 @@ class OMixerInterface : public QObject
     /**
      * @returns true, if @a channel exists.
      */
-    bool hasChannel( const QString& channel );
+    bool hasChannel( const QString& channel ) const;
+    /**
+     * @returns true, if @a channel is stereo.
+     */
+    bool isStereo( const QString& channel ) const;
 
     /**
      * Set the @a left and @a right volumes for @a channel.

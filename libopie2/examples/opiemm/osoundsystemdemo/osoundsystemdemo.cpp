@@ -55,7 +55,8 @@ int main( int argc, char** argv )
 
     for ( QStringList::Iterator it = channels.begin(); it != channels.end(); ++it )
     {
-        odebug << "OSSDEMO: Mixer has channel " <<  *it << "" << oendl;
+        bool stereo = mixer->isStereo( *it );
+        odebug << "OSSDEMO: Mixer has channel " << *it << ( stereo ? "[stereo]" : "[mono]" ) << oendl;
         odebug << "OSSDEMO:              +--- volume " << ( mixer->volume( *it ) & 0xff )
                << " (left) | " << ( mixer->volume( *it ) >> 8 ) << " (right)" << oendl;
     }

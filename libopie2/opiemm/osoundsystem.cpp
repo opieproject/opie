@@ -194,7 +194,7 @@ void OMixerInterface::init()
     _fd = ::open( name(), O_RDWR );
     if ( _fd == -1 )
     {
-        owarn << "OMixerInterface::init(): Can't open mixer." << oendl;
+        owarn << "OMixerInterface::init(): Can't open mixer " << name() << oendl;
         return;
     }
 
@@ -239,6 +239,12 @@ void OMixerInterface::init()
         //odebug << "recmask available and constructed." << oendl;
     }
 
+    devmask = 0;
+    if ( ioctl( _fd, SOUND_MIXER_READ_STEREODEVS, &devmask ) != -1 )
+    {
+        odebug << "stereomask = " << devmask << oendl;
+    }
+
 /*    ChannelIterator it;
     for ( it = _channels.begin(); it != _channels.end(); ++it )
     {
@@ -275,9 +281,24 @@ QStringList OMixerInterface::playChannels() const
 }
 
 
-bool OMixerInterface::hasChannel( const QString& channel )
+bool OMixerInterface::hasChannel( const QString& channel ) const
 {
     return _channels.contains( channel );
+}
+
+
+bool OMixerInterface::isStereo( const QString& channel ) const
+{
+    bool result = false;
+    if ( _channels.contains( channel ) )
+    {
+        int devmask = 0;
+        if ( ioctl( _fd, SOUND_MIXER_READ_STEREODEVS, &devmask ) != -1 )
+        {
+            result = devmask & ( 1 << _channels[channel] );
+        }
+    }
+    return result;
 }
 
 
