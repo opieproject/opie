@@ -396,7 +396,8 @@ static int known=0;
 void PowerchordBase::transport_rec_cb(){
   chordlist->insertItem(chordname->text(),-1);
   if (!known){
-    QMessageBox::information(this, "Powerchord", "This chord has been saved\ninto the list of chords,\nfor later playback.");
+    QMessageBox::information(this, tr("Powerchord"),
+														 tr("<P>This chord has been saved into the list of chords, for later playback.<P>");
     known = 1;
   }
 }
@@ -439,7 +440,8 @@ void PowerchordBase::play_chord_cb(){
       // init synth
       if (synth->Play()){
 	// error
-	QMessageBox::information(this, "Powerchord", "Unable to open device for sound playback - check that no other application is using it.");
+	QMessageBox::information(this, tr("Powerchord"),
+			 tr("<P>Unable to open device for sound playback - check that no other application is using it.</P>"));
 	return;
       }
       synth->fill_buffer();
@@ -530,7 +532,9 @@ void PowerchordBase::tuner_cb(){
 
 
 void PowerchordBase::tuner_start_cb(){
-  if (0 == QMessageBox::information(this, "Powerchord", "Using the microphone,\nthe note's frequency\nis analysed. This\nis a simulation.", "OK", "Cancel", 0, 1)){
+  if (0 == QMessageBox::information(this, tr("Powerchord"),
+					tr("<P>Using the microphone, the note's frequency is analysed. This is a simulation.</P>"),
+					tr("OK"), tr("Cancel"), 0, 1)){
     if (simulation_timer){
       simulation_timer->stop();
     }else{
