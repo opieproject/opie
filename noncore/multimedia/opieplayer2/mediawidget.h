@@ -35,12 +35,14 @@ class MediaWidget : public QWidget
 {
     Q_OBJECT
 public:
-    enum Command { Play = 0, Stop, Next, Previous, VolumeUp, VolumeDown, Loop, PlayList, Forward, Back };
+    enum Command { Play = 0, Stop, Next, Previous, VolumeUp, VolumeDown, Loop, PlayList, Forward, Back, Undefined };
     enum ButtonType { NormalButton, ToggleButton };
 
     struct Button
     {
-        Button() : type( NormalButton ), isHeld( false ), isDown( false ) {}
+        Button() : command( Undefined ), type( NormalButton ), isHeld( false ), isDown( false ) {}
+
+        Command command;
 
         ButtonType type : 1;
         bool isHeld : 1;
@@ -51,8 +53,6 @@ public:
         QPixmap pixDown;
     };
     typedef std::vector<Button> ButtonVector;
-    // when the transition is done this should be Command -> Button
-    typedef QMap<int, Button> ButtonMap;
 
     struct SkinButtonInfo
     {
@@ -97,7 +97,7 @@ protected:
     MediaPlayerState &mediaPlayerState;
     PlayListWidget &playList;
 
-    ButtonMap buttons;
+    ButtonVector buttons;
 
     QImage buttonMask;
 

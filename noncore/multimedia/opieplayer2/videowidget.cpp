@@ -74,13 +74,13 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     Button toggleButton = defaultButton;
     toggleButton.type = ToggleButton;
 
-    buttons.insert( 0, toggleButton ); // play
-    buttons.insert( 1, toggleButton ); // stop
-    buttons.insert( 2, toggleButton ); // next
-    buttons.insert( 3, toggleButton ); // previous
-    buttons.insert( 4, toggleButton ); // volUp
-    buttons.insert( 5, toggleButton ); // volDown
-    buttons.insert( 6, toggleButton ); // fullscreen
+    buttons.push_back( toggleButton ); // play
+    buttons.push_back( toggleButton ); // stop
+    buttons.push_back( toggleButton ); // next
+    buttons.push_back( toggleButton ); // previous
+    buttons.push_back( toggleButton ); // volUp
+    buttons.push_back( toggleButton ); // volDown
+    buttons.push_back( toggleButton ); // fullscreen
 
     videoFrame = new XineVideoWidget ( this, "Video frame" );
 
@@ -243,7 +243,7 @@ void VideoWidget::updateSlider( long i, long max ) {
 }
 
 void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
-    for ( unsigned int i = 0; i < buttons.count(); i++ ) {
+    for ( unsigned int i = 0; i < buttons.size(); i++ ) {
 
         Button &button = buttons[ i ];
 

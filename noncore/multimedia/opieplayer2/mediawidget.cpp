@@ -82,6 +82,7 @@ void MediaWidget::handleCommand( Command command, bool buttonDown )
         case PlayList:   mediaPlayerState.setList();  return;
         case Forward:    emit forwardReleased(); return;
         case Back:       emit backReleased(); return;
+        default: assert( false );
     }
 }
 
@@ -95,7 +96,7 @@ bool MediaWidget::isOverButton( const QPoint &position, int buttonId ) const
 
 void MediaWidget::paintAllButtons( QPainter &p )
 {
-    for ( ButtonMap::ConstIterator it = buttons.begin();
+    for ( ButtonVector::const_iterator it = buttons.begin();
           it != buttons.end(); ++it )
         paintButton( p, *it );
 }

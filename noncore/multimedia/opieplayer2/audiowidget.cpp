@@ -104,6 +104,7 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
 
     for ( uint i = 0; i < buttonCount; i++ ) {
         Button button;
+        button.command = skinInfo[ i ].command;
         button.type = skinInfo[ i ].type;
 
         QString filename = QString( QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skin_mask_" + skinInfo[i].fileName + ".png" );
@@ -120,7 +121,7 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
             }
         }
 
-        buttons.insert( i, button );
+        buttons.push_back( button );
     }
 
     setBackgroundPixmap( backgroundPixmap );
@@ -208,7 +209,7 @@ void AudioWidget::resizeEvent( QResizeEvent * ) {
     QPixmap pixUp = combineImageWithBackground( imgUp, backgroundPixmap, p );
     QPixmap pixDn = combineImageWithBackground( imgDn, backgroundPixmap, p );
 
-    for ( uint i = 0; i < buttons.count(); i++ ) {
+    for ( uint i = 0; i < buttons.size(); i++ ) {
         if ( !buttons[i].mask.isNull() ) {
             buttons[i].pixUp = maskPixToMask( pixUp, buttons[i].mask );
             buttons[i].pixDown = maskPixToMask( pixDn, buttons[i].mask );
@@ -334,7 +335,7 @@ void AudioWidget::timerEvent( QTimerEvent * ) {
 
 
 void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
-    for ( unsigned int i = 0; i < buttons.count(); i++ ) {
+    for ( unsigned int i = 0; i < buttons.size(); i++ ) {
 
         Button &button = buttons[ i ];
 
