@@ -421,14 +421,22 @@ void Today::getTodo() {
   TodoField->setText(tr(output));
 }
 
+
+void Today::startAddressbook() {
+   QCopEnvelope e("QPE/System", "execute(QString)");
+    e << QString("addressbook");
+}
+
+extern QPEApplication *todayApp;
+
 /*
  * launch addressbook (personal card)
  */
 void Today::editCard() {
-    QCopEnvelope w("QPE/System", "execute(QString)");
-    w << QString("addressbook");
 
-    //  while( !QCopChannel::isRegistered("QPE/Addressbook"))
+    startAddressbook();
+
+    while( !QCopChannel::isRegistered("QPE/Addressbook")) todayApp->processEvents();
     QCopEnvelope v("QPE/Addressbook", "editPersonalAndClose()");
 }
 
@@ -443,10 +451,6 @@ void Today::startDatebook() {
 /*
  * starts the edit dialog as known from datebook
  */
-
-
-extern QPEApplication *todayApp;
-
 void Today::editEvent(const Event &e) {
   startDatebook();
 

@@ -46,6 +46,7 @@ class Today : public TodayBase {
     void startConfig();
     void startTodo();
     void startDatebook();
+    void startAddressbook();
     void startMail();
     void editCard();
     void draw();
