@@ -40,13 +40,7 @@ using namespace Opie::Core;
 /* STD */
 #include <sys/types.h>
 #include <sys/stat.h>
-#ifndef _GNU_SOURCE
-    #define _GNU_SOURCE
-    #include <fcntl.h>
-    #undef _GNU_SOURCE
-#else
-    #include <fcntl.h>
-#endif
+#include <fcntl.h>
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>

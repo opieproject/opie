@@ -28,6 +28,9 @@ _;:,     .>    :=|.         This program is free software; you can
 
 #ifndef OFILENOTIFY_H
 #define OFILENOTIFY_H
+#if defined (__GNUC__) && (__GNUC__ < 3)
+#define _GNU_SOURCE
+#endif
 
 /* QT */
 #include <qobject.h>
