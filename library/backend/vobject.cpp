@@ -1,44 +1,44 @@
 /***************************************************************************
-(C) Copyright 1996 Apple Computer, Inc., AT&T Corp., International
-Business Machines Corporation and Siemens Rolm Communications Inc.
+(C) Copyright 1996 Apple Computer, Inc., AT&T Corp., International             
+Business Machines Corporation and Siemens Rolm Communications Inc.             
+                                                                               
+For purposes of this license notice, the term Licensors shall mean,            
+collectively, Apple Computer, Inc., AT&T Corp., International                  
+Business Machines Corporation and Siemens Rolm Communications Inc.             
+The term Licensor shall mean any of the Licensors.                             
+                                                                               
+Subject to acceptance of the following conditions, permission is hereby        
+granted by Licensors without the need for written agreement and without        
+license or royalty fees, to use, copy, modify and distribute this              
+software for any purpose.                                                      
+                                                                               
+The above copyright notice and the following four paragraphs must be           
+reproduced in all copies of this software and any software including           
+this software.                                                                 
+                                                                               
+THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS AND NO LICENSOR SHALL HAVE       
+ANY OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS OR       
+MODIFICATIONS.                                                                 
+                                                                               
+IN NO EVENT SHALL ANY LICENSOR BE LIABLE TO ANY PARTY FOR DIRECT,              
+INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES OR LOST PROFITS ARISING OUT         
+OF THE USE OF THIS SOFTWARE EVEN IF ADVISED OF THE POSSIBILITY OF SUCH         
+DAMAGE.                                                                        
+                                                                               
+EACH LICENSOR SPECIFICALLY DISCLAIMS ANY WARRANTIES, EXPRESS OR IMPLIED,       
+INCLUDING BUT NOT LIMITED TO ANY WARRANTY OF NONINFRINGEMENT OR THE            
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR             
+PURPOSE.                                                                       
 
-For purposes of this license notice, the term Licensors shall mean,
-collectively, Apple Computer, Inc., AT&T Corp., International
-Business Machines Corporation and Siemens Rolm Communications Inc.
-The term Licensor shall mean any of the Licensors.
-
-Subject to acceptance of the following conditions, permission is hereby
-granted by Licensors without the need for written agreement and without
-license or royalty fees, to use, copy, modify and distribute this
-software for any purpose.
-
-The above copyright notice and the following four paragraphs must be
-reproduced in all copies of this software and any software including
-this software.
-
-THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS AND NO LICENSOR SHALL HAVE
-ANY OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS OR
-MODIFICATIONS.
-
-IN NO EVENT SHALL ANY LICENSOR BE LIABLE TO ANY PARTY FOR DIRECT,
-INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES OR LOST PROFITS ARISING OUT
-OF THE USE OF THIS SOFTWARE EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
-DAMAGE.
-
-EACH LICENSOR SPECIFICALLY DISCLAIMS ANY WARRANTIES, EXPRESS OR IMPLIED,
-INCLUDING BUT NOT LIMITED TO ANY WARRANTY OF NONINFRINGEMENT OR THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-PURPOSE.
-
-The software is provided with RESTRICTED RIGHTS.  Use, duplication, or
-disclosure by the government are subject to restrictions set forth in
-DFARS 252.227-7013 or 48 CFR 52.227-19, as applicable.
+The software is provided with RESTRICTED RIGHTS.  Use, duplication, or         
+disclosure by the government are subject to restrictions set forth in          
+DFARS 252.227-7013 or 48 CFR 52.227-19, as applicable.                         
 
 ***************************************************************************/
 
 /*
  * src: vobject.c
- * doc: vobject and APIs to construct vobject, APIs pretty print
+ * doc: vobject and APIs to construct vobject, APIs pretty print 
  * vobject, and convert a vobject into its textual representation.
  */
 
@@ -46,8 +46,9 @@ DFARS 252.227-7013 or 48 CFR 52.227-19, as applicable.
 #include <malloc.h>
 #endif
 
-#include <qtopia/private/vobject_p.h>
-#include <qtopia/private/qfiledirect_p.h>
+#include <qtopia/config.h>
+#include "vobject_p.h"
+#include "qfiledirect_p.h"
 #include <string.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -61,6 +62,10 @@ DFARS 252.227-7013 or 48 CFR 52.227-19, as applicable.
 #define LONG_VALUE_OF(o)		o->val.l
 #define ANY_VALUE_OF(o)			o->val.any
 #define VOBJECT_VALUE_OF(o)		o->val.vobj
+
+static char vobj_cs[10];
+static enum { EightBit, QuotedPrintable, Base64 } vobj_enc=EightBit;
+static const char *vobj_enc_s=0;
 
 typedef union ValueItem {
     const char *strs;
@@ -86,7 +91,7 @@ struct StrItem {
     unsigned int refCnt;
     };
 
-const char** fieldedProp;
+DLLEXPORT(const char**) fieldedProp;
 
 
 
@@ -327,18 +332,18 @@ DLLEXPORT(VObject*) setValueWithSize(VObject *prop, void *val, unsigned int size
 
 DLLEXPORT(void) initPropIterator(VObjectIterator *i, VObject *o)
 {
-    i->start = o->prop;
+    i->start = o->prop; 
     i->next = 0;
 }
 
 DLLEXPORT(void) initVObjectIterator(VObjectIterator *i, VObject *o)
 {
-    i->start = o->next;
+    i->start = o->next; 
     i->next = 0;
 }
 
 DLLEXPORT(int) moreIteration(VObjectIterator *i)
-{
+{ 
     return (i->start && (i->next==0 || i->next!=i->start));
 }
 
@@ -403,7 +408,7 @@ DLLEXPORT(VObject*) addGroup(VObject *o, const char *g)
 	    t = addProp(t,VCGroupingProp);
 	    setVObjectStringZValue(t,lookupProp_(n));
 	    } while (n != gs);
-	deleteStr(gs);
+	deleteStr(gs);	
 	return p;
 	}
     else
@@ -799,12 +804,12 @@ static struct PreDefProp* lookupPropInfo(const char* str)
 {
     /* brute force for now, could use a hash table here. */
     int i;
-
+	
     for (i = 0; propNames[i].name; i++)
 	if (qstricmp(str, propNames[i].name) == 0) {
 	    return &propNames[i];
 	    }
-
+    
     return 0;
 }
 
@@ -812,7 +817,7 @@ static struct PreDefProp* lookupPropInfo(const char* str)
 DLLEXPORT(const char*) lookupProp_(const char* str)
 {
     int i;
-
+	
     for (i = 0; propNames[i].name; i++)
 	if (qstricmp(str, propNames[i].name) == 0) {
 	    const char* s;
@@ -826,7 +831,7 @@ DLLEXPORT(const char*) lookupProp_(const char* str)
 DLLEXPORT(const char*) lookupProp(const char* str)
 {
     int i;
-
+	
     for (i = 0; propNames[i].name; i++)
 	if (qstricmp(str, propNames[i].name) == 0) {
 	    const char *s;
@@ -953,6 +958,17 @@ static void appendsOFile(OFile *fp, const char *s)
 
 #endif
 
+static void appendsOFileEncCs(OFile *fp)
+{
+    if ( vobj_enc_s ) {
+	appendsOFile(fp, ";" VCEncodingProp "=");
+	appendsOFile(fp, vobj_enc_s);
+    }
+    appendsOFile(fp, ";" VCCharSetProp "=");
+    appendsOFile(fp, vobj_cs);
+}
+
+
 static void initOFile(OFile *fp, FILE *ofp)
 {
     fp->fp = ofp;
@@ -1005,41 +1021,20 @@ static int writeBase64(OFile *fp, unsigned char *s, long len)
     return 1;
 }
 
-static const char *replaceChar(unsigned char c)
+static const char *qpReplaceChar(unsigned char c) 
 {
     if (c == '\n') {
 	return "=0A=\n";
     } else if (
-	    (c >= 'A' && c <= 'Z')
+	    // RFC 1521
+	    (c >= 32 && c <= 60) // Note: " " not allowed at EOL
 	    ||
-	    (c >= 'a' && c <= 'z')
-	    ||
-	    (c >= '0' && c <= '9')
-	    ||
-	    (c >= '\'' && c <= ')')
-	    ||
-	    (c >= '+' && c <= '-')
-	    ||
-	    (c == '/')
-	    ||
-	    (c == '?')
-	    ||
-	    (c == ' '))
-    {
+	    (c >= 62 && c <= 126)
+	)
+    { 
 	return 0;
     }
 
-#warning "Bug-Workaround must be fixed !"
-	// IF THIS FUNCTION RETURNES TRUE, THE DATA IS EXPORTED
-	// AS QUOTED PRINTABLE. 
-	// BUT THE PARSER IS UNABLE TO IMPORT THIS, THEREFORE 
-	// I DECIDED TO DISABLE IT UNTIL TROLLTECH FIXES THIS BUG
-        // SEE ALSO includesUnprintable(VObject *o)
-	// (se)
-
-    return 0;
-
-#if 0
     static char trans[4];
     trans[0] = '=';
     trans[3] = '\0';
@@ -1057,13 +1052,12 @@ static const char *replaceChar(unsigned char c)
 	trans[2] = 'A' + (rem - 10);
 
     return trans;
-#endif
 }
 
-static void writeQPString(OFile *fp, const char *s)
+static void writeEncString(OFile *fp, const char *s, bool nosemi)
 {
     /*
-	only A-Z, 0-9 and
+	only A-Z, 0-9 and 
        "'"  (ASCII code 39)
        "("  (ASCII code 40)
        ")"  (ASCII code 41)
@@ -1072,62 +1066,71 @@ static void writeQPString(OFile *fp, const char *s)
        "-"  (ASCII code 45)
        "/"  (ASCII code 47)
        "?"  (ASCII code 63)
-
+       
        should remain un-encoded.
        '=' needs to be encoded as it is the escape character.
        ';' needs to be as it is a field separator.
 
      */
     const char *p = s;
-    while (*p) {
-	const char *rep = replaceChar(*p);
-	if (rep)
-	    appendsOFile(fp, rep);
-	else
-	    appendcOFile(fp, *p);
-	p++;
+    switch ( vobj_enc ) {
+	case EightBit:
+	    while (*p) {
+		if ( *p == '\n' || nosemi && ( *p == '\\' || *p == ';' ) )
+		    appendcOFile(fp, '\\');
+		appendcOFile(fp, *p);
+		p++;
+	    }
+	    break;
+	case QuotedPrintable:
+	    while (*p) {
+		const char *rep = qpReplaceChar(*p);
+		if (rep)
+		    appendsOFile(fp, rep);
+		else if ( *p == ';' && nosemi )
+		    appendsOFile(fp, "=3B");
+		else if ( *p == ' ' ) {
+		    if ( !p[1] || p[1] == '\n' ) // RFC 1521
+			appendsOFile(fp, "=20");
+		    else
+			appendcOFile(fp, *p);
+		} else
+		    appendcOFile(fp, *p);
+		p++;
+	    }
+	    break;
+	case Base64:
+	    writeBase64(fp, (unsigned char*)p, strlen(p));
+	    break;
     }
 }
 
 static bool includesUnprintable(VObject *o)
 {
-
-#if 0
-
-	// IF THIS FUNCTION RETURNES TRUE, THE DATA IS EXPORTED
-	// AS QUOTED PRINTABLE. 
-	// BUT THE PARSER IS UNABLE TO IMPORT THIS, THEREFORE 
-	// I DECIDED TO DISABLE IT UNTIL TROLLTECH FIXES THIS BUG
-	// SEE ALSO *replaceChar(unsigned char c)
-	// (se)
-
     if (o) {
 	if (VALUE_TYPE(o) == VCVT_STRINGZ) {
 	    const char *p = STRINGZ_VALUE_OF(o);
 	    if (p) {
 		while (*p) {
-		    if (replaceChar(*p))
+		    if (*p==' ' && (!p[1] || p[1]=='\n') // RFC 1521: spaces at ends need quoting
+			     || qpReplaceChar(*p) )
 			return TRUE;
 		    p++;
 		}
 	    }
 	}
     }
-
-#endif
-#warning "Bug-Workaround must be fixed !"
-
     return FALSE;
 }
-
+	    
 static void writeVObject_(OFile *fp, VObject *o);
 
-static void writeValue(OFile *fp, VObject *o, unsigned long size)
+static void writeValue(OFile *fp, VObject *o, unsigned long size, bool nosemi)
 {
     if (o == 0) return;
     switch (VALUE_TYPE(o)) {
 	case VCVT_STRINGZ: {
-	    writeQPString(fp, STRINGZ_VALUE_OF(o));
+	    writeEncString(fp, STRINGZ_VALUE_OF(o), nosemi);
 	    break;
 	    }
 	case VCVT_UINT: {
@@ -1160,19 +1163,17 @@ static void writeAttrValue(OFile *fp, VObject *o)
 	struct PreDefProp *pi;
 	pi = lookupPropInfo(NAME_OF(o));
 	if (pi && ((pi->flags & PD_INTERNAL) != 0)) return;
-	if ( includesUnprintable(o) ) {
-	    appendsOFile(fp, ";" VCEncodingProp "=" VCQuotedPrintableProp);
-	    appendsOFile(fp, ";" VCCharSetProp "=" "UTF-8");
-	}
+	if ( includesUnprintable(o) )
+	    appendsOFileEncCs(fp);
 	appendcOFile(fp,';');
 	appendsOFile(fp,NAME_OF(o));
-	}
-    else
+    } else {
 	appendcOFile(fp,';');
+    }
     if (VALUE_TYPE(o)) {
 	appendcOFile(fp,'=');
-	writeValue(fp,o,0);
-	}
+	writeValue(fp,o,0,TRUE);
+    }
 }
 
 static void writeGroup(OFile *fp, VObject *o)
@@ -1235,10 +1236,8 @@ static void writeProp(OFile *fp, VObject *o)
 		fields++;
 	    }
 	    fields = fields_;
-	    if (!printable) {
-		appendsOFile(fp, ";" VCEncodingProp "=" VCQuotedPrintableProp);
-		appendsOFile(fp, ";" VCCharSetProp "=" "UTF-8");
-	    }
+	    if (!printable)
+		appendsOFileEncCs(fp);
 	    appendcOFile(fp,':');
 	    while (*fields) {
 		VObject *t = isAPropertyOf(o,*fields);
@@ -1248,24 +1247,22 @@ static void writeProp(OFile *fp, VObject *o)
 	    }
 	    fields = fields_;
 	    for (i=0;i<n;i++) {
-		writeValue(fp,isAPropertyOf(o,*fields),0);
+		writeValue(fp,isAPropertyOf(o,*fields),0,TRUE);
 		fields++;
 		if (i<(n-1)) appendcOFile(fp,';');
 	    }
 	    }
 	}
 
-
+	
     if (VALUE_TYPE(o)) {
-	    if ( includesUnprintable(o) ) {
-	    appendsOFile(fp, ";" VCEncodingProp "=" VCQuotedPrintableProp);
-	    appendsOFile(fp, ";" VCCharSetProp "=" "UTF-8");
-	}
+	    if ( includesUnprintable(o) )
+			appendsOFileEncCs(fp);
 	unsigned long size = 0;
         VObject *p = isAPropertyOf(o,VCDataSizeProp);
 	if (p) size = LONG_VALUE_OF(p);
 	appendcOFile(fp,':');
-	writeValue(fp,o,size);
+	writeValue(fp,o,size,FALSE);
 	}
 
     appendcOFile(fp,'\n');
@@ -1295,8 +1292,35 @@ static void writeVObject_(OFile *fp, VObject *o)
 	}
 }
 
+static void initVObjectEncoding()
+{
+    Config pimConfig( "Beam" );
+    pimConfig.setGroup("Send");
+    Config devcfg(pimConfig.readEntry("DeviceConfig"),Config::File);
+    QString enc = "QP";
+    QString cs = "UTF-8";
+    if ( devcfg.isValid() ) {
+	devcfg.setGroup("Send");
+	enc = devcfg.readEntry("Encoding","QP"); 
+	cs = devcfg.readEntry("CharSet","UTF-8"); 
+    }
+    strncpy(vobj_cs,cs.latin1(),10);
+    if ( enc == "QP" ) {
+	vobj_enc = QuotedPrintable;
+	vobj_enc_s = VCQuotedPrintableProp;
+    } else if ( enc == "B64" ) {
+	vobj_enc = Base64;
+	vobj_enc_s = VCBase64Prop;
+    } else {
+	vobj_enc = EightBit;
+	vobj_enc_s = 0;
+    }
+}
+
 void writeVObject(FILE *fp, VObject *o)
 {
+    initVObjectEncoding();
+
     OFile ofp;
     // #####
     //_setmode(_fileno(fp), _O_BINARY);
@@ -1329,11 +1353,6 @@ DLLEXPORT(void) writeVObjectsToFile(char *fname, VObject *list)
 	    }
 }
 
-#ifndef __SHARP_COMP_
-
-// This function is not available in the Sharp ROM for SL 5500 !
-// Therefore I have to move it into the header file.. (se)
-
 DLLEXPORT(const char *) vObjectTypeInfo(VObject *o)
 {
     const char *type = vObjectName( o );
@@ -1341,6 +1360,6 @@ DLLEXPORT(const char *) vObjectTypeInfo(VObject *o)
 	type = vObjectStringZValue( o );
     return type;
 }
-#endif
+
 
 // end of source file vobject.c

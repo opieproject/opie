@@ -122,7 +122,7 @@ DFARS 252.227-7013 or 48 CFR 52.227-19, as applicable.
 //#ifdef PALMTOPCENTER
 //#include <qpe/vobject_p.h>
 //#else
-#include <qtopia/private/vobject_p.h>
+#include "vobject_p.h"
 //#endif
 
 /****  Types, Constants  ****/
@@ -723,16 +723,22 @@ static char* lexGet1Value() {
     lexSkipWhite();
     c = lexLookahead();
     lexClearToken();
-    while (c != EOF && c != ';') {
+    while (c != EOF && (c != ';' || !fieldedProp)) {
 	if (c == '\\' ) {
 	    int a;
 	    lexSkipLookahead();
 	    a = lexLookahead();
-	    if ( a != ';' ) {
-		lexAppendc('\\');
-	    } else {
+	    if ( a == ';' ) {
 		lexAppendc( ';' );
 		lexSkipLookahead();
+	    } else if ( a == '\n' ) {
+		lexAppendc( '\n' );
+		lexSkipLookahead();
+	    } else if ( a == '\\' ) {
+		lexAppendc( '\\' );
+		lexSkipLookahead();
+	    } else {
+		lexAppendc('\\');
 	    }
 	} else if (c == '\n') {
 	    int a;
@@ -961,6 +967,7 @@ static char* lexGetQuotedPrintable()
 		// we have been sent buggy stuff. doesn't matter
 		// what we do so long as we keep going.
 		// should probably spit an error here
+		lexSkipLookahead(); 
 		c = lexLookahead();
 		continue;
 	    }
@@ -978,6 +985,7 @@ static char* lexGetQuotedPrintable()
 		// we have been sent buggy stuff. doesn't matter
 		// what we do so long as we keep going.
 		// should probably spit an error here
+		lexSkipLookahead(); 
 		c = lexLookahead();
 		continue;
 	    }
@@ -1000,7 +1008,7 @@ static int yylex() {
     int lexmode = LEXMODE();
     if (lexmode == L_VALUES) {
 	int c = lexGetc();
-	if (c == ';') {
+	if (c == ';' && fieldedProp) {
 	    DBG_(("db: SEMICOLON\n"));
 	    lexPushLookaheadc(c);
 	    handleMoreRFC822LineBreak(c);
@@ -1054,12 +1062,14 @@ static int yylex() {
 		case ':': {
 		    /* consume all line separator(s) adjacent to each other */
 		    /* ignoring linesep immediately after colon. */
+		    /* I don't see this in the spec, and it breaks null values -- WA
 		    c = lexLookahead();
 		    while (strchr("\n",c)) {
 			lexSkipLookahead();
 			c = lexLookahead();
 			++mime_lineNum;
 			}
+		    */
 		    DBG_(("db: COLON\n"));
 		    return COLON;
 		    }
