@@ -18,13 +18,13 @@ Saving and Restoring Profiles
 
 TASKS in progress:
 Profile->Session and MainWidget --- Harlekin
-FilesendingLayer & UI - hash
+FilesendingLayer - hash
 IOLayer - wazlaf
 Configuration - josef
 TE - ibotty
 
 OPEN tasks:
-Session->Profile -  open
+Session->Profile - hash
 Scripting - wazlaf 
 Keys - open
 IRDA-Layer - open
