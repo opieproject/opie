@@ -254,10 +254,10 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   bool listHidden;
   cfg.setGroup("Menubar");
   if( cfg.readEntry("Hidden","FALSE") == "TRUE")  {
-      editCommandListMenu->insertItem("Show command list");
+      editCommandListMenu->insertItem( tr( "Show command list" ));
       listHidden=TRUE;
   } else {
-      editCommandListMenu->insertItem("Hide command list");
+      editCommandListMenu->insertItem( tr( "Hide command list" ));
       listHidden=FALSE;
   }
 
@@ -265,27 +265,27 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   tmp=cfg.readEntry("Position","Bottom");
   if(tmp=="Top") {
       tab->setTabPosition(QTabWidget::Top);
-      configMenu->insertItem("Tabs on Bottom");
+      configMenu->insertItem( tr( "Tabs on Bottom" ) );
   } else {
       tab->setTabPosition(QTabWidget::Bottom);
       configMenu->insertItem("Tabs on Top");
   }
   configMenu->insertSeparator(2);
 
-  colorMenu->insertItem("Green on Black");
-  colorMenu->insertItem("Black on White");
-  colorMenu->insertItem("White on Black");
-  colorMenu->insertItem("Black on Transparent");
-  colorMenu->insertItem("Black on Red");
-  colorMenu->insertItem("Red on Black");
-  colorMenu->insertItem("Green on Yellow");
-  colorMenu->insertItem("Blue on Magenta");
-  colorMenu->insertItem("Magenta on Blue");
-  colorMenu->insertItem("Cyan on White");
-  colorMenu->insertItem("White on Cyan");
-  colorMenu->insertItem("Blue on Black");
-  colorMenu->insertItem("Amber on Black");
-  configMenu->insertItem("Colors",colorMenu);
+  colorMenu->insertItem(tr( "Green on Black"));
+  colorMenu->insertItem(tr( "Black on White"));
+  colorMenu->insertItem(tr( "White on Black"));
+  colorMenu->insertItem(tr( "Black on Transparent"));
+  colorMenu->insertItem(tr( "Black on Red"));
+  colorMenu->insertItem(tr( "Red on Black"));
+  colorMenu->insertItem(tr( "Green on Yellow"));
+  colorMenu->insertItem(tr( "Blue on Magenta"));
+  colorMenu->insertItem(tr( "Magenta on Blue"));
+  colorMenu->insertItem(tr( "Cyan on White"));
+  colorMenu->insertItem(tr( "White on Cyan"));
+  colorMenu->insertItem(tr( "Blue on Black"));
+  colorMenu->insertItem(tr( "Amber on Black"));
+  configMenu->insertItem(tr( "Colors") ,colorMenu);
 
   connect( fontList, SIGNAL( activated(int) ), this, SLOT( fontChanged(int) ));
   connect( configMenu, SIGNAL( activated(int) ), this, SLOT( configMenuSelected(int) ));
@@ -327,12 +327,12 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   commonCombo = new QComboBox( secondToolBar );
   commonCombo->setMaximumWidth(236);
 
-  editCommandListMenu->insertItem( "Quick Edit");
+  editCommandListMenu->insertItem( tr( "Quick Edit" ) );
   if( listHidden) {
       secondToolBar->hide();
       editCommandListMenu->setItemEnabled(-22 ,FALSE);
   }
-  editCommandListMenu->insertItem( "Edit");
+  editCommandListMenu->insertItem(tr(  "Edit" ) );
 
   cfg.setGroup("Commands");
   commonCombo->setInsertionPolicy(QComboBox::AtCurrent);
@@ -347,10 +347,10 @@ void Konsole::init(const char* _pgm, QStrList & _args)
 
   connect( commonCombo, SIGNAL( activated(int) ), this, SLOT( enterCommand(int) ));
 
-  scrollMenu->insertItem("None");
-  scrollMenu->insertItem("Left");
-  scrollMenu->insertItem("Right");
-  configMenu->insertItem("ScrollBar",scrollMenu);
+  scrollMenu->insertItem(tr( "None" ));
+  scrollMenu->insertItem(tr( "Left" ));
+  scrollMenu->insertItem(tr( "Right" ));
+  configMenu->insertItem(tr( "ScrollBar" ),scrollMenu);
   
       // create applications /////////////////////////////////////////////////////
   setCentralWidget(tab);
@@ -802,12 +802,12 @@ void Konsole::editCommandListMenuSelected(int iD)
     if( iD  == -3) {
         if(!secondToolBar->isHidden()) {
             secondToolBar->hide();
-            configMenu->changeItem( iD,"Show Command List");
+            configMenu->changeItem( iD,tr( "Show Command List" ));
             cfg.writeEntry("Hidden","TRUE");
             configMenu->setItemEnabled(-22 ,FALSE);
         } else {
             secondToolBar->show();
-            configMenu->changeItem( iD,"Hide Command List");
+            configMenu->changeItem( iD,tr( "Hide Command List" ));
             cfg.writeEntry("Hidden","FALSE");
             configMenu->setItemEnabled(-22 ,TRUE);
 
