@@ -78,8 +78,8 @@ audio/prs.sid     sid psid
 audio/basic     au snd
 audio/midi      mid midi kar
 audio/mpeg      mp3 mpga mp2 mpega
-audio/mpegurl    m3u
 audio/x-aiff      aif aifc aiff
+audio/x-mpegurl m3u pls
 audio/x-mod     amf apun dsm far gdm imf it med mod mtm nst s3m stm stx ult uni xm
 audio/x-pn-realaudio    ra ram
 audio/x-pn-realaudio-plugin
@@ -114,6 +114,7 @@ multipart/appledouble
 multipart/digest
 multipart/mixed
 multipart/parallel
+playlist/plain playlist
 text/css      css
 text/html     html htm
 text/plain      txt asc c cc h hh cpp hpp
