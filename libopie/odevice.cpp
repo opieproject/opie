@@ -72,6 +72,7 @@ public:
 
 	QValueList <ODeviceButton> *m_buttons;
 	uint                        m_holdtime;
+	QStrList                   *m_cpu_frequencies;
 };
 
 
@@ -423,6 +424,7 @@ ODevice::ODevice ( )
 
 	d-> m_holdtime = 1000; // 1000ms
 	d-> m_buttons = 0;
+	d-> m_cpu_frequencies = new QStrList;
 }
 
 void ODevice::systemMessage ( const QCString &msg, const QByteArray & )
@@ -771,6 +773,46 @@ int ODevice::lightSensorResolution ( ) const
 {
 	return 0;
 }
+
+/**
+ * @return a list with valid CPU frequency
+ */
+QStrList &ODevice::cpuFrequencies ( ) const
+{
+qWarning("ODevice::cpuFrequencies: m_cpu_frequencies is %d", (int) d->m_cpu_frequencies);
+	return *d->m_cpu_frequencies;
+}
+
+
+/**
+ * Set desired cpu frequency
+ * 
+ * @param index index into d->m_cpu_frequencies of the frequency to be set
+ */
+bool ODevice::setCpuFrequency(uint index)
+{
+	if (index >= d->m_cpu_frequencies->count())
+		return false;
+
+	char *freq = d->m_cpu_frequencies->at(index);
+	qWarning("set freq to %s", freq);
+
+	//TODO: do the change in /proc/sys/cpu/0/speed
+
+	return false;
+}
+
+/**
+ * Returns current frequency index out of d->m_cpu_frequencies
+ */
+uint ODevice::cpuFrequency() const
+{
+	// TODO: get freq from /proc/sys/cpu/0/speed and return index
+
+	return 0;
+}
+
+
 
 /**
  * @return a list of hardware buttons
@@ -1950,6 +1992,11 @@ void Ramses::init()
 
 	m_power_timer = 0;
 
+qWarning("adding freq");
+	d->m_cpu_frequencies->append("100");
+	d->m_cpu_frequencies->append("200");
+	d->m_cpu_frequencies->append("300");
+	d->m_cpu_frequencies->append("400");
 }
 
 bool Ramses::filter(int /*unicode*/, int keycode, int modifiers, bool isPress, bool autoRepeat)
@@ -2010,6 +2057,7 @@ bool Ramses::setSoftSuspend(bool soft)
 bool Ramses::suspend ( )
 {
 	qDebug("Ramses::suspend");
+	return false;
 }
 
 /**
@@ -2048,16 +2096,23 @@ bool Ramses::setDisplayBrightness(int bright)
 		bright = 255;
 	if (bright < 0)
 		bright = 0;
-	bright = 500-(bright * 500 / 255);
 
+	// Turn backlight completely off
+	if ((fd = ::open("/proc/sys/board/lcd_backlight", O_WRONLY)) >= 0) {
+		char writeCommand[10];
+		const int count = sprintf(writeCommand, "%d\n", bright ? 1 : 0);
+		res = (::write(fd, writeCommand, count) != -1);
+		::close(fd);
+	}
+
+	// scale backlight brightness to hardware
+	bright = 500-(bright * 500 / 255);
 	if ((fd = ::open("/proc/sys/board/pwm1", O_WRONLY)) >= 0) {
 		qDebug(" %d -> pwm1", bright);
 		char writeCommand[100];
 		const int count = sprintf(writeCommand, "%d\n", bright);
 		res = (::write(fd, writeCommand, count) != -1);
 		::close(fd);
-	} else {
-		qWarning("no write");
 	}
 	return res;
 }

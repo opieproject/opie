@@ -23,6 +23,7 @@
 #include <qobject.h>
 #include <qstring.h>
 #include <qnamespace.h>
+#include <qstrlist.h>
 
 #include <opie/odevicebutton.h>
 
@@ -149,13 +150,12 @@ protected:
 	ODeviceData *d;
 
 public:
-    // sandman do we want to allow destructions? -zecke?
+	// sandman do we want to allow destructions? -zecke?
 	virtual ~ODevice ( );
-
 
 	static ODevice *inst ( );
 
-// information
+	// information
 
 	QString modelString ( ) const;
 	OModel model ( ) const;
@@ -197,6 +197,10 @@ public:
 	virtual bool hasLightSensor ( ) const;
 	virtual int readLightSensor ( );
 	virtual int lightSensorResolution ( ) const;
+
+	QStrList &cpuFrequencies() const;
+	bool setCpuFrequency(uint index);
+	uint cpuFrequency() const;
 
 	/**
 	 * Returns the available buttons on this device.  The number and location
