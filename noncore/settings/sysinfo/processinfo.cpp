@@ -128,7 +128,7 @@ void ProcessInfo::viewProcess(QListViewItem *process)
         {
             bool ok;
             pid_t child=pid.toInt(&ok,10);
-            if((kill(child,SIGTERM)) < 0)
+            if((kill(child,SIGKILL)) < 0)
                 perror("kill:SIGTERM");
         }   
             break;
