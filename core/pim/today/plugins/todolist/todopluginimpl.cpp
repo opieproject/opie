@@ -22,6 +22,7 @@ TodolistPluginImpl::TodolistPluginImpl() {
 }
 
 TodolistPluginImpl::~TodolistPluginImpl() {
+    delete todolistPlugin;
 }
 
 

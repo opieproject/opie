@@ -24,6 +24,7 @@ FortunePluginImpl::FortunePluginImpl()
 
 FortunePluginImpl::~FortunePluginImpl()
 {
+	delete fortunePlugin;
 }
 
 

@@ -36,6 +36,7 @@ WeatherPluginImpl::WeatherPluginImpl()
 
 WeatherPluginImpl::~WeatherPluginImpl()
 {
+	delete weatherPlugin;
 }
 
 

@@ -24,6 +24,7 @@ StockTickerPluginImpl::StockTickerPluginImpl() {
 }
 
 StockTickerPluginImpl::~StockTickerPluginImpl() {
+    delete stocktickerPlugin;
 }
 
 

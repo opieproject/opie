@@ -24,6 +24,7 @@ MailPluginImpl::MailPluginImpl() {
 }
 
 MailPluginImpl::~MailPluginImpl() {
+    delete mailPlugin;
 }
 
 
