@@ -6,3 +6,7 @@ Name=Launcher Refresh
 Comment=Refresh the launcher so that new installed applications appear
 Name[es]=Refresca Lanzador
 Comment[es]=Refresca el lanzador (aparecen aplicaciones recién instaladas)
+Name[pt]=Actualiza Lista Aplicações
+Comment[pt]=Actualiza a lista de aplicações disponíveis
+Name[pt_BR]=Actualiza Lista Aplicações
+Comment[pt_BR]=Actualiza a lista de aplicações disponíveis

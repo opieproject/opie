@@ -6,3 +6,7 @@ Name=Disk Free
 Comment=Frontend to df (show space left on mountpoints)
 Name[es]=Espacio Libre
 Comment[es]=Interfaz de df (muestra espacio libre en puntos de montaje)
+Name[pt]=Espaço Livre
+Comment[pt]=Mostra o espaço livre nos vários discos
+Name[pt_BR]=Espaço Livre
+Comment[pt_BR]=Mostra o espaço livre nos vários discos

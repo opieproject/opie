@@ -6,3 +6,7 @@ Name=Filesystem Mounter
 Comment=Frontend to mount/unmount filesystems
 Name[es]=Montador
 Comment[es]=Interfaz para montar/desmontar sistemas de ficheros
+Name[pt]=Monta Disco
+Comment[pt]=Interface para montar discos
+Name[pt_BR]=Monta Disco
+Comment[pt_BR]=Interface para montar discos
