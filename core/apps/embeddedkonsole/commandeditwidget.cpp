@@ -44,7 +44,6 @@ Form1::Form1( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
     if ( !name )
-  setName( tr("Form1"));
     resize( 596, 480 ); 
     setCaption( tr( "Form1" ) );
     Form1Layout = new QGridLayout( this ); 
