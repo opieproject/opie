@@ -257,7 +257,7 @@ void OVersatileView::contextMenuRequested( QIconViewItem* item, const QPoint& po
 
 void OVersatileView::popupContextMenu( OVersatileViewItem* item, const QPoint& pos, int col )
 {
-    if ( not item )
+    if ( !item )
         _contextmenu->exec( pos );
     else
         emit( contextMenuRequested( item, pos, col ) );
@@ -449,13 +449,13 @@ void OVersatileView::onItem( QIconViewItem * item )
 void OVersatileView::expanded( QListViewItem *item ) // QListView
 {
     //qDebug( "OVersatileView::expanded(): opening tree..." );
-    if ( not _treeopened.isNull() )
+    if ( !_treeopened.isNull() )
         item->setPixmap( 0, _treeopened );
     emit( expanded( static_cast<OVersatileViewItem*>( item ) ) );
 }
 void OVersatileView::collapsed( QListViewItem *item ) // QListView
 {
-    if ( not _treeclosed.isNull() )
+    if ( !_treeclosed.isNull() )
         item->setPixmap( 0, _treeclosed );
     emit( collapsed( static_cast<OVersatileViewItem*>( item ) ) );
 }
@@ -466,7 +466,7 @@ void OVersatileView::collapsed( QListViewItem *item ) // QListView
     
 int OVersatileView::treeStepSize() const  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return -1;
     }
@@ -474,7 +474,7 @@ int OVersatileView::treeStepSize() const  // QListView
 }
  void OVersatileView::setTreeStepSize( int size )  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return;
     }
@@ -483,7 +483,7 @@ int OVersatileView::treeStepSize() const  // QListView
 
 QHeader * OVersatileView::header() const  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return 0;
     }
@@ -492,16 +492,16 @@ QHeader * OVersatileView::header() const  // QListView
 
  int OVersatileView::addColumn( const QString &label, int size )  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return -1;
     }
     return _listview->addColumn( label, size );
 }
-    
+
  int OVersatileView::addColumn( const QIconSet& iconset, const QString &label, int size )  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return -1;
     }
@@ -510,7 +510,7 @@ QHeader * OVersatileView::header() const  // QListView
 
 void OVersatileView::removeColumn( int index )  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return;
     }
@@ -518,7 +518,7 @@ void OVersatileView::removeColumn( int index )  // QListView
 }
  void OVersatileView::setColumnText( int column, const QString &label )  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return;
     }
@@ -526,7 +526,7 @@ void OVersatileView::removeColumn( int index )  // QListView
 }
  void OVersatileView::setColumnText( int column, const QIconSet& iconset, const QString &label )  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return;
     }
@@ -534,7 +534,7 @@ void OVersatileView::removeColumn( int index )  // QListView
 }
 QString OVersatileView::columnText( int column ) const  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return QString::null;
     }
@@ -542,7 +542,7 @@ QString OVersatileView::columnText( int column ) const  // QListView
 }
  void OVersatileView::setColumnWidth( int column, int width )  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return;
     }
@@ -550,7 +550,7 @@ QString OVersatileView::columnText( int column ) const  // QListView
 }
 int OVersatileView::columnWidth( int column ) const  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return -1;
     }
@@ -558,7 +558,7 @@ int OVersatileView::columnWidth( int column ) const  // QListView
 }
  void OVersatileView::setColumnWidthMode( int column, WidthMode mode )  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return;
     }
@@ -566,7 +566,7 @@ int OVersatileView::columnWidth( int column ) const  // QListView
 }
 int OVersatileView::columns() const  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return -1;
     }
@@ -575,7 +575,7 @@ int OVersatileView::columns() const  // QListView
 
  void OVersatileView::setColumnAlignment( int column, int align )  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return;
     }
@@ -583,7 +583,7 @@ int OVersatileView::columns() const  // QListView
 }
 int OVersatileView::columnAlignment( int column ) const  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return -1;
     }
@@ -592,7 +592,7 @@ int OVersatileView::columnAlignment( int column ) const  // QListView
 
 OVersatileViewItem * OVersatileView::itemAt( const QPoint & screenPos ) const  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return 0;
     }
@@ -600,7 +600,7 @@ OVersatileViewItem * OVersatileView::itemAt( const QPoint & screenPos ) const  /
 }
 QRect OVersatileView::itemRect( const OVersatileViewItem * item ) const  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return QRect( -1, -1, -1, -1 );
     }
@@ -608,7 +608,7 @@ QRect OVersatileView::itemRect( const OVersatileViewItem * item ) const  // QLis
 }
 int OVersatileView::itemPos( const OVersatileViewItem * item )  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return -1;
     }
@@ -617,7 +617,7 @@ int OVersatileView::itemPos( const OVersatileViewItem * item )  // QListView
 
 bool OVersatileView::isSelected( const OVersatileViewItem * item ) const  // QListView  // also in QIconViewItem but !in QIconView *shrug*
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return false;
     }
@@ -635,7 +635,7 @@ bool OVersatileView::isMultiSelection() const
 
 OVersatileViewItem * OVersatileView::selectedItem() const  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return 0;
     }
@@ -643,7 +643,7 @@ OVersatileViewItem * OVersatileView::selectedItem() const  // QListView
 }
  void OVersatileView::setOpen( OVersatileViewItem * item, bool open )  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return;
     }
@@ -651,7 +651,7 @@ OVersatileViewItem * OVersatileView::selectedItem() const  // QListView
 }
 bool OVersatileView::isOpen( const OVersatileViewItem * item ) const  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return false;
     }
@@ -660,7 +660,7 @@ bool OVersatileView::isOpen( const OVersatileViewItem * item ) const  // QListVi
 
 OVersatileViewItem * OVersatileView::firstChild() const  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return 0;
     }
@@ -668,7 +668,7 @@ OVersatileViewItem * OVersatileView::firstChild() const  // QListView
 }
 int OVersatileView::childCount() const  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return -1;
     }
@@ -677,7 +677,7 @@ int OVersatileView::childCount() const  // QListView
 
  void OVersatileView::setAllColumnsShowFocus( bool focus )  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return;
     }
@@ -685,7 +685,7 @@ int OVersatileView::childCount() const  // QListView
 }
 bool OVersatileView::allColumnsShowFocus() const  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return false;
     }
@@ -694,7 +694,7 @@ bool OVersatileView::allColumnsShowFocus() const  // QListView
 
  void OVersatileView::setItemMargin( int margin )  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return;
     }
@@ -702,7 +702,7 @@ bool OVersatileView::allColumnsShowFocus() const  // QListView
 }
 int OVersatileView::itemMargin() const  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return -1;
     }
@@ -711,7 +711,7 @@ int OVersatileView::itemMargin() const  // QListView
 
  void OVersatileView::setRootIsDecorated( bool decorate )  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return;
     }
@@ -719,7 +719,7 @@ int OVersatileView::itemMargin() const  // QListView
 }
 bool OVersatileView::rootIsDecorated() const  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return false;
     }
@@ -728,7 +728,7 @@ bool OVersatileView::rootIsDecorated() const  // QListView
 
 void OVersatileView::setShowSortIndicator( bool show )  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return;
     }
@@ -736,7 +736,7 @@ void OVersatileView::setShowSortIndicator( bool show )  // QListView
 }
 bool OVersatileView::showSortIndicator() const  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return false;
     }
@@ -745,7 +745,7 @@ bool OVersatileView::showSortIndicator() const  // QListView
 
 void OVersatileView::triggerUpdate()  // QListView
 {
-    if ( not isValidViewMode( Tree ) )
+    if ( !isValidViewMode( Tree ) )
     {
         return;
     }
@@ -758,7 +758,7 @@ void OVersatileView::triggerUpdate()  // QListView
     
 uint OVersatileView::count() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return 0;
     }
@@ -767,7 +767,7 @@ uint OVersatileView::count() const  // QIconView
 
 int OVersatileView::index( const OVersatileViewItem *item ) const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return -1;
     }
@@ -776,7 +776,7 @@ int OVersatileView::index( const OVersatileViewItem *item ) const  // QIconView
 
 OVersatileViewItem* OVersatileView::firstItem() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return 0;
     }
@@ -784,7 +784,7 @@ OVersatileViewItem* OVersatileView::firstItem() const  // QIconView
 }
 OVersatileViewItem* OVersatileView::lastItem() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return 0;
     }
@@ -793,7 +793,7 @@ OVersatileViewItem* OVersatileView::lastItem() const  // QIconView
 
 OVersatileViewItem* OVersatileView::findItem( const QPoint &pos ) const // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return 0;
     }
@@ -801,7 +801,7 @@ OVersatileViewItem* OVersatileView::findItem( const QPoint &pos ) const // QIcon
 }
 OVersatileViewItem* OVersatileView::findItem( const QString &text ) const // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return 0;
     }
@@ -810,7 +810,7 @@ OVersatileViewItem* OVersatileView::findItem( const QString &text ) const // QIc
 
 OVersatileViewItem* OVersatileView::findFirstVisibleItem( const QRect &r ) const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return 0;
     }
@@ -818,7 +818,7 @@ OVersatileViewItem* OVersatileView::findFirstVisibleItem( const QRect &r ) const
 }
 OVersatileViewItem* OVersatileView::findLastVisibleItem( const QRect &r ) const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return 0;
     }
@@ -827,7 +827,7 @@ OVersatileViewItem* OVersatileView::findLastVisibleItem( const QRect &r ) const 
 
  void OVersatileView::setGridX( int rx )  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return;
     }
@@ -835,7 +835,7 @@ OVersatileViewItem* OVersatileView::findLastVisibleItem( const QRect &r ) const 
 }
  void OVersatileView::setGridY( int ry )  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return;
     }
@@ -843,7 +843,7 @@ OVersatileViewItem* OVersatileView::findLastVisibleItem( const QRect &r ) const 
 }
 int OVersatileView::gridX() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return -1;
     }
@@ -851,7 +851,7 @@ int OVersatileView::gridX() const  // QIconView
 }
 int OVersatileView::gridY() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return -1;
     }
@@ -859,7 +859,7 @@ int OVersatileView::gridY() const  // QIconView
 }
  void OVersatileView::setSpacing( int sp )  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return;
     }
@@ -867,7 +867,7 @@ int OVersatileView::gridY() const  // QIconView
 }
 int OVersatileView::spacing() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return -1;
     }
@@ -875,7 +875,7 @@ int OVersatileView::spacing() const  // QIconView
 }
  void OVersatileView::setItemTextPos( QIconView::ItemTextPos pos )  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return;
     }
@@ -883,7 +883,7 @@ int OVersatileView::spacing() const  // QIconView
 }
 QIconView::ItemTextPos OVersatileView::itemTextPos() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return (QIconView::ItemTextPos) -1;
     }
@@ -891,7 +891,7 @@ QIconView::ItemTextPos OVersatileView::itemTextPos() const  // QIconView
 }
  void OVersatileView::setItemTextBackground( const QBrush &b )  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return;
     }
@@ -899,7 +899,7 @@ QIconView::ItemTextPos OVersatileView::itemTextPos() const  // QIconView
 }
 QBrush OVersatileView::itemTextBackground() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return QBrush();
     }
@@ -907,7 +907,7 @@ QBrush OVersatileView::itemTextBackground() const  // QIconView
 }
  void OVersatileView::setArrangement( QIconView::Arrangement am )  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return;
     }
@@ -915,7 +915,7 @@ QBrush OVersatileView::itemTextBackground() const  // QIconView
 }
 QIconView::Arrangement OVersatileView::arrangement() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return (QIconView::Arrangement) -1;
     }
@@ -923,7 +923,7 @@ QIconView::Arrangement OVersatileView::arrangement() const  // QIconView
 }
  void OVersatileView::setResizeMode( QIconView::ResizeMode am )  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return;
     }
@@ -931,7 +931,7 @@ QIconView::Arrangement OVersatileView::arrangement() const  // QIconView
 }
 QIconView::ResizeMode OVersatileView::resizeMode() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return (QIconView::ResizeMode) -1;
     }
@@ -939,7 +939,7 @@ QIconView::ResizeMode OVersatileView::resizeMode() const  // QIconView
 }
  void OVersatileView::setMaxItemWidth( int w )  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return;
     }
@@ -947,7 +947,7 @@ QIconView::ResizeMode OVersatileView::resizeMode() const  // QIconView
 }
 int OVersatileView::maxItemWidth() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return -1;
     }
@@ -955,7 +955,7 @@ int OVersatileView::maxItemWidth() const  // QIconView
 }
  void OVersatileView::setMaxItemTextLength( int w )  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return;
     }
@@ -963,7 +963,7 @@ int OVersatileView::maxItemWidth() const  // QIconView
 }
 int OVersatileView::maxItemTextLength() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return -1;
     }
@@ -971,7 +971,7 @@ int OVersatileView::maxItemTextLength() const  // QIconView
 }
  void OVersatileView::setAutoArrange( bool b )  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return;
     }
@@ -979,7 +979,7 @@ int OVersatileView::maxItemTextLength() const  // QIconView
 }
 bool OVersatileView::autoArrange() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return false;
     }
@@ -987,7 +987,7 @@ bool OVersatileView::autoArrange() const  // QIconView
 }
  void OVersatileView::setShowToolTips( bool b )  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return;
     }
@@ -995,7 +995,7 @@ bool OVersatileView::autoArrange() const  // QIconView
 }
 bool OVersatileView::showToolTips() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return false;
     }
@@ -1004,7 +1004,7 @@ bool OVersatileView::showToolTips() const  // QIconView
 
 bool OVersatileView::sorting() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return false;
     }
@@ -1012,7 +1012,7 @@ bool OVersatileView::sorting() const  // QIconView
 }
 bool OVersatileView::sortDirection() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return false;
     }
@@ -1021,7 +1021,7 @@ bool OVersatileView::sortDirection() const  // QIconView
 
  void OVersatileView::setItemsMovable( bool b )  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return;
     }
@@ -1029,7 +1029,7 @@ bool OVersatileView::sortDirection() const  // QIconView
 }
 bool OVersatileView::itemsMovable() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return false;
     }
@@ -1037,7 +1037,7 @@ bool OVersatileView::itemsMovable() const  // QIconView
 }
 void OVersatileView::setWordWrapIconText( bool b )  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return;
     }
@@ -1045,7 +1045,7 @@ void OVersatileView::setWordWrapIconText( bool b )  // QIconView
 }
 bool OVersatileView::wordWrapIconText() const  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return false;
     }
@@ -1054,7 +1054,7 @@ bool OVersatileView::wordWrapIconText() const  // QIconView
 
 void OVersatileView::arrangeItemsInGrid( const QSize &grid, bool update )  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return;
     }
@@ -1062,7 +1062,7 @@ void OVersatileView::arrangeItemsInGrid( const QSize &grid, bool update )  // QI
 }
 void OVersatileView::arrangeItemsInGrid( bool update )  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return;
     }
@@ -1070,7 +1070,7 @@ void OVersatileView::arrangeItemsInGrid( bool update )  // QIconView
 }
 void OVersatileView::updateContents()  // QIconView
 {
-    if ( not isValidViewMode( Icons ) )
+    if ( !isValidViewMode( Icons ) )
     {
         return;
     }

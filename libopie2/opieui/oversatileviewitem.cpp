@@ -96,7 +96,7 @@ OVersatileView* OVersatileViewItem::versatileView() const
 
 void OVersatileViewItem::init()
 {
-    if ( not firstChild() )
+    if ( !firstChild() )
     {
         // I'm a sweet yellow and browne autumn leaf
         
