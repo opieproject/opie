@@ -20,8 +20,8 @@
 #include <opie2/otaskbarapplet.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/applnk.h>
-using namespace Opie::Core;
-using namespace Opie::Ui;
+#include <qpe/qcopenvelope_qws.h>
+
 
 /* QT */
 #include <qlineedit.h>
@@ -254,6 +254,10 @@ static char * snapshot_xpm[] = {
 "                                    > 9 . S.Q.. ; ]             ",
 "                                          T.; ]                 "};
 
+
+using namespace Opie::Core;
+using namespace Opie::Ui;
+
 static const char *SCAP_hostname = "www.handhelds.org";
 static const int SCAP_port = 80;
 
@@ -292,6 +296,10 @@ ScreenshotControl::ScreenshotControl( QWidget *parent, const char *name )
   grabItButton ->setFocusPolicy( QWidget::TabFocus );
   hbox-> addWidget ( grabItButton );
 
+  QPushButton* drawPadButton = new QPushButton( tr("Opie drawpad"), this, "DrawPadButton" );
+  drawPadButton->setFocusPolicy( QWidget::TabFocus );
+  hbox->addWidget( drawPadButton );
+
   scapButton = new QPushButton( tr( "Scap" ), this, "ScapButton" );
   scapButton ->setFocusPolicy( QWidget::TabFocus );
   hbox-> addWidget ( scapButton );
@@ -305,6 +313,7 @@ ScreenshotControl::ScreenshotControl( QWidget *parent, const char *name )
   connect ( grabTimer, SIGNAL( timeout()), this, SLOT( performGrab()));
   connect ( grabItButton, SIGNAL( clicked()), SLOT( slotGrab()));
   connect ( scapButton, SIGNAL( clicked()), SLOT( slotScap()));
+  connect ( drawPadButton, SIGNAL(clicked()), SLOT(slotDrawpad()) );
 }
 
 void ScreenshotControl::slotGrab()
@@ -350,6 +359,15 @@ void ScreenshotControl::slotScap()
     show();
 }
 
+void ScreenshotControl::slotDrawpad()
+{
+    buttonPushed = 3;
+    hide();
+    if ( delaySpin->value() )
+        grabTimer->start( delaySpin->value()*1000, true );
+    else
+        show();
+}
 
 void ScreenshotControl::savePixmap()
 {
@@ -413,6 +431,11 @@ void ScreenshotControl::performGrab()
                 show();
                 qApp->processEvents();
                 savePixmap();
+        }else if ( buttonPushed == 3 ) {
+            grabTimer->stop();
+            show();
+            QCopEnvelope env("QPE/Application/drawpad", "importPixmap(QPixmap)" );
+            env << snapshot;
         } else {
                 grabTimer->stop();
 

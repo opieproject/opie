@@ -12,8 +12,8 @@
 **
 **********************************************************************/
 
-#ifndef __SCREENSHOT_APPLET_H__
-#define __SCREENSHOT_APPLET_H__
+#ifndef SCREENSHOT_APPLET_H__
+#define SCREENSHOT_APPLET_H__
 
 
 
@@ -47,7 +47,8 @@ private:
 
 private slots:
     void slotGrab();
-    void slotScap(); 
+    void slotScap();
+    void slotDrawpad();
     void savePixmap();
     void performGrab();
 };
@@ -57,11 +58,11 @@ public:
     ScreenshotApplet( QWidget *parent = 0, const char *name=0 );
     ~ScreenshotApplet();
     static int position();
-    
+
 protected:
     void mousePressEvent( QMouseEvent * );
     void paintEvent( QPaintEvent* );
-    
+
 private:
 	QPixmap m_icon;
 };
