@@ -71,12 +71,9 @@ xconfig :
 	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(TOPDIR)/scripts/kconfig \
 		./scripts/kconfig/qconf ./config.in
 
-menuconfig : scripts/lxdialog/lxdialog
+menuconfig : $(TOPDIR)/scripts/lxdialog/lxdialog
 	$(call descend,scripts/kconfig,mconf)
 	./scripts/kconfig/mconf ./config.in
-
-scripts/lxdialog/lxdialog:
-	make -C scripts/lxdialog
 
 config :
 	$(call descend,scripts/kconfig,conf)
