@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=hostlist
+Exec=hostlist.sh
+Icon=hostlist
+Type=Application
+Name=Hostlist

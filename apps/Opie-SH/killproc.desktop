@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Exec=killproc.sh
+Icon=killproc
+Name=Process Killer

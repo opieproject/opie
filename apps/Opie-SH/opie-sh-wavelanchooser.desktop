@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=WLAN Chooser
+Exec=wavelanchooser.sh
+Icon=qtwavelan
+Type=Application
+Name=WLAN Chooser

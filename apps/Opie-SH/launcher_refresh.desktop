@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=launcher_refresh
+Exec=launcher_refresh.sh
+Icon=launcher_refresh
+Type=Application
+Name=Launcher Refresh

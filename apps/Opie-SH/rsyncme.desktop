@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=rsync helper
+Exec=rsyncme.sh
+Icon=rsyncme
+Type=Application
+Name=RSYNC Helper

@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Exec=usbnetctrl.sh
+Icon=usbnetctrl
+Name=USBNET Control
