@@ -1,0 +1,23 @@
+--- src/kernel/qapplication.cpp.orig	Sun Jul 21 21:26:30 2002
++++ src/kernel/qapplication.cpp	Sun Jul 21 21:41:32 2002
+@@ -930,10 +930,10 @@
+ void QApplication::setStyle( QStyle *style )
+ {
+     QStyle* old = app_style;
+-    app_style = style;
+ 
+     if ( startingUp() ) {
+ 	delete old;
++	app_style = style;
+ 	return;
+     }
+ 
+@@ -954,6 +954,8 @@
+ 	old->unPolish( qApp );
+     }
+ 
++    app_style = style;
++ 
+     // take care of possible palette requirements of certain gui
+     // styles. Do it before polishing the application since the style
+     // might call QApplication::setStyle() itself
