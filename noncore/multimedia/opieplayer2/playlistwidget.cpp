@@ -544,6 +544,11 @@ void PlayListWidget::tabChanged(QWidget *) {
 
     d->tbPlay->setEnabled( true );
 
+    disconnect( audioView, SIGNAL( itemsSelected( bool ) ),
+                d->tbPlay, SLOT( setEnabled( bool ) ) );
+    disconnect( videoView, SIGNAL( itemsSelected( bool ) ),
+                d->tbPlay, SLOT( setEnabled( bool ) ) );
+
     switch ( currentTab() ) {
     case CurrentPlayList:
     {
@@ -565,6 +570,11 @@ void PlayListWidget::tabChanged(QWidget *) {
         }
         d->tbRemoveFromList->setEnabled(FALSE);
         d->tbAddToList->setEnabled(TRUE);
+
+        connect( audioView, SIGNAL( itemsSelected( bool ) ),
+                 d->tbPlay, SLOT( setEnabled( bool ) ) );
+
+        d->tbPlay->setEnabled( audioView->hasSelection() );
     }
     break;
     case VideoFiles:
@@ -575,6 +585,11 @@ void PlayListWidget::tabChanged(QWidget *) {
         }
         d->tbRemoveFromList->setEnabled(FALSE);
         d->tbAddToList->setEnabled(TRUE);
+
+        connect( videoView, SIGNAL( itemsSelected( bool ) ),
+                 d->tbPlay, SLOT( setEnabled( bool ) ) );
+
+        d->tbPlay->setEnabled( videoView->hasSelection() );
     }
     break;
     case PlayLists:

@@ -19,10 +19,22 @@ PlayListFileView::PlayListFileView( const QString &mimeTypePattern, const QStrin
     setSorting( 3, TRUE );
     setMultiSelection( TRUE );
     setSelectionMode( QListView::Extended );
+
+    connect( this, SIGNAL( selectionChanged() ),
+             this, SLOT( checkSelection() ) );
 }
 
 PlayListFileView::~PlayListFileView()
 {
+}
+
+bool PlayListFileView::hasSelection() const
+{
+    for ( QListViewItemIterator it( const_cast<PlayListFileView *>( this ) ); it.current(); ++it )
+        if ( it.current()->isSelected() )
+            return true;
+
+    return false;
 }
 
 void PlayListFileView::scanFiles()
@@ -72,6 +84,11 @@ void PlayListFileView::populateView()
             newItem->setPixmap( 0, Resource::loadPixmap( m_itemPixmapName ) );
         }
     }
+}
+
+void PlayListFileView::checkSelection()
+{
+    emit itemsSelected( hasSelection() );
 }
 
 /* vim: et sw=4 ts=4

@@ -12,9 +12,17 @@ public:
     PlayListFileView( const QString &mimeTypePattern, const QString &itemPixmapName, QWidget *parent, const char *name = 0 );
     virtual ~PlayListFileView();
 
+    bool hasSelection() const;
+
 public slots:
     void scanFiles();
     void populateView();
+
+signals:
+    void itemsSelected( bool selected );
+
+private slots:
+    void checkSelection();
 
 private:
     QString m_mimeTypePattern;
