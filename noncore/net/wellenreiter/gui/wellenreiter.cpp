@@ -513,10 +513,18 @@ void Wellenreiter::joinNetwork(const QString& type, const QString& essid, int ch
         (const char*) macaddr );
 
     QCopEnvelope msg( "QPE/Application/networksettings", "wlan(QString,QString,QString)" );
+    int count = 3;
+    qDebug("sending %d messages",count);
+    msg << QString("count") << QString::number(count);
+    qDebug("msg >%s< Mode >%s<", iface->name(),type.latin1() );
     msg << QString(iface->name()) << QString("Mode") << type;
+    qDebug("msg >%s< essid >%s<", iface->name(),essid.latin1());
     msg << QString(iface->name()) << QString("ESSID") << essid;
+    qDebug("msg >%s< channel >%d<", iface->name(),channel);
     msg << QString(iface->name()) << QString("Channel") << channel;
-    msg << QString(iface->name()) << QString("MacAddr") << macaddr;
+//    qDebug("msg >%s< mac >%s<", iface->name(),macaddr);
+//    msg << QString(iface->name()) << QString("MacAddr") << macaddr;
+
 
 }
 
