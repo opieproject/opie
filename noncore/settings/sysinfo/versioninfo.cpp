@@ -78,8 +78,8 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
 #else
     QString builder = "Unknown";
 #endif
-    palmtopVersionString.append( tr( "Compiled by: " ) );
-    palmtopVersionString.append(  builder );
+    palmtopVersionString.append( tr( "Built against Qt/E " ) );
+    palmtopVersionString.append( QT_VERSION_STR );
     palmtopVersionString.append( "<br>" );
     palmtopVersionString.append( tr( "Built on: " ) );
     palmtopVersionString.append( __DATE__  );
