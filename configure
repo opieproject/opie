@@ -144,6 +144,8 @@ mkdir -p include/opie
 ( cd include/opie &&  rm -f *.h; ln -s ../../libopie/*.h .; rm -f *_p.h; )
 ( cd include/opie &&  ln -s ../../libsql/*.h .; )
 ( cd include/opie &&  ln -s ../../libopie/pim/*.h .; )
+( cd include/opie; for generatedHeader in `cd ../../libopie; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
+  ln -s ../../libopie/$generatedHeader $generatedHeader; done )
 
 echo Creating makefiles...
 
@@ -214,7 +216,7 @@ EOF
     if [ "$f" = "embeddedkonsole" ]
     then
 	case $PLATFORM in
-	    *x86*|*generic*|*ipaq*|*sharp*)
+	    *x86*|*generic*|*ipaq*|*oz*|*sharp*)
 		SED="$SED /^LIBS.*=/s/\$/ -lutil/;"
 		PLATFORM_CFLAGS="-DHAVE_OPENPTY"
 	    ;; *)
@@ -236,7 +238,7 @@ EOF
 	    ;; *generic*)
 		PLATFORM_CFLAGS=""
 	    # For the ipaq use fixed point maths, don't compile the mmx or css code
-	    ;; *ipaq*|*sharp*)
+	    ;; *ipaq*|*oz*|*sharp*)
 		PLATFORM_CFLAGS="-DUSE_FIXED_POINT"
 	    ;; *)
 		# For 'other platforms', turn off optimizations and use fixed point
@@ -251,7 +253,7 @@ EOF
 	    *x86*)
 		PLATFORM_CFLAGS="-DFPM_INTEL"
 	    # For the ipaq use ARM asm optimizations
-	    ;; *ipaq*|*sharp*)
+	    ;; *ipaq*|*oz*|*sharp*)
 		PLATFORM_CFLAGS="-DFPM_ARM"
 		SED="$SED /SOURCES.*=/s/=/= idmt_arm.S /;"
 	    # For generic platforms use the C 64-bit implementation
@@ -263,11 +265,13 @@ EOF
 		SED="$SED /SOURCES.*=/s/=/= idmt_arm.S /;"
 	esac
     fi
+    SED="$SED /LFLAGS.*=.*/s/\$/ $EXTRA $EXTRALIBS/;"
+    PLATFORM_CFLAGS="$PLATFORM_CFLAGS $EXTRAFLAGS";
     if [ -n "$PLATFORM_CFLAGS" ]
     then
 	# Append the addition c-flags we have defined
 	SED="$SED /CFLAGS.*=.*/s/\$/ $PLATFORM_CFLAGS/;"
-	SED="$SED /CXXFLAGS.*=.*/s/\$/ $PLATFORM_CFLAGS/;"
+	SED="$SED /CXXFLAGS.*=.*/s/\$/ $PLATFORM_CFLAGS -fpermissive/;"
     fi
     cat $TARGET >> $N
     if [ -n "$SED" ]
