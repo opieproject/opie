@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Checkbook keeping program.
- The checkbook accounting program for the Opie environment.
+ The checbook accounting program for the Opie environment.

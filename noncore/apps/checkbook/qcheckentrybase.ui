@@ -1,0 +1,610 @@
+<!DOCTYPE UI><UI>
+<class>QCheckEntryBase</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>QCheckEntryBase</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>224</width>
+            <height>291</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Account Transaction</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <grid>
+        <property stdset="1">
+            <name>margin</name>
+            <number>5</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>2</number>
+        </property>
+        <spacer row="7"  column="8"  rowspan="1"  colspan="4" >
+            <property>
+                <name>name</name>
+                <cstring>Spacer3</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Horizontal</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <spacer row="3"  column="1"  rowspan="1"  colspan="4" >
+            <property>
+                <name>name</name>
+                <cstring>Spacer5</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Horizontal</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget row="5"  column="5" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel6</cstring>
+            </property>
+            <property stdset="1">
+                <name>font</name>
+                <font>
+                    <family>adobe-helvetica</family>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>$</string>
+            </property>
+        </widget>
+        <spacer row="4"  column="6" >
+            <property>
+                <name>name</name>
+                <cstring>Spacer8</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Horizontal</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget row="2"  column="0"  rowspan="1"  colspan="3" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel2</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Category:</string>
+            </property>
+        </widget>
+        <spacer row="5"  column="2"  rowspan="1"  colspan="3" >
+            <property>
+                <name>name</name>
+                <cstring>Spacer7</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Horizontal</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <spacer row="5"  column="11" >
+            <property>
+                <name>name</name>
+                <cstring>Spacer4</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Horizontal</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <spacer row="2"  column="3"  rowspan="1"  colspan="2" >
+            <property>
+                <name>name</name>
+                <cstring>Spacer6</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Horizontal</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget row="5"  column="6"  rowspan="1"  colspan="5" >
+            <class>QRestrictedLine</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>transAmount</cstring>
+            </property>
+        </widget>
+        <widget row="1"  column="0"  rowspan="1"  colspan="5" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel1</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Description:</string>
+            </property>
+        </widget>
+        <widget row="3"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel3</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Type:</string>
+            </property>
+        </widget>
+        <widget row="5"  column="0"  rowspan="1"  colspan="2" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel5</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Amount:</string>
+            </property>
+        </widget>
+        <widget row="2"  column="5"  rowspan="1"  colspan="7" >
+            <class>QComboBox</class>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Automobile</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Bills</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>CDs</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Clothing</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Computer</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>DVDs</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Eletronics</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Entertainment</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Food</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Gasoline</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Misc</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Movies</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Rent</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Travel</string>
+                </property>
+            </item>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>cmbCategory</cstring>
+            </property>
+            <property stdset="1">
+                <name>editable</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>currentItem</name>
+                <number>0</number>
+            </property>
+            <property stdset="1">
+                <name>autoCompletion</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>duplicatesEnabled</name>
+                <bool>false</bool>
+            </property>
+        </widget>
+        <widget row="4"  column="0"  rowspan="1"  colspan="6" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel4</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Check Number:</string>
+            </property>
+        </widget>
+        <widget row="6"  column="4" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel6_2</cstring>
+            </property>
+            <property stdset="1">
+                <name>font</name>
+                <font>
+                    <family>adobe-helvetica</family>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>$</string>
+            </property>
+        </widget>
+        <widget row="6"  column="5"  rowspan="1"  colspan="4" >
+            <class>QRestrictedLine</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>transFee</cstring>
+            </property>
+        </widget>
+        <widget row="6"  column="0"  rowspan="1"  colspan="4" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel7</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Extra Fee:</string>
+            </property>
+        </widget>
+        <widget row="7"  column="0"  rowspan="1"  colspan="8" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel8</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Additional Notes:</string>
+            </property>
+        </widget>
+        <widget row="1"  column="5"  rowspan="1"  colspan="7" >
+            <class>QComboBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>descriptionCombo</cstring>
+            </property>
+            <property stdset="1">
+                <name>editable</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>maxCount</name>
+                <number>10</number>
+            </property>
+            <property stdset="1">
+                <name>insertionPolicy</name>
+                <enum>BeforeCurrent</enum>
+            </property>
+            <property stdset="1">
+                <name>autoCompletion</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>duplicatesEnabled</name>
+                <bool>false</bool>
+            </property>
+        </widget>
+        <widget row="6"  column="9" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel9</cstring>
+            </property>
+            <property stdset="1">
+                <name>minimumSize</name>
+                <size>
+                    <width>0</width>
+                    <height>0</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>32767</width>
+                    <height>32767</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>caption</name>
+                <string></string>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Date:</string>
+            </property>
+        </widget>
+        <widget row="6"  column="10"  rowspan="1"  colspan="2" >
+            <class>QRestrictedLine</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>dateEdit</cstring>
+            </property>
+        </widget>
+        <widget row="4"  column="7"  rowspan="1"  colspan="5" >
+            <class>QRestrictedLine</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>checkNumber</cstring>
+            </property>
+        </widget>
+        <widget row="3"  column="5"  rowspan="1"  colspan="7" >
+            <class>QComboBox</class>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Debit Charge</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Written Check</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Transfer</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Credit Card</string>
+                </property>
+            </item>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>transType</cstring>
+            </property>
+        </widget>
+        <widget row="8"  column="0"  rowspan="1"  colspan="12" >
+            <class>QMultiLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>additionalNotes</cstring>
+            </property>
+        </widget>
+        <widget row="0"  column="0"  rowspan="1"  colspan="12" >
+            <class>QButtonGroup</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>ButtonGroup3</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string></string>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <grid>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>4</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>0</number>
+                </property>
+                <widget row="0"  column="1" >
+                    <class>QRadioButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>deposit</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>1</hsizetype>
+                            <vsizetype>1</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Deposit</string>
+                    </property>
+                </widget>
+                <widget row="0"  column="0" >
+                    <class>QRadioButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>payment</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>1</hsizetype>
+                            <vsizetype>1</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Payment</string>
+                    </property>
+                    <property stdset="1">
+                        <name>checked</name>
+                        <bool>true</bool>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+    </grid>
+</widget>
+<customwidgets>
+    <customwidget>
+        <class>QRestrictedLine</class>
+        <header location="local">qrestrictedline.h</header>
+        <sizehint>
+            <width>-1</width>
+            <height>-1</height>
+        </sizehint>
+        <container>0</container>
+        <sizepolicy>
+            <hordata>5</hordata>
+            <verdata>5</verdata>
+        </sizepolicy>
+        <pixmap>image0</pixmap>
+    </customwidget>
+</customwidgets>
+<images>
+    <image>
+        <name>image0</name>
+        <data format="XPM.GZ" length="649">789c6dd23b0ec2300c00d03da7b0e22d42e9476c88232031222186c80c3074813220c4dd214dddd84dac0e759fe2386e1a07a7e3015c639e6318ef04740b0f70d7d730bccf97fdc7d8be87f8406737c62210606869dbb531f531a57f4a299d03a7e06c11cca1055508412c2889acc2ef425423b34840a645f28244936860d2c265d7923bae8b2f05cb35a91739002d2b5727d535cbe954a43ad1e22f700755caf7407cf4799fe286c47dbe3bf303014167a2</data>
+    </image>
+</images>
+<tabstops>
+    <tabstop>payment</tabstop>
+    <tabstop>descriptionCombo</tabstop>
+    <tabstop>cmbCategory</tabstop>
+    <tabstop>transType</tabstop>
+    <tabstop>additionalNotes</tabstop>
+</tabstops>
+</UI>
