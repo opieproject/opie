@@ -587,6 +587,11 @@ void BackupAndRestore::restore()
         return;
     }
 
+    if ( QMessageBox::warning( this, tr( "Restore" ), 
+                                     tr( "Would you really overwrite your local data?" ), 
+                                     tr( "Yes" ), tr( "No" ), "", 1 ) == 1 )
+        return;
+
     OWait *owait = new OWait();
     Global::statusMessage( tr( "Restore Backup..." ) );
     owait->show();

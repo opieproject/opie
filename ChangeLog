@@ -17,6 +17,7 @@
 	* #1554 - Fixed Opie-Console name in .desktop file (mickeyl)
 	* #1556 - Start to look for sound files in /opt/QtPalmtop/sounds (zecke)
 	* #1558 - Fixed opie-login breaking opie startup (mickeyl)
+	* #1570 - Confirmation needed befor Restore a backup and overwrite local data (ar)
 	* n.a.  - PackageManager - fixed where last package in status file was not shown as installed when it should be (drw)
 
 	Internal
