@@ -11,6 +11,7 @@ int main( int argc, char ** argv )
 
     MediumMountSetting::MainWindow mw;
     a.showMainWidget( &mw );
+    mw.showMaximized();
 
     return a.exec();
 }

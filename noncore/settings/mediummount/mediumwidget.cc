@@ -46,12 +46,12 @@ void MediumMountWidget::initGUI()
 {
   //main layout
   m_box = new QVBoxLayout( this , 5, 5 );
-  m_box->setSpacing( 5 );
+  //m_box->setSpacing( 5 );
   //m_box->addStretch( -1 );
 
   // picture + text
   m_infoBox = new QHBox(this, "infobox" );
-  m_infoBox->setSpacing( 4 );
+  //m_infoBox->setSpacing( 4 );
   m_label = new QLabel(m_infoBox );
   m_desc = new QLabel(m_infoBox );
   m_desc->setTextFormat( Qt::RichText );
@@ -66,7 +66,7 @@ void MediumMountWidget::initGUI()
   // groupbox
   m_group = new QGroupBox(tr("Which media files"), this, "MediaFiles" );
   m_checks = new QGridLayout( m_group, 4, 3 );
-  m_checks->setMargin( 12 );
+  //m_checks->setMargin( 12 );
 
 
 
@@ -107,7 +107,7 @@ void MediumMountWidget::initGUI()
 
   // add to
   m_hboxAdd = new QHBox( this );
-  m_hboxAdd->setSpacing( 10 );
+  //m_hboxAdd->setSpacing( 10 );
   m_edit = new QLineEdit(m_hboxAdd );
   m_add = new QPushButton(m_hboxAdd );
   m_add->setText( tr("Add") );
