@@ -643,7 +643,8 @@ void Launcher::typeAdded( const QString& type, const QString& name,
 {
     tabs->newView( type, pixmap, name );
     ids.append( type );
-    tb->refreshStartMenu();
+    /* this will be called in applicationScanningProgress with value 100! */
+//    tb->refreshStartMenu();
 
     static bool first = TRUE;
     if ( first ) {
@@ -660,7 +661,8 @@ void Launcher::typeRemoved( const QString& type )
     tabs->view( type )->removeAllItems();
     tabs->deleteView( type );
     ids.remove( type );
-    tb->refreshStartMenu();
+    /* this will be called in applicationScanningProgress with value 100! */
+//    tb->refreshStartMenu();
 }
 
 void Launcher::applicationAdded( const QString& type, const AppLnk& app )
@@ -768,6 +770,7 @@ void Launcher::documentScanningProgress( int percent )
 	    tabs->docView()->setSortEnabled( TRUE );
 	    tabs->docView()->setUpdatesEnabled( TRUE );
 	    tabs->setLoadingWidgetEnabled( FALSE );
+            tb->refreshStartMenu();
 	    break;
         }
         default:
