@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
-TOPDIR:=$(shell pwd)
+
+OPIEDIR:=$(shell pwd)
+TOPDIR:=$(OPIEDIR)
 
 all :
 
