@@ -1,41 +1,43 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>FifteenMainWindow</name>
     <message>
         <source>Randomize</source>
-        <translation type="unfinished"></translation>
+        <translation>Randomizza</translation>
     </message>
     <message>
         <source>Solve</source>
-        <translation type="unfinished"></translation>
+        <translation>Risolvi</translation>
     </message>
     <message>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Partita</translation>
     </message>
     <message>
         <source>Fifteen Pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Gioco del 15</translation>
     </message>
 </context>
 <context>
     <name>PiecesTable</name>
     <message>
         <source>Fifteen Pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Gioco del 15</translation>
     </message>
     <message>
         <source>Congratulations!
 You win the game!</source>
-        <translation type="unfinished"></translation>
+        <translation>Congratulazioni!
+Hai vinto la partita!</translation>
     </message>
     <message>
         <source>R&amp;andomize Pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>R&amp;andomizza Pezzi</translation>
     </message>
     <message>
         <source>&amp;Reset Pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Reset Pezzi</translation>
     </message>
 </context>
 </TS>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>DateBook</name>
     <message>
@@ -89,11 +90,11 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Duplicate Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia Evento</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica...</translation>
     </message>
 </context>
 <context>
@@ -182,15 +183,15 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Orario</translation>
     </message>
     <message>
         <source> - </source>
-        <translation type="unfinished"></translation>
+        <translation> - </translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia</translation>
     </message>
 </context>
 <context>
@@ -217,7 +218,7 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished">Agenda</translation>
+        <translation>Agenda</translation>
     </message>
 </context>
 <context>
@@ -272,67 +273,67 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Views</source>
-        <translation type="unfinished"></translation>
+        <translation>Viste</translation>
     </message>
     <message>
         <source>Default view:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vista predefinita:</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished">Giorno</translation>
+        <translation>Giorno</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished">Settimana</translation>
+        <translation>Settimana</translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista Settimana</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished">Mese</translation>
+        <translation>Mese</translation>
     </message>
     <message>
         <source>Jump to current time</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai all&apos;orario corrente</translation>
     </message>
     <message>
         <source>Time display</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra orario</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Nessuno</translation>
+        <translation>Nessuno</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished">Inizio</translation>
+        <translation>Inizio</translation>
     </message>
     <message>
         <source>Start-End</source>
-        <translation type="unfinished"></translation>
+        <translation>Inizio-Fine</translation>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Predefiniti</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ubicazione:</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished">Ufficio</translation>
+        <translation>Ufficio</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished">Abitazione</translation>
+        <translation>Abitazione</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Categoria:</translation>
     </message>
 </context>
 <context>
@@ -346,7 +347,7 @@ Uscire comunque?</translation>
     <name>DateBookWeekHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>w</translation>
     </message>
 </context>
 <context>
@@ -360,7 +361,7 @@ Uscire comunque?</translation>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>w</translation>
     </message>
 </context>
 <context>

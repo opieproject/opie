@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>KRFBConnection</name>
     <message>
@@ -140,11 +141,11 @@ per questo account, riprovare più tardi.</translation>
     </message>
     <message>
         <source>Next Click is Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Prossimo Click è un Doppio Click</translation>
     </message>
     <message>
         <source>Next Click is Right Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Prossimo Click è un Click Destro</translation>
     </message>
 </context>
 <context>
@@ -155,7 +156,7 @@ per questo account, riprovare più tardi.</translation>
     </message>
     <message>
         <source>Choose a bookmark that you would like to open</source>
-        <translation type="unfinished"></translation>
+        <translation>Scegli un bookmark che vorresti aprire</translation>
     </message>
 </context>
 <context>
@@ -250,43 +251,43 @@ per questo account, riprovare più tardi.</translation>
     </message>
     <message>
         <source>The password of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>La password per il server VNC</translation>
     </message>
     <message>
         <source>Toggle obscuring the password</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambia l&apos;oscuramento della password</translation>
     </message>
     <message>
         <source>The name of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Il nome del server VNC</translation>
     </message>
     <message>
         <source>The host name of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Il nome host del server VNC</translation>
     </message>
     <message>
         <source>The display number of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Il numero del display del server VNC</translation>
     </message>
     <message>
         <source>Allow other users to connect to the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Permetti ad altri utenti di connettersi al server VNC</translation>
     </message>
     <message>
         <source>Request that the VNC server transfer 8 bit color</source>
-        <translation type="unfinished"></translation>
+        <translation>Richiedi che il server VNC trasferisca a 8 bit di colori</translation>
     </message>
     <message>
         <source>Delay between requesting updates from the server</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritardo tra richieste di aggiornamento dal server</translation>
     </message>
     <message>
         <source>Scale the remote display to fit on the PDA (Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>Scala lo schermo remoto per farlo entrare sul PDA (Lento)</translation>
     </message>
     <message>
         <source>Enable transmiting identical rectangles as references to existing data</source>
-        <translation type="unfinished"></translation>
+        <translation>Abilita la trasmissione di rettangoli uguali come riferimenti per dati esistenti</translation>
     </message>
 </context>
 </TS>
