@@ -48,9 +48,17 @@
 // ML: Yeah, I hate to include kernel headers, but it's necessary here
 // ML: Recent RedHat and MandrakePatches to the Kernel and WE broke something
 // ML: #include <net/if.h> e.g. conflicts with #include <linux/wireless.h>
+
+#ifndef IFNAMSIZ
 #define IFNAMSIZ 16
+#endif
+
 #include <linux/wireless.h>
 #include <net/if.h>
+
+#ifndef SIOCIWFIRSTPRIV
+#define SIOCIWFIRSTPRIV SIOCDEVPRIVATE
+#endif
 
 class ONetworkInterface;
 class OWirelessNetworkInterface;

@@ -51,6 +51,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <linux/sockios.h>
 #include <linux/wireless.h>
 
 using namespace std;
@@ -725,7 +726,7 @@ void OHostAPMonitoringInterface::setEnabled( bool b )
     _if->_iwr.u.mode = IW_MODE_MONITOR;
     _if->wioctl( SIOCSIWMODE );
     #else
-    int* args = (int*) &_if._iwr.u.name;
+    int* args = (int*) &_if->_iwr.u.name;
     args[0] = 2;
     args[1] = 0;
     _if->wioctl( SIOCDEVPRIVATE );

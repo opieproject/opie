@@ -472,9 +472,9 @@ void OGlobalSettings::initStatic() // should be called initPaths(). Don't put an
 
 void OGlobalSettings::initColors()
 {
-    if ( not OpieHighlight ) OpieHighlight = new QColor( 156, 118, 32 );
-    if ( not OpieAlternate ) OpieAlternate = new QColor( 238, 246, 255 );
-    if ( not OpieGray ) OpieGray = new QColor( 220, 210, 215 );
+    if ( !OpieHighlight ) OpieHighlight = new QColor( 156, 118, 32 );
+    if ( !OpieAlternate ) OpieAlternate = new QColor( 238, 246, 255 );
+    if ( !OpieGray ) OpieGray = new QColor( 220, 210, 215 );
 }
 
 void OGlobalSettings::rereadFontSettings()
