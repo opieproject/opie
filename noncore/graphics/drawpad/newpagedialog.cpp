@@ -31,8 +31,8 @@ NewPageDialog::NewPageDialog(uint width, uint height, const QColor& penColor,
 
     QGroupBox* sizeGroupBox = new QGroupBox(0, Qt::Vertical, tr("Page Size"), this);
 
-    QLabel* widthLabel = new QLabel(tr("Width :"), sizeGroupBox);
-    QLabel* heightLabel = new QLabel(tr("Height :"), sizeGroupBox);
+    QLabel* widthLabel = new QLabel(tr("Width:"), sizeGroupBox);
+    QLabel* heightLabel = new QLabel(tr("Height:"), sizeGroupBox);
 
     m_pWidthSpinBox = new QSpinBox(1, 1024, 1, sizeGroupBox);
     m_pHeightSpinBox = new QSpinBox(1, 1024, 1, sizeGroupBox);

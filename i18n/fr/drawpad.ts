@@ -3,7 +3,7 @@
     <name>DrawPad</name>
     <message>
         <source>Delete All</source>
-        <translation>Supprimer Tout</translation>
+        <translation>Supprimer tout</translation>
     </message>
     <message>
         <source>Import</source>
@@ -27,15 +27,15 @@
     </message>
     <message>
         <source>New Page</source>
-        <translation>Nouvelle Page</translation>
+        <translation>Nouvelle page</translation>
     </message>
     <message>
         <source>Clear Page</source>
-        <translation>Effacer Page</translation>
+        <translation>Effacer la page</translation>
     </message>
     <message>
         <source>Delete Page</source>
-        <translation>Supprimer Page</translation>
+        <translation>Supprimer la page</translation>
     </message>
     <message>
         <source>Undo</source>
@@ -47,55 +47,55 @@
     </message>
     <message>
         <source>First Page</source>
-        <translation>Premiere Page</translation>
+        <translation>Premiere page</translation>
     </message>
     <message>
         <source>Previous Page</source>
-        <translation>Page Précédente</translation>
+        <translation>Page précédente</translation>
     </message>
     <message>
         <source>Next Page</source>
-        <translation>Page Suivante</translation>
+        <translation>Page suivante</translation>
     </message>
     <message>
         <source>Last Page</source>
-        <translation>Dernière Page</translation>
+        <translation>Dernière page</translation>
     </message>
     <message>
         <source>Draw Point</source>
-        <translation>Dessiner Point</translation>
+        <translation>Dessiner un point</translation>
     </message>
     <message>
         <source>Draw Line</source>
-        <translation>Dessiner Ligne</translation>
+        <translation>Dessiner une ligne</translation>
     </message>
     <message>
         <source>Draw Rectangle</source>
-        <translation>Dessiner Rectangle</translation>
+        <translation>Dessiner un rectangle</translation>
     </message>
     <message>
         <source>Draw Filled Rectangle</source>
-        <translation>Dessiner Rectangle Rempli</translation>
+        <translation>Dessiner un rectangle rempli</translation>
     </message>
     <message>
         <source>Draw Ellipse</source>
-        <translation>Dessiner Ellipse</translation>
+        <translation>Dessiner une ellipse</translation>
     </message>
     <message>
         <source>Draw Filled Ellipse</source>
-        <translation>Desinner Ellipse Remplie</translation>
+        <translation>Desinner une ellipse remplie</translation>
     </message>
     <message>
         <source>Fill Region</source>
-        <translation>Remplir Région</translation>
+        <translation>Remplir une région</translation>
     </message>
     <message>
         <source>Erase Point</source>
-        <translation>Effacer Point</translation>
+        <translation>Effacer un point</translation>
     </message>
     <message>
         <source>Pen Width</source>
-        <translation>Largeur Pinceau</translation>
+        <translation>Largeur du pinceau</translation>
     </message>
     <message>
         <source>More</source>
@@ -107,11 +107,11 @@
     </message>
     <message>
         <source>Pen Color</source>
-        <translation>Couleur Pinceau</translation>
+        <translation>Couleur du pinceau</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation>Couleur Remplissage</translation>
+        <translation>Couleur de remplissage</translation>
     </message>
     <message>
         <source>DrawPad</source>
@@ -123,14 +123,14 @@
     </message>
     <message>
         <source>Insert Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Insérer un texte</translation>
     </message>
 </context>
 <context>
     <name>DrawPadCanvas</name>
     <message>
         <source>Delete All</source>
-        <translation>Supprimer Tout</translation>
+        <translation>Supprimer tout</translation>
     </message>
     <message>
         <source>Do you want to delete
@@ -140,7 +140,7 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Clear Page</source>
-        <translation>Effacer Page</translation>
+        <translation>Effacer la page</translation>
     </message>
     <message>
         <source>Do you want to clear
@@ -150,7 +150,7 @@ la page actuelle ?</translation>
     </message>
     <message>
         <source>Delete Page</source>
-        <translation>Supprimer Page</translation>
+        <translation>Supprimer la page</translation>
     </message>
     <message>
         <source>Do you want to delete
@@ -160,11 +160,11 @@ la page actuelle ?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Non</translation>
     </message>
 </context>
 <context>
@@ -175,7 +175,7 @@ la page actuelle ?</translation>
     </message>
     <message>
         <source>Page Selection</source>
-        <translation>Sélection Pages</translation>
+        <translation>Sélection des pages</translation>
     </message>
     <message>
         <source>All</source>
@@ -191,19 +191,19 @@ la page actuelle ?</translation>
     </message>
     <message>
         <source>To:</source>
-        <translation>A:</translation>
+        <translation>A :</translation>
     </message>
     <message>
         <source>Export As</source>
-        <translation>Exporter Sous</translation>
+        <translation>Exporter sous</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Nom:</translation>
+        <translation>Nom :</translation>
     </message>
     <message>
         <source>Format:</source>
-        <translation>Format:</translation>
+        <translation>Format :</translation>
     </message>
 </context>
 <context>
@@ -225,19 +225,19 @@ la page actuelle ?</translation>
     <name>NewPageDialog</name>
     <message>
         <source>New Page</source>
-        <translation>Nouvelle Page</translation>
+        <translation>Nouvelle page</translation>
     </message>
     <message>
         <source>Page Size</source>
-        <translation>Dimension Page</translation>
+        <translation>Dimension de la page</translation>
     </message>
     <message>
         <source>Width :</source>
-        <translation>Largeur:</translation>
+        <translation>Largeur :</translation>
     </message>
     <message>
         <source>Height :</source>
-        <translation>Hauteur</translation>
+        <translation>Hauteur :</translation>
     </message>
     <message>
         <source>Contents</source>
@@ -257,11 +257,11 @@ la page actuelle ?</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Fond</translation>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation type="unfinished">Couleur Pinceau</translation>
+        <translation>Couleur du pinceau</translation>
     </message>
     <message>
         <source>Brush Color</source>
@@ -269,7 +269,7 @@ la page actuelle ?</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation type="unfinished">Couleur Remplissage</translation>
+        <translation>Couleur  de remplissage</translation>
     </message>
 </context>
 <context>
@@ -311,7 +311,7 @@ la page actuelle ?</translation>
     <name>TextToolDialog</name>
     <message>
         <source>Insert Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Insérer un texte</translation>
     </message>
 </context>
 </TS>
