@@ -6,7 +6,7 @@ HEADERS         = source/config.hh source/daemon.hh
 SOURCES         = source/daemon.cc
 INCLUDEPATH     += ../
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS            += -lpcap -L$(OPIEDIR)/lib -lwellenreiter
+LIBS            += -lpcap -lpthread -L$(OPIEDIR)/lib -lwellenreiter
 INTERFACES      = 
 TARGET          = wellenreiterd
 
