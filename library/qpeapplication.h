@@ -31,6 +31,10 @@
 #include "qpedecoration_qws.h"
 #include "timestring.h"
 
+#if ( defined Q_WS_QWS || defined( _WS_QWS_ ) ) && !defined( QT_NO_COP )
+#include <qpe/qcopenvelope_qws.h>
+#endif
+
 class QCopChannel;
 class QPEApplicationData;
 class QWSEvent;
@@ -161,6 +165,11 @@ enum Transformation { Rot0, Rot90, Rot180, Rot270 }; /* from qgfxtransformed_qws
 
 inline void QPEApplication::setCurrentRotation( int r )
 {
+    if ( qApp->type() != GuiServer ) {
+        QCopEnvelope e( "QPE/System", "setCurrentRotation(int)" );
+        e << r;
+        return;
+    }
     Transformation e;
 
     switch (r) {
