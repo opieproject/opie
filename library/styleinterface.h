@@ -49,7 +49,7 @@ struct StyleInterface : public QUnknownInterface
 struct StyleExtendedInterface : public StyleInterface
 {
 	//! Return a (longer) description for the style.
-	virtual QString description ( ) = 0;
+	virtual QString description ( ) const = 0;
 
 	//! Does this style support customization
 	virtual bool hasSettings ( ) const = 0;
