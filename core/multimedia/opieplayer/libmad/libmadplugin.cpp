@@ -36,7 +36,6 @@
 
 #include <qapplication.h>
 #include <qmessagebox.h>
-#include <qregexp.h>
 
 #include <qpe/config.h>
 
@@ -821,9 +820,11 @@ void LibMadPlugin::printID3Tags() {
             char *ptr3 = ptr2;
             while ( ptr3-1 >= ptr && isspace(ptr3[-1]) ) ptr3--;
             char push2 = *ptr3; *ptr3 = '\0';
-            if ( strcmp( ptr, "" ) )
+            if ( strcmp( ptr, "" ) ) {
+                if( ((QString)ptr).find("  ") == -1) // don't add anything that has blanks
                 info += ( i != 0 ? ", " : "" ) + label[i] + ": " + ptr;
-            //qDebug( info.latin1() );
+            }
+//             qDebug( info.latin1() );
             *ptr3 = push2;
             *ptr2 = push;
         }
