@@ -25,7 +25,7 @@ private:
    	float _shiftPerSec;
     int _lookupDiff;
     OProcess *ntpProcess;
-    QTimer *ntpTimer;
+    QTimer *ntpTimer, *processTimer;
     QSocket *ntpSock;
 
    	float getTimeShift();
@@ -42,6 +42,7 @@ private slots:
 	  void setPredictTime();
 	  void slotProbeNtpServer();
 	  void slotNtpDelayChanged(int);
+	  void slotTimeoutNtpProcess();
 };
 
 #endif

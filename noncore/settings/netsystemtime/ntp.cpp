@@ -37,13 +37,12 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
 
 	Config cfg("ntp",Config::User);
   cfg.setGroup("settings");
-// 	_maxOffset = cfg.readNumEntry("maxOffset",5);
-//  _minLookupDiff = cfg.readNumEntry("minLookupDiff",10);
 	SpinBoxMinLookupDelay->setValue( cfg.readNumEntry("minLookupDiff",41) );
 	SpinBoxNtpDelay->setValue( cfg.readNumEntry("ntpRefreshFreq",42) );
   ComboNtpSrv->setCurrentItem( cfg.readNumEntry("ntpServer", 0) );
 
   ntpTimer = new QTimer(this);
+  processTimer = new QTimer(this);
 	ntpTimer->start(SpinBoxNtpDelay->value()*1000*60);
 
  	ntpProcess = new OProcess( );
@@ -116,6 +115,9 @@ void Ntp::slotRunNtp()
   }
 	TextLabelStartTime->setText(QDateTime::currentDateTime().toString());
   ntpOutPut( tr("Running:")+"\nntpdate "+getNtpServer() );
+  connect( processTimer, SIGNAL( timeout() ), SLOT(slotTimeoutNtpProcess()) );
+	processTimer->start(2*1000*60, true);
+ 	
 	ntpProcess->clearArguments();
 	*ntpProcess << "ntpdate" << getNtpServer();
 	bool ret = ntpProcess->start(OProcess::NotifyOnExit,OProcess::AllOutput);
@@ -138,8 +140,14 @@ void  Ntp::getNtpOutput(OProcess *proc, char *buffer, int buflen)
   lineStrOld = lineStr;
 }
 
-void  Ntp::ntpFinished(OProcess*)
+void  Ntp::ntpFinished(OProcess *p)
 {
+	if (!p->normalExit())
+ 	{
+    slotProbeNtpServer();
+   	return;
+  }
+	processTimer->stop();
 	Config cfg("ntp",Config::User);
   cfg.setGroup("lookups");
   int lastLookup = cfg.readNumEntry("time",0);
@@ -261,7 +269,6 @@ void Ntp::slotCheckNtp(int i)
   	connect( ButtonSetTime, SIGNAL(clicked()), SLOT(setPredictTime()) );
 	  connect( ntpTimer, SIGNAL( timeout() ), SLOT(slotProbeNtpServer()) );
   }
-//	ntpTimer->start(SpinBoxNtpDelay->value()*1000*60);
 }
 
 void Ntp::slotProbeNtpServer()
@@ -278,4 +285,10 @@ void Ntp::ntpOutPut(QString out)
 {
 	MultiLineEditntpOutPut->append(out);
   MultiLineEditntpOutPut->setCursorPosition(MultiLineEditntpOutPut->numLines() + 1,0,FALSE);
+}
+
+void Ntp::slotTimeoutNtpProcess()
+{
+	ntpProcess->kill();
+	slotProbeNtpServer();
 }
