@@ -1,0 +1,31 @@
+New Launcher TODO:
+
+[x] Split QWS Server out of launcher/taskbar application
+[ ] Handling of default Opie env vars that may or may not be
+    affected by ODevice.  This should really affect all Opie apps..
+    perhaps in qpeapplication, or a seperate app that sets the env vars
+    for Opie ala the way ssh-agent outputs an eval'able set of vars.
+
+[.] QWS Server
+	[x] actual qws server (qpeapplication as GuiServer)
+	[x] qcop bridge
+	[x] transfer server (sync compatibility)
+	[ ] calibration QCop calls (to split calibration into a seperate app)
+	[ ] window list / management QCop calls (matchbox style task switching)
+	[ ] qws event filter hooks
+		[ ] Touch and Key clicks
+		[ ] xstroke style input
+
+[ ] Launcher/Taskbar
+	[ ] Proper VT handling, and VT switching - qt/e + qpeapplication.. every app needs to handle this properly
+	[ ] Proper timezone handling (create localtime link) - belongs in that which handles the time. clock applet, systemtime.
+	[ ] LauncherView as plugins, possibly allow the plugin to add any
+	    arbitary number of tabs, in which case the launcher is simply
+	    a tab bar with plugins, the default being the AppLnk and Docs
+	    scanning plugins, to give us the current functionality.
+
+[ ] Uncertain
+	[ ] Alerts - mem and battery
+	[ ] OpieScreenSaver
+	[.] package slave - essentially take bridged qcop message, pass it
+	    along to the app which is associated with the .ipk mime type.

@@ -1,0 +1,16 @@
+  config QWS
+    boolean "Minimal QWS Server"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+
+# menu "Advanced QWS Server Config"
+#   config QWS_QCOP
+#     bool "QCop bridge and Transfer server (sync)"
+#     default y
+#     depends on QWS
+#
+#   config QWS_PACKAGE
+#     bool "Package Slave (package installs via sync software)"
+#     default n
+#     depends on QWS
+# endmenu
