@@ -5,12 +5,10 @@ small things:
 * Elementar symbols should be small enough to fit the boxes
     (font problem?)
 
-
 big things:
 * backport the conversions from Kalzium (http://edu.kde.org/kalzium)
 * backport more dataset from Kalzium
-* make the colors confiurable
-* graphical analysation (KalziumGraph.cpp/h)
+* make the colors configurable
 * make elements sortable by their attributes (e.g. density)
 * graph of attribute (e.g. ionisationenergie) vs atomnumber?
 

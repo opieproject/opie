@@ -90,8 +90,8 @@ void OxydataWidget::setLayout()
 //    DataTable->setColumnWidth ( 0 , this->width()/2 );
 //    DataTable->setColumnWidth ( 1 , this->width()/2 );
 
-    DataTable->setColumnWidth ( 0 , 110 );
-    DataTable->setColumnWidth ( 1 , 110 );
+//X     DataTable->setColumnWidth ( 0 , 110 );
+//X     DataTable->setColumnWidth ( 1 , 110 );
 }
 
 OxydataTable::OxydataTable(int numRows, int numCols, QWidget *parent,
