@@ -192,24 +192,8 @@ QString OtherHandler::targetName( const QString& file ) {
 /* fast cpy */
 void OtherHandler::copy(const QString& src, const QString& file) {
     qWarning("src %s, dest %s", src.latin1(),file.latin1() );
-    int src_fd = ::open( QFile::encodeName( src ), O_RDONLY );
-    int to_fd  = ::open( QFile::encodeName( file), O_RDWR| O_CREAT| O_TRUNC,
-                         S_IRUSR, S_IWUSR, S_IRGRP, S_IRGRP );
-
-    struct stat stater;
-    ::fstat(src_fd, &stater );
-    ::lseek(to_fd, stater.st_size-1, SEEK_SET );
-    ::write(to_fd, "", 1 );
-
-    void *src_addr, *dest_addr;
-    src_addr = ::mmap(0, stater.st_size, PROT_READ,
-                      MAP_FILE | MAP_SHARED, src_fd, 0 );
-    dest_addr= ::mmap(0, stater.st_size, PROT_READ | PROT_WRITE,
-                      MAP_FILE | MAP_PRIVATE, to_fd, 0 );
-
-    ::memcpy(dest_addr , src_addr, stater.st_size );
-    ::munmap(src_addr , stater.st_size );
-    ::munmap(dest_addr, stater.st_size );
-
+    QString cmd = QString("mv %1 %2").arg( Global::shellQuote( src )).
+                  arg( Global::shellQuote( file ) );
+    ::system( cmd.latin1() );
     // done
 }
