@@ -1317,6 +1317,8 @@ void QPEApplication::reset() {
     applyStyle();
 }
 
+
+extern bool qt_left_hand_scrollbars __attribute__(( weak ));
 /*!
   \internal
 */
@@ -1373,6 +1375,11 @@ void QPEApplication::applyStyle()
 
 	setPalette( pal, TRUE );
 
+
+        // Set the ScrollBar on the 'right' side but only if the weak symbol is present
+        if (&qt_left_hand_scrollbars )
+            qt_left_hand_scrollbars = config.readBoolEntry( "LeftHand", false );
+
 	// Window Decoration
 	QString dec = config.readEntry( "Decoration", "Flat" );
 
@@ -1380,7 +1387,6 @@ void QPEApplication::applyStyle()
 	if ( nostyle & Opie::Force_Decoration )
 		dec = "";
 
-	//qDebug ( "Setting Deco: %s -- old %s (%d)", dec.latin1(), d-> decorationName.latin1(), nostyle);
 
 	if ( dec != d->decorationName ) {
 		qwsSetDecoration( new QPEDecoration( dec ) );
