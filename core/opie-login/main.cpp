@@ -32,7 +32,7 @@
 /* OPIE */
 #include <opie2/odevice.h>
 #include <qpe/qpestyle.h>
-#include <qpe/power.h> 
+#include <qpe/power.h>
 #include <qpe/config.h>
 
 /* QT */
@@ -40,7 +40,7 @@
 #include <qmessagebox.h>
 #include <qlabel.h>
 #include <qtimer.h>
-#include <qfile.h> 
+#include <qfile.h>
 
 /* STD */
 #include <sys/types.h>
@@ -56,7 +56,7 @@
 #include <getopt.h>
 #include <string.h>
 
-using namespace Opie;
+using namespace Opie::Core;
 
 int login_main ( int argc, char **argv, pid_t ppid );
 void sigterm ( int sig );
@@ -188,7 +188,7 @@ int main ( int argc, char **argv )
 				if ( !user. isEmpty ( ))
 					autolog = ::strdup ( user. latin1 ( ));
 			}
-		
+
 			if ( autolog && !userExited ) {
 
                 QWSServer::setDesktopBackground( QImage() );
@@ -196,7 +196,7 @@ int main ( int argc, char **argv )
                 ODevice::inst ( )-> setSoftSuspend ( false );
                 LoginApplication *app = new LoginApplication ( argc, argv, ppid );
                 LoginApplication::setLoginAs ( autolog );
-  
+
 
 				if ( LoginApplication::changeIdentity ( ))
 					::exit ( LoginApplication::login ( ));

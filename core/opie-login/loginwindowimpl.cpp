@@ -42,7 +42,7 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
 
-#include <opie/odevice.h>
+#include <opie2/odevice.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -51,7 +51,7 @@
 #include "loginapplication.h"
 #include "inputmethods.h"
 
-using namespace Opie;
+using namespace Opie::Core;
 
 
 LoginWindowImpl::LoginWindowImpl ( ) : LoginWindow ( 0, "LOGIN-WINDOW", WStyle_Customize | WStyle_NoBorder | WDestructiveClose )
@@ -62,7 +62,7 @@ LoginWindowImpl::LoginWindowImpl ( ) : LoginWindow ( 0, "LOGIN-WINDOW", WStyle_C
 	m_menu-> setPopup ( pop );
 
 	QCopChannel *channel = new QCopChannel ( "QPE/TaskBar", this );
-	connect ( channel, SIGNAL( received(const QCString&,const QByteArray&)), this, SLOT( receive(const QCString&,const QByteArray&)));	         
+	connect ( channel, SIGNAL( received(const QCString&,const QByteArray&)), this, SLOT( receive(const QCString&,const QByteArray&)));
 
 	QHBoxLayout *lay = new QHBoxLayout ( m_taskbar, 4, 4 );
 	m_input = new InputMethods ( m_taskbar );
@@ -74,11 +74,11 @@ LoginWindowImpl::LoginWindowImpl ( ) : LoginWindow ( 0, "LOGIN-WINDOW", WStyle_C
 	m_password-> setFocus ( );
 
 	m_user-> insertStringList ( lApp-> allUsers ( ));
-	
+
 	//there is no point in displaying the IM for a zaurus
-	if (ODevice::inst ( )-> series ( ) != Model_Zaurus){	
+	if (ODevice::inst ( )-> series ( ) != Model_Zaurus){
 		QTimer::singleShot ( 0, this, SLOT( showIM()));
-	}	
+	}
 
 	QString opiedir = ::getenv ( "OPIEDIR" );
 	QPixmap bgpix ( opiedir + "/pics/launcher/opie-background.jpg" );
@@ -88,8 +88,8 @@ LoginWindowImpl::LoginWindowImpl ( ) : LoginWindow ( 0, "LOGIN-WINDOW", WStyle_C
 		m_caption-> setBackgroundPixmap ( bgpix);
 		TextLabel1-> setBackgroundPixmap ( bgpix);
 		TextLabel2-> setBackgroundPixmap ( bgpix);
-	}	
-	
+	}
+
 	m_caption-> setText ( tr("<center>Welcome to OPIE %1</center><center>& %2 %3</center>"). arg(QPE_VERSION). arg ( ODevice::inst ( )-> systemString ( )). arg ( ODevice::inst ( )-> systemVersionString ( )));
 
 	Config cfg ( "opie-login" );
@@ -98,7 +98,7 @@ LoginWindowImpl::LoginWindowImpl ( ) : LoginWindow ( 0, "LOGIN-WINDOW", WStyle_C
 
 	if ( !last. isEmpty ( ))
 		m_user-> setEditText ( last );
-	
+
 	calcMaxWindowRect ( );
 }
 
@@ -110,8 +110,8 @@ LoginWindowImpl::~LoginWindowImpl ( )
 void LoginWindowImpl::receive ( const QCString &msg, const QByteArray &data )
 {
 	QDataStream stream ( data, IO_ReadOnly );
-	
-	if ( msg == "hideInputMethod()" ) 
+
+	if ( msg == "hideInputMethod()" )
 		m_input-> hideInputMethod ( );
 	else if ( msg == "showInputMethod()" )
 		m_input-> showInputMethod ( );
@@ -129,7 +129,7 @@ void LoginWindowImpl::calcMaxWindowRect ( )
 		wr.setCoords( 0, 0, displayWidth-1, ir.top()-1 );
 	else
 		wr.setCoords( 0, 0, displayWidth-1, m_taskbar->y()-1 );
-	
+
 #if QT_VERSION < 300
 	wr = qt_screen-> mapToDevice ( wr, QSize ( qt_screen-> width ( ), qt_screen-> height ( )));
 #endif
@@ -137,7 +137,7 @@ void LoginWindowImpl::calcMaxWindowRect ( )
 	QWSServer::setMaxWindowRect( wr );
 #endif
 }
-                                        
+
 
 void LoginWindowImpl::keyPressEvent ( QKeyEvent *e )
 {
