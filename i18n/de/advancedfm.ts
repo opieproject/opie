@@ -136,7 +136,7 @@
     </message>
     <message>
         <source>Properties</source>
-        <translation>Einstellungen</translation>
+        <translation>Eigenschaften</translation>
     </message>
     <message>
         <source>Beam File</source>
@@ -259,12 +259,12 @@ da es nicht in den Lesezeichen ist!</translation>
     <message>
         <source>Really delete %1
 and all it&apos;s contents ?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 und alle Inhalte wirklich löschen?</translation>
     </message>
     <message>
         <source>Really delete
 %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 wirklich löschen?</translation>
     </message>
 </context>
 <context>
