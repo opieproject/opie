@@ -48,7 +48,8 @@ accurately to calibrate your screen.</source>
         <source>Battery level is critical!
 Keep power off until power restored!</source>
         <translation>Der Batteriestatus ist kritisch!
-Schliessen Sie das Gerät schnellst möglich an die Stromversorgung an!</translation>
+Schliessen Sie das Gerät schnellst 
+möglich an die Stromversorgung an!</translation>
     </message>
     <message>
         <source>Battery is running very low.</source>
