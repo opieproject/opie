@@ -1,4 +1,4 @@
-/* $Id: cardmode.hh,v 1.1 2002-11-27 22:34:42 mjm Exp $ */
+/* $Id: cardmode.hh,v 1.2 2002-11-28 00:00:52 mjm Exp $ */
 
 #ifndef CARDMODE_HH
 #define CARDMODE_HH
@@ -27,8 +27,7 @@
 #define   WLANCTL_PATH           "/sbin/wlanctl-ng"
 
 /* Prototypes */
-
-int card_into_monitormode (void *, char *, int);
+int card_into_monitormode (pcap_t **, char *, int);
 int card_set_promisc_up (const char *);
 
 #endif /* CARDMODE_HH */

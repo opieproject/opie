@@ -1,21 +1,17 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.3 2002-11-27 22:58:36 mjm Exp $
+ * $Id: cardmode.cc,v 1.4 2002-11-28 00:00:52 mjm Exp $
  */
 
 #include "cardmode.hh"
 
 /* main card into monitor function */
-int card_into_monitormode (void *orighandle, char *device, int cardtype)
+int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
 {
-  int datalink; /* used for getting the pcap datalink type */
   char CiscoRFMON[35] = "/proc/driver/aironet/";
   FILE *CISCO_CONFIG_FILE;
-  char errbuf[PCAP_ERRBUF_SIZE];
-  pcap_t *handle;
-  
-  handle = (pcap_t *)orighandle;
+  pcap_t *handle = (pcap_t*)orighandle;
 
   /* Checks if we have a device to sniff on */
   if(device == NULL)
@@ -62,28 +58,6 @@ int card_into_monitormode (void *orighandle, char *device, int cardtype)
       wl_logerr("Got a host-ap card, nothing is implemented now");
   }
    
-  /* Check the interface if it is in the correct raw mode */
-  if((handle = pcap_open_live(device, BUFSIZ, 1, 0, errbuf)) == NULL)
-  {
-      wl_logerr("pcap_open_live() failed: %s", strerror(errno));
-      return 0;
-  }
-  
-#ifdef HAVE_PCAP_NONBLOCK
-  pcap_setnonblock(handle, 1, errstr);
-#endif
-  
-  /* getting the datalink type */
-  datalink = pcap_datalink(handle);
-  
-  if (datalink != DLT_IEEE802_11) /* Rawmode is IEEE802_11 */
-  {
-      wl_loginfo("Interface %s does not work in the correct 802.11 raw mode", device);
-      pcap_close(handle); 
-      return 0;
-  }
-  wl_loginfo("Your successfully listen on %s in 802.11 raw mode", device);
-  
   return 1;
 }
 
@@ -96,7 +70,7 @@ int card_set_promisc_up (const char *device)
   snprintf(ifconfigcmd, sizeof(ifconfigcmd), SBIN_PATH, device);
   retval = system(ifconfigcmd);
 
-  if(retval < 0 || retval == 1)
+  if(retval != 0)
     return 0;
   
 return 1;
