@@ -44,6 +44,7 @@ public:
     bool goNextPageEnabled();
 
     QPixmap* currentPage();
+    QList<QPixmap> pages();
     uint pagePosition();
     uint pageCount();
 

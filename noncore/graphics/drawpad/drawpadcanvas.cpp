@@ -313,6 +313,11 @@ QPixmap* DrawPadCanvas::currentPage()
     return m_pages.current();
 }
 
+QList<QPixmap> DrawPadCanvas::pages()
+{
+    return m_pages;
+}
+
 uint DrawPadCanvas::pagePosition()
 {
     return (m_pages.at() + 1);
