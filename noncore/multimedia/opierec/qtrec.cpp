@@ -466,14 +466,12 @@ QtRec::QtRec( QWidget* parent,  const char* name, WFlags fl )
 		soundDevice->sd = -1;
 		soundDevice = 0;
 		wavFile = 0;
-
 //      if( soundDevice) delete soundDevice;
-
-		initIconView();
+	 QTimer::singleShot(100,this, SLOT(initIconView()));
 
 		if( autoMute)
 				doMute( true);
-		ListView1->setFocus();
+//		ListView1->setFocus();
 		playing = false;
 }
 
@@ -729,7 +727,7 @@ void QtRec::init() {
 }
 
 void QtRec::initIconView() {
-
+		owarn << "initIconView" << oendl;
 		ListView1->clear();
 		Config cfg("OpieRec");
 		cfg.setGroup("Sounds");
@@ -737,9 +735,9 @@ void QtRec::initIconView() {
 		QPixmap image0( ( const char** ) image0_data );
 
 		int nFiles = cfg.readNumEntry("NumberofFiles",0);
-//      odebug << "init number of files " << nFiles << "" << oendl;
+    owarn << "init number of files " << nFiles << "" << oendl;
 
-		for(int i=1;i<= nFiles;i++) {
+		for(int i = 1; i <= nFiles; i++) {
 
 				QListViewItem * item;
 				QString fileS, mediaLocation, fileDate,  filePath;
@@ -754,6 +752,7 @@ void QtRec::initIconView() {
 				fileS = cfg.readEntry( filePath, "0" );// file length in seconds
 				mediaLocation = getStorage( filePath);
 				if( info.exists()) {
+						owarn << "new item " << temp << oendl;
 						item = new QListViewItem( ListView1, temp,  fileS /*,  mediaLocation, fileDate*/);
 						item->setPixmap( 0, image0);
 						if( currentFileName == filePath)
@@ -763,61 +762,39 @@ void QtRec::initIconView() {
 }
 
 void QtRec::initConnections() {
-		connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
+		connect(qApp,SIGNAL(aboutToQuit()),SLOT(cleanUp()));
 
-		connect( toBeginningButton, SIGNAL( pressed()),
-						 this, SLOT( rewindPressed() ));
-		connect( toBeginningButton, SIGNAL( released()),
-						 this, SLOT( rewindReleased() ));
-		connect( toEndButton, SIGNAL( pressed()),
-						 this, SLOT( FastforwardPressed() ));
-		connect( toEndButton, SIGNAL( released()),
-						 this, SLOT( FastforwardReleased() ));
-		connect( deleteSoundButton, SIGNAL(released()),
-						 this, SLOT( deleteSound() ));
-		connect( Stop_PushButton, SIGNAL(released()),
-						 this, SLOT( doPlayBtn() ));
-		connect( Rec_PushButton, SIGNAL(released()),
-						 this, SLOT( newSound() ) );
-		connect( TabWidget, SIGNAL( currentChanged(QWidget*)),
-						 this, SLOT(thisTab(QWidget*) ));
-		connect( OutputSlider, SIGNAL(sliderReleased()),
-						 this, SLOT( changedOutVolume()) );
-		connect( InputSlider, SIGNAL(sliderReleased()),
-						 this, SLOT( changedInVolume()) );
+		connect(toBeginningButton,SIGNAL(pressed()),this,SLOT(rewindPressed()));
+		connect(toBeginningButton,SIGNAL(released()),this,SLOT(rewindReleased()));
+		connect(toEndButton,SIGNAL(pressed()),this,SLOT(FastforwardPressed()));
+		connect(toEndButton,SIGNAL(released()),this,SLOT(FastforwardReleased()));
+		connect(deleteSoundButton,SIGNAL(released()),this,SLOT(deleteSound()));
+		connect(Stop_PushButton,SIGNAL(released()),this,SLOT(doPlayBtn()));
+		connect(Rec_PushButton,SIGNAL(released()),this,SLOT(newSound()));
 
-		connect( sampleRateComboBox, SIGNAL(activated(int)),
-						 this, SLOT( changesamplerateCombo(int)) );
-		connect( bitRateComboBox, SIGNAL(activated(int)),
-						 this, SLOT( changebitrateCombo(int)) );
+		connect(TabWidget,SIGNAL(currentChanged(QWidget*)),this,SLOT(thisTab(QWidget*)));
 
-		connect( directoryComboBox, SIGNAL(activated(int)),
-						 this, SLOT( changeDirCombo(int)) );
-		connect( sizeLimitCombo, SIGNAL(activated(int)),
-						 this, SLOT( changeSizeLimitCombo(int)) );
+		connect(OutputSlider,SIGNAL(sliderReleased()),this,SLOT(changedOutVolume()));
+		connect(InputSlider,SIGNAL(sliderReleased()),this,SLOT(changedInVolume()));
 
-		connect( stereoCheckBox, SIGNAL(toggled(bool)),
-						 this, SLOT( changeStereoCheck(bool)) );
+		connect(sampleRateComboBox,SIGNAL(activated(int)),this,SLOT(changesamplerateCombo(int)));
+		connect(bitRateComboBox,SIGNAL(activated(int)),this,SLOT(changebitrateCombo(int)));
+		connect(directoryComboBox,SIGNAL(activated(int)),this,SLOT(changeDirCombo(int)));
+		connect(sizeLimitCombo,SIGNAL(activated(int)),this,SLOT(changeSizeLimitCombo(int)));
 
-		connect( outMuteCheckBox, SIGNAL(toggled(bool)),
-						 this, SLOT( doVolMuting(bool)) );
-		connect( inMuteCheckBox , SIGNAL(toggled(bool)),
-						 this, SLOT( doMicMuting(bool)) );
+		connect(stereoCheckBox,SIGNAL(toggled(bool)),this,SLOT(changeStereoCheck(bool)));
+		connect(outMuteCheckBox,SIGNAL(toggled(bool)),this,SLOT(doVolMuting(bool)));
+		connect(inMuteCheckBox,SIGNAL(toggled(bool)),this,SLOT(doMicMuting(bool)));
 
-		connect( ListView1,SIGNAL(doubleClicked(QListViewItem*)),
-						 this,SLOT( itClick(QListViewItem*)));
-		connect( ListView1, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int)),
-						 this,SLOT( listPressed(int,QListViewItem*,const QPoint&,int)) );
-		connect( timeSlider, SIGNAL( sliderMoved(int)),
-						 this, SLOT( changeTimeSlider(int) ));
-		connect( timeSlider, SIGNAL( sliderPressed()),
-						 this, SLOT( timeSliderPressed() ));
-		connect( timeSlider, SIGNAL( sliderReleased()),
-						 this, SLOT( timeSliderReleased() ));
-		connect( compressionCheckBox, SIGNAL( toggled(bool)),
-						 this, SLOT( compressionSelected(bool)));
-		connect( autoMuteCheckBox, SIGNAL( toggled(bool)),
-						 this, SLOT( slotAutoMute(bool)));
+		connect(ListView1,SIGNAL(doubleClicked(QListViewItem*)),this,SLOT(itClick(QListViewItem*)));
+		connect(ListView1,SIGNAL(mouseButtonPressed(int,QListViewItem*,const QPoint&,int)),this,SLOT(listPressed(int,QListViewItem*,const QPoint&,int)));
+
+		connect(timeSlider,SIGNAL(sliderMoved(int)),this,SLOT(changeTimeSlider(int)));
+		connect(timeSlider,SIGNAL(sliderPressed()),this,SLOT(timeSliderPressed()));
+		connect(timeSlider,SIGNAL(sliderReleased()),this,SLOT(timeSliderReleased()));
+
+		connect(compressionCheckBox,SIGNAL(toggled(bool)),this,SLOT(compressionSelected(bool)));
+		connect(autoMuteCheckBox,SIGNAL(toggled(bool)),this,SLOT(slotAutoMute(bool)));
 }
 
 void QtRec::initConfig() {

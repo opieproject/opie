@@ -130,6 +130,7 @@ private slots:
    void timeSliderPressed();
    void timeSliderReleased();
    void timerBreak();
+   void initIconView();
 /*     void changedOutVolume(int); */
 /*    void changedInVolume(int); */
 
@@ -172,7 +173,6 @@ protected:
    void endPlaying();
    void endRecording();
    void fileBeamFinished( Ir *ir);
-   void initIconView();
    void keyPressEvent( QKeyEvent *e);
    void keyReleaseEvent( QKeyEvent *e);
    void receive( const QCString &, const QByteArray & );
