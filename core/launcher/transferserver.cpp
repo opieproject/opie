@@ -232,7 +232,6 @@ bool SyncAuthentication::checkPassword( const QString& password )
      *  we need to support old Sync software and QtopiaDesktop
      */
     if ( password.left(6) == "Qtopia" || password.left(6) == "rootme" ) {
-    Config cfg( "Security" );
     cfg.setGroup("Sync");
     QStringList pwds = cfg.readListEntry("Passwords",' ');
     for (QStringList::ConstIterator it=pwds.begin(); it!=pwds.end(); ++it) {
@@ -380,8 +379,10 @@ void ServerPI::read()
 bool ServerPI::checkReadFile( const QString& file )
 {
     QString filename;
-
-    if ( file[0] != "/" )
+    
+    if ( file.length() == 1 && file[0] == "/" )
+    filename = file;
+    else if ( file[0] != "/" ) 
     filename = directory.path() + "/" + file;
     else
     filename = file;
@@ -697,6 +698,9 @@ void ServerPI::process( const QString& message )
 
     // list (LIST)
     else if ( cmd == "LIST" ) {
+    if ( args == "-la" )
+	args = QString::null;
+    
     if ( sendList( absFilePath( args ) ) )
         send( "150 File status okay" ); // No tr
     else
