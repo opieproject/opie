@@ -3,110 +3,106 @@
     <name>ORecurranceBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation type="unfinished"></translation>
+        <translation>Ismétlődő esemény</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Nincs</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Nap</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Hét</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Hónap</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Év</translation>
     </message>
     <message>
         <source>Every:</source>
-        <translation type="unfinished"></translation>
+        <translation>Minden:</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Gyakoriság</translation>
     </message>
     <message>
         <source>End On:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vége:</translation>
     </message>
     <message>
         <source>No End Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Nincs végső dátum</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished"></translation>
+        <translation>Ismétlés</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation>Hé</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation>Ke</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation>Sze</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation>Csü</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation>Pé</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation>Szo</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation>Va</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Minden</translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation type="unfinished"></translation>
+        <translation>Var1</translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Var 2</translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="unfinished"></translation>
+        <translation>HétVar</translation>
     </message>
 </context>
 <context>
     <name>OTimePickerDialogBase</name>
     <message>
-        <source>TimePicker</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Idő:</translation>
     </message>
     <message>
         <source>:</source>
-        <translation type="unfinished"></translation>
+        <translation>:</translation>
     </message>
     <message>
         <source>Pick Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Válasszon időt:</translation>
     </message>
 </context>
 </TS>

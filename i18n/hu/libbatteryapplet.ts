@@ -2,60 +2,84 @@
 <context>
     <name>BatteryStatus</name>
     <message>
-        <source>Battery Status</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Bezár</translation>
     </message>
     <message>
         <source>Charging</source>
-        <translation type="unfinished"></translation>
+        <translation>Töltés</translation>
     </message>
     <message>
         <source>Percentage battery remaining</source>
-        <translation type="unfinished"></translation>
+        <translation>Elem hátrelévő élettartama</translation>
     </message>
     <message>
         <source>Battery status: </source>
-        <translation type="unfinished"></translation>
+        <translation>Elem állapot:</translation>
     </message>
     <message>
         <source>Good</source>
-        <translation type="unfinished"></translation>
+        <translation>Jó</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Alacsony</translation>
     </message>
     <message>
         <source>Very Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Nagyon alacsony</translation>
     </message>
     <message>
         <source>Critical</source>
-        <translation type="unfinished"></translation>
+        <translation>Kritikus</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Ismeretlen</translation>
     </message>
     <message>
         <source>On backup power</source>
-        <translation type="unfinished"></translation>
+        <translation>Tartalékelemen</translation>
     </message>
     <message>
         <source>Power on-line</source>
-        <translation type="unfinished"></translation>
+        <translation>Hálózati töltőn</translation>
     </message>
     <message>
         <source>External power disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Külső áramellátás megszűnt</translation>
     </message>
     <message>
         <source>Battery time remaining</source>
-        <translation type="unfinished"></translation>
+        <translation>Elem élettartamából hátra van</translation>
+    </message>
+    <message>
+        <source>Battery status</source>
+        <translation>Elem állapota</translation>
+    </message>
+    <message>
+        <source>Failure</source>
+        <translation>Hiba</translation>
+    </message>
+    <message>
+        <source>could not open file</source>
+        <translation>nem tudom megnyitni a fájlt</translation>
+    </message>
+    <message>
+        <source>Charging both devices</source>
+        <translation>Mindkét eszközt töltöm</translation>
+    </message>
+    <message>
+        <source>Percentage battery remaining: </source>
+        <translation>Elem hátrelévő élettartama:</translation>
+    </message>
+    <message>
+        <source>Battery time remaining: </source>
+        <translation>Elem élettartamából hátra van:</translation>
+    </message>
+    <message>
+        <source>No jacket with battery inserted</source>
+        <translation>Nincs elemet tartalmazó kabát a gépen</translation>
     </message>
 </context>
 </TS>

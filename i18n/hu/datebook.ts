@@ -3,76 +3,77 @@
     <name>DateBook</name>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Naptár</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Nézet</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Beállítások</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Új</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Ma</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Nap</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Hét</translation>
     </message>
     <message>
         <source>WeekLst</source>
-        <translation type="unfinished"></translation>
+        <translation>HétLista</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Hónap</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Keresés</translation>
     </message>
     <message>
         <source>Alarm and Start Time...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ébresztő és kezdő idő...</translation>
     </message>
     <message>
         <source>Default View</source>
-        <translation type="unfinished"></translation>
+        <translation>Alapértelmezett nézet</translation>
     </message>
     <message>
         <source>Event duration is potentially longer
 than interval between repeats.</source>
-        <translation type="unfinished"></translation>
+        <translation>Az esemény hossza potenciálisan hosszabb
+mint az ismétlődések közötti idő.</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Az adat nem szerkeszthető, szinkronizáció folyik</translation>
     </message>
     <message>
         <source>Edit Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Esemény szerkesztése</translation>
     </message>
     <message>
         <source> minutes)</source>
-        <translation type="unfinished"></translation>
+        <translation>perc)</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Rendben</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Nincs hely</translation>
     </message>
     <message>
         <source>Calendar was unable to save
@@ -80,230 +81,234 @@ your changes.
 Free up some space and try again.
 
 Quit anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>A naptár nem tudta elmenteni
+a változtatásokat.
+Szabadítson fel némi helyet és próbálja újra.
+
+Mégis kilép?</translation>
     </message>
     <message>
         <source>(Unknown)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Ismeretlen)</translation>
     </message>
     <message>
         <source>Error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiba!</translation>
     </message>
     <message>
         <source>Fix it</source>
-        <translation type="unfinished"></translation>
+        <translation>Javítsd ki</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Folytat</translation>
     </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
     <message>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>H</translation>
     </message>
     <message>
         <source>T</source>
-        <translation type="unfinished"></translation>
+        <translation>K / Cs</translation>
     </message>
     <message>
         <source>W</source>
-        <translation type="unfinished"></translation>
+        <translation>Sz</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation>P</translation>
     </message>
     <message>
         <source>S</source>
-        <translation type="unfinished"></translation>
+        <translation>Sz / V</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>Hétfő</translation>
     </message>
     <message>
         <source>Tuesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Kedd</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Szerde</translation>
     </message>
     <message>
         <source>Thursday</source>
-        <translation type="unfinished"></translation>
+        <translation>Csütörtök</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation type="unfinished"></translation>
+        <translation>Péntek</translation>
     </message>
     <message>
         <source>Saturday</source>
-        <translation type="unfinished"></translation>
+        <translation>Szombat</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
+        <translation>Vasárnap</translation>
     </message>
 </context>
 <context>
     <name>DateBookDayView</name>
     <message>
         <source>:00p</source>
-        <translation type="unfinished"></translation>
+        <translation>:00p</translation>
     </message>
 </context>
 <context>
     <name>DateBookDayWidget</name>
     <message>
-        <source>This is an all day event.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Kezdet</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Vége</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Szerkeszt</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Töröl</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Átsugároz</translation>
+    </message>
+    <message>
+        <source>This is an all day event.</source>
+        <translation>Ez egy egész napos esemény.</translation>
     </message>
 </context>
 <context>
     <name>DateBookSettings</name>
     <message>
         <source>:00 PM</source>
-        <translation type="unfinished"></translation>
+        <translation>:00 Du</translation>
     </message>
     <message>
         <source>:00 AM</source>
-        <translation type="unfinished"></translation>
+        <translation>:00 De</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>Du</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation>De</translation>
     </message>
     <message>
         <source>:00</source>
-        <translation type="unfinished"></translation>
+        <translation>:00</translation>
     </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Beállítások</translation>
     </message>
     <message>
         <source>Start viewing events</source>
-        <translation type="unfinished"></translation>
+        <translation>Események mutatásának kezdete</translation>
     </message>
     <message>
         <source>Start Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kezdő idő:</translation>
     </message>
     <message>
         <source>:00</source>
-        <translation type="unfinished"></translation>
+        <translation>:00</translation>
     </message>
     <message>
         <source>Alarm Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ébresztő beállítások</translation>
     </message>
     <message>
         <source>Alarm Preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Előre beállított ébresztő</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>perc</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Vegyes</translation>
     </message>
     <message>
         <source>Row style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sor stílus:</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Alapértelmezett</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Közepes</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Nagy</translation>
     </message>
     <message>
         <source>Jump to current time (dayview)</source>
-        <translation type="unfinished"></translation>
+        <translation>Jelenlegi időre ugrás (napinézet)</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeek</name>
     <message>
         <source>This is an all day event.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ez egy egész napos esemény.</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekHeaderBase</name>
     <message>
         <source>Y: </source>
-        <translation type="unfinished"></translation>
+        <translation>É:</translation>
     </message>
     <message>
         <source>W: </source>
-        <translation type="unfinished"></translation>
+        <translation>H:</translation>
     </message>
     <message>
         <source>00. Jan-00. Jan</source>
-        <translation type="unfinished"></translation>
+        <translation>Jan 00.-Jan 00.</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>W: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>H: %1</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekLstHeaderBase</name>
     <message>
         <source>W: 00,00</source>
-        <translation type="unfinished"></translation>
+        <translation>H: 00,00</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>00 Jan-00 Jan</source>
-        <translation type="unfinished"></translation>
+        <translation>Jan 00-Jan 00</translation>
     </message>
 </context>
 <context>
@@ -311,431 +316,432 @@ Quit anyway?</source>
     <message>
         <source>M</source>
         <comment>Monday</comment>
-        <translation type="unfinished"></translation>
+        <translation>H</translation>
     </message>
     <message>
         <source>T</source>
         <comment>Tuesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>K</translation>
     </message>
     <message>
         <source>W</source>
         <comment>Wednesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sze</translation>
     </message>
     <message>
         <source>T</source>
         <comment>Thursday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cs</translation>
     </message>
     <message>
         <source>F</source>
         <comment>Friday</comment>
-        <translation type="unfinished"></translation>
+        <translation>P</translation>
     </message>
     <message>
         <source>S</source>
         <comment>Saturday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Szo</translation>
     </message>
     <message>
         <source>S</source>
         <comment>Sunday</comment>
-        <translation type="unfinished"></translation>
+        <translation>V</translation>
     </message>
     <message>
         <source>p</source>
-        <translation type="unfinished"></translation>
+        <translation>p</translation>
     </message>
 </context>
 <context>
     <name>DateEntry</name>
     <message>
-        <source>Start Time</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>End Time</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Naptár</translation>
     </message>
     <message>
         <source>Repeat...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ismétlés...</translation>
     </message>
     <message>
         <source>Daily...</source>
-        <translation type="unfinished"></translation>
+        <translation>Napi...</translation>
     </message>
     <message>
         <source>Weekly...</source>
-        <translation type="unfinished"></translation>
+        <translation>Heti...</translation>
     </message>
     <message>
         <source>Monthly...</source>
-        <translation type="unfinished"></translation>
+        <translation>Havi...</translation>
     </message>
     <message>
         <source>Yearly...</source>
-        <translation type="unfinished"></translation>
+        <translation>Évi...</translation>
     </message>
     <message>
         <source>No Repeat...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nincs ismétlés...</translation>
+    </message>
+    <message>
+        <source>Start Time</source>
+        <translation>Kezdő időpont</translation>
+    </message>
+    <message>
+        <source>End Time</source>
+        <translation>Végső időpont</translation>
     </message>
 </context>
 <context>
     <name>DateEntryBase</name>
     <message>
         <source>New Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Új esemény</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Hely</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategória</translation>
     </message>
     <message>
         <source>Meeting</source>
-        <translation type="unfinished"></translation>
+        <translation>Találkozó</translation>
     </message>
     <message>
         <source>Lunch</source>
-        <translation type="unfinished"></translation>
+        <translation>Ebéd</translation>
     </message>
     <message>
         <source>Dinner</source>
-        <translation type="unfinished"></translation>
+        <translation>Vacsora</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description </source>
-        <translation type="unfinished"></translation>
+        <translation>Utazás</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished"></translation>
+        <translation>Iroda</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start - End </source>
-        <translation type="unfinished"></translation>
+        <translation>Otthon</translation>
     </message>
     <message>
         <source>Jan 02 00</source>
-        <translation type="unfinished"></translation>
+        <translation>02 Jan 00</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation type="unfinished"></translation>
+        <translation>Kezdő időpont</translation>
     </message>
     <message>
         <source>All day</source>
-        <translation type="unfinished"></translation>
+        <translation>Egész nap</translation>
     </message>
     <message>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Időzóna</translation>
     </message>
     <message>
         <source>&amp;Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ébresztő</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>perc</translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation type="unfinished"></translation>
+        <translation>Csendes</translation>
     </message>
     <message>
         <source>Loud</source>
-        <translation type="unfinished"></translation>
+        <translation>Hangos</translation>
     </message>
     <message>
         <source>Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Ismétlés</translation>
     </message>
     <message>
         <source>No Repeat...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nincs ismétlés...</translation>
+    </message>
+    <message>
+        <source>Description </source>
+        <translation>Leírás</translation>
+    </message>
+    <message>
+        <source>Start - End </source>
+        <translation>Kezdet - Vég</translation>
     </message>
     <message>
         <source>Note...</source>
-        <translation type="unfinished"></translation>
+        <translation>Jegyzet...</translation>
     </message>
 </context>
 <context>
     <name>NoteEntryBase</name>
     <message>
         <source>Edit Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Jegyzet szerkesztése</translation>
     </message>
     <message>
         <source>&lt;b&gt;1/10&lt;/b&gt; Lunch</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;1/10&lt;/b&gt; Ebéd</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Kezdet</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Vég</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Minden</translation>
     </message>
     <message>
         <source>%1 %2 every </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 minden</translation>
     </message>
     <message>
         <source>The %1 every </source>
-        <translation type="unfinished"></translation>
+        <translation>%1-n minden</translation>
     </message>
     <message>
         <source>The %1 %1 of every</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %1-n minden</translation>
     </message>
     <message>
         <source>Every </source>
-        <translation type="unfinished"></translation>
+        <translation>Minden</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>hétfő</translation>
     </message>
     <message>
         <source>Tuesday</source>
-        <translation type="unfinished"></translation>
+        <translation>kedd</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation type="unfinished"></translation>
+        <translation>szerda</translation>
     </message>
     <message>
         <source>Thursday</source>
-        <translation type="unfinished"></translation>
+        <translation>csütörtök</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation type="unfinished"></translation>
+        <translation>péntek</translation>
     </message>
     <message>
         <source>Saturday</source>
-        <translation type="unfinished"></translation>
+        <translation>szombat</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
+        <translation>vasárnap</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>st</source>
-        <translation type="unfinished"></translation>
+        <translation>.</translation>
     </message>
     <message>
         <source>nd</source>
-        <translation type="unfinished"></translation>
+        <translation>.</translation>
     </message>
     <message>
         <source>rd</source>
-        <translation type="unfinished"></translation>
+        <translation>.</translation>
     </message>
     <message>
         <source>th</source>
-        <translation type="unfinished"></translation>
+        <translation>.</translation>
     </message>
 </context>
 <context>
     <name>RepeatEntry</name>
     <message>
         <source>No Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Nincs ismétlés</translation>
     </message>
     <message>
         <source>day(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>nap</translation>
     </message>
     <message>
         <source>week(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>hét</translation>
     </message>
     <message>
         <source>Repeat By</source>
-        <translation type="unfinished"></translation>
+        <translation>Ismétlés rendszere</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Nap</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Dátum</translation>
     </message>
     <message>
         <source>month(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>hónap</translation>
     </message>
     <message>
         <source>year(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>év</translation>
     </message>
     <message>
         <source>days</source>
-        <translation type="unfinished"></translation>
+        <translation>nap</translation>
     </message>
     <message>
         <source>day</source>
-        <translation type="unfinished"></translation>
+        <translation>nap</translation>
     </message>
     <message>
         <source>weeks</source>
-        <translation type="unfinished"></translation>
+        <translation>hét</translation>
     </message>
     <message>
         <source>week</source>
-        <translation type="unfinished"></translation>
+        <translation>hét</translation>
     </message>
     <message>
         <source>month</source>
-        <translation type="unfinished"></translation>
+        <translation>hónap</translation>
     </message>
     <message>
         <source>year</source>
-        <translation type="unfinished"></translation>
+        <translation>év</translation>
     </message>
     <message>
         <source> and </source>
-        <translation type="unfinished"></translation>
+        <translation>és</translation>
     </message>
     <message>
         <source>,
 and </source>
-        <translation type="unfinished"></translation>
+        <translation>,
+és</translation>
     </message>
     <message>
         <source>, and </source>
-        <translation type="unfinished"></translation>
+        <translation>, és</translation>
     </message>
 </context>
 <context>
     <name>RepeatEntryBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation type="unfinished"></translation>
+        <translation>Ismétlődő esemény</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Nem</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Nap</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Hét</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Hónap</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Év</translation>
     </message>
     <message>
         <source>Every:</source>
-        <translation type="unfinished"></translation>
+        <translation>Minden:</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Gyakoriság</translation>
     </message>
     <message>
         <source>End On:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vége:</translation>
     </message>
     <message>
         <source>No End Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Nincs vége</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished"></translation>
+        <translation>Ismétlés a hét ezen napjain:</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation>Hé</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation>Ke</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation>Sze</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation>Csü</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation>Pé</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation>Szo</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation>Va</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Minden</translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation type="unfinished"></translation>
+        <translation>Var1</translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Var 2</translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="unfinished"></translation>
+        <translation>HétVar</translation>
     </message>
     <message>
         <source>months</source>
-        <translation type="unfinished"></translation>
+        <translation>hónap</translation>
     </message>
     <message>
         <source>years</source>
-        <translation type="unfinished"></translation>
+        <translation>év</translation>
     </message>
 </context>
 </TS>

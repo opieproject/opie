@@ -3,15 +3,15 @@
     <name>ClipboardApplet</name>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Kivág</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Másol</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Beilleszt</translation>
     </message>
 </context>
 </TS>

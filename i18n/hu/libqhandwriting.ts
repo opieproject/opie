@@ -3,152 +3,148 @@
     <name>HandwritingHelp</name>
     <message>
         <source>Handwriting Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Kézírás súgó</translation>
     </message>
     <message>
         <source>&lt;ul&gt;&lt;li&gt;When you start to use the handwriting recogniser write slowly, accurately and firmly.&lt;li&gt;Use the guide lines when drawing your characters.&lt;li&gt;When drawing a character with multiple strokes, each successive stroke must be drawn before the grayed strokes are erased.&lt;li&gt;Practice your handwriting using the handwriting trainer.&lt;li&gt;When adding your own character templates make sure they are sufficiently different from other characters&apos; templates.&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;ul&gt;&lt;li&gt;Amikor a kézírás felismerőt használni kezdi, írjon lassan, pontosan és határozottan.&lt;li&gt;Használja a segédvonalakat amikor az írásjeleket rajzolja.&lt;li&gt;Amikor az írásjeleket több húzásból rajzolja, minden egyes húzást meg kell rajzoljon mielőtt a szürke húzások eltűnnek.&lt;li&gt;Amikor saját írásjel mintákat ad hozzá, legyen biztos benne, hogy elegendően eltér az más írásjelek mintáitól.&lt;/ul&gt;</translation>
     </message>
     <message>
         <source>Tips</source>
-        <translation type="unfinished"></translation>
+        <translation>Ötletek</translation>
     </message>
     <message>
         <source>Trainer</source>
-        <translation type="unfinished"></translation>
+        <translation>Edzés</translation>
     </message>
 </context>
 <context>
     <name>HandwritingTrainer</name>
     <message>
         <source>Matched: </source>
-        <translation type="unfinished"></translation>
+        <translation>Illeszkedik:</translation>
     </message>
     <message>
         <source>Similar to: </source>
-        <translation type="unfinished"></translation>
+        <translation>Hasonló mint:</translation>
     </message>
     <message>
         <source>%1%</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%</translation>
     </message>
     <message>
         <source>Select a reference character from the list.  Practice writing in the area on the right.</source>
-        <translation type="unfinished"></translation>
+        <translation>Válasszon ki egy referencia írásjelet a listából. Gyakoroljon a jobboldali területen.</translation>
     </message>
     <message>
         <source>No match</source>
-        <translation type="unfinished"></translation>
+        <translation>Nincs egyező</translation>
     </message>
 </context>
 <context>
     <name>InputMethods</name>
     <message>
         <source>Handwriting</source>
-        <translation type="unfinished"></translation>
+        <translation>Kézírás</translation>
     </message>
 </context>
 <context>
     <name>QIMPenEdit</name>
     <message>
         <source>New...</source>
-        <translation type="unfinished"></translation>
+        <translation>Új...</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Hozzáad</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Eltávolít</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Alapértelmezett</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Tisztít</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Rendben</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Mégsem</translation>
     </message>
 </context>
 <context>
     <name>QIMPenInput</name>
     <message>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Gyorsbillentyű</translation>
     </message>
 </context>
 <context>
     <name>QIMPenInputCharDlg</name>
     <message>
         <source>Enter new character</source>
-        <translation type="unfinished"></translation>
+        <translation>Új írásjel bevitele</translation>
     </message>
     <message>
         <source>Character:</source>
-        <translation type="unfinished"></translation>
+        <translation>Írásjel:</translation>
     </message>
 </context>
 <context>
     <name>QIMPenPrefBase</name>
     <message>
-        <source>Form1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Multi-stroke character timeout:</source>
-        <translation type="unfinished"></translation>
+        <translation>Több-húzásos írásjel időtullépése:</translation>
     </message>
     <message>
         <source>ms</source>
-        <translation type="unfinished"></translation>
+        <translation>ms</translation>
     </message>
     <message>
         <source>Input areas displayed</source>
-        <translation type="unfinished"></translation>
+        <translation>Megjelenített beviteli területek</translation>
     </message>
     <message>
         <source>Upper and lower case areas</source>
-        <translation type="unfinished"></translation>
+        <translation>Nagy és kisbetűk területe</translation>
     </message>
     <message>
         <source>Lower case (toggle Upper case)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kisbetűk (nagybetűre kapcsolás)</translation>
     </message>
 </context>
 <context>
     <name>QIMPenSetup</name>
     <message>
         <source>Setup Handwriting Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Kézírás bevitel beállítása</translation>
     </message>
     <message>
         <source>Character Profile:</source>
-        <translation type="unfinished"></translation>
+        <translation>Írásjel jellemzők:</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Beállítások</translation>
     </message>
     <message>
         <source>Customize</source>
-        <translation type="unfinished"></translation>
+        <translation>Testre szab</translation>
     </message>
     <message>
         <source>%1 ms</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ms</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Nincs hely</translation>
     </message>
     <message>
         <source>Unable to save information.
@@ -156,7 +152,11 @@ Free up some space
 and try again.
 
 Quit anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Az infomrációkat nem lehet menteni.
+Szabadítson fel némi helyet
+és próbálja újra.
+
+Mégis kilép?</translation>
     </message>
 </context>
 </TS>

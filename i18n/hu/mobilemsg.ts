@@ -1,10 +1,6 @@
 <!DOCTYPE TS><TS>
 <context>
     <name>MobileMsg</name>
-    <message>
-        <source>Messages: </source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>MobileMsgBase</name>
@@ -21,10 +17,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Flash</source>
         <translation type="unfinished"></translation>
     </message>
@@ -33,31 +25,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SMS: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Nokia</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Country:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Logo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Picture</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Message:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -65,7 +33,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Tab</source>
+        <source>SMS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Messages: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -3,91 +3,92 @@
     <name>Clock</name>
     <message>
         <source>Snooze</source>
-        <translation type="unfinished"></translation>
+        <translation>Szundít</translation>
     </message>
     <message>
         <source>Clock</source>
-        <translation type="unfinished"></translation>
+        <translation>Óra</translation>
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation type="unfinished"></translation>
+        <translation>Stopper</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Indulj</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Alaphelyzet</translation>
     </message>
     <message>
         <source>Set Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Ébresztés beállítása</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Állj</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>DU</translation>
     </message>
     <message>
         <source>Alarm Is On</source>
-        <translation type="unfinished"></translation>
+        <translation>Ébresztés bekapcsolva</translation>
     </message>
     <message>
         <source>Alarm Is Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Ébresztés kikapcsolva</translation>
     </message>
     <message>
         <source>Set date and time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dátum és idő beállítása.</translation>
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Óra: az ébresztést elmulasztotta.</translation>
     </message>
 </context>
 <context>
     <name>Set_Alarm</name>
     <message>
         <source>Set Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Ébresztés beállítása</translation>
     </message>
     <message>
         <source>Hour</source>
-        <translation type="unfinished"></translation>
+        <translation>Óra</translation>
     </message>
     <message>
         <source>Minute</source>
-        <translation type="unfinished"></translation>
+        <translation>Perc</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation>DE</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>DU</translation>
     </message>
     <message>
         <source>Snooze Delay
 (minutes)</source>
-        <translation type="unfinished"></translation>
+        <translation>Szundítási késleltetés
+(perc)</translation>
     </message>
     <message>
         <source>mp3 alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>mp3 ébresztés</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Mind</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Hang</translation>
     </message>
 </context>
 </TS>

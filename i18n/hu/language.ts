@@ -3,22 +3,22 @@
     <name>LanguageSettings</name>
     <message>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Magyar</translation>
     </message>
     <message>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>Alapértelmezett</translation>
     </message>
 </context>
 <context>
     <name>LanguageSettingsBase</name>
     <message>
-        <source>Language</source>
-        <translation type="unfinished"></translation>
+        <source>Select language</source>
+        <translation>Válassza ki a nyelvet</translation>
     </message>
     <message>
-        <source>Select language</source>
-        <translation type="unfinished"></translation>
+        <source>Language Settings</source>
+        <translation>Nyelv beállítása</translation>
     </message>
 </context>
 </TS>

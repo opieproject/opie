@@ -3,78 +3,78 @@
     <name>AbTable</name>
     <message>
         <source>Full Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Teljes név</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Kapcsolat</translation>
     </message>
     <message>
         <source>Pick</source>
-        <translation type="unfinished"></translation>
+        <translation>Felvesz</translation>
     </message>
 </context>
 <context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Kapcsolatok</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Kapcsolat</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Új</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Szerkeszt</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Töröl</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Keres</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation type="unfinished"></translation>
+        <translation>Levelet küld</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Bejegyzést átsugároz</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Az én személyes adataim</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Nézet</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Az adat nem szerkeszthető, szinkronizálás folyamatban</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Az én személyes adataim szerkesztése</translation>
     </message>
     <message>
         <source>Edit Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Cím szerkesztése</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Kapcsolatok - Az én személyes adataim</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Nincs hely</translation>
     </message>
     <message>
         <source>Unable to save information.
@@ -82,1311 +82,1318 @@ Free up some space
 and try again.
 
 Quit anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Nem lehet az információkat menteni.
+Szabadítson fel némi helyet
+és próbálja újra.
+
+Mégis kilép?</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Mind</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Iktatatlan</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation type="unfinished"></translation>
+        <translation>vCard importálása</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Keresés bezárása</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Minden adat mentése</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OContacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Beállítás</translation>
     </message>
     <message>
         <source>Not Found</source>
-        <translation type="unfinished"></translation>
+        <translation>Nem található</translation>
     </message>
     <message>
         <source>List</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation type="unfinished"></translation>
+        <translation>Névjegyek</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Névjegy</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Kezdj keresni</translation>
     </message>
     <message>
         <source>Right file type ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Helyes fájltípus ?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Igen</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nem</translation>
     </message>
     <message>
         <source>Unable to find a contact for this 
  search pattern!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ehhez a keresési mintához
+nem találok kapcsolatot!</translation>
     </message>
     <message>
         <source>The selected file 
  does not end with &quot;.vcf&quot;.
  Do you really want to open it?</source>
-        <translation type="unfinished"></translation>
+        <translation>A kiválasztott fájl
+nem &quot;.vcf&quot;-re végződik.
+Tényleg meg akarja nyitni?</translation>
     </message>
     <message>
         <source>Add Contact?</source>
-        <translation type="unfinished"></translation>
+        <translation>Kapcsolat hozzáadása?</translation>
     </message>
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tényleg hozzá akarja adni
+%1-t a kapcsolatokhoz?</translation>
     </message>
     <message>
         <source>&amp;All Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Mind igen</translation>
     </message>
 </context>
 <context>
     <name>ConfigDlg_Base</name>
     <message>
         <source>Query Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Keresési mód</translation>
     </message>
     <message>
         <source>Use Regular Expressions</source>
-        <translation type="unfinished"></translation>
+        <translation>Szabályos kifejezés használata</translation>
     </message>
     <message>
         <source>Use Wildcards (*,?)</source>
-        <translation type="unfinished"></translation>
+        <translation>Helyettesítők (*,?) használata</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Kis- és nagybetű érzékeny</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Levél</translation>
     </message>
     <message>
         <source>Prefer QT-Mail </source>
-        <translation type="unfinished"></translation>
+        <translation>QT-Mail preferálása</translation>
     </message>
     <message>
         <source>Prefer Opie-Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie-Mail preferálása</translation>
     </message>
     <message>
         <source>Notice: QT-Mail is just 
 provided in the SHARP 
 default ROM. Opie-Mail 
 is provided free !</source>
-        <translation type="unfinished"></translation>
+        <translation>Megjegyzés: A QT-Mail program
+csak a SHARP alapértelmezett
+ROM-jában található. Az Opie-Mail
+ingyenesen elérhető !</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Vegyes</translation>
     </message>
     <message>
         <source>Search Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Keresési beállítások</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Betűk</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation type="unfinished"></translation>
+        <translation>Kicsi</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normál</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Nagy</translation>
     </message>
     <message>
         <source>Order</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorrend</translation>
     </message>
     <message>
         <source>Select Contact Order:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kapcsolatok sorrendjének kiválasztása:</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Fel</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Le</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Hozzáad</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Eltávolít</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Beállítás</translation>
     </message>
 </context>
 <context>
     <name>ContactEditor</name>
     <message>
         <source>First Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Keresztnév</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Középső név</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Vezetéknév</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiterjesztés</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Rögzít mint</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Nem</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Beosztás</translation>
     </message>
     <message>
         <source>City</source>
-        <translation type="unfinished"></translation>
+        <translation>Város</translation>
     </message>
     <message>
         <source>State</source>
-        <translation type="unfinished"></translation>
+        <translation>Állam</translation>
     </message>
     <message>
         <source>Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Ország</translation>
     </message>
     <message>
         <source>Full Name...</source>
-        <translation type="unfinished"></translation>
+        <translation>Teljes név...</translation>
     </message>
     <message>
         <source>Organization</source>
-        <translation type="unfinished"></translation>
+        <translation>Szervezet</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategória</translation>
     </message>
     <message>
         <source>Notes...</source>
-        <translation type="unfinished"></translation>
+        <translation>Jegyzetek...</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Általános</translation>
     </message>
     <message>
         <source>Business</source>
-        <translation type="unfinished"></translation>
+        <translation>Üzleti</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Otthoni</translation>
     </message>
     <message>
         <source>Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Cím</translation>
     </message>
     <message>
         <source>Zip Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Irányítószám</translation>
     </message>
     <message>
         <source>United States</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyesült Államok</translation>
     </message>
     <message>
         <source>United Kingdom</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyesült Királyság</translation>
     </message>
     <message>
         <source>Japan</source>
-        <translation type="unfinished"></translation>
+        <translation>Japán</translation>
     </message>
     <message>
         <source>France</source>
-        <translation type="unfinished"></translation>
+        <translation>Franciaország</translation>
     </message>
     <message>
         <source>Germany</source>
-        <translation type="unfinished"></translation>
+        <translation>Németország</translation>
     </message>
     <message>
         <source>Norway</source>
-        <translation type="unfinished"></translation>
+        <translation>Norvégia</translation>
     </message>
     <message>
         <source>Canada</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanada</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>Férfi</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>Nő</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Részletek</translation>
     </message>
     <message>
         <source>Enter Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Jegyzet beírása</translation>
     </message>
     <message>
         <source>Edit Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Név szerkesztése</translation>
     </message>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Afganistan</source>
-        <translation type="unfinished"></translation>
+        <translation>Kapcsolatok</translation>
     </message>
     <message>
         <source>Albania</source>
-        <translation type="unfinished"></translation>
+        <translation>Albánia</translation>
     </message>
     <message>
         <source>Algeria</source>
-        <translation type="unfinished"></translation>
+        <translation>Algéria</translation>
     </message>
     <message>
         <source>American Samoa</source>
-        <translation type="unfinished"></translation>
+        <translation>Amerikai Samoa</translation>
     </message>
     <message>
         <source>Andorra</source>
-        <translation type="unfinished"></translation>
+        <translation>Andorra</translation>
     </message>
     <message>
         <source>Angola</source>
-        <translation type="unfinished"></translation>
+        <translation>Angola</translation>
     </message>
     <message>
         <source>Anguilla</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Antartica</source>
-        <translation type="unfinished"></translation>
+        <translation>Anguilla</translation>
     </message>
     <message>
         <source>Argentina</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Armania</source>
-        <translation type="unfinished"></translation>
+        <translation>Argentína</translation>
     </message>
     <message>
         <source>Aruba</source>
-        <translation type="unfinished"></translation>
+        <translation>Aruba</translation>
     </message>
     <message>
         <source>Australia</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausztrália</translation>
     </message>
     <message>
         <source>Austria</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausztria</translation>
     </message>
     <message>
         <source>Azerbaijan</source>
-        <translation type="unfinished"></translation>
+        <translation>Azerbajdzsán</translation>
     </message>
     <message>
         <source>Bahamas</source>
-        <translation type="unfinished"></translation>
+        <translation>Bahamák</translation>
     </message>
     <message>
         <source>Bahrain</source>
-        <translation type="unfinished"></translation>
+        <translation>Bahrain</translation>
     </message>
     <message>
         <source>Bangladesh</source>
-        <translation type="unfinished"></translation>
+        <translation>Banglades</translation>
     </message>
     <message>
         <source>Barbados</source>
-        <translation type="unfinished"></translation>
+        <translation>Barbadosz</translation>
     </message>
     <message>
         <source>Belarus</source>
-        <translation type="unfinished"></translation>
+        <translation>Belarusszia</translation>
     </message>
     <message>
         <source>Belgium</source>
-        <translation type="unfinished"></translation>
+        <translation>Belgium</translation>
     </message>
     <message>
         <source>Belize</source>
-        <translation type="unfinished"></translation>
+        <translation>Belize</translation>
     </message>
     <message>
         <source>Benin</source>
-        <translation type="unfinished"></translation>
+        <translation>Benin</translation>
     </message>
     <message>
         <source>Bermuda</source>
-        <translation type="unfinished"></translation>
+        <translation>Bermuda</translation>
     </message>
     <message>
         <source>Bhutan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Boliva</source>
-        <translation type="unfinished"></translation>
+        <translation>Bután</translation>
     </message>
     <message>
         <source>Botswana</source>
-        <translation type="unfinished"></translation>
+        <translation>Botszvána</translation>
     </message>
     <message>
         <source>Bouvet Island</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouvet Sziget</translation>
     </message>
     <message>
         <source>Brazil</source>
-        <translation type="unfinished"></translation>
+        <translation>Brazília</translation>
     </message>
     <message>
         <source>Brunei Darussalam</source>
-        <translation type="unfinished"></translation>
+        <translation>Brunei Darussalam</translation>
     </message>
     <message>
         <source>Bulgaria</source>
-        <translation type="unfinished"></translation>
+        <translation>Bulgária</translation>
     </message>
     <message>
         <source>Burkina Faso</source>
-        <translation type="unfinished"></translation>
+        <translation>Burkina Faso</translation>
     </message>
     <message>
         <source>Burundi</source>
-        <translation type="unfinished"></translation>
+        <translation>Burundia</translation>
     </message>
     <message>
         <source>Cambodia</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Camaroon</source>
-        <translation type="unfinished"></translation>
+        <translation>Kambodzsa</translation>
     </message>
     <message>
         <source>Cape Verde</source>
-        <translation type="unfinished"></translation>
+        <translation>Cape Verde</translation>
     </message>
     <message>
         <source>Cayman Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Kajmán Szigetek</translation>
     </message>
     <message>
         <source>Chad</source>
-        <translation type="unfinished"></translation>
+        <translation>Chad</translation>
     </message>
     <message>
         <source>Chile</source>
-        <translation type="unfinished"></translation>
+        <translation>Csile</translation>
     </message>
     <message>
         <source>China</source>
-        <translation type="unfinished"></translation>
+        <translation>Kína</translation>
     </message>
     <message>
         <source>Christmas Island</source>
-        <translation type="unfinished"></translation>
+        <translation>Karácsony Szigetek</translation>
     </message>
     <message>
         <source>Colombia</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolumbia</translation>
     </message>
     <message>
         <source>Comoros</source>
-        <translation type="unfinished"></translation>
+        <translation>Komorosz</translation>
     </message>
     <message>
         <source>Congo</source>
-        <translation type="unfinished"></translation>
+        <translation>Kongó</translation>
     </message>
     <message>
         <source>Cook Island</source>
-        <translation type="unfinished"></translation>
+        <translation>Cook Szigetek</translation>
     </message>
     <message>
         <source>Costa Rica</source>
-        <translation type="unfinished"></translation>
+        <translation>Costa Rica</translation>
     </message>
     <message>
         <source>Cote d&apos;Ivoire</source>
-        <translation type="unfinished"></translation>
+        <translation>Cote d&apos;Ivoire</translation>
     </message>
     <message>
         <source>Croatia</source>
-        <translation type="unfinished"></translation>
+        <translation>Horvátország</translation>
     </message>
     <message>
         <source>Cuba</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuba</translation>
     </message>
     <message>
         <source>Cyprus</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciprus</translation>
     </message>
     <message>
         <source>Czech Republic</source>
-        <translation type="unfinished"></translation>
+        <translation>Csehország</translation>
     </message>
     <message>
         <source>Denmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Dánia</translation>
     </message>
     <message>
         <source>Djibouti</source>
-        <translation type="unfinished"></translation>
+        <translation>Djibouti</translation>
     </message>
     <message>
         <source>Dominica</source>
-        <translation type="unfinished"></translation>
+        <translation>Dominika</translation>
     </message>
     <message>
         <source>Dominican Republic</source>
-        <translation type="unfinished"></translation>
+        <translation>Dominikai Köztársaság</translation>
     </message>
     <message>
         <source>East Timor</source>
-        <translation type="unfinished"></translation>
+        <translation>Kelet Timor</translation>
     </message>
     <message>
         <source>Ecuador</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekvádor</translation>
     </message>
     <message>
         <source>Egypt</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyiptom</translation>
     </message>
     <message>
         <source>El Salvador</source>
-        <translation type="unfinished"></translation>
+        <translation>El Salvador</translation>
     </message>
     <message>
         <source>Equatorial Guinea</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyenlítői Ginea</translation>
     </message>
     <message>
         <source>Eritrea</source>
-        <translation type="unfinished"></translation>
+        <translation>Eritrea</translation>
     </message>
     <message>
         <source>Estonia</source>
-        <translation type="unfinished"></translation>
+        <translation>Észtország</translation>
     </message>
     <message>
         <source>Ethiopia</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiópia</translation>
     </message>
     <message>
         <source>Falkland Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Falkland Szigetek</translation>
     </message>
     <message>
         <source>Faroe Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Faroe Szigetek</translation>
     </message>
     <message>
         <source>Fiji</source>
-        <translation type="unfinished"></translation>
+        <translation>Fiji</translation>
     </message>
     <message>
         <source>Finland</source>
-        <translation type="unfinished"></translation>
+        <translation>Finnország</translation>
     </message>
     <message>
         <source>French Guiana</source>
-        <translation type="unfinished"></translation>
+        <translation>Francia Gajana</translation>
     </message>
     <message>
         <source>French Polynesia</source>
-        <translation type="unfinished"></translation>
+        <translation>Francia Polinézia</translation>
     </message>
     <message>
         <source>Gabon</source>
-        <translation type="unfinished"></translation>
+        <translation>Gabon</translation>
     </message>
     <message>
         <source>Gambia</source>
-        <translation type="unfinished"></translation>
+        <translation>Gambia</translation>
     </message>
     <message>
         <source>Georgia</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Gahna</source>
-        <translation type="unfinished"></translation>
+        <translation>Georgia</translation>
     </message>
     <message>
         <source>Gibraltar</source>
-        <translation type="unfinished"></translation>
+        <translation>Gibraltár</translation>
     </message>
     <message>
         <source>Greece</source>
-        <translation type="unfinished"></translation>
+        <translation>Görögország</translation>
     </message>
     <message>
         <source>Greenland</source>
-        <translation type="unfinished"></translation>
+        <translation>Greenland</translation>
     </message>
     <message>
         <source>Grenada</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Guadelupe</source>
-        <translation type="unfinished"></translation>
+        <translation>Grenada</translation>
     </message>
     <message>
         <source>Guam</source>
-        <translation type="unfinished"></translation>
+        <translation>Guam</translation>
     </message>
     <message>
         <source>Guatemala</source>
-        <translation type="unfinished"></translation>
+        <translation>Guatemala</translation>
     </message>
     <message>
         <source>Guinea</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Guinea-bissau</source>
-        <translation type="unfinished"></translation>
+        <translation>Ginea</translation>
     </message>
     <message>
         <source>Guyana</source>
-        <translation type="unfinished"></translation>
+        <translation>Guyana</translation>
     </message>
     <message>
         <source>Haiti</source>
-        <translation type="unfinished"></translation>
+        <translation>Haiti</translation>
     </message>
     <message>
         <source>Holy See</source>
-        <translation type="unfinished"></translation>
+        <translation>Holy See</translation>
     </message>
     <message>
         <source>Honduras</source>
-        <translation type="unfinished"></translation>
+        <translation>Honduras</translation>
     </message>
     <message>
         <source>Hong Kong</source>
-        <translation type="unfinished"></translation>
+        <translation>Hong Kong</translation>
     </message>
     <message>
         <source>Hungary</source>
-        <translation type="unfinished"></translation>
+        <translation>Magyarország</translation>
     </message>
     <message>
         <source>Iceland</source>
-        <translation type="unfinished"></translation>
+        <translation>Iceland</translation>
     </message>
     <message>
         <source>India</source>
-        <translation type="unfinished"></translation>
+        <translation>India</translation>
     </message>
     <message>
         <source>Indonesia</source>
-        <translation type="unfinished"></translation>
+        <translation>Indonézia</translation>
     </message>
     <message>
         <source>Ireland</source>
-        <translation type="unfinished"></translation>
+        <translation>Írország</translation>
     </message>
     <message>
         <source>Israel</source>
-        <translation type="unfinished"></translation>
+        <translation>Izrael</translation>
     </message>
     <message>
         <source>Italy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Jamacia</source>
-        <translation type="unfinished"></translation>
+        <translation>Olaszország</translation>
     </message>
     <message>
         <source>Jordan</source>
-        <translation type="unfinished"></translation>
+        <translation>Jordánia</translation>
     </message>
     <message>
         <source>Kazakhstan</source>
-        <translation type="unfinished"></translation>
+        <translation>Kazahsztán</translation>
     </message>
     <message>
         <source>Kenya</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Kribati</source>
-        <translation type="unfinished"></translation>
+        <translation>Kenya</translation>
     </message>
     <message>
         <source>Korea</source>
-        <translation type="unfinished"></translation>
+        <translation>Korea</translation>
     </message>
     <message>
         <source>Laos</source>
-        <translation type="unfinished"></translation>
+        <translation>Laos</translation>
     </message>
     <message>
         <source>Latvia</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettország</translation>
     </message>
     <message>
         <source>Lebanon</source>
-        <translation type="unfinished"></translation>
+        <translation>Libanon</translation>
     </message>
     <message>
         <source>Lesotho</source>
-        <translation type="unfinished"></translation>
+        <translation>Lesotho</translation>
     </message>
     <message>
         <source>Liberia</source>
-        <translation type="unfinished"></translation>
+        <translation>Libéria</translation>
     </message>
     <message>
         <source>Liechtenstein</source>
-        <translation type="unfinished"></translation>
+        <translation>Liechtenstein</translation>
     </message>
     <message>
         <source>Lithuania</source>
-        <translation type="unfinished"></translation>
+        <translation>Litvánia</translation>
     </message>
     <message>
         <source>Luxembourg</source>
-        <translation type="unfinished"></translation>
+        <translation>Luxemburg</translation>
     </message>
     <message>
         <source>Macau</source>
-        <translation type="unfinished"></translation>
+        <translation>Makaó</translation>
     </message>
     <message>
         <source>Macedonia</source>
-        <translation type="unfinished"></translation>
+        <translation>Makedónia</translation>
     </message>
     <message>
         <source>Madagascar</source>
-        <translation type="unfinished"></translation>
+        <translation>Madagaszkár</translation>
     </message>
     <message>
         <source>Malawi</source>
-        <translation type="unfinished"></translation>
+        <translation>Malawi</translation>
     </message>
     <message>
         <source>Malaysia</source>
-        <translation type="unfinished"></translation>
+        <translation>Malájzia</translation>
     </message>
     <message>
         <source>Maldives</source>
-        <translation type="unfinished"></translation>
+        <translation>Maldives</translation>
     </message>
     <message>
         <source>Mali</source>
-        <translation type="unfinished"></translation>
+        <translation>Mali</translation>
     </message>
     <message>
         <source>Malta</source>
-        <translation type="unfinished"></translation>
+        <translation>Málta</translation>
     </message>
     <message>
         <source>Martinique</source>
-        <translation type="unfinished"></translation>
+        <translation>Martinique</translation>
     </message>
     <message>
         <source>Mauritania</source>
-        <translation type="unfinished"></translation>
+        <translation>Mauritánia</translation>
     </message>
     <message>
         <source>Mauritius</source>
-        <translation type="unfinished"></translation>
+        <translation>Mauritius</translation>
     </message>
     <message>
         <source>Mayotte</source>
-        <translation type="unfinished"></translation>
+        <translation>Mayotte</translation>
     </message>
     <message>
         <source>Mexico</source>
-        <translation type="unfinished"></translation>
+        <translation>Mexikó</translation>
     </message>
     <message>
         <source>Micronesia</source>
-        <translation type="unfinished"></translation>
+        <translation>Mikronézia</translation>
     </message>
     <message>
         <source>Moldova</source>
-        <translation type="unfinished"></translation>
+        <translation>Moldova</translation>
     </message>
     <message>
         <source>Monaco</source>
-        <translation type="unfinished"></translation>
+        <translation>Monaco</translation>
     </message>
     <message>
         <source>Mongolia</source>
-        <translation type="unfinished"></translation>
+        <translation>Mongólia</translation>
     </message>
     <message>
         <source>Montserrat</source>
-        <translation type="unfinished"></translation>
+        <translation>Montserrat</translation>
     </message>
     <message>
         <source>Morocco</source>
-        <translation type="unfinished"></translation>
+        <translation>Marokkó</translation>
     </message>
     <message>
         <source>Mozambique</source>
-        <translation type="unfinished"></translation>
+        <translation>Mozambik</translation>
     </message>
     <message>
         <source>Myanmar</source>
-        <translation type="unfinished"></translation>
+        <translation>Myanmar</translation>
     </message>
     <message>
         <source>Namibia</source>
-        <translation type="unfinished"></translation>
+        <translation>Namíbia</translation>
     </message>
     <message>
         <source>Nauru</source>
-        <translation type="unfinished"></translation>
+        <translation>Nauru</translation>
     </message>
     <message>
         <source>Nepal</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepál</translation>
     </message>
     <message>
         <source>Netherlands</source>
-        <translation type="unfinished"></translation>
+        <translation>Hollandia</translation>
     </message>
     <message>
         <source>New Caledonia</source>
-        <translation type="unfinished"></translation>
+        <translation>Új Kaledónia</translation>
     </message>
     <message>
         <source>New Zealand</source>
-        <translation type="unfinished"></translation>
+        <translation>Újzéland</translation>
     </message>
     <message>
         <source>Nicaragua</source>
-        <translation type="unfinished"></translation>
+        <translation>Nikaragua</translation>
     </message>
     <message>
         <source>Niger</source>
-        <translation type="unfinished"></translation>
+        <translation>Niger</translation>
     </message>
     <message>
         <source>Nigeria</source>
-        <translation type="unfinished"></translation>
+        <translation>Nigéria</translation>
     </message>
     <message>
         <source>Niue</source>
-        <translation type="unfinished"></translation>
+        <translation>Niua</translation>
     </message>
     <message>
         <source>Oman</source>
-        <translation type="unfinished"></translation>
+        <translation>Omán</translation>
     </message>
     <message>
         <source>Pakistan</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakisztán</translation>
     </message>
     <message>
         <source>Palau</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Palestinian Territory</source>
-        <translation type="unfinished"></translation>
+        <translation>Palau</translation>
     </message>
     <message>
         <source>Panama</source>
-        <translation type="unfinished"></translation>
+        <translation>Panama</translation>
     </message>
     <message>
         <source>Papua New Guinea</source>
-        <translation type="unfinished"></translation>
+        <translation>Pápua Új Gínea</translation>
     </message>
     <message>
         <source>Paraguay</source>
-        <translation type="unfinished"></translation>
+        <translation>Paragváj</translation>
     </message>
     <message>
         <source>Peru</source>
-        <translation type="unfinished"></translation>
+        <translation>Peru</translation>
     </message>
     <message>
         <source>Philippines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pitcairn</source>
-        <translation type="unfinished"></translation>
+        <translation>Philippines</translation>
     </message>
     <message>
         <source>Poland</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengyelország</translation>
     </message>
     <message>
         <source>Portugal</source>
-        <translation type="unfinished"></translation>
+        <translation>Portugália</translation>
     </message>
     <message>
         <source>Puerto Rico</source>
-        <translation type="unfinished"></translation>
+        <translation>Puerto Rico</translation>
     </message>
     <message>
         <source>Qatar</source>
-        <translation type="unfinished"></translation>
+        <translation>Qatar</translation>
     </message>
     <message>
         <source>Reunion</source>
-        <translation type="unfinished"></translation>
+        <translation>Reunion</translation>
     </message>
     <message>
         <source>Romania</source>
-        <translation type="unfinished"></translation>
+        <translation>Románia</translation>
     </message>
     <message>
         <source>Russia</source>
-        <translation type="unfinished"></translation>
+        <translation>Oroszország</translation>
     </message>
     <message>
         <source>Rwanda</source>
-        <translation type="unfinished"></translation>
+        <translation>Rwanda</translation>
     </message>
     <message>
         <source>Saint Lucia</source>
-        <translation type="unfinished"></translation>
+        <translation>Saint Lucia</translation>
     </message>
     <message>
         <source>Samoa</source>
-        <translation type="unfinished"></translation>
+        <translation>Samoa</translation>
     </message>
     <message>
         <source>San Marino</source>
-        <translation type="unfinished"></translation>
+        <translation>San Marino</translation>
     </message>
     <message>
         <source>Saudi Arabia</source>
-        <translation type="unfinished"></translation>
+        <translation>Szaudarábia</translation>
     </message>
     <message>
         <source>Senegal</source>
-        <translation type="unfinished"></translation>
+        <translation>Szenegál</translation>
     </message>
     <message>
         <source>Seychelles</source>
-        <translation type="unfinished"></translation>
+        <translation>Seychelles</translation>
     </message>
     <message>
         <source>Sierra Leone</source>
-        <translation type="unfinished"></translation>
+        <translation>Sierra Leone</translation>
     </message>
     <message>
         <source>Singapore</source>
-        <translation type="unfinished"></translation>
+        <translation>Szingapúr</translation>
     </message>
     <message>
         <source>Slovakia</source>
-        <translation type="unfinished"></translation>
+        <translation>Szlovákia</translation>
     </message>
     <message>
         <source>Slovenia</source>
-        <translation type="unfinished"></translation>
+        <translation>Szlovénia</translation>
     </message>
     <message>
         <source>Solomon Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Solomon Szigetek</translation>
     </message>
     <message>
         <source>Somalia</source>
-        <translation type="unfinished"></translation>
+        <translation>Szomália</translation>
     </message>
     <message>
         <source>South Africa</source>
-        <translation type="unfinished"></translation>
+        <translation>Dél Afrika</translation>
     </message>
     <message>
         <source>Spain</source>
-        <translation type="unfinished"></translation>
+        <translation>Spanyolország</translation>
     </message>
     <message>
         <source>Sri Lanka</source>
-        <translation type="unfinished"></translation>
+        <translation>Sri Lanka</translation>
     </message>
     <message>
         <source>St. Helena</source>
-        <translation type="unfinished"></translation>
+        <translation>St. Helena</translation>
     </message>
     <message>
         <source>Sudan</source>
-        <translation type="unfinished"></translation>
+        <translation>Szudán</translation>
     </message>
     <message>
         <source>Suriname</source>
-        <translation type="unfinished"></translation>
+        <translation>Suriname</translation>
     </message>
     <message>
         <source>Swaziland</source>
-        <translation type="unfinished"></translation>
+        <translation>Swaziland</translation>
     </message>
     <message>
         <source>Sweden</source>
-        <translation type="unfinished"></translation>
+        <translation>Svédország</translation>
     </message>
     <message>
         <source>Switzerland</source>
-        <translation type="unfinished"></translation>
+        <translation>Svájc</translation>
     </message>
     <message>
         <source>Taiwan</source>
-        <translation type="unfinished"></translation>
+        <translation>Tajvan</translation>
     </message>
     <message>
         <source>Tajikistan</source>
-        <translation type="unfinished"></translation>
+        <translation>Tajikistan</translation>
     </message>
     <message>
         <source>Tanzania</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanzánia</translation>
     </message>
     <message>
         <source>Thailand</source>
-        <translation type="unfinished"></translation>
+        <translation>Thaiföld</translation>
     </message>
     <message>
         <source>Togo</source>
-        <translation type="unfinished"></translation>
+        <translation>Togo</translation>
     </message>
     <message>
         <source>Tokelau</source>
-        <translation type="unfinished"></translation>
+        <translation>Tokelau</translation>
     </message>
     <message>
         <source>Tonga</source>
-        <translation type="unfinished"></translation>
+        <translation>Tonga</translation>
     </message>
     <message>
         <source>Tunisia</source>
-        <translation type="unfinished"></translation>
+        <translation>Tunézia</translation>
     </message>
     <message>
         <source>Turkey</source>
-        <translation type="unfinished"></translation>
+        <translation>Törökország</translation>
     </message>
     <message>
         <source>Turkmenistan</source>
-        <translation type="unfinished"></translation>
+        <translation>Turkmenisztán</translation>
     </message>
     <message>
         <source>Tuvalu</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuvalu</translation>
     </message>
     <message>
         <source>Uganda</source>
-        <translation type="unfinished"></translation>
+        <translation>Uganda</translation>
     </message>
     <message>
         <source>Ukraine</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukrajna</translation>
     </message>
     <message>
         <source>Uruguay</source>
-        <translation type="unfinished"></translation>
+        <translation>Urugváj</translation>
     </message>
     <message>
         <source>Uzbekistan</source>
-        <translation type="unfinished"></translation>
+        <translation>Üzbegisztán</translation>
     </message>
     <message>
         <source>Vanuatu</source>
-        <translation type="unfinished"></translation>
+        <translation>Vanuatu</translation>
     </message>
     <message>
         <source>Venezuela</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Viet Nam</source>
-        <translation type="unfinished"></translation>
+        <translation>Venezuela</translation>
     </message>
     <message>
         <source>Virgin Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Virgin Szigetek</translation>
     </message>
     <message>
         <source>Western Sahara</source>
-        <translation type="unfinished"></translation>
+        <translation>Nyugati Szahara</translation>
     </message>
     <message>
         <source>Yemen</source>
-        <translation type="unfinished"></translation>
+        <translation>Yemen</translation>
     </message>
     <message>
         <source>Yugoslavia</source>
-        <translation type="unfinished"></translation>
+        <translation>Jugoszlávia</translation>
     </message>
     <message>
         <source>Zambia</source>
-        <translation type="unfinished"></translation>
+        <translation>Zambia</translation>
     </message>
     <message>
         <source>Zimbabwe</source>
-        <translation type="unfinished"></translation>
+        <translation>Zimbabwe</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Születésnap</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation type="unfinished"></translation>
+        <translation>Évforduló</translation>
     </message>
     <message>
         <source>Kuwait</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Kyrgystan</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvait</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Ismeretlen</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Töröl</translation>
+    </message>
+    <message>
+        <source>Afghanistan</source>
+        <translation>Afganisztán</translation>
+    </message>
+    <message>
+        <source>Antarctica</source>
+        <translation>Antarktisz</translation>
+    </message>
+    <message>
+        <source>Armenia</source>
+        <translation>Armenica</translation>
+    </message>
+    <message>
+        <source>Bolivia</source>
+        <translation>Bolívia</translation>
+    </message>
+    <message>
+        <source>Cameroon</source>
+        <translation>Kamerun</translation>
+    </message>
+    <message>
+        <source>Ghana</source>
+        <translation>Gána</translation>
+    </message>
+    <message>
+        <source>Guadeloupe</source>
+        <translation>Guadeloupe</translation>
+    </message>
+    <message>
+        <source>Guinea-Bissau</source>
+        <translation>Guinea-Bissau</translation>
+    </message>
+    <message>
+        <source>Jamaica</source>
+        <translation>Jamaika</translation>
+    </message>
+    <message>
+        <source>Kiribati</source>
+        <translation>Kirabiti</translation>
+    </message>
+    <message>
+        <source>Kyrgyzstan</source>
+        <translation>Kirgizsztán</translation>
+    </message>
+    <message>
+        <source>Palestinian Sovereign Areas</source>
+        <translation>Palesztín Szuverén Területek</translation>
+    </message>
+    <message>
+        <source>Pitcairn Islands</source>
+        <translation>Pitcaim Szigetek</translation>
+    </message>
+    <message>
+        <source>Vietnam</source>
+        <translation>Vietnám</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Business Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Üzleti telefon</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Üzleti fax</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Üzleti mobil</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Alapértelmezett e-mail</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation type="unfinished"></translation>
+        <translation>E-mailek</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Lakás telefon</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Lakás fax</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Lakás mobil</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished"></translation>
+        <translation>Iroda</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation type="unfinished"></translation>
+        <translation>Szakma</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation type="unfinished"></translation>
+        <translation>Titkár</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Manager</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Hitves</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Nem</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Születésnap</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation type="unfinished"></translation>
+        <translation>Évforduló</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Becenév</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Gyerekek</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Megszólítás</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Keresztnév</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Középső név</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Vezetéknév</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiterjesztés</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Rögzít mint</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Beosztás</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation type="unfinished"></translation>
+        <translation>Részleg</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation type="unfinished"></translation>
+        <translation>Cég</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Üzleti cím</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation type="unfinished"></translation>
+        <translation>Üzleti város</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation type="unfinished"></translation>
+        <translation>Üzleti állam</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Üzleti irányítószám</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Üzleti ország</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation type="unfinished"></translation>
+        <translation>Üzleti személyhívó</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation type="unfinished"></translation>
+        <translation>Üzleti weblap</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Lakás utca</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation type="unfinished"></translation>
+        <translation>Lakás város</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation type="unfinished"></translation>
+        <translation>Lakás állam</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Lakás irányítószám</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Lakás ország</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Lakás weblap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Jegyzetek</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Csoportok</translation>
     </message>
 </context>
 </TS>

@@ -3,39 +3,39 @@
     <name>IrdaApplet</name>
     <message>
         <source>Discovered Device:</source>
-        <translation type="unfinished"></translation>
+        <translation>Felfedezett eszköz:</translation>
     </message>
     <message>
         <source>Disable IrDA</source>
-        <translation type="unfinished"></translation>
+        <translation>IrDA kikapcsolása</translation>
     </message>
     <message>
         <source>Enable IrDA</source>
-        <translation type="unfinished"></translation>
+        <translation>IrDA bekapcsolása</translation>
     </message>
     <message>
         <source>Disable Discovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Felfedezés kikapcsolása</translation>
     </message>
     <message>
         <source>Enable Discovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Felfedezés bekapcsolása</translation>
     </message>
     <message>
         <source>Disable Receive</source>
-        <translation type="unfinished"></translation>
+        <translation>Fogadás kikapcsolása</translation>
     </message>
     <message>
         <source>Enable Receive</source>
-        <translation type="unfinished"></translation>
+        <translation>Fogadás bekapcsolása</translation>
     </message>
     <message>
         <source>Found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Találat:</translation>
     </message>
     <message>
         <source>Lost:</source>
-        <translation type="unfinished"></translation>
+        <translation>Elvesztve:</translation>
     </message>
 </context>
 </TS>

@@ -3,91 +3,91 @@
     <name>WLAN</name>
     <message>
         <source>Wireless LAN Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Vezetéknélküli LAN beállítások</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Beállítások</translation>
     </message>
     <message>
         <source>ESS ID</source>
-        <translation type="unfinished"></translation>
+        <translation>ESS ID</translation>
     </message>
     <message>
         <source>Non-Spec ESSID: &quot;ANY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Nem rögzített ESSID: &quot;BÁRMI&quot;</translation>
     </message>
     <message>
         <source>Specific ESSID</source>
-        <translation type="unfinished"></translation>
+        <translation>Rögzített ESSID</translation>
     </message>
     <message>
         <source>Network Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Hálózat típusa</translation>
     </message>
     <message>
         <source>Infrastructure</source>
-        <translation type="unfinished"></translation>
+        <translation>Infrastruktúra</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Csatorna</translation>
     </message>
     <message>
         <source>802.11 Ad-Hoc</source>
-        <translation type="unfinished"></translation>
+        <translation>802.11 Ad-Hoc</translation>
     </message>
     <message>
         <source>Wep</source>
-        <translation type="unfinished"></translation>
+        <translation>Wep</translation>
     </message>
     <message>
         <source>Key Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulcs beállítások</translation>
     </message>
     <message>
         <source>Key 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulcs 1</translation>
     </message>
     <message>
         <source>Key 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulcs 2</translation>
     </message>
     <message>
         <source>Key 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulcs 3</translation>
     </message>
     <message>
         <source>Key 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulcs 4</translation>
     </message>
     <message>
         <source>Key Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Kulcshossz</translation>
     </message>
     <message>
         <source>40 Bits</source>
-        <translation type="unfinished"></translation>
+        <translation>40 bites</translation>
     </message>
     <message>
         <source>128 Bits</source>
-        <translation type="unfinished"></translation>
+        <translation>128 bites</translation>
     </message>
     <message>
         <source>Authentication Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Azonosítás típusa</translation>
     </message>
     <message>
         <source>Open System</source>
-        <translation type="unfinished"></translation>
+        <translation>Nyílt rendszer</translation>
     </message>
     <message>
         <source>Shared Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Osztott kulcs</translation>
     </message>
     <message>
         <source>Enable Wep</source>
-        <translation type="unfinished"></translation>
+        <translation>Web bekapcsolása</translation>
     </message>
 </context>
 </TS>

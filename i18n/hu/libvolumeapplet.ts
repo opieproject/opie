@@ -3,19 +3,19 @@
     <name>VolumeControl</name>
     <message>
         <source>Enable Sounds for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hangok bekapcsolása ehhez:</translation>
     </message>
     <message>
         <source>Alarm Sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Ébresztő hang</translation>
     </message>
     <message>
         <source>Key Clicks</source>
-        <translation type="unfinished"></translation>
+        <translation>Billentyűleütés</translation>
     </message>
     <message>
         <source>Screen Taps</source>
-        <translation type="unfinished"></translation>
+        <translation>Képernyőérintés</translation>
     </message>
 </context>
 </TS>

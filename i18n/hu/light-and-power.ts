@@ -3,7 +3,7 @@
     <name>Calibration</name>
     <message>
         <source>%1 Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 lépés</translation>
     </message>
 </context>
 <context>
