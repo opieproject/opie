@@ -102,6 +102,7 @@ private slots:
     void scanForVideo(); 
     void openFile();
     void setDocument( const QString& fileref );
+    void setDocumentEx( const QString& fileref );
     void addToSelection( const DocLnk& ); // Add a media file to the playlist
     void addToSelection( QListViewItem* ); // Add a media file to the playlist
     void setActiveWindow(); // need to handle this to show the right view

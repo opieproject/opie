@@ -363,6 +363,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     setCaption(tr("OpiePlayer: ")+ fullBaseName ( QFileInfo(currentPlaylist)));
     
     initializeStates();
+    //    audioUI->setFocus();
 }
 
 
@@ -370,9 +371,9 @@ PlayListWidget::~PlayListWidget() {
     Config cfg( "OpiePlayer" );
     writeConfig( cfg );
 
-    if ( d->current )
-        delete d->current;
-    delete d;
+      if ( d->current )
+          delete d->current;
+      if(d) delete d;
 }
 
 
@@ -494,15 +495,23 @@ void PlayListWidget::addAllVideoToList() {
 
 
 void PlayListWidget::setDocument(const QString& fileref) {
-    qDebug(fileref);
-    fromSetDocument = TRUE;
+   fromSetDocument = true;
+   d->setDocumentUsed = TRUE;
+   d->selectedFiles->setSelected(d->selectedFiles->firstChild(),true );
+   mediaPlayerState->setPlaying( FALSE );
+   qApp->processEvents();
+   mediaPlayerState->setPlaying( TRUE );
+}
+
+void PlayListWidget::setDocumentEx(const QString& fileref) {
+
     QFileInfo fileInfo(fileref);
     if ( !fileInfo.exists() ) {
         QMessageBox::critical( 0, tr( "Invalid File" ),
                                tr( "There was a problem in getting the file." ) );
         return;
     }
-//    qDebug("setDocument "+fileref);
+    qDebug("setDocument "+fileref);
     QString extension = fileInfo.extension(false);
     if( extension.find( "m3u", 0, false) != -1) { //is m3u
         readm3u( fileref);
@@ -530,7 +539,7 @@ void PlayListWidget::setDocument(const QString& fileref) {
         mediaPlayerState->setPlaying( FALSE );
         qApp->processEvents();
         mediaPlayerState->setPlaying( TRUE );
-        qApp->processEvents();
+        //        qApp->processEvents();
         setCaption(tr("OpiePlayer"));
     }
 }
@@ -1460,7 +1469,7 @@ void PlayListWidget::qcopReceive(const QCString &msg, const QByteArray &data) {
       mediaPlayerState->setPlaying( false);
    } else if ( msg == "togglePause()" ) {
       mediaPlayerState->togglePaused();
-   } else if ( msg == "next()" ) { //select next in list
+   } else if ( msg == "next()" ) { //select next in lis
       mediaPlayerState->setNext();      
    } else if ( msg == "prev()" ) { //select previous in list
       mediaPlayerState->setPrev();      
@@ -1477,7 +1486,7 @@ void PlayListWidget::qcopReceive(const QCString &msg, const QByteArray &data) {
    } else if ( msg == "play(QString)" ) { //play this now
       QString file;
       stream >> file;
-      setDocument( (const QString &) file);
+      setDocumentEx( (const QString &) file);
    } else if ( msg == "add(QString)" ) { //add to playlist
       QString file;
       stream >> file;
@@ -1490,6 +1499,8 @@ void PlayListWidget::qcopReceive(const QCString &msg, const QByteArray &data) {
       QString file;
       stream >> file;
 
+   } else if ( msg == "setDocument(QString)" ) { //loop or not loop
+    QCopEnvelope h("QPE/Application/opieplayer", "raise()");
    }
    
 }
