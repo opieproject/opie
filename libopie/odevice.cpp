@@ -1513,7 +1513,10 @@ void SIMpad::init ( )
 
 	switch ( d-> m_model ) {
 		default:
-			d-> m_rotation = Rot270;
+			d-> m_rotation = Rot0;
+			d-> m_direction = CCW;
+			d-> m_holdtime = 1000; // 1000ms
+
 			break;
 	}
 
