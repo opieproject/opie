@@ -22,7 +22,6 @@ GSMTool::GSMTool( QWidget* parent,  const char* name, WFlags fl )
 {
 	devicelocked = 0;
 	me = NULL;
-	port = NULL;
 	setConnected(FALSE);
 	/* FIXME: Persistent settings for device/baudrate */
 	connect(ConnectButton, SIGNAL(clicked()), this, SLOT(doConnectButton()));
@@ -138,6 +137,8 @@ void GSMTool::doScanButton()
  */
 void GSMTool::doConnectButton()
 {
+	gsmlib::Port *port;
+
 	speed_t rate;
 	devicename = strdup(DeviceName->currentText().local8Bit().data());
 	rate = baudrates[BaudRate->currentItem()];
@@ -150,16 +151,12 @@ void GSMTool::doConnectButton()
 
 	setConnected(FALSE);
 	if (me) {
-		//		delete me;
 		me = NULL;
-	}
-	if (port) {
-		//		delete port;
-		port = NULL;
 	}
 
 	if (lockDevice()) {
 		qDebug("lockDevice() failed\n");
+		MfrText->setText("Lock port failed");
 	};
 	
 	qDebug("Device name is %s\n", devicename);
@@ -168,6 +165,7 @@ void GSMTool::doConnectButton()
 		port = new UnixSerialPort(devicename, rate, DEFAULT_INIT_STRING, 0);
 	} catch (GsmException) {
 		qDebug("port failed");
+		MfrText->setText("Open port failed");
 		return;
 	}
 	MfrText->setText("Initialising...");
@@ -176,8 +174,8 @@ void GSMTool::doConnectButton()
 		me = new MeTa(port);
 	} catch (GsmException) {
 		qDebug("meta failed");
-		delete port;
-		port = NULL;
+		MfrText->setText("Initialise GSM unit failed");
+		me = NULL;
 		unlockDevice();
 		return;
 	}
@@ -192,10 +190,8 @@ void GSMTool::doConnectButton()
 		ifo = me->getMEInfo();
 	} catch (GsmException) {
 		qDebug("getMEInfo failed");
-		delete me;
+		MfrText->setText("Query GSM unit failed");
 		me = NULL;
-		delete port;
-		port = NULL;
 		unlockDevice();
 		return;
 	}

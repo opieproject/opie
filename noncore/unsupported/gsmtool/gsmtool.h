@@ -27,7 +27,6 @@ private:
  int timerid;
 
  gsmlib::MeTa *me;
- gsmlib::Port *port;
 
  char *devicename; 
  speed_t baudrate;
