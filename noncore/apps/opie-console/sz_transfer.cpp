@@ -2,6 +2,7 @@
 #include "sz_transfer.h"
 #include <qfile.h>
 #include <opie/oprocess.h>
+#include <stdio.h>
 
 SzTransfer::SzTransfer(Type t, IOLayer *layer) : FileTransferLayer(layer), m_t(t)
 {
@@ -19,20 +20,22 @@ void SzTransfer::sendFile(const QString& file) {
 
     proc = new OProcess;
     *proc << "sz";
-    *proc << "-vv" << file;
+    *proc << "-v" << "-v" << "-v" << "-b" << file;
     connect(proc, SIGNAL(processExited(OProcess *)), 
             this, SLOT(sent()));
-    connect(proc, SIGNAL(processRecievedStdout(OProcess *, char *, int)), 
-            this, SLOT(SzRecievedStdout(OProcess *, char *, int)));
-    connect(proc, SIGNAL(processRecievedStderr(OProcess *, char *, int)),
-            this, SLOT(SzRecievedStderr(OProcess *, char *, int)));
-    connect(layer(), SIGNAL(received(QByteArray &)),
-            this, SLOT(recievedStdin(QByteArray &)));
+    connect(proc, SIGNAL(receivedStdout(OProcess *, char *, int)), 
+            this, SLOT(SzReceivedStdout(OProcess *, char *, int)));
+    connect(proc, SIGNAL(receivedStderr(OProcess *, char *, int)),
+            this, SLOT(SzReceivedStderr(OProcess *, char *, int)));
+    connect(layer(), SIGNAL(received(const QByteArray &)),
+            this, SLOT(receivedStdin(const QByteArray &)));
     proc->start(OProcess::NotifyOnExit, OProcess::All);
 
 }
 
-void SzTransfer::SzRecievedStdout(OProcess *, char *buffer, int buflen) {
+void SzTransfer::SzReceivedStdout(OProcess *, char *buffer, int buflen) {
+
+    qWarning("recieved from sz %d bytes", buflen);
 
     QByteArray data(buflen);
     data.fill(*buffer, buflen);
@@ -41,14 +44,26 @@ void SzTransfer::SzRecievedStdout(OProcess *, char *buffer, int buflen) {
     (layer())->send(data);
 }
 
-void SzTransfer::SzRecievedStderr(OProcess *, char *, int) {
+void SzTransfer::SzReceivedStderr(OProcess *, char *buffer, int length) {
 
     // parse and show data in a progress dialog/widget
+    printf("\n");
+    for (int i = 0; i < length; i++)
+        printf("%c", buffer[i]);
 }
 
-void SzTransfer::recievedStdin(QByteArray &data) {
+void SzTransfer::receivedStdin(const QByteArray &data) {
 
+    qWarning("recieved from io_serial %d bytes", data.size());
     // recieved data from the io layer goes to sz
     proc->writeStdin(data.data(), data.size());
 
+}
+
+void SzTransfer::sent() {
+
+    qWarning("sent file");
+    delete proc;
+    disconnect(layer(), SIGNAL(received(const QByteArray &)),
+            this, SLOT(receivedStdin(const QByteArray &)));
 }

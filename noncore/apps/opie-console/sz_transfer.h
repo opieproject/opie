@@ -24,11 +24,12 @@ public slots:
      */
     void sendFile( const QString& file ) ;
     void sendFile( const QFile& );
+    void sent();
 
 private slots:
-    void SzRecievedStdout(OProcess *, char *, int);
-    void SzRecievedStderr(OProcess *, char *, int);
-    void recievedStdin(QByteArray &);
+    void SzReceivedStdout(OProcess *, char *, int);
+    void SzReceivedStderr(OProcess *, char *, int);
+    void receivedStdin(const QByteArray &);
 
 private:
     OProcess *proc;
