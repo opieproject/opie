@@ -26,25 +26,45 @@
 #include <qimage.h>
 #include <qlabel.h>
 #include <qlayout.h>
+#include <qscrollview.h>
+#include <qdialog.h>
+#include <qstringlist.h>
 
-
-class QMenuBar;
+class QPEToolBar;
+class QPEMenuBar;
 class QPopupMenu;
 class QWidgetStack;
 class FileSelector;
 class DocLnk;
+class QLabel;
+class QAction;
+class QSpinBox;
+class ImageFileSelector;
+
 
 
 class ImageWidget : public QWidget
 {
     Q_OBJECT
-public:
-    ImageWidget( QWidget *parent=0 ) : QWidget( parent ) { }
-    ~ImageWidget() { }
+    public:
+    ImageWidget(
+               QWidget *parent=0                  
+               ) : QWidget( parent ) 
+    {
+        setBackgroundMode(NoBackground);        
+    }
+    ~ImageWidget()
+    {
+        
+    }
 
-    void setPixmap( const QPixmap &pm ) { pixmap = pm; }
+    void setPixmap( const QPixmap &pm ) 
+    {
+        pixmap = pm;
+        show();
+    }
 
-signals:
+    signals:
     void clicked();
 
 protected:
@@ -55,25 +75,87 @@ private:
     QPixmap pixmap;
 };
 
+class InfoDialog:public QDialog
+{
+    Q_OBJECT
+
+    public:
+
+    static void displayInfo(const QString &caption, const QStringList text, QWidget *parent); 
+
+private:
+
+    InfoDialog(const QString &caption,const QStringList text,   QWidget *parent);
+
+};  
+
+class ControlsDialog:public QDialog
+{
+    Q_OBJECT
+
+    public:
+    ControlsDialog(const QString &caption,const QImage image,int *brightness,    QWidget *parent);
+
+
+private slots:
+
+    void bValueChanged(int);
+    void accept();
+
+
+private:
+    ImageWidget *pixmap;
+    QSpinBox *spb;
+    QImage  img;
+    int *b;
+}; 
+
 
 class ImagePane : public QWidget
 {
     Q_OBJECT
-public:
+    public:
     ImagePane( QWidget *parent=0 );
-    ~ImagePane() { }
+    ~ImagePane()
+    {
+        
+    }
 
-    void showStatus();
-    void hideStatus();
-    QLabel  *statusLabel() { return status; }
+    //void showStatus();
+    //void hideStatus();
+    //QLabel  *statusLabel()
+    //{
+    //    return status;
+    //}
     void setPixmap( const QPixmap &pm );
 
-signals:
+
+    int  paneWidth() const
+    {
+        return image->visibleWidth(); 
+    }
+
+    int  paneHeight() const
+    {
+        return image->visibleHeight(); 
+    }
+
+    void setPosition(int x, int y)
+    {
+        image->setContentsPos (x,y );
+    }
+
+    void disable()
+    {
+        pic->hide();
+    }
+
+    signals:
     void clicked();
 
 private:
-    ImageWidget	*image;
-    QLabel	*status;
+    QScrollView   *image;    
+    ImageWidget  *pic;
     QVBoxLayout *vb;
 
 private slots:
@@ -84,7 +166,7 @@ private slots:
 class ImageViewer : public QMainWindow
 {
     Q_OBJECT
-public:
+    public:
     ImageViewer( QWidget *parent=0, const char *name=0, int wFlags=0 );
     ~ImageViewer();
 
@@ -92,51 +174,124 @@ public:
     void show(const QString& fileref);
     void show();
 
+
+    enum INFO_STRINGS
+    {
+        PATH,
+        FORMAT,
+        FILE_SIZE,
+        SIZE,
+        COLORS,
+        ALPHA,
+        LAST
+    };
+
+    enum RotateDirection
+    {
+        Rotate90, Rotate180, Rotate270
+    };
+
+
+    static QImage  rotate(QImage &img, RotateDirection r);
+    static QImage& intensity(QImage &image, float percent);
+    static QImage& toGray(QImage &image, bool fast = false);
+
 protected:
     void resizeEvent( QResizeEvent * );
-    void mousePressEvent( QMouseEvent * );
-    void mouseMoveEvent( QMouseEvent * );
     void closeEvent( QCloseEvent * );
 
 private:
     void updateCaption( QString name );
     bool loadSelected();
     void scale();
-    void convertEvent( QMouseEvent* e, int& x, int& y );
     bool reconvertImage();
     int calcHeight();
     void setImage(const QImage& newimage);
-    void updateStatus();
+    void updateImageInfo(QString &filePath);
+    void switchToFileSelector();
+    void switchToImageView();
+
+    void updateImage();
+
+
+
 
 private slots:
+
+    void switchThumbView();
+    void switchSizeToScreen();
     void setDocument(const QString& fileref);
     void doDelayedLoad();
     void openFile( const DocLnk &file );
+    //void openFile();
     void open();
     void closeFileSelector();
     void hFlip();
     void vFlip();
     void rot180();
     void rot90();
+    void rot270();
     void normalView();
     void fullScreen();
+    void blackAndWhite();
+    void displayInfoDialog();
+    void displayControlsDialog();
+
+
+
+
+
+
+
+
+
 
 private:
+
+
+
+
+    enum MENU_ITEMS
+    {
+        SHOW_THUMBNAILS,
+        SIZE_TO_SCREEN,
+        BLACKANDWHITE
+    };
+
+
+
     QString filename;
     QString delayLoad;
-    QImage image;			// the loaded image
-    QPixmap pm;			// the converted pixmap
-    QPixmap pmScaled;		// the scaled pixmap
-    QMenuBar *menubar;
+    QImage image;           // the loaded image
+    QPixmap pm;         // the converted pixmap
+    QPixmap pmScaled;       // the scaled pixmap
+    QPEToolBar  *toolBar;
+    QPEToolBar  *iconToolBar;
+    QPEMenuBar  *menuBar;
+    QPEMenuBar  *current;
+
+
+    QPopupMenu  *fileMenuFile;
+    QPopupMenu  *viewMenuFile;
+    QPopupMenu  *optionsMenuFile;
+    QPopupMenu  *fileMenuView;
+    QPopupMenu  *viewMenuView;
+
+    QAction     *sss;                // scale to screen size
+
+    QLabel      *lab;
     ImagePane *imagePanel;
-    QToolBar *toolBar;
     QWidgetStack *stack;
-    FileSelector *fileSelector;
-    int pickx, picky;
-    int clickx, clicky;
+    //FileSelector *fileSelector;
+    ImageFileSelector *fileSelector;
     bool isFullScreen;
-    bool bFromDocView; // a flag to indicate whether or not we were 
-                          // launched from the document view...
+    bool isSized;                   // true if image is to be resized to fit the window size
+    bool bFromDocView;              // a flag to indicate whether or not we were 
+                                    // launched from the document view...
+
+    bool showThumbView;              // a flag to indicate if FileSelector should be initialized with thumbnail view
+
+    QString imageInfo[LAST];
 };
 
 
