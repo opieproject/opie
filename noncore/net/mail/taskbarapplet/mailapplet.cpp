@@ -1,16 +1,12 @@
-#include <qlayout.h>
-#include <qpixmap.h>
-#include <qlabel.h>
-#include <qsound.h>
+#include <qpainter.h>
 #include <qtimer.h>
-#include <qdir.h>
 
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
+#include <qpe/applnk.h>
 
 #include <opie/odevice.h>
-#include <qlist.h>
 
 #include <libmailwrapper/settings.h>
 
@@ -18,44 +14,47 @@
 
 using namespace Opie;
 
-MailApplet::MailApplet( QWidget *parent, const char *name, WFlags fl )
-	: QButton( parent, name, fl ) {
+MailApplet::MailApplet( QWidget *parent )
+	: QWidget( parent ) {
 
 	m_config = new Config( "mail" );
 	m_config->setGroup( "Applet" );
 
-	QVBoxLayout *layout = new QVBoxLayout( this );
-	layout->addItem( new QSpacerItem( 0,0 ) );
-
-	QLabel *pixmap = new QLabel( this );
-	pixmap->setPixmap( Resource::loadPixmap( "mail/mailchecker" ) );
-	layout->addWidget( pixmap );
-
-	layout->addItem( new QSpacerItem( 0,0 ) );
+        setFixedWidth(  AppLnk::smallIconSize() );
+        setFixedHeight( AppLnk::smallIconSize() );
 
 	hide();
 
-        m_statusMail = 0;
-
-  	connect( this, SIGNAL( clicked() ), SLOT( slotClicked() ) );
+        m_newMails = 0;
+        m_statusMail = 0l;
 
 	if ( !m_config->readBoolEntry( "Disabled", false ) ) {
-		m_intervalMs = m_config->readNumEntry( "CheckEvery", 5 ) * 60000;
-		m_intervalTimer = new QTimer();
-		m_intervalTimer->start( m_intervalMs );
-		connect( m_intervalTimer, SIGNAL(timeout() ), SLOT( slotCheck() ) );
-
                 // delay 5 sec until the whole mail backend gets started .-)
 		QTimer::singleShot( 5000, this, SLOT( startup() ) );
 	}
+       repaint( true );
 }
+
 
 MailApplet::~MailApplet() {
        if (m_statusMail) delete m_statusMail;
+       if (m_config) delete m_config;
 }
 
-void MailApplet::drawButton(QPainter *) { }
-void MailApplet::drawButtonText(QPainter *) { }
+void MailApplet::paintEvent( QPaintEvent* ) {
+   QPainter p(this);
+   p.drawPixmap( 0, 0, Resource::loadPixmap( "mail/mailchecker" ) );
+   QFont f( "Fixed", AppLnk::smallIconSize() );
+   QFontMetrics fm( f );
+   p.setFont( f );
+   p.drawText(  AppLnk::smallIconSize()/2,  AppLnk::smallIconSize()/2, QString::number( m_newMails ) );
+   return;
+
+}
+
+void MailApplet::mouseReleaseEvent( QMouseEvent* e) {
+  slotClicked();
+}
 
 void MailApplet::slotClicked() {
   qDebug( " CLICKED" );
@@ -77,6 +76,12 @@ void MailApplet::startup() {
       QList<Account> ma = settings->getAccounts();
       StatusMail m_statusMail = StatusMail( ma );
       delete settings;
+
+        m_intervalMs = m_config->readNumEntry( "CheckEvery", 5 ) * 60000;
+      	m_intervalTimer = new QTimer();
+	m_intervalTimer->start( m_intervalMs );
+	connect( m_intervalTimer, SIGNAL(timeout() ), this, SLOT( slotCheck() ) );
+
 }
 
 void MailApplet::slotCheck() {
@@ -90,9 +95,9 @@ void MailApplet::slotCheck() {
 
         folderStat stat;
         m_statusMail->check_current_stat( stat );
-
+        m_newMails =  stat.message_unseen;
         qDebug( QString( "test %1" ).arg( stat.message_unseen ) );
-       	if ( stat.message_unseen > 0 ) {
+       	if ( m_newMails > 0 ) {
 		ODevice *device = ODevice::inst();
 		if ( isHidden() ) show();
 		if ( m_config->readBoolEntry( "BlinkLed", true ) ) {
@@ -104,13 +109,12 @@ void MailApplet::slotCheck() {
 		if ( m_config->readBoolEntry( "PlaySound", false ) )
 			device->alarmSound();
 
-        qDebug( QString( "test %1" ).arg( stat.message_unseen ) );
-
-        Config cfg( "mail" );
+           Config cfg( "mail" );
         cfg.setGroup( "Status" );
-        cfg.writeEntry( "NewMails", ( int )stat.message_unseen  );
+        cfg.writeEntry( "NewMails", m_newMails  );
     QCopEnvelope env( "QPE/Pim", "newMails(int)" );
     env << stat.message_unseen;
+      repaint( true );
 
 	} else {
 		ODevice *device = ODevice::inst();
@@ -120,7 +124,4 @@ void MailApplet::slotCheck() {
 				device->setLedState( led, Led_Off );
 		}
 	}
-
-        // go trough accounts and check here
-        // also trigger qcop call and save status to config
 }

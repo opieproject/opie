@@ -8,18 +8,18 @@
 class Config;
 class QTimer;
 
-class MailApplet : public QButton {
+class MailApplet : public QWidget {
 
 	Q_OBJECT
 
 public:
-	MailApplet( QWidget *parent = 0, const char  *name = 0, WFlags fl = 0 );
+	MailApplet( QWidget *parent = 0 );
         ~MailApplet();
 
 protected:
-	void drawButton(QPainter *);
-	void drawButtonText(QPainter *);
 	void gotNewMail();
+        void mouseReleaseEvent( QMouseEvent* );
+        void paintEvent( QPaintEvent* );
 
 protected slots:
         void startup();
@@ -30,6 +30,7 @@ private:
 	QTimer *m_intervalTimer;
 	int m_intervalMs;
         StatusMail* m_statusMail;
+        int m_newMails;
 
 };
 
