@@ -166,11 +166,11 @@
     </message>
     <message>
         <source>Morphological Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Morfologická označení</translation>
     </message>
     <message>
         <source>Morphological tag cross-referencing not implemented yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Křížové odkazy morfologických označení není ještě implementováno.</translation>
     </message>
 </context>
 <context>

@@ -130,7 +130,7 @@
     </message>
     <message>
         <source>Bluetooth Basic Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Základní konfigurace bluetooth</translation>
     </message>
 </context>
 <context>

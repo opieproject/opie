@@ -56,11 +56,11 @@
     </message>
     <message>
         <source>Backing up...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zálohuji...</translation>
     </message>
     <message>
         <source>Restore Backup...</source>
-        <translation type="unfinished"></translation>
+        <translation>Obnovuji zálohu...</translation>
     </message>
 </context>
 <context>
@@ -123,19 +123,19 @@
     </message>
     <message>
         <source>Destination</source>
-        <translation type="unfinished"></translation>
+        <translation>Cíl</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <source>User Data (Configuration + PIM)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uživatelská data (Konfigurace + PIM)</translation>
     </message>
     <message>
         <source>Full Backup (Root File System)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompletní záloha (Systém souborů root)</translation>
     </message>
 </context>
 <context>

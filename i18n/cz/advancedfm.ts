@@ -290,67 +290,67 @@ do
     </message>
     <message>
         <source>&lt;p&gt;%1 does not exist&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 neexistuje&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;Advanced FileManager is copyright 2002-2003 by L.J.Potter&lt;llornkcor@handhelds.org&gt; and is licensed by the GPL&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Držitel práv na Advanced FileManager 2002-2003 je L.J.Potter&lt;llornkcor@handhelds.org&gt; a je licencován pod GPL&lt;/P&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Cannot remove current directory from bookmarks. It is not bookmarked!&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Nelze odstranit aktuální adresář ze záložek. Není mezi záložkami!&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Obnovit</translation>
     </message>
     <message>
         <source>&lt;p&gt;Really delete %1 files?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Opravdu smazat souborů?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Really delete %1 and all it&apos;s contents?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Opravdu smazat %1 a všechen jeho obsah?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Really delete %1?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Opravdu smazat %1?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Really copy %1 files?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Opravdu kopírovat %1 souborů?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 already  exists. Ok to overwrite?&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 už  existuje. Chcete ho přepsat?&lt;/P&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;Could not copy %1 to %2&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Nelze kopírovat %1 do %2&lt;/P&gt;</translation>
     </message>
     <message>
         <source>Copy %1 As</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovat %1 jako</translation>
     </message>
     <message>
         <source>&lt;P&gt; %1 already exists. Ok to overwrite?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;%1 už  existuje. Chcete ho přepsat?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Could not copy %1 to %2&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Nelze kopírovat %1 do %2&lt;/P&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt; %1 already exists. Do you really want to delete it?&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 už  existuje. Opravdu ho chcete smazat?&lt;/P&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Could not move %1&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Nelze přesunout %1&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Could not copy %1 to %2&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Nelze kopírovat %1 do %2&lt;/p&gt;</translation>
     </message>
 </context>
 <context>

@@ -501,12 +501,14 @@ Jste si jisti?</translation>
     <message>
         <source>Building server list:
 <byte value="x9"/>%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvářím seznam serverů:
+<byte value="x9"/>%1</translation>
     </message>
     <message>
         <source>Building package list for:
 <byte value="x9"/>%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvářím seznam balíčků pro:
+<byte value="x9"/>%1</translation>
     </message>
 </context>
 <context>

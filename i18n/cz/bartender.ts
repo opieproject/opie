@@ -149,20 +149,21 @@
     </message>
     <message>
         <source>Find by Ingredient</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat dle ingredience</translation>
     </message>
     <message>
         <source>Edit Drink</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit nápoj</translation>
     </message>
     <message>
         <source>Failed to write to drink database!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nemohu zapsat do databáze nápojů!
+</translation>
     </message>
     <message>
         <source>Ingredient</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingredience</translation>
     </message>
 </context>
 <context>
