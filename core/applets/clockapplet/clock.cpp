@@ -41,7 +41,7 @@ LauncherClock::LauncherClock( QWidget *parent ) : QLabel( parent )
     setFont( QFont( "Helvetica", 10, QFont::Normal ) );
     connect( qApp, SIGNAL( timeChanged() ), this, SLOT( updateTime( ) ) );
     connect( qApp, SIGNAL( clockChanged( bool ) ),
-	     this, SLOT( slotClockChanged( bool ) ) );
+       this, SLOT( slotClockChanged( bool ) ) );
     readConfig();
     timerId = 0;
     timerEvent( 0 );
@@ -65,13 +65,13 @@ void LauncherClock::mouseReleaseEvent( QMouseEvent * )
 void LauncherClock::timerEvent( QTimerEvent *e )
 {
     if ( !e || e->timerId() == timerId ) {
-	killTimer( timerId );
-	changeTime();
-	QTime t = QTime::currentTime();
-	int ms = (60 - t.second())*1000 - t.msec();
-	timerId = startTimer( ms );
+  killTimer( timerId );
+  changeTime();
+  QTime t = QTime::currentTime();
+  int ms = (60 - t.second())*1000 - t.msec();
+  timerId = startTimer( ms );
     } else {
-	QLabel::timerEvent( e );
+  QLabel::timerEvent( e );
     }
 }
 
@@ -85,23 +85,28 @@ void LauncherClock::changeTime( void )
     QTime tm = QDateTime::currentDateTime().time();
     QString s;
     if( ampmFormat ) {
-	int hour = tm.hour(); 
-	if (hour == 0)
-	    hour = 12;
-	if (hour > 12)
-	    hour -= 12;
-	s.sprintf( "%2d:%02d %s", hour, tm.minute(), 
-		   (tm.hour() >= 12) ? "PM" : "AM" );
+  int hour = tm.hour(); 
+  if (hour == 0)
+      hour = 12;
+  if (hour > 12)
+      hour -= 12;
+  s.sprintf( "%2d:%02d %s", hour, tm.minute(), 
+       (tm.hour() >= 12) ? "PM" : "AM" );
     } else
-	s.sprintf( "%2d:%02d", tm.hour(), tm.minute() );
+  s.sprintf( "%2d:%02d", tm.hour(), tm.minute() );
 
     if (format==1) {
-	QDate dm = QDate::currentDate();
-	QString d;
-	d.sprintf("%d/%d ", dm.day(), dm.month());
-	setText( d+s );
+  QDate dm = QDate::currentDate();
+  QString d;
+  d.sprintf("%d/%d ", dm.day(), dm.month());
+  setText( d+s );
+    } else if (format==2) {
+  QDate dm = QDate::currentDate();
+  QString d;
+  d.sprintf("%d/%d ", dm.month(), dm.day());
+  setText( d+s );
     } else {
-	setText( s );
+  setText( s );
     }
 }
 
