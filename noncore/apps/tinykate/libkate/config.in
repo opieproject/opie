@@ -1,4 +1,0 @@
-  config LIBKATE
-    boolean "libkate"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBQTAUX && LIBOPIE2CORE && LIBOPIE2UI
