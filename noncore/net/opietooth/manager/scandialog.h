@@ -23,9 +23,7 @@
 
 #include <remotedevice.h>
 class QVBoxLayout;
-class QHBoxLayout;
 class QGridLayout;
-class QFrame;
 class QLabel;
 class QListView;
 class QListViewItem;
@@ -34,7 +32,6 @@ class QProgressBar;
 
 
 namespace OpieTooth {
-
 
 class Manager;
 class Device;
@@ -46,11 +43,9 @@ class Device;
         ScanDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
         ~ScanDialog();
 
-    private: // make them private -zecke
-        QFrame* Frame7;
-        QProgressBar* progress;
+    private: 
+	QProgressBar* progress;
         QPushButton* StartStopButton;
-//        QPushButton* StopButton;
         QListView* ListView1;
 
     public slots:
@@ -63,7 +58,7 @@ class Device;
         void stopSearch();
         void startSearch();
         void progressTimer();
-        void fillList(const QString& device, RemoteDevice::ValueList list);
+        void fillList( const QString& device, RemoteDevice::ValueList list );
 
     private:
         bool m_search:1;
@@ -72,7 +67,7 @@ class Device;
         int progressStat;
 
     signals:
-        void selectedDevices(const QValueList<RemoteDevice>&);
+        void selectedDevices( const QValueList<RemoteDevice>& );
     };
 
 
