@@ -11,10 +11,13 @@ DEPENDPATH      += ../$(OPIEDIR)/include ..
 LIBS            += -lqpe -lm
 VERSION   =   1.0.0
 
-contains(QMAKE_CXX, -DQT_QWS_IPAQ) | contains(QMAKE_CXX, -DQT_QWS_SHARP) {
+contains(QMAKE_CXX, arm-linux-g++) | contains(QMAKE_CXX, arm-linux-gcc ){
 DEFINES += FPM_ARM
+} else { contains(QMAKE_CXX, mipsel-linux-g++ ) {
+DEFINES += FPM_MIPS
 } else {
 DEFINES += FPM_INTEL
+}
 }
 
 include ( $(OPIEDIR)/include.pro )
