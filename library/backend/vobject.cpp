@@ -42,9 +42,7 @@ DFARS 252.227-7013 or 48 CFR 52.227-19, as applicable.
  * vobject, and convert a vobject into its textual representation.
  */
 
-#ifndef	 MWERKS
-#include <malloc.h>
-#endif
+#include <stdlib.h>
 
 #include <qtopia/config.h>
 #include "vobject_p.h"
@@ -757,7 +755,6 @@ static struct PreDefProp propNames[] = {
     { VCPSProp, 0, 0, 0 },
     { VCPublicKeyProp, 0, 0, 0 },
     { VCQPProp, VCQuotedPrintableProp, 0, 0 },
-    { VCQPProp, VCBase64Prop, 0, 0 },
     { VCQuickTimeProp, 0, 0, 0 },
     { VCQuotedPrintableProp, 0, 0, 0 },
     { VCRDateProp, 0, 0, 0 },

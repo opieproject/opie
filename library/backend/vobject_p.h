@@ -99,9 +99,7 @@ For example:
 #define vCalendarMimeType	"text/x-vCalendar"
 
 #undef DLLEXPORT
-	//#include <qtopia/qpeglobal.h>
-#include <qglobal.h>
-
+#include <qtopia/global.h>
 #if defined(QTOPIA_MAKEDLL)
 #define DLLEXPORT(t)   __declspec(dllexport) t
 #elif defined(QTOPIA_DLL)
