@@ -94,6 +94,8 @@ public slots:
     void togglePaused();
     void togglePlaying();
     void toggleBlank();
+    void writeConfig( Config& cfg ) const;
+
 
 signals:
     void fullscreenToggled( bool );
@@ -125,8 +127,6 @@ private:
     char curView;
 
     void readConfig( Config& cfg );
-    void writeConfig( Config& cfg ) const;
-
 
 };
 
