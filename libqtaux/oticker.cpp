@@ -28,69 +28,71 @@
 
 */
 
-#include <qpe/config.h>
-
-#include <stdlib.h>
-#include <stdio.h>
-
 #include "oticker.h"
 
+/* OPIE */
+#include <qpe/config.h>
+
 OTicker::OTicker( QWidget* parent )
-        : QLabel( parent ) {
-  //        : QFrame( parent ) {
-    setTextFormat(Qt::RichText);
-    Config cfg("qpe");
-    cfg.setGroup("Appearance");
+        : QLabel( parent )
+{
+    setTextFormat( Qt::RichText );
+    Config cfg( "qpe" );
+    cfg.setGroup( "Appearance" );
     backgroundcolor = QColor( cfg.readEntry( "Background", "#E5E1D5" ) );
-    foregroundcolor= Qt::black;
+    foregroundcolor = Qt::black;
     updateTimerTime = 50;
     scrollLength = 1;
 }
 
-OTicker::~OTicker() {
-}
+OTicker::~OTicker()
+{}
 
-void OTicker::setBackgroundColor(const QColor& backcolor) {
+void OTicker::setBackgroundColor( const QColor& backcolor )
+{
     backgroundcolor = backcolor;
     update();
 }
 
-void OTicker::setForegroundColor(const QColor& backcolor) {
+void OTicker::setForegroundColor( const QColor& backcolor )
+{
     foregroundcolor = backcolor;
     update();
 }
 
-void OTicker::setFrame(int frameStyle) {
-    setFrameStyle( frameStyle/*WinPanel | Sunken */);
+void OTicker::setFrame( int frameStyle )
+{
+    setFrameStyle( frameStyle /*WinPanel | Sunken */ );
     update();
 }
 
-void OTicker::setText( const QString& text ) {
+void OTicker::setText( const QString& text )
+{
     pos = 0; // reset it everytime the text is changed
     scrollText = text;
-qDebug(scrollText);
- 
- int pixelLen = 0;
-   bool bigger = false;
-   int contWidth = contentsRect().width();
-   int contHeight = contentsRect().height();
+    qDebug( scrollText );
+
+    int pixelLen = 0;
+    bool bigger = false;
+    int contWidth = contentsRect().width();
+    int contHeight = contentsRect().height();
     int pixelTextLen = fontMetrics().width( text );
-    printf("<<<<<<<height %d, width %d, text width %d %d\n", contHeight, contWidth, pixelTextLen, scrollText.length());
-  if( pixelTextLen < contWidth)
+    qDebug( "<<<<<<<height %d, width %d, text width %d %d\n", contHeight, contWidth, pixelTextLen, scrollText.length() );
+    if ( pixelTextLen < contWidth )
     {
-      pixelLen = contWidth;
+        pixelLen = contWidth;
     }
-  else
+    else
     {
         bigger = true;
-      pixelLen = pixelTextLen;
+        pixelLen = pixelTextLen;
     }
-    QPixmap pm( pixelLen, contHeight);
-//    pm.fill( QColor( 167, 212, 167 ));
- 
-    pm.fill(backgroundcolor);
+    QPixmap pm( pixelLen, contHeight );
+    //    pm.fill( QColor( 167, 212, 167 ));
+
+    pm.fill( backgroundcolor );
     QPainter pmp( &pm );
-    pmp.setPen(foregroundcolor );
+    pmp.setPen( foregroundcolor );
     pmp.drawText( 0, 0, pixelTextLen, contHeight, AlignVCenter, scrollText );
     pmp.end();
     scrollTextPixmap = pm;
@@ -98,33 +100,38 @@ qDebug(scrollText);
     killTimers();
     //    qDebug("Scrollupdate %d", updateTimerTime);
     if ( bigger /*pixelTextLen > contWidth*/ )
-        startTimer( updateTimerTime);
+        startTimer( updateTimerTime );
     update();
 }
 
 
-void OTicker::timerEvent( QTimerEvent * ) {
-  pos = ( pos <= 0 ) ? scrollTextPixmap.width() : pos - scrollLength;//1;
+void OTicker::timerEvent( QTimerEvent * )
+{
+    pos = ( pos <= 0 ) ? scrollTextPixmap.width() : pos - scrollLength; //1;
     repaint( FALSE );
 }
 
-void OTicker::drawContents( QPainter *p ) {
-    int pixelLen = scrollTextPixmap.width(); 
+void OTicker::drawContents( QPainter *p )
+{
+    int pixelLen = scrollTextPixmap.width();
     p->drawPixmap( pos, contentsRect().y(), scrollTextPixmap );
-    if ( pixelLen > contentsRect().width() ) // Scrolling
+    if ( pixelLen > contentsRect().width() )  // Scrolling
         p->drawPixmap( pos - pixelLen, contentsRect().y(), scrollTextPixmap );
 }
 
-void OTicker::mouseReleaseEvent( QMouseEvent * ) {
-//    qDebug("<<<<<<<>>>>>>>>>");
+void OTicker::mouseReleaseEvent( QMouseEvent * )
+{
+    //    qDebug("<<<<<<<>>>>>>>>>");
     emit mousePressed();
 }
 
-void OTicker::setUpdateTime(int time) {
- updateTimerTime=time;
+void OTicker::setUpdateTime( int time )
+{
+    updateTimerTime = time;
 }
 
-void OTicker::setScrollLength(int len) {
-scrollLength=len;
+void OTicker::setScrollLength( int len )
+{
+    scrollLength = len;
 }
 
