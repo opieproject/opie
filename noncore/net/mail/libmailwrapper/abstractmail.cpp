@@ -83,20 +83,20 @@ QString AbstractMail::convert_String(const char*text)
 {
     size_t index = 0;
     char*res = 0;
+    int err = MAILIMF_NO_ERROR;
 
-    /* attention - doesn't work with arm systems! */
-    int err = mailmime_encoded_phrase_parse("iso-8859-1",
-        text, strlen(text),&index, "iso-8859-1",&res);
-    if (err != MAILIMF_NO_ERROR) {
-        if (res) free(res);
-        return QString(text);
+    QString result(text);
+
+    /* due a bug in libetpan it isn't usable this moment */
+/*    int err = mailmime_encoded_phrase_parse("iso-8859-1",
+        text, strlen(text),&index, "iso-8859-1",&res);*/
+    //qDebug("Input: %s",text);
+    if (err == MAILIMF_NO_ERROR && res && strlen(res)) {
+//        result = QString(res);
+//        qDebug("Res: %s, length: %i",res,strlen(res));
     }
-    if (res) {
-        QString result(res);
-        free(res);
-        return result;
-    }
-    return QString(text);
+    if (res) free(res);
+    return result;
 }
 
 /* cp & paste from launcher */
