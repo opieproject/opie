@@ -15,6 +15,7 @@
 #include <qstringlist.h>
 #include <qmap.h>
 #include <qvaluelist.h>
+#include <qdatetime.h>
 
 class AbstractMail;
 /* a class to describe mails in a mailbox */
@@ -38,8 +39,6 @@ public:
 
     const unsigned int getNumber()const{return msg_number;}
     void setNumber(unsigned int number){msg_number=number;}
-    const QString&getDate()const{ return date; }
-    void setDate( const QString&a ) { date = a; }
     const QString&getFrom()const{ return from; }
     void setFrom( const QString&a ) { from = a; }
     const QString&getSubject()const { return subject; }
@@ -71,14 +70,20 @@ public:
     void setWrapper(AbstractMail*wrapper);
     AbstractMail* Wrapper();
 
+    const QDateTime&getDate()const{ return maildate; }
+    const QString&getStringDate()const{return date;}
+    void setDate( const QDateTime&a,int offset=0 );
+
 protected:
-    QString subject,date,from,mbox,msg_id,replyto;
+    QString subject,from,mbox,msg_id,replyto;
     unsigned int msg_number,msg_size;
     QBitArray msg_flags;
     QStringList to,cc,bcc,in_reply_to,references;
     AbstractMail*wrapper;
     void init();
     void copy_old(const RecMail&old);
+    QDateTime maildate;
+    QString date;
 };
 
 typedef Opie::Core::OSmartPointer<RecMail> RecMailP;

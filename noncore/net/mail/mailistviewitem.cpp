@@ -2,6 +2,7 @@
 #include <libmailwrapper/abstractmail.h>
 #include <qtextstream.h>
 #include <qpe/resource.h>
+#include <qpe/timestring.h>
 
 MailListViewItem::MailListViewItem(QListView * parent, MailListViewItem * item )
         :QListViewItem(parent,item),mail_data()
@@ -13,7 +14,7 @@ void MailListViewItem::showEntry()
     if ( mail_data->getFlags().testBit( FLAG_ANSWERED ) == true) {
         setPixmap( 0, Resource::loadPixmap( "mail/kmmsgreplied") );
     } else if ( mail_data->getFlags().testBit( FLAG_SEEN ) == true )  {
-        /* I think it looks nicer if there are not such a log of icons but only on mails
+        /* I think it looks nicer if there are not such a lot of icons but only on mails
            replied or new - Alwin*/
         //setPixmap( 0, Resource::loadPixmap( "mail/kmmsgunseen") );
     } else  {
@@ -48,11 +49,24 @@ void MailListViewItem::showEntry()
         o.setf(QTextStream::fixed);
         o << s << " " << q << "Byte";
     }
-
     setText(1,mail_data->getSubject());
     setText(2,mail_data->getFrom());
     setText(3,fsize);
-    setText(4,mail_data->getDate());
+    setText(4,mail_data->getStringDate());
+}
+
+QString MailListViewItem::key(int col,bool) const
+{
+    QString temp;
+    if (col == 4) {
+        temp.sprintf( "%08d",QDateTime().secsTo(mail_data->getDate()));
+        return temp;
+    }
+    if (col == 3) {
+        temp.sprintf( "%020d",mail_data->Msgsize());
+        return temp;
+    }
+    return text(col);
 }
 
 void MailListViewItem::storeData(const RecMailP&data)

@@ -144,7 +144,7 @@ void ViewMail::setBody(const RecBodyP&body )
         part_plist_t::ConstIterator it = body->Parts()[i]->Parameters().begin();
         for (;it!=body->Parts()[i]->Parameters().end();++it)
         {
-            odebug << it.key() << oendl; 
+            odebug << it.key() << oendl;
             if (it.key().lower()=="name")
             {
                 filename=it.data();
@@ -247,7 +247,7 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
         }
         break ;
 
-    case 2: 
+    case 2:
         {
             QString tmpfile = "/tmp/opiemail-image";
             encodedString*content = m_recMail->Wrapper()->fetchDecodedPart( m_recMail, m_body->Parts()[ ( ( AttachItem* )item )->Partnumber() ] );
@@ -289,7 +289,7 @@ void ViewMail::setMail(const RecMailP&mail )
 
     m_mail[0] = mail->getFrom();
     m_mail[1] = mail->getSubject();
-    m_mail[3] = mail->getDate();
+    m_mail[3] = mail->getStringDate();
     m_mail[4] = mail->Msgid();
 
     m_mail2[0] = mail->To();

@@ -9,8 +9,8 @@ struct mailimf_date_time;
 class MailStatics
 {
 protected:
-    static QString parseDateTime(const mailimf_date_time * date);
-    static QString parseDateTime(const char*date);
+    static QDateTime parseDateTime(const mailimf_date_time * date,int&offset);
+    static QDateTime parseDateTime(const char*date,int&offset);
     MailStatics(){};
     virtual ~MailStatics(){};
 public:

@@ -16,6 +16,7 @@ public:
     void showEntry();
     MAILLIB::ATYPE wrapperType();
 
+    virtual QString key(int col,bool) const;
 protected:
     RecMailP mail_data;
 };

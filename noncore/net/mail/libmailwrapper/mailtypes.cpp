@@ -1,22 +1,23 @@
 #include "mailtypes.h"
 
 #include <opie2/odebug.h>
+#include <qpe/timestring.h>
 
 #include <stdlib.h>
 
 using namespace Opie::Core;
 RecMail::RecMail()
-    :Opie::Core::ORefCount(),subject(""),date(""),from(""),mbox(""),msg_id(""),msg_number(0),msg_size(0),msg_flags(7)
+    :Opie::Core::ORefCount(),subject(""),from(""),mbox(""),msg_id(""),msg_number(0),msg_size(0),msg_flags(7),maildate(),date("")
 {
     init();
 }
 
 RecMail::RecMail(const RecMail&old)
-    :Opie::Core::ORefCount(),subject(""),date(""),from(""),mbox(""),msg_id(""),msg_number(0),msg_flags(7)
+    :Opie::Core::ORefCount(),subject(""),from(""),mbox(""),msg_id(""),msg_number(0),msg_flags(7),maildate(),date("")
 {
     init();
     copy_old(old);
-    odebug << "Copy constructor RecMail" << oendl; 
+    odebug << "Copy constructor RecMail" << oendl;
 }
 
 RecMail::~RecMail()
@@ -27,6 +28,7 @@ RecMail::~RecMail()
 void RecMail::copy_old(const RecMail&old)
 {
     subject = old.subject;
+    maildate = old.maildate;
     date = old.date;
     mbox = old.mbox;
     msg_id = old.msg_id;
@@ -51,6 +53,17 @@ void RecMail::init()
     in_reply_to.clear();
     references.clear();
     wrapper = 0;
+}
+
+void RecMail::setDate( const QDateTime&a,int offset)
+{
+    QString timestring = TimeString::numberDateString(a.date())+" ";
+    timestring+=TimeString::timeString(a.time());
+    if (offset > 0) {
+        timestring.sprintf(timestring+" %+05i",offset);
+    }
+    date = timestring;
+    maildate = a;
 }
 
 void RecMail::setWrapper(AbstractMail*awrapper)
@@ -134,7 +147,7 @@ RecPart::RecPart(const RecPart&old)
     m_size = old.m_size;
     m_Parameters = old.m_Parameters;
     m_poslist = old.m_poslist;
-    odebug << "RecPart copy constructor" << oendl; 
+    odebug << "RecPart copy constructor" << oendl;
 }
 
 RecPart::~RecPart()
@@ -258,7 +271,7 @@ RecBody::RecBody(const RecBody&old)
     m_BodyText = old.m_BodyText;
     m_PartsList = old.m_PartsList;
     m_description = old.m_description;
-    odebug << "Recbody copy constructor" << oendl; 
+    odebug << "Recbody copy constructor" << oendl;
 }
 
 RecBody::~RecBody()
@@ -323,14 +336,14 @@ encodedString::encodedString(const encodedString&old)
 {
     init();
     copy_old(old);
-    odebug << "encodedeString: copy constructor!" << oendl; 
+    odebug << "encodedeString: copy constructor!" << oendl;
 }
 
 encodedString& encodedString::operator=(const encodedString&old)
 {
     init();
     copy_old(old);
-    odebug << "encodedString: assign operator!" << oendl; 
+    odebug << "encodedString: assign operator!" << oendl;
     return *this;
 }
 
@@ -396,4 +409,3 @@ folderStat&folderStat::operator=(const folderStat&old)
     message_recent = old.message_recent;
     return *this;
 }
-

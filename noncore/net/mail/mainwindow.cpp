@@ -103,7 +103,8 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     mailView->addColumn( tr( "Size" ),QListView::Manual);
     mailView->addColumn( tr( "Date" ));
     mailView->setAllColumnsShowFocus(true);
-    mailView->setSorting(-1);
+    mailView->setShowSortIndicator(true);
+    mailView->setSorting(4,false);
 
     statusWidget = new StatusWidget( wrapperBox );
     statusWidget->hide();
@@ -143,7 +144,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::appMessage(const QCString &, const QByteArray &)
 {
-    odebug << "appMessage not reached" << oendl; 
+    odebug << "appMessage not reached" << oendl;
 }
 
 void MainWindow::slotAdjustLayout() {
@@ -177,32 +178,32 @@ void MainWindow::slotEditSettings()
 
 void MainWindow::slotShowFolders( bool )
 {
-   odebug << "slotShowFolders not reached" << oendl; 
+   odebug << "slotShowFolders not reached" << oendl;
 }
 
 void MainWindow::refreshMailView(const QValueList<RecMailP>&)
 {
-   odebug << "refreshMailView not reached" << oendl; 
+   odebug << "refreshMailView not reached" << oendl;
 }
 
 void MainWindow::mailLeftClicked(int, QListViewItem *,const QPoint&,int )
 {
-    odebug << "mailLeftClicked not reached" << oendl; 
+    odebug << "mailLeftClicked not reached" << oendl;
 }
 
 void MainWindow::displayMail()
 {
-    odebug << "displayMail not reached" << oendl; 
+    odebug << "displayMail not reached" << oendl;
 }
 
 void MainWindow::slotDeleteMail()
 {
-    odebug << "deleteMail not reached" << oendl; 
+    odebug << "deleteMail not reached" << oendl;
 }
 
 void MainWindow::mailHold(int, QListViewItem *,const QPoint&,int  )
 {
-    odebug << "mailHold not reached" << oendl; 
+    odebug << "mailHold not reached" << oendl;
 }
 
 void MainWindow::slotSendQueued()

@@ -372,7 +372,7 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
     clistcell *current,*c,*cf;
     mailimap_msg_att_dynamic*flist;
     mailimap_flag_fetch*cflag;
-    int size;
+    int size,toffset;
     QBitArray mFlags(7);
     QStringList addresslist;
 
@@ -424,7 +424,8 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
         }
         if (item->att_data.att_static->att_type==MAILIMAP_MSG_ATT_ENVELOPE) {
             mailimap_envelope * head = item->att_data.att_static->att_data.att_env;
-            m->setDate(parseDateTime(head->env_date));
+            QDateTime d = parseDateTime(head->env_date,toffset);
+            m->setDate(d,toffset);
             m->setSubject(convert_String((const char*)head->env_subject));
             if (head->env_from!=NULL) {
                 addresslist = address_list_to_stringlist(head->env_from->frm_list);

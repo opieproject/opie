@@ -384,7 +384,7 @@ QStringList Genericwrapper::parseInreplies(mailimf_in_reply_to * in_replies)
 
 void Genericwrapper::parseList(QValueList<Opie::Core::OSmartPointer<RecMail> > &target,mailsession*session,const QString&mailbox,bool mbox_as_to)
 {
-    int r;
+    int r,toffset;
     mailmessage_list * env_list = 0;
     r = mailsession_get_messages_list(session,&env_list);
     if (r != MAIL_NO_ERROR) {
@@ -437,13 +437,13 @@ void Genericwrapper::parseList(QValueList<Opie::Core::OSmartPointer<RecMail> > &
             mail->setCC( parseAddressList( single_fields.fld_cc->cc_addr_list ) );
         if (single_fields.fld_bcc)
             mail->setBcc( parseAddressList( single_fields.fld_bcc->bcc_addr_list ) );
-        if (single_fields.fld_orig_date)
-            mail->setDate( parseDateTime( single_fields.fld_orig_date->dt_date_time ) );
-        // crashes when accessing pop3 account?
+        if (single_fields.fld_orig_date) {
+            QDateTime d = parseDateTime( single_fields.fld_orig_date->dt_date_time,toffset);
+            mail->setDate( d,toffset );
+        }
         if (single_fields.fld_message_id && single_fields.fld_message_id->mid_value) {
             mail->setMsgid(QString(single_fields.fld_message_id->mid_value));
         }
-
         if (single_fields.fld_reply_to) {
             QStringList t = parseAddressList(single_fields.fld_reply_to->rt_addr_list);
             if (t.count()>0) {
