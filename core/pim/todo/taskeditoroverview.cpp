@@ -83,7 +83,7 @@ TaskEditorOverView::TaskEditorOverView( QWidget* parent,  const char* name, WFla
     cmbDesc->clearEdit();
 
     // This will trim the QWidget to correct size, if the description is very long!
-    cmbDesc->sizeHint();
+    QSize sh = cmbDesc->sizeHint();
 
     layout->addMultiCellWidget( cmbDesc, 1, 1, 0, 1 );
     QWhatsThis::add( cmbDesc, tr( "Enter brief description of the task here." ) );
@@ -100,6 +100,7 @@ TaskEditorOverView::TaskEditorOverView( QWidget* parent,  const char* name, WFla
     cmbPriority->insertItem( m_pic_priority[ 3 ], tr( "Low" ) );
     cmbPriority->insertItem( m_pic_priority[ 4 ], tr( "Very Low" ) );
     cmbPriority->setCurrentItem( 2 );
+	cmbPriority->sizeHint();
     layout->addWidget( cmbPriority, 2, 1 );
     QWhatsThis::add( cmbPriority, tr( "Select priority of task here." ) );
 
@@ -108,11 +109,13 @@ TaskEditorOverView::TaskEditorOverView( QWidget* parent,  const char* name, WFla
     layout->addWidget( label, 3, 0 );
     QWhatsThis::add( label, tr( "Select category to organize this task with." ) );
     cmbCategory = new CategorySelect( container );
+	cmbCategory->sizeHint();
     layout->addWidget( cmbCategory, 3, 1 );
     QWhatsThis::add( cmbCategory, tr( "Select category to organize this task with." ) );
 
     // Recurrence
     ckbRecurrence = new QCheckBox( tr( "Recurring task" ), container );
+	ckbRecurrence->sizeHint();
     layout->addMultiCellWidget( ckbRecurrence, 4, 4, 0, 1 );
     QWhatsThis::add( ckbRecurrence, tr( "Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab." ) );
     connect( ckbRecurrence, SIGNAL(clicked() ), this, SLOT( slotRecClicked() ) );
@@ -123,6 +126,7 @@ TaskEditorOverView::TaskEditorOverView( QWidget* parent,  const char* name, WFla
     QWhatsThis::add( label, tr( "Enter any additional information about this task here." ) );
     mleNotes = new QMultiLineEdit( container );
     mleNotes->setWordWrap( QMultiLineEdit::WidgetWidth );
+	mleNotes->sizeHint();
     layout->addMultiCellWidget( mleNotes, 6, 6, 0, 1 );
     QWhatsThis::add( mleNotes, tr( "Enter any additional information about this task here." ) );
 }
