@@ -13,6 +13,8 @@ namespace Core {
 }
 namespace Ui {
 /**
+ * API IDEA - not usable this moment!
+ *
  * With this widget you can configure one or many PluginLoaders either
  * through an already existing Opie::Core::OPluginManager or Opie::Core::OGenericPluginLoader
  * The sorted state will be read from the Loader.
