@@ -14,17 +14,17 @@ while true; do
 		FILES=`ls /var/spool/at/[0-9]* 2>/dev/null`
 	
 		if [ -z "$FILES" ]; then
-			echo "clear resume at"
+			# echo "clear resume at"
 			echo "" >$timefile
 		else
 			for i in "$FILES"; do
-				echo "File = $i"
+				# echo "File = $i"
 
 				unixtime=`basename $i | cut -c1-10`
 				pid=`basename $i | cut -c12-` 
 				
 				if [ -d /proc/$pid ]; then				
-					echo "Datestring = $unixtime"
+					# echo "Datestring = $unixtime"
 					echo "$unixtime" >$timefile
 				else
 					rm -f $i
