@@ -19,11 +19,11 @@
     <name>AlarmDlgBase</name>
     <message>
       <source>Form1</source>
-      <translation type="unfinished" />
+      <translation>Formulář 1</translation>
     </message>
     <message>
       <source>TextLabel1</source>
-      <translation type="unfinished" />
+      <translation>Popisek 1</translation>
     </message>
     <message>
       <source>Snooze</source>

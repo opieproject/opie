@@ -31,7 +31,8 @@
     </message>
     <message>
       <source></source>
-      <translation> </translation>
+      <translation>
+</translation>
     </message>
   </context>
   <context>
