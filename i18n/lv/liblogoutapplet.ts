@@ -3,16 +3,17 @@
     <name>LogoutApplet</name>
     <message>
         <source>Logout shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Atvienošanās saīsne</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation type="unfinished"></translation>
+        <translation>Atvienoties</translation>
     </message>
     <message>
         <source>Do you really want to
 end this session ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai tiešām vēlaties
+pārtraukt šo sesiju ?</translation>
     </message>
 </context>
 </TS>
