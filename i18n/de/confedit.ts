@@ -22,7 +22,7 @@
     <name>ListViewConfDir</name>
     <message>
         <source>Files</source>
-        <translation type="unfinished">Dateien:</translation>
+        <translation>Dateien</translation>
     </message>
     <message>
         <source>Could not open</source>
@@ -41,11 +41,11 @@
     <name>ListViewItemConfFile</name>
     <message>
         <source>Could not open</source>
-        <translation type="unfinished">Konnte nicht öffnen</translation>
+        <translation>Konnte nicht öffnen</translation>
     </message>
     <message>
         <source>The file </source>
-        <translation type="unfinished">Die Datei</translation>
+        <translation>Die Datei</translation>
     </message>
     <message>
         <source> could not be opened.</source>
