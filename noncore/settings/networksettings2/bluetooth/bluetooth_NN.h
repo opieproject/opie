@@ -15,7 +15,7 @@ public:
     virtual ~BluetoothBNEPNetNode();
 
     virtual const QString pixmapName() 
-      { return "bluetooth"; }
+      { return "Devices/bluetooth"; }
 
     virtual const QString nodeName() 
       { return tr("Bluetooth PAN/NAP"); }
@@ -46,7 +46,7 @@ public:
     virtual ~BluetoothRFCOMMNetNode();
 
     virtual const QString pixmapName() 
-      { return "bluetooth"; }
+      { return "Devices/bluetooth"; }
 
     virtual const QString nodeName() 
       { return tr("Bluetooth serial link"); }

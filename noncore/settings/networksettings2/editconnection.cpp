@@ -289,7 +289,7 @@ void EditConnection::buildFullTree( void ) {
       MyQCheckListItem * it = new MyQCheckListItem( TheTop, 
           NN->nodeName(), 
           QCheckListItem::RadioButton );
-      it->setPixmap( 0, NSResources->getPixmap( "commprofile" ) );
+      it->setPixmap( 0, NSResources->getPixmap( "Devices/commprofile" ) );
       // remember that this node maps to this listitem
       Mapping->insert( it, NN );
       buildSubTree( it, NN );

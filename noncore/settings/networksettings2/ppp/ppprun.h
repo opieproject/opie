@@ -3,24 +3,30 @@
 
 #include <qregexp.h>
 #include <asconnection.h>
+#include <asdevice.h>
 #include "pppdata.h"
 
-class PPPRun  : public AsConnection {
+class PPPRun  : public AsConnection, public AsDevice {
 
 public :
 
       PPPRun( ANetNodeInstance * NNI, 
-              PPPData & Data ) : 
-                AsConnection( NNI ),
-                Pat( "eth[0-9]" )
-        { D = &Data; }
+              PPPData & Data );
+      virtual QString genNic( long NicNr )
+        { QString S; return S.sprintf( "ppp%ld", NicNr ); }
 
-protected :
+      virtual AsDevice * device( void ) 
+        { return AsDevice::asDevice(); }
+      virtual RuntimeInfo * runtimeInfo( void ) 
+        { return ( AsConnection *)this; }
+
+ protected :
 
       void detectState( NodeCollection * NC );
       bool setState( NodeCollection * NC, Action_t A );
       bool canSetState( State_t S, Action_t A )
-        { return connection()->findNext( netNode() )->runtime()->canSetState( S,A ); }
+        { return AsDevice::connection()->findNext( 
+            AsDevice::netNode() )->runtime()->canSetState( S,A ); }
 
       bool handlesInterface( const QString & I );
 

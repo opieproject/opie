@@ -168,7 +168,10 @@ bool TheNSResources::loadNetNode(
 }
 
 QPixmap TheNSResources::getPixmap( const QString & QS ) {
-    return Resource::loadPixmap( QString("networksettings2")+QS );
+    QString S("networksettings2/");
+    S += QS;
+    printf( " pixmap %s\n", S.latin1() );
+    return Resource::loadPixmap( QString("networksettings2/")+QS );
 }
 
 QString TheNSResources::tr( const char * s ) {

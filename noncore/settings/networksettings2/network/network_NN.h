@@ -15,7 +15,7 @@ public:
     virtual ~NetworkNetNode();
 
     virtual const QString pixmapName() 
-      { return "tcpip"; }
+      { return "Devices/tcpip"; }
 
     virtual const QString nodeName() 
       { return tr("IP Configuration"); }

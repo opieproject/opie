@@ -15,7 +15,7 @@ public:
     virtual ~LanCardNetNode();
 
     virtual const QString pixmapName() 
-      { return "card"; }
+      { return "Devices/card"; }
 
     virtual const QString nodeName() 
       { return tr("LAN card"); }

@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>403</width>
+            <width>399</width>
             <height>502</height>
         </rect>
     </property>
@@ -32,7 +32,7 @@
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>2</number>
+            <number>0</number>
         </property>
         <widget>
             <class>QFrame</class>
@@ -244,152 +244,10 @@
             </hbox>
         </widget>
         <widget>
-            <class>QIconView</class>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>New Item</string>
-                </property>
-                <property>
-                    <name>pixmap</name>
-                    <pixmap>image0</pixmap>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>New Item</string>
-                </property>
-                <property>
-                    <name>pixmap</name>
-                    <pixmap>image0</pixmap>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>New Item</string>
-                </property>
-                <property>
-                    <name>pixmap</name>
-                    <pixmap>image0</pixmap>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>New Item</string>
-                </property>
-                <property>
-                    <name>pixmap</name>
-                    <pixmap>image0</pixmap>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>New Item</string>
-                </property>
-                <property>
-                    <name>pixmap</name>
-                    <pixmap>image0</pixmap>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>New Item</string>
-                </property>
-                <property>
-                    <name>pixmap</name>
-                    <pixmap>image0</pixmap>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>New Item</string>
-                </property>
-                <property>
-                    <name>pixmap</name>
-                    <pixmap>image0</pixmap>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>New Item</string>
-                </property>
-                <property>
-                    <name>pixmap</name>
-                    <pixmap>image0</pixmap>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>New Item</string>
-                </property>
-                <property>
-                    <name>pixmap</name>
-                    <pixmap>image0</pixmap>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>New Item</string>
-                </property>
-                <property>
-                    <name>pixmap</name>
-                    <pixmap>image0</pixmap>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>New Item</string>
-                </property>
-                <property>
-                    <name>pixmap</name>
-                    <pixmap>image0</pixmap>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>New Item</string>
-                </property>
-                <property>
-                    <name>pixmap</name>
-                    <pixmap>image0</pixmap>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>New Item</string>
-                </property>
-                <property>
-                    <name>pixmap</name>
-                    <pixmap>image0</pixmap>
-                </property>
-            </item>
+            <class>QListBox</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Profiles_IV</cstring>
-            </property>
-            <property stdset="1">
-                <name>spacing</name>
-                <number>5</number>
-            </property>
-            <property stdset="1">
-                <name>itemsMovable</name>
-                <bool>false</bool>
-            </property>
-            <property stdset="1">
-                <name>showToolTips</name>
-                <bool>false</bool>
+                <cstring>Profiles_LB</cstring>
             </property>
         </widget>
         <widget>
@@ -397,6 +255,13 @@
             <property stdset="1">
                 <name>name</name>
                 <cstring>CurProfile_GB</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>5</hsizetype>
+                    <vsizetype>1</vsizetype>
+                </sizepolicy>
             </property>
             <property stdset="1">
                 <name>title</name>
@@ -518,12 +383,6 @@
         </widget>
     </vbox>
 </widget>
-<images>
-    <image>
-        <name>image0</name>
-        <data format="XPM.GZ" length="1347">789c7dd3c14ac4301405d07dbf22f4ed8a743ace0882f8098a4b415ca4c92475310a3a2e44fc777393a64df2dabed7452e1c6eb368778d787e7a10cdaefabac8cb9b126a909fa2d1dfe7f3cfcbebfd6f551fae857bf69dd8d75755dd0a251e3fde4f38933b53e707b10f518df18478e8b08803e271c21af1e6168b681165e7f688681055874594211a13a242347efc95da9688dad58946ca75e58d6be9e5ba0a46e92d351a952aa2d3b2495459989849f949546632b5688c32c65aeadde428ed0132da23306e4c5863f1ba017042738f6fc138a5fdbd0a135b2203ec7bca7b723022e23d19628601cb0d6f59e8612dce0c2b2641658fb5650b375a0795a2c2b8afcaaba4859ba852c4cda4364da9964daed64caa60c2475d9a590503c54d54d1d0a2096abb67541bf79955fc0debbfbbea1f81b84f0e</data>
-    </image>
-</images>
 <connections>
     <connection>
         <sender>Add_TB</sender>
@@ -568,31 +427,31 @@
         <slot>SLOT_GenerateConfig()</slot>
     </connection>
     <connection>
-        <sender>Profiles_IV</sender>
-        <signal>selectionChanged(QIconViewItem*)</signal>
+        <sender>Profiles_LB</sender>
+        <signal>clicked(QListBoxItem*)</signal>
         <receiver>NetworkSettingsGUI</receiver>
-        <slot>SLOT_ShowNode( QIconViewItem*)</slot>
+        <slot>SLOT_ShowNode( QListBoxItem*)</slot>
     </connection>
     <connection>
-        <sender>Profiles_IV</sender>
-        <signal>doubleClicked(QIconViewItem*)</signal>
+        <sender>Profiles_LB</sender>
+        <signal>currentChanged(QListBoxItem*)</signal>
         <receiver>NetworkSettingsGUI</receiver>
-        <slot>SLOT_EditNode( QIconViewItem*)</slot>
+        <slot>SLOT_ShowNode( QListBoxItem*)</slot>
     </connection>
     <connection>
-        <sender>Profiles_IV</sender>
-        <signal>currentChanged(QIconViewItem*)</signal>
+        <sender>Profiles_LB</sender>
+        <signal>doubleClicked(QListBoxItem*)</signal>
         <receiver>NetworkSettingsGUI</receiver>
-        <slot>SLOT_ShowNode( QIconViewItem*)</slot>
+        <slot>SLOT_EditNode( QListBoxItem *)</slot>
     </connection>
     <slot access="public">SLOT_AddNode()</slot>
     <slot access="public">SLOT_CheckState()</slot>
     <slot access="public">SLOT_Connect()</slot>
     <slot access="public">SLOT_DeleteNode()</slot>
-    <slot access="public">SLOT_EditNode( QIconViewItem*)</slot>
+    <slot access="public">SLOT_EditNode( QListBoxItem *)</slot>
     <slot access="public">SLOT_Enable()</slot>
     <slot access="public">SLOT_GenerateConfig()</slot>
     <slot access="public">SLOT_On()</slot>
-    <slot access="public">SLOT_ShowNode( QIconViewItem*)</slot>
+    <slot access="public">SLOT_ShowNode( QListBoxItem*)</slot>
 </connections>
 </UI>

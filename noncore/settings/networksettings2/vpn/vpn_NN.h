@@ -15,7 +15,7 @@ public:
     virtual ~VPNNetNode();
 
     virtual const QString pixmapName() 
-      { return "vpn"; }
+      { return "Devices/vpn"; }
 
     virtual const QString nodeName() 
       { return tr("VPN Connection"); }

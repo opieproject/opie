@@ -314,5 +314,6 @@ void System::probeInterfaces( void ) {
       } else {
         IFI->Netmask = "";
       }
+      fprintf( stderr, "NIC %s UP %d\n", NicName.latin1(), IFI->IsUp );
     }
 }

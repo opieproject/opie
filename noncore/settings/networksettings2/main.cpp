@@ -88,9 +88,9 @@ int main( int argc, char * argv[] ) {
           case ACT_PROMPT :
             { ActivateProfile AP(argv[1]);
               if( AP.exec() == QDialog::Accepted ) {
-                printf( "%s-c%d-allowed", AP.selectedProfile() );
+                printf( "%s-c%ld-allowed", argv[1], AP.selectedProfile() );
               } else {
-                printf( "%s-cNN-disallowed" );
+                printf( "%s-cNN-disallowed", argv[1] );
               }
             }
             break;

@@ -21,7 +21,7 @@ public :
       RuntimeInfo * runtime( void ) 
         { if( RT == 0 ) 
             RT = new PPPRun( this, Data );
-          return RT;
+          return RT->runtimeInfo();
         }
 
       virtual void * data( void ) 

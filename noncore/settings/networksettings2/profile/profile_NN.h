@@ -15,7 +15,7 @@ public:
     virtual ~ProfileNetNode();
 
     virtual const QString pixmapName() 
-      { return "commprofile"; }
+      { return "Devices/commprofile"; }
 
     virtual const QString nodeName() 
       { return tr("Regular profile"); }

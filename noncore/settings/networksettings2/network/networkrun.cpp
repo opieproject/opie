@@ -26,7 +26,7 @@ bool NetworkRun::setState( NodeCollection * NC, Action_t A ) {
       // we can bring UP if lower level is available
       if( NC->currentState() == Available ) {
         QString S;
-        S.sprintf( "ifup %s=manual", II->Name.latin1() );
+        S.sprintf( "ifup %s", II->Name.latin1() );
         NSResources->system().execute( S );
         NC->setCurrentState( IsUp );
       }

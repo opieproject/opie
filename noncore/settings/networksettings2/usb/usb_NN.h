@@ -15,7 +15,7 @@ public:
     virtual ~USBNetNode();
 
     virtual const QString pixmapName() 
-      { return "usb"; }
+      { return "Devices/usb"; }
 
     virtual const QString nodeName() 
       { return tr("USB Cable Connect"); }

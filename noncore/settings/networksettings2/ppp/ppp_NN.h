@@ -15,7 +15,7 @@ public:
     virtual ~PPPNetNode();
 
     virtual const QString pixmapName() 
-      { return "ppp"; }
+      { return "Devices/ppp"; }
 
     virtual const QString nodeName() 
       { return tr("PPP Connection"); }

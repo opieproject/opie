@@ -15,7 +15,7 @@ public:
     virtual ~CableNetNode();
 
     virtual const QString pixmapName() 
-      { return "cable"; }
+      { return "Devices/cable"; }
 
     virtual const QString nodeName() 
       { return tr("Cable Connection"); }

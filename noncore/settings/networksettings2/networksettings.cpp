@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #include <qpe/qpeapplication.h>
-#include <qiconset.h>
+#include <qlistbox.h>
 #include <qgroupbox.h>
 #include <qtimer.h>
 #include <qlistbox.h>
@@ -35,24 +35,21 @@ NetworkSettings::NetworkSettings( QWidget *parent,
     On_TB->setPixmap( NSResources->getPixmap( "off" ) );
 
     // populate main Listbox
-    Profiles_IV->clear();
+    Profiles_LB->clear();
     { Name2Connection_t & M = NSResources->connections();
       NodeCollection * NC;
-      QIconViewItem * IVI;
-
       // for all connections
       for( QDictIterator<NodeCollection> it(M);
            it.current();
            ++it ) {
         NC = it.current();
-        IVI = new QIconViewItem( Profiles_IV,
-                                 NC->name(),
-                                 NC->devicePixmap() );
+        Profiles_LB->insertItem( NC->devicePixmap(),
+                                 NC->name() );
       }
     }
 
-    if( Profiles_IV->count() ) {
-      Profiles_IV->setSelected( Profiles_IV->firstItem(), TRUE );
+    if( Profiles_LB->count() ) {
+      Profiles_LB->setSelected( 0, TRUE );
     }
 
     // if no profiles -> auto popup editing
@@ -91,18 +88,18 @@ NetworkSettings::~NetworkSettings() {
 }
 
 void NetworkSettings::SLOT_RefreshStates( void ) {
-    QIconViewItem * IVI = Profiles_IV->currentItem(); // remeber
+    QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() ); // remember
 
-    if( IVI ) {
+    if( LBI ) {
       NodeCollection * NC;
       NSResources->system().probeInterfaces();
       // update current selection only
-      NC = NSResources->findConnection( IVI->text() );
+      NC = NSResources->findConnection( LBI->text() );
       if( NC ) {
         State_t OldS = NC->state();
         State_t NewS = NC->state(1);
         if( OldS != NewS ) {
-          updateProfileState( IVI );
+          updateProfileState( LBI );
         }
       }
     }
@@ -138,9 +135,9 @@ void NetworkSettings::SLOT_AddNode( void ) {
 }
 
 void NetworkSettings::SLOT_DeleteNode( void ) {
-    QIconViewItem * IVI = Profiles_IV->currentItem();
+    QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() ); 
 
-    if ( ! IVI ) 
+    if ( ! LBI ) 
       return;
 
     if( QMessageBox::warning(
@@ -148,19 +145,19 @@ void NetworkSettings::SLOT_DeleteNode( void ) {
           tr( "Removing profile" ),
           tr( "Remove selected profile ?" ), 
           1, 0 ) == 1 ) {
-      NSResources->removeConnection( IVI->text() );
-      delete IVI;
+      NSResources->removeConnection( LBI->text() );
+      delete LBI;
       setModified( 1 );
       NSD.forceGeneration(1);
     }
 }
 
-void NetworkSettings::SLOT_EditNode( QIconViewItem * IVI ) {
+void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
     QString OldName = "";
     EditConnection EC( this );
 
-    if( IVI ) {
-      NodeCollection * NC = NSResources->findConnection( IVI->text() );
+    if( LBI ) {
+      NodeCollection * NC = NSResources->findConnection( LBI->text() );
       if( ! NC ) {
         return;
       }
@@ -176,29 +173,29 @@ void NetworkSettings::SLOT_EditNode( QIconViewItem * IVI ) {
       NodeCollection * NC = EC.connection();
       if( NC->isModified() ) {
         setModified( 1 );
-        if( IVI ) {
+        if( LBI ) {
           // new name -> remove item
           NSResources->removeConnection( OldName );
           // must add it here since change will trigger event
           NSResources->addConnection( NC );
-          IVI->setText( NC->name() );
-          IVI->setPixmap( NC->devicePixmap() );
+          Profiles_LB->changeItem( NC->devicePixmap(),
+                                   NC->name(),
+                                   Profiles_LB->index( LBI )
+                                 );
         } else {
           // new item
+          int ci = Profiles_LB->count();
           NSResources->addConnection( NC );
           NC->setNumber( NC->maxConnectionNumber()+1 );
-          IVI = new QIconViewItem( Profiles_IV,
-                                   NC->name(),
-                                   NC->devicePixmap()
-                                 );
-          Profiles_IV->setSelected( IVI, TRUE );
+          Profiles_LB->insertItem( NC->devicePixmap(), NC->name() );
+          Profiles_LB->setSelected( ci, TRUE );
         }
-        updateProfileState( IVI );
+        updateProfileState( LBI );
       }
     } else {
       // cancelled : reset connection 
-      if( IVI ) {
-        NodeCollection * NC = NSResources->findConnection( IVI->text() );
+      if( LBI ) {
+        NodeCollection * NC = NSResources->findConnection( LBI->text() );
         NC->reassign();
       }
     }
@@ -206,11 +203,11 @@ void NetworkSettings::SLOT_EditNode( QIconViewItem * IVI ) {
     UpdateTimer->start( 5000 );
 }
 
-void NetworkSettings::SLOT_ShowNode( QIconViewItem * IVI ) {
-    if( IVI == 0 ) 
+void NetworkSettings::SLOT_ShowNode( QListBoxItem * LBI ) {
+    if( LBI == 0 ) 
       return;
 
-    NodeCollection * NC = NSResources->findConnection( IVI->text() );
+    NodeCollection * NC = NSResources->findConnection( LBI->text() );
 
     // is button possible
     bool EnabledPossible, OnPossible, ConnectPossible;
@@ -261,20 +258,20 @@ void NetworkSettings::SLOT_ShowNode( QIconViewItem * IVI ) {
       Description_LBL->setText( NC->description() );
     }
 
-    CurProfile_GB->setTitle( IVI->text() );
+    CurProfile_GB->setTitle( LBI->text() );
     State_LBL->setText( NC->stateName() );
 }
 
 void NetworkSettings::SLOT_CheckState( void ) {
-    QIconViewItem * IVI  = Profiles_IV->currentItem();
-    if ( ! IVI ) 
+    QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() ); 
+    if ( ! LBI ) 
       return;
-    updateProfileState( IVI );
+    updateProfileState( LBI );
 }
 
-void NetworkSettings::updateProfileState( QIconViewItem * IVI ) {
-    if( IVI == Profiles_IV->currentItem() ) {
-      SLOT_ShowNode( IVI );
+void NetworkSettings::updateProfileState( QListBoxItem * LBI ) {
+    if( LBI == Profiles_LB->item( Profiles_LB->currentItem() ) ) {
+      SLOT_ShowNode( LBI );
     }
 }
 
@@ -291,13 +288,13 @@ void NetworkSettings::SLOT_GenerateConfig( void ) {
 }
 
 void NetworkSettings::SLOT_Enable( void ) {
-    QIconViewItem * IVI = Profiles_IV->currentItem();
+    QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() );
     QString Msg;
-    if ( ! IVI ) 
+    if ( ! LBI ) 
       return;
 
     NodeCollection * NC = 
-        NSResources->findConnection( IVI->text() );
+        NSResources->findConnection( LBI->text() );
 
     bool rv;
     switch( NC->state() ) {
@@ -318,17 +315,17 @@ void NetworkSettings::SLOT_Enable( void ) {
           Msg );
       return;
     }
-    updateProfileState( IVI );
+    updateProfileState( LBI );
 }
 
 void NetworkSettings::SLOT_On( void ) {
-    QIconViewItem * IVI = Profiles_IV->currentItem();
+    QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() );
 
-    if ( ! IVI ) 
+    if ( ! LBI ) 
       return;
 
     NodeCollection * NC = 
-        NSResources->findConnection( IVI->text() );
+        NSResources->findConnection( LBI->text() );
 
     bool rv;
     switch( NC->state() ) {
@@ -357,17 +354,17 @@ void NetworkSettings::SLOT_On( void ) {
           tr( "Cannot enable profile" ) );
       return;
     }
-    updateProfileState( IVI );
+    updateProfileState( LBI );
 }
 
 void NetworkSettings::SLOT_Connect( void ) {
-    QIconViewItem * IVI = Profiles_IV->currentItem();
+    QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() );
 
-    if ( ! IVI ) 
+    if ( ! LBI ) 
       return;
 
     NodeCollection * NC = 
-        NSResources->findConnection( IVI->text() );
+        NSResources->findConnection( LBI->text() );
 
     bool rv;
     switch( NC->state() ) {

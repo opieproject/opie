@@ -19,7 +19,7 @@ public :
       void commit( void );
 
       RuntimeInfo * runtime( void ) 
-        { if( RT ) 
+        { if( RT == 0 ) 
             RT = new BluetoothRFCOMMRun( this, Data );
           return RT;
         }

@@ -1,6 +1,11 @@
 #include <resources.h>
 #include "ppprun.h"
 
+PPPRun::PPPRun( ANetNodeInstance * NNI, PPPData & Data ) :
+          AsConnection( NNI ), AsDevice( NNI ), Pat( "eth[0-9]" ) { 
+    D = &Data; 
+}
+
 void PPPRun::detectState( NodeCollection * NC ) {
     if( isMyPPPDRunning( ) ) {
       if( isMyPPPUp() ) {
@@ -11,7 +16,15 @@ void PPPRun::detectState( NodeCollection * NC ) {
     } else {
       NC->setCurrentState( Off ); // at least this
       // but could also be unavailable
-      netNode()->nextNode()->runtime()->detectState( NC ); 
+      ANetNodeInstance * NNI;
+      RuntimeInfo * RI;
+      NNI = AsDevice::netNode();
+      printf( "%p\n", NNI );
+      NNI = NNI->nextNode();
+      printf( "%p\n", NNI );
+      RI = NNI->runtime();
+      printf( "%p\n", RI );
+      RI->detectState( NC ); 
     }
 }
 
@@ -52,7 +65,7 @@ bool PPPRun::isMyPPPDRunning( void ) {
 
 bool PPPRun::isMyPPPUp( void ) {
     System & S = NSResources->system();
-    InterfaceInfo * best = 0, * Run;
+    InterfaceInfo * Run;
     QRegExp R( "ppp[0-9]" );
 
     for( QDictIterator<InterfaceInfo> It(S.interfaces());
@@ -63,7 +76,7 @@ bool PPPRun::isMyPPPUp( void ) {
           Run->IsPointToPoint 
         ) {
         // this is a LAN card
-        if( Run->assignedNode() == netNode() ) {
+        if( Run->assignedNode() == AsDevice::netNode() ) {
           // assigned to us
           return 1;
         } 

@@ -5,7 +5,7 @@
 class ANetNode;
 class ANetNodeInstance;
 class QTimer;
-class QIconViewItem;
+class QListBoxItem;
 
 class NetworkSettings : public NetworkSettingsGUI {
 
@@ -30,8 +30,8 @@ public slots :
 
       void SLOT_AddNode( void );
       void SLOT_DeleteNode( void );
-      void SLOT_ShowNode( QIconViewItem * );
-      void SLOT_EditNode( QIconViewItem * );
+      void SLOT_ShowNode( QListBoxItem * );
+      void SLOT_EditNode( QListBoxItem * );
       void SLOT_CheckState( void );
       void SLOT_Enable( void );
       void SLOT_On( void );
@@ -42,7 +42,7 @@ public slots :
 
 private :
 
-      void updateProfileState( QIconViewItem * it );
+      void updateProfileState( QListBoxItem * it );
       QTimer * UpdateTimer;
       NetworkSettingsData NSD;
 

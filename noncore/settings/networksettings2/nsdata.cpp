@@ -19,6 +19,7 @@ NetworkSettingsData::NetworkSettingsData( void ) {
 
     // load settings
     Force = 0;
+    IsModified = 0;
     loadSettings();
 }
 

@@ -15,7 +15,7 @@ public:
     virtual ~IRDANetNode();
 
     virtual const QString pixmapName() 
-      { return "irda"; }
+      { return "Devices/irda"; }
 
     virtual const QString nodeName() 
       { return tr("Infrared link"); }

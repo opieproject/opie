@@ -232,8 +232,8 @@ static char * State2PixmapTbl[] = {
 };
 
 QPixmap NodeCollection::devicePixmap( void ) {
-    return NSResources->getPixmap( 
-            device()->netNode()->pixmapName()+"-large" );
+    return NSResources->getPixmap(
+          device()->netNode()->pixmapName()+"-large" );
 }
 
 QPixmap NodeCollection::statePixmap( State_t S) {
