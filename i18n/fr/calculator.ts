@@ -142,7 +142,7 @@
     </message>
     <message>
         <source>Weight</source>
-        <translation>Poids</translation>
+        <translation>Masse</translation>
     </message>
     <message>
         <source>Distance</source>
