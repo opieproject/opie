@@ -1,0 +1,30 @@
+#!/bin/sh
+exec 2> /tmp/RES
+set -x 
+CMD=`basename $0`
+RESOLV=/etc/resolv.conf
+FIXED=/etc/ppp/$6.fixed
+
+case $CMD in 
+  U_*)
+    if [ -f $FIXED ]
+    then
+      # ADD FIXED dns ENTRIES
+      grep "nameserver " $FIXED >> "$RESOLV"
+    else
+      if [ "$DNS1" ] ; then
+         echo '' >> "$RESOLV"
+         echo "nameserver $DNS1 # profile $6" >> "$RESOLV"
+         if [ "$DNS2" ] ; then
+            echo '' >> "$RESOLV"
+            echo "nameserver $DNS2 # profile $6" >> "$RESOLV"
+         fi
+      fi      
+    fi
+    ;;
+  D_*)
+    grep -v "profile $6" $RESOLV > /tmp/xx
+    mv /tmp/xx $RESOLV
+    ;;
+esac 
+exit 0

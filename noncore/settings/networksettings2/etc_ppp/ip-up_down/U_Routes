@@ -1,0 +1,30 @@
+#!/bin/sh
+exec 2> /tmp/ROUTE
+set -x 
+CMD=`basename $0`
+FIXED=/etc/ppp/$6.fixed
+
+case $CMD in 
+  U_*)
+    if [ -f $FIXED ]
+    then
+      # ADD FIXED routes
+      grep "route add " $FIXED > /tmp/xx
+    fi
+    ;;
+  D_*)
+    if [ -f $FIXED ]
+    then
+      grep "route del " $FIXED > /tmp/xx
+    fi
+    ;;
+esac 
+
+if [ -f /tmp/xx ]
+then
+  . /tmp/xx
+  rm /tmp/xx
+fi
+  
+exit 0
+
