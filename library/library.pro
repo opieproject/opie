@@ -47,7 +47,6 @@ HEADERS	=   calendar.h \
             backend/task.h \
 	    backend/event.h \
 	    backend/contact.h\
-	    backend/rohfeedback.h \
 	    categorymenu.h \
 	    categoryedit_p.h \
 	    categoryselect.h \
@@ -107,7 +106,6 @@ SOURCES	=   calendar.cpp \
             backend/task.cpp \
 	    backend/event.cpp \
 	    backend/contact.cpp \
-	    backend/rohfeedback.cpp \
 	    categorymenu.cpp \
 	categoryedit_p.cpp \
 	categoryselect.cpp \
@@ -139,5 +137,7 @@ contains( CONFIG, no-override ){
 }
 
 contains( CONFIG, LIBQPE_WITHROHFEEDBACK ){
-    DEFINES += WITHROHFEEDBACK
+    DEFINES += OPIE_ROHFEEDBACK
+    SOURCES += backend/rohfeedback.cpp
+    HEADERS += backend/rohfeedback.h
 }
