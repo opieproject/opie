@@ -435,6 +435,9 @@ void MainWindow::create( const Profile& prof ) {
     if (prof.autoConnect()) {
         slotConnect();
     }
+
+    QWidget *w = currentSession()->widget();
+    if(w) w->setFocus();
 }
 
 void MainWindow::slotTransfer()
@@ -479,6 +482,9 @@ void MainWindow::slotSessionChanged( Session* ses ) {
             m_connect->setEnabled( true );
             m_disconnect->setEnabled( false );
         }
+
+        QWidget *w = m_curSession->widget();
+        if(w) w->setFocus();
     }
 }
 
