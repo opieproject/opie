@@ -275,8 +275,10 @@ bool CardMonitor::getStatusPcmcia(int showPopUp)
 	cardInPcmcia0 = FALSE;
 	cardInPcmcia1 = FALSE;
     }
+    repaint( FALSE );
     return ((cardWas0 == cardInPcmcia0
 	     && cardWas1 == cardInPcmcia1) ? FALSE : TRUE);
+
 }
 
 
@@ -323,6 +325,7 @@ bool CardMonitor::getStatusSd(int showPopUp)
 #else
 #error "Not on Linux"
 #endif
+    repaint( FALSE );
     return ((cardWas == cardInSd) ? FALSE : TRUE);
 }
 
@@ -331,11 +334,11 @@ void CardMonitor::paintEvent(QPaintEvent *)
 
     QPainter p(this);
 
-    if (cardInPcmcia0 || cardInPcmcia1 || cardInSd) {
+    if ( cardInPcmcia0 || cardInPcmcia1 || cardInSd ) {
 	p.drawPixmap(0, 0, pm);
 	show();
     } else {
-	p.eraseRect(rect());
+	//p.eraseRect(rect());
 	hide();
     }
 }
