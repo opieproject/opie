@@ -867,39 +867,39 @@ newly created document.</source>
     </message>
     <message>
         <source>&lt;P&gt;Can&apos;t create directory %1&lt;/P&gt;&lt;P&gt;ZSafe will now exit.&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Не могу создать каталог %1&lt;/P&gt;&lt;P&gt;ZСейф будет закрыт.&lt;/P&gt;</translation>
     </message>
     <message>
         <source>ZSafe: </source>
-        <translation type="unfinished"></translation>
+        <translation>ZСейф:</translation>
     </message>
     <message>
         <source>&lt;P&gt;No document defined. You have to create a new document&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Документы не заданы. Вы должны создать новый документ&lt;/P&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;You must create a new document first. Ok to create?&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Сначала вы должны создать новый документ. Создать?&lt;/P&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus Password Manager&lt;br&gt;ZSafe version 2.1.2&lt;br&gt;&lt;/b&gt;by Carsten Schneider&lt;br&gt;zcarsten@gmx.net&lt;br&gt;http://z-soft.z-portal.info/zsafe&lt;br&gt;Translations by Robert Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus Менеджер Паролей&lt;br&gt;ZСейф версии 2.1.2-jv01b&lt;br&gt;&lt;/b&gt;написан Carsten Schneider&lt;br&gt;zcarsten@gmx.net&lt;br&gt;http://z-soft.z-portal.info/zsafe&lt;br&gt;Перевод Robert Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Copy to Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопировать в буфер обмена</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Правка</translation>
     </message>
     <message>
         <source>Show Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать информацию</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
 </context>
 </TS>

@@ -11,26 +11,26 @@
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Все</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished">Без категории</translation>
+        <translation>Без категории</translation>
     </message>
 </context>
 <context>
     <name>NewTaskDlg</name>
     <message>
         <source>New Task</source>
-        <translation type="unfinished">Новая задача</translation>
+        <translation>Новая задача</translation>
     </message>
     <message>
         <source>Blank task</source>
-        <translation type="unfinished"></translation>
+        <translation>Пустая задача</translation>
     </message>
     <message>
         <source>Using template:</source>
-        <translation type="unfinished"></translation>
+        <translation>Используя шаблон:</translation>
     </message>
 </context>
 <context>
@@ -60,11 +60,11 @@
     <name>Opie</name>
     <message>
         <source>Todo List</source>
-        <translation type="unfinished">Список задач</translation>
+        <translation>Список задач</translation>
     </message>
     <message>
         <source>Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Задача</translation>
     </message>
 </context>
 <context>

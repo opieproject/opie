@@ -254,7 +254,7 @@ accurately to calibrate your screen.</source>
     <name>QueuedRequestRunner</name>
     <message>
         <source>Processing Queued Requests</source>
-        <translation type="unfinished"></translation>
+        <translation>Обрабатываю запросы в очереди</translation>
     </message>
 </context>
 <context>
@@ -280,7 +280,7 @@ accurately to calibrate your screen.</source>
     <name>Server</name>
     <message>
         <source>USB Lock</source>
-        <translation type="unfinished"></translation>
+        <translation>USB замок</translation>
     </message>
 </context>
 <context>

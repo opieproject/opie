@@ -61,43 +61,43 @@
     </message>
     <message>
         <source>Tap here to filter package list by application category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы фильтровать список пакетов по категории приложений.</translation>
     </message>
     <message>
         <source>Select the application category to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите категорию приложений для фильтра.</translation>
     </message>
     <message>
         <source>Tap here to filter package list by package name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы фильтровать список пакетов по названиям пакетов.</translation>
     </message>
     <message>
         <source>Enter the package name to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите название пакета для фильтра.</translation>
     </message>
     <message>
         <source>Tap here to filter package list by the package status.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы фильтровать список пакетов по статусу.</translation>
     </message>
     <message>
         <source>Select the package status to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите статус пакета для фильтра.</translation>
     </message>
     <message>
         <source>Tap here to filter package list by source server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы фильтровать список пакетов по исходному серверу.</translation>
     </message>
     <message>
         <source>Select the source server to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите исходный сервер для фильтра.</translation>
     </message>
     <message>
         <source>Tap here to filter package list by destination where the package is installed to on this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы фильтровать список пакетов по устройству, на котором установлен пакет.</translation>
     </message>
     <message>
         <source>Select the destination location to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите местонахождение устройства для фильтра.</translation>
     </message>
 </context>
 <context>
@@ -757,71 +757,77 @@ A blue dot next to the package name indicates that the package is currently inst
 A blue dot with a star indicates that a newer version of the package is available from the server feed.
 
 Tap inside the box at the left to select a package.  Tap and hold to view package details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Это список всех пакетов.
+
+Синяя точка рядом с названием пакета означает, что пакет уже установлен.
+
+Синяя точка со звездочкой означает, что доступна более свежая версия этого пакета.
+
+Поставьте галочку слева от пакета чтобы его выбрать.  Нажмите и удерживайте, чтобы увидеть информацию о пакете.</translation>
     </message>
     <message>
         <source>Tap here to update package lists from servers.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы обновить список пакетов с сервера.</translation>
     </message>
     <message>
         <source>Tap here to upgrade all installed packages if a newer version is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы обновить все установленные пакеты, если доступна новая версия.</translation>
     </message>
     <message>
         <source>Tap here to download the currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы скачать выделенные пакеты.</translation>
     </message>
     <message>
         <source>Tap here to install, remove or upgrade currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы установить, удалить или обновить выделенные пакеты.</translation>
     </message>
     <message>
         <source>Install local package</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить местный пакет</translation>
     </message>
     <message>
         <source>Tap here to install a package file located on device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы установить пакет из файла, находящегося на местном устройстве.</translation>
     </message>
     <message>
         <source>Tap here to configure this application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы настроить это приложение.</translation>
     </message>
     <message>
         <source>Tap here to show packages available which have not been installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы показать доступные пакеты, которые еще не установлены.</translation>
     </message>
     <message>
         <source>Tap here to show packages currently installed on this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы показать установленные на этом устройстве пакеты.</translation>
     </message>
     <message>
         <source>Tap here to show packages currently installed on this device which have a newer version available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы показать установленные на этом устройстве пакеты, для которых доступна новая версия.</translation>
     </message>
     <message>
         <source>Tap here to apply current filter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы применить текущий фильтр.</translation>
     </message>
     <message>
         <source>Tap here to change the package filter criteria.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы изменить критерий фильтра пакетов.</translation>
     </message>
     <message>
         <source>Tap here to search for text in package names.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите для поиска текста в названиях пакетов.</translation>
     </message>
     <message>
         <source>Tap here to find the next package name containing the text you are searching for.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите для поиска следующего пакета, содержащего искомый текст.</translation>
     </message>
     <message>
         <source>Tap here to hide the find toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы скрыть панель.</translation>
     </message>
     <message>
         <source>Application Packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Пакеты приложений</translation>
     </message>
 </context>
 <context>
@@ -840,15 +846,15 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
     </message>
     <message>
         <source>Linking packages installed in: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Создаю ссылки для пакета, установленного на: %1</translation>
     </message>
     <message>
         <source>Error linkling &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка при связывании &apos;%1&apos; с &apos;%2&apos;</translation>
     </message>
     <message>
         <source>Links removed for: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалены ссылки для: %1</translation>
     </message>
 </context>
 <context>
@@ -959,145 +965,145 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
     </message>
     <message>
         <source>This is a list of all servers configured.  Select one here to edit or delete, or add a new one below.</source>
-        <translation type="unfinished"></translation>
+        <translation>Это список всех настроенных серверов.  Вы можете выбрать один для правки или удаления или добавить новый внизу.</translation>
     </message>
     <message>
         <source>Tap here to create a new entry.  Fill in the fields below and then tap on Update.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы добавить новую запись.  Заполните поля ниже и нажмите на &quot;Обновить&quot;.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Правка</translation>
     </message>
     <message>
         <source>Tap here to edit the entry selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы отредактировать запись, выделенную выше.</translation>
     </message>
     <message>
         <source>Tap here to delete the entry selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы удалить запись, выделенную выше.</translation>
     </message>
     <message>
         <source>This is a list of all destinations configured for this device.  Select one here to edit or delete, or add a new one below.</source>
-        <translation type="unfinished"></translation>
+        <translation>Это список всех мест назначения, настроенных для этого устройства.  Вы можете выбрать один для правки или удаления или добавить новый внизу.</translation>
     </message>
     <message>
         <source>Enter the URL address of the HTTP proxy server here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите URL адрес HTTP прокси сервера ниже.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the HTTP proxy server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы разрешить или запретить HTTP прокси сервер.</translation>
     </message>
     <message>
         <source>Enter the URL address of the FTP proxy server here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Здесь введите URL адрес FTP прокси сервера.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the FTP proxy server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы разрешить или запретить FTP прокси сервер.</translation>
     </message>
     <message>
         <source>Enter the username for the proxy servers here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите имя пользователя для прокси серверов.</translation>
     </message>
     <message>
         <source>Enter the password for the proxy servers here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите пароль для прокси серверов.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the &apos;-force-depends&apos; option for Ipkg.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы разрешить или запретить &apos;-force-depends&apos; опцию Ipkg.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the &apos;-force-reinstall&apos; option for Ipkg.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы разрешить или запретить &apos;-force-reinstall&apos; опцию Ipkg.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the &apos;-force-removal-of-dependent-packages&apos; option for Ipkg.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы разрешить или запретить &apos;-force-removal-of-dependent-packages&apos; опцию Ipkg.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the &apos;-force-overwrite&apos; option for Ipkg.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы разрешить или запретить &apos;-force-overwrite&apos; опцию Ipkg.</translation>
     </message>
     <message>
         <source>Select information level for Ipkg.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите уровень информации для Ipkg.</translation>
     </message>
 </context>
 <context>
     <name>OIpkgDestDlg</name>
     <message>
         <source>Edit Destination</source>
-        <translation type="unfinished"></translation>
+        <translation>Правка места назначения</translation>
     </message>
     <message>
         <source>Active</source>
-        <translation type="unfinished"></translation>
+        <translation>Активный</translation>
     </message>
     <message>
         <source>Tap here to indicate whether this entry is active or not.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы указать, активная ли эта запись.</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Имя:</translation>
+        <translation>Имя:</translation>
     </message>
     <message>
         <source>Enter the name of this entry here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Здесь введите имя записи.</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished">Место:</translation>
+        <translation>Место:</translation>
     </message>
     <message>
         <source>Enter the absolute directory path of this entry here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Здесь введите абсолютный путь этой записи.</translation>
     </message>
     <message>
         <source>Tap here to select the desired location.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы выбрать нужное место.</translation>
     </message>
 </context>
 <context>
     <name>OIpkgServerDlg</name>
     <message>
         <source>Edit Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Правка серверов</translation>
     </message>
     <message>
         <source>Active</source>
-        <translation type="unfinished"></translation>
+        <translation>Активный</translation>
     </message>
     <message>
         <source>Tap here to indicate whether this entry is active or not.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите здесь, чтобы указать используется ли эта запись.</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Имя:</translation>
+        <translation>Имя:</translation>
     </message>
     <message>
         <source>Enter the name of this entry here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите имя этой записи здесь.</translation>
     </message>
     <message>
         <source>Address:</source>
-        <translation type="unfinished">Адрес:</translation>
+        <translation>Адрес:</translation>
     </message>
     <message>
         <source>Enter the URL address of this entry here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите URL адрес этой записи здесь.</translation>
     </message>
     <message>
         <source>Compressed server feed</source>
-        <translation type="unfinished"></translation>
+        <translation>Сжатые списки пакетов</translation>
     </message>
     <message>
         <source>Tap here to indicate whether the server support compressed archives or not.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите здесь, чтобы указать поддерживает ли сервер сжатые архивы.</translation>
     </message>
 </context>
 <context>
@@ -1135,15 +1141,15 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
     </message>
     <message>
         <source>This area contains information about the package.</source>
-        <translation type="unfinished"></translation>
+        <translation>Это поле содержит информацию о пакете.</translation>
     </message>
     <message>
         <source>This area contains a list of files contained in this package.</source>
-        <translation type="unfinished"></translation>
+        <translation>Это поле содержит список файлов, находящихся в этом пакете.</translation>
     </message>
     <message>
         <source>Tap here to retrieve list of files contained in this package.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы получить список файлов в этом пакете.</translation>
     </message>
 </context>
 <context>

@@ -3,7 +3,7 @@
     <name>Today</name>
     <message>
         <source>Today</source>
-        <translation type="unfinished">Сегодня</translation>
+        <translation>Сегодня</translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
@@ -27,11 +27,11 @@
     </message>
     <message>
         <source>Today Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка Сегодня</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The plugin &apos;%1&apos; caused Today to crash. It could be that the plugin is not properly installed.&lt;br&gt;Today tries to continue loading plugins.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Плагин &apos;%1&apos; вызвал обрушение программы Сегодня. Возможно, что плагин неправильно установлен.&lt;br&gt;Сегодня попробует продолжить загрузку плагинов.&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>

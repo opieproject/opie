@@ -62,7 +62,7 @@
     </message>
     <message>
         <source>Enter something to lookup / search.</source>
-        <translation>Введите что нужно искать.</translation>
+        <translation>Введите, что нужно искать.</translation>
     </message>
 </context>
 </TS>

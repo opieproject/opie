@@ -202,7 +202,7 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
     </message>
     <message>
         <source>Save Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу сохранить</translation>
     </message>
 </context>
 <context>

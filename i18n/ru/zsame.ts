@@ -3,27 +3,27 @@
     <name>ZSameWidget</name>
     <message>
         <source>ZSame</source>
-        <translation type="unfinished"></translation>
+        <translation>Однообразие</translation>
     </message>
     <message>
         <source>New Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Новая игра</translation>
     </message>
     <message>
         <source>Restart This Board</source>
-        <translation type="unfinished"></translation>
+        <translation>Перезапустить с этим набором</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Выйти</translation>
     </message>
     <message>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Игра</translation>
     </message>
 </context>
 </TS>

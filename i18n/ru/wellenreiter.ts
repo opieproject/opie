@@ -190,7 +190,7 @@ joining a net.</source>
     </message>
     <message>
         <source>&lt;p&gt;The Wireless Extension Versions&lt;br&gt;do not match!&lt;p&gt;  Wellenreiter II : WE V%1&lt;br&gt;Interface driver: WE V%2</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Версии Wireless Extension&lt;br&gt;не совпадают!&lt;p&gt;  Велленрейтер II : WE V%1&lt;br&gt;драйвер интерфейса: WE V%2</translation>
     </message>
 </context>
 <context>
@@ -624,11 +624,11 @@ joining a net.</source>
     </message>
     <message>
         <source>Wellenreiter II Configuration Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Диалог настроек Велленрейтера II</translation>
     </message>
     <message>
         <source>Send probe requests</source>
-        <translation type="unfinished"></translation>
+        <translation>Посылать пробные запросы</translation>
     </message>
 </context>
 <context>

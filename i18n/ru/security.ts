@@ -120,23 +120,23 @@ You can only select an actually configured user.</source>
     </message>
     <message>
         <source>Important notice</source>
-        <translation type="unfinished"></translation>
+        <translation>Важное замечание</translation>
     </message>
     <message>
         <source>To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one &lt;em&gt;opie-multiauth-*&lt;/em&gt; package! Once you have done that, you will be able to configure your PDA protection here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Чтобы защитить ваш КПК одним или более плагином аутентификации (например, простой ввод ПИН), вы должны установить хотя бы один &lt;em&gt;opie-multiauth-*&lt;/em&gt; пакет! Как только вы это сделаете, здесь вы сможете настроить защиту вашего КПК.</translation>
     </message>
     <message>
         <source>Locking</source>
-        <translation type="unfinished"></translation>
+        <translation>Блокировка</translation>
     </message>
     <message>
         <source>All user-defined net ranges will be lost.</source>
-        <translation type="unfinished"></translation>
+        <translation>Все заданные пользователем участки будут потеряны.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
 </context>
 <context>
@@ -183,35 +183,35 @@ You can only select an actually configured user.</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Опции</translation>
     </message>
     <message>
         <source>Testing</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверка</translation>
     </message>
     <message>
         <source>Test the authentication now</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверить аутентификацию</translation>
     </message>
     <message>
         <source>Attention</source>
-        <translation type="unfinished">Внимание</translation>
+        <translation>Внимание</translation>
     </message>
     <message>
         <source>You must save your current settings before trying to authenticate. Press OK to accept and launch a simulated authentication process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сначала вы должны сохранить текущие настройки. Нажмите &quot;Да&quot;, чтобы принять и запустить демонстрацию процесса аутентификации.</translation>
     </message>
     <message>
         <source>If you don&apos;t like the result of this test, don&apos;t forget to change your settings before you exit the configuration application!</source>
-        <translation type="unfinished"></translation>
+        <translation>Если вам не нравится результат этой проверки, не забудьте изменить настройки до выхода из приложения!</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
 </context>
 <context>
@@ -573,8 +573,12 @@ Beware that all manually entered net ranges will be lost!</source>
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
-        <translation type="unfinished"></translation>
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></source>
+        <translation>Изменить протокол синхронизации для разных устройств.
+    IntelliSync запретит пароль но будет каждый раз спрашивать разрешение для соединения.
+    Opie1.0 совместим с QtopiaDesktop, MultiSync и KitchenSync
+    Qtopia1.7 изменит способ отправки данных и несовместим со старыми клиентами.
+    </translation>
     </message>
 </context>
 </TS>

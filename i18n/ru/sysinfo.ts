@@ -351,7 +351,7 @@ to this process?</source>
     </message>
     <message>
         <source>Syslog</source>
-        <translation type="unfinished"></translation>
+        <translation>Системный журнал</translation>
     </message>
 </context>
 <context>
@@ -398,7 +398,7 @@ to this process?</source>
     </message>
     <message>
         <source>Built against Qt/E </source>
-        <translation type="unfinished"></translation>
+        <translation>Собрано для Qt/E </translation>
     </message>
 </context>
 </TS>

@@ -135,7 +135,7 @@
     </message>
     <message>
         <source>ODO</source>
-        <translation type="unfinished">ODO</translation>
+        <translation>ODO</translation>
     </message>
     <message>
         <source>Sending</source>
@@ -147,7 +147,7 @@
     </message>
     <message>
         <source>Reset ODO</source>
-        <translation type="unfinished">Сбросить ODO</translation>
+        <translation>Сбросить ODO</translation>
     </message>
 </context>
 <context>

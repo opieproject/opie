@@ -474,7 +474,7 @@ and </source>
     </message>
     <message>
         <source>OTimePickerDialogBase</source>
-        <translation type="unfinished"></translation>
+        <translation>ОВремПодборДиалогБаза</translation>
     </message>
 </context>
 <context>

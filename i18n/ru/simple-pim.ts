@@ -3,58 +3,58 @@
     <name>MainWindow</name>
     <message>
         <source>My MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation>Главное окно</translation>
     </message>
     <message>
         <source>Todos</source>
-        <translation type="unfinished"></translation>
+        <translation>Задачи</translation>
     </message>
     <message>
         <source>Events</source>
-        <translation type="unfinished"></translation>
+        <translation>События</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Выйти</translation>
     </message>
     <message>
         <source>View Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Просмотреть текущие</translation>
     </message>
     <message>
         <source>Views the current record</source>
-        <translation type="unfinished"></translation>
+        <translation>Просмотреть текущую запись</translation>
     </message>
     <message>
         <source>Choose Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите дату</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл</translation>
     </message>
     <message>
         <source>View Record</source>
-        <translation type="unfinished"></translation>
+        <translation>Просмотреть запись</translation>
     </message>
 </context>
 <context>
     <name>PIMListView</name>
     <message>
         <source>Start </source>
-        <translation type="unfinished"></translation>
+        <translation>Начало</translation>
     </message>
     <message>
         <source>End </source>
-        <translation type="unfinished"></translation>
+        <translation>Конец</translation>
     </message>
     <message>
         <source>Time </source>
-        <translation type="unfinished"></translation>
+        <translation>Время</translation>
     </message>
     <message>
         <source> This is an All-Day Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Это событие занимает весь день</translation>
     </message>
 </context>
 </TS>

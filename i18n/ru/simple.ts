@@ -3,16 +3,16 @@
     <name>Simple</name>
     <message>
         <source>My Simple Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Простое приложение</translation>
     </message>
     <message>
         <source>Click on the button or follow the white rabbit</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите кнопку или следуйте за белым зайцем</translation>
     </message>
     <message>
         <source>Quit</source>
         <comment>translatable quit string</comment>
-        <translation type="unfinished"></translation>
+        <translation>Выйти</translation>
     </message>
 </context>
 </TS>
