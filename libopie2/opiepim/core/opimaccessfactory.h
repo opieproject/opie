@@ -82,10 +82,13 @@ class OPimAccessFactory
 		switch ( type ){
 		case OPimGlobal::TODOLIST:
 		        base = new OPimTodoAccess( OBackendFactory<OPimTodoAccessBackend>::create( type, dbStyle, appName ) );
+                        break;
 		case OPimGlobal::CONTACTLIST:
 		        base = new OPimContactAccess( QString::null, QString::null, OBackendFactory<OPimContactAccessBackend>::create( type, dbStyle, appName ) );
+                        break;
 		case OPimGlobal::DATEBOOK:
 		        base = new ODateBookAccess( OBackendFactory<ODateBookAccessBackend>::create( type, dbStyle, appName ) );
+                        break;
 		default:
 			return 0l;
 		}
