@@ -47,8 +47,7 @@ InstallDlgImpl::InstallDlgImpl( vector<InstallData> &packageList, DataManager *d
     defaultDest = cfg.readEntry( "dest", "root" );
 
     // Grab flags - Turn MAKE_LINKS on by default (if no flags found)
-//    flags = cfg.readNumEntry( "installFlags", MAKE_LINKS );
-    flags = 0;
+    flags = cfg.readNumEntry( "installFlags", 0 );
 #else
 	flags = 0;
 #endif
