@@ -1,0 +1,4 @@
+  config MULTIAUTH_BLUEPING
+    boolean "opie-multiauth-blueping (blueping authentication plugin for opie-multiauth testing)"
+    default "y"
+    depends SECURITY

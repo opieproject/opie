@@ -1,0 +1,4 @@
+  config MULTIAUTH_NOTICE
+    boolean "opie-multiauth-notice (Notice plugin for opie-multiauth)"
+    default "y"
+    depends SECURITY

@@ -1,0 +1,11 @@
+Package: opie-multiauth-noticeplugin
+Files: plugins/security/libmultiauthnoticeplugin.so* pics/security/noticeplugin.png pics/security/noticeplugin_small.png
+Priority: optional
+Section: opie/settings
+Maintainer: Clement Seveillac <clement@nist.gov>
+Architecture: arm
+Version: 0.0.1.6
+Depends: opie-security
+Description: Notice plugin for opie-security authentication.
+ It allows you to display, for example, a notice from your legal departement.
+ 

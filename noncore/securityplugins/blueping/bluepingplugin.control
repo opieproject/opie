@@ -1,0 +1,12 @@
+Package: opie-multiauth-bluepingplugin
+Files: plugins/security/libmultiauthbluepingplugin.so* pics/security/bluepingplugin.png
+Priority: optional
+Section: opie/settings
+Maintainer: Clement Seveillac <clement@nist.gov>
+Architecture: arm
+Version: 0.0.2.5
+Depends: libopiecore2, opie-security
+Description: Blueping plugin for opie-security authentication.
+ This is a bluetooth-based authentication plugin (you need
+ to have another Bluetooth device around, the more secure the
+ bonding they made, the more secure the authentication)

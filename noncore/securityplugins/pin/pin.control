@@ -1,0 +1,12 @@
+Package: opie-multiauth-pinplugin
+Files:  plugins/security/libmultiauthpinplugin.so* pics/security/pinplugin.png
+Priority: optional
+Section: opie/settings
+Maintainer: Clement Seveillac <clement@nist.gov>
+Architecture: arm
+Version: 0.0.2.6
+Depends: opie-security
+Description: PIN plugin for opie-security authentication.
+ It implements the same kind of widgets as opie-security package,
+ but this implementation can be used along with other authentication
+ methods in the Opie Multi-Authentication Framework.

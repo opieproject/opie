@@ -1,0 +1,11 @@
+Package: opie-multiauth-dummyplugin
+Files: plugins/security/libmultiauthdummyplugin.so* pics/security/dummyplugin.png
+Priority: optional
+Section: opie/settings
+Maintainer: Clement Seveillac <clement@nist.gov>
+Architecture: arm
+Version: 0.0.2.3
+Depends: opie-security
+Description: Dummy plugin for opie-security authentication.
+ This is a very simple authentication plugin (you just have
+ to press a button basically), for demonstration purpose.

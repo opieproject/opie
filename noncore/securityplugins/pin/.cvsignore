@@ -1,0 +1,4 @@
+*.moc
+Makefile
+pinDialogBase.cpp
+pinDialogBase.h

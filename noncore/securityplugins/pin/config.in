@@ -1,0 +1,4 @@
+  config MULTIAUTH_PIN
+    boolean "opie-multiauth-pin (PIN authentication plugin for opie-multiauth)"
+    default "y"
+    depends SECURITY
