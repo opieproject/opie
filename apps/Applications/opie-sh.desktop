@@ -1,6 +1,6 @@
 [Desktop Entry]
 Comment=opie-sh-howto
 Exec=opie-sh-howto.sh
-Icon=opie-sh
+Icon=opie-sh/opie-sh
 Type=Application
 Name=opie-sh HowTo
