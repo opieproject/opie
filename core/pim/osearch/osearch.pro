@@ -1,7 +1,6 @@
-DEPENDPATH += $(OPIEDIR)/ioclude
+DEPENDPATH += $(OPIEDIR)/include
 LIBS += -lqpe -lopie
 INTERFACES =
-include ( $(OPIEDIR)/include.pro )
 TEMPLATE = app
 CONFIG += debug warn_on qt
 DESTDIR = $(OPIEDIR)/bin
@@ -38,5 +37,3 @@ HEADERS += mainwindow.h \
            applnkitem.h \
            doclnkitem.h \
            doclnksearch.h 
-
-include ( $(OPIEDIR)/include.pro )
