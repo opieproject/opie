@@ -32,8 +32,11 @@
 
 /* OPIE */
 #include <opie2/onetwork.h>
+
+#ifdef QWS
 #include <opie2/oapplication.h>
 #include <opie2/oconfig.h>
+#endif
 
 WellenreiterConfigWindow* WellenreiterConfigWindow::_instance = 0;
 

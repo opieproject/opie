@@ -1,4 +1,4 @@
-VERSION=2-1.0rc2
+VERSION=2-1.0.1-cvs
 
 TGZDIR=$PWD
 
@@ -31,7 +31,8 @@ cp -dfR $OPIEDIR/etc/manufacturers $OUTPUT/share/wellenreiter/
 # take care about sourcefiles
 
 FILES="libopie2/opienet/onetwork.h libopie2/opienet/onetwork.cpp \
-      libopie2/opienet/opcap.h libopie2/opienet/opcap.cpp libopie2/opienet/802_11_user.h \
+      libopie2/opienet/opcap.h libopie2/opienet/opcap.cpp \
+      libopie2/opienet/802_11_user.h libopie2/opienet/dhcp.h libopie2/opienet/udp_ports.h \
       libopie2/opienet/onetutils.h libopie2/opienet/onetutils.cpp \
       libopie2/opienet/omanufacturerdb.h libopie2/opienet/omanufacturerdb.cpp \
       libopie2/opieui/olistview.cpp libopie2/opieui/olistview.h"
