@@ -26,8 +26,8 @@ namespace OpieObex {
    private slots:
      void slotCancelSend();
      void slotMessage( const QCString&, const QByteArray& );
-   /*   void slotError(int );
-        void slotCurrentTry( unsigned int ); */
+     void slotError(int );
+      //  void slotCurrentTry( unsigned int ); */
       void slotDone(bool);
       //void slotReceivedFile(const QString & );
       void slotSent();

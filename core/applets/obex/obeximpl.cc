@@ -1,5 +1,7 @@
 
 #include <qdatastream.h>
+#include <qmessagebox.h>
+
 #include <qpe/qcom.h>
 #include <qlabel.h>
 
@@ -79,6 +81,16 @@ void ObexImpl::slotDone(bool) {
 
 void ObexImpl::slotSent() {
     m_sendgui->lblPath->setText("Done!");
+    m_sendgui->hide();
+}
+
+void ObexImpl::slotError( int errorCode) {
+
+    QString errorString = "";
+    if (errorCode = -1) {
+        errorString = "test";
+    }
+    qDebug("Error: " + errorString);
     m_sendgui->hide();
 }
 
