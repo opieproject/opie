@@ -3,202 +3,202 @@
     <name>CommandEditDialog</name>
     <message>
         <source>Command Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecção do Comando</translation>
     </message>
 </context>
 <context>
     <name>CommandEditDialogBase</name>
     <message>
         <source>Commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Comandos</translation>
     </message>
     <message>
         <source>&lt;B&gt;Commands&lt;/B&gt;:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Comandos&lt;/b&gt;:</translation>
     </message>
     <message>
         <source>&lt;B&gt;Suggested Commands&lt;/B&gt;:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Comandos Sugeridos&lt;/b&gt;:</translation>
     </message>
 </context>
 <context>
     <name>Form1</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Form1</translation>
     </message>
 </context>
 <context>
     <name>Konsole</name>
     <message>
         <source>Terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminal</translation>
     </message>
     <message>
         <source>Micro</source>
-        <translation type="unfinished"></translation>
+        <translation>Micro</translation>
     </message>
     <message>
         <source>Small Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pequena</translation>
     </message>
     <message>
         <source>Medium Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Média</translation>
     </message>
     <message>
         <source>Show command list</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Lista</translation>
     </message>
     <message>
         <source>Hide command list</source>
-        <translation type="unfinished"></translation>
+        <translation>Esconder Lista</translation>
     </message>
     <message>
         <source>Tabs on Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Pastas em Baixo</translation>
     </message>
     <message>
         <source>Green on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Verde em Preto</translation>
     </message>
     <message>
         <source>Black on White</source>
-        <translation type="unfinished"></translation>
+        <translation>Preto em Branco</translation>
     </message>
     <message>
         <source>White on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Branco em Preto</translation>
     </message>
     <message>
         <source>Black on Transparent</source>
-        <translation type="unfinished"></translation>
+        <translation>Preto em Transparente</translation>
     </message>
     <message>
         <source>Black on Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Preto em Vermelho</translation>
     </message>
     <message>
         <source>Red on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Vermelho em Preto</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Verde em Amarelo</translation>
     </message>
     <message>
         <source>Blue on Magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Azul em Magenta</translation>
     </message>
     <message>
         <source>Magenta on Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Magenta em Azul</translation>
     </message>
     <message>
         <source>Cyan on White</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciano em Branco</translation>
     </message>
     <message>
         <source>White on Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Branco em Ciano</translation>
     </message>
     <message>
         <source>Blue on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Azul em Preto</translation>
     </message>
     <message>
         <source>Amber on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Ambar em Preto</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Cores</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Fontes</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opções</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo</translation>
     </message>
     <message>
         <source>Enter</source>
-        <translation type="unfinished"></translation>
+        <translation>Enter</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Espaço</translation>
     </message>
     <message>
         <source>Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Tab</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Cima</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Baixo</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Colar</translation>
     </message>
     <message>
         <source>Quick Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Edição Rápida</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Nenhum</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Esquerda</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Direita</translation>
     </message>
     <message>
         <source>ScrollBar</source>
-        <translation type="unfinished"></translation>
+        <translation>Barra</translation>
     </message>
     <message>
         <source>Show Command List</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Lista</translation>
     </message>
     <message>
         <source>Hide Command List</source>
-        <translation type="unfinished"></translation>
+        <translation>Esconder Lista</translation>
     </message>
 </context>
 <context>
     <name>PlayListSelection</name>
     <message>
         <source>Command Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecção de Comandos</translation>
     </message>
 </context>
 <context>
     <name>editCommandBase</name>
     <message>
         <source>Add command</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar comando</translation>
     </message>
     <message>
         <source>Enter command to add:</source>
-        <translation type="unfinished"></translation>
+        <translation>Comando a adicionar:</translation>
     </message>
 </context>
 </TS>

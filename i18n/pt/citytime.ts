@@ -22,7 +22,7 @@
     <name>CityTimeBase</name>
     <message>
         <source>City Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Fusos Horários</translation>
     </message>
     <message>
         <source>&lt;location 4&gt;</source>

@@ -3,84 +3,86 @@
     <name>AppearanceSettings</name>
     <message>
         <source>Appearance</source>
-        <translation type="unfinished"></translation>
+        <translation>Aparência</translation>
     </message>
     <message>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilo</translation>
     </message>
     <message>
         <source>Edit current scheme...</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar o esquema actual...</translation>
     </message>
     <message>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Cores</translation>
     </message>
     <message>
         <source>Enable background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar imagem de fundo</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Omissão</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar...</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Fundo</translation>
     </message>
     <message>
         <source>Do you want to apply your changes?
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicar alterações?
+</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sim</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Não</translation>
     </message>
     <message>
         <source>Delete scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar esquema</translation>
     </message>
     <message>
         <source>Do you really want to delete
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Tem a certeza que quer apagar
+</translation>
     </message>
     <message>
         <source>Unable to delete current scheme.</source>
-        <translation type="unfinished"></translation>
+        <translation>O esquema actual não pode ser apagado.</translation>
     </message>
     <message>
         <source>Current scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Esquema actual</translation>
     </message>
 </context>
 <context>
     <name>EditScheme</name>
     <message>
         <source>Edit scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar esquema</translation>
     </message>
 </context>
 </TS>

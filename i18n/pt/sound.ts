@@ -3,31 +3,31 @@
     <name>SoundSettingsBase</name>
     <message>
         <source>Vmemo Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuração Vmemo</translation>
     </message>
     <message>
         <source>Levels</source>
-        <translation type="unfinished"></translation>
+        <translation>Níveis</translation>
     </message>
     <message>
         <source>Loud</source>
-        <translation type="unfinished"></translation>
+        <translation>Alto</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Saída</translation>
     </message>
     <message>
         <source>Mic</source>
-        <translation type="unfinished"></translation>
+        <translation>Mic</translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation type="unfinished"></translation>
+        <translation>Silêncio</translation>
     </message>
     <message>
         <source>Vmemo</source>
-        <translation type="unfinished"></translation>
+        <translation>Vmemo</translation>
     </message>
     <message>
         <source>Sample Rate</source>
@@ -35,47 +35,47 @@
     </message>
     <message>
         <source>8000</source>
-        <translation type="unfinished"></translation>
+        <translation>8000</translation>
     </message>
     <message>
         <source>11025</source>
-        <translation type="unfinished"></translation>
+        <translation>11025</translation>
     </message>
     <message>
         <source>22050</source>
-        <translation type="unfinished"></translation>
+        <translation>22050</translation>
     </message>
     <message>
         <source>33075</source>
-        <translation type="unfinished"></translation>
+        <translation>33075</translation>
     </message>
     <message>
         <source>44100</source>
-        <translation type="unfinished"></translation>
+        <translation>44100</translation>
     </message>
     <message>
         <source>Stereo</source>
-        <translation type="unfinished"></translation>
+        <translation>Estéreo</translation>
     </message>
     <message>
         <source>16 bit</source>
-        <translation type="unfinished"></translation>
+        <translation>16 bits</translation>
     </message>
     <message>
         <source>Visual Alerts</source>
-        <translation type="unfinished"></translation>
+        <translation>Alertas Visuais</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Localização:</translation>
     </message>
     <message>
         <source>Record Key:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tecla Gravação:</translation>
     </message>
     <message>
         <source>Taskbar Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Icon na Barra de Tarefas</translation>
     </message>
     <message>
         <source>Key_Escape</source>
