@@ -77,7 +77,36 @@ typedef struct {
 #define LED_ON    OD_IOW( 'f', 5, LED_IN )
 #define FLITE_ON  OD_IOW( 'f', 7, FLITE_IN )
 
+using namespace Opie::Core;
 using namespace Opie::Core::Internal;
+
+struct j_button jornada56x_buttons [] = {
+    { Model_Jornada_56x,
+    Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
+    "devicebuttons/jornada56x_calendar",
+    "datebook", "nextView()",
+    "today", "raise()" },
+    { Model_Jornada_56x,
+    Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
+    "devicebuttons/jornada56x_contact",
+    "addressbook", "raise()",
+    "addressbook", "beamBusinessCard()" },
+    { Model_Jornada_56x,
+    Qt::Key_F14, QT_TRANSLATE_NOOP("Button", "Todo Button"),
+    "devicebuttons/jornada56x_todo",
+    "todolist", "raise()",
+    "todolist", "create()" },
+    { Model_Jornada_56x,
+    Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Home Button"),
+    "devicebuttons/jornada56x_home",
+    "QPE/Launcher", "home()",
+    "buttonsettings", "raise()" },
+    { Model_Jornada_56x,
+    Qt::Key_F15, QT_TRANSLATE_NOOP("Button", "Record Button"),
+    "devicebuttons/jornada56x_record",
+    "QPE/VMemo", "toggleRecord()",
+    "sound", "raise()" },
+};
 
 void Jornada::init(const QString&)
 {
@@ -100,6 +129,32 @@ void Jornada::init(const QString&)
     }
 }
 
+void Jornada::initButtons()
+{
+    if ( d->m_buttons )
+        return;
+
+    d->m_buttons = new QValueList <ODeviceButton>;
+
+    for ( uint i = 0; i < ( sizeof( jornada56x_buttons ) / sizeof( j_button )); i++ ) {
+        j_button *ib = jornada56x_buttons + i;
+        ODeviceButton b;
+
+        if (( ib->model & d->m_model ) == d->m_model ) {
+            b. setKeycode ( ib->code );
+            b. setUserText ( QObject::tr ( "Button", ib->utext ));
+            b. setPixmap ( Resource::loadPixmap ( ib->pix ));
+            b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( ib->fpressedservice ), ib->fpressedaction ));
+            b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( ib->fheldservice ), ib->fheldaction ));
+
+            d->m_buttons->append ( b );
+        }
+    }
+    reloadButtonMapping();
+
+    QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
+    connect ( sysch, SIGNAL( received(const QCString&,const QByteArray&)), this, SLOT( systemMessage(const QCString&,const QByteArray&)));
+}
 
 int Jornada::displayBrightnessResolution() const
 {
@@ -110,7 +165,6 @@ int Jornada::displayBrightnessResolution() const
 bool Jornada::setDisplayBrightness( int bright )
 {
     bool res = false;
-    int fd;
 
     if ( bright > 255 )
         bright = 255;
@@ -143,7 +197,7 @@ bool Jornada::suspend( )
     bool res = false;
     ODevice::sendSuspendmsg();
 
-    struct timeval tvs, tvn;
+    struct timeval tvs;
     ::gettimeofday ( &tvs, 0 );
 
     ::sync(); // flush fs caches
@@ -155,9 +209,8 @@ bool Jornada::suspend( )
 bool Jornada::setDisplayStatus ( bool on )
 {
     bool res = false;
-    int fd;
-
-    QString cmdline = QString().sprintf( "echo %d > /sys/class/lcd/sa1100fb/power; echo %d > /sys/class/backlight/sa1100fb/power", on ? "1" : "0",on ? "1" : "0" );
+ 
+    QString cmdline = QString().sprintf( "echo %d > /sys/class/lcd/sa1100fb/power; echo %d > /sys/class/backlight/sa1100fb/power", on ? "1" : "0", on ? "1" : "0" );
 
     res = ( ::system( (const char*) cmdline ) == 0 );
 
