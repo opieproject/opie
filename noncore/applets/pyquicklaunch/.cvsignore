@@ -1,0 +1,6 @@
+Makefile*
+advancedconfigbase.cpp
+advancedconfigbase.h
+moc_*
+.moc
+.obj
