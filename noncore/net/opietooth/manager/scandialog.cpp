@@ -158,19 +158,17 @@ namespace OpieTooth {
             return;
         }
 
-        QList<RemoteDevice> *deviceList = new QList<RemoteDevice>;
-        deviceList->setAutoDelete(true);
+        QValueList<RemoteDevice> deviceList;
 
         QListViewItemIterator it( ListView1 );
         for ( ; it.current(); ++it ) {
             if ( ((QCheckListItem*)it.current())->isOn() ) {
-                RemoteDevice * device = new RemoteDevice(  it.current()->text(1), it.current()->text(0));
-                deviceList->append( device );
+                RemoteDevice device(  it.current()->text(1), it.current()->text(0));
+                deviceList.append( device );
             }
         }
         qDebug("vor emit");
-        emit selectedDevices( *deviceList );
-        delete deviceList;
+        emit selectedDevices( deviceList );
     }
 
 /*

@@ -12,16 +12,16 @@ namespace OpieTooth {
         BTListItem( QListViewItem * parent );
 
         // name, and then mac and then servicetype
-        BTListItem( QListView * ,  QString, QString, QString  );
-        BTListItem( QListViewItem * parent , QString, QString , QString );
+        BTListItem( QListView * ,  const QString&, const QString&, const QString&  );
+        BTListItem( QListViewItem * parent , const QString&, const QString& , const QString& );
         ~BTListItem();
 
-        void setMac( QString );
-        QString mac();
-        void setName( QString );
-        QString name();
-        void setType( QString );
-        QString type();
+        void setMac( const QString& );
+        QString mac()const;
+        void setName( const QString& );
+        QString name()const;
+        void setType( const QString& );
+        QString type()const;
     private:
         QString m_name;
         QString m_mac;

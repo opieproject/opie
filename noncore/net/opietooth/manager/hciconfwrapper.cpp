@@ -16,11 +16,11 @@ namespace OpieTooth {
     }
 
 
-    void HciConfWrapper::setPinHelper( QString app  ) {
+    void HciConfWrapper::setPinHelper( const QString& app  ) {
         setValue( "pin_helper"  , app  );
     }
 
-    void HciConfWrapper::setName( QString name ) {
+    void HciConfWrapper::setName( const QString &name ) {
         qDebug ("NAME : " + name);
         setValue( "name" , "\"" +  name + "\"" );
     }

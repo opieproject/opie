@@ -432,9 +432,10 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
      * Open the "scan for devices"  dialog
      */
     void BlueBase::startScan() {
-        ScanDialog *scan = new ScanDialog( this, "", true);
-        QObject::connect( scan, SIGNAL( selectedDevices( QList<RemoteDevice>& ) ),
-                         this, SLOT( addSearchedDevices( QList<RemoteDevice>& ) ) );
+        ScanDialog *scan = new ScanDialog( this, "ScanDialog",
+                                           true, WDestructiveClose );
+        QObject::connect( scan, SIGNAL( selectedDevices( QValueList<RemoteDevice>& ) ),
+                         this, SLOT( addSearchedDevices( QValueList<RemoteDevice>& ) ) );
 
         scan->showMaximized();
     }

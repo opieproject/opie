@@ -70,7 +70,7 @@ public slots:
         int progressStat;
 
     signals:
-        void selectedDevices(QList<RemoteDevice>&);
+        void selectedDevices(QValueList<RemoteDevice>&);
     };
 
 

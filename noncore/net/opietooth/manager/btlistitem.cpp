@@ -5,20 +5,14 @@ namespace OpieTooth {
 
 
     BTListItem::BTListItem( QListView * parent  ) : QListViewItem( parent ) {
-        m_name = "";
-        m_mac ="";
-        m_type ="";
     }
 
     BTListItem::BTListItem( QListViewItem * parent ) : QListViewItem( parent ) {
-        m_name = "";
-        m_mac ="";
-        m_type ="";
     }
 
 
     // name, and then mac and then servicetype
-    BTListItem::BTListItem( QListView * parent,  QString name , QString mac, QString type   )
+    BTListItem::BTListItem( QListView * parent,  const QString &name , const QString& mac, const QString& type   )
         : QListViewItem( parent, name ){
 
         m_name = name;
@@ -27,7 +21,7 @@ namespace OpieTooth {
 
     }
 
-    BTListItem::BTListItem( QListViewItem * parent , QString name, QString mac, QString type   )
+    BTListItem::BTListItem( QListViewItem * parent , const QString& name, const QString& mac, const QString& type   )
         : QListViewItem( parent, name ){
 
         m_name = name;
@@ -36,27 +30,27 @@ namespace OpieTooth {
     }
 
 
-    void BTListItem::setMac( QString mac ) {
+    void BTListItem::setMac( const QString& mac ) {
         m_mac = mac;
     }
 
-    QString BTListItem::mac() {
+    QString BTListItem::mac() const {
         return m_mac;
     }
 
-    void BTListItem::setName( QString name ) {
+    void BTListItem::setName( const QString& name ) {
         m_name = name;
     }
 
-    QString BTListItem::name() {
+    QString BTListItem::name() const {
         return m_name;
     }
 
-    void BTListItem::setType( QString type ) {
+    void BTListItem::setType( const QString& type ) {
         m_type = type;
     }
 
-    QString BTListItem::type() {
+    QString BTListItem::type() const {
         return m_type;
     }
 

@@ -11,8 +11,8 @@ namespace OpieTooth {
         HciConfWrapper( const QString &fileName );
         ~HciConfWrapper();
 
-        void setPinHelper( QString app  );
-        void setName( QString name );
+        void setPinHelper( const QString& app  );
+        void setName( const QString& name );
         void setIscan( bool enable );
         void setPscan( bool enable );
         void setAuth( bool enable);
