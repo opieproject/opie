@@ -35,7 +35,6 @@ using namespace Opie::Core;
 /* STD */
 #include <errno.h>
 #include <string.h>
-#include <linux/input.h>
 #include <sys/fcntl.h>
 #include <sys/ioctl.h>
 

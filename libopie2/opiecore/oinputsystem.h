@@ -29,12 +29,11 @@
 #ifndef OINPUTSYSTEM_H
 #define OINPUTSYSTEM_H
 
+#include "linux_input.h"
+
 /* QT */
 #include <qobject.h>
 #include <qdict.h>
-
-/* STD */
-#include <linux/input.h>
 
 namespace Opie {
 namespace Core {
