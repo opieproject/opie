@@ -70,7 +70,7 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 		contrast_ac->hide();
 	}
 
-	QStrList freq = ODevice::inst()->cpuFrequencies();
+	QStrList freq = ODevice::inst()->allowedCpuFrequencies();
 	if ( freq.count() ) {
 		frequency->insertStrList( freq );
 		frequency_ac->insertStrList( freq );
@@ -210,7 +210,7 @@ void LightSettings::setContrast ( int contr )
 void LightSettings::setFrequency ( int index )
 {
 qWarning("LightSettings::setFrequency(%d)", index);
-	ODevice::inst ( )-> setCpuFrequency(index);
+	ODevice::inst ( )-> setCurrentCpuFrequency(index);
 }
 
 void LightSettings::resetBacklight ( )

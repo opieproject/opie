@@ -198,9 +198,8 @@ public:
 	virtual int readLightSensor ( );
 	virtual int lightSensorResolution ( ) const;
 
-	QStrList &cpuFrequencies() const;
-	bool setCpuFrequency(uint index);
-	int cpuFrequency() const;
+	const QStrList &allowedCpuFrequencies() const;
+	bool setCurrentCpuFrequency(uint index);
 
 	/**
 	 * Returns the available buttons on this device.  The number and location

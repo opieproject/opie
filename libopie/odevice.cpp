@@ -775,20 +775,20 @@ int ODevice::lightSensorResolution ( ) const
 }
 
 /**
- * @return a list with valid CPU frequency
+ * @return a list with CPU frequencies supported by the hardware
  */
-QStrList &ODevice::cpuFrequencies ( ) const
+const QStrList &ODevice::allowedCpuFrequencies ( ) const
 {
 	return *d->m_cpu_frequencies;
 }
 
 
 /**
- * Set desired cpu frequency
+ * Set desired CPU frequency
  * 
  * @param index index into d->m_cpu_frequencies of the frequency to be set
  */
-bool ODevice::setCpuFrequency(uint index)
+bool ODevice::setCurrentCpuFrequency(uint index)
 {
 	if (index >= d->m_cpu_frequencies->count())
 		return false;
