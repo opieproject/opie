@@ -46,7 +46,7 @@ QString Doc_DirLister::setStartPath(const QString&) {
         Global::findDocuments(&ds,Mtype_str);
         QListIterator<DocLnk> dit(ds.children());
         for( ; dit.current(); ++dit) {
-            if (! (*dit)->isValid()) continue;
+//            if (! (*dit)->isValid()) continue;
             m_namemap[(*dit)->name()]=(*dit)->file();
             m_filemap[(*dit)->file()]=(*dit)->name();
         }
