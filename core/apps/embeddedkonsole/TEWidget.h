@@ -53,20 +53,13 @@ public:
     const ColorEntry* getColorTable() const;
     const ColorEntry* getdefaultColorTable() const;
     void              setColorTable(const ColorEntry table[]);
-
     void setScrollbarLocation(int loc);
     enum { SCRNONE=0, SCRLEFT=1, SCRRIGHT=2 };
-
     void setScroll(int cursor, int lines);
     void doScroll(int lines);
-
     void doHScroll(int lines);
-
-    
     void emitSelection();
-  void setWrapAt(int columns);
-
-public:
+    void setWrapAt(int columns);
 
     void setImage(const ca* const newimg, int lines, int columns);
 
@@ -79,8 +72,8 @@ public:
 
     QSize sizeHint() const;
 
-public:
     bool useHorzScroll;
+    bool useBeep;
 
     void Bell();
     void emitText(QString text);

@@ -332,7 +332,8 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   font_a   = 1;
   word_selection_mode = FALSE;
   hposition = 0;
-vcolumns = 0;
+  vcolumns = 0;
+  useBeep = true;
  
   setMouseMarks(TRUE);
   setVTFont( QFont("fixed") );
@@ -1107,7 +1108,9 @@ void TEWidget::Bell()
 {
 //#ifdef QT_QWS_SHARP
 //# ifndef QT_NO_COP
-    QCopEnvelope( "QPE/TaskBar", "soundAlarm()" );
+    if(useBeep) 
+        QCopEnvelope( "QPE/TaskBar", "soundAlarm()" );
+    
 //# endif
 //#else
 //# ifndef QT_NO_SOUND

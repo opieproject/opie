@@ -371,6 +371,10 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   configMenu->insertItem(tr( "ScrollBar" ),scrollMenu);
 
   configMenu->insertItem(tr( "Wrap" ));
+  int jut = configMenu->insertItem(tr( "Use Beep" ));
+  cfg.setGroup("Menubar");
+  configMenu->setItemChecked(jut, cfg.readBoolEntry("useBeep",0));
+
   
 //scrollMenuSelected(-29);
 //   cfg.setGroup("ScrollBar");
@@ -787,34 +791,34 @@ void Konsole::colorMenuSelected(int iD)
 
 void Konsole::configMenuSelected(int iD)
 {
-//         QString temp;
-//         qDebug( temp.sprintf("configmenu %d",iD));
+//     QString temp;
+//     qDebug( temp.sprintf("configmenu %d",iD));
     TEWidget* te = getTe();
     Config cfg("Konsole");
     cfg.setGroup("Menubar");
-    if( iD  == -4) {
-        cfg.setGroup("Tabs");
-        QString tmp=cfg.readEntry("Position","Bottom");
-
-        if(tmp=="Top") {
-            tab->setTabPosition(QTabWidget::Bottom);
-            configMenu->changeItem( iD,"Tabs on Top");
-            cfg.writeEntry("Position","Bottom");
-        } else {
-            tab->setTabPosition(QTabWidget::Top);
-            configMenu->changeItem( iD,"Tabs on Bottom");
-            cfg.writeEntry("Position","Top");
-        }
-    }
-    int i;
+    int i,j;
 #ifdef QWS_QT_OPIE
-i=-29;
+    i=-29;j=-30;
 #else
-i=-28;
+    i=-28;j=-29;
 #endif
 
-    if( iD  == i) {
-    cfg.setGroup("ScrollBar");
+    if(iD == -4) {
+          cfg.setGroup("Tabs");
+          QString tmp=cfg.readEntry("Position","Bottom");
+
+          if(tmp=="Top") {
+              tab->setTabPosition(QTabWidget::Bottom);
+              configMenu->changeItem( iD,"Tabs on Top");
+              cfg.writeEntry("Position","Bottom");
+          } else {
+              tab->setTabPosition(QTabWidget::Top);
+              configMenu->changeItem( iD,"Tabs on Bottom");
+              cfg.writeEntry("Position","Top");
+          }
+      }
+      if(iD == i) {
+          cfg.setGroup("ScrollBar");
           bool b=cfg.readBoolEntry("HorzScroll",0);
           b=!b;
           cfg.writeEntry("HorzScroll", b );
@@ -826,7 +830,16 @@ i=-28;
               te->setScrollbarLocation(0);
           }
           te->setScrollbarLocation( cfg.readNumEntry("Position",2));
-    }   
+      }
+      if(iD ==  j) {
+          cfg.setGroup("Menubar");
+          bool b=cfg.readBoolEntry("useBeep",0);
+          b=!b;
+          cfg.writeEntry("useBeep", b );
+          cfg.write();
+          configMenu->setItemChecked(j,b);
+          te->useBeep=b;
+      }
 }
 
 void Konsole::changeCommand(const QString &text, int c)
@@ -981,9 +994,9 @@ void Konsole::changeForegroundColor(const QColor &color) {
     int r, g, b;
     color.rgb(&r,&g,&b);
     foreground.setRgb(r,g,b);
-//     QString colors;
-//     colors.sprintf("%d,%d,%d"color.red,color.green,color.blue);
+
     cfg.writeEntry("foreground",color.name());
+    qDebug("foreground "+color.name());
     cfg.write();
 
 qDebug("do other dialog");
@@ -1004,9 +1017,8 @@ void Konsole::changeBackgroundColor(const QColor &color) {
     int r, g, b;
     color.rgb(&r,&g,&b);
     background.setRgb(r,g,b);
-//     QString colors;
-//     colors.sprintf("%d,%d,%d"color.red,color.green,color.blue);
     cfg.writeEntry("background",color.name());
+    qDebug("background "+color.name());
     cfg.write();
 }
 
@@ -1025,8 +1037,8 @@ i=-28;
         te->setWrapAt(0);
         configMenu->setItemChecked( i,TRUE);
     } else {
-        te->setWrapAt(90);
-//        te->setWrapAt(120);
+//        te->setWrapAt(90);
+        te->setWrapAt(120);
         configMenu->setItemChecked( i,FALSE);
     }       
 }
