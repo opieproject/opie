@@ -14,6 +14,7 @@
 
 using namespace MediumMountSetting;
 
+/* TRANSLATOR MediumMountSetting::MainWindow */
 
 MainWindow::MainWindow( QWidget *parent, const char *name, bool modal, WFlags )
   : QDialog( parent, name, modal, WStyle_ContextHelp  )

@@ -15,6 +15,8 @@
 
 using namespace MediumMountSetting;
 
+/* TRANSLATOR MediumMountSetting::MediumGlobalWidget */
+
 MediumGlobalWidget::MediumGlobalWidget(QWidget *wid, const char *name )
   : QWidget( wid, name, WStyle_ContextHelp )
 {

@@ -22,6 +22,8 @@
 
 using namespace MediumMountSetting;
 
+/* TRANSLATOR MediumMountSetting::MediumMountWidget */
+
 MediumMountWidget::MediumMountWidget(const QString &path,
              const QPixmap &pix,
              QWidget *parent,
