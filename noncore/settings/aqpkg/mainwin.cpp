@@ -43,7 +43,6 @@
 #include "categoryfilterimpl.h"
 #include "datamgr.h"
 #include "global.h"
-#include "helpwindow.h"
 #include "inputdlg.h"
 #include "ipkg.h"
 #include "installdlgimpl.h"
@@ -204,18 +203,6 @@ MainWindow :: MainWindow()
     connect( a, SIGNAL( activated() ), this, SLOT( displaySettings() ) );
     a->addTo( popup );
 
-    popup->insertSeparator();
-
-    a = new QAction( tr( "Help" ), Resource::loadPixmap( "help_icon" ), QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here for help." ) );
-    connect( a, SIGNAL( activated() ), this, SLOT( displayHelp() ) );
-    a->addTo( popup );
-
-    a = new QAction( tr( "About" ), Resource::loadPixmap( "UtilsIcon" ), QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here for software version information." ) );
-    connect( a, SIGNAL( activated() ), this, SLOT( displayAbout() ) );
-    a->addTo( popup );
-
     mb->insertItem( tr( "Options" ), popup );
     
     // Finish find toolbar creation
@@ -353,13 +340,6 @@ void MainWindow :: displaySettings()
     }
     delete dlg;
 }
-
-void MainWindow :: displayHelp()
-{
-    HelpWindow *dlg = new HelpWindow( this );
-    dlg->exec();
-    delete dlg;
-}
     
 void MainWindow :: displayFindBar()
 {
@@ -391,11 +371,6 @@ void MainWindow :: hideFindBar()
 void MainWindow :: hideJumpBar()
 {
     jumpBar->hide();
-}
-
-void MainWindow :: displayAbout()
-{
-    QMessageBox::about( this, tr( "About AQPkg" ), tr( VERSION_TEXT ) );
 }
 
 void MainWindow :: filterUninstalledPackages()

@@ -11,7 +11,6 @@ HEADERS		= global.h \
 		  destination.h \
 		  utils.h \
 		  server.h \
-		  helpwindow.h \
 		  letterpushbutton.h \
 		  inputdlg.h \
 		  categoryfilterimpl.h
@@ -27,7 +26,6 @@ SOURCES		= mainwin.cpp \
 		  destination.cpp \
 		  utils.cpp \
 		  server.cpp \
-		  helpwindow.cpp \
 		  letterpushbutton.cpp \
 		  inputdlg.cpp \
 		  version.cpp \
