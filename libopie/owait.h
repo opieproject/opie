@@ -63,6 +63,7 @@ public:
     QLabel *m_lb;
     QTimer *m_waitTimer;
     int m_timerLength;
+    int m_aniSize;
 };
 
 #endif

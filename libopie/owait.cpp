@@ -41,7 +41,8 @@ OWait::OWait(QWidget *parent, const char* msg, bool dispIcon )
     hbox->activate();
 
     m_pix = Resource::loadPixmap( "BigBusy" );
-    resize( 48, 48 );
+    m_aniSize = m_pix.height();
+    resize( m_aniSize, m_aniSize );
 
     m_timerLength = 10;
 
@@ -56,12 +57,12 @@ void OWait::timerEvent( QTimerEvent * )  {
 
 void OWait::paintEvent( QPaintEvent * )  {
       QPainter p( m_lb  );
-      p.drawPixmap( 0, 0, m_pix, 48 * frame,  0, 48, 48 );
+      p.drawPixmap( 0, 0, m_pix, m_aniSize * frame,  0, m_aniSize, m_aniSize );
 }
 
 void OWait::show()  {
 
-    move( ( ( qApp->desktop()->width() ) / 2 ) - 24, ( ( qApp->desktop()->height() ) / 2 ) - 24 );
+    move( ( ( qApp->desktop()->width() ) / 2 ) - ( m_aniSize / 2 ), ( ( qApp->desktop()->height() ) / 2 ) - ( m_aniSize / 2 ) );
     startTimer( 300 );
     m_waitTimer->start( m_timerLength * 1000, true );
     QDialog::show();
