@@ -17,8 +17,8 @@
 #include "filePermissions.h"
 #include "output.h"
 
-#include <opie/ofileselector.h>
-#include <opie/ofiledialog.h>
+//  #include <opie/ofileselector.h>
+//  #include <opie/ofiledialog.h>
 
 
 #include <qpe/lnkproperties.h>
@@ -1732,8 +1732,21 @@ QString  AdvancedFm::getFileSystemType(const QString &currentText) {
   return baseFs;
 }
 
-QString  AdvancedFm::getDiskSpace( const QString &) {
-
+QString  AdvancedFm::getDiskSpace( const QString &path) {
+   struct statfs fss;
+   if ( !statfs( path.latin1(), &fss ) ) {
+     int blkSize = fss.f_bsize;
+ //    int totalBlks = fs.f_blocks;
+     int availBlks = fss.f_bavail;
+ 
+     long mult = blkSize / 1024;
+     long div = 1024 / blkSize;
+     if ( !mult ) mult = 1;
+     if ( !div ) div = 1;
+ 
+     return QString::number(availBlks * mult / div);
+   }
+   return "";
 }
 
 void AdvancedFm::doBeam() {
@@ -1868,7 +1881,6 @@ void AdvancedFm::cancelMenuTimer() {
 }
 
 QString AdvancedFm::checkDiskSpace(const QString &path) {
-
   struct statfs fss;
   if ( !statfs( path.latin1(), &fss ) ) {
     int blkSize = fss.f_bsize;
