@@ -175,6 +175,16 @@ public:
 
 	static void show_mx(QWidget* mw, bool nomaximize, QString &strName/* = QString::null */)
 	{
+		    // ugly hack, remove that later after finding a sane solution
+            // Addendum: Only Sharp currently has models with high resolution but (physically) small displays,
+            // so this is only useful if QT_QWS_SIMPAD is NOT defined. E.g. SIMpad has 800x600 but has
+            // a (physically) large enough display to use the small icons
+#if defined(OPIE_HIGH_RES_SMALL_PHY)
+            if ( QPEApplication::desktop() ->width() >= 600 && ( mw->inherits("QMainWindow") || mw->isA("QMainWindow") ) )  {
+                ( (  QMainWindow* ) mw )->setUsesBigPixmaps( true );
+            }
+#endif
+
 	    QPoint p;
 	    QSize s;
 		bool max;
