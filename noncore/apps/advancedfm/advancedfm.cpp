@@ -208,8 +208,8 @@ AdvancedFm::AdvancedFm( )
     currentRemoteDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
     currentRemoteDir.setPath( QDir::currentDirPath());
 
-b = TRUE;
- currentPathCombo = new QComboBox( FALSE, this, "currentPathCombo" );
+    b = TRUE;
+    currentPathCombo = new QComboBox( FALSE, this, "currentPathCombo" );
     currentPathCombo->setEditable(TRUE);
     layout->addMultiCellWidget( currentPathCombo, 3, 3, 0, 6);
     currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
@@ -562,7 +562,7 @@ void AdvancedFm::doRemoteCd()
 
 void AdvancedFm::showHidden()
 {
-    if (!b) {
+    if (b) {
     currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
 //     localMenu->setItemChecked(localMenu->idAt(0),TRUE);
 //    currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
@@ -579,7 +579,7 @@ void AdvancedFm::showHidden()
 
 void AdvancedFm::showRemoteHidden()
 {
-    if (!b) {
+    if (b) {
     currentRemoteDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
 //     viewMenu->setItemChecked(localMenu->idAt(0),TRUE);
 //    currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
@@ -643,7 +643,7 @@ void AdvancedFm::showLocalMenu(QListViewItem * item)
     m.insertItem( tr( "Set Permissions" ), this, SLOT( filePerms() ));
     m.insertItem( tr( "Properties" ), this, SLOT( doProperties() ));
     m.setCheckable(TRUE);
-    if (b)
+    if (!b)
         m.setItemChecked(m.idAt(0),TRUE);
     else
         m.setItemChecked(m.idAt(0),FALSE);
@@ -676,7 +676,7 @@ void AdvancedFm::showRemoteMenu(QListViewItem * item)
     m.insertItem( tr( "Set Permissions" ), this, SLOT( filePerms() ));
     m.insertItem( tr( "Properties" ), this, SLOT( doProperties() ));
     m.setCheckable(TRUE);
-    if (b)
+    if (!b)
         m.setItemChecked(m.idAt(0),TRUE);
     else
         m.setItemChecked(m.idAt(0),FALSE);
