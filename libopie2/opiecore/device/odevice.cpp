@@ -191,7 +191,7 @@ ODevice::ODevice()
     // identified by /etc/familiar-version or /etc/oz_version.
     // Then check for OpenEmbedded and lastly, read /etc/issue
 
-    for ( unsigned int i = 0; i < sizeof distributions; ++i )
+    for ( unsigned int i = 0; i < sizeof(distributions)/sizeof(ODistribution); ++i )
     {
         if ( QFile::exists( distributions[i].sysvfile ) )
         {
