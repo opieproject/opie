@@ -88,7 +88,8 @@ Score: %1</translation>
     <message>
         <source>%1 points: Bonus
 </source>
-        <translation></translation>
+        <translation>%1 punten: Bonus
+</translation>
     </message>
     <message>
         <source>%1 points: Total score
