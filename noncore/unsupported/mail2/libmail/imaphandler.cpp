@@ -170,7 +170,7 @@ QString IMAPHandler::iStatus(const QString &mailbox, const QString &items)
 	return tag(false);
 }
 
-QString IMAPHandler::iAppend(const QString &mailbox, const QString &literal, const QString &flags, const QString &datetime = 0)
+QString IMAPHandler::iAppend(const QString &mailbox, const QString &literal, const QString &flags, const QString &datetime)
 {
 	doLogin();
 

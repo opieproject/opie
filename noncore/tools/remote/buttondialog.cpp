@@ -16,7 +16,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 #include "buttondialog.h"
 
-ButtonDialog::ButtonDialog(QString buttonName, QWidget *parent=0, const char*name=0, bool modal=FALSE, WFlags f=0):QDialog(parent, name, modal, f)
+ButtonDialog::ButtonDialog(QString buttonName, QWidget *parent, const char*name, bool modal, WFlags f):QDialog(parent, name, modal, f)
 {
 	setCaption(tr(buttonName));
 
@@ -111,7 +111,7 @@ QStringList ButtonDialog::getRemotes()
 		return NULL;
 	}
 
-	if(std::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
+	if(::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
 	{
 		QMessageBox *mb = new QMessageBox("Error!",
 											"couldnt connect to socket",
@@ -154,7 +154,7 @@ QStringList ButtonDialog::getRemotes()
 		return NULL;
 	}
 
-	std::close(fd);
+	::close(fd);
 	return list;
 }
 
@@ -184,7 +184,7 @@ QStringList ButtonDialog::getButtons(const char *remoteName)
 	}
 
 
-	if(std::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
+	if(::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
 	{
 		QMessageBox *mb = new QMessageBox("Error!",
 											"couldnt connect to socket",
@@ -230,7 +230,7 @@ QStringList ButtonDialog::getButtons(const char *remoteName)
 		return NULL;
 	}
 
-	std::close(fd);
+	::close(fd);
 	return list;
 }
 

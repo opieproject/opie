@@ -169,8 +169,8 @@ template <unsigned int SH> inline fixed<SH> sqrt ( const fixed<SH> &f )
 	if ( f. m_f <= 0 )
 		return fixed<SH> ( 0, true );
 		
-	fixed<SH>::fix_t a0 = 0;
-	fixed<SH>::fix_t a1 = f. m_f; // take value as first approximation
+	typename fixed<SH>::fix_t a0 = 0;
+	typename fixed<SH>::fix_t a1 = f. m_f; // take value as first approximation
 	
 	do {
 		a0 = a1;

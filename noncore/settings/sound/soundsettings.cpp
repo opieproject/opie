@@ -38,8 +38,8 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-SoundSettings::SoundSettings( QWidget* parent,  const char* name, WFlags fl )
-    : SoundSettingsBase( parent, name, TRUE, fl )
+SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
+    : SoundSettingsBase( parent, objname, TRUE, fl )
 {
     keyReset=FALSE;
 

@@ -31,7 +31,7 @@
 #include "packagelistitem.h"
 
 
-MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
+MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   QMainWindow( parent, name, f )
 //  packageListServers( QObject(parent), name ),
 //  packageListSearch( parent, name ),

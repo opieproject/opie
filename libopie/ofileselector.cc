@@ -113,8 +113,8 @@ QTimer::singleShot(6*1000, this, SLOT( slotTest() ) );
 }
 
 OFileSelector::OFileSelector(const QString &mimeFilter, QWidget *parent,
-			     const char *name, bool newVisible = TRUE,
-			     bool closeVisible = FALSE )
+			     const char *name, bool newVisible,
+			     bool closeVisible )
   : QWidget( parent, name )
 {
   m_mimetypes = QStringList::split(";", mimeFilter );

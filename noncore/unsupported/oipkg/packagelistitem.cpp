@@ -159,7 +159,7 @@ void PackageListItem::displayDetails()
   sod = sod.isEmpty()?QString(""):QString(" ("+sod+")");
   setText(0, package->name()+sod );
 	nameItem->setText( 0, QObject::tr("Name: ")+package->name());
-	linkItem->setText( 0, QObject::tr("Link: ")+package->link()?QObject::tr("Yes"):QObject::tr("No"));
+	linkItem->setText( 0, QObject::tr("Link: ")+(package->link()?QObject::tr("Yes"):QObject::tr("No")));
   destItem->setText( 0, QObject::tr("Destination: ")+package->dest() );
   statusItem->setText( 0, QObject::tr("Status: ")+package->status() );
   repaint();

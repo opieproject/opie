@@ -152,7 +152,7 @@ void CardMonitor::cardMessage( const QCString &msg, const QByteArray & ) {
     }
 }
 
-bool CardMonitor::getStatusPcmcia( int showPopUp = FALSE ) {
+bool CardMonitor::getStatusPcmcia( int showPopUp ) {
 
     bool cardWas0 = cardInPcmcia0; // remember last state
     bool cardWas1 = cardInPcmcia1;
@@ -235,7 +235,7 @@ bool CardMonitor::getStatusPcmcia( int showPopUp = FALSE ) {
 }
 
 
-bool CardMonitor::getStatusSd( int showPopUp = FALSE ) {
+bool CardMonitor::getStatusSd( int showPopUp ) {
 
     bool cardWas=cardInSd; // remember last state
     cardInSd=false;

@@ -22,7 +22,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 #include "vcrgroup.h"
 
-VCRGroup::VCRGroup(QWidget *parent=0, const char *name=0) : QWidget(parent, 
+VCRGroup::VCRGroup(QWidget *parent, const char *name) : QWidget(parent, 
 name)
 {
 	QVBoxLayout *vlayout = new QVBoxLayout(this);

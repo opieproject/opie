@@ -99,6 +99,7 @@ int myMessageBox(int wi, int h, QWidget *w, int argc, QStringList args)
 		return 1;
 	case 4:
 		return 2;
+	default: return -1;
 	}
 }
 
@@ -128,7 +129,7 @@ void printusage()
 	printf("      -L [label]         The label for the input field\n");
 	printf("      -F [filename]      An input file (for when it makes sense) [Default = stdin]\n");
 	printf("      -E                 Makes list input editable\n");
-	printf("      -g                 Disable fullscreen\n\0");
+	printf("      -g                 Disable fullscreen\n");
 }
 
 int fileviewer(QPEApplication *a, int argc, QStringList args)

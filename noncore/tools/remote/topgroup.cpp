@@ -16,7 +16,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 #include "topgroup.h"
 
-TopGroup::TopGroup(QWidget *parent=0, const char *name=0):QWidget(parent,name)
+TopGroup::TopGroup(QWidget *parent, const char *name):QWidget(parent,name)
 {
 	QHBoxLayout *layout = new QHBoxLayout(this, 0, -1, 0);
 

@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.33 2002-06-23 13:46:45 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.34 2002-06-23 14:19:13 zecke Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -626,4 +626,5 @@ int VMemo::setToggleButton(int tog) {
       break; 
     };
   }
+  return -1;
 }

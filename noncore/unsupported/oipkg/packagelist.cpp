@@ -10,7 +10,7 @@
 static QDict<Package>  *packageListAll;
 static int packageListAllRefCount = 0;
 
-PackageList::PackageList(QObject *parent=0, const char *name=0)
+PackageList::PackageList(QObject *parent, const char *name)
   : QObject(parent,name), packageIter( packageList )
 {
   empty=true;
@@ -197,7 +197,7 @@ void PackageList::setSettings( PackageManagerSettings *s )
 
 Package* PackageList::getByName( QString n )
 {
-	origPackageList[n];
+	return origPackageList[n];
 }
 
 void PackageList::clear()

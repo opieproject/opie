@@ -16,7 +16,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 #include "mainview.h"
 
-MainView::MainView(QWidget *parent, const char *name=0) : QWidget(parent, name)
+MainView::MainView(QWidget *parent, const char *name) : QWidget(parent, name)
 {
 	setIcon( Resource::loadPixmap( "remote" ) );
 	setCaption(tr("Remote") );

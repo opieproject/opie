@@ -9,7 +9,7 @@
 
 #include "debug.h"
 
-Package::Package( QObject *parent=0, const char *name=0 )
+Package::Package( QObject *parent, const char *name )
 	: QObject(parent,name)
 {
 
@@ -19,7 +19,7 @@ Package::~Package()
 {
 }
 
-Package::Package( PackageManagerSettings *s, QObject *parent=0, const char *name=0 )
+Package::Package( PackageManagerSettings *s, QObject *parent, const char *name )
 	: QObject(parent,name)
 {
 	Package(parent,name);
@@ -45,14 +45,14 @@ void Package::init( PackageManagerSettings *s )
   _version="";
 }
 
-Package::Package( QStringList pack, PackageManagerSettings *s , QObject *parent=0, const char *name=0 )
+Package::Package( QStringList pack, PackageManagerSettings *s , QObject *parent, const char *name )
 	: QObject(parent,name)
 {	
   init(s);
   parsePackage( pack );
 }
 
-Package::Package( QString n, PackageManagerSettings *s, QObject *parent=0, const char *name=0 )
+Package::Package( QString n, PackageManagerSettings *s, QObject *parent, const char *name )
 {	
   init(s);
  	if ( !QFile::exists( n ) )
@@ -66,7 +66,7 @@ Package::Package( QString n, PackageManagerSettings *s, QObject *parent=0, const
   }
 }
 
-Package::Package( Package *pi, QObject *parent=0, const char *name=0 )
+Package::Package( Package *pi, QObject *parent, const char *name )
 {
   init(pi->settings);
   copyValues( pi );

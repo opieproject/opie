@@ -16,7 +16,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 #include "mbox.h"
 
-MBox::MBox(int w, int h, int type, QString title, QString message, QString *btext0 = 0, QString *btext1= 0, QString *btext2 = 0, QWidget *parent=0, const char*name=0, bool modal=true, WFlags f=0):QDialog(parent, name, modal, f)
+MBox::MBox(int w, int h, int type, QString title, QString message, QString *btext0, QString *btext1, QString *btext2, QWidget *parent, const char*name, bool modal, WFlags f):QDialog(parent, name, modal, f)
 {
 	QVBoxLayout *layout = new QVBoxLayout(this);
 

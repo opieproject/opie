@@ -15,7 +15,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 #include "inputdialog.h"
 
-InputDialog::InputDialog(int w, int h, int newtype, QString labelString, QString title, QString filename, bool edit, QWidget *parent=0, const char *name=0, bool modal=true, WFlags f=0):QDialog(parent, name, modal, f)
+InputDialog::InputDialog(int w, int h, int newtype, QString labelString, QString title, QString filename, bool edit, QWidget *parent, const char *name, bool modal, WFlags f):QDialog(parent, name, modal, f)
 {
 	type = newtype;
 	QHBoxLayout *layout = new QHBoxLayout(this);
@@ -114,4 +114,5 @@ QString InputDialog::getString()
 		}
 		return string;
 	}
+	return QString::null;
 }

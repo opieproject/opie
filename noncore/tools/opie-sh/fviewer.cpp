@@ -15,7 +15,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 #include "fviewer.h"
 
-FViewer::FViewer(QString icon, QString filename, QString title, QWidget *parent=0, const char*name=0):QWidget(parent, name)
+FViewer::FViewer(QString icon, QString filename, QString title, QWidget *parent, const char*name):QWidget(parent, name)
 {
 	QVBoxLayout *layout = new QVBoxLayout(this);
 	

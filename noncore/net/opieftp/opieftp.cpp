@@ -499,10 +499,10 @@ void OpieFtp::localUpload()
 
 void OpieFtp::nullifyCallBack()
 {
-        FtpOptions(FTPLIB_CALLBACK, NULL, conn);
-        FtpOptions(FTPLIB_IDLETIME, NULL, conn);
-        FtpOptions(FTPLIB_CALLBACKARG, NULL, conn);
-        FtpOptions(FTPLIB_CALLBACKBYTES, NULL, conn);
+        FtpOptions(FTPLIB_CALLBACK, 0, conn);
+        FtpOptions(FTPLIB_IDLETIME, 0, conn);
+        FtpOptions(FTPLIB_CALLBACKARG, 0, conn);
+        FtpOptions(FTPLIB_CALLBACKBYTES, 0, conn);
 }
 
 void OpieFtp::remoteDownload()
