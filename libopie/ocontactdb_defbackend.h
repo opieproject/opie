@@ -13,11 +13,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactdb_defbackend.h,v 1.1.2.1 2002-09-12 19:06:02 eilers Exp $
+ * Version: $Id: ocontactdb_defbackend.h,v 1.1.2.2 2002-09-14 16:14:21 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb_defbackend.h,v $
- * Revision 1.1.2.1  2002-09-12 19:06:02  eilers
+ * Revision 1.1.2.2  2002-09-14 16:14:21  eilers
+ * Some bugfixes.
+ *
+ * Revision 1.1.2.1  2002/09/12 19:06:02  eilers
  * default backend now in own file
  *
  *
@@ -249,14 +252,16 @@ namespace {
 
 		bool addContact ( const Contact &newcontact )
 		{
+			//qWarning("odefaultbackend: ACTION::ADD");
 			updateJournal (newcontact, Contact::ACTION_ADD);
-			m_contactList.append (newcontact);
+			addContact_p( newcontact );
 			return true;
 		}
 
 		bool replaceContact (int uid, const Contact &contact)
 		{
 			bool found = false;
+			
 			QValueListIterator<Contact> it;
 			for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
 				if ((*it).uid() == uid){
@@ -273,7 +278,7 @@ namespace {
 				return false;
 		}
 
-		bool removeContact (int uid, const Contact &contact)
+		bool removeContact ( int uid )
 		{
 			bool found = false;
 			QValueListIterator<Contact> it;
@@ -284,7 +289,7 @@ namespace {
 				}
 			}
 			if (found) {
-				updateJournal (contact, Contact::ACTION_REMOVE);
+				updateJournal ( *it, Contact::ACTION_REMOVE);
 				m_contactList.remove (it);
 				return true;
 			} else
@@ -298,6 +303,10 @@ namespace {
 		}
 
 	private:
+		void addContact_p( const Contact &newcontact ){
+			m_contactList.append (newcontact);
+		}
+
 		/* This function loads the xml-database and the journalfile */
 		bool load( const QString filename, bool isJournal ) {
 
@@ -367,7 +376,7 @@ namespace {
 			dict.insert( "action", new int(JOURNALACTION) );
 			dict.insert( "actionrow", new int(JOURNALROW) );
 
-			qWarning( "OContactDefaultBackEnd::loading %s", m_fileName.latin1() );
+			//qWarning( "OContactDefaultBackEnd::loading %s", filename.latin1() );
 
 			XMLElement *root = XMLElement::load( filename );
 			if(root != 0l ){ // start parsing
@@ -375,13 +384,13 @@ namespace {
 				 * Contact-Class
 				 */
 				XMLElement *element = root->firstChild();
-				// qWarning("OContactDB::load tagName(): %s", root->tagName().latin1() );
+				//qWarning("OContactDB::load tagName(): %s", root->tagName().latin1() );
 				element = element->firstChild();
 
 				/* Search Tag "Contacts" which is the parent of all Contacts */
-				while( element ){
+				while( element && !isJournal ){
 					if( element->tagName() != QString::fromLatin1("Contacts") ){
-						// qWarning ("OContactDefBack::Searching for Tag \"Contacts\"! Found: %s",
+						//qWarning ("OContactDefBack::Searching for Tag \"Contacts\"! Found: %s",
 						//	  element->tagName().latin1());
 						element = element->nextChild();
 					} else {
@@ -436,6 +445,7 @@ namespace {
 						case JOURNALACTION:
 							action = Contact::journal_action(it.data().toInt());
 							foundAction = true;
+							qWarning ("ODefBack(journal)::ACTION found: %d", action);
 							break;
 						case JOURNALROW:
 							journalKey = it.data().toInt();
@@ -456,13 +466,17 @@ namespace {
 						foundAction = false;
 						switch ( action ) {
 						case Contact::ACTION_ADD:
-							addContact (contact);
+							addContact_p (contact);
 							break;
 						case Contact::ACTION_REMOVE:
-							removeContact (contact.uid(), contact);
+							if ( !removeContact (contact.uid()) )
+								qWarning ("ODefBack(journal)::Unable to remove uid: %d",
+									  contact.uid() );
 							break;
 						case Contact::ACTION_REPLACE:
-							replaceContact (contact.uid(), contact);
+							if ( !replaceContact (contact.uid(), contact) )
+								qWarning ("ODefBack(journal)::Unable to replace uid: %d",
+									  contact.uid() );
 							break;
 						default:
 							qWarning ("Unknown action: ignored !");
@@ -470,7 +484,7 @@ namespace {
 						}
 					}else{
 						/* Add contact to list */
-						addContact (contact);
+						addContact_p (contact);
 					}
 
 					/* Move to next element */
@@ -488,10 +502,22 @@ namespace {
 		void updateJournal( const Contact& cnt,
 				    Contact::journal_action action ) {
 			QFile f( m_journalName );
+			bool created = !f.exists();
 			if ( !f.open(IO_WriteOnly|IO_Append) )
 				return;
+
 			QString buf;
 			QCString str;
+
+			// if the file was created, we have to set the Tag "<CONTACTS>" to
+			// get a XML-File which is readable by our parser.
+			// This is just a cheat, but better than rewrite the parser.
+			if ( created ){
+				buf = "<Contacts>";
+				QCString cstr = buf.utf8();
+				f.writeBlock( cstr.data(), cstr.length() );
+			}
+
 			buf = "<Contact ";
 			cnt.save( buf );
 			buf += " action=\"" + QString::number( (int)action ) + "\" ";
@@ -503,7 +529,7 @@ namespace {
 		void removeJournal()
 		{
 			QFile f ( m_journalName );
-			if ( !f.exists() )
+			if ( f.exists() )
 				f.remove();
 		}
 

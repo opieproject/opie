@@ -14,11 +14,14 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactdb.h,v 1.1.2.20 2002-09-13 11:16:21 eilers Exp $
+ * Version: $Id: ocontactdb.h,v 1.1.2.21 2002-09-14 16:14:21 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.h,v $
- * Revision 1.1.2.20  2002-09-13 11:16:21  eilers
+ * Revision 1.1.2.21  2002-09-14 16:14:21  eilers
+ * Some bugfixes.
+ *
+ * Revision 1.1.2.20  2002/09/13 11:16:21  eilers
  * added prefix increment/decrement
  *
  * Revision 1.1.2.19  2002/09/12 17:01:52  eilers
@@ -169,9 +172,10 @@ class OContactBackend {
 	/** Remove contact.
 	 * Removes contact with the user id <i>uid</i>.
 	 * @param uid The user ID
+	 *
 	 * @return <i>true</i> if successful.
 	 */
-	virtual bool removeContact (int uid, const Contact &contact) = 0;
+	virtual bool removeContact ( int uid ) = 0;
 
 };
 
@@ -298,7 +302,7 @@ class OContactDB: public QObject
 	 * @param uid The user ID
 	 * @return <i>true</i> if successful.
 	 */
-	bool removeContact (int uid, const Contact &contact);
+	bool removeContact ( int uid );
 
 	/** Reload database.
 	 * You should execute this function if the external database

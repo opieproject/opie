@@ -17,11 +17,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.21 2002-09-13 11:32:59 eilers Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.22 2002-09-14 16:14:21 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.21  2002-09-13 11:32:59  eilers
+ * Revision 1.1.2.22  2002-09-14 16:14:21  eilers
+ * Some bugfixes.
+ *
+ * Revision 1.1.2.21  2002/09/13 11:32:59  eilers
  * Sorry for that..!
  *
  * Revision 1.1.2.20  2002/09/13 11:16:21  eilers
@@ -244,16 +247,15 @@ bool OContactDB::save ()
 	if ( m_backEnd->isChangedExternally() )
 		reload();
 
-	/* We just want to store data if we have something to store */
-	if ( m_changed ) {
-		bool status = m_backEnd->save();
-		if ( !status ) return false;
+	bool status = m_backEnd->save();
+	if ( !status ) return false;
 
+	if ( m_changed ) {
+		m_changed = false;
 		/* Now tell everyone that new data is available.
 		 */
 		QCopEnvelope e( "QPE/PIM", "addressbookUpdated()" );
 
-		m_changed = false;
 	}
 
 	return true;
@@ -306,10 +308,10 @@ bool OContactDB::replaceContact (int uid, const Contact &contact)
 	return ( m_backEnd->replaceContact ( uid, contact ) );
 }
 
-bool OContactDB::removeContact (int uid, const Contact &contact)
+bool OContactDB::removeContact (int uid)
 {
 	m_changed = true;
-	return ( m_backEnd->removeContact ( uid, contact ) );
+	return ( m_backEnd->removeContact ( uid ) );
 }
 
 void OContactDB::reload()
