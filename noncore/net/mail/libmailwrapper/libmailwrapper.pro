@@ -16,7 +16,8 @@ HEADERS         = mailwrapper.h \
                mhwrapper.h \
                nntpwrapper.h \
                generatemail.h \
-               storemail.h
+               storemail.h \
+               mailstatics.h
 
 SOURCES         = imapwrapper.cpp \
                mailwrapper.cpp \
@@ -33,7 +34,8 @@ SOURCES         = imapwrapper.cpp \
                mhwrapper.cpp \
               nntpwrapper.cpp \
               generatemail.cpp \
-              storemail.cpp
+              storemail.cpp \
+              mailstatics.cpp
 
 INTERFACES     = logindialogui.ui \
               sendmailprogressui.ui
