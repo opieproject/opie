@@ -18,7 +18,7 @@
 **
 **********************************************************************/
 #include "memorystatus.h"
-#include "../../settings/sysinfo/memory.h"
+#include "memory.h"
 #include "swapfile.h"
 
 #include <qpainter.h>
