@@ -2,7 +2,7 @@ Package: opie-tabmanager
 Files: bin/tabmanager apps/Settings/tabmanager.desktop pics/tabmanager/tabmanager.png
 Priority: optional
 Section: opie/settings
-Version: $QPE_VERSION-$SUB_VERSION-1.0
+Version: $QPE_VERSION-$SUB_VERSION-1.2
 Depends: opie-base ($QPE_VERSION)
 Architecture: arm
 Maintainer: Benjamin Meyer <meyerb@sharpsec.com>
