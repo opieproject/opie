@@ -189,7 +189,9 @@ void KRFBBuffer::drawRawRectChunk( void *data,
   }
 
 	if (scaleFactor > 1) {
-		 p.drawImage( x/scaleFactor, y/scaleFactor, img.smoothScale(w/scaleFactor,h/scaleFactor) );
+		 /* FIXME: proper zero width/height handling */
+		 if (w/scaleFactor != 0)
+			p.drawImage( x/scaleFactor, y/scaleFactor, img.smoothScale(w/scaleFactor,h/scaleFactor) );
 		 emit updated( x/scaleFactor, y/scaleFactor, w/scaleFactor, h/scaleFactor );
 	} 
 	else {
