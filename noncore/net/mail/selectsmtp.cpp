@@ -45,9 +45,15 @@ void selectsmtp::setSelectionlist(QList<SMTPaccount>*list)
 {
     m_smtpList = list;
     accountSelection->clear();
+    if (!m_smtpList || m_smtpList->count()==0) {
+        accountSelection->setEnabled(false);
+        return;
+    }
+    accountSelection->setEnabled(true);
     for (unsigned i = 0; m_smtpList!=0 && i < m_smtpList->count(); ++i) {
         accountSelection->insertItem( m_smtpList->at(i)->getAccountName());
     }
+    m_current_smtp = m_smtpList->at(0);
 }
 
 SMTPaccount*selectsmtp::selected_smtp()
