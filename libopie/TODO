@@ -8,6 +8,11 @@
    - MultipleDocuments
    - Move OFileSelectorItem to it's own files
    - new Dirs created inside the listview
+   - implemenent the compability functions
+   - implement close and new icons
+   - have a persistent QWidgetStack so we can add plugins
+   - mode switching
+   - better Layout handling
    
 - Clickable labels?
    Harlekin you wanted them in the libs?

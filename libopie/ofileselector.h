@@ -70,10 +70,32 @@ class OFileSelector : public QWidget {
   Q_OBJECT
  public:
   enum Mode {OPEN=1, SAVE=2, FILESELECTOR=4, DIR=8 };
-  enum Selector{NORMAL=1, EXTENDED = 2, EXTENDED_ALL =4 };
+  enum Selector{NORMAL=0, EXTENDED = 1, EXTENDED_ALL =2 };
   enum View { DIRS = 1, FILES = 2, TREE = 4, ICON = 8 };
-  OFileSelector(QWidget *wid, int mode, int selector, const QString &dirName, const QString &fileName = QString::null, const QStringList &mimetypes = QStringList() );
+
+  OFileSelector(QWidget *wid, int mode, int selector, 
+		const QString &dirName,
+		const QString &fileName = QString::null,
+		const QStringList &mimetypes = QStringList() );
+
+
+  OFileSelector(const QString &mimeFilter, QWidget *parent,
+		const char *name, bool newVisible = TRUE,
+		bool closeVisible = FALSE ) { };
+
   ~OFileSelector() {};
+
+  // currently only for the FILESELECTOR Mode
+  void setNewVisible( bool /*b*/ ) { };
+  void setCloseVisible(bool /*b*/ ) { };
+
+  // end file selector mode
+  // deprecated
+  void reread() { reparse(); };
+  // make sure not to leak please
+  const DocLnk *selected();
+  // end deprecated
+
   bool isToolbarVisible() const { return m_shTool;  };
   bool isPermissionBarVisible() const {  return m_shPerm; };
   bool isLineEditVisible()const { return m_shLne; };
@@ -180,17 +202,20 @@ class OFileSelector : public QWidget {
 
   QLineEdit *m_edit;
   QLabel *m_fnLabel;
-  bool m_shTool:1;
-  bool m_shPerm:1;
-  bool m_shLne:1;
-  bool m_shChooser:1;
-  bool m_shYesNo:1;
-  bool m_boCheckPerm:1;
-  bool m_autoMime:1;
-  bool m_case:1;
-  bool m_dir:1;
-  bool m_files:1;
-  bool m_showPopup:1;
+
+  bool m_shClose     : 1;
+  bool m_shNew       : 1;
+  bool m_shTool      : 1;
+  bool m_shPerm      : 1;
+  bool m_shLne       : 1;
+  bool m_shChooser   : 1;
+  bool m_shYesNo     : 1;
+  bool m_boCheckPerm : 1;
+  bool m_autoMime    : 1;
+  bool m_case        : 1;
+  bool m_dir         : 1;
+  bool m_files       : 1;
+  bool m_showPopup   : 1;
 
   // implementation todo
   virtual void addFile(const QString &mime, QFileInfo *info, bool symlink = FALSE );
@@ -216,8 +241,8 @@ private slots:
    virtual void slotClicked( int, QListViewItem *item, const QPoint &, int);
    virtual void slotRightButton(int, QListViewItem *, const QPoint &, int );
    virtual void slotContextMenu( QListViewItem *item);
-   // listview crap see above
-   // PopupMenu crap
+   // listview above
+   // popup below
    virtual void slotChangedDir();
    virtual void slotOpen();
    virtual void slotRescan();
