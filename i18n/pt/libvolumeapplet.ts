@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Screen Taps</source>
-        <translation type="unfinished"></translation>
+        <translation>Toques da caneta</translation>
     </message>
 </context>
 </TS>

@@ -16,15 +16,15 @@ different name.</source>
     <name>LanBase</name>
     <message>
         <source>LAN </source>
-        <translation type="unfinished"></translation>
+        <translation>Rede</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Conta</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Specify TCP/IP Information</source>
@@ -40,11 +40,11 @@ different name.</source>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Endereço IP</translation>
     </message>
     <message>
         <source>Gateway</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Gateway</translation>
     </message>
     <message>
         <source>Subnet Mask</source>

@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Applet format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato da Hora</translation>
     </message>
     <message>
         <source>hh:mm</source>

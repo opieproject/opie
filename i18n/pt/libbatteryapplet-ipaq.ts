@@ -3,79 +3,79 @@
     <name>BatteryStatus</name>
     <message>
         <source>Battery status for Ipaq</source>
-        <translation type="unfinished"></translation>
+        <translation>Estado da bateria do iPAQ</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Falha</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao ler os dados</translation>
     </message>
     <message>
         <source>Charging both devices</source>
-        <translation type="unfinished"></translation>
+        <translation>A carregar as duas baterias</translation>
     </message>
     <message>
         <source>Charging</source>
-        <translation type="unfinished"></translation>
+        <translation>A carregar</translation>
     </message>
     <message>
         <source>Percentage battery remaining</source>
-        <translation type="unfinished"></translation>
+        <translation>Bateria disponível</translation>
     </message>
     <message>
         <source>Battery status: </source>
-        <translation type="unfinished"></translation>
+        <translation>Estado da bateria:</translation>
     </message>
     <message>
         <source>Good</source>
-        <translation type="unfinished"></translation>
+        <translation>Boa</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Fraca</translation>
     </message>
     <message>
         <source>Very Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Muito Fraca</translation>
     </message>
     <message>
         <source>Critical</source>
-        <translation type="unfinished"></translation>
+        <translation>Crítica</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Desconhecida</translation>
     </message>
     <message>
         <source>On backup power</source>
-        <translation type="unfinished"></translation>
+        <translation>Em energia de reserva</translation>
     </message>
     <message>
         <source>Power on-line</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligado à corrente</translation>
     </message>
     <message>
         <source>External power disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Energia externa desligada</translation>
     </message>
     <message>
         <source>Battery time remaining</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo de bateria restante</translation>
     </message>
     <message>
         <source>Percentage battery remaining: </source>
-        <translation type="unfinished"></translation>
+        <translation>Percentatem de bateria restante:</translation>
     </message>
     <message>
         <source>Battery time remaining: </source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo de bateria restante:</translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>
-        <translation type="unfinished"></translation>
+        <translation>Adaptador externo sem bateria</translation>
     </message>
 </context>
 </TS>

@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; new mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
-        <translation type="unfinished">&lt;b&gt;%1&lt;/b&gt; novo(s) email(s), &lt;b&gt;%2&lt;/b&gt; na caixa de saída</translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt; novo(s) email(s), &lt;b&gt;%2&lt;/b&gt; na caixa de saída</translation>
     </message>
     <message>
         <source>There is &lt;b&gt; 1&lt;/b&gt; active task:  &lt;br&gt;</source>

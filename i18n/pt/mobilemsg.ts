@@ -10,19 +10,19 @@
     <name>MobileMsgBase</name>
     <message>
         <source>Mobile Messaging</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensagens Móveis</translation>
     </message>
     <message>
         <source>Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Número:</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto</translation>
     </message>
     <message>
         <source>Flash</source>
@@ -30,7 +30,7 @@
     </message>
     <message>
         <source>Unicode</source>
-        <translation type="unfinished"></translation>
+        <translation>Unicode</translation>
     </message>
     <message>
         <source>SMS: %1</source>
@@ -38,11 +38,11 @@
     </message>
     <message>
         <source>Nokia</source>
-        <translation type="unfinished"></translation>
+        <translation>Nokia</translation>
     </message>
     <message>
         <source>Country:</source>
-        <translation type="unfinished"></translation>
+        <translation>País:</translation>
     </message>
     <message>
         <source>Logo</source>
@@ -58,11 +58,11 @@
     </message>
     <message>
         <source>Message:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensagem:</translation>
     </message>
     <message>
         <source>EMS</source>
-        <translation type="unfinished"></translation>
+        <translation>EMS</translation>
     </message>
     <message>
         <source>Tab</source>

@@ -3,7 +3,7 @@
     <name>AppsKeyApp</name>
     <message>
         <source>Set Application Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Botões</translation>
     </message>
     <message>
         <source>Calender</source>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu Principal</translation>
     </message>
     <message>
         <source>Popup Menu</source>

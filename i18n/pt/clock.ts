@@ -76,15 +76,15 @@
     </message>
     <message>
         <source>mp3 alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarme MP3</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tudo</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Áudio</translation>
     </message>
 </context>
 </TS>

@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Percentage battery remaining</source>
-        <translation type="unfinished">Percentagem de </translation>
+        <translation>Percentagem de bateria restante</translation>
     </message>
     <message>
         <source>Battery status: </source>
@@ -43,15 +43,15 @@
     </message>
     <message>
         <source>On backup power</source>
-        <translation type="unfinished"></translation>
+        <translation>Em energia de reserva</translation>
     </message>
     <message>
         <source>Power on-line</source>
-        <translation type="unfinished"></translation>
+        <translation>Energia externa</translation>
     </message>
     <message>
         <source>External power disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Energia externa desligada</translation>
     </message>
     <message>
         <source>Battery time remaining</source>

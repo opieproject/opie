@@ -3,7 +3,7 @@
     <name>MailFactory</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <source>&lt;p&gt;Couldn&apos;t attach file &apos;%1&apos;. Continue anyway or abort?&lt;/p&gt;</source>
@@ -11,11 +11,11 @@
     </message>
     <message>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuar</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Abortar</translation>
     </message>
 </context>
 <context>

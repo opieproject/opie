@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>&amp;Change Card Backs</source>
-        <translation type="unfinished">&amp;Mudar</translation>
+        <translation>&amp;Mudar Cartas</translation>
     </message>
     <message>
         <source>&amp;Snap To Position</source>
@@ -23,15 +23,15 @@
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation type="unfinished">&amp;</translation>
+        <translation>&amp;Parâmetros</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Acerca de</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>A&amp;juda</translation>
     </message>
     <message>
         <source>Play</source>
@@ -47,15 +47,15 @@
     </message>
     <message>
         <source>Turn One Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Virar Uma Carta</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações</translation>
     </message>
     <message>
         <source>Turn Three Cards</source>
-        <translation type="unfinished"></translation>
+        <translation>Virar Três Cartas</translation>
     </message>
     <message>
         <source>Chicane</source>

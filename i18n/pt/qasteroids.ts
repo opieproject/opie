@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Ships</source>
-        <translation type="unfinished"></translation>
+        <translation>Naves</translation>
     </message>
     <message>
         <source>Fuel</source>
@@ -28,7 +28,8 @@
     <message>
         <source>Ship Destroyed.
 Press Contacts/Home key.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nave Destruída.
+Prima a tecla Contactos/Início.</translation>
     </message>
     <message>
         <source>Game Over.
