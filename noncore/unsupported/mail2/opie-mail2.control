@@ -1,0 +1,9 @@
+Files: bin/mail $QTDIR/lib/libmail.so* plugins/applets/libbend.so* apps/Applications/mail.desktop pics/mail/*.png
+Priority: optional
+Section: qpe/applications
+Maintainer: Constantin Bergemann <cbergemann@lisa.de>
+Architecture: arm
+Version: 0.0.9-$SUB_VERSION
+Depends: opie-base
+Description: An IMAP mail client
+License: LGPL

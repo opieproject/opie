@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=E-Mail
+Exec=mail
+Type=Application
+Icon=mail/desktopicon

@@ -1,0 +1,31 @@
+LISAmail TODO
+-----------------------------------------------------------------------------
+
+General stuff:
+ - If password is empty, ask for it during fetch.
+ - Check if all necessary fields in AccoundEditor are filled. 
+
+Protocol related:
+ - The IMAP implentation is kinda strange and slow.
+ - The SMTP implentation is goddamn strange.
+ - POP3 support would be nice.
+ - NNTP would be kinda neat, too.
+ - Implent a plugin system.
+
+Security related:
+ - GnuPG support. This will require a seperate gpg managing utility in
+   the settings tab.
+ - sMIME? maybe in the distant future.
+
+Mail management:
+ - Header caching
+ - Sieve filtering support?
+ - Enqueueing/Draft support both on the IMAP server and local.
+
+Testing:
+ I'm using the courier-imap server at my developement site. I didn't have
+ much opportunity to test on other servers. Giving me test-accounts on other
+ servers would be helpfull.
+
+If you want something added, drop a mail. Comments are allways welcome.
+
