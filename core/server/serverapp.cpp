@@ -722,6 +722,8 @@ void ServerApplication::shutdown( ShutdownImpl::Type t )
 void ServerApplication::restart()
 {
     if ( allowRestart ) {
+	/* same as above */
+	emit aboutToQuit();
 	prepareForTermination(TRUE);
 	doRestart = TRUE;
 	quit();

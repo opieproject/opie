@@ -330,10 +330,12 @@ int main( int argc, char ** argv )
 
     // Have we been asked to restart?
     if ( ServerApplication::doRestart ) {
+	qWarning("Do restart ");
 	for ( int fd = 3; fd < 100; fd++ )
 	    close( fd );
 
-	execl( (QPEApplication::qpeDir()+"bin/qpe").latin1(), "qpe", 0 );
+	execl( (QPEApplication::qpeDir()+"/bin/qpe").latin1(), "qpe", 0 );
+	qWarning("executing failed");
     }
 
     // Kill them. Kill them all.

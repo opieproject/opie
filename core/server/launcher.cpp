@@ -482,6 +482,7 @@ void Launcher::createGUI()
 
 Launcher::~Launcher()
 {
+    qApp->setMainWidget( 0 );
     if ( tb )
 	destroyGUI();
 }
