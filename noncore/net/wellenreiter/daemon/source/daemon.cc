@@ -1,7 +1,7 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.7 2002-11-27 22:31:50 mjm Exp $
+ * $Id: daemon.cc,v 1.8 2002-11-28 00:00:08 mjm Exp $
  */
 
 #include "config.hh"
@@ -20,13 +20,35 @@ int main(int argc, char **argv)
 
   fprintf(stderr, "wellenreiterd %s\n\n", VERSION);
 
-  if(!card_into_monitormode(handletopcap, SNIFFER_DEVICE, CARD_TYPE_NG))
+  if(!card_into_monitormode(&handletopcap, SNIFFER_DEVICE, CARD_TYPE_NG))
   {
     wl_logerr("Cannot set card into mon mode, aborting");
     exit(-1);
   }
   wl_loginfo("Set card into monitor mode");
 
+  /////// following line will be moved to lib as soon as possible ////////////
+    if((handletopcap = pcap_open_live(SNIFFER_DEVICE, BUFSIZ, 1, 0, NULL)) == NULL)
+    {
+      wl_logerr("pcap_open_live() failed: %s", strerror(errno));
+      exit(-1);
+    }
+
+#ifdef HAVE_PCAP_NONBLOCK
+    pcap_setnonblock(handletopcap, 1, NULL);
+#endif
+      
+    /* getting the datalink type */
+    retval = pcap_datalink(handletopcap);
+    if (retval != DLT_IEEE802_11) /* Rawmode is IEEE802_11 */
+      {
+	wl_loginfo("Interface %s does not work in the correct 802.11 raw mode", SNIFFER_DEVICE);
+	pcap_close(handletopcap);
+	return 0;
+      }
+    wl_loginfo("Your successfully listen on %s in 802.11 raw mode", SNIFFER_DEVICE);
+    ////////////////////////////////////////
+ 
   /* Setup socket for incoming commands */
   if((sock=commsock(DAEMONADDR, DAEMONPORT)) < 0)
   {
