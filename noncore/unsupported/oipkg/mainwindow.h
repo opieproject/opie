@@ -3,6 +3,7 @@
 
 #include <qmainwindow.h>
 #include <qaction.h>
+#include <qtimer.h>
 #include <qpopupmenu.h>
 
 #include "packagelist.h"
@@ -69,6 +70,9 @@ private:
   QComboBox *section;
   QComboBox *subsection;
   QPopupMenu *popupMenu;
+  bool updateIcon;
+private slots:
+  void rotateUpdateIcon();
 };
 
 #endif

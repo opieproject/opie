@@ -43,6 +43,14 @@ PmIpkg::~PmIpkg()
 int PmIpkg::runIpkg(const QString& args)
 {
   pvDebug(2,"PmIpkg::runIpkg "+args);
+
+  //to make script ipkg happy
+  pvDebug(2, "cd "+settings->getDestinationUrl()+"/tmp/ipkg");
+  if (!QDir::setCurrent(settings->getDestinationUrl()+"/tmp/ipkg"))
+  {
+  	QDir instDir = QDir(settings->getDestinationUrl()+"/tmp/ipkg");
+   	instDir.mkdir(settings->getDestinationUrl()+"/tmp/ipkg");
+  }
 #ifdef PROC
   QStringList cmd = "/usr/bin/ipkg ";
 #endif
@@ -153,6 +161,9 @@ void PmIpkg::commit( PackageList pl )
   runwindow->outPut->setText("");
   out( "<h1>"+tr("Todo")+"</h1>\n"); 	
 
+  to_install.clear();
+  to_remove.clear();
+  int sizecount = 0;
   QString rem="<b>To remove:</b><br>\n";
   QString inst="<b>To install:</b><br>\n";;
   for( Package *pack = pl.first();pack ; (pack = pl.next())  )
@@ -161,12 +172,24 @@ void PmIpkg::commit( PackageList pl )
 	{
 	  if ( pack->toInstall() )
 	    {
+ #ifndef NEWLIST
 	      to_install.append( pack->name() );
+ #endif
+ #ifdef NEWLIST
+	      to_install.append( pack );
+       	sizecount += pack->size().toInt();
+ #endif
 	      inst += pack->name()+"<br>";
 	    }
 	  if ( pack->toRemove() )
 	    {
+ #ifndef NEWLIST
 	      to_remove.append( pack->name() );
+ #endif
+ #ifdef NEWLIST
+	      to_remove.append( pack );
+       	sizecount += 1;
+ #endif
 	      rem += pack->name()+"<br>";
 	    }
 	}
@@ -175,6 +198,8 @@ void PmIpkg::commit( PackageList pl )
   out("<p>"+inst+"</p>"+"<p>"+rem+"</p><hl>");
 
   qDebug("to remove=%i; to install=%i",to_remove.count(),to_install.count());
+
+  runwindow->progress->setTotalSteps( sizecount );
 
   connect( runwindow->doItButton, SIGNAL( clicked() ),
   					 SLOT( doIt() ) );
@@ -207,8 +232,10 @@ void PmIpkg::remove()
 	show( true );
 
 	out("<hr><hr><b>"+tr("Removing")+"<br>"+tr("please wait")+"</b><br>");
-    for (QStringList::ConstIterator it=to_remove.begin(); it!=to_remove.end(); ++it)
-    {
+
+ #ifndef NEWLIST
+   for (QStringList::ConstIterator it=to_remove.begin(); it!=to_remove.end(); ++it)
+   {
       if ( runIpkg("remove " + *it) == 0)
       {
 
@@ -216,6 +243,20 @@ void PmIpkg::remove()
       	out("<b>"+tr("Error while removing")+"</b>"+*it);
       }
     }
+#endif
+ #ifdef NEWLIST
+   for (Package *it=to_remove.first(); it != 0; it=to_remove.next() )
+   {
+      if ( runIpkg("remove " + it->name()) == 0)
+      {
+      	runwindow->progress->setProgress( it->size().toInt() + runwindow->progress->progress());
+        it->processed();
+        runwindow->progress->setProgress( 1 );
+  		}else{
+      	out("<b>"+tr("Error while removing")+"</b>"+it->name());
+      }
+    }
+#endif
 }
 
 
@@ -223,19 +264,33 @@ void PmIpkg::install()
 {
  	if ( to_install.count() == 0 ) return;
 	show( true );
-	out("<hr><hr><b>"+tr("Installing")+"<br>"+tr("please wait")+"<b><br>");
-  if ( to_install.count() )
+	out("<hr><hr><b>"+tr("Installing")+"<br>"+tr("please wait")+"</b><br>");
+ #ifndef NEWLIST
     for (QStringList::ConstIterator it=to_install.begin(); it!=to_install.end(); ++it)
     {
       if ( runIpkg("install " + *it) == 0 )
-		  {    	
+		  {
 	    	if ( settings->createLinks() )
 					makeLinks( *it );
   		}else{
       	out("<b>"+tr("Error while installing")+"</b>"+*it);
       }
     }
-	
+#endif
+ #ifdef NEWLIST
+ 	  for (Package *it=to_install.first(); it != 0; it=to_install.next() )
+    {
+      if ( runIpkg("install " + it->name()) == 0 )
+		  {    	
+      	runwindow->progress->setProgress( it->size().toInt() + runwindow->progress->progress());
+	    	if ( settings->createLinks() )
+					makeLinks( it->name() );
+     		it->processed();
+  		}else{
+      	out("<b>"+tr("Error while installing")+"</b>"+it->name());
+      }
+    }
+#endif
 }
 
 void PmIpkg::linkDestination( const QString msg, const QByteArray dest )
@@ -290,8 +345,8 @@ void PmIpkg::show(bool b)
 	if (!runwindow->isVisible())
 	  runwindow->showMaximized();
 	showButtons(b);
-	if ( b )
- 		runwindow->progress->show();
-  else
- 		runwindow->progress->show();
+//	if ( b )
+ 		runwindow->progress->hide();
+//  else
+// 		runwindow->progress->show();
 }

@@ -90,7 +90,7 @@ void MainWindow::makeMenu()
   toolBar->setStretchableWidget( spacer );
 
 		
-  runAction = new QAction( tr( "Commit" ),
+  runAction = new QAction( tr( "Apply" ),
 			   Resource::loadPixmap( "oipkg/install" ),
 			   QString::null, 0, this, 0 );
   connect( runAction, SIGNAL( activated() ),
@@ -171,10 +171,7 @@ void MainWindow::makeMenu()
   findBar->setStretchableWidget( findEdit );
   connect( findEdit, SIGNAL( textChanged( const QString & ) ),
        this, SLOT( displayList() ) );
-//	a = new QAction( tr( "Filter" ), Resource::loadPixmap( "next" ), QString::null, 0, this, 0 );
-//  connect( a, SIGNAL( activated() ), this, SLOT( filterList() ) );
-//  a->addTo( findBar );
-//    a->addTo( edit );
+
   a = new QAction( tr( "Close Find" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), this, SLOT( findClose() ) );
   a->addTo( findBar );
@@ -183,7 +180,6 @@ void MainWindow::makeMenu()
   findAction->setToggleAction( true );
   findAction->setOn( true );
   findAction->addTo( viewMenu );
-
 }
 
 MainWindow::~MainWindow()
@@ -193,14 +189,18 @@ MainWindow::~MainWindow()
 void MainWindow::runIpkg()
 {
   ipkg->commit( packageList );
-  updateList(); //to remove
+//  updateList(); //to remove
 }
 
 void MainWindow::updateList()
 {
+	QTimer *t = new QTimer( this );
+  connect( t, SIGNAL(timeout()), SLOT( rotateUpdateIcon() ) );
+  t->start( 0, false );
 	packageList.clear();
   ipkg->update();
   getList();
+  t->stop();
 }
 
 void MainWindow::getList()
@@ -346,3 +346,12 @@ void MainWindow::findClose()
   findAction->setOn( false );
 }
 
+void MainWindow::rotateUpdateIcon()
+{
+	pvDebug(2, "MainWindow::rotateUpdateIcon");
+ if ( updateIcon )
+	updateAction->setIconSet( Resource::loadIconSet( "oipkg/update" ) );
+ else
+	updateAction->setIconSet( Resource::loadIconSet( "oipkg/update2" ) );
+ updateIcon = !updateIcon;
+}

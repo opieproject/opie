@@ -3,6 +3,7 @@
 
 
 #include <qobject.h>
+#include <qlist.h>
 #include <qstring.h>
 #include <qwidget.h>
 #include "pksettings.h"
@@ -10,8 +11,8 @@
 #include "packagelist.h"
 #include "debug.h"
 
-
-
+//#define NEWLIST
+class Package;
 class PmIpkg : public QObject
 {
   Q_OBJECT
@@ -28,8 +29,14 @@ public:
 private:
   PackageManagerSettings* settings;
   RunWindow *runwindow;
+#ifndef NEWLIST
   QStringList to_remove;
   QStringList to_install;
+#endif
+#ifdef NEWLIST
+  QList<Package> to_remove;
+  QList<Package> to_install;
+#endif
   bool runwindowopen;
 
   void makeLinks(QString);

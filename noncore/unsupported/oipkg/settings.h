@@ -5,7 +5,8 @@
 #include <qintdict.h>
 
 
-class PackageManagerSettings : private PackageManagerSettingsBase
+class PackageManagerSettings : public PackageManagerSettingsBase
+//class PackageManagerSettings : private PackageManagerSettingsBase
 {
   //	 Q_OBJECT
 public: 
@@ -19,6 +20,8 @@ public:
   bool createLinks();
   QStringList getActiveServers();
   QStringList getDestinationUrls();
+  /** No descriptions */
+  QComboBox getActiveDestinationCombo();
 
 private:
   QIntDict<QString> serverurlDic;
