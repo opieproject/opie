@@ -44,6 +44,34 @@ void MediaWidget::closeEvent( QCloseEvent * )
     mediaPlayerState.setList();
 }
 
+void MediaWidget::paintEvent( QPaintEvent *pe )
+{
+    QPainter p( this );
+
+    if ( mediaPlayerState.isFullscreen() ) {
+        // Clear the background
+        p.setBrush( QBrush( Qt::black ) );
+        return;
+    } 
+
+    if ( !pe->erased() ) {
+        // Combine with background and double buffer
+        QPixmap pix( pe->rect().size() );
+        QPainter p( &pix );
+        p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
+        p.drawTiledPixmap( pe->rect(), backgroundPixmap, pe->rect().topLeft() );
+        for ( unsigned int i = 0; i < buttons.count(); i++ ) {
+            paintButton( p, buttons[ i ] );
+        }
+        QPainter p2( this );
+        p2.drawPixmap( pe->rect().topLeft(), pix );
+    } else {
+        QPainter p( this );
+        for ( unsigned int i = 0; i < buttons.count(); i++ )
+            paintButton( p, buttons[ i ] );
+    }
+}
+
 void MediaWidget::handleCommand( Command command, bool buttonDown )
 {
     switch ( command ) {

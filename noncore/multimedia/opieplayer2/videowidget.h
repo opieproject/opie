@@ -88,7 +88,6 @@ signals:
 protected:
 
     void resizeEvent( QResizeEvent * );
-    void paintEvent( QPaintEvent *pe );
     void showEvent( QShowEvent *se );
     void mouseMoveEvent( QMouseEvent *event );
     void mousePressEvent( QMouseEvent *event );

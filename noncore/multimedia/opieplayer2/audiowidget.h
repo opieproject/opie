@@ -78,7 +78,6 @@ signals:
 protected:
     void doBlank();
     void doUnblank();
-    void paintEvent( QPaintEvent *pe );
     void showEvent( QShowEvent *se );
     void resizeEvent( QResizeEvent *re );
     void mouseMoveEvent( QMouseEvent *event );

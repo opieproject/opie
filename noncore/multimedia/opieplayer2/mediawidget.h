@@ -81,6 +81,8 @@ signals:
 protected:
     virtual void closeEvent( QCloseEvent * );
 
+    virtual void paintEvent( QPaintEvent *pe );
+
     void handleCommand( Command command, bool buttonDown );
 
     bool isOverButton( const QPoint &position, int buttonId ) const;
