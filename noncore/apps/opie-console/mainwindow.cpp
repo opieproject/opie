@@ -205,6 +205,8 @@ void MainWindow::initUI() {
     m_keyBar->hide();
 
     m_kb = new FunctionKeyboard(m_keyBar);
+    connect(m_kb, SIGNAL(keyPressed(ushort, ushort, bool, bool, bool)), 
+            this, SLOT(slotKeyReceived(ushort, ushort, bool, bool, bool)));
 
 
 
@@ -475,4 +477,18 @@ void MainWindow::slotFullscreen() {
 
     m_isFullscreen = !m_isFullscreen;
 
+}
+
+
+void MainWindow::slotKeyReceived(ushort u, ushort q, bool, bool, bool) {
+
+    qWarning("received key event! relay to TE widget");
+
+    if ( m_curSession ) {
+        QKeyEvent ke(QEvent::KeyPress, q, u, 0);
+
+        ke.ignore();
+        // where should i send this event? doesnt work sending it here
+        QApplication::sendEvent((QObject *)m_curSession->widgetStack(), &ke); 
+    }
 }
