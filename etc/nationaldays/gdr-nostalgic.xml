@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<nationaldays>
+  <description value="German holidays" />
+  <entries name="Tag der Sowjetarmee" date="02-23" >
+    <entry name="Tag der Deutschen Volkspolizei" date="07-01" />
+    <entry name="Tag der Befreiung" date="05-08" />
+    <entry name="Internationaler Frauentag " date="03-08" />
+    <entry name="Tag der Nationalen Volksarmee" date="03-01" />
+    <entry name="Tag der Zivilverteidigung" date="02-11" />
+    <entry name="Internationaler Kampf- und Feiertag der Arbeiter" date="05-01" />
+    <entry name="Tag der Republik" date="10-7" />
+  </entries>
+</nationaldays>
