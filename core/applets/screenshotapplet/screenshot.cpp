@@ -459,8 +459,8 @@ void ScreenshotControl::performGrab()
 										if ( !pix.isNull() )  {
 												const char *ascii = header.latin1( );
 												uint ascii_len = ::strlen( ascii );
-// 												::write ( sock, ascii, ascii_len );
-// 												::write ( sock, img.bits(), img.numBytes() );
+ 												::write ( sock, ascii, ascii_len );
+ 												::write ( sock, img.bits(), img.numBytes() );
 
 												ok = true;
 										}
