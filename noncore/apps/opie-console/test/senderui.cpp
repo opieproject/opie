@@ -11,7 +11,7 @@
 #include "../filetransfer.h"
 #include "../filereceive.h"
 
-#include <opie/oprocess.h>
+#include <opie2/oprocess.h>
 
 #include "senderui.h"
 

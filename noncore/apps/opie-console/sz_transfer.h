@@ -2,7 +2,7 @@
 #define OPIE_FL_SZ_H
 
 #include "file_layer.h"
-#include <opie/oprocess.h>
+#include <opie2/oprocess.h>
 
 class SzTransfer : public FileTransferLayer {
 

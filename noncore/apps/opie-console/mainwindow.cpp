@@ -10,7 +10,7 @@
 #include <qpe/filemanager.h>
 #include <qpe/qpeapplication.h>
 
-#include <opie/ofiledialog.h>
+#include <opie2/ofiledialog.h>
 
 #include "TEmulation.h"
 #include "profileeditordialog.h"
@@ -333,7 +333,7 @@ void MainWindow::slotSaveScript() {
         QStringList text;
         text << "text/plain";
         map.insert(tr("Script"), text );
-        QString filename = OFileDialog::getSaveFileName(2, QPEApplication::documentDir(), QString::null, map);
+        QString filename = Opie::OFileDialog::getSaveFileName(2, QPEApplication::documentDir(), QString::null, map);
         if (!filename.isEmpty()) {
             QFileInfo info(filename);
             if (info.extension(FALSE) != "script")
@@ -447,8 +447,8 @@ void MainWindow::slotClose() {
 
     Session* ses = currentSession();
     qWarning("removing! currentSession %s", currentSession()->name().latin1() );
-	/* set to NULL to be safe, if its needed slotSessionChanged resets it automatically */
-	m_curSession = NULL;
+    /* set to NULL to be safe, if its needed slotSessionChanged resets it automatically */
+    m_curSession = NULL;
     tabWidget()->remove( /*currentSession()*/ses );
     /*it's autodelete */
     m_sessions.remove( ses );
@@ -483,19 +483,19 @@ void MainWindow::slotProfile( int id) {
 
 
 void MainWindow::create( const Profile& prof ) {
-	if(m_curSession)
-		if(m_curSession->transferDialog()) m_curSession->transferDialog()->hide();
+    if(m_curSession)
+        if(m_curSession->transferDialog()) m_curSession->transferDialog()->hide();
 
     Session *ses = manager()->fromProfile( prof, tabWidget() );
 
     if((!ses) || (!ses->layer()) || (!ses->widgetStack()))
-	{
-		QMessageBox::warning(this,
-			QObject::tr("Session failed"),
-			QObject::tr("<qt>Cannot open session: Not all components were found.</qt>"));
-		//if(ses) delete ses;
-		return;
-	}
+    {
+        QMessageBox::warning(this,
+            QObject::tr("Session failed"),
+            QObject::tr("<qt>Cannot open session: Not all components were found.</qt>"));
+        //if(ses) delete ses;
+        return;
+    }
 
     m_sessions.append( ses );
     tabWidget()->add( ses );
@@ -536,16 +536,16 @@ void MainWindow::create( const Profile& prof ) {
 void MainWindow::slotTransfer()
 {
     if ( currentSession() ) {
-	Session *mysession = currentSession();
-	TransferDialog dlg(/*mysession->widgetStack()*/this, this);
-	mysession->setTransferDialog(&dlg);
-	//dlg.reparent(mysession->widgetStack(), QPoint(0, 0));
-	//dlg.showMaximized();
-	currentSession()->widgetStack()->addWidget(&dlg, -1);
-	dlg.show();
-	//dlg.exec();
-	while(dlg.isRunning()) qApp->processEvents();
-	mysession->setTransferDialog(0l);
+    Session *mysession = currentSession();
+    TransferDialog dlg(/*mysession->widgetStack()*/this, this);
+    mysession->setTransferDialog(&dlg);
+    //dlg.reparent(mysession->widgetStack(), QPoint(0, 0));
+    //dlg.showMaximized();
+    currentSession()->widgetStack()->addWidget(&dlg, -1);
+    dlg.show();
+    //dlg.exec();
+    while(dlg.isRunning()) qApp->processEvents();
+    mysession->setTransferDialog(0l);
     }
 }
 
@@ -572,10 +572,10 @@ void MainWindow::slotOpenButtons( bool state ) {
 void MainWindow::slotSessionChanged( Session* ses ) {
     qWarning("changed!");
 
-	if(m_curSession)
-		if(m_curSession->transferDialog()) m_curSession->transferDialog()->hide();
-	if(ses)
-		if(ses->transferDialog()) ses->transferDialog()->show();
+    if(m_curSession)
+        if(m_curSession->transferDialog()) m_curSession->transferDialog()->hide();
+    if(ses)
+        if(ses->transferDialog()) ses->transferDialog()->show();
 
     if ( ses ) {
         m_curSession = ses;
@@ -621,15 +621,15 @@ void MainWindow::slotWrap()
         if(e)
         {
             if(m_isWrapped)
-			{
-				e->setWrap(80);
-				m_isWrapped = false;
-			}
-			else
-			{
-				e->setWrap(0);
-				m_isWrapped = true;
-			}
+            {
+                e->setWrap(80);
+                m_isWrapped = false;
+            }
+            else
+            {
+                e->setWrap(0);
+                m_isWrapped = true;
+            }
         }
     }
 }
@@ -706,7 +706,7 @@ void MainWindow::slotSaveHistory() {
     QStringList text;
     text << "text/plain";
     map.insert(tr("History"), text );
-    QString filename = OFileDialog::getSaveFileName(2, QPEApplication::documentDir(), QString::null, map);
+    QString filename = Opie::OFileDialog::getSaveFileName(2, QPEApplication::documentDir(), QString::null, map);
     if (filename.isEmpty() ) return;
 
     QFileInfo info(filename);

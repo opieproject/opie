@@ -2,7 +2,7 @@
 #define PROFILE_EDITOR_DIALOG
 
 #include <qdialog.h>
-#include <opie/otabwidget.h>
+#include <opie2/otabwidget.h>
 
 #include "profile.h"
 

@@ -1,7 +1,7 @@
 #ifndef OPIE_IO_MODEM
 #define OPIE_IO_MODEM
 
-#include <opie/oprocess.h>
+#include <opie2/oprocess.h>
 #include "io_serial.h"
 #include "profile.h"
 
@@ -64,7 +64,7 @@ private:
         m_dialSuf2, m_dialPref3, m_dialSuf3, m_connect, m_hangup, m_cancel;
     int  m_dialTime, m_delayRedial, m_numberTries, m_dtrDropTime,
         m_bpsDetect, m_dcdLines, m_multiLineUntag;
-	Profile m_profile;
+    Profile m_profile;
 
 private slots:
     void slotExited(OProcess* proc);

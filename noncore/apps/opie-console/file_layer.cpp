@@ -1,5 +1,3 @@
-#include <opie/oprocess.h>
-
 #include "file_layer.h"
 
 FileTransferLayer::FileTransferLayer(IOLayer *layer)

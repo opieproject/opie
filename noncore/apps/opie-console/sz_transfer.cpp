@@ -1,7 +1,6 @@
 
 #include "sz_transfer.h"
 #include <qfile.h>
-#include <opie/oprocess.h>
 #include <stdio.h>
 #include <sys/termios.h>
 

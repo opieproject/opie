@@ -2,7 +2,7 @@
 #define OPIE_TAB_WIDGET_H
 
 #include <qmap.h>
-#include <opie/otabwidget.h>
+#include <opie2/otabwidget.h>
 
 #include "session.h"
 /**

@@ -5,6 +5,6 @@ Section: opie/applications
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Version: 0.6-$SUB_VERSION
-Depends: qpe-base, libopie1, opie-console-help-en, lrzsz, opie-keytabs
+Depends: qpe-base, libopiecore2, libopieui2, opie-console-help-en, lrzsz, opie-keytabs
 License: GPL
 Description: Opie terminal app

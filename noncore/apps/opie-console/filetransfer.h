@@ -3,13 +3,14 @@
 
 #include <sys/types.h>
 
+#include <opie2/oprocess.h>
+
 #include <qfile.h>
 #include <qstringlist.h>
 
 #include "file_layer.h"
 
 class QSocketNotifier;
-class OProcess;
 class FileTransferControl;
 class FileTransfer : public FileTransferLayer{
     Q_OBJECT

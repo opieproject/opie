@@ -1,7 +1,7 @@
 #ifndef OPIE_IO_BT
 #define OPIE_IO_BT
 
-#include <opie/oprocess.h>
+#include <opie2/oprocess.h>
 #include "io_serial.h"
 
 /* Default values to be used if the profile information is incomplete */

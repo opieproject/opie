@@ -6,8 +6,6 @@
 
 #include <qsocketnotifier.h>
 
-#include <opie/oprocess.h>
-
 #include "procctl.h"
 #include "filetransfer.h"
 
