@@ -18,9 +18,9 @@ using namespace Opie::Core;
 //
 // Endian stuff
 //
-#ifndef OPIE_NO_DEBUG
+// #ifndef OPIE_NO_DEBUG
 const int endianTest = 1;
-#endif
+// #endif
 
 #define Swap16IfLE(s) \
     (*(char *)&endianTest ? ((((s) & 0xff) << 8) | (((s) >> 8) & 0xff)) : (s))
