@@ -10,25 +10,28 @@ class QPushButton;
 class QMultiLineEdit;
 class QLineEdit;
 
-class PPPDialog : public QDialog {
 
-    Q_OBJECT
+namespace OpieTooth {
 
-public:
-    PPPDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0, const QString& device = 0);
-    ~PPPDialog();
+    class PPPDialog : public QDialog {
 
+        Q_OBJECT
 
-private slots:
-    void connectToDevice();
-    void fillOutPut( OProcess* pppDial, char* cha, int len );
-protected:
-    QVBoxLayout* layout;
-    QLineEdit* cmdLine;
-    QPushButton* connectButton;
-    QMultiLineEdit* outPut;
+    public:
+        PPPDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0, const QString& device = 0);
+        ~PPPDialog();
 
-private:
-    QString m_device;
-};
+    private slots:
+        void connectToDevice();
+        void fillOutPut( OProcess* pppDial, char* cha, int len );
+    protected:
+        QVBoxLayout* layout;
+        QLineEdit* cmdLine;
+        QPushButton* connectButton;
+        QMultiLineEdit* outPut;
+
+    private:
+        QString m_device;
+    };
+}
 #endif

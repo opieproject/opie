@@ -1,6 +1,6 @@
 
-#ifndef OPIE_TOOTH_BT_DEVIVE_ITEM
-#define OPIE_TOOTH_BT_DEVIVE_ITEM
+#ifndef OPIE_TOOTH_BT_DEVICE_ITEM
+#define OPIE_TOOTH_BT_DEVICE_ITEM
 
 
 #include <remotedevice.h>

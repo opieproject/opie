@@ -7,9 +7,12 @@
 
 #include <services.h>
 
+#include "btdeviceitem.h"
+
 extern "C" {
-QPopupMenu* newRfcComPopup( const OpieTooth::Services&, QListViewItem* );
-QPopupMenu* newObexPushPopup( const OpieTooth::Services&, QListViewItem* );
+
+    QPopupMenu* newRfcComPopup( const OpieTooth::Services&,  OpieTooth::BTDeviceItem* );
+    QPopupMenu* newObexPushPopup( const OpieTooth::Services&,  OpieTooth::BTDeviceItem* );
 }
 
 #endif

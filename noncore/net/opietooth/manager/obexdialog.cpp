@@ -12,6 +12,8 @@
 #include <opie/oprocess.h>
 #include <opie/ofiledialog.h>
 
+using namespace OpieTooth;
+
 ObexDialog::ObexDialog( QWidget* parent,  const char* name, bool modal, WFlags fl, const QString& device )
     : QDialog( parent, name, modal, fl ) {
 

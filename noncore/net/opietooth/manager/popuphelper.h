@@ -9,14 +9,14 @@
 #include <services.h>
 
 namespace OpieTooth {
-    typedef QPopupMenu* (*popupFactory)(const Services&, QListViewItem*);
+    typedef QPopupMenu* (*popupFactory)(const Services&, BTDeviceItem*);
     typedef QMap<int,  popupFactory> FactoryMap;
     class PopupHelper {
     public:
         PopupHelper();
         ~PopupHelper();
         void insert( int id, popupFactory fact );
-        QPopupMenu* find( int id, const Services&, QListViewItem* );
+        QPopupMenu* find( int id, const Services&, BTDeviceItem* );
     private:
         void init();
         FactoryMap m_map;

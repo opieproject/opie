@@ -7,6 +7,8 @@
 #include <qlabel.h>
 #include <opie/oprocess.h>
 
+using namespace OpieTooth;
+
 PPPDialog::PPPDialog( QWidget* parent,  const char* name, bool modal, WFlags fl, const QString& device )
     : QDialog( parent, name, modal, fl ) {
 

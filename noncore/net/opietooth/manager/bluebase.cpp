@@ -285,6 +285,8 @@ void BlueBase::startServiceActionClicked( QListViewItem */*item*/ ) {
  * Action that are toggled on hold (mostly QPopups i guess)
  */
 void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & point, int /*column*/ ) {
+    if (!item )
+        return;
 
     QPopupMenu *menu = new QPopupMenu();
     int ret=0;
@@ -342,9 +344,9 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
         QPopupMenu *popup =0l;
         if ( it != list.end() ) {
 	    qWarning("Searching id %d %s", it.key(), it.data().latin1() );
-            popup = m_popHelper.find( it.key(),
+            popup = m_popHelper.find( it.key() /*1*/,
                                       service->services(),
-                                      service->parent() );
+                                      (BTDeviceItem*)service->parent() );
 	}else {
 	    qWarning("Empty");
 	}
@@ -359,17 +361,18 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
         int del = popup->insertItem( tr("delete"),  2);
 
         ret = popup->exec( point );
-
+        qWarning("returned from exec() ");
         if ( ret == -1 )
-            delete popup;
+            ;
         else if ( ret == test1 )
-            delete popup;
+            ;
         else if ( ret == con )
-            delete popup;
+            ;
         else if ( ret == del ) {
             // take item first? -zecke
             delete item;
         }
+        delete popup;
     }
     delete menu;
 }
