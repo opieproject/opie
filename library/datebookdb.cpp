@@ -733,7 +733,8 @@ void DateBookDB::loadFile( const QString &strFile )
 
     int i = 0;
     char *point;
-    while ( ( point = strstr( dt+i, "<event " ) ) != 0 ) {
+    // hack to get rid of segfaults after reading </DATEBOOK>
+    while ( (dt+i != 0) && (( point = strstr( dt+i, "<event " ) ) != 0 )) {
 	i = point - dt;
 	// if we are reading in events in the general case,
 	// we are just adding them, so let the actions represent that...
