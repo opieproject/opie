@@ -137,15 +137,15 @@
     </message>
     <message>
         <source>You must create an account</source>
-        <translation type="unfinished"></translation>
+        <translation>Tem de criar uma conta</translation>
     </message>
     <message>
         <source>Main operation toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Barra de operações principal</translation>
     </message>
     <message>
         <source>getMail</source>
-        <translation type="unfinished"></translation>
+        <translation>Obter Correio</translation>
     </message>
     <message>
         <source>select account</source>
@@ -162,7 +162,7 @@
     </message>
     <message>
         <source>No account associated</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem conta associada</translation>
     </message>
     <message>
         <source>There is no active account 
@@ -172,11 +172,11 @@ associated to this mail
     </message>
     <message>
         <source>&lt;qt&gt;Unknown response from server&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Resposta desconhecida do servidor&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;host not found&lt;/qt&gt;</source>
-        <translation type="unfinished">&lt;qt&gt;servidor não </translation>
+        <translation>&lt;qt&gt;servidor não encontrado&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;connection refused&lt;/qt&gt;</source>
@@ -184,16 +184,17 @@ associated to this mail
     </message>
     <message>
         <source>&lt;qt&gt;socket packet error&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;erro na transmissão dos dados&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Login failed
 Check user name and password&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Autenticação falhou
+Verifique conta e palavra chave&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Receiving error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao receber</translation>
     </message>
     <message>
         <source>OK
@@ -212,11 +213,12 @@ mail with subject: </source>
     <message>
         <source>
 Mail has NOT been sent</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">
+O </translation>
     </message>
     <message>
         <source>Attachment error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro no anexo</translation>
     </message>
     <message>
         <source>OK
@@ -258,11 +260,11 @@ has not been downloaded yet.
     <name>PopClient</name>
     <message>
         <source>Connection established</source>
-        <translation type="unfinished">Ligado</translation>
+        <translation>Ligação efectuada</translation>
     </message>
     <message>
         <source>Error Occured</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocorreu um Erro</translation>
     </message>
     <message>
         <source>Retrieving </source>
@@ -270,7 +272,7 @@ has not been downloaded yet.
     </message>
     <message>
         <source>Completing message </source>
-        <translation type="unfinished"></translation>
+        <translation>A completar a mensagem</translation>
     </message>
     <message>
         <source>No new Messages</source>
@@ -278,7 +280,7 @@ has not been downloaded yet.
     </message>
     <message>
         <source> new messages</source>
-        <translation type="unfinished">Mensage</translation>
+        <translation>Mensagens novas</translation>
     </message>
     <message>
         <source>No new messages</source>
@@ -293,19 +295,19 @@ has not been downloaded yet.
     <name>QWidget</name>
     <message>
         <source>The mail subject should be entered here</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza o assunto do correio aqui</translation>
     </message>
     <message>
         <source>Recipients can be entered here</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza os destinatários do correio aqui</translation>
     </message>
     <message>
         <source>If you would like to send copies of your mail they can be entered here</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza outros destinatário para o correio aqui</translation>
     </message>
     <message>
         <source>Enter your mail text here</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza o texto do correio aqui</translation>
     </message>
     <message>
         <source>Queue your mail by clicking here</source>
@@ -332,7 +334,7 @@ reviewed by double clicking the entry.</source>
     </message>
     <message>
         <source>Choose the recipients from this list</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha os destinatários desta lista</translation>
     </message>
     <message>
         <source>This button opens the address selector with all mail adresses from your Opie addressbook</source>
@@ -379,11 +381,11 @@ reviewed by double clicking the entry.</source>
     </message>
     <message>
         <source>Read the previous mail in the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Ler o correio anterior da lista</translation>
     </message>
     <message>
         <source>Read the next mail in the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Ler o correio seguinte da lista</translation>
     </message>
     <message>
         <source>Click here to add attachments to your mail</source>
@@ -412,7 +414,7 @@ reviewed by double clicking the entry.</source>
     </message>
     <message>
         <source>reply to mail</source>
-        <translation type="unfinished"></translation>
+        <translation>responder ao correio</translation>
     </message>
     <message>
         <source>Click here to reply to the selected mail
