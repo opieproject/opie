@@ -138,7 +138,7 @@ void CanvasCardPile::advance(int stage)
 }
 
 
-void CanvasCardPile::animatedMove(int x2, int y2, int steps = 7 )
+void CanvasCardPile::animatedMove(int x2, int y2, int steps )
 {
     destX = x2;
     destY = y2;
