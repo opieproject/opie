@@ -55,6 +55,11 @@ root.files = root/*
 INSTALLS += root
 
 # new targets
+opie-lupdate.target = opie-lupdate
+opie-lupdate.commands = opie-lupdate -noobsolete $(PRO)
+
+opie-lrelease.target = opie-lrelease
+opie-lrelease.commands = opie-lrelease $(PRO)
 
 lupdate.target = lupdate
 lupdate.commands = lupdate -noobsolete $(PRO)
@@ -65,7 +70,7 @@ lrelease.commands = lrelease $(PRO)
 ipk.target = ipk
 ipk.commands = tmp=`mktemp -d /tmp/ipkg-opie.XXXXXXXXXX` && ( $(MAKE) INSTALL_ROOT="$$$$tmp" install && ipkg-build $$$$tmp; rm -rf $$$$tmp; )
 
-QMAKE_EXTRA_UNIX_TARGETS += lupdate lrelease ipk
+QMAKE_EXTRA_UNIX_TARGETS += lupdate lrelease ipk opie-lupdate opie-lrelease
 QMAKE_LFLAGS += -Wl,-rpath=$$prefix/lib
 QMAKE_LIBDIR += $(OPIEDIR)/lib
 

@@ -111,10 +111,15 @@ all clean install ipk: $(SUBDIRS)
 lupdate lrelease:
 	@for i in $(SUBDIRS); do $(MAKE) -C $$i $@; done;
 
+opie-lupdate opie-lrelease:
+	@for i in $(SUBDIRS); do $(MAKE) -C $$i $@; done;
+
 $(subdir-y) : $(if $(CONFIG_LIBQPE),$(QTDIR)/stamp-headers $(OPIEDIR)/stamp-headers) \
 	$(if $(CONFIG_LIBQPE-X11),$(QTDIR)/stamp-headers-x11 $(OPIEDIR)/stamp-headers-x11 ) \
 	$(TOPDIR)/library/custom.h
 
 clean : $(TOPDIR)/.config
+
+apidox : doc/generate_apidox 
 
 include $(TOPDIR)/Rules.make
