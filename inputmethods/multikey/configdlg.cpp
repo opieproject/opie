@@ -10,6 +10,7 @@
 
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
+#include <qpe/resource.h>
 
 #include <qwidget.h>
 #include <qdialog.h>
@@ -23,6 +24,7 @@
 #include <qpushbutton.h>
 #include <qlistbox.h>
 #include <qstringlist.h>
+#include <qtoolbutton.h>
 #include <opie/ofiledialog.h>
 #include <opie/colordialog.h>
 #include <qdir.h>
@@ -48,8 +50,24 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
 
     QGroupBox *map_group = new QGroupBox (2, Qt::Vertical, tr("Keymap File"), gen_box);
 
-    keymaps = new QListBox (map_group);
+    QHBox *hbox1 = new QHBox(map_group);
+    keymaps = new QListBox(hbox1);
     keymaps->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+    QVBox *vbox1 = new QVBox(hbox1);
+    
+    QToolButton *tb1 = new QToolButton(vbox1, tr("Move Up"));
+    tb1->setPixmap(Resource::loadPixmap("up"));
+    tb1->setAutoRaise(TRUE);
+    tb1->setFocusPolicy(QWidget::NoFocus);
+    tb1->setToggleButton(FALSE);
+    connect(tb1, SIGNAL(clicked()), this, SLOT(moveSelectedUp()));
+
+    QToolButton *tb2 = new QToolButton(vbox1, tr("Move Down"));
+    tb2->setPixmap(Resource::loadPixmap("down"));
+    tb2->setAutoRaise(TRUE);
+    tb2->setFocusPolicy(QWidget::NoFocus);
+    tb2->setToggleButton(FALSE);
+    connect(tb2, SIGNAL(clicked()), this, SLOT(moveSelectedDown()));
 
     QString cur(tr("Current Language"));
     keymaps->insertItem(cur);
@@ -57,95 +75,75 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
     
     QDir map_dir(QPEApplication::qpeDir() + "/share/multikey", "*.keymap");
     default_maps = map_dir.entryList(); // so i can access it in other places
-
-    for (uint i = 0; i < map_dir.count(); i++) {
-
-        QFile map (map_dir.absPath() + "/" + map_dir[i]);
-        if (map.open(IO_ReadOnly)) {
-
-            QString line; bool found = 0;
-
-            map.readLine(line, 1024);
-            while (!map.atEnd()) {
-
-                if (line.find(QRegExp("^title\\s*=\\s*")) != -1) {
-                
-                    keymaps->insertItem(line.right(line.length() - line.find(QChar('=')) - 1).stripWhiteSpace());
-                    found = 1;
-                    break;
-                }
-                map.readLine(line, 1024);
-            }
-            if (!found) keymaps->insertItem(map_dir.absPath() + "/" + map_dir[i]);
-
-            map.close();
-        }
-        if (map_dir.absPath() + "/" + map_dir[i] == current_map) {
-
-            keymaps->setSelected(i + 1, true);
-        }
-
-    } 
-
     custom_maps = config.readListEntry("maps", QChar('|'));
+    sw_maps = ConfigDlg::loadSw();
 
-    for (uint i = 0; i < custom_maps.count(); i++) {
+    QStringList sw_copy(sw_maps);
+    for (uint i = 0; i < sw_copy.count(); i++) {
 
-        if (map_dir.exists(QFileInfo(custom_maps[i]).fileName(), false) 
-                        || !QFile::exists(custom_maps[i])) {
+	QString keymap_map;
+	if (sw_copy[i][0] != '/') { /* share/multikey */
 
-            custom_maps.remove(custom_maps.at(i));
+	    keymap_map =  map_dir.absPath() + "/" + sw_copy[i];
+	} else {
 
-            // remove it from the list too
-            config.writeEntry("maps", custom_maps.join("|"));
+	    if (map_dir.exists(QFileInfo(sw_copy[i]).fileName(), false) 
+		|| !QFile::exists(sw_copy[i])) {
 
+		custom_maps.remove(sw_copy[i]);
+		sw_maps.remove(sw_copy[i]);
 
-        } else {
+		// remove it from the list too
+		config.writeEntry("maps", custom_maps.join("|"));
 
-            QFile map (custom_maps[i]);
-            if (map.open(IO_ReadOnly)) {
+		continue;
+	    }
+	    keymap_map = sw_copy[i];
+	}
 
-                QString line; bool found = 0;
+	QFile map(keymap_map);
+	if (map.open(IO_ReadOnly)) {
 
-                map.readLine(line, 1024);
-                while (!map.atEnd()) {
+	    QString line; bool found = 0;
 
-                    if (line.find(QRegExp("^title\\s*=\\s*")) != -1) {
+	    map.readLine(line, 1024);
+	    while (!map.atEnd()) {
+
+		if (line.find(QRegExp("^title\\s*=\\s*")) != -1) {
                 
-                        keymaps->insertItem(line.right(line.length() - line.find(QChar('=')) - 1).stripWhiteSpace());
-                        found = 1;
-                        break;
-                    }
-                    map.readLine(line, 1024);
-                }
-                if (!found) keymaps->insertItem(custom_maps[i]);
+		    keymaps->insertItem(line.right(line.length() - line.find(QChar('=')) - 1).stripWhiteSpace());
+		    found = 1;
+		    break;
+		}
+		map.readLine(line, 1024);
+	    }
+	    if (!found)
+		keymaps->insertItem(keymap_map);
 
-                map.close();
-            }
-            if (custom_maps[i] == current_map) {
+	    map.close();
+	}
 
-                keymaps->setSelected(map_dir.count() + i + 1, true);
-            }
-        }
+	if (keymap_map == current_map) {
+	    keymaps->setSelected(i + 1, true);
+	}
     }
 
     // have to "+1" because the "current language" listItem... remember?
 
     connect(keymaps, SIGNAL(highlighted(int)), SLOT(setMap(int)));
 
-
     QGrid *add_remove_grid = new QGrid(2, map_group);
     add_remove_grid->setMargin(3);
     add_remove_grid->setSpacing(3);
 
     add_button = new QPushButton(tr("Add"), add_remove_grid);
-    add_button->setFlat((bool)1);
+    add_button->setFlat(TRUE);
     connect(add_button, SIGNAL(clicked()), SLOT(addMap()));
 
     remove_button = new QPushButton(tr("Remove"), add_remove_grid);
-    remove_button->setFlat((bool)1);
-    if ((int)map_dir.count() >= keymaps->currentItem()) 
-        remove_button->setDisabled(true);
+    remove_button->setFlat(TRUE);
+    if (default_maps.find(QFileInfo(current_map).fileName()) != default_maps.end())
+	remove_button->setDisabled(true);
     connect(remove_button, SIGNAL(clicked()), SLOT(removeMap()));
 
     // make a box that will contain the buttons on the bottom
@@ -153,7 +151,7 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
     pick_button = new QCheckBox(tr("Pickboard"), other_grid);
 
     config.setGroup ("general");
-    bool pick_open = config.readBoolEntry ("usePickboard", (bool)0); // default closed
+    bool pick_open = config.readBoolEntry ("usePickboard", FALSE); // default closed
     if (pick_open) {
 
         pick_button->setChecked(true);
@@ -163,14 +161,13 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
     connect (pick_button, SIGNAL(clicked()), this, SLOT(pickTog()));
 
     repeat_button = new QCheckBox(tr("Key Repeat"), other_grid);
-    bool repeat_on = config.readBoolEntry ("useRepeat", (bool)1);
+    bool repeat_on = config.readBoolEntry ("useRepeat", TRUE);
 
     if (repeat_on) {
 
         repeat_button->setChecked(true);
     }
     connect (repeat_button, SIGNAL(clicked()), this, SLOT(repeatTog()));
-
 
     /*
      * 'color' tab
@@ -189,7 +186,7 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
     label = new QLabel(tr("Key Color"), color_box);
     keycolor_button = new QPushButton(color_box);
     connect(keycolor_button, SIGNAL(clicked()), SLOT(keyColorClicked()));
-    keycolor_button->setFlat((bool)1);
+    keycolor_button->setFlat(TRUE);
     color = config.readListEntry("keycolor", QChar(','));
     /*
      * hopefully not required
@@ -206,14 +203,14 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
     label = new QLabel(tr("Key Pressed Color"), color_box);
     keycolor_pressed_button = new QPushButton(color_box);
     connect(keycolor_pressed_button, SIGNAL(clicked()), SLOT(keyColorPressedClicked()));
-    keycolor_pressed_button->setFlat((bool)1);
+    keycolor_pressed_button->setFlat(TRUE);
     color = config.readListEntry("keycolor_pressed", QChar(','));
     keycolor_pressed_button->setPalette(QPalette((QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()))));
 
     label = new QLabel(tr("Line Color"), color_box);
     keycolor_lines_button = new QPushButton(color_box);
     connect(keycolor_lines_button, SIGNAL(clicked()), SLOT(keyColorLinesClicked()));
-    keycolor_lines_button->setFlat((bool)1);
+    keycolor_lines_button->setFlat(TRUE);
     color = config.readListEntry("keycolor_lines", QChar(','));
     keycolor_lines_button->setPalette(QPalette((QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()))));
 
@@ -221,14 +218,98 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
     label = new QLabel(tr("Text Color"), color_box);
     textcolor_button = new QPushButton(color_box);
     connect(textcolor_button, SIGNAL(clicked()), SLOT(textColorClicked()));
-    textcolor_button->setFlat((bool)1);
+    textcolor_button->setFlat(TRUE);
     color = config.readListEntry("textcolor", QChar(','));
     textcolor_button->setPalette(QPalette((QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()))));
 
-
     label = new QLabel("", color_box); // a spacer so the above buttons dont expand
     label->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+}
 
+ConfigDlg::~ConfigDlg()
+{
+    emit reloadSw();
+}
+
+QStringList ConfigDlg::loadSw()
+{
+    Config *config = new Config("multikey");
+    config->setGroup("keymaps");
+    QDir map_dir(QPEApplication::qpeDir() + "/share/multikey", "*.keymap");
+    QStringList d_maps = map_dir.entryList(); // so i can access it in other places
+    QStringList c_maps = config->readListEntry("maps", QChar('|'));
+    QStringList s_maps = config->readListEntry("sw", QChar('|'));
+    delete config;
+
+    if (!s_maps.count())
+    {
+	s_maps = d_maps+c_maps;
+    }
+    else
+    {
+	/* Clear non existents entries */
+	QStringList s_copy = s_maps;
+	for (uint i = 0; i < s_copy.count(); ++i) {
+	    if (d_maps.find(s_copy[i]) == d_maps.end()
+		&& c_maps.find(s_copy[i]) == c_maps.end()) {
+		s_maps.remove(s_copy[i]);
+	    }
+	}
+	/* Update sw_maps from default_maps */
+	for (uint i = 0; i < d_maps.count(); ++i) {
+	    if (s_maps.find(d_maps[i]) == s_maps.end()) {
+		s_maps.append(d_maps[i]);
+	    }
+	}
+	/* Update sw_maps from custom_maps */
+	for (uint i = 0; i < c_maps.count(); ++i) {
+	    if (s_maps.find(c_maps[i]) == s_maps.end()) {
+		s_maps.append(c_maps[i]);
+	    }
+	}
+    }
+
+    return s_maps;
+}
+
+void ConfigDlg::moveSelectedUp()
+{
+    int i = keymaps->currentItem();
+    /* Ignore Current Language */
+    if (i > 1) {
+	QString t = sw_maps[i-1];
+	sw_maps[i-1] = sw_maps[i-2];
+	sw_maps[i-2] = t;
+
+    	QString item = keymaps->currentText();
+	keymaps->removeItem(i);
+	keymaps->insertItem(item, i-1);
+	keymaps->setCurrentItem(i-1);
+
+	Config config("multikey");
+	config.setGroup("keymaps");
+	config.writeEntry("sw", sw_maps, QChar('|'));
+    }
+}
+
+void ConfigDlg::moveSelectedDown()
+{
+    int i = keymaps->currentItem();
+    /* Ignore Current Language */
+    if (i > 0 && i < (int)keymaps->count() - 1) {
+	QString t = sw_maps[i-1];
+	sw_maps[i-1] = sw_maps[i];
+	sw_maps[i] = t;
+
+    	QString item = keymaps->currentText();
+	keymaps->removeItem(i);
+	keymaps->insertItem(item, i+1);
+	keymaps->setCurrentItem(i+1);
+
+	Config config("multikey");
+	config.setGroup("keymaps");
+	config.writeEntry("sw", sw_maps, QChar('|'));
+    }
 }
 
 void ConfigDlg::pickTog() {
@@ -271,15 +352,15 @@ void ConfigDlg::setMap(int index) {
         remove_button->setDisabled(true);
         emit setMapToDefault();
     }
-    else if ((uint)index <= default_maps.count()) {
+    else if (default_maps.find(sw_maps[index-1]) != default_maps.end()) {
 
         remove_button->setDisabled(true);
-        emit setMapToFile(QPEApplication::qpeDir() + "share/multikey/" + default_maps[index - 1]);
+        emit setMapToFile(QPEApplication::qpeDir() + "share/multikey/" + sw_maps[index - 1]);
 
     } else {
 
         remove_button->setEnabled(true);
-        emit setMapToFile(custom_maps[index - default_maps.count() - 1]);
+        emit setMapToFile(sw_maps[index - 1]);
     }
 }
 
@@ -295,6 +376,8 @@ void ConfigDlg::addMap() {
     QStringList maps = config.readListEntry("maps", QChar('|'));
     maps.append(map);
     custom_maps.append(map);
+    if (sw_maps.find(map) == sw_maps.end())
+	sw_maps.append(map);
 
     QFile map_file (map);
     if (map_file.open(IO_ReadOnly)) {
@@ -321,6 +404,7 @@ void ConfigDlg::addMap() {
 
 
     config.writeEntry("maps", maps, QChar('|'));
+    config.writeEntry("sw", sw_maps, QChar('|'));
     config.writeEntry("current", map);
 
 }
@@ -333,12 +417,14 @@ void ConfigDlg::removeMap() {
     // delete the next selected item cus you just moved it up
     keymaps->removeItem(keymaps->currentItem() + 1);
 
-    custom_maps.remove(custom_maps.at(keymaps->currentItem() - default_maps.count()));
+    custom_maps.remove(sw_maps[keymaps->currentItem()]);
+    sw_maps.remove(sw_maps.at(keymaps->currentItem()));
 
     // write the changes
     Config config ("multikey");
     config.setGroup("keymaps");
     config.writeEntry("maps", custom_maps, QChar('|'));
+    config.writeEntry("sw", sw_maps, QChar('|'));
 }
 
 /* ConfigDlg::slots for the color buttons {{{1

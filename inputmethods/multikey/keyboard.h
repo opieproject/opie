@@ -130,9 +130,11 @@ private slots:
     void setMapToDefault();
     void setMapToFile(QString map);
     void cleanupConfigDlg();
+    void reloadSw();
 
     // used to redraw keyboard after edited colors
     void reloadKeyboard();
+    void receive( const QCString &msg, const QByteArray &data );
     
 private:
     int getKey( int &w, int j = -1 );

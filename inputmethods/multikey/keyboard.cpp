@@ -31,7 +31,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <ctype.h>
-#include <qfile.h>
+#include <qdir.h>
 #include <qtextstream.h>
 #include <qstringlist.h>
 
@@ -94,12 +94,15 @@ Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
     repeatTimer = new QTimer( this );
     connect( repeatTimer, SIGNAL(timeout()), this, SLOT(repeat()) );
 
+    QCopChannel* kbdChannel = new QCopChannel("MultiKey/Keyboard", this);
+    connect(kbdChannel, SIGNAL(received(const QCString &, const QByteArray &)),
+	    this, SLOT(receive(const QCString &, const QByteArray &)));
 }
 
 Keyboard::~Keyboard() {
 
     if ( configdlg ) { 
-        delete (ConfigDlg *) configdlg; 
+        delete configdlg;
         configdlg = 0;
     }
 
@@ -417,7 +420,7 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 
             if ( configdlg ) { 
 
-                delete (ConfigDlg *) configdlg; 
+                delete configdlg; 
                 configdlg = 0;
             }
             else {
@@ -434,6 +437,8 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
                        this, SLOT(reloadKeyboard()));
                connect(configdlg, SIGNAL(configDlgClosed()),
                        this, SLOT(cleanupConfigDlg()));
+               connect(configdlg, SIGNAL(reloadSw()),
+                       this, SLOT(reloadSw()));
                configdlg->showMaximized();
                configdlg->show();
                configdlg->raise();
@@ -760,6 +765,17 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 
 }
 
+void Keyboard::receive(const QCString &msg, const QByteArray &data)
+{
+    if (msg == "setmultikey(QString)") {
+	QDataStream stream(data, IO_ReadOnly);
+        QString map;
+        stream >> map;
+	setMapToFile(map);
+    } else if (msg == "getmultikey()") {
+	reloadSw();
+    }
+}
 
 /* Keyboard::mouseReleaseEvent {{{1 */
 void Keyboard::mouseReleaseEvent(QMouseEvent*)
@@ -911,9 +927,20 @@ void Keyboard::toggleRepeat(bool on) {
 void Keyboard::cleanupConfigDlg() {
 
     if ( configdlg ) { 
-        delete (ConfigDlg *) configdlg; 
+        delete configdlg; 
         configdlg = 0;
     }
+}
+
+void Keyboard::reloadSw() {
+    QCopEnvelope e("MultiKey/Switcher", "setsw(QString,QString)");
+
+    Config* config = new Config("multikey");
+    config->setGroup("keymaps");
+    QString current_map = config->readEntry("current", "en.keymap");
+    delete config;
+
+    e << ConfigDlg::loadSw().join("|") << current_map;
 }
 
 /* Keyboard::setMapTo ... {{{1 */
@@ -926,6 +953,11 @@ void Keyboard::setMapToDefault() {
     QString l = config->readEntry( "Language" , "en" );
     delete config;
 
+    /* if Language represents as en_US, ru_RU, etc... */
+    int d = l.find('_');
+    if (d != -1) {
+	l.remove(d, l.length()-d);
+    }
     QString key_map = QPEApplication::qpeDir() + "share/multikey/" 
             + l + ".keymap";
 
@@ -1506,7 +1538,7 @@ void Keys::setKeysFromFile(const char * filename) {
                 buf = t.readLine();
             }
 
-            // other variables like lang & title
+            // other variables like lang & title & sw
             else if (buf.contains(QRegExp("^\\s*[a-zA-Z]+\\s*=\\s*[a-zA-Z0-9/]+\\s*$", FALSE, FALSE))) {
 
                 QTextStream tmp (buf, IO_ReadOnly);

@@ -13,6 +13,8 @@ class ConfigDlg : public QTabWidget
 
 public:
     ConfigDlg ();
+    ~ConfigDlg ();
+    static QStringList ConfigDlg::loadSw();
 
 signals:
     void pickboardToggled(bool on_off);
@@ -21,6 +23,11 @@ signals:
     void setMapToFile(QString map);
     void reloadKeyboard();
     void configDlgClosed();
+    void reloadSw();
+
+protected slots:
+    void moveSelectedUp();
+    void moveSelectedDown();
 
 private slots:
     void pickTog();
@@ -47,6 +54,7 @@ private:
 
     QStringList default_maps; // the maps in your share/multikey/ dir
     QStringList custom_maps; // maps you added with the 'add' button
+    QStringList sw_maps; // maps, which used in keyboard switch rotation ring
 
     /* color buttons */
     QPushButton *keycolor_button;
