@@ -538,7 +538,7 @@ void SMTPwrapper::smtpSend( mailmime *mail,bool later, SMTPaccount *smtp )
 
 int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMTPaccount *smtp )
 {
-    char *server, *user, *pass;
+    const char *server, *user, *pass;
     bool ssl;
     uint16_t port;
     mailsmtp *session;
@@ -546,7 +546,7 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
 
     result = 1;
     server = user = pass = 0;
-    server = strdup( smtp->getServer().latin1() );
+    server = smtp->getServer().latin1();
     ssl = smtp->getSSL();
     port = smtp->getPort().toUInt();
 
@@ -561,7 +561,7 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
         qDebug( "No SSL session" );
         err = mailsmtp_socket_connect( session, server, port );
     }
-    if ( err != MAILSMTP_NO_ERROR ) {result = 0;goto free_mem_session;}
+    if ( err != MAILSMTP_NO_ERROR ) {qDebug("Error init connection");result = 0;goto free_mem_session;}
 
     err = mailsmtp_init( session );
     if ( err != MAILSMTP_NO_ERROR ) {result = 0; goto free_con_session;}
@@ -569,25 +569,28 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
     qDebug( "INIT OK" );
 
     if ( smtp->getLogin() ) {
+        qDebug("smtp with auth");
         if ( smtp->getUser().isEmpty() || smtp->getPassword().isEmpty() ) {
             // get'em
             LoginDialog login( smtp->getUser(), smtp->getPassword(), NULL, 0, true );
             login.show();
             if ( QDialog::Accepted == login.exec() ) {
                 // ok
-                user = strdup( login.getUser().latin1() );
-                pass = strdup( login.getPassword().latin1() );
+                user = login.getUser().latin1();
+                pass = login.getPassword().latin1();
             } else {
                 result = 0; goto free_con_session;
             }
         } else {
-            user = strdup( smtp->getUser().latin1() );
-            pass = strdup( smtp->getPassword().latin1() );
+            user = smtp->getUser().latin1();
+            pass = smtp->getPassword().latin1();
         }
         qDebug( "session->auth: %i", session->auth);
-        err = mailsmtp_auth( session, user, pass );
+        err = mailsmtp_auth( session, (char*)user, (char*)pass );
         if ( err == MAILSMTP_NO_ERROR ) qDebug("auth ok");
         qDebug( "Done auth!" );
+    } else {
+        qDebug("SMTP without auth");
     }
 
     err = mailsmtp_send( session, from, rcpts, data, size );
@@ -604,11 +607,6 @@ free_con_session:
 free_mem_session:
     mailsmtp_free( session );
 free_mem:
-    if (server) free( server );
-    if ( smtp->getLogin() ) {
-        free( user );
-        free( pass );
-    }
     return result;
 }
 
