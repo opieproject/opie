@@ -44,11 +44,12 @@ PackageWindow::PackageWindow( Package *package, const QString &server )
 	QString str;
 	if ( package )
 	{
+        Package *local = package->getLocalPackage();
 		setCaption( package->getPackageName() );
 		QString destName;
-		if ( package->getLocalPackage() )
+		if ( local )
 		{
-			if ( package->getLocalPackage()->getInstalledTo() )
+			if ( local->getInstalledTo() )
 				destName = package->getLocalPackage()->getInstalledTo()->getDestinationName();
 		}
 		else
@@ -86,7 +87,7 @@ PackageWindow::PackageWindow( Package *package, const QString &server )
 		{
 			str.append( tr( "<p><b>Version Available</b> - " ) );
 			str.append( package->getVersion() );
-			if ( package->getLocalPackage() )
+			if ( local )
 			{
 				if ( package->isInstalled() )
 				{

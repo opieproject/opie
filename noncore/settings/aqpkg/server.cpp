@@ -119,7 +119,8 @@ void Server :: readLocalIpks( Server *local )
         QString file = (*it)->file();
 
         // Changed to display the filename (excluding the path)
-        QString packageName = Utils::getFilenameFromIpkFilename( file );
+//        QString packageName = Utils::getFilenameFromIpkFilename( file );
+        QString packageName = Utils::getPackageNameFromIpkFilename( file );      
         QString ver = Utils::getPackageVersionFromIpkFilename( file );
         Package *package = new Package( packageName );
         package->setVersion( ver );
@@ -139,8 +140,10 @@ void Server :: readLocalIpks( Server *local )
 		packageList.push_back( Package( tmp ) );
 		int p2 = file.find( "_", p+1 );
 		tmp = file.mid( p+1, p2-(p+1) );
-		packageList.back().setVersion( tmp );
-		packageList.back().setPackageStoredLocally( true );
+//		packageList.back().setVersion( tmp );
+//		packageList.back().setPackageStoredLocally( true );
+		packageList.setVersion( tmp );
+		packageList.setPackageStoredLocally( true );
 	}
 #endif
 

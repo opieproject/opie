@@ -121,6 +121,8 @@ void Package :: setVersion( const QString &v )
     if ( localPackage )
         if ( localPackage->getVersion() < getVersion() && !installed )
             differentVersionAvailable = true;
+        else
+            differentVersionAvailable = false;
 }
 
 void Package :: setPackageName( const QString &name )

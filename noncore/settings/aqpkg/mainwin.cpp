@@ -1012,6 +1012,11 @@ InstallData *MainWindow :: dealWithItem( QCheckListItem *item )
     {
         InstallData *newitem = new InstallData();
         newitem->option = "D";
+        
+        // If local file, remove using package name, not filename
+        if ( p->isPackageStoredLocally() )
+            name = item->text();
+        
         if ( !p->isPackageStoredLocally() )
             newitem->packageName = p->getInstalledPackageName();
         else
@@ -1041,6 +1046,10 @@ InstallData *MainWindow :: dealWithItem( QCheckListItem *item )
         {
             // Version available is older - remove only
             newitem->option = "D";
+           
+            // If local file, remove using package name, not filename
+            if ( p->isPackageStoredLocally() )
+                name = item->text();
         }
         else
         {
@@ -1080,6 +1089,9 @@ InstallData *MainWindow :: dealWithItem( QCheckListItem *item )
                         break;
                     case 1: // Remove
                         newitem->option = "D";
+                        // If local file, remove using package name, not filename
+                        if ( p->isPackageStoredLocally() )
+                            name = item->text();
                         break;
                     case 2: // Reinstall or Upgrade
                         newitem->option = secondOption;
