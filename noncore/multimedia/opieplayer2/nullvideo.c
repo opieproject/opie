@@ -183,6 +183,7 @@ static void null_compute_ideal_size (null_driver_t *this, opie_frame_t *frame) {
 	  case ASPECT_AUTO:
 	      switch (frame->ratio_code) {
 		  case XINE_ASPECT_RATIO_ANAMORPHIC:  /* anamorphic     */
+		  case XINE_ASPECT_RATIO_PAN_SCAN:    
 		      desired_ratio = 16.0 /9.0;
 		      break;
 		  case XINE_ASPECT_RATIO_211_1:       /* 2.11:1 */
@@ -203,7 +204,7 @@ static void null_compute_ideal_size (null_driver_t *this, opie_frame_t *frame) {
 	      }
 	      break;
 	  case ASPECT_ANAMORPHIC:
-	      desired_ratio = 16.0 / 9.0;
+     	      desired_ratio = 16.0 / 9.0;
 	      break;
 	  case ASPECT_DVB:
 	      desired_ratio = 2.0 / 1.0;
@@ -334,17 +335,20 @@ static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
 				    this->bytes_per_pixel );
 
 	if( format == IMGFMT_YV12 ) {
-	    int image_size = width * height; /* cast ouch*/
-	    frame->frame.base[0] = xine_xmalloc_aligned(16, image_size,
-							(void **)&frame->chunk[0] );
-	    frame->frame.base[1] = xine_xmalloc_aligned(16, image_size,
-							(void **)&frame->chunk[1] );
-	    frame->frame.base[2] = xine_xmalloc_aligned(16, image_size,
-							(void **)&frame->chunk[2] );
+	    frame->frame.pitches[0] = 8*((width + 7) / 8);
+	    frame->frame.pitches[1] = 8*((width + 15) / 16);
+	    frame->frame.pitches[2] = 8*((width + 15) / 16);
+	    frame->frame.base[0] = xine_xmalloc_aligned (16, frame->frame.pitches[0] * height,(void **)&frame->chunk[0]);
+	    frame->frame.base[1] = xine_xmalloc_aligned (16, frame->frame.pitches[1] * ((height+ 1)/2), (void **)&frame->chunk[1]);
+	    frame->frame.base[2] = xine_xmalloc_aligned (16, frame->frame.pitches[2] * ((height+ 1)/2), (void **)&frame->chunk[2]);
+
 	}else{
-	    int image_size = width * height; /* cast ouch*/
-	    frame->frame.base[0] = xine_xmalloc_aligned(16, image_size,
-							(void **)&frame->chunk[0] );
+	    frame->frame.pitches[0] = 8*((width + 3) / 4);
+	    frame->frame.pitches[1] = 8*((width + 3) / 4);
+	    frame->frame.pitches[2] = 8*((width + 3) / 4);
+	    
+	    frame->frame.base[0] = xine_xmalloc_aligned (16, frame->frame.pitches[0] * height,
+                                                      (void **)&frame->chunk[0]);
 	    frame->chunk[1] = NULL;
 	    frame->chunk[2] = NULL;
 	}
@@ -368,8 +372,8 @@ static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
 		frame->yuv2rgb->configure (frame->yuv2rgb,
 					   frame->width,
 					   16,	
-					   frame->width*2,
-					   frame->width,
+					   2*frame->frame.pitches[0],
+					   2*frame->frame.pitches[1],
 					   frame->output_width,
 					   frame->stripe_height,
 					   frame->bytes_per_line*2);
@@ -379,8 +383,8 @@ static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
 		frame->yuv2rgb->configure (frame->yuv2rgb,
 					   frame->width,
 					   16,
-					   frame->width,
-					   frame->width/2,
+					   frame->frame.pitches[0],
+					   frame->frame.pitches[1],
 					   frame->output_width,
 					   frame->stripe_height,
 					   frame->bytes_per_line);
