@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <iostream>
+
 #include <qmenubar.h>
 #include <qpopupmenu.h>
 #include <qmessagebox.h>
@@ -81,7 +83,7 @@ void MainWindow :: setDocument( const QString &doc )
 {
     // Remove path from package
     QString package = Utils::getPackageNameFromIpkFilename( doc );
-    cout << "Selecting package " << package << endl;
+    std::cout << "Selecting package " << package << std::endl;
     networkPkgWindow->selectLocalPackage( package );
 }
 

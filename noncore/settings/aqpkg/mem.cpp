@@ -16,6 +16,7 @@
  ***************************************************************************/
 #include <stdio.h>
 #include <fstream>
+#include <iostream>
 #include <list>
 using namespace std;
 
