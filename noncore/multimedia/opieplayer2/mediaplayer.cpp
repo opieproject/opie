@@ -34,9 +34,8 @@ extern MediaPlayerState *mediaPlayerState;
 MediaPlayer::MediaPlayer( QObject *parent, const char *name )
     : QObject( parent, name ), volumeDirection( 0 ), currentFile( NULL ) {
 
-
-    //   xineControl = new XineControl();
-//    QPEApplication::grabKeyboard(); // EVIL
+    qApp->processEvents();
+    //    QPEApplication::grabKeyboard(); // EVIL
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
     connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( setPlaying( bool ) ) );

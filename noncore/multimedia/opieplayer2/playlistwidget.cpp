@@ -202,7 +202,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
   new ToolButton( vbox1, tr( "Move Down" ), "opieplayer2/down", d->selectedFiles, SLOT(moveSelectedDown()) );
   QVBox *stretch2 = new QVBox( vbox1 ); stretch2->setBackgroundMode( PaletteButton ); // add stretch
 
-    
+
   Playout->addMultiCellWidget( vbox3, 0, 0, 0, 1 );
 
   QWidget *aTab;
@@ -220,7 +220,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
   audioView->setColumnAlignment(2, Qt::AlignRight);
   audioView->setAllColumnsShowFocus(TRUE);
   audioView->setSorting(0,TRUE);
-  
+
   audioView->setMultiSelection( TRUE );
   audioView->setSelectionMode( QListView::Extended);
 
@@ -246,7 +246,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
   videoView->setColumnAlignment(2, Qt::AlignRight);
   videoView->setAllColumnsShowFocus(TRUE);
   videoView->setSorting(0,TRUE);
-  
+
   videoView->setMultiSelection( TRUE );
   videoView->setSelectionMode( QListView::Extended);
 

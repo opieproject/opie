@@ -18,11 +18,12 @@ int main(int argc, char **argv) {
     mediaPlayerState = &st;
     PlayListWidget pl( 0, "playList" );
     playList = &pl;
+    pl.showMaximized();
     AudioWidget aw( 0, "audioUI" );
     audioUI = &aw;
     VideoWidget vw( 0, "videoUI" );
     videoUI = &vw;
-
+    a.processEvents();
     MediaPlayer mp( 0, "mediaPlayer" );
 
     a.showMainDocumentWidget(&pl);

@@ -35,6 +35,7 @@
 #include <qpe/mediaplayerplugininterface.h>
 #include <qpe/config.h>
 
+
 #include <qwidget.h>
 #include <qpainter.h>
 #include <qpixmap.h>
@@ -81,6 +82,8 @@ static const int numVButtons = (sizeof(videoButtons)/sizeof(MediaButton));
 
 VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
 QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
+
+
     setCaption( tr("OpiePlayer - Video") );
 
     videoFrame = new XineVideoWidget ( this, "Video frame" );
