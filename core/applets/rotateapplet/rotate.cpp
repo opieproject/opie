@@ -105,22 +105,15 @@ void RotateApplet::activated ( )
 
     if ( m_flipped )  {
         if ( rotDirection  )  {
-            newRotation = currentRotation - 90;
-            if (newRotation <=0) newRotation = 270;
-	//ipaqs like the 36xx have the display rotated
-	// to 270 as default, and -90 is invalid => handle this here
+            newRotation = ( currentRotation + 270 ) % 360;
         } else {
-            newRotation = currentRotation + 90;
-            if(newRotation >= 360) newRotation = 0;	//ipaqs like the 36xx have the display
-            //rotated to 270 as default, so 360 does nothing => handle this here
+            newRotation = ( currentRotation + 90 ) % 360;
         }
     } else {
         if ( rotDirection )  {
-            newRotation = currentRotation + 90;
-             if(newRotation >= 360) newRotation = 0;
+            newRotation = ( currentRotation + 90 ) % 360;
         } else {
-            newRotation = currentRotation - 90;
-            if (newRotation <=0) newRotation = 270;
+            newRotation = ( currentRotation + 270 ) % 360;
          }
     }
     QCopEnvelope env( "QPE/System", "setCurrentRotation(int)" );
