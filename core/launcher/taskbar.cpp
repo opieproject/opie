@@ -82,7 +82,7 @@ static Global::Command builtins[] = {
 #undef APP
 #endif
 
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_EBX)
+#if defined(QT_QWS_IPAQ) || defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_SHARP)
         { "calibrate",          TaskBar::calibrate, 1, 0 },
 #endif
 #if !defined(QT_QWS_CASSIOPEIA)
@@ -168,12 +168,8 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
 
     sysTray = new SysTray( this );
 
-    // ## make customizable in some way?
-#ifdef QT_QWS_SHARP
+    // ## make customizable in some way? 
     lockState = new LockKeyState( this );
-#else
-    lockState = 0;
-#endif
 
 #if defined(Q_WS_QWS)
 #if !defined(QT_NO_COP)
