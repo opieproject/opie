@@ -941,7 +941,7 @@ void TEWidget::emitSelection()
 {
 #ifndef QT_NO_CLIPBOARD
   QString text = QApplication::clipboard()->text();
-//	qDebug(text);
+//	odebug << text << oendl; 
   if ( ! text.isNull())
   {
     text.replace(QRegExp("\n"), "\r");
@@ -1028,7 +1028,7 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
 #ifdef FAKE_CTRL_AND_ALT
     static bool control = FALSE;
     static bool alt = FALSE;
-//    qDebug(" Has a keyboard with no CTRL and ALT keys, but we fake it:");
+//    odebug << " Has a keyboard with no CTRL and ALT keys, but we fake it:" << oendl; 
     bool dele=FALSE;
     if ( e->type() == QEvent::KeyPress || e->type() == QEvent::KeyRelease ) {
         QKeyEvent* ke = (QKeyEvent*)e;
@@ -1067,7 +1067,7 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
         actSel=0; // Key stroke implies a screen update, so TEWidget won't
           // know where the current selection is.
 
-//     qDebug("key pressed is 0x%x, ascii is 0x%x, state %d", ke->key(), ke->ascii(), ke->state());
+//     odebug << "key pressed is 0x" << ke->key() << ", ascii is 0x" << ke->ascii() << ", state " << ke->state() << "" << oendl; 
 
 	bool special_function = true;
 	switch(ke->key()) {

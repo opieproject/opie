@@ -29,6 +29,7 @@
 
 #ifdef  QT_QWS_OPIE
 #include <opie2/ocolorpopupmenu.h>
+#include <opie2/odebug.h>
 using namespace Opie;
 #endif
 
@@ -204,20 +205,20 @@ static const char *commonCmds[] =
 
 
 static void konsoleInit(const char** shell) {
-    if(setuid(getuid()) !=0) qDebug("setuid failed");
-    if(setgid(getgid()) != 0) qDebug("setgid failed"); // drop privileges
+    if(setuid(getuid()) !=0) odebug << "setuid failed" << oendl;
+    if(setgid(getgid()) != 0) odebug << "setgid failed" << oendl;  // drop privileges
 
 
 //  QPEApplication::grabKeyboard(); // for CTRL and ALT
 
-    qDebug("keyboard grabbed");
+    odebug << "keyboard grabbed" << oendl;
 #ifdef FAKE_CTRL_AND_ALT
-    qDebug("Fake Ctrl and Alt defined");
+    odebug << "Fake Ctrl and Alt defined" << oendl;
     QPEApplication::grabKeyboard(); // for CTRL and ALT
 #endif
 
     *shell = getenv("SHELL");
-    qWarning("SHell initially is %s", *shell );
+    owarn << "SHell initially is " << *shell << "" << oendl;
 
     if (shell == NULL || *shell == '\0') {
         struct passwd *ent = 0;
@@ -235,7 +236,7 @@ static void konsoleInit(const char** shell) {
     }
 
     if( putenv((char*)"COLORTERM=") !=0)
-        qDebug("putenv failed"); // to trigger mc's color detection
+        odebug << "putenv failed" << oendl;  // to trigger mc's color detection
 }
 
 
@@ -281,7 +282,7 @@ class HistoryList : public QList<HistoryItem>
 
 void Konsole::initCommandList()
 {
-    //    qDebug("Konsole::initCommandList");
+    //    odebug << "Konsole::initCommandList" << oendl;
     Config cfg( "Konsole" );
     cfg.setGroup("Commands");
     //    commonCombo->setInsertionPolicy(QComboBox::AtCurrent);
@@ -513,7 +514,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
     setFont(cfont);
 
     configMenu = new QPopupMenu( this);
-    colorMenu = new QPopupMenu( this); 
+    colorMenu = new QPopupMenu( this);
    scrollMenu = new QPopupMenu( this);
     editCommandListMenu = new QPopupMenu( this);
 
@@ -1067,7 +1068,7 @@ QSize Konsole::calcSize(int columns, int lines)
 
 void Konsole::setColLin(int columns, int lines)
 {
-    qDebug("konsole::setColLin:: Columns %d", columns);
+    odebug << "konsole::setColLin:: Columns " << columns << "" << oendl;
 
     if ((columns==0) || (lines==0))
     {
@@ -1115,7 +1116,7 @@ void Konsole::setFont(int fontno)
 
 void Konsole::changeColumns(int /*columns*/)
 { //FIXME this seems to cause silliness when reset command is executed
-    //     qDebug("change columns");
+    //     odebug << "change columns" << oendl;
     //   TEWidget* te = getTe();
     //   if (te != 0) {
     //   setColLin(columns,te->Lines());
@@ -1413,7 +1414,7 @@ void Konsole::colorMenuSelected(int iD)
 {
     // this is NOT pretty, elegant or anything else besides functional
     //       QString temp;
-    //      qDebug( temp.sprintf("colormenu %d", iD));
+    //      odebug << temp.sprintf("colormenu " << iD) << "" << oendl;
 
     TEWidget* te = getTe();
     Config cfg( "Konsole" );
@@ -1529,7 +1530,7 @@ void Konsole::colorMenuSelected(int iD)
     if(iD==-19)
     {
         // Custom
-        qDebug("do custom");
+        odebug << "do custom" << oendl;
         if(fromMenu)
         {
             Opie::OColorPopupMenu* penColorPopupMenu = new Opie::OColorPopupMenu(Qt::black, this, "foreground color");
@@ -1634,7 +1635,7 @@ void Konsole::tabMenuSelected(int id)
 void Konsole::configMenuSelected(int iD)
 {
     //      QString temp;
-    //      qDebug( temp.sprintf("configmenu %d",iD));
+    //      odebug << temp.sprintf("configmenu " << iD) << "" << oendl;
 
     TEWidget* te = getTe();
     Config cfg( "Konsole" );
@@ -1704,7 +1705,7 @@ void Konsole::setColor(int sess)
 
 void Konsole::scrollMenuSelected(int index)
 {
-    //    qDebug( "scrollbar menu %d",index);
+    //    odebug << "scrollbar menu " << index << "" << oendl;
 
     TEWidget* te = getTe();
     Config cfg( "Konsole" );
@@ -1748,7 +1749,7 @@ void Konsole::scrollMenuSelected(int index)
 void Konsole::editCommandListMenuSelected(int iD)
 {
     //      QString temp;
-    //      qDebug( temp.sprintf("edit command list %d",iD));
+    //      odebug << temp.sprintf("edit command list " << iD) << "" << oendl;
 
     // FIXME: more cleanup needed here
 
@@ -1789,7 +1790,7 @@ void Konsole::editCommandListMenuSelected(int iD)
     if( iD  == ec_quick)
     {
         cfg.setGroup("Commands");
-        //        qDebug("enableCommandEdit");
+        //        odebug << "enableCommandEdit" << oendl;
         if( !configMenu->isItemChecked(iD) )
         {
             commonCombo->setEditable( TRUE );
@@ -1877,10 +1878,10 @@ void Konsole::changeForegroundColor(const QColor &color)
     foreground.setRgb(r,g,b);
 
     cfg.writeEntry("foreground",color.name());
-    qDebug("foreground "+color.name());
+    odebug << "foreground "+color.name() << oendl;
     cfg.write();
 
-    qDebug("do other dialog");
+    odebug << "do other dialog" << oendl;
 #ifdef QT_QWS_OPIE
 
     Opie::OColorPopupMenu* penColorPopupMenu2 = new Opie::OColorPopupMenu(Qt::black, this,"background color");
@@ -1893,14 +1894,14 @@ void Konsole::changeForegroundColor(const QColor &color)
 void Konsole::changeBackgroundColor(const QColor &color)
 {
 
-    qDebug("Change background");
+    odebug << "Change background" << oendl;
     Config cfg( "Konsole" );
     cfg.setGroup("Colors");
     int r, g, b;
     color.rgb(&r,&g,&b);
     background.setRgb(r,g,b);
     cfg.writeEntry("background",color.name());
-    qDebug("background "+color.name());
+    odebug << "background "+color.name() << oendl;
     cfg.write();
 }
 

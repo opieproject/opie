@@ -69,7 +69,7 @@ TEScreen::TEScreen(int lines, int columns)
 {
   this->lines   = lines;
   this->columns = columns;
-//  qDebug("Columns %d", columns);
+//  odebug << "Columns " << columns << "" << oendl; 
   
   image      = (ca*) malloc(lines*columns*sizeof(ca));
   tabstops   = NULL; initTabStops();

@@ -45,12 +45,12 @@ OPIE_EXPORT_APP( OApplicationFactory<Konsole> )
 
 /* --| main |------------------------------------------------------ */
 		int main(int argc, char* argv[]) {
-		if(setuid(getuid()) !=0) qDebug("setuid failed");
-		if(setgid(getgid()) != 0) qDebug("setgid failed"); // drop privileges
+		if(setuid(getuid()) !=0) odebug << "setuid failed" << oendl; 
+		if(setgid(getgid()) != 0) odebug << "setgid failed" << oendl;  // drop privileges
 
 		QPEApplication a( argc, argv );
 #ifdef FAKE_CTRL_AND_ALT
-    qDebug("Fake Ctrl and Alt defined");
+    odebug << "Fake Ctrl and Alt defined" << oendl; 
 		QPEApplication::grabKeyboard(); // for CTRL and ALT
 #endif
 
@@ -73,7 +73,7 @@ OPIE_EXPORT_APP( OApplicationFactory<Konsole> )
 		}
 
 		if( putenv((char*)"COLORTERM=") !=0)
-				qDebug("putenv failed"); // to trigger mc's color detection
+				odebug << "putenv failed" << oendl;  // to trigger mc's color detection
 
 		Konsole m( "test", shell, tmp, TRUE  );
 		m.setCaption( Konsole::tr("Terminal") );

@@ -151,13 +151,13 @@ int i = 0;
     QListViewItemIterator it( m_PlayListSelection );
 
     for ( ; it.current(); ++it ) {
-//    qDebug(it.current()->text(0));
+//    odebug << it.current()->text(0) << oendl; 
     cfg->writeEntry(QString::number(i),it.current()->text(0));
     i++;
 
     }
     cfg->writeEntry("Commands Set","TRUE");
-//    qDebug("CommandEditDialog::accept() - written");
+//    odebug << "CommandEditDialog::accept() - written" << oendl; 
     delete cfg;
     emit commandsEdited();
     close();

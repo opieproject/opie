@@ -17,14 +17,17 @@
 ** not clear to you.
 **
 **********************************************************************/
-#include <qheader.h>
 
 #include "playlistselection.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+
+/* Qt */
+#include <qheader.h>
+
+/* STD */
 #include <stdlib.h>
-
-
-
 
 
 PlayListSelection::PlayListSelection( QWidget *parent, const char *name )
@@ -81,7 +84,7 @@ void PlayListSelection::addStringToSelection (const QString & lnk) {
 
 }
 void PlayListSelection::removeSelected() {
-    qDebug("removeSelected()");
+    odebug << "removeSelected()" << oendl;
     QListViewItem *item = selectedItem();
     if ( item )
   delete item;
