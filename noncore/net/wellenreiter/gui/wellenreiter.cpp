@@ -253,15 +253,25 @@ void Wellenreiter::buttonClicked()
         logwindow->log( "(i) Daemon has been stopped." );
         button->setText( "Start Scanning" );
         
-        // Stop daemon
+        // Stop daemon - ugly for now... later better
         
-        // find out pids of wellenreiterd and orinoco_hopper
+        system( "killall orinoco_hopper" );
+        system( "killall wellenreiterd" );
         
+        // FIXME: reset the card trying to get into a usable state again
+        
+        // for now, just message the user
+
+        QMessageBox::information( this, "Wellenreiter/Opie", "You should reset your\ndevice before using it again." );
     }
     
     else
     {    
     
+        logwindow->log( "(i) Daemon has been started." );
+        daemonRunning = true;
+        button->setText( "Stop Scanning" );
+        
         // get configuration from config window
         
         const QString& interface = configwindow->interfaceName->currentText();
@@ -274,12 +284,8 @@ void Wellenreiter::buttonClicked()
             return;
         }
         
-        logwindow->log( "(i) Daemon has been started." );
-        button->setText( "Stop Scanning" );
-
-#ifdef QWS
-                
         // set interface into monitor mode
+        /* Global::Execute definitely does not work very well with non-gui stuff! :( */
         
         QString cmdline;
         
@@ -294,20 +300,24 @@ void Wellenreiter::buttonClicked()
         cmdline += interface;
         cmdline += " -i ";
         cmdline += interval;
-        //qDebug( "execute: %s", (const char*) cmdline );
-        Global::execute( cmdline );
+        cmdline += " &";
+        qDebug( "execute: %s", (const char*) cmdline );
+        system( cmdline ); 
+        qDebug( "done" );
         
         // start daemon
         
         cmdline = "wellenreiterd ";
         cmdline += interface;
         cmdline += " 3";
-        //qDebug( "execute: %s", (const char*) cmdline );       
-        Global::execute( cmdline );
-#endif
+        cmdline += " &";
+
+        qDebug( "execute: %s", (const char*) cmdline );       
+        system( cmdline );
+        qDebug( "done" );
 
         /*
-
+        
         // add some test stations, so that we can see if the GUI part works
 
         addNewItem( "managed", "Vanille", "04:00:20:EF:A6:43", true, 6, 80 );
