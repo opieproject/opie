@@ -75,6 +75,8 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
   			 cmd += " -force-reinstall ";
 	  	if (installDialog->_force_remove->isChecked())
   			 cmd += " -force-removal-of-essential-packages ";
+	  	if (installDialog->_force_overwrite->isChecked())
+  			 cmd += " -force-overwrite ";
 	  }
 	} //!args.contains("update")
 

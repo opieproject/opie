@@ -35,6 +35,7 @@ public:    InstallDialog( PackageManagerSettings* s, QWidget* parent = 0, const 
     QGroupBox* GroupBoxOptions;
     QCheckBox* _force_depends;
     QCheckBox* _force_reinstall;
+    QCheckBox* _force_overwrite;
     QCheckBox* _force_remove;
 		QCheckListItem *toRemoveItem;
 		QCheckListItem *toInstallItem;

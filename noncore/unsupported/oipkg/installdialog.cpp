@@ -43,8 +43,8 @@ InstallDialog::InstallDialog( PackageManagerSettings* s, QWidget* parent,  const
     GroupBoxOptions->layout()->setMargin( 0 );
     GroupBoxOptionsLayout = new QGridLayout( GroupBoxOptions->layout() );
     GroupBoxOptionsLayout->setAlignment( Qt::AlignTop );
-    GroupBoxOptionsLayout->setSpacing( 2 );
-    GroupBoxOptionsLayout->setMargin( 2 );
+    GroupBoxOptionsLayout->setSpacing( 0 );
+    GroupBoxOptionsLayout->setMargin( 0 );
 
     _force_depends = new QCheckBox( GroupBoxOptions, "_force_depends" );
     QFont _force_depends_font(  _force_depends->font() );
@@ -66,10 +66,18 @@ InstallDialog::InstallDialog( PackageManagerSettings* s, QWidget* parent,  const
     _force_remove = new QCheckBox( GroupBoxOptions, "_force_remove" );
     QFont _force_remove_font(  _force_remove->font() );
     _force_remove_font.setPointSize( 8 );
-    _force_remove->setFont( _force_remove_font ); 
+    _force_remove->setFont( _force_remove_font );
     _force_remove->setText( tr( "-force-removal-of-essential-packages" ) );
 
     GroupBoxOptionsLayout->addWidget( _force_remove, 2, 0 );
+
+    _force_overwrite = new QCheckBox( GroupBoxOptions, "_force_overwrite" );
+    QFont _force_overwrite_font(  _force_overwrite->font() );
+    _force_overwrite_font.setPointSize( 8 );
+    _force_overwrite->setFont( _force_overwrite_font );
+    _force_overwrite->setText( tr( "-force-overwrite" ) );
+
+    GroupBoxOptionsLayout->addWidget(_force_overwrite, 3, 0 );
 
     InstallDialogLayout->addWidget( GroupBoxOptions, 1, 0 );
 		toRemoveItem = new QCheckListItem( ListViewPackages, tr("To remove") );
@@ -98,8 +106,9 @@ bool InstallDialog::event( QEvent* ev )
 	_force_depends->setFont( _force_depends_font ); 
 	QFont _force_reinstall_font(  _force_reinstall->font() );
 	_force_reinstall_font.setPointSize( 8 );
-	_force_reinstall->setFont( _force_reinstall_font ); 
+	_force_reinstall->setFont( _force_reinstall_font );
 	QFont _force_remove_font(  _force_remove->font() );
+	QFont _force_overwrite_font(  _force_overwrite->font() );
 	_force_remove_font.setPointSize( 8 );
 	_force_remove->setFont( _force_remove_font ); 
     }
