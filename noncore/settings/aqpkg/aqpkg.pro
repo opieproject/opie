@@ -1,4 +1,4 @@
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on release quick-app
 HEADERS		= global.h \
 		  mainwin.h \
 		  datamgr.h \
