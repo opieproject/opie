@@ -12,25 +12,24 @@
 #include <qpopupmenu.h>
 #include <qaction.h>
 
+#include "listviewitemoipkg.h"
 #include "packagelistitem.h"
 #include "pksettings.h"
 
 PackageListView::PackageListView(QWidget *p, const char* n, PackageManagerSettings *s)
-	: QListView(p,n)
+  : QListView(p,n)
 {
-	settings = s;
-	popupMenu = new QPopupMenu( this );	
-	destsMenu = new QPopupMenu( popupMenu );
+  settings = s;
   popupTimer = new QTimer( this );
   setSelectionMode(QListView::NoSelection);
-	addColumn( tr("Package") );
- 	setRootIsDecorated( true );
+  addColumn( tr("Package") );
+  setRootIsDecorated( true );
 
   connect( popupTimer, SIGNAL(timeout()),
-  		this, SLOT(showPopup()) );
+	   this, SLOT(showPopup()) );
   connect( this, SIGNAL( pressed( QListViewItem* ) ),
-	    this, SLOT( setCurrent( QListViewItem* ) ) );
-	connect( this, SIGNAL( clicked( QListViewItem* ) ),
+	   this, SLOT( setCurrent( QListViewItem* ) ) );
+  connect( this, SIGNAL( clicked( QListViewItem* ) ),
 	   this, SLOT( stopTimer( QListViewItem* ) ) );	
 
 }
@@ -41,113 +40,79 @@ PackageListView::PackageListView(QWidget *p, const char* n, PackageManagerSettin
 
 void PackageListView::setCurrent( QListViewItem* p )
 {
-  if ( !p ) return;
-  activePackageListItem = (PackageListItem*)p;
-  activePackage = activePackageListItem->getPackage();
-  if (!activePackage)
-  {
-//		QDictIterator<QCheckListItem> it( rootItems );
-//		while ( it.current() )
-//    {
-//			if ( it.current()==p )
-//   			pvDebug(2,"current item");
-//			++it;
-//		}
+  qDebug("PackageListView::setCurrent ");
+  activeItem = (ListViewItemOipkg*)p;
 
-		return;
-  }
-  popupTimer->start( 750, true );
+  if ( activeItem != 0 ) popupTimer->start( 750, true );
+  
+//  if ( activeItem->getType() != ListViewItemOipkg::Package ){
+//    qDebug("PackageListView::setCurrent !p ");
+//    activePackage = 0;
+//	  activePackageListItem = 0;
+//    qDebug("PackageListView::setCurrent returning ");
+//    return;
+//  };
+//  activePackageListItem = (PackageListItem*)p;
+//  activePackage = activePackageListItem->getPackage();
+//  if (activePackage == 0 )
+//    {
+//      qDebug("PackageListView::setCurrent  if (!activePackage)");
+//      return;
+//    }
+  
+
+  qDebug("PackageListView::setCurrent popupTimer->start");
 }
 
 
 void PackageListView::showPopup()
 {
-  popupMenu->clear();
-  destsMenu->clear();
- 		
- 	QAction *popupAction;
-  if ( !activePackage->installed() )
-  {
-	  popupMenu->insertItem( tr("Install to"), destsMenu );
-  	QStringList dests = settings->getDestinationNames();
-   	QString ad = settings->getDestinationName();
-	  for (uint i = 0; i < dests.count(); i++ )
-  	{		
-	  	popupAction = new QAction( dests[i], QString::null, 0, this, 0 );
-		  popupAction->addTo( destsMenu );
-    	if ( dests[i] == ad && activePackage->toInstall() )
-     	{
-        popupAction->setToggleAction( true );
-			  popupAction->setOn(true);
-  		};
-  	}
-	  connect( destsMenu, SIGNAL( activated( int ) ),
-		   this, SLOT( changePackageDest( int ) ) );
-   }else{
-   	popupAction = new QAction( tr("Remove"),QString::null,  0, this, 0 );
-		popupAction->addTo( popupMenu );
-  	connect( popupAction, SIGNAL( activated() ),
-	   	this , SLOT( toggleProcess() ) );
-   	popupAction = new QAction( tr("Reinstall"),QString::null,  0, this, 0 );
-		popupAction->addTo( popupMenu );
-  	popupAction->setEnabled( false );
-   }
-  popupMenu->popup( QCursor::pos() );
+  qDebug("PackageListView::showPopup");
+  QPopupMenu *popup = activeItem->getPopupMenu();
+  if (popup == 0) return;
+  popup->popup( QCursor::pos() );
+  qDebug("PackageListView::showPopup");
 }
 
 void PackageListView::stopTimer( QListViewItem* )
 {
-	popupTimer->stop();
+  popupTimer->stop();
 }
 
-
-void PackageListView::changePackageDest( int i )
-{
- 	activePackage->setDest( destsMenu->text(i) );
-  activePackage->setOn();
-  activePackage->setLink( settings->createLinks() );
-  activePackageListItem->displayDetails();
-}
-
-void PackageListView::toggleProcess()
-{
-  activePackage->toggleProcess() ;
-  activePackageListItem->displayDetails();
-}
 
 void PackageListView::display()
 {
-	QDictIterator<PackageList> list( PackageLists );
-	PackageList *packlist;
-	Package *pack;
+  QDictIterator<PackageList> list( PackageLists );
+  PackageList *packlist;
+  OipkgPackage *pack;
   PackageListItem *item;
-  QCheckListItem *rootItem;
+  ListViewItemOipkg *rootItem;
   QListViewItem* it;
   QListViewItem* itdel;
-	while ( list.current() ) {
-  	packlist = list.current();
+  while ( list.current() ) {
+    packlist = list.current();
     rootItem = rootItems.find( list.currentKey() );
     //rootItem->clear();
     it=rootItem->firstChild();
     while ( it )
-    {
-      itdel = it;
-      it    = it->nextSibling();
-			delete itdel;
-   	}
+      {
+	itdel = it;
+	it    = it->nextSibling();
+	delete itdel;
+      }
     pack = packlist->first();
-  	while( pack )
-  	{
-	 		item = new PackageListItem( rootItem, pack, settings );				
+    while( pack )
+      {
+	item = new PackageListItem( rootItem, pack, settings );				
     	pack = packlist->next();
-  	}	
-		++list;
+      }	
+    ++list;
   }
 }
 
 void PackageListView::addList( QString n, PackageList* pl)
 {
-	PackageLists.insert(n, pl);
- 	QCheckListItem *item = new QCheckListItem(this,n);
- 	rootItems.insert(n, item);
+  PackageLists.insert(n, pl);
+  ListViewItemOipkg *item = new ListViewItemOipkg(this,n,ListViewItemOipkg::Feed);
+  rootItems.insert(n, item);
 }

@@ -18,24 +18,23 @@
 
 #include "debug.h"
 
-Package::Package( QObject *parent, const char *name )
+OipkgPackage::OipkgPackage( QObject *parent, const char *name )
 	: QObject(parent,name)
 {
 
 }
 
-Package::~Package()
+OipkgPackage::~OipkgPackage()
 {
 }
 
-Package::Package( PackageManagerSettings *s, QObject *parent, const char *name )
+OipkgPackage::OipkgPackage( PackageManagerSettings *s, QObject *parent, const char *name )
 	: QObject(parent,name)
-{
-	Package(parent,name);
+{	
 	init(s);
 }
 
-void Package::init( PackageManagerSettings *s )
+void OipkgPackage::init( PackageManagerSettings *s )
 {
 	settings = s;
   _size = "";
@@ -54,14 +53,14 @@ void Package::init( PackageManagerSettings *s )
   _version="";
 }
 
-Package::Package( QStringList pack, PackageManagerSettings *s , QObject *parent, const char *name )
+OipkgPackage::OipkgPackage( QStringList pack, PackageManagerSettings *s , QObject *parent, const char *name )
 	: QObject(parent,name)
 {
   init(s);
   parsePackage( pack );
 }
 
-Package::Package( QString n, PackageManagerSettings *s, QObject *parent, const char *name )
+OipkgPackage::OipkgPackage( QString n, PackageManagerSettings *s, QObject *parent, const char *name )
 	: QObject(parent,name)
 {
   init(s);
@@ -76,7 +75,7 @@ Package::Package( QString n, PackageManagerSettings *s, QObject *parent, const c
   }
 }
 
-Package::Package( Package *pi, QObject *parent, const char *name )
+OipkgPackage::OipkgPackage( OipkgPackage *pi, QObject *parent, const char *name )
 	: QObject(parent,name)
 {
   init(pi->settings);
@@ -84,7 +83,7 @@ Package::Package( Package *pi, QObject *parent, const char *name )
 }
 
 
-void Package::setValue( QString n, QString t )
+void OipkgPackage::setValue( QString n, QString t )
 {
   if ( n == "Package" )
   {
@@ -137,20 +136,20 @@ void Package::setValue( QString n, QString t )
   }
 }
 
-QString Package::name()
+QString OipkgPackage::name()
 {
 	if (_displayName.isEmpty() ) return _name;
  	else return _displayName;
 }
 
 
-QString Package::installName()
+QString OipkgPackage::installName()
 {
 	if (_useFileName) return _fileName;
   else return _name;
 }
 
-QString Package::packageName()
+QString OipkgPackage::packageName()
 {
 	QString pn = installName();
  	pn = pn.right(pn.length()-pn.findRev("/"));
@@ -158,7 +157,7 @@ QString Package::packageName()
  	return pn;
 }
 
-bool Package::installed()
+bool OipkgPackage::installed()
 {
   if (_status.contains("installed"))
   {
@@ -172,7 +171,7 @@ bool Package::installed()
   else
 	if (_versions)
   {
-	  QDictIterator<Package> other( *_versions );
+	  QDictIterator<OipkgPackage> other( *_versions );
 		while ( other.current() )
     {
     	 if (other.current()->status().contains("installed")
@@ -184,11 +183,11 @@ bool Package::installed()
   return false;
 }
 
-bool Package::otherInstalled()
+bool OipkgPackage::otherInstalled()
 {
 	if (_versions)
   {
-	  QDictIterator<Package> other( *_versions );
+	  QDictIterator<OipkgPackage> other( *_versions );
 		while ( other.current() )
     {
     	 if (other.current()->installed()) return true;
@@ -198,34 +197,34 @@ bool Package::otherInstalled()
   return false;
 }
 
-void Package::setDesc( QString s )
+void OipkgPackage::setDesc( QString s )
 {
   _desc = s;
   _shortDesc = s.left( s.find("\n") );
 }
 
-QString Package::desc()
+QString OipkgPackage::desc()
 {
   return _desc;
 }
 
-QString Package::shortDesc()
+QString OipkgPackage::shortDesc()
 {
   return _shortDesc;
 }
 
-QString Package::size()
+QString OipkgPackage::size()
 {
   return _size;
 }
 
 
-QString Package::version()
+QString OipkgPackage::version()
 {
   return _version;
 }
 
-QString Package::sizeUnits()
+QString OipkgPackage::sizeUnits()
 {
 	int i = _size.toInt();
  	int c = 0;
@@ -241,31 +240,30 @@ QString Package::sizeUnits()
   return ret;
 }
 
-bool Package::toProcess()
+bool OipkgPackage::toProcess()
 {
   return _toProcess;
 }
 
-bool Package::toRemove()
+bool OipkgPackage::toRemove()
 {
   if ( _toProcess && installed() ) return true;
   else return false;
 }
 
-bool Package::toInstall()
+bool OipkgPackage::toInstall()
 {
   if ( _toProcess && !installed() ) return true;
   else return false;
 }
 
-void Package::toggleProcess()
+void OipkgPackage::toggleProcess()
 {
   _toProcess = ! _toProcess;
 }
 
 
-
-void Package::copyValues( Package* pack )
+void OipkgPackage::copyValues( OipkgPackage* pack )
 {
   if (_size.isEmpty()      && !pack->_size.isEmpty()) _size = QString( pack->_size );
   if (_section.isEmpty()   && !pack->_section.isEmpty()) _section = QString( pack->_section );
@@ -281,12 +279,12 @@ void Package::copyValues( Package* pack )
   if (!installed() && _status.isEmpty() && !pack->_status.isEmpty()) _status = QString( pack->_status );
 }
 
-QString Package::section()
+QString OipkgPackage::section()
 {
   return _section;
 }
 
-void Package::setSection( QString s)
+void OipkgPackage::setSection( QString s)
 {
   int i = s.find("/");
   if ( i > 0 )
@@ -299,12 +297,12 @@ void Package::setSection( QString s)
     }
 }
 
-QString Package::subSection()
+QString OipkgPackage::subSection()
 {
   return _subsection;
 }
 
-void Package::parsePackage( QStringList pack )
+void OipkgPackage::parsePackage( QStringList pack )
 {
   if ( pack.isEmpty() ) return;
   int count = pack.count();
@@ -323,7 +321,7 @@ void Package::parsePackage( QStringList pack )
   return;
 }
 
-QString Package::details()
+QString OipkgPackage::details()
 {
   QString status;
   Process ipkg_status(QStringList() << "ipkg" << "info" << name() );
@@ -362,7 +360,7 @@ QString Package::details()
   return description;
 }
 
-void Package::processed()
+void OipkgPackage::processed()
 {
 	_toProcess = false;
  //hack, but we're not writing status anyway...
@@ -370,36 +368,36 @@ void Package::processed()
  	else _status = "installed";
 }
 
-QString Package::dest()
+QString OipkgPackage::dest()
 {
 	if ( installed()||(!installed() && _toProcess) )
 		return _dest!=""?_dest:settings->getDestinationName();
   else return "";
 }
 
-void Package::setDest( QString d )
+void OipkgPackage::setDest( QString d )
 {
 	if ( d == "remote") _useFileName = true;
 	else _dest = d;
 }
 
-void Package::setOn()
+void OipkgPackage::setOn()
 {
 	_toProcess = true;
 }
 
-bool Package::link()
+bool OipkgPackage::link()
 {
 	if ( _dest == "root" || (!installed() && !_toProcess) ) return false;
 	return _link;
 }
 
-void Package::setLink(bool b)
+void OipkgPackage::setLink(bool b)
 {
 	_link = b;
 }
 
-void Package::parseIpkgFile( QString file)
+void OipkgPackage::parseIpkgFile( QString file)
 {
 // 20020830
 // a quick hack to make oipkg understand the new ipk format
@@ -425,36 +423,36 @@ void Package::parseIpkgFile( QString file)
 
 }
 
-//QString Package::getPackageName()
+//QString OipkgPackage::getPackageName()
 //{
 //	if ( _packageName.isEmpty() ) return _name;
 //	else return _packageName;
 //}
 
-void Package::instalFromFile(bool iff)
+void OipkgPackage::instalFromFile(bool iff)
 {
 	_useFileName = iff;
 }
 
-void Package::setName(QString n)
+void OipkgPackage::setName(QString n)
 {
 	_displayName = n;
 }
 
-QDict<QString>* Package::getFields()
+QDict<QString>* OipkgPackage::getFields()
 {
 	return &_values;
 }
 
-QString Package::status()
+QString OipkgPackage::status()
 {
 	return _status;
 }
 
-bool Package::isOld()
+bool OipkgPackage::isOld()
 {
 	if (!_versions) return false;
-	QDictIterator<Package> other( *_versions );
+	QDictIterator<OipkgPackage> other( *_versions );
 	while ( other.current() ) {
      if (other.current()->version() > version() ) return true;
      ++other;
@@ -462,18 +460,18 @@ bool Package::isOld()
   return false;
 }
 
-bool Package::hasVersions()
+bool OipkgPackage::hasVersions()
 {
 	if (!_versions) return false;
  	else return true;
 }
 
-QDict<Package>* Package::getOtherVersions()
+QDict<OipkgPackage>* OipkgPackage::getOtherVersions()
 {
 	return _versions;
 }
 
-void Package::setOtherVersions(QDict<Package> *v)
+void OipkgPackage::setOtherVersions(QDict<OipkgPackage> *v)
 {
 	_versions=v;
 }

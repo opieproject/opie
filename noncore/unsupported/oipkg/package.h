@@ -19,19 +19,19 @@
 
 #include "pksettings.h"
 
-class Package : public QObject
+class OipkgPackage : public QObject
 {
   	Q_OBJECT
  public:
-  Package(QObject *parent=0, const char *name=0);
-  Package(PackageManagerSettings *s, QObject *parent=0, const char *name=0);
- ~Package();
-  Package( QStringList, PackageManagerSettings *s, QObject *parent=0, const char *name=0 );
-  Package( QString, PackageManagerSettings *s, QObject *parent=0, const char *name=0 );
-  Package( Package*s, QObject *parent=0, const char *name=0 );
+  OipkgPackage(QObject *parent=0, const char *name=0);
+  OipkgPackage(PackageManagerSettings *s, QObject *parent=0, const char *name=0);
+ ~OipkgPackage();
+  OipkgPackage( QStringList, PackageManagerSettings *s, QObject *parent=0, const char *name=0 );
+  OipkgPackage( QString, PackageManagerSettings *s, QObject *parent=0, const char *name=0 );
+  OipkgPackage( OipkgPackage*s, QObject *parent=0, const char *name=0 );
  	
   void    setValue( QString, QString );
-  void    copyValues( Package* );
+  void    copyValues( OipkgPackage* );
 
   QString name();
   QString installName();
@@ -66,8 +66,8 @@ class Package : public QObject
   QDict<QString>* getFields();
   QString status();
 
-	QDict<Package>* getOtherVersions();
-	void setOtherVersions(QDict<Package>*);
+	QDict<OipkgPackage>* getOtherVersions();
+	void setOtherVersions(QDict<OipkgPackage>*);
 
 public slots:
   void toggleProcess();
@@ -90,7 +90,7 @@ private:
   QString _version;
   QString _dest;
   QDict<QString> _values;
-	QDict<Package> *_versions;
+	QDict<OipkgPackage> *_versions;
   bool _useFileName;
   void parsePackage( QStringList );
   void init(PackageManagerSettings *);

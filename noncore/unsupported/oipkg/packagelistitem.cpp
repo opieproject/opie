@@ -11,6 +11,8 @@
 
 #include <qpe/resource.h>
 #include <qobject.h>
+#include <qpopupmenu.h>
+#include <qaction.h>
 
 #include "debug.h"
 
@@ -23,51 +25,64 @@ static QPixmap *pm_install=0;
 static QPixmap *pm_uninstalled_old_installed_new=0;
 static QPixmap *pm_uninstalled_installed_old=0;
 
-PackageListItem::PackageListItem(QListView* lv, Package *pi, PackageManagerSettings *s)
-  :	QCheckListItem(lv,pi->name(),CheckBox)
+PackageListItem::PackageListItem(ListViewItemOipkg *parent, QString name, Type ittype)
+  : ListViewItemOipkg(parent,name,ittype)
 {
- 	init(pi,s);
+
 }
 
-PackageListItem::PackageListItem(QListViewItem *lvi, Package *pi, PackageManagerSettings *s)
-  :	QCheckListItem(lvi,pi->name(),CheckBox)
+PackageListItem::PackageListItem(QListView* lv, OipkgPackage *pi, PackageManagerSettings *s)
+  :	ListViewItemOipkg(lv,pi->name(),ListViewItemOipkg::Package)
 {
- 	init(pi,s);
+  init(pi,s);
 }
 
-void PackageListItem::init( Package *pi, PackageManagerSettings *s)
+PackageListItem::PackageListItem(ListViewItemOipkg *lvi, OipkgPackage *pi, PackageManagerSettings *s)
+  :	ListViewItemOipkg(lvi,pi->name(),ListViewItemOipkg::Package)
 {
+  init(pi,s);
+}
+PackageListItem::~PackageListItem()
+{
+  delete popupMenu;
+  delete destsMenu;
+}
+
+void PackageListItem::init( OipkgPackage *pi, PackageManagerSettings *s)
+{
+  popupMenu = new QPopupMenu( 0 );
+  destsMenu = new QPopupMenu( 0 );
   package = pi;
   settings = s;
   setExpandable( true );
-	QCheckListItem *item;
-	nameItem = new QCheckListItem( this, "" );
-	item = new QCheckListItem( this, QObject::tr("Description: ")+pi->desc() );
- 	item = new QCheckListItem( this, QObject::tr("Size: ")+pi->size() );
-	destItem = new QCheckListItem( this, "" );
-	linkItem = new QCheckListItem( this, "" );
-	statusItem = new QCheckListItem( this, "" );
- 	QCheckListItem *otherItem = new QCheckListItem( this, QObject::tr("other") );
-	item = new QCheckListItem( otherItem, QObject::tr("Install Name: ")+pi->installName() );
+  ListViewItemOipkg *item;
+  nameItem = new ListViewItemOipkg( this, ListViewItemOipkg::Attribute,"name"  );
+  item = new ListViewItemOipkg( this, ListViewItemOipkg::Attribute, QObject::tr("Description: ")+pi->desc()  );
+  item = new ListViewItemOipkg( this, ListViewItemOipkg::Attribute, QObject::tr("Size: ")+pi->size() );
+  destItem = new ListViewItemOipkg( this, ListViewItemOipkg::Attribute, "dest" );
+  linkItem = new ListViewItemOipkg( this, ListViewItemOipkg::Attribute, "link" );
+  statusItem = new ListViewItemOipkg( this, ListViewItemOipkg::Attribute, "status" );
+  ListViewItemOipkg *otherItem = new ListViewItemOipkg( this, ListViewItemOipkg::Attribute, QObject::tr("other") );
+  item = new ListViewItemOipkg( otherItem, ListViewItemOipkg::Attribute, QObject::tr("Install Name: ")+pi->installName() );
   QDict<QString> *fields = pi->getFields();
   QDictIterator<QString> it( *fields );
-	while ( it.current() ) {
-   	item = new QCheckListItem( otherItem, QString(it.currentKey()+": "+*it.current()) );
-		++it;
- 	}
+  while ( it.current() ) {
+    item = new ListViewItemOipkg( otherItem, ListViewItemOipkg::Attribute, QString(it.currentKey()+": "+*it.current()) );
+    ++it;
+  }
   displayDetails();
 
   if (!pm_uninstalled)
-  {
-    pm_uninstalled = new QPixmap(Resource::loadPixmap("oipkg/uninstalled"));
-    pm_uninstalled_old = new QPixmap(Resource::loadPixmap("oipkg/uninstalledOld"));
-    pm_uninstalled_old_installed_new = new QPixmap(Resource::loadPixmap("oipkg/uninstalledOldinstalledNew"));
-    pm_uninstalled_installed_old = new QPixmap(Resource::loadPixmap("oipkg/uninstalledInstalledOld"));
-    pm_installed = new QPixmap(Resource::loadPixmap("oipkg/installed"));
-    pm_installed_old = new QPixmap(Resource::loadPixmap("oipkg/installedOld"));
-    pm_install = new QPixmap(Resource::loadPixmap("oipkg/install"));
-    pm_uninstall = new QPixmap(Resource::loadPixmap("oipkg/uninstall"));
-  }
+    {
+      pm_uninstalled = new QPixmap(Resource::loadPixmap("oipkg/uninstalled"));
+      pm_uninstalled_old = new QPixmap(Resource::loadPixmap("oipkg/uninstalledOld"));
+      pm_uninstalled_old_installed_new = new QPixmap(Resource::loadPixmap("oipkg/uninstalledOldinstalledNew"));
+      pm_uninstalled_installed_old = new QPixmap(Resource::loadPixmap("oipkg/uninstalledInstalledOld"));
+      pm_installed = new QPixmap(Resource::loadPixmap("oipkg/installed"));
+      pm_installed_old = new QPixmap(Resource::loadPixmap("oipkg/installedOld"));
+      pm_install = new QPixmap(Resource::loadPixmap("oipkg/install"));
+      pm_uninstall = new QPixmap(Resource::loadPixmap("oipkg/uninstall"));
+    }
 }
 
 void PackageListItem::paintCell( QPainter *p,  const QColorGroup & cg,
@@ -115,19 +130,19 @@ QPixmap PackageListItem::statePixmap() const
   bool verinstalled = package->otherInstalled();
   if ( !package->toProcess() ) {
     if ( !installed )
-    	if (old)
+      if (old)
      	{
-        if (verinstalled) return *pm_uninstalled_old_installed_new;
-     	 	else return *pm_uninstalled_old;
-      }
-     	else
-      {
-        if (verinstalled) return *pm_uninstalled_installed_old;
-     	 	else return *pm_uninstalled;
-      }
+	  if (verinstalled) return *pm_uninstalled_old_installed_new;
+	  else return *pm_uninstalled_old;
+	}
+      else
+	{
+	  if (verinstalled) return *pm_uninstalled_installed_old;
+	  else return *pm_uninstalled;
+	}
     else
-    	if (old) return *pm_installed_old;
-     	else return *pm_installed;
+      if (old) return *pm_installed_old;
+      else return *pm_installed;
   } else { //toProcess() == true
     if ( !installed )
       return *pm_install;
@@ -160,15 +175,65 @@ void PackageListItem::setOn( bool b )
 
 void PackageListItem::displayDetails()
 {
-	QString sod;
- 	sod += package->sizeUnits().isEmpty()?QString(""):QString(package->sizeUnits());
- 	//sod += QString(package->dest().isEmpty()?"":QObject::tr(" on ")+package->dest());
- 	sod += package->dest().isEmpty()?QString(""):QString(QObject::tr(" on ")+package->dest());
+  QString sod;
+  sod += package->sizeUnits().isEmpty()?QString(""):QString(package->sizeUnits());
+  //sod += QString(package->dest().isEmpty()?"":QObject::tr(" on ")+package->dest());
+  sod += package->dest().isEmpty()?QString(""):QString(QObject::tr(" on ")+package->dest());
   sod = sod.isEmpty()?QString(""):QString(" ("+sod+")");
   setText(0, package->name()+sod );
-	nameItem->setText( 0, QObject::tr("Name: ")+package->name());
-	linkItem->setText( 0, QObject::tr("Link: ")+(package->link()?QObject::tr("Yes"):QObject::tr("No")));
+  nameItem->setText( 0, QObject::tr("Name: ")+package->name());
+  linkItem->setText( 0, QObject::tr("Link: ")+(package->link()?QObject::tr("Yes"):QObject::tr("No")));
   destItem->setText( 0, QObject::tr("Destination: ")+package->dest() );
   statusItem->setText( 0, QObject::tr("Status: ")+package->status() );
   repaint();
 }
+
+QPopupMenu* PackageListItem::getPopupMenu()
+{
+  popupMenu->clear();
+  destsMenu->clear();
+
+  QAction *popupAction;
+  qDebug("PackageListItem::showPopup ");
+
+  if (!package->installed()){
+    popupMenu->insertItem( QObject::tr("Install to"), destsMenu );
+    QStringList dests = settings->getDestinationNames();
+    QString ad = settings->getDestinationName();
+    for (uint i = 0; i < dests.count(); i++ )
+  	{
+     popupAction = new QAction( dests[i], QString::null, 0, popupMenu, 0 );
+     popupAction->addTo( destsMenu );
+     if ( dests[i] == ad && getPackage()->toInstall() )
+	    {
+	      popupAction->setToggleAction( true );
+	      popupAction->setOn(true);
+	    }
+    }
+  connect( destsMenu, SIGNAL( activated( int ) ),
+	       this, SLOT( menuAction( int ) ) );
+      popupMenu->popup( QCursor::pos() );
+  }else{
+    popupMenu->insertItem( QObject::tr("Remove"));
+  connect( popupMenu, SIGNAL( activated( int ) ),
+	       this, SLOT( menuAction( int ) ) );
+      popupMenu->popup( QCursor::pos() );   
+  }
+  return popupMenu;
+}
+
+void PackageListItem::menuAction( int i )
+{
+  if (package->installed()){
+    package->setDest( destsMenu->text(i) );
+    package->setLink( settings->createLinks() );
+  }
+  package->setOn();
+  displayDetails();
+}
+
+//void PackageListItem::toggleProcess()
+//{
+//  package->toggleProcess() ;
+//  displayDetails();
+//}

@@ -48,6 +48,6 @@ void PackageListDocLnk::update()
 	QList<DocLnk> packlist = doclnkset->children();
   for (DocLnk *pack =packlist.first(); pack != 0; pack=packlist.next() )
   {
-    insertPackage( new Package(pack->file(), settings ) );
+    insertPackage( new OipkgPackage(pack->file(), settings ) );
   }
 }

@@ -114,7 +114,7 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
   return ret;
 }
 
-void PmIpkg::makeLinks(Package *pack)
+void PmIpkg::makeLinks(OipkgPackage *pack)
 {
 	pvDebug( 2, "PmIpkg::makeLinks "+ pack->name());
  	QString pn = pack->name();
@@ -232,7 +232,7 @@ void PmIpkg::processLinkDir( QString file, QString dest )
 
 void PmIpkg::loadList( PackageList *pl )
 {   	
-  for( Package *pack = pl->first();pack ; (pack = pl->next())  )
+  for( OipkgPackage *pack = pl->first();pack ; (pack = pl->next())  )
   {
   	if ( pack && (pack->name() != "") && pack)
 		{
@@ -291,7 +291,7 @@ void PmIpkg::remove()
 
 	out(tr("Removing")+"\n"+tr("please wait")+"\n\n");
 
-	QStringList *fileList;
+	QStringList *fileList = new QStringList;
   for (uint i=0; i < to_remove.count(); i++)
   {
 		if ( to_remove.at(i)->link() ) fileList = getList( to_remove.at(i)->name(), to_remove.at(i)->dest() );     	
@@ -414,7 +414,7 @@ void PmIpkg::installFile(const QString &fileName, const QString &dest)
 	to_install.clear();
   to_remove.clear();
 	pvDebug( 2,"PmIpkg::installFile "+ fileName);
- 	Package *p = new Package(fileName,settings);
+ 	OipkgPackage *p = new OipkgPackage(fileName,settings);
   if ( dest!="") p->setDest( dest );
 	to_install.append( p );
 	commit();
@@ -427,7 +427,7 @@ void PmIpkg::removeFile(const QString &fileName, const QString &dest)
 	to_install.clear();
   to_remove.clear();
 	pvDebug( 2,"PmIpkg::removeFile "+ fileName);
- 	Package *p = new Package(fileName,settings);
+ 	OipkgPackage *p = new OipkgPackage(fileName,settings);
   if ( dest!="") p->setDest( dest );
 	to_remove.append( p );
 	commit();

@@ -8,6 +8,7 @@ HEADERS		= mainwindow.h \
 		packagelistdoclnk.h \
 		installdialog.h \
 		utils.h \
+		listviewitemoipkg.h \
 		packagelistitem.h \
 		packagelistremote.h \
 		packagelist.h \
@@ -20,6 +21,7 @@ SOURCES		= main.cpp \
 		packagelistdoclnk.cpp \
 		packagelistview.cpp \
 		installdialog.cpp \
+		listviewitemoipkg.cpp \
 		packagelistremote.cpp \
 		packagelistlocal.cpp \
 		pksettings.cpp \
@@ -32,7 +34,7 @@ DEPENDPATH	+= $(OPIEDIR)/ioclude
 LIBS            += -lqpe
 LIBS            += -lopie
 INTERFACES	= runwindow.ui \
-		pksettingsbase.ui
+   		pksettingsbase.ui
 TARGET		= oipkg
 
 TRANSLATIONS = ../../../i18n/de/oipkg.ts \
