@@ -28,7 +28,8 @@
 #include <qpe/timestring.h>
 #include <qpe/qcopenvelope_qws.h>
 
-#include "ticker.h"
+#include <opie/oticker.h>
+//#include "ticker.h"
 
 extern "C" {
 #include "libstocks/stocks.h"
@@ -49,23 +50,16 @@ void StockTickerPluginWidget::init() {
 
     QHBoxLayout* layout = new QHBoxLayout( this );
 
-    stocktickerTicker = new Ticker(this);
+    stocktickerTicker = new OTicker(this);
     stocktickerTicker->setMinimumHeight(15);
     connect( stocktickerTicker, SIGNAL( mousePressed()), this, SLOT( doStocks() ));
  
     layout->addWidget( stocktickerTicker);
-//    Config cfg( "stockticker");
-//     cfg.setGroup("Timer");
-//     timerDelay= cfg.readNumEntry("Delay",0);
-//     if(timerDelay > 0 )
-//         startTimer(timerDelay*60000);
-//     qDebug("timer ^ set for %d",(timerDelay*60000)/60000);
 
 }
 
 void StockTickerPluginWidget::doStocks() {
     Config cfg( "stockticker");
-
     cfg.setGroup( "Symbols" );
     QString symbollist;
     symbollist = cfg.readEntry("Symbols", "");

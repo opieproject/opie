@@ -24,6 +24,7 @@
 
 #include <opie/tododb.h>
 #include <opie/oclickablelabel.h>
+#include <opie/oticker.h>
 
 #include <sys/types.h>
 #include <sys/uio.h>
@@ -32,7 +33,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "ticker.h"
+//#include "ticker.h"
 
 /* extern "C" { */
 /* #include "stocks.h" */
@@ -53,7 +54,7 @@ protected slots:
     void doStocks();
 
 private:
-    Ticker *stocktickerTicker;
+    OTicker *stocktickerTicker;
     void timerEvent( QTimerEvent * );
     void init();
     void getStocks( const char *stock_liste);
