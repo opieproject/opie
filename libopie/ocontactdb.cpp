@@ -14,11 +14,15 @@
  *       with our version of libqpe
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.5 2002-07-07 12:40:35 zecke Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.6 2002-07-07 16:24:47 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.5  2002-07-07 12:40:35  zecke
+ * Revision 1.1.2.6  2002-07-07 16:24:47  eilers
+ * All active parts moved into the backend. It should be easily possible to
+ * use a database as backend
+ *
+ * Revision 1.1.2.5  2002/07/07 12:40:35  zecke
  * Why was this there in the first place?
  *
  * Revision 1.1.2.4  2002/07/06 16:06:03  eilers
@@ -62,8 +66,29 @@ namespace {
 	/* the default xml implementation */
 	class DefaultBackend : public OContactBackend {
 	public:
-		bool save( const QValueList<Contact>& list ) {
-			QString strNewFile = m_filename + ".new";
+		DefaultBackend ( QString appname, QString filename = 0l ){
+			m_appName = appname;
+
+			/* Set journalfile name ... */
+			m_journalName = getenv("HOME");
+			m_journalName +="/.abjournal" + appname;
+
+			/* Expecting to access the default filename if nothing else is set */
+			if ( filename.isEmpty() ){
+				m_fileName = Global::applicationFileName( "addressbook","addressbook.xml" );
+			} else
+				m_fileName = filename;
+
+			/* Load Database now */
+			load ();
+		}
+
+		void setParent ( OContactDB * parent ){
+			m_parent = parent;
+		}
+
+		bool save() {
+			QString strNewFile = m_fileName + ".new";
 			QFile f( strNewFile );
 			if ( !f.open( IO_WriteOnly|IO_Raw ) )
 				return false;
@@ -76,7 +101,7 @@ namespace {
 				" <Contacts>\n";
 			//QValueList<Contact>::iterator it;
 			QValueListConstIterator<Contact> it;
-			for ( it = list.begin(); it != list.end(); ++it ) {
+			for ( it = m_contactList.begin(); it != m_contactList.end(); ++it ) {
 				out += "<Contact ";
 				(*it).save( out );
 				out += "/>\n";
@@ -93,7 +118,7 @@ namespace {
 			
 			QCString cstr = out.utf8();
 			total_written = f.writeBlock( cstr.data(), cstr.length() );
-			if ( total_written != int(cstr.length()) ) {
+			if ( total_written != int( cstr.length() ) ) {
 				f.close();
 				QFile::remove( strNewFile );
 				return false;
@@ -102,19 +127,127 @@ namespace {
 			
 			// move the file over, I'm just going to use the system call
 			// because, I don't feel like using QDir.
-			if ( ::rename( strNewFile.latin1(), m_filename.latin1() ) < 0 ) {
+			if ( ::rename( strNewFile.latin1(), m_fileName.latin1() ) < 0 ) {
 				qWarning( "problem renaming file %s to %s, errno: %d",
-					  strNewFile.latin1(), m_journal.latin1(), errno );
+					  strNewFile.latin1(), m_journalName.latin1(), errno );
 				// remove the tmp file...
 				QFile::remove( strNewFile );
 			}
 			
 			/* The journalfile should be removed now... */
-			QFile::remove (m_journal);
+			removeJournal();
 			return true;
 		}
 		
-		bool load( ) {
+		bool load () {
+			m_contactList.clear();	
+
+			/* Load XML-File and journal if it exists */
+			if ( !load ( m_fileName, false ) )
+				return false;
+			/* The returncode of the journalfile is ignored due to the
+			 * fact that it does not exist when this class is instantiated !
+			 * But there may such a file exist, if the application crashed.
+			 * Therefore we try to load it to get the changes before the #
+			 * crash happened...
+			 */
+			load (m_journalName, true);
+
+			return true;
+		}
+
+		bool isChangedExternally()
+		{
+			QFileInfo fi( m_fileName );
+	
+			QDateTime lastmod = fi.lastModified ();
+	
+			return (lastmod != m_readtime);
+		}
+
+		QValueList<Contact> allContacts() const {
+			return (m_contactList);
+		}
+
+		bool findContact(Contact &foundContact, int uid )
+		{
+			bool found = false;
+			QValueListConstIterator<Contact> it;
+			for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
+				if ((*it).uid() == uid){
+					found = true;
+					break;
+				}
+			}
+			if ( found ){
+				foundContact = *it;
+				return ( true );
+			}
+
+			return ( false );
+		}
+
+		bool addContact ( const Contact &newcontact )
+		{
+			updateJournal (newcontact, Contact::ACTION_ADD);
+			m_contactList.append (newcontact);
+			return true;
+		}
+
+		bool replaceContact (int uid, const Contact &contact)
+		{
+			bool found = false;
+			QValueListIterator<Contact> it;
+			for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
+				if ((*it).uid() == uid){
+					found = true;
+					break;
+				}
+			}
+			if (found) {
+				updateJournal (contact, Contact::ACTION_REPLACE);
+				m_contactList.remove (it);
+				m_contactList.append (contact);
+				return true;
+			} else
+				return false;
+		}
+
+		bool removeContact (int uid, const Contact &contact)
+		{
+			bool found = false;
+			QValueListIterator<Contact> it;
+			for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
+				if ((*it).uid() == uid){
+					found = true;
+					break;
+				}
+			}
+			if (found) {
+				updateJournal (contact, Contact::ACTION_REMOVE);
+				m_contactList.remove (it);
+				return true;
+			} else
+				return false;
+		}
+		
+		void reload(){
+			/* Reload is the same as load in this implementation */
+			load();
+		}
+
+	private:
+		/* This function loads the xml-database and the journalfile */
+		bool load( const QString filename, bool isJournal ) {
+
+			/* We use the time of the last read to check if the file was
+			 * changed externally.
+			 */
+			if ( !isJournal ){
+				QFileInfo fi( filename );
+				m_readtime = fi.lastModified ();
+			}
+
 			const int JOURNALACTION = Qtopia::Notes + 1;
 			const int JOURNALROW = JOURNALACTION + 1;
 			
@@ -173,13 +306,9 @@ namespace {
 			dict.insert( "action", new int(JOURNALACTION) );
 			dict.insert( "actionrow", new int(JOURNALROW) );
 			
-			qWarning( "OContactDefaultBackEnd::loading %s", m_filename.latin1() );
-			
-			/* Store the date and time when we initialized the database */
-			QFileInfo fi( m_filename );
-			//m_readtime = fi.lastModified ();
-			
-			XMLElement *root = XMLElement::load( m_filename );
+			qWarning( "OContactDefaultBackEnd::loading %s", m_fileName.latin1() );
+						
+			XMLElement *root = XMLElement::load( filename );
 			if(root != 0l ){ // start parsing
 				/* Parse all XML-Elements and put the data into the
 				 * Contact-Class
@@ -210,7 +339,8 @@ namespace {
 					/* Found alement with tagname "contact", now parse and store all
 					 * attributes contained
 					 */
-					qWarning("OContactDefBack::load element tagName() : %s", element->tagName().latin1() );
+					qWarning("OContactDefBack::load element tagName() : %s", 
+						 element->tagName().latin1() );
 					QString dummy;
 					foundAction = false;
 					
@@ -279,7 +409,7 @@ namespace {
 						}
 					}else{
 						/* Add contact to list */
-						parent()->addContact (contact);
+						addContact (contact);
 					}
 					
 					/* Move to next element */
@@ -293,9 +423,10 @@ namespace {
 			return true;
 		}
 		
+
 		void updateJournal( const Contact& cnt,
 				    Contact::journal_action action ) {
-			QFile f( m_journal );
+			QFile f( m_journalName );
 			if ( !f.open(IO_WriteOnly|IO_Append) )
 				return;
 			QString buf;
@@ -310,65 +441,39 @@ namespace {
 		
 		void removeJournal()
 		{
-			QFile f ( m_journal );
+			QFile f ( m_journalName );
 			if ( !f.exists() )
 				f.remove();
 		}
+
+	protected:
+		QString m_journalName;
+		QString m_fileName;
+		QString m_appName;
+		QValueList<Contact> m_contactList;
+		QDateTime m_readtime;
 	};
 }
 
 
-OContactDB::OContactDB (const QString appname,
-                        const QString &fileName,
-                        OContactBackend* end):
-	m_loc_fileName(fileName)
+OContactDB::OContactDB ( const QString appname, const QString filename,
+                        OContactBackend* end )
 {
-	if ( fileName.isEmpty() ){
-		m_loc_fileName = Global::applicationFileName("addressbook","addressbook.xml");
-	}
-	
         /* take care of the backend */
         if( end == 0 ) {
-		end = new DefaultBackend();
+		end = new DefaultBackend( appname, filename );
         }
-        end->m_parent = this;
         m_backEnd = end;
+        m_backEnd->setParent ( this );
 
-	/* Set journalfile name ... */
-	m_loc_journalName = getenv("HOME");
-	m_loc_journalName +="/.abjournal" + appname;
-	m_backEnd->m_journal = m_loc_journalName;
 	
-	/* Load XML-File and journal if it exists */
-	load (m_loc_fileName, false);
-	load (m_loc_journalName, true);
 }
 OContactDB::~OContactDB ()
 {
 	delete m_backEnd;
 }
 
-/* This function does not set the local filename "m_loc_filename" due to the fact
- * that it is just used internally and therefore the filename was 
- * already set by the constructor ! (se)
- */
-void OContactDB::load (const QString& filename, bool isJournal)
-{
-	m_loading = true;
-	m_backEnd->m_filename = filename;
-
-	/* We use the time of the last read to check if the file was
-	 * changed externally.
-	 */
-	if ( !isJournal ){
-		QFileInfo fi( filename );
-		m_readtime = fi.lastModified ();
-	}
-	m_backEnd->load();
-	m_loading = false;
-}
-
-bool OContactDB::save (bool autoreload)
+bool OContactDB::save ( bool autoreload )
 {
 	/* If the database was changed externally, we could not save the
 	 * Data. This will remove added items which is unacceptable !
@@ -379,102 +484,50 @@ bool OContactDB::save (bool autoreload)
 	else
 		reload();
 	
-        bool status = m_backEnd->save(m_contactList);
+        bool status = m_backEnd->save();
 	
         if ( !status ) return false;
 	
-	/* The journalfile is now useless */
-	removeJournal ();
-	
 	/* Now tell everyone that new data is available */
-	QCopEnvelope e( "QPE/PIM", "addressbookUpdated(QString)" );
-	e << m_loc_fileName;
+	QCopEnvelope e( "QPE/PIM", "addressbookUpdated()" );
+	// e << m_loc_fileName;
 	
 	return true;
 }
 
+bool OContactDB::findContact(Contact &foundContact, int uid )
+{
+	return ( m_backEnd->findContact(foundContact, uid) );
+}
+	
 
 bool OContactDB::isChangedExternally()
-{
-	QFileInfo fi( m_loc_fileName );
-	
-	QDateTime lastmod = fi.lastModified ();
-	
-	return (lastmod != m_readtime);
+{	
+	return ( m_backEnd->isChangedExternally() );
 }
 
-
-QValueList<Contact> OContactDB::allContacts()const
+QValueList<Contact> OContactDB::allContacts() const
 {
-	return m_contactList;
+	return ( m_backEnd->allContacts() );
 }
 
-bool OContactDB::addContact (const Contact &newcontact)
+bool OContactDB::addContact ( const Contact &newcontact )
 {
-	updateJournal (newcontact, Contact::ACTION_ADD);
-        m_contactList.append (newcontact);
-	return true;
+	return ( m_backEnd->addContact ( newcontact ) );
 }
 
 bool OContactDB::replaceContact (int uid, const Contact &contact)
 {
-	bool found = false;
-	QValueListIterator<Contact> it;
-	for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-		if ((*it).uid() == uid){
-			found = true;
-			break;
-		}
-	}
-	if (found) {
-		updateJournal (contact, Contact::ACTION_REPLACE);
-		m_contactList.remove (it);
-		m_contactList.append (contact);
-		return true;
-	} else
-		return false;
+	return ( m_backEnd->replaceContact ( uid, contact ) );
 }
 
 bool OContactDB::removeContact (int uid, const Contact &contact)
 {
-	bool found = false;
-	QValueListIterator<Contact> it;
-	for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-		if ((*it).uid() == uid){
-			found = true;
-			break;
-		}
-	}
-	if (found) {
-		updateJournal (contact, Contact::ACTION_REMOVE);
-		m_contactList.remove (it);
-		return true;
-	} else
-		return false;
+	return ( m_backEnd->removeContact ( uid, contact ) );
 }
 
 void OContactDB::reload()
 {
-	m_contactList.clear();
-	load (m_loc_fileName, false);
-	load (m_loc_journalName, true);
+	m_backEnd->reload();
 }
 
-
-/* Every change in the local copy of the database is
- * written into the journalfile.
- */
-void OContactDB::updateJournal( const Contact &cnt,
-				Contact::journal_action action)
-{
-	if (m_loading )
-		return;
-	m_backEnd->m_journal = m_loc_journalName;
-	m_backEnd->updateJournal( cnt, action );
-}
-
-/* Removes the current journal-file */
-void OContactDB::removeJournal()
-{
-	m_backEnd->removeJournal();
-}
