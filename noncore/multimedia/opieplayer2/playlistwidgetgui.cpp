@@ -148,7 +148,7 @@ PlayListWidgetGui::PlayListWidgetGui( MediaPlayerState &_mediaPlayerState, QWidg
     Alayout->setSpacing( 2 );
     Alayout->setMargin( 2 );
     // no m3u's here please
-    audioView = new PlayListFileView( "audio/mpeg;audio/x-wav;audio/x-ogg", "opieplayer2/musicfile", aTab, "Audioview" );
+    audioView = new PlayListFileView( "audio/mpeg;audio/x-wav;application/ogg", "opieplayer2/musicfile", aTab, "Audioview" );
     Alayout->addMultiCellWidget( audioView, 0, 0, 0, 1 );
     tabWidget->insertTab( aTab, tr( "Audio" ) );
 
