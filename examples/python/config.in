@@ -1,0 +1,4 @@
+  config PYTHON_EXMAPLES
+    boolean "Build Python Examples"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) && EXAMPLES
