@@ -1,0 +1,8 @@
+Files: pics/extra/??*.*
+Priority: required
+Section: opie/system
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Description: Extra icons for Qtopia environment
+ These icons are provided to retain full compatibility with Qtopia
