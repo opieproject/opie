@@ -11,7 +11,7 @@
 ************************************************************************************/
 
 /*
- * $Id: vmemo.cpp,v 1.3 2002-02-14 04:01:40 jeremy Exp $
+ * $Id: vmemo.cpp,v 1.4 2002-02-15 02:19:03 llornkcor Exp $
  */
 
 #include <sys/utsname.h>
@@ -30,10 +30,11 @@ typedef struct _waveheader {
   u_long  main_chunk; /* 'RIFF'  */
   u_long  length;     /* filelen */
   u_long  chunk_type; /* 'WAVE'  */
-
   u_long  sub_chunk;  /* 'fmt '                                               */
-  u_long  sc_len;     /* length of sub_chunk, =16        (chunckSize)         */
+  u_long  sc_len;     /* length of sub_chunk, =16     
+                         (chunckSize) format len */
   u_short format;     /* should be 1 for PCM-code        (formatTag)          */
+
   u_short modus;      /* 1 Mono, 2 Stereo                (channels)           */
   u_long  sample_fq;  /* samples per second              (samplesPerSecond)   */
   u_long  byte_p_sec; /* avg bytes per second            (avgBytePerSecond)   */
@@ -41,6 +42,7 @@ typedef struct _waveheader {
   u_short bit_p_spl;  /* 8, 12 or 16 bit                 (bitsPerSample)      */
 
   u_long  data_chunk; /* 'data'      */
+
   u_long  data_length;/* samplecount */
 } WaveHeader;
 
@@ -140,17 +142,17 @@ VMemo::VMemo( QWidget *parent, const char *name )
   recording = FALSE;
   
   struct utsname name; /* check for embedix kernel running on the zaurus, if 
-						  lineo change string, this break
-					   */
+              lineo change string, this break
+             */
   if (uname(&name) != -1)
-	{
-	  QString release=name.release;
-	  qWarning("System release: %s\n", name.release);
-	  if(release.find("embedix",0,TRUE) !=-1)
-		  systemZaurus=TRUE;
-	  else
-		  systemZaurus=FALSE;
-	}
+  {
+    QString release=name.release;
+    qWarning("System release: %s\n", name.release);
+    if(release.find("embedix",0,TRUE) !=-1)
+      systemZaurus=TRUE;
+    else
+      systemZaurus=FALSE;
+  }
   
 }
 
@@ -168,10 +170,10 @@ void VMemo::mousePressEvent( QMouseEvent * )
 {
   // just to be safe
   if (recording)
-	{
-	  recording = FALSE;
-	  return;
-	}
+  {
+    recording = FALSE;
+    return;
+  }
 
   qWarning("VMemo::mousePress()");
   QSound::play(Resource::findSound("vmemob"));
@@ -179,12 +181,12 @@ void VMemo::mousePressEvent( QMouseEvent * )
   recording = TRUE;
   qWarning("VMemo::mousePress() -> Starting to record");
   if (openDSP() == -1)
-	{
-	  // ### Display an error box
-	  QMessageBox::critical(0, "VMemo", "Could not open dsp device.", "Abort");
-	  recording = FALSE;
-	  return;
-	}
+  {
+    // ### Display an error box
+    QMessageBox::critical(0, "VMemo", "Could not open dsp device.", "Abort");
+    recording = FALSE;
+    return;
+  }
   
   Config vmCfg("VMemo");
   vmCfg.setGroup("Defaults");
@@ -192,9 +194,9 @@ void VMemo::mousePressEvent( QMouseEvent * )
   QDateTime dt = QDateTime::currentDateTime();
   QString fileName;
   if(systemZaurus)
-	fileName=vmCfg.readEntry("Dir", "/mnt/cf/"); // zaurus does not have /mnt/ramfs
+  fileName=vmCfg.readEntry("Dir", "/mnt/cf/"); // zaurus does not have /mnt/ramfs
   else
-	fileName=vmCfg.readEntry("Dir", "/mnt/ramfs/");
+  fileName=vmCfg.readEntry("Dir", "/mnt/ramfs/");
 
   fileName += "vm_";
   fileName += dt.toString();
@@ -207,12 +209,12 @@ void VMemo::mousePressEvent( QMouseEvent * )
   fileName.replace(QRegExp(","),"");
 
   if(openWAV(fileName.latin1()) == -1)
-	{
-	  // ### Display an error box
-	  qWarning("VMemo::mousePress() -> WAV error");
-	  close(dsp);
-	  return;
-	}
+  {
+    // ### Display an error box
+    qWarning("VMemo::mousePress() -> WAV error");
+    close(dsp);
+    return;
+  }
   
   QArray<int> cats(1);
   cats[0] = vmCfg.readNumEntry("Category", 0);
@@ -242,48 +244,51 @@ int VMemo::openDSP()
 
   speed = cfg.readNumEntry("SampleRate", 11025);
   channels = cfg.readNumEntry("Stereo", 1) ? 2 : 1; // 1 = stereo(2), 0 = mono(1)
-  if (cfg.readNumEntry("SixteenBit", 1))
-	{
-	  format = AFMT_S16_LE;
-	  resolution = 16;
-	}
+  if (cfg.readNumEntry("SixteenBit", 1)==1)
+  {
+    format = AFMT_S16_LE;
+    resolution = 16;
+  }
   else
-	{
-	  format = AFMT_U8;
-	  resolution = 8;
-	}
+  {
+    format = AFMT_U8;
+    resolution = 8;
+  }
   
-  if(systemZaurus)
-	dsp = open("/dev/dsp1", O_RDWR); //Zaurus needs /dev/dsp1
+  if(systemZaurus) 
+  {
+  dsp = open("/dev/dsp1", O_RDWR); //Zaurus needs /dev/dsp1
+  channels=1; //zaurus has one input channel
+  }
   else 
-	dsp = open("/dev/dsp", O_RDWR);
+  dsp = open("/dev/dsp", O_RDWR);
   
   if(dsp == -1)
-	{
+  {
       perror("open(\"/dev/dsp\")");
       return -1;
-	}
+  }
   
   if(ioctl(dsp, SNDCTL_DSP_SETFMT , &format)==-1)
-	{
-	  perror("ioctl(\"SNDCTL_DSP_SETFMT\")");
-	  return -1;
-	}
+  {
+    perror("ioctl(\"SNDCTL_DSP_SETFMT\")");
+    return -1;
+  }
   if(ioctl(dsp, SNDCTL_DSP_CHANNELS , &channels)==-1)
-	{
-	  perror("ioctl(\"SNDCTL_DSP_CHANNELS\")");
-	  return -1;
-	}
+  {
+    perror("ioctl(\"SNDCTL_DSP_CHANNELS\")");
+    return -1;
+  }
   if(ioctl(dsp, SNDCTL_DSP_SPEED , &speed)==-1)
-	{
-	  perror("ioctl(\"SNDCTL_DSP_SPEED\")");
-	  return -1;
-	}
+  {
+    perror("ioctl(\"SNDCTL_DSP_SPEED\")");
+    return -1;
+  }
   if(ioctl(dsp, SOUND_PCM_READ_RATE , &rate)==-1)
-	{
-	  perror("ioctl(\"SOUND_PCM_READ_RATE\")");
-	  return -1;
-	}
+  {
+    perror("ioctl(\"SOUND_PCM_READ_RATE\")");
+    return -1;
+  }
   
   return 1;
 }
@@ -293,30 +298,28 @@ int VMemo::openWAV(const char *filename)
   qDebug("Creating %s ",filename);
   track.setName(filename);
   if(!track.open(IO_WriteOnly|IO_Truncate|IO_Raw))
-	{
-	  qDebug("Could not open file");
-	  return -1;
-	}
+  {
+    qDebug("Could not open file");
+    return -1;
+  }
   wav=track.handle();
 
   WaveHeader wh;
 
-  wh.main_chunk = RIFF;
-  wh.length     = 0;
-  wh.chunk_type = WAVE;
-
-  wh.sub_chunk  = FMT;
-  wh.sc_len     = 16;
-  wh.format     = PCM_CODE;
-  wh.modus      = channels;
-  wh.sample_fq  = speed;
-  wh.bit_p_spl  = resolution;
-  wh.byte_p_sec = wh.sample_fq * wh.bit_p_spl;
-  wh.byte_p_spl = channels * (wh.bit_p_spl % 8);
-
+  wh.main_chunk = RIFF;// RIFF
+  wh.chunk_type = WAVE;//WAVE
+  wh.sub_chunk  = FMT;// fmt
+  wh.sc_len     = 16;// format length = 16
+  wh.format     = PCM_CODE;// PCM
+  wh.modus      = channels;// channels
+  wh.sample_fq  = speed;//samplerate
+  wh.byte_p_sec = speed * channels *  resolution/8;// av bytes per second
+  wh.byte_p_spl = channels * (resolution / 8);  //block align
+  wh.bit_p_spl  = resolution;//bits per sample 8, or 16
   wh.data_chunk = DATA;
-  wh.data_length= 0;
-
+  wh.data_length= 0; // <---
+//    qDebug("Write header channels %d, speed %d, b/s %d, blockalign %d, bitrate %d"
+//           , wh.modus, wh.sample_fq, wh.byte_p_sec, wh.byte_p_spl, wh.bit_p_spl );
   write (wav, &wh, sizeof(WaveHeader));
 
   return 1;
@@ -330,14 +333,16 @@ void VMemo::record(void)
   qWarning("VMemo::record()");
 
   while(recording)
-	{
-	  result = read(dsp, sound, 512); // 8192
-	  qApp->processEvents();
-	  write(wav, sound, result);
-	  qApp->processEvents();
-	  length += result;
-	  qApp->processEvents();
-	}
+  {
+    result = read(dsp, sound, 512); // 8192
+    qApp->processEvents();
+    write(wav, sound, result);
+    qApp->processEvents();
+    length += result;
+    qApp->processEvents();
+//    printf("%d\r",length);
+//    fflush(stdout);
+  }
   
   qWarning("VMemo::record() -> Done recording");
   qWarning("VMemo::record() -> Closing dsp");
@@ -347,10 +352,11 @@ void VMemo::record(void)
   write(wav, &value, 4);
   lseek(wav, 40, SEEK_SET);
   write(wav, &length, 4);
+//  qDebug("File length %d, samplecount %d", value, length);
   track.close();
 
   if( ioctl( dsp, SNDCTL_DSP_RESET,0) == -1)// ); //tell driver to stop for a while
-	perror("ioctl(\"SNDCTL_DSP_RESET\")");
+  perror("ioctl(\"SNDCTL_DSP_RESET\")");
   ::close(dsp);
 
   qWarning("VMemo::record() -> playing done recording sound");
