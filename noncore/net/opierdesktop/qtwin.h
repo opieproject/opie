@@ -28,8 +28,6 @@ class QMyDialog: public QDialog
     ~QMyDialog();
   public:
     QListBox* ListBox;
-    QPushButton* OKButton;
-    QPushButton* CancelButton;
     QLabel* Label1;
     QLineEdit* ServerNameEdit;
     QLabel* Label2;
@@ -46,8 +44,6 @@ class QMyDialog: public QDialog
     QCheckBox* FullScreenCheckBox;
   public slots:
     void ComboChanged(int);
-    void OKClicked();
-    void CancelClicked();
     void AddClicked();
     void EditClicked();
     void SaveClicked();
@@ -62,6 +58,8 @@ class QMyDialog: public QDialog
     int Height;
     int FullScreen;
     QMyConnectionItem* ConnectionList[10];
+  protected slots:
+    void accept();
 };
 
 class QMyScrollView: public QScrollView

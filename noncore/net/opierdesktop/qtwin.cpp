@@ -180,17 +180,6 @@ QMyDialog::QMyDialog(QWidget* parent) : QDialog(parent, "Settings", true)
   FullScreenCheckBox->setText("Full Screen");
   FullScreenCheckBox->move(10, 230);
   // ok button
-  OKButton = new QPushButton(this);
-  OKButton->setText("OK");
-  OKButton->move(100, 240);
-  OKButton->resize(50, 20);
-  connect(OKButton, SIGNAL(clicked()), this, SLOT(OKClicked()));
-  // cancel button
-  CancelButton = new QPushButton(this);
-  CancelButton->setText("Cancel");
-  CancelButton->move(160, 240);
-  CancelButton->resize(50, 20);
-  connect(CancelButton, SIGNAL(clicked()), this, SLOT(CancelClicked()));
 
   for (i = 0; i < 10; i++)
   {
@@ -277,7 +266,7 @@ void QMyDialog::ComboChanged(int index)
 }
 
 //*****************************************************************************
-void QMyDialog::OKClicked()
+void QMyDialog::accept()
 {
   ServerName = ServerNameEdit->text();
   UserName = UserNameEdit->text();
@@ -285,14 +274,10 @@ void QMyDialog::OKClicked()
   Height = HeightEdit->text().toInt();
   ServerIP = IPEdit->text();
   FullScreen = FullScreenCheckBox->isChecked();
-  done(1);
+
+  QDialog::accept();
 }
 
-//*****************************************************************************
-void QMyDialog::CancelClicked()
-{
-  done(0);
-}
 
 //*****************************************************************************
 void QMyDialog::AddClicked()
