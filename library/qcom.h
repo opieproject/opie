@@ -152,7 +152,7 @@ struct Q_EXPORT QtULong
 };
 
 #define Q_EXPORT_INTERFACE() \
-	extern "C" QUnknownInterface* ucm_instantiate  QPE_EXPORT_SYMBOL ()
+	extern "C" QPE_EXPORT_SYMBOL QUnknownInterface* ucm_instantiate  ()
 
 #define Q_REFCOUNT \
 private:          \
