@@ -1,0 +1,57 @@
+readchunk:
+				if(semi != 0)
+				{
+					printf("HttpComm::incoming: semi !=0\n");
+					QString newBody = tempString;
+					if(i != 0)
+					{
+						printf("HttpComm::incoming: striping header2\n");
+						newBody.remove(0,i);
+					}
+					newBody=newBody.remove(0, semi);
+					if(newBody.length() > clength)
+					{
+						newBody.truncate(clength);
+						nextChunk = true;
+					}
+					body += newBody;
+					bRead += newBody.length();
+					printf("HttpComm::incoming: start body chunk1\n");
+					printf("%s", newBody.latin1());
+					printf("\nHttpComm::incoming: end body chunk\n");
+					printf("HttpComm::incoming: bRead: %d\n", bRead);
+					if(nextChunk)
+					{
+						QString tmpQString = tempString;
+						tmpQString=tmpQString.remove(0, clength);
+						tempString = (char *)tmpQString.latin1();
+						lengthset=false;
+						goto topchunk;
+					}
+				}
+				else
+				{
+					if( (bRead + ba) > clength)
+					{
+//						int bRead2=bRead;
+						for(; bRead < clength; bRead++)
+						{
+							body+=tempString[j];
+//							bRead++;
+						}
+					}
+					else
+					{
+						body += tempString;
+						bRead += ba;
+					}
+					printf("HttpComm::incoming: start body chunk2\n");
+					printf("%s", tempString);
+					printf("\nHttpComm::incoming: end body chunk\n");
+					printf("HttpComm::incoming: bRead: %d\n", bRead);
+				}
+				if(bRead >= clength)
+				{
+					printf("HttpComm::incoming: end chunk\n");
+					lengthset=false;
+				}
