@@ -51,6 +51,11 @@ namespace OpieTooth {
 
     signals:
 
+        /**
+         * Signals devicename and up status
+         * @return &device QString, Devicename
+         * @return up bool, if the device is up or not.
+         */
         device(const QString& device, bool up );
     };
 };
