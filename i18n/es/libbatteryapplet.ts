@@ -55,31 +55,31 @@
     </message>
     <message>
         <source>Battery status</source>
-        <translation type="unfinished"></translation>
+        <translation>Estado de la batería</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation type="unfinished"></translation>
+        <translation>no pude abrir fichero</translation>
     </message>
     <message>
         <source>Charging both devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargando ambos dispositivos</translation>
     </message>
     <message>
         <source>Percentage battery remaining: </source>
-        <translation type="unfinished"></translation>
+        <translation>Porcentaje batería restante:</translation>
     </message>
     <message>
         <source>Battery time remaining: </source>
-        <translation type="unfinished"></translation>
+        <translation>Duración batería restante:</translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin chaqueta con batería insertada</translation>
     </message>
 </context>
 </TS>

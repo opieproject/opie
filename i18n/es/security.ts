@@ -100,7 +100,7 @@ Acceso denegado</translation>
     </message>
     <message>
         <source>1.0.0.0/8</source>
-        <translation type="unfinished">1.0.0.0/8</translation>
+        <translation>1.0.0.0/8</translation>
     </message>
 </context>
 </TS>

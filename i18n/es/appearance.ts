@@ -35,15 +35,15 @@
     </message>
     <message>
         <source>Tab style:</source>
-        <translation>Estilo etiquetas:</translation>
+        <translation>Estilo pestañas:</translation>
     </message>
     <message>
         <source>Tabs</source>
-        <translation>Etiquetas</translation>
+        <translation>Pestañas</translation>
     </message>
     <message>
         <source>Tabs w/icons</source>
-        <translation>Etiquetas con iconos</translation>
+        <translation>Eestañas con iconos</translation>
     </message>
     <message>
         <source>Drop down list</source>
@@ -204,20 +204,20 @@ Esta área le permite seleccionar un aplicación y qué funciones desea deshabil
 2. Tabs w/icons - tabs with icons for each tab, text label only appears on current tab
 3. Drop down list - a vertical listing of tabs
 4. Drop down list w/icons - a vertical listing of tabs with icons</source>
-        <translation>Pulse aquí para seleccionar un estilo para los diálogos con etiquetas (como esta). Los estilos disponibles son:
+        <translation>Pulse aquí para seleccionar un estilo para los diálogos con pestañas (como esta). Los estilos disponibles son:
 
-1. Etiquetas - etiquetas normales con sólo texto
-2. Etiquetas con iconos - etiquetas con iconos, el texto aparece solo en la actual
-3. Lista desplegable - una lista vertical de etiquetas
-4. Lista desplegable con iconos - una lista vertical de etiquetas con iconos</translation>
+1. Pestañas - pestañas normales con sólo texto
+2. Pestañas con iconos - pestañas con iconos, el texto aparece solo en la actual
+3. Lista desplegable - una lista vertical de pestañas
+4. Lista desplegable con iconos - una lista vertical de pestañas con iconos</translation>
     </message>
     <message>
         <source>Click here so that tabs appear at the top of the window.</source>
-        <translation>Pulse aquí para que las etiquetas aparezcan en la parte superior de la ventana.</translation>
+        <translation>Pulse aquí para que las pestañas aparezcan en la parte superior de la ventana.</translation>
     </message>
     <message>
         <source>Click here so that tabs appear at the bottom of the window.</source>
-        <translation>Pulse aquí para que las etiquetas aparezcan en la parte inferior de la ventana.</translation>
+        <translation>Pulse aquí para que las pestañas aparezcan en la parte inferior de la ventana.</translation>
     </message>
     <message>
         <source>This is a preview window.  Look here to see your new appearance as options are changed.</source>
@@ -229,7 +229,7 @@ Esta área le permite seleccionar un aplicación y qué funciones desea deshabil
     </message>
     <message>
         <source>Rotation direction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dirección de rotación:</translation>
     </message>
 </context>
 <context>

@@ -234,29 +234,31 @@ Do you really want to delete it?</source>
 is copyright 2002-2003 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation type="unfinished">Advanced FileManager
-is copyright 2002-2003 by
+        <translation>Advanced FileManager
+copyright 2002-2003 por
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL
+y está bajo licencia GPL
 </translation>
     </message>
     <message>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!!</source>
-        <translation type="unfinished"></translation>
+        <translation>No puedo borrar el directorio
+actual de los favoritos.
+¡No está entre los favoritos!</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Directorio de favoritos</translation>
     </message>
     <message>
         <source>Remove Current Directory from Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar el directorio actual de los favoritos</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error</translation>
     </message>
 </context>
 <context>

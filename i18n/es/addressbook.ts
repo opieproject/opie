@@ -174,15 +174,15 @@ no termina en &quot;.vcf&quot;.
     </message>
     <message>
         <source>Export vCard</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar vCard</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Tiene que seleccionar un contacto!</translation>
     </message>
     <message>
         <source>You have to set a filename !</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Tiene que elegir un nombre de fichero!</translation>
     </message>
 </context>
 <context>
@@ -279,83 +279,83 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Click on tab to select one</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse tab para seleccionar uno</translation>
     </message>
     <message>
         <source>Settings for the search query style</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración del estilo de búsqueda</translation>
     </message>
     <message>
         <source>Search widget expects regular expressions if selected</source>
-        <translation type="unfinished"></translation>
+        <translation>El botón de búsqueda espera una expresión regular al selecionarse</translation>
     </message>
     <message>
         <source>Search widget just expects simple wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>El botón de búsqueda espera sólo comodines simples</translation>
     </message>
     <message>
         <source>If selected, search differs between upper and lower chars</source>
-        <translation type="unfinished"></translation>
+        <translation>Si lo selecciona, la búsqueda diferencia entre mayúsculas y minúsculas</translation>
     </message>
     <message>
         <source>Font size for list- and card view</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño de letra para la vista en lista y tarjetas</translation>
     </message>
     <message>
         <source>Fontsettings for list and card view</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración de letras para la vista en lista y tarjetas</translation>
     </message>
     <message>
         <source>Use Sharp&apos;s mail application if available</source>
-        <translation type="unfinished"></translation>
+        <translation>Use la aplicación de correo de Sharp si está disponible</translation>
     </message>
     <message>
         <source>Use OPIE mail if installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Use el correo de OPIE si está instalado</translation>
     </message>
     <message>
         <source>Move selected attribute one line up</source>
-        <translation type="unfinished"></translation>
+        <translation>Sube los atributos seleccionados una línea</translation>
     </message>
     <message>
         <source>Move selected attribute one line down</source>
-        <translation type="unfinished"></translation>
+        <translation>Baja los atributos seleccionados una línea</translation>
     </message>
     <message>
         <source>List of all available attributes</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de todos los atributos disponibles</translation>
     </message>
     <message>
         <source>Add selected attribute from list below to the upper list</source>
-        <translation type="unfinished"></translation>
+        <translation>Añade el atributo seleccionado de la lista inferior a la lista superior</translation>
     </message>
     <message>
         <source>Remove the selected attribute from the upper list</source>
-        <translation type="unfinished"></translation>
+        <translation>Borra el atributo seleccionado de la lista superior</translation>
     </message>
     <message>
         <source>Order (up -&gt; down) defines the primary contact shown in the second column of the list view</source>
-        <translation type="unfinished"></translation>
+        <translation>Orden (arriba-&gt;abajo) que define el contacto principal que se muestra el la segunda columna en la vista en lista</translation>
     </message>
     <message>
         <source>Tool-/Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta-/Barra de menú</translation>
     </message>
     <message>
         <source>Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Arreglado</translation>
     </message>
     <message>
         <source>Switch to fixed menu-/toolbars after restarting application !</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Cambie entre menu fijo-/barra de herramientas después de reiniciar la aplicación!</translation>
     </message>
     <message>
         <source>Moveable</source>
-        <translation type="unfinished"></translation>
+        <translation>Movible</translation>
     </message>
     <message>
         <source>Switch to moveable menu-/toolbars after restarting application !</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Cambie a menú-/barra de herramientas después de reiniciar la aplicación!</translation>
     </message>
 </context>
 <context>
@@ -1318,31 +1318,31 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse para introducir nombre y apellidos</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Introduzca el nombre completo directamente! Si los apellidos son varias palabras, por favor, escriba &lt;apellidos&gt;, &lt;nombres&gt; como en &quot;Fernández Barros, José Luis&quot;</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation type="unfinished"></translation>
+        <translation>El cargo..</translation>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation type="unfinished"></translation>
+        <translation>Algo como &quot;jr.&quot;..</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation type="unfinished"></translation>
+        <translation>El lugar de trabajo del contacto</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse para seleccional el atributo a cambiar</translation>
     </message>
     <message>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse para seleccionar cómo almacenar el nombre (y cómo mostrarlo el la vista en lista)</translation>
     </message>
 </context>
 <context>

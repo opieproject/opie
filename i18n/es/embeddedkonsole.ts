@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Tabs on Bottom</source>
-        <translation>Etiquetas abajo</translation>
+        <translation>Pestañas abajo</translation>
     </message>
     <message>
         <source>Green on Black</source>
@@ -193,7 +193,7 @@
     </message>
     <message>
         <source>Tabs on Top</source>
-        <translation>Etiquetas arriba</translation>
+        <translation>Pestañas arriba</translation>
     </message>
 </context>
 <context>

@@ -86,7 +86,7 @@
     </message>
     <message>
         <source>Weight</source>
-        <translation type="unfinished"></translation>
+        <translation>Peso</translation>
     </message>
 </context>
 <context>

@@ -102,11 +102,11 @@ Por favor cárguela.</translation>
     </message>
     <message>
         <source>Finding documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscando documentos</translation>
     </message>
     <message>
         <source>Searching documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscando documentos</translation>
     </message>
 </context>
 <context>
