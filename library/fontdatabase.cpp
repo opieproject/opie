@@ -52,8 +52,8 @@ static QString fontFamily( const QString& key )
 }
 #endif
 
-QValueList<FontFactory> *FontDatabase::factoryList = 0;
 
+QValueList<FontFactory> *FontDatabase::factoryList = 0;
 /*!
   \class FontDatabase fontdatabase.h
   \brief The FontDatabase class provides information about available fonts.
@@ -92,6 +92,11 @@ QStringList FontDatabase::families() const
 #ifndef QT_NO_FONTDATABASE
     return QFontDatabase::families();
 #else
+
+#ifndef QWS
+   QStringList list;
+   return list;
+#else
     QStringList list;
     QDict<void> familyDict;
     QDiskFont *qdf;
@@ -114,6 +119,7 @@ QStringList FontDatabase::families() const
     }
 
     return list;
+#endif
 #endif
 }
 
@@ -144,6 +150,10 @@ QValueList<int> FontDatabase::standardSizes()
 */
 void FontDatabase::loadRenderers()
 {
+#ifndef QWS
+    return;
+#else
+
 #ifndef QT_NO_COMPONENT
     if ( !factoryList )
 	factoryList = new QValueList<FontFactory>;
@@ -183,6 +193,7 @@ void FontDatabase::loadRenderers()
 	}
     }
 #endif
+#endif
 }
 
 /*!
@@ -190,6 +201,9 @@ void FontDatabase::loadRenderers()
 */
 void FontDatabase::readFonts( QFontFactory *factory )
 {
+#ifndef QWS
+return;
+#else
     // Load in font definition file
     QString fn = fontDir() + "fontdir";
     FILE* fontdef=fopen(fn.local8Bit(),"r");
@@ -230,5 +244,6 @@ void FontDatabase::readFonts( QFontFactory *factory )
 	fgets(buf,200,fontdef);
     }
     fclose(fontdef);
+#endif
 }
 
