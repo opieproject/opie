@@ -23,7 +23,7 @@
 
 using namespace Opie::Core;
 
-OpieMail::OpieMail( QWidget *parent, const char *name, WFlags flags )
+OpieMail::OpieMail( QWidget *parent, const char *name, WFlags  )
         : MainWindow( parent, name, WStyle_ContextHelp )
 {
     setup_signalblocking();
@@ -62,6 +62,18 @@ void OpieMail::appMessage(const QCString &msg, const QByteArray &data)
     {
         slotComposeMail();
     }
+}
+
+/**
+ * Konqueror calls us with the mailto:name@address
+ */
+void OpieMail::setDocument(const QString& mail)
+{
+    /*
+     * It looks like a mailto address, lets try it
+     */
+    if( mail.startsWith(QString::fromLatin1("mailto:")) )
+	slotwriteMail(QString::null, mail.mid(7));    
 }
 
 void OpieMail::slotwriteMail(const QString&name,const QString&email)
