@@ -37,7 +37,7 @@ class QCopBridge;
 class TransferServer;
 class DesktopPowerAlerter;
 class PackageSlave;
-class QPEScreenSaver;
+class OpieScreenSaver;
 
 class DesktopApplication : public QPEApplication
 {
@@ -77,16 +77,15 @@ public slots:
 
 protected slots:
   void shutdown( ShutdownImpl::Type );
-  void psTimeout( int );
   void apmTimeout();
   void sendCard();
 private:
     void reloadPowerWarnSettings();
     DesktopPowerAlerter *pa;
-    PowerStatus *ps;
+    PowerStatus *m_ps, *m_ps_last;
     QTimer *cardSendTimer;
     QCopChannel *channel;
-    QPEScreenSaver *m_screensaver;
+    OpieScreenSaver *m_screensaver;
     QTimer * m_timer;
     int m_powerVeryLow;
     int m_powerCritical;

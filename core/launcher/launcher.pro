@@ -3,6 +3,7 @@ CONFIG		= qt warn_on release
 DESTDIR		= ../../bin
 HEADERS		= background.h \
 		  desktop.h \
+		  screensaver.h \
 		  qprocess.h \
 		  mediummountgui.h \
 		  info.h \
@@ -44,6 +45,7 @@ HEADERS		= background.h \
 		  quicklauncher.h 
 SOURCES		= background.cpp \
 		  desktop.cpp \
+		  screensaver.cpp \
 		  mediummountgui.cpp \
 		  qprocess.cpp qprocess_unix.cpp \
 		  info.cpp \
