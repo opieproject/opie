@@ -1,0 +1,90 @@
+diff -ru libetpan-0.32/mime/mailmime_content.c libetpan-0.32-patched/mime/mailmime_content.c
+--- libetpan-0.32/mime/mailmime_content.c	2003-12-08 16:36:38.000000000 +0100
++++ libetpan-0.32-patched/mime/mailmime_content.c	2003-12-21 15:42:04.000000000 +0100
+@@ -1549,7 +1549,7 @@
+ /* ************************************************************************* */
+ /* MIME part decoding */
+ 
+-static char get_base64_value(char ch)
++static signed char get_base64_value(char ch)
+ {
+   if ((ch >= 'A') && (ch <= 'Z'))
+     return ch - 'A';
+@@ -1595,7 +1595,7 @@
+ 
+   i = 0;
+   while (1) {
+-    char value;
++    signed char value;
+ 
+     value = -1;
+     while (value == -1) {
+diff -ru libetpan-0.32/mime/mailmime_decode.c libetpan-0.32-patched/mime/mailmime_decode.c
+--- libetpan-0.32/mime/mailmime_decode.c	2003-12-03 22:35:31.000000000 +0100
++++ libetpan-0.32-patched/mime/mailmime_decode.c	2003-12-21 15:42:25.000000000 +0100
+@@ -102,8 +102,8 @@
+   size_t cur_token;
+   int r;
+   int res;
+-  char * str;
+-  char * wordutf8;
++  char * str = 0;
++  char * wordutf8 = 0;
+   int type;
+ 
+   cur_token = * index;
+@@ -147,14 +147,14 @@
+ 	goto free;
+       }
+ 
+-      if (mmap_string_append(gphrase, wordutf8) == NULL) {
++      if (wordutf8==NULL || mmap_string_append(gphrase, wordutf8) == NULL) {
+ 	mailmime_encoded_word_free(word);
+-        free(wordutf8);
++        if (wordutf8) free(wordutf8);
+ 	res = MAILIMF_ERROR_MEMORY;
+ 	goto free;
+       }
+       mailmime_encoded_word_free(word);
+-      free(wordutf8);
++      if (wordutf8) free(wordutf8);
+       first = FALSE;
+     }
+     else if (r == MAILIMF_ERROR_PARSE) {
+@@ -183,14 +183,14 @@
+         r = charconv(tocode, default_fromcode, raw_word,
+             strlen(raw_word), &wordutf8);
+ 
+-	if (mmap_string_append(gphrase, wordutf8) == NULL) {
+-          free(wordutf8);
++	if (wordutf8==NULL || mmap_string_append(gphrase, wordutf8) == NULL) {
++      if (wordutf8)free(wordutf8);
+ 	  mailimf_word_free(raw_word);
+ 	  res = MAILIMF_ERROR_MEMORY;
+ 	  goto free;
+ 	}
+ 
+-        free(wordutf8);
++    if (wordutf8) free(wordutf8);
+ 	mailimf_word_free(raw_word);
+ 	first = FALSE;
+       }
+diff -ru libetpan-0.32/tools/mail_cache_db.c libetpan-0.32-patched/tools/mail_cache_db.c
+--- libetpan-0.32/tools/mail_cache_db.c	2003-12-15 04:33:58.000000000 +0100
++++ libetpan-0.32-patched/tools/mail_cache_db.c	2003-12-21 15:45:36.000000000 +0100
+@@ -65,12 +65,13 @@
+   
+   return cache_db;
+ }
+-
++#endif
+ static void mail_cache_db_free(struct mail_cache_db * cache_db)
+ {
++#if DBVERS >= 1
+   free(cache_db);
+-}
+ #endif
++}
+ 
+ int mail_cache_db_open(const char * filename,
+     struct mail_cache_db ** pcache_db)
