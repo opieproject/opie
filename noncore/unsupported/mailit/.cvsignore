@@ -1,2 +1,3 @@
 Makefile
 qpeobj
+.moc
