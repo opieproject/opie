@@ -372,26 +372,30 @@
     <message>
         <source>Dimensions: %1 x %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Rozměry: %1 x %2
+</translation>
     </message>
     <message>
         <source>Size: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost: %1
+</translation>
     </message>
     <message>
         <source>Compressed size: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Zpakovaná velikost: %1</translation>
     </message>
     <message>
         <source>used colors: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>použité barvy: %1
+</translation>
     </message>
     <message>
         <source>Resolution: %1 x %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Rozlišení: %1 x %2
+</translation>
     </message>
 </context>
 </TS>

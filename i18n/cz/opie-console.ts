@@ -266,25 +266,25 @@
     </message>
     <message>
         <source>Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>Řádek</translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Sloupců</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>Popisek</translation>
     </message>
     <message>
         <source>Q Keycode</source>
         <comment>Qt Key Code for the OnScreen Keyboard</comment>
-        <translation type="unfinished"></translation>
+        <translation>Q kód klávesy</translation>
     </message>
     <message>
         <source>Unicode Value</source>
         <comment>The Unicode value of the key</comment>
-        <translation type="unfinished"></translation>
+        <translation>Unicode hodnota</translation>
     </message>
 </context>
 <context>
@@ -379,15 +379,15 @@
     </message>
     <message>
         <source>4800 baud</source>
-        <translation type="unfinished">4800 baudů</translation>
+        <translation>4800 baudů</translation>
     </message>
     <message>
         <source>2400 baud</source>
-        <translation type="unfinished">2400 baudů</translation>
+        <translation>2400 baudů</translation>
     </message>
     <message>
         <source>1200 baud</source>
-        <translation type="unfinished">1200 baudů</translation>
+        <translation>1200 baudů</translation>
     </message>
 </context>
 <context>
@@ -524,15 +524,15 @@
     </message>
     <message>
         <source>Start log</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustit logování</translation>
     </message>
     <message>
         <source>Stop log</source>
-        <translation type="unfinished"></translation>
+        <translation>Zastavit logování</translation>
     </message>
     <message>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Log</translation>
     </message>
 </context>
 <context>
@@ -832,11 +832,11 @@
     </message>
     <message>
         <source>&lt;qt&gt;Dialing the number failed.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Vytočení čísla selhalo.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Fixing up Embedix</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravuji Embedix</translation>
     </message>
 </context>
 <context>

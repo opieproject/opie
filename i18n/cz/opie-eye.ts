@@ -3,58 +3,58 @@
     <name>BaseSetup</name>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>sekund</translation>
     </message>
     <message>
         <source>Slideshow timeout:</source>
-        <translation type="unfinished"></translation>
+        <translation>Časový limit slideshow:</translation>
     </message>
     <message>
         <source> pixel</source>
-        <translation type="unfinished"></translation>
+        <translation>pixel</translation>
     </message>
     <message>
         <source>Size of thumbnails:</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost zmenšenin:</translation>
     </message>
     <message>
         <source>Show toolbar on startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit panel při spuštění</translation>
     </message>
     <message>
         <source>Save status of fullscreen/autorotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit stav celé obrazovky/autorotace</translation>
     </message>
 </context>
 <context>
     <name>ImageView</name>
     <message>
         <source>View Image Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit info o obrázku</translation>
     </message>
     <message>
         <source>Toggle autorotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Přepnutí auto-rotace</translation>
     </message>
     <message>
         <source>Toggle autoscale</source>
-        <translation type="unfinished"></translation>
+        <translation>Přepnutí auto-zmenšení</translation>
     </message>
     <message>
         <source>Switch to next image</source>
-        <translation type="unfinished"></translation>
+        <translation>Přepnout na další obrázek</translation>
     </message>
     <message>
         <source>Switch to previous image</source>
-        <translation type="unfinished"></translation>
+        <translation>Přepnout na předchozí obrázek</translation>
     </message>
     <message>
         <source>Toggle fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Přepnout celou obrazovku</translation>
     </message>
     <message>
         <source>Toggle thumbnail</source>
-        <translation type="unfinished"></translation>
+        <translation>Přepnout zmenšeninu</translation>
     </message>
 </context>
 <context>
@@ -93,7 +93,7 @@
     </message>
     <message>
         <source>Start slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustit slideshow</translation>
     </message>
 </context>
 <context>
@@ -112,99 +112,99 @@
     </message>
     <message>
         <source>Opie Eye - Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Eye - Konfigurace</translation>
     </message>
     <message>
         <source>Imageinfo Keyboard Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Klávesové akce informací o obrázku</translation>
     </message>
     <message>
         <source>Imageview Keyboard Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Klávesové akce zobrazení obrázku</translation>
     </message>
     <message>
         <source>Go dir up</source>
-        <translation type="unfinished"></translation>
+        <translation>O adresář výš</translation>
     </message>
     <message>
         <source>Beam file</source>
-        <translation type="unfinished"></translation>
+        <translation>Odeslat soubor</translation>
     </message>
     <message>
         <source>Show imageinfo</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit informaci o obrázku</translation>
     </message>
     <message>
         <source>Delete file</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat soubor</translation>
     </message>
     <message>
         <source>Display image</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit obrázek</translation>
     </message>
     <message>
         <source>Start slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustit slideshow</translation>
     </message>
     <message>
         <source>Show toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit panel</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení</translation>
     </message>
     <message>
         <source>Thumbnail and Imageinfo</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšenina a informace o obrázku</translation>
     </message>
     <message>
         <source>Thumbnail and name</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšenina a jméno</translation>
     </message>
     <message>
         <source>Name only</source>
-        <translation type="unfinished"></translation>
+        <translation>Jen jméno</translation>
     </message>
     <message>
         <source>Next image</source>
-        <translation type="unfinished"></translation>
+        <translation>Další obrázek</translation>
     </message>
     <message>
         <source>Previous image</source>
-        <translation type="unfinished"></translation>
+        <translation>Předchozí obrázek</translation>
     </message>
     <message>
         <source>Show images fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit obrázky na celou obrazovku</translation>
     </message>
     <message>
         <source>Auto rotate images</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaticky otočit obrázky</translation>
     </message>
     <message>
         <source>Show images unscaled</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit obrázky v originální velikosti</translation>
     </message>
     <message>
         <source>Show zoomer window when unscaled</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit lupu při originále</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit</translation>
     </message>
     <message>
         <source>Select filesystem</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat systém souborů</translation>
     </message>
     <message>
         <source>Listview mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Režim zobrazení seznamu</translation>
     </message>
 </context>
 <context>
@@ -228,73 +228,73 @@
     </message>
     <message>
         <source>Opie Eye</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Eye</translation>
     </message>
     <message>
         <source>DocView</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazení dokumentace</translation>
     </message>
     <message>
         <source>Directory View</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazení adresáře</translation>
     </message>
     <message>
         <source>&lt;center&gt;&lt;b&gt;Be carefull with the following options!&lt;/b&gt;&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;&lt;b&gt;Mějte se na pozoru s nasledujícími možnostmi!&lt;/b&gt;&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Show files recursive</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit soubory rekurzivně</translation>
     </message>
     <message>
         <source>Recursion depth:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hloubka rekurze:</translation>
     </message>
     <message>
         <source> directories</source>
-        <translation type="unfinished"></translation>
+        <translation>adresáře</translation>
     </message>
     <message>
         <source>Digital Camera View</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazení digi foťákem</translation>
     </message>
     <message>
         <source>Error no Camera Dir found</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba, adresář s foťákem neexistuje</translation>
     </message>
 </context>
 <context>
     <name>ViewModeButton</name>
     <message>
         <source>Thumbnail and Imageinfo</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšenina a informace o obrázku</translation>
     </message>
     <message>
         <source>Thumbnail and Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšenina a jméno</translation>
     </message>
     <message>
         <source>Name Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Jen jméno</translation>
     </message>
 </context>
 <context>
     <name>imageinfo</name>
     <message>
         <source>View Full Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit celý obrázek</translation>
     </message>
     <message>
         <source>Image info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informace o obrázku</translation>
     </message>
     <message>
         <source>Displays an thumbnail of the image</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazí zmenšeninu obrázku</translation>
     </message>
     <message>
         <source>Displays info of selected image</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazí info o vybraném obrázku</translation>
     </message>
 </context>
 </TS>

@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Mind Breaker</source>
-        <translation type="unfinished"></translation>
+        <translation>Drtič mysli</translation>
     </message>
 </context>
 <context>

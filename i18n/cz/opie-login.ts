@@ -89,46 +89,46 @@ nezachytitelným signálem
     <message>
         <source>Set Password</source>
         <comment>Caption of the password dialog</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení hesla</translation>
     </message>
     <message>
         <source>&lt;qt&gt;&lt;h2&gt;Please set a password for the Superuser.&lt;/h2&gt;&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;&lt;h2&gt;Prosím nastavte heslo Superuživatele.&lt;/h2&gt;&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Password:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Heslo:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Confirm:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Potvrzení:&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
     <name>PasswordDialogImpl</name>
     <message>
         <source>Trying to leave without password set</source>
-        <translation type="unfinished"></translation>
+        <translation>Zkouším odejít bez nastavení hesla</translation>
     </message>
     <message>
         <source>&lt;qt&gt;No password was set. This could lead to you not beeingable to remotely connect to your machine.Do you want to continue not setting a password?&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Heslo nebylo nastaveno. To může způsobit nemožnost vzdáleného připojení do vašeho zařízení. Opravdu chcete pokračovat bez nastavení hesla?&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Passwords don&apos;t match</source>
-        <translation type="unfinished"></translation>
+        <translation>Heslo nesouhlasí</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The two passwords don&apos;t match. Please try again.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Obě hesla nesouhlasí. Prosím, zkuste to znovu.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Password not legal</source>
-        <translation type="unfinished"></translation>
+        <translation>Heslo není povoleno</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The entered password is not a valid password.Please try entering a valid password.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Zadané heslo není platné heslo. Prosím zkuste zadat platné heslo.&lt;/qt&gt;</translation>
     </message>
 </context>
 </TS>
