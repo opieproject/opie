@@ -20,6 +20,8 @@
 #include <qpushbutton.h>
 #include <qlabel.h>
 
+#include <qdirectpainter_qws.h>
+
 #include <qpe/resource.h>
 #include <opie/ofiledialog.h>
 
@@ -46,6 +48,10 @@ CameraMainWindow::~CameraMainWindow()
 
 void CameraMainWindow::clickedSnapShot()
 {
+    QDirectPainter fb( l );
+    ZCameraIO::instance()->snapshot( fb.frameBuffer() );
+
+    /*
     QImage i;
     QPixmap p;
     if ( ZCameraIO::instance()->snapshot( &i ) )
@@ -53,5 +59,6 @@ void CameraMainWindow::clickedSnapShot()
         p.convertFromImage( i );
         l->setPixmap( p );
     }
+    */
 }
 

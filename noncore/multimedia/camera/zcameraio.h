@@ -21,16 +21,45 @@ class QImage;
 class ZCameraIO
 {
   public:
-    ZCameraIO();
     virtual ~ZCameraIO();
 
-    bool isOpen() const { return _driver != -1; };
+    enum ReadMode
+    {
+        IMAGE = 0, STATUS = 1,
+        FASTER = 0, BETTER = 2,
+        XNOFLIP = 0, XFLIP = 4,
+        YNOFLIP = 0, YFLIP = 8
+    };
+
+    bool setCaptureFrame( int w, int h, int zoom = 256, bool rot = true );
+    void setReadMode( int = IMAGE | XFLIP | YFLIP );
+
+    bool isShutterPressed(); // not const, because it calls clearShutterLatch
+    bool isAvailable() const;
+    bool isCapturing() const;
+    bool isFinderReversed() const;
+
+    bool isOpen() const;
     bool snapshot( QImage* );
-    static ZCameraIO* instance() { return _instance; };
+    bool snapshot( unsigned char* );
+    static ZCameraIO* instance();
+
+  protected:
+    ZCameraIO();
+    void clearShutterLatch();
+    void init();
+    bool read( char*, int );
+    bool write( char*, int = 0 );
 
   private:
     int _driver;
+    char _status[4];
     static ZCameraIO* _instance;
+    int _height;
+    int _width;
+    int _zoom;
+    bool _rot;
+    int _readlen;
 };
 
 #endif
