@@ -6,7 +6,7 @@ config NETWORKSETUP
 config NETWORKSETUP-CORE
   boolean
   default "y" if NETWORKSETUP
-  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && NETWORKSETUP
+  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && NETWORKSETUP  && INTERFACES
 
   source noncore/settings/networksettings/ppp/config.in
   source noncore/settings/networksettings/wlan/config.in
