@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.cpp,v 1.2 2003-05-24 16:12:02 tille Exp $
+ * $Id: general.cpp,v 1.3 2003-05-25 12:33:50 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -26,11 +26,18 @@
 
 #include <termios.h>
 #include <string.h>
+
+#include <qcheckbox.h>
+#include <qcombobox.h>
+#include <qlabel.h>
+#include <qlayout.h>
+#include <qpushbutton.h>
+#include <qslider.h>
+#include <qspinbox.h>
 #include <qwhatsthis.h>
 
-#include "knuminput.h"
-#include <qslider.h>
-#include <qlayout.h>
+// #include <qgroupbox.h>
+
 #include "general.h"
 //#include "version.h"
 //#include "miniterm.h"
@@ -50,6 +57,7 @@ ModemWidget::ModemWidget( QWidget *parent, const char *name)
 
   QGridLayout *tl = new QGridLayout(this, 8, 2, 0 );//, KDialog::spacingHint());
 
+  QLabel *label1;
   label1 = new QLabel(i18n("Modem de&vice:"), this);
   tl->addWidget(label1, 0, 0);
 
@@ -74,11 +82,11 @@ ModemWidget::ModemWidget( QWidget *parent, const char *name)
   QWhatsThis::add(modemdevice,tmp);
 
 
-  label2 = new QLabel(i18n("&Flow control:"), this);
-  tl->addWidget(label2, 1, 0);
+  label1 = new QLabel(i18n("&Flow control:"), this);
+  tl->addWidget(label1, 1, 0);
 
   flowcontrol = new QComboBox(false, this);
-  label2->setBuddy(flowcontrol);
+  label1->setBuddy(flowcontrol);
   flowcontrol->insertItem(i18n("Hardware [CRTSCTS]"));
   flowcontrol->insertItem(i18n("Software [XON/XOFF]"));
   flowcontrol->insertItem(i18n("None"));
@@ -92,10 +100,10 @@ ModemWidget::ModemWidget( QWidget *parent, const char *name)
 	     "\n"
 	     "<b>Default</b>: CRTSCTS");
 
-  QWhatsThis::add(label2,tmp);
+  QWhatsThis::add(label1,tmp);
   QWhatsThis::add(flowcontrol,tmp);
 
-  labelenter = new QLabel(i18n("&Line termination:"), this);
+  QLabel *labelenter = new QLabel(i18n("&Line termination:"), this);
   tl->addWidget(labelenter, 2, 0);
 
   enter = new QComboBox(false, this);
@@ -116,7 +124,7 @@ ModemWidget::ModemWidget( QWidget *parent, const char *name)
   QWhatsThis::add(labelenter,tmp);
   QWhatsThis::add(enter, tmp);
 
-  baud_label = new QLabel(i18n("Co&nnection speed:"), this);
+  QLabel *baud_label = new QLabel(i18n("Co&nnection speed:"), this);
   tl->addWidget(baud_label, 3, 0);
   baud_c = new QComboBox(this);
   baud_label->setBuddy(baud_c);
@@ -190,14 +198,18 @@ ModemWidget::ModemWidget( QWidget *parent, const char *name)
                        "<b>Default</b>: On"));
 
   // Modem Timeout Line Edit Box
-
-  modemtimeout = new KIntNumInput(PPPData::data()->modemTimeout(), this);
-  modemtimeout->setLabel(i18n("Modem &timeout:"));
-  modemtimeout->setRange(1, 120, 1);
+  QHBoxLayout *timeoutLayout = new QHBoxLayout( this );
+  QLabel *timeoutlabel = new QLabel( tr("Modem timeout:") ,this, "timeout" );
+  modemtimeout = new QSpinBox( 1, 120, 1, this, "modemTimeout" );
+//   modemtimeout = new KIntNumInput(PPPData::data()->modemTimeout(), this);
+//   modemtimeout->setLabel(i18n("Modem &timeout:"));
+//  modemtimeout->setRange(1, 120, 1);
   modemtimeout->setSuffix(i18n(" sec"));
   connect(modemtimeout, SIGNAL(valueChanged(int)),
 	  SLOT(modemtimeoutchanged(int)));
-  tl->addMultiCellWidget(modemtimeout, 6, 6, 0, 1);
+  timeoutLayout->addWidget(timeoutlabel);
+  timeoutLayout->addWidget(modemtimeout);
+  tl->addMultiCellLayout(timeoutLayout, 6, 6, 0, 1);
 
   QWhatsThis::add(modemtimeout,
                   i18n("This specifies how long <i>kppp</i> waits for a\n"
@@ -278,12 +290,17 @@ ModemWidget2::ModemWidget2( QWidget *parent, const char *name)
 		       "\n"
 		       "<b>Default:</b>: On"));
 
-  busywait = new KIntNumInput(PPPData::data()->busyWait(), this);
-  busywait->setLabel(i18n("B&usy wait:"));
-  busywait->setRange(0, 300, 5, true);
-  busywait->setSuffix(i18n(" sec"));
+  QHBoxLayout *waitLayout = new QHBoxLayout( this );
+  QLabel *waitLabel = new QLabel( tr("Busy wait:"), this, "busyWait" );
+  busywait = new QSpinBox( 0, 300, 5, this, "busyWait" );
+//   busywait = new KIntNumInput(PPPData::data()->busyWait(), this);
+//   busywait->setLabel(i18n("B&usy wait:"));
+//   busywait->setRange(0, 300, 5, true);
+   busywait->setSuffix(i18n(" sec"));
   connect(busywait, SIGNAL(valueChanged(int)), SLOT(busywaitchanged(int)));
-  l1->addWidget(busywait);
+  waitLayout->addWidget(waitLabel);
+  waitLayout->addWidget(busywait);
+  l1->addLayout( waitLayout );
 
   QWhatsThis::add(busywait,
                   i18n("Specifies the number of seconds to wait before\n"

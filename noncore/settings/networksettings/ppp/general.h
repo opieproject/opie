@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.h,v 1.1 2003-05-23 19:43:46 tille Exp $
+ * $Id: general.h,v 1.2 2003-05-25 12:33:50 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -27,15 +27,13 @@
 #define _GENERAL_H_
 
 #include <qwidget.h>
-#include <qcombobox.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qgroupbox.h>
-#include <qpushbutton.h>
-//#include <kcolorbutton.h>
 
 class QSlider;
-class KIntNumInput;
+class QSpinBox;
+class QCombobox;
+class QLabel;
+class QCheckBox;
+class QComboBox;
 
 
 
@@ -54,17 +52,17 @@ private slots:
 
 private:
   QComboBox 	*enter;
-  QLabel 	*label1;
-  QLabel 	*label2;
-  QLabel 	*labeltmp;
-  QLabel 	*labelenter;
+/*   QLabel 	*label1; */
+/*   QLabel 	*label2; */
+/*   QLabel 	*labeltmp; */
+/*   QLabel 	*labelenter; */
   QComboBox 	*modemdevice;
   QComboBox 	*flowcontrol;
 
   QComboBox *baud_c;
   QLabel *baud_label;
 
-  KIntNumInput 	*modemtimeout;
+  QSpinBox 	*modemtimeout;
   QCheckBox     *modemlockfile;
 };
 
@@ -88,9 +86,9 @@ private:
   QPushButton 	*modemcmds;
   QPushButton 	*modeminfo_button;
   //  QPushButton 	*terminal_button;
-  QFrame 	*fline;
+  //  QFrame 	*fline;
   QCheckBox     *waitfordt;
-  KIntNumInput 	*busywait;
+  QSpinBox 	*busywait;
   QCheckBox 	*chkbox1;
   QSlider       *volume;
 };
