@@ -20,16 +20,19 @@
 //#include <mainwindow.h>
 #include "opie/ocontactdb.h"
 #include "qpe/contact.h"
+#include <qpe/qpeapplication.h>
 
 int main( int argc, char ** argv )
 {
+
+    QPEApplication a( argc, argv );
 
     /* Testroutine für OContactDB */
     OContactDB contactdb ("testprg");
     Contact query;
     const Contact *result;
 
-    QString queryString (".*1944.*");
+    QString queryString ("\\..*\\.20.*"); /* Every birthday in the year 20xx */
     query.setBirthday (queryString);
     if ( (result = contactdb.queryByExample (query, OContactDB::query_IgnoreCase | OContactDB::query_RegExp)) != NULL){
 	    do{
@@ -40,7 +43,6 @@ int main( int argc, char ** argv )
 		    result = contactdb.nextFound();
 	    } while (result != NULL); 
     }
-
 
 
 
