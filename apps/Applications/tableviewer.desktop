@@ -1,6 +1,7 @@
 [Desktop Entry]
 Exec=tableviewer
 Type=Application
+Icon=tableviewer/Tableviewer
 Name=Table Viewer
 Comment=A table/database viewer
 Name[da]=Tabelviser

@@ -2,7 +2,7 @@
 Comment=A Password Manager Program
 Comment[de]=Ein Programm zum Verwalten von Passworten
 Exec=zsafe
-Icon=zsafe
+Icon=zsafe/zsafe
 Type=Application
 Type[de]=Anwendung
 Name=ZSafe
