@@ -17,7 +17,7 @@ void OClickableLabel::setToggleButton(bool t) {
     isToggle=t;
 }
 
-void OClickableLabel::mousePressEvent( QMouseEvent *e ) {
+void OClickableLabel::mousePressEvent( QMouseEvent * /*e*/ ) {
     if (isToggle && isDown) {
 	showState(false);
     } else {

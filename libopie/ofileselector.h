@@ -180,7 +180,7 @@ class OFileSelector : public QWidget {
   QStringList selectedPaths() const;
 
   QString directory()const;
-  int fileCount();
+  int fileCount() const;
 
   /* the user needs to delete it */
   DocLnk selectedDocument()const;

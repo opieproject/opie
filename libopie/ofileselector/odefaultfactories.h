@@ -5,7 +5,6 @@
 
 extern "C" {
 
-    OFileView* newFileIconView( OFileSelector*, QWidget* parent );
     OFileView* newFileListView( OFileSelector*, QWidget* parent );
 
     OLister* newLocalLister(OFileSelector* );

@@ -79,7 +79,7 @@ public:
      * read ahead cache find method ;)
      */
     virtual T find( int uid, const QArray<int>&,
-                    uint current, CacheDirection dir = Forward )const;
+                    uint current, typename OTemplateBase<T>::CacheDirection dir = OTemplateBase<T>::Forward )const;
 
     /* invalidate cache here */
     /**
@@ -165,13 +165,13 @@ bool OPimAccessTemplate<T>::save() {
     return m_backEnd->save();
 }
 template <class T>
-OPimAccessTemplate<T>::List OPimAccessTemplate<T>::allRecords()const {
+typename OPimAccessTemplate<T>::List OPimAccessTemplate<T>::allRecords()const {
     QArray<int> ints = m_backEnd->allRecords();
     List lis(ints, this );
     return lis;
 }
 template <class T>
-OPimAccessTemplate<T>::List
+typename OPimAccessTemplate<T>::List
 OPimAccessTemplate<T>::queryByExample( const T& t, int sortOrder ) {
     QArray<int> ints = m_backEnd->queryByExample( t, sortOrder );
 
@@ -186,7 +186,7 @@ T OPimAccessTemplate<T>::find( int uid ) const{
 }
 template <class T>
 T OPimAccessTemplate<T>::find( int uid, const QArray<int>& ar,
-                               uint current, CacheDirection dir )const {
+                               uint current, typename OTemplateBase<T>::CacheDirection dir )const {
     /*
      * better do T.isEmpty()
      * after a find this way we would
@@ -230,7 +230,7 @@ void OPimAccessTemplate<T>::invalidateCache() {
     m_cache.invalidate();
 }
 template <class T>
-OPimAccessTemplate<T>::BackEnd* OPimAccessTemplate<T>::backEnd() {
+typename OPimAccessTemplate<T>::BackEnd* OPimAccessTemplate<T>::backEnd() {
     return m_backEnd;
 }
 template <class T>

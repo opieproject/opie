@@ -399,7 +399,7 @@ void OTodo::copy( OTodoData* src, OTodoData* dest ) {
 QString OTodo::type() const {
     return QString::fromLatin1("OTodo");
 }
-QString OTodo::recordField(int id )const {
+QString OTodo::recordField(int /*id*/ )const {
     return QString::null;
 }
 

@@ -375,7 +375,7 @@ QString OFileSelector::directory()const
   return QDir(m_currentDir).absPath();
 }
 
-int OFileSelector::fileCount()
+int OFileSelector::fileCount() const
 {
   int count;
   switch( m_selector ){
@@ -682,7 +682,7 @@ void OFileSelector::initVars()
   m_new = 0;
   m_close = 0;
 }
-void OFileSelector::addFile(const QString &mime, QFileInfo *info, bool symlink)
+void OFileSelector::addFile(const QString &/*mime*/, QFileInfo *info, bool symlink)
 {
   if(!m_files)
     return;
@@ -714,7 +714,7 @@ void OFileSelector::addFile(const QString &mime, QFileInfo *info, bool symlink)
 			 QString::number( info->size() ),
 			 dir, locked );
 }
-void OFileSelector::addDir(const QString &mime, QFileInfo *info, bool symlink )
+void OFileSelector::addDir(const QString &/*mime*/, QFileInfo *info, bool symlink )
 {
   if(!m_dir)
     return;
@@ -1018,7 +1018,6 @@ bool OFileSelector::compliesMime( const QString& mime ) {
     qWarning("list doesn't contain it ");
     QStringList::Iterator it2;
     int pos;
-    int pos2;
     for ( it2 = list.begin(); it2 != list.end(); ++it2 ) {
         pos = (*it2).findRev("/*");
         if ( pos >= 0 ) {
@@ -1105,7 +1104,7 @@ void OFileSelector::slotRightButton(int button, QListViewItem *item, const QPoin
     return;
   slotContextMenu( item );
 }
-void OFileSelector::slotContextMenu( QListViewItem *item)
+void OFileSelector::slotContextMenu( QListViewItem * /*item*/)
 {
 
 }

@@ -247,12 +247,12 @@ ORecordList<T>::~ORecordList() {
 /* nothing to do here */
 }
 template <class T>
-ORecordList<T>::Iterator ORecordList<T>::begin() {
+typename ORecordList<T>::Iterator ORecordList<T>::begin() {
     Iterator it( m_ids, m_acc );
     return it;
 }
 template <class T>
-ORecordList<T>::Iterator ORecordList<T>::end() {
+typename ORecordList<T>::Iterator ORecordList<T>::end() {
     Iterator it( m_ids, m_acc );
     it.m_end = true;
     it.m_current = m_ids.count();

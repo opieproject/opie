@@ -976,7 +976,8 @@ void OFileSelector::initFactory() {
     m_fileFactory = new OFileFactory();
     m_fileFactory->addLister(tr("Files"), newLocalLister );
     m_fileFactory->addView(tr("List View"), newFileListView );
-    m_fileFactory->addView(tr("Documents"), newFileIconView );
+    /* dummy entry */
+    m_fileFactory->addView(tr("Documents"), newFileListView );
 }
 
 void OFileSelector::fillList() {

@@ -57,7 +57,7 @@ public:
     virtual T find(int uid )const  = 0;
 
     virtual T find(int uid, const QArray<int>& items,
-                   uint current, Frontend::CacheDirection )const ;
+                   uint current, typename Frontend::CacheDirection )const ;
     /**
      * clear the back end
      */
@@ -127,7 +127,7 @@ void OPimAccessBackend<T>::setSaneCacheSize( int size) {
 }
 template <class T>
 T OPimAccessBackend<T>::find( int uid, const QArray<int>&,
-                              uint, Frontend::CacheDirection )const {
+                              uint, typename Frontend::CacheDirection )const {
     return find( uid );
 }
 template <class T>
