@@ -13,12 +13,13 @@
 
 OxyFrame::OxyFrame(QWidget *parent, const char *name) : QFrame(parent,name)
 {
+    N = name;
     this->setFrameStyle( QFrame::Panel );
     this->setLineWidth( 2 );
     this->setFrameShadow( QFrame::Raised );
-    this->setBackgroundColor( QColor( cyan ) );
+    this->setBackgroundColor( QColor( green ) );
 }
 
 void OxyFrame::mousePressEvent (  QMouseEvent * e ){
-    emit clicked();
+    emit num( N );
 };

@@ -57,7 +57,7 @@ void OxydataWidget::setElement( int el )
     DataTable->setText( 8,1,configobj.readEntry( "MP" ) ); 
 }
 
-void OxydataWidget::setTable()
+void OxydataWidget::setTable() const
 {
     DataTable->setText( 0,0, tr( "Weight:" ) );
     DataTable->setText( 1,0, tr( "Block" )) ;

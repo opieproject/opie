@@ -19,9 +19,8 @@ class Oxygen : public QMainWindow
 		Oxygen();
         QVBox *vbox;
 	private slots:
-        void slotCalculations();
-        void slotSettings();
-        void slotData();
-        void slotPSE();
-		void close();
+        void slotCalculations() const;
+        void slotData() const;
+        void slotPSE() const;
+		void close() const;
 };

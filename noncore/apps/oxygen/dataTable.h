@@ -37,7 +37,7 @@ class OxydataWidget : public QWidget
 
     private:
         OxydataTable *DataTable;
-        void setTable();
+        void setTable() const;
         
     public slots:
         void setElement( int );

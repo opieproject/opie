@@ -18,7 +18,7 @@
 
 dataWidgetUI::dataWidgetUI() : QWidget()
 {
-    this->setCaption("Chemical Data");
+    this->setCaption( tr( "Chemical Data" ));
     
     QGridLayout *qgrid = new QGridLayout( this, 2,1 );
     

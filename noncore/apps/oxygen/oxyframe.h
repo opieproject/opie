@@ -22,8 +22,13 @@ class OxyFrame : public QFrame
 
         void mousePressEvent( QMouseEvent *);
 
+        QString N;
+
     signals:
-        void clicked();
+        /*
+         * this signal emits the name ( the elemen-number ) 
+         */
+        void num(QString);
 };
 
 #endif

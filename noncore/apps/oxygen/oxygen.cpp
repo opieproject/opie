@@ -20,10 +20,8 @@
 Oxygen::Oxygen()
   : QMainWindow()
 {
-    this->setCaption( "Oxygen" );
+    this->setCaption( tr( "Oxygen" ) );
     vbox = new QVBox( this );
-    QPushButton *setButton = new QPushButton( "Settings", vbox );
-    connect ( setButton, SIGNAL( clicked() ), this, SLOT( slotSettings() ) );
     QPushButton *dataButton = new QPushButton( "Data", vbox );
     connect ( dataButton, SIGNAL( clicked() ), this, SLOT( slotData() ) );
     QPushButton *calcButton = new QPushButton( "Calculations", vbox );
@@ -35,27 +33,25 @@ Oxygen::Oxygen()
 }
 
 
-void Oxygen::close()
+void Oxygen::close() const
 {
   QApplication::exit();
 }
 
 //SLOTS
 
-void Oxygen::slotCalculations(){ 
+void Oxygen::slotCalculations() const{ 
     calcDlgUI *CalcDlgUI = new calcDlgUI();
     CalcDlgUI->show();
 };
 
-void Oxygen::slotData(){ 
+void Oxygen::slotData() const{ 
     dataWidgetUI *DataWidgetUI = new dataWidgetUI();
     DataWidgetUI->showMaximized();
     DataWidgetUI->show();
 };
 
-void Oxygen::slotSettings(){ };
-
-void Oxygen::slotPSE(){
+void Oxygen::slotPSE() const{
     PSEWidget *pse = new PSEWidget();
     pse->showMaximized();
     pse->show();

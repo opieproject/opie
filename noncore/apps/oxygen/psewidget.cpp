@@ -9,22 +9,15 @@
 
 #include <qpe/config.h>
 #include <qlayout.h>
-#include <qlabel.h>
 #include <qlist.h>
-#include <qvbox.h>
 #include "dataTable.h"
 #include "psewidget.h"
 #include "oxyframe.h"
 
 
-/*Element::Element( const QString &name )
-{
-}*/
-
-
 PSEWidget::PSEWidget() : QWidget()
 {
-    this->setCaption( "Periodic System" );
+    this->setCaption( tr( "Periodic System" ) );
 
     QVBoxLayout *vlay = new QVBoxLayout( this );
     
@@ -34,20 +27,23 @@ PSEWidget::PSEWidget() : QWidget()
     {
         position( n+1,h,v );
         QList<OxyFrame> PSEframe;
-        PSEframe.append( new OxyFrame( this , QString::number( n ) ) );
+        PSEframe.append( new OxyFrame( this , QString::number(n) ) );
         grid->addWidget( PSEframe.current() , v/40+1 , h/40 );
         PSEframe.current()->setMinimumHeight( 11 );
-        connect( PSEframe.current(), SIGNAL( clicked() ), this, SLOT( slotShowElement() ));
+        connect( PSEframe.current(), SIGNAL( num(QString) ), this, SLOT( slotShowElement(QString) ));
     }
     
-    OxydataWidget *oxyDW = new OxydataWidget(this);
+    oxyDW = new OxydataWidget(this);
     oxyDW->setElement( 1 );
 
     vlay->addLayout( grid );
     vlay->addWidget( oxyDW );
 }
 
-void PSEWidget::slotShowElement(){ qDebug( "ja genau" );};
+void PSEWidget::slotShowElement(QString number)
+{ 
+    oxyDW->setElement( number.toInt() );
+};
 
 void PSEWidget::position(int n, int& h, int& v)
 {
