@@ -454,6 +454,7 @@ class KateDocument: public Kate::Document
     QString docName () {return myDocName;};
 
     void setDocName (QString docName);
+    void setDocFile (QString docFile);
 
   public slots:
     /** Reloads the current document from disk if possible */
@@ -528,11 +529,11 @@ class KateDocument: public Kate::Document
 
   private:
 
-	class KateDocPrivate
-	{
-		public:
-	        bool hlSetByUser;
-	};
+  class KateDocPrivate
+  {
+    public:
+          bool hlSetByUser;
+  };
  
  
 // BCI: Add a real d-pointer in the next BIC release

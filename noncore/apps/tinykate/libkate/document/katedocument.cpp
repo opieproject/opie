@@ -328,6 +328,7 @@ void KateDocument::openURL(const QString &filename)
 
 bool KateDocument::saveFile()
 {
+    
   QFile f( m_file );
   if ( !f.open( IO_WriteOnly ) )
     return false; // Error
@@ -1925,7 +1926,8 @@ void KateDocument::updateLines(int startLine, int endLine, int flags, int cursor
       updateMaxLength(textLine);
     }
     endCtx = textLine->getContext();
-    qDebug("DOHIGHLIGHT");
+//    qDebug("DOHIGHLIGHT");
+    
     ctxNum = m_highlight->doHighlight(ctxNum,textLine);
     textLine->setContext(ctxNum);
     line++;
@@ -3028,6 +3030,12 @@ void KateDocument::setDocName (QString docName)
 {
   myDocName = docName;
   emit nameChanged (this);
+}
+
+void KateDocument::setDocFile (QString docFile)
+{
+  m_file = docFile;
+  emit fileNameChanged ();
 }
 
 void KateDocument::setMTime()
