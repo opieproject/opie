@@ -1,4 +1,163 @@
-zsh: no such file or directory: /tr
+//========================================================================
+//
+// qpdf.cc
+//
+// Copyright 2001 Robert Griebl
+//
+//========================================================================
+
+#include "aconf.h"
+#include "GString.h"
+#include "PDFDoc.h"
+#include "TextOutputDev.h"
+
+#include "QPEOutputDev.h"
+
+#include <qpe/qpeapplication.h>
+#include <qpe/resource.h>
+#include <qpe/applnk.h>
+#include <qpe/qcopenvelope_qws.h>
+
+
+#include <qclipboard.h>
+#include <qpe/qpetoolbar.h>
+#include <qtoolbutton.h>
+#include <qpe/qpemenubar.h>
+#include <qpopupmenu.h>
+#include <qwidgetstack.h>
+#include <qtimer.h>
+#include <qfileinfo.h>
+#include <qstring.h>
+#include <qlineedit.h>
+#include <qspinbox.h>
+#include <qlayout.h>
+#include <qdialog.h>
+#include <qlabel.h>
+#include <qmessagebox.h>
+
+#include "qpdf.h"
+
+#ifdef QPDF_QPE_ONLY
+#include <qpe/fileselector.h>
+#else
+#include <opie/ofileselector.h>
+#endif
+
+
+int main ( int argc, char **argv ) 
+{
+	QPEApplication app ( argc, argv );
+
+	// read config file
+	globalParams = new GlobalParams ( "" );
+	globalParams-> setErrQuiet ( true );
+
+	QPdfDlg *dlg = new QPdfDlg ( );				
+	app. showMainDocumentWidget ( dlg );
+
+	if (( app. argc ( ) == 3 ) && ( app. argv ( ) [1] == QCString ( "-f" )))
+		dlg-> openFile ( app. argv ( ) [2] );
+
+	return app. exec ( );
+}
+
+
+QPdfDlg::QPdfDlg ( ) : QMainWindow ( )
+{
+	setCaption ( tr( "QPdf" ));
+	setIcon ( Resource::loadPixmap ( "qpdf_icon" ));
+	
+	m_busy = false;
+	
+	m_doc = 0;
+	m_pages = 0;
+	m_zoom = 72;
+	m_currentpage = 0;	
+
+	m_fullscreen = false;
+	m_renderok = false;
+		
+	
+	setToolBarsMovable ( false );
+
+	m_stack = new QWidgetStack ( this );
+	m_stack-> setSizePolicy ( QSizePolicy ( QSizePolicy::Expanding, QSizePolicy::Expanding ));
+	setCentralWidget ( m_stack );
+
+	m_outdev = new QPEOutputDev ( m_stack );
+	connect ( m_outdev, SIGNAL( selectionChanged ( const QRect & )), this, SLOT( copyToClipboard ( const QRect & )));
+
+#ifdef QPDF_QPE_ONLY
+	m_filesel = new FileSelector ( "application/pdf", m_stack, "fs", false, true );
+#else
+	m_filesel = new OFileSelector ( "application/pdf", m_stack, "fs", false, true );
+#endif
+
+	connect ( m_filesel, SIGNAL( closeMe ( )), this, SLOT( closeFileSelector ( )));
+	connect ( m_filesel, SIGNAL( fileSelected ( const DocLnk & )), this, SLOT( openFile ( const DocLnk & )));
+
+	m_tb_menu = new QToolBar ( this );
+	m_tb_menu-> setHorizontalStretchable ( true );
+
+	QMenuBar *mb = new QMenuBar ( m_tb_menu );
+
+	m_pm_zoom = new QPopupMenu ( mb );
+	m_pm_zoom-> setCheckable ( true );
+
+	mb-> insertItem ( tr( "Zoom" ), m_pm_zoom );
+
+	m_pm_zoom-> insertItem ( tr( "Fit to width" ), 1 );
+	m_pm_zoom-> insertItem ( tr( "Fit to page" ),  2 );
+	m_pm_zoom-> insertSeparator ( );
+	m_pm_zoom-> insertItem ( tr( "50%" ),   50 );
+	m_pm_zoom-> insertItem ( tr( "75%" ),   75 );
+	m_pm_zoom-> insertItem ( tr( "100%" ), 100 );
+	m_pm_zoom-> insertItem ( tr( "125%" ), 125 );
+	m_pm_zoom-> insertItem ( tr( "150%" ), 150 );
+	m_pm_zoom-> insertItem ( tr( "200%" ), 200 );
+	
+	connect ( m_pm_zoom, SIGNAL( activated ( int )), this, SLOT( setZoom ( int )));
+
+	m_tb_tool = new QToolBar ( this );
+		
+	new QToolButton ( Resource::loadIconSet ( "fileopen" ),    tr( "Open..." ),       QString::null, this, SLOT( openFile ( )),  m_tb_tool, "open" );
+	m_tb_tool-> addSeparator ( );
+	m_to_find = new QToolButton ( Resource::loadIconSet ( "find" ),        tr( "Find..." ),       QString::null, this, SLOT( toggleFindBar ( )),     m_tb_tool, "find" );
+	m_to_find-> setToggleButton ( true );
+	m_tb_tool-> addSeparator ( );
+	m_to_full = new QToolButton ( Resource::loadIconSet ( "fullscreen" ),  tr( "Fullscreen" ),    QString::null, this, SLOT( toggleFullscreen ( )),  m_tb_tool, "fullscreen" );
+	m_to_full-> setToggleButton ( true );
+	m_tb_tool-> addSeparator ( );
+	new QToolButton ( Resource::loadIconSet ( "fastback" ),    tr( "First page" ),    QString::null, this, SLOT( firstPage ( )), m_tb_tool, "first" );
+	new QToolButton ( Resource::loadIconSet ( "back" ),        tr( "Previous page" ), QString::null, this, SLOT( prevPage ( )),  m_tb_tool, "prev" );
+	new QToolButton ( Resource::loadIconSet ( "down" ),        tr( "Goto page..." ),  QString::null, this, SLOT( gotoPageDialog ( )),  m_tb_tool, "goto" );
+	new QToolButton ( Resource::loadIconSet ( "forward" ),     tr( "Next page" ),     QString::null, this, SLOT( nextPage ( )),  m_tb_tool, "next" );
+	new QToolButton ( Resource::loadIconSet ( "fastforward" ), tr( "Last page" ),     QString::null, this, SLOT( lastPage ( )),  m_tb_tool, "last" );
+
+	m_tb_find = new QToolBar ( this );
+	addToolBar ( m_tb_find, "Search", QMainWindow::Top, true );
+	m_tb_find-> setHorizontalStretchable ( true );
+	m_tb_find-> hide ( );
+
+	m_findedit = new QLineEdit ( m_tb_find, "findedit" );
+	m_tb_find-> setStretchableWidget ( m_findedit );
+	connect ( m_findedit, SIGNAL( textChanged ( const QString & )), this, SLOT( findText ( const QString & )));
+
+	new QToolButton ( Resource::loadIconSet ( "next" ),        tr( "Next" ),          QString::null, this, SLOT( findText ( )),  m_tb_find, "findnext" );
+
+	openFile ( );
+}
+
+QPdfDlg::~QPdfDlg ( )
+{
+	delete m_doc;
+}
+
+// vv Fullscreen handling (for broken QT-lib) [David Hedbor, www.eongames.com]
+
+void QPdfDlg::resizeEvent ( QResizeEvent * )
+{
+	if ( m_fullscreen && ( size ( ) != qApp-> desktop ( )-> size ( ))) 
 		setFullscreen ( true );
 }
 
