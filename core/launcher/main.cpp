@@ -87,6 +87,7 @@ void initEnvironment()
     }
 
     setenv("QWS_DISPLAY", QString("Transformed:Rot%1:0").arg(rot), 1);
+    QPEApplication::defaultRotation ( ); /* to ensure deforient matches reality */
 }
 
 
