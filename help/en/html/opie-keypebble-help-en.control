@@ -1,0 +1,10 @@
+Files: help/en/html/opie-keypebble.html 
+Priority: optional
+Section: opie/onlinedoc
+Maintainer: treke <treke@handhelds.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-keypeble
+License: GPL
+Description: Opie VNC Viewer help files (english)
+ 
