@@ -1,4 +1,4 @@
   config SSHKEYS
-    boolean "sshkeys"
+    boolean "opie-sshkeys (manage ssh-agent keys)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

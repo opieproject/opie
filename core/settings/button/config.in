@@ -1,4 +1,4 @@
   config BUTTON-SETTINGS
-    boolean "buttons"
+    boolean "opie-button-settings (application buttons settings)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && !TARGET_RAMSES

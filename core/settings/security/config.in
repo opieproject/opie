@@ -1,4 +1,4 @@
   config SECURITY
-    boolean "security"
+    boolean "opie-security (to set a pin for PDA usage protection)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

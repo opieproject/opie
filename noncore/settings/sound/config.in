@@ -1,4 +1,4 @@
   config SOUND
-    boolean "sound (opie-vmemo-settings)"
+    boolean "opie-vmemo-settings (control sound settings for the vmemo app)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,4 @@
   config NETSYSTEMTIME
-    boolean "netsystemtime"
+    boolean "opie-systemtime (clock setup tool with NTP ability)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
