@@ -10,7 +10,6 @@
  * Constructor, find all of the possible interfaces
  */ 
 WLANModule::WLANModule() : Module() {
-  // get output from iwconfig
 }
 
 /**
@@ -18,7 +17,7 @@ WLANModule::WLANModule() : Module() {
 WLANModule::~WLANModule(){
   Interface *i;
   for ( i=list.first(); i != 0; i=list.next() )
-    delete i;	  
+    delete i;
 }
 
 /**
@@ -47,12 +46,9 @@ bool WLANModule::isOwner(Interface *i){
   if(!we.doesHaveWirelessExtensions())
     return false;
   
-  //if(i->getInterfaceName() == "eth0" || i->getInterfaceName() == "wlan0"){
-    i->setHardwareName("802.11b");
-    list.append(i);
-    return true;
-  //}
-  //return false;
+  i->setHardwareName("802.11b");
+  list.append(i);
+  return true;
 }
 
 /**
@@ -75,8 +71,8 @@ QWidget *WLANModule::information(Interface *i, QTabWidget **tabWidget){
   WExtensions we(i->getInterfaceName());
   if(!we.doesHaveWirelessExtensions())
     return NULL;
-  
-  WlanInfo *info = new WlanInfo(0, "wireless info");
+ 
+  WlanInfo *info = new WlanInfo(0, "wireless info", Qt::WDestructiveClose);
   (*tabWidget) = info->tabWidget;
   
   info->essidLabel->setText(we.essid());
@@ -92,6 +88,10 @@ QWidget *WLANModule::information(Interface *i, QTabWidget **tabWidget){
   info->noiseProgressBar->setProgress(noise);
   info->qualityProgressBar->setProgress(quality);
   info->rateLabel->setText(QString("%1 Mb/s").arg(we.rate()));
+  //WlanInfo info (0, "wireless info", true);
+  //info.show();
+  //return NULL;
+  
   return info;
 }
 

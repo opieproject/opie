@@ -6,7 +6,7 @@
 #include <qtextstream.h>
 
 #define IFCONFIG "/sbin/ifconfig"
-#define HDCP_INFO_DIR "/etc/dhcpc"
+#define DHCP_INFO_DIR "/etc/dhcpc"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -171,7 +171,7 @@ bool Interface::refresh(){
   leaseExpires = "";
   dhcp = false;
    
-  QString dhcpDirectory(HDCP_INFO_DIR);
+  QString dhcpDirectory(DHCP_INFO_DIR);
   QDir d(dhcpDirectory);
   if(!d.exists(dhcpDirectory))
     dhcpDirectory = "/var/run";

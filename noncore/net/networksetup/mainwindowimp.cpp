@@ -78,6 +78,7 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
  * Deconstructor. Save profiles.  Delete loaded libraries.
  */
 MainWindowImp::~MainWindowImp(){
+  qDebug("start Saving mainwindow");
   // Save profiles.
   Config cfg("NetworkSetup");
   cfg.setGroup("General");
@@ -96,6 +97,7 @@ MainWindowImp::~MainWindowImp(){
     delete it.key();
     delete it.data();
   }
+  qDebug("done Saving mainwindow");
 }
 
 /**

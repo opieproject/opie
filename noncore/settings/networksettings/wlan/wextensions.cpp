@@ -157,7 +157,7 @@ bool WExtensions::stats(int &signal, int &noise, int &quality){
         qDebug( "WIFIAPPLET: Doh! Strength %d > estimated max!\n", signal );
       if ( ( noise > IW_UPPER ) || ( noise < IW_LOWER ) )
         qDebug( "WIFIAPPLET: Doh! Noise %d > estimated max!\n", noise );
-      qDebug(QString("q:%1, s:%2, n:%3").arg(quality).arg(signal).arg(noise).latin1());
+      //qDebug(QString("q:%1, s:%2, n:%3").arg(quality).arg(signal).arg(noise).latin1());
       signal = ( ( signal-IW_LOWER ) * 100 ) / IW_UPPER;
       noise = ( ( noise-IW_LOWER ) * 100 ) / IW_UPPER;
       quality = ( quality*100 ) / 92;

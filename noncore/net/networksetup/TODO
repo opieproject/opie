@@ -1,11 +1,9 @@
 WLAN needs to be re-written to not use Config
--remove WLAN Config item
--sub class out the wlan info
--check if an interface supports wireless extensions before config.
+WHERE Is DHCP info stored???
 
 PPP module needs to be written
 
 Write a class that parses /proc and not ifconfig
 
-Possible other modules: ipsec, bluetooth
+Possible other modules: ipsec, bluetooth, ipchains
 

@@ -16,7 +16,7 @@
 #include <qcheckbox.h>
 #include <qregexp.h>
 
-WLANImp::WLANImp( QWidget* parent, const char* name):WLAN(parent, name){
+WLANImp::WLANImp( QWidget* parent, const char* name):WLAN(parent, name, Qt::WDestructiveClose){
   config = new Config("wireless");
   readConfig();
 }
