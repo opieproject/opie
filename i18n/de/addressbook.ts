@@ -344,7 +344,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Country</source>
-        <translation>Bundesland</translation>
+        <translation>Land</translation>
     </message>
     <message>
         <source>United States</source>
@@ -1355,7 +1355,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>Bundesland, geschäftlich</translation>
+        <translation>Land, geschäftlich</translation>
     </message>
     <message>
         <source>Business Pager</source>
@@ -1383,7 +1383,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>Bundesland, privat</translation>
+        <translation>Land, privat</translation>
     </message>
     <message>
         <source>Home Web Page</source>
