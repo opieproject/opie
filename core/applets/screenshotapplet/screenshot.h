@@ -34,47 +34,35 @@ class ScreenshotControl : public QFrame
     Q_OBJECT
 public:
     ScreenshotControl( QWidget *parent=0, const char *name=0 );
-    void performGrab();
 
-public:
+private:
     QPushButton *grabItButton, *scapButton;
     QPixmap snapshot;
     QTimer* grabTimer;
     QCheckBox *saveNamedCheck;
     QString FileNamePath;
     bool setFileName;
-    void slotSave();
-    void slotCopy();
-    void setTime(int newTime);
-
     QSpinBox  *delaySpin;
-private:
     int buttonPushed;
+
 private slots:
     void slotGrab();
     void slotScap(); 
     void savePixmap();
-    void grabTimerDone();
-    void nameScreenshot(bool);
+    void performGrab();
 };
 
-class ScreenshotApplet : public QWidget
-{
-    Q_OBJECT
+class ScreenshotApplet : public QWidget {
 public:
     ScreenshotApplet( QWidget *parent = 0, const char *name=0 );
     ~ScreenshotApplet();
-    ScreenshotControl *vc; 
-public slots:
-private:
+    
+protected:
     void mousePressEvent( QMouseEvent * );
     void paintEvent( QPaintEvent* );
-
+    
 private:
-    QPixmap snapshotPixmap;
-private slots:
-
-        
+	QPixmap m_icon;
 };
 
 
