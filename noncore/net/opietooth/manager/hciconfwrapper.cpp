@@ -1,4 +1,4 @@
-#include "hciconfwrapper.h"
+ #include "hciconfwrapper.h"
 
 #include <qfile.h>
 #include <qtextstream.h>
@@ -91,20 +91,19 @@ namespace OpieTooth {
             //qDebug(str);
             if( (str.contains(key)) > 0 ) {
                 qDebug("Found");
-                // still need look if its commented out!!!
+                // still need to look if its commented out!!!
                 str.simplifyWhiteSpace();
                 qDebug( key );
                 if (str.startsWith("#")) {
-                    outstream << (key + " " + value + ";\n");
+                    str = (key + " " + value + ";");
                 } else {
-                    str.replace( QRegExp( "\\s*"+key+"\\s+[^\\s][^;]*;" ),  key + " " + value + ";\n");
+                    str = str.replace( QRegExp( "\\s*"+key+"\\s+[^\\s][^;]*;" ),  key + " " + value + ";");
                 }
 
                 qDebug( str );
-                outstream << str;
-            } else {
-                outstream << str + "\n";
             }
+
+            outstream << str << endl;
         }
 
         f.close();
