@@ -4,3 +4,4 @@ Exec=formatter
 Icon=formatter/devices
 Type=Application
 Name=Formatter
+Name[zh_TW]=Formatter

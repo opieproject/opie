@@ -4,3 +4,4 @@ Exec=netsystemtime
 Icon=DateTime
 Type=Application
 Name=NTP-Date/Time
+Name[zh_TW]=網絡時間

@@ -4,3 +4,4 @@ Exec=bluetooth-manager
 Icon=opietooth/bluetooth-manager
 Type=Settings
 Name=Bluetooth Manager
+Name[zh_TW]=BlueTooth 管理員
