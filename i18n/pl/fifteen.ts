@@ -36,7 +36,7 @@ Wygrales gre!</translation>
     </message>
     <message>
         <source>&amp;Reset Pieces</source>
-        <translation>&amp;Reset klocki</translation>
+        <translation>&amp;Resetuj klocki</translation>
     </message>
 </context>
 </TS>

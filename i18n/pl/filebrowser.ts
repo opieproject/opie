@@ -71,11 +71,11 @@
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
     <message>
         <source>Thumbnails</source>
-        <translation type="unfinished"></translation>
+        <translation>Miniatury</translation>
     </message>
 </context>
 <context>
@@ -90,11 +90,11 @@
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <source>Rename file</source>
-        <translation>Zmiana nazwy</translation>
+        <translation>Zmien nazwe pliku</translation>
     </message>
     <message>
         <source>Rename failed!</source>
@@ -110,7 +110,7 @@
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cut file</source>
@@ -150,15 +150,15 @@
     </message>
     <message>
         <source>Launch Application</source>
-        <translation>Wywolaj Aplikacje</translation>
+        <translation>Uruchom aplikacje</translation>
     </message>
     <message>
         <source>Launch failed!</source>
-        <translation>Wywolanie nie powiodlo sie!</translation>
+        <translation>Uruchomienie nie powiodlo sie!</translation>
     </message>
     <message>
         <source>Add to Documents</source>
-        <translation>Dodaj do dokumentow</translation>
+        <translation>Dodaj do Dokumentow</translation>
     </message>
     <message>
         <source>Run</source>

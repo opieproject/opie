@@ -3,42 +3,42 @@
     <name>CommandEditDialog</name>
     <message>
         <source>Command Selection</source>
-        <translation>Wybor komenty</translation>
+        <translation>Wybor polecenia</translation>
     </message>
     <message>
         <source>new</source>
-        <translation type="unfinished"></translation>
+        <translation>nowe</translation>
     </message>
     <message>
         <source>edit</source>
-        <translation type="unfinished"></translation>
+        <translation>edytuj</translation>
     </message>
     <message>
         <source>delete</source>
-        <translation type="unfinished"></translation>
+        <translation>usun</translation>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished"></translation>
+        <translation>gora</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished"></translation>
+        <translation>dol</translation>
     </message>
 </context>
 <context>
     <name>CommandEditDialogBase</name>
     <message>
         <source>Commands</source>
-        <translation>Komendy</translation>
+        <translation>Polecenia</translation>
     </message>
     <message>
         <source>&lt;B&gt;Commands&lt;/B&gt;:</source>
-        <translation>&lt;B&gt;Komendy&lt;/B&gt;:</translation>
+        <translation>&lt;B&gt;Polecenia&lt;/B&gt;:</translation>
     </message>
     <message>
         <source>&lt;B&gt;Suggested Commands&lt;/B&gt;:</source>
-        <translation>&lt;B&gt;Sugerowane&lt;/B&gt;:</translation>
+        <translation>&lt;B&gt;Sugerowane polecenia&lt;/B&gt;:</translation>
     </message>
 </context>
 <context>
@@ -49,7 +49,7 @@
     </message>
     <message>
         <source>Micro</source>
-        <translation type="unfinished"></translation>
+        <translation>Bardzo male</translation>
     </message>
     <message>
         <source>Small Fixed</source>
@@ -61,11 +61,11 @@
     </message>
     <message>
         <source>Show command list</source>
-        <translation>Wyswietl liste komend</translation>
+        <translation>Wyswietl liste polecen</translation>
     </message>
     <message>
         <source>Hide command list</source>
-        <translation>Ukryj liste komend</translation>
+        <translation>Ukryj liste polecen</translation>
     </message>
     <message>
         <source>Tabs on Bottom</source>
@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Black on Transparent</source>
-        <translation>Biale na przezroczystym</translation>
+        <translation>Czarne na przezroczystym</translation>
     </message>
     <message>
         <source>Black on Red</source>
@@ -105,15 +105,15 @@
     </message>
     <message>
         <source>Magenta on Blue</source>
-        <translation>Magneta na Niebieskim</translation>
+        <translation>Magneta na niebieskim</translation>
     </message>
     <message>
         <source>Cyan on White</source>
-        <translation>Cyan na bialym</translation>
+        <translation>Cyjan na bialym</translation>
     </message>
     <message>
         <source>White on Cyan</source>
-        <translation>Biale na cyanie</translation>
+        <translation>Biale na cyjan</translation>
     </message>
     <message>
         <source>Blue on Black</source>
@@ -121,7 +121,7 @@
     </message>
     <message>
         <source>Amber on Black</source>
-        <translation>Amber na czarnym</translation>
+        <translation>Bursztyn na czarnym</translation>
     </message>
     <message>
         <source>Colors</source>
@@ -189,49 +189,49 @@
     </message>
     <message>
         <source>Show Command List</source>
-        <translation>Wyswietl liste komend</translation>
+        <translation>Wyswietl liste polecen</translation>
     </message>
     <message>
         <source>Hide Command List</source>
-        <translation>Ukryj liste komend</translation>
+        <translation>Ukryj liste polecen</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Zdefiniuj</translation>
     </message>
     <message>
         <source>Command List</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista polecen</translation>
     </message>
     <message>
         <source>Wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>Zawijaj</translation>
     </message>
     <message>
         <source>Use Beep</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzywaj sygnalu</translation>
     </message>
     <message>
         <source>Tabs on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Zakladki na gorze</translation>
     </message>
 </context>
 <context>
     <name>PlayListSelection</name>
     <message>
         <source>Command Selection</source>
-        <translation>Wybor komendy</translation>
+        <translation>Wybor polecenia</translation>
     </message>
 </context>
 <context>
     <name>editCommandBase</name>
     <message>
         <source>Add command</source>
-        <translation>Dodaj komende</translation>
+        <translation>Dodaj polecenie</translation>
     </message>
     <message>
         <source>Enter command to add:</source>
-        <translation>Wprowadz komende do dodania:</translation>
+        <translation>Wprowadz polecenie do dodania:</translation>
     </message>
 </context>
 </TS>

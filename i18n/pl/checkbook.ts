@@ -3,11 +3,11 @@
     <name>Checkbook</name>
     <message>
         <source>Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Rachunek</translation>
     </message>
     <message>
         <source>New checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowy rachunek</translation>
     </message>
     <message>
         <source>Info</source>
@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Charts</source>
-        <translation type="unfinished"></translation>
+        <translation>Wykresy</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Enter name of checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wpisz nazwe rachunku.</translation>
     </message>
     <message>
         <source>Type:</source>
@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>Select type of checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz typ rachunku.</translation>
     </message>
     <message>
         <source>Savings</source>
@@ -67,7 +67,7 @@
     </message>
     <message>
         <source>Enter name of the bank for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wpisz tu nazwe banku dla rachunku.</translation>
     </message>
     <message>
         <source>Account number:</source>
@@ -75,7 +75,7 @@
     </message>
     <message>
         <source>Enter account number for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wpisz tu numer konta dla rachunku.</translation>
     </message>
     <message>
         <source>PIN number:</source>
@@ -83,7 +83,7 @@
     </message>
     <message>
         <source>Enter PIN number for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wpisz tu numer PIN dla rachunku.</translation>
     </message>
     <message>
         <source>Starting balance:</source>
@@ -91,7 +91,7 @@
     </message>
     <message>
         <source>Enter the initial balance for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wpisz tu poczatkowy bilans dla rachunku.</translation>
     </message>
     <message>
         <source>Notes:</source>
@@ -99,7 +99,7 @@
     </message>
     <message>
         <source>Enter any additional information for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wpisz tu dodatkowe informacje o tym rachunku.</translation>
     </message>
     <message>
         <source>Current balance: %10.00</source>
@@ -107,13 +107,15 @@
     </message>
     <message>
         <source>This area shows the current balance in this checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ten obszar pokazuje aktualny bilans tego rachunku.</translation>
     </message>
     <message>
         <source>This is a listing of all transactions entered for this checkbook.
 
 To sort entries by a specific field, click on the column name.</source>
-        <translation type="unfinished"></translation>
+        <translation>To jest lista wszystkich transakcji przeprowadzonych na tym rachunku.
+
+By przesortowac wpisy wg pewnego pola, kliknij na nazwe kolumny.</translation>
     </message>
     <message>
         <source>Date</source>
@@ -149,15 +151,15 @@ To sort entries by a specific field, click on the column name.</source>
     </message>
     <message>
         <source>Select a checkbook and then click here to delete it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz rachunek i kliknij tu aby go usunac.</translation>
     </message>
     <message>
         <source>Select the desired chart below and then click on the Draw button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz pozadany wykres ponizej i kliknij na przycisk Rysuj.</translation>
     </message>
     <message>
         <source>Click here to select the desired chart type.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby wyprac typ wykresu.</translation>
     </message>
     <message>
         <source>Account balance</source>
@@ -165,19 +167,19 @@ To sort entries by a specific field, click on the column name.</source>
     </message>
     <message>
         <source>Withdrawals by category</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyplaty wg kateorii</translation>
     </message>
     <message>
         <source>Deposits by category</source>
-        <translation type="unfinished"></translation>
+        <translation>Wplaty wg kategorii</translation>
     </message>
     <message>
         <source>Draw</source>
-        <translation type="unfinished"></translation>
+        <translation>Rysuj</translation>
     </message>
     <message>
         <source>Click here to draw the selected chart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby rysowac wybrany wykres.</translation>
     </message>
     <message>
         <source>Current balance: %1%2</source>
@@ -193,11 +195,11 @@ To sort entries by a specific field, click on the column name.</source>
     </message>
     <message>
         <source>Click here to enable/disable password protection of this checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby wlaczyc/wylaczyc ochrone tego rachunku haslem.</translation>
     </message>
     <message>
         <source>Num</source>
-        <translation type="unfinished"></translation>
+        <translation>Nr</translation>
     </message>
     <message>
         <source>Enter password</source>
@@ -224,7 +226,7 @@ To sort entries by a specific field, click on the column name.</source>
     <name>Configuration</name>
     <message>
         <source>Configure Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguruj rachunek</translation>
     </message>
     <message>
         <source>Enter currency symbol:</source>
@@ -237,26 +239,27 @@ To sort entries by a specific field, click on the column name.</source>
     <message>
         <source>Show whether checkbook is password
 protected</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaz czy rachunek jest chroniony
+haslem</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display that the checkbook is protected with a password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu by zdecydowac, czy okno glowne ma pokazywac czy rachunek jest chroniony haslem.</translation>
     </message>
     <message>
         <source>Show checkbook balances</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaz bilanse rachunkow</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display the current balance for each checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu by zdecydowac, czy okno glowne ma pokazywac aktualny bilans kazdego rachunku.</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Rachunek</translation>
     </message>
     <message>
         <source>New</source>
@@ -266,7 +269,9 @@ protected</source>
         <source>Click here to create a new checkbook.
 
 You also can select New from the Checkbook menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby stworzyc nowy rachunek.
+
+Mozesz rowniez wybrac Nowy z menu Rachunek.</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -276,7 +281,9 @@ You also can select New from the Checkbook menu.</source>
         <source>Select a checkbook and then click here to edit it.
 
 You also can select Edit from the Checkbook menu, or click and hold on a checkbook name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz rachunek i kliknij tu aby go edytowac.
+
+Mozesz rowniez wybrac Edytuj z menu Rachunek albo kliknac i przytrzymac nazwe rachunku.</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -286,15 +293,17 @@ You also can select Edit from the Checkbook menu, or click and hold on a checkbo
         <source>Select a checkbook and then click here delete it.
 
 You also can select Delete from the Checkbook menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz rachunek i kliknij tu aby go usunac.
+
+Mozesz rowniez wybrac Usun z menu Rachunek.</translation>
     </message>
     <message>
         <source>This is a listing of all checkbooks currently available.</source>
-        <translation type="unfinished"></translation>
+        <translation>To jest lista wszystkich aktualnie dostepnych rachunkow.</translation>
     </message>
     <message>
         <source>Delete checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Usun rachunek</translation>
     </message>
     <message>
         <source>Configure</source>
@@ -306,7 +315,7 @@ You also can select Delete from the Checkbook menu.</source>
     </message>
     <message>
         <source>Checkbook Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa rachunku</translation>
     </message>
     <message>
         <source>Balance</source>
@@ -325,19 +334,19 @@ You also can select Delete from the Checkbook menu.</source>
     <name>Transaction</name>
     <message>
         <source>Transaction for </source>
-        <translation type="unfinished"></translation>
+        <translation>Transakcja na</translation>
     </message>
     <message>
         <source>Withdrawal</source>
-        <translation>Wycofanie</translation>
+        <translation>Wyplata</translation>
     </message>
     <message>
         <source>Select whether the transaction is a withdrawal or deposit here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz tu czy transakcja jest wycofaniem czy depozytem.</translation>
     </message>
     <message>
         <source>Deposit</source>
-        <translation>Depozyt</translation>
+        <translation>Wplata</translation>
     </message>
     <message>
         <source>Date:</source>
@@ -353,7 +362,7 @@ You also can select Delete from the Checkbook menu.</source>
     </message>
     <message>
         <source>Enter check number here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wpisz tu numer czeku.</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -397,13 +406,15 @@ Wartosc ta powinna byc zawsze liczba dodatnia.</translation>
     </message>
     <message>
         <source>Fee:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prowizja:</translation>
     </message>
     <message>
         <source>Enter any fee amount assoiciated with this transaction.
 
 The value entered should always be positive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wpisz jakiekolwiek oplaty/prowizje zwiazana z ta transakcja.
+
+Wpisana wartosc powinna byc liczba dodatnia.</translation>
     </message>
     <message>
         <source>Notes:</source>
@@ -463,7 +474,7 @@ The value entered should always be positive.</source>
     </message>
     <message>
         <source>Rent</source>
-        <translation type="unfinished"></translation>
+        <translation>Czynsz</translation>
     </message>
     <message>
         <source>Travel</source>
@@ -471,11 +482,11 @@ The value entered should always be positive.</source>
     </message>
     <message>
         <source>Debit Charge</source>
-        <translation type="unfinished"></translation>
+        <translation>Karta platnicza</translation>
     </message>
     <message>
         <source>Written Check</source>
-        <translation type="unfinished"></translation>
+        <translation>Czek</translation>
     </message>
     <message>
         <source>Transfer</source>
@@ -495,11 +506,11 @@ The value entered should always be positive.</source>
     </message>
     <message>
         <source>Misc. Credit</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozne</translation>
     </message>
     <message>
         <source>Automatic Payment</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatyczna platnosc</translation>
     </message>
     <message>
         <source>Cash</source>
