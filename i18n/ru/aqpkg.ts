@@ -573,7 +573,7 @@ Are you sure?
     </message>
     <message>
         <source>N/A</source>
-        <translation type="unfinished">N/A</translation>
+        <translation>N/A</translation>
     </message>
     <message>
         <source>Package - %1
@@ -593,7 +593,7 @@ Are you sure?
     </message>
     <message>
         <source>Epoch in version is not number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Префикс версии не является числом.</translation>
     </message>
     <message>
         <source>Nothing after colon in version number.</source>
