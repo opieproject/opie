@@ -72,7 +72,7 @@ GAMES = noncore/games/minesweep noncore/games/solitaire \
 
 NONAPPS = noncore/apps/opie-sheet noncore/apps/tableviewer \
 	noncore/apps/opie-reader noncore/apps/checkbook \
-	noncore/apps/sysinfo \
+	noncore/apps/sysinfo \ noncore/net/opieirc \
 	
 NONNET = noncore/net/netsetup noncore/net/opieftp \
 	noncore/mail
