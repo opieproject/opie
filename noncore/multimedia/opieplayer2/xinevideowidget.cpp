@@ -289,6 +289,8 @@ void XineVideoWidget::setVideoFrame ( uchar* img, int w, int h, int bpl )
 	// only repaint the area that *really* needs to be repainted
 
 	repaint ((( m_thisframe & m_lastframe ) != m_lastframe ) ? m_lastframe : m_thisframe, false );
+	// ensure that we always have a valid frame!
+	m_buff = 0;
 }
 
 void XineVideoWidget::resizeEvent ( QResizeEvent * )
