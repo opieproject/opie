@@ -107,9 +107,6 @@ private:
 
     void initData();
 
-    OConfItem *findConfItem( OConfItem::Type type = OConfItem::NotDefined,
-                             const QString &name = QString::null );
-
 private slots:
     void slotServerSelected( int index );
     void slotServerNew();

@@ -42,14 +42,6 @@ class QPushButton;
 class OConfItem;
 class OPackageManager;
 
-namespace Opie
-{
-    namespace Core
-    {
-        class OProcess;
-    }
-}
-
 class InstallDlg : public QWidget
 {
     Q_OBJECT
@@ -89,10 +81,9 @@ private slots:
     void slotDisplayAvailSpace( const QString &destination );
     void slotBtnStart();
     void slotBtnOptions();
-    void slotProcessDone( Opie::Core::OProcess *proc );
     
     // Execution slots
-    void slotOutput( char *msg );
+    void slotOutput( const QString &msg );
 
 signals:
     void closeInstallDlg();

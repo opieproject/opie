@@ -56,7 +56,7 @@ class OIpkg : public QObject
     Q_OBJECT
 
 public:
-    OIpkg( Config *config = 0x0, QObject *parent = 0x0, const char *name = 0x0 );
+    OIpkg( Config *config = 0l, QObject *parent = 0l, const char *name = 0l );
     ~OIpkg();
 
     OConfItemList *configItems();
@@ -77,11 +77,14 @@ public:
     OPackageList *installedPackages( const QString &destName = QString::null,
                                      const QString &destPath = QString::null );
 
+    OConfItem    *findConfItem( OConfItem::Type type = OConfItem::NotDefined,
+                                const QString &name = QString::null );
+    
     bool executeCommand( OPackage::Command command = OPackage::NotDefined,
                          const QStringList &parameters = QStringList(),
                          const QString &destination = QString::null,
-                         const QObject *receiver = 0x0,
-                         const char *slotOutput = 0x0,
+                         const QObject *receiver = 0l,
+                         const char *slotOutput = 0l,
                          bool rawOutput = true );
     void abortCommand();
 
@@ -95,14 +98,19 @@ private:
     OConfItemList *m_confInfo;          // Contains info from all Ipkg configuration files
     int            m_ipkgExecOptions;   // Bit-mapped flags for Ipkg execution options
     int            m_ipkgExecVerbosity; // Ipkg execution verbosity level
+    QString        m_rootPath;          // Directory path where the 'root' destination is located
 
     void           loadConfiguration();
     OConfItemList *filterConfItems( OConfItem::Type typefilter = OConfItem::NotDefined );
+    const QString &rootPath();
+    void           linkPackageDir( const QString &dest = QString::null );
+    void           unlinkPackage( const QString &package = QString::null,
+                                  OConfItemList *destList = 0l );
 
 signals:
-    void signalIpkgMessage( char *msg );
-    void signalIpkgStatus( char *status );
-    void signalIpkgList( char *filelist );
+    void signalIpkgMessage( const QString &msg );
+    void signalIpkgStatus( const QString &status );
+    void signalIpkgList( const QString &filelist );
 };
 
 #endif

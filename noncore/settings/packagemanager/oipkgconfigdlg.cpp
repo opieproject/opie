@@ -92,7 +92,7 @@ void OIpkgConfigDlg::accept()
     if ( !m_installOptions )
     {
         // Update proxy information before saving settings
-        OConfItem *confItem = findConfItem( OConfItem::Option, "http_proxy" );
+        OConfItem *confItem = m_ipkg->findConfItem( OConfItem::Option, "http_proxy" );
         if ( confItem )
         {
             confItem->setValue( m_proxyHttpServer->text() );
@@ -103,7 +103,7 @@ void OIpkgConfigDlg::accept()
                                m_proxyHttpServer->text(), QString::null,
                                m_proxyHttpActive->isChecked() ) );
 
-        confItem = findConfItem( OConfItem::Option, "ftp_proxy" );
+        confItem = m_ipkg->findConfItem( OConfItem::Option, "ftp_proxy" );
         if ( confItem )
         {
             confItem->setValue( m_proxyFtpServer->text() );
@@ -114,14 +114,14 @@ void OIpkgConfigDlg::accept()
                                m_proxyFtpServer->text(), QString::null,
                                m_proxyFtpActive->isChecked() ) );
 
-        confItem = findConfItem( OConfItem::Option, "proxy_username" );
+        confItem = m_ipkg->findConfItem( OConfItem::Option, "proxy_username" );
         if ( confItem )
             confItem->setValue( m_proxyUsername->text() );
         else
             m_configs->append( new OConfItem( OConfItem::Option, "proxy_username",
                                m_proxyUsername->text() ) );
 
-        confItem = findConfItem( OConfItem::Option, "proxy_password" );
+        confItem = m_ipkg->findConfItem( OConfItem::Option, "proxy_password" );
         if ( confItem )
             confItem->setValue( m_proxyPassword->text() );
         else
@@ -393,24 +393,6 @@ void OIpkgConfigDlg::initData()
     m_optVerboseIpkg->setCurrentItem( m_ipkg->ipkgExecVerbosity() );
 }
 
-OConfItem *OIpkgConfigDlg::findConfItem( OConfItem::Type type, const QString &name )
-{
-    // Find selected server in list
-    OConfItemListIterator configIt( *m_configs );
-    OConfItem *config = 0l;
-    for ( ; configIt.current(); ++configIt )
-    {
-        config = configIt.current();
-        if ( config->type() == type && config->name() == name )
-            break;
-    }
-
-    if ( config && config->type() == type && config->name() == name )
-        return config;
-
-    return 0l;
-}
-
 void OIpkgConfigDlg::slotServerSelected( int index )
 {
     m_serverCurrent = index;
@@ -442,7 +424,7 @@ void OIpkgConfigDlg::slotServerNew()
 void OIpkgConfigDlg::slotServerEdit()
 {
     // Find selected server in list
-    OConfItem *server = findConfItem( OConfItem::Source, m_serverList->currentText() );
+    OConfItem *server = m_ipkg->findConfItem( OConfItem::Source, m_serverList->currentText() );
 
     // Edit server
     if ( server )
@@ -461,7 +443,7 @@ void OIpkgConfigDlg::slotServerEdit()
 void OIpkgConfigDlg::slotServerDelete()
 {
     // Find selected server in list
-    OConfItem *server = findConfItem( OConfItem::Source, m_serverList->currentText() );
+    OConfItem *server = m_ipkg->findConfItem( OConfItem::Source, m_serverList->currentText() );
 
     // Delete server
     if ( server )
@@ -502,7 +484,7 @@ void OIpkgConfigDlg::slotDestNew()
 void OIpkgConfigDlg::slotDestEdit()
 {
     // Find selected destination in list
-    OConfItem *dest = findConfItem( OConfItem::Destination, m_destList->currentText() );
+    OConfItem *dest = m_ipkg->findConfItem( OConfItem::Destination, m_destList->currentText() );
 
     // Edit destination
     if ( dest )
@@ -521,7 +503,7 @@ void OIpkgConfigDlg::slotDestEdit()
 void OIpkgConfigDlg::slotDestDelete()
 {
     // Find selected destination in list
-    OConfItem *destination = findConfItem( OConfItem::Destination, m_destList->currentText() );
+    OConfItem *destination = m_ipkg->findConfItem( OConfItem::Destination, m_destList->currentText() );
 
     // Delete destination
     if ( destination )

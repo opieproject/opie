@@ -76,7 +76,8 @@ PackageInfoDlg::PackageInfoDlg( QWidget *parent, OPackageManager *pm, const QStr
     {
         // Package information is not cached, retrieve it
         QStringList list( package );
-        m_packman->executeCommand( OPackage::Info, list, QString::null, this, SLOT(slotInfo(char*)), true );
+        m_packman->executeCommand( OPackage::Info, list, QString::null,
+                                   this, SLOT(slotInfo(const QString &)), true );
     }
 
     // Files tab (display only if package is installed)
@@ -128,18 +129,19 @@ void PackageInfoDlg::slotBtnFileScan()
     m_files.clear();
 
     QStringList list( m_package->name() );
-    m_packman->executeCommand( OPackage::Files, list, QString::null, this, SLOT(slotFiles(char*)), true );
+    m_packman->executeCommand( OPackage::Files, list, QString::null,
+                               this, SLOT(slotFiles(const QString &)), true );
 
     if ( m_retrieveFiles )
         m_retrieveFiles->hide();
 }
 
-void PackageInfoDlg::slotInfo( char *info )
+void PackageInfoDlg::slotInfo( const QString &info )
 {
     m_information.append( info );
 }
 
-void PackageInfoDlg::slotFiles( char *filelist )
+void PackageInfoDlg::slotFiles( const QString &filelist )
 {
     QString str = filelist;
 

@@ -30,7 +30,6 @@ _;:,   .>  :=|.         This file is free software; you can
 #include "installdlg.h"
 
 #include <opie2/ofiledialog.h>
-#include <opie2/oprocess.h>
 
 #include <qpe/fileselector.h>
 #include <qpe/resource.h>
@@ -247,87 +246,11 @@ void InstallDlg::slotBtnStart()
         m_btnStart->setEnabled( false );
     }
 
-    Opie::Core::OProcess process( this );
     for ( m_currCommand = 0; m_currCommand < m_numCommands; m_currCommand++ )
     {
         // Execute next command
         m_packman->executeCommand( m_command[ m_currCommand ], m_packages[ m_currCommand ], dest,
-                                   this, SLOT(slotOutput(char*)), true );
-                                   
-        if ( m_command[ m_currCommand ] == OPackage::Remove )
-        {
-            // Unlink application if the package was removed
-            
-            // Loop through all package names in the command group
-            for ( QStringList::Iterator it = m_packages[ m_currCommand ].begin();
-                  it != m_packages[ m_currCommand ].end();
-                  ++it )
-            {
-                OPackage *currPackage = m_packman->findPackage( (*it) );
-                
-                // Skip package if it is not found or being removed from 'root'
-                if ( !currPackage || ( m_command[ m_currCommand ] == OPackage::Remove &&
-                                       currPackage->destination() == "root" ) )
-                    continue;
-                    
-                // Display feedback to user
-                m_output->append( tr( QString( "Running ipkg-link to remove links for package '%1'." )
-                                        .arg( currPackage->name() ) ) );
-                m_output->setCursorPosition( m_output->numLines(), 0 );
-                
-                // Execute ipkg-link
-                process.clearArguments();
-                process << "ipkg-link"
-                        << ( ( m_command[ m_currCommand ] == OPackage::Install ) ? "add" : "remove" )
-                        << currPackage->name();
-                if ( !process.start( Opie::Core::OProcess::Block,
-                                    Opie::Core::OProcess::NoCommunication ) )
-                {
-                    slotProcessDone( 0l );
-                    m_output->append( tr( "Unable to run ipkg-link." ) );
-                    m_output->setCursorPosition( m_output->numLines(), 0 );
-                    return;
-                }
-            }
-        }
-        else if ( m_command[ m_currCommand ] == OPackage::Install && dest != "root" )
-        {
-            // Link applications in the destination directory
-            
-            m_output->append( tr( "Running ipkg-link to link packages in '%1'." ).arg( dest ) );
-            m_output->setCursorPosition( m_output->numLines(), 0 );
-
-            QString destPath;
-            OConfItem *destItem = m_packman->findConfItem( OConfItem::Destination, dest );
-
-            // Execute ipkg-link
-            process.clearArguments();
-            process << "ipkg-link"
-                    << "mount"
-                    << destItem->value();
-            if ( !process.start( Opie::Core::OProcess::Block,
-                                 Opie::Core::OProcess::NoCommunication ) )
-            {
-                slotProcessDone( 0l );
-                m_output->append( tr( "Unable to run ipkg-link." ) );
-                m_output->setCursorPosition( m_output->numLines(), 0 );
-                return;
-            }
-        }
-    }
-    
-    slotProcessDone( 0l );
-}
-
-void InstallDlg::slotProcessDone( Opie::Core::OProcess *proc )
-{
-    if ( proc )
-    {
-        // Display message pnly if linking was done
-        m_output->append( tr( "The package linking is done." ) );
-        m_output->setCursorPosition( m_output->numLines(), 0 );
-        
-        delete proc;
+                                   this, SLOT(slotOutput(const QString &)), true );
     }
     
     // All commands executed, allow user to close dialog
@@ -372,7 +295,7 @@ void InstallDlg::slotBtnOptions()
     }
 }
 
-void InstallDlg::slotOutput( char *msg )
+void InstallDlg::slotOutput( const QString &msg )
 {
     // Allow processing of other events
     qApp->processEvents();

@@ -2,16 +2,14 @@
 /*
 /*                       Opie - Package Manager
 /*                      ========================
-/*                           Version 0.6.0
+/*                           Version 0.6.1
 /*
 /*                A package management client for Opie
 /*
 /************************************************************************
 
 -----------------------------------------------
- To-do for Opie-PackageManager - December, 2004
+ To-do for Opie-PackageManager - January, 2005
 -----------------------------------------------
 
-1. Move ipkg-link code from InstallDlg to OIpkg
-2. Code ipkg-link logic directly in OIpkg
-3. Re-work package download dialog
+1. Re-work package download dialog

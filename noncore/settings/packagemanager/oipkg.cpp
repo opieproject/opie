@@ -36,11 +36,13 @@ _;:,   .>  :=|.         This program is free software; you can
 #include <qtextstream.h>
 
 #include <stdlib.h>
+#include <unistd.h>
 
 const QString IPKG_CONF        = "/etc/ipkg.conf";      // Fully-qualified name of Ipkg primary configuration file
 const QString IPKG_CONF_DIR    = "/etc/ipkg";           // Directory of secondary Ipkg configuration files
 const QString IPKG_PKG_PATH    = "/usr/lib/ipkg/lists"; // Directory containing server package lists
 const QString IPKG_STATUS_PATH = "usr/lib/ipkg/status"; // Destination status file location
+const QString IPKG_INFO_PATH   = "usr/lib/ipkg/info";   // Package file lists location
 
 OIpkg *oipkg;
 
@@ -48,6 +50,7 @@ OIpkg *oipkg;
 
 int fsignalIpkgMessage( ipkg_conf_t *conf, message_level_t level, char *msg )
 {
+    // Display message only if it is below the message level threshold
     if ( conf && ( conf->verbosity < level ) )
         return 0;
     else
@@ -58,7 +61,7 @@ int fsignalIpkgMessage( ipkg_conf_t *conf, message_level_t level, char *msg )
 
 char *fIpkgResponse( char */*question*/ )
 {
-    return 0x0;
+    return 0l;
 }
 
 int fIpkgStatus( char */*name*/, int /*status*/, char *desc, void */*userdata*/ )
@@ -81,6 +84,7 @@ OIpkg::OIpkg( Config *config, QObject *parent, const char *name )
     , m_ipkgExecOptions( 0 )
     , m_ipkgExecVerbosity( 1 )
 {
+    // Keep pointer to self for the Ipkg callback functions
     oipkg = this;
 
     // Initialize libipkg
@@ -362,6 +366,24 @@ OPackageList *OIpkg::installedPackages( const QString &destName, const QString &
     return pl;
 }
 
+OConfItem *OIpkg::findConfItem( OConfItem::Type type, const QString &name )
+{
+    // Find configuration item in list
+    OConfItemListIterator configIt( *m_confInfo );
+    OConfItem *config = 0l;
+    for ( ; configIt.current(); ++configIt )
+    {
+        config = configIt.current();
+        if ( config->type() == type && config->name() == name )
+            break;
+    }
+
+    if ( config && config->type() == type && config->name() == name )
+        return config;
+
+    return 0l;
+}
+
 bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parameters, const QString &destination,
                             const QObject *receiver, const char *slotOutput, bool rawOutput )
 {
@@ -384,16 +406,11 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
         m_ipkgArgs.dest[ len - 1 ] = '\0';
     }
     else
-        m_ipkgArgs.dest = 0x0;
+        m_ipkgArgs.dest = 0l;
 
     // Connect output signal to widget
 
-    if ( rawOutput )
-    {
-//        if ( slotOutput )
-//            connect( this, SIGNAL(signalIpkgMessage(char*)), receiver, slotOutput );
-    }
-    else
+    if ( !rawOutput )
     {
         // TODO - connect to local slot and parse output before emitting signalIpkgMessage
     }
@@ -401,33 +418,53 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
     switch( command )
     {
         case OPackage::Update : {
-                connect( this, SIGNAL(signalIpkgMessage(char*)), receiver, slotOutput );
+                connect( this, SIGNAL(signalIpkgMessage(const QString &)), receiver, slotOutput );
                 ipkg_lists_update( &m_ipkgArgs );
             };
             break;
         case OPackage::Upgrade : {
-                connect( this, SIGNAL(signalIpkgMessage(char*)), receiver, slotOutput );
+                connect( this, SIGNAL(signalIpkgMessage(const QString &)), receiver, slotOutput );
                 ipkg_packages_upgrade( &m_ipkgArgs );
+
+                // Re-link non-root destinations to make sure everything is in sync
+                OConfItemList *destList = destinations();
+                OConfItemListIterator it( *destList );
+                for ( ; it.current(); ++it )
+                {
+                    OConfItem *dest = it.current();
+                    if ( dest->name() != "root" )
+                        linkPackageDir( dest->name() );
+                }
+                delete destList;
             };
             break;
         case OPackage::Install : {
-                connect( this, SIGNAL(signalIpkgMessage(char*)), receiver, slotOutput );
+                connect( this, SIGNAL(signalIpkgMessage(const QString &)), receiver, slotOutput );
                 for ( QStringList::ConstIterator it = parameters.begin(); it != parameters.end(); ++it )
                 {
                     ipkg_packages_install( &m_ipkgArgs, (*it) );
                 }
+                if ( destination != "root" )
+                    linkPackageDir( destination );
             };
             break;
         case OPackage::Remove : {
-                connect( this, SIGNAL(signalIpkgMessage(char*)), receiver, slotOutput );
+                connect( this, SIGNAL(signalIpkgMessage(const QString &)), receiver, slotOutput );
+
+                // Get list of destinations for unlinking of packages not installed to root
+                OConfItemList *destList = destinations();
+                
                 for ( QStringList::ConstIterator it = parameters.begin(); it != parameters.end(); ++it )
                 {
+                    unlinkPackage( (*it), destList );
                     ipkg_packages_remove( &m_ipkgArgs, (*it), true );
                 }
+
+                delete destList;
             };
             break;
         case OPackage::Download : {
-                connect( this, SIGNAL(signalIpkgMessage(char*)), receiver, slotOutput );
+                connect( this, SIGNAL(signalIpkgMessage(const QString &)), receiver, slotOutput );
                 for ( QStringList::ConstIterator it = parameters.begin(); it != parameters.end(); ++it )
                 {
                     ipkg_packages_download( &m_ipkgArgs, (*it) );
@@ -435,13 +472,13 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
             };
             break;
         case OPackage::Info : {
-                connect( this, SIGNAL(signalIpkgStatus(char*)), receiver, slotOutput );
-                ipkg_packages_info( &m_ipkgArgs, (*parameters.begin()), &fIpkgStatus, 0x0 );
+                connect( this, SIGNAL(signalIpkgStatus(const QString &)), receiver, slotOutput );
+                ipkg_packages_info( &m_ipkgArgs, (*parameters.begin()), &fIpkgStatus, 0l );
             };
             break;
         case OPackage::Files : {
-                connect( this, SIGNAL(signalIpkgList(char*)), receiver, slotOutput );
-                ipkg_package_files( &m_ipkgArgs, (*parameters.begin()), &fIpkgFiles, 0x0 );
+                connect( this, SIGNAL(signalIpkgList(const QString &)), receiver, slotOutput );
+                ipkg_package_files( &m_ipkgArgs, (*parameters.begin()), &fIpkgFiles, 0l );
             };
             break;
         default : break;
@@ -588,4 +625,141 @@ OConfItemList *OIpkg::filterConfItems( OConfItem::Type typefilter )
     }
 
     return sl;
+}
+
+const QString &OIpkg::rootPath()
+{
+    if ( m_rootPath.isEmpty() )
+    {
+        OConfItem *rootDest = findConfItem( OConfItem::Destination, "root" );
+        rootDest ? m_rootPath = rootDest->value()
+                 : m_rootPath = '/';
+        if ( m_rootPath.right( 1 ) == '/' )
+            m_rootPath.truncate( m_rootPath.length() - 1 );
+    }
+    return m_rootPath;
+}
+
+void OIpkg::linkPackageDir( const QString &dest )
+{
+    if ( !dest.isNull() )
+    {
+        OConfItem *destConfItem = findConfItem( OConfItem::Destination, dest );
+        
+        emit signalIpkgMessage( tr( "Linking packages installed in: %1" ).arg( dest ) );
+
+        // Set package destination directory
+        QString destDir = destConfItem->value();
+        QString destInfoDir = destDir;
+        if ( destInfoDir.right( 1 ) != '/' )
+            destInfoDir.append( '/' );
+        destInfoDir.append( IPKG_INFO_PATH );
+
+        // Get list of installed packages in destination
+        QDir packageDir( destInfoDir );
+        QStringList packageFiles;
+        if ( packageDir.exists() )
+        {
+            packageDir.setNameFilter( "*.list" );
+            packageDir.setFilter( QDir::Files );
+            packageFiles = packageDir.entryList( "*.list", QDir::Files );
+        }
+
+        // Link all files for every package installed in desination
+        QStringList::Iterator lastFile = packageFiles.end();
+        for ( QStringList::Iterator it = packageFiles.begin(); it != lastFile; ++it )
+        {
+            //emit signalIpkgMessage( QString( "Processing: %1/%2" ).arg( destInfoDir ).arg (*it) );
+            QString packageFileName = destInfoDir;
+            packageFileName.append( '/' );
+            packageFileName.append( (*it) );
+            QFile packageFile( packageFileName );
+            if ( packageFile.open( IO_ReadOnly ) )
+            {
+                QTextStream t( &packageFile );
+                QString linkFile;
+                while ( !t.eof() )
+                {
+                    // Get the name of the file to link and build the sym link filename
+                    linkFile = t.readLine();
+                    QString linkDest( linkFile.right( linkFile.length() - destDir.length() ) );
+                    linkDest.prepend( rootPath() );
+
+                    // If file installed file is actually symbolic link, use actual file for linking
+                    QFileInfo fileInfo( linkFile );
+                    if ( fileInfo.isSymLink() && !fileInfo.readLink().isEmpty() )
+                        linkFile = fileInfo.readLink();
+                                                            
+                    // See if directory exists in 'root', if not, create
+                    fileInfo.setFile( linkDest );
+                    QString linkDestDirName = fileInfo.dirPath( true );
+                    QDir linkDestDir( linkDestDirName );
+                    if ( !linkDestDir.exists() )
+                    {
+                        linkDestDir.mkdir( linkDestDirName );
+                    }
+                    else
+                    {
+                        // Remove any previous link to make sure we will be pointing to the current version
+                        if ( QFile::exists( linkDest ) )
+                            QFile::remove( linkDest );
+                    }
+
+                    // Link the file
+                    //emit signalIpkgMessage( QString( "Linking '%1' to '%2'" ).arg( linkFile ).arg( linkDest ) );
+                    if ( symlink( linkFile, linkDest ) == -1 )
+                        emit signalIpkgMessage( tr( "Error linkling '%1' to '%2'" )
+                                                .arg( linkFile )
+                                                .arg( linkDest ) );
+                }
+                packageFile.close();
+            }
+        }
+    }
+}
+
+void OIpkg::unlinkPackage( const QString &package, OConfItemList *destList )
+{
+    if ( !package.isNull() )
+    {
+        // Find destination package is installed in
+        if ( destList )
+        {
+            OConfItemListIterator it( *destList );
+            for ( ; it.current(); ++it )
+            {
+                OConfItem *dest = it.current();
+                QString destInfoFileName = QString( "%1/%2/%3.list" ).arg( dest->value() )
+                                                                     .arg( IPKG_INFO_PATH )
+                                                                     .arg( package );
+                //emit signalIpkgMessage( QString( "Looking for '%1'" ).arg ( destInfoFileName ) );
+                
+                // If found and destination is not 'root', remove symbolic links
+                if ( QFile::exists( destInfoFileName ) && dest->name() != "root" )
+                {
+                    QFile destInfoFile( destInfoFileName );
+                    if ( destInfoFile.open( IO_ReadOnly ) )
+                    {
+                        QTextStream t( &destInfoFile );
+                        QString linkFile;
+                        while ( !t.eof() )
+                        {
+                            // Get the name of the file to link and build the sym link filename
+                            linkFile = t.readLine();
+                            QString linkDest( linkFile.right( linkFile.length() -
+                                                              dest->value().length() ) );
+                            linkDest.prepend( rootPath() );
+
+                            //emit signalIpkgMessage( QString( "Deleting: '%1'" ).arg( linkDest ) );
+                            QFile::remove( linkDest );
+                        }
+                        destInfoFile.close();
+                    }
+
+                    emit signalIpkgMessage( tr( "Links removed for: %1" ).arg( package ) );
+                    return;
+                }
+            }
+        }
+    }
 }

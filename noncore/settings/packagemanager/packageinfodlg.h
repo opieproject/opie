@@ -59,8 +59,8 @@ private:
 
 private slots:
     void slotBtnFileScan();
-    void slotInfo( char *info );
-    void slotFiles( char *filelist );
+    void slotInfo( const QString &info );
+    void slotFiles( const QString &filelist );
 };
 
 #endif

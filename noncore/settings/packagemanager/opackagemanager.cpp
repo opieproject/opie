@@ -269,25 +269,7 @@ QStringList OPackageManager::destinations()
 
 OConfItem *OPackageManager::findConfItem( OConfItem::Type type, const QString &name )
 {
-    OConfItem *confItem = 0x0;
-    OConfItemList *confList = m_ipkg.configItems();
-    if ( confList )
-    {
-        for ( OConfItemListIterator confIt( *confList ); confIt.current(); ++confIt )
-        {
-            OConfItem *conf = confIt.current();
-
-            // Add only active confinations
-            if ( conf->type() == type && conf->name() == name )
-            {
-                confItem = conf;
-                break;
-            }
-        }
-    }
-
-    return confItem;
-
+    return m_ipkg.findConfItem( type, name );
 }
 
 OPackage *OPackageManager::findPackage( const QString &name )
