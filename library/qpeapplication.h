@@ -20,6 +20,7 @@
 #ifndef __QPE_APPLICATION_H__
 #define __QPE_APPLICATION_H__
 
+#include <stdlib.h> // for setenv()
 
 #include <qglobal.h>
 #include <qapplication.h>
@@ -159,28 +160,29 @@ inline int QPEApplication::execDialog( QDialog* d, bool nomax )
 
 enum Transformation { Rot0, Rot90, Rot180, Rot270 }; /* from qgfxtransformed_qws.cpp */
 
+inline int TransToDeg ( Transformation t )
+{
+	int d = static_cast<int>( t );
+	return d * 90;
+}
+
+inline Transformation DegToTrans ( int d )
+{
+	Transformation t = static_cast<Transformation>( d / 90 );
+	return t;
+}
+
+/*
+ * Set current rotation of Opie, and rotation for newly started apps.
+ * Differs from setDefaultRotation in that 1) it rotates currently running apps,
+ * and 2) does not set deforient or save orientation to qpe.conf.
+ */
+
 inline void QPEApplication::setCurrentRotation( int r )
 {
-    Transformation e;
+    Transformation e = DegToTrans( r );
 
-    switch (r) {
-        case 0:
-            e = Rot0;
-            break;
-        case 90:
-            e = Rot90;
-            break;
-        case 180:
-            e = Rot180;
-            break;
-        case 270:
-            e = Rot270;
-            break;
-	default:
-	    return;
-    }
-
-    qDebug("calling qApp->desktop()->qwsDisplay()->setTransformation( %d )\n", e);
+    setenv( "QWS_DISPLAY", QString( "Transformed:Rot%1:0" ).arg( r ).latin1(), 1 );
     qApp->desktop()->qwsDisplay()->setTransformation( e );
 }
 
