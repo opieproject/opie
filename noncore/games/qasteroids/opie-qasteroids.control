@@ -1,4 +1,4 @@
-Files: bin/qasteroids apps/Games/qasteroids.desktop pics/qasteroids
+Files: bin/qasteroids apps/Games/qasteroids.desktop pics/qasteroids/*
 Priority: optional
 Section: opie/games
 Maintainer: Martin Jones <mjones@trolltech.com>
