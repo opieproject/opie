@@ -134,7 +134,7 @@ void OpieScreenSaver::setIntervals ( int i1, int i2, int i3 )
 		m_onlylcdoff = config.readBoolEntry ( "LcdOffOnly", false );
 	}
 	
-	qDebug("screen saver intervals: %d %d %d", i1, i2, i3);
+	//qDebug("screen saver intervals: %d %d %d", i1, i2, i3);
 
 	v [ 0 ] = QMAX( 1000 * i1, 100 );
 	v [ 1 ] = QMAX( 1000 * i2, 100 );
@@ -171,10 +171,10 @@ void OpieScreenSaver::setBacklight ( int bright )
 
 	m_use_light_sensor = config. readBoolEntry ( "LightSensor", false );
 
-//	qDebug ( "setBacklight: %d (ls: %d)", m_backlight_normal, m_use_light_sensor ? 1 : 0 );
+	//qDebug ( "setBacklight: %d (norm: %d) (ls: %d)", bright, m_backlight_normal, m_use_light_sensor ? 1 : 0 );
 
 	killTimers ( );
-	if ( m_use_light_sensor ) {
+	if (( bright < 0 ) && m_use_light_sensor ) {
 		QStringList sl = config. readListEntry ( "LightSensorData", ';' );
 		
 		m_sensordata [LS_SensorMin] = 40;
@@ -225,7 +225,7 @@ void OpieScreenSaver::setBacklightInternal ( int bright )
 
 void OpieScreenSaver::timerEvent ( QTimerEvent * )
 {
-	int s = ODevice::inst ( )-> readLightSensor ( );
+	int s = ODevice::inst ( )-> readLightSensor ( ) * 256 / ODevice::inst ( )-> lightSensorResolution ( );
 	
 	if ( s < m_sensordata [LS_SensorMin] )
 		m_backlight_sensor = m_sensordata [LS_LightMax];
@@ -239,10 +239,8 @@ void OpieScreenSaver::timerEvent ( QTimerEvent * )
 		
 		m_backlight_sensor = m_sensordata [LS_LightMax] - dy * stepno / ( m_sensordata [LS_Steps] - 1 );
 	}
-	if ( !m_backlight_sensor )
-		m_backlight_sensor = 1;
 
-	// qDebug ( "f(%d) = %d [%d - %d] -> [%d - %d] / %d", s, m_backlight_sensor, m_sensordata [LS_SensorMin], m_sensordata [LS_SensorMax], m_sensordata [LS_LightMin], m_sensordata [LS_LightMax], m_sensordata [LS_Steps] );
+	//qDebug ( "f(%d) = %d [%d - %d] -> [%d - %d] / %d", s, m_backlight_sensor, m_sensordata [LS_SensorMin], m_sensordata [LS_SensorMax], m_sensordata [LS_LightMin], m_sensordata [LS_LightMax], m_sensordata [LS_Steps] );
 
 	if ( m_level <= 0 )
 		setBacklightInternal ( -1 );
