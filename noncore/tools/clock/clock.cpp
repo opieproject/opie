@@ -18,7 +18,7 @@
 **
 **********************************************************************/
 // changes added and Copyright (C) by L. J. Potter <ljp@llornkcor.com> 2002
-// changes added and Copyright (C) by Holger Freyther 2004
+// changes added and Copyright (C) by Holger Freyther 2004,2005
 
 #include "clock.h"
 
@@ -801,7 +801,7 @@ void Clock::slotBrowseMp3File() {
     QStringList text;
     text << "audio/*";
     map.insert(tr("Audio"), text );
-    QString str = Opie::Ui::OFileDialog::getOpenFileName( 2,"/", QString::null, map);
+    QString str = Opie::Ui::OFileDialog::getOpenFileName( 2, QPEApplication::qpeDir() + "sounds/", QString::null, map);
     if(!str.isEmpty() ) {
         config.writeEntry("mp3Alarm",1);
         config.writeEntry("mp3File",str);
