@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: conwindow.cpp,v 1.2 2003-05-24 16:12:02 tille Exp $
+ * $Id: conwindow.cpp,v 1.3 2003-05-25 14:25:23 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -262,61 +262,61 @@ void ConWindow::stopClock() {
 
 
 void ConWindow::timeclick() {
-  QString tooltip = i18n("Connection: %1\n"
-			 "Connected at: %2\n"
-			 "Time connected: %3")
-		    .arg(PPPData::data()->accname()).arg(info2->text())
-		    .arg(time_string2);
+//   QString tooltip = i18n("Connection: %1\n"
+// 			 "Connected at: %2\n"
+// 			 "Time connected: %3")
+// 		    .arg(PPPData::data()->accname()).arg(info2->text())
+// 		    .arg(time_string2);
 
-  if(accountingEnabled)
-      tooltip += i18n("\nSession Bill: %1\nTotal Bill: %2")
-		 .arg(session_bill->text()).arg(total_bill->text());
-  // volume accounting
-  if(volumeAccountingEnabled) {
+//   if(accountingEnabled)
+//       tooltip += i18n("\nSession Bill: %1\nTotal Bill: %2")
+// 		 .arg(session_bill->text()).arg(total_bill->text());
+//   // volume accounting
+//   if(volumeAccountingEnabled) {
 
-    volinfo->setEnabled(TRUE);
-    int bytes = PPPData::data()->totalBytes();
-    volinfo->setText(prettyPrintVolume(bytes));
-  }
+//     volinfo->setEnabled(TRUE);
+//     int bytes = PPPData::data()->totalBytes();
+//     volinfo->setText(prettyPrintVolume(bytes));
+//   }
 
-  seconds++;
+//   seconds++;
 
-  if(seconds >= 60 ) {
-    minutes ++;
-    seconds = 0;
-  }
+//   if(seconds >= 60 ) {
+//     minutes ++;
+//     seconds = 0;
+//   }
 
-  if (minutes >= 60){
-    minutes = 0;
-    hours ++;
-  }
+//   if (minutes >= 60){
+//     minutes = 0;
+//     hours ++;
+//   }
 
-  if( hours >= 24){
-    days ++;
-    hours = 0;
-  }
+//   if( hours >= 24){
+//     days ++;
+//     hours = 0;
+//   }
 
-  time_string.sprintf("%02d:%02d",hours,minutes);
-  time_string2 = "";
-  if (days)
-      time_string2.sprintf("%d d %02d:%02d:%02d",
-			   days,hours,minutes,seconds);
+//   time_string.sprintf("%02d:%02d",hours,minutes);
+//   time_string2 = "";
+//   if (days)
+//       time_string2.sprintf("%d d %02d:%02d:%02d",
+// 			   days,hours,minutes,seconds);
 
-  else
-    time_string2.sprintf("%02d:%02d:%02d",hours,minutes,seconds);
+//   else
+//     time_string2.sprintf("%02d:%02d:%02d",hours,minutes,seconds);
 
-  caption_string = PPPData::data()->accname();
-  caption_string += " ";
-  caption_string += time_string;
+//   caption_string = PPPData::data()->accname();
+//   caption_string += " ";
+//   caption_string += time_string;
 
 
-  timelabel2->setText(time_string2);
+//   timelabel2->setText(time_string2);
 
-  if(PPPData::data()->get_show_clock_on_caption() && (seconds == 1)){
-    // we update the Caption only once per minute not every second
-    // otherwise I get a flickering icon
-    this->setCaption(caption_string);
-  }
+//   if(PPPData::data()->get_show_clock_on_caption() && (seconds == 1)){
+//     // we update the Caption only once per minute not every second
+//     // otherwise I get a flickering icon
+//     this->setCaption(caption_string);
+//   }
 
 //  QToolTip::add(DockWidget::dock_widget, tooltip);
 }

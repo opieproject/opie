@@ -5,9 +5,9 @@ TEMPLATE        = lib
 CONFIG		+= qt warn_on debug
 DESTDIR         = $(OPIEDIR)/plugins/networksettings
 HEADERS		= pppmodule.h devices.h modem.h modeminfo.h pppdata.h kpppconfig.h pppdata.h runtests.h general.h modemcmds.h kpppwidget.h conwindow.h accounts.h connect.h edit.h scriptedit.h pppdargs.h  iplined.h pwentry.h pppconfig.h
-# knuminput.h knumvalidator.h 
+# 
 SOURCES		= pppmodule.cpp modem.cpp modeminfo.cpp pppdata.cpp runtests.cpp general.cpp modemcmds.cpp kpppwidget.cpp  conwindow.cpp  accounts.cpp connect.cpp edit.cpp scriptedit.cpp pppdargs.cpp  iplined.cpp pwentry.cpp pppconfig.cpp
-#knuminput.cpp knumvalidator.cpp
+#
 INCLUDEPATH	+= $(OPIEDIR)/include ../ ../interfaces/
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -L../interfaces/ -linterfaces

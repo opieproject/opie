@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.3 2003-05-24 23:34:09 tille Exp $
+ * $Id: pppdata.cpp,v 1.4 2003-05-25 14:25:23 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -60,7 +60,8 @@ PPPData::PPPData()
      caccount(-1),         // set the current account index also
      suidprocessid(-1),    // process ID of setuid child
      pppdisrunning(false),
-     pppderror(0)
+     pppderror(0),
+     modemDeviceGroup(-1)
 {
 }
 
@@ -327,8 +328,16 @@ const QString PPPData::modemDevice() {
 }
 
 
-void PPPData::setModemDevice(const QString &n) {
-  writeConfig(modemGroup(), MODEMDEV_KEY, n);
+bool PPPData::setModemDevice(const QString &n) {
+    //FIXME: change modem group
+    bool ret = false;
+    for (int i = 0; devices[i]; i++)
+        if (devices[i] == n){
+            modemDeviceGroup = i;
+            writeConfig(modemGroup(), MODEMDEV_KEY, n);
+            ret = true;
+        }
+    return ret;
 }
 
 
@@ -1093,33 +1102,33 @@ void PPPData::setScript(QStringList &list) {
 }
 
 
-const QString PPPData::accountingFile() {
-  return readConfig(cgroup, ACCTFILE_KEY);
-}
+// const QString PPPData::accountingFile() {
+//   return readConfig(cgroup, ACCTFILE_KEY);
+// }
 
 
-void PPPData::setAccountingFile(const QString &n) {
-  writeConfig(cgroup, ACCTFILE_KEY, n);
-}
+// void PPPData::setAccountingFile(const QString &n) {
+//   writeConfig(cgroup, ACCTFILE_KEY, n);
+// }
 
 
-const QString PPPData::totalCosts() {
-  return readConfig(cgroup, TOTALCOSTS_KEY);
-}
+// const QString PPPData::totalCosts() {
+//   return readConfig(cgroup, TOTALCOSTS_KEY);
+// }
 
 
-void PPPData::setTotalCosts(const QString &n) {
-  writeConfig(cgroup, TOTALCOSTS_KEY, n);
-}
+// void PPPData::setTotalCosts(const QString &n) {
+//   writeConfig(cgroup, TOTALCOSTS_KEY, n);
+// }
 
 
-int PPPData::totalBytes() {
-  return readNumConfig(cgroup, TOTALBYTES_KEY, 0);
-}
+// int PPPData::totalBytes() {
+//   return readNumConfig(cgroup, TOTALBYTES_KEY, 0);
+// }
 
-void PPPData::setTotalBytes(int n) {
-  writeConfig(cgroup, TOTALBYTES_KEY, n);
-}
+// void PPPData::setTotalBytes(int n) {
+//   writeConfig(cgroup, TOTALBYTES_KEY, n);
+// }
 
 
 QStringList &PPPData::pppdArgument() {
@@ -1211,7 +1220,8 @@ void PPPData::setpppdError(int err) {
 
 QString PPPData::modemGroup()
 {
-    return MODEM_GRP;
+    if (modemDeviceGroup<0)qFatal("wrong modem %i",modemDeviceGroup);
+    return QString("MODEM_GRP_%1").arg(modemDeviceGroup);
 }
 
 // //

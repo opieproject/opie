@@ -5,25 +5,30 @@
 
 #include "accounts.h"
 #include "general.h"
+#include "interface.h"
+#include "modem.h"
 #include "pppconfig.h"
 #include "pppdata.h"
 #include "runtests.h"
-#include "modem.h"
 
-PPPConfigWidget::PPPConfigWidget( QWidget *parent, const char *name,
+PPPConfigWidget::PPPConfigWidget( Interface* iface, QWidget *parent,
+                                  const char *name,
                                   bool modal, WFlags fl )
   : QDialog(parent, name, modal, fl)
 {
     setCaption(tr("Configure Modem"));
-  int result = runTests();
-  if(result == TEST_CRITICAL){
-      QMessageBox::critical(0, tr("Modem failure"), tr("A critical failure appeard while testing the modem") );
-      return;
-  }
+    int result = runTests();
+    if(result == TEST_CRITICAL){
+        QMessageBox::critical(0, tr("Modem failure"), tr("A critical failure appeard while testing the modem") );
+        return;
+    }
 
-//  setFixedSize(sizeHint());
-
-  (void)new Modem;
+    interface = iface;
+    if (!PPPData::data()->setModemDevice( interface->getInterfaceName() ))
+        PPPData::data()->setModemDevice("/dev/modem");
+    if (!PPPData::data()->setAccount( interface->getHardwareName() ))
+        PPPData::data()->setAccount( 0 );
+    (void)new Modem;
 
   QVBoxLayout *layout = new QVBoxLayout( this );
   layout->setSpacing( 0 );
@@ -50,6 +55,8 @@ PPPConfigWidget::~PPPConfigWidget()
 
 void PPPConfigWidget::accept()
 {
+    interface->setInterfaceName( PPPData::data()->modemDevice() );
+    interface->setHardwareName( PPPData::data()->accname() );
     PPPData::data()->save();
     QDialog::accept();
 }

@@ -56,7 +56,8 @@ bool PPPModule::isOwner(Interface *i){
  */
 QWidget *PPPModule::configure(Interface *i){
     qDebug("return ModemWidget");
-    PPPConfigWidget *pppconfig = new PPPConfigWidget( 0, "PPPConfig",  false,
+    PPPConfigWidget *pppconfig = new PPPConfigWidget( i, 0, "PPPConfig",
+                                                      false,
                                                       Qt::WDestructiveClose );
     return pppconfig;
 }
@@ -69,7 +70,7 @@ QWidget *PPPModule::information(Interface *i){
   // We don't have any advanced pppd information widget yet :-D
   // TODO ^
     qDebug("return PPPModule::information");
-  InterfaceInformationImp *information = new InterfaceInformationImp(0, "InterfaceSetupImp", i);
+  InterfaceInformationImp *information = new InterfaceInformationImp( 0, "InterfaceSetupImp", i);
   return information;
 }
 
@@ -94,18 +95,19 @@ Interface *PPPModule::addNewInterface(const QString &newInterface){
 
   qDebug("try to add iface %s",newInterface.latin1());
 
-  PPPConfigWidget imp(0, "PPPConfigImp", true);
+  Interface *iface;
+  iface = new Interface();
+  PPPConfigWidget imp(iface, 0, "PPPConfigImp", true);
   imp.showMaximized();
   if(imp.exec() == QDialog::Accepted ){
-              qDebug("ACCEPTED");
-              PPPData::data()->save();
-              Interface *iface;
-              iface = new Interface( 0, PPPData::data()->modemDevice() );
-              iface->setHardwareName( PPPData::data()->accname() );
-              list.append( iface );
-              return iface;
+      iface->setModuleOwner( this );
+      list.append( iface );
+      return iface;
+  }else {
+      delete iface;
+      iface = NULL;
   }
-  return NULL;
+  return iface;
 }
 
 /**

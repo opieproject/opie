@@ -4,6 +4,7 @@
 #include <qdialog.h>
 
 class QTabWidget;
+class Interface;
 class AccountWidget;
 class GeneralWidget;
 class ModemWidget;
@@ -13,7 +14,7 @@ class PPPConfigWidget : public QDialog {
     Q_OBJECT
 public:
 
-    PPPConfigWidget( QWidget *parent=0, const char *name=0, 
+    PPPConfigWidget( Interface*, QWidget *parent=0, const char *name=0, 
 		     bool modal = false, WFlags fl = 0 );
     ~PPPConfigWidget();	
 
@@ -23,6 +24,7 @@ protected slots:
     virtual void reject();
 
  private:
+    Interface *interface;
   QTabWidget *tabWindow;
   AccountWidget *accounts;
   GeneralWidget *general;

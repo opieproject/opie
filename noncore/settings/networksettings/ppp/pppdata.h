@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.h,v 1.3 2003-05-24 23:34:09 tille Exp $
+ * $Id: pppdata.h,v 1.4 2003-05-25 14:25:23 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -241,7 +241,7 @@ public:
   const QString modemEscapeResp();
 
   const QString modemDevice();
-  void setModemDevice(const QString &);
+  bool setModemDevice(const QString &);
 
   const QString flowcontrol();
   void setFlowcontrol(const QString &);
@@ -419,14 +419,14 @@ public:
   void setpppdError(int err);
 
   // functions to set/query the accounting info
-  const QString accountingFile();
-  void setAccountingFile(const QString &);
+//   const QString accountingFile();
+//   void setAccountingFile(const QString &);
 
-  const QString totalCosts();
-  void setTotalCosts(const QString &);
+//   const QString totalCosts();
+//   void setTotalCosts(const QString &);
 
-  int totalBytes();
-  void  setTotalBytes(int);
+//   int totalBytes();
+//   void  setTotalBytes(int);
 
 //   // graphing widget
 //   void setGraphingOptions(bool enabled,
@@ -450,7 +450,7 @@ public:
 private:
 
     static PPPData *_data;
-
+    int modemDeviceGroup;
     QString passwd;
     static Config* config;                       // configuration object
     int highcount;                         // index of highest account
