@@ -8,7 +8,7 @@ SOURCES         = capture.cpp
 
 INCLUDEPATH     += $(OPIEDIR)/include ../lib
 DEPENDPATH      += $(OPIEDIR)/include ../lib
-LIBS            += -lqpe -lopiecore2 -lopiecam
+LIBS            += -lqpe -lopiecore2 -lcamera
 INTERFACES      =
 TARGET          = capture
 
