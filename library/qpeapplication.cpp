@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.15 2002-07-06 16:42:29 sandman Exp $
+** $Id: qpeapplication.cpp,v 1.16 2002-08-15 18:34:42 harlekin Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -487,7 +487,7 @@ static void setScreenSaverInterval( int interval )
   \class QPEApplication qpeapplication.h
   \brief The QPEApplication class implements various system services
     that are available to all Qtopia applications.
- 
+
   Simply by using QPEApplication instead of QApplication, a plain Qt
   application becomes a Qtopia application. It automatically follows
   style changes, quits and raises, and in the
@@ -497,20 +497,20 @@ static void setScreenSaverInterval( int interval )
 
 /*!
   \fn void QPEApplication::clientMoused()
- 
+
   \internal
 */
 
 /*!
   \fn void QPEApplication::timeChanged();
- 
+
   This signal is emitted when the time jumps forward or backwards
   by more than the normal passage of time.
 */
 
 /*!
   \fn void QPEApplication::clockChanged( bool ampm );
- 
+
   This signal is emitted when the user changes the style
   of clock. If \a ampm is TRUE, the user wants a 12-hour
   AM/PM close, otherwise, they want a 24-hour clock.
@@ -518,13 +518,13 @@ static void setScreenSaverInterval( int interval )
 
 /*!
   \fn void QPEApplication::appMessage( const QCString& msg, const QByteArray& data )
- 
+
   This signal is emitted when a message is received on the
   QPE/Application/<i>appname</i> QCop channel for this application.
- 
+
   The slot to which you connect this signal uses \a msg and \a data
   in the following way:
- 
+
 \code
     void MyWidget::receive( const QCString& msg, const QByteArray& data )
     {
@@ -538,7 +538,7 @@ static void setScreenSaverInterval( int interval )
   }
     }
 \endcode
- 
+
   \sa qcop.html
 */
 
@@ -643,13 +643,19 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 		else
 			delete trans;
 
-		//###language/font hack; should look it up somewhere
-		if ( lang == "ja" || lang == "zh_CN" || lang == "zh_TW" || lang == "ko" ) {
-			QFont fn = FontManager::unicodeFont( FontManager::Proportional );
-			setFont( fn );
-		}
-		else {
-			Config config( "qpe" );
+                /*
+                 * not required. if using one of these languages, you might as well install
+                 * a custom font.
+
+                 //###language/font hack; should look it up somewhere
+                 if ( lang == "ja" || lang == "zh_CN" || lang == "zh_TW" || lang == "ko" ) {
+                 QFont fn = FontManager::unicodeFont( FontManager::Proportional );
+                 setFont( fn );
+                 }
+
+                 else {
+                */
+                    Config config( "qpe" );
 			config.setGroup( "Appearance" );
 			QString familyStr = config.readEntry( "FontFamily", "helvetica" );
 			QString styleStr = config.readEntry( "FontStyle", "Regular" );
@@ -660,7 +666,7 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 			FontDatabase fdb;
 			QFont selectedFont = fdb.font( familyStr, styleStr, i_size, charSetStr );
 			setFont( selectedFont );
-		}
+                        //}
 	}
 
 #endif
@@ -693,7 +699,7 @@ static void createInputMethodDict()
 /*!
   Returns the currently set hint to the system as to whether
   \a w has any use for text input methods.
- 
+
   \sa setInputMethodHint()
 */
 QPEApplication::InputMethodHint QPEApplication::inputMethodHint( QWidget * w )
@@ -705,7 +711,7 @@ QPEApplication::InputMethodHint QPEApplication::inputMethodHint( QWidget * w )
 
 /*!
     \enum QPEApplication::InputMethodHint
- 
+
     \value Normal the application sometimes needs text input (the default).
     \value AlwaysOff the application never needs text input.
     \value AlwaysOn the application always needs text input.
@@ -714,7 +720,7 @@ QPEApplication::InputMethodHint QPEApplication::inputMethodHint( QWidget * w )
 /*!
   Hints to the system that \a w has use for text input methods
   as specified by \a mode.
- 
+
   \sa inputMethodHint()
 */
 void QPEApplication::setInputMethodHint( QWidget * w, InputMethodHint mode )
@@ -1269,9 +1275,9 @@ static bool setWidgetCaptionFromAppName( QWidget* /*mw*/, const QString& /*appNa
 	    // then it uses the name stored in the .desktop file as the caption
 	    // for the main widget. This saves duplicating translations for
 	    // the app name in the program and in the .desktop files.
-	 
+
 	    AppLnkSet apps( appsPath );
-	 
+
 	    QList<AppLnk> appsList = apps.children();
 	    for ( QListIterator<AppLnk> it(appsList); it.current(); ++it ) {
 	  if ( (*it)->exec() == appName ) {
@@ -1279,7 +1285,7 @@ static bool setWidgetCaptionFromAppName( QWidget* /*mw*/, const QString& /*appNa
 	      return TRUE;
 	  }
 	    }
-	*/ 
+	*/
 	return FALSE;
 }
 
@@ -1287,7 +1293,7 @@ static bool setWidgetCaptionFromAppName( QWidget* /*mw*/, const QString& /*appNa
 /*!
   Sets \a mw as the mainWidget() and shows it. For small windows,
   consider passing TRUE for \a nomaximize rather than the default FALSE.
- 
+
   \sa showMainDocumentWidget()
 */
 void QPEApplication::showMainWidget( QWidget* mw, bool nomaximize )
@@ -1322,12 +1328,12 @@ void QPEApplication::showMainWidget( QWidget* mw, bool nomaximize )
 /*!
   Sets \a mw as the mainWidget() and shows it. For small windows,
   consider passing TRUE for \a nomaximize rather than the default FALSE.
- 
+
   This calls designates the application as
   a \link docwidget.html document-oriented\endlink application.
- 
+
   The \a mw widget must have a slot: setDocument(const QString&).
- 
+
   \sa showMainWidget()
 */
 void QPEApplication::showMainDocumentWidget( QWidget* mw, bool nomaximize )
@@ -1368,7 +1374,7 @@ void QPEApplication::showMainDocumentWidget( QWidget* mw, bool nomaximize )
   the application will process the qcop message and then quit.  If while
   processing the qcop message it calls this function, then the application
   will show and start proper once it has finished processing qcop messages.
- 
+
   \sa keepRunning()
 */
 void QPEApplication::setKeepRunning()
@@ -1381,8 +1387,8 @@ void QPEApplication::setKeepRunning()
 
 /*!
   Returns whether the application will quit after processing the current
-  list of qcop messages.  
- 
+  list of qcop messages.
+
   \sa setKeepRunning()
 */
 bool QPEApplication::keepRunning() const
@@ -1464,7 +1470,7 @@ void QPEApplication::internalSetStyle( const QString &style )
 			if ( iface )
 				iface-> release ( );
 			delete lib;
-			
+
 			setStyle ( new QPEStyle ( ));
 		}
 
@@ -1564,7 +1570,7 @@ static void createDict()
 
 /*!
   Returns the current StylusMode for \a w.
- 
+
   \sa setStylusOperation()
 */
 QPEApplication::StylusMode QPEApplication::stylusOperation( QWidget * w )
@@ -1576,18 +1582,18 @@ QPEApplication::StylusMode QPEApplication::stylusOperation( QWidget * w )
 
 /*!
     \enum QPEApplication::StylusMode
- 
+
     \value LeftOnly the stylus only generates LeftButton
       events (the default).
     \value RightOnHold the stylus generates RightButton events
       if the user uses the press-and-hold gesture.
- 
+
     See setStylusOperation().
 */
 
 /*!
   Causes \a w to receive mouse events according to \a mode.
- 
+
   \sa stylusOperation()
 */
 void QPEApplication::setStylusOperation( QWidget * w, StylusMode mode )
@@ -1720,7 +1726,7 @@ void QPEApplication::ungrabKeyboard()
   Grabs the keyboard such that the system's application launching
   keys no longer work, and instead they are receivable by this
   application.
- 
+
   \sa ungrabKeyboard()
 */
 void QPEApplication::grabKeyboard()
