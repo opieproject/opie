@@ -11,13 +11,43 @@ DEPENDPATH      += ../$(OPIEDIR)/include ..
 LIBS            += -lqpe -lm
 VERSION   =   1.0.0
 
-contains(QMAKE_CXX, arm-linux-g++) | contains(QMAKE_CXX, arm-linux-gcc ){
-DEFINES += FPM_ARM
-} else { contains(QMAKE_CXX, mipsel-linux-g++ ) {
-DEFINES += FPM_MIPS
-} else {
+include ( $(OPIEDIR)/include.pro )
+	
 DEFINES += FPM_INTEL
-}
+
+system(echo $QMAKESPEC | grep -s sharp) {
+	DEFINES -= FPM_INTEL
+	DEFINES += FPM_ARM
 }
 
-include ( $(OPIEDIR)/include.pro )
+system(echo $QMAKESPEC | grep -s ipaq) {
+	DEFINES -= FPM_INTEL
+	DEFINES += FPM_ARM
+}
+
+system(echo $QMAKESPEC | grep -s mipsel) {
+	DEFINES -= FPM_INTEL
+	DEFINES += FPM_MIPS
+}
+
+system(echo $QMAKESPEC | grep -s ramses) {
+	DEFINES -= FPM_INTEL
+	DEFINES += FPM_ARM
+}
+
+system(echo $QMAKESPEC | grep -s arm) {
+	DEFINES -= FPM_INTEL
+	DEFINES += FPM_ARM
+}
+
+system(echo $QMAKESPEC | grep -s simpad) {
+	DEFINES -= FPM_INTEL
+	DEFINES += FPM_ARM
+}
+
+system(echo $QMAKESPEC | grep -s yopy) {
+	DEFINES -= FPM_INTEL
+	DEFINES += FPM_ARM
+}
+
+
