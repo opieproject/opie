@@ -19,9 +19,6 @@
 #include "gutenbrowser.h"
 #include <qdialog.h>
 #include <qstringlist.h> 
-#ifndef Q_WS_QWS
-#include <qfiledialog.h>
-#endif
 //#include <fileselector.h>
 #include <qlabel.h>
 #include <qlistbox.h>

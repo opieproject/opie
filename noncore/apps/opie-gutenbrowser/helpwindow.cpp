@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: helpwindow.cpp,v 1.2 2004-09-10 11:11:25 zecke Exp $
+** $Id: helpwindow.cpp,v 1.3 2005-02-19 17:24:39 zecke Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -17,6 +17,10 @@
 #include <qtoolbar.h>
 #include <qtoolbutton.h>
 #include <qcombobox.h>
+
+#ifndef QT_NO_FILEDIALOG
+#include <qfiledialog.h>
+#endif
 
 #include <ctype.h>
 
