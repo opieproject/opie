@@ -357,7 +357,7 @@ void CardMonitor::execCommand( const QString &command ) {
     }
 }
 
-void CardMonitor::slotExited( OProcess* proc ) {
+void CardMonitor::slotExited( OProcess*  ) {
 
    if( m_process->normalExit() ) {
         int ret = m_process->exitStatus();

@@ -207,7 +207,7 @@ void IrdaApplet::showDiscovered ( )
 				discoveredDevice = line. mid ( line. find ( ':' ) + 2, line. find ( ',' ) - line. find ( ':' ) - 2 );
 				deviceAddr       = line. mid ( line. find ( "daddr:" ) + 9, 8 );
 
-				// odebug << discoveredDevice + "(" + deviceAddr + ")" << oendl; 
+				// odebug << discoveredDevice + "(" + deviceAddr + ")" << oendl;
 
 				if ( !m_devices. contains ( deviceAddr )) {
 					popup ( tr( "Found:" ) + " " + discoveredDevice );
@@ -219,7 +219,7 @@ void IrdaApplet::showDiscovered ( )
 		}
 
 		for ( it = m_devices. begin ( ); it != m_devices. end ( ); ) {
-			// odebug << "IrdaMon: delete " + it.currentKey() + "=" + *devicesAvailable[it.currentKey()] + "?" << oendl; 
+			// odebug << "IrdaMon: delete " + it.currentKey() + "=" + *devicesAvailable[it.currentKey()] + "?" << oendl;
 
 			if ( it. data ( ). left ( 3 ) == "+++" ) {
 				popup ( tr( "Lost:" ) + " " + it. data ( ). mid ( 3 ));
@@ -331,7 +331,7 @@ void IrdaApplet::paintEvent ( QPaintEvent * )
  * a and b will temp enable the IrDa device and disable will disable it again if it wasn't on
  * c) listDevices: We will return a list of known devices
  */
-void IrdaApplet::slotMessage( const QCString& str, const QByteArray& ar ) {
+void IrdaApplet::slotMessage( const QCString& str, const QByteArray&  ) {
     if ( str == "enableIrda()") {
         m_wasOn = checkIrdaStatus();
         m_wasDiscover = checkIrdaDiscoveryStatus();
