@@ -127,7 +127,7 @@ ODateBookAccessBackend::ODateBookAccessBackend()
 ODateBookAccessBackend::~ODateBookAccessBackend() {
 
 }
-OEffectiveEvent::ValueList ODateBookAccessBackend::effecticeEvents( const QDate& from,
+OEffectiveEvent::ValueList ODateBookAccessBackend::effectiveEvents( const QDate& from,
                                                                     const QDate& to ) {
     OEffectiveEvent::ValueList tmpList;
     OEvent::ValueList list = directNonRepeats();
@@ -135,13 +135,39 @@ OEffectiveEvent::ValueList ODateBookAccessBackend::effecticeEvents( const QDate&
     events( tmpList, list, from, to );
     repeat( tmpList, directRawRepeats(),from,to );
 
-    list = directRawRepeats();
+    list = directRawRepeats();  // Useless, isn't it ? (eilers)
 
     qHeapSort( tmpList );
     return tmpList;
 }
-OEffectiveEvent::ValueList ODateBookAccessBackend::effecticeEvents( const QDateTime& dt ) {
-    OEffectiveEvent::ValueList day = effecticeEvents( dt.date(), dt.date() );
+OEffectiveEvent::ValueList ODateBookAccessBackend::effectiveEvents( const QDateTime& dt ) {
+    OEffectiveEvent::ValueList day = effectiveEvents( dt.date(), dt.date() );
+    OEffectiveEvent::ValueList::Iterator it;
+
+    OEffectiveEvent::ValueList tmpList;
+    QDateTime dtTmp;
+    for ( it = day.begin(); it != day.end(); ++it ) {
+        dtTmp = QDateTime( (*it).date(), (*it).startTime() );
+        if ( QABS(dt.secsTo(dtTmp) ) < 60 )
+            tmpList.append( (*it) );
+    }
+
+    return tmpList;
+}
+
+OEffectiveEvent::ValueList ODateBookAccessBackend::effectiveNonRepeatingEvents( const QDate& from,
+                                                                    const QDate& to ) {
+    OEffectiveEvent::ValueList tmpList;
+    OEvent::ValueList list = directNonRepeats();
+
+    events( tmpList, list, from, to );
+
+    qHeapSort( tmpList );
+    return tmpList;
+}
+
+OEffectiveEvent::ValueList ODateBookAccessBackend::effectiveNonRepeatingEvents( const QDateTime& dt ) {
+    OEffectiveEvent::ValueList day = effectiveNonRepeatingEvents( dt.date(), dt.date() );
     OEffectiveEvent::ValueList::Iterator it;
 
     OEffectiveEvent::ValueList tmpList;

@@ -60,13 +60,26 @@ public:
      * EffectiveEvents bases on the directNonRepeats and directRawRepeats. You may implement this method
      * yourself
      */
-    virtual OEffectiveEvent::ValueList effecticeEvents( const QDate& from, const QDate& to );
+    virtual OEffectiveEvent::ValueList effectiveEvents( const QDate& from, const QDate& to );
 
     /**
      * this is an overloaded member function
-     * @see effecticeEvents
+     * @see effectiveEvents( const QDate& from, const QDate& to )
      */
-    virtual OEffectiveEvent::ValueList effecticeEvents( const QDateTime& start );
+    virtual OEffectiveEvent::ValueList effectiveEvents( const QDateTime& start );
+
+    /**
+     * Effective Events are special event occuring during a time frame. This method does calcualte
+     * EffectiveEvents bases on the directNonRepeats and directRawRepeats. You may implement this method
+     * yourself
+     */
+    virtual OEffectiveEvent::ValueList effectiveNonRepeatingEvents( const QDate& from, const QDate& to );
+
+    /**
+     * this is an overloaded member function
+     * @see effectiveNonRepeatingEvents( const QDate& from, const QDate& to )
+     */
+    virtual OEffectiveEvent::ValueList effectiveNonRepeatingEvents( const QDateTime& start );
 
 private:
     class Private;

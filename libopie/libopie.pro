@@ -101,8 +101,8 @@ contains( CONFTEST, y ){
 
 DEFINES += __USE_SQL
 LIBS    += -lopiedb2
-HEADERS += pim/otodoaccesssql.h pim/ocontactaccessbackend_sql.h
-SOURCES += pim/otodoaccesssql.cpp pim/ocontactaccessbackend_sql.cpp
+HEADERS += pim/otodoaccesssql.h pim/ocontactaccessbackend_sql.h pim/odatebookaccessbackend_sql.h
+SOURCES += pim/otodoaccesssql.cpp pim/ocontactaccessbackend_sql.cpp pim/odatebookaccessbackend_sql.cpp
 
 }
 

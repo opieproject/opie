@@ -9,6 +9,12 @@
 #include <opie/ocontactaccessbackend_xml.h>
 #include <opie/ocontactaccessbackend_sql.h>
 
+#include <opie/odatebookaccess.h>
+#include <opie/odatebookaccessbackend_xml.h>
+#include <opie/odatebookaccessbackend_sql.h>
+
+// #define _ADDRESSBOOK_ACCESS
+
 Converter::Converter(){
 }
 
@@ -16,6 +22,8 @@ void Converter::start_conversion(){
 	qWarning("Converting Contacts from XML to SQL..");
 	
 	// Creating backends to the requested databases..
+
+#ifdef _ADDRESSBOOK_ACCESS
 	OContactAccessBackend* xmlBackend = new OContactAccessBackend_XML( "Converter", 
 									   QString::null );
 	
@@ -26,14 +34,30 @@ void Converter::start_conversion(){
 							 QString::null , xmlBackend, true );
 	
 	OContactAccess* sqlAccess = new OContactAccess ( "addressbook_sql", 
-							 QString::null , sqlBackend, true );
+							 QString::null );
 	
+#else
+	ODateBookAccessBackend* xmlBackend = new ODateBookAccessBackend_XML( "Converter", 
+									     QString::null );
+	
+	ODateBookAccessBackend* sqlBackend = new ODateBookAccessBackend_SQL( QString::null,
+									     QString::null );
+	// Put the created backends into frontends to access them
+	ODateBookAccess* xmlAccess = new ODateBookAccess ( xmlBackend );
+	
+	ODateBookAccess* sqlAccess = new ODateBookAccess ( sqlBackend );
+	
+	xmlAccess->load();
+
+#endif
+
 	QTime t;
 	t.start();
 
-	// Clean the sql-database..
+// Clean the sql-database..
 	sqlAccess->clear();
 	
+#ifdef _ADDRESSBOOK_ACCESS
 	// Now trasmit every contact from the xml database to the sql-database
 	OContactAccess::List contactList = xmlAccess->allRecords();
 	m_progressBar->setTotalSteps( contactList.count() );
@@ -45,7 +69,22 @@ void Converter::start_conversion(){
 			m_progressBar->setProgress( ++count );
 		}
 	}
-	
+#else
+	// Now transmit every contact from the xml database to the sql-database
+	ODateBookAccess::List dateList = xmlAccess->allRecords();
+	m_progressBar->setTotalSteps( dateList.count() );
+	qWarning( "Number of elements to copy: %d", dateList.count() );
+
+	int count = 0;
+	if ( sqlAccess && xmlAccess ){
+		ODateBookAccess::List::Iterator it;
+		for ( it = dateList.begin(); it != dateList.end(); ++it ){
+			sqlAccess->add( *it );
+			m_progressBar->setProgress( ++count );
+		}
+	}
+
+#endif	
 	// Delete the frontends. Backends will be deleted automatically, too !
 	delete sqlAccess;
 

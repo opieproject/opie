@@ -10,11 +10,23 @@
  *      version 2 of the License, or (at your option) any later version.
  * =====================================================================
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_sql.cpp,v 1.3 2003-12-08 15:18:10 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_sql.cpp,v 1.4 2003-12-22 10:19:26 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_sql.cpp,v $
- * Revision 1.3  2003-12-08 15:18:10  eilers
+ * Revision 1.4  2003-12-22 10:19:26  eilers
+ * Finishing implementation of sql-backend for datebook. But I have to
+ * port the PIM datebook application to use it, before I could debug the
+ * whole stuff.
+ * Thus, PIM-Database backend is finished, but highly experimental. And some
+ * parts are still generic. For instance, the "queryByExample()" methods are
+ * not (or not fully) implemented. Todo: custom-entries not stored.
+ * The big show stopper: matchRegExp() (needed by OpieSearch) needs regular
+ * expression search in the database, which is not supported by sqlite !
+ * Therefore we need either an extended sqlite or a workaround which would
+ * be very slow and memory consuming..
+ *
+ * Revision 1.3  2003/12/08 15:18:10  eilers
  * Committing unfinished sql implementation before merging to libopie2 starts..
  *
  * Revision 1.2  2003/09/29 07:44:26  eilers
@@ -510,7 +522,7 @@ bool OContactAccessBackend_SQL::reload()
 
 bool OContactAccessBackend_SQL::save()
 {
-	return m_driver->close();
+	return m_driver->close();  // Shouldn't m_driver->sync be better than close ? (eilers)
 }
 
 
@@ -518,8 +530,8 @@ void OContactAccessBackend_SQL::clear ()
 {
 	ClearQuery cle;
 	OSQLResult res = m_driver->query( &cle );
-	CreateQuery qu;
-	res = m_driver->query(&qu);
+
+	reload();
 }
 
 bool OContactAccessBackend_SQL::wasChangedExternally()

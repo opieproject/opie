@@ -56,11 +56,26 @@ ODateBookAccess::List ODateBookAccess::nonRepeats()const {
  * @param to Include all events to...
  */
 OEffectiveEvent::ValueList ODateBookAccess::effectiveEvents( const QDate& from, const QDate& to ) {
-    return m_backEnd->effecticeEvents( from, to );
+    return m_backEnd->effectiveEvents( from, to );
 }
 /**
  * @return all events at a given datetime
  */
 OEffectiveEvent::ValueList ODateBookAccess::effectiveEvents( const QDateTime& start ) {
-    return m_backEnd->effecticeEvents( start );
+    return m_backEnd->effectiveEvents( start );
+}
+
+/**
+ * @return non repeating dates in the time span between from and to
+ * @param from Include all events from...
+ * @param to Include all events to...
+ */
+OEffectiveEvent::ValueList ODateBookAccess::effectiveNonRepeatingEvents( const QDate& from, const QDate& to ) {
+    return m_backEnd->effectiveNonRepeatingEvents( from, to );
+}
+/**
+ * @return all non repeating events at a given datetime
+ */
+OEffectiveEvent::ValueList ODateBookAccess::effectiveNonRepeatingEvents( const QDateTime& start ) {
+    return m_backEnd->effectiveNonRepeatingEvents( start );
 }

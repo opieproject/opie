@@ -16,11 +16,16 @@ namespace {
     }
     QDateTime utcTime( time_t t, const QString&  zone) {
         QCString org = ::getenv( "TZ" );
+#ifndef Q_OS_MACX   // Following line causes bus errors on Mac
         ::setenv( "TZ", zone.latin1(), true );
         ::tzset();
 
         tm* broken = ::localtime( &t );
         ::setenv( "TZ", org, true );
+#else
+#warning "Need a replacement for MacOSX!!"
+        tm* broken = ::localtime( &t );
+#endif
 
         QDateTime ret;
         ret.setDate( QDate( broken->tm_year + 1900, broken->tm_mon +1, broken->tm_mday ) );
@@ -41,12 +46,16 @@ namespace {
         broken.tm_sec = t.second();
 
         QCString org = ::getenv( "TZ" );
+#ifndef Q_OS_MACX   // Following line causes bus errors on Mac
         ::setenv( "TZ", str.latin1(), true );
         ::tzset();
 
         time_t ti = ::mktime( &broken );
         ::setenv( "TZ", org, true );
-
+#else
+#warning "Need a replacement for MacOSX!!"
+        time_t ti = ::mktime( &broken );
+#endif
         return ti;
     }
 }

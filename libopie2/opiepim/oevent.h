@@ -76,6 +76,12 @@ public:
      * copy c'tor
      */
     OEvent( const OEvent& );
+
+    /**
+     * Create OEvent, initialized by map
+     * @see enum RecordFields
+     */
+    OEvent( const QMap<int, QString> map );
     ~OEvent();
     OEvent &operator=( const OEvent& );
 

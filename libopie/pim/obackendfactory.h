@@ -12,11 +12,23 @@
  * =====================================================================
  * ToDo: Use plugins
  * =====================================================================
- * Version: $Id: obackendfactory.h,v 1.8 2003-09-22 14:31:16 eilers Exp $
+ * Version: $Id: obackendfactory.h,v 1.9 2003-12-22 10:19:26 eilers Exp $
  * =====================================================================
  * History:
  * $Log: obackendfactory.h,v $
- * Revision 1.8  2003-09-22 14:31:16  eilers
+ * Revision 1.9  2003-12-22 10:19:26  eilers
+ * Finishing implementation of sql-backend for datebook. But I have to
+ * port the PIM datebook application to use it, before I could debug the
+ * whole stuff.
+ * Thus, PIM-Database backend is finished, but highly experimental. And some
+ * parts are still generic. For instance, the "queryByExample()" methods are
+ * not (or not fully) implemented. Todo: custom-entries not stored.
+ * The big show stopper: matchRegExp() (needed by OpieSearch) needs regular
+ * expression search in the database, which is not supported by sqlite !
+ * Therefore we need either an extended sqlite or a workaround which would
+ * be very slow and memory consuming..
+ *
+ * Revision 1.8  2003/09/22 14:31:16  eilers
  * Added first experimental incarnation of sql-backend for addressbook.
  * Some modifications to be able to compile the todo sql-backend.
  * A lot of changes fill follow...
@@ -80,6 +92,7 @@
 #ifdef __USE_SQL
 #include "otodoaccesssql.h"
 #include "ocontactaccessbackend_sql.h"
+#include "odatebookaccessbackend_sql.h"
 #endif
 
 class OBackendPrivate;
@@ -143,7 +156,7 @@ class OBackendFactory
 				return (T*) new OTodoAccessBackendSQL("");
 #else
 			if ( backend == "sql" )
-				qWarning ("OBackendFactory:: sql Backend not implemented! Using XML instead!");
+				qWarning ("OBackendFactory:: sql Backend for TODO not implemented! Using XML instead!");
 #endif
 
 			return (T*) new OTodoAccessXML( appName );
@@ -153,13 +166,18 @@ class OBackendFactory
 				return (T*) new OContactAccessBackend_SQL("");
 #else
 			if ( backend == "sql" )
-				qWarning ("OBackendFactory:: sql Backend not implemented! Using XML instead!");
+				qWarning ("OBackendFactory:: sql Backend for CONTACT not implemented! Using XML instead!");
 #endif
 
 			return (T*) new OContactAccessBackend_XML( appName );
 		case DATE:
+#ifdef __USE_SQL
 			if ( backend == "sql" )
-                            qWarning("OBackendFactory:: sql Backend not implemented! Using XML instead!");
+				return (T*) new ODateBookAccessBackend_SQL("");
+#else
+			if ( backend == "sql" )
+                            qWarning("OBackendFactory:: sql Backend for DATEBOOK not implemented! Using XML instead!");
+#endif
 
 			return (T*) new ODateBookAccessBackend_XML( appName );
 		default:

@@ -13,11 +13,23 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactaccess.h,v 1.9 2003-08-01 12:30:16 eilers Exp $
+ * Version: $Id: ocontactaccess.h,v 1.10 2003-12-22 10:19:26 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.h,v $
- * Revision 1.9  2003-08-01 12:30:16  eilers
+ * Revision 1.10  2003-12-22 10:19:26  eilers
+ * Finishing implementation of sql-backend for datebook. But I have to
+ * port the PIM datebook application to use it, before I could debug the
+ * whole stuff.
+ * Thus, PIM-Database backend is finished, but highly experimental. And some
+ * parts are still generic. For instance, the "queryByExample()" methods are
+ * not (or not fully) implemented. Todo: custom-entries not stored.
+ * The big show stopper: matchRegExp() (needed by OpieSearch) needs regular
+ * expression search in the database, which is not supported by sqlite !
+ * Therefore we need either an extended sqlite or a workaround which would
+ * be very slow and memory consuming..
+ *
+ * Revision 1.9  2003/08/01 12:30:16  eilers
  * Merging changes from BRANCH_1_0 to HEAD
  *
  * Revision 1.8.2.1  2003/06/30 14:34:19  eilers
@@ -78,7 +90,7 @@
  * done by the backend.
  * This class is used to access the Contacts on a system. This class as any OPIE PIM
  * class is backend independent.
-
+ * @author Stefan Eilers, Holger Freyther
  * @see OPimAccessTemplate
  */
 class OContactAccess: public QObject, public OPimAccessTemplate<OContact>

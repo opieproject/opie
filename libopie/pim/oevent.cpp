@@ -77,6 +77,15 @@ OEvent::OEvent( const OEvent& ev)
 {
     data->ref();
 }
+
+OEvent::OEvent( const QMap<int, QString> map )
+    : OPimRecord( 0 )
+{
+	data = new Data;
+
+	fromMap( map );
+}
+
 OEvent::~OEvent() {
     if ( data->deref() ) {
         delete data;
@@ -403,6 +412,10 @@ QMap<int, QString> OEvent::toMap()const {
 	    retMap.insert( OEvent::FREndDate, recFields[ORecur::EndDate] );
 	    retMap.insert( OEvent::FRCreated, recFields[ORecur::Created] );
 	    retMap.insert( OEvent::FRExceptions, recFields[ORecur::Exceptions] );
+    } else {
+	    ORecur recur = recurrence();
+	    QMap<int, QString> recFields = recur.toMap();
+	    retMap.insert( OEvent::FRType, recFields[ORecur::RType] );
     }
    
     return retMap;

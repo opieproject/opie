@@ -330,7 +330,7 @@ bool OTodoAccessBackendSQL::reload(){
 }
 
 bool OTodoAccessBackendSQL::save(){
-    return m_driver->close();
+    return m_driver->close();  // Shouldn't m_driver->sync be better than close ? (eilers)
 }
 QArray<int> OTodoAccessBackendSQL::allRecords()const {
     if (m_dirty )

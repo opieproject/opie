@@ -2,6 +2,7 @@
 #define OPIE_DATE_BOOK_ACCESS_BACKEND_SQL__H
 
 #include <qmap.h>
+#include <opie2/osqlresult.h>
 
 #include "odatebookaccessbackend.h"
 
@@ -45,6 +46,7 @@ private:
     QArray<int> m_uids;
 
     QMap<int, QString> m_fieldMap;
+    QMap<QString, int> m_reverseFieldMap;
 
     OSQLDriver* m_driver;
 

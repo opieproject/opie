@@ -13,7 +13,7 @@
  * Make sure to load and save the datebook this is not part of
  * destructing and creating the object
  *
- * @author Holger Freyther
+ * @author Holger Freyther, Stefan Eilers
  */
 class ODateBookAccess : public OPimAccessTemplate<OEvent> {
 public:
@@ -29,8 +29,11 @@ public:
     /* return non repeating events */
     List nonRepeats()const;
 
-    OEffectiveEvent::ValueList effectiveEvents( const QDate& from, const QDate& to );
-    OEffectiveEvent::ValueList effectiveEvents( const QDateTime& start );
+    /* return non repeating events (from,to) */
+    OEffectiveEvent::ValueList effectiveEvents( const QDate& from, const QDate& to ) const;
+    OEffectiveEvent::ValueList effectiveEvents( const QDateTime& start ) const;
+    OEffectiveEvent::ValueList effectiveNonRepeatingEvents( const QDate& from, const QDate& to ) const;
+    OEffectiveEvent::ValueList effectiveNonRepeatingEvents( const QDateTime& start ) const;
 
 private:
     ODateBookAccessBackend* m_backEnd;
