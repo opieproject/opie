@@ -2,7 +2,8 @@ TODO:
 
 small things:
 * there are bug in the layouting of the table
-
+* Elementar symbols should be small enough to fit the boxes
+    (font problem?)
 
 
 big things:
@@ -10,3 +11,8 @@ big things:
 * backport more dataset from Kalzium
 * make the colors confiurable
 * graphical analysation (KalziumGraph.cpp/h)
+* make elements sortable by their attributes (e.g. density)
+* graph of attribute (e.g. ionisationenergie) vs atomnumber?
+
+wishes:
+* add radio active decay 
