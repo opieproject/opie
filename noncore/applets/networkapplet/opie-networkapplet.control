@@ -1,4 +1,4 @@
-Files: plugins/applets/libnetworkapplet.so*
+Files: plugins/applets/libnetworkapplet.so* pics/networkapplet
 Priority: optional
 Section: opie/system
 Maintainer: Michael 'Mickey' Lauer <mickeyl@handhelds.org>
