@@ -75,7 +75,7 @@ INCLUDEPATH += $(OPIEDIR)/noncore/settings/mediummount
 DEPENDPATH  += $(OPIEDIR)/noncore/settings/mediummount
 
 LIBS        += -lqpe -lopiecore2 -lopieui2 -lqrsync
-TARGET       = opie
+TARGET       = qpe
 
 contains( $(CONFIG_TARGET_MACOSX), y ) {
   LIBS += -lcrypt

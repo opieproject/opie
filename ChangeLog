@@ -1,6 +1,5 @@
 2004-??-??	The Opie Team <opie@handhelds.org>
 
-	* The launcher binary is now finally called 'opie' (mickeyl)
 	* Added Conversion tool for pim-data (eilers)
 	* Modifcation of the PIM API for providing generic use of OPimRecords. (eilers)
 
