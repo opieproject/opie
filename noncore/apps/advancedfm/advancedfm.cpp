@@ -725,16 +725,12 @@ void AdvancedFm::showFileMenu() {
     }
 
      MimeType mt( curApp );
-
      const AppLnk* app = mt.application();
-
      QFile fi(curApp);
-
      QPopupMenu *m = new QPopupMenu(0);
      QPopupMenu *n = new QPopupMenu(0);
      //    QPopupMenu *o = new QPopupMenu(0);
-
-     m->insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
+     m->insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showMenuHidden() ));
     
      if ( QFileInfo(fi).isDir() ) {
        m->insertSeparator();
@@ -745,8 +741,7 @@ void AdvancedFm::showFileMenu() {
          m->insertItem( app->pixmap(), tr( "Open in "
                                            + app->name() ), this, SLOT( runThis() ) );
        else if( QFileInfo(fi).isExecutable() ) //damn opie doesnt like this
-         m->insertItem( /*Resource::loadPixmap( app->name()),*/ tr( "Execute" ), this, SLOT( runThis() ) );
-
+         m->insertItem( tr( "Execute" ), this, SLOT( runThis() ) );
        m->insertItem( Resource::loadPixmap( "txt" ), tr( "Open as text" ),this, SLOT( runText() ) );
      }
 

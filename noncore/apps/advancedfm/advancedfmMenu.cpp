@@ -53,34 +53,36 @@ void AdvancedFm::doRemoteCd() {
 }
 
 void AdvancedFm::showMenuHidden() {
-    showHidden();
-    if(b) b= false; else b=true;
-    showRemoteHidden();
+    if(TabWidget->currentPageIndex() == 0)
+        showHidden();
+    else
+        showRemoteHidden();
+//    if(b) qDebug("<<<<<<<<<<<<<<<<<<<<<<<<<<<< true");
+    if(b) b = false; else b = true;
 }
 
 void AdvancedFm::showHidden() {
   if (b) {
     currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
     fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
-    b=FALSE;
+//    b=FALSE;
 
   }  else {
     currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
     fileMenu->setItemChecked( fileMenu->idAt(0),FALSE);
-    b=TRUE;
+//    b=TRUE;
   }
   populateLocalView();
-
 }
 
 void AdvancedFm::showRemoteHidden() {
   if (b) {
     currentRemoteDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
-    b=TRUE;
+//    b=TRUE;
 
   }  else {
     currentRemoteDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
-    b=FALSE;
+//    b=FALSE;
   }
   populateRemoteView();
 }
