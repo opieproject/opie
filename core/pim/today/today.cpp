@@ -452,6 +452,10 @@ void Today::refresh() {
             qDebug( "refresh" );
         }
     }
+
+    DateLabel->setText( QString( "<font color=#FFFFFF>" +  TimeString::longDateString( QDate::currentDate() )  + "</font>" ) );
+
+    updateGeometry();
     repaint();
 }
 
