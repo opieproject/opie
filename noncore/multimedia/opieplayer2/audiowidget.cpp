@@ -80,17 +80,17 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     toggleButton.isToggle = true;
     toggleButton.isHeld = toggleButton.isDown = false;
 
-    audioButtons.reserve( 10 );
-    audioButtons.push_back( toggleButton ); // play
-    audioButtons.push_back( defaultButton ); // stop
-    audioButtons.push_back( defaultButton ); // next
-    audioButtons.push_back( defaultButton ); // previous
-    audioButtons.push_back( defaultButton ); // volume up
-    audioButtons.push_back( defaultButton ); // volume down
-    audioButtons.push_back( toggleButton ); // repeat/loop
-    audioButtons.push_back( defaultButton ); // playlist
-    audioButtons.push_back( defaultButton ); // forward
-    audioButtons.push_back( defaultButton ); // back
+    buttons.reserve( 10 );
+    buttons.push_back( toggleButton ); // play
+    buttons.push_back( defaultButton ); // stop
+    buttons.push_back( defaultButton ); // next
+    buttons.push_back( defaultButton ); // previous
+    buttons.push_back( defaultButton ); // volume up
+    buttons.push_back( defaultButton ); // volume down
+    buttons.push_back( toggleButton ); // repeat/loop
+    buttons.push_back( defaultButton ); // playlist
+    buttons.push_back( defaultButton ); // forward
+    buttons.push_back( defaultButton ); // back
 
     setCaption( tr("OpiePlayer") );
 
@@ -327,21 +327,21 @@ void AudioWidget::updateSlider( long i, long max ) {
 
 void AudioWidget::setToggleButton( int i, bool down ) {
     qDebug("setToggleButton %d", i);
-    if ( down != audioButtons[i].isDown ) {
+    if ( down != buttons[i].isDown ) {
         toggleButton( i );
     }
 }
 
 
 void AudioWidget::toggleButton( int i ) {
-    audioButtons[i].isDown = !audioButtons[i].isDown;
+    buttons[i].isDown = !buttons[i].isDown;
     QPainter p(this);
     paintButton ( &p, i );
 }
 
 
 void AudioWidget::paintButton( QPainter *p, int i ) {
-    if ( audioButtons[i].isDown ) {
+    if ( buttons[i].isDown ) {
         p->drawPixmap( xoff, yoff, *buttonPixDown[i] );
     } else {
         p->drawPixmap( xoff, yoff, *buttonPixUp[i] );
@@ -378,7 +378,7 @@ void AudioWidget::timerEvent( QTimerEvent * ) {
 
 
 void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
-    for ( unsigned int i = 0; i < audioButtons.size(); i++ ) {
+    for ( unsigned int i = 0; i < buttons.size(); i++ ) {
         if ( event->state() == QMouseEvent::LeftButton ) {
             // The test to see if the mouse click is inside the button or not
             int x = event->pos().x() - xoff;
@@ -388,8 +388,8 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                                 && y < imgButtonMask.height()
                                 && imgButtonMask.pixelIndex( x, y ) == i + 1 );
 
-            if ( isOnButton && !audioButtons[i].isHeld ) {
-                audioButtons[i].isHeld = TRUE;
+            if ( isOnButton && !buttons[i].isHeld ) {
+                buttons[i].isHeld = TRUE;
                 toggleButton(i);
                 switch (i) {
                 case VolumeUp:
@@ -405,18 +405,18 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                     emit backClicked();
                     return;
                 }
-            } else if ( !isOnButton && audioButtons[i].isHeld ) {
-                audioButtons[i].isHeld = FALSE;
+            } else if ( !isOnButton && buttons[i].isHeld ) {
+                buttons[i].isHeld = FALSE;
                 toggleButton(i);
             }
         } else {
-            if ( audioButtons[i].isHeld ) {
-                audioButtons[i].isHeld = FALSE;
-                if ( !audioButtons[i].isToggle ) {
+            if ( buttons[i].isHeld ) {
+                buttons[i].isHeld = FALSE;
+                if ( !buttons[i].isToggle ) {
                     setToggleButton( i, FALSE );
                 }
                 qDebug("mouseEvent %d", i);
-                handleCommand( static_cast<Command>( i ), audioButtons[ i ].isDown );
+                handleCommand( static_cast<Command>( i ), buttons[ i ].isDown );
             }
         }
     }
@@ -446,13 +446,13 @@ void AudioWidget::paintEvent( QPaintEvent * pe ) {
         QPainter p( &pix );
         p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
         p.drawTiledPixmap( pe->rect(), pixBg, pe->rect().topLeft() );
-        for ( unsigned int i = 0; i < audioButtons.size(); i++ )
+        for ( unsigned int i = 0; i < buttons.size(); i++ )
             paintButton( &p, i );
         QPainter p2( this );
         p2.drawPixmap( pe->rect().topLeft(), pix );
     } else {
         QPainter p( this );
-        for ( unsigned int i = 0; i < audioButtons.size(); i++ )
+        for ( unsigned int i = 0; i < buttons.size(); i++ )
             paintButton( &p, i );
     }
 }

@@ -67,6 +67,8 @@ protected:
 
     MediaPlayerState &mediaPlayerState;
     PlayListWidget &playList;
+
+    ButtonVector buttons;
 };
 
 #endif // MEDIAWIDGET_H

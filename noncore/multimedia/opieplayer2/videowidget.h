@@ -120,8 +120,6 @@ private:
     int scaledWidth;
     int scaledHeight;
     XineVideoWidget* videoFrame;
-
-    ButtonVector videoButtons;
 };
 
 #endif // VIDEO_WIDGET_H
