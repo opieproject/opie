@@ -28,17 +28,19 @@
 #include "processinfo.h"
 #include "modulesinfo.h"
 #include "benchmarkinfo.h"
+#include "sysloginfo.h"
 #include "versioninfo.h"
 #include "sysinfo.h"
 
+/* OPIE */
 #include <opie2/otabwidget.h>
-
+using namespace Opie::Ui;
 #include <qpe/config.h>
 #include <qpe/resource.h>
 
+/* QT */
 #include <qlayout.h>
 
-using namespace Opie::Ui;
 SystemInfo::SystemInfo( QWidget *parent, const char *name, WFlags )
     : QWidget( parent, name, WStyle_ContextHelp )
 {
@@ -62,13 +64,12 @@ SystemInfo::SystemInfo( QWidget *parent, const char *name, WFlags )
     tab->addTab( new LoadInfo( tab ), "sysinfo/cputabicon", tr("CPU") );
     if ( advanced )
     {
-        tab->addTab( new ProcessInfo( tab ), "sysinfo/processtabicon", tr("Process") );
-        tab->addTab( new ModulesInfo( tab ), "sysinfo/moduletabicon", tr("Modules") );
+        tab->addTab( new ProcessInfo( tab ), "sysinfo/processtabicon", tr( "Process" ) );
+        tab->addTab( new ModulesInfo( tab ), "sysinfo/moduletabicon", tr( "Modules" ) );
     }
+    tab->addTab( new SyslogInfo( tab ), "sysinfo/syslogtabicon", tr( "Syslog" ) );
     tab->addTab( new BenchmarkInfo( tab ), "sysinfo/benchmarktabicon", tr( "Benchmark" ) );
     tab->addTab( new VersionInfo( tab ), "sysinfo/versiontabicon", tr("Version") );
 
     tab->setCurrentTab( tr( "Memory" ) );
 }
-
-

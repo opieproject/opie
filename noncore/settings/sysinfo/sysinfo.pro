@@ -9,6 +9,7 @@ HEADERS   = \
       detail.h \
       contrib/dhry.h \
       benchmarkinfo.h \
+      sysloginfo.h \
       versioninfo.h \
       sysinfo.h
 SOURCES   = main.cpp \
@@ -21,6 +22,7 @@ SOURCES   = main.cpp \
       detail.cpp \
       contrib/dhry.c contrib/fft.c \
       benchmarkinfo.cpp \
+      sysloginfo.cpp \
       versioninfo.cpp \
       sysinfo.cpp
 
@@ -29,6 +31,6 @@ DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lqpe -lopiecore2 -lopieui2
 DEFINES     += UNIX
 TARGET    = sysinfo
-VERSION   = 1.1.1
+VERSION   = 1.2.0
 
 include ( $(OPIEDIR)/include.pro )
