@@ -19,6 +19,7 @@ void IOModem::close() {
 	Dialer d(m_profile, rawIO());
 	d.setHangupOnly();
 	d.exec();
+	closeRawIO();
 
     IOSerial::close();
 }
@@ -30,6 +31,7 @@ bool IOModem::open() {
 	Dialer d(m_profile, rawIO());
 
 	int result = d.exec();
+	closeRawIO();
 	if(result == QDialog::Accepted)
 	{
 		return true;
