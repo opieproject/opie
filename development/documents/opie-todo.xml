@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE features SYSTEM "kde-features.dtd">
+<!DOCTYPE features SYSTEM "opie.dtd">
 
 <!--
 
@@ -30,7 +30,6 @@ Cornelius Schumacher <schumacher@kde.org>.
 -->
 
 <features>
-<!--
 <category name="Documentation">
       <feature status="todo" target="1.0">
 		  <summary>Fix this file</summary>
@@ -41,6 +40,4 @@ Cornelius Schumacher <schumacher@kde.org>.
         <responsible name="Carsten Niehaus" email="cniehaus@handhelds.org" />
       </feature>
   </category>
--->
-
 </features>
