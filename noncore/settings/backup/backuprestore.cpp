@@ -75,16 +75,28 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags f
         backupLocations.insert("SD", "/mnt/card");
     }
 
+    Config config("BackupAndRestore");
+    //read last locations
+    config.setGroup("LastLocation");
+    QString lastStoreLocation   = config.readEntry( "LastStoreLocation", "" );
+    QString lastRestoreLocation = config.readEntry( "LastRestoreLocation", "" );
+    int locationIndex    = 0;
+
     QMap<QString, QString>::Iterator it;
     for( it = backupLocations.begin(); it != backupLocations.end(); ++it )
     {
         storeToLocation->insertItem(it.key());
         restoreSource->insertItem(it.key());
+
+        //check for last locations
+        if ( it.key() == lastStoreLocation )
+            storeToLocation->setCurrentItem( locationIndex );
+        if ( it.key() == lastRestoreLocation )
+            restoreSource->setCurrentItem( locationIndex );
+        locationIndex++;
     }
 
     // Read the list of items to ignore.
-    Config config("BackupAndRestore");
-
     QList<QString> dontBackupList;
     dontBackupList.setAutoDelete(true);
     config.setGroup("DontBackup");
@@ -279,6 +291,12 @@ void BackupAndRestore::backup()
         QMessageBox::information(this, tr( "Message" ), tr( "Backup Successfull." ), QString(tr( "Ok" ) ) );
 
     }
+
+    //write store-location
+    Config config( "BackupAndRestore" );
+    config.setGroup( "LastLocation" );
+    config.writeEntry( "LastStoreLocation", storeToLocation->currentText() );
+
     setCaption(tr("Backup and Restore"));
 }
 
@@ -438,9 +456,14 @@ void BackupAndRestore::restore()
     }
     else
     {
-        QMessageBox::critical(this, tr( "Message" ),
-                              tr( "Restore Successfull." ), QString( tr( "Ok") ) );
+        QMessageBox::information(this, tr( "Message" ), tr( "Restore Successfull." ), QString( tr( "Ok") ) );
     }
+
+    //write restore-location
+    Config config( "BackupAndRestore" );
+    config.setGroup( "LastLocation" );
+    config.writeEntry( "LastRestoreLocation", restoreSource->currentText() );
+
     setCaption(tr("Backup and Restore"));
 }
 
