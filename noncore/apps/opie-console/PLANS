@@ -31,8 +31,9 @@ Session->Profile - hash
 Scripting - wazlaf 
 
 OPEN tasks:
-Irda  ConfigWidget
+Irda  ConfigWidget - Harlekin
 BT ConfigWidget
 Keys - open
 IRDA-Layer - open
 Bluetooth-Layer - open
+Fullscreen mode ( maybe spy at vnc viewer )
