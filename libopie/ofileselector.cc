@@ -66,7 +66,6 @@ namespace {
   int indexByString( const QComboBox *box, const QString &str ){
     int index= -1;
     for(int i= 0; i < box->count(); i++ ){
-      qWarning("str T%sT  boxT%sT", str.latin1(), box->text(i).latin1() );
       if( str == box->text(i ) ){
     index= i;
     break;
@@ -86,17 +85,19 @@ OFileSelector::OFileSelector(QWidget *wid, int mode, int selector, const QString
   m_selector = selector;
   m_currentDir = dirName;
   m_name = fileName;
-  requestedMimeTypesList = m_mimetypes = mimetypes;
+  m_mimetypes = mimetypes;
   
-//   if( mimetypes.isEmpty() )
-//     m_autoMime = true;
+  if( mimetypes.isEmpty() )
+    m_autoMime = true;
 
+  qWarning("OFileSelector mimetypes %s", mimetypes.join(" ").latin1() );
   m_mode = mode;
   m_shTool = true;
   m_shPerm = true;
   m_shLne = true;
   m_shChooser = true;
   m_shYesNo = true;
+
   // for FILESELECTOR only view is interesting
   m_location = 0;
   m_homeButton = 0;
@@ -189,17 +190,21 @@ void OFileSelector::init()
 {
 //    qDebug("init");
   m_stack = new QWidgetStack(this, "wstack" );
+  if( m_selector == NORMAL ){
     QString currMime;
     if( m_mimeCheck != 0 )
       currMime = m_mimeCheck->currentText();
     updateMimes();
-    m_select = new FileSelector( currMime == "All" ? QString::null : currMime , m_stack, "fileselector", FALSE, FALSE );
+    m_select = new FileSelector( currMime == "All" ? QString::null : currMime ,
+				 m_stack, "fileselector", FALSE, FALSE );
     m_stack->addWidget(m_select, NORMAL );
     m_lay->addWidget(m_stack );
     m_stack->raiseWidget(NORMAL );
-    connect(m_select, SIGNAL(fileSelected( const DocLnk &) ), this, SLOT(slotFileBridgeSelected(const DocLnk &) ) );
+    connect(m_select, SIGNAL(fileSelected( const DocLnk &) ), 
+	    this, SLOT(slotFileBridgeSelected(const DocLnk &) ) );
     m_pseudoLayout = 0l;
-    if( m_selector != NORMAL ) {
+
+  } else {
     initializeListView();
   }
   if(m_shLne ){ 
@@ -215,8 +220,8 @@ void OFileSelector::init()
   if(m_shYesNo )
     initializeYes();
 
-  m_mimeCheck->setCurrentItem(indexByString( m_mimeCheck, requestedMimeTypesList.first()) );
-    reparse();
+  // m_mimeCheck->setCurrentItem(indexByString( m_mimeCheck, requestedMimeTypesList.first()) );
+  //  reparse();
   
 }
 
@@ -443,7 +448,10 @@ void OFileSelector::reparse()
     m_mimeCheck->insertStringList(m_mimetypes );
     // set it to the current mimetype
     m_mimeCheck->setCurrentItem( indexByString( m_mimeCheck, currMime ) ); 
-  };
+  }else{
+    m_mimeCheck->clear();
+    m_mimeCheck->insertItem( m_mimetypes.join(";")  );
+  }
   
   QDir dir( m_currentDir );
   //dir.setFilter(-1 );
@@ -578,12 +586,12 @@ void OFileSelector::initializeChooser()
   m_viewCheck->insertItem(tr("Files") );
   m_viewCheck->insertItem(tr("All Files") );
 
-//   if(!m_autoMime )
-//     m_mimeCheck->insertItem(m_mimetypes.join("," ) );
-//   else{ // check
-    updateMimes();
-   m_mimeCheck->insertStringList( m_mimetypes );
-//   }
+   if(!m_autoMime )
+     m_mimeCheck->insertItem(m_mimetypes.join("," ) );
+   else{ // check
+     updateMimes();
+     m_mimeCheck->insertStringList( m_mimetypes );
+   }
 
   connect( m_viewCheck, SIGNAL(activated(const QString &) ),
      this, SLOT(slotViewCheck(const QString & ) ) );
@@ -669,20 +677,22 @@ void OFileSelector::slotViewCheck(const QString &view ){
 void OFileSelector::updateMimes() // lets check which mode is active
   // check the current dir for items then
 {
-  m_mimetypes.clear();
-  m_mimetypes.append("All" );
-//  if( m_selector == NORMAL ){
-    DocLnkSet set;
-    Global::findDocuments(&set, QString::null );
-    QListIterator<DocLnk> dit( set.children() );
-    for ( ; dit.current(); ++dit ) {
-      if( !m_mimetypes.contains((*dit)->type()  ) )
-      m_mimetypes.append( (*dit)->type() );
-    }
-//  }else{
-    // should be allreday updatet
-      //  ;
-      // }
+ if( m_autoMime ){  
+   m_mimetypes.clear();
+   m_mimetypes.append("All" );
+   if( m_selector == NORMAL ){
+     DocLnkSet set;
+     Global::findDocuments(&set, QString::null );
+     QListIterator<DocLnk> dit( set.children() );
+     for ( ; dit.current(); ++dit ) {
+       if( !m_mimetypes.contains((*dit)->type()  ) )
+	 m_mimetypes.append( (*dit)->type() );
+     }
+   }else{
+     // should be allreday updatet
+     ;
+   }
+ }
 }
 
 void OFileSelector::initializeListView()
@@ -692,16 +702,15 @@ void OFileSelector::initializeListView()
       // that aren't even existing yet.
     
   // just to make sure but clean it up better FIXME
-  //      if( m_View) delete m_View;
-//   m_View = 0;
-//    if(m_boxToolbar) delete m_boxToolbar;
-//    if(m_homeButton) delete m_homeButton;
-//    if(m_docButton) delete m_docButton;
-//    if( m_location) delete m_location;
-//    if(m_up) delete m_up;
-  //delete m_pseudo;
-  //if(m_pseudoLayout!=0 ) // why did you overload malloc
-    //delete m_pseudoLayout;
+  delete m_View;
+  m_View = 0;
+  delete m_boxToolbar;
+  delete m_homeButton;
+  delete m_docButton;
+  delete m_location;
+  delete m_up;
+  delete m_pseudo;
+
   m_boxToolbar = 0;
   m_homeButton = 0;
   m_docButton = 0;
