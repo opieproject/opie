@@ -2089,11 +2089,11 @@ void Sheet::getSelection(int *row1, int *col1, int *row2, int *col2)
   int selectionNo=currentSelection();
   if (selectionNo>=0)
   {
-    QTableSelection selection(selection(selectionNo));
-    *row1=selection.topRow();
-    *row2=selection.bottomRow();
-    *col1=selection.leftCol();
-    *col2=selection.rightCol();
+    QTableSelection select(selection(selectionNo));
+    *row1=select.topRow();
+    *row2=select.bottomRow();
+    *col1=select.leftCol();
+    *col2=select.rightCol();
   }
   else
   {
