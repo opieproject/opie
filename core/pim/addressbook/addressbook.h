@@ -59,7 +59,7 @@ public slots:
     void setDocument( const QString & );
 
 private slots:
-    void importvCard();   
+    void importvCard();
     void slotListNew();
     void slotListView();
     void slotListDelete();
@@ -94,7 +94,7 @@ private:
     AbTable *abList;
     QWidget *listContainer;
 
-    QAction *actionNew, *actionEdit, *actionTrash, *actionFind, *actionBeam, 
+    QAction *actionNew, *actionEdit, *actionTrash, *actionFind, *actionBeam,
   *actionPersonal, *actionMail;
 
     bool bAbEditFirstTime;

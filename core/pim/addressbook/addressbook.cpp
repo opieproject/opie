@@ -137,6 +137,20 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
     a->addTo( edit );
     a->addTo( listTools );
 
+
+    // make it possible to go directly to businesscard via qcop call
+#if defined(Q_WS_QWS)
+#if !defined(QT_NO_COP)
+    QCopChannel *addressChannel = new QCopChannel("QPE/Addressbook" , this );
+    connect (addressChannel, SIGNAL( received(const QCString &, const QByteArray &)),
+             this, SLOT ( appMessage(const QCString &, const QByteArray &) ) );
+#endif
+#endif
+
+
+
+
+
 #ifndef MAKE_FOR_SHARP_ROM
     a = new QAction( tr( "Find" ), Resource::loadPixmap( "mag" ),
                      QString::null, 0, this, 0 );
@@ -250,6 +264,8 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 
     //    qDebug("adressbook contrsuction: t=%d", t.elapsed() );
 }
+
+
 void AddressbookWindow::slotSetFont( int size ) {
 
   if (size > 2 || size < 0)
@@ -293,7 +309,7 @@ void AddressbookWindow::importvCard() {
         QString str = OFileDialog::getOpenFileName( 1,"/");//,"", "*", this );
         if(!str.isEmpty() )
             setDocument((const QString&) str );
-    
+
 }
 
 void AddressbookWindow::setDocument( const QString &filename )
