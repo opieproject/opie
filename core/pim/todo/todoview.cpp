@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 
+#include <opie2/odebug.h>
+
 #include "todoview.h"
 
 using namespace Todo;
@@ -31,7 +33,7 @@ OPimTodoAccess::List TodoView::sorted()const{
 }
 void TodoView::sort() {
     m_sort = todoWindow()->sorted(m_asc,m_sortOrder );
-    qWarning("m_sort.count() = %d", m_sort.count() );
+    Opie::Core::owarn << "m_sort.count() = " << m_sort.count() << oendl;
 }
 void TodoView::sort(int sort) {
     m_sort = todoWindow()->sorted(m_asc, m_sortOrder, sort );
@@ -40,7 +42,7 @@ void TodoView::setSortOrder( int order ) {
     m_sortOrder = order;
 }
 void TodoView::setAscending( bool b ) {
-    qWarning("setAscending %d", b );
+    Opie::Core::owarn << "setAscending " << b << oendl;
     m_asc = b;
 }
 void TodoView::update(int, const SmallTodo&  ) {

@@ -29,15 +29,16 @@
 #include <cmath>
 #include <cctype>
 
-#include <qcombobox.h>
-#include <qlineedit.h>
-#include <qtimer.h>
-#include <qpopupmenu.h>
+#include <opie2/odebug.h>
+#include <opie2/opimrecurrence.h>
 
 #include <qpe/config.h>
 #include <qpe/resource.h>
 
-#include <opie2/opimrecurrence.h>
+#include <qcombobox.h>
+#include <qlineedit.h>
+#include <qtimer.h>
+#include <qpopupmenu.h>
 
 #include "mainwindow.h"
 //#include "tableitems.h"
@@ -194,7 +195,7 @@ void TableView::showOverDue( bool ) {
 }
 
 void TableView::updateView( ) {
-    qWarning("update view");
+    Opie::Core::owarn << "update view" << oendl;
     m_row = false;
     static int id;
     id = startTimer(4000 );
@@ -208,7 +209,7 @@ void TableView::updateView( ) {
     it = sorted().begin();
     end = sorted().end();
 
-    qWarning("setTodos");
+    Opie::Core::owarn << "setTodos" << oendl;
     QTime time;
     time.start();
     m_enablePaint = false;
@@ -254,11 +255,11 @@ void TableView::removeEvent( int ) {
     updateView();
 }
 void TableView::setShowCompleted( bool b) {
-    qWarning("Show Completed %d" , b );
+    Opie::Core::owarn << "Show Completed " << b << oendl;
     updateView();
 }
 void TableView::setShowDeadline( bool b ) {
-    qWarning( "Show DeadLine %d" , b );
+    Opie::Core::owarn << "Show Deadline " << b << oendl;
     if ( b )
         showColumn( 3 );
     else
@@ -281,7 +282,7 @@ void TableView::setShowDeadline( bool b ) {
     setColumnWidth( 2, col2width );
 }
 void TableView::setShowCategory( const QString& str) {
-    qWarning("setShowCategory");
+    Opie::Core::owarn << "setShowCategory" << oendl;
     if ( str != m_oleCat || m_first )
         updateView();
 
@@ -346,14 +347,15 @@ void TableView::slotClicked(int row, int col, int,
 void TableView::slotPressed(int row, int col, int,
                             const QPoint& point) {
 
-    qWarning("pressed row %d  col %d   x:%d+y:%d", row,col,point.x(),point.y() );
+    Opie::Core::owarn << "pressed row " << row << "  col " << col << "   x:" << point.x()
+                      << "+y:" << point.y() << oendl;
     m_prevP = point;
     /* TextColumn column */
     if ( col == 2 && cellGeometry( row, col ).contains( point ) )
         m_menuTimer->start( 750, TRUE );
 }
 void TableView::slotValueChanged( int, int ) {
-    qWarning("Value Changed");
+    Opie::Core::owarn << "Value Changed" << oendl;
 }
 void TableView::slotCurrentChanged(int, int ) {
     m_menuTimer->stop();
@@ -369,7 +371,7 @@ QWidget* TableView::widget() {
  * to a sort() and update()
  */
 void TableView::sortColumn( int col, bool asc, bool ) {
-    qWarning("bool %d", asc );
+    Opie::Core::owarn << "bool " << asc << oendl;
     setSortOrder( col );
     setAscending( asc );
     updateView();
@@ -492,7 +494,7 @@ QWidget* TableView::createEditor(int row, int col, bool )const {
     }
 }
 void TableView::setCellContentFromEditor(int row, int col ) {
-    qWarning("set cell content from editor");
+    Opie::Core::owarn << "set cell content from editor" << oendl;
     if ( col == 1 ) {
         QWidget* wid = cellWidget(row, 1 );
         if ( wid->inherits("QComboBox") ) {
@@ -528,7 +530,7 @@ void TableView::slotPriority() {
  *
  */
 void TableView::timerEvent( QTimerEvent*  ) {
-//    qWarning("sorted %d", sorted().count() );
+//    Opie::Core::owarn << "sorted " << sorted().count() << oendl;
     if (sorted().count() == 0 )
         return;
 
@@ -576,7 +578,7 @@ void TableView::contentsMouseReleaseEvent( QMouseEvent* e) {
     int row = rowAt(m_prevP.y());
     int colOld = columnAt(m_prevP.x() );
     int colNew = columnAt(e->x() );
-    qWarning("colNew: %d colOld: %d", colNew, colOld );
+    Opie::Core::owarn << "colNew: "  << colNew << " colOld: " << colOld << oendl;
     if ( row == rowAt( e->y() ) && row != -1 &&
          colOld != colNew ) {
         TodoView::complete( sorted()[row] );

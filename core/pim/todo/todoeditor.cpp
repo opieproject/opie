@@ -1,3 +1,4 @@
+#include <opie2/odebug.h>
 
 #include <qpe/qpeapplication.h>
 
@@ -30,8 +31,8 @@ OPimTodo Editor::newTodo( int cur,
         m_accepted = false;
 
     OPimTodo ev = e->todo();
-    qWarning("Todo uid");
-    qWarning("Todo %s %d %d", ev.summary().latin1(), ev.progress(), ev.isCompleted() );
+    Opie::Core::owarn << "Todo uid" << oendl;
+    Opie::Core::owarn << "Todo " << ev.summary() << " " << ev.progress() << " " << ev.isCompleted() << oendl;
     ev.setUid(1);
 
     return ev;

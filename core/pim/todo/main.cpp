@@ -20,7 +20,7 @@
 
 #include "mainwindow.h"
 
-
+#include <opie2/odebug.h>
 
 #include <qpe/qpeapplication.h>
 
@@ -37,7 +37,7 @@ int main( int argc, char **argv )
     time.start();
     Todo::MainWindow mw;
     int t = time.elapsed();
-    qWarning("QTime %d", t/1000 );
+    Opie::Core::owarn << "QTime " << t/1000 << oendl;
     mw.setCaption( QObject::tr("Opie Todolist"));
     QObject::connect( &a, SIGNAL( flush() ), &mw, SLOT( slotFlush() ) );
     QObject::connect( &a, SIGNAL( reload() ), &mw, SLOT( slotReload() ) );

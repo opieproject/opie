@@ -1,3 +1,5 @@
+#include <opie2/odebug.h>
+
 #include <qpushbutton.h>
 #include <qhbox.h>
 #include <qlayout.h>
@@ -49,14 +51,14 @@ QLineEdit* TemplateDialog::edit() {
     return m_lne;
 }
 void TemplateDialog::slotAdd() {
-    qWarning("Not Implemented here");
+    Opie::Core::owarn << "Not Implemented here" << oendl;
 }
 void TemplateDialog::slotRemove() {
-    qWarning("Not Implemented here");
+    Opie::Core::owarn << "Not Implemented here" << oendl;
 }
 void TemplateDialog::slotEdit() {
-    qWarning("Not Implemented here");
+    Opie::Core::owarn << "Not Implemented here" << oendl;
 }
 void TemplateDialog::slotReturn() {
-    qWarning("Not Implemented here");
+    Opie::Core::owarn << "Not Implemented here" << oendl;
 }

@@ -25,6 +25,9 @@
                              Boston, MA 02111-1307, USA.
 
 */
+
+#include <opie2/odebug.h>
+
 #include <qpe/categoryselect.h>
 
 #include "todomanager.h"
@@ -37,7 +40,7 @@ TodoManager::TodoManager( QObject *obj )
     QTime time;
     time.start();
     int el = time.elapsed();
-    qWarning("QTimer for loading %d", el/1000 );
+    Opie::Core::owarn << "QTimer for loading " << el/1000 << oendl;
 }
 TodoManager::~TodoManager() {
     delete m_db;
@@ -46,7 +49,7 @@ OPimTodo TodoManager::event(int uid ) {
     return m_db->find( uid );
 }
 void TodoManager::updateList() {
-    qWarning("update list");
+    Opie::Core::owarn << "update lists" << oendl;
     m_list = m_db->allRecords();
 }
 OPimTodoAccess::List TodoManager::list() const{

@@ -1,5 +1,7 @@
 #include <qlayout.h>
 
+#include <opie2/odebug.h>
+
 #include "taskeditoroverview.h"
 #include "taskeditorstatus.h"
 #include "taskeditoralarms.h"
@@ -33,7 +35,7 @@ void OTaskEditor::init( const OPimTodo& to ) {
     load( to );
 }
 OPimTodo OTaskEditor::todo()const{
-    qWarning("saving!");
+    Opie::Core::owarn << "saving!" << oendl;
     OPimTodo to ( m_todo );
     m_overView->save( to );
     m_stat->save( to );
