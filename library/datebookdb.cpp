@@ -587,20 +587,6 @@ QValueList<EffectiveEvent> DateBookDB::getEffectiveEvents( const QDateTime &dt)
     return tmpList;
 }
 
-Event DateBookDB::getEvent( int uid ) {
-    QValueList<Event>::ConstIterator it;
-    
-    for (it = eventList.begin(); it != eventList.end(); it++) {
-	if ((*it).uid() == uid) return *it;
-    }
-    for (it = repeatEvents.begin(); it != repeatEvents.end(); it++) {
-	if ((*it).uid() == uid) return *it;
-    }
-
-    qDebug("Event not found: uid=%d\n", uid);
-}
-
-
 void DateBookDB::addEvent( const Event &ev, bool doalarm )
 {
     // write to the journal...

@@ -44,7 +44,6 @@ public:
     QValueList<EffectiveEvent> getEffectiveEvents( const QDate &from,
 						   const QDate &to );
     QValueList<EffectiveEvent> getEffectiveEvents( const QDateTime &start );
-    Event getEvent( int uid );
 
     QValueList<Event> getRawRepeats() const;
     QValueList<Event> getNonRepeatingEvents( const QDate &from,

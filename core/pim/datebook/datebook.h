@@ -34,6 +34,11 @@ class Event;
 class QDate;
 class Ir;
 
+class DateBookDBHack : public DateBookDB {
+ public:
+  Event eventByUID(int id);
+};
+
 class DateBook : public QMainWindow
 {
     Q_OBJECT
@@ -99,7 +104,7 @@ private:
     void saveSettings();
 
 private:
-    DateBookDB *db;
+    DateBookDBHack *db;
     QWidgetStack *views;
     DateBookDay *dayView;
     DateBookWeek *weekView;

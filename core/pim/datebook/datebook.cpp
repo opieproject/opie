@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.6 2002-03-29 16:33:34 hakan Exp $
+** $Id: datebook.cpp,v 1.7 2002-03-31 12:56:14 hakan Exp $
 **
 **********************************************************************/
 
@@ -84,7 +84,7 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 {
     QTime t;
     t.start();
-    db = new DateBookDB;
+    db = new DateBookDBHack;
     qDebug("loading db t=%d", t.elapsed() );
     loadSettings();
     setCaption( tr("Calendar") );
@@ -233,7 +233,7 @@ void DateBook::receive( const QCString &msg, const QByteArray &data )
     else if (msg == "editEvent(int)") {
 	int uid;
 	stream >> uid;
-	Event e=db->getEvent(uid);
+	Event e=db->eventByUID(uid);
 	editEvent(e);
     }
 }
@@ -965,3 +965,24 @@ void DateBook::slotDoFind( const QString& txt, const QDate &dt,
 	wrapAround = !wrapAround;
     }
 }
+
+Event DateBookDBHack::eventByUID(int uid) {
+
+    // FIXME: Dirty Hacks to get hold of the private event lists
+    QDate start;
+    QDate end=start.addDays(-1);
+    QValueList<Event> myEventList=getNonRepeatingEvents(start,end);
+    QValueList<Event> myRepeatEvents=getRawRepeats();
+
+    QValueList<Event>::ConstIterator it;
+    
+    for (it = myEventList.begin(); it != myEventList.end(); it++) {
+	if ((*it).uid() == uid) return *it;
+    }
+    for (it = myRepeatEvents.begin(); it != myRepeatEvents.end(); it++) {
+	if ((*it).uid() == uid) return *it;
+    }
+
+    qDebug("Event not found: uid=%d\n", uid);
+}
+
