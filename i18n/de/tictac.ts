@@ -19,23 +19,23 @@
     </message>
     <message>
         <source>Click Play to start</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf &apos;Los!&apos; klicken, um zu starten</translation>
     </message>
     <message>
         <source>Make your move</source>
-        <translation type="unfinished"></translation>
+        <translation>Ziehen Sie</translation>
     </message>
     <message>
         <source>You won!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie haben gewonnen!</translation>
     </message>
     <message>
         <source>Computer won!</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Computer hat gewonnen!</translation>
     </message>
     <message>
         <source>It&apos;s a draw</source>
-        <translation type="unfinished"></translation>
+        <translation>Unentschieden</translation>
     </message>
 </context>
 </TS>
