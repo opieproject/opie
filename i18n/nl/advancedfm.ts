@@ -259,7 +259,7 @@ Wilt u het echt verwijderen?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="obsolete">AdvancedFM ::</translation>
+        <translation type="unfinished">AdvancedFM ::</translation>
     </message>
     <message>
         <source> kB free</source>

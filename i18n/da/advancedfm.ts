@@ -271,7 +271,7 @@ og alt hvad der er i den?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="obsolete">Filstyring :: </translation>
+        <translation type="unfinished">Filstyring :: </translation>
     </message>
     <message>
         <source> kB free</source>

@@ -272,7 +272,7 @@ de %1?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="obsolete">Gestor de Ficheros Avanzado :: </translation>
+        <translation type="unfinished">Gestor de Ficheros Avanzado :: </translation>
     </message>
     <message>
         <source> kB free</source>

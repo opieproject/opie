@@ -267,6 +267,10 @@ Do you really want to delete it?</source>
         <source>Could not rename</source>
         <translation>Неможе да се преименува</translation>
     </message>
+    <message>
+        <source>AdvancedFm :: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>

@@ -270,6 +270,10 @@ e tutto il suo contenuto ?</translation>
         <translation>Vuoi veramente eliminare
 %1?</translation>
     </message>
+    <message>
+        <source>AdvancedFm :: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>

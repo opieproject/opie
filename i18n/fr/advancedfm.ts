@@ -285,6 +285,10 @@ et tout son contenu ?</translation>
         <translation>Confirmer suppression de
 %1 ?</translation>
     </message>
+    <message>
+        <source>AdvancedFm :: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>

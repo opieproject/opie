@@ -264,6 +264,10 @@ wraz z zawartoscia?</translation>
         <translation>Czy na pewno usunac
 %1?</translation>
     </message>
+    <message>
+        <source>AdvancedFm :: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>

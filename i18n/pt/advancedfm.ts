@@ -264,7 +264,7 @@ e os seus conteúdos?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="obsolete">Gestor de Ficheiros ::</translation>
+        <translation type="unfinished">Gestor de Ficheiros ::</translation>
     </message>
     <message>
         <source> kB free</source>
