@@ -40,14 +40,14 @@ StocktickerPluginConfig::StocktickerPluginConfig( QWidget *parent,  const char* 
     : TodayConfigWidget(parent,  name ) {
 
     QGridLayout *layout = new QGridLayout( this );
-    layout->setSpacing(6);
+    layout->setSpacing(2);
     layout->setMargin( 2);
 
     LineEdit1 = new QLineEdit( this, "LineEdit1" );
     LineEdit1->setFocus();
 //     QWhatsThis::add( LineEdit1, tr("Enter the stock symbols you want to be shown here."));
     
-    layout->addMultiCellWidget(  LineEdit1, 0, 0, 0, 3);
+    layout->addMultiCellWidget(  LineEdit1, 0, 0, 0, 4);
     
     Config cfg( "stockticker");
     cfg.setGroup( "Symbols" );
@@ -59,65 +59,64 @@ StocktickerPluginConfig::StocktickerPluginConfig( QWidget *parent,  const char* 
     label = new QLabel(this);
     label->setText( tr("Enter stock symbols seperated\nby a space."));
     label->setMaximumHeight(60);
-    layout->addMultiCellWidget( label, 1, 1, 0, 3);
+    layout->addMultiCellWidget( label, 1, 1, 0, 4);
 
     cfg.setGroup( "Fields" );
 
     timeCheck= new QCheckBox ( "Time",this );
     timeCheck->setChecked( cfg.readBoolEntry("timeCheck",1));
     layout->addMultiCellWidget(timeCheck, 2, 2, 0, 0 );
-//     QWhatsThis::add( timeCheck, tr("Toggles Time Field"));
+    QWhatsThis::add( timeCheck, tr("Toggles Time of current price field"));
     
     dateCheck= new QCheckBox ( "Date", this );
     dateCheck->setChecked( cfg.readBoolEntry("dateCheck",1));
     layout->addMultiCellWidget( dateCheck, 2, 2, 1, 1 );
-//     QWhatsThis::add(dateCheck, tr("Toggles date field"));
+    QWhatsThis::add(dateCheck, tr("Toggles date field"));
     
     symbolCheck= new QCheckBox ( "Symbol", this );
     symbolCheck->setChecked( cfg.readBoolEntry("symbolCheck",1));
-    layout->addMultiCellWidget( symbolCheck, 3, 3, 0, 0 );
-//    QWhatsThis::add(symbolCheck, tr("Toggles Symbol field"));
+    layout->addMultiCellWidget( symbolCheck, 2, 2, 2, 2 );
+    QWhatsThis::add(symbolCheck, tr("Toggles Symbol field"));
 
     nameCheck= new QCheckBox ( "Name", this );
     nameCheck->setChecked( cfg.readBoolEntry("nameCheck",1));
-    layout->addMultiCellWidget( nameCheck, 3, 3, 1, 1 );
-//    QWhatsThis::add(nameCheck, tr("Toggles Name field"));
+    layout->addMultiCellWidget( nameCheck, 3, 3, 0, 0 );
+    QWhatsThis::add(nameCheck, tr("Toggles Name of symbols owner field"));
 
-    currentPriceCheck= new QCheckBox ( "Current Price", this );
+    currentPriceCheck= new QCheckBox ( "Price", this );
     currentPriceCheck->setChecked( cfg.readBoolEntry("currentPriceCheck",1));
-    layout->addMultiCellWidget( currentPriceCheck, 4, 4, 0, 0 );
-//    QWhatsThis::add(currentPriceCheck, tr("Toggles current Price field"));
-  
+    layout->addMultiCellWidget( currentPriceCheck, 3, 3, 1, 1 );
+    QWhatsThis::add(currentPriceCheck, tr("Toggles current Price field"));
 
     lastPriceCheck= new QCheckBox ( "Last Price", this );
     lastPriceCheck->setChecked( cfg.readBoolEntry("lastPriceCheck",1));
-    layout->addMultiCellWidget(lastPriceCheck, 4, 4, 1, 1);
-//     QWhatsThis::add(lastPriceCheck, tr("Toggles last price field"));
+    layout->addMultiCellWidget(lastPriceCheck, 3, 3, 2, 2);
+    QWhatsThis::add(lastPriceCheck, tr("Toggles last price field"));
 
     openPriceCheck= new QCheckBox ( "Open Price", this);
     openPriceCheck->setChecked( cfg.readBoolEntry("openPriceCheck",1));
-    layout->addMultiCellWidget( openPriceCheck, 5, 5, 0, 0 );
-//     QWhatsThis::add(openPriceCheck, tr("Toggles opening price field"));
+    layout->addMultiCellWidget( openPriceCheck, 4, 4, 0, 0 );
+    QWhatsThis::add(openPriceCheck, tr("Toggles opening price field"));
 
     minPriceCheck= new QCheckBox ( "Min Price", this );
     minPriceCheck->setChecked( cfg.readBoolEntry("minPriceCheck",1));
-    layout->addMultiCellWidget( minPriceCheck, 5, 5, 1, 1);
-//     QWhatsThis::add(minPriceCheck, tr("Toggles minamum price field"));
+    layout->addMultiCellWidget( minPriceCheck, 4, 4, 1, 1);
+    QWhatsThis::add(minPriceCheck, tr("Toggles minimum daily price field"));
 
     maxPriceCheck= new QCheckBox ( "Max Price", this);
     maxPriceCheck->setChecked( cfg.readBoolEntry("maxPriceCheck",1));
-    layout->addMultiCellWidget( maxPriceCheck, 6, 6, 0, 0 );
-//    QWhatsThis::add(maxPriceCheck, tr("Toggles maximum price field"));
+    layout->addMultiCellWidget( maxPriceCheck, 4, 4, 2, 2 );
+    QWhatsThis::add(maxPriceCheck, tr("Toggles maximum daily price field"));
 
     variationCheck= new QCheckBox ( "Variation", this );
     variationCheck->setChecked( cfg.readBoolEntry("variationCheck",1));
-    layout->addMultiCellWidget( variationCheck, 6, 6, 1, 1 );
-//    QWhatsThis::add(variationCheck, tr("Toggles daily variation field"));
+    layout->addMultiCellWidget( variationCheck, 5, 5, 0, 0 );
+    QWhatsThis::add(variationCheck, tr("Toggles daily variation of price field"));
 
     volumeCheck= new QCheckBox ( "Volume", this );
     volumeCheck->setChecked( cfg.readBoolEntry("volumeCheck",1));
-    layout->addMultiCellWidget( volumeCheck , 7, 7, 0, 0);
-//    QWhatsThis::add(volumeCheck, tr("Toggles volume field"));
+    layout->addMultiCellWidget( volumeCheck , 5, 5, 1, 1);
+    QWhatsThis::add(volumeCheck, tr("Toggles volume of trading field"));
 
     timerDelaySpin =  new QSpinBox( this, "timer spin" );
     QWhatsThis::add( timerDelaySpin , tr( "How often stocks prices should be looked up. In minutes" ) );
@@ -125,21 +124,21 @@ StocktickerPluginConfig::StocktickerPluginConfig( QWidget *parent,  const char* 
 
     cfg.setGroup("Timer");
     timerDelaySpin->setValue( cfg.readNumEntry("Delay",0));
-    layout->addMultiCellWidget( timerDelaySpin , 8, 8, 0, 0);
+    layout->addMultiCellWidget( timerDelaySpin , 6, 6, 0, 0);
     
     QLabel *label2;
     label2 = new QLabel(this);
-    label2->setText( tr("Minutes between stock\nprice lookups."));
+    label2->setText( tr("Minutes between lookups."));
     label2->setMaximumHeight(60);
-    layout->addMultiCellWidget( label2, 8, 8, 1, 1);
+    layout->addMultiCellWidget( label2, 6, 6, 1, 2);
 
-//     lookupButton = new QPushButton(this, "LookupButton");
-//     lookupButton->setText(tr("Symbol Lookup"));
-//     connect(lookupButton,SIGNAL(clicked()),SLOT( doLookup()));
-//     layout->addMultiCellWidget( lookupButton , 9, 9, 0, 0);
+//      lookupButton = new QPushButton(this, "LookupButton");
+//      lookupButton->setText(tr("Symbol Lookup"));
+//      connect(lookupButton,SIGNAL(clicked()),SLOT( doLookup()));
+//      layout->addMultiCellWidget( lookupButton , 9, 9, 0, 0);
     
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
-    layout->addItem( spacer, 10, 0 );
+    layout->addItem( spacer, 8, 0 );
 
 }
 

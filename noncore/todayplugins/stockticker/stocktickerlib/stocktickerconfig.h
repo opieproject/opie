@@ -28,7 +28,7 @@ class QCheckBox;
 class QSpinBox;
 
 class StocktickerPluginConfig : public TodayConfigWidget {
-
+//Q_OBJECT
 public:
     StocktickerPluginConfig( QWidget *parent,  const char *name );
     ~StocktickerPluginConfig();
