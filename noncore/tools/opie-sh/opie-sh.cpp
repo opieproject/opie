@@ -126,6 +126,7 @@ void printusage()
 	printf("      -s                 A single line of input (output to console)\n");
 	printf("      -l                 List input (newline separated list read in from file)\n");
 	printf("      -b                 A list box, enabling multiple selections (input same as -l)\n");
+	printf("      -p                 Password input (display '*'s)\n");
 	printf("      -L [label]         The label for the input field\n");
 	printf("      -F [filename]      An input file (for when it makes sense) [Default = stdin]\n");
 	printf("      -E                 Makes list input editable\n");
@@ -185,6 +186,11 @@ int input(int wi, int h, QWidget *w, int argc, QStringList args)
 		if(args[i] == "-b")
 		{
 			type = 2;
+		}
+
+		if(args[i] == "-p")
+		{
+			type = 3;
 		}
 
 		if(args[i] == "-t")

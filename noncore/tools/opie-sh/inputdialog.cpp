@@ -79,6 +79,11 @@ InputDialog::InputDialog(int w, int h, int newtype, QString labelString, QString
 			listBox->insertStringList(QStringList::split('\n', string));
 		}
 		break;
+	case 3:
+		lineEdit = new QLineEdit(this, "line edit");
+		lineEdit->setEchoMode(QLineEdit::Password);
+		layout->addWidget(lineEdit);
+		break;
 	}
 	layout->addSpacing(5);
 
@@ -93,6 +98,7 @@ QString InputDialog::getString()
 	switch (type)
 	{
 	case 0:
+	case 3:
 		return ((QLineEdit *)child("line edit"))->text();
 		break;
 	case 1:
