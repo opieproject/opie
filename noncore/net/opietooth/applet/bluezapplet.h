@@ -54,7 +54,6 @@ public slots:
         int setBluezStatus(int);
         int checkBluezDiscoveryStatus();
         int setBluezDiscoveryStatus(int);
-        int sockfd;
 
     private:
         Device* btDevice;
@@ -62,7 +61,7 @@ public slots:
         QPixmap bluezOffPixmap;
         QPixmap bluezDiscoveryOnPixmap;
         bool bluezactive;
-        int bluezDiscoveryActive;
+        bool bluezDiscoveryActive;
 
 private slots:
 

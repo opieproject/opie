@@ -56,6 +56,8 @@ namespace OpieTooth {
         //    bluezDiscoveryOnPixmap = Resource::loadPixmap( "bluetoothapplet/magglass" );
         startTimer(5000);
         btDevice = 0;
+        bluezactive = false;
+        bluezDiscoveryActive = false;
 
     }
 
@@ -100,7 +102,7 @@ namespace OpieTooth {
         int ret=0;
 
         /* Refresh active state */
-        timerEvent(NULL);
+        timerEvent( 0 );
 
 
         if (bluezactive) {
@@ -128,30 +130,29 @@ namespace OpieTooth {
         switch(ret) {
         case 0:
             setBluezStatus(0);
-            timerEvent(NULL);
+            timerEvent( 0 );
             break;
         case 1:
             setBluezStatus(1);
-            timerEvent(NULL);
+            timerEvent( 0 );
             break;
         case 2:
             // start bluetoothmanager
             launchManager();
-            timerEvent(NULL);
+            timerEvent( 0 );
             break;
         case 3:
             setBluezDiscoveryStatus(0);
-            timerEvent(NULL);
+            timerEvent( 0 );
             break;
         case 4:
             setBluezDiscoveryStatus(1);
-            timerEvent(NULL);
+            timerEvent(0 );
             break;
             //case 7:
             // With table of currently-detected devices.
         }
 
-        timerEvent(NULL);
         delete signal;
         delete menu;
     }
@@ -177,7 +178,7 @@ namespace OpieTooth {
         bluezDiscoveryActive = checkBluezDiscoveryStatus();
 
         if ((bluezactive != oldactive) || (bluezDiscoveryActive != olddiscovery)) {
-            paintEvent(NULL);
+            update();
         }
     }
 
@@ -188,8 +189,6 @@ namespace OpieTooth {
     void BluezApplet::paintEvent( QPaintEvent* ) {
         QPainter p(this);
         qDebug("paint bluetooth pixmap");
-
-        p.eraseRect ( 0, 0, this->width(), this->height() );
 
         if (bluezactive > 0) {
             p.drawPixmap( 0, 1,  bluezOnPixmap );
