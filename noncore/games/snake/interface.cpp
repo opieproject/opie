@@ -33,7 +33,7 @@ SnakeGame::SnakeGame(QWidget* parent, const char* name, WFlags f) :
     canvas(232, 258)
 {
     setCaption( tr("Snake") );
-    QPixmap bg = Resource::loadPixmap("grass");
+    QPixmap bg = Resource::loadPixmap("snake/grass");
     canvas.setBackgroundPixmap(bg);
     canvas.setUpdatePeriod(100);
     snake = 0;
@@ -48,10 +48,10 @@ SnakeGame::SnakeGame(QWidget* parent, const char* name, WFlags f) :
     QPEToolBar* toolbar = new QPEToolBar( this);
     toolbar->setHorizontalStretchable( TRUE );
 
-    QPixmap newicon = Resource::loadPixmap("ksnake");
-    setIcon(newicon);
-    (void)new QToolButton(newicon, tr("New Game"), 0,
-                            this, SLOT(newGame()), toolbar, "New Game");
+    //QPixmap newicon = Resource::loadPixmap("ksnake/ksnake");
+//    setIcon(newicon);
+//     (void)new QToolButton(newicon, tr("New Game"), 0,
+//                             this, SLOT(newGame()), toolbar, "New Game");
 
     scorelabel = new QLabel(toolbar);
     showScore(0);

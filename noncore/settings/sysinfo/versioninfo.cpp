@@ -90,7 +90,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     QColor bgColor = colorGroup().background();
     QPainter painter( &logo2Pixmap );
     painter.fillRect( QRect( 0, 0, 60, 60 ), QBrush( bgColor ) );
-    QImage logo2 = Resource::loadImage( "tux-logo" );
+    QImage logo2 = Resource::loadImage( "sysinfo/tux-logo" );
     logo2 = logo2.smoothScale( 40, 47 );
     painter.drawImage( 0, 0, logo2 );
     painter.end();

@@ -123,6 +123,8 @@ fi
 mkdir -p include/qpe
 ( cd include/qpe &&  rm -f *.h; ln -s ../../library/*.h .; ln -s ../../library/backend/*.h .; rm -f *_p.h; )
 
+echo Creating symlinks...
+$OPIEDIR/mksymlinks
 echo Creating makefiles...
 
 sed -e 's/^\(VERSION.*= \).*/\1'$VERSION_MAJ.$VERSION_MIN.$VERSION_PAT/ <library/library.pro >library/library.pro-v

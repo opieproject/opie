@@ -165,7 +165,7 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
     a->addTo( toolBar );
     a->addTo( edit );
 
-    a = new QAction( tr( "Rotate 90"), Resource::loadPixmap( "rotate90" ), QString::null, 0, this, 0);
+    a = new QAction( tr( "Rotate 90"), Resource::loadPixmap( "showimg/rotate90" ), QString::null, 0, this, 0);
     connect( a, SIGNAL( activated() ), this, SLOT( rot90() ) );
     a->addTo( toolBar );
     a->addTo( edit );
