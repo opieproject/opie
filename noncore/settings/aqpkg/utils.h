@@ -33,6 +33,7 @@ public:
     static QString getFilenameFromIpkFilename( const QString &file );
     static QString getPackageNameFromIpkFilename( const QString &file );
     static QString getPackageVersionFromIpkFilename( const QString &file );
+    static bool getStorageSpace( const char *path, long *blockSize, long *totalBlocks, long *availBlocks );
 };
 
 #endif

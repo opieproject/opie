@@ -15,6 +15,10 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <stdio.h>
+#include <sys/vfs.h>
+//#include <mntent.h>
+ 
 #include "utils.h"
 #include "global.h"
 
@@ -54,7 +58,7 @@ QString Utils :: getPackageNameFromIpkFilename( const QString &file )
     int p = file.findRev( "/" );
     QString name = file;
     if ( p != -1 )
-    	name = name.mid( p + 1 );
+        name = name.mid( p + 1 );
     p = name.find( "_" );
     QString packageName = name.mid( 0, p );
     return packageName;
@@ -70,5 +74,23 @@ QString Utils :: getPackageVersionFromIpkFilename( const QString &file )
     int p2 = name.find( "_", p );
     QString version = name.mid( p, p2 - p );
     return version;
+}
+
+
+bool Utils :: getStorageSpace( const char *path, long *blockSize, long *totalBlocks, long *availBlocks )
+{
+    bool ret = false;
+
+//    qDebug( "Reading from path %s", path );
+    struct statfs fs;
+    if ( !statfs( path, &fs ) )
+    {
+        *blockSize = fs.f_bsize;
+        *totalBlocks = fs.f_blocks;
+        *availBlocks = fs.f_bavail;
+        ret = true;
+    }
+
+    return ret;
 }
 
