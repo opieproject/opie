@@ -1,6 +1,7 @@
 #include <qtextstream.h>
 #include <qstring.h>
 #include <qstringlist.h>
+#include <qregexp.h>
 
 #include "ircmessage.h"
 
@@ -67,9 +68,9 @@ IRCMessage::IRCMessage(QString line) {
         m_ctcp = FALSE;
     }
 
-   /* 
+    
        //-- Uncomment to debug --
-
+    /*
     printf("Parsed : '%s'\n", line.ascii());
     printf("Prefix : '%s'\n", m_prefix.ascii());
     printf("Command : '%s'\n", m_command.ascii());
@@ -80,8 +81,8 @@ IRCMessage::IRCMessage(QString line) {
     printf("CTCP Command : '%s'\n", m_ctcpCommand.latin1());
     printf("CTCP Destination : '%s'\n", m_ctcpDestination.latin1());
     printf("CTCP param  count is : '%i'\n", m_parameters.count()); 
-    
     */
+   
 }
 
 QString IRCMessage::param(int param) {
@@ -96,7 +97,7 @@ QStringList IRCMessage::params(const QString &paramstring) const {
     for (QStringList::Iterator it = params.begin(); it != end; ++it) {
         int pos = (*it).find(':');
         if(pos < 0) {    
-            if((*it).toInt() < m_parameters.count())
+            if(static_cast<unsigned int>((*it).toInt()) < m_parameters.count())
                 retvalue << m_parameters[(*it).toInt()];
         }
 
@@ -104,7 +105,7 @@ QStringList IRCMessage::params(const QString &paramstring) const {
             int start, end;
             start = (*it).left(pos).toInt();
             end = (*it).mid(pos+1).toInt();
-            for (int i=start;i<=end && i < m_parameters.count() ;++i) {
+            for (int i=start;i<=end && i < static_cast<int>(m_parameters.count()) ;++i) {
                 retvalue << m_parameters[i];
             }
         }      
