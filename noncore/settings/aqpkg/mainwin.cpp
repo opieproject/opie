@@ -17,6 +17,7 @@
 
 #include <qmenubar.h>
 #include <qpopupmenu.h>
+#include <qmessagebox.h>
 
 #include "mainwin.h"
 #include "datamgr.h"
@@ -81,5 +82,5 @@ void MainWindow :: displayHelp()
 
 void MainWindow :: displayAbout()
 {
-    
+    QMessageBox::about( this, "About AQPkg", VERSION_TEXT );
 }
