@@ -424,6 +424,7 @@ void TodoWindow::showCompleted( bool s )
     table->setPaintingEnabled( false );
     table->setShowCompleted( s );
     table->setPaintingEnabled( true );
+    mStack->raiseWidget( 1 );
 }
 
 void TodoWindow::currentEntryChanged( int r, int )
@@ -545,6 +546,7 @@ void TodoWindow::closeEvent( QCloseEvent *e )
 void TodoWindow::slotFind()
 {
     // put everything back to view all for searching...
+    mStack->raiseWidget( 1 );
     if ( !catMenu->isItemChecked( 0 ) )
 	setCategory( 0 );
 

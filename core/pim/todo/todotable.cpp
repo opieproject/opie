@@ -598,7 +598,8 @@ void TodoTable::loadFile( const QString &/*we use the standard*/ )
   ToDoDB todoDB;
   QValueList<ToDoEvent> vaList = todoDB.rawToDos();
   for(QValueList<ToDoEvent>::ConstIterator it = vaList.begin(); it != vaList.end(); ++it ){
-    list.append( new ToDoEvent( (*it) ) );
+    ToDoEvent *event = new ToDoEvent( (*it) );
+    list.append( event );
   }   
   vaList.clear();
   //     qDebug("parsing done=%d", t.elapsed() );
@@ -640,8 +641,8 @@ void TodoTable::journalFreeReplaceEntry( const ToDoEvent &todo, int row )
  	if (showDeadl){
 	  static_cast<DueTextItem*>(item(row,3))->setToDoEvent(&todo );
  	}
-
-	todoList.insert( static_cast<CheckItem*>(item(row,0)), new ToDoEvent(todo) );
+	ToDoEvent *ev = new ToDoEvent( todo );
+	todoList.insert( static_cast<CheckItem*>(item(row,0)), new ToDoEvent(ev) );
     }
 }
 
