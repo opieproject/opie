@@ -45,9 +45,6 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name)
   connect(restoreSource, SIGNAL(activated( int  )),
           this, SLOT(sourceDirChanged(int))); 
 
-  systemSettings = new QListViewItem(backupList, "System Settings", "",
-                                     "/etc");
-  selectItem(systemSettings);
   applicationSettings = new QListViewItem(backupList, "Application Settings", "",
                                           QDir::homeDirPath() + "/Settings/");
   selectItem(applicationSettings);
