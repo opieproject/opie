@@ -21,7 +21,7 @@ void IMAPwrapper::listMessages(const QString&mailbox,Maillist&target )
     int err = MAILIMAP_NO_ERROR;
     clist *result;
     clistcell *current;
-    mailimap_fetch_att *fetchAtt,*fetchAttFlags;
+    mailimap_fetch_att *fetchAtt,*fetchAttFlags,*fetchAttDate;
     mailimap_fetch_type *fetchType;
     mailimap_set *set;
     
@@ -81,14 +81,17 @@ void IMAPwrapper::listMessages(const QString&mailbox,Maillist&target )
     set = mailimap_set_new_interval( 1, last );
     fetchAtt = mailimap_fetch_att_new_envelope();
     fetchAttFlags = mailimap_fetch_att_new_flags();
+    fetchAttDate = mailimap_fetch_att_new_internaldate();
     
     //fetchType = mailimap_fetch_type_new_fetch_att(fetchAtt);
     fetchType = mailimap_fetch_type_new_fetch_att_list_empty();
     mailimap_fetch_type_new_fetch_att_list_add(fetchType,fetchAtt);
     mailimap_fetch_type_new_fetch_att_list_add(fetchType,fetchAttFlags);
+    mailimap_fetch_type_new_fetch_att_list_add(fetchType,fetchAttDate);
     
     err = mailimap_fetch( imap, set, fetchType, &result );
     mailimap_set_free( set );
+    /* cleans up the fetch_att's too! */
     mailimap_fetch_type_free( fetchType );
 
     QString date,subject,from;
@@ -314,6 +317,11 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
             m->setSubject(subject);
             m->setFrom(from);
             m->setDate(date);
+        } else if (item->msg_att_static->type==MAILIMAP_MSG_ATT_INTERNALDATE) {
+            mailimap_date_time*d = item->msg_att_static->internal_date;
+            QDateTime da(QDate(d->year,d->month,d->day),QTime(d->hour,d->min,d->sec));
+            qDebug("%i %i %i - %i %i %i",d->year,d->month,d->day,d->hour,d->min,d->sec);
+            qDebug(da.toString());
         } else {
             qDebug("Another type");
         }
@@ -409,3 +417,4 @@ QString IMAPwrapper::fetchBody(const QString & mailbox,const RecMail&mail)
     
     return body;
 }
+
