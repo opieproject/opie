@@ -157,9 +157,9 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     initializeStates();
 
     cfg.setGroup("PlayList");
-    QString currentPlaylist = cfg.readEntry( "CurrentPlaylist", "" );
+    QString currentPlaylist = cfg.readEntry( "CurrentPlaylist", "default");
     loadList(DocLnk(  currentPlaylist ) );
-    setCaption( tr( "OpiePlayer: " ) + currentPlaylist );
+    
 }
 
 
@@ -740,7 +740,9 @@ void PlayListWidget::openFile() {
 //            qDebug("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+ m3uFile);
             lnk.setName( filename ); //sets name
             lnk.setFile( filename ); //sets file name
-            lnk.setIcon("opieplayer2/musicfile");
+
+//            lnk.setIcon("opieplayer2/musicfile");
+
             d->selectedFiles->addToSelection(  lnk );
             writeCurrentM3u();
         }
@@ -750,7 +752,9 @@ void PlayListWidget::openFile() {
         } else if( filename.right(3) == "pls" ) {
             readPls( filename );
         } else {
-            d->selectedFiles->addToSelection(  DocLnk(filename) );
+            lnk.setName( QFileInfo(filename).baseName() ); //sets name
+            lnk.setFile( filename ); //sets file name
+            d->selectedFiles->addToSelection(  lnk);
             writeCurrentM3u();
         }
     }
@@ -788,11 +792,13 @@ void PlayListWidget::readm3u( const QString &filename ) {
           if(s.left(1) != "/")  { 
             //            qDebug("set link "+QFileInfo(filename).dirPath()+"/"+s);
             lnk.setFile( QFileInfo(filename).dirPath()+"/"+s);
-            lnk.setIcon("SoundPlayer");
+//            lnk.setIcon(MimeType(s).pixmap() );
+//            lnk.setIcon("SoundPlayer");
           } else {
             //            qDebug("set link2 "+s);
             lnk.setFile( s);
-            lnk.setIcon("SoundPlayer");
+//            lnk.setIcon(MimeType(s).pixmap() );
+//            lnk.setIcon("SoundPlayer");
           }
         }
         d->selectedFiles->addToSelection( lnk );
@@ -842,9 +848,9 @@ void PlayListWidget::readPls( const QString &filename ) {
         if( s.at( s.length() - 4) == '.') {// if this is probably a file
             lnk.setFile( s );
          } else { //if its a url
-            if( name.right( 1 ).find( '/' ) == -1) {
-                s += "/";
-            }
+//             if( name.right( 1 ).find( '/' ) == -1) {
+//                 s += "/";
+//             }
             lnk.setFile( s );
         }
         lnk.setType( "audio/x-mpegurl" );
@@ -865,12 +871,12 @@ void PlayListWidget::writeCurrentM3u() {
   cfg.setGroup("PlayList");
   QString currentPlaylist = cfg.readEntry("CurrentPlaylist","default");
 
-  if( d->selectedFiles->first()) {
   Om3u *m3uList;
   m3uList = new Om3u( currentPlaylist, IO_ReadWrite | IO_Truncate );
+  if( d->selectedFiles->first()) {
 
   do {
-      qDebug( "writeCurrentM3u " +d->selectedFiles->current()->file());
+      qDebug( "add writeCurrentM3u " +d->selectedFiles->current()->file());
     m3uList->add( d->selectedFiles->current()->file() );
   }
   while ( d->selectedFiles->next() );
@@ -919,7 +925,7 @@ void PlayListWidget::writem3u() {
 
           DocLnk lnk;
           lnk.setFile( filename);
-          lnk.setIcon("opieplayer2/playlist2");
+//          lnk.setIcon("opieplayer2/playlist2");
           lnk.setName( name); //sets file name
 
           // qDebug(filename);

@@ -1,9 +1,11 @@
 #include "inputDialog.h"
 
 #include <qpe/resource.h>
-
+#include <qpe/qpeapplication.h>
+#include <qpe/config.h>
 #include <opie/ofiledialog.h>
 
+#include <qfileinfo.h>
 #include <qlineedit.h>
 #include <qlayout.h>
 #include <qvariant.h>
@@ -40,8 +42,9 @@ InputDialog::~InputDialog() {
 }
 
 void InputDialog::browse() {
-
-    MimeTypes types;
+  Config cfg( "OpiePlayer" );
+  cfg.setGroup("Dialog");
+      MimeTypes types;
     QStringList audio, video, all;
     audio << "audio/*";
     audio << "playlist/plain";
@@ -56,7 +59,11 @@ void InputDialog::browse() {
     types.insert("Audio",  audio );
     types.insert("Video", video );
 
-    QString str = OFileDialog::getOpenFileName( 1,"/","", types, 0 );
+    QString str = OFileDialog::getOpenFileName( 1,
+                  cfg.readEntry("LastDirectory",QPEApplication::documentDir()),"",
+                  types, 0 );
+    if(str.left(2) == "//") str=str.right(str.length()-1);
     LineEdit1->setText(str);
+    cfg.writeEntry("LastDirectory" ,QFileInfo(str).dirPath());
 }
 
