@@ -96,8 +96,12 @@ DocumentList::DocumentList( ServerInterface *serverGui, bool scanDocs,
 {
     appLnkSet = new AppLnkSet( MimeType::appsFolderName() );
     d = new DocumentListPrivate( serverGui );
-    d->scanDocs = scanDocs;
     d->needToSendAllDocLinks = false;
+
+    Config cfg( "Launcher" );
+    cfg.setGroup( "DocTab" );
+    d->scanDocs = cfg.readBoolEntry( "Enable", true );
+    qDebug( "DocumentList::DocumentList() : scanDocs = %d", d->scanDocs );
 
     QTimer::singleShot( 10, this, SLOT( startInitialScan() ) );
 }
@@ -105,21 +109,7 @@ DocumentList::DocumentList( ServerInterface *serverGui, bool scanDocs,
 void DocumentList::startInitialScan()
 {
     reloadAppLnks();
-
-    Config cfg( "Launcher" );
-    cfg.setGroup( "DocTab" );
-    bool docTabEnabled = cfg.readBoolEntry( "Enable", true );
-    if ( docTabEnabled )
-        reloadDocLnks();
-    else
-    {
-        if ( d->sendDocLnks && d->serverGui )
-        {
-            d->serverGui->documentScanningProgress( 0 );
-            d->serverGui->allDocumentsRemoved();
-        }
-    }
-
+    reloadDocLnks();
 }
 
 DocumentList::~DocumentList()

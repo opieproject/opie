@@ -152,6 +152,7 @@ void LauncherTabWidget::createDocLoadingWidget()
         textLabel->setText( tr( "<b>The Documents Tab<p>has been disabled.<p>"
                                 "Use Settings->Launcher->DocTab<p>to reenable it.</b></center>" ) );
         docLoadingWidgetProgress->hide();
+        docLoadingWidgetEnabled = true;
     }
 
     QWidget *space2 = new QWidget( docLoadingVBox );
@@ -501,6 +502,13 @@ Launcher::~Launcher()
 	destroyGUI();
 }
 
+ bool Launcher::requiresDocuments() const
+ {
+    Config cfg( "Launcher" );
+    cfg.setGroup( "DocTab" );
+    return cfg.readBoolEntry( "Enable", true );
+}
+
 void Launcher::makeVisible()
 {
     showMaximized();
@@ -749,14 +757,6 @@ void Launcher::applicationScanningProgress( int percent )
 
 void Launcher::documentScanningProgress( int percent )
 {
-    if ( !docTabEnabled )
-    {
-        qDebug( "Launcher: document tab disabled!" );
-        tabs->setLoadingProgress( 100 );
-	    tabs->setLoadingWidgetEnabled( TRUE );
-        return;
-    }
-
     switch ( percent ) {
         case 0: {
 	    tabs->setLoadingProgress( 0 );
