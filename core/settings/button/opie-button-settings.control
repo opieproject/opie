@@ -1,8 +1,8 @@
 Package: opie-button-settings
-Files: plugins/application/libbuttonsettings.so* bin/buttonsettings apps/Settings/button.desktop pics/buttonsettings/*.png
+Files: plugins/application/libbuttonsettings.so* bin/buttonsettings apps/Settings/buttonsettings.desktop pics/buttonsettings/*.png
 Priority: optional
 Section: opie/settings
-Maintainer: Robert Griebl <sandman@handhelds.org>
+Maintainer: Team Opie <opie@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
 Description: Device-buttons settings dialog
