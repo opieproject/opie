@@ -126,16 +126,18 @@ void UserConfig::getUsers() {
 	availableUID=500;
 	for(QStringList::Iterator it=accounts->passwdStringList.begin(); it!=accounts->passwdStringList.end(); ++it) {
 		accounts->splitPasswdEntry(*it); // Split the string into it's components and store in variables in the accounts object. ("pr_name" and so on.)
-		new QListViewItem(usersListView,QString::number(accounts->pw_uid),accounts->pw_name,accounts->pw_gecos);
-		if((accounts->pw_uid>=500) && (accounts->pw_uid<65000)) {	// Is this user a "normal" user ?
-			mytext=QString(accounts->pw_name)+" - ("+QString(accounts->pw_gecos)+")"; // The string displayed next to the icon.
-			if(!(mypixmap.load("/opt/QtPalmtop/pics/users/"+accounts->pw_name+".png"))) { //  Is there an icon for this user? Resource::loadPixmap is caching, doesn't work.
-				mypixmap=Resource::loadPixmap(QString("usermanager/usericon"));	// If this user has no icon, load the default icon.
+		if(accounts->pw_name.find(QRegExp("^#"),0)) {	// Skip commented lines.
+			new QListViewItem(usersListView,QString::number(accounts->pw_uid),accounts->pw_name,accounts->pw_gecos);
+			if((accounts->pw_uid>=500) && (accounts->pw_uid<65000)) {	// Is this user a "normal" user ?
+				mytext=QString(accounts->pw_name)+" - ("+QString(accounts->pw_gecos)+")"; // The string displayed next to the icon.
+				if(!(mypixmap.load("/opt/QtPalmtop/pics/users/"+accounts->pw_name+".png"))) { //  Is there an icon for this user? Resource::loadPixmap is caching, doesn't work.
+					mypixmap=Resource::loadPixmap(QString("usermanager/usericon"));	// If this user has no icon, load the default icon.
+				}
+				listviewitem=new QListViewItem(usersIconView,"",mytext);	// Add the icon+text to the qiconview.
+				listviewitem->setPixmap(0,mypixmap);
 			}
-			listviewitem=new QListViewItem(usersIconView,"",mytext);	// Add the icon+text to the qiconview.
-			listviewitem->setPixmap(0,mypixmap);
+			if((accounts->pw_uid>=availableUID) && (accounts->pw_uid<65000)) availableUID=accounts->pw_uid+1; // Increase 1 to the latest know UID to get a free uid.
 		}
-		if((accounts->pw_uid>=availableUID) && (accounts->pw_uid<65000)) availableUID=accounts->pw_uid+1; // Increase 1 to the latest know UID to get a free uid. 
 	}
 	usersIconView->sort();
 }
@@ -216,10 +218,12 @@ void UserConfig::getGroups() {
 	availableGID=500;	// We need to find the next free GID, and are only interested in values between 500 & 65000.
 	for(QStringList::Iterator it=accounts->groupStringList.begin(); it!=accounts->groupStringList.end(); ++it) {	// Split the list into lines.
 		accounts->splitGroupEntry(*it);	// Split the line into its components and fill the variables of 'accounts'. (gr_name, gr_uid & gr_mem).
-		new QListViewItem(groupsListView,QString::number(accounts->gr_gid),accounts->gr_name);
-		if((accounts->gr_gid>=availableGID) && (accounts->gr_gid<65000)) availableGID=accounts->gr_gid+1;	// Maybe a new free GID.
+		if(accounts->gr_name.find(QRegExp("^#"),0)) {	// Skip commented lines.
+			new QListViewItem(groupsListView,QString::number(accounts->gr_gid),accounts->gr_name);
+			if((accounts->gr_gid>=availableGID) && (accounts->gr_gid<65000)) availableGID=accounts->gr_gid+1;	// Maybe a new free GID.
+		}
 	}
-}        
+}
 
 void UserConfig::addGroup() {
 	if(GroupDialog::addGroup(availableGID)) getGroups();	// Bring up the add group dialog.

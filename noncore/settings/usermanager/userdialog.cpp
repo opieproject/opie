@@ -44,8 +44,10 @@ UserDialog::UserDialog(int viewmode, QWidget* parent, const char* name, bool mod
 	// And also fill the listview & the combobox with all available groups.
 	for( QStringList::Iterator it = accounts->groupStringList.begin(); it!=accounts->groupStringList.end(); ++it) {
 		accounts->splitGroupEntry(*it);
-		new QCheckListItem(groupsListView,accounts->gr_name,QCheckListItem::CheckBox);
-		groupComboBox->insertItem(accounts->gr_name);
+		if(accounts->gr_name.find(QRegExp("^#"),0)) {	// Skip commented lines.
+			new QCheckListItem(groupsListView,accounts->gr_name,QCheckListItem::CheckBox);
+			groupComboBox->insertItem(accounts->gr_name);
+		}
 	}
 	showMaximized();
 }

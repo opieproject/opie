@@ -207,10 +207,15 @@ bool Passwd::searchGroup(QRegExp &groupRegExp) {
 	if((tempStringList.isEmpty())) {
 		return false;
 	} else {
-		groupString=(*(tempStringList.begin()));
-		splitGroupEntry(groupString);
+		for(QStringList::Iterator it=tempStringList.begin(); it!=tempStringList.end(); it++) {
+			groupString=*it;
+			if(!groupString.find(QRegExp("^#"),0)) {	// Skip commented lines.
+				splitGroupEntry(groupString);
+				return true;
+			}
+		}
 	}
-	return true;
+	return false;
 }
 
 // Find a group by groupname.
