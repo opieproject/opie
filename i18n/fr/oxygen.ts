@@ -1,36 +1,41 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CalcDlg</name>
     <message>
         <source>Calculate</source>
-        <translation type="unfinished"></translation>
+        <translation>Calculer</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer</translation>
+    </message>
+    <message>
+        <source>Form1</source>
+        <translation></translation>
     </message>
     <message>
         <source>Molecular Weight</source>
-        <translation type="unfinished"></translation>
+        <translation>poids moléculaire</translation>
     </message>
     <message>
         <source>Chemical Formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule Chimique</translation>
     </message>
     <message>
         <source>Molecular Weight (u):</source>
-        <translation type="unfinished"></translation>
+        <translation>Poids Moléculaire (u):</translation>
     </message>
     <message>
         <source>Elemental Composition (%):</source>
-        <translation type="unfinished"></translation>
+        <translation>Composition Elementaire (%):</translation>
     </message>
 </context>
 <context>
     <name>OxydataWidget</name>
     <message>
         <source>Weight:</source>
-        <translation type="unfinished"></translation>
+        <translation>Poids:</translation>
     </message>
     <message>
         <source>Block</source>
@@ -38,7 +43,7 @@
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Groupe</translation>
     </message>
     <message>
         <source>Electronegativity</source>
@@ -54,7 +59,7 @@
     </message>
     <message>
         <source>Density</source>
-        <translation type="unfinished"></translation>
+        <translation>Densité</translation>
     </message>
     <message>
         <source>Boilingpoint</source>
@@ -66,7 +71,7 @@
     </message>
     <message>
         <source>%1 u</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 u</translation>
     </message>
     <message>
         <source>%1 J</source>
@@ -89,18 +94,40 @@
     <name>Oxygen</name>
     <message>
         <source>Oxygen</source>
-        <translation type="unfinished"></translation>
+        <translation>Oxygène</translation>
     </message>
     <message>
         <source>PSE</source>
-        <translation type="unfinished"></translation>
+        <translation>PSE</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Données</translation>
     </message>
     <message>
         <source>Calculations</source>
+        <translation>Calculs</translation>
+    </message>
+</context>
+<context>
+    <name>PSEWidget</name>
+    <message>
+        <source>Periodic System</source>
+        <translation>Système Périodique</translation>
+    </message>
+</context>
+<context>
+    <name>calcDlgUI</name>
+    <message>
+        <source>ERROR: 
+</source>
+        <translation>ERREUR: </translation>
+    </message>
+</context>
+<context>
+    <name>dataWidgetUI</name>
+    <message>
+        <source>Chemical Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -129,6 +156,10 @@
     </message>
     <message>
         <source>Nitrogen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Oxygen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -533,28 +564,6 @@
     </message>
     <message>
         <source>Meitnerium</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PSEWidget</name>
-    <message>
-        <source>Periodic System</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>calcDlgUI</name>
-    <message>
-        <source>ERROR: 
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>dataWidgetUI</name>
-    <message>
-        <source>Chemical Data</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
