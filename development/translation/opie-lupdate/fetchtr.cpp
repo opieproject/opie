@@ -8,10 +8,16 @@
 ** Foundation and appearing in the file LICENSE.GPL included in the
 ** packaging of this file.
 **
+** Licensees holding valid Qt Enterprise Edition or Qt Professional Edition
+** licenses may use this file in accordance with the Qt Commercial License
+** Agreement provided with the Software.
+**
 ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 **
 ** See http://www.trolltech.com/gpl/ for GPL licensing information.
+** See http://www.trolltech.com/pricing.html or email sales@trolltech.com for
+**   information about Qt Commercial License Agreements.
 **
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
@@ -80,10 +86,13 @@ static size_t yyCommentLen;
 static char yyString[16384];
 static size_t yyStringLen;
 static QValueStack<int> yySavedBraceDepth;
+static QValueStack<int> yySavedParenDepth;
 static int yyBraceDepth;
 static int yyParenDepth;
 static int yyLineNo;
 static int yyCurLineNo;
+static int yyBraceLineNo;
+static int yyParenLineNo;
 
 // the file to read from (if reading from a file)
 static FILE *yyInFile;
@@ -119,9 +128,12 @@ static void startTokenizer( const char *fileName, int (*getCharFunc)() )
     yyFileName = fileName;
     yyCh = getChar();
     yySavedBraceDepth.clear();
+    yySavedParenDepth.clear();
     yyBraceDepth = 0;
     yyParenDepth = 0;
     yyCurLineNo = 1;
+    yyBraceLineNo = 1;
+    yyParenLineNo = 1;
 }
 
 static int getToken()
@@ -164,6 +176,19 @@ static int getToken()
 		if ( strcmp(yyIdent + 1, "lass") == 0 )
 		    return Tok_class;
 		break;
+	    case 'f':
+		/*
+		  QTranslator::findMessage() has the same parameters as
+		  QApplication::translate().
+		*/
+		if ( strcmp(yyIdent + 1, "indMessage") == 0 )
+		    return Tok_translate;
+		break;
+            case 'i':
+                /* FOR KDE APPS */
+                if ( strcmp( yyIdent + 1,  "8n") == 0 )
+                    return Tok_translate;
+                break;
 	    case 'n':
 		if ( strcmp(yyIdent + 1, "amespace") == 0 )
 		    return Tok_namespace;
@@ -176,9 +201,6 @@ static int getToken()
 		if ( strcmp(yyIdent + 1, "truct") == 0 )
 		    return Tok_class;
 		break;
-	    case 'i':
-		if( strcmp(yyIdent + 1, "18n") == 0 ) 
-		    return Tok_tr;
 	    case 't':
 		if ( strcmp(yyIdent + 1, "r") == 0 ) {
 		    return Tok_tr;
@@ -222,18 +244,23 @@ static int getToken()
 		    if ( yyCh == 'f' ) {
 			// if, ifdef, ifndef
 			yySavedBraceDepth.push( yyBraceDepth );
+                        yySavedParenDepth.push( yyParenDepth );
 		    }
 		    break;
 		case 'e':
 		    yyCh = getChar();
 		    if ( yyCh == 'l' ) {
 			// elif, else
-			if ( !yySavedBraceDepth.isEmpty() )
+			if ( !yySavedBraceDepth.isEmpty() ) {
 			    yyBraceDepth = yySavedBraceDepth.top();
+                            yyParenDepth = yySavedParenDepth.top();
+			}
 		    } else if ( yyCh == 'n' ) {
 			// endif
-			if ( !yySavedBraceDepth.isEmpty() )
+			if ( !yySavedBraceDepth.isEmpty() ) {
 			    yySavedBraceDepth.pop();
+                            yySavedParenDepth.pop();
+			}
 		    }
 		}
 		while ( isalnum(yyCh) || yyCh == '_' )
@@ -356,18 +383,26 @@ static int getToken()
 		yyCh = getChar();
 		break;
 	    case '{':
+                if (yyBraceDepth == 0)
+		    yyBraceLineNo = yyCurLineNo;
 		yyBraceDepth++;
 		yyCh = getChar();
 		return Tok_LeftBrace;
 	    case '}':
+                if (yyBraceDepth == 0)
+		    yyBraceLineNo = yyCurLineNo;
 		yyBraceDepth--;
 		yyCh = getChar();
 		return Tok_RightBrace;
 	    case '(':
+                if (yyParenDepth == 0)
+		    yyParenLineNo = yyCurLineNo;
 		yyParenDepth++;
 		yyCh = getChar();
 		return Tok_LeftParen;
 	    case ')':
+		if (yyParenDepth == 0)
+		    yyParenLineNo = yyCurLineNo;
 		yyParenDepth--;
 		yyCh = getChar();
 		return Tok_RightParen;
@@ -621,14 +656,14 @@ static void parse( MetaTranslator *tor, const char *initialContext,
 
     if ( yyBraceDepth != 0 )
 	fprintf( stderr,
-		 "%s: Unbalanced braces in C++ code (or abuse of the C++"
+		 "%s:%d: Unbalanced braces in C++ code (or abuse of the C++"
 		  " preprocessor)\n",
-		  (const char *) yyFileName );
-    if ( yyParenDepth != 0 )
+		  (const char *)yyFileName, yyBraceLineNo );
+    else if ( yyParenDepth != 0 )
 	fprintf( stderr,
-		 "%s: Unbalanced parentheses in C++ code (or abuse of the C++"
+		 "%s:%d: Unbalanced parentheses in C++ code (or abuse of the C++"
 		 " preprocessor)\n",
-		 (const char *) yyFileName );
+		 (const char *)yyFileName, yyParenLineNo );
 }
 
 void fetchtr_cpp( const char *fileName, MetaTranslator *tor,

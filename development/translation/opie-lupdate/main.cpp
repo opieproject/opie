@@ -62,6 +62,15 @@ static void printUsage()
 	     "           Display the version of lupdate and exit\n" );
 }
 
+/*static QString opie_escape( const QString& str ) {
+    QString ret = str.stripWhiteSpace();
+    qWarning(ret);
+    if ( ret.startsWith("$$(OPIEDIR)") )
+        ret = ret.replace("$$(OPIEDIR)", OPIE::self()->opieDir() );
+    qWarning(ret);
+    return ret;
+    }*/
+
 static void updateTsFiles( const MetaTranslator& fetchedTor,
                            const QString& opiedir,
                            const QStringList& languages,
@@ -150,7 +159,7 @@ int main( int argc, char **argv )
         tsFileNames.clear();
         isLib = FALSE;
 
-        QMap<QString, QString> tagMap = proFileTagMap( fullText );
+        QMap<QString, QString> tagMap = proFileTagMap( fullText, OPIE::self()->opieDir() );
         QMap<QString, QString>::Iterator it;
 
         for ( it = tagMap.begin(); it != tagMap.end(); ++it ) {

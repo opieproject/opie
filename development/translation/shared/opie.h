@@ -9,7 +9,7 @@ public:
     static OPIE* self();
     /** get the list of languages */
     QStringList languageList(const QString& opiedir = QString::null)const;
-    QString opieDir(const QString& opieDir)const;
+    QString opieDir(const QString& opieDir = QString::null)const;
 
 private:
     OPIE();

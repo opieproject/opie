@@ -8,10 +8,16 @@
 ** Foundation and appearing in the file LICENSE.GPL included in the
 ** packaging of this file.
 **
+** Licensees holding valid Qt Enterprise Edition or Qt Professional Edition
+** licenses may use this file in accordance with the Qt Commercial License
+** Agreement provided with the Software.
+**
 ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 **
 ** See http://www.trolltech.com/gpl/ for GPL licensing information.
+** See http://www.trolltech.com/pricing.html or email sales@trolltech.com for
+**   information about Qt Commercial License Agreements.
 **
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
@@ -32,20 +38,20 @@ typedef QValueList<MetaTranslatorMessage> TML;
 
 static bool isDigitFriendly( int c )
 {
-    return ispunct( c ) || isspace( c );
+    return ispunct((uchar)c) || isspace((uchar)c);
 }
 
 static int numberLength( const char *s )
 {
     int i = 0;
 
-    if ( isdigit(s[0]) ) {
+    if ( isdigit((uchar)s[0]) ) {
 	do {
 	    i++;
-	} while ( isdigit(s[i]) ||
-		  (isDigitFriendly(s[i]) &&
-		   (isdigit(s[i + 1]) ||
-		    (isDigitFriendly(s[i + 1]) && isdigit(s[i + 2])))) );
+	} while (isdigit((uchar)s[i]) ||
+		 (isDigitFriendly(s[i]) &&
+		  (isdigit((uchar)s[i + 1]) ||
+		   (isDigitFriendly(s[i + 1]) && isdigit((uchar)s[i + 2])))));
     }
     return i;
 }
@@ -211,20 +217,20 @@ void applyNumberHeuristic( MetaTranslator *tor, bool verbose )
     for ( it = all.begin(); it != all.end(); ++it ) {
 	if ( (*it).type() == MetaTranslatorMessage::Unfinished ) {
 	    if ( (*it).translation().isEmpty() )
-		untranslated.insert( zeroKey((*it).sourceText()), *it );
+		untranslated.insert(QCString((*it).context()) + "\n" + (*it).sourceText() + "\n"
+				    + (*it).comment(), *it);
 	} else if ( !(*it).translation().isEmpty() ) {
 	    translated.insert( zeroKey((*it).sourceText()), *it );
 	}
     }
 
     for ( u = untranslated.begin(); u != untranslated.end(); ++u ) {
-	t = translated.find( u.key() );
+	t = translated.find( zeroKey((*u).sourceText()) );
 	if ( t != translated.end() && !t.key().isEmpty() &&
 	     qstrcmp((*t).sourceText(), (*u).sourceText()) != 0 ) {
 	    MetaTranslatorMessage m( *u );
-	    m.setTranslation( translationAttempt((*t).translation(),
-						 (*t).sourceText(),
-						 (*u).sourceText()) );
+	    m.setTranslation(translationAttempt((*t).translation(), (*t).sourceText(),
+						(*u).sourceText()));
 	    tor->insert( m );
 	    inserted++;
 	}

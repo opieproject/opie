@@ -8,10 +8,16 @@
 ** Foundation and appearing in the file LICENSE.GPL included in the
 ** packaging of this file.
 **
+** Licensees holding valid Qt Enterprise Edition or Qt Professional Edition
+** licenses may use this file in accordance with the Qt Commercial License
+** Agreement provided with the Software.
+**
 ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 **
 ** See http://www.trolltech.com/gpl/ for GPL licensing information.
+** See http://www.trolltech.com/pricing.html or email sales@trolltech.com for
+**   information about Qt Commercial License Agreements.
 **
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
@@ -138,11 +144,13 @@ bool TsHandler::endElement( const QString& /* namespaceURI */,
 	    comment = accum;
 	} else {
 	    if ( contextIsUtf8 )
-		tor->insert( MetaTranslatorMessage(context.utf8(), "",
+		tor->insert( MetaTranslatorMessage(context.utf8(),
+			     ContextComment,
 			     accum.utf8(), QString::null, TRUE,
 			     MetaTranslatorMessage::Unfinished) );
 	    else
-		tor->insert( MetaTranslatorMessage(context.ascii(), "",
+		tor->insert( MetaTranslatorMessage(context.ascii(),
+			     ContextComment,
 			     accum.ascii(), QString::null, FALSE,
 			     MetaTranslatorMessage::Unfinished) );
 	}
@@ -315,14 +323,13 @@ bool MetaTranslatorMessage::operator<( const MetaTranslatorMessage& m ) const
 }
 
 MetaTranslator::MetaTranslator()
-    : codecName( "ISO-8859-1" ), codec( 0 )
 {
+    clear();
 }
 
 MetaTranslator::MetaTranslator( const MetaTranslator& tor )
     : mm( tor.mm ), codecName( tor.codecName ), codec( tor.codec )
 {
-
 }
 
 MetaTranslator& MetaTranslator::operator=( const MetaTranslator& tor )
@@ -333,10 +340,15 @@ MetaTranslator& MetaTranslator::operator=( const MetaTranslator& tor )
     return *this;
 }
 
-bool MetaTranslator::load( const QString& filename )
+void MetaTranslator::clear()
 {
     mm.clear();
+    codecName = "ISO-8859-1";
+    codec = 0;
+}
 
+bool MetaTranslator::load( const QString& filename )
+{
     QFile f( filename );
     if ( !f.open(IO_ReadOnly) )
 	return FALSE;
@@ -344,7 +356,6 @@ bool MetaTranslator::load( const QString& filename )
     QTextStream t( &f );
     QXmlInputSource in( t );
     QXmlSimpleReader reader;
-    // don't click on these!
     reader.setFeature( "http://xml.org/sax/features/namespaces", FALSE );
     reader.setFeature( "http://xml.org/sax/features/namespace-prefixes", TRUE );
     reader.setFeature( "http://trolltech.com/xml/features/report-whitespace"
@@ -358,8 +369,6 @@ bool MetaTranslator::load( const QString& filename )
     reader.setErrorHandler( 0 );
     delete hand;
     f.close();
-    if ( !ok )
-	mm.clear();
     return ok;
 }
 
@@ -384,7 +393,7 @@ bool MetaTranslator::save( const QString& filename ) const
 	QCString comment = "";
 
 	do {
-	    if ( QCString(m.key().sourceText()).isEmpty() ) {
+	    if ( QCString(m.key().sourceText()) == ContextComment ) {
 		if ( m.key().type() != MetaTranslatorMessage::Obsolete ) {
 		    contextIsUtf8 = m.key().utf8();
 		    comment = QCString( m.key().comment() );
@@ -437,7 +446,8 @@ bool MetaTranslator::save( const QString& filename ) const
     return TRUE;
 }
 
-bool MetaTranslator::release( const QString& filename, bool verbose ) const
+bool MetaTranslator::release( const QString& filename, bool verbose,
+			      QTranslator::SaveMode mode ) const
 {
     QTranslator tor( 0 );
     int finished = 0;
@@ -479,7 +489,7 @@ bool MetaTranslator::release( const QString& filename, bool verbose ) const
 	}
     }
 
-    bool saved = tor.save( filename, QTranslator::Stripped );
+    bool saved = tor.save( filename, mode );
     if ( saved && verbose )
 	fprintf( stderr,
 		 " %d finished, %d unfinished and %d untranslated messages\n",
@@ -523,7 +533,7 @@ void MetaTranslator::stripEmptyContexts()
 
     TMM::Iterator m = mm.begin();
     while ( m != mm.end() ) {
-	if ( QCString(m.key().sourceText()).isEmpty() ) {
+	if ( QCString(m.key().sourceText()) == ContextComment ) {
 	    TMM::Iterator n = m;
 	    ++n;
 	    // the context comment is followed by other messages
