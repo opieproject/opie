@@ -29,6 +29,6 @@ DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lqpe -lopiecore2 -lopieui2
 DEFINES     += UNIX
 TARGET    = sysinfo
-VERSION   = 1.1.0
+VERSION   = 1.1.1
 
 include ( $(OPIEDIR)/include.pro )

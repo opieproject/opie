@@ -1,7 +1,7 @@
 /**********************************************************************
 ** BenchmarkInfo
 **
-** A benchmark for Qt/Embedded
+** A benchmark widget for Qt/Embedded
 **
 ** Copyright (C) 2004 Michael Lauer <mickey@vanille.de>
 ** Inspired by ZBench (C) 2002 Satoshi <af230533@im07.alpha-net.ne.jp>
@@ -62,9 +62,6 @@ extern "C"
 
 #define DHRYSTONE_RUNS   20000000
 #define TEST_DURATION    3
-
-#define BUFF_SIZE        8192
-#define FILE_SIZE        1024 * 1024  // 1Mb
 
 //===========================================================================
 
@@ -142,6 +139,9 @@ BenchmarkInfo::BenchmarkInfo( QWidget *parent, const char *name, int wFlags )
     connect( startButton, SIGNAL( clicked() ), this, SLOT( run() ) );
     vb->addWidget( tests, 2 );
 
+    QHBoxLayout* hb = new QHBoxLayout( vb );
+    hb->addWidget( startButton, 2 );
+
     QFile f( QPEApplication::qpeDir() + "/share/sysinfo/results" );
     if ( f.open( IO_ReadOnly ) )
     {
@@ -158,13 +158,10 @@ BenchmarkInfo::BenchmarkInfo( QWidget *parent, const char *name, int wFlags )
             machineCombo->insertItem( machline );
         }
 
-        QHBoxLayout* hb = new QHBoxLayout( vb );
-        hb->addWidget( new QLabel( tr( "Compare To:" ), this ) );
+        hb->addWidget( new QLabel( tr( "Compare:" ), this ) );
         hb->addWidget( machineCombo, 2 );
         connect( machineCombo, SIGNAL( activated(int) ), this, SLOT( machineActivated(int) ) );
     }
-
-    vb->addWidget( startButton, 2 );
 }
 
 
@@ -195,7 +192,7 @@ void BenchmarkInfo::machineActivated( int index )
 
 void BenchmarkInfo::run()
 {
-    startButton->setText( "> Don't touch! Running Tests! Don't touch! <" );
+    startButton->setText( "> Don't touch! <" );
     qApp->processEvents();
     QTime t;
 
@@ -396,14 +393,14 @@ void BenchmarkInfo::performFileTest( const QString& fname, OCheckListItem* item 
     QString readUnit = "kB/s";
     if ( readSpeed > 1024 )
     {
-        readSpeed = readSpeed / 1024.0;
+        readSpeed /= 1024.0;
         readUnit = "MB/s";
     }
     double writeSpeed = FILE_TEST_COUNT / ( write / 1000.0 );
     QString writeUnit = "kb/s";
     if ( writeSpeed > 1024 )
     {
-        writeSpeed = writeSpeed / 1024.0;
+        writeSpeed /= 1024.0;
         writeUnit = "MB/s";
     }
     item->setText( 1, QString().sprintf( "%.2f %s, %.2f %s", readSpeed, readUnit.latin1(), writeSpeed, writeUnit.latin1() ) );
