@@ -166,6 +166,7 @@ CONFIG_UNIKEYBOARD	inputmethods/unikeyboard	unikeyboard.pro
 CONFIG_USERMANAGER	noncore/settings/usermanager	usermanager.pro
 CONFIG_VMEMO	core/applets/vmemo	vmemo.pro
 CONFIG_VOLUMEAPPLET	core/applets/volumeapplet	volumeapplet.pro
+CONFIG_VTAPPLET	core/applets/vtapplet	vtapplet.pro
 CONFIG_WAVPLUGIN	core/multimedia/opieplayer/wavplugin	wavplugin.pro
 CONFIG_WELLENREITER	noncore/net/wellenreiter	wellenreiter.pro
 CONFIG_WIRELESSAPPLET	noncore/applets/wirelessapplet	wirelessapplet.pro
