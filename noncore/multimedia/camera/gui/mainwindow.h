@@ -19,6 +19,7 @@
 #include <qmainwindow.h>
 #include <qimage.h>
 #include <qpixmap.h>
+#include <qdatetime.h>
 
 class QAction;
 class QActionGroup;
