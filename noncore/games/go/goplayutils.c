@@ -916,7 +916,7 @@ short gx, gy, *savex, *savey;
         {
           smark = playMark;
           tryPlay(*savex, *savey, me);
-          pause();
+//pause();
           if (gList[gMap[groupIDs[*savex][*savey]]].libC > 1)
             if (gList[gMap[groupIDs[gx][gy]]].libC > treeLibLim)
               {

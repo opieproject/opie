@@ -62,7 +62,7 @@ short tx, ty, gx, gy, *escape, tkMark;
       depth = depth + 1;
       curMark = playMark;
       tryPlay(tx, ty, me); /* try my move */
-      pause();
+//      pause();
       if (gList[gMap[groupIDs[tx][ty]]].libC == 0) /* I'm dead */
 	{
 	result = FALSE;
@@ -152,7 +152,7 @@ short tx, ty, gx, gy, *escape, tkMark;
               if (i <= lList1.indx) /* try his move */
                   {
                     tryPlay(lList1.p[i].px, lList1.p[i].py, him); /* play his response */
-                    pause();
+//                    pause();
                     if (gList[gMap[groupIDs[lList1.p[i].px]
 		                           [lList1.p[i].py]]].libC < 2)
                       goto two; /* a bogus move */
