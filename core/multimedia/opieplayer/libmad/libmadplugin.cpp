@@ -382,7 +382,7 @@ int LibMadPlugin::http_open(const QString& path ) {
         len = http_read_line(tcp_sock, http_request, sizeof(http_request));
 
         if (len == -1) {
-            qDebug( "http_open: "+ QString(strerror(errno)) +"\n");
+           //            qDebug( "http_open: "+ QString(strerror(errno)) +"\n");
             return 0;
         }
 
@@ -396,7 +396,7 @@ int LibMadPlugin::http_open(const QString& path ) {
         if (QString(http_request).left(4) == "ICY ") {
             /* This is shoutcast/icecast streaming */
             if (strncmp(http_request + 4, "200 ", 4)) {
-                qDebug("http_open: " + QString(http_request) + "\n");
+               //                qDebug("http_open: " + QString(http_request) + "\n");
                 return 0;
             }
         } else if (QString(http_request).left(4) == "icy-") {
@@ -417,7 +417,7 @@ int LibMadPlugin::http_open(const QString& path ) {
 
     info = QString(name + genre + url + bitrate + message).replace( QRegExp("\n"), " : " );
 
-    qDebug("Stream info: " + info);
+    //    qDebug("Stream info: " + info);
 
     return (tcp_sock);
 }
@@ -429,7 +429,7 @@ bool LibMadPlugin::open( const QString& path ) {
     Config cfg("OpiePlayer");
     cfg.setGroup("Options");
     bufferSize = cfg.readNumEntry("MPeg_BufferSize",MPEG_BUFFER_SIZE);
-    qDebug("buffer size is %d", bufferSize);
+    //    qDebug("buffer size is %d", bufferSize);
     d->bad_last_frame = 0;
     d->flush = TRUE;
     info = QString( "" );
@@ -450,13 +450,13 @@ bool LibMadPlugin::open( const QString& path ) {
         printID3Tags();
     }
     if (d->input.fd == -1) {
-        qDebug("error opening %s", d->input.path );
+       //        qDebug("error opening %s", d->input.path );
         return FALSE;
     }
 
     struct stat stat;
     if (fstat(d->input.fd, &stat) == -1) {
-    qDebug("error calling fstat"); return FALSE;
+       //    qDebug("error calling fstat"); return FALSE;
     }
     if (S_ISREG(stat.st_mode) && stat.st_size > 0)
   d->input.fileLength = stat.st_size;
@@ -468,7 +468,7 @@ bool LibMadPlugin::open( const QString& path ) {
         d->input.length = stat.st_size;
         d->input.fdm = map_file(d->input.fd, &d->input.length);
         if (d->input.fdm == 0) {
-            qDebug("error mmapping file"); return FALSE;
+           //            qDebug("error mmapping file"); return FALSE;
         }
         d->input.data = (unsigned char *)d->input.fdm;
     }
@@ -477,7 +477,7 @@ bool LibMadPlugin::open( const QString& path ) {
     if (d->input.data == 0) {
         d->input.data = (unsigned char *)malloc( bufferSize /*MPEG_BUFFER_SIZE*/);
         if (d->input.data == 0) {
-            qDebug("error allocating input buffer");
+           //            qDebug("error allocating input buffer");
             return FALSE;
         }
         d->input.length = 0;
@@ -505,7 +505,7 @@ bool LibMadPlugin::close() {
 #if defined(HAVE_MMAP)
     if (d->input.fdm) {
         if (unmap_file(d->input.fdm, d->input.length) == -1) {
-            qDebug("error munmapping file");
+           //            qDebug("error munmapping file");
             result = FALSE;
         }
         d->input.fdm  = 0;
@@ -519,7 +519,7 @@ bool LibMadPlugin::close() {
     }
 
     if (::close(d->input.fd) == -1) {
-        qDebug("error closing file %s", d->input.path);
+       //        qDebug("error closing file %s", d->input.path);
         result = FALSE;
     }
 
@@ -555,7 +555,7 @@ int LibMadPlugin::audioChannels( int ) {
 int LibMadPlugin::audioFrequency( int ) {
     debugMsg( "LibMadPlugin::audioFrequency" );
     long t; short t1[5]; audioReadSamples( t1, 2, 1, t, 0 );
-    qDebug( "LibMadPlugin::audioFrequency: %i", d->frame.header.samplerate );
+    //    qDebug( "LibMadPlugin::audioFrequency: %i", d->frame.header.samplerate );
     return d->frame.header.samplerate;
 }
 
@@ -574,9 +574,9 @@ int LibMadPlugin::audioSamples( int ) {
       return 0;
    int samples = (d->input.fileLength / (d->frame.header.bitrate/8)) * d->frame.header.samplerate;
 
-   qDebug( "LibMadPlugin::audioSamples: %i * %i * 8 / %i", (int)d->input.fileLength,
-           (int)d->frame.header.samplerate, (int)d->frame.header.bitrate ); 
-   qDebug( "LibMadPlugin::audioSamples: %i", samples );
+   //   qDebug( "LibMadPlugin::audioSamples: %i * %i * 8 / %i", (int)d->input.fileLength,
+   //           (int)d->frame.header.samplerate, (int)d->frame.header.bitrate ); 
+   //   qDebug( "LibMadPlugin::audioSamples: %i", samples );
 
    return samples;
 
@@ -680,7 +680,7 @@ bool LibMadPlugin::read() {
           while (len == -1 && errno == EINTR);
 
           if (len == -1) {
-              qDebug("error reading audio");
+             //              qDebug("error reading audio");
               return FALSE;
           }
           else if (len == 0) {
@@ -758,7 +758,7 @@ bool LibMadPlugin::decode( short *output, long samples, long& samplesMade ) {
             }
             if ( d->stream.error == MAD_ERROR_BADCRC ) {
                 mad_frame_mute(&d->frame);
-                qDebug( "error decoding, bad crc" );
+                //                qDebug( "error decoding, bad crc" );
             }
         }
 
@@ -821,17 +821,17 @@ double LibMadPlugin::getTime() {
 
 
 void LibMadPlugin::printID3Tags() {
-    qDebug( "LibMadPlugin::printID3Tags" );
+   //    qDebug( "LibMadPlugin::printID3Tags" );
 
     char id3v1[128 + 1];
 
     if ( ::lseek( d->input.fd, -128, SEEK_END ) == -1 ) {
-        qDebug( "error seeking to id3 tags" );
+       //        qDebug( "error seeking to id3 tags" );
         return;
     }
 
     if ( ::read( d->input.fd, id3v1, 128 ) != 128 ) {
-        qDebug( "error reading in id3 tags" );
+       //        qDebug( "error reading in id3 tags" );
         return;
     }
 
@@ -841,7 +841,7 @@ void LibMadPlugin::printID3Tags() {
         int len[5] = { 30, 30, 30, 4, 30 };
         QString label[5] = { tr( "Title" ), tr( "Artist" ), tr( "Album" ), tr( "Year" ), tr( "Comment" ) };
         char *ptr = id3v1 + 3, *ptr2 = ptr + len[0];
-        qDebug( "ID3 tags in file:" );
+        //        qDebug( "ID3 tags in file:" );
         info = "";
         for ( int i = 0; i < 5; ptr += len[i], i++, ptr2 += len[i] ) {
             char push = *ptr2;
@@ -862,7 +862,7 @@ void LibMadPlugin::printID3Tags() {
     }
 
     if ( ::lseek(d->input.fd, 0, SEEK_SET) == -1 ) {
-        qDebug( "error seeking back to beginning" );
+       //        qDebug( "error seeking back to beginning" );
         return;
     }
 }
