@@ -18,6 +18,8 @@
 **
 **********************************************************************/
 
+#include <syslog.h>
+
 #include "desktop.h"
 #include "info.h"
 #include "launcher.h"
@@ -738,12 +740,20 @@ void DesktopApplication::shutdown()
 
 void DesktopApplication::shutdown( ShutdownImpl::Type t )
 {
+
+	char *opt = 0;
+
 	switch ( t ) {
 		case ShutdownImpl::ShutdownSystem:
-			execlp( "shutdown", "shutdown", "-h", "now", ( void* ) 0 );
-			break;
+			opt = "-h";
+			// fall through
 		case ShutdownImpl::RebootSystem:
-			execlp( "shutdown", "shutdown", "-r", "now", ( void* ) 0 );
+			if ( opt == 0 )
+				opt = "-r";
+
+			if ( execle( "shutdown", "shutdown", opt, "now", ( void* ) 0, "/sbin", "/usr/sbin", ( void* ) 0 ) < 0 )
+				::syslog ( LOG_ERR, "Erroring execing shutdown\n" );
+
 			break;
 		case ShutdownImpl::RestartDesktop:
 			restart();
