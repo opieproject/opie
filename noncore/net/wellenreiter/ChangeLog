@@ -1,10 +1,15 @@
+2004-??-??	Michael Lauer		<mickey@Vanille.de>
+
+	* Improved the speed reading the manufacturer list
+	* GPS coordinates are now presented in the DMS (as opposed to decimal) format
+
 2003-12-18	Michael Lauer		<mickey@Vanille.de>
 
 	* Released as Version 1.0.2 (Development Snapshot)
-	* Add automatic uploading of capture files to "The Capture Dump" site at
+	* Added automatic uploading of capture files to "The Capture Dump" site at
 	  http://www.Vanille.de/projects/capturedump.spy
 	* Initial reading of the manufacturer database happens now in background
-	* Remove deprecated setMonitorMode() API ==> Use setMode( "monitor" ) now.
+	* Removed deprecated setMonitorMode() API ==> Use setMode( "monitor" ) now.
 	  The monitor mode now tries to use the standard IW_MODE_MONITOR first. If that
 	  doesn't work, it falls back to using the proprietary iwpriv commands
 

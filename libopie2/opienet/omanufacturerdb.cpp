@@ -82,6 +82,9 @@ OManufacturerDB::OManufacturerDB()
         QString addr;
         QString manu;
         QString extManu;
+        #ifdef OPIE_IMPROVE_GUI_LATENCY
+        int counter = 0;
+        #endif
         while (!s.atEnd())
         {
             s >> addr;
@@ -90,11 +93,17 @@ OManufacturerDB::OManufacturerDB()
 
             manufacturers.insert( addr, manu );
             manufacturersExt.insert( addr, extManu );
-            odebug << "OmanufacturerDB: parse '" << addr << "' as '" << manu << "' (" << extManu << ")" << oendl;
+            // odebug << "OmanufacturerDB: parse '" << addr << "' as '" << manu << "' (" << extManu << ")" << oendl;
             #ifdef OPIE_IMPROVE_GUI_LATENCY
-            if ( qApp ) qApp->processEvents();
+            counter++;
+            if ( counter == 50 )
+            {
+                qApp->processEvents();
+                counter = 0;
+            }
             #endif
         }
+        odebug << "OManufacturerDB: manufacturer list completed." << oendl;
     }
 }
 
