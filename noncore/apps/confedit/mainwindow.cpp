@@ -55,20 +55,20 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   editor = new EditWidget(this);
   mainLayout->addWidget( editor, 1, 0 );
 
-  connect (settingList, SIGNAL( currentChanged(QListViewItem*) ),
+  connect(settingList, SIGNAL( pressed(QListViewItem*) ),
 						this, SLOT(setCurrent(QListViewItem*)));
 
-	  connect( popupTimer, SIGNAL(timeout()),
-  			this, SLOT(showPopup()) );
-		connect( this, SIGNAL( clicked( QListViewItem* ) ),
-			   this, SLOT( stopTimer( QListViewItem* ) ) );	
+  connect( popupTimer, SIGNAL(timeout()),
+		  			this, SLOT(showPopup()) );
+	connect( settingList, SIGNAL( clicked( QListViewItem* ) ),
+					   this, SLOT( stopTimer( QListViewItem* ) ) );	
 
-  	connect( editor->LineEditGroup, SIGNAL( textChanged(const QString&) ),
-           SLOT( groupChanged(const QString&) ) );
-  	connect( editor->LineEditKey, SIGNAL( textChanged(const QString&) ),
-           SLOT( keyChanged(const QString&) ) );
-  	connect( editor->LineEditValue, SIGNAL( textChanged(const QString&) ),
-           SLOT( valueChanged(const QString&) ) );
+ 	connect( editor->LineEditGroup, SIGNAL( textChanged(const QString&) ),
+	           SLOT( groupChanged(const QString&) ) );
+	connect( editor->LineEditKey, SIGNAL( textChanged(const QString&) ),
+	           SLOT( keyChanged(const QString&) ) );
+ 	connect( editor->LineEditValue, SIGNAL( textChanged(const QString&) ),
+	           SLOT( valueChanged(const QString&) ) );
   makeMenu();
 }
 

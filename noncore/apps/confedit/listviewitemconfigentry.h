@@ -16,6 +16,8 @@
 #include "listviewitemconffile.h"
 #include "listviewitemconf.h"
 
+class QTextStream;
+
 class ListViewItemConfigEntry : public ListViewItemConf  {
 public:
 	ListViewItemConfigEntry(ListViewItemConfFile *parent, QString group, QString key="");
@@ -32,6 +34,7 @@ public:
 	void valueChanged(QString);
   virtual void displayText();
   virtual void changed();
+  void save(QTextStream*);
 private:
  	QString _file;
 	QString _group;

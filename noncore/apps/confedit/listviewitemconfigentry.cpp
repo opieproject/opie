@@ -10,6 +10,7 @@
 
 #include "listviewitemconfigentry.h"
 #include "listviewitemconffile.h"
+#include <qtextstream.h>
 
 ListViewItemConfigEntry::ListViewItemConfigEntry(ListViewItemConfFile *parent, QString group, QString key)
    : ListViewItemConf(parent)
@@ -104,4 +105,24 @@ void ListViewItemConfigEntry::changed()
 	_changed=true;
  	displayText();
  	_fileItem->changed();
+}
+
+void ListViewItemConfigEntry::save(QTextStream *t)
+{
+	QString s;
+  if (isGroup())
+  {
+	  s += "["+_group+"]";
+   	_type = Group;
+  }else{
+	  s += _key+" = "+_value;
+   _type = Key;
+  }
+  s += "\n";
+	(*t) << s;
+ 	_changed = false;
+ 	for (QListViewItem *it = firstChild(); it!=0;it = it->nextSibling())
+  {
+   	((ListViewItemConfigEntry*)it)->save(t);
+  }
 }

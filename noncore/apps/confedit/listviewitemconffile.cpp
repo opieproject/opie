@@ -92,8 +92,15 @@ void ListViewItemConfFile::save()
   while (int c = conf.readBlock(buf, SIZE) ) back.writeBlock(buf,c);
   conf.close();
   back.close();
- 	
 
+
+  if (!conf.open(IO_WriteOnly)) return;
+ 	QTextStream *t = new QTextStream( &conf );
+  for (QListViewItem *it = firstChild(); it!=0;it = it->nextSibling())
+  {
+   	((ListViewItemConfigEntry*)it)->save(t);
+  }
+	conf.close();
 	qDebug("no saveing yet...");
  	unchanged();
 }
