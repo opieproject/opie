@@ -29,6 +29,7 @@ public slots:
     virtual void fullImageInfo( const QString& ) = 0;
     virtual void thumbNail( const QString&, int max_wid, int max_h ) = 0;
     virtual QImage image(  const QString&, Factor, int max = 0) = 0;
+    virtual QString nameToFname(const QString&name)const = 0;
 
 signals:
     void sig_dirchanged();
@@ -41,7 +42,7 @@ signals:
     void sig_thumbNail( const QString&, const QPixmap& );
 
 protected:
-    ~PDirLister();
+    virtual ~PDirLister();
 };
 
 #endif

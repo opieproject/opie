@@ -12,7 +12,9 @@ HEADERS = gui/iconview.h gui/filesystem.h gui/mainwindow.h \
 	  iface/slaveiface.h \
           gui/imageinfoui.h \
           gui/imageview.h \
-	  gui/viewmodebutton.h
+	  gui/viewmodebutton.h \
+      impl/doc/doc_lister.h impl/doc/doc_dirview.h \
+      impl/doc/doc_ifaceinfo.h
 	
 # A list header files
 
@@ -24,7 +26,9 @@ SOURCES = gui/iconview.cpp gui/filesystem.cpp gui/mainwindow.cpp \
 	  impl/dir/dir_ifaceinfo.cpp lib/slavemaster.cpp \
           gui/imageinfoui.cpp \
           gui/imageview.cpp \
-	  gui/viewmodebutton.cpp
+	  gui/viewmodebutton.cpp \
+      impl/doc/doc_lister.cpp impl/doc/doc_dirview.cpp \
+      impl/doc/doc_ifaceinfo.cpp
 # A list of source files
 
 INTERFACES = 

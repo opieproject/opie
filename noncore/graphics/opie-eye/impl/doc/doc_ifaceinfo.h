@@ -3,15 +3,15 @@
  *  zecke@handhelds.org
  */
 
-#ifndef DIR_IFACE_INFO_H
-#define DIR_IFACE_INFO_H
+#ifndef DOC_IFACE_INFO_H
+#define DOC_IFACE_INFO_H
 
 #include <iface/ifaceinfo.h>
 
-class DirInterfaceInfo : public PInterfaceInfo {
+class DocInterfaceInfo : public PInterfaceInfo {
 public:
-    DirInterfaceInfo();
-    virtual ~DirInterfaceInfo();
+    DocInterfaceInfo();
+    virtual ~DocInterfaceInfo();
 
     QString name()const;
     QWidget* configWidget(const Config&);

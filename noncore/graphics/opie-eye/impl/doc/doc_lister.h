@@ -2,19 +2,20 @@
  * GPLv2 zecke@handhelds.org
  */
 
-#ifndef DIR_LISTER_INTERFACE_LISTER_H
-#define DIR_LISTER_INTERFACE_LISTER_H
-
-#include <qdir.h>
+#ifndef DOC_LISTER_INTERFACE_LISTER_H
+#define DOC_LISTER_INTERFACE_LISTER_H
 
 #include <iface/dirlister.h>
 
+#include <qstring.h>
+#include <qmap.h>
+
 class Config;
-class Dir_DirLister : public PDirLister {
+class Doc_DirLister : public PDirLister {
     Q_OBJECT
 public:
-    Dir_DirLister( bool );
-    virtual ~Dir_DirLister(){}
+    Doc_DirLister();
+    virtual ~Doc_DirLister(){}
 
     QString defaultPath()const;
     QString setStartPath( const QString& );
@@ -30,8 +31,12 @@ public:
     virtual QString nameToFname(const QString&name)const;
 
 private:
-    bool m_allFiles;
-    QDir m_currentDir;
+    QMap<QString,QString> m_namemap,m_filemap;
+    QStringList m_out;
+protected slots:
+    virtual void slotFullInfo(const QString&, const QString&);
+    virtual void slotThumbInfo(const QString&, const QString&);
+    virtual void slotThumbNail(const QString&, const QPixmap&);
 };
 
 #endif

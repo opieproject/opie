@@ -34,7 +34,8 @@
 
 
 
-OPIE_EXPORT_APP_V2( Opie::Core::OApplicationFactory<PMainWindow>,"Opie Eye" )
+//OPIE_EXPORT_APP_V2( Opie::Core::OApplicationFactory<PMainWindow>,"Opie Eye" )
+OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<PMainWindow>)
 
 PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     : QMainWindow( wid, name, style ), m_info( 0 ), m_disp( 0 )

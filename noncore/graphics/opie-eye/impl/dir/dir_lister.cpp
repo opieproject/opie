@@ -20,7 +20,7 @@ Dir_DirLister::Dir_DirLister( bool list )
     : PDirLister( "dir_dir_lister" )
 {
     m_allFiles = list;
-    owarn << "All Files " << m_allFiles << "" << oendl; 
+    owarn << "All Files " << m_allFiles << "" << oendl;
 
     SlaveMaster* master = SlaveMaster::self();
     connect( master, SIGNAL(sig_start()), this, SIGNAL(sig_start()) );
@@ -94,4 +94,9 @@ void Dir_DirLister::imageInfo( const QString& str) {
 
 void Dir_DirLister::fullImageInfo( const QString& str) {
     SlaveMaster::self()->imageInfo( str );
+}
+
+QString Dir_DirLister::nameToFname(const QString&name)const
+{
+    return name;
 }

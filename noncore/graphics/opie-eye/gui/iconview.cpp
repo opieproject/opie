@@ -345,7 +345,7 @@ void PIconView::loadViews() {
     ViewMap::Iterator it;
     ViewMap* map = viewMap();
     for ( it = map->begin(); it != map->end(); ++it )
-        m_views->insertItem(  QObject::tr(it.key() ) );
+        m_views->insertItem(  it.key()  );
 }
 
 void PIconView::resetView() {
@@ -362,9 +362,15 @@ void PIconView::slotViewChanged( int i) {
     }
 
     PDirView* cur = currentView();
-    delete cur;
+    if (cur) delete cur;
     QString str = m_views->text(i);
-    cur = (*(*viewMap())[str])(*m_cfg);
+    ViewMap* map = viewMap();
+    if (!map) {setCurrentView(0l); return;}
+    if (map->find(str) == map->end()) {
+        owarn << "Key not found" << oendl;
+        setCurrentView(0l); return;
+    }
+    cur = (*(*map)[str])(*m_cfg);
     setCurrentView( cur );
 
     /* connect to the signals of the lister */
@@ -406,9 +412,13 @@ void PIconView::addFiles(  const QStringList& lst) {
     QStringList::ConstIterator it;
     IconViewItem * _iv;
     QPixmap*m_pix = 0;
+    QString pre = "";
+    if (!m_path.isEmpty()) {
+        pre = m_path+"/";
+    }
     for (it=lst.begin(); it!= lst.end(); ++it ) {
-         m_pix = PPixmapCache::self()->cachedImage( m_path+"/"+(*it), 64, 64 );
-        _iv = new IconViewItem( m_view, m_path+"/"+(*it), (*it) );
+         m_pix = PPixmapCache::self()->cachedImage( pre+(*it), 64, 64 );
+        _iv = new IconViewItem( m_view, pre+(*it), (*it) );
         if (m_mode==3) {
             _iv->setTextOnly(true);
             _iv->setPixmap(QPixmap());
@@ -543,11 +553,12 @@ void PIconView::slotShowImage()
     bool isDir = false;
     QString name = currentFileName(isDir);
     if (isDir) return;
-
     slotShowImage( name );
 }
 void PIconView::slotShowImage( const QString& name) {
-    emit sig_display( name );
+    PDirLister *lister = currentView()->dirLister();
+    QString r_name = lister->nameToFname(name);
+    emit sig_display( r_name );
 }
 void PIconView::slotImageInfo() {
     bool isDir = false;
@@ -558,7 +569,9 @@ void PIconView::slotImageInfo() {
 }
 
 void PIconView::slotImageInfo( const QString& name) {
-     emit sig_showInfo( name );
+    PDirLister *lister = currentView()->dirLister();
+    QString r_name = lister->nameToFname(name);
+    emit sig_showInfo(r_name );
 }
 
 
@@ -579,8 +592,6 @@ void PIconView::resizeEvent( QResizeEvent* re ) {
 
 
 void PIconView::calculateGrid() {
-    odebug << "Calc grid: x=" << m_view->gridX() << " y=" << m_view->gridY() << oendl;
-    odebug << "Size of view: " << m_view->size() << oendl;
     int dw = QApplication::desktop()->width();
     int viewerWidth = dw-style().scrollBarExtent().width();
 
