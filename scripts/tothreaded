@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# PURPOSE :
+# PURPOSE : 
 #
 # this script converts a non-threaded control file to a threaded one
 # by extending appropriate names with -mt as extension
