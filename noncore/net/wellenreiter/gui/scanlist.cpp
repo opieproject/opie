@@ -86,7 +86,7 @@ MScanListView::MScanListView( QWidget* parent, const char* name )
     setRootIsDecorated( true );
     setAllColumnsShowFocus( true );
 
-    connect( this, SIGNAL( rightButtonClicked(QListViewItem*,const QPoint&,int) ),
+    connect( this, SIGNAL( rightButtonPressed(QListViewItem*,const QPoint&,int) ),
              this, SLOT( contextMenuRequested(QListViewItem*,const QPoint&,int) ) );
 
     #ifdef QWS
