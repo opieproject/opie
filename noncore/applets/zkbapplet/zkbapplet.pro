@@ -1,2 +1,2 @@
 TEMPLATE    = subdirs
-SUBDIRS     = keyz-cfg zkbapplet
+SUBDIRS     = keyzcfg applet
