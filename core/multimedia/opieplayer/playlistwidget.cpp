@@ -127,7 +127,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     bar->setLabel( tr( "Play Operations" ) );
 //      d->tbPlayCurList =  new ToolButton( bar, tr( "play List" ), "mpegplayer/play_current_list",
 //                                        this , SLOT( addSelected()) );
-    tbDeletePlaylist = new QPushButton( Resource::loadIconSet("close"),"",bar,"close");
+    tbDeletePlaylist = new QPushButton( Resource::loadIconSet("trash"),"",bar,"close");
     tbDeletePlaylist->setFlat(TRUE);
     tbDeletePlaylist->setFixedSize(20,20);
     connect(tbDeletePlaylist,(SIGNAL(released())),SLOT( deletePlaylist()));
