@@ -22,24 +22,30 @@
 
 #include <qwidget.h>
 #include <qpixmap.h>
+#include <qstringlist.h>
 
 class ClipboardApplet : public QWidget
 {
     Q_OBJECT
 public:
-    ClipboardApplet( QWidget *parent = 0, const char *name=0 );
-    ~ClipboardApplet();
+    ClipboardApplet ( QWidget *parent = 0, const char *name=0 );
+    ~ClipboardApplet ( );
 
 protected:
-    void mousePressEvent( QMouseEvent *);
-    void paintEvent( QPaintEvent* );
+    void mousePressEvent ( QMouseEvent *);
+    void paintEvent ( QPaintEvent* );
 
 private slots:
-    void action(int);
+    void action ( int );
+	void newData ( );
 
 private:
-    QPopupMenu* menu;
-    QPixmap clipboardPixmap;
+    QPopupMenu * m_menu;
+    QStringList  m_history;
+    bool         m_dirty;
+    QString      m_lasttext;
+    
+    QPixmap      m_clipboardPixmap;
 };
 
 

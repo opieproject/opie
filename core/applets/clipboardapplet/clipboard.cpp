@@ -25,7 +25,8 @@
 #include <qpainter.h>
 #include <qpopupmenu.h>
 #include <qwindowsystem_qws.h>
-#include <qmessagebox.h>
+#include <qapplication.h>
+#include <qclipboard.h>
 #include <qtimer.h>
 
 //===========================================================================
@@ -119,8 +120,18 @@ ClipboardApplet::ClipboardApplet( QWidget *parent, const char *name ) : QWidget(
 {
 	setFixedWidth ( 14 );
 	setFixedHeight ( 18 );
-	clipboardPixmap = QPixmap ( paste_xpm );
-	menu = 0;
+	m_clipboardPixmap = QPixmap ( paste_xpm );
+
+	QTimer *timer = new QTimer ( this );
+	
+	connect ( QApplication::clipboard ( ), SIGNAL( dataChanged ( )), this, SLOT( newData ( )));
+	connect ( timer, SIGNAL( timeout ( )), this, SLOT( newData ( )));
+
+	timer-> start ( 1000 );
+	
+	m_menu = 0;
+	m_dirty = true;
+	m_lasttext = QString::null;
 }
 
 ClipboardApplet::~ClipboardApplet ( )
@@ -129,36 +140,68 @@ ClipboardApplet::~ClipboardApplet ( )
 
 void ClipboardApplet::mousePressEvent ( QMouseEvent *)
 {
-	if ( !menu ) {
-		menu = new QPopupMenu ( this );
-		menu-> insertItem ( QIconSet ( Resource::loadPixmap ( "cut" )), tr( "Cut" ), 0 );
-		menu-> insertItem ( QIconSet ( Resource::loadPixmap ( "copy" )), tr( "Copy" ), 1 );
-		menu-> insertItem ( QIconSet ( Resource::loadPixmap ( "paste" )), tr( "Paste" ), 2 );
-		connect ( menu, SIGNAL( activated ( int )), this, SLOT( action ( int )));
+	if ( m_dirty ) {
+		delete m_menu;
+	
+		m_menu = new QPopupMenu ( this );
+		m_menu-> setCheckable ( true );
+
+		if ( m_history. count ( )) {	
+			for ( unsigned int i = 0; i < m_history. count ( ); i++ ) {
+				QString str = m_history [i];
+				
+				if ( str. length ( ) > 20 )
+					str = str. left ( 20 ) + "...";
+			
+				m_menu-> insertItem ( QString ( "%1: %2" ). arg ( i + 1 ). arg ( str ), i );
+				m_menu-> setItemChecked ( i, false );
+			}
+			m_menu-> setItemChecked ( m_history. count ( ) - 1, true );		
+			m_menu-> insertSeparator ( );
+		}
+		m_menu-> insertItem ( QIconSet ( Resource::loadPixmap ( "cut" )), tr( "Cut" ), 100 );
+		m_menu-> insertItem ( QIconSet ( Resource::loadPixmap ( "copy" )), tr( "Copy" ), 101 );
+		m_menu-> insertItem ( QIconSet ( Resource::loadPixmap ( "paste" )), tr( "Paste" ), 102 );
+		
+		connect ( m_menu, SIGNAL( activated ( int )), this, SLOT( action ( int )));
+		
+		m_dirty = false;
 	}
 	QPoint p = mapToGlobal ( QPoint ( 0, 0 ));
-	QSize s = menu-> sizeHint ( );
+	QSize s = m_menu-> sizeHint ( );
 	
-	menu-> popup ( QPoint ( p. x ( ) + ( width ( ) / 2 ) - ( s. width ( ) / 2 ), p. y ( ) - s. height ( )));
+	m_menu-> popup ( QPoint ( p. x ( ) + ( width ( ) / 2 ) - ( s. width ( ) / 2 ), p. y ( ) - s. height ( )));
 }
 
 void ClipboardApplet::action(int id)
 {
-	ushort unicode=0;
-	int scan=0;
+	ushort unicode = 0;
+	int scan = 0;
 
 	switch ( id ) {
-		case 0:
-			unicode='X'-'@'; 
-			scan=Key_X; // Cut
+		case 100:
+			unicode = 'X' - '@'; 
+			scan    = Key_X; // Cut
 			break;
-		case 1:
-			unicode='C'-'@'; 
-			scan=Key_C; // Copy
+		case 101:
+			unicode = 'C' - '@'; 
+			scan    = Key_C; // Copy
 			break;
-		case 2:
-			unicode='V'-'@'; 
-			scan=Key_V; // Paste
+		case 102:
+			unicode = 'V' - '@'; 
+			scan    = Key_V; // Paste
+			break;
+			
+		default:
+			if (( id >= 0 ) && ( uint( id ) < m_history. count ( ))) {
+				QApplication::clipboard ( )-> setText ( m_history [id] );
+				
+				for ( uint i = 0; i < m_history. count ( ); i++ ) 
+					m_menu-> setItemChecked ( i, i == uint( id ));
+				
+				unicode = 'V' - '@';
+				scan    = Key_V;
+			}
 			break;
 	}
 		
@@ -171,7 +214,20 @@ void ClipboardApplet::action(int id)
 void ClipboardApplet::paintEvent ( QPaintEvent* )
 {
 	QPainter p ( this );
-	p. drawPixmap ( 0, 1, clipboardPixmap );
+	p. drawPixmap ( 0, 1, m_clipboardPixmap );
 }
 
+void ClipboardApplet::newData ( )
+{
+	QCString type = "plain";
+	QString txt = QApplication::clipboard ( )-> text ( type );
 
+	if ( !txt. isEmpty ( ) && !m_history. contains ( txt )) {
+		m_history. append ( txt );
+
+		if ( m_history. count ( ) > 5 )
+			m_history. remove ( m_history. begin ( ));
+		
+		m_dirty = true;
+	}
+}
