@@ -113,6 +113,7 @@ CONFIG_OPIEPLAYER	core/multimedia/opieplayer	opieplayer.pro
 CONFIG_OPIEPLAYER2	noncore/multimedia/opieplayer2	opieplayer2.pro
 CONFIG_OPIE-RDESKTOP	noncore/net/opierdesktop	opierdesktop.pro
 CONFIG_OPIEREC		noncore/multimedia/opierec	opierec.pro
+CONFIG_TONLEITER	noncore/multimedia/tonleiter	tonleiter.pro
 CONFIG_OPIETOOTH-APPLET	noncore/net/opietooth/applet	applet.pro
 CONFIG_OPIETOOTH-MANAGER	noncore/net/opietooth/manager	manager.pro
 CONFIG_OSEARCH	core/pim/osearch	osearch.pro
