@@ -383,7 +383,14 @@ void Wellenreiter::timerEvent( QTimerEvent* )
 {
     qDebug( "Wellenreiter::timerEvent()" );
     OPacket* p = pcap->next();
-    receivePacket( p );
-    delete p;
+    if ( !p ) // no more packets available
+    {
+        stopClicked();
+    }
+    else
+    {
+        receivePacket( p );
+        delete p;
+    }
 }
 
