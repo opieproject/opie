@@ -42,6 +42,7 @@ public:
 
     void display( const QTime& time );
 
+
 protected:
     void drawContents( QPainter *p );
 
@@ -67,6 +68,8 @@ public:
     QDateTime when;
     bool bSound;
     int hour, minute, snoozeTime;
+    static QString appName() { return QString::fromLatin1("clock"); }
+
 private slots:
     void slotSet();
     void slotReset();

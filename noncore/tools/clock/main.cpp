@@ -21,14 +21,7 @@
 #include "clock.h"
 
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-int main( int argc, char ** argv )
-{
-    QPEApplication a( argc, argv );
 
-    Clock mw;
-    mw.setCaption( Clock::tr("Clock") );
-    a.showMainWidget( &mw );
-
-    return a.exec();
-}
+OPIE_EXPORT_APP( OApplicationFactory<Clock> )

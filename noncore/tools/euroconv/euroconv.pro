@@ -1,5 +1,4 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on release quick-app
 HEADERS		= calcdisplay.h    \
                 calckeypad.h
 SOURCES		= calcdisplay.cpp  \
@@ -8,7 +7,7 @@ SOURCES		= calcdisplay.cpp  \
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
-DESTDIR		= $(OPIEDIR)/bin
 INTERFACES	= 
 TARGET          = euroconv
+
 include ( $(OPIEDIR)/include.pro )
