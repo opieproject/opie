@@ -1,0 +1,26 @@
+--- qt-2.3.4/src/kernel/qwindowsystem_qws.cpp~sigsegv	2003-03-18 18:29:00.000000000 -0600
++++ qt-2.3.4/src/kernel/qwindowsystem_qws.cpp	2003-03-18 19:09:08.000000000 -0600
+@@ -843,6 +843,15 @@
+ {
+ }
+ 
++static void catchSegvSignal( int )
++{
++#ifndef QT_NO_QWS_KEYBOARD
++    if ( qwsServer )
++	qwsServer->closeKeyboard();
++#endif
++}
++
++
+ /*!
+   \class QWSServer qwindowsystem_qws.h
+   \brief Server-specific functionality in Qt/Embedded
+@@ -912,6 +921,7 @@
+     }
+ 
+     signal(SIGPIPE, ignoreSignal); //we get it when we read
++    signal(SIGSEGV, catchSegvSignal); //recover the keyboard on crash
+ #endif
+     focusw = 0;
+     mouseGrabber = 0;
