@@ -41,9 +41,10 @@ public:
     QBrush brush() { return m_brush; }
 
     bool antiAliasing();
-    void finishStartup();
 
 private slots:
+    void finishStartup();
+
     void newPage();
     void clearPage();
     void deletePage();

@@ -516,11 +516,13 @@ void DrawPadCanvas::contentsMouseMoveEvent(QMouseEvent* e)
 
 void DrawPadCanvas::drawContents(QPainter* p, int cx, int cy, int cw, int ch)
 {
+    Page* currentPage = m_pages.current();
+    if ( !currentPage ) return; // no page yet --> initialization not finished (Mickeyl)
     QRect clipRect(cx, cy, cw, ch);
-    QRect pixmapRect(0, 0, m_pages.current()->pixmap()->width(), m_pages.current()->pixmap()->height());
+    QRect pixmapRect(0, 0, currentPage->pixmap()->width(), m_pages.current()->pixmap()->height());
     QRect drawRect = pixmapRect.intersect(clipRect);
 
-    p->drawPixmap(drawRect.topLeft(), *(m_pages.current()->pixmap()), drawRect);
+    p->drawPixmap(drawRect.topLeft(), *(currentPage->pixmap()), drawRect);
 
     if (drawRect.right() < clipRect.right()) {
         p->fillRect(drawRect.right() + 1, cy, cw - drawRect.width(), ch, colorGroup().dark());

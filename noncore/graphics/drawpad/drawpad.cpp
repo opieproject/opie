@@ -49,7 +49,6 @@
 #include <qwhatsthis.h>
 
 using namespace Opie::Ui;
-using namespace Opie::Ui;
 DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags /*fl*/ )
     : QMainWindow(parent, name, WStyle_ContextHelp)
 {
@@ -281,7 +280,10 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags /*fl*/ )
 
     changeBrushColor(Qt::white);
 
-    finishStartup();
+    // delay the rest of the initialization and do it from within the mainloop
+    // if we don't do this, the widget layout may not be constructed upon
+    // and we will end up with a wrong QScrollview page size (Mickeyl)
+    QTimer::singleShot( 100, this, SLOT( finishStartup() ) );
 }
 
 
