@@ -3,135 +3,135 @@
     <name>DrawPad</name>
     <message>
         <source>Delete All</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst Visu</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importēt</translation>
     </message>
     <message>
         <source>Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>Importēt...</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportēt</translation>
     </message>
     <message>
         <source>Export...</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportēt...</translation>
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikonu Skats</translation>
     </message>
     <message>
         <source>Thumbnail View...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikonu Skats...</translation>
     </message>
     <message>
         <source>Page Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Lapas Informācija</translation>
     </message>
     <message>
         <source>Page Information...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lapas Informācija...</translation>
     </message>
     <message>
         <source>Anti-Aliasing</source>
-        <translation type="unfinished"></translation>
+        <translation>Pūkaini</translation>
     </message>
     <message>
         <source>Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrumenti</translation>
     </message>
     <message>
         <source>New Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauna Lapa</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai pievienotu jaunu lapu.</translation>
     </message>
     <message>
         <source>Clear Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Attīrīt Lapu</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai attīrītu tekošo lapu.</translation>
     </message>
     <message>
         <source>Delete Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst Lapu</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai izņemtu tekošo lapu.</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>Atlikt</translation>
     </message>
     <message>
         <source>Click here to undo the last action.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai atliktu pēdējo darbību.</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>Atkārtot</translation>
     </message>
     <message>
         <source>Click here to re-perform the last action.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai izpildītu atkārtoti pēdējo darbību.</translation>
     </message>
     <message>
         <source>First Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Pirmā Lapa</translation>
     </message>
     <message>
         <source>Click here to view the first page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikškiniet šeit lai atvērtu pirmo lapu.</translation>
     </message>
     <message>
         <source>Previous Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Iepriekšējā Lapa</translation>
     </message>
     <message>
         <source>Click here to view the previous page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai apskatītu iepriekšējo lapu.</translation>
     </message>
     <message>
         <source>Next Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Nākamā Lapa</translation>
     </message>
     <message>
         <source>Click here to view the next page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai apskatītu nākamo lapu.</translation>
     </message>
     <message>
         <source>Last Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Pēdējā Lapa</translation>
     </message>
     <message>
         <source>Click here to view the last page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai skatītu pēdējo lapu.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw lines.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai izvēlētos vienu no pieejamiem līniju zīmuļiem.</translation>
     </message>
     <message>
         <source>Draw Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Zīmēt Punktu</translation>
     </message>
     <message>
         <source>Draw Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Zīmēt Līniju</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw rectangles.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai izvēlētos pieejamos četrstūru zīmēšanas instrumentus.</translation>
     </message>
     <message>
         <source>Draw Rectangle</source>
