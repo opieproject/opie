@@ -336,24 +336,28 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
 
     QPixmap pic;
     QToolButton *btn = new QToolButton( box );
+    btn->setUsesBigPixmap( true );
     pic.convertFromImage( Resource::loadImage( "up" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     btn->setPixmap( pic );
     connect(btn, SIGNAL(clicked() ),
             this, SLOT( cdUP() ) );
 
     btn = new QToolButton( box );
+    btn->setUsesBigPixmap( true );
     pic.convertFromImage( Resource::loadImage( "home" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     btn->setPixmap( pic );
     connect(btn, SIGNAL(clicked() ),
             this, SLOT( cdHome() ) );
 
     btn = new QToolButton( box );
+    btn->setUsesBigPixmap( true );
     pic.convertFromImage( Resource::loadImage( "DocsIcon" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     btn->setPixmap( pic );
     connect(btn, SIGNAL(clicked() ),
             this, SLOT(cdDoc() ) );
 
     m_btnNew = new QToolButton( box );
+    m_btnNew->setUsesBigPixmap( true );
     pic.convertFromImage( Resource::loadImage( "new" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     m_btnNew->setPixmap( pic );
     connect(m_btnNew, SIGNAL(clicked() ),
@@ -361,12 +365,14 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
 
 
     m_btnClose = new QToolButton( box );
+    m_btnClose->setUsesBigPixmap( true );
     pic.convertFromImage( Resource::loadImage( "close" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     m_btnClose->setPixmap( pic );
     connect(m_btnClose, SIGNAL(clicked() ),
             selector(), SIGNAL(closeMe() ) );
 
     btn = new QToolButton( box );
+    btn->setUsesBigPixmap( true );
     pic.convertFromImage( Resource::loadImage( "cardmon/pcmcia" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     btn->setPixmap( pic );
 
