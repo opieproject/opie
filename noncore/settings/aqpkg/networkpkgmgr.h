@@ -19,6 +19,7 @@
 #define NETWORKPKGMGR_H
 
 #include <qlayout.h>
+#include <qpixmap.h>
 #include <qpushbutton.h>
 #include <qwidget.h>
 #include <qcombobox.h>
@@ -53,6 +54,9 @@ private:
 
     QComboBox *serversList;
     QListView *packagesList;
+    
+    QPixmap installedIcon;
+    QPixmap updatedIcon;
 
     QString currentlySelectedServer;
     QString categoryFilter;

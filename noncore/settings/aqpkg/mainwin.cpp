@@ -15,9 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <iostream>
-using namespace std;
-
 #include <qpe/qpemenubar.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/resource.h>
@@ -224,7 +221,7 @@ void MainWindow :: setDocument( const QString &doc )
 {
     // Remove path from package
     QString package = Utils::getPackageNameFromIpkFilename( doc );
-    std::cout << "Selecting package " << package << std::endl;
+//    std::cout << "Selecting package " << package << std::endl;
     networkPkgWindow->selectLocalPackage( package );
 }
 

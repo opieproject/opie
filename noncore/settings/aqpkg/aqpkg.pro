@@ -1,5 +1,5 @@
 TEMPLATE	= app
-CONFIG		= qt warn_on debug
+CONFIG		= qt warn_on release
 HEADERS		= global.h \
 		  mainwin.h \
 		  datamgr.h \

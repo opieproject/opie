@@ -15,24 +15,20 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <fstream>
-#include <iostream>
-using namespace std;
-
 #include <unistd.h>
-#include <stdlib.h>
-#include <linux/limits.h>
 
 #ifdef QWS
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
+#include <qpe/resource.h>
 #else
 #include <qapplication.h>
 #endif
 #include <qlabel.h>
 #include <qfile.h>
 #include <qmessagebox.h>
+#include <qwhatsthis.h>
 
 #include "datamgr.h"
 #include "networkpkgmgr.h"
@@ -97,7 +93,7 @@ void NetworkPackageManager :: updateData()
 //        cout << "Adding " << it->getServerName() << " to combobox" << endl;
         if ( !it->isServerActive() )
         {
-            cout << serverName << " is not active" << endl;
+//            cout << serverName << " is not active" << endl;
             i--;
             continue;
         }
@@ -145,8 +141,14 @@ void NetworkPackageManager :: initGui()
     QLabel *l = new QLabel( tr( "Servers" ), this );
     serversList = new QComboBox( this );
     connect( serversList, SIGNAL(activated( int )), this, SLOT(serverSelected( int )));
+    QWhatsThis::add( serversList, tr( "Click here to select a package feed." ) );
+    
+    installedIcon = Resource::loadPixmap( "aqpkg/installed" );
+    updatedIcon = Resource::loadPixmap( "aqpkg/updated" );
     
     packagesList = new QListView( this );
+    packagesList->addColumn( tr( "Packages" ), 225 );
+    QWhatsThis::add( packagesList, tr( "This is a listing of all packages for the server feed selected above.\n\nA blue dot next to the package name indicates that the package is currently installed.\n\nA blue dot with a star indicates that a newer version of the package is available from the server feed.\n\nClick inside the box at the left to select a package." ) );
 
     QVBoxLayout *vbox = new QVBoxLayout( this, 0, -1 );
     QHBoxLayout *hbox1 = new QHBoxLayout( vbox, -1 );
@@ -174,8 +176,7 @@ void NetworkPackageManager :: initGui()
     }
 
     vbox->addWidget( packagesList );
-    packagesList->addColumn( tr( "Packages" ) );
-    
+
     downloadEnabled = TRUE;
 }
 
@@ -186,6 +187,9 @@ void NetworkPackageManager :: serverSelected( int index )
 
 void NetworkPackageManager :: serverSelected( int, bool raiseProgress )
 {
+    QPixmap nullIcon( installedIcon.size() );
+    nullIcon.fill( colorGroup().base() );
+    
     // display packages
     QString serverName = serversList->currentText();
     currentlySelectedServer = serverName;
@@ -260,24 +264,23 @@ void NetworkPackageManager :: serverSelected( int, bool raiseProgress )
             continue;
 
 
-        text.append( it->getPackageName() );
+        QCheckListItem *item = new QCheckListItem( packagesList, it->getPackageName(), QCheckListItem::CheckBox );
+        
         if ( it->isInstalled() )
         {
-            text.append( " (installed)" );
-
-            // If a different version of package is available, postfix it with an *
-            if ( it->getVersion() != it->getInstalledVersion() )
+            // If a different version of package is available, show update available icon
+            // Otherwise, show installed icon
+            if ( it->getVersion() != it->getInstalledVersion() &&
+                 compareVersions( it->getInstalledVersion(), it->getVersion() ) == 1)
             {
 
-                if ( compareVersions( it->getInstalledVersion(), it->getVersion() ) == 1 )
-                    text.append( "*" );
+                item->setPixmap( 0, updatedIcon );
             }
-        }
-
-        QCheckListItem *item = new QCheckListItem( packagesList, text, QCheckListItem::CheckBox );
-
-        if ( it->isInstalled() )
-        {
+            else
+            {
+                item->setPixmap( 0, installedIcon );
+            }
+            
             QString destName = "";
             if ( it->getLocalPackage() )
             {
@@ -292,13 +295,17 @@ void NetworkPackageManager :: serverSelected( int, bool raiseProgress )
             if ( destName != "" )
                 new QCheckListItem( item, QString( tr( "Installed To - %1" ).arg( destName ) ) );
         }
+        else
+        {
+            item->setPixmap( 0, nullIcon );
+        }
         
         if ( !it->isPackageStoredLocally() )
         {
             new QCheckListItem( item, QString( tr( "Description - %1" ).arg( it->getDescription() ) ) );
             new QCheckListItem( item, QString( tr( "Size - %1" ).arg( it->getPackageSize() ) ) );
             new QCheckListItem( item, QString( tr( "Section - %1" ).arg( it->getSection() ) ) );
-        }
+                    }
         else
             new QCheckListItem( item, QString( tr( "Filename - %1" ).arg( it->getFilename() ) ) );
         
@@ -508,16 +515,7 @@ void NetworkPackageManager :: downloadSelectedPackages()
     {
         if ( item->isOn() )
         {
-            QString name = item->text();
-            int pos = name.find( "*" );
-            name.truncate( pos );
-
-            // if (there is a (installed), remove it
-            pos = name.find( "(installed)" );
-            if ( pos > 0 )
-                name.truncate( pos - 1 );
-
-            ipkg.setPackage( name );
+            ipkg.setPackage( item->text() );
             ipkg.runIpkg( );
         }
     }
@@ -614,13 +612,6 @@ void NetworkPackageManager :: applyChanges()
 InstallData NetworkPackageManager :: dealWithItem( QCheckListItem *item )
 {
     QString name = item->text();
-    int pos = name.find( "*" );
-    name.truncate( pos );
-
-    // if (there is a (installed), remove it
-    pos = name.find( "(installed)" );
-    if ( pos > 0 )
-        name.truncate( pos - 1 );
 
     // Get package
     vector<Server>::iterator s = dataMgr->getServer( serversList->currentText() );
@@ -651,8 +642,8 @@ InstallData NetworkPackageManager :: dealWithItem( QCheckListItem *item )
         if ( p->getInstalledTo() )
         {
             item.destination = p->getInstalledTo();
-            cout << "dest - " << p->getInstalledTo()->getDestinationName() << endl;
-            cout << "dest - " << p->getInstalledTo()->getDestinationPath() << endl;
+//            cout << "dest - " << p->getInstalledTo()->getDestinationName() << endl;
+//            cout << "dest - " << p->getInstalledTo()->getDestinationPath() << endl;
         }
         else
         {
@@ -734,9 +725,9 @@ InstallData NetworkPackageManager :: dealWithItem( QCheckListItem *item )
     }
 }
 
-void NetworkPackageManager :: displayText( const QString &t )
+void NetworkPackageManager :: displayText( const QString &/*t*/ )
 {
-    cout << t << endl;
+//    cout << t << endl;
 }
 
 
@@ -778,7 +769,7 @@ void NetworkPackageManager :: searchForPackage( const QString &text )
 {
     if ( !text.isEmpty() )
     {
-        cout << "searching for " << text << endl;
+//        cout << "searching for " << text << endl;
         // look through package list for text startng at current position
         vector<InstallData> workingPackages;
         QCheckListItem *start = (QCheckListItem *)packagesList->currentItem();
@@ -791,10 +782,10 @@ void NetworkPackageManager :: searchForPackage( const QString &text )
         for ( QCheckListItem *item = start; item != 0 ;
               item = (QCheckListItem *)item->nextSibling() )
         {
-            cout << "checking " << item->text().lower() << endl;
+//            cout << "checking " << item->text().lower() << endl;
             if ( item->text().lower().find( text ) != -1 )
             {
-                cout << "matched " << item->text() << endl;
+//                cout << "matched " << item->text() << endl;
                 packagesList->ensureItemVisible( item );
                 packagesList->setCurrentItem( item );
                 break;

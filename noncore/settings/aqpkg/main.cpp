@@ -15,9 +15,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <iostream>
-using namespace std;
-
 #ifdef QWS
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
@@ -35,7 +32,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-  cout << "Root dir = " << ROOT << endl;
+//  cout << "Root dir = " << ROOT << endl;
 #ifdef QWS
   QPEApplication a( argc, argv );
 #else
@@ -44,7 +41,7 @@ int main(int argc, char *argv[])
 
 #ifdef QWS
   // Disable suspend mode
-  cout << "Disabling suspend mode" << endl;
+//  cout << "Disabling suspend mode" << endl;
   QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::DisableSuspend;
 #endif
 
@@ -56,7 +53,7 @@ int main(int argc, char *argv[])
 
 #ifdef QWS
   // Reenable suspend mode
-  cout << "Enabling suspend mode" << endl;
+//  cout << "Enabling suspend mode" << endl;
   QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
 #endif
  #ifdef _DEBUG
