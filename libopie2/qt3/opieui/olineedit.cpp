@@ -447,8 +447,8 @@ QPopupMenu *OLineEdit::createPopupMenu()
     if ( compObj() )
     {
         QPopupMenu *subMenu = new QPopupMenu( popup );
-        connect( subMenu, SIGNAL( activated( int ) ),
-                 this, SLOT( completionMenuActivated( int ) ) );
+        connect( subMenu, SIGNAL( activated(int) ),
+                 this, SLOT( completionMenuActivated(int) ) );
 
         popup->insertSeparator();
         //popup->insertItem( SmallIconSet("completion"), i18n("Text Completion"),
@@ -616,17 +616,17 @@ void OLineEdit::makeCompletionBox()
     d->completionBox = new OCompletionBox( this, "completion box" );
     if ( handleSignals() )
     {
-        connect( d->completionBox, SIGNAL(highlighted( const QString& )),
-                 SLOT(setText( const QString& )) );
-        connect( d->completionBox, SIGNAL(userCancelled( const QString& )),
-                 SLOT(setText( const QString& )) );
+        connect( d->completionBox, SIGNAL(highlighted(const QString&)),
+                 SLOT(setText(const QString&)) );
+        connect( d->completionBox, SIGNAL(userCancelled(const QString&)),
+                 SLOT(setText(const QString&)) );
 
         // Nice lil' hacklet ;) KComboBox doesn't know when the completionbox
         // is created (childEvent() is even more hacky, IMHO), so we simply
         // forward the completionbox' activated signal from here.
         if ( parentWidget() && parentWidget()->inherits("KComboBox") )
-            connect( d->completionBox, SIGNAL( activated( const QString& )),
-                     parentWidget(), SIGNAL( activated( const QString & )));
+            connect( d->completionBox, SIGNAL( activated(const QString&)),
+                     parentWidget(), SIGNAL( activated(const QString&)));
     }
 }
 
@@ -706,12 +706,12 @@ void OLineEdit::setCompletionObject( OCompletion* comp, bool hsig )
 {
     OCompletion *oldComp = compObj();
     if ( oldComp && handleSignals() )
-        disconnect( oldComp, SIGNAL( matches( const QStringList& )),
-                    this, SLOT( setCompletedItems( const QStringList& )));
+        disconnect( oldComp, SIGNAL( matches(const QStringList&)),
+                    this, SLOT( setCompletedItems(const QStringList&)));
 
     if ( comp && hsig )
-      connect( comp, SIGNAL( matches( const QStringList& )),
-               this, SLOT( setCompletedItems( const QStringList& )));
+      connect( comp, SIGNAL( matches(const QStringList&)),
+               this, SLOT( setCompletedItems(const QStringList&)));
 
     OCompletionBase::setCompletionObject( comp, hsig );
 }

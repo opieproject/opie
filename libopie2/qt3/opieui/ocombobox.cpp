@@ -328,20 +328,20 @@ void OComboBox::setLineEdit( OLineEdit *edit )
 
     // forward some signals. We only emit returnPressed() ourselves.
     if ( d->olineEdit ) {
-        connect( d->olineEdit, SIGNAL( completion( const QString& )),
-                 SIGNAL( completion( const QString& )) );
-        connect( d->olineEdit, SIGNAL( substringCompletion( const QString& )),
-                 SIGNAL( substringCompletion( const QString& )) );
+        connect( d->olineEdit, SIGNAL( completion(const QString&)),
+                 SIGNAL( completion(const QString&)) );
+        connect( d->olineEdit, SIGNAL( substringCompletion(const QString&)),
+                 SIGNAL( substringCompletion(const QString&)) );
         connect( d->olineEdit,
-                 SIGNAL( textRotation( OCompletionBase::KeyBindingType )),
-                 SIGNAL( textRotation( OCompletionBase::KeyBindingType )) );
+                 SIGNAL( textRotation(OCompletionBase::KeyBindingType)),
+                 SIGNAL( textRotation(OCompletionBase::KeyBindingType)) );
         connect( d->olineEdit,
-                 SIGNAL( completionModeChanged( OGlobalSettings::Completion )),
-                 SIGNAL( completionModeChanged( OGlobalSettings::Completion)));
+                 SIGNAL( completionModeChanged(OGlobalSettings::Completion)),
+                 SIGNAL( completionModeChanged(OGlobalSettings::Completion)));
 
         connect( d->olineEdit,
-                 SIGNAL( aboutToShowContextMenu( QPopupMenu * )),
-                 SIGNAL( aboutToShowContextMenu( QPopupMenu * )) );
+                 SIGNAL( aboutToShowContextMenu(QPopupMenu*)),
+                 SIGNAL( aboutToShowContextMenu(QPopupMenu*)) );
     }
     #else
     #warning OComboBox is not fully functional with Qt2

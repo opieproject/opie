@@ -67,14 +67,14 @@ OCompletionBox::OCompletionBox( QWidget *parent, const char *name )
     setVScrollBarMode( Auto );
     setHScrollBarMode( AlwaysOff );
 
-    connect( this, SIGNAL( doubleClicked( QListBoxItem * )),
-             SLOT( slotActivated( QListBoxItem * )) );
+    connect( this, SIGNAL( doubleClicked(QListBoxItem*)),
+             SLOT( slotActivated(QListBoxItem*)) );
 
     // grmbl, just QListBox workarounds :[ Thanks Volker.
-    connect( this, SIGNAL( currentChanged( QListBoxItem * )),
+    connect( this, SIGNAL( currentChanged(QListBoxItem*)),
              SLOT( slotCurrentChanged() ));
-    connect( this, SIGNAL( clicked( QListBoxItem * )),
-             SLOT( slotItemClicked( QListBoxItem * )) );
+    connect( this, SIGNAL( clicked(QListBoxItem*)),
+             SLOT( slotItemClicked(QListBoxItem*)) );
 }
 
 OCompletionBox::~OCompletionBox()

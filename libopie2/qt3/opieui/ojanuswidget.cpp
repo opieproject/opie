@@ -109,7 +109,7 @@ OJanusWidget::OJanusWidget( QWidget *parent, const char *name, int face )
       mTreeList->setRootIsDecorated(true);
       mTreeList->setSorting( -1 );
       connect( mTreeList, SIGNAL(selectionChanged()), SLOT(slotShowPage()) );
-      connect( mTreeList, SIGNAL(clicked(QListViewItem *)), SLOT(slotItemClicked(QListViewItem *)));
+      connect( mTreeList, SIGNAL(clicked(QListViewItem*)), SLOT(slotItemClicked(QListViewItem*)));
 
       //
       // Page area. Title at top with a separator below and a pagestack using
@@ -159,8 +159,8 @@ OJanusWidget::OJanusWidget( QWidget *parent, const char *name, int face )
     vbox->addWidget( mTitleSep );
 
     mPageStack = new QWidgetStack( page );
-    connect(mPageStack, SIGNAL(aboutToShow(QWidget *)),
-            this, SIGNAL(aboutToShowPage(QWidget *)));
+    connect(mPageStack, SIGNAL(aboutToShow(QWidget*)),
+            this, SIGNAL(aboutToShowPage(QWidget*)));
     vbox->addWidget( mPageStack, 10 );
   }
   else if( mFace == Tabbed )
@@ -863,9 +863,9 @@ void OJanusWidget::unfoldTreeList( bool persist )
   if( mFace == TreeList )
   {
     if( persist )
-      connect( mTreeList, SIGNAL( collapsed( QListViewItem * ) ), this, SLOT( slotReopen( QListViewItem * ) ) );
+      connect( mTreeList, SIGNAL( collapsed(QListViewItem*) ), this, SLOT( slotReopen(QListViewItem*) ) );
     else
-      disconnect( mTreeList, SIGNAL( collapsed( QListViewItem * ) ), this, SLOT( slotReopen( QListViewItem * ) ) );
+      disconnect( mTreeList, SIGNAL( collapsed(QListViewItem*) ), this, SLOT( slotReopen(QListViewItem*) ) );
 
     for( QListViewItem * item = mTreeList->firstChild(); item; item = item->itemBelow() )
       item->setOpen( true );
