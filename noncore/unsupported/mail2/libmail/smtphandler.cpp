@@ -122,11 +122,11 @@ void SmtpHandler::readyRead()
 		_state = Mail;
 	} else if (_state == Mail && responseCode == 250) {
 		emit status(tr("SMTP> MAIL FROM: *"));
-		sendToSocket("MAIL FROM: " + _account.email() + "\r\n");
+		sendToSocket("MAIL FROM: <" + _account.email() + ">\r\n");
 		_state = Rcpt;
 	} else if (_state == Rcpt && responseCode == 250) {
 		emit status(tr("SMTP> RCPT TO: *"));
-		sendToSocket("RCPT TO: " + _to + "\r\n");
+		sendToSocket("RCPT TO: <" + _to + ">\r\n");
 		_state = Data;
 	} else if (_state == Data && responseCode == 250) {
 		emit status(tr("SMTP> DATA"));
