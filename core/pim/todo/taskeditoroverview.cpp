@@ -33,10 +33,8 @@
 #include <qpe/categoryselect.h>
 #include <qpe/datebookmonth.h>
 #include <qpe/resource.h>
-#include <qpe/timestring.h>
 
 #include <qcheckbox.h>
-#include <qcombobox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qmultilineedit.h>

@@ -1,4 +1,3 @@
-#include "mainwindow.h"
 #include "quickedit.h"
 
 using namespace Todo;

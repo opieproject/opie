@@ -1,7 +1,4 @@
-#include <qdatetime.h>
-#include <qlabel.h>
 #include <qlayout.h>
-#include <qmultilineedit.h>
 
 #include <opie/orecurrancewidget.h>
 

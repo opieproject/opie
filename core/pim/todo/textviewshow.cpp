@@ -1,4 +1,3 @@
-#include "mainwindow.h"
 #include "textviewshow.h"
 
 using namespace Todo;

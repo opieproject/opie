@@ -33,15 +33,11 @@
 #include <opie/opimstate.h>
 
 #include <qpe/datebookmonth.h>
-#include <qpe/resource.h>
-#include <qpe/timestring.h>
 
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qscrollview.h>
-#include <qtoolbutton.h>
 #include <qwhatsthis.h>
 
 // FIXME add the hack slots instead of setPopup!!!!

@@ -21,7 +21,6 @@
 #include "mainwindow.h"
 
 
-#include <qdatetime.h>
 
 #include <qpe/qpeapplication.h>
 

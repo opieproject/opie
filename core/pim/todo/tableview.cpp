@@ -32,7 +32,6 @@
 #include <qcombobox.h>
 #include <qlineedit.h>
 #include <qtimer.h>
-#include <qpoint.h>
 #include <qpopupmenu.h>
 
 #include <qpe/config.h>
