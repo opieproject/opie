@@ -7,11 +7,12 @@ HEADERS		= d3des.h \
 		  krfbconnection.h \
 		  krfbdecoder.h \
 		  krfblogin.h \
-		  krfboptions.h \
+		  krfbserver.h \
 		  krfbserverinfo.h \
 		  kvnc.h \
-		  kvncconnectdlg.h \
-		  kvncoptionsdlg.h \
+		  kvncconndlg.h \
+		  kvncbookmarkdlg.h \
+		  version.h \
 		  vncauth.h
 SOURCES		= d3des.c \
 		  vncauth.c \
@@ -20,12 +21,13 @@ SOURCES		= d3des.c \
 		  krfbconnection.cpp \
 		  krfbdecoder.cpp \
 		  krfblogin.cpp \
-		  krfboptions.cpp \
+		  krfbserver.cpp \
 		  kvnc.cpp \
-		  kvncconnectdlg.cpp \
-		  kvncoptionsdlg.cpp \
+		  kvncconndlg.cpp \
+		  kvncbookmarkdlg.cpp \
 		  main.cpp
-INTERFACES	= vncoptionsbase.ui
+INTERFACES	= kvncconndlgbase.ui \
+						kvncbookmarkdlgbase.ui
 TARGET          = keypebble
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include

@@ -10,14 +10,27 @@
 #include <qpe/qpetoolbar.h>
 #include <qtimer.h>
 #include <qmessagebox.h>
+#include <qspinbox.h>
+#include <qlistbox.h>
+#include <qlineedit.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/global.h>
+#include <qpe/qpetoolbar.h>
+#include <qpe/resource.h>
+
 #include <assert.h>
 
 #include "kvnc.h"
 #include "krfbcanvas.h"
-#include "kvncoptionsdlg.h"
 #include "krfbconnection.h"
+#include "kvncconndlg.h"
+#include "krfbserver.h"
+
+static int u_id = 1;
+static int get_unique_id() 
+{   
+		return u_id++;
+}
 
 
 /* XPM */
@@ -48,9 +61,19 @@ KVNC::KVNC( const char *name ) : QMainWindow( 0, name )
     setCaption( tr("VNC Viewer") );
     fullscreen = false;
 
-    canvas = new KRFBCanvas( this, "canvas" );
-    setCentralWidget( canvas );
+		stack = new QWidgetStack( this );
+		setCentralWidget( stack );
 
+		bookmarkSelector=new KVNCBookmarkDlg();
+		stack->addWidget(bookmarkSelector,get_unique_id());
+		stack->raiseWidget( bookmarkSelector );                                        
+
+		canvas = new KRFBCanvas( stack, "canvas" );
+		stack->addWidget(canvas,get_unique_id());
+    setCentralWidget( stack );
+
+    connect( bookmarkSelector->bookmarkList, SIGNAL(doubleClicked(QListBoxItem *)),
+	    this, SLOT(openConnection(QListBoxItem *)) );
     connect( canvas->connection(), SIGNAL(statusChanged(const QString &)),
 	    this, SLOT(statusMessage(const QString &)) );
     connect( canvas->connection(), SIGNAL(error(const QString &)),
@@ -66,16 +89,73 @@ KVNC::KVNC( const char *name ) : QMainWindow( 0, name )
     connect( cornerButton, SIGNAL(pressed()), this, SLOT(showMenu()) );
     canvas->setCornerWidget( cornerButton );
 
-    QTimer::singleShot( 0, canvas, SLOT(openConnection()) );
+		stack->raiseWidget( bookmarkSelector );
+
+
+		QPEToolBar *bar = new QPEToolBar( this );
+
+		 QAction *n = new QAction( tr( "New Connection" ), Resource::loadPixmap( "new" ),
+				QString::null, 0, this, 0 );
+		 connect( n, SIGNAL( activated() ),
+						this, SLOT( newConnection() ) );
+		n->addTo( bar );
+								     
+		 QAction *o = new QAction( tr( "Open Bookmark" ), Resource::loadPixmap( "edit" ),
+				QString::null, 0, this, 0 );
+		 connect( o, SIGNAL( activated() ),
+						this, SLOT( openConnection() ) );
+		o->addTo( bar );
+
+		 QAction *d = new QAction( tr( "Delete Bookmark" ), Resource::loadPixmap( "trash" ),
+				QString::null, 0, this, 0 );
+		 connect( d, SIGNAL( activated() ),
+						this, SLOT( deleteBookmark() ) );
+		d->addTo( bar );
 }
 
 KVNC::~KVNC()
 {
+
 }
 
-void KVNC::openURL( const QUrl &url )
+void KVNC::newConnection()
 {
-    canvas->openURL( url );
+    curServer=new KRFBServer;
+
+		KVNCConnDlg dlg( curServer,this);
+		dlg.showMaximized();
+		if (	dlg.exec()) {
+				if (!curServer->name.isEmpty())
+						bookmarkSelector->addBookmark(curServer);
+				canvas->openConnection(*curServer);
+		} else
+				curServer=0;
+}
+
+void KVNC::openConnection( QString name)
+{
+    curServer=bookmarkSelector->getServer(name);
+
+		if (curServer) {
+				KVNCConnDlg dlg( curServer,this);
+			dlg.showMaximized();
+
+			if ( dlg.exec() ) {
+					canvas->openConnection(*curServer);
+					bookmarkSelector->writeBookmarks();
+			} else
+					curServer=0;
+		}
+}
+
+void KVNC::openConnection( void )
+{
+		openConnection( bookmarkSelector->selectedBookmark());
+}
+
+void KVNC::openConnection( QListBoxItem * item)
+{
+		openConnection(item->text());
 }
 
 void KVNC::setupActions()
@@ -88,14 +168,11 @@ void KVNC::setupActions()
     fullScreenAction->addTo( cornerMenu );
     fullScreenAction->setEnabled( false );
 
-    optionsAction = new QAction( tr("Settings"), QString::null, 0, 0 );
-    connect( optionsAction, SIGNAL(activated()), this, SLOT( showOptions() ) );
-    optionsAction->addTo( cornerMenu );
-
-    connectAction = new QAction( tr("Connect..."), QString::null, 0, 0 );
-    connect( connectAction, SIGNAL(activated()),
-	    canvas, SLOT( openConnection() ) );
-    connectAction->addTo( cornerMenu );
+    ctlAltDelAction = new QAction( tr("Send Contrl-Alt-Delete"), QString::null, 0, 0 );
+    connect( ctlAltDelAction, SIGNAL(activated()),
+	    canvas, SLOT( sendCtlAltDel() ) );
+    ctlAltDelAction->addTo( cornerMenu );
+    ctlAltDelAction->setEnabled( false );
 
     disconnectAction = new QAction( tr("Disconnect"), QString::null, 0, 0 );
     connect( disconnectAction, SIGNAL(activated()),
@@ -106,26 +183,31 @@ void KVNC::setupActions()
 
 void KVNC::toggleFullScreen()
 {
-    if ( fullscreen ) {
-	canvas->releaseKeyboard();
-	canvas->reparent( this, 0, QPoint(0,0), false );
-	canvas->setFrameStyle( QFrame::Panel | QFrame::Sunken );
-	setCentralWidget( canvas );
-	canvas->show();
-	fullScreenAction->setText( tr("Full Screen") );
-    } else {
-	canvas->setFrameStyle( QFrame::NoFrame );
-	canvas->reparent( 0,WStyle_Tool | WStyle_Customize | WStyle_StaysOnTop,
-		QPoint(0,0),false);
-	canvas->resize(qApp->desktop()->width(), qApp->desktop()->height());
-	canvas->raise();
-	canvas->setFocus();
-	canvas->grabKeyboard();
-	canvas->show();
-
-	fullScreenAction->setText( tr("Stop Full Screen") );
-    }
-
+		if ( fullscreen ) {
+			canvas->releaseKeyboard();
+			canvas->reparent( stack, 0, QPoint(0,0), false );
+			canvas->setFrameStyle( QFrame::Panel | QFrame::Sunken );
+			setCentralWidget( stack );
+			stack->addWidget(canvas,get_unique_id());
+			stack->raiseWidget(canvas);
+			canvas->show();
+			stack->show();
+			fullScreenAction->setText( tr("Full Screen") );
+		} else {
+			canvas->setFrameStyle( QFrame::NoFrame );
+			stack->removeWidget(canvas);
+				canvas->reparent( 0,WStyle_Tool | WStyle_Customize | WStyle_StaysOnTop,
+			QPoint(0,0),false);
+			canvas->resize(qApp->desktop()->width(), qApp->desktop()->height());
+			canvas->raise();
+			canvas->setFocus();
+				canvas->grabKeyboard();
+				canvas->show();
+				
+				fullScreenAction->setText( tr("Stop Full Screen") );
+		}
+						
+						
     fullscreen = !fullscreen;
 }
 
@@ -149,9 +231,10 @@ void KVNC::connected()
 {
     static QString msg = tr( "Connected to remote host" );
     statusMessage( msg );
-    connectAction->setEnabled( false );
+    ctlAltDelAction->setEnabled(true);
     disconnectAction->setEnabled( true );
     fullScreenAction->setEnabled( true );
+		stack->raiseWidget(canvas);
 }
 
 void KVNC::loggedIn()
@@ -162,11 +245,15 @@ void KVNC::loggedIn()
 
 void KVNC::disconnected()
 {
+
+		if ( fullscreen ) 
+				toggleFullScreen();
     static QString msg = tr( "Connection closed" );
     statusMessage( msg );
-    connectAction->setEnabled( true );
+    ctlAltDelAction->setEnabled(false);
     disconnectAction->setEnabled( false );
     fullScreenAction->setEnabled( false );
+		stack->raiseWidget(bookmarkSelector);
 }
 
 void KVNC::statusMessage( const QString &m )
@@ -179,12 +266,7 @@ void KVNC::error( const QString &msg )
     statusMessage( msg );
     QMessageBox::warning( this, tr("VNC Viewer"), msg );
 }
-
-void KVNC::showOptions()
+void KVNC::deleteBookmark(void)
 {
-    KVNCOptionsDlg *wdg = new KVNCOptionsDlg( canvas->connection()->options(), this );
-    wdg->showMaximized();
-    wdg->exec();
-    delete wdg;
+		bookmarkSelector->deleteBookmark(bookmarkSelector->selectedBookmark());
 }
-

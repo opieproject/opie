@@ -150,7 +150,38 @@ void KRFBBuffer::drawRawRectChunk( void *data,
 	*p = qRgb( r,g,b );
       }
     }
-  }
+  } else if (decoder->format->bpp == 16 ) {
+
+				CARD16 *d = (CARD16 *) data;
+
+				uint r,g,b;
+
+				for ( int j = 0; j < h; j++ ) {
+						for ( int i = 0; i < w ; i++ ) {
+								CARD16 pixel = d[ j * w + i ];
+								pixel = Swap16IfLE( pixel );
+
+								r = pixel;
+								r = r >> decoder->format->redShift;
+								r = r & redMax;
+
+								g = pixel;
+								g = g >> decoder->format->greenShift;
+								g = g & greenMax;
+
+								b = pixel;
+								b = b >> decoder->format->blueShift;
+								b = b & blueMax;
+
+								r = ( r * 255 ) / redMax;
+								g = ( g * 255 ) / greenMax;
+								b = ( b * 255 ) / blueMax;
+
+								ulong *p = ( ulong * ) img.scanLine( j ) + i;
+								*p = qRgb( r,g,b );
+						}
+				}
+		}
   else {
     p.setBrush( QBrush( Qt::black ) );
     p.drawRect( x, y, w, h );

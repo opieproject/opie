@@ -52,8 +52,6 @@ KRFBLogin::KRFBLogin( KRFBConnection *con )
   connect( this, SIGNAL( error( const QString & ) ),
 	   con, SIGNAL( error( const QString & ) ) );
 
-  connect( this, SIGNAL( passwordRequired( KRFBConnection * ) ),
-	   con, SIGNAL( passwordRequired( KRFBConnection * ) ) );
 
   qWarning( "Waiting for server version..." );
 
@@ -183,12 +181,12 @@ void KRFBLogin::getPassword()
   con->read( challenge, ChallengeLength );
 
   // Last chance to enter a password
-  if ( con->pass_.isNull() ) {
+  if ( con->options_->password.isNull() ) {
     qWarning( "krfblogin needs a password" );
     emit passwordRequired( con );
   }
 
-  if ( con->pass_.isNull() ) {
+  if ( con->options_->password.isNull() ) {
     QString msg = tr( "Error: This server requires a password, but none "
 			"has been specified.\n" );
     
@@ -196,7 +194,7 @@ void KRFBLogin::getPassword()
     return;
   }
 
-  vncEncryptBytes( (unsigned char *) challenge, con->pass_.data() );
+  vncEncryptBytes( (unsigned char *) challenge, QCString(con->options_->password.latin1()).data() );
   con->write( challenge, ChallengeLength );
 
   connect( con, SIGNAL( gotEnoughData() ), SLOT( gotAuthResult() ) );

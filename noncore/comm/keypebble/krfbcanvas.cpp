@@ -1,10 +1,10 @@
-#include "kvncconnectdlg.h"
 #include "krfbconnection.h"
 #include "krfbcanvas.h"
-#include "krfboptions.h"
+#include "krfbserver.h"
 #include "krfbbuffer.h"
 
 #include <qpe/config.h>
+#include <qpe/qpeapplication.h>
 
 #include <qapplication.h>
 #include <qclipboard.h>
@@ -18,12 +18,11 @@ KRFBCanvas::KRFBCanvas( QWidget *parent, const char *name )
   : QScrollView( parent, name )
 {
     connection_ = new KRFBConnection();
-    connect( connection_, SIGNAL( passwordRequired( KRFBConnection * ) ),
-	    this, SLOT( passwordRequired( KRFBConnection * ) ) );
     connect( connection_, SIGNAL( loggedIn() ),
 	    this, SLOT( loggedIn() ) );
 
     loggedIn_ = false;
+		QPEApplication::setStylusOperation(viewport(), QPEApplication::RightOnHold);
 
     viewport()->setFocusPolicy( QWidget::StrongFocus );
     viewport()->setFocus();
@@ -33,15 +32,16 @@ KRFBCanvas::~KRFBCanvas()
 {
 }
 
-void KRFBCanvas::openConnection()
+
+void KRFBCanvas::openConnection(KRFBServer server)
 {
-  KVNCConnectDlg dlg( connection_, this, "connect dialog" );
-  if ( dlg.exec() ) {
-    QCString host = dlg.hostname().latin1();
-    password = dlg.password();
-    connection_->connectTo( host, dlg.display() );
-  }
+
+  
+		QCString host = server.hostname.latin1();
+		password=server.password;
+		connection_->connectTo( server);
 }
+
 
 void KRFBCanvas::openURL( const QUrl &url )
 {
@@ -52,10 +52,8 @@ void KRFBCanvas::openURL( const QUrl &url )
 
   QCString host = url.host().latin1();
   int display = url.port();
-  if ( url.hasPassword() )
-    connection_->setPassword( url.password().latin1() );
 
-  connection_->connectTo( host, display );
+//  connection_->connectTo( host, display );
 }
 
 void KRFBCanvas::closeConnection()
@@ -69,10 +67,6 @@ void KRFBCanvas::closeConnection()
   update();
 }
 
-void KRFBCanvas::passwordRequired( KRFBConnection *con )
-{
-  con->setPassword( password.latin1() );
-}
 
 void KRFBCanvas::bell()
 {
@@ -166,4 +160,13 @@ void KRFBCanvas::clipboardChanged()
   if ( loggedIn_ ) {
       connection_->sendCutText( qApp->clipboard()->text() );
   }
+}
+void KRFBCanvas::sendCtlAltDel( void)
+{
+
+		qDebug("Here");
+  if ( loggedIn_ ) {
+    connection_->buffer()->keyPressEvent( &QKeyEvent(QEvent::KeyPress,Qt::Key_Delete, 0x7f,ControlButton|AltButton));
+ //   connection_->buffer()->keyPressEvent( &QKeyEvent(QEvent::KeyRelease,Qt::Key_Delete, 0x7f,ControlButton|AltButton));
+	}
 }

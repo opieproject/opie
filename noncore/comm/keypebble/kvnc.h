@@ -5,6 +5,8 @@
 
 #include <qmainwindow.h>
 #include <qurl.h>
+#include <qwidgetstack.h>
+#include "kvncbookmarkdlg.h"
 
 class QAction;
 class KRFBCanvas;
@@ -15,7 +17,7 @@ class QToolBar;
  * Top level window for Keystone.
  *
  * @author Richard Moore, rich@kde.org
- * @version $Id: kvnc.h,v 1.1 2002-01-25 22:14:52 kergoth Exp $
+ * @version $Id: kvnc.h,v 1.2 2002-09-04 17:53:13 treke Exp $
  */
 class KVNC : public QMainWindow
 {
@@ -25,10 +27,13 @@ public:
   ~KVNC(); 
 
 public slots:
+  void newConnection();
+  void deleteBookmark();
+  void openConnection(QListBoxItem *);
+  void openConnection(QString);
+  void openConnection(void);
   void toggleFullScreen();
-  void openURL( const QUrl & );
   void closeConnection();
-  void showOptions();
 
 protected:
   void setupActions();
@@ -50,7 +55,12 @@ private:
   QAction *fullScreenAction;
   QAction *optionsAction;
   QAction *disconnectAction;
+  QAction *ctlAltDelAction;;
   QAction *connectAction;
+
+	KVNCBookmarkDlg * bookmarkSelector;
+	QWidgetStack * stack;
+	KRFBServer * curServer;
 };
 
 #endif // KVNC_H

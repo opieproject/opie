@@ -7,6 +7,7 @@
 #include <qurl.h>
 
 class KRFBConnection;
+class KRFBServer;
 
 /**
  * Displays data from an KRFBDecoder, and sends events to the
@@ -23,13 +24,14 @@ public:
   KRFBConnection *connection() { return connection_; };
 
 public slots:
-  void openConnection();
+
+  void openConnection (KRFBServer);
   void openURL( const QUrl & );
   void closeConnection();
-  void passwordRequired( KRFBConnection * );
 
   void refresh();
   void bell();
+  void sendCtlAltDel(void);
 
 protected:
   virtual void keyPressEvent( QKeyEvent * );

@@ -1,5 +1,5 @@
 #include "krfbconnection.h"
-#include "krfboptions.h"
+#include "krfbserver.h"
 #include "krfbserverinfo.h"
 #include "krfbdecoder.h"
 #include "krfbbuffer.h"
@@ -795,6 +795,7 @@ void KRFBDecoder::sendKeyReleaseEvent( QKeyEvent *event )
     con->write( &key, 4 );
   }
 }
+
 
 int KRFBDecoder::toKeySym( QKeyEvent *k )
 {

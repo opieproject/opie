@@ -6,11 +6,12 @@
 #include <qobject.h>
 #include <qstring.h>
 #include <qcstring.h>
+#include "krfbserver.h"
 #include <qurl.h>
 
 class KRFBLogin;
 class KRBUpdateHandler;
-class KRFBOptions;
+class KRFBServer;
 class QSocket;
 class KRFBDecoder;
 class KRFBBuffer;
@@ -45,7 +46,7 @@ public:
   State state() const;
 
   //* Get the options for this connection
-  KRFBOptions *options() const { return options_; };
+  KRFBServer *options() const { return options_; };
 
   KRFBBuffer *buffer() const { return buffer_; };
 
@@ -57,20 +58,17 @@ public:
   //* Get the base from which the port for a given display is calculated.
   int portBase() const;
 
-  //* Set the password which will be used to login
-  void setPassword( const QCString &pass );
-
   //* Open a connection
-  void connectTo( const QCString &host, int display );
+  void connectTo( KRFBServer);
 
   //* Close the connection
   void disconnect();
 
   //* Get the host
-  const QCString host() const { return host_; };
+  const QCString host() const { return options_->hostname.latin1(); };
 
   //* Get the display
-  int display() const { return display_; };
+  int display() const { return options_->display; };
 
   //* Get the current host/display as a URL
   const QUrl &url();
@@ -133,17 +131,14 @@ private:
   int write( void *buf, int sz );
 
 private:
-  QCString host_;
   int portBase_;
-  int display_;
-  QCString pass_;
   QSocket *sock;
   State currentState_;
   unsigned int minData_;
   QTimer *updater;
   KRFBLogin *login;
   KRFBDecoder *decoder_;
-  KRFBOptions *options_;
+  KRFBServer *options_;
   KRFBBuffer *buffer_;
   QUrl url_;
 };
