@@ -6,10 +6,6 @@
         <translation>Heute</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Please fill out the business card &lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Bitte füllen Sie die Visitenkarte aus&lt;/b&gt;</translation>
-    </message>
-    <message>
         <source>&lt;b&gt;%1&lt;/b&gt; new mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
         <translation>&lt;b&gt;%1&lt;/b&gt; neue Nachricht(en), &lt;b&gt;%2&lt;/b&gt; ausgehende</translation>
     </message>
@@ -26,10 +22,6 @@
         <translation>Keine aktiven Aufgaben</translation>
     </message>
     <message>
-        <source>No more appointments today</source>
-        <translation>Heute keine Termine mehr</translation>
-    </message>
-    <message>
         <source>No appointments today</source>
         <translation>Heute keine Termine</translation>
     </message>
@@ -40,6 +32,10 @@
     <message>
         <source>Please fill out the business card</source>
         <translation>Bitte füller Sie die Visitenkarte aus</translation>
+    </message>
+    <message>
+        <source>No more  today</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -80,13 +76,6 @@ appointments</source>
 anzeigen</translation>
     </message>
     <message>
-        <source>How many 
-appointment
-should should 
-be shown?</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Calendar</source>
         <translation>Kalender</translation>
     </message>
@@ -107,12 +96,6 @@ werden?</translation>
 many letters</source>
         <translation>Zeilenumbruch nach
 wievielen Buchstaben?</translation>
-    </message>
-    <message>
-        <source>Should today be
-autostarted on
-resume ? (Opie only)</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Misc</source>

@@ -135,14 +135,6 @@ bevor Sie Daten eingeben.</translation>
         <translation>Neue Aufgabe</translation>
     </message>
     <message>
-        <source>Edit</source>
-        <translation type="obsolete">Editieren</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Löschen</translation>
-    </message>
-    <message>
         <source>Beam</source>
         <translation>Senden</translation>
     </message>
@@ -153,14 +145,6 @@ bevor Sie Daten eingeben.</translation>
     <message>
         <source>Completed tasks</source>
         <translation>Erledigte Aufgaben</translation>
-    </message>
-    <message>
-        <source>Task</source>
-        <translation type="obsolete">Aufgaben</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="obsolete">Ansicht</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -230,10 +214,6 @@ Trozdem beenden?</translation>
     <message>
         <source>Options</source>
         <translation>Optionen</translation>
-    </message>
-    <message>
-        <source>Delete all tasks?</source>
-        <translation type="obsolete">Alle Aufgaben löschen?</translation>
     </message>
     <message>
         <source>all tasks</source>

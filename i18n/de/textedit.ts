@@ -121,25 +121,12 @@
         <translation>Schrift</translation>
     </message>
     <message>
-        <source>Save File As?</source>
-        <translation type="obsolete">Datei speichern als?</translation>
-    </message>
-    <message>
         <source>Permissions</source>
         <translation>Dateirechte</translation>
     </message>
     <message>
         <source>FontDialog</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want
-to delete the current file
-&gt;from the disk?
-This is irreversable!!</source>
-        <translation type="obsolete">Wollen Sie diese Datei wirklich
-löschen? Dieser Befehl ist
-unwiderruflich!</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -152,10 +139,6 @@ unwiderruflich!</translation>
     <message>
         <source>About</source>
         <translation>Über</translation>
-    </message>
-    <message>
-        <source>Open File</source>
-        <translation type="obsolete">Datei öffnen</translation>
     </message>
     <message>
         <source>Text Editor has detected
@@ -189,57 +172,6 @@ This is irreversable!!</source>
     <message>
         <source>Text</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>fileBrowser</name>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">Name</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Größe</translation>
-    </message>
-    <message>
-        <source>Documents</source>
-        <translation type="obsolete">Dokumente</translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation type="obsolete">Alle Dateien</translation>
-    </message>
-    <message>
-        <source>Hidden files</source>
-        <translation type="obsolete">versteckte Dateien</translation>
-    </message>
-    <message>
-        <source>Type: %1</source>
-        <translation type="obsolete">Typ: %1</translation>
-    </message>
-    <message>
-        <source>Change Directory</source>
-        <translation type="obsolete">Verzeichnis wechseln</translation>
-    </message>
-    <message>
-        <source>Make Directory</source>
-        <translation type="obsolete">Verzeichnis erstellen</translation>
-    </message>
-    <message>
-        <source>Rescan</source>
-        <translation type="obsolete">neu laden</translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation type="obsolete">Umbenennen</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Löschen</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete">Alle</translation>
     </message>
 </context>
 <context>
@@ -307,29 +239,6 @@ This is irreversable!!</source>
     <message>
         <source>Error setting mode</source>
         <translation>Fehler beim Setzen des Modus</translation>
-    </message>
-</context>
-<context>
-    <name>fileSaver</name>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">Name</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Größe</translation>
-    </message>
-    <message>
-        <source>fileSaver</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Datum</translation>
-    </message>
-    <message>
-        <source>set file permissions</source>
-        <translation type="obsolete">setze Dateirechte</translation>
     </message>
 </context>
 </TS>

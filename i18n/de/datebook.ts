@@ -107,10 +107,6 @@ Trozdem beenden?</translation>
 <context>
     <name>DateBookDayHeaderBase</name>
     <message>
-        <source>Form1</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>M</source>
         <translation>M</translation>
     </message>
@@ -281,10 +277,6 @@ Trozdem beenden?</translation>
 <context>
     <name>DateBookWeekHeaderBase</name>
     <message>
-        <source>Form1</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Y: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -298,18 +290,7 @@ Trozdem beenden?</translation>
     </message>
 </context>
 <context>
-    <name>DateBookWeekLstDayHdrBase</name>
-    <message>
-        <source>Form1</source>
-        <translation type="obsolete"></translation>
-    </message>
-</context>
-<context>
     <name>DateBookWeekLstHeaderBase</name>
-    <message>
-        <source>Form2</source>
-        <translation type="obsolete"></translation>
-    </message>
     <message>
         <source>W: 00,00</source>
         <translation type="unfinished"></translation>
@@ -435,20 +416,12 @@ Trozdem beenden?</translation>
         <translation>Reise</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="obsolete">Beschreibung</translation>
-    </message>
-    <message>
         <source>Office</source>
         <translation>Büro</translation>
     </message>
     <message>
         <source>Home</source>
         <translation>zu Hause</translation>
-    </message>
-    <message>
-        <source>Start - End</source>
-        <translation type="obsolete">Start - Ende</translation>
     </message>
     <message>
         <source>Jan 02 00</source>
@@ -746,15 +719,15 @@ und</translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation type="obsolete"></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="obsolete"></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="obsolete"></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>months</source>

@@ -2,80 +2,12 @@
 <context>
     <name>KCheckers</name>
     <message>
-        <source>New</source>
-        <translation type="obsolete">Neu</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="obsolete">Beenden</translation>
-    </message>
-    <message>
-        <source>Beginner</source>
-        <translation type="obsolete">Anfänger</translation>
-    </message>
-    <message>
-        <source>Novice</source>
-        <translation type="obsolete">Neuling</translation>
-    </message>
-    <message>
-        <source>Average</source>
-        <translation type="obsolete">Durchschnittlich</translation>
-    </message>
-    <message>
-        <source>Good</source>
-        <translation type="obsolete">Gut</translation>
-    </message>
-    <message>
-        <source>Expert</source>
-        <translation type="obsolete">Experte</translation>
-    </message>
-    <message>
-        <source>Master</source>
-        <translation type="obsolete">Meister</translation>
-    </message>
-    <message>
-        <source>English Rules</source>
-        <translation type="obsolete">Englische Regeln</translation>
-    </message>
-    <message>
-        <source>Russian Rules</source>
-        <translation type="obsolete">Russische Regeln</translation>
-    </message>
-    <message>
-        <source>Marble Board</source>
-        <translation type="obsolete">Marmorbrett</translation>
-    </message>
-    <message>
-        <source>Wooden Board</source>
-        <translation type="obsolete">Holzbrett</translation>
-    </message>
-    <message>
         <source>What&apos;s This</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>About KCheckers</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Game</source>
-        <translation type="obsolete">Spiel</translation>
-    </message>
-    <message>
-        <source>Skill</source>
-        <translation type="obsolete">Schwierigkeitsgrad</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Optionen</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation type="obsolete">Hilfe</translation>
     </message>
     <message>
         <source>Go!</source>
