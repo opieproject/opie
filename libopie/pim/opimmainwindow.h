@@ -20,6 +20,7 @@
  */
 
 class QCopChannel;
+class QDateTime;
 class OPimMainWindow : public QMainWindow {
     Q_OBJECT
 public:
@@ -56,8 +57,18 @@ protected slots:
     /** make a copy of it! */
     virtual void add( const OPimRecord& ) = 0;
 
+    virtual void doAlarm( const QDateTime&, int uid );
 
     QCopChannel* channel();
+
+protected:
+    /**
+     * start to play soundAlarm()
+     * @param count How many times the alarm is played
+     */
+    void startAlarm(int count = 10);
+    void killAlarm();
+    void timerEvent( QTimerEvent* );
 
 private slots:
     void appMessage( const QCString&, const QByteArray& );
@@ -73,13 +84,12 @@ private:
     QString m_service;
     QCString m_str;
     OPimRecord* m_fallBack;
-
+    int m_alarmCount;
+    int m_playedCount;
+    int m_timerId;
     /* I would love to do this as a template
      * but can't think of a right way
      * because I need signal and slots -zecke
-     */
-    /*
-     * the only pointer in the whole PIM API :(
      */
     virtual OPimRecord* record( int rtti, const QByteArray& ) ;
     int service();

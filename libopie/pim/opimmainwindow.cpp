@@ -1,6 +1,8 @@
 #include <qapplication.h>
+#include <qdatetime.h>
 #include <qcopchannel_qws.h>
 
+#include <qpe/sound.h>
 #include <qpe/qcopenvelope_qws.h>
 
 #include "opimresolver.h"
@@ -16,6 +18,8 @@ OPimMainWindow::OPimMainWindow( const QString& service, QWidget* parent,
     m_str = QString("QPE/"+m_service).local8Bit();
     m_channel= new QCopChannel(m_str, this );
     connect(m_channel, SIGNAL(received(const QCString&, const QByteArray& ) ),
+            this, SLOT( appMessage( const QCString&, const QByteArray& ) ) );
+    connect(qApp, SIGNAL(appMessage(const QCString&, const QByteArray& ) ),
             this, SLOT( appMessage( const QCString&, const QByteArray& ) ) );
 
     /* connect flush and reload */
@@ -50,7 +54,7 @@ void OPimMainWindow::appMessage( const QCString& cmd, const QByteArray& array ) 
         QCopEnvelope e(m_str, "removed(bool)" );
         e << rem;
     }else if ( cmd == "beam(int)" ) {
-        int uid, trans;
+        int uid;
         stream >> uid;
         beam( uid);
     }else if ( cmd == "show(int)" ) {
@@ -70,6 +74,16 @@ void OPimMainWindow::appMessage( const QCString& cmd, const QByteArray& array ) 
         if (!m_fallBack) return;
         add( *m_fallBack );
         delete m_fallBack;
+    }else if ( cmd == "alarm(QDateTime,int)" ) {
+        QDateTime dt; int uid;
+        stream >> dt;
+        stream >> uid;
+        qWarning(" Date: %s Uid: %d", dt.toString().latin1(), uid );
+        QDateTime current = QDateTime::currentDateTime();
+        if ( current.time().hour() != dt.time().hour() && current.time().minute() != dt.time().minute() )
+            return;
+        doAlarm( dt,  uid );
+
     }
 }
 /* implement the url scripting here */
@@ -101,4 +115,24 @@ int OPimMainWindow::service() {
         m_rtti  =  OPimResolver::self()->serviceId( m_service );
 
     return m_rtti;
+}
+void OPimMainWindow::doAlarm( const QDateTime&, int  ) {
+
+}
+void OPimMainWindow::startAlarm(int count  ) {
+    m_alarmCount = count;
+    m_playedCount = 0;
+    Sound::soundAlarm();
+    m_timerId = startTimer( 5000 );
+}
+void OPimMainWindow::killAlarm() {
+    killTimer( m_timerId );
+}
+void OPimMainWindow::timerEvent( QTimerEvent* e) {
+    if ( m_playedCount <m_alarmCount ) {
+        m_playedCount++;
+        Sound::soundAlarm();
+    }else {
+        killTimer( e->timerId() );
+    }
 }
