@@ -141,7 +141,7 @@ config OPIE_NO_SOUND_PCM_READ_BITS
   default n
 
 config OPIE_WE_VERSION_OVERRIDE
-  boolean "Override autodetection of wireless extension (WE) version
+  boolean "Override autodetection of wireless extension (WE) version"
   default n
 
 config OPIE_WE_VERSION
