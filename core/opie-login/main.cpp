@@ -200,7 +200,6 @@ int main ( int argc, char **argv )
                 LoginApplication *app = new LoginApplication ( argc, argv, ppid );
                 LoginApplication::setLoginAs ( autolog );
 
-
 				if ( LoginApplication::changeIdentity ( ))
 					::exit ( LoginApplication::login ( ));
 				else
