@@ -208,6 +208,7 @@ QArray<int> ODateBookAccessBackend_SQL::allRecords()const
 }
 
 QArray<int> ODateBookAccessBackend_SQL::queryByExample(const OPimEvent&, int,  const QDateTime& ) {
+	qDebug( "Accessing ODateBookAccessBackend_SQL::queryByExample() which is not implemented!" );
     return QArray<int>();
 }
 

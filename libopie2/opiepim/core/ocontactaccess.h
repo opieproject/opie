@@ -116,21 +116,6 @@ class OPimContactAccess: public QObject, public OPimAccessTemplate<OPimContact>
         ~OPimContactAccess ();
 
 
-	/** 
-	 * Return all possible settings for queryByExample().
-	 *  @return All settings provided by the current backend
-	 * (i.e.: WildCards & IgnoreCase)
-	 * @see QuerySettings in OPimBase for details of the parameter, queryByExample()
-	 */
-	const uint querySettings();
-
-	/** 
-	 * Check whether settings are correct for queryByExample().
-	 * @return <i>true</i> if the given settings are correct and possible.
-	 * @see QuerySettings in OPimBase for details of the parameter
-	 */
-	bool hasQuerySettings ( int querySettings ) const;
-
 	/**
 	 * if the resource was changed externally.
 	 * You should use the signal instead of polling possible changes !

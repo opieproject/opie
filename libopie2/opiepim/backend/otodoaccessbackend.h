@@ -64,7 +64,7 @@ public:
      */
     bool hasQuerySettings (uint querySettings) const;
 
-    UIDArray queryByExample( const UIDArray& uidlist, const OPimTodo& query, int settings, const QDateTime& endperiod = QDateTime() )const;
+    UIDArray queryByExample( const UIDArray& uidlist, const OPimTodo& query, int settings, const QDateTime& startperiod = QDateTime() )const;
     UIDArray sorted( const UIDArray&, bool asc, int, int, const QArray<int>& )const;
     OPimBackendOccurrence::List occurrences( const QDate&, const QDate& )const;
     //@}

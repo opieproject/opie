@@ -1,3 +1,6 @@
+2005-01-03 Stefan Eilers <stefan@eilers-online.net>
+	* Fixing bug in API documentation
+	* Moving hasQuerySettings() and querySettings() to OPimAccessTemplate to be available for all frontends
 2004-12-28  Stefan Eilers <stefan@eilers-online.net>
 	* Make improved query by example accessable via frontend
 	* Some API documentation improvement

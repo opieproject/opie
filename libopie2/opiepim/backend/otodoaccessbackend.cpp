@@ -54,7 +54,7 @@ bool OPimTodoAccessBackend::hasQuerySettings (uint querySettings) const
 
 
 UIDArray OPimTodoAccessBackend::queryByExample( const UIDArray& uidlist, const OPimTodo& query, int settings,
-                                                 const QDateTime& endperiod )const 
+                                                 const QDateTime& startperiod )const 
 {
 	qDebug( "Accessing OPimTodoAccessBackend::queryByExample() which is not implemented!" );
 	return UIDArray();

@@ -87,45 +87,60 @@ public:
     virtual List allRecords()const;
     virtual List matchRegexp(  const QRegExp &r ) const;
 
+    /** 
+     * Return all possible settings for queryByExample().
+     *  @return All settings provided by the current backend
+     * (i.e.: WildCards & IgnoreCase)
+     * @see QuerySettings in OPimBase for details of the parameter, queryByExample()
+     */
+    const uint querySettings();
+
+    /** 
+     * Check whether settings are correct for queryByExample().
+     * @return <i>true</i> if the given settings are correct and possible.
+     * @see QuerySettings in OPimBase for details of the parameter
+     */
+     bool hasQuerySettings ( int querySettings ) const;
+
     /**
      * Query by example search interface. 
      * "Query by Example" provides a very powerful search engine. Use the query object 
      * (this may be a contact, a todo or databook event) 
      * as a search mask which is converted into a query regarding the querySettings. If a time period is needed 
-     * (as for OpimBase::DateDiff), you have to use the date/time in the query object and the endperiod (the last parameter).
+     * (as for OpimBase::DateDiff), you have to use the date/time in the query object and the startperiod (the last parameter).
      * @see QuerySettings in class OPimBase 
      * @param query The object which contains the query set
      * @param querySettings This parameter defines what should be searched and how the query should be interpreted
-     * @param endperiod Defines the end of a period for some special queries.    
+     * @param startperiod Defines the start of a period for some special queries.    
      */
-    virtual List queryByExample( const T& query, int querySettings, const QDateTime& endperiod = QDateTime() );
+    virtual List queryByExample( const T& query, int querySettings, const QDateTime& startperiod = QDateTime() );
 
     /**
      * Generic query by example search interface. This is a special version which handles generic OPimRecord types. They are converted 
      * automatically into the right datatype.
      * "Query by Example" provides a very powerful search engine. Use the query object (this may be a contact, a todo or databook event) 
      * as a search mask which is converted into a query regarding the querySettings. If a time period is needed 
-     * (as for OpimBase::DateDiff), you have to use the date/time in the query object and the endperiod (the last parameter).
+     * (as for OpimBase::DateDiff), you have to use the date/time in the query object and the startperiod (the last parameter).
      * @see QuerySettings in class OPimBase 
      * @param query The object which contains the query set
      * @param querySettings This parameter defines what should be searched and how the query should be interpreted
-     * @param endperiod Defines the end of a period for some special queries.    
+     * @param startperiod Defines the start of a period for some special queries.    
      */
-    virtual List queryByExample( const OPimRecord* query, int querySettings, const QDateTime& endperiod = QDateTime() );
+    virtual List queryByExample( const OPimRecord* query, int querySettings, const QDateTime& startperiod = QDateTime() );
     /**
      * Incremental query by example search interface. Providing incremental search, this one provides the feature 
      * to search in a list of records which may be returned by an other search.
      * "Query by Example" provides a very powerful search engine. Use the query object (this may be a contact, a todo or databook event) 
      * as a search mask which is converted into a query regarding the querySettings. If a time period is needed 
-     * (as for OpimBase::DateDiff), you have to use the date/time in the query object and the endperiod (the last parameter).
+     * (as for OpimBase::DateDiff), you have to use the date/time in the query object and the startperiod (the last parameter).
      * @see QuerySettings in class OPimBase 
      * @param uidlist List of uid's which should be incorporated into the next search 
      * @param query The object which contains the query set
      * @param querySettings This parameter defines what should be searched and how the query should be interpreted
-     * @param endperiod Defines the end of a period for some special queries.    
+     * @param startperiod Defines the start of a period for some special queries.    
      */
     virtual List queryByExample( const OPimAccessTemplate::List& uidlist, const T& query, int querySettings, 
-				 const QDateTime& endperiod = QDateTime() );
+				 const QDateTime& startperiod = QDateTime() );
 
     virtual T find( UID uid )const;
     virtual T find( UID uid, const QArray<int>&,
@@ -306,6 +321,16 @@ typename OPimAccessTemplate<T>::List OPimAccessTemplate<T>::matchRegexp( const Q
 template <class T>
 QArray<int> OPimAccessTemplate<T>::records()const {
     return m_backEnd->allRecords();
+}
+
+template <class T>
+const uint OPimAccessTemplate<T>::querySettings(){
+	return m_backEnd->querySettings();
+}
+
+template <class T>
+bool OPimAccessTemplate<T>::hasQuerySettings ( int querySettings ) const {
+	return m_backEnd->hasQuerySettings( querySettings );
 }
 
 

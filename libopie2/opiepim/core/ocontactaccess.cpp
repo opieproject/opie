@@ -118,15 +118,6 @@ bool OPimContactAccess::save ()
     return true;
 }
 
-const uint OPimContactAccess::querySettings()
-{
-    return ( m_backEnd->querySettings() );
-}
-
-bool OPimContactAccess::hasQuerySettings ( int querySettings ) const
-{
-    return ( m_backEnd->hasQuerySettings ( querySettings ) );
-}
 
 #if 0
 OPimRecordList<OPimContact> OPimContactAccess::sorted( bool ascending, int sortOrder, int sortFilter, int cat ) const
