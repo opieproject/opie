@@ -467,23 +467,49 @@ void BlueBase::addConnectedDevices() {
  */
 void BlueBase::addConnectedDevices( ConnectionState::ValueList connectionList ) {
 
-    // clear the ListView first
-    ListView4->clear();
-
     QValueList<OpieTooth::ConnectionState>::Iterator it;
     BTConnectionItem * connectionItem;
 
     if ( !connectionList.isEmpty() ) {
 
         for (it = connectionList.begin(); it != connectionList.end(); ++it) {
-            connectionItem = new BTConnectionItem( ListView4, (*it) );
 
- 	    if( m_deviceList.find((*it).mac()).data() ) {
+            QListViewItemIterator it2( ListView4 );
+	    bool found = false;
+            for ( ; it2.current(); ++it2 ) {
+	        if( ( (BTConnectionItem*)it2.current())->connection().mac() == (*it).mac() ) {
+		    found = true;
+	        }
+	    }
 
-	        connectionItem->setName( m_deviceList.find( (*it).mac()).data()->name() );
-             }
+	    if ( found == false ) {
+                 connectionItem = new BTConnectionItem( ListView4, (*it) );
+
+ 	         if( m_deviceList.find((*it).mac()).data() ) {
+	               connectionItem->setName( m_deviceList.find( (*it).mac()).data()->name() );
+                 }
+	    }
+
 	}
+
+        QListViewItemIterator it2( ListView4 );
+        for ( ; it2.current(); ++it2 ) {
+	    bool found = false;
+    	    for (it = connectionList.begin(); it != connectionList.end(); ++it) {
+                if( ( ((BTConnectionItem*)it2.current())->connection().mac() ) == (*it).mac() )  {
+			found = true;
+	        }
+            }
+
+	    if ( !found ) {
+		delete it2.current();
+	    }
+
+        }
+
+
     } else {
+        ListView4->clear();
         ConnectionState con;
         con.setMac( tr("No connections found") );
         connectionItem = new BTConnectionItem( ListView4 , con );
