@@ -36,6 +36,7 @@
 #include <qlistview.h>
 #include <qdir.h>
 #include <qpopupmenu.h>
+#include <qtimer.h>
 
 #include <qpe/resource.h>
 #include <qpe/config.h>
@@ -65,6 +66,8 @@ namespace OpieTooth {
                  this, SLOT( addServicesToDevice( const QString& , Services::ValueList ) ) );
         connect( localDevice, SIGNAL( available( const QString&, bool ) ),
                  this, SLOT( deviceActive( const QString& , bool ) ) );
+        connect( localDevice, SIGNAL( connections( Connection::ValueList ) ),
+                 this, SLOT( addConnectedDevices( Connection::ValueList ) ) );
 
         //Load all icons needed
 
@@ -92,6 +95,8 @@ namespace OpieTooth {
         (void) new BTListItem( topLV2, "Serial" ,"", "service" );
         (void) new BTListItem( topLV2, "BlueNiC" , "", "service" );
         writeToHciConfig();
+        // search conncetions
+        addConnectedDevices();
     }
 
 
@@ -295,11 +300,6 @@ namespace OpieTooth {
             // look if device is avail. atm, async
             deviceActive( dev );
 
-            // move into the c'tor
-            // deviceItem->setMac( dev->mac() );
-            // what kind of entry is it.
-            //deviceItem->setType( "device");
-
             // ggf auch hier?
             addServicesToDevice( deviceItem );
         }
@@ -410,16 +410,6 @@ namespace OpieTooth {
             }
         }
 
-
-        // empty entries
-        //  QListViewItem * myChild = deviceItem->firstChild();
-        //QList<QListViewItem*> tmpList;
-        //while( myChild ) {
-        //    tmpList.append(myChild);
-        //    myChild = myChild->nextSibling();
-        // }
-
-
         QValueList<OpieTooth::Services>::Iterator it2;
 
         BTListItem * serviceItem;
@@ -439,13 +429,29 @@ namespace OpieTooth {
 
     /**
      * Add the existing connections (pairs) to the connections tab.
-     *
+     * This one triggers the search
      */
     void BlueBase::addConnectedDevices() {
+        localDevice->searchConnections();
+    }
 
 
-        //mac address
+    void BlueBase::addConnectedDevices( Connection::ValueList connectionList ) {
 
+        QValueList<OpieTooth::Connection>::Iterator it;
+        BTListItem * connectionItem;
+
+        if ( !connectionList.isEmpty() ) {
+
+            for (it = connectionList.begin(); it != connectionList.end(); ++it) {
+                connectionItem = new BTListItem( ListView4 , (*it).mac() , (*it).mac() , "connection" );
+            }
+        } else {
+            connectionItem = new BTListItem( ListView4 , tr("No connections found"), "", "connection" );
+        }
+
+        //  recall connection search after some time
+        QTimer::singleShot( 20000, this, SLOT( addConnectedDevices() ) );
     }
 
     /**

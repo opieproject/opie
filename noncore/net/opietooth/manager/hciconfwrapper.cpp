@@ -99,16 +99,14 @@ namespace OpieTooth {
                 } else {
                     str = str.replace( QRegExp( "\\s*"+key+"\\s+[^\\s][^;]*;" ),  key + " " + value + ";");
                 }
-
                 qDebug( str );
             }
-
             outstream << str << endl;
         }
 
         f.close();
+
         f2.flush();
         f2.close();
     }
-
 }

@@ -69,6 +69,7 @@ namespace OpieTooth {
         void addServicesToDevice( BTListItem *item );
         void addServicesToDevice( const QString& device, Services::ValueList );
         void addConnectedDevices();
+        void addConnectedDevices( Connection::ValueList );
         void startServiceActionClicked( QListViewItem *item );
         void startServiceActionHold( QListViewItem *, const QPoint &, int );
         void deviceActive( const QString& mac, bool connected  );
