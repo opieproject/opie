@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>376</width>
+            <width>372</width>
             <height>441</height>
         </rect>
     </property>
@@ -38,9 +38,9 @@
             <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Layout8</cstring>
+                <cstring>Layout30</cstring>
             </property>
-            <vbox>
+            <hbox>
                 <property stdset="1">
                     <name>margin</name>
                     <number>0</number>
@@ -50,56 +50,12 @@
                     <number>6</number>
                 </property>
                 <widget>
-                    <class>QCheckBox</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>keysound</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Keyboard sound</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QCheckBox</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>touchsound</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Screen sound</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QLabel</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>dblClickLabel</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Double Click Volume runs:</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QLineEdit</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>dblClickRuns</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string></string>
-                    </property>
-                </widget>
-                <widget>
                     <class>QLayoutWidget</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>Layout14</cstring>
+                        <cstring>Layout24</cstring>
                     </property>
-                    <hbox>
+                    <vbox>
                         <property stdset="1">
                             <name>margin</name>
                             <number>0</number>
@@ -109,12 +65,34 @@
                             <number>6</number>
                         </property>
                         <widget>
+                            <class>QCheckBox</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>touchsound</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Screen sound</string>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QCheckBox</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>keysound</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Keyboard sound</string>
+                            </property>
+                        </widget>
+                        <widget>
                             <class>QLayoutWidget</class>
                             <property stdset="1">
                                 <name>name</name>
-                                <cstring>Layout7</cstring>
+                                <cstring>Layout11</cstring>
                             </property>
-                            <vbox>
+                            <hbox>
                                 <property stdset="1">
                                     <name>margin</name>
                                     <number>0</number>
@@ -123,53 +101,83 @@
                                     <name>spacing</name>
                                     <number>6</number>
                                 </property>
+                                <spacer>
+                                    <property>
+                                        <name>name</name>
+                                        <cstring>Spacer3_2_2</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>orientation</name>
+                                        <enum>Horizontal</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizeType</name>
+                                        <enum>Expanding</enum>
+                                    </property>
+                                    <property>
+                                        <name>sizeHint</name>
+                                        <size>
+                                            <width>20</width>
+                                            <height>20</height>
+                                        </size>
+                                    </property>
+                                </spacer>
                                 <widget>
                                     <class>QLabel</class>
                                     <property stdset="1">
                                         <name>name</name>
-                                        <cstring>volLabel</cstring>
+                                        <cstring>PixmapLabel1_2</cstring>
                                     </property>
                                     <property stdset="1">
-                                        <name>text</name>
-                                        <string>Volume</string>
+                                        <name>pixmap</name>
+                                        <pixmap>image0</pixmap>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>scaledContents</name>
+                                        <bool>false</bool>
                                     </property>
                                 </widget>
                                 <widget>
-                                    <class>QSlider</class>
+                                    <class>QLabel</class>
                                     <property stdset="1">
                                         <name>name</name>
-                                        <cstring>volume</cstring>
+                                        <cstring>TextLabel1_2</cstring>
                                     </property>
                                     <property stdset="1">
-                                        <name>maxValue</name>
-                                        <number>100</number>
+                                        <name>text</name>
+                                        <string>Loud</string>
                                     </property>
-                                    <property stdset="1">
-                                        <name>value</name>
-                                        <number>50</number>
+                                </widget>
+                                <spacer>
+                                    <property>
+                                        <name>name</name>
+                                        <cstring>Spacer3_2</cstring>
                                     </property>
                                     <property stdset="1">
                                         <name>orientation</name>
-                                        <enum>Vertical</enum>
+                                        <enum>Horizontal</enum>
                                     </property>
                                     <property stdset="1">
-                                        <name>tickmarks</name>
-                                        <enum>Right</enum>
+                                        <name>sizeType</name>
+                                        <enum>Expanding</enum>
                                     </property>
-                                    <property stdset="1">
-                                        <name>tickInterval</name>
-                                        <number>5</number>
+                                    <property>
+                                        <name>sizeHint</name>
+                                        <size>
+                                            <width>20</width>
+                                            <height>20</height>
+                                        </size>
                                     </property>
-                                </widget>
-                            </vbox>
+                                </spacer>
+                            </hbox>
                         </widget>
                         <widget>
                             <class>QLayoutWidget</class>
                             <property stdset="1">
                                 <name>name</name>
-                                <cstring>Layout13</cstring>
+                                <cstring>Layout11</cstring>
                             </property>
-                            <vbox>
+                            <hbox>
                                 <property stdset="1">
                                     <name>margin</name>
                                     <number>0</number>
@@ -182,9 +190,9 @@
                                     <class>QLayoutWidget</class>
                                     <property stdset="1">
                                         <name>name</name>
-                                        <cstring>Layout11</cstring>
+                                        <cstring>Layout7</cstring>
                                     </property>
-                                    <hbox>
+                                    <vbox>
                                         <property stdset="1">
                                             <name>margin</name>
                                             <number>0</number>
@@ -193,75 +201,45 @@
                                             <name>spacing</name>
                                             <number>6</number>
                                         </property>
-                                        <spacer>
-                                            <property>
-                                                <name>name</name>
-                                                <cstring>Spacer3_2_2</cstring>
-                                            </property>
-                                            <property stdset="1">
-                                                <name>orientation</name>
-                                                <enum>Horizontal</enum>
-                                            </property>
-                                            <property stdset="1">
-                                                <name>sizeType</name>
-                                                <enum>Expanding</enum>
-                                            </property>
-                                            <property>
-                                                <name>sizeHint</name>
-                                                <size>
-                                                    <width>20</width>
-                                                    <height>20</height>
-                                                </size>
-                                            </property>
-                                        </spacer>
                                         <widget>
                                             <class>QLabel</class>
                                             <property stdset="1">
                                                 <name>name</name>
-                                                <cstring>PixmapLabel1_2</cstring>
-                                            </property>
-                                            <property stdset="1">
-                                                <name>pixmap</name>
-                                                <pixmap>image0</pixmap>
-                                            </property>
-                                            <property stdset="1">
-                                                <name>scaledContents</name>
-                                                <bool>false</bool>
-                                            </property>
-                                        </widget>
-                                        <widget>
-                                            <class>QLabel</class>
-                                            <property stdset="1">
-                                                <name>name</name>
-                                                <cstring>TextLabel1_2</cstring>
+                                                <cstring>volLabel</cstring>
                                             </property>
                                             <property stdset="1">
                                                 <name>text</name>
-                                                <string>Loud</string>
+                                                <string>Volume</string>
                                             </property>
                                         </widget>
-                                        <spacer>
-                                            <property>
+                                        <widget>
+                                            <class>QSlider</class>
+                                            <property stdset="1">
                                                 <name>name</name>
-                                                <cstring>Spacer3_2</cstring>
+                                                <cstring>volume</cstring>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>maxValue</name>
+                                                <number>100</number>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>value</name>
+                                                <number>50</number>
                                             </property>
                                             <property stdset="1">
                                                 <name>orientation</name>
-                                                <enum>Horizontal</enum>
+                                                <enum>Vertical</enum>
                                             </property>
                                             <property stdset="1">
-                                                <name>sizeType</name>
-                                                <enum>Expanding</enum>
+                                                <name>tickmarks</name>
+                                                <enum>Right</enum>
                                             </property>
-                                            <property>
-                                                <name>sizeHint</name>
-                                                <size>
-                                                    <width>20</width>
-                                                    <height>20</height>
-                                                </size>
+                                            <property stdset="1">
+                                                <name>tickInterval</name>
+                                                <number>5</number>
                                             </property>
-                                        </spacer>
-                                    </hbox>
+                                        </widget>
+                                    </vbox>
                                 </widget>
                                 <spacer>
                                     <property>
@@ -288,9 +266,9 @@
                                     <class>QLayoutWidget</class>
                                     <property stdset="1">
                                         <name>name</name>
-                                        <cstring>Layout12</cstring>
+                                        <cstring>Layout8</cstring>
                                     </property>
-                                    <hbox>
+                                    <vbox>
                                         <property stdset="1">
                                             <name>margin</name>
                                             <number>0</number>
@@ -299,85 +277,55 @@
                                             <name>spacing</name>
                                             <number>6</number>
                                         </property>
-                                        <spacer>
-                                            <property>
-                                                <name>name</name>
-                                                <cstring>Spacer3_2_3</cstring>
-                                            </property>
-                                            <property stdset="1">
-                                                <name>orientation</name>
-                                                <enum>Horizontal</enum>
-                                            </property>
-                                            <property stdset="1">
-                                                <name>sizeType</name>
-                                                <enum>Expanding</enum>
-                                            </property>
-                                            <property>
-                                                <name>sizeHint</name>
-                                                <size>
-                                                    <width>20</width>
-                                                    <height>20</height>
-                                                </size>
-                                            </property>
-                                        </spacer>
                                         <widget>
                                             <class>QLabel</class>
                                             <property stdset="1">
                                                 <name>name</name>
-                                                <cstring>PixmapLabel2_2</cstring>
-                                            </property>
-                                            <property stdset="1">
-                                                <name>pixmap</name>
-                                                <pixmap>image1</pixmap>
-                                            </property>
-                                            <property stdset="1">
-                                                <name>scaledContents</name>
-                                                <bool>false</bool>
-                                            </property>
-                                        </widget>
-                                        <widget>
-                                            <class>QLabel</class>
-                                            <property stdset="1">
-                                                <name>name</name>
-                                                <cstring>TextLabel2_2</cstring>
+                                                <cstring>micLabel</cstring>
                                             </property>
                                             <property stdset="1">
                                                 <name>text</name>
-                                                <string>Silent</string>
+                                                <string>Microphone</string>
                                             </property>
                                         </widget>
-                                        <spacer>
-                                            <property>
+                                        <widget>
+                                            <class>QSlider</class>
+                                            <property stdset="1">
                                                 <name>name</name>
-                                                <cstring>Spacer2_2</cstring>
+                                                <cstring>mic</cstring>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>maxValue</name>
+                                                <number>100</number>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>value</name>
+                                                <number>50</number>
                                             </property>
                                             <property stdset="1">
                                                 <name>orientation</name>
-                                                <enum>Horizontal</enum>
+                                                <enum>Vertical</enum>
                                             </property>
                                             <property stdset="1">
-                                                <name>sizeType</name>
-                                                <enum>Expanding</enum>
+                                                <name>tickmarks</name>
+                                                <enum>Right</enum>
                                             </property>
-                                            <property>
-                                                <name>sizeHint</name>
-                                                <size>
-                                                    <width>20</width>
-                                                    <height>20</height>
-                                                </size>
+                                            <property stdset="1">
+                                                <name>tickInterval</name>
+                                                <number>5</number>
                                             </property>
-                                        </spacer>
-                                    </hbox>
+                                        </widget>
+                                    </vbox>
                                 </widget>
-                            </vbox>
+                            </hbox>
                         </widget>
                         <widget>
                             <class>QLayoutWidget</class>
                             <property stdset="1">
                                 <name>name</name>
-                                <cstring>Layout8</cstring>
+                                <cstring>Layout12</cstring>
                             </property>
-                            <vbox>
+                            <hbox>
                                 <property stdset="1">
                                     <name>margin</name>
                                     <number>0</number>
@@ -386,49 +334,216 @@
                                     <name>spacing</name>
                                     <number>6</number>
                                 </property>
+                                <spacer>
+                                    <property>
+                                        <name>name</name>
+                                        <cstring>Spacer3_2_3</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>orientation</name>
+                                        <enum>Horizontal</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizeType</name>
+                                        <enum>Expanding</enum>
+                                    </property>
+                                    <property>
+                                        <name>sizeHint</name>
+                                        <size>
+                                            <width>20</width>
+                                            <height>20</height>
+                                        </size>
+                                    </property>
+                                </spacer>
                                 <widget>
                                     <class>QLabel</class>
                                     <property stdset="1">
                                         <name>name</name>
-                                        <cstring>micLabel</cstring>
+                                        <cstring>PixmapLabel2_2</cstring>
                                     </property>
                                     <property stdset="1">
-                                        <name>text</name>
-                                        <string>Microphone</string>
+                                        <name>pixmap</name>
+                                        <pixmap>image1</pixmap>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>scaledContents</name>
+                                        <bool>false</bool>
                                     </property>
                                 </widget>
                                 <widget>
-                                    <class>QSlider</class>
+                                    <class>QLabel</class>
                                     <property stdset="1">
                                         <name>name</name>
-                                        <cstring>mic</cstring>
+                                        <cstring>TextLabel2_2</cstring>
                                     </property>
                                     <property stdset="1">
-                                        <name>maxValue</name>
-                                        <number>100</number>
+                                        <name>text</name>
+                                        <string>Silent</string>
                                     </property>
-                                    <property stdset="1">
-                                        <name>value</name>
-                                        <number>50</number>
+                                </widget>
+                                <spacer>
+                                    <property>
+                                        <name>name</name>
+                                        <cstring>Spacer2_2</cstring>
                                     </property>
                                     <property stdset="1">
                                         <name>orientation</name>
-                                        <enum>Vertical</enum>
+                                        <enum>Horizontal</enum>
                                     </property>
                                     <property stdset="1">
-                                        <name>tickmarks</name>
-                                        <enum>Right</enum>
+                                        <name>sizeType</name>
+                                        <enum>Expanding</enum>
                                     </property>
-                                    <property stdset="1">
-                                        <name>tickInterval</name>
-                                        <number>5</number>
+                                    <property>
+                                        <name>sizeHint</name>
+                                        <size>
+                                            <width>20</width>
+                                            <height>20</height>
+                                        </size>
                                     </property>
-                                </widget>
-                            </vbox>
+                                </spacer>
+                            </hbox>
                         </widget>
-                    </hbox>
+                    </vbox>
                 </widget>
-            </vbox>
+                <widget>
+                    <class>QLayoutWidget</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Layout29</cstring>
+                    </property>
+                    <vbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>6</number>
+                        </property>
+                        <widget>
+                            <class>QGroupBox</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>GroupBox1</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>title</name>
+                                <string>Record Defaults</string>
+                            </property>
+                            <grid>
+                                <property stdset="1">
+                                    <name>margin</name>
+                                    <number>11</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>spacing</name>
+                                    <number>6</number>
+                                </property>
+                                <widget row="0"  column="0" >
+                                    <class>QLayoutWidget</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>Layout28</cstring>
+                                    </property>
+                                    <vbox>
+                                        <property stdset="1">
+                                            <name>margin</name>
+                                            <number>0</number>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>spacing</name>
+                                            <number>6</number>
+                                        </property>
+                                        <widget>
+                                            <class>QLabel</class>
+                                            <property stdset="1">
+                                                <name>name</name>
+                                                <cstring>sampleRateLabel</cstring>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>text</name>
+                                                <string>Rate (5k-44k)</string>
+                                            </property>
+                                        </widget>
+                                        <widget>
+                                            <class>QLineEdit</class>
+                                            <property stdset="1">
+                                                <name>name</name>
+                                                <cstring>sampleRate</cstring>
+                                            </property>
+                                        </widget>
+                                        <widget>
+                                            <class>QCheckBox</class>
+                                            <property stdset="1">
+                                                <name>name</name>
+                                                <cstring>stereoCheckBox</cstring>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>text</name>
+                                                <string>Stereo</string>
+                                            </property>
+                                        </widget>
+                                        <widget>
+                                            <class>QCheckBox</class>
+                                            <property stdset="1">
+                                                <name>name</name>
+                                                <cstring>sixteenBitCheckBox</cstring>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>text</name>
+                                                <string>16 bit</string>
+                                            </property>
+                                        </widget>
+                                    </vbox>
+                                </widget>
+                            </grid>
+                        </widget>
+                        <spacer>
+                            <property>
+                                <name>name</name>
+                                <cstring>Spacer9</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>orientation</name>
+                                <enum>Vertical</enum>
+                            </property>
+                            <property stdset="1">
+                                <name>sizeType</name>
+                                <enum>Expanding</enum>
+                            </property>
+                            <property>
+                                <name>sizeHint</name>
+                                <size>
+                                    <width>20</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                    </vbox>
+                </widget>
+                <spacer>
+                    <property>
+                        <name>name</name>
+                        <cstring>Spacer10</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>orientation</name>
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>sizeType</name>
+                        <enum>Expanding</enum>
+                    </property>
+                    <property>
+                        <name>sizeHint</name>
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+            </hbox>
         </widget>
     </grid>
 </widget>

@@ -35,8 +35,11 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* name, WFlags fl )
 	mic->setValue(100-config.readNumEntry("Mic"));
     touchsound->setChecked(config.readBoolEntry("Touch"));
     keysound->setChecked(config.readBoolEntry("Key"));
-	dblClickRuns->setText(config.readEntry("DblClickVolumeRuns", 
-										   "/opt/QtPalmtop/bin/vmemomanager"));
+
+	config.setGroup("Record");
+	sampleRate->setText(config.readEntry("SampleRate", "11025"));
+	stereoCheckBox->setChecked(config.readNumEntry("Stereo", 0));
+	sixteenBitCheckBox->setChecked(config.readNumEntry("SixteenBit", 0));
 
     connect(volume, SIGNAL(valueChanged(int)), this, SLOT(setVolume(int)));
     connect(mic, SIGNAL(valueChanged(int)), this, SLOT(setMic(int)));
@@ -51,6 +54,11 @@ void SoundSettings::reject()
     setVolume(100-config.readNumEntry("Volume"));
 	setMic(100-config.readNumEntry("Mic"));
 
+	config.setGroup("Record");
+	sampleRate->setText(config.readEntry("SampleRate", "11025"));
+	stereoCheckBox->setChecked(config.readNumEntry("Stereo", 0));
+	sixteenBitCheckBox->setChecked(config.readNumEntry("SixteenBit", 0));
+
     QDialog::reject();
 }
 
@@ -62,8 +70,15 @@ void SoundSettings::accept()
     config.writeEntry("Mic",100-mic->value());
     config.writeEntry("Touch",touchsound->isChecked());
     config.writeEntry("Key",keysound->isChecked());
-	config.writeEntry("DblClickVolumeRuns", dblClickRuns->text());
+
     setVolume(volume->value());
+	setMic(mic->value());
+
+	config.setGroup("Record");
+	config.writeEntry("SampleRate",sampleRate->text());
+	config.writeEntry("Stereo",stereoCheckBox->isChecked());
+	config.writeEntry("SixteenBit",sixteenBitCheckBox->isChecked());
+	
     QDialog::accept();
 }
 
