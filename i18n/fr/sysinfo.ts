@@ -4,15 +4,15 @@
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisation du processeur par les applications (%)</translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisation du processeur par le système (%)</translation>
     </message>
     <message>
         <source>Type: </source>
-        <translation type="unfinished"></translation>
+        <translation>Type :</translation>
     </message>
     <message>
         <source>This page shows how much this device&apos;s processor is being used.</source>
@@ -85,7 +85,7 @@ Click and hold on a module to see additional information about the module, or to
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoyer</translation>
     </message>
     <message>
         <source>Click here to send the selected command to the module selected above.</source>
@@ -98,41 +98,43 @@ Click and hold on a module to see additional information about the module, or to
     <message>
         <source>You really want to execute
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment exécuter
+
+</translation>
     </message>
 </context>
 <context>
     <name>MountInfo</name>
     <message>
         <source>Used (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisé (%1 Ko)</translation>
     </message>
     <message>
         <source>Available (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Disponible (%1 Ko)</translation>
     </message>
     <message>
         <source> : %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation> : %1 Ko</translation>
     </message>
 </context>
 <context>
     <name>ProcessInfo</name>
     <message>
         <source>PID</source>
-        <translation type="unfinished"></translation>
+        <translation>PID</translation>
     </message>
     <message>
         <source>Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Commande</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Etat</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Temps</translation>
     </message>
     <message>
         <source>This is a list of all the processes on this handheld device.
@@ -146,20 +148,21 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoyer</translation>
     </message>
     <message>
         <source>Click here to send the selected signal to this process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour envoyer à ce processus le signal choisi.</translation>
     </message>
     <message>
         <source>This area shows detailed information about this process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette zone montre des informations détaillés à propos de ce processus.</translation>
     </message>
     <message>
         <source>You really want to send
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment envoyer
+</translation>
     </message>
 </context>
 <context>
@@ -272,35 +275,35 @@ Click and hold on a process to see additional information about the process, or 
     <name>VersionInfo</name>
     <message>
         <source>&lt;b&gt;Linux Kernel&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Noyau Linux&lt;/b&gt;&lt;p&gt;Version :</translation>
     </message>
     <message>
         <source>Compiled by: </source>
-        <translation type="unfinished"></translation>
+        <translation>Compilé par :</translation>
     </message>
     <message>
         <source>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version :</translation>
     </message>
     <message>
         <source>Built on: </source>
-        <translation type="unfinished"></translation>
+        <translation>Construit le :</translation>
     </message>
     <message>
         <source>&lt;p&gt;Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Version :</translation>
     </message>
     <message>
         <source>&lt;p&gt;Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Modèle :</translation>
     </message>
     <message>
         <source>&lt;p&gt;Vendor: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Fabricant :</translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette page montre la version courante de Opie, du noyau Linux, et de la distribution installés sur cet appareil de poche.</translation>
     </message>
 </context>
 </TS>

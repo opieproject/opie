@@ -175,15 +175,15 @@ Voulez-vous vraimment l&apos;ouvrir?</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter une vCard</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous devez sélectionner un contact !</translation>
     </message>
     <message>
         <source>You have to set a filename !</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous devez choisir un nom de fichier !</translation>
     </message>
 </context>
 <context>
@@ -340,11 +340,11 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Tool-/Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>Barre d&apos;outils/de menus</translation>
     </message>
     <message>
         <source>Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Fixe</translation>
     </message>
     <message>
         <source>Switch to fixed menu-/toolbars after restarting application !</source>
@@ -352,7 +352,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Movable</source>
-        <translation type="unfinished"></translation>
+        <translation>Mobile</translation>
     </message>
     <message>
         <source>Switch to moveable menu-/toolbars after restarting application !</source>
