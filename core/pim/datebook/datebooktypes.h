@@ -19,6 +19,9 @@ namespace Core {
 
 class QLibrary;
 
+enum { DAY=1,WEEK,WEEKLST,MONTH };  // defaultView values
+enum { NONE=0,NORMAL,EXTENDED };    // WeekLstView's modes.
+
 class DateBookDBHack : virtual public DateBookDB {
  public:
   virtual ~DateBookDBHack(){}

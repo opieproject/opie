@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.42 2005-03-18 16:57:24 alwin Exp $
+** $Id: datebook.cpp,v 1.43 2005-03-19 13:44:30 alwin Exp $
 **
 **********************************************************************/
 
@@ -26,7 +26,7 @@
 #include "datebookday.h"
 #include "datebooksettings.h"
 #include "datebookweek.h"
-#include "datebookweeklst.h"
+#include "modules/weeklst/datebookweeklst.h"
 #include "dateentryimpl.h"
 
 #include <opie2/odebug.h>
@@ -44,6 +44,7 @@
 #include <qpe/resource.h>
 #include <qpe/sound.h>
 #include <qpe/tzselect.h>
+#include <qtopia/qlibrary.h>
 
 #include <qaction.h>
 #include <qcopchannel_qws.h>
@@ -54,7 +55,7 @@
 #include <qtoolbar.h>
 #include <qwidgetstack.h>
 #include <qdir.h>
-#include <qtopia/qlibrary.h>
+#include <qlabel.h>
 
 #include <sys/stat.h>
 #include <sys/types.h>

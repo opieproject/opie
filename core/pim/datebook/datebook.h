@@ -26,9 +26,6 @@
 
 #include <qmainwindow.h>
 
-enum { DAY=1,WEEK,WEEKLST,MONTH };  // defaultView values
-enum { NONE=0,NORMAL,EXTENDED };    // WeekLstView's modes.
-
 class QAction;
 class QWidgetStack;
 class DateBookDay;

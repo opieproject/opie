@@ -5,7 +5,12 @@ HEADERS	= datebookday.h \
 	  datebookdayheaderimpl.h \
 	  datebooksettings.h \
 	  datebookweek.h \
-	  datebookweeklst.h \
+	  modules/weeklst/datebookweeklst.h \
+      modules/weeklst/datebookweeklstdayhdr.h \
+      modules/weeklst/datebookweeklstheader.h \
+      modules/weeklst/datebookweeklstevent.h \
+      modules/weeklst/datebookweeklstview.h \
+      modules/weeklst/datebookweeklstdblview.h \
 	  datebookweekheaderimpl.h \
 	  repeatentry.h \
 	  noteentryimpl.h \
@@ -20,7 +25,12 @@ SOURCES	= main.cpp \
 	  datebookdayheaderimpl.cpp \
 	  datebooksettings.cpp \
 	  datebookweek.cpp \
-	  datebookweeklst.cpp \
+	  modules/weeklst/datebookweeklst.cpp \
+      modules/weeklst/datebookweeklstdayhdr.cpp \
+      modules/weeklst/datebookweeklstheader.cpp \
+      modules/weeklst/datebookweeklstevent.cpp \
+      modules/weeklst/datebookweeklstview.cpp \
+      modules/weeklst/datebookweeklstdblview.cpp \
 	  datebookweekheaderimpl.cpp \
 	  repeatentry.cpp \
 	  noteentryimpl.cpp \
@@ -29,8 +39,8 @@ SOURCES	= main.cpp \
 INTERFACES	= dateentry.ui \
 		  datebookdayheader.ui \
 		  datebookweekheader.ui \
-		  datebookweeklstheader.ui \
- 		  datebookweeklstdayhdr.ui \
+		  modules/weeklst/datebookweeklstheaderbase.ui \
+ 		  modules/weeklst/datebookweeklstdayhdrbase.ui \
  		  repeatentrybase.ui \
 		  datebooksettingsbase.ui \
 		  noteentry.ui
