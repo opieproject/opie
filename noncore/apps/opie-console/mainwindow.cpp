@@ -1,3 +1,6 @@
+#include <assert.h>
+
+
 
 #include <qaction.h>
 #include <qmenubar.h>
@@ -8,6 +11,7 @@
 #include <opie/ofiledialog.h>
 #include <qmessagebox.h>
 
+#include "keytrans.h"
 #include "profileeditordialog.h"
 #include "configdialog.h"
 #include "default.h"
@@ -21,6 +25,11 @@
 #include "script.h"
 
 MainWindow::MainWindow() {
+    KeyTrans::loadAll();
+    for (int i = 0; i < KeyTrans::count(); i++ ) {
+        KeyTrans* s = KeyTrans::find(i );
+        assert( s );
+    }
     m_factory = new MetaFactory();
     Default def(m_factory);
     m_sessions.setAutoDelete( TRUE );

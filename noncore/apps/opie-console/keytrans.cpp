@@ -627,21 +627,18 @@ static QDict<KeyTrans>    * path2keymap = 0L;
 
 KeyTrans* KeyTrans::find(int numb)
 {
-  loadAll();
   KeyTrans* res = numb2keymap->find(numb);
   return res ? res : numb2keymap->find(0);
 }
 
 KeyTrans* KeyTrans::find(const char* path)
 {
-  loadAll();
   KeyTrans* res = path2keymap->find(path);
   return res ? res : numb2keymap->find(0);
 }
 
 int KeyTrans::count()
 {
-  loadAll();
   return numb2keymap->count();
 }
 
