@@ -27,6 +27,8 @@
 */
 
 #include "mainwindow.h"
+#include "cbinfo.h"
+#include "configuration.h"
 #include "password.h"
 #include "checkbook.h"
 
@@ -39,8 +41,10 @@
 #include <qpe/resource.h>
 
 #include <qaction.h>
+#include <qcheckbox.h>
 #include <qdir.h>
-#include <qlistbox.h>
+#include <qlineedit.h>
+#include <qlistview.h>
 #include <qpopupmenu.h>
 #include <qstring.h>
 #include <qwhatsthis.h>
@@ -51,6 +55,14 @@ MainWindow::MainWindow()
 	setCaption( tr( "Checkbook" ) );
 
 	cbDir = Global::applicationFileName( "checkbook", "" );
+	lockIcon = Resource::loadPixmap( "locked" );
+
+	// Load configuration options
+	Config config( "checkbook" );
+	config.setGroup( "Config" );
+	currencySymbol = config.readEntry( "CurrencySymbol", "$" );
+	showLocks = config.readBoolEntry( "ShowLocks", FALSE );
+	showBalances = config.readBoolEntry( "ShowBalances", FALSE );
 
 	// Build menu and tool bars
 	setToolBarsMovable( FALSE );
@@ -82,65 +94,152 @@ MainWindow::MainWindow()
 	actionDelete->addTo( popup );
 	actionDelete->addTo( bar );
 
+	popup->insertSeparator();
+
+	a = new QAction( tr( "Configure" ), Resource::loadPixmap( "checkbook/config" ), QString::null, 0, this, 0 );
+	a->setWhatsThis( tr( "Click here to configure this app." ) );
+	connect( a, SIGNAL( activated() ), this, SLOT( slotConfigure() ) );
+	a->addTo( popup );
+	a->addTo( bar );
+
 	mb->insertItem( tr( "Checkbook" ), popup );
 
-	// Build Checkbook selection list control
-	cbList = new QListBox( this );
-	QWhatsThis::add( cbList, tr( "This is a listing of all checkbooks currently available." ) );
-	QPEApplication::setStylusOperation( cbList->viewport(), QPEApplication::RightOnHold );
-	connect( cbList, SIGNAL( rightButtonPressed( QListBoxItem *, const QPoint & ) ),
-			 this, SLOT( slotEdit() ) );
-	setCentralWidget( cbList );
-
 	// Load Checkbook selection list
+	checkbooks = new CBInfoList();
+
 	QDir checkdir( cbDir );
 	if (checkdir.exists() == true)
 	{
-		QStringList checkbooks = checkdir.entryList( "*.qcb", QDir::Files|QDir::Readable|QDir::Writable,
+		QStringList cblist = checkdir.entryList( "*.qcb", QDir::Files|QDir::Readable|QDir::Writable,
 													 QDir::Time );
-		for ( QStringList::Iterator it = checkbooks.begin(); it != checkbooks.end(); it++ )
-		{
-			(*it) = (*it).remove( (*it).find('.'), (*it).length() );
-		}
-		cbList->insertStringList( checkbooks );
-	}
-	cbList->sort();
-	cbList->setSelected( 0, TRUE );
+		CBInfo *cb = 0x0;
+		QString filename;
 
-	currencySymbol = "$";
+		for ( QStringList::Iterator it = cblist.begin(); it != cblist.end(); it++ )
+		{
+			filename = cbDir;
+			filename.append( (*it) );
+
+			cb = new CBInfo( (*it).remove( (*it).find('.'), (*it).length() ), filename );
+			checkbooks->inSort( cb );
+		}
+	}
+
+	// Build Checkbook selection list control
+	cbList = 0x0;
+	buildList();
 }
 
 MainWindow::~MainWindow()
 {
+//	config.write();
+}
+
+void MainWindow::buildList()
+{
+	if ( cbList )
+	{
+		delete cbList;
+	}
+
+	cbList = new QListView( this );
+	QWhatsThis::add( cbList, tr( "This is a listing of all checkbooks currently available." ) );
+
+	if ( showLocks )
+	{
+		cbList->addColumn( Resource::loadIconSet( "locked" ), "", 24 );
+		posName = 1;
+	}
+	else
+	{
+		posName = 0;
+	}
+	cbList->addColumn( tr( "Checkbook Name" ) );
+	if ( showBalances )
+	{
+		int colnum = cbList->addColumn( tr( "Balance" ) );
+		cbList->setColumnAlignment( colnum, Qt::AlignRight );
+	}
+	cbList->setAllColumnsShowFocus( TRUE );
+	cbList->setSorting( posName );
+	QPEApplication::setStylusOperation( cbList->viewport(), QPEApplication::RightOnHold );
+	connect( cbList, SIGNAL( rightButtonPressed( QListViewItem *, const QPoint &, int ) ),
+			 this, SLOT( slotEdit() ) );
+	setCentralWidget( cbList );
+
+	for ( CBInfo *cb = checkbooks->first(); cb; cb = checkbooks->next() )
+	{
+		addCheckbook( cb );
+	}
+}
+
+void MainWindow::addCheckbook( CBInfo *cb )
+{
+	QListViewItem *lvi = new QListViewItem( cbList );
+	if ( showLocks && !cb->password().isNull() )
+	{
+		lvi->setPixmap( 0, lockIcon );
+	}
+	lvi->setText( posName, cb->name() );
+	if ( showBalances )
+	{
+		QString balance;
+		balance.sprintf( "%s%.2f", currencySymbol.latin1(), cb->balance() );
+		lvi->setText( posName + 1, balance );
+	}
+}
+
+void MainWindow::buildFilename( const QString &name )
+{
+	tempFilename = cbDir;
+	tempFilename.append( name );
+	tempFilename.append( ".qcb" );
 }
 
 void MainWindow::slotNew()
 {
-	Checkbook *currcb = new Checkbook( this, "", cbDir, currencySymbol );
+	CBInfo *cb = new CBInfo();
+
+	Checkbook *currcb = new Checkbook( this, cb, currencySymbol );
 	currcb->showMaximized();
 	if ( currcb->exec() == QDialog::Accepted )
 	{
-		cbList->insertItem( currcb->getName() );
-		cbList->sort();
-		delete currcb;
+		checkbooks->inSort( cb );
+		addCheckbook( cb );
 	}
+	delete currcb;
 }
 
 void MainWindow::slotEdit()
 {
-	QString currname = cbList->currentText();
-	
-	QString tempstr = cbDir;
-	tempstr.append( currname );
-	tempstr.append( ".qcb" );
-	
-	Config config( tempstr, Config::File );
-	config.setGroup( "Account" );
-	QString password = config.readEntryCrypt( "Password", "" );
-	if ( password != "" )
+
+	QListViewItem *curritem = cbList->currentItem();
+	if ( !curritem )
+	{
+		return;
+	}
+	QString currname = curritem->text( posName );
+
+	CBInfo *cb = checkbooks->first();
+	while ( cb )
+	{
+		if ( cb->name() == currname )
+			break;
+		cb = checkbooks->next();
+	}
+	if ( !cb )
+	{
+		return;
+	}
+
+	buildFilename( currname );
+	float currbalance = cb->balance();
+	bool currlock = !cb->password().isNull();
+
+	if ( currlock )
 	{
 		Password *pw = new Password( this, tr( "Enter password" ), tr( "Please enter your password:" ) );
-		if ( pw->exec() != QDialog::Accepted || pw->password != password  )
+		if ( pw->exec() != QDialog::Accepted || pw->password != cb->password()  )
 		{
 			delete pw;
 			return;
@@ -148,39 +247,86 @@ void MainWindow::slotEdit()
 		delete pw;
 	}
 
-	Checkbook *currcb = new Checkbook( this, currname, cbDir, currencySymbol );
+	Checkbook *currcb = new Checkbook( this, cb, currencySymbol );
 	currcb->showMaximized();
 	if ( currcb->exec() == QDialog::Accepted )
 	{
-		QString newname = currcb->getName();
+		QString newname = cb->name();
 		if ( currname != newname )
 		{
-			cbList->changeItem( newname, cbList->currentItem() );
+			// Update name if changed
+			curritem->setText( posName, newname );
 			cbList->sort();
 
-			QFile f( tempstr );
+			// Remove old file
+			QFile f( tempFilename );
 			if ( f.exists() )
 			{
 				f.remove();
 			}
+
+			// Get new filename
+			buildFilename( newname );
+			cb->setFilename( tempFilename );
 		}
-		delete currcb;
+
+		cb->write();
+
+		// Update lock if changed
+		if ( showLocks && !cb->password().isNull() != currlock )
+		{
+			if ( !cb->password().isNull() )
+				curritem->setPixmap( 0, lockIcon );
+			else
+				curritem->setPixmap( 0, nullIcon );
+		}
+
+		// Update balance if changed
+		if ( showBalances && cb->balance() != currbalance )
+		{
+			QString tempstr;
+			tempstr.sprintf( "%s%.2f", currencySymbol.latin1(), cb->balance() );
+			curritem->setText( posName + 1, tempstr );
+		}
 	}
+	delete currcb;
 }
 
 void MainWindow::slotDelete()
 {
-	if ( QPEMessageBox::confirmDelete ( this, tr( "Delete checkbook" ), cbList->currentText() ) )
+	QString currname = cbList->currentItem()->text( posName );
+
+	if ( QPEMessageBox::confirmDelete ( this, tr( "Delete checkbook" ), currname ) )
 	{
-		QString tempstr = cbDir;
-		tempstr.append( cbList->currentText() );
-		tempstr.append( ".qcb" );
-		QFile f( tempstr );
+		buildFilename( currname );
+		QFile f( tempFilename );
 		if ( f.exists() )
 		{
 			f.remove();
 		}
 
-		cbList->removeItem( cbList->currentItem() );
+		delete cbList->currentItem();
 	}
+}
+
+void MainWindow::slotConfigure()
+{
+	Configuration *cfgdlg = new Configuration( this, currencySymbol, showLocks, showBalances );
+	cfgdlg->showMaximized();
+	if ( cfgdlg->exec() == QDialog::Accepted )
+	{
+		currencySymbol = cfgdlg->symbolEdit->text();
+		showLocks = cfgdlg->lockCB->isChecked();
+		showBalances = cfgdlg->balCB->isChecked();
+
+		Config config( "checkbook" );
+		config.setGroup( "Config" );
+		config.writeEntry( "CurrencySymbol", currencySymbol );
+		config.writeEntry( "ShowLocks", showLocks );
+		config.writeEntry( "ShowBalances", showBalances );
+		config.write();
+
+		buildList();
+	}
+	delete cfgdlg;
 }

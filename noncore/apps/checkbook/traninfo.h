@@ -53,18 +53,18 @@ class TranInfo
 		const QString &category()	const { return c; }
 		float          amount()		const { return a; }
 		float          fee()		const { return f; }
-		const QString &number()		const { return cn; }
+		const QString &number()	const { return cn; }
 		const QString &notes()		const { return n; }
 
 		void setDesc( const QString &desc )		{ d = desc; }
-		void setDate( const QDate &date )		{ td = date; }
-		void setWithdrawal( bool withdrawal )	{ w = withdrawal; }
+		void setDate( const QDate &date )			{ td = date; }
+		void setWithdrawal( bool withdrawal )		{ w = withdrawal; }
 		void setType( const QString &type )		{ t = type; }
 		void setCategory( const QString &cat )	{ c = cat; }
-		void setAmount( float amount )			{ a = amount; }
-		void setFee( float fee )				{ f = fee; }
-		void setNumber( const QString &num )	{ cn = num; }
-		void setNotes( const QString &notes )	{ n = notes; }
+		void setAmount( float amount )				{ a = amount; }
+		void setFee( float fee )					{ f = fee; }
+		void setNumber( const QString &num )		{ cn = num; }
+		void setNotes( const QString &notes )		{ n = notes; }
 
 		void write( Config *, int );
 
@@ -86,7 +86,5 @@ class TranInfoList : public QList<TranInfo>
 	protected:
 		int compareItems( QCollection::Item, QCollection::Item );
 };
-
-//typedef TranList<TranInfo> TranInfoList;
 
 #endif

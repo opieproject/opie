@@ -27,7 +27,9 @@
 */
 
 #include "checkbook.h"
+#include "cbinfo.h"
 #include "transaction.h"
+#include "traninfo.h"
 #include "graph.h"
 #include "graphinfo.h"
 #include "password.h"
@@ -50,20 +52,15 @@
 #include <qwhatsthis.h>
 #include <qwidget.h>
 
-Checkbook::Checkbook( QWidget *parent, const QString &n, const QString &fd, const QString &symbol )
+Checkbook::Checkbook( QWidget *parent, CBInfo *i, const QString &symbol )
 	: QDialog( parent, 0, TRUE, WStyle_ContextHelp )
 {
-	name = n;
-	filename = fd;
-	filename.append( name );
-	filename.append( ".qcb" );
-	filedir = fd;
+	info = i;
 	currencySymbol = symbol;
-	currBalance = 0.0;
 
-	if ( name != "" )
+	if ( info->name() != "" )
 	{
-		QString tempstr = name;
+		QString tempstr = info->name();
 		tempstr.append( " - " );
 		tempstr.append( tr( "Checkbook" ) );
 		setCaption( tempstr );
@@ -93,11 +90,6 @@ Checkbook::Checkbook( QWidget *parent, const QString &n, const QString &fd, cons
 
 Checkbook::~Checkbook()
 {
-}
-
-const QString &Checkbook::getName()
-{
-	return( name );
 }
 
 QWidget *Checkbook::initInfo()
@@ -273,17 +265,16 @@ QWidget *Checkbook::initCharts()
 
 void Checkbook::loadCheckbook()
 {
-	transactions.clear();
+	if ( !info )
+	{
+		return;
+	}
 
-	Config config( filename, Config::File );
+	tranList = info->transactions();
 
-	// Load info
-	config.setGroup( "Account" );
-
-	password = config.readEntryCrypt( "Password", "" );
-	passwordCB->setChecked( password != "" );
-	nameEdit->setText( name );
-	QString temptext = config.readEntry( "Type" );
+	passwordCB->setChecked( !info->password().isNull() );
+	nameEdit->setText( info->name() );
+	QString temptext = info->type();
 	int i = typeList->count();
 	while ( i > 0 )
 	{
@@ -294,107 +285,68 @@ void Checkbook::loadCheckbook()
 			break;
 		}
 	}
-	bankEdit->setText( config.readEntry( "Bank", "" ) );
-	acctNumEdit->setText( config.readEntryCrypt( "Number", "" ) );
-	pinNumEdit->setText( config.readEntryCrypt( "PINNumber", "" ) );
-	balanceEdit->setText( config.readEntry( "Balance", "0.0" ) );
-	notesEdit->setText( config.readEntry( "Notes", "" ) );
-
-	bool ok;
-	currBalance = balanceEdit->text().toFloat( &ok );
-	startBalance = currBalance;
+	bankEdit->setText( info->bank() );
+	acctNumEdit->setText( info->account() );
+	pinNumEdit->setText( info->pin() );
+	temptext.setNum( info->startingBalance(), 'f', 2 );
+	balanceEdit->setText( temptext );
+	notesEdit->setText( info->notes() );
 
 	// Load transactions
-	TranInfo *tran;
-	QString trandesc = "";
 	float amount;
 	QString stramount;
-	for ( int i = 1; trandesc != QString::null; i++ )
+
+	for ( TranInfo *tran = tranList->first(); tran; tran = tranList->next() )
 	{
-		tran = new TranInfo( config, i );
-		trandesc = tran->desc();
-		if ( trandesc != QString::null )
+		amount = tran->amount();
+		if ( tran->withdrawal() )
 		{
-			currBalance -= tran->fee();
-			amount = tran->amount();
-			if ( tran->withdrawal() )
-			{
-				amount *= -1;
-			}
-			currBalance += amount;
-			stramount.sprintf( "%s%.2f", currencySymbol.latin1(), amount );
-
-			// Add to transaction list
-			transactions.inSort( tran );
-
-			// Add to transaction table
-			( void ) new CBListItem( tranTable, tran->number(), tran->datestr(), trandesc, stramount );
+			amount *= -1;
 		}
-		else
-		{
-			delete tran;
-		}
+		stramount.sprintf( "%s%.2f", currencySymbol.latin1(), amount );
+		( void ) new CBListItem( tranTable, tran->number(), tran->datestr(), tran->desc(), stramount );
 	}
-	balanceLabel->setText( tr( "Current balance: %1%2" ).arg( currencySymbol ).arg( currBalance, 0, 'f', 2 ) );
 
-	highTranNum = transactions.count();
+	balanceLabel->setText( tr( "Current balance: %1%2" ).arg( currencySymbol ).arg( info->balance(), 0, 'f', 2 ) );
+
+	highTranNum = tranList->count();
 }
 
-void Checkbook::adjustBalance( float amount )
+void Checkbook::adjustBalance()
 {
-	currBalance += amount;
-	balanceLabel->setText( tr( "Current balance: %1%2" ).arg( currencySymbol ).arg( currBalance, 0, 'f', 2 ) );
-
+	balanceLabel->setText( tr( "Current balance: %1%2" ).arg( currencySymbol ).arg( info->balance(), 0, 'f', 2 ) );
 }
 
 TranInfo *Checkbook::findTran( const QString &checknum, const QString &date, const QString &desc )
 {
-	TranInfo *traninfo = transactions.first();
+	TranInfo *traninfo = tranList->first();
 	while ( traninfo )
 	{
 		if ( traninfo->number() == checknum && traninfo->datestr() == date &&
 			 traninfo->desc() == desc )
 			break;
-		traninfo = transactions.next();
+		traninfo = tranList->next();
 	}
 	return( traninfo );
 }
 
 void Checkbook::accept()
 {
-	QFile f( filename );
-	if ( f.exists() )
-	{
-		f.remove();
-	}
-
-	Config *config = new Config(filename, Config::File);
-
-	// Save info
-	config->setGroup( "Account" );
-	config->writeEntryCrypt( "Password", password );
-	config->writeEntry( "Type", typeList->currentText() );
-	config->writeEntry( "Bank", bankEdit->text() );
-	config->writeEntryCrypt( "Number", acctNumEdit->text() );
-	config->writeEntryCrypt( "PINNumber", pinNumEdit->text() );
-	config->writeEntry( "Balance", balanceEdit->text() );
-	config->writeEntry( "Notes", notesEdit->text() );
-
-	// Save transactions
-	int i = 1;
-	for ( TranInfo *tran = transactions.first(); tran; tran = transactions.next() )
-	{
-		tran->write( config, i );
-		i++;
-	}
-	config->write();
+	info->setName( nameEdit->text() );
+	info->setType( typeList->currentText() );
+	info->setBank( bankEdit->text() );
+	info->setAccount( acctNumEdit->text() );
+	info->setPin( pinNumEdit->text() );
+	bool ok;
+	info->setStartingBalance( balanceEdit->text().toFloat( &ok ) );
+	info->setNotes( notesEdit->text() );
 
 	QDialog::accept();
 }
 
 void Checkbook::slotPasswordClicked()
 {
-	if ( password == "" && passwordCB->isChecked() )
+	if ( info->password().isNull() && passwordCB->isChecked() )
 	{
 		Password *pw = new Password( this, tr( "Enter password" ), tr( "Please enter your password:" ) );
 		if ( pw->exec() != QDialog::Accepted  )
@@ -403,25 +355,25 @@ void Checkbook::slotPasswordClicked()
 			delete pw;
 			return;
 		}
-		password = pw->password;
+		info->setPassword( pw->password );
 		delete pw;
 
 		pw = new Password( this, tr( "Confirm password" ), tr( "Please confirm your password:" ) );
-		if ( pw->exec() != QDialog::Accepted || pw->password != password )
+		if ( pw->exec() != QDialog::Accepted || pw->password != info->password() )
 		{
 			passwordCB->setChecked( FALSE );
-			password = "";
+			info->setPassword( QString::null );
 		}
 
 		delete pw;
 	}
-	else if ( password != "" && !passwordCB->isChecked() )
+	else if ( !info->password().isNull() && !passwordCB->isChecked() )
 	{
 		Password *pw = new Password( this, tr( "Enter password" ),
 					tr( "Please enter your password to confirm removal of password protection:" ) );
-		if ( pw->exec() == QDialog::Accepted && pw->password == password )
+		if ( pw->exec() == QDialog::Accepted && pw->password == info->password() )
 		{
-			password = "";
+			info->setPassword( QString::null );
 			delete pw;
 			return;
 		}
@@ -436,22 +388,25 @@ void Checkbook::slotPasswordClicked()
 
 void Checkbook::slotNameChanged( const QString &newname )
 {
-	name = newname;
-	filename = filedir;
-	filename.append( newname );
-	filename.append( ".qcb" );
-	QString tempstr = name;
-	tempstr.append( " - " );
-	tempstr.append( tr( "Checkbook" ) );
-	setCaption( tempstr );
+	info->setName( newname );
+
+	// TODO - need filedir
+//	QString namestr = filedir;
+//	namestr.append( newname );
+//	namestr.append( ".qcb" );
+//	info->setFilename( namestr );
+
+	QString namestr = newname;
+	namestr.append( " - " );
+	namestr.append( tr( "Checkbook" ) );
+	setCaption( namestr );
 }
 
 void Checkbook::slotStartingBalanceChanged( const QString &newbalance )
 {
-	currBalance -= startBalance;
 	bool ok;
-	startBalance = newbalance.toFloat( &ok );
-	adjustBalance( startBalance );
+	info->setStartingBalance( newbalance.toFloat( &ok ) );
+	adjustBalance();
 }
 
 void Checkbook::slotNewTran()
@@ -459,28 +414,30 @@ void Checkbook::slotNewTran()
 	highTranNum++;
 	TranInfo *traninfo = new TranInfo( highTranNum );
 
-	Transaction *currtran = new Transaction( this, name,
+	Transaction *currtran = new Transaction( this, info->name(),
 											 traninfo,
 											 currencySymbol );
 	currtran->showMaximized();
 	if ( currtran->exec() == QDialog::Accepted )
 	{
-		float amount = traninfo->amount();
+		// Add to transaction list
+		info->addTransaction( traninfo );
+
+		// Add to transaction table
+		float amount;
+		QString stramount;
+
+		amount = traninfo->amount();
 		if ( traninfo->withdrawal() )
 		{
 			amount *= -1;
 		}
-		QString stramount;
 		stramount.sprintf( "%s%.2f", currencySymbol.latin1(), amount );
 
-		// Add to transaction list
-		transactions.inSort( traninfo );
-
-		// Add to transaction table
 		( void ) new CBListItem( tranTable, traninfo->number(), traninfo->datestr(), traninfo->desc(),
 								  stramount );
 
-		adjustBalance( amount );
+		adjustBalance();
 	}
 	else
 	{
@@ -497,21 +454,17 @@ void Checkbook::slotEditTran()
 		return;
 	}
 
-	TranInfo *traninfo = findTran( curritem->text( 0 ), curritem->text( 1 ), curritem->text( 2 ) );
-	float origamt = traninfo->amount();
-	if ( traninfo->withdrawal() )
-	{
-		origamt *= -1;
-	}
+	TranInfo *traninfo = info->findTransaction( curritem->text( 0 ), curritem->text( 1 ),
+												   curritem->text( 2 ) );
 
-	Transaction *currtran = new Transaction( this, name,
+	Transaction *currtran = new Transaction( this, info->name(),
 											 traninfo,
 											 currencySymbol );
 	currtran->showMaximized();
 	if ( currtran->exec() == QDialog::Accepted )
 	{
+		curritem->setText( 0, traninfo->number() );
 		curritem->setText( 1, traninfo->datestr() );
-
 		curritem->setText( 2, traninfo->desc() );
 
 		float amount = traninfo->amount();
@@ -519,16 +472,14 @@ void Checkbook::slotEditTran()
 		{
 			amount *= -1;
 		}
-		adjustBalance( origamt * -1 );
-		adjustBalance( amount );
 		QString stramount;
 		stramount.sprintf( "%s%.2f", currencySymbol.latin1(), amount );
 		curritem->setText( 3, stramount );
 
-		balanceLabel->setText( tr( "Current balance: %1%2" ).arg( currencySymbol ).arg( currBalance, 0, 'f', 2 ) );
-
-		delete currtran;
+		adjustBalance();
 	}
+
+	delete currtran;
 }
 
 void Checkbook::slotDeleteTran()
@@ -543,17 +494,9 @@ void Checkbook::slotDeleteTran()
 
 	if ( QPEMessageBox::confirmDelete ( this, tr( "Delete transaction" ), traninfo->desc() ) )
 	{
-		float amount = traninfo->amount();
-		if ( traninfo->withdrawal() )
-		{
-			amount *= -1;
-		}
-
-		transactions.remove( traninfo );
-		delete traninfo;
+		info->removeTransaction( traninfo );
 		delete curritem;
-
-		adjustBalance( amount * -1 );
+		adjustBalance();
 	}
 }
 
@@ -582,13 +525,13 @@ void Checkbook::drawBalanceChart()
 {
 	DataPointList *list = new DataPointList();
 
-	float balance = startBalance;
+	float balance = info->startingBalance();
 	float amount;
 	QString label;
 	int i = 0;
-	int count = transactions.count();
+	int count = tranList->count();
 
-	for ( TranInfo *tran = transactions.first(); tran; tran = transactions.next() )
+	for ( TranInfo *tran = tranList->first(); tran; tran = tranList->next() )
 	{
 		i++;
 		balance -= tran->fee();
@@ -616,15 +559,15 @@ void Checkbook::drawCategoryChart( bool withdrawals )
 {
 	DataPointList *list = new DataPointList();
 
-	TranInfo *tran = transactions.first();
+	TranInfo *tran = tranList->first();
 	if ( tran && tran->withdrawal() == withdrawals )
 	{
 		list->append( new DataPointInfo( tran->category(), tran->amount() ) );
 	}
-	tran = transactions.next();
+	tran = tranList->next();
 
 	DataPointInfo *cat;
-	for ( ; tran; tran = transactions.next() )
+	for ( ; tran; tran = tranList->next() )
 	{
 		if ( tran->withdrawal() == withdrawals )
 		{

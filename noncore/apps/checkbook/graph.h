@@ -57,7 +57,6 @@ class Graph : public QWidget
 
 		void initGraph();
 		void drawBarChart( int, int, float );
-		void drawLineChart( int, int, float );
 		void drawPieChart( int, int, float );
 };
 

@@ -87,11 +87,6 @@ void Graph::initGraph()
 			drawBarChart( width(), height(), data->maxValue() );
 		}
 		break;
-		case GraphInfo::LineChart :
-		{
-			//drawLineChart( p, s, min, max );
-		}
-		break;
 		case GraphInfo::PieChart :
 		{
 			drawPieChart( width(), height(), data->totalValue() );
@@ -130,10 +125,6 @@ void Graph::drawBarChart( int width, int height, float max )
 		i++;
 		x += bw;
 	}
-}
-
-void Graph::drawLineChart( int width, int height, float max )
-{
 }
 
 void Graph::drawPieChart( int width, int height, float sum )

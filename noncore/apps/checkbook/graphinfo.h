@@ -55,7 +55,7 @@ typedef QList<DataPointInfo> DataPointList;
 class GraphInfo
 {
 	public:
-		enum GraphType { BarChart, LineChart, PieChart };
+		enum GraphType { BarChart, PieChart };
 
 		GraphInfo( GraphType = BarChart, DataPointList * = 0x0,
 				   const QString & = 0x0, const QString & = 0x0, const QString & = 0x0 );

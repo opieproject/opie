@@ -1,19 +1,23 @@
 TEMPLATE  = app
 CONFIG    = qt warn_on release
 HEADERS   = mainwindow.h \
-      traninfo.h    \
-      graphinfo.h   \
-      password.h    \
-      checkbook.h   \
-      transaction.h \
+      cbinfo.h        \
+      traninfo.h      \
+      graphinfo.h     \
+      configuration.h \
+      password.h      \
+      checkbook.h     \
+      transaction.h   \
       graph.h
-SOURCES   = main.cpp  \
-      mainwindow.cpp  \
-      traninfo.cpp    \
-      graphinfo.cpp   \
-      password.cpp    \
-      checkbook.cpp   \
-      transaction.cpp \
+SOURCES   = main.cpp    \
+      mainwindow.cpp    \
+      cbinfo.cpp        \
+      traninfo.cpp      \
+      graphinfo.cpp     \
+      configuration.cpp \
+      password.cpp      \
+      checkbook.cpp     \
+      transaction.cpp   \ 
       graph.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include

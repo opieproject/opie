@@ -26,51 +26,26 @@
 
 */
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef CONFIGURATION_H
+#define CONFIGURATION_H
 
-#include <qmainwindow.h>
-#include <qpixmap.h>
+#include <qdialog.h>
 
-class CBInfo;
-class CBInfoList;
-class QAction;
-class QListView;
+class QCheckBox;
+class QLineEdit;
 class QString;
 
-class MainWindow : public QMainWindow
+class Configuration : public QDialog
 {
 	Q_OBJECT
 
 	public:
-		MainWindow();
-		~MainWindow();
+		Configuration( QWidget * = 0x0, const QString & = "$", bool = FALSE, bool = FALSE );
+		~Configuration();
 
-	private:
-		QListView *cbList;
-		QString    cbDir;
-		QAction   *actionOpen;
-		QAction   *actionDelete;
-
-		QString  currencySymbol;
-		bool     showLocks;
-		bool     showBalances;
-		int      posName;
-
-		CBInfoList *checkbooks;
-		QString     tempFilename;
-		QPixmap     lockIcon;
-		QPixmap     nullIcon;
-
-		void buildList();
-		void addCheckbook( CBInfo * );
-		void buildFilename( const QString & );
-
-	private slots:
-		void slotNew();
-		void slotEdit();
-		void slotDelete();
-		void slotConfigure();
+		QLineEdit *symbolEdit;
+		QCheckBox *lockCB;
+		QCheckBox *balCB;
 };
 
 #endif

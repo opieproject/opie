@@ -29,13 +29,12 @@
 #ifndef CHECKBOOK_H
 #define CHECKBOOK_H
 
-#include "traninfo.h"
-
 #include <qdialog.h>
 #include <qlistview.h>
 
 class OTabWidget;
 
+class CBInfo;
 class Graph;
 class GraphInfo;
 class QCheckBox;
@@ -45,30 +44,26 @@ class QLineEdit;
 class QListView;
 class QMultiLineEdit;
 class QString;
+class TranInfo;
+class TranInfoList;
 
 class Checkbook : public QDialog
 {
 	Q_OBJECT
 
 	public:
-		Checkbook( QWidget * = 0x0, const QString & = 0x0, const QString & = 0x0,
-					const QString & = "$" );
+		Checkbook( QWidget * = 0x0, CBInfo * = 0x0, const QString & = "$" );
 		~Checkbook();
 
-		const QString &getName();
-
 	private:
-		TranInfoList transactions;
-		QString      name;
-		QString      filename;
-		QString      filedir;
-		QString      currencySymbol;
-		QString      password;
-		int          highTranNum;
+		CBInfo        *info;
+		TranInfoList *tranList;
+		QString       currencySymbol;
+		int            highTranNum;
 
 		OTabWidget *mainWidget;
 		void        loadCheckbook();
-		void        adjustBalance( float );
+		void        adjustBalance();
 		TranInfo   *findTran( const QString &, const QString &, const QString & );
 
 		// Info tab
@@ -81,13 +76,11 @@ class Checkbook : public QDialog
 		QLineEdit      *pinNumEdit;
 		QLineEdit      *balanceEdit;
 		QMultiLineEdit *notesEdit;
-		float           startBalance;
 
 		// Transactions tab
 		QWidget   *initTransactions();
 		QListView *tranTable;
 		QLabel    *balanceLabel;
-		float      currBalance;
 
 		// Charts tab
 		QWidget   *initCharts();
