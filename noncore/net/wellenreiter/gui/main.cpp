@@ -1,5 +1,5 @@
 /**********************************************************************
-** Copyright (C) 2002 Michael 'Mickey' Lauer.  All rights reserved.
+** Copyright (C) 2002-2004 Michael 'Mickey' Lauer.  All rights reserved.
 **
 ** This file is part of Opie Environment.
 **
@@ -16,18 +16,13 @@
 #include "mainwindow.h"
 #ifdef QWS
 #include <opie2/oapplication.h>
+#include <opie2/oprocess.h>
 #else
 #include <qapplication.h>
 #endif
 
 #include <qmessagebox.h>
 #include <qstringlist.h>
-
-// ==> OProcess
-#include <qdir.h>
-#include <qfileinfo.h>
-#include <qregexp.h>
-#include <qtextstream.h>
 
 #include <errno.h>
 #include <signal.h>
@@ -77,33 +72,14 @@ int main( int argc, char **argv )
             if ( result == QMessageBox::No ) return -1;
         }
 
-        // dhcp check - NOT HERE! This really belongs as a static member to OProcess
-        // and I want to call it like that: if ( OProcess::isRunning( QString& ) ) ...
-
-        QString line;
-        QDir d = QDir( "/proc" );
-        QStringList dirs = d.entryList( QDir::Dirs );
-        QStringList::Iterator it;
-        for ( it = dirs.begin(); it != dirs.end(); ++it )
+        if ( OProcess::processPID( "dhcpc" ) )
         {
-            //qDebug( "next entry: %s", (const char*) *it );
-            QFile file( "/proc/"+*it+"/cmdline" );
-            file.open( IO_ReadOnly );
-            if ( !file.isOpen() ) continue;
-            QTextStream t( &file );
-            line = t.readLine();
-            //qDebug( "cmdline = %s", (const char*) line );
-            if ( line.contains( "dhcp" ) ) break;
-        }
-        if ( line.contains( "dhcp" ) )
-        {
-            qWarning( "Wellenreiter: found dhcp process #%d", (*it).toInt() );
             result = QMessageBox::warning( w, " - Wellenreiter II -  (dhcp)", QObject::tr( "You have a dhcp client running.\n"
             "This can severly limit scanning!\nShould I kill it for you?" ),
             QMessageBox::Yes, QMessageBox::No );
             if ( result == QMessageBox::Yes )
             {
-                if ( -1 == ::kill( (*it).toInt(), SIGTERM ) )
+                if ( -1 == ::kill( OProcess::processPID( "dhcpc" ), SIGTERM ) )
                     qWarning( "Wellenreiter: can't kill process #%d (%s)", result, strerror( errno ) );
                 else
                     killed = true;
