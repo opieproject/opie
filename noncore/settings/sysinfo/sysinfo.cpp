@@ -21,16 +21,15 @@
 #include "memory.h"
 #include "load.h"
 #include "storage.h"
-//#include "graphics.h"
 #include "processinfo.h"
 #include "modulesinfo.h"
 #include "versioninfo.h"
 #include "sysinfo.h"
 
+#include "otabwidget.h"
 
 #include <qpe/resource.h>
 
-#include <qtabwidget.h>
 #include <qlayout.h>
 
 SystemInfo::SystemInfo( QWidget *parent, const char *name, WFlags f )
@@ -39,17 +38,16 @@ SystemInfo::SystemInfo( QWidget *parent, const char *name, WFlags f )
     setIcon( Resource::loadPixmap( "system_icon" ) );
     setCaption( tr("System Info") );
     QVBoxLayout *lay = new QVBoxLayout( this );
-    QTabWidget *tab = new QTabWidget( this );
+    OTabWidget *tab = new OTabWidget( this, "tabwidget" );
     lay->addWidget( tab );
-    tab->addTab( new MemoryInfo( tab ), tr("Memory") );
+    tab->addTab( new MemoryInfo( tab ), "sysinfo/memorytabicon.png", tr("Memory") );
 #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
-    tab->addTab( new StorageInfo( tab ), tr("Storage") );
+    tab->addTab( new StorageInfo( tab ), "sysinfo/storagetabicon.png", tr("Storage") );
 #endif
-    tab->addTab( new LoadInfo( tab ), tr("CPU") );
-//    tab->addTab( new Graphics( tab ), tr("Graphics") );
-    tab->addTab( new ProcessInfo( tab ), tr("Process") );
-    tab->addTab( new ModulesInfo( tab ), tr("Modules") );
-    tab->addTab( new VersionInfo( tab ), tr("Version") );
+    tab->addTab( new LoadInfo( tab ), "sysinfo/cputabicon.png", tr("CPU") );
+    tab->addTab( new ProcessInfo( tab ), "sysinfo/processtabicon.png", tr("Process") );
+    tab->addTab( new ModulesInfo( tab ), "sysinfo/moduletabicon.png", tr("Modules") );
+    tab->addTab( new VersionInfo( tab ), "sysinfo/versiontabicon.png", tr("Version") );
 
     resize( 220, 180 );
 }

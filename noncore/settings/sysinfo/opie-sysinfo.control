@@ -1,4 +1,4 @@
-Files: bin/sysinfo apps/Applications/sysinfo.desktop
+Files: bin/sysinfo apps/Applications/sysinfo.desktop pics/sysinfo
 Priority: optional
 Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>
