@@ -135,4 +135,51 @@ public:
     void addPart(const RecPart&part);
 };
 
+class encodedString
+{
+public:
+    encodedString();
+    /*
+       creates an new content string. 
+       it makes a deep copy of it!
+     */
+    encodedString(const char*nContent,unsigned int length);
+    /*
+      Take over the nContent. Means: it will just copy the pointer, not the content.
+       so make sure: No one else frees the string, the string has allocated with
+       malloc for compatibility with c-based libs
+    */
+    encodedString(char*nContent,unsigned int nSize);
+    /* copy construkor - makes ALWAYS a deep copy!!!! */
+    encodedString(const encodedString&old);
+    /* assign operator - makes ALWAYS a deep copy!!!! */
+    encodedString& operator=(const encodedString&old);
+    /* destructor - cleans the content */
+    virtual ~encodedString();
+    
+    /* returns a pointer to the content - do not delete yoursel! */
+    const char*Content()const;
+    /* returns the lengths of the content 'cause it must not be a null-terminated string! */
+    const int Length()const;
+    
+    /*
+       makes a deep copy of nContent!
+     */
+    void setContent(const char*nContent,int nSize);
+    /*
+      Take over the nContent. Means: it will just copy the pointer, not the content.
+       so make sure: No one else frees the string, the string has allocated with
+       malloc for compatibility with c-based libs
+    */
+    void setContent(char*nContent,int nSize);
+
+protected:
+    char * content;
+    unsigned int size;
+    
+    void init();
+    void copy_old(const encodedString&old);
+    void clean();
+};
+
 #endif

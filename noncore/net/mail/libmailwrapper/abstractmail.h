@@ -10,6 +10,7 @@ class RecPart;
 class IMAPwrapper;
 class POP3wrapper;
 class Folder;
+class encodedString;
 
 class AbstractMail:public QObject
 {
@@ -20,12 +21,15 @@ public:
     virtual QList<Folder>* listFolders()=0;
     virtual void listMessages(const QString & mailbox,QList<RecMail>&target )=0;
     virtual RecBody fetchBody(const RecMail&mail)=0;
-    virtual QString fetchPart(const RecMail&mail,const RecPart&part)=0;
+    virtual QString fetchTextPart(const RecMail&mail,const RecPart&part)=0;
+    virtual encodedString* fetchDecodedPart(const RecMail&mail,const RecPart&part)=0;
+    virtual encodedString* fetchRawPart(const RecMail&mail,const RecPart&part)=0;
+
     virtual void deleteMail(const RecMail&mail)=0;
     virtual void answeredMail(const RecMail&mail)=0;
 
     static AbstractMail* getWrapper(IMAPaccount *a);
     static AbstractMail* getWrapper(POP3account *a);
-    static QString decode_quoted_printable(const char*text);
+    static encodedString*decode_String(const encodedString*text,const QString&enc);
 };
 #endif

@@ -1,5 +1,5 @@
 #include "mailtypes.h"
-
+#include <stdlib.h>
 
 RecMail::RecMail()
     :subject(""),date(""),from(""),mbox(""),msg_id(""),msg_number(0),msg_size(0),msg_flags(7)
@@ -244,4 +244,92 @@ void RecBody::setDescription(const RecPart&des)
 const RecPart& RecBody::Description()const
 {
     return m_description;
+}
+
+/* handling encoded content */
+encodedString::encodedString()
+{
+    init();
+}
+
+encodedString::encodedString(const char*nContent,unsigned int nSize)
+{
+    init();
+    setContent(nContent,nSize);
+}
+
+encodedString::encodedString(char*nContent,unsigned int nSize)
+{
+    init();
+    setContent(nContent,nSize);
+}
+
+encodedString::encodedString(const encodedString&old)
+{
+    init();
+    copy_old(old);
+    qDebug("encodedeString: copy constructor!");
+}
+
+encodedString& encodedString::operator=(const encodedString&old)
+{
+    init();
+    copy_old(old);
+    qDebug("encodedString: assign operator!");
+    return *this;
+}
+
+encodedString::~encodedString()
+{
+    clean();
+}
+
+void encodedString::init()
+{
+    content = 0;
+    size = 0;
+}
+
+void encodedString::clean()
+{
+    if (content) {
+        free(content);
+    }
+    content = 0;
+    size = 0;
+}
+
+void encodedString::copy_old(const encodedString&old)
+{
+    clean();
+    if (old.size>0 && old.content) {
+        content = (char*)malloc(old.size*sizeof(char));
+        memcpy(content,old.content,size);
+        size = old.size;
+    }
+}
+
+const char*encodedString::Content()const
+{
+    return content;
+}
+
+const int encodedString::Length()const
+{
+    return size;
+}
+
+void encodedString::setContent(const char*nContent,int nSize)
+{
+    if (nSize>0 && nContent) {
+        content = (char*)malloc(nSize*sizeof(char));
+        memcpy(content,nContent,nSize);
+        size = nSize;    
+    }
+}
+
+void encodedString::setContent(char*nContent,int nSize)
+{
+    content = nContent;
+    size = nSize;
 }

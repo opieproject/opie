@@ -6,6 +6,7 @@
 
 class RecMail;
 class RecBody;
+class encodedString;
 struct mailpop3;
 
 class POP3wrapper : public AbstractMail
@@ -18,7 +19,10 @@ public:
     /* mailbox will be ignored */
     virtual void listMessages(const QString & mailbox, QList<RecMail> &target );
     virtual QList<Folder>* listFolders();
-    virtual QString fetchPart(const RecMail&mail,const RecPart&part);
+    virtual QString fetchTextPart(const RecMail&mail,const RecPart&part);
+    virtual encodedString* fetchDecodedPart(const RecMail&mail,const RecPart&part);
+    virtual encodedString* fetchRawPart(const RecMail&mail,const RecPart&part);
+
     virtual void deleteMail(const RecMail&mail);
     virtual void answeredMail(const RecMail&mail);
 

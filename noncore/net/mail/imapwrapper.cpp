@@ -302,8 +302,9 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
             }
             m->setMsgid(QString(head->env_message_id));
         } else if (item->att_data.att_static->att_type==MAILIMAP_MSG_ATT_INTERNALDATE) {
-            mailimap_date_time*d = item->att_data.att_static->att_data.att_internal_date;
 #if 0            
+
+            mailimap_date_time*d = item->att_data.att_static->att_data.att_internal_date;
             QDateTime da(QDate(d->dt_year,d->dt_month,d->dt_day),QTime(d->dt_hour,d->dt_min,d->dt_sec));
             qDebug("%i %i %i - %i %i %i",d->dt_year,d->dt_month,d->dt_day,d->dt_hour,d->dt_min,d->dt_sec);
             qDebug(da.toString());
@@ -391,20 +392,14 @@ void IMAPwrapper::searchBodyText(const RecMail&mail,mailimap_body_type_1part*mai
     switch (mailDescription->bd_type) {
     case MAILIMAP_BODY_TYPE_1PART_MSG:
         path.append(1);
-        body_text = fetchPart(mail,path,true);
-        if (singlePart.Encoding()=="quoted-printable") {
-            body_text = decode_quoted_printable(body_text.latin1());
-        }
+        body_text = fetchTextPart(mail,path,true,singlePart.Encoding());
         target_body.setBodytext(body_text);
         target_body.setDescription(singlePart);
         break;
     case MAILIMAP_BODY_TYPE_1PART_TEXT:
         qDebug("Mediatype single: %s",mailDescription->bd_data.bd_type_text->bd_media_text);
         path.append(1);
-        body_text = fetchPart(mail,path,true);
-        if (singlePart.Encoding()=="quoted-printable") {
-            body_text = decode_quoted_printable(body_text.latin1());
-        }
+        body_text = fetchTextPart(mail,path,true,singlePart.Encoding());
         target_body.setBodytext(body_text);
         target_body.setDescription(singlePart);
         break;
@@ -461,9 +456,9 @@ QStringList IMAPwrapper::address_list_to_stringlist(clist*list)
     return l;
 }
 
-QString IMAPwrapper::fetchPart(const RecMail&mail,const QValueList<int>&path,bool internal_call,const QString&enc)
+encodedString*IMAPwrapper::fetchRawPart(const RecMail&mail,const QValueList<int>&path,bool internal_call)
 {
-    QString body("");
+    encodedString*res=new encodedString;
     const char*mb;
     int err;
     mailimap_fetch_type *fetchType;
@@ -472,14 +467,14 @@ QString IMAPwrapper::fetchPart(const RecMail&mail,const QValueList<int>&path,boo
 
     login();
     if (!m_imap) {
-        return body;
+        return res;
     }
     if (!internal_call) {
         mb = mail.getMbox().latin1();
         err = mailimap_select( m_imap, (char*)mb);
         if ( err != MAILIMAP_NO_ERROR ) {
             qDebug("error selecting mailbox: %s",m_imap->imap_response);
-            return body;
+            return res;
         }
     }
     set = mailimap_set_new_single(mail.getNumber());
@@ -511,26 +506,17 @@ QString IMAPwrapper::fetchPart(const RecMail&mail,const QValueList<int>&path,boo
             if (msg_att_item->att_type == MAILIMAP_MSG_ATT_ITEM_STATIC) {
                 if (msg_att_item->att_data.att_static->att_type == MAILIMAP_MSG_ATT_BODY_SECTION) {
                     char*text = msg_att_item->att_data.att_static->att_data.att_body_section->sec_body_part;
+                    /* detach - we take over the content */
                     msg_att_item->att_data.att_static->att_data.att_body_section->sec_body_part = 0L;
-                    if (text) {
-                        if (enc=="quoted-printable") {
-                            body = decode_quoted_printable(text);
-                        } else {
-                            body = QString(text);
-                        }
-                        free(text);
-                    } else {
-                        body = "";
-                    }
+                    res->setContent(text,msg_att_item->att_data.att_static->att_data.att_body_section->sec_length);
                 }
             }
-        }
-         
+        }         
     } else {
         qDebug("error fetching text: %s",m_imap->imap_response);
     }
     mailimap_fetch_list_free(result);
-    return body;
+    return res;
 }
 
 void IMAPwrapper::searchBodyText(const RecMail&mail,mailimap_body_type_mpart*mailDescription,RecBody&target_body,int current_recursion,QValueList<int>recList)
@@ -557,7 +543,7 @@ void IMAPwrapper::searchBodyText(const RecMail&mail,mailimap_body_type_mpart*mai
             clist.append(count);
             /* important: Check for is NULL 'cause a body can be empty! */
             if (currentPart.Type()=="text" && target_body.Bodytext().isNull() ) {
-                QString body_text = fetchPart(mail,clist,true,currentPart.Encoding());
+                QString body_text = fetchTextPart(mail,clist,true,currentPart.Encoding());
                 target_body.setDescription(currentPart);
                 target_body.setBodytext(body_text);
             } else {
@@ -713,11 +699,6 @@ void IMAPwrapper::fillBodyFields(RecPart&target_part,mailimap_body_fields*which)
     target_part.setSize(which->bd_size);
 }
 
-QString IMAPwrapper::fetchPart(const RecMail&mail,const RecPart&part)
-{
-    return fetchPart(mail,part.Positionlist(),false,part.Encoding());
-}
-
 void IMAPwrapper::deleteMail(const RecMail&mail)
 {
     mailimap_flag_list*flist;
@@ -783,4 +764,37 @@ void IMAPwrapper::answeredMail(const RecMail&mail)
         qDebug("error marking mail: %s",m_imap->imap_response);
         return;
     }
+}
+
+QString IMAPwrapper::fetchTextPart(const RecMail&mail,const QValueList<int>&path,bool internal_call,const QString&enc)
+{
+    QString body("");
+    encodedString*res = fetchRawPart(mail,path,internal_call);
+    encodedString*r = decode_String(res,enc);
+    delete res;
+    if (r) {
+        if (r->Length()>0) {
+            body = r->Content();
+        }
+        delete r;
+    }
+    return body;
+}
+
+QString IMAPwrapper::fetchTextPart(const RecMail&mail,const RecPart&part)
+{
+    return fetchTextPart(mail,part.Positionlist(),false,part.Encoding());
+}
+
+encodedString* IMAPwrapper::fetchDecodedPart(const RecMail&mail,const RecPart&part)
+{
+    encodedString*res = fetchRawPart(mail,part.Positionlist(),false);
+    encodedString*r = decode_String(res,part.Encoding());
+    delete res;
+    return r;
+}
+
+encodedString* IMAPwrapper::fetchRawPart(const RecMail&mail,const RecPart&part)
+{
+    return fetchRawPart(mail,part.Positionlist(),false);
 }

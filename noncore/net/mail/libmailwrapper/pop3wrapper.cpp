@@ -328,7 +328,7 @@ QList<Folder>* POP3wrapper::listFolders()
     return folders;
 }
 
-QString POP3wrapper::fetchPart(const RecMail&,const RecPart&)
+QString POP3wrapper::fetchTextPart(const RecMail&,const RecPart&)
 {
     return "";
 }
@@ -347,3 +347,12 @@ void POP3wrapper::answeredMail(const RecMail&)
 {
 }
 
+encodedString* POP3wrapper::fetchDecodedPart(const RecMail&,const RecPart&)
+{
+    return new encodedString();
+}
+
+encodedString* POP3wrapper::fetchRawPart(const RecMail&,const RecPart&)
+{
+    return new encodedString();
+}

@@ -3,6 +3,7 @@
 #include <qtextstream.h>
 #include <qaction.h>
 #include <qpopupmenu.h>
+#include <qfile.h>
 #include <qapplication.h>
 
 #include <opie/ofiledialog.h>
@@ -12,6 +13,7 @@
 #include "viewmail.h"
 #include "abstractmail.h"
 #include "accountview.h"
+#include "mailtypes.h"
 
 AttachItem::AttachItem(QListView * parent,QListViewItem *after, const QString&mime,const QString&desc,const QString&file,
     const QString&fsize,int num)
@@ -134,7 +136,14 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
                   "/", item->text( 2 )  , types, 0 );
 
              if( !str.isEmpty() ) {
-               qDebug( "first we will need a MIME wrapper" );
+               encodedString*content = m_recMail.Wrapper()->fetchDecodedPart( m_recMail, m_body.Parts()[ ( ( AttachItem* )item )->Partnumber() ] );
+               if (content) {
+                 QFile output(str);
+                 output.open(IO_WriteOnly);
+                 output.writeBlock(content->Content(),content->Length());
+                 output.close();
+                 delete content;
+               }
              }
              }
         break ;
@@ -144,7 +153,7 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
                 setText();
              } else {
                 if (  m_recMail.Wrapper() != 0l )  { // make sure that there is a wrapper , even after delete or simular actions
-                browser->setText( m_recMail.Wrapper()->fetchPart( m_recMail, m_body.Parts()[ ( ( AttachItem* )item )->Partnumber() ] ) );
+                browser->setText( m_recMail.Wrapper()->fetchTextPart( m_recMail, m_body.Parts()[ ( ( AttachItem* )item )->Partnumber() ] ) );
                 }
              }
         break;

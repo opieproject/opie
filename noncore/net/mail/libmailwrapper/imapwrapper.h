@@ -13,6 +13,7 @@ struct mailimap_body_type_msg;
 struct mailimap_body_type_mpart;
 struct mailimap_body_fields;
 struct mailimap_msg_att;
+class encodedString;
 
 class IMAPwrapper : public AbstractMail
 {
@@ -22,10 +23,14 @@ public:
     virtual ~IMAPwrapper();
     virtual QList<Folder>* listFolders();
     virtual void listMessages(const QString & mailbox,QList<RecMail>&target );
-    virtual RecBody fetchBody(const RecMail&mail);
-    virtual QString fetchPart(const RecMail&mail,const RecPart&part);
+    
     virtual void deleteMail(const RecMail&mail);
     virtual void answeredMail(const RecMail&mail);
+
+    virtual RecBody fetchBody(const RecMail&mail);
+    virtual QString fetchTextPart(const RecMail&mail,const RecPart&part);
+    virtual encodedString* fetchDecodedPart(const RecMail&mail,const RecPart&part);
+    virtual encodedString* fetchRawPart(const RecMail&mail,const RecPart&part);
 
     static void imap_progress( size_t current, size_t maximum );
 
@@ -34,7 +39,8 @@ protected:
     void login();
     void logout();
 
-    virtual QString fetchPart(const RecMail&mail,const QValueList<int>&path,bool internal_call=false,const QString&enc="");
+    virtual QString fetchTextPart(const RecMail&mail,const QValueList<int>&path,bool internal_call=false,const QString&enc="");
+    virtual encodedString*fetchRawPart(const RecMail&mail,const QValueList<int>&path,bool internal_call);
     
     void searchBodyText(const RecMail&mail,mailimap_body_type_1part*mailDescription,RecBody&target_body);
     void searchBodyText(const RecMail&mail,mailimap_body_type_mpart*mailDescription,RecBody&target_body,int current_recursion=0,QValueList<int>recList=QValueList<int>());
