@@ -651,7 +651,9 @@ static void parseName( const QString& name, QString *first, QString *middle,
 
 void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 {
-	qWarning("Receiving QCop-Call with message %s", QString( msg ).latin1() );
+        bool needShow = FALSE;
+        qWarning("Receiving QCop-Call with message %s", QString( msg ).latin1() );
+
 
 	if (msg == "editPersonal()") {
 		editPersonal();
@@ -706,8 +708,8 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		m_abView -> setCurrentUid( uid );
 		slotViewSwitched ( AbView::CardView );
 
-		showMaximized();
-		qApp->exec();
+	        needShow = true;
+
 
 	} else if ( msg == "edit(int)" ) {
 		QDataStream stream(data,IO_ReadOnly);
@@ -725,6 +727,9 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		m_abView -> setCurrentUid( uid );
 		slotViewEdit();
 	}
+
+        if (needShow)
+            QPEApplication::setKeepRunning();
 
 }
 

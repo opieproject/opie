@@ -98,11 +98,6 @@ public:
     bool hasCompletedDate()const;
 
     /**
-     * Does this Event has an alarm time ?
-     */
-    bool hasAlarmDateTime() const;
-
-    /**
      * What is the priority?
      */
     int priority()const ;
@@ -242,10 +237,6 @@ public:
     void setCompletedDate( const QDate& date );
 
     void setRecurrence( const ORecur& );
-    /**
-     * set the alarm time
-     */
-    void setAlarmDateTime ( const QDateTime& alarm );
 
     void setDescription(const QString& );
     void setSummary(const QString& );

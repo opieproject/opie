@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.48.2.2 2003-06-02 16:21:55 zecke Exp $
+** $Id: qpeapplication.cpp,v 1.48.2.3 2003-06-06 16:37:10 zecke Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -1306,18 +1306,24 @@ void QPEApplication::pidMessage( const QCString& msg, const QByteArray& data)
 			mw = d->qpe_main_widget;
 		if ( mw )
 			Global::setDocument( mw, doc );
+	} else {
+            bool p = d->keep_running;
+            d->keep_running = FALSE;
+            emit appMessage( msg, data);
+            if ( d->keep_running ) {
+                d->notbusysent = FALSE;
+                raiseAppropriateWindow();
+                if ( !p ) {
+                    // Tell the system we're still chugging along...
+#ifndef QT_NO_COP
+                    QCopEnvelope e("QPE/System", "appRaised(QString)");
+                    e << d->appName;
+#endif
+                }
+            }
+            if ( p )
+                d->keep_running = p;
 	}
-	else if ( msg == "nextView()" ) {
-		qDebug("got nextView()");
-		/*
-		  if ( raiseAppropriateWindow() )
-		*/
-		emit appMessage( msg, data);
-	}
-	else {
-		emit appMessage( msg, data);
-	}
-
 #endif
 }
 

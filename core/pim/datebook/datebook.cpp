@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.25.4.4 2003-06-03 18:07:06 zecke Exp $
+** $Id: datebook.cpp,v 1.25.4.5 2003-06-06 16:37:10 zecke Exp $
 **
 **********************************************************************/
 
@@ -711,6 +711,7 @@ void DateBook::appMessage(const QCString& msg, const QByteArray& data)
 				}
 			}
 		} else if ( msg == "nextView()" ) {
+                    needShow = true;
 			if ( !qApp-> activeWindow ( )) {
 				needShow = TRUE;
 			} else {
@@ -745,13 +746,13 @@ void DateBook::appMessage(const QCString& msg, const QByteArray& data)
 
     if ( needShow ) {
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
-		showMaximized();
+//		showMaximized();
 #else
-		show();
+//		show();
 #endif
-		raise();
+//		raise();
 		QPEApplication::setKeepRunning();
-		setActiveWindow();
+//		setActiveWindow();
 	}
 }
 

@@ -1022,10 +1022,10 @@ void MainWindow::doAlarm( const QDateTime& dt, int uid ) {
         killAlarm();
 
     if (needToStay) {
-        showMaximized();
-        raise();
+//        showMaximized();
+//        raise();
         QPEApplication::setKeepRunning();
-        setActiveWindow();
+//        setActiveWindow();
     }
 
 }
