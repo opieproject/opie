@@ -42,6 +42,8 @@ void ProfileManager::load() {
         prof.setBackground( conf.readNumEntry("back") );
         prof.setForeground( conf.readNumEntry("fore") );
         prof.setTerminal( conf.readNumEntry("terminal") );
+
+        // THIS is evil because all data get's reset
         prof.setConf( conf.items( (*it) ) );
 
         /* now add it */
@@ -94,21 +96,26 @@ Session* ProfileManager::fromProfile( const Profile& prof,  QWidget* parent) {
 void ProfileManager::save(  ) {
     QFile::remove( (QString(getenv("HOME") )+ "/Settings/opie-console-profiles.conf" ) );
     ProfileConfig conf("opie-console-profiles");
-    Profile::ValueList::Iterator it;
-    for (it = m_list.begin(); it != m_list.end(); ++it ) {
-        conf.setGroup( (*it).name() );
-        conf.writeEntry( "name", (*it).name() );
-        conf.writeEntry( "iolayer", QString::fromUtf8( (*it).ioLayerName() ) );
-        conf.writeEntry( "term", QString::fromUtf8( (*it).terminalName()  ) );
-        conf.writeEntry( "back", (*it).background() );
-        conf.writeEntry( "fore", (*it).foreground() );
-        conf.writeEntry( "terminal", (*it).terminal() );
+    Profile::ValueList::Iterator it2;
+    for (it2 = m_list.begin(); it2 != m_list.end(); ++it2 ) {
+        conf.setGroup( (*it2).name() );
+
         /* now the config stuff */
-        QMap<QString, QString> map =  (*it).conf();
-        QMap<QString, QString>::Iterator it;
-        for ( it = map.begin(); it != map.end(); ++it ) {
-            conf.writeEntry( it.key(), it.data() );
+        QMap<QString, QString> map =  (*it2).conf();
+        QMap<QString, QString>::Iterator confIt;
+        for ( confIt = map.begin(); confIt != map.end(); ++confIt ) {
+            conf.writeEntry( confIt.key(), confIt.data() );
         }
+
+        conf.writeEntry( "name", (*it2).name() );
+        QString str = QString::fromUtf8( (*it2).ioLayerName() );
+	qWarning("IOLayerName " + str );
+
+        conf.writeEntry( "iolayer", str );
+        conf.writeEntry( "term", QString::fromUtf8( (*it2).terminalName()  ) );
+        conf.writeEntry( "back", (*it2).background() );
+        conf.writeEntry( "fore", (*it2).foreground() );
+        conf.writeEntry( "terminal", (*it2).terminal() );
     }
 }
 void ProfileManager::setProfiles( const Profile::ValueList& list ) {
