@@ -561,7 +561,7 @@ void MainWindow::slotKeyReceived(FKey k, ushort, ushort, bool pressed) {
 
         QKeyEvent ke(state, k.qcode, k.unicode, 0, QString(QChar(k.unicode)));
 
-        // where should i send this event? doesnt work sending it here
+        // is this the best way to do this? cant figure out any other way to work
         QApplication::sendEvent((QObject *)m_curSession->widget(), &ke);
         ke.ignore();
     }

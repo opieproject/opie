@@ -100,7 +100,7 @@ void FunctionKeyboard::paintEvent(QPaintEvent *e) {
                     );
                 else  {
 
-                    ushort centerX = c *keyWidth + (keyWidth - keys[handle].pix->width()) / 2;
+                    ushort centerX = (ushort)(c *keyWidth) + (ushort)(keyWidth - keys[handle].pix->width()) / 2;
                     ushort centerY = r * keyHeight + (keyHeight - keys[handle].pix->height()) / 2;
                     p.drawPixmap(centerX, centerY, *keys[handle].pix);
                 }
@@ -127,7 +127,7 @@ void FunctionKeyboard::paintKey(uint row, uint col) {
         );
     else {
 
-        ushort centerX = col *keyWidth + (keyWidth - keys[handle].pix->width()) / 2;
+        ushort centerX = (ushort)(col *keyWidth) + (ushort)(keyWidth - keys[handle].pix->width()) / 2;
         ushort centerY = row * keyHeight + (keyHeight - keys[handle].pix->height()) / 2;
         p.drawPixmap(centerX, centerY, *keys[handle].pix);
     }
