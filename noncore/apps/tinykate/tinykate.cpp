@@ -185,6 +185,11 @@ void TinyKate::open(const QString & filename)
     viewCount++;
 }
 
+void TinyKate::setDocument(const QString& fileref)
+{
+    open( fileref );
+}
+
 void TinyKate::slotCurrentChanged( QWidget * view)
 {
   if (currentView) {

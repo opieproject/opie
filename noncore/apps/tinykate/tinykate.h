@@ -36,6 +36,7 @@ public:
 
 public slots:
     void slotNew();
+ void setDocument(const QString& fileref);
 
 protected slots:
     void slotOpen();
