@@ -68,14 +68,6 @@
 namespace Opie {
 namespace Core {
 namespace Internal {
-class  DebugBackend {
-};
-
-static  DebugBackend *backEnd = 0;
-}
-static void clean_up_routine() {
-    delete Internal::backEnd;
-}
 /*======================================================================================
  * debug levels
  *======================================================================================*/
@@ -95,8 +87,34 @@ enum DebugLevels {
  * the main debug function
  *======================================================================================*/
 
-static void oDebugBackend( unsigned short level, unsigned int area, const char *data)
-{
+
+
+struct  DebugBackend {
+    DebugBackend() : m_opened( false ), m_file( 0 ) ,m_port( -1 ),m_sock( 0 ) {
+        m_outp = OGlobalSettings::debugMode();
+    }
+    ~DebugBackend() {
+        delete m_file;
+        delete m_sock;
+    }
+    void debug( unsigned short level, unsigned int, const QString& data );
+
+private:
+    void debugFile( const QString&, const QString& data );
+    void debugMsgB( const QString&, const QString& data );
+    void debugShel( const QString&, const QString& data );
+    void debugSysl( int, const QString& );
+    void debugSock( const QString&, const QString& data );
+    QCString line( const QString&, const QString& data );
+    bool m_opened : 1;
+    QFile *m_file;
+    QHostAddress m_addr;
+    int m_port;
+    QSocketDevice *m_sock;
+    short m_outp;
+};
+
+void DebugBackend::debug(unsigned short level, unsigned int, const QString& data) {
     //qDebug( "oDebugBackend: Level=%d, Area=%d, Data=%s", level, area, data );
 
     // ML: OPIE doesn't use areacodes at the moment. See the KDE debug classes for an
@@ -115,11 +133,9 @@ static void oDebugBackend( unsigned short level, unsigned int area, const char *
         case ODEBUG_ERROR: lev = "(Error)"; caption = "Error"; priority = LOG_ERR; break;
     }
 
-    short output = OGlobalSettings::debugMode();
-    if (!oApp && (output == 1))
-    {
+    if (!oApp && (m_outp == 1)) {
         qDebug( "oDebugBackend: Warning: no oapplication object - can't use MsgBox" );
-        output = 2; // need an application object to use MsgBox
+        m_outp = 2; // need an application object to use MsgBox
     }
 
     // gcc 2.9x is dumb and sucks... can you hear it?
@@ -128,101 +144,94 @@ static void oDebugBackend( unsigned short level, unsigned int area, const char *
     if ( oApp ) areaName = oApp->appName();
     else areaName = "<unknown>";
 
-    // Output
-    switch( output )
-    {
-        case -1: // ignore
-        {
+    switch( m_outp ) {
+    case -1: // ignore
+        return;
+    case 0: // File
+        return debugFile( areaName, data );
+    case 1: // Message Box
+        return debugMsgB( areaName, data );
+    case 2:
+        return debugShel( areaName,data );
+    case 3: // syslog
+        return debugSysl( priority, data );
+    case 4: // socket
+        return debugSock( areaName, data );
+    }
+}
+
+inline void DebugBackend::debugFile(const QString& area, const QString& data) {
+    /* something went wrong with the file don't bother.. */
+    if ( m_opened && !m_file )
+        return;
+    else if ( !m_opened ) {
+        m_opened = true;
+        m_file = new QFile( OGlobalSettings::debugOutput() );
+        if (!m_file->open( IO_WriteOnly | IO_Append ) ) {
+            delete m_file; m_file = 0;
+            qDebug( "ODebug: can't write to file '%s' (%s)", (const char*)OGlobalSettings::debugOutput(),
+                    strerror(errno) );
             return;
-        }
-        case 0: // File
-        {
-            QString outputFilename = OGlobalSettings::debugOutput();
-
-            const int BUFSIZE = 4096;
-            char buf[BUFSIZE] = "";
-            buf[BUFSIZE-1] = '\0';
-            int nSize;
-
-            nSize = snprintf( buf, BUFSIZE-1, "%s: %s", (const char*) areaName, data);
-
-            QFile outputFile( outputFilename );
-            if ( outputFile.open( IO_WriteOnly | IO_Append ) )
-            {
-                if ( ( nSize == -1 ) || ( nSize >= BUFSIZE ) )
-                {
-                    outputFile.writeBlock( buf, BUFSIZE-1 );
-                }
-                else
-                {
-                    outputFile.writeBlock( buf, nSize );
-                }
-            }
-            else
-            {
-                qDebug( "ODebug: can't write to file '%s' (%s)", (const char*) outputFilename, strerror(errno) );
-            }
-            break;
-        } // automatic close of file here
-
-        case 1: // Message Box
-        {
-            // Since we are in opiecore here, we cannot use OMsgBox and use
-            // QMessageBox instead
-
-            caption += QString("(") + areaName + ")";
-            QMessageBox::warning( 0L, caption, data, ("&OK") ); // tr?
-            break;
-        }
-
-        case 2: // Shell
-        {
-            FILE *output = stderr;
-            fprintf( output, "%s: ", (const char*) areaName );
-            fputs( data, output);
-            break;
-        }
-
-        case 3: // syslog
-        {
-            syslog( priority, "%s", data);
-            break;
-        }
-
-        case 4: // socket
-        {
-            QString destination = OGlobalSettings::debugOutput();
-            if ( destination && destination.find(":") != -1 )
-            {
-                QString host = destination.left( destination.find(":") );
-                QString port = destination.right( destination.length()-host.length()-1 );
-                QHostAddress addr;
-                addr.setAddress( host );
-                // TODO: sanity check the address
-                QString line;
-                line.sprintf( "%s: %s", (const char*) areaName, (const char*) data );
-                QSocketDevice s( QSocketDevice::Datagram );
-                int result = s.writeBlock( (const char*) line, line.length(), addr, port.toInt() );
-                if ( result == -1 )
-                {
-                    qDebug( "ODebug: can't send to address '%s:%d' (%s)", (const char*) host, port.toInt(), strerror(errno) );
-                }
-            }
-            break;
         }
     }
 
-    // check if we should abort
-
-    /*
-
-    if( ( nLevel == ODEBUG_FATAL )
-        && ( !oDebug_data->config || oDebug_data->config->readNumEntry( "AbortFatal", 1 ) ) )
-            abort();
-
-    */
+    /* go to end of file */
+    m_file->at( m_file->size() );
+    QCString li = line( area, data );
+    m_file->writeBlock(li.data(), li.length() );
 }
 
+void DebugBackend::debugMsgB( const QString& area, const QString& data ) {
+    QMessageBox::warning( 0l, "("+area+")", data, ("Ok") );
+}
+
+void DebugBackend::debugShel( const QString& are, const QString& data ) {
+    FILE *output = stderr;
+    fprintf( output, "%s: %s", are.local8Bit().data(),
+             data.local8Bit().data() );
+}
+
+void DebugBackend::debugSysl( int prio, const QString& data ) {
+    ::syslog( prio, "%s", data.local8Bit().data() );
+}
+
+void DebugBackend::debugSock( const QString& are, const QString& data ) {
+    if ( m_opened && !m_sock  )
+        return;
+    else if ( !m_opened ){
+        m_opened = true;
+        QString destination = OGlobalSettings::debugOutput();
+        if ( destination && destination.find(":") != -1 ) {
+            QString host = destination.left( destination.find(":") );
+            m_port = destination.right( destination.length()-host.length()-1 ).toInt();
+            m_addr.setAddress( host );
+            m_sock = new QSocketDevice( QSocketDevice::Datagram );
+        }else{
+            m_sock = 0;
+            return;
+        }
+    }
+
+    QCString li = line( are, data );
+    int result = m_sock->writeBlock(li.data(), li.length(), m_addr, m_port );
+    if ( result == -1 ) {
+         qDebug( "ODebug: can't send to address '"+ m_addr.toString() +":%d' (%s)",
+                 m_port, strerror(errno) );
+    }
+}
+
+QCString DebugBackend::line( const QString& area, const QString& data ) {
+    QString str = area +":"+data;
+    return str.local8Bit();
+}
+
+static  DebugBackend *backEnd = 0;
+}
+static void clean_up_routine() {
+    qWarning( "Clean up Debug" );
+    delete Internal::backEnd;
+    Internal::backEnd = 0;
+}
 /*======================================================================================
  * odbgstream
  *======================================================================================*/
@@ -234,42 +243,42 @@ odbgstream& perror( odbgstream &s)
 
 odbgstream odDebug(int area)
 {
-    return odbgstream(area, ODEBUG_INFO);
+    return odbgstream(area, Internal::ODEBUG_INFO);
 }
 odbgstream odDebug(bool cond, int area)
 {
-    if (cond) return odbgstream(area, ODEBUG_INFO);
+    if (cond) return odbgstream(area, Internal::ODEBUG_INFO);
     else return odbgstream(0, 0, false);
 }
 
 odbgstream odError(int area)
 {
-    return odbgstream("ERROR: ", area, ODEBUG_ERROR);
+    return odbgstream("ERROR: ", area, Internal::ODEBUG_ERROR);
 }
 
 odbgstream odError(bool cond, int area)
 {
-    if (cond) return odbgstream("ERROR: ", area, ODEBUG_ERROR); else return odbgstream(0,0,false);
+    if (cond) return odbgstream("ERROR: ", area, Internal::ODEBUG_ERROR); else return odbgstream(0,0,false);
 }
 
 odbgstream odWarning(int area)
 {
-    return odbgstream("WARNING: ", area, ODEBUG_WARN);
+    return odbgstream("WARNING: ", area, Internal::ODEBUG_WARN);
 }
 
 odbgstream odWarning(bool cond, int area)
 {
-    if (cond) return odbgstream("WARNING: ", area, ODEBUG_WARN); else return odbgstream(0,0,false);
+    if (cond) return odbgstream("WARNING: ", area, Internal::ODEBUG_WARN); else return odbgstream(0,0,false);
 }
 
 odbgstream odFatal(int area)
 {
-    return odbgstream("FATAL: ", area, ODEBUG_FATAL);
+    return odbgstream("FATAL: ", area, Internal::ODEBUG_FATAL);
 }
 
 odbgstream odFatal(bool cond, int area)
 {
-    if (cond) return odbgstream("FATAL: ", area, ODEBUG_FATAL); else return odbgstream(0,0,false);
+    if (cond) return odbgstream("FATAL: ", area, Internal::ODEBUG_FATAL); else return odbgstream(0,0,false);
 }
 
 odbgstream::odbgstream(unsigned int _area, unsigned int _level, bool _print)
@@ -413,7 +422,11 @@ void odbgstream::flush()
     }
     else
     {
-        oDebugBackend( level, area, output.local8Bit().data() );
+        if ( !Internal::backEnd ) {
+            Internal::backEnd = new Internal::DebugBackend;
+            qAddPostRoutine( clean_up_routine );
+        }
+        Internal::backEnd->debug( level, area, output );
         output = QString::null;
     }
 }
@@ -539,13 +552,11 @@ odbgstream& odbgstream::operator<<( const QRect& r )
 
 odbgstream& odbgstream::operator<<( const QRegion& reg )
 {
-    /* Qt2 doesn't have a QMemArray... :(
     *this << "[ ";
-    QMemArray<QRect>rs=reg.rects();
+    QArray<QRect>rs=reg.rects();
     for (uint i=0;i<rs.size();++i)
         *this << QString("[%1, %2 - %3, %4] ").arg(rs[i].left()).arg(rs[i].top()).arg(rs[i].right()).arg(rs[i].bottom() ) ;
     *this <<"]";
-    */
     return *this;
 }
 

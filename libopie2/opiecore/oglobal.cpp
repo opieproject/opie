@@ -76,11 +76,20 @@ static char Base64DecMap[128] =
 OConfig* OGlobal::_config = 0;
 OConfig* OGlobal::_qpe_config = 0;
 
+void OGlobal::clean_up() {
+    qWarning( "Oglobal clean up" );
+    delete OGlobal::_config;
+    delete OGlobal::_qpe_config;
+    OGlobal::_config = 0;
+    OGlobal::_qpe_config = 0;
+}
+
 OConfig* OGlobal::config()
 {
     if ( !OGlobal::_config )
     {
         // odebug classes are reading config, so can't use them here!
+        qAddPostRoutine( OGlobal::clean_up );
         qDebug( "OGlobal::creating global configuration instance." );
         OGlobal::_config = new OConfig( "global" );
     }

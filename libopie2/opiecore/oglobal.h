@@ -87,13 +87,13 @@ public:
      */
     //@{
     /** the content of TEMP
-     * reads the environment variable TEMP and returns the content. 
+     * reads the environment variable TEMP and returns the content.
      * if not set returns "/tmp"
      * @return a string containing a dir without trailing slash!
      */
     static QString tempDirPath();
     /** the content of HOME
-     * reads the environment variable HOME and returns the content. 
+     * reads the environment variable HOME and returns the content.
      * if not set returns "/"
      * @return a string containing a dir without trailing slash!
      */
@@ -149,6 +149,7 @@ public:
    //@}
 
 private:
+    static void clean_up();
     static OConfig* _config;
     static OConfig* _qpe_config;
     class Private;
