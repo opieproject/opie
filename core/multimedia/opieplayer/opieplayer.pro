@@ -37,4 +37,4 @@ TRANSLATIONS = ../../../i18n/de/opieplayer.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

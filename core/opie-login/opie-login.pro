@@ -46,4 +46,4 @@ TRANSLATIONS = ../../i18n/de/opie-login.ts \
 
 
 
-include ( ../../include.pro )
+include ( $(OPIEDIR)/include.pro )

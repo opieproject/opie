@@ -24,4 +24,4 @@ TARGET = todayweatherplugin
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

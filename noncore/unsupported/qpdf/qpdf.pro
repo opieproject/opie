@@ -73,4 +73,4 @@ TRANSLATIONS = ../../../i18n/de/qpdf.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

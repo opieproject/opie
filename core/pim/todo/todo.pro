@@ -65,4 +65,4 @@ TRANSLATIONS = ../../../i18n/de/todolist.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

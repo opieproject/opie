@@ -42,4 +42,4 @@ TRANSLATIONS = ../../../i18n/de/libmail.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

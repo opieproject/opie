@@ -121,4 +121,4 @@ TRANSLATIONS = ../../i18n/de/qpe.ts \
 
 
 
-include ( ../../include.pro )
+include ( $(OPIEDIR)/include.pro )

@@ -32,4 +32,4 @@ TRANSLATIONS = ../../../i18n/de/kbill.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

@@ -49,4 +49,4 @@ TRANSLATIONS = ../../../i18n/de/addressbook.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

@@ -25,4 +25,4 @@ TRANSLATIONS = ../i18n/de/quickexec.ts \
 
 
 
-include ( ../include.pro )
+include ( $(OPIEDIR)/include.pro )

@@ -20,4 +20,4 @@ TARGET = todayaddressbookplugin
 
 
 
-include ( ../../../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

@@ -46,4 +46,4 @@ TRANSLATIONS = ../../../../i18n/de/bluetooth-manager.ts \
 
 
 
-include ( ../../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

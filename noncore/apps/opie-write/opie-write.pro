@@ -26,4 +26,4 @@ TARGET		= opie-write
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

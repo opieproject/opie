@@ -10,4 +10,4 @@ TARGET		= spaltenweise
 
 
 
-include ( ../../include.pro )
+include ( $(OPIEDIR)/include.pro )

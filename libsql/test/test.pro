@@ -10,4 +10,4 @@ TARGET		= sqltest
 
 
 
-include ( ../../include.pro )
+include ( $(OPIEDIR)/include.pro )

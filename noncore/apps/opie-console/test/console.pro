@@ -18,4 +18,4 @@ TARGET       = test
 
 
 
-include ( ../../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

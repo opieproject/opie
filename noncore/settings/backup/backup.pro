@@ -31,4 +31,4 @@ TRANSLATIONS = ../../../i18n/de/backup.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

@@ -12,4 +12,4 @@ TARGET          = orinoco_hopper
 
 
 
-include ( ../../../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

@@ -27,4 +27,4 @@ TRANSLATIONS = ../../../i18n/de/showimg.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

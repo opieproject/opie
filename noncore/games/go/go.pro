@@ -35,4 +35,4 @@ TRANSLATIONS = ../../../i18n/de/go.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

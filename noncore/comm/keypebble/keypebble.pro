@@ -52,4 +52,4 @@ TRANSLATIONS = ../../../i18n/de/keypebble.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

@@ -27,4 +27,4 @@ TRANSLATIONS = ../../../i18n/de/snake.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

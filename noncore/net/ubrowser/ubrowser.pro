@@ -10,4 +10,4 @@ TARGET          = ubrowser
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

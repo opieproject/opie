@@ -12,4 +12,4 @@ TARGET = wellenreiter
 
 
 
-include ( ../../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

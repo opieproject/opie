@@ -36,4 +36,4 @@ TRANSLATIONS = ../../../i18n/de/tetrix.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

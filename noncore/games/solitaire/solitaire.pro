@@ -38,4 +38,4 @@ TRANSLATIONS = ../../../i18n/de/patience.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

@@ -30,4 +30,4 @@ TRANSLATIONS = ../../../i18n/de/usermanager.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

@@ -49,4 +49,4 @@ TRANSLATIONS = ../../i18n/de/libqhandwriting.ts \
 
 
 
-include ( ../../include.pro )
+include ( $(OPIEDIR)/include.pro )

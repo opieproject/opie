@@ -3,4 +3,4 @@ unix:SUBDIRS    = stockticker stocktickerlib
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

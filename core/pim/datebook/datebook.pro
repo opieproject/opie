@@ -59,4 +59,4 @@ TRANSLATIONS = ../../../i18n/de/datebook.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

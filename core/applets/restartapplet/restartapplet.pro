@@ -13,4 +13,4 @@ OBJECTS_DIR=opieobj
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

@@ -17,4 +17,4 @@ DESTDIR = $(OPIEDIR)/plugins/today
 TARGET = todaymailplugin
 
 
-include ( ../../../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

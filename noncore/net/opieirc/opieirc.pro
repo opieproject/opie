@@ -25,4 +25,4 @@ LIBS        += -lqpe -lopie
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

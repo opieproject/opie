@@ -35,4 +35,4 @@ TRANSLATIONS = ../../../i18n/de/libliquid.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

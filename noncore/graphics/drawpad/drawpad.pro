@@ -65,4 +65,4 @@ TRANSLATIONS = ../../../i18n/de/drawpad.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

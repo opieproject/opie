@@ -11,4 +11,4 @@ DESTDIR = $(OPIEDIR)/bin
 
 
 
-include ( ../../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

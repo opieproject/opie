@@ -10,4 +10,4 @@ LIBS            += -L/opt/QtPalmtop/lib -lxine -lxineutils
 TARGET          = zeckeplayer
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

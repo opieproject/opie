@@ -23,4 +23,4 @@ TARGET       = launchersettings
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

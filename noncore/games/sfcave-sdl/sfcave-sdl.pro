@@ -52,4 +52,4 @@ HEADERS = 	animatedimage.h \
 		starfield.h \
 		util.h
 
-include ( ../../../include.pro ) 
+include ( $(OPIEDIR)/include.pro )

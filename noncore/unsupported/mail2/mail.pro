@@ -64,4 +64,4 @@ TRANSLATIONS = ../../i18n/de/mail.ts \
 
 
 
-include ( ../../include.pro )
+include ( $(OPIEDIR)/include.pro )

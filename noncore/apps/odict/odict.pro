@@ -39,4 +39,4 @@ TRANSLATIONS = ../../../i18n/de/odict.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

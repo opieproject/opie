@@ -28,4 +28,4 @@ TRANSLATIONS = ../../../i18n/de/qcop.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

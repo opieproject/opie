@@ -31,4 +31,4 @@ TRANSLATIONS    = ../../i18n/pt_BR/libqmultikey.ts \
 
 
 
-include ( ../../include.pro )
+include ( $(OPIEDIR)/include.pro )

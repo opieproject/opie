@@ -1,5 +1,6 @@
 TEMPLATE	= lib
-CONFIG		+= qt warn_on release
+#CONFIG		+= qt warn_on release
+CONFIG		+= qt warn_on debug
 HEADERS	=   calendar.h \
 	    global.h \
 	    resource.h \
@@ -146,4 +147,4 @@ TRANSLATIONS = ../i18n/de/libqpe.ts \
 	 ../i18n/da/libqpe.ts
 
 
-include ( ../include.pro )
+include ( $(OPIEDIR)/include.pro )

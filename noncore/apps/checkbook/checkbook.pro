@@ -45,4 +45,4 @@ TRANSLATIONS = ../../../i18n/de/checkbook.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

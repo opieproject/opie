@@ -30,4 +30,4 @@ TRANSLATIONS = ../../i18n/de/libqkjumpx.ts \
 
 
 
-include ( ../../include.pro )
+include ( $(OPIEDIR)/include.pro )

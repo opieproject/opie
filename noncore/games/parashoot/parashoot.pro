@@ -27,4 +27,4 @@ TRANSLATIONS = ../../../i18n/de/parashoot.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

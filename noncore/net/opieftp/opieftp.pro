@@ -27,4 +27,4 @@ TRANSLATIONS = ../../../i18n/de/opieftp.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

@@ -28,4 +28,4 @@ TRANSLATIONS = ../../../i18n/de/libbatteryapplet.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

@@ -27,4 +27,4 @@ OBJECTS_DIR = qpeobj
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

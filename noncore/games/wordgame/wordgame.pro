@@ -29,4 +29,4 @@ TRANSLATIONS = ../../../i18n/de/wordgame.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

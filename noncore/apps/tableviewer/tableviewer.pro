@@ -54,4 +54,4 @@ TRANSLATIONS = ../../../i18n/de/tableviewer.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

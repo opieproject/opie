@@ -56,4 +56,4 @@ TRANSLATIONS = ../../../i18n/de/oipkg.ts \
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

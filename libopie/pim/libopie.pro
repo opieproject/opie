@@ -80,4 +80,4 @@ TRANSLATIONS = ../i18n/de/libopie.ts \
 
 
 
-include ( ../../include.pro )
+include ( $(OPIEDIR)/include.pro )

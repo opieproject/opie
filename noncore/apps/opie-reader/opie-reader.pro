@@ -74,4 +74,4 @@ LIBS		+= -lqpe
 
 
 
-include ( ../../../include.pro )
+include ( $(OPIEDIR)/include.pro )

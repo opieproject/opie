@@ -19,4 +19,4 @@ DESTDIR = $(OPIEDIR)/plugins/today
 TARGET = todaytodolistplugin
 
 
-include ( ../../../../../include.pro )
+include ( $(OPIEDIR)/include.pro )
