@@ -330,6 +330,13 @@ void VolumeApplet::mute( bool toggled )
     // clear if removing mute
     repaint( !toggled );
     writeSystemVolume();
+    Config cfg("qpe");
+    cfg.setGroup("Volume");
+    if(muted)
+    cfg.writeEntry("Mute", "TRUE");
+    else
+        cfg.writeEntry("Mute",  "FALSE");
+    cfg.write();
 }
 
 

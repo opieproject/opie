@@ -20,7 +20,7 @@
 #include "volume.h"
 #include "volumeappletimpl.h"
 #include <qpe/qcopenvelope_qws.h>
-
+#include <qpe/config.h>
 
 VolumeAppletImpl::VolumeAppletImpl()
     : volume(0), ref(0)
@@ -36,7 +36,15 @@ QWidget *VolumeAppletImpl::applet( QWidget *parent )
 {
     if ( !volume )
   volume = new VolumeApplet( parent );
-   QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE; //mute
+
+    Config cfg("qpe");
+    cfg.setGroup("Volume");
+    QString foo = cfg.readEntry("Mute","TRUE");
+    bool muted;
+    if(foo.find("TRUE",0,TRUE) != -1)
+        muted = TRUE;
+    else muted = FALSE;
+    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << muted; //mute
     return volume;
 }
 
