@@ -41,7 +41,7 @@ private:
     static int call_back( void*, int, char**, char** );
     QString m_url;
     sqlite *m_sqlite;
-    sqregex *sqreg;
+    sqregex sqreg;
 };
 }
 }

@@ -136,7 +136,6 @@ bool OSQLiteDriver::open() {
         free( error );
         return false;
     }
-    sqreg = (sqregex *)malloc(sizeof(sqreg));
     sqlite_create_function(m_sqlite,"rlike",3,rlikeFunc,&sqreg);
     return true;
 }
@@ -149,10 +148,10 @@ bool OSQLiteDriver::open() {
 bool OSQLiteDriver::close() {
     if (m_sqlite )
         sqlite_close( m_sqlite ), m_sqlite=0l;
-	if (sqreg->regex_raw != NULL){
-    	    free(sqreg->regex_raw);
-	    sqreg->regex_raw=NULL;
-	    regfree(&sqreg->regex_c);
+	if (sqreg.regex_raw != NULL){
+    	    free(sqreg.regex_raw);
+	    sqreg.regex_raw=NULL;
+	    regfree(&sqreg.regex_c);
 	}
     return true;
 }
