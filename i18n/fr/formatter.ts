@@ -1,161 +1,174 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>FormatterApp</name>
     <message>
         <source>Formatter</source>
-        <translation type="unfinished"></translation>
+        <translation>Formater</translation>
     </message>
     <message>
         <source>Storage Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type du média de stockage</translation>
     </message>
     <message>
         <source>File Systems</source>
-        <translation type="unfinished"></translation>
+        <translation>Système de fichiers</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format</translation>
     </message>
     <message>
         <source>Main</source>
-        <translation type="unfinished"></translation>
+        <translation>Principal</translation>
     </message>
     <message>
         <source>CAUTION:
 Changing parameters on this 
 page may cause your system 
 to stop functioning properly!!</source>
-        <translation type="unfinished"></translation>
+        <translation>ATTENTION:
+Changer des paramètres sur cette
+page peut rendre votre système
+instable!!</translation>
     </message>
     <message>
         <source>Edit fstab</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer /etc/fstab</translation>
     </message>
     <message>
         <source>Check Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Vérifier le disque</translation>
     </message>
     <message>
         <source>Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Périphérique</translation>
     </message>
     <message>
         <source>Mount Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Point de montage</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Avancé(e)</translation>
     </message>
     <message>
         <source>Format?!?</source>
-        <translation type="unfinished"></translation>
+        <translation>Format?!?</translation>
     </message>
     <message>
         <source>Really format
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Réellement formater
+</translation>
     </message>
     <message>
         <source>
 with </source>
-        <translation type="unfinished"></translation>
+        <translation>
+avec</translation>
     </message>
     <message>
         <source> filesystem?!?
 You will loose all data!!</source>
-        <translation type="unfinished"></translation>
+        <translation>système de fichier?!?
+Vous allez perdre toutes vos données!!</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Non</translation>
     </message>
     <message>
         <source>Could not format.
 Unknown type</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de formater
+type inconnu</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Formatter Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Formatter Output</translation>
     </message>
     <message>
         <source>Trying to umount.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tentative de démontage.</translation>
     </message>
     <message>
         <source>umount failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Echec du démontage!</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <source>Could not umount.
 Device is busy!</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de démonté
+Périphérique occupé!</translation>
     </message>
     <message>
         <source>Trying to format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tentative de formatage.</translation>
     </message>
     <message>
         <source>No such device!</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun périphérique de ce type!</translation>
     </message>
     <message>
         <source>
 has been successfully formatted.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+a été formaté correctement.</translation>
     </message>
     <message>
         <source>Trying to mount.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tentative de montage.</translation>
     </message>
     <message>
         <source>Card mount failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Echec du montage de la carte.!</translation>
     </message>
     <message>
         <source>
 has been successfully mounted.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+a réussi a etre monté. </translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous ne pouvez pas fermer la fenêtre &quot;output&quot;.</translation>
     </message>
     <message>
         <source>Internal</source>
-        <translation type="unfinished"></translation>
+        <translation>Internal</translation>
     </message>
     <message>
         <source>Storage Type : </source>
-        <translation type="unfinished"></translation>
+        <translation>Type de stockage:</translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Total: %1 ko ( %d mo)
+</translation>
     </message>
     <message>
         <source>Used: %1 kB ( %d mB)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisé: %1 ko ( %d Mo)
+</translation>
     </message>
     <message>
         <source>Available: %1 kB ( %d mB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Disponible: %1 ko ( %d Mo)</translation>
     </message>
 </context>
 </TS>

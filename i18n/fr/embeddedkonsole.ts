@@ -182,19 +182,19 @@
     </message>
     <message>
         <source>Command List</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste des commandes</translation>
     </message>
     <message>
         <source>Wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>Wrap</translation>
     </message>
     <message>
         <source>Use Beep</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser les bip</translation>
     </message>
     <message>
         <source>Tabs on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>tableau par dessus</translation>
     </message>
 </context>
 <context>

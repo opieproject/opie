@@ -48,7 +48,7 @@
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Horloge: l&apos;alarme a été manquée.</translation>
     </message>
 </context>
 <context>

@@ -125,133 +125,133 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>New Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouvelle connexion</translation>
     </message>
     <message>
         <source>Open Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir favori</translation>
     </message>
     <message>
         <source>Delete Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer le favori</translation>
     </message>
     <message>
         <source>Send Contrl-Alt-Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoyer Contrl+Alt+Suppr</translation>
     </message>
     <message>
         <source>Next Click is Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Le clique suivant est un double clique</translation>
     </message>
     <message>
         <source>Next Click is Right Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Le clique suivant est un clique droit</translation>
     </message>
 </context>
 <context>
     <name>KVNCBookmarkDlgBase</name>
     <message>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoris</translation>
     </message>
     <message>
         <source>Choose a bookmark that you would like to open</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez le favori que vous désirez ouvrir</translation>
     </message>
 </context>
 <context>
     <name>KVNCConnDlgBase</name>
     <message>
         <source>VNC Viewer Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>VNC Viewer Connection</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Serveur</translation>
     </message>
     <message>
         <source>Show Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Montrer le mot de passe</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished">Mot de passe :</translation>
+        <translation>Mot de passe :</translation>
     </message>
     <message>
         <source>Bookmark Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom du favori:</translation>
     </message>
     <message>
         <source>Host Name:</source>
-        <translation type="unfinished">Hôte :</translation>
+        <translation>Hôte :</translation>
     </message>
     <message>
         <source>Display Number:</source>
-        <translation type="unfinished">Numéro de &quot;display&quot; :</translation>
+        <translation>Numéro de &quot;display&quot; :</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options</translation>
     </message>
     <message>
         <source>Check for screen updates every:</source>
-        <translation type="unfinished">Vérifier la mise à jour de l&apos;écran toutes les :</translation>
+        <translation>Vérifier la mise à jour de l&apos;écran toutes les :</translation>
     </message>
     <message>
         <source>Milliseconds</source>
-        <translation type="unfinished">Millisecondes</translation>
+        <translation>Millisecondes</translation>
     </message>
     <message>
         <source>Request 8-bit session</source>
-        <translation type="unfinished">Demande de session &quot;8 bits&quot;</translation>
+        <translation>Demande de session &quot;8 bits&quot;</translation>
     </message>
     <message>
         <source>Raise on bell</source>
-        <translation type="unfinished">Réveil à la cloche</translation>
+        <translation>Réveil à la cloche</translation>
     </message>
     <message>
         <source>Request shared session</source>
-        <translation type="unfinished">Demande de session partagée</translation>
+        <translation>Demande de session partagée</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>4</translation>
     </message>
     <message>
         <source>Scale Factor</source>
-        <translation type="unfinished"></translation>
+        <translation>Facteur d&apos;echelle</translation>
     </message>
     <message>
         <source>Encodings</source>
-        <translation type="unfinished"></translation>
+        <translation>Encodages</translation>
     </message>
     <message>
         <source>Hextile encoding</source>
-        <translation type="unfinished">Encodage Hextile</translation>
+        <translation>Encodage Hextile</translation>
     </message>
     <message>
         <source>CoRRE encoding</source>
-        <translation type="unfinished">Encodage CoRRE</translation>
+        <translation>Encodage CoRRE</translation>
     </message>
     <message>
         <source>RRE encoding</source>
-        <translation type="unfinished">Encodage RRE</translation>
+        <translation>Encodage RRE</translation>
     </message>
     <message>
         <source>Copy rectangle encoding</source>
-        <translation type="unfinished">Copier l&apos;encodage rectangle</translation>
+        <translation>Copier l&apos;encodage rectangle</translation>
     </message>
     <message>
         <source>The password of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Le mot de passe du serveur VNC</translation>
     </message>
     <message>
         <source>Toggle obscuring the password</source>
@@ -259,27 +259,27 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>The name of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Le nom du serveur VNC</translation>
     </message>
     <message>
         <source>The host name of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Le nom d&apos;he du serveur VNC</translation>
     </message>
     <message>
         <source>The display number of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Le numéro de &quot;display&quot; du serveur VNC</translation>
     </message>
     <message>
         <source>Delay between requesting updates from the server</source>
-        <translation type="unfinished"></translation>
+        <translation>Délai avant une requête de mise à jour du serveur</translation>
     </message>
     <message>
         <source>Request that the VNC server transfer 8 bit color</source>
-        <translation type="unfinished"></translation>
+        <translation>Demande un transfert de couleur sur 8-bit au serveur</translation>
     </message>
     <message>
         <source>Allow other users to connect to the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Autorise les autres utilisateurs à se connecter au serveur VNC</translation>
     </message>
     <message>
         <source>Scale the remote display to fit on the PDA (Slow)</source>
