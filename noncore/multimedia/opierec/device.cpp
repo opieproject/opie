@@ -4,7 +4,7 @@
 
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
-
+#include <qpe/custom.h>
 
 #include <fcntl.h>
 #include <stdio.h>
@@ -26,7 +26,7 @@ Device::Device( QObject * parent, const char * dsp, const char * mixr, bool reco
 {
     dspstr = (char *)dsp;
     mixstr = (char *)mixr;
- 
+
     devForm=-1;
     devCh=-1;
     devRate=-1;
@@ -144,7 +144,7 @@ exit(1);
            perror("The fork failed!");
            break;
        case 0: {
- */         
+ */
     if (( sd = ::open( dspstr, flags)) == -1) {
               perror("open(\"/dev/dsp\")");
               QString errorMsg="Could not open audio device\n /dev/dsp\n"
@@ -176,14 +176,14 @@ exit(1);
            _exit(0);
        }
        default:
-          // pid greater than zero is parent getting the child's pid 
+          // pid greater than zero is parent getting the child's pid
            printf("Child's pid is %d\n",pid);
            QString s;
                 close(pipefd[1]);
                 read(pipefd[0], message, sizeof(message));
     s = message;
                  close(pipefd[0]);
-           
+
 //     while(wait(NULL)!=pid)
   //             ;
            printf("child %ld terminated normally, return status is zero\n", (long) pid);
@@ -199,7 +199,7 @@ exit(1);
 //     bool ok;
 //           sd = s.toInt(&ok, 10);
 //           qDebug("<<<<<<<<<<<<<>>>>>>>>>>>>"+s);
-                 
+
 //           f2.close();
 //     }
 ::close(mixerHandle );
@@ -290,7 +290,7 @@ int Device::getDeviceRate() {
 
 int Device::getDeviceBits() {
     int dBits=0;
-#ifndef QT_QWS_EBX // zaurus doesnt have this
+#if !defined(OPIE_NO_SOUND_PCM_READ_BITS) // zaurus doesnt have this
      if (ioctl( sd, SOUND_PCM_READ_BITS, &dBits) == -1) {
          perror("ioctl(\"SNDCTL_PCM_READ_BITS\")");
      }
@@ -308,7 +308,7 @@ int Device::getDeviceChannels() {
 
 int Device::getDeviceFragSize() {
     int frag_size;
-    
+
     if (ioctl( sd, SNDCTL_DSP_GETBLKSIZE, &frag_size) == -1) {
       qDebug("no fragsize");
     } else
