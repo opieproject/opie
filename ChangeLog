@@ -3,6 +3,7 @@
 	New Features
 	------------
 	* PackageManager supports installation of local ipkg files (drw)
+	* PackageManager supports linking of applications to root (drw)
 
 	Fixed Bugs
 	----------
