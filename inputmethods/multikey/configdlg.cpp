@@ -164,7 +164,7 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
 
     }
     */
-    keycolor_button->setBackgroundColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
+    keycolor_button->setPalette(QPalette(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt())));
 
 
     label = new QLabel(tr("Key Pressed Color"), color_box);
@@ -172,14 +172,14 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
     connect(keycolor_pressed_button, SIGNAL(clicked()), SLOT(keyColorPressedClicked()));
     keycolor_pressed_button->setFlat((bool)1);
     color = config.readListEntry("keycolor_pressed", QChar(','));
-    keycolor_pressed_button->setBackgroundColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
+    keycolor_pressed_button->setPalette(QPalette((QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()))));
 
     label = new QLabel(tr("Line Color"), color_box);
     keycolor_lines_button = new QPushButton(color_box);
     connect(keycolor_lines_button, SIGNAL(clicked()), SLOT(keyColorLinesClicked()));
     keycolor_lines_button->setFlat((bool)1);
     color = config.readListEntry("keycolor_lines", QChar(','));
-    keycolor_lines_button->setBackgroundColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
+    keycolor_lines_button->setPalette(QPalette((QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()))));
 
 
     label = new QLabel(tr("Text Color"), color_box);
@@ -187,7 +187,7 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
     connect(textcolor_button, SIGNAL(clicked()), SLOT(textColorClicked()));
     textcolor_button->setFlat((bool)1);
     color = config.readListEntry("textcolor", QChar(','));
-    textcolor_button->setBackgroundColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
+    textcolor_button->setPalette(QPalette((QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()))));
 
 
     label = new QLabel("", color_box); // a spacer so the above buttons dont expand
