@@ -102,7 +102,7 @@
     updateGUI();
 
     dl = new QPEDialogListener(this);
-    showMaximized();
+    QPEApplication::showDialog( this );
 }
 
 Security::~Security()

@@ -420,7 +420,7 @@ void VideoWidget::makeVisible() {
    {
       setBackgroundPixmap( *pixBg );
       showNormal();
-      showMaximized();
+      QPEApplication::showWidget( this );
       slider->show();
    }
 }

@@ -32,6 +32,7 @@
 #include <qpe/mimetype.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
+#include <qpe/qpeapplication.h>
 
 #include <qlistbox.h>
 #include <qpushbutton.h>
@@ -300,8 +301,7 @@ void TabsSettings::editClicked ( )
 
 	TabDialog *d = new TabDialog ( m_list-> pixmap ( ind ), m_list-> text ( ind ), tc, this, "TabDialog", true );
 
-	d-> showMaximized ( );
-	if ( d-> exec ( ) == QDialog::Accepted ) {
+	if ( QPEApplication::execDialog( d ) == QDialog::Accepted ) {
 		tc. m_changed = true;
 		m_tabs [m_ids [ind]] = tc;
 

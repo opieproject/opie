@@ -76,7 +76,7 @@ void BatteryMeter::mouseReleaseEvent( QMouseEvent* e)
         delete (QWidget *) batteryView;
     } else {
         if ( !batteryView ) batteryView = new BatteryStatus( ps );
-        batteryView->showMaximized();
+        QPEApplication::showWidget( batteryView );
         batteryView->raise();
         batteryView->show();
     }

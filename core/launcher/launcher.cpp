@@ -613,8 +613,7 @@ void Launcher::properties( AppLnk *appLnk )
 /* ### libqtopia FIXME also moving docLnks... */
 	LnkProperties prop(appLnk,0 );
 
-	prop.showMaximized();
-	prop.exec();
+	QPEApplication::execDialog( &prop );
     }
 }
 

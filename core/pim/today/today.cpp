@@ -82,7 +82,7 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
 
     qApp->processEvents();
     loadPlugins();
-    showMaximized();
+    QPEApplication::showWidget( this );
 }
 
 /**

@@ -1,6 +1,7 @@
 #include <qcopchannel_qws.h>
 
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/qpeapplication.h>
 
 #include "obexsend.h"
 #include "receiver.h"
@@ -26,7 +27,7 @@ void ObexHandler::doSend(const QString& str, const QString& desc) {
     delete m_sender;
     m_sender = new SendWidget;
     m_sender->raise();
-    m_sender->showMaximized();
+    QPEApplication::showWidget( m_sender );
     connect(m_sender, SIGNAL(done() ),
             this, SLOT(slotSent() ) );
     m_sender->send( str, desc );

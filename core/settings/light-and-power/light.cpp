@@ -210,8 +210,7 @@ void LightSettings::calibrateSensorAC ( )
 {
 	Sensor *s = new Sensor ( m_sensordata_ac, this );
 	connect ( s, SIGNAL( viewBacklight ( int )), this, SLOT( setBacklight ( int )));
-	s-> showMaximized ( );
-	s-> exec ( );
+	QPEApplication::execDialog ( s );
 	delete s;
 }
 

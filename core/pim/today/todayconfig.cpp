@@ -19,6 +19,7 @@
 #include <qpe/config.h>
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/qpeapplication.h>
 
 #include <qcheckbox.h>
 #include <qlabel.h>
@@ -87,7 +88,7 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal )
     connect ( m_appletListView , SIGNAL( clicked ( QListViewItem * ) ), this, SLOT( appletChanged ( ) ) );
 
     readConfig();
-    showMaximized();
+    QPEApplication::showDialog( this );
 }
 
 

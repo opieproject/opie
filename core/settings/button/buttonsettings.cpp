@@ -214,8 +214,7 @@ void ButtonSettings::edit ( buttoninfo *bi, bool hold )
 
 	RemapDlg *d = new RemapDlg ( bi-> m_button, hold, this );
 
-	d-> showMaximized ( );
-	if ( d-> exec ( ) == QDialog::Accepted ) {
+	if ( QPEApplication::execDialog ( d ) == QDialog::Accepted ) {
 
 
 		if ( hold ) {

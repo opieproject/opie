@@ -705,7 +705,7 @@ void PlayListWidget::setPlaylist( bool shown ) {
 
 void PlayListWidget::setView( char view ) {
    if ( view == 'l' )
-      showMaximized();
+      QPEApplication::showWidget( this );
    else
       hide();
 }

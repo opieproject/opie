@@ -702,7 +702,7 @@ void ServerApplication::shutdown()
     ShutdownImpl *sd = new ShutdownImpl( 0, 0, WDestructiveClose );
     connect( sd, SIGNAL(shutdown(ShutdownImpl::Type)),
 	     this, SLOT(shutdown(ShutdownImpl::Type)) );
-    sd->showMaximized();
+    QPEApplication::showWidget( sd );
 }
 
 void ServerApplication::shutdown( ShutdownImpl::Type t )

@@ -286,7 +286,7 @@ void AudioWidget::setView( char view ) {
     if ( view == 'a' ) {
         startTimer( 150 );
 //        show();
-        showMaximized();
+        QPEApplication::showWidget( this );
     } else {
         killTimers();
         hide();
