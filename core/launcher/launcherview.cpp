@@ -247,7 +247,7 @@ protected:
   QIconView::styleChange( old );
   //### duplicated code from LauncherView constructor
   int dw = QApplication::desktop()->width();
-  setGridX( (dw-13-style().scrollBarExtent().width())/3 ); // tweaked for 8pt+dw=176 and 10pt+dw=240
+  setGridX( (dw-13-style().scrollBarExtent().width())/ (dw/80) ); // tweaked for 8pt+dw=176 and 10pt+dw=240
     }
 
 private:
@@ -432,7 +432,7 @@ LauncherView::LauncherView( QWidget* parent, const char* name, WFlags fl )
     icons->setItemsMovable( FALSE );
     icons->setAutoArrange( TRUE );
     icons->setSorting( TRUE );
-    icons->setGridX( (dw-13-style().scrollBarExtent().width())/3 ); // tweaked for 8pt+dw=176 and 10pt+dw=240
+    icons->setGridX( (dw-13-style().scrollBarExtent().width())/ (dw/80) ); // tweaked for 8pt+dw=176 and 10pt+dw=240
     icons->setGridY( fontMetrics().height()*2+24 );
     icons->setFrameStyle( QFrame::NoFrame );
     icons->setSpacing( 4 );
@@ -466,11 +466,11 @@ void LauncherView::setToolsEnabled(bool y)
       typemb = new MenuButton(tools);
       typemb->setLabel(tr("Type: %1"));
       typemb->setFixedHeight ( 20 );
-          
+
       // Category filter
       catmb = new CategorySelect(tools);
       catmb->setFixedHeight ( 20 );
-      
+
       updateTools();
       tools->show();
   } else {
