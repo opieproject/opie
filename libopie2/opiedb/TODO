@@ -1,0 +1,9 @@
+* something like Capabilities of a Driver
+  - ROWID
+  - How to declare INTEGER PRIMARY KEY
+  - Abstract from implementation of some dbs
+  - provides( Type::What )
+  
+ * OSQLDriver DriverVersion - DatabaseVersion
+ * Better OSQLQueries
+   - more than OSQLRawQuery
