@@ -407,7 +407,8 @@ inputmethods.o: inputmethods.cpp \
 		$(OPIEDIR)/include/qpe/quuid.h \
 		$(OPIEDIR)/include/qpe/config.h \
 		$(OPIEDIR)/include/qpe/qpeapplication.h \
-		$(OPIEDIR)/include/qpe/qlibrary.h
+		$(OPIEDIR)/include/qpe/qlibrary.h \
+		$(OPIEDIR)/include/qpe/global.h
 
 systray.o: systray.cpp \
 		$(OPIEDIR)/include/qpe/qpeapplication.h \
