@@ -114,8 +114,7 @@ OConfItemList *OIpkg::configItems()
 OConfItemList *OIpkg::servers()
 {
     // Retrieve only servers
-    return filterConfItems( (OConfItem::Type)((int)OConfItem::Source | 
-                                        (int)OConfItem::GzSource) );
+    return filterConfItems( OConfItem::Source );
 }
 
 OConfItemList *OIpkg::destinations()
@@ -544,7 +543,6 @@ void OIpkg::loadConfiguration()
                 {
                     if ( !line.startsWith( "#" ) ||
                             line.startsWith( "#src" ) ||
-                            line.startsWith( "#src/gz" ) ||
                             line.startsWith( "#dest" ) ||
                             line.startsWith( "#arch" ) ||
                             line.startsWith( "#option" ) )
@@ -620,8 +618,7 @@ OConfItemList *OIpkg::filterConfItems( OConfItem::Type typefilter )
     for ( ; it.current(); ++it )
     {
         OConfItem *item = it.current();
-        if ( retrieveAll || 
-             ( item->type() & typefilter ) )
+        if ( retrieveAll || item->type() == typefilter )
         {
             sl->append( item );
         }

@@ -38,12 +38,7 @@ _;:,   .>  :=|.         This program is free software; you can
 class OConfItem
 {
 public:
-    enum Type { Source=0x01, 
-                GzSource=0x02,
-                Destination=0x04, 
-                Option=0x08,
-                Arch=0x10,
-                NotDefined=0x20 };
+    enum Type { Source, Destination, Option, Arch, NotDefined };
 
     OConfItem( Type type = NotDefined, const QString &name = QString::null,
                const QString &value = QString::null, const QString &features = QString::null,
