@@ -77,7 +77,7 @@ const char * const skin_mask_file_names[10] = {
 };
 
 
-static void changeTextColor( QWidget * ) {
+static void changeTextColor( QWidget * w) {
    QPalette p = w->palette();
    p.setBrush( QColorGroup::Background, QColor( 167, 212, 167 ) );
    p.setBrush( QColorGroup::Base, QColor( 167, 212, 167 ) );
