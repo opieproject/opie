@@ -17,18 +17,24 @@
 #ifndef INSTALLOPTIONSIMPL_H
 #define INSTALLOPTIONSIMPL_H
 
-#include "instoptions.h"
+#include <qdialog.h>
 
-class InstallOptionsDlgImpl : public InstallOptionsDlg
+class QCheckBox;
+
+class InstallOptionsDlgImpl : public QDialog
 {
+    Q_OBJECT
 public:
     InstallOptionsDlgImpl( int flags, QWidget * parent = 0, const char* name = 0, bool modal = false, WFlags fl = 0 );
     ~InstallOptionsDlgImpl();
     int getFlags();
 
-protected:
-
 private:
+    QCheckBox* forceDepends;
+    QCheckBox* forceReinstall;
+    QCheckBox* forceRemove;
+    QCheckBox* forceOverwrite;
+    QCheckBox* verboseWget;
 };
 
 #endif

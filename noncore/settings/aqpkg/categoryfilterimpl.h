@@ -18,16 +18,15 @@
 #ifndef CATEGORYFILTERIMPL_H
 #define CATEGORYFILTERIMPL_H
 
-#include <qwidget.h>
-#include <qstring.h>
+#include <qdialog.h>
 
-#include "categoryfilter.h"
+class QListBox;
 
 /**
   *@author Andy Qua
   */
 
-class CategoryFilterImpl : public CategoryFilterDlg
+class CategoryFilterImpl : public QDialog
 {
    Q_OBJECT
 public: 
@@ -35,6 +34,10 @@ public:
     ~CategoryFilterImpl();
 
     QString getSelectedFilter();
+
+private:
+    QListBox *lstCategories;
+
 };
 
 #endif

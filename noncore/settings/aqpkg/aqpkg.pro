@@ -32,8 +32,7 @@ SOURCES		= mainwin.cpp \
 		  inputdlg.cpp \
 		  version.cpp \
 		  categoryfilterimpl.cpp
-INTERFACES	= instoptions.ui \
-		  categoryfilter.ui
+INTERFACES	= 
 TARGET		= aqpkg
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include

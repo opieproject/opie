@@ -19,16 +19,45 @@
 #include <qpe/config.h>
 #endif
 
-#include <qdialog.h>
 #include <qcheckbox.h>
+#include <qgroupbox.h>
+#include <qlayout.h>
 
+#include "global.h"
 #include "instoptionsimpl.h"
 #include "ipkg.h"
-#include "global.h"
 
 InstallOptionsDlgImpl::InstallOptionsDlgImpl( int flags, QWidget * parent, const char* name, bool modal, WFlags fl )
-    : InstallOptionsDlg( parent, name, modal, fl )
+    : QDialog( parent, name, modal, fl )
 {
+    setCaption( tr( "Options" ) );
+    
+    QVBoxLayout *layout = new QVBoxLayout( this );
+    layout->setMargin( 2 );
+    layout->setSpacing( 4 );
+
+    QGroupBox *grpbox = new QGroupBox( 0, Qt::Vertical, tr( "Options" ), this );
+    grpbox->layout()->setSpacing( 2 );
+    grpbox->layout()->setMargin( 4 );
+    layout->addWidget( grpbox );
+
+    QVBoxLayout *grplayout = new QVBoxLayout( grpbox->layout() );
+    
+    forceDepends = new QCheckBox( tr( "Force Depends" ), grpbox );
+    grplayout->addWidget( forceDepends );
+
+    forceReinstall = new QCheckBox( tr( "Force Reinstall" ), grpbox );
+    grplayout->addWidget( forceReinstall );
+
+    forceRemove = new QCheckBox( tr( "Force Remove" ), grpbox );
+    grplayout->addWidget( forceRemove );
+
+    forceOverwrite = new QCheckBox( tr( "Force Overwrite" ), grpbox );
+    grplayout->addWidget( forceOverwrite );
+
+    verboseWget = new QCheckBox( tr( "Verbose WGet" ), grpbox );
+    grplayout->addWidget( verboseWget );
+    
     if ( flags & FORCE_DEPENDS )
     	forceDepends->setChecked( true );
     if ( flags & FORCE_REINSTALL )

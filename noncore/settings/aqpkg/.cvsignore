@@ -1,6 +1,2 @@
 Makefile*
-instoptions.cpp
-instoptions.h
 moc*
-categoryfilter.cpp
-categoryfilter.h
