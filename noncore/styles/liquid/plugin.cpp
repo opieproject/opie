@@ -77,8 +77,3 @@ Q_EXPORT_INTERFACE()
 	Q_CREATE_INSTANCE( LiquidInterface )
 }
 
-
-        
-
-// Hack for Retail Z experiments
-extern "C" { QStyle *allocate ( ) { return new LiquidStyle ( ); } }

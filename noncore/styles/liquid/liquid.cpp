@@ -2,6 +2,9 @@
  * Copyright (C)QPL 2001 Daniel M. Duley. All rights reserved.
  */
 
+//
+// (c) 2002 Robert 'sandman' Griebl 
+//
 
 
 #ifndef INCLUDE_MENUITEM_DEF
@@ -31,6 +34,7 @@
 #include <unistd.h>
 #include <qmenubar.h>
 #include <qprogressbar.h>
+#include <qlineedit.h>
 
 #include <stdio.h>
 
@@ -162,11 +166,19 @@ bool TransMenuHandler::eventFilter(QObject *obj, QEvent *ev)
 }
 
 
+static int qt_version ( )
+{
+	const char *qver = qVersion ( );
+	return ( qver [0] - '0' ) * 100 + ( qver [2] - '0' ) * 10 + ( qver [4] - '0' );
+}
+        
+
 LiquidStyle::LiquidStyle()
     :QWindowsStyle()
 {
     setName ( "LiquidStyle" );
 
+	oldqte = ( qt_version ( ) < 234 );
 	flatTBButtons = false;
 
     btnMaskBmp = QBitmap(37, 26, buttonmask_bits, true);
@@ -179,12 +191,8 @@ LiquidStyle::LiquidStyle()
     btnDict.setAutoDelete(true);
     bevelFillDict.setAutoDelete(true);
     smallBevelFillDict.setAutoDelete(true);
-    customBtnColorList.setAutoDelete(true);
-    customBtnIconList.setAutoDelete(true);
-    customBtnLabelList.setAutoDelete(true);
 
     rMatrix.rotate(270.0);
-    highcolor = QPixmap::defaultDepth() > 8;
     btnBorderPix = new QPixmap;
     btnBorderPix->convertFromImage(qembed_findImage("buttonfill"));
     btnBlendPix = new QPixmap;
@@ -544,131 +552,119 @@ QPixmap* LiquidStyle::getPixmap(BitmapData item)
     case HTMLBtnBorderDown:
         pixmaps[HTMLBtnBorderDown] = processEmbedded("htmlbtnborder", btnHoverH, btnHoverS, btnHoverV);
         break;
+
     case HTMLCB:
         pixmaps[HTMLCB] = processEmbedded("htmlcheckbox", bH, bS, bV);
+        break;
+    case HTMLCBHover:
+        pixmaps[HTMLCBHover] = processEmbedded("htmlcheckbox", btnHoverH, btnHoverS, btnHoverV);
         break;
     case HTMLCBDown:
         pixmaps[HTMLCBDown] = processEmbedded("htmlcheckboxdown", btnH, btnS, btnV);
         break;
-    case HTMLCBHover:
-        pixmaps[HTMLCBHover] = processEmbedded("htmlcheckbox", btnH, btnS, btnV);
-        break;
     case HTMLCBDownHover:
-        pixmaps[HTMLCBDownHover] = processEmbedded("htmlcheckboxdown",
-                                                   btnHoverH, btnHoverS,
-                                                   btnHoverV);
-        break;
-    case HTMLRadio:
-        pixmaps[HTMLRadio] = processEmbedded("htmlradio", bH, bS, bV);
-    case HTMLRadioDown:
-        pixmaps[HTMLRadioDown] = processEmbedded("htmlradiodown", btnH, btnS, btnV);
-    case HTMLRadioHover:
-        pixmaps[HTMLRadioHover] = processEmbedded("htmlradio", btnH, btnS, btnV);
-    case HTMLRadioDownHover:
-        pixmaps[HTMLRadioDownHover] = processEmbedded("htmlradiodown", 
-                                                      btnHoverH, btnHoverS,
-                                                      btnHoverV);
-    case RadioOn:
-        pixmaps[RadioOn] = processEmbedded("radio_down", btnH, btnS, btnV, true);
-        break;
-    case RadioOnHover:
-        pixmaps[RadioOnHover] = processEmbedded("radio_down", btnHoverH, btnHoverS,
-                                                btnHoverV, true);
-        break;
-    case RadioOffHover:
-        pixmaps[RadioOffHover] = processEmbedded("radio", btnH, btnS, btnV, true);
-        break;
-    case TabDown:
-        pixmaps[TabDown] = processEmbedded("tab", btnH, btnS, btnV, true);
-        break;
-    case TabFocus:
-        pixmaps[TabFocus] = processEmbedded("tab", btnHoverH, btnHoverS,
-                                            btnHoverS, true);
-        break;
-    case CBDown:
-        pixmaps[CBDown] = processEmbedded("checkboxdown", btnH, btnS, btnV, true);
-        break;
-    case CBDownHover:
-        pixmaps[CBDownHover] = processEmbedded("checkboxdown", btnHoverH,
-                                               btnHoverS, btnHoverV, true);
-        break;
-    case CBHover:
-        pixmaps[CBHover] = processEmbedded("checkbox", btnH, btnS, btnV, true);
-        break;
-    case HSlider:
-        pixmaps[HSlider] = processEmbedded("sliderarrow", btnH, btnS, btnV, true);
-        break;
-    case VSlider:
-        pixmaps[VSlider] = processEmbedded("sliderarrow", btnH, btnS, btnV, true);
-        *pixmaps[VSlider] = pixmaps[VSlider]->xForm(rMatrix);
-        break;
-    case RadioOff:
-        pixmaps[RadioOff] = processEmbedded("radio", bH, bS, bV, true);
-        break;
-    case Tab:
-        pixmaps[Tab] = processEmbedded("tab", bH, bS, bV, true);
-        break;
-    case CB:
-        pixmaps[CB] = processEmbedded("checkbox", bH, bS, bV, true);
-        break;
-    case VSBSliderTop:
-        pixmaps[VSBSliderTop] = processEmbedded("sbslider_top", btnH, btnS, btnV, true);
-        break;
-    case VSBSliderBtm:
-        pixmaps[VSBSliderBtm] = processEmbedded("sbslider_btm", btnH, btnS, btnV, true);
-        break;
-    case VSBSliderMid:
-        pixmaps[VSBSliderMid] = processEmbedded("sbslider_mid", btnH, btnS, btnV);
-        break;
-    case VSBSliderTopHover:
-        pixmaps[VSBSliderTopHover] = processEmbedded("sbslider_top", btnHoverH, btnHoverS, btnHoverV, true);
-        break;
-    case VSBSliderBtmHover:
-        pixmaps[VSBSliderBtmHover] = processEmbedded("sbslider_btm", btnHoverH, btnHoverS, btnHoverV, true);
-        break;
-    case VSBSliderMidHover:
-        pixmaps[VSBSliderMidHover] = processEmbedded("sbslider_mid", btnHoverH, btnHoverS, btnHoverV);
+        pixmaps[HTMLCBDownHover] = processEmbedded("htmlcheckboxdown", btnHoverH, btnHoverS, btnHoverV);
         break;
 
-    case HSBSliderTop:
-        pixmaps[HSBSliderTop] = processEmbedded("sbslider_top", btnH, btnS, btnV, true);
-        *pixmaps[HSBSliderTop] = pixmaps[HSBSliderTop]->xForm(rMatrix);
+    case HTMLRadio:
+        pixmaps[HTMLRadio] = processEmbedded("htmlradio", bH, bS, bV);
+		break;
+    case HTMLRadioHover:
+        pixmaps[HTMLRadioHover] = processEmbedded("htmlradio", btnHoverH, btnHoverS, btnHoverV);
+		break;
+    case HTMLRadioDown:
+        pixmaps[HTMLRadioDown] = processEmbedded("htmlradiodown", btnH, btnS, btnV);
+		break;
+    case HTMLRadioDownHover:
+        pixmaps[HTMLRadioDownHover] = processEmbedded("htmlradiodown", btnHoverH, btnHoverS, btnHoverV);
+		break;
+
+    case RadioOff:
+        pixmaps[RadioOff] = processEmbedded("radio", bH, bS, bV /*, true*/);
         break;
-    case HSBSliderBtm:
-        pixmaps[HSBSliderBtm] = processEmbedded("sbslider_btm", btnH, btnS, btnV, true);
-        *pixmaps[HSBSliderBtm] = pixmaps[HSBSliderBtm]->xForm(rMatrix);
+    case RadioOffHover:
+        pixmaps[RadioOffHover] = processEmbedded("radio", btnHoverH, btnHoverS, btnHoverV /*, true*/);
         break;
-    case HSBSliderMid:
-        pixmaps[HSBSliderMid] = processEmbedded("sbslider_mid", btnH, btnS, btnV);
-        *pixmaps[HSBSliderMid] = pixmaps[HSBSliderMid]->xForm(rMatrix);
+	case RadioOn:
+        pixmaps[RadioOn] = processEmbedded("radio_down", btnH, btnS, btnV /*, true*/);
         break;
-    case HSBSliderTopHover:
-        pixmaps[HSBSliderTopHover] = processEmbedded("sbslider_top", btnHoverH, btnHoverS, btnHoverV, true);
-        *pixmaps[HSBSliderTopHover] = pixmaps[HSBSliderTopHover]->xForm(rMatrix);
+    case RadioOnHover:
+        pixmaps[RadioOnHover] = processEmbedded("radio_down", btnHoverH, btnHoverS, btnHoverV /*, true*/);
         break;
-    case HSBSliderBtmHover:
-        pixmaps[HSBSliderBtmHover] = processEmbedded("sbslider_btm", btnHoverH, btnHoverS, btnHoverV, true);
-        *pixmaps[HSBSliderBtmHover] = pixmaps[HSBSliderBtmHover]->xForm(rMatrix);
+
+    case Tab:
+        pixmaps[Tab] = processEmbedded("tab", bH, bS, bV /*, true*/);
         break;
-    case HSBSliderMidHover:
-        pixmaps[HSBSliderMidHover] = processEmbedded("sbslider_mid", btnHoverH, btnHoverS, btnHoverV);
-        *pixmaps[HSBSliderMidHover] = pixmaps[HSBSliderMidHover]->xForm(rMatrix);
+    case TabDown:
+        pixmaps[TabDown] = processEmbedded("tab", btnH, btnS, btnV /*, true*/);
+        break;    
+    case TabFocus:
+        pixmaps[TabFocus] = processEmbedded("tab", btnHoverH, btnHoverS, btnHoverV /*, true*/);
+        break;    
+
+	case CB:
+        pixmaps[CB] = processEmbedded("checkbox", bH, bS, bV /*, true*/);
         break;
-    case VSBSliderTopBg:
-        pixmaps[VSBSliderTopBg] = processEmbedded("sbslider_top", bH, bS, bV, true);
+    case CBHover:
+        pixmaps[CBHover] = processEmbedded("checkbox", btnHoverH, btnHoverS, btnHoverV /*, true*/);
+        break;
+    case CBDown:
+        pixmaps[CBDown] = processEmbedded("checkboxdown", btnH, btnS, btnV /*, true*/);
+        break;
+    case CBDownHover:
+        pixmaps[CBDownHover] = processEmbedded("checkboxdown", btnHoverH, btnHoverS, btnHoverV /*, true*/);
+        break;
+
+	case VSlider:
+        pixmaps[VSlider] = processEmbedded("sliderarrow", btnH, btnS, btnV, true );
+        *pixmaps[VSlider] = pixmaps[VSlider]->xForm(rMatrix);
+        break;
+    case VSBSliderTop:
+    case VSBSliderTopHover:
+        pixmaps[item] = processEmbedded("sbslider_top", btnH, btnS, btnV /*, true*/);
+        break;
+    case VSBSliderBtm:
+    case VSBSliderBtmHover:
+        pixmaps[item] = processEmbedded("sbslider_btm", btnH, btnS, btnV /*, true*/);
+        break;
+    case VSBSliderMid:
+    case VSBSliderMidHover:
+        pixmaps[item] = processEmbedded("sbslider_mid", btnH, btnS, btnV);
+        break;
+	case VSBSliderTopBg:
+        pixmaps[VSBSliderTopBg] = processEmbedded("sbslider_top", bH, bS, bV /*, true*/);
         break;
     case VSBSliderBtmBg:
-        pixmaps[VSBSliderBtmBg] = processEmbedded("sbslider_btm", bH, bS, bV, true);
+        pixmaps[VSBSliderBtmBg] = processEmbedded("sbslider_btm", bH, bS, bV /*, true*/);
         break;
     case VSBSliderMidBg:
         pixmaps[VSBSliderMidBg] = processEmbedded("sbslider_mid", bH, bS, bV);
         break;
+
+	case HSlider:
+        pixmaps[HSlider] = processEmbedded("sliderarrow", btnH, btnS, btnV /*, true*/);
+        break;
+    case HSBSliderTop:
+    case HSBSliderTopHover:
+        pixmaps[item] = processEmbedded("sbslider_top", btnH, btnS, btnV, true );
+        *pixmaps[item] = pixmaps[item]->xForm(rMatrix);
+        break;
+    case HSBSliderBtm:
+    case HSBSliderBtmHover:
+        pixmaps[item] = processEmbedded("sbslider_btm", btnH, btnS, btnV, true );
+        *pixmaps[item] = pixmaps[item]->xForm(rMatrix);
+        break;
+    case HSBSliderMid:
+    case HSBSliderMidHover:
+        pixmaps[item] = processEmbedded("sbslider_mid", btnH, btnS, btnV);
+        *pixmaps[item] = pixmaps[item]->xForm(rMatrix);
+        break;
     case HSBSliderTopBg:
-        pixmaps[HSBSliderTopBg] = processEmbedded("sbslider_top", bH, bS, bV, true);
+        pixmaps[HSBSliderTopBg] = processEmbedded("sbslider_top", bH, bS, bV, true );
         *pixmaps[HSBSliderTopBg] = pixmaps[HSBSliderTopBg]->xForm(rMatrix);
         break;
     case HSBSliderBtmBg:
-        pixmaps[HSBSliderBtmBg] = processEmbedded("sbslider_btm", bH, bS, bV, true);
+        pixmaps[HSBSliderBtmBg] = processEmbedded("sbslider_btm", bH, bS, bV, true );
         *pixmaps[HSBSliderBtmBg] = pixmaps[HSBSliderBtmBg]->xForm(rMatrix);
         break;
     case HSBSliderMidBg:
@@ -690,17 +686,6 @@ void LiquidStyle::polish(QPalette &appPal)
             pixmaps[i] = NULL;
         }
     }
-    QWidgetList *list = QApplication::allWidgets();
-    QWidgetListIt it( *list );
-    QWidget *w;
-    while ((w=it.current()) != 0 ){
-        ++it;
-        if(w->inherits("QPushButton")){
-            unapplyCustomAttributes((QPushButton *)w);
-        }
-    }
-
-    loadCustomButtons();
     lowLightVal = 100 + (2* /*KGlobalSettings::contrast()*/ 3 +4)*10;
     btnDict.clear();
     btnBorderDict.clear();
@@ -719,11 +704,10 @@ void LiquidStyle::polish(QPalette &appPal)
 
     // button color stuff
     config. setGroup ( "Appearance" );
-    QColor c = // QColor ( config. readEntry("Button", ( Qt::lightGray ). name ( )));
-               appPal. color ( QPalette::Active, QColorGroup::Button );
-    if ( c == appPal. color ( QPalette::Active, QColorGroup::Background )
-              //QColor ( config. readEntry ( "background", ( Qt::lightGray ). name ( ))) 
-             ) {
+    QColor c = oldqte ? QColor ( config. readEntry("Button", ( Qt::lightGray ). name ( ))) 
+                      : appPal. color ( QPalette::Active, QColorGroup::Button );
+    if ( c == ( oldqte ?  QColor ( config. readEntry ( "background", ( Qt::lightGray ). name ( )))
+                       : appPal. color ( QPalette::Active, QColorGroup::Background ))) {
         // force button color to be different from background
         QBrush btnBrush(QColor(200, 202, 228));
         appPal.setBrush(QColorGroup::Button, btnBrush);
@@ -758,8 +742,8 @@ void LiquidStyle::polish(QPalette &appPal)
         adjustHSV(*pix, h, s, v);
         smallBevelFillDict.insert(c.rgb(), pix);
     }
-    pagerHoverBrush.setColor(c);
-    pagerHoverBrush.setPixmap(*pix);
+//    pagerHoverBrush.setColor(c);
+//    pagerHoverBrush.setPixmap(*pix);
 
     c = c.dark(120);
     pix = smallBevelFillDict.find(c.rgb()); // better be NULL ;-)
@@ -770,11 +754,13 @@ void LiquidStyle::polish(QPalette &appPal)
         adjustHSV(*pix, h, s, v);
         smallBevelFillDict.insert(c.rgb(), pix);
     }
-    pagerBrush.setColor(c);
-    pagerBrush.setPixmap(*pix);
+//    pagerBrush.setColor(c);
+//    pagerBrush.setPixmap(*pix);
 
     // background color stuff
-    c = /*QColor ( config. readEntry ( "Background", ( Qt::lightGray ).name ( )));*/ appPal. color ( QPalette::Active, QColorGroup::Background );
+    c = oldqte ? QColor ( config. readEntry ( "Background", ( Qt::lightGray ).name ( )))
+               : appPal. color ( QPalette::Active, QColorGroup::Background );
+
     c.hsv(&bH, &bS, &bV);
     c.light(120).hsv(&bHoverH, &bHoverS, &bHoverV);
 
@@ -798,33 +784,6 @@ void LiquidStyle::polish(QPalette &appPal)
     bgBrush.setColor(c);
     bgBrush.setPixmap(wallPaper);
     appPal.setBrush(QColorGroup::Background, bgBrush);
-
-    // lineedits
-    c = /*QColor ( config. readEntry("Base", ( Qt::white). name ( )));*/ appPal. color ( QPalette::Active, QColorGroup::Base );
-    QPixmap basePix;
-    basePix.resize(32, 32);
-    basePix.fill(c.rgb());
-    painter.begin(&basePix);
-    painter.setPen(c.dark(105));
-    for(i=0; i < 32; i+=4){
-        painter.drawLine(0, i, 32, i);
-        painter.drawLine(0, i+1, 32, i+1);
-    };
-    painter.end();
-    baseBrush.setColor(c);
-    baseBrush.setPixmap(basePix);
-    it.toFirst();
-    while ((w=it.current()) != 0 ){
-        ++it;
-        if(w->inherits("QLineEdit")){
-            QPalette pal = w->palette();
-            pal.setBrush(QColorGroup::Base, baseBrush);
-            w->setPalette(pal);
-        }
-        else if(w->inherits("QPushButton")){
-            applyCustomAttributes((QPushButton *)w);
-        }
-    }
 }
 
 void LiquidStyle::polish(QWidget *w)
@@ -853,20 +812,10 @@ void LiquidStyle::polish(QWidget *w)
         return;
     }
    
-    if(w->inherits("QComboBox") || w->inherits("QProgressBar") ||
-       w->inherits("QLineEdit") || w->inherits("QRadioButton") ||
-       w->inherits("QCheckBox") || w->inherits("QScrollBar")) {
+    if(w->inherits("QRadioButton") || w->inherits("QCheckBox") || w->inherits("QProgressBar")) {
         w->installEventFilter(this);
     }
-    if(w->inherits("QLineEdit")){
-        QPalette pal = w->palette();
-        pal.setBrush(QColorGroup::Base, baseBrush);
-        w->setPalette(pal);
-    }
-    if(w->inherits("QPushButton")){
-        applyCustomAttributes((QPushButton *)w);
-        w->installEventFilter(this);
-    }
+
     if(w->inherits("QButton") || w-> inherits("QComboBox")){
     	w-> setBackgroundMode ( QWidget::PaletteBackground );
     	w->setBackgroundOrigin ( QWidget::ParentOrigin);
@@ -900,10 +849,13 @@ void LiquidStyle::polish(QWidget *w)
         w->setMouseTracking(true);
         w->installEventFilter(this);
     }
-    if(w-> inherits("QToolButton")&&w->parent()->inherits("QToolBar")) {
-    	((QToolButton*)w)->setAutoRaise (flatTBButtons);
-    	if ( flatTBButtons )
-    		w->setBackgroundOrigin(QWidget::ParentOrigin);
+    if(w-> inherits("QToolButton")) {
+        if (w->parent()->inherits("QToolBar")) {
+    	    ((QToolButton*)w)->setAutoRaise (flatTBButtons);
+    	    if ( flatTBButtons )
+    		    w->setBackgroundOrigin(QWidget::ParentOrigin);
+    	}
+    	w-> installEventFilter ( this );
     }
     if(w-> inherits("QToolBarSeparator")&&w->parent()->inherits("QToolBar")) {
     	((QFrame *) w)-> setFrameShape ( QFrame::NoFrame );
@@ -971,24 +923,21 @@ void LiquidStyle::unPolish(QWidget *w)
     if(isViewportChild)
         w->setAutoMask(false);
 
-    if(w->inherits("QPushButton")){
-        unapplyCustomAttributes((QPushButton *)w);
-        w->removeEventFilter(this);
-    }
 /*
     if(w->inherits("QPushButton") || w-> inherits("QComboBox")){
     	w-> setBackgroundMode ( PaletteBackground );
     }
 */
-    if(w->inherits("QComboBox") ||
-       w->inherits("QLineEdit") || w->inherits("QRadioButton") ||
-       w->inherits("QCheckBox") || w->inherits("QScrollBar")) {
-        w->removeEventFilter(this);
+    if( w->inherits("QRadioButton") || w->inherits("QCheckBox") || w->inherits("QProgressBar")) {
+       w->removeEventFilter(this);
     }
     if(w->inherits("QButton") || w->inherits("QComboBox")){
         if(w->parent() && w->parent()->inherits("KHTMLPart")){
             w->setAutoMask(false);
         }
+    }
+    if(w-> inherits("QToolButton")) {
+    	w-> removeEventFilter ( this );
     }
     if(w->inherits("QToolBar")){
         w->removeEventFilter(this);
@@ -1095,6 +1044,26 @@ public:
 };
 
 
+/*
+ * The same for QToolButton:
+ * TT hardcoded the drawing of the focus rect ...
+ *
+ * - sandman
+ */
+
+
+class HackToolButton : public QToolButton {
+public:
+	HackToolButton ( );
+	
+	void paint ( QPaintEvent *ev )
+	{
+		erase ( ev-> region ( ));
+		QPainter p ( this );
+		style ( ). drawToolButton ( this, &p );
+		drawButtonLabel ( &p );
+	}
+};
 
 /*
  * This is a fun method ;-) Here's an overview. KToolBar grabs resize to
@@ -1128,75 +1097,27 @@ bool LiquidStyle::eventFilter(QObject *obj, QEvent *ev)
 
         }
     }
-    else if(obj->inherits("QPushButton") || obj->inherits("QComboBox")){
-        QWidget *btn = (QWidget *)obj;
-        if(ev->type() == QEvent::Enter){
-            if(btn->isEnabled()){
-                highlightWidget = btn;
-                btn->repaint(false);
-            }
-        }
-        else if(ev->type() == QEvent::Leave){
-            if(btn == highlightWidget){
-                highlightWidget = NULL;
-                btn->repaint(false);
-            }
-        }
-    }
     else if(obj->inherits("QToolButton")){
-        QToolButton *btn = (QToolButton *)btn;
-        if(!btn->autoRaise()){
+        QToolButton *btn = (QToolButton *)obj;
+        if(ev->type() == QEvent::FocusIn ){ // && !btn-> autoRaise () 
             if(btn->isEnabled()){
                 highlightWidget = btn;
                 btn->repaint(false);
+                
+	        	qDebug ( "TB FOCUS IN [%p]", btn );
             }
         }
-        else if(ev->type() == QEvent::Leave){
-            QWidget *btn = (QWidget *)obj;
+        else if(ev->type() == QEvent::FocusOut ){
             if(btn == highlightWidget){
                 highlightWidget = NULL;
                 btn->repaint(false);
+                
+                qDebug ( "TB FOCUS OUT [%p]", btn );
             }
         }
-        else
-            highlightWidget = NULL;
-    }
-    else if(obj->inherits("QScrollBar")){
-        QScrollBar *sb = (QScrollBar *)obj;
-        if(ev->type() == QEvent::Enter){
-            if(sb->isEnabled()){
-                highlightWidget = sb;
-                sb->repaint(false);
-            }
-        }
-        else if(ev->type() == QEvent::Leave){
-            if(sb == highlightWidget && !sb->draggingSlider()){
-                highlightWidget = NULL;
-                sb->repaint(false);
-            }
-        }
-        else if(ev->type() == QEvent::MouseButtonRelease){
-            QMouseEvent *me = (QMouseEvent *)ev;
-            if(sb == highlightWidget && !sb->rect().contains(me->pos())){
-                highlightWidget = NULL;
-                sb->repaint(false);
-            }
-        }
-    }
-    else if(obj->inherits("QLineEdit")){
-        if(obj->parent() && obj->parent()->inherits("QComboBox")){
-            QWidget *btn = (QComboBox *)obj->parent();
-            if(ev->type() == QEvent::Enter){
-                if (btn->isEnabled()){
-                    highlightWidget = btn;
-                    btn->repaint(false);
-                }
-            }
-            else if(ev->type() == QEvent::Leave){
-                if (btn == highlightWidget)
-                    highlightWidget = NULL;
-                btn->repaint(false);
-            }
+        else if(ev->type() == QEvent::Paint) {
+        	(( HackToolButton *) btn )-> paint ((QPaintEvent *) ev );
+        	return true;
         }
     }
     else if(obj->inherits("QRadioButton") || obj->inherits("QCheckBox")){
@@ -1212,6 +1133,7 @@ bool LiquidStyle::eventFilter(QObject *obj, QEvent *ev)
             QSize sz = isRadio ? exclusiveIndicatorSize()
                 : indicatorSize();
 
+/*
             if(btn->hasFocus()){
                 QRect r = QRect(0, 0, btn->width(), btn->height());
                 p.setPen(btn->colorGroup().button().dark(140));
@@ -1220,7 +1142,8 @@ bool LiquidStyle::eventFilter(QObject *obj, QEvent *ev)
                 p.drawLine(r.right(), r.y()+1, r.right(), r.bottom()-1);
                 p.drawLine(r.x()+1, r.bottom(), r.right()-1, r.bottom());
             }
-            int x = 0;
+*/
+            int x = 0;            
             int y = (btn->height()-lsz.height()+fm.height()-sz.height())/2;
             if(isRadio)
                 drawExclusiveIndicator(&p, x, y, sz.width(), sz.height(),
@@ -1238,36 +1161,6 @@ bool LiquidStyle::eventFilter(QObject *obj, QEvent *ev)
                      btn->pixmap(), btn->text());
             p.end();
             return(true);
-        }
-        // for hover, just redraw the indicator (not the text)
-        else if((ev->type() == QEvent::Enter && btn->isEnabled()) ||
-                (ev->type() == QEvent::Leave && btn == highlightWidget)){
-            QButton *btn = (QButton *)obj;
-            bool isRadio = obj->inherits("QRadioButton");
-
-            if(ev->type() == QEvent::Enter)
-                highlightWidget = btn;
-            else 
-                highlightWidget = NULL;
-            QFontMetrics fm = btn->fontMetrics();
-            QSize lsz = fm.size(ShowPrefix, btn->text());
-            QSize sz = isRadio ? exclusiveIndicatorSize()
-                : indicatorSize();
-            int x = 0;
-            int y = (btn->height()-lsz.height()+fm.height()-sz.height())/2;
-            //if(btn->autoMask())
-            //    btn->erase(x+1, y+1, sz.width()-2, sz.height()-2);
-            QPainter p;
-            p.begin(btn);
-            if(isRadio)
-                drawExclusiveIndicator(&p, x, y, sz.width(), sz.height(),
-                                       btn->colorGroup(), btn->isOn(),
-                                       btn->isDown(), btn->isEnabled());
-            else
-                drawIndicator(&p, x, y, sz.width(), sz.height(),
-                              btn->colorGroup(), btn->state(), btn->isDown(),
-                              btn->isEnabled());
-            p.end();
         }
     }
     else if(obj->inherits("QHeader")){
@@ -1353,8 +1246,11 @@ void LiquidStyle::drawToolButton(QPainter *p, int x, int y, int w, int h,
         }
 
         p->drawTiledPixmap(x+2, y+2, w-4, h-4, *pix);
+        qDebug ( "DRAW TOOLBUTTON IN PIXMAP" );
     }
     else{
+    	qDebug ( "DRAW TOOLBUTTON sunken=%d/high=%p/device=%p", sunken, highlightWidget,p->device() );
+    
         drawClearBevel(p, x, y, w, h, sunken ? g.button() :
                        highlightWidget == p->device() ? g.button().light(110) :
                        g.background(), g.background());
@@ -1511,7 +1407,20 @@ void LiquidStyle::drawComboButton(QPainter *painter, int x, int y, int w, int h,
                                  const QColorGroup &g, bool sunken,
                                  bool edit, bool, const QBrush *)
 {
-    bool isHover = highlightWidget == painter->device();
+    bool isActive = false;
+    if (( painter->device()->devType() == QInternal::Widget ) &&
+        (
+         ( qApp-> focusWidget ( ) == painter-> device ( )) ||
+         (
+          edit &&
+          ((QWidget *) painter-> device ( ))-> inherits ( "QComboBox" ) && 
+          ( qApp-> focusWidget ( ) == ((QComboBox *) painter->device())->lineEdit ( ))
+         )
+        )
+      ) {
+    	isActive = true;
+    }
+    	
     bool isMasked = false;
     if(painter->device()->devType() == QInternal::Widget)
         isMasked = ((QWidget*)painter->device())->autoMask();
@@ -1521,7 +1430,7 @@ void LiquidStyle::drawComboButton(QPainter *painter, int x, int y, int w, int h,
 
     drawRoundButton(&p, g.button(), g.background(), 0, 0, w, h, false,
                     sunken, false, isMasked);
-    if(!isHover){
+    if(!isActive){
         p.setClipRect(0, 0, w-17, h);
         drawRoundButton(&p, g.background(), g.background(), 0, 0, w, h, false,
                         sunken, false, isMasked);
@@ -1573,16 +1482,17 @@ QRect LiquidStyle::comboButtonRect(int x, int y, int w, int h)
     return(QRect(x+9, y+3, w - (h / 3) - 20, h-6));
 }
 
-QRect LiquidStyle::comboButtonFocusRect(int x, int y, int w, int h)
+QRect LiquidStyle::comboButtonFocusRect(int /*x*/, int /*y*/, int /*w*/, int /*h*/)
 {
-    return(QRect(x+5, y+3, w-(h/3)-13, h-5));
+	return QRect ( );
+	
+//    return(QRect(x+5, y+3, w-(h/3)-13, h-5));
 }
 
 void LiquidStyle::drawScrollBarControls(QPainter *p, const QScrollBar *sb,
                                        int sliderStart, uint controls,
                                        uint activeControl)
 {
-    bool isHover = highlightWidget == p->device();
     int sliderMin, sliderMax, sliderLength, buttonDim;
     scrollBarMetrics( sb, sliderMin, sliderMax, sliderLength, buttonDim );
 
@@ -1671,25 +1581,15 @@ void LiquidStyle::drawScrollBarControls(QPainter *p, const QScrollBar *sb,
         }
         if(controls & Slider){
             if(sliderR.height() >= 16){
-                painter.drawPixmap(sliderR.x()+1, sliderR.y(),
-                                   isHover ? *getPixmap(VSBSliderTopHover):
-                                   *getPixmap(VSBSliderTop));
+                painter.drawPixmap(sliderR.x()+1, sliderR.y(), *getPixmap(VSBSliderTop));
                 painter.drawTiledPixmap(sliderR.x()+1, sliderR.y()+8, 13,
-                                        sliderR.height()-16, isHover ?
-                                        *getPixmap(VSBSliderMidHover) :
-                                        *getPixmap(VSBSliderMid));
-                painter.drawPixmap(sliderR.x()+1, sliderR.bottom()-8,
-                                   isHover ? *getPixmap(VSBSliderBtmHover) :
-                                   *getPixmap(VSBSliderBtm));
+                                        sliderR.height()-16, *getPixmap(VSBSliderMid));
+                painter.drawPixmap(sliderR.x()+1, sliderR.bottom()-8, *getPixmap(VSBSliderBtm));
             }
             else if(sliderR.height() >= 8){
                 int m = sliderR.height()/2;
-                painter.drawPixmap(sliderR.x()+1, sliderR.y(),
-                                   isHover ? *getPixmap(VSBSliderTopHover):
-                                   *getPixmap(VSBSliderTop), 0, 0, 13, m);
-                painter.drawPixmap(sliderR.x()+1, sliderR.y()+m,
-                                   isHover ? *getPixmap(VSBSliderBtmHover):
-                                   *getPixmap(VSBSliderBtm), 0, 8-m, 13, m);
+                painter.drawPixmap(sliderR.x()+1, sliderR.y(), *getPixmap(VSBSliderTop), 0, 0, 13, m);
+                painter.drawPixmap(sliderR.x()+1, sliderR.y()+m, *getPixmap(VSBSliderBtm), 0, 8-m, 13, m);
             }
             else{
                 painter.setPen(g.button().dark(210));
@@ -1697,7 +1597,6 @@ void LiquidStyle::drawScrollBarControls(QPainter *p, const QScrollBar *sb,
                               13, sliderR.height());
                 painter.drawTiledPixmap(sliderR.x()+2, sliderR.y()+1,
                                         11, sliderR.height()-2,
-                                        isHover ? *getPixmap(VSBSliderMidHover) :
                                         *getPixmap(VSBSliderMid), 1, 0);
             }
         }
@@ -1738,22 +1637,17 @@ void LiquidStyle::drawScrollBarControls(QPainter *p, const QScrollBar *sb,
         if(controls & Slider){
             if(sliderR.width() >= 16){
                 painter.drawPixmap(sliderR.x(), sliderR.y()+1,
-                                   isHover ? *getPixmap(HSBSliderTopHover) :
                                    *getPixmap(HSBSliderTop));
                 painter.drawTiledPixmap(sliderR.x()+8, sliderR.y()+1, sliderR.width()-16,
-                                        13, isHover ? *getPixmap(HSBSliderMidHover) :
-                                        *getPixmap(HSBSliderMid));
-                painter.drawPixmap(sliderR.right()-8, sliderR.y()+1, isHover ?
-                                   *getPixmap(HSBSliderBtmHover) :
+                                        13, *getPixmap(HSBSliderMid));
+                painter.drawPixmap(sliderR.right()-8, sliderR.y()+1, 
                                    *getPixmap(HSBSliderBtm));
             }
             else if(sliderR.width() >= 8){
                 int m = sliderR.width()/2;
                 painter.drawPixmap(sliderR.x(), sliderR.y()+1,
-                                   isHover ? *getPixmap(HSBSliderTopHover) :
                                    *getPixmap(HSBSliderTop), 0, 0, m, 13);
-                painter.drawPixmap(sliderR.right()-8, sliderR.y()+1, isHover ?
-                                   *getPixmap(HSBSliderBtmHover) :
+                painter.drawPixmap(sliderR.right()-8, sliderR.y()+1, 
                                    *getPixmap(HSBSliderBtm), 8-m, 0, m, 13);
             }
             else{
@@ -1761,8 +1655,7 @@ void LiquidStyle::drawScrollBarControls(QPainter *p, const QScrollBar *sb,
                 drawRoundRect(&painter, sliderR.x(), sliderR.y()+1,
                               sliderR.width(), 13);
                 painter.drawTiledPixmap(sliderR.x()+1, sliderR.y()+2,
-                                        sliderR.width()-2, 11, isHover ?
-                                        *getPixmap(HSBSliderMidHover) :
+                                        sliderR.width()-2, 11, 
                                         *getPixmap(HSBSliderMid), 0, 1);
             }
         }
@@ -1941,27 +1834,27 @@ void LiquidStyle::drawExclusiveIndicator(QPainter *p, int x, int y, int /*w*/,
                                         int /*h*/, const QColorGroup &/*g*/, bool on,
                                         bool down, bool)
 {
-    bool isHover = highlightWidget == p->device();
+    bool isActive = ( p->device()->devType() == QInternal::Widget ) && ( qApp-> focusWidget ( ) == p-> device ( ));
     bool isMasked = p->device() && p->device()->devType() == QInternal::Widget
         && ((QWidget*)p->device())->autoMask();
 
     if(isMasked){
         if(on || down){
-            p->drawPixmap(x, y, isHover ? *getPixmap(HTMLRadioDownHover) :
+            p->drawPixmap(x, y, isActive ? *getPixmap(HTMLRadioDownHover) :
                           *getPixmap(HTMLRadioDown));
         }
         else
-            p->drawPixmap(x, y, isHover ? *getPixmap(HTMLRadioHover) :
+            p->drawPixmap(x, y, isActive ? *getPixmap(HTMLRadioHover) :
                           *getPixmap(HTMLRadio));
 
     }
     else{
         if(on || down){
-            p->drawPixmap(x, y, isHover ? *getPixmap(RadioOnHover) :
+            p->drawPixmap(x, y, isActive ? *getPixmap(RadioOnHover) :
                           *getPixmap(RadioOn));
         }
         else
-            p->drawPixmap(x, y, isHover ? *getPixmap(RadioOffHover) :
+            p->drawPixmap(x, y, isActive ? *getPixmap(RadioOffHover) :
                           *getPixmap(RadioOff));
     }
 }
@@ -1983,22 +1876,22 @@ QSize LiquidStyle::indicatorSize() const
 void LiquidStyle::drawIndicator(QPainter *p, int x, int y, int /*w*/, int /*h*/,
                             const QColorGroup &/*g*/, int state, bool /*down*/, bool)
 {
-    bool isHover = highlightWidget == p->device();
+    bool isActive = ( p->device()->devType() == QInternal::Widget ) && ( qApp-> focusWidget ( ) == p-> device ( ));
     bool isMasked = p->device() && p->device()->devType() == QInternal::Widget
         && ((QWidget*)p->device())->autoMask();
     if(isMasked){
         if(state != QButton::Off){
-            p->drawPixmap(x, y, isHover ? *getPixmap(HTMLCBDownHover) :
+            p->drawPixmap(x, y, isActive ? *getPixmap(HTMLCBDownHover) :
                           *getPixmap(HTMLCBDown));
         }
         else
-            p->drawPixmap(x, y, isHover ? *getPixmap(HTMLCBHover) :
+            p->drawPixmap(x, y, isActive ? *getPixmap(HTMLCBHover) :
                           *getPixmap(HTMLCB));
 
     }
     else{
         if(state != QButton::Off){
-            p->drawPixmap(x, y, isHover ? *getPixmap(CBDownHover) :
+            p->drawPixmap(x, y, isActive ? *getPixmap(CBDownHover) :
                           *getPixmap(CBDown));
             /*  Todo - tristate
              if(state == QButton::On){
@@ -2015,7 +1908,7 @@ void LiquidStyle::drawIndicator(QPainter *p, int x, int y, int /*w*/, int /*h*/,
              }*/
         }
         else
-            p->drawPixmap(x, y, isHover ? *getPixmap(CBHover) : *getPixmap(CB));
+            p->drawPixmap(x, y, isActive ? *getPixmap(CBHover) : *getPixmap(CB));
     }
 }
 
@@ -2360,7 +2253,7 @@ void LiquidStyle::drawFocusRect(QPainter *p, const QRect &r,
     if(p->device()->devType() == QInternal::Widget){
         // if so does it use a special focus rectangle?
         QWidget *w = (QWidget *)p->device();
-        if(w->inherits("QPushButton") || w->inherits("QSlider")){
+        if(w->inherits("QPushButton") || w->inherits("QSlider") || w->inherits("QComboBox") || w->inherits("QToolButton" )){
             return;
         }
         else{
@@ -2712,110 +2605,6 @@ void LiquidStyle::drawSliderGrooveMask (QPainter * p, int x, int y, int w,
         p->drawLine(x+5, y+1, x+5, y2-1);
     }
 }
-
-// I'm debating if to use QValueList or QList here. I like QValueList better,
-// but QList handles pointers which is good for a lot of empty icons...
-
-void LiquidStyle::loadCustomButtons()
-{
-    return; // TODO
-    customBtnColorList.clear();
-    customBtnIconList.clear();
-    customBtnLabelList.clear();
-
-//    KConfig *config = KGlobal::config();
-//    QString oldGrp = config->group();
-//    config->setGroup("MosfetButtons");
-
-    QStrList iconList, colorList; //temp, we store QPixmaps and QColors
-    iconList.setAutoDelete(true);
-    colorList.setAutoDelete(true);
-//    config->readListEntry("Labels", customBtnLabelList);
-//    config->readListEntry("Icons", iconList);
-//    config->readListEntry("Colors", colorList);
-
-    const char *labelStr = customBtnLabelList.first();
-    const char *colorStr = colorList.first();
-    const char *iconStr = iconList.first();
-
-//    KIconLoader *ldr = KGlobal::iconLoader();
-    while(labelStr != NULL){
-        QColor *c = new QColor;
-        c->setNamedColor(QString(colorStr));
-        customBtnColorList.append(c);
-
-        QString tmpStr(iconStr);
-        if(!tmpStr.isEmpty()){
-            QPixmap *pixmap = 
-                new QPixmap();//ldr->loadIcon(tmpStr, KIcon::Small));
-            if(pixmap->isNull()){
-                delete pixmap;
-                customBtnIconList.append(NULL);
-            }
-            else
-                customBtnIconList.append(pixmap);
-        }
-        else
-            customBtnIconList.append(NULL);
-
-        labelStr = customBtnLabelList.next();
-        colorStr = colorList.next();
-        iconStr = iconList.next();
-    }
-}
-
-void LiquidStyle::applyCustomAttributes(QPushButton *btn)
-{
-    return; // TODO
-    QString str = btn->text();
-    if(str.isEmpty())
-        return;
-    while(str.contains('&') != 0)
-        str = str.remove(str.find('&'), 1);
-
-    const char *s;
-    int idx = 0;
-    for(s = customBtnLabelList.first(); s != NULL;
-        ++idx, s = customBtnLabelList.next()){
-        if(qstricmp(s, str.latin1()) == 0){
-            QPalette pal = btn->palette();
-            pal.setColor(QColorGroup::Button,
-                         *customBtnColorList.at(idx));
-            btn->setPalette(pal);
-            /*
-            if(customBtnIconList.at(idx) != NULL){
-                QPixmap *pix = customBtnIconList.at(idx);
-                btn->setIconSet(QIconSet(*pix));
-            }*/
-            break;
-        }
-    }
-}
-
-void LiquidStyle::unapplyCustomAttributes(QPushButton *btn)
-{
-    return; // TODO
-    QString str = btn->text();
-    if(str.isEmpty())
-        return;
-    while(str.contains('&') != 0)
-        str = str.remove(str.find('&'), 1);
-
-    const char *s;
-    for(s = customBtnLabelList.first(); s != NULL; s = customBtnLabelList.next()){
-        if(qstricmp(s, str.latin1()) == 0){
-            btn->setPalette(QApplication::palette());
-            btn->setIconSet(QIconSet());
-            break;
-        }
-    }
-}
-
-// #include "liquid.moc"
-
-
-
-
 
 
 /* vim: set noet sw=8 ts=8: */

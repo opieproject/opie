@@ -171,26 +171,15 @@ protected:
     void drawSBButton(QPainter *p, const QRect &r, const QColorGroup &g,
                       bool down=false, bool fast = true);
     void drawRoundRect(QPainter *p, int x, int y, int w, int h);
-    void loadCustomButtons();
-    void applyCustomAttributes(QPushButton *btn);
-    void unapplyCustomAttributes(QPushButton *btn);
     QPixmap* getPixmap(BitmapData item);
     QPixmap* processEmbedded(const char *label, int h, int s, int v, bool blend=false);
 private:
+	bool oldqte;
 	bool flatTBButtons;
-    bool highcolor;
-    QColorGroup radioOnGrp;
     QWidget *highlightWidget;
-    QBrush wallpaper;
-    QBitmap lightBmp;
-    QBitmap grayBmp;
-    QBitmap dgrayBmp;
-    QBitmap maskBmp;
-    QBitmap xBmp;
     QBitmap btnMaskBmp, htmlBtnMaskBmp;
     QPixmap *btnBorderPix, *btnBlendPix, *bevelFillPix, *smallBevelFillPix, *menuPix;
-    QBitmap paper1, paper2, paper3;
-    QBrush baseBrush, menuBrush, pagerBrush, pagerHoverBrush, bgBrush;
+    QBrush bgBrush, menuBrush;
     bool menuAni, menuFade;
 
     QIntDict<QPixmap>btnDict;
@@ -198,9 +187,6 @@ private:
     QIntDict<QPixmap>bevelFillDict;
     QIntDict<QPixmap>smallBevelFillDict;
 
-    QList<QColor>customBtnColorList;
-    QList<QPixmap>customBtnIconList;
-    QStrList customBtnLabelList;
     QPixmap *vsbSliderFillPix;
     TransMenuHandler *menuHandler;
     QPixmap *pixmaps[BITMAP_ITEMS];
