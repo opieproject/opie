@@ -67,6 +67,9 @@ protected:
 
     bool isOverButton( const QPoint &position, int buttonId ) const;
 
+    void paintButton( int buttonId );
+    virtual void paintButton( QPainter &p, int i ) = 0;
+
     MediaPlayerState &mediaPlayerState;
     PlayListWidget &playList;
 

@@ -93,7 +93,7 @@ private slots:
 private:
     void toggleButton( int );
     void setToggleButton( int, bool );
-    void paintButton( QPainter *p, int i );
+    virtual void paintButton( QPainter &p, int i );
     int skipDirection;
     QString skin;
     QPixmap pixBg;

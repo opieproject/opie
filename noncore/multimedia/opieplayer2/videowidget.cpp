@@ -266,15 +266,15 @@ void VideoWidget::setToggleButton( int i, bool down ) {
 void VideoWidget::toggleButton( int i ) {
     buttons[i].isDown = !buttons[i].isDown;
     QPainter p(this);
-    paintButton ( &p, i );
+    paintButton ( p, i );
 }
 
-void VideoWidget::paintButton( QPainter *p, int i ) {
+void VideoWidget::paintButton( QPainter &p, int i ) {
 
     if ( buttons[i].isDown ) {
-        p->drawPixmap( upperLeftOfButtonMask, *buttonPixDown[i] );
+        p.drawPixmap( upperLeftOfButtonMask, *buttonPixDown[i] );
     } else {
-        p->drawPixmap( upperLeftOfButtonMask, *buttonPixUp[i] );
+        p.drawPixmap( upperLeftOfButtonMask, *buttonPixUp[i] );
     }
 }
 
@@ -422,14 +422,14 @@ void VideoWidget::paintEvent( QPaintEvent * pe) {
             p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
             p.drawTiledPixmap( pe->rect(), pixBg, pe->rect().topLeft() );
             for ( unsigned int i = 0; i < buttons.size(); i++ ) {
-                paintButton( &p, i );
+                paintButton( p, i );
             }
             QPainter p2( this );
             p2.drawPixmap( pe->rect().topLeft(), pix );
         } else {
             QPainter p( this );
             for ( unsigned int i = 0; i < buttons.size(); i++ )
-                paintButton( &p, i );
+                paintButton( p, i );
         }
         //slider->repaint( TRUE );
         }

@@ -107,7 +107,7 @@ private:
 //    QPixmap *pixmaps[4];
 
 
-    void paintButton( QPainter *p, int i );
+    virtual void paintButton( QPainter &p, int i );
     void toggleButton( int );
     void setToggleButton( int, bool );
 
