@@ -60,6 +60,21 @@ void ImageScrollView::setImage( const QString& path ) {
 void ImageScrollView::init()
 {
     odebug << "init " << oendl;
+
+    /*
+     * create the zoomer
+     * and connect ther various signals
+     */
+    _zoomer = new Opie::MM::OImageZoomer( this, "The Zoomer" );
+    connect(_zoomer, SIGNAL( zoomAreaRel(int,int)),
+            this, SLOT(scrollBy(int,int)) );
+    connect(this,SIGNAL(contentsMoving(int,int)),
+            _zoomer, (SLOT(setVisiblePoint(int,int))) );
+    connect(this,SIGNAL(imageSizeChanged(const QSize&)),
+            _zoomer, SLOT(setImageSize(const QSize&)) );
+    connect(this,SIGNAL(viewportSizeChanged(const QSize&)),
+            _zoomer, SLOT(setViewPortSize(const QSize&)) );
+
     viewport()->setBackgroundColor(white);
     setFocusPolicy(QWidget::StrongFocus);
     if (first_resize_done) {
@@ -251,6 +266,17 @@ void ImageScrollView::generateImage()
         resizeContents(_image_data.width(),_image_data.height());
     }
     _pdata.convertFromImage(_image_data);
+
+    /*
+     * update the zoomer
+     */
+    emit imageSizeChanged( _image_data.size() );
+    rescaleImage( 128, 128 );
+    _zoomer->setImage( _image_data );
+
+    /*
+     * invalidate
+     */
     _image_data=QImage();
 }
 
@@ -260,6 +286,12 @@ void ImageScrollView::resizeEvent(QResizeEvent * e)
     QScrollView::resizeEvent(e);
     generateImage();
     first_resize_done = true;
+    emit viewportSizeChanged( viewport()->size() );
+
+   /*
+    * move scrollbar
+    */
+    _zoomer->setGeometry( viewport()->width()-100, viewport()->height()-50, 100, 50 );
 }
 
 void ImageScrollView::keyPressEvent(QKeyEvent * e)
@@ -320,6 +352,7 @@ void ImageScrollView::drawContents(QPainter * p, int clipx, int clipy, int clipw
 /* using the real geometry points and not the translated points is wanted! */
 void ImageScrollView::viewportMouseMoveEvent(QMouseEvent* e)
 {
+    odebug << "Move X and Y " << e->x() << " " << e->y() << oendl;
     int mx, my;
     mx = e->x();
     my = e->y();
@@ -346,12 +379,13 @@ void ImageScrollView::viewportMouseMoveEvent(QMouseEvent* e)
     _mouseStartPosY=my;
 }
 
-void ImageScrollView::contentsMousePressEvent ( QMouseEvent * )
+void ImageScrollView::contentsMousePressEvent ( QMouseEvent * e)
 {
+    odebug << " X and Y " << e->x() << " " << e->y() << oendl;
     /* this marks the beginning of a possible mouse move. Due internal reasons of QT
        the geometry values here may real differ from that set in MoveEvent (I don't know
        why). For getting them in real context, we use the first move-event to set the start
-       position ;) 
+       position ;)
     */
     _mouseStartPosX = -1;
     _mouseStartPosY = -1;

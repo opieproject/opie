@@ -26,6 +26,10 @@ OImageZoomer::OImageZoomer( const QSize& pSize, const QSize& vSize, QWidget* par
     init();
 }
 
+OImageZoomer::~OImageZoomer() {
+
+}
+
 void OImageZoomer::init() {
     setFrameStyle( Panel | Sunken );
 }
@@ -93,7 +97,7 @@ void OImageZoomer::drawContents( QPainter* p ) {
 }
 
 void OImageZoomer::mousePressEvent( QMouseEvent*  ) {
-
+    m_mouseX = m_mouseY = -1;
 }
 
 void OImageZoomer::mouseMoveEvent( QMouseEvent* ev ) {
@@ -102,10 +106,10 @@ void OImageZoomer::mouseMoveEvent( QMouseEvent* ev ) {
     my = ev->y();
 
     if ( m_mouseX != -1 && m_mouseY != -1 ) {
-        int diffx = m_mouseX-mx;
-        int diffy = m_mouseY-my;
-//       emit zoomAreaRel( diffx, diffy );
-//      emit zoomArea(
+        int diffx = ( mx - m_mouseX ) * m_imgSize.width() / width();
+        int diffy = ( my - m_mouseY ) * m_imgSize.height() / height();
+        emit zoomAreaRel( diffx, diffy );
+        emit zoomArea(m_visPt.x()+diffx, m_visPt.y()+diffy );
     }
     m_mouseX = mx;
     m_mouseY = my;

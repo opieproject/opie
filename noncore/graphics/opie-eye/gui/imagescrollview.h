@@ -1,11 +1,15 @@
 #ifndef _IMAGE_SCROLL_VIEW_H
 #define _IMAGE_SCROLL_VIEW_H
 
+#include <lib/oimagezoomer.h>
+
 #include <qscrollview.h>
 #include <qimage.h>
 #include <qpixmap.h>
 #include <qstring.h>
 #include <qdialog.h>
+
+
 
 class QPainter;
 
@@ -34,11 +38,14 @@ public:
 
 signals:
     void sig_return();
+    void imageSizeChanged( const QSize& );
+    void viewportSizeChanged( const QSize& );
 
 protected:
     virtual void drawContents ( QPainter * p, int clipx, int clipy, int clipw, int cliph );
     void init();
 
+    Opie::MM::OImageZoomer *_zoomer;
     QImage _image_data;
     QImage _original_data;
     QPixmap _pdata;
