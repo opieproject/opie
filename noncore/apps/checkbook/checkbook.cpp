@@ -35,22 +35,18 @@
 #include "password.h"
 
 #include <opie/otabwidget.h>
-#include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qpemessagebox.h>
 #include <qpe/resource.h>
 
 #include <qcheckbox.h>
 #include <qcombobox.h>
-#include <qfile.h>
-#include <qfontmetrics.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qmultilineedit.h>
 #include <qpushbutton.h>
 #include <qwhatsthis.h>
-#include <qwidget.h>
 
 Checkbook::Checkbook( QWidget *parent, CBInfo *i, const QString &symbol )
 	: QDialog( parent, 0, TRUE, WStyle_ContextHelp )

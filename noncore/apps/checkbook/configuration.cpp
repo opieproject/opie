@@ -29,11 +29,9 @@
 #include "configuration.h"
 
 #include <qcheckbox.h>
-#include <qfontmetrics.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlineedit.h>
-#include <qstring.h>
 #include <qwhatsthis.h>
 
 Configuration::Configuration( QWidget *parent, const QString &cs, bool sl, bool sb )

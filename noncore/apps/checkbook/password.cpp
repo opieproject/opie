@@ -31,9 +31,7 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlineedit.h>
-#include <qpixmap.h>
 #include <qpushbutton.h>
-#include <qwidget.h>
 
 static const char* const showhideimage_data[] = {
 "16 16 2 1",

@@ -29,8 +29,6 @@
 #include "graph.h"
 #include "graphinfo.h"
 
-#include <qcolor.h>
-#include <qfontmetrics.h>
 #include <qpainter.h>
 
 #include <math.h>

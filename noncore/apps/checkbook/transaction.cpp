@@ -30,7 +30,6 @@
 #include "traninfo.h"
 
 #include <qpe/datebookmonth.h>
-#include <qpe/timestring.h>
 
 #include <qbuttongroup.h>
 #include <qcombobox.h>
@@ -38,11 +37,7 @@
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qmultilineedit.h>
-#include <qpopupmenu.h>
-#include <qpushbutton.h>
 #include <qradiobutton.h>
-#include <qscrollview.h>
-#include <qstring.h>
 #include <qwhatsthis.h>
 
 Transaction::Transaction( QWidget *parent, const QString &acctname, TranInfo *info,

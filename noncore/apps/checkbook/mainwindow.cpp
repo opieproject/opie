@@ -44,9 +44,6 @@
 #include <qcheckbox.h>
 #include <qdir.h>
 #include <qlineedit.h>
-#include <qlistview.h>
-#include <qpopupmenu.h>
-#include <qstring.h>
 #include <qwhatsthis.h>
 
 MainWindow::MainWindow()
