@@ -20,20 +20,29 @@
 
 #include "datebooksettings.h"
 
+#include <opie2/opluginloader.h>
+#include <opie2/odebug.h>
+
 #include <qpe/qpeapplication.h>
 
 #include <qspinbox.h>
 #include <qcheckbox.h>
+#include <qlistview.h>
+#include <qheader.h>
 
 DateBookSettings::DateBookSettings( bool whichClock, QWidget *parent,
                                     const char *name, bool modal, WFlags fl )
     : DateBookSettingsBase( parent, name, modal, fl ),
       ampm( whichClock )
 {
-	init();
-	QObject::connect( qApp, SIGNAL( clockChanged(bool) ), this, SLOT( slotChangeClock(bool) ) );
-	QArray<int> categories;
-	comboCategory->setCategories( categories, "Calendar", tr("Calendar") );
+    init();
+    QObject::connect( qApp, SIGNAL( clockChanged(bool) ), this, SLOT( slotChangeClock(bool) ) );
+    QArray<int> categories;
+    comboCategory->setCategories( categories, "Calendar", tr("Calendar") );
+    m_loader = 0;
+    m_manager = 0;
+    m_PluginListView->header()->hide();
+    m_PluginListView->setSorting(-1);
 }
 
 DateBookSettings::~DateBookSettings()
@@ -43,17 +52,17 @@ DateBookSettings::~DateBookSettings()
 void DateBookSettings::setStartTime( int newStartViewTime )
 {
     if ( ampm ) {
-	if ( newStartViewTime >= 12 ) {
-	    newStartViewTime %= 12;
-	    if ( newStartViewTime == 0 )
-		newStartViewTime = 12;
-	    spinStart->setSuffix( tr(":00 PM") );
-	}
-	else if ( newStartViewTime == 0 ) {
-	    newStartViewTime = 12;
-	    spinStart->setSuffix( tr(":00 AM") );
-	}
-	oldtime = newStartViewTime;
+    if ( newStartViewTime >= 12 ) {
+        newStartViewTime %= 12;
+        if ( newStartViewTime == 0 )
+        newStartViewTime = 12;
+        spinStart->setSuffix( tr(":00 PM") );
+    }
+    else if ( newStartViewTime == 0 ) {
+        newStartViewTime = 12;
+        spinStart->setSuffix( tr(":00 AM") );
+    }
+    oldtime = newStartViewTime;
     }
     spinStart->setValue( newStartViewTime );
 }
@@ -62,20 +71,47 @@ int DateBookSettings::startTime() const
 {
     int returnMe = spinStart->value();
     if ( ampm ) {
-	if ( returnMe != 12 && spinStart->suffix().contains(tr("PM"), FALSE) )
-	    returnMe += 12;
-	else if (returnMe == 12 && spinStart->suffix().contains(tr("AM"), TRUE))
-	    returnMe = 0;
+    if ( returnMe != 12 && spinStart->suffix().contains(tr("PM"), FALSE) )
+        returnMe += 12;
+    else if (returnMe == 12 && spinStart->suffix().contains(tr("AM"), TRUE))
+        returnMe = 0;
     }
     return returnMe;
 }
 
+void DateBookSettings::setPluginList(Opie::Core::OPluginManager*aManager,Opie::Core::OPluginLoader*aLoader)
+{
+    m_manager = aManager;
+    m_loader = aLoader;
+    if (!aManager||!aLoader) return;
+    Opie::Core::OPluginItem::List inLst = m_loader->allAvailable(true);
+    QCheckListItem *pitem = 0;
+
+    for ( Opie::Core::OPluginItem::List::Iterator it = inLst.begin(); it != inLst.end(); ++it ) {
+        pitem = new QCheckListItem(m_PluginListView,(*it).name(),QCheckListItem::CheckBox);
+        pitem->setOn( (*it).isEnabled() );
+    }
+}
+
+void DateBookSettings::pluginItemClicked(QListViewItem *aItem)
+{
+    if (!aItem||!m_manager||!m_loader) return;
+    QCheckListItem*pitem = ((QCheckListItem*)aItem);
+
+    Opie::Core::OPluginItem::List lst = m_loader->allAvailable( true );
+    for ( Opie::Core::OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it ) {
+        if ( QString::compare( (*it).name() , pitem->text(0) ) == 0 ) {
+            m_manager->setEnabled((*it),pitem->isOn());
+            break;
+        }
+    }
+}
 
 void DateBookSettings::setAlarmPreset( bool bAlarm, int presetTime )
 {
     chkAlarmPreset->setChecked( bAlarm );
     if ( presetTime >=5 )
-	spinPreset->setValue( presetTime );
+    spinPreset->setValue( presetTime );
 }
 
 bool DateBookSettings::alarmPreset() const
@@ -92,29 +128,29 @@ int DateBookSettings::presetTime() const
 void DateBookSettings::slot12Hour( int i )
 {
     if ( ampm ) {
-	if ( spinStart->suffix().contains( tr("AM"), FALSE ) ) {
-	    if ( oldtime == 12 && i == 11 || oldtime == 11 && i == 12 )
-		spinStart->setSuffix( tr(":00 PM") );
-	} else {
-	    if ( oldtime == 12 && i == 11 || oldtime == 11 && i == 12 )
-		spinStart->setSuffix( tr(":00 AM") );
-	}
-	oldtime = i;
+    if ( spinStart->suffix().contains( tr("AM"), FALSE ) ) {
+        if ( oldtime == 12 && i == 11 || oldtime == 11 && i == 12 )
+        spinStart->setSuffix( tr(":00 PM") );
+    } else {
+        if ( oldtime == 12 && i == 11 || oldtime == 11 && i == 12 )
+        spinStart->setSuffix( tr(":00 AM") );
+    }
+    oldtime = i;
     }
 }
 
 void DateBookSettings::init()
 {
     if ( ampm ) {
-	spinStart->setMinValue( 1 );
-	spinStart->setMaxValue( 12 );
-	spinStart->setValue( 12 );
-	spinStart->setSuffix( tr(":00 AM") );
-	oldtime = 12;
+    spinStart->setMinValue( 1 );
+    spinStart->setMaxValue( 12 );
+    spinStart->setValue( 12 );
+    spinStart->setSuffix( tr(":00 AM") );
+    oldtime = 12;
     } else {
-	spinStart->setMinValue( 0 );
-	spinStart->setMaxValue( 23 );
-	spinStart->setSuffix( tr(":00") );
+    spinStart->setMinValue( 0 );
+    spinStart->setMaxValue( 23 );
+    spinStart->setSuffix( tr(":00") );
     }
 }
 
@@ -123,11 +159,11 @@ void DateBookSettings::slotChangeClock( bool whichClock )
     int saveMe;
     saveMe = spinStart->value();
     if ( ampm && spinStart->suffix().contains( tr("AM"), FALSE ) ) {
-	if ( saveMe == 12 )
-	    saveMe = 0;
+    if ( saveMe == 12 )
+        saveMe = 0;
     } else if ( ampm && spinStart->suffix().contains( tr("PM"), FALSE )  ) {
-	if ( saveMe != 12 )
-	    saveMe += 12;
+    if ( saveMe != 12 )
+        saveMe += 12;
     }
     ampm = whichClock;
     init();
@@ -136,20 +172,20 @@ void DateBookSettings::slotChangeClock( bool whichClock )
 
 void DateBookSettings::setJumpToCurTime( bool bJump )
 {
-	chkJumpToCurTime->setChecked( bJump );
+    chkJumpToCurTime->setChecked( bJump );
 }
 
 bool DateBookSettings::jumpToCurTime() const
 {
-	return chkJumpToCurTime->isChecked();
+    return chkJumpToCurTime->isChecked();
 }
 
 void DateBookSettings::setRowStyle( int style )
 {
-	comboRowStyle->setCurrentItem( style );
+    comboRowStyle->setCurrentItem( style );
 }
 
 int DateBookSettings::rowStyle() const
 {
-	return comboRowStyle->currentItem();
+    return comboRowStyle->currentItem();
 }

@@ -18,7 +18,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebooksettingsbase.ui,v 1.4 2003-05-04 00:08:28 umopapisdn Exp $
+** $Id: datebooksettingsbase.ui,v 1.5 2005-03-18 12:49:14 alwin Exp $
 **
 **********************************************************************</comment>
 <widget>
@@ -59,7 +59,13 @@
             <class>QTabWidget</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>TabWidget2</cstring>
+                <cstring>TabWidget</cstring>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
             </property>
             <widget>
                 <class>QWidget</class>
@@ -668,6 +674,48 @@
                     </widget>
                 </vbox>
             </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>plugintab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>Plugins</string>
+                </attribute>
+                <vbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>2</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>2</number>
+                    </property>
+                    <widget>
+                        <class>QListView</class>
+                        <column>
+                            <property>
+                                <name>text</name>
+                                <string>Pluginlist</string>
+                            </property>
+                            <property>
+                                <name>clickable</name>
+                                <bool>true</bool>
+                            </property>
+                            <property>
+                                <name>resizeable</name>
+                                <bool>true</bool>
+                            </property>
+                        </column>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>m_PluginListView</cstring>
+                        </property>
+                    </widget>
+                </vbox>
+            </widget>
         </widget>
     </vbox>
 </widget>
@@ -706,7 +754,14 @@
         <receiver>DateBookSettingsBase</receiver>
         <slot>slot12Hour( int )</slot>
     </connection>
-    <slot access="public">slotChangeClock( bool )</slot>
+    <connection>
+        <sender>m_PluginListView</sender>
+        <signal>clicked(QListViewItem*)</signal>
+        <receiver>DateBookSettingsBase</receiver>
+        <slot>pluginItemClicked(QListViewItem *)</slot>
+    </connection>
+    <slot access="protected">pluginItemClicked(QListViewItem *)</slot>
     <slot access="public">slot12Hour( int )</slot>
+    <slot access="public">slotChangeClock( bool )</slot>
 </connections>
 </UI>

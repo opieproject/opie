@@ -192,7 +192,7 @@ void DatebookAlldayDisp::mousePressEvent(QMouseEvent*e)
     setBackgroundColor(green);
     update();
     QPopupMenu m;
-    if (!m_holiday) {
+    if (ev.isValidUid()) {
         m.insertItem( DateBookDayWidget::tr( "Edit" ), 1 );
         m.insertItem( DateBookDayWidget::tr( "Duplicate" ), 4 );
         m.insertItem( DateBookDayWidget::tr( "Delete" ), 2 );

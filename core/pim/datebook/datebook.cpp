@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.40 2005-03-17 23:54:29 alwin Exp $
+** $Id: datebook.cpp,v 1.41 2005-03-18 12:49:14 alwin Exp $
 **
 **********************************************************************/
 
@@ -246,6 +246,7 @@ void DateBook::slotSettings()
     frmSettings.setRowStyle( rowStyle );
     frmSettings.comboDefaultView->setCurrentItem(defaultView-1);
     frmSettings.comboWeekListView->setCurrentItem(weeklistviewconfig);
+    frmSettings.setPluginList(db_holiday->pluginManager(),db_holiday->pluginLoader());
 
     bool found=false;
     for (int i=0; i<(frmSettings.comboLocation->count()); i++) {
@@ -262,6 +263,9 @@ void DateBook::slotSettings()
     frmSettings.comboCategory->setCategories(defaultCategories,"Calendar", tr("Calendar"));
 
     if ( QPEApplication::execDialog( &frmSettings ) ) {
+        db_holiday->pluginManager()->save();
+        db_holiday->reloadPlugins();
+
         aPreset = frmSettings.alarmPreset();
         presetTime = frmSettings.presetTime();
         startTime = frmSettings.startTime();
@@ -1089,6 +1093,15 @@ DateBookHoliday::DateBookHoliday()
     _pluginlist.clear();
     m_pluginLoader = new Opie::Core::OPluginLoader("holidays",false);
     m_pluginLoader->setAutoDelete(true);
+    m_pluginManager = new Opie::Core::OPluginManager(m_pluginLoader);
+    m_pluginManager->load();
+
+    init();
+}
+
+void DateBookHoliday::reloadPlugins()
+{
+    deinit();
     init();
 }
 
@@ -1096,22 +1109,18 @@ DateBookHoliday::~DateBookHoliday()
 {
     deinit();
     delete m_pluginLoader;
+    delete m_pluginManager;
 }
 
 void DateBookHoliday::deinit()
 {
-/*
     QValueList<HPlugin*>::Iterator it;
     for (it=_pluginlist.begin();it!=_pluginlist.end();++it) {
         HPlugin*_pl = *it;
-        // destructs itself?
-        _pl->_if->release();
-        _pl->_lib->unload();
-        delete _pl->_lib;
+        *it = 0;
         delete _pl;
     }
     _pluginlist.clear();
-*/
 }
 
 #if 0
@@ -1123,10 +1132,9 @@ void debugLst( const Opie::Core::OPluginItem::List& lst ) {
 
 void DateBookHoliday::init()
 {
-#if 0
     deinit();
-#endif
-    Opie::Core::OPluginItem::List  lst = m_pluginLoader->allAvailable( false );
+
+    Opie::Core::OPluginItem::List  lst = m_pluginLoader->filtered(true);
 //    debugLst( lst );
     for( Opie::Core::OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it ){
         Opie::Datebook::HolidayPluginIf*hif = m_pluginLoader->load<Opie::Datebook::HolidayPluginIf>(*it,IID_HOLIDAY_PLUGIN);
@@ -1141,30 +1149,6 @@ void DateBookHoliday::init()
             }
         }
     }
-#if 0
-    QString path = QPEApplication::qpeDir() + "plugins/datebook/holiday";
-    QDir dir( path, "lib*.so" );
-    QStringList list = dir.entryList();
-    QStringList::Iterator it;
-    for (it=list.begin();it!=list.end();++it) {
-        Opie::Datebook::HolidayPluginIf*hif = 0;
-        QLibrary*lib=new QLibrary(path+"/"+*it);
-        if ((lib->queryInterface(IID_HOLIDAY_PLUGIN,(QUnknownInterface**)&hif) == QS_OK) && hif) {
-            Opie::Datebook::HolidayPlugin*pl = hif->plugin();
-            if (pl) {
-                HPlugin*_pl=new HPlugin;
-                _pl->_plugin = pl;
-                odebug << "Found holiday " << pl->description()<<oendl;
-                _pl->_lib = lib;
-                _pl->_if = hif;
-                _pluginlist.append(_pl);
-            } else {
-            }
-        } else {
-            delete lib;
-        }
-    }
-#endif
 }
 
 QStringList DateBookHoliday::holidaylist(const QDate&aDate)

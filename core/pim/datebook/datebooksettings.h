@@ -23,6 +23,17 @@
 #include "datebooksettingsbase.h"
 #include <qpe/categoryselect.h>
 
+namespace Opie {
+namespace Core {
+    class OPluginManager;
+    class OGenericPluginLoader;
+    class OPluginLoader;
+}
+namespace Ui {
+    class OPluginConfigWidget;
+}
+}
+
 class DateBookSettings : public DateBookSettingsBase
 {
     Q_OBJECT
@@ -43,13 +54,18 @@ public:
     void setRowStyle( int style );
     int rowStyle() const;
 
+    void setPluginList(Opie::Core::OPluginManager*,Opie::Core::OPluginLoader*);
 private slots:
     void slot12Hour( int );
     void slotChangeClock( bool );
+protected slots:
+    virtual void pluginItemClicked(QListViewItem *);
 
-private:
+protected:
     void init();
     bool ampm;
     int oldtime;
+    Opie::Core::OPluginManager*m_manager;
+    Opie::Core::OPluginLoader*m_loader;
 };
 #endif

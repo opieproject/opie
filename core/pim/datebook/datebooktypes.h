@@ -13,6 +13,7 @@ namespace Datebook {
 }
 namespace Core {
     class OPluginLoader;
+    class OPluginManager;
 }
 }
 
@@ -35,6 +36,11 @@ public:
     virtual QValueList<EffectiveEvent> getEffectiveEvents(const QDate &from,const QDate &to );
     virtual QValueList<EffectiveEvent> getEffectiveEvents(const QDateTime &start);
 
+    void reloadPlugins();
+
+    Opie::Core::OPluginLoader*pluginLoader(){return m_pluginLoader;}
+    Opie::Core::OPluginManager*pluginManager(){return m_pluginManager;}
+
 protected:
     void init();
     void deinit();
@@ -46,6 +52,7 @@ protected:
     };
     QValueList<HPlugin*>_pluginlist;
     Opie::Core::OPluginLoader*m_pluginLoader;
+    Opie::Core::OPluginManager*m_pluginManager;
 };
 
 class DateBookDBHoliday:virtual public DateBookDBHack {

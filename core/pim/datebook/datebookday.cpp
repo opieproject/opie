@@ -363,10 +363,11 @@ void DateBookDay::getEvents()
     QStringList hdays = _holiday_db->holidaylist(currDate);
     QStringList::Iterator sit;
     QObject* object = 0;
+
+    /* this way we make sure that holiday dummy events are always
+       on top of the widgetlist. */
     for (sit=hdays.begin();sit!=hdays.end();++sit) {
-        object = m_allDays->addHoliday(*sit);
-        if (!object) continue;
-        /* not to do something with it */
+        m_allDays->addHoliday(*sit);
     }
     QValueList<EffectiveEvent> eventList = db->getEffectiveEventsNoHoliday( currDate, currDate );
     QValueListIterator<EffectiveEvent> it;

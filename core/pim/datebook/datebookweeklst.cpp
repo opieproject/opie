@@ -215,7 +215,12 @@ void DateBookWeekLstEvent::beamMe()
 }
 void DateBookWeekLstEvent::mousePressEvent( QMouseEvent *e )
 {
+    if (!event.event().isValidUid()) {
+        // this is just such a holiday event.
+        return;
+    }
     popmenue = new QPopupMenu;
+
     popmenue->insertItem( tr( "Edit" ), this, SLOT(editMe()));
     popmenue->insertItem( tr( "Duplicate" ), this, SLOT(duplicateMe()));
     popmenue->insertItem( tr( "Delete" ), this, SLOT(deleteMe()));
