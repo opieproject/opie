@@ -1,7 +1,7 @@
 Package: opie-packagemanager
 Files: plugins/application/libpackagemanager.so* bin/packagemanager pics/packagemanager apps/Settings/packagemanager.desktop
 Priority: optional
-Section: Settings
+Section: opie/settings
 Depends: task-opie-minimal
 Replaces: packagemanager
 Architecture: arm
