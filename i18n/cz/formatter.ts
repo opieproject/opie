@@ -3,165 +3,177 @@
     <name>FormatterApp</name>
     <message>
         <source>Formatter</source>
-        <translation type="unfinished"></translation>
+        <translation>Formatter</translation>
     </message>
     <message>
         <source>Storage Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ média</translation>
     </message>
     <message>
         <source>File Systems</source>
-        <translation type="unfinished"></translation>
+        <translation>Systémy souborů</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formátovat</translation>
     </message>
     <message>
         <source>Main</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavní</translation>
     </message>
     <message>
         <source>CAUTION:
 Changing parameters on this
 page may cause your system
 to stop functioning properly!</source>
-        <translation type="unfinished"></translation>
+        <translation>VAROVÁNÍ:
+Změnou parametrů na této
+stránce můžete způsobit
+nefunkčnost vašeho systému!</translation>
     </message>
     <message>
         <source>Edit fstab</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit fstab</translation>
     </message>
     <message>
         <source>Check Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Zkontrolovat disk</translation>
     </message>
     <message>
         <source>Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Zařízení</translation>
     </message>
     <message>
         <source>Mount Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Místo mountování</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozšířené</translation>
     </message>
     <message>
         <source>Format?</source>
-        <translation type="unfinished"></translation>
+        <translation>Formátovat?</translation>
     </message>
     <message>
         <source>Really format
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu formátovat
+</translation>
     </message>
     <message>
         <source>
 with %1 filesystem?
 You will loose all data!!</source>
-        <translation type="unfinished"></translation>
+        <translation>se systémem souborů %1 ?
+Přijdete o všechna data!!</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ano</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne</translation>
     </message>
     <message>
         <source>Could not format.
 Unknown type</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze naformátovat.
+Neznámý typ</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Formatter Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Výstup Formatteru</translation>
     </message>
     <message>
         <source>Trying to umount %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zkouším umount %1.</translation>
     </message>
     <message>
         <source>umount failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>umount selhal!</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>Could not umount.
 Device is busy!</source>
-        <translation type="unfinished"></translation>
+        <translation>Zařízení nelze odmontovat.
+Je používáno!</translation>
     </message>
     <message>
         <source>Trying to format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zkouším formátovat.</translation>
     </message>
     <message>
         <source>No such device!</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznámé zařízení!</translation>
     </message>
     <message>
         <source>
 has been successfully formatted.</source>
-        <translation type="unfinished"></translation>
+        <translation>bylo úspěšně naformátováno.</translation>
     </message>
     <message>
         <source>Trying to mount %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zkouším mount %1.</translation>
     </message>
     <message>
         <source>Card mount failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Mount karty selhal!</translation>
     </message>
     <message>
         <source>%1
 has been successfully mounted.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1
+bylo úspěšně namontováno.</translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nyní můžete zavřít okno s výstupem.</translation>
     </message>
     <message>
         <source>Internal</source>
-        <translation type="unfinished"></translation>
+        <translation>Interní</translation>
     </message>
     <message>
         <source>Storage Type: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ média: %1</translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Celkově: %1 kB ( %d mB)
+</translation>
     </message>
     <message>
         <source>Used: %1 kB ( %d mB)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Použito: %1 kB ( %d mB)
+</translation>
     </message>
     <message>
         <source>Available: %1 kB ( %d mB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Volno: %1 kB ( %d mB)</translation>
     </message>
     <message>
         <source>Type: %1
 Formatted with %2
 %3, %4, %5</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ: %1
+formátováno s %2
+%3, %4, %5</translation>
     </message>
     <message>
         <source>Trying to umount.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zkouším umount %1.</translation>
     </message>
 </context>
 </TS>

@@ -3,245 +3,245 @@
     <name>FileBrowser</name>
     <message>
         <source>File Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Správce souborů</translation>
     </message>
     <message>
         <source>Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Dir</translation>
     </message>
     <message>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>Setřídit</translation>
     </message>
     <message>
         <source>by Name </source>
-        <translation type="unfinished"></translation>
+        <translation>dle jména</translation>
     </message>
     <message>
         <source>by Size </source>
-        <translation type="unfinished"></translation>
+        <translation>dle velikosti</translation>
     </message>
     <message>
         <source>by Date </source>
-        <translation type="unfinished"></translation>
+        <translation>dle data</translation>
     </message>
     <message>
         <source>by Type </source>
-        <translation type="unfinished"></translation>
+        <translation>dle typu</translation>
     </message>
     <message>
         <source>Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzestupně</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Skryté</translation>
     </message>
     <message>
         <source>Symlinks</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbolické odkazy</translation>
     </message>
     <message>
         <source>Thumbnails</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšeniny</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat</translation>
     </message>
     <message>
         <source>Previous dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Předchozí adresář</translation>
     </message>
     <message>
         <source>Parent dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadřazený adresář</translation>
     </message>
     <message>
         <source>New folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Nová složka</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyjmout</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovat</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložit</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
 </context>
 <context>
     <name>FileView</name>
     <message>
         <source>File Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Správce souborů</translation>
     </message>
     <message>
         <source>Can&apos;t show /dev/ directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze zobrazit /dev/ adresář.</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <source>Rename file</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenovat soubor</translation>
     </message>
     <message>
         <source>Rename failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenování selhalo!</translation>
     </message>
     <message>
         <source>Paste file</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložit soubor</translation>
     </message>
     <message>
         <source>Paste failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložení selhalo!</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cut file</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyjmout soubor</translation>
     </message>
     <message>
         <source>Cut failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyjmutí selhalo!</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit</translation>
     </message>
     <message>
         <source>Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ano</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne</translation>
     </message>
     <message>
         <source>Delete failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranění selhalo!</translation>
     </message>
     <message>
         <source>New folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Nová složka</translation>
     </message>
     <message>
         <source>Folder creation failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Selhalo vytvoření složky!</translation>
     </message>
     <message>
         <source>Launch Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustit aplikaci</translation>
     </message>
     <message>
         <source>Launch failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Spuštění selhalo!</translation>
     </message>
     <message>
         <source>Add to Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat k dokumentům</translation>
     </message>
     <message>
         <source>Run</source>
-        <translation type="unfinished"></translation>
+        <translation>Sputit</translation>
     </message>
     <message>
         <source>View as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit jako text</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenovat</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyjmout</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovat</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložit</translation>
     </message>
     <message>
         <source>Change Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit práva</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat vše</translation>
     </message>
     <message>
         <source>Deselect all</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrušit výběr všeho</translation>
     </message>
     <message>
         <source>Change permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit práva</translation>
     </message>
 </context>
 <context>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení práv souboru</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit práva souboru pro:</translation>
     </message>
     <message>
         <source>owner</source>
-        <translation type="unfinished"></translation>
+        <translation>vlastník</translation>
     </message>
     <message>
         <source>group</source>
-        <translation type="unfinished"></translation>
+        <translation>skupina</translation>
     </message>
     <message>
         <source>others</source>
-        <translation type="unfinished"></translation>
+        <translation>ostatní</translation>
     </message>
     <message>
         <source>Owner</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastník</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Skupina</translation>
     </message>
     <message>
         <source>read</source>
-        <translation type="unfinished"></translation>
+        <translation>čtení</translation>
     </message>
     <message>
         <source>write</source>
-        <translation type="unfinished"></translation>
+        <translation>zápis</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>spuštění</translation>
     </message>
 </context>
 </TS>

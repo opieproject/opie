@@ -3,207 +3,207 @@
     <name>GSMToolBase</name>
     <message>
         <source>GSM Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>GSM Tool</translation>
     </message>
     <message>
         <source>Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Zařízení</translation>
     </message>
     <message>
         <source>Modem Device:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zařízení modemu:</translation>
     </message>
     <message>
         <source>/dev/ircomm0</source>
-        <translation type="unfinished"></translation>
+        <translation>/dev/ircomm0</translation>
     </message>
     <message>
         <source>/dev/ttySA0</source>
-        <translation type="unfinished"></translation>
+        <translation>/dev/ttySA0</translation>
     </message>
     <message>
         <source>/dev/ttyS0</source>
-        <translation type="unfinished"></translation>
+        <translation>/dev/ttyS0</translation>
     </message>
     <message>
         <source>Baud Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rychlost:</translation>
     </message>
     <message>
         <source>300</source>
-        <translation type="unfinished"></translation>
+        <translation>300</translation>
     </message>
     <message>
         <source>600</source>
-        <translation type="unfinished"></translation>
+        <translation>600</translation>
     </message>
     <message>
         <source>1200</source>
-        <translation type="unfinished"></translation>
+        <translation>1200</translation>
     </message>
     <message>
         <source>2400</source>
-        <translation type="unfinished"></translation>
+        <translation>2400</translation>
     </message>
     <message>
         <source>4800</source>
-        <translation type="unfinished"></translation>
+        <translation>4800</translation>
     </message>
     <message>
         <source>9600</source>
-        <translation type="unfinished"></translation>
+        <translation>9600</translation>
     </message>
     <message>
         <source>19200</source>
-        <translation type="unfinished"></translation>
+        <translation>19200</translation>
     </message>
     <message>
         <source>38400</source>
-        <translation type="unfinished"></translation>
+        <translation>38400</translation>
     </message>
     <message>
         <source>57600</source>
-        <translation type="unfinished"></translation>
+        <translation>57600</translation>
     </message>
     <message>
         <source>115200</source>
-        <translation type="unfinished"></translation>
+        <translation>115200</translation>
     </message>
     <message>
         <source>230400</source>
-        <translation type="unfinished"></translation>
+        <translation>230400</translation>
     </message>
     <message>
         <source>460800</source>
-        <translation type="unfinished"></translation>
+        <translation>460800</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojit</translation>
     </message>
     <message>
         <source>Manufacturer:</source>
-        <translation type="unfinished"></translation>
+        <translation>Výrobce:</translation>
     </message>
     <message>
         <source>Model:</source>
-        <translation type="unfinished"></translation>
+        <translation>Model:</translation>
     </message>
     <message>
         <source>Revision:</source>
-        <translation type="unfinished"></translation>
+        <translation>Revize:</translation>
     </message>
     <message>
         <source>Serial Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sériové číslo:</translation>
     </message>
     <message>
         <source>Network</source>
-        <translation type="unfinished"></translation>
+        <translation>Síť</translation>
     </message>
     <message>
         <source>Network Status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stav sítě:</translation>
     </message>
     <message>
         <source>Current Network:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuální síť:</translation>
     </message>
     <message>
         <source>Signal Strength:</source>
-        <translation type="unfinished"></translation>
+        <translation>Síla signálu:</translation>
     </message>
     <message>
         <source>dBm</source>
-        <translation type="unfinished"></translation>
+        <translation>dBm</translation>
     </message>
     <message>
         <source>Available Networks:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sítě k dispozici:</translation>
     </message>
     <message>
         <source>Scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Skanovat</translation>
     </message>
     <message>
         <source>Network Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Jméno sítě</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Stav</translation>
     </message>
     <message>
         <source>No.</source>
-        <translation type="unfinished"></translation>
+        <translation>Č.</translation>
     </message>
     <message>
         <source>Shortname</source>
-        <translation type="unfinished"></translation>
+        <translation>Zkrácený název</translation>
     </message>
     <message>
         <source>Register</source>
-        <translation type="unfinished"></translation>
+        <translation>Registrovat</translation>
     </message>
     <message>
         <source>SMS</source>
-        <translation type="unfinished"></translation>
+        <translation>SMS</translation>
     </message>
     <message>
         <source>Store:</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit:</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Žádný</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ:</translation>
     </message>
     <message>
         <source>Incoming</source>
-        <translation type="unfinished"></translation>
+        <translation>Příchozí</translation>
     </message>
     <message>
         <source>Outgoing</source>
-        <translation type="unfinished"></translation>
+        <translation>Odchozí</translation>
     </message>
     <message>
         <source>Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Poslat</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nová</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Vymazat</translation>
     </message>
     <message>
         <source>To:</source>
-        <translation type="unfinished"></translation>
+        <translation>Komu:</translation>
     </message>
     <message>
         <source>Message:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zpráva:</translation>
     </message>
 </context>
 </TS>

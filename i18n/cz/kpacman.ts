@@ -3,66 +3,66 @@
     <name>Keys</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Storno</translation>
     </message>
     <message>
         <source>Change Direction Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit směrové klávesy</translation>
     </message>
     <message>
         <source>Undefined key</source>
-        <translation type="unfinished"></translation>
+        <translation>Nedefinovaná klávesa</translation>
     </message>
 </context>
 <context>
     <name>Kpacman</name>
     <message>
         <source>KPacman</source>
-        <translation type="unfinished"></translation>
+        <translation>KPacman</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nový</translation>
     </message>
     <message>
         <source>&amp;Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pauza</translation>
     </message>
     <message>
         <source>&amp;Hall of fame</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Dvorana slávy</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ukončit</translation>
     </message>
     <message>
         <source>&amp;Hide Mousecursor</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Skrýt ukazatel myši</translation>
     </message>
     <message>
         <source>&amp;Select graphic scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vybrat grafické schéma</translation>
     </message>
     <message>
         <source>&amp;Pause in Background</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pauznout na pozadí</translation>
     </message>
     <message>
         <source>&amp;Continue in Foreground</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pokračovat na popředí</translation>
     </message>
     <message>
         <source>Change &amp;keys...</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit &amp;klávesy...</translation>
     </message>
     <message>
         <source>@PACKAGE@ - @VERSION@
@@ -79,11 +79,24 @@ The design was strongly influenced by the pacman
 I like to thank my girlfriend Elke Krueers for
 the last 10 years of her friendship.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>@PACKAGE@ - @VERSION@
+
+Joerg Thoennissen (joe@dsite.de)
+
+Hra Pacman pro KDE Desktop
+
+Program je založen na zdrojovém kódu hry ksnake
+od Michel Filippi (mfilippi@sade.rhein-main.de).
+Design je značně ovlivněn hrou pacman
+(c) 1980 MIDWAY MFG.CO.
+
+Chci poděkovat mé přítelkyni Elke Krueers
+za 10 let našeho přátelství.
+</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nápověda</translation>
     </message>
 </context>
 <context>
@@ -93,121 +106,120 @@ the last 10 years of her friendship.
 
 The file &apos;@FONTNAME@&apos; does not exist,
 or is of an unknown format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitfont nelze sestavit.
+
+Soubor &apos;@FONTNAME@&apos; neexistuje,
+nebo má neznámý formát.</translation>
     </message>
 </context>
 <context>
     <name>Referee</name>
     <message>
         <source>GAME  OVER</source>
-        <translation type="unfinished"></translation>
+        <translation>KONEC HRY</translation>
     </message>
     <message>
         <source>PLAYER ONE</source>
-        <translation type="unfinished"></translation>
+        <translation>HRÁČ 1</translation>
     </message>
     <message>
         <source>READY!</source>
-        <translation type="unfinished"></translation>
+        <translation>PŘIPRAVEN!</translation>
     </message>
     <message>
         <source>PAUSED</source>
-        <translation type="unfinished"></translation>
+        <translation>PAUZA</translation>
     </message>
     <message>
         <source>CHARACTER</source>
-        <translation type="unfinished"></translation>
+        <translation>POSTAVA</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
     <message>
         <source>NICKNAME</source>
-        <translation type="unfinished"></translation>
+        <translation>PŘEZDÍVKA</translation>
     </message>
     <message>
         <source>-SHADOW</source>
-        <translation type="unfinished"></translation>
+        <translation>-SHADOW</translation>
     </message>
     <message>
         <source>&quot;BLINKY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;BLINKY&quot;</translation>
     </message>
     <message>
         <source>-SPEEDY</source>
-        <translation type="unfinished"></translation>
+        <translation>-SPEEDY</translation>
     </message>
     <message>
         <source>&quot;PINKY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;PINKY&quot;</translation>
     </message>
     <message>
         <source>-BASHFUL</source>
-        <translation type="unfinished"></translation>
+        <translation>-BASHFUL</translation>
     </message>
     <message>
         <source>&quot;INKY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;INKY&quot;</translation>
     </message>
     <message>
         <source>-POKEY</source>
-        <translation type="unfinished"></translation>
+        <translation>-POKEY</translation>
     </message>
     <message>
         <source>&quot;CLYDE&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;CLYDE&quot;</translation>
     </message>
     <message>
         <source>QTOPIA PORT: CATALIN CLIMOV</source>
-        <translation type="unfinished"></translation>
+        <translation>QTOPIA PORT: CATALIN CLIMOV</translation>
     </message>
     <message>
         <source>PRESS CURSOR TO START</source>
-        <translation type="unfinished"></translation>
+        <translation>PRO START STISKNĚTE KURZOR</translation>
     </message>
 </context>
 <context>
     <name>Score</name>
     <message>
         <source>  1UP </source>
-        <translation type="unfinished"></translation>
+        <translation>1HR</translation>
     </message>
     <message>
         <source> HIGH SCORE </source>
-        <translation type="unfinished"></translation>
+        <translation>SKÓRE</translation>
     </message>
     <message>
         <source>  2UP </source>
-        <translation type="unfinished"></translation>
+        <translation>2HR</translation>
     </message>
     <message>
         <source>     CONGRATULATIONS      </source>
-        <translation type="unfinished"></translation>
+        <translation>GRATULUJI</translation>
     </message>
     <message>
         <source>    YOU HAVE ARCHIEVED    </source>
-        <translation type="unfinished"></translation>
+        <translation>JSEŠ ZAPSÁN</translation>
     </message>
     <message>
         <source>  A SCORE IN THE TOP 10.  </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
+        <translation>SKÓRE V NEJLEPŠÍ 10.</translation>
     </message>
     <message>
         <source>RNK   SCORE  NAME   DATE</source>
-        <translation type="unfinished"></translation>
+        <translation>RNK   SKÓRE  JMÉNO  DATUM</translation>
     </message>
     <message>
         <source>PAUSED</source>
-        <translation type="unfinished"></translation>
+        <translation>PAUZA</translation>
     </message>
     <message>
         <source>@YY@/@MM@/@DD@</source>
-        <translation type="unfinished"></translation>
+        <translation>@YY@/@MM@/@DD@</translation>
     </message>
 </context>
 <context>
@@ -217,11 +229,14 @@ or is of an unknown format.</source>
 
 The file &apos;@PIXMAPNAME@&apos; does not exist,
 or is of an unknown format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pixmapu nelze sestavit.
+
+Soubor &apos;@PIXMAPNAME@&apos; neexistuje,
+nebo má neznámý formát.</translation>
     </message>
     <message>
         <source>Initialization Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba inicializace</translation>
     </message>
 </context>
 </TS>

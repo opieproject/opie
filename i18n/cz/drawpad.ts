@@ -3,441 +3,446 @@
     <name>DrawPad</name>
     <message>
         <source>Delete All</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat vše</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Import</translation>
     </message>
     <message>
         <source>Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>Import...</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Export</translation>
     </message>
     <message>
         <source>Export...</source>
-        <translation type="unfinished"></translation>
+        <translation>Export...</translation>
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>Náhled zmenšenin</translation>
     </message>
     <message>
         <source>Thumbnail View...</source>
-        <translation type="unfinished"></translation>
+        <translation>Náhled zmenšenin...</translation>
     </message>
     <message>
         <source>Page Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informace o stránce</translation>
     </message>
     <message>
         <source>Page Information...</source>
-        <translation type="unfinished"></translation>
+        <translation>Informace o stránce...</translation>
     </message>
     <message>
         <source>Anti-Aliasing</source>
-        <translation type="unfinished"></translation>
+        <translation>Anti-Aliasing</translation>
     </message>
     <message>
         <source>Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástroje</translation>
     </message>
     <message>
         <source>New Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Nová stránka</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro nový list klikněte sem.</translation>
     </message>
     <message>
         <source>Clear Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Vymazat stránku</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro vymazání tohoto listu klikněte sem.</translation>
     </message>
     <message>
         <source>Delete Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat stránku</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro odstranění tohoto listu klikněte sem.</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>Zpět</translation>
     </message>
     <message>
         <source>Click here to undo the last action.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro zrušení poslední akce klikněte sem.</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>Znovu</translation>
     </message>
     <message>
         <source>Click here to re-perform the last action.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro zopakování poslední akce klikněte sem.</translation>
     </message>
     <message>
         <source>First Page</source>
-        <translation type="unfinished"></translation>
+        <translation>První strana</translation>
     </message>
     <message>
         <source>Click here to view the first page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro zobrazení první strany klikněte sem.</translation>
     </message>
     <message>
         <source>Previous Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Předchozí strana</translation>
     </message>
     <message>
         <source>Click here to view the previous page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro zobrazení předchozí strany klikněte sem.</translation>
     </message>
     <message>
         <source>Next Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Další strana</translation>
     </message>
     <message>
         <source>Click here to view the next page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro zobrazení další strany klikněte sem.</translation>
     </message>
     <message>
         <source>Last Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Poslední strana</translation>
     </message>
     <message>
         <source>Click here to view the last page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro zobrazení poslední strany klikněte sem.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw lines.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknutím sem vyberete jeden z nástrojů pro kreslení čar.</translation>
     </message>
     <message>
         <source>Draw Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Kreslit bod</translation>
     </message>
     <message>
         <source>Draw Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Kreslit čáru</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw rectangles.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknutím sem vyberete jeden z nástrojů pro kreslení obdélníků.</translation>
     </message>
     <message>
         <source>Draw Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Kreslit obdélník</translation>
     </message>
     <message>
         <source>Draw Filled Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Kreslit vyplněný obdélník</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw ellipses.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknutím sem vyberete jeden z nástrojů pro kreslení elips.</translation>
     </message>
     <message>
         <source>Draw Ellipse</source>
-        <translation type="unfinished"></translation>
+        <translation>Kreslit elipsu</translation>
     </message>
     <message>
         <source>Draw Filled Ellipse</source>
-        <translation type="unfinished"></translation>
+        <translation>Kreslit vyplněnou elipsu</translation>
     </message>
     <message>
         <source>Insert Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložit text</translation>
     </message>
     <message>
         <source>Click here to select the text drawing tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj na psaní textů vyberete kliknutím sem.</translation>
     </message>
     <message>
         <source>Fill Region</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyplnit oblast</translation>
     </message>
     <message>
         <source>Click here to select the fill tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj na výplně vyberete kliknutím sem.</translation>
     </message>
     <message>
         <source>Erase Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Vymazat bod</translation>
     </message>
     <message>
         <source>Click here to select the eraser tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj na mazání vyberete kliknutím sem.</translation>
     </message>
     <message>
         <source>Pen Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Šířka pera</translation>
     </message>
     <message>
         <source>Click here to select the width of the drawing pen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení šířky pera vyberete kliknutím sem.</translation>
     </message>
     <message>
         <source>Click here to select the color used when drawing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Barvu, kterou kreslíte, vyberete kliknutím sem.</translation>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva pera</translation>
     </message>
     <message>
         <source>Click here to select the color used when filling in areas.</source>
-        <translation type="unfinished"></translation>
+        <translation>Barvu pro výplně vyberete kliknutím sem.</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva výplně</translation>
     </message>
     <message>
         <source>Do you want to clear
 the current page?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu chcete vyčistit
+aktuální stránku?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ano</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne</translation>
     </message>
     <message>
         <source>Do you want to delete
 the current page?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu chcete smazat
+aktuální stránku?</translation>
     </message>
     <message>
         <source>DrawPad - Page %1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>DrawPad - Strana %1/%2</translation>
     </message>
     <message>
         <source>Do you want to delete
 all the pages?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu chcete smazat
+všechny stránky?</translation>
     </message>
 </context>
 <context>
     <name>ExportDialog</name>
     <message>
         <source>DrawPad - Export</source>
-        <translation type="unfinished"></translation>
+        <translation>DrawPad - Export</translation>
     </message>
     <message>
         <source>Page Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Výběr stran</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Všechny</translation>
     </message>
     <message>
         <source>Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuální</translation>
     </message>
     <message>
         <source>Range</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozsah</translation>
     </message>
     <message>
         <source>To:</source>
-        <translation type="unfinished"></translation>
+        <translation>Do:</translation>
     </message>
     <message>
         <source>Export As</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportovat jako</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Jméno:</translation>
     </message>
     <message>
         <source>Format:</source>
-        <translation type="unfinished"></translation>
+        <translation>Formát:</translation>
     </message>
     <message>
         <source>All Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Všechny obrázky</translation>
     </message>
 </context>
 <context>
     <name>ImportDialog</name>
     <message>
         <source>DrawPad - Import</source>
-        <translation type="unfinished"></translation>
+        <translation>DrawPad - Import</translation>
     </message>
     <message>
         <source>All images</source>
-        <translation type="unfinished"></translation>
+        <translation>Všechny obrázky</translation>
     </message>
     <message>
         <source>Automatic preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatický náhled</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Náhled</translation>
     </message>
 </context>
 <context>
     <name>NewPageDialog</name>
     <message>
         <source>New Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Nová strana</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Obecné</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název:</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Šířka:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Výška:</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozadí</translation>
     </message>
     <message>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>Bílé</translation>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva pera</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva výplně</translation>
     </message>
 </context>
 <context>
     <name>PageInformationDialog</name>
     <message>
         <source>Page Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informace o stránce</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Obecné</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název:</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum:</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Šířka:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název:</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Title: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Název: %1</translation>
     </message>
     <message>
         <source>Dimension: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozměr: %1x%2</translation>
     </message>
     <message>
         <source>Date: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Název: %1</translation>
     </message>
 </context>
 <context>
     <name>TextToolDialog</name>
     <message>
         <source>Insert Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložit text</translation>
     </message>
 </context>
 <context>
     <name>ThumbnailView</name>
     <message>
         <source>DrawPad - Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>DrawPad - Náhled zmenšenin</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro nový list klikněte sem.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro vymazání tohoto listu klikněte sem.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro odstranění tohoto listu klikněte sem.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet up one position in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro posunutí listu o jednu pozici nahoru klikněte sem.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet down one position in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro posunutí listu o jednu pozici dolů klikněte sem.</translation>
     </message>
     <message>
         <source>Clear Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyčistit stránku</translation>
     </message>
     <message>
         <source>Do you want to clear
 the selected page?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu chcete vyčistit
+označenou stránku?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ano</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne</translation>
     </message>
     <message>
         <source>Delete Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Vymazat stranu</translation>
     </message>
     <message>
         <source>Do you want to delete
 the selected page?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu chcete smazat
+označenou stránku?</translation>
     </message>
 </context>
 </TS>
