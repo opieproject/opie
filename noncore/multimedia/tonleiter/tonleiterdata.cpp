@@ -1,5 +1,7 @@
 #include "tonleiterdata.h"
 
+#include <qpe/config.h>
+
 TonleiterData::TonleiterData(QObject* parent)
 :QObject(parent)
 {
@@ -47,6 +49,7 @@ void TonleiterData::setDrawNames(bool dn)
 //****************************************************************************
 void TonleiterData::loadData()
 {
+/*
     QValueList<int> strings1;
     strings1.append(Note::getNoteFromName("B",0));
     strings1.append(Note::getNoteFromName("E",1));
@@ -88,10 +91,71 @@ void TonleiterData::loadData()
     currentScaleID=0;
 
     currentNote=Note::getNoteFromName("A",0);
+*/
+    Config load("Tonleiter");
+    load.setGroup("General");
+    currentNote=load.readNumEntry("currentNote");
+    drawnames=load.readBoolEntry("drawnames");
+    currentInstrumentID=load.readNumEntry("currentInstrumentID");
+    currentScaleID=load.readNumEntry("currentScaleID");
+
+    load.setGroup("Instrument");
+    int noOfInstr=load.readNumEntry("noOfInstruments",0);
+    for(int i=0;i<noOfInstr;i++)
+    {
+        QStringList instlist=load.readListEntry("Inst"+QString::number(i),';');
+        QValueList<int> strings;
+        for(int st=2;st<(int)instlist.count();st++)
+            strings.append(instlist[st].toInt());
+        instruments.append(Instrument(instlist[0],instlist[1].toInt(),strings));
+    }
+
+    load.setGroup("Scale");
+    int scaleno=load.readNumEntry("noOfScales",0);
+    for(int s=0;s<scaleno;s++)
+    {
+        QStringList scalelist=load.readListEntry("Scale"+QString::number(s),';');
+        QValueList<int> halftones;
+        for(int ht=1;ht<(int)scalelist.count();ht++)
+            halftones.append(scalelist[ht].toInt());
+        scales.append(Scale(scalelist[0],halftones));
+    }
+
 }
 //****************************************************************************
 void TonleiterData::saveData()
 {
+    Config save("Tonleiter");
+    save.setGroup("General");
+    save.writeEntry("currentNote",currentNote);
+    save.writeEntry("drawnames",drawnames);
+    save.writeEntry("currentInstrumentID",currentInstrumentID);
+    save.writeEntry("currentScaleID",currentScaleID);
+
+    save.setGroup("Instrument");
+    save.writeEntry("noOfInstruments",noOfInstruments());
+    for(int i=0;i<noOfInstruments();i++)
+    {
+        QStringList instlist;
+        Instrument inst=getInstrument(i);
+        instlist.append(inst.instName());
+        instlist.append(QString::number(inst.noOfFrets()));
+        for(int st=0;st<inst.noOfStrings();st++)
+            instlist.append(QString::number(inst.string(st)));
+        save.writeEntry("Inst"+QString::number(i),instlist,';');
+    }
+
+    save.setGroup("Scale");
+    save.writeEntry("noOfScales",noOfScales());
+    for(int s=0;s<noOfScales();s++)
+    {
+        QStringList scalelist;
+        Scale scale=getScale(s);
+        scalelist.append(scale.scaleName());
+        for(int ht=0;ht<scale.noOfHaltones();ht++)
+            scalelist.append(QString::number(scale.getHalfTone(ht)));
+        save.writeEntry("Scale"+QString::number(s),scalelist,';');
+    }
 }
 //****************************************************************************
 int TonleiterData::noOfInstruments()
