@@ -19,15 +19,9 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags f) : QMainWindo
     QAction *a = new QAction(tr("New connection"), Resource::loadPixmap("pass"), QString::null, 0, this, 0);
     connect(a, SIGNAL(activated()), this, SLOT(newConnection()));
     a->addTo(irc);
-    
-    m_joinAction = new QAction(tr("Join channel"), Resource::loadPixmap("forward"), QString::null, 0, this, 0);
-    m_joinAction->setEnabled(FALSE);
-    connect(m_joinAction, SIGNAL(activated()), this, SLOT(join()));
-    m_joinAction->addTo(irc);
 }
 
 void MainWindow::tabSelected(QWidget *) {
-    m_joinAction->setEnabled(TRUE);
 }
 
 void MainWindow::closeTab() {
@@ -36,13 +30,6 @@ void MainWindow::closeTab() {
     IRCTab *tab = (IRCTab *)m_tabWidget->currentPage();
     if (tab) {
         tab->remove();
-    }
-}
-
-void MainWindow::join() {
-    IRCTab *tab = (IRCTab *)m_tabWidget->currentPage();
-    if (tab) {
-        tab->session()->join("#opie.de");
     }
 }
 

@@ -37,11 +37,9 @@ public:
 protected slots:
     void newConnection();
     void closeTab();
-    void join();
     void tabSelected(QWidget *widget);
 protected:
     QTabWidget *m_tabWidget;
-    QAction    *m_joinAction;
 };
 
 #endif /* __MAINWINDOW_H */

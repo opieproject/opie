@@ -11,7 +11,7 @@ IRCTab::IRCTab(QWidget *parent, const char *name, WFlags f) : QWidget(parent, na
     descLayout->addWidget(m_description);
     descLayout->setStretchFactor(m_description, 5);
     QPushButton *close = new QPushButton(this);
-    close->setPixmap(Resource::loadPixmap("opieirc/close"));
+    close->setPixmap(Resource::loadPixmap("close"));
     connect(close, SIGNAL(clicked()), this, SLOT(remove()));
     descLayout->addWidget(close);
     descLayout->setStretchFactor(m_description, 1);
