@@ -540,6 +540,7 @@ void TextEdit::fileOpen()
 void TextEdit::newFileOpen()
 {
     browseForFiles=new fileBrowser(this,"Open File",TRUE,0, "*");
+    browseForFiles->showMaximized();
     if( browseForFiles->exec() != -1 ) {
         QString selFile= browseForFiles->selectedFileName;
         QStringList fileList=browseForFiles->fileList;

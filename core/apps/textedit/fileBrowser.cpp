@@ -20,6 +20,7 @@
 #include <qpushbutton.h>
 #include <qfile.h>
 #include <qmessagebox.h>
+#include <qlayout.h>
 #include <unistd.h>
 
 
@@ -28,32 +29,45 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
-  setName( "fileBrowser" );
-    resize( 240, 280 );
+        setName( "fileBrowser" );
     setCaption(tr( name ) );
     filterStr=filter;
 
+    QGridLayout *layout = new QGridLayout( this );
+    layout->setSpacing( 4 );
+    layout->setMargin( 4 );
+
+
     dirLabel = new QLabel(this, "DirLabel");
     dirLabel->setText(currentDir.canonicalPath());
-    dirLabel->setGeometry(10,20,230,15);
-
-    homeButton = new QPushButton( Resource::loadIconSet("home"),"",this,"homeButton");
-    homeButton->setGeometry(200,4,25,25);
-    connect(homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
-    homeButton->setFlat(TRUE);
-
-    docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",this,"docsButton");
-    docButton->setGeometry(170,4,25,25);
-    connect( docButton,SIGNAL(released()),this,SLOT( docButtonPushed()) );
-    docButton->setFlat(TRUE);
+    dirLabel->setMinimumSize( QSize( 50, 15 ) );
+    dirLabel->setMaximumSize( QSize( 250, 15 ) );
+    layout->addWidget( dirLabel, 0, 0 );
 
     hideButton = new QPushButton( Resource::loadIconSet("s_hidden"),"",this,"hideButton");
-    hideButton->setGeometry(140,4,25,25);
+    hideButton->setMinimumSize( QSize( 25, 25 ) );
+    hideButton->setMaximumSize( QSize( 25, 25 ) );
     connect( hideButton,SIGNAL(toggled(bool)),this,SLOT( hideButtonPushed(bool)) );
     hideButton->setToggleButton(TRUE);
     hideButton->setFlat(TRUE);
-    
+    layout->addWidget( hideButton, 0, 1 );
+
+    docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",this,"docsButton");
+    docButton->setMinimumSize( QSize( 25, 25 ) );
+    docButton->setMaximumSize( QSize( 25, 25 ) );
+    connect( docButton,SIGNAL(released()),this,SLOT( docButtonPushed()) );
+    docButton->setFlat(TRUE);
+    layout->addWidget( docButton, 0, 2 );
+
+    homeButton = new QPushButton( Resource::loadIconSet("home"),"",this,"homeButton");
+    homeButton->setMinimumSize( QSize( 25, 25 ) );
+    homeButton->setMaximumSize( QSize( 25, 25 ) );
+    connect(homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
+    homeButton->setFlat(TRUE);
+    layout->addWidget( homeButton, 0, 3 );
+
     ListView = new QListView( this, "ListView" );
+    ListView->setMinimumSize( QSize( 100, 25 ) );
     ListView->addColumn( tr( "Name" ) );
     ListView->setColumnWidth(0,140);
     ListView->setSorting( 2, FALSE);
@@ -66,7 +80,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
 //      ListView->setSelectionMode(QListView::Extended);
 
     ListView->setAllColumnsShowFocus( TRUE );
-    ListView->setGeometry( QRect( 10, 35, 220, 240 ) );
+    layout->addMultiCellWidget( ListView, 1, 1, 0, 3 );
 
     // signals and slots connections
     connect( ListView, SIGNAL(doubleClicked( QListViewItem*)), SLOT(listDoubleClicked(QListViewItem *)) );
@@ -75,7 +89,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden */| QDir::All);
 
     populateList();
-    move(0,15); 
+    move(0,15);
 }
 
 fileBrowser::~fileBrowser()
