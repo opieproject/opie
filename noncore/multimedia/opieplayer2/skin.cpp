@@ -22,6 +22,7 @@
 
 #include "skin.h"
 #include "singleton.h"
+#include <opie2/odebug.h>
 
 #include <qcache.h>
 #include <qtimer.h>

@@ -19,6 +19,7 @@
 
 #include "threadutil.h"
 
+#include <opie2/odebug.h>
 #include <qsocketnotifier.h>
 
 #include <pthread.h>
