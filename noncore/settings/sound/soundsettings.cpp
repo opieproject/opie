@@ -31,6 +31,12 @@
 #include <qlineedit.h>
 #include <qcombobox.h>
 
+#include <sys/utsname.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <sys/stat.h>
 
 SoundSettings::SoundSettings( QWidget* parent,  const char* name, WFlags fl )
     : SoundSettingsBase( parent, name, TRUE, fl )
@@ -60,7 +66,17 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* name, WFlags fl )
     else if(rate==44100)
         sampleRate->setCurrentItem(4);
 
-    stereoCheckBox->setChecked(cfg.readNumEntry("Stereo", 0));
+    stereoCheckBox->setChecked(cfg.readNumEntry("Stereo", 0));      //TODO hide if zaurus- mono only
+    struct utsname name; /* check for embedix kernel running on the zaurus*/
+    if (uname(&name) != -1) {
+        QString release=name.release;
+
+        if( release.find("embedix",0,TRUE) !=-1)
+            stereoCheckBox->hide();
+//         else
+//            stereoCheckBox->hide();
+
+
     sixteenBitCheckBox->setChecked(cfg.readNumEntry("SixteenBit", 1));
 
     cfg.setGroup("Defaults");
