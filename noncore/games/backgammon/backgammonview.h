@@ -16,3 +16,4 @@ private:
 };
 
 #endif //BACKGAMMON_VIEW_H
+
