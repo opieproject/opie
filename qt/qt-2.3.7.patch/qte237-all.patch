@@ -1,96 +1,10 @@
-diff -ru qt-2.3.5_fresh/include/qapplication.h qt-2.3.5/include/qapplication.h
---- qt-2.3.5_fresh/include/qapplication.h	2003-05-13 15:56:10.000000000 +0200
-+++ qt-2.3.5/include/qapplication.h	2003-05-13 15:58:18.000000000 +0200
-@@ -61,6 +61,10 @@
- class QSemaphore;
- #endif
- 
-+#if !defined( QT_WEAK_SYMBOL )
-+#define QT_WEAK_SYMBOL
-+#endif
-+
- // REMOVE IN 3.0 (just here for moc source compatibility)
- #define QNonBaseApplication QApplication
- 
-@@ -85,7 +89,10 @@
- 
- #ifndef QT_NO_STYLE
-     static QStyle  &style();
--    static void	    setStyle( QStyle* );
-+    static void	    setStyle( QStyle* ) QT_WEAK_SYMBOL;
-+private:
-+	static void     setStyle_NonWeak( QStyle* );
-+public:
- #endif
- #if 1	/* OBSOLETE */
-     enum ColorMode { NormalColors, CustomColors };
-@@ -106,11 +113,19 @@
- #ifndef QT_NO_PALETTE
-     static QPalette  palette( const QWidget* = 0 );
-     static void	     setPalette( const QPalette &, bool informWidgets=FALSE,
-+				 const char* className = 0 ) QT_WEAK_SYMBOL;
-+private:
-+    static void	     setPalette_NonWeak( const QPalette &, bool informWidgets=FALSE,
- 				 const char* className = 0 );
-+public:
- #endif
-     static QFont     font( const QWidget* = 0 );
-     static void	     setFont( const QFont &, bool informWidgets=FALSE,
-+			      const char* className = 0 ) QT_WEAK_SYMBOL;
-+private:
-+    static void	     setFont_NonWeak( const QFont &, bool informWidgets=FALSE,
- 			      const char* className = 0 );
-+public:			      
-     static QFontMetrics fontMetrics();
- 
-     QWidget	    *mainWidget()  const;
-@@ -207,7 +222,10 @@
-     void             qwsSetCustomColors( QRgb *colortable, int start, int numColors );
- #ifndef QT_NO_QWS_MANAGER
-     static QWSDecoration &qwsDecoration();
--    static void      qwsSetDecoration( QWSDecoration *);
-+    static void      qwsSetDecoration( QWSDecoration *) QT_WEAK_SYMBOL;
-+private:
-+    static void      qwsSetDecoration_NonWeak( QWSDecoration *);
-+public:
- #endif
- #endif
- 
-diff -ru qt-2.3.5_fresh/include/qfontdatabase.h qt-2.3.5/include/qfontdatabase.h
---- qt-2.3.5_fresh/include/qfontdatabase.h	2003-05-13 15:56:11.000000000 +0200
-+++ qt-2.3.5/include/qfontdatabase.h	2003-05-13 15:58:18.000000000 +0200
-@@ -59,6 +59,10 @@
- class QDiskFont;
- #endif
- 
-+#if !defined( QT_WEAK_SYMBOL )
-+#define QT_WEAK_SYMBOL
-+#endif
-+
- class QFontDatabasePrivate;
- 
- class Q_EXPORT QFontDatabase
-@@ -67,9 +71,16 @@
-     QFontDatabase();
- 
-     QStringList families( bool onlyForLocale = TRUE ) const;
-+    
-+    
-     QValueList<int> pointSizes( const QString &family,
- 				const QString &style = QString::null,
--				const QString &charSet = QString::null );
-+				const QString &charSet = QString::null ) QT_WEAK_SYMBOL;
-+private:
-+    QValueList<int> pointSizes_NonWeak( const QString &family,
-+				const QString &style,
-+				const QString &charSet );
-+public:
-     QStringList styles( const QString &family,
- 			const QString &charSet = QString::null ) const;
-     QStringList charSets( const QString &familyName,
-diff -ru qt-2.3.5_fresh/src/kernel/qapplication.cpp qt-2.3.5/src/kernel/qapplication.cpp
---- qt-2.3.5_fresh/src/kernel/qapplication.cpp	2003-05-13 15:56:10.000000000 +0200
-+++ qt-2.3.5/src/kernel/qapplication.cpp	2003-05-13 15:58:19.000000000 +0200
+
+#
+# Patch managed by http://www.mn-logistik.de/unsupported/pxa250/patcher
+#
+
+--- qt-2.3.7/src/kernel/qapplication.cpp~qte237-all	2003-07-17 03:20:25.000000000 +0200
++++ qt-2.3.7/src/kernel/qapplication.cpp	2004-04-15 21:06:51.232857014 +0200
 @@ -35,6 +35,8 @@
  **
  **********************************************************************/
@@ -173,10 +87,8 @@ diff -ru qt-2.3.5_fresh/src/kernel/qapplication.cpp qt-2.3.5/src/kernel/qapplica
      bool all = FALSE;
      if ( !className ) {
  	if ( !app_font ) {
-Nur in qt-2.3.5/src/kernel: qapplication.cpp.orig.
-diff -ru qt-2.3.5_fresh/src/kernel/qapplication.h qt-2.3.5/src/kernel/qapplication.h
---- qt-2.3.5_fresh/src/kernel/qapplication.h	2003-05-13 15:56:10.000000000 +0200
-+++ qt-2.3.5/src/kernel/qapplication.h	2003-05-13 15:58:18.000000000 +0200
+--- qt-2.3.7/src/kernel/qapplication.h~qte237-all	2003-07-17 03:20:25.000000000 +0200
++++ qt-2.3.7/src/kernel/qapplication.h	2004-04-15 21:06:51.232857014 +0200
 @@ -61,6 +61,10 @@
  class QSemaphore;
  #endif
@@ -232,10 +144,9 @@ diff -ru qt-2.3.5_fresh/src/kernel/qapplication.h qt-2.3.5/src/kernel/qapplicati
  #endif
  #endif
  
-diff -ru qt-2.3.5_fresh/src/kernel/qapplication_qws.cpp qt-2.3.5/src/kernel/qapplication_qws.cpp
---- qt-2.3.5_fresh/src/kernel/qapplication_qws.cpp	2003-05-13 15:56:10.000000000 +0200
-+++ qt-2.3.5/src/kernel/qapplication_qws.cpp	2003-05-13 15:58:18.000000000 +0200
-@@ -2737,6 +2737,11 @@
+--- qt-2.3.7/src/kernel/qapplication_qws.cpp~qte237-all	2003-07-17 03:20:25.000000000 +0200
++++ qt-2.3.7/src/kernel/qapplication_qws.cpp	2004-04-15 21:06:51.234856703 +0200
+@@ -2804,6 +2804,11 @@
  */
  void QApplication::qwsSetDecoration( QWSDecoration *d )
  {
@@ -247,10 +158,8 @@ diff -ru qt-2.3.5_fresh/src/kernel/qapplication_qws.cpp qt-2.3.5/src/kernel/qapp
      if ( d ) {
  	delete qws_decoration;
  	qws_decoration = d;
-Nur in qt-2.3.5/src/kernel: qapplication_qws.cpp.orig.
-diff -ru qt-2.3.5_fresh/src/kernel/qfontdatabase.cpp qt-2.3.5/src/kernel/qfontdatabase.cpp
---- qt-2.3.5_fresh/src/kernel/qfontdatabase.cpp	2003-05-13 15:56:11.000000000 +0200
-+++ qt-2.3.5/src/kernel/qfontdatabase.cpp	2003-05-13 15:58:18.000000000 +0200
+--- qt-2.3.7/src/kernel/qfontdatabase.cpp~qte237-all	2003-07-17 03:20:25.000000000 +0200
++++ qt-2.3.7/src/kernel/qfontdatabase.cpp	2004-04-15 21:06:51.235856547 +0200
 @@ -35,6 +35,8 @@
  **
  **********************************************************************/
@@ -274,9 +183,8 @@ diff -ru qt-2.3.5_fresh/src/kernel/qfontdatabase.cpp qt-2.3.5/src/kernel/qfontda
      QString cs( charSet );
      if ( charSet.isEmpty() ) {
          QStringList lst = charSets( family );
-diff -ru qt-2.3.5_fresh/src/kernel/qfontdatabase.h qt-2.3.5/src/kernel/qfontdatabase.h
---- qt-2.3.5_fresh/src/kernel/qfontdatabase.h	2003-05-13 15:56:11.000000000 +0200
-+++ qt-2.3.5/src/kernel/qfontdatabase.h	2003-05-13 15:58:18.000000000 +0200
+--- qt-2.3.7/src/kernel/qfontdatabase.h~qte237-all	2003-07-17 03:20:25.000000000 +0200
++++ qt-2.3.7/src/kernel/qfontdatabase.h	2004-04-15 21:06:51.236856392 +0200
 @@ -59,6 +59,10 @@
  class QDiskFont;
  #endif
@@ -306,10 +214,9 @@ diff -ru qt-2.3.5_fresh/src/kernel/qfontdatabase.h qt-2.3.5/src/kernel/qfontdata
      QStringList styles( const QString &family,
  			const QString &charSet = QString::null ) const;
      QStringList charSets( const QString &familyName,
-diff -ru qt-2.3.5_fresh/src/kernel/qgfxraster_qws.cpp qt-2.3.5/src/kernel/qgfxraster_qws.cpp
---- qt-2.3.5_fresh/src/kernel/qgfxraster_qws.cpp	2003-05-13 15:56:11.000000000 +0200
-+++ qt-2.3.5/src/kernel/qgfxraster_qws.cpp	2003-05-13 15:58:18.000000000 +0200
-@@ -4205,7 +4205,7 @@
+--- qt-2.3.7/src/kernel/qgfxraster_qws.cpp~qte237-all	2003-07-17 03:20:25.000000000 +0200
++++ qt-2.3.7/src/kernel/qgfxraster_qws.cpp	2004-04-15 21:06:51.238856081 +0200
+@@ -4237,7 +4237,7 @@
      setAlphaType(IgnoreAlpha);
      if ( w <= 0 || h <= 0 || !ncliprect ) return;
      GFX_START(QRect(rx+xoffs, ry+yoffs, w+1, h+1))
@@ -318,11 +225,9 @@ diff -ru qt-2.3.5_fresh/src/kernel/qgfxraster_qws.cpp qt-2.3.5/src/kernel/qgfxra
      // ### fix for 8bpp
      // This seems to be reliable now, at least for 16bpp
  
-Nur in qt-2.3.5/src/kernel: qgfxraster_qws.cpp.orig.
-diff -ru qt-2.3.5_fresh/src/kernel/qwindowsystem_qws.cpp qt-2.3.5/src/kernel/qwindowsystem_qws.cpp
---- qt-2.3.5_fresh/src/kernel/qwindowsystem_qws.cpp	2003-05-13 15:56:11.000000000 +0200
-+++ qt-2.3.5/src/kernel/qwindowsystem_qws.cpp	2003-05-13 15:58:19.000000000 +0200
-@@ -843,6 +843,18 @@
+--- qt-2.3.7/src/kernel/qwindowsystem_qws.cpp~qte237-all	2003-07-17 03:20:26.000000000 +0200
++++ qt-2.3.7/src/kernel/qwindowsystem_qws.cpp	2004-04-15 21:06:51.240855770 +0200
+@@ -844,6 +844,18 @@
  {
  }
  
@@ -341,7 +246,7 @@ diff -ru qt-2.3.5_fresh/src/kernel/qwindowsystem_qws.cpp qt-2.3.5/src/kernel/qwi
  /*!
    \class QWSServer qwindowsystem_qws.h
    \brief Server-specific functionality in Qt/Embedded
-@@ -912,6 +924,7 @@
+@@ -936,6 +948,7 @@
      }
  
      signal(SIGPIPE, ignoreSignal); //we get it when we read
@@ -349,9 +254,8 @@ diff -ru qt-2.3.5_fresh/src/kernel/qwindowsystem_qws.cpp qt-2.3.5/src/kernel/qwi
  #endif
      focusw = 0;
      mouseGrabber = 0;
-diff -ru qt-2.3.5_fresh/src/widgets/qcommonstyle.cpp qt-2.3.5/src/widgets/qcommonstyle.cpp
---- qt-2.3.5_fresh/src/widgets/qcommonstyle.cpp	2003-05-13 15:56:12.000000000 +0200
-+++ qt-2.3.5/src/widgets/qcommonstyle.cpp	2003-05-13 15:58:19.000000000 +0200
+--- qt-2.3.7/src/widgets/qcommonstyle.cpp~qte237-all	2003-07-17 03:20:26.000000000 +0200
++++ qt-2.3.7/src/widgets/qcommonstyle.cpp	2004-04-15 21:06:51.240855770 +0200
 @@ -566,7 +566,7 @@
  				    bool enabled, bool active )
  {
@@ -361,10 +265,8 @@ diff -ru qt-2.3.5_fresh/src/widgets/qcommonstyle.cpp qt-2.3.5/src/widgets/qcommo
      if (draw_menu_bar_impl != 0) {
  	QDrawMenuBarItemImpl impl = draw_menu_bar_impl;
  	(this->*impl)(p, x, y, w, h, mi, g, enabled, active);
-Nur in qt-2.3.5/src/widgets: qcommonstyle.cpp.orig.
-diff -ru qt-2.3.5_fresh/src/widgets/qlistview.cpp qt-2.3.5/src/widgets/qlistview.cpp
---- qt-2.3.5_fresh/src/widgets/qlistview.cpp	2003-05-13 15:56:12.000000000 +0200
-+++ qt-2.3.5/src/widgets/qlistview.cpp	2003-05-13 15:58:18.000000000 +0200
+--- qt-2.3.7/src/widgets/qlistview.cpp~qte237-all	2003-07-17 03:20:26.000000000 +0200
++++ qt-2.3.7/src/widgets/qlistview.cpp	2004-04-15 21:06:51.243855303 +0200
 @@ -4968,9 +4968,9 @@
  	l = l->childItem ? l->childItem : l->siblingItem;
  
@@ -378,9 +280,8 @@ diff -ru qt-2.3.5_fresh/src/widgets/qlistview.cpp qt-2.3.5/src/widgets/qlistview
  
      if ( s.width() > s.height() * 3 )
  	s.setHeight( s.width() / 3 );
-diff -ru qt-2.3.5_fresh/src/widgets/qtoolbutton.cpp qt-2.3.5/src/widgets/qtoolbutton.cpp
---- qt-2.3.5_fresh/src/widgets/qtoolbutton.cpp	2003-05-13 15:56:12.000000000 +0200
-+++ qt-2.3.5/src/widgets/qtoolbutton.cpp	2003-05-13 15:58:18.000000000 +0200
+--- qt-2.3.7/src/widgets/qtoolbutton.cpp~qte237-all	2003-07-17 03:20:27.000000000 +0200
++++ qt-2.3.7/src/widgets/qtoolbutton.cpp	2004-04-15 21:06:51.243855303 +0200
 @@ -230,7 +230,7 @@
  	else
  	    QToolTip::add( this, textLabel );
@@ -408,8 +309,8 @@ diff -ru qt-2.3.5_fresh/src/widgets/qtoolbutton.cpp qt-2.3.5/src/widgets/qtoolbu
  	QPixmap pm = iconSet(TRUE).pixmap(QIconSet::Small, QIconSet::Normal);
  	w = pm.width();
  	h = pm.height();
---- qt-2.3.7/src/kernel/qkeyboard_qws.cpp~c7xxrotate	2003-07-16 18:20:25.000000000 -0700
-+++ qt-2.3.7/src/kernel/qkeyboard_qws.cpp	2003-12-07 15:54:10.000000000 -0800
+--- qt-2.3.7/src/kernel/qkeyboard_qws.cpp~qte237-all	2003-07-17 03:20:25.000000000 +0200
++++ qt-2.3.7/src/kernel/qkeyboard_qws.cpp	2004-04-15 21:06:51.244855148 +0200
 @@ -238,7 +238,7 @@
      {	Qt::Key_unknown,	0xffff  , 0xffff  , 0xffff  }, // 63
      {	Qt::Key_unknown,	0xffff  , 0xffff  , 0xffff  }, // 64
@@ -419,9 +320,8 @@ diff -ru qt-2.3.5_fresh/src/widgets/qtoolbutton.cpp qt-2.3.5/src/widgets/qtoolbu
      {	Qt::Key_Meta,		0xffff  , 0xffff  , 0xffff  }, // 67
      {	Qt::Key_unknown,	0xffff  , 0xffff  , 0xffff  }, // 68
      {	Qt::Key_unknown,	0xffff  , 0xffff  , 0xffff  }, // 69
-diff -ru qt-2.3.7/configs/linux-generic-g++-shared qte/configs/linux-generic-g++-shared
---- qt-2.3.7/configs/linux-generic-g++-shared	2003-07-17 03:23:08.000000000 +0200
-+++ qte/configs/linux-generic-g++-shared	2004-03-01 20:08:00.884254576 +0100
+--- qt-2.3.7/configs/linux-generic-g++-shared~qte237-all	2003-07-17 03:23:08.000000000 +0200
++++ qt-2.3.7/configs/linux-generic-g++-shared	2004-04-15 21:06:51.244855148 +0200
 @@ -36,7 +36,7 @@
  SYSCONF_LIBS_YACC	= 
  
@@ -431,10 +331,8 @@ diff -ru qt-2.3.7/configs/linux-generic-g++-shared qte/configs/linux-generic-g++
  SYSCONF_LFLAGS		= 
  SYSCONF_LIBS		= 
  
-Nur in qte/configs: linux-generic-g++-shared~.
-diff -ru qt-2.3.7/configs/linux-generic-g++-shared-debug qte/configs/linux-generic-g++-shared-debug
---- qt-2.3.7/configs/linux-generic-g++-shared-debug	2003-07-17 03:23:08.000000000 +0200
-+++ qte/configs/linux-generic-g++-shared-debug	2004-03-01 20:08:06.552392888 +0100
+--- qt-2.3.7/configs/linux-generic-g++-shared-debug~qte237-all	2003-07-17 03:23:08.000000000 +0200
++++ qt-2.3.7/configs/linux-generic-g++-shared-debug	2004-04-15 21:06:51.244855148 +0200
 @@ -36,7 +36,7 @@
  SYSCONF_LIBS_YACC	= 
  
@@ -444,10 +342,8 @@ diff -ru qt-2.3.7/configs/linux-generic-g++-shared-debug qte/configs/linux-gener
  SYSCONF_LFLAGS		= 
  SYSCONF_LIBS		= 
  
-Nur in qte/configs: linux-generic-g++-shared-debug~.
-diff -ru qt-2.3.7/configs/linux-generic-g++-static qte/configs/linux-generic-g++-static
---- qt-2.3.7/configs/linux-generic-g++-static	2003-07-17 03:23:08.000000000 +0200
-+++ qte/configs/linux-generic-g++-static	2004-03-01 20:08:11.410654320 +0100
+--- qt-2.3.7/configs/linux-generic-g++-static~qte237-all	2003-07-17 03:23:08.000000000 +0200
++++ qt-2.3.7/configs/linux-generic-g++-static	2004-04-15 21:06:51.244855148 +0200
 @@ -36,7 +36,7 @@
  SYSCONF_LIBS_YACC	= 
  
@@ -457,10 +353,8 @@ diff -ru qt-2.3.7/configs/linux-generic-g++-static qte/configs/linux-generic-g++
  SYSCONF_LFLAGS		= 
  SYSCONF_LIBS		= 
  
-Nur in qte/configs: linux-generic-g++-static~.
-diff -ru qt-2.3.7/configs/linux-generic-g++-static-debug qte/configs/linux-generic-g++-static-debug
---- qt-2.3.7/configs/linux-generic-g++-static-debug	2003-07-17 03:23:08.000000000 +0200
-+++ qte/configs/linux-generic-g++-static-debug	2004-03-01 20:08:15.780989928 +0100
+--- qt-2.3.7/configs/linux-generic-g++-static-debug~qte237-all	2003-07-17 03:23:08.000000000 +0200
++++ qt-2.3.7/configs/linux-generic-g++-static-debug	2004-04-15 21:06:51.245854992 +0200
 @@ -36,7 +36,7 @@
  SYSCONF_LIBS_YACC	= 
  
@@ -470,10 +364,8 @@ diff -ru qt-2.3.7/configs/linux-generic-g++-static-debug qte/configs/linux-gener
  SYSCONF_LFLAGS		= 
  SYSCONF_LIBS		= 
  
-Nur in qte/configs: linux-generic-g++-static-debug~.
-diff -ru qt-2.3.7/configs/linux-generic_rtti-g++-shared qte/configs/linux-generic_rtti-g++-shared
---- qt-2.3.7/configs/linux-generic_rtti-g++-shared	2003-07-17 03:23:08.000000000 +0200
-+++ qte/configs/linux-generic_rtti-g++-shared	2004-03-01 20:08:20.393288752 +0100
+--- qt-2.3.7/configs/linux-generic_rtti-g++-shared~qte237-all	2003-07-17 03:23:08.000000000 +0200
++++ qt-2.3.7/configs/linux-generic_rtti-g++-shared	2004-04-15 21:06:51.245854992 +0200
 @@ -36,7 +36,7 @@
  SYSCONF_LIBS_YACC	= 
  
@@ -483,10 +375,8 @@ diff -ru qt-2.3.7/configs/linux-generic_rtti-g++-shared qte/configs/linux-generi
  SYSCONF_LFLAGS		= 
  SYSCONF_LIBS		= 
  
-Nur in qte/configs: linux-generic_rtti-g++-shared~.
-diff -ru qt-2.3.7/configs/linux-generic_rtti-g++-shared-debug qte/configs/linux-generic_rtti-g++-shared-debug
---- qt-2.3.7/configs/linux-generic_rtti-g++-shared-debug	2003-07-17 03:23:08.000000000 +0200
-+++ qte/configs/linux-generic_rtti-g++-shared-debug	2004-03-01 20:08:25.127569032 +0100
+--- qt-2.3.7/configs/linux-generic_rtti-g++-shared-debug~qte237-all	2003-07-17 03:23:08.000000000 +0200
++++ qt-2.3.7/configs/linux-generic_rtti-g++-shared-debug	2004-04-15 21:06:51.245854992 +0200
 @@ -36,7 +36,7 @@
  SYSCONF_LIBS_YACC	= 
  
@@ -496,10 +386,8 @@ diff -ru qt-2.3.7/configs/linux-generic_rtti-g++-shared-debug qte/configs/linux-
  SYSCONF_LFLAGS		= 
  SYSCONF_LIBS		= 
  
-Nur in qte/configs: linux-generic_rtti-g++-shared-debug~.
-diff -ru qt-2.3.7/configs/linux-generic_rtti-g++-static qte/configs/linux-generic_rtti-g++-static
---- qt-2.3.7/configs/linux-generic_rtti-g++-static	2003-07-17 03:23:08.000000000 +0200
-+++ qte/configs/linux-generic_rtti-g++-static	2004-03-01 20:08:29.727869680 +0100
+--- qt-2.3.7/configs/linux-generic_rtti-g++-static~qte237-all	2003-07-17 03:23:08.000000000 +0200
++++ qt-2.3.7/configs/linux-generic_rtti-g++-static	2004-04-15 21:06:51.245854992 +0200
 @@ -36,7 +36,7 @@
  SYSCONF_LIBS_YACC	= 
  
@@ -509,10 +397,8 @@ diff -ru qt-2.3.7/configs/linux-generic_rtti-g++-static qte/configs/linux-generi
  SYSCONF_LFLAGS		= 
  SYSCONF_LIBS		= 
  
-Nur in qte/configs: linux-generic_rtti-g++-static~.
-diff -ru qt-2.3.7/configs/linux-generic_rtti-g++-static-debug qte/configs/linux-generic_rtti-g++-static-debug
---- qt-2.3.7/configs/linux-generic_rtti-g++-static-debug	2003-07-17 03:23:08.000000000 +0200
-+++ qte/configs/linux-generic_rtti-g++-static-debug	2004-03-01 20:06:12.806684864 +0100
+--- qt-2.3.7/configs/linux-generic_rtti-g++-static-debug~qte237-all	2003-07-17 03:23:08.000000000 +0200
++++ qt-2.3.7/configs/linux-generic_rtti-g++-static-debug	2004-04-15 21:06:51.245854992 +0200
 @@ -36,7 +36,7 @@
  SYSCONF_LIBS_YACC	= 
  
@@ -522,10 +408,8 @@ diff -ru qt-2.3.7/configs/linux-generic_rtti-g++-static-debug qte/configs/linux-
  SYSCONF_LFLAGS		= 
  SYSCONF_LIBS		= 
  
-Nur in qte/configs: linux-generic_rtti-g++-static-debug~.
-diff -ru qt-2.3.7/configs/linux-x86rtti-g++-shared qte/configs/linux-x86rtti-g++-shared
---- qt-2.3.7/configs/linux-x86rtti-g++-shared	2003-07-17 03:23:10.000000000 +0200
-+++ qte/configs/linux-x86rtti-g++-shared	2004-03-01 19:54:16.977507440 +0100
+--- qt-2.3.7/configs/linux-x86rtti-g++-shared~qte237-all	2003-07-17 03:23:10.000000000 +0200
++++ qt-2.3.7/configs/linux-x86rtti-g++-shared	2004-04-15 21:06:51.245854992 +0200
 @@ -36,7 +36,7 @@
  SYSCONF_LIBS_YACC	= 
  
@@ -535,9 +419,8 @@ diff -ru qt-2.3.7/configs/linux-x86rtti-g++-shared qte/configs/linux-x86rtti-g++
  SYSCONF_LFLAGS		= 
  SYSCONF_LIBS		= -lm
  
-diff -ru qt-2.3.7/configs/linux-x86rtti-g++-shared-debug qte/configs/linux-x86rtti-g++-shared-debug
---- qt-2.3.7/configs/linux-x86rtti-g++-shared-debug	2003-07-17 03:23:10.000000000 +0200
-+++ qte/configs/linux-x86rtti-g++-shared-debug	2004-03-01 19:54:24.064430064 +0100
+--- qt-2.3.7/configs/linux-x86rtti-g++-shared-debug~qte237-all	2003-07-17 03:23:10.000000000 +0200
++++ qt-2.3.7/configs/linux-x86rtti-g++-shared-debug	2004-04-15 21:06:51.245854992 +0200
 @@ -36,7 +36,7 @@
  SYSCONF_LIBS_YACC	= 
  
@@ -547,9 +430,8 @@ diff -ru qt-2.3.7/configs/linux-x86rtti-g++-shared-debug qte/configs/linux-x86rt
  SYSCONF_LFLAGS		= 
  SYSCONF_LIBS		= -lm
  
-diff -ru qt-2.3.7/configs/linux-x86rtti-g++-static qte/configs/linux-x86rtti-g++-static
---- qt-2.3.7/configs/linux-x86rtti-g++-static	2003-07-17 03:23:10.000000000 +0200
-+++ qte/configs/linux-x86rtti-g++-static	2004-03-01 19:54:32.020220600 +0100
+--- qt-2.3.7/configs/linux-x86rtti-g++-static~qte237-all	2003-07-17 03:23:10.000000000 +0200
++++ qt-2.3.7/configs/linux-x86rtti-g++-static	2004-04-15 21:06:51.246854837 +0200
 @@ -36,7 +36,7 @@
  SYSCONF_LIBS_YACC	= 
  
@@ -559,9 +441,8 @@ diff -ru qt-2.3.7/configs/linux-x86rtti-g++-static qte/configs/linux-x86rtti-g++
  SYSCONF_LFLAGS		= 
  SYSCONF_LIBS		= -lm
  
-diff -ru qt-2.3.7/configs/linux-x86rtti-g++-static-debug qte/configs/linux-x86rtti-g++-static-debug
---- qt-2.3.7/configs/linux-x86rtti-g++-static-debug	2003-07-17 03:23:10.000000000 +0200
-+++ qte/configs/linux-x86rtti-g++-static-debug	2004-03-01 19:54:41.434789368 +0100
+--- qt-2.3.7/configs/linux-x86rtti-g++-static-debug~qte237-all	2003-07-17 03:23:10.000000000 +0200
++++ qt-2.3.7/configs/linux-x86rtti-g++-static-debug	2004-04-15 21:06:51.246854837 +0200
 @@ -36,7 +36,7 @@
  SYSCONF_LIBS_YACC	= 
  
@@ -570,3 +451,15 @@ diff -ru qt-2.3.7/configs/linux-x86rtti-g++-static-debug qte/configs/linux-x86rt
 +SYSCONF_LINK		= g++
  SYSCONF_LFLAGS		= 
  SYSCONF_LIBS		= -lm
+ 
+--- qt-2.3.7/src/kernel/qimage.cpp~qte237-all	2003-07-17 03:20:25.000000000 +0200
++++ qt-2.3.7/src/kernel/qimage.cpp	2004-04-15 21:07:23.293869923 +0200
+@@ -2201,7 +2201,7 @@
+     t2 = srcHeight * dstWidth;
+ 
+     if (((sModeQStr == "ScaleMin") && (t1 > t2)) ||
+-	    ((sModeQStr == "ScaleMax") && (t2 < t2))) {
++	    ((sModeQStr == "ScaleMax") && (t1 < t2))) {
+ 	dstHeight = t2 / srcWidth;
+     } else if (sModeQStr != "ScaleFree") {
+ 	dstWidth = t1 / srcHeight;
