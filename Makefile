@@ -12,6 +12,7 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	inputmethods/kjumpx \
 	inputmethods/dvorak \
 	launcher/batteryapplet \
+	launcher/batteryapplet-ipaq \
 	launcher/irdaapplet \
 	launcher/volumeapplet \
 	launcher/clockapplet \
