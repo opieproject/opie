@@ -257,11 +257,11 @@
     </message>
     <message>
         <source>Enable static background pixmap</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnout statický obrázek na pozadí</translation>
     </message>
     <message>
         <source>Activate this, if you want the background pixmap not to scroll with the icons.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivujte, pokud chcete, aby se obrázek na pozadí nepohyboval s ikonami.</translation>
     </message>
 </context>
 <context>

@@ -18,7 +18,7 @@
     <name>AbView</name>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished">Nevyplněné</translation>
+        <translation>Nevyplněné</translation>
     </message>
 </context>
 <context>
@@ -191,7 +191,7 @@ Chcete přesto skončit?</translation>
     </message>
     <message>
         <source>Edit Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit kontakt</translation>
     </message>
 </context>
 <context>
@@ -1363,35 +1363,35 @@ je poskytován zdarma!
     <name>Opie</name>
     <message>
         <source>Contact</source>
-        <translation type="unfinished">Kontakt</translation>
+        <translation>Kontakt</translation>
     </message>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished">Kontakty</translation>
+        <translation>Kontakty</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation type="unfinished">Spustit hledání</translation>
+        <translation>Spustit hledání</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation type="unfinished">Napsat Mail pro</translation>
+        <translation>Napsat Mail pro</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation type="unfinished">Importovat vCard</translation>
+        <translation>Importovat vCard</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation type="unfinished">Exportovat vCard</translation>
+        <translation>Exportovat vCard</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation type="unfinished">Moje osobní detaily</translation>
+        <translation>Moje osobní detaily</translation>
     </message>
     <message>
         <source>Show quick search bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit rychlé hledání</translation>
     </message>
 </context>
 </TS>

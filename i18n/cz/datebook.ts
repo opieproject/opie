@@ -376,19 +376,19 @@ Chcete přesto skončit?</translation>
     <name>DateBookWeekLstEvent</name>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Upravit</translation>
+        <translation>Upravit</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished">Duplikovat</translation>
+        <translation>Duplikovat</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Smazat</translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished">Poslat</translation>
+        <translation>Poslat</translation>
     </message>
 </context>
 <context>

@@ -217,11 +217,11 @@ Tato oblast vám umožní vybrat aplikaci a nastavení, která si přejete vypno
     </message>
     <message>
         <source>Show Scrollbars on the left</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazovat posuvník vlevo</translation>
     </message>
     <message>
         <source>Click here to display scrollbars on the left side instead of the right.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro zobrazování posuvníků na levé straně místo vpravo.</translation>
     </message>
 </context>
 <context>

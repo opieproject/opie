@@ -102,7 +102,7 @@ nebo vybrat ftp místo?</translation>
     </message>
     <message>
         <source>Downloading Gutenberg Index....</source>
-        <translation type="unfinished">Stahuji Gutenberg Index....</translation>
+        <translation>Stahuji Gutenberg Index....</translation>
     </message>
 </context>
 <context>
@@ -314,11 +314,7 @@ http://www.trolltech.com
     </message>
     <message>
         <source>&lt;p&gt;Error opening library index file. Please download a new one.&lt;/P&gt; </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>   </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Chyba otevření index souboru knihovny. Prosím stáhněte nový.&lt;/P&gt; </translation>
     </message>
 </context>
 <context>
