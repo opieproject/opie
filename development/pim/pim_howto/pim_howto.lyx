@@ -9,6 +9,7 @@
 \fancyhead[RE,LO]{\thepage}
 %\fancyhead[LO,RE]{}
 % \usepackage{ae}
+\usepackage[T1]{fontenc} 
 \usepackage[bookmarksopen,colorlinks]{hyperref}
 % \pdfoutput=1
 % \pdfcompresslevel=8
@@ -19,38 +20,6 @@
 %  /Subject ()
 %  /Keywords (Simulation,Real-Time,ClearSim,prototype,efsm)
 % }
-\renewcommand\familydefault{\sfdefault}
-
-\usepackage{multicol}
-\newcommand\NrCol{3}
-\renewenvironment{theindex}
-               {\columnseprule \z@
-                \columnsep 35\p@
-                \section*{\indexname}%
-                \@mkboth{\MakeUppercase\indexname}%
-                        {\MakeUppercase\indexname}%
-                \begin{multicols}{\NrCol}\thispagestyle{plain}\parindent\z@
-                \parskip\z@ \@plus .3\p@\relax
-                \let\item\@idxitem}
-               {\clearpage %
-                \end{multicols}}
-
-\renewenvironment{theindex}
-               {\if@twocolumn
-                  \@restonecolfalse
-                \else
-                  \@restonecoltrue
-                \fi
-                \columnseprule \z@
-                \columnsep 35\p@
-                \twocolumn[\refstepcounter{section}%
-                  \section{\indexname}]%
-                \@mkboth{\MakeUppercase\indexname}%
-                        {\MakeUppercase\indexname}%
-                \thispagestyle{plain}\parindent\z@
-                \parskip\z@ \@plus .3\p@\relax
-                \let\item\@idxitem}
-               {\if@restonecol\onecolumn\else\clearpage\fi}
 \end_preamble
 \language american
 \inputencoding default
@@ -82,12 +51,12 @@ How to use the Opie-Pim API without getting tired!
 \newline 
 (Aka: Hitchhikers Guide Through the Opie-Pim API)
 \newline 
-(Pre V 0.1)
+(V 0.2)
 \layout Author
 
 
 \family sans 
-Stefan Eilers
+Stefan Eilers (stefan@eilers-online.net)
 \layout Section*
 
 
@@ -111,6 +80,16 @@ While starting to read the automatically generated API-documentation, the
  Due to the fact that a user will not need most of the details, this paper
  should help to start to become confortable with those details he need to
  solve his problems.
+\layout Standard
+
+
+\series bold 
+You will find a more recent version at: 
+\begin_inset LatexCommand \url{http://www.sra.uni-hannover.de/~eilers/apihowto/pim_howto.pdf}
+
+\end_inset 
+
+
 \layout Standard
 
 
@@ -217,11 +196,17 @@ OPimAccessFactory
  This operation is defined like this:
 \layout LyX-Code
 
-T* defaultAccess (typename OPimGlobal::PimType type, const QString &appName)
+T* defaultAccess ( 
+\newline 
+typename OPimGlobal::PimType type,
+\newline 
+const QString &appName)
 \layout Standard
 
 You just have to add the following lines to your source code to use it (this
  example is for accessing the contact database):
+\layout LyX-Code
+
 \layout LyX-Code
 
 #include <opie2/opimaccessfactory.h>
@@ -233,8 +218,15 @@ use namespace Opie;
 [...]
 \layout LyX-Code
 
-OPimContactAccess* sourceDB = OPimAccessFactory<OPimContactAccess>::defaultAcces
-s( OPimGlobal::CONTACTLIST, "my-app" );
+OPimContactAccess* sourceDB = 
+\newline 
+OPimAccessFactory<OPimContactAccess>::defaultAccess(
+\newline 
+OPimGlobal::CONTACTLIST,
+\newline 
+"my-app" );
+\layout LyX-Code
+
 \layout Standard
 
 If everything works as expected, you will receive a pointer to the contact
@@ -252,15 +244,25 @@ The API will be changed in the future: ODateBookAccess will be renamed to
 :
 \layout LyX-Code
 
-ODateBookAccess* sourceDB = OPimAccessFactory<ODatebookAccess>::defaultAccess(
- OPimGlobal::DATEBOOK, "my-app" );
+ODateBookAccess* sourceDB = 
+\newline 
+OPimAccessFactory<ODatebookAccess>::defaultAccess(
+\newline 
+OPimGlobal::DATEBOOK,
+\newline 
+"my-app" );
 \layout Standard
 
 And the same for todo:
 \layout LyX-Code
 
-OPimTodoAccess* sourceDB = OPimAccessFactory<OPimTodoAccess>::defaultAccess(
- OPimGlobal::TODOLIST, "my-app" );
+OPimTodoAccess* sourceDB = 
+\newline 
+OPimAccessFactory<OPimTodoAccess>::defaultAccess(
+\newline 
+OPimGlobal::TODOLIST,
+\newline 
+"my-app" );
 \layout Standard
 
 Using 
@@ -485,7 +487,7 @@ allRecords()
 
  which returns a list of all available records as an 
 \series bold 
-OPimRecordList
+OPimRecordList<T>
 \series default 
  (see 
 \begin_inset LatexCommand \url{http://www.sra.uni-hannover.de/~eilers/apidocs/pim2/html/classOpie_1_1OPimRecordList.html}
@@ -493,21 +495,34 @@ OPimRecordList
 \end_inset 
 
 ).
- 
+ This OPimRecordList is a template and should be used with the right class
+ parameter 
+\begin_inset Quotes eld
+\end_inset 
+
+T
+\begin_inset Quotes erd
+\end_inset 
+
+ which is currently one of the following: OPimContact, OPimTodo and OPimEvent.
 \layout LyX-Code
 
-List allRecords();
+OPimRecordList<T> allRecords();
 \layout Standard
 
 In fact, this 
-\emph on 
-List
-\emph default 
+\begin_inset Quotes eld
+\end_inset 
+
+OPimRecordList<T>
+\begin_inset Quotes erd
+\end_inset 
+
  just contains a list of uid's to take care of memory space.
- As every record is identified by an unique identification number which
- is called UID (Unique Identification), these numbers just exists once in
- the database which is currently on access! To receive the real record,
- you have to use the operation 
+ Every record is identified by an unique identification number which is
+ called UID (Unique Identification).
+ These numbers just exists once in the database which is currently on access!
+ To receive the real record, you have to use the operation 
 \begin_inset Quotes gld
 \end_inset 
 
@@ -519,6 +534,76 @@ find()
 \layout LyX-Code
 
 T find (UID uid);
+\layout Standard
+
+The remaining question is, how to get a valid UID out of a list to use the
+ 
+\begin_inset Quotes eld
+\end_inset 
+
+find()
+\begin_inset Quotes erd
+\end_inset 
+
+ in a correct manner.
+ This could be done by requesting a special element of the list, using the
+ operator[] or by using iterators.
+ The first one would be like this
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+Please do not forget to use 
+\begin_inset Quotes eld
+\end_inset 
+
+use namespace Opie;
+\begin_inset Quotes erd
+\end_inset 
+
+ to enable the namespace 
+\begin_inset Quotes eld
+\end_inset 
+
+Opie
+\begin_inset Quotes erd
+\end_inset 
+
+!!
+\end_inset 
+
+:
+\layout LyX-Code
+
+OPimRecordList<OPimContact> list = allRecords();
+\layout LyX-Code
+
+for ( int i = 0; i < list.count(); i++ ){
+\layout LyX-Code
+
+    cout << "The UID is: " << list[i] << endl;
+\layout LyX-Code
+
+}
+\layout Standard
+
+Using the iterator is as easy as the previous one:
+\layout LyX-Code
+
+OPimRecordList<OPimContact> list = allRecords();
+\layout LyX-Code
+
+OPimRecordList<OPimContact>::iterator it;
+\layout LyX-Code
+
+for ( it = list.begin(); it != list.end(); ++it ){
+\layout LyX-Code
+
+    count << "The UID is: " << (*it) << endl;
+\layout LyX-Code
+
+}
 \layout Standard
 
 This is all you need to realize a basic access to the PIM-Databases! The
@@ -753,21 +838,14 @@ collapsed false
 
 \layout Standard
 
-FIXME: matchRegexp() does take a list of uid's.
+FIXME: matchRegexp() does not take a list of uid's.
  Therefore it is currently not possible to use it in an incremental manner!
  (se)
 \end_inset 
 
 .
- Therefore it is possible to research a 
-\begin_inset Quotes gld
-\end_inset 
-
-List
-\begin_inset Quotes grd
-\end_inset 
-
- which was returned by a previous search query and to sort it afterwards.
+ Therefore it is possible to use a list which was returned by a previous
+ search query and to sort it afterwards.
  Before we will take a close look into sorting, we will start with searching.
  There exist two different ways of searching:
 \layout Enumerate
@@ -840,18 +918,18 @@ matchRegexp()
 The function is defined like this:
 \layout LyX-Code
 
-List matchRegexp (const QRegExp& r);
+OPimRecordList<T> matchRegexp (const QRegExp& r);
 \layout Standard
 
 The 
 \begin_inset Quotes gld
 \end_inset 
 
-List
+OPimRecordList<T>
 \begin_inset Quotes grd
 \end_inset 
 
- is still a OPimRecordList which contains 0 or more uid's of matching records.
+ is still a list which contains 0 or more uid's of matching records.
  As already discussed in section 
 \begin_inset LatexCommand \ref{sec:Accessing-the-access-object}
 
@@ -896,26 +974,10 @@ Eilers
 OPimContact searchQuery;
 \layout LyX-Code
 
-searchQuery.setLastName( 
-\begin_inset Quotes eld
-\end_inset 
-
-Eilers
-\begin_inset Quotes erd
-\end_inset 
-
- );
+searchQuery.setLastName( "Eilers" );
 \layout LyX-Code
 
-searchQuery.setHomeZip( 
-\begin_inset Quotes eld
-\end_inset 
-
-3*
-\begin_inset Quotes srd
-\end_inset 
-
- );
+searchQuery.setHomeZip( "3*" );
 \layout Standard
 
 We use an usual 
@@ -959,8 +1021,9 @@ The next step is to put this query into the operation which is defined like
  this:
 \layout LyX-Code
 
-List queryByExample (const T& query, int querySettings, const QDateTime&
- startperiod=QDateTime())
+OPimRecordList<T> queryByExample (const T& query,
+\newline 
+int querySettings, const QDateTime& startperiod=QDateTime())
 \layout Standard
 
 The first parameter 
@@ -1070,8 +1133,11 @@ use namespace Opie;
 [...]
 \layout LyX-Code
 
-List found_items = queryByExample( searchQuery, OPimBase::WildCards | OpimBase::
-IgnoreCase );
+OPimRecordList<OPimContact> found_items = 
+\newline 
+sourceDB->queryByExample( searchQuery, 
+\newline 
+OPimBase::WildCards | OpimBase::IgnoreCase );
 \layout Standard
 
 This operation may return a list of entries which can be accessed as above,
@@ -1217,11 +1283,19 @@ Sorting
 \layout Standard
 
 To sort a given dataset, you should use the following operation (or one
- of the others which behave slightly differently):
+ of the others which behave slightly differently, see 
+\begin_inset LatexCommand \url{http://www.sra.uni-hannover.de/~eilers/apidocs/pim2/html/classOpie_1_1OPimAccessTemplate.html}
+
+\end_inset 
+
+):
 \layout LyX-Code
 
-List sorted (const List& list, bool ascending, int sortOrder, int sortFilter,
- const QArray< UID >& cats);
+OPimRecordList<T> sorted (const List& list, 
+\newline 
+bool ascending, int sortOrder, int sortFilter, 
+\newline 
+const QArray< UID >& cats);
 \layout Standard
 
 This sort operation takes a list of uid's as returned for instance from
