@@ -117,7 +117,7 @@ bool StartMenu::loadMenu( AppLnkSet *folder, QPopupMenu *menu )
 	    QPopupMenu *new_menu = new StartPopupMenu( menu );
 	    typpop.insert(*tit, new_menu);
 	    connect( new_menu, SIGNAL(activated(int)), SLOT(itemSelected(int)) );
-	    menu->insertItem( folder->typePixmap(*tit), *tit, new_menu );
+	    menu->insertItem( folder->typePixmap(*tit), folder->typeName(*tit), new_menu );
 	}
     }
 
