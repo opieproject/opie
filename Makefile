@@ -80,7 +80,8 @@ GAMES = noncore/games/minesweep noncore/games/solitaire \
 
 NONAPPS = noncore/apps/opie-sheet noncore/apps/tableviewer \
 	noncore/apps/opie-reader noncore/apps/checkbook noncore/apps/oxygen \
-	noncore/apps/sysinfo noncore/net/opieirc noncore/apps/aqpkg \
+ 	noncore/apps/sysinfo noncore/net/opieirc noncore/apps/aqpkg \
+ 	noncore/apps/opie-console 
 	
 NONNET = noncore/net/networksetup \
 	noncore/net/opieftp \
