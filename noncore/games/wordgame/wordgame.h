@@ -309,6 +309,7 @@ class WordGame : public QMainWindow {
 public:
     WordGame( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~WordGame();
+    static QString appName() { return QString::fromLatin1("wordgame"); }
 
 private slots:
     void endTurn();
