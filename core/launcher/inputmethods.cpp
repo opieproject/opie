@@ -18,12 +18,14 @@
 **
 **********************************************************************/
 
+#define QTOPIA_INTERNAL_LANGLIST
 #include "inputmethods.h"
 
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/inputmethodinterface.h>
 #include <qpe/qlibrary.h>
+#include <qpe/global.h>
 
 #include <qpopupmenu.h>
 #include <qpushbutton.h>
@@ -178,15 +180,18 @@ void InputMethods::loadInputMethods()
 	    input.widget = input.interface->inputMethod( 0, inputWidgetStyle );
 	    input.interface->onKeyPress( this, SLOT(sendKey(ushort,ushort,ushort,bool,bool)) );
 	    inputMethodList.append( input );
-	    QString lang = getenv( "LANG" );
-	    QTranslator * trans = new QTranslator(qApp);
+
 	    QString type = (*it).left( (*it).find(".") );
-	    QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
-	    qDebug("tr for inputmethod: %s", tfn.latin1() );
-	    if ( trans->load( tfn ))
-		qApp->installTranslator( trans );
-	    else
-		delete trans;
+	    QStringList langs = Global::languageList();
+	    for (QStringList::ConstIterator lit = langs.begin(); lit!=langs.end(); ++lit) {
+		QString lang = *lit;
+		QTranslator * trans = new QTranslator(qApp);
+		QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
+		if ( trans->load( tfn ))
+		    qApp->installTranslator( trans );
+		else
+		    delete trans;
+	    }
 	} else {
 	    delete lib;
 	}
