@@ -180,6 +180,7 @@ CONFIG_ROTATION	noncore/settings/rotation	rotation.pro
 CONFIG_RUNAPPLET	core/applets/runapplet	runapplet.pro
 CONFIG_SCREENSHOTAPPLET	core/applets/screenshotapplet	screenshotapplet.pro
 CONFIG_SECURITY	core/settings/security	security.pro
+CONFIG_MULTIAUTH_DEMO core/settings/security/demo	multiauth.pro
 CONFIG_SFCAVE	noncore/games/sfcave	sfcave.pro
 CONFIG_SFCAVE-SDL	noncore/games/sfcave-sdl	sfcave-sdl.pro
 CONFIG_SHOWIMG	noncore/multimedia/showimg	showimg.pro
