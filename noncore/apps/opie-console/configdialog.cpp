@@ -92,7 +92,6 @@ void ConfigDialog::slotEdit() {
 
 
 void ConfigDialog::slotAdd() {
-    qWarning("slotAdd");
 	ProfileEditorDialog dlg(m_fact);
 
 	dlg.setCaption("New Connection");

@@ -263,7 +263,6 @@ QList<Session> MainWindow::sessions() {
 }
 
 void MainWindow::slotNew() {
-    qWarning("New Connection");
     ProfileEditorDialog dlg(factory() );
     dlg.showMaximized();
     int ret = dlg.exec();
@@ -339,14 +338,12 @@ void MainWindow::slotTerminate() {
 }
 
 void MainWindow::slotConfigure() {
-    qWarning("configure");
     ConfigDialog conf( manager()->all(), factory() );
     conf.showMaximized();
 
     int ret = conf.exec();
 
     if ( QDialog::Accepted == ret ) {
-        qWarning("conf %d", conf.list().count() );
         manager()->setProfiles( conf.list() );
         manager()->save();
         populateProfiles();
@@ -360,7 +357,6 @@ void MainWindow::slotConfigure() {
  * and set the currentSession()
  */
 void MainWindow::slotClose() {
-    qWarning("close");
     if (!currentSession() )
         return;
 
@@ -438,7 +434,6 @@ void MainWindow::slotOpenKeb(bool state) {
 }
 void MainWindow::slotSessionChanged( Session* ses ) {
     if ( ses ) {
-        qWarning("changing %s", ses->name().latin1() );
         m_curSession = ses;
 
         if ( m_curSession->isConnected() ) {

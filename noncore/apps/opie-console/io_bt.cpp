@@ -36,6 +36,7 @@ bool IOBt::open() {
     } else {
         qWarning("could not attach to device");
         delete m_attach;
+	m_attach = 0;
     }
 }
 

@@ -53,7 +53,6 @@ void FileTransfer::sendFile( const QString& file ) {
         break;
     case 0:{
         setupChild();
-        qWarning("output:"+file );
         /* exec */
         char* verbose = "-vv";
         char* binray = "-b";
@@ -166,19 +165,16 @@ void FileTransfer::setupChild() {
 void FileTransfer::slotRead() {
     QByteArray ar(4096);
     int len = read(m_comm[0], ar.data(), 4096 );
-    qWarning("slot read %d", len);
     for (int i = 0; i < len; i++ ) {
         // printf("%c", ar[i] );
     }
     ar.resize( len );
     QString str( ar );
-    qWarning(str.simplifyWhiteSpace() );
     QStringList lis = QStringList::split(' ', str );
     /*
      * Transfer finished.. either complete or incomplete
      */
     if ( lis[0].simplifyWhiteSpace() == "Transfer" ) {
-        qWarning("sent!!!!");
         return;
     }
     /*
@@ -214,7 +210,6 @@ void FileTransfer::slotProgress( const QStringList& list ) {
         return;
     }
 
-    qWarning("%s, %d, %d",  progi.join("/").latin1(), sent, total );
 
     double pro = (double)sent/total;
     int prog = pro * 100;
@@ -240,7 +235,6 @@ void FileTransfer::cancel() {
     
 }
 void FileTransfer::slotExec() {
-    qWarning("exited!");
     char buf[2];
     ::read(m_term[0], buf, 1 );
     delete m_proc;

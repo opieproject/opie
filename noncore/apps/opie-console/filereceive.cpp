@@ -135,13 +135,11 @@ void FileReceive::setupChild() {
 void FileReceive::slotRead() {
     QByteArray ar(4096);
     int len = read(m_comm[0], ar.data(), 4096 );
-    qWarning("slot read %d", len);
     for (int i = 0; i < len; i++ ) {
         // printf("%c", ar[i] );
     }
     ar.resize( len );
     QString str( ar );
-    qWarning(str.simplifyWhiteSpace() );
 }
 void FileReceive::slotExec() {
     char buf[2];

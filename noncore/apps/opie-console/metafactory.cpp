@@ -120,7 +120,6 @@ ProfileDialogWidget *MetaFactory::newTerminalPlugin( const QString& str, QWidget
     if (str.isEmpty() )
         return 0l;
     ProfileDialogWidget* wid = 0l;
-    qWarning("new terminalPlugin %s %l", str.latin1(), parent );
 
     QMap<QString, configWidget>::Iterator it;
     it = m_termFact.find( str );

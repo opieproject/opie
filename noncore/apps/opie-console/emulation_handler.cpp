@@ -37,11 +37,9 @@ void EmulationHandler::load( const Profile& prof) {
      m_teWid->setBackgroundColor(backColor(num) );
 }
 void EmulationHandler::recv( const QByteArray& ar) {
-    qWarning("received in EmulationHandler!");
     m_teEmu->onRcvBlock(ar.data(), ar.count() );
 }
 void EmulationHandler::recvEmulation(const char* src, int len ) {
-    qWarning("received from te ");
     QByteArray ar(len);
 
     memcpy(ar.data(), src, sizeof(char) * len );
@@ -99,12 +97,10 @@ QColor EmulationHandler::foreColor(int col) {
     switch( col ) {
     default:
     case Profile::White:
-        qWarning("Foreground black");
         /* color is black */
         co = Qt::white;
         break;
     case Profile::Black:
-        qWarning("Foreground white");
         co = Qt::black;
         break;
     case Profile::Green:
@@ -126,12 +122,10 @@ QColor EmulationHandler::backColor(int col ) {
     switch( col ) {
     default:
     case Profile::White:
-        qWarning("Background white");
         /* color is white */
         co = Qt::black;
         break;
     case Profile::Black:
-        qWarning("Background black");
         co = Qt::white;
         break;
     case Profile::Green:

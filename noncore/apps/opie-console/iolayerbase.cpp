@@ -129,13 +129,10 @@ void IOLayerBase::setSpeed( Speed sp ) {
 }
 IOLayerBase::Flow IOLayerBase::flow()const {
     if (m_flowHw->isChecked() ) {
-        qWarning("Hardware flow");
         return Hardware;
     }else if( m_flowSw->isChecked() ) {
-        qWarning("Software");
         return Software;
     } else {
-        qWarning("None");
         return None;
     }
 }

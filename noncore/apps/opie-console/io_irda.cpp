@@ -32,8 +32,10 @@ bool IOIrda::open() {
     if ( m_attach->start() ) {
         IOSerial::open();
     } else {
+    // emit error!!!
         qWarning("could not attach to device");
         delete m_attach;
+	m_attach = 0l;
     }
 }
 

@@ -47,7 +47,6 @@ void Session::connect() {
 
     m_connected = true;
 
-    qWarning("connection in session");
     QObject::connect(m_layer, SIGNAL(received(const QByteArray&) ),
             m_emu, SLOT(recv(const QByteArray&) ) );
     QObject::connect(m_emu, SIGNAL(send(const QByteArray&) ),

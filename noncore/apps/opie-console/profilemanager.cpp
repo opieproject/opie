@@ -24,7 +24,6 @@ ProfileManager::~ProfileManager() {
 }
 void ProfileManager::load() {
     m_list.clear();
-    qWarning("load");
     ProfileConfig conf("opie-console-profiles");
     QStringList groups = conf.groups();
     QStringList::Iterator it;
@@ -33,13 +32,11 @@ void ProfileManager::load() {
      * for each profile
      */
     for ( it = groups.begin(); it != groups.end(); ++it ) {
-        qWarning("group " + (*it) );
         conf.setGroup( (*it) );
         Profile prof;
         prof.setName( conf.readEntry("name") );
         prof.setIOLayer( conf.readEntry("iolayer").utf8() );
         prof.setTerminalName( conf.readEntry("term").utf8() );
-        qWarning(" %s %s", conf.readEntry("iolayer").latin1(), prof.ioLayerName().data() );
         prof.setBackground( conf.readNumEntry("back") );
         prof.setForeground( conf.readNumEntry("fore") );
         prof.setTerminal( conf.readNumEntry("terminal") );
@@ -121,7 +118,6 @@ void ProfileManager::save(  ) {
 
         conf.writeEntry( "name", (*it2).name() );
         QString str = QString::fromUtf8( (*it2).ioLayerName() );
-	qWarning("IOLayerName " + str );
 
         conf.writeEntry( "iolayer", str );
         conf.writeEntry( "term", QString::fromUtf8( (*it2).terminalName()  ) );

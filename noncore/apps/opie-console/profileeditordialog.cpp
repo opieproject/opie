@@ -115,10 +115,6 @@ void ProfileEditorDialog::initUI()
     setCurrent( m_fact->external(m_prof.ioLayerName() ), m_conCmb );
     setCurrent( m_fact->external(m_prof.terminalName() ), m_termCmb );
 
-    qWarning("Layer: %s %s", m_prof.ioLayerName().data(),
-             m_fact->external(m_prof.ioLayerName() ).latin1() );
-    qWarning("Term: %s %s", m_prof.terminalName().data(),
-             m_fact->external(m_prof.terminalName() ).latin1() );
 
     // signal and slots
     connect(m_conCmb, SIGNAL(activated(const QString& ) ),
@@ -147,8 +143,6 @@ void ProfileEditorDialog::accept()
 	m_prof.setName(profName());
 	m_prof.setIOLayer(      m_fact->internal(m_conCmb ->currentText()  ) );
         m_prof.setTerminalName( m_fact->internal(m_termCmb->currentText()  ) );
-        qWarning("Term %s %s", m_fact->internal(m_termCmb->currentText() ).data(),
-                 m_termCmb->currentText().latin1() );
 
         if (m_con )
             m_con->save( m_prof );
@@ -190,7 +184,6 @@ void ProfileEditorDialog::slotConActivated( const QString& str ) {
 void ProfileEditorDialog::slotTermActivated( const QString& str ) {
     delete m_term;
     m_term = m_fact->newTerminalPlugin( str, m_tabTerm );
-    qWarning("past");
 
     if (m_term) {
         m_term->load(m_prof );
