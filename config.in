@@ -85,13 +85,11 @@ menu "Base"
     default LIBQPE
     
     source library/config.in
-    source x11/config.in
   endchoice
   source libopie/config.in
   source core/opie-login/config.in
   source core/opiealarm/config.in
   source core/launcher/config.in
-  source core/qws/config.in
 endmenu
 
 comment ""
@@ -127,7 +125,7 @@ menu "Games"
   source noncore/games/config.in
 endmenu
 menu "Graphics and Multimedia"
-  source freetype/config.in
+  #source freetype/config.in
   source noncore/graphics/config.in
   source core/multimedia/config.in
   source noncore/multimedia/config.in
@@ -155,7 +153,4 @@ menu "Tools"
   source development/config.in
 endmenu
 comment ""
-menu "Experimental"
-  source libopie2/config.in
-endmenu
 
