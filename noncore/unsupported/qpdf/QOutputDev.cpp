@@ -181,8 +181,6 @@ QOutputDev::QOutputDev ( QWidget *parent, const char *name, int flags ) : QScrol
 	m_pixmap = 0;
 	m_painter = 0;
 	
-	m_use_string = true;
-	
 	// create text object
 	m_text = new TextPage ( gFalse );
 }
