@@ -17,11 +17,11 @@ public:
 
     QString number();
 
-    void setNumber( int );
+    void setNumber( QString number );
 
 private:
-    float m_number;
-    QLCDNumber *LCD;
+	QString m_number;
+    QLCDNumber *LCD1, *LCD2;
 
 private slots:
     void slotEnterNumber( int );

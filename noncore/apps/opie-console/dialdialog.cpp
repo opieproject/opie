@@ -15,8 +15,6 @@
 DialDialog::DialDialog(  QWidget* parent, const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl ) {
 
-    m_number = 0;
-
     setCaption( tr( "Enter number" ) );
 
     QVBoxLayout *mainLayout = new QVBoxLayout( this );
@@ -24,13 +22,21 @@ DialDialog::DialDialog(  QWidget* parent, const char* name, bool modal, WFlags f
     QLabel *textLabel = new QLabel( this );
     textLabel->setText( tr("Enter the number you want to dial. When finished, press ok") );
 
-    LCD = new QLCDNumber( this, "LCD" );
-    QFont LCD_font(  LCD->font() );
-    LCD_font.setPointSize( 7 );
-    LCD->setFont( LCD_font );
-    LCD->setNumDigits( 25 );
-    LCD->setSegmentStyle( QLCDNumber::Flat );
-    LCD->setMaximumHeight( 30 );
+    LCD1 = new QLCDNumber( this, "LCD" );
+    QFont LCD_font1(  LCD1->font() );
+    LCD_font1.setPointSize( 7 );
+    LCD1->setFont( LCD_font1 );
+    LCD1->setNumDigits( 8 );
+    LCD1->setSegmentStyle( QLCDNumber::Flat );
+    LCD1->setMaximumHeight( 30 );
+
+    LCD2 = new QLCDNumber( this, "LCD" );
+    QFont LCD_font2(  LCD2->font() );
+    LCD_font2.setPointSize( 7 );
+    LCD2->setFont( LCD_font2 );
+    LCD2->setNumDigits( 8 );
+    LCD2->setSegmentStyle( QLCDNumber::Flat );
+    LCD2->setMaximumHeight( 30 );
 
     QGridLayout *layout = new QGridLayout( this , 4, 3 );
 
@@ -68,12 +74,12 @@ DialDialog::DialDialog(  QWidget* parent, const char* name, bool modal, WFlags f
 
     mainLayout->addStretch( 0 );
     mainLayout->addWidget( textLabel );
-    mainLayout->addWidget( LCD );
+	QHBoxLayout *lcdLayout = new QHBoxLayout(mainLayout);
+    lcdLayout->addWidget( LCD1 );
+    lcdLayout->addWidget( LCD2 );
     mainLayout->addStretch( 0 );
     mainLayout->addLayout( layout );
     mainLayout->addStretch( 0 );
-
-
 }
 
 
@@ -81,23 +87,25 @@ void DialDialog::slotEnterNumber( int number ) {
 
     // pretty stupid, just for testing .-)
 
-    m_number = ( m_number * 10 ) + number;
-    qDebug( QString("%1").arg( m_number ) );
-    LCD->display( m_number );
+	m_number.append(QString("%1").arg(number));
 
+	setNumber(m_number);
 }
 
 DialDialog::~DialDialog() {
 }
 
 QString DialDialog::number() {
-    return QString( "%1").arg( m_number );
+    return m_number;
 
 }
 
-void DialDialog::setNumber( int number )
+void DialDialog::setNumber( QString number )
 {
-    m_number = number;
-    LCD->display( m_number );
+	QString n1;
+	if(number.length() > 8) n1 = number.left(number.length() - 8);
+	QString n2 = number.right(8);
+    LCD1->display( n1.toInt() );
+	LCD2->display( n2.toInt() );
 }
 

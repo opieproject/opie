@@ -191,7 +191,7 @@ void ModemConfigWidget::slotAT() {
 void ModemConfigWidget::slotDial() {
     DialDialog dial( this, "DialConfig", true );
     if(!m_telNumber->text().isEmpty()) {
-        dial.setNumber(m_telNumber->text().replace(QRegExp("[\\-\\/\\ ]"), "").toInt());
+        dial.setNumber(m_telNumber->text().replace(QRegExp("[\\-\\/\\ \\.\\,]"), ""));
     }
     dial.showMaximized();
     if ( dial.exec() == QDialog::Accepted ) {
