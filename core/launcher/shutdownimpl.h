@@ -28,27 +28,27 @@ class QProgressBar;
 
 class ShutdownImpl : public QWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    ShutdownImpl( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+	ShutdownImpl( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
 
-    enum Type { ShutdownSystem, RebootSystem, RestartDesktop, TerminateDesktop };
+	enum Type { ShutdownSystem, RebootSystem, RestartDesktop, TerminateDesktop };
 
 signals:
-    void shutdown( ShutdownImpl::Type );
+	void shutdown( ShutdownImpl::Type );
 
 private slots:
-    void buttonClicked( int );
-    void cancelClicked();
-    void timeout();
+	void buttonClicked( int );
+	void cancelClicked();
+	void timeout();
 
 private:
-    QTimer *m_timer;
-    int     m_counter;
-    Type    m_operation;
-    
-    QLabel *      m_info;
-    QProgressBar *m_progress;
+	QTimer *m_timer;
+	int     m_counter;
+	Type    m_operation;
+
+	QLabel *      m_info;
+	QProgressBar *m_progress;
 };
 
 #endif
