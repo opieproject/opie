@@ -265,6 +265,8 @@ InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags
 
     LineEdit1 = new QLineEdit( this, "LineEdit1" );
     LineEdit1->setGeometry( QRect( 10, 10, 216, 22 ) );
+    LineEdit1->setFocus();
+    LineEdit1->setFocus();
     connect(LineEdit1,SIGNAL(returnPressed()),this,SLOT(returned() ));
 }
 

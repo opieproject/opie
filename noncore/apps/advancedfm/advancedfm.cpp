@@ -87,27 +87,31 @@ void AdvancedFm::cleanUp() {
     file.remove();
 }
 
-void AdvancedFm::tabChanged(QWidget *) {
-  if (TabWidget->getCurrentTab() == 0) {
+void AdvancedFm::tabChanged(QWidget *w) {
+    qDebug("tab changed %d",TabWidget->getCurrentTab());
+
+    if ( w == tab) {
+//    if (TabWidget->getCurrentTab() == 0) {
 //  if (TabWidget->currentPageIndex() == 0) {
-    currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
-    viewMenu->setItemChecked(viewMenu->idAt(0),TRUE);
-    viewMenu->setItemChecked(viewMenu->idAt(1),FALSE);
-  QString fs= getFileSystemType((const QString &) currentDir.canonicalPath());
-  setCaption("AdvancedFm :: "+fs+" :: "
-             +checkDiskSpace((const QString &) currentDir.canonicalPath())+" kB free" );
+        currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
+        viewMenu->setItemChecked(viewMenu->idAt(0),TRUE);
+        viewMenu->setItemChecked(viewMenu->idAt(1),FALSE);
+        QString fs= getFileSystemType((const QString &) currentDir.canonicalPath());
+        setCaption("AdvancedFm :: "+fs+" :: "
+                   +checkDiskSpace((const QString &) currentDir.canonicalPath())+" kB free" );
     
-  }
-  if (TabWidget->getCurrentTab() == 1) {
+    }
+    if ( w == tab_2) {
+//    if (TabWidget->getCurrentTab() == 1) {
   
 //  if (TabWidget->currentPageIndex() == 1) {
-    currentPathCombo->lineEdit()->setText( currentRemoteDir.canonicalPath());
-    viewMenu->setItemChecked(viewMenu->idAt(1),TRUE);
-    viewMenu->setItemChecked(viewMenu->idAt(0),FALSE);
-  QString fs= getFileSystemType((const QString &) currentRemoteDir.canonicalPath());
-  setCaption("AdvancedFm :: "+fs+" :: "
-             +checkDiskSpace((const QString &) currentRemoteDir.canonicalPath())+" kB free" );
-  }
+        currentPathCombo->lineEdit()->setText( currentRemoteDir.canonicalPath());
+        viewMenu->setItemChecked(viewMenu->idAt(1),TRUE);
+        viewMenu->setItemChecked(viewMenu->idAt(0),FALSE);
+        QString fs= getFileSystemType((const QString &) currentRemoteDir.canonicalPath());
+        setCaption("AdvancedFm :: "+fs+" :: "
+                   +checkDiskSpace((const QString &) currentRemoteDir.canonicalPath())+" kB free" );
+    }
 }
 
 
