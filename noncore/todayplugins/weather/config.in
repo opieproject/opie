@@ -1,0 +1,5 @@
+  config TODAY_WEATHER
+    boolean "weather"
+    default "y"
+    depends TODAY
+

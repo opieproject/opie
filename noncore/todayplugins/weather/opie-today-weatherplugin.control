@@ -1,0 +1,8 @@
+Files: plugins/today/libtodayweatherplugin.so* pics/todayweatherplugin
+Priority: optional
+Section: opie/applications
+Maintainer: Dan Williams <williamsdr@acm.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: qt-embedded (>=$QTE_VERSION), opie-today
+Description: Current weather plugin for today.
