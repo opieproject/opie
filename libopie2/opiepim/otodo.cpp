@@ -273,27 +273,61 @@ QString OTodo::toRichText() const
   QString text;
   QStringList catlist;
 
-  // Description of the todo
+  // summary
+  text += "<b><h3><img src=\"todo/TodoList\">";
   if ( !summary().isEmpty() ) {
-    text += "<b>" + QObject::tr( "Summary:") + "</b><br>";
-    text += Qtopia::escapeString(summary() ).replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
+      text += Qtopia::escapeString(summary() ).replace(QRegExp( "[\n]"),  "" );
   }
+  text += "</h3></b><br><hr><br>";
+    
+  // description
   if( !description().isEmpty() ){
     text += "<b>" + QObject::tr( "Description:" ) + "</b><br>";
     text += Qtopia::escapeString(description() ).replace(QRegExp( "[\n]"), "<br>" ) ;
   }
-  text += "<br><br><br>";
 
-  text += "<b>" + QObject::tr( "Priority:") +" </b>"
-    +  QString::number( priority() ) + " <br>";
+  // priority
+  int priorityval = priority();
+  text += "<b>" + QObject::tr( "Priority:") +" </b><img src=\"todo/priority" +
+          QString::number( priorityval ) + "\">";
+//  text += "<b>" + QObject::tr( "Priority:") +"</b><img src=\"todo/priority" +
+//          QString::number( priority() ) + "\"><br>";
+  switch ( priorityval )
+  {
+    case 1 : text += QObject::tr( "Very high" );
+        break;
+    case 2 : text += QObject::tr( "High" );
+        break;
+    case 3 : text += QObject::tr( "Normal" );
+        break;
+    case 4 : text += QObject::tr( "Low" );
+        break;
+    case 5 : text += QObject::tr( "Very low" );
+        break;
+  };
+  text += "<br>";
+    
+  // progress
   text += "<b>" + QObject::tr( "Progress:") + " </b>"
           + QString::number( progress() ) + " %<br>";
+          
+  // due date
   if (hasDueDate() ){
-    text += "<b>" + QObject::tr( "Deadline:") + " </b>";
-    text += dueDate().toString();
-    text += "<br>";
-  }
+    QDate dd = dueDate();
+    int off = QDate::currentDate().daysTo( dd );
+    
+    text += "<b>" + QObject::tr( "Deadline:" ) + " </b><font color=\"";
+    if ( off < 0 )
+      text += "#FF0000";
+    else if ( off == 0 )
+      text += "#FFFF00";
+    else if ( off > 0 )
+      text += "#00FF00";
 
+    text += "\">" + dd.toString() + "</font><br>";
+  }
+  
+  // categories
   text += "<b>" + QObject::tr( "Category:") + "</b> ";
   text += categoryNames( "Todo List" ).join(", ");
   text += "<br>";

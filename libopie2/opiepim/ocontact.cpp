@@ -440,7 +440,8 @@ QString OContact::toRichText() const
 
     // name, jobtitle and company
     if ( !(value = fullName()).isEmpty() )
-	text += "<b><h3>" + Qtopia::escapeString(value) + "</h3></b><br>";
+	text += "<b><h3><img src=\"addressbook/AddressBook\">" + Qtopia::escapeString(value) + "</h3></b>";
+    
     if ( !(value = jobTitle()).isEmpty() )
 	text += Qtopia::escapeString(value) + "<br>";
 
@@ -455,17 +456,19 @@ QString OContact::toRichText() const
     if ( !comp.isEmpty() )
 	text += Qtopia::escapeString(comp) + "<br>";
 
+    text += "<hr><br>";
+
+    // defailt email
     QString defEmail = defaultEmail();
     if ( !defEmail.isEmpty() )
-	text += "<b>" + QObject::tr("Default Email: ") + "</b>"
+	text += "<b><img src=\"addressbook/email\">" + QObject::tr("Default Email: ") + "</b>"
 		+ Qtopia::escapeString(defEmail) + "<br>";
 
-    text += "<hr>";
+    text += "<br>";
 
     // business address
     if ( !businessStreet().isEmpty() || !businessCity().isEmpty() ||
 	 !businessZip().isEmpty() || !businessCountry().isEmpty() ) {
-	text += "<br>";
 	text += QObject::tr( "<b>Work Address:</b>" );
 	text +=  "<br>";
 	marker = true;
@@ -496,25 +499,25 @@ QString OContact::toRichText() const
     }
     str = businessWebpage();
     if ( !str.isEmpty() ){
-	text += "<b>" + QObject::tr("Business Web Page: ") + "</b>"
+	text += "<b><img src=\"addressbook/webpagework\">" + QObject::tr("Business Web Page: ") + "</b>"
 		+ Qtopia::escapeString(str) + "<br>";
 	marker = true;
     }
     str = businessPhone();
     if ( !str.isEmpty() ){
-	text += "<b>" + QObject::tr("Business Phone: ") + "</b>"
+	text += "<b><img src=\"addressbook/phonework\">" + QObject::tr("Business Phone: ") + "</b>"
 		+ Qtopia::escapeString(str) + "<br>";
 	marker = true;
     }
     str = businessFax();
     if ( !str.isEmpty() ){
-	text += "<b>" + QObject::tr("Business Fax: ") + "</b>"
+	text += "<b><img src=\"addressbook/faxwork\">" + QObject::tr("Business Fax: ") + "</b>"
 		+ Qtopia::escapeString(str) + "<br>";
 	marker = true;
     }
     str = businessMobile();
     if ( !str.isEmpty() ){
-	text += "<b>" + QObject::tr("Business Mobile: ") + "</b>"
+	text += "<b><img src=\"addressbook/mobilework\">" + QObject::tr("Business Mobile: ") + "</b>"
 		+ Qtopia::escapeString(str) + "<br>";
 	marker = true;
     }
@@ -525,10 +528,11 @@ QString OContact::toRichText() const
 	marker = true;
     }
 
+    text += "<br>";
+
     // home address
     if ( !homeStreet().isEmpty() || !homeCity().isEmpty() ||
 	 !homeZip().isEmpty() || !homeCountry().isEmpty() ) {
-	text += "<br>";
 	text += QObject::tr( "<b>Home Address:</b>" );
 	text +=  "<br>";
     }
@@ -551,25 +555,25 @@ QString OContact::toRichText() const
     // rest of Home data
     str = homeWebpage();
     if ( !str.isEmpty() ){
-	text += "<b>" + QObject::tr("Home Web Page: ") + "</b>"
+	text += "<b><img src=\"addressbook/webpagehome\">" + QObject::tr("Home Web Page: ") + "</b>"
 		+ Qtopia::escapeString(str) + "<br>";
 	marker = true;
     }
     str = homePhone();
     if ( !str.isEmpty() ){
-	text += "<b>" + QObject::tr("Home Phone: ") + "</b>"
+	text += "<b><img src=\"addressbook/phonehome\">" + QObject::tr("Home Phone: ") + "</b>"
 		+ Qtopia::escapeString(str) + "<br>";
 	marker = true;
     }
     str = homeFax();
     if ( !str.isEmpty() ){
-	text += "<b>" + QObject::tr("Home Fax: ") + "</b>"
+	text += "<b><img src=\"addressbook/faxhome\">" + QObject::tr("Home Fax: ") + "</b>"
 		+ Qtopia::escapeString(str) + "<br>";
 	marker = true;
     }
     str = homeMobile();
     if ( !str.isEmpty() ){
-	text += "<b>" + QObject::tr("Home Mobile: ") + "</b>"
+	text += "<b><img src=\"addressbook/mobilehome\">" + QObject::tr("Home Mobile: ") + "</b>"
 		+ Qtopia::escapeString(str) + "<br>";
 	marker = true;
     }
@@ -625,6 +629,7 @@ QString OContact::toRichText() const
 	text += "<b>" + QObject::tr("Nickname: ") + "</b>"
 		+ Qtopia::escapeString(str) + "<br>";
 
+    // categories
     if ( categoryNames("Contacts").count() ){
 	    text += "<b>" + QObject::tr( "Category:") + "</b> ";
 	    text += categoryNames("Contacts").join(", ");
