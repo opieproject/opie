@@ -98,7 +98,7 @@ public slots:
     void fillValues();
 
 protected slots:
-    void slotSSL( bool enabled );
+    void slotConnectionToggle( int index );
     void accept();
 
 private:

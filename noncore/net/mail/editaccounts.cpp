@@ -312,13 +312,23 @@ POP3config::POP3config( POP3account *account, QWidget *parent, const char *name,
     data = account;
     fillValues();
 
-    connect( sslBox, SIGNAL( toggled( bool ) ), SLOT( slotSSL( bool ) ) );
+    connect( ComboBox1, SIGNAL( activated( int ) ), SLOT( slotConnectionToggle( int ) ) );
+    ComboBox1->insertItem( "Only if available", 0 );
+    ComboBox1->insertItem( "Always, Negotiated", 1 );
+    ComboBox1->insertItem( "Connect on secure port", 2 );
+    ComboBox1->insertItem( "Run command instead", 3 );
+    CommandEdit->hide();
+    ComboBox1->setCurrentItem( data->ConnectionType() );
 }
 
-void POP3config::slotSSL( bool enabled )
+void POP3config::slotConnectionToggle( int index )
 {
-    if ( enabled ) {
-        portLine->setText( POP3_SSL_PORT );
+    // 2 is ssl connection
+    if ( index == 2 ) {
+       portLine->setText( POP3_SSL_PORT );
+    } else if (  index == 3 ) {
+        portLine->setText( POP3_PORT );
+        CommandEdit->show();
     } else {
         portLine->setText( POP3_PORT );
     }
@@ -329,7 +339,7 @@ void POP3config::fillValues()
     accountLine->setText( data->getAccountName() );
     serverLine->setText( data->getServer() );
     portLine->setText( data->getPort() );
-    sslBox->setChecked( data->getSSL() );
+    ComboBox1->setCurrentItem( data->ConnectionType() );
     userLine->setText( data->getUser() );
     passLine->setText( data->getPassword() );
 }
@@ -339,7 +349,7 @@ void POP3config::accept()
     data->setAccountName( accountLine->text() );
     data->setServer( serverLine->text() );
     data->setPort( portLine->text() );
-    data->setSSL( sslBox->isChecked() );
+    data->setConnectionType( ComboBox1->currentItem() );
     data->setUser( userLine->text() );
     data->setPassword( passLine->text() );
 

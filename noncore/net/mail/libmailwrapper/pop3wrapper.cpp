@@ -11,8 +11,7 @@
 #define HARD_MSG_SIZE_LIMIT 5242880
 
 POP3wrapper::POP3wrapper( POP3account *a )
-    : Genericwrapper()
-{
+: Genericwrapper() {
     account = a;
     m_pop3 = NULL;
     m_folder = NULL;
@@ -20,8 +19,7 @@ POP3wrapper::POP3wrapper( POP3account *a )
     last_msg_id = 0;
 }
 
-POP3wrapper::~POP3wrapper()
-{
+POP3wrapper::~POP3wrapper() {
     logout();
     QFile msg_cache(msgTempName);
     if (msg_cache.exists()) {
@@ -29,13 +27,11 @@ POP3wrapper::~POP3wrapper()
     }
 }
 
-void POP3wrapper::pop3_progress( size_t current, size_t maximum )
-{
+void POP3wrapper::pop3_progress( size_t current, size_t maximum ) {
     qDebug( "POP3: %i of %i", current, maximum );
 }
 
-RecBody POP3wrapper::fetchBody( const RecMail &mail )
-{
+RecBody POP3wrapper::fetchBody( const RecMail &mail ) {
     int err = MAILPOP3_NO_ERROR;
     char *message = 0;
     size_t length = 0;
@@ -90,27 +86,30 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail )
     body = parseMail(mailmsg);
 
     /* clean up */
-    if (mailmsg) mailmessage_free(mailmsg);
-    if (message) free(message);
+    if (mailmsg)
+        mailmessage_free(mailmsg);
+    if (message)
+        free(message);
 
     return body;
 }
 
-void POP3wrapper::listMessages(const QString &, QList<RecMail> &target )
-{
+void POP3wrapper::listMessages(const QString &, QList<RecMail> &target ) {
     login();
-    if (!m_pop3) return;
+    if (!m_pop3)
+        return;
     uint32_t res_messages,res_recent,res_unseen;
     mailsession_status_folder(m_folder->fld_session,"INBOX",&res_messages,&res_recent,&res_unseen);
     parseList(target,m_folder->fld_session,"INBOX");
     Global::statusMessage( tr("Mailbox contains %1 mail(s)").arg(res_messages));
 }
 
-void POP3wrapper::login()
-{
-    if (account->getOffline()) return;
+void POP3wrapper::login() {
+    if (account->getOffline())
+        return;
     /* we'll hold the line */
-    if ( m_pop3 != NULL ) return;
+    if ( m_pop3 != NULL )
+        return;
 
     const char *server, *user, *pass;
     uint16_t port;
@@ -119,30 +118,45 @@ void POP3wrapper::login()
     server = account->getServer().latin1();
     port = account->getPort().toUInt();
 
-	if ( account->getUser().isEmpty() || account->getPassword().isEmpty() ) {
-	  LoginDialog login( account->getUser(), account->getPassword(), NULL, 0, true );
-	  login.show();
-	  if ( QDialog::Accepted == login.exec() ) {
-		// ok
-		user = login.getUser().latin1();
-		pass = login.getPassword().latin1();
-	  } else {
-		// cancel
-		qDebug( "POP3: Login canceled" );
-		return;
-	  }
-	} else {
-	  user = account->getUser().latin1();
-	  pass = account->getPassword().latin1();
-	}
+    if ( account->getUser().isEmpty() || account->getPassword().isEmpty() ) {
+        LoginDialog login( account->getUser(), account->getPassword(), NULL, 0, true );
+        login.show();
+        if ( QDialog::Accepted == login.exec() ) {
+            // ok
+            user = login.getUser().latin1();
+            pass = login.getPassword().latin1();
+        } else {
+            // cancel
+            qDebug( "POP3: Login canceled" );
+            return;
+        }
+    } else {
+        user = account->getUser().latin1();
+        pass = account->getPassword().latin1();
+    }
 
-    bool ssl = account->getSSL();
+    //  bool ssl = account->getSSL();
 
     m_pop3=mailstorage_new(NULL);
-    int conntype = (ssl?CONNECTION_TYPE_TLS:CONNECTION_TYPE_PLAIN);
-    
-    pop3_mailstorage_init(m_pop3,(char*)server,port,NULL,conntype,POP3_AUTH_TYPE_PLAIN,
-        (char*)user,(char*)pass,0,0,0);
+
+    int conntypeset = account->ConnectionType();
+    int conntype = 0;
+    if ( conntypeset == 3 ) {
+        conntype = CONNECTION_TYPE_COMMAND;
+    } else if ( conntypeset == 2 ) {
+        conntype = CONNECTION_TYPE_TLS;
+    } else if ( conntypeset == 1 ) {
+        conntype = CONNECTION_TYPE_STARTTLS;
+    } else if ( conntypeset == 0 ) {
+        conntype = CONNECTION_TYPE_TRY_STARTTLS;
+    }
+
+    //(ssl?CONNECTION_TYPE_TLS:CONNECTION_TYPE_PLAIN);
+
+    pop3_mailstorage_init(m_pop3,(char*)server, port, NULL, conntype, POP3_AUTH_TYPE_PLAIN,
+                          (char*)user,(char*)pass,0,0,0);
+
+
 
     m_folder = mailfolder_new(m_pop3, NULL, NULL);
 
@@ -163,10 +177,10 @@ void POP3wrapper::login()
     }
 }
 
-void POP3wrapper::logout()
-{
+void POP3wrapper::logout() {
     int err = MAILPOP3_NO_ERROR;
-    if ( m_pop3 == NULL ) return;
+    if ( m_pop3 == NULL )
+        return;
     mailfolder_free(m_folder);
     m_folder = 0;
     mailstorage_free(m_pop3);
@@ -174,8 +188,7 @@ void POP3wrapper::logout()
 }
 
 
-QList<Folder>* POP3wrapper::listFolders()
-{
+QList<Folder>* POP3wrapper::listFolders() {
     QList<Folder> * folders = new QList<Folder>();
     folders->setAutoDelete( false );
     Folder*inb=new Folder("INBOX","/");
@@ -183,24 +196,22 @@ QList<Folder>* POP3wrapper::listFolders()
     return folders;
 }
 
-void POP3wrapper::deleteMail(const RecMail&mail)
-{
+void POP3wrapper::deleteMail(const RecMail&mail) {
     login();
-    if (!m_pop3) return;
+    if (!m_pop3)
+        return;
     int err = mailsession_remove_message(m_folder->fld_session,mail.getNumber());
     if (err != MAIL_NO_ERROR) {
         Global::statusMessage(tr("error deleting mail"));
     }
 }
 
-void POP3wrapper::answeredMail(const RecMail&)
-{
-}
+void POP3wrapper::answeredMail(const RecMail&) {}
 
-int POP3wrapper::deleteAllMail(const Folder*)
-{
+int POP3wrapper::deleteAllMail(const Folder*) {
     login();
-    if (!m_pop3) return 0;
+    if (!m_pop3)
+        return 0;
     int res = 1;
 
     uint32_t result = 0;
@@ -220,38 +231,36 @@ int POP3wrapper::deleteAllMail(const Folder*)
     return res;
 }
 
-void POP3wrapper::statusFolder(folderStat&target_stat,const QString&)
-{
+void POP3wrapper::statusFolder(folderStat&target_stat,const QString&) {
     login();
     target_stat.message_count = 0;
     target_stat.message_unseen = 0;
     target_stat.message_recent = 0;
-    if (!m_pop3) return;
+    if (!m_pop3)
+        return;
     int r = mailsession_status_folder(m_folder->fld_session,0,&target_stat.message_count,
-        &target_stat.message_recent,&target_stat.message_unseen);
+                                      &target_stat.message_recent,&target_stat.message_unseen);
 }
 
-encodedString* POP3wrapper::fetchRawBody(const RecMail&mail)
-{
+encodedString* POP3wrapper::fetchRawBody(const RecMail&mail) {
     char*target=0;
     size_t length=0;
     encodedString*res = 0;
     mailmessage * mailmsg = 0;
     int err = mailsession_get_message(m_folder->fld_session, mail.getNumber(), &mailmsg);
     err = mailmessage_fetch(mailmsg,&target,&length);
-    if (mailmsg) mailmessage_free(mailmsg);
+    if (mailmsg)
+        mailmessage_free(mailmsg);
     if (target) {
         res = new encodedString(target,length);
     }
     return res;
 }
 
-const QString&POP3wrapper::getType()const
-{
+const QString&POP3wrapper::getType()const {
     return account->getType();
 }
 
-const QString&POP3wrapper::getName()const
-{
+const QString&POP3wrapper::getName()const {
     return account->getAccountName();
 }

@@ -31,6 +31,10 @@ public:
     void setSSL( bool b ) { ssl = b; }
     bool getSSL() { return ssl; }
     
+    void setConnectionType( int x ) { connectionType = x; }
+    int ConnectionType() { return connectionType; }
+    
+
     void setOffline(bool b) {offline = b;}
     bool getOffline()const{return offline;}
 
@@ -41,6 +45,7 @@ public:
 protected:
     QString accountName, type, server, port, user, password;
     bool ssl;
+    int connectionType;
     bool offline;
 };
 

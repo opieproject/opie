@@ -108,6 +108,7 @@ Account::Account()
     accountName = "changeMe";
     type = "changeMe";
     ssl = false;
+    connectionType = 1;
 }
 
 void Account::remove()
@@ -122,6 +123,7 @@ IMAPaccount::IMAPaccount()
     file = IMAPaccount::getUniqueFileName();
     accountName = "New IMAP Account";
     ssl = false;
+    connectionType = 1;
     type = "IMAP";
     port = IMAP_PORT;
 }
@@ -132,6 +134,7 @@ IMAPaccount::IMAPaccount( QString filename )
     file = filename;
     accountName = "New IMAP Account";
     ssl = false;
+    connectionType = 1;
     type = "IMAP";
     port = IMAP_PORT;
 }
@@ -203,6 +206,7 @@ POP3account::POP3account()
     file = POP3account::getUniqueFileName();
     accountName = "New POP3 Account";
     ssl = false;
+    connectionType = 1;
     type = "POP3";
     port = POP3_PORT;
 }
@@ -213,6 +217,7 @@ POP3account::POP3account( QString filename )
     file = filename;
     accountName = "New POP3 Account";
     ssl = false;
+    connectionType = 1;
     type = "POP3";
     port = POP3_PORT;
 }
@@ -240,6 +245,7 @@ void POP3account::read()
     server = conf->readEntry( "Server" );
     port = conf->readEntry( "Port" );
     ssl = conf->readBoolEntry( "SSL" );
+    connectionType = conf->readNumEntry( "ConnectionType" );
     user = conf->readEntry( "User" );
     password = conf->readEntryCrypt( "Password" );
     offline = conf->readBoolEntry("Offline",false);
@@ -257,6 +263,7 @@ void POP3account::save()
     conf->writeEntry( "Server", server );
     conf->writeEntry( "Port", port );
     conf->writeEntry( "SSL", ssl );
+    conf->writeEntry( "ConnectionType", connectionType );
     conf->writeEntry( "User", user );
     conf->writeEntryCrypt( "Password", password );
     conf->writeEntry( "Offline",offline);
