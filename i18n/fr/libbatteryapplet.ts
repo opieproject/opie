@@ -8,11 +8,11 @@
     </message>
     <message>
         <source>Percentage battery remaining</source>
-        <translation>Pourcentage de batterie chargé</translation>
+        <translation>Pourcentage de batterie chargé </translation>
     </message>
     <message>
         <source>Battery status: </source>
-        <translation>Niveau batterie(s) : </translation>
+        <translation>Niveau batterie : </translation>
     </message>
     <message>
         <source>Good</source>
@@ -48,7 +48,7 @@
     </message>
     <message>
         <source>Battery time remaining</source>
-        <translation>Durée de batterie restante</translation>
+        <translation>Durée de batterie restante </translation>
     </message>
     <message>
         <source>Close</source>
