@@ -239,6 +239,8 @@ menu "Pim"
   comment "Today Plugins ---"
     source noncore/todayplugins/config.in
     source core/pim/today/plugins/config.in
+  comment "Holiday Plugins ---"
+    source core/pim/datebook/holiday/config.in
 endmenu
 
 menu "Settings"
