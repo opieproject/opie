@@ -1,4 +1,4 @@
-CONFIG EXAMPLE_SIMPLE
-    boolean "Simple Example"
-    default "n"
-    depends (LIBQPE || LIBQPE-X11 ) && EXAMPLES    
+  config SIMPLE_EXAMPLE
+    boolean "Simple widget with a button"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && EXAMPLES
