@@ -19,11 +19,12 @@
 **********************************************************************/
 #include "documentlist.h"
 #include "serverinterface.h"
+#include "launcherglobal.h"
 
 #include <qtopia/mimetype.h>
 #include <qtopia/resource.h>
 #include <qtopia/global.h>
-#include <qtopia/categories.h>
+#include <qtopia/private/categories.h>
 #include <qtopia/qpeapplication.h>
 #include <qtopia/applnk.h>
 #include <qtopia/storage.h>
@@ -242,7 +243,7 @@ void DocumentList::reloadAppLnks()
 	    d->serverGui->applicationAdded( l->type(), *l );
     }
 
-    if ( d->sendAppLnks && d->serverGui ) 
+    if ( d->sendAppLnks && d->serverGui )
 	d->serverGui->applicationScanningProgress( 100 );
 }
 
@@ -263,7 +264,7 @@ void DocumentList::linkChanged( QString arg )
 {
     //qDebug( "linkchanged( %s )", arg.latin1() );
 
-    if ( arg.isNull() || Global::isAppLnkFileName( arg ) ) {
+    if ( arg.isNull() || Opie::Global::isAppLnkFileName( arg ) ) {
 	reloadAppLnks();
     } else {
 
@@ -272,7 +273,7 @@ void DocumentList::linkChanged( QString arg )
 	while ( it.current() ) {
 	    DocLnk *doc = it.current();
 	    ++it;
-	    if ( ( doc->linkFileKnown() && doc->linkFile() == arg ) 
+	    if ( ( doc->linkFileKnown() && doc->linkFile() == arg )
 		|| ( doc->fileKnown() && doc->file() == arg ) ) {
 		//qDebug( "found old link" );
 		DocLnk* dl = new DocLnk( arg );
@@ -456,8 +457,8 @@ void DocumentListPrivate::initialize()
 
 DocumentListPrivate::~DocumentListPrivate()
 {
-    for ( int i = 0; i < MAX_SEARCH_DEPTH; i++ ) 
-	if ( listDirs[i] ) 
+    for ( int i = 0; i < MAX_SEARCH_DEPTH; i++ )
+	if ( listDirs[i] )
 	    delete listDirs[i];
     delete dit;
 }
@@ -622,7 +623,7 @@ const DocLnk *DocumentListPrivate::iterate()
 		if ( store(dl) ) {
 		    ++*dit;
 		    iterationI++;
-		    if ( serverGui ) 
+		    if ( serverGui )
 			serverGui->documentScanningProgress( 75 + (25*iterationI)/iterationCount );
 		    return dl;
 		}
