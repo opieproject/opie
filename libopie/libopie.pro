@@ -44,7 +44,6 @@ HEADERS   = ofontmenu.h \
     pim/odatebookaccessbackend_xml.h \
     orecurrancewidget.h \
     oticker.h owait.h
-#    pim/otodoaccesssql.h \
 
 SOURCES   = ofontmenu.cc  \
         ocolorbutton.cpp \
@@ -85,13 +84,11 @@ SOURCES   = ofontmenu.cc  \
        pim/odatebookaccessbackend.cpp \
        pim/odatebookaccessbackend_xml.cpp \
        orecurrancewidget.cpp \
-       oticker.cpp owait.cpp \
-#             pim/otodoaccesssql.cpp \
+       oticker.cpp owait.cpp 
 
 TARGET    = opie
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR      = $(OPIEDIR)/lib$(PROJMAK)
-#VERSION = 1.0.0
 
 LIBS += -lqpe
 
