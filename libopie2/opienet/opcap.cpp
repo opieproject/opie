@@ -92,7 +92,7 @@ OPacket::OPacket( int datalink, packetheaderstruct header, const unsigned char* 
 OPacket::~OPacket()
 {
     odebug << "~OPacket( " << name() << " )" << oendl;
-    delete _data;
+    delete [] _data;
 }
 
 
