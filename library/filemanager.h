@@ -38,8 +38,10 @@ public:
     bool loadFile( const DocLnk&, QByteArray &data );
     bool loadFile( const DocLnk&, QString &text );
     bool copyFile( const AppLnk &src, const AppLnk &dest );
-
-    // The caller must delete the return values.
+    bool copyFile( const QString & src, const QString & dest );
+    bool renameFile( const QString &, const QString &);
+ 
+// The caller must delete the return values.
     QIODevice* openFile( const DocLnk& );
     QIODevice* saveFile( const DocLnk& );
 
