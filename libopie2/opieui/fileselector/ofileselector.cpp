@@ -355,14 +355,14 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
 
     m_btnNew = new QToolButton( box );
     pic.convertFromImage( Resource::loadImage( "new" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    btn->setPixmap( pic );
+    m_btnNew->setPixmap( pic );
     connect(m_btnNew, SIGNAL(clicked() ),
             this, SLOT(slotNew() ) );
 
 
     m_btnClose = new QToolButton( box );
     pic.convertFromImage( Resource::loadImage( "close" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    btn->setPixmap( pic );
+    m_btnClose->setPixmap( pic );
     connect(m_btnClose, SIGNAL(clicked() ),
             selector(), SIGNAL(closeMe() ) );
 
