@@ -98,7 +98,7 @@ void HelpBrowser::init( const QString& _home )
     forwardAction->setEnabled( FALSE );
 
     QAction *a = new QAction( tr( "Home" ), Resource::loadPixmap(
-"helpbrowser/home" ), QString::null, 0, this, 0 );
+"home" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), browser, SLOT( home() ) );
     //a->addTo( go );
     a->addTo( toolbar );
@@ -136,7 +136,7 @@ void HelpBrowser::setDocument( const QString &doc )
 {
     if ( !doc.isEmpty() )
 	browser->setSource( doc );
-    raise();    
+    raise();
 }
 
 
@@ -191,7 +191,7 @@ void HelpBrowser::readBookmarks()
 	    b.name = current.left( equal );
 	    b.file = current.mid( equal + 1 );
 	    mBookmarks[ bookm->insertItem( b.name ) ] = b;
-	} 
+	}
     }
 }
 
