@@ -502,7 +502,14 @@ void QPEApplication::internalSetStyle( const QString& ) {
 void QPEApplication::systemMessage( const QCString& chan, const QByteArray& ) {
     qWarning("QPEApplication::systemMessage( %s )", chan.data() );
 }
-void QPEApplication::pidMessage( const QCString&, const QByteArray& ) {
+void QPEApplication::pidMessage( const QCString& msg, const QByteArray& ) {
+    if ( msg == "flush()" ) {
+        emit flush();
+        QCopEnvelope e( "QPE/Desktop", "flushDone(QString)" );
+        e << d->appName;
+    }else if ( msg == "reload()" ) {
+        emit reload();
+    }
 
 }
 void QPEApplication::timerEvent( QTimerEvent* e ) {
