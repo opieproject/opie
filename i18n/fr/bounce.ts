@@ -77,7 +77,8 @@ Score: %1</translation>
     <message>
         <source>Successfully cleared more than 75%.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Vous avez réussi à nettoyer plus de 75%.
+</translation>
     </message>
     <message>
         <source>%1 points: 15 points per life

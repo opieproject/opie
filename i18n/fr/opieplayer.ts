@@ -71,7 +71,7 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>, Length: </source>
-        <translation>, Longueur:</translation>
+        <translation>, Durée:</translation>
     </message>
     <message>
         <source>Volume</source>
@@ -145,11 +145,11 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>Rescan for Audio Files</source>
-        <translation>Reparcourir pour les fichiers Audio</translation>
+        <translation>Rafraîchir la liste des fichiers Audio</translation>
     </message>
     <message>
         <source>Rescan for Video Files</source>
-        <translation>Reparcourir pour les fichiers Video</translation>
+        <translation>Rafraîchir la liste des fichiers Video</translation>
     </message>
     <message>
         <source>View</source>
@@ -259,7 +259,7 @@ cette liste?</translation>
     </message>
     <message>
         <source>Skins</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;Skins&quot;</translation>
     </message>
     <message>
         <source>Path</source>

@@ -4,7 +4,7 @@
     <name>LibMadPlugin</name>
     <message>
         <source>No Song Open</source>
-        <translation>Pas de musique ouverte</translation>
+        <translation>Pas de chanson ouverte</translation>
     </message>
     <message>
         <source>Title</source>
