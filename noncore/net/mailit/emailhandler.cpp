@@ -206,22 +206,11 @@ bool EmailHandler::parse(QString in, QString lineShift, Email *mail)
   {
   	QString rec;
 	
-  	if (p.separatorAt(pos-1)!='-')	
+  	if (p.separatorAt(pos-1)!='-')	//The - separator means that this is a Delivered-To: or Reply-To:
 	{
 		pos++;
 		mail->recipients.append(p.getString(&pos, '\r', TRUE));
       	} 
-	/*else {
-      		if ((p.separatorAt(pos) == '<')|| (p.separatorAt(pos) == ' '))       //No name.. nasty
-          		pos++;
-          		pos++;
-      			mail->fromMail = p.getString(&pos, 'z', TRUE);
-      			if (mail->fromMail.at(mail->fromMail.length()-1) == '>')
-      			mail->fromMail.truncate(mail->fromMail.length() - 1);
-      			mail->from=mail->fromMail;
-    		}
-		mail->recipients.append (p.getString(&pos, 'z', TRUE) );
-	}*/
   }
   //
   //if (pos==-1) mail->recipients.append (tr("undisclosed recipients") ); 
