@@ -45,6 +45,7 @@ ifeq ($(QPE_VERSION),)
         $(error Can't compute QPE_VERSION)
     endif
 endif
+QPE_VERSION=1.0.2
 export QPE_VERSION
 
 SUB_VERSION=$(shell echo $$(sed -n -e 's,.*SUB_VERSION \"\(.*\)\".*,\1,p' <$(OPIEDIR)/library/version.h))
