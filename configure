@@ -170,7 +170,7 @@ for a in $TOMAKE ; do
     O=$a/Makefile.add
     f=`basename $a`
 
-    if [ -f $TMAKEPATH/tmake.conf -a -f $a/$f.pro ]
+    if [ -f "$TMAKEPATH/tmake.conf" -a -f "$a/$f.pro" ]
     then
 	(   cd $a;
 	    TMAKEPATH=$QTDIR/tmake:$TMAKEPATH \
@@ -184,7 +184,7 @@ for a in $TOMAKE ; do
 	translation=`grep '^TRANSLATION.*[^+]=.*' $a/$f.pro | sed 's,^TRANSL.*=.*i18n\/.*\/,,' | sed 's/ //g' | sed 's,\.ts.*,,' | sed 's,^lib,,' `
 	if [ -n "$translation" -a -n "$appname" ]
 	then
-	    if [ $appname != $translation ]
+	    if [ "$appname" != "$translation" ]
 	    then 
 		echo
 		echo "Warning: translation and appname disagree in $a/$f.pro"
