@@ -35,12 +35,11 @@
 
 using namespace Opie::Ui;
 BatteryMeter::BatteryMeter( QWidget *parent )
-    : QWidget( parent ), charging(false)
-{
+: QWidget( parent ), charging(false) {
     ps = new PowerStatus;
     startTimer( 10000 );
 
-    setFixedWidth(  QMAX(AppLnk::smallIconSize()*3/4, 6) );
+    setFixedWidth( QMAX(AppLnk::smallIconSize()*3/4, 6) );
     setFixedHeight( AppLnk::smallIconSize() );
 
     chargeTimer = new QTimer( this );
@@ -52,20 +51,16 @@ BatteryMeter::BatteryMeter( QWidget *parent )
     style = c.readNumEntry( "Style", 0 );
 }
 
-BatteryMeter::~BatteryMeter()
-{
+BatteryMeter::~BatteryMeter() {
     delete ps;
 }
 
-QSize BatteryMeter::sizeHint() const
-{
+QSize BatteryMeter::sizeHint() const {
     return QSize(QMAX(AppLnk::smallIconSize()*3/4, 6), height() );
 }
 
-void BatteryMeter::mousePressEvent( QMouseEvent* e )
-{
-    if ( e->button() == RightButton )
-    {
+void BatteryMeter::mousePressEvent( QMouseEvent* e ) {
+    if ( e->button() == RightButton ) {
         style = 1-style;
         Config c( "qpe" );
         c.setGroup( "Battery" );
@@ -75,58 +70,64 @@ void BatteryMeter::mousePressEvent( QMouseEvent* e )
     QWidget::mousePressEvent( e );
 }
 
-void BatteryMeter::mouseReleaseEvent( QMouseEvent* /*e*/ )
-{
+void BatteryMeter::mouseReleaseEvent( QMouseEvent* /*e*/ ) {
     if ( batteryView && batteryView->isVisible() ) {
-        delete (QWidget *) batteryView;
+        batteryView->hide();
     } else {
-        if ( !batteryView ) batteryView = new BatteryStatus( ps );
-        QPEApplication::showWidget( batteryView );
+        if ( !batteryView ) {
+            batteryView = new BatteryStatus( ps, 0, WStyle_StaysOnTop | WType_Popup );
+            batteryView->setFrameStyle( QFrame::PopupPanel | QFrame::Raised );
+        }
+
+        QRect r(batteryView->pos(),batteryView->sizeHint());
+        QPoint curPos = this->mapToGlobal ( rect().topLeft() );
+
+        int lp = qApp->desktop()->width() - batteryView->sizeHint().width();
+        r.moveTopLeft( QPoint(lp, curPos.y()-batteryView->sizeHint().height()-1) );
+        batteryView->setGeometry(r);
+
         batteryView->raise();
-        batteryView->showMaximized();
+        batteryView->show();
     }
 }
 
-void BatteryMeter::timerEvent( QTimerEvent * )
-{
+
+void BatteryMeter::timerEvent( QTimerEvent * ) {
     PowerStatus prev = *ps;
 
     *ps = PowerStatusManager::readStatus();
 
     if ( prev != *ps ) {
-    percent = ps->batteryPercentRemaining();
-    if ( !charging && ps->batteryStatus() == PowerStatus::Charging ) {
-        percent = 0;
-        charging = true;
-        chargeTimer->start( 500 );
-    } else if ( charging && ps->batteryStatus() != PowerStatus::Charging ) {
-        charging = false;
-        chargeTimer->stop();
+        percent = ps->batteryPercentRemaining();
+        if ( !charging && ps->batteryStatus() == PowerStatus::Charging ) {
+            percent = 0;
+            charging = true;
+            chargeTimer->start( 500 );
+        } else if ( charging && ps->batteryStatus() != PowerStatus::Charging ) {
+            charging = false;
+            chargeTimer->stop();
+            if ( batteryView )
+                batteryView->updatePercent( percent );
+        }
+        repaint( style != 0 );
         if ( batteryView )
-        batteryView->updatePercent( percent );
-    }
-    repaint( style != 0 );
-    if ( batteryView )
-        batteryView->repaint();
+            batteryView->repaint();
     }
 }
 
-void BatteryMeter::chargeTimeout()
-{
+void BatteryMeter::chargeTimeout() {
     percent += 20;
     if ( percent > 100 )
-    percent = 0;
+        percent = 0;
 
     repaint(FALSE);
     if ( batteryView )
-    batteryView->updatePercent( percent );
+        batteryView->updatePercent( percent );
 }
 
-void BatteryMeter::paintEvent( QPaintEvent* )
-{
+void BatteryMeter::paintEvent( QPaintEvent* ) {
 
-    if ( style == 1 )
-    {
+    if ( style == 1 ) {
         QPainter p(this);
         QFont f( "Fixed", AppLnk::smallIconSize()/2 );
         QFontMetrics fm( f );
@@ -139,15 +140,20 @@ void BatteryMeter::paintEvent( QPaintEvent* )
     QPainter p(this);
     QColor color;
     QColor g = gray.light( 160 );
-    switch ( ps->acStatus() )
-    {
-        case PowerStatus::Offline: color = blue.light( 150 ); break;
-        case PowerStatus::Online: color = green.dark( 130 ).light( 180 ); break;
-        default: color = red.light( 160 );
+    switch ( ps->acStatus() ) {
+    case PowerStatus::Offline:
+        color = blue.light( 150 );
+        break;
+    case PowerStatus::Online:
+        color = green.dark( 130 ).light( 180 );
+        break;
+    default:
+        color = red.light( 160 );
     }
 
     int w = height() / 2;
-    if ( !(w%2) ) w--; // should have an odd value to get a real middle line
+    if ( !(w%2) )
+        w--; // should have an odd value to get a real middle line
     int h = height() - 4;
     int pix = (percent * h) / 100;
     int y2 = height() -2;
@@ -162,8 +168,7 @@ void BatteryMeter::paintEvent( QPaintEvent* )
     //int extra = ((percent * h) % 100)/(100/4);
 
     int middle = w/2;
-    for ( int i = 0; i < middle; i++ )
-    {
+    for ( int i = 0; i < middle; i++ ) {
         p.setPen( gray.dark( 100+i*20 ) );
         p.drawLine( x1+middle-i, 2, x1+middle-i, y-1 );
         p.drawLine( x1+middle+i, 2, x1+middle+i, y-1 );
@@ -173,8 +178,7 @@ void BatteryMeter::paintEvent( QPaintEvent* )
     }
 }
 
-int BatteryMeter::position()
-{
+int BatteryMeter::position() {
     return 8;
 }
 

@@ -20,24 +20,27 @@
 #ifndef BATTERY_STATUS_H
 #define BATTERY_STATUS_H
 
-#include <qwidget.h>
+#include <qframe.h>
 
 class PowerStatus;
 
-class BatteryStatus : public QWidget
+class BatteryStatus : public QFrame
 {
     Q_OBJECT
 public:
-    BatteryStatus( const PowerStatus *s, QWidget *parent=0 );
+    BatteryStatus( const PowerStatus *s, QWidget *parent=0, WFlags f = 0 );
     ~BatteryStatus();
 
     void updatePercent( int );
-
+    QSize sizeHint() const;
 protected:
     void drawSegment( QPainter *p, const QRect &r, const QColor &topgrad, const QColor &botgrad, const QColor &highlight, int hightlight_height );
     void paintEvent( QPaintEvent *pe );
     bool BatteryStatus::getProcApmStatusIpaq();
+
 private:
+    QString  statusText() const;
+    QString  statusTextIpaq() const;
     const PowerStatus *ps;
     int percent;
     int ipaqPercent;
@@ -52,6 +55,7 @@ private:
     QString ipaqChem;
     QString jackChem;
     bool bat2;
+    bool bat2inserted;
     int screenWidth;
     int screenHeight;
 };

@@ -37,12 +37,13 @@ class BatteryMeter : public QWidget
     QSize sizeHint() const;
     static int position();
 
+
+
   protected:
     void timerEvent( QTimerEvent* );
     void paintEvent( QPaintEvent* );
     void mousePressEvent( QMouseEvent* );
     void mouseReleaseEvent( QMouseEvent* );
-
   protected slots:
     void chargeTimeout();
 
