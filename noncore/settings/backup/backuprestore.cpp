@@ -47,13 +47,13 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name)
 
   systemSettings = new QListViewItem(backupList, "System Settings", "",
                                      "/etc");
-//  selectItem(systemSettings);
+  selectItem(systemSettings);
   applicationSettings = new QListViewItem(backupList, "Application Settings", "",
                                           QDir::homeDirPath() + "/Settings/");
   selectItem(applicationSettings);
   documents= new QListViewItem(backupList, "Documents", "",
                                QDir::homeDirPath() + "/Documents/");
-//  selectItem(documents);
+  selectItem(documents);
   
   scanForApplicationSettings();
   
@@ -140,11 +140,11 @@ void BackupAndRestore::selectItem(QListViewItem *currentItem){
     return;
 
   if(currentItem->text(HEADER_BACKUP) == "B"){
-    currentItem->setPixmap(HEADER_NAME, Resource::loadPixmap("null"));
+    currentItem->setPixmap(HEADER_NAME, Resource::loadPixmap("backup/null"));
     currentItem->setText(HEADER_BACKUP, "");
   }
   else{
-    currentItem->setPixmap(HEADER_NAME, Resource::loadPixmap("check"));
+    currentItem->setPixmap(HEADER_NAME, Resource::loadPixmap("backup/check"));
     currentItem->setText(HEADER_BACKUP, "B");
   }
 }
