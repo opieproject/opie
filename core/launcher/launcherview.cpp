@@ -44,6 +44,7 @@ using namespace Opie::Core;
 //#define USE_ANIMATED_BUSY_ICON_OVERLAY
 #define BOUNCE_BUSY_ICON
 
+typedef QMap<QString,QPixmap>::Iterator pixiter;
 
 class BgPixmap
 {
@@ -105,7 +106,6 @@ private:
     void paintAnimatedIcon( QPainter *p );
     BusyIndicatorType busyType;
     int psize;
-    QPixmap m_iPixmap;
     bool m_EyeImage;
     iconstate_t m_EyeImageSet;
 };
@@ -117,13 +117,16 @@ LauncherItem::LauncherItem( QIconView *parent, AppLnk *applnk, bool bigIcon )
     iteration(0),
     app(applnk), // Takes ownership
     psize( (bigIcon ? applnk->bigPixmap().width() :applnk->pixmap().width() ) ),
-    m_iPixmap(),
     m_EyeImage(false),
     m_EyeImageSet(BASE_ICON)
 {
     if (applnk->type().lower().startsWith("image/") && applnk->exec().contains("opie-eye",false)) {
         m_EyeImage = true;
-        m_iPixmap = (bigIcon ? applnk->bigPixmap():applnk->pixmap());
+        QMap<QString,QPixmap>::Iterator it = LauncherIconView::sm_EyeCache->find(applnk->file());
+        if (it != LauncherIconView::sm_EyeCache->end()) {
+            m_EyeImageSet = EYE_ICON;
+            setPixmap(*it);
+        }
     }
 }
 
@@ -213,7 +216,13 @@ void LauncherItem::animateIcon()
 
     // Highlight the icon
     if ( iteration == 0 ) {
-        QPixmap src = (isEyeImage()?m_iPixmap:(isBigIcon ? app->bigPixmap() : app->pixmap()));
+        QPixmap src;
+        pixiter it;
+        if (isEyeImage() && (it=LauncherIconView::sm_EyeCache->find(appLnk()->file()))!=LauncherIconView::sm_EyeCache->end()) {
+            src = (*it);
+        } else {
+            src = ((isBigIcon ? app->bigPixmap() : app->pixmap()));
+        }
         QImage img = src.convertToImage();
         QRgb *rgb;
         int count;
@@ -249,13 +258,19 @@ void LauncherItem::animateIcon()
 void LauncherItem::resetIcon()
 {
     iteration = 0;
-    setPixmap((isEyeImage()?m_iPixmap:(isBigIcon ? app->bigPixmap() : app->pixmap())));
+    if (isEyeImage()) {
+        QMap<QString,QPixmap>::Iterator it = LauncherIconView::sm_EyeCache->find(appLnk()->file());
+        if (it != LauncherIconView::sm_EyeCache->end()) {
+            setPixmap(*it);
+            return;
+        }
+    }
+    setPixmap(isBigIcon ? app->bigPixmap() : app->pixmap());
 }
 
 void LauncherItem::setEyePixmap(const QPixmap&aIcon)
 {
     if (!isEyeImage()) return;
-    m_iPixmap = aIcon;
     setPixmap(aIcon);
     m_EyeImageSet = EYE_ICON;
 }
@@ -263,10 +278,14 @@ void LauncherItem::setEyePixmap(const QPixmap&aIcon)
 //===========================================================================
 // Implemantation of LauncherIconview start
 //===========================================================================
+
+QMap<QString,QPixmap>* LauncherIconView::sm_EyeCache=0;
+
 LauncherIconView::LauncherIconView( QWidget* parent, const char* name )
     : QIconView(parent,name),tf(""),cf(0),bsy(0),busyTimer(0),bigIcns(TRUE),bgColor(white)
 {
     m_EyeCallBack = 0;
+    if (!sm_EyeCache) sm_EyeCache = new QMap<QString,QPixmap>();
     sortmeth = Name;
     hidden.setAutoDelete(TRUE);
     ike = FALSE;
@@ -432,6 +451,7 @@ void LauncherIconView::setEyePixmap(const QPixmap&aPixmap,const QString&aFile,in
     if (s!=width) return;
     LauncherItem*item = findDocItem(aFile);
     if (!item||!item->isEyeImage()) return;
+    (*sm_EyeCache)[aFile]=aPixmap;
     item->setEyePixmap(aPixmap);
 }
 
@@ -441,8 +461,8 @@ void LauncherIconView::checkCallback()
         m_EyeCallBack = new LauncherThumbReceiver();
         connect(m_EyeCallBack,SIGNAL(sig_Thumbnail(const QPixmap&,const QString&,int)),
             this,SLOT(setEyePixmap(const QPixmap&,const QString&,int)));
-        m_eyeTimer.changeInterval(600000);
     }
+    m_eyeTimer.changeInterval(600000);
 }
 
 void LauncherIconView::addCheckItem(AppLnk* app)
@@ -466,25 +486,12 @@ void LauncherIconView::requestEyePix(const LauncherItem*item)
 void LauncherIconView::stopEyeTimer()
 {
     if (m_EyeCallBack) {
+        disconnect(m_EyeCallBack,SIGNAL(sig_Thumbnail(const QPixmap&,const QString&,int)),
+            this,SLOT(setEyePixmap(const QPixmap&,const QString&,int)));
         delete m_EyeCallBack;
         m_EyeCallBack=0;
     }
     m_eyeTimer.stop();
-}
-
-void LauncherIconView::addItem(AppLnk* app, bool resort)
-{
-    addCatsAndMimes(app);
-    if ( (tf.isEmpty() || tf.match(app->type()) >= 0)
-     && (cf == 0 || app->categories().contains(cf)
-         || cf == -1 && app->categories().count() == 0 ) ) {
-        addCheckItem(app);
-    } else {
-        hidden.append(app);
-    }
-    if ( resort ){
-        sort();
-    }
 }
 
 void LauncherIconView::updateCategoriesAndMimeTypes()
@@ -528,7 +535,7 @@ void LauncherIconView::hideOrShowItems(bool resort)
     viewport()->setUpdatesEnabled( TRUE );
 }
 
-bool LauncherIconView::removeLink(const QString& linkfile)
+bool LauncherIconView::removeLink(const QString& linkfile,bool removeCache)
 {
     LauncherItem* item = (LauncherItem*)firstItem();
     AppLnk* l;
@@ -539,6 +546,7 @@ bool LauncherIconView::removeLink(const QString& linkfile)
         LauncherItem *nextItem = (LauncherItem *)item->nextItem();
         if (  l->linkFileKnown() && l->linkFile() == linkfile || l->fileKnown() &&
                  ( l->file() == linkfile || dl.isValid() && dl.file() == l->file() ) ) {
+            if (removeCache) sm_EyeCache->remove(l->file());
             delete item;
             did = TRUE;
         }
@@ -557,6 +565,38 @@ bool LauncherIconView::removeLink(const QString& linkfile)
     return did;
 }
 
+void LauncherIconView::addItem(AppLnk* app, bool resort)
+{
+    addCatsAndMimes(app);
+    if ( (tf.isEmpty() || tf.match(app->type()) >= 0)
+     && (cf == 0 || app->categories().contains(cf)
+         || cf == -1 && app->categories().count() == 0 ) ) {
+        addCheckItem(app);
+    } else {
+        hidden.append(app);
+    }
+    if ( resort ){
+        sort();
+    }
+}
+
+void LauncherIconView::changeItem(const AppLnk&old,AppLnk*nlink)
+{
+    QString oldfile = old.file();
+    QString newfile = nlink->file();
+
+    if (newfile != oldfile) {
+        QMap<QString,QPixmap>::Iterator it = sm_EyeCache->find(oldfile);
+        if (it != sm_EyeCache->end()) {
+            (*sm_EyeCache)[newfile]=(*it);
+        }
+        removeLink(old.linkFile());
+    } else {
+        removeLink(old.linkFile(),false);
+    }
+    addItem(nlink,false);
+}
+
 void LauncherIconView::timerEvent( QTimerEvent *te )
 {
     if ( te->timerId() == busyTimer ) {
@@ -569,6 +609,7 @@ void LauncherIconView::timerEvent( QTimerEvent *te )
 
 void LauncherIconView::setBigIcons( bool bi )
 {
+    sm_EyeCache->clear();
     bigIcns = bi;
 #ifdef USE_ANIMATED_BUSY_ICON_OVERLAY
     busyPix.resize(0,0);
@@ -756,8 +797,11 @@ void LauncherView::updateTools()
     }
 
     int pcat = catmb ? catmb->currentCategory() : -2;
-    if ( !catmb )
+    if ( !catmb ) {
         catmb = new CategorySelect(tools);
+    } else if (pcat!=-2) {
+
+    }
     Categories cats( 0 );
     cats.load( categoryFileName() );
     QArray<int> vl( 0 );
@@ -1020,7 +1064,7 @@ void LauncherView::itemClicked( int btn, QIconViewItem *item )
         icons->setCurrentItem( item );
         emit clicked( appLnk );
     }
-    item->setSelected(FALSE);
+        item->setSelected(FALSE);
     }
 }
 
@@ -1047,6 +1091,16 @@ bool LauncherView::removeLink(const QString& linkfile)
     return icons->removeLink(linkfile);
 }
 
+void LauncherView::addItem(AppLnk* app, bool resort)
+{
+    icons->addItem(app,resort);
+}
+
+void LauncherView::changeItem(const AppLnk&old,AppLnk*nlink)
+{
+    icons->changeItem(old,nlink);
+}
+
 void LauncherView::setSortEnabled( bool v )
 {
     icons->setSorting( v );
@@ -1062,11 +1116,6 @@ void LauncherView::setUpdatesEnabled( bool u )
 void LauncherView::sort()
 {
     icons->sort();
-}
-
-void LauncherView::addItem(AppLnk* app, bool resort)
-{
-    icons->addItem(app,resort);
 }
 
 void LauncherView::paletteChange( const QPalette &p )

@@ -77,7 +77,7 @@ static bool isVisibleWindow( int );
 //===========================================================================
 
 LauncherTabWidget::LauncherTabWidget( Launcher* parent ) :
-    QVBox( parent ), docview( 0 )
+    QVBox( parent ), docview( 0 ),docTabEnabled(true),m_DocumentTabId(0)
 {
     docLoadingWidgetEnabled = false;
     docLoadingWidget = 0;
@@ -128,7 +128,7 @@ void LauncherTabWidget::createDocLoadingWidget()
 
     Config cfg( "Launcher" );
     cfg.setGroup( "DocTab" );
-    bool docTabEnabled = cfg.readBoolEntry( "Enable", true );
+    docTabEnabled = cfg.readBoolEntry( "Enable", true );
 
     QLabel *textLabel = new QLabel( docLoadingVBox );
     textLabel->setAlignment( int( QLabel::AlignCenter ) );
@@ -169,17 +169,17 @@ void LauncherTabWidget::initLayout()
 void LauncherTabWidget::appMessage(const QCString& message, const QByteArray&)
 {
     if ( message == "nextView()" )
-    categoryBar->nextTab();
+        categoryBar->nextTab();
 }
 
 void LauncherTabWidget::raiseTabWidget()
 {
     if ( categoryBar->currentView() == docView()
-     && docLoadingWidgetEnabled ) {
-    stack->raiseWidget( docLoadingWidget );
-    docLoadingWidget->updateGeometry();
+         && docLoadingWidgetEnabled ) {
+        stack->raiseWidget( docLoadingWidget );
+        docLoadingWidget->updateGeometry();
     } else {
-    stack->raiseWidget( categoryBar->currentView() );
+        stack->raiseWidget( categoryBar->currentView() );
     }
 }
 
@@ -192,7 +192,7 @@ void LauncherTabWidget::tabProperties()
     m->setItemChecked( (int)view->viewMode(), TRUE );
     int rv = m->exec( QCursor::pos() );
     if ( rv >= 0 && rv != view->viewMode() ) {
-    view->setViewMode( (LauncherView::ViewMode)rv );
+        view->setViewMode( (LauncherView::ViewMode)rv );
     }
 
     delete m;
@@ -202,9 +202,9 @@ void LauncherTabWidget::deleteView( const QString& id )
 {
     LauncherTab *t = categoryBar->launcherTab(id);
     if ( t ) {
-    stack->removeWidget( t->view );
-    delete t->view;
-    categoryBar->removeTab( t );
+        stack->removeWidget( t->view );
+        delete t->view;
+        categoryBar->removeTab( t );
     }
 }
 
@@ -216,14 +216,17 @@ LauncherView* LauncherTabWidget::newView( const QString& id, const QPixmap& pm, 
     connect( view, SIGNAL(rightPressed(AppLnk*)),
         this, SIGNAL(rightPressed(AppLnk*)));
 
+
     int n = categoryBar->count();
+
     stack->addWidget( view, n );
 
     LauncherTab *tab = new LauncherTab( id, view, pm, label );
     categoryBar->insertTab( tab, n-1 );
-
-    if ( id == "Documents" )
-    docview = view;
+    if ( id == "Documents" ) {
+        docview = view;
+        m_DocumentTabId = n;
+    }
 
     odebug << "inserting " << id << " at " << n-1 << "" << oendl;
 
@@ -240,7 +243,7 @@ LauncherView *LauncherTabWidget::view( const QString &id )
 {
     LauncherTab *t = categoryBar->launcherTab(id);
     if ( !t )
-    return 0;
+        return 0;
     return t->view;
 }
 
@@ -252,8 +255,8 @@ LauncherView *LauncherTabWidget::docView()
 void LauncherTabWidget::setLoadingWidgetEnabled( bool v )
 {
     if ( v != docLoadingWidgetEnabled && docLoadingWidget ) {
-    docLoadingWidgetEnabled = v;
-    raiseTabWidget();
+        docLoadingWidgetEnabled = v;
+        raiseTabWidget();
     }
 }
 
@@ -604,7 +607,6 @@ void Launcher::properties( AppLnk *appLnk )
         LnkProperties prop(appLnk,0 );
 
         if (QPEApplication::execDialog( &prop )==QDialog::Accepted && tabs->currentView()==tabs->docView()) {
-            tabs->docView()->updateTools();
         }
     }
 }
@@ -721,8 +723,13 @@ void Launcher::documentRemoved( const DocLnk& doc )
 
 void Launcher::documentChanged( const DocLnk& oldDoc, const DocLnk& newDoc )
 {
+#if 0
     documentRemoved( oldDoc );
     documentAdded( newDoc );
+//    tabs->docView()->updateTools();
+#else
+    tabs->docView()->changeItem(oldDoc,new DocLnk(newDoc));
+#endif
 }
 
 void Launcher::allDocumentsRemoved()

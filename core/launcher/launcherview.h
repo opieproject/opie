@@ -56,6 +56,8 @@ public:
 
     bool removeLink(const QString& linkfile);
     void addItem(AppLnk* app, bool resort=TRUE);
+    void changeItem(const AppLnk&old,AppLnk*nlink);
+
     void removeAllItems();
     void setSortEnabled(bool);
     void setUpdatesEnabled(bool);
@@ -176,7 +178,8 @@ public:
     bool inKeyEvent() const { return ike; }
 
     void addItem(AppLnk* app, bool resort=TRUE);
-    bool removeLink(const QString& linkfile);
+    bool removeLink(const QString& linkfile,bool removeCache = true);
+    void changeItem(const AppLnk&old,AppLnk*nlink);
 
     QStringList mimeTypes() const;
     QStringList categories() const;
@@ -205,6 +208,8 @@ public:
     void setSortMethod( SortMethod m );
     int compare(const AppLnk* a, const AppLnk* b);
     void requestEyePix(const LauncherItem*which);
+
+    static QMap<QString,QPixmap>* sm_EyeCache;
 
 protected:
     virtual void timerEvent( QTimerEvent *te );

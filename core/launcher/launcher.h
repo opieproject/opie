@@ -90,6 +90,8 @@ private:
     LauncherView *docLoadingWidget;
     QProgressBar *docLoadingWidgetProgress;
     bool docLoadingWidgetEnabled;
+    bool docTabEnabled;
+    int m_DocumentTabId;
 };
 
 class Launcher : public QMainWindow, public ServerInterface
@@ -135,7 +137,7 @@ signals:
     void executing( const AppLnk * );
 
 private slots:
-    void systemMessage( const QCString &, const QByteArray &);    
+    void systemMessage( const QCString &, const QByteArray &);
 
 protected:
     bool eventFilter( QObject *o, QEvent *ev );
