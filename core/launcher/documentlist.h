@@ -42,6 +42,7 @@ public:
 
     void reloadAppLnks();
     void reloadDocLnks();
+    void DiffAppLnks();
 
 // Orig DocList stuff
     void start();

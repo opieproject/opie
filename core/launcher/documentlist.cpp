@@ -329,12 +329,100 @@ void DocumentList::restoreDone()
     reloadDocLnks();
 }
 
+void DocumentList::DiffAppLnks()
+{
+    static AppLnkSet *appLnkSet2;
+
+    appLnkSet2 = new AppLnkSet( MimeType::appsFolderName() );
+
+    if ( d->sendAppLnks && d->serverGui ) {
+	static QStringList prevTypeList = appLnkSet->types();
+	QStringList types = appLnkSet2->types();
+	for ( QStringList::Iterator ittypes=types.begin(); ittypes!=types.end(); ++ittypes) {
+	    if ( !(*ittypes).isEmpty() ) {
+		if ( !prevTypeList.contains(*ittypes) ) {
+		    QString name = appLnkSet2->typeName(*ittypes);
+		    QPixmap pm = appLnkSet2->typePixmap(*ittypes);
+		    QPixmap bgPm = appLnkSet2->typeBigPixmap(*ittypes);
+
+		    if (pm.isNull()) {
+			QImage img( Resource::loadImage( "UnknownDocument" ) );
+			pm = img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
+			bgPm = img.smoothScale( AppLnk::bigIconSize(), AppLnk::bigIconSize() );
+		    }
+
+            odebug << "adding type " << (*ittypes) << "" << oendl;
+
+		    // ### our current launcher expects docs tab to be last
+		    d->serverGui->typeAdded( *ittypes, name.isNull() ? (*ittypes) : name, pm, bgPm );
+		}
+		prevTypeList.remove(*ittypes);
+	    }
+	}
+	for ( QStringList::Iterator ittypes=prevTypeList.begin(); ittypes!=prevTypeList.end(); ++ittypes) {
+        odebug << "removing type " << (*ittypes) << "" << oendl;
+	    d->serverGui->typeRemoved(*ittypes);
+	}
+	prevTypeList = types;
+    }
+
+
+    QListIterator<AppLnk> it1( appLnkSet->children() );
+    QListIterator<AppLnk> it2( appLnkSet2->children() );
+
+    AppLnk *i;
+    AppLnk *j;
+    bool found;
+
+    while ( (j=it2.current()) ) {
+	it1 = appLnkSet->children();
+	found = false;
+	while ( (i=it1.current()) ){
+	    if (strcmp(i->name().ascii(),j->name().ascii()) == 0)
+		found = true;
+	    ++it1;
+	}
+	if (!found) {
+	    qDebug("Item %s needs to be added",j->name().ascii() );
+	    d->serverGui->applicationAdded( j->type(), *j );
+	}		    
+	    ++it2; 
+    }
+
+    it1 = appLnkSet->children();
+     while ( (i=it1.current()) ) {
+	it2 = appLnkSet2->children();
+	found = false;
+	while ( (j=it2.current()) ){
+	    if (strcmp(i->name().ascii(),j->name().ascii()) == 0)
+		found = true;
+	    ++it2;
+	}
+	if (!found) {
+	    qDebug("Item %s needs to be removed",i->name().ascii() );
+	    d->serverGui->applicationRemoved( i->type(), *i );
+	}
+		    
+	    ++it1; 
+    }
+    
+    delete appLnkSet;
+    appLnkSet = appLnkSet2;
+
+}
 void DocumentList::storageChanged()
 {
+    QTime t;
     // ### can implement better
-    reloadAppLnks();
+
+    t.start();
+    DiffAppLnks();
+//    reloadAppLnks();
+    qDebug("Reload App links took %i ms",t.elapsed() );
     reloadDocLnks();
-    // ### Optimization opportunity
+//    odebug << "Reload links took " << t.elapsed() << " ms " << oendl;
+    qDebug("Reload All links took %i ms",t.elapsed() );
+// ### Optimization opportunity
     // Could be a bit more intelligent and somehow work out which
     // mtab entry has changed and then only scan that and add and remove
     // links appropriately.
