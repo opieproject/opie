@@ -1,4 +1,4 @@
-Files: bin/oipkg apps/Settings/oipkg.desktop pics/oipkg/
+Files: bin/oipkg apps/Settings/oipkg.desktop pics/oipkg/*
 Priority: optional
 Section: opie/settings
 Maintainer: Patrick S. Vogt <tille@almana.ch>

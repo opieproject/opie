@@ -310,7 +310,7 @@ void PmIpkg::remove()
   for (Package *it=to_remove.first(); it != 0; it=to_remove.next() )
   {
 			if ( it->link() )fileList = getList( it->name(), it->dest() );     	
-      if ( runIpkg("remove " + it->name()) == 0)
+      if ( runIpkg("remove " + it->name(), it->dest() ) == 0)
       {
         runwindow->progress->setProgress( 1 + runwindow->progress->progress() );
        	linkOpp = removeLink;
