@@ -42,6 +42,7 @@
 #include <sys/types.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <errno.h>
 
 #include <qwindowsystem_qws.h> // for qwsServer
 #include <qdatetime.h>
@@ -603,18 +604,60 @@ void Global::invoke(const QString &c)
 	quickexecv( libexe.utf8().data(), (const char **)args );
     } else
 #endif
-    {	    
-	if ( !::vfork() ) {
-	    for ( int fd = 3; fd < 100; fd++ )
-		::close( fd );
-	    ::setpgid( ::getpid(), ::getppid() );
-	    // Try bindir first, so that foo/bar works too
-	    ::execv( qpeDir()+"/bin/"+args[0], (char * const *)args );
-	    ::execvp( args[0], (char * const *)args );
-	    _exit( -1 );
-	}
+    {           
+        bool success = false; 
+        int pfd [2];
+        if ( ::pipe ( pfd ) < 0 )
+            pfd [0] = pfd [1] = -1;
+    
+        pid_t pid = ::fork ( );
+        
+        if ( pid == 0 ) { // child
+            for ( int fd = 3; fd < 100; fd++ ) {
+                if ( fd != pfd [1] )
+                    ::close ( fd );
+            }
+            ::setpgid ( ::getpid ( ), ::getppid ( ));
+
+            // Closing of fd[1] indicates that the execvp succeeded!
+            if ( pfd [1] >= 0 )
+                ::fcntl ( pfd [1], F_SETFD, FD_CLOEXEC );
+             
+            // Try bindir first, so that foo/bar works too
+            ::execv ( qpeDir ( ) + "/bin/" + args [0], (char * const *) args );
+            ::execvp ( args [0], (char * const *) args );
+            
+            char resultByte = 1;
+            if ( pfd [1] >= 0 )
+                ::write ( pfd [1], &resultByte, 1 );
+            ::_exit ( -1 );                         
+        }
+        else if ( pid > 0 ) {
+            success = true;
+        
+            if ( pfd [1] >= 0 ) 
+                ::close ( pfd [1] );
+            if ( pfd [0] >= 0 ) {
+                while ( true ) {
+                    char resultByte;
+                    int n = ::read ( pfd [0], &resultByte, 1 );
+                    if ( n == 1 ) {
+                        success = false;
+                        break;
+                    }
+                    if (( n == -1 ) && (( errno == ECHILD ) || ( errno == EINTR )))
+                        continue;
+                        
+                    break; // success
+                }
+                ::close ( pfd [0] );
+            }
+        }
+        if ( success )    
+            StartingAppList::add( list[0] );
+        else
+            QMessageBox::warning( 0, "Error", "Could not start the application " + c, "Ok", 0, 0, 0, 1 );
     }
-    StartingAppList::add( list[0] );
 #endif //QT_NO_QWS_MULTIPROCESS
 }
 
