@@ -2,6 +2,7 @@
 Comment=A Clock Program
 Comment[es]=Reloj, cronómetro y despertador
 Comment[da]=Et ur, stopur og alarm program
+Comment[fr]=Montre et chronomètre
 Exec=clock
 Icon=Clock
 Type=Application
@@ -17,3 +18,4 @@ Name[es]=Reloj
 Name[zh_TW]=時鐘
 Name[ko]=시계
 Name[da]=Ur
+Name[fr]=Montre

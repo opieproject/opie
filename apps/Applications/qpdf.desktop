@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=PDF Viewer
 Comment[es]=Visor de ficheros en Portable Document Format (PDF)
+Comment[fr]=Visualisateur de fichier PDF (Portable Document Format)
 Exec=qpdf
 Icon=qpdf/qpdf_icon
 Type=Application
@@ -12,3 +13,4 @@ Name[es]=Visor PDF
 Name[it]=Lettore PDF
 Name[zh_TW]=PDF瀏覽器
 Name[ko]=PDF 뷰어
+Name[fr]=Lecteur PDF

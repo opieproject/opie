@@ -2,6 +2,7 @@
 Comment = An advanced file manager program
 Comment[es]=Un gestor de ficheros avanzado
 Comment[da]=Et advanceret filstyringsprogram
+Comment[fr]=Un programme de gestion avancée de fichier
 Exec = advancedfm
 File = advancedfm
 Icon = advancedfm/FileBrowser
@@ -14,3 +15,4 @@ Name[it]=Gestione File
 Name[zh_TW]=進階檔案總管
 Name[ko]=발달된 파일 관리자
 Name[da]=Filstyring
+Name[fr]=Gestion de fichier

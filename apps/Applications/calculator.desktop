@@ -2,6 +2,7 @@
 Comment=A Calculator Program
 Comment[es]=Calculadora científica y conversor de unidades
 Comment[da]=Et lommeregner program
+Comment[fr]=Calculatrice scientifique et de conversion d'unité
 Exec=calculator
 Icon=calc/Calculator
 Type=Application
@@ -17,3 +18,4 @@ Name[es]=Calculadora
 Name[zh_TW]=計算機
 Name[ko]=계산기
 Name[da]=Lommeregner
+Name[fr]=Calculatrice
