@@ -1,4 +1,5 @@
-.PHONY: FORCE
+.phony: force
+force:
 
 $(configs) :
 	$(call makecfg,$@)
@@ -134,17 +135,18 @@ $(TOPDIR)/qmake/qmake : $(TOPDIR)/mkspecs/default
 $(TOPDIR)/mkspecs/default :
 	ln -sf linux-g++ $@
 
-$(TOPDIR)/scripts/subst : FORCE
+$(TOPDIR)/scripts/subst : force
 	@( \
 		echo 's,\$$QPE_VERSION,$(QPE_VERSION),g'; \
 		echo 's,\$$OPIE_VERSION,$(OPIE_VERSION),g'; \
 		echo 's,\$$QTE_VERSION,$(QTE_VERSION),g'; \
 		echo 's,\$$QTE_REVISION,$(QTE_REVISION),g'; \
 		echo 's,\$$SUB_VERSION,$(SUB_VERSION),g'; \
+		echo 's,\$$EXTRAVERSION,$(EXTRAVERSION),g'; \
 		echo 's,\$$QTE_BASEVERSION,$(QTE_BASEVERSION),g'; \
 	) > $@ || ( rm -f $@; exit 1 )
 
-$(TOPDIR)/scripts/filesubst : FORCE
+$(TOPDIR)/scripts/filesubst : force
 	@( \
 		echo 's,\$$OPIEDIR/root/,/,g'; \
 		echo 's,$(OPIEDIR)/root/,/,g'; \

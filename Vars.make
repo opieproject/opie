@@ -39,6 +39,10 @@ ifneq ($(filter %snapshot",$(shell cat $(OPIEDIR)/library/version.h|grep QPE_VER
 endif
 export SUB_VERSION
 
+ifneq ($(strip $(SUB_VERSION)),)
+EXTRAVERSION=-$(SUB_VERSION)
+endif
+
 ifeq ($(QTE_REVISION),)
     QTE_REVISION=5
 endif
