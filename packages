@@ -199,3 +199,4 @@ CONFIG_EXAMPLE_MENU	examples/menuapplet menuapplet.pro
 CONFIG_EXAMPLE_BOARD	examples/inputmethod	example.pro
 CONFIG_EXAMPLE_VPN	examples/networksettings	example.pro
 CONFIG_ZSAME		noncore/games/zsame		zsame.pro
+CONFIG_ZLINES		noncore/games/zlines		zlines.pro

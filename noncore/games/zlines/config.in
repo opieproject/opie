@@ -1,0 +1,4 @@
+  config ZLINES
+    boolean "opie-zlines ()"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) 
