@@ -91,7 +91,7 @@ void DatebookPluginWidget::getDates() {
 
         for ( QValueList<EffectiveEvent>::ConstIterator it = list.begin(); it  != list.end(); ++it ) {
 
-            if ( count <= m_max_lines_meet ) {
+            if ( count < m_max_lines_meet ) {
                 if ( !m_onlyLater ) {
                     count++;
                     DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes );
