@@ -616,7 +616,7 @@ void Desktop::togglePower()
 	loggedin=0;
 	suspendTime = QDateTime::currentDateTime();
 
-	qpe_setBacklight ( 0 ); // force LCD off
+//	qpe_setBacklight ( 0 ); // force LCD off (sandman: why ????)
 
 	if ( wasloggedin )
     	blankScreen();
@@ -636,9 +636,6 @@ void Desktop::togglePower()
 
 	execAutoStart();
 	//qcopBridge->closeOpenConnections();
-	//qDebug("called togglePower()!!!!!!");
-
-	qApp-> processEvents ( );
 
   	excllock = false;
 }

@@ -352,7 +352,7 @@ void remove_pidfile ( )
 	::unlink ( pidfile_path );
 }
 
-void handle_sigterm ( int sig )
+void handle_sigterm ( int /* sig */ )
 {
 	if ( qApp )
 		qApp-> quit ( );
@@ -364,6 +364,7 @@ int main( int argc, char ** argv )
     ::signal( SIGCHLD, SIG_IGN );
 
 	::signal ( SIGTERM, handle_sigterm );
+	::signal ( SIGINT, handle_sigterm );
 
 	::setsid ( );
 	::setpgid ( 0, 0 );
