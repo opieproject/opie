@@ -85,7 +85,7 @@ ifeq ($(if $(filter clean%,$(MAKECMDGOALS)),clean,notclean),notclean)
 -include $(TOPDIR)/.depends
 endif
 
-export QMAKESPEC=$(QMAKESPECSDIR)/qws/$(CONFIG_SPECFILE)
+export QMAKESPEC=$(QMAKESPECSDIR)/qws/$(patsubst "%",%,$(CONFIG_SPECFILE))
 
 all : $(subdir-y)
 
