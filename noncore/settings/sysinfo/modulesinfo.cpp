@@ -33,6 +33,7 @@
 #include <qwhatsthis.h>
 
 #include "modulesinfo.h"
+#include "detail.h"
 
 ModulesInfo::ModulesInfo( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
@@ -51,6 +52,14 @@ ModulesInfo::ModulesInfo( QWidget* parent,  const char* name, WFlags fl )
     ModulesView->setAllColumnsShowFocus( TRUE );
     layout->addMultiCellWidget( ModulesView, 0, 0, 0, 1 );
     QWhatsThis::add( ModulesView, tr( "This is a list of all the kernel modules currently loaded on this handheld device.\n\nClick and hold on a module to see additional information about the module, or to unload it." ) );
+	
+	// Test if we have /sbin/modinfo, and if so, allow module detail window
+	if ( QFile::exists( "/sbin/modinfo" ) )
+	{
+		QPEApplication::setStylusOperation( ModulesView->viewport(), QPEApplication::RightOnHold );
+    	connect( ModulesView, SIGNAL( rightButtonPressed( QListViewItem *, const QPoint &, int ) ),
+				 this, SLOT( viewModules( QListViewItem * ) ) );
+	}
 
     CommandCB = new QComboBox( FALSE, this );
     CommandCB->insertItem( "modprobe -r" );
@@ -70,8 +79,11 @@ ModulesInfo::ModulesInfo( QWidget* parent,  const char* name, WFlags fl )
     QTimer *t = new QTimer( this );
     connect( t, SIGNAL( timeout() ), this, SLOT( updateData() ) );
     t->start( 5000 );
-
+	
     updateData();
+	
+	ModulesDtl = new Detail();
+    QWhatsThis::add( ModulesDtl->detailView, tr( "This area shows detailed information about this module." ) );
 }
 
 ModulesInfo::~ModulesInfo()
@@ -114,20 +126,49 @@ void ModulesInfo::slotSendClicked()
 	capstr.append( CommandCB->currentText() );
 	capstr.append( "\nfor this module?" );
 
-    if ( QMessageBox::warning( this, caption(), capstr,
+	QString modname = ModulesView->currentItem()->text( 0 );
+	
+    if ( QMessageBox::warning( this, modname, capstr,
          QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape ) == QMessageBox::Yes )
     {
 		QString command = "/sbin/";
 		command.append( CommandCB->currentText() );
 		command.append( " " );
-		command.append( ModulesView->currentItem()->text( 0 ) );
+		command.append( modname );
 
         FILE* stream = popen( command, "r" );
         if ( stream )
             pclose( stream );
-        //{
-          //  hide();
-        //}
     }
 
 }
+
+void ModulesInfo::viewModules( QListViewItem *modules )
+{
+    QString modname = modules->text( 0 );   
+	QString capstr = "Module: ";
+	capstr.append( modname );
+    ModulesDtl->setCaption( capstr );
+    QString command = "/sbin/modinfo -nad ";
+	command.append( modname );
+    FILE* modinfo = popen( command, "r" );
+    
+    if ( modinfo )
+    {
+        char line[200];
+        ModulesDtl->detailView->setText( " Details:\n------------\n" );
+        
+        while( true )
+        {        
+            int success = fscanf( modinfo, "%[^\n]\n", line );
+            if ( success == EOF )
+                break;         
+            ModulesDtl->detailView->append( line );
+        }
+        
+        pclose( modinfo );
+    }
+
+    ModulesDtl->showMaximized();
+}
+

@@ -23,7 +23,10 @@
 #include <qwidget.h>
 #include <qlistview.h>
 
-#include "processdetail.h"
+class Detail;
+class QComboBox;
+class QListView;
+class QListViewItem;
 
 class ProcessInfo : public QWidget
 {
@@ -32,13 +35,17 @@ public:
     ProcessInfo( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
     ~ProcessInfo();
 
+private:
+    QListView*   ProcessView;
+    QComboBox*   SignalCB;
+    QPushButton* SendButton;
+    
+	Detail *ProcessDtl;
+
 private slots:
     void updateData();
+    void slotSendClicked();
     void viewProcess( QListViewItem * );
-
-private:
-    QListView* ProcessView;
-    ProcessDetail *ProcessDtl;
 };
 
 #endif

@@ -1,5 +1,5 @@
 /**********************************************************************
-** ModulesDetail
+** Detail
 **
 ** Display module information
 **
@@ -19,31 +19,32 @@
 **
 **********************************************************************/
 
-#ifndef MODULESDETAIL_H
-#define MODULESDETAIL_H
+#include "detail.h"
 
-#include <qwidget.h>
-#include <qcombo.h>
-#include <qtextview.h>
-#include <qpushbutton.h>
+#include <sys/types.h>
+#include <stdio.h>
+
+#include <qcombobox.h>
+#include <qlayout.h>
 #include <qlistview.h>
+#include <qmessagebox.h>
+#include <qpushbutton.h>
+#include <qtextview.h>
+#include <qwhatsthis.h>
 
-class ModulesDetail : public QWidget
+Detail::Detail( QWidget* parent,  const char* name, WFlags )
+    : QWidget( parent, name, WStyle_ContextHelp )
 {
-    Q_OBJECT
+    QVBoxLayout *layout = new QVBoxLayout( this );
 
-public:
-    ModulesDetail( QWidget* parent,  const char* name, WFlags fl );
-    ~ModulesDetail();
+    detailView = new QTextView( this );
+    detailView->setTextFormat( PlainText );
 
-    QComboBox* CommandCB;
-    QTextView* ModulesView;
-    QPushButton* SendButton;
+    layout->addWidget( detailView );
+}
 
-    QString modname;
+Detail::~Detail()
+{
+}
 
-private slots:
-    void slotSendClicked();
-};
 
-#endif // MODULESDETAIL_H

@@ -24,15 +24,23 @@
 #include <qheader.h>
 #include <qlayout.h>
 #include <qlistview.h>
+#include <qmessagebox.h>
 #include <qtimer.h>
 #include <qwhatsthis.h>
 
+#include <sys/types.h>
+#include <signal.h>
+
 #include "processinfo.h"
+#include "detail.h"
 
 ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
-    QVBoxLayout *layout = new QVBoxLayout( this, 5 );
+    QGridLayout *layout = new QGridLayout( this );
+    layout->setSpacing( 4 );
+    layout->setMargin( 4 );
+
 
     ProcessView = new QListView( this, "ProcessView" );
     int colnum = ProcessView->addColumn( tr( "PID" ) );
@@ -45,8 +53,30 @@ ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
     QPEApplication::setStylusOperation( ProcessView->viewport(), QPEApplication::RightOnHold );
     connect( ProcessView, SIGNAL( rightButtonPressed( QListViewItem *, const QPoint &, int ) ),
             this, SLOT( viewProcess( QListViewItem * ) ) );
-    layout->addWidget( ProcessView );
+    layout->addMultiCellWidget( ProcessView, 0, 0, 0, 1 );
     QWhatsThis::add( ProcessView, tr( "This is a list of all the processes on this handheld device.\n\nClick and hold on a process to see additional information about the process, or to send a signal to it." ) );
+    
+	SignalCB = new QComboBox( FALSE, this, "SignalCB" );
+    SignalCB->insertItem( " 1: SIGHUP" );
+    SignalCB->insertItem( " 2: SIGINT" );
+    SignalCB->insertItem( " 3: SIGQUIT" );
+    SignalCB->insertItem( " 5: SIGTRAP" );
+    SignalCB->insertItem( " 6: SIGABRT" );
+    SignalCB->insertItem( " 9: SIGKILL" );
+    SignalCB->insertItem( "14: SIGALRM" );
+    SignalCB->insertItem( "15: SIGTERM" );
+    SignalCB->insertItem( "18: SIGCONT" );
+    SignalCB->insertItem( "19: SIGSTOP" );
+    layout->addWidget( SignalCB, 1, 0 );
+    QWhatsThis::add( SignalCB, tr( "Select a signal here and then click the Send button to the right to send to this process." ) );
+
+    SendButton = new QPushButton( this, "SendButton" );
+    SendButton->setMinimumSize( QSize( 50, 24 ) );
+    SendButton->setMaximumSize( QSize( 50, 24 ) );
+    SendButton->setText( tr( "Send" ) );
+    connect( SendButton, SIGNAL( clicked() ), this, SLOT( slotSendClicked() ) );
+    layout->addWidget( SendButton, 1, 1 );
+    QWhatsThis::add( SendButton, tr( "Click here to send the selected signal to this process." ) );
 
     QTimer *t = new QTimer( this );
     connect( t, SIGNAL( timeout() ), this, SLOT( updateData() ) );
@@ -54,8 +84,8 @@ ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
 
     updateData();
 
-    ProcessDtl = new ProcessDetail( 0, 0, 0 );
-    ProcessDtl->ProcessView->setTextFormat( RichText );
+    ProcessDtl = new Detail();
+    QWhatsThis::add( ProcessDtl->detailView, tr( "This area shows detailed information about this process." ) );
 }
 
 ProcessInfo::~ProcessInfo()
@@ -112,21 +142,42 @@ void ProcessInfo::updateData()
     delete procdir;
 }
 
+void ProcessInfo::slotSendClicked()
+{
+	QString capstr = tr( "You really want to send\n" );
+	capstr.append( SignalCB->currentText() );
+	capstr.append( "\nto this process?" );
+
+	QListViewItem *currprocess = ProcessView->currentItem();
+	
+    if ( QMessageBox::warning( this, currprocess->text( 1 ), capstr,
+         QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape ) == QMessageBox::Yes )
+	{
+		QString sigstr = SignalCB->currentText();
+		sigstr.truncate(2);
+		int sigid = sigstr.toUInt();
+        if ( kill( currprocess->text( 0 ).stripWhiteSpace().toUInt(), sigid ) == 0 )
+        {
+            hide();
+        }
+    }
+
+}
+
 void ProcessInfo::viewProcess( QListViewItem *process )
 {
     QString pid= process->text( 0 ).stripWhiteSpace();
     QString command = process->text( 1 );
     ProcessDtl->setCaption( pid + " - " + command );
-    ProcessDtl->pid = pid.toUInt();
     FILE *statfile = fopen( ( QString ) ( "/proc/" + pid + "/status"), "r");
     if ( statfile )
     {
         char line[81];
         fgets( line, 81, statfile );
-        ProcessDtl->ProcessView->setText( line );
+        ProcessDtl->detailView->setText( line );
         while ( fgets( line, 81, statfile ) )
         {
-            ProcessDtl->ProcessView->append( line );
+            ProcessDtl->detailView->append( line );
         }
         fclose( statfile );
     }

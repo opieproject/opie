@@ -24,8 +24,10 @@
 
 #include <qwidget.h>
 
+class Detail;
 class QComboBox;
 class QListView;
+class QListViewItem;
 
 class ModulesInfo : public QWidget
 {
@@ -35,12 +37,15 @@ public:
     ~ModulesInfo();
 
 private:
-    QListView* ModulesView;
+	QListView* ModulesView;
     QComboBox* CommandCB;
+
+	Detail* ModulesDtl;
 
 private slots:
     void updateData();
     void slotSendClicked();
+	void viewModules( QListViewItem * );
 };
 
 #endif
