@@ -1110,7 +1110,7 @@ void TEWidget::frameChanged()
 
 void TEWidget::Bell()
 {
-//#ifdef QT_QWS_SHARP
+//#ifdef QT_QWS_SL5XXX
 //# ifndef QT_NO_COP
     if(useBeep)
         QCopEnvelope( "QPE/TaskBar", "soundAlarm()" );

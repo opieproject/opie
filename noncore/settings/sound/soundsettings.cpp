@@ -69,7 +69,7 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
     stereoCheckBox->setChecked(cfg.readNumEntry("Stereo", 0));
 //TODO hide if zaurus- mono only
 
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
+#if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX)
 //since ipaq and zaurus have particular
 //devices
     bool systemZaurus=FALSE;

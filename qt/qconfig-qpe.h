@@ -31,7 +31,7 @@
 #define QT_DLL // Internal
 #endif
 
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_EBX)
+#if defined(QT_QWS_IPAQ) || defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_SL5XXX)
 # define QT_NO_QWS_CURSOR
 # define QT_NO_QWS_MOUSE_AUTO
 #endif

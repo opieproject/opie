@@ -25,7 +25,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/network.h>
 #include <qpe/config.h>
-#if defined( QT_QWS_SHARP ) || defined( QT_QWS_IPAQ )
+#if defined( QT_QWS_SL5XXX ) || defined( QT_QWS_IPAQ )
 #include <qpe/custom.h>
 #endif
 
@@ -43,7 +43,7 @@
 #include <signal.h>
 #include <unistd.h>
 
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
+#if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX)
 #include "../calibrate/calibrate.h"
 #endif
 
@@ -73,7 +73,7 @@ int initApplication( int argc, char ** argv )
 {
     initEnvironment();
 
-#if !defined(QT_QWS_CASSIOPEIA) && !defined(QT_QWS_IPAQ) && !defined(QT_QWS_EBX)
+#if !defined(QT_QWS_CASSIOPEIA) && !defined(QT_QWS_IPAQ) && !defined(QT_QWS_SL5XXX)
     setenv( "QWS_SIZE", "240x320", 0 );
 #endif
 
@@ -102,7 +102,7 @@ int initApplication( int argc, char ** argv )
     (void)new SysFileMonitor(d);
     Network::createServer(d);
 
-#if defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
+#if defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX)
     if ( !QFile::exists( "/etc/pointercal" ) ) {
 	// Make sure calibration widget starts on top.
 	Calibrate *cal = new Calibrate;

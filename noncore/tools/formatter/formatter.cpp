@@ -183,7 +183,7 @@ void FormatterApp::doFormat() {
     QString diskName =  currentText.left(currentText.find(" -> ",0,TRUE));
     QString fs = fileSystemsCombo->currentText();
 
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX) // lets test on something cheap
+#if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX) // lets test on something cheap
 #else
     currentText  = diskDevice  = "/dev/fd0";
     umountS = "umount -v /floppy 2>&1";
@@ -473,7 +473,7 @@ bool FormatterApp::doFsck() {
 
     Output *outDlg;
     QString selectedDevice;
-// #if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX) 
+// #if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX) 
     selectedDevice = deviceComboBox->currentText();
     QString mountPoint = mountPointLineEdit->text();
     QString umountS = "umount -v "+mountPoint+" 2>&1";

@@ -28,7 +28,7 @@ int main( int argc, char ** argv )
     QPEApplication a( argc, argv );
     int retval = 0;
 
-#if defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
+#if defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX)
     if ( !QFile::exists( "/etc/pointercal" ) ) {
 	// Make sure calibration widget starts on top.
 	Calibrate *cal = new Calibrate;

@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.38 2003-01-26 19:58:41 kergoth Exp $
+** $Id: qpeapplication.cpp,v 1.39 2003-03-19 05:38:26 kergoth Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -1741,7 +1741,7 @@ void QPEApplication::hideOrQuit()
 }
 
 
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_SHARP)
+#if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX)
 
 // The libraries with the skiff package (and possibly others) have
 // completely useless implementations of builtin new and delete that

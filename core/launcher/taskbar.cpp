@@ -33,7 +33,7 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/global.h>
 
-#if defined( QT_QWS_SHARP ) || defined( QT_QWS_IPAQ )
+#if defined( QT_QWS_SL5XXX ) || defined( QT_QWS_IPAQ )
 #include <qpe/custom.h>
 #endif
 
@@ -82,7 +82,7 @@ static Global::Command builtins[] = {
 #undef APP
 #endif
 
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_SHARP)
+#if defined(QT_QWS_IPAQ) || defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_SL5XXX)
         { "calibrate",          TaskBar::calibrate, 1, 0 },
 #endif
 #if !defined(QT_QWS_CASSIOPEIA)
