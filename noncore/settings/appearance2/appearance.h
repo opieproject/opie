@@ -115,6 +115,9 @@ private:
     QRadioButton *m_tabstyle_top;
     QRadioButton *m_tabstyle_bottom;
 
+    QRadioButton *m_rotdir_cw;
+    QRadioButton *m_rotdir_ccw;
+
 	QWidget *     m_advtab;
     QListView *   m_except;
     QCheckBox *   m_force;

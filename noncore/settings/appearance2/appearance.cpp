@@ -400,6 +400,34 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 	m_original_tabstyle = style;
 	m_original_tabpos = tabtop;
 
+	vertLayout-> addSpacing ( 3 );
+	QHBoxLayout *rotLay = new QHBoxLayout ( vertLayout, 3 );
+	
+	QLabel* rotlabel = new QLabel( tr( "Rotation direction:" ), tab );
+	m_rotdir_cw = new QRadioButton( tab, "rotdir_cw" );
+	QPixmap cw1 = Resource::loadIconSet("redo"). pixmap( );
+	m_rotdir_ccw = new QRadioButton( tab, "rotdir_ccw" );
+	QImage ccwImage = cw1. convertToImage( ). mirror( 1, 0 );
+	QPixmap ccw1;
+	QButtonGroup* rotbtngrp = new QButtonGroup( tab, "rotbuttongroup" );
+
+	rotbtngrp-> hide ( );
+	rotbtngrp-> setExclusive ( true );
+	rotbtngrp-> insert ( m_rotdir_cw );
+	rotbtngrp-> insert ( m_rotdir_ccw );
+
+	ccw1. convertFromImage( ccwImage );
+	m_rotdir_cw-> setPixmap( cw1 );
+	m_rotdir_ccw-> setPixmap( ccw1 ); 
+
+	rotLay-> addWidget ( rotlabel, 0 );
+	rotLay-> addWidget ( m_rotdir_cw, 0 );
+	rotLay-> addWidget ( m_rotdir_ccw, 0 );
+
+	bool rotcw = !(cfg. readBoolEntry ( "rotatedir", 0 ));
+	m_rotdir_cw-> setChecked ( rotcw );
+	m_rotdir_ccw-> setChecked ( !rotcw );
+
 	return tab;
 }
 
@@ -455,6 +483,7 @@ void Appearance::tabChanged ( QWidget *w )
 void Appearance::accept ( )
 {
 	bool newtabpos = m_tabstyle_top-> isChecked ( );
+	bool is_rotdir_ccw = m_rotdir_ccw-> isChecked ( );
 	int newtabstyle = m_tabstyle_list-> currentItem ( );
 
     Config config ( "qpe" );
@@ -492,6 +521,7 @@ void Appearance::accept ( )
 			item-> save ( config );
     }
 
+	config. writeEntry ( "rotatedir", is_rotdir_ccw );
 
 	m_except-> setFocus ( ); // if the focus was on the embedded line-edit, we have to move it away first, so the contents are updated
 
