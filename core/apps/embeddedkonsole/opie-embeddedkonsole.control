@@ -1,9 +1,9 @@
 Files: bin/embeddedkonsole apps/Applications/embeddedkonsole.desktop pics/konsole etc/keytabs/*
 Priority: optional
 Section: opie/applications
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: L.J. Potter <ljp@llornkcor.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base ($QPE_VERSION), libopie ($QPE_VERSION)
 Description: KDE's konsole (shell terminal)
  Ported to the Opie environment.
