@@ -1,4 +1,4 @@
-/* $Id: cardmode.hh,v 1.10 2003-01-31 10:42:13 max Exp $ */
+/* $Id: cardmode.hh,v 1.11 2003-02-01 09:05:37 max Exp $ */
 
 #ifndef CARDMODE_HH
 #define CARDMODE_HH
@@ -22,6 +22,7 @@ extern "C"
 
 /* Defines, used for the card setup */
 #define   DEFAULT_PATH       "/proc/driver/aironet/%s/Config"
+#define	  CISCO_STATUS       "/proc/driver/aironet/%s/Status"
 #define   CARD_TYPE_CISCO	1
 #define   CARD_TYPE_NG	        2
 #define   CARD_TYPE_HOSTAP	3
