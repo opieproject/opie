@@ -107,6 +107,8 @@ enum OModel {
     Model_Beagle_All    = ( Model_Beagle | 0xffffff ),
     Model_Beagle_PA100  = ( Model_Beagle | 0x000001 ),
 
+    Model_GenuineIntel  = ( 7 << 24 )
+
 };
 
 /**
@@ -121,6 +123,7 @@ enum OVendor {
     Vendor_MundN,
     Vendor_GMate,
     Vendor_MasterIA,
+    Vendor_GenuineIntel
 };
 
 /**
@@ -134,6 +137,7 @@ enum OSystem {
     System_OpenZaurus,
     System_Linupy,
     System_OpenEmbedded,
+    System_PC
 };
 
 typedef struct {
