@@ -33,7 +33,11 @@ public slots:
 
 	void slotDevice(int id);
 
-	void slotConn(int id);
+	void slotConnFlow(int id);
+	void slotConnParity(int id);
+	void slotConnSpeed(int id);
+	void slotTermTerm(int id);
+	void slotTermFont(int id);
 
 private:
     void initUI();
@@ -51,20 +55,36 @@ private:
 	ProfileEditorPlugin *plugin_plugin;
 	QHBoxLayout *plugin_layout;
 
-	enum Ids
+	enum ParityIds
 	{
 		id_parity_odd,
-		id_parity_even,
+		id_parity_even
+	};
+
+	enum FlowIds
+	{
 		id_flow_hw,
-		id_flow_sw,
+		id_flow_sw
+	};
+
+	enum SpeedIds
+	{
 		id_baud_115200,
 		id_baud_57600,
 		id_baud_38400,
 		id_baud_19200,
-		id_baud_9600,
+		id_baud_9600
+	};
+
+	enum TermIds
+	{
 		id_term_vt100,
 		id_term_vt220,
-		id_term_ansi,
+		id_term_ansi
+	};
+
+	enum FontIds
+	{
 		id_size_small,
 		id_size_medium,
 		id_size_large

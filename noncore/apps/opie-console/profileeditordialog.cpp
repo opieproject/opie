@@ -203,12 +203,12 @@ void ProfileEditorDialog::initUI()
 	connect(this, SIGNAL(cancelButtonPressed()), SLOT(slotCancel()));
 	connect(device_box, SIGNAL(activated(int)), SLOT(slotDevice(int)));
 
-	connect(group_flow, SIGNAL(clicked(int)), SLOT(slotConn(int)));
-	connect(group_parity, SIGNAL(clicked(int)), SLOT(slotConn(int)));
-	connect(speed_box, SIGNAL(clicked(int)), SLOT(slotConn(int)));
+	connect(group_flow, SIGNAL(clicked(int)), SLOT(slotConnFlow(int)));
+	connect(group_parity, SIGNAL(clicked(int)), SLOT(slotConnParity(int)));
+	connect(speed_box, SIGNAL(activated(int)), SLOT(slotConnSpeed(int)));
 
-	connect(terminal_box, SIGNAL(clicked(int)), SLOT(slotConn(int)));
-	connect(group_size, SIGNAL(clicked(int)), SLOT(slotConn(int)));
+	connect(terminal_box, SIGNAL(activated(int)), SLOT(slotTermTerm(int)));
+	connect(group_size, SIGNAL(clicked(int)), SLOT(slotTermFont(int)));
 }
 
 ProfileEditorDialog::~ProfileEditorDialog() {
@@ -267,7 +267,7 @@ QString ProfileEditorDialog::prof_type()
 	return QString::null;
 }
 
-void ProfileEditorDialog::slotConn(int id)
+void ProfileEditorDialog::slotConnFlow(int id)
 {
 	switch(id)
 	{
@@ -277,12 +277,26 @@ void ProfileEditorDialog::slotConn(int id)
 		case id_flow_sw:
 			m_prof.writeEntry("Flow", 0x02);
 			break;
+	}
+}
+
+void ProfileEditorDialog::slotConnParity(int id)
+{
+	switch(id)
+	{
 		case id_parity_odd:
 			m_prof.writeEntry("Parity", 2);
 			break;
 		case id_parity_even:
 			m_prof.writeEntry("Parity", 1);
 			break;
+	}
+}
+
+void ProfileEditorDialog::slotConnSpeed(int id)
+{
+	switch(id)
+	{
 
 		case id_baud_115200:
 			m_prof.writeEntry("Speed", 115200);
@@ -299,6 +313,13 @@ void ProfileEditorDialog::slotConn(int id)
 		case id_baud_9600:
 			m_prof.writeEntry("Speed", 9600);
 			break;
+	}
+}
+
+void ProfileEditorDialog::slotTermTerm(int id)
+{
+	switch(id)
+	{
 
 		case id_term_vt100:
 			m_prof.writeEntry("Terminal", 2);
@@ -309,7 +330,13 @@ void ProfileEditorDialog::slotConn(int id)
 		case id_term_ansi:
 			m_prof.writeEntry("Terminal", 0);
 			break;
+	}
+}
 
+void ProfileEditorDialog::slotTermFont(int id)
+{
+	switch(id)
+	{
 		case id_size_small:
 			m_prof.writeEntry("Font", 0);
 			break;
