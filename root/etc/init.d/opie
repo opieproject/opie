@@ -19,6 +19,7 @@ if [ -e /proc/hal/model ] ; then
         "3700" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
         "3800" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
         "3900" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
+	"5400" ) export QWS_DISPLAY=Transformed:Rot0:0 ;;
         *)       echo "Unknown iPAQ model: $ipaq" ;;
     esac
 else
