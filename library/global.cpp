@@ -681,6 +681,10 @@ void Global::findDocuments(DocLnkSet* folder, const QString &mimefilter)
 	  continue;
 	DocLnkSet ide( path, mimefilter );
 	folder->appendFrom(ide);
+      } else if ( (*it)->disk() == "/dev/mtdblock6" || (*it)->disk() == "tmpfs" ) {
+	QString path = (*it)->path() + "/Documents";
+	DocLnkSet ide( path, mimefilter );
+	folder->appendFrom(ide);
       }
     }
 }

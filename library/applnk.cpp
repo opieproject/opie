@@ -340,7 +340,7 @@ QString AppLnk::linkFile() const
 	if ( type().contains('/') ) {
 	    StorageInfo storage;
 	    const FileSystem *fs = storage.fileSystemOf( that->mFile );
-	    if ( fs && fs->isRemovable() ) {
+	    if ( fs && ( fs->isRemovable() || fs->disk() == "/dev/mtdblock6" || fs->disk() == "tmpfs" ) ) {
 		that->mLinkFile = fs->path();
 	    } else
 		that->mLinkFile = getenv( "HOME" );

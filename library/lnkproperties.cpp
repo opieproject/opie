@@ -173,15 +173,16 @@ void LnkProperties::setupLocations()
   if ( (*it)->availBlocks() * (*it)->blockSize() > fileSize + 10000 ) {
       if ( (*it)->isRemovable() ||
      (*it)->disk() == "/dev/mtdblock1" ||
-     (*it)->disk() == "/dev/mtdblock/1" || (*it)->disk().left(13) == "/dev/mtdblock" ) {
+     (*it)->disk() == "/dev/mtdblock/1" || (*it)->disk().left(13) == "/dev/mtdblock" ||
+     (*it)->disk() == "/dev/mtdblock6" || (*it)->disk() == "tmpfs" ) {
     d->locationCombo->insertItem( (*it)->name(), index );
-    locations.append( ((*it)->isRemovable() ? (*it)->path() : homeDir) );
+    locations.append( ((*it)->isRemovable() || (*it)->disk() == "/dev/mtdblock6" || (*it)->disk() == "tmpfs" ? (*it)->path() : homeDir) );
     if ( lnk->file().contains( (*it)->path() ) ) {
          d->locationCombo->setCurrentItem( index );
          currentLocation = index;
     }
     index++;
-      } else if ( (*it)->name().contains( "Hard Disk") &&
+      } else if ( (*it)->name().contains( tr("Hard Disk") ) &&
       homeDir.contains( (*it)->path() ) &&
       (*it)->path().length() > hardDiskHome.length() ) {
     hardDiskHome = (*it)->name();

@@ -105,7 +105,7 @@ void StorageInfo::update()
       QString fs = me->mnt_fsname;
       if ( fs.left(7)=="/dev/hd" || fs.left(7)=="/dev/sd"
         || fs.left(8)=="/dev/mtd" || fs.left(9) == "/dev/mmcd"
-        ||  fs.left(8)=="/dev/ram" || fs.left(5)=="tmpfs" )
+        || fs.left(5)=="tmpfs" )
       {
     n++;
     curdisks.append(fs);
@@ -145,19 +145,19 @@ void StorageInfo::update()
     humanname = tr("SD Card");
     removable = TRUE;
       } else if ( disk.left(7) == "/dev/hd" )
-    humanname = tr("Hard Disk") + " " + humanname.mid(7);
+    humanname = tr("Hard Disk") + " " + disk.mid(7);
       else if ( disk.left(7) == "/dev/sd" )
-    humanname = tr("SCSI Hard Disk") + " " + humanname.mid(7);
+    humanname = tr("SCSI Hard Disk") + " " + disk.mid(7);
       else if ( disk.left(14) == "/dev/mtdblock6" ) //openzaurus ramfs
-    humanname = tr("Ram FS") + " " + humanname.mid(14);
+    humanname = tr("Internal Memory");
       else if ( disk == "/dev/mtdblock1" || humanname == "/dev/mtdblock/1" )
     humanname = tr("Internal Storage");
       else if ( disk.left(14) == "/dev/mtdblock/" )
-    humanname = tr("Internal Storage") + " " + humanname.mid(14);
+    humanname = tr("Internal Storage") + " " + disk.mid(14);
       else if ( disk.left(13) == "/dev/mtdblock" )
-    humanname = tr("Internal Storage") + " " + humanname.mid(13);
+    humanname = tr("Internal Storage") + " " + disk.mid(13);
       else if ( disk.left(5) == "tmpfs" ) //ipaqs /mnt/ramfs
-    humanname = tr("Ram FS") + " " + humanname.mid(5);
+    humanname = tr("Internal Memory");
       FileSystem *fs = new FileSystem( disk, *fsit, humanname, removable, opts );
       mFileSystems.append( fs );
   }
