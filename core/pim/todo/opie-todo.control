@@ -1,7 +1,7 @@
 Files: bin/todolist apps/Applications/todo.desktop
 Priority: optional
 Section: opie/applications
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Holger 'zecke' Freyther <zecke@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)

@@ -3,11 +3,13 @@ CONFIG		= qt warn_on release
 DESTDIR		= $(OPIEDIR)/bin
 HEADERS	= mainwindow.h \
 		  todotable.h \
-		  todoentryimpl.h
+		  todoentryimpl.h \
+		  todolabel.h
 SOURCES	= main.cpp \
 		  mainwindow.cpp \
 		  todotable.cpp \
-		  todoentryimpl.cpp
+		  todoentryimpl.cpp \
+		  todolabel.cc
 
 INTERFACES	= todoentry.ui
 

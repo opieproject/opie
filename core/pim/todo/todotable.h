@@ -142,7 +142,7 @@ signals:
     void signalShowMenu( const QPoint & );
     void signalNotFound();
     void signalWrapAround();
-
+    void showDetails( const ToDoEvent & );
 protected:
     void keyPressEvent( QKeyEvent *e );
 

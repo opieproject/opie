@@ -1,7 +1,7 @@
 /**********************************************************************
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
-   Copyright (C) 2002 zecke
-   Copyright (C) 2002 Stefan Eilers
+** Copyright (C) 2002 zecke
+** Copyright (C) 2002 Stefan Eilers (se, eilers.stefan@epost.de)
 **
 ** This file is part of Qtopia Environment.
 **
@@ -25,6 +25,7 @@
 #include "mainwindow.h"
 #include "todoentryimpl.h"
 #include "todotable.h"
+#include "todolabel.h"
 
 #include <opie/tododb.h>
 #include <opie/todovcalresource.h>
@@ -48,6 +49,7 @@
 #include <qfile.h>
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
+#include <qwidgetstack.h>
 
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -71,7 +73,8 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
 {
 //     QTime t;
 //     t.start();
-    
+    mView = 0l;
+    mStack = new QWidgetStack(this, "main stack");
     setCaption( tr("Todo") );
     QString str;
     table = new TodoTable( this );
@@ -101,7 +104,9 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
 				   "Free up some space\n"
 				   "before you enter any data") );
 
-    setCentralWidget( table );
+    mStack->addWidget(table, 1 );
+    mStack->raiseWidget( 1 );
+    setCentralWidget( mStack );
     setToolBarsMovable( FALSE );
 
 //     qDebug("after load: t=%d", t.elapsed() );
@@ -146,6 +151,13 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
     a->addTo( contextMenu );
     a->setEnabled( FALSE );
     editAction = a;
+
+    a = new QAction( QString::null, tr("View Task"), 0, this, 0 );
+    a->addTo( edit );
+    a->addTo( contextMenu );
+    connect( a, SIGNAL( activated() ),
+	     this, SLOT(slotShowDetails() ) );
+
     edit->insertSeparator();
 
     a = new QAction( tr( "Delete..." ), Resource::loadIconSet( "trash" ),
@@ -176,8 +188,10 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
     a->addTo(edit );
     a->setEnabled( FALSE );
     duplicateAction = a;
-
     edit->insertSeparator();
+
+   
+
     if ( Ir::supported() ) {
 	a = new QAction( tr( "Beam" ), Resource::loadPixmap( "beam" ),
 			 QString::null, 0, this, 0 );
@@ -249,6 +263,8 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
     connect( table, SIGNAL( currentChanged( int, int ) ),
              this, SLOT( currentEntryChanged( int, int ) ) );
 
+    connect( table, SIGNAL(showDetails(const ToDoEvent &) ),
+	     this, SLOT(slotShowDetails(const ToDoEvent & ) ) );
 //     qDebug("done: t=%d", t.elapsed() );
 }
 
@@ -286,6 +302,7 @@ void TodoWindow::slotNew()
     // I'm afraid we must call this every time now, otherwise
     // spend expensive time comparing all these strings...
     populateCategories();
+    mStack->raiseWidget(1 );
 }
 
 TodoWindow::~TodoWindow()
@@ -318,6 +335,7 @@ void TodoWindow::slotDelete()
         currentEntryChanged( -1, 0 );
 	findAction->setEnabled( FALSE );
     }
+    mStack->raiseWidget(1);
 }
 void TodoWindow::slotDeleteAll()
 {
@@ -329,7 +347,7 @@ void TodoWindow::slotDeleteAll()
   
   //QString strName = table->text( table->currentRow(), 2 ).left( 30 );
   
-  if ( !QPEMessageBox::confirmDelete( this, tr( "Todo" ), tr("Should I delete all tasks?") ) )
+  if ( !QPEMessageBox::confirmDelete( this, tr( "Todo" ), tr("Delete all tasks?") ) )
     return;
   
   
@@ -342,6 +360,7 @@ void TodoWindow::slotDeleteAll()
     currentEntryChanged( -1, 0 );
     findAction->setEnabled( FALSE );
   }
+  mStack->raiseWidget(1 );
 }
 
 void TodoWindow::slotEdit()
@@ -369,7 +388,7 @@ void TodoWindow::slotEdit()
 	table->setPaintingEnabled( true );
     }
     populateCategories();
-
+    mStack->raiseWidget( 1 );
 }
 void TodoWindow::slotDuplicate()
 {
@@ -379,10 +398,19 @@ void TodoWindow::slotDuplicate()
     return;
   }
   ToDoEvent ev = table->currentEntry();
-  ToDoEvent ev2 = ToDoEvent( ev );
+  ToDoEvent ev2 = ToDoEvent( ev ); // what about the uid
+  int uid;
+  { // uid
+    Qtopia::UidGen *uidgen = new Qtopia::UidGen();
+    uid = uidgen->generate();
+    delete uidgen;
+  }
+  ev2.setUid( uid );
   table->setPaintingEnabled( false );
   table->addEntry( ev2 );
   table->setPaintingEnabled( true );
+
+  mStack->raiseWidget( 1 );
 }
 void TodoWindow::slotShowPopup( const QPoint &p )
 {
@@ -433,6 +461,8 @@ void TodoWindow::setCategory( int c )
 	setCaption( tr("Todo") + " - " + cat );
     }
     table->setPaintingEnabled( true );
+
+    mStack->raiseWidget( 1 );
 }
 
 void TodoWindow::populateCategories()
@@ -440,6 +470,7 @@ void TodoWindow::populateCategories()
     catMenu->clear();
     int id, rememberId;
     id = 1;
+    rememberId = 0;
     catMenu->insertItem( tr( "All Categories" ), id++ );
     catMenu->insertSeparator();
     QStringList categories = table->categories();
@@ -472,6 +503,11 @@ void TodoWindow::flush()
 
 void TodoWindow::closeEvent( QCloseEvent *e )
 {
+    if( mStack->visibleWidget() != table ){
+      mStack->raiseWidget( 1 );
+      e->ignore();
+      return;
+    }
     if(syncing) {
 	/* no need to save if in the middle of syncing */
 	e->accept();
@@ -562,10 +598,24 @@ void TodoWindow::beamDone( Ir *ir )
     unlink( beamfile );
 }
 
-/* added 20.01.2k2 by se */
 void TodoWindow::showDeadline( bool s )
 {
     table->setPaintingEnabled( false );
     table->setShowDeadline( s );
     table->setPaintingEnabled( true );
+}
+void TodoWindow::slotShowDetails()
+{
+  ToDoEvent event = table->currentEntry();
+  slotShowDetails( event );
+}
+void TodoWindow::slotShowDetails( const ToDoEvent &event )
+{
+  if( mView == 0l ){
+    mView = new TodoLabel(mStack);
+    mStack->addWidget( mView, 2 );
+  }
+  mView->init( event );
+  mView->sync();
+  mStack->raiseWidget( 2);
 }

@@ -1,5 +1,6 @@
 /**********************************************************************
-   Copyright (C) 2002 Holger 'zecke' Freyther <freyther@kde.org>
+** Copyright (C) 2002 Holger 'zecke' Freyther <freyther@kde.org>
+** Copyright (C) 2002 by Stefan Eilers (se, eilers.stefan@epost.de)
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
 ** This file is part of Qtopia and Opi Environment.
@@ -29,6 +30,10 @@ class QAction;
 class QPopupMenu;
 class Ir;
 class OFontMenu;
+class TodoLabel;
+class ToDoDB;
+class QWidgetStack;
+class ToDoEvent;
 
 class TodoWindow : public QMainWindow
 {
@@ -49,9 +54,11 @@ protected slots:
     void slotShowPopup( const QPoint & );
     void showCompleted( bool );
 
-    /* added 20.01.2k2 by se */
     void showDeadline( bool );
-    
+
+    void slotShowDetails(const ToDoEvent &event );
+    void slotShowDetails();    
+
     void currentEntryChanged( int r, int c );
     void setCategory( int );
     void slotFind();
@@ -66,9 +73,11 @@ protected:
 
 private:
     void populateCategories();
+    //inline void switchToTable(); // move back to the normal view
 
 private:
     TodoTable *table;
+    TodoLabel *mView;
     QAction *editAction,
       *deleteAction,
       *findAction,
@@ -77,6 +86,7 @@ private:
       *deleteAllAction,
       *duplicateAction;
     QPopupMenu *contextMenu, *catMenu;
+    QWidgetStack *mStack;
 
     bool syncing;
 };

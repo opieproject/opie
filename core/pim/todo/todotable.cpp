@@ -305,15 +305,21 @@ void TodoTable::slotClicked( int row, int col, int, const QPoint &pos )
         case 1:
             break;
         case 2:
-            // may as well edit it...
-	  //	    menuTimer->stop();
-//            emit signalEdit();
-	  // fall through
-        case 3: 
-            // may as well edit it...
+	  // may as well edit it...
+	  // menuTimer->stop();
+	  // emit signalEdit();
+	  // Show detailed view of the selected entry
+	  {
 	    menuTimer->stop();
-	    // emit signalEdit();
-            break;
+	    ToDoEvent *todo = todoList[static_cast<CheckItem*>(item(row, 0))];
+	    emit showDetails( *todo );
+	  }
+	  break;
+        case 3: 
+	  // may as well edit it...
+	  menuTimer->stop();
+	  // emit signalEdit();
+	  break;
     }
 }
 
@@ -345,7 +351,7 @@ void TodoTable::internalAddEntries( QList<ToDoEvent> &list )
 
 ToDoEvent TodoTable::currentEntry() const
 {
-  printf ("in currentEntry\n");
+  //qWarning ("in currentEntry\n");
 
     QTableItem *i = item( currentRow(), 0 );
     if ( !i || rowHeight( currentRow() ) <= 0 )
