@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Text Editor
- The (slightly enchanced) text editor for the Opie environment.
+ The text editor for the Opie environment.
