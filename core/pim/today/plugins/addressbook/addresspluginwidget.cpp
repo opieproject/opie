@@ -96,7 +96,7 @@ void AddressBookPluginWidget::getAddress() {
 	QString output;
 
 	// Check whether the database provide the search option..
-	if ( ! m_contactdb->hasQuerySettings( OContactAccess::DateDiff ) ){
+	if ( m_contactdb->hasQuerySettings( OContactAccess::DateDiff ) ){
 
 		// Define the query for birthdays and start search..
 		QDate lookAheadDate = QDate::currentDate().addDays( m_daysLookAhead );
