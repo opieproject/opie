@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qglobal.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
+** $Id: qglobal.h,v 1.3 2003-11-03 16:52:29 eilers Exp $
 **
 ** Global type declarations and definitions
 **
@@ -154,7 +154,14 @@
 #endif
 
 #if defined(Q_OS_MAC9) || defined(Q_OS_MACX)
-#  define Q_OS_MAC
+/* This hack forces the generater to compile qmake not for maxosx native. It is 
+ * compiled for Linux and generates usual makefiles..
+ * Does anyone has a better solution for this ? (eilers)
+ */
+// #  define Q_OS_MAC
+#define Q_OS_LINUX
+#warning "boeser Hack !! (se)"
+#undef Q_OS_MACX
 #endif
 
 #if defined(Q_OS_MAC9) || defined(Q_OS_MSDOS) || defined(Q_OS_OS2) || defined(Q_OS_WIN32) || defined(Q_OS_WIN64)

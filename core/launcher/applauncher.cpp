@@ -546,7 +546,11 @@ bool AppLauncher::execute(const QString &c, const QString &docParam, bool noRais
     args[j] = NULL;
 
 #ifndef Q_OS_WIN32
+#ifdef Q_OS_MACX
+    if ( qlPid && qlReady && QFile::exists( QPEApplication::qpeDir()+"plugins/application/lib"+args[0] + ".dylib" ) ) {
+#else
     if ( qlPid && qlReady && QFile::exists( QPEApplication::qpeDir()+"plugins/application/lib"+args[0] + ".so" ) ) {
+#endif /* Q_OS_MACX */
 	qDebug( "Quick launching: %s", args[0] );
 	if ( getuid() == 0 )
 	    setpriority( PRIO_PROCESS, qlPid, 0 );

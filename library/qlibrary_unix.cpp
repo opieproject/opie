@@ -76,7 +76,118 @@ void* QLibraryPrivate::resolveSymbol( const char* symbol )
     return address;
 }
 
-#else // Q_OS_HPUX
+#elif defined(_NULL_LIB_)
+
+bool QLibraryPrivate::loadLibrary()
+{
+	//qDebug("QLibraryPrivate::loadLibrary\n");
+	return FALSE;
+}
+bool QLibraryPrivate::freeLibrary()
+{
+	//qDebug("QLibraryPrivate::freeLibrary\n");
+	return FALSE;
+}
+void* QLibraryPrivate::resolveSymbol( const char* symbol )
+{
+	//qDebug("QLibraryPrivate::resolveSymbol\n");
+	return FALSE;
+}
+
+#elif defined(Q_OS_MACX)
+
+#define ENUM_DYLD_BOOL
+enum DYLD_BOOL {
+	DYLD_FALSE,
+	DYLD_TRUE
+};
+#include <mach-o/dyld.h>
+typedef struct {
+	NSObjectFileImage img;
+	NSModule mod;
+} DyldLibDesc;
+
+bool QLibraryPrivate::loadLibrary()
+{
+	// qDebug("QLibraryPrivate::loadLibrary\n");
+	// return FALSE;
+    if ( pHnd )
+	return TRUE;
+
+    QString filename = library->library();
+
+    NSObjectFileImage img = 0;
+    NSModule mod = 0;
+    NSObjectFileImageReturnCode ret = NSCreateObjectFileImageFromFile( filename.latin1() , &img );
+    if ( ret != NSObjectFileImageSuccess ) {
+		qWarning( "Error in NSCreateObjectFileImageFromFile(): %d; Filename: %s", ret, filename.latin1() );
+		if (ret == NSObjectFileImageAccess) {
+			qWarning ("(NSObjectFileImageAccess)" );
+		}
+	} else {
+		mod = NSLinkModule(img, filename.latin1(), NSLINKMODULE_OPTION_BINDNOW |
+				                                    NSLINKMODULE_OPTION_PRIVATE |
+													NSLINKMODULE_OPTION_RETURN_ON_ERROR);
+		if (mod == 0) {
+			qWarning( "Error in NSLinkModule()" );
+			NSDestroyObjectFileImage(img);
+		}
+	}
+	DyldLibDesc* desc = 0;
+	if (img != 0 && mod != 0) {
+		desc = new DyldLibDesc;
+		desc->img = img;
+		desc->mod = mod;
+	}
+	pHnd = desc;
+    return pHnd != 0;
+}
+
+bool QLibraryPrivate::freeLibrary()
+{
+	//qDebug("QLibraryPrivate::freeLibrary\n");
+	//return FALSE;
+    if ( !pHnd )
+	return TRUE;
+
+	DyldLibDesc* desc = (DyldLibDesc*) pHnd;
+	NSModule mod = desc->mod;
+	NSObjectFileImage img = desc->img;
+	DYLD_BOOL success = NSUnLinkModule(mod, NSUNLINKMODULE_OPTION_NONE);
+	if ( success ) {
+	NSDestroyObjectFileImage(img);
+	delete desc;
+	pHnd = 0;
+	}
+#if defined(QT_DEBUG) || defined(QT_DEBUG_COMPONENT)
+    else {
+	    qWarning( "Error in NSUnLinkModule(): %d", ret );
+    }
+#endif
+    return pHnd == 0;
+}
+
+void* QLibraryPrivate::resolveSymbol( const char* symbol )
+{
+	//qDebug("QLibraryPrivate::resolveSymbol\n");
+	//return FALSE;
+    if ( !pHnd )
+	return 0;
+
+	DyldLibDesc* desc = (DyldLibDesc*) pHnd;
+	NSSymbol sym = NSLookupSymbolInModule(desc->mod, symbol);
+	void* address = 0;
+	if (sym != 0) {
+		address = NSAddressOfSymbol(sym);
+	}
+#if defined(QT_DEBUG) || defined(QT_DEBUG_COMPONENT)
+    if ( address == 0 )
+	qWarning( "Cannot find symbol: %s", symbol );
+#endif
+    return address;
+}
+
+#else
 // Something else, assuming POSIX
 #include <dlfcn.h>
 

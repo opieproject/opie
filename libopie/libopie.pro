@@ -93,10 +93,6 @@ TARGET    = opie
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR      = $(OPIEDIR)/lib$(PROJMAK)
 
-# The following is just for my Notebook ! 
-# It should never be committed !! (eilers)
-# QMAKE_CXXFLAGS        += -DQT_NO_SOUND
-
 LIBS += -lqpe
 
 # Add SQL-Support if selected by config (eilers) 

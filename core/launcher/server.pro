@@ -115,6 +115,11 @@ DEPENDPATH	+= $(OPIEDIR)/rsync
 
 TARGET		= qpe
 
-LIBS	+= -lcrypt -lqpe -lopie
+CONFTEST = $$system( echo $CONFIG_TARGET_MACOSX )
+contains( CONFTEST, y ){
+  LIBS += -lqpe -lopie
+}else{
+  LIBS	+= -lcrypt -lqpe -lopie
+}
 
 include ( $(OPIEDIR)/include.pro )

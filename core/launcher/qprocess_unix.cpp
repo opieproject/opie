@@ -50,6 +50,9 @@
 
 #include <errno.h>
 
+#ifdef Q_OS_MACX
+#include <sys/time.h>
+#endif
 #include <sys/resource.h>
 
 #ifdef __MIPSEL__

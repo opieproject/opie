@@ -28,8 +28,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
+
+#ifndef Q_OS_MACX
 #include <shadow.h>
 #include <crypt.h>
+#endif /* Q_OS_MACX */ 
 
 #else
 #include <stdlib.h>

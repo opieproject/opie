@@ -28,7 +28,10 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
+
+#ifndef QT_NO_SOUND
 #include <sys/soundcard.h>
+#endif
 
 #include "config.h"
 #include <qmessagebox.h>

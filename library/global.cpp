@@ -604,7 +604,11 @@ void Global::invoke(const QString &c)
 #endif
 
 #ifdef HAVE_QUICKEXEC
+#ifdef Q_OS_MACX
+    QString libexe = qpeDir()+"/binlib/lib"+args[0] + ".dylib";
+#else
     QString libexe = qpeDir()+"/binlib/lib"+args[0] + ".so";
+#endif
     qDebug("libfile = %s", libexe.latin1() );
     if ( QFile::exists( libexe ) ) {
 	qDebug("calling quickexec %s", libexe.latin1() );

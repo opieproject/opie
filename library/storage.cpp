@@ -29,19 +29,30 @@
 
 #include <stdio.h>
 
-#if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
+#if defined(_OS_LINUX_) || defined(Q_OS_LINUX) 
 #include <sys/vfs.h>
 #include <mntent.h>
 #endif
 
+#ifdef Q_OS_MACX
+#  include <sys/param.h>
+#  include <sys/ucred.h>
+#  include <sys/mount.h>
+#  include <stdio.h>  // For strerror()
+#  include <errno.h>
+#endif /* Q_OS_MACX */
+
 #include <qstringlist.h>
 
-#include <sys/vfs.h>
-#include <mntent.h>
+// Shouldn't be here ! (eilers)
+// #include <sys/vfs.h>
+// #include <mntent.h>
 
 
 static bool isCF(const QString& m)
 {
+
+#ifndef Q_OS_MACX
     FILE* f = fopen("/var/run/stab", "r");
     if (!f) f = fopen("/var/state/pcmcia/stab", "r");
     if (!f) f = fopen("/var/lib/pcmcia/stab", "r");
@@ -61,6 +72,7 @@ static bool isCF(const QString& m)
         }
         fclose(f);
     }
+#endif /* Q_OS_MACX */
     return FALSE;
 }
 
@@ -204,8 +216,25 @@ void StorageInfo::update()
 }
 
 bool deviceTab( const char *device) {
-   QString name = device;
-   bool hasDevice=false;
+	QString name = device;
+	bool hasDevice=false;
+
+#ifdef Q_OS_MACX
+	// Darwin (MacOS X)
+	struct statfs** mntbufp;
+	int count = 0;
+	if ( ( count = getmntinfo( mntbufp, MNT_WAIT ) ) == 0 ){
+		qWarning("deviceTab: Error in getmntinfo(): %s",strerror( errno ) );
+		hasDevice = false;
+	}
+	for( int i = 0; i < count; i++ ){
+		QString deviceName = mntbufp[i]->f_mntfromname;
+		qDebug(deviceName);
+		if( deviceName.left( name.length() ) == name )
+			hasDevice = true;
+	}
+#else
+   // Linux
    struct mntent *me;
     FILE *mntfp = setmntent( "/etc/mtab", "r" );
     if ( mntfp ) {
@@ -218,6 +247,9 @@ bool deviceTab( const char *device) {
         }
     }
     endmntent( mntfp );
+#endif /* Q_OS_MACX */
+
+
     return hasDevice;
 }
 

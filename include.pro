@@ -1,7 +1,8 @@
 include ( $(OPIEDIR)/gen.pro )
 
 # base opie install path
-prefix = /opt/QtPalmtop
+# prefix = /opt/QtPalmtop ??? Why here (eilers) ???
+prefix = $(OPIEDIR)
 
 contains( CONFIG, quick-app-lib ) {
     TEMPLATE = lib
@@ -95,7 +96,16 @@ ipk.target = ipk
 ipk.commands = tmp=`mktemp -d /tmp/ipkg-opie.XXXXXXXXXX` && ( $(MAKE) INSTALL_ROOT="$$$$tmp" install && ipkg-build $$$$tmp; rm -rf $$$$tmp; )
 
 QMAKE_EXTRA_UNIX_TARGETS += lupdate lrelease ipk opie-lupdate opie-lrelease messages
+CONFTEST = $$system( echo $CONFIG_TARGET_MACOSX )
+contains( CONFTEST, y ){
+QMAKE_LFLAGS += -Wl
+}
+else {
 QMAKE_LFLAGS += -Wl,-rpath=$$prefix/lib
+# I am not sure whether it is a good idea to change the way plugins is build
+# on linux. Therefore I remove the "plugin" term, which is needed by MacOS-X
+CONFIG -= plugin
+}
 QMAKE_LIBDIR += $(OPIEDIR)/lib
 
 MOC_DIR=.moc/$(PLATFORM)

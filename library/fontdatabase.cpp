@@ -170,7 +170,11 @@ void FontDatabase::loadRenderers()
     factoryList->clear();
 
     QString path = QPEApplication::qpeDir() + "/plugins/fontfactories";
+#ifdef Q_OS_MACX
+    QDir dir( path, "lib*.dylib" );
+#else
     QDir dir( path, "lib*.so" );
+#endif
     
     if ( !dir.exists())
     	return;

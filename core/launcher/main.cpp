@@ -276,7 +276,9 @@ int initApplication( int argc, char ** argv )
     qDebug("exiting...");
     delete s;
 
+#ifndef Q_OS_MACX
     ODevice::inst()->setSoftSuspend( false );
+#endif
 
     return rv;
 }

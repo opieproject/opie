@@ -1,0 +1,91 @@
+Information about porting Opie to MacOS-X (eilers)
+==================================================
+
+Credits:
+--------
+
+Special thanks to xxxx for its patches for qt-X11 (2.3.2), QT/E (2.3.5) and qtopia (1.6.1).
+Without them, I wouldn't be able to provide the port for OPIE to MacOS-X that fast..
+
+Status:
+-------
+The basic system works quite well. But a lot of applications and plugins,
+which are platform specific, need some work to be compileable.
+
+What is ready:
+
+libqpe
+libopie1
+pim-applications (addressbook, todolist, datebook, today)
+A lot of applications and plugins which are not platform specific.
+
+What will follow soon:
+
+libopie2
+
+Remember: A lot of configuration-settings are not tested (as for instance 
+the quicklauncher) and might fail to compile. 
+If you want to avoid misconfigurations, you may want to start with
+the config-file in this directory. Just copy "config_macosx" to $OPIEDIR/.config
+to get a working configuration to start with.
+
+(The missing apps/plugins will be ported on demand.)
+
+How to compile Opie for MacOS-X:
+-------------------------------
+
+Before compiling for MacOS-X, you need the following:
+
+1. X11-Server (Provided by Apple)
+2. QT-2.3.2 for X11
+3. QT/E-2.3.7
+4. Patches for QT-2.3.2 for MacOSX
+5. Patches for QT/E-2.3.7 for MacOSX
+
+Please follow the instructions by xxxx how to create a buildsystem
+for your Mac.
+What is different to the previous desciption: 
+You don't need Qtopia ! 
+It is recommended to use QT/E in version 2.3.7 instead of 2.3.5 as described.
+The Patch for QT/E for Opie, including all other opie-patches is available in the
+qt-directory ($OPIEDIR/qt) and is called "qte237-all-macosx.patch"
+
+If your buildsystem is working correctly, you should be able to build
+opie. You have to enter "make menuconfig" and set 
+"Build Parameters"->"Target Machine"->"Mac OS X (DARWIN)"
+activate the platform specific changes.
+
+You will see that a lot of applications and plugins/applets will not compile
+successfully, due to the fact that they are not ported to this platform.
+You may disable them to be able to compile the rest.
+
+
+Information for Developers:
+---------------------------
+
+1. Platform specific code should be surrounded by
+#ifdef Q_OS_MACX
+MACOS-X CODE
+#else
+OTHER-CODE
+#endif
+
+2. The Plugin-Handling by MacOS-X is different than it is by Linux. 
+On linux-systems, shared libraries are not different to dynamic loaded libraries
+(aka plugins). They just are different whether they are loaded automatically
+at startup or manually by any application.
+On MacOS-X, the plugins are loaded by a special mechanism and must be in a special
+binary format. Therefore you have to add the term "plugin" to the CONFIG-clause, as 
+for instance:
+
+TEMPLATE=lib
+CONFIG += qt plugin release
+
+If you don't add "plugin" you will get a shared library which is not loadable 
+(Error-Code: NSObjectFileImageInappropriateFile (2))!
+
+
+
+For problems, help and flames, feel free to contact me at
+
+eilers.stefan@epost.de

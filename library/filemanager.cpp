@@ -31,7 +31,16 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <dirent.h>
-#include <sys/sendfile.h>
+#ifdef Q_OS_MACX
+// MacOS X does not have sendfile.. :(
+// But maybe in the future.. !?
+#  ifdef SENDFILE
+#    include <sys/types.h>
+#    include <sys/socket.h>
+#  endif
+#else
+#  include <sys/sendfile.h>
+#endif /* Q_OS_MACX */
 #include <fcntl.h>
 
 /*!
@@ -216,6 +225,8 @@ bool FileManager::copyFile( const AppLnk &src, const AppLnk &dest )
     return ok;
 }
 
+
+
 bool FileManager::copyFile( const QString & src, const QString & dest ) {
    bool success = true;
    struct stat status;
@@ -238,17 +249,49 @@ bool FileManager::copyFile( const QString & src, const QString & dest ) {
       if(write_fd != -1) {
          int err=0;
          QString msg;
-         err = sendfile(write_fd, read_fd, &offset, stat_buf.st_size);
-         if( err == -1) {
-            switch(err) {
-            case EBADF : msg = "The input file was not opened for reading or the output file was not opened for writing. ";
-            case EINVAL: msg = "Descriptor is not valid or locked. ";
-            case ENOMEM: msg = "Insufficient memory to read from in_fd.";
-            case EIO: msg = "Unspecified error while reading from in_fd.";
-            };
-            success = false;
-         }
-      } else {
+#ifdef Q_OS_MACX
+#ifdef SENDMAIL
+	 /* FreeBSD does support a different kind of 
+	  * sendfile. (eilers)
+	  * I took this from Very Secure FTPd
+	  * Licence: GPL
+	  * Author: Chris Evans
+	  * sysdeputil.c
+	  */
+          /* XXX - start_pos will truncate on 32-bit machines - can we
+           * say "start from current pos"?
+           */
+          off_t written = 0;
+	  int retval = 0;
+          retval = sendfile(read_fd, write_fd, offset, stat_buf.st_size, NULL,
+                            &written, 0);
+          /* Translate to Linux-like retval */
+          if (written > 0)
+          {
+            err = (int) written;
+          }
+#else /* SENDMAIL */
+	  err == -1;
+	  msg = "FAILURE: Using unsupported function \"sendfile()\" Need Workaround !!";
+	  success = false;
+#         warning "Need workaround for sendfile!!(eilers)"
+#endif  /* SENDMAIL */
+
+#else
+	  err = sendfile(write_fd, read_fd, &offset, stat_buf.st_size);
+	  if( err == -1) {
+		  switch(err) {
+		  case EBADF : msg = "The input file was not opened for reading or the output file was not opened for writing. ";
+		  case EINVAL: msg = "Descriptor is not valid or locked. ";
+		  case ENOMEM: msg = "Insufficient memory to read from in_fd.";
+		  case EIO: msg = "Unspecified error while reading from in_fd.";
+		  };
+		  success = false;
+	  }
+#endif /* Q_OS_MACX */
+	  if( !success )
+		  qWarning( msg );
+     } else {
          qWarning("open write failed %s, %s",src.latin1(), dest.latin1());
          success = false;
       }

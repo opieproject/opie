@@ -23,7 +23,7 @@
 #define _GNU_SOURCE 1
 
 /* GNU extension of saving argv[0] to program_invocation_short_name */
-#define HAVE_PROGRAM_INVOCATION_NAME 1
+/* #define HAVE_PROGRAM_INVOCATION_NAME 1 */
 
 /* Define to a replacement type if intmax_t is not a builtin, or in
    sys/types.h or stdlib.h or stddef.h */

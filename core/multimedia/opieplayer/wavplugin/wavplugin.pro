@@ -1,5 +1,5 @@
 TEMPLATE	=   lib
-CONFIG		+=  qt warn_on release
+CONFIG		+=  qt plugin warn_on release
 HEADERS		=   wavplugin.h wavpluginimpl.h
 SOURCES	        =   wavplugin.cpp wavpluginimpl.cpp
 TARGET		=   wavplugin

@@ -12,6 +12,9 @@ choice
   config TARGET_X86
     boolean "Intel X86"
 
+  config TARGET_MACOSX
+    boolean "Mac OS X (DARWIN)"
+
   config TARGET_SHARP
     boolean "Sharp Zaurus"
 
@@ -62,6 +65,7 @@ config SPECFILE
   default "qws/linux-simpad-g++" if TARGET_SIMPAD && (! X11)
   default "linux-g++" if TARGET_SIMPAD && X11
   default "qws/linux-yopy-g++" if TARGET_YOPY && (! X11)
+  default "qws/macx-generic-g++" if TARGET_MACOSX && (! X11)
 
 config CUSTOMFILE
   string

@@ -34,6 +34,9 @@ endif
 ifdef CONFIG_TARGET_YOPY
   PLATFORM=yopy-linux
 endif
+ifdef CONFIG_TARGET_MACOSX
+  PLATFORM=macx-darwin
+endif
 
 export QMAKE:=$(OPIEDIR)/qmake/qmake
 export QMAKESPECSDIR=$(OPIEDIR)/mkspecs

@@ -23,7 +23,9 @@
 #include <sys/ioctl.h>
 #include <signal.h>
 #include <sys/time.h>
+#ifndef QT_NO_SOUND
 #include <linux/soundcard.h>
+#endif
 #include <math.h>
 
 #include <qapplication.h>

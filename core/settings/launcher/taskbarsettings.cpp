@@ -75,16 +75,23 @@ void TaskbarSettings::init ( )
 	QStringList exclude = cfg. readListEntry ( "ExcludeApplets", ',' );
 
 	QString path = QPEApplication::qpeDir ( ) + "/plugins/applets";
+#ifdef Q_OS_MACX
+	QStringList list = QDir ( path, "lib*.dylib" ). entryList ( );
+#else
 	QStringList list = QDir ( path, "lib*.so" ). entryList ( );
+#endif /* Q_OS_MACX */
 
 	for ( QStringList::Iterator it = list. begin ( ); it != list. end ( ); ++it ) {
 		QString name;
 		QPixmap icon;
 		TaskbarNamedAppletInterface *iface = 0;
 
+		qWarning("Load applet: %s", (*it).latin1() );
 		QLibrary *lib = new QLibrary ( path + "/" + *it );
 		lib-> queryInterface ( IID_TaskbarNamedApplet, (QUnknownInterface**) &iface );
+		qWarning("<1>");
 		if ( iface ) {
+			qWarning("<2>");
 			QString lang = getenv( "LANG" );
 			QTranslator *trans = new QTranslator ( qApp );
 			QString type = (*it). left ((*it). find ("."));
@@ -97,12 +104,20 @@ void TaskbarSettings::init ( )
 			icon = iface-> icon ( );
 			iface-> release ( );
 		}
+		qWarning("<3>");
 		if ( !iface ) {
+			qWarning("<4>");
 			lib-> queryInterface ( IID_TaskbarApplet, (QUnknownInterface**) &iface );
 			
 			if ( iface ) {
+				qWarning("<5>");
 				name = (*it). mid ( 3 );
+				qWarning("Found applet: %s", name.latin1() );
+#ifdef Q_OS_MACX
+				int sep = name. find( ".dylib" );
+#else
 				int sep = name. find( ".so" );
+#endif /* Q_OS_MACX */
 				if ( sep > 0 )
 					name. truncate ( sep );
 				sep = name. find ( "applet" );
@@ -112,8 +127,10 @@ void TaskbarSettings::init ( )
 				iface-> release ( );			
 			}					
 		}
+		qWarning("<6>");
 		
 		if ( iface ) {
+			qWarning("<7>");
 			QCheckListItem *item;
 			item = new QCheckListItem ( m_list, name, QCheckListItem::CheckBox );
 			if ( !icon. isNull ( ))

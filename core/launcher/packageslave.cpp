@@ -43,6 +43,8 @@
 #elif defined(Q_OS_WIN32)
 #include <windows.h>
 #include <winbase.h>
+#elif defined(Q_OS_MACX)
+#include <unistd.h>
 #endif
 
 

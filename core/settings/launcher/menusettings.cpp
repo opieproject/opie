@@ -79,7 +79,11 @@ void MenuSettings::init ( )
 	QStringList exclude = cfg. readListEntry ( "ExcludeApplets", ',' );
 
 	QString path = QPEApplication::qpeDir ( ) + "/plugins/applets";
+#ifdef Q_OS_MACX
+	QStringList list = QDir ( path, "lib*.dylib" ). entryList ( );
+#else
 	QStringList list = QDir ( path, "lib*.so" ). entryList ( );
+#endif /* Q_OS_MACX */
 
 	for ( QStringList::Iterator it = list. begin ( ); it != list. end ( ); ++it ) {
 		QString name;

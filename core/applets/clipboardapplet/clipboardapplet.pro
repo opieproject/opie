@@ -1,5 +1,5 @@
 TEMPLATE	= lib
-CONFIG		+= qt warn_on release
+CONFIG		+= qt plugin warn_on release
 HEADERS	=   clipboard.h clipboardappletimpl.h
 SOURCES	=   clipboard.cpp clipboardappletimpl.cpp
 TARGET		= clipboardapplet

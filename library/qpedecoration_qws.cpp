@@ -512,11 +512,19 @@ void QPEDecoration::init ( const QString &plugin )
     WindowDecorationInterface *iface = 0;
     QString path = QPEApplication::qpeDir() + "/plugins/decorations/";
 
+#ifdef Q_OS_MACX
+    if ( plugin.find( ".dylib" ) > 0 ) {
+#else
     if ( plugin.find( ".so" ) > 0 ) {
+#endif
         // full library name supplied
         path += plugin;
     } else {
+#ifdef Q_OS_MACX
+        path += "lib" + plugin.lower() + ".dylib"; // compatibility
+#else
         path += "lib" + plugin.lower() + ".so"; // compatibility
+#endif
     }
 
     QLibrary *lib = new QLibrary( path );

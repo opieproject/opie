@@ -1,5 +1,5 @@
 TEMPLATE	= lib
-CONFIG		+= qt warn_on release
+CONFIG		+= qt plugin warn_on release
 HEADERS	=	cardmon.h cardmonimpl.h
 SOURCES	=	cardmon.cpp cardmonimpl.cpp
 TARGET		= cardmonapplet

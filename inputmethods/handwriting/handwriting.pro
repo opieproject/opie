@@ -1,5 +1,5 @@
 TEMPLATE	= lib
-CONFIG		+= qt warn_on release
+CONFIG		+= qt plugin warn_on release
 HEADERS	=   qimpenchar.h \
 	    qimpenprofile.h \
 	    qimpencombining.h \

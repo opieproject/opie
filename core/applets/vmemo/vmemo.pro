@@ -1,5 +1,5 @@
 TEMPLATE  = lib
-CONFIG    += qt warn_on release
+CONFIG    += qt plugin warn_on release
 HEADERS =   vmemo.h vmemoimpl.h adpcm.h
 SOURCES =   vmemo.cpp vmemoimpl.cpp adpcm.c
 TARGET    = vmemoapplet

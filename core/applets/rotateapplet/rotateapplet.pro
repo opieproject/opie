@@ -1,5 +1,5 @@
 TEMPLATE      = lib
-CONFIG       += qt warn_on release
+CONFIG       += qt plugn warn_on release
 HEADERS       = rotate.h
 SOURCES       = rotate.cpp
 TARGET        = rotateapplet

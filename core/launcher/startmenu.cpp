@@ -256,7 +256,11 @@ void StartMenu::loadApplets()
 
     QString lang = getenv( "LANG" );
     QString path = QPEApplication::qpeDir() + "/plugins/applets";
+#ifdef Q_OS_MACX
+    QDir dir( path, "lib*.dylib" );
+#else
     QDir dir( path, "lib*.so" );
+#endif /* Q_OS_MACX */
     QStringList list = dir.entryList();
     QStringList::Iterator it;
     int napplets=0;

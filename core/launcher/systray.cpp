@@ -102,7 +102,11 @@ void SysTray::addApplets()
 
     QString lang = getenv( "LANG" );
     QString path = QPEApplication::qpeDir() + "/plugins/applets";
+#ifdef Q_OS_MACX
+    QDir dir( path, "lib*.dylib" );
+#else
     QDir dir( path, "lib*.so" );
+#endif /* Q_OS_MACX */
     QStringList list = dir.entryList();
     QStringList::Iterator it;
     int napplets=0;
@@ -110,6 +114,7 @@ void SysTray::addApplets()
     for ( it = list.begin(); it != list.end(); ++it ) {
 	if ( exclude.find( *it ) != exclude.end() )
 	    continue;
+	qWarning( "Found Applet: %s", (*it).latin1() );
 	TaskbarAppletInterface *iface = 0;
 	QLibrary *lib = new QLibrary( path + "/" + *it );
 	if (( lib->queryInterface( IID_TaskbarApplet, (QUnknownInterface**)&iface ) == QS_OK ) && iface ) {

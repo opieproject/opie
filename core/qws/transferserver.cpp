@@ -23,12 +23,20 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
+
+#ifndef Q_OS_MACX
 #include <shadow.h>
+#endif /* Q_OS_MACX */
 
 /* we need the _OS_LINUX stuff first ! */
 #include <qglobal.h>
 
 #ifndef  _OS_LINUX_
+// Is anybody able to review this ? The include "uuid/uuid.h" couldn't be found
+// anywhere ? Therfore I removed it completely..
+// I think it should be made permanentyl !? (eilers)
+#warning "Where should uuid/uuid.h be found ? Removed this part .. (eilers)"
+#if 0
 
 extern "C"
 {
@@ -36,10 +44,14 @@ extern "C"
 #define UUID_H_INCLUDED
 }
 
+#endif
+
 #endif // not defined linux
 
 #if defined(_OS_LINUX_)
 #include <shadow.h>
+#elif defined(Q_OS_MACX)
+#include <stdlib.h>
 #endif
 
 #include <qdir.h>
@@ -91,15 +103,15 @@ struct UidGen
 {
 	QString uuid();
 };
-#if !defined(_OS_LINUX_)
-
+#if defined(Q_OS_MACX)
 QString UidGen::uuid()
 {
-	uuid_t uuid;
-	uuid_generate( uuid );
-	return QUUid( uuid ).toString();
+	srandom( random() );
+	QString numStr = QString::number( random() );
+
+	return "{" + numStr + "}";
 }
-#else
+#elif defined(_OS_LINUX_)
 /*
 * linux got a /proc/sys/kernel/random/uuid file
 * it'll generate the uuids for us
@@ -113,6 +125,13 @@ QString UidGen::uuid()
 	QTextStream stream(&file);
 
 	return "{" + stream.read().stripWhiteSpace() + "}";
+}
+#else
+QString UidGen::uuid()
+{
+	uuid_t uuid;
+	::uuid_generate( uuid );
+	return QUUid( uuid ).toString();
 }
 #endif
 }

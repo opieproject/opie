@@ -227,7 +227,11 @@ void InputMethods::unloadMethod( QValueList<InputMethod>& list ) {
 
 QStringList InputMethods::plugins()const {
    QString path = QPEApplication::qpeDir() + "/plugins/inputmethods";
+#ifdef Q_OS_MACX
+   QDir dir( path, "lib*.dylib" );
+#else
    QDir dir( path, "lib*.so" );
+#endif /* Q_OS_MACX */
    return dir.entryList();
 }
 

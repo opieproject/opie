@@ -174,10 +174,17 @@ void Today::loadPlugins() {
     }
 
     QString path = QPEApplication::qpeDir() + "/plugins/today";
+    qWarning("Searching for Plugins in: %s", path.latin1());
+#ifdef Q_OS_MACX
+    QDir dir( path, "lib*.dylib" );
+#else
     QDir dir( path, "lib*.so" );
+#endif
 
     QStringList list = dir.entryList();
     QStringList::Iterator it;
+
+    qWarning("Found: %d entries !", list.count() );
 
     QMap<QString, TodayPlugin> tempList;
 

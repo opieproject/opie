@@ -1,5 +1,5 @@
 TEMPLATE	= lib
-CONFIG		+= qt warn_on release
+CONFIG		+= qt plugin warn_on release
 HEADERS	=   volume.h volumeappletimpl.h oledbox.h
 SOURCES	=   volume.cpp volumeappletimpl.cpp oledbox.cpp
 TARGET		= volumeapplet

@@ -418,7 +418,11 @@ NetworkInterface* Network::loadPlugin(const QString& type)
     if ( !ifaces ) ifaces = new QDict<NetworkInterface>;
     NetworkInterface *iface = ifaces->find(type);
     if ( !iface ) {
+#ifdef Q_OS_MACX
+	QString libfile = QPEApplication::qpeDir() + "/plugins/network/lib" + type + ".dylib";
+#else
 	QString libfile = QPEApplication::qpeDir() + "/plugins/network/lib" + type + ".so";
+#endif
 	QLibrary lib(libfile);
 	if ( !lib.queryInterface( IID_Network, (QUnknownInterface**)&iface ) == QS_OK )
 	    return 0;

@@ -1,6 +1,6 @@
 TEMPLATE	= lib
-#CONFIG		= qt warn_on debug
-CONFIG		= qt warn_on release
+#CONFIG		= qt plugin warn_on debug
+CONFIG		= qt plugin warn_on release
 HEADERS		= keyview.h keyboardimpl.h
 SOURCES		= keyview.cpp keyboardimpl.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include

@@ -36,7 +36,11 @@ IrServer::IrServer( QObject *parent, const char *name )
     lib = 0;
     obexIface = 0;
     QString path = QPEApplication::qpeDir() + "/plugins/obex/";
+#ifdef Q_OS_MACX
+    QDir dir( path, "lib*.dylib" );
+#else
     QDir dir( path, "lib*.so" );
+#endif /* Q_OS_MACX */
     QStringList list = dir.entryList();
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {

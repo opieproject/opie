@@ -20,7 +20,9 @@
 #define QTOPIA_INTERNAL_LANGLIST
 #include <stdlib.h>
 #include <unistd.h>
+#ifndef Q_OS_MACX
 #include <linux/limits.h> // needed for some toolchains (PATH_MAX)
+#endif
 #include <qfile.h>
 #include <qqueue.h>
 #ifdef Q_WS_QWS
@@ -89,8 +91,9 @@
 #include <unistd.h>
 #include <sys/file.h>
 #include <sys/ioctl.h>
+#ifndef QT_NO_SOUND
 #include <sys/soundcard.h>
-
+#endif
 #include "qt_override_p.h"
 
 
@@ -233,7 +236,11 @@ public:
 	void loadTextCodecs()
 	{
 		QString path = QPEApplication::qpeDir() + "/plugins/textcodecs";
+#ifdef Q_OS_MACX
+		QDir dir( path, "lib*.dylib" );
+#else
 		QDir dir( path, "lib*.so" );
+#endif
 		QStringList list;
 		if ( dir. exists ( ))
 		    list = dir.entryList();
@@ -258,7 +265,11 @@ public:
 	void loadImageCodecs()
 	{
 		QString path = QPEApplication::qpeDir() + "/plugins/imagecodecs";
+#ifdef Q_OS_MACX
+		QDir dir( path, "lib*.dylib" );
+#else
 		QDir dir( path, "lib*.so" );
+#endif
 		QStringList list;
 		if ( dir. exists ( ))
 		    list = dir.entryList();
@@ -340,6 +351,7 @@ static void setVolume( int t = 0, int percent = -1 )
 				cfg.setGroup( "Volume" );
 				if ( percent < 0 )
 					percent = cfg.readNumEntry( "VolumePercent", 50 );
+#ifndef QT_NO_SOUND
 				int fd = 0;
 				if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
 					int vol = muted ? 0 : percent;
@@ -348,6 +360,7 @@ static void setVolume( int t = 0, int percent = -1 )
 					ioctl( fd, MIXER_WRITE( 0 ), &vol );
 					::close( fd );
 				}
+#endif
 			}
 			break;
 	}
@@ -362,12 +375,14 @@ static void setMic( int t = 0, int percent = -1 )
 				if ( percent < 0 )
 					percent = cfg.readNumEntry( "Mic", 50 );
 
+#ifndef QT_NO_SOUND
 				int fd = 0;
 				int mic = micMuted ? 0 : percent;
 				if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
 					ioctl( fd, MIXER_WRITE( SOUND_MIXER_MIC ), &mic );
 					::close( fd );
 				}
+#endif
 			}
 			break;
 	}
@@ -383,12 +398,14 @@ static void setBass( int t = 0, int percent = -1 )
 				if ( percent < 0 )
 					percent = cfg.readNumEntry( "BassPercent", 50 );
 
+#ifndef QT_NO_SOUND
 				int fd = 0;
 				int bass = percent;
                                 if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
 					ioctl( fd, MIXER_WRITE( SOUND_MIXER_BASS ), &bass );
 					::close( fd );
 				}
+#endif
 			}
 			break;
 	}
@@ -404,12 +421,14 @@ static void setTreble( int t = 0, int percent = -1 )
 				if ( percent < 0 )
 					percent = cfg.readNumEntry( "TreblePercent", 50 );
 
+#ifndef QT_NO_SOUND
 				int fd = 0;
 				int treble = percent;
 				if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
 					ioctl( fd, MIXER_WRITE( SOUND_MIXER_TREBLE ), &treble );
 					::close( fd );
 				}
+#endif
 			}
 			break;
 	}
@@ -1649,11 +1668,17 @@ void QPEApplication::internalSetStyle( const QString &style )
 		QStyle *sty = 0;
 		QString path = QPEApplication::qpeDir ( ) + "/plugins/styles/";
 
+#ifdef Q_OS_MACX
+		if ( style. find ( ".dylib" ) > 0 )
+			path += style;
+		else
+			path = path + "lib" + style. lower ( ) + ".dylib"; // compatibility
+#else
 		if ( style. find ( ".so" ) > 0 )
 			path += style;
 		else
 			path = path + "lib" + style. lower ( ) + ".so"; // compatibility
-
+#endif
 		static QLibrary *lastlib = 0;
 		static StyleInterface *lastiface = 0;
 
