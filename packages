@@ -30,6 +30,7 @@ CONFIG_CLOCK	noncore/tools/clock	clock.pro
 CONFIG_CONFEDIT	noncore/apps/confedit	confedit.pro
 CONFIG_DASHER	inputmethods/dasher	dasher.pro
 CONFIG_DATEBOOK	core/pim/datebook	datebook.pro
+CONFIG_DATEBOOK2	core/pim/datebook2	datebook2.pro
 CONFIG_DECO_FLAT	noncore/decorations/flat	flat.pro
 CONFIG_DECO_LIQUID	noncore/decorations/liquid	liquid.pro
 CONFIG_DECO_POLISHED	noncore/decorations/polished	polished.pro

@@ -99,10 +99,19 @@ ipk.commands = tmp=`mktemp -d /tmp/ipkg-opie.XXXXXXXXXX` && ( $(MAKE) INSTALL_RO
 QMAKE_EXTRA_UNIX_TARGETS += lupdate lrelease ipk opie-lupdate opie-lrelease messages
 CONFTEST = $$system( echo $CONFIG_TARGET_MACOSX )
 contains( CONFTEST, y ){
-QMAKE_LFLAGS += -Wl
-LIBS -= -ldl
-LIBS -= -lcrypt 
-LIBS -= -lm
+  QMAKE_LFLAGS += -Wl
+  LIBS -= -ldl
+  LIBS -= -lcrypt 
+  LIBS -= -lm
+
+  # Manual including indirect referenced libraries which are not loaded
+  # by the mac-linker automatically
+  CONFTEST = $$system( echo $CONFIG_SQL_PIM_BACKEND )
+  contains( CONFTEST, y ){
+    LIBS += -lopiedb2 -lqpe
+  } else {
+    LIBS += -lqpe
+  }
 }
 else {
 QMAKE_LFLAGS += -Wl,-rpath=$$prefix/lib

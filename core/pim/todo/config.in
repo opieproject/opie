@@ -1,4 +1,4 @@
   config TODO
     boolean "opie-todo (a Todo-list manager)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2PIM && LIBOPIE2DB
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2PIM

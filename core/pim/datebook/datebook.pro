@@ -35,7 +35,7 @@ INTERFACES	= dateentry.ui \
 		  noteentry.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe -lopieui2
+LIBS            += -lqpe -lopieui2 -lopiecore2
 TARGET		= datebook
 
 include ( $(OPIEDIR)/include.pro )

@@ -13,7 +13,7 @@ INCLUDEPATH     += $(OPIEDIR)/include \
 DEPENDPATH      += $(OPIEDIR)/include \
         ../ ../library
 
-LIBS+= -lqpe -lopiecore2 -lopieui2 -lopiepim2 -lopiedb2 -lqtaux2
+LIBS+= -lqpe -lopiecore2 -lopieui2 -lopiepim2 -lqtaux2
 
 DESTDIR = $(OPIEDIR)/plugins/today
 TARGET = todayaddressbookplugin
