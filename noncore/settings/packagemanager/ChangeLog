@@ -1,3 +1,7 @@
+2004-02-13 Dan Williams <drw@handhelds.org>
+
+    * Fix handling of filtering options in View menu
+
 2004-02-12 Dan Williams <drw@handhelds.org>
 
     * Package information dialog implemented

@@ -213,17 +213,17 @@ void MainWindow::initUI()
 
     popup->insertSeparator();
 
-    a = new QAction( tr( "Configure filter" ),  QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here to change package filter criteria." ) );
-    connect( a, SIGNAL(activated()), this, SLOT(slotFilterChange()) );
-    a->addTo( popup );
-
     m_actionFilter = new QAction( tr( "Filter" ), Resource::loadPixmap( "packagemanager/filter" ),
                                          QString::null, 0, this, 0 );
     m_actionFilter->setToggleAction( true );
     m_actionFilter->setWhatsThis( tr( "Click here to apply current filter." ) );
     connect( m_actionFilter, SIGNAL(toggled(bool)), this, SLOT(slotFilter(bool)) );
     m_actionFilter->addTo( popup );
+
+    a = new QAction( tr( "Filter settings" ),  QString::null, 0, this, 0 );
+    a->setWhatsThis( tr( "Click here to change the package filter criteria." ) );
+    connect( a, SIGNAL(activated()), this, SLOT(slotFilterChange()) );
+    a->addTo( popup );
 
     popup->insertSeparator();
 
@@ -554,6 +554,7 @@ void MainWindow::slotShowNotInstalled()
     {
         m_actionShowInstalled->setOn( false );
         m_actionShowUpdated->setOn( false );
+        m_actionFilter->setOn( false );
         packageList = m_packman.filterPackages( QString::null, QString::null, QString::null,
                                                 OPackageManager::NotInstalled, QString::null );
     }
@@ -574,6 +575,7 @@ void MainWindow::slotShowInstalled()
     {
         m_actionShowNotInstalled->setOn( false );
         m_actionShowUpdated->setOn( false );
+        m_actionFilter->setOn( false );
         packageList = m_packman.filterPackages( QString::null, QString::null, QString::null,
                                                 OPackageManager::Installed, QString::null );
     }
@@ -594,6 +596,7 @@ void MainWindow::slotShowUpdated()
     {
         m_actionShowInstalled->setOn( false );
         m_actionShowNotInstalled->setOn( false );
+        m_actionFilter->setOn( false );
         packageList = m_packman.filterPackages( QString::null, QString::null, QString::null,
                                                 OPackageManager::Updated, QString::null );
     }
@@ -633,8 +636,42 @@ void MainWindow::slotFilter( bool isOn )
     OPackageList *packageList;
     if ( isOn )
     {
-        packageList = m_packman.filterPackages( m_filterName, m_filterServer, m_filterDest,
-                                                m_filterStatus, m_filterCategory );
+        // Turn off other filtering options
+        m_actionShowNotInstalled->setOn( false );
+        m_actionShowInstalled->setOn( false );
+        m_actionShowUpdated->setOn( false );
+
+        // If the filter settings have not been set yet, display filter dialog
+        if ( m_filterName.isNull() && m_filterServer.isNull() && m_filterDest.isNull() &&
+             m_filterStatus == OPackageManager::NotDefined && m_filterCategory.isNull() )
+        {
+            FilterDlg dlg( this, &m_packman, m_filterName, m_filterServer, m_filterDest, m_filterStatus,
+                        m_filterCategory );
+            if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted )
+            {
+                m_filterName = dlg.name();
+                m_filterServer = dlg.server();
+                m_filterDest = dlg.destination();
+                m_filterStatus = dlg.status();
+                m_filterCategory = dlg.category();
+                m_actionFilter->setOn( true );
+                packageList = m_packman.filterPackages( m_filterName, m_filterServer, m_filterDest,
+                                                        m_filterStatus, m_filterCategory );
+            }
+            else
+            {
+                m_actionFilter->setOn( false );
+                packageList = m_packman.packages();
+            }
+        }
+        else
+        {
+            m_actionFilter->setOn( true );
+            packageList = m_packman.filterPackages( m_filterName, m_filterServer, m_filterDest,
+                                                    m_filterStatus, m_filterCategory );
+        }
+
+
     }
     else
         packageList = m_packman.packages();
