@@ -12,11 +12,14 @@
  * =====================================================================
  * ToDo: There is a lot todo.. It is currently very simplistic..
  * =====================================================================
- * Version: $Id: ocontactselector.cpp,v 1.1.2.4 2002-07-05 11:17:19 zecke Exp $
+ * Version: $Id: ocontactselector.cpp,v 1.1.2.5 2002-07-06 16:07:23 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactselector.cpp,v $
- * Revision 1.1.2.4  2002-07-05 11:17:19  zecke
+ * Revision 1.1.2.5  2002-07-06 16:07:23  eilers
+ * Added keyboard handling
+ *
+ * Revision 1.1.2.4  2002/07/05 11:17:19  zecke
  * Some API updates by me
  *
  * Revision 1.1.2.3  2002/07/03 06:55:54  eilers
@@ -143,6 +146,29 @@ void OContactSelector::slotClicked( int row, int col, int, const QPoint &pos )
 			break;
 		}
 }
+
+void OContactSelector::keyPressEvent( QKeyEvent *e )
+{
+	if ( e->key() == Key_Space || e->key() == Key_Return ) {
+		switch ( currentColumn() ) {
+		case 0: {
+			OCheckItem *i = static_cast<OCheckItem*>( item( currentRow(),
+								    currentColumn() ) );
+			if ( i ){
+				i->toggle();
+				updateCell( currentRow(), currentColumn() );
+				getItemAtRow ( currentRow() ) -> toggle();
+			}
+			break;
+		}
+		default:
+			break;
+		}		
+	} else
+		QTable::keyPressEvent( e );
+}
+
+
 
 QValueList<int> OContactSelector::selected ()const
 {

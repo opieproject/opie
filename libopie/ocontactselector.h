@@ -12,11 +12,14 @@
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactselector.h,v 1.1.2.4 2002-07-05 11:17:19 zecke Exp $
+ * Version: $Id: ocontactselector.h,v 1.1.2.5 2002-07-06 16:07:23 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactselector.h,v $
- * Revision 1.1.2.4  2002-07-05 11:17:19  zecke
+ * Revision 1.1.2.5  2002-07-06 16:07:23  eilers
+ * Added keyboard handling
+ *
+ * Revision 1.1.2.4  2002/07/05 11:17:19  zecke
  * Some API updates by me
  *
  * Revision 1.1.2.3  2002/07/03 06:55:54  eilers
@@ -112,6 +115,9 @@ class OContactSelector: public QTable
 
  private slots:
 	void slotClicked( int row, int col, int button, const QPoint &pos );
+
+ protected:
+    void keyPressEvent( QKeyEvent *e );
 
  
 
