@@ -78,7 +78,7 @@ void TransMenuHandler::reloadSettings()
     pixDict.clear();
 
     Config config ( "qpe" );
-    config. setGroup ( "MosfetMenus" );
+    config. setGroup ( "Liquid-Style" );
 
     type = config. readNumEntry("Type", TransStippleBg);
     color = QColor ( config. readEntry("Color",  QApplication::palette().active().button().name()));
@@ -710,6 +710,13 @@ void LiquidStyle::polish(QPalette &appPal)
     smallBevelFillDict.clear();
 
     Config config ( "qpe" );
+    config. setGroup ( "Liquid-Style" );
+	int contrast = config. readNumEntry ( "StippleContrast", 5 );
+	if ( contrast < 0 )
+		contrast = 0;
+	else if ( contrast > 10 )
+		contrast = 10;
+
     QPalette pal = QApplication::palette();
 
     // button color stuff
@@ -781,9 +788,9 @@ void LiquidStyle::polish(QPalette &appPal)
     wallPaper.fill(c.rgb());
     painter.begin(&wallPaper);
     for(i=0; i < 32; i+=4){
-        painter.setPen(c.dark(105));
+        painter.setPen(c.dark(100 + contrast));
         painter.drawLine(0, i, 32, i);
-        painter.setPen(c.dark(103));
+        painter.setPen(c.dark(100 + 3 * contrast / 5 ) );
         painter.drawLine(0, i+1, 32, i+1);
     };
     painter.end();
@@ -989,7 +996,11 @@ void LiquidStyle::polish(QApplication *app)
 	
     qt_set_draw_menu_bar_impl((QDrawMenuBarItemImpl) &LiquidStyle::drawMenuBarItem);
     
-    QApplication::qwsSetDecoration ( new LiquidDecoration ( ));
+    Config config ( "qpe" );
+    config. setGroup ( "Liquid-Style" );
+    
+    if ( config. readBoolEntry ( "WinDecoration", true ))	
+	    QApplication::qwsSetDecoration ( new LiquidDecoration ( ));
 }
 
 void LiquidStyle::unPolish(QApplication *app)

@@ -44,9 +44,14 @@ static void changeButtonColor ( QWidget *btn, const QColor &col )
 {
 	QPalette pal = btn-> palette ( );
 
+	pal. setColor ( QPalette::Normal, QColorGroup::Button, col );
 	pal. setColor ( QPalette::Active, QColorGroup::Button, col );
 	pal. setColor ( QPalette::Disabled, QColorGroup::Button, col );
 	pal. setColor ( QPalette::Inactive, QColorGroup::Button, col );
+	pal. setColor ( QPalette::Normal, QColorGroup::Background, col );
+	pal. setColor ( QPalette::Active, QColorGroup::Background, col );
+	pal. setColor ( QPalette::Disabled, QColorGroup::Background, col );
+	pal. setColor ( QPalette::Inactive, QColorGroup::Background, col );
 
 	btn-> setPalette ( pal );
 }
@@ -58,13 +63,15 @@ LiquidSet::LiquidSet ( QWidget* parent, const char *name, WFlags fl )
 	setCaption ( tr( "Liquid Style" ) );
 	
 	Config config ( "qpe" );
-    config. setGroup ( "MosfetMenus" );
+    config. setGroup ( "Liquid-Style" );
 
-	m_type      = config. readNumEntry ( "Type", TransStippleBg );
-	m_menucol   = QColor ( config. readEntry ( "Color",  QApplication::palette ( ). active ( ). button ( ). name ( )));
-	m_textcol   = QColor ( config. readEntry ( "TextColor", QApplication::palette ( ). active ( ). text ( ). name ( )));
-	int opacity = config. readNumEntry ( "Opacity", 10 );
-	m_shadow    = config. readBoolEntry ( "ShadowText", true );
+	m_type       = config. readNumEntry ( "Type", TransStippleBg );
+	m_menucol    = QColor ( config. readEntry ( "Color",  QApplication::palette ( ). active ( ). button ( ). name ( )));
+	m_textcol    = QColor ( config. readEntry ( "TextColor", QApplication::palette ( ). active ( ). text ( ). name ( )));
+	int opacity  = config. readNumEntry ( "Opacity", 10 );
+	m_shadow     = config. readBoolEntry ( "ShadowText", true );
+	m_deco       = config. readBoolEntry ( "WinDecoration", true );
+	int contrast = config. readNumEntry ( "StippleContrast", 5 );
 
 	QVBoxLayout *vbox = new QVBoxLayout ( this );
 	vbox-> setSpacing ( 3 );
@@ -138,14 +145,35 @@ LiquidSet::LiquidSet ( QWidget* parent, const char *name, WFlags fl )
 	
 	vbox-> addSpacing ( 4 );
 	
-	QCheckBox *shadow = new QCheckBox ( tr( "Use shadowed text" ), this );
+	QCheckBox *shadow = new QCheckBox ( tr( "Use shadowed menu text" ), this );
 	shadow-> setChecked ( m_shadow );
 	vbox-> addWidget ( shadow );
 	
+	vbox-> addSpacing ( 4 );
+	
+	QCheckBox *windeco = new QCheckBox ( tr( "Draw liquid window title bars" ), this );
+	windeco-> setChecked ( m_deco );
+	vbox-> addWidget ( windeco );
+
+	vbox-> addSpacing ( 4 );
+	
+	QHBoxLayout *hbox = new QHBoxLayout ( vbox );
+	
+	hbox-> addWidget ( new QLabel ( tr( "Stipple contrast" ), this )); 
+	
+	m_contsld = new QSlider ( Horizontal, this );
+	m_contsld-> setRange ( 0, 10 );
+	m_contsld-> setValue ( contrast );
+	m_contsld-> setTickmarks ( QSlider::Below );
+	hbox-> addWidget ( m_contsld, 10 );
+	
 	vbox-> addStretch ( 10 );
+
+	changeType ( m_type );
 	
 	connect ( btngrp, SIGNAL( clicked ( int ) ), this, SLOT( changeType ( int ) ) );
 	connect ( shadow, SIGNAL( toggled ( bool ) ), this, SLOT( changeShadow ( bool ) ) );
+	connect ( windeco, SIGNAL( toggled ( bool ) ), this, SLOT( changeDeco ( bool ) ) );
 }
 
 void LiquidSet::changeType ( int t )
@@ -164,13 +192,13 @@ void LiquidSet::changeType ( int t )
 
 void LiquidSet::changeMenuColor ( const QColor &col )
 {
-	m_menubtn-> setPalette ( col );
+	changeButtonColor ( m_menubtn, col );
 	m_menucol = col;
 }
 
 void LiquidSet::changeTextColor ( const QColor &col )
 {
-	m_textbtn-> setPalette ( col );
+	changeButtonColor ( m_textbtn, col );
 	m_textcol = col;
 }
 
@@ -179,17 +207,24 @@ void LiquidSet::changeShadow ( bool b )
 	m_shadow = b;
 }
 
+void LiquidSet::changeDeco ( bool b )
+{
+	m_deco = b;
+}
+
 
 void LiquidSet::accept ( )
 {
 	Config config ( "qpe" );
-    config. setGroup ( "MosfetMenus" );
+    config. setGroup ( "Liquid-Style" );
 
 	config. writeEntry ( "Type", m_type  );
 	config. writeEntry ( "Color",  m_menucol. name ( ));
 	config. writeEntry ( "TextColor", m_textcol. name ( ));
 	config. writeEntry ( "Opacity", m_opacsld-> value ( ));
 	config. writeEntry ( "ShadowText", m_shadow );	
+	config. writeEntry ( "WinDecoration", m_deco );
+	config. writeEntry ( "StippleContrast", m_contsld-> value ( ));
 	config. write ( );
 
 	Global::applyStyle ( );

@@ -98,12 +98,6 @@ void LiquidDecoration::paint( QPainter *painter, const QWidget *widget )
 	painter->setClipRegion( oldClip );
 
 	if ( titleWidth > 0 ) {
-		QBrush titleBrush;
-		QPen titlePen;
-		QPen titleLines;
-		int titleLeft = titleHeight + 4;
-
-		titleLeft = rect.left() + 5;
 		painter->setPen( cg.midlight() );
 		painter->drawLine( rect.left() - BORDER_WIDTH + 2,
 		                   rect.bottom() + 1, rect.right() + BORDER_WIDTH - 2,
@@ -115,16 +109,16 @@ void LiquidDecoration::paint( QPainter *painter, const QWidget *widget )
 
 		QApplication::style().drawBevelButton( painter, t.x(), t.y(), t.width(), t.height(), cg, isActive );
 
-		t.setLeft( t.left() + 4 );
-		t.setRight( t.right() - 2 );
+		t .setLeft ( t. left ( ) + 4 );
+		t .setRight ( t. right ( ) - 2 );
 
-		QFont f( QApplication::font() );
-		f.setWeight( QFont::Bold );
+		QFont f ( QApplication::font ( ));
+		f. setWeight ( QFont::Bold );
 
-		painter-> setFont( f );
+		painter-> setFont ( f );
 
 		QColor textcol = cg.color( isActive ? QColorGroup::HighlightedText : QColorGroup::Text );
-		QColor shadecol = ( qGray ( textcol. rgb ( ) ) > 128 ) ? textcol. dark ( 130 ) : textcol.light( 200 );
+		QColor shadecol = ( qGray ( textcol. rgb ( ) ) > 128 ) ? textcol. dark ( 230 ) : textcol.light( 300 );
 
 		if ( textcol == shadecol ) {
 			if ( qGray ( shadecol. rgb ( ) ) < 128 )

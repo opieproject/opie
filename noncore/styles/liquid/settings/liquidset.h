@@ -19,6 +19,7 @@ public slots:
 	void changeMenuColor ( const QColor &col );
 	void changeTextColor ( const QColor &col );
 	void changeShadow ( bool b );
+	void changeDeco ( bool b );
 
 protected:
 	virtual void accept ( );
@@ -28,8 +29,10 @@ private:
 	QColor m_textcol;
 	int    m_type;
 	bool   m_shadow;
+	bool   m_deco;
 	
 	QSlider *    m_opacsld;
+	QSlider *    m_contsld;
 	QLabel *     m_menulbl;
 	QLabel *     m_textlbl;
 	QLabel *     m_opaclbl;
