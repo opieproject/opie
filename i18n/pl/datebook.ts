@@ -555,7 +555,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Start Time</source>
-        <translation type="unfinished">Poczatek</translation>
+        <translation>Poczatek</translation>
     </message>
 </context>
 <context>
@@ -588,7 +588,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation>Kazdy</translation>
+        <translation>Co</translation>
     </message>
     <message>
         <source>%1 %2 every </source>
@@ -662,11 +662,11 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>day(s)</source>
-        <translation>dzienne</translation>
+        <translation>dni</translation>
     </message>
     <message>
         <source>week(s)</source>
-        <translation>tygodniowe</translation>
+        <translation>tygodni</translation>
     </message>
     <message>
         <source>Repeat By</source>
@@ -759,7 +759,7 @@ i </translation>
     </message>
     <message>
         <source>Every:</source>
-        <translation>Kazdego:</translation>
+        <translation>Co:</translation>
     </message>
     <message>
         <source>Frequency</source>
@@ -807,7 +807,7 @@ i </translation>
     </message>
     <message>
         <source>Every</source>
-        <translation>Kazdego</translation>
+        <translation>Co</translation>
     </message>
     <message>
         <source>Var1</source>
