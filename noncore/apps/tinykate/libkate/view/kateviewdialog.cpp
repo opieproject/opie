@@ -188,7 +188,7 @@ ReplacePrompt::ReplacePrompt( QWidget *parent )
   setMainWidget(page);
 
   QBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
-  QLabel *label = new QLabel(i18n("Replace this occurence?"),page);
+  QLabel *label = new QLabel(i18n("Replace this occurrence?"),page);
   topLayout->addWidget(label );
 }
 
