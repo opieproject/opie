@@ -103,11 +103,11 @@ Bitte laden Sie sie auf.</translation>
     </message>
     <message>
         <source>Finding documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumente finden</translation>
     </message>
     <message>
         <source>Searching documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumente suchen</translation>
     </message>
 </context>
 <context>

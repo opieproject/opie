@@ -4,70 +4,70 @@
     <name>FormatTabWidget</name>
     <message>
         <source>Time format</source>
-        <translation type="unfinished">Zeitformat</translation>
+        <translation>Zeitformat</translation>
     </message>
     <message>
         <source>hh:mm</source>
-        <translation type="unfinished">ss:mm</translation>
+        <translation>ss:mm</translation>
     </message>
     <message>
         <source>D/M hh:mm</source>
-        <translation type="unfinished">Sonntag</translation>
+        <translation>D/M hh:mm</translation>
     </message>
     <message>
         <source>M/D hh:mm</source>
-        <translation type="unfinished">M/T ss:mm</translation>
+        <translation>M/D hh:mm</translation>
     </message>
     <message>
         <source>12/24 hour</source>
-        <translation type="unfinished">12/24 Stunden</translation>
+        <translation>12/24 Stunden</translation>
     </message>
     <message>
         <source>24 hour</source>
-        <translation type="unfinished">24 Stunden</translation>
+        <translation>24 Stunden</translation>
     </message>
     <message>
         <source>12 hour</source>
-        <translation type="unfinished">12 Stunden</translation>
+        <translation>12 Stunden</translation>
     </message>
     <message>
         <source>Date format</source>
-        <translation type="unfinished">Datumsformat</translation>
+        <translation>Datumsformat</translation>
     </message>
     <message>
         <source>Weeks start on</source>
-        <translation type="unfinished">Woche startet am</translation>
+        <translation>Woche startet am</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished">Sontag</translation>
+        <translation>Sontag</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished">Montag</translation>
+        <translation>Montag</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>SystemTime</source>
-        <translation type="unfinished"></translation>
+        <translation>Systemzeit</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Einstellungen</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Predict</source>
-        <translation type="unfinished">Vorschlag</translation>
+        <translation>Vorschlag</translation>
     </message>
     <message>
         <source>You asked for a delay of </source>
@@ -175,19 +175,19 @@ ntpdate </source>
     </message>
     <message>
         <source>Predict time</source>
-        <translation type="unfinished">Zeitvorschlag</translation>
+        <translation>Zeitvorschlag</translation>
     </message>
     <message>
         <source>Set predicted time</source>
-        <translation type="unfinished">Vorschlag setzen</translation>
+        <translation>Vorschlag setzen</translation>
     </message>
     <message>
         <source> s/h</source>
-        <translation type="unfinished"> s/h</translation>
+        <translation> s/h</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"> Sekunden</translation>
+        <translation> Sekunden</translation>
     </message>
 </context>
 <context>
@@ -217,35 +217,35 @@ ntpdate </source>
     <name>TimeTabWidget</name>
     <message>
         <source>Hour</source>
-        <translation type="unfinished">Stunde</translation>
+        <translation>Stunde</translation>
     </message>
     <message>
         <source>Minute</source>
-        <translation type="unfinished">Minute</translation>
+        <translation>Minute</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished">AM</translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished">PM</translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Datum</translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitzone</translation>
     </message>
     <message>
         <source>Get time from the network</source>
-        <translation type="unfinished"></translation>
+        <translation>Netzwerkzeit holen</translation>
     </message>
     <message>
         <source>Set predicted time</source>
-        <translation type="unfinished">Vorschlag setzen</translation>
+        <translation>Vorschlag setzen</translation>
     </message>
 </context>
 </TS>

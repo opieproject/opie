@@ -1,61 +1,62 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>TinyKate</name>
     <message>
         <source>TinyKATE</source>
-        <translation type="unfinished"></translation>
+        <translation>TinyKATE</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>neu</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffnen</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern als</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei</translation>
     </message>
     <message>
         <source>Font +</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftgröße +</translation>
     </message>
     <message>
         <source>Font -</source>
-        <translation type="unfinished"></translation>
+        <translation>SchriftSchriftgröße -</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
         <source>Utils</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkzeuge</translation>
     </message>
     <message>
         <source>Highlighting</source>
-        <translation type="unfinished"></translation>
+        <translation>Hervorhebungen</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Unnamed %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbenannt %1</translation>
     </message>
 </context>
 </TS>

@@ -1,49 +1,50 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>FileSysInfo</name>
     <message>
         <source>CF</source>
-        <translation type="unfinished">CF</translation>
+        <translation>CF</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
-        <translation type="unfinished">Dieser Graph zeigt an wieviel Speicher auf dieser Speicherkarte verwendet wird.</translation>
+        <translation>Dieser Graph zeigt an wieviel Speicher auf dieser CompactFlash-Karte verwendet wird.</translation>
     </message>
     <message>
         <source>Ha</source>
-        <translation type="unfinished">Ha</translation>
+        <translation>Ha</translation>
     </message>
     <message>
         <source>This graph represents how much storage is currently used on this hard drive.</source>
-        <translation type="unfinished">Dieser Graph zeigt den auf dieser Festplatte verwendeten Speicher an.</translation>
+        <translation>Dieser Graph zeigt den auf dieser Festplatte verwendeten Speicher an.</translation>
     </message>
     <message>
         <source>SD</source>
-        <translation type="unfinished">SD</translation>
+        <translation>SD</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
-        <translation type="unfinished">Dieser Graph zeigt den auf dieser Secure Digital Memory Card verwendeten Speicher an.</translation>
+        <translation>Dieser Graph zeigt den auf dieser Secure Digital Memory Card verwendeten Speicher an.</translation>
     </message>
     <message>
         <source>SC</source>
-        <translation type="unfinished">SC</translation>
+        <translation>SC</translation>
     </message>
     <message>
         <source>In</source>
-        <translation type="unfinished">In</translation>
+        <translation>In</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
-        <translation type="unfinished">Dieser Graph zeigt an, wie viel des eingebauten Speichers zur Zeit belegt wird.</translation>
+        <translation>Dieser Graph zeigt an, wie viel des eingebauten Speichers zur Zeit belegt wird.</translation>
     </message>
     <message>
         <source>RA</source>
-        <translation type="unfinished">RA</translation>
+        <translation>RA</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
-        <translation type="unfinished">Dieser Graph zeigt den von der RAM Disk verwendeten Speicher an.</translation>
+        <translation>Dieser Graph zeigt den von der RAM Disk verwendeten Speicher an.</translation>
     </message>
 </context>
 <context>

@@ -116,11 +116,11 @@ automatisch laden?
     </message>
     <message>
         <source>Today Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Today konfigurieren</translation>
     </message>
     <message>
         <source>Tiny Banner</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleiner Banner</translation>
     </message>
 </context>
 </TS>

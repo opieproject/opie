@@ -294,7 +294,7 @@
     </message>
     <message>
         <source>day</source>
-        <translation type="unfinished"></translation>
+        <translation>Tag</translation>
     </message>
     <message>
         <source>weeks</source>
@@ -613,19 +613,19 @@ und</translation>
     <name>QWidget</name>
     <message>
         <source>st</source>
-        <translation type="unfinished">..</translation>
+        <translation>st</translation>
     </message>
     <message>
         <source>nd</source>
-        <translation type="unfinished">.</translation>
+        <translation>nd</translation>
     </message>
     <message>
         <source>rd</source>
-        <translation type="unfinished">.</translation>
+        <translation>rd</translation>
     </message>
     <message>
         <source>th</source>
-        <translation type="unfinished">.</translation>
+        <translation>th</translation>
     </message>
 </context>
 </TS>
