@@ -80,12 +80,12 @@ TheNSResources::TheNSResources( void ) : NodeTypeNameMap(),
          tr( "<p>Devices that can handle IP packets</p>" ) );
     addNodeType( "line", tr( "Character device" ),
          tr( "<p>Devices that can handle single bytes</p>" ) );
-    addNodeType( "NetworkSetup", tr( "IP NetworkSetup" ),
-         tr( "<p>Nodes that provide working IP NetworkSetups</p>" ) );
-    addNodeType( "fullsetup", tr( "NetworkSetup Profile" ),
-         tr( "<p>Fully configured NetworkSetup profile</p>" ) );
-    addNodeType( "GPRS", tr( "NetworkSetup to GPRS device" ),
-         tr( "<p>NetworkSetup to a GPRS capable device</p>" ) );
+    addNodeType( "connection", tr( "IP Connection" ),
+         tr( "<p>Nodes that provide working IP connection</p>" ) );
+    addNodeType( "fullsetup", tr( "Connection Profile" ),
+         tr( "<p>Fully configured network profile</p>" ) );
+    addNodeType( "GPRS", tr( "Connection to GPRS device" ),
+         tr( "<p>Connection to a GPRS capable device</p>" ) );
 
     // get access to the system
     TheSystem = new System();

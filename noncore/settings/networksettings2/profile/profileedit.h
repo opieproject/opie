@@ -20,10 +20,13 @@ public slots :
 
     void SLOT_AutoRefresh( bool );
     void SLOT_Refresh( void );
+    void SLOT_ResetODO( void );
 
 private :
 
     QTimer RefreshTimer;
     ANetNodeInstance * NNI;
     RuntimeInfo * Dev;
+    long          RcvODO;
+    long          SndODO;
 };

@@ -218,36 +218,48 @@ void System::refreshStatistics( InterfaceInfo & I ) {
         continue;
 
       // tokenize
-      SL = QStringList::split( ' ', line, FALSE );
+      SL = QStringList::split( ' ', line.mid(loc+1), FALSE );
 
       // update data
       switch( version ) {
         case 1 :
-          I.RcvBytes = SL[1];
-          I.RcvErrors = SL[3];
-          I.RcvDropped = SL[4];
-          I.SndBytes = SL[6];
-          I.SndErrors = SL[8];
-          I.SndDropped = SL[9];
-          I.Collisions = SL[11];
+          I.RcvBytes = "";
+          I.RcvPackets = SL[0];
+          I.RcvErrors = SL[1];
+          I.RcvDropped = SL[2];
+
+          I.SndBytes = "";
+          I.SndPackets = SL[5];
+          I.SndErrors = SL[6];
+          I.SndDropped = SL[7];
+
+          I.Collisions = SL[9];
           break;
         case 2 :
-          I.RcvBytes = SL[1];
-          I.RcvErrors = SL[3];
-          I.RcvDropped = SL[4];
-          I.SndBytes = SL[7];
-          I.SndErrors = SL[9];
-          I.SndDropped = SL[10];
-          I.Collisions = SL[12];
+          I.RcvBytes = SL[0];
+          I.RcvPackets = SL[1];
+          I.RcvErrors = SL[2];
+          I.RcvDropped = SL[3];
+
+          I.SndBytes = SL[6];
+          I.SndPackets = SL[7];
+          I.SndErrors = SL[8];
+          I.SndDropped = SL[9];
+
+          I.Collisions = SL[11];
           break;
         case 3 :
-          I.RcvBytes = SL[1];
-          I.RcvErrors = SL[3];
-          I.RcvDropped = SL[4];
-          I.SndBytes = SL[9];
-          I.SndErrors = SL[11];
-          I.SndDropped = SL[12];
-          I.Collisions = SL[14];
+          I.RcvBytes = SL[0];
+          I.RcvPackets = SL[1];
+          I.RcvErrors = SL[2];
+          I.RcvDropped = SL[3];
+
+          I.SndBytes = SL[8];
+          I.SndPackets = SL[9];
+          I.SndErrors = SL[10];
+          I.SndDropped = SL[11];
+
+          I.Collisions = SL[13];
           break;
       }
       break;

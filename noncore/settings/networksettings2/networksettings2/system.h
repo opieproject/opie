@@ -85,10 +85,13 @@ public :
         bool    IsPointToPoint;         // IsPointToPoint card
 
         QString RcvBytes;
-        QString SndBytes;
         QString RcvErrors;
-        QString SndErrors;
+        QString RcvPackets;
         QString RcvDropped;
+
+        QString SndBytes;
+        QString SndErrors;
+        QString SndPackets;
         QString SndDropped;
         QString Collisions;
 };

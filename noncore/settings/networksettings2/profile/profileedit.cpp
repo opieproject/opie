@@ -1,4 +1,6 @@
 #include <qlabel.h>
+#include <qgroupbox.h>
+#include <qpushbutton.h>
 #include <qframe.h>
 #include <qcheckbox.h>
 #include <qmultilineedit.h>
@@ -23,12 +25,16 @@ ProfileEdit::ProfileEdit( QWidget * Parent, ANetNodeInstance * TNNI ) :
       if( ( II = NNI->networkSetup()->assignedInterface() ) ) {
 
         Refresh_CB->setEnabled( TRUE );
-        Snd_GB->setEnabled( TRUE );
-        Rcv_GB->setEnabled( TRUE );
-        Collisions_FRM->setEnabled( TRUE );
+        ResetODO_But->setEnabled( TRUE );
+        Sending_GB->setEnabled( TRUE );
+        Receiving_GB->setEnabled( TRUE );
+        Misc_GB->setEnabled( TRUE );
 
         // show current content
         SLOT_Refresh();
+
+        // initialize ODO
+        SLOT_ResetODO();
 
         // fill in static data
         InterfaceName_LBL->setText( II->Name );
@@ -82,13 +88,23 @@ bool ProfileEdit::commit( ProfileData & Data ) {
 
 void ProfileEdit::SLOT_Refresh( void ) {
     InterfaceInfo * II = NNI->networkSetup()->assignedInterface();
+    QString S;
     NSResources->system().refreshStatistics( *II );
+
     RcvBytes_LBL->setText( II->RcvBytes );
-    SndBytes_LBL->setText( II->SndBytes );
+    RcvPackets_LBL->setText( II->RcvPackets );
     RcvErrors_LBL->setText( II->RcvErrors );
-    SndErrors_LBL->setText( II->SndErrors );
     RcvDropped_LBL->setText( II->RcvDropped );
+    S.setNum( II->RcvBytes.toLong() - RcvODO );
+    RcvODO_LBL->setText( S );
+
+    SndBytes_LBL->setText( II->SndBytes );
+    SndPackets_LBL->setText( II->SndPackets );
+    SndErrors_LBL->setText( II->SndErrors );
     SndDropped_LBL->setText( II->SndDropped );
+    S.setNum( II->SndBytes.toLong() - SndODO );
+    SndODO_LBL->setText( S );
+
     Collisions_LBL->setText( II->Collisions );
 }
 
@@ -99,4 +115,11 @@ void ProfileEdit::SLOT_AutoRefresh( bool ar ) {
     } else {
       RefreshTimer.stop();
     }
+}
+
+void ProfileEdit::SLOT_ResetODO( void ) {
+    InterfaceInfo * II = NNI->networkSetup()->assignedInterface();
+    RcvODO = II->RcvBytes.toLong();
+    SndODO = II->SndBytes.toLong();
+    SLOT_Refresh();
 }
