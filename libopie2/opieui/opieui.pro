@@ -1,6 +1,6 @@
 TEMPLATE    = lib
 CONFIG      += qt warn_on debug
-DESTDIR     = $(QTDIR)/lib
+DESTDIR     = $(OPIEDIR)/lib
 HEADERS     = ocompletionbox.h       \
               ocombobox.h            \
               oeditlistbox.h         \
