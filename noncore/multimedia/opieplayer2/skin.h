@@ -10,11 +10,16 @@ public:
     Skin( const QString &name, const QString &fileNameInfix );
 
     QImage backgroundImage() const;
+    QImage buttonUpImage() const;
+    QImage buttonDownImage() const;
 
 private:
     QString m_name;
     QString m_fileNameInfix;
     QString m_skinPath;
+
+    Skin( const Skin & );
+    Skin &operator=( const Skin & );
 };
 
 #endif // SKIN_H

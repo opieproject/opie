@@ -105,8 +105,8 @@ void MediaWidget::loadSkin( const SkinButtonInfo *skinInfo, uint buttonCount, co
 
     QString skinPath = "opieplayer2/skins/" + name;
     backgroundPixmap = skin.backgroundImage();
-    buttonUpImage = QImage( Resource::loadImage( QString( "%1/skin%2_up" ).arg( skinPath ).arg( fileNameInfix ) ) );
-    buttonDownImage = QImage( Resource::loadImage( QString( "%1/skin%2_down" ).arg( skinPath ).arg( fileNameInfix ) ) );
+    buttonUpImage = skin.buttonUpImage();
+    buttonDownImage = skin.buttonDownImage();
 
     setupButtons( skinInfo, buttonCount,
                   skinPath + QString::fromLatin1( "/skin%1_mask_" ).arg( fileNameInfix ), buttonUpImage.size() );
