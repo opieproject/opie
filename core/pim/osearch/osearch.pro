@@ -18,7 +18,9 @@ SOURCES += main.cpp \
            resultitem.cpp \
            todoitem.cpp \
            contactitem.cpp \
-           eventitem.cpp 
+           eventitem.cpp \
+           applnksearch.cpp \
+           applnkitem.cpp 
 HEADERS += mainwindow.h \
            olistview.h \
            olistviewitem.h \
@@ -29,4 +31,6 @@ HEADERS += mainwindow.h \
            resultitem.h \
            todoitem.h \
            contactitem.h \
-           eventitem.h 
+           eventitem.h \
+           applnksearch.h \
+           applnkitem.h 

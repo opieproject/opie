@@ -28,6 +28,7 @@ class OListViewItem;
 class AdressSearch;
 class TodoSearch;
 class DatebookSearch;
+class AppLnkSearch;
 
 class MainWindow : public QMainWindow
 {
@@ -61,6 +62,7 @@ private:
   AdressSearch *adrSearch;
   TodoSearch *todoSearch;
   DatebookSearch *datebookSearch;
+  AppLnkSearch *applnkSearch;
 
   void makeMenu();
 };
