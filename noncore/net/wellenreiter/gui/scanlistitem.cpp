@@ -19,19 +19,32 @@
 #include <qpixmap.h>
 
 const int col_type = 0;
+const int col_essid = 0;
 const int col_sig = 1;
-const int col_essid = 2;
-const int col_ap = 3;
-const int col_channel = 4;
-const int col_wep = 5;
+const int col_ap = 2;
+const int col_channel = 3;
+const int col_wep = 4;
+const int col_traffic = 5;
 
 MScanListItem::MScanListItem( QListView* parent, QString type, QString essid, QString ap,
                               bool wep, int channel, int signal )
-               :QListViewItem( parent, QString::null, QString::null, essid, ap,
-                               QString::null, QString::null )
+               :QListViewItem( parent, essid, ap, QString::null, QString::null, QString::null )
 {
-
     qDebug( "creating scanlist item" );
+    decorateItem( type, essid, ap, wep, channel, signal );
+}
+
+MScanListItem::MScanListItem( QListViewItem* parent, QString type, QString essid, QString ap,
+                              bool wep, int channel, int signal )
+               :QListViewItem( parent, essid, ap, QString::null, QString::null, QString::null )
+{
+    qDebug( "creating scanlist item" );
+    decorateItem( type, essid, ap, wep, channel, signal );
+}
+
+void MScanListItem::decorateItem( QString type, QString essid, QString ap, bool wep, int channel, int signal )
+{
+    qDebug( "decorating scanlist item" );
 
     // set icon for managed or adhoc mode
     QString name;
@@ -45,4 +58,7 @@ MScanListItem::MScanListItem( QListView* parent, QString type, QString essid, QS
     // set channel and signal text
     setText( col_sig, QString::number( signal ) );
     setText( col_channel, QString::number( channel ) );
+
+    listView()->triggerUpdate();
+
 }

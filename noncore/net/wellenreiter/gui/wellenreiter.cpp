@@ -35,6 +35,7 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
 {
 
     connect( button, SIGNAL( clicked() ), this, SLOT( buttonClicked() ) );
+    netview->setColumnWidthMode( 1, QListView::Manual );
 
     //
     // setup socket for daemon communication and start poller
@@ -86,6 +87,30 @@ void Wellenreiter::timerEvent( QTimerEvent* e )
     }
 }
 
+void Wellenreiter::addNewStation( QString type, QString essid, QString ap, bool wep, int channel, int signal )
+{
+    // FIXME: this code belongs in customized QListView, not into this class
+
+    // search, if we had an item with this essid once before
+
+    QListViewItem* item = netview->firstChild();
+
+    while ( item && ( item->text( 0 ) != essid ) )
+    {
+        qDebug( "itemtext: %s", (const char*) item->text( 0 ) );
+        item = item->itemBelow();
+    }
+    if ( item )
+    {
+        qDebug( "found!" );
+        new MScanListItem( item, type, essid, ap, wep, channel, signal );
+    }
+    else
+    {
+        new MScanListItem( netview, type, essid, ap, wep, channel, signal );
+    }
+}
+
 void Wellenreiter::buttonClicked()
 {
 
@@ -95,7 +120,7 @@ void Wellenreiter::buttonClicked()
 
     // add some icons, so that we can see if this works
 
-    new MScanListItem( netview, "managed", "MyNet", "04:00:20:EF:A6:43", true, 6, 80 );
-    new MScanListItem( netview, "adhoc", "YourNet", "40:03:A3:E7:56:22", false, 11, 30 );
+    addNewStation( "managed", "MyNet", "04:00:20:EF:A6:43", true, 6, 80 );
+    addNewStation( "adhoc", "YourNet", "40:03:A3:E7:56:22", false, 11, 30 );
 
 }

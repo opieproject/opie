@@ -32,8 +32,18 @@ class MScanListItem: public QListViewItem
                                   int channel,
                                   int signal );
 
+    MScanListItem::MScanListItem( QListViewItem* parent,
+                                  QString type,
+                                  QString essid,
+                                  QString ap,
+                                  bool wep,
+                                  int channel,
+                                  int signal );
 
 
+  protected:
+
+    virtual void decorateItem( QString type, QString essid, QString ap, bool wep, int channel, int signal );
 
 };
 

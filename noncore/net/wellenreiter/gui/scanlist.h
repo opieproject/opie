@@ -13,36 +13,16 @@
 **
 **********************************************************************/
 
-#ifndef WELLENREITER_H
-#define WELLENREITER_H
+#ifndef SCANLIST_H
+#define SCANLIST_H
 
-#include "wellenreiterbase.h"
+#include <qlistview.h>
 
-class QTimerEvent;
+class QString;
 
-class Wellenreiter : public WellenreiterBase {
-    Q_OBJECT
-
-public:
-
-    Wellenreiter( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
-    ~Wellenreiter();
-
-protected:
-    virtual void timerEvent( QTimerEvent* );
-
-public slots:
-    void buttonClicked();
-    void addNewStation( QString type, QString essid, QString ap, bool wep, int channel, int signal );
-
-private:
-    int daemon_fd;             // socket filedescriptor for udp communication socket
-
-    bool hasMessage();
-    void handleMessage();
-
-    //void readConfig();
-    //void writeConfig();
+class MScanList: public QListView
+{
 };
 
 #endif
+
