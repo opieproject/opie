@@ -15,6 +15,7 @@ class PackageListItem
 : public QCheckListItem
 {
 public:
+  PackageListItem(QListViewItem*, Package*, PackageManagerSettings*);
   PackageListItem(QListView*, Package*, PackageManagerSettings*);
   void paintCell( QPainter*, const QColorGroup&, int, int, int );
   void paintFocus( QPainter*, const QColorGroup&, const QRect&  );
@@ -27,6 +28,7 @@ public:
   void displayDetails();
 
 private:
+  void init(Package*, PackageManagerSettings*);
 	QCheckListItem *nameItem;
 	QCheckListItem *destItem;
 	QCheckListItem *linkItem;

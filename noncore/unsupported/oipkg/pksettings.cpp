@@ -134,6 +134,8 @@ void PackageManagerSettings::editDestination(int i)
   } else {
     destinationname->setEnabled(TRUE);
     destinationurl->setEnabled(TRUE);
+    createLinksButton->setEnabled(TRUE);
+    removeLinksButton->setEnabled(TRUE);
   }
 
   destinationname->setText( destinations->text(i) );
@@ -528,6 +530,7 @@ QStringList PackageManagerSettings::getDestinationNames()
 
 void PackageManagerSettings::linkEnabled( bool b )
 {
+	pvDebug(2,"PackageManagerSettings::linkEnabled "+QString(b?"yes":"no"));
   activeLinkDestination->setEnabled( b );
 }
 
@@ -540,3 +543,22 @@ QComboBox* PackageManagerSettings::getDestCombo()
 {
 	return new QComboBox(activeDestination);
 }
+
+void PackageManagerSettings::createLinksToDest()
+{
+	pvDebug(2,"creating links...");
+// 	emit doCreateLinks( destinationurl->text() );
+//	ipkg->createLinks( destinationurl );
+}
+
+void PackageManagerSettings::removeLinksToDest()
+{
+	pvDebug(2,"removing links...");
+// 	emit doRemoveLinks( destinationurl->text() );
+//	ipkg->removeLinks( destinationurl );
+}
+
+//void PackageManagerSettings::setIpkg( PmIpkg* i )
+//{
+//	ipkg = i;
+//}

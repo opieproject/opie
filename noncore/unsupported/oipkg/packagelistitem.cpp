@@ -13,6 +13,17 @@ static QPixmap *pm_install=0;
 PackageListItem::PackageListItem(QListView* lv, Package *pi, PackageManagerSettings *s)
   :	QCheckListItem(lv,pi->name(),CheckBox)
 {
+ 	init(pi,s);
+}
+
+PackageListItem::PackageListItem(QListViewItem *lvi, Package *pi, PackageManagerSettings *s)
+  :	QCheckListItem(lvi,pi->name(),CheckBox)
+{
+ 	init(pi,s);
+}
+
+void PackageListItem::init( Package *pi, PackageManagerSettings *s)
+{
   package = pi;
   settings = s;
   setExpandable( true );

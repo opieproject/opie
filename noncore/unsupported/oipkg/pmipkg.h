@@ -23,6 +23,7 @@ public:
   ~PmIpkg();
 
   int linkOpp;
+  void loadList( PackageList );
   void commit( PackageList );
   void update();
  // PackageList* getPackageList();
@@ -39,6 +40,7 @@ public slots:
   void removeLinks( const QString &dest );
 
 private:
+	int sizecount;
   PackageManagerSettings* settings;
   RunWindow *runwindow;
   QDialog *installDialog;

@@ -61,3 +61,7 @@ private:
 };
 
 #endif
+                                                                                                                                                                                                  /** No descriptions */
+  void createLinks();
+  /** No descriptions */
+  void removeLinks();

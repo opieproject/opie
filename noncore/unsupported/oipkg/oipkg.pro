@@ -7,13 +7,17 @@ HEADERS		= mainwindow.h \
 		pmipkg.h \
 		utils.h \
 		packagelistitem.h \
+		packagelistremote.h \
 		packagelist.h \
+		packagelistlocal.h \
 		packagelistview.h \
 		package.h
 SOURCES		= main.cpp \
 		mainwindow.cpp \
 		utils.cpp \
 		packagelistview.cpp \
+		packagelistremote.cpp \
+		packagelistlocal.cpp \
 		pksettings.cpp \
 		pmipkg.cpp \
 		packagelistitem.cpp \

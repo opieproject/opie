@@ -48,7 +48,6 @@ public slots:
   void changePackageDest( int );
   void setCurrent( QListViewItem* );
   void stopTimer( QListViewItem* );
-  /** No descriptions */
   void toggleProcess();
 };
 

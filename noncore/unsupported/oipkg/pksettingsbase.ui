@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>345</width>
+            <width>337</width>
             <height>454</height>
         </rect>
     </property>
@@ -532,11 +532,11 @@
                 <grid>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>3</number>
+                        <number>2</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>3</number>
+                        <number>2</number>
                     </property>
                     <widget row="0"  column="0" >
                         <class>QLayoutWidget</class>
@@ -712,6 +712,121 @@
                             </widget>
                         </grid>
                     </widget>
+                    <widget row="4"  column="0" >
+                        <class>QLayoutWidget</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>Layout11</cstring>
+                        </property>
+                        <hbox>
+                            <property stdset="1">
+                                <name>margin</name>
+                                <number>0</number>
+                            </property>
+                            <property stdset="1">
+                                <name>spacing</name>
+                                <number>6</number>
+                            </property>
+                            <widget>
+                                <class>QPushButton</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>createLinksButton</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>enabled</name>
+                                    <bool>false</bool>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>link to /</string>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QPushButton</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>removeLinksButton</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>enabled</name>
+                                    <bool>false</bool>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Remove links</string>
+                                </property>
+                            </widget>
+                        </hbox>
+                    </widget>
+                    <widget row="5"  column="0" >
+                        <class>QGroupBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>GroupBox1</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>title</name>
+                            <string></string>
+                        </property>
+                        <grid>
+                            <property stdset="1">
+                                <name>margin</name>
+                                <number>11</number>
+                            </property>
+                            <property stdset="1">
+                                <name>spacing</name>
+                                <number>6</number>
+                            </property>
+                            <widget row="0"  column="0" >
+                                <class>QLayoutWidget</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>Layout12</cstring>
+                                </property>
+                                <hbox>
+                                    <property stdset="1">
+                                        <name>margin</name>
+                                        <number>0</number>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>spacing</name>
+                                        <number>6</number>
+                                    </property>
+                                    <widget>
+                                        <class>QCheckBox</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>CheckBoxvolatile</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>enabled</name>
+                                            <bool>false</bool>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>text</name>
+                                            <string>volatile</string>
+                                        </property>
+                                    </widget>
+                                    <widget>
+                                        <class>QCheckBox</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>removeable</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>enabled</name>
+                                            <bool>false</bool>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>text</name>
+                                            <string>removeable</string>
+                                        </property>
+                                    </widget>
+                                </hbox>
+                            </widget>
+                        </grid>
+                    </widget>
                 </grid>
             </widget>
         </widget>
@@ -736,6 +851,20 @@
         <receiver>Form4</receiver>
         <slot>activeServerChanged()</slot>
     </connection>
+    <connection>
+        <sender>createLinksButton</sender>
+        <signal>clicked()</signal>
+        <receiver>Form4</receiver>
+        <slot>createLinksToDest()</slot>
+    </connection>
+    <connection>
+        <sender>removeLinksButton</sender>
+        <signal>clicked()</signal>
+        <receiver>Form4</receiver>
+        <slot>removeLinksToDest()</slot>
+    </connection>
+    <slot access="public">activeServerChanged()</slot>
+    <slot access="public">createLinksToDest()</slot>
     <slot access="public">destNameChanged(const QString&amp;)</slot>
     <slot access="public">destUrlChanged(const QString&amp;)</slot>
     <slot access="public">editDestination(int)</slot>
@@ -746,9 +875,9 @@
     <slot access="public">newDestination()</slot>
     <slot access="public">newInstallationSetting()</slot>
     <slot access="public">newServer()</slot>
-    <slot access="public">activeServerChanged()</slot>
     <slot access="public">removeDestination()</slot>
     <slot access="public">removeInstallationSetting()</slot>
+    <slot access="public">removeLinksToDest()</slot>
     <slot access="public">removeServer()</slot>
     <slot access="public">renameInstallationSetting()</slot>
     <slot access="public">serverNameChanged(const QString&amp;)</slot>

@@ -210,34 +210,31 @@ void PmIpkg::processLinkDir( QString file, QString dest )
   }
 }
 
+void PmIpkg::loadList( PackageList pl )
+{   	
+  for( Package *pack = pl.first();pack ; (pack = pl.next())  )
+  {
+  	if ( pack && (pack->name() != "") && pack)
+		{
+		  if ( pack->toInstall() )
+	      to_install.append( pack );
+		  if ( pack->toRemove() )
+	      to_remove.append( pack );
+		}
+  }
+}
+
 void PmIpkg::commit( PackageList pl )
 {   	
-  int sizecount = 0;  	
-  to_install.clear();
-  to_remove.clear();
+  sizecount = 0;
   QString rem="<b>"+tr("To remove:")+"</b><br>\n";
   QString inst="<b>"+tr("To install:")+"</b><br>\n";
-  for( Package *pack = pl.first();pack ; (pack = pl.next())  )
-    {
-      if ( pack && (pack->name() != "") && pack)
-	{
-	  if ( pack->toInstall() )
-	    {
-	      to_install.append( pack );
-       	sizecount += pack->size().toInt();
-	      inst += pack->name()+"\t("+tr("on ")+pack->dest()+")<br>";
-	    }
-	  if ( pack->toRemove() )
-	    {
-	      to_remove.append( pack );
+  loadList(pl);
+  for (uint i=0; i < to_remove.count(); i++)
        	sizecount += 1;
-	      rem += pack->name()+"<br>";
-	    }
-	}
-    }
-
+  for (uint i=0; i < to_install.count(); i++)
+       	sizecount += to_install.at(i)->size().toInt();
 	startDialog();
-
 }
 
 void PmIpkg::startDialog()
@@ -266,7 +263,7 @@ void PmIpkg::startDialog()
     }
 
     QGroupBox *GroupBox1 = new QGroupBox( installDialog, "Ipkg" );
-    GroupBox1->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3, GroupBox1->sizePolicy().hasHeightForWidth() ) );
+    GroupBox1->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3, GroupBox1->sizePolicy().mayShrinkVertically() ) );
     GroupBox1->setTitle( tr( "Ipkg options" ) );
     GroupBox1->setColumnLayout(0, Qt::Vertical );
     GroupBox1->layout()->setSpacing( 0 );
@@ -275,10 +272,10 @@ void PmIpkg::startDialog()
     GroupBox1Layout->setAlignment( Qt::AlignTop );
     GroupBox1Layout->setSpacing( 3 );
     GroupBox1Layout->setMargin( 3 );
-
     _force_depends = new QCheckBox( GroupBox1, "_force_depends" );
     _force_depends->setText( tr( "-force-depends" ) );
     _force_depends->setAutoResize( TRUE );
+    _force_depends->setChecked(true);
     GroupBox1Layout->addWidget( _force_depends, 0, 0 );
     _force_reinstall = new QCheckBox( GroupBox1, "_force_reinstall" );
     _force_reinstall->setText( tr( "-force-reinstall" ) );
@@ -319,8 +316,8 @@ void PmIpkg::remove()
 	out("<b>"+tr("Removing")+"<br>"+tr("please wait")+"</b><br><hr>");
 
 	QStringList *fileList;
-   for (Package *it=to_remove.first(); it != 0; it=to_remove.next() )
-   {
+  for (Package *it=to_remove.first(); it != 0; it=to_remove.next() )
+  {
 			if ( it->link() )fileList = getList( it->name(), it->dest() );     	
       if ( runIpkg("remove " + it->name()) == 0)
       {
@@ -333,6 +330,7 @@ void PmIpkg::remove()
       		processFileList( fileList, it->dest() );
         }
      		it->processed();
+       	
         out("<br><hr>");
   		}else{
       	out("<b>"+tr("Error while removing")+"</b><hr>"+it->name());
@@ -351,7 +349,7 @@ void PmIpkg::install()
  	for (Package *it=to_install.first(); it != 0; it=to_install.next() )
     {
 
-      if ( runIpkg("install " + it->getPackageName(), it->dest() ) == 0 )
+      if ( runIpkg("install " + it->installName(), it->dest() ) == 0 )
 		  {    	
       	runwindow->progress->setProgress( it->size().toInt() + runwindow->progress->progress());
        	linkOpp = createLink;

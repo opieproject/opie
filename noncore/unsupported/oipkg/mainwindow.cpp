@@ -23,6 +23,7 @@
 #include <qtabwidget.h>
 #include <qcombobox.h>
 #include <qmessagebox.h>
+#include <qpushbutton.h>
 #include <qlayout.h>
 
 #include "pksettingsbase.h"
@@ -42,7 +43,9 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
 //	wait = new QMessageBox(this);
 // 	wait->setText(tr("Please wait"));
   ipkg = new PmIpkg( settings, this );
+//  settings->setIpkg( ipkg );
   packageList.setSettings( settings );
+  packageListSearch.setSettings( settings );
   packageList.update();
   makeMenu();	
   makeChannel();
@@ -54,6 +57,14 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
 
   connect( section,    SIGNAL(activated(int)), SLOT(sectionChanged()) );
   connect( subsection, SIGNAL(activated(int)), SLOT(subSectionChanged()) );
+
+  connect( settings->removeLinksButton, SIGNAL( clicked()),
+  					 SLOT(removeLinks()) );
+  connect( settings->createLinksButton, SIGNAL( clicked()),
+  					 SLOT(createLinks()) );
+
+//	rootLocal = new QCheckListItem(listViewPackages,tr("local"));
+//	rootSearch = new QCheckListItem(listViewPackages,tr("ipkgfind"));
   displayList();
 }
 
@@ -97,14 +108,6 @@ void MainWindow::makeMenu()
   updateAction->addTo( toolBar );
   updateAction->addTo( srvMenu );
 
-// could we use for find
-//  detailsAction = new QAction( tr( "Find" ),
-//      		Resource::loadIconSet( "find" ),
-//  		    QString::null, 0, this, 0 );
-//  connect( detailsAction, SIGNAL( activated() ),
-//               this , SLOT( showFind() ) );
-//  detailsAction->addTo( toolBar );
-
   QAction *cfgact;
 
   cfgact = new QAction( tr( "Setups" ),
@@ -126,6 +129,7 @@ void MainWindow::makeMenu()
 
   QAction *a;
 
+  // SECTIONS
 	sectionBar = new QPEToolBar( this );
  	addToolBar( sectionBar,  "Section", QMainWindow::Top, TRUE );
   sectionBar->setHorizontalStretchable( true );
@@ -139,17 +143,16 @@ void MainWindow::makeMenu()
   a = new QAction( tr( "Close Section" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), this, SLOT( sectionClose() ) );
   a->addTo( sectionBar );
-
   setSections();
   setSubSections();
-
   sectionAction = new QAction( tr( "Sections" ), QString::null, 0, this, 0 );
   connect( sectionAction, SIGNAL( toggled(bool) ), this, SLOT( sectionShow(bool) ) );
   sectionAction->setToggleAction( true );
   sectionAction->addTo( viewMenu );
 
+  //FIND
   findBar = new QPEToolBar(this);
-  addToolBar( findBar,  "Search", QMainWindow::Top, TRUE );
+  addToolBar( findBar,  "Filter", QMainWindow::Top, TRUE );
   label = new QLabel( tr("Filter: "), findBar );
   label->setBackgroundColor( findBar->backgroundColor() );
   findBar->setHorizontalStretchable( TRUE );
@@ -157,18 +160,42 @@ void MainWindow::makeMenu()
   findBar->setStretchableWidget( findEdit );
   connect( findEdit, SIGNAL( textChanged( const QString & ) ),
        this, SLOT( displayList() ) );
-
   a = new QAction( tr( "Clear Find" ), Resource::loadPixmap( "back" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), findEdit, SLOT( clear() ) );
   a->addTo( findBar );
   a = new QAction( tr( "Close Find" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), this, SLOT( findClose() ) );
   a->addTo( findBar );
-  findAction = new QAction( tr( "Find" ), QString::null, 0, this, 0 );
+  findAction = new QAction( tr( "Filter" ), QString::null, 0, this, 0 );
   connect( findAction, SIGNAL( toggled(bool) ), this, SLOT( findShow(bool) ) );
   findAction->setToggleAction( true );
   findAction->addTo( viewMenu );
 
+  //SEARCH
+  searchBar = new QPEToolBar(this);
+  addToolBar( searchBar,  "Search", QMainWindow::Top, TRUE );
+  label = new QLabel( tr("ipkgfind: "), searchBar );
+  label->setBackgroundColor( searchBar->backgroundColor() );
+  searchBar->setHorizontalStretchable( TRUE );
+  searchEdit = new QLineEdit( searchBar, "seachEdit" );
+  searchBar->setStretchableWidget( searchEdit );
+//  connect( searchEdit, SIGNAL( textChanged( const QString & ) ),
+//       this, SLOT( displayList() ) );
+  a = new QAction( tr( "Clear Search" ), Resource::loadPixmap( "back" ), QString::null, 0, this, 0 );
+  connect( a, SIGNAL( activated() ), searchEdit, SLOT( clear() ) );
+  a->addTo( searchBar );
+  searchCommit  = new QAction( tr( "Do Search" ), Resource::loadPixmap( "find" ), QString::null, 0, this, 0 );
+  connect( searchCommit, SIGNAL( activated() ),  SLOT( remotePackageQuery() ) );
+  searchCommit->addTo( searchBar );
+  a = new QAction( tr( "Close Find" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
+  connect( a, SIGNAL( activated() ), this, SLOT( searchClose() ) );
+  a->addTo( searchBar );
+  searchAction = new QAction( tr( "Search" ), QString::null, 0, this, 0 );
+  connect( searchAction, SIGNAL( toggled(bool) ), this, SLOT( searchShow(bool) ) );
+  searchAction->setToggleAction( true );
+  searchAction->addTo( viewMenu );
+
+  //DEST
   destBar = new QPEToolBar(this);
   addToolBar( destBar,  "Destination", QMainWindow::Top, TRUE );
   label = new QLabel( tr("Destination: "), destBar );
@@ -177,15 +204,15 @@ void MainWindow::makeMenu()
   destination = new QComboBox( false, destBar );
   destination->insertStringList( settings->getDestinationNames() );
   setComboName(destination,settings->getDestinationName());
-//  connect( destination, SIGNAL(activated(int)),
-//  			 SLOT(activeDestinationChange(int)) );
+  connect( destination, SIGNAL(activated(int)),
+  			 settings, SLOT(activeDestinationChange(int)) );
   spacer = new QLabel( " ", destBar );
   spacer->setBackgroundColor( destBar->backgroundColor() );
   CheckBoxLink = new QCheckBox( tr("Link"), destBar);
   CheckBoxLink->setBackgroundColor( destBar->backgroundColor() );
   CheckBoxLink->setChecked( settings->createLinks() );
-//  connect( CheckBoxLink, SIGNAL(toggled(bool)),
-//     				 settings, SLOT(linkEnabled(bool)) );
+  connect( CheckBoxLink, SIGNAL(toggled(bool)),
+     				 settings, SLOT(linkEnabled(bool)) );
   destAction = new QAction( tr( "Destinations" ), QString::null, 0, this, 0 );
   connect( destAction, SIGNAL( toggled(bool) ), SLOT( destShow(bool) ) );
   a = new QAction( tr( "Close Destinations" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
@@ -200,6 +227,7 @@ void MainWindow::makeMenu()
   cfg.setGroup( "gui" );
 
   findShow( cfg.readBoolEntry( "findBar", true ) );
+  searchShow( cfg.readBoolEntry( "searchBar", true ) );
   sectionShow( cfg.readBoolEntry( "sectionBar", true ) );
   destShow( cfg.readBoolEntry( "destBar", false ) );
 }
@@ -209,6 +237,7 @@ MainWindow::~MainWindow()
   Config cfg( "oipkg", Config::User );
   cfg.setGroup( "gui" );
   cfg.writeEntry( "findBar", !findBar->isHidden() );
+  cfg.writeEntry( "searchBar", !searchBar->isHidden() );
   cfg.writeEntry( "sectionBar", !sectionBar->isHidden() );
   cfg.writeEntry( "destBar", !destBar->isHidden() );
 	
@@ -217,6 +246,7 @@ MainWindow::~MainWindow()
 void MainWindow::runIpkg()
 {
   packageList.allPackages();
+  ipkg->loadList( packageListSearch );
   ipkg->commit( packageList );
   // ##### If we looked in the list of files, we could send out accurate
   // ##### messages. But we don't bother yet, and just do an "all".
@@ -254,11 +284,20 @@ void MainWindow::displayList()
 	filterList();
   listViewPackages->clear();
   Package *pack = packageList.first();
+  PackageListItem *item;
+
+	QCheckListItem *rootLocal = new QCheckListItem(listViewPackages,tr("local"));
+	QCheckListItem *rootSearch = new QCheckListItem(listViewPackages,tr("ipkgfind"));
   while( pack )
   {
-  	if ( pack && (pack->name() != "") )
-	  	listViewPackages->insertItem( new PackageListItem( listViewPackages, pack, settings ) );
+	 	item = new PackageListItem( rootLocal, pack, settings );				
     pack = packageList.next();
+  }	
+  pack = packageListSearch.first();
+  while( pack )
+  {
+	 	item = new PackageListItem( rootSearch, pack, settings );				
+    pack = packageListSearch.next();
   }	
 }
 
@@ -345,6 +384,19 @@ void MainWindow::findClose()
   findAction->setOn( false );
 }
 
+void MainWindow::searchShow(bool b)
+{
+	if (b) searchBar->show();
+  else searchBar->hide();
+  searchAction->setOn( b );
+}
+
+void MainWindow::searchClose()
+{
+  searchAction->setOn( false );
+}
+
+
 void MainWindow::destShow(bool b)
 {
 	if (b) destBar->show();
@@ -419,4 +471,23 @@ void MainWindow::receive(const QCString &msg, const QByteArray &arg)
 	}else{
     	pvDebug(2,"Huh what do ya want")
  	}
+}
+
+
+void MainWindow::createLinks()
+{
+	pvDebug(2,"creating links...");
+	ipkg->createLinks( settings->destinationurl->text() );
+}
+
+void MainWindow::removeLinks()
+{
+	pvDebug(2,"removing links...");
+	ipkg->removeLinks( settings->destinationurl->text() );
+}
+
+void MainWindow::remotePackageQuery()
+{
+ 	packageListSearch.query( searchEdit->text() );
+ 	displayList();
 }

@@ -6,12 +6,6 @@
 #include "pksettings.h"
 #include "debug.h"
 
-#define HACK
-#ifdef HACK
-  static QString listsDir="/usr/lib/ipkg/";
-  static QString statusDir="/usr/lib/ipkg/";
-#endif
-
 class PackageList //:QObject
 {
 //  	Q_OBJECT
@@ -20,7 +14,7 @@ public:
 
   PackageList();
   PackageList( PackageManagerSettings* );
-  ~PackageList();
+ 	virtual ~PackageList();
   void insertPackage( Package* );
   Package* find( QString );
   Package* next();
@@ -37,9 +31,9 @@ public:
 public slots:
   void setSection(QString);
   void setSubSection(QString);
-  void update();
+ // virtual void update();
 
-private:
+protected:
   int currentPackage;
   int packageCount;
 
@@ -49,10 +43,6 @@ private:
   QDictIterator<Package> packageIter;
 
   bool empty;
-#ifndef HACK
-  QString listsDir;
-  QString statusDir;
-#endif
   QString            aktSection;
   QString            aktSubSection;
   QStringList        sections;
@@ -61,9 +51,7 @@ private:
 
 
   void updateSections( Package* );
-  void parseStatus();
-  void parseList();
-  void readFileEntries( QString file, QString dest );
+  void readFileEntries( QString file, QString dest="" );
 };
 
 

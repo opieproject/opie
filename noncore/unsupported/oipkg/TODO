@@ -7,3 +7,8 @@
 * error handling
 * manage links
 * dependency checking
+* create dest if it does not exist
+* allow reinstalling
+* handle different versions
+* different types of filters and searches
+	i.e. name, desc, files etc

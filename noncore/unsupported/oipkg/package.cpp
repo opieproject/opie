@@ -28,6 +28,7 @@ void Package::init( PackageManagerSettings *s )
   _desc = "";
   _name = "";
   _toProcess = false;
+  _useFileName = false;
   _status = "";
   _dest = settings->getDestinationName();
   _link = settings->createLinks();
@@ -48,7 +49,8 @@ Package::Package( QString n, PackageManagerSettings *s )
   }else{
    	parseIpkgFile( n );
     _toProcess = true;
-    _packageName = QString( n );
+    _useFileName = true;
+    _fileName = QString( n );
   }
 }
 
@@ -90,7 +92,7 @@ void Package::setValue( QString n, QString t )
 
   }else if ( n == "Filename")
   {
-
+    _fileName = t;
   }else if ( n == "Size")
  	{
   	
@@ -116,6 +118,13 @@ void Package::setValue( QString n, QString t )
 QString Package::name()
 {
   return _name;
+}
+
+
+QString Package::installName()
+{
+	if (_useFileName) return _fileName;
+  else return _name;
 }
 
 bool Package::installed()
@@ -331,8 +340,13 @@ void Package::parseIpkgFile( QString file)
 	
 }
 
-QString Package::getPackageName()
+//QString Package::getPackageName()
+//{
+//	if ( _packageName.isEmpty() ) return _name;
+//	else return _packageName;
+//}
+
+void Package::instalFromFile(bool iff)
 {
-	if ( _packageName.isEmpty() ) return _name;
-	else return _packageName;
+	_useFileName = iff;
 }

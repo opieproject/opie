@@ -24,6 +24,7 @@ class Package //: public QObject
   void    copyValues( Package* );
 
   QString name() ;
+  QString installName() ;
   bool    installed();
 
   void    setDesc( QString );
@@ -44,15 +45,17 @@ class Package //: public QObject
   void setOn();
   bool link();
   void setLink(bool);
-  void parseIpkgFile( QString );;
+  void parseIpkgFile( QString );
+  void instalFromFile(bool iff=true);
 public slots:
-  QString getPackageName();
+//  QString getPackageName();
   void toggleProcess();
 
 private:
   PackageManagerSettings *settings;
-  QString _packageName;
+//  QString _packageName;
   QString _name;
+  QString _fileName;
   bool    _toProcess;
   bool    _link;
   QString _status;
@@ -62,6 +65,7 @@ private:
   QString _shortDesc;
   QString _desc;
   QString _dest;
+  bool _useFileName;
   void parsePackage( QStringList );
   void init(PackageManagerSettings *);
 };

@@ -2,10 +2,12 @@
 #define PACKAGEMANAGERSETTINGS_H
 
 #include "pksettingsbase.h"
+//#include "pmipkg.h"
 #include <qintdict.h>
+#include <qobject.h>
 
 
-class PackageManagerSettings : private PackageManagerSettingsBase
+class PackageManagerSettings : public PackageManagerSettingsBase
 {
 //	 Q_OBJECT
 public: 
@@ -22,23 +24,8 @@ public:
   QStringList getDestinationUrls();
   QStringList getDestinationNames();
   QString getDestinationUrlByName(QString);
-  /** No descriptions */
   QComboBox* getDestCombo();
-
-private:
-  QIntDict<QString> serverurlDic;
-  QIntDict<QString> destinationurlDic;
-  int ipkg_old;
-  int editedserver;
-  int editeddestination;
-  int currentSetting;
-  int installationSettingsCount;
-  bool changed;
-
-  bool readIpkgConfig(const QString&);
-  void writeIpkgConfig(const QString&);
-  void writeSettings();
-  void readSettings();
+//  void setIpkg( PmIpkg* );
 
 public slots:
   void writeInstallationSettings();
@@ -46,7 +33,8 @@ public slots:
   void writeCurrentInstallationSetting();
   void readInstallationSetting(int);
   void installationSettingSetName(const QString &);
-
+	void removeLinksToDest();
+	void createLinksToDest();
   void newServer();
   void editServer(int);
   void removeDestination();
@@ -63,6 +51,24 @@ public slots:
   void removeInstallationSetting();
   void renameInstallationSetting();
   void activeServerChanged();
+signals:
+//  void doCreateLinks( QString dest );
+//  void doRemoveLinks( QString dest );
+
+private:
+  QIntDict<QString> serverurlDic;
+  QIntDict<QString> destinationurlDic;
+  int ipkg_old;
+  int editedserver;
+  int editeddestination;
+  int currentSetting;
+  int installationSettingsCount;
+  bool changed;
+
+  bool readIpkgConfig(const QString&);
+  void writeIpkgConfig(const QString&);
+  void writeSettings();
+  void readSettings();
 };
 
 #endif

@@ -7,6 +7,8 @@
 #include <qpopupmenu.h>
 
 #include "packagelist.h"
+#include "packagelistremote.h"
+#include "packagelistlocal.h"
 #include "pmipkg.h"
 #include "pksettings.h"
 #include "packagelistview.h"
@@ -46,11 +48,16 @@ public slots:
   void sectionShow(bool);
   void findClose();
   void findShow(bool);
+  void searchClose();
+  void searchShow(bool);
   void destClose();
   void destShow(bool);
   void filterList();
+  void createLinks();
+  void removeLinks();
 	void receive (const QCString &, const QByteArray &);
 	void setDocument (const QString &);
+  void remotePackageQuery();
 
 private:
   void makeMenu();
@@ -61,18 +68,25 @@ private:
 
   PmIpkg* ipkg;
   PackageManagerSettings *settings;
-  PackageList packageList;
+  PackageListLocal packageList;
+  PackageListRemote packageListSearch;
+  PackageListView *listViewPackages;
+//  QCheckListItem* rootSearch;
+//  QCheckListItem* rootLocal;
   QAction *runAction;
   QAction *updateAction;
   QAction *findAction;
-  QAction *sectionAction;
-  QAction *destAction;
-  PackageListView *listViewPackages;
   QPEToolBar *findBar;
   QLineEdit *findEdit;
+  QAction *searchAction;
+  QAction *searchCommit;
+  QPEToolBar *searchBar;
+  QLineEdit *searchEdit;
+  QAction *sectionAction;
   QPEToolBar *sectionBar;
   QComboBox *section;
   QComboBox *subsection;
+  QAction *destAction;
   QPEToolBar *destBar;
   QComboBox *destination;
   QCheckBox* CheckBoxLink;

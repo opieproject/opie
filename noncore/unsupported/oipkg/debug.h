@@ -6,7 +6,7 @@
 extern int debugLevel;
 
 #define HACK
-
+#define PACKAGELISTLOCAL
 #define NEWLAYOUT
 
 #define pvDebug(I, S) \
