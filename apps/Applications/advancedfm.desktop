@@ -1,6 +1,6 @@
 [Desktop Entry]
 Comment = An advanced file manager program
-Exec = ../apps/Applications/advancedfm
+Exec = advancedfm
 File = advancedfm
 Icon = FileBrowser
 Name = AdvancedFM
