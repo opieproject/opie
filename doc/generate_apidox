@@ -17,9 +17,11 @@ mkdir $OPIEDIR/apidocs/pim
 mkdir $OPIEDIR/apidocs/network
 mkdir $OPIEDIR/apidocs/net2
 mkdir $OPIEDIR/apidocs/core2
+mkdir $OPIEDIR/apidocs/mm2
 mkdir $OPIEDIR/apidocs/pim2
 mkdir $OPIEDIR/apidocs/ui2
 mkdir $OPIEDIR/apidocs/db2
+mkdir $OPIEDIR/apidocs/libopie2
 
 # now copy qt doc
 echo "Scanning and copying QT docu"
