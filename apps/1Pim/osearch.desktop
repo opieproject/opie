@@ -1,5 +1,5 @@
 [Desktop Entry]
-Comment=Seach you data
+Comment=Seach your data
 Exec=osearch
 Icon=osearch/OSearch
 Type=Application
