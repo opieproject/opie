@@ -432,6 +432,9 @@ MScanListItem::MScanListItem( QListViewItem* parent, const QString& type, const 
     #ifdef DEBUG
     qDebug( "creating scanlist item" );
     #endif
+    if ( WellenreiterConfigWindow::instance() )
+        WellenreiterConfigWindow::instance()->performAction( type, essid, macaddr, wep, channel, signal ); // better use signal/slot combination here
+
     decorateItem( type, essid, macaddr, wep, channel, signal, false );
 }
 

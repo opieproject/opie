@@ -92,9 +92,15 @@ WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char
 };
 
 
-WellenreiterConfigWindow::~WellenreiterConfigWindow()
+void WellenreiterConfigWindow::accept()
 {
     save();
+    QDialog::accept();
+}
+
+
+WellenreiterConfigWindow::~WellenreiterConfigWindow()
+{
 }
 
 
@@ -308,7 +314,7 @@ void WellenreiterConfigWindow::performAction( const QString& type,
         return;
     }
 
-    qDebug( "going to perform action %d (script='%s')", action, (const char*) script );
+    qDebug( "for event '%s' I'm going to perform action %d (script='%s')", (const char*) type, action, (const char*) script );
 
     switch( action )
     {
@@ -398,11 +404,11 @@ void WellenreiterConfigWindow::load()
     lookupVendor->setChecked( c->readBoolEntry( "lookupVendor", true ) );
     openTree->setChecked( c->readBoolEntry( "openTree", true ) );
     disablePM->setChecked( c->readBoolEntry( "disablePM", true ) );
-    newNetworkAction->setCurrentItem( c->readNumEntry( "newNetworkAction", 0 ) );
+    newNetworkAction->setCurrentItem( c->readNumEntry( "newNetworkAction", 1 ) ); // Default: Play Alarm
     newNetworkScript->setText( c->readEntry( "newNetworkScript", "" ) );
-    newClientAction->setCurrentItem( c->readNumEntry( "newClientAction", 0 ) );
+    newClientAction->setCurrentItem( c->readNumEntry( "newClientAction", 2 ) ); // Default: Play Click
     newClientScript->setText( c->readEntry( "newClientScript", "" ) );
-    newStationAction->setCurrentItem( c->readNumEntry( "newStationAction", 0 ) );
+    newStationAction->setCurrentItem( c->readNumEntry( "newStationAction", 2 ) ); // Default: Play Click
     newStationScript->setText( c->readEntry( "newStationScript", "" ) );
     synchronizeActionsAndScripts(); // needed for showing/hiding the script QLineEdit on demand
 

@@ -68,8 +68,9 @@ class WellenreiterConfigWindow : public WellenreiterConfigBase
     void channelAllClicked(int);
     void performAction( const QString&, const QString&, const QString&, bool, int, int /* , const GpsLocation& */ );
 
-  protected:
+  protected slots:
     void synchronizeActionsAndScripts();
+    virtual void accept();
 
   protected:
     QMap<QString, int> _devicetype;
