@@ -1,9 +1,10 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>EditWidget</name>
     <message>
         <source>File Name:</source>
-        <translation>Datei Name:</translation>
+        <translation>Dateiname:</translation>
     </message>
     <message>
         <source>Group:</source>
@@ -60,11 +61,11 @@
     <name>MainWindow</name>
     <message>
         <source>Conf File Editor</source>
-        <translation>Conf Datei Editor</translation>
+        <translation>Konfigurationsdateien bearbeiten</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Speichere</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <source>Revert</source>

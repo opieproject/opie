@@ -1,9 +1,10 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Calculator</name>
     <message>
         <source>Experimental Calculator</source>
-        <translation>Experimentaler Taschenrechner</translation>
+        <translation>Experimenteller Taschenrechner</translation>
     </message>
     <message>
         <source>M+</source>

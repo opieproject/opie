@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Clock</name>
     <message>
@@ -27,7 +28,7 @@
     </message>
     <message>
         <source>Stop</source>
-        <translation>Stop</translation>
+        <translation>Stopp</translation>
     </message>
     <message>
         <source>PM</source>
@@ -43,7 +44,7 @@
     </message>
     <message>
         <source>Set date and time.</source>
-        <translation>Alarmzeit setzten.</translation>
+        <translation>Datum und Zeit einstellen.</translation>
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>
@@ -54,7 +55,7 @@
     <name>Set_Alarm</name>
     <message>
         <source>Set Alarm</source>
-        <translation>Alarmzeit einstellen</translation>
+        <translation>Weckzeit einstellen</translation>
     </message>
     <message>
         <source>Hour</source>
@@ -84,7 +85,7 @@
     </message>
     <message>
         <source>All</source>
-        <translation></translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <source>Audio</source>
