@@ -11,7 +11,6 @@
 int main( int argc, char **argv )
 {
     QPEApplication a( argc, argv );
-    int ret = 0;
 
     OTabWidget *tabwidget = new OTabWidget(0, "tab widget");
 
@@ -30,10 +29,23 @@ int main( int argc, char **argv )
 	    qDebug( "accepted: %s", QString( path + "/" + *it ).latin1() );
 
 	    QList<QWidget> list = iface->widgets();
-
             QWidget *widget;
             for ( widget = list.first(); widget != 0; widget = list.next() )
                 tabwidget->addTab(widget, QString(*it), QString(*it));
+
+            QString lang = getenv( "LANG" );
+	    if (lang.isNull())
+		lang = "en";
+	    QTranslator *trans = new QTranslator(qApp);
+	    QString type = (*it).left( (*it).find(".") );
+	    if (type.left(3) == "lib")
+		 type = type.mid(3);
+	    type = type.right( type.find("lib") );
+	    QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
+	    if ( trans->load( tfn ))
+		qApp->installTranslator( trans );
+	    else
+		delete trans;
 	}
     }
 
