@@ -39,6 +39,17 @@ protected:
 #define FLAG_RECENT   5
 
 /* a class to describe mails in a mailbox */
+/* Attention!
+   From programmers point of view it would make sense to
+   store the mail body into this class, too.
+   But: not from the point of view of the device. 
+   Mailbodies can be real large. So we request them when 
+   needed from the mail-wrapper class direct from the server itself
+   (imap) or from a file-based cache (pop3?)
+   So there is no interface "const QString&body()" but you should
+   make a request to the mailwrapper with this class as parameter to
+   get the body. Same words for the attachments.
+*/
 class RecMail
 {
 public:
@@ -53,8 +64,10 @@ public:
     void setFrom( const QString&a ) { from = a; }
     const QString&getSubject()const { return subject; }
     void setSubject( const QString&s ) { subject = s; }
-    void setFlags(const QBitArray&flags){msg_flags = flags;}
+    const QString&getMbox()const{return mbox;}
+    void setMbox(const QString&box){mbox = box;}
     const QBitArray&getFlags()const{return msg_flags;}
+    void setFlags(const QBitArray&flags){msg_flags = flags;}
 
 #if 0    
     void setDate(const QString&dstring);
@@ -62,7 +75,7 @@ public:
     QString getDate()const{return mDate.toString();}
 #endif
 protected:
-    QString subject,date,from;
+    QString subject,date,from,mbox;
     int msg_number;
     QBitArray msg_flags;
 #if 0

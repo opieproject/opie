@@ -2,7 +2,9 @@
 #define __IMAPWRAPPER
 
 #include "mailwrapper.h"
-#include <libetpan/mailimap.h>
+
+struct mailimap;
+struct mailimap_body_type_1part;
 
 class IMAPwrapper : public QObject
 {
@@ -10,16 +12,22 @@ class IMAPwrapper : public QObject
 
 public:
     IMAPwrapper( IMAPaccount *a );
+    virtual ~IMAPwrapper();
     QList<IMAPFolder>* listFolders();
     void listMessages(const QString & mailbox,Maillist&target );
-    QString fetchBody(const QString & mailbox,const RecMail&mail);
+    QString fetchBody(const RecMail&mail);
+    static void imap_progress( size_t current, size_t maximum );
 
 protected:
     RecMail*parse_list_result(mailimap_msg_att*);
+    void login();
+    void logout();
+    QString searchBodyText(const RecMail&mail,mailimap_body_type_1part*mailDescription);
+    QString getPlainBody(const RecMail&mail);
 
 private:
     IMAPaccount *account;
-    
+    mailimap *m_imap;
 };
 
 #endif

@@ -629,7 +629,7 @@ Mail::Mail()
 }
 
 RecMail::RecMail()
-    :subject(""),date(""),msg_number(0),msg_flags(7)
+    :subject(""),date(""),mbox(""),msg_number(0),msg_flags(7)
 {
 }
 

@@ -61,7 +61,7 @@ void IMAPfolderItem::refresh(Maillist&target)
 
 QString IMAPfolderItem::fetchBody(const RecMail&aMail)
 {
-    return imap->getWrapper()->fetchBody(folder->getName(),aMail);
+    return imap->getWrapper()->fetchBody(aMail);
 }
 
 AccountView::AccountView( QWidget *parent, const char *name, WFlags flags )
