@@ -66,6 +66,7 @@ $(OPIEDIR)/stamp-headers :
 	( cd include/opie &&  ln -sf ../../libsql/*.h .; )
 	( cd include/opie &&  ln -sf ../../libopie/pim/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiecore/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opiemm/*.h .; )
 	#( cd include/opie2 && ln -sf ../../libopie2/opiedb/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opienet/*.h .; )
 	#( cd include/opie2 && ln -sf ../../libopie2/opiepim/*.h .; )
