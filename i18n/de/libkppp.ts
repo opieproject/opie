@@ -143,7 +143,7 @@ zu wollen ?</translation>
     </message>
     <message>
         <source>Script-based</source>
-        <translation>Script basiter</translation>
+        <translation>Script basiert</translation>
     </message>
     <message>
         <source>PAP</source>
@@ -454,10 +454,6 @@ neues Gerät kopiert, das modifiziert werden kann</translation>
     <message>
         <source>You must enter a unique device name</source>
         <translation>Sie müssen einen eindeutigen Gerätnamen angeben</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
     </message>
 </context>
 <context>

@@ -124,7 +124,7 @@
     </message>
     <message>
         <source>Force Depends</source>
-        <translation>--force.depends</translation>
+        <translation>--force-depends</translation>
     </message>
     <message>
         <source>Force Reinstall</source>
@@ -209,51 +209,35 @@
     </message>
     <message>
         <source>Could not open :</source>
-        <translation type="obsolete">Öffnen fehlgeschlagen: </translation>
+        <translation>Öffnen fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Creating directory </source>
-        <translation type="obsolete">Erstellung Verzeichnis </translation>
+        <translation>Erstellung Verzeichnis </translation>
     </message>
     <message>
         <source>Linked %1 to %2</source>
-        <translation type="obsolete">Verlinkung von %1 mit %2</translation>
+        <translation>Verlinkung von %1 mit %2</translation>
     </message>
     <message>
         <source>Failed to link %1 to %2</source>
-        <translation type="obsolete">Verlinkung von %1 mit %2 fehlgeschlage</translation>
+        <translation>Verlinkung von %1 mit %2 fehlgeschlage</translation>
     </message>
     <message>
         <source>Removed %1</source>
-        <translation type="obsolete">%1 gelöscht</translation>
+        <translation>%1 gelöscht</translation>
     </message>
     <message>
         <source>Failed to remove %1</source>
-        <translation type="obsolete">Löschen %1 fehlgeschlagen</translation>
+        <translation>Löschen %1 fehlgeschlagen</translation>
     </message>
     <message>
         <source>Removed </source>
-        <translation type="obsolete">Gelöscht </translation>
+        <translation>Gelöscht </translation>
     </message>
     <message>
         <source>Failed to remove </source>
-        <translation type="obsolete">Löschen fehlgeschlagen </translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t start ipkg-link process</source>
-        <translation>ipkg-link konnte nicht gestartet werden</translation>
-    </message>
-    <message>
-        <source>Symbolic linking failed!
-</source>
-        <translation>Verlinkung fehlgeschlagen!
-</translation>
-    </message>
-    <message>
-        <source>Symbolic linking succeeded.
-</source>
-        <translation>Verlinkung war erfolgreich.
-</translation>
+        <translation>Löschen fehlgeschlagen </translation>
     </message>
 </context>
 <context>
