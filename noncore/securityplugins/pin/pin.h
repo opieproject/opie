@@ -48,6 +48,8 @@ class PinPlugin : public QObject, public Opie::Security::MultiauthPluginObject {
     Q_OBJECT
     
 public:
+    PinPlugin();
+    virtual ~PinPlugin();
     int authenticate();
     Opie::Security::MultiauthConfigWidget * configWidget(QWidget * parent);
     QString pixmapNameConfig() const;
@@ -61,6 +63,7 @@ private slots:
     void clearPIN();
     
 private:
+    PinConfigWidget * m_pinW;
     QString encrypt(const QString& pin);
     bool verify(const QString& pin, const QString& hash);
 };

@@ -23,7 +23,6 @@
 
 #include "pin.h"
 #include "pinDialogBase.h"
-#include "pinConfigWidget.h"
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/oapplication.h>
@@ -318,6 +317,16 @@ int PinPlugin::authenticate()
     return MultiauthPluginObject::Success;
 }
 
+/// Standard c'tor
+PinPlugin::PinPlugin() : MultiauthPluginObject(), m_pinW(0) {
+}
+
+/// deletes m_pinW if we need to
+PinPlugin::~PinPlugin() {
+    if (m_pinW != 0)
+        delete m_pinW;
+}
+
 /// Simply returns the plugin name (PIN plugin)
 QString PinPlugin::pluginName() const {
     return "PIN Plugin";
@@ -333,12 +342,13 @@ QString PinPlugin::pixmapNameConfig() const {
 
 /// returns a PinConfigWidget
 MultiauthConfigWidget * PinPlugin::configWidget(QWidget * parent) {
-    PinConfigWidget * pinw = new PinConfigWidget(parent, "PIN configuration widget");
+    if (m_pinW == 0) {
+        m_pinW = new PinConfigWidget(parent, "PIN configuration widget");
 
-    connect(pinw->changePIN, SIGNAL( clicked() ), this, SLOT( changePIN() ));
-    connect(pinw->clearPIN, SIGNAL( clicked() ), this, SLOT( clearPIN() ));
-
-    return pinw;
+        connect(m_pinW->changePIN, SIGNAL( clicked() ), this, SLOT( changePIN() ));
+        connect(m_pinW->clearPIN, SIGNAL( clicked() ), this, SLOT( clearPIN() ));
+    }
+    return m_pinW;
 }
 
 #include "pin.moc"
