@@ -48,7 +48,7 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
   ComboNtpSrv->setCurrentItem( cfg.readNumEntry("ntpServer", 0) );
 
   //make tab order
-  
+                                     
   TabWidgetMain->removePage( tabMain );
   TabWidgetMain->removePage( tabManualSetTime );
   TabWidgetMain->removePage( TabSettings );
@@ -56,7 +56,6 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
   TabWidgetMain->removePage( tabNtp );
 
   TabWidgetMain->insertTab( tabMain, tr( "Main" ) );
-  TabWidgetMain->insertTab( tabManualSetTime, tr( "Manual" ) );
   TabWidgetMain->insertTab( TabSettings, tr( "Settings" ) );
   TabWidgetMain->insertTab( tabPredict, tr( "Predict" ) );
   TabWidgetMain->insertTab( tabNtp, tr( "NTP" ) );
@@ -96,6 +95,9 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
 Ntp::~Ntp()
 {
   delete ntpProcess;
+}
+
+void Ntp::saveConfig(){
   int srvCount = ComboNtpSrv->count();
   bool serversChanged = true;
   QString edit = ComboNtpSrv->currentText();
@@ -199,20 +201,10 @@ void  Ntp::ntpFinished(OProcess *p)
     {      
       if ( isVisible() && _interactive ){
         QMessageBox::critical(this, tr("ntp error"),tr("Error while getting time form\n server")+getNtpServer()+"\n"+_ntpOutput );
-        TabWidgetMain->showPage( tabManualSetTime );
       }
-
+//      slotCheckNtp(-1);
       return;
     }
-
-  Global::writeHWClock();
-  // since time has changed quickly load in the datebookdb
-  // to allow the alarm server to get a better grip on itself
-  // (example re-trigger alarms for when we travel back in time)
-  DateBookDB db;
-  
-  //  QCopEnvelope timeApplet( "QPE/TaskBar", "reloadApplets()" );
-  //  timeApplet << "";
   
   Config cfg("ntp",Config::User);
   cfg.setGroup("lookups");
@@ -306,32 +298,34 @@ void Ntp::preditctTime()
   TextLabelEstimatedShift->setText(QString::number(corr)+tr(" seconds"));
   predictedTime = QDateTime::currentDateTime().addSecs(corr);
   TextLabelPredTime->setText(predictedTime.toString());
-  TextLabelMainPredTime->setText(tr("Predicted time:")+"<br><b>"+predictedTime.toString()+"</b>");
+//  TextLabelMainPredTime->setText(tr("Predicted time:")+"<br><b>"+predictedTime.toString()+"</b>");
 }
 
 void Ntp::setPredictTime()
 {
+  qDebug("Ntp::setPredictTime");
   preditctTime();
-  setTime( predictedTime );
+  timeButton->setTime( predictedTime );
 }
 
 void Ntp::slotCheckNtp(int i)
 {
+  qDebug(" Ntp::slotCheckNtp(%i)",i);
   if (i == 0)
     {
-      TextLabelMainPredTime->hide();
+//      TextLabelMainPredTime->hide();
       ButtonSetTime->setText( tr("Get time from network") );
       connect( ButtonSetTime, SIGNAL(clicked()), SLOT(slotButtonRunNtp()) );
       if ( ntpDelayElapsed() )
-   	{
-	  slotRunNtp();
-	  disconnect(ntpTimer, SIGNAL( timeout() ), this, SLOT(slotProbeNtpServer()) );
-	  connect(ntpTimer, SIGNAL( timeout() ), SLOT(slotTimerRunNtp()) );
-	}else{
-	  disconnect(ntpTimer, SIGNAL( timeout() ), this, SLOT(slotTimerRunNtp()) );
-	  connect(ntpTimer, SIGNAL( timeout() ), SLOT(slotProbeNtpServer()) );
-	}
-    }else{
+      {
+        slotRunNtp();
+        disconnect(ntpTimer, SIGNAL( timeout() ), this, SLOT(slotProbeNtpServer()) );
+        connect(ntpTimer, SIGNAL( timeout() ), SLOT(slotTimerRunNtp()) );
+      }else{
+        disconnect(ntpTimer, SIGNAL( timeout() ), this, SLOT(slotTimerRunNtp()) );
+        connect(ntpTimer, SIGNAL( timeout() ), SLOT(slotProbeNtpServer()) );
+      }
+    }else{              
       preditctTime();
       ButtonSetTime->setText( tr("Set predicted time: ")+predictedTime.toString() );
       if (i>0)ntpOutPut(tr("Could not connect to server ")+getNtpServer());
@@ -417,4 +411,16 @@ void Ntp::showAdvancedFeatures(bool advMode)
     Line1->hide();
   };
   TabWidgetMain->show();
+}
+
+
+void Ntp::accept( ){
+    qDebug("accepted");
+    //SetTimeDate
+    commitTime();
+  	writeSettings(); 
+    updateSystem();
+    // Ntp
+    saveConfig();    
+    qApp->quit();
 }

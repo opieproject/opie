@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Form interface generated from reading ui file 'ntpbase.ui'
 **
-** Created: Sun Nov 10 17:58:48 2002
+** Created: Sat Nov 16 15:49:32 2002
 **      by:  The User Interface Compiler (uic)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -10,7 +10,7 @@
 #define NTPBASE_H
 
 #include <qvariant.h>
-#include <qwidget.h>
+#include <qdialog.h>
 class QVBoxLayout; 
 class QHBoxLayout; 
 class QGridLayout; 
@@ -23,13 +23,14 @@ class QPushButton;
 class QSpinBox;
 class QTabWidget;
 class QTable;
+class QWidget;
 
-class NtpBase : public QWidget
+class NtpBase : public QDialog
 { 
     Q_OBJECT
 
 public:
-    NtpBase( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+    NtpBase( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
     ~NtpBase();
 
     QTabWidget* TabWidgetMain;

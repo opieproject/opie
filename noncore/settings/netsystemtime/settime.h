@@ -41,12 +41,14 @@ public:
     SetTime( QWidget *parent=0, const char *name=0 );
 
     QTime time() const;
+    void setTime( QDateTime );
 
 public slots:
     void slotTzChange( const QString& tz );
     void show12hourTime( int );
 
 protected slots:
+    void slotClockTick();
     void hourChanged( int value );
     void minuteChanged( int value );
 
@@ -56,6 +58,8 @@ protected:
     int hour;
     int minute;
     bool use12hourTime;
+    QDateTime _time;
+    QTimer  *clock;
     QComboBox *ampm;
     QSpinBox *sbHour;
     QSpinBox *sbMin;
@@ -74,7 +78,7 @@ protected slots:
 		void commitTime();
     void tzChange( const QString &tz );
     void formatChanged(int);
-		void updateSystem(int i=0);
+		void updateSystem();
 
 protected:
    	void  setTime(QDateTime dt);
@@ -88,7 +92,7 @@ protected:
     QComboBox *dateFormatCombo;
     QComboBox *clockAppletCombo;
     QPushButton *ButtonSetTime;
-    QLabel *TextLabelMainPredTime;
+   // QLabel *TextLabelMainPredTime;
 
     DateFormat date_formats[4];
 };

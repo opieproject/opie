@@ -4,8 +4,8 @@
 
 int main( int argc, char ** argv )
 {
-  	printf("This is netsystemtime\n");
-	  printf("$Id: main.cpp,v 1.3 2002-07-06 13:53:48 tille Exp $\n");
+  	printf("This is netsystemtime ");
+	  printf("$Id: main.cpp,v 1.4 2002-11-16 16:43:02 tille Exp $\n");
 
     QPEApplication a( argc, argv );
 

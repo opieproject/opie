@@ -35,6 +35,7 @@
 #include <qpe/qcopenvelope_qws.h>
 #endif
 
+#include <qtimer.h>
 #include <qbuttongroup.h>
 #include <qcheckbox.h>
 #include <qlabel.h>
@@ -52,42 +53,47 @@
 
 
 SetDateTime::SetDateTime(QWidget *parent, const char *name, WFlags f )
-    : NtpBase( parent, name, f )
+    : NtpBase( parent, name, true, f )
 {
- //   setCaption( tr("Set System Time") );
+    setCaption( tr("System Time") );
 
-//    QVBoxLayout *vb = new QVBoxLayout( this, 5 );
     QVBoxLayout *vb = new QVBoxLayout( FrameSystemTime, 5 );
-    QVBoxLayout *vb2 = new QVBoxLayout( FrameSetTime, 5 );
 
-    TextLabelMainPredTime = new QLabel( FrameSystemTime );
-    vb->addWidget( TextLabelMainPredTime, 1, 0 );
+//    TextLabelMainPredTime = new QLabel( FrameSystemTime );
+//    vb->addWidget( TextLabelMainPredTime, 1, 0 );
 
+    timeButton = new SetTime( FrameSystemTime );
+		vb->addWidget( timeButton );
+
+    QHBoxLayout *db = new QHBoxLayout( vb );
+    QLabel *dateLabel = new QLabel( tr("Date"), FrameSystemTime );
+    db->addWidget( dateLabel, 1 );
+    dateButton = new DateButton( TRUE, FrameSystemTime );
+    db->addWidget( dateButton, 2 );
+
+    ButtonSetTime = new QPushButton( FrameSystemTime );
+    vb->addWidget( ButtonSetTime, 1, 0 );
+    
+    QFrame *hline = new QFrame( FrameSystemTime );
+    hline->setFrameStyle( QFrame::HLine | QFrame::Sunken );
+    vb->addWidget( hline );
+    
     QHBoxLayout *hb = new QHBoxLayout( vb, -1, "timezone layout" );
-
+   
     QLabel *lblZone = new QLabel( tr( "Time Zone" ), FrameSystemTime, "timezone label" );
     lblZone->setMaximumSize( lblZone->sizeHint() );
     hb->addWidget( lblZone );
 
     tz = new TimeZoneSelector( FrameSystemTime, "Timezone choices" );
     tz->setMinimumSize( tz->sizeHint() );
-    hb->addWidget( tz );
+    hb->addWidget( tz );   
 
-    timeButton = new SetTime( FrameSetTime );
-		vb2->addWidget( timeButton );
-
-    QHBoxLayout *db = new QHBoxLayout( vb2 );
-    QLabel *dateLabel = new QLabel( tr("Date"), FrameSetTime );
-    db->addWidget( dateLabel, 1 );
-    dateButton = new DateButton( TRUE, FrameSetTime );
-    db->addWidget( dateButton, 2 );
-
-    QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
-    vb2->addItem( spacer );
-
-     QFrame *hline = new QFrame( FrameSystemTime );
+    hline = new QFrame( FrameSystemTime );
     hline->setFrameStyle( QFrame::HLine | QFrame::Sunken );
     vb->addWidget( hline );
+    
+    QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
+    vb->addItem( spacer );
 
     Config config("qpe");
     config.setGroup( "Time" );
@@ -179,35 +185,31 @@ SetDateTime::SetDateTime(QWidget *parent, const char *name, WFlags f )
 
     vb->addStretch( 0 );
 
-   hline = new QFrame( FrameSystemTime );
-    hline->setFrameStyle( QFrame::HLine | QFrame::Sunken );
-    vb->addWidget( hline );
+//   hline = new QFrame( FrameSystemTime );
+//    hline->setFrameStyle( QFrame::HLine | QFrame::Sunken );
+//    vb->addWidget( hline );
+//
+//    ButtonSetTime = new QPushButton( FrameSystemTime );
+//    vb->addWidget( ButtonSetTime, 1, 0 );
 
-    ButtonSetTime = new QPushButton( FrameSystemTime );
-    vb->addWidget( ButtonSetTime, 1, 0 );
-
-    QObject::connect( PushButtonSetManualTime, SIGNAL(clicked()),
-    									this, SLOT(commitTime()));
 
     QObject::connect( tz, SIGNAL( signalNewTz( const QString& ) ),
                       timeButton, SLOT( slotTzChange( const QString& ) ) );
     QObject::connect( tz, SIGNAL( signalNewTz( const QString& ) ),
                        SLOT( tzChange( const QString& ) ) );
 
-    QObject::connect( weekStartCombo, SIGNAL( activated ( int )),
-    									SLOT(updateSystem(int ) ));
-    QObject::connect( ampmCombo, SIGNAL( activated ( int )),
-    									SLOT(updateSystem(int ) ));
-    QObject::connect( dateFormatCombo, SIGNAL( activated ( int )),
-    									SLOT(updateSystem(int ) ));
-    QObject::connect( clockAppletCombo, SIGNAL( activated ( int )),
-    									SLOT(updateSystem(int ) ));
+//    QObject::connect( weekStartCombo, SIGNAL( activated ( int )),
+//    									SLOT(updateSystem(int ) ));
+//    QObject::connect( ampmCombo, SIGNAL( activated ( int )),
+//    									SLOT(updateSystem(int ) ));
+//    QObject::connect( dateFormatCombo, SIGNAL( activated ( int )),
+//    									SLOT(updateSystem(int ) ));
+//    QObject::connect( clockAppletCombo, SIGNAL( activated ( int )),
+//    									SLOT(updateSystem(int ) ));
 }
 
 SetDateTime::~SetDateTime()
 {
-	writeSettings();
-
 }
 
 void SetDateTime::writeSettings()
@@ -276,7 +278,7 @@ void  SetDateTime::setTime(QDateTime dt)
   enableScreenSaver << -1 << -1 << -1;
 }
 
-void SetDateTime::updateSystem(int i)
+void SetDateTime::updateSystem()
 {
     // really turn off the screensaver before doing anything
     {
@@ -284,7 +286,7 @@ void SetDateTime::updateSystem(int i)
   QCopEnvelope disableScreenSaver( "QPE/System", "setScreenSaverIntervals(int,int,int)" );
   disableScreenSaver << 0 << 0 << 0;
     }
-	qDebug("SetDateTime::updateSystem(int %i)",i);
+	qDebug("SetDateTime::updateSystem()");
  	writeSettings();
 
     // set the timezone for everyone else...
@@ -323,7 +325,7 @@ void SetDateTime::tzChange( const QString &tz )
     QDate d = QDate::currentDate();
     // reset the time.
     if ( !strSave.isNull() ) {
-  setenv( "TZ", strSave, 1 );
+      setenv( "TZ", strSave, 1 );
     }
     dateButton->setDate( d );
     updateSystem();
@@ -342,11 +344,15 @@ static const int ValuePM = 1;
 SetTime::SetTime( QWidget *parent, const char *name )
     : QWidget( parent, name )
 {
+    clock = new QTimer(this, "clock" );
+    connect(clock, SIGNAL( timeout() ), SLOT(slotClockTick()) );
+    clock->start( 1000 * 60 );
+    
     use12hourTime = FALSE;
 
-    QTime currTime = QTime::currentTime();
-    hour = currTime.hour();
-    minute = currTime.minute();
+    _time = QDateTime::currentDateTime();
+    hour = _time.time().hour();
+    minute = _time.time().minute();
 
     QHBoxLayout *hb2 = new QHBoxLayout( this );
     hb2->setSpacing( 3 );
@@ -499,4 +505,30 @@ void SetTime::slotTzChange( const QString &tz )
     sbMin->setValue( t.minute() );
 }
 
+void SetTime::setTime( QDateTime dt )
+{
+    _time = dt;
+    QTime t = dt.time();
+    // just set the spinboxes and let it propage through
+    if(use12hourTime) {
+  int show_hour = t.hour();
+  if (t.hour() >= 12) {
+      show_hour -= 12;
+      ampm->setCurrentItem( ValuePM );
+  } else {
+      ampm->setCurrentItem( ValueAM );
+  }
+  if (show_hour == 0)
+      show_hour = 12;
+  sbHour->setValue( show_hour );
+    } else {
+  sbHour->setValue( t.hour() );
+    }
+    sbMin->setValue( t.minute() );
+}
 
+void SetTime::slotClockTick()
+{
+  setTime( _time.addSecs(60) );
+  qDebug("SetTime::slotClockTick %s",_time.toString().latin1());
+}

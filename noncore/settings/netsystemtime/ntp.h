@@ -20,6 +20,7 @@ public:
 public slots:
   void setDocument (const QString &);
 protected:
+  virtual void accept( );
   QDateTime predictedTime;
   void makeChannel();
 protected slots:
@@ -38,6 +39,7 @@ private:
   void ntpOutPut(QString);
   bool ntpDelayElapsed();
   QString getNtpServer();
+  void saveConfig();
 private slots:
   void slotTimerRunNtp();
   void slotButtonRunNtp();

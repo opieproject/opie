@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Form implementation generated from reading ui file 'ntpbase.ui'
 **
-** Created: Sun Nov 10 17:59:14 2002
+** Created: Sat Nov 16 15:49:54 2002
 **      by:  The User Interface Compiler (uic)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -17,6 +17,7 @@
 #include <qspinbox.h>
 #include <qtable.h>
 #include <qtabwidget.h>
+#include <qwidget.h>
 #include <qlayout.h>
 #include <qvariant.h>
 #include <qtooltip.h>
@@ -25,9 +26,12 @@
 /* 
  *  Constructs a NtpBase which is a child of 'parent', with the 
  *  name 'name' and widget flags set to 'f' 
+ *
+ *  The dialog will by default be modeless, unless you set 'modal' to
+ *  TRUE to construct a modal dialog.
  */
-NtpBase::NtpBase( QWidget* parent,  const char* name, WFlags fl )
-    : QWidget( parent, name, fl )
+NtpBase::NtpBase( QWidget* parent,  const char* name, bool modal, WFlags fl )
+    : QDialog( parent, name, modal, fl )
 {
     if ( !name )
 	setName( "NtpBase" );
@@ -317,7 +321,7 @@ NtpBase::~NtpBase()
  */
 bool NtpBase::event( QEvent* ev )
 {
-    bool ret = QWidget::event( ev ); 
+    bool ret = QDialog::event( ev ); 
     if ( ev->type() == QEvent::ApplicationFontChange ) {
 	QFont MultiLineEditntpOutPut_font(  MultiLineEditntpOutPut->font() );
 	MultiLineEditntpOutPut_font.setPointSize( 7 );

@@ -1,7 +1,7 @@
 <!DOCTYPE UI><UI>
 <class>NtpBase</class>
 <widget>
-    <class>QWidget</class>
+    <class>QDialog</class>
     <property stdset="1">
         <name>name</name>
         <cstring>NtpBase</cstring>
