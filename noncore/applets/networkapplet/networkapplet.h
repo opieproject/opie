@@ -38,7 +38,13 @@
 #include <qlineedit.h>
 #include <qpixmap.h>
 
-class ONetworkInterface;
+
+namespace Opie {
+namespace Net {
+    class ONetwork;
+    class ONetworkInterface;
+}
+}
 class QShowEvent;
 class QHideEvent;
 class QVBoxLayout;
@@ -55,7 +61,7 @@ class IfaceUpDownButton : public QToolButton
     virtual void clicked();
 
   private:
-    ONetworkInterface* _iface;
+    Opie::Net::ONetworkInterface* _iface;
 };
 
 
@@ -71,13 +77,13 @@ class IfaceIPAddress : public QLineEdit
     virtual void returnPressed();
 
   private:
-    ONetworkInterface* _iface;
+    Opie::Net::ONetworkInterface* _iface;
 };
 
 class NetworkAppletControl : public QFrame
 {
   public:
-    NetworkAppletControl( OTaskbarApplet* parent, const char* name = 0 );
+    NetworkAppletControl( Opie::Ui::OTaskbarApplet* parent, const char* name = 0 );
     ~NetworkAppletControl();
 
     virtual QSize sizeHint() const;
@@ -85,7 +91,7 @@ class NetworkAppletControl : public QFrame
   protected:
     virtual void showEvent( QShowEvent* );
     virtual void hideEvent( QHideEvent* );
-    QString guessDevice( ONetworkInterface* iface );
+    QString guessDevice( Opie::Net::ONetworkInterface* iface );
     void build();
 
   private:
@@ -94,7 +100,7 @@ class NetworkAppletControl : public QFrame
 };
 
 
-class NetworkApplet : public OTaskbarApplet
+class NetworkApplet : public Opie::Ui::OTaskbarApplet
 {
   public:
     NetworkApplet( QWidget* parent = 0, const char* name = 0 );

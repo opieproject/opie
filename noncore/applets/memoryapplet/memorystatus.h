@@ -26,7 +26,7 @@
 
 class MemoryInfo;
 class Swapfile;
-using Opie::OTabWidget;
+
 
 class MemoryStatus : public QFrame
 {
@@ -42,7 +42,7 @@ public:
     int percent();
 
 private:
-    OTabWidget *tab;
+    Opie::Ui::OTabWidget *tab;
 };
 
 #endif

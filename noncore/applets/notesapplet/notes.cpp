@@ -46,6 +46,7 @@
 #include <qtimer.h>
 
 /* XPM */
+using namespace Opie::Ui;
 static char * notes_xpm[] = {
 "16 16 11 1",
 "   c None",
@@ -508,7 +509,6 @@ void NotesApplet::paintEvent( QPaintEvent* ) {
     p.drawPixmap( 0, 1,  ( const char** ) notes_xpm );
 }
 
-Q_EXPORT_INTERFACE()
-{
-    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<NotesApplet> );
-}
+
+EXPORT_OPIE_APPLET_v1(  NotesApplet )
+

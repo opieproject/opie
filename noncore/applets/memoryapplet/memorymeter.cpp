@@ -31,16 +31,17 @@
 
 #include <qtopia/applnk.h>
 
+using namespace Opie::Ui;
 MemoryMeter::MemoryMeter( QWidget *parent )
     : QWidget( parent ), memoryView(0)
 {
 	bvsz = QSize();
-	if ( qApp->desktop()->height() >= 300 ) 
+	if ( qApp->desktop()->height() >= 300 )
 	{
 		memoryView = new MemoryStatus( 0, WStyle_StaysOnTop | WType_Popup );
 		memoryView->setFrameStyle( QFrame::Panel | QFrame::Raised );
-	} 
-	else 
+	}
+	else
 	{
 		memoryView = new MemoryStatus( 0 );
 		memoryView->showMaximized();
@@ -79,11 +80,11 @@ bool MemoryMeter::updateMemoryViewGeometry()
 	if (memoryView != 0)
 	{
 		QSize sz = memoryView->sizeHint();
-		if ( sz != bvsz ) 
+		if ( sz != bvsz )
 		{
 			bvsz = sz;
 			QRect r(memoryView->pos(), memoryView->sizeHint());
-			if ( qApp->desktop()->height() >= 300 ) 
+			if ( qApp->desktop()->height() >= 300 )
 			{
 				QPoint curPos = mapToGlobal( rect().topLeft() );
 				int lp = qApp->desktop()->width() - memoryView->sizeHint().width();
@@ -100,11 +101,11 @@ bool MemoryMeter::updateMemoryViewGeometry()
 
 void MemoryMeter::mousePressEvent( QMouseEvent *)
 {
-    if ( memoryView->isVisible() ) 
+    if ( memoryView->isVisible() )
 	{
 		memoryView->hide();
-	} 
-	else 
+	}
+	else
 	{
 		bvsz = QSize();
 		updateMemoryViewGeometry();
@@ -206,7 +207,7 @@ void MemoryMeter::paintEvent( QPaintEvent* )
     //
     // Drained section.
     //
-    if (used_height != 0) 
+    if (used_height != 0)
 	{
 		p.setPen(NoPen);
 		p.setBrush(gray);
@@ -223,7 +224,7 @@ void MemoryMeter::paintEvent( QPaintEvent* )
     //
     // Unused section.
     //
-    if ( batt_height - used_height > 0 ) 
+    if ( batt_height - used_height > 0 )
 	{
 		int unused_offset = used_height + batt_yoffset;
 		int unused_height = batt_height - used_height;
@@ -240,8 +241,5 @@ void MemoryMeter::paintEvent( QPaintEvent* )
     }
 }
 
-Q_EXPORT_INTERFACE()
-{
-    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<MemoryMeter> );
-}
+EXPORT_OPIE_APPLET_v1( MemoryMeter )
 

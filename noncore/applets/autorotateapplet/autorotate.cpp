@@ -22,8 +22,7 @@
 /* QT */
 #include <qpainter.h>
 
-using namespace Opie;
-
+using namespace Opie::Ui;
 AutoRotate::AutoRotate(QWidget * parent):QWidget(parent)
 {
     setFixedWidth( AppLnk::smallIconSize() );
@@ -94,8 +93,5 @@ bool AutoRotate::isRotateEnabled()
     return res;
 }
 
-Q_EXPORT_INTERFACE()
-{
-    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<AutoRotate> );
-}
+EXPORT_OPIE_APPLET_v1(  AutoRotate )
 

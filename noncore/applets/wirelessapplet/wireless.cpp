@@ -26,6 +26,7 @@
 #include <opie2/onetwork.h>
 #include <opie2/otaskbarapplet.h>
 #include <qpe/config.h>
+#include <qpe/qpeapplication.h>
 
 /* QT */
 #include <qradiobutton.h>
@@ -48,6 +49,8 @@
 //#define MDEBUG
 #undef MDEBUG
 
+using namespace Opie::Ui;
+using namespace Opie::Net;
 WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const char *name )
         : QFrame( parent, name, WStyle_StaysOnTop | WType_Popup ), applet( applet )
 {
@@ -550,9 +553,5 @@ int WirelessApplet::position()
     return 6;
 }
 
-
-Q_EXPORT_INTERFACE()
-{
-    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<WirelessApplet> );
-}
+EXPORT_OPIE_APPLET_v1(  WirelessApplet )
 

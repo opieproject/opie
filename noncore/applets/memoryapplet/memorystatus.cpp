@@ -28,6 +28,7 @@
 
 #include <qlayout.h>
 
+using namespace Opie::Ui;
 MemoryStatus::MemoryStatus(QWidget *parent, WFlags f )
     : QFrame(parent, 0, f), mi(0), sf(0)
 {

@@ -19,7 +19,10 @@
 #include <qframe.h>
 #include <qpixmap.h>
 
-class OWirelessNetworkInterface;
+namespace Opie {namespace Net {
+    class OWirelessNetworkInterface;
+}
+}
 class Y;
 class QLabel;
 class WirelessApplet;
@@ -86,11 +89,11 @@ class WirelessApplet : public QWidget
     int visualStyle;
     int timer;
 
-    OWirelessNetworkInterface* interface;
+    Opie::Net::OWirelessNetworkInterface* interface;
 
   private:
     const char** oldpixmap;
-    OWirelessNetworkInterface* oldiface;
+    Opie::Net::OWirelessNetworkInterface* oldiface;
     int oldqualityH;
     int oldsignalH;
     int oldnoiseH;

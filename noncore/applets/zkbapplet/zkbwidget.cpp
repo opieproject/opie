@@ -8,11 +8,12 @@
 #include "zkbwidget.h"
 #include "zkbcfg.h"
 
+using namespace Opie::Ui;
 ZkbWidget::ZkbWidget(QWidget* parent):QLabel(parent),keymap(0),
 	disabled(Resource::loadPixmap("zkb-disabled")) {
 
 	labels = new QPopupMenu();
-	connect(labels, SIGNAL(activated(int)), this, 
+	connect(labels, SIGNAL(activated(int)), this,
 		SLOT(labelChanged(int)));
 
 	loadKeymap();
@@ -68,7 +69,7 @@ bool ZkbWidget::loadKeymap() {
 	labels->insertItem(disabled, 0, 0);
 	int n = 1;
 	w = 0;
-	for(QStringList::Iterator it = l.begin(); it != l.end(); 
+	for(QStringList::Iterator it = l.begin(); it != l.end();
 		++it, n++) {
 
 //		printf("label: %s\n", (const char*) (*it).utf8());
@@ -155,8 +156,6 @@ void ZkbWidget::reload() {
 	QCopEnvelope("QPE/System", "notBusy()");
 }
 
-Q_EXPORT_INTERFACE()
-{
-    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<ZkbWidget> );
-}
+EXPORT_OPIE_APPLET_v1( ZkbWidget )
+
 

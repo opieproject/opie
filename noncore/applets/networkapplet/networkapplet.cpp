@@ -45,6 +45,8 @@
 
 #include <assert.h>
 
+using namespace Opie::Ui;
+using namespace Opie::Net;
 IfaceUpDownButton::IfaceUpDownButton( QWidget* parent, const char* name )
                   :QToolButton( parent, name )
 {
@@ -246,9 +248,6 @@ void NetworkApplet::mousePressEvent( QMouseEvent* )
     }
 }
 
+EXPORT_OPIE_APPLET_v1(  NetworkApplet )
 
-Q_EXPORT_INTERFACE()
-{
-    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<NetworkApplet> );
-}
 
