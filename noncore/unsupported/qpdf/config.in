@@ -1,4 +1,0 @@
-  config QPDF
-    boolean "qpdf"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,0 @@
-  config INTERFACES
-    boolean
-    default "y" if NETWORKSETUP
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,8 +1,0 @@
-Files: pics/??*.*
-Priority: required
-Section: opie/system
-Maintainer: Project Opie <opie@handhelds.org>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION.1
-Description: a few unassigned for Opie environment
- These icons are available to all Opie application.

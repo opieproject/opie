@@ -1,8 +1,0 @@
-[Desktop Entry]
-Comment=User Manager
-Comment[es]=Gestor de usuarios
-Exec=usermanager
-Icon=usermanager/usermanager.png
-Type=Setting
-Name=User Manager
-Name[es]=Gestor Usuarios

@@ -1,6 +1,0 @@
-*.o
-*~
-Makefile*
-moc_*
-wellenreitertemplate.cpp
-wellenreitertemplate.h

@@ -1,9 +1,0 @@
-Files: i18n/it/.directory i18n/it/*.qm
-Priority: optional
-Section: opie/i18n
-Maintainer: Daniele Foci <sunscan@sunscan.org>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: i18n: it
- Italian UI texts for OPIE environment.

@@ -1,9 +1,0 @@
-*.kdev*
-*~
-.cvsignore
-Makefile*
-moc_*
-pksettingsbase.cpp
-pksettingsbase.h
-runwindow.cpp
-runwindow.h

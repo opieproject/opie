@@ -1,7 +1,0 @@
-*.moc
-Makefile*
-moc_*
-orecurrancebase.cpp
-orecurrancebase.h
-otimepickerbase.cpp
-otimepickerbase.h

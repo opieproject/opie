@@ -1,5 +1,0 @@
-*.moc
-Makefile*
-calcdlg.cpp
-calcdlg.h
-moc_*

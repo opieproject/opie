@@ -1,4 +1,0 @@
-#  config #EXAMPLE
-#    boolean "example"
-#    default "y"
-#    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

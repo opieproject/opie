@@ -1,4 +1,0 @@
-#  config #CALIBRATE
-#    boolean "calibrate"
-#    default "y"
-#    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,5 +1,0 @@
-*.moc
-Makefile*
-mobilemsgbase.cpp
-mobilemsgbase.h
-moc_*

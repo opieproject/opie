@@ -1,4 +1,0 @@
-  config FORMATTER
-    boolean "formatter"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

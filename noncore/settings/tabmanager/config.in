@@ -1,4 +1,0 @@
-  config TABMANAGER
-    boolean "tabmanager"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

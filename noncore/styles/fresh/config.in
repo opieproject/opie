@@ -1,4 +1,0 @@
-  config FRESH
-    boolean "fresh"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

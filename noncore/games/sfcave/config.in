@@ -1,4 +1,0 @@
-  config SFCAVE
-    boolean "sfcave"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
