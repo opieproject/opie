@@ -1296,10 +1296,11 @@ void QPEApplication::setCurrentMode( int x, int y, int depth )
     qt_screen->setMode(x, y, depth);
 
     if ( qApp->type() == GuiServer ) {
+#if QT_VERSION > 236
         // Reconfigure the GuiServer
         qwsServer->beginDisplayReconfigure();
         qwsServer->endDisplayReconfigure();
-
+#endif
         // Get all the running apps to reset
         QCopEnvelope env( "QPE/System", "reset()" );
     }
