@@ -24,6 +24,7 @@
 #include <signal.h>
 #include <sys/time.h>
 #include <linux/soundcard.h>
+#include <math.h>
 
 #include <qapplication.h>
 
@@ -33,9 +34,14 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 
-
-
 #include "odevice.h"
+
+// _IO and friends are only defined in kernel headers ...
+
+#define OD_IO(type,area,number,args)    (( type << 30 ) | ( area << 8 ) | ( number ) | ( sizeof( args ) << 16 ))
+#define OD_IOW(area,number,args)        OD_IO(1,area,number,args)
+#define OD_IOR(area,number,args)        OD_IO(2,area,number,args)
+#define OD_IORW(area,number,args)       OD_IO(3,area,number,args)
 
 
 class ODeviceData {
@@ -61,6 +67,9 @@ protected:
 public:
 	virtual bool setPowerButtonHandler ( PowerButtonHandler h );
 
+	virtual bool setDisplayBrightness ( int b );
+	virtual int displayBrightnessResolution ( ) const;
+
 	virtual void alarmSound ( );
 
 	virtual uint hasLeds ( ) const;
@@ -74,6 +83,9 @@ protected:
 
 public:	
 	virtual bool setPowerButtonHandler ( PowerButtonHandler h );
+
+	virtual bool setDisplayBrightness ( int b );
+	virtual int displayBrightnessResolution ( ) const;
 
 	virtual void alarmSound ( );
 	virtual void keySound ( );
@@ -107,6 +119,14 @@ ODevice *ODevice::inst ( )
 	return dev;
 }
 
+
+/**************************************************
+ *
+ * common
+ *
+ **************************************************/
+
+
 ODevice::ODevice ( )
 {
 	d = new ODeviceData;
@@ -129,16 +149,15 @@ ODevice::~ODevice ( )
 	delete d;
 }
 
-//#include <linux/apm_bios.h>
-
-//#define APM_IOC_SUSPEND        _IO('A',2)
-
-#define APM_IOC_SUSPEND          (( 0<<30 ) | ( 'A'<<8 ) | ( 2 ) | ( 0<<16 ))
-
 bool ODevice::setPowerButtonHandler ( ODevice::PowerButtonHandler )
 {
 	return false;
 }
+
+//#include <linux/apm_bios.h>
+
+#define APM_IOC_SUSPEND          OD_IO( 0, 'A', 2, 0 )
+
 
 bool ODevice::suspend ( )
 {
@@ -177,6 +196,41 @@ bool ODevice::suspend ( )
 	return res;
 }
 
+//#include <linux/fb.h> better not rely on kernel headers in userspace ...
+
+#define FBIOBLANK             OD_IO( 0, 'F', 0x11, 0 ) // 0x4611
+
+/* VESA Blanking Levels */
+#define VESA_NO_BLANKING      0
+#define VESA_VSYNC_SUSPEND    1
+#define VESA_HSYNC_SUSPEND    2
+#define VESA_POWERDOWN        3
+
+
+bool ODevice::setDisplayStatus ( bool on )
+{
+	if ( d-> m_model == OMODEL_Unknown )
+		return false;
+
+	bool res = false;
+	int fd;
+	
+	if (( fd = ::open ( "/dev/fb0", O_RDWR )) >= 0 ) {
+		res = ( ::ioctl ( fd, FBIOBLANK, on ? VESA_NO_BLANKING : VESA_POWERDOWN ) == 0 );
+		::close ( fd );
+	}	                                                                                       
+	return res;
+}
+
+bool ODevice::setDisplayBrightness ( int )
+{
+	return false;
+}
+
+int ODevice::displayBrightnessResolution ( ) const
+{
+	return 16;
+}
 
 QString ODevice::vendorString ( )
 {
@@ -243,11 +297,9 @@ void ODevice::touchSound ( )
 #ifndef QT_QWS_EBX
 #ifndef QT_NO_SOUND
 	static Sound snd ( "touchsound" );
-//qDebug("touchSound");
-	if ( snd. isFinished ( )) {
+
+	if ( snd. isFinished ( ))
 		snd. play ( );
-//		qDebug("sound should play");
-		}
 #endif
 #endif
 }
@@ -270,8 +322,11 @@ bool ODevice::setLed ( uint /*which*/, OLedState /*st*/ )
 
 
 
-//#if defined( QT_QWS_IPAQ ) // IPAQ
-
+/**************************************************
+ *
+ * iPAQ
+ *
+ **************************************************/
 
 void ODeviceIPAQ::init ( )
 {
@@ -315,17 +370,21 @@ void ODeviceIPAQ::init ( )
 
 //#include <linux/h3600_ts.h>  // including kernel headers is evil ...
 
-typedef struct h3600_ts_led {
+typedef struct {
   unsigned char OffOnBlink;       /* 0=off 1=on 2=Blink */
   unsigned char TotalTime;        /* Units of 5 seconds */
   unsigned char OnTime;           /* units of 100m/s */
   unsigned char OffTime;          /* units of 100m/s */
 } LED_IN;
 
+typedef struct {
+	unsigned char mode;
+	unsigned char pwr;
+	unsigned char brightness;
+} FLITE_IN;
 
-// #define IOC_H3600_TS_MAGIC  'f'
-// #define LED_ON                  _IOW(IOC_H3600_TS_MAGIC,  5, struct h3600_ts_led)
-#define LED_ON    (( 1<<30 ) | ( 'f'<<8 ) | ( 5 ) | ( sizeof(struct h3600_ts_led)<<16 )) // _IOW only defined in kernel headers :(
+#define LED_ON    OD_IOW( 'f', 5, LED_IN )
+#define FLITE_ON  OD_IOW( 'f', 7, FLITE_IN )
 
 
 void ODeviceIPAQ::alarmSound ( )
@@ -390,7 +449,7 @@ bool ODeviceIPAQ::setLed ( uint which, OLedState st )
 
 	if ( which == 0 ) {
 		if ( fd >= 0 ) {
-			struct h3600_ts_led leds;
+			LED_IN leds;
 			::memset ( &leds, 0, sizeof( leds ));
 			leds. TotalTime  = 0;
 			leds. OnTime     = 0;
@@ -433,7 +492,44 @@ bool ODeviceIPAQ::setPowerButtonHandler ( ODevice::PowerButtonHandler p )
 }
 
 
+bool ODeviceIPAQ::setDisplayBrightness ( int bright )
+{
+	bool res = false;
+	int fd;
+	
+	if ( bright > 255 )
+		bright = 255;
+	if ( bright < 0 )
+		bright = 0;
 
+	// 128 is the maximum if you want a decent lifetime for the LCD
+	
+	bright = (int) (( ::pow ( 2, double( bright ) / 255.0 ) - 1 ) * 128.0 ); // logarithmic
+//	bright = ( bright + 1 ) / 2;
+	
+	if ((( fd = ::open ( "/dev/ts", O_WRONLY )) >= 0 ) ||
+	    (( fd = ::open ( "/dev/h3600_ts", O_WRONLY )) >= 0 )) {
+		FLITE_IN bl;
+		bl. mode = 1;
+		bl. pwr = bright ? 1 : 0;
+		bl. brightness = bright;
+		res = ( ::ioctl ( fd, FLITE_ON, &bl ) == 0 );
+		::close ( fd );
+	}
+	return res;
+}
+
+int ODeviceIPAQ::displayBrightnessResolution ( ) const
+{
+	return 255; // really 128, but logarithmic control is smoother this way
+}
+
+
+/**************************************************
+ *
+ * Zaurus
+ *
+ **************************************************/
 
 
 
@@ -520,10 +616,11 @@ typedef struct sharp_led_status {
 
 // #include <asm/sharp_apm.h> // including kernel headers is evil ...
 
-#define APM_IOCGEVTSRC          (( 2 ) | ( 'A'<<8 ) | ( 203 ) | ( sizeof(int) ))
-#define APM_IOCSEVTSRC          (( 3 ) | ( 'A'<<8 ) | ( 204 ) | ( sizeof(int) ))
+#define APM_IOCGEVTSRC          OD_IOR( 'A', 203, int )
+#define APM_IOCSEVTSRC          OD_IORW( 'A', 204, int )
 #define APM_EVT_POWER_BUTTON    (1 << 0)
 
+#define FL_IOCTL_STEP_CONTRAST    100
 
 
 void ODeviceZaurus::buzzer ( int sound )
@@ -620,4 +717,31 @@ bool ODeviceZaurus::setPowerButtonHandler ( ODevice::PowerButtonHandler p )
 		perror ( "/dev/apm_bios or /dev/misc/apm_bios" );
 		
     return res;
+}
+
+
+bool ODeviceZaurus::setDisplayBrightness ( int bright )
+{
+	bool res = false;
+	int fd;
+	
+	if ( bright > 255 )
+		bright = 255;
+	if ( bright < 0 )
+		bright = 0;
+	
+	if (( fd = ::open ( "/dev/fl", O_WRONLY )) >= 0 ) {
+		int bl = ( bright * 4 + 127 ) / 255; // only 4 steps on zaurus
+		if ( bright && !bl )
+			bl = 1;
+		res = ( ::ioctl ( fd, FL_IOCTL_STEP_CONTRAST, bl ) == 0 );
+		::close ( fd );
+	}
+	return res;
+}
+
+
+int ODeviceZaurus::displayBrightnessResolution ( ) const 
+{
+	return 4;
 }

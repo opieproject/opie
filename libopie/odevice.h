@@ -75,6 +75,10 @@ public:
 	virtual bool setPowerButtonHandler ( PowerButtonHandler h );
 	virtual bool suspend ( );
 
+	virtual bool setDisplayStatus ( bool on );
+	virtual bool setDisplayBrightness ( int brightness );
+	virtual int displayBrightnessResolution ( ) const;
+	
 // information
 
 	QString modelString ( ); 
