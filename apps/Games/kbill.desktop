@@ -5,6 +5,7 @@ Type=Application
 Name=kbill
 Comment=Hit Bill
 Name[de]=kBill
+Comment[de]=Vertreibe Bill
 Name[es]=kBill
 Comment[es]=Pégale a Bill
 Name[fr]=KBill

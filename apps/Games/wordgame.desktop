@@ -5,6 +5,7 @@ Type=Application
 Name=Word Game
 Comment=A word arranging game
 Name[de]=Wortspiel
+Comment[de]=Ein Scrabble Klon
 Name[es]=Crucigrama
 Comment[es]=Juego de organizar palabras
 Name[fr]=Scrabble

@@ -5,6 +5,7 @@ Type=Application
 Name=Go
 Comment=A Board Strategy Game
 Name[de]=Go
+Comment[de]=Ein Strategie Brettspiel
 Name[es]=Go
 Comment[es]=Juego de estategia de tablero
 Name[fr]=Go

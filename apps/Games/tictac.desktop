@@ -5,6 +5,7 @@ Type=Application
 Name=Tictac
 Comment=Tic Tac Toe game
 Name[de]=Tic Tac To
+Comment[de]=3 in einer Reihe
 Name[es]=Tic Tac
 Comment[es]=Juego del Tic Tac Toe
 Name[fr]=Tic Tac Toc

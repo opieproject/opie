@@ -5,6 +5,7 @@ Type=Application
 Name=KCheckers
 Comment=A Ckeckers Game
 Name[de]=KCheckers
+Comment[de]=Dame Brettspiel
 Name[es]=Damas
 Comment[es]=El juego de las Damas
 Name[fr]=Dames
