@@ -87,7 +87,7 @@ void AdvancedFm::showHidden()
 	else
 		{
 			CurrentDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
-s			OtherDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
+			OtherDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
 //     fileMenu->setItemChecked( fileMenu->idAt(0),FALSE);
 //    b=TRUE;
 		}
