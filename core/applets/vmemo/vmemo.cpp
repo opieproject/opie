@@ -10,7 +10,7 @@
 **
 ************************************************************************************/
 /*
- * $Id: vmemo.cpp,v 1.21 2002-04-24 23:48:57 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.22 2002-04-27 04:33:57 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -22,10 +22,10 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <linux/soundcard.h>
+
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
-#include <string.h>
 
 typedef struct _waveheader {
   u_long  main_chunk; /* 'RIFF'  */
@@ -293,7 +293,7 @@ void VMemo::mousePressEvent( QMouseEvent *me )
   if(s)
      fileName=fileName.right(fileName.length()-s-2);
   qDebug("filename will be "+fileName);   
-   if( !fileName.right(1).find('/') == -1)
+   if( fileName.right(1).find('/') == -1)
            fileName+="/";
 
 //   if(systemZaurus) 
