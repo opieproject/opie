@@ -48,10 +48,6 @@ DingWidget::DingWidget(QWidget *parent, QString word, QTextBrowser *browser_top,
 
 	lines = lines.grep( word );
 
-//X 	for( QStringList::Iterator it = lines.begin() ; it != lines.end() ; ++it )
-//X 	{
-//X 		qDebug( *it );
-//X 	}
 	QString top, bottom;
 
 	parseInfo( lines, top , bottom );
@@ -61,6 +57,17 @@ DingWidget::DingWidget(QWidget *parent, QString word, QTextBrowser *browser_top,
 
 void DingWidget::parseInfo( QStringList &lines, QString &top, QString &bottom )
 {
-	top = "blah";	
-	bottom = lines.join( "\n" );
+	QRegExp reg( "\\" );
+	QStringList toplist, bottomlist;
+	for( QStringList::Iterator it = lines.begin() ; it != lines.end() ; ++it )
+	{
+		QString current = *it;
+		toplist.append(  current.left( current.find(reg) ) );
+		bottomlist.append(  current.right( current.find(reg) ) );
+	}
+		
+
+	//thats it, the lists are rendered. Lets put them in one string
+	bottom = bottomlist.join( "\n" );
+	top = toplist.join( "\n" );
 }
