@@ -50,13 +50,14 @@ void PackageListLocal::parseStatus()
 
 void PackageListLocal::parseList()
 {
-  QStringList srvs = settings->getActiveServers();
-	
+  QStringList srvs = settings->getActiveServers();	
   for ( QStringList::Iterator it = srvs.begin(); it != srvs.end(); ++it )
     {
       pvDebug( 2, "List: "+listsDir+"/"+*it);
+      parentItem = new ListViewItemOipkg( this, *it, Feed);
       readFileEntries( listsDir+"/"+*it );  	
     }
+  parentItem = this;
 }
 
 

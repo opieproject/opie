@@ -14,6 +14,7 @@
 #include <qfileinfo.h>
 #include <qtextstream.h>
 
+#include "packagelistitem.h"
 #include "debug.h"
 
 static QDict<OipkgPackage>  *packageListAll;
@@ -23,6 +24,7 @@ PackageList::PackageList(QListView *parent, QString name)
   : ListViewItemOipkg(parent,name,Feed), packageIter( packageList )
 {
   empty=true;
+  parentItem = this;
   if (!packageListAll) packageListAll = new QDict<OipkgPackage>();
   packageListAllRefCount++;
   sections << "All";
@@ -199,6 +201,7 @@ void PackageList::readFileEntries( QString filename, QString dest )
 		}
 	}
  	delete statusStream;
+  f.close();
   return;
 }
 
@@ -230,4 +233,24 @@ void PackageList::allPackages()
       ++filterIter;
       pack = filterIter.current();
     }
+}
+
+void PackageList::displayPackages()
+{
+  QListViewItem* itdel;
+  OipkgPackage *pack;
+  PackageListItem *item;
+  QListViewItem* it=firstChild();
+  while ( it )
+  {
+    itdel = it;
+    it    = it->nextSibling();
+    delete itdel;
+  }
+  pack = first();
+  while( pack )
+  {
+    item = new PackageListItem( parentItem, pack, settings );
+   	pack = next();
+  }	
 }

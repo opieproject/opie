@@ -36,6 +36,7 @@ public:
   OipkgPackage* getByName( QString );
   void clear();
   void allPackages();
+  void displayPackages();
 
   QDict<OipkgPackage> *versions;
 
@@ -47,7 +48,7 @@ public slots:
 protected:
   int currentPackage;
   int packageCount;
-
+  ListViewItemOipkg *parentItem;
   PackageManagerSettings     *settings;
   QDict<OipkgPackage>         packageList;
   QDict<OipkgPackage>         origPackageList;

@@ -83,29 +83,14 @@ void PackageListView::stopTimer( QListViewItem* )
 void PackageListView::display()
 {
   QDictIterator<PackageList> list( PackageLists );
-  PackageList *packlist;
-  OipkgPackage *pack;
-  PackageListItem *item;
-  ListViewItemOipkg *rootItem;
-  QListViewItem* it;
-  QListViewItem* itdel;
+//  PackageList *packlist;
+//  ListViewItemOipkg *rootItem;
   while ( list.current() ) {
-    packlist = list.current();
-    rootItem = static_cast<ListViewItemOipkg*>(packlist);
-   // rootItem = rootItems.find( list.currentKey() );
-    it=rootItem->firstChild();
-    while ( it )
-      {
-	itdel = it;
-	it    = it->nextSibling();
-	delete itdel;
-      }
-    pack = packlist->first();
-    while( pack )
-      {
-	item = new PackageListItem( rootItem, pack, settings );				
-    	pack = packlist->next();
-      }	
+//    packlist = list.current();
+//    rootItem = static_cast<ListViewItemOipkg*>(packlist);
+//   // rootItem = rootItems.find( list.currentKey() );
+//   packlist->displayPackages();
+    list.current()->displayPackages();
     ++list;
   }
 }

@@ -28,7 +28,7 @@ static QPixmap *pm_uninstalled_installed_old=0;
 PackageListItem::PackageListItem(ListViewItemOipkg *parent, QString name, Type ittype)
   : ListViewItemOipkg(parent,name,ittype)
 {
-
+  init(0,0);
 }
 
 PackageListItem::PackageListItem(QListView* lv, OipkgPackage *pi, PackageManagerSettings *s)
@@ -52,8 +52,8 @@ void PackageListItem::init( OipkgPackage *pi, PackageManagerSettings *s)
 {
   popupMenu = new QPopupMenu( 0 );
   destsMenu = new QPopupMenu( 0 );
-  package = pi;
-  settings = s;
+  if (pi) package = pi;
+  if (s)  settings = s;
   setExpandable( true );
   ListViewItemOipkg *item;
   nameItem = new ListViewItemOipkg( this, ListViewItemOipkg::Attribute,"name"  );
@@ -70,7 +70,7 @@ void PackageListItem::init( OipkgPackage *pi, PackageManagerSettings *s)
     item = new ListViewItemOipkg( otherItem, ListViewItemOipkg::Attribute, QString(it.currentKey()+": "+*it.current()) );
     ++it;
   }
-  displayDetails();
+  if (pi) displayDetails();
 
   if (!pm_uninstalled)
     {
@@ -176,13 +176,12 @@ void PackageListItem::setOn( bool b )
 void PackageListItem::displayDetails()
 {
   QString sod;
-  sod += package->sizeUnits().isEmpty()?QString(""):QString(package->sizeUnits());
-  //sod += QString(package->dest().isEmpty()?"":QObject::tr(" on ")+package->dest());
-  sod += package->dest().isEmpty()?QString(""):QString(QObject::tr(" on ")+package->dest());
-  sod = sod.isEmpty()?QString(""):QString(" ("+sod+")");
+  sod += package->sizeUnits().isEmpty()?QString(""):package->sizeUnits();
+  sod += package->dest().isEmpty()?QString(""):QObject::tr(" on ")+package->dest();
+  sod = sod.isEmpty()?QString(""):" ("+sod+")";
   setText(0, package->name()+sod );
   nameItem->setText( 0, QObject::tr("Name: ")+package->name());
-  linkItem->setText( 0, QObject::tr("Link: ")+(package->link()?QObject::tr("Yes"):QObject::tr("No")));
+  linkItem->setText( 0, QObject::tr("Link: ")+package->link()?QObject::tr("Yes"):QObject::tr("No"));
   destItem->setText( 0, QObject::tr("Destination: ")+package->dest() );
   statusItem->setText( 0, QObject::tr("Status: ")+package->status() );
   repaint();
