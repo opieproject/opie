@@ -59,6 +59,7 @@ namespace
 const int xo = 2; // movable x offset
 const int yo = 0; // movable y offset
 
+/*
 MediaWidget::Button videoButtons[] = {
     { FALSE, FALSE, FALSE }, // stop
     { TRUE, FALSE, FALSE }, // play
@@ -68,12 +69,13 @@ MediaWidget::Button videoButtons[] = {
     { FALSE, FALSE, FALSE }, // volDown
     { TRUE, FALSE, FALSE }  // fullscreen
 };
+*/
 
 const char * const skinV_mask_file_names[7] = {
 "stop","play","back","fwd","up","down","full"
 };
 
-const int numVButtons = (sizeof(videoButtons)/sizeof(MediaWidget::Button));
+//const int numVButtons = (sizeof(videoButtons)/sizeof(MediaWidget::Button));
 
 }
 
@@ -81,6 +83,21 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     : MediaWidget( playList, mediaPlayerState, parent, name ), scaledWidth( 0 ), scaledHeight( 0 ) 
 {
     setCaption( tr("OpiePlayer - Video") );
+
+    Button defaultButton; 
+    defaultButton.isToggle = defaultButton.isHeld = defaultButton.isDown = false;
+    Button toggleButton;
+    toggleButton.isToggle = true;
+    toggleButton.isHeld = toggleButton.isDown = false;
+
+    videoButtons.reserve( 7 );
+    videoButtons.push_back( defaultButton ); // stop
+    videoButtons.push_back( toggleButton ); // play
+    videoButtons.push_back( defaultButton ); // previous
+    videoButtons.push_back( defaultButton ); // next
+    videoButtons.push_back( defaultButton ); // volUp
+    videoButtons.push_back( defaultButton ); // volDown
+    videoButtons.push_back( toggleButton ); //fullscreen
 
     videoFrame = new XineVideoWidget ( this, "Video frame" );
 
@@ -276,7 +293,7 @@ void VideoWidget::paintButton( QPainter *p, int i ) {
 }
 
 void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
-    for ( int i = 0; i < numVButtons; i++ ) {
+    for ( unsigned int i = 0; i < videoButtons.size(); i++ ) {
         if ( event->state() == QMouseEvent::LeftButton ) {
             // The test to see if the mouse click is inside the button or not
             int x = event->pos().x() - xoff;
@@ -423,14 +440,14 @@ void VideoWidget::paintEvent( QPaintEvent * pe) {
             QPainter p( &pix );
             p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
             p.drawTiledPixmap( pe->rect(), pixBg, pe->rect().topLeft() );
-            for ( int i = 0; i < numVButtons; i++ ) {
+            for ( unsigned int i = 0; i < videoButtons.size(); i++ ) {
                 paintButton( &p, i );
             }
             QPainter p2( this );
             p2.drawPixmap( pe->rect().topLeft(), pix );
         } else {
             QPainter p( this );
-            for ( int i = 0; i < numVButtons; i++ )
+            for ( unsigned int i = 0; i < videoButtons.size(); i++ )
                 paintButton( &p, i );
         }
         //slider->repaint( TRUE );

@@ -25,6 +25,8 @@
 #include "mediaplayerstate.h"
 #include "playlistwidget.h"
 
+#include <vector>
+
 class MediaWidget : public QWidget
 {
     Q_OBJECT
@@ -33,12 +35,15 @@ public:
 
     struct Button
     {
-//        Button() : isToggle( false ), isHeld( false ), isDown( false ) {}
+        //Button() : isToggle( false ), isHeld( false ), isDown( false ) {}
+//        Button( bool toggle, bool held, bool down )
+//           : isToggle( toggle ), isHeld( held ), isDown( down ) {}
 
         bool isToggle : 1;
         bool isHeld : 1;
         bool isDown : 1;
     };
+    typedef std::vector<Button> ButtonVector;
 
     MediaWidget( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QWidget *parent = 0, const char *name = 0 );
     virtual ~MediaWidget();
