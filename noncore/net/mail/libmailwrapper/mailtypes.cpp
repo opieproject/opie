@@ -15,6 +15,11 @@ RecMail::RecMail(const RecMail&old)
     qDebug("Copy constructor RecMail");
 }
 
+RecMail::~RecMail()
+{
+    wrapper = 0;
+}
+
 void RecMail::copy_old(const RecMail&old)
 {
     subject = old.subject;
@@ -28,6 +33,7 @@ void RecMail::copy_old(const RecMail&old)
     to = old.to;
     cc = old.cc;
     bcc = old.bcc;
+    wrapper = old.wrapper;
 }
 
 void RecMail::init()
@@ -35,6 +41,17 @@ void RecMail::init()
     to.clear();
     cc.clear();
     bcc.clear();
+    wrapper = 0;
+}
+
+void RecMail::setWrapper(AbstractMail*awrapper)
+{
+    wrapper = awrapper;
+}
+
+AbstractMail* RecMail::Wrapper()
+{
+    return wrapper;
 }
 
 void RecMail::setTo(const QStringList&list)

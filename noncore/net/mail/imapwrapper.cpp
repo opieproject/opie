@@ -131,6 +131,7 @@ void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
             if (m) {
                 m->setNumber(i);
                 m->setMbox(mailbox);
+                m->setWrapper(this);
                 target.append(m);
             }
         }

@@ -15,6 +15,7 @@
 #include <qmap.h>
 #include <qvaluelist.h>
 
+class AbstractMail;
 /* a class to describe mails in a mailbox */
 /* Attention!
    From programmers point of view it would make sense to
@@ -32,7 +33,7 @@ class RecMail
 public:
     RecMail();
     RecMail(const RecMail&old);
-    virtual ~RecMail(){}
+    virtual ~RecMail();
 
     const int getNumber()const{return msg_number;}
     void setNumber(int number){msg_number=number;}
@@ -60,12 +61,16 @@ public:
     const QStringList&Bcc()const;
     const QBitArray&getFlags()const{return msg_flags;}
     void setFlags(const QBitArray&flags){msg_flags = flags;}
+    
+    void setWrapper(AbstractMail*wrapper);
+    AbstractMail* Wrapper();
 
 protected:
     QString subject,date,from,mbox,msg_id,replyto;
     int msg_number,msg_size;
     QBitArray msg_flags;
     QStringList to,cc,bcc;
+    AbstractMail*wrapper;
     void init();
     void copy_old(const RecMail&old);
 };

@@ -81,6 +81,7 @@ void POP3wrapper::listMessages(const QString &, QList<RecMail> &target )
         }
         RecMail *mail = parseHeader( header );
         mail->setNumber( info->msg_index );
+        mail->setWrapper(this);
         target.append( mail );
     }
 
