@@ -23,6 +23,12 @@ public:
     void setSignalWrapAround( bool v );
     void setQtMail( bool v );
     void setOpieMail( bool v );
+
+protected:
+/*     virtual void itemUp(); */
+/*     virtual void itemDown(); */
+
+    QStringList contFields;
 };
 
 

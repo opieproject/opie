@@ -1,10 +1,23 @@
 #include "configdlg.h"
 #include <qcheckbox.h>
 #include <qradiobutton.h>
+#include <qlistbox.h>
+
+#include <opie/ocontact.h>
+
+#include "addresssettings.h"
+
 
 ConfigDlg::ConfigDlg( QWidget *parent = 0, const char *name = 0 ):
 	ConfigDlg_Base(parent, name, true )
-{}
+{
+	contFields = OContact::trfields();
+	contFields.remove( tr("File As") );
+	contFields.remove( tr("Gender") );
+
+	for (uint i=0; i < contFields.count(); i++)
+		fieldListBox->insertItem( contFields[i] );
+}
     
 
 bool ConfigDlg::useRegExp() const

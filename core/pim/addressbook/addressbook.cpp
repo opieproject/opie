@@ -211,9 +211,9 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	a->addTo( edit );
 	
 	// Do we need this function ? (se)	
-// 	a = new QAction( tr( "Arrange Edit Fields"), QString::null, 0, 0 );
-// 	connect( a, SIGNAL( activated() ), this, SLOT( slotSettings() ) );
-// 	a->addTo( edit );
+	a = new QAction( tr( "Arrange Edit Fields"), QString::null, 0, 0 );
+	connect( a, SIGNAL( activated() ), this, SLOT( slotSettings() ) );
+	a->addTo( edit );
 
 
 #ifdef __DEBUG_RELEASE
@@ -815,23 +815,23 @@ void AddressbookWindow::slotSave()
 }
 #endif
 
-// void AddressbookWindow::slotSettings()
-// {
-// 	AddressSettings frmSettings( this );
-// #if defined(Q_WS_QWS) || defined(_WS_QWS_)
-// 	frmSettings.showMaximized();
-// #endif
+void AddressbookWindow::slotSettings()
+{
+	AddressSettings frmSettings( this );
+#if defined(Q_WS_QWS) || defined(_WS_QWS_)
+	frmSettings.showMaximized();
+#endif
 	
-// 	if ( frmSettings.exec() ) {
-// 		allFields.clear();
-// 		orderedFields.clear();
-// 		slOrderedFields.clear();
-// 		initFields();
-// 		if ( abEditor )
-// 			abEditor->loadFields();
-// 		abList->refresh();
-// 	}
-// }
+	if ( frmSettings.exec() ) {
+		allFields.clear();
+		orderedFields.clear();
+		slOrderedFields.clear();
+		initFields();
+		if ( abEditor )
+			abEditor->loadFields();
+		// abList->refresh();
+	}
+}
 
 // This should be moved to the contact editor.. (se)
 void AddressbookWindow::initFields()

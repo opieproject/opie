@@ -12,7 +12,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>244</width>
+            <width>240</width>
             <height>298</height>
         </rect>
     </property>
@@ -41,6 +41,9 @@
             </property>
             <property>
                 <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
             </property>
             <widget>
                 <class>QWidget</class>
@@ -255,6 +258,128 @@ is provided free !</string>
                         </property>
                     </spacer>
                 </vbox>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>Prim.Contact</string>
+                </attribute>
+                <grid>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>5</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>3</number>
+                    </property>
+                    <widget row="0"  column="0"  rowspan="1"  colspan="2" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>lblExplain</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>sizePolicy</name>
+                            <sizepolicy>
+                                <hsizetype>1</hsizetype>
+                                <vsizetype>1</vsizetype>
+                            </sizepolicy>
+                        </property>
+                        <property stdset="1">
+                            <name>frameShape</name>
+                            <enum>MShape</enum>
+                        </property>
+                        <property stdset="1">
+                            <name>frameShadow</name>
+                            <enum>MShadow</enum>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Select Contact Order:</string>
+                        </property>
+                        <property stdset="1">
+                            <name>alignment</name>
+                            <set>AlignTop|AlignLeft</set>
+                        </property>
+                        <property>
+                            <name>hAlign</name>
+                        </property>
+                        <property>
+                            <name>vAlign</name>
+                        </property>
+                    </widget>
+                    <widget row="1"  column="0"  rowspan="3"  colspan="1" >
+                        <class>QListBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>fieldListBox</cstring>
+                        </property>
+                    </widget>
+                    <widget row="1"  column="1" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>upButton</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Up</string>
+                        </property>
+                        <property stdset="1">
+                            <name>autoRepeat</name>
+                            <bool>true</bool>
+                        </property>
+                    </widget>
+                    <widget row="2"  column="1" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>downButton</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>sizePolicy</name>
+                            <sizepolicy>
+                                <hsizetype>1</hsizetype>
+                                <vsizetype>0</vsizetype>
+                            </sizepolicy>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Down</string>
+                        </property>
+                        <property stdset="1">
+                            <name>autoRepeat</name>
+                            <bool>true</bool>
+                        </property>
+                    </widget>
+                    <spacer row="3"  column="1" >
+                        <property>
+                            <name>name</name>
+                            <cstring>Spacer2_2</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>orientation</name>
+                            <enum>Vertical</enum>
+                        </property>
+                        <property stdset="1">
+                            <name>sizeType</name>
+                            <enum>Expanding</enum>
+                        </property>
+                        <property>
+                            <name>sizeHint</name>
+                            <size>
+                                <width>20</width>
+                                <height>20</height>
+                            </size>
+                        </property>
+                    </spacer>
+                </grid>
             </widget>
         </widget>
         <widget>
