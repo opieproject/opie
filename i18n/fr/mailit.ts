@@ -208,16 +208,17 @@ Vérifiez le nom d&apos;utilisateur et le mot de passe&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Mailit ! No account defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun compte Défini</translation>
     </message>
     <message>
         <source>Delete account:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer compte :
+</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau</translation>
     </message>
 </context>
 <context>
