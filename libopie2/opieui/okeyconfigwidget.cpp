@@ -180,10 +180,10 @@ void OKeyConfigWidget::initUi() {
     m_cus = rad;
 
     m_btn = new QPushButton( tr("Configure Key"), box );
-    gridLay->addWidget( m_btn, 1, 4 );
+    gridLay->addWidget( m_btn, 1, 3 );
 
     m_lbl= new QLabel( tr( "Default: " ), box );
-    gridLay->addWidget( m_lbl, 2, 0 );
+    gridLay->addMultiCellWidget( m_lbl, 2, 2, 0, 3 );
 
     connect(m_btn, SIGNAL(clicked()),
             this, SLOT(slotConfigure()));
