@@ -755,13 +755,16 @@ void ODevice::remPreHandler(QWSServer::KeyboardFilter*aFilter)
 
 void ODevice::playingStopped() {
     const_cast<QObject*>(sender())->disconnect( this );
+#ifndef QT_NO_SOUND
     if ( d->m_sound >= 0 ) {
         ::ioctl ( d->m_sound, MIXER_WRITE( d->m_mixer ), &d->m_vol );
         ::close ( d->m_sound );
     }
+#endif
 }
 
 void ODevice::changeMixerForAlarm( int mixer, const char* file, Sound *snd ) {
+#ifndef QT_NO_SOUND
     if (( d->m_sound = ::open ( file, O_RDWR )) >= 0 ) {
         if ( ::ioctl ( d->m_sound, MIXER_READ( mixer ), &d->m_vol ) >= 0 ) {
             Config cfg ( "qpe" );
@@ -779,6 +782,7 @@ void ODevice::changeMixerForAlarm( int mixer, const char* file, Sound *snd ) {
         }
         d->m_mixer = mixer;
     }
+#endif
 }
 
 }

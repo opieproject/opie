@@ -25,8 +25,8 @@ OSQLResultItem::TableString OSQLResultItem::tableString()const{
 OSQLResultItem::TableInt OSQLResultItem::tableInt()const {
     return m_int;
 }
-QString OSQLResultItem::data( const QString& columnName, bool *ok ) {
-    TableString::Iterator it = m_string.find( columnName );
+QString OSQLResultItem::data( const QString& columnName, bool *ok ) const {
+    TableString::ConstIterator it = m_string.find( columnName );
 
     /* if found */
     if ( it != m_string.end() ) {
@@ -38,8 +38,8 @@ QString OSQLResultItem::data( const QString& columnName, bool *ok ) {
     }
 
 }
-QString OSQLResultItem::data( int column, bool *ok ) {
-    TableInt::Iterator it = m_int.find( column );
+QString OSQLResultItem::data( int column, bool *ok ) const {
+    TableInt::ConstIterator it = m_int.find( column );
 
     /* if found */
     if ( it != m_int.end() ) {

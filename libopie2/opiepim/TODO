@@ -5,6 +5,7 @@ As to popular request....
     The API frontend used by the developer should not be used
 
 	Rename ODateBookAccess* to OPimDateBookAccess*
+	Rename OContactAccess* to OpimContactAccess*
 	Fix filenames to OPim* ...    
 
 2.) Move sorting, Query By Example, Exposing of Attributes of a Record
