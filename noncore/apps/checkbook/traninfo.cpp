@@ -29,6 +29,7 @@
 #include "traninfo.h"
 
 #include <qpe/config.h>
+#include <qpe/timestring.h>
 
 QString tempstr;
 
@@ -124,13 +125,16 @@ TranInfo::TranInfo( Config config, int entry )
 }
 
 // --- datestr ----------------------------------------------------------------
-const QString &TranInfo::datestr()
+const QString &TranInfo::datestr(bool bDisplayDate)
 {
-    int y=td.year();
-    y= y>=2000 && y<=2099 ? y-2000 : y;
-    tempstr.sprintf( "%02d/%02d/%02d", y ,td.month(), td.day() );
-    return( tempstr );
+    if( bDisplayDate ) {
+        tempstr=TimeString::numberDateString( td );
+    } else {
+        tempstr.sprintf( "%04d-%02d-%02d", td.year() ,td.month(), td.day() );
+    }
+    return(tempstr);
 }
+
 
 // --- getIdStr ---------------------------------------------------------------
 const QString &TranInfo::getIdStr()
@@ -209,4 +213,15 @@ QString TranInfo::toString()
         fee()
     );
     return(ret);
+}
+
+
+// --- findMostRecentByDesc ---------------------------------------------------
+TranInfo *TranInfoList::findMostRecentByDesc( const QString &desc )
+{
+    for(TranInfo *cur=last(); cur; cur=prev()) {
+        if( cur->desc()==desc )
+            return( cur );
+    }
+    return(NULL);
 }

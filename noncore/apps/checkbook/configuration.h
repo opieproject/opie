@@ -52,9 +52,11 @@ class Configuration : public QDialog
 		QCheckBox *balCB;
         QCheckBox *openLastBookCB;
         QCheckBox *lastTabCB;
+        QCheckBox *savePayees;
         QTabWidget *_mainWidget;
         ListEdit *_listEditTypes;
         ListEdit *_listEditCategories;
+        ListEdit *_listEditPayees;
 
         // saves settings in config struct
         void saveConfig(Cfg &cfg);

@@ -29,8 +29,10 @@
 #include "transaction.h"
 #include "traninfo.h"
 #include "cfg.h"
+#include "checkbook.h"
 
 #include <qpe/datebookmonth.h>
+#include <qpe/resource.h>
 
 #include <qbuttongroup.h>
 #include <qcombobox.h>
@@ -41,14 +43,15 @@
 #include <qradiobutton.h>
 #include <qwhatsthis.h>
 
-Transaction::Transaction( QWidget *parent, const QString &acctname, TranInfo *info,
-							Cfg *pCfg )
+Transaction::Transaction( QWidget *parent, bool bNew, const QString &acctname,
+							 TranInfo *info, Cfg *pCfg )
 	: QDialog( parent, 0, TRUE, WStyle_ContextHelp )
 {
 	QString tempstr = tr( "Transaction for " );
 	tempstr.append( acctname );
 	setCaption( tempstr );
 
+    _bNew=bNew;
 	tran = info;
 	_pCfg=pCfg;
 
@@ -114,9 +117,12 @@ Transaction::Transaction( QWidget *parent, const QString &acctname, TranInfo *in
 	label = new QLabel( tr( "Description:" ), container );
 	QWhatsThis::add( label, tr( "Enter description of transaction here." ) );
 	layout->addWidget( label, 2, 0 );
-	descEdit = new QLineEdit( container );
-	QWhatsThis::add( descEdit, tr( "Enter description of transaction here." ) );
-	layout->addMultiCellWidget( descEdit, 2, 2, 1, 3 );
+    _cbDesc=new QComboBox( true, container );
+    _cbDesc->insertStringList( _pCfg->getPayees() );
+	QWhatsThis::add( _cbDesc, tr( "Enter description of transaction here." ) );
+	layout->addMultiCellWidget( _cbDesc, 2, 2, 1, 3 );
+    connect( _cbDesc, SIGNAL( activated(const QString &) ), this, SLOT( slotActivated(const QString &) ) );
+
 
 	// Category
 	label = new QLabel( tr( "Category:" ), container );
@@ -133,6 +139,7 @@ Transaction::Transaction( QWidget *parent, const QString &acctname, TranInfo *in
 	typeList = new QComboBox( container );
 	QWhatsThis::add( typeList, tr( "Select transaction type here.\n\nThe options available vary based on whether the transaction is a deposit or withdrawal." ) );
 	layout->addMultiCellWidget( typeList, 4, 4, 1, 3 );
+
 
 	// Amount
 	label = new QLabel( tr( "Amount:" ), container );
@@ -158,6 +165,22 @@ Transaction::Transaction( QWidget *parent, const QString &acctname, TranInfo *in
 	QWhatsThis::add( noteEdit, tr( "Enter any additional information for this transaction here." ) );
 	layout->addMultiCellWidget( noteEdit, 8, 8, 0, 3 );
 
+    // init date
+    initFromInfo( info );
+
+    // not new handlers
+    connect( withBtn, SIGNAL( toggled(bool) ), this, SLOT( slotNotNew() ) );
+    connect( depBtn, SIGNAL( toggled(bool) ), this, SLOT( slotNotNew() ) );
+    connect( catList, SIGNAL(activated(const QString &)), this, SLOT( slotNotNew() ) );
+    connect( typeList, SIGNAL(activated(const QString &)), this, SLOT( slotNotNew() ) );
+    connect( amtEdit, SIGNAL(textChanged(const QString &)), this, SLOT( slotNotNew() ) );
+    connect( feeEdit, SIGNAL(textChanged(const QString &)), this, SLOT( slotNotNew() ) );
+    connect( noteEdit, SIGNAL(textChanged()), this, SLOT( slotNotNew() ) );
+}
+
+// --- initFromInfo -----------------------------------------------------------
+void Transaction::initFromInfo(TranInfo *info, bool bPopulateOld)
+{
 	// Populate current values if provided
 	if ( info )
 	{
@@ -171,13 +194,27 @@ Transaction::Transaction( QWidget *parent, const QString &acctname, TranInfo *in
 			depBtn->setChecked( TRUE );
 			slotDepositClicked();
 		}
-		QDate dt = info->date();
-		slotDateChanged( dt.year(), dt.month(), dt.day() );
-		datePicker->setDate( dt );
-		numEdit->setText( info->number() );
-		descEdit->setText( info->desc() );
+
+        if( !bPopulateOld ) {
+		    QDate dt = info->date();
+		    slotDateChanged( dt.year(), dt.month(), dt.day() );
+		    datePicker->setDate( dt );
+		    numEdit->setText( info->number() );
+        }
 		QString temptext = info->category();
-		int i = catList->count();
+
+        // set description field
+        int i;
+        for(i=_cbDesc->count()-1; i>=0; i--) {
+            if( _cbDesc->text(i)==info->desc() ) {
+                _cbDesc->setCurrentItem(i);
+                break;
+            }
+        }
+        if( i<=0 )
+            _cbDesc->setEditText( info->desc() );
+
+		i = catList->count();
 		while ( i > 0 )
 		{
 			i--;
@@ -208,13 +245,16 @@ Transaction::Transaction( QWidget *parent, const QString &acctname, TranInfo *in
 	}
 }
 
+
+// --- ~Transaction -----------------------------------------------------------
 Transaction::~Transaction()
 {
 }
 
+// --- accept -----------------------------------------------------------------
 void Transaction::accept()
 {
-	tran->setDesc( descEdit->text() );
+	tran->setDesc( _cbDesc->currentText() );
 	tran->setDate( datePicker->selectedDate() );
 	tran->setWithdrawal( withBtn->isChecked() );
 	tran->setType( typeList->currentText() );
@@ -262,9 +302,37 @@ void Transaction::slotDepositClicked()
 	typeList->insertItem( tr( "Cash" ) );
 }
 
+// --- slotDateChanged --------------------------------------------------------
 void Transaction::slotDateChanged( int y, int m, int d )
 {
 	QDate date;
 	date.setYMD( y, m, d );
 	dateBtn->setText( TimeString::shortDate( date ) );
+}
+
+
+
+// --- slotActivated ----------------------------------------------------------
+// Search for the most recent transaction with this description/payee and
+// fill amount etc here, as long the new flag is set
+void Transaction::slotActivated(const QString &arg )
+{
+    if( !_bNew ) return;
+    TranInfoList *pTl=((Checkbook *)parentWidget())->getTranList();
+    if( pTl ) {
+        TranInfo *pTi=pTl->findMostRecentByDesc( arg );
+        if( pTi ) {
+            initFromInfo( pTi, true );
+            amtEdit->setFocus();
+            amtEdit->setSelection(0, amtEdit->text().length() );
+            amtEdit->setCursorPosition(0);
+        }
+    }
+}
+
+// slotNotNew -----------------------------------------------------------------
+void Transaction::slotNotNew()
+{
+    qDebug("Not new");
+    _bNew=false;
 }

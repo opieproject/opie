@@ -48,6 +48,7 @@ class QString;
 class TranInfo;
 class TranInfoList;
 class Cfg;
+class QMouseEvent;
 
 
 // --- Checkbook --------------------------------------------------------------
@@ -61,6 +62,9 @@ class Checkbook : public QDialog
 
         // resort
         void resort();
+
+        // members
+        TranInfoList *getTranList() { return(tranList); }
 
 	private:
 		CBInfo *info;
@@ -109,10 +113,12 @@ class Checkbook : public QDialog
 		void slotStartingBalanceChanged( const QString & );
 		void slotNewTran();
 		void slotEditTran();
+        void slotMenuTran(QListViewItem *, const QPoint &);
 		void slotDeleteTran();
 		void slotDrawGraph();
         void slotSortChanged( const QString & );
 };
+
 
 // --- CBListItem -------------------------------------------------------------
 class CBListItem :  public QListViewItem
@@ -129,7 +135,7 @@ class CBListItem :  public QListViewItem
         // --- members
         TranInfo *getTranInfo() { return(_pTran); }
 
-	private:
+  	private:
         TranInfo *_pTran;
 		QListView *owner;
 		bool m_known;

@@ -49,13 +49,15 @@
 #include <qmultilineedit.h>
 #include <qpushbutton.h>
 #include <qwhatsthis.h>
+#include <qpopupmenu.h>
 
-#define COL_ID      0
-#define COL_NUM     1
-#define COL_DATE    2
-#define COL_DESC    3
-#define COL_AMOUNT  4
-#define COL_BAL     5
+#define COL_ID          0
+#define COL_SORTDATE    1
+#define COL_NUM         2
+#define COL_DATE        3
+#define COL_DESC        4
+#define COL_AMOUNT      5
+#define COL_BAL         6
 
 // --- Checkbook --------------------------------------------------------------
 Checkbook::Checkbook( QWidget *parent, CBInfo *i, Cfg *cfg )
@@ -224,6 +226,9 @@ QWidget *Checkbook::initTransactions()
     tranTable->addColumn( tr( "Id" ) );
     tranTable->setColumnWidthMode( COL_ID, QListView::Manual );
     tranTable->setColumnWidth( COL_ID, 0);
+    tranTable->addColumn( tr( "SortDate" ) );
+    tranTable->setColumnWidthMode( COL_SORTDATE, QListView::Manual );
+    tranTable->setColumnWidth( COL_SORTDATE, 0);
     tranTable->addColumn( tr( "Num" ) );
 	tranTable->addColumn( tr( "Date" ) );
 	//tranTable->addColumn( tr( "Cleared" ) );
@@ -237,7 +242,9 @@ QWidget *Checkbook::initTransactions()
 	layout->addMultiCellWidget( tranTable, 1, 1, 0, 2 );
 	QPEApplication::setStylusOperation( tranTable->viewport(), QPEApplication::RightOnHold );
 	connect( tranTable, SIGNAL( rightButtonPressed( QListViewItem *, const QPoint &, int ) ),
-			 this, SLOT( slotEditTran() ) );
+	 	 this, SLOT( slotMenuTran(QListViewItem *, const QPoint &) ) );
+    connect( tranTable, SIGNAL( doubleClicked( QListViewItem * ) ),
+	 	 this, SLOT( slotEditTran() ) );
     _sortCol=COL_ID;
 
     // Buttons
@@ -336,7 +343,7 @@ void Checkbook::loadCheckbook()
 			amount *= -1;
 		}
 		stramount.sprintf( "%s%.2f", _pCfg->getCurrencySymbol().latin1(), amount );
-        ( void ) new CBListItem( tran, tranTable, tran->getIdStr(), tran->number(), tran->datestr(), tran->desc(), stramount );
+        ( void ) new CBListItem( tran, tranTable, tran->getIdStr(), tran->datestr(false), tran->number(), tran->datestr(true), tran->desc(), stramount );
 	}
 
     // set sort order
@@ -357,6 +364,7 @@ void Checkbook::loadCheckbook()
     // calc running balance
     adjustBalance();
 }
+
 
 // --- adjustBalance ----------------------------------------------------------
 void Checkbook::adjustBalance()
@@ -396,6 +404,7 @@ void Checkbook::accept()
 	QDialog::accept();
 }
 
+// --- slotPasswordClicked ----------------------------------------------------
 void Checkbook::slotPasswordClicked()
 {
 	if ( info->password().isNull() && passwordCB->isChecked() )
@@ -464,13 +473,14 @@ void Checkbook::slotStartingBalanceChanged( const QString &newbalance )
 }
 
 
+// --- slotNewTran ------------------------------------------------------------
 void Checkbook::slotNewTran()
 {
 	TranInfo *traninfo = new TranInfo( info->getNextNumber() );
     if( !_dLastNew.isNull() )
         traninfo->setDate(_dLastNew);
 
-	Transaction *currtran = new Transaction( this, info->name(),
+	Transaction *currtran = new Transaction( this, true, info->name(),
 											 traninfo,
 											 _pCfg );
 	currtran->showMaximized();
@@ -484,14 +494,22 @@ void Checkbook::slotNewTran()
 		QString stramount;
 		amount = (traninfo->withdrawal() ? -1 : 1)*traninfo->amount();
 		stramount.sprintf( "%s%.2f", _pCfg->getCurrencySymbol().latin1(), amount );
-		( void ) new CBListItem( traninfo, tranTable, traninfo->getIdStr(),
-                                 traninfo->number(), traninfo->datestr(), traninfo->desc(),
+		( void ) new CBListItem( traninfo, tranTable, traninfo->getIdStr(), traninfo->datestr(false),
+                                 traninfo->number(), traninfo->datestr(true), traninfo->desc(),
 								 stramount );
         resort();
 		adjustBalance();
 
         // save last date
         _dLastNew = traninfo->date();
+
+        // save description in list of payees, if not in there
+        QStringList *pLst=&_pCfg->getPayees();
+        if( _pCfg->getSavePayees() && pLst->contains(traninfo->desc())==0 ) {
+            pLst->append( traninfo->desc() );
+            pLst->sort();
+            _pCfg->setDirty(true);
+        }
 	}
 	else
 	{
@@ -499,22 +517,25 @@ void Checkbook::slotNewTran()
 	}
 }
 
+
+// --- slotEditTran -----------------------------------------------------------
 void Checkbook::slotEditTran()
 {
 	QListViewItem *curritem = tranTable->currentItem();
 	if ( !curritem )
 		return;
-	
+
 	TranInfo *traninfo=info->findTransaction( curritem->text(COL_ID) );
 
-	Transaction *currtran = new Transaction( this, info->name(),
+	Transaction *currtran = new Transaction( this, false, info->name(),
 											 traninfo,
 											 _pCfg );
 	currtran->showMaximized();
 	if ( currtran->exec() == QDialog::Accepted )
 	{
 		curritem->setText( COL_NUM, traninfo->number() );
-		curritem->setText( COL_DATE, traninfo->datestr() );
+        curritem->setText( COL_SORTDATE, traninfo->datestr(false) );
+		curritem->setText( COL_DATE, traninfo->datestr(true) );
 		curritem->setText( COL_DESC, traninfo->desc() );
 
 		float amount = traninfo->amount();
@@ -527,11 +548,47 @@ void Checkbook::slotEditTran()
 		curritem->setText( COL_AMOUNT, stramount );
         resort();
         adjustBalance();
+
+        // save description in list of payees, if not in there
+        QStringList *pLst=&_pCfg->getPayees();
+        if( _pCfg->getSavePayees() && pLst->contains(traninfo->desc())==0 ) {
+            pLst->append( traninfo->desc() );
+            pLst->sort();
+            _pCfg->setDirty(true);
+        }
 	}
 
 	delete currtran;
 }
 
+// --- slotMenuTran -----------------------------------------------------------
+void Checkbook::slotMenuTran(QListViewItem *item, const QPoint &pnt)
+{
+    // active item?
+    if( !item )
+        return;
+
+    // Display menu
+    QPopupMenu m;
+	m.insertItem( QWidget::tr( "Edit" ), 1 );
+	m.insertItem( QWidget::tr( "New" ), 2 );
+	m.insertItem( QWidget::tr( "Delete" ), 3 );
+	int r = m.exec( pnt );
+    switch(r) {
+    case 1:
+        slotEditTran();
+        break;
+    case 2:
+        slotNewTran();
+        break;
+    case 3:
+        slotDeleteTran();
+        break;
+    }
+}
+
+
+// --- slotDeleteTran ---------------------------------------------------------
 void Checkbook::slotDeleteTran()
 {
 	QListViewItem *curritem = tranTable->currentItem();
@@ -591,7 +648,7 @@ void Checkbook::drawBalanceChart()
 		balance += amount;
 		if ( i == 1 || i == count / 2 || i == count )
 		{
-			label = tran->datestr();
+			label = tran->datestr(true);
 		}
 		else
 		{
@@ -666,6 +723,7 @@ void CBListItem::paintCell( QPainter *p, const QColorGroup &cg, int column, int 
 	QListViewItem::paintCell(p, _cg, column, width, align);
 }
 
+// --- CBListItem::isAltBackground --------------------------------------------
 bool CBListItem::isAltBackground()
 {
 	QListView *lv = static_cast<QListView *>( listView() );
@@ -723,8 +781,9 @@ void Checkbook::slotSortChanged( const QString &selc )
     } else if( selc==tr("Number") ) {
         _sortCol=COL_NUM;
     } else if( selc==tr("Date") ) {
-        _sortCol=COL_DATE;
+        _sortCol=COL_SORTDATE;
     }
     info->setSortOrder( selc );
     resort();
 }
+

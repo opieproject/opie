@@ -58,7 +58,6 @@ MainWindow::MainWindow( QWidget* parent, const char* name, WFlags fl )
 
 	// Load configuration options
 	Config config( "checkbook" );
-qDebug( "Reading config" );
     _cfg.readConfig( config );
 
 
@@ -314,6 +313,12 @@ void MainWindow::openBook(QListViewItem *curritem)
 			tempstr.sprintf( "%s%.2f", _cfg.getCurrencySymbol().latin1(), cb->balance() );
 			curritem->setText( posName + 1, tempstr );
 		}
+
+        // write config, if needed
+        if( _cfg.isDirty() ) {
+            Config config("checkbook");
+            _cfg.writeConfig( config );
+        }
 	}
 	delete currcb;
 }

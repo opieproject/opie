@@ -47,12 +47,14 @@ class Transaction : public QDialog
 	Q_OBJECT
 
 	public:
-		Transaction( QWidget *, const QString &, TranInfo *, Cfg *);
+		Transaction( QWidget *, bool, const QString &, TranInfo *, Cfg *);
 		~Transaction();
 
-	private:
-		TranInfo *tran;
+        void initFromInfo(TranInfo *, bool=false);
 
+  	private:
+		TranInfo *tran;
+        bool _bNew;
 		Cfg *_pCfg;
 
 		QRadioButton   *withBtn;
@@ -60,7 +62,7 @@ class Transaction : public QDialog
 		QPushButton    *dateBtn;
 		DateBookMonth  *datePicker;
 		QLineEdit      *numEdit;
-		QLineEdit      *descEdit;
+        QComboBox      *_cbDesc;
 		QComboBox      *catList;
 		QComboBox      *typeList;
 		QLineEdit      *amtEdit;
@@ -74,6 +76,8 @@ class Transaction : public QDialog
 		void slotWithdrawalClicked();
 		void slotDepositClicked();
 		void slotDateChanged( int, int, int );
+        void slotActivated(const QString & );
+        void slotNotNew();
 };
 
 #endif
