@@ -157,8 +157,6 @@ BenchmarkInfo::BenchmarkInfo( QWidget *parent, const char *name, int wFlags )
             machines.insert( machline, new QStringList( QStringList::split( ",", resline ) ) );
             machineCombo->insertItem( machline );
         }
-
-        hb->addWidget( new QLabel( tr( "Compare:" ), this ) );
         hb->addWidget( machineCombo, 2 );
         connect( machineCombo, SIGNAL( activated(int) ), this, SLOT( machineActivated(int) ) );
     }
