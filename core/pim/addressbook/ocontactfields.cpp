@@ -1,4 +1,4 @@
- 
+
 #include "ocontactfields.h"
 
 #include <qstringlist.h>
@@ -6,6 +6,7 @@
 
 // We should use our own enum in the future ..
 #include <qpe/recordfields.h>
+#include <qpe/config.h>
 #include <opie/ocontact.h>
 
 /*!
@@ -209,7 +210,7 @@ QStringList OContactFields::untrfields( bool sorted )
 QMap<int, QString> OContactFields::idToTrFields()
 {
 	QMap<int, QString> ret_map;
-	
+
 	ret_map.insert( Qtopia::Title, QObject::tr( "Name Title") );
 	ret_map.insert( Qtopia::FirstName, QObject::tr( "First Name" ) );
 	ret_map.insert( Qtopia::MiddleName, QObject::tr( "Middle Name" ) );
@@ -264,7 +265,7 @@ QMap<int, QString> OContactFields::idToTrFields()
 
 	// other
 	ret_map.insert( Qtopia::Notes, QObject::tr( "Notes" ) );
-	
+
 
 	return ret_map;
 }
@@ -278,12 +279,12 @@ QMap<QString, int> OContactFields::trFieldsToId()
         QMap<int, QString>::Iterator it;
         for( it = idtostr.begin(); it != idtostr.end(); ++it )
 		ret_map.insert( *it, it.key() );
-	
+
 
 	return ret_map;
 }
 
-OContactFields::OContactFields(): 
+OContactFields::OContactFields():
 	fieldOrder( DEFAULT_FIELD_ORDER )
 {
 }
@@ -292,10 +293,13 @@ OContactFields::~OContactFields(){
 }
 
 
- 
+
 void OContactFields::saveToRecord( OContact &cnt ){
   qDebug("ocontactfields saveToRecord: >%s<",fieldOrder.latin1());
   cnt.setCustomField( CONTACT_FIELD_ORDER_NAME, fieldOrder );
+  Config cfg ( "AddressBook" );
+  cfg.setGroup( "ContactFieldOrder" );
+  cfg.writeEntry( "General", fieldOrder );
 }
 
 void OContactFields::loadFromRecord( OContact &cnt ){
@@ -303,8 +307,12 @@ void OContactFields::loadFromRecord( OContact &cnt ){
   qDebug("loading >%s<",cnt.fullName().latin1());
   fieldOrder = cnt.customField( CONTACT_FIELD_ORDER_NAME );
   qDebug("loaded fieldOrder >%s<",fieldOrder.latin1());
-  if (fieldOrder.isEmpty()) fieldOrder = DEFAULT_FIELD_ORDER;
-  qDebug("effective fieldOrder >%s<",fieldOrder.latin1());
+  if (fieldOrder.isEmpty()){
+      Config cfg ( "AddressBook" );
+      cfg.setGroup( "ContactFieldOrder" );
+      fieldOrder = cfg.readEntry( "General", DEFAULT_FIELD_ORDER );
+  }
+  qDebug("effective fieldOrder in loadFromRecord >%s<",fieldOrder.latin1());
 }
 
 void OContactFields::setFieldOrder( int pos, int index ){
@@ -316,15 +324,15 @@ void OContactFields::setFieldOrder( int pos, int index ){
 int OContactFields::getFieldOrder( int pos ){
   qDebug("ocontactfields getFieldOrder");
 
-  if( fieldOrder.isEmpty() ){ 
+  if( fieldOrder.isEmpty() ){
 	  qDebug("PANIC fieldOrder empty");
 	  fieldOrder = "                ";
-  }else 
+  }else
 	  qDebug("fieldOrder ok");
 
   qDebug("fieldOrder >%s<",fieldOrder.latin1());
   bool ok;
-  int ret = 0; 
+  int ret = 0;
 
   QChar poschar = fieldOrder[pos];
   if ( !( poschar == QChar::null ) )
