@@ -1,7 +1,7 @@
 /*
  * datebookplugin.h
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002, 2003 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -30,16 +30,19 @@ public:
 		    QWidget* parent = 0,
 		    bool show_location = 0,
 		    bool show_notes = 0,
+		    bool timeExtraLine = 0,
 		    int maxCharClip = 0,
 		    const char* name = 0,
 		    WFlags fl = 0 );
      ~DateBookEvent();
+
  signals:
      void editEvent( const Event &e );
      
 private slots:
     void editEventSlot( const Event &e );
     void editMe();
+
  private:
   
     QString ampmTime( QTime );

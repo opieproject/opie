@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>232</width>
+            <width>228</width>
             <height>267</height>
         </rect>
     </property>
@@ -75,6 +75,17 @@
             <property>
                 <name>whatsThis</name>
                 <string>Check this if only appointments later then current time should be shown</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QCheckBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>CheckBox4</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Show time in extra line</string>
             </property>
         </widget>
         <widget>

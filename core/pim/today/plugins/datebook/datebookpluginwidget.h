@@ -53,7 +53,8 @@ private:
     // should only later appointments be shown or all for the current day.
     bool m_onlyLater;
     int m_moreDays;
-
+    // true if time of an appointment should be an extra line
+    bool m_timeExtraLine;
 };
 
 #endif

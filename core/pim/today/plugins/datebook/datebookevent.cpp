@@ -1,7 +1,7 @@
 /*
  * datebookevent.cpp
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002, 2003 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -28,6 +28,7 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
 			     QWidget* parent,
 			     bool show_location,
 			     bool show_notes,
+                             bool timeExtraLine,
                              int maxCharClip,
                              const char* name,
 			     WFlags fl) :
@@ -52,14 +53,20 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
         msg += "<BR><i>" + (ev).location() + "</i>";
     }
 
+    QString timeSpacer = "   ";
+    if ( timeExtraLine )  {
+        timeSpacer = "<br>";
+    }
+
     if ( ( TimeString::timeString( QTime( (ev).event().start().time() ) ) == "00:00" )
          &&  ( TimeString::timeString( QTime( (ev).event().end().time() ) ) == "23:59" ) ) {
-        msg += "<br>All day";
+        msg += timeSpacer;
+        msg += tr ( "All day" );
     }  else {
         // start time of event
         QDate tempDate = (ev).event().start().date();
-        msg += "<br>"
-               + ampmTime( QTime( (ev).event().start().time() ) )
+        msg += timeSpacer;
+        msg += ampmTime( QTime( (ev).event().start().time() ) )
                // end time of event
                + "<b> - </b>" + ampmTime( QTime( (ev).event().end().time() ) )
                + differDate( tempDate );

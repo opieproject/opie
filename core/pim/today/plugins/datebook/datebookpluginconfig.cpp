@@ -48,6 +48,7 @@ void DatebookPluginConfig::readConfig() {
     m_show_notes = cfg.readNumEntry( "shownotes", 0 );
     m_gui->CheckBox2->setChecked( m_show_notes );
     m_only_later = cfg.readNumEntry( "onlylater", 1 );
+    m_gui->CheckBox4->setChecked( cfg.readNumEntry( "timeextraline", 1 ) );
     m_gui->CheckBox3->setChecked( m_only_later );
     m_more_days = cfg.readNumEntry( "moredays", 0 );
     m_gui->SpinBox2->setValue( m_more_days );
@@ -65,6 +66,7 @@ void DatebookPluginConfig::writeConfig() {
     m_show_notes = m_gui->CheckBox2->isChecked();
     cfg.writeEntry( "shownotes", m_show_notes );
     m_only_later  = m_gui->CheckBox3->isChecked();
+    cfg.writeEntry( "timeextraline",  m_gui->CheckBox4->isChecked() );
     cfg.writeEntry( "onlylater", m_only_later );
     m_more_days = m_gui->SpinBox2->value();
     cfg.writeEntry( "moredays", m_more_days );

@@ -56,6 +56,7 @@ void DatebookPluginWidget::readConfig() {
     m_show_notes = cfg.readNumEntry( "shownotes", 0 );
     m_onlyLater = cfg.readNumEntry( "onlylater", 1 );
     m_moreDays = cfg.readNumEntry( "moredays", 0 );
+    m_timeExtraLine = cfg.readNumEntry( "timeextraline",  1 );
 }
 
 void DatebookPluginWidget::reinitialize()  {
@@ -98,14 +99,14 @@ void DatebookPluginWidget::getDates() {
             if ( count < m_max_lines_meet ) {
                 if ( !m_onlyLater ) {
                     count++;
-                    DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes );
+                    DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes, m_timeExtraLine );
                     m_eventsList.append( l );
                     l->show();
                     QObject::connect ( l, SIGNAL( editEvent( const Event & ) ), l, SLOT( editEventSlot( const Event & ) ) );
                 } else if ( ( QDateTime::currentDateTime()  <=  (*it).event().end() )  || ( ( (*it).event().start().date() != date ) &&  (  QDateTime::currentDateTime()  <=  (*it).event().end() )  )  ) {
                     count++;
                     // show only later appointments
-                    DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes );
+                    DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes, m_timeExtraLine );
                     m_eventsList.append( l );
                     l->show();
                     QObject::connect ( l, SIGNAL( editEvent( const Event & ) ), l, SLOT( editEventSlot( const Event & ) ) );
