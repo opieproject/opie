@@ -177,6 +177,8 @@ namespace XINE {
          */
         int error() const;
 
+        void ensureInitialized();
+
     signals:
 
         void stopped();

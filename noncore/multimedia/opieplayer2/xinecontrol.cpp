@@ -45,7 +45,6 @@ XineControl::XineControl( XineVideoWidget *xineWidget,
                           QObject *parent, const char *name )
     : QObject( parent, name ), mediaPlayerState( _mediaPlayerState ), xineVideoWidget( xineWidget )
 {
-
     libXine = new XINE::Lib( XINE::Lib::InitializeImmediately, xineWidget );
 
     init();
@@ -56,6 +55,8 @@ XineControl::XineControl( XINE::Lib *xine, XineVideoWidget *xineWidget,
                           QObject *parent, const char *name )
     : QObject( parent, name ), libXine( xine ), mediaPlayerState( _mediaPlayerState ), xineVideoWidget( xineWidget )
 {
+    xine->ensureInitialized();
+
     init();
 }
 

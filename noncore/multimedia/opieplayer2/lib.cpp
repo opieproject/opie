@@ -99,7 +99,8 @@ Lib::Lib( InitializationMode initMode, XineVideoWidget* widget )
 
 void Lib::run()
 {
-    assert( false );
+    initialize();
+    m_initialized = true;
 }
 
 void Lib::initialize()
@@ -282,6 +283,16 @@ int Lib::error() const {
 
     return xine_get_error( m_stream );
 };
+
+void Lib::ensureInitialized()
+{
+    if ( m_initialized )
+        return;
+
+    qDebug( "waiting for initialization thread to finish" );
+    wait();
+    qDebug( "initialization thread finished!" );
+}
 
 void Lib::receiveMessage( ThreadUtil::ChannelMessage *msg, SendType sendType )
 {
