@@ -40,10 +40,11 @@ _;:,   .>  :=|.         This file is free software; you can
 #include <qwhatsthis.h>
 
 PackageInfoDlg::PackageInfoDlg( QWidget *parent, OPackageManager *pm, const QString &package )
-    : QWidget( 0x0 )
+    : QWidget( 0l )
     , m_packman( pm )
     , m_information( this )
     , m_files( this )
+    , m_retrieveFiles( 0l )
 {
     // Initialize UI
     if ( parent )
@@ -88,18 +89,21 @@ PackageInfoDlg::PackageInfoDlg( QWidget *parent, OPackageManager *pm, const QStr
         m_files.setReadOnly( true );
         filesLayout->addWidget( &m_files );
 
-        QPushButton *btn = new QPushButton( Resource::loadPixmap( "packagemanager/apply" ),
-                                            tr( "Retrieve file list" ), filesWidget );
-        QWhatsThis::add( btn, tr( "Tap here to retrieve list of files contained in this package." ) );
-        filesLayout->addWidget( btn );
-        connect( btn, SIGNAL(clicked()), this, SLOT(slotBtnFileScan()) );
-        tabWidget->addTab( filesWidget, "binary", tr( "File list" ) );
-
-        tabWidget->setCurrentTab( tr( "Information" ) );
-
         // If file list is already cached, display
         if ( !m_package->files().isNull() )
             m_files.setText( m_package->files() );
+        else
+        {
+            m_retrieveFiles = new QPushButton( Resource::loadPixmap( "packagemanager/apply" ),
+                                            tr( "Retrieve file list" ), filesWidget );
+            QWhatsThis::add( m_retrieveFiles, tr( "Tap here to retrieve list of files contained in this package." ) );
+            filesLayout->addWidget( m_retrieveFiles );
+            connect( m_retrieveFiles, SIGNAL(clicked()), this, SLOT(slotBtnFileScan()) );
+        }
+
+        tabWidget->addTab( filesWidget, "binary", tr( "File list" ) );
+        tabWidget->setCurrentTab( tr( "Information" ) );
+
     }
     else
         m_files.hide();
@@ -115,7 +119,7 @@ PackageInfoDlg::~PackageInfoDlg()
         m_package->setInformation( m_information.text() );
 
     // Cache package file list
-    if ( !m_files.text().isNull() )
+    if ( !m_files.text().isEmpty() )
         m_package->setFiles( m_files.text() );
 }
 
@@ -125,6 +129,9 @@ void PackageInfoDlg::slotBtnFileScan()
 
     QStringList list( m_package->name() );
     m_packman->executeCommand( OPackage::Files, list, QString::null, this, SLOT(slotFiles(char*)), true );
+
+    if ( m_retrieveFiles )
+        m_retrieveFiles->hide();
 }
 
 void PackageInfoDlg::slotInfo( char *info )

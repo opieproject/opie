@@ -1,3 +1,11 @@
+2004-12-21 Dan Williams <drw@handhelds.org>
+
+    * Released version 0.6.0
+    * Added support for Ipkg 'src/gz' feeds
+    * Improve server and destination tabs UI's in configuration dialog
+    * Fix app linking to link all dependent packages as well as selected packages
+    * Hide 'Retrive File List' button once list is retrieved in Package Info dialog
+
 2004-11-18 Dan Williams <drw@handhelds.org>
 
     * Released version 0.5.0
