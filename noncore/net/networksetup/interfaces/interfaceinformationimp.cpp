@@ -26,7 +26,7 @@ InterfaceInformationImp::InterfaceInformationImp(QWidget *parent, const char *na
  * @param Intarface *i the interface to update (should be the one we already
  *                     know about).
  */ 
-void InterfaceInformationImp::updateInterface(Interface *i){
+void InterfaceInformationImp::updateInterface(Interface *){
   if(interface->getStatus()){
     startButton->setEnabled(false);
     stopButton->setEnabled(true);

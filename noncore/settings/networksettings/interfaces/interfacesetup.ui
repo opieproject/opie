@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>290</width>
+            <width>286</width>
             <height>280</height>
         </rect>
     </property>
@@ -40,74 +40,19 @@
             </property>
         </widget>
         <widget>
-            <class>QLayoutWidget</class>
+            <class>QCheckBox</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Layout9</cstring>
+                <cstring>dhcpCheckBox</cstring>
             </property>
-            <hbox>
-                <property stdset="1">
-                    <name>margin</name>
-                    <number>0</number>
-                </property>
-                <property stdset="1">
-                    <name>spacing</name>
-                    <number>6</number>
-                </property>
-                <widget>
-                    <class>QCheckBox</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>dhcpCheckBox</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>DHCP</string>
-                    </property>
-                    <property stdset="1">
-                        <name>checked</name>
-                        <bool>true</bool>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QLabel</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>leaseHoursLabel</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Requested Lease</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QSpinBox</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>leaseTime</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>suffix</name>
-                        <string> hours</string>
-                    </property>
-                    <property stdset="1">
-                        <name>maxValue</name>
-                        <number>87600</number>
-                    </property>
-                    <property stdset="1">
-                        <name>minValue</name>
-                        <number>1</number>
-                    </property>
-                    <property stdset="1">
-                        <name>lineStep</name>
-                        <number>24</number>
-                    </property>
-                    <property stdset="1">
-                        <name>value</name>
-                        <number>168</number>
-                    </property>
-                </widget>
-            </hbox>
+            <property stdset="1">
+                <name>text</name>
+                <string>DHCP</string>
+            </property>
+            <property stdset="1">
+                <name>checked</name>
+                <bool>true</bool>
+            </property>
         </widget>
         <widget>
             <class>QGroupBox</class>
@@ -281,18 +226,6 @@
     <connection>
         <sender>dhcpCheckBox</sender>
         <signal>toggled(bool)</signal>
-        <receiver>leaseHoursLabel</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>dhcpCheckBox</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>leaseTime</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>dhcpCheckBox</sender>
-        <signal>toggled(bool)</signal>
         <receiver>staticGroupBox</receiver>
         <slot>setDisabled(bool)</slot>
     </connection>
@@ -300,7 +233,6 @@
 <tabstops>
     <tabstop>autoStart</tabstop>
     <tabstop>dhcpCheckBox</tabstop>
-    <tabstop>leaseTime</tabstop>
     <tabstop>ipAddressEdit</tabstop>
     <tabstop>subnetMaskEdit</tabstop>
     <tabstop>gatewayEdit</tabstop>

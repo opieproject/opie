@@ -50,11 +50,8 @@ bool InterfaceSetupImp::saveSettings(){
   interfaces.removeAllInterfaceOptions();
   
   // DHCP
-  if(dhcpCheckBox->isChecked()){
+  if(dhcpCheckBox->isChecked())
     interfaces.setInterfaceMethod(INTERFACES_METHOD_DHCP);
-    interfaces.setInterfaceOption("leasehours", QString("%1").arg(leaseTime->value()));
-    interfaces.setInterfaceOption("leasetime", QString("%1").arg(leaseTime->value()*60*60));
-  }
   else{
     interfaces.setInterfaceMethod("static");
     interfaces.setInterfaceOption("address", ipAddressEdit->text());
@@ -122,11 +119,6 @@ void InterfaceSetupImp::setProfile(const QString &profile){
     dhcpCheckBox->setChecked(true);
   else
     dhcpCheckBox->setChecked(false);
-  leaseTime->setValue(interfaces.getInterfaceOption("leasehours", error).toInt());
-  if(error)
-    leaseTime->setValue(interfaces.getInterfaceOption("leasetime", error).toInt()/60/60);
-  if(error)
-    leaseTime->setValue(24);
 
   // IP Information
   autoStart->setChecked(interfaces.isAuto(interface->getInterfaceName()));
@@ -138,7 +130,6 @@ void InterfaceSetupImp::setProfile(const QString &profile){
   ipAddressEdit->setText(interfaces.getInterfaceOption("address", error));
   subnetMaskEdit->setText(interfaces.getInterfaceOption("netmask", error));
   gatewayEdit->setText(interfaces.getInterfaceOption("gateway", error)); 
-
 }
   
 // interfacesetup.cpp
