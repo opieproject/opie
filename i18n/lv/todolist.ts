@@ -164,15 +164,15 @@ Saraksts attēlo sekojošu informāciju:
     </message>
     <message>
         <source>All Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Visas Kategorijas</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Neaizpildīts</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepietiek vietas</translation>
     </message>
     <message>
         <source>Todo was unable
@@ -181,79 +181,84 @@ Free up some space
 and try again.
 
 Quit Anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzdevumi nevarēja
+saglabāt izmaiņas
+Atbrīvojiet nedaudz vietas
+un pamēģiniet atkal.
+
+Vai Begit?</translation>
     </message>
     <message>
         <source>Todo</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzdevumi</translation>
     </message>
     <message>
         <source>Data can not be edited, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Datus nevar labot, patreiz notiek sinhronizācija</translation>
     </message>
     <message>
         <source>all tasks?</source>
-        <translation type="unfinished"></translation>
+        <translation>visi uzdevumi?</translation>
     </message>
     <message>
         <source>all completed tasks?</source>
-        <translation type="unfinished"></translation>
+        <translation>visi izpildītie uzdevumi?</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt; pienākuši %1 jauni uzdevumi.&lt;p&gt;Vai vēlaties tos pievienot Darbu sarakstam?</translation>
     </message>
     <message>
         <source>New Tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Jaunie Uzdevumi</translation>
     </message>
     <message>
         <source>Data can&apos;t be edited, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Datus nevar labot, patreiz notiek sinhronizācija</translation>
     </message>
     <message>
         <source>C.</source>
-        <translation type="unfinished"></translation>
+        <translation>C.</translation>
     </message>
     <message>
         <source>Priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Prioritāte</translation>
     </message>
     <message>
         <source>Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Apkopojums</translation>
     </message>
     <message>
         <source>Deadline</source>
-        <translation type="unfinished"></translation>
+        <translation>Termiņš</translation>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurēt Sagataves</translation>
     </message>
     <message>
         <source>Template Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Sagatavju Redaktors</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nosaukums</translation>
     </message>
     <message>
         <source>New Template %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauna Sagatave %1</translation>
     </message>
     <message>
         <source>Click here to set the priority of new task.
@@ -261,7 +266,11 @@ Quit Anyway?</source>
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai norādītu jaunā uzdevuma prioritāti.
+
+Šis lauks tiek saukts par ātro uzdevumjoslu.
+
+Tas ļauj jums ātri pievienot sarakstam jaunus uzdevumus.  Šo laukumu var parādīt vai paslēpt izvēloties Opcijas-&gt;&apos;Rādīt ātro uzdevumu joslu&apos; no izvēlnes zemāk.</translation>
     </message>
     <message>
         <source>Enter description of new task here.
@@ -269,11 +278,15 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šeit ievadiet uzdevumu aprakstu.
+
+Šis lauks tiek saukts par ātro uzdevumjoslu.
+
+Tas ļauj jums ātri pievienot sarakstam jaunus uzdevumus.  Šo laukumu var parādīt vai paslēpt izvēloties Opcijas-&gt;&apos;Rādīt ātro uzdevumu joslu&apos; no izvēlnes zemāk.</translation>
     </message>
     <message>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>Vairāk</translation>
     </message>
     <message>
         <source>Click here to enter additional information for new task.
@@ -281,11 +294,15 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai pievienotu uzdevuma papildus informāciju.
+
+Šis lauks tiek saukts par ātro uzdevumjoslu.
+
+Tas ļauj jums ātri pievienot sarakstam jaunus uzdevumus.  Šo laukumu var parādīt vai paslēpt izvēloties Opcijas-&gt;&apos;Rādīt ātro uzdevumu joslu&apos; no izvēlnes zemāk.</translation>
     </message>
     <message>
         <source>Enter</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadīt</translation>
     </message>
     <message>
         <source>Click here to add new task.
@@ -293,11 +310,15 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet lai pievienotu jaunu uzdevumu.
+
+Šis lauks tiek saukts par ātro uzdevumjoslu.
+
+Tas ļauj jums ātri pievienot sarakstam jaunus uzdevumus.  Šo laukumu var parādīt vai paslēpt izvēloties Opcijas-&gt;&apos;Rādīt ātro uzdevumu joslu&apos; no izvēlnes zemāk.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Atlikt</translation>
     </message>
     <message>
         <source>Click here to reset new task information.
@@ -305,283 +326,287 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai nomestu uzdevuma informāciju.
+
+Šis lauks tiek saukts par ātro uzdevumjoslu.
+
+Tas ļauj jums ātri pievienot sarakstam jaunus uzdevumus.  Šo laukumu var parādīt vai paslēpt izvēloties Opcijas-&gt;&apos;Rādīt ātro uzdevumu joslu&apos; no izvēlnes zemāk.</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prioritāte:</translation>
     </message>
 </context>
 <context>
     <name>TableView</name>
     <message>
         <source>Table View</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabulas Skats</translation>
     </message>
     <message>
         <source>%1 day(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 diena(s)</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Nekas</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorAlarms</name>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datums</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Laiks</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tips</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorOverView</name>
     <message>
         <source>Summary:</source>
-        <translation type="unfinished"></translation>
+        <translation>Apkopojums:</translation>
     </message>
     <message>
         <source>Enter brief description of the task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šeit ievadiet uzdevumu aprakstu.</translation>
     </message>
     <message>
         <source>Complete </source>
-        <translation type="unfinished"></translation>
+        <translation>Pabeigts</translation>
     </message>
     <message>
         <source>Work on </source>
-        <translation type="unfinished"></translation>
+        <translation>Strādā pie</translation>
     </message>
     <message>
         <source>Buy </source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
     <message>
         <source>Organize </source>
-        <translation type="unfinished"></translation>
+        <translation>Organizēt</translation>
     </message>
     <message>
         <source>Get </source>
-        <translation type="unfinished"></translation>
+        <translation>Saņemt</translation>
     </message>
     <message>
         <source>Update </source>
-        <translation type="unfinished"></translation>
+        <translation>Atjaunot</translation>
     </message>
     <message>
         <source>Create </source>
-        <translation type="unfinished"></translation>
+        <translation>Izveidot</translation>
     </message>
     <message>
         <source>Plan </source>
-        <translation type="unfinished"></translation>
+        <translation>Plāns</translation>
     </message>
     <message>
         <source>Call </source>
-        <translation type="unfinished"></translation>
+        <translation>Zvans</translation>
     </message>
     <message>
         <source>Mail </source>
-        <translation type="unfinished"></translation>
+        <translation>Pasts</translation>
     </message>
     <message>
         <source>Select priority of task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šeit izvēlaties uzdevuma prioritāti.</translation>
     </message>
     <message>
         <source>Very High</source>
-        <translation type="unfinished"></translation>
+        <translation>Ļoti Augsta</translation>
     </message>
     <message>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Augsta</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normāla</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Zema</translation>
     </message>
     <message>
         <source>Very Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Ļoti Zema</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorija:</translation>
     </message>
     <message>
         <source>Select category to organize this task with.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlaties uzdevuma organizācijas kategoriju.</translation>
     </message>
     <message>
         <source>Recurring task</source>
-        <translation type="unfinished"></translation>
+        <translation>Atkārtots uzdevums</translation>
     </message>
     <message>
         <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit ja uzdevums atkārtojas regulāri.  Ja tas ir atzīmēts, frekvenci var uzstādīt Atkārtošanās tabā.</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Apraksts:</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet papildus informāciju, ja nepieciešams.</translation>
     </message>
     <message>
         <source>Todo List</source>
-        <translation type="unfinished"></translation>
+        <translation>Darbu Saraksts</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorStatus</name>
     <message>
         <source>Status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Statuss:</translation>
     </message>
     <message>
         <source>Click here to set the current status of this task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai norādītu uzdevuma tekošo statusu.</translation>
     </message>
     <message>
         <source>Started</source>
-        <translation type="unfinished"></translation>
+        <translation>Sākts</translation>
     </message>
     <message>
         <source>Postponed</source>
-        <translation type="unfinished"></translation>
+        <translation>Atlikts</translation>
     </message>
     <message>
         <source>Finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Pabeigts</translation>
     </message>
     <message>
         <source>Not started</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav sākts</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation type="unfinished"></translation>
+        <translation>Progress:</translation>
     </message>
     <message>
         <source>Select progress made on this task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šeit norādiet uzdevuma patreizējo progresu.</translation>
     </message>
     <message>
         <source>0 %</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>20 %</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>40 %</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>60 %</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>80 %</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>100 %</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Start Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sākuma Datums:</translation>
     </message>
     <message>
         <source>Click here to set the date this task was started.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai uzstādītu datumu iesāktam uzdevumam.</translation>
     </message>
     <message>
         <source>Due Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Līdz Datumam:</translation>
     </message>
     <message>
         <source>Click here to set the date this task needs to be completed by.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai uzstādītu šī uzdevuma plānoto pabeigšanas datumu.</translation>
     </message>
     <message>
         <source>Completed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pabeigts:</translation>
     </message>
     <message>
         <source>Click here to mark this task as completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai norādītu ka uzdevums ir pabeigts.</translation>
     </message>
     <message>
         <source>Click here to set the date this task was completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai uzstādītu uzdevuma pabeigšanas datumu.</translation>
     </message>
     <message>
         <source>Maintainer Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzturētāja Režīms:</translation>
     </message>
     <message>
         <source>Click here to set the maintainer&apos;s role.</source>
-        <translation type="unfinished"></translation>
+        <translation>Noklikšķiniet šeit lai uzstādītu uzturētāja lomu.</translation>
     </message>
     <message>
         <source>Nothing</source>
-        <translation type="unfinished"></translation>
+        <translation>Nekas</translation>
     </message>
     <message>
         <source>Responsible</source>
-        <translation type="unfinished"></translation>
+        <translation>Atbildīgs</translation>
     </message>
     <message>
         <source>Done By</source>
-        <translation type="unfinished"></translation>
+        <translation>Darba veicējs</translation>
     </message>
     <message>
         <source>Coordinating</source>
-        <translation type="unfinished"></translation>
+        <translation>Korrdinators</translation>
     </message>
     <message>
         <source>Maintainer:</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzturētājs:</translation>
     </message>
     <message>
         <source>This is the name of the current task maintainer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šis ir tekošā uzdevuma uzturētājs.</translation>
     </message>
     <message>
         <source>test</source>
-        <translation type="unfinished"></translation>
+        <translation>test</translation>
     </message>
     <message>
         <source>Click here to select the task maintainer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai izvēlētos uzdevuma uzturētāju.</translation>
     </message>
 </context>
 </TS>
