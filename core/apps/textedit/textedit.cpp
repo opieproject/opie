@@ -942,8 +942,7 @@ bool TextEdit::saveAs() {
                 filePerm = new filePermissions(this,
                                                tr("Permissions"),true,
                                                0,(const QString &)fileNm);
-                filePerm->showMaximized();
-                filePerm->exec();
+                QPEApplication::execDialog( filePerm );
 
                 if( filePerm)
                     delete  filePerm;
@@ -1016,8 +1015,7 @@ void TextEdit::changeFont() {
   lay-> addWidget ( ofs );
   ofs-> setSelectedFont ( editor-> font ( ));
 
-  d-> showMaximized ( );
-    if ( d-> exec ( ) == QDialog::Accepted )
+    if ( QPEApplication::execDialog( d ) == QDialog::Accepted )
       editor-> setFont ( ofs-> selectedFont ( ));
     delete d;
 

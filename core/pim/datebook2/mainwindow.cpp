@@ -229,24 +229,21 @@ void MainWindow::slotAction( QAction* act ) {
 void MainWindow::slotConfigureLocs() {
     LocationManagerDialog dlg( locationManager() );
     dlg.setCaption( tr("Configure Locations") );
-    dlg.showMaximized();
-    if (dlg.exec() == QDialog::Accepted ) {
+    if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted ) {
         setLocationManager( dlg.manager() );
     }
 }
 void MainWindow::slotConfigureDesc() {
     DescriptionManagerDialog dlg( descriptionManager() );
     dlg.setCaption( tr("Configure Descriptions") );
-    dlg.showMaximized();
-    if (dlg.exec() == QDialog::Accepted ) {
+    if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted ) {
         setDescriptionManager( dlg.manager() );
     }
 }
 void MainWindow::slotConfigureTemp() {
     TemplateDialog dlg( templateManager(), editor() );
     dlg.setCaption( tr("Configure Templates") );
-    dlg.showMaximized();
-    if ( dlg.exec() == QDialog::Accepted ) {
+    if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted ) {
         m_tempMan = dlg.manager();
         setTemplateMenu();
     }

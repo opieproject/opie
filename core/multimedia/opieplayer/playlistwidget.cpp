@@ -949,8 +949,7 @@ void PlayListWidget::listDelete() {
       for ( ; Pdit.current(); ++Pdit ) {
          if( Pdit.current()->name() == file) {
             LnkProperties prop( Pdit.current() );
-            prop.showMaximized();
-            prop.exec();
+            QPEApplication::execDialog( &prop );
          }
       }
       populateAudioView();

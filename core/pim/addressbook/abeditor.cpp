@@ -530,8 +530,7 @@ void AbEditor::saveEntry()
 
 void AbEditor::slotNote()
 {
-    dlgNote->showMaximized();
-    if ( !dlgNote->exec() ) {
+    if ( ! QPEApplication::execDialog( &dlgNote ) ) {
 	// reset the note...
 	txtNote->setText( ent.notes() );
     }

@@ -282,8 +282,7 @@ void AddressbookWindow::slotConfig()
 {
 	ConfigDlg* dlg = new ConfigDlg( this, "Config" );
 	dlg -> setConfig( m_config );
-	dlg -> showMaximized();
-	if ( dlg -> exec() ) {
+	if ( QPEApplication::execDialog( dlg ) ) {
 		qWarning ("Config Dialog accepted!");
 		m_config = dlg -> getConfig();
 		if ( m_curFontSize != m_config.fontSize() ){
@@ -750,12 +749,9 @@ void AddressbookWindow::editEntry( EntryMode entryMode )
 	// other things may change the caption.
 	abEditor->setCaption( tr("Edit Address") );
 
-#if defined(Q_WS_QWS) || defined(_WS_QWS_)
-	abEditor->showMaximized();
-#endif
 	// fix the foxus...
 	abEditor->setNameFocus();
-	if ( abEditor->exec() ) {
+	if ( QPEApplication::execDialog( abEditor ) ) {
 		setFocus();
 		if ( entryMode == NewEntry ) {
 			OContact insertEntry = abEditor->entry();

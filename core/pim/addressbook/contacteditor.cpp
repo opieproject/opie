@@ -1083,8 +1083,7 @@ void ContactEditor::accept() {
 
 void ContactEditor::slotNote() {
 
-	dlgNote->showMaximized();
-	if ( !dlgNote->exec() ) {
+    if ( ! QPEApplication::execDialog( dlgNote ) ) {
 		txtNote->setText( ent.notes() );
 	}
 }
@@ -1098,8 +1097,7 @@ void ContactEditor::slotName() {
 	txtLastName->setText( parseName(txtFullName->text(), NAME_L) );
 	// txtSuffix->setText( parseName(txtFullName->text(), NAME_S) );
 
-	dlgName->showMaximized();
-	if ( dlgName->exec() ) {
+	if ( QPEApplication::execDialog( dlgName ) ) {
 		 if ( txtLastName->text().contains( ' ', TRUE ) )
 			 tmpName =  txtLastName->text() + ", " + txtFirstName->text() + " " + txtMiddleName->text();
 		 else

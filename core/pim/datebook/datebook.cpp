@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.29 2003-12-07 14:06:22 mickeyl Exp $
+** $Id: datebook.cpp,v 1.30 2004-02-07 23:52:32 ar Exp $
 **
 **********************************************************************/
 
@@ -265,12 +265,7 @@ void DateBook::slotSettings()
 	}
 	frmSettings.comboCategory->setCategories(defaultCategories,"Calendar", tr("Calendar"));
 
-#if defined (Q_WS_QWS) || defined(_WS_QWS_)
-    frmSettings.showMaximized();
-#endif
-
-	if ( frmSettings.exec() ) {
-
+	if ( QPEApplication::execDialog( &frmSettings ) ) {
 		aPreset = frmSettings.alarmPreset();
 		presetTime = frmSettings.presetTime();
 		startTime = frmSettings.startTime();
@@ -437,10 +432,7 @@ void DateBook::duplicateEvent( const Event &e )
 	entry->timezone->setEnabled( FALSE );
 	sv->addChild( entry );
 
-#if defined(Q_WS_QWS) || defined(_WS_QWS_)
-    editDlg.showMaximized();
-#endif
-	while (editDlg.exec() ) {
+	while ( QPEApplication::execDialog( &editDlg ) ) {
 		Event newEv = entry->event();
 		QString error = checkEvent(newEv);
 		if (!error.isNull()) {
@@ -486,10 +478,7 @@ void DateBook::editEvent( const Event &e )
 	entry->timezone->setEnabled( FALSE );
 	sv->addChild( entry );
 
-#if defined(Q_WS_QWS) || defined(_WS_QWS_)
-	editDlg.showMaximized();
-#endif
-	while (editDlg.exec() ) {
+	while ( QPEApplication::execDialog( &editDlg ) ) {
 		Event newEv = entry->event();
 		if(newEv.description().isEmpty() && newEv.notes().isEmpty() )
 			break;
@@ -707,10 +696,7 @@ void DateBook::appMessage(const QCString& msg, const QByteArray& data)
 				connect( cmdOk, SIGNAL(clicked()), &dlg, SLOT(accept()) );
 				vb->addWidget( cmdOk );
 
-#if defined(Q_WS_QWS) || defined(_WS_QWS_)
-				dlg.showMaximized();
-#endif
-				needShow = dlg.exec();
+				needShow = QPEApplication::execDialog( &dlg );
 
 				if ( bSound )
 					killTimer( stopTimer );
@@ -902,10 +888,7 @@ void DateBook::slotNewEntry(const QDateTime &start, const QDateTime &end, const 
 	e = new DateEntry( onMonday, ev, ampm, &newDlg );
 	e->setAlarmEnabled( aPreset, presetTime, Event::Loud );
 	sv->addChild( e );
-#if defined(Q_WS_QWS) || defined(_WS_QWS_)
-	newDlg.showMaximized();
-#endif
-	while (newDlg.exec()) {
+	while ( QPEApplication::execDialog( &newDlg ) ) {
 		ev = e->event();
 		ev.assignUid();
 		QString error = checkEvent( ev );

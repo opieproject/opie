@@ -1028,8 +1028,7 @@ void MainWindow::doAlarm( const QDateTime& dt, int uid ) {
     text += todo.toRichText();
     view->setText( text );
 
-    dlg.showMaximized();
-    bool needToStay = dlg.exec();
+    bool needToStay = QPEApplication::execDialog( &dlg );
 
     if (loud)
         killAlarm();

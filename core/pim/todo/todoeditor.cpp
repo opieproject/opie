@@ -1,4 +1,6 @@
 
+#include <qpe/qpeapplication.h>
+
 #include "otaskeditor.h"
 #include "todoeditor.h"
 
@@ -19,10 +21,8 @@ OTodo Editor::newTodo( int cur,
     e->setCaption( QObject::tr("Enter Task") );
     e->init( cur );
 
+    int ret = QPEApplication::execDialog( e );
 
-    e->showMaximized();
-
-    int ret = e->exec();
     if ( QDialog::Accepted == ret ) {
         m_accepted = true;
     }else
@@ -41,8 +41,7 @@ OTodo Editor::edit( QWidget *,
     e->init( todo );
     e->setCaption( QObject::tr( "Edit Task" ) );
 
-    e->showMaximized();
-    int ret = e->exec();
+    int ret = QPEApplication::execDialog( e );
 
     OTodo ev = e->todo();
     if ( ret == QDialog::Accepted )

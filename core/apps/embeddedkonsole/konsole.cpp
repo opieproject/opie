@@ -44,9 +44,10 @@
 #include <qevent.h>
 #include <qtabwidget.h>
 #include <qtabbar.h>
-#include <qpe/config.h>
 #include <qstringlist.h>
 #include <qpalette.h>
+#include <qpe/config.h>
+#include <qpe/qpeapplication.h>
 
 #include <unistd.h>
 #include <pwd.h>
@@ -1076,7 +1077,7 @@ void Konsole::editCommandListMenuSelected(int iD)
     // "edit commands"
     CommandEditDialog *m = new CommandEditDialog(this);
     connect(m,SIGNAL(commandsEdited()),this,SLOT(initCommandList()));
-    m->showMaximized();
+    QPEApplication::showDialog( m );
     }
 
 }

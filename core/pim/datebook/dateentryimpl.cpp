@@ -249,10 +249,7 @@ void DateEntry::slotEditNote() {
   NoteEntry noteDlg(s+comboDescription->currentText(), noteStr,
 		    this,0,TRUE);
 
-#if defined(Q_WS_QWS) || defined(_WS_QWS_)
-  noteDlg.showMaximized();
-#endif
-  if (noteDlg.exec() ) {
+  if ( QPEApplication::execDialog( &noteDlg ) ) {
     noteStr=noteDlg.note->text();
   }
 
@@ -395,10 +392,7 @@ void DateEntry::slotRepeat()
     else
 	e = new RepeatEntry( startWeekOnMonday, startDate, this );
 
-#if defined(Q_WS_QWS) || defined(_WS_QWS_)
-    e->showMaximized();
-#endif
-    if ( e->exec() ) {
+    if ( QPEApplication::execDialog( e ) ) {
 	rp = e->repeatPattern();
 	setRepeatLabel();
     }
