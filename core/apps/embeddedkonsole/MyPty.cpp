@@ -8,11 +8,11 @@
 /*                                                                            */
 /* This file is part of Konsole - an X terminal for KDE                       */
 /* -------------------------------------------------------------------------- */
-/*									      */
+/*                        */
 /* Ported Konsole to Qt/Embedded                                              */
-/*									      */
+/*                        */
 /* Copyright (C) 2000 by John Ryland <jryland@trolltech.com>                  */
-/*									      */
+/*                        */
 /* -------------------------------------------------------------------------- */
 
 /* If you're compiling konsole on non-Linux platforms and find
@@ -113,8 +113,8 @@ void MyPty::donePty()
     ::close(fd);
 
     if (cpid) {
-	kill(cpid, SIGHUP);
-	waitpid(cpid, &status, 0);
+  kill(cpid, SIGHUP);
+  waitpid(cpid, &status, 0);
     }
 
     emit done(status);
@@ -139,40 +139,41 @@ void MyPty::error()
 */
 int MyPty::run(const char* cmd, QStrList &, const char*, int)
 {
-    // This is code from the Qt DumbTerminal example
+      // This is code from the Qt DumbTerminal example
     cpid = fork();
 
     if ( !cpid ) {
-	// child - exec shell on tty
-	for (int sig = 1; sig < NSIG; sig++) signal(sig,SIG_DFL);
-	int ttyfd = open(ttynam, O_RDWR);
-	dup2(ttyfd, STDIN_FILENO);
-	dup2(ttyfd, STDOUT_FILENO);
-	dup2(ttyfd, STDERR_FILENO);
-	// should be done with tty, so close it
-	close(ttyfd);
-	static struct termios ttmode;
-	if ( setsid() < 0 )
-	    perror( "failed to set process group" );
+  // child - exec shell on tty
+  for (int sig = 1; sig < NSIG; sig++) signal(sig,SIG_DFL);
+  int ttyfd = open(ttynam, O_RDWR);
+  dup2(ttyfd, STDIN_FILENO);
+  dup2(ttyfd, STDOUT_FILENO);
+  dup2(ttyfd, STDERR_FILENO);
+  // should be done with tty, so close it
+  close(ttyfd);
+  static struct termios ttmode;
+  if ( setsid() < 0 )
+      perror( "failed to set process group" );
 #if defined (TIOCSCTTY)
-	// grabbed from APUE by Stevens
-	ioctl(STDIN_FILENO, TIOCSCTTY, 0);
+  // grabbed from APUE by Stevens
+  ioctl(STDIN_FILENO, TIOCSCTTY, 0);
 #endif
-	tcgetattr( STDIN_FILENO, &ttmode );
-	ttmode.c_cc[VINTR] = 3;
-	ttmode.c_cc[VERASE] = 8;
-	tcsetattr( STDIN_FILENO, TCSANOW, &ttmode );
-	setenv("TERM","vt100",1);
-	setenv("COLORTERM","0",1);
+  tcgetattr( STDIN_FILENO, &ttmode );
+  ttmode.c_cc[VINTR] = 3;
+  ttmode.c_cc[VERASE] = 8;
+  tcsetattr( STDIN_FILENO, TCSANOW, &ttmode );
+  setenv("TERM","vt100",1);
+  setenv("COLORTERM","0",1);
 
-	if (getuid() == 0) {
-	    char msg[] = "WARNING: You are running this shell as root!\n";
-	    write(ttyfd, msg, sizeof(msg));
-	}
-	execl(cmd, cmd, 0);
+  if (getuid() == 0) {
+      char msg[] = "WARNING: You are running this shell as root!\n";
+      write(ttyfd, msg, sizeof(msg));
+  }
+; //creates a login shell
+  execl(cmd, cmd, "--login", 0);
 
-	donePty();
-	exit(-1);
+  donePty();
+  exit(-1);
     }
 
     // parent - continue as a widget
@@ -192,27 +193,27 @@ int MyPty::openPty()
 #ifdef HAVE_OPENPTY
     int ttyfd;
     if ( openpty(&ptyfd,&ttyfd,ttynam,0,0) )
-	ptyfd = -1;
+  ptyfd = -1;
     else
-	close(ttyfd); // we open the ttynam ourselves.
+  close(ttyfd); // we open the ttynam ourselves.
 #else
     for (const char* c0 = "pqrstuvwxyzabcde"; ptyfd < 0 && *c0 != 0; c0++) {
-	for (const char* c1 = "0123456789abcdef"; ptyfd < 0 && *c1 != 0; c1++) {
-	    sprintf(ptynam,"/dev/pty%c%c",*c0,*c1);
-	    sprintf(ttynam,"/dev/tty%c%c",*c0,*c1);
-	    if ((ptyfd = ::open(ptynam,O_RDWR)) >= 0) {
-		if (geteuid() != 0 && !access(ttynam,R_OK|W_OK) == 0) {
-		    ::close(ptyfd);
-		    ptyfd = -1;
-		}
-	    }
-	}
+  for (const char* c1 = "0123456789abcdef"; ptyfd < 0 && *c1 != 0; c1++) {
+      sprintf(ptynam,"/dev/pty%c%c",*c0,*c1);
+      sprintf(ttynam,"/dev/tty%c%c",*c0,*c1);
+      if ((ptyfd = ::open(ptynam,O_RDWR)) >= 0) {
+    if (geteuid() != 0 && !access(ttynam,R_OK|W_OK) == 0) {
+        ::close(ptyfd);
+        ptyfd = -1;
+    }
+      }
+  }
     }
 #endif
 
     if ( ptyfd < 0 ) {
-	qApp->exit(1);
-	return -1;
+  qApp->exit(1);
+  return -1;
     }
 
     return ptyfd;
@@ -249,7 +250,7 @@ void MyPty::send_bytes(const char* s, int len)
   printf("\n");
 #endif
 
-  ::write(fd, s, len);	
+  ::write(fd, s, len);  
 }
 
 /*! indicates that a block of data is received */
