@@ -3,19 +3,30 @@
     <name>CategoryFilterDlg</name>
     <message>
         <source>Category Filter</source>
-        <translation>Filtre par catégorie</translation>
+        <translation type="obsolete">Filtre par catégorie</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
+        <translation type="obsolete">&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Annuler</translation>
+        <translation type="obsolete">&amp;Annuler</translation>
     </message>
     <message>
         <source>Select groups to show</source>
-        <translation>Sélectionner groupes à afficher</translation>
+        <translation type="obsolete">Sélectionner groupes à afficher</translation>
+    </message>
+</context>
+<context>
+    <name>CategoryFilterImpl</name>
+    <message>
+        <source>Category Filter</source>
+        <translation type="unfinished">Filtre par catégorie</translation>
+    </message>
+    <message>
+        <source>Select one or more groups</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -40,27 +51,27 @@
     <name>InstallDlg</name>
     <message>
         <source>Install</source>
-        <translation>Installer</translation>
+        <translation type="obsolete">Installer</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation>Démarrer</translation>
+        <translation type="obsolete">Démarrer</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Options</translation>
+        <translation type="obsolete">Options</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation>Sortie</translation>
+        <translation type="obsolete">Sortie</translation>
     </message>
     <message>
         <source>Destination</source>
-        <translation>Destination</translation>
+        <translation type="obsolete">Destination</translation>
     </message>
     <message>
         <source>Space Avail</source>
-        <translation>Espace dispo</translation>
+        <translation type="obsolete">Espace dispo</translation>
     </message>
 </context>
 <context>
@@ -69,36 +80,235 @@
         <source>Close</source>
         <translation>Fermer</translation>
     </message>
+    <message>
+        <source>Remove
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Install
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upgrade
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(ReInstall)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(Upgrade)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Destination</source>
+        <translation type="unfinished">Destination</translation>
+    </message>
+    <message>
+        <source>Space Avail</source>
+        <translation type="unfinished">Espace dispo</translation>
+    </message>
+    <message>
+        <source>Output</source>
+        <translation type="unfinished">Sortie</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished">Démarrer</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Options</translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Abort</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+**** User Clicked ABORT ***</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>**** Process Aborted ****</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Kb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save output</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>InstallOptionsDlg</name>
     <message>
         <source>Options</source>
-        <translation>Options</translation>
+        <translation type="obsolete">Options</translation>
     </message>
     <message>
         <source>Force Depends</source>
-        <translation>Forcer les Dépendances</translation>
+        <translation type="obsolete">Forcer les Dépendances</translation>
     </message>
     <message>
         <source>Force Reinstall</source>
-        <translation>Forcer la Réinstallation</translation>
+        <translation type="obsolete">Forcer la Réinstallation</translation>
     </message>
     <message>
         <source>Force Remove</source>
-        <translation>Forcer la Suppression</translation>
+        <translation type="obsolete">Forcer la Suppression</translation>
     </message>
     <message>
         <source>Force Overwrite</source>
-        <translation>Forcer la Ré-écriture</translation>
+        <translation type="obsolete">Forcer la Ré-écriture</translation>
     </message>
     <message>
         <source>Verbose WGet</source>
-        <translation>WGet Verbeux</translation>
+        <translation type="obsolete">WGet Verbeux</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="obsolete">OK</translation>
+    </message>
+</context>
+<context>
+    <name>InstallOptionsDlgImpl</name>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Options</translation>
+    </message>
+    <message>
+        <source>Force Depends</source>
+        <translation type="unfinished">Forcer les Dépendances</translation>
+    </message>
+    <message>
+        <source>Force Reinstall</source>
+        <translation type="unfinished">Forcer la Réinstallation</translation>
+    </message>
+    <message>
+        <source>Force Remove</source>
+        <translation type="unfinished">Forcer la Suppression</translation>
+    </message>
+    <message>
+        <source>Force Overwrite</source>
+        <translation type="unfinished">Forcer la Ré-écriture</translation>
+    </message>
+    <message>
+        <source>Information Level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Errors only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normal messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Informative messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Troubleshooting output</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Ipkg</name>
+    <message>
+        <source>Dealing with package %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Removing symbolic links...
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating symbolic links for %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating symbolic links for %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Finished</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Removing status entry...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>status file - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>package - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t open status file - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t create tempory status file - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t start ipkg process</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not open :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating directory </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Linked %1 to %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to link %1 to %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Removed %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to remove %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Removed </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to remove </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -229,23 +439,23 @@
     </message>
     <message>
         <source>Help</source>
-        <translation>Aide</translation>
+        <translation type="obsolete">Aide</translation>
     </message>
     <message>
         <source>Click here for help.</source>
-        <translation>Cliquez ici pour afficher l&apos;aide.</translation>
+        <translation type="obsolete">Cliquez ici pour afficher l&apos;aide.</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>A Propos</translation>
+        <translation type="obsolete">A Propos</translation>
     </message>
     <message>
         <source>Click here for software version information.</source>
-        <translation>Cliquez ici pour les informations sur la version du logiciel.</translation>
+        <translation type="obsolete">Cliquez ici pour les informations sur la version du logiciel.</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Options</translation>
+        <translation type="obsolete">Options</translation>
     </message>
     <message>
         <source>Click here to hide the find toolbar.</source>
@@ -281,7 +491,7 @@ Cochez la case en début de ligne pour sélectionner un package.</translation>
     </message>
     <message>
         <source>About AQPkg</source>
-        <translation>A propos de AQPkg</translation>
+        <translation type="obsolete">A propos de AQPkg</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -306,31 +516,31 @@ Cochez la case en début de ligne pour sélectionner un package.</translation>
     </message>
     <message>
         <source>Installed To - %1</source>
-        <translation>Installé sur - %1</translation>
+        <translation type="obsolete">Installé sur - %1</translation>
     </message>
     <message>
         <source>Description - %1</source>
-        <translation>Description - %1</translation>
+        <translation type="obsolete">Description - %1</translation>
     </message>
     <message>
         <source>Size - %1</source>
-        <translation>Taille - %1</translation>
+        <translation type="obsolete">Taille - %1</translation>
     </message>
     <message>
         <source>Section - %1</source>
-        <translation>Section - %1</translation>
+        <translation type="obsolete">Section - %1</translation>
     </message>
     <message>
         <source>Filename - %1</source>
-        <translation>Nom - %1</translation>
+        <translation type="obsolete">Nom - %1</translation>
     </message>
     <message>
         <source>V. Installed - %1</source>
-        <translation>V. Installée - %1</translation>
+        <translation type="obsolete">V. Installée - %1</translation>
     </message>
     <message>
         <source>V. Available - %1</source>
-        <translation>V. Disponible - %1</translation>
+        <translation type="obsolete">V. Disponible - %1</translation>
     </message>
     <message>
         <source>Refreshing server package lists</source>
@@ -419,7 +629,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>R</source>
-        <translation>R</translation>
+        <translation type="obsolete">R</translation>
     </message>
     <message>
         <source>Do you wish to remove or upgrade
@@ -433,90 +643,260 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>U</source>
-        <translation>M</translation>
+        <translation type="obsolete">M</translation>
+    </message>
+    <message>
+        <source>Updating Launcher...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PackageWindow</name>
+    <message>
+        <source>&lt;b&gt;Description&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Installed To&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Size&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Section&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Filename&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Version Installed&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Version Available&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Package Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Package information is unavailable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Fermer</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Installed packages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Local packages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>N/A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Package - %1
+              version - %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+              inst version - %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Version string is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Epoch in version is not number.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nothing after colon in version number.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QuestionDlg</name>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SettingsBase</name>
     <message>
         <source>Configuration</source>
-        <translation>Configuration</translation>
+        <translation type="obsolete">Configuration</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation>Serveurs</translation>
+        <translation type="obsolete">Serveurs</translation>
     </message>
     <message>
         <source>Active Server</source>
-        <translation>Serveur actif</translation>
+        <translation type="obsolete">Serveur actif</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Nom :</translation>
+        <translation type="obsolete">Nom :</translation>
     </message>
     <message>
         <source>URL:</source>
-        <translation>URL :</translation>
+        <translation type="obsolete">URL :</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation>Changer</translation>
+        <translation type="obsolete">Changer</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Supprimer</translation>
+        <translation type="obsolete">Supprimer</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Nouveau</translation>
+        <translation type="obsolete">Nouveau</translation>
     </message>
     <message>
         <source>Destinations</source>
-        <translation>Destinations</translation>
+        <translation type="obsolete">Destinations</translation>
     </message>
     <message>
         <source>Link To Root</source>
-        <translation>Créer un lien vers root</translation>
+        <translation type="obsolete">Créer un lien vers root</translation>
     </message>
     <message>
         <source>Proxies</source>
-        <translation>Proxies</translation>
+        <translation type="obsolete">Proxies</translation>
     </message>
     <message>
         <source>HTTP Proxy</source>
-        <translation>Proxy HTTP</translation>
+        <translation type="obsolete">Proxy HTTP</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Mot de Passe</translation>
+        <translation type="obsolete">Mot de Passe</translation>
     </message>
     <message>
         <source>Enabled</source>
-        <translation>Activé</translation>
+        <translation type="obsolete">Activé</translation>
     </message>
     <message>
         <source>FTP Proxy</source>
-        <translation>Proxy FTP</translation>
+        <translation type="obsolete">Proxy FTP</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Utilisateur</translation>
+        <translation type="obsolete">Utilisateur</translation>
     </message>
     <message>
         <source>&amp;Apply</source>
-        <translation>&amp;Appliquer</translation>
+        <translation type="obsolete">&amp;Appliquer</translation>
     </message>
     <message>
         <source>General</source>
-        <translation>Général</translation>
+        <translation type="obsolete">Général</translation>
     </message>
     <message>
         <source>(Will take effect on restart)</source>
-        <translation>(Prendra effet après redémarrage)</translation>
+        <translation type="obsolete">(Prendra effet après redémarrage)</translation>
     </message>
     <message>
         <source>Show Jump To Letters</source>
-        <translation>Afficher la Navigation par Lettres</translation>
+        <translation type="obsolete">Afficher la Navigation par Lettres</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsImpl</name>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished">Configuration</translation>
+    </message>
+    <message>
+        <source>Servers</source>
+        <translation type="unfinished">Serveurs</translation>
+    </message>
+    <message>
+        <source>Destinations</source>
+        <translation type="unfinished">Destinations</translation>
+    </message>
+    <message>
+        <source>Proxies</source>
+        <translation type="unfinished">Proxies</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Nouveau</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nom :</translation>
+    </message>
+    <message>
+        <source>Address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active Server</source>
+        <translation type="unfinished">Serveur actif</translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Destination</source>
+        <translation type="unfinished">Destination</translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Link to root</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HTTP Proxy</source>
+        <translation type="unfinished">Proxy HTTP</translation>
+    </message>
+    <message>
+        <source>Enabled</source>
+        <translation type="unfinished">Activé</translation>
+    </message>
+    <message>
+        <source>FTP Proxy</source>
+        <translation type="unfinished">Proxy FTP</translation>
+    </message>
+    <message>
+        <source>Username:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

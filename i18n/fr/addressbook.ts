@@ -148,7 +148,7 @@ Quitter ?</translation>
     <message>
         <source>Unable to find a contact for this 
  search pattern!</source>
-        <translation>Aucun contact ne correspond
+        <translation type="obsolete">Aucun contact ne correspond
 à cette expression !</translation>
     </message>
     <message>
@@ -184,6 +184,10 @@ Voulez-vous vraiment l&apos;ouvrir ?</translation>
     <message>
         <source>You have to set a filename !</source>
         <translation>Vous devez rentrer un nom de fichier !</translation>
+    </message>
+    <message>
+        <source>Unable to find a contact for this search pattern!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -24,7 +24,7 @@ sans rentrer dans les murs ni se modre la queue.</translation>
     </message>
     <message>
         <source>Press Any Key To Start</source>
-        <translation>Appuyez sur n&apos;importe quelle touche pour commencer</translation>
+        <translation type="obsolete">Appuyez sur n&apos;importe quelle touche pour commencer</translation>
     </message>
     <message>
         <source>     Score :    %1   </source>
@@ -38,7 +38,15 @@ Votre score : %1</translation>
     </message>
     <message>
         <source>Press Any Key to Begin a New Game.</source>
-        <translation>Pressez n&apos;importe quelle touche pour recommencer.</translation>
+        <translation type="obsolete">Pressez n&apos;importe quelle touche pour recommencer.</translation>
+    </message>
+    <message>
+        <source>Press any key to start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press any key to begin a new game.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

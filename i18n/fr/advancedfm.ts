@@ -195,7 +195,7 @@ du fichier %1 ?</translation>
     <message>
         <source>Really delete
 </source>
-        <translation>Confirmer l&apos;effacement
+        <translation type="obsolete">Confirmer l&apos;effacement
 </translation>
     </message>
     <message>
@@ -242,7 +242,7 @@ Sous licence GPL</translation>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!!</source>
-        <translation>Impossible d&apos;effacer le répertoire courant
+        <translation type="obsolete">Impossible d&apos;effacer le répertoire courant
 des favoris.
 Ce n&apos;en est pas un!!</translation>
     </message>
@@ -258,6 +258,26 @@ Ce n&apos;en est pas un!!</translation>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -268,6 +288,21 @@ Ce n&apos;en est pas un!!</translation>
     <message>
         <source>Output</source>
         <translation>Sortie</translation>
+    </message>
+    <message>
+        <source>Process could not start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+Finished
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -311,6 +346,26 @@ Ce n&apos;en est pas un!!</translation>
     <message>
         <source>execute</source>
         <translation>exécuter</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no  group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting ownership or group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

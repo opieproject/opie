@@ -12,11 +12,23 @@
     </message>
     <message>
         <source>General Settings</source>
-        <translation>Config. Générale</translation>
+        <translation type="obsolete">Config. Générale</translation>
     </message>
     <message>
         <source>Searchmethods</source>
-        <translation>Méthodes de recherche</translation>
+        <translation type="obsolete">Méthodes de recherche</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -35,7 +47,7 @@
     </message>
     <message>
         <source>Config</source>
-        <translation>Config</translation>
+        <translation type="obsolete">Config</translation>
     </message>
     <message>
         <source>Searchmethods</source>
@@ -47,39 +59,39 @@
     </message>
     <message>
         <source>Only &amp;complete Words</source>
-        <translation>Les Mots c&amp;omplets seulement</translation>
+        <translation type="obsolete">Les Mots c&amp;omplets seulement</translation>
     </message>
     <message>
         <source>Allow &amp;reg. expressions</source>
-        <translation>Inclure les expressions en&amp;registrées</translation>
+        <translation type="obsolete">Inclure les expressions en&amp;registrées</translation>
     </message>
     <message>
         <source>0 Errors</source>
-        <translation>0 Erreur</translation>
+        <translation type="obsolete">0 Erreur</translation>
     </message>
     <message>
         <source>1 Errors</source>
-        <translation>1 Erreur</translation>
+        <translation type="obsolete">1 Erreur</translation>
     </message>
     <message>
         <source>2 Errors</source>
-        <translation>2 Erreurs</translation>
+        <translation type="obsolete">2 Erreurs</translation>
     </message>
     <message>
         <source>3 Errors</source>
-        <translation>3 Erreurs</translation>
+        <translation type="obsolete">3 Erreurs</translation>
     </message>
     <message>
         <source>4 Errors</source>
-        <translation>4 Erreurs</translation>
+        <translation type="obsolete">4 Erreurs</translation>
     </message>
     <message>
         <source>Until Hit</source>
-        <translation>Jusqu&apos;au bout</translation>
+        <translation type="obsolete">Jusqu&apos;au bout</translation>
     </message>
     <message>
         <source>&amp;Error tolerance</source>
-        <translation>Tolérance d&apos;&amp;Erreur</translation>
+        <translation type="obsolete">Tolérance d&apos;&amp;Erreur</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -88,6 +100,26 @@
     <message>
         <source>Parameter</source>
         <translation>Paramêtre</translation>
+    </message>
+    <message>
+        <source>Opie-Dictionary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No dictionary defined</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Define one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

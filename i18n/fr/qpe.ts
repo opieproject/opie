@@ -80,7 +80,7 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     <name>DesktopPowerAlerter</name>
     <message>
         <source>Battery Status</source>
-        <translation>Status Batterie</translation>
+        <translation type="obsolete">Status Batterie</translation>
     </message>
 </context>
 <context>
@@ -178,6 +178,13 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     <message>
         <source>Do not ask again for this medium</source>
         <translation>Ne plus demander pour ce média</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Battery Status</source>
+        <translation type="unfinished">Status Batterie</translation>
     </message>
 </context>
 <context>

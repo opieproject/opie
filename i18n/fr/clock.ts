@@ -50,6 +50,10 @@
         <source>Clock: Alarm was missed.</source>
         <translation>Horloge: Alarme manquée.</translation>
     </message>
+    <message>
+        <source>Alarm set: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Set_Alarm</name>

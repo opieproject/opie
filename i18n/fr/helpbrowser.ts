@@ -32,7 +32,11 @@
     </message>
     <message>
         <source>HelpBrowser</source>
-        <translation>Aide - Navigateur</translation>
+        <translation type="obsolete">Aide - Navigateur</translation>
+    </message>
+    <message>
+        <source>Go</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

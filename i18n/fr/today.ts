@@ -46,7 +46,7 @@
     <name>TodayConfig</name>
     <message>
         <source>Today config</source>
-        <translation>Config &quot;Aujourd&apos;hui&quot;</translation>
+        <translation type="obsolete">Config &quot;Aujourd&apos;hui&quot;</translation>
     </message>
     <message>
         <source>Load which plugins in what order:</source>
@@ -68,13 +68,13 @@
         <source>autostart on 
 resume?
  (Opie only)</source>
-        <translation>Afficher automatique
+        <translation type="obsolete">Afficher automatique
 à l&apos;allumage ?
 (Opie seulement)</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation>minutes inactives</translation>
+        <translation type="obsolete">minutes inactives</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -82,39 +82,106 @@ resume?
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation>Vérifier si &quot;Aujourd&apos;hui&quot; doit-être lancer automatiquement au démarrage.</translation>
+        <translation type="obsolete">Vérifier si &quot;Aujourd&apos;hui&quot; doit-être lancer automatiquement au démarrage.</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation>Après combien de minutes de  veille du PDA la fonction &quot;Démarrage auto&quot; doit-elle être activée ?</translation>
+        <translation type="obsolete">Après combien de minutes de  veille du PDA la fonction &quot;Démarrage auto&quot; doit-elle être activée ?</translation>
     </message>
     <message>
         <source>Icon size</source>
-        <translation>Taille de l&apos;icône</translation>
+        <translation type="obsolete">Taille de l&apos;icône</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation>Définir la taille de l&apos;icône en pixel</translation>
+        <translation type="obsolete">Définir la taille de l&apos;icône en pixel</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation>Rafraîchir</translation>
+        <translation type="obsolete">Rafraîchir</translation>
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation>Périodicité des rafraîchissements de &quot;Aujourd&apos;hui&quot;</translation>
+        <translation type="obsolete">Périodicité des rafraîchissements de &quot;Aujourd&apos;hui&quot;</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation>sec</translation>
+        <translation type="obsolete">sec</translation>
     </message>
     <message>
         <source>never</source>
-        <translation>jamais</translation>
+        <translation type="obsolete">jamais</translation>
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
         <translation>Sélectionnez une case à cocher pour activer/désactiver un module ou utiliser les flèches de droite pour changer l&apos;ordre d&apos;apparition</translation>
+    </message>
+    <message>
+        <source>Today Config</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TodayConfigMiscBase</name>
+    <message>
+        <source>Form1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check this if today should be autostarted on resume.</source>
+        <translation type="unfinished">Vérifier si &quot;Aujourd&apos;hui&quot; doit-être lancer automatiquement au démarrage.</translation>
+    </message>
+    <message>
+        <source>autostart on resume?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tiny banner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Have small banner </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
+        <translation type="unfinished">Après combien de minutes de  veille du PDA la fonction &quot;Démarrage auto&quot; doit-elle être activée ?</translation>
+    </message>
+    <message>
+        <source>minutes inactive</source>
+        <translation type="unfinished">minutes inactives</translation>
+    </message>
+    <message>
+        <source> pixel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set the icon size in pixel</source>
+        <translation type="unfinished">Définir la taille de l&apos;icône en pixel</translation>
+    </message>
+    <message>
+        <source>icon size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> sec</source>
+        <translation type="unfinished">sec</translation>
+    </message>
+    <message>
+        <source>never</source>
+        <translation type="unfinished">jamais</translation>
+    </message>
+    <message>
+        <source>How often should Today refresh itself</source>
+        <translation type="unfinished">Périodicité des rafraîchissements de &quot;Aujourd&apos;hui&quot;</translation>
+    </message>
+    <message>
+        <source>refresh</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
