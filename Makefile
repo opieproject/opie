@@ -8,7 +8,7 @@ LIBS=library libopie
 INPUTCOMPONENTS= inputmethods/keyboard inputmethods/pickboard \
 	inputmethods/handwriting  inputmethods/unikeyboard \
 	inputmethods/jumpx inputmethods/kjumpx \
-	inputmethods/dvorak 
+	inputmethods/dvorak  inputmethods/multikey \
 
 APPLETS= core/applets/batteryapplet core/applets/batteryapplet-ipaq \
 	core/applets/irdaapplet core/applets/volumeapplet \
