@@ -1,5 +1,3 @@
-MOC_DIR         = ./tmp
-OBJECTS_DIR     = ./tmp
 DESTDIR         = $(OPIEDIR)/output/lib
 TEMPLATE        = lib
 CONFIG          = qt warn_on debug
