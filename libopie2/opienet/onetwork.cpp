@@ -52,6 +52,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <linux/sockios.h>
+#include <net/if_arp.h>
 #include <stdarg.h>
 
 using namespace std;
@@ -71,7 +72,8 @@ ONetwork::ONetwork()
 void ONetwork::synchronize()
 {
     // gather available interfaces by inspecting /proc/net/dev
-    // we could use SIOCGIFCONF here, but we aren't interested in virtual (e.g. eth0:0) devices
+    //FIXME: we could use SIOCGIFCONF here, but we aren't interested in virtual (e.g. eth0:0) devices
+    //FIXME: Use SIOCGIFCONF anway, because we can disable listing of aliased devices
 
     _interfaces.clear();
     QString str;
@@ -132,11 +134,7 @@ bool ONetwork::isWirelessInterface( const char* name ) const
     memset( &iwr, 0, sizeof( struct iwreq ) );
     strcpy( (char*) &iwr.ifr_name, name );
     int result = ::ioctl( sfd, SIOCGIWNAME, &iwr );
-    if ( result == -1 )
-        qDebug( "ONetwork::ioctl(): SIOCGIWNAME failed: %d (%s)", result, strerror( errno ) );
-    else
-        qDebug( "ONetwork::ioctl(): SIOCGIWNAME ok." );
-    return ( result != -1 );
+    return result != -1;
 }
 
 /*======================================================================================
@@ -235,6 +233,19 @@ OMacAddress ONetworkInterface::macAddress() const
     else
     {
         return OMacAddress::unknown;
+    }
+}
+
+
+int ONetworkInterface::dataLinkType() const
+{
+    if ( ioctl( SIOCGIFHWADDR ) )
+    {
+        return _ifr.ifr_hwaddr.sa_family;
+    }
+    else
+    {
+        return -1;
     }
 }
 
@@ -585,7 +596,8 @@ void OWirelessNetworkInterface::setMonitorMode( bool b )
 
 bool OWirelessNetworkInterface::monitorMode() const
 {
-    return _mon ? _mon->enabled() : false;
+    qDebug( "dataLinkType = %d", dataLinkType() );
+    return dataLinkType() == ARPHRD_IEEE80211;
 }
 
 
@@ -685,7 +697,7 @@ bool OWirelessNetworkInterface::wioctl( int call ) const
  *======================================================================================*/
 
 OMonitoringInterface::OMonitoringInterface( ONetworkInterface* iface )
-                      :_enabled( false ), _if( static_cast<OWirelessNetworkInterface*>( iface ) )
+                      :_if( static_cast<OWirelessNetworkInterface*>( iface ) )
 {
 }
 
@@ -707,26 +719,14 @@ void OMonitoringInterface::setChannel( int c )
 
 bool OMonitoringInterface::enabled() const
 {
-    return _enabled;
+    return _if->monitorMode();
 }
+
 
 void OMonitoringInterface::setEnabled( bool b )
 {
-    // open a packet capturer here or leave this to
-    // the client code?
-
-    /*
-
-    if ( b )
-    {
-        OPacketCapturer* opcap = new OPacketCapturer();
-        opcap->open( _if->name() );
-    }
-    */
-
-    _enabled = b;
-
 }
+
 
 /*======================================================================================
  * OCiscoMonitoringInterface
@@ -757,9 +757,6 @@ void OCiscoMonitoringInterface::setEnabled( bool b )
         s << "Mode: r";
         s << "Mode: y";
         s << "XmitPower: 1";
-
-        OMonitoringInterface::setEnabled( b );
-
     }
 
     // flushing and closing will be done automatically when f goes out of scope
@@ -803,8 +800,6 @@ void OWlanNGMonitoringInterface::setEnabled( bool b )
     QString cmd;
     cmd.sprintf( "$(which wlanctl-ng) %s lnxreq_wlansniff channel=%d enable=%s", (const char*) _if->name(), 1, (const char*) enable );
     system( cmd );
-
-    OMonitoringInterface::setEnabled( b );
 }
 
 
@@ -863,8 +858,6 @@ void OHostAPMonitoringInterface::setEnabled( bool b )
         _if->wioctl( SIOCDEVPRIVATE );
         #endif
     }
-
-    OMonitoringInterface::setEnabled( b );
 }
 
 
@@ -914,8 +907,6 @@ void OOrinocoMonitoringInterface::setEnabled( bool b )
         args[1] = 0;
         _if->wioctl( SIOCIWFIRSTPRIV + 0x8 );
     }
-
-    OMonitoringInterface::setEnabled( b );
 }
 
 

@@ -126,6 +126,7 @@ class ONetworkInterface : public QObject
     bool isWireless() const;
     QString ipV4Address() const;
     OMacAddress macAddress() const;
+    int dataLinkType() const;
 
   protected:
     const int _sfd;
@@ -248,7 +249,6 @@ class OMonitoringInterface
     virtual QString name() const = 0;
 
   protected:
-    bool _enabled;
     const OWirelessNetworkInterface* _if;
 
 };
