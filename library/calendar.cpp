@@ -64,7 +64,6 @@ static void never_called_tr_function_um_libqpe_ts_etwas_unter_zu_jubeln() {
 QString Calendar::nameOfMonth( int m )
 {
     QDate d;
-    qDebug( d.monthName( m ) );
     return QObject::tr( d.monthName( m ) );
 }
 
