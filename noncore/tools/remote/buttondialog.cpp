@@ -98,6 +98,18 @@ QStringList ButtonDialog::getRemotes()
 	strcpy(addr.sun_path,"/dev/lircd");
 
 	fd = socket(AF_UNIX, SOCK_STREAM, 0);
+	if(fd == -1)
+	{
+		QMessageBox *mb = new QMessageBox("Error!",
+											"couldnt connect to socket",
+											QMessageBox::NoIcon,
+											QMessageBox::Ok,
+											QMessageBox::NoButton,
+											QMessageBox::NoButton);
+		mb->exec();
+		perror("ButtonDialog::GetRemotes");
+		return NULL;
+	}
 
 	if(std::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
 	{
@@ -158,6 +170,19 @@ QStringList ButtonDialog::getButtons(const char *remoteName)
 	write_buffer += '\n';
 
 	fd = socket(AF_UNIX, SOCK_STREAM, 0);
+	if(fd == -1)
+	{
+		QMessageBox *mb = new QMessageBox("Error!",
+											"couldnt connect to socket",
+											QMessageBox::NoIcon,
+											QMessageBox::Ok,
+											QMessageBox::NoButton,
+											QMessageBox::NoButton);
+		mb->exec();
+		perror("ButtonDialog::GetButtons");
+		return NULL;
+	}
+
 
 	if(std::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
 	{

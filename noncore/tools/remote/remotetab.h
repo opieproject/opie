@@ -50,7 +50,7 @@ public:
 	void setConfig(Config *newCfg);
 	void updateRemotesList();
 public slots:
-	void sendIR();
+	int sendIR();
 	void remoteSelected(const QString &string);
 private:
 	int fd;

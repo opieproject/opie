@@ -51,7 +51,7 @@ RemoteTab::RemoteTab(QWidget *parent=0, const char *name=0):QWidget(parent,name)
 	strcpy(addr.sun_path,"/dev/lircd");
 }
 
-void RemoteTab::sendIR()
+int RemoteTab::sendIR()
 {
 	const QObject *button = sender();
 	QString string = cfg->readEntry(button->name());
@@ -61,6 +61,19 @@ void RemoteTab::sendIR()
 	bool done=false;
 
 	fd = socket(AF_UNIX, SOCK_STREAM, 0);
+	if(fd == -1)
+	{
+		QMessageBox *mb = new QMessageBox("Error!",
+											"couldnt connect to socket",
+											QMessageBox::NoIcon,
+											QMessageBox::Ok,
+											QMessageBox::NoButton,
+											QMessageBox::NoButton);
+		mb->exec();
+		perror("RemoteTab::SendIR");
+		return NULL;
+	}
+
 
 	if(std::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
 	{
