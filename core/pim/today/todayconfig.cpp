@@ -1,11 +1,8 @@
 /*
  * todayconfig.cpp
  *
- * ---------------------
- *
- * begin       : Sun 10 17:20:00 CEST 2002
  * copyright   : (c) 2002 by Maximilian Reiﬂ
- * email       : max.reiss@gmx.de
+ * email       : harlekin@handhelds.org
  *
  */
 /***************************************************************************
@@ -19,133 +16,205 @@
 
 #include "todayconfig.h"
 
+#include <qpe/config.h>
+#include <qpe/resource.h>
+#include <qpe/qcopenvelope_qws.h>
+
 #include <qcheckbox.h>
-#include <qframe.h>
 #include <qlabel.h>
 #include <qspinbox.h>
 #include <qtabwidget.h>
-#include <qwidget.h>
 #include <qlayout.h>
-#include <qvariant.h>
-//#include <qwhatsthis.h>
+#include <qheader.h>
+#include <qhbox.h>
+#include <qvbox.h>
+#include <qtoolbutton.h>
 
-todayconfig::todayconfig( QWidget* parent,  const char* name, bool modal, WFlags fl )
+// for getenv
+#include <stdlib.h>
+
+class ToolButton : public QToolButton {
+public:
+    ToolButton( QWidget *parent, const char *name, const QString& icon, QObject *handler, const QString& slot, bool t = FALSE )
+        : QToolButton( parent, name ) {
+        setTextLabel( name );
+        setPixmap( Resource::loadPixmap( icon ) );
+        setAutoRaise( TRUE );
+        setFocusPolicy( QWidget::NoFocus );
+        setToggleButton( t );
+        connect( this, t ? SIGNAL( toggled(bool) ) : SIGNAL( clicked() ), handler, slot );
+    }
+};
+
+
+/**
+ * The class has currently quite some duplicate code.
+ * By that way it would be real easy to have it as seperate app in settings tab
+ *
+ */
+TodayConfig::TodayConfig( QWidget* parent,  const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl ) {
-  if ( !name )
-      setName( "todayconfig" );
-  resize( 175, 232 );
-  setCaption( tr( "Today config" ) );
 
-  TabWidget3 = new QTabWidget( this, "TabWidget3" );
-  TabWidget3->setGeometry( QRect( 0, 0, 220, 320 ) );
-  TabWidget3->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, TabWidget3->sizePolicy().hasHeightForWidth() ) );
-  TabWidget3->setAutoMask( FALSE );
-  TabWidget3->setTabShape( QTabWidget::Rounded );
+    if ( !name ) {
+        setName( "todayconfig" );
+    }
+    setCaption( tr( "Today config" ) );
 
-  tab = new QWidget( TabWidget3, "tab" );
+    QVBoxLayout *layout = new QVBoxLayout( this );
+    TabWidget3 = new QTabWidget( this, "TabWidget3" );
+    TabWidget3->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, TabWidget3->sizePolicy().hasHeightForWidth() ) );
+    TabWidget3->setAutoMask( FALSE );
+    TabWidget3->setTabShape( QTabWidget::Rounded );
+    layout->addWidget( TabWidget3 );
 
-  Frame8 = new QFrame( tab, "Frame8" );
-  Frame8->setGeometry( QRect( -5, 0, 200, 300 ) );
-  Frame8->setFrameShape( QFrame::StyledPanel );
-  Frame8->setFrameShadow( QFrame::Raised );
+    tab_2 = new QWidget( TabWidget3, "tab_2" );
+    QVBoxLayout *tab2Layout = new QVBoxLayout( tab_2, 4 ,4 );
+    QLabel *l = new QLabel( tr( "Load which plugins in what order:" ), tab_2 );
+    tab2Layout->addWidget( l );
+    QHBox *hbox1 = new QHBox( tab_2 );
+    m_appletListView = new QListView( hbox1 );
+    m_appletListView->addColumn( "PluginList" );
+    m_appletListView->header()->hide();
+    QVBox *vbox1 = new QVBox( hbox1 );
+    new ToolButton( vbox1, tr( "Move Up" ), "opieplayer/up",  this , SLOT( moveSelectedUp() ) );
+    new ToolButton( vbox1, tr( "Move Down" ),"opieplayer/down", this , SLOT( moveSelectedDown() ) );
+    tab2Layout->addWidget( hbox1 );
 
-  TextLabel4 = new QLabel( Frame8, "TextLabel4" );
-  TextLabel4->setGeometry( QRect( 20, 65, 100, 60 ) );
-  TextLabel4->setText( tr( "Should the \n"
-			   "location \n"
-			   "be shown?" ) );
+    TabWidget3->insertTab( tab_2, tr( "active/order" ) );
+    tab_3 = new QWidget( TabWidget3, "tab_3" );
+    QVBoxLayout *tab3Layout = new QVBoxLayout( tab_3 );
+    QHBox *hbox_clip = new QHBox( tab_3 );
+    TextLabel1 = new QLabel( hbox_clip, "TextLabel1" );
+    TextLabel1->setText( tr( "Clip after how\n"
+                             "many letters" ) );
+    SpinBox7 = new QSpinBox( hbox_clip, "SpinBox7" );
+    SpinBox7->setMaxValue( 80 );
+    QHBox *hbox_auto = new QHBox( tab_3 );
+    TextLabel2 = new QLabel( hbox_auto, "AutoStart" );
+    TextLabel2->setText( tr( "autostart on \nresume? (Opie only)" ) );
+    CheckBoxAuto = new QCheckBox( hbox_auto, "CheckBoxAuto" );
+    QHBox *hbox_inactive = new QHBox( tab_3 );
+    TimeLabel = new QLabel( hbox_inactive  , "TimeLabel" );
+    TimeLabel->setText( tr( "minutes inactive" ) );
+    SpinBoxTime = new QSpinBox(  hbox_inactive, "TimeSpinner");
+    tab3Layout->addWidget( hbox_clip );
+    tab3Layout->addWidget( hbox_auto );
+    tab3Layout->addWidget( hbox_inactive );
+    TabWidget3->insertTab( tab_3, tr( "Misc" ) );
 
-  TextLabel5 = new QLabel( Frame8, "TextLabel5" );
-  TextLabel5->setGeometry( QRect( 20, 160, 120, 40 ) );
-  TextLabel5->setText( tr( "Should the notes \n"
-			   "be shown?" ) );
+    m_applets_changed = false;
 
-  CheckBox2 = new QCheckBox( Frame8, "CheckBox2" );
-  CheckBox2->setGeometry( QRect( 158, 170, 27, 21 ) );
-  //CheckBox2->setText( tr( "" ) );
+    connect ( m_appletListView , SIGNAL( clicked ( QListViewItem * ) ), this, SLOT( appletChanged ( ) ) );
 
-  CheckBox1 = new QCheckBox( Frame8, "CheckBox1" );
-  CheckBox1->setGeometry( QRect( 158, 65, 27, 50 ) );
-  //CheckBox1->setText( tr( "" ) );
-
-  CheckBox3 = new QCheckBox (Frame8, "CheckBox3" );
-  CheckBox3->setGeometry( QRect( 158, 125, 27, 21 ) );
-
-  TextLabel6 = new QLabel( Frame8, "All Day");
-  TextLabel6->setGeometry( QRect( 20, 120, 100, 30 ) );
-  TextLabel6->setText( tr( "Show only later\n"
-			   "appointments") );
-
-  SpinBox1 = new QSpinBox( Frame8, "SpinBox1" );
-  SpinBox1->setGeometry( QRect( 115, 20, 58, 25 ) );
-  SpinBox1->setMaxValue( 10 );
-  SpinBox1->setValue( 5 );
-
-  TextLabel3 = new QLabel( Frame8, "TextLabel3" );
-  TextLabel3->setGeometry( QRect( 20, 10, 90, 60 ) );
-  TextLabel3->setText( tr( "How many \n"
-			   "appointment\n"
-			   "should\n"
-			   "be shown?" ) );
-  TabWidget3->insertTab( tab, tr( "Calendar" ) );
-
-  tab_2 = new QWidget( TabWidget3, "tab_2" );
-
-  Frame9 = new QFrame( tab_2, "Frame9" );
-  Frame9->setGeometry( QRect( -5, 0, 230, 310 ) );
-  Frame9->setFrameShape( QFrame::StyledPanel );
-  Frame9->setFrameShadow( QFrame::Raised );
-
-  TextLabel6 = new QLabel( Frame9, "TextLabel6" );
-  TextLabel6->setGeometry( QRect( 20, 10, 100, 60 ) );
-  TextLabel6->setText( tr( "How many\n"
-			   "tasks should \n"
-			   "be shown?" ) );
-
-  SpinBox2 = new QSpinBox( Frame9, "SpinBox2" );
-  SpinBox2->setGeometry( QRect( 115, 20, 58, 25 ) );
-  SpinBox2->setMaxValue( 20 );
-  SpinBox2->setValue( 5 );
-  TabWidget3->insertTab( tab_2, tr( "Tasks" ) );
-
-  tab_3 = new QWidget( TabWidget3, "tab_3" );
-
-  Frame14 = new QFrame( tab_3, "Frame14" );
-  Frame14->setGeometry( QRect( -5, 0, 200, 220 ) );
-  Frame14->setFrameShape( QFrame::StyledPanel );
-  Frame14->setFrameShadow( QFrame::Raised );
-
-  TextLabel1 = new QLabel( Frame14, "TextLabel1" );
-  TextLabel1->setGeometry( QRect( 20, 20, 100, 30 ) );
-  TextLabel1->setText( tr( "Clip after how\n"
-			   "many letters" ) );
-
-  SpinBox7 = new QSpinBox( Frame14, "SpinBox7" );
-  SpinBox7->setGeometry( QRect( 115, 20, 58, 25 ) );
-  SpinBox7->setMaxValue( 80 );
-
-  TextLabel2 = new QLabel( Frame14, "AutoStart" );
-  TextLabel2->setGeometry( QRect( 20, 60, 100, 45 ) );
-  TextLabel2->setText( tr( "Should today be\n"
-			   "autostarted on\n"
-			   "resume?"
-			   " (Opie only)" ) );
-
-  CheckBoxAuto = new QCheckBox (Frame14, "CheckBoxAuto" );
-  CheckBoxAuto->setGeometry( QRect( 158, 60, 27, 21 ) );
-
-  TimeLabel = new QLabel( Frame14, "TimeLabel" );
-  TimeLabel->setGeometry( QRect ( 20, 120, 120, 45 ) );
-  TimeLabel->setText( tr( "Activate the  \n"
-                          "autostart after how\n"
-                          "many minutes?" ) );
-  SpinBoxTime = new QSpinBox( Frame14, "TimeSpinner");
-  SpinBoxTime->setGeometry( QRect( 115,  120,  58, 25 ) );
-
-  TabWidget3->insertTab( tab_3, tr( "Misc" ) );
-
+    readConfig();
 }
 
-todayconfig::~todayconfig() {
+
+/**
+ * Autostart, uses the new (opie only) autostart method in the launcher code.
+ * If registered against that today ist started on each resume.
+ */
+void TodayConfig::setAutoStart() {
+    Config cfg( "today" );
+    cfg.setGroup( "Autostart" );
+    int autostart = cfg.readNumEntry( "autostart", 1);
+    if ( autostart ) {
+        QCopEnvelope e( "QPE/System", "autoStart(QString,QString,QString)" );
+        e << QString( "add" );
+        e << QString( "today" );
+        e << m_autoStartTimer;
+    } else {
+        QCopEnvelope e( "QPE/System", "autoStart(QString,QString)" );
+        e << QString( "remove");
+        e << QString( "today" );
+    }
+}
+
+/**
+ * Read the config part
+ */
+void TodayConfig::readConfig() {
+    Config cfg( "today" );
+    cfg.setGroup( "Autostart" );
+    m_autoStart = cfg.readNumEntry( "autostart", 1 );
+    CheckBoxAuto->setChecked( m_autoStart );
+    m_autoStartTimer = cfg.readEntry( "autostartdelay", "0" );
+    SpinBoxTime->setValue( m_autoStartTimer.toInt() );
+
+    cfg.setGroup( "Applets" );
+    m_excludeApplets = cfg.readListEntry( "ExcludeApplets", ',' );
+}
+
+/**
+ * Write the config part
+ */
+void TodayConfig::writeConfig() {
+    Config cfg( "today" );
+    cfg. setGroup ( "Applets" );
+    if ( m_applets_changed ) {
+        QStringList exclude;
+        QStringList include;
+        QMap <QString, QCheckListItem *>::Iterator it;
+        for ( it = m_applets.begin(); it != m_applets. end (); ++it ) {
+            if ( !(*it)-> isOn () ) {
+                exclude << it.key();
+            } else {
+                include << it.key();
+            }
+        }
+        cfg.writeEntry( "ExcludeApplets", exclude, ',' );
+        cfg.writeEntry( "IncludeApplets", include, ',' );
+    }
+
+    cfg.setGroup( "Autostart" );
+    m_autoStart = CheckBoxAuto->isChecked();
+    cfg.writeEntry( "autostart",  m_autoStart  );
+    m_autoStartTimer = SpinBoxTime->value();
+    cfg.readEntry( "autostartdelay", m_autoStartTimer );
+}
+
+
+void TodayConfig::moveSelectedUp() {
+    QListViewItem *item = m_appletListView->selectedItem();
+    if ( item && item->itemAbove() )  {
+        item->itemAbove()->moveItem( item );
+    }
+}
+
+
+void TodayConfig::moveSelectedDown() {
+    QListViewItem *item = m_appletListView->selectedItem();
+    if ( item && item->itemBelow() ) {
+        item->moveItem( item->itemBelow() );
+    }
+}
+
+
+/**
+ * Set up the
+ */
+void TodayConfig::pluginManagement( QString libName, QString name, QPixmap icon ) {
+
+	QCheckListItem *item;
+    	item = new QCheckListItem( m_appletListView, name, QCheckListItem::CheckBox );
+
+        if ( !icon.isNull() ) {
+	    item->setPixmap( 0, icon );
+        }
+
+        qDebug (" SUCHNAME: " + name );
+        if ( m_excludeApplets.find( libName ) == m_excludeApplets.end() ) {
+	    item->setOn( TRUE );
+        }
+	m_applets[libName] = item;
+}
+
+
+void TodayConfig::appletChanged() {
+    m_applets_changed = true;
+}
+
+
+TodayConfig::~TodayConfig() {
 }
 

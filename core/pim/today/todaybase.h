@@ -1,26 +1,32 @@
-/****************************************************************************
-** Form interface generated from reading ui file 'todaybase.ui'
-**
-** Created: Wed Feb 13 19:36:45 2002
-**      by:  The User Interface Compiler (uic)
-**
-** WARNING! All changes made in this file will be lost!
-****************************************************************************/
+/*
+ * todaybase.h
+ *
+ * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * email       : harlekin@handhelds.org
+ *
+ */
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
 #ifndef TODAYBASE_H
 #define TODAYBASE_H
 
-#include <qvariant.h>
-#include <qwidget.h>
-#include <qscrollview.h>
-#include <qsplitter.h>
+#include <qlayout.h>
 #include <opie/oclickablelabel.h>
 
 class QVBox;
-class QHBoxLayout;
 class QGridLayout;
 class QFrame;
 class QLabel;
 class QPushButton;
+class QBoxLayout;
+
 
 class TodayBase : public QWidget
 {
@@ -30,26 +36,18 @@ public:
     TodayBase( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~TodayBase();
 
-    //QScrollView* Frame4;
     QFrame* Frame4;
     QPushButton* DatesButton;
+    QVBoxLayout* layout;
     OClickableLabel* OwnerField;
     QLabel* Frame;
-    QFrame* MailFrame;
-    QLabel* TextLabel1;
-    QScrollView* sv1;
-    QVBox* DatesField;
+    QLabel* DateLabel;
     QFrame* Frame15;
-    QLabel* TodoField;
-    QLabel* MailField;
-    QPushButton* PushButton1;
-    QPushButton* TodoButton;
-    QPushButton* MailButton;
-    QPushButton* getridoffuckingstrippeldlinesbutton;
+    OClickableLabel* ConfigButton;
 
 protected:
 
 
 };
 
-#endif // TODAYBASE_H
+#endif
