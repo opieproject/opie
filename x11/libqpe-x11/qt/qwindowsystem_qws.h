@@ -1,6 +1,8 @@
 #ifndef OPIE_QWINDOWSYSTEM_H
 #define OPIE_QWINDOWSYSTEM_H
 
+#include <qimage.h>
+
 class QWSScreenSaver;
 class QWSServer {
 public:
