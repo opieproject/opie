@@ -284,7 +284,7 @@ http://www.trolltech.com
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Options</source>
@@ -307,10 +307,6 @@ http://www.trolltech.com
     <message>
         <source>Close</source>
         <translation>Zavřít</translation>
-    </message>
-    <message>
-        <source>   </source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
