@@ -54,6 +54,8 @@
 #include "keytrans.h"
 #include "commandeditdialog.h"
 
+#include <opie/colorpopupmenu.h>
+
 class EKNumTabBar : public QTabBar {
 public:
     void numberTabs()
@@ -206,6 +208,8 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   n_keytab = 0;
   n_render = 0;
   startUp=0;
+  fromMenu = FALSE;
+
   setCaption( tr("Terminal") );
   setIcon( Resource::loadPixmap( "konsole" ) );
 
@@ -288,11 +292,12 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   colorMenu->insertItem(tr( "White on Cyan"));
   colorMenu->insertItem(tr( "Blue on Black"));
   colorMenu->insertItem(tr( "Amber on Black"));
+  colorMenu->insertItem(tr( "Custom"));
   configMenu->insertItem(tr( "Colors") ,colorMenu);
 
   connect( fontList, SIGNAL( activated(int) ), this, SLOT( fontChanged(int) ));
   connect( configMenu, SIGNAL( activated(int) ), this, SLOT( configMenuSelected(int) ));
-  connect( colorMenu, SIGNAL( activated(int) ), this, SLOT( colorMenuSelected(int) ));
+  connect( colorMenu, SIGNAL( activated(int) ), this, SLOT( colorMenuIsSelected(int) ));
   connect( scrollMenu, SIGNAL(activated(int)),this,SLOT(scrollMenuSelected(int)));
   connect(editCommandListMenu,SIGNAL(activated(int)),this,SLOT(editCommandListMenuSelected(int)));
   menuBar->insertItem( tr("Font"), fontList );
@@ -614,6 +619,11 @@ void Konsole::switchSession(QWidget* w) {
   }
 }
 
+void Konsole::colorMenuIsSelected(int iD) {
+    fromMenu = TRUE;
+    colorMenuSelected(iD); 
+}
+
 /// -------------------------------   some new stuff by L.J. Potter
 void Konsole::colorMenuSelected(int iD)
 { // this is NOT pretty, elegant or anything else besides functional
@@ -622,8 +632,8 @@ void Konsole::colorMenuSelected(int iD)
     TEWidget* te = getTe();
     Config cfg("Konsole");
     cfg.setGroup("Colors");
-    QColor foreground;
-    QColor background;
+//     QColor foreground;
+//     QColor background;
     colorMenu->setItemChecked(lastSelectedMenu,FALSE);
     ColorEntry m_table[TABLE_COLORS];
     const ColorEntry * defaultCt=te->getdefaultColorTable();
@@ -634,7 +644,7 @@ void Konsole::colorMenuSelected(int iD)
             m_table[i].color = defaultCt[i].color;
             if(i==1 || i == 11)
                 m_table[i].transparent=1;
-            cfg.writeEntry("Schema","98");
+            cfg.writeEntry("Schema","9");
             colorMenu->setItemChecked(-9,TRUE);
         }
     } else {
@@ -712,6 +722,22 @@ void Konsole::colorMenuSelected(int iD)
             cfg.writeEntry("Schema","18");
             colorMenu->setItemChecked(-18,TRUE);
         }
+        if(iD==-19) {// Custom
+            qDebug("do custom");
+            if(fromMenu) {
+            ColorPopupMenu* penColorPopupMenu = new ColorPopupMenu(Qt::black, this, "foreground color");
+            connect(penColorPopupMenu, SIGNAL(colorSelected(const QColor&)), this,
+                    SLOT(changeForegroundColor(const QColor&)));
+            penColorPopupMenu->exec();
+            }
+            cfg.writeEntry("Schema","19");
+            if(!fromMenu) {
+                foreground.setNamedColor(cfg.readEntry("foreground",""));
+                background.setNamedColor(cfg.readEntry("background",""));
+            }
+            fromMenu=FALSE;
+            colorMenu->setItemChecked(-19,TRUE);
+        }
 
         for (i = 0; i < TABLE_COLORS; i++)  {
             if(i==0 || i == 10) {
@@ -727,6 +753,7 @@ void Konsole::colorMenuSelected(int iD)
     lastSelectedMenu = iD;
     te->setColorTable(m_table);
     update();
+    
 }
 
 void Konsole::configMenuSelected(int iD)
@@ -884,4 +911,37 @@ void Konsole::parseCommandLine() {
         } // end -e switch
     }
     startUp++;
+}
+
+void Konsole::changeForegroundColor(const QColor &color) {
+    Config cfg("Konsole");
+    cfg.setGroup("Colors");
+    int r, g, b;
+    color.rgb(&r,&g,&b);
+    foreground.setRgb(r,g,b);
+//     QString colors;
+//     colors.sprintf("%d,%d,%d"color.red,color.green,color.blue);
+    cfg.writeEntry("foreground",color.name());
+    cfg.write();
+
+qDebug("do other dialog");
+ ColorPopupMenu* penColorPopupMenu2 = new ColorPopupMenu(Qt::black, this,"background color");
+    connect(penColorPopupMenu2, SIGNAL(colorSelected(const QColor&)), this,
+            SLOT(changeBackgroundColor(const QColor&)));
+   penColorPopupMenu2->exec();
+    
+}
+
+void Konsole::changeBackgroundColor(const QColor &color) {
+
+    qDebug("Change background");
+    Config cfg("Konsole");
+    cfg.setGroup("Colors");
+    int r, g, b;
+    color.rgb(&r,&g,&b);
+    background.setRgb(r,g,b);
+//     QString colors;
+//     colors.sprintf("%d,%d,%d"color.red,color.green,color.blue);
+    cfg.writeEntry("background",color.name());
+    cfg.write();
 }

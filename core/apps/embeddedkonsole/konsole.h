@@ -32,6 +32,7 @@
 #include <qtabwidget.h>
 #include <qpe/qpetoolbar.h>
 #include <qcombobox.h>
+#include <qcolor.h>
 
 #include "MyPty.h"
 #include "TEWidget.h"
@@ -62,6 +63,7 @@ private slots:
   void fontChanged(int);
   void configMenuSelected(int );
   void colorMenuSelected(int);
+  void colorMenuIsSelected(int);
   void enterCommand(int);
   void hitEnter();
   void hitSpace();
@@ -76,6 +78,8 @@ private slots:
   void scrollMenuSelected(int);
   void editCommandListMenuSelected(int);
   void parseCommandLine();
+    void changeForegroundColor(const QColor &);
+    void changeBackgroundColor(const QColor &);
 private:
   void init(const char* _pgm, QStrList & _args);
   void initSession(const char* _pgm, QStrList & _args);
@@ -85,7 +89,9 @@ private:
   QSize calcSize(int columns, int lines);
   TEWidget* getTe();
   QStringList commands;
-  
+  QLabel * msgLabel;
+  QColor foreground, background;
+bool fromMenu;
 private:
   class VTFont 
   {
