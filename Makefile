@@ -63,6 +63,7 @@ GAMES = noncore/games/minesweep noncore/games/solitaire \
 	noncore/games/fifteen noncore/games/tictac \
 	noncore/games/kcheckers noncore/games/kpacman \
 	noncore/games/kbill noncore/games/buzzword \
+	noncore/games/bounce 
 
 NONAPPS = noncore/apps/opie-sheet noncore/apps/tableviewer \
 	noncore/apps/opie-reader noncore/apps/checkbook \
