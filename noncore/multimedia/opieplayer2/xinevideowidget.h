@@ -50,6 +50,8 @@ public:
     void setVideoFrame ( uchar *image, int width, int height, int linestep );
     void clear ( );
 
+    QSize videoSize() const;
+
 protected:
     void paintEvent( QPaintEvent *p );
     void resizeEvent ( QResizeEvent *r );
@@ -69,6 +71,6 @@ private:
     int     m_bytes_per_line_frame;
     int     m_bytes_per_pixel;
     QImage *m_logo;
-    int     m_rotation;
+    mutable int     m_rotation;
 };
 

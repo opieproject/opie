@@ -38,16 +38,16 @@
 #include <qpe/qpeapplication.h>
 #include "xinecontrol.h"
 #include "mediaplayerstate.h"
+#include "xinevideowidget.h"
 
-XineControl::XineControl( QWidget *videoContainerWidget, XineVideoWidget *xineWidget, 
+XineControl::XineControl( XineVideoWidget *xineWidget, 
                           MediaPlayerState &_mediaPlayerState, 
                           QObject *parent, const char *name )
-    : QObject( parent, name ), mediaPlayerState( _mediaPlayerState )
+    : QObject( parent, name ), mediaPlayerState( _mediaPlayerState ), xineVideoWidget( xineWidget )
 {
 
     libXine = new XINE::Lib( xineWidget );
 
-    connect ( videoContainerWidget, SIGNAL( videoResized( const QSize & )), this, SLOT( videoResized ( const QSize & ) ) );
     connect( &mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pause( bool ) ) );
     connect( this, SIGNAL( positionChanged( long ) ), &mediaPlayerState, SLOT( updatePosition( long ) ) );
     connect( &mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( stop( bool ) ) );
@@ -55,7 +55,7 @@ XineControl::XineControl( QWidget *videoContainerWidget, XineVideoWidget *xineWi
     connect( &mediaPlayerState, SIGNAL( positionChanged( long ) ),  this,  SLOT( seekTo( long ) ) );
     connect( &mediaPlayerState,  SIGNAL( videoGammaChanged( int ) ), this,  SLOT( setGamma( int ) ) );
     connect( libXine, SIGNAL( stopped() ), this, SLOT( nextMedia() ) );
-    connect( libXine, SIGNAL( initialized() ), this, SIGNAL( initialized() ) );
+    connect( libXine, SIGNAL( initialized() ), this, SLOT( xineInitialized() ) );
 
     disabledSuspendScreenSaver = FALSE;
 }
@@ -124,6 +124,14 @@ void XineControl::nextMedia() {
 
 void XineControl::setGamma( int value ) {
     libXine->setGamma( value );
+}
+
+void XineControl::xineInitialized()
+{
+    connect( xineVideoWidget, SIGNAL( videoResized( const QSize & ) ), this, SLOT( videoResized ( const QSize & ) ) );
+    libXine->resize( xineVideoWidget->videoSize() );
+
+    emit initialized();
 }
 
 void XineControl::stop( bool isSet ) {

@@ -108,6 +108,21 @@ void XineVideoWidget::clear ( )
 	repaint ( false );
 }
 
+QSize XineVideoWidget::videoSize() const
+{
+    QSize s = size();
+    bool fs = ( s == qApp->desktop()->size() );
+
+    // if we are in fullscreen mode, do not rotate the video
+    // (!! the paint routine uses m_rotation + qt_screen-> transformOrientation() !!)
+    m_rotation = fs ? - qt_screen->transformOrientation() : 0;
+
+    if ( fs && qt_screen->isTransformed() )
+        s = qt_screen->mapToDevice( s );
+
+    return s;
+}
+
 void XineVideoWidget::paintEvent ( QPaintEvent * )
 {
 	if ( m_buff == 0 ) {
@@ -251,17 +266,7 @@ void XineVideoWidget::setVideoFrame ( uchar* img, int w, int h, int bpl )
 
 void XineVideoWidget::resizeEvent ( QResizeEvent * )
 {
-	QSize s = size ( );
-	bool fs = ( s == qApp-> desktop ( )-> size ( ));
-
-	// if we are in fullscreen mode, do not rotate the video
-	// (!! the paint routine uses m_rotation + qt_screen-> transformOrientation() !!)
-	m_rotation = fs ? -qt_screen-> transformOrientation ( ) : 0;
-
-	if ( fs && qt_screen-> isTransformed ( ))
-		s = qt_screen-> mapToDevice ( s );
-
-	emit videoResized ( s );
+    emit videoResized( videoSize() );
 }
 
 

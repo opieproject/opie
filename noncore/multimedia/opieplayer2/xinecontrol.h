@@ -42,7 +42,7 @@
 class XineControl : public QObject  {
     Q_OBJECT
 public:
-    XineControl( QWidget *videoContainerWidget, XineVideoWidget *xineWidget, 
+    XineControl( XineVideoWidget *xineWidget, 
                  MediaPlayerState &_mediaPlayerState, 
                  QObject *parent = 0, const char *name =0 );
     ~XineControl();
@@ -101,6 +101,9 @@ public slots:
     void setGamma( int );
 
 
+private slots:
+    void xineInitialized();
+
 private:
     XINE::Lib *libXine;
     long m_currentTime;
@@ -111,6 +114,7 @@ private:
     bool hasVideoChannel : 1;
     bool hasAudioChannel : 1;
     MediaPlayerState &mediaPlayerState;
+    XineVideoWidget *xineVideoWidget;
 
 signals:
     void positionChanged( long );
