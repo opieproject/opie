@@ -248,18 +248,17 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     a->addTo( edit );
 #endif
     
-    a = new QAction( tr( "Find..." ), Resource::loadPixmap( "find" ),
-                     QString::null, 0, this, 0 );
-    connect( a, SIGNAL( activated() ), this, SLOT( editFind() ) );
-    edit->insertSeparator();
-    a->addTo( bar );
-    a->addTo( edit );
-
        a = new QAction( tr( "Goto Line..." ), Resource::loadPixmap( "find" ),
                     QString::null, 0, this, 0 );
    connect( a, SIGNAL( activated() ), this, SLOT( gotoLine() ) );
+    edit->insertSeparator();
    a->addTo( edit );
 
+    a = new QAction( tr( "Find..." ), Resource::loadPixmap( "find" ),
+                     QString::null, 0, this, 0 );
+    connect( a, SIGNAL( activated() ), this, SLOT( editFind() ) );
+    a->addTo( bar );
+    a->addTo( edit );
 
     zin = new QAction( tr("Zoom in"), QString::null, 0, this, 0 );
     connect( zin, SIGNAL( activated() ), this, SLOT( zoomIn() ) );
