@@ -100,23 +100,27 @@ Ntp::~Ntp()
 void Ntp::saveConfig(){
   int srvCount = ComboNtpSrv->count();
   bool serversChanged = true;
+  int curSrv = ComboNtpSrv->currentItem(); 
   QString edit = ComboNtpSrv->currentText();
   for (int i = 0; i < srvCount; i++){
        if ( edit ==  ComboNtpSrv->text(i)) serversChanged = false;
   }
   if (serversChanged){
-    Config ntpSrvs("/etc/ntpservers",Config::File);
+    Config ntpSrvs(QPEApplication::qpeDir()+"etc/ntpservers",Config::File);
     ntpSrvs.setGroup("servers");
-    ntpSrvs.writeEntry("count", srvCount);
-    for (int i = 0; i < srvCount; i++){
+    ntpSrvs.writeEntry("count", ++srvCount);
+    ntpSrvs.setGroup("0");    
+    ntpSrvs.writeEntry( "name", edit );
+    curSrv = 0;
+    for (int i = 1; i < srvCount; i++){
       qDebug("ntpSrvs[%i/%i]=%s",i,srvCount,ComboNtpSrv->text(i).latin1());
       ntpSrvs.setGroup(QString::number(i));
-      ntpSrvs.writeEntry( "name", ComboNtpSrv->text(i) );
+      ntpSrvs.writeEntry( "name", ComboNtpSrv->text(i-1) );
     }
   }
   Config cfg("ntp",Config::User);
   cfg.setGroup("settings");
-  cfg.writeEntry("ntpServer", ComboNtpSrv->currentItem());
+  cfg.writeEntry("ntpServer", curSrv );
   cfg.writeEntry( "minLookupDiff", SpinBoxMinLookupDelay->value() );
   cfg.writeEntry( "ntpRefreshFreq", SpinBoxNtpDelay->value() );
   cfg.writeEntry( "advancedFeatures", CheckBoxAdvSettings->isChecked() );
