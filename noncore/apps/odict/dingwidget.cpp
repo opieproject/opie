@@ -29,7 +29,7 @@
 #include <qregexp.h>
 #include <qtextbrowser.h>
 
-DingWidget::DingWidget(QWidget *parent, QString word, QTextBrowser *browser) : QWidget(parent)
+DingWidget::DingWidget(QWidget *parent, QString word, QTextBrowser *browser_top, QTextBrowser *browser_bottom) : QWidget(parent)
 {
 	QFile file( "/home/carsten/opie/opie/noncore/apps/odict/eng_ita.dic" );
 	QStringList lines;
@@ -50,13 +50,15 @@ DingWidget::DingWidget(QWidget *parent, QString word, QTextBrowser *browser) : Q
 //X 	{
 //X 		qDebug( *it );
 //X 	}
-	browser->setText( parseInfo( lines ) );
+	QString top, bottom;
+
+	parseInfo( lines, top , bottom );
+	browser_top->setText( top );
+	browser_bottom->setText( bottom );
 }
 
-QString DingWidget::parseInfo( QStringList &lines )
+void DingWidget::parseInfo( QStringList &lines, QString &top, QString &bottom )
 {
-	QString parsed = 0;
-	QStringList temp = lines;
-	parsed = temp.first();
-	return parsed;
+	top = "blah";	
+	bottom = lines.join( "\n" );
 }

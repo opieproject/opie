@@ -28,7 +28,8 @@ class ODict : public QMainWindow
     public:
 		ODict();
 		QVBox *vbox;
-		QTextBrowser *browser;
+		QTextBrowser *browser_top,
+					 *browser_bottom;
 
 	private:
 		QPopupMenu *help, *settings, *parameter, *error_tol_menu;

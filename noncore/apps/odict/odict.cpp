@@ -47,7 +47,8 @@ ODict::ODict() : QMainWindow()
 	query_le = new QLineEdit( hbox );
 	ok_button = new QPushButton( tr( "&Ok" ), hbox );
 	connect( ok_button, SIGNAL( released() ), this, SLOT( slotStartQuery() ) );
-	browser = new QTextBrowser( vbox );
+	browser_top = new QTextBrowser( vbox );
+	browser_bottom = new QTextBrowser( vbox );
 
 	loadConfig();
 	setCentralWidget( vbox );
@@ -82,7 +83,7 @@ void ODict::slotDisplayAbout()
 void ODict::slotStartQuery()
 {
 	QString querystring = query_le->text();
-	DingWidget *ding = new DingWidget( vbox , querystring , browser);
+	DingWidget *ding = new DingWidget( vbox , querystring , browser_top, browser_bottom);
 }
 
 

@@ -19,8 +19,8 @@ class DingWidget : public QWidget
 	Q_OBJECT
 	
     public:
-		DingWidget(QWidget *parent = 0, QString word = 0, QTextBrowser* = 0);
+		DingWidget(QWidget *parent = 0, QString word = 0, QTextBrowser* = 0, QTextBrowser* =0);
 
 	private:
-		QString parseInfo( QStringList& );
+		void parseInfo( QStringList& , QString&, QString& );
 };
