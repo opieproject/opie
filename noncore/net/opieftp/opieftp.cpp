@@ -14,7 +14,7 @@
 #include "opieftp.h"
 
 extern "C" {
-#include "ftplib.h"
+#include "../ftplib/ftplib.h"
 }
 
 #include "inputDialog.h"
@@ -1509,4 +1509,8 @@ void OpieFtp::serverListClicked( const QString &item) {
               if(cfg.readEntry( "ServerName").find(item) != -1 && !fuckeduphack)
                   serverComboSelected(i-1);
     }
+}
+
+void OpieFtp::timerOut() {
+
 }

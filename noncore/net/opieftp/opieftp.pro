@@ -1,12 +1,12 @@
 TEMPLATE  = app
 CONFIG    += qt warn_on release
 HEADERS   = opieftp.h inputDialog.h ftplib.h
-SOURCES   = opieftp.cpp inputDialog.cpp ftplib.c main.cpp
+SOURCES   = opieftp.cpp inputDialog.cpp main.cpp
 TARGET    = opieftp
 DESTDIR   = $(OPIEDIR)/bin
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lftplib
 
 TRANSLATIONS = ../../../i18n/de/opieftp.ts \
 	 ../../../i18n/en/opieftp.ts \

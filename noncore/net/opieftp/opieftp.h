@@ -39,6 +39,7 @@ class QPushButton;
 class QToolButton;
 class QStringList;
 class QListBox;
+class QTimer;
 
 class OpieFtp : public QMainWindow
 {
@@ -67,6 +68,7 @@ public:
     bool b;
     int currentServerConfig;
 protected slots:
+    void timerOut();
     void upDir();
     void homeButtonPushed();
     void docButtonPushed();
