@@ -1,6 +1,6 @@
 [Desktop Entry]
 Comment=A Checkbook Program
 Exec=checkbook
-Icon=checkbook.checkbookClock
+Icon=checkbook/checkbookClock
 Type=Application
 Name=Checkbook
