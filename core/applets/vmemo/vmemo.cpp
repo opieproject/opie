@@ -10,7 +10,7 @@
 **
 ************************************************************************************/
 /*
- * $Id: vmemo.cpp,v 1.22 2002-04-27 04:33:57 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.23 2002-05-09 10:44:26 dwmw2 Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -63,6 +63,7 @@ typedef struct _waveheader {
 
 #include <qpainter.h>
 #include <qdatetime.h>
+#include <qregexp.h>
 #include <qsound.h>
 #include <qfile.h>
 #include <qmessagebox.h>
