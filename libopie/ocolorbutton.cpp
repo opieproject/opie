@@ -31,30 +31,30 @@
 #include <qcolor.h>
 #include <qpixmap.h>
 #include <qimage.h>
-	
-#include <qpe/resource.h>	
-	
+
+#include <qpe/resource.h>
+
 class OColorButtonPrivate {
 public:
 	QPopupMenu *m_menu;
 	QColor m_color;
 };
 
-OColorButton::OColorButton ( QWidget *parent, const char *name ) 
+OColorButton::OColorButton ( QWidget *parent, const QColor &color, const char *name )
 	: QPushButton ( parent, name )
 {
 	d = new OColorButtonPrivate;
-	
-	d-> m_menu = new ColorPopupMenu ( black, 0, 0 );
+
+	d-> m_menu = new ColorPopupMenu ( color, 0, 0 );
 	setPopup ( d-> m_menu );
 //	setPopupDelay ( 0 );
 	connect ( d-> m_menu, SIGNAL( colorSelected ( const QColor & )), this, SLOT( updateColor ( const QColor & )));
-	
-	updateColor ( black );
-	
+
+	updateColor ( color );
+
 	QSize s = sizeHint ( ) + QSize ( 12, 0 );
 	setMinimumSize ( s );
-	setMaximumSize ( s. width ( ) * 2, s. height ( )); 
+	setMaximumSize ( s. width ( ) * 2, s. height ( ));
 }
 
 OColorButton::~OColorButton ( )

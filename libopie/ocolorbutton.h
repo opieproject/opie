@@ -27,8 +27,8 @@
 */
 
 #ifndef __OPIE_OCOLORBUTTON_H__
-#define __OPIE_OCOLORBUTTON_H__	
-	
+#define __OPIE_OCOLORBUTTON_H__
+
 #include <qpushbutton.h>
 
 class OColorButtonPrivate;
@@ -37,14 +37,14 @@ class QColor;
 class OColorButton : public QPushButton {
 	Q_OBJECT
 public:
-	OColorButton ( QWidget *parent = 0, const char *name = 0 );
+	OColorButton ( QWidget *parent = 0, const QColor & = black, const char *name = 0 );
 	virtual ~OColorButton ( );
-	
+
 	QColor color ( ) const;
-	
+
 signals:
-	void colorSelected ( const QColor & );	
-	
+	void colorSelected ( const QColor & );
+
 public slots:
 	virtual void setColor ( const QColor & );
 	

@@ -46,14 +46,13 @@ EditScheme::EditScheme ( int cnt, const QString *labels, QColor *colors, QWidget
     m_count = cnt;
     m_buttons = new OColorButton * [cnt];
     m_colors = colors;
-        
+
     for ( int i = 0; i < cnt; i++ )
     {
         QLabel *l = new QLabel ( labels [i], this );
         layout-> addWidget ( l, i, 0 );
-        
-        m_buttons [i] = new OColorButton ( this );
-        m_buttons [i]-> setColor ( colors [i] );
+
+        m_buttons [i] = new OColorButton ( this, colors [i] );
         layout-> addWidget ( m_buttons [i], i, 1 );
     }
 }

@@ -42,7 +42,7 @@ LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
 		: QWidget ( parent, name, fl )
 {
 	setCaption ( tr( "Liquid Style" ) );
-	
+
 	Config config ( "qpe" );
     config. setGroup ( "Liquid-Style" );
 
@@ -65,25 +65,23 @@ LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
 	cb-> insertItem ( tr( "Translucent stippled, background color" ), TransStippleBg );
 	cb-> insertItem ( tr( "Translucent stippled, button color" ), TransStippleBtn );
 	cb-> insertItem ( tr( "Custom translucency" ), Custom );
-	
+
 	cb-> setCurrentItem ( m_type );
 	vbox-> addWidget ( cb );
-	
-	
+
+
 	QGridLayout *grid = new QGridLayout ( vbox );
 	grid-> addColSpacing ( 0, 16 );
 	grid-> addColSpacing ( 3, 8 );
-	
+
 	grid-> addWidget ( m_menulbl = new QLabel ( tr( "Menu color" ), this ), 0, 1 );
 	grid-> addWidget ( m_textlbl = new QLabel ( tr( "Text color" ), this ), 0, 4 );
 	grid-> addWidget ( m_opaclbl = new QLabel ( tr( "Opacity" ), this ), 1, 1 );
 
-	m_menubtn = new OColorButton ( this );
-	m_menubtn-> setColor ( mcol );
+	m_menubtn = new OColorButton ( this, mcol );
 	grid-> addWidget ( m_menubtn, 0, 2 );
 
-	m_textbtn = new OColorButton ( this );
-	m_textbtn-> setColor ( tcol );
+	m_textbtn = new OColorButton ( this, tcol );
 	grid-> addWidget ( m_textbtn, 0, 5 );
 
 	m_opacsld = new QSlider ( Horizontal, this );
@@ -92,9 +90,9 @@ LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
 	m_opacsld-> setValue ( opacity );
 	m_opacsld-> setTickmarks ( QSlider::Below );
 	grid-> addMultiCellWidget ( m_opacsld, 1, 1, 2, 5 );
-	
+
 	vbox-> addSpacing ( 4 );
-	
+
 	QCheckBox *shadow = new QCheckBox ( tr( "Use shadowed menu text" ), this );
 	shadow-> setChecked ( m_shadow );
 	vbox-> addWidget ( shadow );

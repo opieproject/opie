@@ -103,7 +103,7 @@ public:
 	void setViewMode ( TabConfig::ViewMode m )
 	{
 		viewport ( )-> setUpdatesEnabled ( false );
-		
+
 		switch ( m ) {
 			case TabConfig::List:				
 				setItemTextPos( QIconView::Right );
@@ -182,7 +182,7 @@ public:
 	{
 		setFont ( f );
 	}
-	
+
 	void setItemTextPos ( ItemTextPos pos )
 	{
 		calculateGrid ( pos );
@@ -243,7 +243,7 @@ public:
 	{
 		m_bgcolor = c;
 	}
-	
+
 	void drawBackground ( QPainter *p, const QRect &r )
 	{
 		if ( !m_bgpix. isNull ( )) {
@@ -263,39 +263,39 @@ private:
 
 
 
-TabDialog::TabDialog ( const QPixmap *tabicon, const QString &tabname, TabConfig &tc, QWidget *parent, const char *dname, bool modal, WFlags fl ) 
+TabDialog::TabDialog ( const QPixmap *tabicon, const QString &tabname, TabConfig &tc, QWidget *parent, const char *dname, bool modal, WFlags fl )
 	: QDialog ( parent, dname, modal, fl | WStyle_ContextHelp ), m_tc ( tc )
 {
 	setCaption ( tr( "Edit Tab" ));
-	
+
 	QVBoxLayout *lay = new QVBoxLayout ( this, 3, 3 );
-	
+
 	OTabWidget *tw = new OTabWidget ( this, "tabwidget", OTabWidget::Global, OTabWidget::Bottom );
 	QWidget *bgtab;
-	       
+
 	tw-> addTab ( bgtab = createBgTab ( tw ), "appearance/backgroundtabicon.png", tr( "Background" ));
 	tw-> addTab ( createFontTab ( tw ), "appearance/fonttabicon.png", tr( "Font" ));
-	tw-> addTab ( createIconTab ( tw ), "appearance/colorstabicon.png", tr( "Icons" ) );	                           
-	
-	tw-> setCurrentTab ( bgtab );                                       
-	
-	QWidget *sample = new QVBox ( this );	
+	tw-> addTab ( createIconTab ( tw ), "appearance/colorstabicon.png", tr( "Icons" ) );
+
+	tw-> setCurrentTab ( bgtab );
+
+	QWidget *sample = new QVBox ( this );
 	QTabBar *tb = new QTabBar ( sample );
 	QString name ( tr( "Previewing %1" ). arg ( tabname ));
-	
+
 	tb-> addTab ( tabicon ? new QTab ( *tabicon, name ) : new QTab ( name ));
-	
+
 	m_sample = new SampleView ( sample );
-			
+
 	lay-> addWidget ( tw, 10 );
 	lay-> addWidget ( sample, 1 );
-	
+
 	m_iconsize-> setButton ( tc. m_view );
 	iconSizeClicked ( tc. m_view );
-	m_iconcolor-> setColor ( QColor ( m_tc. m_text_color ));
+	//m_iconcolor-> setColor ( QColor ( m_tc. m_text_color ));
 	iconColorClicked ( m_iconcolor-> color ( ));
 	m_bgtype-> setButton ( tc. m_bg_type );
-	m_solidcolor-> setColor ( QColor ( tc. m_bg_color ));
+	//m_solidcolor-> setColor ( QColor ( tc. m_bg_color ));
 	m_bgimage = tc. m_bg_image;
 	bgTypeClicked ( tc. m_bg_type );
 	m_fontuse-> setChecked ( tc. m_font_use );
@@ -319,21 +319,21 @@ QWidget *TabDialog::createFontTab ( QWidget *parent )
 	m_fontuse = new QCheckBox ( tr( "Use a custom font" ), tab );
 	vertLayout-> addWidget ( m_fontuse );
 
-    m_fontselect = new OFontSelector ( false, tab, "fontsel" );    
+    m_fontselect = new OFontSelector ( false, tab, "fontsel" );
     vertLayout-> addWidget ( m_fontselect );
-    
+
 	connect ( m_fontuse, SIGNAL( toggled ( bool )), m_fontselect, SLOT( setEnabled ( bool )));
     connect( m_fontselect, SIGNAL( fontSelected ( const QFont & )),
              this, SLOT( fontClicked ( const QFont & )));
 
-    return tab; 
+    return tab;
 }
 
 QWidget *TabDialog::createBgTab ( QWidget *parent )
 {
     QWidget *tab = new QWidget( parent, "BgTab" );
     QVBoxLayout *vertLayout = new QVBoxLayout( tab, 3, 3 );
-        
+
     QGridLayout* gridLayout = new QGridLayout ( vertLayout );
     gridLayout-> setColStretch ( 1, 10 );
 
@@ -352,11 +352,11 @@ QWidget *TabDialog::createBgTab ( QWidget *parent )
 	hb-> setSpacing ( 3 );
 
     rb = new QRadioButton( tr( "Solid color" ), tab, "solid" );
-    m_bgtype-> insert ( rb, TabConfig::SolidColor ); 
+    m_bgtype-> insert ( rb, TabConfig::SolidColor );
     hb-> addWidget ( rb );
 	hb-> addSpacing ( 10 );
-    
-	m_solidcolor = new OColorButton ( tab );
+
+	m_solidcolor = new OColorButton ( tab, QColor ( m_tc. m_bg_color ) );
 	connect ( m_solidcolor, SIGNAL( colorSelected ( const QColor & )), this, SLOT( bgColorClicked ( const QColor & )));
 	hb-> addWidget ( m_solidcolor );
 	hb-> addStretch ( 10 );
@@ -365,12 +365,12 @@ QWidget *TabDialog::createBgTab ( QWidget *parent )
 
 	hb = new QHBoxLayout ( );
 	hb-> setSpacing ( 3 );
-	
+
 	rb = new QRadioButton( tr( "Image" ), tab, "image" );
     m_bgtype-> insert ( rb, TabConfig::Image );
     hb-> addWidget( rb );
     hb-> addSpacing ( 10 );
-    
+
 	m_imagebrowse = new QPushButton ( tr( "Select..." ), tab );
 	connect ( m_imagebrowse, SIGNAL( clicked ( )), this, SLOT( bgImageClicked ( )));
 	hb-> addWidget ( m_imagebrowse );
@@ -407,7 +407,7 @@ QWidget *TabDialog::createIconTab ( QWidget *parent )
     rb = new QRadioButton( tr( "Small" ), tab, "iconsmall" );
     m_iconsize-> insert ( rb, TabConfig::List );
     gridLayout-> addWidget( rb, 0, 1 );
-    
+
     rb = new QRadioButton( tr( "Large" ), tab, "iconlarge" );
     m_iconsize-> insert ( rb, TabConfig::Icon );
     gridLayout-> addWidget( rb, 1, 1 );
@@ -418,13 +418,13 @@ QWidget *TabDialog::createIconTab ( QWidget *parent )
 
 //	gridLayout = new QGridLayout ( vertLayout );
 	gridLayout-> addRowSpacing ( 2, 8 );
-	
+
 	label = new QLabel ( tr( "Color:" ), tab );
 	gridLayout-> addWidget ( label, 3, 0 );
-	
-	m_iconcolor = new OColorButton ( tab );
+
+	m_iconcolor = new OColorButton ( tab, QColor ( m_tc. m_text_color ) );
 	connect ( m_iconcolor, SIGNAL( colorSelected ( const QColor & )), this, SLOT( iconColorClicked ( const QColor & )));
-	gridLayout-> addWidget ( m_iconcolor, 3, 1, AlignLeft );        	
+	gridLayout-> addWidget ( m_iconcolor, 3, 1, AlignLeft );
 
 	vertLayout-> addStretch ( 10 );
 
