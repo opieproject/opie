@@ -148,9 +148,7 @@ QString OPacket::dump( int bpl ) const
     static int index = 0;
     index++;
     int len = _hdr.caplen;
-    QString str;
-    str.sprintf( "\n<----- Packet #%04d Len = 0x%X (%d) ----->\n\n", index, len, len );
-    str.append( "0000: " );
+    QString str( "000:" );
     QString tmp;
     QString bytes;
     QString chars;
@@ -167,7 +165,7 @@ QString OPacket::dump( int bpl ) const
             str.append( ' ' );
             str.append( chars );
             str.append( '\n' );
-            tmp.sprintf( "%04X: ", i+1 ); str.append( tmp );
+            tmp.sprintf( "%03X:", i+1 ); str.append( tmp );
             bytes = "";
             chars = "";
         }
