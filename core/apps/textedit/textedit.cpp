@@ -20,7 +20,6 @@
 // changes added by L. J. Potter Sun 02-17-2002 21:31:31
 
 #include "textedit.h"
-#include "fileSaver.h"
 #include "filePermissions.h"
 #include "fontDialog.h"
 
@@ -792,7 +791,6 @@ bool TextEdit::saveAs()
         }
     }
 
-/*    
     QMap<QString, QStringList> map;
     map.insert(tr("All"), QStringList() );
     QStringList text;
@@ -803,14 +801,6 @@ bool TextEdit::saveAs()
     QString str = OFileDialog::getSaveFileName( 2,"/", QString::null, map);
     if(!str.isEmpty() ) {
         QString fileNm=str;
-*/
-
-      fileSaveDlg=new fileSaver(this,tr("Save File As?"),TRUE, 0, currentFileName);
-      qDebug("wanna save filename "+currentFileName);
-      fileSaveDlg->exec();
-      if( fileSaveDlg->result() == 1 ) {
-        QString fileNm=fileSaveDlg->selectedFileName;
-
 
         qDebug("saving filename "+fileNm);
         QFileInfo fi(fileNm);
@@ -832,14 +822,15 @@ bool TextEdit::saveAs()
             if ( !fm.saveFile( *doc, rt ) ) {
                 return false;
             }
-            if( fileSaveDlg->filePermCheck->isChecked() ) {
+
+//            if( fileSaveDlg->filePermCheck->isChecked() ) {
                 filePermissions *filePerm;
                 filePerm = new filePermissions(this, tr("Permissions"),true,0,(const QString &)fileNm);
                 filePerm->exec();
 
-                if( filePerm)
-                    delete  filePerm;
-            }
+                 if( filePerm)
+                     delete  filePerm;
+//            }
         }
     }
     editor->setEdited(TRUE);
@@ -848,8 +839,6 @@ bool TextEdit::saveAs()
     if(caption().left(1)=="*")
         setCaption(caption().right(caption().length()-1));
 
-    if(fileSaveDlg)
-        delete fileSaveDlg;
     return true;
 } //end saveAs
 

@@ -25,7 +25,7 @@
 #define QTEXTEDIT_OPEN_API
 
 //#include "fileBrowser.h"
-#include "fileSaver.h"
+//#include "fileSaver.h"
 
 #include <qpe/filemanager.h>
 #include <qpe/qcopenvelope_qws.h>
@@ -110,7 +110,7 @@ private:
     void setFontSize(int sz, bool round_down_not_up);
 
 private:
-    fileSaver *fileSaveDlg;
+//    fileSaver *fileSaveDlg;
 //    fileBrowser *browseForFiles;
     QpeEditor* editor;
     QToolBar *menu, *editBar, *searchBar;
