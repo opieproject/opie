@@ -17,6 +17,7 @@
 #include <qpe/tzselect.h>
 #include <qpe/timestring.h>
 #include <qpe/qpedialog.h>
+#include <qpe/datebookdb.h>
 #include <sys/time.h>
 #include <time.h>
 #include <stdlib.h>
@@ -144,6 +145,13 @@ void  Ntp::ntpFinished(OProcess *p)
     slotProbeNtpServer();
    	return;
   }
+
+  Global::writeHWClock();
+  // since time has changed quickly load in the datebookdb
+  // to allow the alarm server to get a better grip on itself
+  // (example re-trigger alarms for when we travel back in time)
+  DateBookDB db;
+
 	Config cfg("ntp",Config::User);
   cfg.setGroup("lookups");
   int lastLookup = cfg.readNumEntry("time",0);
