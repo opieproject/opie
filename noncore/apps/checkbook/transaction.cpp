@@ -43,12 +43,11 @@
 #include <qradiobutton.h>
 #include <qscrollview.h>
 #include <qstring.h>
-
-#include <stdio.h>
+#include <qwhatsthis.h>
 
 Transaction::Transaction( QWidget *parent, const QString &acctname, TranInfo *info,
 						  char symbol )
-	: QDialog( parent, 0, TRUE, 0 )
+	: QDialog( parent, 0, TRUE, WStyle_ContextHelp )
 {
 	setCaption( tr( "Transaction for " ) + acctname );
 
@@ -79,9 +78,11 @@ Transaction::Transaction( QWidget *parent, const QString &acctname, TranInfo *in
 	layout2->setSpacing( 2 );
 	layout2->setMargin( 2 );
 	withBtn = new QRadioButton( tr( "Withdrawal" ), btngrp );
+	QWhatsThis::add( withBtn, tr( "Select whether the transaction is a withdrawal or deposit here." ) );
 	layout2->addWidget( withBtn, 0, 0 );
 	connect( withBtn, SIGNAL( clicked() ), this, SLOT( slotWithdrawalClicked() ) );
 	depBtn = new QRadioButton( tr( "Deposit" ), btngrp );
+	QWhatsThis::add( depBtn, tr( "Select whether the transaction is a withdrawal or deposit here." ) );
 	layout2->addWidget( depBtn, 0, 1 );
 	btngrp->setMaximumSize( 320, withBtn->height() );
 	connect( depBtn, SIGNAL( clicked() ), this, SLOT( slotDepositClicked() ) );
@@ -89,9 +90,11 @@ Transaction::Transaction( QWidget *parent, const QString &acctname, TranInfo *in
 
 	// Date
 	QLabel *label = new QLabel( tr( "Date:" ), container );
+	QWhatsThis::add( label, tr( "Select date of transaction here." ) );
 	layout->addWidget( label, 1, 0 );
 	dateBtn = new QPushButton( TimeString::shortDate( QDate::currentDate() ),
 								container );
+	QWhatsThis::add( dateBtn, tr( "Select date of transaction here." ) );
 	QPopupMenu *m1 = new QPopupMenu( container );
 	datePicker = new DateBookMonth( m1, 0, TRUE );
 	m1->insertItem( datePicker );
@@ -102,45 +105,59 @@ Transaction::Transaction( QWidget *parent, const QString &acctname, TranInfo *in
 
 	// Check number
 	label = new QLabel( tr( "Number:" ), container );
+	QWhatsThis::add( label, tr( "Enter check number here." ) );
 	layout->addWidget( label, 1, 2 );
 	numEdit = new QLineEdit( container );
+	QWhatsThis::add( numEdit, tr( "Enter check number here." ) );
 	numEdit->setMaximumWidth( 40 );
 	layout->addWidget( numEdit, 1, 3 );
 
 	// Description
 	label = new QLabel( tr( "Description:" ), container );
+	QWhatsThis::add( label, tr( "Enter description of transaction here." ) );
 	layout->addWidget( label, 2, 0 );
 	descEdit = new QLineEdit( container );
+	QWhatsThis::add( descEdit, tr( "Enter description of transaction here." ) );
 	layout->addMultiCellWidget( descEdit, 2, 2, 1, 3 );
 
 	// Category
 	label = new QLabel( tr( "Category:" ), container );
+	QWhatsThis::add( label, tr( "Select transaction category here." ) );
 	layout->addWidget( label, 3, 0 );
 	catList = new QComboBox( container );
+	QWhatsThis::add( catList, tr( "Select transaction category here." ) );
 	layout->addMultiCellWidget( catList, 3, 3, 1, 3 );
 
 	// Type
 	label = new QLabel( tr( "Type:" ), container );
+	QWhatsThis::add( label, tr( "Select transaction type here.\n\nThe options available vary based on whether the transaction is a deposit or withdrawal." ) );
 	layout->addWidget( label, 4, 0 );
 	typeList = new QComboBox( container );
+	QWhatsThis::add( typeList, tr( "Select transaction type here.\n\nThe options available vary based on whether the transaction is a deposit or withdrawal." ) );
 	layout->addMultiCellWidget( typeList, 4, 4, 1, 3 );
 
 	// Amount
 	label = new QLabel( tr( "Amount:" ), container );
+	QWhatsThis::add( label, tr( "Enter the amount of transaction here.\n\nThe value entered should always be positive." ) );
 	layout->addWidget( label, 5, 0 );
 	amtEdit = new QLineEdit( container );
+	QWhatsThis::add( amtEdit, tr( "Enter the amount of transaction here.\n\nThe value entered should always be positive." ) );
 	layout->addMultiCellWidget( amtEdit, 5, 5, 1, 3 );
 
 	// Fee
 	label = new QLabel( tr( "Fee:" ), container );
+	QWhatsThis::add( label, tr( "Enter any fee amount assoiciated with this transaction.\n\nThe value entered should always be positive." ) );
 	layout->addWidget( label, 6, 0 );
 	feeEdit = new QLineEdit( container );
+	QWhatsThis::add( feeEdit, tr( "Enter any fee amount assoiciated with this transaction.\n\nThe value entered should always be positive." ) );
 	layout->addMultiCellWidget( feeEdit, 6, 6, 1, 3 );
 
 	// Notes
 	label = new QLabel( tr( "Notes:" ), container );
+	QWhatsThis::add( label, tr( "Enter any additional information for this transaction here." ) );
 	layout->addWidget( label, 7, 0 );
 	noteEdit = new QMultiLineEdit( container );
+	QWhatsThis::add( noteEdit, tr( "Enter any additional information for this transaction here." ) );
 	layout->addMultiCellWidget( noteEdit, 8, 8, 0, 3 );
 
 	// Populate current values if provided

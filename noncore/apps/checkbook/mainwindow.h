@@ -52,8 +52,8 @@ class MainWindow : public QMainWindow
 		char      currencySymbol;
 
 	private slots:
-		void slotOpen();
 		void slotNew();
+		void slotEdit();
 		void slotDelete();
 };
 

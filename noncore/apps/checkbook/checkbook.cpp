@@ -43,10 +43,11 @@
 #include <qlistview.h>
 #include <qmultilineedit.h>
 #include <qpushbutton.h>
+#include <qwhatsthis.h>
 #include <qwidget.h>
 
 Checkbook::Checkbook( QWidget *parent, const QString &n, const QString &fd, char symbol )
-	: QDialog( parent, 0, TRUE, 0 )
+	: QDialog( parent, 0, TRUE, WStyle_ContextHelp )
 {
 	name = n;
 	filename = fd + name + ".qcb";
@@ -110,16 +111,20 @@ QWidget *Checkbook::initInfo()
 
 	// Account name
 	QLabel *label = new QLabel( tr( "Name:" ), container );
+	QWhatsThis::add( label, tr( "Enter name of checkbook here." ) );
 	layout->addWidget( label, 0, 0 );
 	nameEdit = new QLineEdit( container );
+	QWhatsThis::add( nameEdit, tr( "Enter name of checkbook here." ) );
 	connect( nameEdit, SIGNAL( textChanged( const QString & ) ),
 			 this, SLOT( slotNameChanged( const QString & ) ) );
 	layout->addWidget( nameEdit, 0, 1 );
 
 	// Type of account
 	label = new QLabel( tr( "Type:" ), container );
+	QWhatsThis::add( label, tr( "Select type of checkbook here." ) );
 	layout->addWidget( label, 1, 0 );
 	typeList = new QComboBox( container );
+	QWhatsThis::add( typeList, tr( "Select type of checkbook here." ) );
 	typeList->insertItem( tr( "Savings" ) );		// 0
 	typeList->insertItem( tr( "Checking" ) );		// 1
 	typeList->insertItem( tr( "CD" ) );				// 2
@@ -130,34 +135,44 @@ QWidget *Checkbook::initInfo()
 
 	// Bank/institution name
 	label = new QLabel( tr( "Bank:" ), container );
+	QWhatsThis::add( label, tr( "Enter name of the bank for this checkbook here." ) );
 	layout->addWidget( label, 2, 0 );
 	bankEdit = new QLineEdit( container );
+	QWhatsThis::add( bankEdit, tr( "Enter name of the bank for this checkbook here." ) );
 	layout->addWidget( bankEdit, 2, 1 );
 
 	// Account number
 	label = new QLabel( tr( "Account number:" ), container );
+	QWhatsThis::add( label, tr( "Enter account number for this checkbook here." ) );
 	layout->addWidget( label, 3, 0 );
 	acctNumEdit = new QLineEdit( container );
+	QWhatsThis::add( acctNumEdit, tr( "Enter account number for this checkbook here." ) );
 	layout->addWidget( acctNumEdit, 3, 1 );
 
 	// PIN number
 	label = new QLabel( tr( "PIN number:" ), container );
+	QWhatsThis::add( label, tr( "Enter PIN number for this checkbook here." ) );
 	layout->addWidget( label, 4, 0 );
 	pinNumEdit = new QLineEdit( container );
+	QWhatsThis::add( pinNumEdit, tr( "Enter PIN number for this checkbook here." ) );
 	layout->addWidget( pinNumEdit, 4, 1 );
 
 	// Starting balance
 	label = new QLabel( tr( "Starting balance:" ), container );
+	QWhatsThis::add( label, tr( "Enter the initial balance for this checkbook here." ) );
 	layout->addWidget( label, 5, 0 );
 	balanceEdit = new QLineEdit( container );
+	QWhatsThis::add( balanceEdit, tr( "Enter the initial balance for this checkbook here." ) );
 	connect( balanceEdit, SIGNAL( textChanged( const QString & ) ),
 			 this, SLOT( slotStartingBalanceChanged( const QString & ) ) );
 	layout->addWidget( balanceEdit, 5, 1 );
 
 	// Notes
 	label = new QLabel( tr( "Notes:" ), container );
+	QWhatsThis::add( label, tr( "Enter any additional information for this checkbook here." ) );
 	layout->addWidget( label, 6, 0 );
 	notesEdit = new QMultiLineEdit( container );
+	QWhatsThis::add( notesEdit, tr( "Enter any additional information for this checkbook here." ) );
 	notesEdit->setMaximumHeight( 85 );
 	layout->addMultiCellWidget( notesEdit, 7, 7, 0, 1 );
 
@@ -174,9 +189,11 @@ QWidget *Checkbook::initTransactions()
 
 	balanceLabel = new QLabel( tr( "Current balance: %10.00" ).arg( currencySymbol ),
 								control );
+	QWhatsThis::add( balanceLabel, tr( "This area shows the current balance in this checkbook." ) );
 	layout->addMultiCellWidget( balanceLabel, 0, 0, 0, 2 );
 
 	tranTable = new QListView( control );
+	QWhatsThis::add( tranTable, tr( "This is a listing of all transactions entered for this checkbook.\n\nTo sort entries by a specific field, click on the column name." ) );
 	tranTable->addColumn( tr( "ID" ) );
 	tranTable->addColumn( tr( "Date" ) );
 	tranTable->addColumn( tr( "Description" ) );
@@ -189,14 +206,17 @@ QWidget *Checkbook::initTransactions()
 			 this, SLOT( slotEditTran() ) );
 
 	QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), control );
+	QWhatsThis::add( btn, tr( "Click here to add a new transaction." ) );
 	connect( btn, SIGNAL( clicked() ), this, SLOT( slotNewTran() ) );
 	layout->addWidget( btn, 2, 0 );
 
 	btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Edit" ), control );
+	QWhatsThis::add( btn, tr( "Select a transaction and then click here to edit it." ) );
 	connect( btn, SIGNAL( clicked() ), this, SLOT( slotEditTran() ) );
 	layout->addWidget( btn, 2, 1 );
 
-	btn = new QPushButton( Resource::loadPixmap( "editdelete" ), tr( "Delete" ), control );
+	btn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), control );
+	QWhatsThis::add( btn, tr( "Select a checkbook and then click here to delete it." ) );
 	connect( btn, SIGNAL( clicked() ), this, SLOT( slotDeleteTran() ) );
 	layout->addWidget( btn, 2, 2 );
 
@@ -223,10 +243,12 @@ QWidget *Checkbook::initCharts()
 */
 
 	QWidget *graphWidget = new QWidget( control );
+	QWhatsThis::add( graphWidget, tr( "Graph not implemented yet." ) );
 	layout->addMultiCellWidget( graphWidget, 0, 0, 0, 1 );
 	graphWidget->setBackgroundMode( QWidget::PaletteBase );
 
 	QPushButton *btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Draw" ), control );
+	QWhatsThis::add( btn, tr( "Click here to draw the graph." ) );
 	connect( btn, SIGNAL( clicked() ), this, SLOT( slotDrawGraph() ) );
 	layout->addWidget( btn, 1, 1 );
 
