@@ -11,6 +11,8 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 
 TRANSLATIONS = ../../../i18n/de/wordgame.ts \
+	 ../../../i18n/da/wordgame.ts \
+	 ../../../i18n/xx/wordgame.ts \
 	 ../../../i18n/en/wordgame.ts \
 	 ../../../i18n/es/wordgame.ts \
 	 ../../../i18n/fr/wordgame.ts \

@@ -14,6 +14,8 @@ INTERFACES	= gsmtoolbase.ui
 TARGET		= gsmtool
 
 TRANSLATIONS = ../../../i18n/de/gsmtool.ts \
+	 ../../../i18n/da/gsmtool.ts \
+	 ../../../i18n/xx/gsmtool.ts \
 	 ../../../i18n/en/gsmtool.ts \
 	 ../../../i18n/es/gsmtool.ts \
 	 ../../../i18n/fr/gsmtool.ts \

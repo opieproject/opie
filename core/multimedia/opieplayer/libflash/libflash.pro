@@ -14,6 +14,8 @@ LIBS            +=  -lqpe
 VERSION		=   1.0.0
 
 TRANSLATIONS = ../../../../i18n/de/libflashplugin.ts \
+	 ../../../../i18n/da/libflashplugin.ts \
+	 ../../../../i18n/xx/libflashplugin.ts \
 	 ../../../../i18n/en/libflashplugin.ts \
 	 ../../../../i18n/es/libflashplugin.ts \
 	 ../../../../i18n/fr/libflashplugin.ts \

@@ -26,6 +26,7 @@ DESTDIR     = $(OPIEDIR)/bin
 TARGET      = opie-login
 
 TRANSLATIONS = ../../i18n/de/opie-login.ts \
+	 ../../i18n/xx/opie-login.ts \
 ·    ../../i18n/en/opie-login.ts \
 ·    ../../i18n/es/opie-login.ts \
 ·    ../../i18n/fr/opie-login.ts \

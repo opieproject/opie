@@ -38,6 +38,8 @@ INTERFACES	= runwindow.ui \
 TARGET		= oipkg
 
 TRANSLATIONS = ../../../i18n/de/oipkg.ts \
+	 ../../../i18n/da/oipkg.ts \
+	 ../../../i18n/xx/oipkg.ts \
 	 ../../../i18n/en/oipkg.ts \
 	 ../../../i18n/es/oipkg.ts \
 	 ../../../i18n/fr/oipkg.ts \

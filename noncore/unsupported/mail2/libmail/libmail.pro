@@ -24,6 +24,8 @@ TARGET		=	mail
 DESTDIR		=	$(QTDIR)/lib
 
 TRANSLATIONS = ../../../i18n/de/libmail.ts \
+	 ../../../i18n/da/libmail.ts \
+	 ../../../i18n/xx/libmail.ts \
 	 ../../../i18n/en/libmail.ts \
 	 ../../../i18n/es/libmail.ts \
 	 ../../../i18n/fr/libmail.ts \

@@ -10,6 +10,8 @@ LIBS            += -lqpe -lopie
 VERSION		= 1.0.0
 
 TRANSLATIONS = ../../../i18n/de/libcardmonapplet.ts \
+	 ../../../i18n/da/libcardmonapplet.ts \
+	 ../../../i18n/xx/libcardmonapplet.ts \
 	 ../../../i18n/en/libcardmonapplet.ts \
 	 ../../../i18n/es/libcardmonapplet.ts \
 	 ../../../i18n/fr/libcardmonapplet.ts \

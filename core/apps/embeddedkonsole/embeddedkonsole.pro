@@ -37,6 +37,7 @@ LIBS            += -lqpe -lopie
 TMAKE_CXXFLAGS += -DQT_QWS_OPIE
 
 TRANSLATIONS = ../../../i18n/de/embeddedkonsole.ts \
+        ../../../i18n/xx/embeddedkonsole.ts \
         ../../../i18n/en/embeddedkonsole.ts \
         ../../../i18n/es/embeddedkonsole.ts \
         ../../../i18n/fr/embeddedkonsole.ts \

@@ -13,6 +13,8 @@ INTERFACES	=
 TARGET		= minesweep
 
 TRANSLATIONS = ../../../i18n/de/minesweep.ts \
+	 ../../../i18n/da/minesweep.ts \
+	 ../../../i18n/xx/minesweep.ts \
 	 ../../../i18n/en/minesweep.ts \
 	 ../../../i18n/es/minesweep.ts \
 	 ../../../i18n/fr/minesweep.ts \

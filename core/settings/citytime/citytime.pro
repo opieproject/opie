@@ -11,6 +11,7 @@ DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe
 
 TRANSLATIONS = ../../../i18n/de/citytime.ts \
+	 ../../../i18n/xx/citytime.ts \
 	 ../../../i18n/en/citytime.ts \
 	 ../../../i18n/es/citytime.ts \
 	 ../../../i18n/fr/citytime.ts \

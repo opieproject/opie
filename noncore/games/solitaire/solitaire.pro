@@ -19,6 +19,8 @@ DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe
 
 TRANSLATIONS = ../../../i18n/de/patience.ts \
+	 ../../../i18n/da/patience.ts \
+	 ../../../i18n/xx/patience.ts \
    ../../../i18n/en/patience.ts \
    ../../../i18n/es/patience.ts \
    ../../../i18n/fr/patience.ts \

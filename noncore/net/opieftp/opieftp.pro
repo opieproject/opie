@@ -9,6 +9,8 @@ DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe -lftplib
 
 TRANSLATIONS = ../../../i18n/de/opieftp.ts \
+	 ../../../i18n/da/opieftp.ts \
+	 ../../../i18n/xx/opieftp.ts \
 	 ../../../i18n/en/opieftp.ts \
 	 ../../../i18n/es/opieftp.ts \
 	 ../../../i18n/fr/opieftp.ts \

@@ -11,6 +11,8 @@ INTERFACES	=
 TARGET		= confedit
 
 TRANSLATIONS = ../../../i18n/de/confedit.ts \
+	 ../../../i18n/da/confedit.ts \
+	 ../../../i18n/xx/confedit.ts \
 	 ../../../i18n/en/confedit.ts \
 	 ../../../i18n/es/confedit.ts \
 	 ../../../i18n/fr/confedit.ts \

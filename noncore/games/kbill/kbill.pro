@@ -14,6 +14,8 @@ LIBS		+= -lqpe -lstdc++
 DESTDIR 	=  $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/kbill.ts \
+	 ../../../i18n/da/kbill.ts \
+	 ../../../i18n/xx/kbill.ts \
 	 ../../../i18n/en/kbill.ts \
 	 ../../../i18n/es/kbill.ts \
 	 ../../../i18n/fr/kbill.ts \

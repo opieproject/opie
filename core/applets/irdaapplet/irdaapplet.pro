@@ -10,6 +10,8 @@ LIBS            += -lqpe
 VERSION   = 1.0.0
 
 TRANSLATIONS = ../../../i18n/de/libirdaapplet.ts \
+	 ../../../i18n/da/libirdaapplet.ts \
+	 ../../../i18n/xx/libirdaapplet.ts \
 	 ../../../i18n/en/libirdaapplet.ts \
 	 ../../../i18n/es/libirdaapplet.ts \
 	 ../../../i18n/fr/libirdaapplet.ts \

@@ -129,6 +129,7 @@ DESTDIR		= $(QTDIR)/lib$(PROJMAK)
 VERSION		= 1.5.0.1
 
 TRANSLATIONS = ../i18n/de/libqpe.ts \
+	 ../i18n/xx/libqpe.ts \
 	 ../i18n/en/libqpe.ts \
 	 ../i18n/es/libqpe.ts \
 	 ../i18n/fr/libqpe.ts \

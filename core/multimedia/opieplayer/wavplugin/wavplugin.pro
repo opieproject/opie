@@ -10,6 +10,8 @@ LIBS            +=  -lqpe
 VERSION		=   1.0.0
 
 TRANSLATIONS = ../../../../i18n/de/libwavplugin.ts \
+	 ../../../../i18n/da/libwavplugin.ts \
+	 ../../../../i18n/xx/libwavplugin.ts \
 	 ../../../../i18n/en/libwavplugin.ts \
 	 ../../../../i18n/es/libwavplugin.ts \
 	 ../../../../i18n/fr/libwavplugin.ts \

@@ -10,6 +10,8 @@ LIBS            += -lqpe
 TARGET		= dictionary
 
 TRANSLATIONS = ../../../i18n/de/dictionary.ts \
+	 ../../../i18n/da/dictionary.ts \
+	 ../../../i18n/xx/dictionary.ts \
 	 ../../../i18n/en/dictionary.ts \
 	 ../../../i18n/es/dictionary.ts \
 	 ../../../i18n/fr/dictionary.ts \

@@ -10,6 +10,8 @@ TARGET		=	bend
 DESTDIR		+=	$(OPIEDIR)/plugins/applets/
 
 TRANSLATIONS = ../../../i18n/de/libbend.ts \
+	 ../../../i18n/da/libbend.ts \
+	 ../../../i18n/xx/libbend.ts \
 	 ../../../i18n/en/libbend.ts \
 	 ../../../i18n/es/libbend.ts \
 	 ../../../i18n/fr/libbend.ts \

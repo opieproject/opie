@@ -10,6 +10,8 @@ LIBS            += -lqpe
 TARGET          = mediummount
 
 TRANSLATIONS = ../../../i18n/de/mediummount.ts \
+	 ../../../i18n/da/mediummount.ts \
+	 ../../../i18n/xx/mediummount.ts \
 	 ../../../i18n/en/mediummount.ts \
 	 ../../../i18n/es/mediummount.ts \
 	 ../../../i18n/fr/mediummount.ts \

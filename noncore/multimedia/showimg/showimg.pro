@@ -9,6 +9,7 @@ DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
 
 TRANSLATIONS = ../../../i18n/de/showimg.ts \
+	 ../../../i18n/xx/showimg.ts \
    ../../../i18n/en/showimg.ts \
    ../../../i18n/es/showimg.ts \
    ../../../i18n/fr/showimg.ts \

@@ -10,6 +10,8 @@ INTERFACES	= examplebase.ui
 TARGET		= example
 
 TRANSLATIONS = ../i18n/de/example.ts \
+	 ../i18n/da/example.ts \
+	 ../i18n/xx/example.ts \
 	 ../i18n/en/example.ts \
 	 ../i18n/es/example.ts \
 	 ../i18n/fr/example.ts \

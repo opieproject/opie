@@ -17,6 +17,8 @@ INTERFACES	=
 TARGET		= tetrix
 
 TRANSLATIONS = ../../../i18n/de/tetrix.ts \
+	 ../../../i18n/da/tetrix.ts \
+	 ../../../i18n/xx/tetrix.ts \
 	 ../../../i18n/en/tetrix.ts \
 	 ../../../i18n/es/tetrix.ts \
 	 ../../../i18n/fr/tetrix.ts \

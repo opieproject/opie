@@ -46,6 +46,8 @@ TARGET		= 	mail
 DESTDIR		= 	$(OPIEDIR)/bin
 
 TRANSLATIONS = ../../i18n/de/mail.ts \
+	 ../../i18n/da/mail.ts \
+	 ../../i18n/xx/mail.ts \
 	 ../../i18n/en/mail.ts \
 	 ../../i18n/es/mail.ts \
 	 ../../i18n/fr/mail.ts \

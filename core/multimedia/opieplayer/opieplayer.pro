@@ -19,6 +19,8 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 
 TRANSLATIONS = ../../../i18n/de/opieplayer.ts \
+        ../../../i18n/da/opieplayer.ts \
+        ../../../i18n/xx/opieplayer.ts \
         ../../../i18n/en/opieplayer.ts \
         ../../../i18n/es/opieplayer.ts \
         ../../../i18n/fr/opieplayer.ts \

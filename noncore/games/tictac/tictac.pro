@@ -10,6 +10,8 @@ LIBS            += -lqpe
 DESTDIR   = $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/tictac.ts \
+	 ../../../i18n/da/tictac.ts \
+	 ../../../i18n/xx/tictac.ts \
 	 ../../../i18n/en/tictac.ts \
 	 ../../../i18n/es/tictac.ts \
 	 ../../../i18n/fr/tictac.ts \

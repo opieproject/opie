@@ -9,6 +9,8 @@ LIBS        += -lqpe
 TARGET		= buzzword 
 
 TRANSLATIONS = ../../../i18n/de/buzzword.ts \
+	 ../../../i18n/da/buzzword.ts \
+	 ../../../i18n/xx/buzzword.ts \
 	 ../../../i18n/en/buzzword.ts \
 	 ../../../i18n/es/buzzword.ts \
 	 ../../../i18n/fr/buzzword.ts \

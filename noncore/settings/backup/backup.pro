@@ -11,6 +11,7 @@ TARGET		= backup
 DESTDIR		= $(OPIEDIR)/bin	
 
 TRANSLATIONS = ../../../i18n/de/backup.ts \
+	 ../../../i18n/xx/backup.ts \
 ·    ../../../i18n/en/backup.ts \
 ·    ../../../i18n/es/backup.ts \
 ·    ../../../i18n/fr/backup.ts \

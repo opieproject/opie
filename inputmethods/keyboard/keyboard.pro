@@ -13,6 +13,8 @@ QMAKE_LFLAGS	+= -Wl,-rpath,/opt/QtPalmtop/plugins/inputmethods
 VERSION		= 1.0.0
 
 TRANSLATIONS = ../../i18n/de/libqkeyboard.ts \
+	 ../../i18n/da/libqkeyboard.ts \
+	 ../../i18n/xx/libqkeyboard.ts \
 	 ../../i18n/en/libqkeyboard.ts \
 	 ../../i18n/es/libqkeyboard.ts \
 	 ../../i18n/fr/libqkeyboard.ts \

@@ -10,6 +10,8 @@ DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe
 
 TRANSLATIONS = ../../../i18n/de/mindbreaker.ts \
+	 ../../../i18n/da/mindbreaker.ts \
+	 ../../../i18n/xx/mindbreaker.ts \
 	 ../../../i18n/en/mindbreaker.ts \
 	 ../../../i18n/es/mindbreaker.ts \
 	 ../../../i18n/fr/mindbreaker.ts \

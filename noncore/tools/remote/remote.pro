@@ -9,6 +9,8 @@ LIBS		+=-lqpe -lopie
 TARGET          = remote
 
 TRANSLATIONS = ../../../i18n/de/remote.ts \
+	 ../../../i18n/da/remote.ts \
+	 ../../../i18n/xx/remote.ts \
 	 ../../../i18n/en/remote.ts \
 	 ../../../i18n/es/remote.ts \
 	 ../../../i18n/fr/remote.ts \

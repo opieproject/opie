@@ -11,6 +11,7 @@ TARGET		= today
 DESTDIR		= $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/today.ts \
+	 ../../../i18n/xx/today.ts \
 	 ../../../i18n/en/today.ts \
 	 ../../../i18n/es/today.ts \
 	 ../../../i18n/fr/today.ts \

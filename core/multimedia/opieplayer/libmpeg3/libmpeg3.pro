@@ -47,6 +47,8 @@ LIBS            +=  -lqpe -lpthread -lm
 VERSION   =   1.0.0
 
 TRANSLATIONS = ../../../../i18n/de/libmpeg3plugin.ts \
+	 ../../../../i18n/da/libmpeg3plugin.ts \
+	 ../../../../i18n/xx/libmpeg3plugin.ts \
 	 ../../../../i18n/en/libmpeg3plugin.ts \
 	 ../../../../i18n/es/libmpeg3plugin.ts \
 	 ../../../../i18n/fr/libmpeg3plugin.ts \

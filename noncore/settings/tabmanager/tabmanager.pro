@@ -10,6 +10,8 @@ TARGET		= tabmanager
 DESTDIR 	= $(OPIEDIR)/bin
 
 TRANSLATIONS =	../../../i18n/de/tabmanager.ts \
+	 ../../../i18n/da/tabmanager.ts \
+	 ../../../i18n/xx/tabmanager.ts \
 		../../../i18n/en/tabmanager.ts \
 		../../../i18n/es/tabmanager.ts \
 		../../../i18n/fr/tabmanager.ts \

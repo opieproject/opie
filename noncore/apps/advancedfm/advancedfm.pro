@@ -9,6 +9,8 @@ DESTDIR = $(OPIEDIR)/bin
 LIBS            += -lqpe -lopie
 
 TRANSLATIONS = ../../../i18n/de/advancedfm.ts \
+	 ../../../i18n/da/advancedfm.ts \
+	 ../../../i18n/xx/advancedfm.ts \
    ../../../i18n/en/advancedfm.ts \
    ../../../i18n/es/advancedfm.ts \
    ../../../i18n/fr/advancedfm.ts \

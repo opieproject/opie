@@ -31,6 +31,8 @@ LIBS            += -lqpe
 VERSION		= 1.0.0
 
 TRANSLATIONS = ../../i18n/de/libqhandwriting.ts \
+	 ../../i18n/da/libqhandwriting.ts \
+	 ../../i18n/xx/libqhandwriting.ts \
 	 ../../i18n/en/libqhandwriting.ts \
 	 ../../i18n/es/libqhandwriting.ts \
 	 ../../i18n/fr/libqhandwriting.ts \

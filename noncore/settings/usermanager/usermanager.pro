@@ -10,6 +10,7 @@ TARGET		= usermanager
 DESTDIR         = $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/usermanager.ts \
+	 ../../../i18n/xx/usermanager.ts \
 ·    ../../../i18n/en/usermanager.ts \
 ·    ../../../i18n/es/usermanager.ts \
 ·    ../../../i18n/fr/usermanager.ts \

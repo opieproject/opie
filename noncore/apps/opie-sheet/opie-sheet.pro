@@ -9,6 +9,8 @@ LIBS            += -lqpe
 TARGET		= sheetqt
 
 TRANSLATIONS = ../../../i18n/de/sheetqt.ts \
+	 ../../../i18n/da/sheetqt.ts \
+	 ../../../i18n/xx/sheetqt.ts \
 	 ../../../i18n/en/sheetqt.ts \
 	 ../../../i18n/es/sheetqt.ts \
 	 ../../../i18n/fr/sheetqt.ts \

@@ -1,6 +1,8 @@
 # This is part of the taskbar
 
 TRANSLATIONS = ../../../i18n/de/calibrate.pro.in.ts \
+	 ../../../i18n/da/calibrate.pro.in.ts \
+	 ../../../i18n/xx/calibrate.pro.in.ts \
 	 ../../../i18n/en/calibrate.pro.in.ts \
 	 ../../../i18n/es/calibrate.pro.in.ts \
 	 ../../../i18n/fr/calibrate.pro.in.ts \

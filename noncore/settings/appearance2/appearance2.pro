@@ -11,6 +11,7 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 
 TRANSLATIONS = ../../../i18n/de/appearance.ts \
+	 ../../../i18n/xx/appearance.ts \
 	 ../../../i18n/en/appearance.ts \
 	 ../../../i18n/es/appearance.ts \
 	 ../../../i18n/fr/appearance.ts \

@@ -10,6 +10,8 @@ LIBS            += -lqpe
 VERSION		= 1.0.0
 
 TRANSLATIONS = ../../../i18n/de/libvolumeapplet.ts \
+	 ../../../i18n/da/libvolumeapplet.ts \
+	 ../../../i18n/xx/libvolumeapplet.ts \
 	 ../../../i18n/en/libvolumeapplet.ts \
 	 ../../../i18n/es/libvolumeapplet.ts \
 	 ../../../i18n/fr/libvolumeapplet.ts \

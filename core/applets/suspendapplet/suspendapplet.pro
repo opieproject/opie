@@ -10,6 +10,8 @@ LIBS         += -lqpe
 VERSION       = 1.0.0
 
 TRANSLATIONS = ../../../i18n/de/libsuspendapplet.ts \
+	 ../../../i18n/da/libsuspendapplet.ts \
+	 ../../../i18n/xx/libsuspendapplet.ts \
 	 ../../../i18n/en/libsuspendapplet.ts \
 	 ../../../i18n/es/libsuspendapplet.ts \
 	 ../../../i18n/fr/libsuspendapplet.ts \

@@ -10,6 +10,7 @@ LIBS            += -lqpe
 INTERFACES	=
 
 TRANSLATIONS = ../../../i18n/de/helpbrowser.ts \
+	 ../../../i18n/xx/helpbrowser.ts \
 	 ../../../i18n/en/helpbrowser.ts \
 	 ../../../i18n/es/helpbrowser.ts \
 	 ../../../i18n/fr/helpbrowser.ts \

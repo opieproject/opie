@@ -10,6 +10,8 @@ LIBS         += -lqpe
 VERSION       = 1.0.0
 
 TRANSLATIONS = ../../../i18n/de/liblogoutapplet.ts \
+	 ../../../i18n/da/liblogoutapplet.ts \
+	 ../../../i18n/xx/liblogoutapplet.ts \
 	 ../../../i18n/en/liblogoutapplet.ts \
 	 ../../../i18n/es/liblogoutapplet.ts \
 	 ../../../i18n/fr/liblogoutapplet.ts \

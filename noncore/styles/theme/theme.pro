@@ -20,6 +20,8 @@ TARGET       = theme
 VERSION      = 1.0.0
 
 TRANSLATIONS = ../../../i18n/de/libtheme.ts \
+	 ../../../i18n/da/libtheme.ts \
+	 ../../../i18n/xx/libtheme.ts \
 	 ../../../i18n/en/libtheme.ts \
 	 ../../../i18n/es/libtheme.ts \
 	 ../../../i18n/fr/libtheme.ts \

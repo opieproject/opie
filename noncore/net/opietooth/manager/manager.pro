@@ -28,6 +28,8 @@ DESTDIR         = $(OPIEDIR)/bin
 TARGET          = bluetooth-manager
 
 TRANSLATIONS = ../../../../i18n/de/bluetooth-manager.ts \
+	 ../../../../i18n/da/bluetooth-manager.ts \
+	 ../../../../i18n/xx/bluetooth-manager.ts \
 	 ../../../../i18n/en/bluetooth-manager.ts \
 	 ../../../../i18n/es/bluetooth-manager.ts \
 	 ../../../../i18n/fr/bluetooth-manager.ts \

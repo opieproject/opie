@@ -11,6 +11,7 @@ INTERFACES	= calculator.ui
 TARGET		= calculator
 
 TRANSLATIONS = ../../../i18n/de/calculator.ts \
+	 ../../../i18n/xx/calculator.ts \
 	 ../../../i18n/en/calculator.ts \
 	 ../../../i18n/es/calculator.ts \
 	 ../../../i18n/fr/calculator.ts \

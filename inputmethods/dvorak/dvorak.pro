@@ -13,6 +13,8 @@ QMAKE_LFLAGS	+= -Wl,-rpath,/opt/QtPalmtop/plugins/inputmethods
 VERSION		= 1.0.0
 
 TRANSLATIONS = ../../i18n/de/libqdvorak.ts \
+	 ../../i18n/da/libqdvorak.ts \
+	 ../../i18n/xx/libqdvorak.ts \
 	 ../../i18n/en/libqdvorak.ts \
 	 ../../i18n/es/libqdvorak.ts \
 	 ../../i18n/fr/libqdvorak.ts \

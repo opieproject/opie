@@ -10,6 +10,8 @@ DESTDIR     = $(OPIEDIR)/bin
 TARGET		= bounce 
 
 TRANSLATIONS = ../../../i18n/de/bounce.ts \
+	 ../../../i18n/da/bounce.ts \
+	 ../../../i18n/xx/bounce.ts \
 	 ../../../i18n/en/bounce.ts \
 	 ../../../i18n/es/bounce.ts \
 	 ../../../i18n/fr/bounce.ts \

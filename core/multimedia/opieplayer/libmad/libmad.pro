@@ -18,6 +18,8 @@ LIBS            += -lqpe -lm
 VERSION   =   1.0.0
 
 TRANSLATIONS = ../../../../i18n/de/libmadplugin.ts \
+	 ../../../../i18n/da/libmadplugin.ts \
+	 ../../../../i18n/xx/libmadplugin.ts \
 	 ../../../../i18n/en/libmadplugin.ts \
 	 ../../../../i18n/es/libmadplugin.ts \
 	 ../../../../i18n/fr/libmadplugin.ts \

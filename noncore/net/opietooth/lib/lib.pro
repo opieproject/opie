@@ -9,6 +9,8 @@ LIBS += -lopie
 #VERSION = 0.0.0
 
 TRANSLATIONS = ../../../../i18n/de/libopietooth.ts \
+	 ../../../../i18n/da/libopietooth.ts \
+	 ../../../../i18n/xx/libopietooth.ts \
 	 ../../../../i18n/en/libopietooth.ts \
 	 ../../../../i18n/es/libopietooth.ts \
 	 ../../../../i18n/fr/libopietooth.ts \

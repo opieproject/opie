@@ -82,6 +82,7 @@ DESTDIR      = $(QTDIR)/lib$(PROJMAK)
 INTERFACES      = otimepickerbase.ui orecurrancebase.ui
 
 TRANSLATIONS = ../i18n/de/libopie.ts \
+	 ../i18n/xx/libopie.ts \
    ../i18n/en/libopie.ts \
    ../i18n/es/libopie.ts \
    ../i18n/fr/libopie.ts \

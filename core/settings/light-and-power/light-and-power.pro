@@ -10,6 +10,7 @@ LIBS            += -lqpe -lopie
 TARGET		= light-and-power
 
 TRANSLATIONS = ../../../i18n/de/light-and-power.ts \
+	 ../../../i18n/xx/light-and-power.ts \
 	 ../../../i18n/en/light-and-power.ts \
 	 ../../../i18n/es/light-and-power.ts \
 	 ../../../i18n/fr/light-and-power.ts \

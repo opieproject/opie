@@ -41,6 +41,8 @@ DESTDIR         = $(OPIEDIR)/bin
 TARGET		= kpacman
 
 TRANSLATIONS = ../../../i18n/de/kpacman.ts \
+	 ../../../i18n/da/kpacman.ts \
+	 ../../../i18n/xx/kpacman.ts \
 	 ../../../i18n/en/kpacman.ts \
 	 ../../../i18n/es/kpacman.ts \
 	 ../../../i18n/fr/kpacman.ts \

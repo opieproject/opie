@@ -10,6 +10,8 @@ LIBS            += -lqpe
 TARGET		= fifteen
 
 TRANSLATIONS = ../../../i18n/de/fifteen.ts \
+	 ../../../i18n/da/fifteen.ts \
+	 ../../../i18n/xx/fifteen.ts \
 	 ../../../i18n/en/fifteen.ts \
 	 ../../../i18n/es/fifteen.ts \
 	 ../../../i18n/fr/fifteen.ts \
