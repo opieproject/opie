@@ -150,7 +150,9 @@ int Lib::subVersion() {
 
 int Lib::play( const QString& fileName, int startPos, int start_time ) {
     QString str = fileName.stripWhiteSpace();
-    xine_open( m_xine,  QFile::encodeName(str.utf8() ).data() );
+    if ( !xine_open( m_xine, QFile::encodeName(str.utf8() ).data() ) ) {
+        return 0;
+    }
     return xine_play( m_xine, startPos, start_time);
 }
 
@@ -191,16 +193,22 @@ int Lib::length() {
 }
 
 bool Lib::isSeekable() {
-    return xine_get_stream_info ( m_xine, XINE_STREAM_INFO_SEEKABLE );
+    return xine_get_stream_info( m_xine, XINE_STREAM_INFO_SEEKABLE );
 }
+
+void Lib::seekTo( int time ) {
+//     xine_trick_mode ( m_xine, XINE_TRICK_MODE_SEEK_TO_TIME, time ); NOT IMPLEMENTED YET IN XINE :_(
+    xine_play( m_xine, 0, time );
+}
+
 
 Frame Lib::currentFrame() {
     Frame frame;
     return frame;
 };
 
-QString Lib::metaInfo() {
-    xine_get_meta_info( m_xine, 0 );
+QString Lib::metaInfo( int number) {
+    return xine_get_meta_info( m_xine, number );
 }
 
 int Lib::error() {
@@ -216,11 +224,25 @@ void Lib::handleXineEvent( xine_event_t* t ) {
 
 void Lib::setShowVideo( bool video ) {
     m_video = video;
-    ::null_set_show_video( m_videoOutput,  video );
+    ::null_set_show_video( m_videoOutput, video );
 }
 
 bool Lib::isShowingVideo() {
     return ::null_is_showing_video( m_videoOutput );
+}
+
+bool Lib::hasVideo() {
+    //looks like it is not implemented yet
+    //return xine_get_stream_info( m_xine, XINE_STREAM_INFO_VIDEO_CHANNELS );
+    // ugly hack until xine is ready, look for the width of the video
+    int test =  xine_get_stream_info( m_xine, 2 );
+    if( test > 0 ) {
+        // qDebug( QString(" has video:  %1").arg( test ) );
+        return true;
+    } else {
+        //qDebug ( "does not have video ");
+        return false;
+    }
 }
 
 void Lib::showVideoFullScreen( bool fullScreen ) {
@@ -232,7 +254,7 @@ bool Lib::isVideoFullScreen() {
 }
 
 void Lib::setScaling( bool scale ) {
-    ::null_set_scaling( m_videoOutput, scale  );
+    ::null_set_scaling( m_videoOutput, scale );
 }
 
 void Lib::setGamma( int value ) {
@@ -250,7 +272,7 @@ void Lib::xine_event_handler( void* user_data, xine_event_t* t ) {
 
 void Lib::xine_display_frame( void* user_data, uint8_t *frame,
                               int width,  int height,  int bytes ) {
-    ( (Lib*)user_data)->drawFrame( frame,  width, height, bytes );
+    ( (Lib*)user_data)->drawFrame( frame, width, height, bytes );
 }
 
 void Lib::drawFrame( uint8_t* frame,  int width,  int height,  int bytes ) {
@@ -258,8 +280,5 @@ void Lib::drawFrame( uint8_t* frame,  int width,  int height,  int bytes ) {
         qWarning("not showing video now");
         return;
     }
-
-//    qWarning( "called draw frame %d %d", width, height );
-
     m_wid-> setVideoFrame ( frame, width, height, bytes );
 }

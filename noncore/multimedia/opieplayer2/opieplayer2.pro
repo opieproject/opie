@@ -2,12 +2,12 @@ TEMPLATE  = app
 #CONFIG    = qt warn_on release
 CONFIG         = qt warn_on debug
 DESTDIR   = $(OPIEDIR)/bin
-HEADERS   = playlistselection.h mediaplayerstate.h xinecontrol.h mediadetect.h\
+HEADERS   = playlistselection.h mediaplayerstate.h xinecontrol.h \
    	    videowidget.h audiowidget.h playlistwidget.h mediaplayer.h inputDialog.h \
             frame.h lib.h xinevideowidget.h volumecontrol.h playlistwidgetgui.h\
             alphablend.h yuv2rgb.h
 SOURCES   = main.cpp \
-            playlistselection.cpp mediaplayerstate.cpp xinecontrol.cpp mediadetect.cpp\
+            playlistselection.cpp mediaplayerstate.cpp xinecontrol.cpp \
             videowidget.cpp audiowidget.cpp playlistwidget.cpp mediaplayer.cpp inputDialog.cpp \
             frame.cpp lib.cpp nullvideo.c xinevideowidget.cpp volumecontrol.cpp \
 	    playlistwidgetgui.cpp\

@@ -117,14 +117,34 @@ namespace XINE {
 
         /**
          * Get the meta info (like author etc) from the stream
-         *
+         * XINE_META_INFO_TITLE               0
+         * XINE_META_INFO_COMMENT             1
+         * XINE_META_INFO_ARTIST              2
+         * XINE_META_INFO_GENRE               3
+         * XINE_META_INFO_ALBUM               4
+         * XINE_META_INFO_YEAR                5
+         * XINE_META_INFO_VIDEOCODEC          6
+         * XINE_META_INFO_AUDIOCODEC          7
+         * XINE_META_INFO_SYSTEMLAYER         8
+         * XINE_META_INFO_INPUT_PLUGIN        9
          */
-        QString metaInfo() ;
+        QString metaInfo( int number );
 
         /**
          *
          */
         bool isScaling();
+
+        /**
+         * seek to a position
+         */
+        void seekTo( int time );
+
+        /**
+         *
+         * @return is media stream has video
+         */
+        bool hasVideo();
 
         /**
          *
@@ -144,6 +164,10 @@ namespace XINE {
 
         /**
          * Returns the error code
+         * XINE_ERROR_NONE                    0
+         * XINE_ERROR_NO_INPUT_PLUGIN         1
+         * XINE_ERROR_NO_DEMUXER_PLUGIN       2
+         * XINE_ERROR_DEMUXER_FAILED          3
          */
         int error() /*const*/;
 

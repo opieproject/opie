@@ -58,7 +58,7 @@ static const int yo = 22; // movable y offset
 
 Ticker::Ticker( QWidget* parent=0 ) : QFrame( parent ) {
         setFrameStyle( WinPanel | Sunken );
-        setText( "No Song" );
+        //setText( "No Song" );
 }
 
 Ticker::~Ticker() {
@@ -460,20 +460,15 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                 switch (i) {
                 case AudioPlay:
                     if( mediaPlayerState->isPaused ) {
-//                          setToggleButton( i, FALSE );
                         mediaPlayerState->setPaused( FALSE );
                         return;
                     } else if( !mediaPlayerState->isPaused ) {
-//                            setToggleButton( i, TRUE );
                         mediaPlayerState->setPaused( TRUE );
                         return;
-                    } else {
-                        //  setToggleButton( i, TRUE );
-                        // mediaPlayerState->setPlaying( videoButtons[i].isDown );
                     }
                 case AudioStop:       mediaPlayerState->setPlaying(FALSE); return;
-                  case AudioNext:  if(playList->whichList() ==0) mediaPlayerState->setNext(); return;
-                case AudioPrevious:  if(playList->whichList() ==0) mediaPlayerState->setPrev(); return;
+                case AudioNext:       if( playList->whichList() ==0 ) mediaPlayerState->setNext(); return;
+                case AudioPrevious:   if( playList->whichList() ==0 ) mediaPlayerState->setPrev(); return;
                 case AudioLoop:       mediaPlayerState->setLooping(audioButtons[i].isDown); return;
                 case AudioVolumeUp:   emit moreReleased(); return;
                 case AudioVolumeDown: emit lessReleased(); return;
@@ -508,7 +503,7 @@ void AudioWidget::closeEvent( QCloseEvent* ) {
 }
 
 
-void AudioWidget::paintEvent( QPaintEvent * pe) {
+void AudioWidget::paintEvent( QPaintEvent * pe ) {
     if ( !pe->erased() ) {
           // Combine with background and double buffer
         QPixmap pix( pe->rect().size() );
@@ -580,18 +575,6 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e) {
           //            toggleButton(4);
           break;
       case Key_Escape: {
-/*
- * author pleas tell me where the i come from .-)
-   #if defined(QT_QWS_IPAQ)
-          if( mediaPlayerState->isPaused ) {
-              setToggleButton( i, FALSE );
-              mediaPlayerState->setPaused( FALSE );
-          } else if( !mediaPlayerState->isPaused ) {
-              setToggleButton( i, TRUE );
-              mediaPlayerState->setPaused( TRUE );
-          }
-#endif
-*/
       }
           break;
 

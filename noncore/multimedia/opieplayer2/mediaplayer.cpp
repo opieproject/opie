@@ -36,7 +36,7 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
     : QObject( parent, name ), volumeDirection( 0 ), currentFile( NULL ) {
 
     playList->setCaption(tr("OpiePlayer: Initializating"));
-    
+
     qApp->processEvents();
     //    QPEApplication::grabKeyboard(); // EVIL
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
@@ -100,37 +100,50 @@ void MediaPlayer::setPlaying( bool play ) {
         fileName = currentFile->name();
         long seconds =  mediaPlayerState->length();//
         time.sprintf("%li:%02i", seconds/60, (int)seconds%60 );
-        qDebug(time);
-        
-    } else { //if playing in file list.. play in a different way
-          // random and looping settings enabled causes problems here,
-          // since there is no selected file in the playlist, but a selected file in the file list,
-          // so we remember and shutoff
+        //qDebug(time);
+
+    } else {
+        //if playing in file list.. play in a different way
+        // random and looping settings enabled causes problems here,
+        // since there is no selected file in the playlist, but a selected file in the file list,
+        // so we remember and shutoff
         l = mediaPlayerState->looping();
-        if(l)
+        if(l) {
             mediaPlayerState->setLooping( false );
+        }
         r = mediaPlayerState->shuffled();
-        mediaPlayerState->setShuffled(false);
-        
+        mediaPlayerState->setShuffled( false );
+
         fileName = playList->currentFileListPathName();
-        xineControl->play( fileName);
-        long seconds =  mediaPlayerState->length();//
+        xineControl->play( fileName );
+        long seconds =  mediaPlayerState->length();
         time.sprintf("%li:%02i", seconds/60, (int)seconds%60 );
-        qDebug(time);
-        if( fileName.left(4) != "http" )
-            fileName = QFileInfo( fileName).baseName();
+        //qDebug(time);
+        if( fileName.left(4) != "http" ) {
+            fileName = QFileInfo( fileName ).baseName();
+        }
 
     }
-        if( fileName.left(4) == "http" )
-            tickerText= tr( " File: " ) + fileName;
-        else
-            tickerText = tr( " File: " ) + fileName + tr(", Length: ") + time;
+
+    if( fileName.left(4) == "http" ) {
+       if ( xineControl->getMetaInfo().isEmpty() ) {
+           tickerText = tr( " File: " ) + fileName;
+       } else {
+           tickerText = xineControl->getMetaInfo();
+       }
+    } else {
+        if ( xineControl->getMetaInfo().isEmpty() ) {
+            tickerText = tr( " File: " ) + fileName + tr( ", Length: " ) + time + "  ";
+        } else {
+            tickerText = xineControl->getMetaInfo() + " Length: " + time + "  ";
+        }
+    }
     audioUI->setTickerText( tickerText );
 }
 
 
 void MediaPlayer::prev() {
-    if(playList->whichList() == 0) { //if using the playlist
+    if( playList->whichList() == 0 ) { //if using the playlist
         if ( playList->prev() ) {
             play();
         } else if ( mediaPlayerState->looping() ) {
@@ -192,23 +205,23 @@ void MediaPlayer::stopChangingVolume() {
     onScreenDisplayVolume = 0;
     int w=0;
     int h=0;
-    if( !xineControl->hasVideo()) {
+    if( !xineControl->hasVideo() ) {
         w = audioUI->width();
         h = audioUI->height();
-        audioUI->repaint( (w - 200) / 2, h - yoff, 200 + 9, 70, FALSE );
+        audioUI->repaint( ( w - 200 ) / 2, h - yoff, 200 + 9, 70, FALSE );
     } else {
         w = videoUI->width();
         h = videoUI->height();
-        videoUI->repaint( (w - 200) / 2, h - yoff, 200 + 9, 70, FALSE );
+        videoUI->repaint( ( w - 200 ) / 2, h - yoff, 200 + 9, 70, FALSE );
     }
 }
 
 
 void MediaPlayer::timerEvent( QTimerEvent * ) {
     if ( volumeDirection == +1 ) {
-        volControl->incVol(2);
-    }  else if ( volumeDirection == -1 ) {
-        volControl->decVol(2);
+        volControl->incVol( 2 );
+    } else if ( volumeDirection == -1 ) {
+        volControl->decVol( 2 );
     }
 
 
@@ -223,13 +236,13 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
     }
 
     int w=0; int h=0;
-    if( !xineControl->hasVideo()) {
+    if( !xineControl->hasVideo() ) {
         w = audioUI->width();
         h = audioUI->height();
 
         if ( drawnOnScreenDisplay ) {
             if ( onScreenDisplayVolume > v ) {
-                audioUI->repaint( (w - 200) / 2 + v * 20 + 0, h - yoff + 40, (onScreenDisplayVolume - v) * 20 + 9, 30, FALSE );
+                audioUI->repaint( ( w - 200 ) / 2 + v * 20 + 0, h - yoff + 40, ( onScreenDisplayVolume - v ) * 20 + 9, 30, FALSE );
             }
         }
         drawnOnScreenDisplay = TRUE;
@@ -246,9 +259,9 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
 
         for ( unsigned int i = 0; i < 10; i++ ) {
             if ( v > i ) {
-                p.drawRect( (w - 200) / 2 + i * 20 + 0, h - yoff + 40, 9, 30 );
+                p.drawRect( ( w - 200 ) / 2 + i * 20 + 0, h - yoff + 40, 9, 30 );
             } else {
-                p.drawRect( (w - 200) / 2 + i * 20 + 3, h - yoff + 50, 3, 10 );
+                p.drawRect( ( w - 200 ) / 2 + i * 20 + 3, h - yoff + 50, 3, 10 );
             }
         }
     } else {
@@ -257,7 +270,7 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
 
         if ( drawnOnScreenDisplay ) {
             if ( onScreenDisplayVolume > v ) {
-                videoUI->repaint( (w - 200) / 2 + v * 20 + 0, h - yoff + 40, (onScreenDisplayVolume - v) * 20 + 9, 30, FALSE );
+                videoUI->repaint( (w - 200) / 2 + v * 20 + 0, h - yoff + 40, ( onScreenDisplayVolume - v ) * 20 + 9, 30, FALSE );
             }
         }
         drawnOnScreenDisplay = TRUE;
@@ -270,7 +283,7 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
         f.setPixelSize( 20 );
         f.setBold( TRUE );
         p.setFont( f );
-        p.drawText( (w - 200) / 2, h - yoff + 20, tr("Volume") );
+        p.drawText( (w - 200) / 2, h - yoff + 20, tr( "Volume" ) );
 
         for ( unsigned int i = 0; i < 10; i++ ) {
             if ( v > i ) {
@@ -327,7 +340,7 @@ void MediaPlayer::cleanUp() {// this happens on closing
      Config cfg( "OpiePlayer" );
      mediaPlayerState->writeConfig( cfg );
     playList->writeConfig( cfg );
-    
+
 //     QPEApplication::grabKeyboard();
 //     QPEApplication::ungrabKeyboard();
 }

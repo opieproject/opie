@@ -35,7 +35,6 @@
 #define XINECONTROL_H
 
 #include "lib.h"
-#include "mediadetect.h"
 #include <qobject.h>
 
 class XineControl : public QObject  {
@@ -77,6 +76,18 @@ public slots:
      */
     void nextMedia();
 
+    /**
+     * Get as much info about the stream from xine as possible
+     */
+    QString getMetaInfo();
+
+    /**
+     * get the error code and "translate" it for the user
+     *
+     */
+    QString getErrorCode();
+
+
     void videoResized ( const QSize &s );
 
     /**
@@ -88,7 +99,6 @@ public slots:
 
 private:
     XINE::Lib *libXine;
-    MediaDetect mdetect;
     long m_currentTime;
     long m_position;
     int m_length;

@@ -33,6 +33,7 @@
 
 
 #include <qtimer.h>
+#include <qmessagebox.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
 #include "xinecontrol.h"
@@ -43,16 +44,17 @@ extern MediaPlayerState *mediaPlayerState;
 extern VideoWidget *videoUI;
 XineControl::XineControl( QObject *parent, const char *name )
     : QObject( parent, name ) {
+
     libXine = new XINE::Lib(videoUI->vidWidget() );
 
-    connect ( videoUI, SIGNAL( videoResized ( const QSize & )), this, SLOT( videoResized ( const QSize & )));
-    connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( pause(bool) ) );
+    connect ( videoUI, SIGNAL( videoResized ( const QSize & )), this, SLOT( videoResized ( const QSize & ) ) );
+    connect( mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pause( bool ) ) );
     connect( this, SIGNAL( positionChanged( long ) ), mediaPlayerState, SLOT( updatePosition( long ) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( stop( bool ) ) );
     connect( mediaPlayerState, SIGNAL( fullscreenToggled( bool ) ), this, SLOT( setFullscreen( bool ) ) );
     connect( mediaPlayerState, SIGNAL( positionChanged( long ) ),  this,  SLOT( seekTo( long ) ) );
     connect( mediaPlayerState,  SIGNAL( videoGammaChanged( int ) ), this,  SLOT( setGamma( int ) ) );
-    connect( libXine, SIGNAL( stopped() ),  this, SLOT( nextMedia() ) );
+    connect( libXine, SIGNAL( stopped() ), this, SLOT( nextMedia() ) );
 
     disabledSuspendScreenSaver = FALSE;
 }
@@ -62,44 +64,48 @@ XineControl::~XineControl() {
     if ( disabledSuspendScreenSaver ) {
         disabledSuspendScreenSaver = FALSE;
         // Re-enable the suspend mode
-        QCopEnvelope("QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
+        QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
     }
 #endif
     delete libXine;
 }
 
 void XineControl::play( const QString& fileName ) {
-    hasVideoChannel=FALSE;
-    hasAudioChannel=FALSE;
+    hasVideoChannel = FALSE;
+    hasAudioChannel = FALSE;
     m_fileName = fileName;
 
     //qDebug("<<FILENAME: " + fileName  + ">>>>");
 
-    libXine->play( fileName );
-    mediaPlayerState->setPlaying( true );
-    char whichGui = mdetect.videoOrAudio( fileName );
-    if (whichGui == 'f') {
-        qDebug("Nicht erkannter Dateityp");
+    if ( !libXine->play( fileName ) ) {
+        QMessageBox::warning( 0l , tr( "Failure" ), getErrorCode() );
         return;
     }
-    if (whichGui == 'a') {
+    mediaPlayerState->setPlaying( true );
+
+    char whichGui;
+    // qDebug( QString( "libXine->hasVideo() return : %1 ").arg( libXine->hasVideo() ) );
+    if ( !libXine->hasVideo() ) {
+        whichGui = 'a';
+        qDebug("HAS AUDIO");
         libXine->setShowVideo( false );
-        hasAudioChannel=TRUE;
+        hasAudioChannel = TRUE;
     } else {
+        whichGui = 'v';
+        qDebug("HAS VIDEO");
         libXine->setShowVideo( true );
-        hasVideoChannel=TRUE;
+        hasVideoChannel = TRUE;
     }
     // determine if slider is shown
     mediaPlayerState->setIsStreaming( !libXine->isSeekable() );
     // which gui (video / audio)
     mediaPlayerState->setView( whichGui );
 
-
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
     if ( !disabledSuspendScreenSaver ) {
         disabledSuspendScreenSaver = TRUE;
         // Stop the screen from blanking and power saving state
-        QCopEnvelope("QPE/System", "setScreenSaverMode(int)" )
+        QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" )
             << ( whichGui == 'v' ? QPEApplication::Disable : QPEApplication::DisableSuspend );
     }
 #endif
@@ -117,17 +123,16 @@ void XineControl::setGamma( int value ) {
 }
 
 void XineControl::stop( bool isSet ) {
-    if ( !isSet) {
-        libXine->stop( );
+    if ( !isSet ) {
+        libXine->stop();
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
         if ( disabledSuspendScreenSaver ) {
             disabledSuspendScreenSaver = FALSE;
             // Re-enable the suspend mode
-            QCopEnvelope("QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
+            QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
         }
 #endif
-
     }
 }
 
@@ -136,10 +141,10 @@ void XineControl::stop( bool isSet ) {
  * @isSet
  */
 void XineControl::pause( bool isSet) {
-    if (isSet) {
+    if ( isSet ) {
         libXine->pause();
     } else {
-        libXine->play( m_fileName, 0, m_currentTime);
+        libXine->play( m_fileName, 0, m_currentTime );
     }
 }
 
@@ -149,7 +154,7 @@ void XineControl::pause( bool isSet) {
  */
 long XineControl::currentTime() {
     // todo: jede sekunde überprüfen
-    m_currentTime =  libXine->currentTime();
+    m_currentTime = libXine->currentTime();
     return m_currentTime;
     QTimer::singleShot( 1000, this, SLOT( currentTime() ) );
 }
@@ -168,14 +173,15 @@ void  XineControl::length() {
  * @return long the postion in seconds
  */
 long XineControl::position() {
-    m_position = ( currentTime()  );
-    mediaPlayerState->updatePosition( m_position  );
+    m_position = ( currentTime() );
+    mediaPlayerState->updatePosition( m_position );
     long emitPos = (long)m_position;
     emit positionChanged( emitPos );
-    if(mediaPlayerState->isPlaying)
+    if( mediaPlayerState->isPlaying ) {
     // needs to be stopped the media is stopped
-    QTimer::singleShot( 1000, this, SLOT( position() ) );
-//    qDebug("POSITION : %d", m_position);
+        QTimer::singleShot( 1000, this, SLOT( position() ) );
+    }
+    // qDebug("POSITION : %d", m_position);
     return m_position;
 }
 
@@ -184,7 +190,48 @@ long XineControl::position() {
  * @param isSet
  */
 void XineControl::setFullscreen( bool isSet ) {
-    libXine->showVideoFullScreen( isSet);
+    libXine->showVideoFullScreen( isSet );
+}
+
+
+QString XineControl::getMetaInfo() {
+
+    QString returnString;
+
+    if ( !libXine->metaInfo( 0 ).isEmpty() ) {
+        returnString += tr( " Titel: " + libXine->metaInfo( 0 ) );
+    }
+
+    if ( !libXine->metaInfo( 1 ).isEmpty() ) {
+        returnString += tr( " Comment: " + libXine->metaInfo( 1 ) );
+    }
+
+    if ( !libXine->metaInfo( 2 ).isEmpty() ) {
+        returnString += tr( " Artist: " + libXine->metaInfo( 2 ) );
+    }
+
+    if ( !libXine->metaInfo( 3 ).isEmpty() ) {
+        returnString += tr( " Genre: " + libXine->metaInfo( 3 ) );
+    }
+
+    if ( !libXine->metaInfo( 4 ).isEmpty() ) {
+        returnString += tr( " Album: " + libXine->metaInfo( 4 ) );
+    }
+
+    if ( !libXine->metaInfo( 5 ).isEmpty() ) {
+        returnString += tr( " Year: " + libXine->metaInfo( 5 ) );
+    }
+    return returnString;
+}
+
+QString XineControl::getErrorCode() {
+    int errorCode = libXine->error();
+
+    if ( errorCode == 1 ) {
+        return tr( "No input plugin found for this media type" );
+    } else {
+        return tr( "Some other error" );
+    }
 }
 
 /**
@@ -192,9 +239,9 @@ void XineControl::setFullscreen( bool isSet ) {
  * @param second the second to jump to
  */
 void XineControl::seekTo( long second ) {
-    libXine->play( m_fileName , 0, (int)second );
+    libXine->seekTo( (int)second );
 }
 
 void XineControl::videoResized ( const QSize &s ) {
-  libXine-> resize ( s );
+    libXine->resize( s );
 }
