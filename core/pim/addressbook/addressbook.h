@@ -101,7 +101,7 @@ private:
 	// AbLabel *abView();
 	void populateCategories();
 
-	QPopupMenu *catMenu, *fontMenu;
+	QPopupMenu *catMenu;
 	QPEToolBar *listTools;
 	QToolButton *deleteButton;
 	QValueList<int> allFields, orderedFields;
@@ -122,6 +122,7 @@ private:
 
 	bool syncing;
 	QFont *defaultFont;
+	int m_curFontSize;
 
 	bool isLoading;
 

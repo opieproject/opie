@@ -169,7 +169,7 @@
                                 <class>QRadioButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>RadioButton11</cstring>
+                                    <cstring>m_smallFont</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
@@ -180,7 +180,7 @@
                                 <class>QRadioButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>RadioButton12</cstring>
+                                    <cstring>m_normalFont</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
@@ -195,7 +195,7 @@
                                 <class>QRadioButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>RadioButton13</cstring>
+                                    <cstring>m_largeFont</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>

@@ -28,6 +28,24 @@ void ConfigDlg::setConfig( const AbConfig& cnf )
 	m_useQtMail->setChecked( m_config.useQtMail() );
 	m_useOpieMail->setChecked( m_config.useOpieMail() );
 	m_useCaseSensitive->setChecked( m_config.beCaseSensitive() );
+
+	switch( m_config.fontSize() ){
+	case 0:
+		m_smallFont->setChecked( true );
+		m_normalFont->setChecked( false );
+		m_largeFont->setChecked( false );
+		break;
+	case 1: 
+		m_smallFont->setChecked( false );
+		m_normalFont->setChecked( true );
+		m_largeFont->setChecked( false );
+		break;
+	case 2: 
+		m_smallFont->setChecked( false );
+		m_normalFont->setChecked( false );
+		m_largeFont->setChecked( true );
+		break;
+	}
 	
 }
     
@@ -38,6 +56,13 @@ AbConfig ConfigDlg::getConfig()
 	m_config.setUseQtMail( m_useQtMail->isOn() );
 	m_config.setUseOpieMail( m_useOpieMail->isOn() );
 	m_config.setBeCaseSensitive( m_useCaseSensitive->isChecked() );
+
+	if ( m_smallFont->isChecked() )
+		m_config.setFontSize( 0 );
+	if ( m_normalFont->isChecked() )
+		m_config.setFontSize( 1 );
+	if ( m_largeFont->isChecked() )
+		m_config.setFontSize( 2 );
 
 	return m_config;
 }

@@ -6,6 +6,7 @@ AbConfig::AbConfig( ):
 	m_useOpieMail( false ),
 	m_useRegExp( false ),
 	m_beCaseSensitive( false ),
+	m_fontSize( 1 ),
 	m_changed( false )
 {
 	load();

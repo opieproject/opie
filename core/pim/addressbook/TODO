@@ -6,12 +6,13 @@ Feature requests:
   (Maybe using gsmtool. And we may
 	add a library class for this)
 - Select of primary contact (see #274 on mantis)
-
+- 3rd column for 2. Contact
 
 Urgent:
 
 Important:
 
+- "Unfiled" is always in listview ..
 - Redesign of Contacteditor
 - Store last settings of combo-boxes
 

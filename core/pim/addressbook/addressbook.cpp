@@ -78,7 +78,6 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 				      WFlags f )
 	: QMainWindow( parent, name, f ),
 	  catMenu (0l),
-	  fontMenu (0l),
 	  abEditor(0l),
 	  syncing(FALSE)
 {
@@ -245,19 +244,10 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	
 	mbList->insertItem( tr("View"), catMenu );
 	
-	fontMenu = new QPopupMenu(this);
-	fontMenu->setCheckable( true );
-	connect( fontMenu, SIGNAL(activated(int)), this, SLOT(slotSetFont(int)));
-	
-	fontMenu->insertItem(tr( "Small" ), 0);
-	fontMenu->insertItem(tr( "Normal" ), 1);
-	fontMenu->insertItem(tr( "Large" ), 2);
-	
  	defaultFont = new QFont( m_abView->font() );
-	
  	slotSetFont(m_config.fontSize());
+	m_curFontSize = m_config.fontSize();
 	
-	mbList->insertItem( tr("Font"), fontMenu);
 	setCentralWidget(listContainer);
 	
 	//    qDebug("adressbook contrsuction: t=%d", t.elapsed() );
@@ -275,13 +265,20 @@ void AddressbookWindow::slotConfig()
 	if ( dlg -> exec() ) {
 		qWarning ("Config Dialog accepted !");
 		m_config = dlg -> getConfig();
+		if ( m_curFontSize != m_config.fontSize() ){
+			qWarning("Font was changed!");
+			m_curFontSize = m_config.fontSize();
+			emit slotSetFont( m_curFontSize );
+		}
 	}
 
 	delete dlg;
 }
 
 
-void AddressbookWindow::slotSetFont( int size ) {
+void AddressbookWindow::slotSetFont( int size ) 
+{
+	qWarning("void AddressbookWindow::slotSetFont( %d )", size);
 	
 	if (size > 2 || size < 0)
 		size = 1;
@@ -292,27 +289,18 @@ void AddressbookWindow::slotSetFont( int size ) {
 	
 	switch (size) {
 	case 0:
-		fontMenu->setItemChecked(0, true);
-		fontMenu->setItemChecked(1, false);
-		fontMenu->setItemChecked(2, false);
 		m_abView->setFont( QFont( defaultFont->family(), defaultFont->pointSize() - 2 ) );
 		currentFont = new QFont (m_abView->font());
-		// abList->resizeRows(currentFont->pixelSize() + 7);
+		// abList->resizeRows(currentFont->pixelSize() + 7); :SX
 		// abList->resizeRows();
 		break;
 	case 1:
-		fontMenu->setItemChecked(0, false);
-		fontMenu->setItemChecked(1, true);
-		fontMenu->setItemChecked(2, false);
  		m_abView->setFont( *defaultFont );
  		currentFont = new QFont (m_abView->font());
 // 		// abList->resizeRows(currentFont->pixelSize() + 7);
 // 		abList->resizeRows();
 		break;
 	case 2:
-		fontMenu->setItemChecked(0, false);
-		fontMenu->setItemChecked(1, false);
-		fontMenu->setItemChecked(2, true);
  		m_abView->setFont( QFont( defaultFont->family(), defaultFont->pointSize() + 2 ) );
  		currentFont = new QFont (m_abView->font());
 // 		//abList->resizeRows(currentFont->pixelSize() + 7);
@@ -932,12 +920,12 @@ void AddressbookWindow::slotSetCategory( int c )
 		return;
 	
 	// Checkmark Book Menu Item Selected 
-	if ( c < 6 )
-		for ( unsigned int i = 1; i < 6; i++ )
+	if ( c < 3 )
+		for ( unsigned int i = 1; i < 3; i++ )
 			catMenu->setItemChecked( i, c == (int)i );
 	// Checkmark Category Menu Item Selected 
 	else
-		for ( unsigned int i = 6; i < catMenu->count(); i++ )
+		for ( unsigned int i = 3; i < catMenu->count(); i++ )
 			catMenu->setItemChecked( i, c == (int)i );
 	
 	for ( unsigned int i = 1; i < catMenu->count(); i++ ) {
@@ -945,25 +933,25 @@ void AddressbookWindow::slotSetCategory( int c )
 			if ( i == 1 ){ // default List view
 				book = QString::null;
 				view = AbView::TableView;
+// 			}else if ( i == 2 ){
+// 				book = "Phone";
+// 				view = AbView::PhoneBook;
+// 			}else if ( i == 3 ){
+// 				book = "Company";
+// 				view = AbView::CompanyBook;
+// 			}else if ( i == 4 ){
+// 				book = "Email";
+// 				view = AbView::EmailBook;
 			}else if ( i == 2 ){
-				book = "Phone";
-				view = AbView::PhoneBook;
-			}else if ( i == 3 ){
-				book = "Company";
-				view = AbView::CompanyBook;
-			}else if ( i == 4 ){
-				book = "Email";
-				view = AbView::EmailBook;
-			}else if ( i == 5 ){
 				book = "Cards";
 				view = AbView::CardView;
-			}else if ( i == 6 ) // default All Categories
+			}else if ( i == 3 ) // default All Categories
 				cat = QString::null;
 			else if ( i == (unsigned int)catMenu->count() - 1 ){ // last menu option (seperator is counted, too) will be Unfiled
 				cat = "Unfiled";
 				qWarning ("Unfiled selected!!!");
 			}else{
-				cat = m_abView->categories()[i - 7];
+				cat = m_abView->categories()[i - 4];
 			}
 		}
 	}
@@ -986,20 +974,20 @@ void AddressbookWindow::slotViewSwitched( int view )
 	case AbView::TableView:
 		menu = 1;
 		break;
-	case AbView::PhoneBook:
+// 	case AbView::PhoneBook:
+// 		menu = 2;
+// 		break;
+// 	case AbView::CompanyBook:
+// 		menu = 3;
+// 		break;
+// 	case AbView::EmailBook:
+// 		menu = 4;
+// 		break;
+	case AbView::CardView:
 		menu = 2;
 		break;
-	case AbView::CompanyBook:
-		menu = 3;
-		break;
-	case AbView::EmailBook:
-		menu = 4;
-		break;
-	case AbView::CardView:
-		menu = 5;
-		break;
 	}
-	for ( unsigned int i = 1; i < 6; i++ ){
+	for ( unsigned int i = 1; i < 3; i++ ){
 		if ( catMenu )
 			catMenu->setItemChecked( i, menu == (int)i );
 	}
@@ -1021,9 +1009,9 @@ void AddressbookWindow::populateCategories()
 	rememberId = 0;
 	
 	catMenu->insertItem( tr( "List" ), id++ );
-	catMenu->insertItem( tr( "Phone Book" ), id++ );
-	catMenu->insertItem( tr( "Company Book" ), id++ );
-	catMenu->insertItem( tr( "Email Book" ), id++ );
+// 	catMenu->insertItem( tr( "Phone Book" ), id++ );
+// 	catMenu->insertItem( tr( "Company Book" ), id++ );
+// 	catMenu->insertItem( tr( "Email Book" ), id++ );
 	catMenu->insertItem( tr( "Cards" ), id++ );
 	catMenu->insertSeparator();
 	
@@ -1052,7 +1040,7 @@ void AddressbookWindow::populateCategories()
 // 	}
 	
 	if ( m_abView -> showCategory().isEmpty() ) {
-		slotSetCategory( 6 );
+		slotSetCategory( 3 );
 	}
 	else {
 		slotSetCategory( rememberId );
