@@ -103,15 +103,21 @@ int IrdaApplet::setIrdaStatus(int c) {
 }
 
 int IrdaApplet::checkIrdaDiscoveryStatus() {
-    QFile discovery("/proc/sys/net/irda/discovery");
-    char status;
 
-    discovery.open( IO_ReadOnly|IO_Raw );
-    discovery.readBlock (&status, 1);
+    QFile discovery("/proc/sys/net/irda/discovery");
+
+    QString streamIn = "0";
+
+    if (discovery.open(IO_ReadOnly) ) {
+        QTextStream stream ( &discovery );
+        streamIn = stream.read();
+    }
+
     discovery.close();
 
-    return atoi(&status);
+    return( streamIn.toInt() );
 }
+
 
 int IrdaApplet::setIrdaDiscoveryStatus(int d) {
     QFile discovery("/proc/sys/net/irda/discovery");
