@@ -298,7 +298,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   hScrollbar->setCursor( arrowCursor );
   hScrollbar->setOrientation(QScrollBar::Horizontal);
   hScrollbar->setMaximumHeight(16);
-  
+
   connect( hScrollbar, SIGNAL(valueChanged(int)), this, SLOT( hScrollChanged(int)));
 
   Config cfg("Konsole");
@@ -334,7 +334,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   hposition = 0;
   vcolumns = 0;
   useBeep = true;
- 
+
   setMouseMarks(TRUE);
   setVTFont( QFont("fixed") );
   setColorTable(base_color_table); // init color table
@@ -877,7 +877,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
 
 void TEWidget::focusInEvent( QFocusEvent * )
 {
-    
+
     // do nothing, to prevent repainting
 }
 
@@ -1068,9 +1068,9 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
         else if( ke->state() == ControlButton && ke->key() == Key_V) {
           pasteClipboard();
         }
-        else if( ke->state() == ControlButton && ke->key() == Key_C) {
+//        else if( ke->state() == ControlButton && ke->key() == Key_C) {
 //          pasteClipboard();
-        }
+//        }
         else
             emit keyPressedSignal(ke); // expose
         ke->accept();
@@ -1112,15 +1112,15 @@ void TEWidget::Bell()
 {
 //#ifdef QT_QWS_SHARP
 //# ifndef QT_NO_COP
-    if(useBeep) 
+    if(useBeep)
         QCopEnvelope( "QPE/TaskBar", "soundAlarm()" );
-    
+
 //# endif
 //#else
 //# ifndef QT_NO_SOUND
 //    QSound::play(Resource::findSound("alarm"));
 //# endif
-//#endif    
+//#endif
 
 //    QApplication::beep();
 }
@@ -1209,7 +1209,7 @@ void TEWidget::calcGeometry()
             hScrollbar->move(QPoint(p.x()+hwidth, p.y() - hwidth));
         else
             hScrollbar->move(QPoint(p.x(), p.y() - hwidth));
-     
+
         hScrollbar->show();
     }
     else hScrollbar->hide();
