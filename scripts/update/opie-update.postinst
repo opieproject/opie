@@ -19,21 +19,24 @@ echo "start" > /tmp/update.log
 for p in  $pack; do
 cmd="$IPKG_REMOVE $p"
 echo "rem.  $p" >> /tmp/update.log
-$cmd
+if [$p!="opie-update]; then
+$cmd;
+fi
 done
 
 #might help
 sync
 
 
-echo "Updateing"
+echo "Updating"
 `ipkg update`
 
 for p in  $pack; do
 cmd="$IPKG_INSTALL $p"
 echo "inst. $p" >> /tmp/update.log
-echo "$cmd"
-$cmd
+if [$p!="opie-update]; then
+$cmd;
+fi
 done
 
 ipkg remove opie-update
