@@ -43,10 +43,6 @@ public:
     OContact( const QMap<int, QString> &fromMap );
     virtual ~OContact();
 
-    static void writeVCard( const QString &filename, const QValueList<OContact> &contacts);
-    static void writeVCard( const QString &filename, const OContact &c );
-    static QValueList<OContact> readVCard( const QString &filename );
-
     enum journal_action { ACTION_ADD, ACTION_REMOVE, ACTION_REPLACE };
 
     void setTitle( const QString &v ) { replace( Qtopia::Title, v ); }
@@ -209,7 +205,6 @@ public:
 
 private:
     friend class AbEditor;
-    //    friend class AbTable;
     friend class AddressBookAccessPrivate;
     friend class OContactAccessBackend_XML;
     friend class XMLIO;
