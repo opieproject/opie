@@ -6,7 +6,7 @@ TARGET = sshkeys
 INTERFACES = sshkeysbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH += $(OPIEDIR)/include
-LIBS += -lqpe -lopie
+LIBS += -lqpe -lopiecore2
 DESTDIR = $(OPIEDIR)/bin
 
 include ( $(OPIEDIR)/include.pro )
