@@ -244,8 +244,18 @@ void TEWidget::fontChange(const QFont &)
 {
   QFontMetrics fm(font());
   font_h = fm.height();
-  font_w = fm.maxWidth();
-  font_a = fm.ascent();
+
+    // font_w = max width of ASCII chars (U.B.)
+	font_w = 0;
+	int fw;
+	for (int i = 0x20; i < 0x80; i++) {
+			if (isprint(i) && font_w < (fw = fm.width(i))) {
+					font_w = fw;
+			}
+	}
+		//font_w = fm.maxWidth();
+
+	font_a = fm.ascent();
 //printf("font_h: %d\n",font_h);
 //printf("font_w: %d\n",font_w);
 //printf("font_a: %d\n",font_a);
@@ -1020,6 +1030,7 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
     static bool alt = FALSE;
 //    qDebug(" Has a keyboard with no CTRL and ALT keys, but we fake it:");
     bool dele=FALSE;
+		
     if ( e->type() == QEvent::KeyPress || e->type() == QEvent::KeyRelease ) {
         QKeyEvent* ke = (QKeyEvent*)e;
         bool keydown = e->type() == QEvent::KeyPress || ke->isAutoRepeat();
@@ -1058,7 +1069,11 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
           // know where the current selection is.
 
 //     qDebug("key pressed is 0x%x, ascii is 0x%x, state %d", ke->key(), ke->ascii(), ke->state());
-
+				if(ke->key() == Key_Escape) {
+     qDebug("key pressed is 0x%x, ascii is 0x%x, state %d", ke->key(), ke->ascii(), ke->state());
+	
+				}
+				
         if( ke->state() == ShiftButton && ke->key() == Key_Tab) {
           //lets hardcode this sucker
 
