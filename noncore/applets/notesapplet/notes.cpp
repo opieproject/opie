@@ -112,7 +112,7 @@ NotesControl::NotesControl( QWidget *parent, const char *name )
     deleteButton= new QPushButton( this, "deleteButton" );
     deleteButton->setText(tr("Delete"));
     hbox->addWidget( deleteButton);
-
+    
     vbox->addItem(hbox);
 
     connect( box, SIGNAL( mouseButtonPressed( int, QListBoxItem *, const QPoint&)),
@@ -122,11 +122,21 @@ NotesControl::NotesControl( QWidget *parent, const char *name )
 
     connect(view,SIGNAL( textChanged() ), this, SLOT(slotViewEdited() ) );
     connect(newButton, SIGNAL(clicked()), this, SLOT(slotNewButton()));
-    connect(deleteButton, SIGNAL(clicked()), this, SLOT(slotDeleteButton()));
+    connect(deleteButton, SIGNAL(clicked()), this, SLOT(slotDeleteButtonClicked()));
+
     populateBox();
     load();
     setCaption("Notes");
       //  parent->setFocus();    
+}
+
+void NotesControl::slotDeleteButtonClicked() {
+    switch ( QMessageBox::warning(this,tr("Delete?"),tr("Do you really want to<BR><B> delete</B> this note ?")
+                                  ,tr("Yes"),tr("No"),0,1,1) ) {
+      case 0: 
+          slotDeleteButton();
+          break;
+    };
 }
 
 void NotesControl::slotDeleteButton() {
@@ -135,31 +145,32 @@ void NotesControl::slotDeleteButton() {
     qDebug("deleting "+selectedText);
 
     if( !selectedText.isEmpty()) {
-    Config cfg("Notes");
-    cfg.setGroup("Docs");
-    int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
-    QString entryName, entryName2;;
-    for ( int i = 0; i < noOfFiles; i++ ) {
-        entryName.sprintf( "File%i", i + 1 );
-        if(selectedText == cfg.readEntry( entryName )) {
-            qDebug("removing %s, %d", selectedText.latin1(), i);
-            for ( int j = i; j < noOfFiles; j++ ) {
-                entryName.sprintf( "File%i", i + 1  );
-                entryName2.sprintf( "File%i", i + 2 );
-                QString temp = cfg.readEntry(entryName2);
-                qDebug("move "+temp);
-                cfg.writeEntry(entryName, temp);
-                i++;
+
+        Config cfg("Notes");
+        cfg.setGroup("Docs");
+        int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
+        QString entryName, entryName2;;
+        for ( int i = 0; i < noOfFiles; i++ ) {
+            entryName.sprintf( "File%i", i + 1 );
+            if(selectedText == cfg.readEntry( entryName )) {
+                qDebug("removing %s, %d", selectedText.latin1(), i);
+                for ( int j = i; j < noOfFiles; j++ ) {
+                    entryName.sprintf( "File%i", i + 1  );
+                    entryName2.sprintf( "File%i", i + 2 );
+                    QString temp = cfg.readEntry(entryName2);
+                    qDebug("move "+temp);
+                    cfg.writeEntry(entryName, temp);
+                    i++;
+                }
+                cfg.writeEntry("NumberOfFiles", noOfFiles-1 );
+                entryName.sprintf( "File%i", noOfFiles );
+                cfg.removeEntry(entryName);
+                cfg.write();
+                DocLnk nf(selectedText);
+                nf.removeFiles();
             }
-            cfg.writeEntry("NumberOfFiles", noOfFiles-1 );
-            entryName.sprintf( "File%i", noOfFiles );
-            cfg.removeEntry(entryName);
-            cfg.write();
-            DocLnk nf(selectedText);
-            nf.removeFiles();
         }
-    }
-    populateBox();
+        populateBox();
     }
 }
 

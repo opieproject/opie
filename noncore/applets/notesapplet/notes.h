@@ -54,6 +54,7 @@ private:
       void load(const QString&);
 private slots:
     void slotDeleteButton();
+    void slotDeleteButtonClicked();
     void slotNewButton();
     void boxPressed(int, QListBoxItem *, const QPoint&);
     void showMenu();
