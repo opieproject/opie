@@ -1,27 +1,27 @@
 /*
-                             This file is part of the Opie Project
-                             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+                     This file is part of the Opie Project
+                      Copyright (C) The Opie Team <opie-devel@handhelds.org>
               =.
             .=l.
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+     .>+-=
+_;:,   .>  :=|.         This program is free software; you can
+.> <`_,  > .  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU Library General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This program is distributed in the hope that
+  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=    =    ;      Library General Public License for more
+++=  -.   .`   .:       details.
+:   = ...= . :.=-
+-.  .:....=;==+<;          You should have received a copy of the GNU
+ -_. . .  )=. =           Library General Public License along with
+  --    :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -40,6 +40,7 @@
 #include <qpe/resource.h>
 #include <qpe/sound.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <opie2/okeyfilter.h>
 
 /* STD */
 #include <fcntl.h>
@@ -167,8 +168,10 @@ void iPAQ::initButtons()
     if ( d->m_buttons )
         return;
 
-    if ( isQWS( ) )
-        QWSServer::setKeyboardFilter ( this );
+    if ( isQWS( ) ) {
+        Opie::Core::OKeyFilter::inst()->addPreHandler(this);
+        //QWSServer::setKeyboardFilter ( this );
+    }
 
     d->m_buttons = new QValueList <ODeviceButton>;
 
@@ -271,7 +274,7 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
             break;
         }
 
-        // Rotate cursor keys 180° or 270°
+        // Rotate cursor keys 180 or 270
         case Key_Left :
         case Key_Right:
         case Key_Up   :
@@ -280,7 +283,7 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
                 ( d->m_model == Model_iPAQ_H38xx )) {
                 newkeycode = Key_Left + ( keycode - Key_Left + 2 ) % 4;
             }
-            // Rotate the cursor keys by 270°
+            // Rotate the cursor keys by 270
             // keycode - Key_Left = position of the button starting from left clockwise
             // add the rotation to it and modolo. No we've the original offset
             // add the offset to the Key_Left key
@@ -410,7 +413,7 @@ int iPAQ::displayBrightnessResolution() const
         case Model_iPAQ_H31xx:
         case Model_iPAQ_H36xx:
         case Model_iPAQ_H37xx:
-            return 128;  	// really 256, but >128 could damage the LCD
+            return 128;     // really 256, but >128 could damage the LCD
 
         case Model_iPAQ_H38xx:
         case Model_iPAQ_H39xx:

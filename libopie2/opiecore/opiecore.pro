@@ -7,6 +7,7 @@ HEADERS     = oapplication.h            \
               oglobal.h                 \
               oglobalsettings.h         \
               okeyconfigmanager.h       \
+              okeyfilter.h              \
 	      opluginloader.h           \
               oprocess.h                \
               oprocctrl.h               \
@@ -20,6 +21,7 @@ SOURCES     = oapplication.cpp          \
               oglobal.cpp               \
               oglobalsettings.cpp       \
               okeyconfigmanager.cpp     \
+              okeyfilter.cpp            \
 	      opluginloader.cpp         \
               oprocess.cpp              \
               oprocctrl.cpp             \	    
