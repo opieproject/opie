@@ -41,11 +41,11 @@ class ProfileEditorPluginSerial : public ProfileEditorPlugin
 
 			QLabel *frame_device = new QLabel(QObject::tr("Device"), device_frame);
 
-			QLineEdit *frame_device_line = new QLineEdit("/dev/ttyS0", device_frame);
+			device_line = new QLineEdit("/dev/ttyS0", device_frame);
 
 			QVBoxLayout *vbox_frame = new QVBoxLayout(device_frame, 2);
 			vbox_frame->add(frame_device);
-			vbox_frame->add(frame_device_line);
+			vbox_frame->add(device_line);
 
 			m_widget = device_frame;
 		}
@@ -55,7 +55,13 @@ class ProfileEditorPluginSerial : public ProfileEditorPlugin
 
 	void save()
 	{
+		// special settings
+		Profile p = m_profile;
+		p.writeEntry("Device", device_line->text());
 	}
+
+	private:
+		QLineEdit *device_line;
 };
 
 class ProfileEditorPluginIrda : public ProfileEditorPlugin
@@ -80,11 +86,11 @@ class ProfileEditorPluginIrda : public ProfileEditorPlugin
 
 			QLabel *frame_device = new QLabel(QObject::tr("Device"), device_frame);
 
-			QLineEdit *frame_device_line = new QLineEdit("/dev/ircomm0", device_frame);
+			device_line = new QLineEdit("/dev/ircomm0", device_frame);
 
 			QVBoxLayout *vbox_frame = new QVBoxLayout(device_frame, 2);
 			vbox_frame->add(frame_device);
-			vbox_frame->add(frame_device_line);
+			vbox_frame->add(device_line);
 
 			m_widget = device_frame;
 		}
@@ -94,7 +100,13 @@ class ProfileEditorPluginIrda : public ProfileEditorPlugin
 
 	void save()
 	{
+		// special settings
+		Profile p = m_profile;
+		p.writeEntry("Device", device_line->text());
 	}
+
+	private:
+		QLineEdit *device_line;
 };
 
 class ProfileEditorPluginModem : public ProfileEditorPlugin

@@ -81,12 +81,12 @@ void ProfileEditorDialog::initUI()
 
 	// connection tab, general part
 
-	speed_box = new QComboBox(tabconn);
-	speed_box->insertItem("115200 baud");
-	speed_box->insertItem("57600 baud");
-	speed_box->insertItem("38400 baud");
-	speed_box->insertItem("19200 baud");
-	speed_box->insertItem("9600 baud");
+	QComboBox *speed_box = new QComboBox(tabconn);
+	speed_box->insertItem("115200 baud", id_baud_115200);
+	speed_box->insertItem("57600 baud", id_baud_57600);
+	speed_box->insertItem("38400 baud", id_baud_38400);
+	speed_box->insertItem("19200 baud", id_baud_19200);
+	speed_box->insertItem("9600 baud", id_baud_9600);
 
 	QLabel *speed = new QLabel(QObject::tr("Speed"), tabconn);
 	QLabel *flow = new QLabel(QObject::tr("Flow control"), tabconn);
@@ -96,25 +96,25 @@ void ProfileEditorDialog::initUI()
 	group_flow->hide();
 	QRadioButton *flow_hw = new QRadioButton(QObject::tr("Hardware"), tabconn);
 	QRadioButton *flow_sw = new QRadioButton(QObject::tr("Software"), tabconn);
-	group_flow->insert(flow_hw);
-	group_flow->insert(flow_sw);
+	group_flow->insert(flow_hw, id_flow_hw);
+	group_flow->insert(flow_sw, id_flow_sw);
 
 	QButtonGroup *group_parity = new QButtonGroup(tabconn);
 	group_parity->hide();
 	QRadioButton *parity_odd = new QRadioButton(QObject::tr("Odd"), tabconn);
 	QRadioButton *parity_even = new QRadioButton(QObject::tr("Even"), tabconn);
-	group_parity->insert(parity_odd);
-	group_parity->insert(parity_even);
+	group_parity->insert(parity_odd, id_parity_odd);
+	group_parity->insert(parity_even, id_parity_even);
 
 	flow_sw->setChecked(true);
 	parity_odd->setChecked(true);
 
 	// terminal tab
 
-	terminal_box = new QComboBox(tabterm);
-	terminal_box->insertItem("VT 100");
-	terminal_box->insertItem("VT 220");
-	terminal_box->insertItem("ANSI");
+	QComboBox *terminal_box = new QComboBox(tabterm);
+	terminal_box->insertItem("VT 100", id_term_vt100);
+	terminal_box->insertItem("VT 220", id_term_vt220);
+	terminal_box->insertItem("ANSI", id_term_ansi);
 
 	QLabel *terminal = new QLabel(QObject::tr("Terminal type"), tabterm);
 	QLabel *colour = new QLabel(QObject::tr("Colour scheme"), tabterm);
@@ -202,6 +202,13 @@ void ProfileEditorDialog::initUI()
 
 	connect(this, SIGNAL(cancelButtonPressed()), SLOT(slotCancel()));
 	connect(device_box, SIGNAL(activated(int)), SLOT(slotDevice(int)));
+
+	connect(group_flow, SIGNAL(clicked(int)), SLOT(slotConn(int)));
+	connect(group_parity, SIGNAL(clicked(int)), SLOT(slotConn(int)));
+	connect(speed_box, SIGNAL(clicked(int)), SLOT(slotConn(int)));
+
+	connect(terminal_box, SIGNAL(clicked(int)), SLOT(slotConn(int)));
+	connect(group_size, SIGNAL(clicked(int)), SLOT(slotConn(int)));
 }
 
 ProfileEditorDialog::~ProfileEditorDialog() {
@@ -232,7 +239,6 @@ void ProfileEditorDialog::accept()
 			QObject::tr("Please enter a profile name."));
 		return;
 	}
-
 	// Save profile and plugin profile
 	if(plugin_plugin) plugin_plugin->save();
 
@@ -261,14 +267,59 @@ QString ProfileEditorDialog::prof_type()
 	return QString::null;
 }
 
-QString ProfileEditorDialog::conn_device()
+void ProfileEditorDialog::slotConn(int id)
 {
-	//return frame_device_line->text();
-	return "/dev/ttyS0";
+	switch(id)
+	{
+		case id_flow_hw:
+			m_prof.writeEntry("Flow", 0x01);
+			break;
+		case id_flow_sw:
+			m_prof.writeEntry("Flow", 0x02);
+			break;
+		case id_parity_odd:
+			m_prof.writeEntry("Parity", 2);
+			break;
+		case id_parity_even:
+			m_prof.writeEntry("Parity", 1);
+			break;
+
+		case id_baud_115200:
+			m_prof.writeEntry("Speed", 115200);
+			break;
+		case id_baud_57600:
+			m_prof.writeEntry("Speed", 57600);
+			break;
+		case id_baud_38400:
+			m_prof.writeEntry("Speed", 38400);
+			break;
+		case id_baud_19200:
+			m_prof.writeEntry("Speed", 19200);
+			break;
+		case id_baud_9600:
+			m_prof.writeEntry("Speed", 9600);
+			break;
+
+		case id_term_vt100:
+			m_prof.writeEntry("Terminal", 2);
+			break;
+		case id_term_vt220:
+			m_prof.writeEntry("Terminal", 1);
+			break;
+		case id_term_ansi:
+			m_prof.writeEntry("Terminal", 0);
+			break;
+
+		case id_size_small:
+			m_prof.writeEntry("Font", 0);
+			break;
+		case id_size_medium:
+			m_prof.writeEntry("Font", 1);
+			break;
+		case id_size_large:
+			m_prof.writeEntry("Font", 2);
+			break;
+	}
 }
 
-QString ProfileEditorDialog::term_type()
-{
-	return terminal_box->currentText();
-}
 

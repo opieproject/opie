@@ -26,16 +26,14 @@ public:
 	QString prof_name();
 	QString prof_type();
 
-	QString conn_device();
-
-	QString term_type();
-
 public slots:
 	void accept();
 	//void slotOk();
 	void slotCancel();
 
 	void slotDevice(int id);
+
+	void slotConn(int id);
 
 private:
     void initUI();
@@ -46,13 +44,31 @@ private:
     QHBoxLayout* m_lay;
     Profile m_prof;
 
-	//QLabel *frame_number;
 	QLineEdit *name_line;
-	//QLineEdit *frame_device_line, *frame_number_line;
-	QComboBox *terminal_box, *speed_box, *device_box;
+	QComboBox *device_box;
+
 	QWidget *plugin_base;
 	ProfileEditorPlugin *plugin_plugin;
 	QHBoxLayout *plugin_layout;
+
+	enum Ids
+	{
+		id_parity_odd,
+		id_parity_even,
+		id_flow_hw,
+		id_flow_sw,
+		id_baud_115200,
+		id_baud_57600,
+		id_baud_38400,
+		id_baud_19200,
+		id_baud_9600,
+		id_term_vt100,
+		id_term_vt220,
+		id_term_ansi,
+		id_size_small,
+		id_size_medium,
+		id_size_large
+	};
 };
 
 #endif

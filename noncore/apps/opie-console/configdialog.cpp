@@ -79,9 +79,12 @@ void ConfigDialog::slotEdit() {
 
 	if(ret == QDialog::Accepted)
 	{
-		// if(listView->current()) delete lstView->current(); ...
+		if(lstView->currentItem()) delete lstView->currentItem();
+
 		// use dlg.terminal()!
-		new ConfigListItem(lstView, Profile(dlg.prof_name(), dlg.prof_type(), Profile::White, Profile::Black, Profile::VT102));
+		Profile p = dlg.profile();
+
+		new ConfigListItem(lstView, p);
 	}
 }
 
