@@ -228,7 +228,8 @@ void Wellenreiter::buttonClicked()
         daemonRunning = false;
 
         logwindow->log( "(i) Daemon has been stopped." );
-        button->setText( "Start Scanning" );
+        button->setText( tr( "Start Scanning" ) );
+        setCaption( tr( "Scanning in progress..." ) );
 
         // Stop daemon - ugly for now... later better
 
@@ -237,17 +238,12 @@ void Wellenreiter::buttonClicked()
         // get configuration from config window
 
         const QString& interface = configwindow->interfaceName->currentText();
-        const QString& cardtype = configwindow->deviceType->currentText();
-        //const QString& interval = configwindow->hopInterval->cleanText();
 
-        // reset the card trying to get into a usable state again
+        // reset the interface trying to get it into a usable state again
 
         QString cmdline;
-        cmdline.sprintf( "cardctl eject; cardctl insert" );
+        cmdline.sprintf( "ifdown %s; ifup %s", (const char*) interface, (const char*) interface );
         system( cmdline );
-        cmdline.sprintf( "killall -14 dhcpcd" );
-        system( cmdline );
-        cmdline.sprintf( "killall -10 udhcpc" );
 
         // message the user
 
@@ -280,7 +276,8 @@ void Wellenreiter::buttonClicked()
 
         logwindow->log( "(i) Daemon has been started." );
         daemonRunning = true;
-        button->setText( "Stop Scanning" );
+        button->setText( tr( "Stop Scanning" ) );
+        setCaption( tr( "Wellenreiter/Opie" ) );
 
     }
 }
