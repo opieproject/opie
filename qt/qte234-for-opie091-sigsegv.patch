@@ -1,5 +1,5 @@
---- qt-2.3.4/src/kernel/qwindowsystem_qws.cpp~sigsegv	2003-03-18 18:29:00.000000000 -0600
-+++ qt-2.3.4/src/kernel/qwindowsystem_qws.cpp	2003-03-18 19:09:08.000000000 -0600
+--- ./src/kernel/qwindowsystem_qws.cpp~sigsegv	2003-03-18 18:29:00.000000000 -0600
++++ ./src/kernel/qwindowsystem_qws.cpp	2003-03-18 19:09:08.000000000 -0600
 @@ -843,6 +843,16 @@
  {
  }
