@@ -1,10 +1,6 @@
 #!/bin/sh
 # 
 
-module_id() {
-   cat /proc/hal/model
-}
-
 export LOGNAME=root
 export HOME=/$LOGNAME
 #export QWS_DISPLAY=Transformed:Rot270:0
@@ -15,9 +11,14 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$OPIEDIR/lib
 export PATH=$PATH:$OPIEDIR/bin
 
 #this sets the iPaqs powerbutton to mapable
-echo 1 > /proc/sys/ts/suspend_button_mode
+if [ -e /proc/sys/ts/suspend_button_mode ] ; then
+    echo 1 > /proc/sys/ts/suspend_button_mode
+fi
 
-if [ ! -x $OPIEDIR/bin/qpe ] ; then exit 0 ; fi
+if [ ! -x $OPIEDIR/bin/qpe ] ; then 
+    echo Opie not installed
+    exit 0  
+fi
 
 $OPIEDIR/bin/opie-reorgfiles
 
@@ -30,24 +31,41 @@ killproc() {
 
 case $1 in
 'start')
-	echo "Starting Opie..."
 
 	cd $HOME
-
 	rm -f /etc/rc2.d/S99x # Can't have both running!
 
-	 case `module_id` in 
-        "3100" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
-        "3600" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
-        "3700" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
-        "3800" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
-        *) echo "Unknown processor type -`module_id`-!" ;;
-   	 esac
+	if [ -e /proc/hal/model ] ; then
+
+	    IPAQ=`cat /proc/hal/model`
+	
+	    echo iPAQ type $IPAQ  
+	    case $IPAQ in 
+    		"3100" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
+    		"3600" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
+    		"3700" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
+    		"3800" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
+    		*) echo "Unknown processor type -`module_id`-!" ;;
+   	    esac
+	 fi
+
 	
 	if [ -x $OPIEDIR/bin/opie-login ]; then
+	    if ! killall -0 syslogd 2>/dev/null >/dev/null; then
+    		echo Starting Opie-login....
 		$OPIEDIR/bin/opie-login 2>/dev/null >/dev/null &
+	    else
+		echo Starting Opie-login with syslog logging.....
+		($OPIEDIR/bin/opie-login  2>&1 | logger ) &
+	    fi
 	else
+	    if ! killall -0 syslogd 2>/dev/null >/dev/null; then
+    		echo Starting Opie....
 		$OPIEDIR/bin/qpe 2>/dev/null >/dev/null &
+	    else
+		echo Starting Opie with syslog logging.....
+		($OPIEDIR/bin/qpe 2>&1 | logger ) &
+	    fi
 	fi
 
 	;;
@@ -58,6 +76,7 @@ case $1 in
         else
         	killproc qpe
         fi
+
         killproc opie-login
         ;;
 *)
