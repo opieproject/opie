@@ -196,18 +196,20 @@ void AdvancedFm::doDelete() {
             };
 
          } else {
-            if(doMsg) {
-							switch ( QMessageBox::warning(this,tr("Delete"),
-																						tr("<p>Really delete %1?</p>").arg( myFile ),
-																						tr("Yes"), tr("No"), 0, 0, 1) ) {
-							case 1:
-								return;
-								break;
-							default:
-                return;
-								break;
-							};
-            }
+					 if(doMsg) {
+						 switch ( QMessageBox::warning(this,tr("Delete"),
+																					 tr("<p>Really delete %1?</p>").arg( myFile ),
+																					 tr("Yes"), tr("No"), 0, 0, 1) ) {
+							 case 0;
+							 break;
+						 case 1:
+							 return;
+							 break;
+						 default:
+							 return;
+							 break;
+						 };
+					 }
 
             QString cmd="rm "+f;
             QFile file(f);
@@ -322,6 +324,8 @@ void AdvancedFm::copy() {
 									switch ( QMessageBox::warning(this,tr("File Exists!"),
 																								tr("<p>%1 already  exists. Ok to overwrite?</P>").arg(item),
 																								tr("Yes"),tr("No"),0,0,1)) {
+										case 0;
+										break;
 									case 1:
 										return;
 										break;
@@ -430,7 +434,6 @@ void AdvancedFm::copySameDir() {
 																				 tr("<p> %1 already exists. Do you really want to delete it?</P>").arg(destFile),
 																				 tr("Yes"),tr("No"),0,0,1) ) {
 						case 0:
-
 							f.remove();
 							break;
 						case 1:
