@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=A disk formatting utility
+Exec=formatter
+Icon=formatter/devices
+Type=Application
+Name=Formatter
