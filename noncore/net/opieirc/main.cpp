@@ -4,4 +4,4 @@
 
 
 using namespace Opie::Core;
-OPIE_EXPORT_APP( OApplicationFactory<MainWindow> )
+OPIE_EXPORT_APP_V2( OApplicationFactory<MainWindow>, "OpieIRC" )
