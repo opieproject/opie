@@ -30,25 +30,36 @@ OpieMail::OpieMail( QWidget *parent, const char *name, WFlags flags )
 void OpieMail::appMessage(const QCString &msg, const QByteArray &data)
 {
     // copied from old mail2
-    // TODO: compose mail should get parameters of a recipient for starting
-    // from addressbook. (qcop signal "writeMail(string,string)")
     if (msg == "writeMail(QString,QString)") {
         QDataStream stream(data,IO_ReadOnly);
         QString name, email;
         stream >> name >> email;
-        slotComposeMail();
+        // removing the whitespaces at beginning and end is needed!
+        slotwriteMail(name.stripWhiteSpace(),email.stripWhiteSpace());
     } else if (msg == "newMail()") {
         slotComposeMail();
     }
 }
 
-void OpieMail::slotComposeMail()
+void OpieMail::slotwriteMail(const QString&name,const QString&email)
 {
-    qDebug( "Compose Mail" );
     ComposeMail compose( settings, this, 0 , true );
+    if (!email.isEmpty()) {
+        if (!name.isEmpty()) {
+            compose.setTo("\"" + name + "\"" + " " + "<"+ email + ">");
+        } else {
+            compose.setTo(email);
+        }
+    }
     compose.showMaximized();
     compose.slotAdjustColumns();
     compose.exec();
+}
+
+void OpieMail::slotComposeMail()
+{
+    qDebug( "Compose Mail" );
+    slotwriteMail(0l,0l);
 }
 
 void OpieMail::slotSendQueued()
