@@ -441,10 +441,12 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 }
 
 TextEdit::~TextEdit() {
+    if( edited1 & !useAdvancedFeatures )
+        saveAs();
 }
 
 void TextEdit::cleanUp() {
-//    save();
+qDebug("cleanUp");//    save();
     Config cfg("TextEdit");
     cfg.setGroup("View");
     QFont f = editor->font();
@@ -457,7 +459,7 @@ void TextEdit::cleanUp() {
 
 
 void TextEdit::accept() {
-    if(edited1)
+    if( edited1)
         saveAs();
     exit(0);
 }
@@ -635,7 +637,7 @@ void TextEdit::openFile( const QString &f ) {
 //    bFromDocView = TRUE;
     if(f.find(".desktop",0,TRUE) != -1 && useAdvancedFeatures) {
         switch ( QMessageBox::warning(this,tr("Text Editor"),
-        tr("Text Editor has detected\n you selected a .desktop file.\nOpen .desktop file or linked file?"),
+        tr("Text Editor has detected<BR>you selected a <B>.desktop</B> file.<BR>Open <B>.desktop</B> file or <B>linked</B> file?"),
         tr(".desktop File"),tr("Linked Document"),0,1,1) ) {
           case 0:
               filer = f;
@@ -646,8 +648,10 @@ void TextEdit::openFile( const QString &f ) {
               break;
         }
     } else {
-        filer = f;
-        fileIs = TRUE;
+        DocLnk sf(f);
+        filer = sf.file();
+//         filer = f;
+//         fileIs = TRUE;
     }
         
     DocLnk nf;
@@ -737,7 +741,7 @@ bool TextEdit::save() {
                      QCString crt = rt.utf8();
                      f.writeBlock(crt,crt.length());
                  } else {
-                     QMessageBox::message("Text Edit","Write Failed");
+                     QMessageBox::message(tr("Text Edit"),tr("Write Failed"));
                  return false;
                  }
                      
@@ -914,7 +918,7 @@ void TextEdit::changeFont() {
 }
 
 void TextEdit::editDelete() {
-    switch ( QMessageBox::warning(this,tr("Text Editor"),tr("Do you really want\nto delete the current file\nfrom the disk?\nThis is irreversable!!"),tr("Yes"),tr("No"),0,0,1) ) {
+    switch ( QMessageBox::warning(this,tr("Text Editor"),tr("Do you really want<BR>to <B>delete</B> the current file\nfrom the disk?<BR>This is <B>irreversable!!</B>"),tr("Yes"),tr("No"),0,0,1) ) {
       case 0:
           if(doc) {
               doc->removeFiles();
@@ -957,10 +961,10 @@ void TextEdit::receive(const QCString&msg, const QByteArray&) {
 
 }
 void TextEdit::doAbout() {
-    QMessageBox::about(0,"Text Edit","Text Edit is copyright\n"
-                         "2000 Trolltech AS, and\n"
-                         "2002 by L.J.Potter \nljp@llornkcor.com\n"
-                         "and is licensed under the GPL");
+    QMessageBox::about(0,tr("Text Edit"),tr("Text Edit is copyright<BR>"
+                         "2000 Trolltech AS, and<BR>"
+                         "2002 by <B>L. J. Potter <BR>llornkcor@handhelds.org</B><BR>"
+                         "and is licensed under the GPL"));
 }
 
 void TextEdit::doAdvanced(bool b) {
