@@ -1491,10 +1491,10 @@ void ContactEditor::setEntry( const OContact &entry ) {
 
 	// Get combo-settings from contact and set preset..
 	contactfields.loadFromRecord( ent );
-	cmbChooserField1->setCurrentItem( contactfields.getFieldOrder(0, 0) );
-	cmbChooserField2->setCurrentItem( contactfields.getFieldOrder(1, 1) );
-	cmbChooserField3->setCurrentItem( contactfields.getFieldOrder(2, 2) );
-	cmbChooserField4->setCurrentItem( contactfields.getFieldOrder(3, 5) );
+	cmbChooserField1->setCurrentItem( contactfields.getFieldOrder(0, 7) );
+	cmbChooserField2->setCurrentItem( contactfields.getFieldOrder(1, 9) );
+	cmbChooserField3->setCurrentItem( contactfields.getFieldOrder(2, 0) );
+	cmbChooserField4->setCurrentItem( contactfields.getFieldOrder(3, 6) );
 	cmbAddress->setCurrentItem( contactfields.getFieldOrder(4, 1) );
 	slotCmbChooser1Change( cmbChooserField1->currentItem() );
 	slotCmbChooser2Change( cmbChooserField2->currentItem() );

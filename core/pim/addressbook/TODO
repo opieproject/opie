@@ -37,6 +37,7 @@ ContactEditor:
 - Category is on the wrong position after changing to personal and back to normal
 	( Temporarily workaround: Category is never deactivated.. :S )
 
+- Fix handling of 3 Firstnames
 
 Important:
 ----------
