@@ -65,7 +65,7 @@ void UserDialog::setupTab1() {
 	picturePushButton = new QPushButton(tabpage,"Label");
 	picturePushButton->setMinimumSize(48,48);
 	picturePushButton->setMaximumSize(48,48);
-	picturePushButton->setPixmap(Resource::loadPixmap("userconfig/usericon"));	// Load default usericon.
+	picturePushButton->setPixmap(Resource::loadPixmap("usermanager/usericon"));	// Load default usericon.
 	connect(picturePushButton,SIGNAL(clicked()),this,SLOT(clickedPicture()));	// Clicking the picture should invoke pictureselector.
 	
 	// Login

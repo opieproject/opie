@@ -1,5 +1,5 @@
 Package: userconfig
-Files: bin/usermanager apps/Settings/usermanager.desktop pics/userconfig/*
+Files: bin/usermanager apps/Settings/usermanager.desktop pics/usermanager/*
 Priority: optional
 Section: opie/settings
 Version: $QPE_VERSION-$SUB_VERSION-0.9
