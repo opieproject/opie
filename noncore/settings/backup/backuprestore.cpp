@@ -21,7 +21,7 @@
 #include <qregexp.h>
 #include <qtextstream.h>
 #include <qtextview.h>
-#include <qpe/storage.h>
+#include <opie2/ostorage.h>
 
 #include <errno.h>
 #include <stdlib.h>
@@ -65,7 +65,7 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags f
 
     scanForApplicationSettings();
 
-    StorageInfo storage;
+    OStorageInfo storage;
 
     backupLocations.insert( "Documents", QDir::homeDirPath() + "/Documents" );
     if ( storage.hasCf() )

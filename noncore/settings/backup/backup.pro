@@ -3,7 +3,7 @@ HEADERS		= backuprestore.h
 SOURCES		= main.cpp backuprestore.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lopiecore2
 INTERFACES	= backuprestorebase.ui errordialog.ui
 TARGET		= backup
 
