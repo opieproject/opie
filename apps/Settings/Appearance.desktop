@@ -3,6 +3,7 @@ Type=Application
 Exec=appearance
 Icon=Appearance
 Name=Appearance
+Name[pt_BR]=Aparencia
 Name[no]=Utseende
 Name[de]=Erscheinungsbild
 Name[hu]=Megjelenés

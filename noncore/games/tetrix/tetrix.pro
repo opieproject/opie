@@ -15,3 +15,5 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 INTERFACES	= 
+
+TRANSLATIONS = ../i18n/pt_BR/tetrix.ts

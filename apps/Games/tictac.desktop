@@ -3,3 +3,4 @@ Exec=tictac
 Icon=Tictac
 Type=Application
 Name=Tictac
+Name[pt_BR]=Jogo da Velha

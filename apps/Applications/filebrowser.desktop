@@ -4,6 +4,7 @@ Exec = filebrowser
 File = ../apps/Applications/filebrowser
 Icon = FileBrowser
 Name = File Manager
+Name[pt_BR] = Gerenciador de Arquivos
 Name[de] = Datei Manager
 Name[no] = Filviser
 Type = Application

@@ -5,5 +5,6 @@ MimeType=image/*
 Icon=ImageViewer
 Type=Application
 Name=Image Viewer
+Name[pt_BR]=Visualizador de Imagens
 Name[de]=Bildbetrachter
 Name[hu]=Nézõke

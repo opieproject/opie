@@ -47,8 +47,8 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* name, WFlags fl )
     else if(rate==44100)
         sampleRate->setCurrentItem(2);
 
-    stereoCheckBox->setChecked(config.readNumEntry("Stereo", 0));
-  sixteenBitCheckBox->setChecked(config.readNumEntry("SixteenBit", 0));
+  stereoCheckBox->setChecked(config.readNumEntry("Stereo", 0));
+  sixteenBitCheckBox->setChecked(config.readNumEntry("SixteenBit", 1));
 
     connect(volume, SIGNAL(valueChanged(int)), this, SLOT(setVolume(int)));
     connect(mic, SIGNAL(valueChanged(int)), this, SLOT(setMic(int)));

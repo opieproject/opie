@@ -4,6 +4,7 @@ Exec=calculator
 Icon=Calculator
 Type=Application
 Name=Calculator
+Name[pt_BR]=Calculadora
 Name[no]=Kalkulator
 Name[de]=Taschen rechner
 Name[ja]=電卓

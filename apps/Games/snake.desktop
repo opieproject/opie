@@ -4,6 +4,7 @@ Exec=snake
 Icon=Snake
 Type=Application
 Name=Snake
+Name[pt_BR]=Cobra
 Name[no]=Slange
 Name[de]=Schlange
 Name[hu]=Kígyó

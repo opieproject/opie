@@ -3,6 +3,7 @@ Type=Application
 Exec=calibrate
 Icon=Calibrate
 Name=Recalibrate
+Name[pt_BR]=Recalibrar
 Name[de]=Kalibrieren
 Name[no]=Kalibrer
 Name[hu]=Kalibráció

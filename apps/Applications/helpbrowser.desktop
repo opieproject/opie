@@ -4,6 +4,7 @@ Exec=helpbrowser
 Icon=HelpBrowser
 Type=Application
 Name=Help Browser
+Name[pt_BR] = Navegador de Ajuda
 Name[no]=Hjelp
 Name[de]=Hilfe
 Name[hu]=Segítség

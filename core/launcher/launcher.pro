@@ -25,24 +25,24 @@ HEADERS		= background.h \
 		  qcopbridge.h \
 		  packageslave.h \
 		irserver.h \
-	$(OPIEDIR)/rsync/buf.h \
-	$(OPIEDIR)/rsync/checksum.h \
-	$(OPIEDIR)/rsync/command.h \
-	$(OPIEDIR)/rsync/emit.h \
-	$(OPIEDIR)/rsync/job.h \
-	$(OPIEDIR)/rsync/netint.h \
-	$(OPIEDIR)/rsync/protocol.h \
-	$(OPIEDIR)/rsync/prototab.h \
-	$(OPIEDIR)/rsync/rsync.h \
-	$(OPIEDIR)/rsync/search.h \
-	$(OPIEDIR)/rsync/stream.h \
-	$(OPIEDIR)/rsync/sumset.h \
-	$(OPIEDIR)/rsync/trace.h \
-	$(OPIEDIR)/rsync/types.h \
-	$(OPIEDIR)/rsync/util.h \
-	$(OPIEDIR)/rsync/whole.h \
-	$(OPIEDIR)/rsync/config_rsync.h \
-	$(OPIEDIR)/rsync/qrsync.h
+	/skiff/opie/rsync/buf.h \
+	/skiff/opie/rsync/checksum.h \
+	/skiff/opie/rsync/command.h \
+	/skiff/opie/rsync/emit.h \
+	/skiff/opie/rsync/job.h \
+	/skiff/opie/rsync/netint.h \
+	/skiff/opie/rsync/protocol.h \
+	/skiff/opie/rsync/prototab.h \
+	/skiff/opie/rsync/rsync.h \
+	/skiff/opie/rsync/search.h \
+	/skiff/opie/rsync/stream.h \
+	/skiff/opie/rsync/sumset.h \
+	/skiff/opie/rsync/trace.h \
+	/skiff/opie/rsync/types.h \
+	/skiff/opie/rsync/util.h \
+	/skiff/opie/rsync/whole.h \
+	/skiff/opie/rsync/config_rsync.h \
+	/skiff/opie/rsync/qrsync.h
 #		  quicklauncher.h \
 
 SOURCES		= background.cpp \
@@ -60,39 +60,39 @@ SOURCES		= background.cpp \
 		  shutdownimpl.cpp \
 		  launcher.cpp \
 		  launcherview.cpp \
-		  $(OPIEDIR)/calibrate/calibrate.cpp \
+		  /skiff/opie/calibrate/calibrate.cpp \
 		  transferserver.cpp \
 		  packageslave.cpp \
 		irserver.cpp \
 		  qcopbridge.cpp \
 		  startmenu.cpp \
 		  main.cpp \
-	$(OPIEDIR)/rsync/base64.c \
-	$(OPIEDIR)/rsync/buf.c \
-	$(OPIEDIR)/rsync/checksum.c \
-	$(OPIEDIR)/rsync/command.c \
-	$(OPIEDIR)/rsync/delta.c \
-	$(OPIEDIR)/rsync/emit.c \
-	$(OPIEDIR)/rsync/hex.c \
-	$(OPIEDIR)/rsync/job.c \
-	$(OPIEDIR)/rsync/mdfour.c \
-	$(OPIEDIR)/rsync/mksum.c \
-	$(OPIEDIR)/rsync/msg.c \
-	$(OPIEDIR)/rsync/netint.c \
-	$(OPIEDIR)/rsync/patch.c \
-	$(OPIEDIR)/rsync/prototab.c \
-	$(OPIEDIR)/rsync/readsums.c \
-	$(OPIEDIR)/rsync/scoop.c \
-	$(OPIEDIR)/rsync/search.c \
-	$(OPIEDIR)/rsync/stats.c \
-	$(OPIEDIR)/rsync/stream.c \
-	$(OPIEDIR)/rsync/sumset.c \
-	$(OPIEDIR)/rsync/trace.c \
-	$(OPIEDIR)/rsync/tube.c \
-	$(OPIEDIR)/rsync/util.c \
-	$(OPIEDIR)/rsync/version.c \
-	$(OPIEDIR)/rsync/whole.c \
-	$(OPIEDIR)/rsync/qrsync.cpp
+	/skiff/opie/rsync/base64.c \
+	/skiff/opie/rsync/buf.c \
+	/skiff/opie/rsync/checksum.c \
+	/skiff/opie/rsync/command.c \
+	/skiff/opie/rsync/delta.c \
+	/skiff/opie/rsync/emit.c \
+	/skiff/opie/rsync/hex.c \
+	/skiff/opie/rsync/job.c \
+	/skiff/opie/rsync/mdfour.c \
+	/skiff/opie/rsync/mksum.c \
+	/skiff/opie/rsync/msg.c \
+	/skiff/opie/rsync/netint.c \
+	/skiff/opie/rsync/patch.c \
+	/skiff/opie/rsync/prototab.c \
+	/skiff/opie/rsync/readsums.c \
+	/skiff/opie/rsync/scoop.c \
+	/skiff/opie/rsync/search.c \
+	/skiff/opie/rsync/stats.c \
+	/skiff/opie/rsync/stream.c \
+	/skiff/opie/rsync/sumset.c \
+	/skiff/opie/rsync/trace.c \
+	/skiff/opie/rsync/tube.c \
+	/skiff/opie/rsync/util.c \
+	/skiff/opie/rsync/version.c \
+	/skiff/opie/rsync/whole.c \
+	/skiff/opie/rsync/qrsync.cpp
 
 INTERFACES	= shutdown.ui syncdialog.ui
 
@@ -110,3 +110,4 @@ TARGET		= qpe
 LIBS		+= -lqpe -lcrypt
 
 TRANSLATIONS = ../i18n/de/qpe.ts
+TRANSLATIONS = ../i18n/pt_BR/qpe.ts

@@ -12,3 +12,5 @@ LIBS	+= -lqpe
 DBFILE	= chess.db
 LANGUAGE	= C++
 CPP_ALWAYS_CREATE_SOURCE	= TRUE
+
+TRANSLATIONS = ../i18n/pt_BR/chess.ts

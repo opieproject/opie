@@ -11,9 +11,9 @@
 ************************************************************************************/
 
 /*
- * $Id: vmemo.cpp,v 1.12 2002-02-19 20:44:24 jeremy Exp $
+ * $Id: vmemo.cpp,v 1.13 2002-03-18 01:56:15 llornkcor Exp $
  */
-
+// Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
 #include <sys/time.h>
 #include <sys/types.h>
@@ -141,29 +141,24 @@ VMemo::VMemo( QWidget *parent, const char *name )
   
   recording = FALSE;
   
-  myChannel = new QCopChannel( "QPE/VMemo", this );
-  connect( myChannel, SIGNAL(received(const QCString&, const QByteArray&)),
-		   this, SLOT(receive(const QCString&, const QByteArray&)) );
-  
-  struct utsname name; /* check for embedix kernel running on the zaurus, if 
-						  lineo change string, this break
-					   */
-  if (uname(&name) != -1)
-	{
-	  QString release=name.release;
-	  if(release.find("embedix",0,TRUE) !=-1)
-		systemZaurus=TRUE;
-	  else
-		{
-		  systemZaurus=FALSE;
-		  
-		  // Register the REC key press.
-		  QCopEnvelope e("QPE/Desktop", "keyRegister(int key, QString channel, QString message)");
-		  e << 4096;
-		  e << QString("QPE/VMemo");
-		  e << QString("toggleRecord()");
-		}
-	}
+  struct utsname name; /* check for embedix kernel running on the zaurus*/
+  if (uname(&name) != -1) {
+      QString release=name.release;
+      if(release.find("embedix",0,TRUE) !=-1)
+          systemZaurus=TRUE;
+      else {
+          systemZaurus=FALSE;
+//            myChannel = new QCopChannel( "QPE/VMemo", this );
+//            connect( myChannel, SIGNAL(received(const QCString&, const QByteArray&)),
+//                     this, SLOT(receive(const QCString&, const QByteArray&)) );
+      
+//              // Register the REC key press, for ipaq only
+//            QCopEnvelope e("QPE/Desktop", "keyRegister(int key, QString channel, QString message)");
+//            e << 4096;
+//            e << QString("QPE/VMemo");
+//            e << QString("toggleRecord()");
+      }
+  }
 }
 
 VMemo::~VMemo()
@@ -174,12 +169,12 @@ void VMemo::receive( const QCString &msg, const QByteArray &data )
 {
   QDataStream stream( data, IO_ReadOnly );
   if (msg == "toggleRecord()")
-	{
-	  if (recording)
-		mouseReleaseEvent(NULL);
-	  else
-		mousePressEvent(NULL);
-	}
+  {
+    if (recording)
+    mouseReleaseEvent(NULL);
+    else
+    mousePressEvent(NULL);
+  }
 }
 
 void VMemo::paintEvent( QPaintEvent* )
@@ -192,27 +187,27 @@ void VMemo::mousePressEvent( QMouseEvent *me )
 {
   // just to be safe
   if (recording)
-	{
-	  recording = FALSE;
-	  return;
-	}
+  {
+    recording = FALSE;
+    return;
+  }
 
   /* 
-	 No mousePress/mouseRelease recording on the iPAQ. The REC button on the iPAQ calls these functions
-	 mousePressEvent and mouseReleaseEvent with a NULL parameter.
+   No mousePress/mouseRelease recording on the iPAQ. The REC button on the iPAQ calls these functions
+   mousePressEvent and mouseReleaseEvent with a NULL parameter.
   */
-  if (!systemZaurus && me != NULL)
-	return;
+//        if (!systemZaurus && me != NULL)
+//        return;
   
   QSound::play(Resource::findSound("vmemob"));
-  
+  qDebug("Start recording");
   recording = TRUE;
   if (openDSP() == -1)
-	{
-	  QMessageBox::critical(0, "VMemo", "Could not open dsp device.", "Abort");
-	  recording = FALSE;
-	  return;
-	}
+  {
+    QMessageBox::critical(0, "VMemo", "Could not open dsp device.", "Abort");
+    recording = FALSE;
+    return;
+  }
   
   Config vmCfg("VMemo");
   vmCfg.setGroup("Defaults");
@@ -221,9 +216,9 @@ void VMemo::mousePressEvent( QMouseEvent *me )
   QString fileName;
 
   if(systemZaurus)
-	fileName=vmCfg.readEntry("Dir", "/mnt/cf/"); // zaurus does not have /mnt/ramfs
+  fileName=vmCfg.readEntry("Dir", "/mnt/cf/"); // zaurus does not have /mnt/ramfs
   else
-	fileName=vmCfg.readEntry("Dir", "/mnt/ramfs/");
+  fileName=vmCfg.readEntry("Dir", "/mnt/ramfs/");
   
   fileName += "vm_";
   fileName += dt.toString();
@@ -236,14 +231,14 @@ void VMemo::mousePressEvent( QMouseEvent *me )
   fileName.replace(QRegExp(","),"");
   
   if(openWAV(fileName.latin1()) == -1)
-	{
-	  QString err("Could not open the output file: ");
-	  err += fileName;
+  {
+    QString err("Could not open the output file: ");
+    err += fileName;
 
-	  QMessageBox::critical(0, "VMemo", err, "Abort");
-	  close(dsp);
-	  return;
-	}
+    QMessageBox::critical(0, "VMemo", err, "Abort");
+    close(dsp);
+    return;
+  }
   
   QArray<int> cats(1);
   cats[0] = vmCfg.readNumEntry("Category", 0);
@@ -272,51 +267,43 @@ int VMemo::openDSP()
   
   speed = cfg.readNumEntry("SampleRate", 22050);
   channels = cfg.readNumEntry("Stereo", 1) ? 2 : 1; // 1 = stereo(2), 0 = mono(1)
-  if (cfg.readNumEntry("SixteenBit", 1)==1)
-	{
-	  format = AFMT_S16_LE;
-	  resolution = 16;
-	}
-  else
-	{
-	  format = AFMT_U8;
-	  resolution = 8;
-	}
+  if (cfg.readNumEntry("SixteenBit", 1)==1)  {
+    format = AFMT_S16_LE;
+    resolution = 16;
+  }
+//    else  {
+//      format = AFMT_U8;
+//      resolution = 8;
+//    }
   
-  if(systemZaurus) 
-	{
-	  dsp = open("/dev/dsp1", O_RDWR); //Zaurus needs /dev/dsp1
-	  channels=1; //zaurus has one input channel
-	}
-  else 
-	dsp = open("/dev/dsp", O_RDWR);
+  if(systemZaurus) {
+    dsp = open("/dev/dsp1", O_RDWR); //Zaurus needs /dev/dsp1
+    channels=1; //zaurus has one input channel
+  }  else {
+  dsp = open("/dev/dsp", O_RDWR);
+  }
   
-  if(dsp == -1)
-	{
+  if(dsp == -1)  {
       perror("open(\"/dev/dsp\")");
       return -1;
-	}
+  }
   
-  if(ioctl(dsp, SNDCTL_DSP_SETFMT , &format)==-1)
-	{
-	  perror("ioctl(\"SNDCTL_DSP_SETFMT\")");
-	  return -1;
-	}
-  if(ioctl(dsp, SNDCTL_DSP_CHANNELS , &channels)==-1)
-	{
-	  perror("ioctl(\"SNDCTL_DSP_CHANNELS\")");
-	  return -1;
-	}
-  if(ioctl(dsp, SNDCTL_DSP_SPEED , &speed)==-1)
-	{
-	  perror("ioctl(\"SNDCTL_DSP_SPEED\")");
-	  return -1;
-	}
-  if(ioctl(dsp, SOUND_PCM_READ_RATE , &rate)==-1)
-	{
-	  perror("ioctl(\"SOUND_PCM_READ_RATE\")");
-	  return -1;
-	}
+  if(ioctl(dsp, SNDCTL_DSP_SETFMT , &format)==-1)  {
+    perror("ioctl(\"SNDCTL_DSP_SETFMT\")");
+    return -1;
+  }
+  if(ioctl(dsp, SNDCTL_DSP_CHANNELS , &channels)==-1)  {
+    perror("ioctl(\"SNDCTL_DSP_CHANNELS\")");
+    return -1;
+  }
+  if(ioctl(dsp, SNDCTL_DSP_SPEED , &speed)==-1)  {
+    perror("ioctl(\"SNDCTL_DSP_SPEED\")");
+    return -1;
+  }
+  if(ioctl(dsp, SOUND_PCM_READ_RATE , &rate)==-1)  {
+    perror("ioctl(\"SOUND_PCM_READ_RATE\")");
+    return -1;
+  }
   
   return 1;
 }
@@ -324,8 +311,8 @@ int VMemo::openDSP()
 int VMemo::openWAV(const char *filename)
 {
   track.setName(filename);
-  if(!track.open(IO_WriteOnly|IO_Truncate|IO_Raw))
-	  return -1;
+  if(!track.open(IO_WriteOnly|IO_Truncate|IO_Raw)) 
+    return -1;
 
   wav=track.handle();
   
@@ -354,18 +341,81 @@ int VMemo::openWAV(const char *filename)
 void VMemo::record(void)
 {
   int length=0, result, value;
-  char sound[512];
+  qDebug("Recording");
+
+  if(format==AFMT_S16_LE)  {
+    signed short sound[512], monoBuffer[512];
+    while(recording)   {
+      result = read(dsp, sound, 512); // 8192
+      qApp->processEvents();
+      int j=0;
+       if(systemZaurus) {
+             for (int i = 0; i < result; i++) { //since Z is mono do normally
+               monoBuffer[i] = sound[i];
+             }
+             qApp->processEvents();
+             length+=write(wav, monoBuffer, result);
+         } else { //ipaq /stereo inputs
+            for (int i = 0; i < result; i+=2) {
+                monoBuffer[j] = (sound[i]+sound[i+1])/2;
+                j++;
+            }
+            qApp->processEvents();
+            length+=write(wav, monoBuffer, result/2);
+        }
+     printf("%d\r",length);
+     fflush(stdout);
+   }
+  }
+  // else { //AFMT_U8 // don't try this yet.. as player doesn't understand
+// 8bit unsigned
+ //       unsigned short sound[512], monoBuffer[512];
+//       while(recording)
+//   {
+//     result = read(dsp, sound, 512); // 8192
+//     qApp->processEvents();
+//     int j=0;
+//       if(systemZaurus) 
+//         {
+//             for (int i = 0; i < result; i++) { //since Z is mono do normally
+//               monoBuffer[i] = sound[i];
+//           }
+//             qApp->processEvents();
+//             length+=write(wav, monoBuffer, result);
+//         } else { //ipaq /stereo inputs
+//             for (int i = 0; i < result; i+=2) {
+//                 monoBuffer[j] = (sound[i]+sound[i+1])/2;
+//                 j++;
+//             }
+//             qApp->processEvents();
+//             length+=write(wav, monoBuffer, result/2);
+//         }
+// //    length += result;
+//     printf("%d\r",length);
+//     fflush(stdout);
+
+//      qApp->processEvents();
+//    }
+//  }
+
+
   
-  while(recording)
-	{
-	  result = read(dsp, sound, 512); // 8192
-	  qApp->processEvents();
+//   char sound[512]; //char is 8 bit
+  
+//   while(recording)
+//  {
+//    result = read(dsp, sound, 512); // 8192
+//    qApp->processEvents();
 
-	  write(wav, sound, result);
-	  length += result;
+//    write(wav, sound, result);
+//    length += result;
 
-	  qApp->processEvents();
-	}
+//    qApp->processEvents();
+//  }
+//  qDebug("file has length of %d lasting %d seconds",
+//         length, (( length / speed) / channels) / 2 );
+// medialplayer states wrong length in secs
+  
   
   value = length+36;
   lseek(wav, 4, SEEK_SET);
@@ -375,8 +425,10 @@ void VMemo::record(void)
   track.close();
   
   if( ioctl( dsp, SNDCTL_DSP_RESET,0) == -1)
-	perror("ioctl(\"SNDCTL_DSP_RESET\")");
+  perror("ioctl(\"SNDCTL_DSP_RESET\")");
   ::close(dsp);
+//  if(systemZaurus)
+        QMessageBox::message("Vmemo"," Done recording");
   
   QSound::play(Resource::findSound("vmemoe"));
 }

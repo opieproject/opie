@@ -9,3 +9,5 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe
 DESTDIR   = $(OPIEDIR)/bin
+
+TRANSLATIONS = ../../i18n/pt_BR/tictac.ts

@@ -4,6 +4,7 @@ Exec=todolist
 Icon=TodoList
 Type=Application
 Name=Todo List
+Name[pt_BR]=Afazeres
 Name[no]=Oppgaveliste
 Name[de]=Aufgabenliste
 Name[hu]=Feladatok

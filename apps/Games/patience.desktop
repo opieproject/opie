@@ -4,6 +4,7 @@ Exec=patience
 Icon=Solitaire
 Type=Application
 Name=Patience
+Name[pt_BR]=Paciencia
 Name[no]=Kabal
 Name[de]=Patience
 Name[ja]=ソリティア

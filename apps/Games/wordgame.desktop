@@ -4,6 +4,7 @@ Exec=wordgame
 Icon=WordGame
 Type=Application
 Name=Word Game
+Name[pt_BR]=Palavras Cruzadas
 Name[no]=Kryss-Ord
 Name[de]=Wortspiel
 Name[hu]=Szójáték

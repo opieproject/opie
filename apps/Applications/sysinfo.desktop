@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=System Info
+Name[pt_BR]=Informações do Sistema
 Name[no]=Systeminfo
 Name[de]=System information
 Exec=sysinfo

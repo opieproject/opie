@@ -6,4 +6,6 @@ SOURCES		= filebrowser.cpp inlineedit.cpp filePermissions.cpp main.cpp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
-INTERFACES	= 
+INTERFACES	=
+TRANSLATIONS = ../i18n/de/filebrowser.ts
+TRANSLATIONS = ../i18n/pt_BR/filebrowser.ts

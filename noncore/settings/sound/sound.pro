@@ -8,3 +8,5 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= ../$(OPIEDIR)/include
 LIBS            += -lqpe
 TARGET		= sound
+
+TRANSLATIONS = ../../i18n/pt_BR/sound.ts

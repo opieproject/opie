@@ -9,3 +9,4 @@ INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include 
 LIBS += -lqpe -Wl,-export-dynamic 
 
+TRANSLATIONS = ../i18n/pt_BR/calc.ts

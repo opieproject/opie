@@ -10,3 +10,4 @@ LIBS            += -lqpe
 VERSION		= 1.0.0
 
 TRANSLATIONS += ../../i18n/de/libvolumeapplet.ts
+TRANSLATIONS  = ../../i18n/pt_BR/libvolumeapplet.ts

@@ -10,3 +10,4 @@ LIBS            += -lqpe
 INTERFACES	= 
 TARGET		= today
 DESTDIR		= $(OPIEDIR)/bin
+TRANSLATIONS    = ../i18n/pt_BR/today.ts

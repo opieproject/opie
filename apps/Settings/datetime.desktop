@@ -4,6 +4,7 @@ Exec=systemtime
 Icon=DateTime
 Type=Application
 Name=Date/Time
+Name[pt_BR]=Data/Hora
 Name[no]=Dato/Tid
 Name[de]=Datum/Zeit
 Name[hu]=Dátum/Idõ

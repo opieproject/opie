@@ -27,3 +27,4 @@ LIBS            += -lqpe
 TARGET    = sysinfo
 
 TRANSLATIONS = ../i18n/de/sysinfo.ts
+TRANSLATIONS = ../i18n/pt_BR/sysinfo.ts

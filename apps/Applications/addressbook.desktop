@@ -4,6 +4,7 @@ Exec=addressbook
 Icon=AddressBook
 Type=Application
 Name=Contacts
+Name[pt_BR]=Endereços
 Name[no]=Adressebok
 Name[de]=Adressbuch
 Name[hu]=Címtár

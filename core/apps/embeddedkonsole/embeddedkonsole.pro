@@ -34,3 +34,4 @@ DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe
 REQUIRES  = embeddedkonsole
 
+TRANSLATIONS = ../i18n/pt_BR/embeddedkonsole.ts

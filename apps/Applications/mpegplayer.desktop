@@ -6,6 +6,7 @@ Type=Application
 MimeType=audio/mpeg;video/mpeg;audio/x-wav;application/x-shockwave-flash;playlist/plain
 MimeTypeIcons=SoundPlayer;MPEGPlayer;Sound;Sound;mpegplayer/playlist2
 Name=Media Player
+Name[pt_BR] = Reprodutor de Mídia
 Name[no]=MPEGspiller
 Name[de]=Medienwiedergabe
 Name[ja]=MPEGプレイヤー

@@ -8,3 +8,5 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 TARGET		= fifteen
+
+TRANSLATIONS = ../i18n/pt_BR/fifteen.ts

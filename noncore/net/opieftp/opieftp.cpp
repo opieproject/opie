@@ -487,7 +487,7 @@ void OpieFtp::populateLocalView()
         }
         if(fileL !="./") {
         item = new QListViewItem( Local_View,fileL,fileS, fileDate);
-        if(isDir)
+        if(isDir || fileL.find("/",0,TRUE) != -1)
             item->setPixmap( 0,  Resource::loadPixmap( "folder" ));
         else
             item->setPixmap( 0, Resource::loadPixmap( "fileopen" ));
@@ -527,7 +527,7 @@ bool OpieFtp::populateRemoteView( )
             fileDate = fileDate.stripWhiteSpace();
             if(fileL.find("total",0,TRUE) == -1) {
                 QListViewItem * item = new QListViewItem( Remote_View, fileL, fileS, fileDate);
-                if(s.left(1) == "d") {
+                if(s.left(1) == "d" || fileL.find("/",0,TRUE) != -1) {
                     item->setPixmap( 0, Resource::loadPixmap( "folder" ));
                       if(itemDir)
                           item->moveItem(itemDir);
@@ -695,8 +695,8 @@ void OpieFtp::RemoteListPressed( int mouse, QListViewItem *item, const QPoint &p
 void OpieFtp::showRemoteMenu(QListViewItem * item)
 {
     QPopupMenu  m;// = new QPopupMenu( Local_View );
-    if(item->text(0).right(1) == "/")
-    m.insertItem( tr( "Change Directory" ), this, SLOT( doRemoteCd() ));
+    if( /*item->text(0).right(1) == "/" ||*/ item->text(0).find("/",0,TRUE))
+        m.insertItem( tr( "Change Directory" ), this, SLOT( doRemoteCd() ));
     else
     m.insertItem( tr( "Download" ), this, SLOT( remoteDownload() ));
     m.insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
@@ -711,7 +711,7 @@ void OpieFtp::showLocalMenu(QListViewItem * item)
     QPopupMenu  m;
     m.insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
     m.insertSeparator();
-    if(item->text(0).right(1) == "/")
+    if( /*item->text(0).right(1) == "/" ||*/ item->text(0).find("/",0,TRUE))
     m.insertItem( tr( "Change Directory" ), this, SLOT( doLocalCd() ));
     else
     m.insertItem( tr( "Upload" ), this, SLOT( localUpload() ));

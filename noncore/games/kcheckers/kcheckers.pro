@@ -17,3 +17,5 @@ INCLUDEPATH	+= . \
 LIBS		+= -lqpe
 DESTDIR		= $(OPIEDIR)/bin
 TARGET		= kcheckers
+
+TRANSLATIONS = ../../i18n/pt_BR/kcheckers.ts

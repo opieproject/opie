@@ -9,3 +9,4 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 
 TRANSLATIONS = ../i18n/de/snake.ts
+TRANSLATIONS = ../i18n/pt_BR/snake.ts

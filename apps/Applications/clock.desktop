@@ -4,6 +4,7 @@ Exec=clock
 Icon=Clock
 Type=Application
 Name=Clock
+Name[pt_BR]=Rel�gio
 Name[no]=Klokke
 Name[de]=Uhr
 Name[ja]=時計

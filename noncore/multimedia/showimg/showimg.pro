@@ -17,3 +17,4 @@ LIBS            += -lqpe
 REQUIRES        = showimg
 
 TRANSLATIONS = ../i18n/de/showimg.ts
+TRANSLATIONS = ../i18n/pt_BR/showimg.ts

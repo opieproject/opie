@@ -5,6 +5,7 @@ Icon=Spreadsheet
 Type=Application
 MimeType=application/x-qpe-ss
 Name=Spreadsheet
+Name[pt_BR]=Planilha
 Name[no]=Regneark
 Name[de]=Tabellenkalkulation
 Name[ja]=表計算

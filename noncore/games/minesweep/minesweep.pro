@@ -12,3 +12,4 @@ LIBS            += -lqpe
 INTERFACES	= 
 
 TRANSLATIONS = ../i18n/de/minesweep.ts
+TRANSLATIONS = ../i18n/pt_BR/minesweep.ts

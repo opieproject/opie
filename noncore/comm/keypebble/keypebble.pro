@@ -36,3 +36,4 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe
 
+TRANSLATIONS = ../i18n/pt_BR/keypebble.ts

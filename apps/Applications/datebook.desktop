@@ -4,6 +4,7 @@ Exec=datebook
 Icon=DateBook
 Type=Application
 Name=Calendar
+Name[pt_BR]=Calendário
 Name[no]=Avtalebok
 Name[de]=Termin kalender
 Name[hu]=Naptár

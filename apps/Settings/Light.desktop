@@ -3,6 +3,7 @@ Type=Application
 Exec=light-and-power
 Icon=Light
 Name=Light & Power
+Name[pt_BR]=Iluminacao e Energia
 Name[no]=Lys
 Name[de]=Helligkeit
 Name[hu]=Fényerõ

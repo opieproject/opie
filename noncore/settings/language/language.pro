@@ -10,3 +10,4 @@ LIBS            += -lqpe
 TARGET		= language
 
 TRANSLATIONS    = ../../i18n/de/language.ts 
+TRANSLATIONS    = ../../i18n/pt_BR/language.ts

@@ -11,3 +11,4 @@ VERSION   = 1.0.0
 MOC_DIR=opieobj
 OBJECTS_DIR=opieobj
 
+TRANSLATIONS = ../../i18n/pt_BR/libscreenshotapplet.ts

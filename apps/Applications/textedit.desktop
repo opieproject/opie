@@ -5,6 +5,7 @@ Icon=TextEditor
 Type=Application
 MimeType=text/*
 Name=Text Editor
+Name[pt_BR]=Editor de Textos
 Name[no]=Teksteditor
 Name[de]=Texteditor
 Name[ja]=テキストエディタ

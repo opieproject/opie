@@ -3,3 +3,4 @@ Type=Application
 Exec=sound
 Icon=Sound
 Name=Sound
+Name[pt_BR]=Som
