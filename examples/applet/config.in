@@ -1,4 +1,4 @@
   config APPLET_EXAMPLE
     boolean "Taskbar Applet Example"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIEUI2 &&EXAMPLES 
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI &&EXAMPLES 

@@ -1,7 +1,7 @@
   config OPIEPLAYER
     boolean "opie-mediaplayer (mediaplayer that plays mp3, mpeg, and wav)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIEUI2
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI
 
   source core/multimedia/opieplayer/libflash/config.in
   source core/multimedia/opieplayer/libmad/config.in

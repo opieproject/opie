@@ -1,4 +1,4 @@
   config OSEARCH
     boolean "opie-osearch (searches throught your PDA)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIEUI2 && LIBOPIEPIM2
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI && LIBOPIE2PIM
