@@ -60,7 +60,7 @@ MultiauthMainWindow::MultiauthMainWindow(bool allowBypass = false)
         if ( allowBypass == true )
         {
             // very important: we can close the widget through the quit button, and bypass authentication, only if allowBypass is set!
-            message2 = new QLabel("<center><i>" + tr("Note: this 'exit' button only appears during <b>simulations</b>, like the one we are in.") + "</i></center>", this);
+            message2 = new QLabel("<center><i>" + tr("Note: this 'exit' button only appears during <b>simulations</b>, like the one we are in. If you don't succeed an authentication step at some point, it will keep on asking you to authenticate, but remember you can <b>skip</b> it too (and have access to this button again).") + "</i></center>", this);
             layout->addWidget(message2);
             QObject::connect(quit, SIGNAL(clicked()), this, SLOT(close()));
         }
