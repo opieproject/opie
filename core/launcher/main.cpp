@@ -198,7 +198,8 @@ static void initKeyboard()
 static bool firstUse()
 {
     bool needFirstUse = FALSE;
-    if ( QWSServer::mouseHandler() ->inherits("QCalibratedMouseHandler") ) {
+    if ( QWSServer::mouseHandler() &&
+         QWSServer::mouseHandler() ->inherits("QCalibratedMouseHandler") ) {
         if ( !QFile::exists( "/etc/pointercal" ) )
             needFirstUse = TRUE;
     }
