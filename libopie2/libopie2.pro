@@ -1,5 +1,5 @@
 TEMPLATE        = subdirs
-unix:SUBDIRS    = opiecore opiedb opiepim opieui opienet opiemm examples
+unix:SUBDIRS    = opiecore opiedb opiepim opieui opienet opiemm opiesecurity examples
 
 !contains( platform, x11 ) {
   message( Configuring libopie2 for build on Opie )
