@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.cpp,v 1.7 2003-06-03 14:08:04 tille Exp $
+ * $Id: accounts.cpp,v 1.8 2003-06-10 13:46:02 harlekin Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -245,7 +245,7 @@ int AccountWidget::doTab(){
     bool ok = false;
 
     while (!ok){
-        // dlg->showMinimized();
+        dlg->showMaximized();
         result = dlg->exec();
         ok = true;
 

@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: edit.cpp,v 1.7 2003-06-03 14:08:04 tille Exp $
+ * $Id: edit.cpp,v 1.8 2003-06-10 13:46:02 harlekin Exp $
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
  *
@@ -215,6 +215,7 @@ void DialWidget::downNumber() {
 
 void DialWidget::pppdargsbutton() {
     PPPdArguments pa(_pppdata, this);
+    pa.showMaximized();
     pa.exec();
 }
 
