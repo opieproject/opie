@@ -321,18 +321,17 @@ int OContactFields::getFieldOrder( int pos ){
 	  qDebug("fieldOrder ok");
 
   qDebug("fieldOrder >%s<",fieldOrder.latin1());
-  bool *ok;
+  bool ok;
   int ret = 0; 
 
-  QString posstr ( fieldOrder[pos] );
-  qWarning ("String: %s ", posstr.latin1() );
-  if ( !posstr.isEmpty() )
-	  ret = QString( posstr ).toInt(ok, 10);
+  QChar poschar = fieldOrder[pos];
+  if ( !( poschar == QChar::null ) )
+	  ret = QString( poschar ).toInt(&ok, 10);
   else
-	  *ok = false;
+	  ok = false;
 
   qDebug("pos %i -> %i",pos,ret);
-  if ( !*ok ) ret = pos;
+  if ( !ok ) ret = pos;
   qDebug("returning >%i<",ret);
   return ret;
 }
