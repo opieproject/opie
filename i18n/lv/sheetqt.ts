@@ -3,325 +3,325 @@
     <name>CellFormat</name>
     <message>
         <source>&amp;Borders</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Apmales</translation>
     </message>
     <message>
         <source>Back&amp;ground</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pamats</translation>
     </message>
     <message>
         <source>&amp;Font</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fonts</translation>
     </message>
     <message>
         <source>&amp;Alignment</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Izkārtojums</translation>
     </message>
     <message>
         <source>&amp;Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Platums:</translation>
     </message>
     <message>
         <source>&amp;Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Krāsa:</translation>
     </message>
     <message>
         <source>&amp;Default Borders</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Noklusētās Apmales</translation>
     </message>
     <message>
         <source>&amp;Style:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Stils:</translation>
     </message>
     <message>
         <source>&amp;Default Background</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Noklusētais Pamats</translation>
     </message>
     <message>
         <source>&amp;Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fonts:</translation>
     </message>
     <message>
         <source>&amp;Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Izmērs:</translation>
     </message>
     <message>
         <source>&amp;Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Trekns</translation>
     </message>
     <message>
         <source>&amp;Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Slīpraksts</translation>
     </message>
     <message>
         <source>&amp;Default Font</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Noklusētais Fonts</translation>
     </message>
     <message>
         <source>&amp;Vertical:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vertikāli:</translation>
     </message>
     <message>
         <source>&amp;Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Horizontāli:</translation>
     </message>
     <message>
         <source>&amp;Word Wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vārdu Pārnešana</translation>
     </message>
     <message>
         <source>&amp;Default Alignment</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Noklusētais Izkārtojums</translation>
     </message>
     <message>
         <source>Format Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Formatēt Rūtiņas</translation>
     </message>
     <message>
         <source>Opie Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Tabulas</translation>
     </message>
 </context>
 <context>
     <name>FindDialog</name>
     <message>
         <source>&amp;Find &amp;&amp; Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Meklēŧ &amp;&amp; Aizvietot</translation>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Opcijas</translation>
     </message>
     <message>
         <source>&amp;Search for:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Meklēt:</translation>
     </message>
     <message>
         <source>&amp;Replace with:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Aizvietot ar:</translation>
     </message>
     <message>
         <source>&amp;Type</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tips</translation>
     </message>
     <message>
         <source>&amp;Find</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Meklēt</translation>
     </message>
     <message>
         <source>&amp;Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Aizvietot</translation>
     </message>
     <message>
         <source>Replace &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>Aizvietot &amp;visus</translation>
     </message>
     <message>
         <source>Match &amp;case</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievērot &amp;reģistru</translation>
     </message>
     <message>
         <source>Current &amp;selection only</source>
-        <translation type="unfinished"></translation>
+        <translation>Tikai &amp;iezīmētam</translation>
     </message>
     <message>
         <source>&amp;Entire cell</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Visai rūtiņai</translation>
     </message>
     <message>
         <source>Find &amp; Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēt &amp; Aizvietot</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Opie Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Tabula</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda</translation>
     </message>
     <message>
         <source>Inconsistency error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Konsistences kļūda!</translation>
     </message>
     <message>
         <source>File cannot be saved!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru saglabāt failu!</translation>
     </message>
     <message>
         <source>File cannot be opened!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevar atvērt failu!</translation>
     </message>
     <message>
         <source>Invalid file format!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepareizs faila formāts!</translation>
     </message>
     <message>
         <source>Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt Failu</translation>
     </message>
     <message>
         <source>Do you want to save the current file?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai vēlaties saglabāt tekošo failu?</translation>
     </message>
     <message>
         <source>&amp;File Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Faila Nosaukms:</translation>
     </message>
     <message>
         <source>UnnamedFile</source>
-        <translation type="unfinished"></translation>
+        <translation>NenosauktsFails</translation>
     </message>
     <message>
         <source>New File</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns Fails</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Jauns</translation>
     </message>
     <message>
         <source>Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>Atvērt Failu</translation>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Atvērt</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Saglabāt</translation>
     </message>
     <message>
         <source>Save File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt Failu Kā</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt &amp;Kā</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Akceptēt</translation>
     </message>
     <message>
         <source>&amp;Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Akceptēt</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Atlikt</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Atlikt</translation>
     </message>
     <message>
         <source>Cell Selector</source>
-        <translation type="unfinished"></translation>
+        <translation>Rūtiņas Selektors</translation>
     </message>
     <message>
         <source>Cell &amp;Selector</source>
-        <translation type="unfinished"></translation>
+        <translation>Rūtiņas &amp;Selektors</translation>
     </message>
     <message>
         <source>Cut Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Izgriezt Rūtiņas</translation>
     </message>
     <message>
         <source>Cu&amp;t</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Izgriezt</translation>
     </message>
     <message>
         <source>Copy Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopēt Rūtiņas</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kopēt</translation>
     </message>
     <message>
         <source>Paste Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievietot Rūtiņas</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ievietot</translation>
     </message>
     <message>
         <source>Paste Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievietot Saturu</translation>
     </message>
     <message>
         <source>Paste Cont&amp;ents</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievietot &amp;Saturu</translation>
     </message>
     <message>
         <source>Clear Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Attīrīt Rūtiņas</translation>
     </message>
     <message>
         <source>C&amp;lear</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Attīrīt</translation>
     </message>
     <message>
         <source>Insert Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievietot Rūtiņas</translation>
     </message>
     <message>
         <source>C&amp;ells</source>
-        <translation type="unfinished"></translation>
+        <translation>Rū&amp;tiņas</translation>
     </message>
     <message>
         <source>Insert Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievietot Rindas</translation>
     </message>
     <message>
         <source>&amp;Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rindas</translation>
     </message>
     <message>
         <source>Insert Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievietot Kolonnas</translation>
     </message>
     <message>
         <source>&amp;Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kolonnas</translation>
     </message>
     <message>
         <source>Add Sheets</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot Tabulas</translation>
     </message>
     <message>
         <source>&amp;Sheets</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tabulas</translation>
     </message>
     <message>
         <source>Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Rūtiņas</translation>
     </message>
     <message>
         <source>&amp;Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rūtiņas</translation>
     </message>
     <message>
         <source>Row Height</source>
-        <translation type="unfinished"></translation>
+        <translation>Rūtiņas Augstums</translation>
     </message>
     <message>
         <source>H&amp;eight</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Augstums</translation>
     </message>
     <message>
         <source>Adjust Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Regulēt Rindu</translation>
     </message>
     <message>
         <source>&amp;Adjust</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Regulēt</translation>
     </message>
     <message>
         <source>Show Row</source>

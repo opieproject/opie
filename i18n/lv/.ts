@@ -3,44 +3,44 @@
     <name>AccountPreferences</name>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Konts</translation>
     </message>
 </context>
 <context>
     <name>DatePreferences</name>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datums</translation>
     </message>
 </context>
 <context>
     <name>MemoryDialog</name>
     <message>
         <source>Edit Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot Atmiņu</translation>
     </message>
 </context>
 <context>
     <name>NewAccount</name>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Konts</translation>
     </message>
     <message>
         <source>Child Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Bērna Konts</translation>
     </message>
     <message>
         <source>Bank</source>
-        <translation type="unfinished"></translation>
+        <translation>Banka</translation>
     </message>
     <message>
         <source>Cash</source>
-        <translation type="unfinished"></translation>
+        <translation>Nauda</translation>
     </message>
     <message>
         <source>Credit Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Kredīt Karte</translation>
     </message>
     <message>
         <source>Equity</source>
@@ -59,21 +59,21 @@
     <name>NewTransaction</name>
     <message>
         <source>Transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Tranzakcija</translation>
     </message>
 </context>
 <context>
     <name>QashMoney</name>
     <message>
         <source>QashMoney</source>
-        <translation type="unfinished"></translation>
+        <translation>QashMoney</translation>
     </message>
 </context>
 <context>
     <name>TransactionPreferences</name>
     <message>
         <source>Transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Tranzakcija</translation>
     </message>
 </context>
 </TS>

@@ -3,29 +3,29 @@
     <name>GroupDialog</name>
     <message>
         <source>Add Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot Grupu</translation>
     </message>
     <message>
         <source>Edit Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot Grupu</translation>
     </message>
 </context>
 <context>
     <name>UserConfig</name>
     <message>
         <source>Opie User Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Lieotāju Menedžeris</translation>
     </message>
 </context>
 <context>
     <name>UserDialog</name>
     <message>
         <source>Add User</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot Lietotāju</translation>
     </message>
     <message>
         <source>Edit User</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot Lietotāju</translation>
     </message>
 </context>
 </TS>

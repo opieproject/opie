@@ -3,61 +3,61 @@
     <name>Menu::InstEditDialog</name>
     <message>
         <source>Instrument</source>
-        <translation type="unfinished"></translation>
+        <translation>Instruments</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst</translation>
     </message>
     <message>
         <source>Add High String</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot Augstāko Stīgu</translation>
     </message>
     <message>
         <source>Add Low String</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot Apakšējo Stīgu</translation>
     </message>
 </context>
 <context>
     <name>Menu::MenuWidget</name>
     <message>
         <source>Instr.</source>
-        <translation type="unfinished"></translation>
+        <translation>Instr.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Nots</translation>
     </message>
     <message>
         <source>show</source>
-        <translation type="unfinished"></translation>
+        <translation>rādīt</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Skala</translation>
     </message>
 </context>
 <context>
     <name>Menu::ScaleEditDialog</name>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Skala</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst</translation>
     </message>
 </context>
 </TS>
