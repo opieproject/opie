@@ -104,7 +104,8 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     setLooping( mediaPlayerState->fullscreen() );
     setPaused( mediaPlayerState->paused() );
     setPlaying( mediaPlayerState->playing() );
-
+    if (mediaPlayerState->isStreaming) slider->hide();
+        
 }
 
 

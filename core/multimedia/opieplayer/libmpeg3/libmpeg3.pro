@@ -36,7 +36,7 @@ SOURCES   =   libmpeg3plugin.cpp libmpeg3pluginimpl.cpp \
         video/vlc.c
 TARGET    =   mpeg3plugin
 TMAKE_CC=g++
-DESTDIR   =   ../../plugins/codecs
+DESTDIR   =   $(OPIEDIR)/plugins/codecs
 INCLUDEPATH += $(OPIEDIR)/include ..
 DEPENDPATH      +=  ../$(OPIEDIR)/include ..
 LIBS            +=  -lqpe -lpthread -lm

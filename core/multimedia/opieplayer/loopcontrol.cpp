@@ -247,8 +247,8 @@ void LoopControl::startAudio() {
 //         }
 
       audioDevice->write( audioBuffer, samplesRead * 2 * channels );
-      if(  mediaPlayerState->isStreaming == FALSE);
 
+//      if(  mediaPlayerState->isStreaming == FALSE)
       audioSampleCounter = currentSample + samplesRead - 1;
 
       moreAudio = readOk && (audioSampleCounter <= total_audio_samples);
