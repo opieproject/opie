@@ -5,7 +5,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.h,v 1.1 2003-07-22 19:23:15 zcarsten Exp $
+** $Id: zsafe.h,v 1.2 2004-02-17 23:47:39 alwin Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -14,9 +14,6 @@
 #ifndef ZSAFE_H
 #define ZSAFE_H
 
-#ifndef WIN32
-#include <stream.h>
-#endif
 #include <stdio.h>
 
 #include "infoform.h"
