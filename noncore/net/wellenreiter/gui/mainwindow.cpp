@@ -107,7 +107,8 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
 
     QPopupMenu* fileSave = new QPopupMenu( mb );
     fileSave->insertItem( "&Session...", this, SLOT( fileSaveSession() ) );
-    fileSave->insertItem( "&Log...", this, SLOT( fileSaveLog() ) );
+    fileSave->insertItem( "&Text Log...", this, SLOT( fileSaveLog() ) );
+    fileSave->insertItem( "&Hex Log...", this, SLOT( fileSaveHex() ) );
 
     QPopupMenu* fileLoad = new QPopupMenu( mb );
     fileLoad->insertItem( "&Session...", this, SLOT( fileLoadSession() ) );
@@ -276,6 +277,26 @@ void WellenreiterMainWindow::fileSaveSession()
         else
         {
             qDebug( "Problem saving session to file '%s'", (const char*) fname );
+        }
+    }
+}
+
+void WellenreiterMainWindow::fileSaveHex()
+{
+    QString fname = getFileName( true );
+    if ( !fname.isEmpty() )
+    {
+        QFile f( fname );
+        if ( f.open(IO_WriteOnly) )
+        {
+            QTextStream t( &f );
+            t << mw->hexWindow()->getLog();
+            f.close();
+            qDebug( "Saved hex log to file '%s'", (const char*) fname );
+        }
+        else
+        {
+            qDebug( "Problem saving hex log to file '%s'", (const char*) fname );
         }
     }
 }

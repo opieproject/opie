@@ -53,6 +53,7 @@ class WellenreiterMainWindow: public QMainWindow
     void showConfigure();
     void demoAddStations();
     void fileSaveLog();
+    void fileSaveHex();
     void fileSaveSession();
     void fileLoadSession();
     void fileNew();

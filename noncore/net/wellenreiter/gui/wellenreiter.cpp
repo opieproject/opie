@@ -110,6 +110,8 @@ void Wellenreiter::setConfigWindow( WellenreiterConfigWindow* cw )
 
 void Wellenreiter::receivePacket(OPacket* p)
 {
+    hexWindow()->log( p->dump( 8 ) );
+
     // check if we received a beacon frame
     // static_cast is justified here
     OWaveLanManagementPacket* beacon = static_cast<OWaveLanManagementPacket*>( p->child( "802.11 Management" ) );
@@ -161,6 +163,7 @@ void Wellenreiter::startStopClicked()
         iface->setPromiscuousMode( false );
 
         system( "cardctl reset; sleep 1" ); //FIXME: Use OProcess
+        logwindow->log( "(i) Stopped Scanning." );
 
         // message the user
         QMessageBox::information( this, "Wellenreiter II", "Your wireless card\nshould now be usable again." );
@@ -222,7 +225,7 @@ void Wellenreiter::startStopClicked()
         // connect
         connect( pcap, SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
 
-        logwindow->log( "(i) Daemon has been started." );
+        logwindow->log( "(i) Started Scanning." );
         #ifdef QWS
         oApp->setTitle( "Scanning ..." );
         #else

@@ -20,9 +20,10 @@ MHexWindow::MHexWindow( QWidget * parent, const char * name, WFlags f )
            :QVBox( parent, name, f )
 {
     ledit = new QMultiLineEdit( this );
-    
+    ledit->setFont( QFont( "fixed", 10 ) );
+
     // FIXME: Set properties( font, read-only, etc...)
-    
+
 };
 
 void MHexWindow::log( QString text )
@@ -31,6 +32,11 @@ void MHexWindow::log( QString text )
     ledit->append( text );
 
 };
+
+const QString MHexWindow::getLog() const
+{
+    return ledit->text();
+}
 
 void MHexWindow::clear()
 {

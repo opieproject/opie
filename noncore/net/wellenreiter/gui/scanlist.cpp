@@ -194,7 +194,7 @@ MScanListItem::MScanListItem( QListView* parent, QString type, QString essid, QS
                               bool wep, int channel, int signal )
                :OListViewItem( parent, essid, QString::null, macaddr, QString::null, QString::null ),
                 _type( type ), _essid( essid ), _macaddr( macaddr ), _wep( wep ),
-                _channel( channel ), _signal( signal ), _beacons( 0 )
+                _channel( channel ), _signal( signal ), _beacons( 1 )
 {
     qDebug( "creating scanlist item" );
     if ( WellenreiterConfigWindow::instance() && type == "networks" )
@@ -274,7 +274,7 @@ void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, 
     _essid = essid;
     _macaddr = macaddr;
     _channel = channel;
-    _beacons = 0;
+    _beacons = 1;
     _signal = 0;
 }
 
