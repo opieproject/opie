@@ -165,10 +165,11 @@ void Today::init() {
         delete big_box;
     }
 
-    big_box = new QVBox( sv->viewport() );
-    big_box->setSpacing( 0 );
-    big_box->setSpacing( 0 );
+    big_box = new QWidget( sv->viewport() );
+    //big_box->setSpacing( 0 );
+    // big_box->setSpacing( 0 );
     sv->addChild( big_box );
+    bblayout = new QVBoxLayout ( big_box );
 }
 
 /**
@@ -283,10 +284,11 @@ void Today::loadPlugins() {
             tempPlugin = ( tempList.find( *stringit ) ).data();
             if ( !( (tempPlugin.name).isEmpty() ) ) {
                 pluginList.append( tempPlugin );
+                bblayout->addWidget( tempPlugin.guiBox );
             }
         }
     }
-    new QWidget( big_box );
+    bblayout->addStretch( 2 );
     draw();
 }
 

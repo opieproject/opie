@@ -65,7 +65,8 @@ private slots:
     QStringList m_allApplets;
 
     QScrollView *sv;
-    QVBox* big_box;
+    QWidget* big_box;
+    QVBoxLayout *bblayout;
 
 
     QTimer *m_refreshTimer;
