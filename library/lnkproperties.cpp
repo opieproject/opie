@@ -127,12 +127,13 @@ LnkProperties::~LnkProperties()
 void LnkProperties::unlinkLnk()
 {
     if ( QPEMessageBox::confirmDelete( this, tr("Delete"), lnk->name() ) ) {
-  lnk->removeFiles();
-  if ( QFile::exists(lnk->file()) ) {
-      QMessageBox::warning( this, tr("Delete"), tr("File deletion failed.") );
-  } else {
-      reject();
-  }
+        if ( QFile::exists(lnk->file()) )
+            lnk->removeFiles();
+        if ( QFile::exists(lnk->file()) ) {
+            QMessageBox::warning( this, tr("Delete"), tr("File deletion failed.") );
+        } else {
+            reject();
+        }
     }
 }
 
