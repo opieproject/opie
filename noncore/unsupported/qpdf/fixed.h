@@ -180,10 +180,12 @@ template <unsigned int SH> inline fixed<SH> sqrt ( const fixed<SH> &f )
 	return fixed<SH> ( a1, true );
 }
 
+#if 0 // no std::ostream needed in OPIE
 template <unsigned int SH> inline std::ostream &operator << ( std::ostream &o, const fixed<SH> &f )
 {
 	o << double( f );
 	return o;
 }
+#endif
 
 #endif
