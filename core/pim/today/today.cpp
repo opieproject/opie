@@ -35,6 +35,7 @@
 #include <qhbox.h>
 #include <opie/otabwidget.h>
 #include <qdialog.h>
+#include <qwhatsthis.h>
 
 
 struct TodayPlugin {
@@ -167,6 +168,7 @@ void Today::loadPlugins() {
             plugPix.convertFromImage( Resource::loadImage( plugin.guiPart->pixmapNameWidget() ).smoothScale( m_iconSize, m_iconSize ), 0 );
             OClickableLabel* plugIcon = new OClickableLabel( plugin.guiBox );
             plugIcon->setPixmap( plugPix );
+            QWhatsThis::add( plugIcon, tr("Click here to launch the associated app") );
             plugIcon->setName( plugin.guiPart->appName() );
             connect( plugIcon, SIGNAL( clicked() ), this, SLOT( startApplication() ) );
             // a scrollview for each plugin

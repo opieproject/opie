@@ -33,7 +33,7 @@ class TodayBase : public QWidget
     Q_OBJECT
 
 public:
-    TodayBase( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+    TodayBase( QWidget* parent = 0, const char* name = 0, WFlags = 0 );
     ~TodayBase();
 
     QFrame* Frame4;

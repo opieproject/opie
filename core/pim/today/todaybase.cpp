@@ -21,12 +21,13 @@
 #include <qimage.h>
 #include <qpixmap.h>
 #include <qapplication.h>
+#include <qwhatsthis.h>
 
 #include <qpe/resource.h>
 
 
-TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
-    : QWidget( parent, name, fl ) {
+TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
+    : QWidget( parent, name, WStyle_ContextHelp ) {
 
   QPixmap logo = Resource::loadPixmap( "today/today_logo"); // logo
   QPixmap opiezilla = Resource::loadPixmap("today/opiezilla" ); //the opiezilla
@@ -80,6 +81,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   QLabel* Opiezilla = new QLabel( Frame, "OpieZilla" );
   Opiezilla->setPixmap( opiezilla );
   Opiezilla->setGeometry( QApplication::desktop()->width()-50 ,1, 45, 47 );
+  QWhatsThis::add( Opiezilla , tr( "Today by Maximilian Reiß" ) );
   Opiezilla->setBackgroundOrigin( QLabel::ParentOrigin );
 
   // Ownerfield
@@ -92,6 +94,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   ConfigButton = new OClickableLabel ( Frame, "PushButton1" );
   ConfigButton->setGeometry( QRect( QApplication::desktop()->width()-80, 30, 25, 21 ) );
   ConfigButton->setPixmap( config );
+  QWhatsThis::add( ConfigButton, tr( "Click here to get to the config dialog" ) );
   ConfigButton->setBackgroundOrigin( QLabel::ParentOrigin );
 }
 

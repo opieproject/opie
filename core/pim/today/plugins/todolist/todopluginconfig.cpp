@@ -22,6 +22,7 @@
 #include <qhbox.h>
 #include <qtoolbutton.h>
 #include <qlabel.h>
+#include <qwhatsthis.h>
 
 
 
@@ -34,20 +35,22 @@ TodolistPluginConfig::TodolistPluginConfig( QWidget *parent,  const char* name)
     QHBox *box1 = new QHBox( this );
 
     QLabel* TextLabel6 = new QLabel( box1, "TextLabel6" );
-    TextLabel6->setText( tr( "How many\n tasks should \n"
-                             "be shown?" ) );
+    TextLabel6->setText( tr( "tasks shown " ) );
 
     SpinBox2 = new QSpinBox( box1, "SpinBox2" );
     SpinBox2->setMaxValue( 40 );
+    QWhatsThis::add( SpinBox2 , tr( "Set the maximum number of task that should be shown" ) );
+
+
 
     QHBox *box2 = new QHBox( this );
 
     QLabel* clipLabel = new QLabel( box2, "" );
-    clipLabel->setText( tr( "Clip line after\n X chars" ) );
+    clipLabel->setText( tr( "Clip line after X chars" ) );
 
     SpinBoxClip = new QSpinBox( box2, "SpinClip" );
     SpinBoxClip->setMaxValue( 200 );
-
+    QWhatsThis::add( SpinBoxClip , tr( "After how many chars should be the info about the task be cut off" ) );
     layout->addWidget( box1 );
     layout->addWidget( box2 );
 
