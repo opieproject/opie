@@ -2,7 +2,7 @@
 <context>
     <name>KJezzball</name>
     <message>
-        <source>ZBounce</source>
+        <source>Bounce</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -38,7 +38,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ZBounce Level %1</source>
+        <source>Bounce Level %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
