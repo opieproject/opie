@@ -33,9 +33,9 @@
 
 #include <qpe/config.h>
 #include <qpe/resource.h>
+#include <opie/otabbar.h>
 
 #include <qcombobox.h>
-#include <qtabbar.h>
 #include <qwidgetstack.h>
 
 OTabWidget::OTabWidget( QWidget *parent, const char *name, TabStyle s, TabPosition p )
@@ -72,7 +72,7 @@ OTabWidget::OTabWidget( QWidget *parent, const char *name, TabStyle s, TabPositi
 
     tabBarStack = new QWidgetStack( this, "tabbarstack" );
 
-    tabBar = new QTabBar( tabBarStack, "tabbar" );
+    tabBar = new OTabBar( tabBarStack, "tabbar" );
     tabBarStack->addWidget( tabBar, 0 );
     connect( tabBar, SIGNAL( selected( int ) ), this, SLOT( slotTabBarSelected( int ) ) );
 

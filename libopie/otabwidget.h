@@ -37,6 +37,7 @@
 #include <qwidget.h>
 #include <qlist.h>
 
+class OTabBar;
 class QComboBox;
 class QPixmap;
 class QTabBar;
@@ -183,7 +184,7 @@ private:
     TabPosition tabBarPosition;
 
     QWidgetStack *tabBarStack;
-    QTabBar      *tabBar;
+    OTabBar      *tabBar;
     QComboBox    *tabList;
 
     QWidgetStack *widgetStack;
