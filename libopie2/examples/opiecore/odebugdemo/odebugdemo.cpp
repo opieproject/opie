@@ -139,4 +139,4 @@ int main( int argc, char** argv )
 
 }
 
-#include "moc/odebugdemo.moc"
+#include "odebugdemo.moc"
