@@ -654,7 +654,7 @@ void FileView::showFileMenu()
            tr( "Copy" ), this, SLOT( copy() ) );
     m->insertItem( Resource::loadPixmap("paste"),
            tr( "Paste" ), this, SLOT( paste() ) );
-    m->insertItem( tr( "change permissions" ), this, SLOT( chPerm() ) );
+    m->insertItem( tr( "Change Permissions" ), this, SLOT( chPerm() ) );
     m->insertItem( tr( "Delete" ), this, SLOT( del() ) );
     m->insertSeparator();
     m->insertItem( tr( "Select all" ), this, SLOT( selectAll() ) );
