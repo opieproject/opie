@@ -291,7 +291,7 @@ et tout son contenu ?</translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation>Ko libre</translation>
+        <translation>Ko libres</translation>
     </message>
     <message>
         <source>Switch to View 1</source>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CategoryFilterDlg</name>
     <message>
@@ -260,11 +261,11 @@
     </message>
     <message>
         <source>Removing status entry...</source>
-        <translation>Suppression du status...</translation>
+        <translation>Suppression du statut...</translation>
     </message>
     <message>
         <source>status file - </source>
-        <translation>fichier status - </translation>
+        <translation>fichier statut - </translation>
     </message>
     <message>
         <source>package - </source>
@@ -272,11 +273,11 @@
     </message>
     <message>
         <source>Couldn&apos;t open status file - </source>
-        <translation>Impossible d&apos;ouvrir le fichier de status -</translation>
+        <translation>Impossible d&apos;ouvrir le fichier de statut -</translation>
     </message>
     <message>
         <source>Couldn&apos;t create tempory status file - </source>
-        <translation>Impossible de créer le fichier de status temporaire -</translation>
+        <translation>Impossible de créer le fichier temporaire de statut -</translation>
     </message>
     <message>
         <source>Couldn&apos;t start ipkg process</source>
@@ -288,7 +289,7 @@
     </message>
     <message>
         <source>Creating directory </source>
-        <translation>Creation répertoire</translation>
+        <translation>Création du répertoire</translation>
     </message>
     <message>
         <source>Linked %1 to %2</source>
@@ -862,7 +863,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Address:</source>
-        <translation>Addresse : </translation>
+        <translation>Adresse : </translation>
     </message>
     <message>
         <source>Active Server</source>

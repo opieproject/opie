@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>Hold:</source>
-        <translation>Tenir : </translation>
+        <translation type="unfinished">Maintenir :</translation>
     </message>
     <message>
         <source>Beam VCard</source>
@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>Send eMail</source>
-        <translation>Envoie Courrier</translation>
+        <translation>Envoyer Courrier</translation>
     </message>
     <message>
         <source>Toggle Menu</source>

@@ -53,8 +53,8 @@
         <source>Expose you own pieces.
 After such a move only one piece will remain in the slot</source>
         <translation>Exposer vos propres pièces.
-Après un tel choix seul une pièce
-restera dans la case</translation>
+Après un tel déplacement, il ne restera
+qu&apos;une seule pièce dans la case</translation>
     </message>
     <message>
         <source>Protect a single piece by
@@ -65,7 +65,7 @@ mettant une autre dans la case</translation>
     <message>
         <source>Move piece to a slot already
 occupied by the player</source>
-        <translation>Déplace la pièce sur une case
+        <translation>Déplacer la pièce sur une case
 déjà occupée par le joueur</translation>
     </message>
     <message>
@@ -75,8 +75,8 @@ déjà occupée par le joueur</translation>
     <message>
         <source>Press and hold the ? buttton
 next to a field for help</source>
-        <translation>Pressez et garder le bouton &apos;?&apos;
-à côté du champs d&apos;aide</translation>
+        <translation type="unfinished">Maintenez appuyé le bouton &apos;?&apos;
+à côté d&apos;un champ pour obtenir de l&apos;aide.</translation>
     </message>
 </context>
 <context>
@@ -119,7 +119,7 @@ next to a field for help</source>
     </message>
     <message>
         <source>AI</source>
-        <translation>I.A</translation>
+        <translation type="unfinished">I.A.</translation>
     </message>
     <message>
         <source>Rules</source>

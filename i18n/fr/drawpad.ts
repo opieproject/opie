@@ -84,7 +84,7 @@
     </message>
     <message>
         <source>Draw Filled Ellipse</source>
-        <translation>Desinner Ellipse Pleine</translation>
+        <translation>Dessiner Ellipse Pleine</translation>
     </message>
     <message>
         <source>Fill Region</source>
