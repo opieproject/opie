@@ -104,12 +104,14 @@ public:
     virtual void setUid( int uid );
 
 protected:
+    Qtopia::UidGen &uidGen();
     QString crossToString()const;
 
 private:
     class OPimRecordPrivate;
     OPimRecordPrivate *d;
     QMap<QString, QArray<int> > m_relations;
+    static Qtopia::UidGen m_uidGen;
 
 };
 

@@ -3,6 +3,9 @@
 
 #include "opimrecord.h"
 
+Qtopia::UidGen OPimRecord::m_uidGen( Qtopia::UidGen::Qtopia );
+
+
 OPimRecord::OPimRecord( int uid )
     : Qtopia::Record() {
 
@@ -125,3 +128,6 @@ void OPimRecord::setUid( int uid ) {
 
     Qtopia::Record::setUid( uid );
 };
+Qtopia::UidGen &OPimRecord::uidGen() {
+    return m_uidGen;
+}
