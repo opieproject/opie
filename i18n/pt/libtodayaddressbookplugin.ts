@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Clip line after X chars: </source>
-        <translation type="unfinished"></translation>
+        <translation>Cortar a linha ao fim de X caracteres:</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>Colors for the headlines !</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cor dos cabeçalhos!</translation>
     </message>
     <message>
         <source>Set Entry Color: </source>
@@ -52,7 +52,7 @@ Color if below </source>
     </message>
     <message>
         <source> days: </source>
-        <translation type="unfinished"></translation>
+        <translation>dias:</translation>
     </message>
     <message>
         <source>This urgent color will be used if we are close to the event !</source>

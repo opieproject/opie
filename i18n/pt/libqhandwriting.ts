@@ -3,7 +3,7 @@
     <name>HandwritingHelp</name>
     <message>
         <source>Handwriting Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajuda da Escrita Manual</translation>
     </message>
     <message>
         <source>&lt;ul&gt;&lt;li&gt;When you start to use the handwriting recogniser write slowly, accurately and firmly.&lt;li&gt;Use the guide lines when drawing your characters.&lt;li&gt;When drawing a character with multiple strokes, each successive stroke must be drawn before the grayed strokes are erased.&lt;li&gt;Practice your handwriting using the handwriting trainer.&lt;li&gt;When adding your own character templates make sure they are sufficiently different from other characters&apos; templates.&lt;/ul&gt;</source>
@@ -22,7 +22,7 @@
     <name>HandwritingTrainer</name>
     <message>
         <source>Matched: </source>
-        <translation type="unfinished"></translation>
+        <translation>Encontrado:</translation>
     </message>
     <message>
         <source>Similar to: </source>
@@ -38,7 +38,7 @@
     </message>
     <message>
         <source>No match</source>
-        <translation type="unfinished"></translation>
+        <translation>Não encontrado</translation>
     </message>
 </context>
 <context>
@@ -90,7 +90,7 @@
     <name>QIMPenInputCharDlg</name>
     <message>
         <source>Enter new character</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza o caractér novo</translation>
     </message>
     <message>
         <source>Character:</source>
@@ -101,7 +101,7 @@
     <name>QIMPenPrefBase</name>
     <message>
         <source>Multi-stroke character timeout:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo de espera entre os vários rabiscos do caractér:</translation>
     </message>
     <message>
         <source>ms</source>
@@ -109,26 +109,26 @@
     </message>
     <message>
         <source>Input areas displayed</source>
-        <translation type="unfinished"></translation>
+        <translation>Áreas a mostrar</translation>
     </message>
     <message>
         <source>Upper and lower case areas</source>
-        <translation type="unfinished"></translation>
+        <translation>Áreas de letras grandes e pequenas</translation>
     </message>
     <message>
         <source>Lower case (toggle Upper case)</source>
-        <translation type="unfinished"></translation>
+        <translation>Letras Pequenas (mudar para Letras Grandes)</translation>
     </message>
 </context>
 <context>
     <name>QIMPenSetup</name>
     <message>
         <source>Setup Handwriting Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuração da Escrita Manual</translation>
     </message>
     <message>
         <source>Character Profile:</source>
-        <translation type="unfinished"></translation>
+        <translation>Perfil de Caractéres:</translation>
     </message>
     <message>
         <source>Preferences</source>
@@ -152,7 +152,11 @@ Free up some space
 and try again.
 
 Quit anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível gravar.
+Liberte algum espaço e
+tente novamente.
+
+Sair na mesma?</translation>
     </message>
 </context>
 </TS>

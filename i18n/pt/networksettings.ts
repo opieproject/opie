@@ -74,7 +74,7 @@
     </message>
     <message>
         <source>&amp;Set Current</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Alterar Actuais</translation>
     </message>
     <message>
         <source>Current Profile</source>

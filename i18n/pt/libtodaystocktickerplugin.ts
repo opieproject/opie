@@ -10,7 +10,7 @@
     <name>StockTickerPluginWidget</name>
     <message>
         <source>Connection refused.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligação recusada.</translation>
     </message>
     <message>
         <source>Could not find server.</source>
@@ -18,7 +18,7 @@
     </message>
     <message>
         <source>Socket read error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro na ligação.</translation>
     </message>
 </context>
 <context>

@@ -3,7 +3,7 @@
     <name>DictToolBase</name>
     <message>
         <source>MyDialog1</source>
-        <translation type="unfinished"></translation>
+        <translation>MeuDialogo1</translation>
     </message>
     <message>
         <source>All dictionaries</source>
@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Selects the dictionary to manipulate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha o dicionário para manipular.</translation>
     </message>
     <message>
         <source>Search</source>
@@ -67,7 +67,7 @@
     </message>
     <message>
         <source>This dictionary is read-only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este dicionário é apenas para leitura.</translation>
     </message>
 </context>
 </TS>

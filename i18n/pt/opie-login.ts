@@ -15,11 +15,11 @@ accurately to calibrate your screen.</source>
     <name>LoginWindow</name>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrar</translation>
     </message>
     <message>
         <source>&lt;center&gt;Welcome to OPIE&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Bem-Vindo ao Opie&lt;/center&gt;</translation>
     </message>
     <message>
         <source>User</source>
@@ -79,18 +79,18 @@ de sistema (%1)</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível usar essa conta</translation>
     </message>
     <message>
         <source>Opie was terminated
 by an uncaught signal
 (%1)
 </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Could not start Opie.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível usar essa conta.</translation>
     </message>
 </context>
 </TS>

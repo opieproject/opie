@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Globais</translation>
     </message>
 </context>
 <context>
@@ -22,7 +22,7 @@
     </message>
     <message>
         <source>Use global settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar configurações globais</translation>
     </message>
     <message>
         <source>Which media files</source>
@@ -81,7 +81,7 @@
     </message>
     <message>
         <source>Limit search to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limitar a procura a:</translation>
     </message>
     <message>
         <source>Add</source>

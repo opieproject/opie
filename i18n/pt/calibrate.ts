@@ -8,7 +8,7 @@ accurately to calibrate your screen.</source>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Bem-Vindo ao Opie</translation>
     </message>
 </context>
 </TS>

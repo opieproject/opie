@@ -71,7 +71,7 @@
     </message>
     <message>
         <source>&amp;Change card backs</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Mudar o desenho das cartas</translation>
     </message>
     <message>
         <source>&amp;Snap to position</source>
@@ -79,7 +79,7 @@
     </message>
     <message>
         <source>Change card backs</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar o desenho das cartas</translation>
     </message>
     <message>
         <source>Snap to position</source>
@@ -87,11 +87,11 @@
     </message>
     <message>
         <source>Turn one card</source>
-        <translation type="unfinished"></translation>
+        <translation>Virar uma carta</translation>
     </message>
     <message>
         <source>Turn three cards</source>
-        <translation type="unfinished"></translation>
+        <translation>Virar três cartas</translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>OpieObex::OtherHandler</name>
     <message>
         <source>&lt;qt&gt;&lt;b&gt;Received:&lt;/b&gt;&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;&lt;b&gt;Recebido:&lt;/b&gt;&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Accept</source>
@@ -15,26 +15,26 @@
     </message>
     <message>
         <source>&lt;p&gt;You received a file of type %1 (&lt;img src=&quot;%2&quot;&gt; )What do you want to do?</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Recebeu um ficheiro do tipo %1 (&lt;img src=&quot;%2&quot;&gt;). O que quer fazer com ele?</translation>
     </message>
 </context>
 <context>
     <name>OpieObex::SendWidget</name>
     <message>
         <source>&lt;qt&gt;&lt;h1&gt;Sending:&lt;/h1&gt;&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;&lt;h1&gt;A Enviar:&lt;/h1&gt;&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviado</translation>
     </message>
     <message>
         <source>IrDa is not enabled!</source>
-        <translation type="unfinished"></translation>
+        <translation>Infravermelhos desactivados!</translation>
     </message>
     <message>
         <source>Searching for IrDa Devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>A procurar dispositivos com infravermelhos.</translation>
     </message>
     <message>
         <source>Bluetooth is not available</source>
@@ -42,11 +42,11 @@
     </message>
     <message>
         <source>Searching for bluetooth Devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>A procurar por dispositivos com Bluetooth.</translation>
     </message>
     <message>
         <source>Scheduling for beam.</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcado para envio.</translation>
     </message>
     <message>
         <source>Click to beam</source>
@@ -66,11 +66,11 @@
     </message>
     <message>
         <source>Search again for IrDa.</source>
-        <translation type="unfinished">Procurar outra vez por </translation>
+        <translation>Procurar outra vez por dispositivos com infravermelhos.</translation>
     </message>
     <message>
         <source>Start sending</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar o envio</translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>QObject</name>
     <message>
         <source>Euroconv</source>
-        <translation type="unfinished"></translation>
+        <translation>Conversor Euros</translation>
     </message>
 </context>
 </TS>
