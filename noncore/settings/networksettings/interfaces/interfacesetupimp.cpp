@@ -21,7 +21,7 @@
 
 /**
  * Constuctor.  Set up the connection. A profile must be set.
- */ 
+ */
 InterfaceSetupImp::InterfaceSetupImp(QWidget* parent, const char* name, Interface *i, Interfaces *j, WFlags fl) : InterfaceSetup(parent, name, fl), interface(i), interfaces(j), delInterfaces(false){
   if (j == 0) {
     delInterfaces = true;
@@ -31,7 +31,7 @@ InterfaceSetupImp::InterfaceSetupImp(QWidget* parent, const char* name, Interfac
 
 /**
  * Destructor
- */ 
+ */
 InterfaceSetupImp::~InterfaceSetupImp(){
   if(delInterfaces) {
     delete interfaces;
@@ -39,11 +39,12 @@ InterfaceSetupImp::~InterfaceSetupImp(){
 }
 
 /**
- * Save the current settings, then write out the interfaces file and close. 
+ * Save the current settings, then write out the interfaces file and close.
  */
 bool InterfaceSetupImp::saveChanges(){
   bool error;
   QString iface = interfaces->getInterfaceName(error);
+  qDebug("InterfaceSetupImp::saveChanges saves interface %s", iface.latin1() );
   if(!saveSettings())
     return false;
 
@@ -56,25 +57,25 @@ bool InterfaceSetupImp::saveChanges(){
     ifup += "; ifup ";
     ifup += iface;
     ifup += ";";
-  
+
     OProcess restart;
     restart << "sh";
     restart << "-c";
     restart << ifup;
-  
+
     OWait *owait = new OWait();
     Global::statusMessage( tr( "Restarting interface" ) );
-  
+
     owait->show();
     qApp->processEvents();
-  
+
     if (!restart.start(OProcess::Block, OProcess::NoCommunication) ) {
       qWarning("unstable to spawn ifdown/ifup");
     }
-  
+
     owait->hide();
     delete owait;
-  
+
     interface->refresh();
   }
   return true;
@@ -83,23 +84,23 @@ bool InterfaceSetupImp::saveChanges(){
 /**
  * Save the settings for the current Interface.
  * @return bool true if successfull, false otherwise
- */ 
+ */
 bool InterfaceSetupImp::saveSettings(){
   // eh can't really do anything about it other then return. :-D
   if(!interfaces->isInterfaceSet())
     return true;
-  
+
   bool error = false;
   // Loopback case
   if(interfaces->getInterfaceMethod(error) == INTERFACES_LOOPBACK){
     interfaces->setAuto(interface->getInterfaceName(), autoStart->isChecked());
     return true;
   }
-  
+
   if(!dhcpCheckBox->isChecked() && (ipAddressEdit->text().isEmpty() || subnetMaskEdit->text().isEmpty())){
    QMessageBox::information(this, "Not Saved.", "Please fill in the IP address and\n subnet entries.", QMessageBox::Ok);
    return false;
-  }	
+  }
   // DHCP
   if(dhcpCheckBox->isChecked()) {
     interfaces->setInterfaceMethod(INTERFACES_METHOD_DHCP);
@@ -119,7 +120,7 @@ bool InterfaceSetupImp::saveSettings(){
       interfaces->setInterfaceOption("down "DNSSCRIPT" -r ", dns);
     }
   }
-  
+
   // IP Information
   interfaces->setAuto(interface->getInterfaceName(), autoStart->isChecked());
   return true;
@@ -128,7 +129,7 @@ bool InterfaceSetupImp::saveSettings(){
 /**
  * The Profile has changed.
  * @param QString profile the new profile.
- */ 
+ */
 void InterfaceSetupImp::setProfile(const QString &profile){
    /*
   bool error = false;
@@ -162,13 +163,13 @@ void InterfaceSetupImp::setProfile(const QString &profile){
       interfaces->addInterface(newInterfaceName, INTERFACES_FAMILY_INET, INTERFACES_METHOD_DHCP);
       if(!interfaces->setInterface(newInterfaceName)){
         qDebug("InterfaceSetupImp: Added interface, but still can't setInterface.");
-        return;	      
+        return;
       }
     }
   }
-  
+
   // We must have a valid interface to get this far so read some settings.
-  
+
   // DHCP
   bool error = false;
   if(interfaces->getInterfaceMethod(error) == INTERFACES_METHOD_DHCP)
@@ -179,18 +180,24 @@ void InterfaceSetupImp::setProfile(const QString &profile){
   // IP Information
   autoStart->setChecked(interfaces->isAuto(interface->getInterfaceName()));
   QString dns = interfaces->getInterfaceOption("up "DNSSCRIPT" -a", error);
+  qDebug("dns >%s<",dns.latin1());
   if(dns.contains(" ")){
     firstDNSLineEdit->setText(dns.mid(0, dns.find(" ")));
-    secondDNSLineEdit->setText(dns.mid(dns.find(" ")+1, dns.length())); 
-  }
+    secondDNSLineEdit->setText(dns.mid(dns.find(" ")+1, dns.length()));
+  }else firstDNSLineEdit->setText(dns);
+
   ipAddressEdit->setText(interfaces->getInterfaceOption("address", error));
   subnetMaskEdit->setText(interfaces->getInterfaceOption("netmask", error));
-  gatewayEdit->setText(interfaces->getInterfaceOption("gateway", error)); 
+  if (subnetMaskEdit->text().isEmpty())
+      subnetMaskEdit->setText( "255.255.255.0" );
+  gatewayEdit->setText(interfaces->getInterfaceOption("gateway", error));
+
+
 
   qWarning("InterfaceSetupImp::setProfile(%s)\n", profile.latin1());
   qWarning("InterfaceSetupImp::setProfile: iface is %s\n", interfaces->getInterfaceName(error).latin1());
-  
+
 }
-  
+
 // interfacesetup.cpp
 

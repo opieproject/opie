@@ -1,3 +1,9 @@
+* make dcop handling portable
+* move dcop call for start, stop interfaces from wlan to interface
+
+
+Old TODO of Benmayer:
+
 Types:
 -Ethernet Connection (Done)
 -ISDN Connection

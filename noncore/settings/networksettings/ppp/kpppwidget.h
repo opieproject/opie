@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: kpppwidget.h,v 1.4 2003-06-02 11:57:59 tille Exp $
+ * $Id: kpppwidget.h,v 1.4.2.1 2003-07-15 15:29:08 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu

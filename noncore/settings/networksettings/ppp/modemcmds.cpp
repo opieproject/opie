@@ -1,7 +1,7 @@
 /*
  *            kPPP: A front end for pppd for the KDE project
  *
- * $Id: modemcmds.cpp,v 1.3 2003-05-30 15:06:17 tille Exp $
+ * $Id: modemcmds.cpp,v 1.3.2.1 2003-07-15 15:29:08 tille Exp $
  *
  * Copyright (C) 1997 Bernd Johannes Wuebben
  * wuebben@math.cornell.edu

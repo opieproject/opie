@@ -17,6 +17,7 @@ public:
   Interface(QObject * parent=0, const char * name= "unknown", bool status = false);
   
   QString getInterfaceName() const { QString n(this->name()); return n; };
+  void setInterfaceName( const QString &n ) { this->setName(n); };
   
   bool getStatus() const { return status; };
   void setStatus(bool newStatus);
@@ -40,11 +41,11 @@ public:
   QString getLeaseObtained() const { return leaseObtained; };
   QString getLeaseExpires() const { return leaseExpires; };
 
-public slots:
-  bool refresh();
-  void start();
-  void stop();
-  void restart();
+ public slots:
+  virtual bool refresh();
+  virtual void start();
+  virtual void stop();
+  virtual void restart();
 
 private:
   // Interface information

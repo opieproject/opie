@@ -2,7 +2,7 @@
  *
  *            kPPP: A front end for pppd for the KDE project
  *
- * $Id: modeminfo.h,v 1.2 2003-05-30 15:06:17 tille Exp $
+ * $Id: modeminfo.h,v 1.2.2.1 2003-07-15 15:29:08 tille Exp $
  * 
  * Copyright (C) 1997 Bernd Johannes Wuebben 
  * wuebben@math.cornell.edu

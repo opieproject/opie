@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdargs.cpp,v 1.5 2003-06-02 14:25:18 tille Exp $
+ * $Id: pppdargs.cpp,v 1.5.2.1 2003-07-15 15:29:08 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu

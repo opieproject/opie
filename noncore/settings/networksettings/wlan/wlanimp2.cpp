@@ -14,7 +14,7 @@
 #include <qtabwidget.h>
 #include <qcombobox.h>
 
-#ifdef QWS 
+#ifdef QWS
  #include <opie/oprocess.h>
 #else
  #define OProcess KProcess
@@ -26,9 +26,9 @@
 
 /**
  * Constructor, read in the wireless.opts file for parsing later.
- */ 
-WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, WFlags fl) : WLAN(parent, name, modal, fl), currentProfile("*"), interface(i) {
-  interfaces = new Interfaces;
+ */
+WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, WFlags fl) : WLAN(parent, name, modal, fl), interface(i), currentProfile("*") {
+  interfaces = new Interfaces();
   interfaceSetup = new InterfaceSetupImp(tabWidget, "InterfaceSetupImp", i, interfaces);
   tabWidget->insertTab(interfaceSetup, "TCP/IP");
 
@@ -40,12 +40,12 @@ WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, W
 }
 
 WLANImp::~WLANImp() {
-  delete interfaces;
+//FIXME:  delete interfaces;
 }
 
 /**
  * Change the profile for both wireless settings and network settings.
- */ 
+ */
 void WLANImp::setProfile(const QString &profile){
   interfaceSetup->setProfile(profile);
   parseOpts();
@@ -58,7 +58,7 @@ void WLANImp::parseOpts() {
   if (! interfaces->isInterfaceSet())
     return;
 
-  
+
   opt = interfaces->getInterfaceOption("wireless_essid", error);
   if(opt == "any" || opt == "off" || opt.isNull()){
     essid->setEditText("any");
@@ -75,7 +75,7 @@ void WLANImp::parseOpts() {
     // Managed/Infrastructure mode
     mode->setCurrentItem(1);
   }
-  
+
   opt = interfaces->getInterfaceOption("wireless_ap", error).simplifyWhiteSpace();
   if (! opt.isNull()) {
     specifyAp->setChecked(true);
@@ -132,7 +132,7 @@ void WLANImp::parseKeyStr(QString keystr) {
         case 4:
           keyRadio3->setChecked(true);
 	  break;
-      }   
+      }
     } else {
       // key
       key = (*it);
@@ -140,7 +140,7 @@ void WLANImp::parseKeyStr(QString keystr) {
     if (! key.isNull()) {
       if (enc == -1)
         enc = 1;
-      QStringList::Iterator next = ++it;   
+      QStringList::Iterator next = ++it;
       if (it == keys.end()) {
         break;
       }
@@ -187,8 +187,8 @@ void WLANImp::accept() {
       QMessageBox::information(this, "Error", "Please enter a WEP key.", QMessageBox::Ok);
       return;
     }
-  }	
-  
+  }
+
   if (essid->currentText().isEmpty()) {
     QMessageBox::information(this, "Error", "Please select/enter an ESSID.", QMessageBox::Ok);
     return;
@@ -198,7 +198,7 @@ void WLANImp::accept() {
     QMessageBox::information(this, "Error", "Please enter the MAC address of the Access Point.", QMessageBox::Ok);
     return;
   }
-  
+
   // Try to save the interfaces settings.
   writeOpts();
 
@@ -207,7 +207,16 @@ void WLANImp::accept() {
 }
 
 void WLANImp::writeOpts() {
-  bool error = false;
+    // eh can't really do anything about it other then return. :-D
+    if(!interfaces->isInterfaceSet()){
+        QMessageBox::warning(0,"Inface not set","should not happen!!!");
+        return;
+    }
+    bool error = false;
+
+    qDebug("setting wlan interface %s", interfaces->getInterfaceName( error ).latin1() );
+
+    if (error)  QMessageBox::warning(0,"Inface not set","should not happen!!!");
 
   interfaces->setInterfaceOption(QString("wireless_mode"), mode->currentText());
   interfaces->setInterfaceOption(QString("wireless_essid"), essid->currentText());

@@ -1,7 +1,8 @@
 DESTDIR   = $(OPIEDIR)/bin
 TEMPLATE  = app
-#CONFIG   = qt warn_on debug
-CONFIG    = qt warn_on release
+#
+CONFIG   = qt warn_on debug
+#CONFIG    = qt warn_on release
 HEADERS   = mainwindowimp.h addconnectionimp.h defaultmodule.h  module.h
 SOURCES   = main.cpp mainwindowimp.cpp addconnectionimp.cpp
 INCLUDEPATH += $(OPIEDIR)/include interfaces/

@@ -1,4 +1,6 @@
+#
 TEMPLATE        = lib
+#TEMPLATE        = app
 CONFIG          += qt warn_on release
 #CONFIG		+= qt warn_on debug
 DESTDIR         = $(OPIEDIR)/plugins/networksettings
@@ -8,7 +10,7 @@ INCLUDEPATH	+= $(OPIEDIR)/include ../ ../interfaces/
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -L../interfaces/ -linterfaces
 INTERFACES	= wlan.ui info.ui
-TARGET		= wlanplugin
+TARGET		= wlan
 VERSION		= 1.0.0
 
 #CONFIG += wirelessopts

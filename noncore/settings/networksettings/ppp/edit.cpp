@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: edit.cpp,v 1.8 2003-06-10 13:46:02 harlekin Exp $
+ * $Id: edit.cpp,v 1.8.2.1 2003-07-15 15:29:08 tille Exp $
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
  *

@@ -11,11 +11,12 @@
 #include <qlistview.h>
 #include <qheader.h>
 #include <qlabel.h>
+#include <qpe/qcopenvelope_qws.h>
 #include <qtabwidget.h> // in order to disable the profiles tab
 
 #include <qmessagebox.h>
 
-#ifdef QWS 
+#ifdef QWS
  #include <qpe/config.h>
  #include <qpe/qlibrary.h>
  #include <qpe/resource.h>
@@ -52,27 +53,27 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
   connect(addConnectionButton, SIGNAL(clicked()), this, SLOT(addClicked()));
   connect(removeConnectionButton, SIGNAL(clicked()), this, SLOT(removeClicked()));
   connect(informationConnectionButton, SIGNAL(clicked()), this, SLOT(informationClicked()));
-  connect(configureConnectionButton, SIGNAL(clicked()), this, SLOT(configureClicked())); 
-  
+  connect(configureConnectionButton, SIGNAL(clicked()), this, SLOT(configureClicked()));
+
   connect(newProfileButton, SIGNAL(clicked()), this, SLOT(addProfile()));
   connect(removeProfileButton, SIGNAL(clicked()), this, SLOT(removeProfile()));
   connect(setCurrentProfileButton, SIGNAL(clicked()), this, SLOT(changeProfile()));
 
-  connect(newProfile, SIGNAL(textChanged(const QString&)), this, SLOT(newProfileChanged(const QString&)));  
+  connect(newProfile, SIGNAL(textChanged(const QString&)), this, SLOT(newProfileChanged(const QString&)));
 
   //FIXME: disable profiles for the moment:
-  tabWidget->setTabEnabled( tab, false );
+//  tabWidget->setTabEnabled( tab, false );
 
   // Load connections.
   // /usr/local/kde/lib/libinterfaces.la
-#ifdef QWS 
-  loadModules(QPEApplication::qpeDir() + "/plugins/networksettings");
+#ifdef QWS
+  loadModules(QPEApplication::qpeDir() + "plugins/networksettings");
 #else
   loader = KLibLoader::self();
   loadModules(QString("/usr/")+KStandardDirs::kde_default("lib"));
 #endif
   getAllInterfaces();
-  
+
   Interfaces i;
   QStringList list = i.getInterfaceList();
   QMap<QString, Interface*>::Iterator it;
@@ -86,21 +87,22 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
       if(!(*ni).contains("_")){
         Interface *i = new Interface(this, *ni, false);
         i->setAttached(false);
-        i->setHardwareName("Disconnected");
+        i->setHardwareName(tr("Disconnected"));
         interfaceNames.insert(i->getInterfaceName(), i);
         updateInterface(i);
         connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
       }
     }
   }
-  
+
   //getInterfaceList();
   connectionList->header()->hide();
 
   Config cfg("NetworkSetup");
   profiles = QStringList::split(" ", cfg.readEntry("Profiles", "All"));
-  for ( QStringList::Iterator it = profiles.begin(); it != profiles.end(); ++it)
-    profilesList->insertItem((*it));  
+  for ( QStringList::Iterator it = profiles.begin();
+        it != profiles.end(); ++it)
+      profilesList->insertItem((*it));
   currentProfileLabel->setText(cfg.readEntry("CurrentProfile", "All"));
   advancedUserMode = cfg.readBoolEntry("AdvancedUserMode", false);
   scheme = cfg.readEntry("SchemeFile", DEFAULT_SCHEME);
@@ -118,6 +120,7 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
     }
     file.close();
   }
+  makeChannel();
 }
 
 /**
@@ -128,14 +131,14 @@ MainWindowImp::~MainWindowImp(){
   Config cfg("NetworkSetup");
   cfg.setGroup("General");
   cfg.writeEntry("Profiles", profiles.join(" "));
-  
+
   // Delete all interfaces that don't have owners.
   QMap<Interface*, QListViewItem*>::Iterator iIt;
   for( iIt = items.begin(); iIt != items.end(); ++iIt ){
     if(iIt.key()->getModuleOwner() == NULL)
       delete iIt.key();
   }
-  
+
 #ifdef QWS
   // Delete Modules and Libraries
   QMap<Module*, QLibrary*>::Iterator it;
@@ -152,16 +155,17 @@ MainWindowImp::~MainWindowImp(){
 
 /**
  * Query the kernel for all of the interfaces.
- */ 
+ */
 void MainWindowImp::getAllInterfaces(){
   int sockfd = socket(PF_INET, SOCK_DGRAM, 0);
   if(sockfd == -1)
     return;
-  
+
   struct ifreq ifr;
   QStringList ifaces;
   QFile procFile(QString(_PROCNETDEV));
   int result;
+  Interface *i;
 
   if (! procFile.exists()) {
     struct ifreq ifrs[100];
@@ -169,10 +173,10 @@ void MainWindowImp::getAllInterfaces(){
     ifc.ifc_len = sizeof(ifrs);
     ifc.ifc_req = ifrs;
     result = ioctl(sockfd, SIOCGIFCONF, &ifc);
-    
+
     for (unsigned int i = 0; i < ifc.ifc_len / sizeof(struct ifreq); i++) {
       struct ifreq *pifr = &ifrs[i];
-  
+
       ifaces += pifr->ifr_name;
     }
   } else {
@@ -191,8 +195,9 @@ void MainWindowImp::getAllInterfaces(){
   }
 
   for (QStringList::Iterator it = ifaces.begin(); it != ifaces.end(); ++it) {
-    int flags = 0, family;
-    Interface *i = NULL;
+    int flags = 0;
+//    int family;
+    i = NULL;
 
     strcpy(ifr.ifr_name, (*it).latin1());
 
@@ -221,7 +226,23 @@ void MainWindowImp::getAllInterfaces(){
     qWarning("Adding interface %s to interfaceNames\n", ifr.ifr_name);
     interfaceNames.insert(i->getInterfaceName(), i);
     updateInterface(i);
-    connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
+    connect(i, SIGNAL(updateInterface(Interface *)),
+            this, SLOT(updateInterface(Interface *)));
+  }
+  // now lets ask the plugins too ;)
+  QMap<Module*, QLibrary*>::Iterator it;
+  QList<Interface> ilist;
+  for( it = libraries.begin(); it != libraries.end(); ++it ){
+    if(it.key()){
+        ilist = it.key()->getInterfaces();
+        for( i = ilist.first(); i != 0; i = ilist.next() ){
+            qWarning("Adding interface %s to interfaceNames\n", i->getInterfaceName().latin1() );
+            interfaceNames.insert(i->getInterfaceName(), i);
+            updateInterface(i);
+            connect(i, SIGNAL(updateInterface(Interface *)),
+                    this, SLOT(updateInterface(Interface *)));
+        }
+    }
   }
 }
 
@@ -229,7 +250,7 @@ void MainWindowImp::getAllInterfaces(){
  * Load all modules that are found in the path
  * @param path a directory that is scaned for any plugins that can be loaded
  *  and attempts to load them
- */ 
+ */
 void MainWindowImp::loadModules(const QString &path){
 #ifdef DEBUG
   qDebug("MainWindowImp::loadModules: %s", path.latin1());
@@ -244,12 +265,13 @@ void MainWindowImp::loadModules(const QString &path){
   QFileInfoListIterator it( *list );
   QFileInfo *fi;
   while ( (fi=it.current()) ) {
-#ifdef QWS 
+#ifdef QWS
     if(fi->fileName().contains(".so")){
 #else
     if(fi->fileName().contains(".so") && fi->fileName().contains("networksettings_")){
 #endif
       loadPlugin(path + "/" + fi->fileName());
+      qDebug("loaded plugin: >%s< ",QString(path + "/" + fi->fileName()).latin1());
     }
     ++it;
   }
@@ -258,14 +280,14 @@ void MainWindowImp::loadModules(const QString &path){
 /**
  * Attempt to load a function and resolve a function.
  * @param pluginFileName - the name of the file in which to attempt to load
- * @param resolveString - function pointer to resolve 
+ * @param resolveString - function pointer to resolve
  * @return pointer to the function with name resolveString or NULL
- */ 
+ */
 Module* MainWindowImp::loadPlugin(const QString &pluginFileName, const QString &resolveString){
 #ifdef DEBUG
   qDebug("MainWindowImp::loadPlugin: %s: resolving %s", pluginFileName.latin1(), resolveString.latin1());
 #endif
-#ifdef QWS 
+#ifdef QWS
   QLibrary *lib = new QLibrary(pluginFileName);
   void *functionPointer = lib->resolve(resolveString);
   if( !functionPointer ){
@@ -292,10 +314,8 @@ Module* MainWindowImp::loadPlugin(const QString &pluginFileName, const QString &
 #else
   QLibrary *lib = loader->library(pluginFileName);
   if( !lib || !lib->hasSymbol(resolveString) ){
-#ifdef DEBUG
-    qDebug(QString("MainWindowImp::loadPlugin: File: %1 is not a plugin, but though was.").arg(pluginFileName).latin1());
-#endif
-    return NULL;
+      qDebug(QString("MainWindowImp::loadPlugin: File: %1 is not a plugin, but though was.").arg(pluginFileName).latin1());
+      return NULL;
   }
   // Try to get an object.
   Module *object = ((Module* (*)()) lib->symbol(resolveString))();
@@ -317,13 +337,12 @@ Module* MainWindowImp::loadPlugin(const QString &pluginFileName, const QString &
 /**
  * The Add button was clicked.  Bring up the add dialog and if OK is hit
  * load the plugin and append it to the list
- */ 
+ */
 void MainWindowImp::addClicked(){
   QMap<Module*, QLibrary*>::Iterator it;
   QMap<QString, QString> list;
   QMap<QString, Module*> newInterfaceOwners;
-  //list.insert("USB (PPP) / (ADD_TEST)", "A dialup connection over the USB port");
-  //list.insert("IrDa (PPP) / (ADD_TEST)", "A dialup connection over the IdDa port");
+
   for( it = libraries.begin(); it != libraries.end(); ++it ){
     if(it.key()){
       (it.key())->possibleNewInterfaces(list);
@@ -341,11 +360,12 @@ void MainWindowImp::addClicked(){
     QListViewItem *item = addNewConnection.registeredServicesList->currentItem();
     if(!item)
       return;
-    
+
     for( it = libraries.begin(); it != libraries.end(); ++it ){
       if(it.key()){
         Interface *i = (it.key())->addNewInterface(item->text(0));
         if(i){
+          qDebug("iface name %s",i->getInterfaceName().latin1());
           interfaceNames.insert(i->getInterfaceName(), i);
           updateInterface(i);
         }
@@ -357,25 +377,24 @@ void MainWindowImp::addClicked(){
 /**
  * Prompt the user to see if they really want to do this.
  * If they do then remove from the list and unload.
- */ 
+ */
 void MainWindowImp::removeClicked(){
   QListViewItem *item = connectionList->currentItem();
   if(!item) {
     QMessageBox::information(this, "Sorry","Please select an interface First.", QMessageBox::Ok);
-    return; 
+    return;
   }
-  
+
   Interface *i = interfaceItems[item];
   if(i->getModuleOwner() == NULL){
     QMessageBox::information(this, "Can't remove interface.", "Interface is built in.", QMessageBox::Ok);
   }
   else{
     if(!i->getModuleOwner()->remove(i))
-      QMessageBox::information(this, "Error", "Unable to remove.", QMessageBox::Ok);
+      QMessageBox::information(this, tr("Error"), tr("Unable to remove."), QMessageBox::Ok);
     else{
-      QMessageBox::information(this, "Success", "Interface was removed.", QMessageBox::Ok);
-      // TODO memory managment....
-      // who deletes the interface?
+        delete item;
+//      QMessageBox::information(this, "Success", "Interface was removed.", QMessageBox::Ok);
     }
   }
 }
@@ -384,13 +403,13 @@ void MainWindowImp::removeClicked(){
  * Pull up the configure about the currently selected interface.
  * Report an error if no interface is selected.
  * If the interface has a module owner then request its configure.
- */ 
+ */
 void MainWindowImp::configureClicked(){
   QListViewItem *item = connectionList->currentItem();
   if(!item){
-    QMessageBox::information(this, "Sorry","Please select an interface first.", QMessageBox::Ok);
+    QMessageBox::information(this, tr("Sorry"),tr("Please select an interface first."), QMessageBox::Ok);
     return;
-  } 
+  }
 
   QString currentProfileText = currentProfileLabel->text();
   if(currentProfileText.upper() == "ALL");
@@ -406,7 +425,7 @@ void MainWindowImp::configureClicked(){
       return;
     }
   }
-  
+
   InterfaceSetupImpDialog *configure = new InterfaceSetupImpDialog(this, "InterfaceSetupImp", i, true, Qt::WDestructiveClose );
   configure->setProfile(currentProfileText);
   configure->showMaximized();
@@ -416,19 +435,19 @@ void MainWindowImp::configureClicked(){
  * Pull up the information about the currently selected interface.
  * Report an error if no interface is selected.
  * If the interface has a module owner then request its configure.
- */ 
+ */
 void MainWindowImp::informationClicked(){
   QListViewItem *item = connectionList->currentItem();
   if(!item){
     QMessageBox::information(this, "Sorry","Please select an interface First.", QMessageBox::Ok);
     return;
-  } 
- 
-  Interface *i = interfaceItems[item];
-  if(!i->isAttached()){
-    QMessageBox::information(this, "Sorry","No information about\na disconnected interface.", QMessageBox::Ok);
-    return;
   }
+
+  Interface *i = interfaceItems[item];
+//   if(!i->isAttached()){
+//     QMessageBox::information(this, "Sorry","No information about\na disconnected interface.", QMessageBox::Ok);
+//     return;
+//   }
 
   if(i->getModuleOwner()){
     QWidget *moduleInformation = i->getModuleOwner()->information(i);
@@ -439,7 +458,7 @@ void MainWindowImp::informationClicked(){
 #endif
       return;
     }
-  } 
+  }
   InterfaceInformationImp *information = new InterfaceInformationImp(this, "InterfaceSetupImp", i, Qt::WType_Modal | Qt::WDestructiveClose | Qt::WStyle_Dialog);
   information->showMaximized();
 }
@@ -447,15 +466,15 @@ void MainWindowImp::informationClicked(){
 /**
  * Update this interface.  If no QListViewItem exists create one.
  * @param Interface* pointer to the interface that needs to be updated.
- */ 
+ */
 void MainWindowImp::updateInterface(Interface *i){
   if(!advancedUserMode){
     if(i->getInterfaceName() == "lo")
       return;
   }
-  
+
   QListViewItem *item = NULL;
-  
+
   // Find the interface, making it if needed.
   if(items.find(i) == items.end()){
     item = new QListViewItem(connectionList, "", "", "");
@@ -470,16 +489,16 @@ void MainWindowImp::updateInterface(Interface *i){
   }
   else
     item = items[i];
- 
-  // Update the icons and information 
+
+  // Update the icons and information
 #ifdef QWS
   item->setPixmap(0, (Resource::loadPixmap(i->getStatus() ? "up": "down")));
 #else
   item->setPixmap(0, (SmallIcon(i->getStatus() ? "up": "down")));
 #endif
-  
+
   QString typeName = "lan";
-  if(i->getHardwareName().contains("Local Loopback"))
+  if(i->getInterfaceName() == "lo")
     typeName = "lo";
   if(i->getInterfaceName().contains("irda"))
     typeName = "irda";
@@ -487,13 +506,13 @@ void MainWindowImp::updateInterface(Interface *i){
     typeName = "wlan";
   if(i->getInterfaceName().contains("usb"))
     typeName = "usb";
-  
+
   if(!i->isAttached())
     typeName = "connect_no";
   // Actually try to use the Module
   if(i->getModuleOwner() != NULL)
     typeName = i->getModuleOwner()->getPixmapName(i);
-  
+
 #ifdef QWS
   item->setPixmap(1, (Resource::loadPixmap(QString("networksettings/") + typeName)));
 #else
@@ -515,7 +534,7 @@ void MainWindowImp::newProfileChanged(const QString& newText){
  * Adds a new profile to the list of profiles.
  * Don't add profiles that already exists.
  * Appends to the list and QStringList
- */ 
+ */
 void MainWindowImp::addProfile(){
   QString newProfileName = newProfile->text();
   if(profiles.grep(newProfileName).count() > 0){
@@ -546,7 +565,7 @@ void MainWindowImp::removeProfile(){
     return;
 
   }
-  
+
   if(QMessageBox::information(this, "Question",QString("Remove profile: %1").arg(profileToRemove), QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok){
     profiles = QStringList::split(" ", profiles.join(" ").replace(QRegExp(profileToRemove), ""));
     profilesList->clear();
@@ -579,7 +598,7 @@ void MainWindowImp::removeProfile(){
 /**
  * A new profile has been selected, change.
  * @param newProfile the new profile.
- */ 
+ */
 void MainWindowImp::changeProfile(){
   if(profilesList->currentItem() == -1){
     QMessageBox::information(this, "Can't Change.","Please select a profile.", QMessageBox::Ok);
@@ -608,3 +627,39 @@ void MainWindowImp::changeProfile(){
   // TODO change the profile in the modules
 }
 
+
+void MainWindowImp::makeChannel()
+{
+ 	channel = new QCopChannel( "QPE/Application/networksettings", this );
+ 	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
+ 		this, SLOT(receive(const QCString&, const QByteArray&)) );
+}
+
+void MainWindowImp::receive(const QCString &msg, const QByteArray &arg)
+{
+    bool found = false;
+    qDebug("MainWindowImp::receive QCop msg >"+msg+"<");
+
+    if (msg == "raise") {
+        raise();
+        return;
+    }
+
+    QString dest = msg.left(msg.find("("));
+    QCString param = msg.right(msg.length() - msg.find("(") - 1);
+    param = param.left( param.length() - 1 );
+    qDebug("dest >%s< param >"+param+"<",dest.latin1());
+
+     QMap<Module*, QLibrary*>::Iterator it;
+     for( it = libraries.begin(); it != libraries.end(); ++it ){
+         qDebug("plugin >%s<", it.key()->type().latin1() );
+         if(it.key()->type() == dest){
+             it.key()->receive( param, arg );
+             found = true;
+         }
+     }
+
+
+     if (found) QPEApplication::setKeepRunning();
+     else qDebug("Huh what do ya want");
+}

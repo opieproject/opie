@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: iplined.cpp,v 1.1 2003-05-23 19:43:46 tille Exp $
+ * $Id: iplined.cpp,v 1.1.2.1 2003-07-15 15:29:08 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
