@@ -147,8 +147,7 @@ Dennoch beenden?</translation>
       <translation>&amp;Nein</translation>
     </message>
     <message>
-      <source>Unable to find a contact for this 
- search pattern!</source>
+      <source>Unable to find a contact for this search pattern!</source>
       <translation>Suchmuster konnte nicht gefunden werden !</translation>
     </message>
     <message>

@@ -146,8 +146,7 @@ Quitter ?</translation>
         <translation>&amp;Non</translation>
     </message>
     <message>
-        <source>Unable to find a contact for this 
- search pattern!</source>
+        <source>Unable to find a contact for this search pattern!</source>
         <translation>Impossible de trouver un contact
 pour cette expression!</translation>
     </message>

@@ -146,8 +146,7 @@ Uscire comunque?</translation>
         <translation>&amp;No</translation>
     </message>
     <message>
-        <source>Unable to find a contact for this 
- search pattern!</source>
+        <source>Unable to find a contact for this search pattern!</source>
         <translation>Impossibile trovare un contatto con questo 
  criterio di ricerca!</translation>
     </message>

@@ -145,8 +145,7 @@ Zakonczyc?</translation>
         <translation>&amp;Nie</translation>
     </message>
     <message>
-        <source>Unable to find a contact for this 
- search pattern!</source>
+        <source>Unable to find a contact for this search pattern!</source>
         <translation>Nie znaleziono wizytowki odpowiadajacej
 warunkom wyszukiwania!</translation>
     </message>

@@ -145,8 +145,7 @@ inténtelo de nuevo.
         <translation>&amp;No</translation>
     </message>
     <message>
-        <source>Unable to find a contact for this 
- search pattern!</source>
+        <source>Unable to find a contact for this search pattern!</source>
         <translation>¡Incapaz de encontrar un contacto
 con ese patrón de búsqueda!</translation>
     </message>

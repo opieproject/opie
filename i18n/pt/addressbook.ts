@@ -145,8 +145,7 @@ Sair na mesma?</translation>
         <translation>&amp;Não</translation>
     </message>
     <message>
-        <source>Unable to find a contact for this 
- search pattern!</source>
+        <source>Unable to find a contact for this search pattern!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -167,8 +167,7 @@ Quit anyway?</source>
         <translation>Не е пронајдено</translation>
     </message>
     <message>
-        <source>Unable to find a contact for this 
- search pattern!</source>
+        <source>Unable to find a contact for this search pattern!</source>
         <translation>Не можеше да се пронајде контакт за 
 ова пребарување!</translation>
     </message>

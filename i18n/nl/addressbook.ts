@@ -144,8 +144,7 @@ Toch stoppen?</translation>
         <translation>&amp;Nee</translation>
     </message>
     <message>
-        <source>Unable to find a contact for this 
- search pattern!</source>
+        <source>Unable to find a contact for this search pattern!</source>
         <translation>Kan niets vinden dat voldoet
  aan de zoekterm!</translation>
     </message>

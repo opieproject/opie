@@ -144,8 +144,7 @@ Quit anyway?</source>
         <translation>&amp;否</translation>
     </message>
     <message>
-        <source>Unable to find a contact for this 
- search pattern!</source>
+        <source>Unable to find a contact for this search pattern!</source>
         <translation>無法找到此型態的聯絡人</translation>
     </message>
     <message>

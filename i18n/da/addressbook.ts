@@ -154,8 +154,7 @@ Afslut alligevel?</translation>
         <translation>Ikke fundet</translation>
     </message>
     <message>
-        <source>Unable to find a contact for this 
- search pattern!</source>
+        <source>Unable to find a contact for this search pattern!</source>
         <translation>Kunne ikke finde en kontakt med
 dette søge mønster!</translation>
     </message>

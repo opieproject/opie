@@ -148,8 +148,7 @@ Quit anyway?</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Unable to find a contact for this 
- search pattern!</source>
+        <source>Unable to find a contact for this search pattern!</source>
         <translation>FOO</translation>
     </message>
     <message>
