@@ -70,6 +70,7 @@ public:
   EmailClient( QWidget* parent, const char* name, WFlags fl = 0 );
   ~EmailClient();
   AddressList* getAdrListRef();
+  void download(Email*);
 
 protected:
   void timerEvent(QTimerEvent*);
@@ -139,6 +140,8 @@ private:
   EmailHandler *emailHandler;
   QList<Email> quedMessages;
   MailList mailDownloadList;
+  MailList tempMailDownloadList;
+  
   bool sending, receiving, previewingMail, allAccounts;
   QString lineShift;
   MailAccount account, *currentAccount;

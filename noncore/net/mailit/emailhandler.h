@@ -111,6 +111,7 @@ class EmailHandler : public QObject
 public:
 	EmailHandler();
 	void setAccount(MailAccount account);
+	MailAccount* getAccount(){return &mailAccount;}
 	void sendMail(QList<Email> *mailList);
 	void getMail();
 	void getMailHeaders();

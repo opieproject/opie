@@ -60,7 +60,7 @@ void PopClient::newConnection(QString target, int port)
   
   socket->connectToHost(target, port);
   receiving = TRUE;
-  selected = FALSE;
+  //selected = FALSE;
     
   emit updateStatus("DNS lookup");
 }
@@ -184,13 +184,14 @@ void PopClient::incomingData()
                 messageCount = 1;
               }
               
-              if (selected) {
+              if (selected) {		
                 int *ptr = mailList->first();
                 if (ptr != 0) {
                   newMessages++;  //to ensure no early jumpout
-                  messageCount = *(mailList->first());
-                } else newMessages = 0;
-              }
+                  messageCount = *ptr;
+                } else newMessages = 0; 
+	      }
+
             } else errorHandling(ErrUnknownResponse);
           }
     //Read message number x, count upwards to messageCount
@@ -204,12 +205,12 @@ void PopClient::incomingData()
               emit updateStatus(tr("Retrieving ") + temp + "/" + temp2);
             } else {
               //completing a previously closed transfer
-              if ( (messageCount - lastSync) <= 0) {
+             /* if ( (messageCount - lastSync) <= 0) {
                 temp.setNum(messageCount);
                 emit updateStatus(tr("Previous message ") + temp);
-              } else {
+              } else {*/
                 emit updateStatus(tr("Completing message ") + temp);
-              }
+              //}
             }
             break;
           } else {
@@ -237,7 +238,7 @@ void PopClient::incomingData()
     //Read message number x, count upwards to messageCount
     case Retr:  {
           if (status != Quit) {
-            if (mailSize <= headerLimit) 
+            if ((selected)||(mailSize <= headerLimit)) 
 	    {
               *stream << "RETR " << messageCount << "\r\n";
             } else {        //only header
@@ -272,37 +273,24 @@ void PopClient::incomingData()
             if (x == -1) {
               break;
             } else {  //message reach entire size
-              //complete mail downloaded
-		//if ( (!preview ) || ((preview) && (mailSize <= headerLimit)) ){
-	      if ( mailSize <= headerLimit)
+              
+	      if ( (selected)||(mailSize <= headerLimit)) //mail size limit is not used if late download is active
 	      {
 	    	emit newMessage(message, messageCount-1, mailSize, TRUE);
               } else {  //incomplete mail downloaded
 		emit newMessage(message, messageCount-1, mailSize, FALSE);
               }
-              if (messageCount > newMessages) //that was the last message
+	      
+              if ((messageCount > newMessages)||(selected)) //last message ?
+	      {
                 status = Quit;
-              else {        //ask for new message
                 if (selected) {   //grab next from queue
-                  int *ptr = mailList->next();
-                  if (ptr != 0) {
-                    messageCount = *ptr;
-                    *stream << "LIST " << messageCount << "\r\n";
-                    status = Size;
-                    //completing a previously closed transfer
-                    if ( (messageCount - lastSync) <= 0) {
-                      temp.setNum(messageCount);
-                      emit updateStatus(tr("Previous message ") + temp);
-                    } else {
-                      temp.setNum(messageCount - lastSync);
-                      emit updateStatus(tr("Completing message ") + temp);
-                    }
-                    break;
-                  } else {
                     newMessages--;
                     status = Quit;
                   }
-                } else {
+	      }
+              else 
+	      {
                   *stream << "LIST " << messageCount << "\r\n";
                   status = Size;
                   temp2.setNum(newMessages - lastSync);
@@ -310,12 +298,11 @@ void PopClient::incomingData()
                   emit updateStatus(tr("Retrieving ") + temp + "/" + temp2);
                   
                   break;
-                }
+              }
               }
             }
             if (status != Quit)
               break;
-          }
         }
     case Quit:  {
           *stream << "Quit\r\n";
@@ -336,32 +323,3 @@ void PopClient::incomingData()
   }
 
 }
-
-// if( bAPOPAuthentication )
-//  {
-//    if( m_strTimeStamp.IsEmpty() )
-//    {
-//      SetLastError("Apop error!");
-//      return false;
-//    }
-//    strMD5Source = m_strTimeStamp+pszPassword;
-//    strMD5Dst = MD5_GetMD5( (BYTE*)(const char*)strMD5Source , strMD5Source.GetLength() );
-//    sprintf(msg , "apop %s %s\r\n" , pszUser , strMD5Dst);
-//    ret = send(m_sPop3Socket , msg , strlen(msg) , NULL);
-//    if(ret == SOCKET_ERROR)
-//    {
-//      SetLastError("Socket error!");
-//      m_bSocketOK = false;
-//      m_bConnected = false;
-//      return false;
-//    }
-//    if( !GetSocketResult(&strResult , COMMAND_END_FLAG) )
-//      return false;
-//    if( 0 == strResult.Find('-' , 0) )
-//    {
-//      SetLastError("Username or Password error!");
-//      return false;
-//    }
-//    m_bConnected = true;
-
-//  }

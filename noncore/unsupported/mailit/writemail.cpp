@@ -123,7 +123,7 @@ void WriteMail::init()
 
 	emailInput = new QMultiLineEdit( widget, "emailInput" );
 	grid->addMultiCellWidget( emailInput, 2, 2, 0, 2);
-	QWhatsThis::add(recipientsBox,QWidget::tr("Enter your mail text here"));
+	QWhatsThis::add(emailInput,QWidget::tr("Enter your mail text here"));
 
 	addressView = new QListView( widget, "addressView");
 	addressView->addColumn("Name");
@@ -132,7 +132,7 @@ void WriteMail::init()
 	addressView->setMultiSelection(TRUE);
 	addressView->hide();
 	grid->addMultiCellWidget( addressView, 3, 3, 0, 2);
-	QWhatsThis::add(recipientsBox,QWidget::tr("Chose the recipients from this list"));
+	QWhatsThis::add(recipientsBox,QWidget::tr("Choose the recipients from this list"));
 
 	okButton = new QToolButton(bar, "ok");
 	okButton->setPixmap( Resource::loadPixmap("enter") );
@@ -148,7 +148,6 @@ void WriteMail::reject()
 	emit cancelMail();
 }
 
-// need to insert date
 void WriteMail::accept()
 {
 	QStringList attachedFiles, attachmentsType;
@@ -252,13 +251,24 @@ void WriteMail::attachFile()
 void WriteMail::reply(Email replyMail, bool replyAll)
 {
 	int pos;
+	QString ccRecipients;
 	
 	mail = replyMail;
 	mail.files.clear();
 	
 	toInput->setText(mail.fromMail);
-	//replyAll ? ccInput->setText(mail.c)
 	
+	if (replyAll)
+	{
+		for (QStringList::Iterator it = mail.carbonCopies.begin();it != mail.carbonCopies.end(); ++it) 
+		{
+			ccRecipients.append(*it);
+			ccRecipients.append(";");
+		}
+		ccRecipients.truncate(ccRecipients.length()-1);		//no ; at the end
+		ccInput->setText(ccRecipients);
+	}
+		
 	addRecipients(replyAll);
 	
 	subjectInput->setText(tr("Re: ") + mail.subject);
@@ -321,10 +331,9 @@ bool WriteMail::getRecipients(bool ccField)
 
 void WriteMail::addRecipients()
 {
-	
-	addRecipients(false);
+	toInput->isVisible() ? addRecipients(false) : addRecipients(true);
 }			
-
+       
 void WriteMail::addRecipients(bool ccField)
 {
 	QString recipients = "";
@@ -335,9 +344,9 @@ void WriteMail::addRecipients(bool ccField)
 	while (item != NULL) {
 		if ( item->isSelected() ) {
 			if (recipients == "") {
-				recipients = item->text(0);
+				recipients = item->text(1);
 			} else {
-				recipients += "; " + item->text(0);
+				recipients += "; " + item->text(1);
 			}
 		}
 		item = item->nextSibling();
@@ -376,6 +385,5 @@ void WriteMail::newMail()
 	toInput->clear();
 	subjectInput->clear();
 	emailInput->clear();
-	//to clear selected
 	setAddressList(addressList);
 }

@@ -362,7 +362,7 @@ void EmailClient::mailArrived(const Email &mail, bool fromDisk)
     newMail.size = mail.size;
     newMail.downloaded = mail.downloaded;
     
-    newMail.fromAccountId = currentAccount->id;
+    newMail.fromAccountId = emailHandler->getAccount()->id;
     mailconf->writeEntry("fromaccountid", newMail.fromAccountId);
   }
   
@@ -480,10 +480,10 @@ void EmailClient::allMailArrived(int count)
   status1Label->setText(currentAccount->accountName);
   progressBar->reset();
 
-  //emailHandler->getMailByList(&mailDownloadList);
-  
+   
   mailboxView->setCurrentTab(0);
 }
+
 
 void EmailClient::moveMailFront(Email *mailPtr)
 {
@@ -664,7 +664,7 @@ QString EmailClient::getPath(bool enclosurePath)
 
 void EmailClient::readSettings()
 {
-  int y,acc_count, accountPos=0;
+  int y,acc_count;
     
     mailconf->setGroup("mailitglobal");
     acc_count=mailconf->readNumEntry("Accounts",0);
@@ -891,13 +891,21 @@ void EmailClient::setDownloadedSize(int size)
 void EmailClient::deleteItem()
 {
 	bool inbox=mailboxView->currentTab()==0;
+	QListView* box;
 	
 	EmailListItem* eli;
+	int pos;
+		
+	inbox ? box=inboxView : box=outboxView;
 	
-	inbox ? eli=(EmailListItem*)inboxView->selectedItem():eli=(EmailListItem*)outboxView->selectedItem();
+	eli=(EmailListItem*)box->selectedItem();
 	
 	if (eli)
-		deleteMail(eli,(bool&)inbox);
+	{
+		box->setSelected(eli->itemBelow(),true);	//select the previous item
+		
+		deleteMail(eli,(bool&)inbox);		//remove mail entry
+	}
 }
 
 void EmailClient::inboxItemPressed()
@@ -939,43 +947,22 @@ Email* EmailClient::getCurrentMail()
 		return NULL;
 }
   
-/*
-void EmailClient::reply()
+void EmailClient::download(Email* mail)
 {
-  Email* mail=getCurrentMail();
-  
-  if (mail!=NULL)
-  {
-	emit reply(*mail);
-  }
+	MailAccount* acc=0;
+	
+	tempMailDownloadList.clear();
+	tempMailDownloadList.sizeInsert(mail->serverId, mail->size);
+	if (accountList.count()>0)
+		qDebug("Accounts present");
+	
+	acc=accountList.at(mail->fromAccountId-1);
+	if (acc)
+	{ 
+		emailHandler->setAccount(*acc);
+		emailHandler->getMailByList(&tempMailDownloadList);
+	}
+	else 
+		QMessageBox::warning(qApp->activeWindow(),
+      		tr("No account associated"), tr("There is no active account \nassociated to this mail\n it can not be downloaded"), "Abort\n");
 }
-			
-void EmailClient::replyAll()
-{
-  Email* mail=getCurrentMail();
-  
-  if (mail!=NULL)
-  {
-	emit replyAll(*mail);
-  }
-}
-
-void EmailClient::forward()
-{
-  Email* mail=getCurrentMail();
-  
-  if (mail!=NULL)
-  {
-	emit reply(*mail);
-  }
-}
-
-void EmailClient::remove()
-{
-  Email* mail=getCurrentMail();
-  
-  if (mail!=NULL)
-  {
-	emit remove(*mail);
-  }
-}*/

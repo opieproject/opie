@@ -18,6 +18,7 @@
 **
 **********************************************************************/
 #include <qwhatsthis.h>
+#include <qmessagebox.h>
 #include "mailitwindow.h"
 
 MailItWindow::MailItWindow(QWidget *parent, const char *name, WFlags fl)
@@ -60,8 +61,7 @@ MailItWindow::MailItWindow(QWidget *parent, const char *name, WFlags fl)
   
   connect(emailClient, SIGNAL(newCaption(const QString &)),
     this, SLOT(updateCaption(const QString &)) );
-  viewingMail = FALSE;
-  
+  viewingMail = FALSE;  
 }
 
 MailItWindow::~MailItWindow()
@@ -84,6 +84,7 @@ void MailItWindow::compose()
   readMail->hide();
   views->raiseWidget(writeMail);
   writeMail->setAddressList(emailClient->getAdrListRef());
+  writeMail->newMail();  
   setCaption( tr( "Write mail"  ) );
 }
 
@@ -113,6 +114,27 @@ void MailItWindow::viewMail(QListView *view, Email *mail)
 {
   viewingMail = TRUE;
   emailClient->hide();
+  
+  int result=0;
+  
+  if ((mail->received)&&(!mail->downloaded))
+  {   
+  	QMessageBox mb( tr("Mail not downloaded"),
+                    tr("The mail you have clicked \n"
+		    "has not been downloaded yet.\n "
+		    "Would you like to do it now ?"),
+                    QMessageBox::Information,
+                    QMessageBox::Yes | QMessageBox::Default,
+                    QMessageBox::No | QMessageBox::Escape,0 );
+		 
+	result=mb.exec();
+	
+	if (result==QMessageBox::Yes)
+	{
+		emailClient->download(mail);
+	}
+  }
+  
   readMail->update(view, mail);
   views->raiseWidget(readMail);
   setCaption( tr( "Examine mail"  ) );

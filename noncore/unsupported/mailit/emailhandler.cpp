@@ -127,18 +127,20 @@ void EmailHandler::getMailByList(MailList *mailList)
   
   headers = FALSE;
   popClient->headersOnly(FALSE, 0);
-  popClient->newConnection(mailAccount.popServer, 110);
+  
+  popClient->setAccount(mailAccount.popUserName,mailAccount.popPasswd);
   popClient->setSelectedMails(mailList);
-}
+  popClient->newConnection(mailAccount.popServer, 110);
+ }
 
-void EmailHandler::messageArrived(const QString &message, int id, uint size, bool incomplete)
+void EmailHandler::messageArrived(const QString &message, int id, uint size, bool complete)
 {
   Email mail;
   
   mail.rawMail = message;
   mail.serverId = id;
   mail.size = size;
-  mail.downloaded = incomplete;
+  mail.downloaded = complete;
   
   emit mailArrived(mail, FALSE);
 }
@@ -182,13 +184,11 @@ bool EmailHandler::parse(QString in, QString lineShift, Email *mail)
         mail->from = mail->from.right(mail->from.length() - 1);
       }
       pos++;                 
-
       mail->fromMail = p.getString(&pos, '>', false);
     } else {
-      if ((p.separatorAt(pos) == '<')
-          || (p.separatorAt(pos) == ' '))       //No name.. nasty
+      if (p.separatorAt(pos) == '<')       //No name.. nasty
           pos++;
-          pos++;
+      //pos++;
       mail->fromMail = p.getString(&pos, 'z', TRUE);
       if (mail->fromMail.at(mail->fromMail.length()-1) == '>')
       mail->fromMail.truncate(mail->fromMail.length() - 1);
