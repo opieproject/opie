@@ -843,6 +843,7 @@ bool TextEdit::saveAs() {
             if( useAdvancedFeatures ) {
                 filePermissions *filePerm;
                 filePerm = new filePermissions(this, tr("Permissions"),true,0,(const QString &)fileNm);
+                filePerm->showMaximized();
                 filePerm->exec();
 
                 if( filePerm)
