@@ -23,10 +23,6 @@
 </context>
 <context>
     <name>Form1</name>
-    <message>
-        <source>Form1</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Konsole</name>
@@ -192,15 +188,15 @@
     </message>
     <message>
         <source>Wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeilenumbruch</translation>
     </message>
     <message>
         <source>Use Beep</source>
-        <translation type="unfinished"></translation>
+        <translation>Töne benutzen</translation>
     </message>
     <message>
         <source>Tabs on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabs unten</translation>
     </message>
 </context>
 <context>

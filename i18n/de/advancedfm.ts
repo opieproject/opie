@@ -120,7 +120,7 @@
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="unfinished">Verzeichnis wechseln</translation>
+        <translation>Verzeichnis wechseln</translation>
     </message>
     <message>
         <source>Execute</source>
@@ -179,8 +179,7 @@ Wirklich löschen?</translation>
     <message>
         <source>Could not copy
 </source>
-        <translation type="unfinished">Nicht kopierbar:
-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>to
@@ -254,7 +253,7 @@ exists. Ok to overwrite?</source>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgabe</translation>
     </message>
 </context>
 <context>

@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: i18n: French
- French UI texts and dictionary for Qtopia environment.
+ French UI texts and dictionary for OPIE environment.

@@ -272,11 +272,11 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Unable to find a contact for this</source>
-        <translation>¡Incapaz de encontrar un contacto para este</translation>
+        <translation type="obsolete">¡Incapaz de encontrar un contacto para este</translation>
     </message>
     <message>
         <source>search pattern !</source>
-        <translation>patrón de búsqueda!</translation>
+        <translation type="obsolete">patrón de búsqueda!</translation>
     </message>
     <message>
         <source>End of list</source>
@@ -300,15 +300,15 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>The selected File</source>
-        <translation>El fichero seleccionado</translation>
+        <translation type="obsolete">El fichero seleccionado</translation>
     </message>
     <message>
         <source>does not end with &quot;.vcf&quot; </source>
-        <translation>no termina con &quot;.vcf&quot; </translation>
+        <translation type="obsolete">no termina con &quot;.vcf&quot; </translation>
     </message>
     <message>
         <source>Do you really want to open it?</source>
-        <translation>¿Seguro que quiere abrirlo?</translation>
+        <translation type="obsolete">¿Seguro que quiere abrirlo?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
@@ -318,12 +318,23 @@ inténtelo de nuevo.
         <source>&amp;No</source>
         <translation>&amp;No</translation>
     </message>
+    <message>
+        <source>Unable to find a contact for this 
+ search pattern!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The selected file 
+ does not end with &quot;.vcf&quot;.
+ Do you really want to open it?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ConfigDlg_Base</name>
     <message>
         <source>MyDialog1</source>
-        <translation>MyDialog1</translation>
+        <translation type="obsolete">MyDialog1</translation>
     </message>
     <message>
         <source>Search</source>

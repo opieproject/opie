@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: i18n: English
- English dictionary for Qtopia environment.
+ English dictionary for OPIE environment.

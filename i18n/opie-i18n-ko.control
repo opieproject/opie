@@ -7,4 +7,4 @@ Arch: iPAQ
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION), qpf-cyberbit-120-50-t10
 Description: i18n: Korean
- Korean UI texts for Qtopia environment.
+ Korean UI texts for OPIE environment.

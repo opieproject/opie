@@ -267,14 +267,6 @@ Uscire comunque?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to find a contact for this</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>search pattern !</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Card</source>
         <translation type="unfinished"></translation>
     </message>
@@ -287,18 +279,6 @@ Uscire comunque?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The selected File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>does not end with &quot;.vcf&quot; </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want to open it?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Yes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -306,13 +286,20 @@ Uscire comunque?</translation>
         <source>&amp;No</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unable to find a contact for this 
+ search pattern!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The selected file 
+ does not end with &quot;.vcf&quot;.
+ Do you really want to open it?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ConfigDlg_Base</name>
-    <message>
-        <source>MyDialog1</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Query Style</source>
         <translation type="unfinished"></translation>

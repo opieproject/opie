@@ -25,7 +25,7 @@
     <name>Form1</name>
     <message>
         <source>Form1</source>
-        <translation>Form1</translation>
+        <translation type="obsolete">Form1</translation>
     </message>
 </context>
 <context>
