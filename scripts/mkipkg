@@ -351,6 +351,9 @@ else
     ( cd $tempDir && substAndStripFiles "$ipkgFileList" $filesubst )
 fi
 
+# removing CVS directories
+find $tempDir -name CVS -a -type d -print0 | xargs -0 rm -rf
+
 path="`echo "$PATH" | sed -e "s/\:/ /g"`"
 if [ -z "$mkfsjffs2" ]; then
     for i in $path; do
