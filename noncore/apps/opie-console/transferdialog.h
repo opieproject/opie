@@ -36,6 +36,8 @@ class TransferDialog : public QDialog
 			id_receive
 		};
 
+		void cleanup();
+
 		QLineEdit *filename;
 		QComboBox *protocol;
 		QProgressBar *progressbar;
@@ -45,6 +47,7 @@ class TransferDialog : public QDialog
 		FileTransferLayer* m_lay;
 		ReceiveLayer *m_recvlay;
 		int m_transfermode;
+		int m_autocleanup;
 };
 
 #endif

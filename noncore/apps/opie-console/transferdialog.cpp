@@ -28,6 +28,8 @@ TransferDialog::TransferDialog(MainWindow *parent, const char *name)
 	QButtonGroup *group;
 	QRadioButton *mode_send, *mode_receive;
 
+	m_autocleanup = 0;
+
 	group = new QButtonGroup(QObject::tr("Transfer mode"), this);
 	mode_send = new QRadioButton(QObject::tr("Send"), group);
 	mode_receive = new QRadioButton(QObject::tr("Receive"), group);
@@ -113,6 +115,9 @@ void TransferDialog::slotTransfer()
 
 	ok->setEnabled(false);
 
+	cleanup();
+	m_autocleanup = 0;
+
 	if(m_transfermode == id_send) statusbar->setText(QObject::tr("Sending..."));
 	else statusbar->setText(QObject::tr("Receiving..."));
 
@@ -138,6 +143,22 @@ void TransferDialog::slotTransfer()
 	}
 }
 
+void TransferDialog::cleanup()
+{
+	if(m_lay)
+	{
+		m_lay->cancel();
+		delete m_lay;
+		m_lay = 0l;
+	}
+	if(m_recvlay)
+	{
+		m_recvlay->cancel();
+		delete m_recvlay;
+		m_recvlay = 0l;
+	}
+}
+
 void TransferDialog::slotCancel()
 {
 	ok->setEnabled(true);
@@ -145,21 +166,14 @@ void TransferDialog::slotCancel()
 
 	if((m_lay) || (m_recvlay))
 	{
-		if(m_lay)
+		cleanup();
+		if(m_autocleanup) close();
+		else
 		{
-			m_lay->cancel();
-			delete m_lay;
-			m_lay = 0l;
+			QMessageBox::information(this,
+				QObject::tr("Cancelled"),
+				QObject::tr("The file transfer has been cancelled."));
 		}
-		if(m_recvlay)
-		{
-			m_recvlay->cancel();
-			delete m_recvlay;
-			m_recvlay = 0l;
-		}
-		QMessageBox::information(this,
-			QObject::tr("Cancelled"),
-			QObject::tr("The file transfer has been cancelled."));
 	}
 	else
 	{
@@ -210,6 +224,8 @@ void TransferDialog::slotError(int error, const QString& message)
 					QObject::tr("Unknown error occured."));
 				break;
 	}
+
+	m_autocleanup = 1;
 }
 
 void TransferDialog::slotSent()
@@ -217,6 +233,7 @@ void TransferDialog::slotSent()
 	QMessageBox::information(this, QObject::tr("Sent"), QObject::tr("File has been sent."));
 	ok->setEnabled(true);
 	statusbar->setText(QObject::tr("Ready"));
+	m_autocleanup = 1;
 }
 
 void TransferDialog::slotReceived(const QString& file)
@@ -224,6 +241,7 @@ void TransferDialog::slotReceived(const QString& file)
 	QMessageBox::information(this, QObject::tr("Sent"), QObject::tr("File has been received as %1.").arg(file));
 	ok->setEnabled(true);
 	statusbar->setText(QObject::tr("Ready"));
+	m_autocleanup = 1;
 }
 
 void TransferDialog::slotMode(int id)
