@@ -32,4 +32,8 @@ void MHexWindow::log( QString text )
 
 };
 
+void MHexWindow::clear()
+{
+    ledit->clear();
+}
 

@@ -28,8 +28,11 @@ class QPixmap;
 class OPacket;
 class OPacketCapturer;
 class OWirelessNetworkInterface;
+
 class ManufacturerDB;
 class WellenreiterConfigWindow;
+class MLogWindow;
+class MHexWindow;
 
 class Wellenreiter : public WellenreiterBase {
     Q_OBJECT
@@ -41,6 +44,7 @@ class Wellenreiter : public WellenreiterBase {
     void setConfigWindow( WellenreiterConfigWindow* cw );
     MScanListView* netView() const { return netview; };
     MLogWindow* logWindow() const { return logwindow; };
+    MHexWindow* hexWindow() const { return hexwindow; };
     bool isDaemonRunning() const { return sniffing; };
 
   public slots:

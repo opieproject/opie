@@ -36,6 +36,11 @@ void MLogWindow::log( QString text )
 
 }
 
+void MLogWindow::clear()
+{
+    ledit->clear();
+}
+
 const QString MLogWindow::getLog() const
 {
     return ledit->text();

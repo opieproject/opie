@@ -25,7 +25,7 @@ SOURCES         = main.cpp \
 
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS            += -L. -lwellenreiter -lopiecore2 -lopieui2 -lopienet2
+LIBS            += -lopiecore2 -lopieui2 -lopienet2
 INTERFACES      = configbase.ui
 TARGET          = wellenreiter
 

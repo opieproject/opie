@@ -29,6 +29,7 @@ class MLogWindow: public QVBox
 
     void log( QString text );
     const QString getLog() const;
+    void clear();
 
   protected:
     QMultiLineEdit* ledit;

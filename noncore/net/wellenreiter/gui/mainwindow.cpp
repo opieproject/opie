@@ -15,9 +15,9 @@
 
 #include "configwindow.h"
 #include "logwindow.h"
+#include "hexwindow.h"
 #include "mainwindow.h"
 #include "wellenreiter.h"
-
 #include "scanlist.h"
 
 #include <qcombobox.h>
@@ -114,6 +114,7 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     //fileLoad->insertItem( "&Log", this, SLOT( fileLoadLog() ) );
 
     QPopupMenu* file = new QPopupMenu( mb );
+    file->insertItem( "&New", this, SLOT( fileNew() ) );
     id = file->insertItem( "&Load", fileLoad );
     file->insertItem( "&Save", fileSave );
     file->insertSeparator();
@@ -297,6 +298,13 @@ void WellenreiterMainWindow::fileLoadSession()
             qDebug( "Problem loading session from file '%s'", (const char*) fname );
         }
     }
+}
+
+void WellenreiterMainWindow::fileNew()
+{
+    mw->netView()->clear();
+    mw->logWindow()->clear();
+    mw->hexWindow()->clear();
 }
 
 void WellenreiterMainWindow::closeEvent( QCloseEvent* e )
