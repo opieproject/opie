@@ -45,7 +45,6 @@ class fileBrowser : public QDialog
     Q_OBJECT
 
 public:
-  void populateList();
     fileBrowser( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 ,const QString filter=0);
     ~fileBrowser();
 
@@ -73,6 +72,7 @@ private:
     QStringList getMimeTypes();
     void fillCombo( const QString&);
 private slots:
+    void populateList();
     void homeButtonPushed();
     void docButtonPushed();
     void ListPressed( int, QListViewItem *, const QPoint&, int);
