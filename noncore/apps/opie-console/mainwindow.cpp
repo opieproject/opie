@@ -6,6 +6,7 @@
 #include <qtoolbar.h>
 #include <qpe/resource.h>
 #include <opie/ofiledialog.h>
+#include <qmessagebox.h>
 
 #include "profileeditordialog.h"
 #include "configdialog.h"
@@ -308,6 +309,15 @@ void MainWindow::slotProfile( int id) {
 }
 void MainWindow::create( const Profile& prof ) {
     Session *ses = manager()->fromProfile( prof, tabWidget() );
+
+    if((!ses) || (!ses->layer()) || (!ses->widgetStack()))
+	{
+		QMessageBox::warning(this,
+			QObject::tr("Session failed"),
+			QObject::tr("Cannot open session: Not all components were found."));
+		//if(ses) delete ses;
+		return;
+	}
 
     m_sessions.append( ses );
     tabWidget()->add( ses );

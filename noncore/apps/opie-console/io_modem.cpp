@@ -3,8 +3,8 @@
 
 #include "dialer.h"
 
-IOModem:IOModem( const Profile &config ) : IOSerial( config ) {
-	m_config = config;
+IOModem::IOModem( const Profile &profile )
+	: IOSerial( profile ),  m_profile( profile ) {
 }
 
 
@@ -20,6 +20,7 @@ void IOModem::close() {
 }
 
 bool IOModem::open() {
+	qWarning("IOModem::open");
     IOSerial::open();
 
 	Dialer d(m_profile);
@@ -68,6 +69,7 @@ QString IOModem::name() const {
     return "Modem IO Layer";
 }
 
-void IOIrda::slotExited(OProcess* proc ){
+void IOModem::slotExited(OProcess* proc ){
     close();
 }
+

@@ -3,6 +3,7 @@
 
 #include <opie/oprocess.h>
 #include "io_serial.h"
+#include "profile.h"
 
 /* Default values to be used if the profile information is incomplete */
 #define MODEM_DEFAULT_DEVICE       "/dev/ttyS0"
@@ -57,7 +58,7 @@ public slots:
 private:
 
     QString m_initString, m_resetString, m_dialPref1, m_dialSuf1, m_dialPref2,
-        m_dialSuf2, dialPref3, m_dialSuf3, m_connect, m_hangup, m_cancel;
+        m_dialSuf2, m_dialPref3, m_dialSuf3, m_connect, m_hangup, m_cancel;
     int  m_dialTime, m_delayRedial, m_numberTries, m_dtrDropTime,
         m_bpsDetect, m_dcdLines, m_multiLineUntag;
 	const Profile& m_profile;
