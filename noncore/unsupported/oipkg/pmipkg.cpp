@@ -7,6 +7,7 @@
 
 #include <qpe/process.h>
 #include <qpe/resource.h>
+#include <qpe/config.h>
 #include <qpe/stringutil.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qdir.h>
@@ -22,6 +23,9 @@
 #include "mainwindow.h"
 #include "runwindow.h"
 
+
+#define PARSE_FILELIST
+// #define IPKG_FILELIST
 
 PmIpkg::PmIpkg( PackageManagerSettings* s, QWidget* p,  const char * name, WFlags f )
 //  : RunWindow ( p, name, f )
@@ -52,7 +56,7 @@ int PmIpkg::runIpkg(const QString& args)
   cmd += " -dest "+settings->getDestinationName();
  	cmd += " -force-defaults ";
 
-  out( "Starting to "+ args+"<br>\n");
+  out( "<hr><br>Starting to "+ args+"<br>\n");
   cmd += args;
   out( "running:<br>\n"+cmd+"<br>\n" );
   int r = 0;
@@ -66,6 +70,7 @@ int PmIpkg::runIpkg(const QString& args)
 #ifdef SYSTEM
   QString redirect = "/tmp/oipkg.pipe";
   cmd += " | tee "+redirect+" 2>&1";
+  pvDebug(2, "running >"+cmd+"<");
 	r = system(cmd.latin1());
   QFile f( redirect );
   while ( ! f.open(IO_ReadOnly) ) {};
@@ -85,14 +90,30 @@ int PmIpkg::runIpkg(const QString& args)
   return r;
 }
 
-void PmIpkg::makeLinks(QString file)
+void PmIpkg::makeLinks(QString pack)
 {
+	pvDebug( 2, "PmIpkg::makeLinks "+ pack);
   out( "<br>creating links<br>" );
   QString dest = settings->getDestinationUrl();
-  out("for package "+file+" in "+dest+"<br>");
-  system(("ipkg -d "+dest+" files "+file+"> /tmp/oipkg.pipe 2>&1").latin1());
+  out("for package "+pack+" in "+dest+"<br>");
+#ifdef IPKG_FILELIST
+  system(("ipkg -d "+dest+" files "+pack+"> /tmp/oipkg.pipe 2>&1").latin1());
   QFile f( "/tmp/oipkg.pipe" );
   while ( ! f.open(IO_ReadOnly) ) {};
+#endif
+#ifdef PARSE_FILELIST
+	{
+    Config cfg( "oipkg", Config::User );
+    cfg.setGroup( "Common" );
+    QString statusDir = cfg.readEntry( "statusDir", "" );
+	}
+ 	QString fn = dest+"/"+statusDir+"/info/"+pack+".list";
+  QFile f( fn );
+  if ( ! f.open(IO_ReadOnly) )
+  {
+  	out( "<b>Panik!</b> Could not open:<br>"+fn );
+  };
+#endif
   QTextStream t( &f );
   QString fp;
   while ( !t.eof() )
@@ -105,7 +126,14 @@ void PmIpkg::makeLinks(QString file)
 
 void PmIpkg::processLinkDir( QString file, QString dest )
 {
+
+#ifdef PARSE_FILELIST
+  QString destFile = file;
+	file = dest+"/"+file;
+#endif
+#ifdef IPKG_FILELIST
   QString destFile = file.right( file.length() - dest.length() );
+#endif
   QFileInfo fileInfo( file );
   if ( fileInfo.isDir() )
   {

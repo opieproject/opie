@@ -6,5 +6,6 @@
 * parse "to install" and "to remove" from status
 * install local file
 * install to dest with click on packet
+* qcop
 * error handling
 * manage links
