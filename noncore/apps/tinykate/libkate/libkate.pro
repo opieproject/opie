@@ -51,7 +51,6 @@ SOURCES		= microkde/kapplication.cpp \
                   microkde/kstandarddirs.cpp \
                   microkde/ktempfile.cpp \
                   microkde/kurlrequester.cpp \
-                  microkde/kcolordialog.cpp \
                   microkde/kfontdialog.cpp \
                   microkde/krun.cpp \
                   microkde/knumvalidator.cpp \
