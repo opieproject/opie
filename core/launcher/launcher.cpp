@@ -473,11 +473,6 @@ void Launcher::createGUI()
 
     qApp->installEventFilter( this );
 
-
-    connect( qApp, SIGNAL(symbol()), this, SLOT(toggleSymbolInput()) );
-    connect( qApp, SIGNAL(numLockStateToggle()), this, SLOT(toggleNumLockState()) );
-    connect( qApp, SIGNAL(capsLockStateToggle()), this, SLOT(toggleCapsLockState()) );
-
     connect( tb, SIGNAL(tabSelected(const QString&)),
     this, SLOT(showTab(const QString&)) );
     connect( tabs, SIGNAL(selected(const QString&)),
@@ -552,21 +547,6 @@ bool Launcher::eventFilter( QObject*, QEvent *ev )
     Q_UNUSED(ev);
 #endif
     return FALSE;
-}
-
-void Launcher::toggleSymbolInput()
-{
-    tb->toggleSymbolInput();
-}
-
-void Launcher::toggleNumLockState()
-{
-    tb->toggleNumLockState();
-}
-
-void Launcher::toggleCapsLockState()
-{
-    tb->toggleCapsLockState();
 }
 
 static bool isVisibleWindow(int wid)

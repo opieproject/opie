@@ -147,6 +147,11 @@ config OPIE_NEW_ALLOC
   default y if TARGET_RAMSES || TARGET_IPAQ || TARGET_SIMPAD || TARGET_SHARP
   default n if ! (TARGET_IPAQ || TARGET_SIMPAD || TARGET_RAMSES || TARGET_SHARP)
 
+config OPIE_TASKBAR_LOCK_KEY_STATE
+  boolean "Have a KeyLock state indicator on the taskbar"
+  default y if TARGET_SHARP
+  default n if !TARGET_SHARP
+
 config OPIE_NO_SOUND_PCM_READ_BITS
   boolean "There is not a pcm_read_bits io control"
   default y if TARGET_SHARP

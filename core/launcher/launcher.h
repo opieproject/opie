@@ -135,10 +135,7 @@ signals:
     void executing( const AppLnk * );
 
 private slots:
-    void systemMessage( const QCString &, const QByteArray &);
-    void toggleSymbolInput();
-    void toggleNumLockState();
-    void toggleCapsLockState();
+    void systemMessage( const QCString &, const QByteArray &);    
 
 protected:
     bool eventFilter( QObject *o, QEvent *ev );
