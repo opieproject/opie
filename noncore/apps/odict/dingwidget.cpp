@@ -62,6 +62,11 @@ void DingWidget::parseInfo( QStringList &lines, QString &top, QString &bottom )
  	QString current;
  	QString left;
  	QString right;
+	QString html_header      = "<html><table>";
+	QString html_footer      = "</table></html>";
+	QString html_table_left  = "<tr><td width='50'>";
+	QString html_table_sep   = "</td><td>";
+	QString html_table_right = "</td></tr>";
 	QRegExp reg_div( "\\" );
 	QRegExp reg_word( queryword );
 	//QString substitute = "<font color=red>"+queryword+"</font>";
@@ -75,17 +80,16 @@ void DingWidget::parseInfo( QStringList &lines, QString &top, QString &bottom )
  		if ( left.contains( reg_word ) )
 		{
 		  left.replace( queryword, substitute );
- 		  toplist.append( "<tr><td>" + left + "</td><td>" + right + "</td></tr>" );
+ 		  toplist.append( html_table_left + left + html_table_sep + right + html_table_right );
 		}
 		else
 		{
 		  right.replace( reg_word, substitute );
- 		  bottomlist.append( "<tr><td>" + right + "</td><td>" + left + "</td></tr>" );
+ 		  bottomlist.append( html_table_left + right + html_table_sep + left + html_table_right );
 		}
 	}
 		
 	//thats it, the lists are rendered. Lets put them in one string
-
-	bottom = "<html><table><tbody>"+bottomlist.join( "<br>" )+"</tbody></table></html>";
-	top =  "<html><table><tbody>"+toplist.join( "<br>" )+"</tbody></table></html>";
+	bottom = html_header + bottomlist.join( "<br>" ) + html_footer;
+	top    = html_header + toplist.join( "<br>" )    + html_footer;
 }
