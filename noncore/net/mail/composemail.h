@@ -35,6 +35,10 @@ public:
 public slots:
     void slotAdjustColumns();
 
+    void setTo( const QString & to );
+    void setSubject( const QString & subject );
+    void setInReplyTo( const QString & messageId );
+    void setMessage( const QString & text );
 
 protected slots:
     void accept();

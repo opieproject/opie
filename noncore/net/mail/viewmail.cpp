@@ -73,18 +73,16 @@ void ViewMail::setText()
 
      _mailHtml = tr(
 		"<html><body>"
-		"<div align=center><b><font color=#FF2222>%1</b></font></div>"
-		"<b>From:</b> %2<br>"
-		"<b>To:</b> %3<br>"
+		"<div align=center><b><font color=#0000FF>%1</b></font></div>"
+		"<b>From:</b><font color=#6C86C0> %2</font><br>"
+		"<b>To:</b><font color=#6C86C0> %3</font><br>"
 		"%4"
-		"%5"
-		"<b>Date:</b> %6<hr>"
+            	"<b>Date:</b> %5<hr>"
 		"<font face=fixed>")
 		.arg( deHtml( m_mail[1] ) )
 		.arg( deHtml( m_mail[0] ) )
 		.arg( deHtml( toString ) )
 		.arg( tr("<b>Cc:</b> %1<br>").arg( deHtml( ccString ) ) )
-		.arg( tr("<b>Bcc:</b> %1<br>").arg( deHtml( bccString ) ) )
 		.arg( m_mail[3] );
 	browser->setText( QString(_mailHtml) + deHtml( m_mail[2] ) + "</font>" );
         // remove later in favor of a real handling
@@ -152,18 +150,14 @@ void ViewMail::slotReply()
 	if ( m_mail[1].find(QRegExp("^Re: *$")) != -1) prefix = "";
 	else prefix = "Re: ";				// no i18n on purpose
 
-//	SendMail sendMail;
-//	sendMail.setTo(_mail.envelope().from()[0].toString());
-//	sendMail.setSubject(prefix + _mail.envelope().subject());
-//	sendMail.setInReplyTo(_mail.envelope().messageId());
-//	sendMail.setMessage(rtext);
-
-
-/*        ComposeMail composer(this, 0, true);
-	composer.setMessage(  );
+        Settings *settings = new Settings();
+        ComposeMail composer( settings ,this, 0, true);
+        composer.setTo( m_mail[0] );
+        composer.setSubject( "Re: " + m_mail[1] );
+	composer.setMessage( rtext );
 	composer.showMaximized();
 	composer.exec();
-*/
+
       qDebug ( rtext );
 }
 
@@ -175,42 +169,38 @@ void ViewMail::slotForward()
 	}
 
 	QString ftext;
-/*	ftext += QString("\n----- Forwarded message from %1 -----\n\n")
-		.arg(_mail.envelope().from()[0].toString());
-	if (!_mail.envelope().mailDate().isNull())
-		ftext += QString("Date: %1\n")
-			.arg(_mail.envelope().mailDate());
-	if (!_mail.envelope().from()[0].toString().isNull())
-		ftext += QString("From: %1\n")
-			.arg(_mail.envelope().from()[0].toString());
-	if (!_mail.envelope().to().toString().isNull())
-		ftext += QString("To: %1\n")
-			.arg(_mail.envelope().to().toString());
-	if (!_mail.envelope().cc().toString().isNull())
-		ftext += QString("Cc: %1\n")
-			.arg(_mail.envelope().cc().toString());
-	if (!_mail.envelope().bcc().toString().isNull())
-		ftext += QString("Bcc: %1\n")
-			.arg(_mail.envelope().bcc().toString());
-	if (!_mail.envelope().subject().isNull())
-		ftext += QString("Subject: %1\n")
-			.arg(_mail.envelope().subject());
+	ftext += QString("\n----- Forwarded message from %1 -----\n\n")
+		.arg( m_mail[0] );
+	if (!m_mail[3].isNull())
+	 	ftext += QString("Date: %1\n")
+		 	.arg( m_mail[3] );
+	if (!m_mail[0].isNull())
+	 	ftext += QString("From: %1\n")
+		 	.arg( m_mail[0] );
+	//if (!_mail.envelope().to().toString().isNull())
+	//	ftext += QString("To: %1\n")
+	//		.arg(_mail.envelope().to().toString());
+	//if (!_mail.envelope().cc().toString().isNull())
+	//	ftext += QString("Cc: %1\n")
+	//		.arg(_mail.envelope().cc().toString());
+	if (!m_mail[1].isNull())
+	 	ftext += QString("Subject: %1\n")
+		 	.arg( m_mail[1] );
 
 	ftext += QString("\n%1\n")
-		.arg(_mail.bodyPart(1).data());
+	 	.arg( m_mail[2]);
 
 	ftext += QString("----- End forwarded message -----\n");
-*/
-/*
-	SendMail sendMail;
-	sendMail.setSubject("Fwd: " + _mail.envelope().subject());
-	sendMail.setMessage(ftext);
 
-	Composer composer(this, 0, true);
-	composer.setSendMail(sendMail);
+        qDebug( ftext );
+
+
+        Settings *settings = new Settings();
+        ComposeMail composer( settings ,this, 0, true);
+        composer.setSubject( "Fwd: " + m_mail[1] );
+	composer.setMessage( ftext );
 	composer.showMaximized();
 	composer.exec();
-*/
 }
 
 /*

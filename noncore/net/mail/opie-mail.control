@@ -1,5 +1,5 @@
 Package: opie-mail
-Files: bin/opiemail apps/1Pim/opiemail.desktop pics/mail/*.png
+Files: bin/opiemail apps/1Pim/mail.desktop pics/opiemail/*.png
 Priority: optional
 Section: opie/applications
 Maintainer: Juergen Graf <jgf@handhelds.org>

@@ -51,6 +51,34 @@ void ComposeMail::pickAddress( QLineEdit *line )
 }
 
 
+void ComposeMail::setTo( const QString & to )
+{
+/*  QString toline;
+  QStringList toEntry = to;
+  for ( QStringList::Iterator it = toEntry.begin(); it != toEntry.end(); ++it ) {
+     toline += (*it);
+  }
+  toLine->setText( toline );
+*/
+toLine->setText( to );
+}
+
+void ComposeMail::setSubject( const QString & subject )
+{
+ subjectLine->setText( subject );
+}
+
+void ComposeMail::setInReplyTo( const QString & messageId )
+{
+
+}
+
+void ComposeMail::setMessage( const QString & text )
+{
+  message->setText( text );
+}
+
+
 void ComposeMail::pickAddressTo()
 {
     pickAddress( toLine );
