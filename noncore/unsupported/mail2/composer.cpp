@@ -137,6 +137,8 @@ void Composer::slotSendError(const QString &error)
 
 void Composer::slotSendFinished()
 {
+	QMessageBox::information(this, tr("Success"), tr("<p>The mail was sent successfully.</p>"), tr("Ok"));
+
 	status->setText(QString(0));
 	abort->setEnabled(false);
 }

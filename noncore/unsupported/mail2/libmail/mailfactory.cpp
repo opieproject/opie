@@ -100,7 +100,7 @@ MailFactory::MailFactory(SendMail &smail, QWidget *parent)
 
 				_body += "\n" + MiscFunctions::encodeBase64(file) + "\n";
 			} else {
-				int ret = QMessageBox::critical(_parent, tr("Error"), tr("<p>Couldn't attach file '%1'. Continue anyway or abort?</p>"), tr("Continue"), tr("Abort"));
+				int ret = QMessageBox::critical(_parent, tr("Error"), tr("<p>Couldn't attach file '%1'. Continue anyway or abort?</p>").arg((*it).fileName()), tr("Continue"), tr("Abort"));
 				if (ret == 1) {
 					it = attachments.end();
 					_abort = true;
