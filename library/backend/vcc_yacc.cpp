@@ -1,6 +1,6 @@
 #ifndef lint
 /*static char yysccsid[] = "from: @(#)yaccpar	1.9 (Berkeley) 02/21/93";*/
-static char yyrcsid[] = "$Id: vcc_yacc.cpp,v 1.4 2003-03-27 16:17:48 eilers Exp $";
+static char yyrcsid[] = "$Id: vcc_yacc.cpp,v 1.4.2.1 2003-05-22 09:18:04 zecke Exp $";
 #endif
 #define YYBYACC 1
 #define YYMAJOR 1
@@ -1053,8 +1053,10 @@ static int yylex() {
 	    if (lexWithinMode(L_BASE64)) {
 		/* get each char and convert to bin on the fly... */
 		p = lexGetDataFromBase64();
+#if 0
 		yylval.str = p;
 		return STRING;
+#endif		
 		}
 	    else if (lexWithinMode(L_QUOTED_PRINTABLE)) {
 		p = lexGetQuotedPrintable();

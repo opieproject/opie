@@ -1033,8 +1033,10 @@ static int yylex() {
 	    if (lexWithinMode(L_BASE64)) {
 		/* get each char and convert to bin on the fly... */
 		p = lexGetDataFromBase64();
+#if 0		
 		yylval.str = p;
 		return STRING;
+#endif		
 		}
 	    else if (lexWithinMode(L_QUOTED_PRINTABLE)) {
 		p = lexGetQuotedPrintable();
