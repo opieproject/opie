@@ -67,7 +67,7 @@
     </message>
     <message>
         <source>Case sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozlišovat velikost</translation>
     </message>
 </context>
 <context>
@@ -133,19 +133,19 @@
     </message>
     <message>
         <source>Show completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit dokončené úkoly</translation>
     </message>
     <message>
         <source>Show past events</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit uplynolé události</translation>
     </message>
     <message>
         <source>Search in dates</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat v datech</translation>
     </message>
     <message>
         <source>Search content</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat obsah</translation>
     </message>
 </context>
 </TS>

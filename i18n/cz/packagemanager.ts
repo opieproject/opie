@@ -43,43 +43,43 @@
     </message>
     <message>
         <source>Tap here to filter package list by application category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro filtrování seznamu balíčků dle kategorie aplikací.</translation>
     </message>
     <message>
         <source>Select the application category to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte kategorii aplikací, dle které chcete filtrovat.</translation>
     </message>
     <message>
         <source>Tap here to filter package list by package name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro filtrování seznamu balíčků dle jména balíčku.</translation>
     </message>
     <message>
         <source>Enter the package name to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte název balíčku dle kterého chcete filtrovat.</translation>
     </message>
     <message>
         <source>Tap here to filter package list by the package status.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro filtrování seznamu balíčků dle stavu balíčku.</translation>
     </message>
     <message>
         <source>Select the package status to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte stav balíčku, dle kterého chcete filtrovat.</translation>
     </message>
     <message>
         <source>Tap here to filter package list by source server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro filtrování seznamu balíčků dle zdrojového serveru.</translation>
     </message>
     <message>
         <source>Select the source server to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte zdrojový server, dle kterého chcete filtrovat.</translation>
     </message>
     <message>
         <source>Tap here to filter package list by destination where the package is installed to on this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro filtrování seznamu balíčků dle cíle, kde je balíček nainstalován.</translation>
     </message>
     <message>
         <source>Select the destination location to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte cílové místo, dle kterého chcete filtrovat.</translation>
     </message>
 </context>
 <context>
@@ -364,71 +364,77 @@ A blue dot next to the package name indicates that the package is currently inst
 A blue dot with a star indicates that a newer version of the package is available from the server feed.
 
 Tap inside the box at the left to select a package.  Tap and hold to view package details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto je seznam všech balíčků.
+
+Modrá tečka vedle balíčku říká, že balíček je již nainstalován.
+
+Modrá tečka s hvězdičkou říká, že je k dispozici novější verze balíčku na serveru.
+
+Klikněte do čtverečku nalevo pro výběr balíčku.  Klikněte a podržte pro zobrazení detailů o balíčku.</translation>
     </message>
     <message>
         <source>Tap here to update package lists from servers.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro aktualizaci seznamů balíčků ze serverů.</translation>
     </message>
     <message>
         <source>Tap here to upgrade all installed packages if a newer version is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro aktualizaci všech nainstalovaných balíčků, pokud je k dispozici novější verze.</translation>
     </message>
     <message>
         <source>Tap here to download the currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte zde pro stažení označených balíčků.</translation>
     </message>
     <message>
         <source>Tap here to install, remove or upgrade currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro instalaci, odstranění, nebo aktualizaci označených balíčků.</translation>
     </message>
     <message>
         <source>Install local package</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalovat lokální balíček</translation>
     </message>
     <message>
         <source>Tap here to install a package file located on device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro instalaci lokálně umístěného balíčku.</translation>
     </message>
     <message>
         <source>Tap here to configure this application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro konfiguraci této aplikace.</translation>
     </message>
     <message>
         <source>Tap here to show packages available which have not been installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro zobrazení nenainstalovaných balíčků, které jsou k dispozici.</translation>
     </message>
     <message>
         <source>Tap here to show packages currently installed on this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro zobrazení nainstalovaných balíčků.</translation>
     </message>
     <message>
         <source>Tap here to show packages currently installed on this device which have a newer version available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro zobrazení nainstalovaných balíčků, ke kterým je k dispozici nová verze.</translation>
     </message>
     <message>
         <source>Tap here to apply current filter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro aplikování filtru.</translation>
     </message>
     <message>
         <source>Tap here to change the package filter criteria.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro změnu kritérií filtru balíčků.</translation>
     </message>
     <message>
         <source>Tap here to search for text in package names.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro hledání textu v názvech balíčků.</translation>
     </message>
     <message>
         <source>Tap here to find the next package name containing the text you are searching for.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro nalezení dalšího názvu balíčku obsahujícího hledaný řetězec.</translation>
     </message>
     <message>
         <source>Tap here to hide the find toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro skrytí hledacího nástroje.</translation>
     </message>
     <message>
         <source>Application Packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplikační balíčky</translation>
     </message>
 </context>
 <context>
@@ -447,15 +453,15 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
     </message>
     <message>
         <source>Linking packages installed in: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Linkuji balíčky instalované na: %1</translation>
     </message>
     <message>
         <source>Error linkling &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba linkování &apos;%1&apos; na &apos;%2&apos;</translation>
     </message>
     <message>
         <source>Links removed for: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Linky odstraněny pro: %1</translation>
     </message>
 </context>
 <context>
@@ -566,145 +572,145 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
     </message>
     <message>
         <source>This is a list of all servers configured.  Select one here to edit or delete, or add a new one below.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto je seznam všech nakonfigurovaných serverů.  Vyberte jeden pro úpravu, smazání, nebo přidání nového.</translation>
     </message>
     <message>
         <source>Tap here to create a new entry.  Fill in the fields below and then tap on Update.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro vytvoření nové položky.  Vyplňte pole dole a potom klikněte na Aktualizovat.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit</translation>
     </message>
     <message>
         <source>Tap here to edit the entry selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro úpravu položky vybrané nahoře.</translation>
     </message>
     <message>
         <source>Tap here to delete the entry selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro smazání položky vybrané nahoře.</translation>
     </message>
     <message>
         <source>This is a list of all destinations configured for this device.  Select one here to edit or delete, or add a new one below.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto je seznam všech nakonfigurovaných cílů.  Vyberte jeden pro jeho úpravu, smazání, nebo přidání nového dolů.</translation>
     </message>
     <message>
         <source>Enter the URL address of the HTTP proxy server here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte URL adresu HTTP proxy serveru.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the HTTP proxy server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro zapnutí, nebo vypnutí HTTP proxy serveru.</translation>
     </message>
     <message>
         <source>Enter the URL address of the FTP proxy server here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte URL adresu FTP proxy serveru.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the FTP proxy server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro zapnutí, nebo vypnutí FTP proxy serveru.</translation>
     </message>
     <message>
         <source>Enter the username for the proxy servers here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte uživatelské jméno pro proxy servery.</translation>
     </message>
     <message>
         <source>Enter the password for the proxy servers here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte heslo pro proxy servery.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the &apos;-force-depends&apos; option for Ipkg.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro zapnutí, nebo vypnutí volby &apos;-force-depends&apos; pro Ipkg.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the &apos;-force-reinstall&apos; option for Ipkg.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro zapnutí, nebo vypnutí volby &apos;-force-reinstall&apos; pro Ipkg.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the &apos;-force-removal-of-dependent-packages&apos; option for Ipkg.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro zapnutí, nebo vypnutí volby &apos;-force-removal-of-dependent-packages&apos; pro Ipkg.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the &apos;-force-overwrite&apos; option for Ipkg.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro zapnutí, nebo vypnutí volby &apos;-force-overwrite&apos; pro Ipkg.</translation>
     </message>
     <message>
         <source>Select information level for Ipkg.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte informační úroveň pro Ipkg.</translation>
     </message>
 </context>
 <context>
     <name>OIpkgDestDlg</name>
     <message>
         <source>Edit Destination</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit cíl</translation>
     </message>
     <message>
         <source>Active</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivní</translation>
     </message>
     <message>
         <source>Tap here to indicate whether this entry is active or not.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro určení, jestli je tato položka aktivní.</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Jméno:</translation>
+        <translation>Název:</translation>
     </message>
     <message>
         <source>Enter the name of this entry here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte název této položky.</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Umístění:</translation>
     </message>
     <message>
         <source>Enter the absolute directory path of this entry here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte absolutní adresářovou cestu této položky.</translation>
     </message>
     <message>
         <source>Tap here to select the desired location.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro výběr požadovaného umístění.</translation>
     </message>
 </context>
 <context>
     <name>OIpkgServerDlg</name>
     <message>
         <source>Edit Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit server</translation>
     </message>
     <message>
         <source>Active</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivní</translation>
     </message>
     <message>
         <source>Tap here to indicate whether this entry is active or not.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro určení, jestli je tato položka aktivní.</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Jméno:</translation>
+        <translation>Jméno:</translation>
     </message>
     <message>
         <source>Enter the name of this entry here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte název této položky.</translation>
     </message>
     <message>
         <source>Address:</source>
-        <translation type="unfinished">Adresa:</translation>
+        <translation>Adresa:</translation>
     </message>
     <message>
         <source>Enter the URL address of this entry here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte URL adresu této položky.</translation>
     </message>
     <message>
         <source>Compressed server feed</source>
-        <translation type="unfinished"></translation>
+        <translation>Komprimovaný server s balíčky</translation>
     </message>
     <message>
         <source>Tap here to indicate whether the server support compressed archives or not.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro určení, jestli server podporuje komprimované archivy.</translation>
     </message>
 </context>
 <context>
@@ -722,12 +728,14 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
     <message>
         <source>Reading available packages:
 <byte value="x9"/></source>
-        <translation type="unfinished"></translation>
+        <translation>Načítám dostupné balíčky:
+<byte value="x9"/></translation>
     </message>
     <message>
         <source>Reading installed packages:
 <byte value="x9"/></source>
-        <translation type="unfinished"></translation>
+        <translation>Načítám nainstalované balíčky:
+<byte value="x9"/></translation>
     </message>
 </context>
 <context>
@@ -750,15 +758,15 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
     </message>
     <message>
         <source>This area contains information about the package.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tato oblast obsahuje informace o balíčku.</translation>
     </message>
     <message>
         <source>This area contains a list of files contained in this package.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tato oblast obsahuje seznam souborů obsažených v balíčku.</translation>
     </message>
     <message>
         <source>Tap here to retrieve list of files contained in this package.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro stažení seznamu souborů obsažených v balíčku.</translation>
     </message>
 </context>
 </TS>

@@ -3,118 +3,118 @@
     <name>Converter</name>
     <message>
         <source>PimConverter</source>
-        <translation type="unfinished"></translation>
+        <translation>PimKonvertor</translation>
     </message>
     <message>
         <source>&lt;qt&gt;It is not a good idea to usethe same source and destformat !&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Není dobrý nápad používat stejný zdrojový a cílový formát!&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Pim-Converter</source>
-        <translation type="unfinished"></translation>
+        <translation>Pim-Konvertor</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Starting to convert the database for %1&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Začíná převod databáze pro %1&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>No SQLite2 database could be found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze nalézt databázi SQLite2!</translation>
     </message>
     <message>
         <source>The database is already converted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Databáze je již překonvertována!</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Conversion not possible: &lt;br&gt;Problem: %1&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Konverze není možná: &lt;br&gt;Problém: %1&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;An internal error occurred: &lt;br&gt;Converting the database was impossible! &lt;br&gt;Command/Reason: &apos;%1&apos; &lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Nastala interní chyba: &lt;br&gt;Konvertování databáze není možné! &lt;br&gt;Příkaz/Důvod: &apos;%1&apos; &lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Are you really sure that you want to convert your database from sqlite V2 to sqlite V3?&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Jste si opravdu jisti, že chcete zkonvertovat vaší databázi z sqlite V2 na sqlite V3?&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;An internal error occurred: sqlite was not accessible! Please correct the PATH or install this packages!&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Nastala interní chyba: sqlite není přístupná! Prosím opravte cestu, nebo nainstalujte balíčky!&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;An internal error occurred: sqlite3 was not accessible! Please correct the PATH or install this packages!&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Nastala interní chyba: sqlite3 není přístupná! Prosím opravte cestu, nebo nainstalujte balíčky!&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Conversion is finished!</source>
-        <translation type="unfinished"></translation>
+        <translation>Konverze je dokončena!</translation>
     </message>
 </context>
 <context>
     <name>converter_base</name>
     <message>
         <source>PIM-Database Converter</source>
-        <translation type="unfinished"></translation>
+        <translation>PIM-Konvertor databází</translation>
     </message>
     <message>
         <source>Converter</source>
-        <translation type="unfinished"></translation>
+        <translation>Konvertor</translation>
     </message>
     <message>
         <source>Upgrade to SQLite3</source>
-        <translation type="unfinished"></translation>
+        <translation>Upgrade na SQLite3</translation>
     </message>
     <message>
         <source>Select Database:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte databázi:</translation>
     </message>
     <message>
         <source>Addressbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresář</translation>
     </message>
     <message>
         <source>TodoList</source>
-        <translation type="unfinished"></translation>
+        <translation>Plánovač</translation>
     </message>
     <message>
         <source>Datebook</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalendář</translation>
     </message>
     <message>
         <source>Source/Destination:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zdroj/Cíl:</translation>
     </message>
     <message>
         <source>to</source>
-        <translation type="unfinished"></translation>
+        <translation>do</translation>
     </message>
     <message>
         <source>XML</source>
-        <translation type="unfinished"></translation>
+        <translation>XML</translation>
     </message>
     <message>
         <source>SQL (SQLite)</source>
-        <translation type="unfinished"></translation>
+        <translation>SQL (SQLite)</translation>
     </message>
     <message>
         <source>Convert from</source>
-        <translation type="unfinished"></translation>
+        <translation>Konvertovat z</translation>
     </message>
     <message>
         <source>Config:</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurace:</translation>
     </message>
     <message>
         <source>Erase before copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Vymazat před kopírováním</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation type="unfinished"></translation>
+        <translation>Postup:</translation>
     </message>
     <message>
         <source>Go!</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeď!</translation>
     </message>
 </context>
 </TS>

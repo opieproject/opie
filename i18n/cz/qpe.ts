@@ -246,7 +246,7 @@ kříže pevně a přesně.</translation>
     <name>QueuedRequestRunner</name>
     <message>
         <source>Processing Queued Requests</source>
-        <translation type="unfinished"></translation>
+        <translation>Zpracovávám nahromaděné požadavky</translation>
     </message>
 </context>
 <context>
@@ -272,7 +272,7 @@ kříže pevně a přesně.</translation>
     <name>Server</name>
     <message>
         <source>USB Lock</source>
-        <translation type="unfinished"></translation>
+        <translation>USB zámek</translation>
     </message>
 </context>
 <context>

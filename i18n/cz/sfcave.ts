@@ -3,7 +3,7 @@
     <name>HelpWindow</name>
     <message>
         <source>Help for SFCave</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomoc pro SFCave</translation>
     </message>
 </context>
 <context>
