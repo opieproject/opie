@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.53 2003-08-08 14:45:50 eilers Exp $
+** $Id: qpeapplication.cpp,v 1.54 2003-08-18 10:51:18 zecke Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -1771,6 +1771,18 @@ void QPEApplication::hideOrQuit()
 	else
 		quit();
 }
+
+#if (__GNUC__ > 2 )
+extern "C" void __cxa_pure_virtual();
+
+void __cxa_pure_virtual()
+{
+    fprintf( stderr, "Pure virtual called\n");
+    abort();
+
+}
+
+#endif
 
 
 #if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX) || defined(QT_QWS_RAMSES)
