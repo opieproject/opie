@@ -870,7 +870,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation>Mettre à jour</translation>
+        <translation>Ajouter - Mettre à jour</translation>
     </message>
     <message>
         <source>Destination</source>

@@ -184,11 +184,11 @@
     <name>ORecurranceBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation>Répéter Evènement</translation>
+        <translation>Répétition</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Sans</translation>
+        <translation>Aucune</translation>
     </message>
     <message>
         <source>Day</source>

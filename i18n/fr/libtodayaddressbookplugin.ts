@@ -74,23 +74,22 @@ jours</translation>
     </message>
     <message>
         <source>Next birthdays in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation>Prochain anniversaire (naissance)
-dans &lt;b&gt;%1&lt;/b&gt; jour(s):</translation>
+        <translation>Prochain anniversaire de naissance
+prévu dans &lt;b&gt;%1&lt;/b&gt; jour(s):</translation>
     </message>
     <message>
         <source>No birthdays in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation>Pas d&apos;anniversaire (naissance) prévu
+        <translation>Pas d&apos;anniversaire de naissance prévu
 dans les &lt;b&gt;%1&lt;/b&gt; prochains jours !</translation>
     </message>
     <message>
         <source>Next anniversaries in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation>Prochain anniversaire (autre) dans
-&lt;b&gt;%1&lt;/b&gt; jour(s):</translation>
+        <translation>Prochain anniversaire dans &lt;b&gt;%1&lt;/b&gt; jour(s):</translation>
     </message>
     <message>
         <source>No anniversaries in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation>Pas d&apos;anniversaire (autre) dans
-les &lt;b&gt;%1&lt;/b&gt; prochains jours !</translation>
+        <translation>Pas d&apos;anniversaire dans les &lt;b&gt;%1&lt;/b&gt;
+prochains jours !</translation>
     </message>
     <message>
         <source>Database does not provide this search query ! Please upgrade libOpie !&lt;br&gt;</source>

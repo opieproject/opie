@@ -16,7 +16,8 @@
     </message>
     <message>
         <source>Day</source>
-        <translation>Toute la journée</translation>
+        <translation>Toute la
+Journée</translation>
     </message>
     <message>
         <source>Week</source>
@@ -50,7 +51,7 @@ que l&apos;intervalle entre les répétitions.</translation>
     </message>
     <message>
         <source> minutes)</source>
-        <translation>minutes)</translation>
+        <translation> minutes)</translation>
     </message>
     <message>
         <source>OK</source>
@@ -257,7 +258,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation>minutes</translation>
+        <translation> mn</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -281,11 +282,12 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Views</source>
-        <translation>Affichages</translation>
+        <translation>Affichage</translation>
     </message>
     <message>
         <source>Default view:</source>
-        <translation>Au démarrage :</translation>
+        <translation>Démarrer 
+dans :</translation>
     </message>
     <message>
         <source>Day</source>
@@ -297,7 +299,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation>List des semaines</translation>
+        <translation>Liste Semaine</translation>
     </message>
     <message>
         <source>Month</source>
@@ -309,11 +311,11 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Time display</source>
-        <translation>Affichage heure</translation>
+        <translation>Afficher heure</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Aucun</translation>
+        <translation>Non</translation>
     </message>
     <message>
         <source>Start</source>
@@ -465,13 +467,13 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Start Time</source>
-        <translation>Heure 
-de début</translation>
+        <translation>Heure de
+début</translation>
     </message>
     <message>
         <source>End Time</source>
-        <translation>Heure 
-de fin</translation>
+        <translation>Heure de
+fin</translation>
     </message>
 </context>
 <context>
@@ -518,15 +520,18 @@ de fin</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation>Heure début</translation>
+        <translation>Heure
+de début</translation>
     </message>
     <message>
         <source>All day</source>
-        <translation>Jour</translation>
+        <translation>Toute la
+Journée</translation>
     </message>
     <message>
         <source>Time zone</source>
-        <translation>Zone Horaire
+        <translation>Zone
+Horaire
 </translation>
     </message>
     <message>
@@ -539,7 +544,7 @@ de fin</translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation>Silencieuse</translation>
+        <translation>Muette</translation>
     </message>
     <message>
         <source>Loud</source>
@@ -596,23 +601,23 @@ de fin</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation>Tout</translation>
+        <translation>Chaque</translation>
     </message>
     <message>
         <source>%1 %2 every </source>
-        <translation>%1 %2 tout</translation>
+        <translation>Le %2 %1 chaque </translation>
     </message>
     <message>
         <source>The %1 every </source>
-        <translation>Tout les %1</translation>
+        <translation>Tous les %1 de chaque </translation>
     </message>
     <message>
         <source>The %1 %1 of every</source>
-        <translation>Les %1 %1 de chaque</translation>
+        <translation>Les %2 %1 de chaque </translation>
     </message>
     <message>
         <source>Every </source>
-        <translation>Tout</translation>
+        <translation>Chaque</translation>
     </message>
     <message>
         <source>Monday</source>
@@ -647,7 +652,7 @@ de fin</translation>
     <name>QWidget</name>
     <message>
         <source>st</source>
-        <translation>er</translation>
+        <translation></translation>
     </message>
     <message>
         <source>nd</source>
@@ -722,28 +727,28 @@ de fin</translation>
     </message>
     <message>
         <source> and </source>
-        <translation>et</translation>
+        <translation> et </translation>
     </message>
     <message>
         <source>,
 and </source>
         <translation>,
-et</translation>
+et </translation>
     </message>
     <message>
         <source>, and </source>
-        <translation>, et</translation>
+        <translation>, et </translation>
     </message>
     <message>
         <source>on </source>
-        <translation>activé</translation>
+        <translation>Les </translation>
     </message>
 </context>
 <context>
     <name>RepeatEntryBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation>Evénement qui se répète</translation>
+        <translation>Repétition</translation>
     </message>
     <message>
         <source>None</source>
@@ -767,7 +772,7 @@ et</translation>
     </message>
     <message>
         <source>Every:</source>
-        <translation>Tout :</translation>
+        <translation>Chaque :</translation>
     </message>
     <message>
         <source>Frequency</source>
@@ -779,7 +784,8 @@ et</translation>
     </message>
     <message>
         <source>No End Date</source>
-        <translation>Pas de date de fin</translation>
+        <translation>Pas de date
+de fin</translation>
     </message>
     <message>
         <source>Repeat On</source>
@@ -815,7 +821,7 @@ et</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation>Tout</translation>
+        <translation>Chaque </translation>
     </message>
     <message>
         <source>Var1</source>

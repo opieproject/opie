@@ -4,7 +4,7 @@
     <name>Categories</name>
     <message>
         <source>All</source>
-        <translation>Tout</translation>
+        <translation>Toute</translation>
     </message>
     <message>
         <source>Unfiled</source>
@@ -871,19 +871,19 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Erreur</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <source>Could not find the application </source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;application n&apos;a pas été trouvée</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Could not start the application </source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;application n&apos;a pas été lancée</translation>
     </message>
 </context>
 <context>

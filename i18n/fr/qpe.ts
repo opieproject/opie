@@ -8,11 +8,11 @@
     </message>
     <message>
         <source>&lt;p&gt;%1 is not responding.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;%1&gt; ne répond pas.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;%1 ne répond pas.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Would you like to force the application to exit?&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Voulez-vous forcer l&apos;pplication à quitter?&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Voulez-vous forcer l&apos;application à quitter?&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -36,11 +36,11 @@ avec précision pour calibrer l&apos;écran.</translation>
     </message>
     <message>
         <source>Icon View</source>
-        <translation>Vue icon</translation>
+        <translation>Vue Icône</translation>
     </message>
     <message>
         <source>List View</source>
-        <translation>Vue liste</translation>
+        <translation>Vue Liste</translation>
     </message>
 </context>
 <context>
@@ -161,7 +161,7 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     </message>
     <message>
         <source>Link apps</source>
-        <translation>Liés les apps</translation>
+        <translation>Lier apps</translation>
     </message>
     <message>
         <source>Limit search to dir: (not used yet)</source>
