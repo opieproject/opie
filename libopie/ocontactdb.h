@@ -14,11 +14,14 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactdb.h,v 1.1.2.19 2002-09-12 17:01:52 eilers Exp $
+ * Version: $Id: ocontactdb.h,v 1.1.2.20 2002-09-13 11:16:21 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.h,v $
- * Revision 1.1.2.19  2002-09-12 17:01:52  eilers
+ * Revision 1.1.2.20  2002-09-13 11:16:21  eilers
+ * added prefix increment/decrement
+ *
+ * Revision 1.1.2.19  2002/09/12 17:01:52  eilers
  * First attempt of iterator in ocontactdb
  *
  * Revision 1.1.2.18  2002/08/31 20:22:59  zecke
@@ -190,10 +193,10 @@ class OContactDB: public QObject
 	    bool operator== ( const Iterator& it );
 	    bool operator!= ( const Iterator& it );
 	    Iterator& operator= ( const  Iterator& it );
-	    Iterator& operator++ ();    // prefix
-	    /* 	        Iterator operator++ ( int );  // postfix */
-	    Iterator& operator-- ();    // prefix
-	    /* 		Iterator operator-- (int);    // postfix */
+	    Iterator& operator++ ();      // prefix
+	    Iterator operator++ ( int );  // postfix
+	    Iterator& operator-- ();      // prefix
+	    Iterator operator-- ( int );  // postfix
 	    Contact operator*() const;
 	    Contact operator->() const;
 

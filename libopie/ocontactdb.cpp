@@ -17,11 +17,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.19 2002-09-12 17:01:52 eilers Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.20 2002-09-13 11:16:21 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.19  2002-09-12 17:01:52  eilers
+ * Revision 1.1.2.20  2002-09-13 11:16:21  eilers
+ * added prefix increment/decrement
+ *
+ * Revision 1.1.2.19  2002/09/12 17:01:52  eilers
  * First attempt of iterator in ocontactdb
  *
  * Revision 1.1.2.18  2002/08/31 20:22:59  zecke
@@ -91,8 +94,8 @@ OContactDB::Iterator& OContactDB::Iterator::operator= ( const OContactDB::Iterat
 bool OContactDB::Iterator::operator== ( const OContactDB::Iterator& it )
 {
 	// Hey Zecke: Ich verstehe Deine Gleichoperation nicht ! Für mich sind
-	// Zwei iteratoren gleich, wenn sie die gleiche UID-Liste beinhalten und
-	// auf den gleichen Eintrag zeigen.. (se)
+	// Zwei iteratoren gleich, wenn sie die gleiche UID-Liste beinhalten,
+	// auf den gleichen Eintrag zeigen und das Gleiche Backend benutzen.. (se)
 	
 	return ( ( m_uids == it.m_uids ) 
 		 && ( m_cur_position == it.m_cur_position ) 
@@ -146,9 +149,14 @@ OContactDB::Iterator& OContactDB::Iterator::operator++ ()
 	return *this;
 }
 
-// Iterator OContactDB::Iterator::operator++ ( int )
-// {  // postfix
-// }
+Iterator OContactDB::Iterator::operator++ ( int )
+{  // postfix
+	iterator temp = *this;
+
+	++*this;
+
+	return temp;
+}
 
 OContactDB::Iterator& OContactDB::Iterator::operator-- ()
 {    // prefix
@@ -160,6 +168,15 @@ OContactDB::Iterator& OContactDB::Iterator::operator-- ()
 	}
 
 	return *this;
+}
+
+Iterator OContactDB::Iterator::operator-- ( int )
+{  // postfix
+	iterator temp = *this;
+
+	--*this;
+
+	return temp;
 }
 
 Contact OContactDB::Iterator::operator*() const
