@@ -1,4 +1,4 @@
  config LIBMAILWRAPPER
     boolean "libmailwrapper ( wrapper arround libetpan needed by mail3"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE 
+    depends ( LIBQPE || LIBQPE-X11 )
