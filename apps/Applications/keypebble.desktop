@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Virtual Network Computing (VNC) Viewer
+Comment[es]=Visor de Virtual Network Computing (VNC)
 Exec=keypebble
 Icon=vnc/vnc
 Type=Application

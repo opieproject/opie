@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A Ckeckers Game
+Comment[es]=El juego de las Damas
 Exec=kcheckers
 Icon=kcheckers/KCheckers
 Type=Application

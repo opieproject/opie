@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=An EMail Client
+Comment[es]=Cliente de correo electrónico
 Exec=opiemail
 Icon=opiemail/opiemail
 Type=Application

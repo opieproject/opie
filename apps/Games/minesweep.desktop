@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Find the mines
+Comment[es]=Busca las minas
 Exec=minesweep
 Icon= minesweep/MineHunt
 Type=Application

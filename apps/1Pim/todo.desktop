@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A Todo List Program
+Comment[es]=Un programa de lista de tareas
 Exec=todolist
 Icon=TodoList
 Type=Application

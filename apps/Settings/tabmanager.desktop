@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Tab Managing Tool
+Comment[es]=Herramienta para gestionar las etiquetas superiores
 Exec=tabmanager
 Icon=tabmanager/tabmanager
 Type=Settings

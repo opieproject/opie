@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Spreadsheet Application
+Comment[es]=Aplicación de hoja de cálculo
 Exec=sheetqt
 Icon=opie-sheet/sheetqt
 Type=Application

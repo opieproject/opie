@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Today App
+Comment[es]=Aplicación Hoy
 Exec=today
 Icon=today/today_icon
 Type=Application

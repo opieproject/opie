@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Hit Bill
+Comment[es]=Pégale a Bill
 Exec=kbill
 Icon=kbill/kbill
 Type=Application

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Remote App
+Comment[es]=Aplicación de control remoto
 Exec=remote
 Icon=remote/remote
 Type=Application

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A HTML Help Browser Program
+Comment[es]=Navegador de ayuda en HTML
 Exec=helpbrowser
 Icon=helpbrowser/HelpBrowser
 Type=Application

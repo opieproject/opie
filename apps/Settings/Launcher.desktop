@@ -3,3 +3,6 @@ Type=Application
 Exec=launchersettings
 Icon=launchersettings/Launcher
 Name=Launcher
+Name[es]=Lanzador
+Comment=Launcher settings dialog
+Comment[es]=Configuración del lanzador de aplicaciones

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment = A File Manager Program
+Comment[es]=Un programa gestor de ficheros
 Exec = filebrowser
 File = ../apps/Applications/filebrowser
 Icon = filebrowser/FileBrowser

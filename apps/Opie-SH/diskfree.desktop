@@ -3,3 +3,6 @@ Type=Application
 Exec=diskfree.sh
 Icon=opie-sh-scripts/diskfree
 Name=Disk Free
+Name[es]=Espacio Libre
+Comment=Frontend to df (show space left on mountpoints)
+Comment[es]=Interfaz de df (muestra espacio libre en puntos de montaje)

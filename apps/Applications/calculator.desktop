@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A Calculator Program
+Comment[es]=Calculadora científica y conversor de unidades
 Exec=calculator
 Icon=calc/Calculator
 Type=Application

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Shoot the rocks
+Comment[es]=Dispare a las rocas
 Exec=qasteroids
 Icon=qasteroids/Asteroids
 Type=Application

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A disk formatting utility
+Comment[es]=Utilidad para formatear discos
 Exec=formatter
 Icon=formatter/devices
 Type=Application
@@ -8,3 +9,4 @@ Name[zh_TW]=Formatter
 Name[ko]=포맷기
 Name[it]=Formatter
 Name[de]=Formatieren
+Name[es]=Formateador

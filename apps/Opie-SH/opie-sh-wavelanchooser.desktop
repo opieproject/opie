@@ -1,6 +1,8 @@
 [Desktop Entry]
 Comment=WLAN Chooser
+Comment[es]=Elija red inalámbrica
 Exec=wavelanchooser.sh
 Icon=opie-sh-scripts/qtwavelan
 Type=Application
 Name=WLAN Chooser
+Name[es]=Red Inalámbrica

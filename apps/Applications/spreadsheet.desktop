@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A Spread Sheet Program
+Comment[es]=Un programa de hoja de cálculo
 Exec=spreadsheet
 Icon=Spreadsheet
 Type=Application

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A table/database viewer
+Comment[es]=Visor de tablas y bases de datos
 Exec=tableviewer
 Type=Application
 Name=Table Viewer
@@ -7,7 +8,7 @@ Name[pt_BR]=Visualizador de Tabelas
 Name[hu]=Adatbázis nézõ
 Name[it]=DB Viewer
 Name[de]=Tabellen betrachter
-Name[pt]=Base Dados
+Name[pt]=Visor BD
 Name[es]=Visor Base Datos
 Name[zh_TW]=資料庫檢視
 Name[ko]=테이블 뷰어

@@ -1,6 +1,7 @@
 [Desktop Entry]
-Categories = 
+Categories =
 Comment = An Image Viewer
+Comment[es]=Un visor de imágenes
 Exec = showimg
 File = 
 Icon = imageviewer/ImageViewer

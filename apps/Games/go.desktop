@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A Board Strategy Game
+Comment[es]=Juego de estategia de tablero
 Exec=go
 Icon=go/Go
 Type=Application

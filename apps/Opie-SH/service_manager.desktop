@@ -3,3 +3,6 @@ Type=Application
 Exec=service_manager.sh
 Icon=opie-sh-scripts/service_manager
 Name=Service Manager
+Name[es]=Gestor Servicios
+Comment=Frontend to start/stop init scripts
+Comment[es]=Interfaz para iniciar/parar guiones de inicio

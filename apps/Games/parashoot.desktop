@@ -1,11 +1,12 @@
 [Desktop Entry]
 Comment=A Parachute Attack Game
+Comment[es]=Un juego de ataque de paracaidistas
 Exec=parashoot
 Icon=parashoot/ParaShoot
 Type=Application
 Name=ParaShoot
 Name[no]=Fallskjerm
-Name[de]=Fallschirmj�ger
+Name[de]=Fallschirmj�er
 Name[hu]=Védd a bázist
 Name[pt]=Pára-Quedas
 Name[es]=Paracas

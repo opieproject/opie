@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A Terminal Window
+Comment[es]=Una ventana de terminal
 Exec=embeddedkonsole
 Icon=Terminal
 Type=Application

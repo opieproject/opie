@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Mobile Messaging
+Comment[es]=Mensajería móvil
 Exec=mobilemsg
 Icon=mobilemsg/mobilemsg
 Type=Application

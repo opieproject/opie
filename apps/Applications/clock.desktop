@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A Clock Program
+Comment[es]=Reloj, cronómetro y despertador
 Exec=clock
 Icon=Clock
 Type=Application

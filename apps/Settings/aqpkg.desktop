@@ -5,3 +5,6 @@ MimeType=application/ipkg
 MimeTypeIcons=aqpkg/ipkg
 Icon=aqpkg/aqpkg
 Name=AQPkg
+Name[es]=AQPkg
+Comment=A Package Manager
+Comment[es]=Un gestor de paquetes de software

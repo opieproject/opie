@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A Checkbook Program
+Comment[es]=Programa que gestiona el talonario de cheques
 Exec=checkbook
 Icon=checkbook/checkbook
 Type=Application
@@ -7,3 +8,4 @@ Name=Checkbook
 Name[zh_TW]=Checkbook
 Name[ko]=돈정리
 Name[it]=Checkbook
+Name[es]=Chequera

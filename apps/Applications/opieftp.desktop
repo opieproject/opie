@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=An Ftp Client
+Comment[es]=Cliente de File Transfer Protocol (FTP)
 Exec=opieftp
 Icon=opieftp/opieftp
 Type=Application

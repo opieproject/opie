@@ -1,12 +1,13 @@
 [Desktop Entry]
 Comment=A GSM Phone Utility
+Comment[es]=Utilidad de teléfono GSM
 Exec=gsmtool
 Icon=gsmtool/gsmtool
 Type=Application
 Name=GSM Tool
 Name[pt]=Utilitário GSM
 Name[de]=GSM-Werkzeug
-Name[es]=Herramientas GSM
-Name[it]=Utilit� GSM
+Name[es]=Teléfono GSM
+Name[it]=Utilit�GSM
 Name[zh_TW]=GSM 工具
 Name[ko]=GSM 전화기 유틸

@@ -3,3 +3,4 @@ Type=Application
 Exec=killproc.sh
 Icon=opie-sh-scripts/killproc
 Name=Process Killer
+Name[es]=Mataprocesos

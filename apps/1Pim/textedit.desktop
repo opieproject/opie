@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A Text Editing Program
+Comment[es]=Un editor de textos
 Exec=textedit
 Icon=TextEditor
 Type=Application

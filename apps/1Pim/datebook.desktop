@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A Calendar and Scheduling Program
+Comment[es]=Un calendario y planificador
 Exec=datebook
 Icon=DateBook
 Type=Application

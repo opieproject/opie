@@ -1,6 +1,8 @@
 [Desktop Entry]
 Comment=Backup and Restore Utility
+Comment[es]=Utilidad de copia de seguridad y recuperación
 Exec=backup
 Icon=backup/backupandrestore
 Type=Settings
 Name=Backup And Restore
+Name[es]=Copia de Seguridad

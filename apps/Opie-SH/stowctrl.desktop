@@ -1,6 +1,8 @@
 [Desktop Entry]
 Comment=Start/Stop stowaway keyboard
+Comment[es]=Activa/desactiva teclado Stowaway
 Exec=stowctrl.sh
 Icon=stowctrl/stowctrl
 Type=Application
 Name=Stowaway Control
+Name[es]=Control Stowaway

@@ -6,6 +6,7 @@ Name[de]=Systeminfos
 Exec=sysinfo
 Type=Application
 Comment=System Information
+Comment[es]=Info Sistema
 Icon=SystemInfo
 Name[hu]=Rendszerinfó
 Name[it]=Sistema

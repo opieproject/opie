@@ -4,3 +4,6 @@ Exec=aqpkg
 MimeType=application/ipkg
 Icon=aqpkg
 Name=AQPkg
+Name[es]=AQPkg
+Comment=A Package Manager
+Comment[es]=Un gestor de paquetes de software

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Wireless LAN Setup
+Comment[es]=Configuración de red inalámbrica
 Exec=wlansetup
 Icon=wlansetup/wlan
 Type=Settings

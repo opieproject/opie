@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A Note Taking Program
+Comment[es]=Un programa para tomar notas
 Exec=drawpad
 Icon=drawpad/DrawPad
 Type=Application

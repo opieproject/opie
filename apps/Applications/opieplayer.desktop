@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A Media Playback Program
+Comment[es]=Reproductor multimedia
 Exec=opieplayer
 Icon=opieplayer/MPEGPlayer
 Type=Application

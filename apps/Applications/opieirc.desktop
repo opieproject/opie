@@ -1,6 +1,8 @@
 [Desktop Entry]
 Comment=An IRC Client
+Comment[es]=Un cliente de Internet Relay Chat (IRC)
 Exec=opieirc
 Icon=opieirc/opieirc
 Type=Application
 Name=OpieIRC
+Name[es]=Opie IRC

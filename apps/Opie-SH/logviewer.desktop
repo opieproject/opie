@@ -3,3 +3,6 @@ Type=Application
 Exec=logviewer.sh
 Icon=opie-sh-scripts/logviewer
 Name=Log Viewer
+Name[es]=Visor Registros
+Comment=Frontend to viewing logfiles
+Comment[es]=Interfaz para ver los ficheros de registro

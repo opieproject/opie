@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=PDF Viewer
+Comment[es]=Visor de ficheros en Portable Document Format (PDF)
 Exec=qpdf
 Icon=qpdf/qpdf_icon
 Type=Application

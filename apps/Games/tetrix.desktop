@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A Block Stacking Game
+Comment[es]=Un juego de apilar bloques
 Exec=tetrix
 Icon=tetrix/Tetrix
 Type=Application

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=opie-sh-howto
+Comment[es]=Cómo del Opie Shell
 Exec=opie-sh-howto.sh
 Icon=opie-sh/opie-sh
 Type=Application

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Set Application Key
+Comment[es]=Aplicaciones que lanzan las teclas rápidas
 Exec=appskey
 Icon=AppsKey/CustomizeKeys
 Type=Application
@@ -7,7 +8,7 @@ Name=Application Key
 CanFastload=0
 Name[de]=Anwendungs tasten
 Name[pt]=Botões
-Name[es]=Teclas Rápidas
+Name[es]=Botones
 Name[it]=Pulsanti
 Name[zh_TW]=程式鍵
 Name[ko]=실행단추

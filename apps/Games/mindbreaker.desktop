@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A Code Breaking Game
+Comment[es]=Juego de romper códigos
 Exec=mindbreaker
 Icon=mindbreaker/Mindbreaker
 Type=Application

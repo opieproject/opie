@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=An Address Book Program
+Comment[es]=Una libreta de direcciones
 Exec=addressbook
 Icon=AddressBook
 Type=Application

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Edit the ~/Settings/*.conf files
+Comment[es]=Edite los ficheros ~/Settings/*.conf
 Exec=confedit
 Icon=confedit/confedit
 Type=Application
