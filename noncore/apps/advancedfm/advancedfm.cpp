@@ -377,11 +377,10 @@ void AdvancedFm::doAbout() {
 }
 
 void AdvancedFm::keyPressEvent( QKeyEvent *e) {
-		qDebug("keypressevent");
+		Q_UNUSED(e);
 }
 
 void AdvancedFm::keyReleaseEvent( QKeyEvent *e) {
-		qDebug("key release");
    if( CurrentView()->hasFocus() )
       e->ignore();
 		if(  e->key() ==  Key_Left ) 
@@ -813,6 +812,7 @@ void AdvancedFm::findFile(const QString &fileName) {
 }
 
 void AdvancedFm::slotSwitchMenu(int item) {
+		Q_UNUSED(item);
 //		qDebug( "Switch %d",item);
    //   viewMenu->setItemChecked(item, true);
 }
