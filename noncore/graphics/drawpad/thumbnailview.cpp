@@ -153,7 +153,7 @@ ThumbnailView::ThumbnailView(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas, QWi
     m_pDrawPad = drawPad;
     m_pDrawPadCanvas = drawPadCanvas;
 
-    setCaption(tr("Thumbnail"));
+    setCaption(tr("DrawPad - Thumbnail View"));
 
     QToolButton* newPageButton = new QToolButton(this);
     newPageButton->setIconSet(Resource::loadIconSet("new"));

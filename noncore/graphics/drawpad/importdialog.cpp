@@ -25,7 +25,7 @@
 ImportDialog::ImportDialog(QWidget* parent, const char* name)
     : QDialog(parent, name, true)
 {
-    setCaption(tr("Import"));
+    setCaption(tr("DrawPad - Import"));
 
     m_pFileSelector = new FileSelector("image/*", this, "fileselector");
     connect(m_pFileSelector, SIGNAL(fileSelected(const DocLnk&)), this, SLOT(fileChanged()));

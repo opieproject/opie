@@ -30,7 +30,7 @@
 ExportDialog::ExportDialog(uint pageAt, uint pageCount, QWidget* parent, const char* name)
     : QDialog(parent, name, true)
 {
-    setCaption(tr("Export"));
+    setCaption(tr("DrawPad - Export"));
 
     m_pageAt = pageAt;
     m_pageCount = pageCount;
