@@ -21,13 +21,7 @@
 #include "fifteen.h"
 
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-int main( int argc, char ** argv)
-{
-  QPEApplication app( argc, argv );
-    
-  FifteenMainWindow mw;
-  mw.setCaption( FifteenMainWindow::tr("Fifteen Pieces") );
-  app.showMainWidget( &mw );
-  return app.exec();
-}
+OPIE_EXPORT_APP( OApplicationFactory<FifteenMainWindow> )
+

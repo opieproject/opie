@@ -35,6 +35,8 @@ class PiecesTable : public QTableView
   PiecesTable(QWidget* parent = 0, const char* name = 0);
   ~PiecesTable();
 
+
+
  protected slots:
   void slotRandomize();
   void slotReset();
@@ -66,8 +68,7 @@ class FifteenWidget : public QWidget
     Q_OBJECT
 
 public:
-    FifteenWidget(QWidget *parent = 0, const char *name = 0);
-
+    FifteenWidget(QWidget *parent = 0, const char *name = 0 );
 private:
     PiecesTable *_table;
 };
@@ -77,7 +78,8 @@ class FifteenMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    FifteenMainWindow(QWidget *parent=0, const char* name=0);
+    FifteenMainWindow(QWidget *parent=0, const char* name=0, WFlags fl = 0 );
+    static QString appName() { return QString::fromLatin1("fifteen"); }
 };
 
 #endif

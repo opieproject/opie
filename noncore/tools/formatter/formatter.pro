@@ -1,9 +1,7 @@
-TEMPLATE  = app
-CONFIG    += qt warn_on release
+CONFIG    += qt warn_on release quick-app
 HEADERS   = formatter.h inputDialog.h output.h
 SOURCES   = formatter.cpp inputDialog.cpp output.cpp main.cpp
 TARGET    = formatter
-DESTDIR   = $(OPIEDIR)/bin
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe

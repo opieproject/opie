@@ -37,12 +37,12 @@
 #include <stdlib.h>
 #include <time.h>
 
-FifteenMainWindow::FifteenMainWindow(QWidget *parent, const char* name)
-  : QMainWindow( parent, name )
+FifteenMainWindow::FifteenMainWindow(QWidget *parent, const char* name,  WFlags fl)
+  : QMainWindow( parent, name,fl )
 {
   // random seed
   srand(time(0));
-
+  setCaption( FifteenMainWindow::tr("Fifteen Pieces") );
   setToolBarsMovable( FALSE );
   QVBox *vbox = new QVBox( this );
   PiecesTable *table = new PiecesTable( vbox );
