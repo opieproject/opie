@@ -26,3 +26,17 @@ TARGET 		= oxygen
 DESTDIR		= $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/oxygen.ts 
+	 ../../../i18n/en/oxygen.ts \
+	 ../../../i18n/es/oxygen.ts \
+	 ../../../i18n/fr/oxygen.ts \
+	 ../../../i18n/hu/oxygen.ts \
+	 ../../../i18n/ja/oxygen.ts \
+	 ../../../i18n/ko/oxygen.ts \
+	 ../../../i18n/no/oxygen.ts \
+	 ../../../i18n/pl/oxygen.ts \
+	 ../../../i18n/pt/oxygen.ts \
+	 ../../../i18n/pt_BR/oxygen.ts \
+	 ../../../i18n/sl/oxygen.ts \
+	 ../../../i18n/zh_CN/oxygen.ts \
+	 ../../../i18n/zh_TW/oxygen.ts \
+   	 ../../../i18n/it/oxygen.ts
