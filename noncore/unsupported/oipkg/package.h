@@ -90,10 +90,11 @@ private:
   QString _version;
   QString _dest;
   QDict<QString> _values;
-	QDict<OipkgPackage> *_versions;
+  QDict<OipkgPackage> *_versions;
   bool _useFileName;
   void parsePackage( QStringList );
-  void init(PackageManagerSettings *);
+  void init();
+  //  void init(PackageManagerSettings*);
 };
 
 

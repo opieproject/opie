@@ -44,12 +44,13 @@ PackageListItem::PackageListItem(ListViewItemOipkg *lvi, OipkgPackage *pi, Packa
 }
 PackageListItem::~PackageListItem()
 {
-  delete popupMenu;
-  delete destsMenu;
+   delete popupMenu;
+   delete destsMenu;
 }
 
 void PackageListItem::init( OipkgPackage *pi, PackageManagerSettings *s)
 {
+  //waring pass something different than 0
   popupMenu = new QPopupMenu( 0 );
   destsMenu = new QPopupMenu( 0 );
   package = pi;

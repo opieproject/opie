@@ -206,6 +206,7 @@ void PackageList::readFileEntries( QString filename, QString dest )
 		}
 	}
  	delete statusStream;
+	f.close();
   return;
 }
 

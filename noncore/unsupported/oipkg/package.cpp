@@ -19,24 +19,31 @@
 #include "debug.h"
 
 OipkgPackage::OipkgPackage( QObject *parent, const char *name )
-	: QObject(parent,name)
+ 	: QObject(parent,name)
 {
-
+  init();
 }
 
 OipkgPackage::~OipkgPackage()
 {
+  
 }
 
 OipkgPackage::OipkgPackage( PackageManagerSettings *s, QObject *parent, const char *name )
 	: QObject(parent,name)
 {	
-	init(s);
+	settings = s;
+	init();
 }
 
-void OipkgPackage::init( PackageManagerSettings *s )
+// void OipkgPackage::init( PackageManagerSettings *s )
+// {
+// 	settings = s;
+// 	init();
+// }
+
+void OipkgPackage::init( )
 {
-	settings = s;
   _size = "";
   _section = "";
   _subsection = "";
@@ -55,15 +62,17 @@ void OipkgPackage::init( PackageManagerSettings *s )
 
 OipkgPackage::OipkgPackage( QStringList pack, PackageManagerSettings *s , QObject *parent, const char *name )
 	: QObject(parent,name)
-{
-  init(s);
+{ 
+  settings = s;
+  init();
   parsePackage( pack );
 }
 
 OipkgPackage::OipkgPackage( QString n, PackageManagerSettings *s, QObject *parent, const char *name )
 	: QObject(parent,name)
-{
-  init(s);
+{ 
+  settings = s;
+  init();
  	if ( !QFile::exists( n ) )
   {
 	  _name = QString( n );
@@ -78,7 +87,8 @@ OipkgPackage::OipkgPackage( QString n, PackageManagerSettings *s, QObject *paren
 OipkgPackage::OipkgPackage( OipkgPackage *pi, QObject *parent, const char *name )
 	: QObject(parent,name)
 {
-  init(pi->settings);
+  settings = pi->settings;
+  init();
   copyValues( pi );
 }
 
