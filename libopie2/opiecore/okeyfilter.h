@@ -47,29 +47,57 @@ namespace Internal {
  * @author Rajko Albrecht
  * @version 1.0
  */
-class OKeyFilter:public QWSServer::KeyboardFilter
+class OKeyFilter
 {
     friend class Opie::Core::ODevice;
     friend class Opie::Core::Internal::iPAQ;
     friend class Opie::Core::Internal::SIMpad;
 
-    static QValueList<QWSServer::KeyboardFilter*> filterList;
-    static QValueList<QWSServer::KeyboardFilter*> preFilterList;
-
-    OKeyFilter();
-    OKeyFilter(const OKeyFilter&):QWSServer::KeyboardFilter(){};
-
 protected:
-    void addPreHandler(QWSServer::KeyboardFilter*);
-    void remPreHandler(QWSServer::KeyboardFilter*);
+    /**
+     * Protected constructor - generate class via inst()
+     * @see inst()
+     */
+    OKeyFilter();
+    /**
+     * Protected constructor - generate class via inst()
+     * @see inst()
+     */
+    OKeyFilter(const OKeyFilter&){};
+    /**
+     * Append filter to the primary list.
+     * This is only allowed for friend classes from odevice
+     * @param aFilter a filter to append
+     * @see addHandler
+     */
+    virtual void addPreHandler(QWSServer::KeyboardFilter*aFilter)=0;
+    /**
+     * Remove the specified filter from list and give back ownership.
+     * This is only allowed for friend classes from odevice
+     * @param aFilter a filter to remove
+     * @see remHandler
+     */
+    virtual void remPreHandler(QWSServer::KeyboardFilter*aFilter)=0;
 
 public:
     virtual ~OKeyFilter();
-    virtual bool filter( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
+    /**
+     * Append filter to the secondary list.
+     * @param aFilter a filter to append
+     * @see addPreHandler
+     */
+    virtual void addHandler(QWSServer::KeyboardFilter*)=0;
+    /**
+     * Remove the specified filter from list and give back ownership.
+     * @param aFilter a filter to remove
+     * @see remPreHandler
+     */
+    virtual void remHandler(QWSServer::KeyboardFilter*)=0;
 
-    void addHandler(QWSServer::KeyboardFilter*);
-    void remHandler(QWSServer::KeyboardFilter*);
-
+    /**
+     * Returns a handler to an instance of OKeyFilter
+     * @return a pointer to a working OKeyFilter
+     */
     static OKeyFilter*inst();
 };
 

@@ -33,17 +33,28 @@ _;:,     .>    :=|.         This program is free software; you can
 namespace Opie {
 namespace Core {
 
-QValueList<QWSServer::KeyboardFilter*> OKeyFilter::filterList;
-QValueList<QWSServer::KeyboardFilter*> OKeyFilter::preFilterList;
+class OKeyFilterPrivate:public OKeyFilter, QWSServer::KeyboardFilter
+{
+    static QValueList<QWSServer::KeyboardFilter*> filterList;
+    static QValueList<QWSServer::KeyboardFilter*> preFilterList;
+protected:
+    OKeyFilterPrivate(const OKeyFilterPrivate&):OKeyFilter(),QWSServer::KeyboardFilter(){};
+    virtual void addPreHandler(QWSServer::KeyboardFilter*);
+    virtual void remPreHandler(QWSServer::KeyboardFilter*);
+
+public:
+    OKeyFilterPrivate();
+    virtual ~OKeyFilterPrivate();
+    virtual bool filter( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
+    virtual void addHandler(QWSServer::KeyboardFilter*);
+    virtual void remHandler(QWSServer::KeyboardFilter*);
+};
+
+QValueList<QWSServer::KeyboardFilter*> OKeyFilterPrivate::filterList;
+QValueList<QWSServer::KeyboardFilter*> OKeyFilterPrivate::preFilterList;
 
 OKeyFilter::OKeyFilter()
-    :QWSServer::KeyboardFilter()
 {
-    filterList.clear();
-    preFilterList.clear();
-    if ( isQWS( ) ) {
-        QWSServer::setKeyboardFilter ( this );
-    }
 }
 
 OKeyFilter::~OKeyFilter()
@@ -54,12 +65,12 @@ OKeyFilter* OKeyFilter::inst()
 {
     static OKeyFilter*ofilter = 0;
     if (!ofilter) {
-        ofilter = new OKeyFilter;
+        ofilter = new OKeyFilterPrivate;
     }
     return ofilter;
 }
 
-bool OKeyFilter::filter( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat )
+bool OKeyFilterPrivate::filter( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat )
 {
     QValueList<QWSServer::KeyboardFilter*>::Iterator iter;
     for (iter=preFilterList.begin();iter!=preFilterList.end();++iter) {
@@ -75,7 +86,7 @@ bool OKeyFilter::filter( int unicode, int keycode, int modifiers, bool isPress, 
     return false;
 }
 
-void OKeyFilter::addHandler(QWSServer::KeyboardFilter*aF)
+void OKeyFilterPrivate::addHandler(QWSServer::KeyboardFilter*aF)
 {
     if (filterList.find(aF)!=filterList.end()) {
         return;
@@ -84,7 +95,7 @@ void OKeyFilter::addHandler(QWSServer::KeyboardFilter*aF)
     filterList.append(aF);
 }
 
-void OKeyFilter::remHandler(QWSServer::KeyboardFilter*aF)
+void OKeyFilterPrivate::remHandler(QWSServer::KeyboardFilter*aF)
 {
     QValueList<QWSServer::KeyboardFilter*>::Iterator iter;
     if ( (iter=filterList.find(aF))==filterList.end() ) {
@@ -94,7 +105,7 @@ void OKeyFilter::remHandler(QWSServer::KeyboardFilter*aF)
     filterList.remove(iter);
 }
 
-void OKeyFilter::addPreHandler(QWSServer::KeyboardFilter*aF)
+void OKeyFilterPrivate::addPreHandler(QWSServer::KeyboardFilter*aF)
 {
     if (preFilterList.find(aF)!=preFilterList.end()) {
         return;
@@ -103,7 +114,7 @@ void OKeyFilter::addPreHandler(QWSServer::KeyboardFilter*aF)
     preFilterList.append(aF);
 }
 
-void OKeyFilter::remPreHandler(QWSServer::KeyboardFilter*aF)
+void OKeyFilterPrivate::remPreHandler(QWSServer::KeyboardFilter*aF)
 {
     QValueList<QWSServer::KeyboardFilter*>::Iterator iter;
     if ( (iter=preFilterList.find(aF))==preFilterList.end() ) {
@@ -111,6 +122,20 @@ void OKeyFilter::remPreHandler(QWSServer::KeyboardFilter*aF)
     }
     odebug << "removing a preferred keyboard filter handler"<<oendl;
     preFilterList.remove(iter);
+}
+
+OKeyFilterPrivate::OKeyFilterPrivate()
+    :OKeyFilter(),QWSServer::KeyboardFilter()
+{
+    filterList.clear();
+    preFilterList.clear();
+    if ( isQWS( ) ) {
+        QWSServer::setKeyboardFilter ( this );
+    }
+}
+
+OKeyFilterPrivate::~OKeyFilterPrivate()
+{
 }
 
 /* namespace Core */
