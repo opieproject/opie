@@ -1,6 +1,6 @@
 /*
                =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 Robert Griebl <sandman@handhelds.org>
+             .=l.            Copyright (c) 2002 Robert Griebl <sandman@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This file is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or modify it under
@@ -15,7 +15,7 @@
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
 ..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:       
+++=   -.     .`     .:
  :     =  ...= . :.=-        You should have received a copy of the GNU
  -.   .:....=;==+<;          General Public License along with this file;
   -_. . .   )=.  =           see the file COPYING. If not, write to the
@@ -37,13 +37,14 @@ class SampleView;
 namespace Opie {class OColorButton;}
 class QPushButton;
 class QCheckBox;
+class QSpinBox;
 
 
 class TabDialog : public QDialog {
 	Q_OBJECT
 public:
 	TabDialog ( const QPixmap *tabicon, const QString &tabname, TabConfig &cfg, QWidget *parent = 0, const char *dname = 0, bool modal = false, WFlags = 0 );
-	virtual ~TabDialog ( );	
+	virtual ~TabDialog ( );
 
 public slots:
 	virtual void accept ( );
@@ -61,19 +62,20 @@ private:
 	QWidget *createBgTab ( QWidget *parent );
 	QWidget *createFontTab ( QWidget *parent );
 	QWidget *createIconTab ( QWidget *parent );
-	
-	
+
+
 private:
 	SampleView *m_sample;
 	QButtonGroup *m_iconsize;
 	Opie::Ui::OFontSelector *m_fontselect;
 	Opie::OColorButton *m_solidcolor;
 	Opie::OColorButton *m_iconcolor;
+	QSpinBox *m_iconcolumns;
 	QPushButton *m_imagebrowse;
-	QString m_bgimage;	
+	QString m_bgimage;
 	QButtonGroup *m_bgtype;
 	QCheckBox *m_fontuse;
-	
+
 	TabConfig &m_tc;
 };
 

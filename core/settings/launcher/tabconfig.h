@@ -43,6 +43,7 @@ struct TabConfig {
 	QString		m_last_directory;
 	QString        m_bg_image;
 	QString        m_bg_color;
+    int            m_iconcolumns;
 	QString        m_text_color;
 	bool           m_font_use;
 	QString        m_font_family;

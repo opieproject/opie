@@ -135,6 +135,7 @@ void TabsSettings::readTabSettings ( Config &cfg )
 	global_def. m_bg_type     = TabConfig::Ruled;
 	global_def. m_bg_image    = "launcher/opie-background";
 	global_def. m_bg_color    = colorGroup ( ). color ( QColorGroup::Base ). name ( );
+	global_def. m_iconcolumns = 0; // automatic
 	global_def. m_text_color  = colorGroup ( ). color ( QColorGroup::Text ). name ( );
 	global_def. m_font_use    = false;
 	global_def. m_font_family = font ( ). family ( );
@@ -168,6 +169,7 @@ void TabsSettings::readTabSettings ( Config &cfg )
 		tc. m_bg_image = cfg. readEntry ( "BackgroundImage", tc. m_bg_image );
 		tc. m_last_directory = cfg2.readEntry( "DefaultDir", "" );
 		tc. m_bg_color = cfg. readEntry ( "BackgroundColor", tc. m_bg_color );
+		tc. m_iconcolumns = cfg. readNumEntry ( "Columns", tc. m_iconcolumns );
 		tc. m_text_color = cfg. readEntry ( "TextColor", tc. m_text_color );
 		QStringList f = cfg. readListEntry ( "Font", ',' );
 		if ( f. count ( ) == 4 ) {
@@ -230,6 +232,7 @@ void TabsSettings::accept ( )
 
 		cfg. writeEntry ( "BackgroundImage", tc. m_bg_image );
 		cfg. writeEntry ( "BackgroundColor", tc. m_bg_color );
+		cfg. writeEntry ( "Columns", tc. m_iconcolumns );
 		cfg. writeEntry ( "TextColor", tc. m_text_color );
 		cfg2. writeEntry ( "DefaultDir", tc.m_last_directory );
 

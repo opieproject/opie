@@ -3,6 +3,7 @@
 	New Features
 	------------
 	* Number of icon columns in Launcher is customizable through Launcher.conf (hrw,zecke,mickeyl)
+	* Number of icon columns in Launcher is customizable through LauncherSettings (mickeyl)
 
 	Fixed Bugs
 	----------

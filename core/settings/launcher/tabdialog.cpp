@@ -51,6 +51,7 @@
 #include <qbuttongroup.h>
 #include <qwhatsthis.h>
 #include <qcheckbox.h>
+#include <qspinbox.h>
 
 
 using namespace Opie::Ui;
@@ -79,6 +80,8 @@ public:
 private:
     QPixmap m_large, m_small;
 };
+
+//FIXME: Why not derive SampleView from LauncherView ???
 
 class SampleView : public QIconView {
 public:
@@ -194,6 +197,7 @@ public:
         QIconView::setItemTextPos( pos );
     }
 
+    //FIXME: Add per-tab column handling from launcherview.cpp
     void calculateGrid ( ItemTextPos pos )
     {
         int dw = QApplication::desktop ( )-> width ( );
@@ -416,17 +420,22 @@ QWidget *TabDialog::createIconTab ( QWidget *parent )
     rb = new QRadioButton( tr( "Large" ), tab, "iconlarge" );
     m_iconsize-> insert ( rb, TabConfig::Icon );
     gridLayout-> addWidget( rb, 1, 1 );
-
     connect ( m_iconsize, SIGNAL( clicked(int)), this, SLOT( iconSizeClicked(int)));
-
     gridLayout-> addRowSpacing ( 2, 8 );
 
     label = new QLabel ( tr( "Color:" ), tab );
     gridLayout-> addWidget ( label, 3, 0 );
+    gridLayout-> addRowSpacing ( 3, 8 );
 
     m_iconcolor = new Opie::OColorButton ( tab, QColor ( m_tc. m_text_color ) );
     connect ( m_iconcolor, SIGNAL( colorSelected(const QColor&)), this, SLOT( iconColorClicked(const QColor&)));
     gridLayout-> addWidget ( m_iconcolor, 3, 1, AlignLeft );
+
+    label = new QLabel( tr( "Columns:" ), tab );
+    gridLayout->addWidget( label, 4, 0 );
+    m_iconcolumns = new QSpinBox( 0, 10, 1, tab, "iconspinbox" );
+    m_iconcolumns->setSpecialValueText( tr( "Automatic" ) );
+    gridLayout->addWidget( m_iconcolumns, 4, 1, AlignLeft );
 
     vertLayout-> addStretch ( 10 );
 
@@ -506,6 +515,7 @@ void TabDialog::accept ( )
     m_tc. m_view = (TabConfig::ViewMode) m_iconsize-> id ( m_iconsize-> selected ( ));
     m_tc. m_bg_type = (TabConfig::BackgroundType) m_bgtype-> id ( m_bgtype-> selected ( ));
     m_tc. m_bg_color = m_solidcolor-> color ( ). name ( );
+    m_tc. m_iconcolumns = m_iconcolumns-> value( );
     m_tc. m_bg_image = m_bgimage;
     m_tc. m_text_color = m_iconcolor-> color ( ). name ( );
 
