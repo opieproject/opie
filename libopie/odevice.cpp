@@ -549,11 +549,19 @@ void ODeviceZaurus::init ( )
 		d-> m_system = OSYSTEM_OpenZaurus;
 
 		f. close ( );
+
+		f. setName ( "/etc/oz_version" );
+		if ( f. open ( IO_ReadOnly )) { 
+			QTextStream ts ( &f );
+			d-> m_sysverstr = ts. readLine ( ). mid ( 10 );
+			f. close ( );
+		}
 	}
 	else {
 		d-> m_systemstr = "Zaurus";
 		d-> m_system = OSYSTEM_Zaurus;
 	}
+
 
 	d-> m_leds [0] = OLED_Off;
 }
