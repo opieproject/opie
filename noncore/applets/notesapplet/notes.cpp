@@ -87,6 +87,7 @@ NotesControl::NotesControl( QWidget *parent, const char *name )
     loaded=false;
     edited=false;
     doPopulate=true;
+    isNew=false;
     QVBoxLayout *vbox = new QVBoxLayout( this,0, -1, "Vlayout" );
     QHBoxLayout *hbox = new QHBoxLayout( this, 0, -1, "HLayout" );
 
@@ -187,8 +188,16 @@ void NotesControl::slotDeleteButton() {
                 cfg.write();
                 DocLnk nf(selectedText);
                 nf.removeFiles();
+                QString fi=QPEApplication::documentDir()+"/text/plain/"+selectedText+".desktop";
+                qDebug(fi);
+
+                QFile f( fi);
+                if( !f.remove()) qDebug(".desktop file not removed");
+                
             }
         }
+        view->clear();
+        
         populateBox();
     }
 }
@@ -196,7 +205,9 @@ void NotesControl::slotDeleteButton() {
 void NotesControl::slotNewButton() {
     if(edited) save();
     view->clear();
-    view->setFocus();    
+    view->setFocus();
+    edited=false;
+    isNew=false;
 }
 
 void NotesControl::slotBeamButton() {
@@ -269,8 +280,9 @@ void NotesControl::save() {
     Config cfg("Notes");
     cfg.setGroup("Docs");
     if( edited) {
+//        qDebug("is edited");
         QString rt = view->text();
-        if(!rt.isEmpty()) {
+        if( rt.length()>1) {
             QString pt = rt.simplifyWhiteSpace();
             int i = pt.find( ' ' );
             QString docname = pt;
@@ -286,7 +298,7 @@ void NotesControl::save() {
                 docname = docname.left(40);
             if ( docname.isEmpty() )
                 docname = "Empty Text";
-            qDebug(docname);
+//            qDebug(docname);
 
             if( oldDocName != docname) {
                 int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
@@ -296,14 +308,18 @@ void NotesControl::save() {
                 cfg.writeEntry("NumberOfFiles", noOfFiles+1 );
                 cfg.write();
             }
-            else
-                qDebug("oldname equals docname");
+//             else
+//                 qDebug("oldname equals docname");
+
+            
             doc = new DocLnk(docname);
 
+            if(QFile(doc->linkFile()).exists())
+               qDebug("puppie");
             doc->setType("text/plain");
-            doc->setFile(docname);
+            doc->setFile(QDir::homeDirPath()+"/"+docname);
             doc->setName(docname);
-    
+
             FileManager fm;
             if ( !fm.saveFile( *doc, rt ) ) {
             }
