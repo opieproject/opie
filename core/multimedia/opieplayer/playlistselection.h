@@ -32,7 +32,6 @@ public:
     ~PlayListSelection();
 
     const DocLnk *current(); // retrieve the current playlist entry (media file link)
-
 public slots:
     void addToSelection( const DocLnk & ); // Add a media file to the playlist
     void removeSelected();   // Remove a media file from the playlist

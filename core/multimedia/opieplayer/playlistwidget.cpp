@@ -418,6 +418,7 @@ void PlayListWidget::setDocument(const QString& fileref) {
         QMessageBox::critical( 0, tr( "Invalid File" ), tr( "There was a problem in getting the file." ) );
         return;
     }
+    if(fileref.find("playlist",0,TRUE) == -1) {
     addToSelection( DocLnk( fileref ) );
     d->setDocumentUsed = TRUE;
     qApp->processEvents();
@@ -425,6 +426,13 @@ void PlayListWidget::setDocument(const QString& fileref) {
     qApp->processEvents();
     mediaPlayerState->setPlaying( TRUE );
     d->selectedFiles->removeSelected( );
+    } else {
+        loadList(DocLnk(fileref));
+        d->selectedFiles->first();
+//      mediaPlayerState->setPlaying( TRUE );
+//      mediaPlayerState->setPlaying( FALSE );
+
+    }
 }
 
 
@@ -529,30 +537,21 @@ void PlayListWidget::saveList() {
     if( fileDlg->result() == 1 ) {
         filename = fileDlg->LineEdit1->text();//+".playlist";
         qDebug("saving playlist "+filename+".playlist");
-
-//          DocLnk *lnk;
-//          lnk.setName( filename); //sets file name
-//  //        lnk.setComment(title);
-//          lnk.setFile( filename+".playlist"); //sets File property
-//          lnk.setType("player/plain");// hey is this a REGISTERED mime type?!?!? ;D
-//          lnk.setIcon("MPEGPlayer");
-//          if(!lnk.writeLink())
-//              qDebug("Writing doclink did not work");
-        
         Config cfg( filename +".playlist");
         writeConfig( cfg );
+        DocLnk lnk;
+        lnk.setName( filename); //sets file name
+//        lnk.setComment( "");
+        lnk.setFile(QPEApplication::qpeDir()+"Settings/"+filename+".playlist.conf"); //sets File property
+        lnk.setType("playlist/plain");// hey is this a REGISTERED mime type?!?!? ;D
+        lnk.setIcon("mpegplayer/playlist2");
+        if(!lnk.writeLink())
+            qDebug("Writing doclink did not work");
     }
-    DocLnk lnk;
-    lnk.setName( filename); //sets file name
-//          lnk.setComment(title);
-    lnk.setFile(QPEApplication::qpeDir()+"Settings/"+filename+".playlist.conf"); //sets File property
-    lnk.setType("playlist/plain");// hey is this a REGISTERED mime type?!?!? ;D
-    lnk.setIcon("MPEGPlayer");
-    if(!lnk.writeLink())
-        qDebug("Writing doclink did not work");
 
     if(fileDlg)
         delete fileDlg;
+
 }
 
 

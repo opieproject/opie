@@ -50,14 +50,16 @@ private:
 PlayListSelection::PlayListSelection( QWidget *parent, const char *name )
     : QListView( parent, name )
 {
+    qDebug("starting playlistselector");
 // #ifdef USE_PLAYLIST_BACKGROUND
-    setStaticBackground( TRUE );
-//    setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/background" ) );
-    setBackgroundPixmap( Resource::loadPixmap( "opielogo" ) );
+//    setStaticBackground( TRUE );
+//      setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/background" ) );
+
+//    setBackgroundPixmap( Resource::loadPixmap( "opielogo" ) );
 // #endif
 //      addColumn("Title",236);
 //      setAllColumnsShowFocus( TRUE );
-      addColumn( tr( "Playlist Selection" ) );
+     addColumn( tr( "Playlist Selection" ) );
     header()->hide();
     setSorting( -1, FALSE );
 }
@@ -69,11 +71,12 @@ PlayListSelection::~PlayListSelection() {
 
 // #ifdef USE_PLAYLIST_BACKGROUND
 void PlayListSelection::drawBackground( QPainter *p, const QRect &r ) {
-    p->fillRect( r, QBrush( white ) );
-//    QImage logo = Resource::loadImage( "mpegplayer/background" );
-    QImage logo = Resource::loadImage( "opielogo" );
-    if ( !logo.isNull() )
-  p->drawImage( (width() - logo.width()) / 2, (height() - logo.height()) / 2, logo );
+//  qDebug("drawBackground");
+//   p->fillRect( r, QBrush( white ) );
+//      QImage logo = Resource::loadImage( "mpegplayer/background" );
+//  //      QImage logo = Resource::loadImage( "opielogo" );
+//        if ( !logo.isNull() )
+//      p->drawImage( (width() - logo.width()) / 2, (height() - logo.height()) / 2, logo );
 }
 // #endif
 
