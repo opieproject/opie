@@ -759,7 +759,8 @@ bool TextEdit::save()
                 qDebug("regular save file");
                 QFile f(file);
                  if( f.open(IO_WriteOnly)) {
-                     f.writeBlock(rt,rt.length());
+                     QCString crt = rt.utf8();
+                     f.writeBlock(crt,crt.length());
                  } else {
                      QMessageBox::message("Text Edit","Write Failed");
                  return false;
