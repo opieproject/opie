@@ -1992,15 +1992,15 @@ void LiquidStyle::drawArrow(QPainter *p, Qt::ArrowType type, bool on, int x,
 void LiquidStyle::drawMenuBarItem(QPainter *p, int x, int y, int w, int h,
                             QMenuItem *mi, QColorGroup &g, bool /*enabled*/, bool active )
 {	
-    x -= 2; // Bug in Qt/E 
-    y -= 2;
-    w += 2;
-    h += 2;
+    if(active){
+        x -= 2; // Bug in Qt/E 
+        y -= 2;
+        w += 2;
+        h += 2;
+    }
 
     p-> fillRect ( x, y, w, h, g.brush(QColorGroup::Background));
    
-   w -= 2;
-    
     if(menuHandler->useShadowText()){
         QColor shadow;
         if(p->device() && p->device()->devType() == QInternal::Widget &&
