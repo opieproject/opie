@@ -29,6 +29,12 @@ static int *opie_block_style_p = 0;
 
 extern "C" {
 
+extern void __gmon_start ( ) __attribute(( weak ));
+
+extern void __gmon_start__ ( ) 
+{
+}
+
 static void *resolve_symbol ( const char *sym )
 {
 	void *adr = ::dlsym ( RTLD_NEXT, sym );
