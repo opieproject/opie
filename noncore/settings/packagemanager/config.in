@@ -1,0 +1,4 @@
+  config PACKAGEMANAGER
+    boolean "opie-packagemanager (package management client)"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

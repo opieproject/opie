@@ -1,0 +1,40 @@
+/************************************************************************
+/*
+/*                       Opie - Package Manager
+/*                      ========================
+/*                           Version 0.1.0
+/*
+/*                A package management client for Opie
+/*
+/************************************************************************
+
+-------------------------------------------------------
+ Release Notes for Opie-PackageManager - January, 2004
+-------------------------------------------------------
+
+======================
+=       To-do        =
+======================
+
+- See $OPIEDIR/noncore/settings/packagemanager/TODO for more info.
+
+======================
+=         Run        =
+======================
+
+- In order to use opie-packagemanager, ipkg must be installed and
+  configured on the system.
+
+======================
+=       Credits      =
+======================
+
+- Opie-PackageManager is (C) 2003-2004 Dan Williams
+
+======================
+=        Links       =
+======================
+
+- Opie Project:             http://opie.handhelds.org
+- OpenZaurus Project:       http://openzaurus.org
+- Familiar Project:         http://familiar.handhelds.org

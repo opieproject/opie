@@ -1,0 +1,4 @@
+2004-01-nn Dan Williams <drw@handhelds.org>
+
+	* Released version 0.1.0
+	* Initial check-in of new package management client to eventually replace AQPkg

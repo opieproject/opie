@@ -1,0 +1,10 @@
+Package: opie-packagemanager
+Files: plugins/application/libpackagemanager.so* bin/packagemanager pics/packagemanager apps/Settings/packagemanager.desktop
+Priority: optional
+Section: Settings
+Depends: task-opie-minimal
+Replaces: packagemanager
+Architecture: arm
+Maintainer: Dan Williams (drw@handhelds.org)
+Description: Opie package management client
+Version: 0.1.0

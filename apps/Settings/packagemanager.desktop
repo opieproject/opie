@@ -1,0 +1,8 @@
+[Desktop Entry]
+Exec=packagemanager
+Icon=packagemanager/packagemanager
+MimeType=application/ipkg
+MimeTypeIcons=packagemanager/ipkg
+Type=Application
+Name=Package Manager
+Comment=Opie package management client
