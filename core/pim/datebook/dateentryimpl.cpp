@@ -43,6 +43,7 @@
 #include "timepicker.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 
 /*
  *  Constructs a DateEntry which is a child of 'parent', with the
@@ -57,7 +58,8 @@ DateEntry::DateEntry( bool startOnMonday, const QDateTime &start,
 		      const char* name )
     : DateEntryBase( parent, name ),
       ampm( whichClock ),
-      startWeekOnMonday( startOnMonday )
+      startWeekOnMonday( startOnMonday ),
+      m_showStart(true)
 {
     init();
     setDates(start,end);
@@ -113,7 +115,9 @@ DateEntry::DateEntry( bool startOnMonday, const Event &event, bool whichClock,
                       QWidget* parent,  const char* name )
     : DateEntryBase( parent, name ),
       ampm( whichClock ),
-      startWeekOnMonday( startOnMonday )
+      startWeekOnMonday( startOnMonday ),
+      m_showStart(true)
+
 {
     init();
     setDates(event.start(),event.end());

@@ -60,7 +60,7 @@
             </property>
         </widget>
         <widget>
-            <class>ClickableLabel</class>
+            <class>OClickableLabel</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>label</cstring>
@@ -105,7 +105,7 @@
             </property>
         </widget>
         <widget>
-            <class>ClickableLabel</class>
+            <class>OClickableLabel</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>add</cstring>
@@ -122,8 +122,8 @@
 </widget>
 <customwidgets>
     <customwidget>
-        <class>ClickableLabel</class>
-        <header location="local">clickablelabel.h</header>
+        <class>OClickableLabel</class>
+        <header location="global">opie/oclickablelabel.h</header>
         <sizehint>
             <width>-1</width>
             <height>-1</height>

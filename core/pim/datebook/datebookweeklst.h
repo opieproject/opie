@@ -10,7 +10,7 @@
 #include "datebookweeklstheader.h"
 #include "datebookweeklstdayhdr.h"
 
-#include "clickablelabel.h"
+#include <opie/oclickablelabel.h>
 
 class QDateTime;
 class DateBookDB;
@@ -55,7 +55,7 @@ private:
     QDate date;
 };
 
-class DateBookWeekLstEvent: public ClickableLabel 
+class DateBookWeekLstEvent: public OClickableLabel 
 {
   Q_OBJECT
 public:

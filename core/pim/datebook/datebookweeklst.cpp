@@ -143,7 +143,7 @@ DateBookWeekLstEvent::DateBookWeekLstEvent(const EffectiveEvent &ev,
 					   QWidget* parent, 
 					   const char* name, 
 					   WFlags fl) :
-    ClickableLabel(parent,name,fl),
+    OClickableLabel(parent,name,fl),
     event(ev)
 {
     char s[10];

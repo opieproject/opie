@@ -1,7 +1,7 @@
-#include "clickablelabel.h"
+#include "oclickablelabel.h"
 #include <stdio.h>
 
-ClickableLabel::ClickableLabel(QWidget* parent, 
+OClickableLabel::OClickableLabel(QWidget* parent, 
 			       const char* name, 
 			       WFlags fl) :
   QLabel(parent,name,fl)
@@ -13,11 +13,11 @@ ClickableLabel::ClickableLabel(QWidget* parent,
     setFrameShadow(Sunken);
 }
 
-void ClickableLabel::setToggleButton(bool t) {
+void OClickableLabel::setToggleButton(bool t) {
     isToggle=t;
 }
 
-void ClickableLabel::mousePressEvent( QMouseEvent *e ) {
+void OClickableLabel::mousePressEvent( QMouseEvent *e ) {
     if (isToggle && isDown) {
 	showState(false);
     } else {
@@ -25,7 +25,7 @@ void ClickableLabel::mousePressEvent( QMouseEvent *e ) {
     }
 }
 
-void ClickableLabel::mouseReleaseEvent( QMouseEvent *e ) {
+void OClickableLabel::mouseReleaseEvent( QMouseEvent *e ) {
     if (rect().contains(e->pos()) && isToggle) isDown=!isDown;
 
     if (isToggle && isDown) {
@@ -42,7 +42,7 @@ void ClickableLabel::mouseReleaseEvent( QMouseEvent *e ) {
     }
 }
 
-void ClickableLabel::mouseMoveEvent( QMouseEvent *e ) {
+void OClickableLabel::mouseMoveEvent( QMouseEvent *e ) {
     if (rect().contains(e->pos())) {
 	if (isToggle && isDown) {
 	    showState(false);
@@ -58,7 +58,7 @@ void ClickableLabel::mouseMoveEvent( QMouseEvent *e ) {
     }
 }
 
-void ClickableLabel::showState(bool on) {
+void OClickableLabel::showState(bool on) {
   if (on) {
     //setFrameShape(Panel);
     setInverted(true);
@@ -71,7 +71,7 @@ void ClickableLabel::showState(bool on) {
   repaint();
 }
 
-void ClickableLabel::setInverted(bool on) {
+void OClickableLabel::setInverted(bool on) {
     if ( (!textInverted && on) || (textInverted && !on) ) {
 	QPalette pal=palette();
 	QColor col=pal.color(QPalette::Normal, QColorGroup::Foreground);
@@ -82,7 +82,7 @@ void ClickableLabel::setInverted(bool on) {
     }
 }
 
-void ClickableLabel::setOn(bool on) {
+void OClickableLabel::setOn(bool on) {
   isDown=on;
   showState(isDown);
 }

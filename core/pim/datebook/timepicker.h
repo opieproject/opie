@@ -3,7 +3,7 @@
 
 #include <qwidget.h>
 #include <qvaluelist.h>
-#include "clickablelabel.h"
+#include <opie/oclickablelabel.h>
 #include <qdatetime.h>
 
 class TimePicker: public QWidget {
@@ -16,8 +16,8 @@ class TimePicker: public QWidget {
     void setMinute(int m);
 
  private:
-    QValueList<ClickableLabel *> hourLst;
-    QValueList<ClickableLabel *> minuteLst;
+    QValueList<OClickableLabel *> hourLst;
+    QValueList<OClickableLabel *> minuteLst;
     QTime tm;
 
  private slots:

@@ -3,11 +3,11 @@
 
 #include <qlabel.h> 
 
-class ClickableLabel: public QLabel 
+class OClickableLabel: public QLabel 
 {
   Q_OBJECT
 public:
-    ClickableLabel(QWidget* parent = 0, const char* name = 0, 
+    OClickableLabel(QWidget* parent = 0, const char* name = 0, 
 		   WFlags fl = 0);
     void setToggleButton(bool t);
  protected:

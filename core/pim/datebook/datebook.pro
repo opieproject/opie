@@ -11,7 +11,6 @@ HEADERS	= datebookday.h \
 	  datebookweeklst.h \
 	  datebookweekheaderimpl.h \
 	  repeatentry.h \
-	  clickablelabel.h \
 	  timepicker.h
 
 SOURCES	= main.cpp \
@@ -24,7 +23,6 @@ SOURCES	= main.cpp \
 	  datebookweeklst.cpp \
 	  datebookweekheaderimpl.cpp \
 	  repeatentry.cpp \
-	  clickablelabel.cpp \
 	  timepicker.cpp
 
 INTERFACES	= dateentry.ui \
@@ -37,7 +35,7 @@ INTERFACES	= dateentry.ui \
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lopie
 
 TARGET		= datebook
 

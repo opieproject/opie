@@ -3,7 +3,6 @@
 #include <qbuttongroup.h>
 #include <qtoolbutton.h>
 #include <qlayout.h>
-#include "clickablelabel.h"
 #include <qstring.h>
 #include <stdio.h>
 
@@ -13,7 +12,7 @@ TimePicker::TimePicker(QWidget* parent, const char* name,
 {
   QVBoxLayout *vbox=new QVBoxLayout(this);
 
-  ClickableLabel *r;
+  OClickableLabel *r;
   QString s;
 
   // Hour Row
@@ -23,7 +22,7 @@ TimePicker::TimePicker(QWidget* parent, const char* name,
   
   
   for (int i=0; i<24; i++) {
-    r=new ClickableLabel(row);
+    r=new OClickableLabel(row);
     hourLst.append(r);
     s.sprintf("%.2d",i);
     r->setText(s);
@@ -46,7 +45,7 @@ TimePicker::TimePicker(QWidget* parent, const char* name,
   vbox->addWidget(row);
   
   for (int i=0; i<60; i+=5) {
-    r=new ClickableLabel(row);
+    r=new OClickableLabel(row);
     minuteLst.append(r);
     s.sprintf("%.2d",i);
     r->setText(s);
@@ -60,10 +59,10 @@ TimePicker::TimePicker(QWidget* parent, const char* name,
 
 void TimePicker::slotHour(bool b) {
 
-  ClickableLabel *r = (ClickableLabel *) sender();
+  OClickableLabel *r = (OClickableLabel *) sender();
 
   if (b) {
-    QValueListIterator<ClickableLabel *> it;
+    QValueListIterator<OClickableLabel *> it;
     for (it=hourLst.begin(); it!=hourLst.end(); it++) {
       if (*it != r) (*it)->setOn(false);
       else tm.setHMS((*it)->text().toInt(), tm.minute(), 0);
@@ -77,10 +76,10 @@ void TimePicker::slotHour(bool b) {
 
 void TimePicker::slotMinute(bool b) {
 
-  ClickableLabel *r = (ClickableLabel *) sender();
+  OClickableLabel *r = (OClickableLabel *) sender();
 
   if (b) {
-    QValueListIterator<ClickableLabel *> it;
+    QValueListIterator<OClickableLabel *> it;
     for (it=minuteLst.begin(); it!=minuteLst.end(); it++) {
       if (*it != r) (*it)->setOn(false);
       else tm.setHMS(tm.hour(),(*it)->text().toInt(), 0);
@@ -97,7 +96,7 @@ void TimePicker::setMinute(int m) {
   QString minute;
   minute.sprintf("%.2d",m);
 
-  QValueListIterator<ClickableLabel *> it;
+  QValueListIterator<OClickableLabel *> it;
   for (it=minuteLst.begin(); it!=minuteLst.end(); it++) {
     if ((*it)->text() == minute) (*it)->setOn(true);
     else (*it)->setOn(false);
@@ -111,7 +110,7 @@ void TimePicker::setHour(int h) {
   QString hour;
   hour.sprintf("%.2d",h);
 
-  QValueListIterator<ClickableLabel *> it;
+  QValueListIterator<OClickableLabel *> it;
   for (it=hourLst.begin(); it!=hourLst.end(); it++) {
     if ((*it)->text() == hour) (*it)->setOn(true);
     else (*it)->setOn(false);
