@@ -1,5 +1,5 @@
 
-#include "../ipc/client/ocopclient.h"
+#include "../../ipc/client/ocopclient.h"
 
 #include <qcopchannel_qws.h>
 
@@ -27,9 +27,9 @@ bool QCopChannel::isRegistered( const QCString& chan) {
 }
 bool QCopChannel::send( const QCString& chan, const QCString& msg ) {
     QByteArray ar(0);
-    return return sendLocally(chan, msg, ar );
+    return sendLocally(chan, msg, ar );
 }
-bool QCString::send( const QCString& chan, const QCString& msg,
+bool QCopChannel::send( const QCString& chan, const QCString& msg,
                      const QByteArray& ar ) {
     return sendLocally( chan, msg, ar );
 }
@@ -42,5 +42,5 @@ bool QCopChannel::sendLocally( const QCString& chan, const QCString& msg,
 }
 void QCopChannel::rev( const QCString& chan, const QCString& msg, const QByteArray& ar ) {
     if (chan == m_chan )
-        emit received(chan, msg, ar );
+        emit received(msg, ar );
 }

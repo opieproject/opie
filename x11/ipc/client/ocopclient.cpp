@@ -21,7 +21,7 @@ OCOPClient::OCOPClient( const QString& path, QObject* obj )
 OCOPClient::~OCOPClient() {
     close( m_socket );
 }
-void OCOPClient::init( const QCString& str ) {
+void OCOPClient::init( const QCString&  ) {
     struct sockaddr_un unix_adr;
     if ( (m_socket = socket(PF_UNIX, SOCK_STREAM, 0) ) < 0 ) {
         qWarning("could not socket");
@@ -62,7 +62,7 @@ void OCOPClient::newData() {
     case OCOPPacket::Return:
     case OCOPPacket::Signal:
         /* is Registered should be handled sync */
-    case OCOPPacket::isRegistered:
+    case OCOPPacket::IsRegistered:
         break;
         /* emit the signal */
     case OCOPPacket::Call:
@@ -70,7 +70,7 @@ void OCOPClient::newData() {
         break;
     }
 }
-OCOPPacket OCOPClient::packet() {
+OCOPPacket OCOPClient::packet() const{
     QCString chan;
     QCString func;
     QByteArray ar;
@@ -82,7 +82,7 @@ OCOPPacket OCOPClient::packet() {
         read(m_socket, func.data(), head.funclen );
         read(m_socket, ar.data(), head.datalen );
     }
-    OCOPPacket pack(head.type, chan,  func, data );
+    OCOPPacket pack(head.type, chan,  func, ar );
     return pack;
 }
 /*
@@ -90,7 +90,7 @@ OCOPPacket OCOPClient::packet() {
  * so we send and go on read
  * this will be blocked
  */
-bool OCOPClient::isRegistered( const QCString& chan ) {
+bool OCOPClient::isRegistered( const QCString& chan ) const{
     /* should I disconnect the socket notfier? */
     OCOPPacket packe(OCOPPacket::IsRegistered, chan );
     OCOPHead head = packe.head();
@@ -103,7 +103,7 @@ bool OCOPClient::isRegistered( const QCString& chan ) {
     if ( pack.channel() == chan ) {
         QCString func = pack.header();
         if (func[0] == 1 )
-            return;
+            return true;
     }
 
     return false;
@@ -112,15 +112,15 @@ void OCOPClient::send( const QCString& chan, const QCString& fu, const QByteArra
     OCOPPacket pack(OCOPPacket::Call, chan, fu, arr );
     call( pack );
 }
-void OCOPClient::addChannel(const QCString& channet) {
+void OCOPClient::addChannel(const QCString& channel) {
     OCOPPacket pack(OCOPPacket::RegisterChannel, channel );
     call( pack );
 }
 void OCOPClient::delChannel(const QCString& chan ) {
-    OCOPPacket pack(OCOPPacket::UnregisterChannel, channel );
+    OCOPPacket pack(OCOPPacket::UnregisterChannel, chan );
     call( pack );
 }
-void OCOPPacket::call( const OCOPPacket& pack ) {
+void OCOPClient::call( const OCOPPacket& pack ) {
     OCOPHead head = pack.head();
     write(m_socket, &head, sizeof(head) );
     write(m_socket, pack.channel().data(), pack.channel().size() );

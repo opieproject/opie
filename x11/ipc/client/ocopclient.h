@@ -47,7 +47,7 @@ private slots:
     void init(const QCString& pa);
     void newData();
 private:
-    OCOPPacket packet();
+    OCOPPacket packet()const;
     void call( const OCOPPacket& );
 
     QSocketNotifier* m_notify;

@@ -53,8 +53,12 @@ HEADERS	=   ../../library/calendar.h \
             ../../library/windowdecorationinterface.h \
             ../../library/textcodecinterface.h \
             ../../library/imagecodecinterface.h \
+            qt/qcopchannel_qws.h \
 	    qpe/qpeapplication.h \
-	    qpe/fontmanager.h
+	    qpe/fontmanager.h \
+            ../ipc/client/ocopclient.h \
+            ../ipc/common/ocoppacket.h
+
 
 SOURCES	=   ../../library/calendar.cpp \
 	    ../../library/global.cpp \
@@ -106,17 +110,30 @@ SOURCES	=   ../../library/calendar.cpp \
             ../../library/backend/vobject.cpp \
             ../../library/findwidget_p.cpp \
             ../../library/finddialog.cpp \
-            ../../library/lnkproperties.cpp
+            ../../library/lnkproperties.cpp \
+            qt/qcopchannel_qws.cpp \
+            qpe/qpeapplication.cpp \
+            ../ipc/client/ocopclient.cpp \
+            ../ipc/common/ocoppacket.cpp
 
 # Qt 3 compatibility
-qt2:HEADERS += quuid.h qcom.h qlibrary.h qlibrary_p.h
-qt2:SOURCES += quuid.cpp qlibrary.cpp qlibrary_unix.cpp
+HEADERS +=  ../../library/quuid.h \
+             ../../library/qcom.h \
+             ../../library/qlibrary.h  \
+              ../../library/qlibrary_p.h
+
+SOURCES +=  ../../library/quuid.cpp \
+            ../../library/qlibrary.cpp \
+            ../../library/qlibrary_unix.cpp
+
 INCLUDEPATH += $(OPIEDIR)/include backend
 LIBS		+= -ldl -lcrypt -lm
+
 INTERFACES =  ../../library/passwordbase_p.ui \
               ../../library/categoryeditbase_p.ui \
               ../../library/findwidgetbase_p.ui \
               ../../library/lnkpropertiesbase_p.ui
+
 TARGET		= qpe-x11
 DESTDIR		= $(QTDIR)/lib$(PROJMAK)
 # This is set by configure$(OPIEDIR).
