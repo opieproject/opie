@@ -113,7 +113,16 @@ void KJezzball::newGame()
 
 void KJezzball::about()
 {
-	QMessageBox::information( this, "About", "Written by: Stefan Schimanski\nPorted by: Martin Imobersteg\n\nThis program is distributed under\nthe terms of the GPL v2." );
+	QMessageBox::information( this, "About",
+                                  "Written by: Stefan Schimanski\n"
+                                  "Ported by: Martin Imobersteg\n"
+                                  "\n"
+                                  "Click to form walls.\n"
+                                  "Hit space to switch wall direction.\n"
+                                  "Try to reduce total space by 75%.\n"
+                                  "\n"
+                                  "This program is distributed under\n"
+                                  "the terms of the GPL v2." );
 }
 
 void KJezzball::closeGame()
