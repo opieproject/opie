@@ -170,13 +170,14 @@ PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
             this, SLOT(slotClicked(QIconViewItem*)) );
 
     m_view->setArrangement( QIconView::LeftToRight );
+
+    m_mode = cfg->readNumEntry("ListViewMode", 1);
+
+    if (m_mode < 1 || m_mode>3) m_mode = 1;
+
     m_view->setItemTextPos( QIconView::Right );
 
-    int dw = QApplication::desktop()->width();
-    int viewerWidth = dw-style().scrollBarExtent().width();
-    m_view->setGridX( viewerWidth-3*m_view->spacing());
-    m_view->setGridY( fontMetrics().height()*2+40 );
-
+    calculateGrid();
 
     initKeys();
 
@@ -565,19 +566,7 @@ void PIconView::slotChangeMode( int mode ) {
     if ( mode >= 1 && mode <= 3 )
         m_mode = mode;
 
-    QIconView::ItemTextPos pos;
-    switch( m_mode ) {
-    case 2:
-        pos = QIconView::Bottom;
-        break;
-    case 3:
-    case 1:
-    default:
-        pos = QIconView::Right;
-        break;
-    }
-    m_view->setItemTextPos( pos );
-
+    m_cfg->writeEntry("ListViewMode", m_mode);
     calculateGrid();
     slotReloadDir();
 }
@@ -592,7 +581,21 @@ void PIconView::resizeEvent( QResizeEvent* re ) {
 void PIconView::calculateGrid() {
     odebug << "Calc grid: x=" << m_view->gridX() << " y=" << m_view->gridY() << oendl;
     odebug << "Size of view: " << m_view->size() << oendl;
+    int dw = QApplication::desktop()->width();
+    int viewerWidth = dw-style().scrollBarExtent().width();
 
+    QIconView::ItemTextPos pos;
+    switch( m_mode ) {
+    case 2:
+        pos = QIconView::Bottom;
+        break;
+    case 3:
+    case 1:
+    default:
+        pos = QIconView::Right;
+        break;
+    }
+    m_view->setItemTextPos( pos );
     switch (m_mode) {
         case 2:
             m_view->setGridX(50);
@@ -600,14 +603,14 @@ void PIconView::calculateGrid() {
             PPixmapCache::self()->setMaxImages(40);
             break;
         case 3:
-            m_view->setGridX(m_view->width());
+            m_view->setGridX( fontMetrics().width("testimage.jpg")+20);
             m_view->setGridY(8);
             PPixmapCache::self()->setMaxImages(2);
             break;
         case 1:
         default:
-            m_view->setGridX(m_view->width());
-            m_view->setGridY(80);
+            m_view->setGridX( viewerWidth-3*m_view->spacing());
+            m_view->setGridY( fontMetrics().height()*2+40 );
             PPixmapCache::self()->setMaxImages(20);
             break;
     }

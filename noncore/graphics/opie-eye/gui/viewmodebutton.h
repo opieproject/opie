@@ -13,7 +13,7 @@
 class ViewModeButton : public QToolButton {
     Q_OBJECT
 public:
-    ViewModeButton( QToolBar* );
+    ViewModeButton( QToolBar*,int def=1 );
     ~ViewModeButton();
 
 signals:

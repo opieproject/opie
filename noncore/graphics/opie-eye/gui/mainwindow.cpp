@@ -91,7 +91,9 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
              m_view, SLOT(slotTrash() ) );
 
 
-    viewModeButton = new ViewModeButton( bar );
+    int mode = m_cfg->readNumEntry("ListViewMode", 1);
+    if (mode < 1 || mode>3) mode = 1;
+    viewModeButton = new ViewModeButton( bar,mode );
     connect( viewModeButton, SIGNAL(changeMode(int)),
              m_view, SLOT(slotChangeMode(int)));
 

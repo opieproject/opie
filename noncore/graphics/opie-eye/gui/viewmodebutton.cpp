@@ -5,10 +5,10 @@
 #include <qtoolbar.h>
 #include <qpopupmenu.h>
 
-ViewModeButton::ViewModeButton( QToolBar* bar )
+ViewModeButton::ViewModeButton( QToolBar* bar,int def )
     : QToolButton( bar )
 {
-    slotChange( 1 );
+    slotChange( def );
     QPopupMenu *pop= new QPopupMenu( this );
     pop->setCheckable( true );
     pop->insertItem( tr("Thumbnail and Imageinfo"), 1 );
