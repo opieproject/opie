@@ -72,6 +72,7 @@ void QIMPenCombining::addCombined( QIMPenCharSet *cs )
 		    if ( accentPc->character() == combiningSymbols[i] ) {
 			QIMPenChar *combined = combine( pc, accentPc );
 			combined->setCharacter( combiningChars[charIdx][i+1] );
+			combined->setFlag( QIMPenChar::Combined );
 			cs->addChar( combined );
 		    }
 		}

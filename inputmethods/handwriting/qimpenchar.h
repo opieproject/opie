@@ -60,7 +60,7 @@ public:
     void clearFlag( int f ) { flags &= ~f; }
     bool testFlag( int f ) { return flags & f; }
 
-    enum Flags { System=0x01, Deleted=0x02, CombineRight=0x04, Data=0x08 };
+    enum Flags { System=0x01, Deleted=0x02, CombineRight=0x04, Data=0x08, Combined=0x10 };
     // Correspond to codes in template files.  Do not change values.
     enum Mode { ModeBase=0x4000, Caps=0x4001, Shortcut=0x4002, CapsLock=0x4003,
 		 Punctuation=0x4004, Symbol=0x4005, Extended=0x4006 };
