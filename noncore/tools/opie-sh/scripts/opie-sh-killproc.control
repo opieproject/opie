@@ -1,5 +1,4 @@
 Files: bin/killproc.sh apps/Opie-SH/killproc.desktop pics/opie-sh-scripts/killproc.png
-Package: opie-sh-killproc
 Installed-Size:  0 
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION), opie-sh

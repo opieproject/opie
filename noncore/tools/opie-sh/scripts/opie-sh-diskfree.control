@@ -1,5 +1,4 @@
 Files: bin/diskfree.sh apps/Opie-SH/diskfree.desktop pics/opie-sh-scripts/diskfree.png
-Package: opie-sh-diskfree
 Installed-Size:  0
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION), opie-sh

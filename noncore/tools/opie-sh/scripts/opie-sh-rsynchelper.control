@@ -1,5 +1,4 @@
 Files: bin/rsyncme.sh apps/Opie-SH/rsyncme.desktop pics/opie-sh-scripts/rsyncme.png share/config/rsyncme.cfg
-Package: opie-sh-rsynchelper
 Installed-Size:  0 
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION), opie-sh

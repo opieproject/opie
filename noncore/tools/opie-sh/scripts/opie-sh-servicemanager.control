@@ -1,5 +1,4 @@
 Files: bin/service_manager.sh apps/Opie-SH/service_manager.desktop pics/opie-sh-scripts/service_manager.png
-Package: opie-sh-servicemanager
 Installed-Size:  0
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION), opie-sh

@@ -1,5 +1,4 @@
 Files: bin/filesystem_mounter.sh pics/opie-sh-scripts/fsmounter.png apps/Opie-SH/filesystem_mounter.desktop
-Package: opie-sh-fsmounter
 Installed-Size:  0 
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION), opie-sh
