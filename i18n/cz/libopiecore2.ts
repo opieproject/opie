@@ -1,88 +1,89 @@
-<!DOCTYPE TS><TS>
-<context>
+<!DOCTYPE TS>
+<TS>
+  <context>
     <name>Button</name>
     <message>
-        <source>Calendar Button</source>
-        <translation type="unfinished"></translation>
+      <source>Calendar Button</source>
+      <translation>Tlačítko kalendář</translation>
     </message>
     <message>
-        <source>Contacts Button</source>
-        <translation type="unfinished"></translation>
+      <source>Contacts Button</source>
+      <translation>Tlačítko kontakty</translation>
     </message>
     <message>
-        <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+      <source>Menu Button</source>
+      <translation>Tlačítko Menu</translation>
     </message>
     <message>
-        <source>Mail Button</source>
-        <translation type="unfinished"></translation>
+      <source>Mail Button</source>
+      <translation>Tlačítko Mail</translation>
     </message>
     <message>
-        <source>Home Button</source>
-        <translation type="unfinished"></translation>
+      <source>Home Button</source>
+      <translation>Tlačítko Domů</translation>
     </message>
     <message>
-        <source>Record Button</source>
-        <translation type="unfinished"></translation>
+      <source>Record Button</source>
+      <translation>Tlačítko Záznam</translation>
     </message>
     <message>
-        <source>Lower+Up</source>
-        <translation type="unfinished"></translation>
+      <source>Lower+Up</source>
+      <translation>Dolní+Nahoru</translation>
     </message>
     <message>
-        <source>Lower+Down</source>
-        <translation type="unfinished"></translation>
+      <source>Lower+Down</source>
+      <translation>Dolní+Dolů</translation>
     </message>
     <message>
-        <source>Lower+Right</source>
-        <translation type="unfinished"></translation>
+      <source>Lower+Right</source>
+      <translation>Dolní+Vpravo</translation>
     </message>
     <message>
-        <source>Lower+Left</source>
-        <translation type="unfinished"></translation>
+      <source>Lower+Left</source>
+      <translation>Dolní+Vlevo</translation>
     </message>
     <message>
-        <source>Upper+Up</source>
-        <translation type="unfinished"></translation>
+      <source>Upper+Up</source>
+      <translation>Horní+Nahoru</translation>
     </message>
     <message>
-        <source>Upper+Down</source>
-        <translation type="unfinished"></translation>
+      <source>Upper+Down</source>
+      <translation>Horní+Dolů</translation>
     </message>
     <message>
-        <source>Upper+Right</source>
-        <translation type="unfinished"></translation>
+      <source>Upper+Right</source>
+      <translation>Horní+Vpravo</translation>
     </message>
     <message>
-        <source>Upper+Left</source>
-        <translation type="unfinished"></translation>
+      <source>Upper+Left</source>
+      <translation>Horní+Vlevo</translation>
     </message>
     <message>
-        <source>Display Rotate</source>
-        <translation type="unfinished"></translation>
+      <source>Display Rotate</source>
+      <translation>Rotace displeje</translation>
     </message>
     <message>
-        <source>Action Button</source>
-        <translation type="unfinished"></translation>
+      <source>Action Button</source>
+      <translation>Akční tlačítko</translation>
     </message>
     <message>
-        <source>OK Button</source>
-        <translation type="unfinished"></translation>
+      <source>OK Button</source>
+      <translation>Tlačítko OK</translation>
     </message>
     <message>
-        <source>End Button</source>
-        <translation type="unfinished"></translation>
+      <source>End Button</source>
+      <translation>Tlačítko End</translation>
     </message>
     <message>
-        <source>Todo Button</source>
-        <translation type="unfinished"></translation>
+      <source>Todo Button</source>
+      <translation>Tlačítko Todo</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>QObject</name>
     <message>
-        <source>Trash</source>
-        <translation>Koš</translation>
+      <source>Trash</source>
+      <translation>Koš</translation>
     </message>
-</context>
+  </context>
 </TS>
