@@ -5,7 +5,7 @@ int main(int argc, char **argv)
 {
   QPEApplication app(argc, argv);
   MainWindowImp window;
-  window.showMaximized();
+  app.showMainWidget(&window);
   return app.exec();
 }
 
