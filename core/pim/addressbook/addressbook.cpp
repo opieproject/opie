@@ -68,6 +68,10 @@
 
 #include "picker.h"
 
+// Remove this for OPIE releae 1.0 !
+#define __DEBUG_RELEASE
+
+
 static QString addressbookPersonalVCardName()
 {
 	QString filename = Global::applicationFileName("addressbook",
@@ -184,10 +188,19 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	connect( a, SIGNAL( activated() ), this, SLOT( slotPersonalView() ) );
 	a->addTo( edit );
 	
-	
-	a = new QAction( tr( "Arrange Edit Fields"), QString::null, 0, 0 );
-	connect( a, SIGNAL( activated() ), this, SLOT( slotSettings() ) );
+	// Do we need this function ? (se)	
+// 	a = new QAction( tr( "Arrange Edit Fields"), QString::null, 0, 0 );
+// 	connect( a, SIGNAL( activated() ), this, SLOT( slotSettings() ) );
+// 	a->addTo( edit );
+
+
+#ifdef __DEBUG_RELEASE
+	// Remove this function for public Release ! This is only
+	// for debug purposes ..
+	a = new QAction( tr( "Save all Data"), QString::null, 0, 0 );
+	connect( a, SIGNAL( activated() ), this, SLOT( save() ) );
 	a->addTo( edit );
+#endif
 	
 	// Create Views
 	listContainer = new QWidget( this );
