@@ -10,10 +10,9 @@ Name[es]=Gestor Ficheros
 Comment[es]=Un programa gestor de ficheros
 Name[hu]=Intézõ
 Name[it]=Gestione File
-
 Name[no]=Filviser
-Name[pt]=Gestor Ficheiros
-Comment[pt]=Gestor de ficheiros
+Name[pt]=Ficheiros
+Comment[pt]=Gestor de ficheiros (filebrowser)
 Name[pt_BR]=Gerenciador de Arquivos
-Comment[pt_BR]=Gerenciador de arquivos
+Comment[pt_BR]=Gerenciador de arquivos (filebrowser)
 Name[zh_TW]=檔案總管
