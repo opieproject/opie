@@ -17,11 +17,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccess.cpp,v 1.6 2002-11-01 15:10:42 eilers Exp $
+ * Version: $Id: ocontactaccess.cpp,v 1.7 2002-11-13 14:14:51 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.cpp,v $
- * Revision 1.6  2002-11-01 15:10:42  eilers
+ * Revision 1.7  2002-11-13 14:14:51  eilers
+ * Added sorted for Contacts..
+ *
+ * Revision 1.6  2002/11/01 15:10:42  eilers
  * Added regExp-search in database for all fields in a contact.
  *
  * Revision 1.5  2002/10/16 10:52:40  eilers
@@ -136,6 +139,11 @@ const uint OContactAccess::querySettings()
 bool OContactAccess::hasQuerySettings ( int querySettings ) const
 {
 	return ( m_backEnd->hasQuerySettings ( querySettings ) );
+}
+ORecordList<OContact> OContactAccess::sorted( bool ascending, int sortOrder, int sortFilter, int cat ) const
+{
+	QArray<int> matchingContacts = m_backEnd -> sorted( ascending, sortOrder, sortFilter, cat );
+	return ( ORecordList<OContact>(matchingContacts, this) );
 }
 
 

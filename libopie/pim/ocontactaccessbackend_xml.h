@@ -13,11 +13,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.5 2002-11-01 15:10:42 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.h,v 1.6 2002-11-13 14:14:51 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.5  2002-11-01 15:10:42  eilers
+ * Revision 1.6  2002-11-13 14:14:51  eilers
+ * Added sorted for Contacts..
+ *
+ * Revision 1.5  2002/11/01 15:10:42  eilers
  * Added regExp-search in database for all fields in a contact.
  *
  * Revision 1.4  2002/10/16 10:52:40  eilers
@@ -47,6 +50,7 @@
 #include <qfileinfo.h>
 #include <qregexp.h>
 #include <qarray.h>
+#include <qmap.h>
 
 #include <qpe/global.h>
 
@@ -301,6 +305,34 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 			}
 		}
 	
+	// Currently only asc implemented.. 
+	QArray<int> sorted( bool asc,  int , int ,  int ) 
+		{
+			QMap<QString, int> nameToUid;
+			QStringList names;
+			QArray<int> m_currentQuery( m_contactList.count() );
+
+			// First fill map and StringList with all Names ( better LastNames ? )
+			// Afterwards sort namelist and use map to fill array to return..
+			QValueListConstIterator<OContact> it;
+			for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
+				names.append( (*it).lastName() );
+				nameToUid.insert( (*it).lastName(), (*it).uid() );
+			}
+			names.sort();
+
+			int i = 0;
+			if ( asc ){
+				for ( QStringList::Iterator it = names.begin(); it != names.end(); ++it )
+					m_currentQuery[i++] = nameToUid[ (*it) ];
+			}else{
+				for ( QStringList::Iterator it = names.end(); it != names.begin(); --it )
+					m_currentQuery[i++] = nameToUid[ (*it) ];
+			}
+			
+			return m_currentQuery;
+			
+		}
 	bool add ( const OContact &newcontact )
 		{
 			//qWarning("odefaultbackend: ACTION::ADD");

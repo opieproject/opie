@@ -13,11 +13,14 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactaccess.h,v 1.4 2002-11-01 15:10:42 eilers Exp $
+ * Version: $Id: ocontactaccess.h,v 1.5 2002-11-13 14:14:51 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.h,v $
- * Revision 1.4  2002-11-01 15:10:42  eilers
+ * Revision 1.5  2002-11-13 14:14:51  eilers
+ * Added sorted for Contacts..
+ *
+ * Revision 1.4  2002/11/01 15:10:42  eilers
  * Added regExp-search in database for all fields in a contact.
  *
  * Revision 1.3  2002/10/16 10:52:40  eilers
@@ -90,6 +93,14 @@ class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
 
 	
 	ORecordList<OContact> matchRegexp(  const QRegExp &r )const;
+
+	/** Return all Contacts in a sorted manner.
+	 *  @param ascending true: Sorted in acending order.
+	 *  @param sortOrder Currently not implemented. Just defined to stay compatible to otodoaccess
+	 *  @param sortFilter Currently not implemented. Just defined to stay compatible to otodoaccess
+	 *  @param cat Currently not implemented. Just defined to stay compatible to otodoaccess
+	 */
+	List sorted( bool ascending, int sortOrder, int sortFilter, int cat ) const;
 
 	/** Return all possible settings.
 	 *  @return All settings provided by the current backend

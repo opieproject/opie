@@ -13,11 +13,14 @@
  * ToDo:
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.3 2002-11-11 16:41:09 kergoth Exp $
+ * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.4 2002-11-13 14:14:51 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_vcard.cpp,v $
- * Revision 1.3  2002-11-11 16:41:09  kergoth
+ * Revision 1.4  2002-11-13 14:14:51  eilers
+ * Added sorted for Contacts..
+ *
+ * Revision 1.3  2002/11/11 16:41:09  kergoth
  * no default arguments in implementation
  *
  * Revision 1.2  2002/11/10 15:41:53  eilers
@@ -176,6 +179,13 @@ bool OContactAccessBackend_VCard::hasQuerySettings (uint ) const
 bool OContactAccessBackend_VCard::wasChangedExternally()
 {
 	return false; // Don't expect concurrent access
+}
+
+// Not implemented
+QArray<int> OContactAccessBackend_VCard::sorted( bool , int, int, int )
+{
+	QArray<int> ar(0);
+	return ar;
 }
 
 // *** Private stuff ***
