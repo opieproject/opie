@@ -4,7 +4,7 @@
 using namespace Opie::Core;
 
 #ifdef FSCKED_DISTRI
-FixIt::FixIt() : QObject() {
+FixIt::FixIt() {
     /* the new inittab */
     m_file = "#\n# /etc/inittab"
 "#"
@@ -71,7 +71,7 @@ void FixIt::fixIt() {
     if ( !m_kill.start(OProcess::DontCare,OProcess::NoCommunication) ) {
       owarn << "could not execute kill script" << oendl; 
     }  else {
-      Global::statusMessage( tr("Fixing up Embedix"));
+      Global::statusMessage( QObject::tr("Fixing up Embedix"));
     }       
 
     #endif
