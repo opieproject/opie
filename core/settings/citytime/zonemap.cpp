@@ -42,7 +42,7 @@
 
 // the map file...
 static const char strZONEINFO[] = "/usr/share/zoneinfo/zone.tab";
-static const char strMAP[] = "simple_grid_400";
+static const char strMAP[] = "citytime/simple_grid_400";
 
 // the maximum distance we'll allow the pointer to be away from a city
 // and still show the city's time
@@ -157,7 +157,7 @@ ZoneMap::ZoneMap( QWidget *parent, const char* name )
     // just set the current image to point
     pixCurr = new QPixmap();
 
-    QPixmap pixZoom = Resource::loadPixmap( "mag" );
+    QPixmap pixZoom = Resource::loadPixmap( "citytime/mag" );
 
     cmdZoom = new QToolButton( this, "Zoom command" );
     cmdZoom->setPixmap( pixZoom );
