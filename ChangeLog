@@ -1,7 +1,7 @@
 2004-??-??	The Opie Team <opie@handhelds.org>
+
 	* Added Conversion tool for pim-data (eilers)
 	* Modifcation of the PIM API for providing generic use of OPimRecords. (eilers)
-        * Added Generic Keyconfig Widget (zecke)
 
 2004-25-04	The Opie Team <opie@handhelds.org>
 
