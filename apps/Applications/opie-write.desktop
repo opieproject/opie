@@ -1,0 +1,7 @@
+[Desktop Entry]
+Comment=A Text Editing Program
+Comment[es]=Un editor de textos
+Exec=opie-write
+Icon=opie-write/opie-write
+Type=Application
+Name=opie-write

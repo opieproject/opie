@@ -1,0 +1,9 @@
+Files: bin/opie-write apps/Applications/opie-write.desktop pics/opie-wrote
+Priority: optional
+Section: opie/applications
+Maintainer: L.J. Potter <ljp@llornkcor.com> 
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: Rich Text Editor 
+ The rich text editor for the Opie environment.
