@@ -1226,7 +1226,7 @@ void TEWidget::calcGeometry()
 {
     int showhscrollbar = 1;
     int hwidth = 0;
-    int dcolumns;
+    int dcolumns = 0;
     Config cfg( "Konsole" );
     cfg.setGroup("ScrollBar");
     useHorzScroll=cfg.readBoolEntry("HorzScroll",0);
