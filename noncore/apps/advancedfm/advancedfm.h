@@ -154,7 +154,9 @@ protected slots:
    void doAbout();
    void doBeam();
    void fileBeamFinished( Ir *);
-
+   bool copyDirectory( const QString & , const QString & );
+//   void navigateToSelected();
+   bool moveDirectory( const QString & , const QString & );	 
 //   void slotSwitchtoLocal(int);
 
 private:

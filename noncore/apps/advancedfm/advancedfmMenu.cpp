@@ -68,8 +68,8 @@ void AdvancedFm::showMenuHidden() {
       OtherDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
       fileMenu->setItemChecked( fileMenu->idAt(0),FALSE);
     }
-  rePopulate();
      b = !b;
+		 populateView();
 }
 
 void AdvancedFm::showHidden() {
@@ -80,7 +80,7 @@ void AdvancedFm::showHidden() {
       CurrentDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
       OtherDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
     }
-  rePopulate();
+		 populateView();
 }
 
 QString AdvancedFm::dealWithSymName(const QString &fileName) {
@@ -146,7 +146,7 @@ void AdvancedFm::makeDir() {
       QString  filename = fileDlg->LineEdit1->text();
       thisDir->mkdir( thisDir->canonicalPath()+"/"+filename);
   }
-  populateView();
+	populateView();
 }
 
 void AdvancedFm::doDelete() {
@@ -191,7 +191,7 @@ void AdvancedFm::doDelete() {
                f=f.left(f.length()-1);
                QString cmd="rm -rf "+f;
                startProcess( (const QString)cmd.latin1() );
-               populateView();
+							 populateView();
             }
             break;
             case 1:
@@ -228,7 +228,7 @@ void AdvancedFm::doDelete() {
          }
       }
    }
-   populateView();
+	populateView();
 }
 
 void AdvancedFm::filePerms() {
@@ -245,7 +245,7 @@ void AdvancedFm::filePerms() {
       if( filePerm)
          delete  filePerm;
    }
-   populateView();
+	populateView();
 }
 
 void AdvancedFm::doProperties() {
@@ -278,7 +278,7 @@ void AdvancedFm::upDir() {
   chdir( current.latin1() );
   thisDir->cd(  current, TRUE);
 
-  populateView();
+	populateView();
   update();
 }
 
@@ -339,8 +339,8 @@ void AdvancedFm::copy() {
             return;
          }
       }
-      rePopulate();
-      setOtherTabCurrent();
+			setOtherTabCurrent();
+			rePopulate();
    }
 }
 
@@ -389,8 +389,8 @@ void AdvancedFm::copyAs() {
       delete fileDlg;
 
    }
-   rePopulate();
-   setOtherTabCurrent();
+			rePopulate();
+			setOtherTabCurrent();
 }
 
 void AdvancedFm::copySameDir() {
@@ -438,7 +438,7 @@ void AdvancedFm::copySameDir() {
         }
       delete fileDlg;
     }
-  populateView();
+			rePopulate();
 }
 
 void AdvancedFm::move() {
@@ -461,32 +461,80 @@ void AdvancedFm::move() {
 
           curFile = thisDir->canonicalPath();
           if(curFile.right(1).find("/",0,TRUE) == -1)
-            curFile +="/";
+							curFile +="/";
           curFile+= item;
 //          qDebug("CurrentFile file is " + curFile);
 
-          QFile f( curFile);
-          if( f.exists()) {
-            if( !copyFile(  curFile, destFile) )  {
-                QMessageBox::message(tr("Note"),tr("Could not move\n")+curFile);
-                return;
-              } else
-                QFile::remove(curFile);
+          if(QFileInfo(curFile).isDir()) {
+							moveDirectory( curFile, destFile );
+							rePopulate();
+							return;
           }
-        }
+
+					QFile f( curFile);
+          if( f.exists()) {
+							if( !copyFile(  curFile, destFile) )  {
+									QMessageBox::message(tr("Note"),tr("Could not move\n")+curFile);
+									return;
+              } else
+									QFile::remove(curFile);
+          }
+			}
 
   }
-  rePopulate();
-  setOtherTabCurrent();
+			rePopulate();
+			setOtherTabCurrent();
 }
 
+bool AdvancedFm::moveDirectory( const QString & src, const QString & dest ) {
+		int err = 0;
+		if( copyDirectory( src, dest ) ) {      QString cmd = "rm -rf " + src;
+		err = system((const char*)cmd);
+		} else
+				err = -1;
+   
+		if(err!=0) {
+				QMessageBox::message(tr("Note"),tr("Could not move\n") + src);
+				return false;
+		}
+		return true;
+}
+
+bool AdvancedFm::copyDirectory( const QString & src, const QString & dest ) {
+
+		QString	cmd = "/bin/cp -fpR " + src + " " + dest;
+    qWarning(cmd);
+		int	err = system( (const char *) cmd );
+		if ( err != 0 ) {
+				QMessageBox::message("AdvancedFm",
+														 tr( "Could not copy \n%1 \nto \n%2").arg( src ).arg( dest ) );
+				return false;
+		}
+
+		return true;
+}
+ 
+
 bool AdvancedFm::copyFile( const QString & src, const QString & dest ) {
-   bool success = true;
-   struct stat status;
-   QFile srcFile(src);
-   QFile destFile(dest);
-   int err=0;   
-   int read_fd=0;
+
+		
+		if(QFileInfo(src).isDir()) {
+				if( copyDirectory( src, dest )) {
+						setOtherTabCurrent();
+						populateView();
+						return true;
+				}
+				else
+						return false;
+		}
+
+
+		bool success = true;
+		struct stat status;
+		QFile srcFile(src);
+		QFile destFile(dest);
+		int err=0;   
+		int read_fd=0;
    int write_fd=0;
    struct stat stat_buf;
    off_t offset = 0;
@@ -633,9 +681,9 @@ void AdvancedFm::mkSym() {
 //          qDebug(cmd);
           startProcess( (const QString)cmd );
         }
-      rePopulate();
-      setOtherTabCurrent();
-    }
+			rePopulate();
+			setOtherTabCurrent();
+	}
 }
 
 void AdvancedFm::doBeam() {
@@ -687,7 +735,7 @@ void AdvancedFm::startProcess(const QString & cmd) {
 }
 
 void AdvancedFm::processEnded(OProcess *) {
-  populateView();
+			rePopulate();
 }
 
 void AdvancedFm::oprocessStderr(OProcess*, char *buffer, int ) {
@@ -775,7 +823,7 @@ void AdvancedFm::renameIt() {
    QListView *thisView = CurrentView();
     oldName = thisView->currentItem()->text(0);
     doRename( thisView );
-    populateView();
+			rePopulate();
 }
 
 void AdvancedFm::okRename() {
@@ -794,7 +842,7 @@ void AdvancedFm::okRename() {
 
    view->takeItem( view->currentItem() );
    delete view->currentItem();
-   populateView();
+			rePopulate();
 }
 
 void AdvancedFm::openSearch() {
