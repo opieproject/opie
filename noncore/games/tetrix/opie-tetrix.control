@@ -5,7 +5,7 @@ Section: opie/games
 Maintainer: Martin Imobersteg <imm@gmx.ch>
 Architecture: arm
 Arch: iPAQ
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2
 Description: Game: control falling blocks
  A game for the Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION

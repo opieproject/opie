@@ -12,8 +12,8 @@ SOURCES		= main.cpp \
 			ohighscoredlg.cpp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe -lstdc++
-INTERFACES	= 
+LIBS            += -lqpe -lopiecore2 -lstdc++
+INTERFACES	=
 TARGET		= tetrix
 
 

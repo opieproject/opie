@@ -1,4 +1,4 @@
   config TETRIX
     boolean "opie-tetrix (control the falling blocks)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE
