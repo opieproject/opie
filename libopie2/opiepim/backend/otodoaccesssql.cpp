@@ -299,7 +299,8 @@ namespace {
         : OSQLQuery(), m_uid( uid ) {}
     RemoveQuery::~RemoveQuery() {}
     QString RemoveQuery::query()const {
-        QString qu = "DELETE from todolist where uid = " + QString::number(m_uid);
+        QString qu = "DELETE FROM todolist WHERE uid = " + QString::number(m_uid) + " ;";
+	qu += "DELETE FROM custom_data WHERE uid = " + QString::number(m_uid);
         return qu;
     }
 
@@ -762,30 +763,29 @@ QArray<int> OPimTodoAccessBackendSQL::uids( const OSQLResult& res) const{
 QArray<int> OPimTodoAccessBackendSQL::matchRegexp(  const QRegExp &r ) const
 {
 
-#warning OPimTodoAccessBackendSQL::matchRegexp() not implemented !!
-
 #if 0
-
-	Copied from xml-backend by not adapted to sql (eilers)
-
-	QArray<int> m_currentQuery( m_events.count() );
-	uint arraycounter = 0;
-
-
-
-        QMap<int, OPimTodo>::ConstIterator it;
-        for (it = m_events.begin(); it != m_events.end(); ++it ) {
-		if ( it.data().match( r ) )
-			m_currentQuery[arraycounter++] = it.data().uid();
-
-	}
-	// Shrink to fit..
-	m_currentQuery.resize(arraycounter);
-
-	return m_currentQuery;
-#endif
 	QArray<int> empty;
 	return empty;
+
+#else
+	QString qu = "SELECT uid FROM todolist WHERE (";
+
+	// Do it make sense to search other fields, too ?
+	qu += " rlike(\""+ r.pattern() + "\",\"description\") OR";
+	qu += " rlike(\""+ r.pattern() + "\",\"summary\")";
+		
+	qu += ")";
+
+	qDebug( "query: %s", qu.latin1() );
+
+	OSQLRawQuery raw( qu );
+	OSQLResult res = m_driver->query( &raw );
+
+	return uids( res );
+
+
+#endif
+
 }
 QBitArray OPimTodoAccessBackendSQL::supports()const {
 
@@ -806,8 +806,49 @@ QBitArray OPimTodoAccessBackendSQL::sup() const{
 }
 
 void OPimTodoAccessBackendSQL::removeAllCompleted(){
-#warning OPimTodoAccessBackendSQL::removeAllCompleted() not implemented !!
+	// First we need the uids from all entries which are 
+	// completed. Then, we just have to remove them...
 
+	QString qu = "SELECT uid FROM todolist WHERE completed = 1";
+
+	OSQLRawQuery raw( qu );
+	OSQLResult res = m_driver->query( &raw );
+
+	QArray<int> completed_uids = uids( res );
+
+	qDebug( "Number of completed: %d", completed_uids.size() );
+
+	if ( completed_uids.size() == 0 )
+		return;
+
+	qu = "DELETE FROM todolist WHERE (";
+	QString query;
+
+	for ( int i = 0; i < completed_uids.size(); i++ ){
+		if ( !query.isEmpty() )
+			query += " OR ";
+		query += QString( "uid = %1" ).arg( completed_uids[i] );
+	}
+	qu += query + " );";
+
+	// Put remove of custom entries in this query to speed up..
+ 	qu += "DELETE FORM custom_data WHERE (";
+ 	query = "";
+
+	for ( int i = 0; i < completed_uids.size(); i++ ){
+		if ( !query.isEmpty() )
+			query += " OR ";
+		query += QString( "uid = %1" ).arg( completed_uids[i] );
+	}
+	qu += query + " );";
+
+	qDebug( "query: %s", qu.latin1() );
+
+	OSQLRawQuery raw2( qu );
+	res = m_driver->query( &raw2 );
+	if ( res.state() == OSQLResult::Failure ) {
+		qWarning("OPimTodoAccessBackendSQL::removeAllCompleted():Failure in query: %s", qu.latin1() );
+	}
 }
 
 

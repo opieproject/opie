@@ -221,6 +221,8 @@ void ODateBookAccessBackend_SQL::clear()
 
 
 OPimEvent ODateBookAccessBackend_SQL::find( int uid ) const{
+	qDebug( "ODateBookAccessBackend_SQL::find( %d )", uid ); 
+
 	QString qu = "select *";
 	qu += "from datebook where uid = " + QString::number(uid);
 
@@ -242,6 +244,8 @@ OPimEvent ODateBookAccessBackend_SQL::find( int uid ) const{
 	// Last step: Put map into date event, add custom map and return it
 	OPimEvent retDate( dateEventMap );
 	retDate.setExtraMap( requestCustom( uid ) );
+
+	qDebug( "ODateBookAccessBackend_SQL::find() end", uid ); 
 	return retDate;
 }
 
@@ -375,8 +379,24 @@ OPimEvent::ValueList ODateBookAccessBackend_SQL::directRawRepeats()
 
 QArray<int> ODateBookAccessBackend_SQL::matchRegexp(  const QRegExp &r ) const
 {
-	QArray<int> null;
-	return null;
+
+	QString qu = "SELECT uid FROM datebook WHERE (";
+
+	// Do it make sense to search other fields, too ?
+	qu += " rlike(\""+ r.pattern() + "\", Location ) OR";
+	qu += " rlike(\""+ r.pattern() + "\", Note )";
+		
+	qu += " )";
+
+	qDebug( "query: %s", qu.latin1() );
+
+	OSQLRawQuery raw( qu );
+	OSQLResult res = m_driver->query( &raw );
+
+	return extractUids( res );
+
+
+
 }
 
 /* ===== Private Functions ========================================== */
