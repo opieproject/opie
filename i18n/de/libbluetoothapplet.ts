@@ -3,23 +3,23 @@
     <name>OpieTooth::BluezApplet</name>
     <message>
         <source>Disable Bluetooth</source>
-        <translation type="unfinished"></translation>
+        <translation>Bluetooth abschalten</translation>
     </message>
     <message>
         <source>Enable Bluetooth</source>
-        <translation type="unfinished"></translation>
+        <translation>Bluetooth anschalten</translation>
     </message>
     <message>
         <source>Launch manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Launch Manager</translation>
     </message>
     <message>
         <source>Disable discovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Erkennung abschalten</translation>
     </message>
     <message>
         <source>Enable discovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Erkennung anschalten</translation>
     </message>
 </context>
 </TS>

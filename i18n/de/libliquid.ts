@@ -4,7 +4,7 @@
     <name>Decoration</name>
     <message>
         <source>Liquid</source>
-        <translation type="unfinished">Liquid</translation>
+        <translation>Liquid</translation>
     </message>
 </context>
 <context>

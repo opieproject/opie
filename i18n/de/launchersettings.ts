@@ -4,42 +4,42 @@
     <name>DocTabSettings</name>
     <message>
         <source>Enable the Documents Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Documents tab aktivieren</translation>
     </message>
     <message>
         <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Hinweis:&lt;/b&gt; Das Ändern dieses Settings macht unter Umstand einen Opie-Neustart notwendig.</translation>
     </message>
     <message>
         <source>Check, if you want the Documents Tab to be visible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Anwählen, um den Dokumentenreiter sichtbar zu machen.</translation>
     </message>
 </context>
 <context>
     <name>InputMethodSettings</name>
     <message>
         <source>Resize application on Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Größenänderung bei Erscheinen der Anwendung </translation>
     </message>
     <message>
         <source>Enable floating and resizing</source>
-        <translation type="unfinished"></translation>
+        <translation>Floating und Größenänderung aktivieren</translation>
     </message>
     <message>
         <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Hinweis:&lt;/b&gt; Das Ändern dieses Settings macht unter Umstand einen Opie-Neustart notwendig.</translation>
     </message>
     <message>
         <source>Check, if you want the application to be automatically resized if the input method pops up.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie, ob die Anwendung eine Größenanpassung vornimmt, wenn die Eingabemethode erscheint.</translation>
     </message>
     <message>
         <source>Check, if you want to move and/or resize input methods</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie, ob Sie Eingabemethoden verschieben oder größenverändern möchten</translation>
     </message>
     <message>
         <source>Specify the percentage of the screen width for the input method</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie die prozentuale Bildschirmbreite für den Eingabebereich an</translation>
     </message>
 </context>
 <context>
@@ -62,11 +62,11 @@
     </message>
     <message>
         <source>InputMethods</source>
-        <translation type="unfinished"></translation>
+        <translation>Eingabebereiche</translation>
     </message>
     <message>
         <source>DocTab</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumentenreiter</translation>
     </message>
 </context>
 <context>
@@ -89,7 +89,7 @@
     </message>
     <message>
         <source>Show Applications in subpopups</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzeige von Anwendungen in Unterfenstern</translation>
     </message>
 </context>
 <context>
@@ -250,11 +250,11 @@
     </message>
     <message>
         <source>Enable animated busy indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Animierten Busyzeiger anwählen</translation>
     </message>
     <message>
         <source>Activate this, if you want an animatedbusy indicator for starting applications in the Launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivieren Sie diese Einstellung, wenn Sie einen animierten Busy-Zeiger im Launcher sehen möchten.</translation>
     </message>
 </context>
 <context>

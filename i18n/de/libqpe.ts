@@ -201,7 +201,7 @@ die Kategorien.</translation>
     <message>
         <source>End reached, starting at %1</source>
         <comment>Date using TimeString::shortDate</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ende erreicht, start bei %1</translation>
     </message>
 </context>
 <context>
@@ -346,7 +346,7 @@ die Kategorien.</translation>
     </message>
     <message>
         <source>Arguments:</source>
-        <translation type="unfinished"></translation>
+        <translation>Argumente:</translation>
     </message>
 </context>
 <context>
@@ -893,12 +893,12 @@ frei und versuchen Sie es noch einmal
     <message>
         <source>D</source>
         <comment>Shortcut for Day</comment>
-        <translation type="unfinished">T</translation>
+        <translation>T</translation>
     </message>
     <message>
         <source>M</source>
         <comment>Shortcur for Month</comment>
-        <translation type="unfinished">M</translation>
+        <translation>M</translation>
     </message>
 </context>
 <context>
@@ -912,43 +912,43 @@ frei und versuchen Sie es noch einmal
     <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="unfinished">Klicken Sie hier, um das Fenster zu schließen und alle Änderungen zu verwerfen.</translation>
+        <translation>Klicken Sie hier, um das Fenster zu schließen und alle Änderungen zu verwerfen.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="unfinished">Klicken Sie hier, um das Fenster zu schließen.</translation>
+        <translation>Klicken Sie hier, um das Fenster zu schließen.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="unfinished">Klicken Sie hier, um das Fenster zu schließen und alle Änderungen zu akzeptieren.</translation>
+        <translation>Klicken Sie hier, um das Fenster zu schließen und alle Änderungen zu akzeptieren.</translation>
     </message>
     <message>
         <source>Click to make this window movable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken sie hier um das Fenster verschiebbar zu machen.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="unfinished">Klicken sie hier, um das Fenster zu maximieren.</translation>
+        <translation>Klicken sie hier, um das Fenster zu maximieren.</translation>
     </message>
     <message>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederherstellen</translation>
     </message>
     <message>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschieben</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <source>Maximize</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximieren</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Schließen</translation>
     </message>
 </context>
 <context>
@@ -1043,7 +1043,7 @@ frei und versuchen Sie es noch einmal
     <message>
         <source>Default</source>
         <comment>List box text for default window decoration</comment>
-        <translation type="unfinished"></translation>
+        <translation>Voreinstellung</translation>
     </message>
 </context>
 </TS>
