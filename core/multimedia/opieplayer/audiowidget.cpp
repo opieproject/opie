@@ -93,18 +93,12 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( setPaused(bool) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
 
-    if( !mediaPlayerState->isStreaming) { // this stops the slider from being moved, thus
-          // does not stop stream when it reaches the end
-    connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
-    connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
-    }
     // Intialise state
     setLength( mediaPlayerState->length() );
     setPosition( mediaPlayerState->position() );
     setLooping( mediaPlayerState->fullscreen() );
     setPaused( mediaPlayerState->paused() );
     setPlaying( mediaPlayerState->playing() );
-    if (mediaPlayerState->isStreaming) slider->hide();
         
 }
 
@@ -143,6 +137,18 @@ void AudioWidget::setLength( long max ) {
 
 
 void AudioWidget::setView( char view ) {
+    if (mediaPlayerState->isStreaming) {
+        if( !slider->isHidden()) slider->hide();
+        disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+        disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+    } else {
+// this stops the slider from being moved, thus
+          // does not stop stream when it reaches the end
+        if( slider->isHidden()) slider->show();
+        connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+        connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+    }
+
     if ( view == 'a' ) {
   startTimer( 150 );
   showMaximized();
