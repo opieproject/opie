@@ -4,8 +4,6 @@ DESTDIR     = $(OPIEDIR)/lib
 HEADERS     = 802_11_user.h       \
               dhcp.h              \
               udp_ports.h         \
-              wireless.15.h       \
-              wireless.16.h       \
               odebugmapper.h      \
               omanufacturerdb.h   \
               onetutils.h         \
@@ -20,7 +18,7 @@ SOURCES     = odebugmapper.cpp    \
               ostation.cpp
 INTERFACES  =
 TARGET      = opienet2
-VERSION     = 1.8.3
+VERSION     = 1.8.4
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lpcap

@@ -1,10 +1,10 @@
 Package: libopienet2
 Files: lib/libopienet2.so.* etc/manufacturers
 Priority: optional
-Section: opie/system
+Section: opie/libs
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
-Version: 1.8.3-$SUB_VERSION
-Depends: libopiecore2 (1.8.3)
+Version: 1.8.4-$SUB_VERSION
+Depends: libopiecore2
 Provides: libopienet2
 Description: Opie library 2.0 NET
