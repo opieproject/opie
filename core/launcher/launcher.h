@@ -1,8 +1,7 @@
 /**********************************************************************
 ** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
-**
+** This file is part of the Qtopia Environment.**
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.GPL included in the
@@ -21,6 +20,10 @@
 #define LAUNCHER_H
 
 #include <qpe/config.h>
+#include <qpe/applnk.h>
+
+#include <opie/ofileselector.h>
+
 #include <qmainwindow.h>
 #include <qtabbar.h>
 #include <qstringlist.h>
@@ -36,6 +39,17 @@ class QWidgetStack;
 class StorageInfo;
 class SyncDialog;
 
+
+class DocumentTab : public OFileSelector
+{
+  Q_OBJECT
+public:
+ DocumentTab( QWidget *parent, int mode, int selector, const QString &dirName, const QString &fileName);//, 4,0, "/","");
+~DocumentTab();
+private:
+
+};
+
 class CategoryTabBar : public QTabBar
 {
     Q_OBJECT
@@ -43,12 +57,15 @@ public:
     CategoryTabBar( QWidget *parent=0, const char *name=0 );
     ~CategoryTabBar();
 
+signals:
+
 protected slots:
     virtual void layoutTabs();
 
 protected:
     void paint ( QPainter *p, QTab *t, bool f ) const;
     void paintLabel( QPainter* p, const QRect& br, QTab* t, bool has_focus ) const;
+   
 };
 
 class CategoryTabWidget : public QVBox {
@@ -57,23 +74,25 @@ class CategoryTabWidget : public QVBox {
 public:
     CategoryTabWidget( QWidget* parent );
     void initializeCategories(AppLnkSet* rootFolder, AppLnkSet* docFolder,
-	    const QList<FileSystem> &);
-    void updateDocs(AppLnkSet* docFolder, const QList<FileSystem> &fs);
+      const QList<FileSystem> &);
+//    void updateDocs(AppLnkSet* docFolder, const QList<FileSystem> &fs);
     void updateLink(const QString& linkfile);
     void setBusy(bool on);
     QString getAllDocLinkInfo() const;
     LauncherView *view( const QString &id );
     void setBusyIndicatorType ( const QString &type );
+    DocumentTab *fileSel;
 signals:
     void selected(const QString&);
     void clicked(const AppLnk*);
     void rightPressed(AppLnk*);
-
+    void ofileSel(const DocLnk &);
 public slots:
     void nextTab();
     void prevTab();
     void showTab(const QString&);
-
+   void clickie(const DocLnk&);
+   void clickie(const QString &);
 protected slots:
     void tabProperties();
 
