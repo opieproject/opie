@@ -2,7 +2,7 @@ Package: opie-i18n-fr
 Files: i18n/fr/.directory i18n/fr/*.qm etc/dict/dawg.fr
 Priority: optional
 Section: opie/i18n
-Maintainer: Eric Santonacci <Eric.Santonacci@talc.fr>
+Maintainer: Amrein-Marie Christophe <Christophe.Amrein-Marie@wanadoo.fr>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, opie-language
