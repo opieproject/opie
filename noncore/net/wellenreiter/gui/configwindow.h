@@ -24,6 +24,7 @@ class WellenreiterConfigWindow : public WellenreiterConfigBase
   public:
     WellenreiterConfigWindow( QWidget * parent = 0, const char * name = "WellenreiterConfigWindow", WFlags f = 0 );
   
+    
 };
 
 #endif

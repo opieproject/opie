@@ -16,6 +16,15 @@
 // Qt
 
 #include <qpushbutton.h>
+#include <qmessagebox.h>
+#include <qcombobox.h>
+#include <qspinbox.h>
+
+// Qtopia
+
+#ifdef QWS
+#include <qpe/global.h>
+#endif
 
 // Standard
 
@@ -24,6 +33,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/types.h>
+#include <stdlib.h>
 
 // Local
 
@@ -31,13 +41,14 @@
 #include "scanlistitem.h"
 #include "logwindow.h"
 #include "hexwindow.h"
+#include "configwindow.h"
 
 #include "../libwellenreiter/source/sock.hh"    // <--- ugly path, FIX THIS!
 #include "../libwellenreiter/source/proto.hh"    // <--- ugly path, FIX THIS!
 #include "../daemon/source/config.hh"           // <--- ugly path, FIX THIS!
 
 Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
-    : WellenreiterBase( parent, name, fl )
+    : WellenreiterBase( parent, name, fl ), daemonRunning( false )
 {
 
     logwindow->log( "(i) Wellenreiter has been started." );
@@ -149,15 +160,15 @@ bool Wellenreiter::hasMessage()
 
 void Wellenreiter::timerEvent( QTimerEvent* e )
 {
-    qDebug( "checking for message..." );
+    //qDebug( "checking for message..." );
     if ( hasMessage() )
     {
-        qDebug( "got message" );
+        //qDebug( "got message from daemon" );
         handleMessage();
     }
     else
     {
-        qDebug( "no message..." );
+        //qDebug( "no message..." );
     }
 }
 
@@ -237,21 +248,78 @@ void Wellenreiter::addNewItem( QString type, QString essid, QString macaddr, boo
 
 void Wellenreiter::buttonClicked()
 {
-
-    // FIXME: communicate with daemon and set button text according to state
-
-    button->setText( "Stop Scanning" );
-
-    // add some test stations, so that we can see if the GUI part works
-
-    addNewItem( "managed", "Vanille", "04:00:20:EF:A6:43", true, 6, 80 );
-    addNewItem( "managed", "Vanille", "04:00:20:EF:A6:23", true, 11, 10 );
-    addNewItem( "adhoc", "ELAN", "40:03:43:E7:16:22", false, 3, 10 );
-    addNewItem( "adhoc", "ELAN", "40:03:53:E7:56:62", false, 3, 15 );
-    addNewItem( "adhoc", "ELAN", "40:03:63:E7:56:E2", false, 3, 20 );
+    if ( daemonRunning )
+    {
+        logwindow->log( "(i) Daemon has been stopped." );
+        button->setText( "Start Scanning" );
+        
+        // Stop daemon
+        
+        // find out pids of wellenreiterd and orinoco_hopper
+        
+    }
     
-    QString command ("98");
+    else
+    {    
+    
+        // get configuration from config window
+        
+        const QString& interface = configwindow->interfaceName->currentText();
+        const QString& cardtype = configwindow->deviceType->currentText();
+        const QString& interval = configwindow->hopInterval->cleanText();
+        
+        if ( ( interface == "<select>" ) || ( cardtype == "<select>" ) )
+        {
+            QMessageBox::information( this, "Wellenreiter/Opie", "You must configure your\ndevice before scanning." );
+            return;
+        }
+        
+        logwindow->log( "(i) Daemon has been started." );
+        button->setText( "Stop Scanning" );
 
-    //sendcomm( DAEMONADDR, DAEMONPORT, (const char*) command );
+#ifdef QWS
+                
+        // set interface into monitor mode
+        
+        QString cmdline;
+        
+        cmdline.sprintf( "iwpriv %s monitor 2", (const char*) interface );
+        system( cmdline );
+        cmdline.sprintf( "iwpriv %s monitor 2 1", (const char*) interface );
+        system( cmdline );
+        
+        // start channel hopper
+        
+        cmdline = "orinoco_hopper ";
+        cmdline += interface;
+        cmdline += " -i ";
+        cmdline += interval;
+        //qDebug( "execute: %s", (const char*) cmdline );
+        Global::execute( cmdline );
+        
+        // start daemon
+        
+        cmdline = "wellenreiterd ";
+        cmdline += interface;
+        cmdline += " 3";
+        //qDebug( "execute: %s", (const char*) cmdline );       
+        Global::execute( cmdline );
+#endif
 
+        /*
+
+        // add some test stations, so that we can see if the GUI part works
+
+        addNewItem( "managed", "Vanille", "04:00:20:EF:A6:43", true, 6, 80 );
+        addNewItem( "managed", "Vanille", "04:00:20:EF:A6:23", true, 11, 10 );
+        addNewItem( "adhoc", "ELAN", "40:03:43:E7:16:22", false, 3, 10 );
+        addNewItem( "adhoc", "ELAN", "40:03:53:E7:56:62", false, 3, 15 );
+        addNewItem( "adhoc", "ELAN", "40:03:63:E7:56:E2", false, 3, 20 );
+
+        QString command ("98");
+
+        //sendcomm( DAEMONADDR, DAEMONPORT, (const char*) command );
+
+        */
+    }
 }

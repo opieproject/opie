@@ -30,6 +30,8 @@ public:
 
 protected:
     virtual void timerEvent( QTimerEvent* );
+    
+    bool daemonRunning;
 
 public slots:
     void buttonClicked();

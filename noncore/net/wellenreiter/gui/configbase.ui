@@ -11,28 +11,37 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>240</width>
-            <height>276</height>
+            <width>232</width>
+            <height>267</height>
         </rect>
     </property>
     <property stdset="1">
         <name>caption</name>
         <string>Form1</string>
     </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
     <vbox>
         <property stdset="1">
             <name>margin</name>
-            <number>11</number>
+            <number>4</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>6</number>
+            <number>0</number>
         </property>
         <widget>
             <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>Layout5</cstring>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
             </property>
             <hbox>
                 <property stdset="1">
@@ -41,7 +50,7 @@
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
-                    <number>6</number>
+                    <number>2</number>
                 </property>
                 <widget>
                     <class>QLabel</class>
@@ -80,6 +89,9 @@
                 <name>name</name>
                 <cstring>Layout7</cstring>
             </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
             <grid>
                 <property stdset="1">
                     <name>margin</name>
@@ -87,7 +99,7 @@
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
-                    <number>6</number>
+                    <number>2</number>
                 </property>
                 <widget row="0"  column="0" >
                     <class>QComboBox</class>
@@ -139,7 +151,7 @@
                     </property>
                     <property stdset="1">
                         <name>enabled</name>
-                        <bool>false</bool>
+                        <bool>true</bool>
                     </property>
                 </widget>
                 <widget row="4"  column="0"  rowspan="1"  colspan="2" >
@@ -195,7 +207,7 @@
                     </property>
                     <property stdset="1">
                         <name>enabled</name>
-                        <bool>false</bool>
+                        <bool>true</bool>
                     </property>
                 </widget>
                 <widget row="3"  column="0"  rowspan="1"  colspan="2" >
@@ -221,7 +233,7 @@
                     </property>
                     <property stdset="1">
                         <name>enabled</name>
-                        <bool>false</bool>
+                        <bool>true</bool>
                     </property>
                     <property stdset="1">
                         <name>suffix</name>
@@ -248,7 +260,7 @@
                     </property>
                     <property stdset="1">
                         <name>enabled</name>
-                        <bool>false</bool>
+                        <bool>true</bool>
                     </property>
                     <property stdset="1">
                         <name>text</name>
@@ -263,7 +275,7 @@
                     </property>
                     <property stdset="1">
                         <name>enabled</name>
-                        <bool>false</bool>
+                        <bool>true</bool>
                     </property>
                     <property stdset="1">
                         <name>text</name>
@@ -278,7 +290,7 @@
                     </property>
                     <property stdset="1">
                         <name>enabled</name>
-                        <bool>false</bool>
+                        <bool>true</bool>
                     </property>
                     <property stdset="1">
                         <name>text</name>
@@ -293,6 +305,9 @@
                 <name>name</name>
                 <cstring>Layout6</cstring>
             </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
             <hbox>
                 <property stdset="1">
                     <name>margin</name>
@@ -300,7 +315,7 @@
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
-                    <number>6</number>
+                    <number>2</number>
                 </property>
                 <widget>
                     <class>QLabel</class>
@@ -337,7 +352,10 @@
             <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Layout8</cstring>
+                <cstring>Layout5</cstring>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
             </property>
             <vbox>
                 <property stdset="1">
@@ -346,7 +364,7 @@
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
-                    <number>6</number>
+                    <number>-1</number>
                 </property>
                 <widget>
                     <class>QCheckBox</class>
@@ -378,8 +396,40 @@
                         <string>Enable Activity Display</string>
                     </property>
                 </widget>
+                <widget>
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>beepOnFound</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Beep on new network</string>
+                    </property>
+                </widget>
             </vbox>
         </widget>
+        <spacer>
+            <property>
+                <name>name</name>
+                <cstring>Spacer2</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Vertical</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
     </vbox>
 </widget>
 </UI>
