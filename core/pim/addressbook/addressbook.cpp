@@ -689,6 +689,7 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		QString description = "mycard.vcf";
 		ir->send( beamFilename, description, "text/x-vCard" );
 	} else if ( msg == "show(int)" ) {
+                raise();
 		QDataStream stream(data,IO_ReadOnly);
 		int uid;
 		stream >> uid;
@@ -705,7 +706,7 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		m_abView -> setShowByCategory( QString::null );
 		m_abView -> setCurrentUid( uid );
 		slotViewSwitched ( AbView::CardView );
-		
+
 		showMaximized();
 		qApp->exec();
 
@@ -724,7 +725,7 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		m_abView -> setShowByCategory( QString::null );
 		m_abView -> setCurrentUid( uid );
 		slotViewEdit();
-	} 
+	}
 
 }
 
