@@ -9,7 +9,7 @@
  *
  * Requirements:    Qt
  *
- * $Id: calckeypad.cpp,v 1.2 2003-02-21 10:39:29 eric Exp $
+ * $Id: calckeypad.cpp,v 1.3 2003-02-21 14:07:05 eric Exp $
  *
  ***************************************************************************/
 
@@ -114,9 +114,9 @@ void KeyPad::enterDigits(int i){
 
 if(!dCurrent)
     dCurrent = i;
-else if(!bIsDec){
-    if(iLenCurrent > 9)
+else if(iLenCurrent > 9)
         return;
+else if(!bIsDec){
     dCurrent *= 10;
     dCurrent += i;
     iLenCurrent++;
@@ -155,14 +155,21 @@ if(iPreviousOperator){
     display->setValue(dCurrent);
 }
 
-dPreviousValue      = dCurrent;
-iPreviousOperator   = i;
+if(i==5){
+    // ensure we won't be able to enter more digits
+    iLenCurrent = 100;
+    iPreviousOperator   = 0;
+    dPreviousValue      = 0;
+}else{
+    dPreviousValue      = dCurrent;
+    iPreviousOperator   = i;
 
-// reset LCD for next digit
-dCurrent            = 0;
-iLenCurrent         = 1;
-bIsDec              = false;
-dDecCurrent         = 0;
+    // reset LCD for next digit
+    dCurrent            = 0;
+    iLenCurrent         = 1;
+    bIsDec              = false;
+    dDecCurrent         = 0;
+}
 }
 /***********************************************************************
  * SLOT: clearLCD  CE/C has been pressed
@@ -200,7 +207,7 @@ QMessageBox::about( this, "About Euroconv",
                          "Under GPL license\n\n"
                          "Written by Eric Santonacci for Opie\n"
                          "http://opie.handhelds.org\n\n"
-                         "Version 0.2\n\n"
+                         "Version 0.3\n\n"
                          "Any comment or feedback to:\n"
                          "Eric.Santonacci@talc.fr\n");
 
