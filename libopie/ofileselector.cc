@@ -9,6 +9,7 @@
 #include <qlineedit.h>
 #include <qlistview.h>
 #include <qmessagebox.h>
+#include <qpainter.h>
 #include <qpushbutton.h>
 #include <qwidgetstack.h>
 #include <qpopupmenu.h>
