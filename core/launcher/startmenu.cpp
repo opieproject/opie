@@ -44,6 +44,7 @@
 StartMenu::StartMenu(QWidget *parent) : QLabel( parent )
 {
     loadOptions();
+    safety_tid = 1; // disable the timer... valgrind said it.. we don't use that option either -zecke
 
     int sz = AppLnk::smallIconSize()+3;
     QPixmap pm;
