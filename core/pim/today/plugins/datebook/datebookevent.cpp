@@ -33,7 +33,7 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
 			     WFlags fl) :
     OClickableLabel(parent,name,fl), event(ev) {
 
-    setAlignment( AlignTop );
+    // setAlignment( AlignTop );
 
     QString msg;
 
@@ -73,6 +73,8 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
     connect( this, SIGNAL( clicked() ), this, SLOT( editMe() ) );
 }
 
+DateBookEvent::~DateBookEvent()  {
+}
 
 /**
  * AM/PM timestring conversion.

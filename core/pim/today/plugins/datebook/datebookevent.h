@@ -26,20 +26,22 @@ class DateBookEvent: public OClickableLabel {
      Q_OBJECT
 
 public:
-  DateBookEvent( const EffectiveEvent &ev,
-                 QWidget* parent = 0,
-                 bool show_location = 0,
-                 bool show_notes = 0,
-                 int maxCharClip = 0,
-                 const char* name = 0,
-                 WFlags fl = 0 );
-signals:
-    void editEvent( const Event &e );
+     DateBookEvent( const EffectiveEvent &ev,
+		    QWidget* parent = 0,
+		    bool show_location = 0,
+		    bool show_notes = 0,
+		    int maxCharClip = 0,
+		    const char* name = 0,
+		    WFlags fl = 0 );
+     ~DateBookEvent();
+ signals:
+     void editEvent( const Event &e );
+     
 private slots:
     void editEventSlot( const Event &e );
     void editMe();
-private:
-    DateBookDB *db;
+ private:
+  
     QString ampmTime( QTime );
     QString differDate( QDate date );
     const EffectiveEvent event;
