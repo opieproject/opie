@@ -1,4 +1,4 @@
-/* $Id: cardmode.hh,v 1.19 2003-02-19 10:40:55 mickeyl Exp $ */
+/* $Id: cardmode.hh,v 1.20 2003-03-04 14:05:29 max Exp $ */
 
 #ifndef CARDMODE_HH
 #define CARDMODE_HH
@@ -38,6 +38,8 @@ extern "C"
 #include <pcap.h>  
 }
 
+extern pcap_t *handletopcap;
+
 /* Defines, used for the card setup */
 #define   DEFAULT_PATH       "/proc/driver/aironet/%s/Config"
 #define   CISCO_STATUS       "/proc/driver/aironet/%s/Status"
@@ -58,7 +60,8 @@ extern "C"
 
 /* Prototypes */
 int card_check_rfmon_datalink (const char *device);
-int card_into_monitormode (pcap_t **, const char *, int);
+int card_into_monitormode (const char *, int);
+int check_loopback();
 int card_set_promisc_up (const char *device);
 int card_remove_promisc (const char *device);
 int card_set_channel (const char *device, int channel,int cardtype); 
@@ -66,7 +69,6 @@ int iw_get_range_info(int skfd, const char * ifname,  struct iw_range * range);
 double iw_freq2float(iw_freq * in);
 void iw_float2freq(double in, iw_freq *	out);
 int card_detect_channels (char * device);
-
 
 /*------------------------------------------------------------------*/
 /*

@@ -1,14 +1,14 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.24 2003-02-18 09:31:47 max Exp $
+ * $Id: cardmode.cc,v 1.25 2003-03-04 14:05:29 max Exp $
  */
 
 #include "cardmode.hh"
 #include "wl_log.hh"
-
+pcap_t *handletopcap;
 /* main card into monitor function */
-int card_into_monitormode (pcap_t **orighandle, const char *device, int cardtype)
+int card_into_monitormode (const char *device, int cardtype)
 {
   char CiscoRFMON[35] = "/proc/driver/aironet/";
   FILE *CISCO_CONFIG_FILE;
@@ -152,6 +152,51 @@ int card_check_rfmon_datalink (const char *device)
   }
 }
 
+/* Ipaq running familiar does not have a loopback device, we need one */
+int check_loopback()
+{
+    /* Checking for a loopback interface with 127.0.0.1, otherwise the other stuff seems to fail on
+     familiar linux on ipaq's */
+    int err;
+    /* First generate a socket to use with iocalls */
+    int fd = socket(AF_INET, SOCK_DGRAM, 0);
+    if (fd < 0)
+    {
+        /* In case of an error */
+        wl_logerr("check_loopback, generation of a socket failed, cannot continue");
+        return 0;
+    }
+    /* Fill an empty an interface structure with the right flags (UP and Promsic) */
+    struct ifreq ifr;
+    strncpy(ifr.ifr_name, "lo",3);
+
+	/* Get the interface flags, loopback interfaces can be detected that way */
+    err = ioctl(fd, SIOCGIFFLAGS, &ifr);
+    if (err < 0)
+    {
+        wl_logerr("check_loopback, could not get the flags of lo, check if you got a lo loopback interface, cannot continue");
+    	close(fd);
+        return 0;
+    }
+	/* Checking the flags for IFF_LOOPBACK flags */
+    if(ifr.ifr_flags && IFF_LOOPBACK)
+    {
+    	/* Yes, we do have a loopback interface....sup! */
+    	close(fd);
+        wl_loginfo ("check_loopback, check for loopback interface lo successful");
+        return 1;
+    }
+    else
+    {
+		wl_logerr("check_loopback, did not found an interface lo with the IFF_LOOPBACK flag set, cannot continue");
+		close(fd);
+        return 0;
+    }
+	/* Should never be reached */
+	return 0;
+} /*check_loopback */
+
+
 /* Set card into promisc mode */
 int card_set_promisc_up (const char *device)
 {
@@ -215,16 +260,6 @@ int card_remove_promisc (const char *device)
 
     /* Fill an empty an interface structure with the right flags (UP and Promsic) */
     struct ifreq ifr;
-/*    strncpy(ifr.ifr_name, device,10);
-    ifr.ifr_flags = IFF_UP + IFF_PROMISC;
-    err = ioctl(fd, SIOCSIFFLAGS, &ifr);
-    if (err < 0)
-    {
-    	perror("Could not access the interface, ");
-    	close(fd);
-        return 0;
-    }
-  */  
     /* Get the flags from the interface*/
     strncpy(ifr.ifr_name, device,10);
     err = ioctl(fd, SIOCGIFFLAGS, &ifr);

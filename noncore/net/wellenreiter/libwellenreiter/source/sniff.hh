@@ -1,4 +1,4 @@
-/* $Id: sniff.hh,v 1.6 2003-01-04 19:02:18 mickeyl Exp $ */
+/* $Id: sniff.hh,v 1.7 2003-03-04 14:05:29 max Exp $ */
 
 #ifndef SNIFF_HH
 #define SNIFF_HH
@@ -40,11 +40,14 @@ struct packetinfo
   int ssid_len;
 };
 
+/* Function definitions  */
+/* Used for stoping and starting the sniffer process */
+int start_sniffer(const char *device, int cardtype);
+int stop_sniffer(const char *device, int cardtype);
 void process_packets(const struct pcap_pkthdr* pkthdr,const u_char* packet, char *, int);
 int decode_80211b_hdr(const u_char *p,struct packetinfo *ppinfo);
 void etheraddr_string(register const u_char *ep,char * text);
 int handle_beacon(u_int16_t fc, const u_char *p,struct packetinfo *ppinfo);
-
 int GetHeaderLength(u_int16_t fc);
 
 /*

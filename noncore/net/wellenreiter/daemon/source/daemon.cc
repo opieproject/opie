@@ -1,7 +1,7 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.24 2003-02-26 22:17:26 mjm Exp $
+ * $Id: daemon.cc,v 1.25 2003-03-04 14:04:52 max Exp $
  */
 
 #include "config.hh"
@@ -11,6 +11,7 @@
 #define MAXCHANNEL 13
 #define CHANINTERVAL 500000
 
+
 /* Main function of wellenreiterd */
 int main(int argc, char **argv)
 {
@@ -18,7 +19,7 @@ int main(int argc, char **argv)
   char buffer[WL_SOCKBUF];
   struct pcap_pkthdr header;
   struct sockaddr_in saddr;
-  pcap_t *handletopcap;
+//  pcap_t *handletopcap;
   wl_cardtype_t cardtype;
   pthread_t sub;
   const unsigned char *packet;
@@ -40,26 +41,14 @@ int main(int argc, char **argv)
   if(cardtype.type < 1 || cardtype.type > 4)
     usage();
 
-  /* set card into monitor mode */
-  if(!card_into_monitormode(&handletopcap, cardtype.iface, 
-			    cardtype.type))
+  /* Until we do not act as a read daemon, it starts the sniffer 
+     right after startup */
+  if (!start_sniffer(cardtype.iface,cardtype.type))
   {
-    wl_logerr("Cannot initialize the wireless-card, aborting");
-    exit(EXIT_FAILURE);
+  	wl_logerr("daemon, start_sniff did not return proper, aborting");
+  	exit(EXIT_FAILURE);
   }
-  wl_loginfo("Set card into monitor mode");
-
-  /* setup pcap */
-  if((handletopcap = pcap_open_live(cardtype.iface, 
-				    BUFSIZ, 1, 0, NULL)) == NULL)
-  {
-    wl_logerr("pcap_open_live() failed: %s", strerror(errno));
-    exit(EXIT_FAILURE);
-  }
-  
-#ifdef HAVE_PCAP_NONBLOCK
-  pcap_setnonblock(handletopcap, 1, NULL);
-#endif
+  wl_loginfo ("daemon, wireless card prepared for sniffing");
   
   /* Setup socket for incoming commands */
   if((sock=wl_setupsock(DAEMONADDR, DAEMONPORT, saddr)) < 0)

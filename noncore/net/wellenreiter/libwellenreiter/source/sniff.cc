@@ -1,7 +1,7 @@
 /* 
  *  rfmon mode sniffer
  *
- *  $Id: sniff.cc,v 1.11 2002-12-31 12:36:06 mjm Exp $
+ *  $Id: sniff.cc,v 1.12 2003-03-04 14:05:29 max Exp $
  */
 
 #include "sniff.hh"
@@ -10,6 +10,77 @@
 #include "wl_log.hh"
 #include "wl_types.hh"
 #include "wl_proto.hh"
+#include "cardmode.hh"
+
+int start_sniffer(const char *device, int cardtype )
+{
+	
+	/* This function initialize the sniffing
+	   1. Check for lo interface
+	   2. bring it into promsicous mode and UP
+	   3. bring device into rfmon mode
+	   start the pcap sniffing process.
+	  */
+
+  	/* Do we have the device name ? */
+	  if(device == NULL)
+ 	 {
+  	    wl_logerr("start_sniffer, parameter \"device\" is empty, please check your config");
+   	   return 0;
+  	}
+	
+	/* Some Linux System does not have a loopback device lo with 127.0.0.1 so sockets could 
+	   not made correctly, let the proggie check that and proceed only if it exists. */
+	if (!check_loopback())
+	{
+		wl_logerr("start_sniffer, check_loopback failed, cannot continue without a loopback");
+		return 0;
+	}
+
+	/* Set the card into regulary promiscous mode first and set the UP flag, in case no ip 
+	   was given. It would work without the promisc flags but i dont like this */
+	if (!card_set_promisc_up(device))
+        {
+    		wl_logerr("start_sniffer, card_set_promisc_up failed, cannot continue");
+    		return 0;
+    	} 
+
+	/* Set card into the rfmon/monitoring mode */
+	if (!card_into_monitormode(device,cardtype))
+    {
+	    wl_logerr("start_sniffer, cannot put wireless card into monitoring mode, aborting");
+		return 0;
+	}
+
+    /* setup pcap handle, used for the packet decoding etc. */
+    if((handletopcap = pcap_open_live((char *) device, BUFSIZ, 1, 0, NULL)) == NULL)
+    {
+    	wl_logerr("pcap_open_live() failed: %s", strerror(errno));
+    	return 0;
+    }
+  
+#ifdef HAVE_PCAP_NONBLOCK
+  pcap_setnonblock(handletopcap, 1, NULL);
+#endif
+	return 1;
+}
+
+
+int stop_sniffer(const char *device, int cardtype)
+{
+	/* This function terminates the sniffing 
+	   1. get the device state
+	   2. remove the rfmon state
+	   3. Remove the promisc state
+	   start the pcap sniffing process.
+	   
+	  */
+
+	/* Do we really have at least a lo interface with the 127.0.0.1 ? */
+	return 0;	
+
+}
+
 
 /* Main function, checks packets */
 void process_packets(const struct pcap_pkthdr *pkthdr, 

@@ -1,7 +1,7 @@
 /* 
  * Global bufffer size and type definitions
  *
- * $Id: wl_types.hh,v 1.3 2003-02-09 15:48:57 mjm Exp $
+ * $Id: wl_types.hh,v 1.4 2003-03-04 14:05:29 max Exp $
  *
  */
 
@@ -37,6 +37,7 @@ typedef struct {
 /* Config specific */
 #define WL_CONFFILE "sample.conf"
 #define WL_CONFBUFF 128
+
 
 #endif /* WL_TYPES_HH */
 
