@@ -6,6 +6,9 @@
 #include <qstring.h>
 #include <qvaluelist.h>
 
+#include <sys/types.h>
+
+class KProcess;
 namespace OpieTooth {
     /**
      *  Device takes care of attaching serial 
@@ -61,6 +64,20 @@ namespace OpieTooth {
          * @return up bool, if the device is up or not.
          */
         void device(const QString& device, bool up );
+    private slots:
+        virtual void slotExited( KProcess* );
+        virtual void slotStdOut(KProcess*, char*, int );
+	virtual void slotStdErr(KProcess*, char*, int );
+    private:
+	class Private;
+	Private *d;
+	QString m_device;
+	bool m_attached:1;
+	KProcess* m_hci;
+	KProcess* m_process;
+	QString m_devId;
+	QString m_mode;
+	pid_t pid;
     };
 };
 
