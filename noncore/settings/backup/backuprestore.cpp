@@ -35,13 +35,13 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name)
 
   systemSettings = new QListViewItem(backupList, "System Settings", "",
                                      "/etc");
-  selectItem(systemSettings);
+//  selectItem(systemSettings);
   applicationSettings = new QListViewItem(backupList, "Application Settings", "",
                                           QDir::homeDirPath() + "/Settings/");
   selectItem(applicationSettings);
   documents= new QListViewItem(backupList, "Documents", "",
                                QDir::homeDirPath() + "/Documents/");
-  selectItem(documents);
+//  selectItem(documents);
   
   scanForApplicationSettings();
   
@@ -178,8 +178,8 @@ void BackupAndRestore::backupPressed(){
     c++;
   }
   outputFile += EXTENSION;
-  
-  int r = system(QString("tar -c %1 | gzip --best > %2").arg(backupFiles).arg(outputFile).latin1());
+  qDebug("system(\"tar -c %1 | gzip > %2\").arg(backupFiles).arg(outputFile).latin1())");
+  int r = system(QString("tar -c %1 | gzip > %2").arg(backupFiles).arg(outputFile).latin1() );
   if(r != 0){
     QMessageBox::critical(this, "Message", "Backup Failed.",QString("Ok") );
     return;   
