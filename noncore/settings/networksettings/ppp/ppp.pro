@@ -10,7 +10,7 @@ INCLUDEPATH	+= $(OPIEDIR)/include ../ ../interfaces/
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -L../interfaces/ -linterfaces
 INTERFACES	=  
-TARGET		= pppplugin
+TARGET		= kppp
 VERSION		= 1.0.0
 
 

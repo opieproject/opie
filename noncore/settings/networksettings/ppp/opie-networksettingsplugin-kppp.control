@@ -1,0 +1,10 @@
+Package: opie-networksettingsplugin-kppp
+Files: $OPIEDIR/plugins/networksettings/libkppp.so* 
+Priority: optional
+Section: opie/settings
+Maintainer: Patrick S. Vogt <tille@handhelds.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-networksettings
+Description: Network settings kppp plugin.
+
