@@ -1,0 +1,4 @@
+moc_*
+Makefile
+todoentry.h
+todoentry.cpp

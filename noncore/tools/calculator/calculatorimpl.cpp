@@ -18,6 +18,11 @@
 **
 **********************************************************************/
 
+/*
+ * 01/14/2002 Charles-Edouard Ruault <ce@ruault.com>
+ * Added support for Temperature conversions.
+ */
+
 #include "calculatorimpl.h"
 
 #include <qpe/resource.h>
@@ -134,7 +139,8 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
         }
 
         entry_list = new double[conversion_mode_count*func_button_count];
-
+		preoffset_list = new double[conversion_mode_count*func_button_count];
+		postoffset_list = new double[conversion_mode_count*func_button_count];
         myfile.close();
         myfile.open( IO_Translate | IO_ReadOnly );
         QTextStream ts2(&myfile);
@@ -153,6 +159,12 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
                                 line2 = ts2.readLine();
                                 line2.remove(0,6);
                                 entry_list[x] = line2.toDouble();
+								line2 = ts2.readLine();
+                                line2.remove(0,7);
+                                preoffset_list[x] = line2.toDouble();
+								line2 = ts2.readLine();
+                                line2.remove(0,8);
+                                postoffset_list[x] = line2.toDouble();
                                 x++;
                             }
                         }
@@ -220,16 +232,18 @@ void CalculatorImpl::do_convert(int button) {
 	button < changeable_func_button_count ) {
         if ( last_conversion > -1 ) {
             if( state == sNewNumber ){
-                acc = num
+			  acc = (num+ preoffset_list[(current_mode - pre_conv_modes_count) * func_button_count + last_conversion])
                     / (entry_list[(current_mode - pre_conv_modes_count) * func_button_count + last_conversion])
-                    * (entry_list[(current_mode - pre_conv_modes_count) * func_button_count + button]) ;
+                    * (entry_list[(current_mode - pre_conv_modes_count) * func_button_count + button]) 
+				+postoffset_list[(current_mode - pre_conv_modes_count) * func_button_count + button];
 		num = acc;
                 LCD->display( acc );
             } else {
                 state = sNewNumber;
-                num = num
+                num = (num+ preoffset_list[(current_mode - pre_conv_modes_count) * func_button_count + last_conversion])
                     / (entry_list[(current_mode - pre_conv_modes_count) * func_button_count + last_conversion])
-                    * (entry_list[(current_mode - pre_conv_modes_count) * func_button_count + button]) ;
+                    * (entry_list[(current_mode - pre_conv_modes_count) * func_button_count + button]) 
+				  + postoffset_list[(current_mode - pre_conv_modes_count) * func_button_count + button];;
                 LCD->display( num );
                 acc = num;
             }

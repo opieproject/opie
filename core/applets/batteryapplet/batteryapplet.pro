@@ -4,8 +4,8 @@ HEADERS	=   battery.h batterystatus.h batteryappletimpl.h
 SOURCES	=   battery.cpp batterystatus.cpp batteryappletimpl.cpp
 TARGET		= batteryapplet
 DESTDIR		= ../../plugins/applets
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH      += ../$(QPEDIR)/include ..
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH      += ../$(OPIEDIR)/include ..
 LIBS            += -lqpe
 VERSION		= 1.0.0
 

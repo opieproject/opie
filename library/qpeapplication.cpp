@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.1.1.2 2002-02-04 22:05:35 kergoth Exp $
+** $Id: qpeapplication.cpp,v 1.4 2002-02-10 13:22:54 jeremy Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -163,25 +163,45 @@ public:
 };
 
 static int muted=0;
+static int micMuted=0;
 
 static void setVolume(int t=0, int percent=-1)
 {
-    switch (t) {
-	case 0: {
-	    Config cfg("Sound");
-	    cfg.setGroup("System");
-	    if ( percent < 0 )
-		percent = cfg.readNumEntry("Volume",50);
-	    int fd = 0;
-	    if ((fd = open("/dev/mixer", O_RDWR))>=0) {
-		int vol = muted ? 0 : percent;
-		// set both channels to same volume
-		vol |= vol << 8;
-		ioctl(fd, MIXER_WRITE(0), &vol);
-		::close(fd);
-	    }
-	} break;
-    }
+  switch (t) {
+  case 0: {
+	Config cfg("Sound");
+	cfg.setGroup("System");
+	if ( percent < 0 )
+	  percent = cfg.readNumEntry("Volume",50);
+	int fd = 0;
+	if ((fd = open("/dev/mixer", O_RDWR))>=0) {
+	  int vol = muted ? 0 : percent;
+	  // set both channels to same volume
+	  vol |= vol << 8;
+	  ioctl(fd, MIXER_WRITE(0), &vol);
+	  ::close(fd);
+	}
+  } break;
+  }
+}
+
+static void setMic(int t=0, int percent=-1)
+{
+  switch (t) {
+  case 0: {
+	Config cfg("Sound");
+	cfg.setGroup("System");
+	if ( percent < 0 )
+	  percent = cfg.readNumEntry("Mic",50);
+	
+	int fd = 0;
+	int mic = micMuted ? 0 : percent;
+	if ((fd = open("/dev/mixer", O_RDWR))>=0) {
+	  ioctl(fd, MIXER_WRITE(SOUND_MIXER_MIC), &mic);
+	  ::close(fd);
+	}
+  } break;
+  }
 }
 
 int qpe_sysBrightnessSteps()
@@ -772,11 +792,11 @@ QPEApplication::~QPEApplication()
 }
 
 /*!
-  Returns <tt>$QPEDIR/</tt>.
+  Returns <tt>$OPIEDIR/</tt>.
 */
 QString QPEApplication::qpeDir()
 {
-    const char *base = getenv( "QPEDIR" );
+    const char *base = getenv( "OPIEDIR" );
     if ( base )
 	return QString( base ) + "/";
 
@@ -869,132 +889,141 @@ void QPEApplication::systemMessage( const QCString &msg, const QByteArray &data)
 #ifdef Q_WS_QWS
     QDataStream stream( data, IO_ReadOnly );
     if ( msg == "applyStyle()" ) {
-	applyStyle();
+	  applyStyle();
     } else if ( msg == "setScreenSaverInterval(int)" ) {
-	if ( type() == GuiServer ) {
+	  if ( type() == GuiServer ) {
 	    int time;
 	    stream >> time;
 	    setScreenSaverInterval(time);
-	}
+	  }
     } else if ( msg == "setScreenSaverIntervals(int,int,int)" ) {
-	if ( type() == GuiServer ) {
+	  if ( type() == GuiServer ) {
 	    int t1,t2,t3;
 	    stream >> t1 >> t2 >> t3;
 	    setScreenSaverIntervals(t1,t2,t3);
-	}
+	  }
     } else if ( msg == "setBacklight(int)" ) {
-	if ( type() == GuiServer ) {
+	  if ( type() == GuiServer ) {
 	    int bright;
 	    stream >> bright;
 	    setBacklight(bright);
-	}
+	  }
     } else if ( msg == "setDefaultRotation(int)" ) {
-	if ( type() == GuiServer ) {
+	  if ( type() == GuiServer ) {
 	    int r;
 	    stream >> r;
 	    setDefaultRotation(r);
-	}
+	  }
     } else if ( msg == "shutdown()" ) {
-	if ( type() == GuiServer )
+	  if ( type() == GuiServer )
 	    shutdown();
     } else if ( msg == "quit()" ) {
-	if ( type() != GuiServer )
+	  if ( type() != GuiServer )
 	    tryQuit();
     } else if ( msg == "forceQuit()" ) {
-	if ( type() != GuiServer )
+	  if ( type() != GuiServer )
 	    quit(); 
     } else if ( msg == "restart()" ) {
-	if ( type() == GuiServer )
+	  if ( type() == GuiServer )
 	    restart();
     } else if ( msg == "grabKeyboard(QString)" ) {
-	QString who;
-	stream >> who;
-	if ( who.isEmpty() )
+	  QString who;
+	  stream >> who;
+	  if ( who.isEmpty() )
 	    d->kbgrabber = 0;
-	else if ( who != d->appName )
+	  else if ( who != d->appName )
 	    d->kbgrabber = 1;
-	else
+	  else
 	    d->kbgrabber = 2;
     } else if ( msg == "language(QString)" ) {
-	if ( type() == GuiServer ) {
+	  if ( type() == GuiServer ) {
 	    QString l;
 	    stream >> l;
 	    QString cl = getenv("LANG");
 	    if ( cl != l ) {
-		if ( l.isNull() )
+		  if ( l.isNull() )
 		    unsetenv( "LANG" );
-		else
+		  else
 		    setenv( "LANG", l.latin1(), 1 );
-		restart();
+		  restart();
 	    }
-	}
+	  }
     } else if ( msg == "timeChange(QString)" ) {
-	QString t;
-	stream >> t;
-	if ( t.isNull() )
+	  QString t;
+	  stream >> t;
+	  if ( t.isNull() )
 	    unsetenv( "TZ" );
-	else
+	  else
 	    setenv( "TZ", t.latin1(), 1 );
-	// emit the signal so everyone else knows...
-	emit timeChanged();
+	  // emit the signal so everyone else knows...
+	  emit timeChanged();
     } else if ( msg == "execute(QString)" ) {
-	if ( type() == GuiServer ) {
+	  if ( type() == GuiServer ) {
 	    QString t;
 	    stream >> t;
 	    Global::execute( t );
-	}
+	  }
     } else if ( msg == "execute(QString,QString)" ) {
-	if ( type() == GuiServer ) {
+	  if ( type() == GuiServer ) {
 	    QString t,d;
 	    stream >> t >> d;
 	    Global::execute( t, d );
-	}
+	  }
     } else if ( msg == "addAlarm(QDateTime,QCString,QCString,int)" ) {
-	if ( type() == GuiServer ) {
+	  if ( type() == GuiServer ) {
 	    QDateTime when;
 	    QCString channel, message;
 	    int data;
 	    stream >> when >> channel >> message >> data;
 	    AlarmServer::addAlarm( when, channel, message, data );
-	}
+	  }
     } else if ( msg == "deleteAlarm(QDateTime,QCString,QCString,int)" ) {
-	if ( type() == GuiServer ) {
+	  if ( type() == GuiServer ) {
 	    QDateTime when;
 	    QCString channel, message;
 	    int data;
 	    stream >> when >> channel >> message >> data;
 	    AlarmServer::deleteAlarm( when, channel, message, data );
-	}
+	  }
     } else if ( msg == "clockChange(bool)" ) {
-	int tmp;
-	stream >> tmp;
-	emit clockChanged( tmp );
+	  int tmp;
+	  stream >> tmp;
+	  emit clockChanged( tmp );
     } else if ( msg == "weekChange(bool)" ) {
-	int tmp;
-	stream >> tmp;
-	emit weekChanged( tmp );
+	  int tmp;
+	  stream >> tmp;
+	  emit weekChanged( tmp );
     } else if ( msg == "setDateFormat(DateFormat)" ) {
-	DateFormat tmp;
-	stream >> tmp;
-	emit dateFormatChanged( tmp );
+	  DateFormat tmp;
+	  stream >> tmp;
+	  emit dateFormatChanged( tmp );
     } else if ( msg == "setVolume(int,int)" ) {
-	int t,v;
-	stream >> t >> v;
-	setVolume(t,v);
-	emit volumeChanged( muted );
+	  int t,v;
+	  stream >> t >> v;
+	  setVolume(t,v);
+	  emit volumeChanged( muted );
     } else if ( msg == "volumeChange(bool)" ) {
-	stream >> muted;
-	setVolume();
-	emit volumeChanged( muted );
+	  stream >> muted;
+	  setVolume();
+	  emit volumeChanged( muted );
+	} else if ( msg == "setMic(int,int)") { // Added: 2002-02-08 by Jeremy Cowgar <jc@cowgar.com>
+	  int t,v;
+	  stream >> t >> v;
+	  setMic(t,v);
+	  emit micChanged( micMuted );
+	} else if ( msg == "micChange(bool)" ) { // Added: 2002-02-08 by Jeremy Cowgar <jc@cowgar.com>
+	  stream >> micMuted;
+	  setMic();
+	  emit micChanged( micMuted );
     } else if ( msg == "setScreenSaverMode(int)" ) {
-	if ( type() == GuiServer ) {
-	    int old = disable_suspend;
-	    stream >> disable_suspend;
-	    //qDebug("setScreenSaverMode(%d)", disable_suspend );
-	    if ( disable_suspend > old )
-		setScreenSaverInterval( -1 );
+	  if ( type() == GuiServer ) {
+		int old = disable_suspend;
+		stream >> disable_suspend;
+		//qDebug("setScreenSaverMode(%d)", disable_suspend );
+		if ( disable_suspend > old )
+		  setScreenSaverInterval( -1 );
+	  }
 	}
-    }
 #endif
 }
 

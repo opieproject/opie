@@ -167,7 +167,7 @@ Such messages in the base Qtopia applications are:
    <li>showFile(QString <i>file</i>)
     <br>Send this message to have the Help Browser show a file.
 	The <i>file</i> may be an absolute filename or relative
-	to the system HTML documentation directory ($QPEDIR/help/html).
+	to the system HTML documentation directory ($OPIEDIR/help/html).
   </ul>
  <dt><b>QPE/Application/datebook</b>
   <ul>

@@ -1,0 +1,10 @@
+Files: i18n/zh_CN/.directory i18n/zh_CN/*.qm
+Priority: optional
+Section: opie/i18n
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Arch: iPAQ
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION), qpf-cyberbit-120-50-t10
+Description: i18n: Chinese
+ Chinese UI texts for Qtopia environment.

@@ -1,0 +1,9 @@
+Files: bin/minesweep apps/Games/minesweep.desktop
+Priority: optional
+Section: opie/games
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: Game: find the mines
+ A game for the Opie environment.

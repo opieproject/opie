@@ -9,8 +9,8 @@ HEADERS = binaryimpl.h \
 SOURCES = binaryimpl.cpp \
 	    binaryfactory.cpp
 
-INCLUDEPATH     += $(QPEDIR)/include \
-		    $(QPEDIR)/calc2
-DEPENDPATH      += $(QPEDIR)/include 
+INCLUDEPATH     += $(OPIEDIR)/include \
+		    $(OPIEDIR)/calc2
+DEPENDPATH      += $(OPIEDIR)/include 
 
-DESTDIR = $(QPEDIR)/plugins/calculator
+DESTDIR = $(OPIEDIR)/plugins/calculator

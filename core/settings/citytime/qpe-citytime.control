@@ -1,9 +1,0 @@
-Files: bin/citytime apps/Applications/citytime.desktop
-Priority: optional
-Section: qpe/applications
-Maintainer: Warwick Allison <warwick@trolltech.com>
-Architecture: arm
-Version: $QPE_VERSION-3
-Depends: qpe-base ($QPE_VERSION), timezones
-Description: Time-zone / world clock settings
- The time-zone manager for the Qtopia environment.

@@ -33,7 +33,6 @@
 #include <assert.h>
 #include <qapplication.h>
 
-
 //#define HAVE_MMAP
 
 #if defined(HAVE_MMAP)
@@ -277,11 +276,7 @@ int LibMadPlugin::audioChannels( int ) {
 
 int LibMadPlugin::audioFrequency( int ) {
     debugMsg( "LibMadPlugin::audioFrequency" );
-#ifdef OLD_MEDIAPLAYER_API
-    long t; short t1[5]; audioReadStereoSamples( t1, 1, t, 0 );
-#else
     long t; short t1[5]; audioReadSamples( t1, 2, 1, t, 0 );
-#endif
     qDebug( "LibMadPlugin::audioFrequency: %i", d->frame.header.samplerate );
     return d->frame.header.samplerate;
 }
@@ -310,10 +305,7 @@ long LibMadPlugin::audioGetSample( int ) {
     return 0;
 }
 
-
-#ifdef OLD_MEDIAPLAYER_API
-
-
+/*
 bool LibMadPlugin::audioReadSamples( short *, int, long, int ) {
     debugMsg( "LibMadPlugin::audioReadSamples" );
     return FALSE;
@@ -324,10 +316,7 @@ bool LibMadPlugin::audioReReadSamples( short *, int, long, int ) {
     debugMsg( "LibMadPlugin::audioReReadSamples" );
     return FALSE;
 }
-
-
-#endif
-
+*/
 
 bool LibMadPlugin::read() {
     debugMsg( "LibMadPlugin::read" );
@@ -489,10 +478,7 @@ bool LibMadPlugin::decode( short *output, long samples, long& samplesMade ) {
     return TRUE;
 }
 
-
-#ifdef OLD_MEDIAPLAYER_API
-
-
+/*
 bool LibMadPlugin::audioReadMonoSamples( short *, long, long&, int ) {
     debugMsg( "LibMadPlugin::audioReadMonoSamples" );
     return FALSE;
@@ -500,19 +486,14 @@ bool LibMadPlugin::audioReadMonoSamples( short *, long, long&, int ) {
 
 
 bool LibMadPlugin::audioReadStereoSamples( short *output, long samples, long& samplesMade, int ) {
-
-#else
-
+*/
 bool LibMadPlugin::audioReadSamples( short *output, int /*channels*/, long samples, long& samplesMade, int ) {
-
-#endif
-
     debugMsg( "LibMadPlugin::audioReadStereoSamples" );
 
     static bool needInput = TRUE;
     
     if ( samples == 0 )
-	return TRUE;
+	return FALSE;
 
     do {
 	if ( needInput )
@@ -520,13 +501,13 @@ bool LibMadPlugin::audioReadSamples( short *output, int /*channels*/, long sampl
 //		if ( d->input.eof )
 //		    needInput = FALSE;
 //		else
-		    return TRUE;
+		    return FALSE;
 	    }
 
 	needInput = FALSE;
 
 	if ( decode( output, samples, samplesMade ) )
-	    return FALSE;
+	    return TRUE;
 	else
 	    needInput = TRUE;
     }
@@ -540,7 +521,7 @@ bool LibMadPlugin::audioReadSamples( short *output, int /*channels*/, long sampl
 	return FALSE;
     } else
 */
-        return TRUE;
+        return FALSE;
 }
 
 

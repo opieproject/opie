@@ -4,8 +4,8 @@ DESTDIR		= ../../bin
 HEADERS		= settings.h
 SOURCES		= language.cpp main.cpp
 INTERFACES	= languagesettingsbase.ui
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH	+= ../$(QPEDIR)/include
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH	+= ../$(OPIEDIR)/include
 LIBS            += -lqpe
 TARGET		= language
 

@@ -6,7 +6,7 @@ CXX	=	$(SYSCONF_CXX) $(QT_CXX_MT)
 CXXFLAGS=	$(SYSCONF_CXXFLAGS_QT) $(SYSCONF_CXXFLAGS) $(SYSCONF_CXXFLAGS_LIB)
 CC	=	$(SYSCONF_CC) $(QT_C_MT)
 CFLAGS	=	$(SYSCONF_CFLAGS) $(SYSCONF_CFLAGS_LIB)
-INCPATH =	-I../library
+INCPATH =	-I$(OPIEDIR)/include
 LFLAGS	=	$(SYSCONF_LFLAGS_QT) $(SYSCONF_RPATH_QT) $(SYSCONF_LFLAGS) $(QT_LFLAGS_MT)
 LIBS	=	$(SUBLIBS) -lqpe -lfreetype $(SYSCONF_LIBS_QT) $(SYSCONF_LIBS_QTAPP)
 MOC	=	$(SYSCONF_MOC)
@@ -24,8 +24,7 @@ TARGET1 = lib$(TARGET).so.$(VER_MAJ)
 ####### Files
 
 HEADERS =	fontfactoryttf_qws.h \
-		freetypefactoryimpl.h \
-		qfontdata_p.h
+		freetypefactoryimpl.h
 SOURCES =	fontfactoryttf_qws.cpp \
 		freetypefactoryimpl.cpp
 OBJECTS =	fontfactoryttf_qws.o \
@@ -109,9 +108,6 @@ fontfactoryttf_qws.o: fontfactoryttf_qws.cpp \
 freetypefactoryimpl.o: freetypefactoryimpl.cpp \
 		fontfactoryttf_qws.h \
 		qfontdata_p.h \
-		freetypefactoryimpl.h \
-		../library/fontfactoryinterface.h \
-		../library/qcom.h \
-		../library/quuid.h
+		freetypefactoryimpl.h
 
 

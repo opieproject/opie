@@ -1,0 +1,9 @@
+Files: plugins/applets/libvolumeapplet.so*
+Priority: optional
+Section: opie/taskbar
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION.1
+Depends: opie-base ($QPE_VERSION)
+Description: Volume applet
+ Volume applet for the Opie environment taskbar.

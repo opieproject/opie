@@ -1,6 +1,6 @@
 TEMPLATE	= app
 CONFIG		+= qt warn_on release
-DESTDIR		= $(QPEDIR)/bin
+DESTDIR		= $(OPIEDIR)/bin
 
 HEADERS	= datebookday.h \
 		  datebook.h \
@@ -27,8 +27,8 @@ INTERFACES	= dateentry.ui \
 		  datebookweekheader.ui \
 		  repeatentrybase.ui
 
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH	+= $(QPEDIR)/include
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 
 TARGET		= datebook

@@ -4,8 +4,8 @@ HEADERS	=   unikeyboard.h unikeyboardimpl.h
 SOURCES	=   unikeyboard.cpp unikeyboardimpl.cpp
 TARGET		= qunikeyboard
 DESTDIR		= ../../plugins/inputmethods
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH      += ../$(QPEDIR)/include ../../taskbar
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH      += ../$(OPIEDIR)/include ../../taskbar
 LIBS            += -lqpe
 VERSION		= 1.0.0
 

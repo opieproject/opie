@@ -117,14 +117,14 @@ SOURCES	=   calendar.cpp \
 qt2:HEADERS += quuid.h qcom.h qlibrary.h qlibrary_p.h
 qt2:SOURCES += quuid.cpp qlibrary.cpp qlibrary_unix.cpp
 
-INCLUDEPATH += $(QPEDIR)/include backend
+INCLUDEPATH += $(OPIEDIR)/include backend
 LIBS		+= -ldl -lcrypt -lm
 
 INTERFACES = passwordbase_p.ui categoryeditbase_p.ui findwidgetbase_p.ui lnkpropertiesbase_p.ui
 
 TARGET		= qpe
 DESTDIR		= $(QTDIR)/lib$(PROJMAK)
-# This is set by configure$(QPEDIR).
+# This is set by configure$(OPIEDIR).
 VERSION		= 1.5.0
 
 TRANSLATIONS = ../i18n/de/libqpe.ts

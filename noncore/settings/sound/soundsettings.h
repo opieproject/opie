@@ -26,17 +26,21 @@
 
 class SoundSettings : public SoundSettingsBase
 { 
-    Q_OBJECT
-
+Q_OBJECT
+	
 public:
-    SoundSettings( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
-
+ SoundSettings( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+  
 protected:
-    void accept();
-    void reject();
-
+ void accept();
+ void reject();
+  
 private slots:
-    void setVolume(int);
+ void setVolume(int);
+ void setMic(int); 
+
+ void volumeChanged( bool muted );
+ void micChanged( bool muted );
 };
 
 

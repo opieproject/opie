@@ -1,0 +1,10 @@
+Files: i18n/hu/.directory i18n/hu/*.qm etc/dict/dawg.hu
+Priority: optional
+Section: opie/i18n
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Arch: iPAQ
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: i18n: Magyar
+ Hungarian UI texts and dictionary for Qtopia environment.

@@ -1,0 +1,9 @@
+Files: bin/snake apps/Games/snake.desktop pics/snake
+Priority: optional
+Section: opie/games
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: Game: control the snake
+ A game for the Opie environment.

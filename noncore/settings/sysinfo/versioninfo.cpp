@@ -52,7 +52,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     }
 
     QString palmtopVersionString;
-    palmtopVersionString = tr( "<b>Qtopia</b><p>Version: " ) + QPE_VERSION + "<p>";
+    palmtopVersionString = tr( "<b>Opie</b><p>Version: " ) + QPE_VERSION + "<p>";
 #ifdef QPE_VENDOR
     QString builder = QPE_VENDOR;
 #else
@@ -66,7 +66,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     hb1->setSpacing( 2 );
 
     QLabel *palmtopLogo = new QLabel( this );
-    QImage logo1 = Resource::loadImage( "qpe-logo" );
+    QImage logo1 = Resource::loadImage( "opielogo" );
     logo1 = logo1.smoothScale( 50, 55 );
     QPixmap logo1Pixmap;
     logo1Pixmap.convertFromImage( logo1 );

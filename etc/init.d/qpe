@@ -5,10 +5,11 @@ export LOGNAME=root
 export HOME=/$LOGNAME
 export QWS_DISPLAY=Transformed:Rot270:0
 export QTDIR=/usr
+export OPIEDIR=/opt/QtPalmtop
 export QPEDIR=/opt/QtPalmtop
-if [ ! -x $QPEDIR/bin/qpe ] ; then exit 0 ; fi
+if [ ! -x $OPIEDIR/bin/qpe ] ; then exit 0 ; fi
 
-$QPEDIR/bin/qpe-reorgfiles
+$OPIEDIR/bin/qpe-reorgfiles
 
 . /etc/profile
 
@@ -25,7 +26,7 @@ case $1 in
 
 	rm -f /etc/rc2.d/S99x # Can't have both running!
 
-	$QPEDIR/bin/qpe 2>/dev/null >/dev/null &
+	$OPIEDIR/bin/qpe 2>/dev/null >/dev/null &
 
 	;;
 'stop')

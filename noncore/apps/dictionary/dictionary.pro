@@ -7,8 +7,8 @@ SOURCES	= dicttool.cpp main.cpp
 
 INTERFACES	= dicttoolbase.ui
 
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH	+= $(QPEDIR)/include
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 
 TARGET		= dictionary

@@ -8,10 +8,11 @@ mkdir -p etc/rc2.d
 rm -f etc/rc2.d/S98qpe
 ln -s ../init.d/qpe etc/rc2.d/S98qpe
 
-VERSION_MAJ=$(sed -n -e 's/.*QPE_VERSION "\([0-9]*\)\..*\..*".*/\1/p' <$QPEDIR/include/qpe/version.h)
-VERSION_MIN=$(sed -n -e 's/.*QPE_VERSION ".*\.\([0-9]*\)\..*".*/\1/p' <$QPEDIR/include/qpe/version.h)
-VERSION_PAT=$(sed -n -e 's/.*QPE_VERSION ".*\..*\.\([0-9]*\).*/\1/p' <$QPEDIR/include/qpe/version.h)
-if grep -q 'QPE_VERSION .*snapshot' $QPEDIR/include/qpe/version.h
+VERSION_MAJ=$(sed -n -e 's/.*QPE_VERSION "\([0-9]*\)\..*\..*".*/\1/p' <$OPIEDIR/include/qpe/version.h)
+VERSION_MIN=$(sed -n -e 's/.*QPE_VERSION ".*\.\([0-9]*\)\..*".*/\1/p' <$OPIEDIR/include/qpe/version.h)
+VERSION_PAT=$(sed -n -e 's/.*QPE_VERSION ".*\..*\.\([0-9]*\).*/\1/p' <$OPIEDIR/include/qpe/version.h)
+SUB_VERSION=$(sed -n -e 's,.*SUB_VERSION \"\(.*\)\".*,\1,p' <$OPIEDIR/include/qpe/version.h)
+if grep -q 'QPE_VERSION .*snapshot' $OPIEDIR/include/qpe/version.h
 then
     VERSION_CVS="_$(date +%Y%m%d)"
 else
@@ -47,9 +48,9 @@ do
 	DATADIR=$IMAGEDIR
 	mkdir -p $IMAGEDIR
     ;; -rpm)
-	if [ "$QPEDIR" != "/opt/Qtopia" ]
+	if [ "$OPIEDIR" != "/opt/Qtopia" ]
 	then
-	    echo >&2 '$QPEDIR is not the standard /usr/Qtopia directory.'
+	    echo >&2 '$OPIEDIR is not the standard /usr/Qtopia directory.'
 	    sleep 1
 	    #exit 1
 	fi
@@ -70,11 +71,11 @@ done
 
 if [ -z "$FILES" ]
 then
-    FILES=`find $QPEDIR -name "*.control" -print`
+    FILES=`find $OPIEDIR -name "*.control" -print`
 fi
 
 RDIR=$PWD
-cd $QPEDIR
+cd $OPIEDIR
 
 for i in $FILES
 do
@@ -140,7 +141,7 @@ do
 		    then
 			case "$ff" in
 			 /*) RPMFILES="$RPMFILES $ff"
-			;; *) RPMFILES="$RPMFILES $QPEDIR/$ff"
+			;; *) RPMFILES="$RPMFILES $OPIEDIR/$ff"
 			esac
 		    else
 			mkdir -p $D

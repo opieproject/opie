@@ -1,6 +1,6 @@
 Files: i18n/zh_TW/.directory i18n/zh_TW/*.qm
 Priority: optional
-Section: qpe/i18n
+Section: opie/i18n
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Arch: iPAQ

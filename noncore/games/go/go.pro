@@ -11,8 +11,8 @@ SOURCES		= amigo.c \
 		killable.c \
 		gowidget.cpp \
 		main.cpp
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH	+= $(QPEDIR)/include
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 TARGET		= go
 

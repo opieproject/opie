@@ -4,8 +4,8 @@ DESTDIR		= ../../bin
 HEADERS		= settings.h
 SOURCES		= light.cpp main.cpp
 INTERFACES	= lightsettingsbase.ui
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH	+= ../$(QPEDIR)/include
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH	+= ../$(OPIEDIR)/include
 LIBS            += -lqpe
 TARGET		= light-and-power
 

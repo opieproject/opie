@@ -6,7 +6,7 @@ SOURCES	        =   version.c fixed.c bit.c timer.c stream.c frame.c synth.c dec
 		    layer12.c layer3.c huffman.c libmadplugin.cpp libmadpluginimpl.cpp
 TARGET		=   madplugin
 DESTDIR		=   ../../plugins/codecs
-INCLUDEPATH += $(QPEDIR)/include ..
-DEPENDPATH      +=  ../$(QPEDIR)/include ..
+INCLUDEPATH += $(OPIEDIR)/include ..
+DEPENDPATH      +=  ../$(OPIEDIR)/include ..
 LIBS            +=  -lqpe -lm
 VERSION		=   1.0.0

@@ -1,0 +1,9 @@
+Files: bin/mpegplayer pics/mpegplayer/* apps/Applications/mpegplayer.desktop plugins/codecs/libmpeg3plugin.so plugins/codecs/libmpeg3plugin.so.1 plugins/codecs/libmpeg3plugin.so.1.0 plugins/codecs/libmpeg3plugin.so.1.0.0
+Priority: optional
+Section: opie/applications
+Maintainer: John Ryland <jryland@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: MPEG video/audio player
+ The mpegplayer for the Opie environment.

@@ -1,0 +1,9 @@
+Files: bin/qpe apps/Settings/Calibrate.desktop
+Priority: required
+Section: opie/system
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: qt-embedded (>=$QTE_VERSION)
+Description: Launcher for Opie
+ The "finder" or "explorer", or whatever you want to call it.

@@ -1,0 +1,11 @@
+Files: bin/quickexec
+Priority: required
+Section: opie/applications
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Arch: iPAQ
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: Calculator
+ A multi-function calculator for the Opie environment.
+ Includes units conversion.

@@ -36,7 +36,7 @@ SOURCES		=   libmpeg3plugin.cpp libmpeg3pluginimpl.cpp \
 		    video/vlc.c
 TARGET		=   mpeg3plugin
 DESTDIR		=   ../../plugins/codecs
-INCLUDEPATH += $(QPEDIR)/include ..
-DEPENDPATH      +=  ../$(QPEDIR)/include ..
+INCLUDEPATH += $(OPIEDIR)/include ..
+DEPENDPATH      +=  ../$(OPIEDIR)/include ..
 LIBS            +=  -lqpe -lpthread -lm
 VERSION		=   1.0.0

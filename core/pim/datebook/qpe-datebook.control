@@ -1,9 +1,0 @@
-Files: bin/datebook apps/Applications/datebook.desktop
-Priority: optional
-Section: qpe/applications
-Maintainer: Warwick Allison <warwick@trolltech.com>
-Architecture: arm
-Version: $QPE_VERSION-3
-Depends: qpe-base ($QPE_VERSION)
-Description: A datebook/appointment manager
- A datebook/appointment manager for the Qtopia environment.

@@ -2,7 +2,7 @@ TEMPLATE	= app
 
 CONFIG		= qt warn_on release
 
-DESTDIR		= $(QPEDIR)/bin
+DESTDIR		= $(OPIEDIR)/bin
 
 HEADERS		= background.h \
 		  desktop.h \
@@ -25,24 +25,24 @@ HEADERS		= background.h \
 		  qcopbridge.h \
 		  packageslave.h \
 		irserver.h \
-	$(QPEDIR)/rsync/buf.h \
-	$(QPEDIR)/rsync/checksum.h \
-	$(QPEDIR)/rsync/command.h \
-	$(QPEDIR)/rsync/emit.h \
-	$(QPEDIR)/rsync/job.h \
-	$(QPEDIR)/rsync/netint.h \
-	$(QPEDIR)/rsync/protocol.h \
-	$(QPEDIR)/rsync/prototab.h \
-	$(QPEDIR)/rsync/rsync.h \
-	$(QPEDIR)/rsync/search.h \
-	$(QPEDIR)/rsync/stream.h \
-	$(QPEDIR)/rsync/sumset.h \
-	$(QPEDIR)/rsync/trace.h \
-	$(QPEDIR)/rsync/types.h \
-	$(QPEDIR)/rsync/util.h \
-	$(QPEDIR)/rsync/whole.h \
-	$(QPEDIR)/rsync/config_rsync.h \
-	$(QPEDIR)/rsync/qrsync.h
+	$(OPIEDIR)/rsync/buf.h \
+	$(OPIEDIR)/rsync/checksum.h \
+	$(OPIEDIR)/rsync/command.h \
+	$(OPIEDIR)/rsync/emit.h \
+	$(OPIEDIR)/rsync/job.h \
+	$(OPIEDIR)/rsync/netint.h \
+	$(OPIEDIR)/rsync/protocol.h \
+	$(OPIEDIR)/rsync/prototab.h \
+	$(OPIEDIR)/rsync/rsync.h \
+	$(OPIEDIR)/rsync/search.h \
+	$(OPIEDIR)/rsync/stream.h \
+	$(OPIEDIR)/rsync/sumset.h \
+	$(OPIEDIR)/rsync/trace.h \
+	$(OPIEDIR)/rsync/types.h \
+	$(OPIEDIR)/rsync/util.h \
+	$(OPIEDIR)/rsync/whole.h \
+	$(OPIEDIR)/rsync/config_rsync.h \
+	$(OPIEDIR)/rsync/qrsync.h
 #		  quicklauncher.h \
 
 SOURCES		= background.cpp \
@@ -60,50 +60,50 @@ SOURCES		= background.cpp \
 		  shutdownimpl.cpp \
 		  launcher.cpp \
 		  launcherview.cpp \
-		  $(QPEDIR)/calibrate/calibrate.cpp \
+		  $(OPIEDIR)/calibrate/calibrate.cpp \
 		  transferserver.cpp \
 		  packageslave.cpp \
 		irserver.cpp \
 		  qcopbridge.cpp \
 		  startmenu.cpp \
 		  main.cpp \
-	$(QPEDIR)/rsync/base64.c \
-	$(QPEDIR)/rsync/buf.c \
-	$(QPEDIR)/rsync/checksum.c \
-	$(QPEDIR)/rsync/command.c \
-	$(QPEDIR)/rsync/delta.c \
-	$(QPEDIR)/rsync/emit.c \
-	$(QPEDIR)/rsync/hex.c \
-	$(QPEDIR)/rsync/job.c \
-	$(QPEDIR)/rsync/mdfour.c \
-	$(QPEDIR)/rsync/mksum.c \
-	$(QPEDIR)/rsync/msg.c \
-	$(QPEDIR)/rsync/netint.c \
-	$(QPEDIR)/rsync/patch.c \
-	$(QPEDIR)/rsync/prototab.c \
-	$(QPEDIR)/rsync/readsums.c \
-	$(QPEDIR)/rsync/scoop.c \
-	$(QPEDIR)/rsync/search.c \
-	$(QPEDIR)/rsync/stats.c \
-	$(QPEDIR)/rsync/stream.c \
-	$(QPEDIR)/rsync/sumset.c \
-	$(QPEDIR)/rsync/trace.c \
-	$(QPEDIR)/rsync/tube.c \
-	$(QPEDIR)/rsync/util.c \
-	$(QPEDIR)/rsync/version.c \
-	$(QPEDIR)/rsync/whole.c \
-	$(QPEDIR)/rsync/qrsync.cpp
+	$(OPIEDIR)/rsync/base64.c \
+	$(OPIEDIR)/rsync/buf.c \
+	$(OPIEDIR)/rsync/checksum.c \
+	$(OPIEDIR)/rsync/command.c \
+	$(OPIEDIR)/rsync/delta.c \
+	$(OPIEDIR)/rsync/emit.c \
+	$(OPIEDIR)/rsync/hex.c \
+	$(OPIEDIR)/rsync/job.c \
+	$(OPIEDIR)/rsync/mdfour.c \
+	$(OPIEDIR)/rsync/mksum.c \
+	$(OPIEDIR)/rsync/msg.c \
+	$(OPIEDIR)/rsync/netint.c \
+	$(OPIEDIR)/rsync/patch.c \
+	$(OPIEDIR)/rsync/prototab.c \
+	$(OPIEDIR)/rsync/readsums.c \
+	$(OPIEDIR)/rsync/scoop.c \
+	$(OPIEDIR)/rsync/search.c \
+	$(OPIEDIR)/rsync/stats.c \
+	$(OPIEDIR)/rsync/stream.c \
+	$(OPIEDIR)/rsync/sumset.c \
+	$(OPIEDIR)/rsync/trace.c \
+	$(OPIEDIR)/rsync/tube.c \
+	$(OPIEDIR)/rsync/util.c \
+	$(OPIEDIR)/rsync/version.c \
+	$(OPIEDIR)/rsync/whole.c \
+	$(OPIEDIR)/rsync/qrsync.cpp
 
 INTERFACES	= shutdown.ui syncdialog.ui
 
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH	+= $(QPEDIR)/include .
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/include .
 
-INCLUDEPATH += $(QPEDIR)/calibrate
-DEPENDPATH	+= $(QPEDIR)/calibrate
+INCLUDEPATH += $(OPIEDIR)/calibrate
+DEPENDPATH	+= $(OPIEDIR)/calibrate
 
-INCLUDEPATH += $(QPEDIR)/rsync
-DEPENDPATH	+= $(QPEDIR)/rsync
+INCLUDEPATH += $(OPIEDIR)/rsync
+DEPENDPATH	+= $(OPIEDIR)/rsync
 
 TARGET		= qpe
 

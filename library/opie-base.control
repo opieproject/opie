@@ -1,0 +1,10 @@
+Files: etc/qimpen etc/colors etc/init.d/qpe etc/rc2.d/S98qpe bin/qpe-reorgfiles $QTDIR/lib/libqpe.so.$VERSION_MAJ.$VERSION_MIN.$VERSION_PAT $QTDIR/lib/libqpe.so.$VERSION_MAJ.$VERSION_MIN $QTDIR/lib/libqpe.so.$VERSION_MAJ apps/__7separator.desktop apps/__9quit.desktop apps/*/.directory etc/mime.types apps/Settings/quit.desktop pics/UnknownDocument-14.png pics/UnknownDocument.png
+Priority: required
+Section: opie/system
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION.1
+Depends: qt-embedded (>=$QTE_VERSION), opie-qcop, opie-taskbar, opie-pics, opie-sounds, apmd
+Description: Base Qtopia environment
+ A complete GUI environment for handhelds.
+ You will probably want to install one of the opie-i18n-* packages.

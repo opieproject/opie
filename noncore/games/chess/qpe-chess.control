@@ -1,9 +1,0 @@
-Files: bin/chess apps/Games/chess.desktop
-Priority: optional
-Section: qpe/games
-Maintainer: Luke Graham <luke@trolltech.com>
-Architecture: arm
-Version: $QPE_VERSION-3
-Depends: qpe-base ($QPE_VERSION)
-Description: Crafty GUI
- A GUI for the crafty chess engine

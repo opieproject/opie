@@ -6,7 +6,7 @@ CXX	=	$(SYSCONF_CXX) $(QT_CXX_MT)
 CXXFLAGS=	$(SYSCONF_CXXFLAGS_QT) $(SYSCONF_CXXFLAGS)
 CC	=	$(SYSCONF_CC) $(QT_C_MT)
 CFLAGS	=	$(SYSCONF_CFLAGS)
-INCPATH =	-I$(QPEDIR)/include
+INCPATH =	-I$(OPIEDIR)/include
 LFLAGS	=	$(SYSCONF_LFLAGS_QT) $(SYSCONF_RPATH_QT) $(SYSCONF_LFLAGS) $(QT_LFLAGS_MT)
 LIBS	=	$(SUBLIBS) -lqpe $(SYSCONF_LIBS_QT) $(SYSCONF_LIBS) $(SYSCONF_LIBS_QTAPP)
 MOC	=	$(SYSCONF_MOC)
@@ -14,7 +14,7 @@ UIC	=	$(SYSCONF_UIC)
 
 ####### Target
 
-DESTDIR = $(QPEDIR)/bin/
+DESTDIR = $(OPIEDIR)/bin/
 VER_MAJ = 1
 VER_MIN = 0
 VER_PATCH = 0
@@ -119,28 +119,28 @@ citytime.o: citytime.cpp \
 		stylusnormalizer.h \
 		citytime.h \
 		citytimebase.h \
-		$(QPEDIR)/include/qpe/qpeapplication.h \
-		$(QPEDIR)/include/qpe/config.h \
-		$(QPEDIR)/include/qpe/timestring.h \
-		$(QPEDIR)/include/qpe/tzselect.h \
-		$(QPEDIR)/include/qpe/qcopenvelope_qws.h
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpe/config.h \
+		$(OPIEDIR)/include/qpe/timestring.h \
+		$(OPIEDIR)/include/qpe/tzselect.h \
+		$(OPIEDIR)/include/qpe/qcopenvelope_qws.h
 
 zonemap.o: zonemap.cpp \
 		sun.h \
 		zonemap.h \
 		stylusnormalizer.h \
-		$(QPEDIR)/include/qpe/resource.h \
-		$(QPEDIR)/include/qpe/timestring.h \
-		$(QPEDIR)/include/qpe/qpeapplication.h
+		$(OPIEDIR)/include/qpe/resource.h \
+		$(OPIEDIR)/include/qpe/timestring.h \
+		$(OPIEDIR)/include/qpe/qpeapplication.h
 
 main.o: main.cpp \
 		citytime.h \
 		citytimebase.h \
-		$(QPEDIR)/include/qpe/qpeapplication.h
+		$(OPIEDIR)/include/qpe/qpeapplication.h
 
 sun.o: sun.c \
 		sun.h \
-		$(QPEDIR)/include/qpe/qmath.h
+		$(OPIEDIR)/include/qpe/qmath.h
 
 stylusnormalizer.o: stylusnormalizer.cpp \
 		stylusnormalizer.h

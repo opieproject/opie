@@ -1,6 +1,6 @@
 TEMPLATE	= app
 CONFIG		= qt warn_on release
-DESTDIR		= $(QPEDIR)/bin
+DESTDIR		= $(OPIEDIR)/bin
 HEADERS		= memory.h \
 		  graph.h \
 		  load.h \
@@ -16,8 +16,8 @@ SOURCES		= main.cpp \
 		  sysinfo.cpp
 INTERFACES	= 
 
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH	+= $(QPEDIR)/include
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 
 TARGET		= sysinfo

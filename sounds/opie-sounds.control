@@ -1,0 +1,8 @@
+Files: sounds/*.wav
+Priority: required
+Section: opie/system
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Description: Basic sounds for Qtopia environment
+ These icons are available to all Opie applications.
