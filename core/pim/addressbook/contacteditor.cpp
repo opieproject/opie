@@ -70,8 +70,8 @@ ContactEditor::ContactEditor(	const OContact &entry,
 
 	init();
 	setEntry( entry );
-
 	cmbDefaultEmail = 0;
+	defaultEmailChooserPosition = -1;
 }
 
 ContactEditor::~ContactEditor() {
@@ -631,8 +631,9 @@ void ContactEditor::defaultEmailChanged(int i){
 
 }
 
-void ContactEditor::chooserChange( const QString &textChanged, int index, QLineEdit *inputWid ) {
+void ContactEditor::chooserChange( const QString &textChanged, int index, QLineEdit *inputWid, int widgetPos ) {
 
+	qDebug("defaultEmailChooserPosition %i, widgetPos %i ",defaultEmailChooserPosition,widgetPos);
         if (slChooserNames[index] == "Default Email"){         
 	  if (cmbDefaultEmail) delete cmbDefaultEmail;
 	  cmbDefaultEmail = new QComboBox(inputWid->parentWidget());	   
@@ -646,7 +647,11 @@ void ContactEditor::chooserChange( const QString &textChanged, int index, QLineE
 	      cmbDefaultEmail->setCurrentItem( i );
 
 	  cmbDefaultEmail->show();
-        }
+	  defaultEmailChooserPosition = widgetPos;
+        }else if (defaultEmailChooserPosition == widgetPos){
+	qDebug("cmbDefaultEmail->hide()");
+	  if (cmbDefaultEmail) cmbDefaultEmail->hide();
+	}
 
 
 	slChooserValues[index] = textChanged;
@@ -654,20 +659,20 @@ void ContactEditor::chooserChange( const QString &textChanged, int index, QLineE
 }
 
 void ContactEditor::slotChooser1Change( const QString &textChanged ) {
-	chooserChange( textChanged, cmbChooserField1->currentItem(), txtChooserField1);
+	chooserChange( textChanged, cmbChooserField1->currentItem(), txtChooserField1, 1);
 }
 
 void ContactEditor::slotChooser2Change( const QString &textChanged ) {
-	chooserChange( textChanged, cmbChooserField2->currentItem(), txtChooserField2);
+	chooserChange( textChanged, cmbChooserField2->currentItem(), txtChooserField2, 2);
 
 }
 
 void ContactEditor::slotChooser3Change( const QString &textChanged ) {
-	chooserChange( textChanged, cmbChooserField3->currentItem(), txtChooserField3);
+	chooserChange( textChanged, cmbChooserField3->currentItem(), txtChooserField3, 3);
 }
 
 void ContactEditor::slotChooser4Change( const QString &textChanged ) {
-	chooserChange( textChanged, cmbChooserField4->currentItem(), txtChooserField4);
+	chooserChange( textChanged, cmbChooserField4->currentItem(), txtChooserField4, 4);
 }
 
 void ContactEditor::slotAddressChange( const QString &textChanged ) {

@@ -103,7 +103,8 @@ class ContactEditor : public QDialog {
 		void defaultEmailChanged(int);
 
 	private:
-		void chooserChange( const QString&, int , QLineEdit* );
+		int defaultEmailChooserPosition;
+		void chooserChange( const QString&, int , QLineEdit*, int );
 		bool useFullName;
 
 		OContact ent;
