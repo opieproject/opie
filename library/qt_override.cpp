@@ -7,6 +7,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <limits.h>
+#include <sys/param.h> // for toolchains with old libc headers
 
 #include "qt_override_p.h"
 
@@ -31,6 +33,8 @@ static const color_fix_t apps_that_need_special_colors [] = {
 
 static const char * const apps_that_need_pointsizes_times_10 [] = {
 	"HancomMobileWord",
+	"hancomsheet",
+	"HancomPresenterViewer",
 	
 	0
 };
