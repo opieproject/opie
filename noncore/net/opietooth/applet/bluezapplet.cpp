@@ -54,7 +54,7 @@ namespace OpieTooth {
         bluezOnPixmap = Resource::loadPixmap( "bluetoothapplet/bluezon" );
         bluezOffPixmap = Resource::loadPixmap( "bluetoothapplet/bluezoff" );
         //    bluezDiscoveryOnPixmap = Resource::loadPixmap( "bluetoothapplet/magglass" );
-        startTimer(5000);
+        startTimer(4000);
         btDevice = 0;
         bluezactive = false;
         bluezDiscoveryActive = false;
@@ -79,7 +79,7 @@ namespace OpieTooth {
     int BluezApplet::setBluezStatus(int c) {
 
         if (c == 1) {
-            btDevice = new Device("/dev/ttySB0", "csr" );
+            btDevice = new Device("/dev/ttySB0", "bcsp", "230400" );
         } else {
             if (btDevice) {
                 delete btDevice;
