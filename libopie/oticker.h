@@ -78,16 +78,14 @@ public:
  * @param color QColor color to be set.
  *
  */
-    //FIXME const QColor& please -zecke
-    void setBackgroundColor(QColor color);
+    void setBackgroundColor(const QColor& color);
 /*!
  * @fn setForegroundColor(QColor color)
  * @brief sets color of text
  * @param color QColor color of text
  *
  */
-    // FIXME const QColor& please -zecke
-    void setForegroundColor(QColor color);
+    void setForegroundColor(const QColor& color);
 /*!
  * @fn setFrame(int style)
  * @brief sets frame style
