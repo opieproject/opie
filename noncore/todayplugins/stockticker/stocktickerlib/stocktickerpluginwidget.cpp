@@ -54,18 +54,18 @@ void StockTickerPluginWidget::init() {
     connect( stocktickerTicker, SIGNAL( mousePressed()), this, SLOT( doStocks() ));
  
     layout->addWidget( stocktickerTicker);
+//    Config cfg( "stockticker");
+//     cfg.setGroup("Timer");
+//     timerDelay= cfg.readNumEntry("Delay",0);
+//     if(timerDelay > 0 )
+//         startTimer(timerDelay*60000);
+//     qDebug("timer ^ set for %d",(timerDelay*60000)/60000);
 
-    Config cfg( "stockticker");
-    cfg.setGroup("Timer");
-    timerDelay= cfg.readNumEntry("Delay",0);
-    if(timerDelay > 0)
-        startTimer(timerDelay*60000);
-            
 }
 
 void StockTickerPluginWidget::doStocks() {
-
     Config cfg( "stockticker");
+
     cfg.setGroup( "Symbols" );
     QString symbollist;
     symbollist = cfg.readEntry("Symbols", "");
@@ -248,9 +248,13 @@ void StockTickerPluginWidget::DefProxy(void) {
 }
 
 void  StockTickerPluginWidget::timerEvent( QTimerEvent *e ) {
-    qDebug("timer");
     killTimer(e->timerId());    
     doStocks();
+    Config cfg( "stockticker");
+     cfg.setGroup("Timer");
+     timerDelay= cfg.readNumEntry("Delay",0);
     if(timerDelay > 0)
         startTimer(timerDelay*60000);
+    qDebug("timer set for %d",(timerDelay*60000)/60000);
+    
 }
