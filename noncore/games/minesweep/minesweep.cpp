@@ -241,7 +241,7 @@ MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
 {
     srand(::time(0));
     setCaption( tr("Mine Hunt") );
-    setIcon( Resource::loadPixmap( "minesweep_icon" ) );
+    setIcon( Resource::loadPixmap( "minesweep/minesweep_icon" ) );
 
     QPEToolBar *toolBar = new QPEToolBar( this );
     toolBar->setHorizontalStretchable( TRUE );
