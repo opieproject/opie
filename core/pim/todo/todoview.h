@@ -101,7 +101,7 @@ namespace Todo {
 
         /* return the current item */
         virtual int current() = 0;
-        QString currentRepresentation() = 0;
+        virtual QString currentRepresentation() = 0;
         /**
          * setTodos gets at least called once and on
          * every update again.
@@ -114,7 +114,7 @@ namespace Todo {
         virtual void removeEvent( int uid ) = 0;
         virtual void setShowCompleted( bool ) = 0;
         virtual void setShowDeadline(bool ) = 0;
-        virtual void setShowCategory( const QString::null )= 0;
+        virtual void setShowCategory( const QString& = QString::null )= 0;
         virtual void clear() = 0;
         virtual QArray<int> completed() = 0;
 

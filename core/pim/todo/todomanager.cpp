@@ -70,7 +70,9 @@ void TodoManager::update( int, const Opie::ToDoEvent& ev) {
     m_db->replaceEvent( ev );
 }
 void TodoManager::remove( int uid ) {
-    Opie::ToDoEvent ev = m_db->findEvent( uid );
+    //Opie::ToDoEvent ev = m_db->findEvent( uid );
+    ToDoEvent ev;
+    ev.setUid( uid );
     m_db->removeEvent( ev );
 }
 void TodoManager::removeAll() {
@@ -94,4 +96,7 @@ QStringList TodoManager::categories() {
  */
 int TodoManager::catId( const QString& cats ) {
     return m_cat.id( "Todo List", cats );
+}
+void TodoManager::remove( const QArray<int>& ) {
+
 }
