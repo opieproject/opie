@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.54 2002-12-26 00:57:15 sandman Exp $
+ * $Id: vmemo.cpp,v 1.54.2.1 2003-05-26 05:05:38 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 extern "C" {
@@ -31,7 +31,6 @@ extern "C" {
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
-#include <qtimer.h>
 
 typedef struct _waveheader {
   u_long  main_chunk; /* 'RIFF'  */
@@ -71,14 +70,9 @@ struct adpcm_state encoder_state;
 #include "vmemo.h"
 
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 #include <qpe/config.h>
 
 #include <qpainter.h>
-#include <qdatetime.h>
-#include <qregexp.h>
-#include <qsound.h>
-#include <qfile.h>
 #include <qmessagebox.h>
 
 int seq = 0;
