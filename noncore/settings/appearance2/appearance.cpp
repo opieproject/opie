@@ -297,9 +297,9 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 	QWhatsThis::add( l, tr( "If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.\n\nThis area allows you to select an application and which settings you wish to disable." ) );
 
 	m_except = new QListView ( tab );
-	m_except-> addColumn ( Resource::loadIconSet ( "appearance/style.png" ), "", 24 );
-	m_except-> addColumn ( Resource::loadIconSet ( "appearance/font.png" ), "", 24 );
-	m_except-> addColumn ( Resource::loadIconSet ( "appearance/deco.png" ), "", 24 );
+	m_except-> addColumn ( Resource::loadIconSet ( "appearance" ), "", 24 );
+	m_except-> addColumn ( Resource::loadIconSet ( "appearance/font" ), "", 24 );
+	m_except-> addColumn ( Resource::loadIconSet ( "appearance/deco" ), "", 24 );
 	m_except-> addColumn ( tr( "Binary file(s)" ));
 	m_except-> setColumnAlignment ( 0, AlignCenter );
 	m_except-> setColumnAlignment ( 1, AlignCenter );
@@ -423,7 +423,7 @@ Appearance::Appearance( QWidget* parent,  const char* name, WFlags )
 
 	m_color_list = 0;
 
- 	tw-> addTab ( styletab = createStyleTab ( tw, config ), "appearance/style", tr( "Style" ));
+ 	tw-> addTab ( styletab = createStyleTab ( tw, config ), "appearance", tr( "Style" ));
     tw-> addTab ( createFontTab ( tw, config ), "appearance/font", tr( "Font" ));
     tw-> addTab ( createColorTab ( tw, config ), "appearance/color", tr( "Colors" ) );
     tw-> addTab ( createDecoTab ( tw, config ), "appearance/deco", tr( "Windows" ) );
