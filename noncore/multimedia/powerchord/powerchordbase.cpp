@@ -397,7 +397,7 @@ void PowerchordBase::transport_rec_cb(){
   chordlist->insertItem(chordname->text(),-1);
   if (!known){
     QMessageBox::information(this, tr("Powerchord"),
-														 tr("<P>This chord has been saved into the list of chords, for later playback.<P>");
+			 tr("<P>This chord has been saved into the list of chords, for later playback.<P>"));
     known = 1;
   }
 }
