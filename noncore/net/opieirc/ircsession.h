@@ -43,11 +43,19 @@ public:
     ~IRCSession();
     
     void join(QString channel);
+    void quit(QString message);
+    void quit();
+    void raw(QString message);
+    void topic(IRCChannel *channel, QString message);
+    void mode(IRCChannel *channel, QString message);
+    void mode(IRCPerson *person, QString message);
+    void mode(QString message);
     void part(IRCChannel *channel);
+    void kick(IRCChannel *channel, IRCPerson *person);
+    void kick(IRCChannel *channel, IRCPerson *person, QString message);
     void beginSession();
     bool isSessionActive();
     void endSession();
-
     void sendMessage(IRCPerson *person, QString message);
     void sendMessage(IRCChannel *channel, QString message);
     void sendAction(IRCPerson *person, QString message);

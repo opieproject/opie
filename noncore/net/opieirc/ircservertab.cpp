@@ -22,8 +22,14 @@ IRCServerTab::IRCServerTab(IRCServer server, MainWindow *mainWindow, QWidget *pa
     connect(m_field, SIGNAL(returnPressed()), this, SLOT(processCommand()));
     m_field->setFocus();
     connect(m_session, SIGNAL(outputReady(IRCOutput)), this, SLOT(display(IRCOutput)));
+    connect(m_mainWindow, SIGNAL(updateScroll()), this, SLOT(scrolling()));
     settingsChanged();
 }
+
+void IRCServerTab::scrolling(){
+  m_textview->ensureVisible(0, m_textview->contentsHeight());
+}
+
 
 void IRCServerTab::appendText(QString text) {
     /* not using append because it creates layout problems */
@@ -64,6 +70,10 @@ QString IRCServerTab::title() {
 IRCSession *IRCServerTab::session() {
     return m_session;
 }
+/*
+QString *IRCServerTab::mynick() {
+	return (*m_server->nick());
+} */
 
 IRCServer *IRCServerTab::server() {
     return &m_server;
@@ -79,16 +89,92 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
     QString command;
     stream >> command;
     command = command.upper().right(command.length()-1);
-    
-    if (command == "JOIN") {
+
+   //JOIN
+  if (command == "JOIN" || command == "J") {
         QString channel;
         stream >> channel;
         if (channel.length() > 0 && (channel.startsWith("#") || channel.startsWith("+"))) {
             m_session->join(channel);
         } else {
-            tab->appendText("<font color=\"" + m_errorColor + "\">Unknown channel format!</font><br>"); 
+            tab->appendText("<font color=\"" + m_errorColor + "\">Unknown channel format!</font><br>");
         }
-    } else if (command == "ME") {
+    }
+
+  //KICK
+	else if (command == "KICK"){
+		QString nickname;
+        stream >> nickname;
+        if (nickname.length() > 0) {
+            if (line.length() > 7 + nickname.length()) {
+                QString text = line.right(line.length()-nickname.length()-7);
+                IRCPerson person;
+                person.setNick(nickname);
+                m_session->kick(((IRCChannelTab *)tab)->channel(), &person, text);
+            } else {
+                IRCPerson person;
+                person.setNick(nickname);
+                m_session->kick(((IRCChannelTab *)tab)->channel(), &person);
+            }
+        }
+	}
+
+ else if (command == "OP"){
+		QString nickname;
+        stream >> nickname;
+        if (nickname.length() > 0) {
+            if (line.length() > 7 + nickname.length()) {
+                QString text = line.right(line.length()-nickname.length()-7);
+                IRCPerson person;
+                person.setNick(nickname);
+                m_session->kick(((IRCChannelTab *)tab)->channel(), &person, text);
+            } else {
+                IRCPerson person;
+                person.setNick(nickname);
+                m_session->kick(((IRCChannelTab *)tab)->channel(), &person);
+            }
+        }
+	}
+  
+  //SEND MODES
+  else if (command == "MODE"){
+     QString text = line.right(line.length()-6);
+     if (text.length() > 0) {
+       m_session->mode(text);
+     } else {
+       tab->appendText("<font color=\"" + m_errorColor + "\">/mode channel {[+|-]|o|p|s|i|t|n|b|v} [limit] [user] [ban mask]<br>/mode nickname {[+|-]|i|w|s|o}</font><br>");
+     }
+	}
+  //SEND RAW MESSAGE TO SERVER, COMPLETELY UNCHECKED - anything in the RFC...or really anything you want
+  else if (command == "RAW"){
+     QString text = line.right(line.length()-5);
+     if (text.length() > 0) {
+       m_session->raw(text);
+     }
+  }
+  else if (command == "SUSPEND"){
+     QString text = line.right(line.length()-9);
+      if (text.upper() == "ON") {
+          QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
+      }
+      else if (text.upper() == "OFF"){
+          QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Disable;
+      } else {
+          tab->appendText("<font color=\"" + m_errorColor + "\">Line: "+ line +"</font><br>Text: "+text);
+      }
+  }
+
+  else if (command == "QUIT"){
+     QString text = line.right(line.length()-6);
+     if (text.length() > 0) {
+       m_session->quit(text);
+     } else {
+       m_session->quit();
+     }
+	}
+
+  //SEND ACTION
+	else if (command == "ME") {
         QString text = line.right(line.length()-4);
         if (text.length() > 0) {
             if (tab->isA("IRCChannelTab")) {
@@ -98,10 +184,12 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
                 tab->appendText("<font color=\"" + m_selfColor + "\">*" + IRCOutput::toHTML(m_server.nick()) + " " + IRCOutput::toHTML(text) + "</font><br>");
                 m_session->sendAction(((IRCQueryTab *)tab)->person(), text);
             } else {
-                tab->appendText("<font color=\"" + m_errorColor + "\">Invalid tab for this command</font><br>"); 
+                tab->appendText("<font color=\"" + m_errorColor + "\">Invalid tab for this command</font><br>");
             }
         }
-    } else if (command == "MSG") {
+    }
+  //SEND PRIVMSG
+  else if (command == "MSG") {
         QString nickname;
         stream >> nickname;
         if (nickname.length() > 0) {
@@ -112,9 +200,10 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
                 tab->appendText("<font color=\"" + m_textColor + "\">&gt;</font><font color=\"" + m_otherColor + "\">"+IRCOutput::toHTML(nickname)+"</font><font color=\"" + m_textColor + "\">&lt; "+IRCOutput::toHTML(text)+"</font><br>");
                 m_session->sendMessage(&person, text);
             }
-        }    
-    } else {
-        tab->appendText("<font color=\"" + m_errorColor + "\">Unknown command</font><br>"); 
+        }
+    }
+	else {
+        tab->appendText("<font color=\"" + m_errorColor + "\">Unknown command</font><br>");
     }
 }
 
@@ -153,7 +242,7 @@ void IRCServerTab::remove() {
 
 IRCChannelTab *IRCServerTab::getTabForChannel(IRCChannel *channel) {
     QListIterator<IRCChannelTab> it(m_channelTabs);
-    
+
     for (; it.current(); ++it) {
         if (it.current()->channel() == channel)
             return it.current();
@@ -163,7 +252,7 @@ IRCChannelTab *IRCServerTab::getTabForChannel(IRCChannel *channel) {
 
 IRCQueryTab *IRCServerTab::getTabForQuery(IRCPerson *person) {
     QListIterator<IRCQueryTab> it(m_queryTabs);
-    
+
     for (; it.current(); ++it) {
         if (it.current()->person()->nick() == person->nick())
             return it.current();

@@ -31,7 +31,6 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
     /* Required so that embedded-style "right" clicks work */
     QPEApplication::setStylusOperation(m_list->viewport(), QPEApplication::RightOnHold);
     connect(m_list, SIGNAL(mouseButtonPressed(int, QListBoxItem *, const QPoint&)), this, SLOT(mouseButtonPressed(int, QListBoxItem *, const QPoint &)));
-
     /* Construct the popup menu */
     QPopupMenu *ctcpMenu = new QPopupMenu(m_list);
     m_popup->insertItem(Resource::loadPixmap("opieirc/ctcp"), tr("CTCP"), ctcpMenu);
@@ -39,13 +38,17 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
     ctcpMenu->insertItem(Resource::loadPixmap("opieirc/ping"), tr("Ping"), this, SLOT(popupPing()));
     ctcpMenu->insertItem(Resource::loadPixmap("opieirc/version"), tr("Version"), this, SLOT(popupVersion()));
     ctcpMenu->insertItem(Resource::loadPixmap("opieirc/whois"), tr("Whois"), this, SLOT(popupWhois()));
-    
+    connect(m_mainWindow, SIGNAL(updateScroll()), this, SLOT(scrolling()));
     m_layout->add(hbox);
     hbox->show();
     m_layout->add(m_field);
     m_field->setFocus();
     connect(m_field, SIGNAL(returnPressed()), this, SLOT(processCommand()));
     settingsChanged();
+}
+
+void IRCChannelTab::scrolling(){
+  m_textview->ensureVisible(0, m_textview->contentsHeight());
 }
 
 void IRCChannelTab::appendText(QString text) {
@@ -129,6 +132,7 @@ void IRCChannelTab::popupQuery() {
 }
 
 void IRCChannelTab::popupPing() {
+  //HAHA, no wonder these don't work
 }
 
 void IRCChannelTab::popupVersion() {

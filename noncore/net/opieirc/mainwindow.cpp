@@ -30,6 +30,10 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(
     loadSettings();
 }
 
+/*IRCTabWidget MainWindow::getTabWidget(){
+  return m_tabWidget;
+} */
+
 void MainWindow::loadSettings() {
     Config config("OpieIRC");
     config.setGroup("OpieIRC");
@@ -45,6 +49,7 @@ void MainWindow::loadSettings() {
 
 void MainWindow::selected(QWidget *) {
     m_tabWidget->setTabColor(m_tabWidget->currentPageIndex(), black);
+    emit updateScroll();
 }
 
 void MainWindow::addTab(IRCTab *tab) {

@@ -28,6 +28,42 @@ void IRCSession::join(QString channelname) {
     m_connection->sendLine("JOIN "+channelname);
 }
 
+void IRCSession::quit(){
+    m_connection->sendLine("QUIT :[OI] I'm too good to need a reason");
+}
+
+void IRCSession::quit(QString message){
+    m_connection->sendLine("QUIT :" + message);
+}
+
+void IRCSession::topic(IRCChannel *channel, QString message){
+    m_connection->sendLine("TOPIC :" + channel->channelname() + " " + message);
+}
+
+void IRCSession::mode(IRCChannel *channel, QString message){
+    m_connection->sendLine("MODE " + channel->channelname() + " " + message);
+}
+
+void IRCSession::mode(IRCPerson *person, QString message){
+    m_connection->sendLine("MODE " + person->nick() + " " + message);
+}
+
+void IRCSession::mode(QString message){
+    m_connection->sendLine("MODE " + message);
+}
+
+void IRCSession::raw(QString message){
+    m_connection->sendLine(message);
+}
+
+void IRCSession::kick(IRCChannel *channel, IRCPerson *person) {
+    m_connection->sendLine("KICK "+ channel->channelname() + " " + person->nick() +" :0wn3d - no reason");
+}
+
+void IRCSession::kick(IRCChannel *channel, IRCPerson *person, QString message) {
+    m_connection->sendLine("KICK "+ channel->channelname() + " " + person->nick() +" :" + message);
+} 
+
 void IRCSession::sendMessage(IRCPerson *person, QString message) {
     m_connection->sendLine("PRIVMSG " + person->nick() + " :" + message);
 }
@@ -108,4 +144,3 @@ void IRCSession::removePerson(IRCPerson *person) {
 void IRCSession::handleMessage(IRCMessage *message) {
     m_parser->parse(message);
 }
-

@@ -20,13 +20,15 @@
 
 #ifndef __IRCSERVERTAB_H
 #define __IRCSERVERTAB_H
-
+#include <qpe/qpeapplication.h>
+#include <qpe/qcopenvelope_qws.h>
 #include "irctab.h"
 #include "ircsession.h"
 #include "mainwindow.h"
 #include "ircchanneltab.h"
 #include "ircquerytab.h"
 #include "ircmisc.h"
+
 
 class IRCServerTab : public IRCTab {
     Q_OBJECT
@@ -40,6 +42,7 @@ public:
 
     /* Start the server session */
     void doConnect();
+//    QString *mynick();
     /* Remove tabs from the internal tab lists */
     void removeChannelTab(IRCChannelTab *tab);
     void removeQueryTab(IRCQueryTab *tab);
@@ -53,6 +56,7 @@ public:
 protected:
     void appendText(QString text);
 public slots:
+    void scrolling();
     void remove();
     void processCommand();
     void settingsChanged();

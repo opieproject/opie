@@ -32,9 +32,11 @@ class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
     MainWindow(QWidget *parent = 0, const char *name = 0, WFlags f = 0);
-
+//    IRCTabWidget getTabWidget();
     void addTab(IRCTab *tab);
     void killTab(IRCTab *tab);
+signals:
+    void updateScroll();
 protected slots:
     void newConnection();
     void settings();
