@@ -85,6 +85,7 @@ public:
 
     void show();
     void setPaintingEnabled( bool e );
+    void viewportPaintEvent( QPaintEvent* e);
 
     // addresspicker mode (What's that ? se)
     void setChoiceNames( const QStringList& list);
@@ -127,8 +128,8 @@ private:
     QValueList<int> intFields;
     QStringList choicenames;
     bool enablePainting;
-
     bool columnVisible;
+    int countNested;
 
     OContactAccess::List m_viewList;
 

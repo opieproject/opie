@@ -29,7 +29,8 @@ public:
 
     void setView( Views view );
     void showPersonal( bool personal );
-    void setShowByCategory( Views view, const QString& cat );
+    void setShowByCategory( const QString& cat );
+    void setShowToView( Views view );
     void setShowByLetter( char c );
     void setListOrder( const QValueList<int>& ordered );
 

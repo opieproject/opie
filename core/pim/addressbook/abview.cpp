@@ -1,3 +1,19 @@
+/**********************************************************************
+** Copyright (c) 2002 Stefan Eilers (eilers.stefan@epost.de)
+**
+** This file is part of Qt Palmtop Environment.
+**
+** This file may be distributed and/or modified under the terms of the
+** GNU General Public License version 2 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.
+**
+** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+**
+**
+**********************************************************************/
+
 #include "abview.h"
 
 #include <qlayout.h>
@@ -137,9 +153,6 @@ void AbView::load()
 
 	clearForCategory();
 
-	// Feed all views with new lists
-	updateListinViews();
-	
 	qWarning ("Number of contacts: %d", m_list.count());
 
 	updateView(); 
@@ -159,20 +172,9 @@ void AbView::clear()
 	// :SX
 }
 
-void AbView::setShowByCategory( Views view, const QString& cat )
+void AbView::setShowByCategory( const QString& cat )
 {
-	qWarning("AbView::setShowCategory( Views view, const QString& cat )");
-
-// 	if ( view == PersonalView ){
-// 		if ( ! m_inPersonal )
-// 			showPersonal( true );
-		
-// 	}else{
-// 		if  ( m_inPersonal )
-// 			showPersonal( false );
-
-// 			m_curr_View = view;
-// 	}
+	qWarning("AbView::setShowCategory( const QString& cat )");
 
 	int intCat = 0;
 
@@ -182,18 +184,10 @@ void AbView::setShowByCategory( Views view, const QString& cat )
 	else
 		intCat = mCat.id("Contacts", cat );
 
-	// If we just change the view, we don't have to reload any data..
-	// This speeds up a lot of things !
-	if ( intCat == m_curr_category ){
-		qWarning ("Just change the View (Category is: %d)", m_curr_category);
-		m_prev_View = m_curr_View;
-		m_curr_View = view;
-
-		updateView();
-	}else{
+	// Just do anything if we really change the category
+	if ( intCat != m_curr_category ){
 		qWarning ("Categories: Selected %s.. Number: %d", cat.latin1(), m_curr_category);
 
-		m_curr_View = view;
 		m_curr_category = intCat;
 		emit signalClearLetterPicker();
 		
@@ -201,6 +195,22 @@ void AbView::setShowByCategory( Views view, const QString& cat )
 	}
 
 }
+
+void AbView::setShowToView( Views view )
+{
+	qWarning("void AbView::setShowToView( View %d )", view);
+
+	qWarning ("Change the View (Category is: %d)", m_curr_category);
+
+	if ( m_curr_View != view ){
+		m_prev_View = m_curr_View;
+		m_curr_View = view;
+
+		updateView();
+	}
+
+}
+
 void AbView::setShowByLetter( char c )
 {
 	qWarning("void AbView::setShowByLetter( %c )", c );
@@ -401,6 +411,9 @@ void  AbView::updateView()
 {
 	qWarning("AbView::updateView()");
 
+	// Feed all views with new lists
+	updateListinViews();
+
 	if ( m_viewStack -> visibleWidget() ){
 		m_viewStack -> visibleWidget() -> clearFocus();
 	}
@@ -415,23 +428,24 @@ void  AbView::updateView()
 			m_curr_Contact = m_ablabel -> currentEntry_UID();
 			break;
 		}
-		emit signalViewSwitched ( (int) m_curr_View );
 	}else
 		m_curr_Contact = 0;
 	
+	// Inform the world that the view is changed
+	if ( m_curr_View != m_prev_View )
+		emit signalViewSwitched ( (int) m_curr_View );
+
 	m_prev_View = m_curr_View;
 
 	// Switch to new View
 	switch ( (int) m_curr_View ) {
 	case TableView:
 		m_abTable -> setChoiceSelection( m_orderedFields );
-		m_abTable -> setContacts( m_list );
 		if ( m_curr_Contact != 0 )
 			m_abTable -> selectContact ( m_curr_Contact );
 		m_abTable -> setFocus();
 		break;
 	case CardView:
-		m_ablabel -> setContacts( m_list );
 		if ( m_curr_Contact != 0 )
 			m_ablabel -> selectContact( m_curr_Contact );
 		m_ablabel -> setFocus();

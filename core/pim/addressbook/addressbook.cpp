@@ -821,15 +821,18 @@ void AddressbookWindow::slotSetCategory( int c )
 	if ( c <= 0 )
 		return;
 	
-	// Checkmark Book Menu Item Selected 
+	// Switch view 
 	if ( c < 3 )
-		for ( unsigned int i = 1; i < 3; i++ )
-			catMenu->setItemChecked( i, c == (int)i );
-	// Checkmark Category Menu Item Selected 
+		for ( unsigned int i = 1; i < 3; i++ ){
+			if ( catMenu )
+				catMenu->setItemChecked( i, c == (int)i );
+		}
 	else
+ 	// Checkmark Category Menu Item Selected 
 		for ( unsigned int i = 3; i < catMenu->count(); i++ )
 			catMenu->setItemChecked( i, c == (int)i );
 	
+	// Now switch to the selected category
 	for ( unsigned int i = 1; i < catMenu->count(); i++ ) {
 		if (catMenu->isItemChecked( i )) {
 			if ( i == 1 ){ // default List view
@@ -852,9 +855,11 @@ void AddressbookWindow::slotSetCategory( int c )
 		}
 	}
 	
+	// Switch to the selected View
 	slotViewSwitched( view );
 
-	m_abView -> setShowByCategory( view, cat );
+	// Tell the view about the selected category
+	m_abView -> setShowByCategory( cat );
 
 	if ( book.isEmpty() )
 		book = "List";
@@ -868,6 +873,8 @@ void AddressbookWindow::slotViewSwitched( int view )
 {
 	qWarning( "void AddressbookWindow::slotViewSwitched( %d )", view );
 	int menu = 0;
+
+	// Switch to selected view
 	switch ( view ){
 	case AbView::TableView:
 		menu = 1;
@@ -879,31 +886,26 @@ void AddressbookWindow::slotViewSwitched( int view )
 		m_tableViewButton->setOn(false);
 		m_cardViewButton->setOn(true);
 		break;
-// 	case AbView::PersonalView:
-// 		menu = 3;
-// 		break;
-// 	case AbView::CompanyBook:
-// 		menu = 3;
-// 		break;
-// 	case AbView::EmailBook:
-// 		menu = 4;
-// 		break;
 	}
 	for ( unsigned int i = 1; i < 3; i++ ){
 		if ( catMenu )
 			catMenu->setItemChecked( i, menu == (int)i );
 	}
+
+	// Tell the view about the selected view
+	m_abView -> setShowToView ( (AbView::Views) view );
+	
 }
 
 
 void AddressbookWindow::slotListView()
 {
-	emit slotSetCategory( AbView::TableView +1 );
+	slotViewSwitched( AbView::TableView );
 }
 
 void AddressbookWindow::slotCardView()
 {
-	emit slotSetCategory( AbView::CardView +1 );
+	slotViewSwitched( AbView::CardView );
 }
 
 void AddressbookWindow::slotSetLetter( char c ) {
@@ -937,18 +939,6 @@ void AddressbookWindow::populateCategories()
 		++id;
 	}
 
-	// :SX
-// 	if ( abList->showBook().isEmpty() ) {
-// 		catMenu->setItemChecked( 1, true );
-// 	} else if ( abList->showBook() == "Phone" ) {
-// 		catMenu->setItemChecked( 2, true );
-// 	} else if ( abList->showBook() == "Company" ) {
-// 		catMenu->setItemChecked( 3, true );
-// 	} else if ( abList->showBook() == "Email" ) {
-// 		catMenu->setItemChecked( 4, true );
-// 	} else if ( abList->showBook() == "Cards" ) {
-// 		catMenu->setItemChecked( 5, true );
-// 	}
 	
 	if ( m_abView -> showCategory().isEmpty() ) {
 		slotSetCategory( 3 );

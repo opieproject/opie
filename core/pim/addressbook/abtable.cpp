@@ -123,7 +123,8 @@ AbTable::AbTable( const QValueList<int> order, QWidget *parent, const char *name
 	  asc( TRUE ),
 	  intFields( order ),
 	  enablePainting( true ),
-	  columnVisible( true )
+	  columnVisible( true ),
+	  countNested( 0 )
 {
 	qWarning("C'tor start");
 
@@ -162,7 +163,7 @@ void AbTable::setContacts( const OContactAccess::List& viewList )
 	m_viewList = viewList;
 
 	setSorting( false );
-	setUpdatesEnabled( FALSE );
+	setPaintingEnabled( FALSE );
 	
 	OContactAccess::List::Iterator it;
 	setNumRows( m_viewList.count() );
@@ -170,13 +171,13 @@ void AbTable::setContacts( const OContactAccess::List& viewList )
 	for ( it = m_viewList.begin(); it != m_viewList.end(); ++it )
 		insertIntoTable( *it, row++ );
 	
-	setUpdatesEnabled( TRUE );
-
 	setSorting( true );
 
 	resort();
 
 	updateVisible();
+
+	setPaintingEnabled( TRUE );
 
 }
 
@@ -188,6 +189,7 @@ bool AbTable::selectContact( int UID )
 	OContact* foundContact = 0l;
 	bool found = false;
 
+	setPaintingEnabled( FALSE );
 	for ( int r = 0; r < rows; ++r ) {
 		abi = static_cast<AbTableItem*>( item(r, 0) );
 		foundContact = &contactList[abi];
@@ -204,12 +206,14 @@ bool AbTable::selectContact( int UID )
 		setCurrentCell( 0, 0 );
 	}
 
+	setPaintingEnabled( TRUE );
+
 	return true;
 }
 
 void AbTable::insertIntoTable( const OContact& cnt, int row )
 {
-	// qWarning( "void AbTable::insertIntoTable( const OContact& cnt, %d )", row );
+	qWarning( "void AbTable::insertIntoTable( const OContact& cnt, %d )", row );
 	QString strName,
 		strContact;
 	
@@ -251,6 +255,7 @@ void AbTable::columnClicked( int col )
 void AbTable::resort()
 {
 	qWarning( "void AbTable::resort()" );
+	setPaintingEnabled( FALSE );
 	if ( sorting() ) {
 		if ( lastSortCol == -1 )
 			lastSortCol = 0;
@@ -258,6 +263,7 @@ void AbTable::resort()
 		//QMessageBox::information( this, "resort", "resort" );
 		updateVisible();
 	}
+	setPaintingEnabled( TRUE );
 }
 
 OContact AbTable::currentEntry()
@@ -282,6 +288,8 @@ void AbTable::clear()
 {
 	qWarning( "void AbTable::clear()" );
 	contactList.clear();
+
+	setPaintingEnabled( FALSE );
 	for ( int r = 0; r < numRows(); ++r ) {
 		for ( int c = 0; c < numCols(); ++c ) {
 			if ( cellWidget( r, c ) )
@@ -290,6 +298,7 @@ void AbTable::clear()
 		}
 	}
 	setNumRows( 0 );
+	setPaintingEnabled( TRUE );
 }
 
 // Refresh updates column 2 if the contactsettings changed
@@ -300,12 +309,14 @@ void AbTable::refresh()
 	QString value;
 	AbTableItem *abi;
 
+	setPaintingEnabled( FALSE );
 	for ( int r = 0; r < rows; ++r ) {
 		abi = static_cast<AbTableItem*>( item(r, 0) );
 		value = findContactContact( contactList[abi], r );
 		static_cast<AbTableItem*>( item(r, 1) )->setItem( value, abi->text() );
 	}
 	resort();
+	setPaintingEnabled( TRUE );
 }
 
 void AbTable::keyPressEvent( QKeyEvent *e )
@@ -454,6 +465,8 @@ void AbTable::fitColumns()
 	int contentsWidth = visibleWidth() / 2; // :SX Why too low
 	// Fix to better value
 	// contentsWidth = 130; 
+
+	setPaintingEnabled( FALSE );
 	
 	if ( columnVisible == false ){
 		showColumn(0);
@@ -466,6 +479,8 @@ void AbTable::fitColumns()
 	adjustColumn(1);
 	if ( columnWidth(1) < contentsWidth )
 		setColumnWidth( 1, contentsWidth );
+
+	setPaintingEnabled( TRUE );
 }
 
 void AbTable::show()
@@ -533,6 +548,8 @@ QStringList AbTable::choiceSelection(int /*index*/) const
 
 void AbTable::updateVisible()
 {
+	qWarning("void AbTable::updateVisible()");
+
 	int visible,
 		totalRows,
 		row,
@@ -540,9 +557,9 @@ void AbTable::updateVisible()
 		
 	visible = 0;
 	
-	realignTable();
-
 	setPaintingEnabled( FALSE );
+
+	realignTable();
 
 	totalRows = numRows();
 	for ( row = 0; row < totalRows; row++ ) {
@@ -569,16 +586,32 @@ void AbTable::updateVisible()
 
 void AbTable::setPaintingEnabled( bool e )
 {
-	if ( e != enablePainting ) {
-		if ( !enablePainting ) {
+	qWarning("IN void AbTable::setPaintingEnabled( %d )->Nested: %d", e, countNested );
+
+	if ( e ) {
+		if ( countNested > 0 )
+			--countNested;
+		if ( ! countNested ){
+			setUpdatesEnabled( true );
 			enablePainting = true;
 			rowHeightChanged( 0 );
 			viewport()->update();
-		} else {
-			enablePainting = false;
 		}
+	} else {
+		++countNested;
+		enablePainting = false;
+		setUpdatesEnabled( false );
 	}
+	qWarning("OUT void AbTable::setPaintingEnabled( %d )->Nested: %d", e, countNested );
 }
+
+void AbTable::viewportPaintEvent( QPaintEvent* e ) {
+	qWarning(" void AbTable::viewportPaintEvent( QPaintEvent* e ) -> %d", enablePainting);
+	if ( enablePainting )
+		QTable::viewportPaintEvent( e );
+}
+
+
 
 void AbTable::rowHeightChanged( int row )
 {
