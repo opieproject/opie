@@ -84,5 +84,8 @@
 #endif
 
 
+#define QTOPIA_MERGED_METHOD(method, version) method QPE_WEAK_SYMBOL;
+#define NOT_IN_SHARP(method) method QPE_WEAK_SYMBOL;
+#define NOT_IN_QPE(method) method QPE_WEAK_SYMBOL;
 
 #endif

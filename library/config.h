@@ -1,5 +1,5 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000, 2004 Trolltech AS.  All rights reserved.
 **
 ** This file is part of Qtopia Environment.
 **
@@ -23,18 +23,24 @@
 
 // ##### could use QSettings with Qt 3.0
 
+#include <qpe/qpeglobal.h>
+
 #include <qmap.h>
 #include <qstringlist.h>
+
+typedef QMap< QString, QString > ConfigGroup;
+typedef QMap< QString, ConfigGroup> ConfigGroupMap;
 
 class ConfigPrivate;
 class Config
 {
 public:
-    typedef QMap< QString, QString > ConfigGroup;
 
     enum Domain { File, User };
     Config( const QString &name, Domain domain=User );
     ~Config();
+
+    QTOPIA_MERGED_METHOD(static long timeStamp( const QString &name, Domain domain=User ), "2.1");
 
     bool operator == ( const Config & other ) const { return (filename == other.filename); }
     bool operator != ( const Config & other ) const { return (filename != other.filename); }
@@ -43,8 +49,8 @@ public:
     bool hasKey( const QString &key ) const;
 
 	// inline for better SharpROM BC
-	inline bool hasGroup ( const QString &gname ) const  { return ( groups. find ( gname ) != groups. end ( )); };
-	inline QStringList groupList ( ) const { QStringList sl; for ( QMap< QString, ConfigGroup >::ConstIterator it = groups. begin ( ); it != groups. end ( ); ++it ) { sl << it.key(); } return sl; };
+    NOT_IN_QPE(bool hasGroup ( const QString &gname ) const);
+    NOT_IN_QPE(QStringList groupList ( ) const);
 
     void setGroup( const QString &gname );
     void writeEntry( const QString &key, const char* value );
@@ -55,6 +61,8 @@ public:
     void writeEntry( const QString &key, bool b );
 #endif
     void writeEntry( const QString &key, const QStringList &lst, const QChar &sep );
+    QTOPIA_MERGED_METHOD(void writeEntry( const QString &key, const QStringList &lst ), "2.1.0");
+
     void removeEntry( const QString &key );
 
     QString readEntry( const QString &key, const QString &deflt = QString::null ) const;
@@ -63,6 +71,7 @@ public:
     int readNumEntry( const QString &key, int deflt = -1 ) const;
     bool readBoolEntry( const QString &key, bool deflt = FALSE ) const;
     QStringList readListEntry( const QString &key, const QChar &sep ) const;
+    QTOPIA_MERGED_METHOD(QStringList readListEntry( const QString &key ) const, "2.1.0");
 
     // For compatibility, non-const versions.
     QString readEntry( const QString &key, const QString &deflt );
@@ -73,6 +82,9 @@ public:
     QStringList readListEntry( const QString &key, const QChar &sep );
 
     void clearGroup();
+    QTOPIA_MERGED_METHOD(void removeGroup(), "2.1.0");
+    QTOPIA_MERGED_METHOD(void removeGroup(const QString&), "2.1.0");
+    QTOPIA_MERGED_METHOD(QStringList allGroups() const, "2.1.0");
 
     void write( const QString &fn = QString::null );
 
@@ -92,18 +104,5 @@ protected:
 private: // Sharp ROM compatibility
     Config( const QString &name, bool what );
 };
-
-inline QString Config::readEntry( const QString &key, const QString &deflt ) const
-{ return ((Config*)this)->readEntry(key,deflt); }
-inline QString Config::readEntryCrypt( const QString &key, const QString &deflt ) const
-{ return ((Config*)this)->readEntryCrypt(key,deflt); }
-inline QString Config::readEntryDirect( const QString &key, const QString &deflt ) const
-{ return ((Config*)this)->readEntryDirect(key,deflt); }
-inline int Config::readNumEntry( const QString &key, int deflt ) const
-{ return ((Config*)this)->readNumEntry(key,deflt); }
-inline bool Config::readBoolEntry( const QString &key, bool deflt ) const
-{ return ((Config*)this)->readBoolEntry(key,deflt); }
-inline QStringList Config::readListEntry( const QString &key, const QChar &sep ) const
-{ return ((Config*)this)->readListEntry(key,sep); }
 
 #endif

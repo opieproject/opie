@@ -1,5 +1,5 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000,2004 Trolltech AS.  All rights reserved.
 **
 ** This file is part of Qtopia Environment.
 **
@@ -578,3 +578,165 @@ bool Config::parse( const QString &l )
     }
     return TRUE;
 }
+
+
+
+bool Config::hasGroup( const QString& name )const {
+    return ( groups. find ( name ) != groups. end ( ));
+};
+
+QStringList Config::groupList()const {
+    QStringList sl;
+    for ( ConfigGroupMap::ConstIterator it = groups. begin ( ); it != groups. end ( ); ++it )
+        sl << it.key();
+
+    return sl;
+};
+
+/////////////
+// Qtopia 2.1 Functions
+//
+////////////
+
+QStringList Config::allGroups()const {
+    return groupList();
+}
+
+/*!
+  Returns the time stamp for the config identified by \a name.  The
+  time stamp represents the time the config was last committed to storage.
+  Returns 0 if there is no time stamp available for the config.
+
+  A \a domain can optionally be specified and defaults to User.
+  See \l{Config()} for details.
+
+  First availability: Qtopia 2.0
+*/
+long Config::timeStamp(const QString& name, Domain domain)
+{
+#ifdef Q_WS_WIN
+    // Too slow (many conversions too and from time_t and QDataTime)
+    QDateTime epoch;
+    epoch.setTime_t(0);
+    return epoch.secsTo(QFileInfo(Config::configFilename(name,domain)).lastModified());
+#else
+    QString fn = Config::configFilename(name,domain);
+    struct stat b;
+    if (lstat( QFile::encodeName(fn).data(), &b ) == 0)
+        return b.st_mtime;
+    else
+        return 0;
+#endif
+}
+
+
+/*!
+  Removes the current group (and all its entries).
+
+  The current group becomes unset.
+
+  First availability: Qtopia 2.0
+*/
+void Config::removeGroup()
+{
+    if ( git == groups.end() ) {
+        qWarning( "no group set" );
+        return;
+    }
+
+    groups.remove(git.key());
+    git = groups.end();
+    changed = TRUE;
+}
+
+/*!
+  Removes the current group (and all its entries).
+
+  The current group becomes unset.
+
+  First availability: Qtopia 2.0
+*/
+void Config::removeGroup(const QString& g)
+{
+    groups.remove(g);
+    git = groups.end();
+}
+
+
+
+/*!
+  Writes a (\a key, \a lst) entry to the current group.
+
+  The list is
+  separated by the two characters "^e", and "^" withing the strings
+  is replaced by "^^", such that the strings may contain any character,
+  including "^".
+
+  Null strings are also allowed, and are recorded as "^0" in the string.
+
+  First availability: Qtopia 2.0
+
+  \sa readListEntry()
+*/
+void Config::writeEntry( const QString &key, const QStringList &lst )
+{
+    QString s;
+    for (QStringList::ConstIterator it=lst.begin(); it!=lst.end(); ++it) {
+        QString el = *it;
+        if ( el.isNull() ) {
+            el = "^0";
+        } else {
+            el.replace(QRegExp("\\^"), "^^");
+        }
+        s+=el;
+        s+="^e"; // end of element
+    }
+    writeEntry(key, s);
+}
+
+/*!
+  Returns the string list entry stored using \a key and with
+  the escaped seperator convention described in writeListEntry().
+
+  First availability: Qtopia 2.0
+*/
+QStringList Config::readListEntry( const QString &key ) const
+{
+    QString value = readEntry( key, QString::null );
+    QStringList l;
+    QString s;
+    bool esc=FALSE;
+    for (int i=0; i<(int)value.length(); i++) {
+        if ( esc ) {
+            if ( value[i] == 'e' ) { // end-of-string
+                l.append(s);
+                s="";
+            } else if ( value[i] == '0' ) { // null string
+                s=QString::null;
+            } else {
+                s.append(value[i]);
+            }
+            esc = FALSE;
+        } else if ( value[i] == '^' ) {
+            esc = TRUE;
+        } else {
+            s.append(value[i]);
+            if ( i == (int)value.length()-1 )
+                l.append(s);
+        }
+    }
+    return l;
+}
+
+QString Config::readEntry( const QString &key, const QString &deflt ) const
+{ return ((Config*)this)->readEntry(key,deflt); }
+QString Config::readEntryCrypt( const QString &key, const QString &deflt ) const
+{ return ((Config*)this)->readEntryCrypt(key,deflt); }
+QString Config::readEntryDirect( const QString &key, const QString &deflt ) const
+{ return ((Config*)this)->readEntryDirect(key,deflt); }
+int Config::readNumEntry( const QString &key, int deflt ) const
+{ return ((Config*)this)->readNumEntry(key,deflt); }
+bool Config::readBoolEntry( const QString &key, bool deflt ) const
+{ return ((Config*)this)->readBoolEntry(key,deflt); }
+QStringList Config::readListEntry( const QString &key, const QChar &sep ) const
+{ return ((Config*)this)->readListEntry(key,sep); }
