@@ -30,6 +30,7 @@
 	* n.a.  - PackageManager - provide default value for lists_dir when none is entered in configuration dialog (drw)
 	* n.a.  - Launcher Settings - fix default settings for background in Edit tab dialog (drw)
 	* n.a.  - OTabWidget - fix scroll buttons, fix display position of tabs (drw)
+	* n.a.  - AddressBook - fix sorting by 'File As' name (drw)
 
 	Internal
 	--------
