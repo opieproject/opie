@@ -230,16 +230,21 @@ void TransferDialog::slotError(int error, const QString& message)
 
 void TransferDialog::slotSent()
 {
+	progressbar->setProgress(100);
 	QMessageBox::information(this, QObject::tr("Sent"), QObject::tr("File has been sent."));
 	ok->setEnabled(true);
+	progressbar->setProgress(0);
 	statusbar->setText(QObject::tr("Ready"));
 	m_autocleanup = 1;
 }
 
 void TransferDialog::slotReceived(const QString& file)
 {
-	QMessageBox::information(this, QObject::tr("Sent"), QObject::tr("File has been received as %1.").arg(file));
+	progressbar->setProgress(100);
+	QMessageBox::information(this, QObject::tr("Received"), QObject::tr("File has been received."));
+	//QMessageBox::information(this, QObject::tr("Sent"), QObject::tr("File has been received as %1.").arg(file));
 	ok->setEnabled(true);
+	progressbar->setProgress(0);
 	statusbar->setText(QObject::tr("Ready"));
 	m_autocleanup = 1;
 }

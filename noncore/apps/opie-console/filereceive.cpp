@@ -53,7 +53,12 @@ void FileReceive::receive( const QString& dir ) {
         }
 
         /* we should never return from here */
-        execlp("rz", "rz",  typus, NULL );
+        if( m_type == SX )
+            // FIXME: file name should be configurable - currently we ensure it
+            // doesn't get overwritten by -E (--rename)
+            execlp("rz", "rz",  typus, "--overwrite", QObject::tr("SynchronizedFile").latin1(), NULL );
+        else
+            execlp("rz", "rz",  typus, "--overwrite", NULL );
 
         char resultByte = 1;
         if (m_info[1] )
