@@ -214,7 +214,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     QHBox *hbox6 = new QHBox( vbox4 ); hbox6->setBackgroundMode( PaletteButton );
     
     tabWidget = new QTabWidget( hbox6, "tabWidget" );
-    tabWidget->setTabShape(QTabWidget::Triangular);
+//    tabWidget->setTabShape(QTabWidget::Triangular);
     
     QWidget *pTab;
     pTab = new QWidget( tabWidget, "pTab" );
@@ -325,7 +325,10 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
     connect( tabWidget, SIGNAL (currentChanged(QWidget*)),this,SLOT(tabChanged(QWidget*)));
 
-//    connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ),    d->tbPlay,    SLOT( setOn( bool ) ) );
+    connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ),    d->tbPlay,    SLOT( setOn( bool ) ) );
+
+
+
     connect( mediaPlayerState, SIGNAL( loopingToggled( bool ) ),    d->tbLoop,    SLOT( setOn( bool ) ) );
     connect( mediaPlayerState, SIGNAL( shuffledToggled( bool ) ),   d->tbShuffle, SLOT( setOn( bool ) ) );
     connect( mediaPlayerState, SIGNAL( playlistToggled( bool ) ),   this,         SLOT( setPlaylist( bool ) ) );
@@ -724,7 +727,7 @@ void PlayListWidget::addSelected() {
   }
     break;
   };
-  tabWidget->setCurrentPage(0);
+//  tabWidget->setCurrentPage(0);
   writeCurrentM3u();          
 
 }
@@ -761,7 +764,7 @@ void PlayListWidget::addToSelection( QListViewItem *it) {
     d->selectedFiles->addToSelection(  lnk);
  
     writeCurrentM3u();          
-    tabWidget->setCurrentPage(0);
+//    tabWidget->setCurrentPage(0);
         
   }
 }
