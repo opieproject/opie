@@ -533,7 +533,7 @@ void TextEdit::newFileOpen()
             QString  fileName = fileTemp;
             if( fileName != "Unnamed" || fileName != "Empty Text"  ) {
                 currentFileName = fileName;
-//                qDebug("please open "+currentFileName);
+                qDebug("please open "+currentFileName);
                 openFile(fileName );
             }
         }
@@ -633,6 +633,8 @@ void TextEdit::openFile( const QString &f )
     nf.setType("text/plain");
     nf.setFile(f);
     currentFileName=f;
+    QFileInfo fi( currentFileName);
+    nf.setName(fi.baseName());
     qDebug("openFile string"+currentFileName);
 
     openFile(nf);
