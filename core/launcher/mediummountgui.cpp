@@ -44,11 +44,11 @@ void MediumMountGui::readConfig(){
   checkagain = m_cfg->readBoolEntry("check", false);
   
   m_cfg->setGroup("mimetypes");
-  checkmimeaudio = m_cfg->readBoolEntry("audio", true);
-  checkmimeimage = m_cfg->readBoolEntry("image", true);
-  checkmimetext  = m_cfg->readBoolEntry("text", true);
-  checkmimevideo = m_cfg->readBoolEntry("video", true);
-  checkmimeall   = m_cfg->readBoolEntry("all", true);
+  checkmimeaudio = m_cfg->readBoolEntry("audio", true );
+  checkmimeimage = m_cfg->readBoolEntry("image", true );
+  checkmimetext  = m_cfg->readBoolEntry("text" , true );
+  checkmimevideo = m_cfg->readBoolEntry("video", true );
+  checkmimeall   = m_cfg->readBoolEntry("all"  , false);
 
   m_cfg->setGroup("dirs");
   limittodirs = m_cfg->readEntry("dirs", "");
@@ -180,7 +180,7 @@ void MediumMountGui::startGui() {
   CheckBoxImage->setChecked(checkmimeimage);
   CheckBoxText->setChecked(checkmimetext);
   CheckBoxVideo->setChecked(checkmimevideo);
-
+  CheckBoxAll->setChecked( checkmimeall );
   // buttons
   quit = new QPushButton( this );
   quit->setGeometry( QRect( (this->width()/2)- 90 , 260, 80, 22 ) ); 
