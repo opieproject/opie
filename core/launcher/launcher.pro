@@ -107,7 +107,7 @@ DEPENDPATH	+= $(OPIEDIR)/core/apps/calibrate
 INCLUDEPATH += $(OPIEDIR)/rsync
 DEPENDPATH	+= $(OPIEDIR)/rsync
 
-TARGET		= qpe
+TARGET		= opie
 
 LIBS		+= -lqpe -lcrypt -lopie
 
