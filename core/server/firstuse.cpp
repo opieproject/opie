@@ -30,9 +30,8 @@
 #include "applauncher.h"
 #include "serverapp.h"
 #include <qtopia/custom.h>
-#if defined(QPE_NEED_CALIBRATION)
+
 #include "calibrate.h"
-#endif
 #include "documentlist.h"
 
 #include <qtopia/resource.h>
@@ -168,12 +167,16 @@ FirstUse::FirstUse(QWidget* parent, const char * name, WFlags wf) :
 	    this, SLOT(message(const QCString &, const QByteArray &)) );
 #endif
     calcMaxWindowRect();
-#if defined(QPE_NEED_CALIBRATION)
-    if ( !QFile::exists("/etc/pointercal") ) {
-	needCalibrate = TRUE;
-	grabMouse();
+
+    m_calHandler = ( QWSServer::mouseHandler() && QWSServer::mouseHandler()->inherits("QCalibratedMouseHandler") ) ? true : false;
+
+    if ( m_calHandler) {
+        if ( !QFile::exists("/etc/pointercal") ) {
+            needCalibrate = TRUE;
+            grabMouse();
+        }
     }
-#endif
+
     Config config("locale");
     config.setGroup( "Language");
     lang = config.readEntry( "Language", "en");
@@ -230,7 +233,7 @@ void FirstUse::nextDialog()
 	if ( settingsTable[currApp].app == 0 ) {
 	    if ( prevApp >= 0 && appLauncher->isRunning(settingsTable[prevApp].app) ) {
 		// The last application is still running.
-		// Tell it to stop, and when its done we'll come back 
+		// Tell it to stop, and when its done we'll come back
 		// to nextDialog and exit.
 		qDebug( "Waiting for %s to exit", settingsTable[prevApp].app );
 		QCopEnvelope e(QCString("QPE/Application/") + settingsTable[prevApp].app,
@@ -491,6 +494,7 @@ void FirstUse::updateButtons()
 	next->setText(tr("Finish"));
     else
 	next->setText(tr("Next >>"));
+
     next->setEnabled( !waitingForLaunch );
 }
 
@@ -504,14 +508,12 @@ void FirstUse::keyPressEvent( QKeyEvent *e )
 void FirstUse::mouseReleaseEvent( QMouseEvent * )
 {
     if ( currApp < 0 ) {
-#if defined(QPE_NEED_CALIBRATION)
-	if ( needCalibrate ) {
+	if ( m_calHandler && needCalibrate ) {
 	    releaseMouse();
 	    Calibrate *cal = new Calibrate;
 	    cal->exec();
 	    delete cal;
 	}
-#endif
 	nextDialog();
     }
 }

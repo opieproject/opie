@@ -79,6 +79,7 @@ private:
     int waitForExit;
     bool waitingForLaunch;
     bool needRestart;
+    bool m_calHandler : 1;
 
     QFont defaultFont;
 };
