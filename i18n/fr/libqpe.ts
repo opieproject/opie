@@ -200,7 +200,12 @@ de cette liste</translation>
     </message>
     <message>
         <source>End reached, starting at beginning</source>
-        <translation>Fin atteinte, reprise au début</translation>
+        <translation type="obsolete">Fin atteinte, reprise au début</translation>
+    </message>
+    <message>
+        <source>End reached, starting at %1</source>
+        <comment>Date using TimeString::shortDate</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -344,6 +349,10 @@ de cette liste</translation>
         <source>Use custom rotation</source>
         <translation>Personnaliser la rotation</translation>
     </message>
+    <message>
+        <source>Arguments:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OwnerDlg</name>
@@ -451,11 +460,11 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>D</source>
-        <translation>J</translation>
+        <translation type="obsolete">J</translation>
     </message>
     <message>
         <source>M</source>
-        <translation>M</translation>
+        <translation type="obsolete">M</translation>
     </message>
     <message>
         <source>Y</source>
@@ -837,23 +846,23 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation>Cliquez pour fermer cette fenêtre et abandonner les modifications.</translation>
+        <translation type="obsolete">Cliquez pour fermer cette fenêtre et abandonner les modifications.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation>Cliquez pour fermer cette fenêtre.</translation>
+        <translation type="obsolete">Cliquez pour fermer cette fenêtre.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation>Cliquez pour fermer cette fenêtre et appliquer les modifications.</translation>
+        <translation type="obsolete">Cliquez pour fermer cette fenêtre et appliquer les modifications.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation>Cliquez pour rendre cette fenêtre déplaçable.</translation>
+        <translation type="obsolete">Cliquez pour rendre cette fenêtre déplaçable.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation>Cliquez pour que cette fenêtre remplisse l&apos;écran.</translation>
+        <translation type="obsolete">Cliquez pour que cette fenêtre remplisse l&apos;écran.</translation>
     </message>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
@@ -885,6 +894,16 @@ Libérez de la mémoire et réessayez.</translation>
         <source>Could not start the application </source>
         <translation type="obsolete">L&apos;application n&apos;a pas été lancée</translation>
     </message>
+    <message>
+        <source>D</source>
+        <comment>Shortcut for Day</comment>
+        <translation type="unfinished">J</translation>
+    </message>
+    <message>
+        <source>M</source>
+        <comment>Shortcur for Month</comment>
+        <translation type="unfinished">M</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
@@ -908,15 +927,15 @@ Libérez de la mémoire et réessayez.</translation>
     <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="obsolete">Cliquez pour fermer cette fenêtre et abandonner les changements.</translation>
+        <translation type="unfinished">Cliquez pour fermer cette fenêtre et abandonner les changements.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="obsolete">Cliquez pour fermer cette fenêtre.</translation>
+        <translation type="unfinished">Cliquez pour fermer cette fenêtre.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="obsolete">Cliquez pour fermer cette fenêtre et appliquer les changements.</translation>
+        <translation type="unfinished">Cliquez pour fermer cette fenêtre et appliquer les changements.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
@@ -924,7 +943,31 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="obsolete">Cliquez pour que cette fenêtre remplisse l&apos;écran.</translation>
+        <translation type="unfinished">Cliquez pour que cette fenêtre remplisse l&apos;écran.</translation>
+    </message>
+    <message>
+        <source>Click to make this window movable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1010,6 +1053,14 @@ Libérez de la mémoire et réessayez</translation>
     <message>
         <source>All files</source>
         <translation>Tous les fichiers</translation>
+    </message>
+</context>
+<context>
+    <name>WindowDecoration</name>
+    <message>
+        <source>Default</source>
+        <comment>List box text for default window decoration</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -1332,6 +1332,10 @@ is provided free !</source>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

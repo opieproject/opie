@@ -85,11 +85,11 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="obsolete">FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="obsolete">FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
 </context>
 <context>
@@ -260,6 +260,17 @@ Please charge the back-up battery.</source>
     </message>
     <message>
         <source>All types</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Mediadlg</name>
+    <message>
+        <source>A new storage media detected:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>What should I do with it?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -481,6 +492,10 @@ These termination options are provided primarily for use while developing and te
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade or change the security setting to use IntelliSync.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;You chose IntelliSync so you may I allow or deny this connection.&lt;/qt&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

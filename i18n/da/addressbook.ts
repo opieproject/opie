@@ -1342,6 +1342,10 @@ Opie-Mail fås gratis!</translation>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
         <translation>Tryk for at vælge hvordan navnet skal gemmes (og hvordan det skal vises i liste visningen)</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

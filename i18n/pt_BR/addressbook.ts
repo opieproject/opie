@@ -1343,6 +1343,10 @@ forcnecido livremente !</translation>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
         <translation>Pressione para selecionar como o nome será armazenado (e como será mostrado na visão em lista)</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

@@ -195,7 +195,12 @@ ureja kategorije.</translation>
     </message>
     <message>
         <source>End reached, starting at beginning</source>
-        <translation>Prišel na konec, začenjam na začetku</translation>
+        <translation type="obsolete">Prišel na konec, začenjam na začetku</translation>
+    </message>
+    <message>
+        <source>End reached, starting at %1</source>
+        <comment>Date using TimeString::shortDate</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -338,6 +343,10 @@ ureja kategorije.</translation>
         <source>Use custom rotation</source>
         <translation>Uporabi prilagojen zasuk</translation>
     </message>
+    <message>
+        <source>Arguments:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OwnerDlg</name>
@@ -444,11 +453,11 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
     </message>
     <message>
         <source>D</source>
-        <translation>D</translation>
+        <translation type="obsolete">D</translation>
     </message>
     <message>
         <source>M</source>
-        <translation>M</translation>
+        <translation type="obsolete">M</translation>
     </message>
     <message>
         <source>Y</source>
@@ -782,23 +791,23 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
     </message>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="unfinished">Kliknite tu, da zaprete to okno in zanemarite spremembe.</translation>
+        <translation type="obsolete">Kliknite tu, da zaprete to okno in zanemarite spremembe.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="unfinished">Kliknite tu, da zaprete to okno.</translation>
+        <translation type="obsolete">Kliknite tu, da zaprete to okno.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="unfinished">Kliknite tu, da zaprete to okno in uveljavite spremembe.</translation>
+        <translation type="obsolete">Kliknite tu, da zaprete to okno in uveljavite spremembe.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation type="unfinished">Kliknite tu, da naredite to okno premično.</translation>
+        <translation type="obsolete">Kliknite tu, da naredite to okno premično.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="unfinished">Kliknite tu, da to okno uporablja ves prostor, ki je na voljo.</translation>
+        <translation type="obsolete">Kliknite tu, da to okno uporablja ves prostor, ki je na voljo.</translation>
     </message>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
@@ -865,6 +874,16 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
         <source>Error</source>
         <translation type="obsolete">Napaka</translation>
     </message>
+    <message>
+        <source>D</source>
+        <comment>Shortcut for Day</comment>
+        <translation type="unfinished">D</translation>
+    </message>
+    <message>
+        <source>M</source>
+        <comment>Shortcur for Month</comment>
+        <translation type="unfinished">M</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
@@ -888,15 +907,15 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
     <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="obsolete">Kliknite tu, da zaprete to okno in zanemarite spremembe.</translation>
+        <translation type="unfinished">Kliknite tu, da zaprete to okno in zanemarite spremembe.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="obsolete">Kliknite tu, da zaprete to okno.</translation>
+        <translation type="unfinished">Kliknite tu, da zaprete to okno.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="obsolete">Kliknite tu, da zaprete to okno in uveljavite spremembe.</translation>
+        <translation type="unfinished">Kliknite tu, da zaprete to okno in uveljavite spremembe.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
@@ -904,7 +923,31 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="obsolete">Kliknite tu, da to okno uporablja ves prostor, ki je na voljo.</translation>
+        <translation type="unfinished">Kliknite tu, da to okno uporablja ves prostor, ki je na voljo.</translation>
+    </message>
+    <message>
+        <source>Click to make this window movable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -989,6 +1032,14 @@ Prosim sprostite malo prostora in poizkusite ponovno</translation>
     <message>
         <source>All files</source>
         <translation>Vse datoteke</translation>
+    </message>
+</context>
+<context>
+    <name>WindowDecoration</name>
+    <message>
+        <source>Default</source>
+        <comment>List box text for default window decoration</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

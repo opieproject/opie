@@ -3,261 +3,261 @@
     <name>@default</name>
     <message>
         <source>ZSafe</source>
-        <translation>ZSafe</translation>
+        <translation type="obsolete">ZSafe</translation>
     </message>
     <message>
         <source>Do you want to delete?</source>
-        <translation>Opravdu chcete smazat?</translation>
+        <translation type="obsolete">Opravdu chcete smazat?</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;Smazat</translation>
+        <translation type="obsolete">&amp;Smazat</translation>
     </message>
     <message>
         <source>D&amp;on&apos;t Delete</source>
-        <translation>N&amp;emazat</translation>
+        <translation type="obsolete">N&amp;emazat</translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation>Upravit položku</translation>
+        <translation type="obsolete">Upravit položku</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Název</translation>
+        <translation type="obsolete">Název</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Uživatelské jméno</translation>
+        <translation type="obsolete">Uživatelské jméno</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Heslo</translation>
+        <translation type="obsolete">Heslo</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Komentář</translation>
+        <translation type="obsolete">Komentář</translation>
     </message>
     <message>
         <source>Field 4</source>
-        <translation>Pole 4</translation>
+        <translation type="obsolete">Pole 4</translation>
     </message>
     <message>
         <source>Field 5</source>
-        <translation>Pole 5</translation>
+        <translation type="obsolete">Pole 5</translation>
     </message>
     <message>
         <source>New Entry</source>
-        <translation>Nová položka</translation>
+        <translation type="obsolete">Nová položka</translation>
     </message>
     <message>
         <source>Entry name must be different
 from the category name.</source>
-        <translation>Název položky musí být jiný
+        <translation type="obsolete">Název položky musí být jiný
 než název kategorie.</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Hledat</translation>
+        <translation type="obsolete">Hledat</translation>
     </message>
     <message>
         <source>Entry not found</source>
-        <translation>Položka nenalezena</translation>
+        <translation type="obsolete">Položka nenalezena</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
+        <translation type="obsolete">&amp;OK</translation>
     </message>
     <message>
         <source>Field 2</source>
-        <translation>Pole 2</translation>
+        <translation type="obsolete">Pole 2</translation>
     </message>
     <message>
         <source>Field 3</source>
-        <translation>Pole 3</translation>
+        <translation type="obsolete">Pole 3</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Všechno</translation>
+        <translation type="obsolete">Všechno</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation>Text</translation>
+        <translation type="obsolete">Text</translation>
     </message>
     <message>
         <source>Remove text file</source>
-        <translation>Odstranit textový soubor</translation>
+        <translation type="obsolete">Odstranit textový soubor</translation>
     </message>
     <message>
         <source>Could not remove text file.</source>
-        <translation>Nelze odstranit textový soubor.</translation>
+        <translation type="obsolete">Nelze odstranit textový soubor.</translation>
     </message>
     <message>
         <source>No document defined.
 You have to create a new document</source>
-        <translation>Dokument nebyl definován.
+        <translation type="obsolete">Dokument nebyl definován.
 Vytvořte nový dokument</translation>
     </message>
     <message>
         <source>Export text file</source>
-        <translation>Export do textového souboru</translation>
+        <translation type="obsolete">Export do textového souboru</translation>
     </message>
     <message>
         <source>Import text file</source>
-        <translation>Import z textového souboru</translation>
+        <translation type="obsolete">Import z textového souboru</translation>
     </message>
     <message>
         <source>Could not export to text file.</source>
-        <translation>Nelze exportovat do textového souboru.</translation>
+        <translation type="obsolete">Nelze exportovat do textového souboru.</translation>
     </message>
     <message>
         <source>Could not import text file.</source>
-        <translation>Nelze importovat textový soubor.</translation>
+        <translation type="obsolete">Nelze importovat textový soubor.</translation>
     </message>
     <message>
         <source>Enter Password</source>
-        <translation>Zadejte heslo</translation>
+        <translation type="obsolete">Zadejte heslo</translation>
     </message>
     <message>
         <source>Wrong password.
 
 ZSafe will now exit.</source>
-        <translation>Špatné heslo.
+        <translation type="obsolete">Špatné heslo.
 
 ZSafe se nyní ukončí.</translation>
     </message>
     <message>
         <source>Wrong password.
 Enter again?</source>
-        <translation>Špatné heslo.
+        <translation type="obsolete">Špatné heslo.
 Zkusit znovu?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;Ano</translation>
+        <translation type="obsolete">&amp;Ano</translation>
     </message>
     <message>
         <source>&amp;No.</source>
-        <translation>&amp;Ne.</translation>
+        <translation type="obsolete">&amp;Ne.</translation>
     </message>
     <message>
         <source>Empty document or
 wrong password.
 Continue?</source>
-        <translation>Prázdný dokument,
+        <translation type="obsolete">Prázdný dokument,
 nebo špatné heslo.
 Pokračovat?</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;Ne</translation>
+        <translation type="obsolete">&amp;Ne</translation>
     </message>
     <message>
         <source>&amp;Yes.</source>
-        <translation>&amp;Ano.</translation>
+        <translation type="obsolete">&amp;Ano.</translation>
     </message>
     <message>
         <source>Password is empty.
 Please enter again.</source>
-        <translation>Heslo je prázdné.
+        <translation type="obsolete">Heslo je prázdné.
 Zadejte ho znovu.</translation>
     </message>
     <message>
         <source>Reenter Password</source>
-        <translation>Opakujte heslo</translation>
+        <translation type="obsolete">Opakujte heslo</translation>
     </message>
     <message>
         <source>Passwords must be identical.
 Please enter again.</source>
-        <translation>Hesla musí být identická.
+        <translation type="obsolete">Hesla musí být identická.
 Zadejte ho znovu.</translation>
     </message>
     <message>
         <source>Do you want to save </source>
-        <translation>Chcete uložit změny</translation>
+        <translation type="obsolete">Chcete uložit změny</translation>
     </message>
     <message>
         <source>
 before continuing?</source>
-        <translation>
+        <translation type="obsolete">
 před pokračováním?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>&amp;Uložit</translation>
+        <translation type="obsolete">&amp;Uložit</translation>
     </message>
     <message>
         <source>&amp;Don&apos;t Save</source>
-        <translation>&amp;Neukládat</translation>
+        <translation type="obsolete">&amp;Neukládat</translation>
     </message>
     <message>
         <source>Password file saved.</source>
-        <translation>Soubor s hesly uložen.</translation>
+        <translation type="obsolete">Soubor s hesly uložen.</translation>
     </message>
     <message>
         <source>Do you want to save
 before exiting?</source>
-        <translation>Chcete uložit změny
+        <translation type="obsolete">Chcete uložit změny
 před ukončením?</translation>
     </message>
     <message>
         <source>S&amp;ave with
 new
 password</source>
-        <translation>U&amp;ložit s
+        <translation type="obsolete">U&amp;ložit s
 novým
 heslem</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation>Kategorie</translation>
+        <translation type="obsolete">Kategorie</translation>
     </message>
     <message>
         <source>Wait dialog</source>
-        <translation>Čekejte</translation>
+        <translation type="obsolete">Čekejte</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation>Shromažďování ikon...</translation>
+        <translation type="obsolete">Shromažďování ikon...</translation>
     </message>
     <message>
         <source>Create new ZSafe document</source>
-        <translation>Vytvořit nový ZSafe dokument</translation>
+        <translation type="obsolete">Vytvořit nový ZSafe dokument</translation>
     </message>
     <message>
         <source>Now you have to enter
 a password twice for your
 newly created document.</source>
-        <translation>Nyní prosím zadejte
+        <translation type="obsolete">Nyní prosím zadejte
 dvakrát heslo k vašemu
 nově vytvořenému dokumentu.</translation>
     </message>
     <message>
         <source>Open ZSafe document</source>
-        <translation>Otevřít ZSafe dokument</translation>
+        <translation type="obsolete">Otevřít ZSafe dokument</translation>
     </message>
     <message>
         <source>Save ZSafe document as..</source>
-        <translation>Uložit ZSafe dokument jako..</translation>
+        <translation type="obsolete">Uložit ZSafe dokument jako..</translation>
     </message>
     <message>
         <source>Zaurus Password Manager&lt;br&gt;</source>
-        <translation>Zaurus Správce hesel&lt;br&gt;</translation>
+        <translation type="obsolete">Zaurus Správce hesel&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
-        <translation>ZSafe verze 2.1.2-jv01b&lt;br&gt;</translation>
+        <translation type="obsolete">ZSafe verze 2.1.2-jv01b&lt;br&gt;</translation>
     </message>
     <message>
         <source>by Carsten Schneider&lt;br&gt;</source>
-        <translation>napsal Carsten Schneider&lt;br&gt;</translation>
+        <translation type="obsolete">napsal Carsten Schneider&lt;br&gt;</translation>
     </message>
     <message>
         <source>Translations by Robert Ernst&lt;br&gt;</source>
-        <translation>Přeložil Robert Ernst&lt;br&gt;</translation>
+        <translation type="obsolete">Přeložil Robert Ernst&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2&lt;br&gt;</source>
-        <translation>ZSafe verze 2.1.2&lt;br&gt;</translation>
+        <translation type="obsolete">ZSafe verze 2.1.2&lt;br&gt;</translation>
     </message>
 </context>
 <context>
@@ -423,6 +423,10 @@ shows the list of dirs and files</source>
         <translation>Seznam Adresářů
 
 zobrazí seznam adresářů a souborů</translation>
+    </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -629,6 +633,236 @@ ZSafe se nyní ukončí.</translation>
     <message>
         <source>Field 5</source>
         <translation>Pole 5</translation>
+    </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to delete?</source>
+        <translation type="unfinished">Opravdu chcete smazat?</translation>
+    </message>
+    <message>
+        <source>D&amp;on&apos;t Delete</source>
+        <translation type="unfinished">N&amp;emazat</translation>
+    </message>
+    <message>
+        <source>Edit Entry</source>
+        <translation type="unfinished">Upravit položku</translation>
+    </message>
+    <message>
+        <source>Username</source>
+        <translation type="unfinished">Uživatelské jméno</translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation type="unfinished">Heslo</translation>
+    </message>
+    <message>
+        <source>New Entry</source>
+        <translation type="unfinished">Nová položka</translation>
+    </message>
+    <message>
+        <source>Entry name must be different
+from the category name.</source>
+        <translation type="unfinished">Název položky musí být jiný
+než název kategorie.</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Hledat</translation>
+    </message>
+    <message>
+        <source>Entry not found</source>
+        <translation type="unfinished">Položka nenalezena</translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
+        <translation type="unfinished">&amp;OK</translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished">Všechno</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished">Text</translation>
+    </message>
+    <message>
+        <source>Remove text file</source>
+        <translation type="unfinished">Odstranit textový soubor</translation>
+    </message>
+    <message>
+        <source>Could not remove text file.</source>
+        <translation type="unfinished">Nelze odstranit textový soubor.</translation>
+    </message>
+    <message>
+        <source>No document defined.
+You have to create a new document</source>
+        <translation type="unfinished">Dokument nebyl definován.
+Vytvořte nový dokument</translation>
+    </message>
+    <message>
+        <source>Export text file</source>
+        <translation type="unfinished">Export do textového souboru</translation>
+    </message>
+    <message>
+        <source>Import text file</source>
+        <translation type="unfinished">Import z textového souboru</translation>
+    </message>
+    <message>
+        <source>Could not export to text file.</source>
+        <translation type="unfinished">Nelze exportovat do textového souboru.</translation>
+    </message>
+    <message>
+        <source>Could not import text file.</source>
+        <translation type="unfinished">Nelze importovat textový soubor.</translation>
+    </message>
+    <message>
+        <source>Enter Password</source>
+        <translation type="unfinished">Zadejte heslo</translation>
+    </message>
+    <message>
+        <source>Wrong password.
+
+ZSafe will now exit.</source>
+        <translation type="unfinished">Špatné heslo.
+
+ZSafe se nyní ukončí.</translation>
+    </message>
+    <message>
+        <source>Wrong password.
+Enter again?</source>
+        <translation type="unfinished">Špatné heslo.
+Zkusit znovu?</translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation type="unfinished">&amp;Ano</translation>
+    </message>
+    <message>
+        <source>&amp;No.</source>
+        <translation type="unfinished">&amp;Ne.</translation>
+    </message>
+    <message>
+        <source>Empty document or
+wrong password.
+Continue?</source>
+        <translation type="unfinished">Prázdný dokument,
+nebo špatné heslo.
+Pokračovat?</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation type="unfinished">&amp;Ne</translation>
+    </message>
+    <message>
+        <source>&amp;Yes.</source>
+        <translation type="unfinished">&amp;Ano.</translation>
+    </message>
+    <message>
+        <source>Password is empty.
+Please enter again.</source>
+        <translation type="unfinished">Heslo je prázdné.
+Zadejte ho znovu.</translation>
+    </message>
+    <message>
+        <source>Reenter Password</source>
+        <translation type="unfinished">Opakujte heslo</translation>
+    </message>
+    <message>
+        <source>Passwords must be identical.
+Please enter again.</source>
+        <translation type="unfinished">Hesla musí být identická.
+Zadejte ho znovu.</translation>
+    </message>
+    <message>
+        <source>Do you want to save </source>
+        <translation type="unfinished">Chcete uložit změny</translation>
+    </message>
+    <message>
+        <source>
+before continuing?</source>
+        <translation type="unfinished">
+před pokračováním?</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="unfinished">&amp;Uložit</translation>
+    </message>
+    <message>
+        <source>&amp;Don&apos;t Save</source>
+        <translation type="unfinished">&amp;Neukládat</translation>
+    </message>
+    <message>
+        <source>Password file saved.</source>
+        <translation type="unfinished">Soubor s hesly uložen.</translation>
+    </message>
+    <message>
+        <source>Do you want to save
+before exiting?</source>
+        <translation type="unfinished">Chcete uložit změny
+před ukončením?</translation>
+    </message>
+    <message>
+        <source>S&amp;ave with
+new
+password</source>
+        <translation type="unfinished">U&amp;ložit s
+novým
+heslem</translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished">Kategorie</translation>
+    </message>
+    <message>
+        <source>Wait dialog</source>
+        <translation type="unfinished">Čekejte</translation>
+    </message>
+    <message>
+        <source>Gathering icons...</source>
+        <translation type="unfinished">Shromažďování ikon...</translation>
+    </message>
+    <message>
+        <source>Create new ZSafe document</source>
+        <translation type="unfinished">Vytvořit nový ZSafe dokument</translation>
+    </message>
+    <message>
+        <source>Now you have to enter
+a password twice for your
+newly created document.</source>
+        <translation type="unfinished">Nyní prosím zadejte
+dvakrát heslo k vašemu
+nově vytvořenému dokumentu.</translation>
+    </message>
+    <message>
+        <source>Open ZSafe document</source>
+        <translation type="unfinished">Otevřít ZSafe dokument</translation>
+    </message>
+    <message>
+        <source>Save ZSafe document as..</source>
+        <translation type="unfinished">Uložit ZSafe dokument jako..</translation>
+    </message>
+    <message>
+        <source>Zaurus Password Manager&lt;br&gt;</source>
+        <translation type="unfinished">Zaurus Správce hesel&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
+        <translation type="unfinished">ZSafe verze 2.1.2-jv01b&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>by Carsten Schneider&lt;br&gt;</source>
+        <translation type="unfinished">napsal Carsten Schneider&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>Translations by Robert Ernst&lt;br&gt;</source>
+        <translation type="unfinished">Přeložil Robert Ernst&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>ZSafe version 2.1.2&lt;br&gt;</source>
+        <translation type="unfinished">ZSafe verze 2.1.2&lt;br&gt;</translation>
     </message>
 </context>
 </TS>

@@ -196,7 +196,12 @@ modificando le categorie.</translation>
     </message>
     <message>
         <source>End reached, starting at beginning</source>
-        <translation>Raggiunta la fine, inizio da capo</translation>
+        <translation type="obsolete">Raggiunta la fine, inizio da capo</translation>
+    </message>
+    <message>
+        <source>End reached, starting at %1</source>
+        <comment>Date using TimeString::shortDate</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -339,6 +344,10 @@ modificando le categorie.</translation>
         <source>Use custom rotation</source>
         <translation>Utilizza rotazione personalizzata</translation>
     </message>
+    <message>
+        <source>Arguments:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OwnerDlg</name>
@@ -445,11 +454,11 @@ riprovare.</translation>
     </message>
     <message>
         <source>D</source>
-        <translation>G</translation>
+        <translation type="obsolete">G</translation>
     </message>
     <message>
         <source>M</source>
-        <translation>M</translation>
+        <translation type="obsolete">M</translation>
     </message>
     <message>
         <source>Y</source>
@@ -783,23 +792,23 @@ riprovare.</translation>
     </message>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation>Premi per chiudere questa finestra, abbandonando le modifiche effettuate.</translation>
+        <translation type="obsolete">Premi per chiudere questa finestra, abbandonando le modifiche effettuate.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation>Premi per chiudere questa finestra.</translation>
+        <translation type="obsolete">Premi per chiudere questa finestra.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation>Premi per chiudere questa finestra e salvare le modifiche effettuate.</translation>
+        <translation type="obsolete">Premi per chiudere questa finestra e salvare le modifiche effettuate.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation>Premi per spostare la finestra.</translation>
+        <translation type="obsolete">Premi per spostare la finestra.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation>Premi per ingrandire al massimo questa finestra.</translation>
+        <translation type="obsolete">Premi per ingrandire al massimo questa finestra.</translation>
     </message>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
@@ -867,12 +876,65 @@ riprovare.</translation>
         <source>Error</source>
         <translation type="obsolete">Errore</translation>
     </message>
+    <message>
+        <source>D</source>
+        <comment>Shortcut for Day</comment>
+        <translation type="unfinished">G</translation>
+    </message>
+    <message>
+        <source>M</source>
+        <comment>Shortcur for Month</comment>
+        <translation type="unfinished">M</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
     <message>
         <source>%1 document</source>
         <translation>%1 documento</translation>
+    </message>
+</context>
+<context>
+    <name>QPEManager</name>
+    <message>
+        <source>Click to close this window, discarding changes.</source>
+        <translation type="unfinished">Premi per chiudere questa finestra, abbandonando le modifiche effettuate.</translation>
+    </message>
+    <message>
+        <source>Click to close this window.</source>
+        <translation type="unfinished">Premi per chiudere questa finestra.</translation>
+    </message>
+    <message>
+        <source>Click to close this window and apply changes.</source>
+        <translation type="unfinished">Premi per chiudere questa finestra e salvare le modifiche effettuate.</translation>
+    </message>
+    <message>
+        <source>Click to make this window movable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to make this window use all available screen area.</source>
+        <translation type="unfinished">Premi per ingrandire al massimo questa finestra.</translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -958,6 +1020,14 @@ riprovare</translation>
     <message>
         <source>All files</source>
         <translation>Tutti i file</translation>
+    </message>
+</context>
+<context>
+    <name>WindowDecoration</name>
+    <message>
+        <source>Default</source>
+        <comment>List box text for default window decoration</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -1343,6 +1343,10 @@ SHARP основниот ROM.
         <source>Unknown</source>
         <translation></translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

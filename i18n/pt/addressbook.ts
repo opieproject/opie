@@ -1343,6 +1343,10 @@ todos os dispositivos!</translation>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
         <translation>Use para escolher o formato para gravar o nome e mostrar na lista</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

@@ -1352,6 +1352,10 @@ founi gratuitement !</translation>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
         <translation>Permet de choisir le format du nom complet (et comment il s&apos;affiche en mode liste)</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

@@ -3,261 +3,261 @@
     <name>@default</name>
     <message>
         <source>ZSafe</source>
-        <translation>ZSafe</translation>
+        <translation type="obsolete">ZSafe</translation>
     </message>
     <message>
         <source>Do you want to delete?</source>
-        <translation>Czy chcesz usunąć?</translation>
+        <translation type="obsolete">Czy chcesz usunąć?</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;Usuń</translation>
+        <translation type="obsolete">&amp;Usuń</translation>
     </message>
     <message>
         <source>D&amp;on&apos;t Delete</source>
-        <translation>&amp;Nie usuwaj</translation>
+        <translation type="obsolete">&amp;Nie usuwaj</translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation>Edytuj wpis</translation>
+        <translation type="obsolete">Edytuj wpis</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Nazwa</translation>
+        <translation type="obsolete">Nazwa</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Użytkownik</translation>
+        <translation type="obsolete">Użytkownik</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Hasło</translation>
+        <translation type="obsolete">Hasło</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Komentarz</translation>
+        <translation type="obsolete">Komentarz</translation>
     </message>
     <message>
         <source>Field 4</source>
-        <translation>Pole 4</translation>
+        <translation type="obsolete">Pole 4</translation>
     </message>
     <message>
         <source>Field 5</source>
-        <translation>Pole 5</translation>
+        <translation type="obsolete">Pole 5</translation>
     </message>
     <message>
         <source>New Entry</source>
-        <translation>Nowy wpis</translation>
+        <translation type="obsolete">Nowy wpis</translation>
     </message>
     <message>
         <source>Entry name must be different
 from the category name.</source>
-        <translation>Nazwa wpisu musi być inna
+        <translation type="obsolete">Nazwa wpisu musi być inna
 niż nazwa kategorii.</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation>Szukaj</translation>
+        <translation type="obsolete">Szukaj</translation>
     </message>
     <message>
         <source>Entry not found</source>
-        <translation>Wpis nie znaleziony</translation>
+        <translation type="obsolete">Wpis nie znaleziony</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
+        <translation type="obsolete">&amp;OK</translation>
     </message>
     <message>
         <source>Field 2</source>
-        <translation>Pole 2</translation>
+        <translation type="obsolete">Pole 2</translation>
     </message>
     <message>
         <source>Field 3</source>
-        <translation>Pole 3</translation>
+        <translation type="obsolete">Pole 3</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Wszystkie</translation>
+        <translation type="obsolete">Wszystkie</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation>Tekst</translation>
+        <translation type="obsolete">Tekst</translation>
     </message>
     <message>
         <source>Remove text file</source>
-        <translation>Usuń plik tekstowy</translation>
+        <translation type="obsolete">Usuń plik tekstowy</translation>
     </message>
     <message>
         <source>Could not remove text file.</source>
-        <translation>Nie udało się usunięcie pliku tekstowego.</translation>
+        <translation type="obsolete">Nie udało się usunięcie pliku tekstowego.</translation>
     </message>
     <message>
         <source>No document defined.
 You have to create a new document</source>
-        <translation>Brak dokumentu.
+        <translation type="obsolete">Brak dokumentu.
 Musisz stworzyć nowy dokument</translation>
     </message>
     <message>
         <source>Export text file</source>
-        <translation>Eksportuj plik tekstowy</translation>
+        <translation type="obsolete">Eksportuj plik tekstowy</translation>
     </message>
     <message>
         <source>Import text file</source>
-        <translation>Importuj plik tekstowy</translation>
+        <translation type="obsolete">Importuj plik tekstowy</translation>
     </message>
     <message>
         <source>Could not export to text file.</source>
-        <translation>Nie udał się eksport pliku tekstowego.</translation>
+        <translation type="obsolete">Nie udał się eksport pliku tekstowego.</translation>
     </message>
     <message>
         <source>Could not import text file.</source>
-        <translation>Nie udał się import pliku tekstowego.</translation>
+        <translation type="obsolete">Nie udał się import pliku tekstowego.</translation>
     </message>
     <message>
         <source>Enter Password</source>
-        <translation>Wpisz hasło</translation>
+        <translation type="obsolete">Wpisz hasło</translation>
     </message>
     <message>
         <source>Wrong password.
 
 ZSafe will now exit.</source>
-        <translation>Błędne hasło.
+        <translation type="obsolete">Błędne hasło.
 
 ZSafe zostanie zamknięty.</translation>
     </message>
     <message>
         <source>Wrong password.
 Enter again?</source>
-        <translation>Błędne hasło.
+        <translation type="obsolete">Błędne hasło.
 Spróbuj ponownie?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;Tak</translation>
+        <translation type="obsolete">&amp;Tak</translation>
     </message>
     <message>
         <source>&amp;No.</source>
-        <translation>&amp;Nie.</translation>
+        <translation type="obsolete">&amp;Nie.</translation>
     </message>
     <message>
         <source>Empty document or
 wrong password.
 Continue?</source>
-        <translation>Pusty dokument lub
+        <translation type="obsolete">Pusty dokument lub
 błędne hasło.
 Kontynuować?</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;Nie</translation>
+        <translation type="obsolete">&amp;Nie</translation>
     </message>
     <message>
         <source>&amp;Yes.</source>
-        <translation>&amp;Tak.</translation>
+        <translation type="obsolete">&amp;Tak.</translation>
     </message>
     <message>
         <source>Password is empty.
 Please enter again.</source>
-        <translation>Hasło jest puste.
+        <translation type="obsolete">Hasło jest puste.
 Wpisz ponownie.</translation>
     </message>
     <message>
         <source>Reenter Password</source>
-        <translation>Powtórz hasło</translation>
+        <translation type="obsolete">Powtórz hasło</translation>
     </message>
     <message>
         <source>Passwords must be identical.
 Please enter again.</source>
-        <translation>Hasła muszą być identyczne.
+        <translation type="obsolete">Hasła muszą być identyczne.
 Wpisz ponownie.</translation>
     </message>
     <message>
         <source>Do you want to save </source>
-        <translation>Czy chcesz zapisać</translation>
+        <translation type="obsolete">Czy chcesz zapisać</translation>
     </message>
     <message>
         <source>
 before continuing?</source>
-        <translation>
+        <translation type="obsolete">
 teraz?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>&amp;Zapisz</translation>
+        <translation type="obsolete">&amp;Zapisz</translation>
     </message>
     <message>
         <source>&amp;Don&apos;t Save</source>
-        <translation>&amp;Nie zapisuj</translation>
+        <translation type="obsolete">&amp;Nie zapisuj</translation>
     </message>
     <message>
         <source>Password file saved.</source>
-        <translation>Plik z hasłem zapisany.</translation>
+        <translation type="obsolete">Plik z hasłem zapisany.</translation>
     </message>
     <message>
         <source>Do you want to save
 before exiting?</source>
-        <translation>Czy chcesz zapisać
+        <translation type="obsolete">Czy chcesz zapisać
 przed wyjściem?</translation>
     </message>
     <message>
         <source>S&amp;ave with
 new
 password</source>
-        <translation>&amp;Zapisz z
+        <translation type="obsolete">&amp;Zapisz z
 nowym
 hasłem</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation>Kategoria</translation>
+        <translation type="obsolete">Kategoria</translation>
     </message>
     <message>
         <source>Wait dialog</source>
-        <translation>Czekaj</translation>
+        <translation type="obsolete">Czekaj</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation>Zbieram ikony...</translation>
+        <translation type="obsolete">Zbieram ikony...</translation>
     </message>
     <message>
         <source>Create new ZSafe document</source>
-        <translation>Twórz nowy dokument ZSafe</translation>
+        <translation type="obsolete">Twórz nowy dokument ZSafe</translation>
     </message>
     <message>
         <source>Now you have to enter
 a password twice for your
 newly created document.</source>
-        <translation>Teraz musisz dwukrotnie
+        <translation type="obsolete">Teraz musisz dwukrotnie
 podać hasło dla nowego
 dokumentu.</translation>
     </message>
     <message>
         <source>Open ZSafe document</source>
-        <translation>Otwórz dokument ZSafe</translation>
+        <translation type="obsolete">Otwórz dokument ZSafe</translation>
     </message>
     <message>
         <source>Save ZSafe document as..</source>
-        <translation>Zapisz dokument ZSafe jako..</translation>
+        <translation type="obsolete">Zapisz dokument ZSafe jako..</translation>
     </message>
     <message>
         <source>Zaurus Password Manager&lt;br&gt;</source>
-        <translation>Menedżer haseł dla Zaurusa&lt;br&gt;</translation>
+        <translation type="obsolete">Menedżer haseł dla Zaurusa&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
-        <translation>ZSafe wersja 2.1.2-jv01b&lt;br&gt;</translation>
+        <translation type="obsolete">ZSafe wersja 2.1.2-jv01b&lt;br&gt;</translation>
     </message>
     <message>
         <source>by Carsten Schneider&lt;br&gt;</source>
-        <translation>autor: Carsten Schneider&lt;br&gt;</translation>
+        <translation type="obsolete">autor: Carsten Schneider&lt;br&gt;</translation>
     </message>
     <message>
         <source>Translations by Robert Ernst&lt;br&gt;</source>
-        <translation>tłumaczenia: Robert Ernst&lt;br&gt;</translation>
+        <translation type="obsolete">tłumaczenia: Robert Ernst&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2&lt;br&gt;</source>
-        <translation>ZSafe wersja 2.1.2&lt;br&gt;</translation>
+        <translation type="obsolete">ZSafe wersja 2.1.2&lt;br&gt;</translation>
     </message>
 </context>
 <context>
@@ -422,6 +422,10 @@ shows the list of dirs and files</source>
         <translation>Lista katalogów
 
 pokazuje listę katalogów i plików</translation>
+    </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -599,159 +603,159 @@ ZSafe zostanie zamknięty.</translation>
     </message>
     <message>
         <source>Do you want to delete?</source>
-        <translation type="obsolete">Wollen Sie wirklich löschen?</translation>
+        <translation type="unfinished">Wollen Sie wirklich löschen?</translation>
     </message>
     <message>
         <source>D&amp;on&apos;t Delete</source>
-        <translation type="obsolete">&amp;Nicht löschen</translation>
+        <translation type="unfinished">&amp;Nicht löschen</translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation type="obsolete">Eintrag ändern</translation>
+        <translation type="unfinished">Eintrag ändern</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="obsolete">Benutzername</translation>
+        <translation type="unfinished">Benutzername</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="obsolete">Passwort</translation>
+        <translation type="unfinished">Passwort</translation>
     </message>
     <message>
         <source>New Entry</source>
-        <translation type="obsolete">Neuer Eintrag</translation>
+        <translation type="unfinished">Neuer Eintrag</translation>
     </message>
     <message>
         <source>Entry name must be different
 from the category name.</source>
-        <translation type="obsolete">Die Namen der Einträge
+        <translation type="unfinished">Die Namen der Einträge
 müssen sich von der
 Kategorie unterscheiden.</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="obsolete">Suchen</translation>
+        <translation type="unfinished">Suchen</translation>
     </message>
     <message>
         <source>Entry not found</source>
-        <translation type="obsolete">Eintrag nicht gefunden</translation>
+        <translation type="unfinished">Eintrag nicht gefunden</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="obsolete">&amp;Ok</translation>
+        <translation type="unfinished">&amp;Ok</translation>
     </message>
     <message>
         <source>Could not remove text file.</source>
-        <translation type="obsolete">Konnte Textdatei nicht löschen.</translation>
+        <translation type="unfinished">Konnte Textdatei nicht löschen.</translation>
     </message>
     <message>
         <source>Could not export to text file.</source>
-        <translation type="obsolete">Konnte Textdatei nicht exportieren.</translation>
+        <translation type="unfinished">Konnte Textdatei nicht exportieren.</translation>
     </message>
     <message>
         <source>Could not import text file.</source>
-        <translation type="obsolete">Konnte Textdatei nicht importieren.</translation>
+        <translation type="unfinished">Konnte Textdatei nicht importieren.</translation>
     </message>
     <message>
         <source>Enter Password</source>
-        <translation type="obsolete">Passwort eingeben</translation>
+        <translation type="unfinished">Passwort eingeben</translation>
     </message>
     <message>
         <source>Wrong password.
 
 ZSafe will now exit.</source>
-        <translation type="obsolete">Falsches Passwort
+        <translation type="unfinished">Falsches Passwort
 
 ZSafe wird sich jetzt beenden.</translation>
     </message>
     <message>
         <source>Wrong password.
 Enter again?</source>
-        <translation type="obsolete">Falsches Passwort.
+        <translation type="unfinished">Falsches Passwort.
 Neu eingeben?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="obsolete">&amp;Ja</translation>
+        <translation type="unfinished">&amp;Ja</translation>
     </message>
     <message>
         <source>&amp;No.</source>
-        <translation type="obsolete">&amp;Nein.</translation>
+        <translation type="unfinished">&amp;Nein.</translation>
     </message>
     <message>
         <source>Empty document or
 wrong password.
 Continue?</source>
-        <translation type="obsolete">Leeres Dokument oder
+        <translation type="unfinished">Leeres Dokument oder
 falsches Passwort.
 Fortfahren?</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="obsolete">&amp;Nein</translation>
+        <translation type="unfinished">&amp;Nein</translation>
     </message>
     <message>
         <source>&amp;Yes.</source>
-        <translation type="obsolete">&amp;Ja.</translation>
+        <translation type="unfinished">&amp;Ja.</translation>
     </message>
     <message>
         <source>Password is empty.
 Please enter again.</source>
-        <translation type="obsolete">Das Passwort ist leer.
+        <translation type="unfinished">Das Passwort ist leer.
 Bitte nochmals eingeben.</translation>
     </message>
     <message>
         <source>Reenter Password</source>
-        <translation type="obsolete">Passwort nochmals eingeben</translation>
+        <translation type="unfinished">Passwort nochmals eingeben</translation>
     </message>
     <message>
         <source>Passwords must be identical.
 Please enter again.</source>
-        <translation type="obsolete">Die Passwörter müssen
+        <translation type="unfinished">Die Passwörter müssen
 gleich sein. Bitte nochmals
 Passwort eingeben.</translation>
     </message>
     <message>
         <source>Password file saved.</source>
-        <translation type="obsolete">Passwort-Datei gesichert.</translation>
+        <translation type="unfinished">Passwort-Datei gesichert.</translation>
     </message>
     <message>
         <source>Do you want to save
 before exiting?</source>
-        <translation type="obsolete">Wollen Sie vor dem Beenden
+        <translation type="unfinished">Wollen Sie vor dem Beenden
 die Daten speichern?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="obsolete">&amp;Sichern</translation>
+        <translation type="unfinished">&amp;Sichern</translation>
     </message>
     <message>
         <source>S&amp;ave with
 new
 password</source>
-        <translation type="obsolete">Mit neuem
+        <translation type="unfinished">Mit neuem
 &amp;Passwort
 sichern</translation>
     </message>
     <message>
         <source>&amp;Don&apos;t Save</source>
-        <translation type="obsolete">&amp;Nicht sichern</translation>
+        <translation type="unfinished">&amp;Nicht sichern</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="obsolete">Kategorie</translation>
+        <translation type="unfinished">Kategorie</translation>
     </message>
     <message>
         <source>Wait dialog</source>
-        <translation type="obsolete">Bitte warten</translation>
+        <translation type="unfinished">Bitte warten</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation type="obsolete">Suche nach Symbolen...</translation>
+        <translation type="unfinished">Suche nach Symbolen...</translation>
     </message>
     <message>
         <source>Zaurus Password Manager&lt;br&gt;</source>
-        <translation type="obsolete">Zaurus Passwort Manager&lt;br&gt;</translation>
+        <translation type="unfinished">Zaurus Passwort Manager&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.0.1ern&lt;br&gt;</source>
@@ -759,11 +763,11 @@ sichern</translation>
     </message>
     <message>
         <source>by Carsten Schneider&lt;br&gt;</source>
-        <translation type="obsolete">von Carsten Schneider&lt;br&gt;</translation>
+        <translation type="unfinished">von Carsten Schneider&lt;br&gt;</translation>
     </message>
     <message>
         <source>Translations by Robert Ernst&lt;br&gt;</source>
-        <translation type="obsolete">Übersetzungen von Robert Ernst&lt;br&gt;</translation>
+        <translation type="unfinished">Übersetzungen von Robert Ernst&lt;br&gt;</translation>
     </message>
     <message>
         <source>&amp;New document</source>
@@ -779,15 +783,15 @@ sichern</translation>
     </message>
     <message>
         <source>Create new ZSafe document</source>
-        <translation type="obsolete">Erzeuge neue ZSafe Datei</translation>
+        <translation type="unfinished">Erzeuge neue ZSafe Datei</translation>
     </message>
     <message>
         <source>Open ZSafe document</source>
-        <translation type="obsolete">Öffne ZSafe Datei</translation>
+        <translation type="unfinished">Öffne ZSafe Datei</translation>
     </message>
     <message>
         <source>Save ZSafe document as..</source>
-        <translation type="obsolete">Speichere ZSafe Datei als..</translation>
+        <translation type="unfinished">Speichere ZSafe Datei als..</translation>
     </message>
     <message>
         <source>Can&apos;t create directory
@@ -824,6 +828,62 @@ ZSafe zostanie zamknięty.</translation>
     <message>
         <source>Find entry</source>
         <translation>Znajdź wpis</translation>
+    </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished">Wszystkie</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished">Tekst</translation>
+    </message>
+    <message>
+        <source>Remove text file</source>
+        <translation type="unfinished">Usuń plik tekstowy</translation>
+    </message>
+    <message>
+        <source>No document defined.
+You have to create a new document</source>
+        <translation type="unfinished">Brak dokumentu.
+Musisz stworzyć nowy dokument</translation>
+    </message>
+    <message>
+        <source>Export text file</source>
+        <translation type="unfinished">Eksportuj plik tekstowy</translation>
+    </message>
+    <message>
+        <source>Import text file</source>
+        <translation type="unfinished">Importuj plik tekstowy</translation>
+    </message>
+    <message>
+        <source>Do you want to save </source>
+        <translation type="unfinished">Czy chcesz zapisać</translation>
+    </message>
+    <message>
+        <source>
+before continuing?</source>
+        <translation type="unfinished">
+teraz?</translation>
+    </message>
+    <message>
+        <source>Now you have to enter
+a password twice for your
+newly created document.</source>
+        <translation type="unfinished">Teraz musisz dwukrotnie
+podać hasło dla nowego
+dokumentu.</translation>
+    </message>
+    <message>
+        <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
+        <translation type="unfinished">ZSafe wersja 2.1.2-jv01b&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>ZSafe version 2.1.2&lt;br&gt;</source>
+        <translation type="unfinished">ZSafe wersja 2.1.2&lt;br&gt;</translation>
     </message>
 </context>
 </TS>

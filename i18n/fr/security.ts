@@ -84,11 +84,11 @@ Accès refusé</translation>
     </message>
     <message>
         <source>WARNING</source>
-        <translation>ATTENTION</translation>
+        <translation type="obsolete">ATTENTION</translation>
     </message>
     <message>
         <source>&lt;p&gt;Selecting IntelliSync here will disable the FTP password.&lt;p&gt;Every machine in your netrange will be able to sync with your Zaurus!</source>
-        <translation>&lt;p&gt;Sélectionnez IntelliSync ici désactivera le mot de passe FTP.&lt;p&gt;Chaque machine de votre sous réseau pourra se synchroniser avec votre Zaurus!</translation>
+        <translation type="obsolete">&lt;p&gt;Sélectionnez IntelliSync ici désactivera le mot de passe FTP.&lt;p&gt;Chaque machine de votre sous réseau pourra se synchroniser avec votre Zaurus!</translation>
     </message>
 </context>
 <context>
@@ -256,7 +256,7 @@ Attention : Toutes les plages d&apos;adresse IP entrées manuellement seront per
     </message>
     <message>
         <source>QTopia</source>
-        <translation>QTopia</translation>
+        <translation type="obsolete">QTopia</translation>
     </message>
     <message>
         <source>IntelliSync</source>
@@ -268,7 +268,7 @@ Attention : Toutes les plages d&apos;adresse IP entrées manuellement seront per
 If you have problems syncing, try the &quot;IntelliSync&quot; setting, which will accept any password you throw at the sync (FTP) port.  
 
 The default is Qtopia. It will let you log in with username &quot;root&quot; and password &quot;Qtopia&quot;.   The password is CaSeSeNsItIvE.</source>
-        <translation>Cette option change la façon dont le serveur FTP interne accepte les connections.
+        <translation type="obsolete">Cette option change la façon dont le serveur FTP interne accepte les connections.
 
 Si vous avez un problème de synchronisation, essayez le paramètrage &quot;IntelliSync&quot; qui acceptera tous les mots de passe reçu sur le port de synchronisation (FTP).
 
@@ -286,7 +286,15 @@ Attention : les mots de passe sont sensibles à la case (i.e HeLLo est différen
     </message>
     <message>
         <source>Both</source>
-        <translation>Les deux</translation>
+        <translation type="obsolete">Les deux</translation>
+    </message>
+    <message>
+        <source>Alter the Sync Protocol to tweak for the different devices.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

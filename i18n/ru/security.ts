@@ -81,11 +81,11 @@ Access denied</source>
     </message>
     <message>
         <source>WARNING</source>
-        <translation>ВНИМАНИЕ</translation>
+        <translation type="obsolete">ВНИМАНИЕ</translation>
     </message>
     <message>
         <source>&lt;p&gt;Selecting IntelliSync here will disable the FTP password.&lt;p&gt;Every machine in your netrange will be able to sync with your Zaurus!</source>
-        <translation>&lt;p&gt;Выбор IntelliSync запретит пароль FTP.&lt;p&gt;Любая машина в заданном участке сможет синхронизироваться с вашим КПК!</translation>
+        <translation type="obsolete">&lt;p&gt;Выбор IntelliSync запретит пароль FTP.&lt;p&gt;Любая машина в заданном участке сможет синхронизироваться с вашим КПК!</translation>
     </message>
 </context>
 <context>
@@ -226,7 +226,7 @@ Beware that all manually entered net ranges will be lost!</source>
     </message>
     <message>
         <source>QTopia</source>
-        <translation>QTopia</translation>
+        <translation type="obsolete">QTopia</translation>
     </message>
     <message>
         <source>IntelliSync</source>
@@ -238,7 +238,7 @@ Beware that all manually entered net ranges will be lost!</source>
 If you have problems syncing, try the &quot;IntelliSync&quot; setting, which will accept any password you throw at the sync (FTP) port.  
 
 The default is Qtopia. It will let you log in with username &quot;root&quot; and password &quot;Qtopia&quot;.   The password is CaSeSeNsItIvE.</source>
-        <translation>Эта опция изменяет поведение внутреннего FTP сервера.  
+        <translation type="obsolete">Эта опция изменяет поведение внутреннего FTP сервера.  
 
 Если есть проблемы с соединением, попробуйте значение &quot;IntelliSync&quot;, с которым будет приниматься любое соединение по FTP порту.
 
@@ -254,7 +254,15 @@ The default is Qtopia. It will let you log in with username &quot;root&quot; and
     </message>
     <message>
         <source>Both</source>
-        <translation>Оба</translation>
+        <translation type="obsolete">Оба</translation>
+    </message>
+    <message>
+        <source>Alter the Sync Protocol to tweak for the different devices.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -13,6 +13,10 @@
         <source>Personal Information</source>
         <translation>Персональная Информация</translation>
     </message>
+    <message>
+        <source>DocTab</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AppLauncher</name>
@@ -59,6 +63,18 @@
     <message>
         <source>OK</source>
         <translation>ОК</translation>
+    </message>
+</context>
+<context>
+    <name>Calibrate</name>
+    <message>
+        <source>Touch the crosshairs firmly and
+accurately to calibrate your screen.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Welcome to Opie</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -155,6 +171,10 @@
         <source>List View</source>
         <translation>Список</translation>
     </message>
+    <message>
+        <source>&lt;b&gt;The Documents Tab&lt;p&gt;has been disabled.&lt;p&gt;Use Settings-&gt;Launcher-&gt;DocTab&lt;p&gt;to reenable it.&lt;/b&gt;&lt;/center&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LauncherView</name>
@@ -165,6 +185,17 @@
     <message>
         <source>All types</source>
         <translation>Все типы</translation>
+    </message>
+</context>
+<context>
+    <name>Mediadlg</name>
+    <message>
+        <source>A new storage media detected:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>What should I do with it?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -201,18 +232,18 @@
     <message>
         <source>Battery level is critical!
 Keep power off until power restored!</source>
-        <translation>Аккумулятор сел совсем!
+        <translation type="obsolete">Аккумулятор сел совсем!
 Выключите питание до тех пор,
 пока заряд не восстановится!</translation>
     </message>
     <message>
         <source>Battery is running very low. </source>
-        <translation>Аккумулятор разряжен.</translation>
+        <translation type="obsolete">Аккумулятор разряжен.</translation>
     </message>
     <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
-        <translation>Запасной аккумулятор разряжен.
+        <translation type="obsolete">Запасной аккумулятор разряжен.
 Зарядите запасной аккумулятор.</translation>
     </message>
     <message>
@@ -251,6 +282,26 @@ Please end this application
 immediately.</source>
         <translation>Критическая нехватка памяти.
 Немедленно завершите программу.</translation>
+    </message>
+    <message>
+        <source>WARNING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The battery level is critical!&lt;p&gt;Keep power off until AC is restored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The battery is running very low. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The Back-up battery is very low&lt;p&gt;Please charge the back-up battery</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -298,7 +349,7 @@ These termination options are provided primarily for use while developing and te
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation>&lt;p&gt;Неавторизованная система требует доступа к устройству.&lt;p&gt;Если у Вас Qtopia Desktop 1.5.1 и меньше, пожалуйста обновите его.</translation>
+        <translation type="obsolete">&lt;p&gt;Неавторизованная система требует доступа к устройству.&lt;p&gt;Если у Вас Qtopia Desktop 1.5.1 и меньше, пожалуйста обновите его.</translation>
     </message>
     <message>
         <source>Deny</source>
@@ -311,6 +362,14 @@ These termination options are provided primarily for use while developing and te
     <message>
         <source>Allow</source>
         <translation>Разрешить</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;You chose IntelliSync so you may I allow or deny this connection.&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade or change the security setting to use IntelliSync.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

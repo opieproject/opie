@@ -194,7 +194,12 @@ editing categories.</source>
     </message>
     <message>
         <source>End reached, starting at beginning</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>End reached, starting at %1</source>
+        <comment>Date using TimeString::shortDate</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -337,6 +342,10 @@ editing categories.</source>
         <source>Beam this document to another device.</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>Arguments:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OwnerDlg</name>
@@ -439,11 +448,11 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>D</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>M</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Y</source>
@@ -772,23 +781,23 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
@@ -855,12 +864,65 @@ Free some memory and try again.</source>
         <source>Error</source>
         <translation type="obsolete">FOO</translation>
     </message>
+    <message>
+        <source>D</source>
+        <comment>Shortcut for Day</comment>
+        <translation type="unfinished">FOO</translation>
+    </message>
+    <message>
+        <source>M</source>
+        <comment>Shortcur for Month</comment>
+        <translation type="unfinished">FOO</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
     <message>
         <source>%1 document</source>
         <translation>FOO</translation>
+    </message>
+</context>
+<context>
+    <name>QPEManager</name>
+    <message>
+        <source>Click to close this window, discarding changes.</source>
+        <translation type="unfinished">FOO</translation>
+    </message>
+    <message>
+        <source>Click to close this window.</source>
+        <translation type="unfinished">FOO</translation>
+    </message>
+    <message>
+        <source>Click to close this window and apply changes.</source>
+        <translation type="unfinished">FOO</translation>
+    </message>
+    <message>
+        <source>Click to make this window movable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to make this window use all available screen area.</source>
+        <translation type="unfinished">FOO</translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -943,6 +1005,14 @@ Please free up space and try again</source>
     <message>
         <source>All files</source>
         <translation>FOO</translation>
+    </message>
+</context>
+<context>
+    <name>WindowDecoration</name>
+    <message>
+        <source>Default</source>
+        <comment>List box text for default window decoration</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

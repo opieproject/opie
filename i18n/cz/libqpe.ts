@@ -195,7 +195,12 @@ právě upravuje kategorie.</translation>
     </message>
     <message>
         <source>End reached, starting at beginning</source>
-        <translation>Bylo dosaženo konce, hledám od začátku</translation>
+        <translation type="obsolete">Bylo dosaženo konce, hledám od začátku</translation>
+    </message>
+    <message>
+        <source>End reached, starting at %1</source>
+        <comment>Date using TimeString::shortDate</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -337,6 +342,10 @@ právě upravuje kategorie.</translation>
     <message>
         <source>Beam this document to another device.</source>
         <translation>Pošle tento dokument do jiného zařízení.</translation>
+    </message>
+    <message>
+        <source>Arguments:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -492,23 +501,23 @@ právě upravuje kategorie.</translation>
     </message>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation>Klikněte pro zavření okna, změny budou ztraceny.</translation>
+        <translation type="obsolete">Klikněte pro zavření okna, změny budou ztraceny.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation>Klikněte pro zavření okna.</translation>
+        <translation type="obsolete">Klikněte pro zavření okna.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation>Klikněte pro zavření okna s aplikováním změn.</translation>
+        <translation type="obsolete">Klikněte pro zavření okna s aplikováním změn.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation>Klikněte sem pro možnost posunování okna.</translation>
+        <translation type="obsolete">Klikněte sem pro možnost posunování okna.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation>Klikněte sem pro použití celé obrazovky pro okno.</translation>
+        <translation type="obsolete">Klikněte sem pro použití celé obrazovky pro okno.</translation>
     </message>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
@@ -552,11 +561,11 @@ Uvolněte nějakou paměť a zkuste to znovu.</translation>
     </message>
     <message>
         <source>D</source>
-        <translation>D</translation>
+        <translation type="obsolete">D</translation>
     </message>
     <message>
         <source>M</source>
-        <translation>M</translation>
+        <translation type="obsolete">M</translation>
     </message>
     <message>
         <source>Y</source>
@@ -856,12 +865,65 @@ Uvolněte nějakou paměť a zkuste to znovu.</translation>
         <source>Groups</source>
         <translation>Skupiny</translation>
     </message>
+    <message>
+        <source>D</source>
+        <comment>Shortcut for Day</comment>
+        <translation type="unfinished">D</translation>
+    </message>
+    <message>
+        <source>M</source>
+        <comment>Shortcur for Month</comment>
+        <translation type="unfinished">M</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
     <message>
         <source>%1 document</source>
         <translation>Dokument %1</translation>
+    </message>
+</context>
+<context>
+    <name>QPEManager</name>
+    <message>
+        <source>Click to close this window, discarding changes.</source>
+        <translation type="unfinished">Klikněte pro zavření okna, změny budou ztraceny.</translation>
+    </message>
+    <message>
+        <source>Click to close this window.</source>
+        <translation type="unfinished">Klikněte pro zavření okna.</translation>
+    </message>
+    <message>
+        <source>Click to close this window and apply changes.</source>
+        <translation type="unfinished">Klikněte pro zavření okna s aplikováním změn.</translation>
+    </message>
+    <message>
+        <source>Click to make this window movable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to make this window use all available screen area.</source>
+        <translation type="unfinished">Klikněte sem pro použití celé obrazovky pro okno.</translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -946,6 +1008,14 @@ Uvolněte nějakou paměť a zkuste to znovu</translation>
     <message>
         <source>All files</source>
         <translation>Všechny soubory</translation>
+    </message>
+</context>
+<context>
+    <name>WindowDecoration</name>
+    <message>
+        <source>Default</source>
+        <comment>List box text for default window decoration</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -195,7 +195,12 @@ vwijzigt al categorieen.</translation>
     </message>
     <message>
         <source>End reached, starting at beginning</source>
-        <translation>Einde bereikt, begin bovenaan</translation>
+        <translation type="obsolete">Einde bereikt, begin bovenaan</translation>
+    </message>
+    <message>
+        <source>End reached, starting at %1</source>
+        <comment>Date using TimeString::shortDate</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -338,6 +343,10 @@ vwijzigt al categorieen.</translation>
         <source>Beam this document to another device.</source>
         <translation>Verstuur dit bestand via IR naar een ander apparaat.</translation>
     </message>
+    <message>
+        <source>Arguments:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OwnerDlg</name>
@@ -449,11 +458,11 @@ nogmaals.</translation>
     </message>
     <message>
         <source>D</source>
-        <translation>D</translation>
+        <translation type="obsolete">D</translation>
     </message>
     <message>
         <source>M</source>
-        <translation>M</translation>
+        <translation type="obsolete">M</translation>
     </message>
     <message>
         <source>Y</source>
@@ -783,23 +792,23 @@ wilt verwijderen?</translation>
     </message>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation>Klik om dit venster te sluiten zonder op te slaan.</translation>
+        <translation type="obsolete">Klik om dit venster te sluiten zonder op te slaan.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation>Klik om dit venster te sluiten.</translation>
+        <translation type="obsolete">Klik om dit venster te sluiten.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation>Klik om dit venster te sluiten en de veranderingen aktief te maken.</translation>
+        <translation type="obsolete">Klik om dit venster te sluiten en de veranderingen aktief te maken.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation>Klik om dit venster beweegbaar te maken.</translation>
+        <translation type="obsolete">Klik om dit venster beweegbaar te maken.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation>Klik om te maximaliseren.</translation>
+        <translation type="obsolete">Klik om te maximaliseren.</translation>
     </message>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
@@ -867,6 +876,16 @@ wilt verwijderen?</translation>
         <source>Error</source>
         <translation type="obsolete">Fout</translation>
     </message>
+    <message>
+        <source>D</source>
+        <comment>Shortcut for Day</comment>
+        <translation type="unfinished">D</translation>
+    </message>
+    <message>
+        <source>M</source>
+        <comment>Shortcur for Month</comment>
+        <translation type="unfinished">M</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
@@ -890,15 +909,15 @@ wilt verwijderen?</translation>
     <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="obsolete">Klik om dit venster te sluiten zoner op te slaan.</translation>
+        <translation type="unfinished">Klik om dit venster te sluiten zoner op te slaan.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="obsolete">Klik om dit venster te sluiten.</translation>
+        <translation type="unfinished">Klik om dit venster te sluiten.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="obsolete">Klik om dit venster te sluiten en de veranderingen aktief te maken.</translation>
+        <translation type="unfinished">Klik om dit venster te sluiten en de veranderingen aktief te maken.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
@@ -906,7 +925,31 @@ wilt verwijderen?</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="obsolete">Klik om te maximaliseren.</translation>
+        <translation type="unfinished">Klik om te maximaliseren.</translation>
+    </message>
+    <message>
+        <source>Click to make this window movable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -994,6 +1037,14 @@ ninor mimetype / major mimetype</translation>
     <message>
         <source>All files</source>
         <translation>Alle bestanden</translation>
+    </message>
+</context>
+<context>
+    <name>WindowDecoration</name>
+    <message>
+        <source>Default</source>
+        <comment>List box text for default window decoration</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

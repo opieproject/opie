@@ -86,12 +86,12 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="obsolete">Cliquez sur la croix fermement et
+        <translation type="unfinished">Cliquez sur la croix fermement et
 avec précision pour calibrer l&apos;écran.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="obsolete">Bienvenue sur Opie</translation>
+        <translation type="unfinished">Bienvenue sur Opie</translation>
     </message>
 </context>
 <context>
@@ -266,6 +266,17 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     <message>
         <source>All types</source>
         <translation>Tous types</translation>
+    </message>
+</context>
+<context>
+    <name>Mediadlg</name>
+    <message>
+        <source>A new storage media detected:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>What should I do with it?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -497,6 +508,10 @@ These termination options are provided primarily for use while developing and te
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade or change the security setting to use IntelliSync.</source>
         <translation>&lt;p&gt;Un systeme non autorisé demande l&apos;accès à ce périphérique.&lt;p&gt;Si vous utiliser une version de &quot;Qtopia Desktop&quot; plus ancienne que la 1.5.1, vous devriez la mettre à jour ou changer les paramètres de sécurité pour utiliser IntelliSync.</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;You chose IntelliSync so you may I allow or deny this connection.&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

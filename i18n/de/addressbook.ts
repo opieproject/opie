@@ -1344,6 +1344,10 @@ wird nach dem Neustart der Anwendung aktiv!</translation>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
         <translation>Hier auswählen, wie der Name gespeichert wird (und wie er in der Liste erscheint)</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

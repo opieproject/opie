@@ -73,11 +73,11 @@ Přístup odmítnut</translation>
     </message>
     <message>
         <source>WARNING</source>
-        <translation>VAROVÁNÍ</translation>
+        <translation type="obsolete">VAROVÁNÍ</translation>
     </message>
     <message>
         <source>&lt;p&gt;Selecting IntelliSync here will disable the FTP password.&lt;p&gt;Every machine in your netrange will be able to sync with your Zaurus!</source>
-        <translation>&lt;p&gt;Výběrem IntelliSync vypnete FTP heslo.&lt;p&gt;Každý počítač ve vaší síti bude moci provést synchronizaci s vaším zařízením!</translation>
+        <translation type="obsolete">&lt;p&gt;Výběrem IntelliSync vypnete FTP heslo.&lt;p&gt;Každý počítač ve vaší síti bude moci provést synchronizaci s vaším zařízením!</translation>
     </message>
     <message>
         <source>Enter new passcode</source>
@@ -226,7 +226,7 @@ Uvědomte si ale, že všechny zadané rozsahy budou ztraceny!</translation>
     </message>
     <message>
         <source>QTopia</source>
-        <translation>QTopia</translation>
+        <translation type="obsolete">QTopia</translation>
     </message>
     <message>
         <source>IntelliSync</source>
@@ -238,7 +238,7 @@ Uvědomte si ale, že všechny zadané rozsahy budou ztraceny!</translation>
 If you have problems syncing, try the &quot;IntelliSync&quot; setting, which will accept any password you throw at the sync (FTP) port.  
 
 The default is Qtopia. It will let you log in with username &quot;root&quot; and password &quot;Qtopia&quot;.   The password is CaSeSeNsItIvE.</source>
-        <translation>Tato volba změní chování přihlašování k vnitřnímu FTP serveru.
+        <translation type="obsolete">Tato volba změní chování přihlašování k vnitřnímu FTP serveru.
 
 Jestliže máte problém se synchronizací, zkuste &quot;IntelliSync&quot;, což nastaví akceptování libovolného hesla na sync (FTP) portu.
 
@@ -254,7 +254,15 @@ Výchozí je Qtopia. To vám umožní přihlášení se jménem &quot;root&quot;
     </message>
     <message>
         <source>Both</source>
-        <translation>Obojí</translation>
+        <translation type="obsolete">Obojí</translation>
+    </message>
+    <message>
+        <source>Alter the Sync Protocol to tweak for the different devices.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

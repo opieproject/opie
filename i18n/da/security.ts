@@ -79,14 +79,6 @@ Adgang nægtet</translation>
         <source>1.0.0.0/8</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>WARNING</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Selecting IntelliSync here will disable the FTP password.&lt;p&gt;Every machine in your netrange will be able to sync with your Zaurus!</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>SecurityBase</name>
@@ -212,19 +204,7 @@ Beware that all manually entered net ranges will be lost!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>QTopia</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>IntelliSync</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This option changes the login behaviour of the internal FTP server.  
-
-If you have problems syncing, try the &quot;IntelliSync&quot; setting, which will accept any password you throw at the sync (FTP) port.  
-
-The default is Qtopia. It will let you log in with username &quot;root&quot; and password &quot;Qtopia&quot;.   The password is CaSeSeNsItIvE.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -236,7 +216,11 @@ The default is Qtopia. It will let you log in with username &quot;root&quot; and
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Both</source>
+        <source>Alter the Sync Protocol to tweak for the different devices.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1344,6 +1344,10 @@ rilasciato gratuitamente!</translation>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
         <translation>Premi per selezionare come registrare il nome (e come visualizzarlo nella vista)</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

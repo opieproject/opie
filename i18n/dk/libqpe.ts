@@ -193,7 +193,8 @@ editing categories.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>End reached, starting at beginning</source>
+        <source>End reached, starting at %1</source>
+        <comment>Date using TimeString::shortDate</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -335,6 +336,10 @@ editing categories.</source>
     </message>
     <message>
         <source>Beam this document to another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arguments:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -490,26 +495,6 @@ editing categories.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -539,14 +524,6 @@ before entering data</source>
     <message>
         <source>Unable to schedule alarm.
 Free some memory and try again.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -846,11 +823,64 @@ Free some memory and try again.</source>
         <source>Groups</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>D</source>
+        <comment>Shortcut for Day</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M</source>
+        <comment>Shortcur for Month</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
     <message>
         <source>%1 document</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QPEManager</name>
+    <message>
+        <source>Click to close this window, discarding changes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to close this window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to close this window and apply changes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to make this window movable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to make this window use all available screen area.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -933,6 +963,14 @@ Please free up space and try again</source>
     </message>
     <message>
         <source>All files</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>WindowDecoration</name>
+    <message>
+        <source>Default</source>
+        <comment>List box text for default window decoration</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

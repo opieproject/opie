@@ -1343,6 +1343,10 @@ dostępny za darmo!</translation>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
         <translation>Wciśnij by wybrać sposób zapisania nazwiska (i jego prezentacji na liście)</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

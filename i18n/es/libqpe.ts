@@ -195,7 +195,12 @@ editando las categorías.</translation>
     </message>
     <message>
         <source>End reached, starting at beginning</source>
-        <translation>Final alcanzado, empezando por el principio</translation>
+        <translation type="obsolete">Final alcanzado, empezando por el principio</translation>
+    </message>
+    <message>
+        <source>End reached, starting at %1</source>
+        <comment>Date using TimeString::shortDate</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -338,6 +343,10 @@ editando las categorías.</translation>
         <source>Use custom rotation</source>
         <translation>Usar rotación personalizada</translation>
     </message>
+    <message>
+        <source>Arguments:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OwnerDlg</name>
@@ -444,11 +453,11 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>D</source>
-        <translation>D</translation>
+        <translation type="obsolete">D</translation>
     </message>
     <message>
         <source>M</source>
-        <translation>M</translation>
+        <translation type="obsolete">M</translation>
     </message>
     <message>
         <source>Y</source>
@@ -782,23 +791,23 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation>Pulse para cerrar esta ventana, descartando los cambios.</translation>
+        <translation type="obsolete">Pulse para cerrar esta ventana, descartando los cambios.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation>Pulse para cerrar esta ventana.</translation>
+        <translation type="obsolete">Pulse para cerrar esta ventana.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation>Pulse para cerrar esta ventana y aplicar los cambios.</translation>
+        <translation type="obsolete">Pulse para cerrar esta ventana y aplicar los cambios.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation>Pulse para hacer esta ventana móvil.</translation>
+        <translation type="obsolete">Pulse para hacer esta ventana móvil.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation>Pulse para hacer que esta ventana use toda la pantalla disponible.</translation>
+        <translation type="obsolete">Pulse para hacer que esta ventana use toda la pantalla disponible.</translation>
     </message>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
@@ -866,12 +875,65 @@ Libere memoria e intételo de nuevo.</translation>
         <source>Error</source>
         <translation type="obsolete">Error</translation>
     </message>
+    <message>
+        <source>D</source>
+        <comment>Shortcut for Day</comment>
+        <translation type="unfinished">D</translation>
+    </message>
+    <message>
+        <source>M</source>
+        <comment>Shortcur for Month</comment>
+        <translation type="unfinished">M</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
     <message>
         <source>%1 document</source>
         <translation>%1 documento</translation>
+    </message>
+</context>
+<context>
+    <name>QPEManager</name>
+    <message>
+        <source>Click to close this window, discarding changes.</source>
+        <translation type="unfinished">Pulse para cerrar esta ventana, descartando los cambios.</translation>
+    </message>
+    <message>
+        <source>Click to close this window.</source>
+        <translation type="unfinished">Pulse para cerrar esta ventana.</translation>
+    </message>
+    <message>
+        <source>Click to close this window and apply changes.</source>
+        <translation type="unfinished">Pulse para cerrar esta ventana y aplicar los cambios.</translation>
+    </message>
+    <message>
+        <source>Click to make this window movable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to make this window use all available screen area.</source>
+        <translation type="unfinished">Pulse para hacer que esta ventana use toda la pantalla disponible.</translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -956,6 +1018,14 @@ Libere memoria e inténtelo de nuevo</translation>
     <message>
         <source>All files</source>
         <translation>Todos los ficheros</translation>
+    </message>
+</context>
+<context>
+    <name>WindowDecoration</name>
+    <message>
+        <source>Default</source>
+        <comment>List box text for default window decoration</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

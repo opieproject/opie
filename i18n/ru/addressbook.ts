@@ -1340,6 +1340,10 @@ Opie-Mail - свободная программа!</translation>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
         <translation>Нажать для выбора, как записывать имя и как его показывать</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

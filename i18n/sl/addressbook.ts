@@ -1343,6 +1343,10 @@ je zastonj!</translation>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
         <translation>Pristisnite, da izberete kako shraniti ime (in kako ga prikazati v seznamu)</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
