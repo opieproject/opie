@@ -56,7 +56,7 @@ StartMenu::StartMenu(QWidget *parent) : QLabel( parent )
 
     int sz = AppLnk::smallIconSize()+3;
     QPixmap pm;
-    pm.convertFromImage(Resource::loadImage(startButtonPixmap).smoothScale(sz,sz));
+    pm.convertFromImage(Resource::loadImage( startButtonPixmap).smoothScale( sz,sz) );
     setPixmap(pm);
     setFocusPolicy( NoFocus );
 
@@ -165,7 +165,9 @@ bool StartMenu::loadMenu( QPopupMenu *menu )
 		QString ic = cfg.readEntry("Icon");
 		if ( !!nm && !!ic ) {
 		    tabs.append(d);
-		    menu->insertItem( Resource::loadIconSet(ic), nm, ntabs++ );
+                    QPixmap test;
+                    test.convertFromImage( Resource::loadImage( ic ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ), 0 );
+		    menu->insertItem( test, nm, ntabs++ );
 		}
 	    } else if ( lot && d.right(8)==".desktop") {
 		AppLnk* applnk = new AppLnk(dir.path()+"/"+d);
@@ -179,8 +181,9 @@ bool StartMenu::loadMenu( QPopupMenu *menu )
 		    } else {
 			f = FALSE;
 			other.append(applnk);
-			menu->insertItem( Resource::loadIconSet(applnk->icon()),
-				applnk->name(), 20+nother++ );
+                        QPixmap test;
+                        test.convertFromImage( Resource::loadImage( applnk->icon() ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ), 0 );
+                        menu->insertItem( test  , applnk->name(), 20+nother++ );
 		    }
 		} else {
 		    delete applnk;
