@@ -1,14 +1,10 @@
-#include <qbuttongroup.h>
 #include <qlabel.h>
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qradiobutton.h>
-#include <qgroupbox.h>
-#include <qvbox.h>
 #include <qhgroupbox.h>
 #include <qhbuttongroup.h>
 #include <qlayout.h>
-#include <qhbox.h>
 
 #include "terminalwidget.h"
 

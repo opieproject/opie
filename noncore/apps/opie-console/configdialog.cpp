@@ -1,10 +1,7 @@
-#include <qdialog.h>
 #include <qlistview.h>
 
 
-#include "profile.h"
 #include "configdialog.h"
-#include "metafactory.h"
 #include "profileeditordialog.h"
 
 class ConfigListItem : public QListViewItem {

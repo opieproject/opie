@@ -1,5 +1,4 @@
 #include <qfile.h>
-#include <qtextstream.h>
 #include "script.h"
 
 Script::Script() {

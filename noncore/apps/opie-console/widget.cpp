@@ -64,17 +64,9 @@ alter Widget to use only QByteArray, where applicable.
 
 // #include "config.h"
 #include "widget.h"
-#include "session.h"
 #include <qpe/config.h>
-#include <qapplication.h>
 
-#include <qcursor.h>
-#include <qregexp.h>
-#include <qpainter.h>
 #include <qclipboard.h>
-#include <qstyle.h>
-#include <qfile.h>
-#include <qdragobject.h>
 
 #include <stdio.h>
 #include <stdlib.h>

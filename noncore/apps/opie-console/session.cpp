@@ -1,7 +1,5 @@
 
 
-#include "profile.h"
-#include "io_layer.h"
 #include "file_layer.h"
 #include "emulation_handler.h"
 #include "session.h"

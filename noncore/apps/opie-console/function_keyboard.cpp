@@ -1,16 +1,8 @@
 #include "function_keyboard.h"
 
-#include <qpe/resource.h>
-#include <qpe/qpeapplication.h>
-#include <qsizepolicy.h>
-#include <qevent.h>
-#include <qwindowsystem_qws.h>
-#include <qapplication.h>
 #include <qlayout.h>
-#include <qspinbox.h>
 #include <qlistbox.h>
 #include <qlabel.h>
-#include <qcombobox.h>
 #include <qdir.h>
 
 #define DEFAULT_ROWS 2

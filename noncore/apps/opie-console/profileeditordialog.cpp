@@ -2,7 +2,6 @@
 #include <qlineedit.h>
 #include <qlabel.h>
 #include <qmessagebox.h>
-#include <qstringlist.h>
 #include <qcombobox.h>
 #include <qcheckbox.h>
 #include <qscrollview.h>

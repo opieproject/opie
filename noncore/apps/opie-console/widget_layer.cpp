@@ -10,14 +10,10 @@
 
 #include "widget_layer.h"
 
-#include <qclipboard.h>
-#include <qregexp.h>
-#include <qglobal.h>
 
 #include <string.h>
 //#include <
 
-#include "common.h"
 
 
 

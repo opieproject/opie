@@ -1,10 +1,7 @@
 #include <unistd.h>
 
 #include <qdir.h>
-#include <qstring.h>
-#include <qfile.h>
 
-#include "io_layer.h"
 #include "receive_layer.h"
 
 ReceiveLayer::ReceiveLayer( IOLayer* lay, const QString& startDir )

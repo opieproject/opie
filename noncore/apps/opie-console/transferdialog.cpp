@@ -10,8 +10,6 @@
 
 #include <opie/ofiledialog.h>
 
-#include "file_layer.h"
-#include "receive_layer.h"
 #include "metafactory.h"
 #include "mainwindow.h"
 

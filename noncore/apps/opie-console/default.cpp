@@ -1,4 +1,3 @@
-#include "io_serial.h"
 #include "io_irda.h"
 #include "io_bt.h"
 #include "io_modem.h"

@@ -64,9 +64,7 @@
 */
 
 
-#include <qapplication.h>
 #include <qsocketnotifier.h>
-#include <qstring.h>
 #include <qfile.h>
 
 #include <stdlib.h>

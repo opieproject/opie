@@ -1,10 +1,8 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qcombobox.h>
-#include <qlineedit.h>
 #include <qpushbutton.h>
 #include <qhbox.h>
-#include <qregexp.h>
 
 #include "modemconfigwidget.h"
 #include "dialdialog.h"

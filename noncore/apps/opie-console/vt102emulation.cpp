@@ -24,14 +24,9 @@
 */
 
 #include "vt102emulation.h"
-#include "widget_layer.h"
-#include "screen.h"
-#include "keytrans.h"
 
 #include <stdio.h>
 #include <unistd.h>
-#include <qkeycode.h>
-#include <qtextcodec.h>
 
 
 /* VT102 Terminal Emulation

@@ -76,12 +76,9 @@
 */
 
 #include "emulation_layer.h"
-#include "widget_layer.h"
-#include "screen.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <qkeycode.h>
 
 
 /* ------------------------------------------------------------------------- */

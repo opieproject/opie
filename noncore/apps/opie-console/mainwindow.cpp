@@ -2,29 +2,19 @@
 
 #include <qaction.h>
 #include <qmenubar.h>
-#include <qlabel.h>
-#include <qpopupmenu.h>
 #include <qtoolbar.h>
 #include <qmessagebox.h>
-#include <qpushbutton.h>
 #include <qwhatsthis.h>
 #include <qfileinfo.h>
-#include <qtextstream.h>
 
-#include <qpe/resource.h>
-#include <qpe/qpeapplication.h>
 #include <qpe/filemanager.h>
-#include <qpe/mimetype.h>
 
 #include <opie/ofiledialog.h>
 
 #include "TEmulation.h"
-#include "keytrans.h"
 #include "profileeditordialog.h"
 #include "configdialog.h"
 #include "default.h"
-#include "metafactory.h"
-#include "profile.h"
 #include "profilemanager.h"
 #include "mainwindow.h"
 #include "tabwidget.h"

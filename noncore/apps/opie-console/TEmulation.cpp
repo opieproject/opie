@@ -70,12 +70,9 @@
 */
 
 #include "TEmulation.h"
-#include "TEWidget.h"
-#include "TEScreen.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <qkeycode.h>
 
 
 /* ------------------------------------------------------------------------- */

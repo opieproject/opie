@@ -1,4 +1,3 @@
-#include <qpe/config.h>
 #include "metafactory.h"
 
 MetaFactory::MetaFactory() {

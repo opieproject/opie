@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <signal.h>
 
-#include <qfile.h>
 
 #include <qpe/qpeapplication.h>
 

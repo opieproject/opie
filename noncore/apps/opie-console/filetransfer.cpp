@@ -4,7 +4,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#include <qcstring.h>
 #include <qsocketnotifier.h>
 
 #include <opie/oprocess.h>

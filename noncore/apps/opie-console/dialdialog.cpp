@@ -2,10 +2,7 @@
 
 #include <qlayout.h>
 #include <qlabel.h>
-#include <qcombobox.h>
-#include <qscrollview.h>
 #include <qpushbutton.h>
-#include <qfont.h>
 #include <qbuttongroup.h>
 
 #include "dialdialog.h"

@@ -3,14 +3,9 @@
 
 #include <qfile.h>
 #include <qhbox.h>
-#include <qlayout.h>
-#include <qwidgetstack.h>
 
-#include <qpe/config.h>
 
 #include "emulation_handler.h"
-#include "widget_layer.h"
-#include "emulation_widget.h"
 #include "metafactory.h"
 #include "profileconfig.h"
 #include "profilemanager.h"

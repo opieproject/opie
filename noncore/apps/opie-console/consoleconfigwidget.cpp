@@ -1,11 +1,9 @@
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qcombobox.h>
 #include <qlineedit.h>
 #include <qpushbutton.h>
 #include <qlistview.h>
 #include <qhbox.h>
-#include <qregexp.h>
 #include <stdio.h>
 
 #include <pwd.h>

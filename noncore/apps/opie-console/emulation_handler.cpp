@@ -1,7 +1,4 @@
-#include <qwidget.h>
-#include <qpushbutton.h>
 
-#include "TEWidget.h"
 #include "TEmuVt102.h"
 
 #include "profile.h"

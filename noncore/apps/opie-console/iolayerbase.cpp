@@ -1,10 +1,8 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qcombobox.h>
-#include <qbuttongroup.h>
 #include <qhbuttongroup.h>
 #include <qradiobutton.h>
-#include <qhbox.h>
 
 #include "iolayerbase.h"
 

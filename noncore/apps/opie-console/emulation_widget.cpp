@@ -1,15 +1,7 @@
 // opie-console includes
 #include "emulation_widget.h"
-#include "common.h"
-#include "widget_layer.h"
-#include "profile.h"
 
 // qt includes
-#include <qwidget.h>
-#include <qarray.h>
-#include <qstring.h>
-#include <qpainter.h>
-#include <qrect.h>
 #include <qscrollbar.h>
 
 #define rimX 0 // left/right rim width
