@@ -21,6 +21,7 @@
 #include <qpe/resource.h>
 #include <qpe/version.h>
 
+
 #include <qlabel.h>
 #include <qpixmap.h>
 #include <qpainter.h>
@@ -30,6 +31,9 @@
 #include <qtextstream.h>
 #include <qlayout.h>
 #include "versioninfo.h"
+
+#include <opie/odevice.h>
+using namespace Opie;
 
 VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     : QWidget( parent, name, f )
@@ -41,14 +45,14 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     QString kernelVersionString;
     QFile file( "/proc/version" );
     if ( file.open( IO_ReadOnly ) ) {
-	QTextStream t( &file );
-	QString v;
-	t >> v; t >> v; t >> v;
-	v = v.left( 20 );
-	kernelVersionString = tr( "<b>Linux Kernel</b><p>Version: " ) + v + "<p>";
-	t >> v;
-	kernelVersionString += tr( "Compiled by: " ) + v;
-	file.close();
+  QTextStream t( &file );
+  QString v;
+  t >> v; t >> v; t >> v;
+  v = v.left( 20 );
+  kernelVersionString = tr( "<b>Linux Kernel</b><p>Version: " ) + v + "<p>";
+  t >> v;
+  kernelVersionString += tr( "Compiled by: " ) + v;
+  file.close();
     }
 
     QString palmtopVersionString;
@@ -94,6 +98,29 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     QLabel *kernelVersion = new QLabel( this );
     kernelVersion->setText( kernelVersionString );
     hb2->addWidget( kernelVersion, 1, Qt::AlignTop + Qt::AlignLeft );
+
+
+    QHBoxLayout *hb3 = new QHBoxLayout( vb );
+    hb3->setSpacing( 2 );
+
+    QLabel *palmtopLogo3 = new QLabel( this );
+    QImage logo3 = Resource::loadImage( "SystemInfo" );
+    logo3 = logo3.smoothScale( 50, 55 );
+    QPixmap logo3Pixmap;
+    logo3Pixmap.convertFromImage( logo3 );
+    palmtopLogo3->setPixmap( logo3Pixmap );
+    palmtopLogo3->setFixedSize( 60, 60 );
+    hb3->addWidget( palmtopLogo3, 0, Qt::AlignTop + Qt::AlignLeft );
+
+    systemString = tr( "<b>System</b><p>System: ") + ODevice::inst()->modelString()
+        +tr("<p>Version: " ) + ODevice::inst()->vendorString()
+        +tr("<p>Model: ") + ODevice::inst()->systemString()
+        +tr("<p>Vendor: ") + ODevice::inst()->systemVersionString();
+
+    QLabel *systemVersion = new QLabel( this );
+    systemVersion->setText( systemString );
+    hb3->addWidget( systemVersion, 1, Qt::AlignTop + Qt::AlignLeft );
+    
 }
 
 VersionInfo::~VersionInfo()
