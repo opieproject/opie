@@ -1,7 +1,5 @@
 /****************************************************************************
  *
-using namespace Opie::Core;
-using namespace Opie::Core;
  * File:        main.cpp
  *
  * Description: main file for OPIE Euroconv aapp
@@ -34,6 +32,8 @@ struct Layout : QVBox{
     };
     
 };
+
+using namespace Opie::Core;
 
 OPIE_EXPORT_APP( OApplicationFactory<Layout> )
 
