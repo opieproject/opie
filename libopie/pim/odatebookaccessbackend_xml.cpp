@@ -77,12 +77,14 @@ namespace {
 	FRStart,
 	FREnd,
 	FNote,
-	FCreated,
+	FCreated,      // Should't this be called FRCreated ?
         FTimeZone,
         FRecParent,
         FRecChildren,
         FExceptions
     };
+
+    // FIXME: Use OEvent::toMap() here !! (eilers)
     inline void save( const OEvent& ev, QString& buf ) {
         qWarning("Saving %d %s", ev.uid(), ev.description().latin1() );
         buf += " description=\"" + Qtopia::escapeString(ev.description() ) + "\"";
@@ -275,7 +277,7 @@ bool ODateBookAccessBackend_XML::remove( int uid ) {
     return true;
 }
 bool ODateBookAccessBackend_XML::replace( const OEvent& ev ) {
-    replace( ev.uid() );
+    replace( ev.uid() ); // ??? Shouldn't this be "remove( ev.uid() ) ??? (eilers)
     return add( ev );
 }
 QArray<int> ODateBookAccessBackend_XML::rawEvents()const {
@@ -321,6 +323,8 @@ OEvent::ValueList ODateBookAccessBackend_XML::directRawRepeats() {
 
     return list;
 }
+
+// FIXME: Use OEvent::fromMap() (eilers)
 bool ODateBookAccessBackend_XML::loadFile() {
     m_changed = false;
 
@@ -359,7 +363,7 @@ bool ODateBookAccessBackend_XML::loadFile() {
     dict.insert( "start", new int(FRStart) );
     dict.insert( "end", new int(FREnd) );
     dict.insert( "note", new int(FNote) );
-    dict.insert( "created", new int(FCreated) );
+    dict.insert( "created", new int(FCreated) );  // Shouldn't this be FRCreated ??
     dict.insert( "recparent", new int(FRecParent) );
     dict.insert( "recchildren", new int(FRecChildren) );
     dict.insert( "exceptions", new int(FExceptions) );
@@ -444,6 +448,8 @@ bool ODateBookAccessBackend_XML::loadFile() {
 
     return true;
 }
+
+// FIXME: Use OEvent::fromMap() which makes this obsolete.. (eilers)
 void ODateBookAccessBackend_XML::finalizeRecord( OEvent& ev ) {
     /* AllDay is alway in UTC */
     if ( ev.isAllDay() ) {

@@ -10,11 +10,14 @@
  *      version 2 of the License, or (at your option) any later version.
  * =====================================================================
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_sql.cpp,v 1.2 2003-09-29 07:44:26 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_sql.cpp,v 1.3 2003-12-08 15:18:10 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_sql.cpp,v $
- * Revision 1.2  2003-09-29 07:44:26  eilers
+ * Revision 1.3  2003-12-08 15:18:10  eilers
+ * Committing unfinished sql implementation before merging to libopie2 starts..
+ *
+ * Revision 1.2  2003/09/29 07:44:26  eilers
  * Improvement of PIM-SQL Databases, but search queries are still limited.
  * Addressbook: Changed table layout. Now, we just need 1/3 of disk-space.
  * Todo: Started to add new attributes. Some type conversions missing.
@@ -454,7 +457,8 @@ namespace {
 /* --------------------------------------------------------------------------- */
 
 OContactAccessBackend_SQL::OContactAccessBackend_SQL ( const QString& /* appname */, 
-						       const QString& filename ): m_changed(false)
+						       const QString& filename ): 
+	OContactAccessBackend(), m_changed(false), m_driver( NULL )
 {
 	qWarning("C'tor OContactAccessBackend_SQL starts");
 	QTime t;
@@ -476,6 +480,11 @@ OContactAccessBackend_SQL::OContactAccessBackend_SQL ( const QString& /* appname
 	qWarning("C'tor OContactAccessBackend_SQL ends: %d ms", t.elapsed() );
 }
 
+OContactAccessBackend_SQL::~OContactAccessBackend_SQL ()
+{
+	if( m_driver )
+		delete m_driver;
+}
 
 bool OContactAccessBackend_SQL::load ()
 {

@@ -34,6 +34,14 @@ struct ORecur::Data : public QShared {
 ORecur::ORecur() {
     data = new Data;
 }
+
+ORecur::ORecur( const QMap<int, QString>& map )
+{
+	ORecur();
+	fromMap( map );
+}
+
+
 ORecur::ORecur( const ORecur& rec)
     : data( rec.data )
 {

@@ -41,21 +41,30 @@ public:
     typedef QValueList<OEvent> ValueList;
     /**
      * RecordFields contain possible attributes
+     * used in the Results of toMap()..
      */
     enum RecordFields {
-        Uid = Qtopia::UID_ID,
-        Category = Qtopia::CATEGORY_ID,
-        Description,
-        Location,
-        Alarm,
-        Reminder,
-        Recurrence,
-        Note,
-        Created,
-        StartDate,
-        EndDate,
-        AllDay,
-        TimeZone
+        FUid = Qtopia::UID_ID,
+        FCategories = Qtopia::CATEGORY_ID,
+        FDescription = 0,
+        FLocation,
+	FType,
+	FAlarm,
+	FSound,
+	FRType,
+	FRWeekdays,
+	FRPosition,
+	FRFreq,
+	FRHasEndDate,
+	FREndDate,
+	FRCreated,
+	FRExceptions,
+	FStart,
+	FEnd,
+	FNote,
+        FTimeZone,
+        FRecParent,
+        FRecChildren,
     };
 
     /**
@@ -74,7 +83,7 @@ public:
     void setDescription( const QString& description );
 
     QString location()const;
-    void setLocation( const QString& loc );
+   void setLocation( const QString& loc );
 
     bool hasNotifiers()const;
     OPimNotifyManager &notifiers()const;
@@ -132,6 +141,7 @@ public:
     QString type()const;
 
     QMap<int, QString> toMap()const;
+    void fromMap( const QMap<int, QString>& map );
     QString recordField(int )const;
 
     static int rtti();

@@ -22,6 +22,7 @@ public:
 		 EndDate, Created, Exceptions };
 
     ORecur();
+    ORecur( const QMap<int, QString>& map );
     ORecur( const ORecur& );
     ~ORecur();
 

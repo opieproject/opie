@@ -1,4 +1,5 @@
 #include <qshared.h>
+#include <qarray.h>
 
 #include <qpe/palmtopuidgen.h>
 #include <qpe/categories.h>
@@ -356,10 +357,136 @@ void OEvent::deref() {
         data = 0;
     }
 }
-// FIXME
+// Exporting Event data to map. Using the same
+// encoding as ODateBookAccessBackend_xml does..
+// Thus, we could remove the stuff there and use this
+// for it and for all other places..
+// Encoding should happen at one place, only ! (eilers)
 QMap<int, QString> OEvent::toMap()const {
-    return QMap<int, QString>();
+    QMap<int, QString> retMap;
+
+    retMap.insert( OEvent::FUid, QString::number( uid() ) );
+    retMap.insert( OEvent::FCategories, Qtopia::escapeString( Qtopia::Record::idsToString( categories() ) ));
+    retMap.insert( OEvent::FDescription, Qtopia::escapeString( description() ) );
+    retMap.insert( OEvent::FLocation, Qtopia::escapeString( location() ) );
+    retMap.insert( OEvent::FType, isAllDay() ? "AllDay" : "" );
+    OPimAlarm alarm = notifiers().alarms()[0];
+    retMap.insert( OEvent::FAlarm, QString::number( alarm.dateTime().secsTo(  startDateTime() ) / 60 ) );
+    retMap.insert( OEvent::FSound, (alarm.sound() == OPimAlarm::Loud) ? "loud" : "silent" );
+
+    OTimeZone zone(  timeZone().isEmpty() ? OTimeZone::current() : timeZone() );
+    retMap.insert( OEvent::FStart, QString::number( zone.fromUTCDateTime( zone.toDateTime(  startDateTime(), OTimeZone::utc() ) ) ) );
+    retMap.insert( OEvent::FEnd, QString::number( zone.fromUTCDateTime( zone.toDateTime(  endDateTime(), OTimeZone::utc() ) ) ) );
+    retMap.insert( OEvent::FNote, Qtopia::escapeString( note() ) );
+    retMap.insert( OEvent::FTimeZone, timeZone().isEmpty() ? "None" : timeZone() );
+    if( parent() )
+	    retMap.insert( OEvent::FRecParent, QString::number( parent() ) );
+    if( children().count() ){
+            QArray<int> childr = children();
+	    QString buf;
+            for ( uint i = 0; i < childr.count(); i++ ) {
+		    if ( i != 0 ) buf += " ";
+		    buf += QString::number( childr[i] );
+            }	    
+	    retMap.insert( OEvent::FRecChildren, buf );
+    }
+    
+    // Add recurrence stuff
+    if( hasRecurrence() ){
+	    ORecur recur = recurrence();
+	    QMap<int, QString> recFields = recur.toMap();
+	    retMap.insert( OEvent::FRType, recFields[ORecur::RType] );
+	    retMap.insert( OEvent::FRWeekdays, recFields[ORecur::RWeekdays] );
+	    retMap.insert( OEvent::FRPosition, recFields[ORecur::RPosition] );
+	    retMap.insert( OEvent::FRFreq, recFields[ORecur::RFreq] );
+	    retMap.insert( OEvent::FRHasEndDate, recFields[ORecur::RHasEndDate] );
+	    retMap.insert( OEvent::FREndDate, recFields[ORecur::EndDate] );
+	    retMap.insert( OEvent::FRCreated, recFields[ORecur::Created] );
+	    retMap.insert( OEvent::FRExceptions, recFields[ORecur::Exceptions] );
+    }
+   
+    return retMap;
 }
+
+void OEvent::fromMap( const QMap<int, QString>& map )
+{
+
+	// We just want to set the UID if it is really stored.
+	if ( !map[OEvent::FUid].isEmpty() )
+		setUid( map[OEvent::FUid].toInt() );
+
+	setCategories( idsFromString( map[OEvent::FCategories] ) );
+	setDescription( map[OEvent::FDescription] );
+	setLocation( map[OEvent::FLocation] );
+
+	if ( map[OEvent::FType] == "AllDay" )
+		setAllDay( true );
+	else
+		setAllDay( false );
+	
+	int alarmTime = -1;
+	if( !map[OEvent::FAlarm].isEmpty() )
+		alarmTime = map[OEvent::FAlarm].toInt();
+
+	int sound = ( ( map[OEvent::FSound] == "loud" ) ? OPimAlarm::Loud : OPimAlarm::Silent );
+	if ( ( alarmTime != -1 )  ){
+		QDateTime dt = startDateTime().addSecs( -1*alarmTime*60 );
+		OPimAlarm al( sound ,  dt  );
+		notifiers().add( al );
+	}
+	if ( !map[OEvent::FTimeZone].isEmpty() && ( map[OEvent::FTimeZone] != "None" ) ){
+		setTimeZone( map[OEvent::FTimeZone] );
+	}
+	
+	time_t start = (time_t) map[OEvent::FStart].toLong();
+	time_t end   = (time_t) map[OEvent::FEnd].toLong();
+
+	/* AllDay is always in UTC */
+	if ( isAllDay() ) {
+		OTimeZone utc = OTimeZone::utc();
+		setStartDateTime( utc.fromUTCDateTime( start ) );
+		setEndDateTime  ( utc.fromUTCDateTime( end   ) );
+		setTimeZone( "UTC"); // make sure it is really utc
+	}else {
+		/* to current date time */
+		// qWarning(" Start is %d", start );
+		OTimeZone zone( timeZone().isEmpty() ? OTimeZone::current() : timeZone() );
+		QDateTime date = zone.toDateTime( start );
+		qWarning(" Start is %s", date.toString().latin1() );
+		setStartDateTime( zone.toDateTime( date, OTimeZone::current() ) );
+
+		date = zone.toDateTime( end );
+		setEndDateTime  ( zone.toDateTime( date, OTimeZone::current() ) );
+	}
+	
+	if ( !map[OEvent::FRecParent].isEmpty() )
+		setParent( map[OEvent::FRecParent].toInt() );
+
+	if ( !map[OEvent::FRecChildren].isEmpty() ){
+		QStringList list = QStringList::split(' ', map[OEvent::FRecChildren] );
+		for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
+			addChild( (*it).toInt() );
+		}
+	}
+	
+	// Fill recurrence stuff and put it directly into the ORecur-Object using fromMap..
+	if( !map[OEvent::FRType].isEmpty() ){
+		QMap<int, QString> recFields;
+		recFields.insert( ORecur::RType, map[OEvent::FRType] );
+		recFields.insert( ORecur::RWeekdays, map[OEvent::FRWeekdays] );
+		recFields.insert( ORecur::RPosition, map[OEvent::FRPosition] );
+		recFields.insert( ORecur::RFreq, map[OEvent::FRFreq] );
+		recFields.insert( ORecur::RHasEndDate, map[OEvent::FRHasEndDate] );
+		recFields.insert( ORecur::EndDate, map[OEvent::FREndDate] );
+		recFields.insert( ORecur::Created, map[OEvent::FRCreated] );
+		recFields.insert( ORecur::Exceptions, map[OEvent::FRExceptions] );
+		ORecur recur( recFields );
+		setRecurrence( recur );
+	}
+	
+}
+
+
 int OEvent::parent()const {
     return data->parent;
 }

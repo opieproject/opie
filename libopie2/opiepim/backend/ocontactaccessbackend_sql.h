@@ -12,11 +12,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_sql.h,v 1.1 2003-09-22 14:31:16 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_sql.h,v 1.2 2003-12-08 15:18:11 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_sql.h,v $
- * Revision 1.1  2003-09-22 14:31:16  eilers
+ * Revision 1.2  2003-12-08 15:18:11  eilers
+ * Committing unfinished sql implementation before merging to libopie2 starts..
+ *
+ * Revision 1.1  2003/09/22 14:31:16  eilers
  * Added first experimental incarnation of sql-backend for addressbook.
  * Some modifications to be able to compile the todo sql-backend.
  * A lot of changes fill follow...
@@ -46,6 +49,8 @@ class OSQLResultItem;
 class OContactAccessBackend_SQL : public OContactAccessBackend {
  public:
 	OContactAccessBackend_SQL ( const QString& appname, const QString& filename = QString::null );
+
+	~OContactAccessBackend_SQL ();
 
 	bool save();
 

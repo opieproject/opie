@@ -299,7 +299,7 @@ namespace {
 };
 
 OTodoAccessBackendSQL::OTodoAccessBackendSQL( const QString& file )
-    : OTodoAccessBackend(), m_dict(15), m_dirty(true)
+    : OTodoAccessBackend(), m_dict(15), m_driver(NULL), m_dirty(true)
 {
     QString fi = file;
     if ( fi.isEmpty() )
@@ -311,7 +311,10 @@ OTodoAccessBackendSQL::OTodoAccessBackendSQL( const QString& file )
 }
 
 OTodoAccessBackendSQL::~OTodoAccessBackendSQL(){
+	if( m_driver )
+		delete m_driver;
 }
+
 bool OTodoAccessBackendSQL::load(){
     if (!m_driver->open() )
         return false;
