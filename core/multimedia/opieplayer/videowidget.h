@@ -28,12 +28,14 @@ class QSlider;
 
 
 enum VideoButtons {
-    VideoPrevious,
     VideoStop,
     VideoPlay,
-    VideoPause,
+//    VideoPause,
+    VideoPrevious,
     VideoNext,
-    VideoPlayList,
+    VideoVolUp,
+    VideoVolDown,
+//    VideoPlayList,
     VideoFullscreen
 };
 
@@ -49,7 +51,7 @@ public slots:
     void updateSlider( long, long );
     void sliderPressed( );
     void sliderReleased( );
-    void setPaused( bool b)      { setToggleButton( VideoPause, b ); }
+//    void setPaused( bool b)      { setToggleButton( VideoPause, b ); }
     void setPlaying( bool b)     { setToggleButton( VideoPlay, b ); }
     void setFullscreen( bool b ) { setToggleButton( VideoFullscreen, b ); }
     void makeVisible();
@@ -58,6 +60,10 @@ public slots:
     void setView( char );
 
 signals:
+    void moreClicked();
+    void lessClicked();
+    void moreReleased();
+    void lessReleased();
     void sliderMoved( long );
 
 protected:
