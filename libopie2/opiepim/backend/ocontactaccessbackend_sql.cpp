@@ -1,6 +1,6 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) The Main Author <main-author@whereever.org>
+                             Copyright (C) Stefan Eilers <eilers.stefan@epost.de>
               =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
             .=l.
            .>+-=
@@ -47,19 +47,6 @@
 #include <opie2/osqlquery.h>
 
 using namespace Opie::DB;
-
-
-// If defined, we use a horizontal table ( uid, attr1, attr2, attr3, ..., attrn ) instead
-// vertical like "uid, type, value".
-// DON'T DEACTIVATE THIS DEFINE IN PRODUCTIVE ENVIRONMENTS !!
-#define __STORE_HORIZONTAL_
-
-// Distinct loading is not very fast. If I expect that every person has just
-// one (and always one) 'Last Name', I can request all uid's for existing lastnames, 
-// which is faster..
-// But this may not be true for all entries, like company contacts..
-// The current AddressBook application handles this problem, but other may not.. (eilers)
-#define __USE_SUPERFAST_LOADQUERY
 
 
 /*
@@ -172,7 +159,6 @@ namespace Opie {
 	CreateQuery::~CreateQuery() {}
 	QString CreateQuery::query()const {
 		QString qu;
-#ifdef __STORE_HORIZONTAL_
 
 		qu += "create table addressbook( uid PRIMARY KEY ";
 
@@ -184,13 +170,6 @@ namespace Opie {
 		
 		qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR, priority INTEGER, value VARCHAR, PRIMARY KEY /* identifier */ (uid, id) );";
 
-#else
-
-		qu += "create table addressbook( uid INTEGER, id INTEGER, type VARCHAR, priority INTEGER, value VARCHAR, PRIMARY KEY /* identifier */ (uid, id));";
-		qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR, priority INTEGER, value VARCHAR, PRIMARY KEY /* identifier */ (uid, id) );";
-// 		qu += "create table dates( uid PRIMARY KEY, type, day, month, year, hour, minute, second );";
-
-#endif // __STORE_HORIZONTAL_
 		return qu;
 	}
 	
@@ -209,15 +188,7 @@ namespace Opie {
 	LoadQuery::~LoadQuery() {}
 	QString LoadQuery::query()const {
 		QString qu;
-#ifdef __STORE_HORIZONTAL_
 		qu += "select uid from addressbook";
-#else
-#  ifndef __USE_SUPERFAST_LOADQUERY 
-		qu += "select distinct uid from addressbook";
-#  else
-		qu += "select uid from addressbook where type = 'Last Name'";
-#  endif // __USE_SUPERFAST_LOADQUERY 
-#endif // __STORE_HORIZONTAL_
 		
 		return qu;
 	}
@@ -235,7 +206,6 @@ namespace Opie {
 	 */
 	QString InsertQuery::query()const{
 
-#ifdef __STORE_HORIZONTAL_
 		QString qu;
 		qu  += "insert into addressbook VALUES( " + 
 			QString::number( m_contact.uid() );
@@ -287,75 +257,8 @@ namespace Opie {
 		qu += " );";
 
 			
-#else
-		// Get all information out of the contact-class
-		// Remember: The category is stored in contactMap, too ! 
-		QMap<int, QString> contactMap = m_contact.toMap();
-		
-		QMap<QString, QString> addressbook_db;
-		
-		// Get the translation from the ID to the String
-		QMap<int, QString> transMap = OPimContactFields::idToUntrFields();
-		
-		for( QMap<int, QString>::Iterator it = contactMap.begin(); 
-		     it != contactMap.end(); ++it ){
-			switch ( it.key() ){
-			case Qtopia::Birthday:{
-				// These entries should stored in a special format
-				// year-month-day
-				QDate day = m_contact.birthday();
-				addressbook_db.insert( transMap[it.key()], 
-						       QString("%1-%2-%3")
-						       .arg( day.year() )
-						       .arg( day.month() )
-						       .arg( day.day() ) );
-			}
-				break;
-			case Qtopia::Anniversary:{
-				// These entries should stored in a special format
-				// year-month-day
-				QDate day = m_contact.anniversary();
-				addressbook_db.insert( transMap[it.key()], 
-						       QString("%1-%2-%3")
-						       .arg( day.year() )
-						       .arg( day.month() )
-						       .arg( day.day() ) );
-			}
-				break;
-			case Qtopia::AddressUid: // Ignore UID
-				break;
-			default: // Translate id to String
-				addressbook_db.insert( transMap[it.key()], it.data() );
-				break;
-			}
-		
-		}
-		
-		// Now convert this whole stuff into a SQL String, beginning with
-		// the addressbook table..
-		QString qu;
-		// qu  += "begin transaction;";
-		int id = 0;
-		for( QMap<QString, QString>::Iterator it = addressbook_db.begin(); 
-		     it != addressbook_db.end(); ++it ){
-			qu  += "insert into addressbook VALUES(" 
-				+  QString::number( m_contact.uid() )
-				+ ","
-				+  QString::number( id++ ) 
-				+ ",'" 
-				+ it.key() //.latin1()
-				+ "',"
-				+ "0"  // Priority for future enhancements
-				+ ",'" 
-				+ it.data()  //.latin1()
-				+ "');";
-		}
-
-#endif 	//__STORE_HORIZONTAL_	
 		// Now add custom data..
-#ifdef __STORE_HORIZONTAL_
 		int id = 0;
-#endif
 		id = 0;
 		QMap<QString, QString> customMap = m_contact.toExtraMap();
 		for( QMap<QString, QString>::Iterator it = customMap.begin(); 
@@ -417,7 +320,6 @@ namespace Opie {
 		return qu;
 	}
 	*/
-#ifdef __STORE_HORIZONTAL_
 	QString FindQuery::single()const{
 		QString qu = "select *";
 		qu += " from addressbook where uid = " + QString::number(m_uid);
@@ -425,13 +327,6 @@ namespace Opie {
 		// qWarning("find query: %s", qu.latin1() );
 		return qu;
 	}
-#else
-	QString FindQuery::single()const{
-		QString qu = "select uid, type, value from addressbook where uid = ";
-		qu += QString::number(m_uid);
-		return qu;
-	}
-#endif
 
 
 	FindCustomQuery::FindCustomQuery(int uid)
@@ -708,13 +603,8 @@ QArray<int> OPimContactAccessBackend_SQL::sorted( bool asc,  int , int ,  int )
 	QTime t;
 	t.start();
 
-#ifdef __STORE_HORIZONTAL_
 	QString query = "SELECT uid FROM addressbook ";
 	query += "ORDER BY \"Last Name\" ";
-#else
-	QString query = "SELECT uid FROM addressbook WHERE type = 'Last Name' ";
-	query += "ORDER BY upper( value )";
-#endif
 
 	if ( !asc )
 		query += "DESC";
@@ -777,7 +667,6 @@ QArray<int> OPimContactAccessBackend_SQL::extractUids( OSQLResult& res ) const
 
 }
 
-#ifdef __STORE_HORIZONTAL_
 QMap<int, QString>  OPimContactAccessBackend_SQL::requestNonCustom( int uid ) const
 {
 	QTime t;
@@ -841,70 +730,6 @@ QMap<int, QString>  OPimContactAccessBackend_SQL::requestNonCustom( int uid ) co
 
 	return nonCustomMap;
 }
-#else
-
-QMap<int, QString>  OPimContactAccessBackend_SQL::requestNonCustom( int uid ) const
-{
-	QTime t;
-	t.start();
-
-	QMap<int, QString> nonCustomMap;
-	
-	int t2needed = 0;
-	QTime t2;
-	t2.start();
-	FindQuery query( uid );
-	OSQLResult res_noncustom = m_driver->query( &query );
-	t2needed = t2.elapsed();
-
-	if ( res_noncustom.state() == OSQLResult::Failure ) {
-		qWarning("OSQLResult::Failure in find query !!");
-		QMap<int, QString> empty;
-		return empty;
-	}	
-
-	int t3needed = 0;
-	QTime t3;
-	t3.start();
-	QMap<QString, int> translateMap = OPimContactFields::untrFieldsToId();
-
-	OSQLResultItem::ValueList list = res_noncustom.results();
-	OSQLResultItem::ValueList::Iterator it = list.begin();
-	for ( ; it != list.end(); ++it ) {
-		if ( (*it).data("type") != "" ){
-			int typeId = translateMap[(*it).data( "type" )];
-			switch( typeId ){
-			case Qtopia::Birthday:
-			case Qtopia::Anniversary:{
-				// Birthday and Anniversary are encoded special ( yyyy-mm-dd )
-				QStringList list = QStringList::split( '-', (*it).data( "value" ) );
-				QStringList::Iterator lit = list.begin();
-				int year  = (*lit).toInt();
-				qWarning("1. %s", (*lit).latin1());
-				int month = (*(++lit)).toInt();
-				qWarning("2. %s", (*lit).latin1());
-				int day   = (*(++lit)).toInt();
-				qWarning("3. %s", (*lit).latin1());
-				qWarning( "RequestNonCustom->Converting:%s to Year: %d, Month: %d, Day: %d ", (*it).data( "value" ).latin1(), year, month, day );
-				QDate date( year, month, day );
-				nonCustomMap.insert( typeId, OPimDateConversion::dateToString( date ) );
-			}
-				break;
-			default:
-				nonCustomMap.insert( typeId, 
-						     (*it).data( "value" ) );
-			}
-		}
-	}
-	// Add UID to Map..
-	nonCustomMap.insert( Qtopia::AddressUid, QString::number( uid ) );
-	t3needed = t3.elapsed();
-
-	qWarning("RequestNonCustom needed: insg.:%d ms, query: %d ms, mapping: %d ms", t.elapsed(), t2needed, t3needed  );
-	return nonCustomMap;
-}
-
-#endif // __STORE_HORIZONTAL_
 
 QMap<QString, QString>  OPimContactAccessBackend_SQL::requestCustom( int uid ) const
 {
