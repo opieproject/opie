@@ -1,3 +1,6 @@
+#include <qpe/categories.h>
+#include <qpe/categoryselect.h>
+
 #include "opimrecord.h"
 
 OPimRecord::OPimRecord( int uid )
@@ -19,8 +22,18 @@ OPimRecord &OPimRecord::operator=( const OPimRecord& rec) {
 
     return  *this;
 }
+/*
+ * category names
+ */
 QStringList OPimRecord::categoryNames()const {
     QStringList list;
+    QArray<int> cats = categories();
+    Categories catDB;
+    catDB.load( categoryFileName() );
+
+    for (uint i = 0; i < cats.count(); i++ ) {
+        list << catDB.label("Todo List", cats[i] );
+    }
 
     return list;
 }
@@ -28,6 +41,9 @@ void OPimRecord::setCategoryNames( const QStringList& ) {
 
 }
 void OPimRecord::addCategoryName( const QString& ) {
+    Categories catDB;
+    catDB.load( categoryFileName() );
+
 
 }
 bool OPimRecord::isEmpty()const {
