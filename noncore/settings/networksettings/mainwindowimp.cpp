@@ -417,7 +417,7 @@ void MainWindowImp::informationClicked(){
       return;
     }
   } 
-  InterfaceInformationImp *information = new InterfaceInformationImp(this, "InterfaceSetupImp", i, Qt::WType_Modal | Qt::WDestructiveClose | Qt::WType_Dialog);
+  InterfaceInformationImp *information = new InterfaceInformationImp(this, "InterfaceSetupImp", i, Qt::WType_Modal | Qt::WDestructiveClose | Qt::WStyle_Dialog);
   information->showMaximized();
 }
 
