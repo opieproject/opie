@@ -1,27 +1,28 @@
 /*
-                             This file is part of the Opie Project
-                             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+ Â  Â  Â  Â  Â  Â  Â  Â              This file is part of the Opie Project
+
+                             Copyright (C)2002-2005 The Opie Team <opie-devel@handhelds.org>
               =.
             .=l.
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+Â  Â  Â  Â  Â  Â .>+-=
+Â _;:, Â  Â  .> Â  Â :=|.         This program is free software; you can
+.> <`_, Â  > Â . Â  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.-- Â  :           the terms of the GNU Library General Public
+.="- .-=="i, Â  Â  .._         License as published by the Free Software
+Â - . Â  .-<_> Â  Â  .<>         Foundation; either version 2 of the License,
+Â  Â  Â ._= =} Â  Â  Â  :          or (at your option) any later version.
+Â  Â  .%`+i> Â  Â  Â  _;_.
+Â  Â  .i_,=:_. Â  Â  Â -<s.       This program is distributed in the hope that
+Â  Â  Â + Â . Â -:. Â  Â  Â  =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : .. Â  Â .:, Â  Â  . . .    without even the implied warranty of
+Â  Â  =_ Â  Â  Â  Â + Â  Â  =;=|`    MERCHANTABILITY or FITNESS FOR A
+Â  _.=:. Â  Â  Â  : Â  Â :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.= Â  Â  Â  = Â  Â  Â  ;      Library General Public License for more
+++= Â  -. Â  Â  .` Â  Â  .:       details.
+: Â  Â  = Â ...= . :.=-
+Â -. Â  .:....=;==+<;          You should have received a copy of the GNU
+Â  -_. . . Â  )=. Â =           Library General Public License along with
+Â  Â  -- Â  Â  Â  Â :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -38,10 +39,11 @@
 
 /* OPIE */
 #include <qpe/config.h>
-#include <qpe/resource.h>
 #include <qpe/sound.h>
 #include <qpe/qcopenvelope_qws.h>
+
 #include <opie2/okeyfilter.h>
+#include <opie2/oresource.h>
 
 /* STD */
 #include <fcntl.h>
@@ -171,7 +173,7 @@ void SIMpad::initButtons()
         if (( sb->model & d->m_model ) == d->m_model ) {
             b. setKeycode ( sb->code );
             b. setUserText ( QObject::tr ( "Button", sb->utext ));
-            b. setPixmap ( Resource::loadPixmap ( sb->pix ));
+            b. setPixmap ( OResource::loadPixmap ( sb->pix ));
             b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( sb->fpressedservice ), sb->fpressedaction ));
             b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( sb->fheldservice ), sb->fheldaction ));
 
