@@ -418,7 +418,7 @@ QStringList* Ipkg :: getList( const QString &packageFilename, const QString &des
         qDebug( "Try to open %s", packageFileDir.latin1() );
         if ( ! f.open(IO_ReadOnly) )
         {
-            qDebug( "Could not open: %s", packageFileDir );
+            qDebug( "Could not open: %s", packageFileDir.latin1() );
             emit outputText( QString( "Could not open :" ) + packageFileDir );
             return (QStringList*)0;
         }
