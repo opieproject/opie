@@ -64,7 +64,11 @@ Color if below </source>
     </message>
 </context>
 <context>
-    <name>AddressBookPluginWidget</name>
+    <name>QObject</name>
+    <message>
+        <source>AddressBook plugin</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>Next birthdays in &lt;b&gt; %1 &lt;/b&gt; days:</source>
         <translation type="unfinished"></translation>
@@ -83,13 +87,6 @@ Color if below </source>
     </message>
     <message>
         <source>Database does not provide this search query ! Please upgrade libOpie !&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>AddressBook plugin</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
