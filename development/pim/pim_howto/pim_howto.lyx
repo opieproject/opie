@@ -1,0 +1,1213 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass scrbook
+\begin_preamble
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[LE,RO]{\slshape \leftmark}
+\fancyhead[LO,RE]{\slshape \leftmark}
+\fancyhead[RE,LO]{\thepage}
+%\fancyhead[LO,RE]{}
+% \usepackage{ae}
+\usepackage[bookmarksopen,colorlinks]{hyperref}
+% \pdfoutput=1
+% \pdfcompresslevel=8
+% \pdfinfo{
+% /Title   ClearSim-RealtTime und Andere
+%  /Creator (Tex)
+%  /Author  (Stefan Eilers)
+%  /Subject ()
+%  /Keywords (Simulation,Real-Time,ClearSim,prototype,efsm)
+% }
+\renewcommand\familydefault{\sfdefault}
+
+\usepackage{multicol}
+\newcommand\NrCol{3}
+\renewenvironment{theindex}
+               {\columnseprule \z@
+                \columnsep 35\p@
+                \section*{\indexname}%
+                \@mkboth{\MakeUppercase\indexname}%
+                        {\MakeUppercase\indexname}%
+                \begin{multicols}{\NrCol}\thispagestyle{plain}\parindent\z@
+                \parskip\z@ \@plus .3\p@\relax
+                \let\item\@idxitem}
+               {\clearpage %
+                \end{multicols}}
+
+\renewenvironment{theindex}
+               {\if@twocolumn
+                  \@restonecolfalse
+                \else
+                  \@restonecoltrue
+                \fi
+                \columnseprule \z@
+                \columnsep 35\p@
+                \twocolumn[\refstepcounter{section}%
+                  \section{\indexname}]%
+                \@mkboth{\MakeUppercase\indexname}%
+                        {\MakeUppercase\indexname}%
+                \thispagestyle{plain}\parindent\z@
+                \parskip\z@ \@plus .3\p@\relax
+                \let\item\@idxitem}
+               {\if@restonecol\onecolumn\else\clearpage\fi}
+\end_preamble
+\language german
+\inputencoding auto
+\fontscheme ae
+\graphics default
+\float_placement htbp
+\paperfontsize default
+\spacing single 
+\papersize a4paper
+\paperpackage widemarginsa4
+\use_geometry 0
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language german
+\quotes_times 2
+\papercolumns 1
+\papersides 2
+\paperpagestyle fancy
+
+\layout Title
+
+How to use the Opie-Pim API without getting tired!
+\newline 
+(Aka: Hitchhikers Guide Through the Opie-Pim API)
+\newline 
+(Pre V 0.1)
+\layout Author
+
+
+\family sans 
+Stefan Eilers
+\layout Section*
+
+
+\family sans 
+Abstract
+\layout Standard
+
+The Opie-Pim API provides a powerfull access interface to the PIM (Personal
+ Information Management) data which contains your contact information, the
+ dates in your calender tool (in this paper called datebook events) and
+ your todo events.
+ Beside providing full featured access to this information, it covers the
+ real management of this informantion - the access of the databases - from
+ the user.
+ 
+\layout Standard
+
+While starting to read the automatically generated API-documentation, the
+ user may be confused by a lot of unneccessary classes and details which
+ makes the quick start not as easy as expected.
+ Due to the fact that a user who just want to access data will not need
+ most of the details, this paper should help to start to be confortable
+ with the details he need to solve his problems.
+\layout Standard
+
+
+\begin_inset LatexCommand \tableofcontents{}
+
+\end_inset 
+
+
+\layout Chapter
+
+Introduction
+\layout Standard
+
+Before starting to jump into the work, we should introduce some specialities
+ of the PIM API first.
+ To know these facts should help to avoid possible irritations and misunderstand
+ings:
+\layout Enumerate
+
+The PIM-API heavily uses C++ templates (as known as generic classes), but
+ you don't have to understand very deeple what templates are doing and how
+ they work! Most of the API works without even seeing the templates.
+ In some cases whe have to use them (for instance to use the factory classes)
+ but this guide will provide examples which should help to find the path
+ through.
+ But it is a good idea to read some short introduction of templates to avoid
+ unneccessary mistakes.
+\layout Enumerate
+
+The PIM-API is split into two parts: The 
+\emph on 
+frontend
+\emph default 
+ and the 
+\emph on 
+backend.
+
+\emph default 
+ While the frontend provides the API for the user, the backend implements
+ how to access the databases and what to do with the data.
+ This paper just focusses the frontend as we just want to access data.
+ Thus, you should ignore all classes which contains something like 
+\begin_inset Quotes gld
+\end_inset 
+
+backend
+\begin_inset Quotes grd
+\end_inset 
+
+ in its name! Backends are just interessting for people who want to extend
+ or implement new possiblities about how to access databases, which will
+ be discussed at the end of this paper.
+ Currently, you just have to understand that there do exist several backends
+ for every type of PIM data (Contact, Todo, Datebook) which controls whether
+ you want to access an XML, SQL (SQLite) or VCard style database.
+ If you just want to use the default database, you even don't have to think
+ about this!
+\layout Standard
+
+In the next chapter, we will show how to access the default database as
+ easy as possible.
+ This will be the solution for most of the problems you may face while accessing
+ the PIM data.
+\layout Chapter
+
+Quick Guide to access the Database
+\layout Standard
+
+In this chapter we will introduce very quickly how to get access to the
+ database and how to access data.
+ It should help to find the right directions.
+ If it is too short for you, you should read the next chapter afterwards
+ to find a more complete and detailed view into the system.
+\layout Section
+
+Instantiate the access-object
+\begin_inset LatexCommand \label{sec:Instantiate-the-Access}
+
+\end_inset 
+
+
+\layout Standard
+
+To gain access to the database you need something we will call
+\emph on 
+ access-object
+\emph default 
+ (an instance of the access-class for the database) which handles the database
+ access.
+ Requesting such an object is very easy by using the operation 
+\emph on 
+defaultAccess()
+\emph default 
+ of the factory class 
+\series bold 
+OPimAccessFactory
+\series default 
+ (see 
+\begin_inset LatexCommand \url{http://www.sra.uni-hannover.de/~eilers/apidocs/pim2/html/classOpie_1_1OPimAccessFactory.html}
+
+\end_inset 
+
+).
+ This operation is defined like this:
+\layout LyX-Code
+
+T* defaultAccess (typename OPimGlobal::PimType type, const QString &appName)
+\layout Standard
+
+You just have to add the following lines to your source code to use it (this
+ example is for accessing the contact database):
+\layout LyX-Code
+
+#include <opie2/opimaccessfactory.h>
+\layout LyX-Code
+
+use namespace Opie;
+\layout Standard
+
+[...]
+\layout LyX-Code
+
+OPimContactAccess* sourceDB = OPimAccessFactory<OPimContactAccess>::defaultAcces
+s( OPimGlobal::CONTACTLIST, "my-app" );
+\layout Standard
+
+If everything works as expected, you will receive a pointer to the contact
+ access-class which has to be used for accessing the database.
+ Accessing the datebook database works equally
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+The API will be changed in the future: ODateBookAccess will be renamed to
+ OPimEventAccess.
+\end_inset 
+
+:
+\layout LyX-Code
+
+ODateBookAccess* sourceDB = OPimAccessFactory<ODatebookAccess>::defaultAccess(
+ OPimGlobal::DATEBOOK, "my-app" );
+\layout Standard
+
+And the same for todo:
+\layout LyX-Code
+
+OPimTodoAccess* sourceDB = OPimAccessFactory<OPimTodoAccess>::defaultAccess(
+ OPimGlobal::TODOLIST, "my-app" );
+\layout Standard
+
+Using 
+\emph on 
+
+\begin_inset Quotes gld
+\end_inset 
+
+defaultAccess()
+\begin_inset Quotes grd
+\end_inset 
+
+
+\emph default 
+, the default dabase is accessed automatically
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+The configuration file 
+\begin_inset Quotes gld
+\end_inset 
+
+pimaccess.conf
+\begin_inset Quotes grd
+\end_inset 
+
+ defines which backend is selected as default!
+\end_inset 
+
+.
+ If you want to use anything else, you have to read the next chapter to
+ get the information how to do this.
+ 
+\layout Standard
+
+The last parameter 
+\begin_inset Quotes gld
+\end_inset 
+
+my-app
+\begin_inset Quotes grd
+\end_inset 
+
+ is very importand and should be equal for every instance of an application.
+ Some database backends (like the XML backend) uses this string as an unique
+ filename to create a journal file.
+ If your application should run in several instances independently you will
+ need multiple journal files and therefore several name strings!
+\layout Standard
+
+If the database access-object is is not needed anymore, you have to remove
+ it by calling 
+\emph on 
+delete
+\emph default 
+:
+\layout LyX-Code
+
+delete sourceDB;
+\layout Section
+
+Accessing the access-object
+\begin_inset LatexCommand \label{sec:Accessing-the-access-object}
+
+\end_inset 
+
+
+\layout Standard
+
+After receiving the access-object, we just have to use its API which is
+ mainly defined by the common base class 
+\series bold 
+OPimAccessTemplate
+\series default 
+ (see 
+\begin_inset LatexCommand \url{http://www.sra.uni-hannover.de/~eilers/apidocs/pim2/html/classOpie_1_1OPimAccessTemplate.html}
+
+\end_inset 
+
+).
+ This API is inherited by all access-classes and therefore common to all
+ access-objects.
+ We will show the most important operations of it first (please replace
+ 
+\begin_inset Quotes gld
+\end_inset 
+
+T
+\begin_inset Quotes grd
+\end_inset 
+
+ below with the corresponding 
+\emph on 
+data-class
+\emph default 
+ for the selected access-class: OPimContact
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+see 
+\begin_inset LatexCommand \url{http://www.sra.uni-hannover.de/~eilers/apidocs/pim2/html/classOpie_1_1OPimContact.html}
+
+\end_inset 
+
+
+\end_inset 
+
+ for OPimContactAccess, OPimEvent
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+see 
+\begin_inset LatexCommand \url{http://www.sra.uni-hannover.de/~eilers/apidocs/pim2/html/classOpie_1_1OPimEvent.html}
+
+\end_inset 
+
+
+\end_inset 
+
+ for ODateBookAccess and OPimTodo
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+see 
+\begin_inset LatexCommand \url{http://www.sra.uni-hannover.de/~eilers/apidocs/pim2/html/classOpie_1_1OPimTodo.html}
+
+\end_inset 
+
+
+\end_inset 
+
+ for OPimTodoAccess):
+\layout LyX-Code
+
+bool load ();
+\layout LyX-Code
+
+bool reload ();
+\layout LyX-Code
+
+bool save ();
+\layout LyX-Code
+
+\layout LyX-Code
+
+bool add (const T& t);
+\layout LyX-Code
+
+bool remove (const T& t);
+\layout LyX-Code
+
+bool replace (const T& t);
+\layout Standard
+
+After receiving an access-object, we have to load the existing dataset,
+ which is done by the 
+\begin_inset Quotes gld
+\end_inset 
+
+load()
+\begin_inset Quotes grd
+\end_inset 
+
+ operation.
+ The 
+\begin_inset Quotes gld
+\end_inset 
+
+save()
+\begin_inset Quotes grd
+\end_inset 
+
+ operation is important to write back (or 
+\emph on 
+commit
+\emph default 
+) local changes into the global database.
+ After doing this, the changes are globally accessable! The 
+\begin_inset Quotes gld
+\end_inset 
+
+reload()
+\begin_inset Quotes grd
+\end_inset 
+
+ operation loads changes of the global database into the local set 
+\series bold 
+without
+\series default 
+ removing any local changes
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+We should check whether all dabases behave like this! (se)
+\end_inset 
+
+.
+ This may be done after receiving information about any change by an other
+ application which is not in scope of this chapter.
+ The other operations are self explaining and should work as expected.
+\layout Standard
+
+If you want to work with the existing dataset, you need to get a list of
+ all available information.
+ This list is returned by the call 
+\begin_inset Quotes gld
+\end_inset 
+
+allRecords()
+\begin_inset Quotes grd
+\end_inset 
+
+ which returns a list of all available records as an 
+\series bold 
+OPimRecordList
+\series default 
+ (see 
+\begin_inset LatexCommand \url{http://www.sra.uni-hannover.de/~eilers/apidocs/pim2/html/classOpie_1_1OPimRecordList.html}
+
+\end_inset 
+
+).
+ 
+\layout LyX-Code
+
+List allRecords ();
+\layout Standard
+
+In fact this 
+\emph on 
+List
+\emph default 
+ just contains a list of uid's to take care of memory space.
+ As every record is identified by an unique identifaction number which is
+ called UID (Unique IDentification), these numbers just exists once in the
+ database which is currently on access! To receive the real record, you
+ have to use the operation 
+\begin_inset Quotes gld
+\end_inset 
+
+find()
+\begin_inset Quotes grd
+\end_inset 
+
+ with a valid UID as paramter:
+\layout LyX-Code
+
+T find (UID uid);
+\layout Standard
+
+This is all you need to realize a basic access to the PIM-Databases! The
+ next chapter will guide you into more details of the PIM-API.
+\layout Chapter
+
+How to Access PIM-Data: Detailed View
+\layout Standard
+
+As shown in the previous chapter, all we need to access the PIM-Database
+ is to request an access-object from the OPimAccessFactory and to use it.
+ We will now introduce some special features of this factory (see section
+ 
+\begin_inset LatexCommand \ref{sec:Advanced-Factory-Features}
+
+\end_inset 
+
+), followed by some very important features like searching and sorting in
+ section 
+\begin_inset LatexCommand \ref{sec:Special-Features:-Searching}
+
+\end_inset 
+
+.
+ If you are interested in accessing data without take care about their types,
+ section 
+\begin_inset LatexCommand \ref{sec:Generic-Access:-OPimBase}
+
+\end_inset 
+
+ will show how to do this, followed by a short introduction about delayed
+ loading in section 
+\begin_inset LatexCommand \ref{sec:Internal-Signal-Handling:}
+
+\end_inset 
+
+.
+\layout Standard
+
+But first we will start with intoducing some features of the 
+\series bold 
+OPimAccessFactory
+\series default 
+.
+\layout Section
+
+Advanced Factory Features
+\begin_inset LatexCommand \label{sec:Advanced-Factory-Features}
+
+\end_inset 
+
+
+\layout Standard
+
+In the previous chapter we used the operation 
+\begin_inset Quotes gld
+\end_inset 
+
+defaultAccess()
+\begin_inset Quotes grd
+\end_inset 
+
+ to request an access-object to the dafault backend.
+ Whether this default backend will access the XML, VCard or SQLite database
+ type, this is defined by the configuration file 
+\begin_inset Quotes gld
+\end_inset 
+
+pimaccess.conf
+\begin_inset Quotes grd
+\end_inset 
+
+ which is stored in the directory 
+\begin_inset Quotes gld
+\end_inset 
+
+Settings
+\begin_inset Quotes grd
+\end_inset 
+
+, stored in the user home directory.
+ Changing this setting will take effect to all applications using 
+\begin_inset Quotes gld
+\end_inset 
+
+defaultAccess()
+\begin_inset Quotes grd
+\end_inset 
+
+.
+ Therefore it is not a good idea to modify a global setting, if an application
+ should access a special database type, for instance to move data from one
+ database to an other.
+ 
+\layout Standard
+
+If the developer wants to select a special database type for sure, he has
+ to use the oparation 
+\emph on 
+create()
+\emph default 
+ which has the following parameters:
+\layout LyX-Code
+
+T * create (OPimGlobal::PimType type, OPimGlobal::DatabaseStyle dbStyle,
+ const QString &appName, const QString &fileName=QString::null)
+\layout Standard
+
+Some paramters are already known, like type and appName (see section 
+\begin_inset LatexCommand \ref{sec:Instantiate-the-Access}
+
+\end_inset 
+
+).
+ The new parameter 
+\begin_inset Quotes gld
+\end_inset 
+
+dbStyle
+\begin_inset Quotes grd
+\end_inset 
+
+ defines which database type should be selected.
+ Possible values could be found in the enumeration 
+\emph on 
+DataBaseStyle
+\emph default 
+ in the class 
+\series bold 
+OPimGlobal
+\series default 
+ (see 
+\begin_inset LatexCommand \url{http://www.sra.uni-hannover.de/~eilers/apidocs/pim2/html/classOpie_1_1Pim_1_1OPimGlobal.html}
+
+\end_inset 
+
+).
+ 
+\begin_inset Quotes gld
+\end_inset 
+
+DEFAULT
+\begin_inset Quotes grd
+\end_inset 
+
+ selects the default database and therefore behaves exactly as the operation
+ 
+\begin_inset Quotes gld
+\end_inset 
+
+defaultAccess()
+\begin_inset Quotes grd
+\end_inset 
+
+ above.
+ 
+\begin_inset Quotes gld
+\end_inset 
+
+UNKOWN
+\begin_inset Quotes grd
+\end_inset 
+
+ is just defined for internal reasons and should not be used be the developer.
+ The remaining values (
+\begin_inset Quotes gld
+\end_inset 
+
+XML
+\begin_inset Quotes grd
+\end_inset 
+
+, 
+\begin_inset Quotes gld
+\end_inset 
+
+SQL
+\begin_inset Quotes grd
+\end_inset 
+
+, 
+\begin_inset Quotes gld
+\end_inset 
+
+VCARD
+\begin_inset Quotes grd
+\end_inset 
+
+) should be used to select the desired database backend.
+ The last parameter 
+\begin_inset Quotes gld
+\end_inset 
+
+fileName
+\begin_inset Quotes grd
+\end_inset 
+
+ is used to select a special file name and path to the database file.
+ Thus, you can use it to access database files which don't reside on the
+ default path or have other filenames as it is defined by the platform as
+ default (in normal cases 
+\begin_inset Quotes gld
+\end_inset 
+
+~/Applications/<name of application>/
+\begin_inset Quotes grd
+\end_inset 
+
+).
+\layout Standard
+
+In the next section we will discuss how searching and sorting take place
+ with this API.
+\layout Section
+
+Special Features: Searching and Sorting
+\begin_inset LatexCommand \label{sec:Special-Features:-Searching}
+
+\end_inset 
+
+
+\layout Standard
+
+In most cases it is not sufficient to receive just a list of all information
+ in a database.
+ It is essential to get a subset of the information available and to be
+ able to sort it.
+ For this kind of excercise we provide some special operations which provide
+ searching and sorting in an incremental manner
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+FIXME: matchRegexp() does take a list of uid's.
+ Therefore it is currently not possible to use it in an incremental manner!
+ (se)
+\end_inset 
+
+.
+ Therfore it is possible to research a 
+\begin_inset Quotes gld
+\end_inset 
+
+List
+\begin_inset Quotes grd
+\end_inset 
+
+ which was returned by a previous search query and to sort it afterwards.
+ Before we will take a close look into sorting, we will start with searching.
+ There exist two different ways of searching:
+\layout Enumerate
+
+Search a complete database for a special regular expression, using 
+\begin_inset Quotes gld
+\end_inset 
+
+matchRegexp ()
+\begin_inset Quotes grd
+\end_inset 
+
+.
+ This search type returns all records which contains the given regular expressio
+n 
+\emph on 
+anywhere
+\emph default 
+ in the dataset.
+ This search type is used for example by the opie search tool (OSearch)
+ (see 
+\begin_inset LatexCommand \url{http://handhelds.org/cgi-bin/cvsweb.cgi/opie/core/pim/osearch/}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \url{http://handhelds.org/cgi-bin/cvsweb.cgi/opie/core/pim/osearch/adresssearch.cpp?rev=1.12&content-type=text/x-cvsweb-markup}
+
+\end_inset 
+
+).
+\layout Enumerate
+
+Define a so called 
+\begin_inset Quotes gld
+\end_inset 
+
+Query By Example
+\begin_inset Quotes grd
+\end_inset 
+
+ search query which allows to define what should be searched and which internal
+ data fields should be taken into account.
+ This is a very advanced search function which allows to search in a very
+ fine granular manner.
+\layout Standard
+
+We will start with the first and very simple 
+\begin_inset Quotes grd
+\end_inset 
+
+matchRegexp()
+\begin_inset Quotes grd
+\end_inset 
+
+, followed by the query by example search query.
+\layout Subsection
+
+Searching with 
+\begin_inset Quotes gld
+\end_inset 
+
+matchRegexp()
+\begin_inset Quotes grd
+\end_inset 
+
+
+\layout Standard
+
+The function is defined like this:
+\layout LyX-Code
+
+List matchRegexp (const QRegExp &r);
+\layout Standard
+
+The 
+\begin_inset Quotes gld
+\end_inset 
+
+List
+\begin_inset Quotes grd
+\end_inset 
+
+ is still a OPimRecordList which contains 0 or more uid's of matching records.
+ As already discussed in section 
+\begin_inset LatexCommand \ref{sec:Accessing-the-access-object}
+
+\end_inset 
+
+ you have to use the 
+\begin_inset Quotes gld
+\end_inset 
+
+find()
+\begin_inset Quotes grd
+\end_inset 
+
+ operation to request the real records.
+\layout Subsection
+
+Searching with Query By Example
+\layout Standard
+
+The query by example search style is working is using a data object (for
+ instance an OPimContact) to store the search query.
+ For instance, if you want to request all entries which contains the last
+ name 
+\begin_inset Quotes gld
+\end_inset 
+
+Eilers
+\begin_inset Quotes grd
+\end_inset 
+
+ and the home zip number should start with 
+\begin_inset Quotes gld
+\end_inset 
+
+3
+\begin_inset Quotes grd
+\end_inset 
+
+ you have to do the following:
+\layout LyX-Code
+
+OPimContact searchQuery;
+\layout LyX-Code
+
+searchQuery.setLastName( 
+\begin_inset Quotes gld
+\end_inset 
+
+Eilers
+\begin_inset Quotes grd
+\end_inset 
+
+ );
+\layout LyX-Code
+
+searchQuery.setHomeZip( 
+\begin_inset Quotes gld
+\end_inset 
+
+3*
+\begin_inset Quotes grd
+\end_inset 
+
+ );
+\layout Standard
+
+We use a usual 
+\begin_inset Quotes gld
+\end_inset 
+
+OPimContact
+\begin_inset Quotes grd
+\end_inset 
+
+ and fill into two fields the search information.
+ As we just want to search for entries which zip number starts with a 
+\begin_inset Quotes gld
+\end_inset 
+
+3
+\begin_inset Quotes grd
+\end_inset 
+
+ we use the Wildcard 
+\begin_inset Quotes gld
+\end_inset 
+
+*
+\begin_inset Quotes grd
+\end_inset 
+
+ as we would do for finding files in a filesystem.
+\layout Standard
+
+The next step is to put this query into the operation which is defined like
+ this:
+\layout LyX-Code
+
+List queryByExample (const T& query, int querySettings, const QDateTime
+ &startperiod=QDateTime())
+\layout Standard
+
+The first parameter 
+\begin_inset Quotes gld
+\end_inset 
+
+query
+\begin_inset Quotes grd
+\end_inset 
+
+ should used to set our query, but we have to set the parameter 
+\begin_inset Quotes gld
+\end_inset 
+
+querySettings
+\begin_inset Quotes grd
+\end_inset 
+
+ to configure the search properly.
+ This settings are defined by the enum QuerySettings in the class 
+\series bold 
+OPimBase
+\series default 
+ (see 
+\begin_inset LatexCommand \url{http://www.sra.uni-hannover.de/~eilers/apidocs/pim2/html/structOpie_1_1OPimBase.html#w19}
+
+\end_inset 
+
+).
+ The meaning of all settings will be discussed later.
+ For the first turn we will just concentrate on the things we need in this
+ case.
+ As we use Wildcards in 
+\begin_inset Quotes gld
+\end_inset 
+
+setHomeZip
+\begin_inset Quotes grd
+\end_inset 
+
+ we have to use 
+\begin_inset Quotes gld
+\end_inset 
+
+WildCards
+\begin_inset Quotes grd
+\end_inset 
+
+.
+ And we want to be sure to find lower case names, too, which may be mistyped
+ (like 
+\begin_inset Quotes gld
+\end_inset 
+
+eilers
+\begin_inset Quotes grd
+\end_inset 
+
+, 
+\begin_inset Quotes gld
+\end_inset 
+
+eIlers
+\begin_inset Quotes grd
+\end_inset 
+
+, ...).
+ Thus we have to use the 
+\begin_inset Quotes gld
+\end_inset 
+
+IgnoreCase
+\begin_inset Quotes grd
+\end_inset 
+
+ setting which is to combine with the other using an 
+\begin_inset Quotes gld
+\end_inset 
+
+or
+\begin_inset Quotes grd
+\end_inset 
+
+ operator.
+ The last parameter 
+\begin_inset Quotes gld
+\end_inset 
+
+endperiod
+\begin_inset Quotes grd
+\end_inset 
+
+ will be ignored for this case which will look like this:
+\layout LyX-Code
+
+use namespace Opie;
+\layout LyX-Code
+
+[...]
+\layout LyX-Code
+
+List found_items = queryByExample( searchQuery, OPimBase::WildCards | OpimBase::
+IgnoreCase );
+\layout Standard
+
+This operation may return a list of entries which can be accesses as usual,
+ using the 
+\begin_inset Quotes gld
+\end_inset 
+
+find()
+\begin_inset Quotes grd
+\end_inset 
+
+ operation.
+\layout Standard
+
+It should be clear at this stage, that this query is very powerful and -
+ depending to the querySettings - could be very complicated to implement.
+ Thus, not all backends do support all features defined by querySettings
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+At this time, just the contact database for XML and VCard is supporting
+ all queries and combination of them.
+ All others just support subsets.
+\end_inset 
+
+.
+ To check which settings are supported and to be able to react dynamically
+ on missing features (for instance to disable some search features in the
+ application) we provide the following operations:
+\layout LyX-Code
+
+bool hasQuerySettings( uint querySettings );
+\layout LyX-Code
+
+uint querySettings();
+\layout Standard
+
+The first operation 
+\begin_inset Quotes gld
+\end_inset 
+
+hasQuerySettings()
+\begin_inset Quotes grd
+\end_inset 
+
+ may be used to ask whether the database can handle the given query settings.
+ In this example a call to 
+\layout LyX-Code
+
+hasQuerySettings( OPimBase::WildCards | OpimBase::IgnoreCase );
+\layout Standard
+
+should be answered with 
+\begin_inset Quotes gld
+\end_inset 
+
+true
+\begin_inset Quotes grd
+\end_inset 
+
+.
+ If you need to ask which kind of queries are supported, the operation 
+\begin_inset Quotes gld
+\end_inset 
+
+querySettings()
+\begin_inset Quotes grd
+\end_inset 
+
+ will be your friend.
+ It will return an unsigned integer value where a 
+\begin_inset Quotes gld
+\end_inset 
+
+1
+\begin_inset Quotes grd
+\end_inset 
+
+ is set for every available feature.
+\layout Standard
+
+The last parameter is called 
+\begin_inset Quotes gld
+\end_inset 
+
+startperiod
+\begin_inset Quotes grd
+\end_inset 
+
+ which is used to set a time interval: 
+\layout Standard
+
+In some cases, a time interval should be set to find for instance all entries
+ between two dates (used for example by the birthday reminder for today
+ (see here: 
+\begin_inset LatexCommand \url{http://handhelds.org/cgi-bin/cvsweb.cgi/opie/core/pim/today/plugins/addressbook/addresspluginwidget.cpp?rev=1.14&content-type=text/x-cvsweb-markup}
+
+\end_inset 
+
+)) as requested by the setting 
+\begin_inset Quotes gld
+\end_inset 
+
+OPimBase::DateDiff
+\begin_inset Quotes grd
+\end_inset 
+
+.
+ The date and time in the query object is used as the 
+\series bold 
+end
+\series default 
+ of the interval.
+ The start will be defined by the last parameter (if nothing is set, the
+ current date will be taken!).
+ Therefore, it is possible to set a time frame for all searched entries.
+\layout Section
+
+Generic Access: OPimBase and OPimRecord
+\begin_inset LatexCommand \label{sec:Generic-Access:-OPimBase}
+
+\end_inset 
+
+
+\layout Section
+
+Caching
+\layout Standard
+
+Need to be written.
+ Implementation is found at: 
+\begin_inset LatexCommand \url{http://handhelds.org/cgi-bin/cvsweb.cgi/opie/noncore/tools/pimconverter/converter.cpp?rev=1.9&content-type=text/x-cvsweb-markup}
+
+\end_inset 
+
+
+\layout Section
+
+Internal Signal Handling: Automatic Propagation of Changes
+\begin_inset LatexCommand \label{sec:Internal-Signal-Handling:}
+
+\end_inset 
+
+
+\layout Standard
+
+Need to be written and is not implemented completly!
+\layout Chapter
+
+Howto Extend and Write New Backends
+\layout Standard
+
+Need to be written.
+\the_end
