@@ -708,18 +708,34 @@ void AddressbookWindow::slotPersonalView()
 
     bool personal = m_actionPersonal->isOn();
 
-    // Disable certain menu items when showing personal details
+    // Disable actions when showing personal details
     setItemNewEnabled( !personal );
     setItemDuplicateEnabled( !personal );
     setItemDeleteEnabled( !personal );
     m_actionMail->setEnabled( !personal );
+    setShowCategories( !personal );
 
     // Display appropriate view
     m_abView->showPersonal( personal );
 
-    // Set application caption
-    personal ? setCaption( tr( "Contacts - My Personal Details") )
-             : setCaption( tr( "Contacts") );
+    if ( personal )
+    {
+        setCaption( tr( "Contacts - My Personal Details") );
+
+        // Set category to 'All' to make sure personal details is visible
+        setViewCategory( "All" );
+        m_abView->setShowByCategory( "All" );
+
+        // Temporarily disable letter picker
+        pLabel->hide();
+    }
+    else
+    {
+        setCaption( tr( "Contacts") );
+
+        // Re-enable letter picker
+        pLabel->show();
+    }
 }
 
 void AddressbookWindow::reload()
@@ -738,10 +754,22 @@ void AddressbookWindow::flush()
 
 void AddressbookWindow::closeEvent( QCloseEvent *e )
 {
-        if(active_view == AbView::CardView){
-	  slotViewSwitched( AbView::TableView );
-	  e->ignore();
-	  return;
+    if ( active_view == AbView::CardView )
+    {
+        if ( !m_actionPersonal->isOn() )
+        {
+            // Switch to table view only if not editing personal details
+            slotViewSwitched( AbView::TableView );
+        }
+        else
+        {
+            // If currently editing personal details, switch off personal view
+            m_actionPersonal->setOn( false );
+            slotPersonalView();
+        }
+
+        e->ignore();
+        return;
 	}
 	if(syncing) {
 		/* shouldn't we save, I hear you say? well its already been set
