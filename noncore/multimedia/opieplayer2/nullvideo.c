@@ -20,29 +20,36 @@ struct opie_frame_s {
     vo_frame_t frame;
     char* name;
     int version;
+    int m_width;
+    int m_height;
+    uint8_t *chunk[3];
     null_driver_t *output;
 };
 
-static uint32_t null_get_capabilities(vo_driver_t *self ){
+static uint32_t null_get_capabilities(vo_driver_t *self ){   
     null_driver_t* this = (null_driver_t*)self;
+    printf("capabilities\n");
     return this->m_capabilities;
 }
 
 /* take care of the frame*/
-static void null_frame_dispose( vo_frame_t* vo_img){
+static void null_frame_dispose( vo_frame_t* vo_img){    
     opie_frame_t* frame = (opie_frame_t*)vo_img;
+    printf("frame_dispose\n");
     free (frame);
 }
 static void null_frame_field( vo_frame_t* frame, int inti ){
+    printf("frame_field\n");
     /* not needed */
 }
 
 /* end take care of frames*/
 
-static vo_frame_t* null_alloc_frame( vo_driver_t* self ){
+static vo_frame_t* null_alloc_frame( vo_driver_t* self ){    
     null_driver_t* this = (null_driver_t*)self;
     opie_frame_t* frame = (opie_frame_t*)malloc ( sizeof(opie_frame_t) );
     memset( frame, 0, sizeof( opie_frame_t) );
+    printf("alloc_frame\n");
     frame->name = "opie\0";
     frame->version = 1;
     frame->output = this;
@@ -54,15 +61,51 @@ static vo_frame_t* null_alloc_frame( vo_driver_t* self ){
     frame->frame.field = null_frame_field;
     frame->frame.dispose = null_frame_dispose;
  
+
     return (vo_frame_t*) frame;
 }
 static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
 				      uint32_t width, uint32_t height,
 				      int ratio_code, int format, int flags ){
+    null_driver_t* this = (null_driver_t*) self;
+    opie_frame_t*  frame = (opie_frame_t*)img;
     /* not needed now */
+    printf("update_frame_format\n");
+    printf("al crash aye?\n");
+
+    if(frame->chunk[0] ){
+	free( frame->chunk[0] );
+	frame->chunk[0] = NULL;	
+    }
+    if(frame->chunk[1] ){
+	free ( frame->chunk[1] );
+	frame->chunk[1] = NULL;
+    }	
+    if(frame->chunk[2] ){
+	free ( frame->chunk[2] );
+	frame->chunk[2] = NULL;
+    }
+
+
+    if( format == IMGFMT_YV12 ) {
+	int image_size = width * height; /* cast ouch*/
+	frame->frame.base[0] = xine_xmalloc_aligned(16, image_size,
+						       (void **)&frame->chunk[0] );
+	frame->frame.base[1] = xine_xmalloc_aligned(16, image_size,
+						       (void **)&frame->chunk[1] );
+	frame->frame.base[2] = xine_xmalloc_aligned(16, image_size,
+						       (void **)&frame->chunk[2] );
+    }else{
+	int image_size = width * height; /* cast ouch*/
+	frame->frame.base[0] = xine_xmalloc_aligned(16, image_size,
+						       (void **)&frame->chunk[0] );
+	frame->chunk[1] = NULL;
+	frame->chunk[2] = NULL;
+    }
+
 }
 static void null_display_frame( vo_driver_t* self, vo_frame_t *frame ){
-    printf("display frame");
+    printf("display frame\n");
 }
 static void null_overlay_blend( vo_driver_t* self, vo_frame_t* frame,
 			       vo_overlay_t* overlay ){
@@ -70,16 +113,19 @@ static void null_overlay_blend( vo_driver_t* self, vo_frame_t* frame,
 }
 static int null_get_property( vo_driver_t* self,
 			      int property ){
+    printf("property get]n");			     
     return 0;
 }
 static int null_set_property( vo_driver_t* self,
 			      int property,
 			      int value ){
+    printf("set property\n");			     
     return value;
 }
 static void null_get_property_min_max( vo_driver_t* self,
 				       int property, int *min,
 				       int *max ){
+    printf("min max\n");				       
     *max = 0;
     *min = 0;
 }

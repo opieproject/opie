@@ -43,11 +43,13 @@ Lib::Lib() {
         printf("Audio %s\n", out );
         i++;
     }
-    m_xine = xine_init( m_videoOutput,
-                      m_audioOutput,
-                      m_config );
+//    m_xine = xine_init( m_videoOutput,
+//                      m_audioOutput,
+//                      m_config );
     // test loading
     m_videoOutput = ::init_video_out_plugin( m_config, NULL );		     
+    m_xine = xine_init( m_videoOutput,
+			m_audioOutput, m_config );
 }
 
 Lib::~Lib() {
