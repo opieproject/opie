@@ -59,6 +59,7 @@ public slots:
     void setDocument( const QString & );
 
 private slots:
+    void importvCard();   
     void slotListNew();
     void slotListView();
     void slotListDelete();
@@ -76,7 +77,7 @@ private slots:
     void slotUpdateToolbar();
     void slotSetFont(int);
 private:
-    void initFields();	// inititialize our fields...
+    void initFields();  // inititialize our fields...
     AbLabel *abView();
     void populateCategories();
 
@@ -84,7 +85,7 @@ private:
     QPEToolBar *listTools;
     QToolButton *deleteButton;
     QValueList<int> allFields,
-	            orderedFields;
+              orderedFields;
     QStringList slOrderedFields;
     enum Panes { paneList=0, paneView, paneEdit };
     ContactEditor *abEditor;
@@ -94,7 +95,7 @@ private:
     QWidget *listContainer;
 
     QAction *actionNew, *actionEdit, *actionTrash, *actionFind, *actionBeam, 
-	*actionPersonal, *actionMail;
+  *actionPersonal, *actionMail;
 
     bool bAbEditFirstTime;
     int viewMargin;
