@@ -77,7 +77,7 @@ signals:
 
 
 private:
-    inline bool keyRegistered( int key );
+    bool keyRegistered( int key );
     int held_tid;
     const Opie::ODeviceButton* heldButton;
     KeyRegisterList m_keys;
