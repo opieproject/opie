@@ -128,6 +128,7 @@ int SFCave::flyHardScores[7][3] = { { 0, 20, 5 },
 int SFCave::initialGateGaps[]           = { 75, 50, 25 };
 
 
+#define FLYSCORES( x, y )  (*(flyScores + ((x)*3) + y))
 bool movel;
 
 
@@ -282,11 +283,11 @@ void SFCave :: setUp()
         maxDownThrust = MaxDownThrustVals[FLY_GAME_TYPE][currentGameDifficulty];
 
         if ( currentGameDifficulty == DIFICULTY_EASY )
-            flyScores = flyEasyScores;
+            flyScores = (int*)flyEasyScores;
         else if ( currentGameDifficulty == DIFICULTY_NORMAL )
-            flyScores = flyNormalScores;
+            flyScores = (int*)flyNormalScores;
         else
-            flyScores = flyHardScores;
+            flyScores = (int*)flyHardScores;
     }
     
     crashLineLength = 0;
@@ -481,11 +482,11 @@ void SFCave :: handleGameFly()
             // get distance between landscape and ship
 
             // the closer the difference is to 0 means more points
-            for ( int i = 0 ; i < 10 && flyScores[i][0] != -1 ; ++i )
+            for ( int i = 0 ; i < 10 && FLYSCORES( i, 0 ) != -1 ; ++i )
             {
-                if ( flyScores[i][0] <= diff && flyScores[i][1] > diff )
+                if ( FLYSCORES( i, 0 ) <= diff && FLYSCORES(i, 1 ) > diff )
                 {
-                    score += flyScores[i][2];
+                    score += FLYSCORES( i, 2 );
                     break;
                 }
             }
@@ -694,12 +695,12 @@ void SFCave :: draw()
         if ( CURRENT_GAME_TYPE == FLY_GAME && showScoreZones )
         {
             p.setPen( Qt::blue );
-            for ( int j = 1 ; j < 10 && flyScores[j][0] != -1 ; ++j )
+            for ( int j = 1 ; j < 10 && FLYSCORES( j, 0 ) != -1 ; ++j )
             {
-                if ( flyScores[j][2] < 0 )
+                if ( FLYSCORES( j, 2 ) < 0 )
                     p.setPen( Qt::red );
 
-                p.drawLine( (i*segSize) - (offset*speed), mapBottom[i]-flyScores[j][0], ((i+1)*segSize)-(offset*speed), mapBottom[i+1]-flyScores[j][0] );
+                p.drawLine( (i*segSize) - (offset*speed), mapBottom[i]-FLYSCORES( j, 0 ), ((i+1)*segSize)-(offset*speed), mapBottom[i+1]-FLYSCORES( j, 0 ) );
             }
 
             p.setPen( Qt::white );

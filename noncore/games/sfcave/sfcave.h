@@ -50,7 +50,7 @@ public:
     static int flyEasyScores[7][3];
     static int flyNormalScores[7][3];
     static int flyHardScores[7][3];
-    int flyScores[7][3];
+    int *flyScores;
 
     
     double thrustUp;
