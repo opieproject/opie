@@ -72,21 +72,21 @@ void AdvancedFm::tabChanged(QWidget *wd) {
 //		qDebug("tabChanged");
  		if(wd == tab) {
 				whichTab = 1;
+ 				viewMenu->setItemChecked(viewMenu->idAt(0), true);
+ 				viewMenu->setItemChecked(viewMenu->idAt(1), false);
 // 				qDebug("tabchanged: LOCAL VIEW SHOWN");
 		}
  		else if(wd == tab_2) {
 				whichTab = 2;
+ 				viewMenu->setItemChecked(viewMenu->idAt(0), false);
+ 				viewMenu->setItemChecked(viewMenu->idAt(1), true);
 // 				qDebug("tabchanged: REMOTE VIEW SHOWN");
 		}
 		qApp->processEvents();
  		QString path = CurrentDir()->canonicalPath();
 //		qDebug(path);
  		if ( TabWidget->currentWidget() == tab) {
- 				viewMenu->setItemChecked(viewMenu->idAt(0), true);
- 				viewMenu->setItemChecked(viewMenu->idAt(1), false);
  		} else {
- 				viewMenu->setItemChecked(viewMenu->idAt(0), false);
- 				viewMenu->setItemChecked(viewMenu->idAt(1), true);
  		}
 
  		chdir( path.latin1());
@@ -365,7 +365,7 @@ void AdvancedFm::keyReleaseEvent( QKeyEvent *e) {
 //				qDebug("shout!");
 		}
 
-				else if(  e->key() ==  Key_Left ) 
+				else if(  e->key() ==  Key_Left )
 				upDir();
 		else if( e->key() == Key_Return || e->key() == Key_Enter)
 				navigateToSelected();
