@@ -92,7 +92,7 @@ NewTaskDialog::NewTaskDialog( int id, QWidget* parent,  const char* name, bool m
 void NewTaskDialog::init()
 {
     if( layout() != 0 ){
-      layout()->setMargin( 0 );
+      layout()->setMargin( 2 );
     }
     QPopupMenu *m1 = new QPopupMenu( this );
     picker = new DateBookMonth( m1, 0, TRUE );
