@@ -1,15 +1,13 @@
 TEMPLATE	= app
 
 CONFIG		+= qtopia warn_on release
-win32:DEFINES   += QTOPIA_DLL
 
-DESTDIR		= $(QPEDIR)/bin
+DESTDIR		= $(OPIEDIR)/bin
 
 HEADERS		+= server.h \
 		  serverinterface.h \
 		  launchertab.h \
 		  documentlist.h \
-		  suspendmonitor.h \
 		  appicons.h \
 		  taskbar.h \
                   runningappbar.h \
