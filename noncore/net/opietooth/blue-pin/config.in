@@ -1,4 +1,4 @@
   config BLUE-PIN
-    boolean "blue-pin"
+    boolean "opie-bluepin (Bluetooth pin application)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OPIETOOTH

@@ -1,4 +1,4 @@
   config LIBOPIETOOTH
-    boolean "libopietooth"
+    boolean "libopietooth1 (Opie Bluetooth library)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OPIETOOTH

@@ -1,5 +1,5 @@
 config OPIETOOTH
-  bool "Opietooth"
+  bool "Bluetooth support"
   depends (LIBQPE || LIBQPE-X11) && LIBOPIE
 
 if OPIETOOTH
