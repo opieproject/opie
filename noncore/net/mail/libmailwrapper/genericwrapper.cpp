@@ -468,7 +468,7 @@ void Genericwrapper::parseList(QList<RecMail> &target,mailsession*session,const 
         QBitArray mFlags(7);
         msg = (mailmessage*)carray_get(env_list->msg_tab, i);
         if (msg->msg_fields == NULL) {
-            qDebug("could not fetch envelope of message %i", i);
+            //qDebug("could not fetch envelope of message %i", i);
             continue;
         }
         RecMail * mail = new RecMail();
