@@ -19,6 +19,7 @@
 **********************************************************************/
 #include "volume.h"
 #include "volumeappletimpl.h"
+#include <qpe/qcopenvelope_qws.h>
 
 
 VolumeAppletImpl::VolumeAppletImpl()
@@ -34,7 +35,8 @@ VolumeAppletImpl::~VolumeAppletImpl()
 QWidget *VolumeAppletImpl::applet( QWidget *parent )
 {
     if ( !volume )
-	volume = new VolumeApplet( parent );
+  volume = new VolumeApplet( parent );
+   QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE; //mute
     return volume;
 }
 
@@ -47,12 +49,12 @@ QRESULT VolumeAppletImpl::queryInterface( const QUuid &uuid, QUnknownInterface *
 {
     *iface = 0;
     if ( uuid == IID_QUnknown )
-	*iface = this;
+  *iface = this;
     else if ( uuid == IID_TaskbarApplet )
-	*iface = this;
+  *iface = this;
 
     if ( *iface )
-	(*iface)->addRef();
+  (*iface)->addRef();
     return QS_OK;
 }
 

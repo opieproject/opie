@@ -46,6 +46,7 @@
 VolumeControl::VolumeControl( bool showMic, QWidget *parent, const char *name )
     : QFrame( parent, name, WDestructiveClose | WStyle_StaysOnTop | WType_Popup )
 {
+   QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE; //mute
   setFrameStyle( QFrame::PopupPanel | QFrame::Raised );
   createView(showMic);
 }
