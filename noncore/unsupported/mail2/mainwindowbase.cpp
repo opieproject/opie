@@ -1,5 +1,3 @@
-#include <qprogressbar.h>
-#include <qtoolbutton.h>
 #include <qpopupmenu.h>
 #include <qaction.h>
 #include <qheader.h>
@@ -11,6 +9,7 @@
 #include <qpe/resource.h>
 
 #include "mainwindowbase.h"
+#include "mailstatusbar.h"
 #include "folderwidget.h"
 #include "mailtable.h"
 
@@ -65,22 +64,7 @@ MainWindowBase::MainWindowBase(QWidget *parent, const char *name, WFlags fl)
 	mailView = new MailTable(view);
 	mailView->setMinimumHeight(50);
 
-	QHBox *status = new QHBox(view);
-
-	statusLabel = new QLabel(status);
-	QFont tmpFont = statusLabel->font();
-	tmpFont.setPixelSize(8);
-	statusLabel->setFont(tmpFont);
-
-	stopButton = new QToolButton(status);
-	stopButton->setText(" X ");
-	stopButton->setMaximumHeight(15);
-	stopButton->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
-
-	statusProgress = new QProgressBar(status);
-	statusProgress->setCenterIndicator(true);
-	statusProgress->setMaximumHeight(15);
-	statusProgress->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+	status = new MailStatusBar(view);
 }
 
 void MainWindowBase::slotFoldersToggled(bool toggled)

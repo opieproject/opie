@@ -12,8 +12,8 @@
 #include <qpe/config.h>
 
 #include <opie/ofiledialog.h>
-//#include "attachdiag.h"
 
+#include "mailstatusbar.h"
 #include "addresspicker.h"
 #include "listviewplus.h"
 #include "smtphandler.h"
@@ -32,7 +32,7 @@ Composer::Composer(QWidget *parent, const char *name, WFlags fl, bool sendQueue)
 	: ComposerBase(parent, name, fl), _inLoop(false)
 {
 	_sendQueued = sendQueue;
-	abort->setEnabled(false);
+	status->setStopEnabled(false);
 	to->setFocus();
 
 	connect(sendmail, SIGNAL(activated()), SLOT(slotSendMail()));
@@ -154,12 +154,12 @@ void Composer::slotSendMail()
 	MailFactory::genMail(header, message, smail, this);
 	if (header.isNull() || message.isNull()) return;	// Aborted.
 
-	abort->setEnabled(true);
+	status->setStopEnabled(true);
 
 	SmtpHandler *handler = new SmtpHandler(header, message, accountsLoaded[from->currentItem()], to->text());
 	connect(handler, SIGNAL(finished()), SLOT(slotSendFinished()));
 	connect(handler, SIGNAL(error(const QString &)), SLOT(slotSendError(const QString &)));
-	connect(handler, SIGNAL(status(const QString &)), status, SLOT(setText(const QString &)));
+	connect(handler, SIGNAL(status(const QString &)), status, SLOT(setStatusText(const QString &)));
 }
 
 void Composer::slotSendQueued()
@@ -248,7 +248,7 @@ void Composer::slotSendQueued()
    	  effSendCount++;
     	connect(handler, SIGNAL(finished()), SLOT(slotSendQueuedFinished()));
   	  connect(handler, SIGNAL(error(const QString &)), SLOT(slotSendQueuedError(const QString &)));
-	    connect(handler, SIGNAL(status(const QString &)), status, SLOT(setText(const QString &)));
+	    connect(handler, SIGNAL(status(const QString &)), status, SLOT(setStatusText(const QString &)));
 
    	}
  	if (effSendCount < _toSend)
@@ -305,7 +305,7 @@ void Composer::slotQueueMail()
 
 void Composer::slotSendError(const QString &error)
 {
-	status->setText(tr("<font color=#ff0000>Error occoured during sending.</font>"));
+	status->setStatusText(tr("<font color=#ff0000>Error occoured during sending.</font>"));
 	QMessageBox::warning(this, tr("Error"), tr("<p>%1</p").arg(error), tr("Ok"));
 }
 
@@ -313,7 +313,7 @@ void Composer::slotSendQueuedError(const QString &error)
 {
 	_sendError++;
 	qDebug("error send mail %i",_sendCount);
-	status->setText(tr("<font color=#ff0000>Error occoured during sending.</font>"));
+	status->setStatusText(tr("<font color=#ff0000>Error occoured during sending.</font>"));
 	QMessageBox::warning(this, tr("Error"), tr("<p>%1</p").arg(error), tr("Ok"));
 }
 
@@ -321,8 +321,8 @@ void Composer::slotSendFinished()
 {
 	QMessageBox::information(this, tr("Success"), tr("<p>The mail was sent successfully.</p>"), tr("Ok"));
 
-	status->setText(QString(0));
-	abort->setEnabled(false);
+	status->setStatusText(QString(0));
+	status->setStopEnabled(false);
 }
 
 void Composer::slotSendQueuedFinished()

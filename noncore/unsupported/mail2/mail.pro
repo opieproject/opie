@@ -8,6 +8,7 @@ HEADERS		= 	accounteditor.h \
 		  	configdiag.h \
 		  	folderwidget.h \
 		  	listviewplus.h \
+			mailstatusbar.h \
 		  	mailtable.h \
 		  	mainwindow.h \
 		  	mainwindowbase.h \
@@ -23,6 +24,7 @@ SOURCES		= 	accounteditor.cpp \
 		  	configdiag.cpp \
 		  	folderwidget.cpp \
 		  	listviewplus.cpp \
+			mailstatusbar.cpp \
 		  	mailtable.cpp \
 		  	main.cpp \
 		  	mainwindow.cpp \

@@ -11,6 +11,7 @@
 #include <qpe/qpemenubar.h>
 #include <qpe/resource.h>
 
+#include "mailstatusbar.h"
 #include "listviewplus.h"
 #include "composerbase.h"
 
@@ -21,9 +22,9 @@ ComposerBase::ComposerBase(QWidget *parent, const char *name, WFlags fl)
 	setToolBarsMovable(false);
 
 	toolbar = new QPEToolBar(this);
-  menubar = new QPEMenuBar( toolbar );
-  mailmenu = new QPopupMenu( menubar );
-  menubar->insertItem( tr( "Mail" ), mailmenu );
+	menubar = new QPEMenuBar( toolbar );
+	mailmenu = new QPopupMenu( menubar );
+	menubar->insertItem( tr( "Mail" ), mailmenu );
 	addToolBar(toolbar);
 	toolbar->setHorizontalStretchable(true);
 
@@ -47,10 +48,6 @@ ComposerBase::ComposerBase(QWidget *parent, const char *name, WFlags fl)
 	addressbook = new QAction(tr("Addressbook"), QIconSet(Resource::loadPixmap("mail/addbook")), 0, 0, this);
 	addressbook->addTo(toolbar);
 	addressbook->addTo(mailmenu);
-
-	abort = new QAction(tr("Abort sending"), QIconSet(Resource::loadPixmap("mail/abort")), 0, 0, this);
-	abort->addTo(toolbar);
-	abort->addTo(mailmenu);
 
 	QWidget *main = new QWidget(this);
 	setCentralWidget(main);
@@ -123,8 +120,8 @@ ComposerBase::ComposerBase(QWidget *parent, const char *name, WFlags fl)
 	message->setMinimumHeight(30);
 
 	attachWindow = new QMainWindow(view, 0, 0);
-	attachWindow->setMinimumHeight(100);
-	attachWindow->setMaximumHeight(100);
+	attachWindow->setMinimumHeight(80);
+	attachWindow->setMaximumHeight(80);
 	attachWindow->setToolBarsMovable(false);
 	attachWindow->hide();
 
@@ -156,10 +153,7 @@ ComposerBase::ComposerBase(QWidget *parent, const char *name, WFlags fl)
 	attachPopup->insertItem(tr("Remove"), POPUP_ATTACH_REMOVE);
 	attachView->setPopup(attachPopup);
 
-	status = new QLabel(view);
-	QFont tmpFont = status->font();
-	tmpFont.setPixelSize(8);
-	status->setFont(tmpFont);
+	status = new MailStatusBar(view);
 }
 
 void ComposerBase::slotAttachfileChanged(bool toggled)

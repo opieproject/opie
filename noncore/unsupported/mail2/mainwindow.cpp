@@ -1,9 +1,7 @@
-#include <qprogressbar.h>
 #include <qmessagebox.h>
-#include <qtoolbutton.h>
 #include <qaction.h>
-#include <qlabel.h>
 
+#include "mailstatusbar.h"
 #include "folderwidget.h"
 #include "mainwindow.h"
 #include "configdiag.h"
@@ -16,19 +14,19 @@
 MainWindow::MainWindow(QWidget *parent, const char *name, WFlags fl)
 	: MainWindowBase(parent, name, fl)
 {
-	stopButton->setEnabled(false);
+	status->setStopEnabled(false);
 
-	connect(folderView, SIGNAL(status(const QString &)), statusLabel, SLOT(setText(const QString &)));
+	connect(folderView, SIGNAL(status(const QString &)), status, SLOT(setStatusText(const QString &)));
 	connect(folderView, SIGNAL(folderSelected(Folder)), mailView, SLOT(setFolder(Folder)));
 
 	connect(mailView, SIGNAL(mailClicked(IMAPResponseFETCH, IMAPHandler *)), SLOT(mailClicked(IMAPResponseFETCH, IMAPHandler *)));
-	connect(mailView, SIGNAL(status(const QString &)), statusLabel, SLOT(setText(const QString &)));
-	connect(mailView, SIGNAL(totalSteps(int)), statusProgress, SLOT(setTotalSteps(int)));
-	connect(mailView, SIGNAL(progress(int)), statusProgress, SLOT(setProgress(int)));
-	connect(mailView, SIGNAL(resetProgress()), statusProgress, SLOT(reset()));
-	connect(mailView, SIGNAL(stopEnabled(bool)), stopButton, SLOT(setEnabled(bool)));
+	connect(mailView, SIGNAL(status(const QString &)), status, SLOT(setStatusText(const QString &)));
+	connect(mailView, SIGNAL(totalSteps(int)), status, SLOT(setProgressTotalSteps(int)));
+	connect(mailView, SIGNAL(progress(int)), status, SLOT(setProgress(int)));
+	connect(mailView, SIGNAL(resetProgress()), status, SLOT(resetProgress()));
+	connect(mailView, SIGNAL(stopEnabled(bool)), status, SLOT(setStopEnabled(bool)));
 
-	connect(stopButton, SIGNAL(clicked()), mailView, SLOT(stop()));
+	connect(status, SIGNAL(stop()), mailView, SLOT(stop()));
 
 	connect(compose, SIGNAL(activated()), SLOT(slotCompose()));
 	connect(sendQueue, SIGNAL(activated()), SLOT(slotSendQueued()));

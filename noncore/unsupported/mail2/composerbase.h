@@ -4,6 +4,7 @@
 #include <qmainwindow.h>
 
 class QMultiLineEdit;
+class MailStatusBar;
 class ListViewPlus;
 class QPopupMenu;
 class QPEToolBar;
@@ -37,16 +38,17 @@ protected:
 	static const int POPUP_ATTACH_REMOVE = 2;
 
 	QMultiLineEdit *message;
+	MailStatusBar *status;
 	ListViewPlus *attachView;
 	QMainWindow *attachWindow;
 	QPopupMenu *attachPopup;
 	QPEToolBar *toolbar, *attachToolbar;
  	QPEMenuBar *menubar;
-  QPopupMenu *mailmenu;
+	QPopupMenu *mailmenu;
 	QComboBox *fromBox, *from, *receiversBox, *subjectBox, *priority;
 	QLineEdit *replyto, *to, *cc, *bcc, *subject;
 	QAction *sendmail, *queuemail, *attachfile, *addressbook, *abort, *addattach, *delattach;
-	QLabel *fromLabel, *status;
+	QLabel *fromLabel;
 
 protected slots:
 	void slotAttachfileChanged(bool toggled);

@@ -4,15 +4,13 @@
 #include <qmainwindow.h>
 
 class ServerConnection;
-class QProgressBar;
+class MailStatusBar;
 class FolderWidget;
-class QToolButton;
 class QPEToolBar;
 class QPEMenuBar;
 class QPopupMenu;
 class MailTable;
 class QAction;
-class QLabel;
 
 class MainWindowBase : public QMainWindow
 {
@@ -26,15 +24,13 @@ protected slots:
 
 protected:
 	ServerConnection *serverConnection;
-	QProgressBar *statusProgress;
+	MailStatusBar *status;
 	FolderWidget *folderView;
-	QToolButton *stopButton;
 	QPEToolBar *toolbar;
  	QPEMenuBar *menubar;
 	QPopupMenu *mailmenu, *servermenu;
 	MailTable *mailView;
 	QAction *compose, *sendQueue, *folders, *findmails, *configure;
-	QLabel *statusLabel;
 
 };
 
