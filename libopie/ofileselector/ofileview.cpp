@@ -1,7 +1,8 @@
+#include <qlineedit.h>
+
 #include <qpe/applnk.h>
 
 #include "ofileselector.h"
-
 #include "ofileview.h"
 
 
@@ -28,4 +29,8 @@ void OFileView::changedDir( const QDir& d ) {
 }
 OFileSelector* OFileView::selector() const {
     return m_sel;
+}
+void OFileView::updateLine( const QString& str ) {
+    if (m_sel->m_shLne )
+        m_sel->m_edit->setText( str );
 }

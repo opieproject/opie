@@ -1,6 +1,9 @@
 
+#include <qheader.h>
+
 #include <qpe/mimetype.h>
 #include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
 
 #include "ofileselector.h"
 #include "ofileselectoritem.h"
@@ -10,7 +13,29 @@
 OFileListView::OFileListView( QWidget* parent, OFileSelector* sel)
     : QListView( parent ), OFileView( sel )
 {
+    QPEApplication::setStylusOperation( viewport(),
+					QPEApplication::RightOnHold);
+    addColumn(" " );
+    addColumn(tr("Name"), 135 );
+    addColumn(tr("Size"), -1 );
+    addColumn(tr("Date"), 60 );
+    addColumn(tr("Mime Type"), -1 );
+    QHeader *head = header();
+    head->hide();
+    setSorting( 1 );
+    setAllColumnsShowFocus( TRUE );
 
+    connect(this, SIGNAL(selectionChanged() ),
+	    this, SLOT(slotSelectionChanged() ) );
+
+    connect(this, SIGNAL(currentChanged(QListViewItem *) ),
+	    this, SLOT(slotCurrentChanged(QListViewItem * ) ) );
+
+    connect(this, SIGNAL(mouseButtonClicked(int, QListViewItem*, const QPoint &, int) ),
+	    this, SLOT(slotClicked( int, QListViewItem *, const QPoint &, int) ) );
+
+    connect(this, SIGNAL(mouseButtonPressed(int, QListViewItem *, const QPoint &, int )),
+	    this, SLOT(slotRightButton(int, QListViewItem *, const QPoint &, int  ) ) );
 }
 OFileListView::~OFileListView() {
 
@@ -122,4 +147,62 @@ QStringList OFileListView::selectedPaths()const {
 }
 int OFileListView::fileCount() {
     return childCount();
+}
+void OFileListView::sort() {
+    QListView::sort();
+}
+void OFileListView::slotSelectionChanged() {
+
+}
+void OFileListView::slotCurrentChanged( QListViewItem* item) {
+    if (!item )
+        return;
+
+    OFileSelectorItem* sel = (OFileSelectorItem*) item;
+
+    qWarning("current changed");
+    if(!sel->isDir() ){
+        updateLine( sel->text(1) );
+
+        if (selector()->mode() == OFileSelector::Fileselector ) {
+            QStringList str = QStringList::split("->", sel->text(1) );
+            QString path =sel->directory() + "/" + str[0].stripWhiteSpace();
+            DocLnk lnk( path );
+            fileSelected(lnk );
+            fileSelected( path );
+        }
+    }
+}
+void OFileListView::slotClicked( int button, QListViewItem* item,
+                                 const QPoint&, int ) {
+  if ( !item )
+    return;
+
+  if( button != Qt::LeftButton )
+    return;
+
+  OFileSelectorItem *sel = (OFileSelectorItem*)item;
+
+  if(!sel->isLocked() ){
+      QStringList str = QStringList::split("->", sel->text(1) );
+      if( sel->isDir() ){
+          changedDir( sel->directory() + "/" + str[0].stripWhiteSpace() );
+      }else{
+          updateLine(  str[0].stripWhiteSpace() );
+          QString path = sel->directory();
+          path += "/";
+          path += str[0].stripWhiteSpace();
+
+          DocLnk lnk( path );
+          fileSelected( path );
+          fileSelected( lnk );
+      }
+  }
+}
+void OFileListView::slotRightButton( int button, QListViewItem* item,
+                                     const QPoint&, int ) {
+    if (!item || (button != Qt::RightButton ))
+        return;
+
+    /* raise contextmenu */
 }

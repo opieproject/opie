@@ -32,6 +32,7 @@ public:
                      const QString& file, bool isSymlink = FALSE );
     void cd( const QString& path );
     QWidget* widget();
+    void sort();
 
     QString selectedName()const ;
     QStringList selectedNames()const;
@@ -39,7 +40,11 @@ public:
     QString selectedPath()const;
     QStringList selectedPaths()const;
     int fileCount();
-
+private slots:
+    void slotSelectionChanged();
+    void slotCurrentChanged(QListViewItem* );
+    void slotClicked( int, QListViewItem*, const QPoint&, int );
+    void slotRightButton(int, QListViewItem*, const QPoint&, int );
 };
 
 #endif

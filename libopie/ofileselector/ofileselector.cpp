@@ -31,22 +31,23 @@
 
 #include "ofileview.h"
 #include "ofileselector.h"
-
+#include "olister.h"
 
 QMap<QString,QPixmap> *OFileSelector::m_pixmaps = 0;
 
 namespace {
-  int indexByString( const QComboBox *box, const QString &str ){
-    int index= 0;
-    for(int i= 0; i < box->count(); i++ ){
-      if( str == box->text(i ) ){
-	index= i;
-	break;
-      }
+    /* let's find the index for a specified string */
+    int indexByString( const QComboBox *box, const QString &str ){
+        int index= 0;
+        for(int i= 0; i < box->count(); i++ ){
+            /* found */
+            if( str == box->text(i ) ){
+                index= i;
+                break;
+            }
+        }
+        return index;
     }
-    return index;
-  }
-
 }
 
 OFileSelector::OFileSelector( QWidget *wid, int mode, int selector,
@@ -58,12 +59,13 @@ OFileSelector::OFileSelector( QWidget *wid, int mode, int selector,
   m_mimetypes = mimeTypes;
   if (mode == Save )
       m_name = fileName;
+
   initVars();
+
   m_mode = mode;
   m_selector = selector;
   m_currentDir =  dirName;
   init();
-  //QTimer::singleShot(6*1000, this, SLOT( slotTest() ) );
 }
 
 OFileSelector::OFileSelector(const QString &mimeFilter, QWidget *parent,
@@ -71,6 +73,7 @@ OFileSelector::OFileSelector(const QString &mimeFilter, QWidget *parent,
 			     bool closeVisible )
   : QWidget( parent, name )
 {
+    /* update the mimefilter */
   if (!mimeFilter.isEmpty() ) {
       QStringList list = QStringList::split(";", mimeFilter );
       m_mimetypes.insert(mimeFilter, list );
@@ -154,6 +157,7 @@ void OFileSelector::setToolbarVisible( bool show )
 {
   m_shTool = show;
   initializeListView(); // FIXME see above waste of memory
+
   if(!m_shTool ){
     m_location->hide();
     m_up->hide();
@@ -632,26 +636,6 @@ void OFileSelector::initVars()
   m_new = 0;
   m_close = 0;
 }
-void OFileSelector::addFile(const QString &, QFileInfo *info, bool )
-{
-  if(!m_files)
-    return;
-  //  if( !compliesMime(info->absFilePath(), mime ) )
-  //  return;
-  MimeType type( info->absFilePath() );
-  if (!compliesMime( type.id() ) )
-      return;
-
-}
-void OFileSelector::addDir(const QString &, QFileInfo *, bool  )
-{
-  if(!m_dir)
-    return;
-}
-void OFileSelector::delItems()
-{
-
-}
 void OFileSelector::initializeName()
 {
   /**  Name Layout Line
@@ -729,6 +713,7 @@ void OFileSelector::initializeChooser()
     m_viewCheck->insertItem( tr("Documents") );
     m_viewCheck->insertItem( tr("Files") );
     m_viewCheck->insertItem( tr("All Files") );
+    /* update to custom views */
     updateMimeCheck();
 
     connect( m_viewCheck, SIGNAL( activated(const QString & ) ),
@@ -814,32 +799,8 @@ void OFileSelector::initializeListView()
     } // off toolbar
     // the Main ListView
     // make a QWidgetStack first so Views can share the Toolbar
-    m_View = new QListView( m_pseudo, "Extended view");
-    QPEApplication::setStylusOperation( m_View->viewport(),
-					QPEApplication::RightOnHold);
-    m_View->addColumn(" " );
-    m_View->addColumn(tr("Name"), 135 );
-    m_View->addColumn(tr("Size"), -1 );
-    m_View->addColumn(tr("Date"), 60 );
-    m_View->addColumn(tr("Mime Type"), -1 );
-    QHeader *header = m_View->header();
-    header->hide();
-    m_View->setSorting( 1 );
-    m_View->setAllColumnsShowFocus( TRUE );
 
-    connect(m_View, SIGNAL(selectionChanged() ),
-	    this, SLOT(slotSelectionChanged() ) );
-
-    connect(m_View, SIGNAL(currentChanged(QListViewItem *) ),
-	    this, SLOT(slotCurrentChanged(QListViewItem * ) ) );
-
-    connect(m_View, SIGNAL(mouseButtonClicked(int, QListViewItem*, const QPoint &, int) ),
-	    this, SLOT(slotClicked( int, QListViewItem *, const QPoint &, int) ) );
-
-    connect(m_View, SIGNAL(mouseButtonPressed(int, QListViewItem *, const QPoint &, int )),
-	    this, SLOT(slotRightButton(int, QListViewItem *, const QPoint &, int  ) ) );
-
-    m_pseudoLayout->addWidget( m_View, 288 );
+    //   m_pseudoLayout->addWidget( m_View, 288 );
     m_stack->addWidget( m_pseudo, Extended );
   }
 }
@@ -849,7 +810,6 @@ void OFileSelector::initializePerm()
     m_checkPerm = new QCheckBox(tr("Set Permission"), this, "perm");
     m_checkPerm->setChecked( false );
     m_lay->addWidget( m_checkPerm );
-
   }
 }
 void OFileSelector::initPics()
@@ -857,6 +817,7 @@ void OFileSelector::initPics()
   m_pixmaps = new QMap<QString,QPixmap>;
   QPixmap pm  = Resource::loadPixmap( "folder"  );
   QPixmap lnk = Resource::loadPixmap( "opie/symlink"  );
+
   QPainter painter( &pm );
   painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
   pm.setMask( pm.createHeuristicMask( FALSE ) );
@@ -916,10 +877,6 @@ bool OFileSelector::compliesMime( const QString& mime ) {
         if ( it == m_mimetypes.end() ) qWarning("not there"), list << currentText;
         else qWarning("found"), list = it.data();
     }
-    // dump it now
-    //for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
-    //    qWarning( "%s", (*it).latin1() );
-    //}
 
 
     if ( list.contains(mime) ) return true;
@@ -945,111 +902,8 @@ void OFileSelector::slotFileBridgeSelected( const DocLnk &lnk )
   slotFileSelected( lnk.name() );
   // emit fileSelected( lnk );
 }
-void OFileSelector::slotSelectionChanged()
-{
 
-}
-void OFileSelector::slotCurrentChanged(QListViewItem* /*item*/ )
-{
-    /*
-  if( item == 0 )
-    return;
-  if( m_selector == Extended || m_selector == ExtendedAll ) {
-    OFileSelectorItem *sel = (OFileSelectorItem*) item; // start to use the C++ casts ;)
-    qWarning("current changed");
-    if(!sel->isDir() ){
-      if( m_shLne )
-	m_edit->setText( sel->text(1) );
 
-      if (m_mode == Fileselector ) {
-          QStringList str = QStringList::split("->", sel->text(1) );
-          QString path =sel->directory() + "/" + str[0].stripWhiteSpace();
-          emit fileSelected(path  );
-          DocLnk lnk( path );
-          emit fileSelected(lnk );
-      }
-    }
-    } */
-}
-void OFileSelector::slotClicked( int /*button*/, QListViewItem */*item*/, const QPoint &, int)
-
-{
-    /*
-  if ( item == 0 )
-    return;
-
-  if( button != Qt::LeftButton )
-    return;
-
-  switch( m_selector ){
-  default:
-    break;
-  case Extended:  // fall through
-  case ExtendedAll:{
-    OFileSelectorItem *sel = (OFileSelectorItem*)item;
-    if(!sel->isLocked() ){
-      QStringList str = QStringList::split("->", sel->text(1) );
-      if( sel->isDir() ){
-	cd( sel->directory() + "/" + str[0].stripWhiteSpace() );
-	// if MODE Dir m_shLne set the Text
-      }else{
-	if( m_shLne )
-	  m_edit->setText(  str[0].stripWhiteSpace() );
-        qWarning("selected here in slot clicked");
-	emit fileSelected( sel->directory() + "/" + str[0].stripWhiteSpace() );
-	DocLnk lnk( sel->directory() + "/" + str[0].stripWhiteSpace() );
-        qWarning("file selected");
-	emit fileSelected( lnk );
-      }
-    }
-    break;
-  }
-  } */
-}
-void OFileSelector::slotRightButton(int button, QListViewItem *item, const QPoint &, int )
-{
-  if( item == 0 )
-    return;
-
-  if( button != Qt::RightButton )
-    return;
-  slotContextMenu( item );
-}
-void OFileSelector::slotContextMenu( QListViewItem */*item*/)
-{
-
-}
-void OFileSelector::slotChangedDir()
-{
-    /*
-  OFileSelectorItem *sel = (OFileSelectorItem*)m_View->currentItem();
-  if(sel->isDir() ){
-    QStringList str = QStringList::split("->", sel->text(1) );
-    cd( sel->directory() + "/" + str[0].stripWhiteSpace() );
-  }
-    */
-}
-void OFileSelector::slotOpen()
-{
-    /*
-  OFileSelectorItem *sel = (OFileSelectorItem*)m_View->currentItem();
-  if(!sel->isDir() ){
-    QStringList str = QStringList::split("->", sel->text(1) );
-    slotFileSelected( sel->directory() +"/" +str[0].stripWhiteSpace() );
-    qWarning("slot open");
-    // DocLnk lnk( sel->directory() + "/" + str[0].stripWhiteSpace() );
-    //emit fileSelected( lnk );
-  }
-    */
-}
-void OFileSelector::slotRescan()
-{
-
-}
-void OFileSelector::slotRename()
-{
-  reparse();
-}
 void OFileSelector::slotDelete()
 {
     /*
@@ -1101,14 +955,14 @@ void OFileSelector::reparse()
 {
   if( m_selector == Normal )
     return;
-  if( m_selector == Extended || m_selector == ExtendedAll )
-    m_View->clear();
-  else // custom view
-    ; // currentView()->clear();
+
+  currentView()->clear();
+
   if( m_shChooser)
     qWarning("reparse %s", m_mimeCheck->currentText().latin1() );
 
   QString currentMimeType;
+
   // let's update the mimetype
   if( m_autoMime ){
     m_mimetypes.clear();
@@ -1118,25 +972,8 @@ void OFileSelector::reparse()
       m_mimeCheck->clear();
 
       // let's find possible mimetypes
-      QDir dir( m_currentDir );
-      dir.setFilter( QDir::Files | QDir::Readable );
-      dir.setSorting( QDir::Size );
-      const QFileInfoList *list = dir.entryInfoList();
-      QFileInfoListIterator it( *list );
-      QFileInfo *fi;
-      while( (fi=it.current() ) ) {
-	if( fi->extension() == QString::fromLatin1("desktop") ){
-	  ++it;
-	  continue;
-	}
-	MimeType type( fi->absFilePath() );
-	if( !m_mimetypes.contains( type.id() ) ){
-	  //qWarning("Type %s", type.id().latin1() );
-	  m_mimetypes.insert( type.id(), type.id() );
-	}
+      m_mimetypes = currentLister()->mimeTypes( m_currentDir );
 
-	++it;
-      }
       // add them to the chooser
       updateMimeCheck();
       m_mimeCheck->setCurrentItem( indexByString( m_mimeCheck, currentMimeType ) );
@@ -1145,69 +982,17 @@ void OFileSelector::reparse()
   }else { // no autoMime
       // let the mimetype be set from out side the m_mimeCheck FEATURE
 
-    if( m_shChooser ){
+    if( m_shChooser )
         currentMimeType = m_mimeCheck->currentText();
-//        updateMimeCheck();
-    }
+
   }
   // now we got our mimetypes we can add the files
 
-  QDir dir( m_currentDir );
+  currentLister()->reparse( m_currentDir );
+  /* we're done with adding let's sort */
+  currentView()->sort();
 
-  int sort;
-  if ( m_case )
-    sort = (QDir::IgnoreCase | QDir::Name | QDir::DirsFirst | QDir::Reversed);
-  else
-    sort = (QDir::Name | QDir::DirsFirst | QDir::Reversed);
-  dir.setSorting( sort );
 
-  int filter;
-  if( m_selector == ExtendedAll /*|| m_selector ==CUSTOM_ALL */ ){
-    filter = QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All;
-  }else
-    filter = QDir::Files | QDir::Dirs | QDir::All;
-  dir.setFilter( filter );
-
-  // now go through all files
-  const QFileInfoList *list = dir.entryInfoList();
-  QFileInfoListIterator it( *list );
-  QFileInfo *fi;
-  while( (fi=it.current() ) ){
-    //qWarning("True and only" );
-    if( fi->fileName() == QString::fromLatin1("..") || fi->fileName() == QString::fromLatin1(".") ){
-      //qWarning(".. or ." );
-      ++it;
-      continue;
-    }
-    if( fi->isSymLink() ){
-      QString file = fi->dirPath( true ) + "/" + fi->readLink();
-      for( int i = 0; i<=4; i++) { // 5 tries to prevent dos
-	QFileInfo info( file );
-	if( !info.exists() ){
-	  addSymlink( currentMimeType, fi, TRUE );
-	  break;
-	}else if( info.isDir() ){
-	  addDir( currentMimeType, fi, TRUE );
-	  break;
-	}else if( info.isFile() ){
-	  addFile( currentMimeType, fi, TRUE );
-	  break;
-	}else if( info.isSymLink() ){
-	  file = info.dirPath(true ) + "/" + info.readLink() ;
-	  break;
-	}else if( i == 4){
-	  addSymlink( currentMimeType, fi );
-	}
-      } // off for loop
-    }else if( fi->isDir() ){
-      addDir( currentMimeType, fi );
-    }else if( fi->isFile() ){
-      addFile( currentMimeType, fi );
-    }
-    //qWarning( "%s", fi->fileName().latin1() );
-    ++it;
-  } // of while loop
-  m_View->sort();
   if( m_shTool ){
     m_location->insertItem( m_currentDir );
 
@@ -1252,6 +1037,7 @@ void OFileSelector::internContextMenu() {
 }
 void OFileSelector::internChangedDir( const QString& s) {
     emit dirSelected( s );
+    cd(s );
 }
 void OFileSelector::internChangedDir( const QDir& s) {
     emit dirSelected( s );
@@ -1259,4 +1045,7 @@ void OFileSelector::internChangedDir( const QDir& s) {
 QPixmap OFileSelector::pixmap( const QString& s ) {
 
     return (*m_pixmaps)[s];
+}
+OLister* OFileSelector::currentLister()const {
+    return 0l;
 }

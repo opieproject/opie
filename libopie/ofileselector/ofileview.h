@@ -81,6 +81,7 @@ public:
     virtual QString selectedPath()const = 0;
     virtual QStringList selectedPaths()const = 0;
     virtual int fileCount() = 0;
+    virtual void sort() =0;
 
 /*signals:*/
 protected:
@@ -90,6 +91,7 @@ protected:
   void contextMenu();
   void changedDir(const QString &);
   void changedDir(const QDir & );
+  void updateLine( const QString& );
   OFileSelector* selector()const;
 
 private:

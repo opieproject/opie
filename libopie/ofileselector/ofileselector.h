@@ -68,6 +68,7 @@ class QPopupMenu;
 class QFileInfo;
 class QHBox;
 class OFileView;
+class OLister;
 //
 
 /* the mimetypes one name and a list of mimetypes */
@@ -337,6 +338,7 @@ class OFileSelector : public QWidget {
 
   OFileView* currentView();
   OFileView* currentView()const;
+  OLister* currentLister()const;
   int filter();
   int sorting();
   QPixmap pixmap( const QString& );
@@ -369,17 +371,25 @@ class OFileSelector : public QWidget {
 
     FileSelector* m_select;
     int m_mode, m_selector;
-    QComboBox *m_location, *m_mimeCheck, *m_viewCheck;
-    QPushButton *m_homeButton, *m_docButton, *m_hideButton, *m_ok, *m_cancel;
-    QPushButton  *m_reread, *m_up, *m_new, *m_close;
+    QComboBox *m_location,
+      *m_mimeCheck,
+      *m_viewCheck;
+
+    QPushButton *m_homeButton,
+      *m_docButton,
+      *m_hideButton,
+      *m_ok, *m_cancel;
+    QPushButton  *m_reread,
+      *m_up,
+      *m_new,
+      *m_close;
     QListView *m_View;
     QCheckBox *m_checkPerm;
     QWidget *m_pseudo;
     QVBoxLayout *m_pseudoLayout;
 
-  QString m_currentDir;
-  QString m_name;
-//  QStringList m_mimetypes;
+    QString m_currentDir;
+    QString m_name;
   QMap<QString, QStringList> m_mimetypes;
 
 
@@ -388,8 +398,8 @@ class OFileSelector : public QWidget {
   QGridLayout *m_Oselector;
 
   QHBox *m_boxToolbar;
-  QHBox *m_boxOk; // (no layout anymore) wait
-  QHBox *m_boxName; // (no Layout anymore) wait
+  QHBox *m_boxOk;
+  QHBox *m_boxName;
   QHBox *m_boxView;
 
   QPopupMenu *m_custom;
@@ -412,9 +422,7 @@ class OFileSelector : public QWidget {
   bool m_showPopup   : 1;
 
   void initVars();
-  virtual void addFile(const QString &mime, QFileInfo *info, bool symlink = FALSE );
-  virtual void addDir( const QString &mime, QFileInfo *info , bool symlink = FALSE );
-  virtual void addSymlink(const QString &, QFileInfo *, bool = FALSE ){};
+
   void delItems();
   void initializeName();
   void initializeYes();
@@ -441,17 +449,8 @@ class OFileSelector : public QWidget {
 private slots:
    void slotFileSelected(const QString & ); // not really meant to be a slot
    void slotFileBridgeSelected( const DocLnk & );
-   virtual void slotSelectionChanged();
-   virtual void slotCurrentChanged(QListViewItem* );
-   virtual void slotClicked( int, QListViewItem *item, const QPoint &, int);
-   virtual void slotRightButton(int, QListViewItem *, const QPoint &, int );
-   virtual void slotContextMenu( QListViewItem *item);
    // listview above
    // popup below
-   virtual void slotChangedDir();
-   virtual void slotOpen();
-   virtual void slotRescan();
-   virtual void slotRename();
    virtual void slotDelete();
    virtual void cdUP();
    virtual void slotHome();
