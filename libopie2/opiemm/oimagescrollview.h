@@ -11,10 +11,19 @@
 
 class QPainter;
 
-namespace Opie { namespace MM { 
+namespace Opie { namespace MM {
 
-    class OImageZoomer; 
-
+    class OImageZoomer;
+/**
+ * \brief Class displaying an image with scrollbars
+ *
+ * This class displays various image formats supported by QT an
+ * gives a small interface for basics display modifications.
+ *
+ * @see QScrollView
+ *
+ * @since 1.2
+ */
 class OImageScrollView:public QScrollView
 {
     Q_OBJECT
@@ -26,29 +35,105 @@ public:
         Rotate270
     };
 
+    /**
+     * Standard constructor
+     * @param parent the parent widget
+     * @param name the name of the widget
+     * @param fl widget flags. The flag Qt::WRepaintNoErase will be always set.
+     */
     OImageScrollView( QWidget* parent, const char* name = 0, WFlags fl = 0 );
-    OImageScrollView (const QImage&, QWidget * parent=0, const char * name=0, WFlags f=0,bool always_scale=false,bool rfit=false );
-    OImageScrollView (const QString&, QWidget * parent=0, const char * name=0, WFlags f=0,bool always_scale=false,bool rfit=false );
+    /**
+     * constructor
+     * @param aImage QImage object to display
+     * @param parent the parent widget
+     * @param name the name of the widget
+     * @param fl widget flags. The flag Qt::WRepaintNoErase will be always set.
+     * @param always_scale if the image should be scaled into the display
+     * @param rfit the image will be rotated to fit
+     */
+    OImageScrollView (const QImage&aImage, QWidget * parent=0, const char * name=0, WFlags f=0,bool always_scale=false,bool rfit=false );
+    /**
+     * constructor
+     * @param aFile image file to display
+     * @param parent the parent widget
+     * @param name the name of the widget
+     * @param fl widget flags. The flag Qt::WRepaintNoErase will be always set.
+     * @param always_scale if the image should be scaled into the display
+     * @param rfit the image will be rotated to fit
+     */
+    OImageScrollView (const QString&aFile, QWidget * parent=0, const char * name=0, WFlags f=0,bool always_scale=false,bool rfit=false );
     virtual ~OImageScrollView();
 
-
+    /**
+     * sets the WDestructiveClose flag to the view
+     */
     virtual void setDestructiveClose();
 
-    virtual void setAutoRotate(bool);
-    virtual void setAutoScale(bool);
-    virtual void setShowZoomer(bool);
+    /**
+     * set if the image should be rotate to best fit
+     * and repaint it if set to a new value.
+     *
+     * Be carefull - autorating real large images cost time!
+     * @param how if true then autorotate otherwise not
+     */
+    virtual void setAutoRotate(bool how);
+    /**
+     * set if the image should be scaled to the size of the viewport if larger(!)
+     *
+     * if autoscaling is set when loading a jpeg image, it will use a feature of
+     * jpeg lib to load the image scaled to display size. If switch of later the
+     * image will reloaded.
+     *
+     * @param how true - display image scaled down otherwise not
+     */
+    virtual void setAutoScale(bool how);
+    /**
+     * set if there should be displayed a small zoomer widget at the right bottom of
+     * the view when the image is larger than the viewport.
+     *
+     * @param how true - display zoomer
+     */
+    virtual void setShowZoomer(bool how);
 
+    /**
+     * return the current value of the autorotate flag.
+     */
     virtual bool AutoRotate()const;
+    /**
+     * return the current value of the autoscale flag.
+     */
     virtual bool AutoScale()const;
+    /**
+     * return the current value of the show zoomer flag.
+     */
     virtual bool ShowZoomer()const;
 
 public slots:
-    virtual void setImage(const QImage&);
+    /**
+     * Displays a new image, calculations will made immediately.
+     *
+     * @param aImage the image to display
+     */
+    virtual void setImage(const QImage&aImage);
+    /**
+     * Displays a new image, calculations will made immediately.
+     *
+     * @param path the image to display
+     */
     virtual void setImage( const QString& path );
 
 
 signals:
+    /**
+     * emitted when the display image size has changed.
+     */
     void imageSizeChanged( const QSize& );
+    /**
+     * emitted when the size of the viewport has changed, eg. in resizeEvent of
+     * the view.
+     *
+     * @see QWidget::resizeEvent
+     */
     void viewportSizeChanged( const QSize& );
 
 protected:
