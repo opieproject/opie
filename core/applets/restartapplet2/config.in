@@ -1,0 +1,4 @@
+  config RESTARTAPPLET2
+    boolean "opie-restartapplet (Restart Opie via taskbar)"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) 
