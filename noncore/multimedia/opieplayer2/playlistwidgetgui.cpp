@@ -106,11 +106,13 @@ PlayListWidgetGui::PlayListWidgetGui( QWidget* parent, const char* name, WFlags 
     gammaSlider->setRange( -40, 40 );
     gammaSlider->setTickmarks( QSlider::Left );
     gammaSlider->setTickInterval( 20 );
-    //gammaSlider->setFocusPolicy( QWidget::NoFocus );
+    gammaSlider->setFocusPolicy( QWidget::StrongFocus );
     gammaSlider->setValue( 0 );
     gammaSlider->setMinimumHeight( 50 );
 
     gammaLCD = new QLCDNumber( 3,  gammaMenu );
+    gammaLCD-> setFrameShape ( QFrame::NoFrame );
+    gammaLCD-> setSegmentStyle ( QLCDNumber::Flat );
 
     gammaMenu->insertItem( gammaSlider );
     gammaMenu->insertItem( gammaLCD );
