@@ -590,7 +590,7 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 		AppLnk::setSmallIconSize( 10 );
 		AppLnk::setBigIconSize( 28 );
 	}
-#ifndef OPIE_HIGH_RES_SMALL_PHY
+#if defined(OPIE_HIGH_RES_SMALL_PHY)
 	else if ( dw > 600 ) {
                 setFont( QFont( "vera", 16 ) );
                 AppLnk::setSmallIconSize( 24 );
