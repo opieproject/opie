@@ -191,8 +191,6 @@ void MainWindowImp::getAllInterfaces(){
 
     strcpy(ifr.ifr_name, (*it).latin1());
 
-    qWarning("ifr.ifr_name=%s\n", ifr.ifr_name); 
-
     struct ifreq ifcopy;
     ifcopy = ifr;
     result = ioctl(sockfd, SIOCGIFFLAGS, &ifcopy);
@@ -389,19 +387,22 @@ void MainWindowImp::configureClicked(){
     return;
   } 
 
+  QString currentProfileText = currentProfileLabel->text();
+  if(currentProfileText.upper() == "ALL");
+    currentProfileText = "";
+
   Interface *i = interfaceItems[item];
+
   if(i->getModuleOwner()){
     QWidget *moduleConfigure = i->getModuleOwner()->configure(i);
     if(moduleConfigure != NULL){
+      i->getModuleOwner()->setProfile(currentProfileText);
       moduleConfigure->showMaximized();
       return;
     }
   }
   
   InterfaceSetupImpDialog *configure = new InterfaceSetupImpDialog(this, "InterfaceSetupImp", i, true, Qt::WDestructiveClose );
-  QString currentProfileText = currentProfileLabel->text();
-  if(currentProfileText.upper() == "ALL");
-    currentProfileText = "";
   configure->setProfile(currentProfileText);
   configure->showMaximized();
 }
