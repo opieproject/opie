@@ -13,11 +13,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.12.2.1 2003-02-09 15:05:01 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.h,v 1.12.2.2 2003-02-11 12:17:28 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.12.2.1  2003-02-09 15:05:01  eilers
+ * Revision 1.12.2.2  2003-02-11 12:17:28  eilers
+ * Speed optimization. Removed the sequential search loops.
+ *
+ * Revision 1.12.2.1  2003/02/09 15:05:01  eilers
  * Nothing happened.. Just some cleanup before I will start..
  *
  * Revision 1.12  2003/01/03 16:58:03  eilers
@@ -69,6 +72,8 @@
 #include "ocontactaccessbackend.h"
 #include "ocontactaccess.h"
 
+#include <qlist.h>
+#include <qdict.h>
 
 /* the default xml implementation */
 class OContactAccessBackend_XML : public OContactAccessBackend {
@@ -122,8 +127,10 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 	QString m_journalName;
 	QString m_fileName;
 	QString m_appName;
-	QValueList<OContact> m_contactList;
+	QList<OContact> m_contactList;
 	QDateTime m_readtime;
+
+	QDict<OContact> m_uidToContact;
 };
 
 #endif
