@@ -47,11 +47,12 @@
     </message>
     <message>
         <source>ntp error</source>
-        <translation>ntp fejl</translation>
+        <translation>NTP Fejl</translation>
     </message>
     <message>
         <source>Error while getting time form network!</source>
-        <translation>Fejl under forsøget på at hente tiden fra netværket!</translation>
+        <translation>Fejl under forsøget på at
+hente tiden fra netværket!</translation>
     </message>
     <message>
         <source>Error while executing ntpdate</source>
@@ -60,8 +61,8 @@
     <message>
         <source>Error while getting time form
  server</source>
-        <translation>Fejl under forsøget på at
-hente tiden fra serveren</translation>
+        <translation>Fejl under forsøget på at hente
+tiden fra serveren </translation>
     </message>
     <message>
         <source> seconds</source>

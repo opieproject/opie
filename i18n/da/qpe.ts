@@ -19,7 +19,8 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik præcist midt på krydset
+for at kalibrere din skærm.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
@@ -34,11 +35,11 @@ accurately to calibrate your screen.</source>
     </message>
     <message>
         <source>Icon View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikoner</translation>
     </message>
     <message>
         <source>List View</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste</translation>
     </message>
 </context>
 <context>
@@ -112,18 +113,18 @@ Genoplad venligst back-up batteriet.</translation>
     </message>
     <message>
         <source>Document View</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokument visning</translation>
     </message>
 </context>
 <context>
     <name>MediumMountGui</name>
     <message>
         <source>Medium inserted</source>
-        <translation type="unfinished"></translation>
+        <translation>Medie indsat</translation>
     </message>
     <message>
         <source>A &lt;b&gt;storage medium&lt;/b&gt; was inserted. Should it be scanned for media files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Et &lt;b&gt;lager medie&lt;/b&gt; blev indsat. Skal det skannes for medie filer?</translation>
     </message>
     <message>
         <source>Which media files</source>
@@ -151,7 +152,7 @@ Genoplad venligst back-up batteriet.</translation>
     </message>
     <message>
         <source>Link apps</source>
-        <translation type="unfinished"></translation>
+        <translation>Link programmer</translation>
     </message>
     <message>
         <source>Limit search to dir: (not used yet)</source>
