@@ -589,20 +589,24 @@ void MainWindow::beamDone( Ir* ir) {
 }
 void MainWindow::receiveFile( const QString& filename ) {
     OTodoAccessVCal* cal = new OTodoAccessVCal(filename );
+
     OTodoAccess acc( cal );
     acc.load();
     OTodoAccess::List list = acc.allRecords();
 
-    QString message = QWidget::tr("<P>%1 new tasks arrived.<p>Would you like to add them to your Todolist?").arg(list.count() );
+    if (list.count()){
 
-    if ( QMessageBox::information(this, QWidget::tr("New Tasks"),
-                                  message, QMessageBox::Ok,
-                                  QMessageBox::Cancel ) == QMessageBox::Ok ) {
-        OTodoAccess::List::Iterator it;
-        for ( it = list.begin(); it != list.end(); ++it )
-            m_todoMgr.add( (*it) );
+	    QString message = QWidget::tr("<P>%1 new tasks arrived.<p>Would you like to add them to your Todolist?").arg(list.count() );
 
-        currentView()->updateView();
+	    if ( QMessageBox::information(this, QWidget::tr("New Tasks"),
+					  message, QMessageBox::Ok,
+					  QMessageBox::Cancel ) == QMessageBox::Ok ) {
+		    OTodoAccess::List::Iterator it;
+		    for ( it = list.begin(); it != list.end(); ++it )
+			    m_todoMgr.add( (*it) );
+		    
+		    currentView()->updateView();
+	    }
     }
 }
 
