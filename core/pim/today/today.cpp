@@ -263,6 +263,7 @@ void Today::loadPlugins() {
             // on first start the list is off course empty
             if ( m_allApplets.isEmpty() ) {
                 pluginList.append( plugin );
+                m_bblayout->addWidget( plugin.guiBox );
             }
 
             // if plugin is not yet in the list, add it to the layout too
