@@ -117,6 +117,7 @@ private:
 
     QRadioButton *m_rotdir_cw;
     QRadioButton *m_rotdir_ccw;
+    QRadioButton *m_rotdir_flip;
 
 	QWidget *     m_advtab;
     QListView *   m_except;

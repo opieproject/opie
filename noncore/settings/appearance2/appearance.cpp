@@ -409,24 +409,30 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 	m_rotdir_ccw = new QRadioButton( tab, "rotdir_ccw" );
 	QImage ccwImage = cw1. convertToImage( ). mirror( 1, 0 );
 	QPixmap ccw1;
+	m_rotdir_flip = new QRadioButton( tab, "rotdir_flip" );
+	QPixmap flip1 = Resource::loadIconSet("pass"). pixmap( );
 	QButtonGroup* rotbtngrp = new QButtonGroup( tab, "rotbuttongroup" );
 
 	rotbtngrp-> hide ( );
 	rotbtngrp-> setExclusive ( true );
 	rotbtngrp-> insert ( m_rotdir_cw );
 	rotbtngrp-> insert ( m_rotdir_ccw );
+	rotbtngrp-> insert ( m_rotdir_flip );
 
 	ccw1. convertFromImage( ccwImage );
 	m_rotdir_cw-> setPixmap( cw1 );
 	m_rotdir_ccw-> setPixmap( ccw1 ); 
+	m_rotdir_flip-> setPixmap( flip1 ); 
 
 	rotLay-> addWidget ( rotlabel, 0 );
 	rotLay-> addWidget ( m_rotdir_cw, 0 );
 	rotLay-> addWidget ( m_rotdir_ccw, 0 );
+	rotLay-> addWidget ( m_rotdir_flip, 0 );
 
-	bool rotcw = !(cfg. readBoolEntry ( "rotatedir", 0 ));
-	m_rotdir_cw-> setChecked ( rotcw );
-	m_rotdir_ccw-> setChecked ( !rotcw );
+	int rot = cfg. readNumEntry ( "rotatedir", 0 );
+	m_rotdir_cw-> setChecked ( rot == 0 );
+	m_rotdir_ccw-> setChecked ( rot == 1 );
+	m_rotdir_flip-> setChecked ( rot == 2 );
 
 	return tab;
 }
@@ -483,7 +489,6 @@ void Appearance::tabChanged ( QWidget *w )
 void Appearance::accept ( )
 {
 	bool newtabpos = m_tabstyle_top-> isChecked ( );
-	bool is_rotdir_ccw = m_rotdir_ccw-> isChecked ( );
 	int newtabstyle = m_tabstyle_list-> currentItem ( );
 
     Config config ( "qpe" );
@@ -521,7 +526,16 @@ void Appearance::accept ( )
 			item-> save ( config );
     }
 
-	config. writeEntry ( "rotatedir", is_rotdir_ccw );
+	bool is_rotdir_ccw = m_rotdir_ccw-> isChecked ( );
+	int rotval;
+	if (m_rotdir_ccw-> isChecked ( )) {
+		rotval = 1;
+	} else if (m_rotdir_cw-> isChecked ( )) {
+		rotval = 0;
+	} else {
+		rotval = 2;
+	}
+	config. writeEntry ( "rotatedir", rotval );
 
 	m_except-> setFocus ( ); // if the focus was on the embedded line-edit, we have to move it away first, so the contents are updated
 

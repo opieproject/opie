@@ -97,7 +97,7 @@ void RotateApplet::activated ( )
     cfg.setGroup( "Appearance" );
 
     // 0 -> 90° clockwise, 1 -> 90° counterclockwise
-    bool rotDirection = cfg.readBoolEntry( "rotatedir", 0 );
+    int rotDirection = cfg.readNumEntry( "rotatedir", 0 );
 
     // hide inputs methods before rotation
     QCopEnvelope en( "QPE/TaskBar", "hideInputMethod()" );
@@ -107,11 +107,13 @@ void RotateApplet::activated ( )
 	// regardless of rotation direction
         newRotation = defaultRotation;
     } else {
-        if ( rotDirection )  {
+        if ( rotDirection == 1 )  {
             newRotation = ( defaultRotation + 90 ) % 360;
-        } else {
+        } else if ( rotDirection == 0 ) {
             newRotation = ( defaultRotation + 270 ) % 360;
-        }
+        } else {
+            newRotation = ( defaultRotation + 180 ) % 360;
+	}
     }
 
     QCopEnvelope env( "QPE/System", "setCurrentRotation(int)" );
