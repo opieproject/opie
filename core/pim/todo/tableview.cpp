@@ -51,6 +51,27 @@ namespace {
     static const int RowHeight = 20;
 }
 
+TableView::EditorWidget::EditorWidget() : m_wid(0l), m_row(-1), m_col(-1) {
+}
+void TableView::EditorWidget::setCellWidget(QWidget* wid, int row, int col ) {
+    m_wid = wid;
+    m_row = row;
+    m_col = col;
+}
+void TableView::EditorWidget::releaseCellWidget() {
+    m_wid = 0;
+    m_row = m_col = -1;
+}
+QWidget* TableView::EditorWidget::cellWidget()const {
+    return m_wid;
+}
+int TableView::EditorWidget::cellRow()const {
+    return m_row;
+}
+int TableView::EditorWidget::cellCol()const {
+    return m_col;
+}
+
 
 void TableView::initConfig() {
     Config config( "todo" );
@@ -273,6 +294,13 @@ void TableView::clear() {
 }
 void TableView::slotClicked(int row, int col, int,
                             const QPoint& point) {
+    if ( m_editorWidget.cellWidget() ) {
+        //setCellContentFromEditor(m_editorWidget.cellRow(), m_editorWidget.cellCol() );
+        endEdit(m_editorWidget.cellRow(), m_editorWidget.cellCol(),
+                true, true );
+        m_editorWidget.releaseCellWidget();
+    }
+
     if ( !cellGeometry(row, col ).contains(point ) )
         return;
 
@@ -295,7 +323,10 @@ void TableView::slotClicked(int row, int col, int,
         break;
 
         // Priority emit a double click...
-    case 1:
+    case 1:{
+        QWidget* wid = beginEdit( row, col, FALSE );
+        m_editorWidget.setCellWidget( wid, row, col );
+    }
         break;
 
     case 2: {
@@ -461,6 +492,7 @@ QWidget* TableView::createEditor(int row, int col, bool )const {
     }
 }
 void TableView::setCellContentFromEditor(int row, int col ) {
+    qWarning("set cell content from editor");
     if ( col == 1 ) {
         QWidget* wid = cellWidget(row, 1 );
         if ( wid->inherits("QComboBox") ) {
@@ -557,6 +589,13 @@ void TableView::contentsMouseMoveEvent( QMouseEvent* e ) {
     QTable::contentsMouseMoveEvent( e );
 }
 void TableView::keyPressEvent( QKeyEvent* event) {
+    if ( m_editorWidget.cellWidget() ) {
+//        setCellContentFromEditor(m_editorWidget.cellRow(), m_editorWidget.cellCol() );
+        endEdit(m_editorWidget.cellRow(), m_editorWidget.cellCol(),
+                true, true );
+        m_editorWidget.releaseCellWidget();
+        setFocus();
+    }
     int row = currentRow();
     int col = currentColumn();
 
@@ -574,7 +613,8 @@ void TableView::keyPressEvent( QKeyEvent* event) {
         if ( col == 0 ) {
             TodoView::complete(sorted()[row]);
         }else if ( col == 1 ) {
-
+            QWidget* wid = beginEdit(row, col, FALSE );
+            m_editorWidget.setCellWidget( wid, row, col );
         }else if ( col == 2 ) {
             showTodo( sorted().uidAt( currentRow() ) );
         }else if ( col == 3 ) {
