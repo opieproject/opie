@@ -1,6 +1,7 @@
 /*
  * VCard Backend for the OPIE-Contact Database.
  *
+ * Copyright (C) 2000 Trolltech AS.  All rights reserved.
  * Copyright (c) 2002 by Stefan Eilers (Eilers.Stefan@epost.de)
  *
  * =====================================================================
@@ -12,11 +13,14 @@
  * ToDo:
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.1 2002-11-09 14:34:52 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.2 2002-11-10 15:41:53 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_vcard.cpp,v $
- * Revision 1.1  2002-11-09 14:34:52  eilers
+ * Revision 1.2  2002-11-10 15:41:53  eilers
+ * Bugfixes..
+ *
+ * Revision 1.1  2002/11/09 14:34:52  eilers
  * Added VCard Backend.
  *
  */
@@ -31,7 +35,9 @@
 OContactAccessBackend_VCard::OContactAccessBackend_VCard ( QString , QString filename = 0l ):
 	m_dirty( false ),
 	m_file( filename )
-{}
+{
+	load();
+}
 
 
 bool OContactAccessBackend_VCard::load ()
@@ -86,11 +92,9 @@ bool OContactAccessBackend_VCard::save()
 	VObject *vo;
 	for(QMap<int, OContact>::ConstIterator it=m_map.begin(); it !=m_map.end(); ++it ){
 		vo = createVObject( *it );
-		addVObjectProp( obj, vo );
+		writeVObject( file.directHandle() , vo );
+		cleanVObject( vo );
 	}
-	writeVObject( file.directHandle() , obj );
-	cleanVObject( obj );
-	
 	cleanStrTbl();
 
 	m_dirty = false;
@@ -166,6 +170,10 @@ bool OContactAccessBackend_VCard::hasQuerySettings (uint ) const
 	return false; // No search possible, therefore all settings invalid ;)
 }
 
+bool OContactAccessBackend_VCard::wasChangedExternally()
+{
+	return false; // Don't expect concurrent access
+}
 
 // *** Private stuff ***
 

@@ -1,6 +1,7 @@
 /*
  * VCard Backend for the OPIE-Contact Database.
  *
+ * Copyright (C) 2000 Trolltech AS.  All rights reserved.
  * Copyright (c) 2002 by Stefan Eilers (Eilers.Stefan@epost.de)
  *
  * =====================================================================
@@ -12,11 +13,14 @@
  * ToDo:
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.h,v 1.1 2002-11-09 14:34:52 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_vcard.h,v 1.2 2002-11-10 15:41:53 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_vcard.h,v $
- * Revision 1.1  2002-11-09 14:34:52  eilers
+ * Revision 1.2  2002-11-10 15:41:53  eilers
+ * Bugfixes..
+ *
+ * Revision 1.1  2002/11/09 14:34:52  eilers
  * Added VCard Backend.
  *
  */
@@ -49,6 +53,7 @@ class OContactAccessBackend_VCard : public OContactAccessBackend {
 
 	const uint querySettings();
 	bool hasQuerySettings (uint querySettings) const;
+	bool wasChangedExternally();
 	
 private:
 	OContact parseVObject( VObject* obj );
