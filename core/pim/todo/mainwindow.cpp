@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -34,6 +34,8 @@
 #include <qpe/resource.h>
 #include <qpe/task.h>
 #include <qpe/qpetoolbar.h>
+#include <qpe/categoryselect.h>
+#include <qpe/categories.h>
 
 #include <qaction.h>
 #include <qarray.h>
@@ -42,6 +44,8 @@
 #include <qfile.h>
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
+#include <qvbox.h>
+#include <qcombobox.h>
 
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -55,11 +59,6 @@ static QString todolistXMLFilename()
     return Global::applicationFileName("todolist","todolist.xml");
 }
 
-static QString categoriesXMLFilename()
-{
-    return Global::applicationFileName("todolist","categories.xml");
-}
-
 TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
     QMainWindow( parent, name, f ), syncing(FALSE)
 {
@@ -67,8 +66,11 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
 //     t.start();
     
     setCaption( tr("Todo") );
+
+    QVBox *vb = new QVBox( this );
+    
     QString str;
-    table = new TodoTable( this );
+    table = new TodoTable( vb );
     table->setColumnWidth( 2, 10 );
     table->setPaintingEnabled( FALSE );
     table->setUpdatesEnabled( FALSE );
@@ -86,16 +88,7 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
 	    table->load( str );
     }
 
-    // repeat for categories...
-    str = categoriesXMLFilename();
-    if ( str.isNull() )
-	QMessageBox::critical( this,
-			       tr( "Out of Space" ),
-			       tr( "Unable to create startup files\n"
-				   "Free up some space\n"
-				   "before you enter any data") );
-
-    setCentralWidget( table );
+    setCentralWidget( vb );
     setToolBarsMovable( FALSE );
 
 //     qDebug("after load: t=%d", t.elapsed() );
@@ -104,15 +97,12 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
     config.setGroup( "View" );
     bool complete = config.readBoolEntry( "ShowComplete", true );
     table->setShowCompleted( complete );
-    QString category = config.readEntry( "Category", QString::null );
-    table->setShowCategory( category );
 
     QPEToolBar *bar = new QPEToolBar( this );
     bar->setHorizontalStretchable( TRUE );
 
     QPEMenuBar *mb = new QPEMenuBar( bar );
 
-    catMenu = new QPopupMenu( this );
     QPopupMenu *edit = new QPopupMenu( this );
     contextMenu = new QPopupMenu( this );
 
@@ -152,7 +142,7 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
 	a->addTo( bar );
     }
 
-    a = new QAction( tr( "Find" ), Resource::loadIconSet( "mag" ),
+    a = new QAction( tr( "Find" ), Resource::loadIconSet( "find" ),
 		     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ),
 	     this, SLOT( slotFind() ) );
@@ -167,13 +157,25 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
     findAction = a;
 //     qDebug("mainwindow #2: t=%d", t.elapsed() );
 
-    completedAction = new QAction( QString::null, tr("Completed tasks"), 0, this, 0, TRUE );
-
-    catMenu->setCheckable( true );
-    populateCategories();
-
     mb->insertItem( tr( "Task" ), edit );
-    mb->insertItem( tr( "View" ), catMenu );
+
+    // Filter bar
+    QHBox *hb = new QHBox( vb );
+
+    QComboBox *cb = new QComboBox( hb );
+    cb->insertItem( tr("Pending Tasks") );
+    cb->insertItem( tr("All Tasks") );
+    cb->setCurrentItem( table->showCompleted() ? 1 : 0 );
+    connect( cb, SIGNAL(activated(int)), this, SLOT(setShowCompleted(int)) );
+
+    Categories c;
+    c.load(categoryFileName());
+    QArray<int> vl( 0 );
+    catSelect = new CategorySelect( hb );
+    catSelect->setRemoveCategoryEdit( TRUE );
+    catSelect->setCategories( vl, "Todo List", tr("Todo List") );
+    catSelect->setAllCategories( TRUE );
+    connect( catSelect, SIGNAL(signalSelected(int)), this, SLOT(catSelected(int)) );
 
     resize( 200, 300 );
     if ( table->numRows() > 0 )
@@ -189,8 +191,10 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
     table->setPaintingEnabled( TRUE );
     table->viewport()->setUpdatesEnabled( TRUE );
 
-    connect( completedAction, SIGNAL( toggled(bool) ), this, SLOT( showCompleted(bool) ) );
-    connect( catMenu, SIGNAL(activated(int)), this, SLOT(setCategory(int)) );
+    int currCat = config.readNumEntry( "Category", -2 );
+    catSelect->setCurrentCategory( currCat );
+    catSelected( currCat );
+
     connect( table, SIGNAL( currentChanged( int, int ) ),
              this, SLOT( currentEntryChanged( int, int ) ) );
 
@@ -228,9 +232,6 @@ void TodoWindow::slotNew()
 	table->setPaintingEnabled( true );
 	findAction->setEnabled( TRUE );
     }
-    // I'm afraid we must call this every time now, otherwise
-    // spend expensive time comparing all these strings...
-    populateCategories();
 }
 
 TodoWindow::~TodoWindow()
@@ -289,7 +290,6 @@ void TodoWindow::slotEdit()
 	table->replaceCurrentEntry( todo );
 	table->setPaintingEnabled( true );
     }
-    populateCategories();
 
 }
 
@@ -298,12 +298,12 @@ void TodoWindow::slotShowPopup( const QPoint &p )
     contextMenu->popup( p );
 }
 
-void TodoWindow::showCompleted( bool s )
+void TodoWindow::setShowCompleted( int s )
 {
     if ( !table->isUpdatesEnabled() )
 	return;
     table->setPaintingEnabled( false );
-    table->setShowCompleted( s );
+    table->setShowCompleted( s == 1 );
     table->setPaintingEnabled( true );
 }
 
@@ -318,53 +318,12 @@ void TodoWindow::currentEntryChanged( int r, int )
     }
 }
 
-void TodoWindow::setCategory( int c )
+void TodoWindow::catSelected( int c )
 {
-    if ( c <= 0 ) return;
-    if ( !table->isUpdatesEnabled() )
-	return; 
-   table->setPaintingEnabled( false );
-    for ( unsigned int i = 1; i < catMenu->count(); i++ )
-	catMenu->setItemChecked( i, c == (int)i );
-    if ( c == 1 ) {
-	table->setShowCategory( QString::null );
-	setCaption( tr("Todo") + " - " + tr( "All" ) );
-    } else if ( c == (int)catMenu->count() - 1 ) {
-	table->setShowCategory( tr( "Unfiled" ) );
-	setCaption( tr("Todo") + " - " + tr( "Unfiled" ) );
-    } else {
-	QString cat = table->categories()[c - 2];
-	table->setShowCategory( cat );
-	setCaption( tr("Todo") + " - " + cat );
-    }
+    table->setPaintingEnabled( false );
+    table->setShowCategory( c );
     table->setPaintingEnabled( true );
-}
-
-void TodoWindow::populateCategories()
-{
-    catMenu->clear();
-
-    completedAction->addTo( catMenu );
-    completedAction->setOn( table->showCompleted() );
-
-    int id,
-	rememberId;
-    id = 1;
-    catMenu->insertItem( tr( "All" ), id++ );
-//    catMenu->insertSeparator();
-    QStringList categories = table->categories();
-    categories.append( tr( "Unfiled" ) );
-    for ( QStringList::Iterator it = categories.begin();
-	  it != categories.end(); ++it ) {
-	catMenu->insertItem( *it, id );
-	if ( *it == table->showCategory() )
-	    rememberId = id;
-	++id;
-    }
-    if ( table->showCategory().isEmpty() )
-	setCategory( 1 );
-    else
-	setCategory( rememberId );
+    setCaption( tr("Todo") + " - " + table->categoryLabel( c ) );
 }
 
 void TodoWindow::reload()
@@ -417,8 +376,7 @@ void TodoWindow::closeEvent( QCloseEvent *e )
 void TodoWindow::slotFind()
 {
     // put everything back to view all for searching...
-    if ( !catMenu->isItemChecked( 0 ) )
-	setCategory( 0 );
+    catSelected( -2 );
 
     FindDialog dlg( "Todo List",  this );
     QObject::connect( &dlg,
