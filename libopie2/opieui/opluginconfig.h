@@ -21,7 +21,8 @@ namespace Ui {
  * directly through Opie::Core::OPluginManager or to use Queued where you manually need to
  * call save.
  *
- * Internally we operate on Opie::Core::OPluginManager.
+ * Internally we operate on Opie::Core::OPluginManager. You can insert any numbers of loaders
+ * or pluginmanagers.  But you need to call load() after you've inserted new items.
  *
  * @see Opie::Ui::OKeyConfigWidget
  * @see Opie::Core::OPluginLoader
@@ -40,26 +41,51 @@ public:
     OPluginConfig( Opie::Core::OGenericPluginLoader* loader, QWidget* wid, const char* name,
                    WFlags fl );
 
-    ~OPluginConfig();
+    virtual ~OPluginConfig();
 
-    void setChangeMode( enum Mode );
+    void setChangeMode( enum ChangeMode );
     ChangeMode mode()const;
 
     void insert(  const QString&, const Opie::Core::OPluginManager* );
-    void insert(  const QString&, const Opie::Core::OPluginLoader*  );
+    void insert(  const QString&, const Opie::Core::OGenericPluginLoader*  );
 
 signals:
     /**
-     * @param item The new OPluginItem
+     * A PluginItem was changed. This signal is only emitted if you're
+     * in the immediate ChangeMode.
+     * This is emitted on any change ( disable,enable,pos)
+     *
+     * @param item The OPluginItem that was changed. This is how it looks now
+     * @param old_state If  it was enabled before
      */
     void pluginChanged ( const Opie::Core::OPluginItem& item, bool old_state);
+
+    /**
+     * emitted only if you're in Immediate when an Item was enabled
+     *
+     * @param item The Item that was enabled
+     */
     void pluginEnabled ( const Opie::Core::OPluginItem& item);
+
+    /**
+     * emitted only if you're in Immediate when an Item was enabled
+     *
+     * @param item The Item was disabled
+     */
     void pluginDisabled( const Opie::Core::OPluginItem& item);
+
+    /**
+     * Data was saved(). Normally this is emitted when save() is called
+     * @see changed
+     */
+    void changed();
 public:
 
     void load();
     void save();
 private:
+    ChangeMode m_mode;
+    QMap<Opie::Core::OPluginManager*, bool> m_items;
 
 };
 }
