@@ -5,3 +5,4 @@ File = /opt/opie/apps/Pim/.directory
 Icon = Clock
 Name = Pim 
 Type = application/octet-stream
+Name[ko] = 개인 정보 관리
