@@ -175,7 +175,7 @@ int MyPty::run(const char* cmd, QStrList &, const char*, int)
 	ttmode.c_cc[VINTR] = 3;
 	ttmode.c_cc[VERASE] = 8;
 	tcsetattr( STDIN_FILENO, TCSANOW, &ttmode );
-	setenv("TERM","vt100",1);
+	setenv("TERM",m_term,1);
 	setenv("COLORTERM","0",1);
 
 	if (getuid() == 0) {
@@ -236,8 +236,23 @@ int MyPty::openPty()
 /*!
     Create an instance.
 */
-MyPty::MyPty(const Profile&) : m_cpid(0)
+MyPty::MyPty(const Profile& prof) : m_cpid(0)
 {
+
+    int term = prof.readNumEntry("Terminal", Profile::VT100 );
+    switch( term ) {
+    default:
+    case Profile::VT100:
+    case Profile::VT102:
+        m_term = "vt100";
+        break;
+    case Profile::Linux:
+        m_term = "linux";
+        break;
+    case Profile::XTerm:
+        m_term = "xterm";
+        break;
+    }
     m_sn_e = 0l;
     m_sn_r = 0l;
   m_fd = openPty();

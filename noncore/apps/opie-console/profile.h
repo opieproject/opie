@@ -20,7 +20,10 @@ public:
                  Gray,
                  Green,
                  Orange};
-    enum Terminal {VT102 = 0, VT100 };
+    enum Terminal {VT102 = 0, VT100,
+                   Ansi,
+                   Linux,
+                   XTerm };
     enum Font { Micro = 0,  Small, Medium };
     Profile();
     Profile( const QString& name,

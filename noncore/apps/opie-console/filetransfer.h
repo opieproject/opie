@@ -33,12 +33,7 @@ private slots:
     void slotProgress( const QStringList& );
     void slotExec();
 private:
-    /*
-     * FIXME? What does happen if we've
-     * two FileTransfers at a time?
-     * Have a procctl which does listen
-     * for termination and then send a signal
-     */
+    Type m_type;
     pid_t m_pid;
     int m_fd;
     int m_prog;
@@ -46,7 +41,6 @@ private:
     int m_comm[2];
     int m_term[2];
     QString m_file;
-    Type m_type;
     QSocketNotifier *m_not;
     QSocketNotifier* m_proc;
 };

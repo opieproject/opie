@@ -60,6 +60,7 @@ void FileTransfer::sendFile( const QString& file ) {
 
         char* typus;
         switch(m_type ) {
+        default:
         case SZ:
             typus = "";
             break;
@@ -232,7 +233,7 @@ void FileTransfer::slotProgress( const QStringList& list ) {
 }
 void FileTransfer::cancel() {
     if(m_pid > 0) ::kill(m_pid,9 );
-    
+
 }
 void FileTransfer::slotExec() {
     char buf[2];

@@ -39,7 +39,22 @@ void EmulationHandler::load( const Profile& prof) {
     m_teWid->setVTFont( font( prof.readNumEntry("Font")  )  );
     int num = prof.readNumEntry("Color");
     setColor( foreColor(num), backColor(num) );
-     m_teWid->setBackgroundColor(backColor(num) );
+    m_teWid->setBackgroundColor(backColor(num) );
+
+    int term = prof.readNumEntry("Terminal",  0) ;
+    switch(term) {
+    default:
+    case Profile::VT102:
+    case Profile::VT100:
+        m_teEmu->setKeytrans("vt100.keytab");
+        break;
+    case Profile::Linux:
+        m_teEmu->setKeytrans("linux.keytab");
+        break;
+    case Profile::XTerm:
+        m_teEmu->setKeytrans("default.Keytab");
+        break;
+    }
 }
 void EmulationHandler::recv( const QByteArray& ar) {
     m_teEmu->onRcvBlock(ar.data(), ar.count() );

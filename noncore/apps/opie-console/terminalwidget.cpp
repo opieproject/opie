@@ -12,9 +12,10 @@
 
 namespace {
     enum TermIds {
-        id_term_vt100,
+        id_term_vt100 = 0,
         id_term_vt102,
-        id_term_ansi
+        id_term_linux,
+        id_term_xterm
     };
 
     enum ColourIds {
@@ -74,8 +75,11 @@ TerminalWidget::TerminalWidget( const QString& name, QWidget* parent,
     m_lroot->add(m_groupOptions );
 
     // Fill in some options
-    m_terminalBox->insertItem( tr("VT 100"), id_term_vt100 );
-    m_terminalBox->insertItem( tr("VT 102"), id_term_vt102 );
+    qWarning("Options for terminal box");
+    m_terminalBox->insertItem( tr("VT 100"), 0 ); // /*, id_term_vt100*/ );
+    m_terminalBox->insertItem( tr("VT 102"), 1 );  // /* , id_term_vt102 */);
+    m_terminalBox->insertItem( tr("Linux Console"), 2 ); //, id_term_linux );
+    m_terminalBox->insertItem( tr("X-Terminal"), 3 ); //, id_term_xterm );
     //m_terminalBox->insertItem( tr("ANSI"), id_term_ansi );
 
     m_colorCmb->insertItem( tr("black on white"), id_term_black );
@@ -119,6 +123,12 @@ void TerminalWidget::load( const Profile& prof ) {
         break;
     case Profile::VT102:
         m_terminalBox->setCurrentItem(id_term_vt102 );
+        break;
+    case Profile::Linux:
+        m_terminalBox->setCurrentItem(id_term_linux );
+        break;
+    case Profile::XTerm:
+        m_terminalBox->setCurrentItem(id_term_xterm );
         break;
     default:
         break;
@@ -169,6 +179,12 @@ void TerminalWidget::save( Profile& profile ) {
         break;
     case id_term_vt102:
         profile.writeEntry("Terminal", Profile::VT102 );
+        break;
+    case id_term_linux:
+        profile.writeEntry("Terminal", Profile::Linux );
+        break;
+    case id_term_xterm:
+        profile.writeEntry("Terminal", Profile::XTerm );
         break;
     //case id_term_ansi:
     //    profile.writeEntry("Terminal", Profile::VT102 );
