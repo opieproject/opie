@@ -393,7 +393,7 @@ void OWirelessNetworkInterface::init()
 
     for ( int i = 0; i < range.num_frequency; ++i )
     {
-        int freq = (int) ( double( range.freq[i].m ) * pow( 10, range.freq[i].e ) / 1000000.0 );
+        int freq = (int) ( double( range.freq[i].m ) * pow( 10.0, range.freq[i].e ) / 1000000.0 );
         _channels.insert( freq, i+1 );
     }
 }
@@ -436,7 +436,7 @@ int OWirelessNetworkInterface::channel() const
     }
     else
     {
-        return _channels[ static_cast<int>(double( _iwr.u.freq.m ) * pow( 10, _iwr.u.freq.e ) / 1000000) ];
+        return _channels[ static_cast<int>(double( _iwr.u.freq.m ) * pow( 10.0, _iwr.u.freq.e ) / 1000000) ];
     }
 }
 
@@ -465,7 +465,7 @@ double OWirelessNetworkInterface::frequency() const
     }
     else
     {
-        return double( _iwr.u.freq.m ) * pow( 10, _iwr.u.freq.e ) / 1000000000.0;
+        return double( _iwr.u.freq.m ) * pow( 10.0, _iwr.u.freq.e ) / 1000000000.0;
     }
 }
 
