@@ -1,7 +1,7 @@
 #ifndef OPIE_EXAMPLE_NETWORK_MODULE_H
 #define OPIE_EXAMPLE_NETWORK_MODULE_H
 
-#include <module.h>
+#include <interfaces/module.h>
 
 class VirtualModule : Module {
 
