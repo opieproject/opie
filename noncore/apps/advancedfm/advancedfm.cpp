@@ -368,6 +368,9 @@ void AdvancedFm::CFButtonPushed() {
 			 changeTo("/mnt/hda"); //ipaq
 }
 
+void AdvancedFm::QPEButtonPushed() {
+		changeTo(QPEApplication::qpeDir());
+}
 
 void AdvancedFm::doAbout() {
    QMessageBox::message("AdvancedFm",tr("<P>Advanced FileManager is copyright 2002-2003 by L.J.Potter<llornkcor@handhelds.org> and is licensed by the GPL</P>"));
@@ -427,14 +430,6 @@ void AdvancedFm::keyReleaseEvent( QKeyEvent *e) {
 				e->accept();
 }
 
-
-void AdvancedFm::QPEButtonPushed() {
-   QString current = QPEApplication::qpeDir();
-   chdir( current.latin1() );
-   CurrentDir()->cd( current, TRUE);
-   populateView();
-   update();
-}
 
 void AdvancedFm::parsetab(const QString &fileName) {
 
