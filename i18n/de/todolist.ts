@@ -16,26 +16,26 @@
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished">nicht eingeteilt</translation>
+        <translation>Nicht eingeteilt</translation>
     </message>
 </context>
 <context>
     <name>NewTaskDlg</name>
     <message>
         <source>New Task</source>
-        <translation type="unfinished">Neue Aufgabe</translation>
+        <translation>Neue Aufgabe</translation>
     </message>
     <message>
         <source>Blank task</source>
-        <translation type="unfinished"></translation>
+        <translation>Leere Aufgabe</translation>
     </message>
     <message>
         <source>Using template:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorlage:</translation>
     </message>
 </context>
 <context>
@@ -65,11 +65,11 @@
     <name>Opie</name>
     <message>
         <source>Todo List</source>
-        <translation type="unfinished">Aufgabenliste</translation>
+        <translation>Aufgabenliste</translation>
     </message>
     <message>
         <source>Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgabe</translation>
     </message>
 </context>
 <context>

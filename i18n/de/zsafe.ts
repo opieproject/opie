@@ -515,7 +515,7 @@ ZSafe wird sich jetzt beenden.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Ändern</translation>
+        <translation>Ändern</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -837,35 +837,37 @@ für das neue Dokument.</translation>
     </message>
     <message>
         <source>&lt;P&gt;Can&apos;t create directory %1&lt;/P&gt;&lt;P&gt;ZSafe will now exit.&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Konnte Verzeichnis %1 nicht erstellen.&lt;/P&gt;&lt;P&gt;ZSafe wird beendet&lt;/P&gt;</translation>
     </message>
     <message>
         <source>ZSafe: </source>
-        <translation type="unfinished"></translation>
+        <translation>ZSafe:
+</translation>
     </message>
     <message>
         <source>&lt;P&gt;No document defined. You have to create a new document&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Kein Dokument engegeben. Sie müssen erst ein neues Dokument erstellen&lt;/P&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;You must create a new document first. Ok to create?&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Sie müssen erst ein neues Dokument erstellen. Dokument anlegen?&lt;/P&gt;
+</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus Password Manager&lt;br&gt;ZSafe version 2.1.2&lt;br&gt;&lt;/b&gt;by Carsten Schneider&lt;br&gt;zcarsten@gmx.net&lt;br&gt;http://z-soft.z-portal.info/zsafe&lt;br&gt;Translations by Robert Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus Password Manager&lt;br&gt;ZSafe version 2.1.2&lt;br&gt;&lt;/b&gt;von Carsten Schneider&lt;br&gt;zcarsten@gmx.net&lt;br&gt;http://z-soft.z-portal.info/zsafe&lt;br&gt;Übersetzung von Robert Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Copy to Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>In die Zwischenablage kopieren</translation>
     </message>
     <message>
         <source>Show Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info anzeigen</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 </TS>

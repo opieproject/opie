@@ -62,43 +62,43 @@
     </message>
     <message>
         <source>Tap here to filter package list by application category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um Pakete nach Kategorie zu filtern.</translation>
     </message>
     <message>
         <source>Select the application category to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter Kategorie hier auswählen.</translation>
     </message>
     <message>
         <source>Tap here to filter package list by package name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um Pakete nach Name zu filtern.</translation>
     </message>
     <message>
         <source>Enter the package name to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier den Namensfilter eingeben.</translation>
     </message>
     <message>
         <source>Tap here to filter package list by the package status.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um Pakete nach Paket-Status zu filtern.</translation>
     </message>
     <message>
         <source>Select the package status to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Paket-Status Filter hier einstellen.</translation>
     </message>
     <message>
         <source>Tap here to filter package list by source server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um Pakete nach Quell-Server zu filtern.</translation>
     </message>
     <message>
         <source>Select the source server to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Quell-Server hier einstellen.</translation>
     </message>
     <message>
         <source>Tap here to filter package list by destination where the package is installed to on this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um Pakete nach Installationsort zu filtern.</translation>
     </message>
     <message>
         <source>Select the destination location to filter by here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installationsort Filter hier einstellen.</translation>
     </message>
 </context>
 <context>
@@ -136,7 +136,7 @@
     </message>
     <message>
         <source>Packages to </source>
-        <translation type="unfinished">Pakete zum Installieren</translation>
+        <translation>Pakete zum </translation>
     </message>
     <message>
         <source>install</source>
@@ -748,71 +748,77 @@ A blue dot next to the package name indicates that the package is currently inst
 A blue dot with a star indicates that a newer version of the package is available from the server feed.
 
 Tap inside the box at the left to select a package.  Tap and hold to view package details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist eine Auflistung aller Pakete.
+
+Ein blauer Punkt neben dem Paketnamen zeigt, dass das Paket installiert ist.
+
+Ein blauer Punkt mit einem Stern zeigt, dass es eine neuere Version dieses Paketes gibt.
+
+Klicken um ein Paket auszuwählen, Klicken und halten um Mehr Informationen anzuzeigen.</translation>
     </message>
     <message>
         <source>Tap here to update package lists from servers.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um die Paketliste vom Server zu erneuern.</translation>
     </message>
     <message>
         <source>Tap here to upgrade all installed packages if a newer version is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um alle installierten Pakete zu aktualisieren.</translation>
     </message>
     <message>
         <source>Tap here to download the currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um die ausgewählten Pakete herunterzuladen.</translation>
     </message>
     <message>
         <source>Tap here to install, remove or upgrade currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um ausgewählte Pakete zu installieren, löschen, oder aktualisieren.</translation>
     </message>
     <message>
         <source>Install local package</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokales Paket installieren</translation>
     </message>
     <message>
         <source>Tap here to install a package file located on device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um ein lokal vorhandenes Paket zu installieren.</translation>
     </message>
     <message>
         <source>Tap here to configure this application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um Einstellungen zu ändern.</translation>
     </message>
     <message>
         <source>Tap here to show packages available which have not been installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um nicht-installierten Pakete anzuzeigen.</translation>
     </message>
     <message>
         <source>Tap here to show packages currently installed on this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um alle installierten Pakete anzuzeigen.</translation>
     </message>
     <message>
         <source>Tap here to show packages currently installed on this device which have a newer version available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um alle installierten Pakete für die es eine neue Version gibt anzuzeigen.</translation>
     </message>
     <message>
         <source>Tap here to apply current filter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um den aktuellen Filter anzuwenden.</translation>
     </message>
     <message>
         <source>Tap here to change the package filter criteria.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um den Filter zu ändern.</translation>
     </message>
     <message>
         <source>Tap here to search for text in package names.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um nach Text in Paket Namen zu suchen.</translation>
     </message>
     <message>
         <source>Tap here to find the next package name containing the text you are searching for.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um den nächsten Treffer in der Textsuche anzuzeigen.</translation>
     </message>
     <message>
         <source>Tap here to hide the find toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um die Such-Toolbar zu verstecken.</translation>
     </message>
     <message>
         <source>Application Packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Anwendungspakete</translation>
     </message>
 </context>
 <context>
@@ -827,15 +833,15 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
     </message>
     <message>
         <source>Linking packages installed in: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Verlinke Pakete in: %1</translation>
     </message>
     <message>
         <source>Error linkling &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim verlinken von &apos;%1&apos; nach &apos;%2&apos;</translation>
     </message>
     <message>
         <source>Links removed for: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Links entfernt für: %1</translation>
     </message>
 </context>
 <context>
@@ -946,145 +952,145 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
     </message>
     <message>
         <source>This is a list of all servers configured.  Select one here to edit or delete, or add a new one below.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist eine Liste aller konfigurierten Server.</translation>
     </message>
     <message>
         <source>Tap here to create a new entry.  Fill in the fields below and then tap on Update.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um einen neuen Eintrag zu erstellen. Nach beeden Update klicken.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Ändern</translation>
     </message>
     <message>
         <source>Tap here to edit the entry selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um den oben ausgewählten Eintrag zu editieren.</translation>
     </message>
     <message>
         <source>Tap here to delete the entry selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um den oben ausgewählten Eintrag zu löschen.</translation>
     </message>
     <message>
         <source>This is a list of all destinations configured for this device.  Select one here to edit or delete, or add a new one below.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist eine Liste aller konfigurierten &apos;destinations&apos;. Auswählen zum editieren oder löschen.</translation>
     </message>
     <message>
         <source>Enter the URL address of the HTTP proxy server here.</source>
-        <translation type="unfinished"></translation>
+        <translation>URL des HTTP Proxies hier eingeben.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the HTTP proxy server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um den HTTP Proxyserver zu aktivieren / de-aktivieren.</translation>
     </message>
     <message>
         <source>Enter the URL address of the FTP proxy server here.</source>
-        <translation type="unfinished"></translation>
+        <translation>URL des FTP Proxies hier eingeben.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the FTP proxy server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um den FTP Proxyserver zu aktivieren / de-aktivieren.</translation>
     </message>
     <message>
         <source>Enter the username for the proxy servers here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzernamen für den Proxyserver hier eingeben.</translation>
     </message>
     <message>
         <source>Enter the password for the proxy servers here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort für den Proxyserver hier eingeben.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the &apos;-force-depends&apos; option for Ipkg.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um &apos;--force-depends&apos; bei ipkg zu verwenden.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the &apos;-force-reinstall&apos; option for Ipkg.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um &apos;--force-reinstall&apos; bei ipkg zu verwenden.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the &apos;-force-removal-of-dependent-packages&apos; option for Ipkg.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um &apos;--force-removal-of-dependent-packages&apos; bei ipkg zu verwenden.</translation>
     </message>
     <message>
         <source>Tap here to enable or disable the &apos;-force-overwrite&apos; option for Ipkg.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um &apos;--force-overwrite&apos; bei ipkg zu verwenden.</translation>
     </message>
     <message>
         <source>Select information level for Ipkg.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgabelevel von ipkg einstellen.</translation>
     </message>
 </context>
 <context>
     <name>OIpkgDestDlg</name>
     <message>
         <source>Edit Destination</source>
-        <translation type="unfinished"></translation>
+        <translation>Ziel Ändern</translation>
     </message>
     <message>
         <source>Active</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiv</translation>
     </message>
     <message>
         <source>Tap here to indicate whether this entry is active or not.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um den Eintrag zu aktiviern / de-aktvieren.</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Name: </translation>
+        <translation>Name: </translation>
     </message>
     <message>
         <source>Enter the name of this entry here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Name des Eintrags hier eingeben.</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished">Ort:</translation>
+        <translation>Ort:</translation>
     </message>
     <message>
         <source>Enter the absolute directory path of this entry here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Absolten Verzeichnispfad hier eingeben.</translation>
     </message>
     <message>
         <source>Tap here to select the desired location.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um den gewünschten Ort zu wählen.</translation>
     </message>
 </context>
 <context>
     <name>OIpkgServerDlg</name>
     <message>
         <source>Edit Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Server Editieren</translation>
     </message>
     <message>
         <source>Active</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiv</translation>
     </message>
     <message>
         <source>Tap here to indicate whether this entry is active or not.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um den Eintrag zu aktiviern / de-aktvieren.</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Name: </translation>
+        <translation>Name: </translation>
     </message>
     <message>
         <source>Enter the name of this entry here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Name des Eintrags hier eingeben.</translation>
     </message>
     <message>
         <source>Address:</source>
-        <translation type="unfinished">Adresse:</translation>
+        <translation>Adresse:</translation>
     </message>
     <message>
         <source>Enter the URL address of this entry here.</source>
-        <translation type="unfinished"></translation>
+        <translation>URL des Eintrags hier eingeben.</translation>
     </message>
     <message>
         <source>Compressed server feed</source>
-        <translation type="unfinished"></translation>
+        <translation>Komprimierter Feed</translation>
     </message>
     <message>
         <source>Tap here to indicate whether the server support compressed archives or not.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken wenn der Server komprimierte Feeds unterstützt.</translation>
     </message>
 </context>
 <context>
@@ -1122,15 +1128,15 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
     </message>
     <message>
         <source>This area contains information about the package.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Bereich enthält Informationen über das Paket.</translation>
     </message>
     <message>
         <source>This area contains a list of files contained in this package.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Bereich listet alle enthaltenen Dateien im Paket auf.</translation>
     </message>
     <message>
         <source>Tap here to retrieve list of files contained in this package.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um die enthaltenen Dateien in diesem Paket anzuzeigen.</translation>
     </message>
 </context>
 <context>

@@ -4,63 +4,64 @@
     <name>BenchmarkInfo</name>
     <message>
         <source>This area shows the available tests, the results for which the tests have been performed, and comparison values for one selected device. Use the checkboxes to define which tests you want to perform.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Bereich zeigt alle verfügbaren Tests, die Ergebnisse von durchgeführten Tests und Vergleichswerte für das eingestelle Gerät.
+Mit den Auswahlboxen kann man die gewünschten Tests einstellen.</translation>
     </message>
     <message>
         <source>Tests</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Ergebnisse</translation>
     </message>
     <message>
         <source>Comparison</source>
-        <translation type="unfinished"></translation>
+        <translation>Vergleich</translation>
     </message>
     <message>
         <source>1. Integer Arithmetic  </source>
-        <translation type="unfinished"></translation>
+        <translation>1. Integer Berechnungen</translation>
     </message>
     <message>
         <source>2. Floating Point Unit  </source>
-        <translation type="unfinished"></translation>
+        <translation>2. Fliesskomma Berechnungen</translation>
     </message>
     <message>
         <source>3. Text Rendering  </source>
-        <translation type="unfinished"></translation>
+        <translation>3. Text Rendern</translation>
     </message>
     <message>
         <source>4. Gfx Rendering  </source>
-        <translation type="unfinished"></translation>
+        <translation>4. Gfx Rendern</translation>
     </message>
     <message>
         <source>5. RAM Performance  </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>6. SD Card Performance  </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7. CF Card Performance  </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&amp;Start Tests!</source>
-        <translation type="unfinished"></translation>
+        <translation>Test&amp;s starten!</translation>
     </message>
     <message>
         <source>Click here to perform the selected tests.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um die ausgewählen Tests zu starten.</translation>
     </message>
     <message>
         <source>Choose a model to compare your results with.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie ein Model um die Ergebnisse zu vergleichen.</translation>
     </message>
     <message>
         <source>error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
 </context>
 <context>
@@ -178,7 +179,7 @@ Memory is categorized as follows:
     </message>
     <message>
         <source>Total Swap: %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesammter Swap: %1 kB</translation>
     </message>
 </context>
 <context>
@@ -239,7 +240,8 @@ Click and hold on a module to see additional information about the module, or to
     <message>
         <source>You really want to execute
 %1 for this module?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wirklich %1 für dieses Modul
+ausführen?</translation>
     </message>
 </context>
 <context>
@@ -311,7 +313,8 @@ Klicken Sie und halten Sie den Stylus um weitere Prozessinformationen angezeigt 
     <message>
         <source>Really want to send %1
 to this process?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wirklich %1 an diesen
+Prozess senden?</translation>
     </message>
 </context>
 <context>
@@ -346,11 +349,11 @@ to this process?</source>
     </message>
     <message>
         <source>Benchmark</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Syslog</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -389,15 +392,15 @@ to this process?</source>
     </message>
     <message>
         <source>&lt;br&gt;Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;Model: </translation>
     </message>
     <message>
         <source>&lt;br&gt;Vendor: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;Hersteller:</translation>
     </message>
     <message>
         <source>Built against Qt/E </source>
-        <translation type="unfinished"></translation>
+        <translation>Qt/E Version</translation>
     </message>
 </context>
 </TS>

@@ -211,7 +211,7 @@ Das ist &lt;B&gt;irreversibel!&lt;/B&gt;</translation>
     </message>
     <message>
         <source>Save Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern fehlgeschlagen</translation>
     </message>
 </context>
 <context>

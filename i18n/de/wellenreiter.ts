@@ -218,7 +218,7 @@ joinen eines Netzes.</translation>
     </message>
     <message>
         <source>&lt;p&gt;The Wireless Extension Versions&lt;br&gt;do not match!&lt;p&gt;  Wellenreiter II : WE V%1&lt;br&gt;Interface driver: WE V%2</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Die Wireless Extension Versionen&lt;br&gt;stimmen nicht!&lt;p&gt; Wellenreiter II: WE V%1&lt;br&gt;Treiber: WE V%2</translation>
     </message>
 </context>
 <context>
@@ -736,7 +736,7 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>Wellenreiter II Configuration Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Wellenreiter II Einstellungen</translation>
     </message>
     <message>
         <source>Send probe requests</source>

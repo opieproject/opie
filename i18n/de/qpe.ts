@@ -255,7 +255,7 @@ mittig um das Display zu kalibrieren.</translation>
     <name>QueuedRequestRunner</name>
     <message>
         <source>Processing Queued Requests</source>
-        <translation type="unfinished"></translation>
+        <translation>Bearbeite die angesammelten Aufgaben</translation>
     </message>
 </context>
 <context>
@@ -281,7 +281,7 @@ mittig um das Display zu kalibrieren.</translation>
     <name>Server</name>
     <message>
         <source>USB Lock</source>
-        <translation type="unfinished"></translation>
+        <translation>USB Sperre</translation>
     </message>
 </context>
 <context>
