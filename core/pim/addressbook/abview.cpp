@@ -153,6 +153,7 @@ void AbView::load()
 	emit signalClearLetterPicker();
 
 	if ( m_inPersonal )
+		// VCard Backend does not sort.. 
 		m_list = m_contactdb->allRecords();
 	else{
 		m_list = m_contactdb->sorted( true, 0, 0, 0 );
@@ -225,8 +226,14 @@ void AbView::setShowByLetter( char c )
 		load();
 		return;
 	}else{
+		// If the current Backend is unable to solve the query, we will 
+		// ignore the request ..
+		if ( ! m_contactdb->hasQuerySettings( OContactAccess::WildCards | OContactAccess::IgnoreCase ) ){
+			return;
+		}
+
 		query.setLastName( QString("%1*").arg(c) );
-		m_list = m_contactdb->queryByExample( query, OContactAccess::WildCards );
+		m_list = m_contactdb->queryByExample( query, OContactAccess::WildCards | OContactAccess::IgnoreCase );
 		clearForCategory();
 		m_curr_Contact = 0;
 	}

@@ -15,10 +15,6 @@ Feature requests:
 
 Known Bugs:
 -----------
-- Language not English (tested with german opie-translation): 
-	1. Configure nicht übersetzt (alles leer).
-	2. Contacteditor nur teilweise übersetzt.
-	3. Kategorie-Picker geht nicht.
 
 
 Bugs but not in addressbook:
@@ -36,6 +32,7 @@ ContactEditor:
 - Store last settings of combo-boxes
 - Category is on the wrong position after changing to personal and back to normal
 	( Temporarily workaround: Category is never deactivated.. :S )
+
 - Personal and Business Web-page is not editable 
 
 Important:
@@ -107,3 +104,7 @@ Fixed:
 - Fix start of opie-mail
 - Implement Button Pics
 - Add a dialog to accept and optionally edit  received contacts by IRDA. 
+- Language not English (tested with german opie-translation): 
+	1. Configure nicht übersetzt (alles leer).
+	2. Contacteditor nur teilweise übersetzt.
+	3. Kategorie-Picker geht nicht.
