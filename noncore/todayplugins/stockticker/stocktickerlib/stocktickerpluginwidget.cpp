@@ -44,14 +44,15 @@ extern "C" {
 QString output;
 OTicker *stocktickerTicker;
 
-void getStocks( const char *blah) {
+void getStocks(char *blah) {
 
 //    stocktickerTicker->setText( "Downloading stock data.");
     stock *stocks_quotes=NULL;
     stock *stocks_tmp;
-    char *stock_liste = blah;
+    QCString stock_liste = blah;
+    ::free ( blah );
     //    char *stock_liste = (char *)blah->latin1();
-    qDebug("%s", stock_liste );
+    qDebug("%s", stock_liste.data() );
     QString tempString;
     output = "";
 
@@ -100,7 +101,7 @@ void getStocks( const char *blah) {
  }
 //    char *stock_liste = (char *)blah;
       /* Get the stocks and process errors */
-    error = get_stocks( stock_liste, &stocks_quotes);
+    error = get_stocks( stock_liste.data(), &stocks_quotes);
 
     if (error) {
         printf("Error in getting stocks (%d)\n", error);
@@ -252,8 +253,8 @@ void StockTickerPluginWidget::doStocks() {
 
     if (!symbollist.isEmpty()) {
         pthread_t thread1;
-        char *blah = symbollist.latin1();
-        pthread_create(&thread1,NULL, (void * (*)(void *))getStocks, blah);
+        char *blah = ::strdup(symbollist.latin1());
+        pthread_create(&thread1,NULL, (void * (*)(void *))getStocks, (void *) blah);
     }
 }
 
