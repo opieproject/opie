@@ -114,10 +114,10 @@ public:
     SMTPconfig( SMTPaccount *account, QWidget *parent = 0, const char *name = 0, bool modal = 0, WFlags flags = 0 );
 
 public slots:
-    void slotSSL( bool enabled );
     void fillValues();
 
 protected slots:
+    void slotConnectionToggle( int index );
     void accept();
 
 private:

@@ -283,6 +283,7 @@ SMTPaccount::SMTPaccount()
     file = SMTPaccount::getUniqueFileName();
     accountName = "New SMTP Account";
     ssl = false;
+    connectionType = 1;
     login = false;
     useCC = false;
     useBCC = false;
@@ -297,6 +298,7 @@ SMTPaccount::SMTPaccount( QString filename )
     file = filename;
     accountName = "New SMTP Account";
     ssl = false;
+    connectionType = 1;
     login = false;
     type = "SMTP";
     port = SMTP_PORT;
@@ -325,6 +327,7 @@ void SMTPaccount::read()
     server = conf->readEntry( "Server" );
     port = conf->readEntry( "Port" );
     ssl = conf->readBoolEntry( "SSL" );
+    connectionType = conf->readNumEntry( "ConnectionType" );
     login = conf->readBoolEntry( "Login" );
     user = conf->readEntry( "User" );
     password = conf->readEntryCrypt( "Password" );
@@ -342,6 +345,7 @@ void SMTPaccount::save()
     conf->writeEntry( "Server", server );
     conf->writeEntry( "Port", port );
     conf->writeEntry( "SSL", ssl );
+    conf->writeEntry( "ConnectionType", connectionType );
     conf->writeEntry( "Login", login );
     conf->writeEntry( "User", user );
     conf->writeEntryCrypt( "Password", password );

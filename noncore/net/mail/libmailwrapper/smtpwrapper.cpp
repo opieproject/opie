@@ -25,8 +25,7 @@ const char* SMTPwrapper::USER_AGENT="OpieMail v0.3";
 progressMailSend*SMTPwrapper::sendProgress = 0;
 
 SMTPwrapper::SMTPwrapper( Settings *s )
-    : QObject()
-{
+: QObject() {
     settings = s;
     Config cfg( "mail" );
     cfg.setGroup( "Status" );
@@ -40,59 +39,57 @@ void SMTPwrapper::emitQCop( int queued ) {
     env << queued;
 }
 
-QString SMTPwrapper::mailsmtpError( int errnum )
-{
+QString SMTPwrapper::mailsmtpError( int errnum ) {
     switch ( errnum ) {
-        case MAILSMTP_NO_ERROR:
-            return tr( "No error" );
-        case MAILSMTP_ERROR_UNEXPECTED_CODE:
-            return tr( "Unexpected error code" );
-        case MAILSMTP_ERROR_SERVICE_NOT_AVAILABLE:
-            return tr( "Service not available" );
-        case MAILSMTP_ERROR_STREAM:
-            return tr( "Stream error" );
-        case MAILSMTP_ERROR_HOSTNAME:
-            return tr( "gethostname() failed" );
-        case MAILSMTP_ERROR_NOT_IMPLEMENTED:
-            return tr( "Not implemented" );
-        case MAILSMTP_ERROR_ACTION_NOT_TAKEN:
-            return tr( "Error, action not taken" );
-        case MAILSMTP_ERROR_EXCEED_STORAGE_ALLOCATION:
-            return tr( "Data exceeds storage allocation" );
-        case MAILSMTP_ERROR_IN_PROCESSING:
-            return tr( "Error in processing" );
-  //      case MAILSMTP_ERROR_INSUFFISANT_SYSTEM_STORAGE:
-    //        return tr( "Insufficient system storage" );
-        case MAILSMTP_ERROR_MAILBOX_UNAVAILABLE:
-            return tr( "Mailbox unavailable" );
-        case MAILSMTP_ERROR_MAILBOX_NAME_NOT_ALLOWED:
-            return tr( "Mailbox name not allowed" );
-        case MAILSMTP_ERROR_BAD_SEQUENCE_OF_COMMAND:
-            return tr( "Bad command sequence" );
-        case MAILSMTP_ERROR_USER_NOT_LOCAL:
-            return tr( "User not local" );
-        case MAILSMTP_ERROR_TRANSACTION_FAILED:
-            return tr( "Transaction failed" );
-        case MAILSMTP_ERROR_MEMORY:
-            return tr( "Memory error" );
-        case MAILSMTP_ERROR_CONNECTION_REFUSED:
-            return tr( "Connection refused" );
-        default:
-            return tr( "Unknown error code" );
+    case MAILSMTP_NO_ERROR:
+        return tr( "No error" );
+    case MAILSMTP_ERROR_UNEXPECTED_CODE:
+        return tr( "Unexpected error code" );
+    case MAILSMTP_ERROR_SERVICE_NOT_AVAILABLE:
+        return tr( "Service not available" );
+    case MAILSMTP_ERROR_STREAM:
+        return tr( "Stream error" );
+    case MAILSMTP_ERROR_HOSTNAME:
+        return tr( "gethostname() failed" );
+    case MAILSMTP_ERROR_NOT_IMPLEMENTED:
+        return tr( "Not implemented" );
+    case MAILSMTP_ERROR_ACTION_NOT_TAKEN:
+        return tr( "Error, action not taken" );
+    case MAILSMTP_ERROR_EXCEED_STORAGE_ALLOCATION:
+        return tr( "Data exceeds storage allocation" );
+    case MAILSMTP_ERROR_IN_PROCESSING:
+        return tr( "Error in processing" );
+        //      case MAILSMTP_ERROR_INSUFFISANT_SYSTEM_STORAGE:
+        //        return tr( "Insufficient system storage" );
+    case MAILSMTP_ERROR_MAILBOX_UNAVAILABLE:
+        return tr( "Mailbox unavailable" );
+    case MAILSMTP_ERROR_MAILBOX_NAME_NOT_ALLOWED:
+        return tr( "Mailbox name not allowed" );
+    case MAILSMTP_ERROR_BAD_SEQUENCE_OF_COMMAND:
+        return tr( "Bad command sequence" );
+    case MAILSMTP_ERROR_USER_NOT_LOCAL:
+        return tr( "User not local" );
+    case MAILSMTP_ERROR_TRANSACTION_FAILED:
+        return tr( "Transaction failed" );
+    case MAILSMTP_ERROR_MEMORY:
+        return tr( "Memory error" );
+    case MAILSMTP_ERROR_CONNECTION_REFUSED:
+        return tr( "Connection refused" );
+    default:
+        return tr( "Unknown error code" );
     }
 }
 
-mailimf_mailbox *SMTPwrapper::newMailbox(const QString&name, const QString&mail )
-{
+mailimf_mailbox *SMTPwrapper::newMailbox(const QString&name, const QString&mail ) {
     return mailimf_mailbox_new( strdup( name.latin1() ),
                                 strdup( mail.latin1() ) );
 }
 
-mailimf_address_list *SMTPwrapper::parseAddresses(const QString&addr )
-{
+mailimf_address_list *SMTPwrapper::parseAddresses(const QString&addr ) {
     mailimf_address_list *addresses;
 
-    if ( addr.isEmpty() ) return NULL;
+    if ( addr.isEmpty() )
+        return NULL;
 
     addresses = mailimf_address_list_new_empty();
 
@@ -123,8 +120,8 @@ mailimf_address_list *SMTPwrapper::parseAddresses(const QString&addr )
     }
     s = addr.mid(startpos,i-startpos);
     if (!s.isEmpty()) {
-       list.append(s);
-       qDebug("Appended %s",s.latin1());
+        list.append(s);
+        qDebug("Appended %s",s.latin1());
     }
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); it++ ) {
@@ -139,8 +136,7 @@ mailimf_address_list *SMTPwrapper::parseAddresses(const QString&addr )
     return addresses;
 }
 
-mailimf_fields *SMTPwrapper::createImfFields(const Mail&mail )
-{
+mailimf_fields *SMTPwrapper::createImfFields(const Mail&mail ) {
     mailimf_fields *fields;
     mailimf_field *xmailer;
     mailimf_mailbox *sender=0,*fromBox=0;
@@ -150,19 +146,24 @@ mailimf_fields *SMTPwrapper::createImfFields(const Mail&mail )
     int err;
 
     sender = newMailbox( mail.getName(), mail.getMail() );
-    if ( sender == NULL ) goto err_free;
+    if ( sender == NULL )
+        goto err_free;
 
     fromBox = newMailbox( mail.getName(), mail.getMail() );
-    if ( fromBox == NULL ) goto err_free_sender;
+    if ( fromBox == NULL )
+        goto err_free_sender;
 
     from = mailimf_mailbox_list_new_empty();
-    if ( from == NULL ) goto err_free_fromBox;
+    if ( from == NULL )
+        goto err_free_fromBox;
 
     err = mailimf_mailbox_list_add( from, fromBox );
-    if ( err != MAILIMF_NO_ERROR ) goto err_free_from;
+    if ( err != MAILIMF_NO_ERROR )
+        goto err_free_from;
 
     to = parseAddresses( mail.getTo() );
-    if ( to == NULL ) goto err_free_from;
+    if ( to == NULL )
+        goto err_free_from;
 
     cc = parseAddresses( mail.getCC() );
     bcc = parseAddresses( mail.getBCC() );
@@ -170,41 +171,52 @@ mailimf_fields *SMTPwrapper::createImfFields(const Mail&mail )
 
     fields = mailimf_fields_new_with_data( from, sender, reply, to, cc, bcc,
                                            NULL, NULL, subject );
-    if ( fields == NULL ) goto err_free_reply;
+    if ( fields == NULL )
+        goto err_free_reply;
 
     xmailer = mailimf_field_new_custom( strdup( "User-Agent" ),
                                         strdup( USER_AGENT ) );
-    if ( xmailer == NULL ) goto err_free_fields;
+    if ( xmailer == NULL )
+        goto err_free_fields;
 
     err = mailimf_fields_add( fields, xmailer );
-    if ( err != MAILIMF_NO_ERROR ) goto err_free_xmailer;
+    if ( err != MAILIMF_NO_ERROR )
+        goto err_free_xmailer;
 
     return fields;      // Success :)
 
 err_free_xmailer:
-    if (xmailer) mailimf_field_free( xmailer );
+    if (xmailer)
+        mailimf_field_free( xmailer );
 err_free_fields:
-    if (fields) mailimf_fields_free( fields );
+    if (fields)
+        mailimf_fields_free( fields );
 err_free_reply:
-    if (reply) mailimf_address_list_free( reply );
-    if (bcc) mailimf_address_list_free( bcc );
-    if (cc) mailimf_address_list_free( cc );
-    if (to) mailimf_address_list_free( to );
+    if (reply)
+        mailimf_address_list_free( reply );
+    if (bcc)
+        mailimf_address_list_free( bcc );
+    if (cc)
+        mailimf_address_list_free( cc );
+    if (to)
+        mailimf_address_list_free( to );
 err_free_from:
-    if (from) mailimf_mailbox_list_free( from );
+    if (from)
+        mailimf_mailbox_list_free( from );
 err_free_fromBox:
     mailimf_mailbox_free( fromBox );
 err_free_sender:
-    if (sender) mailimf_mailbox_free( sender );
+    if (sender)
+        mailimf_mailbox_free( sender );
 err_free:
-    if (subject) free( subject );
+    if (subject)
+        free( subject );
     qDebug( "createImfFields - error" );
 
     return NULL;        // Error :(
 }
 
-mailmime *SMTPwrapper::buildTxtPart(const QString&str )
-{
+mailmime *SMTPwrapper::buildTxtPart(const QString&str ) {
     mailmime *txtPart;
     mailmime_fields *fields;
     mailmime_content *content;
@@ -213,22 +225,28 @@ mailmime *SMTPwrapper::buildTxtPart(const QString&str )
 
     param = mailmime_parameter_new( strdup( "charset" ),
                                     strdup( "iso-8859-1" ) );
-    if ( param == NULL ) goto err_free;
+    if ( param == NULL )
+        goto err_free;
 
     content = mailmime_content_new_with_str( "text/plain" );
-    if ( content == NULL ) goto err_free_param;
+    if ( content == NULL )
+        goto err_free_param;
 
     err = clist_append( content->ct_parameters, param );
-    if ( err != MAILIMF_NO_ERROR ) goto err_free_content;
+    if ( err != MAILIMF_NO_ERROR )
+        goto err_free_content;
 
     fields = mailmime_fields_new_encoding(MAILMIME_MECHANISM_8BIT);
-    if ( fields == NULL ) goto err_free_content;
+    if ( fields == NULL )
+        goto err_free_content;
 
     txtPart = mailmime_new_empty( content, fields );
-    if ( txtPart == NULL ) goto err_free_fields;
+    if ( txtPart == NULL )
+        goto err_free_fields;
 
     err = mailmime_set_body_text( txtPart, (char*)str.data(), str.length() );
-    if ( err != MAILIMF_NO_ERROR ) goto err_free_txtPart;
+    if ( err != MAILIMF_NO_ERROR )
+        goto err_free_txtPart;
 
     return txtPart;     // Success :)
 
@@ -246,8 +264,7 @@ err_free:
     return NULL;        // Error :(
 }
 
-mailmime *SMTPwrapper::buildFilePart(const QString&filename,const QString&mimetype,const QString&TextContent )
-{
+mailmime *SMTPwrapper::buildFilePart(const QString&filename,const QString&mimetype,const QString&TextContent ) {
     mailmime * filePart = 0;
     mailmime_fields * fields = 0;
     mailmime_content * content = 0;
@@ -274,8 +291,8 @@ mailmime *SMTPwrapper::buildFilePart(const QString&filename,const QString&mimety
     }
 
     fields = mailmime_fields_new_filename(
-                disptype, name,
-                mechanism );
+                 disptype, name,
+                 mechanism );
     content = mailmime_content_new_with_str( (char*)mimetype.latin1() );
     if (content!=0 && fields != 0) {
         if (param) {
@@ -325,8 +342,7 @@ mailmime *SMTPwrapper::buildFilePart(const QString&filename,const QString&mimety
 
 }
 
-void SMTPwrapper::addFileParts( mailmime *message,const QList<Attachment>&files )
-{
+void SMTPwrapper::addFileParts( mailmime *message,const QList<Attachment>&files ) {
     const Attachment *it;
     unsigned int count = files.count();
     qDebug("List contains %i values",count);
@@ -350,26 +366,29 @@ void SMTPwrapper::addFileParts( mailmime *message,const QList<Attachment>&files 
     }
 }
 
-mailmime *SMTPwrapper::createMimeMail(const Mail &mail )
-{
+mailmime *SMTPwrapper::createMimeMail(const Mail &mail ) {
     mailmime *message, *txtPart;
     mailimf_fields *fields;
     int err;
 
     fields = createImfFields( mail );
-    if ( fields == NULL ) goto err_free;
+    if ( fields == NULL )
+        goto err_free;
 
     message = mailmime_new_message_data( NULL );
-    if ( message == NULL ) goto err_free_fields;
+    if ( message == NULL )
+        goto err_free_fields;
 
     mailmime_set_imf_fields( message, fields );
 
     txtPart = buildTxtPart( mail.getMessage() );
 
-    if ( txtPart == NULL ) goto err_free_message;
+    if ( txtPart == NULL )
+        goto err_free_message;
 
     err = mailmime_smart_add_part( message, txtPart );
-    if ( err != MAILIMF_NO_ERROR ) goto err_free_txtPart;
+    if ( err != MAILIMF_NO_ERROR )
+        goto err_free_txtPart;
 
     addFileParts( message, mail.getAttachments() );
 
@@ -387,8 +406,7 @@ err_free:
     return NULL;            // Error :(
 }
 
-mailimf_field *SMTPwrapper::getField( mailimf_fields *fields, int type )
-{
+mailimf_field *SMTPwrapper::getField( mailimf_fields *fields, int type ) {
     mailimf_field *field;
     clistiter *it;
 
@@ -404,8 +422,7 @@ mailimf_field *SMTPwrapper::getField( mailimf_fields *fields, int type )
     return NULL;
 }
 
-void SMTPwrapper::addRcpts( clist *list, mailimf_address_list *addr_list )
-{
+void SMTPwrapper::addRcpts( clist *list, mailimf_address_list *addr_list ) {
     clistiter *it, *it2;
 
     for ( it = clist_begin( addr_list->ad_list ); it; it = it->next ) {
@@ -413,20 +430,19 @@ void SMTPwrapper::addRcpts( clist *list, mailimf_address_list *addr_list )
         addr = (mailimf_address *) it->data;
 
         if ( addr->ad_type == MAILIMF_ADDRESS_MAILBOX ) {
-    	    esmtp_address_list_add( list, addr->ad_data.ad_mailbox->mb_addr_spec, 0, NULL );
+            esmtp_address_list_add( list, addr->ad_data.ad_mailbox->mb_addr_spec, 0, NULL );
         } else if ( addr->ad_type == MAILIMF_ADDRESS_GROUP ) {
             clist *l = addr->ad_data.ad_group->grp_mb_list->mb_list;
-    	    for ( it2 = clist_begin( l ); it2; it2 = it2->next ) {
+            for ( it2 = clist_begin( l ); it2; it2 = it2->next ) {
                 mailimf_mailbox *mbox;
-    	        mbox = (mailimf_mailbox *) it2->data;
-	            esmtp_address_list_add( list, mbox->mb_addr_spec, 0, NULL );
-	        }
-	    }
+                mbox = (mailimf_mailbox *) it2->data;
+                esmtp_address_list_add( list, mbox->mb_addr_spec, 0, NULL );
+            }
+        }
     }
 }
 
-clist *SMTPwrapper::createRcptList( mailimf_fields *fields )
-{
+clist *SMTPwrapper::createRcptList( mailimf_fields *fields ) {
     clist *rcptList;
     mailimf_field *field;
 
@@ -434,30 +450,29 @@ clist *SMTPwrapper::createRcptList( mailimf_fields *fields )
 
     field = getField( fields, MAILIMF_FIELD_TO );
     if ( field && (field->fld_type == MAILIMF_FIELD_TO)
-         && field->fld_data.fld_to->to_addr_list ) {
+            && field->fld_data.fld_to->to_addr_list ) {
         addRcpts( rcptList, field->fld_data.fld_to->to_addr_list );
     }
 
     field = getField( fields, MAILIMF_FIELD_CC );
     if ( field && (field->fld_type == MAILIMF_FIELD_CC)
-         && field->fld_data.fld_cc->cc_addr_list ) {
+            && field->fld_data.fld_cc->cc_addr_list ) {
         addRcpts( rcptList, field->fld_data.fld_cc->cc_addr_list );
     }
 
     field = getField( fields, MAILIMF_FIELD_BCC );
     if ( field && (field->fld_type == MAILIMF_FIELD_BCC)
-         && field->fld_data.fld_bcc->bcc_addr_list ) {
+            && field->fld_data.fld_bcc->bcc_addr_list ) {
         addRcpts( rcptList, field->fld_data.fld_bcc->bcc_addr_list );
     }
 
     return rcptList;
 }
 
-char *SMTPwrapper::getFrom( mailimf_field *ffrom)
-{
+char *SMTPwrapper::getFrom( mailimf_field *ffrom) {
     char *from = NULL;
     if ( ffrom && (ffrom->fld_type == MAILIMF_FIELD_FROM)
-         && ffrom->fld_data.fld_from->frm_mb_list && ffrom->fld_data.fld_from->frm_mb_list->mb_list ) {
+            && ffrom->fld_data.fld_from->frm_mb_list && ffrom->fld_data.fld_from->frm_mb_list->mb_list ) {
         clist *cl = ffrom->fld_data.fld_from->frm_mb_list->mb_list;
         clistiter *it;
         for ( it = clist_begin( cl ); it; it = it->next ) {
@@ -469,25 +484,23 @@ char *SMTPwrapper::getFrom( mailimf_field *ffrom)
     return from;
 }
 
-char *SMTPwrapper::getFrom( mailmime *mail )
-{
+char *SMTPwrapper::getFrom( mailmime *mail ) {
     /* no need to delete - its just a pointer to structure content */
     mailimf_field *ffrom = 0;
     ffrom = getField( mail->mm_data.mm_message.mm_fields, MAILIMF_FIELD_FROM );
     return getFrom(ffrom);
 }
 
-void SMTPwrapper::progress( size_t current, size_t maximum )
-{
+void SMTPwrapper::progress( size_t current, size_t maximum ) {
     if (SMTPwrapper::sendProgress) {
         SMTPwrapper::sendProgress->setSingleMail(current, maximum );
         qApp->processEvents();
     }
 }
 
-void SMTPwrapper::storeMail(const char*mail, size_t length, const QString&box)
-{
-    if (!mail) return;
+void SMTPwrapper::storeMail(const char*mail, size_t length, const QString&box) {
+    if (!mail)
+        return;
     QString localfolders = AbstractMail::defaultLocalfolder();
     AbstractMail*wrap = AbstractMail::getWrapper(localfolders);
     wrap->createMbox(box);
@@ -495,8 +508,7 @@ void SMTPwrapper::storeMail(const char*mail, size_t length, const QString&box)
     delete wrap;
 }
 
-void SMTPwrapper::smtpSend( mailmime *mail,bool later, SMTPaccount *smtp )
-{
+void SMTPwrapper::smtpSend( mailmime *mail,bool later, SMTPaccount *smtp ) {
     clist *rcpts = 0;
     char *from, *data;
     size_t size;
@@ -513,14 +525,16 @@ void SMTPwrapper::smtpSend( mailmime *mail,bool later, SMTPaccount *smtp )
     mime_message_detach_mime(msg);
     mailmessage_free(msg);
     if (r != MAIL_NO_ERROR || !data) {
-        if (data) free(data);
+        if (data)
+            free(data);
         qDebug("Error fetching mime...");
         return;
     }
     msg = 0;
     if (later) {
         storeMail(data,size,"Outgoing");
-        if (data) free( data );
+        if (data)
+            free( data );
         Config cfg( "mail" );
         cfg.setGroup( "Status" );
         cfg.writeEntry( "outgoing", ++m_queuedMail );
@@ -530,13 +544,17 @@ void SMTPwrapper::smtpSend( mailmime *mail,bool later, SMTPaccount *smtp )
     from = getFrom( mail );
     rcpts = createRcptList( mail->mm_data.mm_message.mm_fields );
     smtpSend(from,rcpts,data,size,smtp);
-    if (data) {free(data);}
-    if (from) {free(from);}
-    if (rcpts) smtp_address_list_free( rcpts );
+    if (data) {
+        free(data);
+    }
+    if (from) {
+        free(from);
+    }
+    if (rcpts)
+        smtp_address_list_free( rcpts );
 }
 
-int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMTPaccount *smtp )
-{
+int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMTPaccount *smtp ) {
     const char *server, *user, *pass;
     bool ssl;
     uint16_t port;
@@ -546,11 +564,20 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
     result = 1;
     server = user = pass = 0;
     server = smtp->getServer().latin1();
-    ssl = smtp->getSSL();
+
+    // FIXME: currently only TLS and Plain work.
+
+    ssl = false;
+
+    if  ( smtp->ConnectionType() == 2 ) {
+        ssl = true;
+    }
+
     port = smtp->getPort().toUInt();
 
     session = mailsmtp_new( 20, &progress );
-    if ( session == NULL ) goto free_mem;
+    if ( session == NULL )
+        goto free_mem;
 
     qDebug( "Servername %s at port %i", server, port );
     if ( ssl ) {
@@ -560,10 +587,17 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
         qDebug( "No SSL session" );
         err = mailsmtp_socket_connect( session, server, port );
     }
-    if ( err != MAILSMTP_NO_ERROR ) {qDebug("Error init connection");result = 0;goto free_mem_session;}
+    if ( err != MAILSMTP_NO_ERROR ) {
+        qDebug("Error init connection");
+        result = 0;
+        goto free_mem_session;
+    }
 
     err = mailsmtp_init( session );
-    if ( err != MAILSMTP_NO_ERROR ) {result = 0; goto free_con_session;}
+    if ( err != MAILSMTP_NO_ERROR ) {
+        result = 0;
+        goto free_con_session;
+    }
 
     qDebug( "INIT OK" );
 
@@ -578,7 +612,8 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
                 user = login.getUser().latin1();
                 pass = login.getPassword().latin1();
             } else {
-                result = 0; goto free_con_session;
+                result = 0;
+                goto free_con_session;
             }
         } else {
             user = smtp->getUser().latin1();
@@ -586,7 +621,8 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
         }
         qDebug( "session->auth: %i", session->auth);
         err = mailsmtp_auth( session, (char*)user, (char*)pass );
-        if ( err == MAILSMTP_NO_ERROR ) qDebug("auth ok");
+        if ( err == MAILSMTP_NO_ERROR )
+            qDebug("auth ok");
         qDebug( "Done auth!" );
     } else {
         qDebug("SMTP without auth");
@@ -595,7 +631,8 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
     err = mailsmtp_send( session, from, rcpts, data, size );
     if ( err != MAILSMTP_NO_ERROR ) {
         qDebug("Error sending mail: %s",mailsmtpError(err).latin1());
-        result = 0; goto free_con_session;
+        result = 0;
+        goto free_con_session;
     }
 
     qDebug( "Mail sent." );
@@ -609,8 +646,7 @@ free_mem:
     return result;
 }
 
-void SMTPwrapper::sendMail(const Mail&mail,SMTPaccount*aSmtp,bool later )
-{
+void SMTPwrapper::sendMail(const Mail&mail,SMTPaccount*aSmtp,bool later ) {
     mailmime * mimeMail;
 
     SMTPaccount *smtp = aSmtp;
@@ -635,8 +671,7 @@ void SMTPwrapper::sendMail(const Mail&mail,SMTPaccount*aSmtp,bool later )
     }
 }
 
-int SMTPwrapper::sendQueuedMail(AbstractMail*wrap,SMTPaccount*smtp,RecMail*which)
-{
+int SMTPwrapper::sendQueuedMail(AbstractMail*wrap,SMTPaccount*smtp,RecMail*which) {
     size_t curTok = 0;
     mailimf_fields *fields = 0;
     mailimf_field*ffrom = 0;
@@ -645,7 +680,8 @@ int SMTPwrapper::sendQueuedMail(AbstractMail*wrap,SMTPaccount*smtp,RecMail*which
     int res = 0;
 
     encodedString * data = wrap->fetchRawBody(*which);
-    if (!data) return 0;
+    if (!data)
+        return 0;
     int err = mailimf_fields_parse( data->Content(), data->Length(), &curTok, &fields );
     if (err != MAILIMF_NO_ERROR) {
         delete data;
@@ -677,11 +713,11 @@ int SMTPwrapper::sendQueuedMail(AbstractMail*wrap,SMTPaccount*smtp,RecMail*which
 }
 
 /* this is a special fun */
-bool SMTPwrapper::flushOutbox(SMTPaccount*smtp)
-{
+bool SMTPwrapper::flushOutbox(SMTPaccount*smtp) {
     bool returnValue = true;
 
-    if (!smtp) return false;
+    if (!smtp)
+        return false;
 
     QString localfolders = AbstractMail::defaultLocalfolder();
     AbstractMail*wrap = AbstractMail::getWrapper(localfolders);
@@ -705,7 +741,7 @@ bool SMTPwrapper::flushOutbox(SMTPaccount*smtp)
     while (mailsToSend.count()>0) {
         if (sendQueuedMail(wrap,smtp,mailsToSend.at(0))==0) {
             QMessageBox::critical(0,tr("Error sending mail"),
-                tr("Error sending queued mail - breaking"));
+                                  tr("Error sending queued mail - breaking"));
             returnValue = false;
             break;
         }
