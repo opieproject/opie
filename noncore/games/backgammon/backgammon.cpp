@@ -135,6 +135,8 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
     //the main area
 	QBoxLayout* layout=new QBoxLayout(mainarea,QBoxLayout::TopToBottom);
     area=new QCanvas(235,235);
+	QColor bgColor=palette().color(QPalette::Normal,QColorGroup::Background);
+	area->setBackgroundColor(bgColor);
     boardview=new BackGammonView(area,mainarea);
     boardview->setMaximumHeight(240);
 	layout->addWidget(boardview);

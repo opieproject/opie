@@ -18,7 +18,6 @@ class BackGammon : public QMainWindow
 {
     Q_OBJECT
 private:
-    //GUI
     //the "status" bar
     QLabel* message;
     //the main drawing area
