@@ -24,7 +24,7 @@ public:
   ~PmIpkg();
 
   int linkOpp;
-  void loadList( PackageList );
+  void loadList( PackageList* );
   void commit();
   void update();
   void showButtons(bool b=true);

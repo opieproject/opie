@@ -13,10 +13,11 @@ int main( int argc, char ** argv )
   if (argc > 0)
   {
       debugLevel = QString ( argv[1] ).toInt();
+    	qDebug("setting debug level to %i",debugLevel);
   }
   QPEApplication a( argc, argv );
   MainWindow mw;
-  if (debugLevel < 4)
+  if (argc > 2)
 		QMessageBox::information( &mw, "oipkg","While ipkg is working\noipkg is hanging.\nPlease be patient!");
   a.showMainDocumentWidget( &mw );
   return a.exec();

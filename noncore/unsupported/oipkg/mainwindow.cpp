@@ -250,9 +250,9 @@ MainWindow::~MainWindow()
 void MainWindow::runIpkg()
 {
   packageListServers.allPackages();
-  ipkg->loadList( packageListSearch );
-  ipkg->loadList( packageListDocLnk );
-  ipkg->loadList( packageListServers );
+  ipkg->loadList( &packageListSearch );
+  ipkg->loadList( &packageListDocLnk );
+  ipkg->loadList( &packageListServers );
   ipkg->commit();
   // ##### If we looked in the list of files, we could send out accurate
   // ##### messages. But we don't bother yet, and just do an "all".
@@ -422,7 +422,8 @@ void MainWindow::setDocument(const QString &fileName)
   QCopEnvelope e("QPE/System", "linkChanged(QString)");
   QString lf = QString::null;
   e << lf;
-  displayList();
+ // displayList();
+ 	exit;
 }
 
 void MainWindow::installFile(const QString &fileName)
@@ -483,5 +484,6 @@ void MainWindow::removeLinks()
 void MainWindow::remotePackageQuery()
 {
  	packageListSearch.query( searchEdit->text() );
+  packageListSearch.update();
  	displayList();
 }

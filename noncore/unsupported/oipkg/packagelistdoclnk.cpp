@@ -20,6 +20,7 @@ PackageListDocLnk::PackageListDocLnk()
 	Config cfg( "oipkg", Config::User );
 	cfg.setGroup( "Common" );
 	docLnkDir = cfg.readEntry( "docLnkDir", "/root/" );
+ 	pvDebug(2,"opening DocLnkSet "+docLnkDir);
 	doclnkset = new DocLnkSet(docLnkDir,"application/ipkg");
 }
 
@@ -35,7 +36,7 @@ PackageListDocLnk::~PackageListDocLnk()
 void PackageListDocLnk::update()
 {
 	pvDebug(2,"PackageListDocLnk::update ");	
- 	QList<DocLnk> packlist = doclnkset->children();
+	QList<DocLnk> packlist = doclnkset->children();
   for (DocLnk *pack =packlist.first(); pack != 0; pack=packlist.next() )
   {
     insertPackage( new Package(pack->file(), settings) );

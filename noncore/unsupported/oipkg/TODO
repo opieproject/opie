@@ -12,3 +12,4 @@
 * different types of filters and searches
 	i.e. name, desc, files etc
 * mark packages from doclnk and ipkgfind installed if installed
+* show if different version is installed

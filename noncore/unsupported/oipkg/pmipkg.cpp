@@ -44,7 +44,7 @@ int PmIpkg::runIpkg(const QString& args, const QString& dest )
   pvDebug(2,"PmIpkg::runIpkg "+args);
 
 #ifdef PROC
-  QStringList cmd = "/usr/bin/ipkg ";
+  QStringList cmd = "ipkg ";
 #endif
 #ifdef SYSTEM
   QString cmd = "/usr/bin/ipkg ";
@@ -75,8 +75,8 @@ int PmIpkg::runIpkg(const QString& args, const QString& dest )
   Process *ipkg = new Process( cmd );
   out( "running:<br>\n"+ipkg->arguments().join(" ")+"<br>\n" );
   QString description;
-  ipkg->exec("",o);
-//  out( o );
+  r = ipkg->exec("",o);
+  out( o );
 #endif
 #ifdef SYSTEM
   out( "running:<br>\n"+cmd+"<br>\n" );
@@ -177,7 +177,6 @@ void PmIpkg::processLinkDir( QString file, QString dest )
     const QFileInfoList *list = d.entryInfoList();
     QFileInfoListIterator it( *list );
     QFileInfo *fi;
-    qDebug( "while %i",list->count());
     while ( (fi=it.current()) )
     {
     	pvDebug(4, "processLinkDir "+fi->absFilePath());
@@ -208,9 +207,9 @@ void PmIpkg::processLinkDir( QString file, QString dest )
   }
 }
 
-void PmIpkg::loadList( PackageList pl )
+void PmIpkg::loadList( PackageList *pl )
 {   	
-  for( Package *pack = pl.first();pack ; (pack = pl.next())  )
+  for( Package *pack = pl->first();pack ; (pack = pl->next())  )
   {
   	if ( pack && (pack->name() != "") && pack)
 		{
@@ -225,36 +224,28 @@ void PmIpkg::loadList( PackageList pl )
 void PmIpkg::commit()
 {   	
   int sizecount = 0;
-  for (uint i=0; i < to_remove.count(); i++)
-       	sizecount += 1;
-  for (uint i=0; i < to_install.count(); i++)
-       	sizecount += to_install.at(i)->size().toInt();
-  runwindow->progress->setTotalSteps(sizecount);
-	startDialog();
-}
-
-void PmIpkg::startDialog()
-{
   installDialog = new InstallDialog(settings,0,0,true);
-	QCheckListItem *toRemoveItem;
-	toRemoveItem= new QCheckListItem( installDialog->ListViewPackages, QObject::tr("To remove") );
+	QCheckListItem *toRemoveItem = new QCheckListItem( installDialog->ListViewPackages, QObject::tr("To remove") );
+	QCheckListItem *toInstallItem = new QCheckListItem( installDialog->ListViewPackages, QObject::tr("To install") );
  	toRemoveItem->setOpen( true );
-  for (Package *it=to_remove.first(); it != 0; it=to_remove.next() )
+	toInstallItem->setOpen( true );
+  for (uint i=0; i < to_remove.count(); i++)
   {
-    toRemoveItem->insertItem( new PackageListItem(installDialog->ListViewPackages, it,settings) );
+  	sizecount += 1;
+    toRemoveItem->insertItem( new PackageListItem(installDialog->ListViewPackages, to_remove.at(i),settings) );
  	} 	
-	QCheckListItem *toInstallItem;
-	toInstallItem = new QCheckListItem( installDialog->ListViewPackages, QObject::tr("To install") );
- 	toInstallItem->setOpen( true );
-  for (Package *it=to_install.first(); it != 0; it=to_install.next() )
+  for (uint i=0; i < to_install.count(); i++)
   {
-    toInstallItem->insertItem( new PackageListItem(installDialog->ListViewPackages, it,settings) );
+  	sizecount += to_install.at(i)->size().toInt();
+    toInstallItem->insertItem( new PackageListItem(installDialog->ListViewPackages, to_install.at(i),settings) );
   }
+  runwindow->progress->setTotalSteps(sizecount);
+  qDebug("Install size %i",sizecount);
   installDialog->showMaximized();
   if ( installDialog->exec() ) doIt();
  	installDialog->close();
+  runwindow->showMaximized();
   out(tr("<b>All done.</b>"));
-  to_install.clear();
 }
 
 void PmIpkg::doIt()
@@ -272,57 +263,57 @@ void PmIpkg::remove()
 	out("<b>"+tr("Removing")+"<br>"+tr("please wait")+"</b><br><hr>");
 
 	QStringList *fileList;
-  for (Package *it=to_remove.first(); it != 0; it=to_remove.next() )
+  for (uint i=0; i < to_remove.count(); i++)
   {
-			if ( it->link() )fileList = getList( it->name(), it->dest() );     	
-      if ( runIpkg("remove " + it->name(), it->dest() ) == 0)
-      {
-        runwindow->progress->setProgress( 1 + runwindow->progress->progress() );
-       	linkOpp = removeLink;
-	    	if ( it->link() )
-      	{
+		if ( to_remove.at(i)->link() )fileList = getList( to_remove.at(i)->name(), to_remove.at(i)->dest() );     	
+    if ( runIpkg("remove " + to_remove.at(i)->name(), to_remove.at(i)->dest() ) == 0)
+    {
+      runwindow->progress->setProgress( 1 );
+     	linkOpp = removeLink;
+	   	if ( to_remove.at(i)->link() )
+     	{
 					out( "<br>removing links<br>" );
-  				out( "for package "+it->name()+" in "+it->dest()+"<br>" );
-      		processFileList( fileList, it->dest() );
-        }
-     		it->processed();
-//       	to_install.take( it );       	
-        out("<br><hr>");
-  		}else{
-      	out("<b>"+tr("Error while removing")+"</b><hr>"+it->name());
+  				out( "for package "+to_remove.at(i)->name()+" in "+to_remove.at(i)->dest()+"<br>" );
+      		processFileList( fileList, to_remove.at(i)->dest() );
       }
-	  if ( it->link() )delete fileList;
+    	to_remove.at(i)->processed();
+     	to_remove.take( i );       	
+      out("<br><hr>");
+ 		}else{
+     	out("<b>"+tr("Error while removing")+"</b><hr>"+to_remove.at(i)->name());
     }
-    out("<br>");
+	  if ( to_remove.at(i)->link() )delete fileList;
+  }
+  to_remove.clear();
+  out("<br>");
 }
 
 
 void PmIpkg::install()
 {
  	if ( to_install.count() == 0 ) return;
-	out("<b>"+tr("Installing")+"<br>"+tr("please wait")+"</b><br>");
- 	for (Package *it=to_install.first(); it != 0; it=to_install.next() )
-    {
-
-      if ( runIpkg("install " + it->installName(), it->dest() ) == 0 )
-		  {    	
-      	runwindow->progress->setProgress( it->size().toInt() + runwindow->progress->progress());
-       	linkOpp = createLink;
-	    	if ( it->link() )
-      	{
-					out( "<br>creating links<br>" );
-  				out( "for package "+it->name()+" in "+it->dest()+"<br>" );
-					makeLinks( it );
-     		}
-     		it->processed();
-//       	to_install.take( it->name() );
-        out("<br><hr>");
-  		}else{
-      	out("<b>"+tr("Error while installing")+"</b><hr>"+it->name());
-      }
+	out("<b>"+tr("Installing")+"<br>"+tr("please wait")+"</b><br>"); 	
+  for (uint i=0; i < to_install.count(); i++)
+  {
+	  if ( runIpkg("install " + to_install.at(i)->installName(), to_install.at(i)->dest() ) == 0 )
+		{    	
+    	runwindow->progress->setProgress( to_install.at(i)->size().toInt() );
+      linkOpp = createLink;
+	    if ( to_install.at(i)->link() )
+      {
+				out( "<br>creating links<br>" );
+  			out( "for package "+to_install.at(i)->name()+" in "+to_install.at(i)->dest()+"<br>" );
+				makeLinks( to_install.at(i) );
+     	}
+     	to_install.at(i)->processed();
+      to_install.take( i );
+      out("<br><hr>");
+  	}else{
+     	out("<b>"+tr("Error while installing")+"</b><hr>"+to_install.at(i)->name());
     }
-    out("<br>");
-    to_install.clear();
+   }
+   out("<br>");
+   to_install.clear();
 }
 
 void PmIpkg::createLinks( const QString &dest )
@@ -398,7 +389,7 @@ void PmIpkg::installFile(const QString &fileName, const QString &dest)
  	Package *p = new Package(fileName,settings);
   if ( dest!="") p->setDest( dest );
 	to_install.append( p );
-	startDialog();
+	commit();
  	delete p;
 }
 
@@ -411,7 +402,7 @@ void PmIpkg::removeFile(const QString &fileName, const QString &dest)
  	Package *p = new Package(fileName,settings);
   if ( dest!="") p->setDest( dest );
 	to_remove.append( p );
-	startDialog();
+	commit();
  	delete p;
 }
 

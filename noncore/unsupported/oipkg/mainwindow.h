@@ -69,7 +69,7 @@ private:
 
   PmIpkg* ipkg;
   PackageManagerSettings *settings;
-  PackageListLocal packageListServers;
+  PackageListLocal  packageListServers;
   PackageListRemote packageListSearch;
   PackageListDocLnk packageListDocLnk;
   PackageListView *listViewPackages;

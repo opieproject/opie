@@ -22,6 +22,7 @@ PackageListRemote::~PackageListRemote()
 
 void PackageListRemote::query(QString s)
 {
+	pvDebug(4,"set query "+s);
 	searchString = s;	
 }
 
