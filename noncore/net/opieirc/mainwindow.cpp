@@ -59,21 +59,10 @@ void MainWindow::killTab(IRCTab *tab) {
 }
 
 void MainWindow::newConnection() {
-    IRCServer *server = new IRCServer();
-    server->setHostname("irc.openprojects.net");
-    server->setPort(6667);
-    server->setDescription("OpenProjects");
-    server->setNick("opie-irc");
-    server->setUsername("opie-irc");
-    server->setRealname("opie-irc");
-    IRCServerTab *serverTab = new IRCServerTab(server, this, m_tabWidget);
-    addTab(serverTab);
-    serverTab->doConnect();
-
-    /*
-     * Serverlist : not functional yet
-    IRCServerList *list = new IRCServerList(this, "ServerList", TRUE);
-    list->exec();
-    delete list;
-    */
+    IRCServerList list(this, "ServerList", TRUE);
+    if (list.exec() == QDialog::Accepted && list.hasServer()) {
+        IRCServerTab *serverTab = new IRCServerTab(list.server(), this, m_tabWidget);
+        addTab(serverTab);
+        serverTab->doConnect();
+    }
 }

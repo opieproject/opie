@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include "ircservertab.h"
 
-IRCServerTab::IRCServerTab(IRCServer *server, MainWindow *mainWindow, QWidget *parent, const char *name, WFlags f) : IRCTab(parent, name, f) {
+IRCServerTab::IRCServerTab(IRCServer server, MainWindow *mainWindow, QWidget *parent, const char *name, WFlags f) : IRCTab(parent, name, f) {
     m_server = server;
-    m_session = new IRCSession(m_server);
+    m_session = new IRCSession(&m_server);
     m_mainWindow = mainWindow;
     m_close = FALSE;
-    m_description->setText(tr("Connection to")+" <b>" + server->hostname() + ":" + QString::number(server->port()) + "</b>");
+    m_description->setText(tr("Connection to")+" <b>" + server.hostname() + ":" + QString::number(server.port()) + "</b>");
     m_textview = new QTextView(this);
     m_textview->setHScrollBarMode(QScrollView::AlwaysOff);
     m_textview->setVScrollBarMode(QScrollView::AlwaysOn);
@@ -30,7 +30,6 @@ IRCServerTab::~IRCServerTab() {
         m_mainWindow->killTab(it.current());
     }
     delete m_session;
-    delete m_server;
 }
 
 void IRCServerTab::removeChannelTab(IRCChannelTab *tab) {
@@ -46,7 +45,7 @@ IRCSession *IRCServerTab::session() {
 }
 
 IRCServer *IRCServerTab::server() {
-    return m_server;
+    return &m_server;
 }
 
 void IRCServerTab::processCommand() {

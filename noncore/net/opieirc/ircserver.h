@@ -30,8 +30,8 @@ class IRCServer {
 public:
     IRCServer();
 
+    void setName(QString name);
     void setHostname(QString hostname);
-    void setDescription(QString description);
     void setPort(int port);
     void setUsername(QString username);
     void setPassword(QString password);
@@ -39,7 +39,7 @@ public:
     void setRealname(QString realname);
 
     QString hostname();
-    QString description();
+    QString name();
     unsigned short int port();
     QString username();
     QString password();
@@ -47,7 +47,7 @@ public:
     QString realname();
 protected:
     QString             m_hostname;
-    QString             m_description;
+    QString             m_name;
     unsigned short int  m_port;
     QString             m_username;
     QString             m_password;

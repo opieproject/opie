@@ -7,7 +7,8 @@ HEADERS		= ircchannel.h ircconnection.h \
               ircperson.h ircserver.h ircsession.h \
               mainwindow.h irctab.h ircservertab.h \
               ircchanneltab.h ircchannellist.h \
-              ircserverlist.h ircservereditor.h
+              ircserverlist.h ircservereditor.h \
+              ircquerytab.h
 SOURCES		= ircchannel.cpp ircconnection.cpp \
               ircmessage.cpp \
               ircmessageparser.cpp ircoutput.cpp \
@@ -15,7 +16,8 @@ SOURCES		= ircchannel.cpp ircconnection.cpp \
               ircsession.cpp main.cpp mainwindow.cpp \
               irctab.cpp ircservertab.cpp \
               ircchanneltab.cpp ircchannellist.cpp \
-              ircserverlist.cpp ircservereditor.cpp
+              ircserverlist.cpp ircservereditor.cpp \
+              ircquerytab.cpp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS        += -lqpe

@@ -18,27 +18,7 @@
 
 */
 
-#ifndef __IRCSERVEREDITOR
-#define __IRCSERVEREDITOR
+#ifndef __IRCQUERYTAB_H
+#define __IRCQUERYTAB_H
 
-#include <qdialog.h>
-#include <qlineedit.h>
-#include "ircserver.h"
-
-class IRCServerEditor : public QDialog {
-    Q_OBJECT
-public:
-    IRCServerEditor(IRCServer server, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags f = 0);
-    IRCServer getServer();
-protected slots:
-    void accept();
-protected:
-    QLineEdit *m_name;
-    QLineEdit *m_hostname;
-    QLineEdit *m_port;
-    QLineEdit *m_nickname;
-    QLineEdit *m_password;
-    QLineEdit *m_realname;
-};
-
-#endif /* __IRCSERVEREDITOR_H */
+#endif /* __IRCQUERYTAB_H */

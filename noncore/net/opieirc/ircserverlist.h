@@ -31,16 +31,20 @@ class IRCServerList : public QDialog {
     Q_OBJECT
 public:
     IRCServerList(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags f = 0);
+    int exec();
+    /* Check whether a server was selected */
+    bool hasServer();
+    /* Return the selected server */
+    IRCServer server();
+    
     ~IRCServerList();
 public slots:
     void addServer();
     void delServer();
     void editServer();
 protected:
-    void update();
-protected:
-    Config           *m_config;
-    QListBox         *m_list;
+    Config    *m_config;
+    QListBox  *m_list;
 };
 
 #endif /* __IRCSERVERLIST_H */

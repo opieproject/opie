@@ -1,15 +1,15 @@
 #include "ircserver.h"
 
 IRCServer::IRCServer() {
-    m_port = 0;
+    m_port = 6667;
 }
 
 void IRCServer::setHostname(QString hostname) {
     m_hostname = hostname;
 }
 
-void IRCServer::setDescription(QString description) {
-    m_description = description;
+void IRCServer::setName(QString name) {
+    m_name = name;
 }
 
 void IRCServer::setPort(int port) {
@@ -36,8 +36,8 @@ QString IRCServer::hostname() {
     return m_hostname;
 }
 
-QString IRCServer::description() {
-    return m_description;
+QString IRCServer::name() {
+    return m_name;
 }
 
 unsigned short int IRCServer::port() {

@@ -30,7 +30,7 @@ class IRCServerTab : public IRCTab {
     Q_OBJECT
 public:
     /* IRCTab implementation */
-    IRCServerTab(IRCServer *server, MainWindow *mainWindow, QWidget *parent = 0, const char *name = 0, WFlags f = 0);
+    IRCServerTab(IRCServer server, MainWindow *mainWindow, QWidget *parent = 0, const char *name = 0, WFlags f = 0);
     ~IRCServerTab();
     QString title();
     IRCSession *session();
@@ -49,7 +49,7 @@ protected slots:
     void display(IRCOutput output);
 protected:
     bool                  m_close;
-    IRCServer            *m_server;
+    IRCServer             m_server;
     IRCSession           *m_session;
     MainWindow           *m_mainWindow;
     QTextView            *m_textview;
