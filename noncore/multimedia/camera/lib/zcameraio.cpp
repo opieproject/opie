@@ -139,6 +139,7 @@ bool ZCameraIO::setCaptureFrame( int width, int height, int zoom, bool rot )
         _readlen = 2 * _width * _height; // camera is fixed @ 16 bits per pixel
         return true;
     }
+    owarn << "couldn't write to driver" << oendl;
     return false;
 }
 
@@ -214,6 +215,8 @@ bool ZCameraIO::snapshot( QImage* image )
 
     odebug << "finder reversed = " << isFinderReversed() << oendl;
     odebug << "rotation = " << _rot << oendl;
+
+    odebug << "w=" << _width << " h= " << _height << " readlen= " << _readlen << oendl;
 
     int readmode;
     if ( _flip == -1 ) // AUTO
@@ -291,11 +294,12 @@ bool ZCameraIO::snapshot( unsigned char* buf )
 
 void ZCameraIO::captureFrame( int w, int h, int zoom, QImage* image )
 {
+    int prot = _rot;
     int pw = _width;
     int ph = _height;
-    setCaptureFrame( w, h, zoom*256, _rot );
+    setCaptureFrame( w, h, zoom*256, w<h );
     snapshot( image );
-    setCaptureFrame( pw, ph, _zoom, _rot );
+    setCaptureFrame( pw, ph, _zoom, prot );
 }
 
 

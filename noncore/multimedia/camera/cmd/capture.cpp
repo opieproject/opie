@@ -13,35 +13,104 @@
 **
 **********************************************************************/
 
+#include "capture.h"
+
 #include "zcameraio.h"
 #include "imageio.h"
 #include "avi.h"
 
-#include <qfile.h>
-#include <qimage.h>
 #include <opie2/oapplication.h>
+#include <opie2/odebug.h>
 
-#include <assert.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <string.h>
-#include <errno.h>
-#include <unistd.h>
-#include <stdio.h>
+#include <qimage.h>
 
-#define CAPTUREFILE "/tmp/capture.dat"
-#define OUTPUTFILE  "/tmp/output.avi"
+Capturer::Capturer()
+         :QFrame( 0 ), height( 320 ), width( 240 ), zoom( 1 ), quality( 90 ),
+         flip( "A" ), format( "JPEG" ), name( "Untitled" )
+{
+}
 
-int captureX = 240;
-int captureY = 320;
-int quality = 75;
-QString flip = "A";
-int zoom = 1;
-QString format = "JPG";
-QString name;
 
-int performCapture();
+Capturer::~Capturer()
+{
+}
+
+
+void Capturer::checkSettings()
+{
+    if ( width > height )
+    {
+        if ( 0 != width % 16 || width < 16 || width > 640 )
+        {
+            printf( "Warning: Corrected X resolution to 320 px\n" );
+            width = 320;
+        }
+        if ( 0 != height % 16 || height < 16 || height > 480 )
+        {
+            printf( "Warning: Corrected Y resolution to 240 px\n" );
+            height = 240;
+        }
+    }
+    else
+    {
+        if ( 0 != width % 16 || width < 16 || width > 480 )
+        {
+            printf( "Warning: Corrected X resolution to 240 px\n" );
+            width = 240;
+        }
+        if ( 0 != height % 16 || height < 16 || height > 640 )
+        {
+            printf( "Warning: Corrected Y resolution to 320 px\n" );
+            height = 320;
+        }
+    }
+
+    if ( quality > 100 || quality < 10 )
+    {
+        printf( "Warning: Corrected quality to 75%%\n" );
+        quality = 75;
+    }
+
+    if ( zoom > 2 || zoom < 1 )
+    {
+        printf( "Warning: Corrected zoom to x1\n" );
+        zoom = 1;
+    }
+
+    if ( format != "JPEG" && format != "PNG" && format != "BMP" )
+    {
+        printf( "Warning: Corrected format to 'JPEG'\n" );
+        format = "JPEG";
+    }
+}
+
+
+void Capturer::capture()
+{
+    if ( flip == "A" )
+        ZCameraIO::instance()->setFlip( ZCameraIO::AUTOMATICFLIP );
+    else if ( flip == "0" )
+        ZCameraIO::instance()->setFlip( ZCameraIO::XNOFLIP | ZCameraIO::YNOFLIP );
+    else if ( flip == "X" )
+        ZCameraIO::instance()->setFlip( ZCameraIO::XFLIP );
+    else if ( flip == "Y" )
+        ZCameraIO::instance()->setFlip( ZCameraIO::YFLIP );
+    else if ( flip == "*" )
+        ZCameraIO::instance()->setFlip( ZCameraIO::XFLIP | ZCameraIO::YFLIP );
+
+    ZCameraIO::instance()->captureFrame( width, height, zoom, &image );
+    QImage im = image.convertDepth( 32 );
+    bool result = im.save( name, format, quality );
+    if ( !result )
+    {
+        printf( "QImageio-Problem while writing.\n" );
+    }
+    else
+    {
+        printf( "Ok.\n" );
+    }
+}
+
 
 void usage()
 {
@@ -49,24 +118,21 @@ void usage()
     printf( "  -x xresolution (dividable by 16) [default=240]\n" );
     printf( "  -y xresolution (dividable by 16) [default=320]\n" );
     printf( "  -q quality (10-100) [default=75]\n" );
-    printf( "  -f flip (A=auto, X, Y, *=both) [default=Auto]\n" );
-    printf( "  -o output format (JPG,BMP,PNG) [default=JPG]\n" );
+    printf( "  -f flip (A=auto, 0, X, Y, *=both) [default=Auto]\n" );
+    printf( "  -o output format (JPEG,BMP,PNG) [default=JPEG]\n" );
     printf( "  -z zoom (1-2) [default=1]\n" );
 }
 
 int main( int argc, char** argv )
 {
-    OApplication* a = new OApplication( argc, argv, "opie-camera" );
+    OApplication* a = new OApplication( argc, argv, "Capture" );
+    Capturer* c = new Capturer();
 
     if ( argc < 2 )
     {
         usage();
         return -1;
     }
-
-    int captureX = 240;
-    int captureY = 320;
-    QString flip = "A";
 
     #define I_HATE_WRITING_HARDCODED_PARSES
 
@@ -83,7 +149,7 @@ int main( int argc, char** argv )
             }
             else
             {
-                name = argv[i];
+                c->name = argv[i];
                 break;
             }
         }
@@ -97,12 +163,12 @@ int main( int argc, char** argv )
             }
             switch ( argv[i-1][1] )
             {
-                case 'x': captureX = QString( argv[i] ).toInt(); break;
-                case 'y': captureY = QString( argv[i] ).toInt(); break;
-                case 'z': zoom = QString( argv[i] ).toInt(); break;
-                case 'o': format = QString( argv[i] ); break;
-                case 'q': quality = QString( argv[i] ).toInt(); break;
-                case 'f': flip = QString( argv[i] )[0]; break;
+                case 'x': c->width = QString( argv[i] ).toInt(); break;
+                case 'y': c->height = QString( argv[i] ).toInt(); break;
+                case 'z': c->zoom = QString( argv[i] ).toInt(); break;
+                case 'o': c->format = QString( argv[i] ); break;
+                case 'q': c->quality = QString( argv[i] ).toInt(); break;
+                case 'f': c->flip = QString( argv[i] )[0]; break;
                 default: usage(); return -1;
             }
             i++;
@@ -116,31 +182,9 @@ int main( int argc, char** argv )
         printf( "Error: Can't detect your camera. Exiting.\n" );
         return -1;
     }
-    return performCapture();
-}
 
-
-int performCapture()
-{
-   printf( "Capturing %dx%d Image [%s] q%d z%d --> %s\n", captureX,
-                                                          captureY,
-                                                          (const char*) format,
-                                                          quality,
-                                                          zoom,
-                                                          (const char*) name );
-
-    QImage i;
-    ZCameraIO::instance()->captureFrame( captureX, captureY, zoom, &i );
-    QImage im = i.convertDepth( 32 );
-    bool result = im.save( name, format, quality );
-    if ( !result )
-    {
-        printf( "QImageio-Problem while writing.\n" );
-        return -1;
-    }
-    else
-    {
-        printf( "Ok.\n" );
-    }
+    c->checkSettings();
+    c->capture();
+    return 0;
 }
 
