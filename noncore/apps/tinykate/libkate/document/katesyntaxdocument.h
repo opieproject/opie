@@ -18,7 +18,7 @@
 #ifndef SYNTAXDOCUMENT_H
 #define SYNTAXDOCUMENT_H
 
-#include <opie/xmltree.h>
+#include <opie2/xmltree.h>
 #include <qlist.h>
 #include <qstringlist.h>
 
@@ -43,7 +43,7 @@ class syntaxContextData
 
 typedef QList<syntaxModeListItem> SyntaxModeList;
 
-class SyntaxDocument 
+class SyntaxDocument
 {
   public:
     SyntaxDocument();
@@ -54,7 +54,7 @@ class SyntaxDocument
 
     syntaxContextData* getGroupInfo(const QString& langName, const QString &group);
     void freeGroupInfo(syntaxContextData* data);
-    syntaxContextData* getConfig(const QString& mainGroupName, const QString &Config);       
+    syntaxContextData* getConfig(const QString& mainGroupName, const QString &Config);
     bool nextItem(syntaxContextData* data);
     bool nextGroup(syntaxContextData* data);
     syntaxContextData* getSubItems(syntaxContextData* data);

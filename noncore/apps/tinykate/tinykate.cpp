@@ -23,7 +23,7 @@
 #include <qpe/global.h>
 #include <qpe/qpeapplication.h>
 
-#include <opie/ofiledialog.h>
+#include <opie2/ofiledialog.h>
 
 #include "tinykate.h"
 
@@ -160,7 +160,7 @@ TinyKate::~TinyKate( )
 
   shutDown=true;
   while (currentView!=0) {
-	slotClose();
+    slotClose();
   }
 
   if( KGlobal::config() != 0 ) {
@@ -171,7 +171,7 @@ TinyKate::~TinyKate( )
 
 void TinyKate::slotOpen( )
 {
-    QString filename = OFileDialog::getOpenFileName( OFileSelector::EXTENDED_ALL,
+    QString filename = Opie::OFileDialog::getOpenFileName( OFileSelector::EXTENDED_ALL,
                                                 QString::null);
   if (!filename.isEmpty()) {
     open(filename);
@@ -266,7 +266,7 @@ void TinyKate::slotSaveAs() {
   if (currentView==0) return;
   KateDocument *kd = (KateDocument*) currentView->document();
 
-  QString filename=OFileDialog::getSaveFileName(OFileSelector::EXTENDED_ALL,
+  QString filename= Opie::OFileDialog::getSaveFileName(OFileSelector::EXTENDED_ALL,
                                                 QString::null);
   if (!filename.isEmpty()) {
     qDebug("saving file "+filename);

@@ -20,7 +20,7 @@
 
 
 #include <qmainwindow.h>
-#include <opie/otabwidget.h>
+#include <opie2/otabwidget.h>
 #include <ktexteditor.h>
 
 class QToolButton;

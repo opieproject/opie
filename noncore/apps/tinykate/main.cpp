@@ -13,10 +13,10 @@
  *   ONLY VERSION 2 OF THE LICENSE IS APPLICABLE                           *
  *                                                                         *
  ***************************************************************************/
-#include <qmainwindow.h>
-#include "tinykate.h"
 
-#include <opie/oapplicationfactory.h>
+#include <opie2/oapplicationfactory.h>
+
+#include "tinykate.h"
 
 OPIE_EXPORT_APP( OApplicationFactory<TinyKate> )
 

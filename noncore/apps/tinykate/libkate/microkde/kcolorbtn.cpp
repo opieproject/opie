@@ -23,10 +23,9 @@
 #include <qdrawutil.h>
 #include <qapplication.h>
 #include <kglobalsettings.h>
-//#include "kcolordialog.h"
 #include "kcolorbtn.h"
 
-#include <opie/colordialog.h>
+#include <opie2/qcolordialog.h>
 
 KColorButton::KColorButton( QWidget *parent, const char *name )
   : QPushButton( parent, name ), dragFlag(false)
@@ -58,10 +57,10 @@ void KColorButton::drawButtonLabel( QPainter *painter )
   int w = r.width();
   int h = r.height();
   int b = 5;
-  
+
   QColor lnCol = colorGroup().text();
   QColor fillCol = isEnabled() ? col : backgroundColor();
-  
+
   if ( isDown() ) {
     qDrawPlainRect( painter, l+b+1, t+b+1, w-b*2, h-b*2, lnCol, 1, 0 );
     b++;
@@ -75,7 +74,7 @@ void KColorButton::drawButtonLabel( QPainter *painter )
 
 void KColorButton::chooseColor()
 {
-  QColor newCol=OColorDialog::getColor( col);
+  QColor newCol=QColorDialog::getColor( col);
   if( newCol != QDialog::Rejected )
   {
   col=newCol;

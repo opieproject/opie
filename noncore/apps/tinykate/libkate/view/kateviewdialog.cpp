@@ -35,7 +35,7 @@
 #include <qobjectlist.h>
 #include <qradiobutton.h>
 #include <qwhatsthis.h>
-#include <qstringlist.h> 
+#include <qstringlist.h>
 #include <klocale.h>
 #include <kcolorbtn.h>
 #include <qcombobox.h>
@@ -46,7 +46,7 @@
 
 #include "../document/katedocument.h"
 #include "kateviewdialog.h"
-#include <opie/ofontselector.h>
+#include <opie2/ofontselector.h>
 
 
 SearchDialog::SearchDialog( QWidget *parent, QStringList &searchFor, QStringList &replaceWith, int flags )
@@ -425,7 +425,7 @@ EditConfigTab::EditConfigTab(QWidget *parent, KateView *view)
   e3 = new QSpinBox(this);
   e3->setMinValue(5);
   e3->setMaxValue( 30000);
-#warning fixme   e3->setLabel(i18n("Undo steps:")); 
+#warning fixme   e3->setLabel(i18n("Undo steps:"));
   e3->setValue((int)view->undoSteps());
 
   leLayout->addWidget(e1, 0, AlignLeft);
@@ -541,7 +541,7 @@ FontConfig::FontConfig( QWidget *parent, char *name )
              this, SLOT( slotFontSelected( const QFont & )));
    grid->addWidget(  m_fontselect, 0, 0);
 
-    
+
 // #if 0
 //   m_fontchooser = new KFontChooser ( this );
 //   m_fontchooser->enableColumn(KFontChooser::StyleList, false);
