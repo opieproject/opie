@@ -26,6 +26,7 @@
 #include <qlabel.h>
 #include <qlistview.h>
 #include <qpushbutton.h>
+#include <qlineedit.h>
 
 #include <opie/otabwidget.h>
 
@@ -46,8 +47,6 @@ ConfigDlg::ConfigDlg(QWidget *parent, const char *name, bool modal) : QDialog(pa
 	QHBox *hbox = new QHBox( search_tab );
 	list = new QListView( hbox );
 	list->addColumn( tr( "Searchmethod" ) );
-	QListViewItem *item = new QListViewItem( list );
-	item->setText( 0, "foofooofoofoof" );
 	
 	QVBox *vbox = new QVBox( hbox );
 	new_button = new QPushButton( "New" , vbox );
@@ -75,14 +74,28 @@ void ConfigDlg::slotNewMethod()
 	SearchMethodDlg dlg( this, "SearchMethodDlg", true );
 	if ( dlg.exec() == QDialog::Accepted )
 	{
-		//dlg.saveItem();
+		dlg.saveItem();
 		QListViewItem *item = new QListViewItem( list );
-		item->setText( 0 , dlg.itemName );
+		item->setText( 0 , dlg.nameLE->text() );
 	}
 	else qDebug( "SearchMethodDlg abgebrochen" );
 }
 
-void ConfigDlg::slotChangeMethod(){}
+void ConfigDlg::slotChangeMethod()
+{
+	if ( list->selectedItem() )
+	{
+		SearchMethodDlg dlg( this, "SearchMethodDlg", true, list->selectedItem()->text( 0 ) );
+		if ( dlg.exec() == QDialog::Accepted )
+		{
+			dlg.saveItem();
+			QListViewItem *item = new QListViewItem( list );
+			item->setText( 0 , dlg.nameLE->text() );
+		}
+		else qDebug( "SearchMethodDlg abgebrochen" );
+	}
+	else qDebug( "kein item angewählt" );
+}
 
 void ConfigDlg::slotDeleteMethod()
 {
