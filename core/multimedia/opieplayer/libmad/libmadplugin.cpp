@@ -34,6 +34,14 @@
 #include <qapplication.h>
 #include <qpe/config.h>
 
+// for network handling
+#include <netinet/in.h>
+#include <netdb.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+
+
 //#define HAVE_MMAP
 
 #if defined(HAVE_MMAP)
@@ -160,8 +168,177 @@ bool LibMadPlugin::isFileSupported( const QString& path ) {
   if ( strncasecmp(ext, ".mp3", 4) == 0 )
       return TRUE;
     }
+    // UGLY - just for fast testing
+    if ( path.left(4) == "http") {
+        return TRUE;
+    }
+
 
     return FALSE;
+}
+
+
+int LibMadPlugin::tcp_open(char *address, int port) {
+    struct sockaddr_in stAddr;
+    struct hostent *host;
+    int sock;
+    struct linger l;
+
+    memset(&stAddr, 0, sizeof(stAddr));
+    stAddr.sin_family = AF_INET;
+    stAddr.sin_port = htons(port);
+
+    if ((host = gethostbyname(address)) == NULL)
+        return (0);
+
+    stAddr.sin_addr = *((struct in_addr *)host->h_addr_list[0]);
+
+    if ((sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
+        return (0);
+
+    l.l_onoff = 1;
+    l.l_linger = 5;
+    if (setsockopt(sock, SOL_SOCKET, SO_LINGER, (char *)&l, sizeof(l)) < 0)
+        return (0);
+
+    if (connect(sock, (struct sockaddr *)&stAddr, sizeof(stAddr)) < 0)
+        return (0);
+
+    return (sock);
+}
+
+
+/**
+ * Read a http line header.
+ * This function read character by character.
+ * @param tcp_sock the socket use to read the stream
+ * @param buf a buffer to receive the data
+ * @param size size of the buffer
+ * @return the size of the stream read or -1 if an error occured
+ */
+int LibMadPlugin::http_read_line(int tcp_sock, char *buf, int size) {
+    int offset = 0;
+
+    do
+    {
+        if (std::read(tcp_sock, buf + offset, 1) < 0)
+            return -1;
+        if (buf[offset] != '\r')    /* Strip \r from answer */
+            offset++;
+    }
+    while (offset < size - 1 && buf[offset - 1] != '\n');
+
+    buf[offset] = 0;
+    return offset;
+}
+
+int LibMadPlugin::http_open(const QString& path ) {
+    char *host;
+    int port;
+    char *request;
+    int tcp_sock;
+    char http_request[PATH_MAX];
+    char filename[PATH_MAX];
+    char c;
+    char *arg =strdup(path.latin1());
+
+    /* Check for URL syntax */
+    if (strncmp(arg, "http://", strlen("http://")))
+        return (0);
+
+    /* Parse URL */
+    port = 80;
+    host = arg + strlen("http://");
+    if ((request = strchr(host, '/')) == NULL)
+        return (0);
+    *request++ = 0;
+
+    if (strchr(host, ':') != NULL)  /* port is specified */
+    {
+        port = atoi(strchr(host, ':') + 1);
+        *strchr(host, ':') = 0;
+    }
+
+    /* Open a TCP socket */
+    if (!(tcp_sock = tcp_open(host, port)))
+    {
+        perror("http_open");
+        return (0);
+    }
+
+    snprintf(filename, sizeof(filename) - strlen(host) - 75, "%s", request);
+
+    /* Send HTTP GET request */
+    /* Please don't use a Agent know by shoutcast (Lynx, Mozilla) seems to be reconized and print
+     * a html page and not the stream */
+    snprintf(http_request, sizeof(http_request), "GET /%s HTTP/1.0\r\n"
+/*  "User-Agent: Mozilla/2.0 (Win95; I)\r\n" */
+             "Pragma: no-cache\r\n" "Host: %s\r\n" "Accept: */*\r\n" "\r\n", filename, host);
+
+    send(tcp_sock, http_request, strlen(http_request), 0);
+
+    /* Parse server reply */
+#if 0
+    do
+        read(tcp_sock, &c, sizeof(char));
+    while (c != ' ');
+    read(tcp_sock, http_request, 4 * sizeof(char));
+    http_request[4] = 0;
+    if (strcmp(http_request, "200 "))
+    {
+        fprintf(stderr, "http_open: ");
+        do
+        {
+            read(tcp_sock, &c, sizeof(char));
+            fprintf(stderr, "%c", c);
+        }
+        while (c != '\r');
+        fprintf(stderr, "\n");
+        return (0);
+    }
+#endif
+
+    do
+    {
+        int len;
+
+        len = http_read_line(tcp_sock, http_request, sizeof(http_request));
+
+        if (len == -1)
+        {
+            fprintf(stderr, "http_open: %s\n", strerror(errno));
+            return 0;
+        }
+
+        if (strncmp(http_request, "Location:", 9) == 0)
+        {
+            /* redirect */
+            std::close(tcp_sock);
+
+            http_request[strlen(http_request) - 1] = '\0';
+
+            return http_open(&http_request[10]);
+        }
+
+        if (strncmp(http_request, "ICY ", 4) == 0)
+        {
+            /* This is icecast streaming */
+            if (strncmp(http_request + 4, "200 ", 4))
+            {
+                fprintf(stderr, "http_open: %s\n", http_request);
+                return 0;
+            }
+        }
+        else if (strncmp(http_request, "icy-", 4) == 0)
+        {
+            /* we can have: icy-noticeX, icy-name, icy-genre, icy-url, icy-pub, icy-metaint, icy-br */
+            /* Don't print these - mpg123 doesn't */
+            /*    fprintf(stderr,"%s\n",http_request); */
+        }
+    }
+    while (strcmp(http_request, "\n") != 0);
+
+    return (tcp_sock);
 }
 
 
@@ -177,8 +354,14 @@ bool LibMadPlugin::open( const QString& path ) {
 
     //qDebug( "Opening %s", path.latin1() );
 
-    d->input.path = path.latin1();
-    d->input.fd = ::open( d->input.path, O_RDONLY );
+
+    if (path.left( 4 ) == "http" ) {
+        d->input.fd = http_open(path);
+
+    } else {
+        d->input.path = path.latin1();
+        d->input.fd = ::open( d->input.path, O_RDONLY );
+    }
     if (d->input.fd == -1) {
         qDebug("error opening %s", d->input.path );
   return FALSE;
@@ -496,7 +679,7 @@ bool LibMadPlugin::audioReadSamples( short *output, int /*channels*/, long sampl
     debugMsg( "LibMadPlugin::audioReadStereoSamples" );
 
     static bool needInput = TRUE;
-    
+
     if ( samples == 0 )
   return FALSE;
 

@@ -17,7 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifndef LIBMAD_PLUGIN_H 
+#ifndef LIBMAD_PLUGIN_H
 #define LIBMAD_PLUGIN_H
 
 #include <qstring.h>
@@ -43,13 +43,14 @@ public:
 
     bool isFileSupported( const QString& );
     bool open( const QString& );
+
     bool close();
     bool isOpen();
     const QString &fileInfo() { return info; }
 
     // If decoder doesn't support audio then return 0 here
     int audioStreams();
-    int audioChannels( int stream ); 
+    int audioChannels( int stream );
     int audioFrequency( int stream );
     int audioSamples( int stream );
     bool audioSetSample( long sample, int stream );
@@ -101,6 +102,10 @@ public:
     long getPlayTime() { return -1; }
 
 private:
+    int tcp_open(char *address, int port);
+    int http_read_line(int tcp_sock, char *buf, int size) ;
+    int http_open(const QString& path );
+
     LibMadPluginData *d;
     QString info;
 int bufferSize;
