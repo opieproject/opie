@@ -129,7 +129,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     QString modelPixmap = "sysinfo/";
     if ( model == Model_Zaurus_SLC7x0 )
         modelPixmap += "zaurusc700";
-    else if ( model >= Model_Zaurus_SLC7x0 && model <= Model_Zaurus_SLC7x0 )
+    else if ( model >= Model_Zaurus_SL5000 && model <= Model_Zaurus_SLB600 )
         modelPixmap += "zaurus5500";
     else if ( model >= Model_iPAQ_H31xx && model <= Model_iPAQ_H5xxx )
         modelPixmap += "ipaq3600";
