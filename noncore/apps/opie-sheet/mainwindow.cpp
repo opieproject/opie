@@ -280,7 +280,7 @@ void MainWindow::initActions()
 
   //fileQuit=new QAction(tr("Quit"), tr("&Quit"), 0, this);
   //connect(fileQuit, SIGNAL(activated()), this, SLOT(close()));
-  fileExcelImport=new QAction(tr("Import Excel file"),Resource::loadPixmap( "/opie-sheet/excel16" ),tr("Import E&xcel file"),0,this);
+  fileExcelImport=new QAction(tr("Import Excel file"),Resource::loadPixmap( "opie-sheet/excel16" ),tr("Import E&xcel file"),0,this);
   connect(fileExcelImport, SIGNAL(activated()), this, SLOT(slotImportExcelOpen()));
 
   // helpGeneral=new QAction(tr("General Help"), QPixmap(help_general_xpm), tr("&General"), 0, this);
