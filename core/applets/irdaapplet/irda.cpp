@@ -207,7 +207,7 @@ void IrdaApplet::showDiscovered ( )
 				discoveredDevice = line. mid ( line. find ( ':' ) + 2, line. find ( ',' ) - line. find ( ':' ) - 2 );
 				deviceAddr       = line. mid ( line. find ( "daddr:" ) + 9, 8 );
 
-				// qDebug(discoveredDevice + "(" + deviceAddr + ")");
+				// odebug << discoveredDevice + "(" + deviceAddr + ")" << oendl; 
 
 				if ( !m_devices. contains ( deviceAddr )) {
 					popup ( tr( "Found:" ) + " " + discoveredDevice );
@@ -219,7 +219,7 @@ void IrdaApplet::showDiscovered ( )
 		}
 
 		for ( it = m_devices. begin ( ); it != m_devices. end ( ); ) {
-			// qDebug("IrdaMon: delete " + it.currentKey() + "=" + *devicesAvailable[it.currentKey()] + "?");
+			// odebug << "IrdaMon: delete " + it.currentKey() + "=" + *devicesAvailable[it.currentKey()] + "?" << oendl; 
 
 			if ( it. data ( ). left ( 3 ) == "+++" ) {
 				popup ( tr( "Lost:" ) + " " + it. data ( ). mid ( 3 ));

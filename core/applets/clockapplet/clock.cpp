@@ -20,12 +20,16 @@
 
 #include "clock.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <opie2/otaskbarapplet.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
 
+using namespace Opie::Core;
 using namespace Opie::Ui;
+
 LauncherClock::LauncherClock( QWidget *parent ) : QLabel( parent )
 {
     // If you want a sunken border around the clock do this:
@@ -55,9 +59,9 @@ void LauncherClock::readConfig() {
 
 void LauncherClock::mouseReleaseEvent( QMouseEvent * )
 {
-	QCString setTimeApp;
-	setTimeApp="systemtime";
-	QCopEnvelope e("QPE/Application/"+setTimeApp, "raise()");
+    QCString setTimeApp;
+    setTimeApp="systemtime";
+    QCopEnvelope e("QPE/Application/"+setTimeApp, "raise()");
 }
 
 

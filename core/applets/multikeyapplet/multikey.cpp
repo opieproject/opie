@@ -68,7 +68,7 @@ void Multikey::mouseReleaseEvent(QMouseEvent *ev)
 
     lang = lang < sw_maps.count()-1 ? lang+1 : 0;
     QCopEnvelope e("MultiKey/Keyboard", "setmultikey(QString)");
-    //qDebug("Lang=%d, count=%d, lab=%s", lang, sw_maps.count(), labels[lang].ascii());
+    //odebug << "Lang=" << lang << ", count=" << sw_maps.count() << ", lab=" << labels[lang].ascii() << "" << oendl; 
     e << sw_maps[lang];
     setText(labels[lang]);
 }

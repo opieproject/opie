@@ -1,24 +1,27 @@
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
-#include <stdlib.h> // int system
-#include <unistd.h>
+#include "obex.h"
+#include "receiver.h"
+using namespace OpieObex;
 
-#include <fcntl.h>
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/applnk.h>
+#include <qpe/qpeapplication.h>
+#include <qpe/qcopenvelope_qws.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qfileinfo.h>
 #include <qlabel.h>
 #include <qtextview.h>
 #include <qpushbutton.h>
 
-#include <qpe/applnk.h>
-#include <qpe/qpeapplication.h>
-#include <qpe/qcopenvelope_qws.h>
-
-#include "obex.h"
-#include "receiver.h"
-
-using namespace OpieObex;
+/* STD */
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
+#include <stdlib.h> // int system
+#include <unistd.h>
+#include <fcntl.h>
 
 /* TRANSLATOR OpieObex::Receiver */
 
@@ -75,14 +78,14 @@ void Receiver::tidyUp( QString& _file, const QString& ending) {
     (void)::strncat( foo, ending.latin1(), 4 );
     _file = QString::fromLatin1( foo );
     QString cmd = QString("sed -e \"s/^\\(X-MICROSOFT-BODYINK\\)\\;/\\1:/;\" < %2 > %2 ").arg( Global::shellQuote(file)).arg( Global::shellQuote(_file) );
-    qWarning("Executing: %s", cmd.latin1() );
+    owarn << "Executing: " << cmd << "" << oendl;
     (void)::system( cmd.latin1() );
 
     cmd = QString("rm %1").arg( Global::shellQuote(file) );
     (void)::system( cmd.latin1() );
 }
 int Receiver::checkFile( QString& file ) {
-    qWarning("check file!! %s", file.latin1() );
+    owarn << "check file!! " << file << "" << oendl;
     int ret;
     QString ending;
 
@@ -107,7 +110,7 @@ int Receiver::checkFile( QString& file ) {
      */
     tidyUp( file, ending );
 
-    qWarning("check it now %d", ret );
+    owarn << "check it now " << ret << "" << oendl;
     return ret;
 }
 
@@ -148,7 +151,7 @@ void OtherHandler::handle( const QString& file ) {
     m_file = file;
     m_na->setText(file);
     DocLnk lnk(file);
-    qWarning(" %s %s", lnk.type().latin1(), lnk.icon().latin1() );
+    owarn << " " << lnk.type() << " " << lnk.icon() << "" << oendl;
 
     QString str = tr("<p>You received a file of type %1 (<img src=\"%2\"> )What do you want to do?").arg(lnk.type() ).arg(lnk.icon() );
     m_view->setText( str );
@@ -191,7 +194,7 @@ QString OtherHandler::targetName( const QString& file ) {
 
 /* fast cpy */
 void OtherHandler::copy(const QString& src, const QString& file) {
-    qWarning("src %s, dest %s", src.latin1(),file.latin1() );
+    owarn << "src " << src << ", dest " << file << "" << oendl;
     QString cmd = QString("mv %1 %2").arg( Global::shellQuote( src )).
                   arg( Global::shellQuote( file ) );
     ::system( cmd.latin1() );

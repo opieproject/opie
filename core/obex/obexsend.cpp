@@ -1,18 +1,19 @@
+#include "obex.h"
+#include "obexsend.h"
+using namespace OpieObex;
+
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/qcopenvelope_qws.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qpushbutton.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qtimer.h>
 
-
-#include <qpe/qcopenvelope_qws.h>
-
-#include "obex.h"
-#include "obexsend.h"
-
-using namespace OpieObex;
-
 /* TRANSLATOR OpieObex::SendWidget */
-
 
 SendWidget::SendWidget( QWidget* parent, const char* name )
     : QWidget( parent, name ) {
@@ -104,7 +105,7 @@ void SendWidget::send( const QString& file, const QString& desc ) {
     }
 }
 void SendWidget::slotIrDaDevices( const QStringList& list) {
-    qWarning("slot it irda devices ");
+    owarn << "slot it irda devices " << oendl;
     for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it ) {
         int id = m_devBox->addDevice( (*it), DeviceBox::IrDa, tr("Scheduling for beam.") );
         m_irDa.insert( id, (*it) );
@@ -123,7 +124,7 @@ void SendWidget::slotBTDevices( const QMap<QString, QString>& str ) {
     m_devBox->removeDevice( m_btDeSearch );
 }
 void SendWidget::slotSelectedDevice( int name, int dev ) {
-    qWarning("Start beam? %d %d", name, dev );
+    owarn << "Start beam? " << name << " " << dev << "" << oendl;
     if ( name ==  m_irDeSearch ) {
         for (QMap<int, QString>::Iterator it= m_irDa.begin(); it != m_irDa.end(); ++it )
             m_devBox->removeDevice( it.key() );
@@ -132,7 +133,7 @@ void SendWidget::slotSelectedDevice( int name, int dev ) {
     }
 }
 void SendWidget::dispatchIrda( const QCString& str, const QByteArray& ar ) {
-    qWarning("dispatch irda %s", str.data() );
+    owarn << "dispatch irda " << str.data() << "" << oendl;
     if ( str == "devices(QStringList)" ) {
         QDataStream stream( ar, IO_ReadOnly );
         QStringList list;
@@ -147,7 +148,7 @@ void SendWidget::slotIrError( int ) {
 
 }
 void SendWidget::slotIrSent( bool b) {
-    qWarning("irda sent!!");
+    owarn << "irda sent!!" << oendl;
     QString text = b ? tr("Sent") : tr("Failure");
     m_devBox->setStatus( m_irDaIt.key(), text );
     ++m_irDaIt;
@@ -204,7 +205,7 @@ void DeviceBox::setStatus( int id, const QString& status ) {
     setText( allText() );
 }
 void DeviceBox::setSource( const QString& str ) {
-    qWarning("SetSource:%d", str.toInt() );
+    owarn << "SetSource:" << str.toInt() << "" << oendl;
     int id = str.toInt();
     emit selectedDevice( id, m_dev[id].device() );
 }

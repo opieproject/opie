@@ -12,6 +12,10 @@
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 // copyright 2002 and 2003  L.J.Potter <ljp@llornkcor.com>
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
 extern "C" {
 #include "adpcm.h"
 }
@@ -29,7 +33,7 @@ typedef struct _waveheader {
   u_long  length;     /* filelen */
   u_long  chunk_type; /* 'WAVE'  */
   u_long  sub_chunk;  /* 'fmt '                                               */
-  u_long  sc_len;     /* length of sub_chunk, =16     
+  u_long  sc_len;     /* length of sub_chunk, =16
                          (chunckSize) format len */
   u_short format;     /* should be 1 for PCM-code        (formatTag)          */
 
@@ -198,21 +202,21 @@ VMemo::VMemo( QWidget *parent, const char *_name )
   : QWidget( parent, _name ) {
   setFixedHeight( 18 );
   setFixedWidth( 14 );
-  
+
   t_timer = new QTimer( this );
   connect( t_timer, SIGNAL( timeout() ), SLOT( timerBreak() ) );
-  
+
     Config vmCfg("Vmemo");
     vmCfg.setGroup("Defaults");
     int toggleKey = setToggleButton(vmCfg.readNumEntry("toggleKey", -1));
     useADPCM = vmCfg.readBoolEntry("use_ADPCM", 0);
 
-    qDebug("toggleKey %d", toggleKey);
+    odebug << "toggleKey " << toggleKey << "" << oendl;
     if ( QFile::exists ( "/dev/sharp_buz" ) || QFile::exists ( "/dev/sharp_led" ))
          systemZaurus=TRUE;
-    else 
+    else
       systemZaurus=FALSE;
-      
+
     myChannel = new QCopChannel( "QPE/VMemo", this );
     connect( myChannel, SIGNAL(received(const QCString&,const QByteArray&)),
              this, SLOT(receive(const QCString&,const QByteArray&)) );
@@ -245,7 +249,7 @@ int VMemo::position()
 }
 
 void VMemo::receive( const QCString &msg, const QByteArray &data ) {
-  qDebug("receive");
+  odebug << "receive" << oendl;
   QDataStream stream( data, IO_ReadOnly );
 
   if (msg == "toggleRecord()")  {
@@ -267,7 +271,7 @@ void VMemo::paintEvent( QPaintEvent* ) {
 void VMemo::mousePressEvent( QMouseEvent * me) {
   /*  No mousePress/mouseRelease recording on the iPAQ. The REC button on the iPAQ calls these functions
          mousePressEvent and mouseReleaseEvent with a NULL parameter.  */
-        
+
 //  if (!systemZaurus && me != NULL)
 //        return;
 //    }
@@ -293,14 +297,14 @@ bool VMemo::startRecording() {
     msgLabel->show();
   }
 
-  qDebug("Start recording engines");
+  odebug << "Start recording engines" << oendl;
   recording = TRUE;
 
   if (openDSP() == -1)  {
     recording = FALSE;
     return FALSE;
   }
-  
+
   config.setGroup("Defaults");
 
   date = TimeString::dateString( QDateTime::currentDateTime(),false,true);
@@ -318,21 +322,21 @@ bool VMemo::startRecording() {
   s=fileName.find(':');
   if(s)
     fileName=fileName.right(fileName.length()-s-2);
-  qDebug("pathname will be "+fileName);   
+  odebug << "pathname will be "+fileName << oendl;
 
   if( fileName.left(1).find('/') == -1)
     fileName="/"+fileName;
   if( fileName.right(1).find('/') == -1)
     fileName+="/";
   fName = "vm_"+ date+ ".wav";
-  
+
   fileName+=fName;
-  qDebug("filename is "+fileName);
+  odebug << "filename is "+fileName << oendl;
 // open tmp file here
   char *pointer;
-  pointer=tmpnam(NULL); 
-  qDebug("Opening tmp file %s",pointer);
-  
+  pointer=tmpnam(NULL);
+  odebug << "Opening tmp file " << pointer << "" << oendl;
+
   if(openWAV(pointer ) == -1)  {
 
     QString err("Could not open the temp file\n");
@@ -349,12 +353,12 @@ bool VMemo::startRecording() {
 
   cmd.sprintf("mv %s "+fileName, pointer);
 // move tmp file to regular file here
-  
+
   system(cmd.latin1());
 
   QArray<int> cats(1);
   cats[0] = config.readNumEntry("Category", 0);
-  
+
   QString dlName("vm_");
   dlName += date;
   DocLnk l;
@@ -366,12 +370,12 @@ bool VMemo::startRecording() {
   return TRUE;
   } else
       return FALSE;
-  
+
 }
 
 void VMemo::stopRecording() {
     show();
-    qDebug("Stopped recording");
+    odebug << "Stopped recording" << oendl;
     recording = FALSE;
     if(useAlerts) {
         msgLabel->close();
@@ -388,7 +392,7 @@ void VMemo::stopRecording() {
 int VMemo::openDSP() {
   Config cfg("Vmemo");
   cfg.setGroup("Record");
-  
+
   speed = cfg.readNumEntry("SampleRate", 22050);
   channels = cfg.readNumEntry("Stereo", 1) ? 2 : 1; // 1 = stereo(2), 0 = mono(1)
   if (cfg.readNumEntry("SixteenBit", 1)==1)  {
@@ -399,7 +403,7 @@ int VMemo::openDSP() {
     resolution = 8;
   }
 
-  qDebug("samplerate: %d, channels %d, resolution %d", speed, channels, resolution);  
+  odebug << "samplerate: " << speed << ", channels " << channels << ", resolution " << resolution << "" << oendl;
 
   if(systemZaurus) {
     dsp = open("/dev/dsp1", O_RDONLY); //Zaurus needs /dev/dsp1
@@ -407,18 +411,18 @@ int VMemo::openDSP() {
   }  else {
     dsp = open("/dev/dsp", O_RDONLY);
   }
-  
+
   if(dsp == -1)  {
       msgLabel->close();
       msgLabel=0;
       delete msgLabel;
-    
+
       perror("open(\"/dev/dsp\")");
       errorMsg="open(\"/dev/dsp\")\n "+(QString)strerror(errno);
     QMessageBox::critical(0, "vmemo", errorMsg, "Abort");
     return -1;
   }
-  
+
   if(ioctl(dsp, SNDCTL_DSP_SETFMT , &format)==-1)  {
     perror("ioctl(\"SNDCTL_DSP_SETFMT\")");
     return -1;
@@ -437,7 +441,7 @@ int VMemo::openDSP() {
   }
 
   QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << FALSE; //mute
-  
+
   return 1;
 }
 
@@ -452,29 +456,29 @@ int VMemo::openWAV(const char *filename) {
     Config vmCfg("Vmemo");
     vmCfg.setGroup("Defaults");
   useADPCM = vmCfg.readBoolEntry("use_ADPCM", 0);
-  
+
   WaveHeader wh;
 
   wh.main_chunk = RIFF;
-  wh.length=0; 
+  wh.length=0;
   wh.chunk_type = WAVE;
   wh.sub_chunk  = FMT;
   wh.sc_len     = 16;
   if(useADPCM)
       wh.format     = WAVE_FORMAT_DVI_ADPCM;//PCM_CODE;
   else
-      wh.format     = PCM_CODE;     
+      wh.format     = PCM_CODE;
   wh.modus      = channels;
   wh.sample_fq  = speed;
   wh.byte_p_sec = speed * channels *  resolution/8;
-  wh.byte_p_spl = channels * (resolution / 8); 
+  wh.byte_p_spl = channels * (resolution / 8);
   wh.bit_p_spl  = resolution;
   wh.data_chunk = DATA;
-  wh.data_length= 0; 
+  wh.data_length= 0;
   //    qDebug("Write header channels %d, speed %d, b/s %d, blockalign %d, bitrate %d"
   //           , wh.modus, wh.sample_fq, wh.byte_p_sec, wh.byte_p_spl, wh.bit_p_spl );
   write (wav, &wh, sizeof(WaveHeader));
-  
+
   return 1;
 }
 
@@ -483,7 +487,7 @@ bool VMemo::record() {
    int result, value;
   QString msg;
   msg.sprintf("Recording format %d", format);
-  qDebug(msg);
+  odebug << msg << oendl;
   Config config("Vmemo");
   config.setGroup("Record");
   int sRate=config.readNumEntry("SizeLimit", 30);
@@ -494,7 +498,7 @@ bool VMemo::record() {
 //    } else { // 16 bit only capabilities
 
     msg.sprintf("Recording format other");
-    qDebug(msg);
+    odebug << msg << oendl;
 
     int bufsize=1024;
     int bytesWritten=0;
@@ -513,7 +517,7 @@ bool VMemo::record() {
             result = read(dsp, sound, 1024); // 8192
         if( result <= 0) {
           perror("recording error ");
-//          qDebug(currentFileName);
+//          odebug << currentFileName << oendl;
           QMessageBox::message(tr("Note"),tr("error recording"));
           recording=FALSE;
           break;
@@ -540,7 +544,7 @@ bool VMemo::record() {
           break;
           return FALSE;
       }
-      //       printf("%d\r",length);
+      //       odebug << "" << length << "\r" << oendl;
       //       fflush(stdout);
       qApp->processEvents();
     }
@@ -559,8 +563,8 @@ bool VMemo::record() {
   write(wav, &length, 4);
 
   track.close();
-  qDebug("Track closed");
-  
+  odebug << "Track closed" << oendl;
+
   if( ioctl( dsp, SNDCTL_DSP_RESET,0) == -1)
     perror("ioctl(\"SNDCTL_DSP_RESET\")");
 
@@ -573,7 +577,7 @@ bool VMemo::record() {
 
       QString currentFileName = fileName;
       QString currentFile = "vm_"+ date;
-      
+
       float numberOfRecordedSeconds=(float) length / (float)speed * (float)2;
 
       cfgO.writeEntry( "NumberofFiles", nFiles + 1);
@@ -583,11 +587,11 @@ bool VMemo::record() {
       QString time;
       time.sprintf("%.2f", numberOfRecordedSeconds);
       cfgO.writeEntry( currentFileName, time );
-      //      qDebug("writing config numberOfRecordedSeconds "+time);
+      //      odebug << "writing config numberOfRecordedSeconds "+time << oendl;
 
       cfgO.write();
 
-      qDebug("done recording "+fileName);
+      odebug << "done recording "+fileName << oendl;
 
   Config cfg("qpe");
   cfg.setGroup("Volume");
@@ -602,32 +606,32 @@ int VMemo::setToggleButton(int tog) {
   for( int i=0; i < 10;i++) {
     switch (tog) {
     case 0:
-      return -1; 
-      break; 
+      return -1;
+      break;
     case 1:
-      return 0; 
-      break; 
+      return 0;
+      break;
     case 2:
         return Key_F24; //was Escape
-      break; 
+      break;
     case 3:
       return Key_Space;
-      break; 
+      break;
     case 4:
       return Key_F12;
-      break; 
+      break;
     case 5:
       return Key_F9;
-      break; 
+      break;
     case 6:
       return Key_F10;
-      break; 
+      break;
     case 7:
       return Key_F11;
-      break; 
+      break;
     case 8:
       return Key_F13;
-      break; 
+      break;
     };
   }
   return -1;

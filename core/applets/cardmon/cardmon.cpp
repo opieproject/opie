@@ -19,10 +19,13 @@
 #include "cardmon.h"
 
 /* OPIE */
+#include <opie2/odebug.h>
 #include <opie2/odevice.h>
 #include <opie2/otaskbarapplet.h>
 #include <qpe/applnk.h>
 #include <qpe/resource.h>
+using namespace Opie::Core;
+using namespace Opie::Ui;
 
 /* QT */
 #include <qcopchannel_qws.h>
@@ -38,17 +41,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <fcntl.h>
-
 #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
 #include <sys/vfs.h>
 #include <mntent.h>
 #endif
-
-using namespace Opie;
-
-using namespace Opie::Ui;
-using namespace Opie::Ui;
-using namespace Opie::Core;
 
 CardMonitor::CardMonitor( QWidget * parent ) : QWidget( parent ),
         pm( Resource::loadPixmap( "cardmon/pcmcia" ) )
@@ -197,12 +193,12 @@ void CardMonitor::cardMessage( const QCString & msg, const QByteArray & )
 {
     if ( msg == "stabChanged()" )
     {
-        // qDebug("Pcmcia: stabchanged");
+        // odebug << "Pcmcia: stabchanged" << oendl;
         getStatusPcmcia();
     }
     else if ( msg == "mtabChanged()" )
     {
-        // qDebug("CARDMONAPPLET: mtabchanged");
+        // odebug << "CARDMONAPPLET: mtabchanged" << oendl;
         getStatusSd();
     }
 }
@@ -210,7 +206,7 @@ void CardMonitor::cardMessage( const QCString & msg, const QByteArray & )
 bool CardMonitor::getStatusPcmcia( int showPopUp )
 {
 
-    bool cardWas0 = cardInPcmcia0;	// remember last state
+    bool cardWas0 = cardInPcmcia0;    // remember last state
     bool cardWas1 = cardInPcmcia1;
 
     QString fileName;
@@ -331,7 +327,7 @@ bool CardMonitor::getStatusPcmcia( int showPopUp )
     else
     {
         // no file found
-        qDebug( "no file found" );
+        odebug << "no file found" << oendl;
         cardInPcmcia0 = FALSE;
         cardInPcmcia1 = FALSE;
     }
@@ -345,7 +341,7 @@ bool CardMonitor::getStatusPcmcia( int showPopUp )
 bool CardMonitor::getStatusSd( int showPopUp )
 {
 
-    bool cardWas = cardInSd;	// remember last state
+    bool cardWas = cardInSd;    // remember last state
     cardInSd = FALSE;
 
 #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
@@ -357,7 +353,7 @@ bool CardMonitor::getStatusSd( int showPopUp )
         while ( ( me = getmntent( mntfp ) ) != 0 )
         {
             QString fs = me->mnt_fsname;
-            //qDebug( fs );
+            //odebug << fs << oendl;
             if ( fs.left( 14 ) == "/dev/mmc/part1" || fs.left( 7 ) == "/dev/sd"
                     || fs.left( 9 ) == "/dev/mmcd" )
             {
@@ -385,11 +381,11 @@ bool CardMonitor::getStatusSd( int showPopUp )
             text += "Ejected: SD/MMC";
             what = "off";
         }
-        //qDebug("TEXT: " + text );
+        //odebug << "TEXT: " + text << oendl;
 #ifndef QT_NO_SOUND
         QSound::play( Resource::findSound( "cardmon/card" + what ) );
 #endif
-        popUp( text, "cardmon/ide" );	// XX add SD pic
+        popUp( text, "cardmon/ide" );    // XX add SD pic
     }
 #else
 #error "Not on Linux"

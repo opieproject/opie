@@ -53,7 +53,6 @@ RestartApplet::RestartApplet( QWidget *parent, const char *name )
     : QWidget( parent, name ) {
       setFixedHeight( 18 );
       setFixedWidth( 16 );
-    qDebug("new restartapplet");
     show();
 }
 
@@ -66,7 +65,6 @@ void RestartApplet::mousePressEvent( QMouseEvent *) {
 
 void RestartApplet::paintEvent( QPaintEvent* ) {
       QPainter p(this);
-      qDebug("paint RESTART pixmap");
       p.drawPixmap( 0, 1,  ( const char** ) restart_xpm );
 }
 

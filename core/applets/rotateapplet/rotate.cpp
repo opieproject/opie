@@ -31,6 +31,7 @@
 #include "rotate.h"
 
 /* OPIE */
+#include <opie2/odebug.h>
 #include <opie2/odevice.h>
 #include <qpe/config.h>
 #include <qpe/power.h>
@@ -62,7 +63,7 @@ RotateApplet::~RotateApplet ( )
  */
 void RotateApplet::channelReceived( const QCString &msg, const QByteArray & data )
 {
-    qDebug( "RotateApplet::channelReceived( '%s' )", (const char*) msg );
+    odebug << "RotateApplet::channelReceived( '" <<  msg << "' )" << oendl;
 
     if ( ODevice::inst()->hasHingeSensor() )
     {
@@ -72,7 +73,7 @@ void RotateApplet::channelReceived( const QCString &msg, const QByteArray & data
         interval.tv_nsec = 600000;
         ::nanosleep( &interval, &remain );
         OHingeStatus status = ODevice::inst()->readHingeSensor();
-        qDebug( "RotateApplet::readHingeSensor = %d", (int) status );
+        odebug << "RotateApplet::readHingeSensor = " << (int) status << "" << oendl;
 
         Config cfg( "apm" );
         cfg.setGroup( PowerStatusManager::readStatus().acStatus() == PowerStatus::Online ? "AC" : "Battery" );
@@ -96,7 +97,7 @@ void RotateApplet::channelReceived( const QCString &msg, const QByteArray & data
                 default: /* IGNORE */ break;
             }
         }
-        qDebug( "RotateApplet::switchAction %d performed.", cfg.readNumEntry( "CloseHingeAction", 0 ) );
+        odebug << "RotateApplet::switchAction " << cfg.readNumEntry( "CloseHingeAction" ) << " performed." << oendl;
     }
 
     QDataStream stream( data, IO_ReadOnly );
@@ -239,7 +240,7 @@ QRESULT RotateApplet::queryInterface( const QUuid &uuid, QUnknownInterface **ifa
     else if ( uuid == IID_MenuApplet )
         *iface = this;
     else
-	return QS_FALSE;
+    return QS_FALSE;
 
     if ( *iface )
         (*iface)->addRef();

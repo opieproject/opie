@@ -33,7 +33,6 @@ RestartAppletImpl::~RestartAppletImpl()
 
 QWidget *RestartAppletImpl::applet( QWidget *parent )
 {
-    qDebug("restart applet");
     if ( !restart )
         restart = new RestartApplet( parent );
     return restart;
@@ -52,8 +51,8 @@ QRESULT RestartAppletImpl::queryInterface( const QUuid &uuid, QUnknownInterface 
     else if ( uuid == IID_TaskbarApplet )
   *iface = this;
     else
-	return QS_FALSE;
-	
+    return QS_FALSE;
+
     if ( *iface )
   (*iface)->addRef();
     return QS_OK;

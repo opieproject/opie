@@ -1,7 +1,5 @@
 /**********************************************************************
-** Copyright (C) 2003 Michael 'Mickey' Lauer.  All rights reserved.
-**
-** Contact me @ mickeyl@handhelds.org
+** Copyright (C) 2003-2004 Michael 'Mickey' Lauer <mickey@Vanille.de>
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -13,10 +11,17 @@
 **
 **********************************************************************/
 
-#include <qpe/resource.h>
+#include "vt.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/resource.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qpopupmenu.h>
 
+/* STD */
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -24,10 +29,8 @@
 #include <sys/ioctl.h>
 #include <linux/vt.h>
 
-#include "vt.h"
-
 VTApplet::VTApplet ( )
-	: QObject ( 0, "VTApplet" )
+    : QObject ( 0, "VTApplet" )
 {
 }
 
@@ -42,12 +45,12 @@ int VTApplet::position ( ) const
 
 QString VTApplet::name ( ) const
 {
-	return tr( "VT shortcut" );
+    return tr( "VT shortcut" );
 }
 
 QString VTApplet::text ( ) const
 {
-	return tr( "Terminal" );
+    return tr( "Terminal" );
 }
 
 /*
@@ -64,17 +67,17 @@ QString VTApplet::tr( const char* s, const char* p ) const
 
 QIconSet VTApplet::icon ( ) const
 {
-	QPixmap pix;
-	QImage img = Resource::loadImage ( "terminal" );
+    QPixmap pix;
+    QImage img = Resource::loadImage ( "terminal" );
 
-	if ( !img. isNull ( ))
-		pix. convertFromImage ( img. smoothScale ( 14, 14 ));
-	return pix;
+    if ( !img. isNull ( ))
+        pix. convertFromImage ( img. smoothScale ( 14, 14 ));
+    return pix;
 }
 
 QPopupMenu *VTApplet::popup ( QWidget* parent ) const
 {
-    qDebug( "VTApplet::popup" );
+    odebug << "VTApplet::popup" << oendl;
 
     struct vt_stat vtstat;
     int fd = ::open( "/dev/tty0", O_RDWR );
@@ -99,7 +102,7 @@ QPopupMenu *VTApplet::popup ( QWidget* parent ) const
 
 void VTApplet::changeVT( int index )
 {
-    //qDebug( "VTApplet::changeVT( %d )", index-500 );
+    //odebug << "VTApplet::changeVT( " << index-500 << " )" << oendl;
 
     int fd = ::open("/dev/tty0", O_RDWR);
     if ( fd == -1 ) return;
@@ -109,7 +112,7 @@ void VTApplet::changeVT( int index )
 
 void VTApplet::updateMenu()
 {
-    //qDebug( "VTApplet::updateMenu()" );
+    //odebug << "VTApplet::updateMenu()" << oendl;
 
     int fd = ::open( "/dev/console", O_RDONLY );
     if ( fd == -1 ) return;
@@ -120,9 +123,9 @@ void VTApplet::updateMenu()
 
         /*
         if ( result == -1 )
-            qDebug( "VT %d disallocated == free", i );
+            odebug << "VT " << i << " disallocated == free" << oendl;
         else
-            qDebug( "VT %d _not_ disallocated == busy", i );
+            odebug << "VT " << i << " _not_ disallocated == busy" << oendl;
         */
 
         m_subMenu->setItemEnabled( 500+i, result == -1 );
@@ -134,28 +137,28 @@ void VTApplet::updateMenu()
 
 void VTApplet::activated()
 {
-    qDebug( "VTApplet::activated()" );
+    odebug << "VTApplet::activated()" << oendl;
 }
 
 
 QRESULT VTApplet::queryInterface ( const QUuid &uuid, QUnknownInterface **iface )
 {
-	*iface = 0;
-	if ( uuid == IID_QUnknown )
-		*iface = this;
-	else if ( uuid == IID_MenuApplet )
-		*iface = this;
-	else
-	    return QS_FALSE;
+    *iface = 0;
+    if ( uuid == IID_QUnknown )
+        *iface = this;
+    else if ( uuid == IID_MenuApplet )
+        *iface = this;
+    else
+        return QS_FALSE;
 
-	if ( *iface )
-		(*iface)-> addRef ( );
-	return QS_OK;
+    if ( *iface )
+        (*iface)-> addRef ( );
+    return QS_OK;
 }
 
 Q_EXPORT_INTERFACE( )
 {
-	Q_CREATE_INSTANCE( VTApplet )
+    Q_CREATE_INSTANCE( VTApplet )
 }
 
 
