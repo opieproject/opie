@@ -1,6 +1,7 @@
 TEMPLATE        = lib
 CONFIG          += qte warn_on release
 HEADERS   = ofontmenu.h \
+    ocolorbutton.h \
     ofiledialog.h ofileselector.h tododb.h \
     ocheckitem.h todoevent.h todoresource.h \
     todovcalresource.h xmltree.h \
@@ -25,6 +26,7 @@ HEADERS   = ofontmenu.h \
 #    pim/otodoaccesssql.h \
     
 SOURCES   = ofontmenu.cc  \
+        ocolorbutton.cpp \
 	    xmltree.cc \
 	    ofiledialog.cc ofileselector.cc \
             ocheckitem.cpp tododb.cpp todoevent.cpp \
