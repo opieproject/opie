@@ -33,7 +33,7 @@ APPS=$(LOCALAPPS) addressbook calculator clock datebook \
     solitaire spreadsheet tetrix textedit \
     todo tux wordgame embeddedkonsole taskbar sysinfo \
     parashoot snake citytime showimg netsetup \
-    qipkg mindbreaker go qasteroids qcop fifteen keypebble opiemail/converter opiemail/lib opiemail
+    qipkg mindbreaker go qasteroids qcop fifteen keypebble opiemail/converter opiemail today 
 
 DOCS = docs/src/opie-policy
 single: mpegplayer/libmpeg3
