@@ -141,9 +141,10 @@ void MainWindow::initUI() {
     /*
      * immediate change of line wrap policy
      */
-    m_isWrapped = false;
-    m_wrap = new QAction( tr("Line wrap"), Resource::loadPixmap( "linewrap" ), QString::null, 0, this, 0 );
+    m_isWrapped = true;
+    m_wrap = new QAction( tr("Line wrap"), Resource::loadPixmap( "linewrap" ), QString::null, 0, this, 0, true );
     m_wrap->addTo( m_console );
+    m_wrap->setOn( true );
     connect( m_wrap, SIGNAL( activated() ), SLOT( slotWrap() ) );
 
     /*
@@ -152,7 +153,7 @@ void MainWindow::initUI() {
     m_isFullscreen = false;
 
     m_fullscreen = new QAction( tr("Full screen"), Resource::loadPixmap( "fullscreen" )
-                           , QString::null, 0, this, 0);
+                           , QString::null, 0, this, 0, true );
     m_fullscreen->addTo( m_console );
     connect( m_fullscreen, SIGNAL( activated() ),
              this,  SLOT( slotFullscreen() ) );
@@ -534,7 +535,6 @@ void MainWindow::create( const Profile& prof ) {
         slotConnect();
     }
 
-
     QWidget *w = currentSession()->widget();
     if(w) w->setFocus();
 
@@ -634,16 +634,8 @@ void MainWindow::slotWrap()
         EmulationHandler *e = m_curSession->emulationHandler();
         if(e)
         {
-            if(m_isWrapped)
-            {
-                e->setWrap(80);
-                m_isWrapped = false;
-            }
-            else
-            {
-                e->setWrap(0);
-                m_isWrapped = true;
-            }
+            e->setWrap( m_isWrapped ? 80:0 );
+            m_isWrapped = !m_isWrapped;
         }
     }
 }

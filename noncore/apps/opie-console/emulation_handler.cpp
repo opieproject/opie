@@ -13,7 +13,7 @@ EmulationHandler::EmulationHandler( const Profile& prof, QWidget* parent,const c
     m_teWid = new TEWidget( parent, "TerminalMain");
 	// use setWrapAt(0) for classic behaviour (wrap at screen width, no scrollbar)
 	// use setWrapAt(80) for normal console with scrollbar
-	setWrap(prof.readNumEntry("Wrap", 0) ? 0 : 80);
+	setWrap(prof.readNumEntry("Wrap", 80) ? 0 : 80);
     m_teWid->setMinimumSize(150, 70 );
     m_script = 0;
     parent->resize( m_teWid->calcSize(80, 24 ) );
