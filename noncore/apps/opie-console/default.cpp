@@ -99,16 +99,16 @@ Default::Default( MetaFactory* fact ) {
     fact->addReceiveLayer( "SX", QObject::tr("X-Modem"), newSXReceive );
 
     fact->addIOLayerFactory( "serial", QObject::tr("Serial"), newSerialLayer );
-    fact->addIOLayerFactory( "irda", QObject::tr("Infrared"), newIrDaLayer   );
-    fact->addIOLayerFactory( "bt", QObject::tr("Bluetooth"),  newBTLayer     );
+//    fact->addIOLayerFactory( "irda", QObject::tr("Infrared"), newIrDaLayer   );
+//    fact->addIOLayerFactory( "bt", QObject::tr("Bluetooth"),  newBTLayer     );
     fact->addIOLayerFactory( "modem", QObject::tr("Modem"),   newModemLayer  );
-    fact->addIOLayerFactory( "console", QObject::tr("Console"), newConsole   );
+    fact->addIOLayerFactory( "console", QObject::tr("local Console"), newConsole   );
 
     fact->addConnectionWidgetFactory( "serial", QObject::tr("Serial"), newSerialWidget );
-    fact->addConnectionWidgetFactory( "irda", QObject::tr("Infrared"), newIrDaWidget );
+//    fact->addConnectionWidgetFactory( "irda", QObject::tr("Infrared"), newIrDaWidget );
     fact->addConnectionWidgetFactory( "modem", QObject::tr("Modem"), newModemWidget );
-    fact->addConnectionWidgetFactory( "bt", QObject::tr("Bluetooth"), newBTWidget );
-    fact->addConnectionWidgetFactory( "console", QObject::tr("Console"), newConsoleWid );
+//    fact->addConnectionWidgetFactory( "bt", QObject::tr("Bluetooth"), newBTWidget );
+    fact->addConnectionWidgetFactory( "console", QObject::tr("local Console"), newConsoleWid );
 
     fact->addTerminalWidgetFactory( "default", QObject::tr("Default Terminal"),  newTerminalWidget );
     fact->addKeyboardWidgetFactory( "defaultKeys", QObject::tr("Default Keyboard"),
