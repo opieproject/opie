@@ -212,10 +212,11 @@ namespace OpieTooth {
 
             // seperate config file for each device, to store more information in future.
 // TO FIX: BTLISTITEM!!!
+            qDebug( "/Settings/bluetooth/" + (((BTListItem*)it.current())->mac()) + ".conf");
+            Config conf( QDir::homeDirPath() + "/Settings/bluetooth/" + (((BTListItem*)it.current())->mac()) + ".conf", Config::File );
 
-            //  Config conf( QDir::homeDirPath() + "/Settings/bluetooth/" + (((BTListItem)it.current())->mac()) + ".conf", Config::File );
-            // conf.setGroup( "Info" );
-            //  conf.writeEntry( "name", it.current()->name() );
+            conf.setGroup( "Info" );
+            conf.writeEntry( "name", ((BTListItem*)it.current())->name() );
         }
     }
 
