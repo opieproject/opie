@@ -257,15 +257,36 @@ int Lib::currentTime() const {
 
     int pos, time, length;
     xine_get_pos_length( m_stream, &pos, &time, &length );
-    return time/1000;
+    if ( time > 0 )  {
+        return time/1000;
+    } else {
+        return 0;
+    }
 }
 
 int Lib::length() const {
       assert( m_initialized );
 
       int pos, time, length;
-      xine_get_pos_length( m_stream, &pos, &time, &length );
-      return length/1000;
+/* dilb: patch to solve the wrong stream length reported to the GUI*/
+      int iRetVal=0, iTestLoop=0;
+      
+      do
+      	{
+	iRetVal = xine_get_pos_length( m_stream, &pos, &time, &length );
+	if (iRetVal)
+	   {/* if the function didn't return 0, then pos, time and length are valid.*/
+	   return length/1000;
+	   }
+	/*don't poll too much*/
+	usleep(100000);
+	iTestLoop++;
+	}
+      while ( iTestLoop < 10 ); /* if after 1s, we still don't have any
+valid stream, then return -1 (this value could be used to make the stream
+unseekable, but it should never occur!! Mr. Murphy ? :) ) */
+
+      return -1;
 }
 
 bool Lib::isSeekable() const {
