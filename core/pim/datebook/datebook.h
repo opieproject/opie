@@ -52,6 +52,8 @@ protected:
     void timerEvent( QTimerEvent *e );
     void closeEvent( QCloseEvent *e );
 
+    void view(int v, const QDate &d);
+
 public slots:
     void flush();
     void reload();
@@ -69,6 +71,8 @@ private slots:
     void slotNewEventFromKey( const QString &str );
     void slotFind();
     void slotDoFind( const QString &, const QDate &, bool, bool, int );
+
+    void viewDefault(const QDate &d);
 
     void viewDay();
     void viewWeek();

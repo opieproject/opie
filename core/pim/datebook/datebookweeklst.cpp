@@ -46,7 +46,7 @@ DateBookWeekLstHeader::DateBookWeekLstHeader(bool onM, QWidget* parent,
     onMonday=onM;
 }
 DateBookWeekLstHeader::~DateBookWeekLstHeader(){}
-void DateBookWeekLstHeader::setDate(QDate d) {
+void DateBookWeekLstHeader::setDate(const QDate &d) {
     date=d;
 
     int year,week;
@@ -242,7 +242,7 @@ DateBookWeekLst::DateBookWeekLst( bool ap, bool onM, DateBookDB *newDB,
 }
 
 
-void DateBookWeekLst::setDate( QDate &d ) {
+void DateBookWeekLst::setDate(const QDate &d) {
     int w,y;
     calcWeek(d,w,y,onMonday);
     year=y;

@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.3 2002-03-09 11:39:21 hakan Exp $
+** $Id: datebook.cpp,v 1.4 2002-03-09 13:07:57 hakan Exp $
 **
 **********************************************************************/
 
@@ -168,7 +168,6 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
     settings->insertItem( tr( "Default View" ),default_view );
     default_view->setCheckable(TRUE);
 
-    
     Config config("DateBook");
     config.setGroup("Main");
     int current=config.readNumEntry("defaultview", DAY);
@@ -312,43 +311,56 @@ QDate DateBook::currentDate()
     return d;
 }
 
-void DateBook::viewDay()
-{
-    initDay();
-    dayAction->setOn( TRUE );
-    QDate d = currentDate();
-    dayView->setDate( d );
-    views->raiseWidget( dayView );
-    dayView->redraw();
+void DateBook::view(int v, const QDate &d) {
+    if (v==DAY) {
+	initDay();
+	dayAction->setOn( TRUE );
+	dayView->setDate( d );
+	views->raiseWidget( dayView );
+	dayView->redraw();
+    } else if (v==WEEK) {
+	initWeek();
+	weekAction->setOn( TRUE );
+	weekView->setDate( d );
+	views->raiseWidget( weekView );
+	weekView->redraw();
+    } else if (v==WEEKLST) {
+	initWeekLst();
+	weekLstAction->setOn( TRUE );
+	weekLstView->setDate(d);
+	views->raiseWidget( weekLstView );
+	weekLstView->redraw();
+    } else if (v==MONTH) {
+	initMonth();
+	monthAction->setOn( TRUE );
+	monthView->setDate( d.year(), d.month(), d.day() );
+	views->raiseWidget( monthView );
+	monthView->redraw();
+    }
 }
 
-void DateBook::viewWeek()
-{
-    initWeek();
-    weekAction->setOn( TRUE );
-    QDate d = currentDate();
-    weekView->setDate( d );
-    views->raiseWidget( weekView );
-    weekView->redraw();
+void DateBook::viewDefault(const QDate &d) {
+  Config config("DateBook");
+  config.setGroup("Main");
+  int current=config.readNumEntry("defaultview", DAY);
+
+  view(current,d);
+}
+
+void DateBook::viewDay() {
+  view(DAY,currentDate());
+}
+
+void DateBook::viewWeek() {
+    view(WEEK,currentDate());
 }
 
 void DateBook::viewWeekLst() {
-    initWeekLst();
-    weekLstAction->setOn( TRUE );
-    QDate d=currentDate();
-    weekLstView->setDate(d);
-    views->raiseWidget( weekLstView );
-    weekLstView->redraw();
+    view(WEEKLST,currentDate());
 }
 
-void DateBook::viewMonth()
-{
-    initMonth();
-    monthAction->setOn( TRUE );
-    QDate d = currentDate();
-    monthView->setDate( d.year(), d.month(), d.day() );
-    views->raiseWidget( monthView );
-    monthView->redraw();
+void DateBook::viewMonth() {
+    view(MONTH,currentDate());
 }
 
 void DateBook::editEvent( const Event &e )
@@ -418,10 +430,8 @@ void DateBook::addEvent( const Event &e )
 
 void DateBook::showDay( int year, int month, int day )
 {
-    initDay();
-    dayView->setDate( year, month, day );
-    views->raiseWidget( dayView );
-    dayAction->setOn( TRUE );
+    QDate d(year, month, day);
+    view(DAY,d);
 }
 
 void DateBook::initDay()
@@ -689,9 +699,8 @@ void DateBook::changeWeek( bool m )
 
 void DateBook::slotToday()
 {
-    // we need to view today
-    QDate dt = QDate::currentDate();
-    showDay( dt.year(), dt.month(), dt.day() );
+    // we need to view today using default view
+    viewDefault(QDate::currentDate());
 }
 
 void DateBook::closeEvent( QCloseEvent *e )

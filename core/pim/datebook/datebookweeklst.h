@@ -22,7 +22,7 @@ public:
     DateBookWeekLstHeader(bool onM, QWidget* parent = 0, const char* name = 0, 
 			  WFlags fl = 0 );
     ~DateBookWeekLstHeader();
-    void setDate(QDate d);
+    void setDate(const QDate &d);
     
 public slots:
     void nextWeek();
@@ -97,7 +97,7 @@ public:
 		     QWidget *parent = 0, 
 		     const char *name = 0 );
     void setDate( int y, int w );
-    void setDate( QDate &d );
+    void setDate(const QDate &d );
     int week() const { return _week; };
     QDate date() const;
     
