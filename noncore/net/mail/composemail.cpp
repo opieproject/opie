@@ -7,7 +7,8 @@
 #include <qpe/contact.h>
 
 #include "composemail.h"
-#include "smtpwrapper.h"
+
+#include <libmailwrapper/smtpwrapper.h>
 
 ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool modal, WFlags flags )
     : ComposeMailUI( parent, name, modal, flags )
@@ -23,7 +24,7 @@ ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool m
 
     QStringList mails = c.emailList();
     QString defmail = c.defaultEmail();
-    
+
     if (defmail.length()!=0) {
         fromBox->insertItem(defmail);
     }
@@ -42,7 +43,7 @@ ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool m
     attList->addColumn( tr( "Size" ) );
 
     QList<Account> accounts = settings->getAccounts();
-    
+
     Account *it;
     for ( it = accounts.first(); it; it = accounts.next() ) {
         if ( it->getType().compare( "SMTP" ) == 0 ) {
@@ -191,7 +192,7 @@ void ComposeMail::accept()
             smtpAccounts.at( smtpAccountBox->currentItem() )->getAccountName() );
 #endif
     Mail *mail = new Mail();
-    
+
     SMTPaccount *smtp = smtpAccounts.at( smtpAccountBox->currentItem() );
     mail->setMail(fromBox->currentText());
 
@@ -221,7 +222,7 @@ void ComposeMail::accept()
 
     SMTPwrapper wrapper( settings );
     wrapper.sendMail( *mail,smtp,checkBoxLater->isChecked() );
-    
+
     QDialog::accept();
 }
 

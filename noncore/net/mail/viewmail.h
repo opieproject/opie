@@ -7,7 +7,8 @@
 #include <qvaluelist.h>
 
 #include "viewmailbase.h"
-#include "mailtypes.h"
+#include <libmailwrapper/mailtypes.h>
+
 
 class AttachItem : public QListViewItem
 {

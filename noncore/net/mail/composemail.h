@@ -6,8 +6,9 @@
 
 #include "composemailui.h"
 #include "addresspickerui.h"
-#include "settings.h"
-#include "mailwrapper.h"
+#include <libmailwrapper/settings.h>
+#include <libmailwrapper/mailwrapper.h>
+
 
 
 class AddressPicker : public AddressPickerUI

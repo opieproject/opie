@@ -4,9 +4,9 @@
 #include <qlistview.h>
 #include <qlist.h>
 
-#include "settings.h"
-#include "mailwrapper.h"
-#include "abstractmail.h"
+#include <libmailwrapper/settings.h>
+#include <libmailwrapper/mailwrapper.h>
+#include <libmailwrapper/abstractmail.h>
 
 class POP3wrapper;
 class RecMail;

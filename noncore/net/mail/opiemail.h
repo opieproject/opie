@@ -2,7 +2,8 @@
 #define OPIEMAIL_H
 
 #include "mainwindow.h"
-#include "settings.h"
+#include <libmailwrapper/settings.h>
+
 
 class OpieMail : public MainWindow
 {

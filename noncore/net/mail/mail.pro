@@ -42,9 +42,9 @@ INCLUDEPATH += $(OPIEDIR)/include
 
 CONFTEST = $$system( echo $CONFIG_TARGET_MACOSX )
 contains( CONFTEST, y ){
-    LIBS        += -lqpe -letpan -lssl -lcrypto -lopie -liconv
+    LIBS        += -lqpe -lopie -lmailwrapper -liconv
 }else{
-    LIBS        += -lqpe -lopie -llibmailwrapper
+    LIBS        += -lqpe -lopie -lmailwrapper
 }
 
 TARGET       = opiemail

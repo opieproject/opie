@@ -9,10 +9,11 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 
+
 #include "defines.h"
 #include "mainwindow.h"
 #include "viewmail.h"
-#include "mailtypes.h"
+#include <libmailwrapper/mailtypes.h>
 #include "mailistviewitem.h"
 
 

@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include "accountview.h"
-#include "mailtypes.h"
+#include <libmailwrapper/mailtypes.h>
 #include "defines.h"
 #include "newmaildir.h"
 #include <qmessagebox.h>
@@ -163,7 +163,7 @@ void IMAPviewItem::refreshFolders(bool force)
     if (childCount()>0 && force==false) return;
     QList<Folder> *folders = wrapper->listFolders();
 
-    QListViewItem *child = firstChild();    
+    QListViewItem *child = firstChild();
     while ( child ) {
         QListViewItem *tmp = child;
         child = child->nextSibling();
@@ -177,7 +177,7 @@ void IMAPviewItem::refreshFolders(bool force)
     int pos;
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     folders->setAutoDelete(false);
-    
+
     for ( it = folders->first(); it; it = folders->next() ) {
         if (it->getDisplayName().lower()=="inbox") {
             item = new IMAPfolderItem( it, this , item );
@@ -417,7 +417,7 @@ AccountView::AccountView( QWidget *parent, const char *name, WFlags flags )
     connect( this, SIGNAL( selectionChanged( QListViewItem * ) ),
             SLOT( refresh( QListViewItem * ) ) );
     connect( this, SIGNAL( mouseButtonPressed(int, QListViewItem *,const QPoint&,int  ) ),this,
-            SLOT( slotHold( int, QListViewItem *,const QPoint&,int  ) ) );         
+            SLOT( slotHold( int, QListViewItem *,const QPoint&,int  ) ) );
 
     setSorting(0);
 }
@@ -607,7 +607,7 @@ MBOXfolderItem::MBOXfolderItem( Folder *folderInit, MBOXviewItem *parent , QList
     } else if (folder->getDisplayName().lower() == "inbox") {
         setPixmap( 0, PIXMAP_INBOXFOLDER);
     } else {
-        setPixmap( 0, PIXMAP_MBOXFOLDER );	
+        setPixmap( 0, PIXMAP_MBOXFOLDER );
 	}
     setText( 0, folder->getDisplayName() );
 }

@@ -11,12 +11,12 @@
 
 #include <opie/ofiledialog.h>
 
-#include "settings.h"
+#include <libmailwrapper/settings.h>
 #include "composemail.h"
 #include "viewmail.h"
-#include "abstractmail.h"
+#include <libmailwrapper/abstractmail.h>
 #include "accountview.h"
-#include "mailtypes.h"
+#include <libmailwrapper/mailtypes.h>
 
 AttachItem::AttachItem(QListView * parent,QListViewItem *after, const QString&mime,const QString&desc,const QString&file,
     const QString&fsize,int num,const QValueList<int>&path)

@@ -2,7 +2,8 @@
 #define __MAILLISTVIEWITEM_H
 
 #include <qlistview.h>
-#include "mailtypes.h"
+#include <libmailwrapper/mailtypes.h>
+
 
 class MailListViewItem:public QListViewItem
 {

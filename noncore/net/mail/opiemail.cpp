@@ -3,7 +3,7 @@
 #include "opiemail.h"
 #include "editaccounts.h"
 #include "composemail.h"
-#include "smtpwrapper.h"
+#include <libmailwrapper/smtpwrapper.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qaction.h>
 #include <qapplication.h>

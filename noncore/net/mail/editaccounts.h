@@ -10,7 +10,8 @@
 #include "pop3configui.h"
 #include "smtpconfigui.h"
 #include "nntpconfigui.h"
-#include "settings.h"
+#include <libmailwrapper/settings.h>
+
 
 class AccountListItem : public QListViewItem
 {
