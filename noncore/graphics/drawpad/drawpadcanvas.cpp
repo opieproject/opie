@@ -161,6 +161,8 @@ DrawPadCanvas::DrawPadCanvas(DrawPad* drawPad, QWidget* parent, const char* name
     m_pDrawPad = drawPad;
     m_pages.setAutoDelete(true);
     m_pageBackups.setAutoDelete(true);
+
+    viewport()->setBackgroundMode(QWidget::NoBackground);
 }
 
 DrawPadCanvas::~DrawPadCanvas()
