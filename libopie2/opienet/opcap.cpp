@@ -41,6 +41,8 @@
 #include <qsocketnotifier.h>
 #include <qobjectlist.h>
 
+#include "udp_ports.h"
+
 /*======================================================================================
  * OPacket
  *======================================================================================*/
@@ -354,6 +356,17 @@ OUDPPacket::OUDPPacket( const unsigned char* end, const struct udphdr* data, QOb
 
 {
     qDebug( "OUDPPacket::OUDPPacket(): decoding UDP header..." );
+    qDebug( "fromPort = %d", fromPort() );
+    qDebug( "  toPort = %d", toPort() );
+
+    // TODO: Make this a case or a hash if we know more udp protocols
+
+    if ( fromPort() == UDP_PORT_BOOTPS || fromPort() == UDP_PORT_BOOTPC ||
+         toPort() == UDP_PORT_BOOTPS || toPort() == UDP_PORT_BOOTPC )
+    {
+        qDebug( "seems to be part of a DHCP conversation => creating DHCP packet." );
+        new ODHCPPacket( end, (const struct dhcp_packet*) (data+1), this );
+    }
 }
 
 
@@ -364,25 +377,25 @@ OUDPPacket::~OUDPPacket()
 
 int OUDPPacket::fromPort() const
 {
-    return _udphdr->source;
+    return EXTRACT_16BITS( &_udphdr->source );
 }
 
 
 int OUDPPacket::toPort() const
 {
-    return _udphdr->dest;
+    return EXTRACT_16BITS( &_udphdr->dest );
 }
 
 
 int OUDPPacket::length() const
 {
-    return _udphdr->len;
+    return EXTRACT_16BITS( &_udphdr->len );
 }
 
 
 int OUDPPacket::checksum() const
 {
-    return _udphdr->check;
+    return EXTRACT_16BITS( &_udphdr->check );
 }
 
 
@@ -424,37 +437,37 @@ OTCPPacket::~OTCPPacket()
 
 int OTCPPacket::fromPort() const
 {
-    return _tcphdr->source;
+    return EXTRACT_16BITS( &_tcphdr->source );
 }
 
 
 int OTCPPacket::toPort() const
 {
-    return _tcphdr->dest;
+    return EXTRACT_16BITS( &_tcphdr->dest );
 }
 
 
 int OTCPPacket::seq() const
 {
-    return _tcphdr->seq;
+    return EXTRACT_16BITS( &_tcphdr->seq );
 }
 
 
 int OTCPPacket::ack() const
 {
-    return _tcphdr->ack_seq;
+    return EXTRACT_16BITS( &_tcphdr->ack_seq );
 }
 
 
 int OTCPPacket::window() const
 {
-    return _tcphdr->window;
+    return EXTRACT_16BITS( &_tcphdr->window );
 }
 
 
 int OTCPPacket::checksum() const
 {
-    return _tcphdr->check;
+    return EXTRACT_16BITS( &_tcphdr->check );
 }
 
 /*======================================================================================
