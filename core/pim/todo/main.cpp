@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -20,15 +20,23 @@
 
 #include "mainwindow.h"
 
+
+#include <qdatetime.h>
+
 #include <qpe/qpeapplication.h>
 
 int main( int argc, char **argv )
 {
     QPEApplication a( argc, argv );
 
-    TodoWindow mw;
-    QObject::connect( &a, SIGNAL( flush() ), &mw, SLOT( flush() ) );
-    QObject::connect( &a, SIGNAL( reload() ), &mw, SLOT( reload() ) );
+    QTime time;
+    time.start();
+    Todo::MainWindow mw;
+    int t = time.elapsed();
+    qWarning("QTime %d", t/1000 );
+    mw.setCaption("Opie Todolist");
+    QObject::connect( &a, SIGNAL( flush() ), &mw, SLOT( slotFlush() ) );
+    QObject::connect( &a, SIGNAL( reload() ), &mw, SLOT( slotReload() ) );
     
     a.showMainWidget(&mw);
 

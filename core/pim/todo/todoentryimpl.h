@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -23,7 +23,8 @@
 
 #include "todoentry.h"
 
-#include <qpe/task.h>
+#include <opie/otodo.h>
+//#include <opie/ocontactselector.h>
 
 #include <qdatetime.h>
 #include <qpalette.h>
@@ -32,28 +33,31 @@ class QLabel;
 class QTimer;
 class DateBookMonth;
 
+
+
 class NewTaskDialog : public NewTaskDialogBase
 {
     Q_OBJECT
 
 public:
-    NewTaskDialog( const Task &task, QWidget *parent = 0, const char* name = 0,
+    NewTaskDialog( const OTodo& task, QWidget *parent = 0, const char* name = 0,
 		   bool modal = FALSE, WFlags fl = 0 );
     NewTaskDialog( int id, QWidget* parent = 0, const char* name = 0,
 		   bool modal = FALSE, WFlags fl = 0 );
     ~NewTaskDialog();
 
-    Task todoEntry();
+    OTodo todoEntry();
 
 protected slots:
     void dateChanged( int y, int m, int d );
-
+    void groupButtonClicked ();
+    void slotCopy();
 protected:
     virtual void accept();
 
 private:
     void init();
-    Task todo;
+    OTodo todo;
     QDate date;
     DateBookMonth *picker;
 };

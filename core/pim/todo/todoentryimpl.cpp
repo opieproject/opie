@@ -1,7 +1,8 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2002 zecke
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -20,13 +21,18 @@
 
 #include "todoentryimpl.h"
 
+#include <opie/oclickablelabel.h>
+#include <opie/otodo.h>
+
 #include <qpe/categoryselect.h>
 #include <qpe/datebookmonth.h>
 #include <qpe/global.h>
+#include <qpe/resource.h>
 #include <qpe/imageedit.h>
-#include <qpe/task.h>
 #include <qpe/timestring.h>
+#include <qpe/palmtoprecord.h>
 
+#include <qlayout.h>
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
 #include <qtoolbutton.h>
@@ -37,9 +43,9 @@
 #include <qlabel.h>
 #include <qtimer.h>
 #include <qapplication.h>
+#include <qvaluelist.h>
 
-
-NewTaskDialog::NewTaskDialog( const Task& task, QWidget *parent,
+NewTaskDialog::NewTaskDialog( const OTodo& task, QWidget *parent,
 			      const char *name, bool modal, WFlags fl )
     : NewTaskDialogBase( parent, name, modal, fl ),
       todo( task )
@@ -58,6 +64,8 @@ NewTaskDialog::NewTaskDialog( const Task& task, QWidget *parent,
     buttonDate->setText( TimeString::longDateString( date ) );
 
     txtTodo->setText( task.description() );
+    lneSum->setText( task.summary() );
+    cmbProg->setCurrentItem( task.progress()/20 );
 }
 
 /*
@@ -72,16 +80,16 @@ NewTaskDialog::NewTaskDialog( int id, QWidget* parent,  const char* name, bool m
     : NewTaskDialogBase( parent, name, modal, fl ),
       date( QDate::currentDate() )
 {
-    if ( id != -1 ) {
-	QArray<int> ids( 1 );
-	ids[0] = id;
-	todo.setCategories( ids );
-    }
+    if ( id != -1 ) 
+	todo.setCategories( id );
     init();
 }
 
 void NewTaskDialog::init()
 {
+    if( layout() != 0 ){
+      layout()->setMargin( 2 );
+    }
     QPopupMenu *m1 = new QPopupMenu( this );
     picker = new DateBookMonth( m1, 0, TRUE );
     m1->insertItem( picker );
@@ -91,8 +99,12 @@ void NewTaskDialog::init()
     connect( picker, SIGNAL( dateClicked( int, int, int ) ),
              this, SLOT( dateChanged( int, int, int ) ) );
 
+    connect ( selectGroupButton, SIGNAL( clicked() ),
+	      this, SLOT( groupButtonClicked () ) );
+
     buttonDate->setText( TimeString::longDateString( date ) );
     picker->setDate( date.year(), date.month(), date.day() );
+    lblDown->setPixmap(Resource::loadPixmap("down") );
 }
 
 /*
@@ -107,24 +119,58 @@ void NewTaskDialog::dateChanged( int y, int m, int d )
     date = QDate( y, m, d );
     buttonDate->setText( TimeString::longDateString( date ) );
 }
-
-/*!
-*/
-
-Task NewTaskDialog::todoEntry()
+void NewTaskDialog::groupButtonClicked ()
 {
-    todo.setDueDate( date, checkDate->isChecked() );
-    if ( comboCategory->currentCategory() != -1 ) {
-	todo.setCategories( comboCategory->currentCategories() );
-    }
-    todo.setPriority( comboPriority->currentItem() + 1 );
-    todo.setCompleted( checkCompleted->isChecked() );
+/*	OContactSelectorDialog cd( this );
+	QArray<int> todo_relations = todo.relations ( "addressbook" );
+	QValueList<int> selectedContacts;
 
-    todo.setDescription( txtTodo->text() );
+	for ( uint i=0; i < todo_relations.size(); i++ ){
+		printf ("old: %d\n", todo_relations[i]);
+		selectedContacts.append( todo_relations[i] );
+	}
+	cd.setSelected (selectedContacts);
+	cd.showMaximized();
+	if ( cd.exec() == QDialog::Accepted ){
+		selectedContacts = cd.selected ();
+		QValueListIterator<int> it;
+		todo.clearRelated("addressbook");
+		for( it = selectedContacts.begin(); it != selectedContacts.end(); ++it ){
+			printf ("Adding: %d\n", (*it));
+			todo.addRelated( "addressbook", (*it) );
+		}
 
-    return todo;
+	}
+*/
 }
 
+OTodo NewTaskDialog::todoEntry()
+{
+  if( checkDate->isChecked() ){
+    todo.setDueDate( date );
+    todo.setHasDueDate( true );
+  }else{
+    todo.setHasDueDate( false );
+  }
+  if ( comboCategory->currentCategory() != -1 ) {
+    QArray<int> arr = comboCategory->currentCategories();
+    QStringList list;
+    todo.setCategories( arr );
+  }
+  todo.setPriority( comboPriority->currentItem() + 1 );
+  todo.setCompleted( checkCompleted->isChecked() );
+
+  todo.setDescription( txtTodo->text() );
+  todo.setSummary( lneSum->text() );
+  QString text = cmbProg->currentText();
+  todo.setProgress( text.remove( text.length()-1, 1 ).toUShort() );
+  return todo;
+}
+void NewTaskDialog::slotCopy()
+{
+    txtTodo->clear();
+    txtTodo->setText( lneSum->text() );
+}
 
 /*!
 
@@ -133,7 +179,8 @@ Task NewTaskDialog::todoEntry()
 void NewTaskDialog::accept()
 {
     QString strText = txtTodo->text();
-    if ( !strText || strText == "") {
+    QString strSumm = lneSum->text();
+    if ( strSumm.isEmpty() && strText.isEmpty() ) {
        // hmm... just decline it then, the user obviously didn't care about it
        QDialog::reject();
        return;

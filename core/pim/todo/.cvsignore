@@ -1,4 +1,4 @@
 moc_*
-Makefile
+Makefile*
 todoentry.h
 todoentry.cpp
