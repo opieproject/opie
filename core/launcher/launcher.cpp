@@ -289,6 +289,7 @@ void LauncherTabWidget::setTabViewAppearance( LauncherView *v, Config &cfg )
     v->setTextColor( QColor(textCol) );
 //    bool customFont = cfg.readBoolEntry( "CustomFont", FALSE );
 
+    v->setColNumber( cfg.readNumEntry( "Columns", 0 ) );
 
     QStringList font = cfg.readListEntry( "Font", ',' );
     if ( font.count() == 4 )

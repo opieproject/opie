@@ -22,6 +22,7 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <qpe/config.h>
 #include <qtopia/qpeapplication.h>
 #include <qtopia/private/categories.h>
 #include <qtopia/categoryselect.h>
@@ -282,7 +283,7 @@ void LauncherItem::setEyePixmap(const QPixmap&aIcon)
 QMap<QString,QPixmap>* LauncherIconView::sm_EyeCache=0;
 
 LauncherIconView::LauncherIconView( QWidget* parent, const char* name )
-    : QIconView(parent,name),tf(""),cf(0),bsy(0),busyTimer(0),bigIcns(TRUE),bgColor(white)
+    : QIconView(parent,name),tf(""),cf(0),bsy(0),busyTimer(0),bigIcns(TRUE),bgColor(white),numColumns(0)
 {
     m_EyeCallBack = 0;
     if (!sm_EyeCache) sm_EyeCache = new QMap<QString,QPixmap>();
@@ -625,22 +626,22 @@ void LauncherIconView::calculateGrid( ItemTextPos pos )
         int dw = QApplication::desktop()->width();
         int viewerWidth = dw-style().scrollBarExtent().width();
         if ( pos == Bottom ) {
-            int cols = 3;
-            if ( viewerWidth <= 200 )
-                cols = 2;
-            else if ( viewerWidth >= 400 )
-                 cols = viewerWidth/96;
+            if( !numColumns ) {
+                if ( viewerWidth <= 200 ) numColumns = 2;
+                else if ( viewerWidth >= 400 ) numColumns = viewerWidth/96;
+                else numColumns = 3;
+            }
             setSpacing( 4 );
-            setGridX( (viewerWidth-(cols+1)*spacing())/cols );
+            setGridX( (viewerWidth-(numColumns+1)*spacing())/numColumns );
             setGridY( fontMetrics().height()*2+24 );
         } else {
-            int cols = 2;
-            if ( viewerWidth < 150 )
-                cols = 1;
-            else if ( viewerWidth >= 400 )
-                cols = viewerWidth/150;
+            if( !numColumns ) {
+                if ( viewerWidth < 150 ) numColumns = 1;
+                else if ( viewerWidth >= 400 ) numColumns = viewerWidth/150;
+                else numColumns = 2;
+            }          
             setSpacing( 2 );
-            setGridX( (viewerWidth-(cols+1)*spacing())/cols );
+            setGridX( (viewerWidth-(numColumns+1)*spacing())/numColumns );
             setGridY( fontMetrics().height()+2 );
         }
 }
@@ -1001,6 +1002,17 @@ void LauncherView::setBackgroundType( BackgroundType t, const QString &val )
     icons->viewport()->update();
 
     QTimer::singleShot( 1000, this, SLOT(flushBgCache()) );
+}
+
+void LauncherView::setColNumber( int num )
+{
+    icons->setColNumber( num );
+}
+
+void LauncherIconView::setColNumber( int num )
+{
+    numColumns = num;
+    calculateGrid( Bottom );
 }
 
 void LauncherView::setTextColor( const QColor &tc )
