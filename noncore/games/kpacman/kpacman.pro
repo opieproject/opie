@@ -35,7 +35,7 @@ SOURCES		= kpacmanwidget.cpp \
 		    config.cpp \
 		    main.cpp 
 
-INCLUDEPATH	+= $(OPIEDIR)/include \
+INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -ljpeg
 DESTDIR         = $(OPIEDIR)/bin
