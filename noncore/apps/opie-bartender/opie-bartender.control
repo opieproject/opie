@@ -1,0 +1,10 @@
+Files: bin/bartender apps/Applications/bartender.desktop
+Priority: optional
+Package: opie-bartender
+Section: opie
+Maintainer: L.J. Potter <ljp@llornkcor.com> 
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: qpe-base ($QPE_VERSION)
+Description: Bartender drink receipe database lookup, and 
+blood alcohol estimator.
