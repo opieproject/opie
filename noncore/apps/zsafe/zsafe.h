@@ -5,7 +5,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.h,v 1.2 2004-02-17 23:47:39 alwin Exp $
+** $Id: zsafe.h,v 1.3 2004-07-10 01:04:49 llornkcor Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -61,8 +61,8 @@ public:
     ZSafe( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = WDestructiveClose );
     ~ZSafe();
 
-    static const QColor *evenRowColor;
-    static const QColor *oddRowColor;
+     static const QColor *evenRowColor; 
+     static const QColor *oddRowColor;  
 
     QToolButton* Edit;
     QToolButton* Delete;
@@ -81,6 +81,7 @@ public:
     bool IsCopy;
     bool IsCut;
     bool modified; // true if database is modified
+    bool showpwd;  // show PWD Dialog
 
     QListViewItem *lastSearchedCategory; 
     QListViewItem *lastSearchedItem; 
@@ -182,6 +183,9 @@ public slots:
     virtual void setExpandFlag();
 
     virtual void categoryFieldActivated( const QString& str);
+
+		virtual void ListPressed(int, QListViewItem *, const QPoint&, int);
+	  virtual void copyClip( const QString &text);
 
 private slots:
     void setDocument(const QString& fileref);

@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.17 2004-06-17 23:11:26 clem Exp $
+** $Id: zsafe.cpp,v 1.18 2004-07-10 01:04:49 llornkcor Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -54,6 +54,7 @@ using namespace Opie::Ui;
 
 #ifdef DESKTOP
 #include <qfiledialog.h>
+#include <qdragobject.h>
 #ifndef WIN32
 #include <qsettings.h>
 #else
@@ -393,6 +394,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     IsCut = false;
     IsCopy = false;
     modified = false;
+    showpwd = false;
 
     // set the config file
     cfgFile=QDir::homeDirPath();
@@ -457,7 +459,8 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     QPixmap passwords( ( const char** ) passwords_data );
     QPixmap software( ( const char** ) software_data );
     QPixmap general( ( const char** ) general_data );
-    if ( !name )
+		QPixmap image0( ( const char** ) zsafe_xpm );
+	if ( !name )
     setName( "ZSafe" );
 
 #ifdef DESKTOP
@@ -492,26 +495,63 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
    QString filename = conf->readEntry(APP_KEY+"document");
    if (filename.isEmpty() || filename.isNull())
    {
-       if ( !QDir( zsafeAppDirPath ).exists() )
+
+    // check if the directory application exists, if not
+    // create it
+// #ifndef WIN32
+    // QString d1("Documents/application");
+// #else
+	QString d1(QDir::homeDirPath() + "/Documents/application");
+// #endif
+    QDir pd1(d1);
+    if (!pd1.exists())
+    {
+     
+       QDir pd2(QDir::homeDirPath() + "/Documents");
+	   if (!pd2.exists()) {
+			QDir pd3(QDir::homeDirPath());
+			if (!pd3.mkdir("Documents", FALSE)) {
+		   }
+	   }
+       
+	   if (!pd2.mkdir("application", FALSE))
        {
-           //FIXME: Pending someone to look into why QDir.mkdir does not work as expected
-           QString cmdline = QString().sprintf( "mkdir -p %s", (const char*) zsafeAppDirPath );
-           ::system( cmdline );
-       }
-       if ( !QDir( zsafeAppDirPath ).exists() )
-       {
-               QMessageBox::critical( 0, "ZSafe", tr("Can't create application data directory.\nZSafe will now exit."));
-               exitZs (1);
+          QMessageBox::critical( 0, tr("ZSafe"),
+#ifdef JPATCH_HDE
+               tr("<P>Can't create directory ..."+d1+"</P><P>ZSafe will now exit.</P>"));
+#else
+               tr("<P>Can't create directory %1</P><P>ZSafe will now exit.</P>").arg(d1));
+#endif
+          exitZs (1);
        }
     }
-
+// #ifndef WIN32
+    // QString d2("Documents/application/zsafe");
+// #else
+	QString d2(QDir::homeDirPath() + "/Documents/application/zsafe");
+// #endif
+    QDir pd2(d2);
+    if (!pd2.exists())
+    {
+       if (!pd1.mkdir("zsafe", FALSE))
+       {
+          QMessageBox::critical( 0, tr("ZSafe"),
+#ifdef JPATCH_HDE
+               tr("<P>Can't create directory ...//Documents/application/zsafe</P><P>ZSafe will now exit.</P"));
+#else
+               tr("<P>Can't create directory %1</P><P>ZSafe will now exit.</P>").arg(d2));
+#endif
+          exitZs (1);
+       }
+   }
+    
     // set the default filename
     filename = zsafeAppDirPath + "/passwords.zsf";
 
     // save the current filename to the config file
     conf->writeEntry(APP_KEY+"document", filename);
     saveConf();
-
+	 }
    //if (filename == "INVALIDPWD")
       //filename = "";
 
@@ -531,6 +571,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
 
     infoForm = new InfoForm();
     categoryDialog = NULL;
+    infoForm->setIcon( image0);
 
     // add a menu bar
     QMenuBar *menu = new QMenuBar( this );
@@ -666,6 +707,13 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     connect( ListView, SIGNAL( returnPressed(QListViewItem*) ),
              this, SLOT( showInfo(QListViewItem*) ) );
 
+#ifndef DESKTOP	  
+  	QPEApplication::setStylusOperation( ListView->viewport(),QPEApplication::RightOnHold);
+#endif
+    connect( ListView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
+           this,SLOT( ListPressed(int, QListViewItem *, const QPoint&, int)) );
+
+	   this->setIcon( image0);
 }
 
 const QColor *ZSafe::evenRowColor = &Qt::white;
@@ -1516,7 +1564,7 @@ void ZSafe::readAllEntries()
             // build the full path
             fullIconPath = iconPath + icon;
             pix = new QPixmap (fullIconPath);
-            if (pix)
+            if (!pix->isNull())
             {
                QImage img = pix->convertToImage();
                pix->convertFromImage(img.smoothScale(14,14));
@@ -1731,7 +1779,7 @@ void ZSafe::readAllEntries()
             // build the full path
             fullIconPath = iconPath + icon;
             pix = new QPixmap (fullIconPath);
-            if (pix)
+            if (!pix->isNull())
             {
                QImage img = pix->convertToImage();
                pix->convertFromImage(img.smoothScale(14,14));
@@ -1760,6 +1808,8 @@ void ZSafe::resume(int)
    owarn << "Resume" << oendl;
    // hide the main window
 
+   if ( !showpwd )
+   {
    infoForm->hide();
    // open zsafe again
    m_password = "";
@@ -1786,6 +1836,7 @@ void ZSafe::resume(int)
 
    // ask for password and read again
    openDocument(filename);
+	 }
 }
 
 //---------------------------------------------
@@ -1954,7 +2005,7 @@ bool ZSafe::openDocument(const char* _filename, const char* )
                       // build the full path
                       fullIconPath = iconPath + icon;
                       pix = new QPixmap (fullIconPath);
-                      if (pix)
+                      if (!pix->isNull())
                       {
                          QImage img = pix->convertToImage();
                          pix->convertFromImage(img.smoothScale(14,14));
@@ -2301,6 +2352,9 @@ void ZSafe::getDocPassword(QString title)
     PasswordForm *dialog = new PasswordForm(this, title, TRUE);
     newPwdDialog = dialog;
     newPwdDialogResult = false;
+
+		QPixmap image0( ( const char** ) zsafe_xpm );
+		dialog->setIcon( image0);
 
     connect( dialog->PasswordField, SIGNAL( returnPressed() ),
              this, SLOT( setPasswordDialogDone() ) );
@@ -2692,7 +2746,7 @@ void ZSafe::addCategory()
                fullIconPath = iconPath + icon;
                pix = new QPixmap (fullIconPath);
                // pix->resize(14, 14);
-               if (pix)
+               if (!pix->isNull())
                {
                   // save the full pixmap name into the config file
 // #ifndef WIN32
@@ -3161,7 +3215,7 @@ void ZSafe::editCategory()
                   // build the full path
                   fullIconPath = iconPath + icon;
                   pix = new QPixmap (fullIconPath);
-                  if (pix)
+                  if (!pix->isNull())
                   {
                      // save the full pixmap name into the config file
 // #ifndef WIN32
@@ -3691,5 +3745,51 @@ void ZSafe::setDocument(const QString& fileref)
 #endif
 }
 
+
+void ZSafe::ListPressed(int mouse, QListViewItem *item, const QPoint&, int column) {
+	if(item ==0) return;
+   switch (mouse) {
+   case 1:
+   {
+#ifdef DESKTOP
+	   QDragObject *d = new QTextDrag( item->text(column) , this );
+	   d->dragCopy();
+#endif
+   }
+   break;
+   case 2:
+	   {
+			QClipboard *cb = QApplication::clipboard();
+
+			QIconSet copy_img((const char**) copy_xpm);
+			QIconSet edit_img((const char**) edit_xpm);
+			QPixmap folder_open_img((const char**) folder_open_xpm);
+			QPixmap editdelete_img((const char**) editdelete_xpm);
+
+			QPopupMenu *m = new QPopupMenu(this);
+			int copyItem = 	m->insertItem( copy_img, tr( "Copy to Clipboard" ));
+			int editItem = m->insertItem(edit_img, tr( "Edit" ));
+			int showItem = m->insertItem(folder_open_img, tr( "Show Info" ));
+			int cancelItem = m->insertItem( editdelete_img, tr( "Cancel" ));
+			m->setFocus();
+			int me=m->exec( QPoint( QCursor::pos().x(), QCursor::pos().y() ) ) ;
+			 if(me == copyItem) {
+				copyClip( item->text(column) ) ;
+			} else if (me == cancelItem) {
+			     cb->clear();
+			} else if (me == editItem) {
+				editPwd();
+			} else if (me == showItem) {
+				showInfo(item);
+			}
+	   }
+      break;
+   };
+}
+
+void  ZSafe::copyClip( const QString &text) {
+	QClipboard *cb = QApplication::clipboard();
+	cb->setText( text);
+}
 
 
