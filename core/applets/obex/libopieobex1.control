@@ -4,6 +4,7 @@ Section: opie/system
 Maintainer: Holger Freyther <zecke@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION.1
-Depends: opie-base ($QPE_VERSION), openobex
+Depends: opie-base ($QPE_VERSION), openobex | libopenobex1
+Provides: libopieobex
+Replaces: libopieobex
 Description: Irda obex lib
- 
