@@ -203,6 +203,8 @@ AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
     int fragments = 0x10000 * 8 + sound_fragment_shift;
     int capabilities = 0;
 
+    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE; 
+    
 #ifdef KEEP_DEVICE_OPEN
     if ( AudioDevicePrivate::dspFd == 0 ) {
 #endif
@@ -244,11 +246,15 @@ AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
     //if ( capabilities & DSP_CAP_REALTIME )qDebug( "Sound card has realtime sync" );
     //if ( capabilities & DSP_CAP_TRIGGER ) qDebug( "Sound card has precise trigger" );
     //if ( capabilities & DSP_CAP_MMAP )    qDebug( "Sound card can mmap" );
+    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << FALSE; 
+    
 }
     
 
 AudioDevice::~AudioDevice() {
     qDebug("destryo audiodevice");
+    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE; 
+    
 #ifdef Q_OS_WIN32
     waveOutClose( (HWAVEOUT)d->handle );
 #else
@@ -258,6 +264,8 @@ AudioDevice::~AudioDevice() {
     delete d->unwrittenBuffer;
     delete d;
 #endif
+    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << FALSE; 
+    
 }
 
 
