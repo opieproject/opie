@@ -23,6 +23,7 @@
 #include <qpe/config.h>
 #include <qpe/password.h>
 #include <qpe/qpedialog.h>
+#include <qpe/qcopenvelope_qws.h>
 
 #include <qcheckbox.h>
 #include <qpushbutton.h>
@@ -72,6 +73,9 @@
         autoLogin=true;
     }
 
+    cfg.setGroup("SyncMode");
+    int mode = cfg.readNumEntry("Mode",2); // Default to Sharp
+    syncModeCombo->setCurrentItem( mode - 1 );
 
     connect(autologinToggle, SIGNAL(toggled(bool)), this, SLOT(toggleAutoLogin(bool)));
     connect(userlist, SIGNAL(activated(int)), this, SLOT(changeLoginName(int)));
@@ -132,6 +136,7 @@ void Security::accept()
 {
     applySecurity();
     QDialog::accept();
+    QCopEnvelope env("QPE/System", "securityChanged()" );
 }
 
 void Security::done(int r)
@@ -185,14 +190,14 @@ void Security::parseNet(const QString& sn,int& auth_peer,int& auth_peer_bits)
     }
 }
 
-void Security::loadUsers ( void ) 
+void Security::loadUsers ( void )
 {
     QFile passwd("/etc/passwd");
     if ( passwd.open(IO_ReadOnly) ) {
-        QTextStream t( &passwd );   
+        QTextStream t( &passwd );
         QString s;
         QStringList account;
-        while ( !t.eof() ) {        
+        while ( !t.eof() ) {
             account = QStringList::split(':',t.readLine());
 
             // Hide disabled accounts
@@ -200,7 +205,7 @@ void Security::loadUsers ( void )
 
                 userlist->insertItem(*account.at(0));
                 // Highlight this item if it is set to autologinToggle
-                if ( *account.at(0) == autoLoginName) 
+                if ( *account.at(0) == autoLoginName)
                     userlist->setCurrentItem(userlist->count()-1);
             }
         }
@@ -212,7 +217,7 @@ void Security::toggleAutoLogin(bool val)
 {
     autoLogin=val;
     userlist->setEnabled(val);
-    if (!autoLogin) 
+    if (!autoLogin)
         autoLoginName=userlist->currentText();
 }
 void Security::setSyncNet(const QString& sn)
@@ -255,6 +260,8 @@ void Security::applySecurity()
             loginCfg.removeEntry("AutoLogin");
         }
 
+	cfg.setGroup("SyncMode");
+	cfg.writeEntry("Mode", syncModeCombo->currentItem()+1 );
     }
 }
 
