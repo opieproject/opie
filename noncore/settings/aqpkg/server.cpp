@@ -19,16 +19,11 @@
  ***************************************************************************/
 
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
-#include <iostream>
-#include <fstream>
-using namespace std;
-
 #include "server.h"
 #include "datamgr.h"
+
+#include <qfile.h>
+#include <qtextstream.h>
 
 #ifdef QWS
 #include <qpe/global.h>
@@ -73,7 +68,7 @@ void Server :: readStatusFile(  QList<Destination> &destList )
         
         QString path = dest->getDestinationPath();
         if ( path.right( 1 ) != "/" )
-            path += "/";
+            path.append( "/" );
             
         if ( path == "/" )
         {
@@ -81,14 +76,15 @@ void Server :: readStatusFile(  QList<Destination> &destList )
             installingToRoot = true;
         }   
         
-        packageFile = path + "usr/lib/ipkg/status";
+        packageFile = path;
+        packageFile.append( "usr/lib/ipkg/status" );
         readPackageFile( 0, false, installingToRoot, &( *dest ) );
     }
 
     // Ensure that the root status file is read
     if ( !rootRead )
     {
-        cout << "Reading status file " << "/usr/lib/ipkg/status" << endl;
+        //cout << "Reading status file " << "/usr/lib/ipkg/status" << endl;
         packageFile = "/usr/lib/ipkg/status";
         readPackageFile( 0, false, true );
     }
@@ -146,36 +142,32 @@ void Server :: readLocalIpks( Server *local )
 
 void Server :: readPackageFile( Server *local, bool clearAll, bool installingToRoot, Destination *dest )
 {
-    ifstream in( packageFile );
-	if ( !in.is_open() )
+    QFile f( packageFile );
+    if ( !f.open( IO_ReadOnly ) )
         return;
+    QTextStream t( &f );
 
-    char line[5001];
-    char k[21];
-    char v[5001];
+    QString line;
     QString key;
     QString value;
+    int pos;
 
     if ( clearAll )
         cleanUp();
     Package *currPackage = 0;
 
     bool newPackage = true;
-    do
+    while ( !t.eof() )
     {
-        in.getline( line, 5000 );
-        if ( in.eof() )
-            continue;
-
-        k[0] = '\0';
-        v[0] = '\0';
-
-        sscanf( line, "%[^:]: %[^\n]", k, v );
+        line = t.readLine();
         
-        key = k;
-        value = v;
-        key = key.stripWhiteSpace();
-        value = value.stripWhiteSpace();
+        pos = line.find( ':', 0 );
+        if ( pos > -1 )
+            key = line.mid( 0, pos ).stripWhiteSpace();
+        else
+            key = QString::null;
+        value = line.mid( pos+1, line.length()-pos ).stripWhiteSpace();
+
         if ( key == "Package" && newPackage )
         {
             newPackage = false;
@@ -228,13 +220,13 @@ void Server :: readPackageFile( Server *local, bool clearAll, bool installingToR
 
             DataManager::setAvailableCategories( value );
         }
-        else if ( key == "" )
+        else if ( key == QString::null )
         {
             newPackage = true;
         }
-    } while ( !in.eof() );
+    }
 
-    in.close();
+    f.close();
 
     // build local packages
     buildLocalPackages( local );
