@@ -26,3 +26,11 @@ IRCTab::IRCTab(QWidget *parent, const char *name, WFlags f) : QWidget(parent, na
     descLayout->setStretchFactor(m_description, 1);
 }
 
+
+void IRCTab::setID(int id) {
+    m_id = id;
+}
+
+int IRCTab::id() {
+    return m_id;
+}

@@ -10,7 +10,8 @@
 
 MainWindow::MainWindow(QWidget *parent, const char *name, WFlags f) : QMainWindow(parent, name, f) {
     setCaption(tr("IRC Client"));
-    m_tabWidget = new QTabWidget(this);
+    m_tabWidget = new IRCTabWidget(this);
+    connect(m_tabWidget, SIGNAL(currentChanged(QWidget *)), this, SLOT(selected(QWidget *)));
     setCentralWidget(m_tabWidget);
     setToolBarsMovable(FALSE);
     QPEMenuBar *menuBar = new QPEMenuBar(this);
@@ -37,10 +38,21 @@ void MainWindow::loadSettings() {
     IRCTab::m_notificationColor = config.readEntry("NotificationColor", "#AA3300");
 }
 
+void MainWindow::selected(QWidget *) {
+    m_tabWidget->setTabColor(m_tabWidget->currentPageIndex(), &black);
+}
+
 void MainWindow::addTab(IRCTab *tab) {
+    connect(tab, SIGNAL(changed(IRCTab *)), this, SLOT(changeEvent(IRCTab *)));
     m_tabWidget->addTab(tab, tab->title());
     m_tabWidget->showPage(tab);
+    tab->setID(m_tabWidget->currentPageIndex());
     m_tabs.append(tab);
+}
+
+void MainWindow::changeEvent(IRCTab *tab) {
+    if (tab->id() != m_tabWidget->currentPageIndex())
+        m_tabWidget->setTabColor(tab->id(), &blue);
 }
 
 void MainWindow::killTab(IRCTab *tab) {

@@ -21,24 +21,52 @@
 #ifndef __IRCMISC_H
 #define __IRCMISC_H
 
+#include <qtabwidget.h>
+#include <qtabbar.h>
 #include <qlabel.h>
 #include <qcolor.h>
+#include <qvector.h>
+
+/* IRCFramedColorLabel is used to display a color */
 
 class IRCColorLabel : public QLabel {
-    public:
-        IRCColorLabel(QColor color, QWidget *parent = 0, const char *name = 0, WFlags f = 0);
-        QColor color();
-        void mousePressEvent(QMouseEvent *event); 
-    protected:
-        QColor m_color;
+    Q_OBJECT
+public:
+    IRCColorLabel(QColor color, QWidget *parent = 0, const char *name = 0, WFlags f = 0);
+    QColor color();
+    void mousePressEvent(QMouseEvent *event); 
+protected:
+    QColor m_color;
 };
 
 class IRCFramedColorLabel : public QWidget {
-    public:
-        IRCFramedColorLabel(QColor color, QWidget *parent = 0, const char *name = 0, WFlags f = 0); 
-        QColor color();
-    protected:
-        IRCColorLabel *m_label;
+    Q_OBJECT
+public:
+    IRCFramedColorLabel(QColor color, QWidget *parent = 0, const char *name = 0, WFlags f = 0); 
+    QColor color();
+protected:
+    IRCColorLabel *m_label;
+};
+
+/* Custom colored QTabWidget */
+
+class IRCTabWidget : public QTabWidget {
+    Q_OBJECT
+public:
+    IRCTabWidget(QWidget *parent = 0, const char *name = 0);
+    void setTabColor(int index, const QColor *color);
+};
+
+class IRCTabBar : public QTabBar {
+    Q_OBJECT
+public:
+    IRCTabBar(QWidget *parent = 0, const char *name = 0);
+    void setTabColor(int index, const QColor *color);
+protected:
+    void paintLabel(QPainter*, const QRect&, QTab*, bool) const;
+    int insertTab(QTab *, int index = -1);
+protected:
+    QVector<QColor> m_colors;
 };
 
 #endif /* __IRCMISC_H */

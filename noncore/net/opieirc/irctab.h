@@ -35,15 +35,20 @@ class IRCTab : public QWidget {
     Q_OBJECT
 public:
     IRCTab(QWidget *parent = 0, const char *name = 0, WFlags f = 0);
+    void setID(int id);
+    int id();
     virtual QString title() = 0;
     virtual IRCSession *session() = 0;
     virtual void appendText(QString text) = 0;
+signals:
+    void changed(IRCTab *);
 public slots:
     virtual void remove() = 0;
     virtual void settingsChanged() = 0;
 protected:
     QLabel      *m_description;
     QVBoxLayout *m_layout;
+    int          m_id;
 public:
     /* Configuration shared accross all instances - contains HTML style colors (#rrggbb) */ 
     static QString m_errorColor;

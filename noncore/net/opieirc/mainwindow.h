@@ -24,8 +24,8 @@
 #include <qmainwindow.h>
 #include <qaction.h>
 #include <qlist.h>
-#include <qtabwidget.h>
 #include "mainwindow.h"
+#include "ircmisc.h"
 #include "irctab.h"
 
 class MainWindow : public QMainWindow {
@@ -38,10 +38,12 @@ public:
 protected slots:
     void newConnection();
     void settings();
+    void selected(QWidget *);
+    void changeEvent(IRCTab *);
 protected:
     void loadSettings();
 protected:
-    QTabWidget *m_tabWidget;
+    IRCTabWidget *m_tabWidget;
     QList<IRCTab> m_tabs;
 };
 

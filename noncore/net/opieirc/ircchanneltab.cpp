@@ -47,6 +47,7 @@ void IRCChannelTab::appendText(QString text) {
     /* not using append because it creates layout problems */
     m_textview->setText(m_textview->text() + text);
     m_textview->ensureVisible(0, m_textview->contentsHeight());
+    emit changed(this);
 }
 
 IRCChannelTab::~IRCChannelTab() {
