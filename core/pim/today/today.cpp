@@ -479,7 +479,7 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
       msg += "<br>All day";
     }  else {
       // start time of event
-        msg += "<br>" + ampmTime(QTime((ev).event().start().time()) );
+        msg += "<br>" + ampmTime(QTime((ev).event().start().time()) )
         // end time of event
         + "<b> - </b>" + ampmTime(QTime((ev).event().end().time()) );
     }
@@ -546,7 +546,7 @@ DateBookEventLater::DateBookEventLater(const EffectiveEvent &ev,
       msg += "<br>All day";
     } else {
       // start time of event
-        msg += "<br>" + ampmTime(QTime((ev).event().start().time()) );
+        msg += "<br>" + ampmTime(QTime((ev).event().start().time()) )
         // end time of event
         + "<b> - </b>" + ampmTime(QTime((ev).event().end().time()) );
     }
