@@ -1030,8 +1030,8 @@ void AddressbookWindow::populateCategories()
 	id = 1;
 	rememberId = 0;
 
-	catMenu->insertItem( Resource::loadPixmap( "datebook/weeklst" ), tr( "List" ), id++ );
-	catMenu->insertItem( Resource::loadPixmap( "day" ), tr( "Cards" ), id++ );
+	catMenu->insertItem( Resource::loadPixmap( "addressbook/listview" ), tr( "List" ), id++ );
+	catMenu->insertItem( Resource::loadPixmap( "addressbook/cardview" ), tr( "Cards" ), id++ );
 // 	catMenu->insertItem( tr( "Personal" ), id++ );
 	catMenu->insertSeparator();
 
