@@ -64,6 +64,11 @@ enum OModel {
 	Model_SIMpad_SL4    = ( Model_SIMpad | 0x000002 ),
 	Model_SIMpad_SLC    = ( Model_SIMpad | 0x000004 ),
 	Model_SIMpad_TSinus = ( Model_SIMpad | 0x000008 ),
+
+	Model_Ramses        = ( 4 << 24 ),
+
+	Model_Ramses_All    = ( Model_Ramses | 0xffffff ),
+	Model_Ramses_MNCI   = ( Model_Ramses | 0x000001 ),
 };
 
 /**
@@ -75,6 +80,7 @@ enum OVendor {
 	Vendor_HP,
 	Vendor_Sharp,
 	Vendor_SIEMENS,
+	Vendor_MundN,
 };
 
 /**

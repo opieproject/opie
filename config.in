@@ -30,7 +30,10 @@ choice
 #    boolean "Sharp Zaurus SL-5x00 - OpenZaurus"
 
   config TARGET_IPAQ
-    boolean "Ipaq"
+    boolean "iPAQ"
+
+  config TARGET_RAMSES
+    boolean "Ramses"
 
 endchoice
 
@@ -56,11 +59,14 @@ config SPECFILE
 #  default "linux-oz-g++" if TARGET_OZ
   default "qws/linux-ipaq-g++" if TARGET_IPAQ && (! X11)
   default "linux-g++" if TARGET_IPAQ && X11
+  default "qws/linux-ramses-g++" if TARGET_RAMSES && (! X11)
+  default "linux-g++" if TARGET_RAMSES && X11
 
 config CUSTOMFILE
   string
   default "custom-ipaq.h" if TARGET_IPAQ
   default "custom-sharp.h" if TARGET_SHARP
+  default "custom-ramses.h" if TARGET_RAMSES
   
 
 config OPTIMIZATIONS
@@ -68,6 +74,7 @@ config OPTIMIZATIONS
   depends OPTIMIZE
   default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_IPAQ
   default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_SHARP
+  default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_RAMSES
 
 #config CROSS
 #  string "Crosscompilation prefix"

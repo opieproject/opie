@@ -161,6 +161,25 @@ protected:
 	OLedState m_leds [1]; //FIXME check if really only one
 };
 
+class Ramses : public ODevice, public QWSServer::KeyboardFilter {
+protected:
+	virtual void init ( );
+	virtual void initButtons ( );
+
+public:
+	virtual bool setSoftSuspend ( bool soft );
+
+	virtual bool setDisplayStatus( bool on );
+	virtual bool setDisplayBrightness ( int b );
+	virtual int displayBrightnessResolution ( ) const;
+
+protected:
+	virtual bool filter ( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
+	virtual void timerEvent ( QTimerEvent *te );
+
+	int m_power_timer;
+};
+
 struct i_button {
 	uint model;
     Qt::Key code;
@@ -322,6 +341,28 @@ struct s_button {
     */
 };
 
+struct r_button {
+	uint model;
+    Qt::Key code;
+    char *utext;
+    char *pix;
+    char *fpressedservice;
+    char *fpressedaction;
+    char *fheldservice;
+    char *fheldaction;
+} ramses_buttons [] = {
+    { Model_Ramses_MNCI,
+    Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
+	"devicebuttons/simpad_menu",
+ 	"QPE/TaskBar", "toggleMenu()",
+	"QPE/TaskBar", "toggleStartMenu()" },
+    { Model_Ramses_MNCI,
+    Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
+	"devicebuttons/ipaq_home",
+	"QPE/Launcher", "home()",
+	"buttonsettings", "raise()" },
+};
+
 static QCString makeChannel ( const char *str )
 {
 	if ( str && !::strchr ( str, '/' ))
@@ -346,6 +387,8 @@ ODevice *ODevice::inst ( )
 			dev = new Zaurus ( );
 		else if ( QFile::exists ( "/proc/ucb1x00" ) && QFile::exists ( "/proc/cs3" ))
 			dev = new SIMpad ( );
+		else if ( QFile::exists ( "/proc/sys/board/name" ))
+			dev = new Ramses ( );
 		else
 			dev = new ODevice ( );
 
@@ -1844,3 +1887,157 @@ int SIMpad::displayBrightnessResolution ( ) const
 	}
 }
 
+/**************************************************
+ *
+ * Ramses
+ *
+ **************************************************/
+
+void Ramses::init ( )
+{
+	d->m_vendorstr = "M und N";
+	d->m_vendor = Vendor_MundN;
+
+	QFile f( "/proc/sys/board/ramses" );
+
+	d->m_modelstr = "Ramses";
+	d->m_model = Model_Ramses_MNCI;
+
+	d->m_rotation = Rot180;
+	d->m_direction = CCW;
+	d->m_holdtime = 1000;
+
+	f.setName( "/etc/oz_version" );
+
+	if ( f.open( IO_ReadOnly )) {
+	   	d->m_systemstr = "OpenEmbedded/Ramses";
+	    	d->m_system = System_OpenZaurus;
+
+		QTextStream ts ( &f );
+		ts.setDevice ( &f );
+		d->m_sysverstr = ts.readLine ( );
+		f.close ( );
+	}
+
+	m_power_timer = 0;
+
+}
+
+void Ramses::initButtons ( )
+{
+	if ( d->m_buttons )
+		return;
+
+	if ( isQWS( ) )
+		QWSServer::setKeyboardFilter ( this );
+
+	d->m_buttons = new QValueList <ODeviceButton>;
+
+	for ( uint i = 0; i < ( sizeof( ramses_buttons ) / sizeof( s_button )); i++ ) {
+		r_button *rb = ramses_buttons + i;
+		ODeviceButton b;
+
+		if (( rb->model & d->m_model ) == d->m_model ) {
+			b.setKeycode( rb->code );
+			b.setUserText( QObject::tr ( "Button", rb->utext ));
+			b.setPixmap( Resource::loadPixmap ( rb->pix ));
+			b.setFactoryPresetPressedAction( OQCopMessage ( makeChannel ( rb->fpressedservice ), rb->fpressedaction ));
+			b.setFactoryPresetHeldAction( OQCopMessage ( makeChannel ( rb->fheldservice ), rb->fheldaction ));
+
+			d->m_buttons->append( b );
+		}
+	}
+	reloadButtonMapping();
+
+	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
+	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));
+}
+
+bool Ramses::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, bool autoRepeat )
+{
+	//TODO
+	return false;
+}
+
+void Ramses::timerEvent ( QTimerEvent * )
+{
+	killTimer ( m_power_timer );
+	m_power_timer = 0;
+	QWSServer::sendKeyEvent ( -1, HardKey_Backlight, 0, true, false );
+	QWSServer::sendKeyEvent ( -1, HardKey_Backlight, 0, false, false );
+}
+
+
+bool Ramses::setSoftSuspend ( bool soft )
+{
+	bool res = false;
+	int fd;
+
+	if ((( fd = ::open ( "/dev/apm_bios", O_RDWR )) >= 0 ) ||
+        (( fd = ::open ( "/dev/misc/apm_bios",O_RDWR )) >= 0 )) {
+
+		int sources = ::ioctl ( fd, APM_IOCGEVTSRC, 0 ); // get current event sources
+
+		if ( sources >= 0 ) {
+			if ( soft )
+				sources &= ~APM_EVT_POWER_BUTTON;
+			else
+				sources |= APM_EVT_POWER_BUTTON;
+
+			if ( ::ioctl ( fd, APM_IOCSEVTSRC, sources ) >= 0 ) // set new event sources
+				res = true;
+			else
+				perror ( "APM_IOCGEVTSRC" );
+		}
+		else
+			perror ( "APM_IOCGEVTSRC" );
+
+		::close ( fd );
+	}
+	else
+		perror ( "/dev/apm_bios or /dev/misc/apm_bios" );
+
+    return res;
+}
+
+/**
+ * This sets the display on or off
+ */
+bool Ramses::setDisplayStatus ( bool on )
+{
+	bool res = false;
+	int fd;
+
+	if (( fd = ::open ( "/dev/fb/0", O_RDWR )) >= 0 ) {
+		res = ( ::ioctl ( fd, FBIOBLANK, on ? VESA_NO_BLANKING : VESA_POWERDOWN ) == 0 );
+		::close ( fd );
+	}
+	return res;
+}
+
+
+bool Ramses::setDisplayBrightness ( int bright )
+{
+	qDebug( "ODevice for Ramses: setDisplayBrightness( %d )", bright );
+	bool res = false;
+	int fd;
+
+	if ( bright > 255 )
+		bright = 100;
+	if ( bright < 0 )
+		bright = 0;
+
+	if (( fd = ::open ( "/proc/sys/board/pwm0", O_WRONLY )) >= 0 ) {
+		char writeCommand[100];
+		const int count = sprintf( writeCommand, "%d\n", bright);
+		res = ( ::write ( fd, writeCommand, count ) != -1 );
+		::close ( fd );
+	}
+	return res;
+}
+
+
+int Ramses::displayBrightnessResolution ( ) const
+{
+	return 100;
+}
