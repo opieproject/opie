@@ -29,9 +29,11 @@
 // gcc exports inline functions in the generated file
 // inlinepics_p.h
 
+#ifndef LIBQPE_NO_INLINE_IMAGES
 namespace {
 #include "inlinepics_p.h"
 }
+#endif
 
 static bool g_notUseSet = ::getenv("OVERWRITE_ICON_SET");
 
@@ -96,7 +98,6 @@ QBitmap Resource::loadBitmap( const QString &pix )
 QString Resource::findPixmap( const QString &pix )
 {
     QString picsPath = QPEApplication::qpeDir() + "pics/";
-
     QString f;
 
     // Common case optimizations...
@@ -106,6 +107,17 @@ QString Resource::findPixmap( const QString &pix )
     f = picsPath + pix + ".xpm";
     if ( QFile( f ).exists() )
 	return f;
+
+#ifdef LIBQPE_NO_INLINE_IMAGES
+    QString picsPathInline = picsPath + "inline/";
+    // Common case optimizations...
+    f = picsPathInline + pix + ".png";
+    if ( QFile( f ).exists() )
+	return f;
+    f = picsPathInline + pix + ".xpm";
+    if ( QFile( f ).exists() )
+	return f;
+#endif
 
     // All formats...
     QStrList fileFormats = QImageIO::inputFormats();
@@ -163,20 +175,32 @@ QStringList Resource::allSounds()
 
 static QImage load_image(const QString &name)
 {
+    QImage img;
+
     if (g_notUseSet ) {
         // try file
-        QImage img;
         QString f = Resource::findPixmap(name);
         if ( !f.isEmpty() )
             img.load(f);
+#ifndef LIBQPE_NO_INLINE_IMAGES
         if (img.isNull() )
             img = qembed_findImage(name.latin1() );
+#endif
         return img;
     }
     else{
-        QImage img = qembed_findImage(name.latin1());
-
-        if ( img.isNull() ) {
+#ifndef LIBQPE_NO_INLINE_IMAGES
+        img = qembed_findImage(name.latin1());
+#else
+        QString f = Resource::findPixmap( "/inline/" + name );
+        if ( !f.isEmpty() )
+        {
+            img.load(f);
+            return img;
+        }
+#endif
+        if ( img.isNull() )
+        {
             // No inlined image, try file
             QString f = Resource::findPixmap(name);
             if ( !f.isEmpty() )

@@ -24,8 +24,9 @@
 
 	Internal
 	--------
-	* Work around bug in Qt/Embedded 2.3.10: qt_version() returns 231 (mickeyl)
+	* Worked around bug in Qt/Embedded 2.3.10: qt_version() returns 231 (mickeyl)
 	* Killed the need for weak symbols in QtE (zecke)
+	* Added optional building libqpe without inline images (mickeyl)
 
 2005-02-03	Opie 1.1.9
 

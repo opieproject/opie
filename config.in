@@ -170,6 +170,10 @@ config LIBQPE_WITHROHFEEDBACK
   boolean "Build libqpe with Right-On-Hold feedback"
   default y
 
+config LIBQPE_NO_INLINE_IMAGES
+  boolean "Build libqpe without inline images"
+  default y
+
 config OPIE_NO_SOUND_PCM_READ_BITS
   boolean "There is not a pcm_read_bits io control"
   default y if TARGET_SHARP
