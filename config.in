@@ -39,14 +39,18 @@ config OPTIMIZE
   boolean "Use optimizations"
   default "y" if ! TARGET_X86
 
-# added for threaded compile
 config THREADED
   boolean "Enable threaded build"
+  default "n"
+
+config STATIC
+  boolean "Build static libraries"
   default "n"
 
 config DEBUG
   boolean "Enable debug builds"
   default n
+
 config RELEASE
   bool
   default y

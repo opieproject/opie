@@ -22,7 +22,9 @@ else
 	echo CONFIG += release >> $@
 	echo DEFINES += "OPIE_NO_DEBUG" >> $@
 endif
-
+ifeq ($(CONFIG_STATIC),y)
+	echo CONFIG += staticlib >> $@
+endif
 ifeq ($(filter 3.%,$(QTE_VERSION)),) # not qt3
 	echo CONFIG -= qt3 >> $@
 else
@@ -30,6 +32,7 @@ else
 endif
 ifneq ($(CONFIG_QUICK_LAUNCH),)
 	echo contains\( CONFIG, quick-app \) \{ >> $@
+	echo CONFIG -= staticlib >> $@
 	echo CONFIG -= quick-app >> $@
 	echo CONFIG += quick-app-lib >> $@
 	echo QUICKLAUNCH_PATH = $(CONFIG_QUICKLAUNCH_PATH) >> $@
