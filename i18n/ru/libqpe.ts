@@ -477,11 +477,11 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished">PM</translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished">AM</translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>All</source>
@@ -585,7 +585,7 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Титул</translation>
     </message>
     <message>
         <source>First Name</source>

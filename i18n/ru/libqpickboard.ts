@@ -3,7 +3,7 @@
     <name>InputMethods</name>
     <message>
         <source>Pickboard</source>
-        <translation type="unfinished">Pickboard</translation>
+        <translation>Подбор клавиш</translation>
     </message>
 </context>
 </TS>

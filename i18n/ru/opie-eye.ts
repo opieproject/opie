@@ -38,7 +38,7 @@
     <name>PMainWindow</name>
     <message>
         <source>Phunk View - Config</source>
-        <translation type="unfinished">Вид - настройка</translation>
+        <translation>Вид - настройка</translation>
     </message>
     <message>
         <source>Browser Keyboard Actions</source>
@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>Opie Eye Caramba</source>
-        <translation type="unfinished">Карамба Глаз Opie</translation>
+        <translation>Карамба Глаз Opie</translation>
     </message>
     <message>
         <source>Show all files</source>

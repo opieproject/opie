@@ -358,11 +358,11 @@
     <name>KLocale</name>
     <message>
         <source>pm</source>
-        <translation type="unfinished">pm</translation>
+        <translation>pm</translation>
     </message>
     <message>
         <source>am</source>
-        <translation type="unfinished">am</translation>
+        <translation>am</translation>
     </message>
     <message>
         <source>concatenation of dates and time</source>

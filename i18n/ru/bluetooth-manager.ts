@@ -126,7 +126,7 @@
     </message>
     <message>
         <source>Status Label</source>
-        <translation type="unfinished">Отметка статуса</translation>
+        <translation>Метка статуса</translation>
     </message>
 </context>
 <context>

@@ -92,7 +92,7 @@
     </message>
     <message>
         <source>Show Applications in Subpopups</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать приложения в под-окнах</translation>
     </message>
 </context>
 <context>

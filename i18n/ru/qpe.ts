@@ -113,7 +113,7 @@ accurately to calibrate your screen.</source>
     </message>
     <message>
         <source>FirstUseBackground</source>
-        <translation type="unfinished"></translation>
+        <translation>ФонПервогоИспользования</translation>
     </message>
     <message>
         <source>Finish</source>

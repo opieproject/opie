@@ -674,7 +674,7 @@ and </source>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Титул</translation>
     </message>
     <message>
         <source>First Name</source>

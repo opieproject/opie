@@ -75,7 +75,7 @@
     </message>
     <message>
         <source>Todo Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Кнопка &quot;Задачи&quot;</translation>
     </message>
 </context>
 <context>

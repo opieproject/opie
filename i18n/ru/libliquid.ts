@@ -10,66 +10,66 @@
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>
-        <translation type="unfinished">Стиль Жидкость</translation>
+        <translation>Стиль Жидкость</translation>
     </message>
     <message>
         <source>No translucency</source>
-        <translation type="unfinished">Нет прозрачности</translation>
+        <translation>Без прозрачности</translation>
     </message>
     <message>
         <source>Stippled, background color</source>
-        <translation type="unfinished">Полосы, цвет фона</translation>
+        <translation>Полосы, цвет фона</translation>
     </message>
     <message>
         <source>Stippled, button color</source>
-        <translation type="unfinished">Полосы, цвет кнопок</translation>
+        <translation>Полосы, цвет кнопок</translation>
     </message>
     <message>
         <source>Translucent stippled, background color</source>
-        <translation type="unfinished">Прозрачный с полосами, цвет фона</translation>
+        <translation>Прозрачный с полосами, цвет фона</translation>
     </message>
     <message>
         <source>Translucent stippled, button color</source>
-        <translation type="unfinished">Прозрачный с полосами, цвет кнопок</translation>
+        <translation>Прозрачный с полосами, цвет кнопок</translation>
     </message>
     <message>
         <source>Custom translucency</source>
-        <translation type="unfinished">Свой уровень прозрачности</translation>
+        <translation>Свой уровень прозрачности</translation>
     </message>
     <message>
         <source>Menu color</source>
-        <translation type="unfinished">Цвет меню</translation>
+        <translation>Цвет меню</translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation type="unfinished">Цвет текста</translation>
+        <translation>Цвет текста</translation>
     </message>
     <message>
         <source>Opacity</source>
-        <translation type="unfinished">Непрозрачность</translation>
+        <translation>Непрозрачность</translation>
     </message>
     <message>
         <source>Use shadowed menu text</source>
-        <translation type="unfinished">Текст меню отбрасывает тень</translation>
+        <translation>Текст меню отбрасывает тень</translation>
     </message>
     <message>
         <source>Make toolbar buttons appear flat</source>
-        <translation type="unfinished">Показывать плоские кнопки инструментов</translation>
+        <translation>Показывать плоские кнопки инструментов</translation>
     </message>
     <message>
         <source>Stipple contrast</source>
-        <translation type="unfinished">Контраст полос</translation>
+        <translation>Контраст полос</translation>
     </message>
 </context>
 <context>
     <name>Styles</name>
     <message>
         <source>Liquid</source>
-        <translation type="unfinished">Жидкость</translation>
+        <translation>Жидкость</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation type="unfinished">Стиль High Performance Liquid, сделал Mosfet</translation>
+        <translation>Стиль High Performance Liquid, сделал Mosfet</translation>
     </message>
 </context>
 </TS>

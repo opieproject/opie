@@ -197,79 +197,79 @@
     </message>
     <message>
         <source>Konsole</source>
-        <translation type="unfinished"></translation>
+        <translation>Консоль</translation>
     </message>
     <message>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Внизу</translation>
     </message>
     <message>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Сверху</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрытый</translation>
     </message>
     <message>
         <source>Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Вкладки</translation>
     </message>
     <message>
         <source>Black on Pink</source>
-        <translation type="unfinished"></translation>
+        <translation>Черный на розовом</translation>
     </message>
     <message>
         <source>Pink on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Розовый на черном</translation>
     </message>
     <message>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>по умолчанию</translation>
     </message>
     <message>
         <source>new session</source>
-        <translation type="unfinished"></translation>
+        <translation>новый сеанс</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Вид</translation>
     </message>
     <message>
         <source>Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Шрифты</translation>
     </message>
     <message>
         <source>Sessions</source>
-        <translation type="unfinished"></translation>
+        <translation>Сеансы</translation>
     </message>
     <message>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>На весь экран</translation>
     </message>
     <message>
         <source>Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Увеличить</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Правка...</translation>
     </message>
     <message>
         <source>History...</source>
-        <translation type="unfinished"></translation>
+        <translation>История...</translation>
     </message>
     <message>
         <source>To exit fullscreen, tap here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Чтобы выйти из полноэкранного режима, нажмите здесь.</translation>
     </message>
     <message>
         <source>History Lines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Линий истории:</translation>
     </message>
     <message>
         <source>Konsole </source>
-        <translation type="unfinished"></translation>
+        <translation>Консоль</translation>
     </message>
 </context>
 <context>

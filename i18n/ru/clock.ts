@@ -3,38 +3,38 @@
     <name>AlarmDlg</name>
     <message>
         <source>Clock</source>
-        <translation type="unfinished">Часы</translation>
+        <translation>Часы</translation>
     </message>
     <message>
         <source>Snooze</source>
-        <translation type="unfinished">Вздремнуть</translation>
+        <translation>Вздремнуть</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть</translation>
     </message>
 </context>
 <context>
     <name>AlarmDlgBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма1</translation>
     </message>
     <message>
         <source>TextLabel1</source>
-        <translation type="unfinished"></translation>
+        <translation>ТекстМетка1</translation>
     </message>
     <message>
         <source>Snooze</source>
-        <translation type="unfinished">Вздремнуть</translation>
+        <translation>Вздремнуть</translation>
     </message>
     <message>
         <source> mins</source>
-        <translation type="unfinished"></translation>
+        <translation>мин</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть</translation>
     </message>
 </context>
 <context>
@@ -94,153 +94,154 @@
     <message>
         <source>Mon</source>
         <comment>Monday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Пнд</translation>
     </message>
     <message>
         <source>Tue</source>
         <comment>Tuesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Втр</translation>
     </message>
     <message>
         <source>Wed</source>
         <comment>Wednesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Срд</translation>
     </message>
     <message>
         <source>Thu</source>
         <comment>Thursday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Чтв</translation>
     </message>
     <message>
         <source>Fri</source>
         <comment>Friday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Птн</translation>
     </message>
     <message>
         <source>Sat</source>
         <comment>Saturday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Сбт</translation>
     </message>
     <message>
         <source>Sun</source>
         <comment>Sunday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Вск</translation>
     </message>
     <message>
         <source>Lap/Split</source>
-        <translation type="unfinished"></translation>
+        <translation>Забег/разделить</translation>
     </message>
     <message>
         <source>&lt;b&gt;Daily Alarm:&lt;/b&gt;&lt;p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Ежедневный будильник:&lt;/b&gt;&lt;p&gt;</translation>
     </message>
     <message>
         <source>Select Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать день</translation>
     </message>
     <message>
         <source>Daily alarm requires at least
 one day to be selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Для ежедневного будильника
+требуется выбрать хотя бы один день.</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished">Все</translation>
+        <translation>Все</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished">Аудио</translation>
+        <translation>Аудио</translation>
     </message>
 </context>
 <context>
     <name>ClockBase</name>
     <message>
         <source>Clock</source>
-        <translation type="unfinished">Часы</translation>
+        <translation>Часы</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation type="unfinished">Секундомер</translation>
+        <translation>Секундомер</translation>
     </message>
     <message>
         <source>Split</source>
-        <translation type="unfinished"></translation>
+        <translation>Разделить</translation>
     </message>
     <message>
         <source>Lap</source>
-        <translation type="unfinished"></translation>
+        <translation>Забег</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished">Старт</translation>
+        <translation>Старт</translation>
     </message>
     <message>
         <source>Starts and stops the stopwatch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Запускает и останавливает секундомер.</translation>
     </message>
     <message>
         <source>Lap/Split</source>
-        <translation type="unfinished"></translation>
+        <translation>Забег/разделить</translation>
     </message>
     <message>
         <source>Resets the stopwatch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбрасывает секундомер.</translation>
     </message>
     <message>
         <source>Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Будильник</translation>
     </message>
     <message>
         <source>Daily Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Ежедневный будильник</translation>
     </message>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Включен</translation>
     </message>
     <message>
         <source>Check to enable the daily alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите чтобы включить будильник</translation>
     </message>
     <message>
         <source>Set the hour the alarm will sound.</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить часовую стрелку будильника.</translation>
     </message>
     <message>
         <source>:</source>
-        <translation type="unfinished"></translation>
+        <translation>:</translation>
     </message>
     <message>
         <source>Set the minute the alarm will sound.</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить минутную стрелку будильника.</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished">AM</translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished">PM</translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>Days:</source>
-        <translation type="unfinished"></translation>
+        <translation>Дней:</translation>
     </message>
     <message>
         <source>Countdown Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Обратный отсчет</translation>
     </message>
     <message>
         <source>Play Sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Воспроизвести звук</translation>
     </message>
     <message>
         <source>Play File</source>
-        <translation type="unfinished"></translation>
+        <translation>Воспроизвести файл</translation>
     </message>
 </context>
 <context>
