@@ -4,23 +4,18 @@
 #include <qpe/qpeapplication.h>
 #include <qstring.h>
 #include <unistd.h>
-int debugLevel;
+#include <stdio.h>
 
 int main( int argc, char ** argv )
 {
 	setpgid(0,0);
   printf("This is oipkg\n");
-  printf("$Id: main.cpp,v 1.14 2002-07-19 12:44:48 tille Exp $\n");
-  debugLevel = 2;
-  if (argc > 1)
-  {
-      debugLevel = QString ( argv[1] ).toInt();
-    	qDebug("setting debug level to %i",debugLevel);
-  }
+  printf("$Id: main.cpp,v 1.14.2.1 2002-08-04 15:18:54 tille Exp $\n");
   QPEApplication a( argc, argv );
+  qDebug("creating mainwindow");
   MainWindow mw;
-//  if (argc > 2)
-//		QMessageBox::information( &mw, "oipkg","While ipkg is working\noipkg is hanging.\nPlease be patient!");
+  qDebug(" showMainDocumentWidget");
   a.showMainDocumentWidget( &mw );
+  qDebug(" a.exec()");
   return a.exec();
 }

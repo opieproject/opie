@@ -15,16 +15,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-PackageListRemote::PackageListRemote(PackageManagerSettings* s)
-	: PackageList(s)
+PackageListRemote::PackageListRemote(PackageListView *pl, const char *name, PackageManagerSettings* s)
+	: PackageList(pl,name,s)
 {
-	PackageListRemote();
 }
 
-PackageListRemote::PackageListRemote()
-	: PackageList()
-{
-}
+//PackageListRemote::PackageListRemote(PackageListView *pl, const char *name)
+//	: PackageList(pl,name)
+//{
+//}
 
 PackageListRemote::~PackageListRemote()
 {
@@ -32,13 +31,13 @@ PackageListRemote::~PackageListRemote()
 
 void PackageListRemote::query(QString s)
 {
-	pvDebug(4,"set query "+s);
+	qDebug("set query "+s);
 	searchString = s;	
 }
 
 void PackageListRemote::update()
 {
-	pvDebug(2,"PackageListRemote::update");	
+	qDebug("PackageListRemote::update");	
  	if (searchString.isEmpty()) return;
  	int r=0;
   QString cmdQuery;
@@ -54,7 +53,7 @@ void PackageListRemote::update()
   cmdQuery += "&query="+searchString;           	
   cmdQuery += "\"";
 
-  pvDebug(4,"search :"+cmdQuery);
+  qDebug("search :"+cmdQuery);
   r = system(cmdQuery.latin1());
   readFileEntries( redirect, "remote" );
 
@@ -65,7 +64,7 @@ void PackageListRemote::update()
   cmdQuery += "query="+searchString;           	
   cmdQuery += "\"";
 
-  pvDebug(4,"search :"+cmdQuery);
+  qDebug("search :"+cmdQuery);
   r = system(cmdQuery.latin1());
   readFileEntries( redirect, "remote" );
 }

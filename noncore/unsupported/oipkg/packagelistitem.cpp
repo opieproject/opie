@@ -12,7 +12,6 @@
 #include <qpe/resource.h>
 #include <qobject.h>
 
-#include "debug.h"
 
 static QPixmap *pm_uninstalled=0;
 static QPixmap *pm_uninstalled_old=0;

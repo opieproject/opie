@@ -13,27 +13,21 @@
 #include "packagelist.h"
 
 
-#define HACK
-#ifdef HACK
-  static QString listsDir="/usr/lib/ipkg/";
-  static QString statusDir="/usr/lib/ipkg/";
-#endif
 
 class PackageListLocal : public PackageList  {
 public:
-	PackageListLocal();
-	PackageListLocal( PackageManagerSettings* );
+	PackageListLocal( PackageListView* parent=0, const char* name=0, PackageManagerSettings *s=0 );
 	virtual ~PackageListLocal();
+  virtual void expand();
 
-public slots:
+//public slots:
   void update();
 private:
-#ifndef HACK
   QString listsDir;
   QString statusDir;
-#endif
   void parseStatus();
   void parseList();
+  void init();
 };
 
 #endif

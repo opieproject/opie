@@ -37,7 +37,7 @@
 
 
 
-PmIpkg::PmIpkg( PackageManagerSettings* s, QWidget* p,  const char * name, WFlags f )
+PmIpkg::PmIpkg( QWidget* p, PackageManagerSettings* s, const char * name, WFlags f )
   	: QObject ( p )
 {
   settings = s;
@@ -57,7 +57,7 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
 	bool ret=false;
   QDir::setCurrent("/tmp");
   QString cmd = ipkg_cmd;
-	pvDebug( 3,"PmIpkg::runIpkg got dest="+dest);
+	qDebug("PmIpkg::runIpkg got dest="+dest);
 	if (!args.contains("update"))
 	{
 		if ( dest == "" )
@@ -82,7 +82,7 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
   qApp->processEvents();
   cmd += args;
   out( "running:\n"+cmd+"\n" );
-  pvDebug(2,"running:"+cmd);
+  qDebug("running:"+cmd);
   qApp->processEvents();
   FILE *fp;
   char line[130];
@@ -108,13 +108,13 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
      }
   }
   pclose(fp);
-  pvDebug(2,QString(ret?"success\n":"failure\n"));
+  qDebug(QString(ret?"success\n":"failure\n"));
   return ret;
 }
 
 void PmIpkg::makeLinks(Package *pack)
 {
-	pvDebug( 2, "PmIpkg::makeLinks "+ pack->name());
+	qDebug("PmIpkg::makeLinks "+ pack->name());
  	QString pn = pack->name();
   linkPackage( pack->packageName(), pack->dest() );
 }
@@ -127,7 +127,7 @@ QStringList* PmIpkg::getList( QString packFileName, QString d )
 	{
     Config cfg( "oipkg", Config::User );
     cfg.setGroup( "Common" );
-    QString statusDir = cfg.readEntry( "statusDir", "" );
+    statusDir = cfg.readEntry( "statusDir", "" );
 	}
  	QString packFileDir = dest+"/"+statusDir+"/info/"+packFileName+".list";
  	QFile f( packFileDir );
@@ -178,9 +178,7 @@ void PmIpkg::processFileList( QStringList *fileList, QString d )
 
 void PmIpkg::processLinkDir( QString file, QString dest )
 {
-	pvDebug( 4,"PmIpkg::processLinkDir "+file+" to "+ dest);
- 	if (linkOpp==createLink) pvDebug( 4,"opp: createLink");
- 	if (linkOpp==removeLink) pvDebug( 4,"opp: removeLink");
+	qDebug("PmIpkg::processLinkDir "+file+" to "+ dest);
 	if ( dest == "???" || dest == "" ) return;
   QString destFile = file;
 	file = dest+"/"+file;
@@ -190,7 +188,7 @@ void PmIpkg::processLinkDir( QString file, QString dest )
   QFileInfo fileInfo( file );
   if ( fileInfo.isDir() )
   {
-    pvDebug(4, "process dir "+file);
+    qDebug("process dir "+file);
   	QDir destDir( destFile );
     if (linkOpp==createLink) destDir.mkdir( destFile, true );
     QDir d( file );
@@ -200,7 +198,7 @@ void PmIpkg::processLinkDir( QString file, QString dest )
     QFileInfo *fi;
     while ( (fi=it.current()) )
     {
-    	pvDebug(4, "processLinkDir "+fi->absFilePath());
+    	qDebug("processLinkDir "+fi->absFilePath());
   		processLinkDir( fi->absFilePath(), dest );      			
 			++it;
     }
@@ -211,7 +209,7 @@ void PmIpkg::processLinkDir( QString file, QString dest )
     const char *linkFile = strdup(  (destFile).latin1());
     if( linkOpp==createLink )
 		{
-    	pvDebug(4, "linking: "+file+" -> "+destFile );
+    	qDebug("linking: "+file+" -> "+destFile );
     	symlink( instFile, linkFile );
   	}
   }  else  {
@@ -221,7 +219,7 @@ void PmIpkg::processLinkDir( QString file, QString dest )
       QFileInfo toRemoveLink( destFile );
     	if ( !QFile::exists( file ) && toRemoveLink.isSymLink() )
      	{
-	      pvDebug(4,"removing "+destFile+" no "+file);
+	      qDebug("removing "+destFile+" no "+file);
      		unlink( linkFile ); 	
       }
     }
@@ -298,10 +296,9 @@ void PmIpkg::remove()
       runwindow->progress->setProgress( 1 );
      	linkOpp = removeLink;
     	to_remove.at(i)->processed();
-     	pvDebug(3,"link "+QString::number(i));
+     	qDebug("link "+QString::number(i));
 		  if ( to_remove.at(i)->link() )
       		processFileList( fileList, to_remove.at(i)->dest() );
-     	//pvDebug(3,"take "+QString::number(i)+" of "+QString::number(to_remove.count()));
      	//if ( to_remove.at(i) ) to_remove.take( i );
           	
       out("\n");
@@ -325,7 +322,7 @@ void PmIpkg::install()
 	out(tr("Installing")+"\n"+tr("please wait")+"\n"); 	
   for (uint i=0; i < to_install.count(); i++)
   {
-  	qDebug("install loop %i of %i installing %s",i,to_install.count(),to_install.at(i)->installName().latin1()); //pvDebug
+  	qDebug("install loop %i of %i installing %s",i,to_install.count(),to_install.at(i)->installName().latin1()); 
     if (to_install.at(i)->link())
   	{
   		// hack to have package.list
@@ -337,7 +334,7 @@ void PmIpkg::install()
 	  	lds += listFile;
 	  	const char *rd = rds.latin1();
   		const char *ld = lds.latin1();
-   		pvDebug(4, "linking: "+rds+" -> "+lds );
+   		qDebug("linking: "+rds+" -> "+lds );
 	   	symlink( rd, ld );
   	}
 	  if ( runIpkg("install " + to_install.at(i)->installName(), to_install.at(i)->dest() ))
@@ -362,7 +359,7 @@ void PmIpkg::install()
 
 void PmIpkg::createLinks( const QString &dest )
 {
-	pvDebug(2,"PmIpkg::createLinks "+dest);
+	qDebug("PmIpkg::createLinks "+dest);
 	linkOpp=createLink;
  	QString url = settings->getDestinationUrlByName( dest );
   url = url==""?dest:url;
@@ -372,7 +369,7 @@ void PmIpkg::createLinks( const QString &dest )
 
 void PmIpkg::removeLinks( const QString &dest )
 {
-	pvDebug(2,"PmIpkg::removeLinks "+dest);
+	qDebug("PmIpkg::removeLinks "+dest);
 	linkOpp=removeLink;
  	QString url = settings->getDestinationUrlByName( dest );
   url = url==""?dest:url;
@@ -410,7 +407,7 @@ void PmIpkg::installFile(const QString &fileName, const QString &dest)
 
 	to_install.clear();
   to_remove.clear();
-	pvDebug( 2,"PmIpkg::installFile "+ fileName);
+	qDebug("PmIpkg::installFile "+ fileName);
  	Package *p = new Package(fileName,settings);
   if ( dest!="") p->setDest( dest );
 	to_install.append( p );
@@ -423,7 +420,7 @@ void PmIpkg::removeFile(const QString &fileName, const QString &dest)
 
 	to_install.clear();
   to_remove.clear();
-	pvDebug( 2,"PmIpkg::removeFile "+ fileName);
+	qDebug("PmIpkg::removeFile "+ fileName);
  	Package *p = new Package(fileName,settings);
   if ( dest!="") p->setDest( dest );
 	to_remove.append( p );

@@ -14,15 +14,18 @@
 #include <qfileinfo.h>
 #include <qtextstream.h>
 
-#include "debug.h"
-
 static QDict<Package>  *packageListAll;
 static int packageListAllRefCount = 0;
 
-PackageList::PackageList(QObject *parent, const char *name)
-  : QObject(parent,name), packageIter( packageList )
+
+PackageList::PackageList( PackageListView *parent, const char *name, PackageManagerSettings* s )
+  : QCheckListItem((QListView*)parent,name),
+  packageIter( packageList )
 {
-  empty=true;
+	qDebug("Creating packagelist %s",name);
+  settings = s;
+  dummy = new QCheckListItem(this,"dummy");
+  insertItem(dummy);
   if (!packageListAll) packageListAll = new QDict<Package>();
   packageListAllRefCount++;
   sections << "All";
@@ -31,13 +34,6 @@ PackageList::PackageList(QObject *parent, const char *name)
   *ss << "All";
   aktSection = "All";
   aktSubSection = "All";
-}
-
-PackageList::PackageList( PackageManagerSettings* s, QObject *parent, const char *name)
-  : QObject(parent,name), packageIter( packageList )
-{
-  settings = s;
-  PackageList(parent, name);
 }
 
 PackageList::~PackageList()
@@ -80,7 +76,6 @@ void PackageList::insertPackage( Package* pack )
       packageList.insert( pack->name(), pack );
       origPackageList.insert( pack->name(), pack );
     };
-  empty=false;
   updateSections( pack );
 }
 
@@ -169,8 +164,7 @@ void PackageList::updateSections( Package* pack )
 
 
 void PackageList::readFileEntries( QString filename, QString dest )
-{ 	
-	pvDebug(5,"PackageList::readFileEntries "+filename+" dest "+dest);
+{
   QStringList packEntry;
   QFile f( filename );
   if ( !f.open(IO_ReadOnly) ) return;
@@ -227,4 +221,14 @@ void PackageList::allPackages()
       ++filterIter;
       pack = filterIter.current();
     }
+}
+
+void PackageList::expand()
+{
+	if(dummy)
+	{
+		qDebug("PackageList::expand(): deleting dummy item");
+   	delete dummy;
+    dummy=0;
+	}
 }

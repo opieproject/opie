@@ -16,19 +16,24 @@
 #include "package.h"
 #include "pksettings.h"
 
-PackageListDocLnk::PackageListDocLnk(PackageManagerSettings* s, QObject *parent, const char *name)
-	: PackageList(s)
+PackageListDocLnk::PackageListDocLnk(PackageListView *parent, const char *name,PackageManagerSettings* s)
+	: PackageList(parent,name,s)
 {
-	PackageListDocLnk(parent, name);
+	init();
 }
 
-PackageListDocLnk::PackageListDocLnk(QObject *parent, const char *name)
-	: PackageList(parent, name)
+//PackageListDocLnk::PackageListDocLnk( PackageListView *parent, const char *name)
+//	: PackageList(parent, name)
+//{
+//	init();
+//}
+
+void PackageListDocLnk::init()
 {
 	Config cfg( "oipkg", Config::User );
 	cfg.setGroup( "Common" );
 	docLnkDir = cfg.readEntry( "docLnkDir", "/root/" );
- 	pvDebug(2,"opening DocLnkSet "+docLnkDir);
+ 	qDebug("opening DocLnkSet "+docLnkDir);
 	doclnkset = new DocLnkSet(docLnkDir,"application/ipkg");
 }
 
@@ -44,10 +49,17 @@ PackageListDocLnk::~PackageListDocLnk()
 
 void PackageListDocLnk::update()
 {
-	pvDebug(2,"PackageListDocLnk::update ");	
+	qDebug("PackageListDocLnk::update ");	
 	QList<DocLnk> packlist = doclnkset->children();
   for (DocLnk *pack =packlist.first(); pack != 0; pack=packlist.next() )
   {
     insertPackage( new Package(pack->file(), settings ) );
   }
 }
+
+void PackageListDocLnk::expand()
+{
+  update();
+}
+
+  

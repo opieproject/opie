@@ -18,7 +18,6 @@
 #include "runwindow.h"
 #include "packagelist.h"
 #include "installdialog.h"
-#include "debug.h"
 
 #define createLink 0
 #define removeLink 1
@@ -28,7 +27,7 @@ class PmIpkg : public QObject
 {
   Q_OBJECT
 public:
-  PmIpkg( PackageManagerSettings* , QWidget* p=0,  const char * name=0, WFlags f=0 );
+  PmIpkg( QWidget* p=0, PackageManagerSettings *s=0,  const char * name=0, WFlags f=0 );
   ~PmIpkg();
 
   int linkOpp;
@@ -50,6 +49,7 @@ public slots:
 
 private:
 	QString ipkg_cmd;
+	QString statusDir;
   PackageManagerSettings* settings;
   RunWindow *runwindow;
   InstallDialog *installDialog;

@@ -43,26 +43,30 @@
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   QMainWindow( parent, name, f )
-//  packageListServers( QObject(parent), name ),
-//  packageListSearch( parent, name ),
-//  packageListDocLnk( parent, name )
-{	
+{
+  qDebug("MainWindow::MainWindow");
   setCaption( tr("Package Manager") );
   settings = new PackageManagerSettings(this,0,TRUE);
+  qDebug("creating listViewPackages");
   listViewPackages =  new PackageListView( this,"listViewPackages",settings );
   setCentralWidget( listViewPackages );
-  listViewPackages->addList( tr("feeds"), &packageListServers );
-  listViewPackages->addList( tr("ipkgfind&killefiz"), &packageListSearch );
-  listViewPackages->addList( tr("documents"), &packageListDocLnk );
-  ipkg = new PmIpkg( settings, this );
-  packageListServers.setSettings( settings );
-  packageListSearch.setSettings( settings );
-  packageListDocLnk.setSettings( settings );
-	pvDebug(9,"packageListServers.update");
-  packageListServers.update();
-	pvDebug(9,"packageListDocLnk.update");
-  packageListDocLnk.update();
-	pvDebug(9,"makeMenu");
+  qDebug("creating lists");
+  packageListServers = new PackageListLocal(  listViewPackages, tr("feeds"),     settings );
+  packageListSearch  = new PackageListRemote( listViewPackages, tr("search"),    settings );
+  packageListDocLnk  = new PackageListDocLnk( listViewPackages, tr("documents"), settings );
+  qDebug("adding lists");
+  listViewPackages->addList( tr("feeds"), packageListServers );
+  listViewPackages->addList( tr("ipkgfind&killefiz"), packageListSearch );
+  listViewPackages->addList( tr("documents"), packageListDocLnk );
+  ipkg = new PmIpkg( this, settings, "Ipkg engine" );
+//  packageListServers->setSettings( settings );
+//  packageListSearch->setSettings( settings );
+//  packageListDocLnk->setSettings( settings );
+//	qDebug("packageListServers.update");
+//  packageListServers->update();
+//	qDebug("packageListDocLnk.update");
+//  packageListDocLnk.update();
+	qDebug("makeMenu");
   makeMenu();	
   makeChannel();
 
@@ -75,7 +79,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   connect( settings->createLinksButton, SIGNAL( clicked()),
   					 SLOT(createLinks()) );
 
-	pvDebug(9,"displayList");
+	qDebug("displayList");
   displayList();
 }
 
@@ -302,10 +306,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::runIpkg()
 {
-  packageListServers.allPackages();
-  ipkg->loadList( &packageListSearch );
-	ipkg->loadList( &packageListDocLnk );
-  ipkg->loadList( &packageListServers );
+  packageListServers->allPackages();
+  ipkg->loadList( packageListSearch );
+	ipkg->loadList( packageListDocLnk );
+  ipkg->loadList( packageListServers );
   ipkg->commit();
   ipkg->clearLists();
   // ##### If we looked in the list of files, we could send out accurate
@@ -318,21 +322,21 @@ void MainWindow::runIpkg()
 
 void MainWindow::updateList()
 {
-	packageListServers.clear();
-	packageListSearch.clear();
+	packageListServers->clear();
+	packageListSearch->clear();
 
-  packageListDocLnk.clear();
+  packageListDocLnk->clear();
   ipkg->update();
-  packageListServers.update();
-  packageListSearch.update();
-  packageListDocLnk.update();
+  packageListServers->update();
+  packageListSearch->update();
+  packageListDocLnk->update();
 }
 
 void MainWindow::filterList()
 {
  	QString f = "";
   if ( findAction->isOn() ) f = findEdit->text();
-  packageListServers.filterPackages( f );
+  packageListServers->filterPackages( f );
 }
 
 void MainWindow::displayList()
@@ -348,7 +352,7 @@ void MainWindow::sectionChanged()
   disconnect( subsection, SIGNAL(activated(int) ),
 	      this, SLOT( subSectionChanged() ) );
   subsection->clear();
-  packageListServers.setSection( section->currentText() );
+  packageListServers->setSection( section->currentText() );
   setSubSections();
   connect( section, SIGNAL( activated(int) ),
 	   this, SLOT( sectionChanged() ) );
@@ -363,7 +367,7 @@ void MainWindow::subSectionChanged()
 	      this, SLOT( sectionChanged() ) );
   disconnect( subsection, SIGNAL(activated(int) ),
 	      this, SLOT( subSectionChanged() ) );
-  packageListServers.setSubSection( subsection->currentText() );
+  packageListServers->setSubSection( subsection->currentText() );
   connect( section, SIGNAL( activated(int) ),
 	   this, SLOT( sectionChanged() ) );
   connect( subsection, SIGNAL(activated(int) ),
@@ -374,13 +378,13 @@ void MainWindow::subSectionChanged()
 void MainWindow::setSections()
 {
   section->clear();
-  section->insertStringList( packageListServers.getSections() );
+  section->insertStringList( packageListServers->getSections() );
 }
 
 void MainWindow::setSubSections()
 {
   subsection->clear();
-  subsection->insertStringList( packageListServers.getSubSections() );
+  subsection->insertStringList( packageListServers->getSubSections() );
 }
 
 
@@ -476,7 +480,7 @@ void MainWindow::makeChannel()
 
 void MainWindow::receive(const QCString &msg, const QByteArray &arg)
 {
-	pvDebug(3, "QCop "+msg+" "+QCString(arg));
+	qDebug( "QCop "+msg+" "+QCString(arg));
 	if ( msg == "installFile(QString)" )
  	{
   	ipkg->installFile( QString(arg) );
@@ -490,26 +494,26 @@ void MainWindow::receive(const QCString &msg, const QByteArray &arg)
  	{
   	ipkg->removeLinks( QString(arg) );
 	}else{
-    	pvDebug(2,"Huh what do ya want")
+    	qDebug("Huh what do ya want");
  	}
 }
 
 
 void MainWindow::createLinks()
 {
-	pvDebug(2,"creating links...");
+	qDebug("creating links...");
 	ipkg->createLinks( settings->destinationurl->text() );
 }
 
 void MainWindow::removeLinks()
 {
-	pvDebug(2,"removing links...");
+	qDebug("removing links...");
 	ipkg->removeLinks( settings->destinationurl->text() );
 }
 
 void MainWindow::remotePackageQuery()
 {
- 	packageListSearch.query( searchEdit->text() );
-  packageListSearch.update();
+ 	packageListSearch->query( searchEdit->text() );
+  packageListSearch->update();
  	displayList();
 }

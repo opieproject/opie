@@ -19,10 +19,10 @@
 #include <qwidget.h>
 #include <qpopupmenu.h>
 #include "packagelist.h"
-#include "debug.h"
 
 class PackageListItem;
 class Package;
+//class PackageList;
 class PackageManagerSettings;
 
 class PackageListView : public QListView
@@ -32,11 +32,11 @@ class PackageListView : public QListView
 public:
 	PackageListView(QWidget*, const char*, PackageManagerSettings*);
   void addList( QString, PackageList* );
-//	~PackageListView();
+	~PackageListView();
   QTimer *popupTimer;
 private:
-	QDict<PackageList> PackageLists;
- 	QDict<QCheckListItem> rootItems;
+//	QDict<PackageList> PackageLists;
+// 	QDict<QCheckListItem> rootItems;
 	PackageManagerSettings *settings;
   Package *activePackage;
   PackageListItem *activePackageListItem;
@@ -49,6 +49,8 @@ public slots:
   void stopTimer( QListViewItem* );
   void toggleProcess();
   void display();
+protected slots:
+	void expand(QListViewItem*);
 };
 
 #endif

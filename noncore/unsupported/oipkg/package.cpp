@@ -16,7 +16,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "debug.h"
 
 Package::Package( QObject *parent, const char *name )
 	: QObject(parent,name)
@@ -69,7 +68,7 @@ Package::Package( QString n, PackageManagerSettings *s, QObject *parent, const c
   {
 	  _name = QString( n );
   }else{
-    pvDebug(4,"remote file: "+n);
+    qDebug("remote file: "+n);
    	parseIpkgFile( n );
     _useFileName = true;
     _fileName = QString( n );

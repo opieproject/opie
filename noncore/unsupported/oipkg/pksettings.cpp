@@ -30,8 +30,6 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "debug.h"
-//#include "utils.h"
 
 PackageManagerSettings::PackageManagerSettings( QWidget* parent,  const char* name, WFlags fl )
   : PackageManagerSettingsBase( parent, name, fl )
@@ -316,8 +314,8 @@ void PackageManagerSettings::readInstallationSetting(int setting)
   CheckBoxLink->setChecked( cfg.readBoolEntry( "link", true ) );
   QString dest = cfg.readEntry( "dest" );
   QString linkdest = cfg.readEntry( "linkdest" );
-  pvDebug(3, "dest="+dest);
-  pvDebug(3, "linkdest="+linkdest);
+  qDebug("dest="+dest);
+  qDebug("linkdest="+linkdest);
   for ( int i = 0; i < activeDestination->count(); i++)
   {
   	if ( activeDestination->text( i ) == dest )
@@ -543,7 +541,7 @@ QStringList PackageManagerSettings::getDestinationNames()
 
 void PackageManagerSettings::linkEnabled( bool b )
 {
-	pvDebug(2,"PackageManagerSettings::linkEnabled "+QString(b?"yes":"no"));
+	qDebug("PackageManagerSettings::linkEnabled "+QString(b?"yes":"no"));
   activeLinkDestination->setEnabled( b );
   CheckBoxLink->setChecked( b );
 }
@@ -555,22 +553,22 @@ void PackageManagerSettings::activeServerChanged()
 
 void PackageManagerSettings::createLinksToDest()
 {
-	pvDebug(2,"creating links...");
+	qDebug("creating links...");
 // 	emit doCreateLinks( destinationurl->text() );
 //	ipkg->createLinks( destinationurl );
 }
 
 void PackageManagerSettings::removeLinksToDest()
 {
-	pvDebug(2,"removing links...");
+	qDebug("removing links...");
 // 	emit doRemoveLinks( destinationurl->text() );
 //	ipkg->removeLinks( destinationurl );
 }
 
 void PackageManagerSettings::activeDestinationChange(int i)
 {
-	pvDebug(5,"activeDestinationChange "+QString::number(i));
+	qDebug("activeDestinationChange "+QString::number(i));
 	if (i > activeDestination->count()) return;
 	activeDestination->setCurrentItem(i);
-	pvDebug(5,"dest name "+ activeDestination->currentText());
+	qDebug("dest name "+ activeDestination->currentText());
 }

@@ -14,9 +14,11 @@
 #include <qstringlist.h>
 #include "packagelistlocal.h"
 
-PackageListLocal::PackageListLocal()
-	: PackageList()
+
+PackageListLocal::PackageListLocal(PackageListView *parent, const char *name, PackageManagerSettings* s)
+	: PackageList(parent,name,s)
 {
+	QListViewItem b = new QListViewItem(this);
 	Config cfg( "oipkg", Config::User );
 	cfg.setGroup( "Common" );
 	statusDir = cfg.readEntry( "statusDir", "" );
@@ -30,12 +32,6 @@ PackageListLocal::PackageListLocal()
   }
 }
 
-PackageListLocal::PackageListLocal(PackageManagerSettings* s)
-	: PackageList(s)
-{
-	PackageListLocal();
-}
-
 PackageListLocal::~PackageListLocal()
 {
 }
@@ -47,7 +43,7 @@ void PackageListLocal::parseStatus()
   QStringList::Iterator name = destnames.begin();
   for ( QStringList::Iterator dir = dests.begin(); dir != dests.end(); ++dir )
     {
-      pvDebug( 2,"Status: "+*dir+statusDir+"/status");
+      qDebug("Status: "+*dir+statusDir+"/status");
       readFileEntries( *dir+statusDir+"/status", *name );
       ++name;
     };
@@ -59,7 +55,7 @@ void PackageListLocal::parseList()
 	
   for ( QStringList::Iterator it = srvs.begin(); it != srvs.end(); ++it )
     {
-      pvDebug( 2, "List: "+listsDir+"/"+*it);
+      qDebug("List: "+listsDir+"/"+*it);
       readFileEntries( listsDir+"/"+*it );  	
     }
 }
@@ -67,9 +63,15 @@ void PackageListLocal::parseList()
 
 void PackageListLocal::update()
 {
-  pvDebug( 2, "parseStatus");
+  qDebug("parseStatus");
   parseStatus();
-  pvDebug( 2, "parseList");
+  qDebug("parseList");
   parseList();
-  pvDebug( 2, "finished parsing");
+  qDebug("finished parsing");
+}
+
+void PackageListLocal::expand()
+{
+	PackageList::expand();
+  update();
 }

@@ -81,9 +81,9 @@ private:
 
   PmIpkg* ipkg;
   PackageManagerSettings *settings;
-  PackageListLocal  packageListServers;
-  PackageListRemote packageListSearch;
-  PackageListDocLnk packageListDocLnk;
+  PackageListLocal  *packageListServers;
+  PackageListRemote *packageListSearch;
+  PackageListDocLnk *packageListDocLnk;
   PackageListView *listViewPackages;
   QAction *runAction;
   QAction *updateAction;

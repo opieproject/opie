@@ -14,6 +14,7 @@
 
 #include "packagelistitem.h"
 #include "pksettings.h"
+#include "packagelist.h"
 
 PackageListView::PackageListView(QWidget *p, const char* n, PackageManagerSettings *s)
 	: QListView(p,n)
@@ -31,31 +32,23 @@ PackageListView::PackageListView(QWidget *p, const char* n, PackageManagerSettin
   connect( this, SIGNAL( pressed( QListViewItem* ) ),
 	    this, SLOT( setCurrent( QListViewItem* ) ) );
 	connect( this, SIGNAL( clicked( QListViewItem* ) ),
-	   this, SLOT( stopTimer( QListViewItem* ) ) );	
+	   this, SLOT( stopTimer( QListViewItem* ) ) );
+ 	connect( this, SIGNAL(expanded(QListViewItem*)),
+  	       SLOT(expand(QListViewItem*)));
+
 
 }
 
-//PackageListView::~PackageListView()
-//{
-//}
+PackageListView::~PackageListView()
+{
+}
 
 void PackageListView::setCurrent( QListViewItem* p )
 {
   if ( !p ) return;
   activePackageListItem = (PackageListItem*)p;
   activePackage = activePackageListItem->getPackage();
-  if (!activePackage)
-  {
-//		QDictIterator<QCheckListItem> it( rootItems );
-//		while ( it.current() )
-//    {
-//			if ( it.current()==p )
-//   			pvDebug(2,"current item");
-//			++it;
-//		}
-
-		return;
-  }
+  if (!activePackage) return;
   popupTimer->start( 750, true );
 }
 
@@ -117,37 +110,42 @@ void PackageListView::toggleProcess()
 
 void PackageListView::display()
 {
-	QDictIterator<PackageList> list( PackageLists );
-	PackageList *packlist;
-	Package *pack;
-  PackageListItem *item;
-  QCheckListItem *rootItem;
-  QListViewItem* it;
-  QListViewItem* itdel;
-	while ( list.current() ) {
-  	packlist = list.current();
-    rootItem = rootItems.find( list.currentKey() );
-    //rootItem->clear();
-    it=rootItem->firstChild();
-    while ( it )
-    {
-      itdel = it;
-      it    = it->nextSibling();
-			delete itdel;
-   	}
-    pack = packlist->first();
-  	while( pack )
-  	{
-	 		item = new PackageListItem( rootItem, pack, settings );				
-    	pack = packlist->next();
-  	}	
-		++list;
-  }
+//	QDictIterator<PackageList> list( PackageLists );
+//	PackageList *packlist;
+//	Package *pack;
+//  PackageListItem *item;
+//  QCheckListItem *rootItem;
+//  QListViewItem* it;
+//  QListViewItem* itdel;
+//	while ( list.current() ) {
+//  	packlist = list.current();
+//    rootItem = rootItems.find( list.currentKey() );
+//    //rootItem->clear();
+//    it=rootItem->firstChild();
+//    while ( it )
+//    {
+//      itdel = it;
+//      it    = it->nextSibling();
+//			delete itdel;
+//   	}
+//    pack = packlist->first();
+//  	while( pack )
+//  	{
+//	 		item = new PackageListItem( rootItem, pack, settings );
+//    	pack = packlist->next();
+//  	}
+//		++list;
+//  }
 }
 
 void PackageListView::addList( QString n, PackageList* pl)
 {
-	PackageLists.insert(n, pl);
- 	QCheckListItem *item = new QCheckListItem(this,n);
- 	rootItems.insert(n, item);
+//	PackageLists.insert(n, pl);
+// 	rootItems.insert(n, pl);
+  insertItem(pl);
+}
+
+void PackageListView::expand(QListViewItem *item)
+{
+ 	((PackageList*)item)->expand();
 }

@@ -13,15 +13,15 @@
 #include "packagelist.h"
 #include "package.h"
 #include "pksettings.h"
-#include "debug.h"
 
 class PackageListRemote : public PackageList  {
 public:
-	PackageListRemote();
-	PackageListRemote( PackageManagerSettings* s);
+//	PackageListRemote( PackageListView*, const char *name);
+	PackageListRemote( PackageListView*, const char *name, PackageManagerSettings* s=0);
 	virtual ~PackageListRemote();
   void query(QString);
-public slots:
+  virtual void expand() {};
+//public slots:
   void update();
 private:
 	QString searchString;
