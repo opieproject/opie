@@ -3,29 +3,29 @@
     <name>GroupDialog</name>
     <message>
         <source>Add Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj Grupe</translation>
     </message>
     <message>
         <source>Edit Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Edytuj Grupe</translation>
     </message>
 </context>
 <context>
     <name>UserConfig</name>
     <message>
         <source>Opie User Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Menadzer Uzytkownikow Opie</translation>
     </message>
 </context>
 <context>
     <name>UserDialog</name>
     <message>
         <source>Add User</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj Uzytkownika</translation>
     </message>
     <message>
         <source>Edit User</source>
-        <translation type="unfinished"></translation>
+        <translation>Edytuj Uzytkownika</translation>
     </message>
 </context>
 </TS>

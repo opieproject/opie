@@ -18,19 +18,19 @@
     <name>QObject</name>
     <message>
         <source>Error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad!</translation>
     </message>
     <message>
         <source>IP-Address not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Adres IP nie znaleziony</translation>
     </message>
     <message>
         <source>Error creating socket</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad przy tworzeniu gniazda</translation>
     </message>
     <message>
         <source>Error connecting to socket</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad przy laczeniu z gniazdem</translation>
     </message>
 </context>
 </TS>
