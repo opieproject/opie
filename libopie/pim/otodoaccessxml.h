@@ -39,7 +39,7 @@ public:
     QArray<int> sorted( bool asc,  int sortOrder,
                         int sortFilter, int cat );
 private:
-    OTodo todo( QAsciiDict<int>*, Opie::XMLElement* )const;
+    void todo( QAsciiDict<int>*, OTodo&,const QCString&,const QString& );
     QString toString( const OTodo& )const;
     QString toString( const QArray<int>& ints ) const;
     QMap<int, OTodo> m_events;
@@ -49,6 +49,7 @@ private:
     bool m_changed : 1;
     class OTodoAccessXMLPrivate;
     OTodoAccessXMLPrivate* d;
+    int m_year, m_month, m_day;
 
 };
 

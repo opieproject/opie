@@ -46,36 +46,79 @@ bool OTodoAccessXML::load() {
     dict.insert("HasAlarmDateTime",new int(OTodo::HasAlarmDateTime) );
     dict.insert("AlarmDateTime",   new int(OTodo::AlarmDateTime)    );
 
-    Opie::XMLElement *root = Opie::XMLElement::load( m_file );
-    int day, year, month;
-    day = year = month = -1;
+    // here the custom XML parser from TT it's GPL
+    // but we want to push that to TT.....
+    QFile f(m_file );
+    if (!f.open(IO_ReadOnly) )
+        return false;
 
-    /* if opened */
-    if ( root != 0l ) {
-        Opie::XMLElement *element = root->firstChild();
-        if ( element == 0l )
-            return false;
+    QByteArray ba = f.readAll();
+    f.close();
+    char* dt = ba.data();
+    int len = ba.size();
+    int i = 0;
+    char *point;
+    const char* collectionString = "<Task ";
+    while ( dt+i != 0 && ( point = strstr( dt+i, collectionString ) ) != 0l ) {
+        i = point -dt;
+        i+= strlen(collectionString);
+        OTodo ev;
+        m_year = m_month = m_day = 0;
 
-        element = element->firstChild();
+        while ( TRUE ) {
+            while ( i < len && (dt[i] == ' ' || dt[i] == '\n' || dt[i] == '\r') )
+		++i;
+	    if ( i >= len-2 || (dt[i] == '/' && dt[i+1] == '>') )
+		break;
 
-        while ( element ) {
-            if ( element->tagName() != QString::fromLatin1("Task") ) {
-                element = element->nextChild();
-                continue;
-            }
-            /* here is the right element for a task */
-            OTodo ev = todo( &dict, element );
-            m_events.insert( ev.uid(), ev );
+	    // we have another attribute, read it.
+	    int j = i;
+	    while ( j < len && dt[j] != '=' )
+		++j;
+	    QCString attr( dt+i, j-i+1);
 
-            element = element->nextChild();
+	    i = ++j; // skip =
+
+	    // find the start of quotes
+	    while ( i < len && dt[i] != '"' )
+		++i;
+	    j = ++i;
+
+	    bool haveUtf = FALSE;
+	    bool haveEnt = FALSE;
+	    while ( j < len && dt[j] != '"' ) {
+		if ( ((unsigned char)dt[j]) > 0x7f )
+		    haveUtf = TRUE;
+		if ( dt[j] == '&' )
+		    haveEnt = TRUE;
+		++j;
+	    }
+	    if ( i == j ) {
+		// empty value
+		i = j + 1;
+		continue;
+	    }
+
+	    QCString value( dt+i, j-i+1 );
+	    i = j + 1;
+
+	    QString str = (haveUtf ? QString::fromUtf8( value )
+		    : QString::fromLatin1( value ) );
+	    if ( haveEnt )
+		str = Qtopia::plainString( str );
+
+            /*
+             * add key + value
+             */
+            todo( &dict, ev, attr, str );
+
         }
-    }else {
-//        qWarning("could not parse");
-        return false;;
+        /*
+         * now add it
+         */
+        m_events.insert(ev.uid(), ev );
     }
-    delete root;
 
-//    qWarning("Access %d" + m_events.count() );
     return true;
 }
 bool OTodoAccessXML::reload() {
@@ -220,93 +263,86 @@ QArray<int> OTodoAccessXML::overDue() {
 
 
 /* private */
-OTodo OTodoAccessXML::todo( QAsciiDict<int>* dict, Opie::XMLElement* element)const {
+void OTodoAccessXML::todo( QAsciiDict<int>* dict, OTodo& ev,
+                            const QCString& attr, const QString& val) {
 //    qWarning("parse to do from XMLElement" );
-    OTodo ev;
-    QMap<QString, QString> attributes = element->attributes();
-    QMap<QString, QString>::Iterator it;
 
     int *find=0;
-    int day, month, year;
-    day = month = year = -1;
-    for ( it = attributes.begin(); it != attributes.end(); ++it ) {
-        find = (*dict)[ it.key() ];
-        if (!find ) {
+
+    find = (*dict)[ attr.data() ];
+    if (!find ) {
 //            qWarning("Unknown option" + it.key() );
-            ev.setCustomField( it.key(), it.data() );
-            continue;
-        }
-
-        switch( *find ) {
-        case OTodo::Uid:
-            ev.setUid( it.data().toInt() );
-            break;
-        case OTodo::Category:
-            ev.setCategories( ev.idsFromString( it.data() ) );
-            break;
-        case OTodo::HasDate:
-            ev.setHasDueDate( it.data().toInt() );
-            break;
-        case OTodo::Completed:
-            ev.setCompleted( it.data().toInt() );
-            break;
-        case OTodo::Description:
-            ev.setDescription( it.data() );
-            break;
-        case OTodo::Summary:
-            ev.setSummary( it.data() );
-            break;
-        case OTodo::Priority:
-            qWarning("ParsePriority " + it.data() );
-            ev.setPriority( it.data().toInt() );
-            break;
-        case OTodo::DateDay:
-            day = it.data().toInt();
-            break;
-        case OTodo::DateMonth:
-            month = it.data().toInt();
-            break;
-        case OTodo::DateYear:
-            year = it.data().toInt();
-            break;
-        case OTodo::Progress:
-            ev.setProgress( it.data().toInt() );
-            break;
-        case OTodo::CrossReference:
-        {
-         /*
-          * A cross refernce looks like
-          * appname,id;appname,id
-          * we need to split it up
-          */
-            QStringList refs = QStringList::split(';', it.data() );
-            QStringList::Iterator strIt;
-            for (strIt = refs.begin(); strIt != refs.end(); ++strIt ) {
-                int pos = (*strIt).find(',');
-                if ( pos > -1 )
-                    ev.addRelation( (*strIt).left(pos),  (*strIt).mid(pos+1).toInt() );
-
-            }
-            break;
-        }
-        case OTodo::HasAlarmDateTime:
-            ev.setHasAlarmDateTime( it.data().toInt() );
-            break;
-        case OTodo::AlarmDateTime: {
-            /* this sounds better ;) zecke */
-            ev.setAlarmDateTime( TimeConversion::fromISO8601( it.data().local8Bit() ) );
-            break;
-        }
-        default:
-            break;
-        }
+        ev.setCustomField( attr, val );
+        return;
     }
+
+    switch( *find ) {
+    case OTodo::Uid:
+        ev.setUid( val.toInt() );
+        break;
+    case OTodo::Category:
+        ev.setCategories( ev.idsFromString( val ) );
+        break;
+    case OTodo::HasDate:
+        ev.setHasDueDate( val.toInt() );
+        break;
+    case OTodo::Completed:
+        ev.setCompleted( val.toInt() );
+        break;
+    case OTodo::Description:
+        ev.setDescription( val );
+        break;
+    case OTodo::Summary:
+        ev.setSummary( val );
+        break;
+    case OTodo::Priority:
+        ev.setPriority( val.toInt() );
+        break;
+    case OTodo::DateDay:
+        m_day = val.toInt();
+        break;
+    case OTodo::DateMonth:
+        m_month = val.toInt();
+        break;
+    case OTodo::DateYear:
+        m_year = val.toInt();
+        break;
+    case OTodo::Progress:
+        ev.setProgress( val.toInt() );
+        break;
+    case OTodo::CrossReference:
+    {
+        /*
+         * A cross refernce looks like
+         * appname,id;appname,id
+         * we need to split it up
+         */
+        QStringList  refs = QStringList::split(';', val );
+        QStringList::Iterator strIt;
+        for (strIt = refs.begin(); strIt != refs.end(); ++strIt ) {
+            int pos = (*strIt).find(',');
+            if ( pos > -1 )
+                ev.addRelation( (*strIt).left(pos),  (*strIt).mid(pos+1).toInt() );
+
+        }
+        break;
+    }
+    case OTodo::HasAlarmDateTime:
+        ev.setHasAlarmDateTime( val.toInt() );
+        break;
+    case OTodo::AlarmDateTime: {
+        /* this sounds better ;) zecke */
+        ev.setAlarmDateTime( TimeConversion::fromISO8601( val.local8Bit() ) );
+        break;
+    }
+    default:
+        break;
+    }
+
     if ( ev.hasDueDate() ) {
-        QDate date( year,  month, day );
+        QDate date( m_year,  m_month, m_day );
         ev.setDueDate( date );
     }
-
-    return ev;
 }
 QString OTodoAccessXML::toString( const OTodo& ev )const {
     QString str;
@@ -480,7 +516,7 @@ QArray<int> OTodoAccessXML::sorted( bool asc,  int sortOrder,
 
     bool bCat = sortFilter & 1 ? true : false;
     bool bOver = sortFilter & 0 ? true : false;
-    bool bOnly = split & 2 ? true : false;
+    bool bOnly = sortFilter & 2 ? true : false;
     for ( it = m_events.begin(); it != m_events.end(); ++it ) {
 
         /* show category */
