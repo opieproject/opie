@@ -298,7 +298,7 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 
 	m_except = new QListView ( tab );
 	m_except-> addColumn ( Resource::loadIconSet ( "appearance" ), "", 24 );
-	m_except-> addColumn ( Resource::loadIconSet ( "appearance/font" ), "", 24 );
+	m_except-> addColumn ( Resource::loadIconSet ( "font" ), "", 24 );
 	m_except-> addColumn ( Resource::loadIconSet ( "appearance/deco" ), "", 24 );
 	m_except-> addColumn ( tr( "Binary file(s)" ));
 	m_except-> setColumnAlignment ( 0, AlignCenter );
@@ -424,7 +424,7 @@ Appearance::Appearance( QWidget* parent,  const char* name, WFlags )
 	m_color_list = 0;
 
  	tw-> addTab ( styletab = createStyleTab ( tw, config ), "appearance", tr( "Style" ));
-    tw-> addTab ( createFontTab ( tw, config ), "appearance/font", tr( "Font" ));
+    tw-> addTab ( createFontTab ( tw, config ), "font", tr( "Font" ));
     tw-> addTab ( createColorTab ( tw, config ), "appearance/color", tr( "Colors" ) );
     tw-> addTab ( createDecoTab ( tw, config ), "appearance/deco", tr( "Windows" ) );
 	tw-> addTab ( m_advtab = createAdvancedTab ( tw, config ), "SettingsIcon", tr( "Advanced" ) );
