@@ -502,8 +502,8 @@ void Desktop::raiseDatebook()
     Config cfg( "qpe" ); //F9 'Activity'
     cfg.setGroup( "AppsKey" );
     QString tempItem;
-    tempItem = cfg.readEntry( "LeftEnd" , "Calender" );
-    if ( tempItem == "Calender" || tempItem.isEmpty() ) {
+    tempItem = cfg.readEntry( "LeftEnd" , "Calendar" );
+    if ( tempItem == "Calendar" || tempItem.isEmpty() ) {
         tempItem = "datebook";
     }
     QCopEnvelope e( "QPE/System", "execute(QString)" );
@@ -603,41 +603,41 @@ static void darkScreen()
 
 void Desktop::togglePower()
 {
-	extern void qpe_setBacklight ( int ); // We need to toggle the LCD fast - no time to send a QCop
+  extern void qpe_setBacklight ( int ); // We need to toggle the LCD fast - no time to send a QCop
 
-	static bool excllock = false;
+  static bool excllock = false;
 
-	if ( excllock )
-		return;
+  if ( excllock )
+    return;
 
-	excllock = true;
+  excllock = true;
 
-	bool wasloggedin = loggedin;
-	loggedin=0;
-	suspendTime = QDateTime::currentDateTime();
+  bool wasloggedin = loggedin;
+  loggedin=0;
+  suspendTime = QDateTime::currentDateTime();
 
-//	qpe_setBacklight ( 0 ); // force LCD off (sandman: why ????)
+//  qpe_setBacklight ( 0 ); // force LCD off (sandman: why ????)
 
-	if ( wasloggedin )
-    	blankScreen();
+  if ( wasloggedin )
+      blankScreen();
 
-	ODevice::inst ( )-> suspend ( );
+  ODevice::inst ( )-> suspend ( );
 
-	QWSServer::screenSaverActivate ( false );
+  QWSServer::screenSaverActivate ( false );
 
-	qpe_setBacklight ( -3 ); // force LCD on
+  qpe_setBacklight ( -3 ); // force LCD on
 
-	{
-		QCopEnvelope("QPE/Card", "mtabChanged()" ); // might have changed while asleep
-	}
+  {
+    QCopEnvelope("QPE/Card", "mtabChanged()" ); // might have changed while asleep
+  }
 
-	if ( wasloggedin )
-		login(TRUE);
+  if ( wasloggedin )
+    login(TRUE);
 
-	execAutoStart();
-	//qcopBridge->closeOpenConnections();
+  execAutoStart();
+  //qcopBridge->closeOpenConnections();
 
-  	excllock = false;
+    excllock = false;
 }
 
 void Desktop::toggleLight()
