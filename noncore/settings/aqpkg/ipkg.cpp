@@ -196,15 +196,13 @@ int Ipkg :: executeIpkgCommand( QString &cmd, const QString option )
                     // so that we can create links to them as necessary
                     if ( lineStr.startsWith( "Installing " ) )
                     {
-                        cout << "LineStr = " << lineStr << endl;
                         int start = lineStr.find( " " ) + 1;
                         int end = lineStr.find( " ", start );
                         QString *package = new QString( lineStr.mid( start, end-start ) );
                         dependantPackages->append( package );
-                        cout << "installing dependant package <" << *package << ">" << endl;
                     }
                 }
-
+                
                 if ( option == "update" )
                 {
                     if (lineStr.contains("Updated list"))
