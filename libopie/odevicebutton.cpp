@@ -70,7 +70,7 @@ void OQCopMessage::init ( const QCString &ch, const QCString &m, const QByteArra
 
 bool OQCopMessage::send ( )
 {
-	if ( d-> m_channel. isEmpty ( ) || d-> m_message. isEmpty ( ))
+	if ( d-> m_channel. isEmpty ( ) || d-> m_message. isEmpty ( ) )
 		return false;
 
 	QCopEnvelope e ( d-> m_channel, d-> m_message );
@@ -217,6 +217,7 @@ void ODeviceButton::setFactoryPresetPressedAction(const OQCopMessage& action)
 {
     m_FactoryPresetPressedAction = action;
 }
+
 
 void ODeviceButton::setPressedAction(const OQCopMessage& action)
 {

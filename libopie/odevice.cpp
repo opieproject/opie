@@ -280,7 +280,6 @@ void ODevice::init ( )
 			b. setPixmap ( Resource::loadPixmap ( ib-> pix ));
 			b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( ib-> fpressedservice ), ib-> fpressedaction ));
 			b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( ib-> fheldservice ), ib-> fheldaction ));
-                                        
 			d-> m_buttons. append ( b );
 		}
 	}
@@ -516,23 +515,29 @@ void ODevice::reloadButtonMapping ( )
 			hm  = cfg. readEntry ( "HeldActionMessage" ). latin1 ( );
 			// hdata = decodeBase64 ( buttonFile. readEntry ( "HeldActionArgs" ));
 		}
-		
+				
 		b. setPressedAction ( OQCopMessage ( pch, pm, pdata ));
+		
 		b. setHeldAction ( OQCopMessage ( hch, hm, hdata ));
 	}
 }
 
 void ODevice::remapPressedAction ( int button, const OQCopMessage &action )
 {
+	QString mb_chan;
+	
 	if ( button >= (int) d-> m_buttons. count ( ))
 		return;
+	
 		
 	ODeviceButton &b = d-> m_buttons [button];
-    b. setPressedAction ( action );
+        b. setPressedAction ( action );
+
+	mb_chan=b. pressedAction ( ). channel ( );
 
 	Config buttonFile ( "ButtonSettings" );
 	buttonFile. setGroup ( "Button" + QString::number ( button ));
-	buttonFile. writeEntry ( "PressedActionChannel", (const char*) b. pressedAction ( ). channel ( ));
+	buttonFile. writeEntry ( "PressedActionChannel", (const char*) mb_chan);
 	buttonFile. writeEntry ( "PressedActionMessage", (const char*) b. pressedAction ( ). message ( ));
 
 //	buttonFile. writeEntry ( "PressedActionArgs", encodeBase64 ( b. pressedAction ( ). data ( )));
@@ -546,7 +551,7 @@ void ODevice::remapHeldAction ( int button, const OQCopMessage &action )
 		return;
 		
 	ODeviceButton &b = d-> m_buttons [button];
-    b. setHeldAction ( action );
+    	b. setHeldAction ( action );
 
 	Config buttonFile ( "ButtonSettings" );
 	buttonFile. setGroup ( "Button" + QString::number ( button ));

@@ -208,7 +208,6 @@ void ButtonSettings::keyTimeout ( )
 
 void ButtonSettings::edit ( buttoninfo *bi, bool hold )
 {
-	qDebug ( "remap %s for %s", hold ? "hold" : "press", bi-> m_button-> userText ( ). latin1 ( )); 	
 	
 	if ( m_lock )
 		return;
@@ -218,7 +217,7 @@ void ButtonSettings::edit ( buttoninfo *bi, bool hold )
 
 	d-> showMaximized ( );	
 	if ( d-> exec ( ) == QDialog::Accepted ) {
-		qDebug ( " -> %s %s", d-> message ( ). channel ( ). data ( ), d-> message ( ). message ( ). data ( ));
+
 	
 		if ( hold ) {
 			bi-> m_hmsg = d-> message ( );

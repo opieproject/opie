@@ -342,24 +342,34 @@ void DesktopApplication::sendHeldAction ( )
 
 
 
-void DesktopApplication::checkButtonAction ( const ODeviceButton *db, int /*keycode*/, bool press, bool autoRepeat )
+bool DesktopApplication::checkButtonAction ( const ODeviceButton *db, int /*keycode*/, bool press, bool autoRepeat )
 {		
 	if ( db ) {
 		if ( !press && !autoRepeat && m_button_timer-> isActive ( )) {
 			m_button_timer-> stop ( );
-			if ( !db-> pressedAction ( ). channel ( ). isEmpty ( )) {
-				db-> pressedAction ( ). send ( );
+			
+			if (!db-> pressedAction ( ). channel ( ) .isEmpty())
+			{
+				if ( db-> pressedAction ( ). channel ( )!="ignore") {
+					db-> pressedAction ( ). send ( );
+				}
+				else return false;
 			}
 		}
 		else if ( press && !autoRepeat ) {
 			m_button_timer-> stop ( );
+			if (!db-> pressedAction ( ). channel ( ) .isEmpty())
+			{
 			
-			if ( !db-> heldAction ( ). channel ( ). isEmpty ( )) {
-				m_last_button = db;
-				m_button_timer-> start ( ODevice::inst ( )-> buttonHoldTime ( ), true );
+				if ( db-> heldAction ( ). channel ( )!="ignore") {
+					m_last_button = db;
+					m_button_timer-> start ( ODevice::inst ( )-> buttonHoldTime ( ), true );
+				}
+				else return false;
 			}
 		}
 	}
+	return true;
 }
 
 bool DesktopApplication::eventFilter ( QObject *o, QEvent *e )
@@ -370,8 +380,7 @@ bool DesktopApplication::eventFilter ( QObject *o, QEvent *e )
 		const ODeviceButton *db = ODevice::inst ( )-> buttonForKeycode ( ke-> key ( ));
         
 		if ( db ) {
-			checkButtonAction ( db, ke-> key ( ), e-> type ( ) == QEvent::KeyPress, ke-> isAutoRepeat ( ));
-			return true;
+			return checkButtonAction ( db, ke-> key ( ), e-> type ( ) == QEvent::KeyPress, ke-> isAutoRepeat ( ));
 		}
 	}
 	return QPEApplication::eventFilter ( o, e );

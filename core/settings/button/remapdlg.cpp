@@ -59,7 +59,18 @@ RemapDlg::RemapDlg ( const Opie::ODeviceButton *b, bool hold, QWidget *parent, c
 	m_map_none   = new NoSortItem ( w_list, 0, tr( "No mapping" ));
 	m_map_preset = new NoSortItem ( w_list, 1, tr( "Default" ), m_msg_preset. channel ( ), m_msg_preset. message ( ));
 	((NoSortItem *) m_map_preset )-> setDefault ( true );
-	m_map_custom = new NoSortItem ( w_list, 2, tr( "Custom" ), m_msg. channel ( ), m_msg. message ( ));
+	
+	if (m_msg. channel ( ) == "ignore")
+	{
+		m_map_custom = new NoSortItem ( w_list, 2, tr( "Custom" ), m_msg_preset. channel ( ), m_msg_preset. message ( ));
+		
+		m_current = m_map_none;
+	}
+	else
+	{
+		m_map_custom = new NoSortItem ( w_list, 2, tr( "Custom" ), m_msg. channel ( ), m_msg. message ( ));
+		m_current = m_map_custom;
+	}
 	
 	QListViewItem *it = new NoSortItem ( w_list, 3, tr( "Actions" ));	
 	ButtonUtils::inst ( )-> insertActions ( it );
@@ -67,7 +78,6 @@ RemapDlg::RemapDlg ( const Opie::ODeviceButton *b, bool hold, QWidget *parent, c
 	
 	m_map_show = new NoSortItem ( w_list, 4, tr( "Show" ));	
 	
-	m_current = m_map_custom;
 	w_list-> setCurrentItem ( m_current );
 	
 	QTimer::singleShot ( 0, this, SLOT( delayedInit ( )));
@@ -97,10 +107,18 @@ void RemapDlg::itemChanged ( QListViewItem *it )
 	m_current = it;
 
 	if ( it == m_map_none )
-		m_msg = m = OQCopMessage ( 0, 0 );
+	{
+		m_msg = m = OQCopMessage ( "ignore", 0 );
+		qDebug ("***ignoring");
+	}
 	else if ( it == m_map_preset )
+	{
 		m_msg = m = m_msg_preset;
-	else if ( it && !it-> childCount ( )) {
+		qDebug ("***Preset");
+	}
+	else if ( it && !it-> childCount ( )) 
+	{
+		qDebug ("***Custom: %s %s ",it-> text ( 1 ). latin1 ( ), it-> text ( 2 ). latin1 ( ));
 		enabled = ( it == m_map_custom );
 		m_msg = m = OQCopMessage ( it-> text ( 1 ). latin1 ( ), it-> text ( 2 ). latin1 ( ));
 	}

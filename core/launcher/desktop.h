@@ -83,7 +83,7 @@ protected slots:
 
 protected:
 	virtual bool eventFilter ( QObject *o, QEvent *e );
-	void checkButtonAction ( const Opie::ODeviceButton *db, int keycode, bool press, bool autoRepeat );
+	bool checkButtonAction ( const Opie::ODeviceButton *db, int keycode, bool press, bool autoRepeat );
 	
 private:
 	static DesktopApplication *me ( );

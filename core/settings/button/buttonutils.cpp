@@ -65,7 +65,8 @@ qCopInfo ButtonUtils::messageToInfo ( const OQCopMessage &c )
 	QCString ch = c. channel ( );
 	QCString f  = c. message ( ); 
 
-	if ( ch. isNull ( ))
+	
+	if ( ch == "ignore" )
 		return qCopInfo ( qApp-> translate ( "ButtonSettings", "<nobr>Ignored</nobr>" ));
 	
 	for ( const predef_qcop *p = predef; p-> m_text; p++ ) {
