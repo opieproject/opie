@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.9 2002-06-20 00:32:56 drw Exp $
+** $Id: qpeapplication.cpp,v 1.10 2002-06-21 01:23:55 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -90,6 +90,7 @@
 #endif
 #include <stdlib.h>
 
+#include <dlfcn.h> // for Liquid HACK
 
 class QPEApplicationData {
 public:
@@ -1314,6 +1315,27 @@ void QPEApplication::internalSetStyle( const QString &style )
   setStyle( new QMotifPlusStyle );
     }
 #endif
+
+	// HACK for Qt2 only
+	else if ( style == "Liquid" ) {
+		static void *lib = 0;	
+		QStyle *sty = 0;
+		
+
+		if ( !lib ) {
+			QString path = QPEApplication::qpeDir() + "/plugins/styles/" + "libliquid.so";		
+			lib = ::dlopen ( path. local8Bit ( ), RTLD_NOW | RTLD_GLOBAL );
+		}
+		if ( lib ) {
+			void *sym = ::dlsym ( lib, "allocate" );
+		
+			if ( sym )
+				sty = ((QStyle * (*) ( )) sym ) ( );
+		}
+		if ( sty )
+			setStyle ( sty );
+	}
+	// HACK for Qt2 only 
 #endif
 }
 
