@@ -125,15 +125,16 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     setCaption( tr( "OpiePlayer: " ) + currentPlaylist );
 
     // see which skins are installed
+    videoScan=FALSE;
+    audioScan=FALSE;
     populateSkinsMenu();
     initializeStates();
 }
 
 
 PlayListWidget::~PlayListWidget() {
-/* fixing symptoms and not sources is entirely stupid - zecke */
-//  Config cfg( "OpiePlayer" );
-//  writeConfig( cfg );
+      // WTF?!@?! 
+
     if ( d->current ) {
         delete d->current;
     }
@@ -784,7 +785,7 @@ void PlayListWidget::openFile() {
         } else if( filename.right(3) == "pls" ) {
             readPls( filename );
         } else {
-            /* FIXME ....... AUDIO/X-MPEGURL is bad*/
+              // this doesnt need fixing
             DocLnk lnk;
             lnk.setName( filename ); //sets file name
             lnk.setFile( filename ); //sets File property
@@ -929,6 +930,8 @@ void PlayListWidget::writem3u() {
             //         qDebug(d->selectedFiles->current()->file());
 
             // so maybe we should do some net checking to ,-)
+            // no, cause it takes to long...
+            
             list += d->selectedFiles->current()->file() + "\n";
             noOfFiles++;
         }

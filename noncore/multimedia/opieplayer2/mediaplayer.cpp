@@ -183,6 +183,7 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
 
 
       // TODO FIXME
+      // huh??
     unsigned int v= 0;
     v = volControl->volume();
     v = v / 10;
