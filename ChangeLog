@@ -1,4 +1,11 @@
-2005-03-20	Opie 1.2.0-pre
+2005-03-nn	Opie 1.2.0
+
+	Fixed Bugs
+	----------
+	* #1613 - AdvancedFM - scale toolbar icons appropriately (drw)
+
+2005-03-20	Opie 1.2.0-rc1
+
 
 	New Features
 	------------
@@ -12,7 +19,7 @@
 	Fixed Bugs
 	----------
 	* #1236 - VCards contained empty home and work address entries causing Palms to crash (eilers)
-    * #1412 - Launcher Settings - fixed default settings for background in Edit tab dialog (drw)
+	* #1412 - Launcher Settings - fixed default settings for background in Edit tab dialog (drw)
 	* #1472 - Opie textedit now check for unsaved changes on ESC key (ljp)
 	* #1474 - Implement GUI for Scrollbars on the Left in Appearance (zecke)
 	* #1482 - Fix double '/' in paths (zecke)
