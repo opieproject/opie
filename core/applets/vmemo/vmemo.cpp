@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.48 2002-09-19 15:35:19 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.49 2002-09-20 14:39:04 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 extern "C" {
@@ -288,11 +288,11 @@ void VMemo::mousePressEvent( QMouseEvent * me) {
         }
   /*  No mousePress/mouseRelease recording on the iPAQ. The REC button on the iPAQ calls these functions
          mousePressEvent and mouseReleaseEvent with a NULL parameter.  */
-    if ( me->button() != LeftButton && me != NULL /*&& !systemZaurus*/) {
+//    if ( me->button() != LeftButton && me != NULL /*&& !systemZaurus*/) {
         
   //  if (!systemZaurus && me != NULL)
-        return;
-    }
+//        return;
+//    }
 
   if(!recording)
        startRecording();
