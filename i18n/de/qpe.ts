@@ -382,7 +382,8 @@ sofort beenden.</translation>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation>Die Optionen zum Herunterfahren sind ausschließlich zur Entwicklung und für Tests des Opie-Systems gedacht. Unter normalen Bedingungen sind sie nicht notwendig.</translation>
+        <translation>&lt;p&gt;
+Die Optionen zum Herunterfahren sind ausschließlich zur Entwicklung und für Tests des Opie-Systems gedacht. Unter normalen Bedingungen sind sie nicht notwendig.</translation>
     </message>
     <message>
         <source>Cancel</source>
