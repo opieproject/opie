@@ -241,10 +241,12 @@ QDataStream& operator>>( QDataStream& stream, OListViewItem& item );
  * ONamedListView
  *======================================================================================*/
 
+class ONamedListViewItem;
+
 /**
  * @brief An OListView variant with named columns.
  *
- * This class provides a higher-level interface to the columns in an OListView.
+ * This class provides a higher-level interface to an OListView.
  *
  * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
  */
@@ -266,6 +268,24 @@ class ONamedListView: public OListView
      * Add a number of @a columns to the listview.
      */
     virtual void addColumns( const QStringList& columns );
+    /**
+     * @returns the column index matching to @a text or -1 if not found.
+     */
+    virtual int findColumn( const QString& text ) const;
+    /**
+     * @returns the first item which has a @a text in column @a column.
+     * Set @a recurse to indicate how much subchild levels to search, e.g.<ul>
+     * <li>set it to 0 to search only among direct childs,
+     * <li>set it to 1 to search direct childs and all 1st order subchilds
+     * <li>set it to -1 for maximum recursion.
+     * </ul>
+     * @sa ONamedListViewItem::find()
+     */
+    virtual ONamedListViewItem* find( ONamedListViewItem* start, int column, const QString& text, int recurse = -1 ) const;
+    virtual ONamedListViewItem* find( int column, const QString& text, int recurse = -1 ) const;
+
+    virtual ONamedListViewItem* find( ONamedListViewItem* start, const QString& column, const QString& text, int recurse = -1 ) const;
+    virtual ONamedListViewItem* find( const QString& column, const QString& text, int recurse = -1 ) const;
 };
 
 /*======================================================================================
@@ -275,7 +295,7 @@ class ONamedListView: public OListView
 /**
  * @brief An OListView variant with named columns.
  *
- * This class provides a higher-level interface to the columns in an OListViewItem.
+ * This class provides a higher-level interface to an OListViewItem.
  *
  * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
  */
@@ -304,6 +324,17 @@ class ONamedListViewItem: public OListViewItem
      * Sets a number of @a texts for this item.
      */
     virtual void setText( const QStringList& texts );
+    /**
+     * @returns the first child which has a @a text in column @a column.
+     * Set @a recurse to indicate how much subchild levels to search, e.g.<ul>
+     * <li>set it to 0 to search only among direct childs,
+     * <li>set it to 1 to search direct childs and all 1st order subchilds
+     * <li>set it to -1 for maximum recursion.
+     * </ul>
+     * @sa ONamedListView::find()
+     */
+    virtual ONamedListViewItem* find( int column, const QString& text, int recurse = -1 ) const;
+    virtual ONamedListViewItem* find( const QString& column, const QString& text, int recurse = -1 ) const;
 };
 
 

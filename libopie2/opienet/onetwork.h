@@ -76,6 +76,7 @@ class OMonitoringInterface;
  * @brief A container class for all network interfaces
  *
  * This class provides access to all available network interfaces of your computer.
+ *
  * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
  */
 class ONetwork : public QObject
@@ -137,6 +138,7 @@ class ONetwork : public QObject
  * Linux ioctls are hidden under a convenient high-level interface.
  * @warning Most of the setting methods contained in this class require the appropriate
  * process permissions to work.
+ *
  * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
  */
 class ONetworkInterface : public QObject
@@ -246,6 +248,7 @@ class ONetworkInterface : public QObject
  * changes the radio frequency channel of its associated @ref OWirelessNetworkInterface.
  * This is necessary when in monitoring mode and scanning for other devices, because
  * the radio frequency hardware can only detect packets sent on the same frequency.
+ *
  * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
  */
 class OChannelHopper : public QObject
@@ -305,6 +308,8 @@ class OChannelHopper : public QObject
  * @brief A network interface wrapper for interfaces supporting the wireless extensions protocol.
  *
  * This class provides a high-level encapsulation of the Linux wireless extension API.
+ *
+ * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
  */
 class OWirelessNetworkInterface : public ONetworkInterface
 {

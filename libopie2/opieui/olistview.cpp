@@ -466,6 +466,68 @@ void ONamedListView::addColumns( const QStringList& columns )
 }
 
 
+int ONamedListView::findColumn( const QString& text ) const
+{
+    //FIXME: If used excessively, this will slow down performance of updates
+    //FIXME: because of the linear search over all column texts.
+    //FIXME: I will optimize later by using a hash map.
+    for ( int i = 0; i < columns(); ++i )
+        if ( columnText( i ) == text )
+            return i;
+    return -1;
+}
+
+
+ONamedListViewItem* ONamedListView::find( int column, const QString& text, int recurse ) const
+{
+    return find( (ONamedListViewItem*) firstChild(), column, text, recurse );
+}
+
+
+ONamedListViewItem* ONamedListView::find( ONamedListViewItem* item, int column, const QString& text, int recurse ) const
+{
+    ONamedListViewItem* result;
+    while ( item && item->text( column ) != text )
+    {
+        qDebug( "checked %s", (const char*) item->text( column ) );
+
+        if ( recurse < 0 || recurse > 0 )
+        {
+            qDebug( "recursion is %d - recursing into...", recurse );
+            result = find( (ONamedListViewItem*) item->firstChild(), column, text, recurse-1 );
+            if ( result ) return result;
+        }
+
+
+        item = (ONamedListViewItem*) item->itemBelow();
+    }
+    if ( item && item->text( column ) == text )
+        return item;
+    else
+        return 0;
+}
+
+
+ONamedListViewItem* ONamedListView::find( const QString& column, const QString& text, int recurse ) const
+{
+    int col = findColumn( column );
+    if ( col != -1 )
+        return find( (ONamedListViewItem*) firstChild(), col, text, recurse );
+    else
+        return 0;
+}
+
+
+ONamedListViewItem* ONamedListView::find( ONamedListViewItem* item, const QString& column, const QString& text, int recurse ) const
+{
+    int col = findColumn( column );
+    if ( col != -1 )
+        return find( item, col, text, recurse );
+    else
+        return 0;
+}
+
+
 /*======================================================================================
  * ONamedListViewItem
  *======================================================================================*/
@@ -520,13 +582,26 @@ void ONamedListViewItem::setText( const QString& column, const QString& text )
     //FIXME: If used excessively, this will slow down performance of updates
     //FIXME: because of the linear search over all column texts.
     //FIXME: I will optimize later by using a hash map.
-    for ( int i = 0; i < listView()->columns(); ++i )
-    {
-        if ( listView()->columnText( i ) == column )
-        {
-            OListViewItem::setText( i, text );
-            return;
-        }
-    }
-    qWarning( "ONamedListViewItem::setText(): Warning! Columntext '%s' not found.", (const char*) column );
+    int col = ( (ONamedListView*) listView() )->findColumn( column );
+    if ( col != -1 )
+        OListViewItem::setText( col, text );
+    else
+        qWarning( "ONamedListViewItem::setText(): Warning! Columntext '%s' not found.", (const char*) column );
 }
+
+
+ONamedListViewItem* ONamedListViewItem::find( int column, const QString& text, int recurse ) const
+{
+    return ( (ONamedListView*) listView() )->find( (ONamedListViewItem*) firstChild(), column, text, recurse );
+}
+
+
+ONamedListViewItem* ONamedListViewItem::find( const QString& column, const QString& text, int recurse ) const
+{
+    int col = ( (ONamedListView*) listView() )->findColumn( column );
+    if ( col != -1 )
+        return ( (ONamedListView*) listView() )->find( (ONamedListViewItem*) firstChild(), col, text, recurse );
+    else
+        return 0;
+}
+
