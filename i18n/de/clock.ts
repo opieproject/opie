@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Set date and time.</source>
-        <translation>Alarmzeit und -datum setzten.</translation>
+        <translation>Alarmzeit setzten.</translation>
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>

@@ -92,11 +92,11 @@ automatisch laden?
     </message>
     <message>
         <source>Icon size</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbolgröße</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbolgröße in Pixeln einstellen</translation>
     </message>
     <message>
         <source>Refresh</source>
@@ -104,7 +104,7 @@ automatisch laden?
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation type="unfinished"></translation>
+        <translation>Wie häufig soll &quot;Heute&quot; sich aktualisieren</translation>
     </message>
     <message>
         <source> sec</source>

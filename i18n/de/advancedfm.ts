@@ -91,11 +91,11 @@
     </message>
     <message>
         <source>AdvancedFm Output</source>
-        <translation>Erweiterter Dateimanager Ausgabe</translation>
+        <translation>Dateimanager Ausgabe</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation type="unfinished">Erweiterter Dateimanager Beam out</translation>
+        <translation>Dateimanager Senden</translation>
     </message>
     <message>
         <source>Ir sent.</source>
@@ -160,7 +160,8 @@
     <message>
         <source>Could not copy
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte nicht kopieren
+</translation>
     </message>
     <message>
         <source>to
@@ -179,7 +180,10 @@
 is copyright 2002 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateimanager
+Copyright 2002 von
+L.J.Potter&lt;llornkcor@handhelds.org&gt;
+unter der GPL</translation>
     </message>
     <message>
         <source>Add To Documents</source>
@@ -187,38 +191,39 @@ and is licensed by the GPL</source>
     </message>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktionen</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle auswählen</translation>
     </message>
     <message>
         <source>Really delete
 %1 files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wirklich %1 Dateien löschen?</translation>
     </message>
     <message>
         <source>Delete Directory?</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzeichnis löschen?</translation>
     </message>
     <message>
         <source>Really delete
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wirklich löschen?
+</translation>
     </message>
     <message>
         <source>Delete Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzeichnis löschen</translation>
     </message>
     <message>
         <source>Really copy
 %1 files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wirklich %1 Dateien kopieren?</translation>
     </message>
     <message>
         <source>File Exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei existiert bereits!</translation>
     </message>
     <message>
         <source>

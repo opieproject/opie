@@ -3,35 +3,35 @@
     <name>Appearance</name>
     <message>
         <source>Settings...</source>
-        <translation type="unfinished">Einstellungen...</translation>
+        <translation>Einstellungen...</translation>
     </message>
     <message>
         <source>Current scheme</source>
-        <translation type="unfinished">Aktuelles Schema</translation>
+        <translation>Aktuelles Schema</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Anpassen...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Löschen</translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Speichern</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <source>Force styling for all applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stil für alle Anwendungen erzwingen.</translation>
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation type="unfinished"></translation>
+        <translation>Stil für diese Anwendungen deaktivieren (&lt;b&gt;*&lt;/b&gt; kann als Platzhalter benutzt werden):</translation>
     </message>
     <message>
         <source>Binary file(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Binäre Datei(en)</translation>
     </message>
     <message>
         <source>Tab style:</source>
@@ -63,63 +63,63 @@
     </message>
     <message>
         <source>Style</source>
-        <translation type="unfinished">Stil</translation>
+        <translation>Stil</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished">Schrift</translation>
+        <translation>Schrift</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished">Farben</translation>
+        <translation>Farben</translation>
     </message>
     <message>
         <source>Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Fenster</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Fortgeschritten</translation>
     </message>
     <message>
         <source>Restart</source>
-        <translation type="unfinished">Neustart</translation>
+        <translation>Neustart</translation>
     </message>
     <message>
         <source>Do you want to restart %1 now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wollen Sie %1 nun neu starten?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Nein</translation>
+        <translation>Nein</translation>
     </message>
     <message>
         <source>Save Scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Schema speichern</translation>
     </message>
     <message>
         <source>Save scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Schema speichern</translation>
     </message>
     <message>
         <source>Scheme does already exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Schema exitiert bereits.</translation>
     </message>
     <message>
         <source>Delete scheme</source>
-        <translation type="unfinished">Schema löschen</translation>
+        <translation>Schema löschen</translation>
     </message>
     <message>
         <source>Unable to delete current scheme.</source>
-        <translation type="unfinished">Kann das aktuelle Schema nicht löschen</translation>
+        <translation>Kann das aktuelle Schema nicht löschen.</translation>
     </message>
     <message>
         <source>&lt;new&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;neu&gt;</translation>
     </message>
     <message>
         <source>Styles control the way items such as buttons and scroll bars appear in all applications.
@@ -210,7 +210,7 @@ This area allows you to select an application and which settings you wish to dis
     </message>
     <message>
         <source>Appearance Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Erscheinungsbild-Einstellungen</translation>
     </message>
 </context>
 <context>
@@ -221,38 +221,38 @@ This area allows you to select an application and which settings you wish to dis
     </message>
     <message>
         <source>Click here to select a color for: </source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier zum Aussuchen einer Farbe für:</translation>
     </message>
 </context>
 <context>
     <name>SampleWindow</name>
     <message>
         <source>Sample</source>
-        <translation type="unfinished"></translation>
+        <translation>Beispiel</translation>
     </message>
     <message>
         <source>Normal Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Normales Element</translation>
     </message>
     <message>
         <source>Disabled Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktiviertes Element</translation>
     </message>
     <message>
         <source>Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menü</translation>
     </message>
     <message>
         <source>Normal Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Normaler Text</translation>
     </message>
     <message>
         <source>Highlighted Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Markierter Text</translation>
     </message>
     <message>
         <source>Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Knopf</translation>
     </message>
     <message>
         <source>Check Box</source>
