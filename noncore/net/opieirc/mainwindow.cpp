@@ -76,6 +76,7 @@ void MainWindow::changeEvent(IRCTab *tab) {
 void MainWindow::killTab(IRCTab *tab) {
     m_tabWidget->removePage(tab);
     m_tabs.remove(tab);
+
     /* there might be nicer ways to do this .. */
     delete tab;
 }

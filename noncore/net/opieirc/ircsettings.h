@@ -27,6 +27,9 @@
 
 namespace Opie {
 class OColorButton;
+namespace Ui {
+class OKeyConfigWidget;
+}
 }
 
 class IRCSettings : public QDialog {
@@ -45,6 +48,7 @@ protected:
     Opie::OColorButton *m_server;
     Opie::OColorButton *m_other;
     Opie::OColorButton *m_notification;
+    Opie::Ui::OKeyConfigWidget *m_keyConf;
     QLineEdit    *m_lines;
 };
 

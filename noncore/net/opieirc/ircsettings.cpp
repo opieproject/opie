@@ -1,10 +1,12 @@
 
 #include "ircsettings.h"
 #include "irctab.h"
+#include "ircmisc.h"
 
 /* OPIE */
 #include <opie2/ocolorbutton.h>
 #include <opie2/otabwidget.h>
+#include <opie2/okeyconfigwidget.h>
 #include <qpe/qpeapplication.h>
 
 /* QT */
@@ -78,8 +80,19 @@ IRCSettings::IRCSettings(QWidget* parent, const char* name, bool modal, WFlags) 
     QWhatsThis::add(m_notification, tr("Text color to be used to display notifications"));
     layout->addWidget(m_notification, 6, 1);
     tw->addTab(view, "opieirc/colors", tr("Colors"));
-    tw->setCurrentTab( genwidget );
 
+
+    /*
+     * IRC EditLine KeyConfiguration
+     */
+    m_keyConf = new Opie::Ui::OKeyConfigWidget(tw, "KEyConfig GUI" );
+    m_keyConf->setChangeMode( OKeyConfigWidget::Queue );
+    m_keyConf->insert( tr("Keyboard Shortcuts"),
+                       IRCHistoryLineEdit::keyConfigInstance() );
+    m_keyConf->load();
+    tw->addTab(m_keyConf, "SettingsIcon", tr("Keyboard Shortcuts") );
+
+    tw->setCurrentTab( genwidget );
     QPEApplication::showDialog( this );
 }
 
@@ -93,6 +106,9 @@ void IRCSettings::accept()
     IRCTab::m_serverColor = m_server->color().name();
     IRCTab::m_notificationColor = m_notification->color().name();
     IRCTab::m_maxLines = m_lines->text().toInt();
+    m_keyConf->save();
+
+
     m_config->writeEntry("BackgroundColor", IRCTab::m_backgroundColor);
     m_config->writeEntry("TextColor", IRCTab::m_textColor);
     m_config->writeEntry("ErrorColor", IRCTab::m_errorColor);
@@ -101,6 +117,8 @@ void IRCSettings::accept()
     m_config->writeEntry("ServerColor", IRCTab::m_serverColor);
     m_config->writeEntry("NotificationColor", IRCTab::m_notificationColor);
     m_config->writeEntry("Lines", m_lines->text());
+    IRCHistoryLineEdit::keyConfigInstance()->save();
+
     QDialog::accept();
 }
 

@@ -28,6 +28,13 @@
 #include <qcolor.h>
 #include <qarray.h>
 
+namespace Opie {
+namespace Core {
+class OKeyConfigManager;
+}
+}
+
+
 /* Custom colored QTabWidget */
 
 class QExtTab : public QTab {
@@ -59,6 +66,13 @@ protected:
 class IRCHistoryLineEdit : public QLineEdit {
     Q_OBJECT
 public:
+    enum KeyMode {
+        KeyNextTab,
+        KeyPrevTab
+    };
+
+    static Opie::Core::OKeyConfigManager* keyConfigInstance();
+
     IRCHistoryLineEdit(QWidget *parent = 0, const char *name = 0);
     virtual bool eventFilter(QObject *object, QEvent *event);
 public slots:

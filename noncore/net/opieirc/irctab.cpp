@@ -1,8 +1,13 @@
-#include <qpe/resource.h>
-#include <qpushbutton.h>
-#include <qwhatsthis.h>
 #include "irctab.h"
 #include "mainwindow.h"
+
+#include <opie2/okeyconfigmanager.h>
+#include <qpe/resource.h>
+
+
+#include <qpushbutton.h>
+#include <qwhatsthis.h>
+
 
 QString IRCTab::m_errorColor;
 QString IRCTab::m_serverColor;

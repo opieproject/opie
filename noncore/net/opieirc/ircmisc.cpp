@@ -2,7 +2,10 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oconfig.h>
+#include <opie2/okeyconfigmanager.h>
 using namespace Opie::Core;
+
 
 IRCTabBar::IRCTabBar(QWidget *parent, const char *name) : QTabBar(parent, name) {
 }
@@ -42,6 +45,35 @@ void IRCTabWidget::setTabColor(int index, QColor color) {
 }
 
 
+
+static OKeyConfigManager* s_manager = 0;
+OKeyConfigManager* IRCHistoryLineEdit::keyConfigInstance() {
+    if ( !s_manager ) {
+        /*
+         * black list with the DeviceButtons as default
+         * because we do not grab the keyboard and they
+         * wouldn't work
+         */
+        OKeyPair::List blackList = OKeyPair::hardwareKeys();
+        blackList.append( OKeyPair::returnKey() );
+        blackList.append( OKeyPair::leftArrowKey() );
+        blackList.append( OKeyPair::upArrowKey() );
+        blackList.append( OKeyPair::downArrowKey() );
+
+        s_manager = new OKeyConfigManager(new OConfig("opieirc-keys"),
+                                          "keys", blackList,
+                                          false, 0, "irc_history_line_keyconfigm" );
+        s_manager->addKeyConfig( OKeyConfigItem( tr("Next Tab"), "next_tab", QPixmap(),
+                                                 KeyNextTab, OKeyPair(Qt::Key_N, Qt::ControlButton) ));
+        s_manager->addKeyConfig( OKeyConfigItem( tr("Previous Tab"), "prev_tab", QPixmap(),
+                                                 KeyPrevTab, OKeyPair(Qt::Key_P, Qt::ControlButton) ));
+        s_manager->load();
+    }
+
+    return s_manager;
+}
+
+
 IRCHistoryLineEdit::IRCHistoryLineEdit(QWidget *parent, const char *name) : QLineEdit(parent, name) {
     m_index = -1;
     installEventFilter(this);
@@ -66,15 +98,17 @@ void IRCHistoryLineEdit::keyPressEvent(QKeyEvent *event) {
     } else if (key == Key_Return) {
         m_history.prepend(text());
         m_index = -1;
-    } else if (key == Key_N && event->state() == Qt::ControlButton) {
+    }
+
+    switch( keyConfigInstance()->handleKeyEventId( event ) ) {
+    case KeyNextTab:
         emit nextTab();
         return;
-    } else if ( ( key == Key_Y || key == Key_Z ) && event->state() == Qt::ControlButton) {
-        emit closeTab();
-        return;
-    } else if (key == Key_P && event->state() == Qt::ControlButton) {
+    case KeyPrevTab:
         emit prevTab();
         return;
+    default:
+        break;
     }
 
     QLineEdit::keyPressEvent(event);
