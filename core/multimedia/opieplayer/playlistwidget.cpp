@@ -1060,20 +1060,27 @@ void PlayListWidget::openFile() {
             Config cfg( "OpiePlayer" );
             cfg.setGroup("PlayList");
 
+        QString m3uFile;
+        m3uFile = filename;
         if(filename.left(4) == "http") {
-            QString m3uFile, m3uFilePath;
             if(filename.find(":",8,TRUE) != -1) { //found a port
-                m3uFile = filename.left( filename.find( ":",8,TRUE));
-                m3uFile = m3uFile.right(  7);
-            } else if(filename.left(4) == "http"){
-                m3uFile=filename;
-                m3uFile = m3uFile.right( m3uFile.length() - 7);
-            } else{
-                m3uFile=filename;
-            }
 
-//            qDebug("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+ m3uFile);
-            lnk.setName( filename ); //sets name
+//               m3uFile = filename.left( filename.find( ":",8,TRUE));
+                 m3uFile = filename;
+                     if( m3uFile.right( 1 ).find( '/' ) == -1) {
+                         m3uFile += "/";
+                     }
+                filename = m3uFile;
+//                 qDebug("1 "+m3uFile);
+//             } else if(filename.left(4) == "http"){
+//                 m3uFile=filename;
+//                 m3uFile = m3uFile.right( m3uFile.length() - 7);
+//                 qDebug("2 "+m3uFile);
+//             } else{
+//                 m3uFile=filename;
+//                 qDebug("3 "+m3uFile);
+             }
+            lnk.setName( m3uFile ); //sets name
             lnk.setFile( filename ); //sets file name
             lnk.setIcon("opieplayer2/musicfile");
             d->selectedFiles->addToSelection(  lnk );
@@ -1114,7 +1121,10 @@ void PlayListWidget::readm3u( const QString &filename ) {
         if(s.left(4)=="http") {
           lnk.setName( s ); //sets file name
           lnk.setIcon("opieplayer2/musicfile");
-          if(s.right(4) != '.' || s.right(5) != '.')
+
+//          if(s.right(4) != '.' || s.right(5) != '.')
+          if(s.right(4) != '.' || s.right(5) != '.' )
+             if( s.right(1) != "/")
             lnk.setFile( s+"/"); //if url with no extension
           else
             lnk.setFile( s ); //sets file name
