@@ -47,7 +47,7 @@ class BrightnessAppletControl : public QFrame
   public:
     BrightnessAppletControl( Opie::Ui::OTaskbarApplet* parent, const char* name = 0 );
     ~BrightnessAppletControl();
-
+    virtual void hideEvent( QHideEvent* );
     QSlider* slider;
 };
 

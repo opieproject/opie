@@ -139,6 +139,13 @@ BrightnessAppletControl::~BrightnessAppletControl()
 }
 
 
+void BrightnessAppletControl::hideEvent( QHideEvent* e )
+{    
+    BrightnessApplet* applet = static_cast<BrightnessApplet*>( parent() );
+    applet->writeSystemBrightness( applet->calcBrightnessValue() );
+    QFrame::hideEvent( e );
+}
+
 BrightnessApplet::BrightnessApplet( QWidget *parent, const char *name )
              :OTaskbarApplet( parent, name )
 {
@@ -160,6 +167,8 @@ void BrightnessApplet::writeSystemBrightness(int brightness)
         cfg.setGroup("Battery");
     }
     cfg.writeEntry("Brightness", brightness);
+    odebug << "writing brightness " << brightness << oendl;
+    cfg.write();
 }
 
 
@@ -173,6 +182,8 @@ int BrightnessApplet::readSystemBrightness(void)
     } else {
         cfg.setGroup("Battery");
     }
+    
+    odebug << "reading brightness " << cfg.readNumEntry("Brightness", 128) << oendl;
 
     return cfg.readNumEntry("Brightness", 128);
 }
@@ -222,11 +233,6 @@ void BrightnessApplet::mousePressEvent( QMouseEvent* )
         popup( _control );
         _control->slider->setValue((_control->slider->maxValue() * v + 128) / 255);
         connect(_control->slider, SIGNAL(valueChanged(int)), this, SLOT(sliderMoved(int)));
-    }
-    else
-    {
-        _control->hide();
-        writeSystemBrightness( calcBrightnessValue() );
     }
 }
 
