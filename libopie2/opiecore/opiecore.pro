@@ -8,6 +8,7 @@ HEADERS     = oapplication.h            \
               oglobalsettings.h         \
               oprocess.h                \
               oprocctrl.h               \
+              osmart_pointer.h          \
               ostorageinfo.h            \
               xmltree.h
 
