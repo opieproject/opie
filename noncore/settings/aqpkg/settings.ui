@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>331</width>
-            <height>456</height>
+            <width>247</width>
+            <height>390</height>
         </rect>
     </property>
     <property stdset="1">
@@ -69,7 +69,7 @@
                         <name>spacing</name>
                         <number>6</number>
                     </property>
-                    <widget row="0"  column="0"  rowspan="1"  colspan="2" >
+                    <widget row="0"  column="0" >
                         <class>QLayoutWidget</class>
                         <property stdset="1">
                             <name>name</name>
@@ -118,60 +118,11 @@
                             </spacer>
                         </hbox>
                     </widget>
-                    <widget row="1"  column="0"  rowspan="1"  colspan="2" >
-                        <class>QListBox</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>servers</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>selectionMode</name>
-                            <enum>Extended</enum>
-                        </property>
-                    </widget>
-                    <widget row="2"  column="1" >
-                        <class>QPushButton</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>removeserver</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>enabled</name>
-                            <bool>true</bool>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>Remove</string>
-                        </property>
-                        <property stdset="1">
-                            <name>autoDefault</name>
-                            <bool>false</bool>
-                        </property>
-                    </widget>
-                    <widget row="2"  column="0" >
-                        <class>QPushButton</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>newserver</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>enabled</name>
-                            <bool>true</bool>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>New</string>
-                        </property>
-                        <property stdset="1">
-                            <name>autoDefault</name>
-                            <bool>false</bool>
-                        </property>
-                    </widget>
-                    <widget row="3"  column="0"  rowspan="1"  colspan="2" >
+                    <widget row="1"  column="0" >
                         <class>QLayoutWidget</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>Layout10</cstring>
+                            <cstring>Layout8</cstring>
                         </property>
                         <grid>
                             <property stdset="1">
@@ -182,51 +133,128 @@
                                 <name>spacing</name>
                                 <number>6</number>
                             </property>
+                            <widget row="0"  column="0"  rowspan="1"  colspan="2" >
+                                <class>QListBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>servers</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>selectionMode</name>
+                                    <enum>Extended</enum>
+                                </property>
+                            </widget>
+                            <widget row="2"  column="0"  rowspan="1"  colspan="2" >
+                                <class>QLayoutWidget</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>Layout6</cstring>
+                                </property>
+                                <grid>
+                                    <property stdset="1">
+                                        <name>margin</name>
+                                        <number>0</number>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>spacing</name>
+                                        <number>6</number>
+                                    </property>
+                                    <widget row="2"  column="1" >
+                                        <class>QCheckBox</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>active</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>text</name>
+                                            <string>Active Server</string>
+                                        </property>
+                                    </widget>
+                                    <widget row="0"  column="0" >
+                                        <class>QLabel</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>TextLabel1_3</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>text</name>
+                                            <string>Name:</string>
+                                        </property>
+                                    </widget>
+                                    <widget row="1"  column="0" >
+                                        <class>QLabel</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>TextLabel2_3</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>text</name>
+                                            <string>URL:</string>
+                                        </property>
+                                    </widget>
+                                    <widget row="0"  column="1" >
+                                        <class>QLineEdit</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>servername</cstring>
+                                        </property>
+                                    </widget>
+                                    <widget row="1"  column="1" >
+                                        <class>QLineEdit</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>serverurl</cstring>
+                                        </property>
+                                    </widget>
+                                    <widget row="3"  column="1" >
+                                        <class>QPushButton</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>btnChangeServer</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>text</name>
+                                            <string>Change</string>
+                                        </property>
+                                    </widget>
+                                </grid>
+                            </widget>
                             <widget row="1"  column="1" >
-                                <class>QLineEdit</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>serverurl</cstring>
-                                </property>
-                            </widget>
-                            <widget row="1"  column="0" >
-                                <class>QLabel</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>TextLabel2_3</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>URL:</string>
-                                </property>
-                            </widget>
-                            <widget row="0"  column="1" >
-                                <class>QLineEdit</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>servername</cstring>
-                                </property>
-                            </widget>
-                            <widget row="0"  column="0" >
-                                <class>QLabel</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>TextLabel1_3</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>Name:</string>
-                                </property>
-                            </widget>
-                            <widget row="2"  column="1" >
                                 <class>QPushButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>btnChangeServer</cstring>
+                                    <cstring>removeserver</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>enabled</name>
+                                    <bool>true</bool>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>Change</string>
+                                    <string>Remove</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>autoDefault</name>
+                                    <bool>false</bool>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="0" >
+                                <class>QPushButton</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>newserver</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>enabled</name>
+                                    <bool>true</bool>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>New</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>autoDefault</name>
+                                    <bool>false</bool>
                                 </property>
                             </widget>
                         </grid>
@@ -392,7 +420,7 @@
                         <class>QLayoutWidget</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>Layout8</cstring>
+                            <cstring>Layout13</cstring>
                         </property>
                         <grid>
                             <property stdset="1">
@@ -403,21 +431,18 @@
                                 <name>spacing</name>
                                 <number>6</number>
                             </property>
-                            <widget row="0"  column="1" >
-                                <class>QLineEdit</class>
+                            <widget row="1"  column="0" >
+                                <class>QLabel</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>destinationname</cstring>
+                                    <cstring>TextLabel1_3_2_2</cstring>
                                 </property>
-                            </widget>
-                            <widget row="1"  column="1" >
-                                <class>QLineEdit</class>
                                 <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>destinationurl</cstring>
+                                    <name>text</name>
+                                    <string>URL:</string>
                                 </property>
                             </widget>
-                            <widget row="2"  column="1" >
+                            <widget row="3"  column="1" >
                                 <class>QPushButton</class>
                                 <property stdset="1">
                                     <name>name</name>
@@ -426,6 +451,13 @@
                                 <property stdset="1">
                                     <name>text</name>
                                     <string>Change</string>
+                                </property>
+                            </widget>
+                            <widget row="0"  column="1" >
+                                <class>QLineEdit</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>destinationname</cstring>
                                 </property>
                             </widget>
                             <widget row="0"  column="0" >
@@ -439,15 +471,26 @@
                                     <string>Name:</string>
                                 </property>
                             </widget>
-                            <widget row="1"  column="0" >
-                                <class>QLabel</class>
+                            <widget row="2"  column="1" >
+                                <class>QCheckBox</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>TextLabel1_3_2_2</cstring>
+                                    <cstring>linkToRoot</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>URL:</string>
+                                    <string>LinkToRoot</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>checked</name>
+                                    <bool>true</bool>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="1" >
+                                <class>QLineEdit</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>destinationurl</cstring>
                                 </property>
                             </widget>
                         </grid>

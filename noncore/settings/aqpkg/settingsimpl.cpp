@@ -22,6 +22,11 @@ using namespace std;
 #include <qlineedit.h>
 #include <qpushbutton.h>
 #include <qtabwidget.h>
+#include <qcheckbox.h>
+
+#ifdef QWS
+#include <qpe/config.h>
+#endif
 
 #include "settingsimpl.h"
 
@@ -83,6 +88,7 @@ void SettingsImpl :: editServer( int sel )
     serverName = s->getServerName();
     servername->setText( s->getServerName() );
     serverurl->setText( s->getServerUrl() );
+    active->setChecked( s->isServerActive() );
 }
 
 void SettingsImpl :: newServer()
@@ -91,6 +97,7 @@ void SettingsImpl :: newServer()
 	servername->setText( "" );
 	serverurl->setText( "" );
 	servername->setFocus();
+    active->setChecked( true );
 }
 
 void SettingsImpl :: removeServer()
@@ -112,6 +119,8 @@ void SettingsImpl :: changeServerDetails()
 
 		// Update url
 		s->setServerUrl( serverurl->text() );
+        s->setActive( active->isChecked() );
+
 
 		// Check if server name has changed, if it has then we need to replace the key in the map
 		if ( serverName != newName )
@@ -120,8 +129,8 @@ void SettingsImpl :: changeServerDetails()
 			s->setServerName( newName );
 
 			// See if this server is the active server
-			if ( dataMgr->getActiveServer() == serverName )
-				dataMgr->setActiveServer( newName );
+//			if ( dataMgr->getActiveServer() == serverName )
+//				dataMgr->setActiveServer( newName );
 
 			// Update list box
 			servers->changeItem( newName, currentSelectedServer );
@@ -129,7 +138,9 @@ void SettingsImpl :: changeServerDetails()
 	}
 	else
 	{
-		dataMgr->getServerList().push_back( Server( newName, serverurl->text() ) );
+        Server s( newName, serverurl->text() );
+        dataMgr->getServerList().push_back( Server( newName, serverurl->text() ) );
+        dataMgr->getServerList().end()->setActive( active->isChecked() );
 		servers->insertItem( newName );
 		servers->setCurrentItem( servers->count() );
 		newserver = false;
@@ -141,10 +152,11 @@ void SettingsImpl :: changeServerDetails()
 void SettingsImpl :: editDestination( int sel )
 {
 	currentSelectedDestination = sel;
-    Destination *s = dataMgr->getDestination( destinations->currentText() );
-    destinationName = s->getDestinationName();
-    destinationname->setText( s->getDestinationName() );
-    destinationurl->setText( s->getDestinationPath() );
+    Destination *d = dataMgr->getDestination( destinations->currentText() );
+    destinationName = d->getDestinationName();
+    destinationname->setText( d->getDestinationName() );
+    destinationurl->setText( d->getDestinationPath() );
+    linkToRoot->setChecked( d->linkToRoot() );
 }
 
 void SettingsImpl :: newDestination()
@@ -153,6 +165,7 @@ void SettingsImpl :: newDestination()
 	destinationname->setText( "" );
 	destinationurl->setText( "" );
 	destinationname->setFocus();
+    linkToRoot->setChecked( true );
 }
 
 void SettingsImpl :: removeDestination()
@@ -167,13 +180,19 @@ void SettingsImpl :: changeDestinationDetails()
 {
 	changed = true;
 
-	QString newName = destinationname->text();
+#ifdef QWS
+    Config cfg( "aqpkg" );
+    cfg.setGroup( "destinations" );
+#endif
+
+    QString newName = destinationname->text();
 	if ( !newdestination )
 	{
 		Destination *d = dataMgr->getDestination( destinationName );
 
 		// Update url
 		d->setDestinationPath( destinationurl->text() );
+        d->linkToRoot( linkToRoot->isChecked() );
 
 		// Check if server name has changed, if it has then we need to replace the key in the map
 		if ( destinationName != newName )
@@ -184,6 +203,12 @@ void SettingsImpl :: changeDestinationDetails()
 			// Update list box
 			destinations->changeItem( newName, currentSelectedDestination );
 		}
+#ifdef QWS
+        QString key = newName;
+        key += "_linkToRoot";
+        int val = d->linkToRoot();
+        cfg.writeEntry( key, val );
+#endif        
 	}
 	else
 	{
@@ -191,5 +216,11 @@ void SettingsImpl :: changeDestinationDetails()
 		destinations->insertItem( newName );
 		destinations->setCurrentItem( destinations->count() );
 		newdestination = false;
+
+#ifdef QWS
+        QString key = newName;
+        key += "_linkToRoot";
+        cfg.writeEntry( key, true );
+#endif
 	}
 }
