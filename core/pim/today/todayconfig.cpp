@@ -68,8 +68,8 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal, WFlags 
     m_appletListView->header()->hide();
     m_appletListView->setSorting( -1 );
     QVBox *vbox1 = new QVBox( hbox1 );
-    new ToolButton( vbox1, tr( "Move Up" ), "opieplayer/up",  this , SLOT( moveSelectedUp() ) );
-    new ToolButton( vbox1, tr( "Move Down" ),"opieplayer/down", this , SLOT( moveSelectedDown() ) );
+    new ToolButton( vbox1, tr( "Move Up" ), "up",  this , SLOT( moveSelectedUp() ) );
+    new ToolButton( vbox1, tr( "Move Down" ), "down", this , SLOT( moveSelectedDown() ) );
     tab2Layout->addWidget( hbox1 );
     TabWidget3->addTab( tab_2, "pass", tr( "active/order" ) );
 
@@ -89,8 +89,6 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal, WFlags 
     TabWidget3->addTab( tab_3, "SettingsIcon", tr( "Misc" ) );
 
     m_applets_changed = false;
-
-    //   TabWidget3->setCurrentTab( tab_2 );
 
     connect ( m_appletListView , SIGNAL( clicked ( QListViewItem * ) ), this, SLOT( appletChanged ( ) ) );
 
@@ -191,7 +189,7 @@ void TodayConfig::moveSelectedDown() {
 
 
 /**
- * Set up the
+ * Set up the icons in the order/active tab
  */
 void TodayConfig::pluginManagement( QString libName, QString name, QPixmap icon ) {
 
