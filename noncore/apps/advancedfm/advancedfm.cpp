@@ -374,6 +374,13 @@ void AdvancedFm::doAbout() {
 }
 
 void AdvancedFm::keyPressEvent( QKeyEvent *e) {
+		qDebug("keypressevent");
+}
+
+void AdvancedFm::keyReleaseEvent( QKeyEvent *e) {
+		qDebug("key release");
+   if( CurrentView()->hasFocus() )
+      e->ignore();
 		if(  e->key() ==  Key_Left ) 
 				upDir();
 		else if( e->key() == Key_Return || e->key() == Key_Enter)
@@ -418,11 +425,6 @@ void AdvancedFm::keyPressEvent( QKeyEvent *e) {
 				docButtonPushed();
 		else
 				e->accept();
-}
-
-void AdvancedFm::keyReleaseEvent( QKeyEvent *e) {
-   if( CurrentView()->hasFocus() )
-      e->ignore();
 }
 
 
