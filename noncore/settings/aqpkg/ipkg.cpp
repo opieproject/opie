@@ -119,9 +119,9 @@ bool Ipkg :: runIpkg( )
 
     qApp->processEvents();
 
-    // If we are removing packages and make links option is selected
+    // If we are removing, reinstalling or upgrading packages and make links option is selected
     // create the links
-    if ( option == "remove" || option == "reinstall" )
+    if ( option == "remove" || option == "reinstall" || option == "upgrade" )
     {
         createLinks = false;
         if ( flags & MAKE_LINKS )
@@ -141,7 +141,7 @@ bool Ipkg :: runIpkg( )
     if ( aborted )
         return false;
 
-    if ( option == "install" || option == "reinstall" )
+    if ( option == "install" || option == "reinstall" || option == "upgrade" )
     {
         // If we are not removing packages and make links option is selected
         // create the links
@@ -522,8 +522,8 @@ void Ipkg :: processLinkDir( const QString &file, const QString &destDir, const 
                 QDir d;
                 d.mkdir( linkFile, true );
             }
-            else
-                emit outputText( QString( "Directory " ) + linkFile + " already exists" );
+//            else
+//                emit outputText( QString( "Directory " ) + linkFile + " already exists" );
             
         }
         else
@@ -552,9 +552,12 @@ void Ipkg :: processLinkDir( const QString &file, const QString &destDir, const 
             {
                 QDir d;
                 bool rc = d.rmdir( linkFile, true );
-                text = (rc ? "Removed " : "Failed to remove ");
-                text += linkFile;
-                emit outputText( text );
+                if ( rc )
+                {
+                    text = (rc ? "Removed " : "Failed to remove ");
+                    text += linkFile;
+                    emit outputText( text );
+                }
             }
         }
     }
