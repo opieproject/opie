@@ -1,9 +1,13 @@
 #include "io_layer.h"
 
-IOLayer::IOLayer() {
+IOLayer::IOLayer()
+    : QObject()
+{
 }
 
-IOLayer::IOLayer(const Config &config) {
+IOLayer::IOLayer(const Config &)
+    : QObject()
+{
 }
 
 IOLayer::~IOLayer() {

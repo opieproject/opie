@@ -45,6 +45,12 @@ signals:
      */
     void progress( const QString& file, int progress );
 
+protected:
+    IOLayer* layer();
+
+private:
+    IOLayer* m_layer;
+
 };
 
 #endif
