@@ -3,369 +3,384 @@
     <name>AdvancedFm</name>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="unfinished"></translation>
+        <translation>AdvancētaisFm ::</translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="unfinished"></translation>
+        <translation>kB brīvs</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Piezīme</translation>
     </message>
     <message>
         <source>That directory does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Šāda direktorija neeksistē</translation>
     </message>
     <message>
         <source>Advanced FileManager
 is copyright 2002-2003 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzlabotais FailuMenedžeris
+visas tiesības rezervētas 2002-2003 g.
+L.J.Potters&lt;llornkcor@handhelds.org&gt;
+un ir licezēts ar GPL</translation>
     </message>
     <message>
         <source>Show Hidden Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt Slēptos Failus</translation>
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Mainīt Direktoriju</translation>
     </message>
     <message>
         <source>Execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Palaist</translation>
     </message>
     <message>
         <source>Open as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Atvērt kā tekstu</translation>
     </message>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Darbības</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Veidot Direktoriju</translation>
     </message>
     <message>
         <source>Make Symlink</source>
-        <translation type="unfinished"></translation>
+        <translation>Veidot Simsaiti</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārsaukt</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopēt</translation>
     </message>
     <message>
         <source>Copy As</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopēt Kā</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopēt Tajā Pašā Dir</translation>
     </message>
     <message>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārvietot</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst</translation>
     </message>
     <message>
         <source>Add To Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot Komentāriem</translation>
     </message>
     <message>
         <source>Run Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Palaist Komandu</translation>
     </message>
     <message>
         <source>File Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Faila Info</translation>
     </message>
     <message>
         <source>Set Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādīt Tiesības</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Parametri</translation>
     </message>
     <message>
         <source>Beam File</source>
-        <translation type="unfinished"></translation>
+        <translation>Bīmot Failu</translation>
     </message>
     <message>
         <source>AdvancedFm</source>
-        <translation type="unfinished"></translation>
+        <translation>UzlabotaisFm</translation>
     </message>
     <message>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru izņemt tekošo direktoriju no grāmatzīmēm.  Tas nav iezīmēts!</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fails</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Skats</translation>
     </message>
     <message>
         <source>File Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Failu Meklēšana</translation>
     </message>
     <message>
         <source>Run Command with Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Palaist Komandu ar Izvadu</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Atzīmēt Visu</translation>
     </message>
     <message>
         <source>Switch to View 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārslēgt uz Skatu 1</translation>
     </message>
     <message>
         <source>Switch to View 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārslēgt uz Skatu 2</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Iezīmēt Direktoriju</translation>
     </message>
     <message>
         <source>Remove Current Directory from Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Izdzēst Tekošo Direktoriju no Grāmatzīmēm</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Izmērs</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datums</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>Really delete
 %1 files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai tiešām dzēst
+%1 failus?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Jā</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nē</translation>
     </message>
     <message>
         <source>Delete Directory?</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst Direktoriju?</translation>
     </message>
     <message>
         <source>Really delete %1
 and all it&apos;s contents ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai tiešām dzēst %1 un visu tā saturu ?</translation>
     </message>
     <message>
         <source>Really delete
 %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiešām dzēst
+%1?</translation>
     </message>
     <message>
         <source>Really copy
 %1 files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiešām kopēt
+%1 failus?</translation>
     </message>
     <message>
         <source>File Exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>Fails Eksistē!</translation>
     </message>
     <message>
         <source>%1 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 eksistē. Tiešām pārrakstīt?</translation>
     </message>
     <message>
         <source>Could not copy %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru kopēt %1 uz %2</translation>
     </message>
     <message>
         <source>
 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>
+eksistē. Tiešām pārrakstīt?</translation>
     </message>
     <message>
         <source>Could not copy
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru nokopēt</translation>
     </message>
     <message>
         <source>to
 </source>
-        <translation type="unfinished"></translation>
+        <translation>uz
+</translation>
     </message>
     <message>
         <source>Copy </source>
-        <translation type="unfinished"></translation>
+        <translation>Kopēt</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="unfinished"></translation>
+        <translation>Kā</translation>
     </message>
     <message>
         <source> already exists.
 Do you really want to delete it?</source>
-        <translation type="unfinished"></translation>
+        <translation>jau eksistē
+Vai tiešām vēlaties to dzēst?</translation>
     </message>
     <message>
         <source>Could not move
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru pārvietot</translation>
     </message>
     <message>
         <source>Could not copy 
 %1 
 to 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru nokopēt
+%1
+uz
+%2</translation>
     </message>
     <message>
         <source>AdvancedFm Output</source>
-        <translation type="unfinished"></translation>
+        <translation>UzlabotāFm Izvads</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzlabotaisfm Bīmots</translation>
     </message>
     <message>
         <source>Ir sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir nosūtīts.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda</translation>
     </message>
     <message>
         <source>Could not rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru pārsaukt</translation>
     </message>
     <message>
         <source>Not Yet Implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav Vēl Implementēts</translation>
     </message>
 </context>
 <context>
     <name>Output</name>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvads</translation>
     </message>
     <message>
         <source>Process could not start</source>
-        <translation type="unfinished"></translation>
+        <translation>Procesu nevar palaist</translation>
     </message>
     <message>
         <source>Error
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda
+</translation>
     </message>
     <message>
         <source>Save output to file (name only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt izvadu failā (tikai vārds)</translation>
     </message>
     <message>
         <source>
 Finished
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Pabeigts
+</translation>
     </message>
 </context>
 <context>
     <name>filePermissions</name>
     <message>
         <source>filePermissions</source>
-        <translation type="unfinished"></translation>
+        <translation>failuTiesības</translation>
     </message>
     <message>
         <source>Set File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādīt Faila Tiesības</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādīt tiesības:</translation>
     </message>
     <message>
         <source>owner</source>
-        <translation type="unfinished"></translation>
+        <translation>īpašnieks</translation>
     </message>
     <message>
         <source>group</source>
-        <translation type="unfinished"></translation>
+        <translation>grupa</translation>
     </message>
     <message>
         <source>others</source>
-        <translation type="unfinished"></translation>
+        <translation>citi</translation>
     </message>
     <message>
         <source>Owner</source>
-        <translation type="unfinished"></translation>
+        <translation>Īpašnieks</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupa</translation>
     </message>
     <message>
         <source>read</source>
-        <translation type="unfinished"></translation>
+        <translation>lasīt</translation>
     </message>
     <message>
         <source>write</source>
-        <translation type="unfinished"></translation>
+        <translation>rakstīt</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>palaist</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Brīdinājums</translation>
     </message>
     <message>
         <source>Error- no user</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda- nav lietotāja</translation>
     </message>
     <message>
         <source>Error- no  group</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda- nav grupas</translation>
     </message>
     <message>
         <source>Error setting ownership or group</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda uzstādot īpašumtiesības vai grupu</translation>
     </message>
     <message>
         <source>Error setting mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda uzstādot režīmu</translation>
     </message>
 </context>
 </TS>

@@ -3,29 +3,29 @@
     <name>CategoryFilterImpl</name>
     <message>
         <source>Category Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategoriju Filtrs</translation>
     </message>
     <message>
         <source>Select one or more groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlēties vienu vai vairāk grupas</translation>
     </message>
 </context>
 <context>
     <name>DataManager</name>
     <message>
         <source>Reading configuration...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lasa konfigurāciju...</translation>
     </message>
 </context>
 <context>
     <name>InputDialog</name>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Atlikt</translation>
     </message>
 </context>
 <context>
@@ -33,82 +33,84 @@
     <message>
         <source>Remove
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt
+</translation>
     </message>
     <message>
         <source>Install
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Instalēt
+</translation>
     </message>
     <message>
         <source>Upgrade
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Uzlabot</translation>
     </message>
     <message>
         <source>(ReInstall)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Pārinstalēt)</translation>
     </message>
     <message>
         <source>(Upgrade)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Uzlabot)</translation>
     </message>
     <message>
         <source>Destination</source>
-        <translation type="unfinished"></translation>
+        <translation>Mērķis</translation>
     </message>
     <message>
         <source>Space Avail</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieejamā Vieta</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvads</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Starts</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcijas</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Visas</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Teksts</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārtrauce</translation>
     </message>
     <message>
         <source>
 **** User Clicked ABORT ***</source>
-        <translation type="unfinished"></translation>
+        <translation>**** Lietotājs klikšķināja PĀRTRAUKT ****</translation>
     </message>
     <message>
         <source>**** Process Aborted ****</source>
-        <translation type="unfinished"></translation>
+        <translation>**** Process Pārtraukts ****</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Aizvērt</translation>
     </message>
     <message>
         <source>%1 Kb</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Kb</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Nezināms</translation>
     </message>
     <message>
         <source>Save output</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt izvadu</translation>
     </message>
 </context>
 <context>
