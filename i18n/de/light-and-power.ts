@@ -3,7 +3,7 @@
     <name>LightSettingsBase</name>
     <message>
         <source>Light Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Helligkeitseinstellungen</translation>
     </message>
     <message>
         <source>Adjust to environment</source>
@@ -15,19 +15,19 @@
     </message>
     <message>
         <source>Power saving</source>
-        <translation type="unfinished"></translation>
+        <translation>Energie sparen</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekunden</translation>
     </message>
     <message>
         <source>Light off after</source>
-        <translation type="unfinished"></translation>
+        <translation>Licht aus nach</translation>
     </message>
     <message>
         <source>Dim light after</source>
-        <translation type="unfinished"></translation>
+        <translation>Licht dimmen nach</translation>
     </message>
     <message>
         <source>Suspend after</source>
@@ -35,15 +35,15 @@
     </message>
     <message>
         <source>Bright</source>
-        <translation type="unfinished"></translation>
+        <translation>Hell</translation>
     </message>
     <message>
         <source>&lt;blockquote&gt;The brighter the screen light, the more battery power is used.&lt;/blockquote&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;blockquote&gt;Je heller der Bildschrim eingestellt ist, desto mehr Strom wird verbraucht.&lt;/blockquote&gt;</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Aus</translation>
     </message>
 </context>
 </TS>
