@@ -65,7 +65,9 @@ public:
 
 public:
 	static ODevice *inst ( );
-	
+
+// system	
+	virtual bool suspend ( );
 
 // information
 

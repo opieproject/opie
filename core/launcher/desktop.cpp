@@ -604,30 +604,40 @@ static void darkScreen()
 
 void Desktop::togglePower()
 {
-  bool wasloggedin = loggedin;
-  loggedin=0;
-  suspendTime = QDateTime::currentDateTime();
-  darkScreen();
-  if ( wasloggedin )
-    blankScreen();
+	static bool excllock = false;
+	
+	if ( excllock )
+		return;
+		
+	excllock = true;
 
-  system("apm --suspend");
+	bool wasloggedin = loggedin;
+	loggedin=0;
+	suspendTime = QDateTime::currentDateTime();
+	darkScreen();
+	if ( wasloggedin )
+    	blankScreen();
 
+	ODevice::inst ( )-> suspend ( );
 
+	QWSServer::screenSaverActivate( FALSE );
 
-  QWSServer::screenSaverActivate( FALSE );
-  {
-    QCopEnvelope("QPE/Card", "mtabChanged()" ); // might have changed while asleep
-    QCopEnvelope e("QPE/System", "setBacklight(int)");
-    e << -3; // Force on
-  }
-  if ( wasloggedin ) {
-    login(TRUE);
-  }
-  sleep(1);
-  execAutoStart();
-  //qcopBridge->closeOpenConnections();
-  //qDebug("called togglePower()!!!!!!");
+	{
+		QCopEnvelope("QPE/Card", "mtabChanged()" ); // might have changed while asleep
+		QCopEnvelope e("QPE/System", "setBacklight(int)");
+		e << -3; // Force on
+	}
+
+	if ( wasloggedin )
+		login(TRUE);
+
+	execAutoStart();
+	//qcopBridge->closeOpenConnections();
+	//qDebug("called togglePower()!!!!!!");
+  
+	qApp-> processEvents ( );
+  
+  	excllock = false;
 }
 
 void Desktop::toggleLight()

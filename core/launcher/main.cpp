@@ -333,20 +333,50 @@ int initApplication( int argc, char ** argv )
     return rv;
 }
 
+static const char *pidfile_path = "/var/run/opie.pid";
+
+void create_pidfile ( )
+{
+	FILE *f;
+	
+	if (( f = ::fopen ( pidfile_path, "w" ))) {
+		::fprintf ( f, "%d", getpid ( ));
+		::fclose ( f );
+	}
+}
+
+void remove_pidfile ( )
+{
+	::unlink ( pidfile_path );
+}
+
+void handle_sigterm ( int sig )
+{
+	if ( qApp )
+		qApp-> quit ( );
+}
+
 int main( int argc, char ** argv )
 {
 #ifndef SINGLE_APP
-    signal( SIGCHLD, SIG_IGN );
+    ::signal( SIGCHLD, SIG_IGN );
+
+	::signal ( SIGTERM, handle_sigterm );
+
+	::setsid ( );
+	::setpgid ( 0, 0 );
+	
+	::atexit ( remove_pidfile );
+	create_pidfile ( );
 #endif
 
-    int retVal = initApplication( argc, argv );
+    int retVal = initApplication ( argc, argv );
 
 #ifndef SINGLE_APP
     // Kill them. Kill them all.
-    setpgid( getpid(), getppid() );
-    killpg( getpid(), SIGTERM );
-    sleep( 1 );
-    killpg( getpid(), SIGKILL );
+    ::kill ( 0, SIGTERM );
+    ::sleep( 1 );
+    ::kill ( 0, SIGKILL );
 #endif
 
     return retVal;
