@@ -79,14 +79,14 @@ void WeatherPluginWidget::timerEvent( QTimerEvent *e )
 
 void WeatherPluginWidget::retreiveData()
 {
-	startTimer( frequency * 60000 );
-
 	Config config( "todayweatherplugin");
 	config.setGroup( "Config" );
 
 	location = config.readEntry( "Location", "" );
 	useMetric = config.readBoolEntry( "Metric", TRUE );
 	frequency = config.readNumEntry( "Frequency", 5 );
+	
+	startTimer( frequency * 60000 );
 
 	localFile = "/tmp/";
 	localFile.append( location );
