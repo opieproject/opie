@@ -83,6 +83,11 @@ signals:
     void lessClicked();
 
 protected:
+    void setupButtons( const SkinButtonInfo *skinInfo, uint buttonCount,
+                       const QString &imagePrefix, const QSize &buttonAreaSize );
+    Button setupButton( const SkinButtonInfo &buttonInfo, const QString &imagePrefix );
+    QBitmap setupButtonMask( const Command &command, const QString &fileName );
+
     virtual void closeEvent( QCloseEvent * );
 
     virtual void paintEvent( QPaintEvent *pe );

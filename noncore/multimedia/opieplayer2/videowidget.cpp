@@ -94,30 +94,7 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     imgUp = QImage( Resource::loadImage( QString("%1/skinV_up").arg(skinPath) ) );
     imgDn = QImage( Resource::loadImage( QString("%1/skinV_down").arg(skinPath) ) );
 
-    buttonMask = QImage( imgUp.width(), imgUp.height(), 8, 255 );
-    buttonMask.fill( 0 );
-
-    for ( uint i = 0; i < buttonCount; i++ ) {
-        Button button;
-        button.command = skinInfo[ i ].command;
-        button.type = skinInfo[ i ].type;
-
-        QString filename = QString( QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skinV_mask_" + skinInfo[i].fileName + ".png" );
-        button.mask =QBitmap( filename );
-
-        if ( !button.mask.isNull() ) {
-            QImage imgMask = button.mask.convertToImage();
-            uchar **dest = buttonMask.jumpTable();
-            for ( int y = 0; y < imgUp.height(); y++ ) {
-                uchar *line = dest[y];
-                for ( int x = 0; x < imgUp.width(); x++ )
-                    if ( !qRed( imgMask.pixel( x, y ) ) )
-                        line[x] = button.command + 1;
-            }
-        }
-
-        buttons.push_back( button );
-    }
+    setupButtons( skinInfo, buttonCount, QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skinV_mask_", imgUp.size() );
 
     setBackgroundPixmap( backgroundPixmap );
 

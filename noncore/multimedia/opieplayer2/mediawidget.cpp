@@ -39,6 +39,49 @@ MediaWidget::~MediaWidget()
 {
 }
 
+void MediaWidget::setupButtons( const SkinButtonInfo *skinInfo, uint buttonCount,
+                                const QString &imagePrefix, const QSize &buttonAreaSize )
+{
+    buttonMask = QImage( buttonAreaSize, 8, 255 );
+    buttonMask.fill( 0 );
+
+    for ( uint i = 0; i < buttonCount; ++i ) {
+        Button button = setupButton( skinInfo[ i ], imagePrefix );
+        buttons.push_back( button );
+    }
+}
+
+MediaWidget::Button MediaWidget::setupButton( const SkinButtonInfo &buttonInfo, const QString &imagePrefix )
+{
+    Button button;
+    button.command = buttonInfo.command;
+    button.type = buttonInfo.type;
+
+    QString fileName = imagePrefix + buttonInfo.fileName + ".png";
+
+    button.mask = setupButtonMask( button.command, fileName );
+
+    return button;
+}
+
+QBitmap MediaWidget::setupButtonMask( const Command &command, const QString &fileName )
+{
+    QBitmap mask( fileName );
+    if ( mask.isNull() )
+        return mask;
+
+    QImage imgMask = mask.convertToImage();
+    uchar **dest = buttonMask.jumpTable();
+    for ( int y = 0; y < buttonMask.height(); y++ ) {
+        uchar *line = dest[y];
+        for ( int x = 0; x < buttonMask.width(); x++ )
+            if ( !qRed( imgMask.pixel( x, y ) ) )
+                line[x] = command + 1;
+    }
+
+    return mask;
+}
+
 void MediaWidget::closeEvent( QCloseEvent * )
 {
     mediaPlayerState.setList();
