@@ -4,7 +4,7 @@
 #include <qstring.h>
 #include <qlistbox.h>
 #include <qcombobox.h>
-#include <sqlite.h>
+#include <sqlite3.h>
 
 class Memory : public QObject
   {
@@ -33,7 +33,7 @@ class Memory : public QObject
       void displayMemoryItems ( QComboBox * );
 
       // The primary database that stores all our data
-      sqlite *db;
+      sqlite3 *db;
 
     public slots:
 

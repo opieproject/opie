@@ -4,7 +4,7 @@
 #include <qstring.h>
 #include <qlistview.h>
 #include <qdatetime.h>
-#include <sqlite.h>
+#include <sqlite3.h>
 
 #include "preferences.h"
 
@@ -63,7 +63,7 @@ class Transaction
 
     private:
 
-      sqlite *tdb;
+      sqlite3 *tdb;
       int rows, columns;
   };
 

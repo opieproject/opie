@@ -1,4 +1,4 @@
-#include <sqlite.h>
+#include <sqlite3.h>
 #include <qstring.h>
 
 #ifndef PREFERENCES_H
@@ -29,7 +29,7 @@ class Preferences
       void changeSortingPreference ( int id, int column );
 
       // The primary database that stores all our data
-      sqlite *db;
+      sqlite3 *db;
 
       // This function returns a Qstring for the year first date formats
       // for displaying.  It takes the date numbers

@@ -4,7 +4,7 @@
 #include <qstring.h>
 #include <qstringlist.h>
 #include <qlistview.h>
-#include <sqlite.h>
+#include <sqlite3.h>
 
 class Budget
   {
@@ -38,7 +38,7 @@ class Budget
       float getLineItemAmount ( int budgetid, int lineitemid );
 
     private:
-      sqlite *bdb;
+      sqlite3 *bdb;
   };
 
 #endif

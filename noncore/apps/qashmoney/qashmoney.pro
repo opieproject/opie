@@ -43,7 +43,7 @@ TARGET = qashmoney
 DESTDIR = $(OPIEDIR)/bin
 
 unix:LIBS += -lm
-LIBS += -lqpe -lopiecore2 -lsqlite
+LIBS += -lqpe -lopiecore2 -lsqlite3
 
 include ( $(OPIEDIR)/include.pro )
 

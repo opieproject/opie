@@ -4,7 +4,7 @@
 #include <qstring.h>
 #include <qlistview.h>
 #include <qcombobox.h>
-#include <sqlite.h>
+#include <sqlite3.h>
 
 class Account
   {
@@ -80,7 +80,7 @@ class Account
       float getAccountCreditLimit ( int );
 
       // The primary database that stores all our data
-      sqlite *adb;
+      sqlite3 *adb;
   };
 
 class GreyBackgroundItem : public QListViewItem
