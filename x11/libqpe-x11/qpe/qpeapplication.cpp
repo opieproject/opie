@@ -19,6 +19,7 @@
 #include <qregexp.h>
 #include <qtimer.h>
 
+#include <qpe/custom.h>
 #include <qpe/alarmserver.h>
 #include <qpe/applnk.h>
 #include <qpe/qpemenubar.h>
