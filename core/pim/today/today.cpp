@@ -185,12 +185,10 @@ void Today::loadPlugins() {
             if ( pluginListRefreshExclude.contains( (*it) ) ) {
                 // if its not in allApplets list, add it to a layout
                 if ( !m_allApplets.contains( pluginListRefreshExclude[(*it)].name ) ) {
-                    qDebug( "NUGASDA" );
                     layout->addWidget( pluginListRefreshExclude[(*it)].guiBox );
                     pluginList.append( pluginListRefreshExclude[(*it)] );
                 } else {
                     tempList.insert( pluginListRefreshExclude[(*it)].name, pluginListRefreshExclude[(*it)] );
-                    qDebug( "TEST2 " +  pluginListRefreshExclude[(*it)].name );
                 }
             } else {
 
@@ -355,7 +353,7 @@ void Today::startConfig() {
 void Today::refresh() {
     init();
 
-    qDebug(" refresh ");
+    // qDebug(" refresh ");
     // set the date in top label
     QDate date = QDate::currentDate();
     QString time = ( tr( date.toString() ) );
@@ -373,12 +371,6 @@ void Today::refresh() {
     draw();
 }
 
-void Today::startAddressbook() {
-    QCopEnvelope e( "QPE/System", "execute(QString)" );
-    e << QString( "addressbook" );
-}
-
-
 void Today::startApplication() {
     QCopEnvelope e( "QPE/System", "execute(QString)" );
     e << QString( sender()->name() );
@@ -388,11 +380,7 @@ void Today::startApplication() {
  * launch addressbook (personal card)
  */
 void Today::editCard() {
-    startAddressbook();
-    while( !QCopChannel::isRegistered( "QPE/Addressbook" ) ) {
-        qApp->processEvents();
-    }
-    QCopEnvelope v( "QPE/Addressbook", "editPersonalAndClose()" );
+    QCopEnvelope env( "QPE/Application/addressbook", "editPersonalAndClose()" );
 }
 
 Today::~Today() {

@@ -45,7 +45,6 @@ class Today : public TodayBase {
 
 private slots:
     void startConfig();
-    void startAddressbook();
     void startApplication();
     void editCard();
     void refresh();
