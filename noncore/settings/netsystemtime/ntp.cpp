@@ -21,6 +21,7 @@
 #include <qpe/timestring.h>
 #include <qpe/qpedialog.h>
 #include <qpe/datebookdb.h>
+#include <qpe/datebookmonth.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <sys/time.h>
 #include <time.h>
@@ -223,6 +224,10 @@ void  Ntp::ntpFinished(OProcess *p)
   int secsSinceLast = time - lastLookup;
   TextLabelNewTime->setText(QDateTime::currentDateTime().toString());
   TextLabelTimeShift->setText(QString::number(timeShift)+tr(" seconds"));
+  
+  dateButton->setDate( QDate::currentDate() );
+  timeButton->setTime( QDateTime::currentDateTime() );
+    
   if ( lastNtp && lastLookup > 0 && secsSinceLast > 60* SpinBoxMinLookupDelay->value())
     {
       cfg.setGroup("lookup_"+QString::number(lookupCount));
