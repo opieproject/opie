@@ -310,7 +310,7 @@ void NotesControl::save() {
 
             oldDocName=docname;
             edited=false;
-            qDebug("save");
+//            qDebug("save");
             if (doPopulate)
                 populateBox();
         }
@@ -322,7 +322,7 @@ void NotesControl::save() {
 
 void NotesControl::populateBox() {
     box->clear();
-    qDebug("populate");
+//    qDebug("populate");
     Config cfg("Notes");
     cfg.setGroup("Docs");
     int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
