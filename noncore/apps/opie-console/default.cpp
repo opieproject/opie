@@ -48,7 +48,7 @@ extern "C" {
     }
 
     // VT Emulations
-    EmulationLayer* newVT102( Widget* wid ) {
+    EmulationLayer* newVT102( WidgetLayer* wid ) {
         return new Vt102Emulation( wid );
     }
 

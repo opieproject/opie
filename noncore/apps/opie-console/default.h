@@ -20,7 +20,7 @@ extern "C" {
 
     ProfileDialogWidget* newTerminalWidget(const QString&, QWidget* );
 
-    EmulationLayer* newVT102( Widget* );
+    EmulationLayer* newVT102( WidgetLayer* );
 };
 
 class MetaFactory;
