@@ -55,7 +55,7 @@ PlayListSelection::PlayListSelection( QWidget *parent, const char *name )
 //    qDebug("starting playlistselector");
 // #ifdef USE_PLAYLIST_BACKGROUND
 //    setStaticBackground( TRUE );
-//      setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/background" ) );
+//      setBackgroundPixmap( Resource::loadPixmap( "opieplayer/background" ) );
 
 //      setBackgroundPixmap( Resource::loadPixmap( "launcher/opielogo" ) );
 // #endif
