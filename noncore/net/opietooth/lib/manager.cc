@@ -45,7 +45,7 @@ void Manager::isAvailable( const QString& device ){
     l2ping->setName( device.latin1() );
     *l2ping << "l2ping" << "-c1" << device;
     connect(l2ping, SIGNAL(processExited(Opie::Core::OProcess* ) ),
-            this, SLOT(slotProcessExited(OProcess*) ) );
+            this, SLOT(slotProcessExited(Opie::Core::OProcess*) ) );
     if (!l2ping->start() ) {
         emit available( device,  false );
         delete l2ping;
@@ -63,9 +63,9 @@ void Manager::searchDevices( const QString& device ){
     hcitool->setName( device.isEmpty() ? "hci0" : device.latin1() );
     *hcitool << "hcitool" << "scan";
     connect( hcitool, SIGNAL(processExited(Opie::Core::OProcess*) ) ,
-             this, SLOT(slotHCIExited(OProcess* ) ) );
+             this, SLOT(slotHCIExited(Opie::Core::OProcess* ) ) );
     connect( hcitool, SIGNAL(receivedStdout(Opie::Core::OProcess*, char*, int ) ),
-             this, SLOT(slotHCIOut(OProcess*, char*, int ) ) );
+             this, SLOT(slotHCIOut(Opie::Core::OProcess*, char*, int ) ) );
     if (!hcitool->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
         qWarning("could not start");
         RemoteDevice::ValueList list;
@@ -110,9 +110,9 @@ void Manager::searchServices( const QString& remDevice ){
     m_sdp->setName( remDevice.latin1() );
     qWarning("search Services for %s", remDevice.latin1() );
     connect(m_sdp, SIGNAL(processExited(Opie::Core::OProcess*) ),
-            this, SLOT(slotSDPExited(OProcess* ) ) );
+            this, SLOT(slotSDPExited(Opie::Core::OProcess* ) ) );
     connect(m_sdp, SIGNAL(receivedStdout(Opie::Core::OProcess*, char*,  int ) ),
-            this, SLOT(slotSDPOut(OProcess*, char*, int) ) );
+            this, SLOT(slotSDPOut(Opie::Core::OProcess*, char*, int) ) );
     if (!m_sdp->start(OProcess::NotifyOnExit,  OProcess::AllOutput) ) {
         qWarning("could not start sdptool" );
         delete m_sdp;
@@ -249,9 +249,9 @@ void Manager::searchConnections() {
     m_hcitoolCon = QString::null;
 
     connect(proc, SIGNAL(processExited(Opie::Core::OProcess*) ),
-            this, SLOT(slotConnectionExited( OProcess*) ) );
+            this, SLOT(slotConnectionExited( Opie::Core::OProcess*) ) );
     connect(proc, SIGNAL(receivedStdout(Opie::Core::OProcess*, char*, int) ),
-            this, SLOT(slotConnectionOutput(OProcess*, char*, int) ) );
+            this, SLOT(slotConnectionOutput(Opie::Core::OProcess*, char*, int) ) );
     *proc << "hcitool";
     *proc << "con";
 
@@ -308,9 +308,9 @@ void Manager::signalStrength( const QString &mac ) {
     OProcess* sig_proc = new OProcess();
 
     connect(sig_proc, SIGNAL(processExited(Opie::Core::OProcess*) ),
-            this, SLOT(slotSignalStrengthExited( OProcess*) ) );
+            this, SLOT(slotSignalStrengthExited( Opie::Core::OProcess*) ) );
     connect(sig_proc, SIGNAL(receivedStdout(Opie::Core::OProcess*, char*, int) ),
-            this, SLOT(slotSignalStrengthOutput(OProcess*, char*, int) ) );
+            this, SLOT(slotSignalStrengthOutput(Opie::Core::OProcess*, char*, int) ) );
     *sig_proc << "hcitool";
     *sig_proc << "lq";
     *sig_proc << mac;

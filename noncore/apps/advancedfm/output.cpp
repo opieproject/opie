@@ -147,10 +147,10 @@ Output::Output( const QStringList commands, QWidget* parent,  const char* name, 
             this, SLOT( processFinished()));
 
     connect(proc, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)),
-            this, SLOT(commandStdout(OProcess*,char*,int)));
+            this, SLOT(commandStdout(Opie::Core::OProcess*,char*,int)));
 
     connect(proc, SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)),
-            this, SLOT(commandStderr(OProcess*,char*,int)));
+            this, SLOT(commandStderr(Opie::Core::OProcess*,char*,int)));
 
 //     connect( , SIGNAL(received(const QByteArray&)),
 //             this, SLOT(commandStdin(const QByteArray&)));

@@ -20,7 +20,7 @@
 
 
 #include <qclipboard.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qtoolbutton.h>
 #include <qmenubar.h>
 #include <qpopupmenu.h>

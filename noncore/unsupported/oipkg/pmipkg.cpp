@@ -12,7 +12,7 @@
 #include "package.h"
 #include "packagelistitem.h"
 
-//#include <opie/oprocess.h>
+//#include <opie2/oprocess.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/stringutil.h>

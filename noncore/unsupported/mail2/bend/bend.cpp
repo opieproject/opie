@@ -9,7 +9,7 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 
-#include <opie/odevice.h>
+#include <opie2/odevice.h>
 
 #include "imapresponse.h"
 #include "imaphandler.h"

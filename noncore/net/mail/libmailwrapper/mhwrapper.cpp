@@ -9,8 +9,6 @@
 #include <opie2/oprocess.h>
 
 using namespace Opie::Core;
-using namespace Opie::Core;
-using namespace Opie::Core;
 MHwrapper::MHwrapper(const QString & mbox_dir,const QString&mbox_name)
     : Genericwrapper(),MHPath(mbox_dir),MHName(mbox_name)
 {
@@ -321,9 +319,9 @@ int MHwrapper::deleteMbox(const FolderP&tfolder)
     OProcess *process = new OProcess();
 
     connect(process, SIGNAL(processExited(Opie::Core::OProcess*)),
-            this, SLOT( processEnded(OProcess*)));
+            this, SLOT( processEnded(Opie::Core::OProcess*)));
     connect(process, SIGNAL( receivedStderr(Opie::Core::OProcess*,char*,int)),
-            this, SLOT( oprocessStderr(OProcess*,char*,int)));
+            this, SLOT( oprocessStderr(Opie::Core::OProcess*,char*,int)));
 
     *process << command;
     removeMboxfailed = false;

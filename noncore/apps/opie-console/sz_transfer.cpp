@@ -30,9 +30,9 @@ void SzTransfer::sendFile(const QString& file) {
     connect(proc, SIGNAL(processExited(Opie::Core::OProcess*)),
             this, SLOT(sent()));
     connect(proc, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)),
-            this, SLOT(SzReceivedStdout(OProcess*,char*,int)));
+            this, SLOT(SzReceivedStdout(Opie::Core::OProcess*,char*,int)));
     connect(proc, SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)),
-            this, SLOT(SzReceivedStderr(OProcess*,char*,int)));
+            this, SLOT(SzReceivedStderr(Opie::Core::OProcess*,char*,int)));
     connect(layer(), SIGNAL(received(const QByteArray&)),
             this, SLOT(receivedStdin(const QByteArray&)));
     proc->start(OProcess::NotifyOnExit, OProcess::All);

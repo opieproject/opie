@@ -3,4 +3,4 @@
     default "n" if NETWORKSETUP
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI && NETWORKSETUP && NETWORKSETUP-CORE && INTERFACES && LIBOPIE2NET
     #comment "opie-networksettingsplugin-wlan needs libopie2ui, libopie2net and networksetup"
-    #depends !( LIBOPIE2NET && LIBOPIE && NETWORKSETUP)
+    #depends !( LIBOPIE2NET && NETWORKSETUP)

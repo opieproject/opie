@@ -1,5 +1,6 @@
 #include <qpe/qpeapplication.h>
 
+using namespace Opie::Core;
 #include "mainwindow.h"
 
 #include <opie/oapplicationfactory.h>

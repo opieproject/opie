@@ -7,7 +7,7 @@
 #include <qlabel.h>
 #include <qvbox.h>
 
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qmenubar.h>
 #include <qpe/resource.h>
 
