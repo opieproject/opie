@@ -33,6 +33,8 @@
 #include <qfontmetrics.h>
 #include <qpainter.h>
 
+#include <math.h>
+
 Graph::Graph( QWidget *parent, GraphInfo *d, const QString &name, int flags )
 	: QWidget( parent, name, flags )
 {
