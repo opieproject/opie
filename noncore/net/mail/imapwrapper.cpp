@@ -60,6 +60,7 @@ void IMAPwrapper::login()
 	}
 
     m_imap = mailimap_new( 20, &imap_progress );
+
     /* connect */
     if (account->getSSL()) {
         err = mailimap_ssl_connect( m_imap, (char*)server, port );
@@ -70,7 +71,13 @@ void IMAPwrapper::login()
     if ( err != MAILIMAP_NO_ERROR &&
          err != MAILIMAP_NO_ERROR_AUTHENTICATED &&
          err != MAILIMAP_NO_ERROR_NON_AUTHENTICATED ) {
-         Global::statusMessage(tr("error connecting imap server: %1").arg(m_imap->imap_response));
+         QString failure = "";
+         if (err == MAILIMAP_ERROR_CONNECTION_REFUSED) {
+            failure="Connection refused";
+         } else {
+            failure="Unknown failure";
+         }
+         Global::statusMessage(tr("error connecting imap server: %1").arg(failure));
          mailimap_free( m_imap );
          m_imap = 0;
          return;
@@ -400,56 +407,14 @@ RecBody IMAPwrapper::fetchBody(const RecMail&mail)
         mailimap_msg_att * msg_att;
         msg_att = (mailimap_msg_att*)current->data;
         mailimap_msg_att_item*item = (mailimap_msg_att_item*)msg_att->att_list->first->data;
+        QValueList<int> path;
         body_desc = item->att_data.att_static->att_data.att_body;
-        if (body_desc->bd_type==MAILIMAP_BODY_1PART) {
-            searchBodyText(mail,body_desc->bd_data.bd_body_1part,body);
-        } else if (body_desc->bd_type==MAILIMAP_BODY_MPART) {
-            qDebug("Mulitpart mail");
-            searchBodyText(mail,body_desc->bd_data.bd_body_mpart,body);
-        }
+        traverseBody(mail,body_desc,body,0,path);
     } else {
         qDebug("error fetching body: %s",m_imap->imap_response);
     }
     if (result) mailimap_fetch_list_free(result);
     return body;
-}
-
-/* this routine is just called when the mail has only ONE part.
-   for filling the parts of a multi-part-message there are other
-   routines 'cause we can not simply fetch the whole body. */
-void IMAPwrapper::searchBodyText(const RecMail&mail,mailimap_body_type_1part*mailDescription,RecBody&target_body)
-{
-    if (!mailDescription) {
-        return;
-    }
-    QString sub,body_text;
-    RecPart singlePart;
-    QValueList<int> path;
-    fillSinglePart(singlePart,mailDescription);
-    switch (mailDescription->bd_type) {
-    case MAILIMAP_BODY_TYPE_1PART_MSG:
-        path.append(1);
-        body_text = fetchTextPart(mail,path,true,singlePart.Encoding());
-        target_body.setBodytext(body_text);
-        target_body.setDescription(singlePart);
-        break;
-    case MAILIMAP_BODY_TYPE_1PART_TEXT:
-        qDebug("Mediatype single: %s",mailDescription->bd_data.bd_type_text->bd_media_text);
-        path.append(1);
-        body_text = fetchTextPart(mail,path,true,singlePart.Encoding());
-        target_body.setBodytext(body_text);
-        target_body.setDescription(singlePart);
-        break;
-    case MAILIMAP_BODY_TYPE_1PART_BASIC:
-        qDebug("Single attachment");
-        target_body.setBodytext("");
-        target_body.addPart(singlePart);
-        break;
-    default:
-        break;
-    }
-    
-    return;
 }
 
 QStringList IMAPwrapper::address_list_to_stringlist(clist*list)
@@ -469,7 +434,6 @@ QStringList IMAPwrapper::address_list_to_stringlist(clist*list)
         current_address=(mailimap_address*)current->data;
         if (current_address->ad_personal_name){
             from+=convert_String((const char*)current_address->ad_personal_name);
-            //from+=QString(current_address->ad_personal_name);
             from+=" ";
             named_from = true;
         }
@@ -557,45 +521,60 @@ encodedString*IMAPwrapper::fetchRawPart(const RecMail&mail,const QValueList<int>
     return res;
 }
 
-void IMAPwrapper::searchBodyText(const RecMail&mail,mailimap_body_type_mpart*mailDescription,RecBody&target_body,int current_recursion,QValueList<int>recList)
+/* current_recursion is for recursive calls.
+   current_count means the position inside the internal loop! */
+void IMAPwrapper::traverseBody(const RecMail&mail,mailimap_body*body,RecBody&target_body,
+    int current_recursion,QValueList<int>recList,int current_count)
 {
-    /* current_recursion is for avoiding ugly mails which has a to deep body-structure */
-    if (!mailDescription||current_recursion==10) {
+    if (!body || current_recursion>=10) {
         return;
     }
-    clistcell*current;
-    mailimap_body*current_body;
-    unsigned int count = 0;
-    for (current=clist_begin(mailDescription->bd_list);current!=0;current=clist_next(current)) {
-        /* the point in the message */
-        ++count;
-        current_body = (mailimap_body*)current->data;
-        if (current_body->bd_type==MAILIMAP_BODY_MPART) {
-            QValueList<int>countlist = recList;
-            countlist.append(count);
-            searchBodyText(mail,current_body->bd_data.bd_body_mpart,target_body,current_recursion+1,countlist);
-        } else if (current_body->bd_type==MAILIMAP_BODY_1PART){
-            RecPart currentPart;
-            fillSinglePart(currentPart,current_body->bd_data.bd_body_1part);
-            QValueList<int>countlist = recList;    
-            countlist.append(count);
-            /* important: Check for is NULL 'cause a body can be empty! */
-            if (currentPart.Type()=="text" && target_body.Bodytext().isNull() ) {
-                QString body_text = fetchTextPart(mail,countlist,true,currentPart.Encoding());
-                target_body.setDescription(currentPart);
-                target_body.setBodytext(body_text);
-            } else {
-                QString id("");
-                for (unsigned int j = 0; j < countlist.count();++j) {
-                    id+=(j>0?" ":"");
-                    id+=QString("%1").arg(countlist[j]);
-                }
-                qDebug("ID= %s",id.latin1());
-                currentPart.setIdentifier(id);
-                currentPart.setPositionlist(countlist);
-                target_body.addPart(currentPart);
-            }
+    ++current_count;
+    switch (body->bd_type) {
+    case MAILIMAP_BODY_1PART:
+    {
+        QValueList<int>countlist = recList;
+        countlist.append(current_count);
+        RecPart currentPart;
+        mailimap_body_type_1part*part1 = body->bd_data.bd_body_1part;
+        QString id("");
+        currentPart.setPositionlist(countlist);
+        for (unsigned int j = 0; j < countlist.count();++j) {
+            id+=(j>0?" ":"");
+            id+=QString("%1").arg(countlist[j]);
         }
+        qDebug("ID = %s",id.latin1());
+        currentPart.setIdentifier(id);
+        fillSinglePart(currentPart,part1);
+        /* important: Check for is NULL 'cause a body can be empty!
+           And we put it only into the mail if it is the FIRST part */
+        if (part1->bd_type==MAILIMAP_BODY_TYPE_1PART_TEXT && target_body.Bodytext().isNull() && countlist[0]==1) {
+            QString body_text = fetchTextPart(mail,countlist,true,currentPart.Encoding());
+            target_body.setDescription(currentPart);
+            target_body.setBodytext(body_text);
+        } else {
+            target_body.addPart(currentPart);
+        }
+        if (part1->bd_type==MAILIMAP_BODY_TYPE_1PART_MSG) {
+            traverseBody(mail,part1->bd_data.bd_type_msg->bd_body,target_body,current_recursion+1,countlist);
+        }
+    }
+    break;
+    case MAILIMAP_BODY_MPART:
+    {
+        clistcell*current=0;
+        mailimap_body*current_body=0;
+        unsigned int ccount = current_count-1;
+        mailimap_body_type_mpart*mailDescription = body->bd_data.bd_body_mpart;
+        for (current=clist_begin(mailDescription->bd_list);current!=0;current=clist_next(current)) {
+            current_body = (mailimap_body*)current->data;
+            traverseBody(mail,current_body,target_body,current_recursion+1,recList,ccount);
+            ++ccount;
+        }
+    }
+    break;
+    default:
+    break;
     }
 }
 
@@ -613,6 +592,7 @@ void IMAPwrapper::fillSinglePart(RecPart&target_part,mailimap_body_type_1part*De
             fillSingleBasicPart(target_part,Description->bd_data.bd_type_basic);
             break;
         case MAILIMAP_BODY_TYPE_1PART_MSG:
+            target_part.setType("message");
             fillSingleMsgPart(target_part,Description->bd_data.bd_type_msg);
             break;
         default:
@@ -637,13 +617,9 @@ void IMAPwrapper::fillSingleMsgPart(RecPart&target_part,mailimap_body_type_msg*w
     if (!which) {
         return;
     }
-//    QString sub;
-//    sub = which->bd_media_text;
-//    target_part.setSubtype(sub.lower());
+    target_part.setSubtype("rfc822");
     qDebug("Message part");
     /* we set this type to text/plain */
-    target_part.setType("text");
-    target_part.setSubtype("plain");
     target_part.setLines(which->bd_lines);
     fillBodyFields(target_part,which->bd_fields);    
 }
