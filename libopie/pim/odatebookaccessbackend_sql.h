@@ -6,7 +6,10 @@
 
 #include "odatebookaccessbackend.h"
 
+namespace Opie { namespace DB {
 class OSQLDriver;
+
+}}
 
 /**
  * This is the default SQL implementation for DateBoook SQL storage
@@ -48,14 +51,14 @@ private:
     QMap<int, QString> m_fieldMap;
     QMap<QString, int> m_reverseFieldMap;
 
-    OSQLDriver* m_driver;
+    Opie::DB::OSQLDriver* m_driver;
 
     class Private;
     Private *d;
 
     void initFields();
     void update();
-    QArray<int> extractUids( OSQLResult& res ) const;
+    QArray<int> extractUids( Opie::DB::OSQLResult& res ) const;
 
 };
 

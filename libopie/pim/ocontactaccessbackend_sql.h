@@ -12,11 +12,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_sql.h,v 1.2 2003-12-08 15:18:11 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_sql.h,v 1.3 2004-03-14 13:50:35 alwin Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_sql.h,v $
- * Revision 1.2  2003-12-08 15:18:11  eilers
+ * Revision 1.3  2004-03-14 13:50:35  alwin
+ * namespace correction
+ *
+ * Revision 1.2  2003/12/08 15:18:11  eilers
  * Committing unfinished sql implementation before merging to libopie2 starts..
  *
  * Revision 1.1  2003/09/22 14:31:16  eilers
@@ -36,9 +39,12 @@
 #include <qlist.h>
 #include <qdict.h>
 
+namespace Opie { namespace DB {
 class OSQLDriver;
 class OSQLResult;
 class OSQLResultItem;
+
+}}
 
 /* the default xml implementation */
 /**
@@ -85,7 +91,7 @@ class OContactAccessBackend_SQL : public OContactAccessBackend {
 	bool reload();
 
  private:
-	QArray<int> extractUids( OSQLResult& res ) const;
+	QArray<int> extractUids( Opie::DB::OSQLResult& res ) const;
 	QMap<int, QString>  requestNonCustom( int uid ) const;
 	QMap<QString, QString>  requestCustom( int uid ) const;
 	void update();
@@ -95,7 +101,7 @@ class OContactAccessBackend_SQL : public OContactAccessBackend {
 	QString m_fileName;
 	QArray<int> m_uids;
 
-	OSQLDriver* m_driver;
+	Opie::DB::OSQLDriver* m_driver;
 };
 
 #endif

@@ -10,11 +10,14 @@
  *      version 2 of the License, or (at your option) any later version.
  * =====================================================================
  * =====================================================================
- * Version: $Id: odatebookaccessbackend_sql.cpp,v 1.3 2003-12-22 11:41:39 eilers Exp $
+ * Version: $Id: odatebookaccessbackend_sql.cpp,v 1.4 2004-03-14 13:50:35 alwin Exp $
  * =====================================================================
  * History:
  * $Log: odatebookaccessbackend_sql.cpp,v $
- * Revision 1.3  2003-12-22 11:41:39  eilers
+ * Revision 1.4  2004-03-14 13:50:35  alwin
+ * namespace correction
+ *
+ * Revision 1.3  2003/12/22 11:41:39  eilers
  * Fixing stupid bug, found by sourcode review..
  *
  * Revision 1.2  2003/12/22 10:19:26  eilers
@@ -50,6 +53,7 @@
 #include "orecur.h"
 #include "odatebookaccessbackend_sql.h"
 
+using namespace Opie::DB;
 
 
 ODateBookAccessBackend_SQL::ODateBookAccessBackend_SQL( const QString& ,

@@ -5,9 +5,14 @@
 
 #include "otodoaccessbackend.h"
 
+namespace Opie{
+namespace DB {
 class OSQLDriver;
 class OSQLResult;
 class OSQLResultItem;
+}
+}
+
 class OTodoAccessBackendSQL : public OTodoAccessBackend {
 public:
     OTodoAccessBackendSQL( const QString& file );
@@ -40,14 +45,14 @@ private:
     void update()const;
     void fillDict();
     inline bool date( QDate& date, const QString& )const;
-    inline OTodo todo( const OSQLResult& )const;
-    inline OTodo todo( OSQLResultItem& )const;
-    inline QArray<int> uids( const OSQLResult& )const;
+    inline OTodo todo( const Opie::DB::OSQLResult& )const;
+    inline OTodo todo( Opie::DB::OSQLResultItem& )const;
+    inline QArray<int> uids( const Opie::DB::OSQLResult& )const;
     OTodo todo( int uid )const;
     QBitArray sup() const;
 
     QAsciiDict<int> m_dict;
-    OSQLDriver* m_driver;
+    Opie::DB::OSQLDriver* m_driver;
     QArray<int> m_uids;
     bool m_dirty : 1;
 };

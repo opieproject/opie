@@ -10,11 +10,14 @@
  *      version 2 of the License, or (at your option) any later version.
  * =====================================================================
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_sql.cpp,v 1.4 2003-12-22 10:19:26 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_sql.cpp,v 1.5 2004-03-14 13:50:35 alwin Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_sql.cpp,v $
- * Revision 1.4  2003-12-22 10:19:26  eilers
+ * Revision 1.5  2004-03-14 13:50:35  alwin
+ * namespace correction
+ *
+ * Revision 1.4  2003/12/22 10:19:26  eilers
  * Finishing implementation of sql-backend for datebook. But I have to
  * port the PIM datebook application to use it, before I could debug the
  * whole stuff.
@@ -57,7 +60,7 @@
 #include <opie2/osqlmanager.h>
 #include <opie2/osqlquery.h>
 
-
+using namespace Opie::DB;
 
 
 // If defined, we use a horizontal table ( uid, attr1, attr2, attr3, ..., attrn ) instead

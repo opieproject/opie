@@ -13,6 +13,7 @@
 #include "opimnotifymanager.h"
 #include "orecur.h"
 
+using namespace Opie::DB;
 /*
  * first some query
  * CREATE query
