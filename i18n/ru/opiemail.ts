@@ -104,7 +104,7 @@
     </message>
     <message>
         <source>No Receiver specified</source>
-        <translation type="unfinished"></translation>
+        <translation>Не задан получатель</translation>
     </message>
 </context>
 <context>
@@ -387,7 +387,9 @@ with that filter will be listet.</source>
         <source>Enter a filter string here.
 Then hit &quot;get newsgroup list&quot; again and only groups starting 
 with that filter will be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите строку фильтра.
+Потом нажмите &quot;получить список групп новостей&quot; снова, и только группы,
+начинающиеся с этой строки, будут показаны.</translation>
     </message>
 </context>
 <context>
@@ -547,15 +549,15 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>ask before downloading large mails</source>
-        <translation type="unfinished"></translation>
+        <translation>спрашивать перед загрузкой больших сообщений</translation>
     </message>
     <message>
         <source>Large mail size (kb):</source>
-        <translation type="unfinished"></translation>
+        <translation>Большой размер (кбайт):</translation>
     </message>
     <message>
         <source> kB</source>
-        <translation type="unfinished"></translation>
+        <translation>кбайт</translation>
     </message>
 </context>
 <context>
@@ -750,7 +752,7 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>E-Mail by %1</source>
-        <translation type="unfinished">E-Mail от %1</translation>
+        <translation>E-Mail от %1</translation>
     </message>
 </context>
 <context>
@@ -797,7 +799,7 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>E-Mail view</source>
-        <translation type="unfinished"></translation>
+        <translation>Вид e-mail</translation>
     </message>
 </context>
 <context>

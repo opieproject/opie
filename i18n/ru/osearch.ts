@@ -67,7 +67,7 @@
     </message>
     <message>
         <source>Case sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Учет регистра</translation>
     </message>
 </context>
 <context>
@@ -133,19 +133,19 @@
     </message>
     <message>
         <source>Show completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать завершенные задачи</translation>
     </message>
     <message>
         <source>Show past events</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать события из прошлого</translation>
     </message>
     <message>
         <source>Search in dates</source>
-        <translation type="unfinished"></translation>
+        <translation>Искать в датах</translation>
     </message>
     <message>
         <source>Search content</source>
-        <translation type="unfinished"></translation>
+        <translation>Искать содержимое</translation>
     </message>
 </context>
 </TS>

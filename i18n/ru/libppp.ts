@@ -127,39 +127,39 @@
     <name>PPPDialingGUI</name>
     <message>
         <source>PPPDialing</source>
-        <translation type="unfinished"></translation>
+        <translation>PPP набор</translation>
     </message>
     <message>
         <source>Dialing</source>
-        <translation type="unfinished"></translation>
+        <translation>Набор</translation>
     </message>
     <message>
         <source>GPRS</source>
-        <translation type="unfinished"></translation>
+        <translation>GPRS</translation>
     </message>
     <message>
         <source>APN</source>
-        <translation type="unfinished"></translation>
+        <translation>APN</translation>
     </message>
     <message>
         <source>Dialup</source>
-        <translation type="unfinished"></translation>
+        <translation>Модем</translation>
     </message>
     <message>
         <source>Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Номер</translation>
     </message>
     <message>
         <source>Commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Команды</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>New Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Новая запись</translation>
     </message>
 </context>
 <context>
@@ -182,11 +182,11 @@
     </message>
     <message>
         <source>Commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Команды</translation>
     </message>
     <message>
         <source>Dialing</source>
-        <translation type="unfinished"></translation>
+        <translation>Набор</translation>
     </message>
 </context>
 <context>
@@ -252,19 +252,19 @@
     </message>
     <message>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Местный</translation>
     </message>
     <message>
         <source>Server Overrules</source>
-        <translation type="unfinished"></translation>
+        <translation>Отменяется сервером</translation>
     </message>
     <message>
         <source>Remote</source>
-        <translation type="unfinished"></translation>
+        <translation>Удаленный</translation>
     </message>
     <message>
         <source>Only if not yet set</source>
-        <translation type="unfinished"></translation>
+        <translation>Только если уже не задан</translation>
     </message>
 </context>
 <context>
@@ -279,37 +279,40 @@
     </message>
     <message>
         <source>PPP connection</source>
-        <translation type="unfinished"></translation>
+        <translation>PPP соединение</translation>
     </message>
 </context>
 <context>
     <name>PPPRunGUI</name>
     <message>
         <source>PPPRun</source>
-        <translation type="unfinished"></translation>
+        <translation>PPP Запуск</translation>
     </message>
     <message>
         <source>Upon connect</source>
-        <translation type="unfinished"></translation>
+        <translation>При соединении</translation>
     </message>
     <message>
         <source>Before</source>
-        <translation type="unfinished"></translation>
+        <translation>До</translation>
     </message>
     <message>
         <source>After</source>
-        <translation type="unfinished"></translation>
+        <translation>После</translation>
     </message>
     <message>
         <source>Upon disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>При рассоединении</translation>
     </message>
     <message>
         <source>&lt;UL&gt;
 &lt;LI&gt;Commands run under your &lt;b&gt;real&lt;/b&gt; user id (&lt;b&gt;not&lt;/b&gt; as root)&lt;/LI&gt;
 &lt;LI&gt;Supply the whole path&lt;/LI&gt;
 &lt;/UL&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;UL&gt;
+&lt;LI&gt;Команды, запущенные под вашим &lt;b&gt;настоящим&lt;/b&gt; ID пользователя (&lt;b&gt;не&lt;/b&gt; как root)&lt;/LI&gt;
+&lt;LI&gt;Задайте полный путь&lt;/LI&gt;
+&lt;/UL&gt;</translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>Interface</name>
     <message>
         <source>Restarting interface</source>
-        <translation type="unfinished">Перезапускаю интерфейс</translation>
+        <translation>Перезапускаю интерфейс</translation>
     </message>
 </context>
 <context>

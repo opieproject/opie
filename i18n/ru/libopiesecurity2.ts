@@ -62,19 +62,19 @@
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Добро пожаловать в Opie</translation>
     </message>
     <message>
         <source>Note: this &apos;exit&apos; button only appears during &lt;b&gt;simulations&lt;/b&gt;, like the one we are in. If you don&apos;t succeed a step, remember you can &lt;b&gt;skip&lt;/b&gt; it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Примечание: кнопка &apos;выйти&apos; показана только во время &lt;b&gt;демонстраций&lt;/b&gt;, в которой мы сейчас находимся. Если какая-та стадия неудалась, ее можно &lt;b&gt;пропустить&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>You have &lt;b&gt;not&lt;/b&gt; succeeded enough authentication steps!</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы &lt;b&gt;не&lt;/b&gt; прошли достаточно стадий аутентификации!</translation>
     </message>
     <message>
         <source>Be careful: if this was not a &lt;b&gt;simulation&lt;/b&gt;, you would have to go back through all the steps now.</source>
-        <translation type="unfinished"></translation>
+        <translation>Осторожно: если бы это не было &lt;b&gt;демонстрацией&lt;/b&gt;, вам бы пришлось повторить все стадии сначала.</translation>
     </message>
 </context>
 <context>

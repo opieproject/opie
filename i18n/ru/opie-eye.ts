@@ -3,58 +3,58 @@
     <name>BaseSetup</name>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>секунд</translation>
     </message>
     <message>
         <source>Slideshow timeout:</source>
-        <translation type="unfinished"></translation>
+        <translation>Таймаут презентации:</translation>
     </message>
     <message>
         <source> pixel</source>
-        <translation type="unfinished"></translation>
+        <translation>пикселей</translation>
     </message>
     <message>
         <source>Size of thumbnails:</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер значков:</translation>
     </message>
     <message>
         <source>Show toolbar on startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать панель при запуске</translation>
     </message>
     <message>
         <source>Save status of fullscreen/autorotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить статус полного экрана/авто поворота</translation>
     </message>
 </context>
 <context>
     <name>ImageView</name>
     <message>
         <source>View Image Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Просморт информации</translation>
     </message>
     <message>
         <source>Toggle autorotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить авто поворот</translation>
     </message>
     <message>
         <source>Toggle autoscale</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить авто размер</translation>
     </message>
     <message>
         <source>Switch to next image</source>
-        <translation type="unfinished"></translation>
+        <translation>Следующее изображение</translation>
     </message>
     <message>
         <source>Switch to previous image</source>
-        <translation type="unfinished"></translation>
+        <translation>Предыдущее изображение</translation>
     </message>
     <message>
         <source>Toggle fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>На весь экран</translation>
     </message>
     <message>
         <source>Toggle thumbnail</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать значки</translation>
     </message>
 </context>
 <context>
@@ -93,7 +93,7 @@
     </message>
     <message>
         <source>Start slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Начать презентацию слайдов</translation>
     </message>
 </context>
 <context>
@@ -112,99 +112,99 @@
     </message>
     <message>
         <source>Opie Eye - Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Глаз Opie - Настройки</translation>
     </message>
     <message>
         <source>Imageinfo Keyboard Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация - Действия клавиатуры</translation>
     </message>
     <message>
         <source>Imageview Keyboard Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Изображение - Действия клавиатуры</translation>
     </message>
     <message>
         <source>Go dir up</source>
-        <translation type="unfinished"></translation>
+        <translation>Родительский каталог</translation>
     </message>
     <message>
         <source>Beam file</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправить файл</translation>
     </message>
     <message>
         <source>Show imageinfo</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать информацию</translation>
     </message>
     <message>
         <source>Delete file</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить файл</translation>
     </message>
     <message>
         <source>Display image</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать изображение</translation>
     </message>
     <message>
         <source>Start slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Начать презентацию слайдов</translation>
     </message>
     <message>
         <source>Show toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать панель</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>Thumbnail and Imageinfo</source>
-        <translation type="unfinished"></translation>
+        <translation>Значок и информация</translation>
     </message>
     <message>
         <source>Thumbnail and name</source>
-        <translation type="unfinished"></translation>
+        <translation>Значок и имя</translation>
     </message>
     <message>
         <source>Name only</source>
-        <translation type="unfinished"></translation>
+        <translation>Только имя</translation>
     </message>
     <message>
         <source>Next image</source>
-        <translation type="unfinished"></translation>
+        <translation>Следующее</translation>
     </message>
     <message>
         <source>Previous image</source>
-        <translation type="unfinished"></translation>
+        <translation>Предыдущее</translation>
     </message>
     <message>
         <source>Show images fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать на полный экран</translation>
     </message>
     <message>
         <source>Auto rotate images</source>
-        <translation type="unfinished"></translation>
+        <translation>Авто поворот изображений</translation>
     </message>
     <message>
         <source>Show images unscaled</source>
-        <translation type="unfinished"></translation>
+        <translation>Исходный размер</translation>
     </message>
     <message>
         <source>Show zoomer window when unscaled</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать окно масштаба при исходном размере</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать</translation>
     </message>
     <message>
         <source>Select filesystem</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать файловую систему</translation>
     </message>
     <message>
         <source>Listview mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим списка</translation>
     </message>
 </context>
 <context>
@@ -228,73 +228,73 @@
     </message>
     <message>
         <source>Opie Eye</source>
-        <translation type="unfinished"></translation>
+        <translation>Глаз Opie</translation>
     </message>
     <message>
         <source>DocView</source>
-        <translation type="unfinished"></translation>
+        <translation>Документы</translation>
     </message>
     <message>
         <source>Directory View</source>
-        <translation type="unfinished"></translation>
+        <translation>Каталоги</translation>
     </message>
     <message>
         <source>&lt;center&gt;&lt;b&gt;Be carefull with the following options!&lt;/b&gt;&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;&lt;b&gt;Будьте осторожны со следующими опциями!&lt;/b&gt;&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Show files recursive</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать файлы рекурсивно</translation>
     </message>
     <message>
         <source>Recursion depth:</source>
-        <translation type="unfinished"></translation>
+        <translation>Глубина рекурсии:</translation>
     </message>
     <message>
         <source> directories</source>
-        <translation type="unfinished"></translation>
+        <translation>каталоги</translation>
     </message>
     <message>
         <source>Digital Camera View</source>
-        <translation type="unfinished"></translation>
+        <translation>Цифровая камера</translation>
     </message>
     <message>
         <source>Error no Camera Dir found</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка: Не найден каталог камеры</translation>
     </message>
 </context>
 <context>
     <name>ViewModeButton</name>
     <message>
         <source>Thumbnail and Imageinfo</source>
-        <translation type="unfinished"></translation>
+        <translation>Значок и информация</translation>
     </message>
     <message>
         <source>Thumbnail and Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Значок и имя</translation>
     </message>
     <message>
         <source>Name Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Только имя</translation>
     </message>
 </context>
 <context>
     <name>imageinfo</name>
     <message>
         <source>View Full Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Просморт всего изображения</translation>
     </message>
     <message>
         <source>Image info</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация</translation>
     </message>
     <message>
         <source>Displays an thumbnail of the image</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывает значок изображения</translation>
     </message>
     <message>
         <source>Displays info of selected image</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывает информацию о текущем изображении</translation>
     </message>
 </context>
 </TS>

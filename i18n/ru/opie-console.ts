@@ -266,25 +266,25 @@
     </message>
     <message>
         <source>Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>Строк</translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Колонок</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>Метка</translation>
     </message>
     <message>
         <source>Q Keycode</source>
         <comment>Qt Key Code for the OnScreen Keyboard</comment>
-        <translation type="unfinished"></translation>
+        <translation>Код клавиши Qt</translation>
     </message>
     <message>
         <source>Unicode Value</source>
         <comment>The Unicode value of the key</comment>
-        <translation type="unfinished"></translation>
+        <translation>Значение Юникода</translation>
     </message>
 </context>
 <context>
@@ -379,15 +379,15 @@
     </message>
     <message>
         <source>4800 baud</source>
-        <translation type="unfinished">4800 бод</translation>
+        <translation>4800 бод</translation>
     </message>
     <message>
         <source>2400 baud</source>
-        <translation type="unfinished">2400 бод</translation>
+        <translation>2400 бод</translation>
     </message>
     <message>
         <source>1200 baud</source>
-        <translation type="unfinished">1200 бод</translation>
+        <translation>1200 бод</translation>
     </message>
 </context>
 <context>
@@ -524,15 +524,15 @@
     </message>
     <message>
         <source>Start log</source>
-        <translation type="unfinished"></translation>
+        <translation>Начать журнал</translation>
     </message>
     <message>
         <source>Stop log</source>
-        <translation type="unfinished"></translation>
+        <translation>Закончить журнал</translation>
     </message>
     <message>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Журнал</translation>
     </message>
 </context>
 <context>
@@ -832,11 +832,11 @@
     </message>
     <message>
         <source>&lt;qt&gt;Dialing the number failed.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Набор номера неудался.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Fixing up Embedix</source>
-        <translation type="unfinished"></translation>
+        <translation>Подправляю Embedix</translation>
     </message>
 </context>
 <context>

@@ -115,7 +115,7 @@ Pres: </source>
     </message>
     <message>
         <source> kPa</source>
-        <translation type="unfinished"></translation>
+        <translation>кПа</translation>
     </message>
 </context>
 </TS>

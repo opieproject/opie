@@ -64,23 +64,23 @@
     </message>
     <message>
         <source>Selected devices with gprs capability</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбранные устройства с GPRS возможностями</translation>
     </message>
     <message>
         <source>Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Адрес</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Канал</translation>
     </message>
     <message>
         <source>Addresses</source>
-        <translation type="unfinished"></translation>
+        <translation>Адреса</translation>
     </message>
 </context>
 <context>
@@ -98,7 +98,7 @@
     <name>BluetoothRFCOMMRun</name>
     <message>
         <source>Select device to connect to</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите устройство, к которому подсоединиться</translation>
     </message>
 </context>
 </TS>

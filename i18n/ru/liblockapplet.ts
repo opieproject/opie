@@ -3,11 +3,11 @@
     <name>LockMenuApplet</name>
     <message>
         <source>Lock shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Ссылка на блокировку</translation>
     </message>
     <message>
         <source>Lock</source>
-        <translation type="unfinished"></translation>
+        <translation>Заблокировать</translation>
     </message>
 </context>
 </TS>

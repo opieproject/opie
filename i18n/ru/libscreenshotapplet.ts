@@ -47,11 +47,11 @@
     </message>
     <message>
         <source>Opie drawpad</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie холст</translation>
     </message>
     <message>
         <source>Please set &lt;b&gt;QWS_DISPLAY&lt;/b&gt; environmental variable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста задайте переменную среды &lt;b&gt;QWS_DISPLAY&lt;/b&gt;.</translation>
     </message>
 </context>
 </TS>

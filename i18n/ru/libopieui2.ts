@@ -500,19 +500,19 @@ and </source>
     <name>Opie::Ui::OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation type="unfinished">ФайлДиалог</translation>
+        <translation>ФайлДиалог</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Открыть</translation>
+        <translation>Открыть</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Сохранить</translation>
+        <translation>Сохранить</translation>
     </message>
     <message>
         <source>Select Directory</source>
-        <translation type="unfinished">Выбрать каталог</translation>
+        <translation>Выбрать каталог</translation>
     </message>
 </context>
 <context>
@@ -526,15 +526,15 @@ and </source>
     <name>Opie::Ui::OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation type="unfinished">Стиль</translation>
+        <translation>Стиль</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Размер</translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="unfinished">А ещё хорошо уметь всем на зависть чётко и складно писать буквы и цифры!</translation>
+        <translation>А ещё хорошо уметь всем на зависть чётко и складно писать буквы и цифры!</translation>
     </message>
 </context>
 <context>

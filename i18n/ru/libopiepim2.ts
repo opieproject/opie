@@ -592,103 +592,103 @@ and </source>
     <name>Opie::OPimMainWindow</name>
     <message>
         <source>Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Запись</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Все</translation>
     </message>
     <message>
         <source>Click here to view all items.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы увидеть все записи.</translation>
     </message>
     <message>
         <source>Click here to view items belonging to %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы увидеть все записи, принадлежащие %1.</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Не сохранен</translation>
     </message>
     <message>
         <source>Click here to view all unfiled items.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Нажмите, чтобы увидеть все несохраненные записи.</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Вид</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать</translation>
     </message>
     <message>
         <source>Click here to create a new item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы создать новую запись.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Правка</translation>
     </message>
     <message>
         <source>Click here to edit the selected item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы отредактировать выбранную запись.</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Сделать копию</translation>
     </message>
     <message>
         <source>Click here to duplicate the selected item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы сделать копию выбранной записи.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Click here to delete the selected item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы удалить выбранную запись.</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправить</translation>
     </message>
     <message>
         <source>Click here to transmit the selected item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы передать выбранную запись.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Найти</translation>
     </message>
     <message>
         <source>Click here to search for an item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите для поиска записи.</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Настроить</translation>
     </message>
     <message>
         <source>Click here to set your preferences for this application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы задать настройки для этого приложения.</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Фильтр</translation>
     </message>
     <message>
         <source>Click here to filter the items displayed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы отфильтровать отображаемые записи.</translation>
     </message>
     <message>
         <source>Filter Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки фильтра</translation>
     </message>
     <message>
         <source>Click here to modify the current filter settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы изменить настройки текущего фильтра.</translation>
     </message>
 </context>
 <context>
@@ -1133,31 +1133,31 @@ and </source>
     </message>
     <message>
         <source>Has a due-date</source>
-        <translation type="unfinished"></translation>
+        <translation>Имеет конечный срок</translation>
     </message>
     <message>
         <source>No due-date</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет конечного срока</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Выполнен</translation>
     </message>
     <message>
         <source>Not completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не выполнен</translation>
     </message>
     <message>
         <source>No reccurrence</source>
-        <translation type="unfinished"></translation>
+        <translation>Не повторяется</translation>
     </message>
     <message>
         <source>No start-date</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет даты начала</translation>
     </message>
     <message>
         <source>No completed-date</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет даты завершения</translation>
     </message>
 </context>
 <context>

@@ -152,20 +152,21 @@
     </message>
     <message>
         <source>Find by Ingredient</source>
-        <translation type="unfinished"></translation>
+        <translation>Искать по ингредиентам</translation>
     </message>
     <message>
         <source>Edit Drink</source>
-        <translation type="unfinished"></translation>
+        <translation>Правка напитка</translation>
     </message>
     <message>
         <source>Failed to write to drink database!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу записать базу данных напитков!
+</translation>
     </message>
     <message>
         <source>Ingredient</source>
-        <translation type="unfinished"></translation>
+        <translation>Ингредиент</translation>
     </message>
 </context>
 <context>

@@ -165,7 +165,7 @@
     </message>
     <message>
         <source>Cable connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Проводное соединение</translation>
     </message>
 </context>
 </TS>

@@ -7,11 +7,11 @@
     </message>
     <message>
         <source>State should be off</source>
-        <translation type="unfinished"></translation>
+        <translation>Статус должен быть &quot;выкл.&quot;</translation>
     </message>
     <message>
         <source>State should at least be off</source>
-        <translation type="unfinished"></translation>
+        <translation>Статус должен быть хотя бы &quot;выкл.&quot;</translation>
     </message>
 </context>
 <context>
@@ -50,27 +50,27 @@
     </message>
     <message>
         <source>&lt;p&gt;Nodes that provide working IP connection&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ноды, которые обеспечивают рабочее IP соединение&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Fully configured network profile&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Полностью настроенный сетевой профиль&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Connection to GPRS device</source>
-        <translation type="unfinished"></translation>
+        <translation>Соединение с GPRS устройством</translation>
     </message>
     <message>
         <source>&lt;p&gt;Connection to a GPRS capable device&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Соединение с GPRS-совместимым устройством&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Today Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка Сегодня</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The plugin &apos;%1&apos; caused Today to crash. It could be that the plugin is not properly installed.&lt;br&gt;Today tries to continue loading plugins.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Плагин &apos;%1&apos; вызвал обрушение программы Сегодня. Возможно, что плагин неправильно установлен.&lt;br&gt;Сегодня попробует продолжить загрузку плагинов.&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>
@@ -101,11 +101,11 @@
     </message>
     <message>
         <source>Inactive</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключен</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Включен</translation>
     </message>
 </context>
 </TS>

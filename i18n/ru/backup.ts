@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Backup and Restore</source>
-        <translation>Резервное копирование</translation>
+        <translation>Архивация и восстановление</translation>
     </message>
     <message>
         <source>Error from System:
@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Backup Failed!</source>
-        <translation>Сохранить не удалось!</translation>
+        <translation>Архивация не удалась!</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Backup and Restore.. Failed !!</source>
-        <translation>Резервное копирование... Сбой !!</translation>
+        <translation>Архивация и восстановление.. Сбой !!</translation>
     </message>
     <message>
         <source>Backup Successfull.</source>
@@ -56,7 +56,7 @@
     </message>
     <message>
         <source>Backup Successful.</source>
-        <translation>Сохранили успешно.</translation>
+        <translation>Архивация прошла успешно.</translation>
     </message>
     <message>
         <source>Restore Successful.</source>
@@ -64,11 +64,11 @@
     </message>
     <message>
         <source>Backing up...</source>
-        <translation type="unfinished"></translation>
+        <translation>Архивирую...</translation>
     </message>
     <message>
         <source>Restore Backup...</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстанавливаю...</translation>
     </message>
 </context>
 <context>
@@ -79,7 +79,7 @@
     </message>
     <message>
         <source>Backup</source>
-        <translation>Сохранить</translation>
+        <translation>Архивировать</translation>
     </message>
     <message>
         <source>Applications</source>
@@ -135,19 +135,19 @@
     </message>
     <message>
         <source>Destination</source>
-        <translation type="unfinished"></translation>
+        <translation>Место назначения</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <source>User Data (Configuration + PIM)</source>
-        <translation type="unfinished"></translation>
+        <translation>Данные пользователя (конфигурация + PIM)</translation>
     </message>
     <message>
         <source>Full Backup (Root File System)</source>
-        <translation type="unfinished"></translation>
+        <translation>Полный архив (корневая файловая система)</translation>
     </message>
 </context>
 <context>

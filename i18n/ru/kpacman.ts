@@ -50,11 +50,11 @@
     </message>
     <message>
         <source>&amp;Pause in Background</source>
-        <translation>&amp;Приостановить в фоне</translation>
+        <translation>&amp;Приостановить</translation>
     </message>
     <message>
         <source>&amp;Continue in Foreground</source>
-        <translation type="unfinished">П&amp;родолжить</translation>
+        <translation>П&amp;родолжить</translation>
     </message>
     <message>
         <source>Change &amp;keys...</source>
@@ -223,11 +223,7 @@ or is of an unknown format.</source>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

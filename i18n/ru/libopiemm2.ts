@@ -4,152 +4,162 @@
     <message>
         <source>Colormode: Color
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Цветовой режим: Цвет
+</translation>
     </message>
     <message>
         <source>Colormode: Black and white
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Цветовой режим: Ч/Б
+</translation>
     </message>
     <message>
         <source>Basic</source>
-        <translation type="unfinished"></translation>
+        <translation>Минимальное</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Обычное</translation>
     </message>
     <message>
         <source>Fine</source>
-        <translation type="unfinished"></translation>
+        <translation>Четкое</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестный</translation>
     </message>
     <message>
         <source>Quality: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Качество: %1
+</translation>
     </message>
     <message>
         <source>Daylight</source>
-        <translation type="unfinished"></translation>
+        <translation>Дневной свет</translation>
     </message>
     <message>
         <source>Fluorescent</source>
-        <translation type="unfinished"></translation>
+        <translation>Флуоресцентный</translation>
     </message>
     <message>
         <source>Tungsten</source>
-        <translation type="unfinished"></translation>
+        <translation>Вольфрам</translation>
     </message>
     <message>
         <source>Standard light A</source>
-        <translation type="unfinished"></translation>
+        <translation>Стандартный свет A</translation>
     </message>
     <message>
         <source>Standard light B</source>
-        <translation type="unfinished"></translation>
+        <translation>Стандартный свет B</translation>
     </message>
     <message>
         <source>Standard light C</source>
-        <translation type="unfinished"></translation>
+        <translation>Стандартный свет C</translation>
     </message>
     <message>
         <source>D55</source>
-        <translation type="unfinished"></translation>
+        <translation>D55</translation>
     </message>
     <message>
         <source>D65</source>
-        <translation type="unfinished"></translation>
+        <translation>D65</translation>
     </message>
     <message>
         <source>D75</source>
-        <translation type="unfinished"></translation>
+        <translation>D75</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Другой</translation>
     </message>
     <message>
         <source>White Balance: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Баланс белого: %1
+</translation>
     </message>
     <message>
         <source>Average</source>
-        <translation type="unfinished"></translation>
+        <translation>Средний</translation>
     </message>
     <message>
         <source>Center weighted average</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Средний с утяжелением центра</translation>
     </message>
     <message>
         <source>Spot</source>
-        <translation type="unfinished"></translation>
+        <translation>Пятно</translation>
     </message>
     <message>
         <source>MultiSpot</source>
-        <translation type="unfinished"></translation>
+        <translation>Много пятен</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Модель</translation>
     </message>
     <message>
         <source>Partial</source>
-        <translation type="unfinished"></translation>
+        <translation>Частичный</translation>
     </message>
     <message>
         <source>Metering Mode: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Режим измерения: %1
+</translation>
     </message>
     <message>
         <source>Not defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Не задан</translation>
     </message>
     <message>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Вручную</translation>
     </message>
     <message>
         <source>Normal progam</source>
-        <translation type="unfinished"></translation>
+        <translation>Обычная программа</translation>
     </message>
     <message>
         <source>Aperture priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Приоритет апертуры</translation>
     </message>
     <message>
         <source>Shutter priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Приоритет затвора</translation>
     </message>
     <message>
         <source>Creative progam
 (biased toward fast shutter speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Творческая программа
+(предпочтение высокой скорости затвора)</translation>
     </message>
     <message>
         <source>Action progam
 (biased toward fast shutter speed)</source>
-        <translation type="unfinished"></translation>
+        <translation>Программа движения
+(предпочтение высокой скорости затвора)</translation>
     </message>
     <message>
         <source>Portrait mode
 (for closeup photos with the background out of focus)</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим портрета
+(для близких снимков с размытым фонов)</translation>
     </message>
     <message>
         <source>Landscape mode
 (for landscape photos with the background in focus)</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим пейзажа
+(для панорамный снимков с четким фоном)</translation>
     </message>
     <message>
         <source>Exposure Program: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Программа экспозиции: %1
+</translation>
     </message>
 </context>
 </TS>

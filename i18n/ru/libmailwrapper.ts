@@ -156,19 +156,20 @@
     <message>
         <source>Download mail?
 It is %1 kByte but your limit is %2 kByte</source>
-        <translation type="unfinished"></translation>
+        <translation>Скачать почту?
+Ее размер %1 кбайт, но ваш лимит %2 кбайт</translation>
     </message>
     <message>
         <source>Download message</source>
-        <translation type="unfinished"></translation>
+        <translation>Скачать сообщение</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет</translation>
     </message>
 </context>
 <context>

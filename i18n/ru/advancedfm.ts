@@ -302,67 +302,67 @@ to
     </message>
     <message>
         <source>&lt;p&gt;%1 does not exist&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 не существует&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;Advanced FileManager is copyright 2002-2003 by L.J.Potter&lt;llornkcor@handhelds.org&gt; and is licensed by the GPL&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Advanced FileManager копирайт 2002-2003 L.J.Potter&lt;llornkcor@handhelds.org&gt;. Лицензирован на условиях GPL.&lt;/P&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Cannot remove current directory from bookmarks. It is not bookmarked!&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Не могу убрать текущий каталог из закладок. Нету такой закладки!&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновить</translation>
     </message>
     <message>
         <source>&lt;p&gt;Really delete %1 files?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Действительно удалить %1 файлов?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Really delete %1 and all it&apos;s contents?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Действительно удалить %1 и все содержимое?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Really delete %1?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Действительно удалить %1?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Really copy %1 files?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Действительно копировать %1 файлов?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 already  exists. Ok to overwrite?&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 уже  существует. Переписать?&lt;/P&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;Could not copy %1 to %2&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Не могу скопировать %1 в %2&lt;/P&gt;</translation>
     </message>
     <message>
         <source>Copy %1 As</source>
-        <translation type="unfinished"></translation>
+        <translation>Копировать %1 как</translation>
     </message>
     <message>
         <source>&lt;P&gt; %1 already exists. Ok to overwrite?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;%1 уже существует. Переписать?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Could not copy %1 to %2&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Не могу скопировать %1 в %2&lt;/P&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt; %1 already exists. Do you really want to delete it?&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt; %1 уже существует. Удалить его?&lt;/P&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Could not move %1&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Не могу переместить %1&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Could not copy %1 to %2&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Не могу скопировать %1 в %2&lt;/p&gt;</translation>
     </message>
 </context>
 <context>

@@ -3,7 +3,7 @@
     <name>DiceWidget</name>
     <message>
         <source>Roll</source>
-        <translation type="unfinished"></translation>
+        <translation>Кинуть кости</translation>
     </message>
 </context>
 <context>
@@ -14,7 +14,7 @@
     </message>
     <message>
         <source>Only three rolls per turn allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешено только три броска за ход.</translation>
     </message>
 </context>
 </TS>

@@ -34,7 +34,7 @@
     </message>
     <message>
         <source>VPN connection</source>
-        <translation type="unfinished"></translation>
+        <translation>VPN соединение</translation>
     </message>
 </context>
 </TS>

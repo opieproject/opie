@@ -61,15 +61,15 @@
     <name>IRCHistoryLineEdit</name>
     <message>
         <source>Next Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Следующая вкладка</translation>
     </message>
     <message>
         <source>Previous Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Предыдущая вкладка</translation>
     </message>
     <message>
         <source>Close Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть вкладку</translation>
     </message>
 </context>
 <context>
@@ -236,100 +236,101 @@
     </message>
     <message>
         <source>Server %1 version %2 supports usermodes &apos;%3&apos; and channelmodes &apos;%4&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Сервер %1 версии %2 поддерживает режимы пользователей &apos;%3&apos; и режимы канала &apos;%4&apos;</translation>
     </message>
     <message>
         <source>There are %1 operators connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Подключено %1 операторов</translation>
     </message>
     <message>
         <source>There are %1 unknown connection(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 неизвестных соединений</translation>
     </message>
     <message>
         <source>There are %1 channels formed</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 каналов сформировано</translation>
     </message>
     <message>
         <source>Please wait a while and try again</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста подождите и попробуйте снова</translation>
     </message>
     <message>
         <source>Whois %1 (%2@%3)
 Real name: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Whois %1 (%2@%3)
+Настоящее имя: %4</translation>
     </message>
     <message>
         <source>%1 is using server %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 использует сервер %2</translation>
     </message>
     <message>
         <source>%1 is on channels: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 находится на каналах: %2</translation>
     </message>
     <message>
         <source>Names for %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Имена %1: %2</translation>
     </message>
     <message>
         <source>Time on server %1 is %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Время на сервере %1 - %2</translation>
     </message>
     <message>
         <source>Channel or nick %1 doesn&apos;t exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Канал или ник %1 не существует</translation>
     </message>
     <message>
         <source>There is no history information for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет информации об истории %1</translation>
     </message>
     <message>
         <source>Unknown command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестная команда: %1</translation>
     </message>
     <message>
         <source>Can&apos;t change nick to %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу сменить ник на %1: %2</translation>
     </message>
     <message>
         <source>You&apos;re not on channel %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы не находитесь на канале %1</translation>
     </message>
     <message>
         <source>[%1] Operation not permitted, you don&apos;t have enough channel privileges</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Действие не разрешено, у вас недостаточно привилегий на канале</translation>
     </message>
     <message>
         <source>Connected to</source>
-        <translation type="unfinished"></translation>
+        <translation>Подключен к</translation>
     </message>
     <message>
         <source>%1 has been idle for %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 неактивен %2</translation>
     </message>
     <message>
         <source>%1 signed on %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 зарегистрировался на %2</translation>
     </message>
     <message>
         <source>CTCP PING with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP PING с неизвестным человеком - десинхронизирован?</translation>
     </message>
     <message>
         <source>CTCP PING with unknown channel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP PING с неизвестным каналом - десинхронизирован?</translation>
     </message>
     <message>
         <source>CTCP PING with bad recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP ACTION с плохим адресатом</translation>
     </message>
     <message>
         <source>Received a CTCP VERSION request from </source>
-        <translation type="unfinished"></translation>
+        <translation>Получил запрос CTCP VERSION от</translation>
     </message>
     <message>
         <source>Malformed DCC request from </source>
-        <translation type="unfinished"></translation>
+        <translation>Неверный DCC запрос от</translation>
     </message>
 </context>
 <context>
@@ -501,22 +502,22 @@ comma separated list of channel
     </message>
     <message>
         <source>Connecting to</source>
-        <translation type="unfinished"></translation>
+        <translation>Подключаюсь к</translation>
     </message>
 </context>
 <context>
     <name>IRCSession</name>
     <message>
         <source>You are now known as %1</source>
-        <translation type="unfinished">Вы теперб известны как %1</translation>
+        <translation>Вы теперь известны как %1</translation>
     </message>
     <message>
         <source>Nickname change of an unknown person</source>
-        <translation type="unfinished">Смена клички неизвестного человека</translation>
+        <translation>Смена ника неизвестного человека</translation>
     </message>
     <message>
         <source>%1 is now known as %2</source>
-        <translation type="unfinished">%1 теперь известен как %2</translation>
+        <translation>%1 теперь известен как %2</translation>
     </message>
 </context>
 <context>
@@ -599,11 +600,11 @@ comma separated list of channel
     </message>
     <message>
         <source>Display time in chat log</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать время в журнале чата</translation>
     </message>
     <message>
         <source>Keyboard Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Клавиатурные команды</translation>
     </message>
 </context>
 <context>
@@ -656,27 +657,27 @@ comma separated list of channel
     <name>QObject</name>
     <message>
         <source> User</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользователь</translation>
     </message>
     <message>
         <source>Opie IRC</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie IRC</translation>
     </message>
     <message>
         <source> gives channel operator status to </source>
-        <translation type="unfinished"></translation>
+        <translation>дает статус оператора канала</translation>
     </message>
     <message>
         <source> removes channel operator status from </source>
-        <translation type="unfinished"></translation>
+        <translation>забирает статус оператора канала у</translation>
     </message>
     <message>
         <source> gives voice to </source>
-        <translation type="unfinished"></translation>
+        <translation>дает голос</translation>
     </message>
     <message>
         <source> removes voice from </source>
-        <translation type="unfinished"></translation>
+        <translation>забирает голос у</translation>
     </message>
 </context>
 </TS>

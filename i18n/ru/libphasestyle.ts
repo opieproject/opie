@@ -4,7 +4,7 @@
     <message>
         <source>Phase</source>
         <comment>Name of the style Phase</comment>
-        <translation type="unfinished"></translation>
+        <translation>Фаза</translation>
     </message>
 </context>
 </TS>

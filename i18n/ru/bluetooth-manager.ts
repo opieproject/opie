@@ -130,7 +130,7 @@
     </message>
     <message>
         <source>Bluetooth Basic Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Основная настройка Bluetooth</translation>
     </message>
 </context>
 <context>

@@ -31,11 +31,11 @@
     </message>
     <message>
         <source>New card: SD/MMC</source>
-        <translation type="unfinished">Новая карта: SD/MMC</translation>
+        <translation>Новая карта: SD/MMC</translation>
     </message>
     <message>
         <source>Ejected: SD/MMC</source>
-        <translation type="unfinished">Выдвинута: SD/MMC</translation>
+        <translation>Выдвинута: SD/MMC</translation>
     </message>
 </context>
 </TS>
