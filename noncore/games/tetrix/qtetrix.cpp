@@ -166,11 +166,9 @@ void QTetrix::gameOver()
 {
 	OHighscore *hs = new OHighscore( showScore->text().toInt() );
 	if ( hs->isNewhighscore )
-	{
 		hs->insertData( hs->getName(), showScore->text().toInt() );
-	}
-		OHighscoreDialog hscdlg( hs, this, "OHighscoreDialog", true );
-		hscdlg.exec();
+	OHighscoreDialog hscdlg( hs, this, "OHighscoreDialog", true );
+	hscdlg.exec();
 }
 
 void QTetrix::quit()
