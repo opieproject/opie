@@ -23,7 +23,7 @@
 #include <qlist.h>
 #include <qlistview.h>
 #include <qpe/applnk.h>
-
+#include <qpe/config.h>
 
 class PlayListSelection : public QListView {
     Q_OBJECT
@@ -37,7 +37,9 @@ public slots:
     void removeSelected();   // Remove a media file from the playlist
     void moveSelectedUp();   // Move the media file up the playlist so it is played earlier
     void moveSelectedDown(); // Move the media file down the playlist so it is played later
-	void unSelect();
+  void unSelect();
+  void writeCurrent( Config &);
+  void setSelectedItem( const QString & );
     bool prev();
     bool next();
     bool first();

@@ -32,6 +32,7 @@
 #include <math.h>
 #include <assert.h>
 #include <qapplication.h>
+#include <qpe/config.h>
 
 //#define HAVE_MMAP
 
@@ -47,6 +48,7 @@ extern "C" {
 
 
 #define MPEG_BUFFER_SIZE    65536
+//#define MPEG_BUFFER_SIZE    32768 //16384 // 8192
 //#define debugMsg(a)     qDebug(a)
 #define debugMsg(a)
 
@@ -165,7 +167,10 @@ bool LibMadPlugin::isFileSupported( const QString& path ) {
 
 bool LibMadPlugin::open( const QString& path ) {
     debugMsg( "LibMadPlugin::open" );
-
+    Config cfg("MediaPlayer");
+    cfg.setGroup("Options");
+    bufferSize = cfg.readNumEntry("MPeg_BufferSize",MPEG_BUFFER_SIZE);
+    qDebug("buffer size is %d", bufferSize);
     d->bad_last_frame = 0;
     d->flush = TRUE;
     info = QString( "" );
@@ -197,7 +202,7 @@ bool LibMadPlugin::open( const QString& path ) {
 #endif
 
     if (d->input.data == 0) {
-  d->input.data = (unsigned char *)malloc(MPEG_BUFFER_SIZE);
+        d->input.data = (unsigned char *)malloc( bufferSize /*MPEG_BUFFER_SIZE*/);
   if (d->input.data == 0) {
       qDebug("error allocating input buffer");
       return FALSE;
@@ -369,7 +374,7 @@ bool LibMadPlugin::read() {
   }
 
   do {
-    len = ::read(d->input.fd, d->input.data + d->input.length, MPEG_BUFFER_SIZE - d->input.length);
+    len = ::read(d->input.fd, d->input.data + d->input.length, bufferSize /* MPEG_BUFFER_SIZE*/ - d->input.length);
   }
   while (len == -1 && errno == EINTR);
 
@@ -380,7 +385,7 @@ bool LibMadPlugin::read() {
   else if (len == 0) {
     d->input.eof = 1;
 
-    assert(MPEG_BUFFER_SIZE - d->input.length >= MAD_BUFFER_GUARD);
+    assert(bufferSize /*MPEG_BUFFER_SIZE*/ - d->input.length >= MAD_BUFFER_GUARD);
 
     while (len < MAD_BUFFER_GUARD)
       d->input.data[d->input.length + len++] = 0;

@@ -25,6 +25,7 @@
 #include <qpe/fileselector.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/lnkproperties.h>
+#include <qpe/storage.h>
 
 #include <qpe/applnk.h>
 #include <qpe/config.h>
@@ -216,6 +217,9 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     audioView->setColumnAlignment(1, Qt::AlignRight);
     audioView->setColumnAlignment(2, Qt::AlignRight);
     audioView->setAllColumnsShowFocus(TRUE);
+//     audioView->setMultiSelection( TRUE );
+//     audioView->setSelectionMode( QListView::Extended);
+    
     tabWidget->insertTab(aTab,tr("Audio"));
 
     QPEApplication::setStylusOperation( audioView->viewport(),QPEApplication::RightOnHold);
@@ -238,6 +242,9 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     videoView->setColumnAlignment(1, Qt::AlignRight);
     videoView->setColumnAlignment(2, Qt::AlignRight);
     videoView->setAllColumnsShowFocus(TRUE);
+//     videoView->setMultiSelection( TRUE );
+//     videoView->setSelectionMode( QListView::Extended);
+
     QPEApplication::setStylusOperation( videoView->viewport(),QPEApplication::RightOnHold);
     connect( videoView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
              this,SLOT( viewPressed(int, QListViewItem *, const QPoint&, int)) );
@@ -318,54 +325,54 @@ void PlayListWidget::initializeStates() {
 
 void PlayListWidget::readConfig( Config& cfg ) {
     cfg.setGroup("PlayList");
-    
+    QString currentString = cfg.readEntry("current", "" );
     int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
-    
     for ( int i = 0; i < noOfFiles; i++ ) {
         QString entryName;
         entryName.sprintf( "File%i", i + 1 );
         QString linkFile = cfg.readEntry( entryName );
         DocLnk lnk( linkFile );
-        if ( lnk.isValid() )
+        if ( lnk.isValid() ) {
             d->selectedFiles->addToSelection( lnk );
+        }
     }
+//    d->selectedFiles->setSelectedItem( (const QString &)currentString);
 }
 
 
 void PlayListWidget::writeConfig( Config& cfg ) const {
+
+    d->selectedFiles->writeCurrent( cfg);
     cfg.setGroup("PlayList");
-
     int noOfFiles = 0;
-
     d->selectedFiles->first();
     do {
-  const DocLnk *lnk = d->selectedFiles->current();
-  if ( lnk ) {
-      QString entryName;
-      entryName.sprintf( "File%i", noOfFiles + 1 );
-      cfg.writeEntry( entryName, lnk->linkFile() );
-      // if this link does exist, add it so we have the file
-      // next time...
-      if ( !QFile::exists( lnk->linkFile() ) ) {
-    // the way writing lnks doesn't really check for out
-    // of disk space, but check it anyway.
-    if ( !lnk->writeLink() ) {
-        QMessageBox::critical( 0, tr("Out of space"),
-             tr( "There was a problem saving "
-                 "the playlist.\n"
-                 "Your playlist "
-                 "may be missing some entries\n"
-                 "the next time you start it." )
-             );
+        const DocLnk *lnk = d->selectedFiles->current();
+        if ( lnk ) {
+            QString entryName;
+            entryName.sprintf( "File%i", noOfFiles + 1 );
+            qDebug(entryName);
+            cfg.writeEntry( entryName, lnk->linkFile() );
+              // if this link does exist, add it so we have the file
+              // next time...
+            if ( !QFile::exists( lnk->linkFile() ) ) {
+                  // the way writing lnks doesn't really check for out
+                  // of disk space, but check it anyway.
+                if ( !lnk->writeLink() ) {
+                    QMessageBox::critical( 0, tr("Out of space"),
+                                           tr( "There was a problem saving "
+                                               "the playlist.\n"
+                                               "Your playlist "
+                                               "may be missing some entries\n"
+                                               "the next time you start it." )
+                                           );
+                }
+            }      
+            noOfFiles++;
+        }
     }
-      }      
-       noOfFiles++;
-  }
-    } while ( d->selectedFiles->next() );
-    
+    while ( d->selectedFiles->next() );
     cfg.writeEntry("NumberOfFiles", noOfFiles );
-
-   
 }
 
 
@@ -386,17 +393,17 @@ void PlayListWidget::clearList() {
 
 
 void PlayListWidget::addAllToList() {
-    DocLnkSet files;
-    Global::findDocuments(&files, "video/*;audio/*");
-    QListIterator<DocLnk> dit( files.children() );
-    for ( ; dit.current(); ++dit )
-        d->selectedFiles->addToSelection( **dit );
+    DocLnkSet filesAll;
+    Global::findDocuments(&filesAll, "video/*;audio/*");
+    QListIterator<DocLnk> Adit( filesAll.children() );
+    for ( ; Adit.current(); ++Adit )
+        d->selectedFiles->addToSelection( **Adit );
 }
 
 
 void PlayListWidget::addAllMusicToList() {
-    DocLnkSet files;
-    Global::findDocuments(&files, "audio/*");
+//    DocLnkSet files;
+//    Global::findDocuments(&files, "audio/*");
     QListIterator<DocLnk> dit( files.children() );
     for ( ; dit.current(); ++dit )
         d->selectedFiles->addToSelection( **dit );
@@ -404,9 +411,7 @@ void PlayListWidget::addAllMusicToList() {
 
 
 void PlayListWidget::addAllVideoToList() {
-    DocLnkSet files;
-    Global::findDocuments(&files, "video/*");
-    QListIterator<DocLnk> dit( files.children() );
+    QListIterator<DocLnk> dit( vFiles.children() );
     for ( ; dit.current(); ++dit )
         d->selectedFiles->addToSelection( **dit );
 }
@@ -468,15 +473,15 @@ const DocLnk *PlayListWidget::current() { // this is fugly
 //     switch (tabWidget->currentPageIndex()) {
 //          case 0: //playlist
 //          {
-          qDebug("playlist");
-          if ( mediaPlayerState->playlist() ) {
-            return d->selectedFiles->current();
-          }
-          else if ( d->setDocumentUsed && d->current ) {
-              return d->current;
-          } else {
-              return d->files->selected();
-          }
+    qDebug("playlist");
+    if ( mediaPlayerState->playlist() ) {
+        return d->selectedFiles->current();
+    }
+    else if ( d->setDocumentUsed && d->current ) {
+        return d->current;
+    } else {
+        return d->files->selected();
+    }
 //        }
 //        break;
 //        case 1://audio
@@ -512,66 +517,66 @@ const DocLnk *PlayListWidget::current() { // this is fugly
 
 bool PlayListWidget::prev() {
     if ( mediaPlayerState->playlist() ) {
-  if ( mediaPlayerState->shuffled() ) {
-      const DocLnk *cur = current();
-      int j = 1 + (int)(97.0 * rand() / (RAND_MAX + 1.0));
-      for ( int i = 0; i < j; i++ ) {
-    if ( !d->selectedFiles->next() )
-        d->selectedFiles->first();
-      }
-      if ( cur == current() )
-    if ( !d->selectedFiles->next() )
-        d->selectedFiles->first();
-      return TRUE;
-  } else {
-      if ( !d->selectedFiles->prev() ) {
-    if ( mediaPlayerState->looping() ) {
-        return d->selectedFiles->last();
+        if ( mediaPlayerState->shuffled() ) {
+            const DocLnk *cur = current();
+            int j = 1 + (int)(97.0 * rand() / (RAND_MAX + 1.0));
+            for ( int i = 0; i < j; i++ ) {
+                if ( !d->selectedFiles->next() )
+                    d->selectedFiles->first();
+            }
+            if ( cur == current() )
+                if ( !d->selectedFiles->next() )
+                    d->selectedFiles->first();
+            return TRUE;
+        } else {
+            if ( !d->selectedFiles->prev() ) {
+                if ( mediaPlayerState->looping() ) {
+                    return d->selectedFiles->last();
+                } else {
+                    return FALSE;
+                }
+            }
+            return TRUE;
+        }
     } else {
-        return FALSE;
-    }
-      }
-      return TRUE;
-  }
-    } else {
-  return mediaPlayerState->looping();
+        return mediaPlayerState->looping();
     }
 }
 
 
 bool PlayListWidget::next() {
     if ( mediaPlayerState->playlist() ) {
-  if ( mediaPlayerState->shuffled() ) {
-      return prev();
-  } else {
-      if ( !d->selectedFiles->next() ) {
-    if ( mediaPlayerState->looping() ) {
-        return d->selectedFiles->first();
+        if ( mediaPlayerState->shuffled() ) {
+            return prev();
+        } else {
+            if ( !d->selectedFiles->next() ) {
+                if ( mediaPlayerState->looping() ) {
+                    return d->selectedFiles->first();
+                } else {
+                    return FALSE;
+                }
+            }
+            return TRUE;
+        }
     } else {
-        return FALSE;
-    }
-      }
-      return TRUE;
-  }
-    } else {
-  return mediaPlayerState->looping();
+        return mediaPlayerState->looping();
     }
 }
 
 
 bool PlayListWidget::first() {
     if ( mediaPlayerState->playlist() )
-  return d->selectedFiles->first();
+        return d->selectedFiles->first();
     else
-  return mediaPlayerState->looping();
+        return mediaPlayerState->looping();
 }
 
 
 bool PlayListWidget::last() {
     if ( mediaPlayerState->playlist() )
-  return d->selectedFiles->last();
+        return d->selectedFiles->last();
     else
-  return mediaPlayerState->looping();
+        return mediaPlayerState->looping();
 }
 
 
@@ -582,25 +587,29 @@ void PlayListWidget::saveList() {
     fileDlg = new InputDialog(this,tr("Save Playlist"),TRUE, 0);
     fileDlg->exec();
     if( fileDlg->result() == 1 ) {
-    if ( d->current )
-        delete d->current;
+     if ( d->current )
+         delete d->current;
         filename = fileDlg->LineEdit1->text();//+".playlist";
-//        qDebug("saving playlist "+filename+".playlist");
+//         qDebug("saving playlist "+filename+".playlist");
         Config cfg( filename +".playlist");
         writeConfig( cfg );
-        if( playLists->selected()->name() == filename) {
-//            qDebug("same name so delete lnk");
-            QFile().remove(playLists->selected()->file());
-            QFile().remove(playLists->selected()->linkFile());
-            playLists->reread();
-        }
-            
+
+//             qDebug("same name so delete lnk??");
+//         if( playLists->selected()->name() == filename) {
+
+//             qDebug("same name so delete lnk");
+//             QFile().remove(playLists->selected()->file());
+//             QFile().remove(playLists->selected()->linkFile());
+//             playLists->reread();
+//         }
+//        qDebug("new doclnk");            
         DocLnk lnk;
 //        lnk.setComment( "");
         lnk.setFile(QDir::homeDirPath()+"/Settings/"+filename+".playlist.conf"); //sets File property
         lnk.setType("playlist/plain");// hey is this a REGISTERED mime type?!?!? ;D
         lnk.setIcon("mpegplayer/playlist2");
         lnk.setName( filename); //sets file name
+        qDebug(filename);
         if(!lnk.writeLink())
             qDebug("Writing doclink did not work");
       }
@@ -608,8 +617,8 @@ void PlayListWidget::saveList() {
         config.writeEntry("CurrentPlaylist",filename);
         setCaption(tr("OpiePlayer: ")+filename);
         d->selectedFiles->first();
-    if(fileDlg)
-        delete fileDlg;
+     if(fileDlg)
+         delete fileDlg;
 }
 
 void PlayListWidget::loadList( const DocLnk & lnk) {
@@ -621,11 +630,14 @@ void PlayListWidget::loadList( const DocLnk & lnk) {
         clearList();
         Config cfg( name+".playlist");
         readConfig(cfg);
+
         tabWidget->setCurrentPage(0);
+
         Config config( "MediaPlayer" );
         config.writeEntry("CurrentPlaylist", name);
-        d->selectedFiles->first();
+//        d->selectedFiles->first();
     }
+    
 }
 
 void PlayListWidget::setPlaylist( bool shown ) {
@@ -783,7 +795,8 @@ void PlayListWidget::btnPlay(bool b) {
 //            qApp->processEvents();
           d->selectedFiles->removeSelected( );
           tabWidget->setCurrentPage(1);
-      d->selectedFiles->unSelect();
+           audioView->clearSelection();
+//      d->selectedFiles->unSelect();
 //            mediaPlayerState->setPlaying(FALSE);
       }
       break;
@@ -794,7 +807,8 @@ void PlayListWidget::btnPlay(bool b) {
           qApp->processEvents();
           d->selectedFiles->removeSelected( );
           tabWidget->setCurrentPage(2);
-      d->selectedFiles->unSelect();
+           videoView->clearSelection();
+//      d->selectedFiles->unSelect();
 //            mediaPlayerState->setPlaying(FALSE);
       }
       break;
@@ -905,16 +919,22 @@ void PlayListWidget::listDelete() {
 void PlayListWidget::populateAudioView() {
 //     if(files)
 //         files.~DocLnkSet();
+    StorageInfo storageInfo;
+    const QList<FileSystem> &fs = storageInfo.fileSystems();
+
     Global::findDocuments(&files, "audio/*");
     QListIterator<DocLnk> dit( files.children() );
+    QListIterator<FileSystem> it ( fs );
     audioView->clear();
     QString storage;
     for ( ; dit.current(); ++dit ) {
+        for( ; it.current(); ++it ){
+            const QString name = (*it)->name();
+            const QString path = (*it)->path();
+            if(dit.current()->file().find(path) != -1 ) storage=name;
+        }
+
         QListViewItem * newItem;
-        if(dit.current()->file().find("/mnt/cf") != -1 ) storage=tr("CF");
-        else if(dit.current()->file().find("/mnt/hda") != -1 ) storage=tr("CF");
-        else if(dit.current()->file().find("/mnt/card") != -1 ) storage=tr("SD");
-        else storage=tr("RAM");
         if ( QFile( dit.current()->file()).exists() ) {
             newItem= /*(void)*/ new QListViewItem( audioView, dit.current()->name(), QString::number( QFile( dit.current()->file()).size() ), storage);
             newItem->setPixmap(0, Resource::loadPixmap( "mpegplayer/musicfile" ));
@@ -923,15 +943,21 @@ void PlayListWidget::populateAudioView() {
 }
 
 void PlayListWidget::populateVideoView() {
+    StorageInfo storageInfo;
+    const QList<FileSystem> &fs = storageInfo.fileSystems();
+
     Global::findDocuments(&vFiles, "video/*");
     QListIterator<DocLnk> Vdit( vFiles.children() );
+    QListIterator<FileSystem> it ( fs );
     videoView->clear();
-     QString storage;
+    QString storage;
     for ( ; Vdit.current(); ++Vdit ) {
-        if( Vdit.current()->file().find("/mnt/cf") != -1 ) storage=tr("CF");
-        else if( Vdit.current()->file().find("/mnt/hda") != -1 ) storage=tr("CF");
-        else if( Vdit.current()->file().find("/mnt/card") != -1 ) storage=tr("SD");
-        else storage=tr("RAM");
+        for( ; it.current(); ++it ){
+            const QString name = (*it)->name();
+            const QString path = (*it)->path();
+            if( Vdit.current()->file().find(path) != -1 ) storage=name;
+        }
+
         QListViewItem * newItem;
         if ( QFile( Vdit.current()->file()).exists() ) {
             newItem= /*(void)*/ new QListViewItem( videoView, Vdit.current()->name(), QString::number( QFile( Vdit.current()->file()).size() ), storage);

@@ -19,6 +19,8 @@
 **********************************************************************/
 #include <qpe/applnk.h>
 #include <qpe/resource.h>
+#include <qpe/config.h>
+
 #include <qpainter.h>
 #include <qimage.h>
 #include <qheader.h>
@@ -50,7 +52,7 @@ private:
 PlayListSelection::PlayListSelection( QWidget *parent, const char *name )
     : QListView( parent, name )
 {
-    qDebug("starting playlistselector");
+//    qDebug("starting playlistselector");
 // #ifdef USE_PLAYLIST_BACKGROUND
 //    setStaticBackground( TRUE );
 //      setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/background" ) );
@@ -184,4 +186,18 @@ void PlayListSelection::unSelect()
 {
     QListViewItem *item = selectedItem();
     setSelected( currentItem(), FALSE);
+}
+
+void PlayListSelection::writeCurrent( Config& cfg ) {
+    cfg.setGroup("PlayList");
+    QListViewItem *item = selectedItem();
+    if ( item )
+        cfg.writeEntry("current", item->text(0) );
+    qDebug(item->text(0));
+
+}
+
+void  PlayListSelection::setSelectedItem(const QString &strk ) {
+//     setSelected( item, TRUE );
+//     ensureItemVisible( selectedItem() );
 }
