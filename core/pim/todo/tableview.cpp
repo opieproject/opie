@@ -85,6 +85,7 @@ void TableView::initConfig() {
 TableView::TableView( MainWindow* window, QWidget* wid )
     : QTable(  wid ), TodoView( window ) {
 
+    setName("TableView");
     // Load icons
     // TODO - probably should be done globally somewhere else,
     //        see also quickeditimpl.cpp/h, taskeditoroverview.cpp/h

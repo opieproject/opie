@@ -44,7 +44,7 @@ class QPopupMenu;
 class QMenuBar;
 class QToolBar;
 class QAction;
-class QWidgetStack;
+class OWidgetStack;
 class Ir;
 class QVBox;
 class QLineEdit;
@@ -142,7 +142,7 @@ private slots:
             *m_showOverDueAction,
             *m_showQuickTaskAction,
             *m_effectiveAction;
-        QWidgetStack *m_stack;
+        OWidgetStack *m_stack;
         QPopupMenu* m_catMenu,
             *m_edit,
             *m_options,

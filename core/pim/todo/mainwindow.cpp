@@ -53,6 +53,7 @@
 #include <opie/orecur.h>
 #include <opie/opimnotifymanager.h>
 #include <opie/otodoaccessvcal.h>
+#include <opie/owidgetstack.h>
 
 #include <opie/oapplicationfactory.h>
 
@@ -73,6 +74,9 @@ MainWindow::MainWindow( QWidget* parent,
                         const char* name, WFlags )
     : OPimMainWindow( "Todolist", parent, name, WType_TopLevel | WStyle_ContextHelp )
 {
+    if (!name)
+        setName("todo window");
+
     m_syncing = false;
     m_showing = false;
     m_counter = 0;
@@ -224,7 +228,7 @@ void MainWindow::initConfig() {
 }
 void MainWindow::initUI() {
 
-    m_stack = new QWidgetStack(this,  "main stack");
+    m_stack = new OWidgetStack(this,  "main stack");
 
     setCentralWidget( m_stack );
 
@@ -405,6 +409,7 @@ void MainWindow::closeEvent( QCloseEvent* e ) {
         /* save templates */
         templateManager()->save();
         e->accept();
+        qApp->quit();
     }
 }
 void MainWindow::populateTemplates() {
