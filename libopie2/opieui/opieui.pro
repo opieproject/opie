@@ -8,12 +8,17 @@ HEADERS     = ocheckitem.h           \
               ofileselector_p.h      \
               ofiledialog.h          \
               ofileview.h            \
+              ofontselector.h        \
               oimageeffect.h         \
               olistview.h            \
               opixmapeffect.h        \
               opopupmenu.h           \
               opixmapprovider.h      \
               oselector.h            \
+              otabinfo.h             \
+              otabbar.h              \
+              otabwidget.h           \
+              otimepicker.h          \
               oversatileview.h       \
               oversatileviewitem.h   \
               omessagebox.h          \
@@ -25,12 +30,16 @@ SOURCES     = ocheckitem.cpp         \
               oclickablelabel.cpp    \
               ofileselector.cpp      \
               ofiledialog.cpp        \
+              ofontselector.cpp      \
               oimageeffect.cpp       \
               olistview.cpp          \
               opixmapeffect.cpp      \
               opopupmenu.cpp         \
               opixmapprovider.cpp    \
               oselector.cpp          \
+              otabbar.cpp            \
+              otabwidget.cpp         \
+              otimepicker.cpp        \
               oversatileview.cpp     \
               oversatileviewitem.cpp \
               odialog.cpp            \
@@ -38,9 +47,10 @@ SOURCES     = ocheckitem.cpp         \
               otaskbarapplet.cpp     \
               oseparator.cpp
 
-INTERFACES  =
+INTERFACES  = otimepickerbase.ui
+
 TARGET      = opieui2
-VERSION     = 1.8.3
+VERSION     = 1.8.4
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
