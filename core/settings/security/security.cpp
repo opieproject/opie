@@ -44,19 +44,12 @@
     int auth_peer = cfg.readNumEntry("auth_peer",0xc0a88100);//new default 192.168.129.0/24
     int auth_peer_bits = cfg.readNumEntry("auth_peer_bits",24);
     selectNet(auth_peer,auth_peer_bits,TRUE);
-  
+
     connect(syncnet, SIGNAL(textChanged(const QString&)),
             this, SLOT(setSyncNet(const QString&)));
 
-    cfg.setGroup("Sync");
-    QString sa = cfg.readEntry("syncapp","Qtopia");
 
-    for (int i=0; i<syncapp->count(); i++) {
-        if ( syncapp->text(i) == sa ) {
-           syncapp->setCurrentItem(i);       	    
-        }
-    }  
-    
+
     /*
        cfg.setGroup("Remote");
        if ( telnetAvailable() )
@@ -72,7 +65,7 @@
 
     QString configFile = QPEApplication::qpeDir() + "/etc/opie-login.conf";
     Config loginCfg(configFile,Config::File);
-        
+
     loginCfg.setGroup("General");
     autoLoginName=loginCfg.readEntry("AutoLogin","");
 
@@ -84,20 +77,27 @@
 
     cfg.setGroup("SyncMode");
     int mode = cfg.readNumEntry("Mode",2); // Default to Sharp
-    syncModeCombo->setCurrentItem( mode - 1 );
-    
-    //since nobody knows what this is and it doesn't do anything, i'll hide it # CoreDump
-    // is this work-in-progress or can it be removed?
-    syncModeCombo->hide();
+    switch( mode ) {
+    case 0x01:
+        syncModeCombo->setCurrentItem( 0 );
+        break;
+    case 0x02:
+    default:
+        syncModeCombo->setCurrentItem( 1 );
+        break;
+    case 0x04:
+        syncModeCombo->setCurrentItem( 2 );
+        break;
+    }
+
 
     connect(autologinToggle, SIGNAL(toggled(bool)), this, SLOT(toggleAutoLogin(bool)));
     connect(userlist, SIGNAL(activated(int)), this, SLOT(changeLoginName(int)));
     connect(changepasscode,SIGNAL(clicked()), this, SLOT(changePassCode()));
     connect(clearpasscode,SIGNAL(clicked()), this, SLOT(clearPassCode()));
-    connect(syncapp,SIGNAL(activated(int)), this, SLOT(changeSyncApp()));
-    connect(restoredefaults,SIGNAL(clicked()), this, SLOT(restoreDefaults()));    
+    connect(restoredefaults,SIGNAL(clicked()), this, SLOT(restoreDefaults()));
     connect(deleteentry,SIGNAL(clicked()), this, SLOT(deleteListEntry()));
-    
+
     loadUsers();
     updateGUI();
 
@@ -109,13 +109,13 @@ Security::~Security()
 {
 }
 
-void Security::deleteListEntry() 
+void Security::deleteListEntry()
 {
     syncnet->removeItem(syncnet->currentItem());
 }
 
 void Security::restoreDefaults()
-{		
+{
     QMessageBox unrecbox(
     tr("Attention"),
     tr(	"<p>All user-defined net ranges will be lost."),
@@ -125,15 +125,16 @@ void Security::restoreDefaults()
     unrecbox.setButtonText(QMessageBox::Cancel, tr("Cancel"));
     unrecbox.setButtonText(QMessageBox::Yes, tr("Ok"));
 
-    if ( unrecbox.exec() == QMessageBox::Yes)	
+    if ( unrecbox.exec() == QMessageBox::Yes)
     {
         syncnet->clear();
         insertDefaultRanges();
-    }	
+    }
+    syncModeCombo->setCurrentItem( 2 );
 }
 
 void Security::insertDefaultRanges()
-{    
+{
     syncnet->insertItem( tr( "192.168.129.0/24" ) );
     syncnet->insertItem( tr( "192.168.1.0/24" ) );
     syncnet->insertItem( tr( "192.168.0.0/16" ) );
@@ -154,7 +155,7 @@ void Security::updateGUI()
     clearpasscode->setEnabled( !empty );
 
     autologinToggle->setChecked(autoLogin);
-    userlist->setEnabled(autoLogin);    
+    userlist->setEnabled(autoLogin);
 }
 
 
@@ -237,19 +238,19 @@ void Security::selectNet(int auth_peer,int auth_peer_bits, bool update)
                     //make sure we have no "twin" entries
                     for (int i=0; i<syncnet->count(); i++) {
                         if ( syncnet->text(i) == netrange ) {
-                            already_there=TRUE;      	    
+                            already_there=TRUE;
                         }
                     }
                     if (! already_there) {
                         syncnet->insertItem( tr( netrange ) );
                     } else {
                         already_there=FALSE;
-                    }		
-                }	
+                    }
+                }
             }
-        }	
-    } 
-     
+        }
+    }
+
     for (int i=0; i<syncnet->count(); i++) {
         if ( syncnet->text(i).left(sn.length()) == sn ) {
             syncnet->setCurrentItem(i);
@@ -334,20 +335,37 @@ void Security::applySecurity()
         int auth_peer_bits;
         QString sn = syncnet->currentText();
         parseNet(sn,auth_peer,auth_peer_bits);
-       
+
         //this is the *selected* (active) net range
         cfg.writeEntry("auth_peer",auth_peer);
         cfg.writeEntry("auth_peer_bits",auth_peer_bits);
-	
+
 	//write back all other net ranges in *cleartext*
 	for (int i=0; i<10; i++) {
 		QString target;
 		target.sprintf("net%d", i);
         	cfg.writeEntry(target,syncnet->text(i));
 	}
-		
-        cfg.writeEntry("syncapp",syncapp->currentText());
-	
+
+#ifdef ODP
+        #error "Use 0,1,2 and use Launcher"
+#endif
+        /* keep the old code so we don't use currentItem directly */
+        int value = 0x02;
+        switch( syncModeCombo->currentItem() ) {
+        case 0:
+            value = 0x01;
+            break;
+        case 1:
+            value = 0x02;
+            break;
+        case 2:
+            value = 0x04;
+            break;
+        }
+        cfg.setGroup("SyncMode");
+        cfg.writeEntry( "Mode", value );
+
         /*
            cfg.setGroup("Remote");
            if ( telnetAvailable() )
@@ -369,23 +387,7 @@ void Security::applySecurity()
 
     }
 }
-void Security::changeSyncApp()
-{
-    // Don't say i didn't tell ya
-    if (syncapp->currentText() == "IntelliSync") {
-	    QMessageBox attn(
-		tr("WARNING"),
-		tr("<p>Selecting IntelliSync here will disable the FTP password."
-		    "<p>Every machine in your netrange will be able to sync with "
-		    "your Zaurus!"),
-		QMessageBox::Warning,
-		QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton,
-		0, QString::null, TRUE, WStyle_StaysOnTop);
-	    attn.setButtonText(QMessageBox::Cancel, tr("Ok"));
-	    attn.exec();
-    } 
-    updateGUI();
-}
+
 
 
 

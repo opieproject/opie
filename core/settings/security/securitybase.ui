@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>309</width>
+            <width>327</width>
             <height>483</height>
         </rect>
     </property>
@@ -466,33 +466,6 @@ Beware that all manually entered net ranges will be lost!</string>
                                 <item>
                                     <property>
                                         <name>text</name>
-                                        <string>QTopia</string>
-                                    </property>
-                                </item>
-                                <item>
-                                    <property>
-                                        <name>text</name>
-                                        <string>IntelliSync</string>
-                                    </property>
-                                </item>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>syncapp</cstring>
-                                </property>
-                                <property>
-                                    <name>whatsThis</name>
-                                    <string>This option changes the login behaviour of the internal FTP server.  
-
-If you have problems syncing, try the "IntelliSync" setting, which will accept any password you throw at the sync (FTP) port.  
-
-The default is Qtopia. It will let you log in with username "root" and password "Qtopia".   The password is CaSeSeNsItIvE.</string>
-                                </property>
-                            </widget>
-                            <widget>
-                                <class>QComboBox</class>
-                                <item>
-                                    <property>
-                                        <name>text</name>
                                         <string>Qtopia 1.7</string>
                                     </property>
                                 </item>
@@ -505,12 +478,20 @@ The default is Qtopia. It will let you log in with username "root" and password 
                                 <item>
                                     <property>
                                         <name>text</name>
-                                        <string>Both</string>
+                                        <string>IntelliSync</string>
                                     </property>
                                 </item>
                                 <property stdset="1">
                                     <name>name</name>
                                     <cstring>syncModeCombo</cstring>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Alter the Sync Protocol to tweak for the different devices.
+				    IntelliSync will disable the password check but you'll be prompted to accept the connection.
+				    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
+				    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
+				    </string>
                                 </property>
                             </widget>
                         </vbox>

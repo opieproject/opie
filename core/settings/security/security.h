@@ -25,7 +25,7 @@
 class QPEDialogListener;
 
 class Security : public SecurityBase
-{ 
+{
     Q_OBJECT
 
 public:
@@ -46,7 +46,6 @@ private slots:
     void setSyncNet(const QString&);
     void changeLoginName(int);
     void toggleAutoLogin(bool);
-    void changeSyncApp();
     void restoreDefaults();
     void insertDefaultRanges();
     void deleteListEntry();
@@ -60,7 +59,7 @@ private:
     static void parseNet(const QString& sn,int& auth_peer,int& auth_peer_bits);
     void selectNet(int auth_peer,int auth_peer_bits,bool update);
 
-    
+
     QString enterPassCode(const QString&);
     QString passcode;
     bool valid;
