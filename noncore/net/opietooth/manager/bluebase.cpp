@@ -50,16 +50,15 @@ namespace OpieTooth {
 
         localDevice = new Manager( "hci0" );
 
-        QObject::connect( PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan() ) );
-        QObject::connect( configApplyButton, SIGNAL(clicked() ), this, SLOT(applyConfigChanges() ) );
-        QObject::connect( ListView2, SIGNAL(  expanded( QListViewItem * item ) ),
-                          this, SLOT( addServicesToDevice( QListViewItem * item ) ) );
-        QObject::connect( ListView2, SIGNAL( clicked( QListViewItem * )),
-                          this, SLOT( startServiceActionClicked( QListViewItem * item ) ) );
-       connect( localDevice,  SIGNAL( foundServices( const QString& device, Services::ValueList ) ),
+        connect( PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan() ) );
+        connect( configApplyButton, SIGNAL(clicked() ), this, SLOT(applyConfigChanges() ) );
+        connect( ListView2, SIGNAL( expanded ( QListViewItem *item ) ),
+                          this, SLOT( addServicesToDevice( QListViewItem *item ) ) );
+        connect( ListView2, SIGNAL( clicked( QListViewItem* )),
+                          this, SLOT( startServiceActionClicked( QListViewItem *item ) ) );
+        connect( localDevice, SIGNAL( foundServices( const QString& device, Services::ValueList ) ),
                 this, SLOT( addServicesToDevice( const QString& device, Services::ValueList ) ) );
 
-        //      QObject::connect( (QObject*) Manager, SIGNAL (foundServices( const QString& device, Services::ValueList ), this () ) );
 
         //Load all icons needed
 
@@ -87,8 +86,8 @@ namespace OpieTooth {
 
         QListViewItem *topLV = new QListViewItem( ListView2, "Harlekins Dongle" , "yes");
         topLV->setPixmap( 0, offPix );
-        (void) new QListViewItem( topLV, "on" );
-        (void) new QListViewItem( topLV, "off"  );
+        //  (void) new QListViewItem( topLV, "on" );
+        //(void) new QListViewItem( topLV, "off"  );
 
         QListViewItem *topLV2 = new QListViewItem( ListView2, "Siemens S45" , "no" );
         topLV2->setPixmap( 0, onPix );
@@ -239,7 +238,7 @@ namespace OpieTooth {
 
 
             RemoteDevice *dev = it.current();
-            deviceItem = new QListViewItem( ListView2, dev->name() );
+            deviceItem = new QListViewItem( ListView2 , dev->name() );
 
             if ( deviceActive( dev ) ) {
                 deviceItem->setPixmap( 1 , onPix );
@@ -248,6 +247,9 @@ namespace OpieTooth {
             }
 
             deviceItem->setText( 3, dev->mac() );
+
+            // ggf auch hier?
+            addServicesToDevice( deviceItem );
         }
     }
 
@@ -274,6 +276,7 @@ namespace OpieTooth {
      */
     void BlueBase::addServicesToDevice( QListViewItem * item ) {
 
+        qDebug("addServicesToDevice");
         // row of mac adress
         RemoteDevice *device = new RemoteDevice(item->text(3),  item->text(0));
 
@@ -313,8 +316,8 @@ namespace OpieTooth {
         QListViewItem * serviceItem;
 
         for( it2 = servicesList.begin(); it2 != servicesList.end(); ++it2 ) {
- it2.serviceName()
-            serviceItem = new QListViewItem( deviceItem  ,    it2.serviceName()       );
+// it2.serviceName()
+            serviceItem = new QListViewItem( deviceItem  ,  (*it2).serviceName()   );
         }
 
     }
