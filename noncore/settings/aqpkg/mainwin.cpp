@@ -38,6 +38,7 @@ MainWindow :: MainWindow( QWidget *p, char *name )
 
     // Create our menu
 	QPopupMenu *help = new QPopupMenu( this );
+
 	help->insertItem( "&General", this, SLOT(displayHelp()), Qt::CTRL+Qt::Key_H );
 	help->insertItem( "&About", this, SLOT(displayAbout()), Qt::CTRL+Qt::Key_A );
 
@@ -45,7 +46,8 @@ MainWindow :: MainWindow( QWidget *p, char *name )
 	settings->insertItem( "&Settings", this, SLOT(displaySettings()), Qt::CTRL+Qt::Key_S );
 
     QPopupMenu *edit = new QPopupMenu( this );
-	edit->insertItem( "&Search", this, SLOT(searchForPackage()), Qt::CTRL+Qt::Key_F );
+	edit->insertItem( "&Find", this, SLOT(searchForPackage()), Qt::CTRL+Qt::Key_F );
+	edit->insertItem( "&Find Next", this, SLOT(repeatSearchForPackage()), Qt::CTRL+Qt::Key_R );
 
 	// Create the main menu
 	QMenuBar *menu = menuBar();  //new QMenuBar( this );
@@ -95,7 +97,12 @@ void MainWindow :: displayHelp()
 
 void MainWindow :: searchForPackage()
 {
-    networkPkgWindow->searchForPackage();
+    networkPkgWindow->searchForPackage( false );
+}
+
+void MainWindow :: repeatSearchForPackage()
+{
+    networkPkgWindow->searchForPackage( true );
 }
 
 void MainWindow :: displayAbout()

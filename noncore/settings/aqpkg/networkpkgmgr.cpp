@@ -675,13 +675,17 @@ void NetworkPackageManager :: letterPushed( QString t )
 }
 
 
-void NetworkPackageManager :: searchForPackage()
+void NetworkPackageManager :: searchForPackage( bool findNext )
 {
-    bool ok = FALSE;
-    QString searchText = InputDialog::getText( "Search for package", "Enter package to search for", QString::null, &ok, this ).lower();
-    if ( ok && !searchText.isEmpty() )
+    bool ok = false;
+    if ( !findNext || lastSearchText.isEmpty() )
+        lastSearchText = InputDialog::getText( "Search for package", "Enter package to search for", lastSearchText, &ok, this ).lower();
+    else
+        ok = true;
+        
+    if ( ok && !lastSearchText.isEmpty() )
     {
-        cout << "searching for " << searchText << endl;
+        cout << "searching for " << lastSearchText << endl;
         // look through package list for text startng at current position
         vector<InstallData> workingPackages;
         QCheckListItem *start = (QCheckListItem *)packagesList->currentItem();
@@ -695,7 +699,7 @@ void NetworkPackageManager :: searchForPackage()
               item = (QCheckListItem *)item->nextSibling() )
         {
             cout << "checking " << item->text().lower() << endl;
-            if ( item->text().lower().find( searchText ) != -1 )
+            if ( item->text().lower().find( lastSearchText ) != -1 )
             {
                 cout << "matched " << item->text() << endl;
                 packagesList->ensureItemVisible( item );

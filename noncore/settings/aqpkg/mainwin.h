@@ -43,6 +43,7 @@ public slots:
     void setDocument( const QString &doc );
     void displayHelp();
     void searchForPackage();
+    void repeatSearchForPackage();
     void displayAbout();
     void displaySettings();
 };

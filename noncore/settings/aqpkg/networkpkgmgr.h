@@ -40,7 +40,7 @@ public:
 
     void selectLocalPackage( const QString &pkg );
     void updateData();
-    void searchForPackage();
+    void searchForPackage( bool findNext );
 private:
     DataManager *dataMgr;
 
@@ -53,6 +53,7 @@ private:
 
     ProgressDlg *progressDlg;
     QString currentlySelectedServer;
+    QString lastSearchText;
 
     bool showJumpTo;
     int timerId;
