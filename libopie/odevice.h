@@ -23,6 +23,7 @@
 #include <qobject.h>
 #include <qstring.h>
 #include <qnamespace.h>
+#include <qstrlist.h>
 
 #include <opie/odevicebutton.h>
 
@@ -57,6 +58,7 @@ enum OModel {
 	Model_Zaurus_SLB600 = ( Model_Zaurus | 0x000004 ),
 	Model_Zaurus_SLC700 = ( Model_Zaurus | 0x000005 ),
 
+
 	Model_SIMpad        = ( 3 << 24 ),
 
 	Model_SIMpad_All    = ( Model_SIMpad | 0xffffff ),
@@ -64,6 +66,11 @@ enum OModel {
 	Model_SIMpad_SL4    = ( Model_SIMpad | 0x000002 ),
 	Model_SIMpad_SLC    = ( Model_SIMpad | 0x000004 ),
 	Model_SIMpad_TSinus = ( Model_SIMpad | 0x000008 ),
+
+	Model_Ramses        = ( 4 << 24 ),
+
+	Model_Ramses_All    = ( Model_Ramses | 0xffffff ),
+	Model_Ramses_MNCI   = ( Model_Ramses | 0x000001 ),
 };
 
 /**
@@ -75,6 +82,7 @@ enum OVendor {
 	Vendor_HP,
 	Vendor_Sharp,
 	Vendor_SIEMENS,
+	Vendor_MundN,
 };
 
 /**
@@ -123,7 +131,6 @@ enum ODirection {
  * like the Hardware used, LEDs, the Base Distribution and
  * hardware key mappings.
  *
- *
  * @short A small class for device specefic options
  * @see QObject
  * @author Robert Griebl
@@ -144,13 +151,12 @@ protected:
 	ODeviceData *d;
 
 public:
-    // sandman do we want to allow destructions? -zecke?
+	// sandman do we want to allow destructions? -zecke?
 	virtual ~ODevice ( );
-
 
 	static ODevice *inst ( );
 
-// information
+	// information
 
 	QString modelString ( ) const;
 	OModel model ( ) const;
@@ -175,6 +181,8 @@ public:
 	virtual bool setDisplayStatus ( bool on );
 	virtual bool setDisplayBrightness ( int brightness );
 	virtual int displayBrightnessResolution ( ) const;
+	virtual bool setDisplayContrast ( int contrast );
+	virtual int displayContrastResolution ( ) const;
 
 // input / output
         //FIXME playAlarmSound and al might be better -zecke
@@ -190,6 +198,9 @@ public:
 	virtual bool hasLightSensor ( ) const;
 	virtual int readLightSensor ( );
 	virtual int lightSensorResolution ( ) const;
+
+	const QStrList &allowedCpuFrequencies() const;
+	bool setCurrentCpuFrequency(uint index);
 
 	/**
 	 * Returns the available buttons on this device.  The number and location
@@ -230,6 +241,8 @@ private slots:
 
 protected:
 	void reloadButtonMapping ( );
+	/* ugly virtual hook */
+	virtual void virtual_hook( int id, void* data );
 };
 
 }

@@ -72,6 +72,7 @@ public:
 
 	QValueList <ODeviceButton> *m_buttons;
 	uint                        m_holdtime;
+	QStrList                   *m_cpu_frequencies;
 };
 
 
@@ -88,7 +89,7 @@ public:
 
 	virtual void alarmSound ( );
 
-    virtual QValueList <OLed> ledList ( ) const;
+	virtual QValueList <OLed> ledList ( ) const;
 	virtual QValueList <OLedState> ledStateList ( OLed led ) const;
 	virtual OLedState ledState ( OLed led ) const;
 	virtual bool setLedState ( OLed led, OLedState st );
@@ -121,7 +122,7 @@ public:
 	virtual void keySound ( );
 	virtual void touchSound ( );
 
-    virtual QValueList <OLed> ledList ( ) const;
+	virtual QValueList <OLed> ledList ( ) const;
 	virtual QValueList <OLedState> ledStateList ( OLed led ) const;
 	virtual OLedState ledState ( OLed led ) const;
 	virtual bool setLedState ( OLed led, OLedState st );
@@ -147,7 +148,7 @@ public:
 
 	virtual void alarmSound ( );
 
-    virtual QValueList <OLed> ledList ( ) const;
+	virtual QValueList <OLed> ledList ( ) const;
 	virtual QValueList <OLedState> ledStateList ( OLed led ) const;
 	virtual OLedState ledState ( OLed led ) const;
 	virtual bool setLedState ( OLed led, OLedState st );
@@ -161,15 +162,36 @@ protected:
 	OLedState m_leds [1]; //FIXME check if really only one
 };
 
+class Ramses : public ODevice, public QWSServer::KeyboardFilter {
+protected:
+	virtual void init ( );
+
+public:
+	virtual bool setSoftSuspend ( bool soft );
+	virtual bool suspend ( );
+
+	virtual bool setDisplayStatus( bool on );
+	virtual bool setDisplayBrightness ( int b );
+	virtual int displayBrightnessResolution ( ) const;
+	virtual bool setDisplayContrast ( int b );
+	virtual int displayContrastResolution ( ) const;
+
+protected:
+	virtual bool filter ( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
+	virtual void timerEvent ( QTimerEvent *te );
+
+	int m_power_timer;
+};
+
 struct i_button {
 	uint model;
-    Qt::Key code;
-    char *utext;
-    char *pix;
-    char *fpressedservice;
-    char *fpressedaction;
-    char *fheldservice;
-    char *fheldaction;
+	Qt::Key code;
+	char *utext;
+	char *pix;
+	char *fpressedservice;
+	char *fpressedaction;
+	char *fheldservice;
+	char *fheldaction;
 } ipaq_buttons [] = {
     { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx,
     Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
@@ -258,7 +280,7 @@ struct z_button z_buttons_c700 [] = {
 };
 
 struct s_button {
-	uint model;
+    uint model;
     Qt::Key code;
     char *utext;
     char *pix;
@@ -268,11 +290,76 @@ struct s_button {
     char *fheldaction;
 } simpad_buttons [] = {
     { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Lower+Up"),
+    "devicebuttons/simpad_lower_up",
+    "datebook", "nextView()",
+    "today", "raise()" },
+    { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Lower+Down"),
+    "devicebuttons/simpad_lower_down",
+    "addressbook", "raise()",
+    "addressbook", "beamBusinessCard()" },
+    { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Lower+Right"),
+    "devicebuttons/simpad_lower_right",
+    "QPE/TaskBar", "toggleMenu()",
+    "QPE/TaskBar", "toggleStartMenu()" },
+    { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Lower+Left"),
+    "devicebuttons/simpad_lower_left",
+    "mail", "raise()",
+    "mail", "newMail()" },
+
+    { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F5, QT_TRANSLATE_NOOP("Button", "Upper+Up"),
+    "devicebuttons/simpad_upper_up",
+    "QPE/Launcher", "home()",
+    "buttonsettings", "raise()" },
+    { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F6, QT_TRANSLATE_NOOP("Button", "Upper+Down"),
+    "devicebuttons/simpad_upper_down",
+    "addressbook", "raise()",
+    "addressbook", "beamBusinessCard()" },
+    { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F7, QT_TRANSLATE_NOOP("Button", "Upper+Right"),
+    "devicebuttons/simpad_upper_right",
+    "QPE/TaskBar", "toggleMenu()",
+    "QPE/TaskBar", "toggleStartMenu()" },
+    { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Upper+Left"),
+    "devicebuttons/simpad_upper_left",
+    "QPE/Rotation", "flip()",
+    "QPE/Rotation", "flip()" },
+    /*
+    { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Lower+Upper"),
+    "devicebuttons/simpad_lower_upper",
+    "QPE/Launcher", "home()",
+    "buttonsettings", "raise()" },
+    { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Lower+Upper"),
+    "devicebuttons/simpad_upper_lower",
+    "QPE/Launcher", "home()",
+    "buttonsettings", "raise()" },
+    */
+};
+
+struct r_button {
+	uint model;
+    Qt::Key code;
+    char *utext;
+    char *pix;
+    char *fpressedservice;
+    char *fpressedaction;
+    char *fheldservice;
+    char *fheldaction;
+} ramses_buttons [] = {
+    { Model_Ramses_MNCI,
     Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
-	"devicebuttons/simpad_menu",
+	"devicebuttons/z_menu",
  	"QPE/TaskBar", "toggleMenu()",
 	"QPE/TaskBar", "toggleStartMenu()" },
-    { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    { Model_Ramses_MNCI,
     Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
 	"devicebuttons/ipaq_home",
 	"QPE/Launcher", "home()",
@@ -303,6 +390,8 @@ ODevice *ODevice::inst ( )
 			dev = new Zaurus ( );
 		else if ( QFile::exists ( "/proc/ucb1x00" ) && QFile::exists ( "/proc/cs3" ))
 			dev = new SIMpad ( );
+		else if ( QFile::exists ( "/proc/sys/board/name" ))
+			dev = new Ramses ( );
 		else
 			dev = new ODevice ( );
 
@@ -335,6 +424,7 @@ ODevice::ODevice ( )
 
 	d-> m_holdtime = 1000; // 1000ms
 	d-> m_buttons = 0;
+	d-> m_cpu_frequencies = new QStrList;
 }
 
 void ODevice::systemMessage ( const QCString &msg, const QByteArray & )
@@ -382,6 +472,9 @@ void ODevice::initButtons ( )
 
 ODevice::~ODevice ( )
 {
+// we leak m_devicebuttons and m_cpu_frequency 
+// but it's a singleton and it is not so importantant
+// -zecke
 	delete d;
 }
 
@@ -407,6 +500,7 @@ bool ODevice::setSoftSuspend ( bool /*soft*/ )
  */
 bool ODevice::suspend ( )
 {
+	qDebug("ODevice::suspend");
 	if ( !isQWS( ) ) // only qwsserver is allowed to suspend
 		return false;
 
@@ -450,6 +544,8 @@ bool ODevice::suspend ( )
  */
 bool ODevice::setDisplayStatus ( bool on )
 {
+	qDebug("ODevice::setDisplayStatus(%d)", on);
+
 	if ( d-> m_model == Model_Unknown )
 		return false;
 
@@ -465,6 +561,8 @@ bool ODevice::setDisplayStatus ( bool on )
 
 /**
  * This sets the display brightness
+ *
+ * @param p The brightness to be set on a scale from 0 to 255
  * @return success or failure
  */
 bool ODevice::setDisplayBrightness ( int p)
@@ -473,9 +571,33 @@ bool ODevice::setDisplayBrightness ( int p)
 	return false;
 }
 
+/**
+ * @return returns the number of steppings on the brightness slider
+ * in the Light-'n-Power settings.
+ */
 int ODevice::displayBrightnessResolution ( ) const
 {
 	return 16;
+}
+
+/**
+ * This sets the display contrast
+ * @param p The contrast to be set on a scale from 0 to 255
+ * @return success or failure
+ */
+bool ODevice::setDisplayContrast ( int p)
+{
+        Q_UNUSED( p )
+	return false;
+}
+
+/**
+ * @return return the max value for the brightness settings slider
+ *         or 0 if the device doesn't support setting of a contrast
+ */
+int ODevice::displayContrastResolution ( ) const
+{
+	return 0;
 }
 
 /**
@@ -584,7 +706,6 @@ void ODevice::keySound ( )
  */
 void ODevice::touchSound ( )
 {
-
 #ifndef QT_NO_SOUND
 	static Sound snd ( "touchsound" );
 
@@ -655,6 +776,42 @@ int ODevice::lightSensorResolution ( ) const
 {
 	return 0;
 }
+
+/**
+ * @return a list with CPU frequencies supported by the hardware
+ */
+const QStrList &ODevice::allowedCpuFrequencies ( ) const
+{
+	return *d->m_cpu_frequencies;
+}
+
+
+/**
+ * Set desired CPU frequency
+ * 
+ * @param index index into d->m_cpu_frequencies of the frequency to be set
+ */
+bool ODevice::setCurrentCpuFrequency(uint index)
+{
+	if (index >= d->m_cpu_frequencies->count())
+		return false;
+
+	char *freq = d->m_cpu_frequencies->at(index);
+	qWarning("set freq to %s", freq);
+
+	int fd;
+
+	if ((fd = ::open("/proc/sys/cpu/0/speed", O_WRONLY)) >= 0) {
+		char writeCommand[50];
+		const int count = sprintf(writeCommand, "%s\n", freq);
+		int res = (::write(fd, writeCommand, count) != -1);
+		::close(fd);
+		return res;
+	}
+
+	return false;
+}
+
 
 /**
  * @return a list of hardware buttons
@@ -766,7 +923,9 @@ void ODevice::remapHeldAction ( int button, const OQCopMessage &action )
 
 	QCopEnvelope ( "QPE/System", "deviceButtonMappingChanged()" );
 }
+void ODevice::virtual_hook(int, void* ){
 
+}
 
 
 
@@ -1801,3 +1960,212 @@ int SIMpad::displayBrightnessResolution ( ) const
 	}
 }
 
+/**************************************************
+ *
+ * Ramses
+ *
+ **************************************************/
+
+void Ramses::init()
+{
+	d->m_vendorstr = "M und N";
+	d->m_vendor = Vendor_MundN;
+
+	QFile f("/proc/sys/board/ramses");
+
+	d->m_modelstr = "Ramses";
+	d->m_model = Model_Ramses_MNCI;
+
+	d->m_rotation = Rot0;
+	d->m_holdtime = 1000;
+
+	f.setName("/etc/oz_version");
+
+	if (f.open(IO_ReadOnly)) {
+	   	d->m_systemstr = "OpenEmbedded/Ramses";
+	    	d->m_system = System_OpenZaurus;
+
+		QTextStream ts(&f);
+		ts.setDevice(&f);
+		d->m_sysverstr = ts.readLine();
+		f.close();
+	}
+
+	m_power_timer = 0;
+
+#ifdef QT_QWS_ALLOW_OVERCLOCK
+#warning *** Overclocking enabled - this may fry your hardware - you have been warned ***
+#define OC(x...)        x
+#else
+#define OC(x...)
+#endif
+
+
+	// This table is true for a Intel XScale PXA 255
+
+	d->m_cpu_frequencies->append("99000");      // mem= 99, run= 99, turbo= 99, PXbus= 50
+OC(	d->m_cpu_frequencies->append("118000"); )   // mem=118, run=118, turbo=118, PXbus= 59 OC'd mem
+	d->m_cpu_frequencies->append("199100");     // mem= 99, run=199, turbo=199, PXbus= 99
+OC(	d->m_cpu_frequencies->append("236000"); )   // mem=118, run=236, turbo=236, PXbus=118 OC'd mem
+	d->m_cpu_frequencies->append("298600");     // mem= 99, run=199, turbo=298, PXbus= 99
+OC(	d->m_cpu_frequencies->append("354000"); )   // mem=118, run=236, turbo=354, PXbus=118 OC'd mem
+	d->m_cpu_frequencies->append("398099");     // mem= 99, run=199, turbo=398, PXbus= 99
+	d->m_cpu_frequencies->append("398100");     // mem= 99, run=398, turbo=398, PXbus=196
+OC(	d->m_cpu_frequencies->append("471000"); )   // mem=118, run=471, turbo=471, PXbus=236 OC'd mem/core/bus
+
+}
+
+bool Ramses::filter(int /*unicode*/, int keycode, int modifiers, bool isPress, bool autoRepeat)
+{
+        Q_UNUSED( keycode );
+        Q_UNUSED( modifiers );
+        Q_UNUSED( isPress );
+        Q_UNUSED( autoRepeat );
+	return false;
+}
+
+void Ramses::timerEvent(QTimerEvent *)
+{
+	killTimer(m_power_timer);
+	m_power_timer = 0;
+	QWSServer::sendKeyEvent(-1, HardKey_Backlight, 0, true, false);
+	QWSServer::sendKeyEvent(-1, HardKey_Backlight, 0, false, false);
+}
+
+
+bool Ramses::setSoftSuspend(bool soft)
+{
+	qDebug("Ramses::setSoftSuspend(%d)", soft);
+#if 0
+	bool res = false;
+	int fd;
+
+	if (((fd = ::open("/dev/apm_bios", O_RDWR)) >= 0) ||
+        ((fd = ::open("/dev/misc/apm_bios",O_RDWR)) >= 0)) {
+
+		int sources = ::ioctl(fd, APM_IOCGEVTSRC, 0); // get current event sources
+
+		if (sources >= 0) {
+			if (soft)
+				sources &= ~APM_EVT_POWER_BUTTON;
+			else
+				sources |= APM_EVT_POWER_BUTTON;
+
+			if (::ioctl(fd, APM_IOCSEVTSRC, sources) >= 0) // set new event sources
+				res = true;
+			else
+				perror("APM_IOCGEVTSRC");
+		}
+		else
+			perror("APM_IOCGEVTSRC");
+
+		::close(fd);
+	}
+	else
+		perror("/dev/apm_bios or /dev/misc/apm_bios");
+
+    return res;
+#else
+    return true;
+#endif
+}
+
+bool Ramses::suspend ( )
+{
+	qDebug("Ramses::suspend");
+	return false;
+}
+
+/**
+ * This sets the display on or off
+ */
+bool Ramses::setDisplayStatus(bool on)
+{
+	qDebug("Ramses::setDisplayStatus(%d)", on);
+#if 0
+	bool res = false;
+	int fd;
+
+	if ((fd = ::open ("/dev/fb/0", O_RDWR)) >= 0) {
+		res = (::ioctl(fd, FBIOBLANK, on ? VESA_NO_BLANKING : VESA_POWERDOWN) == 0);
+		::close(fd);
+	}
+	return res;
+#else
+	return true;
+#endif
+}
+
+
+/*
+ * We get something between 0..255 into us
+*/
+bool Ramses::setDisplayBrightness(int bright)
+{
+	qDebug("Ramses::setDisplayBrightness(%d)", bright);
+	bool res = false;
+	int fd;
+
+	// pwm1 brighness: 20 steps 500..0 (dunkel->hell)
+
+	if (bright > 255 )
+		bright = 255;
+	if (bright < 0)
+		bright = 0;
+
+	// Turn backlight completely off
+	if ((fd = ::open("/proc/sys/board/lcd_backlight", O_WRONLY)) >= 0) {
+		char writeCommand[10];
+		const int count = sprintf(writeCommand, "%d\n", bright ? 1 : 0);
+		res = (::write(fd, writeCommand, count) != -1);
+		::close(fd);
+	}
+
+	// scale backlight brightness to hardware
+	bright = 500-(bright * 500 / 255);
+	if ((fd = ::open("/proc/sys/board/pwm1", O_WRONLY)) >= 0) {
+		qDebug(" %d -> pwm1", bright);
+		char writeCommand[100];
+		const int count = sprintf(writeCommand, "%d\n", bright);
+		res = (::write(fd, writeCommand, count) != -1);
+		::close(fd);
+	}
+	return res;
+}
+
+
+int Ramses::displayBrightnessResolution() const
+{
+	return 32;
+}
+
+bool Ramses::setDisplayContrast(int contr)
+{
+	qDebug("Ramses::setDisplayContrast(%d)", contr);
+	bool res = false;
+	int fd;
+
+	// pwm0 contrast: 20 steps 79..90 (dunkel->hell)
+
+	if (contr > 255 )
+		contr = 255;
+	if (contr < 0)
+		contr = 0;
+	contr = 90 - (contr * 20 / 255);
+
+	if ((fd = ::open("/proc/sys/board/pwm0", O_WRONLY)) >= 0) {
+		qDebug(" %d -> pwm0", contr);
+		char writeCommand[100];
+		const int count = sprintf(writeCommand, "%d\n", contr);
+		res = (::write(fd, writeCommand, count) != -1);
+		res = true;
+		::close(fd);
+	}
+	return res;
+}
+
+
+int Ramses::displayContrastResolution() const
+{
+	return 20;
+}
