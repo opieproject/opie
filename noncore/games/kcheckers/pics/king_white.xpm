@@ -1,5 +1,5 @@
 /* XPM */
-static const char *king_white[]={
+static const char *king_white_xpm[]={
 "28 28 8 1",
 ". c None",
 "# c #000000",

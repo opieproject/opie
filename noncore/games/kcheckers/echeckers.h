@@ -2,7 +2,7 @@
 #ifndef ECHECKERS_H
 #define ECHECKERS_H
 
-#include <checkers.h>
+#include "checkers.h"
 
 
 class ECheckers:public Checkers

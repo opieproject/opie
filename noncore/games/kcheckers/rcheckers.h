@@ -2,7 +2,7 @@
 #ifndef RCHECKERS_H
 #define RCHECKERS_H
 
-#include <checkers.h>
+#include "checkers.h"
 
 
 class RCheckers:public Checkers

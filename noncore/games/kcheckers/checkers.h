@@ -29,7 +29,8 @@ class Checkers
     virtual bool checkCapture2()=0;
 
     void setLevel(int i) {levelmax=i;};
-    int  getBoard(int i) {return board[i];};
+
+    int board[54];
 
   protected:
     int level;        // Current level
@@ -39,7 +40,6 @@ class Checkers
     void turn(int &,bool capture=false);
 
     int to;
-    int board[54];
     int bestboard[54];
     int bestcounter;
 

@@ -12,8 +12,7 @@ SOURCES		= checkers.cpp \
 		  main.cpp \
 		  rcheckers.cpp
 INTERFACES	= 
-INCLUDEPATH	+= . \
-		  $(OPIEDIR)/include
+INCLUDEPATH	+= $(OPIEDIR)/include
 LIBS		+= -lqpe
 DESTDIR		= $(OPIEDIR)/bin
 TARGET		= kcheckers

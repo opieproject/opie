@@ -8,18 +8,21 @@
 #include "field.h"
 #include "checkers.h"
 
-#define WOOD   1
-#define MARBLE 2
+#define WOODEN 1
+#define GREEN  2
+#define MARBLE 3
 
 #define ENGLISH 11
 #define RUSSIAN 12
 
 #define BEGINNER 2
 #define NOVICE   4
-#define AVERAGE  5
-#define GOOD     6
-#define EXPERT   7
-#define MASTER   8
+#define AVERAGE  6
+#define GOOD     7
+#define EXPERT   8
+#define MASTER   9
+
+class QToolButton;
 
 
 class KCheckers:public QMainWindow
@@ -28,11 +31,18 @@ class KCheckers:public QMainWindow
   public:
     KCheckers();
 
+  protected:
+    void closeEvent(QCloseEvent*);
+
   private slots:
+
+    void help();
     void about();
     void aboutQt();
     void newGame();
-    void click(int);    // Processes the mouse clics on fields
+    void undoMove();
+    void click(int);
+    void showNumeration();
 
     void setSkillBeginner() {setSkill(BEGINNER);};
     void setSkillNovice()   {setSkill(NOVICE);};
@@ -41,18 +51,23 @@ class KCheckers:public QMainWindow
     void setSkillExpert()   {setSkill(EXPERT);};
     void setSkillMaster()   {setSkill(MASTER);};
 
-    void setPatternWood()   {setPattern(WOOD);};
+    void setPatternWooden() {setPattern(WOODEN);};
+    void setPatternGreen()  {setPattern(GREEN);};
     void setPatternMarble() {setPattern(MARBLE);};
 
     void setRulesEnglish()  {setRules(ENGLISH);};
     void setRulesRussian()  {setRules(RUSSIAN);};
 
   private:
+
     void compGo();
     bool userGo(int);
 
-    void drawBoard();
+    void drawBoard(int);
+    void drawNumeration();
     void colorChange();
+    void unselect();
+    void readConfig();
 
     void setSkill(int);
     void setRules(int);
@@ -62,6 +77,11 @@ class KCheckers:public QMainWindow
     int  skill;
     int  rules;
     int  pattern;
+
+    int  numID;          // Show Numeration
+    int  undoID;         // Undo Move
+    int  undoBoard[32];
+
     bool gameOver;
     bool selected;
     bool userFirst;
@@ -75,6 +95,9 @@ class KCheckers:public QMainWindow
     QImage* imageWood1;
     QImage* imageWood2;
     QImage* imageWood3;
+    QImage* imageGreen1;
+    QImage* imageGreen2;
+    QImage* imageGreen3;
     QImage* imageMarble1;
     QImage* imageMarble2;
     QImage* imageMarble3;
@@ -84,10 +107,15 @@ class KCheckers:public QMainWindow
     QImage* imageKing1;
     QImage* imageKing2;
 
-    Checkers*   game;
-    QPopupMenu* skillMenu;
-    QPopupMenu* optionsMenu;
-    QLabel*     statusLabel;
+    Checkers*    game;
+    QPopupMenu*  gameMenu;
+    QPopupMenu*  skillMenu;
+    QPopupMenu*  optionsMenu;
+    QToolButton* undoButton;
+    QLabel*      statusLabel;
+
+    static QString enNumeration;
+    static QString ruNumeration;
 
     static const int t[32];  // Translate table
 

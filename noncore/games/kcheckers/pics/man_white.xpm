@@ -1,5 +1,5 @@
 /* XPM */
-static const char *man_white[]={
+static const char *man_white_xpm[]={
 "28 28 10 1",
 ". c None",
 "# c #000000",

@@ -12,14 +12,31 @@ class Field:public QWidget
   Q_OBJECT
   public:
     Field(QWidget*,int);
-    void draw(QImage*);
+
+    void setFrame(QImage*);
+    void setPicture(QImage*);
+    void setPattern(QImage*);
+    void setLabel(const QString &);
+
   signals:
     void click(int);
+
   protected:
     void paintEvent(QPaintEvent*);
     void mousePressEvent(QMouseEvent*);
+
   private:
+    void draw();
+
     int number;
+
+    // pixmap = pattern + label + picture + frame;
+
+    QImage* frame;
+    QImage* picture;
+    QImage* pattern;
+    QString label;
+
     QPixmap *pixmap;
 
 };

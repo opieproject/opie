@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 
   KCheckers kcheckers;
   app.setMainWidget(&kcheckers);
-  kcheckers.show();
+  kcheckers.showMaximized();
 
   return app.exec();
 }

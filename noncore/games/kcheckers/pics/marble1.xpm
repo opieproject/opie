@@ -1,6 +1,6 @@
 /* XPM */
-static const char *marble1[]={
-"28 28 209 2",
+static const char *marble1_xpm[]={
+"32 32 209 2",
 "#Y c #cbcee3",
 ".s c #cccfe4",
 ".X c #cdcfe5",
@@ -237,4 +237,8 @@ static const char *marble1[]={
 ".#.P.H#Z.b.Q.F#p.d.H#T.h#aba.d#w.P#f#S.J.t.O.K.ubbas.0.ubc.o.c.l",
 "Qt.H.H#f.o#g.c.c.g#Z.S.e.dbd#a.#.h#v.c#X.0.q#X.6#H#k.v#u#s#S.g#V",
 "Qt.C.o.g.b.C.e.F.C.B#cbd.l#a#a.c.#.Q.l#5.6.6.K#6.u.y.M.ybe.5.a#g",
-".C.i#w#w.dau.e.c.b.Q#c#daZ.5.c.e.e#g.i#X#j.w.0af#Hbf#m.q#X#a#e.i"};
+".C.i#w#w.dau.e.c.b.Q#c#daZ.5.c.e.e#g.i#X#j.w.0af#Hbf#m.q#X#a#e.i",
+"#w.#bg.j#v.F.i.d.d#y.f#O.5.3#P.3#ya0#q#s#u#k.O.qbhbi#.#Q#k.b.bbj",
+"#f.C#w#w.F#e.B.b.lbk#Y.W##.6bbbl.O.w.L.A.l#q#y.B.H.h.#.B.##t.Mac",
+".H.F.C#w.3.e.i.i.eaZad.W.0.y#t#m.z#k#l.c.d.E.b#i#8.a.d.##P.z.v.O",
+"#V.i.h#f#e.i.e.e.e#Qbm.t.y#k.r.yaf#F#nbn.d.i.h#h#e#v.o#wbo.q#l#l"};

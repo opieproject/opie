@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/games
 Maintainer: leseb <prudhomme@laposte.net>
 Architecture: arm
-Version: 0.2-$SUB_VERSION
+Version: 0.3-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: The game of Checkers
  A game for the Opie environment.

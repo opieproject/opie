@@ -1,5 +1,5 @@
 /* XPM */
-static const char *wood1[]={
+static const char *wood1_xpm[]={
 "32 32 82 2",
 "#c c #9c825c",
 ".H c #9c8664",
