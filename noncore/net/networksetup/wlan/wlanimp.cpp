@@ -90,43 +90,32 @@ void WLANImp::parseSettingFile(){
 	  networkInfrastructure->setChecked( false );
 	}
       }
+      if(line.contains("KEY0="))
+        keyLineEdit0->setText(line.mid(5, line.length()));
+      if(line.contains("KEY1="))
+        keyLineEdit1->setText(line.mid(5, line.length()));
+      if(line.contains("KEY2="))
+        keyLineEdit2->setText(line.mid(5, line.length()));
+      if(line.contains("KEY3="))
+        keyLineEdit3->setText(line.mid(5, line.length()));
+      
       if(line.contains("KEY=")){
-        line.at(0) != '#' ? wepEnabled->setChecked(true) : wepEnabled->setChecked(false);
-        int s = line.find("KEY=");
-	line = line.mid(s+4, line.length());
-        // Find first Key
-	s = line.find("[1]");
-	if(s != -1){
-	  keyLineEdit0->setText(line.mid(0, s));
-	  line = line.mid(s+3, line.length());
-	}
-        s = line.find("[2]");
-	if(s != -1){
-	  keyLineEdit1->setText(line.mid(0, s));
-	  line = line.mid(s+3, line.length());
-	}
-        s = line.find("[3]");
-	if(s != -1){
-	  keyLineEdit2->setText(line.mid(0, s));
-	  line = line.mid(s+3, line.length());
-	}
-        s = line.find("[4]");
-	if(s != -1){
-	  keyLineEdit3->setText(line.mid(0, s));
-	  line = line.mid(s+3, line.length());
-	}
-        if(line.contains("key [1]")) keyRadio0->setChecked(true);
-        if(line.contains("key [2]")) keyRadio1->setChecked(true);
-        if(line.contains("key [3]")) keyRadio2->setChecked(true);
-        if(line.contains("key [4]")) keyRadio3->setChecked(true);
-        if(line.contains("open")){
+        wepEnabled->setChecked(true);
+        QString key;
+	if(line.right(5) == (" open")){
+	  key = line.mid(4, line.length()-5);
 	  authOpen->setChecked(true);
 	  authShared->setChecked(false);
 	}
 	else{
 	  authOpen->setChecked(false);
 	  authShared->setChecked(true);
+	  key = line.mid(4, line.length());
 	}
+        if(key == keyLineEdit0->text()) keyRadio0->setChecked(true);
+	if(key == keyLineEdit1->text()) keyRadio1->setChecked(true);
+	if(key == keyLineEdit2->text()) keyRadio2->setChecked(true);
+	if(key == keyLineEdit3->text()) keyRadio3->setChecked(true);
       }
       if(line.contains("CHANNEL=")){
         networkChannel->setValue(line.mid(line.find("CHANNEL=")+8, line.length()).toInt());
@@ -167,21 +156,22 @@ void WLANImp::changeAndSaveSettingFile(){
         stream << line << "\n"; 
       
       stream << "\tESSID=" << (essNon->isChecked() == true ? QString("any") : essSpecificLineEdit->text()) << '\n';
-      stream << "\tMODE=" << (networkInfrastructure->isChecked() == true  ? "Managed" : "AdHoc") << '\n';
-      if(!wepEnabled->isChecked())
-        stream << "#";
-      stream << "\tKEY=";
-      stream << keyLineEdit0->text() << " [1]";
-      stream << keyLineEdit1->text() << " [2]";
-      stream << keyLineEdit2->text() << " [3]";
-      stream << keyLineEdit3->text() << " [4]";
-      stream << " key [";
-      if(keyRadio0->isChecked()) stream << "1]";
-      if(keyRadio1->isChecked()) stream << "2]";
-      if(keyRadio2->isChecked()) stream << "3]";
-      if(keyRadio3->isChecked()) stream << "4]";
-      if(authOpen->isChecked()) stream << " open";
-      stream << "\n"; 
+      stream << "\tMODE=" << (networkInfrastructure->isChecked() == true  ? "Managed" : "ad-hoc") << '\n';
+      
+      stream << "\tKEY0=" << keyLineEdit0->text() << "\n";
+      stream << "\tKEY1=" << keyLineEdit1->text() << "\n";
+      stream << "\tKEY2=" << keyLineEdit2->text() << "\n";
+      stream << "\tKEY3=" << keyLineEdit3->text() << "\n";
+      
+      if(wepEnabled->isChecked()){
+        stream << "\tKEY=";
+        if(keyRadio0->isChecked()) stream << keyLineEdit0->text();
+        if(keyRadio1->isChecked()) stream << keyLineEdit1->text();
+        if(keyRadio2->isChecked()) stream << keyLineEdit2->text();
+        if(keyRadio3->isChecked()) stream << keyLineEdit3->text();
+	if(authOpen->isChecked()) stream << " open";
+	stream << "\n";
+      }
       stream << "\tCHANNEL=" << networkChannel->value() << "\n";
       stream << "\tRATE=auto\n";
       if(line.contains("esac"))
@@ -214,7 +204,9 @@ void WLANImp::accept(){
   // Try to save the interfaces settings.
   if(!interfaceSetup->saveChanges())
     return;
-  
+ 
+  QDialog::accept();
+  return;
   // Restart the device now that the settings have changed
   QString initpath;
   if( QDir("/etc/rc.d/init.d").exists() )
