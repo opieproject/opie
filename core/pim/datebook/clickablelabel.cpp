@@ -1,9 +1,9 @@
 #include "clickablelabel.h"
 #include <stdio.h>
 
-ClickableLabel::ClickableLabel(QWidget* parent = 0, 
-			       const char* name = 0, 
-			       WFlags fl = 0) :
+ClickableLabel::ClickableLabel(QWidget* parent, 
+			       const char* name, 
+			       WFlags fl) :
   QLabel(parent,name,fl)
 {
     textInverted=false;

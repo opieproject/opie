@@ -92,9 +92,9 @@ void DateBookWeekLstHeader::prevWeek() {
 }
 
 DateBookWeekLstDayHdr::DateBookWeekLstDayHdr(const QDate &d, bool onM,
-					     QWidget* parent = 0, 
-					     const char* name = 0, 
-					     WFlags fl = 0 ) 
+					     QWidget* parent, 
+					     const char* name, 
+					     WFlags fl ) 
     : DateBookWeekLstDayHdrBase(parent, name, fl) {
 
     date=d;
@@ -140,9 +140,9 @@ void DateBookWeekLstDayHdr::newEvent() {
     emit addEvent(start,stop,"");
 }
 DateBookWeekLstEvent::DateBookWeekLstEvent(const EffectiveEvent &ev, 
-					   QWidget* parent = 0, 
-					   const char* name = 0, 
-					   WFlags fl = 0) :
+					   QWidget* parent, 
+					   const char* name, 
+					   WFlags fl) :
     ClickableLabel(parent,name,fl),
     event(ev)
 {

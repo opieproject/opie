@@ -7,8 +7,8 @@
 #include <qstring.h>
 #include <stdio.h>
 
-TimePicker::TimePicker(QWidget* parent = 0, const char* name = 0, 
-		       WFlags fl = 0) :
+TimePicker::TimePicker(QWidget* parent, const char* name, 
+		       WFlags fl) :
   QWidget(parent,name,fl)
 {
   QVBoxLayout *vbox=new QVBoxLayout(this);

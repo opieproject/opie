@@ -612,7 +612,7 @@ QDate DateBookWeek::weekDate() const
 // week...
 
 bool calcWeek( const QDate &d, int &week, int &year,
-	       bool startOnMonday = false )
+	       bool startOnMonday )
 {
     int weekNumber;
     int yearNumber;

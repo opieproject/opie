@@ -485,10 +485,10 @@ DateBookDayWidget::DateBookDayWidget( const EffectiveEvent &e,
     text += "<br><br>" + strNote;
     setBackgroundMode( PaletteBase );
 
-    QTime s = ev.start();
-    QTime e = ev.end();
-    int y = s.hour()*60+s.minute();
-    int h = e.hour()*60+e.minute()-y;
+    QTime start = ev.start();
+    QTime end = ev.end();
+    int y = start.hour()*60+start.minute();
+    int h = end.hour()*60+end.minute()-y;
     int rh = dateBook->dayView()->rowHeight(0);
     y = y*rh/60;
     h = h*rh/60;
