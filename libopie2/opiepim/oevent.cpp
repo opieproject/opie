@@ -242,8 +242,13 @@ void OEvent::changeOrModify() {
         Data* d2 = new Data;
         d2->description = data->description;
         d2->location = data->location;
-        d2->manager = data->manager;
-        d2->recur = data->recur;
+
+        if (data->manager )
+            d2->manager = new OPimNotifyManager( *data->manager );
+
+        if ( data->recur )
+            d2->recur = new ORecur( *data->recur );
+
         d2->note = data->note;
         d2->created = data->created;
         d2->start = data->start;
@@ -251,10 +256,11 @@ void OEvent::changeOrModify() {
         d2->isAllDay = data->isAllDay;
         d2->timezone = data->timezone;
         d2->parent = data->parent;
-        d2->child = data->child;
 
-        if (d2->child )
+        if ( data->child ) {
+            d2->child = new QArray<int>( *data->child );
             d2->child->detach();
+        }
 
         data = d2;
     }
