@@ -100,11 +100,13 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     buttonMask.fill( 0 );
 
     for ( int i = 0; i < 7; i++ ) {
-        QString filename = QString( QPEApplication::qpeDir() + "/pics/" + skinPath + "/skinV_mask_" + skinV_mask_file_names[i] + ".png" );
-        masks[i] = new QBitmap( filename );
+        Button &button = buttons[ i ];
 
-        if ( !masks[i]->isNull() ) {
-            QImage imgMask = masks[i]->convertToImage();
+        QString filename = QString( QPEApplication::qpeDir() + "/pics/" + skinPath + "/skinV_mask_" + skinV_mask_file_names[i] + ".png" );
+        button.mask = QBitmap( filename );
+
+        if ( !button.mask.isNull() ) {
+            QImage imgMask = button.mask.convertToImage();
             uchar **dest = buttonMask.jumpTable();
             for ( int y = 0; y < imgUp.height(); y++ ) {
                 uchar *line = dest[y];
@@ -139,16 +141,10 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
 
 
 VideoWidget::~VideoWidget() {
-
     for ( int i = 0; i < 7; i++ ) {
         delete buttonPixUp[i];
         delete buttonPixDown[i];
     }
-
-    for ( int i = 0; i < 7; i++ ) {
-        delete masks[i];
-    }
-
 }
 
 QPixmap *combineVImageWithBackground( QImage img, QPixmap bg, QPoint offset ) {
@@ -188,11 +184,13 @@ void VideoWidget::resizeEvent( QResizeEvent * ) {
     QPixmap *pixDn = combineVImageWithBackground( imgDn, pixBg, p );
 
     for ( int i = 0; i < 7; i++ ) {
-        if ( !masks[i]->isNull() ) {
+        Button &button = buttons[ i ];
+
+        if ( !button.mask.isNull() ) {
             delete buttonPixUp[i];
             delete buttonPixDown[i];
-            buttonPixUp[i] = maskVPixToMask( *pixUp, *masks[i] );
-            buttonPixDown[i] = maskVPixToMask( *pixDn, *masks[i] );
+            buttonPixUp[i] = maskVPixToMask( *pixUp, button.mask );
+            buttonPixDown[i] = maskVPixToMask( *pixDn, button.mask );
         }
     }
 

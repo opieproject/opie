@@ -100,11 +100,9 @@ private:
     QPixmap pixBg;
     QImage  imgUp;
     QImage  imgDn;
-    QBitmap *masks[7];
     QPixmap *buttonPixUp[7];
     QPixmap *buttonPixDown[7];
     QString skin;
-//    QPixmap *pixmaps[4];
 
 
     virtual void paintButton( QPainter &p, int i );
