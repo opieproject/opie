@@ -1,12 +1,17 @@
+#define _GNU_SOURCE
+
+#include <sys/types.h>
+#include <time.h>
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <unistd.h>
 #include <syslog.h>
-#include <sys/types.h>
 #include <sys/wait.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <getopt.h>
+#include <string.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
@@ -16,17 +21,24 @@
 #include <opie/odevice.h>
 
 #include <qwindowsystem_qws.h>
-#include <qfile.h>
+#include <qmessagebox.h>
+#include <qlabel.h>
+#include <qtimer.h>
 
+#include "loginapplication.h"
 #include "loginwindowimpl.h"
 #include "calibrate.h"
 
 using namespace Opie;
 
 int login_main ( int argc, char **argv );
-void sigusr1 ( int sig );
+void sigterm ( int sig );
 void exit_closelog ( );
 
+static struct option long_options [] = {
+	{ "autologin", 1, 0, 'a' },
+	{ 0, 0, 0, 0 }
+};
 
 
 int main ( int argc, char **argv )
@@ -34,6 +46,21 @@ int main ( int argc, char **argv )
 	if ( ::geteuid ( ) != 0 ) {
 		::fprintf ( stderr, "%s can only be executed by root. (or chmod +s)", argv [0] );
 		return 1;
+	}
+	if ( ::getuid ( ) != 0 ) // qt doesn't really like SUID and
+		::setuid ( 0 );      // messes up things like config files
+
+	char *autolog = 0;
+	int c;
+	while (( c = ::getopt_long ( argc, argv, "a:", long_options, 0 )) != -1 ) {
+		switch ( c ) {
+			case 'a':
+				autolog = optarg;
+				break;
+			default:
+				::fprintf ( stderr, "Usage: %s [-a|--autologin=<user>]\n", argv [0] );
+				return 2;
+		}
 	}
 
 //	struct rlimit rl;
@@ -45,7 +72,7 @@ int main ( int argc, char **argv )
 	::setpgid ( 0, 0 );
 	::setsid ( );
 
-	::signal ( SIGUSR1, sigusr1 );
+	::signal ( SIGTERM, sigterm );
 
 	::openlog ( "opie-login", LOG_CONS, LOG_AUTHPRIV );
 	::atexit ( exit_closelog );
@@ -54,26 +81,81 @@ int main ( int argc, char **argv )
 		pid_t child = ::fork ( );
 
 		if ( child < 0 ) {
-			::syslog ( LOG_ERR, "Could not fork process" );
+			::syslog ( LOG_ERR, "Could not fork GUI process\n" );
 			break;
-
 		}
 		else if ( child > 0 ) {
 			int status = 0;
+			time_t started = ::time ( 0 );
 
 			while ( ::waitpid ( child, &status, 0 ) < 0 ) { }
+
+			if (( ::time ( 0 ) - started ) < 3 ) {
+				if ( autolog ) {
+					::syslog ( LOG_ERR, "Respawning too fast -- disabling auto-login\n" );
+					autolog = 0;
+				}
+				else {
+					::syslog ( LOG_ERR, "Respawning too fast -- going down\n" );
+					break;
+				}
+			}
+			int killedbysig = 0;
+
+			if ( WIFSIGNALED( status )) {
+				switch ( WTERMSIG( status )) {
+					case SIGINT :
+					case SIGTERM:
+					case SIGKILL:
+						break;
+
+					default     :
+						killedbysig = WTERMSIG( status );
+						break;
+				}
+			}
+			if ( killedbysig ) {  // qpe was killed by an uncaught signal
+				qApp = 0;
+
+				QWSServer::setDesktopBackground ( QImage ( ));
+				QApplication *app = new QApplication ( argc, argv, QApplication::GuiServer );
+				app-> setFont ( QFont ( "Helvetica", 10 ));
+				app-> setStyle ( new QPEStyle ( ));
+
+				const char *sig = ::strsignal ( killedbysig );
+				QLabel *l = new QLabel ( 0, "sig", Qt::WStyle_Customize | Qt::WStyle_NoBorder | Qt::WStyle_Tool );
+				l-> setText ( LoginWindowImpl::tr( "OPIE was terminated\nby an uncaught signal\n(%1)\n" ). arg ( sig ));
+				l-> setAlignment ( Qt::AlignCenter );
+				l-> move ( 0, 0 );
+				l-> resize ( app-> desktop ( )-> width ( ), app-> desktop ( )-> height ( ));
+				l-> show ( );
+				QTimer::singleShot ( 3000, app, SLOT( quit ( )));
+				app-> exec ( );
+				delete app;
+				qApp = 0;
+			}
 		}
 		else {
-			::exit ( login_main ( argc, argv ));
+			if ( autolog ) {
+				LoginApplication::setLoginAs ( autolog );
+
+				if ( LoginApplication::changeIdentity ( ))
+					::exit ( LoginApplication::login ( ));
+				else
+					::exit ( 0 );
+			}
+			else
+				::exit ( login_main ( argc, argv ));
 		}
 	}
 	return 0;
 }
 
-void sigusr1 ( int /*sig*/ )
+void sigterm ( int /*sig*/ )
 {
 	::exit ( 0 );
 }
+
 
 void exit_closelog ( )
 {
@@ -181,13 +263,14 @@ private:
 
 
 
+
 int login_main ( int argc, char **argv )
 {
 	QWSServer::setDesktopBackground( QImage() );
-	QPEApplication app ( argc, argv, QApplication::GuiServer );
+	LoginApplication *app = new LoginApplication ( argc, argv );
 
-	app. setFont ( QFont ( "Helvetica", 10 ));
-	app. setStyle ( new QPEStyle ( ));
+	app-> setFont ( QFont ( "Helvetica", 10 ));
+	app-> setStyle ( new QPEStyle ( ));
 
 	ODevice::inst ( )-> setSoftSuspend ( true );
 
@@ -208,14 +291,29 @@ int login_main ( int argc, char **argv )
 
 
 	LoginWindowImpl *lw = new LoginWindowImpl ( );
-	app. setMainWidget ( lw );
-	lw-> setGeometry ( 0, 0, app. desktop ( )-> width ( ), app. desktop ( )-> height ( ));
+	app-> setMainWidget ( lw );
+	lw-> setGeometry ( 0, 0, app-> desktop ( )-> width ( ), app-> desktop ( )-> height ( ));
 	lw-> show ( );
 
-	int rc = app. exec ( );
+	int rc = app-> exec ( );
 
 	ODevice::inst ( )-> setSoftSuspend ( false );
 
+	if ( app-> loginAs ( )) {
+		if ( app-> changeIdentity ( )) {
+			app-> login ( );
+
+			// if login succeeds, it never comes back
+
+			QMessageBox::critical ( 0, LoginWindowImpl::tr( "Failure" ), LoginWindowImpl::tr( "Could not start OPIE." ));
+			rc = 1;
+		}
+		else {
+			QMessageBox::critical ( 0, LoginWindowImpl::tr( "Failure" ), LoginWindowImpl::tr( "Could not switch to new user identity" ));
+			rc = 2;
+		}
+
+	}
 	return rc;
 }
 
