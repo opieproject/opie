@@ -104,6 +104,10 @@ Afslut alligevel?</translation>
         <source>Continue</source>
         <translation>Fortsæt</translation>
     </message>
+    <message>
+        <source>Duplicate Event</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -188,6 +192,18 @@ Afslut alligevel?</translation>
     <message>
         <source>Beam</source>
         <translation>Send</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

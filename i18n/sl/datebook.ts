@@ -104,6 +104,10 @@ Izhod?</translation>
         <source>Continue</source>
         <translation>Nadaljuj</translation>
     </message>
+    <message>
+        <source>Duplicate Event</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -188,6 +192,18 @@ Izhod?</translation>
     <message>
         <source>This is an all day event.</source>
         <translation>To je celodnevni dogodek.</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

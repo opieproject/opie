@@ -103,6 +103,10 @@ Uscire comunque?</translation>
         <source>Continue</source>
         <translation>Continua</translation>
     </message>
+    <message>
+        <source>Duplicate Event</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -187,6 +191,18 @@ Uscire comunque?</translation>
     <message>
         <source>Beam</source>
         <translation>Trasmetti via IrDA</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
