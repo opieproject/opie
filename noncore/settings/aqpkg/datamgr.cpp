@@ -148,7 +148,7 @@ void DataManager :: loadServers()
                 char type[20];
                 char val[100];
                 sscanf( lineStr, "%*[^ ] %s %s", type, val );
-                if ( stricmp( type, "http_proxy" ) == 0 )
+                if ( qstricmp( type, "http_proxy" ) == 0 )
                 {
                     httpProxy = val;
                     if ( lineStr.startsWith( "#" ) )
@@ -156,7 +156,7 @@ void DataManager :: loadServers()
                     else
                         httpProxyEnabled = true;
                 }
-                if ( stricmp( type, "ftp_proxy" ) == 0 )
+                if ( qstricmp( type, "ftp_proxy" ) == 0 )
                 {
                     ftpProxy = val;
                     if ( lineStr.startsWith( "#" ) )
@@ -164,9 +164,9 @@ void DataManager :: loadServers()
                     else
                         ftpProxyEnabled = true;
                 }
-                if ( stricmp( type, "proxy_username" ) == 0 )
+                if ( qstricmp( type, "proxy_username" ) == 0 )
                     proxyUsername = val;
-                if ( stricmp( type, "proxy_password" ) == 0 )
+                if ( qstricmp( type, "proxy_password" ) == 0 )
                     proxyPassword = val;
             }
         }
