@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=main-tab
+Icon=Example
+Type=Example
+Name=TabWidget Example
+Comment=An Example Program

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Exec=simple-main
+Icon=Example
+Type=Example
+Name=Simple MainWindow
+Comment=An Example Program
+Name[pt]=Exemplo
+Comment[pt]=Um programa de exemplo
