@@ -10,7 +10,7 @@ class AttachDiag : public QDialog
 	Q_OBJECT
 
 public:
-	static DocLnk getFile();
+	static DocLnk getFile(QWidget *parent);
 
 protected:
 	AttachDiag(QWidget *parent = 0, const char* name = 0, bool modal = false, WFlags fl = 0);

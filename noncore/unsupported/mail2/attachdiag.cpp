@@ -55,9 +55,9 @@ void AttachDiag::fileSelected(const DocLnk &file)
 	currentFile = file;
 }
 
-DocLnk AttachDiag::getFile()
+DocLnk AttachDiag::getFile(QWidget *parent)
 {
-	AttachDiag *attach = new AttachDiag(0, 0, true);
+	AttachDiag *attach = new AttachDiag(parent, 0, true);
 	attach->showMaximized();
 	attach->show();
 

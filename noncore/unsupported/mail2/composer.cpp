@@ -199,7 +199,7 @@ void Composer::slotOpenAddressPicker()
 
 void Composer::slotAddAttach()
 {
-	DocLnk lnk = AttachDiag::getFile();
+	DocLnk lnk = AttachDiag::getFile(this);
 	if (lnk.name().isEmpty()) return;
 
 	Attachment attachment;
