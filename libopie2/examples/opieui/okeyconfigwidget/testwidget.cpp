@@ -84,8 +84,10 @@ TestMainWindow::TestMainWindow( QWidget* parent, const char* slot, WFlags fl )
                                                  blackList, false, this, "Key Manager" );
 
     m_manager->addKeyConfig( Opie::Ui::OKeyConfigItem( tr( "Delete Action" ), "delete_key", QPixmap(),
-                                                       10, Opie::Ui::OKeyPair( Qt::Key_D, 0 ), this,
+                                                       10, Opie::Ui::OKeyPair( Qt::Key_D, Qt::ShiftButton ), this,
                                                        SLOT(slotDelete(QWidget*,QKeyEvent*)) ) );
+    m_manager->addKeyConfig( Opie::Ui::OKeyConfigItem( tr( "Show Action" ), "show_key", QPixmap(),
+                                                       11, Opie::Ui::OKeyPair( Qt::Key_S, Qt::AltButton ) ) );
 
     connect(m_manager, SIGNAL(actionActivated(QWidget*,QKeyEvent*,const Opie::Ui::OKeyConfigItem&)),
             this, SLOT(slotAction(QWidget*, QKeyEvent*, const Opie::Ui::OKeyConfigItem&)) );
@@ -96,6 +98,7 @@ TestMainWindow::TestMainWindow( QWidget* parent, const char* slot, WFlags fl )
 
 TestMainWindow::~TestMainWindow() {
     m_manager->save();
+    delete m_config;
 }
 
 Opie::Ui::OKeyConfigManager* TestMainWindow::manager() {
@@ -108,7 +111,8 @@ Opie::Ui::OKeyConfigManager* TestMainWindow::manager() {
  */
 void TestMainWindow::keyPressEvent( QKeyEvent* ev ) {
     qWarning( "String is "+ m_manager->handleKeyEvent( ev ).text() );
-    qWarning( "Id was %d", m_manager->handleKeyEventId( ev ) );
+    qWarning( "Id was %d %d %d %d", m_manager->handleKeyEventId( ev ),ev->key(),ev->state(), ev->ascii() );
+    ev->ignore();
 }
 
 void TestMainWindow::slotDelete( QWidget* wid, QKeyEvent* ev ) {
