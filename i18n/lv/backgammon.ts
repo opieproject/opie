@@ -3,164 +3,168 @@
     <name>AI_Dialog</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādījumi</translation>
     </message>
     <message>
         <source>&lt;b&gt;Rescue&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Glābt&lt;/b&gt;</translation>
     </message>
     <message>
         <source>?</source>
-        <translation type="unfinished"></translation>
+        <translation>?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Eliminate&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Nosist&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Expose&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Atklāt&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Protect&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Aizsargāt&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Safe&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Drošs&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Empty&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Tukšs&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Default Values</source>
-        <translation type="unfinished"></translation>
+        <translation>Noklusētās vērtības</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Palīdzība</translation>
     </message>
     <message>
         <source>Bring the pieces out of the endzone</source>
-        <translation type="unfinished"></translation>
+        <translation>Aizvākt kauliņus prom no beiguzonas</translation>
     </message>
     <message>
         <source>Eliminate an opponents piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Nosist oponenta kauliņu</translation>
     </message>
     <message>
         <source>Expose you own pieces.
 After such a move only one piece will remain in the slot</source>
-        <translation type="unfinished"></translation>
+        <translation>Atklāt savus kauliņus.
+Pēc šāda gājiena tikai viens kauliņš paliks slotā</translation>
     </message>
     <message>
         <source>Protect a single piece by
 putting another one in this slot</source>
-        <translation type="unfinished"></translation>
+        <translation>Aizsargāt vienu kauliņu
+novietojot otru uz tā</translation>
     </message>
     <message>
         <source>Move piece to a slot already
 occupied by the player</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārvietot kauliņu uz lauciņa
+kur jau ir pretinieks</translation>
     </message>
     <message>
         <source>Move piece to an empty slot</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārvietot kauliņu uz tukšu lauku</translation>
     </message>
     <message>
         <source>Press and hold the ? buttton
 next to a field for help</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiediet un turiet ? pogu
+blakus laukam, lai saņemtu palīdzību</translation>
     </message>
 </context>
 <context>
     <name>BackGammon</name>
     <message>
         <source>Backgammon</source>
-        <translation type="unfinished"></translation>
+        <translation>Bakagamons</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns</translation>
     </message>
     <message>
         <source>Load</source>
-        <translation type="unfinished"></translation>
+        <translation>Ielādēt</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst</translation>
     </message>
     <message>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Spēle</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Noklusēts</translation>
     </message>
     <message>
         <source>Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Tēma</translation>
     </message>
     <message>
         <source>Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Spēlētājs</translation>
     </message>
     <message>
         <source>AI</source>
-        <translation type="unfinished"></translation>
+        <translation>Visi</translation>
     </message>
     <message>
         <source>Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Noteikumi</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcijas</translation>
     </message>
     <message>
         <source>deleted theme %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>dzēst tēmu %1?</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Labi</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Atlikt</translation>
     </message>
     <message>
         <source>Load Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Ielādēt Tēmu</translation>
     </message>
     <message>
         <source>&lt;b&gt;no move&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;nav gājienu&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Player 1 wins. Click on board for new game.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Vinēja pirmais spēlētājs.  Lai sāktu spēli no jauna klikšķiniet uz lauka.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Player 2 wins. Click on board for new game.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Vinēja otrais spēlētājs!!  Lai sāktu spēli no jauna klikšķiniet uz lauka.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;P2 turn&lt;/b&gt;</source>
         <comment>P means player</comment>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;2S gājiens&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;P1 turn&lt;/b&gt;</source>
         <comment>P means player</comment>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;1S gājiens&lt;/b&gt;</translation>
     </message>
 </context>
 </TS>
