@@ -564,10 +564,6 @@ void Appearance::accept ( )
 	config. write ( ); // need to flush the config info first
 	Global::applyStyle ( );
 
-	if ( QMessageBox::warning ( this, tr( "Restart" ), tr( "Do you want to restart %1 now?" ). arg ( ODevice::inst ( )-> system ( ) == System_Zaurus ? "Qtopia" : "Opie" ),  tr( "Yes" ), tr( "No" ), 0, 0, 1 ) == 0 ) {
-		QCopEnvelope e( "QPE/System", "restart()" );
-	}
-
 	QDialog::accept ( );
 }
 
