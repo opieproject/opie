@@ -24,7 +24,7 @@
 #include <qbuffer.h>
 
 class QFileInfo;
-class QProcess;
+class OProcess;
 class TransferServer : public QServerSocket
 {
     Q_OBJECT
@@ -92,11 +92,11 @@ private slots:
     void connected();
     void bytesWritten( int bytes );
     void readyRead();
-    void writeTargzBlock();
+    void writeTargzBlock(OProcess *, char *, int);
     void targzDone();
 
-    void gzipTarBlock();
-    void tarExtractBlock();
+    void gzipTarBlock(OProcess *, char *, int);
+    void tarExtractBlock(OProcess *, char *, int);
     void gunzipDone();
     void extractTarDone();
 
@@ -106,9 +106,9 @@ private:
     Mode mode;
     QFile file;
     QBuffer buf;
-    QProcess *createTargzProc;
-    QProcess *retrieveTargzProc;
-    QProcess *gzipProc;
+    OProcess *createTargzProc;
+    OProcess *retrieveTargzProc;
+    OProcess *gzipProc;
 };
 
 class ServerSocket : public QServerSocket

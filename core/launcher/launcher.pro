@@ -4,7 +4,6 @@ DESTDIR		= ../../bin
 HEADERS		= background.h \
 		  desktop.h \
 		  screensaver.h \
-		  qprocess.h \
 		  mediummountgui.h \
 		  info.h \
 		  appicons.h \
@@ -47,7 +46,6 @@ SOURCES		= background.cpp \
 		  desktop.cpp \
 		  screensaver.cpp \
 		  mediummountgui.cpp \
-		  qprocess.cpp qprocess_unix.cpp \
 		  info.cpp \
 		  appicons.cpp \
 		  taskbar.cpp \
