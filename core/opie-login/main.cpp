@@ -63,36 +63,17 @@ void sigterm ( int sig );
 void sigint ( int sig );
 void exit_closelog ( );
 
-static struct option long_options [] = {
-	{ "autologin", 1, 0, 'a' },
-	{ 0, 0, 0, 0 }
-};
-
-
 int main ( int argc, char **argv )
 {
     int userExited = 0;
 	pid_t ppid = ::getpid ( );
 
 	if ( ::geteuid ( ) != 0 ) {
-		::fprintf ( stderr, "%s can only be executed by root. (or chmod +s)", argv [0] );
+		::fprintf ( stderr, "%s can only be executed by root. (or chmod +s)\n", argv [0] );
 		return 1;
 	}
 	if ( ::getuid ( ) != 0 ) // qt doesn't really like SUID and
 		::setuid ( 0 );      // messes up things like config files
-
-	char *autolog = 0;
-	int c;
-	while (( c = ::getopt_long ( argc, argv, "a:", long_options, 0 )) != -1 ) {
-		switch ( c ) {
-			case 'a':
-				autolog = optarg;
-				break;
-			default:
-				::fprintf ( stderr, "Usage: %s [-a|--autologin=<user>]\n", argv [0] );
-				return 2;
-		}
-	}
 
 //	struct rlimit rl;
 //	::getrlimit ( RLIMIT_NOFILE, &rl );
@@ -109,6 +90,12 @@ int main ( int argc, char **argv )
 	::openlog ( "opie-login", LOG_CONS, LOG_AUTHPRIV );
 	::atexit ( exit_closelog );
 
+        const char* autolog = 0;
+        Config c( "opie-login" );
+        c.setGroup( "autologin" );
+        QString entry = c.readEntry( "user", "" );
+        if ( !entry.isEmpty() ) autolog = ::strdup( (const char*) entry );
+        
 	while ( true ) {
 		pid_t child = ::fork ( );
 
@@ -194,7 +181,7 @@ int main ( int argc, char **argv )
                 QWSServer::setDesktopBackground( QImage() );
                 ODevice::inst()->setDisplayStatus( true );
                 LoginApplication *app = new LoginApplication ( argc, argv, ppid );
-                LoginApplication::setLoginAs ( autolog );
+                LoginApplication::setLoginAs( autolog );
 
 
 				if ( LoginApplication::changeIdentity ( ))
