@@ -67,15 +67,25 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
         sampleRate->setCurrentItem(4);
 
     stereoCheckBox->setChecked(cfg.readNumEntry("Stereo", 0));      //TODO hide if zaurus- mono only
-    struct utsname name; /* check for embedix kernel running on the zaurus*/
-    if (uname(&name) != -1) {
-        QString release=name.release;
 
-        if( release.find("embedix",0,TRUE) !=-1)
-            stereoCheckBox->hide();
+#if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX) //since ipaq and zaurus have particular
+                                                //devices
+    bool systemZaurus=FALSE;
+    struct utsname name; /* check for embedix kernel running on the zaurus*/
+    if (uname(&name) != -1) {// TODO change this here,...
+        QString release=name.release;
+        if( release.find("embedix",0,TRUE) != -1) {
+            qDebug("IS System Zaurus");
+            systemZaurus=TRUE;
+        }
     }
-//         else
-//            stereoCheckBox->hide();
+    if(!systemZaurus) {
+        stereoCheckBox->setChecked(TRUE);
+    }
+    stereoCheckBox->setEnabled(FALSE);
+    sixteenBitCheckBox->setEnabled(FALSE);
+#else
+#endif
     int sRate=cfg.readNumEntry("SizeLimit", 30);
     qDebug("%d",sRate);
 
