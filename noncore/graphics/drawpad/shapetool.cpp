@@ -32,6 +32,8 @@ ShapeTool::~ShapeTool()
 
 void ShapeTool::mousePressEvent(QMouseEvent* e)
 {
+    m_pDrawPadCanvas->backupPage();
+
     m_mousePressed = true;
     m_polyline[2] = m_polyline[1] = m_polyline[0] = e->pos();
 }
@@ -41,7 +43,7 @@ void ShapeTool::mouseReleaseEvent(QMouseEvent* e)
     Q_UNUSED(e)
 
     QPainter painter;
-    painter.begin(m_pDrawPadCanvas->currentPage());
+    painter.begin(m_pDrawPadCanvas->currentPage()->pixmap());
     drawFinalShape(painter);
     painter.end();
 
@@ -56,13 +58,11 @@ void ShapeTool::mouseReleaseEvent(QMouseEvent* e)
                        m_pDrawPadCanvas->contentsToViewport(r.bottomRight()));
 
     bitBlt(m_pDrawPadCanvas->viewport(), viewportRect.x(), viewportRect.y(),
-           m_pDrawPadCanvas->currentPage(), r.x(), r.y(), r.width(), r.height());
+           m_pDrawPadCanvas->currentPage()->pixmap(), r.x(), r.y(), r.width(), r.height());
 
     m_pDrawPadCanvas->viewport()->update(viewportRect);
 
     m_mousePressed = false;
-
-    m_pDrawPadCanvas->backupPage();
 }
 
 void ShapeTool::mouseMoveEvent(QMouseEvent* e)
@@ -70,7 +70,7 @@ void ShapeTool::mouseMoveEvent(QMouseEvent* e)
     if (m_mousePressed) {
         m_polyline[0] = e->pos();
         QPainter painter;
-        painter.begin(m_pDrawPadCanvas->currentPage());
+        painter.begin(m_pDrawPadCanvas->currentPage()->pixmap());
         drawTemporaryShape(painter);
         painter.end();
 
@@ -85,7 +85,7 @@ void ShapeTool::mouseMoveEvent(QMouseEvent* e)
                            m_pDrawPadCanvas->contentsToViewport(r.bottomRight()));
 
         bitBlt(m_pDrawPadCanvas->viewport(), viewportRect.x(), viewportRect.y(),
-               m_pDrawPadCanvas->currentPage(), r.x(), r.y(), r.width(), r.height());
+               m_pDrawPadCanvas->currentPage()->pixmap(), r.x(), r.y(), r.width(), r.height());
 
         m_pDrawPadCanvas->viewport()->update(viewportRect);
 

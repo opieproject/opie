@@ -37,8 +37,6 @@ public:
     void importPage(const QString& fileName);
     void exportPage(uint fromPage, uint toPage, const QString& name, const QString& format);
 
-    bool undoEnabled();
-    bool redoEnabled();
     bool goPreviousPageEnabled();
     bool goNextPageEnabled();
 
@@ -58,7 +56,7 @@ public slots:
     void deletePage();
     void movePageUp();
     void movePageDown();
-
+    
     void undo();
     void redo();
 
@@ -69,7 +67,6 @@ public slots:
 
 signals:
     void pagesChanged();
-    void pageBackupsChanged();
 
 protected:
     void contentsMousePressEvent(QMouseEvent* e);
@@ -80,7 +77,6 @@ protected:
 private:
     DrawPad* m_pDrawPad;
     QList<Page> m_pages;
-    QList<Page> m_pageBackups;
 };
 
 #endif // DRAWPADCANVAS_H

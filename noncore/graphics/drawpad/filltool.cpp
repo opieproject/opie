@@ -35,11 +35,13 @@ void FillTool::mousePressEvent(QMouseEvent* e)
     int x = e->x();
     int y = e->y();
 
-    m_image = m_pDrawPadCanvas->currentPage()->convertToImage();
+    m_image = m_pDrawPadCanvas->currentPage()->pixmap()->convertToImage();
     m_fillRgb = m_pDrawPad->brush().color().rgb();
     m_oldRgb = m_image.pixel(x, y);
 
     if (m_oldRgb != m_fillRgb) {
+        m_pDrawPadCanvas->backupPage();
+
         if (m_pDrawPad->antiAliasing()) {
             m_mask.create(m_image.width(), m_image.height(), 8, 2);
             m_mask.fill(0);
@@ -58,10 +60,8 @@ void FillTool::mousePressEvent(QMouseEvent* e)
             fillLine(x, y);
         }
 
-        m_pDrawPadCanvas->currentPage()->convertFromImage(m_image);
+        m_pDrawPadCanvas->currentPage()->pixmap()->convertFromImage(m_image);
         m_pDrawPadCanvas->viewport()->update();
-
-        m_pDrawPadCanvas->backupPage();
     }
 }
 
@@ -111,31 +111,31 @@ void FillTool::fillMaskLine(int x, int y)
 {
     if ((x >= 0) && (x < m_image.width()) && (y >= 0) && (y < m_image.height())) {
         if (m_mask.pixelIndex(x, y) == 0) {
-                if (rgbDistance(m_image.pixel(x, y), m_oldRgb) < FILL_THRESHOLD) {
-                int x1, x2;
+            if (rgbDistance(m_image.pixel(x, y), m_oldRgb) < FILL_THRESHOLD) {
+            int x1, x2;
 
-                x1 = x - 1;
-                x2 = x + 1;
+            x1 = x - 1;
+            x2 = x + 1;
 
-                while ((x1 >= 0) && (rgbDistance(m_image.pixel(x1, y), m_oldRgb) < FILL_THRESHOLD)) {
-                    x1--;
-                }
+            while ((x1 >= 0) && (rgbDistance(m_image.pixel(x1, y), m_oldRgb) < FILL_THRESHOLD)) {
+                x1--;
+            }
 
-                while ((x2 < m_image.width()) && (rgbDistance(m_image.pixel(x2, y), m_oldRgb) < FILL_THRESHOLD)) {
-                    x2++;
-                }
+            while ((x2 < m_image.width()) && (rgbDistance(m_image.pixel(x2, y), m_oldRgb) < FILL_THRESHOLD)) {
+                x2++;
+            }
 
-                for (int i = x1 + 1; i < x2; i++) {
-                    m_mask.setPixel(i, y, 1);
-                }
+            for (int i = x1 + 1; i < x2; i++) {
+                m_mask.setPixel(i, y, 1);
+            }
 
-                for (int i = x1 + 1; i < x2; i++) {
-                    fillMaskLine(i, y - 1);
-                }
+            for (int i = x1 + 1; i < x2; i++) {
+                fillMaskLine(i, y - 1);
+            }
 
-                for (int i = x1 + 1; i < x2; i++) {
-                    fillMaskLine(i, y + 1);
-                }
+            for (int i = x1 + 1; i < x2; i++) {
+                fillMaskLine(i, y + 1);
+            }
             }
         }
     }

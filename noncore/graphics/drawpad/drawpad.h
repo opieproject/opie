@@ -59,10 +59,8 @@ private slots:
     void changePenWidth(int value);
     void changePenColor(const QColor& color);
     void changeBrushColor(const QColor& color);
-
-    void updateUndoRedoToolButtons();
-    void updateNavigationToolButtons();
-    void updateCaption();
+    
+    void updateView();
 
     void deleteAll();
     void importPage();

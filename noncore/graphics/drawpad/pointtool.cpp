@@ -33,6 +33,8 @@ PointTool::~PointTool()
 
 void PointTool::mousePressEvent(QMouseEvent* e)
 {
+    m_pDrawPadCanvas->backupPage();
+
     m_mousePressed = true;
     m_polyline[2] = m_polyline[1] = m_polyline[0] = e->pos();
 }
@@ -42,8 +44,6 @@ void PointTool::mouseReleaseEvent(QMouseEvent* e)
     Q_UNUSED(e)
 
     m_mousePressed = false;
-
-    m_pDrawPadCanvas->backupPage();
 }
 
 void PointTool::mouseMoveEvent(QMouseEvent* e)
@@ -61,7 +61,7 @@ void PointTool::mouseMoveEvent(QMouseEvent* e)
         r.setBottom(r.bottom() + m_pDrawPad->pen().width());
 
         QPainter painter;
-        painter.begin(m_pDrawPadCanvas->currentPage());
+        painter.begin(m_pDrawPadCanvas->currentPage()->pixmap());
 
         if (m_pDrawPad->antiAliasing()) {
             QPixmap areaPixmap(r.width(), r.height());
@@ -104,7 +104,7 @@ void PointTool::mouseMoveEvent(QMouseEvent* e)
                            m_pDrawPadCanvas->contentsToViewport(r.bottomRight()));
 
         bitBlt(m_pDrawPadCanvas->viewport(), viewportRect.x(), viewportRect.y(),
-               m_pDrawPadCanvas->currentPage(), r.x(), r.y(), r.width(), r.height());
+               m_pDrawPadCanvas->currentPage()->pixmap(), r.x(), r.y(), r.width(), r.height());
 
         m_pDrawPadCanvas->viewport()->update(viewportRect);
     }

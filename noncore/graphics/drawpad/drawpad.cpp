@@ -55,9 +55,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
 
     m_pDrawPadCanvas = new DrawPadCanvas(this, this);
 
-    connect(m_pDrawPadCanvas, SIGNAL(pagesChanged()), this, SLOT(updateNavigationToolButtons()));
-    connect(m_pDrawPadCanvas, SIGNAL(pagesChanged()), this, SLOT(updateCaption()));
-    connect(m_pDrawPadCanvas, SIGNAL(pageBackupsChanged()), this, SLOT(updateUndoRedoToolButtons()));
+    connect(m_pDrawPadCanvas, SIGNAL(pagesChanged()), this, SLOT(updateView()));
 
     setCentralWidget(m_pDrawPadCanvas);
 
@@ -542,27 +540,21 @@ void DrawPad::changeBrushColor(const QColor& color)
     m_pBrushColorToolButton->popup()->hide();
 }
 
-void DrawPad::updateUndoRedoToolButtons()
-{
-    m_pUndoAction->setEnabled(m_pDrawPadCanvas->undoEnabled());
-    m_pRedoAction->setEnabled(m_pDrawPadCanvas->redoEnabled());
-}
-
-void DrawPad::updateNavigationToolButtons()
-{
-    m_pFirstPageAction->setEnabled(m_pDrawPadCanvas->goPreviousPageEnabled());
-    m_pPreviousPageAction->setEnabled(m_pDrawPadCanvas->goPreviousPageEnabled());
-    m_pNextPageAction->setEnabled(m_pDrawPadCanvas->goNextPageEnabled());
-    m_pLastPageAction->setEnabled(m_pDrawPadCanvas->goNextPageEnabled());
-}
-
-void DrawPad::updateCaption()
+void DrawPad::updateView()
 {
     uint pagePosition = m_pDrawPadCanvas->pagePosition();
     uint pageCount = m_pDrawPadCanvas->pageCount();
 
     setCaption(tr("DrawPad") + " - " + tr("Page") + " "
                + QString::number(pagePosition) + "/" + QString::number(pageCount));
+
+    m_pUndoAction->setEnabled(m_pDrawPadCanvas->currentPage()->undoEnabled());
+    m_pRedoAction->setEnabled(m_pDrawPadCanvas->currentPage()->redoEnabled());
+
+    m_pFirstPageAction->setEnabled(m_pDrawPadCanvas->goPreviousPageEnabled());
+    m_pPreviousPageAction->setEnabled(m_pDrawPadCanvas->goPreviousPageEnabled());
+    m_pNextPageAction->setEnabled(m_pDrawPadCanvas->goNextPageEnabled());
+    m_pLastPageAction->setEnabled(m_pDrawPadCanvas->goNextPageEnabled());
 }
 
 void DrawPad::deleteAll()

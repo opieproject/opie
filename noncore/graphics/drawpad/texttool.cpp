@@ -56,15 +56,15 @@ void TextTool::mousePressEvent(QMouseEvent* e)
     TextToolDialog textToolDialog(m_pDrawPad);
 
     if (textToolDialog.exec() == QDialog::Accepted && !textToolDialog.text().isEmpty()) {
+        m_pDrawPadCanvas->backupPage();
+
         QPainter painter;
-        painter.begin(m_pDrawPadCanvas->currentPage());
+        painter.begin(m_pDrawPadCanvas->currentPage()->pixmap());
         painter.setPen(m_pDrawPad->pen());
         painter.drawText(e->x(), e->y(), textToolDialog.text());
         painter.end();
 
         m_pDrawPadCanvas->viewport()->update();
-
-        m_pDrawPadCanvas->backupPage();
     }
 }
 

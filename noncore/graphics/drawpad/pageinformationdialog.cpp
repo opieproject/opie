@@ -43,10 +43,10 @@ PageInformationDialog::PageInformationDialog(Page* page, QWidget* parent, const 
     QGroupBox* sizeGroupBox = new QGroupBox(0, Qt::Vertical, tr("Size"), this);
 
     QLabel* widthLabel = new QLabel(tr("Width:"), sizeGroupBox);
-    QLabel* widthValueLabel = new QLabel(QString::number(m_pPage->width()), sizeGroupBox);
+    QLabel* widthValueLabel = new QLabel(QString::number(m_pPage->pixmap()->width()), sizeGroupBox);
 
     QLabel* heightLabel = new QLabel(tr("Height:"), sizeGroupBox);
-    QLabel* heightValueLabel = new QLabel(QString::number(m_pPage->height()), sizeGroupBox);
+    QLabel* heightValueLabel = new QLabel(QString::number(m_pPage->pixmap()->height()), sizeGroupBox);
 
     QVBoxLayout* mainLayout = new QVBoxLayout(this, 4, 4);
     generalGroupBox->layout()->setSpacing(4);

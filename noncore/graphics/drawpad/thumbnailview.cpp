@@ -35,7 +35,7 @@ PageListBoxItem::PageListBoxItem(Page* page, QListBox* parent)
 {
     m_pPage = page;
 
-    QImage image = m_pPage->convertToImage();
+    QImage image = m_pPage->pixmap()->convertToImage();
 
     int previewWidth = THUMBNAIL_SIZE;
     int previewHeight = THUMBNAIL_SIZE;
@@ -57,8 +57,8 @@ PageListBoxItem::PageListBoxItem(Page* page, QListBox* parent)
     m_thumbnail.convertFromImage(thumbnailImage);
 
     m_titleText = QObject::tr("Title:") + " " + m_pPage->title();
-    m_dimensionText = QObject::tr("Dimension:") + " " + QString::number(m_pPage->width())
-                      + "x" + QString::number(m_pPage->height());
+    m_dimensionText = QObject::tr("Dimension:") + " " + QString::number(m_pPage->pixmap()->width())
+                      + "x" + QString::number(m_pPage->pixmap()->height());
     m_dateText = QObject::tr("Date:") + " " + dateTimeString(m_pPage->lastModified());
 
     QColor baseColor = parent->colorGroup().base();

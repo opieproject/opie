@@ -32,6 +32,8 @@ EraseTool::~EraseTool()
 
 void EraseTool::mousePressEvent(QMouseEvent* e)
 {
+    m_pDrawPadCanvas->backupPage();
+
     m_mousePressed = true;
     m_polyline[2] = m_polyline[1] = m_polyline[0] = e->pos();
 }
@@ -41,8 +43,6 @@ void EraseTool::mouseReleaseEvent(QMouseEvent* e)
     Q_UNUSED(e)
 
     m_mousePressed = false;
-
-    m_pDrawPadCanvas->backupPage();
 }
 
 void EraseTool::mouseMoveEvent(QMouseEvent* e)
@@ -50,7 +50,7 @@ void EraseTool::mouseMoveEvent(QMouseEvent* e)
     if (m_mousePressed) {
         QPainter painter;
         QPen pen(Qt::white, m_pDrawPad->pen().width());
-        painter.begin(m_pDrawPadCanvas->currentPage());
+        painter.begin(m_pDrawPadCanvas->currentPage()->pixmap());
         painter.setPen(pen);
         m_polyline[2] = m_polyline[1];
         m_polyline[1] = m_polyline[0];
@@ -69,7 +69,7 @@ void EraseTool::mouseMoveEvent(QMouseEvent* e)
                            m_pDrawPadCanvas->contentsToViewport(r.bottomRight()));
 
         bitBlt(m_pDrawPadCanvas->viewport(), viewportRect.x(), viewportRect.y(),
-               m_pDrawPadCanvas->currentPage(), r.x(), r.y(), r.width(), r.height());
+               m_pDrawPadCanvas->currentPage()->pixmap(), r.x(), r.y(), r.width(), r.height());
 
         m_pDrawPadCanvas->viewport()->update(viewportRect);
     }

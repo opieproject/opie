@@ -14,11 +14,13 @@
 #ifndef PAGE_H
 #define PAGE_H
 
-#include <qpixmap.h>
+#include <qobject.h>
 
 #include <qdatetime.h>
+#include <qlist.h>
+#include <qpixmap.h>
 
-class Page : public QPixmap
+class Page : public QObject
 {
 public:
     Page();
@@ -26,16 +28,28 @@ public:
     Page(QString title, const QSize& size);
 
     ~Page();
-    
+
     QString title() const;
     QDateTime lastModified() const;
+    QPixmap* pixmap() const;
 
     void setTitle(QString title);
     void setLastModified(QDateTime lastModified);
 
+    bool undoEnabled();
+    bool redoEnabled();
+
+    void backup();
+    void undo();
+    void redo();
+
 private:
     QString m_title;
     QDateTime m_lastModified;
+    QPixmap* m_pPixmap;
+
+    QList<QPixmap> m_backHistory;
+    QList<QPixmap> m_forwardHistory;
 };
 
 #endif // PAGE_H
