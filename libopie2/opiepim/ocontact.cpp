@@ -484,8 +484,9 @@ QString OContact::toRichText() const
 	if ( state )
 	    text += ", " + Qtopia::escapeString(state);
 	text += "<br>";
-    } else if ( !state.isEmpty() )
+    } else if ( !state.isEmpty() ){
 	text += Qtopia::escapeString(state) + "<br>";
+    } else text += "<br>";
 
     if ( !(value = businessCountry()).isEmpty() )
 	text += Qtopia::escapeString(value) + "<br>";
@@ -547,8 +548,10 @@ QString OContact::toRichText() const
 	if ( !state.isEmpty() )
 	    text += ", " + Qtopia::escapeString(state);
 	text += "<br>";
-    } else if (!state.isEmpty())
-	text += Qtopia::escapeString(state) + "<br>";
+    } else if (!state.isEmpty()) {
+	    text += Qtopia::escapeString(state) + "<br>";
+    } else text += "<br>";
+	    
     if ( !(value = homeCountry()).isEmpty() )
 	text += Qtopia::escapeString(value) + "<br>";
 
