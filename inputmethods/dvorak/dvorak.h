@@ -18,8 +18,8 @@
 **
 **********************************************************************/
 #include <qframe.h>
-#include "../pickboard/pickboardcfg.h"
-#include "../pickboard/pickboardpicks.h"
+#include <pickboardcfg.h>
+#include <pickboardpicks.h>
 
 class QTimer;
 

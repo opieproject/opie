@@ -19,8 +19,8 @@
 **********************************************************************/
 #include <qframe.h>
 #include <qmap.h>
-#include "../pickboard/pickboardcfg.h"
-#include "../pickboard/pickboardpicks.h"
+#include <pickboardcfg.h>
+#include <pickboardpicks.h>
 #include "configdlg.h"
 
 class QTimer;
