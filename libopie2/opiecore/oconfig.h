@@ -101,7 +101,7 @@ class OConfig : public Config
  * in one block.
  *
  * @author Matthias Kalle Dalheimer <Kalle@kde.org>
- * @version $Id: oconfig.h,v 1.5 2003-12-01 22:44:39 mickeyl Exp $
+ * @version $Id: oconfig.h,v 1.6 2004-02-19 02:08:16 zecke Exp $
  * @see OConfig
  */
 
@@ -124,6 +124,7 @@ class OConfigGroupSaver
     /**
      * Destructor.
      * Restores the last current group.
+     * @todo make it not inline for bc reasons. See KDE BC guide
      */
     ~OConfigGroupSaver() { _config->setGroup( _oldgroup ); }
 
