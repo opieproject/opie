@@ -15,7 +15,7 @@
     <name>QtRec</name>
     <message>
         <source>OpieRecord </source>
-        <translation type="unfinished"></translation>
+        <translation>OpieRecord</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -87,11 +87,11 @@
     </message>
     <message>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinein</translation>
     </message>
     <message>
         <source>Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinaus</translation>
     </message>
     <message>
         <source>Options</source>
@@ -109,7 +109,9 @@
         <source>You are running low of
 recording space
 or a card isn&apos;t being recognized</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufnahmeplatz wird 
+knapp oder eine Karte 
+wurde nicht erkannt</translation>
     </message>
     <message>
         <source> seconds</source>
@@ -139,7 +141,7 @@ Datei &lt;font size=+2&gt;&lt;B&gt;LÖSCHEN&lt;/B&gt;&lt;/font&gt;?</translation
     </message>
     <message>
         <source>Opierec</source>
-        <translation type="unfinished"></translation>
+        <translation>Opierec</translation>
     </message>
     <message>
         <source>Please select file to  play</source>
@@ -152,7 +154,7 @@ Datei &lt;font size=+2&gt;&lt;B&gt;LÖSCHEN&lt;/B&gt;&lt;/font&gt;?</translation
     <message>
         <source>Could not open audio file.
 </source>
-        <translation type="unfinished">Konnte Audiodatei nicht öffnen
+        <translation>Konnte Tondatei nicht öffnen.
 </translation>
     </message>
     <message>
@@ -169,11 +171,11 @@ Datei &lt;font size=+2&gt;&lt;B&gt;LÖSCHEN&lt;/B&gt;&lt;/font&gt;?</translation
     </message>
     <message>
         <source>Ir Beam out</source>
-        <translation type="unfinished"></translation>
+        <translation>IR Übertragung</translation>
     </message>
     <message>
         <source>Ir sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>IR übertragen.</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -181,7 +183,7 @@ Datei &lt;font size=+2&gt;&lt;B&gt;LÖSCHEN&lt;/B&gt;&lt;/font&gt;?</translation
     </message>
     <message>
         <source>Rec</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufn</translation>
     </message>
     <message>
         <source>Location</source>
@@ -197,11 +199,11 @@ Datei &lt;font size=+2&gt;&lt;B&gt;LÖSCHEN&lt;/B&gt;&lt;/font&gt;?</translation
     </message>
     <message>
         <source>auto Mute</source>
-        <translation type="unfinished"></translation>
+        <translation>auto still</translation>
     </message>
     <message>
         <source>mute</source>
-        <translation type="unfinished"></translation>
+        <translation>still</translation>
     </message>
     <message>
         <source>Stop</source>

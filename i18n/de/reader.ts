@@ -79,7 +79,7 @@
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished">Home</translation>
+        <translation>Home</translation>
     </message>
     <message>
         <source>Page up</source>
@@ -236,19 +236,19 @@ Actions</source>
     <name>CLayoutPrefs</name>
     <message>
         <source>Strip CR</source>
-        <translation type="unfinished">CR entfernen</translation>
+        <translation>CR entfernen</translation>
     </message>
     <message>
         <source>Dehyphen</source>
-        <translation type="unfinished">ohne Bindestr. </translation>
+        <translation>ohne Bindestr</translation>
     </message>
     <message>
         <source>Single Space</source>
-        <translation type="unfinished">Einzelleerzeichen</translation>
+        <translation>Einzelleerzeichen</translation>
     </message>
     <message>
         <source>Unindent</source>
-        <translation type="unfinished">Nicht eingerückt</translation>
+        <translation>Nicht eingerückt</translation>
     </message>
     <message>
         <source>Reparagraph</source>
@@ -486,11 +486,11 @@ Leading</source>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished">Layout</translation>
+        <translation>Layout</translation>
     </message>
     <message>
         <source>Layout(2)</source>
-        <translation type="unfinished">Layout(2)</translation>
+        <translation>Layout(2)</translation>
     </message>
     <message>
         <source>Locale</source>
@@ -498,7 +498,7 @@ Leading</source>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished">Gemischt</translation>
+        <translation>Gemischt</translation>
     </message>
     <message>
         <source>Buttons</source>
@@ -735,7 +735,7 @@ Leading</source>
     </message>
     <message>
         <source>Scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Blättern</translation>
     </message>
     <message>
         <source>Set Target</source>
