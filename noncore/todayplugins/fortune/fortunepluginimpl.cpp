@@ -35,7 +35,6 @@ TodayPluginObject* FortunePluginImpl::guiPart()
 QRESULT FortunePluginImpl::queryInterface( const QUuid & uuid,  QUnknownInterface **iface )
 {
 	*iface = 0;
-	qWarning("FortunePluginImpl::queryInterface called\n");
 	if ( ( uuid == IID_QUnknown ) || ( uuid == IID_TodayPluginInterface ) )  {
 		*iface = this, (*iface)->addRef();
 	}
