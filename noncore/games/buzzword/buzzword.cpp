@@ -32,18 +32,9 @@
 #include <math.h>
 #include <stdlib.h>
 
-#include <list>
-#include <string>
-
 #include <qpe/qpeapplication.h>
 
 #include "buzzword.h"
-
-// sponsered by rikkus :)
-bool random_compare(const QString &, const QString &)
-{
-  return (rand() % 2) > 0.5;
-}
 
 BuzzLabel::BuzzLabel( QWidget *parent, const char *name )
 : QLabel( parent, name )
@@ -96,7 +87,7 @@ BuzzWord::BuzzWord() : QMainWindow(0)
 
 void BuzzWord::drawGrid()
 {
-	std::list<QString> l;
+	QStringList l;
 
 	QString path = QPEApplication::qpeDir()+"share/buzzword/";
 	QFile f( path + "buzzwords" );
@@ -107,13 +98,11 @@ void BuzzWord::drawGrid()
 
 	while (!t.atEnd())
 	{
-		l.push_back(t.readLine());
+		l << t.readLine();
 	}
 
 	f.close();
 
-	l.sort(random_compare);
-	
 	grid = new QGrid(gridVal, this);
 	grid->setFixedSize(240,240);
 
@@ -121,12 +110,14 @@ void BuzzWord::drawGrid()
 	{
 		for( int r = 0 ; r < gridVal ; r++ )
 		{
-			QString word = QStringList::split(" ", l.front()).join("\n");
+			uint pos = rand() % l. count();
+             
+			QString word = QStringList::split(" ", l[pos]).join("\n");
 			BuzzItem* bi = new BuzzItem( c, r, word, grid );
 			connect( bi, SIGNAL(clicked(int, int)), this, SLOT(clicked(int,int)) );
 			map[c][r] = 0;
 
-			l.pop_front();
+			l.remove( l.at( pos ));
 		}
 	}
 }
