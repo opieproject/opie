@@ -83,7 +83,7 @@ ScreenshotControl::ScreenshotControl( QWidget *parent, const char *name )
     grabItButton= new QPushButton( this, "GrabButton" );
 //    qDebug("new pushbutton");
     grabItButton ->setFocusPolicy( QWidget::TabFocus );
-    grabItButton->setText("Snaphot");
+    grabItButton->setText("Snapshot");
     vbox->setMargin( 6 );
     vbox->setSpacing( 3 );
     vbox->addWidget( delaySpin);
