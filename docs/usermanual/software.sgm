@@ -9,19 +9,24 @@ install an ipkg package file that resides on the local filesystem.
 </para>
 <important>
 <para>
-There is a bug in oipkg that prevents it from installing packages
-properly.  There is, however, a workaround for it.  Simply run oipkg from
-Embedded Konsole to avoid the bug.
+If you are using a version of ipkg lower than 0.99.20 there is a bug that prevents 
+oipkg from working properly.  If you see errors in the installation log about not being 
+able to kill the old gunzip process, you can get around this by starting oipkg from 
+Embedded Konsole.
 </para>
 </important>
 
 <section><title>Installing Software</title>
 <para>
-To install software, first select "Opie" from the "Section" pulldown menu,
-the press the "+" icon next to "Feeds" in the main view.  This will show all
-the available Opie packages (you can change which packages to view by selecting
-something else from the "Section" pulldown).  Installed packages are marked
-with a blue circle, while packages that are not installed are marked with a red
+There are several way to install a software package, depending on how you are 
+accessing the package.
+</para>
+<para>
+To install software from a feed (see <xref linkend=feed>), first select "Opie" from the
+"Section" pulldown menu, the press the "+" icon next to "Feeds" in the main view.  
+This will show all the available Opie packages (you can change which packages 
+to view by selecting something else from the "Section" pulldown).  Installed 
+packages are marked with a blue circle, while packages that are not installed are marked with a red
 box.  If you click on the icon for an uninstalled package, it will turn into an
 open box, with a blue circle coming out of it, indicating that you have marked
 this package to be installed.  Mark as many packages as you wish this way, and
@@ -35,6 +40,24 @@ right corner (or press "x" to cancel and go back to the package selection
 window).  The packages should then install, and you should see their icons
 appear in the Launcher, if they are Opie applications.
 </para>
+<para>
+If you would like to install software that is not avaialable in a feed, you can 
+download it to your device, and open Filemanger to the directory that it is in.  You
+can then press and hold on the file name, and select "Open in Software", and oipkg 
+will be started, with the package already marked to install.  Confirm that it is the 
+correct package, and check any options that you may need and press "Ok" to install 
+the package.
+</para>
+<para>
+If you would like to install a package but are not sure where to find it, and it is not in 
+any of the feeds that you are using, you can try to have oipkg search for it.  You can 
+enter a query in the "Search" field in the toolbars, and then press the magnifying
+glass icon.  Oipkg will then search a list of feeds as well as some software websites, 
+and show you all the packages that it thinks might be what you are looking for, and
+displays them under the "ipkgfind&amp;killefiz" section in the Package view.  You can
+then select the packages that you would like to install from that list and install them 
+as you normally would install packages from a feed.
+</para>
 </section>
 
 <section><title>Removing Software</title>
@@ -47,7 +70,7 @@ remove, and then pressing apply.
 </para>
 </section>
 
-<section><title>Servers</title>
+<section id=feed><title>Servers</title>
 <para>
 When you install software normally, ipkg downloadins  the packages automatically
 from ipkg servers (also called "Feeds") and installing them.  The list of
@@ -121,14 +144,26 @@ can still find the files where they think they should be.
 
 <section><title>Using Destinations</title>
 <para>
-To install a package in a destination other than root, go to 
+To mark a single package to be installed to a destination other than the default, you 
+can press and hold on it, and select the destination you would like to use from the 
+"Install to" menu.  That package will then be installed in that destination.
+</para>
+<para>
+To install a group of packages in a destination other than root, go to
 Settings&arrow;Setups to open the settings dialog to the Setups tab.  From here
 you can select the destination you would like to install the package to from the 
 pulldown menu at the bottom.  You will also want to check "Link to root 
 destination" so that links are properly made.  Once you have selected the 
 destination you want to install the package to, click the dialog's "Ok" button, 
-and all packages that you install will be installed to the destination you 
-selected.
+and all packages that you mark for install will be installed in the selected feed 
+(The destination will not be changed for the packages already marked for 
+installation).
+</para>
+<para>
+You can also change the default destination by checking View&arrow;Destinations 
+to add the Destination toolbar to your toolbars.  You can then select the default
+destination from the pulldown menu, as well as use the checkbox to select whether
+the packages should be linked to the root destination or not.
 </para>
 </section>
 <section><title>Adding Destinations</title>
