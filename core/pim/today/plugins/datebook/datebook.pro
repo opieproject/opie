@@ -4,7 +4,7 @@ CONFIG += qt debug
 
 # Input
 HEADERS = datebookplugin.h datebookpluginimpl.h datebookpluginconfig.h \
-	datebookevent.h datebookpluginwidget.h
+	datebookevent.h datebookpluginwidget.h ../../configwidget.h
 SOURCES = datebookplugin.cpp datebookpluginimpl.cpp datebookpluginconfig.cpp \
 	datebookevent.cpp datebookpluginwidget.cpp
 

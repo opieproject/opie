@@ -18,6 +18,7 @@
 #define TODAYBASE_H
 
 #include <qlayout.h>
+#include <qguardedptr.h>
 #include <opie/oclickablelabel.h>
 
 class QVBox;
@@ -36,14 +37,14 @@ public:
     TodayBase( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~TodayBase();
 
-    QFrame* Frame4;
-    QPushButton* DatesButton;
-    QVBoxLayout* layout;
-    OClickableLabel* OwnerField;
-    QLabel* Frame;
-    QLabel* DateLabel;
-    QFrame* Frame15;
-    OClickableLabel* ConfigButton;
+    QGuardedPtr<QFrame> Frame4;
+    QGuardedPtr<QPushButton> DatesButton;
+    QGuardedPtr<QVBoxLayout> layout;
+    QGuardedPtr<OClickableLabel> OwnerField;
+    QGuardedPtr<QLabel> Frame;
+    QGuardedPtr<QLabel> DateLabel;
+    QGuardedPtr<QFrame> Frame15;
+    QGuardedPtr<OClickableLabel> ConfigButton;
 
 protected:
 
