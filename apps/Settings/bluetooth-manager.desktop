@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=Bluetooth Setup
+Exec=bluetooth-manager
+Icon=opietooth/bluetooth-manager
+Type=Settings
+Name=Bluetooth Manager
