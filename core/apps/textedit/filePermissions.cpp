@@ -150,7 +150,7 @@ filePermissions::filePermissions( QWidget* parent,  const char* name, bool modal
     if( fi.permission( QFileInfo::WriteOther)) { CheckBox1_8->setChecked(true); }
     if( fi.permission( QFileInfo::ExeOther)) { CheckBox1_8_2->setChecked(true); }
     
-    lstat(file.latin1(), &buf);
+    stat(file.latin1(), &buf);
     mode = buf.st_mode;
     modeStr.sprintf("%#o", buf.st_mode & ~(S_IFMT) );
     ModeLine->setText(modeStr);

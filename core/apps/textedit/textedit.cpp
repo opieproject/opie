@@ -705,7 +705,7 @@ bool TextEdit::save()
 
     struct stat buf;
     mode_t mode;
-    lstat(file.latin1(), &buf);
+    stat(file.latin1(), &buf);
     mode = buf.st_mode;
 
     doc->setName( name);
