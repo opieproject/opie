@@ -152,7 +152,7 @@ OFontSelector::OFontSelector( bool withpreview, QWidget *parent, const char *nam
              this, SLOT( fontSizeClicked(int) ) );
     gridLayout->addWidget( d->m_font_size_list, 3, 1 );
 
-    d->m_pointbug = ( qt_version() <= 233 );
+    d->m_pointbug = ( qt_version() == 232 || qt_version() == 233 ); // SharpROM uses 2.3.2
 
     if ( withpreview )
     {

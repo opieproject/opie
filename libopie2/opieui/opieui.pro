@@ -48,7 +48,7 @@ include( fileselector/fileselector.pro )
 INTERFACES  = otimepickerbase.ui
 
 TARGET      = opieui2
-VERSION     = 1.9.0
+VERSION     = 1.9.1
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include

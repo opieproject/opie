@@ -12,6 +12,7 @@
 
 	Internal
 	--------
+	* Work around bug in Qt/Embedded 2.3.10: qt_version() returns 231 (mickeyl)
 
 2005-02-03	Opie 1.1.9
 
