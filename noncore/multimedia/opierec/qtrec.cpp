@@ -8,9 +8,6 @@
 
 #include "pixmaps.h"
 #include "qtrec.h"
-#include "helpwindow.h"
-#include "device.h"
-#include "wavFile.h"
 
 #include <pthread.h>
 
@@ -24,39 +21,26 @@ extern "C" {
 // #include <qpe/lnkproperties.h>
 // #endif
 
-#include <qpe/applnk.h>
 #include <qpe/config.h>
-#include <qpe/ir.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/storage.h>
 
-#include <qlineedit.h>
-#include <qbuttongroup.h>
 #include <qcheckbox.h>
 #include <qcombobox.h>
-#include <qcursor.h>
 //#include <qdatetime.h>
 #include <qdir.h>
-#include <qfile.h>
-#include <qtextstream.h>
 #include <qgroupbox.h>
-#include <qiconview.h>
-#include <qimage.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qlineedit.h>
 #include <qlistview.h>
 #include <qmessagebox.h>
-#include <qpixmap.h>
 #include <qpopupmenu.h>
 #include <qpushbutton.h>
-#include <qregexp.h>
 #include <qslider.h>
 #include <qtabwidget.h>
 #include <qtimer.h>
-#include <qvariant.h>
 
 #include <errno.h>
 #include <fcntl.h>

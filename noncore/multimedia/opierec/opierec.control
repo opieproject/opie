@@ -1,4 +1,4 @@
-Package: opierec
+Package: opie-rec
 Files: bin/opierec pics/opierec apps/Applications/opierec.desktop 
 Priority: optional
 Section: multimedia/applications
