@@ -112,7 +112,7 @@ public:
 protected:
     virtual QString text(int r, int i)=0;
     virtual bool spreadRow(int i)=0;
-    virtual QColor rowColor(int) { return Qt::black; }
+    virtual QColor rowColor(int) { return ::Qt::black; }
     virtual void pickInRow(int r, int xpos, bool press);
     virtual void updateItem(int r, int i);
     virtual bool highlight(int,int) const;

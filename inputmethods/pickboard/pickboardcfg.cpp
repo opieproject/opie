@@ -158,10 +158,10 @@ void StringConfig::draw(QPainter* p)
 	for (; !(s=text(r,i)).isNull(); ++i) {
 	    int w = fm.width(s)+xw;
 	    if ( highlight(r,i) ) {
-		p->fillRect(x-xw/2,1+fm.descent()-fm.lineSpacing(),w,fm.lineSpacing(),Qt::black);
-		p->setPen(Qt::white);
+		p->fillRect(x-xw/2,1+fm.descent()-fm.lineSpacing(),w,fm.lineSpacing(),::Qt::black);
+		p->setPen(::Qt::white);
 	    }else{
-		p->setPen(Qt::black);
+		p->setPen(::Qt::black);
 	    }
 	    p->drawText(x,-fm.descent()-1,s);
 	    x += w;
@@ -431,10 +431,10 @@ void DictFilterConfig::pick(bool press, int row, int item)
 		    generateText(" ");
 		} else if ( othermodes[item] == "Back" ) {
 		    updateItem(row,item);
-		    generateKey(Qt::Key_Backspace);
+		    generateKey(::Qt::Key_Backspace);
 		} else if ( othermodes[item] == "Enter" ) {
 		    updateItem(row,item);
-		    generateKey(Qt::Key_Return);
+		    generateKey(::Qt::Key_Return);
 		} else if ( othermodes[item] == "Shift" ) {
 		    updateItem(row,item);
 		    shift = (shift+1)%3;
