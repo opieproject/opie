@@ -27,13 +27,6 @@ public:
     typedef OPimCache<T> Cache;
 
     /**
-     * our sort order
-     * should be safe explaining
-     */
-    enum SortOrder { WildCards = 0, IgnoreCase = 1,
-                     RegExp = 2, ExactMatch = 4 };
-
-    /**
      * c'tor BackEnd
      */
     OPimAccessTemplate( BackEnd* end);
@@ -66,9 +59,10 @@ public:
     virtual List allRecords()const;
 
     /**
-     * queryByExample
+     * queryByExample)
+     * @see otodoaccess, ocontactaccess
      */
-    virtual List queryByExample( const T& t, int sortOrder );
+    virtual List queryByExample( const T& t, int querySettings );
 
     /**
      * find the OPimRecord uid

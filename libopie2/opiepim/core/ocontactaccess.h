@@ -13,11 +13,14 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactaccess.h,v 1.1 2002-09-27 17:11:44 eilers Exp $
+ * Version: $Id: ocontactaccess.h,v 1.2 2002-10-14 16:21:54 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.h,v $
- * Revision 1.1  2002-09-27 17:11:44  eilers
+ * Revision 1.2  2002-10-14 16:21:54  eilers
+ * Some minor interface updates
+ *
+ * Revision 1.1  2002/09/27 17:11:44  eilers
  * Added API for accessing the Contact-Database ! It is compiling, but
  * please do not expect that anything is working !
  * I will debug that stuff in the next time ..
@@ -47,38 +50,6 @@ class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
 {
     Q_OBJECT
 
-	    
-	    /*    class Iterator{
-	    friend OContactAccess;
-    public:
-	    Iterator();
-	    Iterator ( const Iterator& copy );
-
-	    bool operator== ( const Iterator& it );
-	    bool operator!= ( const Iterator& it );
-	    Iterator& operator= ( const  Iterator& it );
-	    Iterator& operator++ ();      // prefix
-	    Iterator operator++ ( int );  // postfix
-	    Iterator& operator-- ();      // prefix
-	    Iterator operator-- ( int );  // postfix
-	    Contact operator*() const;
-	    Contact operator->() const;
-
-	    Iterator begin();
-	    Iterator end();
-
-	    uint count() const;
-
-    private:
-	    QValueList<int> m_uids;
-	    int m_cur_position;
-	    bool m_end_reached;
-	    OContactAccess *m_db;
-	    
-    };
-
-	    */
-
  public:
 	/** Create Database with contacts (addressbook).
 	 * @param appname Name of application which wants access to the database
@@ -91,7 +62,7 @@ class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
 	 * automatically if it receives the signals <i>flush()</i> and <i>reload()</i>
 	 * which are used before and after synchronisation. If the application wants
 	 * to react itself, it should be disabled by setting it to <b>false</b>
-	 * @see OContactBackend
+	 * @see OContactAccessBackend
 	 */
 	OContactAccess (const QString appname, const QString filename = 0l,
                     OContactAccessBackend* backend = 0l, bool handlesync = true);
@@ -101,13 +72,13 @@ class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
 	 * Use this constants to set the query parameters.
 	 * Note: <i>query_IgnoreCase</i> just make sense with one of the other attributes !
 	 * @see queryByExample()
-	 * - why not enum - zecke? 
-	 *   -> Had some implementation problems .. Will use enum soon ! .. (se)
 	 */
-        static const int query_WildCards  = 0x0001;
-	static const int query_IgnoreCase = 0x0002;
-	static const int query_RegExp     = 0x0004;
-	static const int query_ExactMatch = 0x0008;
+	enum QuerySettings {
+		WildCards  = 0x0001,
+		IgnoreCase = 0x0002,
+		RegExp     = 0x0004,
+		ExactMatch = 0x0008,
+	};
 
 	/** Return all possible settings.
 	 *  @return All settings provided by the current backend

@@ -17,11 +17,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccess.cpp,v 1.3 2002-10-07 17:34:24 eilers Exp $
+ * Version: $Id: ocontactaccess.cpp,v 1.4 2002-10-14 16:21:54 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.cpp,v $
- * Revision 1.3  2002-10-07 17:34:24  eilers
+ * Revision 1.4  2002-10-14 16:21:54  eilers
+ * Some minor interface updates
+ *
+ * Revision 1.3  2002/10/07 17:34:24  eilers
  * added OBackendFactory for advanced backend access
  *
  * Revision 1.2  2002/10/02 16:18:11  eilers
@@ -66,7 +69,6 @@ OContactAccess::OContactAccess ( const QString appname, const QString ,
 	 * will use the XML-Backend as default (until we have a cute SQL-Backend..).
 	 */
         if( end == 0 ) {
-		// __asm__("int3");
 		qWarning ("Using BackendFactory !");
 		end = OBackendFactory<OContactAccessBackend>::Default( "contact", appname );
         }

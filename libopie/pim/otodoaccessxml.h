@@ -24,7 +24,7 @@ public:
     bool save();
 
     QArray<int> allRecords()const;
-    QArray<int> queryByExample( const OTodo&, int sort );
+    QArray<int> queryByExample( const OTodo&, int querysettings );
     OTodo find( int uid )const;
     void clear();
     bool add( const OTodo& );

@@ -187,7 +187,7 @@ QArray<int> OTodoAccessXML::allRecords()const {
     }
     return ids;
 }
-QArray<int> OTodoAccessXML::queryByExample( const OTodo&, int sort ) {
+QArray<int> OTodoAccessXML::queryByExample( const OTodo&, int ) {
     QArray<int> ids(0);
     return ids;
 }

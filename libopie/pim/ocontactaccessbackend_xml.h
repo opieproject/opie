@@ -13,11 +13,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.2 2002-10-07 17:34:24 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.h,v 1.3 2002-10-14 16:21:54 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.2  2002-10-07 17:34:24  eilers
+ * Revision 1.3  2002-10-14 16:21:54  eilers
+ * Some minor interface updates
+ *
+ * Revision 1.2  2002/10/07 17:34:24  eilers
  * added OBackendFactory for advanced backend access
  *
  * Revision 1.1  2002/09/27 17:11:44  eilers
@@ -199,25 +202,25 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 			for ( int i = 0; i < Qtopia::rid; i++ ) {
 				/* Just compare fields which are not empty in the query object */
 				if ( !query.field(i).isEmpty() ){
-					switch ( settings & ~OContactAccess::query_IgnoreCase ){
-					case OContactAccess::query_RegExp:{
+					switch ( settings & ~OContactAccess::IgnoreCase ){
+					case OContactAccess::RegExp:{
 						QRegExp expr ( query.field(i),
-							       !(settings & OContactAccess::query_IgnoreCase),
+							       !(settings & OContactAccess::IgnoreCase),
 							       false );
 						if ( expr.find ( (*it).field(i), 0 ) == -1 )
 							allcorrect = false;
 					}
 						break;
-					case OContactAccess::query_WildCards:{
+					case OContactAccess::WildCards:{
 						QRegExp expr ( query.field(i),
-							       !(settings & OContactAccess::query_IgnoreCase),
+							       !(settings & OContactAccess::IgnoreCase),
 							       true );
 						if ( expr.find ( (*it).field(i), 0 ) == -1 )
 							allcorrect = false;
 					}
 						break;
-					case OContactAccess::query_ExactMatch:{
-						if (settings & OContactAccess::query_IgnoreCase){
+					case OContactAccess::ExactMatch:{
+						if (settings & OContactAccess::IgnoreCase){
 							if ( query.field(i).upper() !=
 							     (*it).field(i).upper() )
 								allcorrect = false;
@@ -243,24 +246,24 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 	
 	const uint querySettings()
 		{
-			return ( OContactAccess::query_WildCards
-				 & OContactAccess::query_IgnoreCase
-				 & OContactAccess::query_RegExp
-				 & OContactAccess::query_ExactMatch );
+			return ( OContactAccess::WildCards
+				 & OContactAccess::IgnoreCase
+				 & OContactAccess::RegExp
+				 & OContactAccess::ExactMatch );
 		}
 	
 	bool hasQuerySettings (uint querySettings) const
 		{
-			/* OContactAccess::query_IgnoreCase may be added with one
+			/* OContactAccess::IgnoreCase may be added with one
 			 * of the other settings, but never used alone.
 			 * The other settings are just valid alone...
 			 */
-			switch ( querySettings & ~OContactAccess::query_IgnoreCase ){
-			case OContactAccess::query_RegExp:
+			switch ( querySettings & ~OContactAccess::IgnoreCase ){
+			case OContactAccess::RegExp:
 				return ( true );
-			case OContactAccess::query_WildCards:
+			case OContactAccess::WildCards:
 				return ( true );
-			case OContactAccess::query_ExactMatch:
+			case OContactAccess::ExactMatch:
 				return ( true );
 			default:
 				return ( false );
