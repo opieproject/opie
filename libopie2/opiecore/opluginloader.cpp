@@ -281,7 +281,7 @@ OGenericPluginLoader::OGenericPluginLoader( const QString& name,  bool isSorted)
     : m_dir( name ), m_autoDelete( false ), m_isSafeMode( false ),
       m_isSorted( isSorted )
 {
-    setPluginDir( QPEApplication::qpeDir() + "/plugins/"+name );
+    setPluginDir( QPEApplication::qpeDir() + "plugins/"+name );
     readConfig();
 }
 
@@ -532,6 +532,7 @@ OPluginItem::List OGenericPluginLoader::plugins( const QString& _dir, bool sorte
 #else
     QDir dir( _dir, "lib*.so" );
 #endif
+
 
     OPluginItem::List lst;
 
