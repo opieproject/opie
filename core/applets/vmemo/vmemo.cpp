@@ -269,7 +269,7 @@ void VMemo::paintEvent( QPaintEvent* ) {
   p.drawPixmap( 0, 1,( const char** )  vmemo_xpm );
 }
 
-void VMemo::mousePressEvent( QMouseEvent * me) {
+void VMemo::mousePressEvent( QMouseEvent * /*me*/) {
   /*  No mousePress/mouseRelease recording on the iPAQ. The REC button on the iPAQ calls these functions
          mousePressEvent and mouseReleaseEvent with a NULL parameter.  */
 
@@ -485,78 +485,82 @@ int VMemo::openWAV(const char *filename) {
 
 bool VMemo::record() {
 		length = 0;
-		int result, value;
+    int bytesWritten = 0;
+		int result = 0;
+		int value = 0;
 		QString msg;
 		msg.sprintf("Recording format %d", format);
 		odebug << msg << oendl;
 		Config config("Vmemo");
 		config.setGroup("Record");
-		int sRate=config.readNumEntry("SizeLimit", 30);
+		int sRate = config.readNumEntry("SizeLimit", 30);
 		if(sRate > 0)
 				t_timer->start( sRate * 1000+1000, TRUE);
-
-//    if(systemZaurus) {
-//    } else { // 16 bit only capabilities
 
     msg.sprintf("Recording format other");
     odebug << msg << oendl;
 
+    config.setGroup("Defaults");
+    useADPCM = config.readBoolEntry("use_ADPCM", 0);
 
-    int bytesWritten = 0;
-
-    Config vmCfg("Vmemo");
-    vmCfg.setGroup("Defaults");
-    useADPCM = vmCfg.readBoolEntry("use_ADPCM", 0);
-
-	int bufsize = vmCfg.readNumEntry("BufferSize",1024);
-	signed short sound[bufsize], monoBuffer[bufsize];
+		int bufsize = config.readNumEntry("BufferSize",1024);
+		unsigned short sound[bufsize]; //, monoBuffer[bufsize];
     char abuf[bufsize / 2];
     short sbuf[bufsize];
 
-    while(recording)  {
+		if(useADPCM) {
+				while(recording) {
+						result = ::read(dsp, sbuf, bufsize); // adpcm read
+						if( result <= 0) {
+								perror("recording error ");
+								QMessageBox::message(tr("Note"),tr("error recording"));
+								recording = FALSE;
+								break;
+								return FALSE;
+						}
+						adpcm_coder( sbuf, abuf, result/2, &encoder_state);
+						bytesWritten = ::write(wav, abuf, result/4); // adpcm write
+						length += bytesWritten;
 
-        if(useADPCM)
-            result = ::read(dsp, sbuf, bufsize); // 8192
-        else
-            result = ::read(dsp, sound, bufsize); // 8192
-        if( result <= 0) {
-						perror("recording error ");
-//          odebug << currentFileName << oendl;
-						QMessageBox::message(tr("Note"),tr("error recording"));
-						recording = FALSE;
-						break;
-						return FALSE;
-        }
-
-        if(useADPCM) {
-            adpcm_coder( sbuf, abuf, result/2, &encoder_state);
-            bytesWritten = ::write(wav, abuf, result/4);
-
-        } else {
-//             for (int i = 0; i < result; i++) { //since Z is mono do normally
-//                 monoBuffer[i] = sound[i];
-//             }
-
-            length += write(wav, sound, result);
-        }
-        length += bytesWritten;
-
-				if(length<0) {
-						recording = false;
-						perror("dev/dsp's is a lookin' messy");
-						QMessageBox::message("Vmemo","Error writing to file\n"+ fileName);
-						break;
-						return FALSE;
+						if(length < 0) {
+								recording = false;
+								perror("dev/dsp's is a lookin' messy");
+								QMessageBox::message("Vmemo","Error writing to file\n"+ fileName);
+								break;
+								return FALSE;
+						}
+							//       printf("%d\r", length);
+							//       fflush(stdout);
+						qApp->processEvents();
 				}
-					//       odebug << "" << length << "\r" << oendl;
-					//       fflush(stdout);
-				qApp->processEvents();
-    }
+		} else {
+				while(recording) {
+						result = ::read(dsp, sound, bufsize); // read
+						if( result <= 0) {
+								perror("recording error ");
+								QMessageBox::message(tr("Note"),tr("error recording"));
+								recording = FALSE;
+								break;
+								return FALSE;
+
+								bytesWritten = ::write(wav, sound, result); // write
+								length += bytesWritten;
+
+								if(length < 0) {
+										recording = false;
+										perror("dev/dsp's is a lookin' messy");
+										QMessageBox::message("Vmemo","Error writing to file\n"+ fileName);
+										break;
+										return FALSE;
+								}
+									//       printf("%d\r", length);
+									//       fflush(stdout);
+								qApp->processEvents();
+						}
+				}
+		}
 			//  qDebug("file has length of %d lasting %d seconds",
 			//         length, (( length / speed) / channels) / 2 );
-			//  }
-
-			//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<//
 
 		value = length + 36;
 
@@ -582,7 +586,7 @@ bool VMemo::record() {
 		QString currentFileName = fileName;
 		QString currentFile = "vm_"+ date;
 
-		float numberOfRecordedSeconds=(float) length / (float)speed * (float)2;
+		float numberOfRecordedSeconds = (float) length / (float)speed * (float)2;
 
 		cfgO.writeEntry( "NumberofFiles", nFiles + 1);
 		cfgO.writeEntry( QString::number( nFiles + 1), currentFile);
