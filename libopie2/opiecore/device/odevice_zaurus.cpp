@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
                              Copyright (C) The Opie Team <opie-devel@handhelds.org>
-              =.
+              =.             Copyright (C) 2003-2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -107,7 +107,8 @@ struct z_button z_buttons_c700 [] = {
 //
 //       Zaurus-Collie (SA-model  w/ 320x240 lcd, for SL5500 and SL5000)
 //       Zaurus-Poodle (PXA-model w/ 320x240 lcd, for SL5600)
-//       Zaurus-Corgi  (PXA-model w/ 640x480 lcd, for C700, C750, C760, and C860)
+//       Zaurus-Corgi  (PXA-model w/ 640x480 lcd, for C700, C750, C760, C860, C3000)
+//       Zaurus-Tosa   (PXA-model w/ 480x640 lcd, for SL6000)
 //
 //       Only question right now is: Do we really need to do it? Because as soon
 //       as the OpenZaurus kernel is ready, there will be a unified interface for all
@@ -134,7 +135,7 @@ void Zaurus::init(const QString& cpu_info)
         d->m_system = System_OpenZaurus;
         // sysver already gathered
 
-        // Openzaurus sometimes uses the embedix kernel, check if this is one
+        // OpenZaurus sometimes uses the embedix kernel, check if this is one
         FILE *uname = popen("uname -r", "r");
         QFile f;
         QString line;
@@ -167,7 +168,7 @@ void Zaurus::init(const QString& cpu_info)
         d->m_modelstr = "Zaurus SL-C750";
     } else if ( model == "SHARP Husky" ) {
         d->m_model = Model_Zaurus_SLC7x0;
-        d->m_modelstr = "Zaurus SL-C760";
+        d->m_modelstr = "Zaurus SL-C760 or SL-C860";
     } else if ( model == "SHARP Poodle" ) {
         d->m_model = Model_Zaurus_SLB600;
         d->m_modelstr = "Zaurus SL-B500 or SL-5600";
@@ -183,8 +184,8 @@ void Zaurus::init(const QString& cpu_info)
     }
 
     // set initial rotation
-    switch ( d->m_model ) {
-        case Model_Zaurus_SL6000:
+    switch( d->m_model ) {
+        case Model_Zaurus_SL6000: // fallthrough
         case Model_Zaurus_SLA300:
             d->m_rotation = Rot0;
             break;
@@ -192,8 +193,8 @@ void Zaurus::init(const QString& cpu_info)
             d->m_rotation = rotation();
             d->m_direction = direction();
             break;
-        case Model_Zaurus_SLB600:
-        case Model_Zaurus_SL5500:
+        case Model_Zaurus_SLB600: // fallthrough
+        case Model_Zaurus_SL5500: // fallthrough
         case Model_Zaurus_SL5000:
         default:
             d->m_rotation = Rot270;
@@ -240,83 +241,22 @@ void Zaurus::initButtons()
     reloadButtonMapping();
 }
 
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/ioctl.h>
 
-//#include <asm/sharp_char.h> // including kernel headers is evil ...
-
-#define SHARP_DEV_IOCTL_COMMAND_START 0x5680
-
-#define	SHARP_BUZZER_IOCTL_START (SHARP_DEV_IOCTL_COMMAND_START)
-#define SHARP_BUZZER_MAKESOUND   (SHARP_BUZZER_IOCTL_START)
-
-#define SHARP_BUZ_TOUCHSOUND       1  /* touch panel sound */
-#define SHARP_BUZ_KEYSOUND         2  /* key sound */
-#define SHARP_BUZ_SCHEDULE_ALARM  11  /* schedule alarm */
-
-/* --- for SHARP_BUZZER device --- */
-
-//#define	SHARP_BUZZER_IOCTL_START (SHARP_DEV_IOCTL_COMMAND_START)
-//#define SHARP_BUZZER_MAKESOUND   (SHARP_BUZZER_IOCTL_START)
-
-#define SHARP_BUZZER_SETVOLUME   (SHARP_BUZZER_IOCTL_START+1)
-#define SHARP_BUZZER_GETVOLUME   (SHARP_BUZZER_IOCTL_START+2)
-#define SHARP_BUZZER_ISSUPPORTED (SHARP_BUZZER_IOCTL_START+3)
-#define SHARP_BUZZER_SETMUTE     (SHARP_BUZZER_IOCTL_START+4)
-#define SHARP_BUZZER_STOPSOUND   (SHARP_BUZZER_IOCTL_START+5)
-
-//#define SHARP_BUZ_TOUCHSOUND       1  /* touch panel sound */
-//#define SHARP_BUZ_KEYSOUND         2  /* key sound */
-
-//#define SHARP_PDA_ILLCLICKSOUND    3  /* illegal click */
-//#define SHARP_PDA_WARNSOUND        4  /* warning occurred */
-//#define SHARP_PDA_ERRORSOUND       5  /* error occurred */
-//#define SHARP_PDA_CRITICALSOUND    6  /* critical error occurred */
-//#define SHARP_PDA_SYSSTARTSOUND    7  /* system start */
-//#define SHARP_PDA_SYSTEMENDSOUND   8  /* system shutdown */
-//#define SHARP_PDA_APPSTART         9  /* application start */
-//#define SHARP_PDA_APPQUIT         10  /* application ends */
-
-//#define SHARP_BUZ_SCHEDULE_ALARM  11  /* schedule alarm */
-//#define SHARP_BUZ_DAILY_ALARM     12  /* daily alarm */
-//#define SHARP_BUZ_GOT_PHONE_CALL  13  /* phone call sound */
-//#define SHARP_BUZ_GOT_MAIL        14  /* mail sound */
-//
-
-#define	SHARP_LED_IOCTL_START (SHARP_DEV_IOCTL_COMMAND_START)
-#define SHARP_LED_SETSTATUS   (SHARP_LED_IOCTL_START+1)
-
-#define  SHARP_IOCTL_GET_ROTATION 0x413c
 
 typedef struct sharp_led_status {
-int which;   /* select which LED status is wanted. */
-int status;  /* set new led status if you call SHARP_LED_SETSTATUS */
+    int which;   /* select which LED status is wanted. */
+    int status;  /* set new led status if you call SHARP_LED_SETSTATUS */
 } sharp_led_status;
 
-#define SHARP_LED_MAIL_EXISTS  9       /* mail status (exists or not) */
-
-#define LED_MAIL_NO_UNREAD_MAIL  0   /* for SHARP_LED_MAIL_EXISTS */
-#define LED_MAIL_NEWMAIL_EXISTS  1   /* for SHARP_LED_MAIL_EXISTS */
-#define LED_MAIL_UNREAD_MAIL_EX  2   /* for SHARP_LED_MAIL_EXISTS */
-
-// #include <asm/sharp_apm.h> // including kernel headers is evil ...
-
-#define APM_IOCGEVTSRC          OD_IOR( 'A', 203, int )
-#define APM_IOCSEVTSRC          OD_IORW( 'A', 204, int )
-#define APM_EVT_POWER_BUTTON    (1 << 0)
-
-#define FL_IOCTL_STEP_CONTRAST    100
-
-
-void Zaurus::buzzer ( int sound )
+void Zaurus::buzzer( int sound )
 {
 #ifndef QT_NO_SOUND
     Sound *snd = 0;
 
     // Not all devices have real sound
     if ( d->m_model == Model_Zaurus_SLC7x0
-        || d->m_model == Model_Zaurus_SLB600 ){
+      || d->m_model == Model_Zaurus_SLB600 
+      || d->m_model == Model_Zaurus_SL6000 ) {
 
         switch ( sound ){
         case SHARP_BUZ_TOUCHSOUND: {
@@ -343,7 +283,7 @@ void Zaurus::buzzer ( int sound )
     // device..
     if ( snd && snd->isFinished() ){
         changeMixerForAlarm( 0, "/dev/sound/mixer", snd );
-        snd-> play();
+        snd->play();
     } else if( !snd ) {
         int fd = ::open ( "/dev/sharp_buz", O_WRONLY|O_NONBLOCK );
 
@@ -359,17 +299,17 @@ void Zaurus::buzzer ( int sound )
 
 void Zaurus::playAlarmSound()
 {
-    buzzer ( SHARP_BUZ_SCHEDULE_ALARM );
+    buzzer( SHARP_BUZ_SCHEDULE_ALARM );
 }
 
 void Zaurus::playTouchSound()
 {
-    buzzer ( SHARP_BUZ_TOUCHSOUND );
+    buzzer( SHARP_BUZ_TOUCHSOUND );
 }
 
 void Zaurus::playKeySound()
 {
-    buzzer ( SHARP_BUZ_KEYSOUND );
+    buzzer( SHARP_BUZ_KEYSOUND );
 }
 
 
@@ -464,8 +404,7 @@ bool Zaurus::setSoftSuspend ( bool soft )
     return res;
 }
 
-
-bool Zaurus::setDisplayBrightness ( int bright )
+bool Zaurus::setDisplayBrightness( int bright )
 {
     //qDebug( "Zaurus::setDisplayBrightness( %d )", bright );
     bool res = false;
@@ -484,9 +423,24 @@ bool Zaurus::setDisplayBrightness ( int bright )
             {
                 int value = ( bright == 1 ) ? 1 : static_cast<int>( bright * ( 17.0 / 255.0 ) );
                 char writeCommand[100];
-                const int count = sprintf( writeCommand, "0x%x\n", value );
+                const int count = sprintf( writeCommand, "%x\n", value );
                 res = ( ::write ( fd, writeCommand, count ) != -1 );
                 ::close ( fd );
+            }
+            return res;
+        }
+        else
+        if ( d->m_model == Model_Zaurus_SL6000 )
+        {
+            //qDebug( "using special treatment for devices with the tosa backlight interface" );
+            // special treatment for devices with the tosa backlight interface
+            if (( fd = ::open ( "/proc/driver/fl/tosa-bl", O_WRONLY )) >= 0 )
+            {
+                int value = ( bright == 1 ) ? 1 : static_cast<int>( bright * ( 17.0 / 255.0 ) );
+                char writeCommand[100];
+                const int count = sprintf( writeCommand, "%x\n", value ); 
+                res = ( ::write ( fd, writeCommand, count ) != -1 );
+                ::close ( fd );  
             }
             return res;
         }
@@ -614,9 +568,15 @@ ODirection Zaurus::direction() const
 int Zaurus::displayBrightnessResolution() const
 {
     if (m_embedix)
-        return d->m_model == Model_Zaurus_SLC7x0 ? 18 : 5;
+    {
+        if ( d->m_model == Model_Zaurus_SLC7x0 ) return 18;
+        if ( d->m_model == Model_Zaurus_SL6000 ) return 18;
+        return 5;
+    }
     else
+    {
         return 256;
+    }
 }
 
 bool Zaurus::hasHingeSensor() const
