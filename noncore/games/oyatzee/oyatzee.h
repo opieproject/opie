@@ -14,6 +14,7 @@ class Scoreboard;
 class DiceWidget;
 
 typedef QList<Dice> dicesList;
+typedef QValueList<int> QValueListInt;
 
 class OYatzee : public QMainWindow {
 	Q_OBJECT
@@ -25,9 +26,25 @@ class OYatzee : public QMainWindow {
 		DiceWidget *dw;
 		Scoreboard *sb;
 
+		QValueListInt posibilities;		
 		
 		void setPlayerNumber( const int num );
 		void setRoundsNumber( const int num );
+		
+		enum { 
+				Ones=1, 
+				Twos = 2,
+				Threes = 3,
+				Fours = 4,
+				Fives = 5,
+				Sixes = 6,
+				ThreeOfAKind = 7,        //12444
+				FourOfAKind = 8,         //14444
+				FullHouse = 9,           //22555
+				SStraight = 10,          //13456
+				LStraight = 11,          //12345
+				Yatzee = 12,             //55555
+				Chance = 13};
 
 	public slots:
 		void slotStartGame();
@@ -38,6 +55,8 @@ class OYatzee : public QMainWindow {
 		int numOfRounds;
 
 		void detectPosibilities();
+		void displayPossibilites();
+
 };
 
 class Dice : public QFrame
