@@ -1,5 +1,5 @@
 Package: opie-wordgame
-Files: plugins/application/libwordgame.so* bin/wordgame apps/Games/wordgame.desktop pics/wordgame
+Files: bin/wordgame apps/Games/wordgame.desktop pics/wordgame
 Priority: optional
 Section: opie/games
 Maintainer: Martin Imobersteg <imm@gmx.ch> 

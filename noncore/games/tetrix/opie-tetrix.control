@@ -1,5 +1,5 @@
 Package: opie-tetrix
-Files: plugins/application/libtetrix.so* bin/tetrix apps/Games/tetrix.desktop pics/tetrix/*
+Files: bin/tetrix apps/Games/tetrix.desktop pics/tetrix/*
 Priority: optional
 Section: opie/games
 Maintainer: Martin Imobersteg <imm@gmx.ch>

@@ -1,5 +1,5 @@
 Package: opie-bounce
-Files: plugins/application/libbounce.so* bin/bounce apps/Games/bounce.desktop pics/bounce/*.png
+Files: bin/bounce apps/Games/bounce.desktop pics/bounce/*.png
 Version: 0.6-$SUB_VERSION 
 Depends: task-opie-minimal
 Priority: optional

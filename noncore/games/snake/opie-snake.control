@@ -1,5 +1,5 @@
 Package: opie-snake
-Files: plugins/application/libsnake.so* bin/snake apps/Games/snake.desktop pics/snake
+Files: bin/snake apps/Games/snake.desktop pics/snake
 Priority: optional
 Section: opie/games
 Maintainer: Martin Imobersteg <imm@gmx.ch>
